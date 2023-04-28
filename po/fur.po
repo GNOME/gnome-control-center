@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2023-04-04 11:45+0000\n"
-"PO-Revision-Date: 2023-04-05 20:17+0200\n"
+"POT-Creation-Date: 2023-04-25 07:14+0000\n"
+"PO-Revision-Date: 2023-04-28 09:29+0200\n"
 "Last-Translator: Fabio Tomat <f.t.public@gmail.com>\n"
 "Language-Team: Friulian <f.t.public@gmail.com>\n"
 "Language: fur\n"
@@ -37,8 +37,8 @@ msgid "Session Bus"
 msgstr "Bus di session"
 
 #: panels/applications/cc-applications-panel.c:828
-#: panels/power/cc-power-panel.ui:75 panels/thunderbolt/cc-bolt-panel.ui:265
-#: panels/thunderbolt/cc-bolt-panel.ui:309
+#: panels/power/cc-power-panel.ui:75 panels/thunderbolt/cc-bolt-panel.ui:233
+#: panels/thunderbolt/cc-bolt-panel.ui:277
 msgid "Devices"
 msgstr "Dispositîfs"
 
@@ -87,10 +87,7 @@ msgid "Can change settings"
 msgstr "Al pues cambiâ lis impostazions"
 
 #: panels/applications/cc-applications-panel.c:850
-#, fuzzy, c-format
-#| msgid ""
-#| "%s requires access to the following system resources. To stop this "
-#| "access, the application must be removed."
+#, c-format
 msgid ""
 "%s requires access to the following system resources. To stop this access, "
 "the app must be removed."
@@ -117,16 +114,13 @@ msgstr ""
 msgid "%s of disk space used."
 msgstr "%s di spazi disc doprâts."
 
-#. List of apps.
 #: panels/applications/cc-applications-panel.c:1415
 #: panels/applications/cc-applications-panel.ui:19
 #: panels/applications/gnome-applications-panel.desktop.in:3
-#: panels/notifications/cc-notifications-panel.ui:26
 msgid "Apps"
 msgstr "Aplicazions"
 
 #: panels/applications/cc-applications-panel.ui:31
-#| msgid "No applications"
 msgid "No apps"
 msgstr "No apps"
 
@@ -145,10 +139,11 @@ msgstr "Detais de aplicazion"
 #: panels/applications/cc-applications-panel.ui:112
 #: panels/applications/cc-applications-panel.ui:119
 #: panels/keyboard/01-launchers.xml.in:16
-#: panels/keyboard/cc-input-chooser.ui:75
+#: panels/keyboard/cc-input-chooser.ui:76
 #: panels/printers/new-printer-dialog.ui:230
 #: panels/region/cc-format-chooser.ui:82
-#: panels/search/gnome-search-panel.desktop.in:3 shell/cc-window.ui:41
+#: panels/search/gnome-search-panel.desktop.in:3 shell/cc-window.ui:40
+#: shell/cc-window.ui:42
 msgid "Search"
 msgstr "Cîr"
 
@@ -171,8 +166,8 @@ msgstr "Ricevi ricercjis di sisteme e inviâ risultâts"
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:123
 #: panels/keyboard/cc-xkb-modifier-dialog.c:344
 #: panels/keyboard/keyboard-shortcuts.c:367
-#: panels/user-accounts/cc-user-panel.c:821
-#: panels/user-accounts/cc-user-panel.c:951
+#: panels/user-accounts/cc-user-panel.c:789
+#: panels/user-accounts/cc-user-panel.c:918
 #: panels/wwan/cc-wwan-device-page.c:477
 #: subprojects/gvc/gvc-mixer-control.c:1908
 msgid "Disabled"
@@ -265,7 +260,7 @@ msgid "Access device location data"
 msgstr "Acedi ai dâts di posizion dal dispositîf"
 
 #: panels/applications/cc-applications-panel.ui:222
-#: panels/applications/cc-applications-panel.ui:326
+#: panels/applications/cc-applications-panel.ui:327
 msgid "Required Access"
 msgstr "Acès necessari"
 
@@ -278,60 +273,64 @@ msgid "File &amp; Link Associations"
 msgstr "Associazions di files e colegaments"
 
 #: panels/applications/cc-applications-panel.ui:239
-#: panels/applications/cc-applications-panel.ui:412
+#: panels/applications/cc-applications-panel.ui:413
 msgid "Storage"
 msgstr "Archiviazion"
 
-#: panels/applications/cc-applications-panel.ui:301 shell/cc-panel-list.ui:108
+#: panels/applications/cc-applications-panel.ui:258
+msgid "Search apps"
+msgstr "Cîr aplicazions"
+
+#: panels/applications/cc-applications-panel.ui:302 shell/cc-panel-list.ui:108
 msgid "No results found"
 msgstr "Nissun risultât cjatât"
 
-#: panels/applications/cc-applications-panel.ui:311 shell/cc-panel-list.ui:117
+#: panels/applications/cc-applications-panel.ui:312 shell/cc-panel-list.ui:117
 msgid "Try a different search"
 msgstr "Prove une ricercje diferente"
 
-#: panels/applications/cc-applications-panel.ui:355
+#: panels/applications/cc-applications-panel.ui:356
 msgid "File & Link Associations"
 msgstr "Associazions di files e colegaments"
 
-#: panels/applications/cc-applications-panel.ui:380
+#: panels/applications/cc-applications-panel.ui:381
 msgid "File Types"
 msgstr "Gjenars di file"
 
-#: panels/applications/cc-applications-panel.ui:386
+#: panels/applications/cc-applications-panel.ui:387
 msgid "Link Types"
 msgstr "Gjenars di colegament"
 
-#: panels/applications/cc-applications-panel.ui:396
+#: panels/applications/cc-applications-panel.ui:397
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:131
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:234
 #: panels/keyboard/cc-keyboard-shortcut-row.ui:25
 msgid "Reset"
 msgstr "Reset"
 
-#: panels/applications/cc-applications-panel.ui:423
+#: panels/applications/cc-applications-panel.ui:424
 msgid "How much disk space this app is occupying with app data and caches."
 msgstr ""
 "Trop spazi disc che cheste aplicazion e sta ocupant cun dâts de aplicazion e "
 "memoriis cache."
 
-#: panels/applications/cc-applications-panel.ui:426
+#: panels/applications/cc-applications-panel.ui:427
 msgid "App"
 msgstr "Aplicazion"
 
-#: panels/applications/cc-applications-panel.ui:432
+#: panels/applications/cc-applications-panel.ui:433
 msgid "Data"
 msgstr "Dâts"
 
-#: panels/applications/cc-applications-panel.ui:438
+#: panels/applications/cc-applications-panel.ui:439
 msgid "Cache"
 msgstr "Cache"
 
-#: panels/applications/cc-applications-panel.ui:444
+#: panels/applications/cc-applications-panel.ui:445
 msgid "<b>Total</b>"
 msgstr "<b>Totâl</b>"
 
-#: panels/applications/cc-applications-panel.ui:454
+#: panels/applications/cc-applications-panel.ui:455
 msgid "Clear Cache…"
 msgstr "Nete cache…"
 
@@ -353,24 +352,25 @@ msgstr "Selezione un imagjin"
 #: panels/color/cc-color-panel.c:844 panels/common/cc-language-chooser.ui:21
 #: panels/display/cc-display-panel.ui:42 panels/keyboard/cc-input-chooser.ui:11
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:23
-#: panels/network/cc-wifi-hotspot-dialog.ui:125
-#: panels/network/cc-wifi-panel.c:745
+#: panels/network/cc-wifi-hotspot-dialog.ui:142
+#: panels/network/cc-wifi-panel.c:744
+#: panels/network/connection-editor/ce-page-details.c:100
 #: panels/network/connection-editor/connection-editor.ui:14
 #: panels/network/connection-editor/vpn-helpers.c:215
 #: panels/network/connection-editor/vpn-helpers.c:334
-#: panels/network/net-device-wifi.c:867
+#: panels/network/net-device-wifi.c:863
 #: panels/printers/new-printer-dialog.ui:50
 #: panels/printers/pp-details-dialog.c:269
 #: panels/region/cc-format-chooser.ui:24
 #: panels/search/cc-search-locations-dialog.c:677
-#: panels/sharing/cc-sharing-panel.c:479 panels/usage/cc-usage-panel.c:139
+#: panels/sharing/cc-sharing-panel.c:447 panels/usage/cc-usage-panel.c:139
 #: panels/user-accounts/cc-add-user-dialog.ui:25
 #: panels/user-accounts/cc-avatar-chooser.c:96
-#: panels/user-accounts/cc-avatar-chooser.c:167
+#: panels/user-accounts/cc-avatar-chooser.c:166
 #: panels/user-accounts/cc-fingerprint-dialog.ui:32
 #: panels/user-accounts/cc-password-dialog.ui:20
-#: panels/user-accounts/cc-user-panel.c:611
-#: panels/user-accounts/cc-user-panel.c:629
+#: panels/user-accounts/cc-user-panel.c:609
+#: panels/user-accounts/cc-user-panel.c:627
 #: panels/user-accounts/data/join-dialog.ui:17
 #: panels/wwan/cc-wwan-mode-dialog.ui:32
 #: panels/wwan/cc-wwan-network-dialog.ui:108
@@ -381,8 +381,8 @@ msgstr "_Anule"
 #: panels/background/cc-background-chooser.c:316
 #: panels/network/connection-editor/vpn-helpers.c:216
 #: panels/printers/pp-details-dialog.c:270
-#: panels/sharing/cc-sharing-panel.c:480
-#: panels/user-accounts/cc-avatar-chooser.c:168
+#: panels/sharing/cc-sharing-panel.c:448
+#: panels/user-accounts/cc-avatar-chooser.c:167
 msgid "_Open"
 msgstr "_Vierç"
 
@@ -442,9 +442,6 @@ msgstr ""
 "Aspiet;"
 
 #: panels/bluetooth/cc-bluetooth-panel.ui:11
-#: panels/datetime/cc-datetime-panel.ui:130
-#: panels/diagnostics/cc-diagnostics-panel.ui:18
-#: panels/display/cc-night-light-page.ui:124
 msgid "Enable"
 msgstr "Abilite"
 
@@ -598,25 +595,25 @@ msgid "The target whitepoint was not obtainable."
 msgstr "Impussibil vê il pont blanc prefissât."
 
 #. TRANSLATORS: the display calibration process is finished
-#: panels/color/cc-color-calibrate.c:452
+#: panels/color/cc-color-calibrate.c:451
 msgid "Complete!"
 msgstr "Completât!"
 
 #. TRANSLATORS: the display calibration failed, and we also show
 #. * the translated (or untranslated) error string after this
-#: panels/color/cc-color-calibrate.c:460
+#: panels/color/cc-color-calibrate.c:459
 msgid "Calibration failed!"
 msgstr "Calibrazion falide!"
 
 #. TRANSLATORS: The user can now remove the sensor from the screen
-#: panels/color/cc-color-calibrate.c:467
+#: panels/color/cc-color-calibrate.c:466
 msgid "You can remove the calibration device."
 msgstr "Al è pussibil gjavâ il dispositîf di calibrazion."
 
 #. TRANSLATORS: The user has to be careful not to knock the
 #. * display off the screen (although we do cope if this is
 #. * detected early enough)
-#: panels/color/cc-color-calibrate.c:535
+#: panels/color/cc-color-calibrate.c:534
 msgid "Do not disturb the calibration device while in progress"
 msgstr "No sta disturbâ il dispositîf di calibrazion intant che al lavore"
 
@@ -673,7 +670,7 @@ msgstr "Fotocjamare %s"
 #: panels/color/cc-color-common.c:77
 #, c-format
 msgid "%s Printer"
-msgstr "Stampant %s"
+msgstr "Stampadore %s"
 
 #. TRANSLATORS: a webcam device, e.g. 'Philips HiDef Camera'
 #: panels/color/cc-color-common.c:81
@@ -692,7 +689,7 @@ msgid "Show color profiles for %s"
 msgstr "Mostre i profîi di colôr par %s"
 
 #. not calibrated
-#: panels/color/cc-color-device.c:291
+#: panels/color/cc-color-device.c:290
 msgid "Not calibrated"
 msgstr "No calibrât"
 
@@ -765,7 +762,7 @@ msgstr ""
 #. TRANSLATORS: this is when the button is insensitive
 #: panels/color/cc-color-panel.c:1195
 msgid "The measuring instrument does not support printer profiling."
-msgstr "Il strument di misure nol supuarte il profiling de stampant."
+msgstr "Il strument di misure nol supuarte il profiling de stampadore."
 
 #. TRANSLATORS: this is when the button is insensitive
 #: panels/color/cc-color-panel.c:1206
@@ -1146,12 +1143,13 @@ msgstr "Colôr"
 msgid ""
 "Calibrate the color of your devices, such as displays, cameras or printers"
 msgstr ""
-"Calibre il colôr dai tiei dispositîfs, come visôrs, fotocjamaris o stampants"
+"Calibre il colôr dai tiei dispositîfs, come visôrs, fotocjamaris o "
+"stampadoris"
 
 #. Translators: Search terms to find the Color panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/color/gnome-color-panel.desktop.in:15
 msgid "Color;ICC;Profile;Calibrate;Printer;Display;"
-msgstr "Colôr;ICC;Profîll;Calibrazion;Stampant;Visôr;Schermi;"
+msgstr "Colôr;ICC;Profîll;Calibrazion;Stampadore;Visôr;Schermi;"
 
 #: panels/common/cc-common-language.c:300
 msgid "Other…"
@@ -1165,26 +1163,27 @@ msgstr "Selezione lenghe"
 msgid "_Select"
 msgstr "_Selezione"
 
-#: panels/common/cc-language-chooser.ui:58
+#: panels/common/cc-language-chooser.ui:35
+#: panels/keyboard/cc-input-chooser.ui:68
+msgid "Language or country"
+msgstr "Lenghe o paîs"
+
+#: panels/common/cc-language-chooser.ui:59
 msgid "No languages found"
 msgstr "Nissune lenghe cjatade"
 
-#: panels/common/cc-language-chooser.ui:69
+#: panels/common/cc-language-chooser.ui:70
 #: panels/keyboard/cc-input-chooser.c:175
 msgid "More…"
 msgstr "Plui…"
 
-#: panels/common/cc-permission-infobar.c:109
+#: panels/common/cc-permission-infobar.c:194
 msgid "Unlock to Change Settings"
 msgstr "Sblocâ par cambiâ lis impostazions"
 
-#: panels/common/cc-permission-infobar.ui:42
-msgid "Some settings must be unlocked before they can be changed."
-msgstr "Si à di sblocâ cualchi impostazion prime di podêlis cambiâ."
-
-#: panels/common/cc-permission-infobar.ui:59
-msgid "Unlock…"
-msgstr "Sbloche…"
+#: panels/common/cc-permission-infobar.ui:6
+msgid "_Unlock…"
+msgstr "_Sbloche…"
 
 #: panels/common/cc-time-editor.ui:25
 msgid "Increment Hour"
@@ -1207,12 +1206,12 @@ msgid "Decrement Minute"
 msgstr "Decremente minût"
 
 #: panels/common/cc-util.c:127
-#: panels/network/connection-editor/ce-page-details.c:167
+#: panels/network/connection-editor/ce-page-details.c:199
 msgid "Today"
 msgstr "Vuê"
 
 #: panels/common/cc-util.c:131
-#: panels/network/connection-editor/ce-page-details.c:169
+#: panels/network/connection-editor/ce-page-details.c:201
 msgid "Yesterday"
 msgstr "Îr"
 
@@ -1302,26 +1301,26 @@ msgctxt "hotspot"
 msgid "Hotspot"
 msgstr "Hotspot"
 
-#: panels/datetime/cc-datetime-panel.c:167
+#: panels/datetime/cc-datetime-panel.c:169
 msgid "24-hour"
 msgstr "24 oris"
 
-#: panels/datetime/cc-datetime-panel.c:169
+#: panels/datetime/cc-datetime-panel.c:171
 msgid "AM / PM"
 msgstr "AM / PM"
 
 #. Translators: This is the full date and time format used in 12-hour mode.
-#: panels/datetime/cc-datetime-panel.c:240
+#: panels/datetime/cc-datetime-panel.c:242
 msgid "%e %B %Y, %l:%M %p"
 msgstr "%e %B %Y, %I:%M %p"
 
 #. Translators: This is the full date and time format used in 24-hour mode.
-#: panels/datetime/cc-datetime-panel.c:245
+#: panels/datetime/cc-datetime-panel.c:247
 msgid "%e %B %Y, %R"
 msgstr "%e %B %Y, %H:%M"
 
 #. Translators: "city, country"
-#: panels/datetime/cc-datetime-panel.c:398
+#: panels/datetime/cc-datetime-panel.c:400
 #, c-format
 msgctxt "timezone loc"
 msgid "%s, %s"
@@ -1329,7 +1328,7 @@ msgstr "%s, %s"
 
 #. Update the timezone on the listbow row
 #. Translators: "timezone (details)"
-#: panels/datetime/cc-datetime-panel.c:415
+#: panels/datetime/cc-datetime-panel.c:417
 #, c-format
 msgctxt "timezone desc"
 msgid "%s (%s)"
@@ -1360,84 +1359,71 @@ msgstr "_Date e ore automatiche"
 msgid "Requires internet access"
 msgstr "Si scugne vê un acès a internet"
 
-#: panels/datetime/cc-datetime-panel.ui:138
+#: panels/datetime/cc-datetime-panel.ui:135
 msgid "Date &amp; _Time"
 msgstr "Da_te e ore"
 
-#: panels/datetime/cc-datetime-panel.ui:162
+#: panels/datetime/cc-datetime-panel.ui:159
 msgid "Automatic Time _Zone"
 msgstr "_Fûs orari automatic"
 
-#: panels/datetime/cc-datetime-panel.ui:163
+#: panels/datetime/cc-datetime-panel.ui:160
 msgid "Requires location services enabled and internet access"
 msgstr "Si scugne vê abilitât i servizis di posizion e un acès a internet"
 
-#. TRANSLATORS: if the function is enabled through BIOS or OS settings.
-#. TRANSLATORS: Status of Parental Controls setup
-#: panels/datetime/cc-datetime-panel.ui:170
-#: panels/display/cc-display-settings.ui:23
-#: panels/firmware-security/cc-firmware-security-utils.c:45
-#: panels/keyboard/cc-xkb-modifier-dialog.ui:43
-#: panels/screen/cc-screen-panel.ui:40 panels/screen/cc-screen-panel.ui:76
-#: panels/screen/cc-screen-panel.ui:96 panels/user-accounts/cc-user-panel.c:819
-#: panels/user-accounts/cc-user-panel.c:948
-#: panels/wwan/cc-wwan-device-page.c:475
-msgid "Enabled"
-msgstr "Abilitât"
-
-#: panels/datetime/cc-datetime-panel.ui:178
+#: panels/datetime/cc-datetime-panel.ui:172
 msgid "Time Z_one"
 msgstr "Fûs _orari"
 
-#: panels/datetime/cc-datetime-panel.ui:203
+#: panels/datetime/cc-datetime-panel.ui:197
 msgid "Time _Format"
 msgstr "F_ormât ore"
 
-#: panels/datetime/cc-datetime-panel.ui:247
+#: panels/datetime/cc-datetime-panel.ui:241
 msgid "January"
 msgstr "Zenâr"
 
-#: panels/datetime/cc-datetime-panel.ui:248
+#: panels/datetime/cc-datetime-panel.ui:242
 msgid "February"
 msgstr "Fevrâr"
 
-#: panels/datetime/cc-datetime-panel.ui:249
+#: panels/datetime/cc-datetime-panel.ui:243
 msgid "March"
 msgstr "Març"
 
-#: panels/datetime/cc-datetime-panel.ui:250
+#: panels/datetime/cc-datetime-panel.ui:244
 msgid "April"
 msgstr "Avrîl"
 
-#: panels/datetime/cc-datetime-panel.ui:251
+#: panels/datetime/cc-datetime-panel.ui:245
 msgid "May"
 msgstr "Mai"
 
-#: panels/datetime/cc-datetime-panel.ui:252
+#: panels/datetime/cc-datetime-panel.ui:246
 msgid "June"
 msgstr "Jugn"
 
-#: panels/datetime/cc-datetime-panel.ui:253
+#: panels/datetime/cc-datetime-panel.ui:247
 msgid "July"
 msgstr "Lui"
 
-#: panels/datetime/cc-datetime-panel.ui:254
+#: panels/datetime/cc-datetime-panel.ui:248
 msgid "August"
 msgstr "Avost"
 
-#: panels/datetime/cc-datetime-panel.ui:255
+#: panels/datetime/cc-datetime-panel.ui:249
 msgid "September"
 msgstr "Setembar"
 
-#: panels/datetime/cc-datetime-panel.ui:256
+#: panels/datetime/cc-datetime-panel.ui:250
 msgid "October"
 msgstr "Otubar"
 
-#: panels/datetime/cc-datetime-panel.ui:257
+#: panels/datetime/cc-datetime-panel.ui:251
 msgid "November"
 msgstr "Novembar"
 
-#: panels/datetime/cc-datetime-panel.ui:258
+#: panels/datetime/cc-datetime-panel.ui:252
 msgid "December"
 msgstr "Dicembar"
 
@@ -1445,7 +1431,11 @@ msgstr "Dicembar"
 msgid "Select Time Zone"
 msgstr "Selezione il Fûs orari"
 
-#: panels/datetime/cc-tz-dialog.ui:40
+#: panels/datetime/cc-tz-dialog.ui:25
+msgid "Search cities"
+msgstr "Cîr citâts"
+
+#: panels/datetime/cc-tz-dialog.ui:41
 msgid "No Results"
 msgstr "Nissun risultât"
 
@@ -1551,21 +1541,21 @@ msgstr "diagnostiche;colàs;crash;"
 msgid "On"
 msgstr "Impiât"
 
-#: panels/display/cc-display-panel.c:498 panels/network/cc-net-proxy-page.c:166
+#: panels/display/cc-display-panel.c:498 panels/network/cc-net-proxy-page.c:181
 #: panels/notifications/cc-notifications-panel.c:217
 #: panels/power/cc-power-panel.c:737 panels/power/cc-power-panel.c:748
 msgid "Off"
 msgstr "Distudât"
 
-#: panels/display/cc-display-panel.c:936
+#: panels/display/cc-display-panel.c:937
 msgid "Apply Changes?"
 msgstr "Aplicâ lis modifichis?"
 
-#: panels/display/cc-display-panel.c:941
+#: panels/display/cc-display-panel.c:942
 msgid "Changes Cannot be Applied"
 msgstr "Lis modifichis no puedin jessi aplicadis"
 
-#: panels/display/cc-display-panel.c:943
+#: panels/display/cc-display-panel.c:944
 msgid "This could be due to hardware limitations."
 msgstr "Chest al podarès jessi par vie di limitazions hardware."
 
@@ -1615,7 +1605,7 @@ msgstr "Visôr primari"
 #. This is the redshift functionality where we suppress blue light when the sun has gone down
 #: panels/display/cc-display-panel.ui:188
 #: panels/display/cc-display-panel.ui:227
-#: panels/display/cc-night-light-page.ui:117
+#: panels/display/cc-night-light-page.ui:86
 msgid "Night Light"
 msgstr "Lûs noturne"
 
@@ -1644,6 +1634,16 @@ msgstr "Orizontâl (invertît)"
 msgid "%.2lf Hz"
 msgstr "%.2lf Hz"
 
+#. TRANSLATORS: if the function is enabled through BIOS or OS settings.
+#. TRANSLATORS: Status of Parental Controls setup
+#: panels/display/cc-display-settings.ui:23
+#: panels/firmware-security/cc-firmware-security-utils.c:45
+#: panels/user-accounts/cc-user-panel.c:787
+#: panels/user-accounts/cc-user-panel.c:915
+#: panels/wwan/cc-wwan-device-page.c:475
+msgid "Enabled"
+msgstr "Abilitât"
+
 #: panels/display/cc-display-settings.ui:43
 msgctxt "display setting"
 msgid "Orientation"
@@ -1668,7 +1668,7 @@ msgctxt "display setting"
 msgid "Scale"
 msgstr "Scjale"
 
-#: panels/display/cc-night-light-page.c:269
+#: panels/display/cc-night-light-page.c:268
 msgid "Night Light cannot be used from a virtual machine."
 msgstr "Nol è pussibil doprâ la lûs noturne di dentri une machine virtuâl."
 
@@ -1685,16 +1685,16 @@ msgstr ""
 "scritori al ven doprât di lontan"
 
 #. Inhibit the redshift functionality until the next day starts
-#: panels/display/cc-night-light-page.ui:60
+#: panels/display/cc-night-light-page.ui:54
 msgid "Temporarily Disabled Until Tomorrow"
 msgstr "Disabilitât in maniere temporanie fintremai doman"
 
 #. This cancels the redshift inhibit.
-#: panels/display/cc-night-light-page.ui:74
+#: panels/display/cc-night-light-page.ui:68
 msgid "Restart Filter"
 msgstr "Torne invie il filtri"
 
-#: panels/display/cc-night-light-page.ui:97
+#: panels/display/cc-night-light-page.ui:82
 msgid ""
 "Night light makes the screen color warmer. This can help to prevent eye "
 "strain and sleeplessness."
@@ -1702,59 +1702,59 @@ msgstr ""
 "La lûs noturne a rint i colôrs dal schermi plui cjalts. Chest al pues judâ a "
 "rilassâ i voi e prevignî la svearole."
 
-#: panels/display/cc-night-light-page.ui:134
+#: panels/display/cc-night-light-page.ui:100
 msgid "Schedule"
 msgstr "Planificazion"
 
-#: panels/display/cc-night-light-page.ui:142
+#: panels/display/cc-night-light-page.ui:108
 msgid "Sunset to Sunrise"
 msgstr "Dal tramont al cricâ dal dì"
 
-#: panels/display/cc-night-light-page.ui:143
+#: panels/display/cc-night-light-page.ui:109
 msgid "Manual Schedule"
 msgstr "Planificazion manuâl"
 
-#: panels/display/cc-night-light-page.ui:156
+#: panels/display/cc-night-light-page.ui:122
 #: panels/region/cc-format-preview.ui:35
 msgid "Times"
 msgstr "Oraris"
 
-#: panels/display/cc-night-light-page.ui:169
+#: panels/display/cc-night-light-page.ui:135
 msgid "From"
 msgstr "Di"
 
-#: panels/display/cc-night-light-page.ui:194
-#: panels/display/cc-night-light-page.ui:281
+#: panels/display/cc-night-light-page.ui:160
+#: panels/display/cc-night-light-page.ui:247
 msgid "Hour"
 msgstr "Ore"
 
-#: panels/display/cc-night-light-page.ui:200
-#: panels/display/cc-night-light-page.ui:287
+#: panels/display/cc-night-light-page.ui:166
+#: panels/display/cc-night-light-page.ui:253
 msgid ":"
 msgstr ":"
 
-#: panels/display/cc-night-light-page.ui:217
-#: panels/display/cc-night-light-page.ui:304
+#: panels/display/cc-night-light-page.ui:183
+#: panels/display/cc-night-light-page.ui:270
 msgid "Minute"
 msgstr "Minût"
 
 #. This is the short form for the time period in the morning
-#: panels/display/cc-night-light-page.ui:227
-#: panels/display/cc-night-light-page.ui:314
+#: panels/display/cc-night-light-page.ui:193
+#: panels/display/cc-night-light-page.ui:280
 msgid "AM"
 msgstr "AM"
 
 #. This is the short form for the time period in the afternoon
-#: panels/display/cc-night-light-page.ui:239
-#: panels/display/cc-night-light-page.ui:326
+#: panels/display/cc-night-light-page.ui:205
+#: panels/display/cc-night-light-page.ui:292
 msgid "PM"
 msgstr "PM"
 
-#: panels/display/cc-night-light-page.ui:256
+#: panels/display/cc-night-light-page.ui:222
 msgid "To"
 msgstr "A"
 
-#: panels/display/cc-night-light-page.ui:362
+#: panels/display/cc-night-light-page.ui:328
 msgid "Color Temperature"
 msgstr "Temperadure colôr"
 
@@ -1896,17 +1896,12 @@ msgstr "Controi passâts"
 #. TRANSLATORS: This description describes the device passing the
 #. minimum requirement of security check.
 #: panels/firmware-security/cc-firmware-security-dialog.c:130
-#, fuzzy
-#| msgid ""
-#| "Device hardware meets security requirements. This device has protection "
-#| "against a range of the most common hardware security threats."
 msgid ""
 "This device meets basic security requirements. Its hardware has protection "
 "against some of the most common security threats."
 msgstr ""
-"L'hardware dal dispositîf al sodisfe i recuisîts di sigurece. Chest "
-"dispositîf al à une protezion cuintri une schirie des plui comunis menacis "
-"di sigurece hardware."
+"Chest dispositîf al sodisfe i recuisîts di sigurece di base. Il so hardware "
+"al à une protezion cuintri cualchidune des plui comunis menacis di sigurece."
 
 #. TRANSLATORS: in reference to firmware protection: 2~4 stars
 #: panels/firmware-security/cc-firmware-security-dialog.c:141
@@ -1917,17 +1912,12 @@ msgstr "Protet"
 #. TRANSLATOR: This description describes the devices passing
 #. the extended security check.
 #: panels/firmware-security/cc-firmware-security-dialog.c:144
-#, fuzzy
-#| msgid ""
-#| "Device hardware meets security requirements. This device has protection "
-#| "against a range of the most common hardware security threats."
 msgid ""
 "This device passes current security tests. Its hardware is protected against "
 "the majority of security threats."
 msgstr ""
-"L'hardware dal dispositîf al sodisfe i recuisîts di sigurece. Chest "
-"dispositîf al à une protezion cuintri une schirie des plui comunis menacis "
-"di sigurece hardware."
+"Chest dispositîf al passe lis provis di sigurece atuâls. Il so hardware al è "
+"protet cuintri la plui part des menacis di sigurece."
 
 #. TRANSLATORS: in reference to firmware protection: ??? stars
 #: panels/firmware-security/cc-firmware-security-dialog.c:152
@@ -1946,10 +1936,10 @@ msgstr ""
 
 #. Translators: Unknown endpoint host for WireGuard (invalid setting)
 #: panels/firmware-security/cc-firmware-security-dialog.c:188
-#: panels/info-overview/cc-info-overview-panel.c:294
-#: panels/info-overview/cc-info-overview-panel.c:314
-#: panels/info-overview/cc-info-overview-panel.c:355
-#: panels/info-overview/cc-info-overview-panel.c:385
+#: panels/info-overview/cc-info-overview-panel.c:297
+#: panels/info-overview/cc-info-overview-panel.c:317
+#: panels/info-overview/cc-info-overview-panel.c:358
+#: panels/info-overview/cc-info-overview-panel.c:388
 #: panels/network/connection-editor/ce-page-wireguard.c:368
 #: panels/sound/cc-alert-chooser-window.c:350
 #: panels/wwan/cc-wwan-details-dialog.c:100
@@ -2272,33 +2262,33 @@ msgstr ""
 "indiç;tabele;non;rêt;identitât;privacy;riservatece;"
 
 #. translators: This is the type of architecture for the OS
-#: panels/info-overview/cc-info-overview-panel.c:332
+#: panels/info-overview/cc-info-overview-panel.c:335
 #, c-format
 msgid "64-bit"
 msgstr "64-bit"
 
 #. translators: This is the type of architecture for the OS
-#: panels/info-overview/cc-info-overview-panel.c:335
+#: panels/info-overview/cc-info-overview-panel.c:338
 #, c-format
 msgid "32-bit"
 msgstr "32-bit"
 
-#: panels/info-overview/cc-info-overview-panel.c:623
+#: panels/info-overview/cc-info-overview-panel.c:626
 msgid "X11"
 msgstr "X11"
 
-#: panels/info-overview/cc-info-overview-panel.c:627
+#: panels/info-overview/cc-info-overview-panel.c:630
 msgid "Wayland"
 msgstr "Wayland"
 
-#: panels/info-overview/cc-info-overview-panel.c:629
+#: panels/info-overview/cc-info-overview-panel.c:632
 msgctxt "Windowing system (Wayland, X11, or Unknown)"
 msgid "Unknown"
 msgstr "No cognossût"
 
 #. translators: this is the placeholder string when the GNOME Shell
 #. * version couldn't be loaded, eg. “GNOME Version: Not Available”
-#: panels/info-overview/cc-info-overview-panel.c:707
+#: panels/info-overview/cc-info-overview-panel.c:710
 msgid "Not Available"
 msgstr "No disponibile"
 
@@ -2307,7 +2297,7 @@ msgid "System Logo"
 msgstr "Logo di sisteme"
 
 #: panels/info-overview/cc-info-overview-panel.ui:33
-#: panels/sharing/cc-sharing-panel.ui:21 panels/sharing/cc-sharing-panel.ui:278
+#: panels/sharing/cc-sharing-panel.ui:12 panels/sharing/cc-sharing-panel.ui:269
 msgid "Device Name"
 msgstr "Non dispositîf"
 
@@ -2545,7 +2535,7 @@ msgstr "Ative o disative il contrast elevât"
 msgid "No input sources found"
 msgstr "Nissune sorzint input cjatade"
 
-#: panels/keyboard/cc-input-chooser.c:993
+#: panels/keyboard/cc-input-chooser.c:990
 msgctxt "Input Source"
 msgid "Other"
 msgstr "Altri"
@@ -2554,7 +2544,7 @@ msgstr "Altri"
 msgid "Add an Input Source"
 msgstr "Zonte une sorzint input"
 
-#: panels/keyboard/cc-input-chooser.ui:84
+#: panels/keyboard/cc-input-chooser.ui:85
 msgid "Input methods can’t be used on the login screen"
 msgstr "Nol è pussibil doprâ i metodis di input te schermade di acès"
 
@@ -2582,8 +2572,8 @@ msgstr "Preferencis"
 msgid "View Keyboard Layout"
 msgstr "Mostre disposizion de tastiere"
 
-#: panels/keyboard/cc-input-row.ui:54 panels/sharing/cc-sharing-networks.c:223
-#: panels/sharing/cc-sharing-panel.c:603
+#: panels/keyboard/cc-input-row.ui:54 panels/sharing/cc-sharing-networks.c:224
+#: panels/sharing/cc-sharing-panel.c:571
 msgid "Remove"
 msgstr "Gjave"
 
@@ -2675,7 +2665,7 @@ msgctxt "keyboard key"
 msgid "Print Screen"
 msgstr "Stampe"
 
-#: panels/keyboard/cc-keyboard-panel.c:214
+#: panels/keyboard/cc-keyboard-panel.c:215
 #, c-format
 msgid ""
 "Input sources can be switched using the %s keyboard shortcut.\n"
@@ -2713,7 +2703,7 @@ msgid "Methods for entering symbols and letter variants using the keyboard."
 msgstr "Metodis par inserî variantis di simbui e letaris doprant la tastiere."
 
 #: panels/keyboard/cc-keyboard-panel.ui:82
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:7 shell/cc-window.ui:161
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:7 shell/cc-window.ui:163
 msgid "Keyboard Shortcuts"
 msgstr "Scurte di tastiere"
 
@@ -2753,32 +2743,36 @@ msgid "Reset all shortcuts to their default keybindings"
 msgstr "Torne met la scurte ae sô cumbinazion di tascj predefinide"
 
 # cîr scurtis o scurtis di ricercje?
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:49
-#, fuzzy
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:45
+msgid "Search shortcuts"
+msgstr "Cîr scurtis"
+
+# cîr scurtis o scurtis di ricercje?
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:50
 msgid "Search Shortcuts"
 msgstr "Cîr scurtis"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:88
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:89
 msgid "No keyboard shortcut found"
 msgstr "Nissune scurte di tastiere cjatade"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:89
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:90
 msgid "Try a different search."
 msgstr "Prove une ricercje diferente."
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:138
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:139
 msgid "Add Custom Shortcuts"
 msgstr "Zonte scurtis personalizadis"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:139
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:140
 msgid "Set up custom shortcuts for launching apps, running scripts, and more."
 msgstr ""
 "Configure lis scurtis personalizadis par inviâ lis aplicazions, eseguî i "
 "scripts e altri."
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:143
-msgid "Add Shortcut"
-msgstr "Zonte scurte"
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:144
+msgid "Add Shortcut…"
+msgstr "Zonte scurte…"
 
 #. TRANSLATORS: Don't translate/transliterate <b>%s</b>, which is the accelerator used
 #: panels/keyboard/cc-keyboard-shortcut-editor.c:391
@@ -2894,22 +2888,13 @@ msgstr ""
 #: panels/keyboard/gnome-keyboard-panel.desktop.in:15
 msgid ""
 "Shortcut;Workspace;Window;Resize;Zoom;Contrast;Input;Source;Lock;Volume;"
-"Hotkey;"
+"Hotkey;Compose;Character;"
 msgstr ""
 "Scurte;Spazi di lavôr;Barcon;Ridimensione;Cambiâ dimension;Ingrandiment;"
-"Contrast;Input;Jentrade;Sorzint;Bloche;Volum;Hotkey;"
+"Contrast;Input;Jentrade;Sorzint;Bloche;Volum;Hotkey;Tast rapit;Compon;"
+"Caratar;"
 
 #: panels/location/cc-location-panel.ui:9
-#, fuzzy
-#| msgid ""
-#| "Location services use GPS, Wi-Fi and cellular connections to determine "
-#| "the approximate location of this device. <a href='https://location."
-#| "services.mozilla.com/privacy'>Learn about what data is collected, and how "
-#| "it is used.</a>\n"
-#| "\n"
-#| "The following sandboxed applications have been given access to location "
-#| "data. Applications that are not sandboxed can access location data "
-#| "without asking for permission."
 msgid ""
 "Location services use GPS, Wi-Fi and cellular connections to determine the "
 "approximate location of this device. <a href='https://location.services."
@@ -2918,12 +2903,8 @@ msgid ""
 msgstr ""
 "I servizis pe posizion a doprin il GPS, il Wi-Fi e lis conessions di celulâr "
 "par determinâ la posizion aprossimative di chest dispositîf. <a "
-"href='https://location.services.mozilla.com/privacy'>Scuvierç di plui su "
-"cuâi dâts a vegnin tirâts dongje e cemût che a vegnin doprâts.</a>\n"
-"\n"
-"Chestis aplicazions isoladis a àn vût il permès par acedi ai dâts pe "
-"posizion. Lis aplicazions che no son isoladis a puedin acedi ai dâts pe "
-"posizion cence domandâ i permès."
+"href='https://location.services.mozilla.com/privacy'>Scuvierç di plui sui "
+"dâts che a vegnin tirâts dongje e cemût che a vegnin doprâts.</a>"
 
 #: panels/location/cc-location-panel.ui:12
 msgid "_Location Services"
@@ -2934,19 +2915,14 @@ msgid "Allow permitted apps to access location data"
 msgstr "Consint aes aplicazion ametudis di acedi ai dâts su la posizion"
 
 #: panels/location/cc-location-panel.ui:24
-#, fuzzy
-#| msgid ""
-#| "The following sandboxed applications have been given permission to use "
-#| "cameras. Applications that are not sandboxed can use cameras without "
-#| "asking for permission."
 msgid ""
 "The following sandboxed apps have been given access to location data. Apps "
 "that are not sandboxed can access location data without asking for "
 "permission."
 msgstr ""
-"Chestis aplicazions isoladis a àn vût il permès par doprâ la fotocjamare. "
-"Lis aplicazions che no son isoladis a puedin doprâ lis fotocjamaris cence "
-"domandâ il permès."
+"Chestis aplicazions isoladis a àn vût il permès par acedi ai dâts su la "
+"posizion. Lis aplicazions che no son isoladis a puedin acedi ai dâts su la "
+"posizion cence domandâ il permès."
 
 #: panels/location/cc-location-panel.ui:38
 msgid "No sandboxed apps have asked for location access"
@@ -2970,11 +2946,6 @@ msgid "Allow permitted apps to use microphones"
 msgstr "Permet aes aplicazions consintudis di doprâ i microfons"
 
 #: panels/microphone/cc-microphone-panel.ui:23
-#, fuzzy
-#| msgid ""
-#| "The following sandboxed applications have been given permission to use "
-#| "microphones. Applications that are not sandboxed can use microphones "
-#| "without asking for permission."
 msgid ""
 "The following sandboxed apps have been given permission to use microphones. "
 "Apps that are not sandboxed can use microphones without asking for "
@@ -2985,8 +2956,6 @@ msgstr ""
 "il permès."
 
 #: panels/microphone/cc-microphone-panel.ui:38
-#, fuzzy
-#| msgid "No sandboxed applications have asked for microphone access"
 msgid "No sandboxed apps have asked for microphone access"
 msgstr "Nissune aplicazion isolade e à domandât di doprâ il microfon"
 
@@ -3003,7 +2972,7 @@ msgstr "Limite l'acès al microfon"
 msgid "microphone;recording;application;privacy;"
 msgstr "microfon;regjistrazion;aplicazion;riservatece;privacy;"
 
-#: panels/mouse/cc-mouse-panel.ui:30
+#: panels/mouse/cc-mouse-panel.ui:30 panels/wacom/cc-wacom-panel.ui:9
 msgid "Test _Settings"
 msgstr "Prove lis _impostazions"
 
@@ -3021,10 +2990,8 @@ msgid "Primary Button"
 msgstr "Boton primari"
 
 #: panels/mouse/cc-mouse-panel.ui:55
-#, fuzzy
-#| msgid "Sets the order of physical buttons on mice and touchpads."
 msgid "Order of physical buttons on mice and touchpads."
-msgstr "Stabilìs l'ordin dai botons fisics sui mouse e touchpad."
+msgstr "Ordin dai botons fisics sui mouse e touchpads."
 
 #: panels/mouse/cc-mouse-panel.ui:69
 msgid "Left"
@@ -3035,17 +3002,17 @@ msgid "Right"
 msgstr "Drete"
 
 #: panels/mouse/cc-mouse-panel.ui:93 panels/mouse/cc-mouse-panel.ui:98
-#: panels/mouse/cc-mouse-panel.ui:200
+#: panels/mouse/cc-mouse-panel.ui:194
 msgid "Pointer Speed"
 msgstr "Velocitât cursôr"
 
-#: panels/mouse/cc-mouse-panel.ui:101 panels/mouse/cc-mouse-panel.ui:208
+#: panels/mouse/cc-mouse-panel.ui:101 panels/mouse/cc-mouse-panel.ui:203
 #: panels/universal-access/cc-ua-typing-page.ui:53
 #: panels/universal-access/cc-ua-typing-page.ui:111
 msgid "Slow"
 msgstr "Lente"
 
-#: panels/mouse/cc-mouse-panel.ui:103 panels/mouse/cc-mouse-panel.ui:210
+#: panels/mouse/cc-mouse-panel.ui:103 panels/mouse/cc-mouse-panel.ui:205
 #: panels/universal-access/cc-ua-typing-page.ui:50
 #: panels/universal-access/cc-ua-typing-page.ui:108
 msgid "Fast"
@@ -3056,10 +3023,8 @@ msgid "Mouse Acceleration"
 msgstr "Acelerazion dal mouse"
 
 #: panels/mouse/cc-mouse-panel.ui:120
-#, fuzzy
-#| msgid "Read system and application logs"
 msgid "Recommended for most users and applications"
-msgstr "Lei i regjistris dal sisteme e des aplicazions"
+msgstr "Racomandât pe plui part dai utents e aplicazions"
 
 #: panels/mouse/cc-mouse-panel.ui:140
 msgid ""
@@ -3069,78 +3034,67 @@ msgstr ""
 "La disativazion de acelerazion dal mouse e pues puartâ a moviments plui "
 "svelts e plui precîs, ma ancje rindi il mouse plui dificil di doprâ."
 
-#: panels/mouse/cc-mouse-panel.ui:152
-#, fuzzy
-#| msgid "_Pointer speed"
-msgid "Pointer Assistance"
-msgstr "_Velocitât cursôr"
-
-#: panels/mouse/cc-mouse-panel.ui:160 panels/mouse/cc-mouse-panel.ui:264
+#: panels/mouse/cc-mouse-panel.ui:157 panels/mouse/cc-mouse-panel.ui:258
 msgid "Scroll Direction"
 msgstr "Direzion di scoriment"
 
-#: panels/mouse/cc-mouse-panel.ui:161 panels/mouse/cc-mouse-panel.ui:265
+#: panels/mouse/cc-mouse-panel.ui:158 panels/mouse/cc-mouse-panel.ui:259
 msgid "Traditional"
 msgstr "Tradizionâl"
 
-#: panels/mouse/cc-mouse-panel.ui:162 panels/mouse/cc-mouse-panel.ui:266
+#: panels/mouse/cc-mouse-panel.ui:159 panels/mouse/cc-mouse-panel.ui:260
 msgid "Scrolling moves the view"
 msgstr "Il scori al sposte la viodude"
 
-#: panels/mouse/cc-mouse-panel.ui:163 panels/mouse/cc-mouse-panel.ui:267
+#: panels/mouse/cc-mouse-panel.ui:160 panels/mouse/cc-mouse-panel.ui:261
 msgid "Natural"
 msgstr "Naturâl"
 
-#: panels/mouse/cc-mouse-panel.ui:164 panels/mouse/cc-mouse-panel.ui:268
+#: panels/mouse/cc-mouse-panel.ui:161 panels/mouse/cc-mouse-panel.ui:263
 msgid "Scrolling moves the content"
 msgstr "Il scori al sposte il contignût"
 
-#: panels/mouse/cc-mouse-panel.ui:179 panels/mouse/cc-mouse-panel.ui:186
-#: panels/mouse/cc-mouse-panel.ui:192
+#: panels/mouse/cc-mouse-panel.ui:176 panels/mouse/cc-mouse-panel.ui:183
 msgid "Touchpad"
 msgstr "Touchpad"
 
-#: panels/mouse/cc-mouse-panel.ui:205
+#: panels/mouse/cc-mouse-panel.ui:200
 msgid "Pointer speed"
 msgstr "Velocitât pontadôr"
 
-#: panels/mouse/cc-mouse-panel.ui:228
+#: panels/mouse/cc-mouse-panel.ui:223
 msgid "Clicking"
 msgstr "Clics"
 
-#: panels/mouse/cc-mouse-panel.ui:233
+#: panels/mouse/cc-mouse-panel.ui:228
 msgid "Tap to Click"
 msgstr "Tap par fâ clic"
 
-#: panels/mouse/cc-mouse-panel.ui:234
+#: panels/mouse/cc-mouse-panel.ui:229
 msgid "Quickly touch the touchpad to click"
 msgstr "Tocje svelt il touchpad par fâ clic"
 
-#: panels/mouse/cc-mouse-panel.ui:240
-msgid "Tap to click"
-msgstr "Batuce par fâ clic"
-
-#: panels/mouse/cc-mouse-panel.ui:251
+#: panels/mouse/cc-mouse-panel.ui:244
 msgid "Scrolling"
 msgstr "Scoriment"
 
-#: panels/mouse/cc-mouse-panel.ui:254
+#: panels/mouse/cc-mouse-panel.ui:247
 msgid "Scroll Method"
 msgstr "Metodi di scoriment"
 
-#: panels/mouse/cc-mouse-panel.ui:255
+#: panels/mouse/cc-mouse-panel.ui:248
 msgid "Two Finger"
 msgstr "Doi dêts"
 
-#: panels/mouse/cc-mouse-panel.ui:256
+#: panels/mouse/cc-mouse-panel.ui:249
 msgid "Drag two fingers on the touchpad"
 msgstr "Strissine doi dêts sul touchpad"
 
-#: panels/mouse/cc-mouse-panel.ui:257
+#: panels/mouse/cc-mouse-panel.ui:250
 msgid "Edge"
 msgstr "Ôr"
 
-#: panels/mouse/cc-mouse-panel.ui:258
+#: panels/mouse/cc-mouse-panel.ui:251
 msgid "Drag one finger on the edge"
 msgstr "Strissine un dêt sul ôr"
 
@@ -3279,7 +3233,7 @@ msgstr "Proxy"
 msgid "Save"
 msgstr "Salve"
 
-#: panels/network/cc-network-panel.ui:75 panels/network/cc-network-panel.ui:80
+#: panels/network/cc-network-panel.ui:75
 msgid "Other Devices"
 msgstr "Altris dispositîfs"
 
@@ -3296,18 +3250,18 @@ msgstr "Zonteconession"
 msgid "Not set up"
 msgstr "No configurade"
 
-#: panels/network/cc-net-proxy-page.c:168
+#: panels/network/cc-net-proxy-page.c:183
 #: panels/network/cc-net-proxy-page.ui:24
 #: panels/network/connection-editor/ip4-page.ui:175
 #: panels/network/connection-editor/ip4-page.ui:227
 #: panels/network/connection-editor/ip6-page.ui:36
 #: panels/network/connection-editor/ip6-page.ui:185
 #: panels/network/connection-editor/ip6-page.ui:237
-#: panels/wacom/cc-wacom-page.c:656
+#: panels/wacom/cc-wacom-page.c:659
 msgid "Automatic"
 msgstr "Automatic"
 
-#: panels/network/cc-net-proxy-page.c:170
+#: panels/network/cc-net-proxy-page.c:185
 #: panels/network/cc-net-proxy-page.ui:25
 #: panels/network/connection-editor/ip4-page.ui:55
 #: panels/network/connection-editor/ip6-page.ui:65
@@ -3430,6 +3384,11 @@ msgstr "Rêt sigure (WPA3)"
 msgid "Secure network"
 msgstr "Rêt sigure"
 
+#: panels/network/cc-wifi-connection-row.c:323
+#, c-format
+msgid "Signal strength %d%%"
+msgstr "Fuarce dal segnâl %d%%"
+
 #. TRANSLATORS: device status
 #: panels/network/cc-wifi-connection-row.ui:41 panels/network/panel-common.c:63
 msgid "Connected"
@@ -3441,13 +3400,13 @@ msgstr "Mostre codiç QR"
 
 #: panels/network/cc-wifi-connection-row.ui:77
 #: panels/network/net-device-ethernet.c:325
-#: panels/network/network-bluetooth.ui:22 panels/network/network-ethernet.ui:56
+#: panels/network/network-bluetooth.ui:19 panels/network/network-ethernet.ui:53
 #: panels/network/network-mobile.ui:329 panels/network/network-vpn.ui:21
 msgid "Options…"
 msgstr "Opzions…"
 
 #. TRANSLATORS: ‘%s’ is a Wi-Fi Network(SSID) name
-#: panels/network/cc-wifi-hotspot-dialog.c:133
+#: panels/network/cc-wifi-hotspot-dialog.c:134
 #, c-format
 msgid ""
 "Turning on the hotspot will disconnect from %s, and it will not be possible "
@@ -3456,12 +3415,21 @@ msgstr ""
 "Impiant l'hotspot tu ti disconetarâs di %s e nol sarà pussibil acedi  su "
 "internet vie Wi-Fi."
 
-#: panels/network/cc-wifi-hotspot-dialog.c:266
+#: panels/network/cc-wifi-hotspot-dialog.c:250
+msgid "Network name cannot be empty"
+msgstr "Il non de rêt nol pues jessi vueit"
+
+#. SSID length needs to be in the 1-32 byte range
+#: panels/network/cc-wifi-hotspot-dialog.c:256
+msgid "Network name is too long"
+msgstr "Il non de rêt al è masse lunc"
+
+#: panels/network/cc-wifi-hotspot-dialog.c:277
 msgid "Must have a minimum of 8 characters"
 msgstr "E scugne vê un minim di 8 caratars"
 
 # Si riferìs ae password
-#: panels/network/cc-wifi-hotspot-dialog.c:271
+#: panels/network/cc-wifi-hotspot-dialog.c:282
 #, c-format
 msgid "Must have a maximum of %d character"
 msgid_plural "Must have a maximum of %d characters"
@@ -3487,9 +3455,9 @@ msgid "Network Name"
 msgstr "Non rêt"
 
 #. Translators: This is a password needed for printing.
-#: panels/network/cc-wifi-hotspot-dialog.ui:75
+#: panels/network/cc-wifi-hotspot-dialog.ui:92
 #: panels/printers/new-printer-dialog.ui:316
-#: panels/printers/pp-jobs-dialog.ui:54 panels/sharing/cc-sharing-panel.ui:359
+#: panels/printers/pp-jobs-dialog.ui:54 panels/sharing/cc-sharing-panel.ui:350
 #: panels/user-accounts/cc-add-user-dialog.ui:145
 #: panels/user-accounts/cc-add-user-dialog.ui:180
 #: panels/user-accounts/cc-add-user-dialog.ui:359
@@ -3497,35 +3465,35 @@ msgstr "Non rêt"
 msgid "Password"
 msgstr "Password"
 
-#: panels/network/cc-wifi-hotspot-dialog.ui:88
+#: panels/network/cc-wifi-hotspot-dialog.ui:105
 msgid "Generate Random Password"
 msgstr "Gjenere password casuâl"
 
-#: panels/network/cc-wifi-hotspot-dialog.ui:89
+#: panels/network/cc-wifi-hotspot-dialog.ui:106
 msgid "Autogenerate Password"
 msgstr "Gjenere in automatic la password"
 
-#: panels/network/cc-wifi-hotspot-dialog.ui:131
+#: panels/network/cc-wifi-hotspot-dialog.ui:148
 msgid "_Turn On"
 msgstr "_Impie"
 
-#: panels/network/cc-wifi-panel.c:407
+#: panels/network/cc-wifi-panel.c:406
 #: panels/network/gnome-wifi-panel.desktop.in:3
-#: panels/network/network-wifi.ui:66
+#: panels/network/network-wifi.ui:61
 msgid "Wi-Fi"
 msgstr "Wi-Fi"
 
-#: panels/network/cc-wifi-panel.c:741
+#: panels/network/cc-wifi-panel.c:740
 msgid "Turning off will disconnect any devices that are using the hotspot."
 msgstr ""
 "Disativant tu disconetarâs cualsisei dispositîf che al sta doprant il pont "
 "di acès."
 
-#: panels/network/cc-wifi-panel.c:743
+#: panels/network/cc-wifi-panel.c:742
 msgid "Turn Off Hotspot?"
 msgstr "Distudâ il pont di acès?"
 
-#: panels/network/cc-wifi-panel.c:746
+#: panels/network/cc-wifi-panel.c:745
 msgid "_Turn Off"
 msgstr "Dis_tude"
 
@@ -3623,50 +3591,69 @@ msgstr ""
 msgid "Profile %d"
 msgstr "Profîl %d"
 
+#. Translators: "%s" is the user visible name of the network
+#: panels/network/connection-editor/ce-page-details.c:93
+#, c-format
+msgid ""
+"Saved details for “%s” will be permanently lost. This includes passwords and "
+"any network changes."
+msgstr ""
+"I detais salvâts par “%s” a vignaran pierdûts par simpri. Chest al inclût "
+"lis passwords e cualsisei modifiche ae rêt."
+
+#: panels/network/connection-editor/ce-page-details.c:96
+#: panels/network/net-device-wifi.c:860
+msgid "Forget Connection?"
+msgstr "Dismenteâ la conession?"
+
+#: panels/network/connection-editor/ce-page-details.c:101
+msgid "Forget"
+msgstr "Dismentee"
+
 #. TRANSLATORS: this WEP WiFi security
-#: panels/network/connection-editor/ce-page-details.c:97
-#: panels/network/net-device-wifi.c:230
+#: panels/network/connection-editor/ce-page-details.c:129
+#: panels/network/net-device-wifi.c:228
 msgid "WEP"
 msgstr "WEP"
 
 #. TRANSLATORS: this WPA WiFi security
-#: panels/network/connection-editor/ce-page-details.c:101
-#: panels/network/net-device-wifi.c:235
+#: panels/network/connection-editor/ce-page-details.c:133
+#: panels/network/net-device-wifi.c:233
 msgid "WPA"
 msgstr "WPA"
 
 #. TRANSLATORS: this WPA3 WiFi security
-#: panels/network/connection-editor/ce-page-details.c:107
+#: panels/network/connection-editor/ce-page-details.c:139
 msgid "WPA3"
 msgstr "WPA3"
 
 #. TRANSLATORS: this Enhanced Open WiFi security
-#: panels/network/connection-editor/ce-page-details.c:112
+#: panels/network/connection-editor/ce-page-details.c:144
 #: panels/network/connection-editor/ce-page-security.c:271
 msgid "Enhanced Open"
 msgstr "Enhanced Open"
 
 #. TRANSLATORS: this WPA WiFi security
-#: panels/network/connection-editor/ce-page-details.c:124
+#: panels/network/connection-editor/ce-page-details.c:156
 msgid "WPA2"
 msgstr "WPA2"
 
 #. TRANSLATORS: this Enterprise WiFi security
-#: panels/network/connection-editor/ce-page-details.c:130
+#: panels/network/connection-editor/ce-page-details.c:162
 msgid "Enterprise"
 msgstr "Enterprise"
 
-#: panels/network/connection-editor/ce-page-details.c:135
-#: panels/network/net-device-wifi.c:220
+#: panels/network/connection-editor/ce-page-details.c:167
+#: panels/network/net-device-wifi.c:218
 msgctxt "Wifi security"
 msgid "None"
 msgstr "Nissune"
 
-#: panels/network/connection-editor/ce-page-details.c:156
+#: panels/network/connection-editor/ce-page-details.c:188
 msgid "Never"
 msgstr "Mai"
 
-#: panels/network/connection-editor/ce-page-details.c:171
+#: panels/network/connection-editor/ce-page-details.c:203
 #: panels/network/net-device-ethernet.c:105
 #, c-format
 msgid "%i day ago"
@@ -3674,71 +3661,71 @@ msgid_plural "%i days ago"
 msgstr[0] "%i zornade indaûr"
 msgstr[1] "%i dîs indaûr"
 
-#: panels/network/connection-editor/ce-page-details.c:295
+#: panels/network/connection-editor/ce-page-details.c:327
 #, c-format
 msgid "%d Mb/s (%1.1f GHz)"
 msgstr "%d Mb/s (%1.1f GHz)"
 
 #. Translators: network device speed
-#: panels/network/connection-editor/ce-page-details.c:297
+#: panels/network/connection-editor/ce-page-details.c:329
 #: panels/network/net-device-ethernet.c:217
 #, c-format
 msgid "%d Mb/s"
 msgstr "%d Mb/s"
 
-#: panels/network/connection-editor/ce-page-details.c:312
+#: panels/network/connection-editor/ce-page-details.c:344
 msgid "2.4 GHz / 5 GHz"
 msgstr "2.4 GHz / 5 GHz"
 
-#: panels/network/connection-editor/ce-page-details.c:314
+#: panels/network/connection-editor/ce-page-details.c:346
 msgid "2.4 GHz"
 msgstr "2.4 GHz"
 
-#: panels/network/connection-editor/ce-page-details.c:316
+#: panels/network/connection-editor/ce-page-details.c:348
 msgid "5 GHz"
 msgstr "5 GHz"
 
-#: panels/network/connection-editor/ce-page-details.c:336
+#: panels/network/connection-editor/ce-page-details.c:368
 msgctxt "Signal strength"
 msgid "None"
 msgstr "Nissune"
 
-#: panels/network/connection-editor/ce-page-details.c:338
+#: panels/network/connection-editor/ce-page-details.c:370
 msgctxt "Signal strength"
 msgid "Weak"
 msgstr "Debul"
 
-#: panels/network/connection-editor/ce-page-details.c:340
+#: panels/network/connection-editor/ce-page-details.c:372
 msgctxt "Signal strength"
 msgid "Ok"
 msgstr "Ok"
 
-#: panels/network/connection-editor/ce-page-details.c:342
+#: panels/network/connection-editor/ce-page-details.c:374
 msgctxt "Signal strength"
 msgid "Good"
 msgstr "Bon"
 
-#: panels/network/connection-editor/ce-page-details.c:344
+#: panels/network/connection-editor/ce-page-details.c:376
 msgctxt "Signal strength"
 msgid "Excellent"
 msgstr "Ecelent"
 
-#: panels/network/connection-editor/ce-page-details.c:411
+#: panels/network/connection-editor/ce-page-details.c:443
 #: panels/network/connection-editor/details-page.ui:94
 #: panels/network/net-device-ethernet.c:144
 #: panels/network/net-device-mobile.c:441
 msgid "IPv4 Address"
 msgstr "Direzion IPv4"
 
-#: panels/network/connection-editor/ce-page-details.c:412
+#: panels/network/connection-editor/ce-page-details.c:444
 #: panels/network/connection-editor/details-page.ui:110
 #: panels/network/net-device-ethernet.c:146
 #: panels/network/net-device-mobile.c:442 panels/network/network-mobile.ui:177
 msgid "IPv6 Address"
 msgstr "Direzion IPv6"
 
-#: panels/network/connection-editor/ce-page-details.c:414
-#: panels/network/connection-editor/ce-page-details.c:415
+#: panels/network/connection-editor/ce-page-details.c:446
+#: panels/network/connection-editor/ce-page-details.c:447
 #: panels/network/net-device-ethernet.c:149
 #: panels/network/net-device-ethernet.c:151
 #: panels/network/net-device-mobile.c:445
@@ -3746,20 +3733,20 @@ msgstr "Direzion IPv6"
 msgid "IP Address"
 msgstr "Direzions IP"
 
-#: panels/network/connection-editor/ce-page-details.c:419
+#: panels/network/connection-editor/ce-page-details.c:451
 #: panels/network/net-device-ethernet.c:166
 #: panels/network/net-device-mobile.c:450
 msgid "DNS4"
 msgstr "DNS4"
 
-#: panels/network/connection-editor/ce-page-details.c:420
+#: panels/network/connection-editor/ce-page-details.c:452
 #: panels/network/net-device-ethernet.c:167
 #: panels/network/net-device-mobile.c:451
 msgid "DNS6"
 msgstr "DNS6"
 
-#: panels/network/connection-editor/ce-page-details.c:422
-#: panels/network/connection-editor/ce-page-details.c:423
+#: panels/network/connection-editor/ce-page-details.c:454
+#: panels/network/connection-editor/ce-page-details.c:455
 #: panels/network/connection-editor/details-page.ui:175
 #: panels/network/connection-editor/details-page.ui:192
 #: panels/network/connection-editor/ip4-page.ui:165
@@ -3772,27 +3759,27 @@ msgstr "DNS6"
 msgid "DNS"
 msgstr "DNS"
 
-#: panels/network/connection-editor/ce-page-details.c:475
+#: panels/network/connection-editor/ce-page-details.c:507
 msgid "Forget Connection"
 msgstr "Dismentee conession"
 
-#: panels/network/connection-editor/ce-page-details.c:477
+#: panels/network/connection-editor/ce-page-details.c:509
 msgid "Remove Connection Profile"
 msgstr "Gjave profîl conession"
 
-#: panels/network/connection-editor/ce-page-details.c:480
+#: panels/network/connection-editor/ce-page-details.c:512
 msgid "Remove VPN"
 msgstr "Gjave VPN"
 
-#: panels/network/connection-editor/ce-page-details.c:498
+#: panels/network/connection-editor/ce-page-details.c:530
 msgid "Details"
 msgstr "Detais"
 
-#: panels/network/connection-editor/ce-page-ethernet.c:71
+#: panels/network/connection-editor/ce-page-ethernet.c:69
 msgid "automatic"
 msgstr "automatic"
 
-#: panels/network/connection-editor/ce-page-ethernet.c:144
+#: panels/network/connection-editor/ce-page-ethernet.c:142
 #: panels/network/connection-editor/ce-page-vpn.c:148
 #: panels/network/connection-editor/ce-page-wifi.c:129
 msgid "Identity"
@@ -3851,7 +3838,6 @@ msgstr "WPA3 personâl"
 
 #: panels/network/connection-editor/ce-page-wireguard.c:106
 #: panels/network/connection-editor/net-connection-editor.c:864
-#| msgid "Wired"
 msgid "WireGuard"
 msgstr "WireGuard"
 
@@ -4254,7 +4240,7 @@ msgstr "Fîl"
 msgid "Add new connection"
 msgstr "Zonte gnove conession"
 
-#: panels/network/net-device-wifi.c:864
+#: panels/network/net-device-wifi.c:858
 msgid ""
 "Network details for the selected networks, including passwords and any "
 "custom configuration will be lost."
@@ -4262,7 +4248,7 @@ msgstr ""
 "A vignaran pierdûts i detais par lis rêts selezionadis, includût lis "
 "password e ogni configurazion personalizade."
 
-#: panels/network/net-device-wifi.c:868
+#: panels/network/net-device-wifi.c:864
 msgid "_Forget"
 msgstr "_Dismentee"
 
@@ -4276,22 +4262,13 @@ msgctxt "Wi-Fi Network"
 msgid "_Forget"
 msgstr "_Dismentee"
 
-#: panels/network/net-device-wifi.c:1244
+#: panels/network/net-device-wifi.c:1242
 msgid "System policy prohibits use as a Hotspot"
 msgstr "La politiche di sisteme e proibìs l'ûs come Hotspot"
 
-#: panels/network/net-device-wifi.c:1247
+#: panels/network/net-device-wifi.c:1245
 msgid "Wireless device does not support Hotspot mode"
 msgstr "Il dispositîf wireless nol supuarte la modalitât Hotspot"
-
-#: panels/network/network-bluetooth.ui:11
-msgid "Turn device off"
-msgstr "Distude il dispositîf"
-
-#: panels/network/network-ethernet.ui:45 panels/network/network-mobile.ui:310
-#: panels/power/cc-power-profile-row.ui:21
-msgid "Active"
-msgstr "Atîf"
 
 #: panels/network/network-mobile.ui:27
 #: panels/wwan/cc-wwan-details-dialog.ui:237
@@ -4301,6 +4278,10 @@ msgstr "IMEI"
 #: panels/network/network-mobile.ui:41
 msgid "Provider"
 msgstr "Provider"
+
+#: panels/network/network-mobile.ui:310 panels/power/cc-power-profile-row.ui:21
+msgid "Active"
+msgstr "Atîf"
 
 #: panels/network/network-vpn.ui:11
 msgid "Turn VPN connection off"
@@ -4321,23 +4302,23 @@ msgctxt "Wi-Fi Hotspot"
 msgid "Password"
 msgstr "Password"
 
-#: panels/network/network-wifi.ui:90
+#: panels/network/network-wifi.ui:73
 msgid "Turn Wi-Fi off"
 msgstr "Distude Wi-Fi"
 
-#: panels/network/network-wifi.ui:99 panels/search/cc-search-panel-row.ui:39
+#: panels/network/network-wifi.ui:82 panels/search/cc-search-panel-row.ui:39
 msgid "More options…"
 msgstr "Plui opzions…"
 
-#: panels/network/network-wifi.ui:119
+#: panels/network/network-wifi.ui:102
 msgid "_Connect to Hidden Network…"
 msgstr "_Conet a rêt platade…"
 
-#: panels/network/network-wifi.ui:131
+#: panels/network/network-wifi.ui:114
 msgid "_Turn On Wi-Fi Hotspot…"
 msgstr "_Impie hotspot Wi-Fi…"
 
-#: panels/network/network-wifi.ui:143
+#: panels/network/network-wifi.ui:126
 msgid "_Saved Networks"
 msgstr "Rêts _salvadis"
 
@@ -4643,9 +4624,14 @@ msgstr "_No sta disturbâ"
 
 #. Translators: Whether to show notifications on the lock screen
 #: panels/notifications/cc-notifications-panel.ui:17
-#: panels/screen/cc-screen-panel.ui:69
+#: panels/screen/cc-screen-panel.ui:66
 msgid "_Lock Screen Notifications"
 msgstr "Notifichis sul schermi b_locât"
+
+#. List of apps.
+#: panels/notifications/cc-notifications-panel.ui:26
+msgid "App Notifications"
+msgstr "Notifichis aplicazions"
 
 #: panels/notifications/gnome-notifications-panel.desktop.in:4
 msgid "Control which notifications are displayed and what they show"
@@ -4669,7 +4655,7 @@ msgstr "Altri"
 msgid "%s removed"
 msgstr "%s gjavât"
 
-#: panels/online-accounts/cc-online-accounts-panel.c:695
+#: panels/online-accounts/cc-online-accounts-panel.c:694
 msgid "Error removing account"
 msgstr "Erôr tal gjava l'account"
 
@@ -4876,13 +4862,12 @@ msgstr "Batariis"
 #. Translators: UPS is an Uninterruptible Power Supply:
 #. * https://en.wikipedia.org/wiki/Uninterruptible_power_supply
 #: panels/power/cc-power-panel.c:260
-#| msgid "USB"
 msgid "UPS"
 msgstr "UPS"
 
 #: panels/power/cc-power-panel.c:520
 msgid "When _idle"
-msgstr "Cuant _inatîf"
+msgstr "Se _inatîf"
 
 #: panels/power/cc-power-panel.c:680
 msgid "Suspend"
@@ -4902,11 +4887,11 @@ msgstr "Nissune azion"
 
 #: panels/power/cc-power-panel.c:739
 msgid "When on battery power"
-msgstr "Cuant che si dopre la batarie"
+msgstr "Se si dopre la batarie"
 
 #: panels/power/cc-power-panel.c:741
 msgid "When plugged in"
-msgstr "Cuant che al è alimentât"
+msgstr "Se al è alimentât"
 
 #: panels/power/cc-power-panel.c:862
 msgctxt "Idle time"
@@ -5042,8 +5027,7 @@ msgstr "Scurî il schermi"
 
 #: panels/power/cc-power-panel.ui:140
 msgid "Reduces the screen brightness when the computer is inactive."
-msgstr ""
-"Al diminuìs la luminositât dal schermi cuant che il computer al è inatîf."
+msgstr "Al diminuìs la luminositât dal schermi se il computer al è inatîf."
 
 #: panels/power/cc-power-panel.ui:151
 msgid "Screen _Blank"
@@ -5060,8 +5044,8 @@ msgstr "Sparagn energjetic automatic"
 #: panels/power/cc-power-panel.ui:161
 msgid "Enables power saver mode when battery is low."
 msgstr ""
-"Al abilite la modalitât di sparagn energjetic cuant che la cjarie de batarie "
-"e je basse."
+"Al abilite la modalitât di sparagn energjetic se la cjarie de batarie e je "
+"basse."
 
 #: panels/power/cc-power-panel.ui:174
 msgid "_Automatic Suspend"
@@ -5150,35 +5134,35 @@ msgstr ""
 #: panels/printers/cc-printers-panel.c:682
 #, c-format
 msgid "Printer “%s” has been deleted"
-msgstr "La stampant “%s” e je stade eliminade"
+msgstr "La stampadore “%s” e je stade eliminade"
 
 #. Translators: Addition of the new printer failed.
-#: panels/printers/cc-printers-panel.c:939
+#: panels/printers/cc-printers-panel.c:938
 msgid "Failed to add new printer."
-msgstr "Zonte de gnove stampant falide."
+msgstr "Zonte de gnove stampadore falide."
 
 #. Translators: The XML file containing user interface can not be loaded
-#: panels/printers/cc-printers-panel.c:1246
+#: panels/printers/cc-printers-panel.c:1245
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "Impussibil cjariâ la interface: %s"
 
-#: panels/printers/cc-printers-panel.c:1314
-msgid "Unlock to Add Printers and Change Settings"
+#: panels/printers/cc-printers-panel.c:1313
+msgid "Unlock to add printers and change settings"
 msgstr "Sbloche par zontâ stampadoris e cambiâ impostazions"
 
 #: panels/printers/gnome-printers-panel.desktop.in:3
 msgid "Printers"
-msgstr "Stampants"
+msgstr "Stampadoris"
 
 #: panels/printers/gnome-printers-panel.desktop.in:4
 msgid "Add printers, view printer jobs and decide how you want to print"
-msgstr "Zonte stampants, mostre i lavôrs di stampe e decît cemût stampâ"
+msgstr "Zonte stampadoris, mostre i lavôrs di stampe e decît cemût stampâ"
 
 #. Translators: Search terms to find the Printers panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/printers/gnome-printers-panel.desktop.in:16
 msgid "Printer;Queue;Print;Paper;Ink;Toner;"
-msgstr "Stampant;Code;Stampe;Cjarte;Ingjustri;Toner;"
+msgstr "Stampadore;Code;Stampe;Cjarte;Ingjustri;Toner;"
 
 #. Translators: This is the title presented at top of the dialog.
 #: panels/printers/new-printer-dialog.ui:28
@@ -5186,7 +5170,7 @@ msgstr "Stampant;Code;Stampe;Cjarte;Ingjustri;Toner;"
 #: panels/printers/pp-new-printer-dialog.c:255
 #: panels/printers/pp-new-printer-dialog.c:312
 msgid "Add Printer"
-msgstr "Zonte stampant"
+msgstr "Zonte stampadore"
 
 #. Translators: This button opens authentication dialog for selected server.
 #. Translators: This buttons submits the credentials for the selected server.
@@ -5199,12 +5183,12 @@ msgstr "_Sbloche"
 #. Translators: No printers were detected
 #: panels/printers/new-printer-dialog.ui:181
 msgid "No Printers Found"
-msgstr "Nissune stampant cjatade"
+msgstr "Nissune stampadore cjatade"
 
 #. Translators: The entered text should contain network address of a printer or a text which will filter found devices (their names and locations)
 #: panels/printers/new-printer-dialog.ui:225
 msgid "Enter a network address or search for a printer"
-msgstr "Scrîf une direzion di rêt o cîr une stampant"
+msgstr "Scrîf une direzion di rêt o cîr une stampadore"
 
 #: panels/printers/new-printer-dialog.ui:270
 msgid "Authentication Required"
@@ -5213,7 +5197,7 @@ msgstr "Autenticazion necessarie"
 #: panels/printers/new-printer-dialog.ui:286
 msgid "Enter username and password to view printers on Print Server."
 msgstr ""
-"Scrîf non utent e password par viodi lis stampants su Servidôr Stampant."
+"Scrîf non utent e password par viodi lis stampadoris su Servidôr Stampadoris."
 
 #. Translators: This is a username on a print server.
 #: panels/printers/new-printer-dialog.ui:295
@@ -5279,7 +5263,7 @@ msgstr "Instale file PPD…"
 
 #: panels/printers/ppd-selection-dialog.ui:8
 msgid "Select Printer Driver"
-msgstr "Selezione driver stampant"
+msgstr "Selezione driver stampadore"
 
 #: panels/printers/ppd-selection-dialog.ui:75
 msgid "Loading drivers database…"
@@ -5293,12 +5277,12 @@ msgstr "Selezione"
 #. Translators: The found device is a JetDirect printer
 #: panels/printers/pp-host.c:478
 msgid "JetDirect Printer"
-msgstr "Stampant JetDirect"
+msgstr "Stampadore JetDirect"
 
 #. Translators: The found device is a Line Printer Daemon printer
 #: panels/printers/pp-host.c:713
 msgid "LPD Printer"
-msgstr "Stampant LPD"
+msgstr "Stampadore LPD"
 
 #. Translators: this is an option of "Two Sided"
 #: panels/printers/pp-ipp-option-widget.c:64
@@ -5460,11 +5444,11 @@ msgstr "Sbloche %s."
 #: panels/printers/pp-new-printer-dialog.c:278
 #, c-format
 msgid "Enter username and password to view printers on %s."
-msgstr "Scrîf non utent e password par viodi lis stampants su %s."
+msgstr "Scrîf non utent e password par viodi lis stampadoris su %s."
 
 #: panels/printers/pp-new-printer-dialog.c:578
 msgid "Searching for Printers"
-msgstr "Daûr a cirî stampants"
+msgstr "Daûr a cirî stampadoris"
 
 #. Translators: The found device is a printer connected via USB
 #: panels/printers/pp-new-printer-dialog.c:1366
@@ -5524,77 +5508,77 @@ msgid "GhostScript pre-filtering"
 msgstr "Pre-filtradure GhostScript"
 
 #. Translators: This option sets number of pages printed on one sheet
-#: panels/printers/pp-options-dialog.c:513
+#: panels/printers/pp-options-dialog.c:512
 msgid "Pages per side"
 msgstr "Pagjinis par sfuei"
 
 #. Translators: This option sets whether to print on both sides of paper
-#: panels/printers/pp-options-dialog.c:525
+#: panels/printers/pp-options-dialog.c:524
 msgid "Two-sided"
 msgstr "Denant e daûr"
 
 #. Translators: This option sets orientation of print (portrait, landscape...)
-#: panels/printers/pp-options-dialog.c:537
+#: panels/printers/pp-options-dialog.c:536
 msgid "Orientation"
 msgstr "Orientament"
 
 #. Translators: "General" tab contains general printer options
-#: panels/printers/pp-options-dialog.c:634
+#: panels/printers/pp-options-dialog.c:633
 msgctxt "Printer Option Group"
 msgid "General"
 msgstr "Gjenerâl"
 
 #. Translators: "Page Setup" tab contains settings related to pages (page size, paper source, etc.)
-#: panels/printers/pp-options-dialog.c:637
+#: panels/printers/pp-options-dialog.c:636
 msgctxt "Printer Option Group"
 msgid "Page Setup"
 msgstr "Impostazions pagjine"
 
 #. Translators: "Installable Options" tab contains settings of presence of installed options (amount of RAM, duplex unit, etc.)
-#: panels/printers/pp-options-dialog.c:640
+#: panels/printers/pp-options-dialog.c:639
 msgctxt "Printer Option Group"
 msgid "Installable Options"
 msgstr "Opzions instalabii"
 
 #. Translators: "Job" tab contains settings for jobs
-#: panels/printers/pp-options-dialog.c:643
+#: panels/printers/pp-options-dialog.c:642
 msgctxt "Printer Option Group"
 msgid "Job"
 msgstr "Lavôr"
 
 #. Translators: "Image Quality" tab contains settings for quality of output print (e.g. resolution)
-#: panels/printers/pp-options-dialog.c:646
+#: panels/printers/pp-options-dialog.c:645
 msgctxt "Printer Option Group"
 msgid "Image Quality"
 msgstr "Cualitât Imagjin"
 
 #. Translators: "Color" tab contains color settings (e.g. color printing)
-#: panels/printers/pp-options-dialog.c:649
+#: panels/printers/pp-options-dialog.c:648
 msgctxt "Printer Option Group"
 msgid "Color"
 msgstr "Colôr"
 
 #. Translators: "Finishing" tab contains finishing settings (e.g. booklet printing)
-#: panels/printers/pp-options-dialog.c:652
+#: panels/printers/pp-options-dialog.c:651
 msgctxt "Printer Option Group"
 msgid "Finishing"
 msgstr "Finidure"
 
 #. Translators: "Advanced" tab contains all others settings
-#: panels/printers/pp-options-dialog.c:655
+#: panels/printers/pp-options-dialog.c:654
 msgctxt "Printer Option Group"
 msgid "Advanced"
 msgstr "Avanzadis"
 
 #. Translators: Name of job which makes printer to print test page
 #. Translators: This button triggers the printing of a test page.
-#: panels/printers/pp-options-dialog.c:840
+#: panels/printers/pp-options-dialog.c:839
 #: panels/printers/pp-options-dialog.ui:14
 msgid "Test Page"
 msgstr "Pagjine di prove"
 
 #. Translators: Name of job which makes printer to print test page
-#: panels/printers/pp-options-dialog.c:853
+#: panels/printers/pp-options-dialog.c:852
 msgid "Test page"
 msgstr "Pagjine di prove"
 
@@ -5612,7 +5596,7 @@ msgstr "Automatic"
 #: panels/printers/pp-ppd-option-widget.c:83
 #: panels/printers/pp-ppd-option-widget.c:87
 msgid "Printer Default"
-msgstr "Impostazions predefinidis stampant"
+msgstr "Impostazions predefinidis stampadore"
 
 #. Translators: this is an option of "GhostScript"
 #: panels/printers/pp-ppd-option-widget.c:89
@@ -5656,7 +5640,7 @@ msgstr[1] "%u Lavôrs"
 #. Translators: Name of job which makes printer to clean its heads
 #: panels/printers/pp-printer-entry.c:651
 msgid "Clean print heads"
-msgstr "Nete testinis stampant"
+msgstr "Nete testinis stampadore"
 
 #. Translators: The printer is low on toner
 #: panels/printers/pp-printer-entry.c:719
@@ -5768,21 +5752,21 @@ msgstr "Opzions di stampe"
 
 #: panels/printers/printer-entry.ui:29
 msgid "Printer Details"
-msgstr "Detais stampant"
+msgstr "Detais stampadore"
 
 #. Set this printer as default
 #: panels/printers/printer-entry.ui:40
 msgid "Use Printer by Default"
-msgstr "Dopre la stampant come impostazion predefinide"
+msgstr "Dopre la stampadore come impostazion predefinide"
 
 #. Translators: This button executes command which cleans print heads of the printer.
 #: panels/printers/printer-entry.ui:52
 msgid "Clean Print Heads"
-msgstr "Nete testinis stampant"
+msgstr "Nete testinis stampadore"
 
 #: panels/printers/printer-entry.ui:62
 msgid "Remove Printer"
-msgstr "Gjave stampant"
+msgstr "Gjave stampadore"
 
 #: panels/printers/printer-entry.ui:183
 #: panels/wwan/cc-wwan-details-dialog.ui:184
@@ -5805,21 +5789,25 @@ msgstr "Torne invie"
 
 #. Translators: This button adds new printer.
 #. Translators: This button adds a new printer.
-#: panels/printers/printers.ui:10 panels/printers/printers.ui:148
+#: panels/printers/printers.ui:10 panels/printers/printers.ui:149
 msgid "Add Printer…"
 msgstr "Zonte stampadore…"
 
-#: panels/printers/printers.ui:145
+#: panels/printers/printers.ui:108
+msgid "Search printers"
+msgstr "Cîr stampadoris"
+
+#: panels/printers/printers.ui:146
 msgid "No Printers"
 msgstr "Nissune stampadore"
 
 #. Translators: Title if the CUPS server is not running (we can not connect to it).
-#: panels/printers/printers.ui:168
+#: panels/printers/printers.ui:169
 msgid "No Print Service"
 msgstr "Nissun servizi di stampe"
 
 #. Translators: Description if the CUPS server is not running (we can not connect to it).
-#: panels/printers/printers.ui:169
+#: panels/printers/printers.ui:170
 msgid "The system printing service doesn’t seem to be available."
 msgstr "Al somee che il servizi di sisteme pe stampe nol sedi disponibil."
 
@@ -5829,8 +5817,8 @@ msgid "Formats"
 msgstr "Formâts"
 
 #: panels/region/cc-format-chooser.ui:76
-msgid "Search locales…"
-msgstr "Cîr configurazions regjonâls…"
+msgid "Search locales"
+msgstr "Cîr configurazions regjonâls"
 
 #: panels/region/cc-format-chooser.ui:116
 msgid "Common Formats"
@@ -5882,15 +5870,15 @@ msgstr "Unitât di misure"
 msgid "Paper"
 msgstr "Cjarte"
 
-#: panels/region/cc-region-panel.ui:19
+#: panels/region/cc-region-panel.ui:11
 msgid "Language and format will be changed after next login"
 msgstr "La lenghe e il formât a vignaran cambiâts al prossim acès"
 
-#: panels/region/cc-region-panel.ui:29
-msgid "Logout…"
+#: panels/region/cc-region-panel.ui:12
+msgid "Log Out…"
 msgstr "Jes…"
 
-#: panels/region/cc-region-panel.ui:45
+#: panels/region/cc-region-panel.ui:22
 msgid ""
 "The language setting is used for interface text and web pages. Formats are "
 "used for numbers, dates, and currencies."
@@ -5898,20 +5886,20 @@ msgstr ""
 "La impostazion de lenghe e ven doprade pai tescj de interface e pes pagjinis "
 "web. I formâts a vegnin doprâts pai numars, pes datis e pes monedis."
 
-#: panels/region/cc-region-panel.ui:51
+#: panels/region/cc-region-panel.ui:28
 msgid "Your Account"
 msgstr "Il to account"
 
-#: panels/region/cc-region-panel.ui:56 panels/region/cc-region-panel.ui:83
-#: panels/user-accounts/cc-user-panel.ui:278
+#: panels/region/cc-region-panel.ui:33 panels/region/cc-region-panel.ui:60
+#: panels/user-accounts/cc-user-panel.ui:269
 msgid "_Language"
 msgstr "_Lenghe"
 
-#: panels/region/cc-region-panel.ui:66 panels/region/cc-region-panel.ui:93
+#: panels/region/cc-region-panel.ui:43 panels/region/cc-region-panel.ui:70
 msgid "_Formats"
 msgstr "_Formâts"
 
-#: panels/region/cc-region-panel.ui:78
+#: panels/region/cc-region-panel.ui:55
 msgid "Login Screen"
 msgstr "Videade di acès"
 
@@ -6206,19 +6194,19 @@ msgstr "B_loc schermi automatic"
 msgid "Locks the screen after it blanks"
 msgstr "Al bloche il schermi dopo che al devente neri"
 
-#: panels/screen/cc-screen-panel.ui:50
+#: panels/screen/cc-screen-panel.ui:47
 msgid "Automatic _Screen Lock Delay"
 msgstr "Ritart bloc _schermi automatic"
 
-#: panels/screen/cc-screen-panel.ui:51
+#: panels/screen/cc-screen-panel.ui:48
 msgid "Time from screen blank to screen lock"
 msgstr "Timp dal schermi neri al bloc dal schermi"
 
-#: panels/screen/cc-screen-panel.ui:87
+#: panels/screen/cc-screen-panel.ui:81
 msgid "Forbid new _USB devices"
 msgstr "Impedìs gnûfs dispositîfs _USB"
 
-#: panels/screen/cc-screen-panel.ui:88
+#: panels/screen/cc-screen-panel.ui:82
 msgid ""
 "Prevent new USB devices from interacting with the system when the screen is "
 "locked."
@@ -6226,11 +6214,11 @@ msgstr ""
 "Impedìs ai gnûfs dispositîfs USB di interagjî cul sisteme cuant che il "
 "schermi al è blocât."
 
-#: panels/screen/cc-screen-panel.ui:108
+#: panels/screen/cc-screen-panel.ui:99
 msgid "Screen Privacy"
 msgstr "Riservatece schermi"
 
-#: panels/screen/cc-screen-panel.ui:113
+#: panels/screen/cc-screen-panel.ui:104
 msgid "Restrict Viewing Angle"
 msgstr "Limite l'angul di viodude"
 
@@ -6261,15 +6249,11 @@ msgid "Search Locations"
 msgstr "Posizions di ricercje"
 
 #: panels/search/cc-search-locations-dialog.ui:13
-#, fuzzy
-#| msgid ""
-#| "Folders which are searched by system applications, such as Files, Photos "
-#| "and Videos."
 msgid ""
 "Folders which are searched by system apps, such as Files, Photos and Videos."
 msgstr ""
-"Lis cartelis dulà che lis aplicazions di sisteme,, come Files, Fotos e "
-"Videos, a cirin."
+"Lis cartelis dulà che lis aplicazions di sisteme, come Files, Fotos e "
+"Videos, a van a cirî."
 
 #: panels/search/cc-search-locations-dialog.ui:18
 msgid "Places"
@@ -6287,7 +6271,7 @@ msgstr "Altris"
 msgid "Add Location"
 msgstr "Zonte une colocazion"
 
-#: panels/search/cc-search-panel.c:165
+#: panels/search/cc-search-panel.c:166
 msgid "No apps found"
 msgstr "Nissune aplicazion cjatade"
 
@@ -6296,14 +6280,10 @@ msgid "App Search"
 msgstr "Ricercje aplicazions"
 
 #: panels/search/cc-search-panel.ui:11
-#, fuzzy
-#| msgid "Include application-provided search results."
 msgid "Include app-provided search results."
 msgstr "Inclût i risultâts de ricercje indicâts de aplicazion."
 
 #: panels/search/cc-search-panel.ui:23
-#, fuzzy
-#| msgid "Folders which are searched by system applications."
 msgid "Folders which are searched by system apps."
 msgstr "Lis cartelis dulà che lis aplicazions di sisteme a van a cirî."
 
@@ -6316,9 +6296,6 @@ msgid "Results are displayed according to the list order."
 msgstr "I risultâts a vegnin visualizâts secont l'ordin de liste."
 
 #: panels/search/gnome-search-panel.desktop.in:4
-#, fuzzy
-#| msgid ""
-#| "Control which applications show search results in the Activities Overview"
 msgid "Control which apps show search results in the Activities Overview"
 msgstr ""
 "Controle cualis aplicazions a mostrin risultâts di ricercje te panoramiche "
@@ -6330,7 +6307,7 @@ msgid "Search;Find;Index;Hide;Privacy;Results;"
 msgstr "Cîr;Cjate;Indiç;Plate;Privacy;Risultâts;"
 
 #. Label
-#: panels/sharing/cc-sharing-networks.c:268
+#: panels/sharing/cc-sharing-networks.c:270
 msgid "No networks selected for sharing"
 msgstr "Nissune rêt selezionade pe condivision"
 
@@ -6338,40 +6315,40 @@ msgstr "Nissune rêt selezionade pe condivision"
 msgid "Networks"
 msgstr "Rêts"
 
-#: panels/sharing/cc-sharing-panel.c:323
+#: panels/sharing/cc-sharing-panel.c:299
 msgctxt "service is enabled"
 msgid "On"
 msgstr "On"
 
-#: panels/sharing/cc-sharing-panel.c:325 panels/sharing/cc-sharing-panel.c:352
+#: panels/sharing/cc-sharing-panel.c:301 panels/sharing/cc-sharing-panel.c:324
 msgctxt "service is disabled"
 msgid "Off"
 msgstr "Off"
 
-#: panels/sharing/cc-sharing-panel.c:355
+#: panels/sharing/cc-sharing-panel.c:327
 msgctxt "service is enabled"
 msgid "Enabled"
 msgstr "Abilitât"
 
-#: panels/sharing/cc-sharing-panel.c:358
+#: panels/sharing/cc-sharing-panel.c:330
 msgctxt "service is active"
 msgid "Active"
 msgstr "Atîf"
 
-#: panels/sharing/cc-sharing-panel.c:476
+#: panels/sharing/cc-sharing-panel.c:444
 msgid "Choose a Folder"
 msgstr "Sielzi une cartele"
 
-#: panels/sharing/cc-sharing-panel.c:629 panels/wwan/cc-wwan-apn-dialog.ui:33
+#: panels/sharing/cc-sharing-panel.c:597 panels/wwan/cc-wwan-apn-dialog.ui:33
 msgid "Add"
 msgstr "Zonte"
 
-#: panels/sharing/cc-sharing-panel.c:693
+#: panels/sharing/cc-sharing-panel.c:661
 msgid "Enable media sharing"
 msgstr "Abilite condivision multimediâl"
 
 #. TRANSLATORS: %s is replaced with a link to a dav://<hostname> URL
-#: panels/sharing/cc-sharing-panel.c:715
+#: panels/sharing/cc-sharing-panel.c:683
 #, c-format
 msgid ""
 "File Sharing allows you to share your Public folder with others on your "
@@ -6381,7 +6358,7 @@ msgstr ""
 "Public su pe rêt atuâl doprant: %s"
 
 #. TRANSLATORS: %s is replaced with a link to a "ssh <hostname>" command to run
-#: panels/sharing/cc-sharing-panel.c:721
+#: panels/sharing/cc-sharing-panel.c:689
 #, c-format
 msgid ""
 "When remote login is enabled, remote users can connect using the Secure "
@@ -6392,71 +6369,66 @@ msgstr ""
 "doprant il comant Secure Shell:\n"
 "%s"
 
-#: panels/sharing/cc-sharing-panel.c:795
+#: panels/sharing/cc-sharing-panel.c:763
 msgid "Enable personal media sharing"
 msgstr "Abilite condivision dai files multimediâi personâi"
 
-#: panels/sharing/cc-sharing-panel.c:1159
+#: panels/sharing/cc-sharing-panel.c:1127
 msgid "Device name copied"
 msgstr "Non dispositîf copiât"
 
-#: panels/sharing/cc-sharing-panel.c:1170
+#: panels/sharing/cc-sharing-panel.c:1138
 msgid "Device address copied"
 msgstr "Direzion dal dispositîf copiade"
 
-#: panels/sharing/cc-sharing-panel.c:1181
+#: panels/sharing/cc-sharing-panel.c:1149
 msgid "Username copied"
 msgstr "Non utent copiât"
 
-#: panels/sharing/cc-sharing-panel.c:1192
+#: panels/sharing/cc-sharing-panel.c:1160
 msgid "Password copied"
 msgstr "Password copiade"
 
-#: panels/sharing/cc-sharing-panel.ui:9
-#: panels/sharing/gnome-sharing-panel.desktop.in:3
-msgid "Sharing"
-msgstr "Condivision"
-
-#: panels/sharing/cc-sharing-panel.ui:32
+#: panels/sharing/cc-sharing-panel.ui:23
 msgid "_File Sharing"
 msgstr "Condivision _file"
 
-#: panels/sharing/cc-sharing-panel.ui:40
+#: panels/sharing/cc-sharing-panel.ui:31
 msgid "Remote _Desktop"
 msgstr "_Scritori lontan"
 
-#: panels/sharing/cc-sharing-panel.ui:48
+#: panels/sharing/cc-sharing-panel.ui:39
 msgid "_Media Sharing"
 msgstr "Condivision _multimediâl"
 
-#: panels/sharing/cc-sharing-panel.ui:56
+#: panels/sharing/cc-sharing-panel.ui:47
 msgid "_Remote Login"
 msgstr "Acès _esterni"
 
-#: panels/sharing/cc-sharing-panel.ui:66
+#: panels/sharing/cc-sharing-panel.ui:57
 msgid "File Sharing"
 msgstr "Condivision file"
 
-#: panels/sharing/cc-sharing-panel.ui:112
+#: panels/sharing/cc-sharing-panel.ui:103
 msgid "_Require Password"
 msgstr "_Covente password"
 
-#: panels/sharing/cc-sharing-panel.ui:126
+#: panels/sharing/cc-sharing-panel.ui:117
 #: panels/user-accounts/cc-user-panel.ui:182
 msgid "_Password"
 msgstr "_Password"
 
-#: panels/sharing/cc-sharing-panel.ui:169
-#: panels/sharing/cc-sharing-panel.ui:205
+#: panels/sharing/cc-sharing-panel.ui:160
+#: panels/sharing/cc-sharing-panel.ui:196
 msgid "Remote Login"
 msgstr "Acès esterni"
 
-#: panels/sharing/cc-sharing-panel.ui:225
-#: panels/sharing/cc-sharing-panel.ui:244
+#: panels/sharing/cc-sharing-panel.ui:216
+#: panels/sharing/cc-sharing-panel.ui:235
 msgid "Remote Desktop"
 msgstr "Scritori lontan"
 
-#: panels/sharing/cc-sharing-panel.ui:240
+#: panels/sharing/cc-sharing-panel.ui:231
 msgid ""
 "Remote desktop allows viewing and controlling your desktop from another "
 "computer."
@@ -6464,63 +6436,63 @@ msgstr ""
 "Il scritori lontan ti permet di visualizâ e controlâ il to scritori doprant "
 "un altri computer."
 
-#: panels/sharing/cc-sharing-panel.ui:245
+#: panels/sharing/cc-sharing-panel.ui:236
 msgid "Enable or disable remote desktop connections to this computer."
 msgstr ""
 "Abilite o disabilite lis conessions dai scritoris esternis a chest computer."
 
-#: panels/sharing/cc-sharing-panel.ui:258
+#: panels/sharing/cc-sharing-panel.ui:249
 msgid "Remote Control"
 msgstr "Control di lontan"
 
-#: panels/sharing/cc-sharing-panel.ui:259
+#: panels/sharing/cc-sharing-panel.ui:250
 msgid "Allows remote connections to control the screen."
 msgstr "Permet lis conessions di lontan par controlâ il schermi."
 
-#: panels/sharing/cc-sharing-panel.ui:273
+#: panels/sharing/cc-sharing-panel.ui:264
 msgid "How to Connect"
 msgstr "Cemût conetisi"
 
-#: panels/sharing/cc-sharing-panel.ui:274
+#: panels/sharing/cc-sharing-panel.ui:265
 msgid ""
 "Connect to this computer using the device name or remote desktop address."
 msgstr ""
 "Conetiti a chest computer doprant il non dal dispositîf o la direzion dal "
 "scritori lontan."
 
-#: panels/sharing/cc-sharing-panel.ui:293
-#: panels/sharing/cc-sharing-panel.ui:320
-#: panels/sharing/cc-sharing-panel.ui:347
-#: panels/sharing/cc-sharing-panel.ui:365
+#: panels/sharing/cc-sharing-panel.ui:284
+#: panels/sharing/cc-sharing-panel.ui:311
+#: panels/sharing/cc-sharing-panel.ui:338
+#: panels/sharing/cc-sharing-panel.ui:356
 msgid "Copy"
 msgstr "Copie"
 
-#: panels/sharing/cc-sharing-panel.ui:306
+#: panels/sharing/cc-sharing-panel.ui:297
 msgid "Remote Desktop Address"
 msgstr "Direzion dal scritori esterni"
 
-#: panels/sharing/cc-sharing-panel.ui:336
+#: panels/sharing/cc-sharing-panel.ui:327
 msgid "Authentication"
 msgstr "Autenticazion"
 
-#: panels/sharing/cc-sharing-panel.ui:337
+#: panels/sharing/cc-sharing-panel.ui:328
 msgid "The user name and password are required to connect to this computer."
 msgstr ""
 "Il non utent e la password a son necessaris par conetisi al chest computer."
 
-#: panels/sharing/cc-sharing-panel.ui:341
+#: panels/sharing/cc-sharing-panel.ui:332
 msgid "User Name"
 msgstr "Non utent"
 
-#: panels/sharing/cc-sharing-panel.ui:380
+#: panels/sharing/cc-sharing-panel.ui:371
 msgid "Verify Encryption"
 msgstr "Cifradure di verifiche"
 
-#: panels/sharing/cc-sharing-panel.ui:409
+#: panels/sharing/cc-sharing-panel.ui:400
 msgid "Encryption Fingerprint"
 msgstr "Impront di cifradure"
 
-#: panels/sharing/cc-sharing-panel.ui:410
+#: panels/sharing/cc-sharing-panel.ui:401
 msgid ""
 "The encryption fingerprint can be seen in connecting clients and should be "
 "identical."
@@ -6528,17 +6500,21 @@ msgstr ""
 "Al è pussibil viodi l'impront di cifradure tai clients che si conetin e al à "
 "di sei compagn."
 
-#: panels/sharing/cc-sharing-panel.ui:442
+#: panels/sharing/cc-sharing-panel.ui:433
 msgid "Media Sharing"
 msgstr "Condivision multimediâl"
 
-#: panels/sharing/cc-sharing-panel.ui:464
+#: panels/sharing/cc-sharing-panel.ui:455
 msgid "Share music, photos and videos over the network."
 msgstr "Condivît musiche, fotos e video su la rêt."
 
-#: panels/sharing/cc-sharing-panel.ui:477
+#: panels/sharing/cc-sharing-panel.ui:468
 msgid "Folders"
 msgstr "Cartelis"
+
+#: panels/sharing/gnome-sharing-panel.desktop.in:3
+msgid "Sharing"
+msgstr "Condivision"
 
 #: panels/sharing/gnome-sharing-panel.desktop.in:4
 msgid "Control what you want to share with others"
@@ -6803,7 +6779,7 @@ msgstr ""
 "maniere adate."
 
 #: panels/thunderbolt/cc-bolt-panel.c:490
-#: panels/thunderbolt/cc-bolt-panel.ui:156
+#: panels/thunderbolt/cc-bolt-panel.ui:123
 msgid "Allow direct access to devices such as docks and external GPUs."
 msgstr ""
 "Permet l'acès diret a dispositîfs come supuarts (docks) e GPU esternis."
@@ -6843,15 +6819,15 @@ msgstr "Nissun supuart par Thunderbolt"
 msgid "Could not connect to the thunderbolt subsystem."
 msgstr "Impussibil colegâsi al sotsisteme di thunderbolt."
 
-#: panels/thunderbolt/cc-bolt-panel.ui:152
+#: panels/thunderbolt/cc-bolt-panel.ui:120
 msgid "Direct Access"
 msgstr "Acès diret"
 
-#: panels/thunderbolt/cc-bolt-panel.ui:224
+#: panels/thunderbolt/cc-bolt-panel.ui:192
 msgid "Pending Devices"
 msgstr "Dispositîf in pîts in spiete"
 
-#: panels/thunderbolt/cc-bolt-panel.ui:318
+#: panels/thunderbolt/cc-bolt-panel.ui:286
 msgid "No devices attached"
 msgstr "Nissun dispositîf tacât"
 
@@ -6909,6 +6885,14 @@ msgstr "Dut il barcon"
 #: panels/universal-access/cc-ua-hearing-page.ui:63
 msgid "_Test Flash"
 msgstr "_Prove la lampade"
+
+#. '#' is a dummy target to make 'Sound' clickable
+#. TRANSLATORS: Don't translate  <a href='#'> and </a>
+#: panels/universal-access/cc-ua-hearing-page.c:159
+msgid "System volume can be adjusted in <a href='#'>Sound</a> settings."
+msgstr ""
+"Al è pussibil justâ il volum di sisteme tes impostazions <a href='#'>Audio</"
+"a>."
 
 #: panels/universal-access/cc-ua-mouse-page.ui:10
 msgid "_Mouse Keys"
@@ -7517,11 +7501,6 @@ msgid "File History"
 msgstr "Cronologjie dai file"
 
 #: panels/usage/cc-usage-panel.ui:10
-#, fuzzy
-#| msgid ""
-#| "File history keeps a record of files that you have used. This information "
-#| "is shared between applications, and makes it easier to find files that "
-#| "you might want to use."
 msgid ""
 "File history keeps a record of files that you have used. This information is "
 "shared between apps, and makes it easier to find files that you might want "
@@ -7695,7 +7674,7 @@ msgstr ""
 "esistent ministrât in maniere centrâl. Tu puedis ancje doprâ chest account "
 "par jentrâ tes risorsis de compagnie su internet."
 
-#: panels/user-accounts/cc-avatar-chooser.c:164
+#: panels/user-accounts/cc-avatar-chooser.c:163
 msgid "Browse for more pictures"
 msgstr "Esplore altris imagjins"
 
@@ -7921,79 +7900,6 @@ msgstr "No si è rivâts a riclamâ il dispositîf pes improntis %s: %s"
 msgid "Failed to get fingerprint devices: %s"
 msgstr "No si è rivâts a otignî i dispositîfs pes improntis: %s"
 
-#: panels/user-accounts/cc-login-history-dialog.c:71
-msgid "This Week"
-msgstr "Cheste setemane"
-
-#: panels/user-accounts/cc-login-history-dialog.c:74
-msgid "Last Week"
-msgstr "Setemane passade"
-
-#. Translators: This is a date format string in the style of "Feb 18",
-#. shown as the first day of a week on login history dialog.
-#. Translators: This is a date format string in the style of "Feb 24",
-#. shown as the last day of a week on login history dialog.
-#: panels/user-accounts/cc-login-history-dialog.c:84
-#: panels/user-accounts/cc-login-history-dialog.c:88
-msgctxt "login history week label"
-msgid "%b %e"
-msgstr "%e %b"
-
-#. Translators: This is a date format string in the style of "Feb 24, 2013",
-#. shown as the last day of a week on login history dialog.
-#: panels/user-accounts/cc-login-history-dialog.c:93
-msgctxt "login history week label"
-msgid "%b %e, %Y"
-msgstr "%e %b %Y"
-
-#. Translators: This indicates a week label on a login history.
-#. The first %s is the first day of a week, and the second %s the last day.
-#: panels/user-accounts/cc-login-history-dialog.c:98
-#, c-format
-msgctxt "login history week label"
-msgid "%s — %s"
-msgstr "%s — %s"
-
-#. Translators: This is a time format string in the style of "22:58".
-#. It indicates a login time which follows a date.
-#: panels/user-accounts/cc-login-history-dialog.c:179
-#: panels/user-accounts/cc-user-panel.c:744
-msgctxt "login date-time"
-msgid "%k:%M"
-msgstr "%H:%M"
-
-#. Translators: This indicates a login date-time.
-#. The first %s is a date, and the second %s a time.
-#: panels/user-accounts/cc-login-history-dialog.c:182
-#: panels/user-accounts/cc-user-panel.c:748
-#, c-format
-msgctxt "login date-time"
-msgid "%s, %s"
-msgstr "%s, %s"
-
-#: panels/user-accounts/cc-login-history-dialog.c:238
-msgid "Session Ended"
-msgstr "Fin session"
-
-#: panels/user-accounts/cc-login-history-dialog.c:244
-msgid "Session Started"
-msgstr "Inizi session"
-
-#. Translators: This is the title of the "Account Activity" dialog.
-#. The %s is the user real name.
-#: panels/user-accounts/cc-login-history-dialog.c:339
-#, c-format
-msgid "%s — Account Activity"
-msgstr "%s — Ativitât dal account"
-
-#: panels/user-accounts/cc-login-history-dialog.ui:30
-msgid "Previous"
-msgstr "Precedent"
-
-#: panels/user-accounts/cc-login-history-dialog.ui:40
-msgid "Next"
-msgstr "Sucessîf"
-
 #: panels/user-accounts/cc-password-dialog.c:127
 msgid "Please choose another password."
 msgstr "Sielç une altre password."
@@ -8057,30 +7963,30 @@ msgstr "Password no valide, prove di gnûf"
 msgid "Couldn’t connect to the %s domain: %s"
 msgstr "Impussibil tacâsi al domini %s: %s"
 
-#: panels/user-accounts/cc-user-panel.c:259
+#: panels/user-accounts/cc-user-panel.c:257
 msgid "Add User…"
 msgstr "Zonte utent…"
 
-#: panels/user-accounts/cc-user-panel.c:373
+#: panels/user-accounts/cc-user-panel.c:371
 msgid "Failed to delete user"
 msgstr "Eliminazion utent falide"
 
-#: panels/user-accounts/cc-user-panel.c:430
-#: panels/user-accounts/cc-user-panel.c:485
-#: panels/user-accounts/cc-user-panel.c:531
+#: panels/user-accounts/cc-user-panel.c:428
+#: panels/user-accounts/cc-user-panel.c:483
+#: panels/user-accounts/cc-user-panel.c:529
 msgid "Failed to revoke remotely managed user"
 msgstr "No si è rivâts a revocâ l'utent gjestît di lontan"
 
-#: panels/user-accounts/cc-user-panel.c:580
+#: panels/user-accounts/cc-user-panel.c:578
 msgid "You cannot delete your own account."
 msgstr "Nol è permetût eliminâ il propri account."
 
-#: panels/user-accounts/cc-user-panel.c:589
+#: panels/user-accounts/cc-user-panel.c:587
 #, c-format
 msgid "%s is still logged in"
 msgstr "%s nol à ancjemò terminât la session"
 
-#: panels/user-accounts/cc-user-panel.c:593
+#: panels/user-accounts/cc-user-panel.c:591
 msgid ""
 "Deleting a user while they are logged in can leave the system in an "
 "inconsistent state."
@@ -8088,12 +7994,12 @@ msgstr ""
 "Eliminâ un utent intant che la sô session e je ancjemò in cors, al pues "
 "lassâ il sisteme in stât incoerent."
 
-#: panels/user-accounts/cc-user-panel.c:602
+#: panels/user-accounts/cc-user-panel.c:600
 #, c-format
 msgid "Do you want to keep %s’s files?"
 msgstr "Tignî i files di %s?"
 
-#: panels/user-accounts/cc-user-panel.c:606
+#: panels/user-accounts/cc-user-panel.c:604
 msgid ""
 "It is possible to keep the home directory, mail spool and temporary files "
 "around when deleting a user account."
@@ -8101,60 +8007,56 @@ msgstr ""
 "Al è pussibil tegnî la cartele home, la code di pueste e i varis files "
 "temporanis cuant che si elimine un account utent."
 
-#: panels/user-accounts/cc-user-panel.c:609
+#: panels/user-accounts/cc-user-panel.c:607
 msgid "_Delete Files"
 msgstr "_Elimine i files"
 
-#: panels/user-accounts/cc-user-panel.c:610
+#: panels/user-accounts/cc-user-panel.c:608
 msgid "_Keep Files"
 msgstr "_Ten i files"
 
-#: panels/user-accounts/cc-user-panel.c:624
+#: panels/user-accounts/cc-user-panel.c:622
 #, c-format
 msgid "Are you sure you want to revoke remotely managed %s’s account?"
 msgstr "Revocâ pardabon l'account di %s gjestît di lontan?"
 
-#: panels/user-accounts/cc-user-panel.c:628
+#: panels/user-accounts/cc-user-panel.c:626
 msgid "_Delete"
 msgstr "_Elimine"
 
-#: panels/user-accounts/cc-user-panel.c:678
+#: panels/user-accounts/cc-user-panel.c:676
 msgctxt "Password mode"
 msgid "Account disabled"
 msgstr "Account disabilitât"
 
-#: panels/user-accounts/cc-user-panel.c:686
+#: panels/user-accounts/cc-user-panel.c:684
 msgctxt "Password mode"
 msgid "To be set at next login"
 msgstr "Di stabilî al prossim acès"
 
-#: panels/user-accounts/cc-user-panel.c:689
+#: panels/user-accounts/cc-user-panel.c:687
 msgctxt "Password mode"
 msgid "None"
 msgstr "Nissun"
 
-#: panels/user-accounts/cc-user-panel.c:732
-msgid "Logged in"
-msgstr "Acès eseguît"
-
-#: panels/user-accounts/cc-user-panel.c:1246
+#: panels/user-accounts/cc-user-panel.c:1183
 msgid "Failed to contact the accounts service"
 msgstr "Comunicazion cun servizi account falide"
 
-#: panels/user-accounts/cc-user-panel.c:1248
+#: panels/user-accounts/cc-user-panel.c:1185
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "Sigurâsi che AccountService al sedi instalât e abilitât."
 
-#: panels/user-accounts/cc-user-panel.c:1270
+#: panels/user-accounts/cc-user-panel.c:1207
 msgid "This panel must be unlocked to change this setting"
 msgstr "Al è necessari sblocâ chest panel par cambiâ cheste impostazion"
 
-#: panels/user-accounts/cc-user-panel.c:1337
+#: panels/user-accounts/cc-user-panel.c:1274
 msgid "Delete the selected user account"
 msgstr "Elimine l'account utent selezionât"
 
-#: panels/user-accounts/cc-user-panel.c:1341
-#: panels/user-accounts/cc-user-panel.c:1482
+#: panels/user-accounts/cc-user-panel.c:1278
+#: panels/user-accounts/cc-user-panel.c:1415
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -8162,9 +8064,9 @@ msgstr ""
 "Par eliminâ l'account utent selezionât,\n"
 "fâs prime clic su la icone *"
 
-#: panels/user-accounts/cc-user-panel.c:1528
-msgid "Unlock to Add Users and Change Settings"
-msgstr "Sbloche par Zontâ utents e Cambiâ impostazions"
+#: panels/user-accounts/cc-user-panel.c:1461
+msgid "Unlock to add users and change settings"
+msgstr "Sbloche par zontâ utents e cambiâ impostazions"
 
 #: panels/user-accounts/cc-user-panel.ui:23
 #: panels/user-accounts/data/gnome-user-accounts-panel.desktop.in:3
@@ -8205,15 +8107,11 @@ msgstr "Acès cun impronte"
 msgid "A_utomatic Login"
 msgstr "Acès automatic"
 
-#: panels/user-accounts/cc-user-panel.ui:224
-msgid "Account Activity"
-msgstr "Ativitât dal account"
-
-#: panels/user-accounts/cc-user-panel.ui:238
+#: panels/user-accounts/cc-user-panel.ui:229
 msgid "_Administrator"
 msgstr "_Aministradôr"
 
-#: panels/user-accounts/cc-user-panel.ui:239
+#: panels/user-accounts/cc-user-panel.ui:230
 msgid ""
 "Administrators can add and remove other users, and can change settings for "
 "all users."
@@ -8221,28 +8119,28 @@ msgstr ""
 "I aministradôrs a puedin zontâ e gjavâ altris utents e a puedin cambiâ lis "
 "impostazions par ducj i utent."
 
-#: panels/user-accounts/cc-user-panel.ui:255
+#: panels/user-accounts/cc-user-panel.ui:246
 msgid "_Parental Controls"
 msgstr "Controi _parentâi"
 
-#: panels/user-accounts/cc-user-panel.ui:256
+#: panels/user-accounts/cc-user-panel.ui:247
 msgid "Open the Parental Controls app."
 msgstr "Vierç la aplicazion pai controi parentâi."
 
-#: panels/user-accounts/cc-user-panel.ui:293
+#: panels/user-accounts/cc-user-panel.ui:284
 msgid "Remove User…"
 msgstr "Gjave utent…"
 
-#: panels/user-accounts/cc-user-panel.ui:305
+#: panels/user-accounts/cc-user-panel.ui:296
 msgid "Other Users"
 msgstr "Altris utents"
 
 #. Translators: This is the empty state page label which states that there are no users to show in the panel.
-#: panels/user-accounts/cc-user-panel.ui:337
+#: panels/user-accounts/cc-user-panel.ui:328
 msgid "No Users Found"
 msgstr "Nissun utent cjatât"
 
-#: panels/user-accounts/cc-user-panel.ui:346
+#: panels/user-accounts/cc-user-panel.ui:337
 msgid "Unlock to add a user account."
 msgstr "Sbloche par zontâ un account utent."
 
@@ -8505,7 +8403,7 @@ msgstr ""
 msgid "Mis-click detected, restarting…"
 msgstr "Rilevât clic sbaliât, si torne a inviâ…"
 
-#: panels/wacom/cc-wacom-button-row.c:244
+#: panels/wacom/cc-wacom-button-row.c:243
 #, c-format
 msgid "Button %d"
 msgstr "Boton %d"
@@ -8548,7 +8446,7 @@ msgid "External pad device"
 msgstr "Dispositîf esterni panel/taulete"
 
 #. All displays item
-#: panels/wacom/cc-wacom-page.c:643
+#: panels/wacom/cc-wacom-page.c:646
 msgid "All Displays"
 msgstr "Ducj i visôrs"
 
@@ -8587,10 +8485,6 @@ msgstr ""
 #: panels/wacom/cc-wacom-page.ui:72
 msgid "Calibrate"
 msgstr "Calibre"
-
-#: panels/wacom/cc-wacom-panel.ui:9
-msgid "Test Your _Settings"
-msgstr "Prove lis _impostazions"
 
 #: panels/wacom/cc-wacom-panel.ui:56
 msgid "No tablet detected"
@@ -9274,15 +9168,19 @@ msgstr "Panei disponibii:"
 msgid "All Settings"
 msgstr "Dutis lis impostazions"
 
-#: shell/cc-window.ui:53 shell/cc-window.ui:55
+#: shell/cc-window.ui:54 shell/cc-window.ui:56
 msgid "Main Menu"
 msgstr "Menù principâl"
 
-#: shell/cc-window.ui:153
+#: shell/cc-window.ui:71
+msgid "Search settings"
+msgstr "Impostazions di ricercje"
+
+#: shell/cc-window.ui:155
 msgid "Warning: Development Version"
 msgstr "Avertiment: Version di svilup"
 
-#: shell/cc-window.ui:154
+#: shell/cc-window.ui:156
 msgid ""
 "This version of Settings should only be used for development purposes. You "
 "may experience incorrect system behavior, data loss, and other unexpected "
@@ -9292,7 +9190,7 @@ msgstr ""
 "svilup. A puedin capitâ compuartaments dal sisteme sbaliâts, pierditis di "
 "dâts e altris problemis inspietâts. "
 
-#: shell/cc-window.ui:165
+#: shell/cc-window.ui:167
 msgid "Help"
 msgstr "Jutori"
 
@@ -9371,10 +9269,6 @@ msgid "Initial state of the window"
 msgstr "Stât iniziâl dal barcon"
 
 #: shell/org.gnome.Settings.gschema.xml:21
-#, fuzzy
-#| msgid ""
-#| "A tuple containing the initial width, height and maximized state of the "
-#| "application window."
 msgid ""
 "A tuple containing the initial width, height and maximized state of the app "
 "window."
@@ -9403,6 +9297,76 @@ msgstr[1] "%u jentradis"
 #: subprojects/gvc/gvc-mixer-control.c:2876
 msgid "System Sounds"
 msgstr "Suns di sisteme"
+
+#~ msgid "Some settings must be unlocked before they can be changed."
+#~ msgstr "Si à di sblocâ cualchi impostazion prime di podêlis cambiâ."
+
+#, fuzzy
+#~| msgid "_Pointer speed"
+#~ msgid "Pointer Assistance"
+#~ msgstr "_Velocitât cursôr"
+
+#~ msgid "Tap to click"
+#~ msgstr "Batuce par fâ clic"
+
+#~ msgid "Turn device off"
+#~ msgstr "Distude il dispositîf"
+
+#~ msgid "Logout…"
+#~ msgstr "Jes…"
+
+#~ msgid "This Week"
+#~ msgstr "Cheste setemane"
+
+#~ msgid "Last Week"
+#~ msgstr "Setemane passade"
+
+#~ msgctxt "login history week label"
+#~ msgid "%b %e"
+#~ msgstr "%e %b"
+
+#~ msgctxt "login history week label"
+#~ msgid "%b %e, %Y"
+#~ msgstr "%e %b %Y"
+
+#, c-format
+#~ msgctxt "login history week label"
+#~ msgid "%s — %s"
+#~ msgstr "%s — %s"
+
+#~ msgctxt "login date-time"
+#~ msgid "%k:%M"
+#~ msgstr "%H:%M"
+
+#, c-format
+#~ msgctxt "login date-time"
+#~ msgid "%s, %s"
+#~ msgstr "%s, %s"
+
+#~ msgid "Session Ended"
+#~ msgstr "Fin session"
+
+#~ msgid "Session Started"
+#~ msgstr "Inizi session"
+
+#, c-format
+#~ msgid "%s — Account Activity"
+#~ msgstr "%s — Ativitât dal account"
+
+#~ msgid "Previous"
+#~ msgstr "Precedent"
+
+#~ msgid "Next"
+#~ msgstr "Sucessîf"
+
+#~ msgid "Logged in"
+#~ msgstr "Acès eseguît"
+
+#~ msgid "Account Activity"
+#~ msgstr "Ativitât dal account"
+
+#~ msgid "Test Your _Settings"
+#~ msgstr "Prove lis _impostazions"
 
 #~ msgid "Applications"
 #~ msgstr "Aplicazions"
