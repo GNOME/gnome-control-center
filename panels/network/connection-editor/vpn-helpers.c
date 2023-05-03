@@ -22,6 +22,7 @@
 
 #include "config.h"
 
+#include <adwaita.h>
 #include <string.h>
 #include <glib.h>
 #include <gmodule.h>
@@ -98,22 +99,22 @@ typedef struct {
 } ActionInfo;
 
 static void
-import_vpn_from_file_cb (GtkWidget *dialog, gint response, gpointer user_data)
+import_vpn_from_file_cb (GObject *source_object, GAsyncResult *result, gpointer user_data)
 {
 	g_autofree gchar *filename = NULL;
 	g_autoptr(GFile) file = NULL;
 	ActionInfo *info = (ActionInfo *) user_data;
+	GtkFileDialog *dialog;
 	NMConnection *connection = NULL;
 	g_autoptr(GError) error = NULL;
 	GSList *iter;
 
-	if (response != GTK_RESPONSE_ACCEPT)
-		goto destroy;
-
-	file = gtk_file_chooser_get_file (GTK_FILE_CHOOSER (dialog));
+	dialog = GTK_FILE_DIALOG (source_object);
+	file = gtk_file_dialog_open_finish (dialog, result, &error);
 	if (!file) {
 		g_warning ("%s: didn't get a filename back from the chooser!", __func__);
-		goto destroy;
+
+		return;
 	}
 
 	filename = g_file_get_path (file);
@@ -131,55 +132,32 @@ import_vpn_from_file_cb (GtkWidget *dialog, gint response, gpointer user_data)
 	}
 
 	if (!connection) {
-		GtkWidget *err_dialog;
-		g_autofree gchar *bname = g_path_get_basename (filename);
+		g_autofree gchar *bname;
 
-		err_dialog = gtk_message_dialog_new (GTK_WINDOW (dialog),
-		                                     GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
-		                                     GTK_MESSAGE_ERROR,
-		                                     GTK_BUTTONS_OK,
-		                                     _("Cannot import VPN connection"));
-		gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (err_dialog),
-		                                 _("The file “%s” could not be read or does not contain recognized VPN connection information\n\nError: %s."),
-		                                 bname, error ? error->message : "unknown error");
-		gtk_window_set_transient_for(GTK_WINDOW(err_dialog),
-						GTK_WINDOW(dialog));
-		g_signal_connect (err_dialog, "response", G_CALLBACK (gtk_window_destroy), NULL);
-		gtk_widget_show (err_dialog);
-		goto out;
+		bname = g_path_get_basename (filename);
+		g_warning ("Failed to read “%s”: %s", bname, error ? error->message : "unknown error");
 	}
-
-destroy:
-	gtk_window_destroy (GTK_WINDOW (dialog));
 
 	info->callback (connection, info->user_data);
 	g_free (info);
-
-out:
-	return;
 }
 
 void
 vpn_import (GtkWindow *parent, VpnImportCallback callback, gpointer user_data)
 {
 	g_autoptr(GFile) home_folder = NULL;
-	GtkWidget *dialog;
+	GtkFileDialog *dialog;
 	ActionInfo *info;
 
-	dialog = gtk_file_chooser_dialog_new (_("Select file to import"),
-	                                      parent,
-	                                      GTK_FILE_CHOOSER_ACTION_OPEN,
-	                                      _("_Cancel"), GTK_RESPONSE_CANCEL,
-	                                      _("_Open"), GTK_RESPONSE_ACCEPT,
-	                                      NULL);
-	gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
+	dialog = gtk_file_dialog_new ();
+	gtk_file_dialog_set_title (dialog, _("Select file to import"));
+	gtk_file_dialog_set_modal (dialog, TRUE);
 	home_folder = g_file_new_for_path (g_get_home_dir ());
-	gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (dialog), home_folder, NULL);
+	gtk_file_dialog_set_initial_folder (dialog, home_folder);
 
 	info = g_malloc0 (sizeof (ActionInfo));
 	info->callback = callback;
 	info->user_data = user_data;
 
-	g_signal_connect (G_OBJECT (dialog), "response", G_CALLBACK (import_vpn_from_file_cb), info);
-	gtk_window_present (GTK_WINDOW (dialog));
+	gtk_file_dialog_open (dialog, parent, NULL, import_vpn_from_file_cb, info);
 }
