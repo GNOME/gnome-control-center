@@ -64,6 +64,7 @@ struct _CcColorPanel
   GtkTreeModel  *liststore_assign;
   GtkTreeModel  *liststore_calib_kind;
   GtkTreeModel  *liststore_calib_sensor;
+  AdwPreferencesGroup *pref_group_devices;
   GtkWidget     *toolbar_devices;
   GtkWidget     *toolbutton_device_calibrate;
   GtkWidget     *toolbutton_device_default;
@@ -1923,6 +1924,7 @@ cc_color_panel_class_init (CcColorPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcColorPanel, liststore_assign);
   gtk_widget_class_bind_template_child (widget_class, CcColorPanel, liststore_calib_kind);
   gtk_widget_class_bind_template_child (widget_class, CcColorPanel, liststore_calib_sensor);
+  gtk_widget_class_bind_template_child (widget_class, CcColorPanel, pref_group_devices);
   gtk_widget_class_bind_template_child (widget_class, CcColorPanel, toolbar_devices);
   gtk_widget_class_bind_template_child (widget_class, CcColorPanel, toolbutton_device_calibrate);
   gtk_widget_class_bind_template_child (widget_class, CcColorPanel, toolbutton_device_default);
@@ -1998,6 +2000,8 @@ cc_color_panel_init (CcColorPanel *prefs)
   GtkTreeModel *model_filter;
   GtkTreeSelection *selection;
   GtkTreeViewColumn *column;
+  g_autofree gchar *learn_more_link = NULL;
+  g_autofree gchar *panel_description = NULL;
 
   g_resources_register (cc_color_get_resource ());
 
@@ -2012,6 +2016,12 @@ cc_color_panel_init (CcColorPanel *prefs)
   /* setup defaults */
   prefs->settings = g_settings_new (GCM_SETTINGS_SCHEMA);
   prefs->settings_colord = g_settings_new (COLORD_SETTINGS_SCHEMA);
+
+  /* Translators: This will be presented as the text of a link to the documentation */
+  learn_more_link = g_strdup_printf ("<a href='help:gnome-help/color-whyimportant'>%s</a>", _("Learn more"));
+  /* Translators: %s is a link to the documentation with the label "Learn more" */
+  panel_description = g_strdup_printf (_("Each device needs an up to date color profile to be color managed. %s"), learn_more_link);
+  adw_preferences_group_set_description (prefs->pref_group_devices, panel_description);
 
   /* assign buttons */
   g_signal_connect_object (prefs->toolbutton_profile_add, "clicked",
