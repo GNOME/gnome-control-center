@@ -227,15 +227,10 @@ update_search (CcPanelList *self)
       GtkSelectionMode selection_mode;
       gboolean autoselect_panel;
 
-      /* Autoselect panel only if allowed.  Autoselect of
-       * panel isn’t allowed if the panel is folded */
-      autoselect_panel = self->autoselect_panel;
-      selection_mode = gtk_list_box_get_selection_mode (GTK_LIST_BOX (self->main_listbox));
-      self->autoselect_panel = selection_mode != GTK_SELECTION_NONE;
+      /* Don't autoselect first panel when going back from search view */
+      self->autoselect_panel = FALSE;
 
       switch_to_view (self, self->previous_view);
-
-      self->autoselect_panel = autoselect_panel;
     }
 
   gtk_list_box_invalidate_filter (GTK_LIST_BOX (self->search_listbox));
@@ -644,6 +639,10 @@ search_row_activated_cb (GtkWidget     *listbox,
 
           gtk_list_box_select_row (GTK_LIST_BOX (real_listbox), real_row);
           gtk_widget_grab_focus (GTK_WIDGET (real_row));
+
+          /* Don't autoselect first panel because we are already
+           * activating a panel from search result */
+          self->autoselect_panel = FALSE;
 
           g_signal_emit_by_name (real_row, "activate");
           break;
