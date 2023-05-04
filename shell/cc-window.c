@@ -147,8 +147,6 @@ activate_panel (CcWindow          *self,
 
   timer = g_timer_new ();
 
-  g_settings_set_string (self->settings, "last-panel", id);
-
   /* Begin the profile */
   g_timer_start (timer);
 
@@ -176,6 +174,8 @@ activate_panel (CcWindow          *self,
   ellapsed_time = g_timer_elapsed (timer, NULL);
 
   g_debug ("Time to open panel '%s': %lfs", name, ellapsed_time);
+
+  g_settings_set_string (self->settings, "last-panel", id);
 
   CC_RETURN (TRUE);
 }
