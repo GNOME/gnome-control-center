@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <template class="CcListRowInfoButton" parent="GtkWidget">
+    <child>
+      <object class="GtkMenuButton" id="button">
+        <property name="icon-name">info-symbolic</property>
+        <style>
+          <class name="flat"/>
+        </style>
+        <accessibility>
+          <property name="label" translatable="yes">More information</property>
+        </accessibility>
+        <property name="popover">
+          <object class="GtkPopover">
+            <child>
+              <object class="GtkLabel" id="label">
+                <property name="halign">center</property>
+                <property name="margin-bottom">6</property>
+                <property name="margin-end">6</property>
+                <property name="margin-start">6</property>
+                <property name="margin-top">6</property>
+                <property name="max-width-chars">50</property>
+                <property name="valign">center</property>
+                <property name="wrap">True</property>
+              </object>
+            </child>
+          </object>
+        </property>
+      </object>
+    </child>
+  </template>
+</interface>
