@@ -237,33 +237,9 @@
                             <property name="use_underline">True</property>
                             <property name="activatable-widget">account_type_switch</property>
                             <child type="suffix">
-                              <object class="GtkMenuButton">
-                                <property name="tooltip-text" translatable="yes">Information</property>
+                              <object class="CcListRowInfoButton">
                                 <property name="valign">center</property>
-                                <property name="icon-name">help-about-symbolic</property>
-                                <style>
-                                  <class name="flat"/>
-                                </style>
-                                <accessibility>
-                                  <property name="label" translatable="yes">Information</property>
-                                </accessibility>
-                                <property name="popover">
-                                  <object class="GtkPopover">
-                                    <child>
-                                      <object class="GtkLabel">
-                                        <property name="margin-top">6</property>
-                                        <property name="margin-bottom">6</property>
-                                        <property name="margin-start">6</property>
-                                        <property name="margin-end">6</property>
-                                        <property name="halign">center</property>
-                                        <property name="valign">center</property>
-                                        <property name="wrap">True</property>
-                                        <property name="max-width-chars">50</property>
-                                        <property name="label" translatable="yes">Administrators have extra abilities, including adding and removing users, changing login settings, and removing software. Parental controls cannot be applied to administrators.</property>
-                                      </object>
-                                    </child>
-                                  </object>
-                                </property>
+                                <property name="text" translatable="yes">Administrators have extra abilities, including adding and removing users, changing login settings, and removing software. Parental controls cannot be applied to administrators.</property>
                               </object>
                             </child>
                             <child>
