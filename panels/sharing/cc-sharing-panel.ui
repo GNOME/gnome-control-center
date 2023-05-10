@@ -20,6 +20,7 @@
               <object class="CcListRow" id="personal_file_sharing_row">
                 <property name="icon-name">folder-remote-symbolic</property>
                 <property name="show-arrow">True</property>
+                <property name="subtitle" translatable="yes">Share files with other devices on the current network</property>
                 <property name="use-underline">True</property>
                 <property name="title" translatable="yes">_File Sharing</property>
                 <signal name="activated" handler="gtk_window_present" object="personal_file_sharing_dialog"/>
@@ -29,6 +30,7 @@
               <object class="CcListRow" id="remote_desktop_row">
                 <property name="icon-name">preferences-desktop-remote-desktop-symbolic</property>
                 <property name="show-arrow">True</property>
+                <property name="subtitle" translatable="yes">View and control the desktop from another device</property>
                 <property name="use-underline">True</property>
                 <property name="title" translatable="yes">Remote _Desktop</property>
                 <signal name="activated" handler="gtk_window_present" object="remote_desktop_dialog"/>
@@ -38,6 +40,7 @@
               <object class="CcListRow" id="media_sharing_row">
                 <property name="icon-name">applications-multimedia-symbolic</property>
                 <property name="show-arrow">True</property>
+                <property name="subtitle" translatable="yes">Stream music, photos and videos to devices on the current network</property>
                 <property name="use-underline">True</property>
                 <property name="title" translatable="yes">_Media Sharing</property>
                 <signal name="activated" handler="gtk_window_present" object="media_sharing_dialog"/>
@@ -47,6 +50,7 @@
               <object class="CcListRow" id="remote_login_row">
                 <property name="icon-name">utilities-terminal-symbolic</property>
                 <property name="show-arrow">True</property>
+                <property name="subtitle" translatable="yes">Enable SSH access for this device</property>
                 <property name="use-underline">True</property>
                 <property name="title" translatable="yes">_Remote Login</property>
                 <signal name="activated" handler="gtk_window_present" object="remote_login_dialog"/>
