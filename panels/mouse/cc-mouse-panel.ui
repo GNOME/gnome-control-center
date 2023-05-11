@@ -120,29 +120,9 @@
                         <property name="subtitle" translatable="yes">Recommended for most users and applications</property>
                         <property name="activatable-widget">mouse_accel_switch</property>
                         <child type="suffix">
-                          <object class="GtkMenuButton">
+                          <object class="CcListRowInfoButton">
                             <property name="valign">center</property>
-                            <property name="icon-name">help-about-symbolic</property>
-                            <style>
-                              <class name="flat"/>
-                            </style>
-                            <property name="popover">
-                              <object class="GtkPopover">
-                                <child>
-                                  <object class="GtkLabel">
-                                    <property name="margin-start">8</property>
-                                    <property name="margin-end">8</property>
-                                    <property name="margin-top">8</property>
-                                    <property name="margin-bottom">8</property>
-                                    <property name="halign">center</property>
-                                    <property name="valign">center</property>
-                                    <property name="wrap">True</property>
-                                    <property name="label" translatable="yes">Turning mouse acceleration off can allow faster and more precise movements, but can also make the mouse more difficult to use.</property>
-                                    <property name="max-width-chars">36</property>
-                                  </object>
-                                </child>
-                              </object>
-                            </property>
+                            <property name="text" translatable="yes">Turning mouse acceleration off can allow faster and more precise movements, but can also make the mouse more difficult to use.</property>
                           </object>
                         </child>
                         <child type="suffix">
