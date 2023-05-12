@@ -256,6 +256,10 @@ parse_variant_iter (CcfirmwareSecurityPanel *self,
   if (appstream_id == NULL)
     return;
 
+  /* skip obsoleted */
+  if (attr->flags & FWUPD_SECURITY_ATTR_FLAG_OBSOLETED)
+    return;
+
   /* in fwupd <= 1.8.3 org.fwupd.hsi.Uefi.SecureBoot was incorrectly marked as HSI-0,
    * so lower the HSI number forcefully if this attribute failed -- the correct thing
    * to do of course is to update fwupd to a newer build */
