@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center.HEAD.he\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2023-04-20 15:33+0000\n"
-"PO-Revision-Date: 2023-04-21 12:34+0300\n"
+"POT-Creation-Date: 2023-05-15 12:45+0000\n"
+"PO-Revision-Date: 2023-05-15 16:25+0300\n"
 "Last-Translator: Yosef Or Boczko <yoseforb@gmail.com>\n"
 "Language-Team: Hebrew <yoseforb@gmail.com>\n"
 "Language: he\n"
@@ -143,7 +143,7 @@ msgstr "פרטי יישום"
 #: panels/applications/cc-applications-panel.ui:112
 #: panels/applications/cc-applications-panel.ui:119
 #: panels/keyboard/01-launchers.xml.in:16
-#: panels/keyboard/cc-input-chooser.ui:75
+#: panels/keyboard/cc-input-chooser.ui:76
 #: panels/printers/new-printer-dialog.ui:230
 #: panels/region/cc-format-chooser.ui:82
 #: panels/search/gnome-search-panel.desktop.in:3 shell/cc-window.ui:40
@@ -264,7 +264,7 @@ msgid "Access device location data"
 msgstr "גישה לנתוני המיקום של המכשיר"
 
 #: panels/applications/cc-applications-panel.ui:222
-#: panels/applications/cc-applications-panel.ui:326
+#: panels/applications/cc-applications-panel.ui:327
 msgid "Required Access"
 msgstr "גישה נדרשת"
 
@@ -277,59 +277,63 @@ msgid "File &amp; Link Associations"
 msgstr "שיוכי קבצים וקישורים"
 
 #: panels/applications/cc-applications-panel.ui:239
-#: panels/applications/cc-applications-panel.ui:412
+#: panels/applications/cc-applications-panel.ui:413
 msgid "Storage"
 msgstr "אחסון"
 
-#: panels/applications/cc-applications-panel.ui:301 shell/cc-panel-list.ui:108
+#: panels/applications/cc-applications-panel.ui:258
+msgid "Search apps"
+msgstr "חיפוש יישומים"
+
+#: panels/applications/cc-applications-panel.ui:302 shell/cc-panel-list.ui:108
 msgid "No results found"
 msgstr "לא נמצאו תוצאות"
 
-#: panels/applications/cc-applications-panel.ui:311 shell/cc-panel-list.ui:117
+#: panels/applications/cc-applications-panel.ui:312 shell/cc-panel-list.ui:117
 msgid "Try a different search"
 msgstr "יש לנסות חיפוש שונה"
 
-#: panels/applications/cc-applications-panel.ui:355
+#: panels/applications/cc-applications-panel.ui:356
 msgid "File & Link Associations"
 msgstr "שיוכי קבצים וקישורים"
 
-#: panels/applications/cc-applications-panel.ui:380
+#: panels/applications/cc-applications-panel.ui:381
 msgid "File Types"
 msgstr "סוגי קבצים"
 
-#: panels/applications/cc-applications-panel.ui:386
+#: panels/applications/cc-applications-panel.ui:387
 msgid "Link Types"
 msgstr "סוגי קישורים"
 
-#: panels/applications/cc-applications-panel.ui:396
+#: panels/applications/cc-applications-panel.ui:397
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:131
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:234
 #: panels/keyboard/cc-keyboard-shortcut-row.ui:25
 msgid "Reset"
 msgstr "איפוס"
 
-#: panels/applications/cc-applications-panel.ui:423
+#: panels/applications/cc-applications-panel.ui:424
 msgid "How much disk space this app is occupying with app data and caches."
 msgstr ""
 "כמות האחסון על הדיסק בשימוש על ידי היישום לטובת אחסון מידע ונתוני מטמון."
 
-#: panels/applications/cc-applications-panel.ui:426
+#: panels/applications/cc-applications-panel.ui:427
 msgid "App"
 msgstr "יישום"
 
-#: panels/applications/cc-applications-panel.ui:432
+#: panels/applications/cc-applications-panel.ui:433
 msgid "Data"
 msgstr "מידע"
 
-#: panels/applications/cc-applications-panel.ui:438
+#: panels/applications/cc-applications-panel.ui:439
 msgid "Cache"
 msgstr "מטמון"
 
-#: panels/applications/cc-applications-panel.ui:444
+#: panels/applications/cc-applications-panel.ui:445
 msgid "<b>Total</b>"
 msgstr "‫<b>סך הכול</b>"
 
-#: panels/applications/cc-applications-panel.ui:454
+#: panels/applications/cc-applications-panel.ui:455
 msgid "Clear Cache…"
 msgstr "ניקוי מטמון…"
 
@@ -347,8 +351,8 @@ msgid "Select a picture"
 msgstr "בחירת תמונה"
 
 #: panels/background/cc-background-chooser.c:315
-#: panels/color/cc-color-calibrate.ui:22 panels/color/cc-color-panel.c:284
-#: panels/color/cc-color-panel.c:844 panels/common/cc-language-chooser.ui:21
+#: panels/color/cc-color-calibrate.ui:22 panels/color/cc-color-panel.c:285
+#: panels/color/cc-color-panel.c:845 panels/common/cc-language-chooser.ui:21
 #: panels/display/cc-display-panel.ui:42 panels/keyboard/cc-input-chooser.ui:11
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:23
 #: panels/network/cc-wifi-hotspot-dialog.ui:142
@@ -480,6 +484,7 @@ msgstr "יש לכבות את מצב הטיסה על מנת לאפשר בלוטו
 
 #. Translators: The found device is a printer connected via Bluetooth
 #: panels/bluetooth/gnome-bluetooth-panel.desktop.in:3
+#: panels/network/cc-network-panel.ui:75
 #: panels/printers/pp-new-printer-dialog.c:1383
 msgid "Bluetooth"
 msgstr "בלוטות'"
@@ -686,77 +691,90 @@ msgstr "ללא כיול"
 
 #. TRANSLATORS: this is a profile prefix to signify the
 #. * profile has been auto-generated for this hardware
-#: panels/color/cc-color-panel.c:160
+#: panels/color/cc-color-panel.c:161
 msgid "Default: "
 msgstr "בררת מחדל: "
 
 #. TRANSLATORS: this is a profile prefix to signify the
 #. * profile his a standard space like AdobeRGB
-#: panels/color/cc-color-panel.c:168
+#: panels/color/cc-color-panel.c:169
 msgid "Colorspace: "
 msgstr "מרחב צבעים: "
 
 #. TRANSLATORS: this is a profile prefix to signify the
 #. * profile is a test profile
-#: panels/color/cc-color-panel.c:175
+#: panels/color/cc-color-panel.c:176
 msgid "Test profile: "
 msgstr "פרופיל בדיקה: "
 
 #. TRANSLATORS: an ICC profile is a file containing colorspace data
-#: panels/color/cc-color-panel.c:282
+#: panels/color/cc-color-panel.c:283
 msgid "Select ICC Profile File"
 msgstr "בחירת פרופיל ICC"
 
-#: panels/color/cc-color-panel.c:285
+#: panels/color/cc-color-panel.c:286
 msgid "_Import"
 msgstr "יי_בוא"
 
 #. TRANSLATORS: filter name on the file->open dialog
-#: panels/color/cc-color-panel.c:296
+#: panels/color/cc-color-panel.c:297
 msgid "Supported ICC profiles"
 msgstr "פרופילי ICC נתמכים"
 
 #. TRANSLATORS: filter name on the file->open dialog
-#: panels/color/cc-color-panel.c:303
+#: panels/color/cc-color-panel.c:304
 msgid "All files"
 msgstr "כל הקבצים"
 
-#: panels/color/cc-color-panel.c:586
+#: panels/color/cc-color-panel.c:587
 msgid "Screen"
 msgstr "מסך"
 
 #. TRANSLATORS: this is the dialog to save the ICC profile
-#: panels/color/cc-color-panel.c:841
+#: panels/color/cc-color-panel.c:842
 msgid "Save Profile"
 msgstr "שמירת הפרופיל"
 
-#: panels/color/cc-color-panel.c:845
+#: panels/color/cc-color-panel.c:846
 #: panels/network/connection-editor/vpn-helpers.c:335
 #: panels/wwan/cc-wwan-apn-dialog.ui:43
 msgid "_Save"
 msgstr "_שמירה"
 
 #. TRANSLATORS: this is when the button is sensitive
-#: panels/color/cc-color-panel.c:1146
+#: panels/color/cc-color-panel.c:1147
 msgid "Create a color profile for the selected device"
 msgstr "יצירת פרופיל צבע עבור ההתקן הנבחר"
 
 #. TRANSLATORS: this is when the button is insensitive
-#: panels/color/cc-color-panel.c:1161 panels/color/cc-color-panel.c:1185
+#: panels/color/cc-color-panel.c:1162 panels/color/cc-color-panel.c:1186
 msgid ""
 "The measuring instrument is not detected. Please check it is turned on and "
 "correctly connected."
 msgstr "התקן המדידה לא זוהה. נא לבדוק כי הוא פועל ומחובר כראוי."
 
 #. TRANSLATORS: this is when the button is insensitive
-#: panels/color/cc-color-panel.c:1195
+#: panels/color/cc-color-panel.c:1196
 msgid "The measuring instrument does not support printer profiling."
 msgstr "התקן המדידה אינו תומך ביצירת פרופילים למדפסות."
 
 #. TRANSLATORS: this is when the button is insensitive
-#: panels/color/cc-color-panel.c:1206
+#: panels/color/cc-color-panel.c:1207
 msgid "The device type is not currently supported."
 msgstr "סוג ההתקן אינו נתמך נכון לעכשיו."
+
+#. Translators: This will be presented as the text of a link to the documentation
+#. translators: Text used in link to privacy policy
+#: panels/color/cc-color-panel.c:2021
+#: panels/diagnostics/cc-diagnostics-panel.c:137
+msgid "Learn more"
+msgstr "מידע נוסף"
+
+#. Translators: %s is a link to the documentation with the label "Learn more"
+#: panels/color/cc-color-panel.c:2023
+#, c-format
+msgid "Each device needs an up to date color profile to be color managed. %s"
+msgstr "לכל התקן דרוש פרופיל צבע עדכני כדי שניתן יהיה לנהל אותו לפי צבע. %s"
 
 #: panels/color/cc-color-panel.ui:4 panels/wacom/calibrator/calibrator.ui:40
 msgid "Screen Calibration"
@@ -899,141 +917,127 @@ msgstr "_ייבוא קובץ…"
 msgid "_Add"
 msgstr "הו_ספה"
 
-#: panels/color/cc-color-panel.ui:424
-msgid "Each device needs an up to date color profile to be color managed."
-msgstr "לכל התקן דרוש פרופיל צבע עדכני כדי שניתן יהיה לנהל אותו לפי צבע."
-
-#. translators: Text used in link to privacy policy
-#: panels/color/cc-color-panel.ui:434
-#: panels/diagnostics/cc-diagnostics-panel.c:137
-msgid "Learn more"
-msgstr "מידע נוסף"
-
-#: panels/color/cc-color-panel.ui:436
-msgid "Learn more about color management"
-msgstr "מידע נוסף בנוגע לניהול צבעים"
-
-#: panels/color/cc-color-panel.ui:473
+#: panels/color/cc-color-panel.ui:453
 msgid "_Set for all users"
 msgstr "ה_גדרה לכל המשתמשים"
 
-#: panels/color/cc-color-panel.ui:475 panels/color/cc-color-panel.ui:483
-#: panels/color/cc-color-panel.ui:484
+#: panels/color/cc-color-panel.ui:455 panels/color/cc-color-panel.ui:463
+#: panels/color/cc-color-panel.ui:464
 msgid "Set this profile for all users on this computer"
 msgstr "הגדרת פרופיל זה לכל המשתמשים במחשב זה"
 
-#: panels/color/cc-color-panel.ui:481
+#: panels/color/cc-color-panel.ui:461
 msgid "_Enable"
 msgstr "ה_פעלה"
 
-#: panels/color/cc-color-panel.ui:497
+#: panels/color/cc-color-panel.ui:477
 msgid "_Add profile"
 msgstr "הו_ספת פרופיל"
 
-#: panels/color/cc-color-panel.ui:503
+#: panels/color/cc-color-panel.ui:483
 msgid "_Calibrate…"
 msgstr "_כיול…"
 
-#: panels/color/cc-color-panel.ui:505
+#: panels/color/cc-color-panel.ui:485
 msgid "Calibrate the device"
 msgstr "כיול ההתקן"
 
-#: panels/color/cc-color-panel.ui:511
+#: panels/color/cc-color-panel.ui:491
 msgid "_Remove profile"
 msgstr "ה_סרת פרופיל"
 
-#: panels/color/cc-color-panel.ui:517
+#: panels/color/cc-color-panel.ui:497
 msgid "_View details"
 msgstr "_צפייה בפרטים"
 
-#: panels/color/cc-color-panel.ui:529
+#: panels/color/cc-color-panel.ui:509
 msgid "Unable to detect any devices that can be color managed"
 msgstr "לא ניתן לזהות התקנים כלשהם שניתן לנהל בהם את הצבע"
 
-#: panels/color/cc-color-panel.ui:568
+#: panels/color/cc-color-panel.ui:548
 msgid "LCD"
 msgstr "LCD"
 
-#: panels/color/cc-color-panel.ui:573
+#: panels/color/cc-color-panel.ui:553
 msgid "LED"
 msgstr "LED"
 
-#: panels/color/cc-color-panel.ui:578
+#: panels/color/cc-color-panel.ui:558
 msgid "CRT"
 msgstr "CRT"
 
-#: panels/color/cc-color-panel.ui:583
+#: panels/color/cc-color-panel.ui:563
 msgid "Projector"
 msgstr "מקרן"
 
-#: panels/color/cc-color-panel.ui:588
+#: panels/color/cc-color-panel.ui:568
 msgid "Plasma"
 msgstr "פלזמה"
 
-#: panels/color/cc-color-panel.ui:593
+#: panels/color/cc-color-panel.ui:573
 msgid "LCD (CCFL backlight)"
 msgstr "‏LCD ‏(CCFL תאורה אחורית)"
 
-#: panels/color/cc-color-panel.ui:598
+#: panels/color/cc-color-panel.ui:578
 msgid "LCD (RGB LED backlight)"
 msgstr "‏LCD ‏(RGB LED תאורה אחורית)"
 
-#: panels/color/cc-color-panel.ui:603
+#: panels/color/cc-color-panel.ui:583
 msgid "LCD (white LED backlight)"
 msgstr "‏LCD (תאורת LED אחורית)"
 
-#: panels/color/cc-color-panel.ui:608
+#: panels/color/cc-color-panel.ui:588
 msgid "Wide gamut LCD (CCFL backlight)"
 msgstr "טווח צבעים רחב LCD ‏(CCLF תאורה אחורית)"
 
-#: panels/color/cc-color-panel.ui:613
+#: panels/color/cc-color-panel.ui:593
 msgid "Wide gamut LCD (RGB LED backlight)"
 msgstr "טווח צבעים רחב LCD ‏(RGB LED תאורה אחורית)"
 
-#: panels/color/cc-color-panel.ui:630
+#: panels/color/cc-color-panel.ui:610
 msgctxt "Calibration quality"
 msgid "High"
 msgstr "גבוהה"
 
-#: panels/color/cc-color-panel.ui:631
+#: panels/color/cc-color-panel.ui:611
 msgid "40 minutes"
 msgstr "40 דקות"
 
-#: panels/color/cc-color-panel.ui:635
+#: panels/color/cc-color-panel.ui:615
 msgctxt "Calibration quality"
 msgid "Medium"
 msgstr "בינונית"
 
-#: panels/color/cc-color-panel.ui:636
+#: panels/color/cc-color-panel.ui:616
 msgid "30 minutes"
 msgstr "חצי שעה"
 
-#: panels/color/cc-color-panel.ui:640
+#: panels/color/cc-color-panel.ui:620
 msgctxt "Calibration quality"
 msgid "Low"
 msgstr "נמוכה"
 
-#: panels/color/cc-color-panel.ui:641
+#: panels/color/cc-color-panel.ui:621
 msgid "15 minutes"
 msgstr "רבע שעה"
 
-#: panels/color/cc-color-panel.ui:663
+#: panels/color/cc-color-panel.ui:643
 msgid "Native to display"
 msgstr "טבעי לתצוגה"
 
-#: panels/color/cc-color-panel.ui:667
+#: panels/color/cc-color-panel.ui:647
 msgid "D50 (Printing and publishing)"
 msgstr "D50 (הדפסה והוצאה לאור)"
 
-#: panels/color/cc-color-panel.ui:671
+#: panels/color/cc-color-panel.ui:651
 msgid "D55"
 msgstr "D55"
 
-#: panels/color/cc-color-panel.ui:675
+#: panels/color/cc-color-panel.ui:655
 msgid "D65 (Photography and graphics)"
 msgstr "D65 (צילום וגרפיקה)"
 
-#: panels/color/cc-color-panel.ui:679
+#: panels/color/cc-color-panel.ui:659
 msgid "D75"
 msgstr "D75"
 
@@ -1141,11 +1145,16 @@ msgstr "בחירת שפה"
 msgid "_Select"
 msgstr "ב_חירה"
 
-#: panels/common/cc-language-chooser.ui:58
+#: panels/common/cc-language-chooser.ui:35
+#: panels/keyboard/cc-input-chooser.ui:68
+msgid "Language or country"
+msgstr "שפה או מדינה"
+
+#: panels/common/cc-language-chooser.ui:59
 msgid "No languages found"
 msgstr "לא נמצאו שפות"
 
-#: panels/common/cc-language-chooser.ui:69
+#: panels/common/cc-language-chooser.ui:70
 #: panels/keyboard/cc-input-chooser.c:175
 msgid "More…"
 msgstr "עוד…"
@@ -1411,7 +1420,11 @@ msgstr "דצמבר"
 msgid "Select Time Zone"
 msgstr "בחירת אזור זמן"
 
-#: panels/datetime/cc-tz-dialog.ui:40
+#: panels/datetime/cc-tz-dialog.ui:25
+msgid "Search cities"
+msgstr "חיפוש ערים"
+
+#: panels/datetime/cc-tz-dialog.ui:41
 msgid "No Results"
 msgstr "לא נמצאו תוצאות"
 
@@ -1990,6 +2003,10 @@ msgstr "הדיווח הועתק ללוח הגזירים"
 msgid "Device Security Status"
 msgstr "מצב אבטחת התקן"
 
+#: panels/firmware-security/cc-firmware-security-dialog.ui:87
+msgid "Copy Technical Report"
+msgstr "העתקת דו״ח טכני"
+
 #: panels/firmware-security/cc-firmware-security-help-dialog.ui:6
 msgid "About Device Security"
 msgstr "על אודות אבטחת התקן"
@@ -2254,7 +2271,7 @@ msgid "System Logo"
 msgstr "לוגו המערכת"
 
 #: panels/info-overview/cc-info-overview-panel.ui:33
-#: panels/sharing/cc-sharing-panel.ui:12 panels/sharing/cc-sharing-panel.ui:269
+#: panels/sharing/cc-sharing-panel.ui:12 panels/sharing/cc-sharing-panel.ui:279
 msgid "Device Name"
 msgstr "שם ההתקן"
 
@@ -2502,7 +2519,7 @@ msgstr "אחר"
 msgid "Add an Input Source"
 msgstr "הוספת מקור קלט"
 
-#: panels/keyboard/cc-input-chooser.ui:84
+#: panels/keyboard/cc-input-chooser.ui:85
 msgid "Input methods can’t be used on the login screen"
 msgstr "לא ניתן להשתמש בשיטות קלט במסך הכניסה"
 
@@ -2530,7 +2547,7 @@ msgstr "העדפות"
 msgid "View Keyboard Layout"
 msgstr "הצגת פריסת המקלדת"
 
-#: panels/keyboard/cc-input-row.ui:54 panels/sharing/cc-sharing-networks.c:224
+#: panels/keyboard/cc-input-row.ui:54 panels/sharing/cc-sharing-networks.c:223
 #: panels/sharing/cc-sharing-panel.c:571
 msgid "Remove"
 msgstr "הסרה"
@@ -2660,7 +2677,7 @@ msgid "Methods for entering symbols and letter variants using the keyboard."
 msgstr "שיטות למילוי סימנים והגווני אותיות באמצעות המקלדת."
 
 #: panels/keyboard/cc-keyboard-panel.ui:82
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:7 shell/cc-window.ui:162
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:9 shell/cc-window.ui:163
 msgid "Keyboard Shortcuts"
 msgstr "צירופי מקשים"
 
@@ -2691,35 +2708,39 @@ msgstr "ביטול"
 msgid "Reset All"
 msgstr "איפוס הכול"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:27
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:29
 msgid "Reset All…"
 msgstr "איפוס של הכול…"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:28
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:30
 msgid "Reset all shortcuts to their default keybindings"
 msgstr "איפוס כל צירופי המקשים לערכי ברירת המחדל"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:49
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:47
+msgid "Search shortcuts"
+msgstr "חיפוש קיצורי מקשים"
+
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:52
 msgid "Search Shortcuts"
 msgstr "חיפוש קיצורי מקשים"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:88
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:91
 msgid "No keyboard shortcut found"
 msgstr "לא נמצאו צירופי מקשים"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:89
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:92
 msgid "Try a different search."
 msgstr "יש לנסות חיפוש שונה."
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:138
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:141
 msgid "Add Custom Shortcuts"
 msgstr "הוספת צירוף מקשים מותאם"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:139
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:142
 msgid "Set up custom shortcuts for launching apps, running scripts, and more."
 msgstr "הגדרת צירופי מקשים מותאמים להפעלת יישומים, הרצת תסריטים ועוד."
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:143
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:146
 msgid "Add Shortcut…"
 msgstr "הוספת צירוף מקשים…"
 
@@ -2798,7 +2819,7 @@ msgstr "הגדרת צירופי מקשים…"
 
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:261
 #: panels/sound/cc-alert-chooser-window.c:340
-#: panels/sound/cc-alert-chooser-window.ui:20
+#: panels/sound/cc-alert-chooser-window.ui:22
 #: panels/universal-access/cc-ua-zoom-page.ui:271
 msgid "None"
 msgstr "ללא"
@@ -3153,16 +3174,16 @@ msgstr ""
 "עבודה;שולחן עבודה;מרחב עבודה;"
 
 #: panels/network/cc-network-panel.c:672
-msgid "Can’t Connect to Network"
-msgstr "לא ניתן להתחבר לרשת"
+msgid "Network Unavailable"
+msgstr "רשת לא זמינה"
 
 #: panels/network/cc-network-panel.c:674
 msgid ""
-"NetworkManager needs to be running to view or make connections. Contact a "
-"system administrator or the software vendor."
+"An error has occurred and network cannot be used.\n"
+" Error details: NetworkManager not running."
 msgstr ""
-"‏NetworkManager צריך לפעול על מנת להציג או ליצור התחברויות. יש ליצור קשר עם "
-"מנהל המערכת או ספק התכנה שלך."
+"אירעה שגיאה שבגללה לא ניתן להשתמש ברשת האלחוטית.\n"
+" פרטי שגיאה: NetworkManager לא פועל."
 
 #. xxx: Added to avoid confusion with the preceding VPN row
 #: panels/network/cc-network-panel.c:759 panels/network/cc-network-panel.ui:140
@@ -3173,10 +3194,6 @@ msgstr "מתווך"
 #: panels/network/cc-network-panel.ui:34
 msgid "Save"
 msgstr "שמירה"
-
-#: panels/network/cc-network-panel.ui:75
-msgid "Other Devices"
-msgstr "התקנים אחרים"
 
 #: panels/network/cc-network-panel.ui:91 panels/network/cc-network-panel.ui:125
 #: panels/network/connection-editor/net-connection-editor.c:708
@@ -3397,10 +3414,10 @@ msgstr "שם הרשת"
 #. Translators: This is a password needed for printing.
 #: panels/network/cc-wifi-hotspot-dialog.ui:92
 #: panels/printers/new-printer-dialog.ui:316
-#: panels/printers/pp-jobs-dialog.ui:54 panels/sharing/cc-sharing-panel.ui:350
-#: panels/user-accounts/cc-add-user-dialog.ui:145
-#: panels/user-accounts/cc-add-user-dialog.ui:180
-#: panels/user-accounts/cc-add-user-dialog.ui:359
+#: panels/printers/pp-jobs-dialog.ui:54 panels/sharing/cc-sharing-panel.ui:360
+#: panels/user-accounts/cc-add-user-dialog.ui:173
+#: panels/user-accounts/cc-add-user-dialog.ui:208
+#: panels/user-accounts/cc-add-user-dialog.ui:387
 #: panels/wwan/cc-wwan-apn-dialog.ui:175
 msgid "Password"
 msgstr "ססמה"
@@ -3435,51 +3452,51 @@ msgstr "כיבוי נקודת הגישה?"
 msgid "_Turn Off"
 msgstr "_כיבוי"
 
-#: panels/network/cc-wifi-panel.ui:75
+#: panels/network/cc-wifi-panel.ui:57
 msgid "Airplane Mode"
 msgstr "מצב טיסה"
 
-#: panels/network/cc-wifi-panel.ui:76
+#: panels/network/cc-wifi-panel.ui:58
 msgid "Disables Wi-Fi, Bluetooth and mobile broadband"
 msgstr "השבתת רשת אלחוטית, בלוטות' ורשת סלולרית"
 
-#: panels/network/cc-wifi-panel.ui:96
+#: panels/network/cc-wifi-panel.ui:81
 msgid "No Wi-Fi Adapter Found"
 msgstr "לא נמצא מתאם לרשת אלחוטית"
 
-#: panels/network/cc-wifi-panel.ui:97
+#: panels/network/cc-wifi-panel.ui:82
 msgid "Make sure you have a Wi-Fi adapter plugged and turned on"
 msgstr "יש לוודא כי ברשותך מתאם לרשת אלחוטית מחובר ופועל"
 
-#: panels/network/cc-wifi-panel.ui:110 panels/wwan/cc-wwan-panel.ui:102
+#: panels/network/cc-wifi-panel.ui:95 panels/wwan/cc-wwan-panel.ui:102
 msgid "Airplane Mode On"
 msgstr "מצב טיסה פועל"
 
-#: panels/network/cc-wifi-panel.ui:111
+#: panels/network/cc-wifi-panel.ui:96
 msgid "Turn off to use Wi-Fi"
 msgstr "יש לכבות על מנת להשתמש ברשת האלחוטית"
 
-#: panels/network/cc-wifi-panel.ui:146
+#: panels/network/cc-wifi-panel.ui:131
 msgid "Wi-Fi Hotspot Active"
 msgstr "נקודת גישה אלחוטית פעילה"
 
-#: panels/network/cc-wifi-panel.ui:156
+#: panels/network/cc-wifi-panel.ui:141
 msgid "Mobile devices can scan the QR code to connect."
 msgstr "התקנים ניידים יכולים לסרוק את קוד ה־QR כדי להתחבר."
 
-#: panels/network/cc-wifi-panel.ui:164
+#: panels/network/cc-wifi-panel.ui:149
 msgid "Turn Off Hotspot…"
 msgstr "_כיבוי נקודת גישה…"
 
-#: panels/network/cc-wifi-panel.ui:184
+#: panels/network/cc-wifi-panel.ui:169
 msgid "Visible Networks"
 msgstr "רשתות גלויות"
 
-#: panels/network/cc-wifi-panel.ui:221
+#: panels/network/cc-wifi-panel.ui:206
 msgid "Wi-Fi Unavailable"
 msgstr "רשת אלחוטית לא זמינה"
 
-#: panels/network/cc-wifi-panel.ui:222
+#: panels/network/cc-wifi-panel.ui:207
 msgid ""
 "An error has occurred and Wi-Fi cannot be used.\n"
 "Error details: NetworkManager not running."
@@ -5134,7 +5151,7 @@ msgstr "יש להזין שם משתמש וססמה להצגת מדפסות זמ�
 #: panels/printers/new-printer-dialog.ui:295
 #: panels/printers/pp-jobs-dialog.ui:42
 #: panels/user-accounts/cc-add-user-dialog.ui:94
-#: panels/user-accounts/cc-add-user-dialog.ui:338
+#: panels/user-accounts/cc-add-user-dialog.ui:366
 #: panels/wwan/cc-wwan-apn-dialog.ui:150
 msgid "Username"
 msgstr "שם משתמש"
@@ -5338,7 +5355,7 @@ msgstr "יש להזין אישור על מנת להדפיס מ־%s."
 
 #. Translators: This is a windows domain used with SMB protocol.
 #: panels/printers/pp-jobs-dialog.ui:30
-#: panels/user-accounts/cc-add-user-dialog.ui:295
+#: panels/user-accounts/cc-add-user-dialog.ui:323
 msgid "Domain"
 msgstr "מתחם"
 
@@ -5723,21 +5740,25 @@ msgstr "הפעלה מחדש"
 
 #. Translators: This button adds new printer.
 #. Translators: This button adds a new printer.
-#: panels/printers/printers.ui:10 panels/printers/printers.ui:148
+#: panels/printers/printers.ui:10 panels/printers/printers.ui:149
 msgid "Add Printer…"
 msgstr "הוספת מדפסת…"
 
-#: panels/printers/printers.ui:145
+#: panels/printers/printers.ui:108
+msgid "Search printers"
+msgstr "חיפוש מדפסות"
+
+#: panels/printers/printers.ui:146
 msgid "No Printers"
 msgstr "אין מדפסות בנמצא"
 
 #. Translators: Title if the CUPS server is not running (we can not connect to it).
-#: panels/printers/printers.ui:168
+#: panels/printers/printers.ui:169
 msgid "No Print Service"
 msgstr "אין שרת הדפסה"
 
 #. Translators: Description if the CUPS server is not running (we can not connect to it).
-#: panels/printers/printers.ui:169
+#: panels/printers/printers.ui:170
 msgid "The system printing service doesn’t seem to be available."
 msgstr "כפי הנראה, שירותי ההדפסה של המערכת אינם זמינים."
 
@@ -5747,8 +5768,8 @@ msgid "Formats"
 msgstr "תבניות"
 
 #: panels/region/cc-format-chooser.ui:76
-msgid "Search locales…"
-msgstr "חיפוש שפות…"
+msgid "Search locales"
+msgstr "חיפוש שפות"
 
 #: panels/region/cc-format-chooser.ui:116
 msgid "Common Formats"
@@ -5821,7 +5842,7 @@ msgid "Your Account"
 msgstr "החשבון שלך"
 
 #: panels/region/cc-region-panel.ui:33 panels/region/cc-region-panel.ui:60
-#: panels/user-accounts/cc-user-panel.ui:269
+#: panels/user-accounts/cc-user-panel.ui:298
 msgid "_Language"
 msgstr "_שפה"
 
@@ -6170,29 +6191,29 @@ msgstr "בחירת מיקום"
 msgid "_OK"
 msgstr "_אישור"
 
-#: panels/search/cc-search-locations-dialog.ui:8
+#: panels/search/cc-search-locations-dialog.ui:10
 #: panels/search/cc-search-panel.ui:22
 msgid "Search Locations"
 msgstr "מקומות לחיפוש"
 
-#: panels/search/cc-search-locations-dialog.ui:13
+#: panels/search/cc-search-locations-dialog.ui:15
 msgid ""
 "Folders which are searched by system apps, such as Files, Photos and Videos."
 msgstr "תיקיות אשר מבוצע בהן חיפוש על ידי יישומים כמו קבצים, תמונות וסרטים."
 
-#: panels/search/cc-search-locations-dialog.ui:18
+#: panels/search/cc-search-locations-dialog.ui:20
 msgid "Places"
 msgstr "מיקומים"
 
-#: panels/search/cc-search-locations-dialog.ui:35
+#: panels/search/cc-search-locations-dialog.ui:37
 msgid "Bookmarks"
 msgstr "סימניות"
 
-#: panels/search/cc-search-locations-dialog.ui:52
+#: panels/search/cc-search-locations-dialog.ui:54
 msgid "Others"
 msgstr "אחרים"
 
-#: panels/search/cc-search-locations-dialog.ui:59
+#: panels/search/cc-search-locations-dialog.ui:61
 msgid "Add Location"
 msgstr "הוספת מיקום"
 
@@ -6230,7 +6251,7 @@ msgid "Search;Find;Index;Hide;Privacy;Results;"
 msgstr "חיפוש;מציאה;חפש;מצא;למצוא;לחפש;אינדקס;מפתח;הסתרה;החבאה;פרטיות;תוצאות;"
 
 #. Label
-#: panels/sharing/cc-sharing-networks.c:270
+#: panels/sharing/cc-sharing-networks.c:269
 msgid "No networks selected for sharing"
 msgstr "לא נבחרו רשתות לשיתוף"
 
@@ -6313,117 +6334,133 @@ msgid "Password copied"
 msgstr "ססמה הועתקה"
 
 #: panels/sharing/cc-sharing-panel.ui:23
+msgid "Share files with other devices on the current network"
+msgstr "שיתוף קבצים עם התקנים אחרים על הרשת הנוכחית"
+
+#: panels/sharing/cc-sharing-panel.ui:25
 msgid "_File Sharing"
 msgstr "שיתוף _קבצים"
 
-#: panels/sharing/cc-sharing-panel.ui:31
+#: panels/sharing/cc-sharing-panel.ui:33
+msgid "View and control the desktop from another device"
+msgstr "צפייה ושליטה בשולחן העבודה ממחשב אחר"
+
+#: panels/sharing/cc-sharing-panel.ui:35
 msgid "Remote _Desktop"
 msgstr "_שולחן עבודה מרוחק"
 
-#: panels/sharing/cc-sharing-panel.ui:39
+#: panels/sharing/cc-sharing-panel.ui:43
+msgid "Stream music, photos and videos to devices on the current network"
+msgstr "שיתוף מוזיקה, תמונות וסרטים ברשת הנוכחית"
+
+#: panels/sharing/cc-sharing-panel.ui:45
 msgid "_Media Sharing"
 msgstr "שיתוף _מדיה"
 
-#: panels/sharing/cc-sharing-panel.ui:47
+#: panels/sharing/cc-sharing-panel.ui:53
+msgid "Enable SSH access for this device"
+msgstr "לאפשר גישת SSH עבור התקן זה"
+
+#: panels/sharing/cc-sharing-panel.ui:55
 msgid "_Remote Login"
 msgstr "כניסה מ_רוחקת"
 
-#: panels/sharing/cc-sharing-panel.ui:57
+#: panels/sharing/cc-sharing-panel.ui:65
 msgid "File Sharing"
 msgstr "שיתוף קבצים"
 
-#: panels/sharing/cc-sharing-panel.ui:103
+#: panels/sharing/cc-sharing-panel.ui:111
 msgid "_Require Password"
 msgstr "ד_רישת ססמה"
 
-#: panels/sharing/cc-sharing-panel.ui:117
+#: panels/sharing/cc-sharing-panel.ui:125
 #: panels/user-accounts/cc-user-panel.ui:182
 msgid "_Password"
 msgstr "_ססמה"
 
-#: panels/sharing/cc-sharing-panel.ui:160
-#: panels/sharing/cc-sharing-panel.ui:196
+#: panels/sharing/cc-sharing-panel.ui:168
+#: panels/sharing/cc-sharing-panel.ui:204
 msgid "Remote Login"
 msgstr "התחברות מרוחקת"
 
-#: panels/sharing/cc-sharing-panel.ui:216
-#: panels/sharing/cc-sharing-panel.ui:235
+#: panels/sharing/cc-sharing-panel.ui:224
+#: panels/sharing/cc-sharing-panel.ui:245
 msgid "Remote Desktop"
 msgstr "שולחן עבודה מרוחק"
 
-#: panels/sharing/cc-sharing-panel.ui:231
+#: panels/sharing/cc-sharing-panel.ui:241
 msgid ""
 "Remote desktop allows viewing and controlling your desktop from another "
 "computer."
 msgstr "שולחן עבודה מרוחק מאפשר צפייה ושליטה בשולחן העבודה שלך ממחשב אחר."
 
-#: panels/sharing/cc-sharing-panel.ui:236
+#: panels/sharing/cc-sharing-panel.ui:246
 msgid "Enable or disable remote desktop connections to this computer."
 msgstr "הפעלה או השבתה של התחברות מרוחקת לשולחן העבודה של מחשב זה."
 
-#: panels/sharing/cc-sharing-panel.ui:249
+#: panels/sharing/cc-sharing-panel.ui:259
 msgid "Remote Control"
 msgstr "שליטה מרחוק"
 
-#: panels/sharing/cc-sharing-panel.ui:250
+#: panels/sharing/cc-sharing-panel.ui:260
 msgid "Allows remote connections to control the screen."
 msgstr "לאפשר להתחברויות מרוחקות לשלוט במסך זה."
 
-#: panels/sharing/cc-sharing-panel.ui:264
+#: panels/sharing/cc-sharing-panel.ui:274
 msgid "How to Connect"
 msgstr "כיצד להתחבר"
 
-#: panels/sharing/cc-sharing-panel.ui:265
+#: panels/sharing/cc-sharing-panel.ui:275
 msgid ""
 "Connect to this computer using the device name or remote desktop address."
 msgstr "התחברות למחשב זה באמצעות שם ההתקן או כתובת שולחן העבודה המרוחק."
 
-#: panels/sharing/cc-sharing-panel.ui:284
-#: panels/sharing/cc-sharing-panel.ui:311
-#: panels/sharing/cc-sharing-panel.ui:338
-#: panels/sharing/cc-sharing-panel.ui:356
+#: panels/sharing/cc-sharing-panel.ui:294
+#: panels/sharing/cc-sharing-panel.ui:321
+#: panels/sharing/cc-sharing-panel.ui:348
+#: panels/sharing/cc-sharing-panel.ui:366
 msgid "Copy"
 msgstr "העתקה"
 
-#: panels/sharing/cc-sharing-panel.ui:297
+#: panels/sharing/cc-sharing-panel.ui:307
 msgid "Remote Desktop Address"
 msgstr "כתובת שולחן עבודה מרוחק"
 
-#: panels/sharing/cc-sharing-panel.ui:327
+#: panels/sharing/cc-sharing-panel.ui:337
 msgid "Authentication"
 msgstr "אימות"
 
-#: panels/sharing/cc-sharing-panel.ui:328
+#: panels/sharing/cc-sharing-panel.ui:338
 msgid "The user name and password are required to connect to this computer."
 msgstr "שם משתמש וססמה נדרשים על מנת להתחבר למחשב זה."
 
-#: panels/sharing/cc-sharing-panel.ui:332
+#: panels/sharing/cc-sharing-panel.ui:342
 msgid "User Name"
 msgstr "שם משתמש"
 
-#: panels/sharing/cc-sharing-panel.ui:371
+#: panels/sharing/cc-sharing-panel.ui:381
 msgid "Verify Encryption"
 msgstr "אימות הצפנה"
 
-#: panels/sharing/cc-sharing-panel.ui:400
+#: panels/sharing/cc-sharing-panel.ui:410
 msgid "Encryption Fingerprint"
 msgstr "הצפנת טביעת אצבע"
 
-#: panels/sharing/cc-sharing-panel.ui:401
+#: panels/sharing/cc-sharing-panel.ui:411
 msgid ""
 "The encryption fingerprint can be seen in connecting clients and should be "
 "identical."
 msgstr "הצפנת טביעת האצבע ניתנת לצפייה בצד הלקוח המתחבר וצריכה להיות זהה."
 
-#: panels/sharing/cc-sharing-panel.ui:433
+#: panels/sharing/cc-sharing-panel.ui:443
 msgid "Media Sharing"
 msgstr "שיתוף מדיה"
 
-#: panels/sharing/cc-sharing-panel.ui:455
+#: panels/sharing/cc-sharing-panel.ui:465
 msgid "Share music, photos and videos over the network."
 msgstr "שיתוף מוזיקה, תמונות וסרטים ברשת."
 
-#: panels/sharing/cc-sharing-panel.ui:468
+#: panels/sharing/cc-sharing-panel.ui:478
 msgid "Folders"
 msgstr "תיקיות"
 
@@ -6457,22 +6494,22 @@ msgid "Custom"
 msgstr "התאמה אישית"
 
 #: panels/sound/cc-alert-chooser-window.c:342
-#: panels/sound/cc-alert-chooser-window.ui:32
+#: panels/sound/cc-alert-chooser-window.ui:34
 msgid "Click"
 msgstr "נקישה"
 
 #: panels/sound/cc-alert-chooser-window.c:344
-#: panels/sound/cc-alert-chooser-window.ui:74
+#: panels/sound/cc-alert-chooser-window.ui:76
 msgid "Hum"
 msgstr "המהום"
 
 #: panels/sound/cc-alert-chooser-window.c:346
-#: panels/sound/cc-alert-chooser-window.ui:46
+#: panels/sound/cc-alert-chooser-window.ui:48
 msgid "String"
 msgstr "מיתר"
 
 #: panels/sound/cc-alert-chooser-window.c:348
-#: panels/sound/cc-alert-chooser-window.ui:60
+#: panels/sound/cc-alert-chooser-window.ui:62
 msgid "Swing"
 msgstr "הנפה"
 
@@ -6798,6 +6835,12 @@ msgstr "כל החלון"
 #: panels/universal-access/cc-ua-hearing-page.ui:63
 msgid "_Test Flash"
 msgstr "_בדיקת הבהוב"
+
+#. '#' is a dummy target to make 'Sound' clickable
+#. TRANSLATORS: Don't translate  <a href='#'> and </a>
+#: panels/universal-access/cc-ua-hearing-page.c:159
+msgid "System volume can be adjusted in <a href='#'>Sound</a> settings."
+msgstr "ניתן להתאים את עצמת השמע של המערכת בהגדרות <a href='#'>צליל</a>."
 
 #: panels/universal-access/cc-ua-mouse-page.ui:10
 msgid "_Mouse Keys"
@@ -7535,39 +7578,47 @@ msgstr "הוספת משתמש"
 msgid "Administrator"
 msgstr "מנהל"
 
-#: panels/user-accounts/cc-add-user-dialog.ui:132
-msgid ""
-"Administrators can add and remove other users, and can change settings for "
-"all users. Parental controls cannot be applied to administrators."
-msgstr ""
-"מנהל יכול להוסיף ולהסיר משתמשים, וכן לשנות הגדרות עבור כלל המשתמשים. בקרת "
-"הורים לא ניתנת להחלה על מנהל."
+#: panels/user-accounts/cc-add-user-dialog.ui:141
+#: panels/user-accounts/cc-user-panel.ui:235
+#: panels/user-accounts/cc-user-panel.ui:242
+msgid "Information"
+msgstr "מידע"
 
-#: panels/user-accounts/cc-add-user-dialog.ui:149
+#: panels/user-accounts/cc-add-user-dialog.ui:155
+#: panels/user-accounts/cc-user-panel.ui:256
+msgid ""
+"Administrators have extra abilities, including adding and removing users, "
+"changing login settings, and removing software. Parental controls cannot be "
+"applied to administrators."
+msgstr ""
+"למנהל יש יכולות נרחבות, לרבות הוספה והסרת משתמשים, שינוי הגדרות התחברות "
+"והסרת תכנה. בקרת הורים לא ניתנת להחלה על מנהל."
+
+#: panels/user-accounts/cc-add-user-dialog.ui:177
 msgid "User sets password on first login"
 msgstr "הגדרת ססמה בכניסה הראשונה של המשתמש"
 
-#: panels/user-accounts/cc-add-user-dialog.ui:161
+#: panels/user-accounts/cc-add-user-dialog.ui:189
 msgid "Set password now"
 msgstr "הגדרת ססמה כעת"
 
-#: panels/user-accounts/cc-add-user-dialog.ui:223
+#: panels/user-accounts/cc-add-user-dialog.ui:251
 msgid "Confirm"
 msgstr "אישור"
 
-#: panels/user-accounts/cc-add-user-dialog.ui:277
+#: panels/user-accounts/cc-add-user-dialog.ui:305
 msgid "Enterprise Login"
 msgstr "כניסה ארגונית"
 
-#: panels/user-accounts/cc-add-user-dialog.ui:278
+#: panels/user-accounts/cc-add-user-dialog.ui:306
 msgid "User accounts which are managed by a company or organization."
 msgstr "חשבונות משתמש המנוהלים על ידי חברה או ארגון."
 
-#: panels/user-accounts/cc-add-user-dialog.ui:383
+#: panels/user-accounts/cc-add-user-dialog.ui:411
 msgid "You are Offline"
 msgstr "התנתקת"
 
-#: panels/user-accounts/cc-add-user-dialog.ui:384
+#: panels/user-accounts/cc-add-user-dialog.ui:412
 msgid ""
 "Enterprise login allows an existing centrally managed user account to be "
 "used on this device. You can also use this account to access company "
@@ -8010,34 +8061,28 @@ msgstr "כניסה _אוטומטית"
 msgid "_Administrator"
 msgstr "_מנהל"
 
-#: panels/user-accounts/cc-user-panel.ui:230
-msgid ""
-"Administrators can add and remove other users, and can change settings for "
-"all users."
-msgstr "מנהל יכול להוסיף ולהסיר משתמשים, וכן לשנות הגדרות עבור כלל המשתמשים."
-
-#: panels/user-accounts/cc-user-panel.ui:246
+#: panels/user-accounts/cc-user-panel.ui:275
 msgid "_Parental Controls"
 msgstr "_בקרת הורים"
 
-#: panels/user-accounts/cc-user-panel.ui:247
+#: panels/user-accounts/cc-user-panel.ui:276
 msgid "Open the Parental Controls app."
 msgstr "פתיחת יישום בקרת הורים."
 
-#: panels/user-accounts/cc-user-panel.ui:284
+#: panels/user-accounts/cc-user-panel.ui:313
 msgid "Remove User…"
 msgstr "הסרת משתמש…"
 
-#: panels/user-accounts/cc-user-panel.ui:296
+#: panels/user-accounts/cc-user-panel.ui:325
 msgid "Other Users"
 msgstr "משתמשים אחרים"
 
 #. Translators: This is the empty state page label which states that there are no users to show in the panel.
-#: panels/user-accounts/cc-user-panel.ui:328
+#: panels/user-accounts/cc-user-panel.ui:357
 msgid "No Users Found"
 msgstr "לא נמצאו משתמשים"
 
-#: panels/user-accounts/cc-user-panel.ui:337
+#: panels/user-accounts/cc-user-panel.ui:366
 msgid "Unlock to add a user account."
 msgstr "שחרור על מנת להוסיף משתמש."
 
@@ -9062,11 +9107,15 @@ msgstr "כל ההגדרות"
 msgid "Main Menu"
 msgstr "תפריט ראשי"
 
-#: shell/cc-window.ui:154
+#: shell/cc-window.ui:71
+msgid "Search settings"
+msgstr "חיפוש הגדרות"
+
+#: shell/cc-window.ui:155
 msgid "Warning: Development Version"
 msgstr "אזהרה: גרסת פיתוח"
 
-#: shell/cc-window.ui:155
+#: shell/cc-window.ui:156
 msgid ""
 "This version of Settings should only be used for development purposes. You "
 "may experience incorrect system behavior, data loss, and other unexpected "
@@ -9075,7 +9124,7 @@ msgstr ""
 "גרסה זו של הגדרות צריכה לשמש למטרות פיתוח בלבד. הגרסה עשויה לגרום להתנהגויות "
 "לא תקינות של המערכת, לאבדן מידע לתקלות אחרות בלתי צפויות. "
 
-#: shell/cc-window.ui:166
+#: shell/cc-window.ui:167
 msgid "Help"
 msgstr "עזרה"
 
@@ -9181,6 +9230,28 @@ msgstr[3] "‏‫%u ערוצי קלט"
 #: subprojects/gvc/gvc-mixer-control.c:2876
 msgid "System Sounds"
 msgstr "צלילי מערכת"
+
+#~ msgid "Learn more about color management"
+#~ msgstr "מידע נוסף בנוגע לניהול צבעים"
+
+#~ msgid "Can’t Connect to Network"
+#~ msgstr "לא ניתן להתחבר לרשת"
+
+#~ msgid ""
+#~ "NetworkManager needs to be running to view or make connections. Contact a "
+#~ "system administrator or the software vendor."
+#~ msgstr ""
+#~ "‏NetworkManager צריך לפעול על מנת להציג או ליצור התחברויות. יש ליצור קשר "
+#~ "עם מנהל המערכת או ספק התכנה שלך."
+
+#~ msgid "Other Devices"
+#~ msgstr "התקנים אחרים"
+
+#~ msgid ""
+#~ "Administrators can add and remove other users, and can change settings "
+#~ "for all users."
+#~ msgstr ""
+#~ "מנהל יכול להוסיף ולהסיר משתמשים, וכן לשנות הגדרות עבור כלל המשתמשים."
 
 #~ msgid "Some settings must be unlocked before they can be changed."
 #~ msgstr "יש לשחרר חלק מההגדרות בכדי לבצע בהן שינויים."
@@ -10466,9 +10537,6 @@ msgstr "צלילי מערכת"
 #~ msgstr ""
 #~ "הרשאות מיוחדות ניתנות לשינוי בהגדרות <a href=\"privacy\">הפרטיות</a>."
 
-#~ msgid "Integration"
-#~ msgstr "שילוב"
-
 #~ msgid "Set Desktop Background"
 #~ msgstr "הגדרת רקע שולחן העבודה"
 
@@ -10723,9 +10791,6 @@ msgstr "צלילי מערכת"
 
 #~ msgid "Setup and use privileged FUSE filesystems"
 #~ msgstr "הגדרה ושימוש במערכות קביצם מותאמות (FUSE)"
-
-#~ msgid "Update firmware on this device"
-#~ msgstr "עדכון חומת אש שבהתקן"
 
 #~ msgid "Access hardware information"
 #~ msgstr "גישה למידע על החומרה"
