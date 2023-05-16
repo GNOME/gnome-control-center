@@ -526,6 +526,9 @@ search_entry_activate_cb (CcWindow *self)
 {
   gboolean changed;
 
+  if (cc_panel_list_get_view (self->panel_list) != CC_PANEL_LIST_SEARCH)
+    return;
+
   changed = cc_panel_list_activate (self->panel_list);
 
   gtk_search_bar_set_search_mode (self->search_bar, !changed);
