@@ -851,7 +851,8 @@ cc_panel_list_activate (CcPanelList *self)
   /* Select the first visible row */
   do
     row = gtk_list_box_get_row_at_index (GTK_LIST_BOX (listbox), i++);
-  while (row && !gtk_widget_get_visible (GTK_WIDGET (row)));
+  while (row && !(gtk_widget_get_visible (GTK_WIDGET (row)) &&
+         gtk_widget_get_child_visible (GTK_WIDGET (row))));
 
   /* If the row is valid, activate it */
   if (row)
