@@ -21,7 +21,7 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2023-03-03 18:27+0000\n"
+"POT-Creation-Date: 2023-05-05 07:06+0000\n"
 "PO-Revision-Date: 2023-03-13 10:43+0100\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Spanish - Spain <gnome-es-list@gnome.org>\n"
@@ -125,9 +125,11 @@ msgstr ""
 msgid "%s of disk space used."
 msgstr "%s de espacio de disco usado."
 
+#. List of apps.
 #: panels/applications/cc-applications-panel.c:1415
 #: panels/applications/cc-applications-panel.ui:19
 #: panels/applications/gnome-applications-panel.desktop.in:3
+#: panels/notifications/cc-notifications-panel.ui:26
 msgid "Apps"
 msgstr "Aplicaciones"
 
@@ -179,7 +181,7 @@ msgstr "Recibir búsquedas del sistema y enviar los resultados"
 #: panels/user-accounts/cc-user-panel.c:821
 #: panels/user-accounts/cc-user-panel.c:951
 #: panels/wwan/cc-wwan-device-page.c:477
-#: subprojects/gvc/gvc-mixer-control.c:1900
+#: subprojects/gvc/gvc-mixer-control.c:1908
 msgid "Disabled"
 msgstr "Desactivado"
 
@@ -356,7 +358,7 @@ msgstr "Seleccionar una imagen"
 #: panels/background/cc-background-chooser.c:315
 #: panels/color/cc-color-calibrate.ui:22 panels/color/cc-color-panel.c:284
 #: panels/color/cc-color-panel.c:844 panels/common/cc-language-chooser.ui:21
-#: panels/display/cc-display-panel.ui:31 panels/keyboard/cc-input-chooser.ui:11
+#: panels/display/cc-display-panel.ui:42 panels/keyboard/cc-input-chooser.ui:11
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:23
 #: panels/network/cc-wifi-hotspot-dialog.ui:125
 #: panels/network/cc-wifi-panel.c:745
@@ -1246,7 +1248,7 @@ msgstr[0] "%d hora"
 msgstr[1] "%d horas"
 
 #. Translators: Option for "Blank Screen" in "Power" panel
-#: panels/common/cc-util.c:183 panels/power/cc-power-panel.c:849
+#: panels/common/cc-util.c:183 panels/power/cc-power-panel.c:855
 #, c-format
 msgid "%d minute"
 msgid_plural "%d minutes"
@@ -1306,21 +1308,21 @@ msgctxt "hotspot"
 msgid "Hotspot"
 msgstr "Hotspot"
 
-#: panels/datetime/cc-datetime-panel.c:165
+#: panels/datetime/cc-datetime-panel.c:167
 msgid "24-hour"
 msgstr "24 horas"
 
-#: panels/datetime/cc-datetime-panel.c:167
+#: panels/datetime/cc-datetime-panel.c:169
 msgid "AM / PM"
 msgstr "AM / PM"
 
 #. Translators: This is the full date and time format used in 12-hour mode.
-#: panels/datetime/cc-datetime-panel.c:238
+#: panels/datetime/cc-datetime-panel.c:240
 msgid "%e %B %Y, %l:%M %p"
 msgstr "%d/%b/%Y, %I:%M"
 
 #. Translators: This is the full date and time format used in 24-hour mode.
-#: panels/datetime/cc-datetime-panel.c:243
+#: panels/datetime/cc-datetime-panel.c:245
 msgid "%e %B %Y, %R"
 msgstr "%d/%b/%Y, %H:%M"
 
@@ -1548,37 +1550,33 @@ msgstr "Configuración para informar de un problema automáticamente"
 msgid "diagnostics;crash;"
 msgstr "diagnósticos;fallo;error;crash;"
 
-#: panels/display/cc-display-panel.c:493
+#: panels/display/cc-display-panel.c:496
 #: panels/notifications/cc-notifications-panel.c:217
-#: panels/power/cc-power-panel.c:737 panels/power/cc-power-panel.c:744
+#: panels/power/cc-power-panel.c:743 panels/power/cc-power-panel.c:750
 msgid "On"
 msgstr "Encendido"
 
-#: panels/display/cc-display-panel.c:495 panels/network/cc-net-proxy-page.c:166
+#: panels/display/cc-display-panel.c:498 panels/network/cc-net-proxy-page.c:166
 #: panels/notifications/cc-notifications-panel.c:217
-#: panels/power/cc-power-panel.c:731 panels/power/cc-power-panel.c:742
+#: panels/power/cc-power-panel.c:737 panels/power/cc-power-panel.c:748
 msgid "Off"
 msgstr "Apagado"
 
-#: panels/display/cc-display-panel.c:931
+#: panels/display/cc-display-panel.c:936
 msgid "Apply Changes?"
 msgstr "¿Aplicar los cambios?"
 
-#: panels/display/cc-display-panel.c:936
+#: panels/display/cc-display-panel.c:941
 msgid "Changes Cannot be Applied"
 msgstr "No se pueden aplicar los cambios"
 
-#: panels/display/cc-display-panel.c:938
+#: panels/display/cc-display-panel.c:943
 msgid "This could be due to hardware limitations."
 msgstr "Esto puede deber a limitaciones hardware."
 
-#: panels/display/cc-display-panel.ui:43
-#: panels/network/connection-editor/connection-editor.ui:21
-msgid "_Apply"
-msgstr "_Aplicar"
-
-#: panels/display/cc-display-panel.ui:78 panels/display/cc-display-panel.ui:209
-#: panels/display/cc-display-panel.ui:248 panels/mouse/cc-mouse-panel.ui:22
+#: panels/display/cc-display-panel.ui:33 panels/display/cc-display-panel.ui:89
+#: panels/display/cc-display-panel.ui:220
+#: panels/display/cc-display-panel.ui:259 panels/mouse/cc-mouse-panel.ui:22
 #: panels/network/cc-wifi-panel.ui:16 panels/printers/new-printer-dialog.ui:64
 #: panels/region/cc-format-chooser.ui:37
 #: panels/universal-access/cc-ua-panel.ui:19
@@ -1589,34 +1587,39 @@ msgstr "_Aplicar"
 msgid "Back"
 msgstr "Atrás"
 
-#: panels/display/cc-display-panel.ui:100
+#: panels/display/cc-display-panel.ui:54
+#: panels/network/connection-editor/connection-editor.ui:21
+msgid "_Apply"
+msgstr "_Aplicar"
+
+#: panels/display/cc-display-panel.ui:111
 msgid "Display Settings Disabled"
 msgstr "Configuración de pantalla desactivada"
 
-#: panels/display/cc-display-panel.ui:111
+#: panels/display/cc-display-panel.ui:122
 msgid "Multiple Displays"
 msgstr "Varias pantalla"
 
 #. 'Join' as in 'Join displays'
-#: panels/display/cc-display-panel.ui:120
+#: panels/display/cc-display-panel.ui:131
 msgid "Join"
 msgstr "Unir"
 
-#: panels/display/cc-display-panel.ui:127
+#: panels/display/cc-display-panel.ui:138
 msgid "Mirror"
 msgstr "Espejo"
 
-#: panels/display/cc-display-panel.ui:155
+#: panels/display/cc-display-panel.ui:166
 msgid "Contains top bar and Activities"
 msgstr "Contiene la barra superior y de Actividades"
 
-#: panels/display/cc-display-panel.ui:156
+#: panels/display/cc-display-panel.ui:167
 msgid "Primary Display"
 msgstr "Pantalla primaria"
 
 #. This is the redshift functionality where we suppress blue light when the sun has gone down
-#: panels/display/cc-display-panel.ui:177
-#: panels/display/cc-display-panel.ui:216
+#: panels/display/cc-display-panel.ui:188
+#: panels/display/cc-display-panel.ui:227
 #: panels/display/cc-night-light-page.ui:117
 msgid "Night Light"
 msgstr "Luz nocturna"
@@ -2716,11 +2719,11 @@ msgstr "Atajos del teclado"
 msgid "View and Customize Shortcuts"
 msgstr "Ver y personalizar atajos"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.c:381
+#: panels/keyboard/cc-keyboard-shortcut-dialog.c:382
 msgid "Reset All Shortcuts?"
 msgstr "¿Restablecer todos los atajos?"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.c:384
+#: panels/keyboard/cc-keyboard-shortcut-dialog.c:385
 msgid ""
 "Resetting the shortcuts may affect your custom shortcuts. This cannot be "
 "undone."
@@ -2728,14 +2731,14 @@ msgstr ""
 "Restablecer todos los atajos puede afectar a sus atajos personalizados. Esto "
 "no se puede deshacer."
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.c:388
+#: panels/keyboard/cc-keyboard-shortcut-dialog.c:389
 #: panels/network/cc-network-panel.ui:26
 #: panels/printers/ppd-selection-dialog.ui:83
 #: panels/wwan/cc-wwan-device-page.c:188
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.c:389
+#: panels/keyboard/cc-keyboard-shortcut-dialog.c:390
 msgid "Reset All"
 msgstr "Restablecer todo"
 
@@ -3497,7 +3500,7 @@ msgstr "Desactiva la red inalámbrica, el Bluetooth y la red de banda ancha"
 
 #: panels/network/cc-wifi-panel.ui:96
 msgid "No Wi-Fi Adapter Found"
-msgstr "No se han encontrado ningún adaptador inalámbrico"
+msgstr "No se ha encontrado ningún adaptador inalámbrico"
 
 #: panels/network/cc-wifi-panel.ui:97
 msgid "Make sure you have a Wi-Fi adapter plugged and turned on"
@@ -4600,11 +4603,6 @@ msgstr "_No molestar"
 msgid "_Lock Screen Notifications"
 msgstr "_Notificaciones de la pantalla de bloqueo"
 
-#. List of apps.
-#: panels/notifications/cc-notifications-panel.ui:26
-msgid "Applications"
-msgstr "Aplicaciones"
-
 #: panels/notifications/gnome-notifications-panel.desktop.in:4
 msgid "Control which notifications are displayed and what they show"
 msgstr "Controlar qué notificaciones se muestran"
@@ -4811,7 +4809,7 @@ msgid "Gaming input device"
 msgstr "Mando de juegos"
 
 #. TRANSLATORS: secondary battery, misc
-#: panels/power/cc-battery-row.c:218 panels/power/cc-power-panel.c:257
+#: panels/power/cc-battery-row.c:218 panels/power/cc-power-panel.c:263
 #: panels/power/cc-power-panel.ui:58
 msgid "Battery"
 msgstr "Batería"
@@ -4830,51 +4828,59 @@ msgstr "Adicional"
 msgid "Batteries"
 msgstr "Baterías"
 
-#: panels/power/cc-power-panel.c:514
+#. Translators: UPS is an Uninterruptible Power Supply:
+#. * https://en.wikipedia.org/wiki/Uninterruptible_power_supply
+#: panels/power/cc-power-panel.c:260
+#, fuzzy
+#| msgid "USB"
+msgid "UPS"
+msgstr "USB"
+
+#: panels/power/cc-power-panel.c:520
 msgid "When _idle"
 msgstr "Cuando esté _inactivo"
 
-#: panels/power/cc-power-panel.c:674
+#: panels/power/cc-power-panel.c:680
 msgid "Suspend"
 msgstr "Suspender"
 
-#: panels/power/cc-power-panel.c:675
+#: panels/power/cc-power-panel.c:681
 msgid "Power Off"
 msgstr "Apagar"
 
-#: panels/power/cc-power-panel.c:676
+#: panels/power/cc-power-panel.c:682
 msgid "Hibernate"
 msgstr "Hibernar"
 
-#: panels/power/cc-power-panel.c:677
+#: panels/power/cc-power-panel.c:683
 msgid "Nothing"
 msgstr "Nada"
 
-#: panels/power/cc-power-panel.c:733
+#: panels/power/cc-power-panel.c:739
 msgid "When on battery power"
 msgstr "En modo batería"
 
-#: panels/power/cc-power-panel.c:735
+#: panels/power/cc-power-panel.c:741
 msgid "When plugged in"
 msgstr "Cuando está conectado a la red"
 
-#: panels/power/cc-power-panel.c:856
+#: panels/power/cc-power-panel.c:862
 msgctxt "Idle time"
 msgid "Never"
 msgstr "Nunca"
 
-#: panels/power/cc-power-panel.c:940
+#: panels/power/cc-power-panel.c:946
 msgid "Automatic suspend"
 msgstr "Suspender automáticamente"
 
-#: panels/power/cc-power-panel.c:1036
+#: panels/power/cc-power-panel.c:1042
 msgid ""
 "Performance mode temporarily disabled due to high operating temperature."
 msgstr ""
 "Modo rendimiento desactivado temporalmente debido a la alta temperatura de "
 "operación."
 
-#: panels/power/cc-power-panel.c:1038
+#: panels/power/cc-power-panel.c:1044
 msgid ""
 "Lap detected: performance mode temporarily unavailable. Move the device to a "
 "stable surface to restore."
@@ -4882,11 +4888,11 @@ msgstr ""
 "Portátil detectado: modo rendimiento desactivado temporalmente. Mueva el "
 "dispositivo a una superficie estable para restaurarlo."
 
-#: panels/power/cc-power-panel.c:1040
+#: panels/power/cc-power-panel.c:1046
 msgid "Performance mode temporarily disabled."
 msgstr "Modo de rendimiento desactivado temporalmente."
 
-#: panels/power/cc-power-panel.c:1082
+#: panels/power/cc-power-panel.c:1088
 msgid ""
 "Low battery: power saver enabled. Previous mode will be restored when "
 "battery is sufficiently charged."
@@ -4895,13 +4901,13 @@ msgstr ""
 "cuando la batería esté suficientemente cargada."
 
 #. translators: "%s" is an application name
-#: panels/power/cc-power-panel.c:1090
+#: panels/power/cc-power-panel.c:1096
 #, c-format
 msgid "Power Saver mode activated by “%s”."
 msgstr "Modo de ahorro de energía activado por «%s»."
 
 #. translators: "%s" is an application name
-#: panels/power/cc-power-panel.c:1094
+#: panels/power/cc-power-panel.c:1100
 #, c-format
 msgid "Performance mode activated by “%s”."
 msgstr "Modo de rendimiento activado por «%s»."
@@ -7446,12 +7452,14 @@ msgid "Forever"
 msgstr "Para siempre"
 
 #: panels/usage/cc-usage-panel.c:347
-msgid "Delete all the recent files?"
-msgstr "¿Quiere eliminar todos los archivos recientes?"
+#, fuzzy
+#| msgid "_Clear History"
+msgid "Clear File History?"
+msgstr "_Limpiar el histórico"
 
 #: panels/usage/cc-usage-panel.c:348
-msgid "All the recent files will be permanently deleted."
-msgstr "Todos los archivos recientes se eliminarán de manera permanente."
+msgid "After clearing, lists of recently used files will appear empty."
+msgstr ""
 
 #: panels/usage/cc-usage-panel.c:349
 msgid "_Clear History"
@@ -9320,7 +9328,7 @@ msgstr ""
 
 #. translators:
 #. * The number of sound outputs on a particular device
-#: subprojects/gvc/gvc-mixer-control.c:1907
+#: subprojects/gvc/gvc-mixer-control.c:1915
 #, c-format
 msgid "%u Output"
 msgid_plural "%u Outputs"
@@ -9329,16 +9337,25 @@ msgstr[1] "%u salidas"
 
 #. translators:
 #. * The number of sound inputs on a particular device
-#: subprojects/gvc/gvc-mixer-control.c:1917
+#: subprojects/gvc/gvc-mixer-control.c:1925
 #, c-format
 msgid "%u Input"
 msgid_plural "%u Inputs"
 msgstr[0] "%u entrada"
 msgstr[1] "%u entradas"
 
-#: subprojects/gvc/gvc-mixer-control.c:2867
+#: subprojects/gvc/gvc-mixer-control.c:2876
 msgid "System Sounds"
 msgstr "Sonidos del sistema"
+
+#~ msgid "Applications"
+#~ msgstr "Aplicaciones"
+
+#~ msgid "Delete all the recent files?"
+#~ msgstr "¿Quiere eliminar todos los archivos recientes?"
+
+#~ msgid "All the recent files will be permanently deleted."
+#~ msgstr "Todos los archivos recientes se eliminarán de manera permanente."
 
 #~ msgid "Camera is Turned Off"
 #~ msgstr "La cámara está apagada"
