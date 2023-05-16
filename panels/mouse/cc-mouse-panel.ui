@@ -14,6 +14,7 @@
         </property>
         <child type="start">
           <object class="GtkButton">
+            <property name="tooltip-text" translatable="yes">Back</property>
             <property name="visible" bind-source="CcMousePanel" bind-property="folded" bind-flags="default|sync-create" />
             <property name="icon-name">go-previous-symbolic</property>
             <property name="action-name">window.navigate</property>
@@ -28,6 +29,7 @@
             <property name="use_underline">True</property>
             <property name="valign">center</property>
             <property name="label" translatable="yes">Test _Settings</property>
+            <property name="tooltip_text" translatable="yes">Test Mouse and Touchpad Settings</property>
             <signal name="clicked" handler="test_button_clicked_cb" object="CcMousePanel" swapped="yes"/>
             <style>
               <class name="text-button"/>
