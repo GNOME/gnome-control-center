@@ -26,6 +26,7 @@
 
 #include "cc-illustrated-row.h"
 #include "cc-split-row.h"
+#include "cc-list-row-info-button.h"
 
 #include "cc-mouse-caps-helper.h"
 #include "cc-mouse-panel.h"
@@ -425,6 +426,7 @@ cc_mouse_panel_class_init (CcMousePanelClass *klass)
 
   g_type_ensure (CC_TYPE_ILLUSTRATED_ROW);
   g_type_ensure (CC_TYPE_SPLIT_ROW);
+  g_type_ensure (CC_TYPE_LIST_ROW_INFO_BUTTON);
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/mouse/cc-mouse-panel.ui");
 
