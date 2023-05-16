@@ -62,6 +62,14 @@ enum {
 static GParamSpec *properties[N_PROPS];
 
 static void
+update_checked_state (CcListRow *self)
+{
+  gtk_accessible_update_state (GTK_ACCESSIBLE (self),
+                               GTK_ACCESSIBLE_STATE_CHECKED, self->switch_active,
+                               -1);
+}
+
+static void
 cc_list_row_switch_active_cb (CcListRow *self)
 {
   gboolean switch_active;
@@ -75,6 +83,7 @@ cc_list_row_switch_active_cb (CcListRow *self)
     return;
 
   self->switch_active = switch_active;
+  update_checked_state (self);
   g_object_notify_by_pspec (G_OBJECT (self), properties[PROP_ACTIVE]);
 }
 
@@ -133,6 +142,7 @@ cc_list_row_set_property (GObject      *object,
       gtk_switch_set_active (self->enable_switch,
                              g_value_get_boolean (value));
       self->switch_active = g_value_get_boolean (value);
+      update_checked_state (self);
       g_signal_handlers_unblock_by_func (self->enable_switch,
                                          cc_list_row_switch_active_cb, self);
       break;
@@ -228,6 +238,8 @@ cc_list_row_set_show_switch (CcListRow *self,
 
   adw_action_row_set_activatable_widget (ADW_ACTION_ROW (self),
                                          self->show_switch ? GTK_WIDGET (self->enable_switch) : NULL);
+
+  update_checked_state (self);
 }
 
 gboolean
