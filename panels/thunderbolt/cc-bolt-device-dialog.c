@@ -20,6 +20,7 @@
 #include <config.h>
 
 #include <glib/gi18n.h>
+#include "cc-list-row.h"
 
 #include "bolt-device.h"
 #include "bolt-error.h"
@@ -32,31 +33,22 @@
 
 struct _CcBoltDeviceDialog
 {
-  GtkDialog     parent;
+  AdwWindow     parent;
 
   BoltClient   *client;
   BoltDevice   *device;
   GCancellable *cancel;
 
-  /* main ui */
-  GtkHeaderBar *header_bar;
-
-  /* notifications */
-  GtkLabel    *notify_label;
-  GtkRevealer *notify_revealer;
+  AdwToastOverlay *toast_overlay;
 
   /* device details */
-  GtkLabel *name_label;
-  GtkLabel *status_label;
-  GtkLabel *uuid_label;
-
-  GtkLabel *time_title;
-  GtkLabel *time_label;
+  CcListRow *status_row;
+  CcListRow *uuid_row;
+  CcListRow *time_row;
 
   /* parents */
-  GtkExpander *parents_expander;
-  GtkLabel    *parents_label;
-  GtkListBox  *parents_devices;
+  AdwPreferencesGroup *parents_group;
+  GtkListBox *parents_devices;
 
   /* actions */
   GtkWidget  *button_box;
@@ -65,13 +57,10 @@ struct _CcBoltDeviceDialog
   GtkButton  *forget_button;
 };
 
-static void     on_notify_button_clicked_cb (GtkButton          *button,
-                                             CcBoltDeviceDialog *panel);
-
 static void     on_forget_button_clicked_cb (CcBoltDeviceDialog *dialog);
 static void     on_connect_button_clicked_cb (CcBoltDeviceDialog *dialog);
 
-G_DEFINE_TYPE (CcBoltDeviceDialog, cc_bolt_device_dialog, GTK_TYPE_DIALOG);
+G_DEFINE_TYPE (CcBoltDeviceDialog, cc_bolt_device_dialog, ADW_TYPE_WINDOW);
 
 #define RESOURCE_UI "/org/gnome/control-center/thunderbolt/cc-bolt-device-dialog.ui"
 
@@ -152,11 +141,10 @@ dialog_update_from_device (CcBoltDeviceDialog *dialog)
       label = generated;
     }
 
-  gtk_label_set_label (dialog->name_label, label);
   gtk_window_set_title (GTK_WINDOW (dialog), label);
 
   status_brief = status_to_string_for_ui (dev);
-  gtk_label_set_label (dialog->status_label, status_brief);
+  cc_list_row_set_secondary_label (dialog->status_row, status_brief);
   gtk_widget_set_visible (GTK_WIDGET (dialog->forget_button), stored);
 
   /* while we are having an ongoing operation we are setting the buttons
@@ -167,30 +155,30 @@ dialog_update_from_device (CcBoltDeviceDialog *dialog)
     gtk_widget_set_visible (GTK_WIDGET (dialog->connect_button),
                             status == BOLT_STATUS_CONNECTED);
 
-  gtk_label_set_label (dialog->uuid_label, uuid);
+  cc_list_row_set_secondary_label (dialog->uuid_row, uuid);
 
   if (bolt_status_is_authorized (status))
     {
       /* Translators: The time point the device was authorized. */
-      gtk_label_set_label (dialog->time_title, _("Authorized at:"));
+      adw_preferences_row_set_title (ADW_PREFERENCES_ROW (dialog->time_row), _("Authorized at"));
       timestamp = bolt_device_get_authtime (dev);
     }
   else if (bolt_status_is_connected (status))
     {
       /* Translators: The time point the device was connected. */
-      gtk_label_set_label (dialog->time_title, _("Connected at:"));
+      adw_preferences_row_set_title (ADW_PREFERENCES_ROW (dialog->time_row), _("Connected at"));
       timestamp = bolt_device_get_conntime (dev);
     }
   else
     {
       /* Translators: The time point the device was enrolled,
        * i.e. authorized and stored in the device database. */
-      gtk_label_set_label (dialog->time_title, _("Enrolled at:"));
+      adw_preferences_row_set_title (ADW_PREFERENCES_ROW (dialog->time_row), _("Enrolled at"));
       timestamp = bolt_device_get_storetime (dev);
     }
 
   timestr = bolt_epoch_format (timestamp, "%c");
-  gtk_label_set_label (dialog->time_label, timestr);
+  cc_list_row_set_secondary_label (dialog->time_row, timestr);
 
 }
 
@@ -232,8 +220,8 @@ dialog_operation_done (CcBoltDeviceDialog *dialog,
 
   if (error != NULL)
     {
-      gtk_label_set_label (dialog->notify_label, error->message);
-      gtk_revealer_set_reveal_child (dialog->notify_revealer, TRUE);
+      AdwToast *toast = adw_toast_new (error->message);
+      adw_toast_overlay_add_toast (dialog->toast_overlay, toast);
 
       /* set the *other* button to sensitive */
       gtk_widget_set_sensitive (cb, cb != sender);
@@ -349,14 +337,6 @@ on_forget_button_clicked_cb (CcBoltDeviceDialog *dialog)
 }
 
 static void
-on_notify_button_clicked_cb (GtkButton          *button,
-                             CcBoltDeviceDialog *dialog)
-{
-  gtk_revealer_set_reveal_child (dialog->notify_revealer, FALSE);
-}
-
-
-static void
 cc_bolt_device_dialog_finalize (GObject *object)
 {
   CcBoltDeviceDialog *dialog = CC_BOLT_DEVICE_DIALOG (object);
@@ -378,28 +358,22 @@ cc_bolt_device_dialog_class_init (CcBoltDeviceDialogClass *klass)
   object_class->finalize = cc_bolt_device_dialog_finalize;
 
   gtk_widget_class_set_template_from_resource (widget_class, RESOURCE_UI);
-  gtk_widget_class_bind_template_child (widget_class, CcBoltDeviceDialog, header_bar);
 
-  gtk_widget_class_bind_template_child (widget_class, CcBoltDeviceDialog, notify_label);
-  gtk_widget_class_bind_template_child (widget_class, CcBoltDeviceDialog, notify_revealer);
+  gtk_widget_class_bind_template_child (widget_class, CcBoltDeviceDialog, toast_overlay);
 
-  gtk_widget_class_bind_template_child (widget_class, CcBoltDeviceDialog, name_label);
-  gtk_widget_class_bind_template_child (widget_class, CcBoltDeviceDialog, status_label);
+  gtk_widget_class_bind_template_child (widget_class, CcBoltDeviceDialog, status_row);
 
-  gtk_widget_class_bind_template_child (widget_class, CcBoltDeviceDialog, uuid_label);
-  gtk_widget_class_bind_template_child (widget_class, CcBoltDeviceDialog, time_title);
-  gtk_widget_class_bind_template_child (widget_class, CcBoltDeviceDialog, time_label);
+  gtk_widget_class_bind_template_child (widget_class, CcBoltDeviceDialog, uuid_row);
+  gtk_widget_class_bind_template_child (widget_class, CcBoltDeviceDialog, time_row);
 
-  gtk_widget_class_bind_template_child (widget_class, CcBoltDeviceDialog, parents_expander);
-  gtk_widget_class_bind_template_child (widget_class, CcBoltDeviceDialog, parents_label);
   gtk_widget_class_bind_template_child (widget_class, CcBoltDeviceDialog, parents_devices);
+  gtk_widget_class_bind_template_child (widget_class, CcBoltDeviceDialog, parents_group);
 
   gtk_widget_class_bind_template_child (widget_class, CcBoltDeviceDialog, button_box);
   gtk_widget_class_bind_template_child (widget_class, CcBoltDeviceDialog, spinner);
   gtk_widget_class_bind_template_child (widget_class, CcBoltDeviceDialog, connect_button);
   gtk_widget_class_bind_template_child (widget_class, CcBoltDeviceDialog, forget_button);
 
-  gtk_widget_class_bind_template_callback (widget_class, on_notify_button_clicked_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_connect_button_clicked_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_forget_button_clicked_cb);
 }
@@ -418,7 +392,6 @@ cc_bolt_device_dialog_new (void)
   CcBoltDeviceDialog *dialog;
 
   dialog = g_object_new (CC_TYPE_BOLT_DEVICE_DIALOG,
-                         "use-header-bar", TRUE,
                          NULL);
   return dialog;
 }
@@ -458,7 +431,7 @@ cc_bolt_device_dialog_set_device (CcBoltDeviceDialog *dialog,
       while ((child = gtk_widget_get_first_child (GTK_WIDGET (dialog->parents_devices))) != NULL)
         gtk_list_box_remove (dialog->parents_devices, child);
 
-      gtk_widget_set_visible (GTK_WIDGET (dialog->parents_expander), FALSE);
+      gtk_widget_set_visible (GTK_WIDGET (dialog->parents_group), FALSE);
     }
 
   if (device == NULL)
@@ -486,8 +459,8 @@ cc_bolt_device_dialog_set_device (CcBoltDeviceDialog *dialog,
 				   "Depends on %u other devices",
 				   parents->len), parents->len);
 
-  gtk_label_set_label (dialog->parents_label, msg);
-  gtk_widget_set_visible (GTK_WIDGET (dialog->parents_expander), TRUE);
+  adw_preferences_group_set_title (dialog->parents_group, msg);
+  gtk_widget_set_visible (GTK_WIDGET (dialog->parents_group), TRUE);
 
   for (i = 0; i < parents->len; i++)
     {
