@@ -147,7 +147,7 @@ is_valid_username_child_watch_cb (GPid pid,
                                 valid = TRUE;
                                 break;
                         case E_BAD_ARG:
-                                tip = _("The username should usually only consist of lower case letters from a-z, digits and the following characters: - _");
+                                tip = _("Usernames can only include lower case letters, numbers, hyphens and underscores.");
                                 valid = FALSE;
                                 break;
                         case E_SUCCESS:

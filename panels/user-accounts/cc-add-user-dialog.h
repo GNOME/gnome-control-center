@@ -21,12 +21,12 @@
 #pragma once
 
 #include <act/act.h>
-#include <gtk/gtk.h>
+#include <adwaita.h>
 
 G_BEGIN_DECLS
 
 #define CC_TYPE_ADD_USER_DIALOG (cc_add_user_dialog_get_type ())
-G_DECLARE_FINAL_TYPE (CcAddUserDialog, cc_add_user_dialog, CC, ADD_USER_DIALOG, GtkDialog)
+G_DECLARE_FINAL_TYPE (CcAddUserDialog, cc_add_user_dialog, CC, ADD_USER_DIALOG, AdwWindow)
 
 CcAddUserDialog *cc_add_user_dialog_new      (GPermission         *permission);
 ActUser         *cc_add_user_dialog_get_user (CcAddUserDialog     *dialog);
