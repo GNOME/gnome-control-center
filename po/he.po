@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center.HEAD.he\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2023-05-15 12:45+0000\n"
-"PO-Revision-Date: 2023-05-15 16:25+0300\n"
+"POT-Creation-Date: 2023-05-17 09:43+0000\n"
+"PO-Revision-Date: 2023-05-21 07:55+0300\n"
 "Last-Translator: Yosef Or Boczko <yoseforb@gmail.com>\n"
 "Language-Team: Hebrew <yoseforb@gmail.com>\n"
 "Language: he\n"
@@ -171,7 +171,7 @@ msgstr "קבלת חיפושי מערכת ושליחת התוצאות"
 #: panels/keyboard/cc-xkb-modifier-dialog.c:344
 #: panels/keyboard/keyboard-shortcuts.c:367
 #: panels/user-accounts/cc-user-panel.c:789
-#: panels/user-accounts/cc-user-panel.c:918
+#: panels/user-accounts/cc-user-panel.c:913
 #: panels/wwan/cc-wwan-device-page.c:477
 #: subprojects/gvc/gvc-mixer-control.c:1908
 msgid "Disabled"
@@ -372,8 +372,8 @@ msgstr "בחירת תמונה"
 #: panels/user-accounts/cc-avatar-chooser.c:166
 #: panels/user-accounts/cc-fingerprint-dialog.ui:32
 #: panels/user-accounts/cc-password-dialog.ui:20
-#: panels/user-accounts/cc-user-panel.c:609
-#: panels/user-accounts/cc-user-panel.c:627
+#: panels/user-accounts/cc-user-panel.c:610
+#: panels/user-accounts/cc-user-panel.c:628
 #: panels/user-accounts/data/join-dialog.ui:17
 #: panels/wwan/cc-wwan-mode-dialog.ui:32
 #: panels/wwan/cc-wwan-network-dialog.ui:108
@@ -1159,6 +1159,10 @@ msgstr "לא נמצאו שפות"
 msgid "More…"
 msgstr "עוד…"
 
+#: panels/common/cc-list-row-info-button.ui:11
+msgid "More information"
+msgstr "מידע נוסף"
+
 #: panels/common/cc-permission-infobar.c:194
 msgid "Unlock to Change Settings"
 msgstr "יש לשחרר לשינוי הגדרות"
@@ -1626,7 +1630,7 @@ msgstr "‏%.2lf הרץ"
 #: panels/display/cc-display-settings.ui:23
 #: panels/firmware-security/cc-firmware-security-utils.c:45
 #: panels/user-accounts/cc-user-panel.c:787
-#: panels/user-accounts/cc-user-panel.c:915
+#: panels/user-accounts/cc-user-panel.c:910
 #: panels/wwan/cc-wwan-device-page.c:475
 msgid "Enabled"
 msgstr "פעיל"
@@ -1843,7 +1847,7 @@ msgstr ""
 
 #. TRANSLATORS: in reference to firmware protection: 0/4 stars
 #: panels/firmware-security/cc-firmware-security-dialog.c:113
-#: panels/firmware-security/cc-firmware-security-panel.c:544
+#: panels/firmware-security/cc-firmware-security-panel.c:548
 msgid "Checks Failed"
 msgstr "בדיקות נכשלו"
 
@@ -1867,7 +1871,7 @@ msgstr ""
 
 #. TRANSLATORS: in reference to firmware protection: 1/4 stars
 #: panels/firmware-security/cc-firmware-security-dialog.c:127
-#: panels/firmware-security/cc-firmware-security-panel.c:551
+#: panels/firmware-security/cc-firmware-security-panel.c:555
 msgid "Checks Passed"
 msgstr "בדיקה עברה"
 
@@ -1883,7 +1887,7 @@ msgstr ""
 
 #. TRANSLATORS: in reference to firmware protection: 2~4 stars
 #: panels/firmware-security/cc-firmware-security-dialog.c:141
-#: panels/firmware-security/cc-firmware-security-panel.c:560
+#: panels/firmware-security/cc-firmware-security-panel.c:564
 msgid "Protected"
 msgstr "מוגן"
 
@@ -1899,7 +1903,7 @@ msgstr ""
 
 #. TRANSLATORS: in reference to firmware protection: ??? stars
 #: panels/firmware-security/cc-firmware-security-dialog.c:152
-#: panels/firmware-security/cc-firmware-security-panel.c:567
+#: panels/firmware-security/cc-firmware-security-panel.c:571
 msgid "Checks Unavailable"
 msgstr "בדיקות לא זמינות"
 
@@ -2115,19 +2119,19 @@ msgstr "%1$s"
 msgid "(%1$s → %2$s)"
 msgstr "‏‏(%1$s ← %2$s)"
 
-#: panels/firmware-security/cc-firmware-security-panel.c:545
+#: panels/firmware-security/cc-firmware-security-panel.c:549
 msgid "Hardware does not pass checks."
 msgstr "החָמְרה לא עברה בדיקות."
 
-#: panels/firmware-security/cc-firmware-security-panel.c:552
+#: panels/firmware-security/cc-firmware-security-panel.c:556
 msgid "Hardware meets basic security requirements."
 msgstr "החָמְרה עומדת בדרישות האבטחה הבסיסיות."
 
-#: panels/firmware-security/cc-firmware-security-panel.c:561
+#: panels/firmware-security/cc-firmware-security-panel.c:565
 msgid "Hardware has a good level of protection."
 msgstr "לחָמְרה רמת אבטחה טובה."
 
-#: panels/firmware-security/cc-firmware-security-panel.c:568
+#: panels/firmware-security/cc-firmware-security-panel.c:572
 msgid "Security levels are not available for this device."
 msgstr "רמות אבטחה אינן זמינות עבור התקן זה."
 
@@ -2966,19 +2970,19 @@ msgid "Right"
 msgstr "ימין"
 
 #: panels/mouse/cc-mouse-panel.ui:93 panels/mouse/cc-mouse-panel.ui:98
-#: panels/mouse/cc-mouse-panel.ui:194
+#: panels/mouse/cc-mouse-panel.ui:174
 msgid "Pointer Speed"
 msgstr "מהירות הסמן"
 
 # msgctxt "keyboard, speed"
-#: panels/mouse/cc-mouse-panel.ui:101 panels/mouse/cc-mouse-panel.ui:203
+#: panels/mouse/cc-mouse-panel.ui:101 panels/mouse/cc-mouse-panel.ui:183
 #: panels/universal-access/cc-ua-typing-page.ui:53
 #: panels/universal-access/cc-ua-typing-page.ui:111
 msgid "Slow"
 msgstr "אטי"
 
 # msgctxt "keyboard, speed"
-#: panels/mouse/cc-mouse-panel.ui:103 panels/mouse/cc-mouse-panel.ui:205
+#: panels/mouse/cc-mouse-panel.ui:103 panels/mouse/cc-mouse-panel.ui:185
 #: panels/universal-access/cc-ua-typing-page.ui:50
 #: panels/universal-access/cc-ua-typing-page.ui:108
 msgid "Fast"
@@ -2992,7 +2996,7 @@ msgstr "סיוע סמן"
 msgid "Recommended for most users and applications"
 msgstr "מומלץ לרוב המשתמשים והיישומים"
 
-#: panels/mouse/cc-mouse-panel.ui:140
+#: panels/mouse/cc-mouse-panel.ui:125
 msgid ""
 "Turning mouse acceleration off can allow faster and more precise movements, "
 "but can also make the mouse more difficult to use."
@@ -3000,67 +3004,67 @@ msgstr ""
 "כיבוי סיוע סמן יכול לאפשר תזוזות מהירות ומדויקות יותר אך יכול גם להקשות על "
 "השימוש בעכבר."
 
-#: panels/mouse/cc-mouse-panel.ui:157 panels/mouse/cc-mouse-panel.ui:258
+#: panels/mouse/cc-mouse-panel.ui:137 panels/mouse/cc-mouse-panel.ui:238
 msgid "Scroll Direction"
 msgstr "כיוון הגלילה"
 
-#: panels/mouse/cc-mouse-panel.ui:158 panels/mouse/cc-mouse-panel.ui:259
+#: panels/mouse/cc-mouse-panel.ui:138 panels/mouse/cc-mouse-panel.ui:239
 msgid "Traditional"
 msgstr "מסורתי"
 
-#: panels/mouse/cc-mouse-panel.ui:159 panels/mouse/cc-mouse-panel.ui:260
+#: panels/mouse/cc-mouse-panel.ui:139 panels/mouse/cc-mouse-panel.ui:240
 msgid "Scrolling moves the view"
 msgstr "גלילה מזיזה את התצוגה"
 
-#: panels/mouse/cc-mouse-panel.ui:160 panels/mouse/cc-mouse-panel.ui:261
+#: panels/mouse/cc-mouse-panel.ui:140 panels/mouse/cc-mouse-panel.ui:241
 msgid "Natural"
 msgstr "טבעי"
 
-#: panels/mouse/cc-mouse-panel.ui:161 panels/mouse/cc-mouse-panel.ui:263
+#: panels/mouse/cc-mouse-panel.ui:141 panels/mouse/cc-mouse-panel.ui:243
 msgid "Scrolling moves the content"
 msgstr "גלילה מזיזה את התוכן"
 
-#: panels/mouse/cc-mouse-panel.ui:176 panels/mouse/cc-mouse-panel.ui:183
+#: panels/mouse/cc-mouse-panel.ui:156 panels/mouse/cc-mouse-panel.ui:163
 msgid "Touchpad"
 msgstr "משטח מגע"
 
-#: panels/mouse/cc-mouse-panel.ui:200
+#: panels/mouse/cc-mouse-panel.ui:180
 msgid "Pointer speed"
 msgstr "מהירות המ_צביע"
 
-#: panels/mouse/cc-mouse-panel.ui:223
+#: panels/mouse/cc-mouse-panel.ui:203
 msgid "Clicking"
 msgstr "נקישה"
 
-#: panels/mouse/cc-mouse-panel.ui:228
+#: panels/mouse/cc-mouse-panel.ui:208
 msgid "Tap to Click"
 msgstr "הקשה היא לחיצה"
 
-#: panels/mouse/cc-mouse-panel.ui:229
+#: panels/mouse/cc-mouse-panel.ui:209
 msgid "Quickly touch the touchpad to click"
 msgstr "נגיעה קלילה במשטח המגע מייצרת לחיצה"
 
-#: panels/mouse/cc-mouse-panel.ui:244
+#: panels/mouse/cc-mouse-panel.ui:224
 msgid "Scrolling"
 msgstr "גלילה"
 
-#: panels/mouse/cc-mouse-panel.ui:247
+#: panels/mouse/cc-mouse-panel.ui:227
 msgid "Scroll Method"
 msgstr "שיטת גלילה"
 
-#: panels/mouse/cc-mouse-panel.ui:248
+#: panels/mouse/cc-mouse-panel.ui:228
 msgid "Two Finger"
 msgstr "שתי אצבעות"
 
-#: panels/mouse/cc-mouse-panel.ui:249
+#: panels/mouse/cc-mouse-panel.ui:229
 msgid "Drag two fingers on the touchpad"
 msgstr "יש לגרור שתי אצבעות על משטח המגע"
 
-#: panels/mouse/cc-mouse-panel.ui:250
+#: panels/mouse/cc-mouse-panel.ui:230
 msgid "Edge"
 msgstr "קצה"
 
-#: panels/mouse/cc-mouse-panel.ui:251
+#: panels/mouse/cc-mouse-panel.ui:231
 msgid "Drag one finger on the edge"
 msgstr "גרירה של אצבע אחת על הקצה"
 
@@ -5842,7 +5846,7 @@ msgid "Your Account"
 msgstr "החשבון שלך"
 
 #: panels/region/cc-region-panel.ui:33 panels/region/cc-region-panel.ui:60
-#: panels/user-accounts/cc-user-panel.ui:298
+#: panels/user-accounts/cc-user-panel.ui:248
 msgid "_Language"
 msgstr "_שפה"
 
@@ -6374,7 +6378,7 @@ msgid "_Require Password"
 msgstr "ד_רישת ססמה"
 
 #: panels/sharing/cc-sharing-panel.ui:125
-#: panels/user-accounts/cc-user-panel.ui:182
+#: panels/user-accounts/cc-user-panel.ui:150
 msgid "_Password"
 msgstr "_ססמה"
 
@@ -7579,13 +7583,11 @@ msgid "Administrator"
 msgstr "מנהל"
 
 #: panels/user-accounts/cc-add-user-dialog.ui:141
-#: panels/user-accounts/cc-user-panel.ui:235
-#: panels/user-accounts/cc-user-panel.ui:242
 msgid "Information"
 msgstr "מידע"
 
 #: panels/user-accounts/cc-add-user-dialog.ui:155
-#: panels/user-accounts/cc-user-panel.ui:256
+#: panels/user-accounts/cc-user-panel.ui:210
 msgid ""
 "Administrators have extra abilities, including adding and removing users, "
 "changing login settings, and removing software. Parental controls cannot be "
@@ -7914,41 +7916,41 @@ msgstr "הססמה שגויה, נא לנסות שוב"
 msgid "Couldn’t connect to the %s domain: %s"
 msgstr "לא ניתן להתחבר אל התחום %s:‏ %s"
 
-#: panels/user-accounts/cc-user-panel.c:257
+#: panels/user-accounts/cc-user-panel.c:258
 msgid "Add User…"
 msgstr "הוספת משתמש…"
 
-#: panels/user-accounts/cc-user-panel.c:371
+#: panels/user-accounts/cc-user-panel.c:372
 msgid "Failed to delete user"
 msgstr "מחיקת משתמש נכשלה"
 
-#: panels/user-accounts/cc-user-panel.c:428
-#: panels/user-accounts/cc-user-panel.c:483
-#: panels/user-accounts/cc-user-panel.c:529
+#: panels/user-accounts/cc-user-panel.c:429
+#: panels/user-accounts/cc-user-panel.c:484
+#: panels/user-accounts/cc-user-panel.c:530
 msgid "Failed to revoke remotely managed user"
 msgstr "ביטול המשתמש המנוהל מרחוק נכשל"
 
-#: panels/user-accounts/cc-user-panel.c:578
+#: panels/user-accounts/cc-user-panel.c:579
 msgid "You cannot delete your own account."
 msgstr "מחיקת החשבון שלך על ידיך אינה אפשרית."
 
-#: panels/user-accounts/cc-user-panel.c:587
+#: panels/user-accounts/cc-user-panel.c:588
 #, c-format
 msgid "%s is still logged in"
 msgstr "%s עדיין במערכת"
 
-#: panels/user-accounts/cc-user-panel.c:591
+#: panels/user-accounts/cc-user-panel.c:592
 msgid ""
 "Deleting a user while they are logged in can leave the system in an "
 "inconsistent state."
 msgstr "מחיקת משתמש כשהוא מחובר עלולה להשאיר את המערכת במצב בלתי יציב."
 
-#: panels/user-accounts/cc-user-panel.c:600
+#: panels/user-accounts/cc-user-panel.c:601
 #, c-format
 msgid "Do you want to keep %s’s files?"
 msgstr "לשמור על הקבצים של %s?"
 
-#: panels/user-accounts/cc-user-panel.c:604
+#: panels/user-accounts/cc-user-panel.c:605
 msgid ""
 "It is possible to keep the home directory, mail spool and temporary files "
 "around when deleting a user account."
@@ -7956,56 +7958,56 @@ msgstr ""
 "ניתן לשמור על תיקיית הבית, מאגר הדואר והקבצים הזמניים בהישג ידך לאחר מחיקת "
 "משתמש."
 
-#: panels/user-accounts/cc-user-panel.c:607
+#: panels/user-accounts/cc-user-panel.c:608
 msgid "_Delete Files"
 msgstr "_מחיקת הקבצים"
 
-#: panels/user-accounts/cc-user-panel.c:608
+#: panels/user-accounts/cc-user-panel.c:609
 msgid "_Keep Files"
 msgstr "_שמירת הקבצים"
 
-#: panels/user-accounts/cc-user-panel.c:622
+#: panels/user-accounts/cc-user-panel.c:623
 #, c-format
 msgid "Are you sure you want to revoke remotely managed %s’s account?"
 msgstr "לשלול את החשבון של %s שמנוהל מרחוק?"
 
-#: panels/user-accounts/cc-user-panel.c:626
+#: panels/user-accounts/cc-user-panel.c:627
 msgid "_Delete"
 msgstr "מ_חיקה"
 
-#: panels/user-accounts/cc-user-panel.c:676
+#: panels/user-accounts/cc-user-panel.c:677
 msgctxt "Password mode"
 msgid "Account disabled"
 msgstr "חשבון מושבת"
 
-#: panels/user-accounts/cc-user-panel.c:684
+#: panels/user-accounts/cc-user-panel.c:685
 msgctxt "Password mode"
 msgid "To be set at next login"
 msgstr "להגדרה בהתחברות הבאה"
 
-#: panels/user-accounts/cc-user-panel.c:687
+#: panels/user-accounts/cc-user-panel.c:688
 msgctxt "Password mode"
 msgid "None"
 msgstr "אין"
 
-#: panels/user-accounts/cc-user-panel.c:1183
+#: panels/user-accounts/cc-user-panel.c:1161
 msgid "Failed to contact the accounts service"
 msgstr "לא ניתן ליצור קשר עם שירות החשבונות"
 
-#: panels/user-accounts/cc-user-panel.c:1185
+#: panels/user-accounts/cc-user-panel.c:1163
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "נא לוודא ששירות החשבונות (AccountService) מותקן ומופעל."
 
-#: panels/user-accounts/cc-user-panel.c:1207
+#: panels/user-accounts/cc-user-panel.c:1185
 msgid "This panel must be unlocked to change this setting"
 msgstr "יש הכרח לשחרר לוח זה על מנת לשנות הגדרה זו"
 
-#: panels/user-accounts/cc-user-panel.c:1274
+#: panels/user-accounts/cc-user-panel.c:1252
 msgid "Delete the selected user account"
 msgstr "מחיקת חשבון המשתמש הנבחר"
 
-#: panels/user-accounts/cc-user-panel.c:1278
-#: panels/user-accounts/cc-user-panel.c:1415
+#: panels/user-accounts/cc-user-panel.c:1256
+#: panels/user-accounts/cc-user-panel.c:1393
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -8013,7 +8015,7 @@ msgstr ""
 "כדי למחוק את המשתמש הנבחר\n"
 "ראשית יש ללחוץ על הסמל *"
 
-#: panels/user-accounts/cc-user-panel.c:1461
+#: panels/user-accounts/cc-user-panel.c:1439
 msgid "Unlock to add users and change settings"
 msgstr "יש לשחרר כדי להוסיף משתמשים ולשנות הגדרות"
 
@@ -8039,50 +8041,50 @@ msgstr "סגירה"
 msgid "Edit avatar"
 msgstr "עריכת תמונה"
 
-#: panels/user-accounts/cc-user-panel.ui:152
-msgid "Full name"
-msgstr "שם מלא"
-
-#: panels/user-accounts/cc-user-panel.ui:171
-#: panels/wwan/cc-wwan-apn-dialog.c:293
-msgid "Edit"
-msgstr "עריכה"
-
 #. FIXME
-#: panels/user-accounts/cc-user-panel.ui:202
+#: panels/user-accounts/cc-user-panel.ui:170
 msgid "_Fingerprint Login"
 msgstr "כניסה באמצעות _טביעת אצבע"
 
-#: panels/user-accounts/cc-user-panel.ui:211
+#: panels/user-accounts/cc-user-panel.ui:179
 msgid "A_utomatic Login"
 msgstr "כניסה _אוטומטית"
 
-#: panels/user-accounts/cc-user-panel.ui:229
+#: panels/user-accounts/cc-user-panel.ui:185
+msgid ""
+"Automatic login opens the user account when the device starts, without "
+"requiring authentication. Authentication is still required at other times, "
+"such as when unlocking the screen."
+msgstr ""
+"התחברות אוטומטית פותחת את חשבון המשתמש עם עליית ההתקן, ללא כל בקשה לאימות. "
+"אימות עדיין יידרש בהזדמנויות אחרות, כגון בעת שחרור מסך הנעילה."
+
+#: panels/user-accounts/cc-user-panel.ui:203
 msgid "_Administrator"
 msgstr "_מנהל"
 
-#: panels/user-accounts/cc-user-panel.ui:275
+#: panels/user-accounts/cc-user-panel.ui:225
 msgid "_Parental Controls"
 msgstr "_בקרת הורים"
 
-#: panels/user-accounts/cc-user-panel.ui:276
+#: panels/user-accounts/cc-user-panel.ui:226
 msgid "Open the Parental Controls app."
 msgstr "פתיחת יישום בקרת הורים."
 
-#: panels/user-accounts/cc-user-panel.ui:313
+#: panels/user-accounts/cc-user-panel.ui:263
 msgid "Remove User…"
 msgstr "הסרת משתמש…"
 
-#: panels/user-accounts/cc-user-panel.ui:325
+#: panels/user-accounts/cc-user-panel.ui:275
 msgid "Other Users"
 msgstr "משתמשים אחרים"
 
 #. Translators: This is the empty state page label which states that there are no users to show in the panel.
-#: panels/user-accounts/cc-user-panel.ui:357
+#: panels/user-accounts/cc-user-panel.ui:307
 msgid "No Users Found"
 msgstr "לא נמצאו משתמשים"
 
-#: panels/user-accounts/cc-user-panel.ui:366
+#: panels/user-accounts/cc-user-panel.ui:316
 msgid "Unlock to add a user account."
 msgstr "שחרור על מנת להוסיף משתמש."
 
@@ -8513,6 +8515,10 @@ msgstr "לוח;Wacom;עט מגע;מחק;מוחק;עכבר;משטח מגע;לוח
 #: panels/wacom/gsd-wacom-key-shortcut-button.c:190
 msgid "New shortcut…"
 msgstr "קיצור דרך חדש…"
+
+#: panels/wwan/cc-wwan-apn-dialog.c:293
+msgid "Edit"
+msgstr "עריכה"
 
 #: panels/wwan/cc-wwan-apn-dialog.ui:8
 msgid "Access Points"
@@ -9230,6 +9236,9 @@ msgstr[3] "‏‫%u ערוצי קלט"
 #: subprojects/gvc/gvc-mixer-control.c:2876
 msgid "System Sounds"
 msgstr "צלילי מערכת"
+
+#~ msgid "Full name"
+#~ msgstr "שם מלא"
 
 #~ msgid "Learn more about color management"
 #~ msgstr "מידע נוסף בנוגע לניהול צבעים"
