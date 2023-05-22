@@ -287,6 +287,8 @@ apply_clicked_cb (NetConnectionEditor *self)
                                                            self->cancellable,
                                                            updated_connection_cb, self);
         }
+
+        gtk_window_destroy (GTK_WINDOW (self));
 }
 
 static void
