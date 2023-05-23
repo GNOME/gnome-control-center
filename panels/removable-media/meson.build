@@ -14,15 +14,10 @@ sources = files(
   'cc-removable-media-panel.c'
 )
 
-resource_data = files(
-  'cc-removable-media-panel.ui'
-)
-
 sources += gnome.compile_resources(
   'cc-' + cappletname + '-resources',
   cappletname + '.gresource.xml',
   c_name: 'cc_' + cappletname.underscorify (),
-  dependencies: resource_data,
   export: true
 )
 

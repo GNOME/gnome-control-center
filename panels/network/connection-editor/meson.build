@@ -17,27 +17,12 @@ sources = files(
   'vpn-helpers.c'
 )
 
-resource_data = files(
-  '8021x-security-page.ui',
-  'connection-editor.ui',
-  'details-page.ui',
-  'ethernet-page.ui',
-  'ip4-page.ui',
-  'ip6-page.ui',
-  'security-page.ui',
-  'vpn-page.ui',
-  'wireguard-page.ui',
-  'wireguard-peer.ui',
-  'wifi-page.ui'
-)
-
 c_name = 'net-' + name
 
 sources += gnome.compile_resources(
   c_name + '-resources',
   name + '.gresource.xml',
   c_name: c_name.underscorify(),
-  dependencies: resource_data,
   export: true
 )
 

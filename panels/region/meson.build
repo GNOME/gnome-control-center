@@ -16,18 +16,10 @@ sources = files(
   'cc-format-preview.c',
 )
 
-resource_data = files(
-  'cc-format-chooser.ui',
-  'cc-format-preview.ui',
-  'cc-region-panel.ui',
-  'view-layout-symbolic.svg',
-)
-
 sources += gnome.compile_resources(
   'cc-' + cappletname + '-resources',
   cappletname + '.gresource.xml',
   c_name: 'cc_' + cappletname,
-  dependencies: resource_data,
   export: true
 )
 

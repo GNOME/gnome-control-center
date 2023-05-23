@@ -20,15 +20,10 @@ sources = files(
   'info-cleanup.c'
 )
 
-resource_data = files(
-  'cc-info-overview-panel.ui'
-)
-
 sources += gnome.compile_resources(
   'cc-' + cappletname + '-resources',
   cappletname + '.gresource.xml',
   c_name: 'cc_' + cappletname.underscorify (),
-  dependencies: resource_data,
   export: true
 )
 

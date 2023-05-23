@@ -92,25 +92,10 @@ common_sources = files(
   'user-utils.c',
 )
 
-resource_data = files(
-  'cc-add-user-dialog.ui',
-  'cc-avatar-chooser.ui',
-  'cc-password-dialog.ui',
-  'cc-user-panel.ui',
-  'cc-fingerprint-dialog.ui',
-  'data/icons/fingerprint-detection-complete-symbolic.svg',
-  'data/icons/fingerprint-detection-symbolic.svg',
-  'data/icons/fingerprint-detection-warning-symbolic.svg',
-  'data/join-dialog.ui',
-  'data/user-accounts-dialog.css',
-  'data/cc-fingerprint-dialog.css',
-)
-
 common_sources += gnome.compile_resources(
   'cc-' + cappletname + '-resources',
   cappletname + '.gresource.xml',
   c_name: 'cc_' + cappletname.underscorify(),
-  dependencies: resource_data,
   export: true
 )
 

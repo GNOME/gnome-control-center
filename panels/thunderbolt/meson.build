@@ -33,18 +33,11 @@ sources += gnome.mkenums_simple(
   'bolt-enum-types',
   sources: enum_headers)
 
-resource_data = files(
-  'cc-bolt-device-dialog.ui',
-  'cc-bolt-device-entry.ui',
-  'cc-bolt-panel.ui'
-)
-
 sources += gnome.compile_resources(
   'cc-' + cappletname + '-resources',
   cappletname + '.gresource.xml',
   source_dir: '.',
   c_name: 'cc_' + cappletname,
-  dependencies: resource_data,
   export: true
 )
 

@@ -57,17 +57,10 @@ common_sources = files(
 generated_sources = files()
 
 #Resources
-resource_data = files(
-  'cc-panel-list.ui',
-  'cc-window.ui',
-  'help-overlay.ui',
-)
-
 generated_sources += gnome.compile_resources(
-       'resources',
+  'resources',
   meson.project_name() + '.gresource.xml',
-     dependencies : resource_data,
-           export : true
+  export : true
 )
 
 common_sources += generated_sources

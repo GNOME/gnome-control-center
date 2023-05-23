@@ -42,18 +42,10 @@ common_sources += gnome.mkenums(
   vtail: '      { 0, NULL, NULL }\n    };\n    etype = g_@type@_register_static ("@EnumName@", values);\n  }\n  return etype;\n}\n'
 )
 
-resource_data = files(
-  'cc-background-chooser.ui',
-  'cc-background-panel.ui',
-  'cc-background-preview.ui',
-  'preview.css',
-)
-
 common_sources += gnome.compile_resources(
   'cc-@0@-resources'.format(cappletname),
   cappletname + '.gresource.xml',
   c_name: 'cc_' + cappletname,
-  dependencies: resource_data,
   export: true
 )
 

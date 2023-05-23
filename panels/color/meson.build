@@ -19,16 +19,10 @@ sources = files(
   'cc-color-profile.c'
 )
 
-resource_data = files(
-  'cc-color-calibrate.ui',
-  'cc-color-panel.ui',
-)
-
 sources += gnome.compile_resources(
   'cc-' + cappletname + '-resources',
   cappletname + '.gresource.xml',
   c_name: 'cc_' + cappletname,
-  dependencies: resource_data,
   export: true
 )
 

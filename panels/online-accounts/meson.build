@@ -20,18 +20,10 @@ sources = files(
   'cc-online-accounts-panel.c',
 )
 
-resource_data = files(
-  'cc-online-account-provider-row.ui',
-  'cc-online-account-row.ui',
-  'cc-online-accounts-panel.ui',
-  'online-accounts.css',
-)
-
 sources += gnome.compile_resources(
   'cc-' + cappletname + '-resources',
   cappletname + '.gresource.xml',
   c_name: 'cc_' + cappletname.underscorify(),
-  dependencies: resource_data,
   export: true
 )
 

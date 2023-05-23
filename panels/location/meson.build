@@ -12,13 +12,10 @@ i18n.merge_file(
 
 sources = files('cc-location-panel.c')
 
-resource_data = files('cc-location-panel.ui')
-
 sources += gnome.compile_resources(
   'cc-' + cappletname + '-resources',
   cappletname + '.gresource.xml',
   c_name: 'cc_' + cappletname,
-  dependencies: resource_data,
   export: true
 )
 

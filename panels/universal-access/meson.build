@@ -20,31 +20,10 @@ sources = files(
   'cc-ua-zoom-page.c',
 )
 
-resource_data = files(
-  'cc-ua-panel.ui',
-  'hearing-symbolic.svg',
-  'pointing-symbolic.svg',
-  'seeing-symbolic.svg',
-  'typing-symbolic.svg',
-  'zoom-symbolic.svg',
-  'left_ptr_24px.png',
-  'left_ptr_32px.png',
-  'left_ptr_48px.png',
-  'left_ptr_64px.png',
-  'left_ptr_96px.png',
-  'cc-cursor-size-dialog.ui',
-  'cc-ua-hearing-page.ui',
-  'cc-ua-mouse-page.ui',
-  'cc-ua-seeing-page.ui',
-  'cc-ua-typing-page.ui',
-  'cc-ua-zoom-page.ui',
-)
-
 sources += gnome.compile_resources(
   'cc-ua-resources',
   cappletname + '.gresource.xml',
   c_name: 'cc_' + cappletname.underscorify(),
-  dependencies: resource_data,
   export: true
 )
 

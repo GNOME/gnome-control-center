@@ -16,16 +16,10 @@ sources = files(
   'cc-search-panel-row.c'
 )
 
-resource_data = files(
-  'cc-search-locations-dialog.ui',
-  'cc-search-panel.ui',
-)
-
 sources += gnome.compile_resources(
   'cc-' + cappletname + '-resources',
   cappletname + '.gresource.xml',
   c_name: 'cc_' + cappletname,
-  dependencies: resource_data,
   export: true
 )
 

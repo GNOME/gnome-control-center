@@ -24,22 +24,11 @@ sources = files(
   'cc-wwan-apn-dialog.c',
 )
 
-resource_data = files(
-  'cc-wwan-panel.ui',
-  'cc-wwan-device-page.ui',
-  'cc-wwan-mode-dialog.ui',
-  'cc-wwan-network-dialog.ui',
-  'cc-wwan-details-dialog.ui',
-  'cc-wwan-sim-lock-dialog.ui',
-  'cc-wwan-apn-dialog.ui',
-)
-
 sources += gnome.compile_resources(
   'cc-' + cappletname + '-resources',
   cappletname + '.gresource.xml',
-        c_name : 'cc_' + cappletname,
-  dependencies : resource_data,
-        export : true
+  c_name : 'cc_' + cappletname,
+  export : true,
 )
 
 cflags += '-DGNOMELOCALEDIR="@0@"'.format(control_center_localedir)

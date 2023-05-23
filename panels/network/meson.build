@@ -47,25 +47,10 @@ sources = files(
   'ui-helpers.c'
 )
 
-resource_data = files(
-  'cc-network-panel.ui',
-  'cc-net-proxy-page.c',
-  'cc-qr-code-dialog.ui',
-  'cc-wifi-connection-row.ui',
-  'cc-wifi-panel.ui',
-  'cc-wifi-hotspot-dialog.ui',
-  'network-bluetooth.ui',
-  'network-ethernet.ui',
-  'network-mobile.ui',
-  'network-vpn.ui',
-  'network-wifi.ui',
-)
-
 sources += gnome.compile_resources(
   'cc-' + cappletname + '-resources',
   cappletname + '.gresource.xml',
   c_name: 'cc_' + cappletname,
-  dependencies: resource_data,
   export: true
 )
 

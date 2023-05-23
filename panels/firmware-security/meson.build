@@ -16,16 +16,10 @@ sources = files('cc-firmware-security-utils.c',
                 'cc-firmware-security-help-dialog.c',
                 'cc-firmware-security-boot-dialog.c')
 
-resource_data = files('cc-firmware-security-panel.ui',
-                      'cc-firmware-security-dialog.ui',
-                      'cc-firmware-security-help-dialog.ui',
-                      'cc-firmware-security-boot-dialog.ui')
-
 sources += gnome.compile_resources(
   'cc-' + cappletname + '-resources',
   cappletname + '.gresource.xml',
   c_name: 'cc_' + cappletname.underscorify (),
-  dependencies: resource_data,
   export: true
 )
 

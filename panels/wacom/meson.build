@@ -15,7 +15,6 @@ wacom_gresource = gnome.compile_resources(
   cappletname + '.gresource.xml',
     source_dir : '.',
         c_name : 'cc_' + cappletname,
-  dependencies : resource_data,
         export : true
 )
 
@@ -41,24 +40,6 @@ common_sources = files(
   'cc-wacom-stylus-page.c',
   'cc-wacom-tool.c',
   'gsd-wacom-key-shortcut-button.c'
-)
-
-resource_data = files(
-  'calibrator/calibrator.ui',
-  'calibrator/calibrator.css',
-  'calibrator/target.svg',
-  'button-mapping.ui',
-  'wacom-stylus-3btn.svg',
-  'wacom-stylus-3btn-no-eraser.svg',
-  'wacom-stylus-airbrush.svg',
-  'wacom-stylus-art-pen.svg',
-  'wacom-stylus-classic.svg',
-  'wacom-stylus-inking.svg',
-  'wacom-stylus-no-eraser.svg',
-  'wacom-stylus.svg',
-  'wacom-tablet-cintiq.svg',
-  'wacom-tablet-pc.svg',
-  'wacom-tablet.svg'
 )
 
 common_sources += wacom_gresource

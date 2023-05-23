@@ -65,18 +65,10 @@ sources = files(
   'cc-input-source-xkb.c',
 )
 
-resource_data = files(
-  'enter-keyboard-shortcut.svg',
-  'cc-keyboard-panel.ui',
-  'cc-keyboard-shortcut-editor.ui',
-  'cc-input-chooser.ui',
-)
-
 sources += gnome.compile_resources(
   'cc-' + cappletname + '-resources',
   cappletname + '.gresource.xml',
   c_name: 'cc_' + cappletname,
-  dependencies: resource_data,
   export: true
 )
 

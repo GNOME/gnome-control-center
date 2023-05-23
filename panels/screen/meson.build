@@ -12,8 +12,6 @@ i18n.merge_file(
 
 sources = files('cc-screen-panel.c')
 
-resource_data = files('cc-screen-panel.ui')
-
 sources += gnome.mkenums_simple(
   'cc-screen-panel-enums',
   sources: ['cc-screen-panel.h'],
@@ -23,7 +21,6 @@ sources += gnome.compile_resources(
   'cc-' + cappletname + '-resources',
   cappletname + '.gresource.xml',
   c_name: 'cc_' + cappletname,
-  dependencies: resource_data,
   export: true
 )
 

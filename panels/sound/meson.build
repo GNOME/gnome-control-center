@@ -40,34 +40,10 @@ sources = files(
   'cc-volume-slider.c',
 )
 
-resource_data = files(
-  'icons/audio-speaker-center-back.svg',
-  'icons/audio-speaker-center.svg',
-  'icons/audio-speaker-left-back.svg',
-  'icons/audio-speaker-left-side.svg',
-  'icons/audio-speaker-left.svg',
-  'icons/audio-speaker-right-back.svg',
-  'icons/audio-speaker-right-side.svg',
-  'icons/audio-speaker-right.svg',
-  'cc-alert-chooser-window.ui',
-  'cc-balance-slider.ui',
-  'cc-device-combo-box.ui',
-  'cc-fade-slider.ui',
-  'cc-output-test-window.ui',
-  'cc-profile-combo-box.ui',
-  'cc-sound-panel.ui',
-  'cc-stream-row.ui',
-  'cc-subwoofer-slider.ui',
-  'cc-volume-levels-window.ui',
-  'cc-volume-slider.ui',
-  'output-test-wheel.css',
-)
-
 sources += gnome.compile_resources(
   'cc-' + cappletname + '-resources',
   cappletname + '.gresource.xml',
   c_name: 'cc_' + cappletname.underscorify (),
-  dependencies: resource_data,
   export: true
 )
 

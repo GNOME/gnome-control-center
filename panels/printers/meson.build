@@ -32,22 +32,10 @@ sources = files(
   'pp-utils.c'
 )
 
-resource_data = files(
-  'new-printer-dialog.ui',
-  'ppd-selection-dialog.ui',
-  'pp-details-dialog.ui',
-  'pp-job-row.ui',
-  'pp-jobs-dialog.ui',
-  'pp-options-dialog.ui',
-  'printer-entry.ui',
-  'printers.ui'
-)
-
 sources += gnome.compile_resources(
   'cc-' + cappletname + '-resources',
   cappletname + '.gresource.xml',
   c_name: 'cc_' + cappletname,
-  dependencies: resource_data,
   export: true
 )
 
