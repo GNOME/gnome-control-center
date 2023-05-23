@@ -14,8 +14,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2023-05-21 04:56+0000\n"
-"PO-Revision-Date: 2023-05-22 14:55+0200\n"
+"POT-Creation-Date: 2023-05-22 19:27+0000\n"
+"PO-Revision-Date: 2023-05-23 09:37+0200\n"
 "Last-Translator: Davide Ferracin <davide.ferracin@protonmail.com>\n"
 "Language-Team: Italiano <tp@lists.linux.it>\n"
 "Language: it\n"
@@ -1319,11 +1319,11 @@ msgctxt "hotspot"
 msgid "Hotspot"
 msgstr "Hotspot"
 
-#: panels/datetime/cc-datetime-panel.c:169
+#: panels/datetime/cc-datetime-panel.c:182
 msgid "24-hour"
 msgstr "24 ore"
 
-#: panels/datetime/cc-datetime-panel.c:171
+#: panels/datetime/cc-datetime-panel.c:184
 msgid "AM / PM"
 msgstr "am / pm"
 
@@ -1331,17 +1331,17 @@ msgstr "am / pm"
 # [DF] Qual è il motivo del cambio tra %l e %I? Non conosco il motivo,
 # ma nel dubbio non tocco la traduzione.
 #. Translators: This is the full date and time format used in 12-hour mode.
-#: panels/datetime/cc-datetime-panel.c:242
+#: panels/datetime/cc-datetime-panel.c:255
 msgid "%e %B %Y, %l:%M %p"
 msgstr "%e %B %Y, %I:%M %p"
 
 #. Translators: This is the full date and time format used in 24-hour mode.
-#: panels/datetime/cc-datetime-panel.c:247
+#: panels/datetime/cc-datetime-panel.c:260
 msgid "%e %B %Y, %R"
 msgstr "%e %B %Y, %R"
 
 #. Translators: "city, country"
-#: panels/datetime/cc-datetime-panel.c:400
+#: panels/datetime/cc-datetime-panel.c:413
 #, c-format
 msgctxt "timezone loc"
 msgid "%s, %s"
@@ -1349,7 +1349,7 @@ msgstr "%s, %s"
 
 #. Update the timezone on the listbow row
 #. Translators: "timezone (details)"
-#: panels/datetime/cc-datetime-panel.c:417
+#: panels/datetime/cc-datetime-panel.c:430
 #, c-format
 msgctxt "timezone desc"
 msgid "%s (%s)"
@@ -1400,51 +1400,71 @@ msgstr "Fus_o orario"
 msgid "Time _Format"
 msgstr "F_ormato ora"
 
+#: panels/datetime/cc-datetime-panel.ui:214
+msgid "Clock &amp; Calendar"
+msgstr "Orologio e calendario"
+
+#: panels/datetime/cc-datetime-panel.ui:217
+msgid "Week Day"
+msgstr "Giorno della settimana"
+
+#: panels/datetime/cc-datetime-panel.ui:229
+msgid "Date"
+msgstr "Data"
+
 #: panels/datetime/cc-datetime-panel.ui:241
+msgid "Seconds"
+msgstr "Secondi"
+
+#: panels/datetime/cc-datetime-panel.ui:253
+msgid "Week Numbers"
+msgstr "Numeri della settimana"
+
+#: panels/datetime/cc-datetime-panel.ui:294
 msgid "January"
 msgstr "Gennaio"
 
-#: panels/datetime/cc-datetime-panel.ui:242
+#: panels/datetime/cc-datetime-panel.ui:295
 msgid "February"
 msgstr "Febbraio"
 
-#: panels/datetime/cc-datetime-panel.ui:243
+#: panels/datetime/cc-datetime-panel.ui:296
 msgid "March"
 msgstr "Marzo"
 
-#: panels/datetime/cc-datetime-panel.ui:244
+#: panels/datetime/cc-datetime-panel.ui:297
 msgid "April"
 msgstr "Aprile"
 
-#: panels/datetime/cc-datetime-panel.ui:245
+#: panels/datetime/cc-datetime-panel.ui:298
 msgid "May"
 msgstr "Maggio"
 
-#: panels/datetime/cc-datetime-panel.ui:246
+#: panels/datetime/cc-datetime-panel.ui:299
 msgid "June"
 msgstr "Giugno"
 
-#: panels/datetime/cc-datetime-panel.ui:247
+#: panels/datetime/cc-datetime-panel.ui:300
 msgid "July"
 msgstr "Luglio"
 
-#: panels/datetime/cc-datetime-panel.ui:248
+#: panels/datetime/cc-datetime-panel.ui:301
 msgid "August"
 msgstr "Agosto"
 
-#: panels/datetime/cc-datetime-panel.ui:249
+#: panels/datetime/cc-datetime-panel.ui:302
 msgid "September"
 msgstr "Settembre"
 
-#: panels/datetime/cc-datetime-panel.ui:250
+#: panels/datetime/cc-datetime-panel.ui:303
 msgid "October"
 msgstr "Ottobre"
 
-#: panels/datetime/cc-datetime-panel.ui:251
+#: panels/datetime/cc-datetime-panel.ui:304
 msgid "November"
 msgstr "Novembre"
 
-#: panels/datetime/cc-datetime-panel.ui:252
+#: panels/datetime/cc-datetime-panel.ui:305
 msgid "December"
 msgstr "Dicembre"
 
@@ -6545,7 +6565,8 @@ msgstr "Autenticazione"
 
 #: panels/sharing/cc-sharing-panel.ui:338
 msgid "The user name and password are required to connect to this computer."
-msgstr "Nome utente e password sono richiesti per collegarsi a questo computer."
+msgstr ""
+"Nome utente e password sono richiesti per collegarsi a questo computer."
 
 #: panels/sharing/cc-sharing-panel.ui:342
 msgid "User Name"
@@ -7735,8 +7756,9 @@ msgid ""
 "applied to administrators."
 msgstr ""
 "Gli amministratori hanno dei privilegi in più, tra cui poter aggiungere e "
-"rimuovere utenti, modificare le impostazioni di accesso, e rimuovere software. "
-"I controlli parentali non possono essere applicati agli amministratori."
+"rimuovere utenti, modificare le impostazioni di accesso, e rimuovere "
+"software. I controlli parentali non possono essere applicati agli "
+"amministratori."
 
 #: panels/user-accounts/cc-add-user-dialog.ui:177
 msgid "User sets password on first login"
