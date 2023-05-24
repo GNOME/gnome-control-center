@@ -73,6 +73,11 @@
                     <property name="max_width_chars">25</property>
                     <signal name="activate" handler="search_entry_activate_cb" object="CcWindow" swapped="yes" />
                     <signal name="notify::text" handler="update_list_title" object="CcWindow" swapped="yes" />
+                    <child>
+                      <object class="GtkEventControllerKey">
+                        <signal name="key-pressed" handler="search_entry_key_pressed_cb" object="CcWindow" swapped="yes" />
+                      </object>
+                    </child>
                   </object>
                 </child>
               </object>

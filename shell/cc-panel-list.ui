@@ -77,6 +77,7 @@
             <property name="child">
               <object class="GtkListBox" id="search_listbox">
                 <signal name="row-activated" handler="search_row_activated_cb" object="CcPanelList" swapped="no" />
+                <signal name="keynav-failed" handler="search_list_keynav_failed_cb" swapped="yes"/>
                 <style>
                   <class name="navigation-sidebar" />
                 </style>

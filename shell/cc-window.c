@@ -781,6 +781,29 @@ cc_window_finalize (GObject *object)
   G_OBJECT_CLASS (cc_window_parent_class)->finalize (object);
 }
 
+static gboolean
+search_entry_key_pressed_cb (CcWindow              *self,
+                             guint                  keyval,
+                             guint                  keycode,
+                             GdkModifierType        state,
+                             GtkEventControllerKey *key_controller)
+{
+  GtkWidget *toplevel;
+
+  /* When pressing Arrow Down on the entry we move focus to match results list */
+  if (keyval == GDK_KEY_Down || keyval == GDK_KEY_KP_Down)
+    {
+      toplevel = GTK_WIDGET (gtk_widget_get_root (GTK_WIDGET (self)));
+
+      if (!toplevel)
+        return FALSE;
+
+      return gtk_widget_child_focus (toplevel, GTK_DIR_TAB_FORWARD);
+    }
+
+  return FALSE;
+}
+
 static void
 cc_window_class_init (CcWindowClass *klass)
 {
@@ -835,6 +858,7 @@ cc_window_class_init (CcWindowClass *klass)
   gtk_widget_class_bind_template_callback (widget_class, search_entry_activate_cb);
   gtk_widget_class_bind_template_callback (widget_class, show_panel_cb);
   gtk_widget_class_bind_template_callback (widget_class, update_list_title);
+  gtk_widget_class_bind_template_callback (widget_class, search_entry_key_pressed_cb);
 
   gtk_widget_class_add_binding (widget_class, GDK_KEY_Left, GDK_ALT_MASK, go_back_shortcut_cb, NULL);
   gtk_widget_class_add_binding (widget_class, GDK_KEY_f, GDK_CONTROL_MASK, search_shortcut_cb, NULL);
