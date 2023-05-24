@@ -39,6 +39,8 @@ cc_firmware_security_help_dialog_class_init (CcFirmwareSecurityHelpDialogClass *
 {
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
+  gtk_widget_class_add_binding_action (widget_class, GDK_KEY_Escape, 0, "window.close", NULL);
+
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/firmware-security/cc-firmware-security-help-dialog.ui");
 }
 

@@ -463,6 +463,8 @@ cc_format_chooser_class_init (CcFormatChooserClass *klass)
 
         g_type_ensure (CC_TYPE_FORMAT_PREVIEW);
 
+        gtk_widget_class_add_binding_action (widget_class, GDK_KEY_Escape, 0, "window.close", NULL);
+
         gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/region/cc-format-chooser.ui");
 
         gtk_widget_class_bind_template_child (widget_class, CcFormatChooser, title_bar);

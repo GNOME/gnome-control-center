@@ -518,6 +518,8 @@ cc_keyboard_shortcut_dialog_class_init (CcKeyboardShortcutDialogClass *klass)
   object_class->constructed = cc_keyboard_shortcut_dialog_constructed;
   object_class->finalize = cc_keyboard_shortcut_dialog_finalize;
 
+  gtk_widget_class_add_binding_action (widget_class, GDK_KEY_Escape, 0, "window.close", NULL);
+
   gtk_widget_class_set_template_from_resource (widget_class,
                                                "/org/gnome/control-center/"
                                                "keyboard/cc-keyboard-shortcut-dialog.ui");

@@ -224,6 +224,8 @@ cc_tz_dialog_class_init (CcTzDialogClass *klass)
                   0, NULL, NULL, NULL,
                   G_TYPE_NONE, 0);
 
+  gtk_widget_class_add_binding_action (widget_class, GDK_KEY_Escape, 0, "window.close", NULL);
+
   gtk_widget_class_set_template_from_resource (widget_class,
                                                "/org/gnome/control-center/"
                                                "datetime/cc-tz-dialog.ui");
