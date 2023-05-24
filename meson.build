@@ -246,9 +246,8 @@ config_h.set10('HAVE_FN_EXPLICIT_BZERO',
 # Snap support
 enable_snap = get_option('snap')
 if enable_snap
-  snapd_glib_deps = [
-    dependency('snapd-glib-2', version: '>= 1.62')
-  ]
+  json_glib_dep = dependency('json-glib-1.0')
+  libsoup_dep = dependency('libsoup-3.0')
 endif
 config_h.set('HAVE_SNAP', enable_snap,
              description: 'Define to 1 if Snap support is enabled')

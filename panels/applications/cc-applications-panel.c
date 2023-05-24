@@ -23,9 +23,6 @@
 
 #include <config.h>
 #include <glib/gi18n.h>
-#ifdef HAVE_SNAP
-#include <snapd-glib/snapd-glib.h>
-#endif
 #ifdef HAVE_MALCONTENT
 #include <libmalcontent/malcontent.h>
 #endif
@@ -38,10 +35,11 @@
 #include "cc-default-apps-page.h"
 #include "cc-removable-media-settings.h"
 #include "cc-applications-resources.h"
-#include "cc-util.h"
 #ifdef HAVE_SNAP
+#include "cc-snapd-client.h"
 #include "cc-snap-row.h"
 #endif
+#include "cc-util.h"
 #include "globs.h"
 #include "search.h"
 #include "utils.h"
@@ -113,9 +111,7 @@ struct _CcApplicationsPanel
   GtkWindow       *builtin_dialog;
   AdwPreferencesPage *builtin_page;
   GtkListBox      *builtin_list;
-#ifdef HAVE_SNAP
   GList           *snap_permission_rows;
-#endif
 
   GtkButton       *handler_reset;
   GtkWindow       *handler_dialog;
@@ -700,11 +696,9 @@ add_snap_permissions (CcApplicationsPanel *self,
                       const gchar         *app_id)
 {
   const gchar *snap_name;
-  g_autoptr(SnapdClient) client = NULL;
-  g_autoptr(GPtrArray) interfaces = NULL;
-  g_autoptr(GPtrArray) plugs = NULL;
-  g_autoptr(GPtrArray) slots = NULL;
-  SnapdInterface *interface = NULL;
+  g_autoptr(CcSnapdClient) client = NULL;
+  g_autoptr(JsonArray) plugs = NULL;
+  g_autoptr(JsonArray) slots = NULL;
   gint added = 0;
   g_autoptr(GError) error = NULL;
   g_autoptr(GError) interfaces_error = NULL;
@@ -713,31 +707,20 @@ add_snap_permissions (CcApplicationsPanel *self,
     return FALSE;
   snap_name = app_id + strlen (PORTAL_SNAP_PREFIX);
 
-  client = snapd_client_new ();
+  client = cc_snapd_client_new ();
 
-  interfaces = snapd_client_get_interfaces2_sync (client,
-                                                  SNAPD_GET_INTERFACES_FLAGS_NONE,
-                                                  NULL,
-                                                  NULL, &interfaces_error);
-  if (interfaces == NULL)
-    g_warning ("Failed to get snap interfaces: %s", interfaces_error->message);
-
-  if (!snapd_client_get_connections2_sync (client,
-                                           SNAPD_GET_CONNECTIONS_FLAGS_SELECT_ALL,
-                                           NULL, NULL,
-                                           NULL, NULL,
-                                           &plugs, &slots,
-                                           NULL, &error))
+  if (!cc_snapd_client_get_all_connections_sync (client, &plugs, &slots, cc_panel_get_cancellable (CC_PANEL (self)), &error))
     {
       g_warning ("Failed to get snap connections: %s", error->message);
       return FALSE;
     }
 
-  for (int i = 0; i < plugs->len; i++)
+  for (guint i = 0; i < json_array_get_length (plugs); i++)
     {
-      SnapdPlug *plug = g_ptr_array_index (plugs, i);
+      JsonObject *plug = json_array_get_object_element (plugs, i);
+      const gchar *plug_interface;
       CcSnapRow *row;
-      g_autoptr(GPtrArray) available_slots = NULL;
+      g_autoptr(JsonArray) available_slots = NULL;
       const gchar * const hidden_interfaces[] = { "content",
                                                   "desktop", "desktop-legacy",
                                                   "mir",
@@ -747,34 +730,25 @@ add_snap_permissions (CcApplicationsPanel *self,
                                                   NULL };
 
       /* Skip if not relating to this snap */
-      if (g_strcmp0 (snapd_plug_get_snap (plug), snap_name) != 0)
+      if (g_strcmp0 (json_object_get_string_member (plug, "snap"), snap_name) != 0)
         continue;
 
       /* Ignore interfaces that are too low level to make sense to show or disable */
-      if (g_strv_contains (hidden_interfaces, snapd_plug_get_interface (plug)))
+      plug_interface = json_object_get_string_member (plug, "interface");
+      if (g_strv_contains (hidden_interfaces, plug_interface))
         continue;
 
-      available_slots = g_ptr_array_new_with_free_func (g_object_unref);
-      for (int j = 0; j < slots->len; j++)
+      available_slots = json_array_new ();
+      for (guint j = 0; j < json_array_get_length (slots); j++)
         {
-          SnapdSlot *slot = g_ptr_array_index (slots, j);
-          if (g_strcmp0 (snapd_plug_get_interface (plug), snapd_slot_get_interface (slot)) != 0)
+          JsonObject *slot = json_array_get_object_element (slots, j);
+          if (g_strcmp0 (plug_interface, json_object_get_string_member (slot, "interface")) != 0)
             continue;
 
-          g_ptr_array_add (available_slots, g_object_ref (slot));
+          json_array_add_object_element (available_slots, slot);
         }
 
-      if (interfaces != NULL)
-        {
-          for (int j = 0; j < interfaces->len; j++)
-            {
-              SnapdInterface *i = g_ptr_array_index (interfaces, j);
-              if (g_strcmp0 (snapd_interface_get_name (i), snapd_plug_get_interface (plug)) == 0)
-                interface = i;
-            }
-        }
-
-      row = cc_snap_row_new (cc_panel_get_cancellable (CC_PANEL (self)), interface, plug, available_slots);
+      row = cc_snap_row_new (cc_panel_get_cancellable (CC_PANEL (self)), plug, available_slots);
       adw_preferences_group_add (self->integration_section, GTK_WIDGET (row));
       self->snap_permission_rows = g_list_prepend (self->snap_permission_rows, row);
       added++;
@@ -960,9 +934,9 @@ update_integration_section (CcApplicationsPanel *self,
       gtk_widget_set_visible (GTK_WIDGET (self->no_location), set && disabled);
       has_any |= set;
 
-    #ifdef HAVE_SNAP
+#ifdef HAVE_SNAP
       has_any |= add_snap_permissions (self, info, portal_app_id);
-    #endif
+#endif
     }
   else
     {

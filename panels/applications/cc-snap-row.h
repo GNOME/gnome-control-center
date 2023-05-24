@@ -21,7 +21,7 @@
 #pragma once
 
 #include <adwaita.h>
-#include <snapd-glib/snapd-glib.h>
+#include <json-glib/json-glib.h>
 
 G_BEGIN_DECLS
 
@@ -29,8 +29,7 @@ G_BEGIN_DECLS
 G_DECLARE_FINAL_TYPE (CcSnapRow, cc_snap_row, CC, SNAP_ROW, AdwActionRow)
 
 CcSnapRow* cc_snap_row_new      (GCancellable   *cancellable,
-                                 SnapdInterface *interface,
-                                 SnapdPlug      *plug,
-                                 GPtrArray      *slots);
+                                 JsonObject     *plug,
+                                 JsonArray      *slots);
 
 G_END_DECLS

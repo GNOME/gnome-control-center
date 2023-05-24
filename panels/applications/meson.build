@@ -43,8 +43,8 @@ if host_is_linux
 endif
 
 if enable_snap
-  deps += snapd_glib_deps
-  sources += files('cc-snap-row.c')
+  deps += [ json_glib_dep, libsoup_dep ]
+  sources += [ 'cc-snap-row.c', 'cc-snapd-client.c' ]
 endif
 
 if enable_malcontent

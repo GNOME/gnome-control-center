@@ -24,15 +24,15 @@
 
 #include <config.h>
 #include <glib/gi18n.h>
-#ifdef HAVE_SNAP
-#include <snapd-glib/snapd-glib.h>
-#endif
 #include <sys/types.h>
 #include <sys/stat.h>
 
 #include <ftw.h>
 
 #include "utils.h"
+#ifdef HAVE_SNAP
+#include "cc-snapd-client.h"
+#endif
 
 static gint
 ftw_remove_cb (const gchar       *path,
@@ -236,19 +236,19 @@ guint64
 get_snap_app_size (const gchar *snap_name)
 {
 #ifdef HAVE_SNAP
-  g_autoptr(SnapdClient) client = NULL;
-  g_autoptr(SnapdSnap) snap = NULL;
+  g_autoptr(CcSnapdClient) client = NULL;
+  g_autoptr(JsonObject) snap = NULL;
   g_autoptr(GError) error = NULL;
 
-  client = snapd_client_new ();
-  snap = snapd_client_get_snap_sync (client, snap_name, NULL, &error);
+  client = cc_snapd_client_new ();
+  snap = cc_snapd_client_get_snap_sync (client, snap_name, NULL, &error);
   if (snap == NULL)
     {
       g_warning ("Failed to get snap size: %s", error->message);
       return 0;
     }
 
-  return snapd_snap_get_installed_size (snap);
+  return json_object_get_int_member (snap, "installed-size");
 #else
   return 0;
 #endif
