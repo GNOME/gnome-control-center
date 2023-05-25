@@ -75,9 +75,7 @@ struct _CcWifiPanel
   gchar              *arg_access_point;
 };
 
-static void          rfkill_switch_notify_activate_cb            (CcListRow          *rfkill_row,
-                                                                  GParamSpec         *pspec,
-                                                                  CcWifiPanel        *self);
+static void          rfkill_switch_notify_activate_cb            (CcWifiPanel        *self);
 
 static void          update_devices_names                        (CcWifiPanel        *self);
 
@@ -659,13 +657,11 @@ rfkill_proxy_acquired_cb (GObject      *source_object,
 }
 
 static void
-rfkill_switch_notify_activate_cb (CcListRow   *row,
-                                  GParamSpec  *pspec,
-                                  CcWifiPanel *self)
+rfkill_switch_notify_activate_cb (CcWifiPanel *self)
 {
   gboolean enable;
 
-  enable = cc_list_row_get_active (row);
+  enable = cc_list_row_get_active (self->rfkill_row);
 
   g_dbus_proxy_call (self->rfkill_proxy,
                      "org.freedesktop.DBus.Properties.Set",
@@ -680,9 +676,7 @@ rfkill_switch_notify_activate_cb (CcListRow   *row,
 }
 
 static void
-on_stack_visible_child_changed_cb (GtkStack    *stack,
-                                   GParamSpec  *pspec,
-                                   CcWifiPanel *self)
+on_stack_visible_child_changed_cb (CcWifiPanel *self)
 {
   const gchar *visible_device_id = NULL;
   guint i;
@@ -692,7 +686,7 @@ on_stack_visible_child_changed_cb (GtkStack    *stack,
   /* Remove previous bindings */
   g_clear_pointer (&self->spinner_binding, g_binding_unbind);
 
-  visible_device_id = gtk_stack_get_visible_child_name (stack);
+  visible_device_id = gtk_stack_get_visible_child_name (self->stack);
   for (i = 0; i < self->devices->len; i++)
     {
       NetDeviceWifi *net_device = g_ptr_array_index (self->devices, i);

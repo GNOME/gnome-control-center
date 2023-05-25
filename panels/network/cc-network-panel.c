@@ -767,8 +767,7 @@ visible_child_changed_cb (CcNetworkPanel *self)
 }
 
 static void
-create_connection_cb (GtkWidget      *button,
-                      CcNetworkPanel *self)
+create_connection_cb (CcNetworkPanel *self)
 {
         NetConnectionEditor *editor;
 
