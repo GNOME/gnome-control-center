@@ -284,11 +284,8 @@ row_moved_cb (CcSearchPanel    *self,
 }
 
 static void
-settings_row_activated (GtkWidget *widget,
-                        gpointer   user_data)
+settings_row_activated (CcSearchPanel *self)
 {
-  CcSearchPanel *self = user_data;
-
   if (self->locations_dialog == NULL)
     {
       self->locations_dialog = cc_search_locations_dialog_new (self);
