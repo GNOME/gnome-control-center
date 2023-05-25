@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center.HEAD.he\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2023-05-17 09:43+0000\n"
-"PO-Revision-Date: 2023-05-21 07:55+0300\n"
+"POT-Creation-Date: 2023-05-24 15:41+0000\n"
+"PO-Revision-Date: 2023-05-25 08:51+0300\n"
 "Last-Translator: Yosef Or Boczko <yoseforb@gmail.com>\n"
 "Language-Team: Hebrew <yoseforb@gmail.com>\n"
 "Language: he\n"
@@ -80,7 +80,7 @@ msgstr "מערכת הפעלה"
 #: panels/applications/cc-applications-panel.c:848
 #: panels/keyboard/01-launchers.xml.in:6
 #: shell/appdata/org.gnome.Settings.appdata.xml.in:7 shell/cc-window.c:246
-#: shell/cc-window.c:878 shell/cc-window.ui:22
+#: shell/cc-window.c:881 shell/cc-window.ui:22
 #: shell/org.gnome.Settings.desktop.in:3
 msgid "Settings"
 msgstr "הגדרות"
@@ -170,8 +170,8 @@ msgstr "קבלת חיפושי מערכת ושליחת התוצאות"
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:123
 #: panels/keyboard/cc-xkb-modifier-dialog.c:344
 #: panels/keyboard/keyboard-shortcuts.c:367
-#: panels/user-accounts/cc-user-panel.c:789
-#: panels/user-accounts/cc-user-panel.c:913
+#: panels/user-accounts/cc-user-panel.c:781
+#: panels/user-accounts/cc-user-panel.c:905
 #: panels/wwan/cc-wwan-device-page.c:477
 #: subprojects/gvc/gvc-mixer-control.c:1908
 msgid "Disabled"
@@ -372,8 +372,8 @@ msgstr "בחירת תמונה"
 #: panels/user-accounts/cc-avatar-chooser.c:166
 #: panels/user-accounts/cc-fingerprint-dialog.ui:32
 #: panels/user-accounts/cc-password-dialog.ui:20
-#: panels/user-accounts/cc-user-panel.c:610
-#: panels/user-accounts/cc-user-panel.c:628
+#: panels/user-accounts/cc-user-panel.c:620
+#: panels/user-accounts/cc-user-panel.ui:336
 #: panels/user-accounts/data/join-dialog.ui:17
 #: panels/wwan/cc-wwan-mode-dialog.ui:32
 #: panels/wwan/cc-wwan-network-dialog.ui:108
@@ -1294,26 +1294,26 @@ msgctxt "hotspot"
 msgid "Hotspot"
 msgstr "נקודה חמה"
 
-#: panels/datetime/cc-datetime-panel.c:169
+#: panels/datetime/cc-datetime-panel.c:182
 msgid "24-hour"
 msgstr "24 שעות"
 
-#: panels/datetime/cc-datetime-panel.c:171
+#: panels/datetime/cc-datetime-panel.c:184
 msgid "AM / PM"
 msgstr "AM / PM"
 
 #. Translators: This is the full date and time format used in 12-hour mode.
-#: panels/datetime/cc-datetime-panel.c:242
+#: panels/datetime/cc-datetime-panel.c:255
 msgid "%e %B %Y, %l:%M %p"
 msgstr "%e ב%B %Y, %l:%M %p"
 
 #. Translators: This is the full date and time format used in 24-hour mode.
-#: panels/datetime/cc-datetime-panel.c:247
+#: panels/datetime/cc-datetime-panel.c:260
 msgid "%e %B %Y, %R"
 msgstr "%e ב%B %Y, %R"
 
 #. Translators: "city, country"
-#: panels/datetime/cc-datetime-panel.c:400
+#: panels/datetime/cc-datetime-panel.c:413
 #, c-format
 msgctxt "timezone loc"
 msgid "%s, %s"
@@ -1321,7 +1321,7 @@ msgstr "%s, %s"
 
 #. Update the timezone on the listbow row
 #. Translators: "timezone (details)"
-#: panels/datetime/cc-datetime-panel.c:417
+#: panels/datetime/cc-datetime-panel.c:430
 #, c-format
 msgctxt "timezone desc"
 msgid "%s (%s)"
@@ -1372,51 +1372,71 @@ msgstr "_אזור זמן"
 msgid "Time _Format"
 msgstr "_תבנית זמן"
 
+#: panels/datetime/cc-datetime-panel.ui:214
+msgid "Clock &amp; Calendar"
+msgstr "שעון ולוח שנה"
+
+#: panels/datetime/cc-datetime-panel.ui:217
+msgid "Week Day"
+msgstr "יום בשבוע"
+
+#: panels/datetime/cc-datetime-panel.ui:229
+msgid "Date"
+msgstr "תאריך"
+
 #: panels/datetime/cc-datetime-panel.ui:241
+msgid "Seconds"
+msgstr "שניות"
+
+#: panels/datetime/cc-datetime-panel.ui:253
+msgid "Week Numbers"
+msgstr "מספרי שבועות"
+
+#: panels/datetime/cc-datetime-panel.ui:294
 msgid "January"
 msgstr "ינואר"
 
-#: panels/datetime/cc-datetime-panel.ui:242
+#: panels/datetime/cc-datetime-panel.ui:295
 msgid "February"
 msgstr "פברואר"
 
-#: panels/datetime/cc-datetime-panel.ui:243
+#: panels/datetime/cc-datetime-panel.ui:296
 msgid "March"
 msgstr "מרץ"
 
-#: panels/datetime/cc-datetime-panel.ui:244
+#: panels/datetime/cc-datetime-panel.ui:297
 msgid "April"
 msgstr "אפריל"
 
-#: panels/datetime/cc-datetime-panel.ui:245
+#: panels/datetime/cc-datetime-panel.ui:298
 msgid "May"
 msgstr "מאי"
 
-#: panels/datetime/cc-datetime-panel.ui:246
+#: panels/datetime/cc-datetime-panel.ui:299
 msgid "June"
 msgstr "יוני"
 
-#: panels/datetime/cc-datetime-panel.ui:247
+#: panels/datetime/cc-datetime-panel.ui:300
 msgid "July"
 msgstr "יולי"
 
-#: panels/datetime/cc-datetime-panel.ui:248
+#: panels/datetime/cc-datetime-panel.ui:301
 msgid "August"
 msgstr "אוגוסט"
 
-#: panels/datetime/cc-datetime-panel.ui:249
+#: panels/datetime/cc-datetime-panel.ui:302
 msgid "September"
 msgstr "ספטמבר"
 
-#: panels/datetime/cc-datetime-panel.ui:250
+#: panels/datetime/cc-datetime-panel.ui:303
 msgid "October"
 msgstr "אוקטובר"
 
-#: panels/datetime/cc-datetime-panel.ui:251
+#: panels/datetime/cc-datetime-panel.ui:304
 msgid "November"
 msgstr "נובמבר"
 
-#: panels/datetime/cc-datetime-panel.ui:252
+#: panels/datetime/cc-datetime-panel.ui:305
 msgid "December"
 msgstr "דצמבר"
 
@@ -1629,8 +1649,8 @@ msgstr "‏%.2lf הרץ"
 #. TRANSLATORS: Status of Parental Controls setup
 #: panels/display/cc-display-settings.ui:23
 #: panels/firmware-security/cc-firmware-security-utils.c:45
-#: panels/user-accounts/cc-user-panel.c:787
-#: panels/user-accounts/cc-user-panel.c:910
+#: panels/user-accounts/cc-user-panel.c:779
+#: panels/user-accounts/cc-user-panel.c:902
 #: panels/wwan/cc-wwan-device-page.c:475
 msgid "Enabled"
 msgstr "פעיל"
@@ -2783,6 +2803,7 @@ msgid "Add Custom Shortcut"
 msgstr "הוספת צירוף מקשים חדש"
 
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:30
+#: panels/user-accounts/cc-user-panel.ui:337
 msgid "_Remove"
 msgstr "הס_רה"
 
@@ -3214,19 +3235,19 @@ msgstr "לא מוגדר"
 
 #: panels/network/cc-net-proxy-page.c:183
 #: panels/network/cc-net-proxy-page.ui:24
-#: panels/network/connection-editor/ip4-page.ui:175
-#: panels/network/connection-editor/ip4-page.ui:227
+#: panels/network/connection-editor/ip4-page.ui:181
+#: panels/network/connection-editor/ip4-page.ui:233
 #: panels/network/connection-editor/ip6-page.ui:36
-#: panels/network/connection-editor/ip6-page.ui:185
-#: panels/network/connection-editor/ip6-page.ui:237
+#: panels/network/connection-editor/ip6-page.ui:192
+#: panels/network/connection-editor/ip6-page.ui:244
 #: panels/wacom/cc-wacom-page.c:659
 msgid "Automatic"
 msgstr "אוטומטי"
 
 #: panels/network/cc-net-proxy-page.c:185
 #: panels/network/cc-net-proxy-page.ui:25
-#: panels/network/connection-editor/ip4-page.ui:55
-#: panels/network/connection-editor/ip6-page.ui:65
+#: panels/network/connection-editor/ip4-page.ui:58
+#: panels/network/connection-editor/ip6-page.ui:69
 msgid "Manual"
 msgstr "ידני"
 
@@ -3707,8 +3728,8 @@ msgstr "DNS6"
 #: panels/network/connection-editor/ce-page-details.c:455
 #: panels/network/connection-editor/details-page.ui:175
 #: panels/network/connection-editor/details-page.ui:192
-#: panels/network/connection-editor/ip4-page.ui:165
-#: panels/network/connection-editor/ip6-page.ui:175
+#: panels/network/connection-editor/ip4-page.ui:171
+#: panels/network/connection-editor/ip6-page.ui:182
 #: panels/network/net-device-ethernet.c:169
 #: panels/network/net-device-ethernet.c:171
 #: panels/network/net-device-mobile.c:453
@@ -3743,21 +3764,21 @@ msgstr "אוטומטית"
 msgid "Identity"
 msgstr "זהות"
 
-#: panels/network/connection-editor/ce-page-ip4.c:264
-#: panels/network/connection-editor/ce-page-ip6.c:245
+#: panels/network/connection-editor/ce-page-ip4.c:260
+#: panels/network/connection-editor/ce-page-ip6.c:239
 msgid "Delete Address"
 msgstr "מחיקת כתובת"
 
-#: panels/network/connection-editor/ce-page-ip4.c:423
-#: panels/network/connection-editor/ce-page-ip6.c:392
+#: panels/network/connection-editor/ce-page-ip4.c:419
+#: panels/network/connection-editor/ce-page-ip6.c:386
 msgid "Delete Route"
 msgstr "מחיקת נתיב"
 
-#: panels/network/connection-editor/ce-page-ip4.c:774
+#: panels/network/connection-editor/ce-page-ip4.c:763
 msgid "IPv4"
 msgstr "IPv4"
 
-#: panels/network/connection-editor/ce-page-ip6.c:744
+#: panels/network/connection-editor/ce-page-ip6.c:727
 msgid "IPv6"
 msgstr "IPv6"
 
@@ -3882,79 +3903,79 @@ msgstr "שיטת IPv_4"
 msgid "Automatic (DHCP)"
 msgstr "אוטומטי (DHCP)"
 
-#: panels/network/connection-editor/ip4-page.ui:45
-#: panels/network/connection-editor/ip6-page.ui:55
+#: panels/network/connection-editor/ip4-page.ui:47
+#: panels/network/connection-editor/ip6-page.ui:58
 msgid "Link-Local Only"
 msgstr "קישור מקומי בלבד"
 
-#: panels/network/connection-editor/ip4-page.ui:65
-#: panels/network/connection-editor/ip6-page.ui:75
+#: panels/network/connection-editor/ip4-page.ui:69
+#: panels/network/connection-editor/ip6-page.ui:80
 msgid "Disable"
 msgstr "השבתה"
 
-#: panels/network/connection-editor/ip4-page.ui:75
-#: panels/network/connection-editor/ip6-page.ui:85
+#: panels/network/connection-editor/ip4-page.ui:80
+#: panels/network/connection-editor/ip6-page.ui:91
 msgid "Shared to other computers"
 msgstr "שיתוף למחשבים אחרים"
 
-#: panels/network/connection-editor/ip4-page.ui:98
-#: panels/network/connection-editor/ip6-page.ui:108
+#: panels/network/connection-editor/ip4-page.ui:104
+#: panels/network/connection-editor/ip6-page.ui:115
 msgid "Addresses"
 msgstr "כתובות"
 
-#: panels/network/connection-editor/ip4-page.ui:112
-#: panels/network/connection-editor/ip4-page.ui:250
-#: panels/network/connection-editor/ip6-page.ui:122
-#: panels/network/connection-editor/ip6-page.ui:260
+#: panels/network/connection-editor/ip4-page.ui:118
+#: panels/network/connection-editor/ip4-page.ui:256
+#: panels/network/connection-editor/ip6-page.ui:129
+#: panels/network/connection-editor/ip6-page.ui:267
 #: panels/printers/pp-details-dialog.ui:114
 msgid "Address"
 msgstr "כתובת"
 
-#: panels/network/connection-editor/ip4-page.ui:124
-#: panels/network/connection-editor/ip4-page.ui:262
+#: panels/network/connection-editor/ip4-page.ui:130
+#: panels/network/connection-editor/ip4-page.ui:268
 msgid "Netmask"
 msgstr "מסכת רשת"
 
-#: panels/network/connection-editor/ip4-page.ui:136
-#: panels/network/connection-editor/ip4-page.ui:274
-#: panels/network/connection-editor/ip6-page.ui:146
-#: panels/network/connection-editor/ip6-page.ui:284
+#: panels/network/connection-editor/ip4-page.ui:142
+#: panels/network/connection-editor/ip4-page.ui:280
+#: panels/network/connection-editor/ip6-page.ui:153
+#: panels/network/connection-editor/ip6-page.ui:291
 msgid "Gateway"
 msgstr "שער גישה"
 
-#: panels/network/connection-editor/ip4-page.ui:183
-#: panels/network/connection-editor/ip6-page.ui:193
+#: panels/network/connection-editor/ip4-page.ui:189
+#: panels/network/connection-editor/ip6-page.ui:200
 msgid "Automatic DNS"
 msgstr "DNS אוטומטי"
 
-#: panels/network/connection-editor/ip4-page.ui:192
-#: panels/network/connection-editor/ip6-page.ui:202
+#: panels/network/connection-editor/ip4-page.ui:198
+#: panels/network/connection-editor/ip6-page.ui:209
 msgid "DNS server address(es)"
 msgstr "כתובות שרת DNS"
 
-#: panels/network/connection-editor/ip4-page.ui:200
-#: panels/network/connection-editor/ip6-page.ui:210
+#: panels/network/connection-editor/ip4-page.ui:206
+#: panels/network/connection-editor/ip6-page.ui:217
 msgid "Separate IP addresses with commas"
 msgstr "יש להפריד כתובות IP עם פסיקים"
 
-#: panels/network/connection-editor/ip4-page.ui:217
-#: panels/network/connection-editor/ip6-page.ui:227
+#: panels/network/connection-editor/ip4-page.ui:223
+#: panels/network/connection-editor/ip6-page.ui:234
 msgid "Routes"
 msgstr "ניתובים"
 
-#: panels/network/connection-editor/ip4-page.ui:235
-#: panels/network/connection-editor/ip6-page.ui:245
+#: panels/network/connection-editor/ip4-page.ui:241
+#: panels/network/connection-editor/ip6-page.ui:252
 msgid "Automatic Routes"
 msgstr "נתיבים אוטומטיים"
 
 #. Translators: Please see https://en.wikipedia.org/wiki/Metrics_(networking)
-#: panels/network/connection-editor/ip4-page.ui:285
-#: panels/network/connection-editor/ip6-page.ui:295
+#: panels/network/connection-editor/ip4-page.ui:291
+#: panels/network/connection-editor/ip6-page.ui:302
 msgid "Metric"
 msgstr "מטריקה"
 
-#: panels/network/connection-editor/ip4-page.ui:308
-#: panels/network/connection-editor/ip6-page.ui:318
+#: panels/network/connection-editor/ip4-page.ui:314
+#: panels/network/connection-editor/ip6-page.ui:325
 msgid "Use this connection _only for resources on its network"
 msgstr "יש להשתמש בחיבור זה _רק עבור משאבים ברשת שלו"
 
@@ -3962,12 +3983,12 @@ msgstr "יש להשתמש בחיבור זה _רק עבור משאבים ברשת
 msgid "IPv_6 Method"
 msgstr "שיטת IPv_6"
 
-#: panels/network/connection-editor/ip6-page.ui:45
+#: panels/network/connection-editor/ip6-page.ui:47
 msgid "Automatic, DHCP only"
 msgstr "אוטומטי, DHCP בלבד"
 
-#: panels/network/connection-editor/ip6-page.ui:134
-#: panels/network/connection-editor/ip6-page.ui:272
+#: panels/network/connection-editor/ip6-page.ui:141
+#: panels/network/connection-editor/ip6-page.ui:279
 msgid "Prefix"
 msgstr "קידומת"
 
@@ -6615,77 +6636,77 @@ msgstr ""
 "כרטיס;מיקרופון;עצמת שמע;ווליום;איזון;בלוטות׳;Bluetooth;אזניות;אוזניות;שמע;"
 "קלט;פלט;"
 
-#: panels/thunderbolt/cc-bolt-device-dialog.c:92
+#: panels/thunderbolt/cc-bolt-device-dialog.c:81
 #: panels/thunderbolt/cc-bolt-device-entry.c:123
 msgctxt "Thunderbolt Device Status"
 msgid "Disconnected"
 msgstr "מנותק"
 
-#: panels/thunderbolt/cc-bolt-device-dialog.c:95
+#: panels/thunderbolt/cc-bolt-device-dialog.c:84
 #: panels/thunderbolt/cc-bolt-device-entry.c:126
 msgctxt "Thunderbolt Device Status"
 msgid "Connecting"
 msgstr "בהתחברות"
 
-#: panels/thunderbolt/cc-bolt-device-dialog.c:98
+#: panels/thunderbolt/cc-bolt-device-dialog.c:87
 #: panels/thunderbolt/cc-bolt-device-entry.c:130
 #: panels/thunderbolt/cc-bolt-device-entry.c:142
 msgctxt "Thunderbolt Device Status"
 msgid "Connected"
 msgstr "מחובר"
 
-#: panels/thunderbolt/cc-bolt-device-dialog.c:101
+#: panels/thunderbolt/cc-bolt-device-dialog.c:90
 msgctxt "Thunderbolt Device Status"
 msgid "Authorization Error"
 msgstr "שגיאת אימות"
 
-#: panels/thunderbolt/cc-bolt-device-dialog.c:104
+#: panels/thunderbolt/cc-bolt-device-dialog.c:93
 #: panels/thunderbolt/cc-bolt-device-entry.c:136
 msgctxt "Thunderbolt Device Status"
 msgid "Authorizing"
 msgstr "אימות"
 
-#: panels/thunderbolt/cc-bolt-device-dialog.c:111
+#: panels/thunderbolt/cc-bolt-device-dialog.c:100
 msgctxt "Thunderbolt Device Status"
 msgid "Reduced Functionality"
 msgstr "תפקוד ירוד"
 
-#: panels/thunderbolt/cc-bolt-device-dialog.c:113
+#: panels/thunderbolt/cc-bolt-device-dialog.c:102
 msgctxt "Thunderbolt Device Status"
 msgid "Connected & Authorized"
 msgstr "התקנים מחוברים ומאומתים"
 
-#: panels/thunderbolt/cc-bolt-device-dialog.c:119
+#: panels/thunderbolt/cc-bolt-device-dialog.c:108
 #: panels/thunderbolt/cc-bolt-device-entry.c:150
 msgctxt "Thunderbolt Device Status"
 msgid "Unknown"
 msgstr "לא ידוע"
 
 #. Translators: The time point the device was authorized.
-#: panels/thunderbolt/cc-bolt-device-dialog.c:175
-msgid "Authorized at:"
-msgstr "אומת ב־:"
+#: panels/thunderbolt/cc-bolt-device-dialog.c:163
+msgid "Authorized at"
+msgstr "אומת ב־"
 
 #. Translators: The time point the device was connected.
-#: panels/thunderbolt/cc-bolt-device-dialog.c:181
-msgid "Connected at:"
-msgstr "מחובר החל מ־:"
+#: panels/thunderbolt/cc-bolt-device-dialog.c:169
+msgid "Connected at"
+msgstr "מחובר החל מ־"
 
 #. Translators: The time point the device was enrolled,
 #. * i.e. authorized and stored in the device database.
-#: panels/thunderbolt/cc-bolt-device-dialog.c:188
-msgid "Enrolled at:"
-msgstr "נרשם ב־:"
+#: panels/thunderbolt/cc-bolt-device-dialog.c:176
+msgid "Enrolled at"
+msgstr "נרשם ב־"
 
-#: panels/thunderbolt/cc-bolt-device-dialog.c:262
+#: panels/thunderbolt/cc-bolt-device-dialog.c:250
 msgid "Failed to authorize device: "
 msgstr "אימות ההתקן נכשל: "
 
-#: panels/thunderbolt/cc-bolt-device-dialog.c:329
+#: panels/thunderbolt/cc-bolt-device-dialog.c:317
 msgid "Failed to forget device: "
 msgstr "שכיחת ההתקן נכשלה: "
 
-#: panels/thunderbolt/cc-bolt-device-dialog.c:485
+#: panels/thunderbolt/cc-bolt-device-dialog.c:458
 #, c-format
 msgid "Depends on %u other device"
 msgid_plural "Depends on %u other devices"
@@ -6694,28 +6715,28 @@ msgstr[1] "תלוי בשני התקנים אחרים"
 msgstr[2] "תלוי ב־%u התקנים אחרים"
 msgstr[3] "‫תלוי ב־%u התקנים אחרים"
 
+#: panels/thunderbolt/cc-bolt-device-dialog.ui:25
+msgid "Status"
+msgstr "מצב"
+
+#: panels/thunderbolt/cc-bolt-device-dialog.ui:30
+msgid "UUID"
+msgstr "‏UUID"
+
+#: panels/thunderbolt/cc-bolt-device-dialog.ui:35
+msgid "Timestamp"
+msgstr "טביעת זמן"
+
 #: panels/thunderbolt/cc-bolt-device-dialog.ui:43
-#: panels/thunderbolt/cc-bolt-panel.ui:41
-msgid "Close notification"
-msgstr "סגירת ההתראות"
+# msgid_plural "Depends on %u other devices"
+msgid "Depends on other devices"
+msgstr "תלוי בהתקנים אחרים"
 
-#: panels/thunderbolt/cc-bolt-device-dialog.ui:87
-msgid "Name:"
-msgstr "שם:"
-
-#: panels/thunderbolt/cc-bolt-device-dialog.ui:115
-msgid "Status:"
-msgstr "מצב:"
-
-#: panels/thunderbolt/cc-bolt-device-dialog.ui:144
-msgid "UUID:"
-msgstr "‏UUID:"
-
-#: panels/thunderbolt/cc-bolt-device-dialog.ui:250
+#: panels/thunderbolt/cc-bolt-device-dialog.ui:73
 msgid "Authorize and Connect"
 msgstr "אימות והתחברות"
 
-#: panels/thunderbolt/cc-bolt-device-dialog.ui:266
+#: panels/thunderbolt/cc-bolt-device-dialog.ui:88
 msgid "Forget Device"
 msgstr "שכיחת ההתקן"
 
@@ -6765,6 +6786,10 @@ msgstr "שכבת האבטחה של Thunderbolt לא ניתנת לקביעה."
 #, c-format
 msgid "Error switching direct mode: %s"
 msgstr "שגיאה בשינוי המצב הישיר: %s"
+
+#: panels/thunderbolt/cc-bolt-panel.ui:41
+msgid "Close notification"
+msgstr "סגירת ההתראות"
 
 #: panels/thunderbolt/cc-bolt-panel.ui:102
 msgid "No Thunderbolt Support"
@@ -7916,11 +7941,11 @@ msgstr "הססמה שגויה, נא לנסות שוב"
 msgid "Couldn’t connect to the %s domain: %s"
 msgstr "לא ניתן להתחבר אל התחום %s:‏ %s"
 
-#: panels/user-accounts/cc-user-panel.c:258
+#: panels/user-accounts/cc-user-panel.c:260
 msgid "Add User…"
 msgstr "הוספת משתמש…"
 
-#: panels/user-accounts/cc-user-panel.c:372
+#: panels/user-accounts/cc-user-panel.c:374
 msgid "Failed to delete user"
 msgstr "מחיקת משתמש נכשלה"
 
@@ -7945,69 +7970,53 @@ msgid ""
 "inconsistent state."
 msgstr "מחיקת משתמש כשהוא מחובר עלולה להשאיר את המערכת במצב בלתי יציב."
 
-#: panels/user-accounts/cc-user-panel.c:601
+#: panels/user-accounts/cc-user-panel.c:606
 #, c-format
-msgid "Do you want to keep %s’s files?"
-msgstr "לשמור על הקבצים של %s?"
+msgid "Remove %s?"
+msgstr "להסיר את %s?"
 
-#: panels/user-accounts/cc-user-panel.c:605
-msgid ""
-"It is possible to keep the home directory, mail spool and temporary files "
-"around when deleting a user account."
-msgstr ""
-"ניתן לשמור על תיקיית הבית, מאגר הדואר והקבצים הזמניים בהישג ידך לאחר מחיקת "
-"משתמש."
-
-#: panels/user-accounts/cc-user-panel.c:608
-msgid "_Delete Files"
-msgstr "_מחיקת הקבצים"
-
-#: panels/user-accounts/cc-user-panel.c:609
-msgid "_Keep Files"
-msgstr "_שמירת הקבצים"
-
-#: panels/user-accounts/cc-user-panel.c:623
+#: panels/user-accounts/cc-user-panel.c:615
 #, c-format
 msgid "Are you sure you want to revoke remotely managed %s’s account?"
 msgstr "לשלול את החשבון של %s שמנוהל מרחוק?"
 
-#: panels/user-accounts/cc-user-panel.c:627
+#: panels/user-accounts/cc-user-panel.c:619
 msgid "_Delete"
 msgstr "מ_חיקה"
 
-#: panels/user-accounts/cc-user-panel.c:677
+#: panels/user-accounts/cc-user-panel.c:669
 msgctxt "Password mode"
 msgid "Account disabled"
 msgstr "חשבון מושבת"
 
-#: panels/user-accounts/cc-user-panel.c:685
+#: panels/user-accounts/cc-user-panel.c:677
 msgctxt "Password mode"
 msgid "To be set at next login"
 msgstr "להגדרה בהתחברות הבאה"
 
-#: panels/user-accounts/cc-user-panel.c:688
+#: panels/user-accounts/cc-user-panel.c:680
 msgctxt "Password mode"
 msgid "None"
 msgstr "אין"
 
-#: panels/user-accounts/cc-user-panel.c:1161
+#: panels/user-accounts/cc-user-panel.c:1153
 msgid "Failed to contact the accounts service"
 msgstr "לא ניתן ליצור קשר עם שירות החשבונות"
 
-#: panels/user-accounts/cc-user-panel.c:1163
+#: panels/user-accounts/cc-user-panel.c:1155
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "נא לוודא ששירות החשבונות (AccountService) מותקן ומופעל."
 
-#: panels/user-accounts/cc-user-panel.c:1185
+#: panels/user-accounts/cc-user-panel.c:1177
 msgid "This panel must be unlocked to change this setting"
 msgstr "יש הכרח לשחרר לוח זה על מנת לשנות הגדרה זו"
 
-#: panels/user-accounts/cc-user-panel.c:1252
+#: panels/user-accounts/cc-user-panel.c:1244
 msgid "Delete the selected user account"
 msgstr "מחיקת חשבון המשתמש הנבחר"
 
-#: panels/user-accounts/cc-user-panel.c:1256
-#: panels/user-accounts/cc-user-panel.c:1393
+#: panels/user-accounts/cc-user-panel.c:1248
+#: panels/user-accounts/cc-user-panel.c:1385
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -8015,7 +8024,7 @@ msgstr ""
 "כדי למחוק את המשתמש הנבחר\n"
 "ראשית יש ללחוץ על הסמל *"
 
-#: panels/user-accounts/cc-user-panel.c:1439
+#: panels/user-accounts/cc-user-panel.c:1431
 msgid "Unlock to add users and change settings"
 msgstr "יש לשחרר כדי להוסיף משתמשים ולשנות הגדרות"
 
@@ -8087,6 +8096,16 @@ msgstr "לא נמצאו משתמשים"
 #: panels/user-accounts/cc-user-panel.ui:316
 msgid "Unlock to add a user account."
 msgstr "שחרור על מנת להוסיף משתמש."
+
+#: panels/user-accounts/cc-user-panel.ui:331
+msgid ""
+"The user will not be able to use this device once their account has been "
+"removed."
+msgstr "המשתמש לא יוכל להשתמש בהתקן זה לאחר שהחשבון שלו יוסר."
+
+#: panels/user-accounts/cc-user-panel.ui:343
+msgid "Delete Files and Settings"
+msgstr "מחיקת קבצים והגדרות"
 
 #: panels/user-accounts/data/gnome-user-accounts-panel.desktop.in:4
 msgid "Add or remove users and change your password"
@@ -9236,6 +9255,23 @@ msgstr[3] "‏‫%u ערוצי קלט"
 #: subprojects/gvc/gvc-mixer-control.c:2876
 msgid "System Sounds"
 msgstr "צלילי מערכת"
+
+#~ msgid "Name:"
+#~ msgstr "שם:"
+
+#, c-format
+#~ msgid "Do you want to keep %s’s files?"
+#~ msgstr "לשמור על הקבצים של %s?"
+
+#~ msgid ""
+#~ "It is possible to keep the home directory, mail spool and temporary files "
+#~ "around when deleting a user account."
+#~ msgstr ""
+#~ "ניתן לשמור על תיקיית הבית, מאגר הדואר והקבצים הזמניים בהישג ידך לאחר "
+#~ "מחיקת משתמש."
+
+#~ msgid "_Keep Files"
+#~ msgstr "_שמירת הקבצים"
 
 #~ msgid "Full name"
 #~ msgstr "שם מלא"
