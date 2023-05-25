@@ -181,11 +181,9 @@ on_xkb_options_changed_cb (CcXkbModifierDialog *self)
 }
 
 static gboolean
-enable_switch_changed_cb (GtkSwitch *widget,
-                          gboolean   state,
-                          gpointer   user_data)
+enable_switch_changed_cb (CcXkbModifierDialog *self,
+                          gboolean             state)
 {
-  CcXkbModifierDialog *self = user_data;
   gchar *xkb_option;
   GSList *l;
 

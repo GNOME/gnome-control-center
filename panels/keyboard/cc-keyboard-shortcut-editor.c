@@ -444,8 +444,7 @@ add_button_clicked_cb (CcKeyboardShortcutEditor *self)
 }
 
 static void
-cancel_button_clicked_cb (GtkWidget                *button,
-                          CcKeyboardShortcutEditor *self)
+cancel_button_clicked_cb (CcKeyboardShortcutEditor *self)
 {
   cancel_editing (self);
 }
@@ -668,11 +667,11 @@ cc_keyboard_shortcut_editor_set_property (GObject      *object,
 }
 
 static gboolean
-on_key_pressed_cb (GtkEventControllerKey    *key_controller,
+on_key_pressed_cb (CcKeyboardShortcutEditor *self,
                    guint                     keyval,
                    guint                     keycode,
                    GdkModifierType           state,
-                   CcKeyboardShortcutEditor *self)
+                   GtkEventControllerKey    *key_controller)
 {
   GdkModifierType real_mask;
   GdkEvent *event;
