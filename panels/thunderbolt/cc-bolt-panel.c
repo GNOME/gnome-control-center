@@ -130,8 +130,7 @@ static void     on_device_entry_status_changed_cb (CcBoltDeviceEntry *entry,
                                                    BoltStatus         new_status,
                                                    CcBoltPanel       *panel);
 
-static void     on_notification_button_clicked_cb (GtkButton   *button,
-                                                   CcBoltPanel *panel);
+static void     on_notification_button_clicked_cb (CcBoltPanel *panel);
 
 
 /* polkit */
@@ -816,8 +815,7 @@ on_device_entry_status_changed_cb (CcBoltDeviceEntry *entry,
 
 
 static void
-on_notification_button_clicked_cb (GtkButton   *button,
-                                   CcBoltPanel *panel)
+on_notification_button_clicked_cb (CcBoltPanel *panel)
 {
   gtk_revealer_set_reveal_child (panel->notification_revealer, FALSE);
 }
