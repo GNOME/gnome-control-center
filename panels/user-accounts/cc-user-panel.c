@@ -937,11 +937,11 @@ full_name_entry_apply_cb (CcUserPanel *self)
 }
 
 static gboolean
-full_name_entry_key_press_cb (GtkEventController *controller,
+full_name_entry_key_press_cb (CcUserPanel        *self,
                               guint               keyval,
                               guint               keycode,
                               GdkModifierType     state,
-                              CcUserPanel        *self)
+                              GtkEventController *controller)
 {
         if (keyval == GDK_KEY_Escape) {
                 gtk_editable_set_text (GTK_EDITABLE (self->full_name_entry), act_user_get_real_name (self->selected_user));

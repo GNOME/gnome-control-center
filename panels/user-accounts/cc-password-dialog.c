@@ -319,11 +319,11 @@ password_entry_focus_out_cb (CcPasswordDialog *self)
 
 
 static gboolean
-password_entry_key_press_cb (GtkEventControllerKey *controller,
+password_entry_key_press_cb (CcPasswordDialog      *self,
                              guint                  keyval,
                              guint                  keycode,
                              GdkModifierType        state,
-                             CcPasswordDialog      *self)
+                             GtkEventControllerKey *controller)
 {
         if (self->password_entry_timeout_id != 0) {
                 g_source_remove (self->password_entry_timeout_id);

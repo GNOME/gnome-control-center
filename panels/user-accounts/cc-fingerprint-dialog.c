@@ -949,9 +949,8 @@ populate_enrollment_view (CcFingerprintDialog *self)
 }
 
 static void
-on_print_activated_cb (GtkFlowBox          *flowbox,
-                       GtkFlowBoxChild     *child,
-                       CcFingerprintDialog *self)
+on_print_activated_cb (CcFingerprintDialog *self,
+                       GtkFlowBoxChild     *child)
 {
   GtkWidget *selected_button;
 

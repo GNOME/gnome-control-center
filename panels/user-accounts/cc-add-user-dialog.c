@@ -724,11 +724,11 @@ password_focus_out_event_cb (CcAddUserDialog *self)
 }
 
 static gboolean
-local_password_entry_key_press_event_cb (GtkEventControllerKey *controller,
+local_password_entry_key_press_event_cb (CcAddUserDialog       *self,
                                          guint                  keyval,
                                          guint                  keycode,
                                          GdkModifierType        state,
-                                         CcAddUserDialog       *self)
+                                         GtkEventControllerKey *controller)
 {
         if (keyval == GDK_KEY_Tab)
                local_password_timeout (self);
