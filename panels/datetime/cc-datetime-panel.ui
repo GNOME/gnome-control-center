@@ -196,7 +196,7 @@
               <object class="AdwComboRow" id="timeformat_row">
                 <property name="title" translatable="yes">Time _Format</property>
                 <property name="use_underline">True</property>
-                <signal name="notify::selected-item" handler="change_clock_settings" object="CcDateTimePanel" swapped="no"/>
+                <signal name="notify::selected-item" handler="change_clock_settings" object="CcDateTimePanel" swapped="yes"/>
                 <property name="model">
                   <object class="AdwEnumListModel">
                     <property name="enum-type">GDesktopClockFormat</property>

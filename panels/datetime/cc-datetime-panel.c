@@ -188,9 +188,7 @@ format_clock_name_cb (AdwEnumListItem *item,
 }
 
 static void
-change_clock_settings (GObject         *gobject,
-                       GParamSpec      *pspec,
-                       CcDateTimePanel *self)
+change_clock_settings (CcDateTimePanel *self)
 {
   GDesktopClockFormat value;
   AdwEnumListItem *item;
