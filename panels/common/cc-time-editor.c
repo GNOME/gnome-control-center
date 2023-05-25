@@ -236,6 +236,7 @@ cc_time_editor_constructed (GObject *object)
 {
   CcTimeEditor *self = (CcTimeEditor *)object;
   GDateTime *date;
+  GtkWidget *grid;
   char *label;
 
   G_OBJECT_CLASS (cc_time_editor_parent_class)->constructed (object);
@@ -253,6 +254,10 @@ cc_time_editor_constructed (GObject *object)
   gtk_label_set_label (self->pm_label, label);
   g_date_time_unref (date);
   g_free (label);
+
+  /* Force LTR so we don't reorder clock buttons for RTL languages */
+  grid = gtk_widget_get_parent (GTK_WIDGET (self->hour_up_button));
+  gtk_widget_set_direction (grid, GTK_TEXT_DIR_LTR);
 }
 
 static void

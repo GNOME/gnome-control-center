@@ -412,6 +412,7 @@ cc_time_entry_constructed (GObject *object)
 
   G_OBJECT_CLASS (cc_time_entry_parent_class)->constructed (object);
 
+  gtk_widget_set_direction (GTK_WIDGET (self->text), GTK_TEXT_DIR_LTR);
   time_entry_fill_time (CC_TIME_ENTRY (object));
 
   list = pango_attr_list_new ();
