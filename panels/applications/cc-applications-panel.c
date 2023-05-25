@@ -1204,8 +1204,7 @@ update_handler_dialog (CcApplicationsPanel *self,
 /* --- usage section --- */
 
 static void
-on_builtin_row_activated_cb (GtkListBoxRow       *row,
-                             CcApplicationsPanel *self)
+on_builtin_row_activated_cb (CcApplicationsPanel *self)
 {
   CcShell *shell = cc_panel_get_shell (CC_PANEL (self));
 
@@ -1215,8 +1214,7 @@ on_builtin_row_activated_cb (GtkListBoxRow       *row,
 }
 
 static void
-on_handler_row_activated_cb (GtkListBoxRow       *row,
-                             CcApplicationsPanel *self)
+on_handler_row_activated_cb (CcApplicationsPanel *self)
 {
   CcShell *shell = cc_panel_get_shell (CC_PANEL (self));
 
@@ -1226,8 +1224,7 @@ on_handler_row_activated_cb (GtkListBoxRow       *row,
 }
 
 static void
-on_storage_row_activated_cb (GtkListBoxRow       *row,
-                             CcApplicationsPanel *self)
+on_storage_row_activated_cb (CcApplicationsPanel *self)
 {
   CcShell *shell = cc_panel_get_shell (CC_PANEL (self));
 
@@ -1579,8 +1576,7 @@ select_app (CcApplicationsPanel *self,
 }
 
 static void
-on_launch_button_clicked_cb (GtkButton           *button,
-                             CcApplicationsPanel *self)
+on_launch_button_clicked_cb (CcApplicationsPanel *self)
 {
   g_autoptr(GdkAppLaunchContext) context = NULL;
   g_autoptr(GError) error = NULL;

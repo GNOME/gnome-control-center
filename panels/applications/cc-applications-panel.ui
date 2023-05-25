@@ -82,7 +82,7 @@
                         <child>
                           <object class="GtkButton" id="launch_button">
                             <property name="label" translatable="yes">Open</property>
-                            <signal name="clicked" handler="on_launch_button_clicked_cb" object="CcApplicationsPanel" swapped="no" />
+                            <signal name="clicked" handler="on_launch_button_clicked_cb" object="CcApplicationsPanel" swapped="yes" />
                             <style>
                               <class name="pill" />
                               <class name="suggested-action" />
@@ -223,7 +223,7 @@
                     <property name="subtitle" translatable="yes">System access that is required by the app</property>
                     <property name="has-expander">True</property>
                     <property name="is-link">True</property>
-                    <signal name="activated" handler="on_builtin_row_activated_cb" object="CcApplicationsPanel" swapped="no" />
+                    <signal name="activated" handler="on_builtin_row_activated_cb" object="CcApplicationsPanel" swapped="yes" />
                   </object>
                 </child>
                 <child>
@@ -231,7 +231,7 @@
                     <property name="title" translatable="yes">File &amp;amp; Link Associations</property>
                     <property name="has-expander">True</property>
                     <property name="is-link">True</property>
-                    <signal name="activated" handler="on_handler_row_activated_cb" object="CcApplicationsPanel" swapped="no" />
+                    <signal name="activated" handler="on_handler_row_activated_cb" object="CcApplicationsPanel" swapped="yes" />
                   </object>
                 </child>
                 <child>
@@ -239,7 +239,7 @@
                     <property name="title" translatable="yes">Storage</property>
                     <property name="has-expander">1</property>
                     <property name="is-link">1</property>
-                    <signal name="activated" handler="on_storage_row_activated_cb" object="CcApplicationsPanel" swapped="no" />
+                    <signal name="activated" handler="on_storage_row_activated_cb" object="CcApplicationsPanel" swapped="yes" />
                   </object>
                 </child>
               </object>
