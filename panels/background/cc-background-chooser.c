@@ -215,9 +215,9 @@ setup_flowbox (CcBackgroundChooser *self)
 }
 
 static void
-on_item_activated_cb (GtkFlowBox          *flowbox,
+on_item_activated_cb (CcBackgroundChooser *self,
                       GtkFlowBoxChild     *child,
-                      CcBackgroundChooser *self)
+                      GtkFlowBox          *flowbox)
 {
   self->recent_selected = flowbox == self->recent_flowbox;
   if (self->recent_selected)
