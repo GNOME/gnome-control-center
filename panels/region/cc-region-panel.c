@@ -741,8 +741,7 @@ session_proxy_ready (GObject      *source,
 }
 
 static void
-on_login_formats_row_activated_cb (GtkListBoxRow *row,
-                                   CcRegionPanel *self)
+on_login_formats_row_activated_cb (CcRegionPanel *self)
 {
         if (g_permission_get_allowed (self->permission)) {
                 show_region_chooser (self, SYSTEM);
@@ -755,8 +754,7 @@ on_login_formats_row_activated_cb (GtkListBoxRow *row,
 }
 
 static void
-on_login_language_row_activated_cb (GtkListBoxRow *row,
-                                    CcRegionPanel *self)
+on_login_language_row_activated_cb (CcRegionPanel *self)
 {
         if (g_permission_get_allowed (self->permission)) {
                 show_language_chooser (self, SYSTEM);
@@ -769,15 +767,13 @@ on_login_language_row_activated_cb (GtkListBoxRow *row,
 }
 
 static void
-on_user_formats_row_activated_cb (GtkListBoxRow *row,
-                                  CcRegionPanel *self)
+on_user_formats_row_activated_cb (CcRegionPanel *self)
 {
         show_region_chooser (self, USER);
 }
 
 static void
-on_user_language_row_activated_cb (GtkListBoxRow *row,
-                                   CcRegionPanel *self)
+on_user_language_row_activated_cb (CcRegionPanel *self)
 {
         show_language_chooser (self, USER);
 }
