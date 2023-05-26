@@ -81,7 +81,6 @@ static const CcXkbModifier COMPOSE_MODIFIER = {
      " For example, compose key followed by <b>C</b> and <b>o</b> will enter <b>©</b>, "
      "<b>a</b> followed by <b>'</b> will enter <b>á</b>."),
   (CcXkbOption[]){
-    { NC_("keyboard key", "Left Alt"),     "compose:lalt" },
     { NC_("keyboard key", "Right Alt"),    "compose:ralt" },
     { NC_("keyboard key", "Left Super"),   "compose:lwin" },
     { NC_("keyboard key", "Right Super"),  "compose:rwin" },
