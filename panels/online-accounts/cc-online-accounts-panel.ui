@@ -21,7 +21,7 @@
                     <child>
                       <object class="GtkButton" id="undo_button">
                         <property name="label" translatable="yes">Undo</property>
-                        <signal name="clicked" handler="on_undo_button_clicked_cb" object="CcOnlineAccountsPanel" swapped="no" />
+                        <signal name="clicked" handler="on_undo_button_clicked_cb" object="CcOnlineAccountsPanel" swapped="yes" />
                       </object>
                     </child>
                     <child>
@@ -30,7 +30,7 @@
                         <accessibility>
                           <property name="label" translatable="yes">Close the notification</property>
                         </accessibility>
-                        <signal name="clicked" handler="on_notification_closed_cb" object="CcOnlineAccountsPanel" swapped="no" />
+                        <signal name="clicked" handler="on_notification_closed_cb" object="CcOnlineAccountsPanel" swapped="yes" />
                         <style>
                           <class name="flat" />
                         </style>

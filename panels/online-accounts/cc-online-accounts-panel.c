@@ -700,8 +700,7 @@ on_client_remove_account_finish_cb (GoaAccount   *account,
 }
 
 static void
-on_notification_closed_cb (GtkButton             *button,
-                           CcOnlineAccountsPanel *self)
+on_notification_closed_cb (CcOnlineAccountsPanel *self)
 {
   goa_account_call_remove (goa_object_peek_account (self->removed_object),
                            cc_panel_get_cancellable (CC_PANEL (self)),
@@ -715,8 +714,7 @@ on_notification_closed_cb (GtkButton             *button,
 }
 
 static void
-on_undo_button_clicked_cb (GtkButton             *button,
-                           CcOnlineAccountsPanel *self)
+on_undo_button_clicked_cb (CcOnlineAccountsPanel *self)
 {
   /* Simply show the account row and hide the notification */
   modify_row_for_account (self, self->removed_object, show_row_for_account_cb);
