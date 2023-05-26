@@ -27,7 +27,7 @@
 G_BEGIN_DECLS
 
 #define CC_TYPE_FIRMWARE_SECURITY_PANEL (cc_firmware_security_panel_get_type ())
-G_DECLARE_FINAL_TYPE (CcfirmwareSecurityPanel, cc_firmware_security_panel, CC, FIRMWARE_SECURITY_PANEL, CcPanel)
+G_DECLARE_FINAL_TYPE (CcFirmwareSecurityPanel, cc_firmware_security_panel, CC, FIRMWARE_SECURITY_PANEL, CcPanel)
 
 void                 cc_firmware_security_panel_static_init_func              (void);
 

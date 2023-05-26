@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
-  <template class="CcfirmwareSecurityPanel" parent="CcPanel">
+  <template class="CcFirmwareSecurityPanel" parent="CcPanel">
     <child type="titlebar-end">
       <object class="GtkButton" id="fw_help_button">
         <property name="halign">center</property>
         <property name="valign">center</property>
         <property name="icon-name">help-about-symbolic</property>
-           <signal name="clicked" handler="on_fw_help_button_clicked_cb" object="CcfirmwareSecurityPanel" swapped="yes" />
+           <signal name="clicked" handler="on_fw_help_button_clicked_cb" object="CcFirmwareSecurityPanel" swapped="yes" />
         <style>
           <class name="image-button" />
         </style>
@@ -103,7 +103,7 @@
                             <property name="receives-default">True</property>
                             <property name="sensitive">True</property>
                             <property name="vexpand-set">True</property>
-                            <signal name="clicked" handler="on_hsi_button_clicked_cb" object="CcfirmwareSecurityPanel" swapped="yes" />
+                            <signal name="clicked" handler="on_hsi_button_clicked_cb" object="CcFirmwareSecurityPanel" swapped="yes" />
                             <style>
                               <class name="card" />
                             </style>
@@ -156,7 +156,7 @@
                         <child>
                           <object class="GtkButton" id="secure_boot_button">
                             <property name="receives-default">True</property>
-                            <signal name="clicked" handler="on_secure_boot_button_clicked_cb" object="CcfirmwareSecurityPanel" swapped="yes" />
+                            <signal name="clicked" handler="on_secure_boot_button_clicked_cb" object="CcFirmwareSecurityPanel" swapped="yes" />
                             <style>
                               <class name="card" />
                             </style>

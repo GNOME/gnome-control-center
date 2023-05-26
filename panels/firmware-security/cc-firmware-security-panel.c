@@ -33,7 +33,7 @@
 #include <gio/gdesktopappinfo.h>
 #include <glib/gi18n.h>
 
-struct _CcfirmwareSecurityPanel
+struct _CcFirmwareSecurityPanel
 {
   CcPanel           parent_instance;
 
@@ -78,13 +78,13 @@ struct _CcfirmwareSecurityPanel
   SecureBootState   secure_boot_state;
 };
 
-CC_PANEL_REGISTER (CcfirmwareSecurityPanel, cc_firmware_security_panel)
+CC_PANEL_REGISTER (CcFirmwareSecurityPanel, cc_firmware_security_panel)
 
 static void
-set_hsi_button_view (CcfirmwareSecurityPanel *self);
+set_hsi_button_view (CcFirmwareSecurityPanel *self);
 
 static void
-set_secure_boot_button_view (CcfirmwareSecurityPanel *self)
+set_secure_boot_button_view (CcFirmwareSecurityPanel *self)
 {
   FwupdSecurityAttr *attr;
   guint64 sb_flags = 0;
@@ -172,7 +172,7 @@ fu_security_attr_get_description_for_eventlog (FwupdSecurityAttr *attr)
 }
 
 static void
-parse_event_variant_iter (CcfirmwareSecurityPanel *self,
+parse_event_variant_iter (CcFirmwareSecurityPanel *self,
                           GVariantIter            *iter)
 {
   g_autofree gchar *date_string = NULL;
@@ -246,7 +246,7 @@ parse_event_variant_iter (CcfirmwareSecurityPanel *self,
 }
 
 static void
-parse_variant_iter (CcfirmwareSecurityPanel *self,
+parse_variant_iter (CcFirmwareSecurityPanel *self,
                     GVariantIter            *iter)
 {
   g_autoptr (FwupdSecurityAttr) attr = fu_security_attr_new_from_variant(iter);
@@ -301,7 +301,7 @@ parse_variant_iter (CcfirmwareSecurityPanel *self,
 }
 
 static void
-parse_data_from_variant (CcfirmwareSecurityPanel *self,
+parse_data_from_variant (CcFirmwareSecurityPanel *self,
                          GVariant                *value,
                          const gboolean           is_event)
 {
@@ -332,7 +332,7 @@ parse_data_from_variant (CcfirmwareSecurityPanel *self,
 }
 
 static void
-parse_array_from_variant (CcfirmwareSecurityPanel *self,
+parse_array_from_variant (CcFirmwareSecurityPanel *self,
                           GVariant                *value,
                           const gboolean           is_event)
 {
@@ -359,7 +359,7 @@ on_bus_event_done_cb (GObject      *source,
 {
   g_autoptr (GError) error = NULL;
   g_autoptr (GVariant) val = NULL;
-  CcfirmwareSecurityPanel *self = CC_FIRMWARE_SECURITY_PANEL (user_data);
+  CcFirmwareSecurityPanel *self = CC_FIRMWARE_SECURITY_PANEL (user_data);
 
   val = g_dbus_proxy_call_finish (G_DBUS_PROXY (source), res, &error);
   if (val == NULL)
@@ -372,7 +372,7 @@ on_bus_event_done_cb (GObject      *source,
 }
 
 static void
-show_loading_page (CcfirmwareSecurityPanel *self, const gchar *page_name)
+show_loading_page (CcFirmwareSecurityPanel *self, const gchar *page_name)
 {
   adw_leaflet_set_visible_child_name (ADW_LEAFLET(self->panel_leaflet), page_name);
 }
@@ -380,7 +380,7 @@ show_loading_page (CcfirmwareSecurityPanel *self, const gchar *page_name)
 static int
 on_timeout_cb (gpointer user_data)
 {
-  CcfirmwareSecurityPanel *self = CC_FIRMWARE_SECURITY_PANEL (user_data);
+  CcFirmwareSecurityPanel *self = CC_FIRMWARE_SECURITY_PANEL (user_data);
   show_loading_page (self, "panel_show");
   return 0;
 }
@@ -388,7 +388,7 @@ on_timeout_cb (gpointer user_data)
 static int
 on_timeout_unavaliable (gpointer user_data)
 {
-  CcfirmwareSecurityPanel *self = CC_FIRMWARE_SECURITY_PANEL (user_data);
+  CcFirmwareSecurityPanel *self = CC_FIRMWARE_SECURITY_PANEL (user_data);
   show_loading_page (self, "panel_unavaliable");
   return 0;
 }
@@ -398,7 +398,7 @@ on_bus_done (GObject      *source,
              GAsyncResult *res,
              gpointer      user_data)
 {
-  CcfirmwareSecurityPanel *self = CC_FIRMWARE_SECURITY_PANEL (user_data);
+  CcFirmwareSecurityPanel *self = CC_FIRMWARE_SECURITY_PANEL (user_data);
   g_autoptr (GError) error = NULL;
   g_autoptr (GVariant) val = NULL;
 
@@ -420,7 +420,7 @@ on_bus_ready_cb (GObject       *source_object,
                  gpointer       user_data)
 {
   g_autoptr (GError) error = NULL;
-  CcfirmwareSecurityPanel *self = CC_FIRMWARE_SECURITY_PANEL (user_data);
+  CcFirmwareSecurityPanel *self = CC_FIRMWARE_SECURITY_PANEL (user_data);
 
   self->bus_proxy = g_dbus_proxy_new_for_bus_finish (res, &error);
   if (self->bus_proxy == NULL)
@@ -451,7 +451,7 @@ on_bus_ready_cb (GObject       *source_object,
 }
 
 static void
-on_hsi_button_clicked_cb (CcfirmwareSecurityPanel *self)
+on_hsi_button_clicked_cb (CcFirmwareSecurityPanel *self)
 {
   GtkWidget *toplevel;
   CcShell *shell;
@@ -471,7 +471,7 @@ on_hsi_button_clicked_cb (CcfirmwareSecurityPanel *self)
 }
 
 static void
-on_secure_boot_button_clicked_cb (CcfirmwareSecurityPanel *self)
+on_secure_boot_button_clicked_cb (CcFirmwareSecurityPanel *self)
 {
   GtkWidget *toplevel;
   CcShell *shell;
@@ -485,7 +485,7 @@ on_secure_boot_button_clicked_cb (CcfirmwareSecurityPanel *self)
 }
 
 static void
-on_fw_help_button_clicked_cb (CcfirmwareSecurityPanel *self)
+on_fw_help_button_clicked_cb (CcFirmwareSecurityPanel *self)
 {
   GtkWidget *help_dialog;
   GtkWidget *toplevel;
@@ -499,7 +499,7 @@ on_fw_help_button_clicked_cb (CcfirmwareSecurityPanel *self)
 }
 
 static void
-set_hsi_button_view_contain (CcfirmwareSecurityPanel *self,
+set_hsi_button_view_contain (CcFirmwareSecurityPanel *self,
                              guint                    hsi_number,
                              gchar                   *title,
                              const gchar             *description)
@@ -531,7 +531,7 @@ set_hsi_button_view_contain (CcfirmwareSecurityPanel *self,
 }
 
 static void
-set_hsi_button_view (CcfirmwareSecurityPanel *self)
+set_hsi_button_view (CcFirmwareSecurityPanel *self)
 {
   switch (self->hsi_number)
     {
@@ -578,7 +578,7 @@ on_properties_bus_done_cb (GObject      *source,
   g_autoptr (GError) error = NULL;
   g_autoptr (GVariant) val = NULL;
   const gchar *hsi_str = NULL;
-  CcfirmwareSecurityPanel *self = CC_FIRMWARE_SECURITY_PANEL (user_data);
+  CcFirmwareSecurityPanel *self = CC_FIRMWARE_SECURITY_PANEL (user_data);
 
   val = g_dbus_proxy_call_finish (G_DBUS_PROXY (source), res, &error);
   if (val == NULL)
@@ -605,7 +605,7 @@ on_properties_bus_ready_cb (GObject      *source_object,
                             GAsyncResult *res,
                             gpointer      user_data)
 {
-  CcfirmwareSecurityPanel *self = CC_FIRMWARE_SECURITY_PANEL (user_data);
+  CcFirmwareSecurityPanel *self = CC_FIRMWARE_SECURITY_PANEL (user_data);
   g_autoptr (GError) error = NULL;
 
   self->properties_bus_proxy = g_dbus_proxy_new_for_bus_finish (res, &error);
@@ -686,7 +686,7 @@ cc_firmware_security_panel_static_init_func (void)
 static void
 cc_firmware_security_panel_finalize (GObject *object)
 {
-  CcfirmwareSecurityPanel *self = CC_FIRMWARE_SECURITY_PANEL (object);
+  CcFirmwareSecurityPanel *self = CC_FIRMWARE_SECURITY_PANEL (object);
 
   g_clear_pointer (&self->hsi1_dict, g_hash_table_unref);
   g_clear_pointer (&self->hsi2_dict, g_hash_table_unref);
@@ -703,7 +703,7 @@ cc_firmware_security_panel_finalize (GObject *object)
 
 
 static void
-cc_firmware_security_panel_class_init (CcfirmwareSecurityPanelClass *klass)
+cc_firmware_security_panel_class_init (CcFirmwareSecurityPanelClass *klass)
 {
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
@@ -712,17 +712,17 @@ cc_firmware_security_panel_class_init (CcfirmwareSecurityPanelClass *klass)
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/firmware-security/cc-firmware-security-panel.ui");
 
-  gtk_widget_class_bind_template_child (widget_class, CcfirmwareSecurityPanel, firmware_security_log_pgroup);
-  gtk_widget_class_bind_template_child (widget_class, CcfirmwareSecurityPanel, firmware_security_log_stack);
-  gtk_widget_class_bind_template_child (widget_class, CcfirmwareSecurityPanel, hsi_button);
-  gtk_widget_class_bind_template_child (widget_class, CcfirmwareSecurityPanel, hsi_description);
-  gtk_widget_class_bind_template_child (widget_class, CcfirmwareSecurityPanel, hsi_icon);
-  gtk_widget_class_bind_template_child (widget_class, CcfirmwareSecurityPanel, hsi_label);
-  gtk_widget_class_bind_template_child (widget_class, CcfirmwareSecurityPanel, secure_boot_button);
-  gtk_widget_class_bind_template_child (widget_class, CcfirmwareSecurityPanel, secure_boot_description);
-  gtk_widget_class_bind_template_child (widget_class, CcfirmwareSecurityPanel, secure_boot_icon);
-  gtk_widget_class_bind_template_child (widget_class, CcfirmwareSecurityPanel, secure_boot_label);
-  gtk_widget_class_bind_template_child (widget_class, CcfirmwareSecurityPanel, panel_leaflet);
+  gtk_widget_class_bind_template_child (widget_class, CcFirmwareSecurityPanel, firmware_security_log_pgroup);
+  gtk_widget_class_bind_template_child (widget_class, CcFirmwareSecurityPanel, firmware_security_log_stack);
+  gtk_widget_class_bind_template_child (widget_class, CcFirmwareSecurityPanel, hsi_button);
+  gtk_widget_class_bind_template_child (widget_class, CcFirmwareSecurityPanel, hsi_description);
+  gtk_widget_class_bind_template_child (widget_class, CcFirmwareSecurityPanel, hsi_icon);
+  gtk_widget_class_bind_template_child (widget_class, CcFirmwareSecurityPanel, hsi_label);
+  gtk_widget_class_bind_template_child (widget_class, CcFirmwareSecurityPanel, secure_boot_button);
+  gtk_widget_class_bind_template_child (widget_class, CcFirmwareSecurityPanel, secure_boot_description);
+  gtk_widget_class_bind_template_child (widget_class, CcFirmwareSecurityPanel, secure_boot_icon);
+  gtk_widget_class_bind_template_child (widget_class, CcFirmwareSecurityPanel, secure_boot_label);
+  gtk_widget_class_bind_template_child (widget_class, CcFirmwareSecurityPanel, panel_leaflet);
 
   gtk_widget_class_bind_template_callback (widget_class, on_hsi_button_clicked_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_secure_boot_button_clicked_cb);
@@ -730,7 +730,7 @@ cc_firmware_security_panel_class_init (CcfirmwareSecurityPanelClass *klass)
 }
 
 static void
-cc_firmware_security_panel_init (CcfirmwareSecurityPanel *self)
+cc_firmware_security_panel_init (CcFirmwareSecurityPanel *self)
 {
   g_resources_register (cc_firmware_security_get_resource ());
 
