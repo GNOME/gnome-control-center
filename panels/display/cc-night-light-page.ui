@@ -70,7 +70,7 @@
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="valign">GTK_ALIGN_CENTER</property>
-                <signal name="clicked" handler="dialog_undisable_clicked_cb" object="CcNightLightPage" swapped="no" />
+                <signal name="clicked" handler="dialog_undisable_clicked_cb" object="CcNightLightPage" swapped="yes" />
               </object>
             </child>
           </object>
@@ -103,7 +103,7 @@
                     <child>
                       <object class="GtkComboBoxText" id="schedule_type_combo">
                         <property name="valign">center</property>
-                        <signal name="notify::active" handler="on_schedule_type_combo_active_changed_cb" object="CcNightLightPage" swapped="no" />
+                        <signal name="notify::active" handler="on_schedule_type_combo_active_changed_cb" object="CcNightLightPage" swapped="yes" />
                         <items>
                           <item translatable="yes" id="automatic">Sunset to Sunrise</item>
                           <item translatable="yes" id="manual">Manual Schedule</item>
@@ -152,7 +152,7 @@
                                 <property name="numeric">True</property>
                                 <property name="wrap">True</property>
                                 <property name="value">4</property>
-                                <signal name="output" handler="dialog_format_hours_combobox" object="CcNightLightPage" swapped="no" />
+                                <signal name="output" handler="dialog_format_from_hours_combobox" object="CcNightLightPage" swapped="yes" />
                                 <style>
                                   <class name="padded-spinbutton"/>
                                 </style>
@@ -175,7 +175,7 @@
                                 <property name="adjustment">adjustment_from_minutes</property>
                                 <property name="numeric">True</property>
                                 <property name="wrap">True</property>
-                                <signal name="output" handler="dialog_format_minutes_combobox" object="CcNightLightPage" swapped="no" />
+                                <signal name="output" handler="dialog_format_from_minutes_combobox" object="CcNightLightPage" swapped="yes" />
                                 <style>
                                   <class name="padded-spinbutton"/>
                                 </style>
@@ -194,7 +194,7 @@
                                     <property name="can_focus">True</property>
                                     <property name="receives_default">True</property>
                                     <property name="valign">center</property>
-                                    <signal name="clicked" handler="dialog_am_pm_from_button_clicked_cb" object="CcNightLightPage" swapped="no" />
+                                    <signal name="clicked" handler="dialog_am_pm_from_button_clicked_cb" object="CcNightLightPage" swapped="yes" />
                                     <style>
                                       <class name="unpadded-button"/>
                                     </style>
@@ -206,7 +206,7 @@
                                     <property name="can_focus">True</property>
                                     <property name="receives_default">True</property>
                                     <property name="valign">center</property>
-                                    <signal name="clicked" handler="dialog_am_pm_from_button_clicked_cb" object="CcNightLightPage" swapped="no" />
+                                    <signal name="clicked" handler="dialog_am_pm_from_button_clicked_cb" object="CcNightLightPage" swapped="yes" />
                                     <style>
                                       <class name="unpadded-button"/>
                                     </style>
@@ -239,7 +239,7 @@
                                 <property name="numeric">True</property>
                                 <property name="wrap">True</property>
                                 <property name="value">4</property>
-                                <signal name="output" handler="dialog_format_hours_combobox" object="CcNightLightPage" swapped="no" />
+                                <signal name="output" handler="dialog_format_to_hours_combobox" object="CcNightLightPage" swapped="yes" />
                                 <style>
                                   <class name="padded-spinbutton"/>
                                 </style>
@@ -262,7 +262,7 @@
                                 <property name="adjustment">adjustment_to_minutes</property>
                                 <property name="numeric">True</property>
                                 <property name="wrap">True</property>
-                                <signal name="output" handler="dialog_format_minutes_combobox" object="CcNightLightPage" swapped="no" />
+                                <signal name="output" handler="dialog_format_to_minutes_combobox" object="CcNightLightPage" swapped="yes" />
                                 <style>
                                   <class name="padded-spinbutton"/>
                                 </style>
@@ -281,7 +281,7 @@
                                     <property name="can_focus">True</property>
                                     <property name="receives_default">True</property>
                                     <property name="valign">center</property>
-                                    <signal name="clicked" handler="dialog_am_pm_to_button_clicked_cb" object="CcNightLightPage" swapped="no" />
+                                    <signal name="clicked" handler="dialog_am_pm_to_button_clicked_cb" object="CcNightLightPage" swapped="yes" />
                                     <style>
                                       <class name="unpadded-button"/>
                                     </style>
@@ -293,7 +293,7 @@
                                     <property name="can_focus">True</property>
                                     <property name="receives_default">True</property>
                                     <property name="valign">center</property>
-                                    <signal name="clicked" handler="dialog_am_pm_to_button_clicked_cb" object="CcNightLightPage" swapped="no" />
+                                    <signal name="clicked" handler="dialog_am_pm_to_button_clicked_cb" object="CcNightLightPage" swapped="yes" />
                                     <style>
                                       <class name="unpadded-button"/>
                                     </style>
@@ -373,31 +373,31 @@
     <property name="upper">23</property>
     <property name="step_increment">1</property>
     <property name="page_increment">10</property>
-    <signal name="value-changed" handler="dialog_time_from_value_changed_cb" object="CcNightLightPage" swapped="no" />
+    <signal name="value-changed" handler="dialog_time_from_value_changed_cb" object="CcNightLightPage" swapped="yes" />
   </object>
   <object class="GtkAdjustment" id="adjustment_from_minutes">
     <property name="upper">59</property>
     <property name="step_increment">1</property>
     <property name="page_increment">10</property>
-    <signal name="value-changed" handler="dialog_time_from_value_changed_cb" object="CcNightLightPage" swapped="no" />
+    <signal name="value-changed" handler="dialog_time_from_value_changed_cb" object="CcNightLightPage" swapped="yes" />
   </object>
   <object class="GtkAdjustment" id="adjustment_to_hours">
     <property name="upper">23</property>
     <property name="step_increment">1</property>
     <property name="page_increment">10</property>
-    <signal name="value-changed" handler="dialog_time_to_value_changed_cb" object="CcNightLightPage" swapped="no" />
+    <signal name="value-changed" handler="dialog_time_to_value_changed_cb" object="CcNightLightPage" swapped="yes" />
   </object>
   <object class="GtkAdjustment" id="adjustment_to_minutes">
     <property name="upper">59</property>
     <property name="step_increment">1</property>
     <property name="page_increment">10</property>
-    <signal name="value-changed" handler="dialog_time_to_value_changed_cb" object="CcNightLightPage" swapped="no" />
+    <signal name="value-changed" handler="dialog_time_to_value_changed_cb" object="CcNightLightPage" swapped="yes" />
   </object>
   <object class="GtkAdjustment" id="adjustment_color_temperature">
     <property name="lower">1700</property>
     <property name="upper">4700</property>
     <property name="step_increment">100</property>
     <property name="page_increment">500</property>
-    <signal name="value-changed" handler="dialog_color_temperature_value_changed_cb" object="CcNightLightPage" swapped="no" />
+    <signal name="value-changed" handler="dialog_color_temperature_value_changed_cb" object="CcNightLightPage" swapped="yes" />
   </object>
 </interface>

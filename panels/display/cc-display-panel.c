@@ -462,8 +462,7 @@ on_monitor_settings_updated_cb (CcDisplayPanel    *panel,
 }
 
 static void
-on_back_button_clicked_cb (GtkButton      *button,
-                           CcDisplayPanel *self)
+on_back_button_clicked_cb (CcDisplayPanel *self)
 {
   adw_leaflet_set_visible_child_name (self->leaflet, "displays");
 }
@@ -488,9 +487,7 @@ on_config_type_toggled_cb (CcDisplayPanel *panel,
 }
 
 static void
-on_night_light_enabled_changed_cb (GSettings      *settings,
-                                   const gchar    *key,
-                                   CcDisplayPanel *self)
+on_night_light_enabled_changed_cb (CcDisplayPanel *self)
 {
   if (g_settings_get_boolean (self->display_settings, "night-light-enabled"))
     cc_list_row_set_secondary_label (self->night_light_row, _("On"));
@@ -499,8 +496,7 @@ on_night_light_enabled_changed_cb (GSettings      *settings,
 }
 
 static void
-on_night_light_row_activated_cb (GtkListBoxRow  *row,
-                                 CcDisplayPanel *self)
+on_night_light_row_activated_cb (CcDisplayPanel *self)
 {
   adw_leaflet_set_visible_child_name (self->leaflet, "night-light");
 }
@@ -646,8 +642,8 @@ set_current_output (CcDisplayPanel   *panel,
 }
 
 static void
-on_monitor_row_activated_cb (GtkListBoxRow  *row,
-                             CcDisplayPanel *self)
+on_monitor_row_activated_cb (CcDisplayPanel *self,
+                             GtkListBoxRow  *row)
 {
   CcDisplayMonitor *monitor;
 
@@ -684,7 +680,7 @@ add_display_row (CcDisplayPanel   *self,
 
   adw_preferences_group_add (ADW_PREFERENCES_GROUP (self->display_settings_group), row);
 
-  g_signal_connect (row, "activated", G_CALLBACK (on_monitor_row_activated_cb), self);
+  g_signal_connect_swapped (row, "activated", G_CALLBACK (on_monitor_row_activated_cb), self);
 
   self->monitor_rows = g_list_prepend (self->monitor_rows, row);
 }
@@ -1143,6 +1139,6 @@ cc_display_panel_init (CcDisplayPanel *self)
                            "changed::night-light-enabled",
                            G_CALLBACK (on_night_light_enabled_changed_cb),
                            self,
-                           0);
-  on_night_light_enabled_changed_cb (NULL, NULL, self);
+                           G_CONNECT_SWAPPED);
+  on_night_light_enabled_changed_cb (self);
 }
