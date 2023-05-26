@@ -17,14 +17,14 @@
 
             <child>
               <object class="GtkEventControllerMotion">
-                <signal name="enter" handler="on_option_focus_enter_cb" object="default_option_picture" swapped="no" />
-                <signal name="leave" handler="on_option_focus_leave_cb" object="default_option_picture" swapped="no" />
+                <signal name="enter" handler="on_default_option_focus_enter_cb" object="CcSplitRow" swapped="yes" />
+                <signal name="leave" handler="on_default_option_focus_leave_cb" object="CcSplitRow" swapped="yes" />
               </object>
             </child>
 
             <child>
               <object class="GtkGestureClick">
-                <signal name="released" handler="on_option_click_released_cb" object="default_option_checkbutton" swapped="no" />
+                <signal name="released" handler="on_default_option_click_released_cb" object="CcSplitRow" swapped="yes" />
               </object>
             </child>
 
@@ -96,14 +96,14 @@
 
             <child>
               <object class="GtkEventControllerMotion">
-                <signal name="enter" handler="on_option_focus_enter_cb" object="alternative_option_picture" swapped="no" />
-                <signal name="leave" handler="on_option_focus_leave_cb" object="alternative_option_picture" swapped="no" />
+                <signal name="enter" handler="on_alternative_option_focus_enter_cb" object="CcSplitRow" swapped="yes" />
+                <signal name="leave" handler="on_alternative_option_focus_leave_cb" object="CcSplitRow" swapped="yes" />
               </object>
             </child>
 
             <child>
               <object class="GtkGestureClick">
-                <signal name="released" handler="on_option_click_released_cb" object="alternative_option_checkbutton" swapped="no" />
+                <signal name="released" handler="on_alternative_option_click_released_cb" object="CcSplitRow" swapped="yes" />
               </object>
             </child>
 
