@@ -52,7 +52,7 @@
           <object class="AdwComboRow" id="tablet_display">
             <property name="width_request">100</property>
             <property name="title" translatable="yes" context="display setting">Map to Monitor</property>
-            <signal name="notify::selected-item" handler="on_display_selected" swapped="no"/>
+            <signal name="notify::selected-item" handler="on_display_selected" object="CcWacomPage" swapped="yes"/>
           </object>
         </child>
         <child>

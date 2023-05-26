@@ -143,20 +143,30 @@ cc_wacom_stylus_page_set_property (GObject      *object,
 }
 
 static void
-on_stylus_action_selected (GtkWidget         *widget,
-			   GParamSpec        *pspec,
-			   CcWacomStylusPage *page)
+on_stylus_button1_action_selected (CcWacomStylusPage *page)
 {
 	gint idx;
 
-	idx = adw_combo_row_get_selected (ADW_COMBO_ROW (widget));
+	idx = adw_combo_row_get_selected (ADW_COMBO_ROW (page->stylus_button1_action));
+	g_settings_set_enum (page->stylus_settings, "button-action", idx);
+}
 
-	if (widget == page->stylus_button1_action)
-		g_settings_set_enum (page->stylus_settings, "button-action", idx);
-	else if (widget == page->stylus_button2_action)
-		g_settings_set_enum (page->stylus_settings, "secondary-button-action", idx);
-	else if (widget == page->stylus_button3_action)
-		g_settings_set_enum (page->stylus_settings, "tertiary-button-action", idx);
+static void
+on_stylus_button2_action_selected (CcWacomStylusPage *page)
+{
+	gint idx;
+
+	idx = adw_combo_row_get_selected (ADW_COMBO_ROW (page->stylus_button2_action));
+	g_settings_set_enum (page->stylus_settings, "secondary-button-action", idx);
+}
+
+static void
+on_stylus_button3_action_selected (CcWacomStylusPage *page)
+{
+	gint idx;
+
+	idx = adw_combo_row_get_selected (ADW_COMBO_ROW (page->stylus_button3_action));
+	g_settings_set_enum (page->stylus_settings, "tertiary-button-action", idx);
 }
 
 static void
@@ -181,7 +191,9 @@ cc_wacom_stylus_page_class_init (CcWacomStylusPageClass *klass)
 	gtk_widget_class_bind_template_child (widget_class, CcWacomStylusPage, stylus_tip_pressure_adjustment);
 	gtk_widget_class_bind_template_child (widget_class, CcWacomStylusPage, stylus_eraser_pressure_adjustment);
 
-	gtk_widget_class_bind_template_callback (widget_class, on_stylus_action_selected);
+	gtk_widget_class_bind_template_callback (widget_class, on_stylus_button1_action_selected);
+	gtk_widget_class_bind_template_callback (widget_class, on_stylus_button2_action_selected);
+	gtk_widget_class_bind_template_callback (widget_class, on_stylus_button3_action_selected);
 	gtk_widget_class_bind_template_callback (widget_class, on_tip_pressure_value_changed);
 	gtk_widget_class_bind_template_callback (widget_class, on_eraser_pressure_value_changed);
 }

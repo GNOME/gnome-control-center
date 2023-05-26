@@ -494,17 +494,15 @@ on_map_buttons_activated (CcWacomPage *self)
 }
 
 static void
-on_display_selected (GtkWidget   *widget,
-		     GParamSpec  *pspec,
-		     CcWacomPage *page)
+on_display_selected (CcWacomPage *page)
 {
 	GListModel *list;
 	g_autoptr (GObject) obj = NULL;
 	GVariant *variant;
 	gint idx;
 
-	list = adw_combo_row_get_model (ADW_COMBO_ROW (widget));
-	idx = adw_combo_row_get_selected (ADW_COMBO_ROW (widget));
+	list = adw_combo_row_get_model (ADW_COMBO_ROW (page->tablet_display));
+	idx = adw_combo_row_get_selected (ADW_COMBO_ROW (page->tablet_display));
 	obj = g_list_model_get_item (list, idx);
 
 	variant = g_object_get_data (obj, "value-output");
