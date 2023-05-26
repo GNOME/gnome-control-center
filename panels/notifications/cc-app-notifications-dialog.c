@@ -55,12 +55,12 @@ struct _CcAppNotificationsDialog {
   gchar               *app_id;
   GDBusProxy          *perm_store;
 
-  GtkWidget           *notifications_switch;
-  GtkWidget           *sound_alerts_switch;
-  GtkWidget           *notification_banners_switch;
-  GtkWidget           *notification_banners_content_switch;
-  GtkWidget           *lock_screen_notifications_switch;
-  GtkWidget           *lock_screen_content_switch;
+  GtkSwitch           *notifications_switch;
+  GtkSwitch           *sound_alerts_switch;
+  GtkSwitch           *notification_banners_switch;
+  GtkSwitch           *notification_banners_content_switch;
+  GtkSwitch           *lock_screen_notifications_switch;
+  GtkSwitch           *lock_screen_content_switch;
 };
 
 G_DEFINE_TYPE (CcAppNotificationsDialog, cc_app_notifications_dialog, GTK_TYPE_DIALOG)
@@ -158,12 +158,10 @@ set_portal_permissions_for_app (CcAppNotificationsDialog *dialog, GtkSwitch *the
 }
 
 static void
-notifications_switch_state_set_cb (GtkSwitch    *widget,
-                                   GParamSpec   *pspec,
-                                   CcAppNotificationsDialog *dialog)
+notifications_switch_state_set_cb (CcAppNotificationsDialog *dialog)
 {
-  g_settings_set_boolean (dialog->settings, "enable", gtk_switch_get_active (widget));
-  set_portal_permissions_for_app (dialog, widget);
+  g_settings_set_boolean (dialog->settings, "enable", gtk_switch_get_active (dialog->notifications_switch));
+  set_portal_permissions_for_app (dialog, dialog->notifications_switch);
   update_sound_switch (dialog);
   update_banner_switch (dialog);
   update_banner_content_switch (dialog);
@@ -172,45 +170,35 @@ notifications_switch_state_set_cb (GtkSwitch    *widget,
 }
 
 static void
-sound_alerts_switch_state_set_cb (GtkSwitch    *widget,
-                                  GParamSpec   *pspec,
-                                  CcAppNotificationsDialog *dialog)
+sound_alerts_switch_state_set_cb (CcAppNotificationsDialog *dialog)
 {
-  g_settings_set_boolean (dialog->settings, "enable-sound-alerts", gtk_switch_get_active (widget));
+  g_settings_set_boolean (dialog->settings, "enable-sound-alerts", gtk_switch_get_active (dialog->sound_alerts_switch));
 }
 
 static void
-notification_banners_switch_state_set_cb (GtkSwitch    *widget,
-                                          GParamSpec   *pspec,
-                                          CcAppNotificationsDialog *dialog)
+notification_banners_switch_state_set_cb (CcAppNotificationsDialog *dialog)
 {
-  g_settings_set_boolean (dialog->settings, "show-banners", gtk_switch_get_active (widget));
+  g_settings_set_boolean (dialog->settings, "show-banners", gtk_switch_get_active (dialog->notification_banners_switch));
   update_banner_content_switch (dialog);
 }
 
 static void
-notification_banners_content_switch_state_set_cb (GtkSwitch    *widget,
-                                                  GParamSpec   *pspec,
-                                                  CcAppNotificationsDialog *dialog)
+notification_banners_content_switch_state_set_cb (CcAppNotificationsDialog *dialog)
 {
-  g_settings_set_boolean (dialog->settings, "force-expanded", gtk_switch_get_active (widget));
+  g_settings_set_boolean (dialog->settings, "force-expanded", gtk_switch_get_active (dialog->notification_banners_content_switch));
 }
 
 static void
-lock_screen_notifications_switch_state_set_cb (GtkSwitch    *widget,
-                                               GParamSpec   *pspec,
-                                               CcAppNotificationsDialog *dialog)
+lock_screen_notifications_switch_state_set_cb (CcAppNotificationsDialog *dialog)
 {
-  g_settings_set_boolean (dialog->settings, "show-in-lock-screen", gtk_switch_get_active (widget));
+  g_settings_set_boolean (dialog->settings, "show-in-lock-screen", gtk_switch_get_active (dialog->lock_screen_notifications_switch));
   update_lock_screen_content_switch (dialog);
 }
 
 static void
-lock_screen_content_switch_state_set_cb (GtkSwitch    *widget,
-                                         GParamSpec   *pspec,
-                                         CcAppNotificationsDialog *dialog)
+lock_screen_content_switch_state_set_cb (CcAppNotificationsDialog *dialog)
 {
-  g_settings_set_boolean (dialog->settings, "details-in-lock-screen", gtk_switch_get_active (widget));
+  g_settings_set_boolean (dialog->settings, "details-in-lock-screen", gtk_switch_get_active (dialog->lock_screen_content_switch));
 }
 
 static void
@@ -228,7 +216,7 @@ static void
 update_notification_switch (CcAppNotificationsDialog *dialog)
 {
   g_signal_handlers_block_by_func (G_OBJECT (dialog->notifications_switch), notifications_switch_state_set_cb, dialog);
-  gtk_switch_set_active (GTK_SWITCH (dialog->notifications_switch), g_settings_get_boolean (dialog->settings, "enable"));
+  gtk_switch_set_active (dialog->notifications_switch, g_settings_get_boolean (dialog->settings, "enable"));
   g_signal_handlers_unblock_by_func (G_OBJECT (dialog->notifications_switch), notifications_switch_state_set_cb, dialog);
 }
 
@@ -236,9 +224,9 @@ static void
 update_sound_switch (CcAppNotificationsDialog *dialog)
 {
   g_signal_handlers_block_by_func (G_OBJECT (dialog->sound_alerts_switch), sound_alerts_switch_state_set_cb, dialog);
-  gtk_switch_set_active (GTK_SWITCH (dialog->sound_alerts_switch), g_settings_get_boolean (dialog->settings, "enable-sound-alerts"));
+  gtk_switch_set_active (dialog->sound_alerts_switch, g_settings_get_boolean (dialog->settings, "enable-sound-alerts"));
   g_signal_handlers_unblock_by_func (G_OBJECT (dialog->sound_alerts_switch), sound_alerts_switch_state_set_cb, dialog);
-  gtk_widget_set_sensitive (dialog->sound_alerts_switch, g_settings_get_boolean (dialog->settings, "enable"));
+  gtk_widget_set_sensitive (GTK_WIDGET (dialog->sound_alerts_switch), g_settings_get_boolean (dialog->settings, "enable"));
 }
 
 static void
@@ -257,9 +245,9 @@ update_banner_switch (CcAppNotificationsDialog *dialog)
   sensitive = notifications_enabled &&
               show_banners;
   g_signal_handlers_block_by_func (G_OBJECT (dialog->notification_banners_switch), notification_banners_switch_state_set_cb, dialog);
-  gtk_switch_set_active (GTK_SWITCH (dialog->notification_banners_switch), active);
+  gtk_switch_set_active (dialog->notification_banners_switch, active);
   g_signal_handlers_unblock_by_func (G_OBJECT (dialog->notification_banners_switch), notification_banners_switch_state_set_cb, dialog);
-  gtk_widget_set_sensitive (dialog->notification_banners_switch, sensitive);
+  gtk_widget_set_sensitive (GTK_WIDGET (dialog->notification_banners_switch), sensitive);
 }
 
 static void
@@ -280,9 +268,9 @@ update_banner_content_switch (CcAppNotificationsDialog *dialog)
               notifications_enabled &&
               show_banners;
   g_signal_handlers_block_by_func (G_OBJECT (dialog->notification_banners_content_switch), notification_banners_content_switch_state_set_cb, dialog);
-  gtk_switch_set_active (GTK_SWITCH (dialog->notification_banners_content_switch), active);
+  gtk_switch_set_active (dialog->notification_banners_content_switch, active);
   g_signal_handlers_unblock_by_func (G_OBJECT (dialog->notification_banners_content_switch), notification_banners_content_switch_state_set_cb, dialog);
-  gtk_widget_set_sensitive (dialog->notification_banners_content_switch, sensitive);
+  gtk_widget_set_sensitive (GTK_WIDGET (dialog->notification_banners_content_switch), sensitive);
 }
 
 static void
@@ -302,9 +290,9 @@ update_lock_screen_switch (CcAppNotificationsDialog *dialog)
               show_in_lock_screen;
 
   g_signal_handlers_block_by_func (G_OBJECT (dialog->lock_screen_notifications_switch), lock_screen_notifications_switch_state_set_cb, dialog);
-  gtk_switch_set_active (GTK_SWITCH (dialog->lock_screen_notifications_switch), active);
+  gtk_switch_set_active (dialog->lock_screen_notifications_switch, active);
   g_signal_handlers_unblock_by_func (G_OBJECT (dialog->lock_screen_notifications_switch), lock_screen_notifications_switch_state_set_cb, dialog);
-  gtk_widget_set_sensitive (dialog->lock_screen_notifications_switch, sensitive);
+  gtk_widget_set_sensitive (GTK_WIDGET (dialog->lock_screen_notifications_switch), sensitive);
 }
 
 static void
@@ -325,9 +313,9 @@ update_lock_screen_content_switch (CcAppNotificationsDialog *dialog)
               notifications_enabled &&
               show_in_lock_screen;
   g_signal_handlers_block_by_func (G_OBJECT (dialog->lock_screen_content_switch), lock_screen_content_switch_state_set_cb, dialog);
-  gtk_switch_set_active (GTK_SWITCH (dialog->lock_screen_content_switch), active);
+  gtk_switch_set_active (dialog->lock_screen_content_switch, active);
   g_signal_handlers_unblock_by_func (G_OBJECT (dialog->lock_screen_content_switch), lock_screen_content_switch_state_set_cb, dialog);
-  gtk_widget_set_sensitive (dialog->lock_screen_content_switch, sensitive);
+  gtk_widget_set_sensitive (GTK_WIDGET (dialog->lock_screen_content_switch), sensitive);
 }
 
 static void
