@@ -451,13 +451,11 @@ on_bus_ready_cb (GObject       *source_object,
 }
 
 static void
-on_hsi_button_clicked_cb (GtkWidget *widget,
-                          gpointer   data)
+on_hsi_button_clicked_cb (CcfirmwareSecurityPanel *self)
 {
   GtkWidget *toplevel;
   CcShell *shell;
   GtkWidget *dialog;
-  CcfirmwareSecurityPanel *self = CC_FIRMWARE_SECURITY_PANEL (data);
 
   dialog = cc_firmware_security_dialog_new (self->hsi_number,
                                             self->hsi1_dict,
@@ -473,13 +471,11 @@ on_hsi_button_clicked_cb (GtkWidget *widget,
 }
 
 static void
-on_secure_boot_button_clicked_cb (GtkWidget *widget,
-                                  gpointer   data)
+on_secure_boot_button_clicked_cb (CcfirmwareSecurityPanel *self)
 {
   GtkWidget *toplevel;
   CcShell *shell;
   GtkWidget *boot_dialog;
-  CcfirmwareSecurityPanel *self = CC_FIRMWARE_SECURITY_PANEL (data);
 
   boot_dialog = cc_firmware_security_boot_dialog_new (self->secure_boot_state);
   shell = cc_panel_get_shell (CC_PANEL (self));
@@ -489,10 +485,8 @@ on_secure_boot_button_clicked_cb (GtkWidget *widget,
 }
 
 static void
-on_fw_help_button_clicked_cb (GtkWidget *widget,
-                              gpointer   data)
+on_fw_help_button_clicked_cb (CcfirmwareSecurityPanel *self)
 {
-  CcfirmwareSecurityPanel *self = CC_FIRMWARE_SECURITY_PANEL (data);
   GtkWidget *help_dialog;
   GtkWidget *toplevel;
   CcShell *shell;

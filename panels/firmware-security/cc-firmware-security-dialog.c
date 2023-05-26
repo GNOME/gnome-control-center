@@ -157,11 +157,8 @@ update_dialog (CcFirmwareSecurityDialog *self)
 }
 
 static void
-on_fw_back_button_clicked_cb (GtkWidget *widget,
-                              gpointer   data)
+on_fw_back_button_clicked_cb (CcFirmwareSecurityDialog *self)
 {
-  CcFirmwareSecurityDialog *self = CC_FIRMWARE_SECURITY_DIALOG (data);
-
   adw_leaflet_navigate (self->leaflet, ADW_NAVIGATION_DIRECTION_BACK);
 
   gtk_widget_set_visible (self->firmware_security_dialog_hsi1_pg, FALSE);
@@ -242,10 +239,8 @@ fwupd_get_property (const char *property_name)
 }
 
 static void
-on_hsi_detail_button_clicked_cb (GtkWidget *widget,
-                                 gpointer  *data)
+on_hsi_detail_button_clicked_cb (CcFirmwareSecurityDialog *self)
 {
-  CcFirmwareSecurityDialog *self = CC_FIRMWARE_SECURITY_DIALOG (data);
   GdkClipboard *clip_board;
   GdkDisplay *display; 
   g_autoptr (GList) hash_keys;

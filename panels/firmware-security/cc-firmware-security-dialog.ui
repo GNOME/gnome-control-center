@@ -85,7 +85,7 @@
                                 <property name="sensitive">True</property>
                                 <property name="halign">center</property>
                                 <property name="label" translatable="yes">Copy Technical Report</property>
-                                <signal name="clicked" handler="on_hsi_detail_button_clicked_cb" swapped="no" />
+                                <signal name="clicked" handler="on_hsi_detail_button_clicked_cb" object="CcFirmwareSecurityDialog" swapped="yes" />
                                 <style>
                                   <class name="pill" />
                                 </style>
@@ -124,7 +124,7 @@
                         <property name="height-request">12</property>
 
                         <property name="icon-name">go-previous-symbolic</property>
-                        <signal name="clicked" handler="on_fw_back_button_clicked_cb" swapped="no" />
+                        <signal name="clicked" handler="on_fw_back_button_clicked_cb" object="CcFirmwareSecurityDialog" swapped="yes" />
                         <style>
                           <class name="image-button" />
                         </style>
