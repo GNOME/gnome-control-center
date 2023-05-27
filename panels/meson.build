@@ -19,6 +19,7 @@ panels = [
   'search',
   'sharing',
   'sound',
+  'system',
   'universal-access',
   'user-accounts',
  'wwan',

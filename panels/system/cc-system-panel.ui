@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <template class="CcSystemPanel" parent="CcPanel">
+
+    <child type="titlebar">
+      <object class="AdwBin"/>
+    </child>
+
+    <child type="content">
+      <object class="AdwNavigationView" id="navigation">
+
+        <child>
+          <object class="AdwNavigationPage">
+            <property name="title" translatable="yes">System</property>
+            <property name="child">
+              <object class="AdwToolbarView">
+                <property name="top-bar-style">raised</property>
+
+                <child type="top">
+                  <object class="AdwHeaderBar">
+                  </object>
+                </child>
+
+                <property name="content">
+                  <!-- ... -->
+                </property>
+
+              </object>
+            </property>
+          </object>
+        </child>
+
+      </object>
+    </child>
+  </template>
+</interface>
