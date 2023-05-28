@@ -158,6 +158,7 @@ static void
 shortuct_custom_items_changed (CcKeyboardShortcutDialog *self)
 {
   GListStore *section;
+  GtkWidget *page;
 
   g_assert (CC_IS_KEYBOARD_SHORTCUT_DIALOG (self));
 
@@ -165,7 +166,6 @@ shortuct_custom_items_changed (CcKeyboardShortcutDialog *self)
 
   if (self->visible_section == section)
     {
-      GtkWidget *page;
       guint n_items;
 
       n_items = g_list_model_get_n_items (G_LIST_MODEL (section));
@@ -174,9 +174,11 @@ shortuct_custom_items_changed (CcKeyboardShortcutDialog *self)
         page = GTK_WIDGET (self->shortcut_list_stack);
       else
         page = GTK_WIDGET (self->empty_custom_shortcut_page);
-
-      gtk_stack_set_visible_child (self->subview_stack, page);
     }
+  else
+    page = GTK_WIDGET (self->shortcut_list_stack);
+
+  gtk_stack_set_visible_child (self->subview_stack, page);
 }
 
 static int
