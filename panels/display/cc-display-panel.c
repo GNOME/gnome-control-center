@@ -118,6 +118,8 @@ update_apply_button (CcDisplayPanel *panel);
 static void
 apply_current_configuration (CcDisplayPanel *self);
 static void
+cancel_current_configuration (CcDisplayPanel *panel);
+static void
 on_apply_titlebar_back_button_clicked (CcDisplayPanel *self);
 static void
 reset_current_config (CcDisplayPanel *panel);
@@ -603,6 +605,7 @@ cc_display_panel_class_init (CcDisplayPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, toplevel_shortcuts);
 
   gtk_widget_class_bind_template_callback (widget_class, apply_current_configuration);
+  gtk_widget_class_bind_template_callback (widget_class, cancel_current_configuration);
   gtk_widget_class_bind_template_callback (widget_class, on_back_button_clicked_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_config_type_toggled_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_night_light_row_activated_cb);
@@ -966,6 +969,22 @@ apply_current_configuration (CcDisplayPanel *self)
     g_warning ("Error applying configuration: %s", error->message);
 
   adw_leaflet_set_visible_child_name (self->leaflet, "displays");
+}
+
+static void
+cancel_current_configuration (CcDisplayPanel *panel)
+{
+  CcDisplayConfigType selected;
+  CcDisplayConfig *current;
+
+  selected = cc_panel_get_selected_type (panel);
+  current = cc_display_config_manager_get_current (panel->manager);
+
+  /* Closes the potentially open monitor row leaflet child. */
+  if (selected == CC_DISPLAY_CONFIG_JOIN && cc_display_config_is_cloning (current))
+    adw_leaflet_set_visible_child_name (panel->leaflet, "displays");
+
+  on_screen_changed (panel);
 }
 
 static void
