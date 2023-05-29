@@ -919,6 +919,7 @@ show_apply_titlebar (CcDisplayPanel *panel, gboolean is_applicable)
     {
       adw_window_title_set_title (panel->apply_titlebar_title_widget,
                                   _("Apply Changes?"));
+      adw_window_title_set_subtitle (panel->apply_titlebar_title_widget, "");
     }
   else
     {
