@@ -639,11 +639,10 @@ cc_display_arrangement_draw (GtkDrawingArea *drawing_area,
 }
 
 static gboolean
-on_click_gesture_pressed_cb (GtkGestureClick      *click_gesture,
+on_click_gesture_pressed_cb (CcDisplayArrangement *self,
                              gint                  n_press,
                              gdouble               x,
-                             gdouble               y,
-                             CcDisplayArrangement *self)
+                             gdouble               y)
 {
   CcDisplayMonitor *output;
   gdouble event_x, event_y;
@@ -677,11 +676,10 @@ on_click_gesture_pressed_cb (GtkGestureClick      *click_gesture,
 }
 
 static gboolean
-on_click_gesture_released_cb (GtkGestureClick      *click_gesture,
+on_click_gesture_released_cb (CcDisplayArrangement *self,
                               gint                  n_press,
                               gdouble               x,
-                              gdouble               y,
-                              CcDisplayArrangement *self)
+                              gdouble               y)
 {
   CcDisplayMonitor *output;
 
@@ -706,10 +704,9 @@ on_click_gesture_released_cb (GtkGestureClick      *click_gesture,
 }
 
 static gboolean
-on_motion_controller_motion_cb (GtkEventControllerMotion *motion_controller,
-                                gdouble                   x,
-                                gdouble                   y,
-                                CcDisplayArrangement     *self)
+on_motion_controller_motion_cb (CcDisplayArrangement *self,
+                                gdouble               x,
+                                gdouble               y)
 {
   gdouble event_x, event_y;
   gint mon_x, mon_y;
@@ -859,12 +856,12 @@ cc_display_arrangement_init (CcDisplayArrangement *self)
   GtkGesture *click_gesture;
 
   click_gesture = gtk_gesture_click_new ();
-  g_signal_connect (click_gesture, "pressed", G_CALLBACK (on_click_gesture_pressed_cb), self);
-  g_signal_connect (click_gesture, "released", G_CALLBACK (on_click_gesture_released_cb), self);
+  g_signal_connect_swapped (click_gesture, "pressed", G_CALLBACK (on_click_gesture_pressed_cb), self);
+  g_signal_connect_swapped (click_gesture, "released", G_CALLBACK (on_click_gesture_released_cb), self);
   gtk_widget_add_controller (GTK_WIDGET (self), GTK_EVENT_CONTROLLER (click_gesture));
 
   motion_controller = gtk_event_controller_motion_new ();
-  g_signal_connect (motion_controller, "motion", G_CALLBACK (on_motion_controller_motion_cb), self);
+  g_signal_connect_swapped (motion_controller, "motion", G_CALLBACK (on_motion_controller_motion_cb), self);
   gtk_widget_add_controller (GTK_WIDGET (self), motion_controller);
 
   gtk_drawing_area_set_draw_func (GTK_DRAWING_AREA (self),

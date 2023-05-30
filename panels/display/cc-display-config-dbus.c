@@ -1764,10 +1764,9 @@ update_panel_orientation_managed (CcDisplayConfigDBus *self)
 }
 
 static void
-proxy_properties_changed_cb (GDBusProxy          *proxy,
+proxy_properties_changed_cb (CcDisplayConfigDBus *self,
                              GVariant            *changed_properties,
-                             GStrv                invalidated_properties,
-                             CcDisplayConfigDBus *self)
+                             GStrv                invalidated_properties)
 {
   GVariantDict dict;
 
@@ -1837,8 +1836,8 @@ cc_display_config_dbus_constructed (GObject *object)
   if (error)
     g_warning ("Could not create DisplayConfig proxy: %s", error->message);
 
-  g_signal_connect (self->proxy, "g-properties-changed",
-                    G_CALLBACK (proxy_properties_changed_cb), self);
+  g_signal_connect_swapped (self->proxy, "g-properties-changed",
+                            G_CALLBACK (proxy_properties_changed_cb), self);
   update_panel_orientation_managed (self);
 
   G_OBJECT_CLASS (cc_display_config_dbus_parent_class)->constructed (object);
