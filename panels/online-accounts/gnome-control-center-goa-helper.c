@@ -345,8 +345,7 @@ list_providers (int    argc,
 /* show-account */
 
 static void
-on_remove_button_clicked_cb (GtkButton    *button,
-                             GApplication *application)
+on_remove_button_clicked_cb (GApplication *application)
 {
   g_print ("remove");
   g_application_quit (application);
@@ -436,7 +435,7 @@ on_application_activate_show_account_cb (GtkApplication  *application,
   gtk_widget_set_visible (button, !goa_account_get_is_locked (account));
   gtk_style_context_add_class (gtk_widget_get_style_context (button), "destructive-action");
   gtk_container_add (GTK_CONTAINER (box), button);
-  g_signal_connect (button, "clicked", G_CALLBACK (on_remove_button_clicked_cb), application);
+  g_signal_connect_swapped (button, "clicked", G_CALLBACK (on_remove_button_clicked_cb), application);
 }
 
 static int

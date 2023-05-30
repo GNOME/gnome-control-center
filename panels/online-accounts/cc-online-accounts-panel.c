@@ -641,26 +641,23 @@ sort_providers_func (GtkListBoxRow *a,
 }
 
 static void
-on_account_added_cb (GoaClient             *client,
-                     GoaObject             *object,
-                     CcOnlineAccountsPanel *self)
+on_account_added_cb (CcOnlineAccountsPanel *self,
+                     GoaObject             *object)
 {
   add_account (self, object);
 }
 
 static void
-on_account_changed_cb (GoaClient             *client,
-                       GoaObject             *object,
-                       CcOnlineAccountsPanel *self)
+on_account_changed_cb (CcOnlineAccountsPanel *self,
+                       GoaObject             *object)
 {
   if (self->active_object == object)
     show_account (self, self->active_object);
 }
 
 static void
-on_account_removed_cb (GoaClient             *client,
-                       GoaObject             *object,
-                       CcOnlineAccountsPanel *self)
+on_account_removed_cb (CcOnlineAccountsPanel *self,
+                       GoaObject             *object)
 {
   modify_row_for_account (self, object, remove_row_for_account_cb);
 }
@@ -924,20 +921,20 @@ cc_online_accounts_panel_init (CcOnlineAccountsPanel *self)
       return;
     }
 
-  g_signal_connect (self->client,
-                    "account-added",
-                    G_CALLBACK (on_account_added_cb),
-                    self);
+  g_signal_connect_swapped (self->client,
+                            "account-added",
+                            G_CALLBACK (on_account_added_cb),
+                            self);
 
-  g_signal_connect (self->client,
-                    "account-changed",
-                    G_CALLBACK (on_account_changed_cb),
-                    self);
+  g_signal_connect_swapped (self->client,
+                            "account-changed",
+                            G_CALLBACK (on_account_changed_cb),
+                            self);
 
-  g_signal_connect (self->client,
-                    "account-removed",
-                    G_CALLBACK (on_account_removed_cb),
-                    self);
+  g_signal_connect_swapped (self->client,
+                            "account-removed",
+                            G_CALLBACK (on_account_removed_cb),
+                            self);
 
   fill_accounts_listbox (self);
   load_custom_css ();
