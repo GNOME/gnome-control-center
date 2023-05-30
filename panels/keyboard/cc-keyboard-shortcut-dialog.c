@@ -336,14 +336,15 @@ back_button_clicked_cb (CcKeyboardShortcutDialog *self)
 }
 
 static void
-on_reset_all_dialog_response_cb (GtkDialog                *dialog,
-                                 gint                      response,
+on_reset_all_dialog_response_cb (AdwMessageDialog         *dialog,
+                                 gchar                    *response,
                                  CcKeyboardShortcutDialog *self)
 {
   guint n_items, j_items;
 
   gtk_window_destroy (GTK_WINDOW (dialog));
-  if (response != GTK_RESPONSE_ACCEPT)
+
+  if (g_strcmp0 (response, "cancel") == 0)
     return;
 
   n_items = g_list_model_get_n_items (G_LIST_MODEL (self->sections));
@@ -375,30 +376,34 @@ on_reset_all_dialog_response_cb (GtkDialog                *dialog,
 static void
 reset_all_clicked_cb (CcKeyboardShortcutDialog *self)
 {
-  GtkWidget *dialog, *button;
+  GtkWidget *dialog;
 
-  dialog = gtk_message_dialog_new (GTK_WINDOW (self),
-                                   GTK_DIALOG_MODAL | GTK_DIALOG_USE_HEADER_BAR | GTK_DIALOG_DESTROY_WITH_PARENT,
-                                   GTK_MESSAGE_WARNING,
-                                   GTK_BUTTONS_NONE,
-                                   _("Reset All Shortcuts?"));
+  dialog = adw_message_dialog_new (GTK_WINDOW (self),
+                                   _("Reset All Shortcuts?"),
+                                   NULL);
 
-  gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
-                                            _("Resetting the shortcuts may affect your custom shortcuts. "
-                                              "This cannot be undone."));
+  adw_message_dialog_format_body (ADW_MESSAGE_DIALOG (dialog),
+                                  _("Resetting the shortcuts may affect your custom shortcuts. This cannot be undone."));
 
-  gtk_dialog_add_buttons (GTK_DIALOG (dialog),
-                          _("Cancel"), GTK_RESPONSE_CANCEL,
-                          _("Reset All"), GTK_RESPONSE_ACCEPT,
-                          NULL);
+  adw_message_dialog_add_responses (ADW_MESSAGE_DIALOG (dialog),
+                                    "cancel",    _("Cancel"),
+                                    "reset_all", _("Reset All"),
+                                    NULL);
 
-  gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_CANCEL);
+  adw_message_dialog_set_response_appearance (ADW_MESSAGE_DIALOG (dialog),
+                                              "reset_all",
+                                              ADW_RESPONSE_DESTRUCTIVE);
 
-  /* Make the "Reset All" button destructive */
-  button = gtk_dialog_get_widget_for_response (GTK_DIALOG (dialog), GTK_RESPONSE_ACCEPT);
-  gtk_widget_add_css_class (button, "destructive-action");
+  adw_message_dialog_set_default_response (ADW_MESSAGE_DIALOG (dialog),
+                                           "cancel");
 
-  g_signal_connect (dialog, "response", G_CALLBACK (on_reset_all_dialog_response_cb), self);
+  adw_message_dialog_set_close_response (ADW_MESSAGE_DIALOG (dialog),
+                                         "cancel");
+
+  g_signal_connect (dialog,
+                    "response",
+                    G_CALLBACK (on_reset_all_dialog_response_cb),
+                    self);
 
   gtk_window_present (GTK_WINDOW (dialog));
 }
