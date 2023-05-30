@@ -342,11 +342,10 @@ cc_background_xml_load_xml_internal (CcBackgroundXml *xml,
 }
 
 static void
-gnome_wp_file_changed (GFileMonitor *monitor,
+gnome_wp_file_changed (CcBackgroundXml *xml,
 		       GFile *file,
 		       GFile *other_file,
-		       GFileMonitorEvent event_type,
-		       CcBackgroundXml *data)
+		       GFileMonitorEvent event_type)
 {
   g_autofree gchar *filename = NULL;
 
@@ -354,7 +353,7 @@ gnome_wp_file_changed (GFileMonitor *monitor,
   case G_FILE_MONITOR_EVENT_CHANGED:
   case G_FILE_MONITOR_EVENT_CREATED:
     filename = g_file_get_path (file);
-    cc_background_xml_load_xml_internal (data, filename, FALSE);
+    cc_background_xml_load_xml_internal (xml, filename, FALSE);
     break;
   default:
     break;
@@ -381,9 +380,9 @@ cc_background_xml_add_monitor (GFile      *directory,
     return;
   }
 
-  g_signal_connect (monitor, "changed",
-                    G_CALLBACK (gnome_wp_file_changed),
-                    data);
+  g_signal_connect_swapped (monitor, "changed",
+                            G_CALLBACK (gnome_wp_file_changed),
+                            data);
 
   data->monitors = g_slist_prepend (data->monitors, monitor);
 }
