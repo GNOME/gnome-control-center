@@ -82,10 +82,9 @@ move_down_cb (GSimpleAction *action,
 }
 
 static GdkContentProvider *
-drag_prepare_cb (GtkDragSource    *source,
+drag_prepare_cb (CcSearchPanelRow *self,
                  double            x,
-                 double            y,
-                 CcSearchPanelRow *self)
+                 double            y)
 {
   self->drag_x = x;
   self->drag_y = y;
@@ -94,9 +93,8 @@ drag_prepare_cb (GtkDragSource    *source,
 }
 
 static void
-drag_begin_cb (GtkDragSource    *source,
-               GdkDrag          *drag,
-               CcSearchPanelRow *self)
+drag_begin_cb (CcSearchPanelRow *self,
+               GdkDrag          *drag)
 {
   CcSearchPanelRow *panel_row;
   GtkAllocation alloc;
@@ -120,11 +118,10 @@ drag_begin_cb (GtkDragSource    *source,
 }
 
 static gboolean
-drop_cb (GtkDropTarget    *drop_target,
+drop_cb (CcSearchPanelRow *self,
          const GValue     *value,
          gdouble           x,
-         gdouble           y,
-         CcSearchPanelRow *self)
+         gdouble           y)
 {
   CcSearchPanelRow *source;
 
@@ -181,13 +178,13 @@ cc_search_panel_row_init (CcSearchPanelRow *self)
 
   drag_source = gtk_drag_source_new ();
   gtk_drag_source_set_actions (drag_source, GDK_ACTION_MOVE);
-  g_signal_connect (drag_source, "prepare", G_CALLBACK (drag_prepare_cb), self);
-  g_signal_connect (drag_source, "drag-begin", G_CALLBACK (drag_begin_cb), self);
+  g_signal_connect_swapped (drag_source, "prepare", G_CALLBACK (drag_prepare_cb), self);
+  g_signal_connect_swapped (drag_source, "drag-begin", G_CALLBACK (drag_begin_cb), self);
   gtk_widget_add_controller (GTK_WIDGET (self), GTK_EVENT_CONTROLLER (drag_source));
 
   drop_target = gtk_drop_target_new (CC_TYPE_SEARCH_PANEL_ROW, GDK_ACTION_MOVE);
   gtk_drop_target_set_preload (drop_target, TRUE);
-  g_signal_connect (drop_target, "drop", G_CALLBACK (drop_cb), self);
+  g_signal_connect_swapped (drop_target, "drop", G_CALLBACK (drop_cb), self);
   gtk_widget_add_controller (GTK_WIDGET (self), GTK_EVENT_CONTROLLER (drop_target));
 
   group = g_simple_action_group_new ();
