@@ -444,10 +444,10 @@ update_current_tool (CcWacomPanel  *self,
 }
 
 static void
-on_stylus_proximity_cb (GtkGestureStylus *gesture,
+on_stylus_proximity_cb (CcWacomPanel     *self,
 			double            x,
 			double            y,
-			CcWacomPanel     *self)
+			GtkGestureStylus *gesture)
 {
 	GdkDevice *device;
 	GdkDeviceTool *tool;
@@ -497,8 +497,8 @@ cc_wacom_panel_constructed (GObject *object)
 	shell = cc_panel_get_shell (CC_PANEL (self));
 
 	self->stylus_gesture = gtk_gesture_stylus_new ();
-	g_signal_connect (self->stylus_gesture, "proximity",
-			  G_CALLBACK (on_stylus_proximity_cb), self);
+	g_signal_connect_swapped (self->stylus_gesture, "proximity",
+                                  G_CALLBACK (on_stylus_proximity_cb), self);
 	gtk_widget_add_controller (GTK_WIDGET (shell),
 				   GTK_EVENT_CONTROLLER (self->stylus_gesture));
 

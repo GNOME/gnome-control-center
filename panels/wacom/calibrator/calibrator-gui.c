@@ -136,11 +136,11 @@ set_active_target (CcCalibArea *area,
 }
 
 static void
-on_gesture_press (GtkGestureClick *gesture,
+on_gesture_press (CcCalibArea     *area,
                   guint            n_press,
                   gdouble          x,
                   gdouble          y,
-                  CcCalibArea     *area)
+                  GtkGestureClick *gesture)
 {
   gint num_clicks;
   gboolean success;
@@ -186,11 +186,10 @@ on_gesture_press (GtkGestureClick *gesture,
 }
 
 static gboolean
-on_key_release (GtkEventControllerKey *controller,
+on_key_release (CcCalibArea           *area,
 		guint                  keyval,
 		guint                  keycode,
-		GdkModifierType        state,
-		CcCalibArea           *area)
+		GdkModifierType        state)
 {
   if (area->success || keyval != GDK_KEY_Escape)
     return GDK_EVENT_PROPAGATE;
@@ -200,8 +199,7 @@ on_key_release (GtkEventControllerKey *controller,
 }
 
 static void
-on_clock_finished (CcClock     *clock,
-                   CcCalibArea *area)
+on_clock_finished (CcCalibArea *area)
 {
   set_calibration_status (area);
 }
@@ -306,8 +304,8 @@ cc_calib_area_init (CcCalibArea *calib_area)
                                               GTK_STYLE_PROVIDER_PRIORITY_USER);
 
   cc_clock_set_duration (CC_CLOCK (calib_area->clock), MAX_TIME);
-  g_signal_connect (calib_area->clock, "finished",
-                    G_CALLBACK (on_clock_finished), calib_area);
+  g_signal_connect_swapped (calib_area->clock, "finished",
+                            G_CALLBACK (on_clock_finished), calib_area);
 
 #ifndef FAKE_AREA
   /* No cursor */
@@ -328,14 +326,14 @@ cc_calib_area_init (CcCalibArea *calib_area)
 
   click = gtk_gesture_click_new ();
   gtk_gesture_single_set_button (GTK_GESTURE_SINGLE (click), GDK_BUTTON_PRIMARY);
-  g_signal_connect (click, "pressed",
-                    G_CALLBACK (on_gesture_press), calib_area);
+  g_signal_connect_swapped (click, "pressed",
+                            G_CALLBACK (on_gesture_press), calib_area);
   gtk_widget_add_controller (GTK_WIDGET (calib_area),
                              GTK_EVENT_CONTROLLER (click));
 
   key = gtk_event_controller_key_new ();
-  g_signal_connect (key, "key-released",
-                    G_CALLBACK (on_key_release), calib_area);
+  g_signal_connect_swapped (key, "key-released",
+                            G_CALLBACK (on_key_release), calib_area);
   gtk_widget_add_controller (GTK_WIDGET (calib_area), key);
 }
 

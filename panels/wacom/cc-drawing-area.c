@@ -114,19 +114,18 @@ draw_cb (GtkDrawingArea *drawing_area,
 }
 
 static void
-stylus_down_cb (GtkGestureStylus *gesture,
+stylus_down_cb (CcDrawingArea    *area,
 		double            x,
-		double            y,
-		CcDrawingArea    *area)
+		double            y)
 {
 	cairo_new_path (area->cr);
 }
 
 static void
-stylus_motion_cb (GtkGestureStylus *gesture,
+stylus_motion_cb (CcDrawingArea    *area,
 		  double            x,
 		  double            y,
-		  CcDrawingArea    *area)
+		  GtkGestureStylus *gesture)
 {
 	GdkDeviceTool *tool;
 	gdouble pressure;
@@ -167,10 +166,10 @@ cc_drawing_area_init (CcDrawingArea *area)
 {
 	gtk_drawing_area_set_draw_func (GTK_DRAWING_AREA (area), draw_cb, NULL, NULL);
 	area->stylus_gesture = gtk_gesture_stylus_new ();
-	g_signal_connect (area->stylus_gesture, "down",
-			  G_CALLBACK (stylus_down_cb), area);
-	g_signal_connect (area->stylus_gesture, "motion",
-			  G_CALLBACK (stylus_motion_cb), area);
+	g_signal_connect_swapped (area->stylus_gesture, "down",
+                                  G_CALLBACK (stylus_down_cb), area);
+	g_signal_connect_swapped (area->stylus_gesture, "motion",
+                                  G_CALLBACK (stylus_motion_cb), area);
 	gtk_widget_add_controller (GTK_WIDGET (area),
 				   GTK_EVENT_CONTROLLER (area->stylus_gesture));
 }
