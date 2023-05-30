@@ -704,9 +704,9 @@ on_stack_visible_child_changed_cb (CcWifiPanel *self)
 }
 
 static void
-on_stop_hotspot_dialog_response_cb (AdwMessageDialog   *dialog,
+on_stop_hotspot_dialog_response_cb (CcWifiPanel        *self,
                                     gchar              *response,
-                                    CcWifiPanel        *self)
+                                    AdwMessageDialog   *dialog)
 {
   if (g_strcmp0 (response, "turn-off") == 0)
     {
@@ -744,7 +744,7 @@ hotspot_stop_clicked_cb (CcWifiPanel *self)
   adw_message_dialog_set_default_response (ADW_MESSAGE_DIALOG (dialog), "cancel");
   adw_message_dialog_set_close_response (ADW_MESSAGE_DIALOG (dialog), "cancel");
 
-  g_signal_connect (dialog, "response", G_CALLBACK (on_stop_hotspot_dialog_response_cb), self);
+  g_signal_connect_swapped (dialog, "response", G_CALLBACK (on_stop_hotspot_dialog_response_cb), self);
   gtk_window_present (GTK_WINDOW (dialog));
 }
 

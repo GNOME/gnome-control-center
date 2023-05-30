@@ -73,9 +73,8 @@ G_DEFINE_TYPE_WITH_CODE (CEPageDetails, ce_page_details, GTK_TYPE_GRID,
                          G_IMPLEMENT_INTERFACE (ce_page_get_type (), ce_page_iface_init))
 
 static void
-on_forget_cb (AdwMessageDialog   *dialog,
-              gchar              *response,
-              CEPageDetails      *self)
+on_forget_cb (CEPageDetails *self,
+              gchar         *response)
 {
         if (g_strcmp0 (response, "forget") == 0)
                 net_connection_editor_forget (self->editor);
@@ -106,7 +105,7 @@ forget_cb (CEPageDetails *self)
         adw_message_dialog_set_default_response (ADW_MESSAGE_DIALOG (dialog), "cancel");
         adw_message_dialog_set_close_response (ADW_MESSAGE_DIALOG (dialog), "cancel");
 
-        g_signal_connect (dialog, "response", G_CALLBACK (on_forget_cb), self);
+        g_signal_connect_swapped (dialog, "response", G_CALLBACK (on_forget_cb), self);
         gtk_window_present (GTK_WINDOW (dialog));
 }
 

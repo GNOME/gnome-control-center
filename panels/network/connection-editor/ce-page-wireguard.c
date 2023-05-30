@@ -394,7 +394,7 @@ add_nm_wg_peer_to_list (CEPageWireguard *self, NMWireGuardPeer *peer)
 }
 
 static void
-handle_peer_add_cb (GtkButton *add_button, CEPageWireguard *self)
+handle_peer_add_cb (CEPageWireguard *self)
 {
         NMWireGuardPeer *nm_wg_peer = nm_wireguard_peer_new ();
         WireguardPeer *wg_peer = add_nm_wg_peer_to_list (self, nm_wg_peer);
@@ -450,7 +450,7 @@ finish_setup (CEPageWireguard *self, gpointer unused, GError *error, gpointer us
         gtk_check_button_set_active (self->checkbutton_peer_routes,
                                      nm_setting_wireguard_get_peer_routes (self->setting_wireguard));
 
-        g_signal_connect (self->button_add_peer, "clicked", G_CALLBACK (handle_peer_add_cb), self);
+        g_signal_connect_swapped (self->button_add_peer, "clicked", G_CALLBACK (handle_peer_add_cb), self);
 }
 
 CEPageWireguard *
