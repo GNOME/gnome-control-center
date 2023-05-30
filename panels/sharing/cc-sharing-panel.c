@@ -381,9 +381,9 @@ cc_sharing_panel_bind_switch_to_widgets (GtkWidget *gtkswitch,
 }
 
 static void
-on_add_folder_dialog_response_cb (GtkDialog      *dialog,
+on_add_folder_dialog_response_cb (CcSharingPanel *self,
                                   gint            response,
-                                  CcSharingPanel *self)
+                                  GtkDialog      *dialog)
 {
   g_autofree gchar *folder = NULL;
   g_autoptr(GFile) file = NULL;
@@ -452,7 +452,7 @@ cc_sharing_panel_add_folder (CcSharingPanel *self,
                            "response",
                            G_CALLBACK (on_add_folder_dialog_response_cb),
                            self,
-                           0);
+                           G_CONNECT_SWAPPED);
   gtk_window_present (GTK_WINDOW (dialog));
 }
 
@@ -723,9 +723,9 @@ file_sharing_set_require_password (const GValue       *value,
 }
 
 static void
-file_sharing_password_changed (GtkEntry *entry)
+file_sharing_password_changed (CcSharingPanel *self)
 {
-  file_share_write_out_password (gtk_editable_get_text (GTK_EDITABLE (entry)));
+  file_share_write_out_password (gtk_editable_get_text (GTK_EDITABLE (self->personal_file_sharing_password_entry)));
 }
 
 static void
@@ -751,9 +751,9 @@ cc_sharing_panel_setup_personal_file_sharing_dialog (CcSharingPanel *self)
                                 file_sharing_get_require_password,
                                 file_sharing_set_require_password, NULL, NULL);
 
-  g_signal_connect (self->personal_file_sharing_password_entry,
-                    "notify::text", G_CALLBACK (file_sharing_password_changed),
-                    NULL);
+  g_signal_connect_swapped (self->personal_file_sharing_password_entry,
+                            "notify::text", G_CALLBACK (file_sharing_password_changed),
+                            self);
 
   networks = cc_sharing_networks_new (self->sharing_proxy, "gnome-user-share-webdav");
   gtk_grid_attach (GTK_GRID (self->personal_file_sharing_grid), networks, 0, 3, 2, 1);
@@ -1031,11 +1031,9 @@ enable_gnome_remote_desktop (CcSharingPanel *self)
 }
 
 static void
-on_remote_desktop_active_changed (GtkWidget      *widget,
-                                  GParamSpec     *pspec,
-                                  CcSharingPanel *self)
+on_remote_desktop_active_changed (CcSharingPanel *self)
 {
-  if (gtk_switch_get_active (GTK_SWITCH (widget)))
+  if (gtk_switch_get_active (GTK_SWITCH (self->remote_desktop_switch)))
     enable_gnome_remote_desktop (self);
   else
     disable_gnome_remote_desktop_service (self);
@@ -1117,47 +1115,66 @@ add_toast (CcSharingPanel *self,
 }
 
 static void
-on_device_name_copy_clicked (GtkButton      *button,
-                             CcSharingPanel *self)
+on_device_name_copy_clicked (CcSharingPanel *self)
 {
   GtkLabel *label = GTK_LABEL (self->remote_desktop_device_name_label);
 
-  gdk_clipboard_set_text (gtk_widget_get_clipboard (GTK_WIDGET (button)),
+  gdk_clipboard_set_text (gtk_widget_get_clipboard (GTK_WIDGET (self->remote_desktop_device_name_copy)),
                           gtk_label_get_text (label));
   add_toast (self, _("Device name copied"));
 }
 
 static void
-on_device_address_copy_clicked (GtkButton      *button,
-                                CcSharingPanel *self)
+on_device_address_copy_clicked (CcSharingPanel *self)
 {
   GtkLabel *label = GTK_LABEL (self->remote_desktop_address_label);
 
-  gdk_clipboard_set_text (gtk_widget_get_clipboard (GTK_WIDGET (button)),
+  gdk_clipboard_set_text (gtk_widget_get_clipboard (GTK_WIDGET (self->remote_desktop_address_copy)),
                           gtk_label_get_text (label));
   add_toast (self, _("Device address copied"));
 }
 
 static void
-on_username_copy_clicked (GtkButton      *button,
-                          CcSharingPanel *self)
+on_username_copy_clicked (CcSharingPanel *self)
 {
   GtkEditable *editable = GTK_EDITABLE (self->remote_desktop_username_entry);
 
-  gdk_clipboard_set_text (gtk_widget_get_clipboard (GTK_WIDGET (button)),
+  gdk_clipboard_set_text (gtk_widget_get_clipboard (GTK_WIDGET (self->remote_desktop_username_copy)),
                           gtk_editable_get_text (editable));
   add_toast (self, _("Username copied"));
 }
 
 static void
-on_password_copy_clicked (GtkButton      *button,
-                          CcSharingPanel *self)
+on_password_copy_clicked (CcSharingPanel *self)
 {
   GtkEditable *editable = GTK_EDITABLE (self->remote_desktop_password_entry);
 
-  gdk_clipboard_set_text (gtk_widget_get_clipboard (GTK_WIDGET (button)),
+  gdk_clipboard_set_text (gtk_widget_get_clipboard (GTK_WIDGET (self->remote_desktop_password_copy)),
                           gtk_editable_get_text (editable));
   add_toast (self, _("Password copied"));
+}
+
+static void
+media_sharing_dialog_response (CcSharingPanel *self)
+{
+  gtk_widget_set_visible (self->media_sharing_dialog, FALSE);
+}
+static void
+personal_file_sharing_dialog_response (CcSharingPanel *self)
+{
+  gtk_widget_set_visible (self->media_sharing_dialog, FALSE);
+}
+
+static void
+remote_login_dialog_response (CcSharingPanel *self)
+{
+  gtk_widget_set_visible (self->media_sharing_dialog, FALSE);
+}
+
+static void
+remote_desktop_dialog_response (CcSharingPanel *self)
+{
+  gtk_widget_set_visible (self->media_sharing_dialog, FALSE);
 }
 
 static pwquality_settings_t *
@@ -1268,21 +1285,21 @@ cc_sharing_panel_setup_remote_desktop_dialog (CcSharingPanel *self)
         gtk_editable_set_text (GTK_EDITABLE (self->remote_desktop_password_entry),
                                pw );
     }
-  g_signal_connect (self->remote_desktop_device_name_copy,
-                    "clicked", G_CALLBACK (on_device_name_copy_clicked),
-                    self);
-  g_signal_connect (self->remote_desktop_address_copy,
-                    "clicked", G_CALLBACK (on_device_address_copy_clicked),
-                    self);
-  g_signal_connect (self->remote_desktop_username_copy,
-                    "clicked", G_CALLBACK (on_username_copy_clicked),
-                    self);
-  g_signal_connect (self->remote_desktop_password_copy,
-                    "clicked", G_CALLBACK (on_password_copy_clicked),
-                    self);
+  g_signal_connect_swapped (self->remote_desktop_device_name_copy,
+                            "clicked", G_CALLBACK (on_device_name_copy_clicked),
+                            self);
+  g_signal_connect_swapped (self->remote_desktop_address_copy,
+                            "clicked", G_CALLBACK (on_device_address_copy_clicked),
+                            self);
+  g_signal_connect_swapped (self->remote_desktop_username_copy,
+                            "clicked", G_CALLBACK (on_username_copy_clicked),
+                            self);
+  g_signal_connect_swapped (self->remote_desktop_password_copy,
+                            "clicked", G_CALLBACK (on_password_copy_clicked),
+                            self);
 
-  g_signal_connect (self->remote_desktop_switch, "notify::active",
-                    G_CALLBACK (on_remote_desktop_active_changed), self);
+  g_signal_connect_swapped (self->remote_desktop_switch, "notify::active",
+                            G_CALLBACK (on_remote_desktop_active_changed), self);
 
   if (is_remote_desktop_enabled (self))
     {
@@ -1384,14 +1401,14 @@ cc_sharing_panel_init (CcSharingPanel *self)
 
   gtk_widget_init_template (GTK_WIDGET (self));
 
-  g_signal_connect (self->media_sharing_dialog, "response",
-                    G_CALLBACK (gtk_widget_hide), NULL);
-  g_signal_connect (self->personal_file_sharing_dialog, "response",
-                    G_CALLBACK (gtk_widget_hide), NULL);
-  g_signal_connect (self->remote_login_dialog, "response",
-                    G_CALLBACK (gtk_widget_hide), NULL);
-  g_signal_connect (self->remote_desktop_dialog, "response",
-                    G_CALLBACK (gtk_widget_hide), NULL);
+  g_signal_connect_swapped (self->media_sharing_dialog, "response",
+                            G_CALLBACK (media_sharing_dialog_response), self);
+  g_signal_connect_swapped (self->personal_file_sharing_dialog, "response",
+                            G_CALLBACK (personal_file_sharing_dialog_response), self);
+  g_signal_connect_swapped (self->remote_login_dialog, "response",
+                            G_CALLBACK (remote_login_dialog_response), self);
+  g_signal_connect_swapped (self->remote_desktop_dialog, "response",
+                            G_CALLBACK (remote_desktop_dialog_response), self);
 
   gsd_sharing_proxy_new_for_bus (G_BUS_TYPE_SESSION,
                                  G_DBUS_PROXY_FLAGS_NONE,
