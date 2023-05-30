@@ -230,12 +230,10 @@ select_ppd_in_dialog (PpDetailsDialog *self)
 }
 
 static void
-ppd_file_select_response_cb (GtkDialog *dialog,
-                             gint       response_id,
-                             gpointer   user_data)
+ppd_file_select_response_cb (PpDetailsDialog *self,
+                             gint             response_id,
+                             GtkDialog       *dialog)
 {
-  PpDetailsDialog *self = PP_DETAILS_DIALOG (user_data);
-
   if (response_id == GTK_RESPONSE_ACCEPT)
     {
       g_autoptr(GFile) file = NULL;
@@ -283,7 +281,7 @@ select_ppd_manually (PpDetailsDialog *self)
 
   gtk_widget_set_visible (dialog, TRUE);
 
-  g_signal_connect (dialog, "response", G_CALLBACK (ppd_file_select_response_cb), self);
+  g_signal_connect_swapped (dialog, "response", G_CALLBACK (ppd_file_select_response_cb), self);
 }
 
 static void
