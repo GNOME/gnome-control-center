@@ -52,10 +52,10 @@ enum {
 static GParamSpec *properties[N_PROPS];
 
 static void
-cc_list_row_get_property (GObject    *object,
-                          guint       prop_id,
-                          GValue     *value,
-                          GParamSpec *pspec)
+cc_list_row_info_button_get_property (GObject    *object,
+                                      guint       prop_id,
+                                      GValue     *value,
+                                      GParamSpec *pspec)
 {
   CcListRowInfoButton *self = (CcListRowInfoButton *)object;
 
@@ -71,10 +71,10 @@ cc_list_row_get_property (GObject    *object,
 }
 
 static void
-cc_list_row_set_property (GObject      *object,
-                          guint         prop_id,
-                          const GValue *value,
-                          GParamSpec   *pspec)
+cc_list_row_info_button_set_property (GObject      *object,
+                                      guint         prop_id,
+                                      const GValue *value,
+                                      GParamSpec   *pspec)
 {
   CcListRowInfoButton *self = (CcListRowInfoButton *)object;
 
@@ -106,8 +106,8 @@ cc_list_row_info_button_class_init (CcListRowInfoButtonClass *klass)
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
   object_class->dispose = cc_list_row_info_button_dispose;
-  object_class->get_property = cc_list_row_get_property;
-  object_class->set_property = cc_list_row_set_property;
+  object_class->get_property = cc_list_row_info_button_get_property;
+  object_class->set_property = cc_list_row_info_button_set_property;
 
   properties[PROP_TEXT] =
     g_param_spec_string ("text",
