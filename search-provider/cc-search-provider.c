@@ -127,24 +127,22 @@ get_results (gchar **terms)
 }
 
 static gboolean
-handle_get_initial_result_set (CcShellSearchProvider2  *skeleton,
+handle_get_initial_result_set (CcSearchProvider        *self,
                                GDBusMethodInvocation   *invocation,
-                               char                   **terms,
-                               CcSearchProvider        *self)
+                               char                   **terms)
 {
   g_auto(GStrv) results = get_results (terms);
-  cc_shell_search_provider2_complete_get_initial_result_set (skeleton,
+  cc_shell_search_provider2_complete_get_initial_result_set (self->skeleton,
                                                              invocation,
                                                              (const char* const*) results);
   return TRUE;
 }
 
 static gboolean
-handle_get_subsearch_result_set (CcShellSearchProvider2  *skeleton,
+handle_get_subsearch_result_set (CcSearchProvider        *self,
                                  GDBusMethodInvocation   *invocation,
                                  char                   **previous_results,
-                                 char                   **terms,
-                                 CcSearchProvider        *self)
+                                 char                   **terms)
 {
   /* We ignore the previous results here since the model re-sorts for
    * the new terms. This means that we're not really doing a subsearch
@@ -154,7 +152,7 @@ handle_get_subsearch_result_set (CcShellSearchProvider2  *skeleton,
    * about this taking too long.
    */
   g_auto(GStrv) results = get_results (terms);
-  cc_shell_search_provider2_complete_get_subsearch_result_set (skeleton,
+  cc_shell_search_provider2_complete_get_subsearch_result_set (self->skeleton,
                                                                invocation,
                                                                (const char* const*) results);
   return TRUE;
@@ -195,10 +193,9 @@ get_iter_for_result (CcSearchProvider *self,
 }
 
 static gboolean
-handle_get_result_metas (CcShellSearchProvider2  *skeleton,
+handle_get_result_metas (CcSearchProvider        *self,
                          GDBusMethodInvocation   *invocation,
-                         char                   **results,
-                         CcSearchProvider        *self)
+                         char                   **results)
 {
   GtkTreeModel *model = get_model ();
   GtkTreeIter *iter;
@@ -239,19 +236,18 @@ handle_get_result_metas (CcShellSearchProvider2  *skeleton,
       g_variant_builder_close (&builder);
     }
 
-  cc_shell_search_provider2_complete_get_result_metas (skeleton,
+  cc_shell_search_provider2_complete_get_result_metas (self->skeleton,
                                                        invocation,
                                                        g_variant_builder_end (&builder));
   return TRUE;
 }
 
 static gboolean
-handle_activate_result (CcShellSearchProvider2  *skeleton,
+handle_activate_result (CcSearchProvider        *self,
                         GDBusMethodInvocation   *invocation,
                         char                    *identifier,
                         char                   **results,
-                        guint                    timestamp,
-                        CcSearchProvider        *self)
+                        guint                    timestamp)
 {
   GdkAppLaunchContext *launch_context;
   g_autoptr(GError) error = NULL;
@@ -265,17 +261,16 @@ handle_activate_result (CcShellSearchProvider2  *skeleton,
   if (!g_app_info_launch (app, NULL, G_APP_LAUNCH_CONTEXT (launch_context), &error))
     g_dbus_method_invocation_return_gerror (invocation, error);
   else
-    cc_shell_search_provider2_complete_activate_result (skeleton, invocation);
+    cc_shell_search_provider2_complete_activate_result (self->skeleton, invocation);
 
   return TRUE;
 }
 
 static gboolean
-handle_launch_search (CcShellSearchProvider2  *skeleton,
+handle_launch_search (CcSearchProvider        *self,
                       GDBusMethodInvocation   *invocation,
                       char                   **terms,
-                      guint                    timestamp,
-                      CcSearchProvider        *self)
+                      guint                    timestamp)
 {
   GdkAppLaunchContext *launch_context;
   g_autoptr(GError) error = NULL;
@@ -300,7 +295,7 @@ handle_launch_search (CcShellSearchProvider2  *skeleton,
   if (!g_app_info_launch (app, NULL, G_APP_LAUNCH_CONTEXT (launch_context), &error))
     g_dbus_method_invocation_return_gerror (invocation, error);
   else
-    cc_shell_search_provider2_complete_launch_search (skeleton, invocation);
+    cc_shell_search_provider2_complete_launch_search (self->skeleton, invocation);
 
   return TRUE;
 }
@@ -310,16 +305,16 @@ cc_search_provider_init (CcSearchProvider *self)
 {
   self->skeleton = cc_shell_search_provider2_skeleton_new ();
 
-  g_signal_connect (self->skeleton, "handle-get-initial-result-set",
-                    G_CALLBACK (handle_get_initial_result_set), self);
-  g_signal_connect (self->skeleton, "handle-get-subsearch-result-set",
-                    G_CALLBACK (handle_get_subsearch_result_set), self);
-  g_signal_connect (self->skeleton, "handle-get-result-metas",
-                    G_CALLBACK (handle_get_result_metas), self);
-  g_signal_connect (self->skeleton, "handle-activate-result",
-                    G_CALLBACK (handle_activate_result), self);
-  g_signal_connect (self->skeleton, "handle-launch-search",
-                    G_CALLBACK (handle_launch_search), self);
+  g_signal_connect_swapped (self->skeleton, "handle-get-initial-result-set",
+                            G_CALLBACK (handle_get_initial_result_set), self);
+  g_signal_connect_swapped (self->skeleton, "handle-get-subsearch-result-set",
+                            G_CALLBACK (handle_get_subsearch_result_set), self);
+  g_signal_connect_swapped (self->skeleton, "handle-get-result-metas",
+                            G_CALLBACK (handle_get_result_metas), self);
+  g_signal_connect_swapped (self->skeleton, "handle-activate-result",
+                            G_CALLBACK (handle_activate_result), self);
+  g_signal_connect_swapped (self->skeleton, "handle-launch-search",
+                            G_CALLBACK (handle_launch_search), self);
 }
 
 gboolean
