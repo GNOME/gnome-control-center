@@ -257,13 +257,10 @@ eval_radial_line (double center_x, double center_y,
 }
 
 static gboolean
-on_motion (GtkEventControllerMotion *controller,
-           double                    event_x,
-           double                    event_y,
-           void                     *user_data)
+on_motion (CcCropArea *area,
+           double      event_x,
+           double      event_y)
 {
-    CcCropArea *area = CC_CROP_AREA (user_data);
-
     if (area->paintable == NULL)
         return FALSE;
 
@@ -273,11 +270,8 @@ on_motion (GtkEventControllerMotion *controller,
 }
 
 static void
-on_leave (GtkEventControllerMotion *controller,
-           void                     *user_data)
+on_leave (CcCropArea *area)
 {
-    CcCropArea *area = CC_CROP_AREA (user_data);
-
     if (area->paintable == NULL)
         return;
 
@@ -286,12 +280,10 @@ on_leave (GtkEventControllerMotion *controller,
 }
 
 static void
-on_drag_begin (GtkGestureDrag *gesture,
+on_drag_begin (CcCropArea     *area,
                double          start_x,
-               double          start_y,
-               void           *user_data)
+               double          start_y)
 {
-    CcCropArea *area = CC_CROP_AREA (user_data);
     GdkRectangle crop;
 
     if (area->paintable == NULL)
@@ -308,12 +300,11 @@ on_drag_begin (GtkGestureDrag *gesture,
 }
 
 static void
-on_drag_update (GtkGestureDrag *gesture,
+on_drag_update (CcCropArea     *area,
                 double          offset_x,
                 double          offset_y,
-                void           *user_data)
+                GtkGestureDrag *gesture)
 {
-    CcCropArea *area = CC_CROP_AREA (user_data);
     double start_x, start_y;
     int x, y, delta_x, delta_y;
     int width, height;
@@ -474,25 +465,19 @@ on_drag_update (GtkGestureDrag *gesture,
 }
 
 static void
-on_drag_end (GtkGestureDrag *gesture,
+on_drag_end (CcCropArea     *area,
              double          offset_x,
-             double          offset_y,
-             void           *user_data)
+             double          offset_y)
 {
-    CcCropArea *area = CC_CROP_AREA (user_data);
-
     area->active_region = OUTSIDE;
     area->drag_offx = 0.0;
     area->drag_offy = 0.0;
 }
 
 static void
-on_drag_cancel (GtkGesture       *gesture,
-                GdkEventSequence *sequence,
-                void             *user_data)
+on_drag_cancel (CcCropArea       *area,
+                GdkEventSequence *sequence)
 {
-    CcCropArea *area = CC_CROP_AREA (user_data);
-
     area->active_region = OUTSIDE;
     area->drag_offx = 0;
     area->drag_offy = 0;
@@ -588,17 +573,16 @@ cc_crop_area_init (CcCropArea *area)
 
     /* Add handlers for dragging */
     gesture = gtk_gesture_drag_new ();
-    g_signal_connect (gesture, "drag-begin", G_CALLBACK (on_drag_begin), area);
-    g_signal_connect (gesture, "drag-update", G_CALLBACK (on_drag_update),
-                      area);
-    g_signal_connect (gesture, "drag-end", G_CALLBACK (on_drag_end), area);
-    g_signal_connect (gesture, "cancel", G_CALLBACK (on_drag_cancel), area);
+    g_signal_connect_swapped (gesture, "drag-begin", G_CALLBACK (on_drag_begin), area);
+    g_signal_connect_swapped (gesture, "drag-update", G_CALLBACK (on_drag_update), area);
+    g_signal_connect_swapped (gesture, "drag-end", G_CALLBACK (on_drag_end), area);
+    g_signal_connect_swapped (gesture, "cancel", G_CALLBACK (on_drag_cancel), area);
     gtk_widget_add_controller (GTK_WIDGET (area), GTK_EVENT_CONTROLLER (gesture));
 
     /* Add handlers for motion events */
     controller = gtk_event_controller_motion_new ();
-    g_signal_connect (controller, "motion", G_CALLBACK (on_motion), area);
-    g_signal_connect (controller, "leave", G_CALLBACK (on_leave), area);
+    g_signal_connect_swapped (controller, "motion", G_CALLBACK (on_motion), area);
+    g_signal_connect_swapped (controller, "leave", G_CALLBACK (on_leave), area);
     gtk_widget_add_controller (GTK_WIDGET (area), GTK_EVENT_CONTROLLER (controller));
 
     area->scale = 0.0;
