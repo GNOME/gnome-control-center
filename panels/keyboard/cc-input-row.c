@@ -46,10 +46,9 @@ enum
 static guint signals[SIGNAL_LAST] = { 0, };
 
 static GdkContentProvider *
-drag_prepare_cb (GtkDragSource *source,
+drag_prepare_cb (CcInputRow    *self,
                  double         x,
-                 double         y,
-                 CcInputRow    *self)
+                 double         y)
 {
   self->drag_x = x;
   self->drag_y = y;
@@ -58,9 +57,8 @@ drag_prepare_cb (GtkDragSource *source,
 }
 
 static void
-drag_begin_cb (GtkDragSource *source,
-               GdkDrag       *drag,
-               CcInputRow    *self)
+drag_begin_cb (CcInputRow    *self,
+               GdkDrag       *drag)
 {
   GtkAllocation alloc;
   CcInputRow *drag_row;
@@ -81,11 +79,10 @@ drag_begin_cb (GtkDragSource *source,
 }
 
 static gboolean
-drop_cb (GtkDropTarget *drop_target,
+drop_cb (CcInputRow    *self,
          const GValue  *value,
          gdouble        x,
-         gdouble        y,
-         CcInputRow    *self)
+         gdouble        y)
 {
   CcInputRow *source;
 
@@ -249,13 +246,13 @@ cc_input_row_init (CcInputRow *self)
 
   self->drag_source = gtk_drag_source_new ();
   gtk_drag_source_set_actions (self->drag_source, GDK_ACTION_MOVE);
-  g_signal_connect (self->drag_source, "prepare", G_CALLBACK (drag_prepare_cb), self);
-  g_signal_connect (self->drag_source, "drag-begin", G_CALLBACK (drag_begin_cb), self);
+  g_signal_connect_swapped (self->drag_source, "prepare", G_CALLBACK (drag_prepare_cb), self);
+  g_signal_connect_swapped (self->drag_source, "drag-begin", G_CALLBACK (drag_begin_cb), self);
   gtk_widget_add_controller (GTK_WIDGET (self), GTK_EVENT_CONTROLLER (self->drag_source));
 
   drop_target = gtk_drop_target_new (CC_TYPE_INPUT_ROW, GDK_ACTION_MOVE);
   gtk_drop_target_set_preload (drop_target, TRUE);
-  g_signal_connect (drop_target, "drop", G_CALLBACK (drop_cb), self);
+  g_signal_connect_swapped (drop_target, "drop", G_CALLBACK (drop_cb), self);
   gtk_widget_add_controller (GTK_WIDGET (self), GTK_EVENT_CONTROLLER (drop_target));
 }
 

@@ -306,11 +306,11 @@ add_input_source_rows_for_locale (CcInputChooser *self,
 }
 
 static void
-on_back_row_click_released_cb (GtkGestureClick *click,
+on_back_row_click_released_cb (CcInputChooser  *self,
                                int              n_press,
                                double           x,
                                double           y,
-                               CcInputChooser  *self)
+                               GtkGestureClick *click)
 {
   GtkWidget *widget;
   GtkListBoxRow *row;
@@ -337,7 +337,7 @@ show_input_sources_for_locale (CcInputChooser *self,
 
       controller = GTK_EVENT_CONTROLLER (gtk_gesture_click_new ());
       gtk_gesture_single_set_button (GTK_GESTURE_SINGLE (controller), 0);
-      g_signal_connect (controller, "released", G_CALLBACK (on_back_row_click_released_cb), self);
+      g_signal_connect_swapped (controller, "released", G_CALLBACK (on_back_row_click_released_cb), self);
       gtk_widget_add_controller (GTK_WIDGET (info->back_row), controller);
     }
   gtk_list_box_append (self->input_sources_listbox, GTK_WIDGET (info->back_row));

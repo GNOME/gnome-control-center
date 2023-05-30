@@ -336,9 +336,9 @@ back_button_clicked_cb (CcKeyboardShortcutDialog *self)
 }
 
 static void
-on_reset_all_dialog_response_cb (AdwMessageDialog         *dialog,
+on_reset_all_dialog_response_cb (CcKeyboardShortcutDialog *self,
                                  gchar                    *response,
-                                 CcKeyboardShortcutDialog *self)
+                                 AdwMessageDialog         *dialog)
 {
   guint n_items, j_items;
 
@@ -400,10 +400,10 @@ reset_all_clicked_cb (CcKeyboardShortcutDialog *self)
   adw_message_dialog_set_close_response (ADW_MESSAGE_DIALOG (dialog),
                                          "cancel");
 
-  g_signal_connect (dialog,
-                    "response",
-                    G_CALLBACK (on_reset_all_dialog_response_cb),
-                    self);
+  g_signal_connect_swapped (dialog,
+                            "response",
+                            G_CALLBACK (on_reset_all_dialog_response_cb),
+                            self);
 
   gtk_window_present (GTK_WINDOW (dialog));
 }

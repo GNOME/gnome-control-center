@@ -454,9 +454,9 @@ update_input (CcInputListBox *self)
 }
 
 static void
-on_chooser_response_cb (GtkDialog      *dialog,
+on_chooser_response_cb (CcInputListBox *self,
                         gint            response,
-                        CcInputListBox *self)
+                        GtkDialog      *dialog)
 {
 
   if (response == GTK_RESPONSE_OK) {
@@ -486,7 +486,7 @@ show_input_chooser (CcInputListBox *self)
 				  );
   gtk_window_set_transient_for (GTK_WINDOW (chooser),
                                 GTK_WINDOW (gtk_widget_get_native (GTK_WIDGET (self))));
-  g_signal_connect (chooser, "response", G_CALLBACK (on_chooser_response_cb), self);
+  g_signal_connect_swapped (chooser, "response", G_CALLBACK (on_chooser_response_cb), self);
   gtk_window_present (GTK_WINDOW (chooser));
 }
 
