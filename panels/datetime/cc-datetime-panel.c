@@ -133,31 +133,31 @@ static void update_time (CcDateTimePanel *self);
 static void
 cc_date_time_panel_dispose (GObject *object)
 {
-  CcDateTimePanel *panel = CC_DATE_TIME_PANEL (object);
+  CcDateTimePanel *self = CC_DATE_TIME_PANEL (object);
 
-  if (panel->cancellable)
+  if (self->cancellable)
     {
-      g_cancellable_cancel (panel->cancellable);
-      g_clear_object (&panel->cancellable);
+      g_cancellable_cancel (self->cancellable);
+      g_clear_object (&self->cancellable);
     }
 
-  if (panel->toplevels)
+  if (self->toplevels)
     {
-      g_list_free_full (panel->toplevels, (GDestroyNotify) gtk_window_destroy);
-      panel->toplevels = NULL;
+      g_list_free_full (self->toplevels, (GDestroyNotify) gtk_window_destroy);
+      self->toplevels = NULL;
     }
 
-  g_clear_object (&panel->clock_tracker);
-  g_clear_object (&panel->dtm);
-  g_clear_object (&panel->permission);
-  g_clear_object (&panel->tz_permission);
-  g_clear_object (&panel->location_settings);
-  g_clear_object (&panel->clock_settings);
-  g_clear_object (&panel->calendar_settings);
-  g_clear_object (&panel->datetime_settings);
-  g_clear_object (&panel->filechooser_settings);
+  g_clear_object (&self->clock_tracker);
+  g_clear_object (&self->dtm);
+  g_clear_object (&self->permission);
+  g_clear_object (&self->tz_permission);
+  g_clear_object (&self->location_settings);
+  g_clear_object (&self->clock_settings);
+  g_clear_object (&self->calendar_settings);
+  g_clear_object (&self->datetime_settings);
+  g_clear_object (&self->filechooser_settings);
 
-  g_clear_pointer (&panel->date, g_date_time_unref);
+  g_clear_pointer (&self->date, g_date_time_unref);
 
   G_OBJECT_CLASS (cc_date_time_panel_parent_class)->dispose (object);
 }
@@ -168,7 +168,7 @@ cc_date_time_panel_get_help_uri (CcPanel *panel)
   return "help:gnome-help/clock";
 }
 
-static void clock_settings_changed_cb (CcDateTimePanel *panel,
+static void clock_settings_changed_cb (CcDateTimePanel *self,
                                        gchar           *key);
 
 static char *
@@ -450,9 +450,9 @@ get_initial_timezone (CcDateTimePanel *self)
 }
 
 static void
-day_changed (CcDateTimePanel *panel)
+day_changed (CcDateTimePanel *self)
 {
-  change_date (panel);
+  change_date (self);
 }
 
 static void
@@ -503,13 +503,13 @@ on_month_selection_changed_cb (CcDateTimePanel *self)
 }
 
 static void
-on_clock_changed (CcDateTimePanel *panel,
+on_clock_changed (CcDateTimePanel *self,
 		  GParamSpec      *pspec)
 {
-  g_date_time_unref (panel->date);
-  panel->date = g_date_time_new_now_local ();
-  update_time (panel);
-  update_timezone (panel);
+  g_date_time_unref (self->date);
+  self->date = g_date_time_new_now_local ();
+  update_time (self);
+  update_timezone (self);
 }
 
 static gboolean
@@ -566,9 +566,9 @@ on_permission_changed (CcDateTimePanel *self)
 }
 
 static void
-on_location_settings_changed (CcDateTimePanel *panel)
+on_location_settings_changed (CcDateTimePanel *self)
 {
-  on_permission_changed (panel);
+  on_permission_changed (self);
 }
 
 static void
