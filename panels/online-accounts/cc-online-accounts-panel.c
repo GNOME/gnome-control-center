@@ -824,12 +824,12 @@ cc_online_accounts_panel_constructed (GObject *object)
 static void
 cc_online_accounts_panel_finalize (GObject *object)
 {
-  CcOnlineAccountsPanel *panel = CC_ONLINE_ACCOUNTS_PANEL (object);
+  CcOnlineAccountsPanel *self = CC_ONLINE_ACCOUNTS_PANEL (object);
 
-  if (panel->removed_object != NULL)
+  if (self->removed_object != NULL)
     {
       g_autoptr(GError) error = NULL;
-      goa_account_call_remove_sync (goa_object_peek_account (panel->removed_object),
+      goa_account_call_remove_sync (goa_object_peek_account (self->removed_object),
                                     NULL, /* GCancellable */
                                     &error);
 
@@ -842,7 +842,7 @@ cc_online_accounts_panel_finalize (GObject *object)
         }
     }
 
-  g_clear_object (&panel->client);
+  g_clear_object (&self->client);
 
   G_OBJECT_CLASS (cc_online_accounts_panel_parent_class)->finalize (object);
 }
