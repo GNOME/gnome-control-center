@@ -176,13 +176,13 @@ got_transition_proxy_cb (GObject      *source_object,
 /* Background */
 
 static void
-update_preview (CcBackgroundPanel *panel)
+update_preview (CcBackgroundPanel *self)
 {
   CcBackgroundItem *current_background;
 
-  current_background = panel->current_background;
-  cc_background_preview_set_item (panel->default_preview, current_background);
-  cc_background_preview_set_item (panel->dark_preview, current_background);
+  current_background = self->current_background;
+  cc_background_preview_set_item (self->default_preview, current_background);
+  cc_background_preview_set_item (self->dark_preview, current_background);
 }
 
 static gchar *
@@ -196,7 +196,7 @@ get_save_path (void)
 }
 
 static void
-reload_current_bg (CcBackgroundPanel *panel)
+reload_current_bg (CcBackgroundPanel *self)
 {
   g_autoptr(CcBackgroundItem) saved = NULL;
   CcBackgroundItem *configured;
@@ -211,7 +211,7 @@ reload_current_bg (CcBackgroundPanel *panel)
   saved = cc_background_xml_get_item (uri);
 
   /* initalise the current background information from settings */
-  settings = panel->settings;
+  settings = self->settings;
   uri = g_settings_get_string (settings, WP_URI_KEY);
   if (uri && *uri == '\0')
     g_clear_pointer (&uri, g_free);
@@ -246,8 +246,8 @@ reload_current_bg (CcBackgroundPanel *panel)
 		    NULL);
     }
 
-  g_clear_object (&panel->current_background);
-  panel->current_background = configured;
+  g_clear_object (&self->current_background);
+  self->current_background = configured;
   cc_background_item_load (configured, NULL);
 }
 
@@ -269,7 +269,7 @@ create_save_dir (void)
 }
 
 static void
-reset_settings_if_defaults (CcBackgroundPanel *panel,
+reset_settings_if_defaults (CcBackgroundPanel *self,
                             GSettings         *settings,
                             gboolean           check_dark)
 {
@@ -317,7 +317,7 @@ reset_settings_if_defaults (CcBackgroundPanel *panel,
 }
 
 static void
-set_background (CcBackgroundPanel *panel,
+set_background (CcBackgroundPanel *self,
                 GSettings         *settings,
                 CcBackgroundItem  *item,
                 gboolean           set_dark)
@@ -369,12 +369,12 @@ set_background (CcBackgroundPanel *panel,
   g_settings_apply (settings);
 
   /* Clean out dconf if the user went back to distro defaults */
-  reset_settings_if_defaults (panel, settings, set_dark);
+  reset_settings_if_defaults (self, settings, set_dark);
 
   /* Save the source XML if there is one */
   filename = get_save_path ();
   if (create_save_dir ())
-    cc_background_xml_save (panel->current_background, filename);
+    cc_background_xml_save (self->current_background, filename);
 }
 
 static void
@@ -400,12 +400,12 @@ cc_background_panel_get_help_uri (CcPanel *panel)
 static void
 cc_background_panel_dispose (GObject *object)
 {
-  CcBackgroundPanel *panel = CC_BACKGROUND_PANEL (object);
+  CcBackgroundPanel *self = CC_BACKGROUND_PANEL (object);
 
-  g_clear_object (&panel->settings);
-  g_clear_object (&panel->lock_settings);
-  g_clear_object (&panel->interface_settings);
-  g_clear_object (&panel->proxy);
+  g_clear_object (&self->settings);
+  g_clear_object (&self->lock_settings);
+  g_clear_object (&self->interface_settings);
+  g_clear_object (&self->proxy);
 
   G_OBJECT_CLASS (cc_background_panel_parent_class)->dispose (object);
 }
@@ -413,9 +413,9 @@ cc_background_panel_dispose (GObject *object)
 static void
 cc_background_panel_finalize (GObject *object)
 {
-  CcBackgroundPanel *panel = CC_BACKGROUND_PANEL (object);
+  CcBackgroundPanel *self = CC_BACKGROUND_PANEL (object);
 
-  g_clear_object (&panel->current_background);
+  g_clear_object (&self->current_background);
 
   G_OBJECT_CLASS (cc_background_panel_parent_class)->finalize (object);
 }
@@ -449,43 +449,43 @@ cc_background_panel_class_init (CcBackgroundPanelClass *klass)
 }
 
 static void
-on_settings_changed (CcBackgroundPanel *panel)
+on_settings_changed (CcBackgroundPanel *self)
 {
-  reload_current_bg (panel);
-  update_preview (panel);
+  reload_current_bg (self);
+  update_preview (self);
 }
 
 static void
-cc_background_panel_init (CcBackgroundPanel *panel)
+cc_background_panel_init (CcBackgroundPanel *self)
 {
   g_resources_register (cc_background_get_resource ());
 
-  gtk_widget_init_template (GTK_WIDGET (panel));
+  gtk_widget_init_template (GTK_WIDGET (self));
 
-  panel->connection = g_application_get_dbus_connection (g_application_get_default ());
+  self->connection = g_application_get_dbus_connection (g_application_get_default ());
 
-  panel->settings = g_settings_new (WP_PATH_ID);
-  g_settings_delay (panel->settings);
+  self->settings = g_settings_new (WP_PATH_ID);
+  g_settings_delay (self->settings);
  
-  panel->lock_settings = g_settings_new (WP_LOCK_PATH_ID);
-  g_settings_delay (panel->lock_settings);
+  self->lock_settings = g_settings_new (WP_LOCK_PATH_ID);
+  g_settings_delay (self->lock_settings);
 
-  panel->interface_settings = g_settings_new (INTERFACE_PATH_ID);
+  self->interface_settings = g_settings_new (INTERFACE_PATH_ID);
 
   /* Load the background */
-  reload_current_bg (panel);
-  update_preview (panel);
+  reload_current_bg (self);
+  update_preview (self);
 
   /* Background settings */
-  g_signal_connect_object (panel->settings, "changed", G_CALLBACK (on_settings_changed), panel, G_CONNECT_SWAPPED);
+  g_signal_connect_object (self->settings, "changed", G_CALLBACK (on_settings_changed), self, G_CONNECT_SWAPPED);
 
   /* Interface settings */
-  reload_color_scheme_toggles (panel);
+  reload_color_scheme_toggles (self);
 
-  g_signal_connect_object (panel->interface_settings,
+  g_signal_connect_object (self->interface_settings,
                            "changed::" INTERFACE_COLOR_SCHEME_KEY,
                            G_CALLBACK (reload_color_scheme_toggles),
-                           panel,
+                           self,
                            G_CONNECT_SWAPPED);
 
   g_dbus_proxy_new_for_bus (G_BUS_TYPE_SESSION,
@@ -496,7 +496,7 @@ cc_background_panel_init (CcBackgroundPanel *panel)
                             "org.gnome.Shell",
                             NULL,
                             got_transition_proxy_cb,
-                            panel);
+                            self);
 
-  load_custom_css (panel);
+  load_custom_css (self);
 }
