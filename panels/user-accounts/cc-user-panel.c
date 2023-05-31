@@ -104,7 +104,6 @@ struct _CcUserPanel {
         GPermission *permission;
         CcLanguageChooser *language_chooser;
         GListStore *other_users_model;
-        GtkFlattenListModel *other_users_flat_model;
 
         CcAvatarChooser *avatar_chooser;
 
@@ -245,25 +244,11 @@ static GtkWidget *
 create_user_row (gpointer item,
                  gpointer user_data)
 {
-        CcUserPanel *self = user_data;
         ActUser *user;
         GtkWidget *row, *user_image;
 
         row = adw_action_row_new ();
         gtk_list_box_row_set_activatable (GTK_LIST_BOX_ROW (row), TRUE);
-
-        if (GTK_IS_STRING_OBJECT (item)) {
-                g_assert (!self->add_user_button);
-                self->add_user_button = row;
-
-                adw_preferences_row_set_title (ADW_PREFERENCES_ROW (row),
-                                               _("Add User…"));
-                adw_action_row_set_icon_name (ADW_ACTION_ROW (row), "list-add-symbolic");
-                g_signal_connect_object (row, "activated",
-                                         G_CALLBACK (add_user),
-                                         self, G_CONNECT_SWAPPED);
-                return row;
-        }
 
         user = item;
         g_object_set_data (G_OBJECT (row), "uid", GINT_TO_POINTER (act_user_get_uid (user)));
@@ -811,7 +796,7 @@ show_user (ActUser *user, CcUserPanel *self)
 {
         g_autofree gchar *lang = NULL;
         g_autofree gchar *name = NULL;
-        gboolean show, enable;
+        gboolean show, enable, is_admin;
 #ifdef HAVE_MALCONTENT
         g_autofree gchar *malcontent_control_path = NULL;
 #endif
@@ -842,8 +827,8 @@ show_user (ActUser *user, CcUserPanel *self)
         gtk_widget_set_tooltip_text (GTK_WIDGET (self->full_name_entry),
                                      gtk_editable_get_text (GTK_EDITABLE (self->full_name_entry)));
 
-        enable = (act_user_get_account_type (user) == ACT_USER_ACCOUNT_TYPE_ADMINISTRATOR);
-        gtk_switch_set_active (self->account_type_switch, enable);
+        is_admin = (act_user_get_account_type (user) == ACT_USER_ACCOUNT_TYPE_ADMINISTRATOR);
+        gtk_switch_set_active (self->account_type_switch, is_admin);
 
         gtk_label_set_label (self->password_button_label, get_password_mode_text (user));
         enable = act_user_is_local_account (user);
@@ -893,8 +878,7 @@ show_user (ActUser *user, CcUserPanel *self)
          * libmalcontent is installed but malcontent-control is not). */
         malcontent_control_path = g_find_program_in_path ("malcontent-control");
 
-        if (act_user_get_account_type (user) == ACT_USER_ACCOUNT_TYPE_ADMINISTRATOR ||
-            malcontent_control_path == NULL) {
+        if (is_admin || malcontent_control_path == NULL) {
                 gtk_widget_set_visible (GTK_WIDGET (self->parental_controls_row), FALSE);
         } else {
                 if (is_parental_controls_enabled_for_user (user))
@@ -916,6 +900,7 @@ show_user (ActUser *user, CcUserPanel *self)
         gtk_widget_set_visible (GTK_WIDGET (self->back_button), !show);
         show_or_hide_back_button(self);
         gtk_widget_set_visible (GTK_WIDGET (self->other_users), show);
+        gtk_widget_set_visible (GTK_WIDGET (self->add_user_button), show && is_admin);
 
         if (self->permission != NULL)
                 on_permission_changed (self);
@@ -1324,32 +1309,6 @@ on_permission_changed (CcUserPanel *self)
         }
 }
 
-/*
- * This is a workaround to add an additional item to the end
- * of the users list, which will be used to show "Add User…"
- * row.  We do this way instead of appending a row to avoid
- * some imperfections in the GUI.  See
- * https://gitlab.gnome.org/GNOME/gnome-control-center/-/issues/1926
- */
-static void
-setup_other_users_list (CcUserPanel *self)
-{
-        g_autoptr(GListStore) add_user = NULL;
-        g_autoptr(GtkStringObject) str = NULL;
-        GListStore *users_store;
-
-        users_store = g_list_store_new (G_TYPE_LIST_MODEL);
-        add_user = g_list_store_new (GTK_TYPE_STRING_OBJECT);
-
-        str = gtk_string_object_new ("add-user");
-        g_list_store_append (add_user, str);
-
-        g_list_store_append (users_store, self->other_users_model);
-        g_list_store_append (users_store, add_user);
-
-        self->other_users_flat_model = gtk_flatten_list_model_new (G_LIST_MODEL (users_store));
-}
-
 static void
 setup_main_window (CcUserPanel *self)
 {
@@ -1357,11 +1316,8 @@ setup_main_window (CcUserPanel *self)
         gboolean loaded;
 
         self->other_users_model = g_list_store_new (ACT_TYPE_USER);
-
-        setup_other_users_list (self);
-
         gtk_list_box_bind_model (self->other_users_listbox,
-                                 G_LIST_MODEL (self->other_users_flat_model),
+                                 G_LIST_MODEL (self->other_users_model),
                                  (GtkListBoxCreateWidgetFunc)create_user_row,
                                  self,
                                  NULL);
@@ -1502,6 +1458,7 @@ cc_user_panel_class_init (CcUserPanelClass *klass)
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, account_settings_box);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, account_type_row);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, account_type_switch);
+        gtk_widget_class_bind_template_child (widget_class, CcUserPanel, add_user_button);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, autologin_row);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, autologin_switch);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, back_button);
