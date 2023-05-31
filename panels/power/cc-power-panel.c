@@ -160,14 +160,14 @@ load_custom_css (CcPowerPanel *self,
 }
 
 static void
-add_battery (CcPowerPanel *panel, UpDevice *device, gboolean primary)
+add_battery (CcPowerPanel *self, UpDevice *device, gboolean primary)
 {
   CcBatteryRow *row = cc_battery_row_new (device, primary);
-  cc_battery_row_set_level_sizegroup (row, panel->level_sizegroup);
-  cc_battery_row_set_row_sizegroup (row, panel->battery_row_sizegroup);
+  cc_battery_row_set_level_sizegroup (row, self->level_sizegroup);
+  cc_battery_row_set_row_sizegroup (row, self->battery_row_sizegroup);
 
-  gtk_list_box_append (panel->battery_listbox, GTK_WIDGET (row));
-  gtk_widget_set_visible (GTK_WIDGET (panel->battery_section), TRUE);
+  gtk_list_box_append (self->battery_listbox, GTK_WIDGET (row));
+  gtk_widget_set_visible (GTK_WIDGET (self->battery_section), TRUE);
 }
 
 static void
