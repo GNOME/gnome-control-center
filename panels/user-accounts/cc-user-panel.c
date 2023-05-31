@@ -266,8 +266,8 @@ sort_users (gconstpointer a, gconstpointer b, gpointer user_data)
 {
         ActUser *ua, *ub;
 
-        ua = ACT_USER (a);
-        ub = ACT_USER (b);
+        ua = ACT_USER ((gpointer*)a);
+        ub = ACT_USER ((gpointer*)b);
 
         /* Make sure the current user is shown first */
         if (act_user_get_uid (ua) == getuid ()) {
