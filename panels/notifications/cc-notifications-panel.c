@@ -63,11 +63,11 @@ typedef struct {
 
   /* Temporary pointer, to pass from the loading thread
      to the app */
-  CcNotificationsPanel *panel;
+  CcNotificationsPanel *self;
 } Application;
 
-static void build_app_store (CcNotificationsPanel *panel);
-static void select_app      (CcNotificationsPanel *panel, GtkListBoxRow *row);
+static void build_app_store (CcNotificationsPanel *self);
+static void select_app      (CcNotificationsPanel *self, GtkListBoxRow *row);
 static int  sort_apps       (gconstpointer one, gconstpointer two, gpointer user_data);
 
 CC_PANEL_REGISTER (CcNotificationsPanel, cc_notifications_panel);
@@ -91,10 +91,10 @@ keynav_failed_cb (CcNotificationsPanel *self,
 static void
 cc_notifications_panel_dispose (GObject *object)
 {
-  CcNotificationsPanel *panel = CC_NOTIFICATIONS_PANEL (object);
+  CcNotificationsPanel *self = CC_NOTIFICATIONS_PANEL (object);
 
-  g_clear_object (&panel->master_settings);
-  g_clear_pointer (&panel->known_applications, g_hash_table_unref);
+  g_clear_object (&self->master_settings);
+  g_clear_pointer (&self->known_applications, g_hash_table_unref);
 
   G_OBJECT_CLASS (cc_notifications_panel_parent_class)->dispose (object);
 }
@@ -102,9 +102,9 @@ cc_notifications_panel_dispose (GObject *object)
 static void
 cc_notifications_panel_finalize (GObject *object)
 {
-  CcNotificationsPanel *panel = CC_NOTIFICATIONS_PANEL (object);
+  CcNotificationsPanel *self = CC_NOTIFICATIONS_PANEL (object);
 
-  g_clear_object (&panel->perm_store);
+  g_clear_object (&self->perm_store);
 
   G_OBJECT_CLASS (cc_notifications_panel_parent_class)->finalize (object);
 }
@@ -131,27 +131,27 @@ on_perm_store_ready (GObject *source_object,
 }
 
 static void
-cc_notifications_panel_init (CcNotificationsPanel *panel)
+cc_notifications_panel_init (CcNotificationsPanel *self)
 {
   g_resources_register (cc_notifications_get_resource ());
 
-  gtk_widget_init_template (GTK_WIDGET (panel));
+  gtk_widget_init_template (GTK_WIDGET (self));
 
-  panel->known_applications = g_hash_table_new_full (g_str_hash, g_str_equal,
-                                                     NULL, g_free);
+  self->known_applications = g_hash_table_new_full (g_str_hash, g_str_equal,
+                                                    NULL, g_free);
 
-  panel->master_settings = g_settings_new (MASTER_SCHEMA);
+  self->master_settings = g_settings_new (MASTER_SCHEMA);
 
-  g_settings_bind (panel->master_settings, "show-banners",
-                   panel->dnd_row,
+  g_settings_bind (self->master_settings, "show-banners",
+                   self->dnd_row,
                    "active", G_SETTINGS_BIND_INVERT_BOOLEAN);
-  g_settings_bind (panel->master_settings, "show-in-lock-screen",
-                   panel->lock_screen_row,
+  g_settings_bind (self->master_settings, "show-in-lock-screen",
+                   self->lock_screen_row,
                    "active", G_SETTINGS_BIND_DEFAULT);
 
-  gtk_list_box_set_sort_func (panel->app_listbox, (GtkListBoxSortFunc)sort_apps, NULL, NULL);
+  gtk_list_box_set_sort_func (self->app_listbox, (GtkListBoxSortFunc)sort_apps, NULL, NULL);
 
-  build_app_store (panel);
+  build_app_store (self);
 
   g_dbus_proxy_new_for_bus (G_BUS_TYPE_SESSION,
                             G_DBUS_PROXY_FLAGS_NONE,
@@ -159,9 +159,9 @@ cc_notifications_panel_init (CcNotificationsPanel *panel)
                             "org.freedesktop.impl.portal.PermissionStore",
                             "/org/freedesktop/impl/portal/PermissionStore",
                             "org.freedesktop.impl.portal.PermissionStore",
-                            cc_panel_get_cancellable (CC_PANEL (panel)),
+                            cc_panel_get_cancellable (CC_PANEL (self)),
                             on_perm_store_ready,
-                            panel);
+                            self);
 }
 
 static const char *
@@ -225,7 +225,7 @@ application_free (Application *app)
   g_free (app->canonical_app_id);
   g_object_unref (app->app_info);
   g_object_unref (app->settings);
-  g_object_unref (app->panel);
+  g_object_unref (app->self);
 
   g_slice_free (Application, app);
 }
@@ -233,7 +233,7 @@ application_free (Application *app)
 G_DEFINE_AUTOPTR_CLEANUP_FUNC (Application, application_free)
 
 static void
-add_application (CcNotificationsPanel *panel,
+add_application (CcNotificationsPanel *self,
                  Application          *app)
 {
   GtkWidget *w, *row;
@@ -258,7 +258,7 @@ add_application (CcNotificationsPanel *panel,
   g_object_set_qdata_full (G_OBJECT (row), application_quark (),
                            app, (GDestroyNotify) application_free);
 
-  gtk_list_box_append (panel->app_listbox, row);
+  gtk_list_box_append (self->app_listbox, row);
 
   w = gtk_image_new_from_gicon (icon);
   gtk_widget_add_css_class (w, "lowres-icon");
@@ -279,11 +279,11 @@ add_application (CcNotificationsPanel *panel,
   w = gtk_image_new_from_icon_name ("go-next-symbolic");
   adw_action_row_add_suffix (ADW_ACTION_ROW (row), w);
 
-  g_hash_table_add (panel->known_applications, g_strdup (app->canonical_app_id));
+  g_hash_table_add (self->known_applications, g_strdup (app->canonical_app_id));
 }
 
 static void
-maybe_add_app_id (CcNotificationsPanel *panel,
+maybe_add_app_id (CcNotificationsPanel *self,
                   const char *canonical_app_id)
 {
   Application *app;
@@ -295,7 +295,7 @@ maybe_add_app_id (CcNotificationsPanel *panel,
   if (*canonical_app_id == '\0')
     return;
 
-  if (g_hash_table_contains (panel->known_applications,
+  if (g_hash_table_contains (self->known_applications,
                              canonical_app_id))
     return;
 
@@ -320,7 +320,7 @@ maybe_add_app_id (CcNotificationsPanel *panel,
   g_debug ("Adding application '%s' (canonical app ID: %s)",
            full_app_id, canonical_app_id);
 
-  add_application (panel, app);
+  add_application (self, app);
 }
 
 static char *
@@ -351,7 +351,7 @@ app_info_get_id (GAppInfo *app_info)
 }
 
 static void
-process_app_info (CcNotificationsPanel *panel,
+process_app_info (CcNotificationsPanel *self,
                   GAppInfo             *app_info)
 {
   Application *app;
@@ -377,19 +377,19 @@ process_app_info (CcNotificationsPanel *panel,
   app->canonical_app_id = g_steal_pointer (&app_id);
   app->settings = g_object_ref (settings);
   app->app_info = g_object_ref (app_info);
-  app->panel = g_object_ref (panel);
+  app->self = g_object_ref (self);
 
-  if (g_hash_table_contains (panel->known_applications,
+  if (g_hash_table_contains (self->known_applications,
                              app->canonical_app_id))
     return;
 
   g_debug ("Processing queued application %s", app->canonical_app_id);
 
-  add_application (panel, app);
+  add_application (self, app);
 }
 
 static void
-load_apps (CcNotificationsPanel *panel)
+load_apps (CcNotificationsPanel *self)
 {
   GList *iter, *apps;
 
@@ -401,7 +401,7 @@ load_apps (CcNotificationsPanel *panel)
 
       app = iter->data;
       if (g_desktop_app_info_get_boolean (app, "X-GNOME-UsesNotifications")) {
-        process_app_info (panel, G_APP_INFO (app));
+        process_app_info (self, G_APP_INFO (app));
         g_debug ("Processing app '%s'", g_app_info_get_id (G_APP_INFO (app)));
       } else {
         g_debug ("Skipped app '%s', doesn't use notifications", g_app_info_get_id (G_APP_INFO (app)));
@@ -412,34 +412,34 @@ load_apps (CcNotificationsPanel *panel)
 }
 
 static void
-children_changed (CcNotificationsPanel *panel,
+children_changed (CcNotificationsPanel *self,
                   const char           *key)
 {
   int i;
   g_auto (GStrv) new_app_ids = NULL;
 
-  g_settings_get (panel->master_settings,
+  g_settings_get (self->master_settings,
                   "application-children",
                   "^as", &new_app_ids);
   for (i = 0; new_app_ids[i]; i++)
-    maybe_add_app_id (panel, new_app_ids[i]);
+    maybe_add_app_id (self, new_app_ids[i]);
 }
 
 static void
-build_app_store (CcNotificationsPanel *panel)
+build_app_store (CcNotificationsPanel *self)
 {
   /* Build application entries for known applications */
-  children_changed (panel, NULL);
-  g_signal_connect_object (panel->master_settings,
+  children_changed (self, NULL);
+  g_signal_connect_object (self->master_settings,
                            "changed::application-children",
-                           G_CALLBACK (children_changed), panel, G_CONNECT_SWAPPED);
+                           G_CALLBACK (children_changed), self, G_CONNECT_SWAPPED);
 
   /* Scan applications that statically declare to show notifications */
-  load_apps (panel);
+  load_apps (self);
 }
 
 static void
-select_app (CcNotificationsPanel *panel,
+select_app (CcNotificationsPanel *self,
             GtkListBoxRow        *row)
 {
   Application *app;
@@ -448,7 +448,7 @@ select_app (CcNotificationsPanel *panel,
   GtkWidget *toplevel;
   CcShell *shell;
 
-  shell = cc_panel_get_shell (CC_PANEL (panel));
+  shell = cc_panel_get_shell (CC_PANEL (self));
   toplevel = cc_shell_get_toplevel (shell);
 
   app = g_object_get_qdata (G_OBJECT (row), application_quark ());
@@ -457,7 +457,7 @@ select_app (CcNotificationsPanel *panel,
   if (g_str_has_suffix (app_id, ".desktop"))
     app_id[strlen (app_id) - strlen (".desktop")] = '\0';
 
-  dialog = cc_app_notifications_dialog_new (app_id, g_app_info_get_name (app->app_info), app->settings, panel->master_settings, panel->perm_store);
+  dialog = cc_app_notifications_dialog_new (app_id, g_app_info_get_name (app->app_info), app->settings, self->master_settings, self->perm_store);
   gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (toplevel));
   gtk_window_present (GTK_WINDOW (dialog));
 }
