@@ -272,10 +272,10 @@ cc_sound_panel_get_help_uri (CcPanel *panel)
 static void
 cc_sound_panel_finalize (GObject *object)
 {
-  CcSoundPanel *panel = CC_SOUND_PANEL (object);
+  CcSoundPanel *self = CC_SOUND_PANEL (object);
 
-  g_clear_object (&panel->mixer_control);
-  g_clear_object (&panel->sound_settings);
+  g_clear_object (&self->mixer_control);
+  g_clear_object (&self->sound_settings);
 
   G_OBJECT_CLASS (cc_sound_panel_parent_class)->finalize (object);
 }
