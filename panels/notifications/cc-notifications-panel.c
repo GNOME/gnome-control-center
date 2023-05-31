@@ -225,6 +225,7 @@ application_free (Application *app)
   g_free (app->canonical_app_id);
   g_object_unref (app->app_info);
   g_object_unref (app->settings);
+  g_object_unref (app->panel);
 
   g_slice_free (Application, app);
 }
