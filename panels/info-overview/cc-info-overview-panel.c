@@ -852,7 +852,7 @@ cc_info_panel_open_software_update (CcInfoOverviewPanel *self)
 
 #if !defined(DISTRIBUTOR_LOGO) || defined(DARK_MODE_DISTRIBUTOR_LOGO)
 static gboolean
-use_dark_theme (CcInfoOverviewPanel *panel)
+use_dark_theme (CcInfoOverviewPanel *self)
 {
   AdwStyleManager *style_manager = adw_style_manager_get_default ();
 
@@ -861,17 +861,17 @@ use_dark_theme (CcInfoOverviewPanel *panel)
 #endif
 
 static void
-setup_os_logo (CcInfoOverviewPanel *panel)
+setup_os_logo (CcInfoOverviewPanel *self)
 {
 #ifdef DISTRIBUTOR_LOGO
 #ifdef DARK_MODE_DISTRIBUTOR_LOGO
-  if (use_dark_theme (panel))
+  if (use_dark_theme (self))
     {
-      gtk_picture_set_filename (panel->os_logo, DARK_MODE_DISTRIBUTOR_LOGO);
+      gtk_picture_set_filename (self->os_logo, DARK_MODE_DISTRIBUTOR_LOGO);
       return;
     }
 #endif
-  gtk_picture_set_filename (panel->os_logo, DISTRIBUTOR_LOGO);
+  gtk_picture_set_filename (self->os_logo, DISTRIBUTOR_LOGO);
   return;
 #else
   GtkIconTheme *icon_theme;
@@ -881,7 +881,7 @@ setup_os_logo (CcInfoOverviewPanel *panel)
   g_autoptr(GIcon) icon = NULL;
   gboolean dark;
 
-  dark = use_dark_theme (panel);
+  dark = use_dark_theme (self);
   if (logo_name == NULL)
     logo_name = g_strdup ("gnome-logo");
 
@@ -897,10 +897,10 @@ setup_os_logo (CcInfoOverviewPanel *panel)
   icon_theme = gtk_icon_theme_get_for_display (gdk_display_get_default ());
   icon_paintable = gtk_icon_theme_lookup_by_gicon (icon_theme, icon,
                                                    192,
-                                                   gtk_widget_get_scale_factor (GTK_WIDGET (panel)),
-                                                   gtk_widget_get_direction (GTK_WIDGET (panel)),
+                                                   gtk_widget_get_scale_factor (GTK_WIDGET (self)),
+                                                   gtk_widget_get_direction (GTK_WIDGET (self)),
                                                    0);
-  gtk_picture_set_paintable (panel->os_logo, GDK_PAINTABLE (icon_paintable));
+  gtk_picture_set_paintable (self->os_logo, GDK_PAINTABLE (icon_paintable));
 #endif
 }
 
