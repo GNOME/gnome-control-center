@@ -669,6 +669,7 @@ static char *
 get_gnome_version (GDBusProxy *proxy)
 {
   g_autoptr(GVariant) variant = NULL;
+  g_auto(GStrv) split_version = NULL;
   const char *gnome_version = NULL;
   if (!proxy)
     return NULL;
@@ -680,7 +681,15 @@ get_gnome_version (GDBusProxy *proxy)
   gnome_version = g_variant_get_string (variant, NULL);
   if (!gnome_version || *gnome_version == '\0')
     return NULL;
-  return g_strdup (gnome_version);
+
+  /* Only show the major version. This is the gnome-shell version and we do not
+   * want to present the full gnome-shell version as the "GNOME Version" because
+   * the minor versions often differ; e.g. GNOME 43.6 contains gnome-shell 43.5.
+   * We also don't want to say "GNOME Shell Version" because shell is considered
+   * to be an internal name, not user-facing.
+   */
+  split_version = g_strsplit (gnome_version, ".", 2);
+  return g_strdup (split_version[0]);
 }
 
 static void
