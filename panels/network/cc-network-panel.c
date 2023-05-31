@@ -235,7 +235,7 @@ cc_network_panel_finalize (GObject *object)
 }
 
 static const char *
-cc_network_panel_get_help_uri (CcPanel *self)
+cc_network_panel_get_help_uri (CcPanel *panel)
 {
 	return "help:gnome-help/net";
 }
