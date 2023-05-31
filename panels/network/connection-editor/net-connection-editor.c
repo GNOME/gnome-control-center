@@ -494,6 +494,10 @@ recheck_initialization (NetConnectionEditor *self)
         gtk_notebook_set_current_page (self->notebook, 0);
 
         g_idle_add (idle_validate, self);
+
+        if (self->is_new_connection)
+                adw_bin_set_child (self->add_connection_frame, NULL);
+
 }
 
 static void
@@ -711,8 +715,6 @@ complete_vpn_connection (NetConnectionEditor *self,
 static void
 finish_add_connection (NetConnectionEditor *self, NMConnection *connection)
 {
-        adw_bin_set_child (self->add_connection_frame, NULL);
-        gtk_stack_set_visible_child (self->toplevel_stack, GTK_WIDGET (self->notebook));
         gtk_widget_set_visible (GTK_WIDGET (self->apply_button), TRUE);
 
         if (connection)
