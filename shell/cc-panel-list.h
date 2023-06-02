@@ -69,5 +69,7 @@ void                 cc_panel_list_set_panel_visibility          (CcPanelList   
 
 void                 cc_panel_list_set_selection_mode            (CcPanelList        *self,
                                                                   GtkSelectionMode    selection_mode);
+void                 cc_panel_list_center_activated_row          (CcPanelList        *self,
+                                                                  gboolean            val);
 
 G_END_DECLS

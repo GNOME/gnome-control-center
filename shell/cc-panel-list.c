@@ -58,6 +58,11 @@ struct _CcPanelList
   CcPanelListView     view;
   GHashTable         *id_to_data;
   GHashTable         *id_to_search_data;
+
+  /* When true, the next row being activated will be vertically centered on
+   * the visible part of panel list. Currently we do that for panels activated
+   * from Search or from the set_active_panel_from_id() CcShell iface */
+  gboolean            center_activated_row;
 };
 
 G_DEFINE_TYPE (CcPanelList, cc_panel_list, ADW_TYPE_BIN)
@@ -561,6 +566,8 @@ search_row_activated_cb (GtkWidget     *listbox,
            * activating a panel from search result */
           self->autoselect_panel = FALSE;
 
+          /* center Search activated row on panel list */
+          self->center_activated_row = TRUE;
           g_signal_emit_by_name (real_row, "activate");
           break;
         }
@@ -766,6 +773,16 @@ cc_panel_list_new (void)
   return g_object_new (CC_TYPE_PANEL_LIST, NULL);
 }
 
+void
+cc_panel_list_center_activated_row (CcPanelList *self,
+                                    gboolean     val)
+{
+  g_return_if_fail (CC_IS_PANEL_LIST (self));
+
+  if (self->center_activated_row != val)
+    self->center_activated_row = val;
+}
+
 gboolean
 cc_panel_list_activate (CcPanelList *self)
 {
@@ -936,12 +953,19 @@ cc_panel_list_set_active_panel (CcPanelList *self,
   GtkWidget *listbox;
   RowData *data;
   ScrollData *sdata;
+  gboolean scroll_to_center = FALSE;
 
   g_return_if_fail (CC_IS_PANEL_LIST (self));
 
   data = g_hash_table_lookup (self->id_to_data, id);
 
   g_assert (data != NULL);
+
+  if (self->center_activated_row)
+    {
+      scroll_to_center = TRUE;
+      self->center_activated_row = FALSE;
+    }
 
   /* Stop if row is supposed to be always hidden */
   if (data->visibility == CC_PANEL_HIDDEN)
@@ -986,13 +1010,18 @@ cc_panel_list_set_active_panel (CcPanelList *self,
   g_clear_pointer (&self->current_panel_id, g_free);
   self->current_panel_id = g_strdup (id);
 
-  /* Scroll the sidebar to the selected panel row, as that row may be
-   * out of view when panel is launched from a search or from cli */
-  sdata = g_new (ScrollData, 1);
-  sdata->panel_list = g_object_ref (self);
-  sdata->row = g_object_ref (data->row);
+  /* This centering is currently set for panels activated from Search
+   * or from set_active_panel_from_id() CcShell iface */
+  if (scroll_to_center)
+    {
+      /* Scroll the sidebar to the selected panel row, as that row may be
+       * out of view when panel is launched from a search or from cli */
+      sdata = g_new (ScrollData, 1);
+      sdata->panel_list = g_object_ref (self);
+      sdata->row = g_object_ref (data->row);
 
-  g_idle_add (G_SOURCE_FUNC (scroll_to_idle_cb), sdata);
+      g_idle_add (G_SOURCE_FUNC (scroll_to_idle_cb), sdata);
+    }
 }
 
 /**
