@@ -914,7 +914,7 @@ cc_panel_list_scroll_to_center_row (CcPanelList *self,
   if (!adj)
     return;
 
-  if (!gtk_widget_compute_point (row, scrolled_window, &GRAPHENE_POINT_INIT (0, 0), &p))
+  if (!gtk_widget_compute_point (row, GTK_WIDGET (self), &GRAPHENE_POINT_INIT (0, 0), &p))
     return;
 
   target_value = p.y + gtk_widget_get_height (row) / 2;
