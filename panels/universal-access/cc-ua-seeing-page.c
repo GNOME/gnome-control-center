@@ -45,7 +45,7 @@
 
 struct _CcUaSeeingPage
 {
-  AdwPreferencesPage  parent_instance;
+  AdwNavigationPage   parent_instance;
 
   AdwSwitchRow       *high_contrast_row;
   AdwSwitchRow       *animations_row;
@@ -67,7 +67,7 @@ struct _CcUaSeeingPage
   gboolean            is_self_change;
 };
 
-G_DEFINE_TYPE (CcUaSeeingPage, cc_ua_seeing_page, ADW_TYPE_PREFERENCES_PAGE)
+G_DEFINE_TYPE (CcUaSeeingPage, cc_ua_seeing_page, ADW_TYPE_NAVIGATION_PAGE)
 
 static gboolean
 get_large_text_mapping (GValue   *value,

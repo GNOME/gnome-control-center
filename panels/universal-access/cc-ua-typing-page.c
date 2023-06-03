@@ -43,7 +43,7 @@
 
 struct _CcUaTypingPage
 {
-  AdwPreferencesPage  parent_instance;
+  AdwNavigationPage   parent_instance;
 
   AdwSwitchRow       *screen_kb_row;
   AdwSwitchRow       *shortcuts_by_kb_row;
@@ -76,7 +76,7 @@ struct _CcUaTypingPage
   GSettings          *kb_settings;
 };
 
-G_DEFINE_TYPE (CcUaTypingPage, cc_ua_typing_page, ADW_TYPE_PREFERENCES_PAGE)
+G_DEFINE_TYPE (CcUaTypingPage, cc_ua_typing_page, ADW_TYPE_NAVIGATION_PAGE)
 
 /*
  * In the UI We are showing the speed, but in the settings we

@@ -37,6 +37,6 @@ G_BEGIN_DECLS
 
 #define CC_TYPE_UA_ZOOM_PAGE (cc_ua_zoom_page_get_type ())
 
-G_DECLARE_FINAL_TYPE (CcUaZoomPage, cc_ua_zoom_page, CC, UA_ZOOM_PAGE, AdwPreferencesPage)
+G_DECLARE_FINAL_TYPE (CcUaZoomPage, cc_ua_zoom_page, CC, UA_ZOOM_PAGE, AdwNavigationPage)
 
 G_END_DECLS

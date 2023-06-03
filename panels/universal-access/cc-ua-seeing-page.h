@@ -32,7 +32,7 @@ G_BEGIN_DECLS
 
 #define CC_TYPE_UA_SEEING_PAGE (cc_ua_seeing_page_get_type ())
 
-G_DECLARE_FINAL_TYPE (CcUaSeeingPage, cc_ua_seeing_page, CC, UA_SEEING_PAGE, AdwPreferencesPage)
+G_DECLARE_FINAL_TYPE (CcUaSeeingPage, cc_ua_seeing_page, CC, UA_SEEING_PAGE, AdwNavigationPage)
 
 GtkWidget *cc_ua_seeing_page_new (void);
 

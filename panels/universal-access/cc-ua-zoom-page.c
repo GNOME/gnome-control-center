@@ -41,7 +41,7 @@
 
 struct _CcUaZoomPage
 {
-  AdwPreferencesPage  parent_instance;
+  AdwNavigationPage   parent_instance;
 
   AdwSwitchRow       *desktop_zoom_row;
   GtkSpinButton      *magnify_factor_spin;
@@ -68,7 +68,7 @@ struct _CcUaZoomPage
   gboolean            is_self_update;
 };
 
-G_DEFINE_TYPE (CcUaZoomPage, cc_ua_zoom_page, ADW_TYPE_PREFERENCES_PAGE)
+G_DEFINE_TYPE (CcUaZoomPage, cc_ua_zoom_page, ADW_TYPE_NAVIGATION_PAGE)
 
 static void
 ua_zoom_magnifier_settings_changed_cb (CcUaZoomPage *self,

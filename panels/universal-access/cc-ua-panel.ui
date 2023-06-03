@@ -1,164 +1,141 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <template class="CcUaPanel" parent="CcPanel">
-    <signal name="notify::folded" handler="ua_panel_update_back_button_cb" swapped="yes"/>
-
-    <!-- Header Bar -->
     <child type="titlebar">
-      <object class="AdwHeaderBar" id="titlebar">
-        <property name="show-end-title-buttons">True</property>
-        <property name="show-start-title-buttons" bind-source="CcUaPanel" bind-property="folded" bind-flags="default|sync-create" />
-        <property name="title-widget">
-          <object class="AdwWindowTitle" id="page_title"/>
-        </property>
-        <child type="start">
-          <object class="GtkButton" id="back_button">
-            <property name="tooltip-text" translatable="yes">Back</property>
-            <property name="visible">False</property>
-            <property name="icon-name">go-previous-symbolic</property>
-            <accessibility>
-              <property name="label" translatable="yes">Back</property>
-            </accessibility>
-            <signal name="clicked" handler="ua_panel_back_clicked_cb" swapped="yes"/>
-          </object>
-        </child>
+      <object class="GtkHeaderBar">
+        <property name="visible">False</property>
       </object>
     </child>
 
     <child type="content">
-      <object class="AdwLeaflet" id="main_leaflet">
-        <property name="can-unfold">False</property>
-        <property name="can-navigate-back">True</property>
-        <signal name="notify::visible-child" handler="ua_panel_update_back_button_cb" swapped="yes"/>
-        <signal name="notify::visible-child" handler="ua_panel_visible_child_changed_cb" swapped="yes"/>
-
+      <object class="AdwNavigationView" id="main_nav_view">
         <child>
-          <object class="AdwPreferencesPage" id="main_page">
-
-            <!-- Accessibility menu row -->
-            <child>
-              <object class="AdwPreferencesGroup">
-                <child>
-                  <object class="AdwSwitchRow" id="show_ua_menu_row">
-                    <property name="title" translatable="yes">_Accessibility Menu</property>
-                    <property name="subtitle" translatable="yes">Display menu for Accessibility settings in top bar</property>
-                    <property name="use-underline">True</property>
+          <object class="AdwNavigationPage" id="main_page">
+            <property name="title" translatable="yes">Accessibility</property>
+            <property name="child">
+              <object class="AdwToolbarView">
+                <property name="top-bar-style">raised</property>
+                <child type="top">
+                  <object class="AdwHeaderBar" id="titlebar">
+                    <property name="show-end-title-buttons">True</property>
+                    <property name="show-start-title-buttons" bind-source="CcUaPanel" bind-property="folded" bind-flags="default|sync-create" />
+                    <child type="start">
+                      <object class="GtkButton" id="back_button">
+                        <property name="tooltip-text" translatable="yes">Back</property>
+                        <property name="visible" bind-source="CcUaPanel" bind-property="folded" bind-flags="sync-create"/>
+                        <property name="icon-name">go-previous-symbolic</property>
+                        <accessibility>
+                          <property name="label" translatable="yes">Back</property>
+                        </accessibility>
+                        <signal name="clicked" handler="ua_panel_back_clicked_cb" swapped="yes"/>
+                      </object>
+                    </child>
                   </object>
                 </child>
+                <property name="content">
+                  <object class="AdwPreferencesPage">
+
+                    <!-- Accessibility menu row -->
+                    <child>
+                      <object class="AdwPreferencesGroup">
+                        <child>
+                          <object class="AdwSwitchRow" id="show_ua_menu_row">
+                            <property name="title" translatable="yes">_Accessibility Menu</property>
+                            <property name="subtitle" translatable="yes">Display menu for Accessibility settings in top bar</property>
+                            <property name="use-underline">True</property>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+
+                    <child>
+                      <object class="AdwPreferencesGroup">
+                        <!-- Seeing row -->
+                        <child>
+                          <object class="CcListRow" id="seeing_row">
+                            <property name="title" translatable="yes">_Seeing</property>
+                            <property name="icon-name">seeing-symbolic</property>
+                            <property name="use-underline">True</property>
+                            <property name="show-arrow">True</property>
+                            <property name="action-name">navigation.push</property>
+                            <property name="action-target">'seeing'</property>
+                          </object>
+                        </child>
+
+                        <!-- Hearing row -->
+                        <child>
+                          <object class="CcListRow" id="hearing_row">
+                            <property name="title" translatable="yes">_Hearing</property>
+                            <property name="icon-name">hearing-symbolic</property>
+                            <property name="use-underline">True</property>
+                            <property name="show-arrow">True</property>
+                            <property name="action-name">navigation.push</property>
+                            <property name="action-target">'hearing'</property>
+                          </object>
+                        </child>
+
+                        <!-- Typing row -->
+                        <child>
+                          <object class="CcListRow" id="typing_row">
+                            <property name="title" translatable="yes">_Typing</property>
+                            <property name="icon-name">typing-symbolic</property>
+                            <property name="use-underline">True</property>
+                            <property name="show-arrow">True</property>
+                            <property name="action-name">navigation.push</property>
+                            <property name="action-target">'typing'</property>
+                          </object>
+                        </child>
+
+                        <!-- Mouse and clicking row -->
+                        <child>
+                          <object class="CcListRow" id="mouse_row">
+                            <property name="title" translatable="yes">_Pointing and Clicking</property>
+                            <property name="icon-name">pointing-symbolic</property>
+                            <property name="use-underline">True</property>
+                            <property name="show-arrow">True</property>
+                            <property name="action-name">navigation.push</property>
+                            <property name="action-target">'mouse'</property>
+                          </object>
+                        </child>
+
+                        <!-- Zoom row -->
+                        <child>
+                          <object class="CcListRow" id="zoom_row">
+                            <property name="title" translatable="yes">_Zoom</property>
+                            <property name="icon-name">zoom-symbolic</property>
+                            <property name="use-underline">True</property>
+                            <property name="show-arrow">True</property>
+                            <property name="action-name">navigation.push</property>
+                            <property name="action-target">'zoom'</property>
+                          </object>
+                        </child>
+                      </object> <!-- ./AdwPreferencesGroup -->
+                    </child>
+                  </object> <!-- ./AdwPreferencesPage main_page -->
+                </property>
               </object>
-            </child>
-
-            <child>
-              <object class="AdwPreferencesGroup">
-                <child>
-                  <object class="GtkListBox">
-                    <property name="selection-mode">none</property>
-                    <signal name="row-activated" handler="ua_panel_row_activated_cb" swapped="yes"/>
-                    <style>
-                      <class name="boxed-list"/>
-                    </style>
-
-                    <!-- Seeing row -->
-                    <child>
-                      <object class="CcListRow" id="seeing_row">
-                        <property name="title" translatable="yes">_Seeing</property>
-                        <property name="icon-name">seeing-symbolic</property>
-                        <property name="use-underline">True</property>
-                        <property name="show-arrow">True</property>
-                      </object>
-                    </child>
-
-                    <!-- Hearing row -->
-                    <child>
-                      <object class="CcListRow" id="hearing_row">
-                        <property name="title" translatable="yes">_Hearing</property>
-                        <property name="icon-name">hearing-symbolic</property>
-                        <property name="use-underline">True</property>
-                        <property name="show-arrow">True</property>
-                      </object>
-                    </child>
-
-                    <!-- Typing row -->
-                    <child>
-                      <object class="CcListRow" id="typing_row">
-                        <property name="title" translatable="yes">_Typing</property>
-                        <property name="icon-name">typing-symbolic</property>
-                        <property name="use-underline">True</property>
-                        <property name="show-arrow">True</property>
-                      </object>
-                    </child>
-
-                    <!-- Mouse and clicking row -->
-                    <child>
-                      <object class="CcListRow" id="mouse_row">
-                        <property name="title" translatable="yes">_Pointing and Clicking</property>
-                        <property name="icon-name">pointing-symbolic</property>
-                        <property name="use-underline">True</property>
-                        <property name="show-arrow">True</property>
-                      </object>
-                    </child>
-
-                    <!-- Zoom row -->
-                    <child>
-                      <object class="CcListRow" id="zoom_row">
-                        <property name="title" translatable="yes">_Zoom</property>
-                        <property name="icon-name">zoom-symbolic</property>
-                        <property name="use-underline">True</property>
-                        <property name="show-arrow">True</property>
-                      </object>
-                    </child>
-                  </object>
-                </child>
-
-              </object> <!-- ./AdwPreferencesGroup -->
-            </child>
-
-          </object> <!-- ./AdwPreferencesPage main_page -->
-        </child>
-
-        <child>
-          <object class="AdwLeafletPage">
-            <property name="navigatable">False</property>
-            <property name="child">
-              <object class="CcUaSeeingPage" id="seeing_page"/>
             </property>
           </object>
         </child>
 
         <child>
-          <object class="AdwLeafletPage">
-            <property name="navigatable">False</property>
-            <property name="child">
-              <object class="CcUaHearingPage" id="hearing_page"/>
-            </property>
-          </object>
+          <object class="CcUaSeeingPage" id="seeing_page"/>
         </child>
 
         <child>
-          <object class="AdwLeafletPage">
-            <property name="navigatable">False</property>
-            <property name="child">
-              <object class="CcUaTypingPage" id="typing_page"/>
-            </property>
-          </object>
+          <object class="CcUaHearingPage" id="hearing_page"/>
         </child>
 
         <child>
-          <object class="AdwLeafletPage">
-            <property name="navigatable">False</property>
-            <property name="child">
-              <object class="CcUaMousePage" id="mouse_page"/>
-            </property>
-          </object>
+          <object class="CcUaTypingPage" id="typing_page"/>
         </child>
 
         <child>
-          <object class="AdwLeafletPage">
-            <property name="navigatable">False</property>
-            <property name="child">
-              <object class="CcUaZoomPage" id="zoom_page"/>
-            </property>
-          </object>
+          <object class="CcUaMousePage" id="mouse_page"/>
+        </child>
+
+        <child>
+          <object class="CcUaZoomPage" id="zoom_page"/>
         </child>
 
       </object>

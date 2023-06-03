@@ -37,6 +37,6 @@ G_BEGIN_DECLS
 
 #define CC_TYPE_UA_TYPING_PAGE (cc_ua_typing_page_get_type ())
 
-G_DECLARE_FINAL_TYPE (CcUaTypingPage, cc_ua_typing_page, CC, UA_TYPING_PAGE, AdwPreferencesPage)
+G_DECLARE_FINAL_TYPE (CcUaTypingPage, cc_ua_typing_page, CC, UA_TYPING_PAGE, AdwNavigationPage)
 
 G_END_DECLS

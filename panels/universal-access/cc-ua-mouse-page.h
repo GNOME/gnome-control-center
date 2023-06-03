@@ -37,6 +37,6 @@ G_BEGIN_DECLS
 
 #define CC_TYPE_UA_MOUSE_PAGE (cc_ua_mouse_page_get_type ())
 
-G_DECLARE_FINAL_TYPE (CcUaMousePage, cc_ua_mouse_page, CC, UA_MOUSE_PAGE, AdwPreferencesPage)
+G_DECLARE_FINAL_TYPE (CcUaMousePage, cc_ua_mouse_page, CC, UA_MOUSE_PAGE, AdwNavigationPage)
 
 G_END_DECLS

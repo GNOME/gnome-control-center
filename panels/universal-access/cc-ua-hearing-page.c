@@ -45,7 +45,7 @@
 
 struct _CcUaHearingPage
 {
-  AdwPreferencesPage  parent_instance;
+  AdwNavigationPage   parent_instance;
 
   AdwSwitchRow       *overamplification_row;
   GtkLabel           *sound_settings_label;
@@ -57,7 +57,7 @@ struct _CcUaHearingPage
   GSettings          *wm_settings;
 };
 
-G_DEFINE_TYPE (CcUaHearingPage, cc_ua_hearing_page, ADW_TYPE_PREFERENCES_PAGE)
+G_DEFINE_TYPE (CcUaHearingPage, cc_ua_hearing_page, ADW_TYPE_NAVIGATION_PAGE)
 
 static void
 ua_hearing_flash_type_changed_cb (CcUaHearingPage *self)

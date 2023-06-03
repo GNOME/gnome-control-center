@@ -37,6 +37,6 @@ G_BEGIN_DECLS
 
 #define CC_TYPE_UA_HEARING_PAGE (cc_ua_hearing_page_get_type ())
 
-G_DECLARE_FINAL_TYPE (CcUaHearingPage, cc_ua_hearing_page, CC, UA_HEARING_PAGE, AdwPreferencesPage)
+G_DECLARE_FINAL_TYPE (CcUaHearingPage, cc_ua_hearing_page, CC, UA_HEARING_PAGE, AdwNavigationPage)
 
 G_END_DECLS

@@ -41,7 +41,7 @@
 
 struct _CcUaMousePage
 {
-  AdwPreferencesPage  parent_instance;
+  AdwNavigationPage   parent_instance;
 
   AdwSwitchRow       *mouse_keys_row;
   AdwSwitchRow       *locate_pointer_row;
@@ -60,7 +60,7 @@ struct _CcUaMousePage
   GSettings          *gds_mouse_settings;
 };
 
-G_DEFINE_TYPE (CcUaMousePage, cc_ua_mouse_page, ADW_TYPE_PREFERENCES_PAGE)
+G_DEFINE_TYPE (CcUaMousePage, cc_ua_mouse_page, ADW_TYPE_NAVIGATION_PAGE)
 
 static void
 cc_ua_mouse_page_dispose (GObject *object)
