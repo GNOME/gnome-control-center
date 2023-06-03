@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
-  <template class="CcUsagePanel" parent="CcPanel">
-    <child type="content">
+  <template class="CcUsagePage" parent="AdwNavigationPage">
+    <property name="title" translatable="yes">File History &amp; Trash</property>
+    <property name="tag">usage-page</property>
+    <property name="child">
+      <object class="AdwToolbarView">
+        <property name="top-bar-style">raised</property>
+        <child type="top">
+          <object class="AdwHeaderBar"/>
+        </child>
+        <property name="content">
       <object class="AdwPreferencesPage">
         <!-- File History -->
         <child>
@@ -27,7 +35,7 @@
                 <signal name="notify::selected-item" handler="retain_history_combo_changed_cb"/>
                 <property name="model">
                   <object class="AdwEnumListModel">
-                    <property name="enum-type">CcUsagePanelRetainHistory</property>
+                    <property name="enum-type">CcUsagePageRetainHistory</property>
                   </object>
                 </property>
                 <property name="expression">
@@ -93,7 +101,7 @@
                 <signal name="notify::selected-item" handler="purge_after_combo_changed_cb"/>
                 <property name="model">
                   <object class="AdwEnumListModel">
-                    <property name="enum-type">CcUsagePanelPurgeAfter</property>
+                    <property name="enum-type">CcUsagePagePurgeAfter</property>
                   </object>
                 </property>
                 <property name="expression">
@@ -136,6 +144,8 @@
           </object>
         </child>
       </object>
-    </child>
+        </property>
+      </object>
+    </property>
   </template>
 </interface>

@@ -18,17 +18,16 @@
  * Author: Matthias Clasen <mclasen@redhat.com>
  */
 
-#include "cc-usage-panel.h"
-#include "cc-usage-panel-enums.h"
-#include "cc-usage-resources.h"
+#include "cc-usage-page.h"
+#include "cc-usage-page-enums.h"
 #include "cc-util.h"
 
 #include <gio/gdesktopappinfo.h>
 #include <glib/gi18n.h>
 
-struct _CcUsagePanel
+struct _CcUsagePage
 {
-  CcPanel     parent_instance;
+  AdwNavigationPage parent_instance;
 
   GSettings  *privacy_settings;
 
@@ -42,7 +41,7 @@ struct _CcUsagePanel
   GtkButton   *purge_trash_button;
 };
 
-CC_PANEL_REGISTER (CcUsagePanel, cc_usage_panel)
+G_DEFINE_TYPE (CcUsagePage, cc_usage_page, ADW_TYPE_NAVIGATION_PAGE)
 
 static char *
 purge_after_name_cb (AdwEnumListItem *item,
@@ -50,34 +49,34 @@ purge_after_name_cb (AdwEnumListItem *item,
 {
   switch (adw_enum_list_item_get_value (item))
     {
-    case CC_USAGE_PANEL_PURGE_AFTER_1_HOUR:
+    case CC_USAGE_PAGE_PURGE_AFTER_1_HOUR:
       /* Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group */
       return g_strdup (C_("purge_files", "1 hour"));
-    case CC_USAGE_PANEL_PURGE_AFTER_1_DAY:
+    case CC_USAGE_PAGE_PURGE_AFTER_1_DAY:
       /* Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group */
       return g_strdup (C_("purge_files", "1 day"));
-    case CC_USAGE_PANEL_PURGE_AFTER_2_DAYS:
+    case CC_USAGE_PAGE_PURGE_AFTER_2_DAYS:
       /* Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group */
       return g_strdup (C_("purge_files", "2 days"));
-    case CC_USAGE_PANEL_PURGE_AFTER_3_DAYS:
+    case CC_USAGE_PAGE_PURGE_AFTER_3_DAYS:
       /* Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group */
       return g_strdup (C_("purge_files", "3 days"));
-    case CC_USAGE_PANEL_PURGE_AFTER_4_DAYS:
+    case CC_USAGE_PAGE_PURGE_AFTER_4_DAYS:
       /* Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group */
       return g_strdup (C_("purge_files", "4 days"));
-    case CC_USAGE_PANEL_PURGE_AFTER_5_DAYS:
+    case CC_USAGE_PAGE_PURGE_AFTER_5_DAYS:
       /* Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group */
       return g_strdup (C_("purge_files", "5 days"));
-    case CC_USAGE_PANEL_PURGE_AFTER_6_DAYS:
+    case CC_USAGE_PAGE_PURGE_AFTER_6_DAYS:
       /* Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group */
       return g_strdup (C_("purge_files", "6 days"));
-    case CC_USAGE_PANEL_PURGE_AFTER_7_DAYS:
+    case CC_USAGE_PAGE_PURGE_AFTER_7_DAYS:
       /* Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group */
       return g_strdup (C_("purge_files", "7 days"));
-    case CC_USAGE_PANEL_PURGE_AFTER_14_DAYS:
+    case CC_USAGE_PAGE_PURGE_AFTER_14_DAYS:
       /* Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group */
       return g_strdup (C_("purge_files", "14 days"));
-    case CC_USAGE_PANEL_PURGE_AFTER_30_DAYS:
+    case CC_USAGE_PAGE_PURGE_AFTER_30_DAYS:
       /* Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group */
       return g_strdup (C_("purge_files", "30 days"));
     default:
@@ -86,12 +85,12 @@ purge_after_name_cb (AdwEnumListItem *item,
 }
 
 static void
-purge_after_combo_changed_cb (AdwComboRow  *combo_row,
-                              GParamSpec   *pspec,
-                              CcUsagePanel *self)
+purge_after_combo_changed_cb (AdwComboRow *combo_row,
+                              GParamSpec  *pspec,
+                              CcUsagePage *self)
 {
   AdwEnumListItem *item;
-  CcUsagePanelPurgeAfter value;
+  CcUsagePagePurgeAfter value;
 
   item = ADW_ENUM_LIST_ITEM (adw_combo_row_get_selected_item (combo_row));
   value = adw_enum_list_item_get_value (item);
@@ -100,8 +99,8 @@ purge_after_combo_changed_cb (AdwComboRow  *combo_row,
 }
 
 static void
-set_purge_after_value_for_combo (AdwComboRow  *combo_row,
-                                 CcUsagePanel *self)
+set_purge_after_value_for_combo (AdwComboRow *combo_row,
+                                 CcUsagePage *self)
 {
   AdwEnumListModel *model;
   guint value;
@@ -114,18 +113,16 @@ set_purge_after_value_for_combo (AdwComboRow  *combo_row,
 }
 
 static GtkDialog *
-run_warning (CcUsagePanel *self,
-             const gchar  *prompt,
-             const gchar  *text,
-             const gchar  *button_title)
+run_warning (CcUsagePage *self,
+             const gchar *prompt,
+             const gchar *text,
+             const gchar *button_title)
 {
-  GtkWindow *parent;
+  GtkWindow *parent = NULL;
   GtkWidget *dialog;
   GtkWidget *button;
-  CcShell *shell;
 
-  shell = cc_panel_get_shell (CC_PANEL (self));
-  parent = GTK_WINDOW (cc_shell_get_toplevel (shell));
+  parent = GTK_WINDOW (gtk_widget_get_root (GTK_WIDGET (self)));
 
   dialog = gtk_message_dialog_new (parent,
                                    GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
@@ -150,9 +147,9 @@ run_warning (CcUsagePanel *self,
 }
 
 static void
-on_empty_trash_warning_response_cb (GtkDialog    *dialog,
-                                    gint          response,
-                                    CcUsagePanel *self)
+on_empty_trash_warning_response_cb (GtkDialog   *dialog,
+                                    gint         response,
+                                    CcUsagePage *self)
 {
   g_autoptr(GDBusConnection) bus = NULL;
 
@@ -172,7 +169,7 @@ out:
 }
 
 static void
-empty_trash (CcUsagePanel *self)
+empty_trash (CcUsagePage *self)
 {
   GtkDialog *dialog;
 
@@ -189,9 +186,9 @@ empty_trash (CcUsagePanel *self)
 }
 
 static void
-on_purge_temp_warning_response_cb (GtkDialog    *dialog,
-                                   gint          response,
-                                   CcUsagePanel *self)
+on_purge_temp_warning_response_cb (GtkDialog   *dialog,
+                                   gint         response,
+                                   CcUsagePage *self)
 {
   g_autoptr(GDBusConnection) bus = NULL;
 
@@ -210,7 +207,7 @@ out:
   gtk_window_destroy (GTK_WINDOW (dialog));
 }
 static void
-purge_temp (CcUsagePanel *self)
+purge_temp (CcUsagePage *self)
 {
   GtkDialog *dialog;
 
@@ -227,13 +224,13 @@ purge_temp (CcUsagePanel *self)
 }
 
 static void
-cc_usage_panel_finalize (GObject *object)
+cc_usage_page_finalize (GObject *object)
 {
-  CcUsagePanel *self = CC_USAGE_PANEL (object);
+  CcUsagePage *self = CC_USAGE_PAGE (object);
 
   g_clear_object (&self->privacy_settings);
 
-  G_OBJECT_CLASS (cc_usage_panel_parent_class)->finalize (object);
+  G_OBJECT_CLASS (cc_usage_page_parent_class)->finalize (object);
 }
 
 static char *
@@ -242,16 +239,16 @@ retain_history_name_cb (AdwEnumListItem *item,
 {
   switch (adw_enum_list_item_get_value (item))
     {
-    case CC_USAGE_PANEL_RETAIN_HISTORY_1_DAY:
+    case CC_USAGE_PAGE_RETAIN_HISTORY_1_DAY:
       /* Translators: Option for "File History Duration" in "File History" group */
       return g_strdup (C_("retain_history", "1 day"));
-    case CC_USAGE_PANEL_RETAIN_HISTORY_7_DAYS:
+    case CC_USAGE_PAGE_RETAIN_HISTORY_7_DAYS:
       /* Translators: Option for "File History Duration" in "File History" group */
       return g_strdup (C_("retain_history", "7 days"));
-    case CC_USAGE_PANEL_RETAIN_HISTORY_30_DAYS:
+    case CC_USAGE_PAGE_RETAIN_HISTORY_30_DAYS:
       /* Translators: Option for "File History Duration" in "File History" group */
       return g_strdup (C_("retain_history", "30 days"));
-    case CC_USAGE_PANEL_RETAIN_HISTORY_FOREVER:
+    case CC_USAGE_PAGE_RETAIN_HISTORY_FOREVER:
       /* Translators: Option for "File History Duration" in "File History" group */
       return g_strdup (C_("retain_history", "Forever"));
     default:
@@ -260,12 +257,12 @@ retain_history_name_cb (AdwEnumListItem *item,
 }
 
 static void
-retain_history_combo_changed_cb (AdwComboRow  *combo_row,
-                                 GParamSpec   *pspec,
-                                 CcUsagePanel *self)
+retain_history_combo_changed_cb (AdwComboRow *combo_row,
+                                 GParamSpec  *pspec,
+                                 CcUsagePage *self)
 {
   AdwEnumListItem *item;
-  CcUsagePanelRetainHistory value;
+  CcUsagePageRetainHistory value;
 
   item = ADW_ENUM_LIST_ITEM (adw_combo_row_get_selected_item (combo_row));
   value = adw_enum_list_item_get_value (item);
@@ -274,8 +271,8 @@ retain_history_combo_changed_cb (AdwComboRow  *combo_row,
 }
 
 static void
-set_retain_history_value_for_combo (AdwComboRow  *combo_row,
-                                    CcUsagePanel *self)
+set_retain_history_value_for_combo (AdwComboRow *combo_row,
+                                    CcUsagePage *self)
 {
   AdwEnumListModel *model;
   gint value;
@@ -288,12 +285,10 @@ set_retain_history_value_for_combo (AdwComboRow  *combo_row,
 }
 
 static void
-cc_usage_panel_init (CcUsagePanel *self)
+cc_usage_page_init (CcUsagePage *self)
 {
-  g_resources_register (cc_usage_get_resource ());
-
-  g_type_ensure (CC_TYPE_USAGE_PANEL_PURGE_AFTER);
-  g_type_ensure (CC_TYPE_USAGE_PANEL_RETAIN_HISTORY);
+  g_type_ensure (CC_TYPE_USAGE_PAGE_PURGE_AFTER);
+  g_type_ensure (CC_TYPE_USAGE_PAGE_RETAIN_HISTORY);
 
   gtk_widget_init_template (GTK_WIDGET (self));
 
@@ -328,9 +323,9 @@ cc_usage_panel_init (CcUsagePanel *self)
 }
 
 static void
-on_clear_recent_warning_response_cb (GtkDialog    *dialog,
-                                   gint          response,
-                                   CcUsagePanel *self)
+on_clear_recent_warning_response_cb (GtkDialog   *dialog,
+                                     gint         response,
+                                     CcUsagePage *self)
 {
   if (response == GTK_RESPONSE_OK)
     gtk_recent_manager_purge_items (gtk_recent_manager_get_default (), NULL);
@@ -339,7 +334,7 @@ on_clear_recent_warning_response_cb (GtkDialog    *dialog,
 }
 
 static void
-clear_recent (CcUsagePanel *self)
+clear_recent (CcUsagePage *self)
 {
   GtkDialog *dialog;
 
@@ -356,22 +351,22 @@ clear_recent (CcUsagePanel *self)
 }
 
 static void
-cc_usage_panel_class_init (CcUsagePanelClass *klass)
+cc_usage_page_class_init (CcUsagePageClass *klass)
 {
   GObjectClass *oclass = G_OBJECT_CLASS (klass);
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
-  oclass->finalize = cc_usage_panel_finalize;
+  oclass->finalize = cc_usage_page_finalize;
 
-  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/usage/cc-usage-panel.ui");
+  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/privacy/cc-usage-page.ui");
 
-  gtk_widget_class_bind_template_child (widget_class, CcUsagePanel, purge_after_combo);
-  gtk_widget_class_bind_template_child (widget_class, CcUsagePanel, purge_temp_switch);
-  gtk_widget_class_bind_template_child (widget_class, CcUsagePanel, purge_trash_button);
-  gtk_widget_class_bind_template_child (widget_class, CcUsagePanel, purge_trash_switch);
-  gtk_widget_class_bind_template_child (widget_class, CcUsagePanel, purge_temp_button);
-  gtk_widget_class_bind_template_child (widget_class, CcUsagePanel, recently_used_switch);
-  gtk_widget_class_bind_template_child (widget_class, CcUsagePanel, retain_history_combo);
+  gtk_widget_class_bind_template_child (widget_class, CcUsagePage, purge_after_combo);
+  gtk_widget_class_bind_template_child (widget_class, CcUsagePage, purge_temp_switch);
+  gtk_widget_class_bind_template_child (widget_class, CcUsagePage, purge_trash_button);
+  gtk_widget_class_bind_template_child (widget_class, CcUsagePage, purge_trash_switch);
+  gtk_widget_class_bind_template_child (widget_class, CcUsagePage, purge_temp_button);
+  gtk_widget_class_bind_template_child (widget_class, CcUsagePage, recently_used_switch);
+  gtk_widget_class_bind_template_child (widget_class, CcUsagePage, retain_history_combo);
 
   gtk_widget_class_bind_template_callback (widget_class, clear_recent);
   gtk_widget_class_bind_template_callback (widget_class, retain_history_name_cb);
