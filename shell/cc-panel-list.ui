@@ -21,51 +21,6 @@
                 <style>
                   <class name="navigation-sidebar" />
                 </style>
-                <child>
-                  <object class="GtkListBoxRow" id="privacy_row">
-                    <property name="visible">False</property>
-                    <child>
-                      <object class="GtkBox">
-                        <property name="margin-start">6</property>
-                        <property name="margin-end">6</property>
-                        <property name="margin-top">12</property>
-                        <property name="margin-bottom">12</property>
-                        <property name="spacing">12</property>
-                        <child>
-                          <object class="GtkImage">
-                            <property name="icon_name">preferences-system-privacy-symbolic</property>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="GtkLabel">
-                            <property name="hexpand">True</property>
-                            <property name="label" translatable="yes">Privacy</property>
-                            <property name="xalign">0</property>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="GtkImage">
-                            <property name="icon_name">go-next-symbolic</property>
-                          </object>
-                        </child>
-                      </object>
-                    </child>
-                  </object>
-                </child>
-              </object>
-            </property>
-          </object>
-        </child>
-
-        <child>
-          <object class="GtkStackPage">
-            <property name="name">privacy</property>
-            <property name="child">
-              <object class="GtkListBox" id="privacy_listbox">
-                <signal name="row-activated" handler="row_activated_cb" object="CcPanelList" swapped="no" />
-                <style>
-                  <class name="navigation-sidebar" />
-                </style>
               </object>
             </property>
           </object>

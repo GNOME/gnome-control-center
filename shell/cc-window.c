@@ -238,10 +238,6 @@ update_list_title (CcWindow *self)
 
   switch (view)
     {
-    case CC_PANEL_LIST_PRIVACY:
-      title = g_strdup (_("Privacy"));
-      break;
-
     case CC_PANEL_LIST_MAIN:
       title = g_strdup (_("Settings"));
       break;
