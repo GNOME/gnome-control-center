@@ -10,159 +10,138 @@
     <signal name="map" handler="gtk_widget_grab_focus" object="search_entry" swapped="yes"/>
 
     <child>
-      <object class="AdwLeaflet" id="leaflet">
-        <property name="can-unfold">False</property>
-        <property name="can-navigate-forward">False</property>
-        <property name="can-navigate-back">True</property>
-        <signal name="notify::visible-child" handler="shortcut_dialog_visible_child_changed_cb" swapped="yes"/>
+      <object class="AdwNavigationView" id="navigation_view">
+        <signal name="notify::visible-page" handler="shortcut_dialog_visible_page_changed_cb" swapped="yes"/>
 
         <child>
-          <object class="GtkBox" id="main_box">
-            <property name="orientation">vertical</property>
+          <object class="AdwNavigationPage" id="main_page">
+            <property name="title" bind-source="CcKeyboardShortcutDialog" bind-flags="sync-create" bind-property="title"/>
+            <property name="child">
+              <object class="AdwToolbarView">
+                <child type="top">
+                  <object class="AdwHeaderBar">
 
-            <child>
-              <object class="AdwHeaderBar">
-
-                <!-- Reset All… button -->
-                <child>
-                  <object class="GtkButton" id="reset_all_button">
-                    <property name="label" translatable="yes">Reset All…</property>
-                    <property name="tooltip-text" translatable="yes">Reset all shortcuts to their default keybindings</property>
-                    <signal name="clicked" handler="reset_all_clicked_cb" swapped="yes" />
-                  </object>
-                </child>
-
-              </object> <!-- ./AdwHeaderBar main_header_bar -->
-            </child>
-
-            <!-- Search Entry -->
-            <child>
-              <object class="GtkSearchBar">
-                <property name="search-mode-enabled">True</property>
-                <property name="child">
-                  <!-- xxx: Pack the search entry inside a box so that Escape key won't hide the bar -->
-                  <object class="GtkBox">
+                    <!-- Reset All… button -->
                     <child>
-                      <object class="GtkSearchEntry" id="search_entry">
-                        <property name="placeholder_text" translatable="yes">Search shortcuts</property>
-                        <property name="halign">center</property>
-                        <property name="width-chars">28</property>
-                        <signal name="search-changed" handler="shortcut_search_entry_changed_cb" swapped="yes" />
-                        <accessibility>
-                          <property name="label" translatable="yes">Search Shortcuts</property>
-                        </accessibility>
+                      <object class="GtkButton" id="reset_all_button">
+                        <property name="label" translatable="yes">Reset All…</property>
+                        <property name="tooltip-text" translatable="yes">Reset all shortcuts to their default keybindings</property>
+                        <signal name="clicked" handler="reset_all_clicked_cb" swapped="yes" />
                       </object>
                     </child>
+
+                  </object> <!-- ./AdwHeaderBar main_header_bar -->
+                </child>
+
+                <!-- Search Entry -->
+                <child type="top">
+                  <object class="GtkSearchBar">
+                    <property name="search-mode-enabled">True</property>
+                    <property name="child">
+                      <!-- xxx: Pack the search entry inside a box so that Escape key won't hide the bar -->
+                      <object class="AdwClamp">
+                        <child>
+                          <object class="GtkSearchEntry" id="search_entry">
+                            <property name="placeholder_text" translatable="yes">Search shortcuts</property>
+                            <property name="hexpand">True</property>
+                            <signal name="search-changed" handler="shortcut_search_entry_changed_cb" swapped="yes" />
+                            <accessibility>
+                              <property name="label" translatable="yes">Search Shortcuts</property>
+                            </accessibility>
+                          </object>
+                        </child>
+                      </object>
+                    </property>
                   </object>
+                </child>
+                <property name="content">
+                  <object class="GtkStack" id="section_stack">
+                    <property name="vhomogeneous">False</property>
+                    <property name="css-classes">shortcut-list</property>
+
+                    <!-- Shortcut section title rows -->
+                    <child>
+                      <object class="AdwPreferencesPage" id="section_list_page">
+                        <child>
+                          <object class="AdwPreferencesGroup">
+                            <child>
+                              <object class="GtkListBox" id="section_list_box">
+                                <property name="selection-mode">none</property>
+                                <signal name="row-activated" handler="shortcut_section_row_activated_cb" swapped="yes"/>
+                                <style>
+                                  <class name="boxed-list"/>
+                                </style>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+
+                    <child>
+                      <object class="AdwPreferencesPage" id="search_result_page"/>
+                    </child>
+                    <child>
+                      <object class="AdwStatusPage" id="empty_results_page">
+                        <property name="vexpand">True</property>
+                        <property name="icon_name">edit-find-symbolic</property>
+                        <property name="title" translatable="yes">No keyboard shortcut found</property>
+                        <property name="description" translatable="yes">Try a different search.</property>
+                      </object>
+                    </child>
+
+                  </object> <!-- ./GtkStack section_stack -->
                 </property>
               </object>
-            </child>
-            <child>
-              <object class="GtkStack" id="section_stack">
-                <property name="vhomogeneous">False</property>
-                <property name="css-classes">shortcut-list</property>
+            </property>
+          </object>
+        </child>
 
-                <!-- Shortcut section title rows -->
-                <child>
-                  <object class="AdwPreferencesPage" id="section_list_page">
+        <child>
+          <object class="AdwNavigationPage" id="subview_page">
+            <property name="child">
+              <object class="AdwToolbarView">
+                <child type="top">
+                  <object class="AdwHeaderBar"/>
+                </child>
+                <property name="content">
+                  <object class="GtkStack" id="subview_stack">
+
                     <child>
-                      <object class="AdwPreferencesGroup">
+                      <object class="GtkStack" id="shortcut_list_stack">
+                        <property name="vhomogeneous">False</property>
+                      </object>
+                    </child>
+
+                    <child>
+                      <object class="AdwStatusPage" id="empty_custom_shortcut_page">
+                        <property name="vexpand">True</property>
+                        <property name="icon-name">input-keyboard-symbolic</property>
+                        <property name="title" translatable="yes">Add Custom Shortcuts</property>
+                        <property name="description" translatable="yes">Set up custom shortcuts for launching apps, running scripts, and more.</property>
                         <child>
-                          <object class="GtkListBox" id="section_list_box">
-                            <property name="selection-mode">none</property>
-                            <signal name="row-activated" handler="shortcut_section_row_activated_cb" swapped="yes"/>
+                          <object class="GtkButton">
+                            <property name="halign">center</property>
+                            <property name="use-underline">True</property>
+                            <property name="label" translatable="yes">_Add Shortcut…</property>
+                            <signal name="clicked" handler="add_custom_shortcut_clicked_cb" swapped="yes"/>
                             <style>
-                              <class name="boxed-list"/>
+                              <class name="suggested-action"/>
+                              <class name="pill"/>
                             </style>
                           </object>
                         </child>
                       </object>
                     </child>
-                  </object>
-                </child>
 
-                <child>
-                  <object class="AdwPreferencesPage" id="search_result_page"/>
-                </child>
-                <child>
-                  <object class="AdwStatusPage" id="empty_results_page">
-                    <property name="vexpand">True</property>
-                    <property name="icon_name">edit-find-symbolic</property>
-                    <property name="title" translatable="yes">No keyboard shortcut found</property>
-                    <property name="description" translatable="yes">Try a different search.</property>
-                  </object>
-                </child>
-
-              </object> <!-- ./GtkStack section_stack -->
-            </child>
-
-          </object>  <!-- ./GtkBox main_box -->
-        </child>
-
-        <child>
-          <object class="GtkBox" id="subview_box">
-            <property name="orientation">vertical</property>
-
-            <child>
-              <object class="AdwHeaderBar">
-                <property name="title-widget">
-                  <object class="AdwWindowTitle" id="subview_title" />
+                  </object>  <!-- ./GtkStack subview_stack -->
                 </property>
-
-                <!-- Back button -->
-                <child>
-                  <object class="GtkButton" id="back_button">
-                    <property name="tooltip-text" translatable="yes">Back</property>
-                    <property name="icon-name">go-previous-symbolic</property>
-                    <accessibility>
-                      <property name="label" translatable="yes">Back</property>
-                    </accessibility>
-                    <signal name="clicked" handler="back_button_clicked_cb" swapped="yes" />
-                    <style>
-                      <class name="image-button"/>
-                    </style>
-                  </object>
-                </child>
-              </object> <!-- ./AdwHeaderBar subview_header_bar -->
-            </child>
-
-            <child>
-              <object class="GtkStack" id="subview_stack">
-
-                <child>
-                  <object class="GtkStack" id="shortcut_list_stack">
-                    <property name="vhomogeneous">False</property>
-                  </object>
-                </child>
-
-                <child>
-                  <object class="AdwStatusPage" id="empty_custom_shortcut_page">
-                    <property name="vexpand">True</property>
-                    <property name="icon-name">input-keyboard-symbolic</property>
-                    <property name="title" translatable="yes">Add Custom Shortcuts</property>
-                    <property name="description" translatable="yes">Set up custom shortcuts for launching apps, running scripts, and more.</property>
-                    <child>
-                      <object class="GtkButton">
-                        <property name="halign">center</property>
-                        <property name="use-underline">True</property>
-                        <property name="label" translatable="yes">_Add Shortcut…</property>
-                        <signal name="clicked" handler="add_custom_shortcut_clicked_cb" swapped="yes"/>
-                        <style>
-                          <class name="suggested-action"/>
-                          <class name="pill"/>
-                        </style>
-                      </object>
-                    </child>
-                  </object>
-                </child>
-
-              </object>  <!-- ./GtkStack subview_stack -->
-            </child>
-
-          </object>  <!-- ./GtkBox subview_box -->
+              </object>
+            </property>
+          </object>
         </child>
 
-      </object>  <!-- ./AdwLeaflet leaflet -->
+      </object>  <!-- ./AdwNavigationView navigation_view-->
     </child>
 
   </template>
