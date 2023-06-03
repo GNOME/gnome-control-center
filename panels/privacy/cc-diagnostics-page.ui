@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
-  <template class="CcDiagnosticsPanel" parent="CcPanel">
-    <child type="content">
+  <template class="CcDiagnosticsPage" parent="AdwNavigationPage">
+    <property name="title" translatable="yes">Diagnostics</property>
+    <property name="tag">diagnostics-page</property>
+    <property name="child">
+      <object class="AdwToolbarView">
+        <property name="top-bar-style">raised</property>
+        <child type="top">
+          <object class="AdwHeaderBar"/>
+        </child>
+        <property name="content">
       <object class="AdwPreferencesPage">
         <child>
           <object class="AdwPreferencesGroup" id="diagnostics_group">
@@ -21,6 +29,8 @@
           </object>
         </child>
       </object>
-    </child>
+        </property>
+      </object>
+    </property>
   </template>
 </interface>

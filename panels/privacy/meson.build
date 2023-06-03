@@ -11,6 +11,7 @@ i18n.merge_file(
 )
 
 sources = files(
+  'cc-diagnostics-page.c',
   'cc-privacy-panel.c',
   'cc-screen-page.c',
   'cc-usage-page.c',

@@ -61,6 +61,21 @@
                           </object>
                         </child>
 
+                        <child>
+                          <object class="CcListRow">
+                            <property name="title" translatable="yes">_Diagnostics</property>
+                            <property name="subtitle" translatable="yes">Settings for automatic problem reporting</property>
+                            <property name="icon-name">diagnostics-symbolic</property>
+                            <property name="use-underline">True</property>
+                            <property name="show-arrow">True</property>
+                            <property name="action-name">navigation.push</property>
+                            <property name="action-target">'diagnostics-page'</property>
+                            <binding name="visible">
+                              <lookup name="visible">diagnostics_page</lookup>
+                            </binding>
+                          </object>
+                        </child>
+
                       </object>
                     </child>
                   </object>
@@ -77,6 +92,10 @@
 
         <child>
           <object class="CcUsagePage"/>
+        </child>
+
+        <child>
+          <object class="CcDiagnosticsPage" id="diagnostics_page"/>
         </child>
 
       </object>

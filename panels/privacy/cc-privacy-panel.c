@@ -20,6 +20,7 @@
 
 #include "cc-privacy-panel.h"
 
+#include "cc-diagnostics-page.h"
 #include "cc-privacy-resources.h"
 #include "cc-screen-page.h"
 #include "cc-usage-page.h"
@@ -38,6 +39,7 @@ cc_privacy_panel_class_init (CcPrivacyPanelClass *klass)
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/privacy/cc-privacy-panel.ui");
 
+  g_type_ensure (CC_TYPE_DIAGNOSTICS_PAGE);
   g_type_ensure (CC_TYPE_SCREEN_PAGE);
   g_type_ensure (CC_TYPE_USAGE_PAGE);
 }

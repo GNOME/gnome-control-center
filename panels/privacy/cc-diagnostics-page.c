@@ -18,17 +18,16 @@
  * Author: Matthias Clasen <mclasen@redhat.com>
  */
 
-#include "cc-diagnostics-panel.h"
-#include "cc-diagnostics-resources.h"
+#include "cc-diagnostics-page.h"
 #include "cc-util.h"
 #include "shell/cc-application.h"
 
 #include <gio/gdesktopappinfo.h>
 #include <glib/gi18n.h>
 
-struct _CcDiagnosticsPanel
+struct _CcDiagnosticsPage
 {
-  CcPanel              parent_instance;
+  AdwNavigationPage    parent_instance;
 
   AdwPreferencesGroup *diagnostics_group;
   GtkSwitch           *abrt_switch;
@@ -36,21 +35,9 @@ struct _CcDiagnosticsPanel
   GSettings           *privacy_settings;
 };
 
-CC_PANEL_REGISTER (CcDiagnosticsPanel, cc_diagnostics_panel)
+G_DEFINE_TYPE (CcDiagnosticsPage, cc_diagnostics_page, ADW_TYPE_NAVIGATION_PAGE)
 
 /* Static init function */
-
-static void
-set_panel_visibility (CcPanelVisibility visibility)
-{
-  CcApplication *application;
-
-  application = CC_APPLICATION (g_application_get_default ());
-  cc_shell_model_set_panel_visibility (cc_application_get_model (application),
-                                       "diagnostics",
-                                       visibility);
-
-}
 
 static void
 abrt_appeared_cb (GDBusConnection *connection,
@@ -58,8 +45,10 @@ abrt_appeared_cb (GDBusConnection *connection,
                   const gchar     *name_owner,
                   gpointer         user_data)
 {
+  CcDiagnosticsPage *self = CC_DIAGNOSTICS_PAGE (user_data);
+
   g_debug ("ABRT appeared");
-  set_panel_visibility (CC_PANEL_VISIBLE);
+  gtk_widget_set_visible (GTK_WIDGET (self), TRUE);
 }
 
 static void
@@ -67,59 +56,55 @@ abrt_vanished_cb (GDBusConnection *connection,
                   const gchar     *name,
                   gpointer         user_data)
 {
+  CcDiagnosticsPage *self = CC_DIAGNOSTICS_PAGE (user_data);
+
   g_debug ("ABRT vanished");
-  set_panel_visibility (CC_PANEL_VISIBLE_IN_SEARCH);
-}
-
-void
-cc_diagnostics_panel_static_init_func (void)
-{
-  g_bus_watch_name (G_BUS_TYPE_SYSTEM,
-                    "org.freedesktop.problems.daemon",
-                    G_BUS_NAME_WATCHER_FLAGS_NONE,
-                    abrt_appeared_cb,
-                    abrt_vanished_cb,
-                    NULL,
-                    NULL);
-
-  set_panel_visibility (CC_PANEL_VISIBLE_IN_SEARCH);
+  gtk_widget_set_visible (GTK_WIDGET (self), FALSE);
 }
 
 static void
-cc_diagnostics_panel_finalize (GObject *object)
+cc_diagnostics_page_finalize (GObject *object)
 {
-  CcDiagnosticsPanel *self = CC_DIAGNOSTICS_PANEL (object);
+  CcDiagnosticsPage *self = CC_DIAGNOSTICS_PAGE (object);
 
   g_clear_object (&self->privacy_settings);
 
-  G_OBJECT_CLASS (cc_diagnostics_panel_parent_class)->finalize (object);
+  G_OBJECT_CLASS (cc_diagnostics_page_parent_class)->finalize (object);
 }
 
 static void
-cc_diagnostics_panel_class_init (CcDiagnosticsPanelClass *klass)
+cc_diagnostics_page_class_init (CcDiagnosticsPageClass *klass)
 {
   GObjectClass *oclass = G_OBJECT_CLASS (klass);
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
-  oclass->finalize = cc_diagnostics_panel_finalize;
+  oclass->finalize = cc_diagnostics_page_finalize;
 
-  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/diagnostics/cc-diagnostics-panel.ui");
+  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/privacy/cc-diagnostics-page.ui");
 
-  gtk_widget_class_bind_template_child (widget_class, CcDiagnosticsPanel, diagnostics_group);
-  gtk_widget_class_bind_template_child (widget_class, CcDiagnosticsPanel, abrt_switch);
+  gtk_widget_class_bind_template_child (widget_class, CcDiagnosticsPage, diagnostics_group);
+  gtk_widget_class_bind_template_child (widget_class, CcDiagnosticsPage, abrt_switch);
 }
 
 static void
-cc_diagnostics_panel_init (CcDiagnosticsPanel *self)
+cc_diagnostics_page_init (CcDiagnosticsPage *self)
 {
   g_autofree gchar *os_name = NULL;
   g_autofree gchar *url = NULL;
   g_autofree gchar *msg = NULL;
   g_autofree gchar *link = NULL;
 
-  g_resources_register (cc_diagnostics_get_resource ());
-
   gtk_widget_init_template (GTK_WIDGET (self));
+
+  g_bus_watch_name (G_BUS_TYPE_SYSTEM,
+                    "org.freedesktop.problems.daemon",
+                    G_BUS_NAME_WATCHER_FLAGS_NONE,
+                    abrt_appeared_cb,
+                    abrt_vanished_cb,
+                    self,
+                    NULL);
+
+  gtk_widget_set_visible (GTK_WIDGET (self), FALSE);
 
   self->privacy_settings = g_settings_new ("org.gnome.desktop.privacy");
 
