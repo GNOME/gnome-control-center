@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <template class="CcPrivacyPanel" parent="CcPanel">
+    <!-- TODO: Remove this property from CcPanel -->
+    <child type="titlebar">
+      <object class="AdwBin"/>
+    </child>
+
+    <child type="content">
+      <object class="AdwNavigationView">
+
+        <child>
+          <object class="AdwNavigationPage">
+            <property name="title" translatable="yes">Privacy</property>
+            <property name="child">
+              <object class="AdwToolbarView">
+                <property name="top-bar-style">raised</property>
+
+                <child type="top">
+                  <object class="AdwHeaderBar">
+                    <child type="start">
+                      <object class="GtkButton">
+                        <property name="visible" bind-source="CcPrivacyPanel" bind-property="folded" bind-flags="default|sync-create" />
+                        <property name="icon-name">go-previous-symbolic</property>
+                        <property name="action-name">window.navigate</property>
+                        <property name="action-target">0</property> <!-- 0: ADW_NAVIGATION_DIRECTION_BACK -->
+                        <accessibility>
+                          <property name="label" translatable="yes">Back</property>
+                        </accessibility>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+
+                <property name="content">
+                  <object class="AdwPreferencesPage">
+                    <child>
+                      <object class="AdwPreferencesGroup">
+
+                      </object>
+                    </child>
+                  </object>
+                </property>
+
+              </object>
+            </property>
+          </object>
+        </child>
+
+      </object>
+    </child>
+  </template>
+</interface>
