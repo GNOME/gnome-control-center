@@ -21,6 +21,7 @@
 #include "cc-privacy-panel.h"
 
 #include "cc-privacy-resources.h"
+#include "cc-screen-page.h"
 
 struct _CcPrivacyPanel
 {
@@ -35,6 +36,8 @@ cc_privacy_panel_class_init (CcPrivacyPanelClass *klass)
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/privacy/cc-privacy-panel.ui");
+
+  g_type_ensure (CC_TYPE_SCREEN_PAGE);
 }
 
 static void

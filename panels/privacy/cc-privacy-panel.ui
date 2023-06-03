@@ -37,6 +37,18 @@
                     <child>
                       <object class="AdwPreferencesGroup">
 
+                        <child>
+                          <object class="CcListRow">
+                            <property name="title" translatable="yes">_Screen Lock</property>
+                            <property name="subtitle" translatable="yes">Automatically lock the screen</property>
+                            <property name="icon-name">lock-symbolic</property>
+                            <property name="use-underline">True</property>
+                            <property name="show-arrow">True</property>
+                            <property name="action-name">navigation.push</property>
+                            <property name="action-target">'screen-page'</property>
+                          </object>
+                        </child>
+
                       </object>
                     </child>
                   </object>
@@ -45,6 +57,10 @@
               </object>
             </property>
           </object>
+        </child>
+
+        <child>
+          <object class="CcScreenPage"/>
         </child>
 
       </object>

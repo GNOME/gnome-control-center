@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
-  <template class="CcScreenPanel" parent="CcPanel">
-    <child type="content">
+  <template class="CcScreenPage" parent="AdwNavigationPage">
+    <property name="title" translatable="yes">Screen Lock</property>
+    <property name="tag">screen-page</property>
+    <property name="child">
+      <object class="AdwToolbarView">
+        <property name="top-bar-style">raised</property>
+        <child type="top">
+          <object class="AdwHeaderBar"/>
+        </child>
+        <property name="content">
       <object class="AdwPreferencesPage">
         <property name="description" translatable="yes">Automatically locking the screen prevents others from accessing the computer while you're away.</property>
 
@@ -17,7 +25,7 @@
                 <signal name="notify::selected-item" handler="on_blank_screen_delay_changed_cb"/>
                 <property name="model">
                   <object class="AdwEnumListModel">
-                    <property name="enum-type">CcScreenPanelBlankScreenDelay</property>
+                    <property name="enum-type">CcScreenPageBlankScreenDelay</property>
                   </object>
                 </property>
                 <property name="expression">
@@ -51,7 +59,7 @@
                 <signal name="notify::selected-item" handler="on_lock_combo_changed_cb"/>
                 <property name="model">
                   <object class="AdwEnumListModel">
-                    <property name="enum-type">CcScreenPanelLockAfter</property>
+                    <property name="enum-type">CcScreenPageLockAfter</property>
                   </object>
                 </property>
                 <property name="expression">
@@ -115,6 +123,8 @@
         </child>
 
       </object>
-    </child>
+        </property>
+      </object>
+    </property>
   </template>
 </interface>

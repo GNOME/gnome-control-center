@@ -20,21 +20,18 @@
  * Author: Matthias Clasen <mclasen@redhat.com>
  */
 
-#include "cc-screen-panel.h"
-#include "cc-screen-panel-enums.h"
-#include "cc-screen-resources.h"
+#include "cc-screen-page.h"
+#include "cc-screen-page-enums.h"
 #include "cc-util.h"
 
 #include "panels/display/cc-display-config-manager-dbus.h"
 
-#include <adwaita.h>
-
 #include <gio/gdesktopappinfo.h>
 #include <glib/gi18n.h>
 
-struct _CcScreenPanel
+struct _CcScreenPage
 {
-  CcPanel        parent_instance;
+  AdwNavigationPage       parent_instance;
 
   CcDisplayConfigManager *display_config_manager;
 
@@ -56,7 +53,7 @@ struct _CcScreenPanel
   GtkSwitch           *usb_protection_switch;
 };
 
-CC_PANEL_REGISTER (CcScreenPanel, cc_screen_panel)
+G_DEFINE_TYPE (CcScreenPage, cc_screen_page, ADW_TYPE_NAVIGATION_PAGE)
 
 static char *
 lock_after_name_cb (AdwEnumListItem *item,
@@ -65,29 +62,29 @@ lock_after_name_cb (AdwEnumListItem *item,
 
   switch (adw_enum_list_item_get_value (item))
     {
-    case CC_SCREEN_PANEL_LOCK_AFTER_SCREEN_OFF:
-      /* Translators: Option for "Lock screen after blank" in "Screen Lock" panel */
+    case CC_SCREEN_PAGE_LOCK_AFTER_SCREEN_OFF:
+      /* Translators: Option for "Lock screen after blank" in "Screen Lock" page */
       return g_strdup(C_("lock_screen", "Screen Turns Off"));
-    case CC_SCREEN_PANEL_LOCK_AFTER_30_SEC:
-      /* Translators: Option for "Lock screen after blank" in "Screen Lock" panel */
+    case CC_SCREEN_PAGE_LOCK_AFTER_30_SEC:
+      /* Translators: Option for "Lock screen after blank" in "Screen Lock" page */
       return g_strdup (C_("lock_screen", "30 seconds"));
-    case CC_SCREEN_PANEL_LOCK_AFTER_1_MIN:
-      /* Translators: Option for "Lock screen after blank" in "Screen Lock" panel */
+    case CC_SCREEN_PAGE_LOCK_AFTER_1_MIN:
+      /* Translators: Option for "Lock screen after blank" in "Screen Lock" page */
       return g_strdup (C_("lock_screen", "1 minute"));
-    case CC_SCREEN_PANEL_LOCK_AFTER_2_MIN:
-      /* Translators: Option for "Lock screen after blank" in "Screen Lock" panel */
+    case CC_SCREEN_PAGE_LOCK_AFTER_2_MIN:
+      /* Translators: Option for "Lock screen after blank" in "Screen Lock" page */
       return g_strdup (C_("lock_screen", "2 minutes"));
-    case CC_SCREEN_PANEL_LOCK_AFTER_3_MIN:
-      /* Translators: Option for "Lock screen after blank" in "Screen Lock" panel */
+    case CC_SCREEN_PAGE_LOCK_AFTER_3_MIN:
+      /* Translators: Option for "Lock screen after blank" in "Screen Lock" page */
       return g_strdup (C_("lock_screen", "3 minutes"));
-    case CC_SCREEN_PANEL_LOCK_AFTER_5_MIN:
-      /* Translators: Option for "Lock screen after blank" in "Screen Lock" panel */
+    case CC_SCREEN_PAGE_LOCK_AFTER_5_MIN:
+      /* Translators: Option for "Lock screen after blank" in "Screen Lock" page */
       return g_strdup (C_("lock_screen", "5 minutes"));
-    case CC_SCREEN_PANEL_LOCK_AFTER_30_MIN:
-      /* Translators: Option for "Lock screen after blank" in "Screen Lock" panel */
+    case CC_SCREEN_PAGE_LOCK_AFTER_30_MIN:
+      /* Translators: Option for "Lock screen after blank" in "Screen Lock" page */
       return g_strdup (C_("lock_screen", "30 minutes"));
-    case CC_SCREEN_PANEL_LOCK_AFTER_1_HR:
-      /* Translators: Option for "Lock screen after blank" in "Screen Lock" panel */
+    case CC_SCREEN_PAGE_LOCK_AFTER_1_HR:
+      /* Translators: Option for "Lock screen after blank" in "Screen Lock" page */
       return g_strdup (C_("lock_screen", "1 hour"));
     default:
       return NULL;
@@ -97,10 +94,10 @@ lock_after_name_cb (AdwEnumListItem *item,
 static void
 on_lock_combo_changed_cb (AdwComboRow   *combo_row,
                           GParamSpec    *pspec,
-                          CcScreenPanel *self)
+                          CcScreenPage  *self)
 {
   AdwEnumListItem *item;
-  CcScreenPanelLockAfter delay;
+  CcScreenPageLockAfter delay;
 
   item = ADW_ENUM_LIST_ITEM (adw_combo_row_get_selected_item (combo_row));
   delay = adw_enum_list_item_get_value (item);
@@ -110,7 +107,7 @@ on_lock_combo_changed_cb (AdwComboRow   *combo_row,
 
 static void
 set_lock_value_for_combo (AdwComboRow   *combo_row,
-                          CcScreenPanel *self)
+                          CcScreenPage *self)
 {
   AdwEnumListModel *model;
   guint value;
@@ -129,35 +126,35 @@ screen_delay_name_cb (AdwEnumListItem *item,
 
   switch (adw_enum_list_item_get_value (item))
     {
-    case CC_SCREEN_PANEL_BLANK_SCREEN_DELAY_1_MIN:
-      /* Translators: Option for "Blank screen" in "Screen Lock" panel */
+    case CC_SCREEN_PAGE_BLANK_SCREEN_DELAY_1_MIN:
+      /* Translators: Option for "Blank screen" in "Screen Lock" page */
       return g_strdup (C_("blank_screen", "1 minute"));
-    case CC_SCREEN_PANEL_BLANK_SCREEN_DELAY_2_MIN:
-      /* Translators: Option for "Blank screen" in "Screen Lock" panel */
+    case CC_SCREEN_PAGE_BLANK_SCREEN_DELAY_2_MIN:
+      /* Translators: Option for "Blank screen" in "Screen Lock" page */
       return g_strdup (C_("blank_screen", "2 minutes"));
-    case CC_SCREEN_PANEL_BLANK_SCREEN_DELAY_3_MIN:
-      /* Translators: Option for "Blank screen" in "Screen Lock" panel */
+    case CC_SCREEN_PAGE_BLANK_SCREEN_DELAY_3_MIN:
+      /* Translators: Option for "Blank screen" in "Screen Lock" page */
       return g_strdup (C_("blank_screen", "3 minutes"));
-    case CC_SCREEN_PANEL_BLANK_SCREEN_DELAY_4_MIN:
-      /* Translators: Option for "Blank screen" in "Screen Lock" panel */
+    case CC_SCREEN_PAGE_BLANK_SCREEN_DELAY_4_MIN:
+      /* Translators: Option for "Blank screen" in "Screen Lock" page */
       return g_strdup (C_("blank_screen", "4 minutes"));
-    case CC_SCREEN_PANEL_BLANK_SCREEN_DELAY_5_MIN:
-      /* Translators: Option for "Blank screen" in "Screen Lock" panel */
+    case CC_SCREEN_PAGE_BLANK_SCREEN_DELAY_5_MIN:
+      /* Translators: Option for "Blank screen" in "Screen Lock" page */
       return g_strdup (C_("blank_screen", "5 minutes"));
-    case CC_SCREEN_PANEL_BLANK_SCREEN_DELAY_8_MIN:
-      /* Translators: Option for "Blank screen" in "Screen Lock" panel */
+    case CC_SCREEN_PAGE_BLANK_SCREEN_DELAY_8_MIN:
+      /* Translators: Option for "Blank screen" in "Screen Lock" page */
       return g_strdup (C_("blank_screen", "8 minutes"));
-    case CC_SCREEN_PANEL_BLANK_SCREEN_DELAY_10_MIN:
-      /* Translators: Option for "Blank screen" in "Screen Lock" panel */
+    case CC_SCREEN_PAGE_BLANK_SCREEN_DELAY_10_MIN:
+      /* Translators: Option for "Blank screen" in "Screen Lock" page */
       return g_strdup (C_("blank_screen", "10 minutes"));
-    case CC_SCREEN_PANEL_BLANK_SCREEN_DELAY_12_MIN:
-      /* Translators: Option for "Blank screen" in "Screen Lock" panel */
+    case CC_SCREEN_PAGE_BLANK_SCREEN_DELAY_12_MIN:
+      /* Translators: Option for "Blank screen" in "Screen Lock" page */
       return g_strdup (C_("blank_screen", "12 minutes"));
-    case CC_SCREEN_PANEL_BLANK_SCREEN_DELAY_15_MIN:
-      /* Translators: Option for "Blank screen" in "Screen Lock" panel */
+    case CC_SCREEN_PAGE_BLANK_SCREEN_DELAY_15_MIN:
+      /* Translators: Option for "Blank screen" in "Screen Lock" page */
       return g_strdup (C_("blank_screen", "15 minutes"));
-    case CC_SCREEN_PANEL_BLANK_SCREEN_DELAY_NEVER:
-      /* Translators: Option for "Blank screen" in "Screen Lock" panel */
+    case CC_SCREEN_PAGE_BLANK_SCREEN_DELAY_NEVER:
+      /* Translators: Option for "Blank screen" in "Screen Lock" page */
       return g_strdup (C_("blank_screen", "Never"));
     default:
       return NULL;
@@ -165,8 +162,8 @@ screen_delay_name_cb (AdwEnumListItem *item,
 }
 
 static void
-set_blank_screen_delay_value (CcScreenPanel *self,
-                              gint           value)
+set_blank_screen_delay_value (CcScreenPage *self,
+                              gint          value)
 {
   AdwEnumListModel *model;
 
@@ -179,10 +176,10 @@ set_blank_screen_delay_value (CcScreenPanel *self,
 static void
 on_blank_screen_delay_changed_cb (AdwComboRow   *combo_row,
                                   GParamSpec    *pspec,
-                                  CcScreenPanel *self)
+                                  CcScreenPage  *self)
 {
   AdwEnumListItem *item;
-  CcScreenPanelBlankScreenDelay delay;
+  CcScreenPageBlankScreenDelay delay;
 
   item = ADW_ENUM_LIST_ITEM (adw_combo_row_get_selected_item (combo_row));
   delay = adw_enum_list_item_get_value (item);
@@ -191,10 +188,10 @@ on_blank_screen_delay_changed_cb (AdwComboRow   *combo_row,
 }
 
 static void
-on_usb_protection_properties_changed_cb (GDBusProxy    *usb_proxy,
-                                         GVariant      *changed_properties,
-                                         GStrv          invalidated_properties,
-                                         CcScreenPanel *self)
+on_usb_protection_properties_changed_cb (GDBusProxy   *usb_proxy,
+                                         GVariant     *changed_properties,
+                                         GStrv         invalidated_properties,
+                                         CcScreenPage *self)
 {
   gboolean available = FALSE;
 
@@ -217,7 +214,7 @@ on_usb_protection_param_ready (GObject      *source_object,
                                gpointer      user_data)
 {
   g_autoptr(GError) error = NULL;
-  CcScreenPanel *self;
+  CcScreenPage *self;
   GDBusProxy *proxy;
 
   self = user_data;
@@ -244,9 +241,9 @@ on_usb_protection_param_ready (GObject      *source_object,
 }
 
 static void
-cc_screen_panel_finalize (GObject *object)
+cc_screen_page_finalize (GObject *object)
 {
-  CcScreenPanel *self = CC_SCREEN_PANEL (object);
+  CcScreenPage *self = CC_SCREEN_PAGE (object);
 
   g_cancellable_cancel (self->cancellable);
   g_clear_object (&self->cancellable);
@@ -256,29 +253,29 @@ cc_screen_panel_finalize (GObject *object)
   g_clear_object (&self->session_settings);
   g_clear_object (&self->usb_proxy);
 
-  G_OBJECT_CLASS (cc_screen_panel_parent_class)->finalize (object);
+  G_OBJECT_CLASS (cc_screen_page_parent_class)->finalize (object);
 }
 
 static void
-cc_screen_panel_class_init (CcScreenPanelClass *klass)
+cc_screen_page_class_init (CcScreenPageClass *klass)
 {
   GObjectClass *oclass = G_OBJECT_CLASS (klass);
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
-  oclass->finalize = cc_screen_panel_finalize;
+  oclass->finalize = cc_screen_page_finalize;
 
-  g_type_ensure (CC_TYPE_SCREEN_PANEL_LOCK_AFTER);
-  g_type_ensure (CC_TYPE_SCREEN_PANEL_BLANK_SCREEN_DELAY);
-  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/screen/cc-screen-panel.ui");
+  g_type_ensure (CC_TYPE_SCREEN_PAGE_LOCK_AFTER);
+  g_type_ensure (CC_TYPE_SCREEN_PAGE_BLANK_SCREEN_DELAY);
+  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/privacy/cc-screen-page.ui");
 
-  gtk_widget_class_bind_template_child (widget_class, CcScreenPanel, automatic_screen_lock_switch);
-  gtk_widget_class_bind_template_child (widget_class, CcScreenPanel, blank_screen_row);
-  gtk_widget_class_bind_template_child (widget_class, CcScreenPanel, lock_after_row);
-  gtk_widget_class_bind_template_child (widget_class, CcScreenPanel, privacy_screen_switch);
-  gtk_widget_class_bind_template_child (widget_class, CcScreenPanel, screen_privacy_group);
-  gtk_widget_class_bind_template_child (widget_class, CcScreenPanel, show_notifications_switch);
-  gtk_widget_class_bind_template_child (widget_class, CcScreenPanel, usb_protection_row);
-  gtk_widget_class_bind_template_child (widget_class, CcScreenPanel, usb_protection_switch);
+  gtk_widget_class_bind_template_child (widget_class, CcScreenPage, automatic_screen_lock_switch);
+  gtk_widget_class_bind_template_child (widget_class, CcScreenPage, blank_screen_row);
+  gtk_widget_class_bind_template_child (widget_class, CcScreenPage, lock_after_row);
+  gtk_widget_class_bind_template_child (widget_class, CcScreenPage, privacy_screen_switch);
+  gtk_widget_class_bind_template_child (widget_class, CcScreenPage, screen_privacy_group);
+  gtk_widget_class_bind_template_child (widget_class, CcScreenPage, show_notifications_switch);
+  gtk_widget_class_bind_template_child (widget_class, CcScreenPage, usb_protection_row);
+  gtk_widget_class_bind_template_child (widget_class, CcScreenPage, usb_protection_switch);
 
   gtk_widget_class_bind_template_callback (widget_class, lock_after_name_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_blank_screen_delay_changed_cb);
@@ -287,7 +284,7 @@ cc_screen_panel_class_init (CcScreenPanelClass *klass)
 }
 
 static void
-update_display_config (CcScreenPanel *self)
+update_display_config (CcScreenPage *self)
 {
   g_autoptr (CcDisplayConfig) config = NULL;
   gboolean any_privacy_screen = FALSE;
@@ -319,11 +316,9 @@ update_display_config (CcScreenPanel *self)
 }
 
 static void
-cc_screen_panel_init (CcScreenPanel *self)
+cc_screen_page_init (CcScreenPage *self)
 {
   guint value;
-
-  g_resources_register (cc_screen_get_resource ());
 
   gtk_widget_init_template (GTK_WIDGET (self));
 

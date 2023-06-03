@@ -12,6 +12,12 @@ i18n.merge_file(
 
 sources = files(
   'cc-privacy-panel.c',
+  'cc-screen-page.c',
+)
+
+sources += gnome.mkenums_simple(
+  'cc-screen-page-enums',
+  sources: ['cc-screen-page.h'],
 )
 
 sources += gnome.compile_resources(
