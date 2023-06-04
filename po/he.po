@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center.HEAD.he\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2023-05-24 15:41+0000\n"
-"PO-Revision-Date: 2023-05-25 08:51+0300\n"
+"POT-Creation-Date: 2023-05-30 08:35+0000\n"
+"PO-Revision-Date: 2023-06-04 13:57+0300\n"
 "Last-Translator: Yosef Or Boczko <yoseforb@gmail.com>\n"
 "Language-Team: Hebrew <yoseforb@gmail.com>\n"
 "Language: he\n"
@@ -359,8 +359,6 @@ msgstr "בחירת תמונה"
 #: panels/network/cc-wifi-panel.c:744
 #: panels/network/connection-editor/ce-page-details.c:100
 #: panels/network/connection-editor/connection-editor.ui:14
-#: panels/network/connection-editor/vpn-helpers.c:215
-#: panels/network/connection-editor/vpn-helpers.c:334
 #: panels/network/net-device-wifi.c:863
 #: panels/printers/new-printer-dialog.ui:50
 #: panels/printers/pp-details-dialog.c:269
@@ -382,7 +380,6 @@ msgid "_Cancel"
 msgstr "_ביטול"
 
 #: panels/background/cc-background-chooser.c:316
-#: panels/network/connection-editor/vpn-helpers.c:216
 #: panels/printers/pp-details-dialog.c:270
 #: panels/sharing/cc-sharing-panel.c:448
 #: panels/user-accounts/cc-avatar-chooser.c:167
@@ -735,9 +732,7 @@ msgstr "מסך"
 msgid "Save Profile"
 msgstr "שמירת הפרופיל"
 
-#: panels/color/cc-color-panel.c:846
-#: panels/network/connection-editor/vpn-helpers.c:335
-#: panels/wwan/cc-wwan-apn-dialog.ui:43
+#: panels/color/cc-color-panel.c:846 panels/wwan/cc-wwan-apn-dialog.ui:43
 msgid "_Save"
 msgstr "_שמירה"
 
@@ -911,7 +906,7 @@ msgstr "_ייבוא קובץ…"
 
 #: panels/color/cc-color-panel.ui:390 panels/keyboard/cc-input-chooser.ui:18
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:41
-#: panels/network/connection-editor/net-connection-editor.c:620
+#: panels/network/connection-editor/net-connection-editor.c:600
 #: panels/printers/new-printer-dialog.ui:87
 #: panels/user-accounts/cc-add-user-dialog.ui:39
 msgid "_Add"
@@ -1558,15 +1553,15 @@ msgstr "פעיל"
 msgid "Off"
 msgstr "כבוי"
 
-#: panels/display/cc-display-panel.c:937
+#: panels/display/cc-display-panel.c:921
 msgid "Apply Changes?"
 msgstr "להחיל שינויים?"
 
-#: panels/display/cc-display-panel.c:942
+#: panels/display/cc-display-panel.c:927
 msgid "Changes Cannot be Applied"
 msgstr "אי אפשר להחיל את השינויים"
 
-#: panels/display/cc-display-panel.c:944
+#: panels/display/cc-display-panel.c:929
 msgid "This could be due to hardware limitations."
 msgstr "אולי זה קשור למגבלות חומרה."
 
@@ -1731,7 +1726,7 @@ msgstr "זמנים"
 
 #: panels/display/cc-night-light-page.ui:135
 msgid "From"
-msgstr "מ־"
+msgstr "התחלה"
 
 #: panels/display/cc-night-light-page.ui:160
 #: panels/display/cc-night-light-page.ui:247
@@ -1762,7 +1757,7 @@ msgstr "PM"
 
 #: panels/display/cc-night-light-page.ui:222
 msgid "To"
-msgstr "עד"
+msgstr "סיום"
 
 #: panels/display/cc-night-light-page.ui:328
 msgid "Color Temperature"
@@ -1786,13 +1781,13 @@ msgstr ""
 "לאדום;צבע;שקיעה;זריחה;"
 
 #. TRANSLATORS: secure boot refers to the system firmware security mode
-#: panels/firmware-security/cc-firmware-security-boot-dialog.c:72
+#: panels/firmware-security/cc-firmware-security-boot-dialog.c:74
 #: panels/firmware-security/cc-firmware-security-panel.c:119
 msgid "Secure Boot is Active"
 msgstr "הפעלה מאובטחת פעילה"
 
 #. TRANSLATORS: this is the first section of the decription
-#: panels/firmware-security/cc-firmware-security-boot-dialog.c:77
+#: panels/firmware-security/cc-firmware-security-boot-dialog.c:79
 msgid ""
 "Secure boot prevents malicious software from being loaded when the device "
 "starts. It is currently turned on and is functioning correctly."
@@ -1801,12 +1796,12 @@ msgstr ""
 "ופועלת בצורה תקינה."
 
 #. TRANSLATORS: secure boot refers to the system firmware security mode
-#: panels/firmware-security/cc-firmware-security-boot-dialog.c:83
+#: panels/firmware-security/cc-firmware-security-boot-dialog.c:85
 msgid "Secure Boot Has Problems"
 msgstr "יש בעיות בהפעלה מאובטחת"
 
 #. TRANSLATORS: this is the first section of the decription.
-#: panels/firmware-security/cc-firmware-security-boot-dialog.c:87
+#: panels/firmware-security/cc-firmware-security-boot-dialog.c:89
 msgid ""
 "Secure boot prevents malicious software from being loaded when the device "
 "starts. It is currently turned on, but will not work due to having an "
@@ -1816,7 +1811,7 @@ msgstr ""
 "אך לא תעבוד עקב מפתח לא תקף."
 
 #. TRANSLATORS: this is the second section of description.
-#: panels/firmware-security/cc-firmware-security-boot-dialog.c:90
+#: panels/firmware-security/cc-firmware-security-boot-dialog.c:92
 msgid ""
 "Secure boot problems can often be resolved from your computer's UEFI "
 "firmware settings (BIOS) and your hardware manufacturer may provide "
@@ -1826,17 +1821,17 @@ msgstr ""
 "המחשב. יצרן החָמְרָה שלך עשוי לספק מידע כיצד לעשות זאת."
 
 #. TRANSLATORS: this is the third section of description.
-#: panels/firmware-security/cc-firmware-security-boot-dialog.c:93
+#: panels/firmware-security/cc-firmware-security-boot-dialog.c:95
 msgid "For help, contact your hardware manufacturer or IT support provider."
 msgstr "לעזרה, יש ליצור קשר עם יצרן החָמְרָה או עם תמיכת ה־IT של הספק."
 
 #. TRANSLATORS: secure boot refers to the system firmware security mode
-#: panels/firmware-security/cc-firmware-security-boot-dialog.c:99
+#: panels/firmware-security/cc-firmware-security-boot-dialog.c:101
 msgid "Secure Boot is Turned Off"
 msgstr "הפעלה מאובטחת אינה פעילה"
 
 #. TRANSLATORS: this is the first section of the description.
-#: panels/firmware-security/cc-firmware-security-boot-dialog.c:103
+#: panels/firmware-security/cc-firmware-security-boot-dialog.c:105
 msgid ""
 "Secure boot prevents malicious software from being loaded when the device "
 "starts. It is currently turned off."
@@ -1845,7 +1840,7 @@ msgstr ""
 "כעת."
 
 #. TRANSLATORS: this is the second section of the description.
-#: panels/firmware-security/cc-firmware-security-boot-dialog.c:106
+#: panels/firmware-security/cc-firmware-security-boot-dialog.c:108
 msgid ""
 "Secure boot can often be turned on from your computer's UEFI firmware "
 "settings (BIOS). For help, contact your hardware manufacturer or IT support "
@@ -1943,7 +1938,7 @@ msgstr ""
 #: panels/info-overview/cc-info-overview-panel.c:358
 #: panels/info-overview/cc-info-overview-panel.c:388
 #: panels/network/connection-editor/ce-page-wireguard.c:368
-#: panels/sound/cc-alert-chooser-window.c:350
+#: panels/sound/cc-alert-chooser-window.c:352
 #: panels/wwan/cc-wwan-details-dialog.c:100
 msgid "Unknown"
 msgstr "לא ידוע"
@@ -2843,7 +2838,7 @@ msgid "Set Shortcut…"
 msgstr "הגדרת צירופי מקשים…"
 
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:261
-#: panels/sound/cc-alert-chooser-window.c:340
+#: panels/sound/cc-alert-chooser-window.c:342
 #: panels/sound/cc-alert-chooser-window.ui:22
 #: panels/universal-access/cc-ua-zoom-page.ui:271
 msgid "None"
@@ -3221,7 +3216,7 @@ msgid "Save"
 msgstr "שמירה"
 
 #: panels/network/cc-network-panel.ui:91 panels/network/cc-network-panel.ui:125
-#: panels/network/connection-editor/net-connection-editor.c:708
+#: panels/network/connection-editor/net-connection-editor.c:688
 msgid "VPN"
 msgstr "VPN"
 
@@ -3440,9 +3435,9 @@ msgstr "שם הרשת"
 #: panels/network/cc-wifi-hotspot-dialog.ui:92
 #: panels/printers/new-printer-dialog.ui:316
 #: panels/printers/pp-jobs-dialog.ui:54 panels/sharing/cc-sharing-panel.ui:360
-#: panels/user-accounts/cc-add-user-dialog.ui:173
-#: panels/user-accounts/cc-add-user-dialog.ui:208
-#: panels/user-accounts/cc-add-user-dialog.ui:387
+#: panels/user-accounts/cc-add-user-dialog.ui:149
+#: panels/user-accounts/cc-add-user-dialog.ui:184
+#: panels/user-accounts/cc-add-user-dialog.ui:363
 #: panels/wwan/cc-wwan-apn-dialog.ui:175
 msgid "Password"
 msgstr "ססמה"
@@ -3816,7 +3811,7 @@ msgid "WPA3 Personal"
 msgstr "‏WPA3 אישי"
 
 #: panels/network/connection-editor/ce-page-wireguard.c:106
-#: panels/network/connection-editor/net-connection-editor.c:864
+#: panels/network/connection-editor/net-connection-editor.c:850
 msgid "WireGuard"
 msgstr "WireGuard"
 
@@ -3992,26 +3987,32 @@ msgstr "אוטומטי, DHCP בלבד"
 msgid "Prefix"
 msgstr "קידומת"
 
-#: panels/network/connection-editor/net-connection-editor.c:389
-msgid "Unable to open connection editor"
-msgstr "לא ניתן לפתוח את עורך החיבורים"
+#: panels/network/connection-editor/net-connection-editor.c:366
+#, c-format
+msgid "Unable to open connection editor: %s"
+msgstr "לא ניתן לפתוח את עורך החיבורים: %s"
 
-#: panels/network/connection-editor/net-connection-editor.c:405
+#: panels/network/connection-editor/net-connection-editor.c:385
 msgid "New Profile"
 msgstr "פרופיל חדש"
 
-#: panels/network/connection-editor/net-connection-editor.c:472
+#: panels/network/connection-editor/net-connection-editor.c:452
 #, c-format
 msgid "Invalid setting %s: %s"
 msgstr "הגדרה %s לא תקפה: ‏%s"
 
-#: panels/network/connection-editor/net-connection-editor.c:475
+#: panels/network/connection-editor/net-connection-editor.c:455
 #, c-format
 msgid "Invalid setting %s"
 msgstr "הגדרה %s לא תקפה"
 
+#: panels/network/connection-editor/net-connection-editor.c:731
+#, c-format
+msgid "Invalid VPN configuration file"
+msgstr "קובץ תצורת ה־VPN לא תקף"
+
 #. Translators: VPN add dialog Wireguard description
-#: panels/network/connection-editor/net-connection-editor.c:852
+#: panels/network/connection-editor/net-connection-editor.c:838
 msgid ""
 "Free and open-source VPN solution designed for ease of use, high speed "
 "performance and low attack surface."
@@ -4019,11 +4020,11 @@ msgstr ""
 "פתרון VPN חינמי ובקוד פתוח לשימוש קל, מהירות וביצועים גבוהים ומרחב פגיעות "
 "קטן."
 
-#: panels/network/connection-editor/net-connection-editor.c:888
+#: panels/network/connection-editor/net-connection-editor.c:874
 msgid "Import from file…"
 msgstr "יבוא מקובץ…"
 
-#: panels/network/connection-editor/net-connection-editor.c:914
+#: panels/network/connection-editor/net-connection-editor.c:900
 msgid "Add VPN"
 msgstr "הוספת VPN"
 
@@ -4031,60 +4032,9 @@ msgstr "הוספת VPN"
 msgid "S_ecurity"
 msgstr "_אבטחה"
 
-#: panels/network/connection-editor/vpn-helpers.c:191
-msgid "Cannot import VPN connection"
-msgstr "לא ניתן לייבא חיבור VPN"
-
-#: panels/network/connection-editor/vpn-helpers.c:193
-#, c-format
-msgid ""
-"The file “%s” could not be read or does not contain recognized VPN "
-"connection information\n"
-"\n"
-"Error: %s."
-msgstr ""
-"הקובץ „%s” לא ניתן לקריאה או שאינו מכיל מידע התחברות VPN מוכר\n"
-"\n"
-"שגיאה: %s."
-
-#: panels/network/connection-editor/vpn-helpers.c:212
+#: panels/network/connection-editor/vpn-helpers.c:153
 msgid "Select file to import"
 msgstr "נא לבחור קובץ לייבוא"
-
-#: panels/network/connection-editor/vpn-helpers.c:264
-#, c-format
-msgid "A file named “%s” already exists."
-msgstr "כבר קיים קובץ בשם „%s“."
-
-#: panels/network/connection-editor/vpn-helpers.c:266
-msgid "_Replace"
-msgstr "ה_חלפה"
-
-#: panels/network/connection-editor/vpn-helpers.c:268
-#, c-format
-msgid "Do you want to replace %s with the VPN connection you are saving?"
-msgstr "להחליף את %s בחיבור ה־VPN שנשמר כעת?"
-
-#: panels/network/connection-editor/vpn-helpers.c:303
-msgid "Cannot export VPN connection"
-msgstr "לא ניתן לייצא את חיבור ה־VPN"
-
-#: panels/network/connection-editor/vpn-helpers.c:305
-#, c-format
-msgid ""
-"The VPN connection “%s” could not be exported to %s.\n"
-"\n"
-"Error: %s."
-msgstr ""
-"החיבור „%s” לא ניתן לייצוא אל %s.\n"
-"‬\n"
-"‏‫\n"
-"‬\n"
-"‫שגיאה: %s."
-
-#: panels/network/connection-editor/vpn-helpers.c:331
-msgid "Export VPN connection"
-msgstr "יצוא חיבור VPN"
 
 #: panels/network/connection-editor/vpn-page.ui:34
 msgid "(Error: unable to load VPN connection editor)"
@@ -5176,7 +5126,7 @@ msgstr "יש להזין שם משתמש וססמה להצגת מדפסות זמ�
 #: panels/printers/new-printer-dialog.ui:295
 #: panels/printers/pp-jobs-dialog.ui:42
 #: panels/user-accounts/cc-add-user-dialog.ui:94
-#: panels/user-accounts/cc-add-user-dialog.ui:366
+#: panels/user-accounts/cc-add-user-dialog.ui:342
 #: panels/wwan/cc-wwan-apn-dialog.ui:150
 msgid "Username"
 msgstr "שם משתמש"
@@ -5380,7 +5330,7 @@ msgstr "יש להזין אישור על מנת להדפיס מ־%s."
 
 #. Translators: This is a windows domain used with SMB protocol.
 #: panels/printers/pp-jobs-dialog.ui:30
-#: panels/user-accounts/cc-add-user-dialog.ui:323
+#: panels/user-accounts/cc-add-user-dialog.ui:299
 msgid "Domain"
 msgstr "מתחם"
 
@@ -6518,22 +6468,22 @@ msgstr "נדרש אימות כדי להפעיל או להשבית התחברות
 msgid "Custom"
 msgstr "התאמה אישית"
 
-#: panels/sound/cc-alert-chooser-window.c:342
+#: panels/sound/cc-alert-chooser-window.c:344
 #: panels/sound/cc-alert-chooser-window.ui:34
 msgid "Click"
 msgstr "נקישה"
 
-#: panels/sound/cc-alert-chooser-window.c:344
+#: panels/sound/cc-alert-chooser-window.c:346
 #: panels/sound/cc-alert-chooser-window.ui:76
 msgid "Hum"
 msgstr "המהום"
 
-#: panels/sound/cc-alert-chooser-window.c:346
+#: panels/sound/cc-alert-chooser-window.c:348
 #: panels/sound/cc-alert-chooser-window.ui:48
 msgid "String"
 msgstr "מיתר"
 
-#: panels/sound/cc-alert-chooser-window.c:348
+#: panels/sound/cc-alert-chooser-window.c:350
 #: panels/sound/cc-alert-chooser-window.ui:62
 msgid "Swing"
 msgstr "הנפה"
@@ -6727,8 +6677,8 @@ msgstr "‏UUID"
 msgid "Timestamp"
 msgstr "טביעת זמן"
 
-#: panels/thunderbolt/cc-bolt-device-dialog.ui:43
 # msgid_plural "Depends on %u other devices"
+#: panels/thunderbolt/cc-bolt-device-dialog.ui:43
 msgid "Depends on other devices"
 msgstr "תלוי בהתקנים אחרים"
 
@@ -7607,11 +7557,7 @@ msgstr "הוספת משתמש"
 msgid "Administrator"
 msgstr "מנהל"
 
-#: panels/user-accounts/cc-add-user-dialog.ui:141
-msgid "Information"
-msgstr "מידע"
-
-#: panels/user-accounts/cc-add-user-dialog.ui:155
+#: panels/user-accounts/cc-add-user-dialog.ui:135
 #: panels/user-accounts/cc-user-panel.ui:210
 msgid ""
 "Administrators have extra abilities, including adding and removing users, "
@@ -7621,31 +7567,31 @@ msgstr ""
 "למנהל יש יכולות נרחבות, לרבות הוספה והסרת משתמשים, שינוי הגדרות התחברות "
 "והסרת תכנה. בקרת הורים לא ניתנת להחלה על מנהל."
 
-#: panels/user-accounts/cc-add-user-dialog.ui:177
+#: panels/user-accounts/cc-add-user-dialog.ui:153
 msgid "User sets password on first login"
 msgstr "הגדרת ססמה בכניסה הראשונה של המשתמש"
 
-#: panels/user-accounts/cc-add-user-dialog.ui:189
+#: panels/user-accounts/cc-add-user-dialog.ui:165
 msgid "Set password now"
 msgstr "הגדרת ססמה כעת"
 
-#: panels/user-accounts/cc-add-user-dialog.ui:251
+#: panels/user-accounts/cc-add-user-dialog.ui:227
 msgid "Confirm"
 msgstr "אישור"
 
-#: panels/user-accounts/cc-add-user-dialog.ui:305
+#: panels/user-accounts/cc-add-user-dialog.ui:281
 msgid "Enterprise Login"
 msgstr "כניסה ארגונית"
 
-#: panels/user-accounts/cc-add-user-dialog.ui:306
+#: panels/user-accounts/cc-add-user-dialog.ui:282
 msgid "User accounts which are managed by a company or organization."
 msgstr "חשבונות משתמש המנוהלים על ידי חברה או ארגון."
 
-#: panels/user-accounts/cc-add-user-dialog.ui:411
+#: panels/user-accounts/cc-add-user-dialog.ui:387
 msgid "You are Offline"
 msgstr "התנתקת"
 
-#: panels/user-accounts/cc-add-user-dialog.ui:412
+#: panels/user-accounts/cc-add-user-dialog.ui:388
 msgid ""
 "Enterprise login allows an existing centrally managed user account to be "
 "used on this device. You can also use this account to access company "
@@ -9255,6 +9201,52 @@ msgstr[3] "‏‫%u ערוצי קלט"
 #: subprojects/gvc/gvc-mixer-control.c:2876
 msgid "System Sounds"
 msgstr "צלילי מערכת"
+
+#~ msgid "Cannot import VPN connection"
+#~ msgstr "לא ניתן לייבא חיבור VPN"
+
+#, c-format
+#~ msgid ""
+#~ "The file “%s” could not be read or does not contain recognized VPN "
+#~ "connection information\n"
+#~ "\n"
+#~ "Error: %s."
+#~ msgstr ""
+#~ "הקובץ „%s” לא ניתן לקריאה או שאינו מכיל מידע התחברות VPN מוכר\n"
+#~ "\n"
+#~ "שגיאה: %s."
+
+#, c-format
+#~ msgid "A file named “%s” already exists."
+#~ msgstr "כבר קיים קובץ בשם „%s“."
+
+#~ msgid "_Replace"
+#~ msgstr "ה_חלפה"
+
+#, c-format
+#~ msgid "Do you want to replace %s with the VPN connection you are saving?"
+#~ msgstr "להחליף את %s בחיבור ה־VPN שנשמר כעת?"
+
+#~ msgid "Cannot export VPN connection"
+#~ msgstr "לא ניתן לייצא את חיבור ה־VPN"
+
+#, c-format
+#~ msgid ""
+#~ "The VPN connection “%s” could not be exported to %s.\n"
+#~ "\n"
+#~ "Error: %s."
+#~ msgstr ""
+#~ "החיבור „%s” לא ניתן לייצוא אל %s.\n"
+#~ "‬\n"
+#~ "‏‫\n"
+#~ "‬\n"
+#~ "‫שגיאה: %s."
+
+#~ msgid "Export VPN connection"
+#~ msgstr "יצוא חיבור VPN"
+
+#~ msgid "Information"
+#~ msgstr "מידע"
 
 #~ msgid "Name:"
 #~ msgstr "שם:"
