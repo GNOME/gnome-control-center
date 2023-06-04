@@ -20,11 +20,11 @@
 
 #pragma once
 
-#include <shell/cc-panel.h>
+#include <adwaita.h>
 
 G_BEGIN_DECLS
 
-#define CC_TYPE_MICROPHONE_PANEL (cc_microphone_panel_get_type ())
-G_DECLARE_FINAL_TYPE (CcMicrophonePanel, cc_microphone_panel, CC, MICROPHONE_PANEL, CcPanel)
+#define CC_TYPE_MICROPHONE_PAGE (cc_microphone_page_get_type ())
+G_DECLARE_FINAL_TYPE (CcMicrophonePage, cc_microphone_page, CC, MICROPHONE_PAGE, AdwNavigationPage)
 
 G_END_DECLS

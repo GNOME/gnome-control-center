@@ -75,6 +75,18 @@
 
                         <child>
                           <object class="CcListRow">
+                            <property name="title" translatable="yes">_Microphones</property>
+                            <property name="subtitle" translatable="yes">Restrict microphone access</property>
+                            <property name="icon-name">microphone-symbolic</property>
+                            <property name="use-underline">True</property>
+                            <property name="show-arrow">True</property>
+                            <property name="action-name">navigation.push</property>
+                            <property name="action-target">'microphone-page'</property>
+                          </object>
+                        </child>
+
+                        <child>
+                          <object class="CcListRow">
                             <property name="title" translatable="yes">_File History &amp;amp; Trash</property>
                             <property name="subtitle" translatable="yes">Control data and files that are kept on your device</property>
                             <property name="icon-name">trash-symbolic</property>
@@ -120,6 +132,10 @@
 
         <child>
           <object class="CcCameraPage"/>
+        </child>
+
+        <child>
+          <object class="CcMicrophonePage"/>
         </child>
 
         <child>

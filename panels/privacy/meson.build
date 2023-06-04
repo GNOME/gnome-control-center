@@ -14,6 +14,7 @@ sources = files(
   'cc-camera-page.c',
   'cc-diagnostics-page.c',
   'cc-location-page.c',
+  'cc-microphone-page.c',
   'cc-privacy-panel.c',
   'cc-screen-page.c',
   'cc-usage-page.c',

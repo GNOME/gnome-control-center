@@ -18,8 +18,7 @@
  * Author: Matthias Clasen <mclasen@redhat.com>
  */
 
-#include "cc-microphone-panel.h"
-#include "cc-microphone-resources.h"
+#include "cc-microphone-page.h"
 #include "cc-util.h"
 
 #include <gio/gdesktopappinfo.h>
@@ -28,14 +27,15 @@
 #define APP_PERMISSIONS_TABLE "devices"
 #define APP_PERMISSIONS_ID "microphone"
 
-struct _CcMicrophonePanel
+struct _CcMicrophonePage
 {
-  CcPanel       parent_instance;
+  AdwNavigationPage parent_instance;
 
   AdwSwitchRow *microphone_row;
   GtkListBox   *microphone_apps_list_box;
 
   GSettings    *privacy_settings;
+  GCancellable *cancellable;
 
   GDBusProxy   *perm_store;
   GVariant     *microphone_apps_perms;
@@ -45,11 +45,11 @@ struct _CcMicrophonePanel
   GtkSizeGroup *microphone_icon_size_group;
 };
 
-CC_PANEL_REGISTER (CcMicrophonePanel, cc_microphone_panel)
+G_DEFINE_TYPE (CcMicrophonePage, cc_microphone_page, ADW_TYPE_NAVIGATION_PAGE)
 
 typedef struct
 {
-  CcMicrophonePanel *self;
+  CcMicrophonePage *self;
   GtkWidget *widget;
   gchar *app_id;
   gboolean changing_state;
@@ -96,7 +96,7 @@ on_microphone_app_state_set (GtkSwitch *widget,
                            gpointer   user_data)
 {
   MicrophoneAppStateData *data = (MicrophoneAppStateData *) user_data;
-  CcMicrophonePanel *self = data->self;
+  CcMicrophonePage *self = data->self;
   GVariant *params;
   GVariantIter iter;
   const gchar *key;
@@ -138,7 +138,7 @@ on_microphone_app_state_set (GtkSwitch *widget,
                      params,
                      G_DBUS_CALL_FLAGS_NONE,
                      -1,
-                     cc_panel_get_cancellable (CC_PANEL (self)),
+                     self->cancellable,
                      on_perm_store_set_done,
                      data);
 
@@ -166,7 +166,7 @@ update_app_switch_state (GValue   *value,
 
 
 static void
-add_microphone_app (CcMicrophonePanel *self,
+add_microphone_app (CcMicrophonePage *self,
                   const gchar    *app_id,
                   gboolean        enabled)
 {
@@ -236,7 +236,7 @@ add_microphone_app (CcMicrophonePanel *self,
 
 /* Steals permissions and permissions_data references */
 static void
-update_perm_store (CcMicrophonePanel *self,
+update_perm_store (CcMicrophonePage *self,
                    GVariant *permissions,
                    GVariant *permissions_data)
 {
@@ -288,7 +288,7 @@ on_perm_store_lookup_done (GObject      *source_object,
                            GAsyncResult *res,
                            gpointer      user_data)
 {
-  CcMicrophonePanel *self = user_data;
+  CcMicrophonePage *self = user_data;
   g_autoptr(GError) error = NULL;
   GVariant *ret, *permissions, *permissions_data;
 
@@ -318,7 +318,7 @@ on_perm_store_ready (GObject      *source_object,
                      GAsyncResult *res,
                      gpointer      user_data)
 {
-  CcMicrophonePanel *self;
+  CcMicrophonePage *self;
   g_autoptr(GError) error = NULL;
   GDBusProxy *proxy;
   GVariant *params;
@@ -341,15 +341,18 @@ on_perm_store_ready (GObject      *source_object,
                      params,
                      G_DBUS_CALL_FLAGS_NONE,
                      -1,
-                     cc_panel_get_cancellable (CC_PANEL (self)),
+                     self->cancellable,
                      on_perm_store_lookup_done,
                      self);
 }
 
 static void
-cc_microphone_panel_finalize (GObject *object)
+cc_microphone_page_finalize (GObject *object)
 {
-  CcMicrophonePanel *self = CC_MICROPHONE_PANEL (object);
+  CcMicrophonePage *self = CC_MICROPHONE_PAGE (object);
+
+  g_cancellable_cancel (self->cancellable);
+  g_clear_object (&self->cancellable);
 
   g_clear_object (&self->privacy_settings);
   g_clear_object (&self->perm_store);
@@ -358,42 +361,33 @@ cc_microphone_panel_finalize (GObject *object)
   g_clear_pointer (&self->microphone_apps_data, g_variant_unref);
   g_clear_pointer (&self->microphone_app_switches, g_hash_table_unref);
 
-  G_OBJECT_CLASS (cc_microphone_panel_parent_class)->finalize (object);
-}
-
-static const char *
-cc_microphone_panel_get_help_uri (CcPanel *panel)
-{
-  return "help:gnome-help/microphone";
+  G_OBJECT_CLASS (cc_microphone_page_parent_class)->finalize (object);
 }
 
 static void
-cc_microphone_panel_class_init (CcMicrophonePanelClass *klass)
+cc_microphone_page_class_init (CcMicrophonePageClass *klass)
 {
-  CcPanelClass *panel_class = CC_PANEL_CLASS (klass);
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
-  panel_class->get_help_uri = cc_microphone_panel_get_help_uri;
+  object_class->finalize = cc_microphone_page_finalize;
 
-  object_class->finalize = cc_microphone_panel_finalize;
+  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/privacy/cc-microphone-page.ui");
 
-  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/microphone/cc-microphone-panel.ui");
-
-  gtk_widget_class_bind_template_child (widget_class, CcMicrophonePanel, microphone_row);
-  gtk_widget_class_bind_template_child (widget_class, CcMicrophonePanel, microphone_apps_list_box);
+  gtk_widget_class_bind_template_child (widget_class, CcMicrophonePage, microphone_row);
+  gtk_widget_class_bind_template_child (widget_class, CcMicrophonePage, microphone_apps_list_box);
 }
 
 static void
-cc_microphone_panel_init (CcMicrophonePanel *self)
+cc_microphone_page_init (CcMicrophonePage *self)
 {
-  g_resources_register (cc_microphone_get_resource ());
-
   gtk_widget_init_template (GTK_WIDGET (self));
 
   self->microphone_icon_size_group = gtk_size_group_new (GTK_SIZE_GROUP_BOTH);
 
   self->privacy_settings = g_settings_new ("org.gnome.desktop.privacy");
+
+  self->cancellable = g_cancellable_new ();
 
   g_settings_bind (self->privacy_settings,
                    "disable-microphone",
@@ -412,7 +406,7 @@ cc_microphone_panel_init (CcMicrophonePanel *self)
                             "org.freedesktop.impl.portal.PermissionStore",
                             "/org/freedesktop/impl/portal/PermissionStore",
                             "org.freedesktop.impl.portal.PermissionStore",
-                            cc_panel_get_cancellable (CC_PANEL (self)),
+                            self->cancellable,
                             on_perm_store_ready,
                             self);
 }

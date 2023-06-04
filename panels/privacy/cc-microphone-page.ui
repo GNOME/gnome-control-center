@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
-  <template class="CcMicrophonePanel" parent="CcPanel">
-
-    <child type="content">
+  <template class="CcMicrophonePage" parent="AdwNavigationPage">
+    <property name="title" translatable="yes">Microphones</property>
+    <property name="tag">microphone-page</property>
+    <property name="child">
+      <object class="AdwToolbarView">
+        <property name="top-bar-style">raised</property>
+        <child type="top">
+          <object class="AdwHeaderBar"/>
+        </child>
+        <property name="content">
       <object class="AdwPreferencesPage">
         <child>
           <object class="AdwPreferencesGroup">
@@ -47,6 +54,8 @@
           </object>
         </child>
       </object>
-    </child>
+        </property>
+      </object>
+    </property>
   </template>
 </interface>
