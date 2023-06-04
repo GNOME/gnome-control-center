@@ -66,17 +66,11 @@ struct _CcNetworkPanel
         gboolean          updating_device;
 
         /* widgets */
-        GtkWidget        *back_button;
         GtkWidget        *box_bluetooth;
         GtkWidget        *box_vpn;
         GtkWidget        *box_wired;
-        GtkWidget        *cancel_button;
         GtkWidget        *container_bluetooth;
         GtkWidget        *empty_listbox;
-        GtkWidget        *enable_switch;
-        GtkWidget        *main_leaflet;
-        GtkWidget        *page_title;
-        GtkWidget        *proxy_page;
         GtkWidget        *proxy_row;
         GtkWidget        *save_button;
         GtkWidget        *vpn_stack;
@@ -680,93 +674,6 @@ panel_check_network_manager_version (CcNetworkPanel *self)
 }
 
 static void
-network_panel_update_back_button_cb (CcNetworkPanel *self)
-{
-        GtkWidget *child;
-        gboolean folded, is_proxy_page;
-
-        g_assert (CC_IS_NETWORK_PANEL (self));
-
-        folded = cc_panel_get_folded (CC_PANEL (self));
-
-        child = adw_leaflet_get_visible_child (ADW_LEAFLET (self->main_leaflet));
-        is_proxy_page = child == self->proxy_page;
-
-        gtk_widget_set_visible (self->back_button, folded || is_proxy_page);
-        gtk_widget_set_visible (self->enable_switch, is_proxy_page);
-}
-
-static void
-network_panel_back_clicked_cb (CcNetworkPanel *self)
-{
-        GtkWidget *child;
-        gboolean is_sub_page;
-
-        g_assert (CC_IS_NETWORK_PANEL (self));
-
-        child = adw_leaflet_get_visible_child (ADW_LEAFLET (self->main_leaflet));
-        is_sub_page = child == self->proxy_page;
-
-        if (is_sub_page) {
-                adw_leaflet_navigate (ADW_LEAFLET (self->main_leaflet), ADW_NAVIGATION_DIRECTION_BACK);
-        } else {
-                gtk_widget_activate_action (GTK_WIDGET (self),
-                                            "window.navigate", "i",
-                                            ADW_NAVIGATION_DIRECTION_BACK);
-        }
-}
-
-static void
-network_panel_cancel_clicked_cb (CcNetworkPanel *self)
-{
-        g_assert (CC_IS_NETWORK_PANEL (self));
-
-        cc_net_proxy_page_cancel_changes (CC_NET_PROXY_PAGE (self->proxy_page));
-}
-
-static void
-network_panel_save_clicked_cb (CcNetworkPanel *self)
-{
-        g_assert (CC_IS_NETWORK_PANEL (self));
-
-        cc_net_proxy_page_save_changes (CC_NET_PROXY_PAGE (self->proxy_page));
-}
-
-static void
-network_panel_enable_changed_cb (CcNetworkPanel *self)
-{
-        gboolean enabled;
-
-        g_assert (CC_IS_NETWORK_PANEL (self));
-
-        enabled = gtk_switch_get_active (GTK_SWITCH (self->enable_switch));
-        cc_net_proxy_page_set_enabled (CC_NET_PROXY_PAGE (self->proxy_page), enabled);
-}
-
-static void
-visible_child_changed_cb (CcNetworkPanel *self)
-{
-        GtkWidget *page;
-        const char *title = NULL;
-
-        g_assert (CC_IS_NETWORK_PANEL (self));
-
-        page = adw_leaflet_get_visible_child (ADW_LEAFLET (self->main_leaflet));
-
-        if (page == self->proxy_page) {
-                gboolean enabled;
-
-                title = _("Proxy");
-                enabled = cc_net_proxy_page_get_enabled (CC_NET_PROXY_PAGE (self->proxy_page));
-                gtk_switch_set_active (GTK_SWITCH (self->enable_switch), enabled);
-        } else {
-                title = _("Network");
-        }
-
-        adw_window_title_set_title (ADW_WINDOW_TITLE (self->page_title), title);
-}
-
-static void
 create_connection_cb (CcNetworkPanel *self)
 {
         NetConnectionEditor *editor;
@@ -778,40 +685,6 @@ create_connection_cb (CcNetworkPanel *self)
 }
 
 static void
-settings_row_activated_cb (CcNetworkPanel *self,
-                           GtkListBoxRow  *row,
-                           GtkListBox     *box)
-{
-        g_assert (CC_IS_NETWORK_PANEL (self));
-        g_assert (GTK_IS_LIST_BOX_ROW (row));
-        g_assert (GTK_IS_LIST_BOX (box));
-
-        adw_leaflet_set_visible_child (ADW_LEAFLET (self->main_leaflet), self->proxy_page);
-}
-
-static void
-network_proxy_modified_cb (CcNetworkPanel *self)
-{
-        GtkWidget *child;
-        gboolean modified, show_back = TRUE;
-
-        g_assert (CC_IS_NETWORK_PANEL (self));
-
-        modified = cc_net_proxy_page_has_modified (CC_NET_PROXY_PAGE (self->proxy_page));
-        child = adw_leaflet_get_visible_child (ADW_LEAFLET (self->main_leaflet));
-
-        /* If modified, we show "Cancel" and "Save" button instead */
-        if (modified || child != self->proxy_page)
-                show_back = FALSE;
-
-        gtk_widget_set_visible (self->back_button, show_back);
-        gtk_widget_set_visible (self->enable_switch, show_back);
-
-        gtk_widget_set_visible (self->cancel_button, !show_back);
-        gtk_widget_set_visible (self->save_button, !show_back);
-}
-
-static void
 cc_network_panel_map (GtkWidget *widget)
 {
         GTK_WIDGET_CLASS (cc_network_panel_parent_class)->map (widget);
@@ -819,7 +692,6 @@ cc_network_panel_map (GtkWidget *widget)
         /* is the user compiling against a new version, but not running
          * the daemon? */
         panel_check_network_manager_version (CC_NETWORK_PANEL (widget));
-        visible_child_changed_cb (CC_NETWORK_PANEL (widget));
 }
 
 
@@ -843,30 +715,15 @@ cc_network_panel_class_init (CcNetworkPanelClass *klass)
 
         gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/network/cc-network-panel.ui");
 
-        gtk_widget_class_bind_template_child (widget_class, CcNetworkPanel, back_button);
         gtk_widget_class_bind_template_child (widget_class, CcNetworkPanel, box_bluetooth);
         gtk_widget_class_bind_template_child (widget_class, CcNetworkPanel, box_vpn);
         gtk_widget_class_bind_template_child (widget_class, CcNetworkPanel, box_wired);
-        gtk_widget_class_bind_template_child (widget_class, CcNetworkPanel, cancel_button);
         gtk_widget_class_bind_template_child (widget_class, CcNetworkPanel, container_bluetooth);
         gtk_widget_class_bind_template_child (widget_class, CcNetworkPanel, empty_listbox);
-        gtk_widget_class_bind_template_child (widget_class, CcNetworkPanel, enable_switch);
-        gtk_widget_class_bind_template_child (widget_class, CcNetworkPanel, main_leaflet);
-        gtk_widget_class_bind_template_child (widget_class, CcNetworkPanel, page_title);
-        gtk_widget_class_bind_template_child (widget_class, CcNetworkPanel, proxy_page);
         gtk_widget_class_bind_template_child (widget_class, CcNetworkPanel, proxy_row);
-        gtk_widget_class_bind_template_child (widget_class, CcNetworkPanel, save_button);
         gtk_widget_class_bind_template_child (widget_class, CcNetworkPanel, vpn_stack);
 
-        gtk_widget_class_bind_template_callback (widget_class, network_panel_update_back_button_cb);
-        gtk_widget_class_bind_template_callback (widget_class, network_panel_back_clicked_cb);
-        gtk_widget_class_bind_template_callback (widget_class, network_panel_cancel_clicked_cb);
-        gtk_widget_class_bind_template_callback (widget_class, network_panel_save_clicked_cb);
-        gtk_widget_class_bind_template_callback (widget_class, network_panel_enable_changed_cb);
-        gtk_widget_class_bind_template_callback (widget_class, visible_child_changed_cb);
         gtk_widget_class_bind_template_callback (widget_class, create_connection_cb);
-        gtk_widget_class_bind_template_callback (widget_class, settings_row_activated_cb);
-        gtk_widget_class_bind_template_callback (widget_class, network_proxy_modified_cb);
 
         g_type_ensure (CC_TYPE_LIST_ROW);
         g_type_ensure (CC_TYPE_NET_PROXY_PAGE);

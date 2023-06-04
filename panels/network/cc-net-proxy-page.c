@@ -37,7 +37,7 @@
 
 struct _CcNetProxyPage
 {
-  AdwPreferencesPage   parent_instance;
+  AdwNavigationPage    parent_instance;
 
   AdwComboRow         *proxy_type_row;
 
@@ -66,7 +66,7 @@ struct _CcNetProxyPage
   gboolean             is_loading;
 };
 
-G_DEFINE_TYPE (CcNetProxyPage, cc_net_proxy_page, ADW_TYPE_PREFERENCES_PAGE)
+G_DEFINE_TYPE (CcNetProxyPage, cc_net_proxy_page, ADW_TYPE_NAVIGATION_PAGE)
 
 typedef enum
 {
@@ -85,6 +85,7 @@ enum {
   PROP_0,
   PROP_MODIFIED,
   PROP_STATE_TEXT,
+  PROP_ENABLED,
   N_PROPS
 };
 
@@ -188,6 +189,23 @@ proxy_update_state_text (CcNetProxyPage *self)
 }
 
 static void
+cancel_clicked_cb (CcNetProxyPage *self)
+{
+  g_assert (CC_IS_NET_PROXY_PAGE (self));
+
+  cc_net_proxy_page_cancel_changes (CC_NET_PROXY_PAGE (self));
+}
+
+static void
+save_clicked_cb (CcNetProxyPage *self)
+{
+  g_assert (CC_IS_NET_PROXY_PAGE (self));
+
+  cc_net_proxy_page_save_changes (CC_NET_PROXY_PAGE (self));
+}
+
+
+static void
 proxy_configuration_changed_cb (CcNetProxyPage *self)
 {
   GtkWidget *child;
@@ -257,6 +275,34 @@ cc_net_proxy_page_get_property (GObject    *object,
       g_value_set_string (value, self->state_text);
       break;
 
+    case PROP_ENABLED:
+      g_value_set_boolean (value, cc_net_proxy_page_get_enabled (self));
+      break;
+
+    default:
+      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+    }
+}
+
+static void
+cc_net_proxy_page_set_property (GObject      *object,
+                                guint         prop_id,
+                                const GValue *value,
+                                GParamSpec   *pspec)
+{
+  CcNetProxyPage *self = (CcNetProxyPage *)object;
+
+  switch (prop_id)
+    {
+    case PROP_MODIFIED:
+    case PROP_STATE_TEXT:
+      g_warning ("%s is not a writeable property", g_param_spec_get_name (pspec));
+      break;
+
+    case PROP_ENABLED:
+      cc_net_proxy_page_set_enabled (self, g_value_get_boolean (value));
+      break;
+
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
     }
@@ -279,6 +325,7 @@ cc_net_proxy_page_class_init (CcNetProxyPageClass *klass)
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
   object_class->get_property = cc_net_proxy_page_get_property;
+  object_class->set_property = cc_net_proxy_page_set_property;
   object_class->finalize = cc_net_proxy_page_finalize;
 
   properties[PROP_STATE_TEXT] =
@@ -294,6 +341,11 @@ cc_net_proxy_page_class_init (CcNetProxyPageClass *klass)
                           "Proxy settings modified",
                           FALSE,
                           G_PARAM_READABLE | G_PARAM_STATIC_STRINGS);
+
+  properties[PROP_ENABLED] =
+    g_param_spec_boolean ("enabled",
+                          "", "", FALSE,
+                          G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS);
 
   g_object_class_install_properties (object_class, N_PROPS, properties);
 
@@ -321,6 +373,8 @@ cc_net_proxy_page_class_init (CcNetProxyPageClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcNetProxyPage, proxy_ignore_entry);
 
   gtk_widget_class_bind_template_callback (widget_class, proxy_configuration_changed_cb);
+  gtk_widget_class_bind_template_callback (widget_class, save_clicked_cb);
+  gtk_widget_class_bind_template_callback (widget_class, cancel_clicked_cb);
 }
 
 static void
@@ -345,10 +399,10 @@ proxy_bind_settings (CcNetProxyPage *self,
 static void
 cc_net_proxy_page_init (CcNetProxyPage *self)
 {
-  gtk_widget_init_template (GTK_WIDGET (self));
-
   self->is_loading = TRUE;
   self->settings = g_settings_new ("org.gnome.system.proxy");
+
+  gtk_widget_init_template (GTK_WIDGET (self));
 
   /* We should save the changes only when asked to */
   g_settings_delay (self->settings);
