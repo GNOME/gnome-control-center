@@ -28,7 +28,7 @@
 #include <glibtop/mem.h>
 #include <glibtop/sysinfo.h>
 
-#include "cc-firmware-security-panel.h"
+#include "cc-firmware-security-page.h"
 #include "cc-firmware-security-dialog.h"
 #include "cc-firmware-security-utils.h"
 
@@ -391,7 +391,7 @@ cc_firmware_security_dialog_class_init (CcFirmwareSecurityDialogClass *klass)
 
   gtk_widget_class_add_binding_action (widget_class, GDK_KEY_Escape, 0, "window.close", NULL);
 
-  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/firmware-security/cc-firmware-security-dialog.ui");
+  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/privacy/cc-firmware-security-dialog.ui");
 
   gtk_widget_class_bind_template_child (widget_class, CcFirmwareSecurityDialog, firmware_security_dialog_icon);
   gtk_widget_class_bind_template_child (widget_class, CcFirmwareSecurityDialog, firmware_security_dialog_title_label);
@@ -411,7 +411,7 @@ static void
 cc_firmware_security_dialog_init (CcFirmwareSecurityDialog *dialog)
 {
   gtk_widget_init_template (GTK_WIDGET (dialog));
-  load_custom_css ("/org/gnome/control-center/firmware-security/security-level.css");
+  load_custom_css ("/org/gnome/control-center/privacy/security-level.css");
 }
 
 GtkWidget *

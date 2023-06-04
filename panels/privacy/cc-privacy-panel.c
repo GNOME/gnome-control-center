@@ -22,6 +22,7 @@
 
 #include "cc-camera-page.h"
 #include "cc-diagnostics-page.h"
+#include "cc-firmware-security-page.h"
 #include "cc-location-page.h"
 #include "cc-microphone-page.h"
 #include "cc-privacy-resources.h"
@@ -67,6 +68,7 @@ cc_privacy_panel_class_init (CcPrivacyPanelClass *klass)
 
   g_type_ensure (CC_TYPE_CAMERA_PAGE);
   g_type_ensure (CC_TYPE_DIAGNOSTICS_PAGE);
+  g_type_ensure (CC_TYPE_FIRMWARE_SECURITY_PAGE);
   g_type_ensure (CC_TYPE_LOCATION_PAGE);
   g_type_ensure (CC_TYPE_MICROPHONE_PAGE);
   g_type_ensure (CC_TYPE_SCREEN_PAGE);

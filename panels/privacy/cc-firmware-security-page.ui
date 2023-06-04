@@ -1,19 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
-  <template class="CcFirmwareSecurityPanel" parent="CcPanel">
-    <child type="titlebar-end">
-      <object class="GtkButton" id="fw_help_button">
-        <property name="halign">center</property>
-        <property name="valign">center</property>
-        <property name="icon-name">help-about-symbolic</property>
-           <signal name="clicked" handler="on_fw_help_button_clicked_cb" object="CcFirmwareSecurityPanel" swapped="yes" />
-        <style>
-          <class name="image-button" />
-        </style>
-      </object>
-    </child>
-
-    <child type="content">
+  <template class="CcFirmwareSecurityPage" parent="AdwNavigationPage">
+    <property name="title" translatable="yes">Device Security</property>
+    <property name="tag">firmware-security-page</property>
+    <property name="child">
+      <object class="AdwToolbarView">
+        <property name="top-bar-style">raised</property>
+        <child type="top">
+          <object class="AdwHeaderBar">
+            <child type="end">
+              <object class="GtkButton" id="fw_help_button">
+                <property name="halign">center</property>
+                <property name="valign">center</property>
+                <property name="icon-name">help-about-symbolic</property>
+                  <signal name="clicked" handler="on_fw_help_button_clicked_cb" object="CcFirmwareSecurityPage" swapped="yes" />
+                <style>
+                  <class name="image-button" />
+                </style>
+              </object>
+            </child>
+          </object>
+        </child>
+        <property name="content">
       <object class="AdwLeaflet" id="panel_leaflet">
         <property name="can-unfold">False</property>
 
@@ -103,7 +111,7 @@
                             <property name="receives-default">True</property>
                             <property name="sensitive">True</property>
                             <property name="vexpand-set">True</property>
-                            <signal name="clicked" handler="on_hsi_button_clicked_cb" object="CcFirmwareSecurityPanel" swapped="yes" />
+                            <signal name="clicked" handler="on_hsi_button_clicked_cb" object="CcFirmwareSecurityPage" swapped="yes" />
                             <style>
                               <class name="card" />
                             </style>
@@ -156,7 +164,7 @@
                         <child>
                           <object class="GtkButton" id="secure_boot_button">
                             <property name="receives-default">True</property>
-                            <signal name="clicked" handler="on_secure_boot_button_clicked_cb" object="CcFirmwareSecurityPanel" swapped="yes" />
+                            <signal name="clicked" handler="on_secure_boot_button_clicked_cb" object="CcFirmwareSecurityPage" swapped="yes" />
                             <style>
                               <class name="card" />
                             </style>
@@ -252,11 +260,8 @@
         </child>
 
       </object>
-
-
-
-
-
-    </child>
+        </property>
+      </object>
+    </property>
   </template>
 </interface>

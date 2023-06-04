@@ -112,6 +112,21 @@
                           </object>
                         </child>
 
+                        <child>
+                          <object class="CcListRow">
+                            <property name="title" translatable="yes">Device _Security</property>
+                            <property name="subtitle" translatable="yes">Protection against hardware security threats</property>
+                            <property name="icon-name">security-symbolic</property>
+                            <property name="use-underline">True</property>
+                            <property name="show-arrow">True</property>
+                            <property name="action-name">navigation.push</property>
+                            <property name="action-target">'firmware-security-page'</property>
+                            <binding name="visible">
+                              <lookup name="visible">security_page</lookup>
+                            </binding>
+                          </object>
+                        </child>
+
                       </object>
                     </child>
                   </object>
@@ -144,6 +159,10 @@
 
         <child>
           <object class="CcDiagnosticsPage" id="diagnostics_page"/>
+        </child>
+
+        <child>
+          <object class="CcFirmwareSecurityPage" id="security_page"/>
         </child>
 
       </object>

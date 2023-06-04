@@ -13,6 +13,11 @@ i18n.merge_file(
 sources = files(
   'cc-camera-page.c',
   'cc-diagnostics-page.c',
+  'cc-firmware-security-boot-dialog.c',
+  'cc-firmware-security-dialog.c',
+  'cc-firmware-security-help-dialog.c',
+  'cc-firmware-security-page.c',
+  'cc-firmware-security-utils.c',
   'cc-location-page.c',
   'cc-microphone-page.c',
   'cc-privacy-panel.c',
@@ -41,11 +46,15 @@ cflags += [
   '-DDATADIR="@0@"'.format(control_center_datadir)
 ]
 
+deps = common_deps + [
+  dependency('libgtop-2.0'),
+]
+
 panels_libs += static_library(
   cappletname,
   sources: sources,
   include_directories: [ top_inc, common_inc ],
-  dependencies: common_deps,
+  dependencies: deps,
   c_args: cflags
 )
 

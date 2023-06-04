@@ -1,4 +1,4 @@
-/* cc-firmware-security-panel.c
+/* cc-firmware-security-page.c
  *
  * Copyright (C) 2021 Red Hat, Inc
  *
@@ -22,8 +22,7 @@
 
 #include "shell/cc-application.h"
 
-#include "cc-firmware-security-panel.h"
-#include "cc-firmware-security-resources.h"
+#include "cc-firmware-security-page.h"
 #include "cc-firmware-security-dialog.h"
 #include "cc-firmware-security-boot-dialog.h"
 #include "cc-firmware-security-help-dialog.h"
@@ -33,9 +32,9 @@
 #include <gio/gdesktopappinfo.h>
 #include <glib/gi18n.h>
 
-struct _CcFirmwareSecurityPanel
+struct _CcFirmwareSecurityPage
 {
-  CcPanel           parent_instance;
+  AdwNavigationPage parent_instance;
 
   GtkButton        *hsi_button;
   GtkButton        *secure_boot_button;
@@ -64,6 +63,8 @@ struct _CcFirmwareSecurityPanel
   GtkWidget        *firmware_security_log_stack;
   GtkWidget        *firmware_security_log_pgroup;
 
+  GCancellable     *cancellable;
+
   GDBusProxy       *bus_proxy;
   GDBusProxy       *properties_bus_proxy;
 
@@ -78,13 +79,13 @@ struct _CcFirmwareSecurityPanel
   SecureBootState   secure_boot_state;
 };
 
-CC_PANEL_REGISTER (CcFirmwareSecurityPanel, cc_firmware_security_panel)
+G_DEFINE_TYPE (CcFirmwareSecurityPage, cc_firmware_security_page, ADW_TYPE_NAVIGATION_PAGE)
 
 static void
-set_hsi_button_view (CcFirmwareSecurityPanel *self);
+set_hsi_button_view (CcFirmwareSecurityPage *self);
 
 static void
-set_secure_boot_button_view (CcFirmwareSecurityPanel *self)
+set_secure_boot_button_view (CcFirmwareSecurityPage *self)
 {
   FwupdSecurityAttr *attr;
   guint64 sb_flags = 0;
@@ -172,8 +173,8 @@ fu_security_attr_get_description_for_eventlog (FwupdSecurityAttr *attr)
 }
 
 static void
-parse_event_variant_iter (CcFirmwareSecurityPanel *self,
-                          GVariantIter            *iter)
+parse_event_variant_iter (CcFirmwareSecurityPage *self,
+                          GVariantIter           *iter)
 {
   g_autofree gchar *date_string = NULL;
   g_autoptr (GDateTime) date = NULL;
@@ -246,8 +247,8 @@ parse_event_variant_iter (CcFirmwareSecurityPanel *self,
 }
 
 static void
-parse_variant_iter (CcFirmwareSecurityPanel *self,
-                    GVariantIter            *iter)
+parse_variant_iter (CcFirmwareSecurityPage *self,
+                    GVariantIter           *iter)
 {
   g_autoptr (FwupdSecurityAttr) attr = fu_security_attr_new_from_variant(iter);
   const gchar *appstream_id = attr->appstream_id;
@@ -301,9 +302,9 @@ parse_variant_iter (CcFirmwareSecurityPanel *self,
 }
 
 static void
-parse_data_from_variant (CcFirmwareSecurityPanel *self,
-                         GVariant                *value,
-                         const gboolean           is_event)
+parse_data_from_variant (CcFirmwareSecurityPage *self,
+                         GVariant               *value,
+                         const gboolean          is_event)
 {
   const gchar *type_string;
   g_autoptr (GVariantIter) iter = NULL;
@@ -332,9 +333,9 @@ parse_data_from_variant (CcFirmwareSecurityPanel *self,
 }
 
 static void
-parse_array_from_variant (CcFirmwareSecurityPanel *self,
-                          GVariant                *value,
-                          const gboolean           is_event)
+parse_array_from_variant (CcFirmwareSecurityPage *self,
+                          GVariant               *value,
+                          const gboolean          is_event)
 {
   gsize sz;
   g_autoptr (GVariant) untuple = NULL;
@@ -359,7 +360,7 @@ on_bus_event_done_cb (GObject      *source,
 {
   g_autoptr (GError) error = NULL;
   g_autoptr (GVariant) val = NULL;
-  CcFirmwareSecurityPanel *self = CC_FIRMWARE_SECURITY_PANEL (user_data);
+  CcFirmwareSecurityPage *self = CC_FIRMWARE_SECURITY_PAGE (user_data);
 
   val = g_dbus_proxy_call_finish (G_DBUS_PROXY (source), res, &error);
   if (val == NULL)
@@ -372,7 +373,7 @@ on_bus_event_done_cb (GObject      *source,
 }
 
 static void
-show_loading_page (CcFirmwareSecurityPanel *self, const gchar *page_name)
+show_loading_page (CcFirmwareSecurityPage *self, const gchar *page_name)
 {
   adw_leaflet_set_visible_child_name (ADW_LEAFLET(self->panel_leaflet), page_name);
 }
@@ -380,7 +381,7 @@ show_loading_page (CcFirmwareSecurityPanel *self, const gchar *page_name)
 static int
 on_timeout_cb (gpointer user_data)
 {
-  CcFirmwareSecurityPanel *self = CC_FIRMWARE_SECURITY_PANEL (user_data);
+  CcFirmwareSecurityPage *self = CC_FIRMWARE_SECURITY_PAGE (user_data);
   show_loading_page (self, "panel_show");
   return 0;
 }
@@ -388,7 +389,7 @@ on_timeout_cb (gpointer user_data)
 static int
 on_timeout_unavaliable (gpointer user_data)
 {
-  CcFirmwareSecurityPanel *self = CC_FIRMWARE_SECURITY_PANEL (user_data);
+  CcFirmwareSecurityPage *self = CC_FIRMWARE_SECURITY_PAGE (user_data);
   show_loading_page (self, "panel_unavaliable");
   return 0;
 }
@@ -398,7 +399,7 @@ on_bus_done (GObject      *source,
              GAsyncResult *res,
              gpointer      user_data)
 {
-  CcFirmwareSecurityPanel *self = CC_FIRMWARE_SECURITY_PANEL (user_data);
+  CcFirmwareSecurityPage *self = CC_FIRMWARE_SECURITY_PAGE (user_data);
   g_autoptr (GError) error = NULL;
   g_autoptr (GVariant) val = NULL;
 
@@ -420,7 +421,7 @@ on_bus_ready_cb (GObject       *source_object,
                  gpointer       user_data)
 {
   g_autoptr (GError) error = NULL;
-  CcFirmwareSecurityPanel *self = CC_FIRMWARE_SECURITY_PANEL (user_data);
+  CcFirmwareSecurityPage *self = CC_FIRMWARE_SECURITY_PAGE (user_data);
 
   self->bus_proxy = g_dbus_proxy_new_for_bus_finish (res, &error);
   if (self->bus_proxy == NULL)
@@ -436,7 +437,7 @@ on_bus_ready_cb (GObject       *source_object,
                      NULL,
                      G_DBUS_CALL_FLAGS_NONE,
                      -1,
-                     cc_panel_get_cancellable (CC_PANEL (self)),
+                     self->cancellable,
                      on_bus_done,
                      self);
   g_dbus_proxy_call (self->bus_proxy,
@@ -445,16 +446,15 @@ on_bus_ready_cb (GObject       *source_object,
                                     100),
                      G_DBUS_CALL_FLAGS_NONE,
                      -1,
-                     cc_panel_get_cancellable (CC_PANEL (self)),
+                     self->cancellable,
                      on_bus_event_done_cb,
                      self);
 }
 
 static void
-on_hsi_button_clicked_cb (CcFirmwareSecurityPanel *self)
+on_hsi_button_clicked_cb (CcFirmwareSecurityPage *self)
 {
-  GtkWidget *toplevel;
-  CcShell *shell;
+  GtkWindow *toplevel;
   GtkWidget *dialog;
 
   dialog = cc_firmware_security_dialog_new (self->hsi_number,
@@ -464,45 +464,40 @@ on_hsi_button_clicked_cb (CcFirmwareSecurityPanel *self)
                                             self->hsi4_dict,
                                             self->runtime_dict,
                                             self->event_log_output);
-  shell = cc_panel_get_shell (CC_PANEL (self));
-  toplevel = cc_shell_get_toplevel (shell);
-  gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (toplevel));
+  toplevel = GTK_WINDOW (gtk_widget_get_root (GTK_WIDGET (self)));
+  gtk_window_set_transient_for (GTK_WINDOW (dialog), toplevel);
   gtk_window_present (GTK_WINDOW (dialog));
 }
 
 static void
-on_secure_boot_button_clicked_cb (CcFirmwareSecurityPanel *self)
+on_secure_boot_button_clicked_cb (CcFirmwareSecurityPage *self)
 {
-  GtkWidget *toplevel;
-  CcShell *shell;
+  GtkWindow *toplevel;
   GtkWidget *boot_dialog;
 
   boot_dialog = cc_firmware_security_boot_dialog_new (self->secure_boot_state);
-  shell = cc_panel_get_shell (CC_PANEL (self));
-  toplevel = cc_shell_get_toplevel (shell);
-  gtk_window_set_transient_for (GTK_WINDOW (boot_dialog), GTK_WINDOW (toplevel));
+  toplevel = GTK_WINDOW (gtk_widget_get_root (GTK_WIDGET (self)));
+  gtk_window_set_transient_for (GTK_WINDOW (boot_dialog), toplevel);
   gtk_window_present (GTK_WINDOW (boot_dialog));
 }
 
 static void
-on_fw_help_button_clicked_cb (CcFirmwareSecurityPanel *self)
+on_fw_help_button_clicked_cb (CcFirmwareSecurityPage *self)
 {
   GtkWidget *help_dialog;
-  GtkWidget *toplevel;
-  CcShell *shell;
+  GtkWindow *toplevel;
 
   help_dialog = cc_firmware_security_help_dialog_new ();
-  shell = cc_panel_get_shell (CC_PANEL (self));
-  toplevel = cc_shell_get_toplevel (shell);
-  gtk_window_set_transient_for (GTK_WINDOW (help_dialog), GTK_WINDOW (toplevel));
+  toplevel = GTK_WINDOW (gtk_widget_get_root (GTK_WIDGET (self)));
+  gtk_window_set_transient_for (GTK_WINDOW (help_dialog), toplevel);
   gtk_window_present (GTK_WINDOW (help_dialog));
 }
 
 static void
-set_hsi_button_view_contain (CcFirmwareSecurityPanel *self,
-                             guint                    hsi_number,
-                             gchar                   *title,
-                             const gchar             *description)
+set_hsi_button_view_contain (CcFirmwareSecurityPage *self,
+                             guint                   hsi_number,
+                             gchar                  *title,
+                             const gchar            *description)
 {
   switch (hsi_number)
     {
@@ -531,7 +526,7 @@ set_hsi_button_view_contain (CcFirmwareSecurityPanel *self,
 }
 
 static void
-set_hsi_button_view (CcFirmwareSecurityPanel *self)
+set_hsi_button_view (CcFirmwareSecurityPage *self)
 {
   switch (self->hsi_number)
     {
@@ -578,7 +573,7 @@ on_properties_bus_done_cb (GObject      *source,
   g_autoptr (GError) error = NULL;
   g_autoptr (GVariant) val = NULL;
   const gchar *hsi_str = NULL;
-  CcFirmwareSecurityPanel *self = CC_FIRMWARE_SECURITY_PANEL (user_data);
+  CcFirmwareSecurityPage *self = CC_FIRMWARE_SECURITY_PAGE (user_data);
 
   val = g_dbus_proxy_call_finish (G_DBUS_PROXY (source), res, &error);
   if (val == NULL)
@@ -605,7 +600,7 @@ on_properties_bus_ready_cb (GObject      *source_object,
                             GAsyncResult *res,
                             gpointer      user_data)
 {
-  CcFirmwareSecurityPanel *self = CC_FIRMWARE_SECURITY_PANEL (user_data);
+  CcFirmwareSecurityPage *self = CC_FIRMWARE_SECURITY_PAGE (user_data);
   g_autoptr (GError) error = NULL;
 
   self->properties_bus_proxy = g_dbus_proxy_new_for_bus_finish (res, &error);
@@ -624,36 +619,20 @@ on_properties_bus_ready_cb (GObject      *source_object,
                                     "HostSecurityId"),
                      G_DBUS_CALL_FLAGS_NONE,
                      -1,
-                     cc_panel_get_cancellable (CC_PANEL (self)),
+                     self->cancellable,
                      on_properties_bus_done_cb,
                      self);
 }
 
 static void
-update_panel_visibility (const gchar *chassis_type)
-{
-  CcApplication *application;
-  gboolean visible = TRUE;
-
-  /* there's no point showing this */
-  if (g_strcmp0 (chassis_type, "vm") == 0 || g_strcmp0 (chassis_type, "") == 0)
-    visible = FALSE;
-  application = CC_APPLICATION (g_application_get_default ());
-  cc_shell_model_set_panel_visibility (cc_application_get_model (application),
-                                       "firmware-security",
-                                       visible ? CC_PANEL_VISIBLE : CC_PANEL_HIDDEN);
-  g_debug ("Firmware Security panel visible: %s as chassis was %s",
-           visible ? "yes" : "no",
-           chassis_type);
-}
-
-void
-cc_firmware_security_panel_static_init_func (void)
+update_page_visibility (CcFirmwareSecurityPage *self)
 {
   g_autoptr(GDBusConnection) connection = NULL;
   g_autoptr(GError) error = NULL;
   g_autoptr(GVariant) inner = NULL;
   g_autoptr(GVariant) variant = NULL;
+  gboolean visible = TRUE;
+  const gchar *chassis_type;
 
   connection = g_bus_get_sync (G_BUS_TYPE_SYSTEM, NULL, &error);
   if (!connection)
@@ -680,13 +659,22 @@ cc_firmware_security_panel_static_init_func (void)
       return;
     }
   g_variant_get (variant, "(v)", &inner);
-  update_panel_visibility (g_variant_get_string (inner, NULL));
+
+  chassis_type = g_variant_get_string (inner, NULL);
+
+  /* there's no point showing this */
+  if (g_strcmp0 (chassis_type, "vm") == 0 || g_strcmp0 (chassis_type, "") == 0)
+    visible = FALSE;
+  gtk_widget_set_visible (GTK_WIDGET (self), visible);
+  g_debug ("Firmware Security page visible: %s as chassis was %s",
+           visible ? "yes" : "no",
+           chassis_type);
 }
 
 static void
-cc_firmware_security_panel_finalize (GObject *object)
+cc_firmware_security_page_finalize (GObject *object)
 {
-  CcFirmwareSecurityPanel *self = CC_FIRMWARE_SECURITY_PANEL (object);
+  CcFirmwareSecurityPage *self = CC_FIRMWARE_SECURITY_PAGE (object);
 
   g_clear_pointer (&self->hsi1_dict, g_hash_table_unref);
   g_clear_pointer (&self->hsi2_dict, g_hash_table_unref);
@@ -698,31 +686,34 @@ cc_firmware_security_panel_finalize (GObject *object)
   g_clear_object (&self->bus_proxy);
   g_clear_object (&self->properties_bus_proxy);
 
-  G_OBJECT_CLASS (cc_firmware_security_panel_parent_class)->finalize (object);
+  g_cancellable_cancel (self->cancellable);
+  g_clear_object (&self->cancellable);
+
+  G_OBJECT_CLASS (cc_firmware_security_page_parent_class)->finalize (object);
 }
 
 
 static void
-cc_firmware_security_panel_class_init (CcFirmwareSecurityPanelClass *klass)
+cc_firmware_security_page_class_init (CcFirmwareSecurityPageClass *klass)
 {
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
-  object_class->finalize = cc_firmware_security_panel_finalize;
+  object_class->finalize = cc_firmware_security_page_finalize;
 
-  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/firmware-security/cc-firmware-security-panel.ui");
+  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/privacy/cc-firmware-security-page.ui");
 
-  gtk_widget_class_bind_template_child (widget_class, CcFirmwareSecurityPanel, firmware_security_log_pgroup);
-  gtk_widget_class_bind_template_child (widget_class, CcFirmwareSecurityPanel, firmware_security_log_stack);
-  gtk_widget_class_bind_template_child (widget_class, CcFirmwareSecurityPanel, hsi_button);
-  gtk_widget_class_bind_template_child (widget_class, CcFirmwareSecurityPanel, hsi_description);
-  gtk_widget_class_bind_template_child (widget_class, CcFirmwareSecurityPanel, hsi_icon);
-  gtk_widget_class_bind_template_child (widget_class, CcFirmwareSecurityPanel, hsi_label);
-  gtk_widget_class_bind_template_child (widget_class, CcFirmwareSecurityPanel, secure_boot_button);
-  gtk_widget_class_bind_template_child (widget_class, CcFirmwareSecurityPanel, secure_boot_description);
-  gtk_widget_class_bind_template_child (widget_class, CcFirmwareSecurityPanel, secure_boot_icon);
-  gtk_widget_class_bind_template_child (widget_class, CcFirmwareSecurityPanel, secure_boot_label);
-  gtk_widget_class_bind_template_child (widget_class, CcFirmwareSecurityPanel, panel_leaflet);
+  gtk_widget_class_bind_template_child (widget_class, CcFirmwareSecurityPage, firmware_security_log_pgroup);
+  gtk_widget_class_bind_template_child (widget_class, CcFirmwareSecurityPage, firmware_security_log_stack);
+  gtk_widget_class_bind_template_child (widget_class, CcFirmwareSecurityPage, hsi_button);
+  gtk_widget_class_bind_template_child (widget_class, CcFirmwareSecurityPage, hsi_description);
+  gtk_widget_class_bind_template_child (widget_class, CcFirmwareSecurityPage, hsi_icon);
+  gtk_widget_class_bind_template_child (widget_class, CcFirmwareSecurityPage, hsi_label);
+  gtk_widget_class_bind_template_child (widget_class, CcFirmwareSecurityPage, secure_boot_button);
+  gtk_widget_class_bind_template_child (widget_class, CcFirmwareSecurityPage, secure_boot_description);
+  gtk_widget_class_bind_template_child (widget_class, CcFirmwareSecurityPage, secure_boot_icon);
+  gtk_widget_class_bind_template_child (widget_class, CcFirmwareSecurityPage, secure_boot_label);
+  gtk_widget_class_bind_template_child (widget_class, CcFirmwareSecurityPage, panel_leaflet);
 
   gtk_widget_class_bind_template_callback (widget_class, on_hsi_button_clicked_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_secure_boot_button_clicked_cb);
@@ -730,11 +721,11 @@ cc_firmware_security_panel_class_init (CcFirmwareSecurityPanelClass *klass)
 }
 
 static void
-cc_firmware_security_panel_init (CcFirmwareSecurityPanel *self)
+cc_firmware_security_page_init (CcFirmwareSecurityPage *self)
 {
-  g_resources_register (cc_firmware_security_get_resource ());
-
   gtk_widget_init_template (GTK_WIDGET (self));
+
+  update_page_visibility (self);
 
   self->hsi1_dict = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, (GDestroyNotify) fu_security_attr_free);
   self->hsi2_dict = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, (GDestroyNotify) fu_security_attr_free);
@@ -742,8 +733,9 @@ cc_firmware_security_panel_init (CcFirmwareSecurityPanel *self)
   self->hsi4_dict = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, (GDestroyNotify) fu_security_attr_free);
   self->runtime_dict = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, (GDestroyNotify) fu_security_attr_free);
   self->event_log_output = g_string_new (NULL);
+  self->cancellable = g_cancellable_new ();
 
-  load_custom_css ("/org/gnome/control-center/firmware-security/security-level.css");
+  load_custom_css ("/org/gnome/control-center/privacy/security-level.css");
 
   g_dbus_proxy_new_for_bus (G_BUS_TYPE_SYSTEM,
                             G_DBUS_PROXY_FLAGS_NONE,
@@ -751,7 +743,7 @@ cc_firmware_security_panel_init (CcFirmwareSecurityPanel *self)
                             "org.freedesktop.fwupd",
                             "/",
                             "org.freedesktop.DBus.Properties",
-                            cc_panel_get_cancellable (CC_PANEL (self)),
+                            self->cancellable,
                             on_properties_bus_ready_cb,
                             self);
   g_dbus_proxy_new_for_bus (G_BUS_TYPE_SYSTEM,
@@ -760,7 +752,7 @@ cc_firmware_security_panel_init (CcFirmwareSecurityPanel *self)
                             "org.freedesktop.fwupd",
                             "/",
                             "org.freedesktop.fwupd",
-                            cc_panel_get_cancellable (CC_PANEL (self)),
+                            self->cancellable,
                             on_bus_ready_cb,
                             self);
 }

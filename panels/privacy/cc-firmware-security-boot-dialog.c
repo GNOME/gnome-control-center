@@ -44,7 +44,7 @@ cc_firmware_security_boot_dialog_class_init (CcFirmwareSecurityBootDialogClass *
 
   gtk_widget_class_add_binding_action (widget_class, GDK_KEY_Escape, 0, "window.close", NULL);
 
-  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/firmware-security/cc-firmware-security-boot-dialog.ui");
+  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/privacy/cc-firmware-security-boot-dialog.ui");
   gtk_widget_class_bind_template_child (widget_class, CcFirmwareSecurityBootDialog, secure_boot_title);
   gtk_widget_class_bind_template_child (widget_class, CcFirmwareSecurityBootDialog, secure_boot_icon);
   gtk_widget_class_bind_template_child (widget_class, CcFirmwareSecurityBootDialog, secure_boot_description);
@@ -54,7 +54,7 @@ static void
 cc_firmware_security_boot_dialog_init (CcFirmwareSecurityBootDialog *dialog)
 {
   gtk_widget_init_template (GTK_WIDGET (dialog));
-  load_custom_css ("/org/gnome/control-center/firmware-security/security-level.css");
+  load_custom_css ("/org/gnome/control-center/privacy/security-level.css");
 }
 
 GtkWidget *
