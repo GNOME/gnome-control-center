@@ -19,8 +19,6 @@
 
 #include <config.h>
 
-#include <shell/cc-panel.h>
-
 #include <glib/gi18n.h>
 #include <polkit/polkit.h>
 
@@ -32,12 +30,11 @@
 #include "bolt-names.h"
 #include "bolt-str.h"
 
-#include "cc-bolt-panel.h"
-#include "cc-thunderbolt-resources.h"
+#include "cc-bolt-page.h"
 
-struct _CcBoltPanel
+struct _CcBoltPage
 {
-  CcPanel             parent;
+  AdwNavigationPage   parent;
 
   BoltClient         *client;
 
@@ -75,6 +72,8 @@ struct _CcBoltPanel
 
   /* polkit integration */
   GPermission        *permission;
+
+  GCancellable       *cancellable;
 };
 
 /* initialization */
@@ -83,20 +82,20 @@ static void           bolt_client_ready (GObject      *source,
                                          gpointer      user_data);
 
 /* panel functions */
-static void                cc_bolt_panel_set_no_thunderbolt (CcBoltPanel *self,
-                                                             const char  *custom_msg);
+static void                cc_bolt_page_set_no_thunderbolt (CcBoltPage *self,
+                                                             const char *custom_msg);
 
-static void                cc_bolt_panel_name_owner_changed (CcBoltPanel *self);
+static void                cc_bolt_page_name_owner_changed (CcBoltPage *self);
 
-static CcBoltDeviceEntry * cc_bolt_panel_add_device (CcBoltPanel *self,
-                                                     BoltDevice  *dev);
+static CcBoltDeviceEntry * cc_bolt_page_add_device (CcBoltPage *self,
+                                                     BoltDevice *dev);
 
-static void                cc_bolt_panel_del_device_entry (CcBoltPanel       *self,
+static void                cc_bolt_page_del_device_entry (CcBoltPage        *self,
                                                            CcBoltDeviceEntry *entry);
 
-static void                cc_bolt_panel_authmode_sync (CcBoltPanel *self);
+static void                cc_bolt_page_authmode_sync (CcBoltPage *self);
 
-static void                cc_panel_list_box_migrate (CcBoltPanel       *self,
+static void                cc_panel_list_box_migrate (CcBoltPage        *self,
                                                       GtkListBox        *from,
                                                       GtkListBox        *to,
                                                       CcBoltDeviceEntry *entry);
@@ -106,31 +105,31 @@ static void     on_bolt_name_owner_changed_cb (GObject    *object,
                                                GParamSpec *pspec,
                                                gpointer    user_data);
 
-static void     on_bolt_device_added_cb (BoltClient  *cli,
-                                         const char  *path,
-                                         CcBoltPanel *self);
+static void     on_bolt_device_added_cb (BoltClient *cli,
+                                         const char *path,
+                                         CcBoltPage *self);
 
-static void     on_bolt_device_removed_cb (BoltClient  *cli,
-                                           const char  *opath,
-                                           CcBoltPanel *self);
+static void     on_bolt_device_removed_cb (BoltClient *cli,
+                                           const char *opath,
+                                           CcBoltPage *self);
 
 static void     on_bolt_notify_authmode_cb (GObject    *gobject,
                                             GParamSpec *pspec,
                                             gpointer    user_data);
 
 /* panel signals */
-static gboolean on_authmode_state_set_cb (CcBoltPanel *self,
-                                          gboolean     state,
-                                          GtkSwitch   *toggle);
+static gboolean on_authmode_state_set_cb (CcBoltPage *self,
+                                          gboolean    state,
+                                          GtkSwitch  *toggle);
 
-static void     on_device_entry_row_activated_cb (CcBoltPanel   *self,
+static void     on_device_entry_row_activated_cb (CcBoltPage    *self,
                                                   GtkListBoxRow *row);
 
 static void     on_device_entry_status_changed_cb (CcBoltDeviceEntry *entry,
                                                    BoltStatus         new_status,
-                                                   CcBoltPanel       *self);
+                                                   CcBoltPage        *self);
 
-static void     on_notification_button_clicked_cb (CcBoltPanel *self);
+static void     on_notification_button_clicked_cb (CcBoltPage *self);
 
 
 /* polkit */
@@ -140,22 +139,9 @@ static void      on_permission_ready (GObject      *source_object,
 
 static void      on_permission_notify_cb (GPermission *permission,
                                           GParamSpec  *pspec,
-                                          CcBoltPanel *self);
+                                          CcBoltPage  *self);
 
-CC_PANEL_REGISTER (CcBoltPanel, cc_bolt_panel);
-
-/* Static init function */
-static void
-set_panel_visibility (gboolean visible)
-{
-  CcApplication *application;
-
-  application = CC_APPLICATION (g_application_get_default ());
-  cc_shell_model_set_panel_visibility (cc_application_get_model (application),
-                                       "thunderbolt",
-                                       visible ? CC_PANEL_VISIBLE : CC_PANEL_VISIBLE_IN_SEARCH);
-  g_debug ("Thunderbolt panel visible: %s", visible ? "yes" : "no");
-}
+G_DEFINE_TYPE (CcBoltPage, cc_bolt_page, ADW_TYPE_NAVIGATION_PAGE)
 
 static void
 update_visibility (BoltClient  *client,
@@ -164,6 +150,9 @@ update_visibility (BoltClient  *client,
 {
   g_autoptr(GPtrArray) devices = NULL;
   gboolean visible = FALSE;
+  CcBoltPage *self;
+
+  self = CC_BOLT_PAGE (user_data);
 
   if (client)
     {
@@ -172,7 +161,7 @@ update_visibility (BoltClient  *client,
         visible = devices->len > 0;
     }
 
-  set_panel_visibility (visible);
+  gtk_widget_set_visible (GTK_WIDGET (self), visible);
 }
 
 static void
@@ -181,31 +170,28 @@ on_visibility_client_ready (GObject      *source,
                             gpointer      user_data)
 {
   BoltClient *client;
+  CcBoltPage *self;
+
+  self = CC_BOLT_PAGE (user_data);
 
   client = bolt_client_new_finish (res, NULL);
   if (client == NULL)
     {
-      set_panel_visibility (FALSE);
+      gtk_widget_set_visible (GTK_WIDGET (self), FALSE);
       return;
     }
 
   g_signal_connect_object (client,
                            "device-added",
                            G_CALLBACK (update_visibility),
-                           NULL,
+                           self,
                            0);
   g_signal_connect_object (client,
                            "device-removed",
                            G_CALLBACK (update_visibility),
-                           NULL,
+                           self,
                            0);
-  update_visibility (client, NULL, NULL);
-}
-
-void
-cc_thunderbolt_panel_static_init_func (void)
-{
-  bolt_client_new_async (NULL, on_visibility_client_ready, NULL);
+  update_visibility (client, NULL, self);
 }
 
 static void
@@ -214,10 +200,10 @@ bolt_client_ready (GObject      *source,
                    gpointer      user_data)
 {
   g_autoptr(GError) err = NULL;
-  g_autoptr(CcBoltPanel) self = NULL;
+  g_autoptr(CcBoltPage) self = NULL;
   BoltClient *client;
 
-  self = CC_BOLT_PANEL (user_data);
+  self = CC_BOLT_PAGE (user_data);
   client = bolt_client_new_finish (res, &err);
 
   if (client == NULL)
@@ -275,7 +261,7 @@ bolt_client_ready (GObject      *source,
 
   cc_bolt_device_dialog_set_client (self->device_dialog, client);
 
-  cc_bolt_panel_authmode_sync (self);
+  cc_bolt_page_authmode_sync (self);
 
   g_object_bind_property (self->authmode_switch,
                           "active",
@@ -290,7 +276,7 @@ bolt_client_ready (GObject      *source,
                           G_BINDING_DEFAULT | G_BINDING_SYNC_CREATE);
 
   gtk_stack_set_visible_child_name (self->devices_stack, "no-devices");
-  cc_bolt_panel_name_owner_changed (self);
+  cc_bolt_page_name_owner_changed (self);
 }
 
 static gboolean
@@ -313,8 +299,8 @@ devices_table_transfer_entry (GHashTable   *from,
 }
 
 static void
-devices_table_clear_entries (GHashTable  *table,
-                             CcBoltPanel *self)
+devices_table_clear_entries (GHashTable *table,
+                             CcBoltPage *self)
 {
   GHashTableIter iter;
   gpointer key, value;
@@ -324,20 +310,20 @@ devices_table_clear_entries (GHashTable  *table,
     {
       CcBoltDeviceEntry *entry = value;
 
-      cc_bolt_panel_del_device_entry (self, entry);
+      cc_bolt_page_del_device_entry (self, entry);
       g_hash_table_iter_remove (&iter);
     }
 }
 
 static void
-devices_table_synchronize (CcBoltPanel *self)
+devices_table_synchronize (CcBoltPage *self)
 {
   g_autoptr(GHashTable) old = NULL;
   g_autoptr(GPtrArray) devices = NULL;
   g_autoptr(GError) err = NULL;
   guint i;
 
-  devices = bolt_client_list_devices (self->client, cc_panel_get_cancellable (CC_PANEL (self)), &err);
+  devices = bolt_client_list_devices (self->client, self->cancellable, &err);
 
   if (!devices)
     {
@@ -360,7 +346,7 @@ devices_table_synchronize (CcBoltPanel *self)
       if (found)
         continue;
 
-      cc_bolt_panel_add_device (self, dev);
+      cc_bolt_page_add_device (self, dev);
     }
 
   devices_table_clear_entries (old, self);
@@ -382,8 +368,8 @@ list_box_sync_visible (GtkListBox *listbox)
 }
 
 static GtkWidget *
-cc_bolt_panel_box_for_listbox (CcBoltPanel *self,
-                               GtkListBox  *lstbox)
+cc_bolt_page_box_for_listbox (CcBoltPage *self,
+                               GtkListBox *lstbox)
 {
   if ((gpointer) lstbox == self->devices_list)
     return GTK_WIDGET (self->devices_box);
@@ -394,8 +380,8 @@ cc_bolt_panel_box_for_listbox (CcBoltPanel *self,
 }
 
 static CcBoltDeviceEntry *
-cc_bolt_panel_add_device (CcBoltPanel *self,
-                          BoltDevice  *dev)
+cc_bolt_page_add_device (CcBoltPage *self,
+                          BoltDevice *dev)
 {
   CcBoltDeviceEntry *entry;
   BoltDeviceType type;
@@ -439,7 +425,7 @@ cc_bolt_panel_add_device (CcBoltPanel *self,
 }
 
 static void
-cc_bolt_panel_del_device_entry (CcBoltPanel       *self,
+cc_bolt_page_del_device_entry (CcBoltPage        *self,
                                 CcBoltDeviceEntry *entry)
 {
   BoltDevice *dev;
@@ -457,7 +443,7 @@ cc_bolt_panel_del_device_entry (CcBoltPanel       *self,
   p = gtk_widget_get_parent (GTK_WIDGET (entry));
   gtk_list_box_remove (GTK_LIST_BOX (p), GTK_WIDGET (entry));
 
-  box = cc_bolt_panel_box_for_listbox (self, GTK_LIST_BOX (p));
+  box = cc_bolt_page_box_for_listbox (self, GTK_LIST_BOX (p));
   show = list_box_sync_visible (GTK_LIST_BOX (p));
   gtk_widget_set_visible (box, show);
 
@@ -469,7 +455,7 @@ cc_bolt_panel_del_device_entry (CcBoltPanel       *self,
 }
 
 static void
-cc_bolt_panel_authmode_sync (CcBoltPanel *self)
+cc_bolt_page_authmode_sync (CcBoltPage *self)
 {
   BoltClient *client = self->client;
   BoltAuthMode mode;
@@ -491,7 +477,7 @@ cc_bolt_panel_authmode_sync (CcBoltPanel *self)
 }
 
 static void
-cc_panel_list_box_migrate (CcBoltPanel       *self,
+cc_panel_list_box_migrate (CcBoltPage        *self,
                            GtkListBox        *from,
                            GtkListBox        *to,
                            CcBoltDeviceEntry *entry)
@@ -507,8 +493,8 @@ cc_panel_list_box_migrate (CcBoltPanel       *self,
   gtk_list_box_append (to, target);
   gtk_widget_set_visible (GTK_WIDGET (to), TRUE);
 
-  from_box = cc_bolt_panel_box_for_listbox (self, from);
-  to_box = cc_bolt_panel_box_for_listbox (self, to);
+  from_box = cc_bolt_page_box_for_listbox (self, from);
+  to_box = cc_bolt_page_box_for_listbox (self, to);
 
   show = list_box_sync_visible (from);
   gtk_widget_set_visible (from_box, show);
@@ -517,8 +503,8 @@ cc_panel_list_box_migrate (CcBoltPanel       *self,
 
 /* bolt client signals */
 static void
-cc_bolt_panel_set_no_thunderbolt (CcBoltPanel *self,
-                                  const char  *msg)
+cc_bolt_page_set_no_thunderbolt (CcBoltPage *self,
+                                  const char *msg)
 {
   if (!msg)
     {
@@ -533,7 +519,7 @@ cc_bolt_panel_set_no_thunderbolt (CcBoltPanel *self,
 }
 
 static void
-cc_bolt_panel_name_owner_changed (CcBoltPanel *self)
+cc_bolt_page_name_owner_changed (CcBoltPage *self)
 {
   g_autofree char *name_owner = NULL;
   BoltClient *client = self->client;
@@ -545,7 +531,7 @@ cc_bolt_panel_name_owner_changed (CcBoltPanel *self)
 
   if (name_owner == NULL)
     {
-      cc_bolt_panel_set_no_thunderbolt (self, NULL);
+      cc_bolt_page_set_no_thunderbolt (self, NULL);
       devices_table_clear_entries (self->devices, self);
       gtk_widget_set_visible (GTK_WIDGET (self->headerbar_box), FALSE);
       return;
@@ -577,7 +563,7 @@ cc_bolt_panel_name_owner_changed (CcBoltPanel *self)
   if (notb)
     {
       /* security level is unknown or un-handled */
-      cc_bolt_panel_set_no_thunderbolt (self, text);
+      cc_bolt_page_set_no_thunderbolt (self, text);
       return;
     }
 
@@ -589,7 +575,7 @@ cc_bolt_panel_name_owner_changed (CcBoltPanel *self)
     {
       polkit_permission_new ("org.freedesktop.bolt.manage",
                              NULL,
-                             cc_panel_get_cancellable (CC_PANEL (self)),
+                             self->cancellable,
                              on_permission_ready,
                              g_object_ref (self));
     }
@@ -603,13 +589,13 @@ on_bolt_name_owner_changed_cb (GObject    *object,
                                GParamSpec *pspec,
                                gpointer    user_data)
 {
-  cc_bolt_panel_name_owner_changed (CC_BOLT_PANEL (user_data));
+  cc_bolt_page_name_owner_changed (CC_BOLT_PAGE (user_data));
 }
 
 static void
-on_bolt_device_added_cb (BoltClient  *cli,
-                         const char  *path,
-                         CcBoltPanel *self)
+on_bolt_device_added_cb (BoltClient *cli,
+                         const char *path,
+                         CcBoltPage *self)
 {
   g_autoptr(GError) err = NULL;
   GDBusConnection *bus;
@@ -622,7 +608,7 @@ on_bolt_device_added_cb (BoltClient  *cli,
     return;
 
   bus = g_dbus_proxy_get_connection (G_DBUS_PROXY (self->client));
-  dev = bolt_device_new_for_object_path (bus, path, cc_panel_get_cancellable (CC_PANEL (self)), &err);
+  dev = bolt_device_new_for_object_path (bus, path, self->cancellable, &err);
 
   if (!dev)
     {
@@ -630,13 +616,13 @@ on_bolt_device_added_cb (BoltClient  *cli,
       return;
     }
 
-  cc_bolt_panel_add_device (self, dev);
+  cc_bolt_page_add_device (self, dev);
 }
 
 static void
-on_bolt_device_removed_cb (BoltClient  *cli,
-                           const char  *path,
-                           CcBoltPanel *self)
+on_bolt_device_removed_cb (BoltClient *cli,
+                           const char *path,
+                           CcBoltPage *self)
 {
   CcBoltDeviceEntry *entry;
 
@@ -645,7 +631,7 @@ on_bolt_device_removed_cb (BoltClient  *cli,
   if (!entry)
     return;
 
-  cc_bolt_panel_del_device_entry (self, entry);
+  cc_bolt_page_del_device_entry (self, entry);
   g_hash_table_remove (self->devices, path);
 }
 
@@ -654,7 +640,7 @@ on_bolt_notify_authmode_cb (GObject    *gobject,
                             GParamSpec *pspec,
                             gpointer    user_data)
 {
-  cc_bolt_panel_authmode_sync (CC_BOLT_PANEL (user_data));
+  cc_bolt_page_authmode_sync (CC_BOLT_PAGE (user_data));
 }
 
 /* panel signals */
@@ -666,7 +652,7 @@ on_authmode_ready (GObject      *source_object,
 {
   g_autoptr(GError) error = NULL;
   BoltClient *client = BOLT_CLIENT (source_object);
-  CcBoltPanel *self;
+  CcBoltPage *self;
   gboolean ok;
 
   ok = bolt_client_set_authmode_finish (client, res, &error);
@@ -675,7 +661,7 @@ on_authmode_ready (GObject      *source_object,
       BoltAuthMode mode;
       gboolean enabled;
 
-      self = CC_BOLT_PANEL (user_data);
+      self = CC_BOLT_PAGE (user_data);
       mode = bolt_client_get_authmode (client);
       enabled = (mode & BOLT_AUTH_ENABLED) != 0;
       gtk_switch_set_state (self->authmode_switch, enabled);
@@ -689,13 +675,13 @@ on_authmode_ready (GObject      *source_object,
       if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
         return;
 
-      self = CC_BOLT_PANEL (user_data);
+      self = CC_BOLT_PAGE (user_data);
       text = g_strdup_printf (_("Error switching direct mode: %s"), error->message);
       gtk_label_set_markup (self->notification_label, text);
       gtk_revealer_set_reveal_child (self->notification_revealer, TRUE);
 
       /* make sure we are reflecting the correct state */
-      cc_bolt_panel_authmode_sync (self);
+      cc_bolt_page_authmode_sync (self);
     }
 
   gtk_spinner_stop (self->authmode_spinner);
@@ -703,9 +689,9 @@ on_authmode_ready (GObject      *source_object,
 }
 
 static gboolean
-on_authmode_state_set_cb (CcBoltPanel *self,
-                          gboolean     enable,
-                          GtkSwitch   *toggle)
+on_authmode_state_set_cb (CcBoltPage *self,
+                          gboolean    enable,
+                          GtkSwitch  *toggle)
 {
   BoltClient *client = self->client;
   BoltAuthMode mode;
@@ -726,7 +712,7 @@ on_authmode_state_set_cb (CcBoltPanel *self,
 }
 
 static void
-on_device_entry_row_activated_cb (CcBoltPanel   *self,
+on_device_entry_row_activated_cb (CcBoltPage    *self,
                                   GtkListBoxRow *row)
 {
   g_autoptr(GPtrArray) parents = NULL;
@@ -777,7 +763,7 @@ on_device_entry_row_activated_cb (CcBoltPanel   *self,
 static void
 on_device_entry_status_changed_cb (CcBoltDeviceEntry *entry,
                                    BoltStatus         new_status,
-                                   CcBoltPanel       *self)
+                                   CcBoltPage        *self)
 {
   GtkListBox *from = NULL;
   GtkListBox *to = NULL;
@@ -815,7 +801,7 @@ on_device_entry_status_changed_cb (CcBoltDeviceEntry *entry,
 
 
 static void
-on_notification_button_clicked_cb (CcBoltPanel *self)
+on_notification_button_clicked_cb (CcBoltPage *self)
 {
   gtk_revealer_set_reveal_child (self->notification_revealer, FALSE);
 }
@@ -827,7 +813,7 @@ on_permission_ready (GObject      *source_object,
                      GAsyncResult *res,
                      gpointer      user_data)
 {
-  g_autoptr(CcBoltPanel) self = user_data;
+  g_autoptr(CcBoltPage) self = user_data;
   g_autoptr(GError) err = NULL;
   GPermission *permission;
   gboolean is_allowed;
@@ -861,7 +847,7 @@ on_permission_ready (GObject      *source_object,
 static void
 on_permission_notify_cb (GPermission *permission,
                          GParamSpec  *pspec,
-                         CcBoltPanel *self)
+                         CcBoltPage  *self)
 {
   gboolean is_allowed = g_permission_get_allowed (permission);
 
@@ -937,69 +923,70 @@ device_entries_sort_by_syspath_cb (GtkListBoxRow *a_row,
 /* GObject overrides */
 
 static void
-cc_bolt_panel_finalize (GObject *object)
+cc_bolt_page_finalize (GObject *object)
 {
-  CcBoltPanel *self = CC_BOLT_PANEL (object);
+  CcBoltPage *self = CC_BOLT_PAGE (object);
 
   g_clear_object (&self->client);
   g_clear_pointer (&self->devices, g_hash_table_unref);
   g_clear_object (&self->permission);
 
-  G_OBJECT_CLASS (cc_bolt_panel_parent_class)->finalize (object);
+  g_cancellable_cancel (self->cancellable);
+  g_clear_object (&self->cancellable);
+
+  G_OBJECT_CLASS (cc_bolt_page_parent_class)->finalize (object);
 }
 
 static void
-cc_bolt_panel_dispose (GObject *object)
+cc_bolt_page_dispose (GObject *object)
 {
-  CcBoltPanel *self = CC_BOLT_PANEL (object);
+  CcBoltPage *self = CC_BOLT_PAGE (object);
 
   /* Must be destroyed in dispose, not finalize. */
   cc_bolt_device_dialog_set_device (self->device_dialog, NULL, NULL);
   g_clear_pointer ((GtkWindow **) &self->device_dialog, gtk_window_destroy);
 
-  G_OBJECT_CLASS (cc_bolt_panel_parent_class)->dispose (object);
+  G_OBJECT_CLASS (cc_bolt_page_parent_class)->dispose (object);
 }
 
 static void
-cc_bolt_panel_constructed (GObject *object)
+cc_bolt_page_constructed (GObject *object)
 {
-  CcBoltPanel *self = CC_BOLT_PANEL (object);
+  CcBoltPage *self = CC_BOLT_PAGE (object);
   GtkWindow *parent;
-  CcShell *shell;
 
-  G_OBJECT_CLASS (cc_bolt_panel_parent_class)->constructed (object);
+  G_OBJECT_CLASS (cc_bolt_page_parent_class)->constructed (object);
 
-  shell = cc_panel_get_shell (CC_PANEL (self));
-  parent = GTK_WINDOW (cc_shell_get_toplevel (shell));
+  parent = GTK_WINDOW (gtk_widget_get_root (GTK_WIDGET (self)));
   gtk_window_set_transient_for (GTK_WINDOW (self->device_dialog), parent);
 }
 
 static void
-cc_bolt_panel_class_init (CcBoltPanelClass *klass)
+cc_bolt_page_class_init (CcBoltPageClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
-  object_class->constructed = cc_bolt_panel_constructed;
-  object_class->dispose = cc_bolt_panel_dispose;
-  object_class->finalize = cc_bolt_panel_finalize;
+  object_class->constructed = cc_bolt_page_constructed;
+  object_class->dispose = cc_bolt_page_dispose;
+  object_class->finalize = cc_bolt_page_finalize;
 
-  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/thunderbolt/cc-bolt-panel.ui");
+  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/privacy/cc-bolt-page.ui");
 
-  gtk_widget_class_bind_template_child (widget_class, CcBoltPanel, authmode_spinner);
-  gtk_widget_class_bind_template_child (widget_class, CcBoltPanel, authmode_switch);
-  gtk_widget_class_bind_template_child (widget_class, CcBoltPanel, container);
-  gtk_widget_class_bind_template_child (widget_class, CcBoltPanel, devices_list);
-  gtk_widget_class_bind_template_child (widget_class, CcBoltPanel, devices_box);
-  gtk_widget_class_bind_template_child (widget_class, CcBoltPanel, devices_stack);
-  gtk_widget_class_bind_template_child (widget_class, CcBoltPanel, direct_access_row);
-  gtk_widget_class_bind_template_child (widget_class, CcBoltPanel, headerbar_box);
-  gtk_widget_class_bind_template_child (widget_class, CcBoltPanel, lock_button);
-  gtk_widget_class_bind_template_child (widget_class, CcBoltPanel, notb_page);
-  gtk_widget_class_bind_template_child (widget_class, CcBoltPanel, notification_label);
-  gtk_widget_class_bind_template_child (widget_class, CcBoltPanel, notification_revealer);
-  gtk_widget_class_bind_template_child (widget_class, CcBoltPanel, pending_box);
-  gtk_widget_class_bind_template_child (widget_class, CcBoltPanel, pending_list);
+  gtk_widget_class_bind_template_child (widget_class, CcBoltPage, authmode_spinner);
+  gtk_widget_class_bind_template_child (widget_class, CcBoltPage, authmode_switch);
+  gtk_widget_class_bind_template_child (widget_class, CcBoltPage, container);
+  gtk_widget_class_bind_template_child (widget_class, CcBoltPage, devices_list);
+  gtk_widget_class_bind_template_child (widget_class, CcBoltPage, devices_box);
+  gtk_widget_class_bind_template_child (widget_class, CcBoltPage, devices_stack);
+  gtk_widget_class_bind_template_child (widget_class, CcBoltPage, direct_access_row);
+  gtk_widget_class_bind_template_child (widget_class, CcBoltPage, headerbar_box);
+  gtk_widget_class_bind_template_child (widget_class, CcBoltPage, lock_button);
+  gtk_widget_class_bind_template_child (widget_class, CcBoltPage, notb_page);
+  gtk_widget_class_bind_template_child (widget_class, CcBoltPage, notification_label);
+  gtk_widget_class_bind_template_child (widget_class, CcBoltPage, notification_revealer);
+  gtk_widget_class_bind_template_child (widget_class, CcBoltPage, pending_box);
+  gtk_widget_class_bind_template_child (widget_class, CcBoltPage, pending_list);
 
   gtk_widget_class_bind_template_callback (widget_class, on_notification_button_clicked_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_authmode_state_set_cb);
@@ -1007,11 +994,11 @@ cc_bolt_panel_class_init (CcBoltPanelClass *klass)
 }
 
 static void
-cc_bolt_panel_init (CcBoltPanel *self)
+cc_bolt_page_init (CcBoltPage *self)
 {
-  g_resources_register (cc_thunderbolt_get_resource ());
-
   gtk_widget_init_template (GTK_WIDGET (self));
+
+  bolt_client_new_async (NULL, on_visibility_client_ready, self);
 
   gtk_stack_set_visible_child_name (self->container, "loading");
 
@@ -1029,5 +1016,13 @@ cc_bolt_panel_init (CcBoltPanel *self)
 
   self->device_dialog = cc_bolt_device_dialog_new ();
 
-  bolt_client_new_async (cc_panel_get_cancellable (CC_PANEL (self)), bolt_client_ready, g_object_ref (self));
+  self->cancellable = g_cancellable_new ();
+
+  bolt_client_new_async (self->cancellable, bolt_client_ready, g_object_ref (self));
+}
+
+CcBoltPage *
+cc_bolt_page_new (void)
+{
+  return g_object_new (CC_TYPE_BOLT_PAGE, NULL);
 }

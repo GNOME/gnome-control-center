@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
-  <template class="CcBoltPanel" parent="CcPanel">
-
+  <template class="CcBoltPage" parent="AdwNavigationPage">
+    <property name="title" translatable="yes">Thunderbolt</property>
+    <property name="tag">bolt-page</property>
+    <property name="child">
+      <object class="AdwToolbarView">
+        <property name="top-bar-style">raised</property>
+        <child type="top">
+          <object class="AdwHeaderBar">
     <!-- Headerbar entries -->
-    <child type="titlebar-end">
+    <child type="end">
       <object class="GtkBox" id="headerbar_box">
         <property name="visible">False</property>
         <property name="spacing">6</property>
@@ -14,8 +20,10 @@
         </child>
       </object>
     </child>
+          </object>
+        </child>
 
-    <child type="content">
+        <property name="content">
       <object class="GtkOverlay">
         <child type="overlay">
           <object class="GtkRevealer" id="notification_revealer">
@@ -45,7 +53,7 @@
                         </style>
                         <signal name="clicked"
                                 handler="on_notification_button_clicked_cb"
-                                object="CcBoltPanel"
+                                object="CcBoltPage"
                                 swapped="yes" />
                       </object>
                     </child>
@@ -141,7 +149,7 @@
                                     <property name="active">True</property>
                                     <signal name="state-set"
                                             handler="on_authmode_state_set_cb"
-                                            object="CcBoltPanel"
+                                            object="CcBoltPage"
                                             swapped="yes" />
                                   </object>
                                 </child>
@@ -218,7 +226,7 @@
                                                 <property name="can_focus">True</property>
                                                 <signal name="row-activated"
                                                         handler="on_device_entry_row_activated_cb"
-                                                        object="CcBoltPanel"
+                                                        object="CcBoltPage"
                                                         swapped="yes" />
                                               </object>
                                             </child>
@@ -240,7 +248,7 @@
                                             <property name="selection-mode">none</property>
                                             <signal name="row-activated"
                                                     handler="on_device_entry_row_activated_cb"
-                                                    object="CcBoltPanel"
+                                                    object="CcBoltPage"
                                                     swapped="yes" />
                                                 <style>
                                                   <class name="boxed-list"/>
@@ -308,7 +316,9 @@
 
         <!-- End of overlay -->
       </object>
-    </child>
+        </property>
+      </object>
+    </property>
   </template>
 
 </interface>

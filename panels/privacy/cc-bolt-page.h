@@ -19,14 +19,14 @@
 
 #pragma once
 
-#include <glib-object.h>
+#include <adwaita.h>
 
 G_BEGIN_DECLS
 
-#define CC_TYPE_BOLT_PANEL cc_bolt_panel_get_type ()
+#define CC_TYPE_BOLT_PAGE cc_bolt_page_get_type ()
 
-G_DECLARE_FINAL_TYPE (CcBoltPanel, cc_bolt_panel, CC, BOLT_PANEL, CcPanel);
+G_DECLARE_FINAL_TYPE (CcBoltPage, cc_bolt_page, CC, BOLT_PAGE, AdwNavigationPage);
 
-void cc_thunderbolt_panel_static_init_func (void);
+CcBoltPage *cc_bolt_page_new (void);
 
 G_END_DECLS

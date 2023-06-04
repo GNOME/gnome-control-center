@@ -23,11 +23,9 @@
 
 #include "cc-bolt-device-entry.h"
 
-#include "cc-thunderbolt-resources.h"
-
 #include <glib/gi18n.h>
 
-#define RESOURCE_UI "/org/gnome/control-center/thunderbolt/cc-bolt-device-entry.ui"
+#define RESOURCE_UI "/org/gnome/control-center/privacy/cc-bolt-device-entry.ui"
 
 struct _CcBoltDeviceEntry
 {
@@ -185,7 +183,6 @@ cc_bolt_device_entry_class_init (CcBoltDeviceEntryClass *klass)
 static void
 cc_bolt_device_entry_init (CcBoltDeviceEntry *entry)
 {
-  g_resources_register (cc_thunderbolt_get_resource ());
   gtk_widget_init_template (GTK_WIDGET (entry));
 }
 

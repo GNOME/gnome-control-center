@@ -26,8 +26,6 @@
 #include "bolt-error.h"
 #include "bolt-time.h"
 
-#include "cc-thunderbolt-resources.h"
-
 #include "cc-bolt-device-dialog.h"
 #include "cc-bolt-device-entry.h"
 
@@ -62,7 +60,7 @@ static void     on_connect_button_clicked_cb (CcBoltDeviceDialog *dialog);
 
 G_DEFINE_TYPE (CcBoltDeviceDialog, cc_bolt_device_dialog, ADW_TYPE_WINDOW);
 
-#define RESOURCE_UI "/org/gnome/control-center/thunderbolt/cc-bolt-device-dialog.ui"
+#define RESOURCE_UI "/org/gnome/control-center/privacy/cc-bolt-device-dialog.ui"
 
 static const char *
 status_to_string_for_ui (BoltDevice *dev)
@@ -381,7 +379,6 @@ cc_bolt_device_dialog_class_init (CcBoltDeviceDialogClass *klass)
 static void
 cc_bolt_device_dialog_init (CcBoltDeviceDialog *dialog)
 {
-  g_resources_register (cc_thunderbolt_get_resource ());
   gtk_widget_init_template (GTK_WIDGET (dialog));
 }
 

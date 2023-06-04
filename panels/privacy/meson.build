@@ -25,6 +25,33 @@ sources = files(
   'cc-usage-page.c',
 )
 
+if host_is_linux_not_s390
+  sources += files(
+    'bolt-client.c',
+    'bolt-device.c',
+    'bolt-enums.c',
+    'bolt-error.c',
+    'bolt-names.c',
+    'bolt-proxy.c',
+    'bolt-str.c',
+    'bolt-time.c',
+    'cc-bolt-device-dialog.c',
+    'cc-bolt-device-entry.c',
+    'cc-bolt-page.c',
+  )
+
+  enum_headers = [
+    'bolt-enums.h',
+    'bolt-error.h'
+  ]
+
+  sources += gnome.mkenums_simple(
+    'bolt-enum-types',
+    sources: enum_headers,
+  )
+endif
+
+
 sources += gnome.mkenums_simple(
   'cc-screen-page-enums',
   sources: ['cc-screen-page.h'],
@@ -48,6 +75,11 @@ cflags += [
 
 deps = common_deps + [
   dependency('libgtop-2.0'),
+]
+
+deps = deps + [
+  polkit_gobject_dep,
+  m_dep,
 ]
 
 panels_libs += static_library(

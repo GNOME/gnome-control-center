@@ -18,11 +18,17 @@
  */
 
 
+#include <config.h>
+
 #include "cc-privacy-panel.h"
 
+#ifdef BUILD_THUNDERBOLT
+#include "cc-bolt-page.h"
+#endif
 #include "cc-camera-page.h"
 #include "cc-diagnostics-page.h"
 #include "cc-firmware-security-page.h"
+#include "cc-list-row.h"
 #include "cc-location-page.h"
 #include "cc-microphone-page.h"
 #include "cc-privacy-resources.h"
@@ -34,6 +40,7 @@ struct _CcPrivacyPanel
   CcPanel            parent_instance;
 
   AdwNavigationView *navigation;
+  CcListRow         *bolt_row;
 };
 
 CC_PANEL_REGISTER (CcPrivacyPanel, cc_privacy_panel)
@@ -65,6 +72,7 @@ cc_privacy_panel_class_init (CcPrivacyPanelClass *klass)
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/privacy/cc-privacy-panel.ui");
 
   gtk_widget_class_bind_template_child (widget_class, CcPrivacyPanel, navigation);
+  gtk_widget_class_bind_template_child (widget_class, CcPrivacyPanel, bolt_row);
 
   g_type_ensure (CC_TYPE_CAMERA_PAGE);
   g_type_ensure (CC_TYPE_DIAGNOSTICS_PAGE);
@@ -81,4 +89,13 @@ cc_privacy_panel_init (CcPrivacyPanel *self)
   g_resources_register (cc_privacy_get_resource ());
 
   gtk_widget_init_template (GTK_WIDGET (self));
+
+#ifdef BUILD_THUNDERBOLT
+  CcBoltPage* bolt_page = cc_bolt_page_new ();
+
+  adw_navigation_view_add (self->navigation, ADW_NAVIGATION_PAGE (bolt_page));
+
+  g_object_bind_property (bolt_page, "visible",
+                          self->bolt_row, "visible", G_BINDING_SYNC_CREATE);
+#endif
 }
