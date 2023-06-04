@@ -18,11 +18,9 @@
  * Author: Matthias Clasen <mclasen@redhat.com>
  */
 
-#include "cc-location-panel.h"
-#include "cc-location-resources.h"
+#include "cc-location-page.h"
 #include "cc-util.h"
 
-#include <adwaita.h>
 #include <gio/gdesktopappinfo.h>
 #include <glib/gi18n.h>
 
@@ -30,14 +28,15 @@
 #define APP_PERMISSIONS_TABLE "location"
 #define APP_PERMISSIONS_ID "location"
 
-struct _CcLocationPanel
+struct _CcLocationPage
 {
-  CcPanel       parent_instance;
+  AdwNavigationPage parent_instance;
 
   GtkListBox   *location_apps_list_box;
   AdwSwitchRow *location_row;
 
   GSettings    *location_settings;
+  GCancellable *cancellable;
 
   GDBusProxy   *perm_store;
   GVariant     *location_apps_perms;
@@ -47,15 +46,15 @@ struct _CcLocationPanel
   GtkSizeGroup *location_icon_size_group;
 };
 
-CC_PANEL_REGISTER (CcLocationPanel, cc_location_panel)
+G_DEFINE_TYPE (CcLocationPage, cc_location_page, ADW_TYPE_NAVIGATION_PAGE)
 
 typedef struct
 {
-  CcLocationPanel *self;
-  GtkWidget       *widget;
-  gchar           *app_id;
-  gboolean         changing_state;
-  gboolean         pending_state;
+  CcLocationPage *self;
+  GtkWidget      *widget;
+  gchar          *app_id;
+  gboolean        changing_state;
+  gboolean        pending_state;
 } LocationAppStateData;
 
 static void
@@ -96,7 +95,7 @@ on_location_app_state_set (GtkSwitch *widget,
                            gpointer   user_data)
 {
   LocationAppStateData *data = (LocationAppStateData *) user_data;
-  CcLocationPanel *self = data->self;
+  CcLocationPage *self = data->self;
   GVariant *params;
   GVariantIter iter;
   const gchar *key;
@@ -138,7 +137,7 @@ on_location_app_state_set (GtkSwitch *widget,
                      params,
                      G_DBUS_CALL_FLAGS_NONE,
                      -1,
-                     cc_panel_get_cancellable (CC_PANEL (self)),
+                     self->cancellable,
                      on_perm_store_set_done,
                      data);
 
@@ -165,10 +164,10 @@ update_app_switch_state (GValue   *value,
 }
 
 static void
-add_location_app (CcLocationPanel *self,
-                  const gchar     *app_id,
-                  gboolean         enabled,
-                  gint64           last_used)
+add_location_app (CcLocationPage *self,
+                  const gchar    *app_id,
+                  gboolean        enabled,
+                  gint64          last_used)
 {
   LocationAppStateData *data;
   GDesktopAppInfo *app_info;
@@ -247,9 +246,9 @@ add_location_app (CcLocationPanel *self,
 
 /* Steals permissions and permissions_data references */
 static void
-update_perm_store (CcLocationPanel *self,
-                   GVariant        *permissions,
-                   GVariant        *permissions_data)
+update_perm_store (CcLocationPage *self,
+                   GVariant       *permissions,
+                   GVariant       *permissions_data)
 {
   GVariantIter iter;
   const gchar *key;
@@ -333,7 +332,7 @@ on_perm_store_ready (GObject      *source_object,
                      gpointer      user_data)
 {
   g_autoptr(GError) error = NULL;
-  CcLocationPanel *self;
+  CcLocationPage *self;
   GDBusProxy *proxy;
   GVariant *params;
 
@@ -357,15 +356,18 @@ on_perm_store_ready (GObject      *source_object,
                      params,
                      G_DBUS_CALL_FLAGS_NONE,
                      -1,
-                     cc_panel_get_cancellable (CC_PANEL (self)),
+                     self->cancellable,
                      on_perm_store_lookup_done,
                      self);
 }
 
 static void
-cc_location_panel_finalize (GObject *object)
+cc_location_page_finalize (GObject *object)
 {
-  CcLocationPanel *self = CC_LOCATION_PANEL (object);
+  CcLocationPage *self = CC_LOCATION_PAGE (object);
+
+  g_cancellable_cancel (self->cancellable);
+  g_clear_object (&self->cancellable);
 
   g_clear_object (&self->location_settings);
   g_clear_object (&self->perm_store);
@@ -374,41 +376,32 @@ cc_location_panel_finalize (GObject *object)
   g_clear_pointer (&self->location_apps_data, g_variant_unref);
   g_clear_pointer (&self->location_app_switches, g_hash_table_unref);
 
-  G_OBJECT_CLASS (cc_location_panel_parent_class)->finalize (object);
-}
-
-static const char *
-cc_location_panel_get_help_uri (CcPanel *panel)
-{
-  return "help:gnome-help/location";
+  G_OBJECT_CLASS (cc_location_page_parent_class)->finalize (object);
 }
 
 static void
-cc_location_panel_class_init (CcLocationPanelClass *klass)
+cc_location_page_class_init (CcLocationPageClass *klass)
 {
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
-  CcPanelClass *panel_class = CC_PANEL_CLASS (klass);
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
-  panel_class->get_help_uri = cc_location_panel_get_help_uri;
+  object_class->finalize = cc_location_page_finalize;
 
-  object_class->finalize = cc_location_panel_finalize;
+  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/privacy/cc-location-page.ui");
 
-  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/location/cc-location-panel.ui");
-
-  gtk_widget_class_bind_template_child (widget_class, CcLocationPanel, location_apps_list_box);
-  gtk_widget_class_bind_template_child (widget_class, CcLocationPanel, location_row);
+  gtk_widget_class_bind_template_child (widget_class, CcLocationPage, location_apps_list_box);
+  gtk_widget_class_bind_template_child (widget_class, CcLocationPage, location_row);
 }
 
 static void
-cc_location_panel_init (CcLocationPanel *self)
+cc_location_page_init (CcLocationPage *self)
 {
-  g_resources_register (cc_location_get_resource ());
-
   gtk_widget_init_template (GTK_WIDGET (self));
 
   self->location_icon_size_group = gtk_size_group_new (GTK_SIZE_GROUP_BOTH);
   self->location_settings = g_settings_new ("org.gnome.system.location");
+
+  self->cancellable = g_cancellable_new ();
 
   g_settings_bind (self->location_settings,
                    LOCATION_ENABLED,
@@ -427,7 +420,7 @@ cc_location_panel_init (CcLocationPanel *self)
                             "org.freedesktop.impl.portal.PermissionStore",
                             "/org/freedesktop/impl/portal/PermissionStore",
                             "org.freedesktop.impl.portal.PermissionStore",
-                            cc_panel_get_cancellable (CC_PANEL (self)),
+                            self->cancellable,
                             on_perm_store_ready,
                             self);
 }

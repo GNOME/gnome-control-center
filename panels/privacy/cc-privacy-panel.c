@@ -21,25 +21,46 @@
 #include "cc-privacy-panel.h"
 
 #include "cc-diagnostics-page.h"
+#include "cc-location-page.h"
 #include "cc-privacy-resources.h"
 #include "cc-screen-page.h"
 #include "cc-usage-page.h"
 
 struct _CcPrivacyPanel
 {
-  CcPanel          parent_instance;
+  CcPanel            parent_instance;
+
+  AdwNavigationView *navigation;
 };
 
 CC_PANEL_REGISTER (CcPrivacyPanel, cc_privacy_panel)
 
+static const char *
+cc_privacy_panel_get_help_uri (CcPanel *panel)
+{
+  AdwNavigationPage *page = adw_navigation_view_get_visible_page (CC_PRIVACY_PANEL (panel)->navigation);
+  const char *page_tag = adw_navigation_page_get_tag (page);
+
+  if (g_strcmp0 (page_tag, "location-page") == 0)
+    return "help:gnome-help/location";
+  else
+    return NULL;
+}
+
 static void
 cc_privacy_panel_class_init (CcPrivacyPanelClass *klass)
 {
+  CcPanelClass *panel_class = CC_PANEL_CLASS (klass);
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
+
+  panel_class->get_help_uri = cc_privacy_panel_get_help_uri;
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/privacy/cc-privacy-panel.ui");
 
+  gtk_widget_class_bind_template_child (widget_class, CcPrivacyPanel, navigation);
+
   g_type_ensure (CC_TYPE_DIAGNOSTICS_PAGE);
+  g_type_ensure (CC_TYPE_LOCATION_PAGE);
   g_type_ensure (CC_TYPE_SCREEN_PAGE);
   g_type_ensure (CC_TYPE_USAGE_PAGE);
 }

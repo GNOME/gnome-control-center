@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
-  <template class="CcLocationPanel" parent="CcPanel">
-
-    <child type="content">
+  <template class="CcLocationPage" parent="AdwNavigationPage">
+    <property name="title" translatable="yes">Location Services</property>
+    <property name="tag">location-page</property>
+    <property name="child">
+      <object class="AdwToolbarView">
+        <property name="top-bar-style">raised</property>
+        <child type="top">
+          <object class="AdwHeaderBar"/>
+        </child>
+        <property name="content">
       <object class="AdwPreferencesPage">
         <property name="description" translatable="yes">Location services use GPS, Wi-Fi and cellular connections to determine the approximate location of this device. &lt;a href=&apos;https://location.services.mozilla.com/privacy&apos;&gt;Learn about what data is collected, and how it is used.&lt;/a&gt;</property>
         <child>
@@ -48,6 +55,8 @@
           </object>
         </child>
       </object>
-    </child>
+        </property>
+      </object>
+    </property>
   </template>
 </interface>
