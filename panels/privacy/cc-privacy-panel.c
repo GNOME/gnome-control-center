@@ -20,6 +20,7 @@
 
 #include "cc-privacy-panel.h"
 
+#include "cc-camera-page.h"
 #include "cc-diagnostics-page.h"
 #include "cc-location-page.h"
 #include "cc-privacy-resources.h"
@@ -41,7 +42,9 @@ cc_privacy_panel_get_help_uri (CcPanel *panel)
   AdwNavigationPage *page = adw_navigation_view_get_visible_page (CC_PRIVACY_PANEL (panel)->navigation);
   const char *page_tag = adw_navigation_page_get_tag (page);
 
-  if (g_strcmp0 (page_tag, "location-page") == 0)
+  if (g_strcmp0 (page_tag, "camera-page") == 0)
+    return "help:gnome-help/camera";
+  else if (g_strcmp0 (page_tag, "location-page") == 0)
     return "help:gnome-help/location";
   else
     return NULL;
@@ -59,6 +62,7 @@ cc_privacy_panel_class_init (CcPrivacyPanelClass *klass)
 
   gtk_widget_class_bind_template_child (widget_class, CcPrivacyPanel, navigation);
 
+  g_type_ensure (CC_TYPE_CAMERA_PAGE);
   g_type_ensure (CC_TYPE_DIAGNOSTICS_PAGE);
   g_type_ensure (CC_TYPE_LOCATION_PAGE);
   g_type_ensure (CC_TYPE_SCREEN_PAGE);

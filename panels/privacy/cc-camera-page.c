@@ -18,25 +18,24 @@
  * Author: Matthias Clasen <mclasen@redhat.com>
  */
 
-#include "cc-camera-panel.h"
-#include "cc-camera-resources.h"
+#include "cc-camera-page.h"
 #include "cc-util.h"
 
-#include <adwaita.h>
 #include <gio/gdesktopappinfo.h>
 #include <glib/gi18n.h>
 
 #define APP_PERMISSIONS_TABLE "devices"
 #define APP_PERMISSIONS_ID "camera"
 
-struct _CcCameraPanel
+struct _CcCameraPage
 {
-  CcPanel       parent_instance;
+  AdwNavigationPage parent_instance;
 
   GtkListBox   *camera_apps_list_box;
   AdwSwitchRow *camera_row;
 
   GSettings    *privacy_settings;
+  GCancellable *cancellable;
 
   GDBusProxy   *perm_store;
   GVariant     *camera_apps_perms;
@@ -46,11 +45,11 @@ struct _CcCameraPanel
   GtkSizeGroup *camera_icon_size_group;
 };
 
-CC_PANEL_REGISTER (CcCameraPanel, cc_camera_panel)
+G_DEFINE_TYPE (CcCameraPage, cc_camera_page, ADW_TYPE_NAVIGATION_PAGE)
 
 typedef struct
 {
-  CcCameraPanel *self;
+  CcCameraPage *self;
   GtkWidget *widget;
   gchar *app_id;
   gboolean changing_state;
@@ -95,7 +94,7 @@ on_camera_app_state_set (GtkSwitch *widget,
 {
   CameraAppStateData *data = (CameraAppStateData *) user_data;
   GVariantBuilder builder;
-  CcCameraPanel *self;
+  CcCameraPage *self;
   GVariantIter iter;
   GVariant *params;
   const gchar *key;
@@ -146,7 +145,7 @@ on_camera_app_state_set (GtkSwitch *widget,
                      params,
                      G_DBUS_CALL_FLAGS_NONE,
                      -1,
-                     cc_panel_get_cancellable (CC_PANEL (self)),
+                     self->cancellable,
                      on_perm_store_set_done,
                      data);
 
@@ -173,9 +172,9 @@ update_app_switch_state (GValue   *value,
 }
 
 static void
-add_camera_app (CcCameraPanel *self,
-                const gchar   *app_id,
-                gboolean       enabled)
+add_camera_app (CcCameraPage *self,
+                const gchar  *app_id,
+                gboolean      enabled)
 {
   g_autofree gchar *desktop_id = NULL;
   CameraAppStateData *data;
@@ -241,9 +240,9 @@ add_camera_app (CcCameraPanel *self,
 
 /* Steals permissions and permissions_data references */
 static void
-update_perm_store (CcCameraPanel *self,
-                   GVariant      *permissions,
-                   GVariant      *permissions_data)
+update_perm_store (CcCameraPage *self,
+                   GVariant     *permissions,
+                   GVariant     *permissions_data)
 {
   GVariantIter iter;
   const gchar *key;
@@ -293,7 +292,7 @@ on_perm_store_lookup_done (GObject      *source_object,
                            GAsyncResult *res,
                            gpointer      user_data)
 {
-  CcCameraPanel *self = user_data;
+  CcCameraPage *self = user_data;
   GVariant *ret, *permissions, *permissions_data;
   g_autoptr(GError) error = NULL;
 
@@ -323,7 +322,7 @@ on_perm_store_ready (GObject      *source_object,
                      GAsyncResult *res,
                      gpointer      user_data)
 {
-  CcCameraPanel *self;
+  CcCameraPage *self;
   g_autoptr(GVariant) params = NULL;
   g_autoptr(GError) error = NULL;
   GDBusProxy *proxy;
@@ -346,15 +345,18 @@ on_perm_store_ready (GObject      *source_object,
                      params,
                      G_DBUS_CALL_FLAGS_NONE,
                      -1,
-                     cc_panel_get_cancellable (CC_PANEL (self)),
+                     self->cancellable,
                      on_perm_store_lookup_done,
                      self);
 }
 
 static void
-cc_camera_panel_finalize (GObject *object)
+cc_camera_page_finalize (GObject *object)
 {
-  CcCameraPanel *self = CC_CAMERA_PANEL (object);
+  CcCameraPage *self = CC_CAMERA_PAGE (object);
+
+  g_cancellable_cancel (self->cancellable);
+  g_clear_object (&self->cancellable);
 
   g_clear_object (&self->privacy_settings);
   g_clear_object (&self->perm_store);
@@ -363,42 +365,33 @@ cc_camera_panel_finalize (GObject *object)
   g_clear_pointer (&self->camera_apps_data, g_variant_unref);
   g_clear_pointer (&self->camera_app_switches, g_hash_table_unref);
 
-  G_OBJECT_CLASS (cc_camera_panel_parent_class)->finalize (object);
-}
-
-static const char *
-cc_camera_panel_get_help_uri (CcPanel *panel)
-{
-  return "help:gnome-help/camera";
+  G_OBJECT_CLASS (cc_camera_page_parent_class)->finalize (object);
 }
 
 static void
-cc_camera_panel_class_init (CcCameraPanelClass *klass)
+cc_camera_page_class_init (CcCameraPageClass *klass)
 {
-  CcPanelClass *panel_class = CC_PANEL_CLASS (klass);
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
-  panel_class->get_help_uri = cc_camera_panel_get_help_uri;
+  object_class->finalize = cc_camera_page_finalize;
 
-  object_class->finalize = cc_camera_panel_finalize;
+  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/privacy/cc-camera-page.ui");
 
-  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/camera/cc-camera-panel.ui");
-
-  gtk_widget_class_bind_template_child (widget_class, CcCameraPanel, camera_apps_list_box);
-  gtk_widget_class_bind_template_child (widget_class, CcCameraPanel, camera_row);
+  gtk_widget_class_bind_template_child (widget_class, CcCameraPage, camera_apps_list_box);
+  gtk_widget_class_bind_template_child (widget_class, CcCameraPage, camera_row);
 }
 
 static void
-cc_camera_panel_init (CcCameraPanel *self)
+cc_camera_page_init (CcCameraPage *self)
 {
-  g_resources_register (cc_camera_get_resource ());
-
   gtk_widget_init_template (GTK_WIDGET (self));
 
   self->camera_icon_size_group = gtk_size_group_new (GTK_SIZE_GROUP_BOTH);
 
   self->privacy_settings = g_settings_new ("org.gnome.desktop.privacy");
+
+  self->cancellable = g_cancellable_new ();
 
   g_settings_bind (self->privacy_settings, "disable-camera",
                    self->camera_row, "active",
@@ -415,7 +408,7 @@ cc_camera_panel_init (CcCameraPanel *self)
                             "org.freedesktop.impl.portal.PermissionStore",
                             "/org/freedesktop/impl/portal/PermissionStore",
                             "org.freedesktop.impl.portal.PermissionStore",
-                            cc_panel_get_cancellable (CC_PANEL (self)),
+                            self->cancellable,
                             on_perm_store_ready,
                             self);
 }
