@@ -2389,12 +2389,12 @@ cc_display_config_get_panel_orientation_managed (CcDisplayConfig *self)
 void
 cc_display_config_update_ui_numbers_names (CcDisplayConfig *self)
 {
-  GList *item;
+  GList *l;
   gint ui_number = 1;
 
-  for (item = self->ui_sorted_monitors; item != NULL; item = item->next)
+  for (l = self->ui_sorted_monitors; l; l = l->next)
     {
-      CcDisplayMonitor *monitor = item->data;
+      CcDisplayMonitor *monitor = l->data;
       char *ui_name;
       gint current_ui_number = 0;
 
