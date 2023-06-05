@@ -29,7 +29,7 @@
 
 #include "shell/cc-object-storage.h"
 #include "cc-hostname.h"
-#include "cc-display-config-manager-dbus.h"
+#include "cc-display-config-manager.h"
 
 struct _CcNightLightPage {
   AdwBin               parent;
@@ -727,7 +727,7 @@ cc_night_light_page_init (CcNightLightPage *self)
       gtk_widget_set_direction (self->from_spinbuttons_box, GTK_TEXT_DIR_LTR);
     }
 
-  self->config_manager = cc_display_config_manager_dbus_new ();
+  self->config_manager = cc_display_config_manager_new ();
   g_signal_connect_object (self->config_manager, "changed",
                            G_CALLBACK (config_manager_changed_cb), self,
                            G_CONNECT_SWAPPED);

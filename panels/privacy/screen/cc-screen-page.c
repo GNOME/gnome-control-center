@@ -23,7 +23,7 @@
 #include "cc-screen-page.h"
 #include "cc-number-row.h"
 
-#include "panels/display/cc-display-config-manager-dbus.h"
+#include "panels/display/cc-display-config-manager.h"
 
 #include <gio/gdesktopappinfo.h>
 
@@ -218,7 +218,7 @@ cc_screen_page_init (CcScreenPage *self)
                    "active",
                    G_SETTINGS_BIND_DEFAULT);
 
-  self->display_config_manager = cc_display_config_manager_dbus_new ();
+  self->display_config_manager = cc_display_config_manager_new ();
   g_signal_connect_object (self->display_config_manager, "changed",
                            G_CALLBACK (update_display_config), self,
                            G_CONNECT_SWAPPED);

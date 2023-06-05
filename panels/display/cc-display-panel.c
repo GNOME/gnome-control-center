@@ -30,7 +30,7 @@
 #include <libupower-glib/upower.h>
 
 #include "cc-list-row.h"
-#include "cc-display-config-manager-dbus.h"
+#include "cc-display-config-manager.h"
 #include "cc-display-config.h"
 #include "cc-display-arrangement.h"
 #include "cc-night-light-page.h"
@@ -1057,7 +1057,7 @@ session_bus_ready (GObject        *source,
       return;
     }
 
-  self->manager = cc_display_config_manager_dbus_new ();
+  self->manager = cc_display_config_manager_new ();
   g_signal_connect_object (self->manager, "changed",
                            G_CALLBACK (on_screen_changed),
                            self,

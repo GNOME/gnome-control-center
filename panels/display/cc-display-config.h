@@ -89,116 +89,20 @@ typedef enum _CcDisplayColorMode
 } CcDisplayColorMode;
 
 #define CC_TYPE_DISPLAY_MODE (cc_display_mode_get_type ())
-G_DECLARE_DERIVABLE_TYPE (CcDisplayMode, cc_display_mode,
-                          CC, DISPLAY_MODE, GObject)
-
-struct _CcDisplayModeClass
-{
-  GObjectClass parent_class;
-
-  gboolean      (*is_clone_mode)        (CcDisplayMode *self);
-  void          (*get_resolution)       (CcDisplayMode *self, int *w, int *h);
-  GArray*       (*get_supported_scales) (CcDisplayMode *self);
-  double        (*get_preferred_scale)  (CcDisplayMode *self);
-  CcDisplayModeRefreshRateMode (*get_refresh_rate_mode) (CcDisplayMode *self);
-  gboolean      (*is_interlaced)        (CcDisplayMode *self);
-  gboolean      (*is_preferred)         (CcDisplayMode *self);
-  int           (*get_freq)             (CcDisplayMode *self);
-  double        (*get_freq_f)           (CcDisplayMode *self);
-};
-
+G_DECLARE_FINAL_TYPE (CcDisplayMode, cc_display_mode,
+                      CC, DISPLAY_MODE, GObject)
 
 #define CC_TYPE_DISPLAY_MONITOR (cc_display_monitor_get_type ())
-G_DECLARE_DERIVABLE_TYPE (CcDisplayMonitor, cc_display_monitor,
-                          CC, DISPLAY_MONITOR, GObject)
+G_DECLARE_FINAL_TYPE (CcDisplayMonitor, cc_display_monitor,
+                      CC, DISPLAY_MONITOR, GObject)
 
-struct _CcDisplayMonitorClass
-{
-  GObjectClass parent_class;
-
-  guint32           (*get_id)                 (CcDisplayMonitor  *self);
-  const char*       (*get_display_name)       (CcDisplayMonitor  *self);
-  const char*       (*get_connector_name)     (CcDisplayMonitor  *self);
-  const char*       (*get_vendor_name)        (CcDisplayMonitor  *self);
-  const char*       (*get_product_name)       (CcDisplayMonitor  *self);
-  const char*       (*get_product_serial)     (CcDisplayMonitor  *self);
-  gboolean          (*is_builtin)             (CcDisplayMonitor  *self);
-  gboolean          (*is_primary)             (CcDisplayMonitor  *self);
-  void              (*set_primary)            (CcDisplayMonitor  *self,
-                                               gboolean          primary);
-  gboolean          (*is_active)              (CcDisplayMonitor *self);
-  void              (*set_active)             (CcDisplayMonitor *self,
-                                               gboolean          a);
-  CcDisplayRotation (*get_rotation)           (CcDisplayMonitor *self);
-  void              (*set_rotation)           (CcDisplayMonitor  *self,
-                                               CcDisplayRotation  r);
-  gboolean          (*supports_rotation)      (CcDisplayMonitor  *self,
-                                               CcDisplayRotation  r);
-  void              (*get_physical_size)      (CcDisplayMonitor  *self,
-                                               int               *w,
-                                               int               *h);
-  void              (*get_geometry)           (CcDisplayMonitor  *self,
-                                               int               *x,
-                                               int               *y,
-                                               int               *w,
-                                               int               *h);
-  int               (*get_min_freq)           (CcDisplayMonitor  *self);
-  gboolean          (*supports_variable_refresh_rate) (CcDisplayMonitor  *self);
-  GList *           (*get_supported_color_modes) (CcDisplayMonitor *self);
-  CcDisplayColorMode (*get_color_mode)        (CcDisplayMonitor   *self);
-  void              (*set_color_mode)         (CcDisplayMonitor   *self,
-                                               CcDisplayColorMode  color_mode);
-  gboolean          (*supports_underscanning) (CcDisplayMonitor  *self);
-  gboolean          (*get_underscanning)      (CcDisplayMonitor  *self);
-  void              (*set_underscanning)      (CcDisplayMonitor  *self,
-                                               gboolean           u);
-  CcDisplayMonitorPrivacy (*get_privacy)      (CcDisplayMonitor  *self);
-  CcDisplayMode*    (*get_mode)               (CcDisplayMonitor  *self);
-  CcDisplayMode*    (*get_preferred_mode)     (CcDisplayMonitor  *self);
-  GList*            (*get_modes)              (CcDisplayMonitor  *self);
-  void              (*set_compatible_clone_mode) (CcDisplayMonitor  *self,
-                                                  CcDisplayMode     *m);
-  void              (*set_mode)               (CcDisplayMonitor  *self,
-                                               CcDisplayMode     *m);
-  void              (*set_refresh_rate_mode)  (CcDisplayMonitor             *self,
-                                               CcDisplayModeRefreshRateMode  refresh_rate_mode);
-  void              (*set_position)           (CcDisplayMonitor  *self,
-                                               int                x,
-                                               int                y);
-  double            (*get_scale)              (CcDisplayMonitor  *self);
-  void              (*set_scale)              (CcDisplayMonitor  *self,
-                                               double             s);
-};
-
+#define CC_TYPE_DISPLAY_LOGICAL_MONITOR (cc_display_logical_monitor_get_type ())
+G_DECLARE_FINAL_TYPE (CcDisplayLogicalMonitor, cc_display_logical_monitor,
+                      CC, DISPLAY_LOGICAL_MONITOR, GObject)
 
 #define CC_TYPE_DISPLAY_CONFIG (cc_display_config_get_type ())
-G_DECLARE_DERIVABLE_TYPE (CcDisplayConfig, cc_display_config,
-                          CC, DISPLAY_CONFIG, GObject)
-
-struct _CcDisplayConfigClass
-{
-  GObjectClass parent_class;
-
-  GList*   (*get_monitors)      (CcDisplayConfig  *self);
-  gboolean (*is_applicable)     (CcDisplayConfig  *self);
-  gboolean (*equal)             (CcDisplayConfig  *self,
-                                 CcDisplayConfig  *other);
-  gboolean (*apply)             (CcDisplayConfig  *self,
-                                GError           **error);
-  gboolean (*is_cloning)        (CcDisplayConfig  *self);
-  void     (*set_cloning)       (CcDisplayConfig  *self,
-                                 gboolean          clone);
-  GList*   (*generate_cloning_modes) (CcDisplayConfig  *self);
-  gboolean (*is_layout_logical) (CcDisplayConfig  *self);
-  void     (*set_minimum_size)  (CcDisplayConfig  *self,
-                                 int               width,
-                                 int               height);
-  gboolean (*is_scaled_mode_valid) (CcDisplayConfig  *self,
-                                    CcDisplayMode    *mode,
-                                    double            scale);
-  gboolean (* get_panel_orientation_managed) (CcDisplayConfig    *self);
-};
-
+G_DECLARE_FINAL_TYPE (CcDisplayConfig, cc_display_config,
+                      CC, DISPLAY_CONFIG, GObject)
 
 GList*            cc_display_config_get_monitors            (CcDisplayConfig    *config);
 GList*            cc_display_config_get_ui_sorted_monitors  (CcDisplayConfig    *config);

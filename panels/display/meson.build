@@ -31,8 +31,6 @@ sources = files(
   'cc-display-panel.c',
   'cc-display-arrangement.c',
   'cc-display-config.c',
-  'cc-display-config-dbus.c',
-  'cc-display-config-manager-dbus.c',
   'cc-display-config-manager.c',
   'cc-display-settings.c',
   'cc-night-light-page.c',
