@@ -50,6 +50,9 @@ notify_selected_item_cb (CcDefaultAppsRow *self)
 
   info = G_APP_INFO (adw_combo_row_get_selected_item (ADW_COMBO_ROW (self)));
 
+  if (!info)
+    return;
+
   if (g_app_info_set_as_default_for_type (info, self->content_type, &error) == FALSE)
     {
       g_warning ("Failed to set '%s' as the default application for '%s': %s",
