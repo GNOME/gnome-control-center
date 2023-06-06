@@ -4,7 +4,10 @@ if host_is_linux
   subdir('network')
 endif
 
-subdir('interactive-panels')
+# FIXME: these tests don't work when libadwaita is a subproject. See !1754
+if not libadwaita_dep.found()
+  subdir('interactive-panels')
+endif
 
 subdir('printers')
 subdir('info')
