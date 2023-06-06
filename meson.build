@@ -133,9 +133,15 @@ gtk_dep = dependency(
 libadwaita_dep = dependency(
   'libadwaita-1',
   version: '>= 1.4.alpha',
-  fallback: ['libadwaita', 'libadwaita_dep'],
   default_options: ['examples=false', 'introspection=disabled', 'tests=false', 'vapi=false'],
+  required: false
 )
+# FIXME: this is a workaround because interactive-tests don't work with libadwaita as a subproject. See !1754
+libadwaita_is_subproject = not libadwaita_dep.found()
+if libadwaita_is_subproject
+  libadwaita = subproject('libadwaita')
+  libadwaita_dep = libadwaita.get_variable('libadwaita_dep')
+endif
 
 accounts_dep = dependency('accountsservice', version: '>= 0.6.39')
 colord_dep = dependency('colord', version: '>= 0.1.34')
