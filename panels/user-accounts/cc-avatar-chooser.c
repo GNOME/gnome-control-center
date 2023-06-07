@@ -121,22 +121,25 @@ cc_avatar_chooser_crop (CcAvatarChooser *self,
 }
 
 static void
-file_chooser_response (CcAvatarChooser *self,
-                       gint             response,
-                       GtkDialog       *chooser)
+file_dialog_open_cb (GObject            *source_object,
+                     GAsyncResult       *res,
+                     gpointer            user_data)
 {
+        CcAvatarChooser *self = CC_AVATAR_CHOOSER (user_data);
+        GtkFileDialog *file_dialog = GTK_FILE_DIALOG (source_object);
         g_autoptr(GError) error = NULL;
         g_autoptr(GdkPixbuf) pixbuf = NULL;
         g_autoptr(GdkPixbuf) pixbuf2 = NULL;
         g_autoptr(GFile) file = NULL;
         g_autoptr(GFileInputStream) stream = NULL;
 
-        if (response != GTK_RESPONSE_ACCEPT) {
-                gtk_window_destroy (GTK_WINDOW (chooser));
+        file = gtk_file_dialog_open_finish (file_dialog, res, &error);
+
+        if (error != NULL) {
+                g_warning ("Failed to pick avatar image: %s", error->message);
                 return;
         }
 
-        file = gtk_file_chooser_get_file (GTK_FILE_CHOOSER (chooser));
         stream = g_file_read (file, NULL, &error);
         pixbuf = gdk_pixbuf_new_from_stream (G_INPUT_STREAM (stream),
                                              NULL, &error);
@@ -146,44 +149,41 @@ file_chooser_response (CcAvatarChooser *self,
 
         pixbuf2 = gdk_pixbuf_apply_embedded_orientation (pixbuf);
 
-        gtk_window_destroy (GTK_WINDOW (chooser));
-
         cc_avatar_chooser_crop (self, pixbuf2);
 }
 
 static void
 cc_avatar_chooser_select_file (CcAvatarChooser *self)
 {
-        g_autoptr(GFile) folder = NULL;
-        GtkWidget *chooser;
+        g_autoptr(GFile) pictures_folder = NULL;
+        GtkFileDialog *file_dialog;
         GtkFileFilter *filter;
+        GListStore *filters;
         GtkWindow *toplevel;
 
-        toplevel = (GtkWindow*) gtk_widget_get_native (GTK_WIDGET (self->transient_for));
-        chooser = gtk_file_chooser_dialog_new (_("Browse for more pictures"),
-                                               toplevel,
-                                               GTK_FILE_CHOOSER_ACTION_OPEN,
-                                               _("_Cancel"), GTK_RESPONSE_CANCEL,
-                                               _("_Open"), GTK_RESPONSE_ACCEPT,
-                                               NULL);
+        g_return_if_fail (CC_IS_AVATAR_CHOOSER (self));
 
-        gtk_window_set_modal (GTK_WINDOW (chooser), TRUE);
+        toplevel = GTK_WINDOW (gtk_widget_get_native (GTK_WIDGET (self->transient_for)));
 
-        folder = g_file_new_for_path (g_get_user_special_dir (G_USER_DIRECTORY_PICTURES));
-        if (folder)
-                gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (chooser),
-                                                     folder,
-                                                     NULL);
+        file_dialog = gtk_file_dialog_new ();
+        gtk_file_dialog_set_title (file_dialog, _("Browse for more pictures"));
+        gtk_file_dialog_set_modal (file_dialog, TRUE);
 
         filter = gtk_file_filter_new ();
         gtk_file_filter_add_pixbuf_formats (filter);
-        gtk_file_chooser_set_filter (GTK_FILE_CHOOSER (chooser), filter);
 
-        g_signal_connect_object (chooser, "response",
-                                 G_CALLBACK (file_chooser_response), self, G_CONNECT_SWAPPED);
+        filters = g_list_store_new (GTK_TYPE_FILE_FILTER);
+        g_list_store_append (filters, filter);
+        gtk_file_dialog_set_filters (file_dialog, G_LIST_MODEL (filters));
 
-        gtk_popover_popdown (GTK_POPOVER (self));
-        gtk_window_present (GTK_WINDOW (chooser));
+        pictures_folder = g_file_new_for_path (g_get_user_special_dir (G_USER_DIRECTORY_PICTURES));
+        gtk_file_dialog_set_initial_folder (file_dialog, pictures_folder);
+
+        gtk_file_dialog_open (file_dialog,
+                              toplevel,
+                              NULL,
+                              file_dialog_open_cb,
+                              self);
 }
 
 static void
