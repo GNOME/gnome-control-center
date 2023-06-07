@@ -58,7 +58,7 @@ stages:
     # stable branch.
     # Could probably also switch away from rawhide,
     # to stable fedora branch as well.
-    FDO_DISTRIBUTION_TAG: '2023-03-14.0-main'
+    FDO_DISTRIBUTION_TAG: '2023-06-07.0-main'
     FDO_DISTRIBUTION_VERSION: rawhide
 
 #############################################
@@ -139,6 +139,7 @@ build.container.fedora@x86_64:
       gcr3-devel
       gcr-devel
       setxkbmap
+      appstream-devel
     FDO_DISTRIBUTION_EXEC: |-
       git clone https://gitlab.gnome.org/GNOME/gsettings-desktop-schemas.git && \
         cd gsettings-desktop-schemas && \
