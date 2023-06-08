@@ -456,6 +456,10 @@ on_drag_cancel (CcCropArea       *area,
     area->drag_offy = 0;
 }
 
+#define CORNER_LINE_WIDTH 4.0
+#define CORNER_LINE_LENGTH 15.0
+#define CORNER_SIZE (CORNER_LINE_LENGTH + CORNER_LINE_WIDTH / 2)
+
 static void
 cc_crop_area_snapshot (GtkWidget   *widget,
                        GtkSnapshot *snapshot)
@@ -499,24 +503,24 @@ cc_crop_area_snapshot (GtkWidget   *widget,
 
     /* draw the four corners */
     cairo_set_source_rgb (cr, 1, 1, 1);
-    cairo_set_line_width (cr, 4.0);
+    cairo_set_line_width (cr, CORNER_LINE_WIDTH);
 
     /* top left corner */
-    cairo_move_to (cr, crop.x + 15, crop.y);
-    cairo_line_to (cr, crop.x, crop.y);
-    cairo_line_to (cr, crop.x, crop.y + 15);
+    cairo_move_to (cr, crop.x + CORNER_LINE_WIDTH / 2, crop.y + CORNER_SIZE);
+    cairo_rel_line_to (cr, 0, -CORNER_LINE_LENGTH);
+    cairo_rel_line_to (cr, CORNER_LINE_LENGTH, 0);
     /* top right corner */
-    cairo_move_to (cr, crop.x + crop.width - 15, crop.y);
-    cairo_line_to (cr, crop.x + crop.width, crop.y);
-    cairo_line_to (cr, crop.x + crop.width, crop.y + 15);
+    cairo_rel_move_to (cr, crop.width - 2 * CORNER_SIZE, 0);
+    cairo_rel_line_to (cr, CORNER_LINE_LENGTH, 0);
+    cairo_rel_line_to (cr, 0, CORNER_LINE_LENGTH);
     /* bottom right corner */
-    cairo_move_to (cr, crop.x + crop.width - 15, crop.y + crop.height);
-    cairo_line_to (cr, crop.x + crop.width, crop.y + crop.height);
-    cairo_line_to (cr, crop.x + crop.width, crop.y + crop.height - 15);
+    cairo_rel_move_to (cr, 0, crop.height - 2 * CORNER_SIZE);
+    cairo_rel_line_to (cr, 0, CORNER_LINE_LENGTH);
+    cairo_rel_line_to (cr, -CORNER_LINE_LENGTH, 0);
     /* bottom left corner */
-    cairo_move_to (cr, crop.x + 15, crop.y + crop.height);
-    cairo_line_to (cr, crop.x, crop.y + crop.height);
-    cairo_line_to (cr, crop.x, crop.y + crop.height - 15);
+    cairo_rel_move_to (cr, -(crop.width - 2 * CORNER_SIZE), 0);
+    cairo_rel_line_to (cr, -CORNER_LINE_LENGTH, 0);
+    cairo_rel_line_to (cr, 0, -CORNER_LINE_LENGTH);
 
     cairo_stroke (cr);
 
