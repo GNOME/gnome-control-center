@@ -242,20 +242,6 @@ update_cursor (CcCropArea *area,
     }
 }
 
-static int
-eval_radial_line (double center_x, double center_y,
-                  double bounds_x, double bounds_y,
-                  double user_x)
-{
-    double decision_slope;
-    double decision_intercept;
-
-    decision_slope = (bounds_y - center_y) / (bounds_x - center_x);
-    decision_intercept = -(decision_slope * bounds_x);
-
-    return (int) (decision_slope * user_x + decision_intercept);
-}
-
 static gboolean
 on_motion (CcCropArea *area,
            double      event_x,
@@ -307,16 +293,13 @@ on_drag_update (CcCropArea     *area,
 {
     double start_x, start_y;
     int x, y, delta_x, delta_y;
-    int width, height;
-    int adj_width, adj_height;
-    int pb_width, pb_height;
+    int clamped_delta_x, clamped_delta_y;
     int left, right, top, bottom;
-    double new_width, new_height;
-    double center_x, center_y;
-    int min_width, min_height;
-
-    pb_width = gdk_paintable_get_intrinsic_width (area->paintable);
-    pb_height = gdk_paintable_get_intrinsic_height (area->paintable);
+    int center_x, center_y;
+    int distance_left, distance_right, distance_top, distance_bottom;
+    int closest_distance_x, closest_distance_y;
+    int size_x, size_y;
+    int min_size, max_size, wanted_size, new_size;
 
     gtk_gesture_drag_get_start_point (gesture, &start_x, &start_y);
 
@@ -332,125 +315,114 @@ on_drag_update (CcCropArea     *area,
     top = area->crop.y;
     bottom = area->crop.y + area->crop.height - 1;
 
-    center_x = (left + right) / 2.0;
-    center_y = (top + bottom) / 2.0;
+    center_x = (left + right) / 2;
+    center_y = (top + bottom) / 2;
+
+    distance_left = left;
+    distance_right = gdk_paintable_get_intrinsic_width (area->paintable) - (right + 1);
+    distance_top = top;
+    distance_bottom = gdk_paintable_get_intrinsic_height (area->paintable) - (bottom + 1);
+
+    closest_distance_x = MIN (distance_left, distance_right);
+    closest_distance_y = MIN (distance_top, distance_bottom);
+
+    /* All size variables are center-to-center, not edge-to-edge, hence the missing '+ 1' everywhere */
+    size_x = right - left;
+    size_y = bottom - top;
+
+    min_size = MAX (area->min_crop_width / area->scale, area->min_crop_height / area->scale);
 
     /* What we have to do depends on where the user started dragging */
     switch (area->active_region) {
     case INSIDE:
-        width = right - left + 1;
-        height = bottom - top + 1;
+        if (delta_x < 0)
+            clamped_delta_x = MAX (delta_x, -distance_left);
+        else
+            clamped_delta_x = MIN (delta_x, distance_right);
 
-        left = MAX (left + delta_x, 0);
-        right = MIN (right + delta_x, pb_width);
-        top = MAX (top + delta_y, 0);
-        bottom = MIN (bottom + delta_y, pb_height);
+        if (delta_y < 0)
+            clamped_delta_y = MAX (delta_y, -distance_top);
+        else
+            clamped_delta_y = MIN (delta_y, distance_bottom);
 
-        adj_width = right - left + 1;
-        adj_height = bottom - top + 1;
-        if (adj_width != width) {
-            if (delta_x < 0)
-                right = left + width - 1;
-            else
-                left = right - width + 1;
-        }
-        if (adj_height != height) {
-            if (delta_y < 0)
-                bottom = top + height - 1;
-            else
-                top = bottom - height + 1;
-        }
+        left += clamped_delta_x;
+        right += clamped_delta_x;
+        top += clamped_delta_y;
+        bottom += clamped_delta_y;
 
         break;
 
+    /* The wanted size assumes one side remains glued to the cursor */
     case TOP_LEFT:
-        if (y < eval_radial_line (center_x, center_y, left, top, x)) {
-            top = y;
-            new_width = bottom - top;
-            left = right - new_width;
-        } else {
-            left = x;
-            new_height = right - left;
-            top = bottom - new_height;
-        }
+        max_size = MIN (size_y + distance_top, size_x + distance_left);
+        wanted_size = MAX (bottom - y, right - x);
+        new_size = CLAMP (wanted_size, MIN (min_size, max_size), max_size);
+        top = bottom - new_size;
+        left = right - new_size;
         break;
 
     case TOP:
-        top = y;
-        new_width = bottom - top;
-        right = left + new_width;
+        max_size = MIN (size_y + distance_top, size_x + 2 * closest_distance_x);
+        wanted_size = bottom - y;
+        new_size = CLAMP (wanted_size, MIN (min_size, max_size), max_size);
+        top = bottom - new_size;
+        left = center_x - new_size / 2;
+        right = left + new_size;
         break;
 
     case TOP_RIGHT:
-        if (y < eval_radial_line (center_x, center_y, right, top, x)) {
-            top = y;
-            new_width = bottom - top;
-            right = left + new_width;
-        } else {
-            right = x;
-            new_height = right - left;
-            top = bottom - new_height;
-        }
+        max_size = MIN (size_y + distance_top, size_x + distance_right);
+        wanted_size = MAX (bottom - y, x - left);
+        new_size = CLAMP (wanted_size, MIN (min_size, max_size), max_size);
+        top = bottom - new_size;
+        right = left + new_size;
         break;
 
     case LEFT:
-        left = x;
-        new_height = right - left;
-        bottom = top + new_height;
+        max_size = MIN (size_x + distance_left, size_y + 2 * closest_distance_y);
+        wanted_size = right - x;
+        new_size = CLAMP (wanted_size, MIN (min_size, max_size), max_size);
+        left = right - new_size;
+        top = center_y - new_size / 2;
+        bottom = top + new_size;
         break;
 
     case BOTTOM_LEFT:
-        if (y < eval_radial_line (center_x, center_y, left, bottom, x)) {
-            left = x;
-            new_height = right - left;
-            bottom = top + new_height;
-        } else {
-            bottom = y;
-            new_width = bottom - top;
-            left = right - new_width;
-        }
+        max_size = MIN (size_y + distance_bottom, size_x + distance_left);
+        wanted_size = MAX (y - top, right - x);
+        new_size = CLAMP (wanted_size, MIN (min_size, max_size), max_size);
+        bottom = top + new_size;
+        left = right - new_size;
         break;
 
     case RIGHT:
-        right = x;
-        new_height = right - left;
-        bottom = top + new_height;
+        max_size = MIN (size_x + distance_right, size_y + 2 * closest_distance_y);
+        wanted_size = x - left;
+        new_size = CLAMP (wanted_size, MIN (min_size, max_size), max_size);
+        right = left + new_size;
+        top = center_y - new_size / 2;
+        bottom = top + new_size;
         break;
 
     case BOTTOM_RIGHT:
-        if (y < eval_radial_line (center_x, center_y, right, bottom, x)) {
-            right = x;
-            new_height = right - left;
-            bottom = top + new_height;
-        } else {
-            bottom = y;
-            new_width = bottom - top;
-            right = left + new_width;
-        }
+        max_size = MIN (size_y + distance_bottom, size_x + distance_right);
+        wanted_size = MAX (y - top, x - left);
+        new_size = CLAMP (wanted_size, MIN (min_size, max_size), max_size);
+        bottom = top + new_size;
+        right = left + new_size;
         break;
 
     case BOTTOM:
-        bottom = y;
-        new_width = bottom - top;
-        right= left + new_width;
+        max_size = MIN (size_y + distance_bottom, size_x + 2 * closest_distance_x);
+        wanted_size = y - top;
+        new_size = CLAMP (wanted_size, MIN (min_size, max_size), max_size);
+        bottom = top + new_size;
+        left = center_x - new_size / 2;
+        right = left + new_size;
         break;
 
     default:
         return;
-    }
-
-    min_width = area->min_crop_width / area->scale;
-    min_height = area->min_crop_height / area->scale;
-
-    width = right - left + 1;
-    height = bottom - top + 1;
-    if (left < 0 || top < 0 ||
-        right > pb_width || bottom > pb_height ||
-        width < min_width || height < min_height) {
-        left = area->crop.x;
-        right = area->crop.x + area->crop.width - 1;
-        top = area->crop.y;
-        bottom = area->crop.y + area->crop.height - 1;
     }
 
     area->crop.x = left;
@@ -458,8 +430,9 @@ on_drag_update (CcCropArea     *area,
     area->crop.width = right - left + 1;
     area->crop.height = bottom - top + 1;
 
-    area->drag_offx = offset_x;
-    area->drag_offy = offset_y;
+    /* Only update drag_off based on the rounded deltas, otherwise rounding accumulates */
+    area->drag_offx += area->scale * delta_x;
+    area->drag_offy += area->scale * delta_y;
 
     gtk_widget_queue_draw (GTK_WIDGET (area));
 }
