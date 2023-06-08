@@ -126,8 +126,8 @@ get_scaled_crop (CcCropArea    *area,
 {
     crop->x = area->image.x + area->crop.x * area->scale;
     crop->y = area->image.y + area->crop.y * area->scale;
-    crop->width = area->crop.width * area->scale;
-    crop->height = area->crop.height * area->scale;
+    crop->width = area->image.x + (area->crop.x + area->crop.width) * area->scale - crop->x;
+    crop->height = area->image.y + (area->crop.y + area->crop.height) * area->scale - crop->y;
 }
 
 typedef enum {
@@ -484,9 +484,13 @@ cc_crop_area_snapshot (GtkWidget   *widget,
     crop.x -= area->image.x;
     crop.y -= area->image.y;
 
-    /* Draw the circle */
+    /* Draw the circle as an ellipse, to prevent rounding from jitter of the edges */
     cairo_save (cr);
-    cairo_arc (cr, crop.x + crop.width / 2, crop.y + crop.width / 2, crop.width / 2, 0, 2 * G_PI);
+    cairo_translate (cr, crop.x + crop.width / 2.0, crop.y + crop.height / 2.0);
+    cairo_scale (cr, crop.width / 2.0, crop.height / 2.0);
+    cairo_arc (cr, 0, 0, 1, 0, 2 * G_PI);
+    cairo_restore (cr);
+    cairo_save (cr);
     cairo_rectangle (cr, 0, 0, area->image.width, area->image.height);
     cairo_set_source_rgba (cr, 0, 0, 0, 0.4);
     cairo_set_fill_rule (cr, CAIRO_FILL_RULE_EVEN_ODD);
