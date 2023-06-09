@@ -647,7 +647,7 @@ cc_wifi_connection_list_get_property (GObject    *object,
       break;
 
     case PROP_FORGETTABLE:
-      g_value_set_object (value, self->forgettable);
+      g_value_set_boolean (value, self->forgettable);
       break;
 
     default:
