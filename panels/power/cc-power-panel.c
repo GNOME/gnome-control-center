@@ -939,7 +939,8 @@ setup_power_saving (CcPowerPanel *self)
     }
 
   /* Automatic suspend row */
-  if (can_suspend_or_hibernate (self, "CanSuspend"))
+  if (can_suspend_or_hibernate (self, "CanSuspend") && 
+      g_strcmp0 (self->chassis_type, "vm") != 0)
     {
       gtk_widget_set_visible (GTK_WIDGET (self->automatic_suspend_row), TRUE);
       gtk_accessible_update_property (GTK_ACCESSIBLE (self->automatic_suspend_row),
