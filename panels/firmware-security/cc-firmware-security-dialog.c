@@ -262,22 +262,22 @@ on_hsi_detail_button_clicked_cb (CcFirmwareSecurityDialog *self)
 
   result_str = g_string_new (NULL);
 
-  g_string_append (result_str, _("Device Security Report"));
+  // TRANSLATORS: device security report fields are left untranslated as developers expect bug reports in English
+  g_string_append (result_str, "Device Security Report");
   g_string_append (result_str, "\n======================\n\n");
 
-  g_string_append (result_str, _("Report details"));
+  g_string_append (result_str, "Report details");
   g_string_append (result_str, "\n");
 
   g_string_append (result_str, "  ");
-  hsi_report_title_print_padding (_("Date generated:"), result_str, 0);
+  hsi_report_title_print_padding ("Date generated:", result_str, 0);
   date = g_date_time_new_now_local ();
   date_string = g_date_time_format (date, "%Y-%m-%d %H:%M:%S");
 
   g_string_append_printf (result_str, "%s\n", date_string);
 
   g_string_append (result_str, "  ");
-  /* TRANSLATOR: This is the title for showing the version of fwupd service. */
-  hsi_report_title_print_padding (_("fwupd version:"), result_str, 00);
+  hsi_report_title_print_padding ("fwupd version:", result_str, 00);
   fwupd_ver = fwupd_get_property ("DaemonVersion");
   g_string_append_printf (result_str, "%s", fwupd_ver);
   g_string_append (result_str, "\n\n");
@@ -286,26 +286,23 @@ on_hsi_detail_button_clicked_cb (CcFirmwareSecurityDialog *self)
   g_string_append (result_str, "\n");
 
   g_string_append (result_str, "  ");
-  hsi_report_title_print_padding (_("Hardware model:"), result_str, 0);
+  hsi_report_title_print_padding ("Hardware model:", result_str, 0);
   vendor = fwupd_get_property ("HostVendor");
   product = fwupd_get_property ("HostProduct");
   g_string_append_printf (result_str, "%s %s\n", vendor, product);
 
   g_string_append (result_str, "  ");
-  /* TRANSLATOR: "Processor" indicates the CPU model name. */
-  hsi_report_title_print_padding (_("Processor:"), result_str, 0);
+  hsi_report_title_print_padding ("Processor:", result_str, 0);
   cpu_model = cpu_get_model ();
   g_string_append_printf (result_str, "%s\n", cpu_model);
 
   g_string_append (result_str, "  ");
-  /* TRANSLATOR: "OS" indicates the OS name, ex: Fedora 38. */
-  hsi_report_title_print_padding (_("OS:"), result_str, 0);
+  hsi_report_title_print_padding ("OS:", result_str, 0);
   os_name = get_os_name ();
   g_string_append_printf (result_str, "%s\n", os_name);
 
   g_string_append (result_str, "  ");
-  /* TRANSLATOR: This is the title for device security level. */
-  hsi_report_title_print_padding (_("Security level:"), result_str, 0);
+  hsi_report_title_print_padding ("Security level:", result_str, 0);
   hsi_level = fwupd_get_property ("HostSecurityId");
   g_string_append_printf (result_str, "%s\n", hsi_level);
   g_string_append (result_str, "\n");
@@ -334,13 +331,12 @@ on_hsi_detail_button_clicked_cb (CcFirmwareSecurityDialog *self)
         {
           g_string_append_printf (result_str, "HSI-");
           g_string_append_printf (result_str, "%i ", i);
-          /* TRANSLATOR: This is the postfix of "HSI-n Tests" title. */
-          g_string_append (result_str, _("Tests"));
+          g_string_append (result_str, "Tests");
           g_string_append (result_str, "\n");
         } 
       else
         {
-          g_string_append (result_str, _("Runtime Tests"));
+          g_string_append (result_str, "Runtime Tests");
           g_string_append (result_str, "\n");
         }
 
@@ -358,15 +354,13 @@ on_hsi_detail_button_clicked_cb (CcFirmwareSecurityDialog *self)
           if (firmware_security_attr_has_flag (attr, FWUPD_SECURITY_ATTR_FLAG_SUCCESS))
             {
               /* Passed */
-              /* TRANSLATOR: If the status for security attribute is success, "Pass " is shown. */
-              g_string_append (result_str, _("Pass"));
+              g_string_append (result_str, "Pass");
               g_string_append (result_str, " ");
             }
           else
             {
               /* Failed */
-              /* TRANSLATOR: If the status for security attribute is success, "! Fail " is shown. */
-              result_str = g_string_overwrite (result_str, result_str->len-2, _("! Fail"));
+              result_str = g_string_overwrite (result_str, result_str->len-2, "! Fail");
               g_string_append (result_str, " ");
             }
           hsi_result = fwupd_security_attr_result_to_string (attr->result);
@@ -378,11 +372,11 @@ on_hsi_detail_button_clicked_cb (CcFirmwareSecurityDialog *self)
         g_string_append (result_str, "\n");
     }
 
-    g_string_append (result_str, _("Host security events"));
+    g_string_append (result_str, "Host security events");
     g_string_append (result_str, "\n");
     g_string_append (result_str, self->event_log_str->str);
     g_string_append (result_str, "\n");
-    g_string_append (result_str, _("For information on the contents of this report, see https://fwupd.github.io/hsi.html"));
+    g_string_append (result_str, "For information on the contents of this report, see https://fwupd.github.io/hsi.html");
 
     display = gdk_display_get_default ();
     clip_board = gdk_display_get_clipboard (display);
