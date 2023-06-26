@@ -1434,7 +1434,8 @@ cc_display_config_dbus_generate_cloning_modes (CcDisplayConfig *pself)
         best_mode = virtual_mode;
     }
 
-  best_mode->flags |= MODE_PREFERRED;
+  if (best_mode)
+    best_mode->flags |= MODE_PREFERRED;
 
   return clone_modes;
 }
