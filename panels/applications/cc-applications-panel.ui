@@ -31,7 +31,8 @@
             <property name="title" translatable="yes">No apps</property>
             <child>
               <object class="GtkButton" id="install_button">
-                <property name="label" translatable="yes">Install some…</property>
+                <property name="label" translatable="yes">_Install some…</property>
+                <property name="use-underline">True</property>
                 <property name="halign">center</property>
                 <signal name="clicked" handler="open_software_cb" object="CcApplicationsPanel" swapped="yes"/>
                 <style>
@@ -81,7 +82,8 @@
                         <property name="spacing">18</property>
                         <child>
                           <object class="GtkButton" id="launch_button">
-                            <property name="label" translatable="yes">Open</property>
+                            <property name="label" translatable="yes">_Open</property>
+                            <property name="use-underline">True</property>
                             <signal name="clicked" handler="on_launch_button_clicked_cb" object="CcApplicationsPanel" swapped="yes" />
                             <style>
                               <class name="pill" />
@@ -91,7 +93,8 @@
                         </child>
                         <child>
                           <object class="GtkButton" id="view_details_button">
-                            <property name="label" translatable="yes">App Details</property>
+                            <property name="label" translatable="yes">App _Details</property>
+                            <property name="use-underline">True</property>
                             <style>
                               <class name="pill" />
                             </style>
@@ -441,7 +444,8 @@
           <object class="AdwPreferencesGroup">
             <child>
               <object class="GtkButton" id="clear_cache_button">
-                <property name="label" translatable="yes">Clear Cache…</property>
+                <property name="label" translatable="yes">_Clear Cache…</property>
+                <property name="use-underline">True</property>
                 <signal name="clicked" handler="clear_cache_cb" object="CcApplicationsPanel" swapped="yes"/>
               </object>
             </child>
