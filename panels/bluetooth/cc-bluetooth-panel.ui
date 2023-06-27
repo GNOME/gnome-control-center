@@ -39,7 +39,8 @@
             <property name="description" translatable="yes">Bluetooth is disabled when airplane mode is on</property>
             <property name="child">
               <object class="GtkButton">
-                <property name="label" translatable="yes">Turn Off Airplane Mode</property>
+                <property name="label" translatable="yes">_Turn Off Airplane Mode</property>
+                <property name="use-underline">True</property>
                 <property name="halign">center</property>
                 <property name="valign">center</property>
                 <signal name="clicked" handler="airplane_mode_off_button_clicked_cb" object="CcBluetoothPanel" swapped="yes"/>
