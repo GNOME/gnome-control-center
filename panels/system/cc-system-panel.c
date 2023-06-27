@@ -27,6 +27,8 @@
 #include "cc-system-panel.h"
 #include "cc-system-resources.h"
 
+#include "cc-system-region-language-page.h"
+
 struct _CcSystemPanel
 {
   CcPanel    parent_instance;
@@ -40,10 +42,14 @@ static void
 cc_system_panel_class_init (CcSystemPanelClass *klass)
 {
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
+  GObjectClass   *object_class = G_OBJECT_CLASS (klass);
+  CcPanelClass   *panel_class = CC_PANEL_CLASS (klass);
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/system/cc-system-panel.ui");
 
   gtk_widget_class_bind_template_child (widget_class, CcSystemPanel, navigation);
+
+  g_type_ensure (CC_TYPE_SYSTEM_REGION_LANGUAGE_PAGE);
 }
 
 static void
