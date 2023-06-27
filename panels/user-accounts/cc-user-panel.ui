@@ -275,7 +275,8 @@
                         <child>
                           <object class="GtkButton" id="remove_user_button">
                             <property name="visible">False</property>
-                            <property name="label" translatable="yes">Remove User…</property>
+                            <property name="use_underline">True</property>
+                            <property name="label" translatable="yes">_Remove User…</property>
                             <signal name="clicked" handler="delete_user" object="CcUserPanel" swapped="yes"/>
                             <style>
                               <class name="destructive-action"/>
@@ -284,7 +285,8 @@
                         </child>
                         <child>
                           <object class="GtkButton" id="add_user_button">
-                            <property name="label" translatable="yes">Add User…</property>
+                            <property name="use_underline">True</property>
+                            <property name="label" translatable="yes">_Add User…</property>
                             <signal name="clicked" handler="add_user" object="CcUserPanel" swapped="yes"/>
                             <style>
                               <class name="suggested-action"/>
