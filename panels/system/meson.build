@@ -12,6 +12,9 @@ i18n.merge_file(
 
 sources = files(
   'cc-system-panel.c',
+  'region/cc-region-page.c',
+  'region/cc-format-chooser.c',
+  'region/cc-format-preview.c',
 )
 
 sources += gnome.compile_resources(
@@ -21,7 +24,18 @@ sources += gnome.compile_resources(
   export : true
 )
 
-deps = common_deps
+deps = common_deps + [
+  accounts_dep,
+  gnome_desktop_dep,
+  liblanguage_dep,
+  polkit_gobject_dep
+]
+
+if enable_ibus
+  deps += ibus_dep
+endif
+
+subdir('region')
 
 panels_libs += static_library(
   cappletname,

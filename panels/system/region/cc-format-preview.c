@@ -231,7 +231,7 @@ cc_format_preview_class_init (CcFormatPreviewClass *klass)
                                                         NULL,
                                                         G_PARAM_READWRITE));
 
-  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/region/cc-format-preview.ui");
+  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/system/region/cc-format-preview.ui");
 
   gtk_widget_class_bind_template_child (widget_class, CcFormatPreview, date_format_label);
   gtk_widget_class_bind_template_child (widget_class, CcFormatPreview, date_time_format_label);

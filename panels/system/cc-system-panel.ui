@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <template class="CcSystemPanel" parent="CcPanel">
-
-    <child type="titlebar">
-      <object class="AdwBin"/>
-    </child>
-
-    <child type="content">
+    <child type="child">
       <object class="AdwNavigationView" id="navigation">
 
         <child>
@@ -14,20 +9,38 @@
             <property name="title" translatable="yes">System</property>
             <property name="child">
               <object class="AdwToolbarView">
-                <property name="top-bar-style">raised</property>
-
                 <child type="top">
-                  <object class="AdwHeaderBar">
-                  </object>
+                  <object class="AdwHeaderBar"/>
                 </child>
 
                 <property name="content">
-                  <!-- ... -->
+                  <object class="AdwPreferencesPage">
+                    <child>
+                      <object class="AdwPreferencesGroup">
+
+                        <child>
+                          <object class="CcListRow">
+                            <property name="title" translatable="yes">_Region &amp;amp; Language</property>
+                            <property name="icon-name">org.gnome.Settings-region-symbolic</property>
+                            <property name="use-underline">True</property>
+                            <property name="show-arrow">True</property>
+                            <property name="action-name">navigation.push</property>
+                            <property name="action-target">'system-region-page'</property>
+                          </object>
+                        </child>
+
+                      </object>
+                    </child>
+                  </object>
                 </property>
 
               </object>
             </property>
           </object>
+        </child>
+
+        <child>
+          <object class="CcRegionPage"/>
         </child>
 
       </object>

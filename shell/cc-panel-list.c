@@ -375,7 +375,6 @@ static const gchar * const panel_order[] = {
 
   /* Details page */
   "system",
-  "region",
   "universal-access",
   "user-accounts",
   "reset-settings",

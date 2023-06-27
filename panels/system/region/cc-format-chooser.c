@@ -465,7 +465,7 @@ cc_format_chooser_class_init (CcFormatChooserClass *klass)
 
         gtk_widget_class_add_binding_action (widget_class, GDK_KEY_Escape, 0, "window.close", NULL);
 
-        gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/region/cc-format-chooser.ui");
+        gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/system/region/cc-format-chooser.ui");
 
         gtk_widget_class_bind_template_child (widget_class, CcFormatChooser, title_bar);
         gtk_widget_class_bind_template_child (widget_class, CcFormatChooser, title_buttons);

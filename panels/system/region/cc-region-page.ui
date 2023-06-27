@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
-  <template class="CcRegionPanel" parent="CcPanel">
+  <template class="CcRegionPage" parent="AdwNavigationPage">
+    <property name="title" translatable="yes">Region &amp; Language</property>
+    <property name="tag">system-region-page</property>
+
     <property name="child">
       <object class="AdwToolbarView">
         <child type="top">
@@ -15,14 +18,13 @@
               <object class="AdwBanner" id="banner">
                 <property name="title" translatable="yes">Language and format will be changed after next login</property>
                 <property name="button-label" translatable="yes">Log Out…</property>
-                <signal name="button-clicked" handler="restart_now" object="CcRegionPanel" swapped="yes"/>
+                <signal name="button-clicked" handler="restart_now" object="CcRegionPage" swapped="yes"/>
               </object>
             </child>
 
             <child>
               <object class="AdwPreferencesPage">
                 <property name="description" translatable="yes">The language setting is used for interface text and web pages. Formats are used for numbers, dates, and currencies.</property>
-
                 <child>
                   <object class="AdwPreferencesGroup">
                     <property name="title" translatable="yes">Your Account</property>
@@ -33,7 +35,7 @@
                         <property name="title" translatable="yes">_Language</property>
                         <property name="activatable">True</property>
                         <property name="show-arrow">True</property>
-                        <signal name="activated" handler="on_user_language_row_activated_cb" object="CcRegionPanel" swapped="yes" />
+                        <signal name="activated" handler="on_user_language_row_activated_cb" object="CcRegionPage" swapped="yes" />
                       </object>
                     </child>
 
@@ -43,10 +45,9 @@
                         <property name="title" translatable="yes">_Formats</property>
                         <property name="activatable">True</property>
                         <property name="show-arrow">True</property>
-                        <signal name="activated" handler="on_user_formats_row_activated_cb" object="CcRegionPanel" swapped="yes" />
+                        <signal name="activated" handler="on_user_formats_row_activated_cb" object="CcRegionPage" swapped="yes" />
                       </object>
                     </child>
-
                   </object>
                 </child>
 
@@ -60,7 +61,7 @@
                         <property name="title" translatable="yes">_Language</property>
                         <property name="activatable">True</property>
                         <property name="show-arrow">True</property>
-                        <signal name="activated" handler="on_login_language_row_activated_cb" object="CcRegionPanel" swapped="yes" />
+                        <signal name="activated" handler="on_login_language_row_activated_cb" object="CcRegionPage" swapped="yes" />
                       </object>
                     </child>
 
@@ -70,13 +71,11 @@
                         <property name="title" translatable="yes">_Formats</property>
                         <property name="activatable">True</property>
                         <property name="show-arrow">True</property>
-                        <signal name="activated" handler="on_login_formats_row_activated_cb" object="CcRegionPanel" swapped="yes" />
+                        <signal name="activated" handler="on_login_formats_row_activated_cb" object="CcRegionPage" swapped="yes" />
                       </object>
                     </child>
-
                   </object>
                 </child>
-
               </object>
             </child>
           </object>

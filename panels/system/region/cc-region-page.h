@@ -1,4 +1,6 @@
 /*
+ * cc-region-page.h
+ *
  * Copyright (C) 2010 Intel, Inc
  *
  * This program is free software; you can redistribute it and/or modify
@@ -14,17 +16,20 @@
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
  *
- * Author: Sergey Udaltsov <svu@gnome.org>
- *
+ * Authors:
+ *   Sergey Udaltsov <svu@gnome.org>
+ *   Gotam Gorabh <gautamy672@gmail.com>
  */
 
 #pragma once
 
-#include <shell/cc-panel.h>
+
+#include <adwaita.h>
 
 G_BEGIN_DECLS
 
-#define CC_TYPE_REGION_PANEL (cc_region_panel_get_type ())
-G_DECLARE_FINAL_TYPE (CcRegionPanel, cc_region_panel, CC, REGION_PANEL, CcPanel)
+#define CC_TYPE_REGION_PAGE (cc_region_page_get_type ())
+
+G_DECLARE_FINAL_TYPE (CcRegionPage, cc_region_page, CC, REGION_PAGE, AdwNavigationPage)
 
 G_END_DECLS

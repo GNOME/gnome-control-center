@@ -27,6 +27,8 @@
 #include "cc-system-panel.h"
 #include "cc-system-resources.h"
 
+#include "region/cc-region-page.h"
+
 struct _CcSystemPanel
 {
   CcPanel    parent_instance;
@@ -44,6 +46,8 @@ cc_system_panel_class_init (CcSystemPanelClass *klass)
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/system/cc-system-panel.ui");
 
   gtk_widget_class_bind_template_child (widget_class, CcSystemPanel, navigation);
+
+  g_type_ensure (CC_TYPE_REGION_PAGE);
 }
 
 static void
