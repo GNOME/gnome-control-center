@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center.HEAD.he\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2023-05-30 08:35+0000\n"
-"PO-Revision-Date: 2023-06-04 13:57+0300\n"
+"POT-Creation-Date: 2023-06-28 01:03+0000\n"
+"PO-Revision-Date: 2023-06-28 10:44+0300\n"
 "Last-Translator: Yosef Or Boczko <yoseforb@gmail.com>\n"
 "Language-Team: Hebrew <yoseforb@gmail.com>\n"
 "Language: he\n"
@@ -80,7 +80,7 @@ msgstr "מערכת הפעלה"
 #: panels/applications/cc-applications-panel.c:848
 #: panels/keyboard/01-launchers.xml.in:6
 #: shell/appdata/org.gnome.Settings.appdata.xml.in:7 shell/cc-window.c:246
-#: shell/cc-window.c:881 shell/cc-window.ui:22
+#: shell/cc-window.c:905 shell/cc-window.ui:22
 #: shell/org.gnome.Settings.desktop.in:3
 msgid "Settings"
 msgstr "הגדרות"
@@ -92,10 +92,10 @@ msgstr "ניתן לשנות הגדרות"
 #: panels/applications/cc-applications-panel.c:850
 #, c-format
 msgid ""
-"%s requires access to the following system resources. To stop this access, "
-"the app must be removed."
+"<b>%s</b> requires access to the following system resources. To stop this "
+"access, the app must be removed."
 msgstr ""
-"היישום ‏%s דורש גישה למשאבי המערכת הבאים. על מנת למנוע את הגישה, יש להסיר את "
+"‏<b>%s</b> דורש גישה למשאבי המערכת הבאים. על מנת למנוע את הגישה, יש להסיר את "
 "היישום."
 
 #: panels/applications/cc-applications-panel.c:1192
@@ -113,46 +113,48 @@ msgid "<b>%s</b> is used to open the following types of files and links."
 msgstr "‫<b>%s</b> משמש לפתיחת סוגי הקבצים והקישורים הבאים."
 
 #. Translators: '%s' is the formatted size, e.g. "26.2 MB"
-#: panels/applications/cc-applications-panel.c:1251
+#: panels/applications/cc-applications-panel.c:1248
 #, c-format
 msgid "%s of disk space used."
 msgstr "‫%s משטח הכונן מנוצלים."
 
-#: panels/applications/cc-applications-panel.c:1415
+#: panels/applications/cc-applications-panel.c:1412
 #: panels/applications/cc-applications-panel.ui:19
 #: panels/applications/gnome-applications-panel.desktop.in:3
 msgid "Apps"
 msgstr "יישומים"
 
 #: panels/applications/cc-applications-panel.ui:31
-msgid "No apps"
+msgid "No Apps"
 msgstr "אין יישומים"
 
 #: panels/applications/cc-applications-panel.ui:34
-msgid "Install some…"
-msgstr "מתבצעת התקנה…"
+msgid "_Install Some…"
+msgstr "מתבצעת ה_תקנה…"
 
-#: panels/applications/cc-applications-panel.ui:84
-msgid "Open"
-msgstr "פתיחה"
+#: panels/applications/cc-applications-panel.ui:85
+#: panels/printers/pp-details-dialog.c:268
+#: panels/sharing/cc-sharing-panel.c:448
+msgid "_Open"
+msgstr "_פתיחה"
 
-#: panels/applications/cc-applications-panel.ui:94
-msgid "App Details"
-msgstr "פרטי יישום"
+#: panels/applications/cc-applications-panel.ui:96
+msgid "App _Details"
+msgstr "_פרטי יישום"
 
-#: panels/applications/cc-applications-panel.ui:112
-#: panels/applications/cc-applications-panel.ui:119
+#: panels/applications/cc-applications-panel.ui:115
+#: panels/applications/cc-applications-panel.ui:122
 #: panels/keyboard/01-launchers.xml.in:16
 #: panels/keyboard/cc-input-chooser.ui:76
 #: panels/printers/new-printer-dialog.ui:230
 #: panels/region/cc-format-chooser.ui:82
-#: panels/search/gnome-search-panel.desktop.in:3 shell/cc-window.ui:40
-#: shell/cc-window.ui:42
+#: panels/search/gnome-search-panel.desktop.in:3 shell/cc-window.ui:41
+#: shell/cc-window.ui:43
 msgid "Search"
 msgstr "חיפוש"
 
-#: panels/applications/cc-applications-panel.ui:113
-#: panels/applications/cc-applications-panel.ui:120
+#: panels/applications/cc-applications-panel.ui:116
+#: panels/applications/cc-applications-panel.ui:123
 msgid "Receive system searches and send results"
 msgstr "קבלת חיפושי מערכת ושליחת התוצאות"
 
@@ -162,180 +164,180 @@ msgstr "קבלת חיפושי מערכת ושליחת התוצאות"
 #. TRANSLATORS: Status of Parental Controls setup
 #. translators:
 #. * The device has been disabled
-#: panels/applications/cc-applications-panel.ui:121
-#: panels/applications/cc-applications-panel.ui:163
-#: panels/applications/cc-applications-panel.ui:184
-#: panels/applications/cc-applications-panel.ui:198
-#: panels/applications/cc-applications-panel.ui:212
+#: panels/applications/cc-applications-panel.ui:124
+#: panels/applications/cc-applications-panel.ui:166
+#: panels/applications/cc-applications-panel.ui:187
+#: panels/applications/cc-applications-panel.ui:201
+#: panels/applications/cc-applications-panel.ui:215
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:123
-#: panels/keyboard/cc-xkb-modifier-dialog.c:344
+#: panels/keyboard/cc-xkb-modifier-dialog.c:342
 #: panels/keyboard/keyboard-shortcuts.c:367
-#: panels/user-accounts/cc-user-panel.c:781
-#: panels/user-accounts/cc-user-panel.c:905
+#: panels/user-accounts/cc-user-panel.c:766
+#: panels/user-accounts/cc-user-panel.c:889
 #: panels/wwan/cc-wwan-device-page.c:477
 #: subprojects/gvc/gvc-mixer-control.c:1908
 msgid "Disabled"
 msgstr "מושבת"
 
-#: panels/applications/cc-applications-panel.ui:126
+#: panels/applications/cc-applications-panel.ui:129
 #: panels/notifications/gnome-notifications-panel.desktop.in:3
 msgid "Notifications"
 msgstr "התראות"
 
-#: panels/applications/cc-applications-panel.ui:127
+#: panels/applications/cc-applications-panel.ui:130
 msgid "Show system notifications"
 msgstr "הצגת התראות מערכת"
 
-#: panels/applications/cc-applications-panel.ui:133
+#: panels/applications/cc-applications-panel.ui:136
 msgid "Run in Background"
 msgstr "פעילות ברקע"
 
-#: panels/applications/cc-applications-panel.ui:134
+#: panels/applications/cc-applications-panel.ui:137
 msgid "Allow activity when the app is closed"
 msgstr "לאפשר פעילות כשהיישום סגור"
 
-#: panels/applications/cc-applications-panel.ui:140
+#: panels/applications/cc-applications-panel.ui:143
 msgid "Screenshots"
 msgstr "צילומי מסך"
 
-#: panels/applications/cc-applications-panel.ui:141
+#: panels/applications/cc-applications-panel.ui:144
 msgid "Take pictures of the screen at any time"
 msgstr "צילום המסך בכל רגע"
 
-#: panels/applications/cc-applications-panel.ui:147
+#: panels/applications/cc-applications-panel.ui:150
 msgid "Change Wallpaper"
 msgstr "החלפת רקע"
 
-#: panels/applications/cc-applications-panel.ui:148
+#: panels/applications/cc-applications-panel.ui:151
 msgid "Change the desktop wallpaper."
 msgstr "החלפת רקע שולחן העבודה."
 
-#: panels/applications/cc-applications-panel.ui:154
-#: panels/applications/cc-applications-panel.ui:161
+#: panels/applications/cc-applications-panel.ui:157
+#: panels/applications/cc-applications-panel.ui:164
 #: panels/sound/cc-sound-panel.ui:352
 msgid "Sounds"
 msgstr "שמע"
 
-#: panels/applications/cc-applications-panel.ui:155
+#: panels/applications/cc-applications-panel.ui:158
 msgid "Reproduce sounds."
 msgstr "הפקת צלילים."
 
-#: panels/applications/cc-applications-panel.ui:162
+#: panels/applications/cc-applications-panel.ui:165
 msgid "Reproduce sounds"
 msgstr "הפקת צלילים"
 
-#: panels/applications/cc-applications-panel.ui:168
+#: panels/applications/cc-applications-panel.ui:171
 msgid "Inhibit Shortcuts"
 msgstr "מניעת צירופי מקשים"
 
-#: panels/applications/cc-applications-panel.ui:169
+#: panels/applications/cc-applications-panel.ui:172
 msgid "Block standard keyboard shortcuts"
 msgstr "חסימת צירופי מקשי המערכת הרגילים"
 
-#: panels/applications/cc-applications-panel.ui:175
-#: panels/applications/cc-applications-panel.ui:182
+#: panels/applications/cc-applications-panel.ui:178
+#: panels/applications/cc-applications-panel.ui:185
 msgid "Camera"
 msgstr "מצלמה"
 
-#: panels/applications/cc-applications-panel.ui:176
-#: panels/applications/cc-applications-panel.ui:183
+#: panels/applications/cc-applications-panel.ui:179
+#: panels/applications/cc-applications-panel.ui:186
 msgid "Take pictures with the camera"
 msgstr "צילום תמונות עם המצלמה"
 
-#: panels/applications/cc-applications-panel.ui:189
-#: panels/applications/cc-applications-panel.ui:196
+#: panels/applications/cc-applications-panel.ui:192
+#: panels/applications/cc-applications-panel.ui:199
 msgid "Microphone"
 msgstr "מיקרופון"
 
-#: panels/applications/cc-applications-panel.ui:190
-#: panels/applications/cc-applications-panel.ui:197
+#: panels/applications/cc-applications-panel.ui:193
+#: panels/applications/cc-applications-panel.ui:200
 msgid "Record audio with the microphone"
 msgstr "הקלטת שמע עם המיקרופון"
 
-#: panels/applications/cc-applications-panel.ui:203
-#: panels/applications/cc-applications-panel.ui:210
+#: panels/applications/cc-applications-panel.ui:206
+#: panels/applications/cc-applications-panel.ui:213
 #: panels/location/gnome-location-panel.desktop.in:3
 msgid "Location Services"
 msgstr "שירותי איכון"
 
-#: panels/applications/cc-applications-panel.ui:204
-#: panels/applications/cc-applications-panel.ui:211
+#: panels/applications/cc-applications-panel.ui:207
+#: panels/applications/cc-applications-panel.ui:214
 msgid "Access device location data"
 msgstr "גישה לנתוני המיקום של המכשיר"
 
-#: panels/applications/cc-applications-panel.ui:222
-#: panels/applications/cc-applications-panel.ui:327
+#: panels/applications/cc-applications-panel.ui:225
+#: panels/applications/cc-applications-panel.ui:330
 msgid "Required Access"
 msgstr "גישה נדרשת"
 
-#: panels/applications/cc-applications-panel.ui:223
+#: panels/applications/cc-applications-panel.ui:226
 msgid "System access that is required by the app"
 msgstr "גישה למערכת הנדרשת על ידי היישום"
 
-#: panels/applications/cc-applications-panel.ui:231
+#: panels/applications/cc-applications-panel.ui:234
 msgid "File &amp; Link Associations"
 msgstr "שיוכי קבצים וקישורים"
 
-#: panels/applications/cc-applications-panel.ui:239
-#: panels/applications/cc-applications-panel.ui:413
+#: panels/applications/cc-applications-panel.ui:242
+#: panels/applications/cc-applications-panel.ui:405
 msgid "Storage"
 msgstr "אחסון"
 
-#: panels/applications/cc-applications-panel.ui:258
+#: panels/applications/cc-applications-panel.ui:261
 msgid "Search apps"
 msgstr "חיפוש יישומים"
 
-#: panels/applications/cc-applications-panel.ui:302 shell/cc-panel-list.ui:108
+#: panels/applications/cc-applications-panel.ui:305 shell/cc-panel-list.ui:109
 msgid "No results found"
 msgstr "לא נמצאו תוצאות"
 
-#: panels/applications/cc-applications-panel.ui:312 shell/cc-panel-list.ui:117
+#: panels/applications/cc-applications-panel.ui:315 shell/cc-panel-list.ui:118
 msgid "Try a different search"
 msgstr "יש לנסות חיפוש שונה"
 
-#: panels/applications/cc-applications-panel.ui:356
+#: panels/applications/cc-applications-panel.ui:359
 msgid "File & Link Associations"
 msgstr "שיוכי קבצים וקישורים"
 
-#: panels/applications/cc-applications-panel.ui:381
+#: panels/applications/cc-applications-panel.ui:373
 msgid "File Types"
 msgstr "סוגי קבצים"
 
-#: panels/applications/cc-applications-panel.ui:387
+#: panels/applications/cc-applications-panel.ui:379
 msgid "Link Types"
 msgstr "סוגי קישורים"
 
-#: panels/applications/cc-applications-panel.ui:397
+#: panels/applications/cc-applications-panel.ui:389
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:131
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:234
 #: panels/keyboard/cc-keyboard-shortcut-row.ui:25
 msgid "Reset"
 msgstr "איפוס"
 
-#: panels/applications/cc-applications-panel.ui:424
+#: panels/applications/cc-applications-panel.ui:414
 msgid "How much disk space this app is occupying with app data and caches."
 msgstr ""
 "כמות האחסון על הדיסק בשימוש על ידי היישום לטובת אחסון מידע ונתוני מטמון."
 
-#: panels/applications/cc-applications-panel.ui:427
+#: panels/applications/cc-applications-panel.ui:419
 msgid "App"
 msgstr "יישום"
 
-#: panels/applications/cc-applications-panel.ui:433
+#: panels/applications/cc-applications-panel.ui:425
 msgid "Data"
 msgstr "מידע"
 
-#: panels/applications/cc-applications-panel.ui:439
+#: panels/applications/cc-applications-panel.ui:431
 msgid "Cache"
 msgstr "מטמון"
 
-#: panels/applications/cc-applications-panel.ui:445
+#: panels/applications/cc-applications-panel.ui:437
 msgid "<b>Total</b>"
 msgstr "‫<b>סך הכול</b>"
 
-#: panels/applications/cc-applications-panel.ui:455
-msgid "Clear Cache…"
-msgstr "ניקוי מטמון…"
+#: panels/applications/cc-applications-panel.ui:447
+msgid "_Clear Cache…"
+msgstr "_ניקוי מטמון…"
 
 #: panels/applications/gnome-applications-panel.desktop.in:4
 msgid "Control various app permissions and settings"
@@ -346,45 +348,9 @@ msgstr "שליטה בהגדרות והרשאות של מספר יישומים"
 msgid "application;flatpak;permission;setting;"
 msgstr "יישומים;flatpak;הרשאות;השראה;יישום;אפליקציה;"
 
-#: panels/background/cc-background-chooser.c:312
+#: panels/background/cc-background-chooser.c:320
 msgid "Select a picture"
 msgstr "בחירת תמונה"
-
-#: panels/background/cc-background-chooser.c:315
-#: panels/color/cc-color-calibrate.ui:22 panels/color/cc-color-panel.c:285
-#: panels/color/cc-color-panel.c:845 panels/common/cc-language-chooser.ui:21
-#: panels/display/cc-display-panel.ui:42 panels/keyboard/cc-input-chooser.ui:11
-#: panels/keyboard/cc-keyboard-shortcut-editor.ui:23
-#: panels/network/cc-wifi-hotspot-dialog.ui:142
-#: panels/network/cc-wifi-panel.c:744
-#: panels/network/connection-editor/ce-page-details.c:100
-#: panels/network/connection-editor/connection-editor.ui:14
-#: panels/network/net-device-wifi.c:863
-#: panels/printers/new-printer-dialog.ui:50
-#: panels/printers/pp-details-dialog.c:269
-#: panels/region/cc-format-chooser.ui:24
-#: panels/search/cc-search-locations-dialog.c:677
-#: panels/sharing/cc-sharing-panel.c:447 panels/usage/cc-usage-panel.c:139
-#: panels/user-accounts/cc-add-user-dialog.ui:25
-#: panels/user-accounts/cc-avatar-chooser.c:96
-#: panels/user-accounts/cc-avatar-chooser.c:166
-#: panels/user-accounts/cc-fingerprint-dialog.ui:32
-#: panels/user-accounts/cc-password-dialog.ui:20
-#: panels/user-accounts/cc-user-panel.c:620
-#: panels/user-accounts/cc-user-panel.ui:336
-#: panels/user-accounts/data/join-dialog.ui:17
-#: panels/wwan/cc-wwan-mode-dialog.ui:32
-#: panels/wwan/cc-wwan-network-dialog.ui:108
-#: panels/wwan/cc-wwan-sim-lock-dialog.ui:240
-msgid "_Cancel"
-msgstr "_ביטול"
-
-#: panels/background/cc-background-chooser.c:316
-#: panels/printers/pp-details-dialog.c:270
-#: panels/sharing/cc-sharing-panel.c:448
-#: panels/user-accounts/cc-avatar-chooser.c:167
-msgid "_Open"
-msgstr "_פתיחה"
 
 #: panels/background/cc-background-item.c:169
 msgid "multiple sizes"
@@ -468,20 +434,20 @@ msgid "Bluetooth is disabled when airplane mode is on"
 msgstr "‏בלוטות' מושבת כאשר מצב טיסה מופעל"
 
 #: panels/bluetooth/cc-bluetooth-panel.ui:42
-msgid "Turn Off Airplane Mode"
-msgstr "לכבות מצב טיסה"
+msgid "_Turn Off Airplane Mode"
+msgstr "_כיבוי מצב טיסה"
 
-#: panels/bluetooth/cc-bluetooth-panel.ui:57
+#: panels/bluetooth/cc-bluetooth-panel.ui:58
 msgid "Hardware Airplane Mode is On"
 msgstr "מצב טיסה חומרתי מופעל"
 
-#: panels/bluetooth/cc-bluetooth-panel.ui:58
+#: panels/bluetooth/cc-bluetooth-panel.ui:59
 msgid "Turn off the Airplane mode switch to enable Bluetooth."
 msgstr "יש לכבות את מצב הטיסה על מנת לאפשר בלוטות'."
 
 #. Translators: The found device is a printer connected via Bluetooth
 #: panels/bluetooth/gnome-bluetooth-panel.desktop.in:3
-#: panels/network/cc-network-panel.ui:75
+#: panels/network/cc-network-panel.ui:76
 #: panels/printers/pp-new-printer-dialog.c:1383
 msgid "Bluetooth"
 msgstr "בלוטות'"
@@ -614,6 +580,32 @@ msgstr "נא לא להפריע להתקן הכיול במהלך ההתקדמות
 msgid "Display Calibration"
 msgstr "כיול התצוגה"
 
+#: panels/color/cc-color-calibrate.ui:22
+#: panels/common/cc-language-chooser.ui:21
+#: panels/display/cc-display-panel.ui:42 panels/keyboard/cc-input-chooser.ui:11
+#: panels/keyboard/cc-keyboard-shortcut-editor.ui:23
+#: panels/network/cc-wifi-hotspot-dialog.ui:142
+#: panels/network/cc-wifi-panel.c:738
+#: panels/network/connection-editor/ce-page-details.c:99
+#: panels/network/connection-editor/connection-editor.ui:14
+#: panels/network/net-device-wifi.c:862
+#: panels/printers/new-printer-dialog.ui:50
+#: panels/printers/pp-details-dialog.c:267
+#: panels/region/cc-format-chooser.ui:24 panels/sharing/cc-sharing-panel.c:447
+#: panels/usage/cc-usage-panel.c:139
+#: panels/user-accounts/cc-add-user-dialog.ui:25
+#: panels/user-accounts/cc-avatar-chooser.c:96
+#: panels/user-accounts/cc-fingerprint-dialog.ui:32
+#: panels/user-accounts/cc-password-dialog.ui:20
+#: panels/user-accounts/cc-user-panel.c:605
+#: panels/user-accounts/cc-user-panel.ui:347
+#: panels/user-accounts/data/join-dialog.ui:17
+#: panels/wwan/cc-wwan-mode-dialog.ui:32
+#: panels/wwan/cc-wwan-network-dialog.ui:108
+#: panels/wwan/cc-wwan-sim-lock-dialog.ui:240
+msgid "_Cancel"
+msgstr "_ביטול"
+
 #. This starts the calibration process
 #: panels/color/cc-color-calibrate.ui:28
 msgid "_Start"
@@ -688,85 +680,81 @@ msgstr "ללא כיול"
 
 #. TRANSLATORS: this is a profile prefix to signify the
 #. * profile has been auto-generated for this hardware
-#: panels/color/cc-color-panel.c:161
+#: panels/color/cc-color-panel.c:162
 msgid "Default: "
 msgstr "בררת מחדל: "
 
 #. TRANSLATORS: this is a profile prefix to signify the
 #. * profile his a standard space like AdobeRGB
-#: panels/color/cc-color-panel.c:169
+#: panels/color/cc-color-panel.c:170
 msgid "Colorspace: "
 msgstr "מרחב צבעים: "
 
 #. TRANSLATORS: this is a profile prefix to signify the
 #. * profile is a test profile
-#: panels/color/cc-color-panel.c:176
+#: panels/color/cc-color-panel.c:177
 msgid "Test profile: "
 msgstr "פרופיל בדיקה: "
 
 #. TRANSLATORS: an ICC profile is a file containing colorspace data
-#: panels/color/cc-color-panel.c:283
+#: panels/color/cc-color-panel.c:268
 msgid "Select ICC Profile File"
 msgstr "בחירת פרופיל ICC"
 
-#: panels/color/cc-color-panel.c:286
-msgid "_Import"
-msgstr "יי_בוא"
+#: panels/color/cc-color-panel.c:271
+msgid "Import"
+msgstr "ייבוא"
 
 #. TRANSLATORS: filter name on the file->open dialog
-#: panels/color/cc-color-panel.c:297
+#: panels/color/cc-color-panel.c:283
 msgid "Supported ICC profiles"
 msgstr "פרופילי ICC נתמכים"
 
 #. TRANSLATORS: filter name on the file->open dialog
-#: panels/color/cc-color-panel.c:304
+#: panels/color/cc-color-panel.c:290
 msgid "All files"
 msgstr "כל הקבצים"
 
-#: panels/color/cc-color-panel.c:587
+#: panels/color/cc-color-panel.c:566
 msgid "Screen"
 msgstr "מסך"
 
 #. TRANSLATORS: this is the dialog to save the ICC profile
-#: panels/color/cc-color-panel.c:842
+#: panels/color/cc-color-panel.c:852
 msgid "Save Profile"
 msgstr "שמירת הפרופיל"
 
-#: panels/color/cc-color-panel.c:846 panels/wwan/cc-wwan-apn-dialog.ui:43
-msgid "_Save"
-msgstr "_שמירה"
-
 #. TRANSLATORS: this is when the button is sensitive
-#: panels/color/cc-color-panel.c:1147
+#: panels/color/cc-color-panel.c:1142
 msgid "Create a color profile for the selected device"
 msgstr "יצירת פרופיל צבע עבור ההתקן הנבחר"
 
 #. TRANSLATORS: this is when the button is insensitive
-#: panels/color/cc-color-panel.c:1162 panels/color/cc-color-panel.c:1186
+#: panels/color/cc-color-panel.c:1157 panels/color/cc-color-panel.c:1181
 msgid ""
 "The measuring instrument is not detected. Please check it is turned on and "
 "correctly connected."
 msgstr "התקן המדידה לא זוהה. נא לבדוק כי הוא פועל ומחובר כראוי."
 
 #. TRANSLATORS: this is when the button is insensitive
-#: panels/color/cc-color-panel.c:1196
+#: panels/color/cc-color-panel.c:1191
 msgid "The measuring instrument does not support printer profiling."
 msgstr "התקן המדידה אינו תומך ביצירת פרופילים למדפסות."
 
 #. TRANSLATORS: this is when the button is insensitive
-#: panels/color/cc-color-panel.c:1207
+#: panels/color/cc-color-panel.c:1202
 msgid "The device type is not currently supported."
 msgstr "סוג ההתקן אינו נתמך נכון לעכשיו."
 
 #. Translators: This will be presented as the text of a link to the documentation
 #. translators: Text used in link to privacy policy
-#: panels/color/cc-color-panel.c:2021
+#: panels/color/cc-color-panel.c:1991
 #: panels/diagnostics/cc-diagnostics-panel.c:137
 msgid "Learn more"
 msgstr "מידע נוסף"
 
 #. Translators: %s is a link to the documentation with the label "Learn more"
-#: panels/color/cc-color-panel.c:2023
+#: panels/color/cc-color-panel.c:1993
 #, c-format
 msgid "Each device needs an up to date color profile to be color managed. %s"
 msgstr "לכל התקן דרוש פרופיל צבע עדכני כדי שניתן יהיה לנהל אותו לפי צבע. %s"
@@ -906,7 +894,7 @@ msgstr "_ייבוא קובץ…"
 
 #: panels/color/cc-color-panel.ui:390 panels/keyboard/cc-input-chooser.ui:18
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:41
-#: panels/network/connection-editor/net-connection-editor.c:600
+#: panels/network/connection-editor/net-connection-editor.c:602
 #: panels/printers/new-printer-dialog.ui:87
 #: panels/user-accounts/cc-add-user-dialog.ui:39
 msgid "_Add"
@@ -1187,12 +1175,12 @@ msgid "Decrement Minute"
 msgstr "הפחתת דקה"
 
 #: panels/common/cc-util.c:127
-#: panels/network/connection-editor/ce-page-details.c:199
+#: panels/network/connection-editor/ce-page-details.c:198
 msgid "Today"
 msgstr "היום"
 
 #: panels/common/cc-util.c:131
-#: panels/network/connection-editor/ce-page-details.c:201
+#: panels/network/connection-editor/ce-page-details.c:200
 msgid "Yesterday"
 msgstr "אתמול"
 
@@ -1298,17 +1286,17 @@ msgid "AM / PM"
 msgstr "AM / PM"
 
 #. Translators: This is the full date and time format used in 12-hour mode.
-#: panels/datetime/cc-datetime-panel.c:255
+#: panels/datetime/cc-datetime-panel.c:253
 msgid "%e %B %Y, %l:%M %p"
 msgstr "%e ב%B %Y, %l:%M %p"
 
 #. Translators: This is the full date and time format used in 24-hour mode.
-#: panels/datetime/cc-datetime-panel.c:260
+#: panels/datetime/cc-datetime-panel.c:258
 msgid "%e %B %Y, %R"
 msgstr "%e ב%B %Y, %R"
 
 #. Translators: "city, country"
-#: panels/datetime/cc-datetime-panel.c:413
+#: panels/datetime/cc-datetime-panel.c:411
 #, c-format
 msgctxt "timezone loc"
 msgid "%s, %s"
@@ -1316,7 +1304,7 @@ msgstr "%s, %s"
 
 #. Update the timezone on the listbow row
 #. Translators: "timezone (details)"
-#: panels/datetime/cc-datetime-panel.c:430
+#: panels/datetime/cc-datetime-panel.c:428
 #, c-format
 msgctxt "timezone desc"
 msgid "%s (%s)"
@@ -1464,36 +1452,40 @@ msgstr "שינוי הגדרות השעה והתאריך של המערכת"
 msgid "To change time or date settings, you need to authenticate."
 msgstr "כדי לשנות את הגדרות השעה או התאריך עליך להזדהות."
 
-#: panels/default-apps/cc-default-apps-panel.ui:23
+#: panels/default-apps/cc-default-apps-panel.ui:8
+msgid "Links &amp; Files"
+msgstr "קישורים וקבצים"
+
+#: panels/default-apps/cc-default-apps-panel.ui:12
 msgid "_Web"
 msgstr "_אינטרנט"
 
-#: panels/default-apps/cc-default-apps-panel.ui:33
+#: panels/default-apps/cc-default-apps-panel.ui:20
 msgid "_Mail"
 msgstr "_דוא״ל"
 
-#: panels/default-apps/cc-default-apps-panel.ui:47
+#: panels/default-apps/cc-default-apps-panel.ui:27
 msgid "_Calendar"
 msgstr "_לוח שנה"
 
-#: panels/default-apps/cc-default-apps-panel.ui:61
+#: panels/default-apps/cc-default-apps-panel.ui:34
 msgid "M_usic"
 msgstr "מו_זיקה"
 
-#: panels/default-apps/cc-default-apps-panel.ui:75
+#: panels/default-apps/cc-default-apps-panel.ui:42
 msgid "_Video"
 msgstr "_וידאו"
 
-#: panels/default-apps/cc-default-apps-panel.ui:89
+#: panels/default-apps/cc-default-apps-panel.ui:50
 #: panels/removable-media/cc-removable-media-panel.ui:127
 msgid "_Photos"
 msgstr "תמו_נות"
 
-#: panels/default-apps/cc-default-apps-panel.ui:103
-msgid "Ca_lls"
+#: panels/default-apps/cc-default-apps-panel.ui:59
+msgid "_Calls"
 msgstr "_שיחות"
 
-#: panels/default-apps/cc-default-apps-panel.ui:118
+#: panels/default-apps/cc-default-apps-panel.ui:67
 msgid "_SMS"
 msgstr "_SMS"
 
@@ -1541,38 +1533,43 @@ msgstr "הגדרות לדיווח אוטומטי של בעיות"
 msgid "diagnostics;crash;"
 msgstr "אבחון;אבחנה;קריסה;"
 
-#: panels/display/cc-display-panel.c:496
+#: panels/display/cc-display-panel.c:495
 #: panels/notifications/cc-notifications-panel.c:217
 #: panels/power/cc-power-panel.c:743 panels/power/cc-power-panel.c:750
 msgid "On"
 msgstr "פעיל"
 
-#: panels/display/cc-display-panel.c:498 panels/network/cc-net-proxy-page.c:181
+#: panels/display/cc-display-panel.c:497 panels/network/cc-net-proxy-page.c:181
 #: panels/notifications/cc-notifications-panel.c:217
 #: panels/power/cc-power-panel.c:737 panels/power/cc-power-panel.c:748
 msgid "Off"
 msgstr "כבוי"
 
-#: panels/display/cc-display-panel.c:921
+#: panels/display/cc-display-panel.c:920
 msgid "Apply Changes?"
 msgstr "להחיל שינויים?"
 
-#: panels/display/cc-display-panel.c:927
+#: panels/display/cc-display-panel.c:926
 msgid "Changes Cannot be Applied"
 msgstr "אי אפשר להחיל את השינויים"
 
-#: panels/display/cc-display-panel.c:929
+#: panels/display/cc-display-panel.c:928
 msgid "This could be due to hardware limitations."
 msgstr "אולי זה קשור למגבלות חומרה."
 
-#: panels/display/cc-display-panel.ui:33 panels/display/cc-display-panel.ui:89
-#: panels/display/cc-display-panel.ui:220
-#: panels/display/cc-display-panel.ui:259 panels/mouse/cc-mouse-panel.ui:22
-#: panels/network/cc-wifi-panel.ui:16 panels/printers/new-printer-dialog.ui:64
+#: panels/display/cc-display-panel.ui:33 panels/display/cc-display-panel.ui:84
+#: panels/display/cc-display-panel.ui:90 panels/display/cc-display-panel.ui:221
+#: panels/display/cc-display-panel.ui:260
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:115
+#: panels/mouse/cc-mouse-panel.ui:17 panels/mouse/cc-mouse-panel.ui:23
+#: panels/network/cc-network-panel.ui:17 panels/network/cc-wifi-panel.ui:11
+#: panels/network/cc-wifi-panel.ui:17 panels/printers/new-printer-dialog.ui:64
 #: panels/region/cc-format-chooser.ui:37
-#: panels/universal-access/cc-ua-panel.ui:19
+#: panels/universal-access/cc-ua-panel.ui:16
+#: panels/universal-access/cc-ua-panel.ui:20
 #: panels/user-accounts/cc-fingerprint-dialog.ui:44
-#: panels/user-accounts/cc-user-panel.ui:31
+#: panels/user-accounts/cc-user-panel.ui:28
+#: panels/user-accounts/cc-user-panel.ui:32
 #: panels/wacom/cc-wacom-stylus-page.ui:136
 #: panels/wwan/cc-wwan-apn-dialog.ui:21
 msgid "Back"
@@ -1583,59 +1580,59 @@ msgstr "חזרה"
 msgid "_Apply"
 msgstr "ה_חלה"
 
-#: panels/display/cc-display-panel.ui:111
+#: panels/display/cc-display-panel.ui:112
 msgid "Display Settings Disabled"
 msgstr "הגדרות הצג מושבתות"
 
-#: panels/display/cc-display-panel.ui:122
+#: panels/display/cc-display-panel.ui:123
 msgid "Multiple Displays"
 msgstr "צגים מרובים"
 
 #. 'Join' as in 'Join displays'
-#: panels/display/cc-display-panel.ui:131
+#: panels/display/cc-display-panel.ui:132
 msgid "Join"
 msgstr "הצטרפות"
 
-#: panels/display/cc-display-panel.ui:138
+#: panels/display/cc-display-panel.ui:139
 msgid "Mirror"
 msgstr "מראה"
 
-#: panels/display/cc-display-panel.ui:166
+#: panels/display/cc-display-panel.ui:167
 msgid "Contains top bar and Activities"
 msgstr "מכיל את השורה העליונה וכפתור פעילויות"
 
-#: panels/display/cc-display-panel.ui:167
+#: panels/display/cc-display-panel.ui:168
 msgid "Primary Display"
 msgstr "צג ראשי"
 
 #. This is the redshift functionality where we suppress blue light when the sun has gone down
-#: panels/display/cc-display-panel.ui:188
-#: panels/display/cc-display-panel.ui:227
+#: panels/display/cc-display-panel.ui:189
+#: panels/display/cc-display-panel.ui:228
 #: panels/display/cc-night-light-page.ui:86
 msgid "Night Light"
 msgstr "תאורת לילה"
 
-#: panels/display/cc-display-settings.c:110
+#: panels/display/cc-display-settings.c:109
 msgctxt "Display rotation"
 msgid "Landscape"
 msgstr "לרוחב"
 
-#: panels/display/cc-display-settings.c:113
+#: panels/display/cc-display-settings.c:112
 msgctxt "Display rotation"
 msgid "Portrait Right"
 msgstr "ימין לאורך"
 
-#: panels/display/cc-display-settings.c:116
+#: panels/display/cc-display-settings.c:115
 msgctxt "Display rotation"
 msgid "Portrait Left"
 msgstr "שמאל לאורך"
 
-#: panels/display/cc-display-settings.c:119
+#: panels/display/cc-display-settings.c:118
 msgctxt "Display rotation"
 msgid "Landscape (flipped)"
 msgstr "לרוחב (הפוך)"
 
-#: panels/display/cc-display-settings.c:180
+#: panels/display/cc-display-settings.c:179
 #, c-format
 msgid "%.2lf Hz"
 msgstr "‏%.2lf הרץ"
@@ -1644,8 +1641,8 @@ msgstr "‏%.2lf הרץ"
 #. TRANSLATORS: Status of Parental Controls setup
 #: panels/display/cc-display-settings.ui:23
 #: panels/firmware-security/cc-firmware-security-utils.c:45
-#: panels/user-accounts/cc-user-panel.c:779
-#: panels/user-accounts/cc-user-panel.c:902
+#: panels/user-accounts/cc-user-panel.c:764
+#: panels/user-accounts/cc-user-panel.c:886
 #: panels/wwan/cc-wwan-device-page.c:475
 msgid "Enabled"
 msgstr "פעיל"
@@ -1862,7 +1859,7 @@ msgstr ""
 
 #. TRANSLATORS: in reference to firmware protection: 0/4 stars
 #: panels/firmware-security/cc-firmware-security-dialog.c:113
-#: panels/firmware-security/cc-firmware-security-panel.c:548
+#: panels/firmware-security/cc-firmware-security-panel.c:542
 msgid "Checks Failed"
 msgstr "בדיקות נכשלו"
 
@@ -1886,7 +1883,7 @@ msgstr ""
 
 #. TRANSLATORS: in reference to firmware protection: 1/4 stars
 #: panels/firmware-security/cc-firmware-security-dialog.c:127
-#: panels/firmware-security/cc-firmware-security-panel.c:555
+#: panels/firmware-security/cc-firmware-security-panel.c:549
 msgid "Checks Passed"
 msgstr "בדיקה עברה"
 
@@ -1902,7 +1899,7 @@ msgstr ""
 
 #. TRANSLATORS: in reference to firmware protection: 2~4 stars
 #: panels/firmware-security/cc-firmware-security-dialog.c:141
-#: panels/firmware-security/cc-firmware-security-panel.c:564
+#: panels/firmware-security/cc-firmware-security-panel.c:558
 msgid "Protected"
 msgstr "מוגן"
 
@@ -1918,7 +1915,7 @@ msgstr ""
 
 #. TRANSLATORS: in reference to firmware protection: ??? stars
 #: panels/firmware-security/cc-firmware-security-dialog.c:152
-#: panels/firmware-security/cc-firmware-security-panel.c:571
+#: panels/firmware-security/cc-firmware-security-panel.c:565
 msgid "Checks Unavailable"
 msgstr "בדיקות לא זמינות"
 
@@ -1932,7 +1929,7 @@ msgstr ""
 "האבטחה."
 
 #. Translators: Unknown endpoint host for WireGuard (invalid setting)
-#: panels/firmware-security/cc-firmware-security-dialog.c:188
+#: panels/firmware-security/cc-firmware-security-dialog.c:185
 #: panels/info-overview/cc-info-overview-panel.c:297
 #: panels/info-overview/cc-info-overview-panel.c:317
 #: panels/info-overview/cc-info-overview-panel.c:358
@@ -1943,78 +1940,7 @@ msgstr ""
 msgid "Unknown"
 msgstr "לא ידוע"
 
-#: panels/firmware-security/cc-firmware-security-dialog.c:270
-msgid "Device Security Report"
-msgstr "דו״ח אבטחת התקן"
-
-#: panels/firmware-security/cc-firmware-security-dialog.c:273
-msgid "Report details"
-msgstr "פרטי דיווח"
-
-#: panels/firmware-security/cc-firmware-security-dialog.c:277
-msgid "Date generated:"
-msgstr "תאריך יצירה:"
-
-#. TRANSLATOR: This is the title for showing the version of fwupd service.
-#: panels/firmware-security/cc-firmware-security-dialog.c:285
-msgid "fwupd version:"
-msgstr "גרסת fwupd:"
-
-#: panels/firmware-security/cc-firmware-security-dialog.c:294
-msgid "Hardware model:"
-msgstr "דגם חָמְרה:"
-
-#. TRANSLATOR: "Processor" indicates the CPU model name.
-#: panels/firmware-security/cc-firmware-security-dialog.c:301
-msgid "Processor:"
-msgstr "מעבד:"
-
-#. TRANSLATOR: "OS" indicates the OS name, ex: Fedora 38.
-#: panels/firmware-security/cc-firmware-security-dialog.c:307
-msgid "OS:"
-msgstr "מערכת הפעלה:"
-
-#. TRANSLATOR: This is the title for device security level.
-#: panels/firmware-security/cc-firmware-security-dialog.c:313
-msgid "Security level:"
-msgstr "רמת אבטחה:"
-
-#. TRANSLATOR: This is the postfix of "HSI-n Tests" title.
-#: panels/firmware-security/cc-firmware-security-dialog.c:343
-msgid "Tests"
-msgstr "בדיקות"
-
-#: panels/firmware-security/cc-firmware-security-dialog.c:348
-msgid "Runtime Tests"
-msgstr "בדיקות זמן ריצה"
-
-#. Passed
-#. TRANSLATOR: If the status for security attribute is success, "Pass " is shown.
-#. TRANSLATOR: This is the text event status output when the event status is "success"
-#: panels/firmware-security/cc-firmware-security-dialog.c:367
-#: panels/firmware-security/cc-firmware-security-panel.c:231
-msgid "Pass"
-msgstr "עבר"
-
-#. Failed
-#. TRANSLATOR: If the status for security attribute is success, "! Fail " is shown.
-#. TRANSLATOR: This is the text event status output when the event status is not "success"
-#: panels/firmware-security/cc-firmware-security-dialog.c:374
-#: panels/firmware-security/cc-firmware-security-panel.c:234
-msgid "! Fail"
-msgstr "! נכשל"
-
-#: panels/firmware-security/cc-firmware-security-dialog.c:386
-msgid "Host security events"
-msgstr "אירועי אבטחת המארח"
-
-#: panels/firmware-security/cc-firmware-security-dialog.c:390
-msgid ""
-"For information on the contents of this report, see https://fwupd.github.io/"
-"hsi.html"
-msgstr "מידע על תוכן הדיווח באתר https://fwupd.github.io/hsi.html"
-
-#: panels/firmware-security/cc-firmware-security-dialog.c:395
+#: panels/firmware-security/cc-firmware-security-dialog.c:384
 msgid "Report copied to clipboard"
 msgstr "הדיווח הועתק ללוח הגזירים"
 
@@ -2022,9 +1948,9 @@ msgstr "הדיווח הועתק ללוח הגזירים"
 msgid "Device Security Status"
 msgstr "מצב אבטחת התקן"
 
-#: panels/firmware-security/cc-firmware-security-dialog.ui:87
-msgid "Copy Technical Report"
-msgstr "העתקת דו״ח טכני"
+#: panels/firmware-security/cc-firmware-security-dialog.ui:88
+msgid "_Copy Technical Report"
+msgstr "ה_עתקת דו״ח טכני"
 
 #: panels/firmware-security/cc-firmware-security-help-dialog.ui:6
 msgid "About Device Security"
@@ -2128,25 +2054,35 @@ msgstr ""
 msgid "%1$s"
 msgstr "%1$s"
 
+#. TRANSLATOR: This is the text event status output when the event status is "success"
+#: panels/firmware-security/cc-firmware-security-panel.c:231
+msgid "Pass"
+msgstr "עבר"
+
+#. TRANSLATOR: This is the text event status output when the event status is not "success"
+#: panels/firmware-security/cc-firmware-security-panel.c:234
+msgid "! Fail"
+msgstr "! נכשל"
+
 # msgctxt "timezone loc"
 #: panels/firmware-security/cc-firmware-security-panel.c:237
 #, c-format
 msgid "(%1$s → %2$s)"
 msgstr "‏‏(%1$s ← %2$s)"
 
-#: panels/firmware-security/cc-firmware-security-panel.c:549
+#: panels/firmware-security/cc-firmware-security-panel.c:543
 msgid "Hardware does not pass checks."
 msgstr "החָמְרה לא עברה בדיקות."
 
-#: panels/firmware-security/cc-firmware-security-panel.c:556
+#: panels/firmware-security/cc-firmware-security-panel.c:550
 msgid "Hardware meets basic security requirements."
 msgstr "החָמְרה עומדת בדרישות האבטחה הבסיסיות."
 
-#: panels/firmware-security/cc-firmware-security-panel.c:565
+#: panels/firmware-security/cc-firmware-security-panel.c:559
 msgid "Hardware has a good level of protection."
 msgstr "לחָמְרה רמת אבטחה טובה."
 
-#: panels/firmware-security/cc-firmware-security-panel.c:572
+#: panels/firmware-security/cc-firmware-security-panel.c:566
 msgid "Security levels are not available for this device."
 msgstr "רמות אבטחה אינן זמינות עבור התקן זה."
 
@@ -2281,7 +2217,7 @@ msgstr "לא ידוע"
 
 #. translators: this is the placeholder string when the GNOME Shell
 #. * version couldn't be loaded, eg. “GNOME Version: Not Available”
-#: panels/info-overview/cc-info-overview-panel.c:710
+#: panels/info-overview/cc-info-overview-panel.c:719
 msgid "Not Available"
 msgstr "לא זמין"
 
@@ -2591,37 +2527,36 @@ msgstr ""
 "שלישית במקלדת שלך."
 
 #: panels/keyboard/cc-keyboard-panel.c:66
-#: panels/keyboard/cc-keyboard-panel.c:84
 msgctxt "keyboard key"
 msgid "Left Alt"
 msgstr "‏Alt שמאלי"
 
 #: panels/keyboard/cc-keyboard-panel.c:67
-#: panels/keyboard/cc-keyboard-panel.c:85
+#: panels/keyboard/cc-keyboard-panel.c:84
 msgctxt "keyboard key"
 msgid "Right Alt"
 msgstr "‏Alt ימני"
 
 #: panels/keyboard/cc-keyboard-panel.c:68
-#: panels/keyboard/cc-keyboard-panel.c:86
+#: panels/keyboard/cc-keyboard-panel.c:85
 msgctxt "keyboard key"
 msgid "Left Super"
 msgstr "‏Super שמאלי"
 
 #: panels/keyboard/cc-keyboard-panel.c:69
-#: panels/keyboard/cc-keyboard-panel.c:87
+#: panels/keyboard/cc-keyboard-panel.c:86
 msgctxt "keyboard key"
 msgid "Right Super"
 msgstr "‏Super ימני"
 
 #: panels/keyboard/cc-keyboard-panel.c:70
-#: panels/keyboard/cc-keyboard-panel.c:88
+#: panels/keyboard/cc-keyboard-panel.c:87
 msgctxt "keyboard key"
 msgid "Menu key"
 msgstr "מקש תפריט"
 
 #: panels/keyboard/cc-keyboard-panel.c:71
-#: panels/keyboard/cc-keyboard-panel.c:89
+#: panels/keyboard/cc-keyboard-panel.c:88
 msgctxt "keyboard key"
 msgid "Right Ctrl"
 msgstr "‏Ctrl ימני"
@@ -2642,22 +2577,22 @@ msgstr ""
 "Compose ואז על צירוף תווים.  למשל, מקש Compose שלאחריו נלחצים <b>C</b> ואז "
 "<b>o</b> יקליד <b>©</b>, ‏<b>a</b> ולאחריו <b>’</b> יקליד <b>á</b>."
 
-#: panels/keyboard/cc-keyboard-panel.c:90
+#: panels/keyboard/cc-keyboard-panel.c:89
 msgctxt "keyboard key"
 msgid "Caps Lock"
 msgstr "Caps Lock"
 
-#: panels/keyboard/cc-keyboard-panel.c:91
+#: panels/keyboard/cc-keyboard-panel.c:90
 msgctxt "keyboard key"
 msgid "Scroll Lock"
 msgstr "‫Scroll Lock"
 
-#: panels/keyboard/cc-keyboard-panel.c:92
+#: panels/keyboard/cc-keyboard-panel.c:91
 msgctxt "keyboard key"
 msgid "Print Screen"
 msgstr "צילום מסך"
 
-#: panels/keyboard/cc-keyboard-panel.c:215
+#: panels/keyboard/cc-keyboard-panel.c:214
 #, c-format
 msgid ""
 "Input sources can be switched using the %s keyboard shortcut.\n"
@@ -2696,7 +2631,7 @@ msgid "Methods for entering symbols and letter variants using the keyboard."
 msgstr "שיטות למילוי סימנים והגווני אותיות באמצעות המקלדת."
 
 #: panels/keyboard/cc-keyboard-panel.ui:82
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:9 shell/cc-window.ui:163
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:9 shell/cc-window.ui:169
 msgid "Keyboard Shortcuts"
 msgstr "צירופי מקשים"
 
@@ -2708,7 +2643,7 @@ msgstr "הצגה והתאמה של קיצורי מקשים"
 msgid "Reset All Shortcuts?"
 msgstr "איפוס כל צירופי המקשים?"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.c:385
+#: panels/keyboard/cc-keyboard-shortcut-dialog.c:386
 msgid ""
 "Resetting the shortcuts may affect your custom shortcuts. This cannot be "
 "undone."
@@ -2717,7 +2652,7 @@ msgstr ""
 "פעולה זאת."
 
 #: panels/keyboard/cc-keyboard-shortcut-dialog.c:389
-#: panels/network/cc-network-panel.ui:26
+#: panels/network/cc-network-panel.ui:27
 #: panels/printers/ppd-selection-dialog.ui:83
 #: panels/wwan/cc-wwan-device-page.c:188
 msgid "Cancel"
@@ -2751,17 +2686,17 @@ msgstr "לא נמצאו צירופי מקשים"
 msgid "Try a different search."
 msgstr "יש לנסות חיפוש שונה."
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:141
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:142
 msgid "Add Custom Shortcuts"
 msgstr "הוספת צירוף מקשים מותאם"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:142
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:143
 msgid "Set up custom shortcuts for launching apps, running scripts, and more."
 msgstr "הגדרת צירופי מקשים מותאמים להפעלת יישומים, הרצת תסריטים ועוד."
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:146
-msgid "Add Shortcut…"
-msgstr "הוספת צירוף מקשים…"
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:148
+msgid "_Add Shortcut…"
+msgstr "הו_ספת צירוף מקשים…"
 
 #. TRANSLATORS: Don't translate/transliterate <b>%s</b>, which is the accelerator used
 #: panels/keyboard/cc-keyboard-shortcut-editor.c:391
@@ -2771,15 +2706,15 @@ msgid ""
 "disabled"
 msgstr "‏<b>%s</b> כבר בשימוש על ידי %s. החלפה שלו, תשבית את %s"
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.c:533
+#: panels/keyboard/cc-keyboard-shortcut-editor.c:532
 msgid "Enter the new shortcut"
 msgstr "יש להקיש את צירוף המקשים החדש"
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.c:548
+#: panels/keyboard/cc-keyboard-shortcut-editor.c:547
 msgid "Set Custom Shortcut"
 msgstr "הגדרת צירופי מקשים מותאמים אישית"
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.c:548
+#: panels/keyboard/cc-keyboard-shortcut-editor.c:547
 msgid "Set Shortcut"
 msgstr "הגדרת צירופי מקשים"
 
@@ -2788,17 +2723,17 @@ msgstr "הגדרת צירופי מקשים"
 #. * TRANSLATORS: %s is replaced with a description of the keyboard shortcut,
 #. * don't translate/transliterate <b>%s</b>
 #.
-#: panels/keyboard/cc-keyboard-shortcut-editor.c:561
+#: panels/keyboard/cc-keyboard-shortcut-editor.c:560
 #, c-format
 msgid "Enter new shortcut to change <b>%s</b>"
 msgstr "יש להקיש צירופי מקשים חדשים לשינוי <b>%s</b>"
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.c:977
+#: panels/keyboard/cc-keyboard-shortcut-editor.c:976
 msgid "Add Custom Shortcut"
 msgstr "הוספת צירוף מקשים חדש"
 
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:30
-#: panels/user-accounts/cc-user-panel.ui:337
+#: panels/user-accounts/cc-user-panel.ui:348
 msgid "_Remove"
 msgstr "הס_רה"
 
@@ -2820,7 +2755,7 @@ msgstr "יש ללחוץ Esc לביטול או Backspace להשבתת צירופ�
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:161
 #: panels/printers/pp-details-dialog.ui:39
 #: panels/user-accounts/cc-add-user-dialog.ui:68
-#: panels/user-accounts/cc-user-panel.ui:137
+#: panels/user-accounts/cc-user-panel.ui:138
 #: panels/wwan/cc-wwan-apn-dialog.ui:96
 msgid "Name"
 msgstr "שם"
@@ -2881,7 +2816,7 @@ msgstr ""
 "צירופי מקשים;קיצורי מקשים;מרחב עבודה;חלון;חלונות;שינוי גודל;הגדלה;ניגודיות;"
 "קלט;מקור;נעילה;עצמה;מקש חם;Compose;תו;"
 
-#: panels/location/cc-location-panel.ui:9
+#: panels/location/cc-location-panel.ui:7
 msgid ""
 "Location services use GPS, Wi-Fi and cellular connections to determine the "
 "approximate location of this device. <a href='https://location.services."
@@ -2956,63 +2891,67 @@ msgstr "הגבלת גישה למיקרופון"
 msgid "microphone;recording;application;privacy;"
 msgstr "מיקרופון;הקלטה;יישום;פרטיות;"
 
-#: panels/mouse/cc-mouse-panel.ui:30 panels/wacom/cc-wacom-panel.ui:9
+#: panels/mouse/cc-mouse-panel.ui:31 panels/wacom/cc-wacom-panel.ui:9
 msgid "Test _Settings"
 msgstr "ב_דיקת ההגדרות"
 
-#: panels/mouse/cc-mouse-panel.ui:44 panels/mouse/cc-mouse-panel.ui:90
+#: panels/mouse/cc-mouse-panel.ui:32
+msgid "Test Mouse and Touchpad Settings"
+msgstr "בדיקת הגדרות עכבר ומשטח מגע"
+
+#: panels/mouse/cc-mouse-panel.ui:46 panels/mouse/cc-mouse-panel.ui:92
 msgid "Mouse"
 msgstr "עכבר"
 
-#: panels/mouse/cc-mouse-panel.ui:51
+#: panels/mouse/cc-mouse-panel.ui:53
 #: panels/multitasking/cc-multitasking-panel.ui:9
 msgid "General"
 msgstr "כללי"
 
-#: panels/mouse/cc-mouse-panel.ui:54
+#: panels/mouse/cc-mouse-panel.ui:56
 msgid "Primary Button"
 msgstr "לחצן ראשי"
 
-#: panels/mouse/cc-mouse-panel.ui:55
+#: panels/mouse/cc-mouse-panel.ui:57
 msgid "Order of physical buttons on mice and touchpads."
 msgstr "סדר הכפתורים הפיזיים בעכבר ובמשטח המגע."
 
-#: panels/mouse/cc-mouse-panel.ui:69
+#: panels/mouse/cc-mouse-panel.ui:71
 msgid "Left"
 msgstr "שמאל"
 
-#: panels/mouse/cc-mouse-panel.ui:76
+#: panels/mouse/cc-mouse-panel.ui:78
 msgid "Right"
 msgstr "ימין"
 
-#: panels/mouse/cc-mouse-panel.ui:93 panels/mouse/cc-mouse-panel.ui:98
-#: panels/mouse/cc-mouse-panel.ui:174
+#: panels/mouse/cc-mouse-panel.ui:95 panels/mouse/cc-mouse-panel.ui:100
+#: panels/mouse/cc-mouse-panel.ui:176
 msgid "Pointer Speed"
 msgstr "מהירות הסמן"
 
 # msgctxt "keyboard, speed"
-#: panels/mouse/cc-mouse-panel.ui:101 panels/mouse/cc-mouse-panel.ui:183
+#: panels/mouse/cc-mouse-panel.ui:103 panels/mouse/cc-mouse-panel.ui:185
 #: panels/universal-access/cc-ua-typing-page.ui:53
 #: panels/universal-access/cc-ua-typing-page.ui:111
 msgid "Slow"
 msgstr "אטי"
 
 # msgctxt "keyboard, speed"
-#: panels/mouse/cc-mouse-panel.ui:103 panels/mouse/cc-mouse-panel.ui:185
+#: panels/mouse/cc-mouse-panel.ui:105 panels/mouse/cc-mouse-panel.ui:187
 #: panels/universal-access/cc-ua-typing-page.ui:50
 #: panels/universal-access/cc-ua-typing-page.ui:108
 msgid "Fast"
 msgstr "מהיר"
 
-#: panels/mouse/cc-mouse-panel.ui:119
+#: panels/mouse/cc-mouse-panel.ui:121
 msgid "Mouse Acceleration"
 msgstr "סיוע סמן"
 
-#: panels/mouse/cc-mouse-panel.ui:120
+#: panels/mouse/cc-mouse-panel.ui:122
 msgid "Recommended for most users and applications"
 msgstr "מומלץ לרוב המשתמשים והיישומים"
 
-#: panels/mouse/cc-mouse-panel.ui:125
+#: panels/mouse/cc-mouse-panel.ui:127
 msgid ""
 "Turning mouse acceleration off can allow faster and more precise movements, "
 "but can also make the mouse more difficult to use."
@@ -3020,67 +2959,67 @@ msgstr ""
 "כיבוי סיוע סמן יכול לאפשר תזוזות מהירות ומדויקות יותר אך יכול גם להקשות על "
 "השימוש בעכבר."
 
-#: panels/mouse/cc-mouse-panel.ui:137 panels/mouse/cc-mouse-panel.ui:238
+#: panels/mouse/cc-mouse-panel.ui:139 panels/mouse/cc-mouse-panel.ui:240
 msgid "Scroll Direction"
 msgstr "כיוון הגלילה"
 
-#: panels/mouse/cc-mouse-panel.ui:138 panels/mouse/cc-mouse-panel.ui:239
+#: panels/mouse/cc-mouse-panel.ui:140 panels/mouse/cc-mouse-panel.ui:241
 msgid "Traditional"
 msgstr "מסורתי"
 
-#: panels/mouse/cc-mouse-panel.ui:139 panels/mouse/cc-mouse-panel.ui:240
+#: panels/mouse/cc-mouse-panel.ui:141 panels/mouse/cc-mouse-panel.ui:242
 msgid "Scrolling moves the view"
 msgstr "גלילה מזיזה את התצוגה"
 
-#: panels/mouse/cc-mouse-panel.ui:140 panels/mouse/cc-mouse-panel.ui:241
+#: panels/mouse/cc-mouse-panel.ui:142 panels/mouse/cc-mouse-panel.ui:243
 msgid "Natural"
 msgstr "טבעי"
 
-#: panels/mouse/cc-mouse-panel.ui:141 panels/mouse/cc-mouse-panel.ui:243
+#: panels/mouse/cc-mouse-panel.ui:143 panels/mouse/cc-mouse-panel.ui:245
 msgid "Scrolling moves the content"
 msgstr "גלילה מזיזה את התוכן"
 
-#: panels/mouse/cc-mouse-panel.ui:156 panels/mouse/cc-mouse-panel.ui:163
+#: panels/mouse/cc-mouse-panel.ui:158 panels/mouse/cc-mouse-panel.ui:165
 msgid "Touchpad"
 msgstr "משטח מגע"
 
-#: panels/mouse/cc-mouse-panel.ui:180
+#: panels/mouse/cc-mouse-panel.ui:182
 msgid "Pointer speed"
 msgstr "מהירות המ_צביע"
 
-#: panels/mouse/cc-mouse-panel.ui:203
+#: panels/mouse/cc-mouse-panel.ui:205
 msgid "Clicking"
 msgstr "נקישה"
 
-#: panels/mouse/cc-mouse-panel.ui:208
+#: panels/mouse/cc-mouse-panel.ui:210
 msgid "Tap to Click"
 msgstr "הקשה היא לחיצה"
 
-#: panels/mouse/cc-mouse-panel.ui:209
+#: panels/mouse/cc-mouse-panel.ui:211
 msgid "Quickly touch the touchpad to click"
 msgstr "נגיעה קלילה במשטח המגע מייצרת לחיצה"
 
-#: panels/mouse/cc-mouse-panel.ui:224
+#: panels/mouse/cc-mouse-panel.ui:226
 msgid "Scrolling"
 msgstr "גלילה"
 
-#: panels/mouse/cc-mouse-panel.ui:227
+#: panels/mouse/cc-mouse-panel.ui:229
 msgid "Scroll Method"
 msgstr "שיטת גלילה"
 
-#: panels/mouse/cc-mouse-panel.ui:228
+#: panels/mouse/cc-mouse-panel.ui:230
 msgid "Two Finger"
 msgstr "שתי אצבעות"
 
-#: panels/mouse/cc-mouse-panel.ui:229
+#: panels/mouse/cc-mouse-panel.ui:231
 msgid "Drag two fingers on the touchpad"
 msgstr "יש לגרור שתי אצבעות על משטח המגע"
 
-#: panels/mouse/cc-mouse-panel.ui:230
+#: panels/mouse/cc-mouse-panel.ui:232
 msgid "Edge"
 msgstr "קצה"
 
-#: panels/mouse/cc-mouse-panel.ui:231
+#: panels/mouse/cc-mouse-panel.ui:233
 msgid "Drag one finger on the edge"
 msgstr "גרירה של אצבע אחת על הקצה"
 
@@ -3206,25 +3145,25 @@ msgstr ""
 " פרטי שגיאה: NetworkManager לא פועל."
 
 #. xxx: Added to avoid confusion with the preceding VPN row
-#: panels/network/cc-network-panel.c:759 panels/network/cc-network-panel.ui:140
-#: panels/network/cc-network-panel.ui:149
+#: panels/network/cc-network-panel.c:759 panels/network/cc-network-panel.ui:141
+#: panels/network/cc-network-panel.ui:150
 msgid "Proxy"
 msgstr "מתווך"
 
-#: panels/network/cc-network-panel.ui:34
+#: panels/network/cc-network-panel.ui:35
 msgid "Save"
 msgstr "שמירה"
 
-#: panels/network/cc-network-panel.ui:91 panels/network/cc-network-panel.ui:125
-#: panels/network/connection-editor/net-connection-editor.c:688
+#: panels/network/cc-network-panel.ui:92 panels/network/cc-network-panel.ui:126
+#: panels/network/connection-editor/net-connection-editor.c:690
 msgid "VPN"
 msgstr "VPN"
 
-#: panels/network/cc-network-panel.ui:96
+#: panels/network/cc-network-panel.ui:97
 msgid "Add connection"
 msgstr "הוספת התחברות"
 
-#: panels/network/cc-network-panel.ui:116
+#: panels/network/cc-network-panel.ui:117
 msgid "Not set up"
 msgstr "לא מוגדר"
 
@@ -3235,7 +3174,7 @@ msgstr "לא מוגדר"
 #: panels/network/connection-editor/ip6-page.ui:36
 #: panels/network/connection-editor/ip6-page.ui:192
 #: panels/network/connection-editor/ip6-page.ui:244
-#: panels/wacom/cc-wacom-page.c:659
+#: panels/wacom/cc-wacom-page.c:657
 msgid "Automatic"
 msgstr "אוטומטי"
 
@@ -3335,33 +3274,33 @@ msgid "Scan to Connect"
 msgstr "סריקה להתחברות"
 
 #. TRANSLATORS: This happens when the connection name does not contain the SSID.
-#: panels/network/cc-wifi-connection-row.c:218
+#: panels/network/cc-wifi-connection-row.c:222
 #, c-format
 msgctxt "Wi-Fi Connection"
 msgid "%s (SSID: %s)"
 msgstr "‏%s ‏(SSID: ‏%s)"
 
-#: panels/network/cc-wifi-connection-row.c:278
+#: panels/network/cc-wifi-connection-row.c:282
 msgid "Insecure network (WEP)"
 msgstr "רשת לא מאובטחת (WEP)"
 
-#: panels/network/cc-wifi-connection-row.c:282
+#: panels/network/cc-wifi-connection-row.c:286
 msgid "Secure network (WPA)"
 msgstr "רשת מאובטחת (WPA)"
 
-#: panels/network/cc-wifi-connection-row.c:286
+#: panels/network/cc-wifi-connection-row.c:290
 msgid "Secure network (WPA2)"
 msgstr "רשת מאובטחת (WPA2)"
 
-#: panels/network/cc-wifi-connection-row.c:290
+#: panels/network/cc-wifi-connection-row.c:294
 msgid "Secure network (WPA3)"
 msgstr "רשת מאובטחת (WPA3)"
 
-#: panels/network/cc-wifi-connection-row.c:294
+#: panels/network/cc-wifi-connection-row.c:298
 msgid "Secure network"
 msgstr "רשת מאובטחת"
 
-#: panels/network/cc-wifi-connection-row.c:323
+#: panels/network/cc-wifi-connection-row.c:327
 #, c-format
 msgid "Signal strength %d%%"
 msgstr "עצמת אות %d%%"
@@ -3381,6 +3320,12 @@ msgstr "הצגת קוד QR"
 #: panels/network/network-mobile.ui:329 panels/network/network-vpn.ui:21
 msgid "Options…"
 msgstr "אפשרויות…"
+
+#. Translators: This is the text displayed in a button, indicating an action.
+#: panels/network/cc-wifi-connection-row.ui:90
+#: panels/network/connection-editor/ce-page-details.c:100
+msgid "Forget"
+msgstr "לשכוח"
 
 #. TRANSLATORS: ‘%s’ is a Wi-Fi Network(SSID) name
 #: panels/network/cc-wifi-hotspot-dialog.c:134
@@ -3454,69 +3399,69 @@ msgstr "יצירת ססמה אקראית באופן אוטומטי"
 msgid "_Turn On"
 msgstr "ה_פעלה"
 
-#: panels/network/cc-wifi-panel.c:406
+#: panels/network/cc-wifi-panel.c:404
 #: panels/network/gnome-wifi-panel.desktop.in:3
-#: panels/network/network-wifi.ui:61
+#: panels/network/network-wifi.ui:61 panels/network/network-wifi.ui:70
 msgid "Wi-Fi"
 msgstr "רשת אלחוטית"
 
-#: panels/network/cc-wifi-panel.c:740
+#: panels/network/cc-wifi-panel.c:734
 msgid "Turning off will disconnect any devices that are using the hotspot."
 msgstr "כיבוי יוביל לניתוק של כל ההתקנים העושים שימוש בנקודת הגישה."
 
-#: panels/network/cc-wifi-panel.c:742
+#: panels/network/cc-wifi-panel.c:736
 msgid "Turn Off Hotspot?"
 msgstr "כיבוי נקודת הגישה?"
 
-#: panels/network/cc-wifi-panel.c:745
+#: panels/network/cc-wifi-panel.c:739
 msgid "_Turn Off"
 msgstr "_כיבוי"
 
-#: panels/network/cc-wifi-panel.ui:57
+#: panels/network/cc-wifi-panel.ui:59
 msgid "Airplane Mode"
 msgstr "מצב טיסה"
 
-#: panels/network/cc-wifi-panel.ui:58
+#: panels/network/cc-wifi-panel.ui:60
 msgid "Disables Wi-Fi, Bluetooth and mobile broadband"
 msgstr "השבתת רשת אלחוטית, בלוטות' ורשת סלולרית"
 
-#: panels/network/cc-wifi-panel.ui:81
+#: panels/network/cc-wifi-panel.ui:83
 msgid "No Wi-Fi Adapter Found"
 msgstr "לא נמצא מתאם לרשת אלחוטית"
 
-#: panels/network/cc-wifi-panel.ui:82
+#: panels/network/cc-wifi-panel.ui:84
 msgid "Make sure you have a Wi-Fi adapter plugged and turned on"
 msgstr "יש לוודא כי ברשותך מתאם לרשת אלחוטית מחובר ופועל"
 
-#: panels/network/cc-wifi-panel.ui:95 panels/wwan/cc-wwan-panel.ui:102
+#: panels/network/cc-wifi-panel.ui:97 panels/wwan/cc-wwan-panel.ui:102
 msgid "Airplane Mode On"
 msgstr "מצב טיסה פועל"
 
-#: panels/network/cc-wifi-panel.ui:96
+#: panels/network/cc-wifi-panel.ui:98
 msgid "Turn off to use Wi-Fi"
 msgstr "יש לכבות על מנת להשתמש ברשת האלחוטית"
 
-#: panels/network/cc-wifi-panel.ui:131
+#: panels/network/cc-wifi-panel.ui:133
 msgid "Wi-Fi Hotspot Active"
 msgstr "נקודת גישה אלחוטית פעילה"
 
-#: panels/network/cc-wifi-panel.ui:141
+#: panels/network/cc-wifi-panel.ui:143
 msgid "Mobile devices can scan the QR code to connect."
 msgstr "התקנים ניידים יכולים לסרוק את קוד ה־QR כדי להתחבר."
 
-#: panels/network/cc-wifi-panel.ui:149
+#: panels/network/cc-wifi-panel.ui:151
 msgid "Turn Off Hotspot…"
 msgstr "_כיבוי נקודת גישה…"
 
-#: panels/network/cc-wifi-panel.ui:169
+#: panels/network/cc-wifi-panel.ui:171
 msgid "Visible Networks"
 msgstr "רשתות גלויות"
 
-#: panels/network/cc-wifi-panel.ui:206
+#: panels/network/cc-wifi-panel.ui:208
 msgid "Wi-Fi Unavailable"
 msgstr "רשת אלחוטית לא זמינה"
 
-#: panels/network/cc-wifi-panel.ui:207
+#: panels/network/cc-wifi-panel.ui:209
 msgid ""
 "An error has occurred and Wi-Fi cannot be used.\n"
 "Error details: NetworkManager not running."
@@ -3566,66 +3511,62 @@ msgid "Profile %d"
 msgstr "פרופיל %d"
 
 #. Translators: "%s" is the user visible name of the network
-#: panels/network/connection-editor/ce-page-details.c:93
+#: panels/network/connection-editor/ce-page-details.c:92
 #, c-format
 msgid ""
 "Saved details for “%s” will be permanently lost. This includes passwords and "
 "any network changes."
 msgstr "המידע השמור על „%s” יאבד לצמיתות. מידע זה כולל ססמאות וכל שינוי ברשת."
 
-#: panels/network/connection-editor/ce-page-details.c:96
-#: panels/network/net-device-wifi.c:860
+#: panels/network/connection-editor/ce-page-details.c:95
+#: panels/network/net-device-wifi.c:859
 msgid "Forget Connection?"
 msgstr "לשכוח התחברות?"
 
-#: panels/network/connection-editor/ce-page-details.c:101
-msgid "Forget"
-msgstr "לשכוח"
-
 #. TRANSLATORS: this WEP WiFi security
-#: panels/network/connection-editor/ce-page-details.c:129
-#: panels/network/net-device-wifi.c:228
+#: panels/network/connection-editor/ce-page-details.c:128
+#: panels/network/net-device-wifi.c:232
 msgid "WEP"
 msgstr "WEP"
 
 #. TRANSLATORS: this WPA WiFi security
-#: panels/network/connection-editor/ce-page-details.c:133
-#: panels/network/net-device-wifi.c:233
+#: panels/network/connection-editor/ce-page-details.c:132
+#: panels/network/net-device-wifi.c:237
 msgid "WPA"
 msgstr "WPA"
 
 #. TRANSLATORS: this WPA3 WiFi security
-#: panels/network/connection-editor/ce-page-details.c:139
+#: panels/network/connection-editor/ce-page-details.c:138
 msgid "WPA3"
 msgstr "WPA3"
 
 #. TRANSLATORS: this Enhanced Open WiFi security
-#: panels/network/connection-editor/ce-page-details.c:144
+#: panels/network/connection-editor/ce-page-details.c:143
 #: panels/network/connection-editor/ce-page-security.c:271
 msgid "Enhanced Open"
 msgstr "פתוחה מורחבת"
 
 #. TRANSLATORS: this WPA WiFi security
-#: panels/network/connection-editor/ce-page-details.c:156
+#: panels/network/connection-editor/ce-page-details.c:155
 msgid "WPA2"
 msgstr "WPA2"
 
 #. TRANSLATORS: this Enterprise WiFi security
-#: panels/network/connection-editor/ce-page-details.c:162
+#: panels/network/connection-editor/ce-page-details.c:161
 msgid "Enterprise"
 msgstr "ארגוני"
 
-#: panels/network/connection-editor/ce-page-details.c:167
-#: panels/network/net-device-wifi.c:218
+#: panels/network/connection-editor/ce-page-details.c:166
+#: panels/network/net-device-wifi.c:222
 msgctxt "Wifi security"
 msgid "None"
 msgstr "ללא"
 
-#: panels/network/connection-editor/ce-page-details.c:188
+#: panels/network/connection-editor/ce-page-details.c:187
 msgid "Never"
 msgstr "לעולם לא"
 
-#: panels/network/connection-editor/ce-page-details.c:203
+#: panels/network/connection-editor/ce-page-details.c:202
 #: panels/network/net-device-ethernet.c:105
 #, c-format
 msgid "%i day ago"
@@ -3635,71 +3576,71 @@ msgstr[1] "שלשום"
 msgstr[2] "לפני %i ימים"
 msgstr[3] "לפני %i ימים"
 
-#: panels/network/connection-editor/ce-page-details.c:327
+#: panels/network/connection-editor/ce-page-details.c:326
 #, c-format
 msgid "%d Mb/s (%1.1f GHz)"
 msgstr "‏%d מ״ב/שנייה (%1.1f גה״צ‏)"
 
 #. Translators: network device speed
-#: panels/network/connection-editor/ce-page-details.c:329
+#: panels/network/connection-editor/ce-page-details.c:328
 #: panels/network/net-device-ethernet.c:217
 #, c-format
 msgid "%d Mb/s"
 msgstr "‏%d מ״ב/שנייה"
 
-#: panels/network/connection-editor/ce-page-details.c:344
+#: panels/network/connection-editor/ce-page-details.c:343
 msgid "2.4 GHz / 5 GHz"
 msgstr "‏5 גה״צ / 2.4 גה״צ"
 
-#: panels/network/connection-editor/ce-page-details.c:346
+#: panels/network/connection-editor/ce-page-details.c:345
 msgid "2.4 GHz"
 msgstr "2.4 גה״צ"
 
-#: panels/network/connection-editor/ce-page-details.c:348
+#: panels/network/connection-editor/ce-page-details.c:347
 msgid "5 GHz"
 msgstr "5 גה״צ"
 
-#: panels/network/connection-editor/ce-page-details.c:368
+#: panels/network/connection-editor/ce-page-details.c:367
 msgctxt "Signal strength"
 msgid "None"
 msgstr "ללא"
 
-#: panels/network/connection-editor/ce-page-details.c:370
+#: panels/network/connection-editor/ce-page-details.c:369
 msgctxt "Signal strength"
 msgid "Weak"
 msgstr "חלש"
 
-#: panels/network/connection-editor/ce-page-details.c:372
+#: panels/network/connection-editor/ce-page-details.c:371
 msgctxt "Signal strength"
 msgid "Ok"
 msgstr "טוב"
 
-#: panels/network/connection-editor/ce-page-details.c:374
+#: panels/network/connection-editor/ce-page-details.c:373
 msgctxt "Signal strength"
 msgid "Good"
 msgstr "טוב"
 
-#: panels/network/connection-editor/ce-page-details.c:376
+#: panels/network/connection-editor/ce-page-details.c:375
 msgctxt "Signal strength"
 msgid "Excellent"
 msgstr "מצוין"
 
-#: panels/network/connection-editor/ce-page-details.c:443
+#: panels/network/connection-editor/ce-page-details.c:442
 #: panels/network/connection-editor/details-page.ui:94
 #: panels/network/net-device-ethernet.c:144
 #: panels/network/net-device-mobile.c:441
 msgid "IPv4 Address"
 msgstr "כתובת IPv4"
 
-#: panels/network/connection-editor/ce-page-details.c:444
+#: panels/network/connection-editor/ce-page-details.c:443
 #: panels/network/connection-editor/details-page.ui:110
 #: panels/network/net-device-ethernet.c:146
 #: panels/network/net-device-mobile.c:442 panels/network/network-mobile.ui:177
 msgid "IPv6 Address"
 msgstr "כתובת IPv6"
 
+#: panels/network/connection-editor/ce-page-details.c:445
 #: panels/network/connection-editor/ce-page-details.c:446
-#: panels/network/connection-editor/ce-page-details.c:447
 #: panels/network/net-device-ethernet.c:149
 #: panels/network/net-device-ethernet.c:151
 #: panels/network/net-device-mobile.c:445
@@ -3707,20 +3648,20 @@ msgstr "כתובת IPv6"
 msgid "IP Address"
 msgstr "כתובת IP"
 
-#: panels/network/connection-editor/ce-page-details.c:451
+#: panels/network/connection-editor/ce-page-details.c:450
 #: panels/network/net-device-ethernet.c:166
 #: panels/network/net-device-mobile.c:450
 msgid "DNS4"
 msgstr "DNS4"
 
-#: panels/network/connection-editor/ce-page-details.c:452
+#: panels/network/connection-editor/ce-page-details.c:451
 #: panels/network/net-device-ethernet.c:167
 #: panels/network/net-device-mobile.c:451
 msgid "DNS6"
 msgstr "DNS6"
 
+#: panels/network/connection-editor/ce-page-details.c:453
 #: panels/network/connection-editor/ce-page-details.c:454
-#: panels/network/connection-editor/ce-page-details.c:455
 #: panels/network/connection-editor/details-page.ui:175
 #: panels/network/connection-editor/details-page.ui:192
 #: panels/network/connection-editor/ip4-page.ui:171
@@ -3733,19 +3674,19 @@ msgstr "DNS6"
 msgid "DNS"
 msgstr "DNS"
 
-#: panels/network/connection-editor/ce-page-details.c:507
+#: panels/network/connection-editor/ce-page-details.c:506
 msgid "Forget Connection"
 msgstr "לשכוח התחברות"
 
-#: panels/network/connection-editor/ce-page-details.c:509
+#: panels/network/connection-editor/ce-page-details.c:508
 msgid "Remove Connection Profile"
 msgstr "הסרת פרופיל התחברות"
 
-#: panels/network/connection-editor/ce-page-details.c:512
+#: panels/network/connection-editor/ce-page-details.c:511
 msgid "Remove VPN"
 msgstr "הסרת VPN"
 
-#: panels/network/connection-editor/ce-page-details.c:530
+#: panels/network/connection-editor/ce-page-details.c:529
 msgid "Details"
 msgstr "פרטים"
 
@@ -3811,7 +3752,7 @@ msgid "WPA3 Personal"
 msgstr "‏WPA3 אישי"
 
 #: panels/network/connection-editor/ce-page-wireguard.c:106
-#: panels/network/connection-editor/net-connection-editor.c:850
+#: panels/network/connection-editor/net-connection-editor.c:852
 msgid "WireGuard"
 msgstr "WireGuard"
 
@@ -3987,32 +3928,32 @@ msgstr "אוטומטי, DHCP בלבד"
 msgid "Prefix"
 msgstr "קידומת"
 
-#: panels/network/connection-editor/net-connection-editor.c:366
+#: panels/network/connection-editor/net-connection-editor.c:368
 #, c-format
 msgid "Unable to open connection editor: %s"
 msgstr "לא ניתן לפתוח את עורך החיבורים: %s"
 
-#: panels/network/connection-editor/net-connection-editor.c:385
+#: panels/network/connection-editor/net-connection-editor.c:387
 msgid "New Profile"
 msgstr "פרופיל חדש"
 
-#: panels/network/connection-editor/net-connection-editor.c:452
+#: panels/network/connection-editor/net-connection-editor.c:454
 #, c-format
 msgid "Invalid setting %s: %s"
 msgstr "הגדרה %s לא תקפה: ‏%s"
 
-#: panels/network/connection-editor/net-connection-editor.c:455
+#: panels/network/connection-editor/net-connection-editor.c:457
 #, c-format
 msgid "Invalid setting %s"
 msgstr "הגדרה %s לא תקפה"
 
-#: panels/network/connection-editor/net-connection-editor.c:731
+#: panels/network/connection-editor/net-connection-editor.c:733
 #, c-format
 msgid "Invalid VPN configuration file"
 msgstr "קובץ תצורת ה־VPN לא תקף"
 
 #. Translators: VPN add dialog Wireguard description
-#: panels/network/connection-editor/net-connection-editor.c:838
+#: panels/network/connection-editor/net-connection-editor.c:840
 msgid ""
 "Free and open-source VPN solution designed for ease of use, high speed "
 "performance and low attack surface."
@@ -4020,11 +3961,11 @@ msgstr ""
 "פתרון VPN חינמי ובקוד פתוח לשימוש קל, מהירות וביצועים גבוהים ומרחב פגיעות "
 "קטן."
 
-#: panels/network/connection-editor/net-connection-editor.c:874
+#: panels/network/connection-editor/net-connection-editor.c:876
 msgid "Import from file…"
 msgstr "יבוא מקובץ…"
 
-#: panels/network/connection-editor/net-connection-editor.c:900
+#: panels/network/connection-editor/net-connection-editor.c:902
 msgid "Add VPN"
 msgstr "הוספת VPN"
 
@@ -4032,7 +3973,28 @@ msgstr "הוספת VPN"
 msgid "S_ecurity"
 msgstr "_אבטחה"
 
-#: panels/network/connection-editor/vpn-helpers.c:153
+#: panels/network/connection-editor/vpn-helpers.c:142
+msgid "Cannot Import VPN Connection"
+msgstr "לא ניתן לייבא חיבור VPN"
+
+#: panels/network/connection-editor/vpn-helpers.c:146
+#, c-format
+msgid ""
+"The file “%s” could not be read or does not contain recognized VPN "
+"connection information\n"
+"\n"
+"Error: %s."
+msgstr ""
+"הקובץ „%s” לא ניתן לקריאה או שאינו מכיל מידע התחברות VPN מוכר\n"
+"\n"
+"שגיאה: %s."
+
+#: panels/network/connection-editor/vpn-helpers.c:149
+#: panels/wacom/button-mapping.ui:66
+msgid "_Close"
+msgstr "ס_גירה"
+
+#: panels/network/connection-editor/vpn-helpers.c:166
 msgid "Select file to import"
 msgstr "נא לבחור קובץ לייבוא"
 
@@ -4167,31 +4129,25 @@ msgstr "קווי"
 msgid "Add new connection"
 msgstr "הוספת התחברות חדשה"
 
-#: panels/network/net-device-wifi.c:858
+#: panels/network/net-device-wifi.c:857
 msgid ""
 "Network details for the selected networks, including passwords and any "
 "custom configuration will be lost."
 msgstr "פרטי הרשתות הנבחרות, לרבות ססמאות וכל תצורה אחרת שהותאמה אישית יאבדו."
 
-#: panels/network/net-device-wifi.c:864
+#: panels/network/net-device-wifi.c:863
 msgid "_Forget"
 msgstr "הת_עלמות"
 
-#: panels/network/net-device-wifi.c:1067
+#: panels/network/net-device-wifi.c:1068
 msgid "Saved Wi-Fi Networks"
 msgstr "רשתות אלחוטיות שמורות"
 
-#. translators: This is the label for the "Forget wireless network" functionality
-#: panels/network/net-device-wifi.c:1086
-msgctxt "Wi-Fi Network"
-msgid "_Forget"
-msgstr "הת_עלמות"
-
-#: panels/network/net-device-wifi.c:1242
+#: panels/network/net-device-wifi.c:1237
 msgid "System policy prohibits use as a Hotspot"
 msgstr "מדיניות המערכת אוסרת שימוש בנקודה חמה"
 
-#: panels/network/net-device-wifi.c:1245
+#: panels/network/net-device-wifi.c:1240
 msgid "Wireless device does not support Hotspot mode"
 msgstr "התקן הרשת האלחוטית אינו תומך במצב נקודה חמה"
 
@@ -4227,25 +4183,25 @@ msgctxt "Wi-Fi Hotspot"
 msgid "Password"
 msgstr "ססמה"
 
-#: panels/network/network-wifi.ui:73
+#: panels/network/network-wifi.ui:75
 msgid "Turn Wi-Fi off"
 msgstr "כיבוי הרשת האלחוטית"
 
-#: panels/network/network-wifi.ui:82 panels/search/cc-search-panel-row.ui:39
-msgid "More options…"
-msgstr "אפשרויות נוספות…"
+#: panels/network/network-wifi.ui:83
+msgid "Saved Networks"
+msgstr "רשתות שמורות"
 
-#: panels/network/network-wifi.ui:102
+#: panels/network/network-wifi.ui:88 panels/network/network-wifi.ui:102
+msgid "Show Saved Networks"
+msgstr "הצגת רשתות שמורות"
+
+#: panels/network/network-wifi.ui:96
 msgid "_Connect to Hidden Network…"
 msgstr "התחברות לרשת _נסתרת…"
 
-#: panels/network/network-wifi.ui:114
+#: panels/network/network-wifi.ui:110
 msgid "_Turn On Wi-Fi Hotspot…"
 msgstr "_הפעלת נקודת גישה…"
-
-#: panels/network/network-wifi.ui:126
-msgid "_Saved Networks"
-msgstr "רשתות _שמורות"
 
 #. TRANSLATORS: device status
 #: panels/network/panel-common.c:37
@@ -4578,13 +4534,13 @@ msgstr "אחר"
 msgid "%s removed"
 msgstr "הסרת %s"
 
-#: panels/online-accounts/cc-online-accounts-panel.c:694
+#: panels/online-accounts/cc-online-accounts-panel.c:691
 msgid "Error removing account"
 msgstr "אירעה שגיאה בעת הסרת החשבון"
 
 #. Translators: This is the button which allows undoing the removal of the printer.
 #: panels/online-accounts/cc-online-accounts-panel.ui:23
-#: panels/printers/printers.ui:47
+#: panels/printers/printers.ui:48
 msgid "Undo"
 msgstr "ביטול"
 
@@ -4606,12 +4562,12 @@ msgstr "הוספת חשבון"
 
 #. translators: This is the title of the "Show Account" dialog. The
 #. * %s is the name of the provider. e.g., 'Google'.
-#: panels/online-accounts/gnome-control-center-goa-helper.c:428
+#: panels/online-accounts/gnome-control-center-goa-helper.c:427
 #, c-format
 msgid "%s Account"
 msgstr "חשבון %s"
 
-#: panels/online-accounts/gnome-control-center-goa-helper.c:431
+#: panels/online-accounts/gnome-control-center-goa-helper.c:430
 msgid "Remove Account"
 msgstr "הסרת חשבון"
 
@@ -4827,16 +4783,16 @@ msgctxt "Idle time"
 msgid "Never"
 msgstr "לעולם לא"
 
-#: panels/power/cc-power-panel.c:946
+#: panels/power/cc-power-panel.c:947
 msgid "Automatic suspend"
 msgstr "השהיה אוטומטית"
 
-#: panels/power/cc-power-panel.c:1042
+#: panels/power/cc-power-panel.c:1043
 msgid ""
 "Performance mode temporarily disabled due to high operating temperature."
 msgstr "מצב הביצועים הושבת זמנית עקב טמפרטורה גבוהה בזמן הפעילות."
 
-#: panels/power/cc-power-panel.c:1044
+#: panels/power/cc-power-panel.c:1045
 msgid ""
 "Lap detected: performance mode temporarily unavailable. Move the device to a "
 "stable surface to restore."
@@ -4844,11 +4800,11 @@ msgstr ""
 "זוהו ירכיים: מצב הביצועים אינו זמין באופן זמני. יש להעביר את המכשיר למשטח "
 "יציב כדי לשחזר את המצב הקודם."
 
-#: panels/power/cc-power-panel.c:1046
+#: panels/power/cc-power-panel.c:1047
 msgid "Performance mode temporarily disabled."
 msgstr "מצב הביצועים מושבת זמנית."
 
-#: panels/power/cc-power-panel.c:1088
+#: panels/power/cc-power-panel.c:1089
 msgid ""
 "Low battery: power saver enabled. Previous mode will be restored when "
 "battery is sufficiently charged."
@@ -4857,13 +4813,13 @@ msgstr ""
 "מספק."
 
 #. translators: "%s" is an application name
-#: panels/power/cc-power-panel.c:1096
+#: panels/power/cc-power-panel.c:1097
 #, c-format
 msgid "Power Saver mode activated by “%s”."
 msgstr "מצב החיסכון בחשמל הופעל על ידי „%s”."
 
 #. translators: "%s" is an application name
-#: panels/power/cc-power-panel.c:1100
+#: panels/power/cc-power-panel.c:1101
 #, c-format
 msgid "Performance mode activated by “%s”."
 msgstr "מצב הביצועים מופעל על ידי „%s”."
@@ -5133,7 +5089,7 @@ msgstr "שם משתמש"
 
 #. Translators: This is the title of the dialog. %s is the printer name.
 #: panels/printers/pp-details-dialog.c:76
-#: panels/printers/pp-details-dialog.c:372
+#: panels/printers/pp-details-dialog.c:370
 #, c-format
 msgid "%s Details"
 msgstr "פרטי %s"
@@ -5142,11 +5098,11 @@ msgstr "פרטי %s"
 msgid "No suitable driver found"
 msgstr "לא נמצא מנהל התקן מתאים"
 
-#: panels/printers/pp-details-dialog.c:266
+#: panels/printers/pp-details-dialog.c:264
 msgid "Select PPD File"
 msgstr "בחירת קובץ PPD"
 
-#: panels/printers/pp-details-dialog.c:275
+#: panels/printers/pp-details-dialog.c:273
 msgid ""
 "PostScript Printer Description files (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, *."
 "PPD.GZ)"
@@ -5306,7 +5262,7 @@ msgid "Move this job to the top of the queue"
 msgstr "העברת המשימה הזאת לראש התור"
 
 #. Translators: This label shows how many jobs of this printer needs to be authenticated to be printed.
-#: panels/printers/pp-jobs-dialog.c:318
+#: panels/printers/pp-jobs-dialog.c:319
 #, c-format
 msgid "%u Job Requires Authentication"
 msgid_plural "%u Jobs Require Authentication"
@@ -5316,14 +5272,14 @@ msgstr[2] "‫%u משימות דורשות אימות"
 msgstr[3] "‏‫%u משימות דורשות אימות"
 
 #. Translators: This is the printer name for which we are showing the active jobs
-#: panels/printers/pp-jobs-dialog.c:456
+#: panels/printers/pp-jobs-dialog.c:457
 #, c-format
 msgctxt "Printer jobs dialog title"
 msgid "%s — Active Jobs"
 msgstr "%s - הדפסות פעילות"
 
 #. Translators: The printer needs authentication info to print.
-#: panels/printers/pp-jobs-dialog.c:460
+#: panels/printers/pp-jobs-dialog.c:461
 #, c-format
 msgid "Enter credentials to print from %s."
 msgstr "יש להזין אישור על מנת להדפיס מ־%s."
@@ -5564,110 +5520,110 @@ msgstr[2] "‫%u משימות"
 msgstr[3] "‫%u משימות"
 
 #. Translators: Name of job which makes printer to clean its heads
-#: panels/printers/pp-printer-entry.c:651
+#: panels/printers/pp-printer-entry.c:648
 msgid "Clean print heads"
 msgstr "ניקוי ראשי ההדפסה"
 
 #. Translators: The printer is low on toner
-#: panels/printers/pp-printer-entry.c:719
+#: panels/printers/pp-printer-entry.c:716
 msgid "Low on toner"
 msgstr "הטונר כמעט נגמר"
 
 #. Translators: The printer has no toner left
-#: panels/printers/pp-printer-entry.c:721
+#: panels/printers/pp-printer-entry.c:718
 msgid "Out of toner"
 msgstr "נגמר הטונר"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: panels/printers/pp-printer-entry.c:724
+#: panels/printers/pp-printer-entry.c:721
 msgid "Low on developer"
 msgstr "נותר מעט נייר צילום"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: panels/printers/pp-printer-entry.c:727
+#: panels/printers/pp-printer-entry.c:724
 msgid "Out of developer"
 msgstr "נגמר נייר הצילום"
 
 #. Translators: "marker" is one color bin of the printer
-#: panels/printers/pp-printer-entry.c:729
+#: panels/printers/pp-printer-entry.c:726
 msgid "Low on a marker supply"
 msgstr "נותרה מעט אספקת צבע"
 
 #. Translators: "marker" is one color bin of the printer
-#: panels/printers/pp-printer-entry.c:731
+#: panels/printers/pp-printer-entry.c:728
 msgid "Out of a marker supply"
 msgstr "נגמרה אספקת הצבע"
 
 #. Translators: One or more covers on the printer are open
-#: panels/printers/pp-printer-entry.c:733
+#: panels/printers/pp-printer-entry.c:730
 msgid "Open cover"
 msgstr "הכיסוי פתוח"
 
 #. Translators: One or more doors on the printer are open
-#: panels/printers/pp-printer-entry.c:735
+#: panels/printers/pp-printer-entry.c:732
 msgid "Open door"
 msgstr "הדלת פתוחה"
 
 #. Translators: At least one input tray is low on media
-#: panels/printers/pp-printer-entry.c:737
+#: panels/printers/pp-printer-entry.c:734
 msgid "Low on paper"
 msgstr "נותר מעט נייר"
 
 #. Translators: At least one input tray is empty
-#: panels/printers/pp-printer-entry.c:739
+#: panels/printers/pp-printer-entry.c:736
 msgid "Out of paper"
 msgstr "נגמר הנייר"
 
 #. Translators: The printer is offline
-#: panels/printers/pp-printer-entry.c:741
+#: panels/printers/pp-printer-entry.c:738
 msgctxt "printer state"
 msgid "Offline"
 msgstr "מנותקת"
 
 #. Translators: Someone has stopped the Printer
 #. Translators: Printer's state (no jobs can be processed)
-#: panels/printers/pp-printer-entry.c:743
-#: panels/printers/pp-printer-entry.c:886
+#: panels/printers/pp-printer-entry.c:740
+#: panels/printers/pp-printer-entry.c:883
 msgctxt "printer state"
 msgid "Stopped"
 msgstr "נעצרה"
 
 #. Translators: The printer marker supply waste receptacle is almost full
-#: panels/printers/pp-printer-entry.c:745
+#: panels/printers/pp-printer-entry.c:742
 msgid "Waste receptacle almost full"
 msgstr "כלי קיבול הפסולת כמעט מלא"
 
 #. Translators: The printer marker supply waste receptacle is full
-#: panels/printers/pp-printer-entry.c:747
+#: panels/printers/pp-printer-entry.c:744
 msgid "Waste receptacle full"
 msgstr "כלי קיבול הפסולת מלא"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: panels/printers/pp-printer-entry.c:749
+#: panels/printers/pp-printer-entry.c:746
 msgid "The optical photo conductor is near end of life"
 msgstr "הפוטו מוליך האופטי עומד לסיים את חייו"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: panels/printers/pp-printer-entry.c:751
+#: panels/printers/pp-printer-entry.c:748
 msgid "The optical photo conductor is no longer functioning"
 msgstr "הפוטו מוליך האופטי אינו מתפקד עוד"
 
 #. Translators: Printer's state (can start new job without waiting)
-#: panels/printers/pp-printer-entry.c:872
+#: panels/printers/pp-printer-entry.c:869
 msgctxt "printer state"
 msgid "Ready"
 msgstr "מוכנה"
 
 #. Translators: Printer's state (printer is ready but doesn't accept new jobs)
-#: panels/printers/pp-printer-entry.c:877
+#: panels/printers/pp-printer-entry.c:874
 msgctxt "printer state"
 msgid "Does not accept jobs"
 msgstr "אין עבודות"
 
 #. Translators: Printer's state (jobs are processing)
-#: panels/printers/pp-printer-entry.c:882
+#: panels/printers/pp-printer-entry.c:879
 msgctxt "printer state"
 msgid "Processing"
 msgstr "מעבדת"
@@ -5713,27 +5669,31 @@ msgstr "יש להפעיל מחדש כאשר הבעיה נפתרת."
 msgid "Restart"
 msgstr "הפעלה מחדש"
 
+#: panels/printers/printers.ui:8
+msgid "All Connected and Network Printers"
+msgstr "כל המדפסות הזמינות - מקומיות ומרוחקות"
+
 #. Translators: This button adds new printer.
 #. Translators: This button adds a new printer.
-#: panels/printers/printers.ui:10 panels/printers/printers.ui:149
-msgid "Add Printer…"
-msgstr "הוספת מדפסת…"
+#: panels/printers/printers.ui:11 panels/printers/printers.ui:150
+msgid "_Add Printer…"
+msgstr "הוס_פת מדפסת…"
 
-#: panels/printers/printers.ui:108
+#: panels/printers/printers.ui:109
 msgid "Search printers"
 msgstr "חיפוש מדפסות"
 
-#: panels/printers/printers.ui:146
+#: panels/printers/printers.ui:147
 msgid "No Printers"
 msgstr "אין מדפסות בנמצא"
 
 #. Translators: Title if the CUPS server is not running (we can not connect to it).
-#: panels/printers/printers.ui:169
+#: panels/printers/printers.ui:171
 msgid "No Print Service"
 msgstr "אין שרת הדפסה"
 
 #. Translators: Description if the CUPS server is not running (we can not connect to it).
-#: panels/printers/printers.ui:170
+#: panels/printers/printers.ui:172
 msgid "The system printing service doesn’t seem to be available."
 msgstr "כפי הנראה, שירותי ההדפסה של המערכת אינם זמינים."
 
@@ -5804,7 +5764,7 @@ msgstr "השפה והתבנית ישתנו לאחר ההתחברות הבאה"
 msgid "Log Out…"
 msgstr "יציאה…"
 
-#: panels/region/cc-region-panel.ui:22
+#: panels/region/cc-region-panel.ui:19
 msgid ""
 "The language setting is used for interface text and web pages. Formats are "
 "used for numbers, dates, and currencies."
@@ -5812,20 +5772,20 @@ msgstr ""
 "הגדרת השפה תשמש לטקסט בממשק המשתמש ובאתרי האינטרנט. התבנית תשמש עבור מספרים, "
 "תאריכים ומטבעות."
 
-#: panels/region/cc-region-panel.ui:28
+#: panels/region/cc-region-panel.ui:23
 msgid "Your Account"
 msgstr "החשבון שלך"
 
-#: panels/region/cc-region-panel.ui:33 panels/region/cc-region-panel.ui:60
-#: panels/user-accounts/cc-user-panel.ui:248
+#: panels/region/cc-region-panel.ui:28 panels/region/cc-region-panel.ui:55
+#: panels/user-accounts/cc-user-panel.ui:249
 msgid "_Language"
 msgstr "_שפה"
 
-#: panels/region/cc-region-panel.ui:43 panels/region/cc-region-panel.ui:70
+#: panels/region/cc-region-panel.ui:38 panels/region/cc-region-panel.ui:65
 msgid "_Formats"
 msgstr "_תבניות"
 
-#: panels/region/cc-region-panel.ui:55
+#: panels/region/cc-region-panel.ui:50
 msgid "Login Screen"
 msgstr "מסך כניסה"
 
@@ -5955,19 +5915,19 @@ msgstr "_תכנה"
 msgid "_Other Media…"
 msgstr "מ_דיה אחרת…"
 
-#: panels/removable-media/cc-removable-media-panel.ui:195
+#: panels/removable-media/cc-removable-media-panel.ui:197
 msgid "_Never prompt or start apps on media insertion"
 msgstr "ל_עולם לא לשאול או להפעיל תכנית עם הכנסת מדיה"
 
-#: panels/removable-media/cc-removable-media-panel.ui:225
+#: panels/removable-media/cc-removable-media-panel.ui:230
 msgid "Select how other media should be handled"
 msgstr "יש לבחור כיצד מדיה אחרת תטופל"
 
-#: panels/removable-media/cc-removable-media-panel.ui:259
+#: panels/removable-media/cc-removable-media-panel.ui:264
 msgid "_Action:"
 msgstr "_פעולה:"
 
-#: panels/removable-media/cc-removable-media-panel.ui:278
+#: panels/removable-media/cc-removable-media-panel.ui:283
 msgid "_Type:"
 msgstr "_סוג:"
 
@@ -6096,7 +6056,7 @@ msgctxt "blank_screen"
 msgid "Never"
 msgstr "לעולם לא"
 
-#: panels/screen/cc-screen-panel.ui:8
+#: panels/screen/cc-screen-panel.ui:6
 msgid ""
 "Automatically locking the screen prevents others from accessing the computer "
 "while you're away."
@@ -6158,43 +6118,43 @@ msgstr "נעילת מסך אוטומטית"
 msgid "screen;lock;private;privacy;"
 msgstr "מסך;נעילה;פרטי;פרטיות;"
 
-#: panels/search/cc-search-locations-dialog.c:674
+#: panels/search/cc-search-locations-dialog.c:675
 msgid "Select Location"
 msgstr "בחירת מיקום"
-
-#: panels/search/cc-search-locations-dialog.c:678
-msgid "_OK"
-msgstr "_אישור"
 
 #: panels/search/cc-search-locations-dialog.ui:10
 #: panels/search/cc-search-panel.ui:22
 msgid "Search Locations"
 msgstr "מקומות לחיפוש"
 
-#: panels/search/cc-search-locations-dialog.ui:15
+#: panels/search/cc-search-locations-dialog.ui:13
 msgid ""
 "Folders which are searched by system apps, such as Files, Photos and Videos."
 msgstr "תיקיות אשר מבוצע בהן חיפוש על ידי יישומים כמו קבצים, תמונות וסרטים."
 
-#: panels/search/cc-search-locations-dialog.ui:20
+#: panels/search/cc-search-locations-dialog.ui:16
 msgid "Places"
 msgstr "מיקומים"
 
-#: panels/search/cc-search-locations-dialog.ui:37
+#: panels/search/cc-search-locations-dialog.ui:33
 msgid "Bookmarks"
 msgstr "סימניות"
 
-#: panels/search/cc-search-locations-dialog.ui:54
+#: panels/search/cc-search-locations-dialog.ui:50
 msgid "Others"
 msgstr "אחרים"
 
-#: panels/search/cc-search-locations-dialog.ui:61
+#: panels/search/cc-search-locations-dialog.ui:57
 msgid "Add Location"
 msgstr "הוספת מיקום"
 
 #: panels/search/cc-search-panel.c:166
 msgid "No apps found"
 msgstr "לא נמצאו יישומים"
+
+#: panels/search/cc-search-panel-row.ui:39
+msgid "More options…"
+msgstr "אפשרויות נוספות…"
 
 #: panels/search/cc-search-panel.ui:10
 msgid "App Search"
@@ -6292,19 +6252,19 @@ msgstr ""
 msgid "Enable personal media sharing"
 msgstr "הפעלת שיתוף מדיה פרטי"
 
-#: panels/sharing/cc-sharing-panel.c:1127
+#: panels/sharing/cc-sharing-panel.c:1124
 msgid "Device name copied"
 msgstr "שם ההתקן הועתק"
 
-#: panels/sharing/cc-sharing-panel.c:1138
+#: panels/sharing/cc-sharing-panel.c:1134
 msgid "Device address copied"
 msgstr "כתובת ההתקן הועתקה"
 
-#: panels/sharing/cc-sharing-panel.c:1149
+#: panels/sharing/cc-sharing-panel.c:1144
 msgid "Username copied"
 msgstr "שם המשתמש הועתק"
 
-#: panels/sharing/cc-sharing-panel.c:1160
+#: panels/sharing/cc-sharing-panel.c:1154
 msgid "Password copied"
 msgstr "ססמה הועתקה"
 
@@ -6349,7 +6309,7 @@ msgid "_Require Password"
 msgstr "ד_רישת ססמה"
 
 #: panels/sharing/cc-sharing-panel.ui:125
-#: panels/user-accounts/cc-user-panel.ui:150
+#: panels/user-accounts/cc-user-panel.ui:151
 msgid "_Password"
 msgstr "_ססמה"
 
@@ -6363,7 +6323,7 @@ msgstr "התחברות מרוחקת"
 msgid "Remote Desktop"
 msgstr "שולחן עבודה מרוחק"
 
-#: panels/sharing/cc-sharing-panel.ui:241
+#: panels/sharing/cc-sharing-panel.ui:239
 msgid ""
 "Remote desktop allows viewing and controlling your desktop from another "
 "computer."
@@ -6700,21 +6660,21 @@ msgctxt "Thunderbolt Device Status"
 msgid "Authorized"
 msgstr "אומת"
 
-#: panels/thunderbolt/cc-bolt-panel.c:234
+#: panels/thunderbolt/cc-bolt-panel.c:233
 msgid ""
 "The Thunderbolt subsystem (boltd) is not installed or not set up properly."
 msgstr "מערכת הבת של Thunderbolt ‏(boltd) אינה מותקנת או לא מוגדרת כראוי."
 
-#: panels/thunderbolt/cc-bolt-panel.c:490
+#: panels/thunderbolt/cc-bolt-panel.c:489
 #: panels/thunderbolt/cc-bolt-panel.ui:123
 msgid "Allow direct access to devices such as docks and external GPUs."
 msgstr "לאפשר גישה ישירה להתקנים דוגמת תחנות עגינה ומעבדים גרפיים חיצוניים."
 
-#: panels/thunderbolt/cc-bolt-panel.c:491
+#: panels/thunderbolt/cc-bolt-panel.c:490
 msgid "Only USB and Display Port devices can attach."
 msgstr "רק התקני USB ו־DisplayPort ניתנים לצירוף."
 
-#: panels/thunderbolt/cc-bolt-panel.c:526
+#: panels/thunderbolt/cc-bolt-panel.c:525
 msgid ""
 "Thunderbolt could not be detected.\n"
 "Either the system lacks Thunderbolt support, it has been disabled in the "
@@ -6724,15 +6684,15 @@ msgstr ""
 "או שהמערכת חסרת תמיכה ב־Thunderbolt, או שהיא הושבתה ב־BIOS או שהיא הוגדרה "
 "כשכבת אבטחה לא נתמכת ב־BIOS."
 
-#: panels/thunderbolt/cc-bolt-panel.c:570
+#: panels/thunderbolt/cc-bolt-panel.c:569
 msgid "Thunderbolt support has been disabled in the BIOS."
 msgstr "תמיכה ב־Thunderbolt הושבתה ב־BIOS."
 
-#: panels/thunderbolt/cc-bolt-panel.c:574
+#: panels/thunderbolt/cc-bolt-panel.c:573
 msgid "Thunderbolt security level could not be determined."
 msgstr "שכבת האבטחה של Thunderbolt לא ניתנת לקביעה."
 
-#: panels/thunderbolt/cc-bolt-panel.c:694
+#: panels/thunderbolt/cc-bolt-panel.c:693
 #, c-format
 msgid "Error switching direct mode: %s"
 msgstr "שגיאה בשינוי המצב הישיר: %s"
@@ -6919,31 +6879,31 @@ msgstr "הצבעה ולחיצה"
 msgid "Zoom"
 msgstr "תקריב"
 
-#: panels/universal-access/cc-ua-panel.ui:42
+#: panels/universal-access/cc-ua-panel.ui:43
 msgid "_Accessibility Menu"
 msgstr "תפריט _נגישות"
 
-#: panels/universal-access/cc-ua-panel.ui:43
+#: panels/universal-access/cc-ua-panel.ui:44
 msgid "Display menu for Accessibility settings in top bar"
 msgstr "הצגת תפריט להגדרות הנגישות בלוח העליון"
 
-#: panels/universal-access/cc-ua-panel.ui:64
+#: panels/universal-access/cc-ua-panel.ui:65
 msgid "_Seeing"
 msgstr "_ראייה"
 
-#: panels/universal-access/cc-ua-panel.ui:74
+#: panels/universal-access/cc-ua-panel.ui:75
 msgid "_Hearing"
 msgstr "_שמיעה"
 
-#: panels/universal-access/cc-ua-panel.ui:84
+#: panels/universal-access/cc-ua-panel.ui:85
 msgid "_Typing"
 msgstr "ה_קלדה"
 
-#: panels/universal-access/cc-ua-panel.ui:94
+#: panels/universal-access/cc-ua-panel.ui:95
 msgid "_Pointing and Clicking"
 msgstr "ה_צבעה ולחיצה"
 
-#: panels/universal-access/cc-ua-panel.ui:104
+#: panels/universal-access/cc-ua-panel.ui:105
 msgid "_Zoom"
 msgstr "ת_קריב"
 
@@ -7558,7 +7518,7 @@ msgid "Administrator"
 msgstr "מנהל"
 
 #: panels/user-accounts/cc-add-user-dialog.ui:135
-#: panels/user-accounts/cc-user-panel.ui:210
+#: panels/user-accounts/cc-user-panel.ui:211
 msgid ""
 "Administrators have extra abilities, including adding and removing users, "
 "changing login settings, and removing software. Parental controls cannot be "
@@ -7600,7 +7560,7 @@ msgstr ""
 "התחברות ארגונית מאפשרת ניהול חשבון משתמש מרוכז לשימוש בהתקן זה. נתן גם "
 "להשתמש בחשבון זה לגישה למשאבי חברות באינטרנט."
 
-#: panels/user-accounts/cc-avatar-chooser.c:163
+#: panels/user-accounts/cc-avatar-chooser.c:169
 msgid "Browse for more pictures"
 msgstr "עיון אחר תמונות נוספות"
 
@@ -7795,31 +7755,31 @@ msgid ""
 "fingerprint"
 msgstr "יש לחזור על הרמת והנחת האצבע על הקורא כדי לרשום את טביעת האצבע שלך"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:1015
+#: panels/user-accounts/cc-fingerprint-dialog.c:1014
 msgid "_Re-enroll this finger…"
 msgstr "_רישום מחדש של אצבע זו…"
 
 #. TRANSLATORS: This is the label for the button to enroll a new finger
-#: panels/user-accounts/cc-fingerprint-dialog.c:1030
+#: panels/user-accounts/cc-fingerprint-dialog.c:1029
 msgid "Scan new fingerprint"
 msgstr "סריקת טביעת אצבע חדשה"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:1067
+#: panels/user-accounts/cc-fingerprint-dialog.c:1066
 #, c-format
 msgid "Failed to release fingerprint device %s: %s"
 msgstr "שחרור התקן טביעת אצבע %s נכשל: ‏%s"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:1139
+#: panels/user-accounts/cc-fingerprint-dialog.c:1138
 msgctxt "Fingerprint enroll state"
 msgid "Problem Reading Device"
 msgstr "בעיה בקריאת התקן"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:1174
+#: panels/user-accounts/cc-fingerprint-dialog.c:1173
 #, c-format
 msgid "Failed to claim fingerprint device %s: %s"
 msgstr "טעינת התקן טביעת אצבע %s נכשלה: ‏%s"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:1325
+#: panels/user-accounts/cc-fingerprint-dialog.c:1324
 #, c-format
 msgid "Failed to get fingerprint devices: %s"
 msgstr "קבלת התקני טביעת אצבע נכשלה: ‏%s"
@@ -7887,82 +7847,78 @@ msgstr "הססמה שגויה, נא לנסות שוב"
 msgid "Couldn’t connect to the %s domain: %s"
 msgstr "לא ניתן להתחבר אל התחום %s:‏ %s"
 
-#: panels/user-accounts/cc-user-panel.c:260
-msgid "Add User…"
-msgstr "הוספת משתמש…"
-
-#: panels/user-accounts/cc-user-panel.c:374
+#: panels/user-accounts/cc-user-panel.c:359
 msgid "Failed to delete user"
 msgstr "מחיקת משתמש נכשלה"
 
-#: panels/user-accounts/cc-user-panel.c:429
-#: panels/user-accounts/cc-user-panel.c:484
-#: panels/user-accounts/cc-user-panel.c:530
+#: panels/user-accounts/cc-user-panel.c:414
+#: panels/user-accounts/cc-user-panel.c:469
+#: panels/user-accounts/cc-user-panel.c:515
 msgid "Failed to revoke remotely managed user"
 msgstr "ביטול המשתמש המנוהל מרחוק נכשל"
 
-#: panels/user-accounts/cc-user-panel.c:579
+#: panels/user-accounts/cc-user-panel.c:564
 msgid "You cannot delete your own account."
 msgstr "מחיקת החשבון שלך על ידיך אינה אפשרית."
 
-#: panels/user-accounts/cc-user-panel.c:588
+#: panels/user-accounts/cc-user-panel.c:573
 #, c-format
 msgid "%s is still logged in"
 msgstr "%s עדיין במערכת"
 
-#: panels/user-accounts/cc-user-panel.c:592
+#: panels/user-accounts/cc-user-panel.c:577
 msgid ""
 "Deleting a user while they are logged in can leave the system in an "
 "inconsistent state."
 msgstr "מחיקת משתמש כשהוא מחובר עלולה להשאיר את המערכת במצב בלתי יציב."
 
-#: panels/user-accounts/cc-user-panel.c:606
+#: panels/user-accounts/cc-user-panel.c:591
 #, c-format
 msgid "Remove %s?"
 msgstr "להסיר את %s?"
 
-#: panels/user-accounts/cc-user-panel.c:615
+#: panels/user-accounts/cc-user-panel.c:600
 #, c-format
 msgid "Are you sure you want to revoke remotely managed %s’s account?"
 msgstr "לשלול את החשבון של %s שמנוהל מרחוק?"
 
-#: panels/user-accounts/cc-user-panel.c:619
+#: panels/user-accounts/cc-user-panel.c:604
 msgid "_Delete"
 msgstr "מ_חיקה"
 
-#: panels/user-accounts/cc-user-panel.c:669
+#: panels/user-accounts/cc-user-panel.c:654
 msgctxt "Password mode"
 msgid "Account disabled"
 msgstr "חשבון מושבת"
 
-#: panels/user-accounts/cc-user-panel.c:677
+#: panels/user-accounts/cc-user-panel.c:662
 msgctxt "Password mode"
 msgid "To be set at next login"
 msgstr "להגדרה בהתחברות הבאה"
 
-#: panels/user-accounts/cc-user-panel.c:680
+#: panels/user-accounts/cc-user-panel.c:665
 msgctxt "Password mode"
 msgid "None"
 msgstr "אין"
 
-#: panels/user-accounts/cc-user-panel.c:1153
+#: panels/user-accounts/cc-user-panel.c:1138
 msgid "Failed to contact the accounts service"
 msgstr "לא ניתן ליצור קשר עם שירות החשבונות"
 
-#: panels/user-accounts/cc-user-panel.c:1155
+#: panels/user-accounts/cc-user-panel.c:1140
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "נא לוודא ששירות החשבונות (AccountService) מותקן ומופעל."
 
-#: panels/user-accounts/cc-user-panel.c:1177
+#: panels/user-accounts/cc-user-panel.c:1162
 msgid "This panel must be unlocked to change this setting"
 msgstr "יש הכרח לשחרר לוח זה על מנת לשנות הגדרה זו"
 
-#: panels/user-accounts/cc-user-panel.c:1244
+#: panels/user-accounts/cc-user-panel.c:1229
 msgid "Delete the selected user account"
 msgstr "מחיקת חשבון המשתמש הנבחר"
 
-#: panels/user-accounts/cc-user-panel.c:1248
-#: panels/user-accounts/cc-user-panel.c:1385
+#: panels/user-accounts/cc-user-panel.c:1233
+#: panels/user-accounts/cc-user-panel.c:1341
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -7970,7 +7926,7 @@ msgstr ""
 "כדי למחוק את המשתמש הנבחר\n"
 "ראשית יש ללחוץ על הסמל *"
 
-#: panels/user-accounts/cc-user-panel.c:1431
+#: panels/user-accounts/cc-user-panel.c:1387
 msgid "Unlock to add users and change settings"
 msgstr "יש לשחרר כדי להוסיף משתמשים ולשנות הגדרות"
 
@@ -7979,33 +7935,33 @@ msgstr "יש לשחרר כדי להוסיף משתמשים ולשנות הגדר
 msgid "Users"
 msgstr "משתמשים"
 
-#: panels/user-accounts/cc-user-panel.ui:63
+#: panels/user-accounts/cc-user-panel.ui:64
 msgid "Your session needs to be restarted for changes to take effect"
 msgstr ""
 "יש להפעיל מחדש את ההפעלה שלך כדי שהשינויים ייכנסו לתוקף (יש לצאת ולהיכנס)"
 
-#: panels/user-accounts/cc-user-panel.ui:70
+#: panels/user-accounts/cc-user-panel.ui:71
 msgid "Restart Now"
 msgstr "הפעלה מחדש כעת"
 
-#: panels/user-accounts/cc-user-panel.ui:79
+#: panels/user-accounts/cc-user-panel.ui:80
 msgid "Close"
 msgstr "סגירה"
 
-#: panels/user-accounts/cc-user-panel.ui:120
+#: panels/user-accounts/cc-user-panel.ui:121
 msgid "Edit avatar"
 msgstr "עריכת תמונה"
 
 #. FIXME
-#: panels/user-accounts/cc-user-panel.ui:170
+#: panels/user-accounts/cc-user-panel.ui:171
 msgid "_Fingerprint Login"
 msgstr "כניסה באמצעות _טביעת אצבע"
 
-#: panels/user-accounts/cc-user-panel.ui:179
+#: panels/user-accounts/cc-user-panel.ui:180
 msgid "A_utomatic Login"
 msgstr "כניסה _אוטומטית"
 
-#: panels/user-accounts/cc-user-panel.ui:185
+#: panels/user-accounts/cc-user-panel.ui:186
 msgid ""
 "Automatic login opens the user account when the device starts, without "
 "requiring authentication. Authentication is still required at other times, "
@@ -8014,42 +7970,46 @@ msgstr ""
 "התחברות אוטומטית פותחת את חשבון המשתמש עם עליית ההתקן, ללא כל בקשה לאימות. "
 "אימות עדיין יידרש בהזדמנויות אחרות, כגון בעת שחרור מסך הנעילה."
 
-#: panels/user-accounts/cc-user-panel.ui:203
+#: panels/user-accounts/cc-user-panel.ui:204
 msgid "_Administrator"
 msgstr "_מנהל"
 
-#: panels/user-accounts/cc-user-panel.ui:225
+#: panels/user-accounts/cc-user-panel.ui:226
 msgid "_Parental Controls"
 msgstr "_בקרת הורים"
 
-#: panels/user-accounts/cc-user-panel.ui:226
+#: panels/user-accounts/cc-user-panel.ui:227
 msgid "Open the Parental Controls app."
 msgstr "פתיחת יישום בקרת הורים."
 
-#: panels/user-accounts/cc-user-panel.ui:263
-msgid "Remove User…"
-msgstr "הסרת משתמש…"
-
-#: panels/user-accounts/cc-user-panel.ui:275
+#: panels/user-accounts/cc-user-panel.ui:261
 msgid "Other Users"
 msgstr "משתמשים אחרים"
 
+#: panels/user-accounts/cc-user-panel.ui:279
+msgid "_Remove User…"
+msgstr "ה_סרת משתמש…"
+
+#: panels/user-accounts/cc-user-panel.ui:289
+msgid "_Add User…"
+msgstr "הו_ספת משתמש…"
+
 #. Translators: This is the empty state page label which states that there are no users to show in the panel.
-#: panels/user-accounts/cc-user-panel.ui:307
+#: panels/user-accounts/cc-user-panel.ui:318
 msgid "No Users Found"
 msgstr "לא נמצאו משתמשים"
 
-#: panels/user-accounts/cc-user-panel.ui:316
+#: panels/user-accounts/cc-user-panel.ui:327
 msgid "Unlock to add a user account."
 msgstr "שחרור על מנת להוסיף משתמש."
 
-#: panels/user-accounts/cc-user-panel.ui:331
+#: panels/user-accounts/cc-user-panel.ui:342
 msgid ""
 "The user will not be able to use this device once their account has been "
 "removed."
 msgstr "המשתמש לא יוכל להשתמש בהתקן זה לאחר שהחשבון שלו יוסר."
 
-#: panels/user-accounts/cc-user-panel.ui:343
+#: panels/user-accounts/cc-user-panel.ui:354
 msgid "Delete Files and Settings"
 msgstr "מחיקת קבצים והגדרות"
 
@@ -8293,10 +8253,6 @@ msgstr ""
 "על מנת לערוך צירוף מקשים, יש לבחור בפעולה „שליחת צירוף מקשים”, ללחוץ על "
 "כפתור צירופי מקשים ולהקיש על המקשים החדשים או על Backspace למחיקה."
 
-#: panels/wacom/button-mapping.ui:66
-msgid "_Close"
-msgstr "ס_גירה"
-
 #: panels/wacom/calibrator/calibrator.ui:51
 msgid ""
 "Please tap the target markers as they appear on screen to calibrate the "
@@ -8350,7 +8306,7 @@ msgid "External pad device"
 msgstr "התקן משטח חיצוני"
 
 #. All displays item
-#: panels/wacom/cc-wacom-page.c:646
+#: panels/wacom/cc-wacom-page.c:644
 msgid "All Displays"
 msgstr "כל הצגים"
 
@@ -8488,6 +8444,10 @@ msgstr "עריכה"
 #: panels/wwan/cc-wwan-apn-dialog.ui:8
 msgid "Access Points"
 msgstr "נקודות גישה"
+
+#: panels/wwan/cc-wwan-apn-dialog.ui:43
+msgid "_Save"
+msgstr "_שמירה"
 
 #: panels/wwan/cc-wwan-apn-dialog.ui:123
 msgid "APN"
@@ -9070,23 +9030,23 @@ msgstr "פרטיות"
 msgid "Available panels:"
 msgstr "לוחות זמינים:"
 
-#: shell/cc-window.ui:30
+#: shell/cc-window.ui:27 shell/cc-window.ui:31
 msgid "All Settings"
 msgstr "כל ההגדרות"
 
-#: shell/cc-window.ui:54 shell/cc-window.ui:56
+#: shell/cc-window.ui:55 shell/cc-window.ui:57
 msgid "Main Menu"
 msgstr "תפריט ראשי"
 
-#: shell/cc-window.ui:71
+#: shell/cc-window.ui:72
 msgid "Search settings"
 msgstr "חיפוש הגדרות"
 
-#: shell/cc-window.ui:155
+#: shell/cc-window.ui:161
 msgid "Warning: Development Version"
 msgstr "אזהרה: גרסת פיתוח"
 
-#: shell/cc-window.ui:156
+#: shell/cc-window.ui:162
 msgid ""
 "This version of Settings should only be used for development purposes. You "
 "may experience incorrect system behavior, data loss, and other unexpected "
@@ -9095,7 +9055,7 @@ msgstr ""
 "גרסה זו של הגדרות צריכה לשמש למטרות פיתוח בלבד. הגרסה עשויה לגרום להתנהגויות "
 "לא תקינות של המערכת, לאבדן מידע לתקלות אחרות בלתי צפויות. "
 
-#: shell/cc-window.ui:167
+#: shell/cc-window.ui:173
 msgid "Help"
 msgstr "עזרה"
 
@@ -9202,19 +9162,59 @@ msgstr[3] "‏‫%u ערוצי קלט"
 msgid "System Sounds"
 msgstr "צלילי מערכת"
 
-#~ msgid "Cannot import VPN connection"
-#~ msgstr "לא ניתן לייבא חיבור VPN"
+#~ msgid "No apps"
+#~ msgstr "אין יישומים"
 
-#, c-format
+#~ msgid "Open"
+#~ msgstr "פתיחה"
+
+#~ msgid "Ca_lls"
+#~ msgstr "_שיחות"
+
+#~ msgid "Device Security Report"
+#~ msgstr "דו״ח אבטחת התקן"
+
+#~ msgid "Report details"
+#~ msgstr "פרטי דיווח"
+
+#~ msgid "Date generated:"
+#~ msgstr "תאריך יצירה:"
+
+#~ msgid "fwupd version:"
+#~ msgstr "גרסת fwupd:"
+
+#~ msgid "Hardware model:"
+#~ msgstr "דגם חָמְרה:"
+
+#~ msgid "Processor:"
+#~ msgstr "מעבד:"
+
+#~ msgid "OS:"
+#~ msgstr "מערכת הפעלה:"
+
+#~ msgid "Security level:"
+#~ msgstr "רמת אבטחה:"
+
+#~ msgid "Tests"
+#~ msgstr "בדיקות"
+
+#~ msgid "Runtime Tests"
+#~ msgstr "בדיקות זמן ריצה"
+
+#~ msgid "Host security events"
+#~ msgstr "אירועי אבטחת המארח"
+
 #~ msgid ""
-#~ "The file “%s” could not be read or does not contain recognized VPN "
-#~ "connection information\n"
-#~ "\n"
-#~ "Error: %s."
-#~ msgstr ""
-#~ "הקובץ „%s” לא ניתן לקריאה או שאינו מכיל מידע התחברות VPN מוכר\n"
-#~ "\n"
-#~ "שגיאה: %s."
+#~ "For information on the contents of this report, see https://fwupd.github."
+#~ "io/hsi.html"
+#~ msgstr "מידע על תוכן הדיווח באתר https://fwupd.github.io/hsi.html"
+
+#~ msgctxt "Wi-Fi Network"
+#~ msgid "_Forget"
+#~ msgstr "הת_עלמות"
+
+#~ msgid "_OK"
+#~ msgstr "_אישור"
 
 #, c-format
 #~ msgid "A file named “%s” already exists."
@@ -11759,9 +11759,6 @@ msgstr "צלילי מערכת"
 #~ msgid "System"
 #~ msgstr "מערכת"
 
-#~ msgid "Add a New Printer"
-#~ msgstr "הוספת מדפסת חדשה"
-
 #~ msgctxt "login history week label"
 #~ msgid "%s - %s"
 #~ msgstr "%s – %s"
@@ -12102,9 +12099,6 @@ msgstr "צלילי מערכת"
 
 #~ msgid "Paired"
 #~ msgstr "מצוות"
-
-#~ msgid "Mouse & Touchpad Settings"
-#~ msgstr "הגדרות עכבר ומשטח מגע"
 
 #~ msgid "Keyboard Settings"
 #~ msgstr "הגדרות המקלדת"
