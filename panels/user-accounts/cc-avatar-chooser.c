@@ -277,13 +277,9 @@ get_system_facesdirs (void)
 static gboolean
 add_faces_from_dirs (GListStore *faces, GStrv facesdirs, gboolean add_all)
 {
-        GFile *file;
-        GFileType type;
-        const gchar *target;
-        guint i;
         gboolean added_faces = FALSE;
 
-        for (i = 0; facesdirs[i] != NULL; i++) {
+        for (guint i = 0; facesdirs[i] != NULL; i++) {
                 g_autoptr(GFile) dir = NULL;
                 g_autoptr(GFileEnumerator) enumerator = NULL;
 
@@ -301,6 +297,9 @@ add_faces_from_dirs (GListStore *faces, GStrv facesdirs, gboolean add_all)
                 }
 
                 while (TRUE) {
+                        GFile *file;
+                        GFileType type;
+                        const gchar *target;
                         g_autoptr(GFileInfo) info = g_file_enumerator_next_file (enumerator, NULL, NULL);
                         if (info == NULL) {
                                 break;
@@ -312,7 +311,8 @@ add_faces_from_dirs (GListStore *faces, GStrv facesdirs, gboolean add_all)
                                 continue;
                         }
 
-                        target = g_file_info_get_symlink_target (info);
+                        target = g_file_info_get_attribute_byte_string (info,
+                                                                        G_FILE_ATTRIBUTE_STANDARD_SYMLINK_TARGET);
                         if (target != NULL && g_str_has_prefix (target , "legacy/")) {
                                 continue;
                         }
