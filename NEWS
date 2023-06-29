@@ -1,4 +1,140 @@
 ================
+Version 45.alpha
+================
+
+- Add placeholder text to various search entries
+- Set a minimum size for various dialogs
+- Make dialogs close when pressing the Escape key
+- Replace deprecated GTK4 methods with new replacements
+- Depend on snapd-glib-2 (soup3 version)
+- Accessibility improvements
+- Updated translations
+
+Common
+- Fix time entry for RTL languages
+- Use ToastOverlay
+- Show start title buttons in header bar
+- Allow more theming of rows
+- Only return to last panel if it didn't crash
+- Improvements to panel activation
+- Improvements to panel searching
+
+About
+- Show only the GNOME major version
+- Update hostname only after apply is clicked
+
+Accessibility
+- Present the checked state on the list row itself
+
+Appearance
+- Clear out dconf if user picks defaults
+
+Applications
+- Always use bold for app name in dialogs
+- Use header capitalization in the "No apps" AdwStatusPage
+
+Color
+- Do not try to access to null pointer in destruction
+- Dim information text & fix "Learn more" link alignment
+
+Date and Time
+- Fix NTP switch getting out of sync
+- Add top bar clock and calendar switches
+- Move "Time Format" row out of "Clock" section
+- Merge "Clock" and "Calendar" sections
+
+Default Apps
+- Don't crash when there are no apps for a mimetype
+
+Device Security
+- Skip security attributes that have been obsoleted by others
+- Ddon't translate technical report
+
+Display
+- Allow configuring all monitors and apply settings at once
+- Try snapping all the displays after a config change
+- Don't leak config manager proxy
+- Use AdwPreferencesPage
+- Fix display enabled toggle visibility
+- Fix gaps when numbering unusable displays
+- Fix stuck window subtitle
+- Fix invalid panel state after canceling changes
+- Check best_mode exist before adding flag
+
+Info
+- Show each GPU in it's own line
+
+Mouse
+- Prevent infinite loop on settings changes
+- Do not bind sensitivity to touchpad settings
+- Simplify binding of touchpad sensitive widgets
+- Hide entire "Touchpad" row when touchpad cannot be disabled
+
+Keyboard
+- Fix cancel button issue
+- Add "Compose" and "Character" keywords
+- Add ellipsis to the "Add Shortcut" button label
+- Fix "Add Custom Shortcut" in others sections
+- Drop "Left Alt" as compose key option
+
+Network
+- Validate max length of hotspot SSID
+- Keep current mode when enabling proxy
+- Increase maximum MTU value from 10000 to 65536
+- Fix incorrect styling in WiFi list
+- Make the security status and signal strength read by screen readers
+- Add a confirmation dialog when forgetting a connection
+- Center panel title when subtitle isn't visible
+- Rename "Other Devices" to "Bluetooth"
+- Fix crash when importing wrong vpn file
+- Drop legacy vpn_export function
+- Close Connection Editor dialog when clicking Apply button
+- Add delete icon in saved WiFi connections list
+- Move WiFi controls out of headerbar
+
+Notifications
+- Replace "Applications" with "App Notifications"
+
+Power
+- Label the main "battery" as UPS if that's what it is
+- Hide automatic suspend row in VM
+
+Region
+- Fix label of formats for the login screen
+
+Sharing
+- Disable AdwActionRow markup for networks
+- Fix network row visible name bug
+- Remove global master switch
+- Fix visual bug for active indicators
+- Add icons next to each row
+- Add subtitle to each panel row
+
+Sound
+- Make bass audible on low quality hardware
+- Prevent duplicate sound device entries
+
+Thunderbolt
+- Update page to be more similar to other pages
+- Modernize Device Dialog UI
+
+Usage
+- Fix confirmation dialog when clearing history
+
+Users
+- Remove account activity window
+- Set language-chooser to hide on close
+- Add popover explaining about the "Administrator" option
+- Add a popover describing the autologin functionality
+- Move "Add User" button out of the user listbox
+- Improve avatar crop mechanics
+- Improve rounding of avatar crop edges
+- Draw avatar crop corners to inside of crop
+
+Wacom
+- Rename "Test Your Settings" button to "Test Settings"
+
+================
 Version 44.rc
 ================
 
