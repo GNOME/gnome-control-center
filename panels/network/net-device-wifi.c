@@ -65,7 +65,7 @@ struct _NetDeviceWifi
         GtkBox                  *listbox_box;
         GtkStack                *stack;
 
-        CcListRow *device_enable_row;
+        AdwSwitchRow *device_enable_row;
         CcListRow *saved_network_row;
         CcListRow *connect_hidden_row;
         CcListRow *hotspot_row;
@@ -378,7 +378,7 @@ device_off_switch_changed_cb (NetDeviceWifi *self)
         if (self->updating_device)
                 return;
 
-        active = cc_list_row_get_active (self->device_enable_row);
+        active = adw_switch_row_get_active (self->device_enable_row);
         nm_client_dbus_set_property (self->client,
                                      NM_DBUS_PATH,
                                      NM_DBUS_INTERFACE,

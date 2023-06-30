@@ -66,10 +66,8 @@
 
     <!-- Enable Wi-Fi -->
     <child>
-      <object class="CcListRow" id="device_enable_row">
+      <object class="AdwSwitchRow" id="device_enable_row">
         <property name="title" translatable="yes">Wi-Fi</property>
-        <property name="show-switch">True</property>
-        <property name="activatable">True</property>
         <signal name="notify::active" handler="device_off_switch_changed_cb" object="NetDeviceWifi" swapped="yes"/>
         <accessibility>
           <property name="label" translatable="yes">Turn Wi-Fi off</property>
