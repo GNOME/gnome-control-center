@@ -10,51 +10,51 @@
           <object class="AdwHeaderBar"/>
         </child>
         <property name="content">
-      <object class="AdwPreferencesPage">
-        <property name="description" translatable="yes">Location services use GPS, Wi-Fi and cellular connections to determine the approximate location of this device. &lt;a href=&apos;https://location.services.mozilla.com/privacy&apos;&gt;Learn about what data is collected, and how it is used.&lt;/a&gt;</property>
-        <child>
-          <object class="AdwPreferencesGroup">
+          <object class="AdwPreferencesPage">
+            <property name="description" translatable="yes">Location services use GPS, Wi-Fi and cellular connections to determine the approximate location of this device. &lt;a href=&apos;https://location.services.mozilla.com/privacy&apos;&gt;Learn about what data is collected, and how it is used.&lt;/a&gt;</property>
             <child>
-              <object class="AdwSwitchRow" id="location_row">
-                <property name="title" translatable="yes">_Location Services</property>
-                <property name="subtitle" translatable="yes">Allow permitted apps to access location data</property>
-                <property name="use-underline">True</property>
-              </object>
-            </child>
-          </object>
-        </child>
-
-        <child>
-          <object class="AdwPreferencesGroup">
-            <property name="title" translatable="yes">Permitted Apps</property>
-            <property name="description" translatable="yes">The following sandboxed apps have been given access to location data. Apps that are not sandboxed can access location data without asking for permission.</property>
-            <child>
-              <object class="GtkListBox" id="location_apps_list_box">
-                <property name="selection-mode">none</property>
-                <style>
-                  <class name="boxed-list"/>
-                </style>
-
-                <child type="placeholder">
-                  <object class="GtkLabel">
-                    <property name="margin_top">18</property>
-                    <property name="margin_bottom">18</property>
-                    <property name="margin_start">18</property>
-                    <property name="margin_end">18</property>
-                    <property name="label" translatable="yes">No sandboxed apps have asked for location access</property>
-                    <property name="wrap">true</property>
-                    <property name="max-width-chars">50</property>
-                    <style>
-                      <class name="dim-label" />
-                    </style>
+              <object class="AdwPreferencesGroup">
+                <child>
+                  <object class="AdwSwitchRow" id="location_row">
+                    <property name="title" translatable="yes">_Location Services</property>
+                    <property name="subtitle" translatable="yes">Allow permitted apps to access location data</property>
+                    <property name="use-underline">True</property>
                   </object>
                 </child>
+              </object>
+            </child>
 
+            <child>
+              <object class="AdwPreferencesGroup">
+                <property name="title" translatable="yes">Permitted Apps</property>
+                <property name="description" translatable="yes">The following sandboxed apps have been given access to location data. Apps that are not sandboxed can access location data without asking for permission.</property>
+                <child>
+                  <object class="GtkListBox" id="location_apps_list_box">
+                    <property name="selection-mode">none</property>
+                    <style>
+                      <class name="boxed-list"/>
+                    </style>
+
+                    <child type="placeholder">
+                      <object class="GtkLabel">
+                        <property name="margin_top">18</property>
+                        <property name="margin_bottom">18</property>
+                        <property name="margin_start">18</property>
+                        <property name="margin_end">18</property>
+                        <property name="label" translatable="yes">No sandboxed apps have asked for location access</property>
+                        <property name="wrap">true</property>
+                        <property name="max-width-chars">50</property>
+                        <style>
+                          <class name="dim-label" />
+                        </style>
+                      </object>
+                    </child>
+
+                  </object>
+                </child>
               </object>
             </child>
           </object>
-        </child>
-      </object>
         </property>
       </object>
     </property>

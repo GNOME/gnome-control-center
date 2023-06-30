@@ -10,25 +10,25 @@
           <object class="AdwHeaderBar"/>
         </child>
         <property name="content">
-      <object class="AdwPreferencesPage">
-        <child>
-          <object class="AdwPreferencesGroup" id="diagnostics_group">
-            <property name="title" translatable="yes">Problem Reporting</property>
+          <object class="AdwPreferencesPage">
             <child>
-              <object class="AdwActionRow">
-                <property name="title" translatable="yes">_Automatic Problem Reporting</property>
-                <property name="use-underline">True</property>
-                <property name="activatable-widget">abrt_switch</property>
-                <child type="suffix">
-                  <object class="GtkSwitch" id="abrt_switch">
-                    <property name="valign">center</property>
+              <object class="AdwPreferencesGroup" id="diagnostics_group">
+                <property name="title" translatable="yes">Problem Reporting</property>
+                <child>
+                  <object class="AdwActionRow">
+                    <property name="title" translatable="yes">_Automatic Problem Reporting</property>
+                    <property name="use-underline">True</property>
+                    <property name="activatable-widget">abrt_switch</property>
+                    <child type="suffix">
+                      <object class="GtkSwitch" id="abrt_switch">
+                        <property name="valign">center</property>
+                      </object>
+                    </child>
                   </object>
                 </child>
               </object>
             </child>
           </object>
-        </child>
-      </object>
         </property>
       </object>
     </property>
