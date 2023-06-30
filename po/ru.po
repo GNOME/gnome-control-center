@@ -24,9 +24,9 @@ msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2023-03-31 10:36+0000\n"
-"PO-Revision-Date: 2023-03-31 18:02+0300\n"
-"Last-Translator: Aleksandr Melman <Alexmelman88@gmail.com>\n"
+"POT-Creation-Date: 2023-06-28 02:28+0000\n"
+"PO-Revision-Date: 2023-06-28 16:16+1000\n"
+"Last-Translator: Ser82-png <asvmail.as@gmail.com>\n"
 "Language-Team: Русский <gnome-cyr@gnome.org>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
@@ -34,7 +34,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Poedit 3.2.2\n"
+"X-Generator: Poedit 3.0.1\n"
 
 #: panels/applications/cc-applications-panel.c:822
 msgid "System Bus"
@@ -52,8 +52,8 @@ msgid "Session Bus"
 msgstr "Шина сеанса"
 
 #: panels/applications/cc-applications-panel.c:828
-#: panels/power/cc-power-panel.ui:75 panels/thunderbolt/cc-bolt-panel.ui:232
-#: panels/thunderbolt/cc-bolt-panel.ui:276
+#: panels/power/cc-power-panel.ui:75 panels/thunderbolt/cc-bolt-panel.ui:233
+#: panels/thunderbolt/cc-bolt-panel.ui:277
 msgid "Devices"
 msgstr "Устройства"
 
@@ -92,7 +92,7 @@ msgstr "Файловая система"
 #: panels/applications/cc-applications-panel.c:848
 #: panels/keyboard/01-launchers.xml.in:6
 #: shell/appdata/org.gnome.Settings.appdata.xml.in:7 shell/cc-window.c:246
-#: shell/cc-window.c:878 shell/cc-window.ui:22
+#: shell/cc-window.c:905 shell/cc-window.ui:22
 #: shell/org.gnome.Settings.desktop.in:3
 msgid "Settings"
 msgstr "Настройки"
@@ -104,10 +104,10 @@ msgstr "Может изменять настройки"
 #: panels/applications/cc-applications-panel.c:850
 #, c-format
 msgid ""
-"%s requires access to the following system resources. To stop this access, "
-"the app must be removed."
+"<b>%s</b> requires access to the following system resources. To stop this "
+"access, the app must be removed."
 msgstr ""
-"Приложение %s требует доступа к следующим системным ресурсам. Чтобы "
+"Приложение <b>%s</b> требует доступа к следующим системным ресурсам. Чтобы "
 "прекратить этот доступ, приложение должно быть удалено."
 
 #: panels/applications/cc-applications-panel.c:1192
@@ -124,46 +124,48 @@ msgid "<b>%s</b> is used to open the following types of files and links."
 msgstr "<b>%s</b> используется для открытия следующих типов файлов и ссылок."
 
 #. Translators: '%s' is the formatted size, e.g. "26.2 MB"
-#: panels/applications/cc-applications-panel.c:1251
+#: panels/applications/cc-applications-panel.c:1248
 #, c-format
 msgid "%s of disk space used."
 msgstr "%s дискового пространства использовано."
 
-#: panels/applications/cc-applications-panel.c:1415
+#: panels/applications/cc-applications-panel.c:1412
 #: panels/applications/cc-applications-panel.ui:19
 #: panels/applications/gnome-applications-panel.desktop.in:3
 msgid "Apps"
 msgstr "Приложения"
 
 #: panels/applications/cc-applications-panel.ui:31
-msgid "No apps"
+msgid "No Apps"
 msgstr "Нет приложений"
 
 #: panels/applications/cc-applications-panel.ui:34
-msgid "Install some…"
-msgstr "Установить какое-нибудь…"
+msgid "_Install Some…"
+msgstr "_Установить какое-нибудь…"
 
-#: panels/applications/cc-applications-panel.ui:84
-msgid "Open"
-msgstr "Открыть"
+#: panels/applications/cc-applications-panel.ui:85
+#: panels/printers/pp-details-dialog.c:268
+#: panels/sharing/cc-sharing-panel.c:448
+msgid "_Open"
+msgstr "_Открыть"
 
-#: panels/applications/cc-applications-panel.ui:94
-msgid "App Details"
-msgstr "Подробнее о приложении"
+#: panels/applications/cc-applications-panel.ui:96
+msgid "App _Details"
+msgstr "_Подробнее о приложении"
 
-#: panels/applications/cc-applications-panel.ui:112
-#: panels/applications/cc-applications-panel.ui:119
+#: panels/applications/cc-applications-panel.ui:115
+#: panels/applications/cc-applications-panel.ui:122
 #: panels/keyboard/01-launchers.xml.in:16
-#: panels/keyboard/cc-input-chooser.ui:75
+#: panels/keyboard/cc-input-chooser.ui:76
 #: panels/printers/new-printer-dialog.ui:230
 #: panels/region/cc-format-chooser.ui:82
-#: panels/search/gnome-search-panel.desktop.in:3 shell/cc-window.ui:40
-#: shell/cc-window.ui:42
+#: panels/search/gnome-search-panel.desktop.in:3 shell/cc-window.ui:41
+#: shell/cc-window.ui:43
 msgid "Search"
 msgstr "Поиск"
 
-#: panels/applications/cc-applications-panel.ui:113
-#: panels/applications/cc-applications-panel.ui:120
+#: panels/applications/cc-applications-panel.ui:116
+#: panels/applications/cc-applications-panel.ui:123
 msgid "Receive system searches and send results"
 msgstr "Получение результатов поиска в системе и их отправка"
 
@@ -173,177 +175,181 @@ msgstr "Получение результатов поиска в системе
 #. TRANSLATORS: Status of Parental Controls setup
 #. translators:
 #. * The device has been disabled
-#: panels/applications/cc-applications-panel.ui:121
-#: panels/applications/cc-applications-panel.ui:163
-#: panels/applications/cc-applications-panel.ui:184
-#: panels/applications/cc-applications-panel.ui:198
-#: panels/applications/cc-applications-panel.ui:212
+#: panels/applications/cc-applications-panel.ui:124
+#: panels/applications/cc-applications-panel.ui:166
+#: panels/applications/cc-applications-panel.ui:187
+#: panels/applications/cc-applications-panel.ui:201
+#: panels/applications/cc-applications-panel.ui:215
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:123
-#: panels/keyboard/cc-xkb-modifier-dialog.c:344
+#: panels/keyboard/cc-xkb-modifier-dialog.c:342
 #: panels/keyboard/keyboard-shortcuts.c:367
-#: panels/user-accounts/cc-user-panel.c:789
-#: panels/user-accounts/cc-user-panel.c:918
+#: panels/user-accounts/cc-user-panel.c:766
+#: panels/user-accounts/cc-user-panel.c:889
 #: panels/wwan/cc-wwan-device-page.c:477
-#: subprojects/gvc/gvc-mixer-control.c:1900
+#: subprojects/gvc/gvc-mixer-control.c:1908
 msgid "Disabled"
 msgstr "Выключено"
 
-#: panels/applications/cc-applications-panel.ui:126
+#: panels/applications/cc-applications-panel.ui:129
 #: panels/notifications/gnome-notifications-panel.desktop.in:3
 msgid "Notifications"
 msgstr "Уведомления"
 
-#: panels/applications/cc-applications-panel.ui:127
+#: panels/applications/cc-applications-panel.ui:130
 msgid "Show system notifications"
 msgstr "Показывать системные уведомления"
 
-#: panels/applications/cc-applications-panel.ui:133
+#: panels/applications/cc-applications-panel.ui:136
 msgid "Run in Background"
 msgstr "Запуск в фоновом режиме"
 
-#: panels/applications/cc-applications-panel.ui:134
+#: panels/applications/cc-applications-panel.ui:137
 msgid "Allow activity when the app is closed"
 msgstr "Разрешить активность, когда приложение закрыто"
 
-#: panels/applications/cc-applications-panel.ui:140
+#: panels/applications/cc-applications-panel.ui:143
 msgid "Screenshots"
 msgstr "Снимки экрана"
 
-#: panels/applications/cc-applications-panel.ui:141
+#: panels/applications/cc-applications-panel.ui:144
 msgid "Take pictures of the screen at any time"
 msgstr "Делать снимки экрана в любое время"
 
-#: panels/applications/cc-applications-panel.ui:147
+#: panels/applications/cc-applications-panel.ui:150
 msgid "Change Wallpaper"
 msgstr "Смена обоев"
 
-#: panels/applications/cc-applications-panel.ui:148
+#: panels/applications/cc-applications-panel.ui:151
 msgid "Change the desktop wallpaper."
 msgstr "Изменение обоев рабочего стола."
 
-#: panels/applications/cc-applications-panel.ui:154
-#: panels/applications/cc-applications-panel.ui:161
+#: panels/applications/cc-applications-panel.ui:157
+#: panels/applications/cc-applications-panel.ui:164
 #: panels/sound/cc-sound-panel.ui:352
 msgid "Sounds"
 msgstr "Звуки"
 
-#: panels/applications/cc-applications-panel.ui:155
+#: panels/applications/cc-applications-panel.ui:158
 msgid "Reproduce sounds."
 msgstr "Воспроизведение звуков."
 
-#: panels/applications/cc-applications-panel.ui:162
+#: panels/applications/cc-applications-panel.ui:165
 msgid "Reproduce sounds"
 msgstr "Воспроизведение звуков"
 
-#: panels/applications/cc-applications-panel.ui:168
+#: panels/applications/cc-applications-panel.ui:171
 msgid "Inhibit Shortcuts"
 msgstr "Запретить комбинации клавиш"
 
-#: panels/applications/cc-applications-panel.ui:169
+#: panels/applications/cc-applications-panel.ui:172
 msgid "Block standard keyboard shortcuts"
 msgstr "Блокировать стандартные комбинации клавиш"
 
-#: panels/applications/cc-applications-panel.ui:175
-#: panels/applications/cc-applications-panel.ui:182
+#: panels/applications/cc-applications-panel.ui:178
+#: panels/applications/cc-applications-panel.ui:185
 msgid "Camera"
 msgstr "Камера"
 
-#: panels/applications/cc-applications-panel.ui:176
-#: panels/applications/cc-applications-panel.ui:183
+#: panels/applications/cc-applications-panel.ui:179
+#: panels/applications/cc-applications-panel.ui:186
 msgid "Take pictures with the camera"
 msgstr "Делать снимки с помощью камеры"
 
-#: panels/applications/cc-applications-panel.ui:189
-#: panels/applications/cc-applications-panel.ui:196
+#: panels/applications/cc-applications-panel.ui:192
+#: panels/applications/cc-applications-panel.ui:199
 msgid "Microphone"
 msgstr "Микрофон"
 
-#: panels/applications/cc-applications-panel.ui:190
-#: panels/applications/cc-applications-panel.ui:197
+#: panels/applications/cc-applications-panel.ui:193
+#: panels/applications/cc-applications-panel.ui:200
 msgid "Record audio with the microphone"
 msgstr "Запись звука с помощью микрофона"
 
-#: panels/applications/cc-applications-panel.ui:203
-#: panels/applications/cc-applications-panel.ui:210
+#: panels/applications/cc-applications-panel.ui:206
+#: panels/applications/cc-applications-panel.ui:213
 #: panels/location/gnome-location-panel.desktop.in:3
 msgid "Location Services"
 msgstr "Службы определения местоположения"
 
-#: panels/applications/cc-applications-panel.ui:204
-#: panels/applications/cc-applications-panel.ui:211
+#: panels/applications/cc-applications-panel.ui:207
+#: panels/applications/cc-applications-panel.ui:214
 msgid "Access device location data"
 msgstr "Доступ к данным о местоположении устройства"
 
-#: panels/applications/cc-applications-panel.ui:222
-#: panels/applications/cc-applications-panel.ui:326
+#: panels/applications/cc-applications-panel.ui:225
+#: panels/applications/cc-applications-panel.ui:330
 msgid "Required Access"
 msgstr "Требуемый доступ"
 
-#: panels/applications/cc-applications-panel.ui:223
+#: panels/applications/cc-applications-panel.ui:226
 msgid "System access that is required by the app"
 msgstr "Доступ к системе, который требуется приложению"
 
-#: panels/applications/cc-applications-panel.ui:231
+#: panels/applications/cc-applications-panel.ui:234
 msgid "File &amp; Link Associations"
 msgstr "Ассоциации файлов и ссылок"
 
-#: panels/applications/cc-applications-panel.ui:239
-#: panels/applications/cc-applications-panel.ui:412
+#: panels/applications/cc-applications-panel.ui:242
+#: panels/applications/cc-applications-panel.ui:405
 msgid "Storage"
 msgstr "Хранилище"
 
-#: panels/applications/cc-applications-panel.ui:301 shell/cc-panel-list.ui:108
+#: panels/applications/cc-applications-panel.ui:261
+msgid "Search apps"
+msgstr "Поиск приложений"
+
+#: panels/applications/cc-applications-panel.ui:305 shell/cc-panel-list.ui:109
 msgid "No results found"
 msgstr "Результатов не найдено"
 
-#: panels/applications/cc-applications-panel.ui:311 shell/cc-panel-list.ui:117
+#: panels/applications/cc-applications-panel.ui:315 shell/cc-panel-list.ui:118
 msgid "Try a different search"
 msgstr "Попробуйте другой поисковый запрос"
 
-#: panels/applications/cc-applications-panel.ui:355
+#: panels/applications/cc-applications-panel.ui:359
 msgid "File & Link Associations"
 msgstr "Ассоциации файлов и ссылок"
 
-#: panels/applications/cc-applications-panel.ui:380
+#: panels/applications/cc-applications-panel.ui:373
 msgid "File Types"
 msgstr "Типы файлов"
 
-#: panels/applications/cc-applications-panel.ui:386
+#: panels/applications/cc-applications-panel.ui:379
 msgid "Link Types"
 msgstr "Типы ссылок"
 
-#: panels/applications/cc-applications-panel.ui:396
+#: panels/applications/cc-applications-panel.ui:389
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:131
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:234
 #: panels/keyboard/cc-keyboard-shortcut-row.ui:25
 msgid "Reset"
 msgstr "Сбросить"
 
-#: panels/applications/cc-applications-panel.ui:423
+#: panels/applications/cc-applications-panel.ui:414
 msgid "How much disk space this app is occupying with app data and caches."
 msgstr ""
 "Сколько дискового пространства занимает это приложение с его данными и "
 "кэшами."
 
-#: panels/applications/cc-applications-panel.ui:426
+#: panels/applications/cc-applications-panel.ui:419
 msgid "App"
 msgstr "Приложение"
 
-#: panels/applications/cc-applications-panel.ui:432
+#: panels/applications/cc-applications-panel.ui:425
 msgid "Data"
 msgstr "Данные"
 
-#: panels/applications/cc-applications-panel.ui:438
+#: panels/applications/cc-applications-panel.ui:431
 msgid "Cache"
 msgstr "Кэш"
 
-#: panels/applications/cc-applications-panel.ui:444
+#: panels/applications/cc-applications-panel.ui:437
 msgid "<b>Total</b>"
 msgstr "<b>Всего</b>"
 
-#: panels/applications/cc-applications-panel.ui:454
-msgid "Clear Cache…"
-msgstr "Очистить кэш…"
+#: panels/applications/cc-applications-panel.ui:447
+msgid "_Clear Cache…"
+msgstr "_Очистить кэш…"
 
 #: panels/applications/gnome-applications-panel.desktop.in:4
 msgid "Control various app permissions and settings"
@@ -354,47 +360,9 @@ msgstr "Управление различными разрешениями и н
 msgid "application;flatpak;permission;setting;"
 msgstr "приложение;flatpak;права;доступ;настройки;параметры;"
 
-#: panels/background/cc-background-chooser.c:312
+#: panels/background/cc-background-chooser.c:320
 msgid "Select a picture"
 msgstr "Выберите изображение"
-
-#: panels/background/cc-background-chooser.c:315
-#: panels/color/cc-color-calibrate.ui:22 panels/color/cc-color-panel.c:284
-#: panels/color/cc-color-panel.c:844 panels/common/cc-language-chooser.ui:21
-#: panels/display/cc-display-panel.ui:42 panels/keyboard/cc-input-chooser.ui:11
-#: panels/keyboard/cc-keyboard-shortcut-editor.ui:23
-#: panels/network/cc-wifi-hotspot-dialog.ui:142
-#: panels/network/cc-wifi-panel.c:744
-#: panels/network/connection-editor/connection-editor.ui:14
-#: panels/network/connection-editor/vpn-helpers.c:215
-#: panels/network/connection-editor/vpn-helpers.c:334
-#: panels/network/net-device-wifi.c:867
-#: panels/printers/new-printer-dialog.ui:50
-#: panels/printers/pp-details-dialog.c:269
-#: panels/region/cc-format-chooser.ui:24
-#: panels/search/cc-search-locations-dialog.c:677
-#: panels/sharing/cc-sharing-panel.c:479 panels/usage/cc-usage-panel.c:139
-#: panels/user-accounts/cc-add-user-dialog.ui:25
-#: panels/user-accounts/cc-avatar-chooser.c:96
-#: panels/user-accounts/cc-avatar-chooser.c:166
-#: panels/user-accounts/cc-fingerprint-dialog.ui:32
-#: panels/user-accounts/cc-password-dialog.ui:20
-#: panels/user-accounts/cc-user-panel.c:609
-#: panels/user-accounts/cc-user-panel.c:627
-#: panels/user-accounts/data/join-dialog.ui:17
-#: panels/wwan/cc-wwan-mode-dialog.ui:32
-#: panels/wwan/cc-wwan-network-dialog.ui:108
-#: panels/wwan/cc-wwan-sim-lock-dialog.ui:240
-msgid "_Cancel"
-msgstr "_Отменить"
-
-#: panels/background/cc-background-chooser.c:316
-#: panels/network/connection-editor/vpn-helpers.c:216
-#: panels/printers/pp-details-dialog.c:270
-#: panels/sharing/cc-sharing-panel.c:480
-#: panels/user-accounts/cc-avatar-chooser.c:167
-msgid "_Open"
-msgstr "_Открыть"
 
 #: panels/background/cc-background-item.c:169
 msgid "multiple sizes"
@@ -450,9 +418,6 @@ msgid "Background;Wallpaper;Screen;Desktop;Style;Light;Dark;Appearance;"
 msgstr "Фон;Обои;Экран;Рабочий;Стиль;Светлый;Темный;Внешний вид;"
 
 #: panels/bluetooth/cc-bluetooth-panel.ui:11
-#: panels/datetime/cc-datetime-panel.ui:130
-#: panels/diagnostics/cc-diagnostics-panel.ui:18
-#: panels/display/cc-night-light-page.ui:124
 msgid "Enable"
 msgstr "Включить"
 
@@ -481,19 +446,20 @@ msgid "Bluetooth is disabled when airplane mode is on"
 msgstr "Bluetooth отключается, когда включен авиарежим"
 
 #: panels/bluetooth/cc-bluetooth-panel.ui:42
-msgid "Turn Off Airplane Mode"
-msgstr "Выключить авиарежим"
+msgid "_Turn Off Airplane Mode"
+msgstr "_Выключить авиарежим"
 
-#: panels/bluetooth/cc-bluetooth-panel.ui:57
+#: panels/bluetooth/cc-bluetooth-panel.ui:58
 msgid "Hardware Airplane Mode is On"
 msgstr "Аппаратный авиарежим включен"
 
-#: panels/bluetooth/cc-bluetooth-panel.ui:58
+#: panels/bluetooth/cc-bluetooth-panel.ui:59
 msgid "Turn off the Airplane mode switch to enable Bluetooth."
 msgstr "Для включения Bluetooth выключите авиарежим."
 
 #. Translators: The found device is a printer connected via Bluetooth
 #: panels/bluetooth/gnome-bluetooth-panel.desktop.in:3
+#: panels/network/cc-network-panel.ui:76
 #: panels/printers/pp-new-printer-dialog.c:1383
 msgid "Bluetooth"
 msgstr "Bluetooth"
@@ -628,6 +594,32 @@ msgstr "Не трогайте устройство калибровки в пр�
 msgid "Display Calibration"
 msgstr "Калибровка экрана"
 
+#: panels/color/cc-color-calibrate.ui:22
+#: panels/common/cc-language-chooser.ui:21
+#: panels/display/cc-display-panel.ui:42 panels/keyboard/cc-input-chooser.ui:11
+#: panels/keyboard/cc-keyboard-shortcut-editor.ui:23
+#: panels/network/cc-wifi-hotspot-dialog.ui:142
+#: panels/network/cc-wifi-panel.c:738
+#: panels/network/connection-editor/ce-page-details.c:99
+#: panels/network/connection-editor/connection-editor.ui:14
+#: panels/network/net-device-wifi.c:862
+#: panels/printers/new-printer-dialog.ui:50
+#: panels/printers/pp-details-dialog.c:267
+#: panels/region/cc-format-chooser.ui:24 panels/sharing/cc-sharing-panel.c:447
+#: panels/usage/cc-usage-panel.c:139
+#: panels/user-accounts/cc-add-user-dialog.ui:25
+#: panels/user-accounts/cc-avatar-chooser.c:96
+#: panels/user-accounts/cc-fingerprint-dialog.ui:32
+#: panels/user-accounts/cc-password-dialog.ui:20
+#: panels/user-accounts/cc-user-panel.c:605
+#: panels/user-accounts/cc-user-panel.ui:347
+#: panels/user-accounts/data/join-dialog.ui:17
+#: panels/wwan/cc-wwan-mode-dialog.ui:32
+#: panels/wwan/cc-wwan-network-dialog.ui:108
+#: panels/wwan/cc-wwan-sim-lock-dialog.ui:240
+msgid "_Cancel"
+msgstr "_Отменить"
+
 #. This starts the calibration process
 #: panels/color/cc-color-calibrate.ui:28
 msgid "_Start"
@@ -702,63 +694,57 @@ msgstr "Неоткалиброванный"
 
 #. TRANSLATORS: this is a profile prefix to signify the
 #. * profile has been auto-generated for this hardware
-#: panels/color/cc-color-panel.c:160
+#: panels/color/cc-color-panel.c:162
 msgid "Default: "
 msgstr "По умолчанию: "
 
 #. TRANSLATORS: this is a profile prefix to signify the
 #. * profile his a standard space like AdobeRGB
-#: panels/color/cc-color-panel.c:168
+#: panels/color/cc-color-panel.c:170
 msgid "Colorspace: "
 msgstr "Цветовое пространство: "
 
 #. TRANSLATORS: this is a profile prefix to signify the
 #. * profile is a test profile
-#: panels/color/cc-color-panel.c:175
+#: panels/color/cc-color-panel.c:177
 msgid "Test profile: "
 msgstr "Тестовый профиль: "
 
 #. TRANSLATORS: an ICC profile is a file containing colorspace data
-#: panels/color/cc-color-panel.c:282
+#: panels/color/cc-color-panel.c:268
 msgid "Select ICC Profile File"
 msgstr "Выберите файл профиля ICC"
 
-#: panels/color/cc-color-panel.c:285
-msgid "_Import"
-msgstr "_Импортировать"
+#: panels/color/cc-color-panel.c:271
+msgid "Import"
+msgstr "Импортировать"
 
 #. TRANSLATORS: filter name on the file->open dialog
-#: panels/color/cc-color-panel.c:296
+#: panels/color/cc-color-panel.c:283
 msgid "Supported ICC profiles"
 msgstr "Поддерживаемые профили ICC"
 
 #. TRANSLATORS: filter name on the file->open dialog
-#: panels/color/cc-color-panel.c:303
+#: panels/color/cc-color-panel.c:290
 msgid "All files"
 msgstr "Все файлы"
 
-#: panels/color/cc-color-panel.c:586
+#: panels/color/cc-color-panel.c:566
 msgid "Screen"
 msgstr "Экран"
 
 #. TRANSLATORS: this is the dialog to save the ICC profile
-#: panels/color/cc-color-panel.c:841
+#: panels/color/cc-color-panel.c:852
 msgid "Save Profile"
 msgstr "Сохранить профиль"
 
-#: panels/color/cc-color-panel.c:845
-#: panels/network/connection-editor/vpn-helpers.c:335
-#: panels/wwan/cc-wwan-apn-dialog.ui:43
-msgid "_Save"
-msgstr "_Сохранить"
-
 #. TRANSLATORS: this is when the button is sensitive
-#: panels/color/cc-color-panel.c:1146
+#: panels/color/cc-color-panel.c:1142
 msgid "Create a color profile for the selected device"
 msgstr "Создать цветовой профиль для выбранного устройства"
 
 #. TRANSLATORS: this is when the button is insensitive
-#: panels/color/cc-color-panel.c:1161 panels/color/cc-color-panel.c:1185
+#: panels/color/cc-color-panel.c:1157 panels/color/cc-color-panel.c:1181
 msgid ""
 "The measuring instrument is not detected. Please check it is turned on and "
 "correctly connected."
@@ -767,14 +753,29 @@ msgstr ""
 "подключён."
 
 #. TRANSLATORS: this is when the button is insensitive
-#: panels/color/cc-color-panel.c:1195
+#: panels/color/cc-color-panel.c:1191
 msgid "The measuring instrument does not support printer profiling."
 msgstr "Измерительный инструмент не поддерживает профилирование принтеров."
 
 #. TRANSLATORS: this is when the button is insensitive
-#: panels/color/cc-color-panel.c:1206
+#: panels/color/cc-color-panel.c:1202
 msgid "The device type is not currently supported."
 msgstr "Этот тип устройств ещё не поддерживается."
+
+#. Translators: This will be presented as the text of a link to the documentation
+#. translators: Text used in link to privacy policy
+#: panels/color/cc-color-panel.c:1991
+#: panels/diagnostics/cc-diagnostics-panel.c:137
+msgid "Learn more"
+msgstr "Узнать больше"
+
+#. Translators: %s is a link to the documentation with the label "Learn more"
+#: panels/color/cc-color-panel.c:1993
+#, c-format
+msgid "Each device needs an up to date color profile to be color managed. %s"
+msgstr ""
+"Для управления цветом каждому устройству требуется обновление цветового "
+"профиля. %s"
 
 #: panels/color/cc-color-panel.ui:4 panels/wacom/calibrator/calibrator.ui:40
 msgid "Screen Calibration"
@@ -918,152 +919,136 @@ msgstr "_Импортировать файл…"
 
 #: panels/color/cc-color-panel.ui:390 panels/keyboard/cc-input-chooser.ui:18
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:41
-#: panels/network/connection-editor/net-connection-editor.c:620
+#: panels/network/connection-editor/net-connection-editor.c:602
 #: panels/printers/new-printer-dialog.ui:87
 #: panels/user-accounts/cc-add-user-dialog.ui:39
 msgid "_Add"
 msgstr "_Добавить"
 
-#: panels/color/cc-color-panel.ui:424
-msgid "Each device needs an up to date color profile to be color managed."
-msgstr ""
-"Для управления цветом каждому устройству требуется обновление цветового "
-"профиля."
-
-#. translators: Text used in link to privacy policy
-#: panels/color/cc-color-panel.ui:434
-#: panels/diagnostics/cc-diagnostics-panel.c:137
-msgid "Learn more"
-msgstr "Узнать больше"
-
-#: panels/color/cc-color-panel.ui:436
-msgid "Learn more about color management"
-msgstr "Узнать больше об управлении цветом"
-
-#: panels/color/cc-color-panel.ui:473
+#: panels/color/cc-color-panel.ui:453
 msgid "_Set for all users"
 msgstr "_Установить для всех пользователей"
 
-#: panels/color/cc-color-panel.ui:475 panels/color/cc-color-panel.ui:483
-#: panels/color/cc-color-panel.ui:484
+#: panels/color/cc-color-panel.ui:455 panels/color/cc-color-panel.ui:463
+#: panels/color/cc-color-panel.ui:464
 msgid "Set this profile for all users on this computer"
 msgstr "Установить этот профиль для всех пользователей этого компьютера"
 
-#: panels/color/cc-color-panel.ui:481
+#: panels/color/cc-color-panel.ui:461
 msgid "_Enable"
 msgstr "_Включить"
 
-#: panels/color/cc-color-panel.ui:497
+#: panels/color/cc-color-panel.ui:477
 msgid "_Add profile"
 msgstr "_Добавить профиль"
 
-#: panels/color/cc-color-panel.ui:503
+#: panels/color/cc-color-panel.ui:483
 msgid "_Calibrate…"
 msgstr "_Калибровать…"
 
-#: panels/color/cc-color-panel.ui:505
+#: panels/color/cc-color-panel.ui:485
 msgid "Calibrate the device"
 msgstr "Калибровать устройство"
 
-#: panels/color/cc-color-panel.ui:511
+#: panels/color/cc-color-panel.ui:491
 msgid "_Remove profile"
 msgstr "У_далить профиль"
 
-#: panels/color/cc-color-panel.ui:517
+#: panels/color/cc-color-panel.ui:497
 msgid "_View details"
 msgstr "П_одробности"
 
-#: panels/color/cc-color-panel.ui:529
+#: panels/color/cc-color-panel.ui:509
 msgid "Unable to detect any devices that can be color managed"
 msgstr "Устройства с возможностью управления цветом не обнаружены"
 
-#: panels/color/cc-color-panel.ui:568
+#: panels/color/cc-color-panel.ui:548
 msgid "LCD"
 msgstr "LCD"
 
-#: panels/color/cc-color-panel.ui:573
+#: panels/color/cc-color-panel.ui:553
 msgid "LED"
 msgstr "LED"
 
-#: panels/color/cc-color-panel.ui:578
+#: panels/color/cc-color-panel.ui:558
 msgid "CRT"
 msgstr "CRT"
 
-#: panels/color/cc-color-panel.ui:583
+#: panels/color/cc-color-panel.ui:563
 msgid "Projector"
 msgstr "Проектор"
 
-#: panels/color/cc-color-panel.ui:588
+#: panels/color/cc-color-panel.ui:568
 msgid "Plasma"
 msgstr "Плазменная панель"
 
-#: panels/color/cc-color-panel.ui:593
+#: panels/color/cc-color-panel.ui:573
 msgid "LCD (CCFL backlight)"
 msgstr "LCD (CCFL-подсветка)"
 
-#: panels/color/cc-color-panel.ui:598
+#: panels/color/cc-color-panel.ui:578
 msgid "LCD (RGB LED backlight)"
 msgstr "LCD (RGB LED-подсветка)"
 
-#: panels/color/cc-color-panel.ui:603
+#: panels/color/cc-color-panel.ui:583
 msgid "LCD (white LED backlight)"
 msgstr "LCD (белая LED-подсветка)"
 
-#: panels/color/cc-color-panel.ui:608
+#: panels/color/cc-color-panel.ui:588
 msgid "Wide gamut LCD (CCFL backlight)"
 msgstr "LCD с расширенной цветовой палитрой (CCFL-подсветка)"
 
-#: panels/color/cc-color-panel.ui:613
+#: panels/color/cc-color-panel.ui:593
 msgid "Wide gamut LCD (RGB LED backlight)"
 msgstr "LCD с расширенной цветовой палитрой (RGB LED-подсветка)"
 
-#: panels/color/cc-color-panel.ui:630
+#: panels/color/cc-color-panel.ui:610
 msgctxt "Calibration quality"
 msgid "High"
 msgstr "Высокое"
 
 # Выключать экран при простое после:
-#: panels/color/cc-color-panel.ui:631
+#: panels/color/cc-color-panel.ui:611
 msgid "40 minutes"
 msgstr "40 минут"
 
-#: panels/color/cc-color-panel.ui:635
+#: panels/color/cc-color-panel.ui:615
 msgctxt "Calibration quality"
 msgid "Medium"
 msgstr "Среднее"
 
 # Выключать экран при простое после:
-#: panels/color/cc-color-panel.ui:636
+#: panels/color/cc-color-panel.ui:616
 msgid "30 minutes"
 msgstr "30 минут"
 
-#: panels/color/cc-color-panel.ui:640
+#: panels/color/cc-color-panel.ui:620
 msgctxt "Calibration quality"
 msgid "Low"
 msgstr "Низкое"
 
 # Выключать экран при простое после:
-#: panels/color/cc-color-panel.ui:641
+#: panels/color/cc-color-panel.ui:621
 msgid "15 minutes"
 msgstr "15 минут"
 
-#: panels/color/cc-color-panel.ui:663
+#: panels/color/cc-color-panel.ui:643
 msgid "Native to display"
 msgstr "Нативный для экрана"
 
-#: panels/color/cc-color-panel.ui:667
+#: panels/color/cc-color-panel.ui:647
 msgid "D50 (Printing and publishing)"
 msgstr "D50 (Полиграфия и издательская деятельность)"
 
-#: panels/color/cc-color-panel.ui:671
+#: panels/color/cc-color-panel.ui:651
 msgid "D55"
 msgstr "D55"
 
-#: panels/color/cc-color-panel.ui:675
+#: panels/color/cc-color-panel.ui:655
 msgid "D65 (Photography and graphics)"
 msgstr "D65 (Фото и графика)"
 
-#: panels/color/cc-color-panel.ui:679
+#: panels/color/cc-color-panel.ui:659
 msgid "D75"
 msgstr "D75"
 
@@ -1172,26 +1157,31 @@ msgstr "Выберите язык"
 msgid "_Select"
 msgstr "_Выбрать"
 
-#: panels/common/cc-language-chooser.ui:58
+#: panels/common/cc-language-chooser.ui:35
+#: panels/keyboard/cc-input-chooser.ui:68
+msgid "Language or country"
+msgstr "Язык или страна"
+
+#: panels/common/cc-language-chooser.ui:59
 msgid "No languages found"
 msgstr "Ни один язык не найден"
 
-#: panels/common/cc-language-chooser.ui:69
+#: panels/common/cc-language-chooser.ui:70
 #: panels/keyboard/cc-input-chooser.c:175
 msgid "More…"
 msgstr "Ещё…"
 
-#: panels/common/cc-permission-infobar.c:109
+#: panels/common/cc-list-row-info-button.ui:11
+msgid "More information"
+msgstr "Больше информации"
+
+#: panels/common/cc-permission-infobar.c:194
 msgid "Unlock to Change Settings"
 msgstr "Разблокировать для изменения настроек"
 
-#: panels/common/cc-permission-infobar.ui:42
-msgid "Some settings must be unlocked before they can be changed."
-msgstr "Некоторые настройки перед изменением нужно разблокировать."
-
-#: panels/common/cc-permission-infobar.ui:59
-msgid "Unlock…"
-msgstr "Разблокировать…"
+#: panels/common/cc-permission-infobar.ui:6
+msgid "_Unlock…"
+msgstr "_Разблокировать…"
 
 #: panels/common/cc-time-editor.ui:25
 msgid "Increment Hour"
@@ -1214,12 +1204,12 @@ msgid "Decrement Minute"
 msgstr "Убавление минуты"
 
 #: panels/common/cc-util.c:127
-#: panels/network/connection-editor/ce-page-details.c:167
+#: panels/network/connection-editor/ce-page-details.c:198
 msgid "Today"
 msgstr "Сегодня"
 
 #: panels/common/cc-util.c:131
-#: panels/network/connection-editor/ce-page-details.c:169
+#: panels/network/connection-editor/ce-page-details.c:200
 msgid "Yesterday"
 msgstr "Вчера"
 
@@ -1314,26 +1304,26 @@ msgctxt "hotspot"
 msgid "Hotspot"
 msgstr "Точка доступа"
 
-#: panels/datetime/cc-datetime-panel.c:167
+#: panels/datetime/cc-datetime-panel.c:182
 msgid "24-hour"
 msgstr "24-часовой"
 
-#: panels/datetime/cc-datetime-panel.c:169
+#: panels/datetime/cc-datetime-panel.c:184
 msgid "AM / PM"
 msgstr "12-часовой"
 
 #. Translators: This is the full date and time format used in 12-hour mode.
-#: panels/datetime/cc-datetime-panel.c:240
+#: panels/datetime/cc-datetime-panel.c:253
 msgid "%e %B %Y, %l:%M %p"
 msgstr "%-d %B %Y, %l∶%M %p"
 
 #. Translators: This is the full date and time format used in 24-hour mode.
-#: panels/datetime/cc-datetime-panel.c:245
+#: panels/datetime/cc-datetime-panel.c:258
 msgid "%e %B %Y, %R"
 msgstr "%-d %B %Y, %R"
 
 #. Translators: "city, country"
-#: panels/datetime/cc-datetime-panel.c:398
+#: panels/datetime/cc-datetime-panel.c:411
 #, c-format
 msgctxt "timezone loc"
 msgid "%s, %s"
@@ -1341,7 +1331,7 @@ msgstr "%s, %s"
 
 #. Update the timezone on the listbow row
 #. Translators: "timezone (details)"
-#: panels/datetime/cc-datetime-panel.c:415
+#: panels/datetime/cc-datetime-panel.c:428
 #, c-format
 msgctxt "timezone desc"
 msgid "%s (%s)"
@@ -1372,84 +1362,92 @@ msgstr "Автоматическое определение _даты и вре�
 msgid "Requires internet access"
 msgstr "Требуется подключение к Интернету"
 
-#: panels/datetime/cc-datetime-panel.ui:138
+#: panels/datetime/cc-datetime-panel.ui:135
 msgid "Date &amp; _Time"
 msgstr "Дата и _время"
 
-#: panels/datetime/cc-datetime-panel.ui:162
+#: panels/datetime/cc-datetime-panel.ui:159
 msgid "Automatic Time _Zone"
 msgstr "Автоматическое определение _часового пояса"
 
-#: panels/datetime/cc-datetime-panel.ui:163
+#: panels/datetime/cc-datetime-panel.ui:160
 msgid "Requires location services enabled and internet access"
 msgstr "Требуются службы определения местоположения и доступ в интернет"
 
-#. TRANSLATORS: if the function is enabled through BIOS or OS settings.
-#. TRANSLATORS: Status of Parental Controls setup
-#: panels/datetime/cc-datetime-panel.ui:170
-#: panels/display/cc-display-settings.ui:23
-#: panels/firmware-security/cc-firmware-security-utils.c:45
-#: panels/keyboard/cc-xkb-modifier-dialog.ui:43
-#: panels/screen/cc-screen-panel.ui:40 panels/screen/cc-screen-panel.ui:76
-#: panels/screen/cc-screen-panel.ui:96 panels/user-accounts/cc-user-panel.c:787
-#: panels/user-accounts/cc-user-panel.c:915
-#: panels/wwan/cc-wwan-device-page.c:475
-msgid "Enabled"
-msgstr "Включено"
-
-#: panels/datetime/cc-datetime-panel.ui:178
+#: panels/datetime/cc-datetime-panel.ui:172
 msgid "Time Z_one"
 msgstr "_Часовой пояс"
 
-#: panels/datetime/cc-datetime-panel.ui:203
+#: panels/datetime/cc-datetime-panel.ui:197
 msgid "Time _Format"
 msgstr "_Формат времени"
 
-#: panels/datetime/cc-datetime-panel.ui:247
+#: panels/datetime/cc-datetime-panel.ui:214
+msgid "Clock &amp; Calendar"
+msgstr "Часы и календарь"
+
+#: panels/datetime/cc-datetime-panel.ui:217
+msgid "Week Day"
+msgstr "День недели"
+
+#: panels/datetime/cc-datetime-panel.ui:229
+msgid "Date"
+msgstr "Дата"
+
+# Блокировать экран после:
+#: panels/datetime/cc-datetime-panel.ui:241
+msgid "Seconds"
+msgstr "Секунды"
+
+#: panels/datetime/cc-datetime-panel.ui:253
+msgid "Week Numbers"
+msgstr "Номера недель"
+
+#: panels/datetime/cc-datetime-panel.ui:294
 msgid "January"
 msgstr "Январь"
 
-#: panels/datetime/cc-datetime-panel.ui:248
+#: panels/datetime/cc-datetime-panel.ui:295
 msgid "February"
 msgstr "Февраль"
 
-#: panels/datetime/cc-datetime-panel.ui:249
+#: panels/datetime/cc-datetime-panel.ui:296
 msgid "March"
 msgstr "Март"
 
-#: panels/datetime/cc-datetime-panel.ui:250
+#: panels/datetime/cc-datetime-panel.ui:297
 msgid "April"
 msgstr "Апрель"
 
-#: panels/datetime/cc-datetime-panel.ui:251
+#: panels/datetime/cc-datetime-panel.ui:298
 msgid "May"
 msgstr "Май"
 
-#: panels/datetime/cc-datetime-panel.ui:252
+#: panels/datetime/cc-datetime-panel.ui:299
 msgid "June"
 msgstr "Июнь"
 
-#: panels/datetime/cc-datetime-panel.ui:253
+#: panels/datetime/cc-datetime-panel.ui:300
 msgid "July"
 msgstr "Июль"
 
-#: panels/datetime/cc-datetime-panel.ui:254
+#: panels/datetime/cc-datetime-panel.ui:301
 msgid "August"
 msgstr "Август"
 
-#: panels/datetime/cc-datetime-panel.ui:255
+#: panels/datetime/cc-datetime-panel.ui:302
 msgid "September"
 msgstr "Сентябрь"
 
-#: panels/datetime/cc-datetime-panel.ui:256
+#: panels/datetime/cc-datetime-panel.ui:303
 msgid "October"
 msgstr "Октябрь"
 
-#: panels/datetime/cc-datetime-panel.ui:257
+#: panels/datetime/cc-datetime-panel.ui:304
 msgid "November"
 msgstr "Ноябрь"
 
-#: panels/datetime/cc-datetime-panel.ui:258
+#: panels/datetime/cc-datetime-panel.ui:305
 msgid "December"
 msgstr "Декабрь"
 
@@ -1457,7 +1455,11 @@ msgstr "Декабрь"
 msgid "Select Time Zone"
 msgstr "Выбрать часовой пояс"
 
-#: panels/datetime/cc-tz-dialog.ui:40
+#: panels/datetime/cc-tz-dialog.ui:25
+msgid "Search cities"
+msgstr "Поиск по городам"
+
+#: panels/datetime/cc-tz-dialog.ui:41
 msgid "No Results"
 msgstr "Нет результатов"
 
@@ -1468,7 +1470,7 @@ msgstr "Изменить дату и время, включая часовой �
 #. Translators: Search terms to find the Date and Time panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/datetime/gnome-datetime-panel.desktop.in:15
 msgid "Clock;Timezone;Location;"
-msgstr "Часы;Часовой;пояс;Местоположение;"
+msgstr "Clock;Timezone;Location;Часы;Часовой;пояс;Местоположение;"
 
 #: panels/datetime/org.gnome.controlcenter.datetime.policy.in:11
 msgid "Change system time and date settings"
@@ -1478,36 +1480,40 @@ msgstr "Изменить системное время и дату"
 msgid "To change time or date settings, you need to authenticate."
 msgstr "Для изменения времени или даты требуется аутентификация."
 
-#: panels/default-apps/cc-default-apps-panel.ui:23
+#: panels/default-apps/cc-default-apps-panel.ui:8
+msgid "Links &amp; Files"
+msgstr "Ссылки и файлы"
+
+#: panels/default-apps/cc-default-apps-panel.ui:12
 msgid "_Web"
 msgstr "_Интернет"
 
-#: panels/default-apps/cc-default-apps-panel.ui:33
+#: panels/default-apps/cc-default-apps-panel.ui:20
 msgid "_Mail"
 msgstr "_Почта"
 
-#: panels/default-apps/cc-default-apps-panel.ui:47
+#: panels/default-apps/cc-default-apps-panel.ui:27
 msgid "_Calendar"
 msgstr "_Календарь"
 
-#: panels/default-apps/cc-default-apps-panel.ui:61
+#: panels/default-apps/cc-default-apps-panel.ui:34
 msgid "M_usic"
 msgstr "_Музыка"
 
-#: panels/default-apps/cc-default-apps-panel.ui:75
+#: panels/default-apps/cc-default-apps-panel.ui:42
 msgid "_Video"
 msgstr "_Видео"
 
-#: panels/default-apps/cc-default-apps-panel.ui:89
+#: panels/default-apps/cc-default-apps-panel.ui:50
 #: panels/removable-media/cc-removable-media-panel.ui:127
 msgid "_Photos"
 msgstr "_Фото"
 
-#: panels/default-apps/cc-default-apps-panel.ui:103
-msgid "Ca_lls"
-msgstr "Вы_зовы"
+#: panels/default-apps/cc-default-apps-panel.ui:59
+msgid "_Calls"
+msgstr "_Звонки"
 
-#: panels/default-apps/cc-default-apps-panel.ui:118
+#: panels/default-apps/cc-default-apps-panel.ui:67
 msgid "_SMS"
 msgstr "_SMS"
 
@@ -1555,38 +1561,43 @@ msgstr "Настройки для автоматического сообщен�
 msgid "diagnostics;crash;"
 msgstr "диагностика;крах;"
 
-#: panels/display/cc-display-panel.c:496
+#: panels/display/cc-display-panel.c:495
 #: panels/notifications/cc-notifications-panel.c:217
 #: panels/power/cc-power-panel.c:743 panels/power/cc-power-panel.c:750
 msgid "On"
 msgstr "Включено"
 
-#: panels/display/cc-display-panel.c:498 panels/network/cc-net-proxy-page.c:181
+#: panels/display/cc-display-panel.c:497 panels/network/cc-net-proxy-page.c:181
 #: panels/notifications/cc-notifications-panel.c:217
 #: panels/power/cc-power-panel.c:737 panels/power/cc-power-panel.c:748
 msgid "Off"
 msgstr "Выключено"
 
-#: panels/display/cc-display-panel.c:936
+#: panels/display/cc-display-panel.c:920
 msgid "Apply Changes?"
 msgstr "Применить изменения?"
 
-#: panels/display/cc-display-panel.c:941
+#: panels/display/cc-display-panel.c:926
 msgid "Changes Cannot be Applied"
 msgstr "Изменения не могут быть применены"
 
-#: panels/display/cc-display-panel.c:943
+#: panels/display/cc-display-panel.c:928
 msgid "This could be due to hardware limitations."
 msgstr "Это может быть связано с аппаратными ограничениями."
 
-#: panels/display/cc-display-panel.ui:33 panels/display/cc-display-panel.ui:89
-#: panels/display/cc-display-panel.ui:220
-#: panels/display/cc-display-panel.ui:259 panels/mouse/cc-mouse-panel.ui:22
-#: panels/network/cc-wifi-panel.ui:16 panels/printers/new-printer-dialog.ui:64
+#: panels/display/cc-display-panel.ui:33 panels/display/cc-display-panel.ui:84
+#: panels/display/cc-display-panel.ui:90 panels/display/cc-display-panel.ui:221
+#: panels/display/cc-display-panel.ui:260
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:115
+#: panels/mouse/cc-mouse-panel.ui:17 panels/mouse/cc-mouse-panel.ui:23
+#: panels/network/cc-network-panel.ui:17 panels/network/cc-wifi-panel.ui:11
+#: panels/network/cc-wifi-panel.ui:17 panels/printers/new-printer-dialog.ui:64
 #: panels/region/cc-format-chooser.ui:37
-#: panels/universal-access/cc-ua-panel.ui:19
+#: panels/universal-access/cc-ua-panel.ui:16
+#: panels/universal-access/cc-ua-panel.ui:20
 #: panels/user-accounts/cc-fingerprint-dialog.ui:44
-#: panels/user-accounts/cc-user-panel.ui:31
+#: panels/user-accounts/cc-user-panel.ui:28
+#: panels/user-accounts/cc-user-panel.ui:32
 #: panels/wacom/cc-wacom-stylus-page.ui:136
 #: panels/wwan/cc-wwan-apn-dialog.ui:21
 msgid "Back"
@@ -1597,62 +1608,72 @@ msgstr "Назад"
 msgid "_Apply"
 msgstr "_Применить"
 
-#: panels/display/cc-display-panel.ui:111
+#: panels/display/cc-display-panel.ui:112
 msgid "Display Settings Disabled"
 msgstr "Настройки дисплея отключены"
 
-#: panels/display/cc-display-panel.ui:122
+#: panels/display/cc-display-panel.ui:123
 msgid "Multiple Displays"
 msgstr "Несколько дисплеев"
 
 #. 'Join' as in 'Join displays'
-#: panels/display/cc-display-panel.ui:131
+#: panels/display/cc-display-panel.ui:132
 msgid "Join"
 msgstr "Объединить"
 
-#: panels/display/cc-display-panel.ui:138
+#: panels/display/cc-display-panel.ui:139
 msgid "Mirror"
 msgstr "Зеркальное отображение"
 
-#: panels/display/cc-display-panel.ui:166
+#: panels/display/cc-display-panel.ui:167
 msgid "Contains top bar and Activities"
 msgstr "Содержит верхнюю панель и меню Обзор"
 
-#: panels/display/cc-display-panel.ui:167
+#: panels/display/cc-display-panel.ui:168
 msgid "Primary Display"
 msgstr "Основной дисплей"
 
 #. This is the redshift functionality where we suppress blue light when the sun has gone down
-#: panels/display/cc-display-panel.ui:188
-#: panels/display/cc-display-panel.ui:227
-#: panels/display/cc-night-light-page.ui:117
+#: panels/display/cc-display-panel.ui:189
+#: panels/display/cc-display-panel.ui:228
+#: panels/display/cc-night-light-page.ui:86
 msgid "Night Light"
 msgstr "Ночной свет"
 
-#: panels/display/cc-display-settings.c:110
+#: panels/display/cc-display-settings.c:109
 msgctxt "Display rotation"
 msgid "Landscape"
 msgstr "Ландшафтная"
 
-#: panels/display/cc-display-settings.c:113
+#: panels/display/cc-display-settings.c:112
 msgctxt "Display rotation"
 msgid "Portrait Right"
 msgstr "Портретная справа"
 
-#: panels/display/cc-display-settings.c:116
+#: panels/display/cc-display-settings.c:115
 msgctxt "Display rotation"
 msgid "Portrait Left"
 msgstr "Портретная слева"
 
-#: panels/display/cc-display-settings.c:119
+#: panels/display/cc-display-settings.c:118
 msgctxt "Display rotation"
 msgid "Landscape (flipped)"
 msgstr "Ландшафтная (перевернутая)"
 
-#: panels/display/cc-display-settings.c:180
+#: panels/display/cc-display-settings.c:179
 #, c-format
 msgid "%.2lf Hz"
 msgstr "%.2lf Гц"
+
+#. TRANSLATORS: if the function is enabled through BIOS or OS settings.
+#. TRANSLATORS: Status of Parental Controls setup
+#: panels/display/cc-display-settings.ui:23
+#: panels/firmware-security/cc-firmware-security-utils.c:45
+#: panels/user-accounts/cc-user-panel.c:764
+#: panels/user-accounts/cc-user-panel.c:886
+#: panels/wwan/cc-wwan-device-page.c:475
+msgid "Enabled"
+msgstr "Включено"
 
 #: panels/display/cc-display-settings.ui:43
 msgctxt "display setting"
@@ -1678,7 +1699,7 @@ msgctxt "display setting"
 msgid "Scale"
 msgstr "Масштаб"
 
-#: panels/display/cc-night-light-page.c:269
+#: panels/display/cc-night-light-page.c:268
 msgid "Night Light cannot be used from a virtual machine."
 msgstr "Ночной свет нельзя использовать с виртуальной машины."
 
@@ -1695,16 +1716,16 @@ msgstr ""
 "удаленного использования рабочего стола"
 
 #. Inhibit the redshift functionality until the next day starts
-#: panels/display/cc-night-light-page.ui:60
+#: panels/display/cc-night-light-page.ui:54
 msgid "Temporarily Disabled Until Tomorrow"
 msgstr "Временно отключено до завтра"
 
 #. This cancels the redshift inhibit.
-#: panels/display/cc-night-light-page.ui:74
+#: panels/display/cc-night-light-page.ui:68
 msgid "Restart Filter"
 msgstr "Перезапустить фильтр"
 
-#: panels/display/cc-night-light-page.ui:97
+#: panels/display/cc-night-light-page.ui:82
 msgid ""
 "Night light makes the screen color warmer. This can help to prevent eye "
 "strain and sleeplessness."
@@ -1712,59 +1733,59 @@ msgstr ""
 "Ночной свет делает цвет экрана теплее. Это может помочь предотвратить "
 "напряжение глаз и бессонницу."
 
-#: panels/display/cc-night-light-page.ui:134
+#: panels/display/cc-night-light-page.ui:100
 msgid "Schedule"
 msgstr "Расписание"
 
-#: panels/display/cc-night-light-page.ui:142
+#: panels/display/cc-night-light-page.ui:108
 msgid "Sunset to Sunrise"
 msgstr "От заката до восхода солнца"
 
-#: panels/display/cc-night-light-page.ui:143
+#: panels/display/cc-night-light-page.ui:109
 msgid "Manual Schedule"
 msgstr "Установленное вручную"
 
-#: panels/display/cc-night-light-page.ui:156
+#: panels/display/cc-night-light-page.ui:122
 #: panels/region/cc-format-preview.ui:35
 msgid "Times"
 msgstr "Время"
 
-#: panels/display/cc-night-light-page.ui:169
+#: panels/display/cc-night-light-page.ui:135
 msgid "From"
 msgstr "От"
 
-#: panels/display/cc-night-light-page.ui:194
-#: panels/display/cc-night-light-page.ui:281
+#: panels/display/cc-night-light-page.ui:160
+#: panels/display/cc-night-light-page.ui:247
 msgid "Hour"
 msgstr "Часы"
 
-#: panels/display/cc-night-light-page.ui:200
-#: panels/display/cc-night-light-page.ui:287
+#: panels/display/cc-night-light-page.ui:166
+#: panels/display/cc-night-light-page.ui:253
 msgid ":"
 msgstr ":"
 
-#: panels/display/cc-night-light-page.ui:217
-#: panels/display/cc-night-light-page.ui:304
+#: panels/display/cc-night-light-page.ui:183
+#: panels/display/cc-night-light-page.ui:270
 msgid "Minute"
 msgstr "Минуты"
 
 #. This is the short form for the time period in the morning
-#: panels/display/cc-night-light-page.ui:227
-#: panels/display/cc-night-light-page.ui:314
+#: panels/display/cc-night-light-page.ui:193
+#: panels/display/cc-night-light-page.ui:280
 msgid "AM"
 msgstr "ДП (AM)"
 
 #. This is the short form for the time period in the afternoon
-#: panels/display/cc-night-light-page.ui:239
-#: panels/display/cc-night-light-page.ui:326
+#: panels/display/cc-night-light-page.ui:205
+#: panels/display/cc-night-light-page.ui:292
 msgid "PM"
 msgstr "ПП (PM)"
 
-#: panels/display/cc-night-light-page.ui:256
+#: panels/display/cc-night-light-page.ui:222
 msgid "To"
 msgstr "До"
 
-#: panels/display/cc-night-light-page.ui:362
+#: panels/display/cc-night-light-page.ui:328
 msgid "Color Temperature"
 msgstr "Цветовая температура"
 
@@ -1788,13 +1809,13 @@ msgstr ""
 "Синий;смещение;цвет;закат;рассвет;"
 
 #. TRANSLATORS: secure boot refers to the system firmware security mode
-#: panels/firmware-security/cc-firmware-security-boot-dialog.c:72
+#: panels/firmware-security/cc-firmware-security-boot-dialog.c:74
 #: panels/firmware-security/cc-firmware-security-panel.c:119
 msgid "Secure Boot is Active"
 msgstr "Безопасная загрузка активна"
 
 #. TRANSLATORS: this is the first section of the decription
-#: panels/firmware-security/cc-firmware-security-boot-dialog.c:77
+#: panels/firmware-security/cc-firmware-security-boot-dialog.c:79
 msgid ""
 "Secure boot prevents malicious software from being loaded when the device "
 "starts. It is currently turned on and is functioning correctly."
@@ -1804,12 +1825,12 @@ msgstr ""
 "функционирует правильно."
 
 #. TRANSLATORS: secure boot refers to the system firmware security mode
-#: panels/firmware-security/cc-firmware-security-boot-dialog.c:83
+#: panels/firmware-security/cc-firmware-security-boot-dialog.c:85
 msgid "Secure Boot Has Problems"
 msgstr "Проблемы с безопасной загрузкой"
 
 #. TRANSLATORS: this is the first section of the decription.
-#: panels/firmware-security/cc-firmware-security-boot-dialog.c:87
+#: panels/firmware-security/cc-firmware-security-boot-dialog.c:89
 msgid ""
 "Secure boot prevents malicious software from being loaded when the device "
 "starts. It is currently turned on, but will not work due to having an "
@@ -1820,7 +1841,7 @@ msgstr ""
 "будет работать из-за наличия недействительного ключа."
 
 #. TRANSLATORS: this is the second section of description.
-#: panels/firmware-security/cc-firmware-security-boot-dialog.c:90
+#: panels/firmware-security/cc-firmware-security-boot-dialog.c:92
 msgid ""
 "Secure boot problems can often be resolved from your computer's UEFI "
 "firmware settings (BIOS) and your hardware manufacturer may provide "
@@ -1831,19 +1852,19 @@ msgstr ""
 "информацию о том, как это сделать."
 
 #. TRANSLATORS: this is the third section of description.
-#: panels/firmware-security/cc-firmware-security-boot-dialog.c:93
+#: panels/firmware-security/cc-firmware-security-boot-dialog.c:95
 msgid "For help, contact your hardware manufacturer or IT support provider."
 msgstr ""
 "За помощью обратитесь к производителю оборудования или поставщику ИТ-"
 "поддержки."
 
 #. TRANSLATORS: secure boot refers to the system firmware security mode
-#: panels/firmware-security/cc-firmware-security-boot-dialog.c:99
+#: panels/firmware-security/cc-firmware-security-boot-dialog.c:101
 msgid "Secure Boot is Turned Off"
 msgstr "Безопасная загрузка отключена"
 
 #. TRANSLATORS: this is the first section of the description.
-#: panels/firmware-security/cc-firmware-security-boot-dialog.c:103
+#: panels/firmware-security/cc-firmware-security-boot-dialog.c:105
 msgid ""
 "Secure boot prevents malicious software from being loaded when the device "
 "starts. It is currently turned off."
@@ -1852,7 +1873,7 @@ msgstr ""
 "обеспечения при запуске устройства. В настоящее время она отключена."
 
 #. TRANSLATORS: this is the second section of the description.
-#: panels/firmware-security/cc-firmware-security-boot-dialog.c:106
+#: panels/firmware-security/cc-firmware-security-boot-dialog.c:108
 msgid ""
 "Secure boot can often be turned on from your computer's UEFI firmware "
 "settings (BIOS). For help, contact your hardware manufacturer or IT support "
@@ -1877,7 +1898,7 @@ msgstr ""
 
 #. TRANSLATORS: in reference to firmware protection: 0/4 stars
 #: panels/firmware-security/cc-firmware-security-dialog.c:113
-#: panels/firmware-security/cc-firmware-security-panel.c:544
+#: panels/firmware-security/cc-firmware-security-panel.c:542
 msgid "Checks Failed"
 msgstr "Проверка не удалась"
 
@@ -1902,7 +1923,7 @@ msgstr ""
 
 #. TRANSLATORS: in reference to firmware protection: 1/4 stars
 #: panels/firmware-security/cc-firmware-security-dialog.c:127
-#: panels/firmware-security/cc-firmware-security-panel.c:551
+#: panels/firmware-security/cc-firmware-security-panel.c:549
 msgid "Checks Passed"
 msgstr "Проверка пройдена"
 
@@ -1919,7 +1940,7 @@ msgstr ""
 
 #. TRANSLATORS: in reference to firmware protection: 2~4 stars
 #: panels/firmware-security/cc-firmware-security-dialog.c:141
-#: panels/firmware-security/cc-firmware-security-panel.c:560
+#: panels/firmware-security/cc-firmware-security-panel.c:558
 msgid "Protected"
 msgstr "Защищено"
 
@@ -1935,7 +1956,7 @@ msgstr ""
 
 #. TRANSLATORS: in reference to firmware protection: ??? stars
 #: panels/firmware-security/cc-firmware-security-dialog.c:152
-#: panels/firmware-security/cc-firmware-security-panel.c:567
+#: panels/firmware-security/cc-firmware-security-panel.c:565
 msgid "Checks Unavailable"
 msgstr "Проверка недоступна"
 
@@ -1949,97 +1970,28 @@ msgstr ""
 "определить, соответствует ли оно требованиям безопасности."
 
 #. Translators: Unknown endpoint host for WireGuard (invalid setting)
-#: panels/firmware-security/cc-firmware-security-dialog.c:188
-#: panels/info-overview/cc-info-overview-panel.c:294
-#: panels/info-overview/cc-info-overview-panel.c:314
-#: panels/info-overview/cc-info-overview-panel.c:355
-#: panels/info-overview/cc-info-overview-panel.c:385
+#: panels/firmware-security/cc-firmware-security-dialog.c:185
+#: panels/info-overview/cc-info-overview-panel.c:297
+#: panels/info-overview/cc-info-overview-panel.c:317
+#: panels/info-overview/cc-info-overview-panel.c:358
+#: panels/info-overview/cc-info-overview-panel.c:388
 #: panels/network/connection-editor/ce-page-wireguard.c:368
-#: panels/sound/cc-alert-chooser-window.c:350
+#: panels/sound/cc-alert-chooser-window.c:352
 #: panels/wwan/cc-wwan-details-dialog.c:100
 msgid "Unknown"
 msgstr "Неизвестно"
 
-#: panels/firmware-security/cc-firmware-security-dialog.c:270
-msgid "Device Security Report"
-msgstr "Отчет о безопасности устройства"
-
-#: panels/firmware-security/cc-firmware-security-dialog.c:273
-msgid "Report details"
-msgstr "Подробности отчета"
-
-#: panels/firmware-security/cc-firmware-security-dialog.c:277
-msgid "Date generated:"
-msgstr "Дата создания:"
-
-#. TRANSLATOR: This is the title for showing the version of fwupd service.
-#: panels/firmware-security/cc-firmware-security-dialog.c:285
-msgid "fwupd version:"
-msgstr "Версия fwupd:"
-
-#: panels/firmware-security/cc-firmware-security-dialog.c:294
-msgid "Hardware model:"
-msgstr "Модель оборудования:"
-
-#. TRANSLATOR: "Processor" indicates the CPU model name.
-#: panels/firmware-security/cc-firmware-security-dialog.c:301
-msgid "Processor:"
-msgstr "Процессор:"
-
-#. TRANSLATOR: "OS" indicates the OS name, ex: Fedora 38.
-#: panels/firmware-security/cc-firmware-security-dialog.c:307
-msgid "OS:"
-msgstr "ОС:"
-
-#. TRANSLATOR: This is the title for device security level.
-#: panels/firmware-security/cc-firmware-security-dialog.c:313
-msgid "Security level:"
-msgstr "Уровень безопасности:"
-
-#. TRANSLATOR: This is the postfix of "HSI-n Tests" title.
-#: panels/firmware-security/cc-firmware-security-dialog.c:343
-msgid "Tests"
-msgstr "Проверки"
-
-#: panels/firmware-security/cc-firmware-security-dialog.c:348
-msgid "Runtime Tests"
-msgstr "Проверки Runtime"
-
-#. Passed
-#. TRANSLATOR: If the status for security attribute is success, "Pass " is shown.
-#. TRANSLATOR: This is the text event status output when the event status is "success"
-#: panels/firmware-security/cc-firmware-security-dialog.c:367
-#: panels/firmware-security/cc-firmware-security-panel.c:231
-msgid "Pass"
-msgstr "Пройдено"
-
-#. Failed
-#. TRANSLATOR: If the status for security attribute is success, "! Fail " is shown.
-#. TRANSLATOR: This is the text event status output when the event status is not "success"
-#: panels/firmware-security/cc-firmware-security-dialog.c:374
-#: panels/firmware-security/cc-firmware-security-panel.c:234
-msgid "! Fail"
-msgstr "Неудачно"
-
-#: panels/firmware-security/cc-firmware-security-dialog.c:386
-msgid "Host security events"
-msgstr "События безопасности хоста"
-
-#: panels/firmware-security/cc-firmware-security-dialog.c:390
-msgid ""
-"For information on the contents of this report, see https://fwupd.github.io/"
-"hsi.html"
-msgstr ""
-"Информацию о содержании данного отчета см. на сайте https://fwupd.github.io/"
-"hsi.html"
-
-#: panels/firmware-security/cc-firmware-security-dialog.c:395
+#: panels/firmware-security/cc-firmware-security-dialog.c:384
 msgid "Report copied to clipboard"
 msgstr "Отчет скопирован в буфер обмена"
 
 #: panels/firmware-security/cc-firmware-security-dialog.ui:22
 msgid "Device Security Status"
 msgstr "Статус безопасности устройства"
+
+#: panels/firmware-security/cc-firmware-security-dialog.ui:88
+msgid "_Copy Technical Report"
+msgstr "_Копировать технический отчёт"
 
 #: panels/firmware-security/cc-firmware-security-help-dialog.ui:6
 msgid "About Device Security"
@@ -2149,24 +2101,34 @@ msgstr ""
 msgid "%1$s"
 msgstr "%1$s"
 
+#. TRANSLATOR: This is the text event status output when the event status is "success"
+#: panels/firmware-security/cc-firmware-security-panel.c:231
+msgid "Pass"
+msgstr "Пройдено"
+
+#. TRANSLATOR: This is the text event status output when the event status is not "success"
+#: panels/firmware-security/cc-firmware-security-panel.c:234
+msgid "! Fail"
+msgstr "Неудачно"
+
 #: panels/firmware-security/cc-firmware-security-panel.c:237
 #, c-format
 msgid "(%1$s → %2$s)"
 msgstr "(%1$s → %2$s)"
 
-#: panels/firmware-security/cc-firmware-security-panel.c:545
+#: panels/firmware-security/cc-firmware-security-panel.c:543
 msgid "Hardware does not pass checks."
 msgstr "Оборудование не проходит проверку."
 
-#: panels/firmware-security/cc-firmware-security-panel.c:552
+#: panels/firmware-security/cc-firmware-security-panel.c:550
 msgid "Hardware meets basic security requirements."
 msgstr "Оборудование соответствует базовым требованиям безопасности."
 
-#: panels/firmware-security/cc-firmware-security-panel.c:561
+#: panels/firmware-security/cc-firmware-security-panel.c:559
 msgid "Hardware has a good level of protection."
 msgstr "Оборудование имеет хороший уровень защиты."
 
-#: panels/firmware-security/cc-firmware-security-panel.c:568
+#: panels/firmware-security/cc-firmware-security-panel.c:566
 msgid "Security levels are not available for this device."
 msgstr "Уровни безопасности для этого устройства недоступны."
 
@@ -2277,33 +2239,33 @@ msgstr ""
 "индекс;имя;сеть;идентификация;личность;конфиденциальность;"
 
 #. translators: This is the type of architecture for the OS
-#: panels/info-overview/cc-info-overview-panel.c:332
+#: panels/info-overview/cc-info-overview-panel.c:335
 #, c-format
 msgid "64-bit"
 msgstr "64-бит"
 
 #. translators: This is the type of architecture for the OS
-#: panels/info-overview/cc-info-overview-panel.c:335
+#: panels/info-overview/cc-info-overview-panel.c:338
 #, c-format
 msgid "32-bit"
 msgstr "32-бит"
 
-#: panels/info-overview/cc-info-overview-panel.c:623
+#: panels/info-overview/cc-info-overview-panel.c:626
 msgid "X11"
 msgstr "X11"
 
-#: panels/info-overview/cc-info-overview-panel.c:627
+#: panels/info-overview/cc-info-overview-panel.c:630
 msgid "Wayland"
 msgstr "Wayland"
 
-#: panels/info-overview/cc-info-overview-panel.c:629
+#: panels/info-overview/cc-info-overview-panel.c:632
 msgctxt "Windowing system (Wayland, X11, or Unknown)"
 msgid "Unknown"
 msgstr "Неизвестно"
 
 #. translators: this is the placeholder string when the GNOME Shell
 #. * version couldn't be loaded, eg. “GNOME Version: Not Available”
-#: panels/info-overview/cc-info-overview-panel.c:707
+#: panels/info-overview/cc-info-overview-panel.c:719
 msgid "Not Available"
 msgstr "Недоступно"
 
@@ -2312,7 +2274,7 @@ msgid "System Logo"
 msgstr "Логотип системы"
 
 #: panels/info-overview/cc-info-overview-panel.ui:33
-#: panels/sharing/cc-sharing-panel.ui:21 panels/sharing/cc-sharing-panel.ui:278
+#: panels/sharing/cc-sharing-panel.ui:12 panels/sharing/cc-sharing-panel.ui:279
 msgid "Device Name"
 msgstr "Имя устройства"
 
@@ -2560,7 +2522,7 @@ msgstr "Другое"
 msgid "Add an Input Source"
 msgstr "Добавить источник ввода"
 
-#: panels/keyboard/cc-input-chooser.ui:84
+#: panels/keyboard/cc-input-chooser.ui:85
 msgid "Input methods can’t be used on the login screen"
 msgstr "Методы ввода нельзя использовать на экране входа в систему"
 
@@ -2588,8 +2550,8 @@ msgstr "Настройки"
 msgid "View Keyboard Layout"
 msgstr "Показать раскладку"
 
-#: panels/keyboard/cc-input-row.ui:54 panels/sharing/cc-sharing-networks.c:224
-#: panels/sharing/cc-sharing-panel.c:603
+#: panels/keyboard/cc-input-row.ui:54 panels/sharing/cc-sharing-networks.c:223
+#: panels/sharing/cc-sharing-panel.c:571
 msgid "Remove"
 msgstr "Удалить"
 
@@ -2614,37 +2576,36 @@ msgstr ""
 "третий вариант."
 
 #: panels/keyboard/cc-keyboard-panel.c:66
-#: panels/keyboard/cc-keyboard-panel.c:84
 msgctxt "keyboard key"
 msgid "Left Alt"
 msgstr "Левый Alt"
 
 #: panels/keyboard/cc-keyboard-panel.c:67
-#: panels/keyboard/cc-keyboard-panel.c:85
+#: panels/keyboard/cc-keyboard-panel.c:84
 msgctxt "keyboard key"
 msgid "Right Alt"
 msgstr "Правый Alt"
 
 #: panels/keyboard/cc-keyboard-panel.c:68
-#: panels/keyboard/cc-keyboard-panel.c:86
+#: panels/keyboard/cc-keyboard-panel.c:85
 msgctxt "keyboard key"
 msgid "Left Super"
 msgstr "Левый Super"
 
 #: panels/keyboard/cc-keyboard-panel.c:69
-#: panels/keyboard/cc-keyboard-panel.c:87
+#: panels/keyboard/cc-keyboard-panel.c:86
 msgctxt "keyboard key"
 msgid "Right Super"
 msgstr "Правый Super"
 
 #: panels/keyboard/cc-keyboard-panel.c:70
-#: panels/keyboard/cc-keyboard-panel.c:88
+#: panels/keyboard/cc-keyboard-panel.c:87
 msgctxt "keyboard key"
 msgid "Menu key"
 msgstr "Кнопка меню"
 
 #: panels/keyboard/cc-keyboard-panel.c:71
-#: panels/keyboard/cc-keyboard-panel.c:89
+#: panels/keyboard/cc-keyboard-panel.c:88
 msgctxt "keyboard key"
 msgid "Right Ctrl"
 msgstr "Правый Ctrl"
@@ -2667,17 +2628,17 @@ msgstr ""
 "<b>o</b>, получим <b>©</b>, клавиша compose и <b>a</b>, за которой следует "
 "<b>'</b>, получим <b>á</b>."
 
-#: panels/keyboard/cc-keyboard-panel.c:90
+#: panels/keyboard/cc-keyboard-panel.c:89
 msgctxt "keyboard key"
 msgid "Caps Lock"
 msgstr "Caps Lock"
 
-#: panels/keyboard/cc-keyboard-panel.c:91
+#: panels/keyboard/cc-keyboard-panel.c:90
 msgctxt "keyboard key"
 msgid "Scroll Lock"
 msgstr "Scroll Lock"
 
-#: panels/keyboard/cc-keyboard-panel.c:92
+#: panels/keyboard/cc-keyboard-panel.c:91
 msgctxt "keyboard key"
 msgid "Print Screen"
 msgstr "Print Screen"
@@ -2720,7 +2681,7 @@ msgid "Methods for entering symbols and letter variants using the keyboard."
 msgstr "Методы ввода символов и вариантов букв, используя клавиатуры."
 
 #: panels/keyboard/cc-keyboard-panel.ui:82
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:7 shell/cc-window.ui:162
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:9 shell/cc-window.ui:169
 msgid "Keyboard Shortcuts"
 msgstr "Комбинации клавиш"
 
@@ -2732,7 +2693,7 @@ msgstr "Просмотр и изменение комбинаций клавиш
 msgid "Reset All Shortcuts?"
 msgstr "Сбросить все комбинации клавиш?"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.c:385
+#: panels/keyboard/cc-keyboard-shortcut-dialog.c:386
 msgid ""
 "Resetting the shortcuts may affect your custom shortcuts. This cannot be "
 "undone."
@@ -2741,7 +2702,7 @@ msgstr ""
 "клавиш. Это действие нельзя отменить."
 
 #: panels/keyboard/cc-keyboard-shortcut-dialog.c:389
-#: panels/network/cc-network-panel.ui:26
+#: panels/network/cc-network-panel.ui:27
 #: panels/printers/ppd-selection-dialog.ui:83
 #: panels/wwan/cc-wwan-device-page.c:188
 msgid "Cancel"
@@ -2751,38 +2712,42 @@ msgstr "Отменить"
 msgid "Reset All"
 msgstr "Сбросить все"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:27
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:29
 msgid "Reset All…"
 msgstr "Сбросить все…"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:28
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:30
 msgid "Reset all shortcuts to their default keybindings"
 msgstr "Сбросить все комбинации клавиш на значения по умолчанию"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:49
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:47
+msgid "Search shortcuts"
+msgstr "Поиск комбинаций клавиш"
+
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:52
 msgid "Search Shortcuts"
 msgstr "Поиск комбинаций клавиш"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:88
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:91
 msgid "No keyboard shortcut found"
 msgstr "Комбинация клавиш не найдена"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:89
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:92
 msgid "Try a different search."
 msgstr "Попробуйте другой поисковый запрос."
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:138
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:142
 msgid "Add Custom Shortcuts"
 msgstr "Добавить свою комбинацию клавиш"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:139
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:143
 msgid "Set up custom shortcuts for launching apps, running scripts, and more."
 msgstr ""
 "Установка своих комбинаций для запуска приложений, сценариев и прочего."
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:143
-msgid "Add Shortcut…"
-msgstr "Добавить комбинацию…"
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:148
+msgid "_Add Shortcut…"
+msgstr "_Добавить комбинацию…"
 
 #. TRANSLATORS: Don't translate/transliterate <b>%s</b>, which is the accelerator used
 #: panels/keyboard/cc-keyboard-shortcut-editor.c:391
@@ -2794,15 +2759,15 @@ msgstr ""
 "<b>%s</b> уже используется для %s. Если применить, комбинация для %s будет "
 "отключена"
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.c:533
+#: panels/keyboard/cc-keyboard-shortcut-editor.c:532
 msgid "Enter the new shortcut"
 msgstr "Введите новую комбинацию"
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.c:548
+#: panels/keyboard/cc-keyboard-shortcut-editor.c:547
 msgid "Set Custom Shortcut"
 msgstr "Установить пользовательскую комбинацию клавиш"
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.c:548
+#: panels/keyboard/cc-keyboard-shortcut-editor.c:547
 msgid "Set Shortcut"
 msgstr "Установить комбинацию клавиш"
 
@@ -2811,16 +2776,17 @@ msgstr "Установить комбинацию клавиш"
 #. * TRANSLATORS: %s is replaced with a description of the keyboard shortcut,
 #. * don't translate/transliterate <b>%s</b>
 #.
-#: panels/keyboard/cc-keyboard-shortcut-editor.c:561
+#: panels/keyboard/cc-keyboard-shortcut-editor.c:560
 #, c-format
 msgid "Enter new shortcut to change <b>%s</b>"
 msgstr "Введите новую комбинацию для изменения <b>%s</b>"
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.c:977
+#: panels/keyboard/cc-keyboard-shortcut-editor.c:976
 msgid "Add Custom Shortcut"
 msgstr "Добавить пользовательскую комбинацию клавиш"
 
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:30
+#: panels/user-accounts/cc-user-panel.ui:348
 msgid "_Remove"
 msgstr "_Удалить"
 
@@ -2842,7 +2808,7 @@ msgstr "Нажмите Esc для отмены или Backspace для откл�
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:161
 #: panels/printers/pp-details-dialog.ui:39
 #: panels/user-accounts/cc-add-user-dialog.ui:68
-#: panels/user-accounts/cc-user-panel.ui:137
+#: panels/user-accounts/cc-user-panel.ui:138
 #: panels/wwan/cc-wwan-apn-dialog.ui:96
 msgid "Name"
 msgstr "Имя"
@@ -2860,8 +2826,8 @@ msgid "Set Shortcut…"
 msgstr "Установить комбинацию клавиш…"
 
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:261
-#: panels/sound/cc-alert-chooser-window.c:340
-#: panels/sound/cc-alert-chooser-window.ui:20
+#: panels/sound/cc-alert-chooser-window.c:342
+#: panels/sound/cc-alert-chooser-window.ui:22
 #: panels/universal-access/cc-ua-zoom-page.ui:271
 msgid "None"
 msgstr "Нет"
@@ -2904,7 +2870,7 @@ msgstr ""
 "Комбинация;Рабочий;стол;Окно;Изменение;размера;Масштабирование;Контраст;Ввод;"
 "Источник;Блокировка;Том;Горячая;клавиша;Написать;Символ;"
 
-#: panels/location/cc-location-panel.ui:9
+#: panels/location/cc-location-panel.ui:7
 msgid ""
 "Location services use GPS, Wi-Fi and cellular connections to determine the "
 "approximate location of this device. <a href='https://location.services."
@@ -2986,61 +2952,65 @@ msgstr "Ограничить доступ к микрофону"
 msgid "microphone;recording;application;privacy;"
 msgstr "микрофон;запись;приложение;конфиденциальность;"
 
-#: panels/mouse/cc-mouse-panel.ui:30 panels/wacom/cc-wacom-panel.ui:9
+#: panels/mouse/cc-mouse-panel.ui:31 panels/wacom/cc-wacom-panel.ui:9
 msgid "Test _Settings"
 msgstr "_Проверить настройки"
 
-#: panels/mouse/cc-mouse-panel.ui:44 panels/mouse/cc-mouse-panel.ui:90
+#: panels/mouse/cc-mouse-panel.ui:32
+msgid "Test Mouse and Touchpad Settings"
+msgstr "Проверить настройки мыши и сенсорной панели"
+
+#: panels/mouse/cc-mouse-panel.ui:46 panels/mouse/cc-mouse-panel.ui:92
 msgid "Mouse"
 msgstr "Мышь"
 
-#: panels/mouse/cc-mouse-panel.ui:51
+#: panels/mouse/cc-mouse-panel.ui:53
 #: panels/multitasking/cc-multitasking-panel.ui:9
 msgid "General"
 msgstr "Общие"
 
-#: panels/mouse/cc-mouse-panel.ui:54
+#: panels/mouse/cc-mouse-panel.ui:56
 msgid "Primary Button"
 msgstr "Основная кнопка"
 
-#: panels/mouse/cc-mouse-panel.ui:55
+#: panels/mouse/cc-mouse-panel.ui:57
 msgid "Order of physical buttons on mice and touchpads."
 msgstr "Порядок расположения физических кнопок на мышах и сенсорных панелях."
 
-#: panels/mouse/cc-mouse-panel.ui:69
+#: panels/mouse/cc-mouse-panel.ui:71
 msgid "Left"
 msgstr "Левая"
 
-#: panels/mouse/cc-mouse-panel.ui:76
+#: panels/mouse/cc-mouse-panel.ui:78
 msgid "Right"
 msgstr "Правая"
 
-#: panels/mouse/cc-mouse-panel.ui:93 panels/mouse/cc-mouse-panel.ui:98
-#: panels/mouse/cc-mouse-panel.ui:200
+#: panels/mouse/cc-mouse-panel.ui:95 panels/mouse/cc-mouse-panel.ui:100
+#: panels/mouse/cc-mouse-panel.ui:176
 msgid "Pointer Speed"
 msgstr "Скорость курсора"
 
-#: panels/mouse/cc-mouse-panel.ui:101 panels/mouse/cc-mouse-panel.ui:209
+#: panels/mouse/cc-mouse-panel.ui:103 panels/mouse/cc-mouse-panel.ui:185
 #: panels/universal-access/cc-ua-typing-page.ui:53
 #: panels/universal-access/cc-ua-typing-page.ui:111
 msgid "Slow"
 msgstr "Медленная"
 
-#: panels/mouse/cc-mouse-panel.ui:103 panels/mouse/cc-mouse-panel.ui:211
+#: panels/mouse/cc-mouse-panel.ui:105 panels/mouse/cc-mouse-panel.ui:187
 #: panels/universal-access/cc-ua-typing-page.ui:50
 #: panels/universal-access/cc-ua-typing-page.ui:108
 msgid "Fast"
 msgstr "Быстрая"
 
-#: panels/mouse/cc-mouse-panel.ui:119
+#: panels/mouse/cc-mouse-panel.ui:121
 msgid "Mouse Acceleration"
 msgstr "Ускорение мыши"
 
-#: panels/mouse/cc-mouse-panel.ui:120
+#: panels/mouse/cc-mouse-panel.ui:122
 msgid "Recommended for most users and applications"
 msgstr "Рекомендуется для большинства пользователей и приложений"
 
-#: panels/mouse/cc-mouse-panel.ui:140
+#: panels/mouse/cc-mouse-panel.ui:127
 msgid ""
 "Turning mouse acceleration off can allow faster and more precise movements, "
 "but can also make the mouse more difficult to use."
@@ -3048,76 +3018,67 @@ msgstr ""
 "Отключение ускорения мыши может обеспечить более быстрые и точные движения, "
 "но также может усложнить использование мыши."
 
-#: panels/mouse/cc-mouse-panel.ui:152
-msgid "Pointer Assistance"
-msgstr "Помощь курсора"
-
-#: panels/mouse/cc-mouse-panel.ui:160 panels/mouse/cc-mouse-panel.ui:267
+#: panels/mouse/cc-mouse-panel.ui:139 panels/mouse/cc-mouse-panel.ui:240
 msgid "Scroll Direction"
 msgstr "Направление прокрутки"
 
-#: panels/mouse/cc-mouse-panel.ui:161 panels/mouse/cc-mouse-panel.ui:268
+#: panels/mouse/cc-mouse-panel.ui:140 panels/mouse/cc-mouse-panel.ui:241
 msgid "Traditional"
 msgstr "Традиционное"
 
-#: panels/mouse/cc-mouse-panel.ui:162 panels/mouse/cc-mouse-panel.ui:269
+#: panels/mouse/cc-mouse-panel.ui:141 panels/mouse/cc-mouse-panel.ui:242
 msgid "Scrolling moves the view"
 msgstr "Прокрутка перемещает вид"
 
-#: panels/mouse/cc-mouse-panel.ui:163 panels/mouse/cc-mouse-panel.ui:270
+#: panels/mouse/cc-mouse-panel.ui:142 panels/mouse/cc-mouse-panel.ui:243
 msgid "Natural"
 msgstr "Естественное"
 
-#: panels/mouse/cc-mouse-panel.ui:164 panels/mouse/cc-mouse-panel.ui:272
+#: panels/mouse/cc-mouse-panel.ui:143 panels/mouse/cc-mouse-panel.ui:245
 msgid "Scrolling moves the content"
 msgstr "Прокрутка перемещает содержимое"
 
-#: panels/mouse/cc-mouse-panel.ui:179 panels/mouse/cc-mouse-panel.ui:186
-#: panels/mouse/cc-mouse-panel.ui:192
+#: panels/mouse/cc-mouse-panel.ui:158 panels/mouse/cc-mouse-panel.ui:165
 msgid "Touchpad"
 msgstr "Сенсорная панель"
 
-#: panels/mouse/cc-mouse-panel.ui:206
+#: panels/mouse/cc-mouse-panel.ui:182
 msgid "Pointer speed"
 msgstr "Скорость курсора"
 
-#: panels/mouse/cc-mouse-panel.ui:229
+#: panels/mouse/cc-mouse-panel.ui:205
 msgid "Clicking"
 msgstr "Нажатие"
 
-#: panels/mouse/cc-mouse-panel.ui:234
+#: panels/mouse/cc-mouse-panel.ui:210
 msgid "Tap to Click"
 msgstr "Нажатие касанием"
 
-#: panels/mouse/cc-mouse-panel.ui:235
+#: panels/mouse/cc-mouse-panel.ui:211
 msgid "Quickly touch the touchpad to click"
 msgstr "Быстро коснитесь сенсорной панели для нажатия"
 
-#: panels/mouse/cc-mouse-panel.ui:242
-msgid "Tap to click"
-msgstr "Нажатие касанием"
-
-#: panels/mouse/cc-mouse-panel.ui:253
+#: panels/mouse/cc-mouse-panel.ui:226
 msgid "Scrolling"
 msgstr "Прокрутка"
 
-#: panels/mouse/cc-mouse-panel.ui:256
+#: panels/mouse/cc-mouse-panel.ui:229
 msgid "Scroll Method"
 msgstr "Способ прокрутки"
 
-#: panels/mouse/cc-mouse-panel.ui:257
+#: panels/mouse/cc-mouse-panel.ui:230
 msgid "Two Finger"
 msgstr "Два пальца"
 
-#: panels/mouse/cc-mouse-panel.ui:258
+#: panels/mouse/cc-mouse-panel.ui:231
 msgid "Drag two fingers on the touchpad"
 msgstr "Проведите двумя пальцами по сенсорной панели"
 
-#: panels/mouse/cc-mouse-panel.ui:259
+#: panels/mouse/cc-mouse-panel.ui:232
 msgid "Edge"
 msgstr "Край"
 
-#: panels/mouse/cc-mouse-panel.ui:260
+#: panels/mouse/cc-mouse-panel.ui:233
 msgid "Drag one finger on the edge"
 msgstr "Проведите одним пальцем по краю"
 
@@ -3233,60 +3194,55 @@ msgstr ""
 "Рабочее место;"
 
 #: panels/network/cc-network-panel.c:672
-msgid "Can’t Connect to Network"
-msgstr "Не удается подключиться к сети"
+msgid "Network Unavailable"
+msgstr "Сеть недоступна"
 
 #: panels/network/cc-network-panel.c:674
 msgid ""
-"NetworkManager needs to be running to view or make connections. Contact a "
-"system administrator or the software vendor."
+"An error has occurred and network cannot be used.\n"
+" Error details: NetworkManager not running."
 msgstr ""
-"NetworkManager должен быть запущен для просмотра или создания подключений. "
-"Обратитесь к системному администратору или поставщику программного "
-"обеспечения."
+"Произошла ошибка, и сеть не может быть использована.\n"
+"Подробности ошибки: NetworkManager не запущен."
 
 #. xxx: Added to avoid confusion with the preceding VPN row
-#: panels/network/cc-network-panel.c:759 panels/network/cc-network-panel.ui:140
-#: panels/network/cc-network-panel.ui:149
+#: panels/network/cc-network-panel.c:759 panels/network/cc-network-panel.ui:141
+#: panels/network/cc-network-panel.ui:150
 msgid "Proxy"
 msgstr "Прокси"
 
-#: panels/network/cc-network-panel.ui:34
+#: panels/network/cc-network-panel.ui:35
 msgid "Save"
 msgstr "Сохранить"
 
-#: panels/network/cc-network-panel.ui:75 panels/network/cc-network-panel.ui:80
-msgid "Other Devices"
-msgstr "Другие устройства"
-
-#: panels/network/cc-network-panel.ui:91 panels/network/cc-network-panel.ui:125
-#: panels/network/connection-editor/net-connection-editor.c:708
+#: panels/network/cc-network-panel.ui:92 panels/network/cc-network-panel.ui:126
+#: panels/network/connection-editor/net-connection-editor.c:690
 msgid "VPN"
 msgstr "VPN"
 
-#: panels/network/cc-network-panel.ui:96
+#: panels/network/cc-network-panel.ui:97
 msgid "Add connection"
 msgstr "Добавить подключение"
 
-#: panels/network/cc-network-panel.ui:116
+#: panels/network/cc-network-panel.ui:117
 msgid "Not set up"
 msgstr "Не настроено"
 
 #: panels/network/cc-net-proxy-page.c:183
 #: panels/network/cc-net-proxy-page.ui:24
-#: panels/network/connection-editor/ip4-page.ui:175
-#: panels/network/connection-editor/ip4-page.ui:227
+#: panels/network/connection-editor/ip4-page.ui:181
+#: panels/network/connection-editor/ip4-page.ui:233
 #: panels/network/connection-editor/ip6-page.ui:36
-#: panels/network/connection-editor/ip6-page.ui:185
-#: panels/network/connection-editor/ip6-page.ui:237
-#: panels/wacom/cc-wacom-page.c:656
+#: panels/network/connection-editor/ip6-page.ui:192
+#: panels/network/connection-editor/ip6-page.ui:244
+#: panels/wacom/cc-wacom-page.c:657
 msgid "Automatic"
 msgstr "Автоматический"
 
 #: panels/network/cc-net-proxy-page.c:185
 #: panels/network/cc-net-proxy-page.ui:25
-#: panels/network/connection-editor/ip4-page.ui:55
-#: panels/network/connection-editor/ip6-page.ui:65
+#: panels/network/connection-editor/ip4-page.ui:58
+#: panels/network/connection-editor/ip6-page.ui:69
 msgid "Manual"
 msgstr "Вручную"
 
@@ -3379,33 +3335,33 @@ msgid "Scan to Connect"
 msgstr "Сканировать для подключения"
 
 #. TRANSLATORS: This happens when the connection name does not contain the SSID.
-#: panels/network/cc-wifi-connection-row.c:218
+#: panels/network/cc-wifi-connection-row.c:222
 #, c-format
 msgctxt "Wi-Fi Connection"
 msgid "%s (SSID: %s)"
 msgstr "%s (SSID: %s)"
 
-#: panels/network/cc-wifi-connection-row.c:278
+#: panels/network/cc-wifi-connection-row.c:282
 msgid "Insecure network (WEP)"
 msgstr "Незащищённая сеть (WEP)"
 
-#: panels/network/cc-wifi-connection-row.c:282
+#: panels/network/cc-wifi-connection-row.c:286
 msgid "Secure network (WPA)"
 msgstr "Защищённая сеть (WPA)"
 
-#: panels/network/cc-wifi-connection-row.c:286
+#: panels/network/cc-wifi-connection-row.c:290
 msgid "Secure network (WPA2)"
 msgstr "Защищённая сеть (WPA2)"
 
-#: panels/network/cc-wifi-connection-row.c:290
+#: panels/network/cc-wifi-connection-row.c:294
 msgid "Secure network (WPA3)"
 msgstr "Защищённая сеть (WPA3)"
 
-#: panels/network/cc-wifi-connection-row.c:294
+#: panels/network/cc-wifi-connection-row.c:298
 msgid "Secure network"
 msgstr "Защищённая сеть"
 
-#: panels/network/cc-wifi-connection-row.c:323
+#: panels/network/cc-wifi-connection-row.c:327
 #, c-format
 msgid "Signal strength %d%%"
 msgstr "Мощность сигнала %d%%"
@@ -3421,10 +3377,16 @@ msgstr "Показать QR-код"
 
 #: panels/network/cc-wifi-connection-row.ui:77
 #: panels/network/net-device-ethernet.c:325
-#: panels/network/network-bluetooth.ui:22 panels/network/network-ethernet.ui:56
+#: panels/network/network-bluetooth.ui:19 panels/network/network-ethernet.ui:53
 #: panels/network/network-mobile.ui:329 panels/network/network-vpn.ui:21
 msgid "Options…"
 msgstr "Параметры…"
+
+#. Translators: This is the text displayed in a button, indicating an action.
+#: panels/network/cc-wifi-connection-row.ui:90
+#: panels/network/connection-editor/ce-page-details.c:100
+msgid "Forget"
+msgstr "Забыть"
 
 #. TRANSLATORS: ‘%s’ is a Wi-Fi Network(SSID) name
 #: panels/network/cc-wifi-hotspot-dialog.c:134
@@ -3479,10 +3441,10 @@ msgstr "Название сети"
 #. Translators: This is a password needed for printing.
 #: panels/network/cc-wifi-hotspot-dialog.ui:92
 #: panels/printers/new-printer-dialog.ui:316
-#: panels/printers/pp-jobs-dialog.ui:54 panels/sharing/cc-sharing-panel.ui:359
-#: panels/user-accounts/cc-add-user-dialog.ui:145
-#: panels/user-accounts/cc-add-user-dialog.ui:180
-#: panels/user-accounts/cc-add-user-dialog.ui:359
+#: panels/printers/pp-jobs-dialog.ui:54 panels/sharing/cc-sharing-panel.ui:360
+#: panels/user-accounts/cc-add-user-dialog.ui:149
+#: panels/user-accounts/cc-add-user-dialog.ui:184
+#: panels/user-accounts/cc-add-user-dialog.ui:363
 #: panels/wwan/cc-wwan-apn-dialog.ui:175
 msgid "Password"
 msgstr "Пароль"
@@ -3499,69 +3461,69 @@ msgstr "Автоматически сгенерировать пароль"
 msgid "_Turn On"
 msgstr "_Включить"
 
-#: panels/network/cc-wifi-panel.c:406
+#: panels/network/cc-wifi-panel.c:404
 #: panels/network/gnome-wifi-panel.desktop.in:3
-#: panels/network/network-wifi.ui:66
+#: panels/network/network-wifi.ui:61 panels/network/network-wifi.ui:70
 msgid "Wi-Fi"
 msgstr "Wi-Fi"
 
-#: panels/network/cc-wifi-panel.c:740
+#: panels/network/cc-wifi-panel.c:734
 msgid "Turning off will disconnect any devices that are using the hotspot."
 msgstr "Выключение отключит любые устройства, использующие точку доступа."
 
-#: panels/network/cc-wifi-panel.c:742
+#: panels/network/cc-wifi-panel.c:736
 msgid "Turn Off Hotspot?"
 msgstr "Выключить точку доступа?"
 
-#: panels/network/cc-wifi-panel.c:745
+#: panels/network/cc-wifi-panel.c:739
 msgid "_Turn Off"
 msgstr "_Выключить"
 
-#: panels/network/cc-wifi-panel.ui:75
+#: panels/network/cc-wifi-panel.ui:59
 msgid "Airplane Mode"
 msgstr "Авиарежим"
 
-#: panels/network/cc-wifi-panel.ui:76
+#: panels/network/cc-wifi-panel.ui:60
 msgid "Disables Wi-Fi, Bluetooth and mobile broadband"
 msgstr "Отключает Wi-Fi, Bluetooth и мобильную связь"
 
-#: panels/network/cc-wifi-panel.ui:96
+#: panels/network/cc-wifi-panel.ui:83
 msgid "No Wi-Fi Adapter Found"
 msgstr "Адаптеры Wi-Fi не найдены"
 
-#: panels/network/cc-wifi-panel.ui:97
+#: panels/network/cc-wifi-panel.ui:84
 msgid "Make sure you have a Wi-Fi adapter plugged and turned on"
 msgstr "Убедитесь, что адаптер Wi-Fi вставлен в разъём и включён"
 
-#: panels/network/cc-wifi-panel.ui:110 panels/wwan/cc-wwan-panel.ui:102
+#: panels/network/cc-wifi-panel.ui:97 panels/wwan/cc-wwan-panel.ui:102
 msgid "Airplane Mode On"
 msgstr "Включён авиарежим"
 
-#: panels/network/cc-wifi-panel.ui:111
+#: panels/network/cc-wifi-panel.ui:98
 msgid "Turn off to use Wi-Fi"
 msgstr "Выключите чтобы воспользоваться Wi-Fi"
 
-#: panels/network/cc-wifi-panel.ui:146
+#: panels/network/cc-wifi-panel.ui:133
 msgid "Wi-Fi Hotspot Active"
 msgstr "Точка доступа Wi-Fi активна"
 
-#: panels/network/cc-wifi-panel.ui:156
+#: panels/network/cc-wifi-panel.ui:143
 msgid "Mobile devices can scan the QR code to connect."
 msgstr "Можно сканировать QR на мобильном устройстве для подключения."
 
-#: panels/network/cc-wifi-panel.ui:164
+#: panels/network/cc-wifi-panel.ui:151
 msgid "Turn Off Hotspot…"
 msgstr "Выключить точку доступа Wi-Fi…"
 
-#: panels/network/cc-wifi-panel.ui:184
+#: panels/network/cc-wifi-panel.ui:171
 msgid "Visible Networks"
 msgstr "Видимые сети"
 
-#: panels/network/cc-wifi-panel.ui:221
+#: panels/network/cc-wifi-panel.ui:208
 msgid "Wi-Fi Unavailable"
 msgstr "Wi-Fi недоступен"
 
-#: panels/network/cc-wifi-panel.ui:222
+#: panels/network/cc-wifi-panel.ui:209
 msgid ""
 "An error has occurred and Wi-Fi cannot be used.\n"
 "Error details: NetworkManager not running."
@@ -3610,51 +3572,66 @@ msgstr ""
 msgid "Profile %d"
 msgstr "Профиль %d"
 
+#. Translators: "%s" is the user visible name of the network
+#: panels/network/connection-editor/ce-page-details.c:92
+#, c-format
+msgid ""
+"Saved details for “%s” will be permanently lost. This includes passwords and "
+"any network changes."
+msgstr ""
+"Сохранённые данные для «%s» будут безвозвратно утеряны. Это относится к "
+"паролям и любым изменениям в сети."
+
+#: panels/network/connection-editor/ce-page-details.c:95
+#: panels/network/net-device-wifi.c:859
+msgid "Forget Connection?"
+msgstr "Забыть соединение?"
+
 #. TRANSLATORS: this WEP WiFi security
-#: panels/network/connection-editor/ce-page-details.c:97
-#: panels/network/net-device-wifi.c:230
+#: panels/network/connection-editor/ce-page-details.c:128
+#: panels/network/net-device-wifi.c:232
 msgid "WEP"
 msgstr "WEP"
 
 #. TRANSLATORS: this WPA WiFi security
-#: panels/network/connection-editor/ce-page-details.c:101
-#: panels/network/net-device-wifi.c:235
+#: panels/network/connection-editor/ce-page-details.c:132
+#: panels/network/net-device-wifi.c:237
 msgid "WPA"
 msgstr "WPA"
 
 #. TRANSLATORS: this WPA3 WiFi security
-#: panels/network/connection-editor/ce-page-details.c:107
+#: panels/network/connection-editor/ce-page-details.c:138
 msgid "WPA3"
 msgstr "WPA3"
 
 # Enhanced open provides improved data encryption in open Wi-Fi networks and protects data from sniffing. Enhanced open replaces open system as the default option. With enhanced open, the client and WLAN perform Diffie-Hellman key exchange during the access procedure and use the resulting pairwise key with a 4-way handshake.
 #. TRANSLATORS: this Enhanced Open WiFi security
-#: panels/network/connection-editor/ce-page-details.c:112
+#: panels/network/connection-editor/ce-page-details.c:143
 #: panels/network/connection-editor/ce-page-security.c:271
 msgid "Enhanced Open"
 msgstr "Enhanced Open"
 
 #. TRANSLATORS: this WPA WiFi security
-#: panels/network/connection-editor/ce-page-details.c:124
+#: panels/network/connection-editor/ce-page-details.c:155
 msgid "WPA2"
 msgstr "WPA2"
 
 #. TRANSLATORS: this Enterprise WiFi security
-#: panels/network/connection-editor/ce-page-details.c:130
+#: panels/network/connection-editor/ce-page-details.c:161
 msgid "Enterprise"
 msgstr "Enterprise"
 
-#: panels/network/connection-editor/ce-page-details.c:135
-#: panels/network/net-device-wifi.c:220
+#: panels/network/connection-editor/ce-page-details.c:166
+#: panels/network/net-device-wifi.c:222
 msgctxt "Wifi security"
 msgid "None"
 msgstr "Нет"
 
-#: panels/network/connection-editor/ce-page-details.c:156
+#: panels/network/connection-editor/ce-page-details.c:187
 msgid "Never"
 msgstr "Никогда"
 
-#: panels/network/connection-editor/ce-page-details.c:171
+#: panels/network/connection-editor/ce-page-details.c:202
 #: panels/network/net-device-ethernet.c:105
 #, c-format
 msgid "%i day ago"
@@ -3663,71 +3640,71 @@ msgstr[0] "%i день назад"
 msgstr[1] "%i дня назад"
 msgstr[2] "%i дней назад"
 
-#: panels/network/connection-editor/ce-page-details.c:295
+#: panels/network/connection-editor/ce-page-details.c:326
 #, c-format
 msgid "%d Mb/s (%1.1f GHz)"
 msgstr "%d Мб/с (%1.1f ГГц)"
 
 #. Translators: network device speed
-#: panels/network/connection-editor/ce-page-details.c:297
+#: panels/network/connection-editor/ce-page-details.c:328
 #: panels/network/net-device-ethernet.c:217
 #, c-format
 msgid "%d Mb/s"
 msgstr "%d Мб/с"
 
-#: panels/network/connection-editor/ce-page-details.c:312
+#: panels/network/connection-editor/ce-page-details.c:343
 msgid "2.4 GHz / 5 GHz"
 msgstr "2.4 ГГц / 5 ГГц"
 
-#: panels/network/connection-editor/ce-page-details.c:314
+#: panels/network/connection-editor/ce-page-details.c:345
 msgid "2.4 GHz"
 msgstr "2.4 ГГц"
 
-#: panels/network/connection-editor/ce-page-details.c:316
+#: panels/network/connection-editor/ce-page-details.c:347
 msgid "5 GHz"
 msgstr "5 ГГц"
 
-#: panels/network/connection-editor/ce-page-details.c:336
+#: panels/network/connection-editor/ce-page-details.c:367
 msgctxt "Signal strength"
 msgid "None"
 msgstr "Нет"
 
-#: panels/network/connection-editor/ce-page-details.c:338
+#: panels/network/connection-editor/ce-page-details.c:369
 msgctxt "Signal strength"
 msgid "Weak"
 msgstr "Слабый"
 
-#: panels/network/connection-editor/ce-page-details.c:340
+#: panels/network/connection-editor/ce-page-details.c:371
 msgctxt "Signal strength"
 msgid "Ok"
 msgstr "Средний"
 
-#: panels/network/connection-editor/ce-page-details.c:342
+#: panels/network/connection-editor/ce-page-details.c:373
 msgctxt "Signal strength"
 msgid "Good"
 msgstr "Хороший"
 
-#: panels/network/connection-editor/ce-page-details.c:344
+#: panels/network/connection-editor/ce-page-details.c:375
 msgctxt "Signal strength"
 msgid "Excellent"
 msgstr "Отличный"
 
-#: panels/network/connection-editor/ce-page-details.c:411
+#: panels/network/connection-editor/ce-page-details.c:442
 #: panels/network/connection-editor/details-page.ui:94
 #: panels/network/net-device-ethernet.c:144
 #: panels/network/net-device-mobile.c:441
 msgid "IPv4 Address"
 msgstr "Адрес IPv4"
 
-#: panels/network/connection-editor/ce-page-details.c:412
+#: panels/network/connection-editor/ce-page-details.c:443
 #: panels/network/connection-editor/details-page.ui:110
 #: panels/network/net-device-ethernet.c:146
 #: panels/network/net-device-mobile.c:442 panels/network/network-mobile.ui:177
 msgid "IPv6 Address"
 msgstr "Адрес IPv6"
 
-#: panels/network/connection-editor/ce-page-details.c:414
-#: panels/network/connection-editor/ce-page-details.c:415
+#: panels/network/connection-editor/ce-page-details.c:445
+#: panels/network/connection-editor/ce-page-details.c:446
 #: panels/network/net-device-ethernet.c:149
 #: panels/network/net-device-ethernet.c:151
 #: panels/network/net-device-mobile.c:445
@@ -3735,24 +3712,24 @@ msgstr "Адрес IPv6"
 msgid "IP Address"
 msgstr "Адрес IP"
 
-#: panels/network/connection-editor/ce-page-details.c:419
+#: panels/network/connection-editor/ce-page-details.c:450
 #: panels/network/net-device-ethernet.c:166
 #: panels/network/net-device-mobile.c:450
 msgid "DNS4"
 msgstr "DNS4"
 
-#: panels/network/connection-editor/ce-page-details.c:420
+#: panels/network/connection-editor/ce-page-details.c:451
 #: panels/network/net-device-ethernet.c:167
 #: panels/network/net-device-mobile.c:451
 msgid "DNS6"
 msgstr "DNS6"
 
-#: panels/network/connection-editor/ce-page-details.c:422
-#: panels/network/connection-editor/ce-page-details.c:423
+#: panels/network/connection-editor/ce-page-details.c:453
+#: panels/network/connection-editor/ce-page-details.c:454
 #: panels/network/connection-editor/details-page.ui:175
 #: panels/network/connection-editor/details-page.ui:192
-#: panels/network/connection-editor/ip4-page.ui:165
-#: panels/network/connection-editor/ip6-page.ui:175
+#: panels/network/connection-editor/ip4-page.ui:171
+#: panels/network/connection-editor/ip6-page.ui:182
 #: panels/network/net-device-ethernet.c:169
 #: panels/network/net-device-ethernet.c:171
 #: panels/network/net-device-mobile.c:453
@@ -3761,19 +3738,19 @@ msgstr "DNS6"
 msgid "DNS"
 msgstr "DNS"
 
-#: panels/network/connection-editor/ce-page-details.c:475
+#: panels/network/connection-editor/ce-page-details.c:506
 msgid "Forget Connection"
 msgstr "Забыть соединение"
 
-#: panels/network/connection-editor/ce-page-details.c:477
+#: panels/network/connection-editor/ce-page-details.c:508
 msgid "Remove Connection Profile"
 msgstr "Удалить профиль соединения"
 
-#: panels/network/connection-editor/ce-page-details.c:480
+#: panels/network/connection-editor/ce-page-details.c:511
 msgid "Remove VPN"
 msgstr "Удалить VPN"
 
-#: panels/network/connection-editor/ce-page-details.c:498
+#: panels/network/connection-editor/ce-page-details.c:529
 msgid "Details"
 msgstr "Подробности"
 
@@ -3787,21 +3764,21 @@ msgstr "автоматический"
 msgid "Identity"
 msgstr "Идентификация"
 
-#: panels/network/connection-editor/ce-page-ip4.c:264
-#: panels/network/connection-editor/ce-page-ip6.c:245
+#: panels/network/connection-editor/ce-page-ip4.c:260
+#: panels/network/connection-editor/ce-page-ip6.c:239
 msgid "Delete Address"
 msgstr "Удалить адрес"
 
-#: panels/network/connection-editor/ce-page-ip4.c:423
-#: panels/network/connection-editor/ce-page-ip6.c:392
+#: panels/network/connection-editor/ce-page-ip4.c:419
+#: panels/network/connection-editor/ce-page-ip6.c:386
 msgid "Delete Route"
 msgstr "Удалить маршрут"
 
-#: panels/network/connection-editor/ce-page-ip4.c:774
+#: panels/network/connection-editor/ce-page-ip4.c:763
 msgid "IPv4"
 msgstr "IPv4"
 
-#: panels/network/connection-editor/ce-page-ip6.c:744
+#: panels/network/connection-editor/ce-page-ip6.c:727
 msgid "IPv6"
 msgstr "IPv6"
 
@@ -3839,7 +3816,7 @@ msgid "WPA3 Personal"
 msgstr "WPA3 Personal"
 
 #: panels/network/connection-editor/ce-page-wireguard.c:106
-#: panels/network/connection-editor/net-connection-editor.c:864
+#: panels/network/connection-editor/net-connection-editor.c:852
 msgid "WireGuard"
 msgstr "WireGuard"
 
@@ -3929,79 +3906,79 @@ msgstr "Метод IPv_4"
 msgid "Automatic (DHCP)"
 msgstr "Автоматический (DHCP)"
 
-#: panels/network/connection-editor/ip4-page.ui:45
-#: panels/network/connection-editor/ip6-page.ui:55
+#: panels/network/connection-editor/ip4-page.ui:47
+#: panels/network/connection-editor/ip6-page.ui:58
 msgid "Link-Local Only"
 msgstr "Только для локальной сети"
 
-#: panels/network/connection-editor/ip4-page.ui:65
-#: panels/network/connection-editor/ip6-page.ui:75
+#: panels/network/connection-editor/ip4-page.ui:69
+#: panels/network/connection-editor/ip6-page.ui:80
 msgid "Disable"
 msgstr "Выключить"
 
-#: panels/network/connection-editor/ip4-page.ui:75
-#: panels/network/connection-editor/ip6-page.ui:85
+#: panels/network/connection-editor/ip4-page.ui:80
+#: panels/network/connection-editor/ip6-page.ui:91
 msgid "Shared to other computers"
 msgstr "Общий доступ другим компьютерам"
 
-#: panels/network/connection-editor/ip4-page.ui:98
-#: panels/network/connection-editor/ip6-page.ui:108
+#: panels/network/connection-editor/ip4-page.ui:104
+#: panels/network/connection-editor/ip6-page.ui:115
 msgid "Addresses"
 msgstr "Адреса"
 
-#: panels/network/connection-editor/ip4-page.ui:112
-#: panels/network/connection-editor/ip4-page.ui:250
-#: panels/network/connection-editor/ip6-page.ui:122
-#: panels/network/connection-editor/ip6-page.ui:260
+#: panels/network/connection-editor/ip4-page.ui:118
+#: panels/network/connection-editor/ip4-page.ui:256
+#: panels/network/connection-editor/ip6-page.ui:129
+#: panels/network/connection-editor/ip6-page.ui:267
 #: panels/printers/pp-details-dialog.ui:114
 msgid "Address"
 msgstr "Адрес"
 
-#: panels/network/connection-editor/ip4-page.ui:124
-#: panels/network/connection-editor/ip4-page.ui:262
+#: panels/network/connection-editor/ip4-page.ui:130
+#: panels/network/connection-editor/ip4-page.ui:268
 msgid "Netmask"
 msgstr "Маска сети"
 
-#: panels/network/connection-editor/ip4-page.ui:136
-#: panels/network/connection-editor/ip4-page.ui:274
-#: panels/network/connection-editor/ip6-page.ui:146
-#: panels/network/connection-editor/ip6-page.ui:284
+#: panels/network/connection-editor/ip4-page.ui:142
+#: panels/network/connection-editor/ip4-page.ui:280
+#: panels/network/connection-editor/ip6-page.ui:153
+#: panels/network/connection-editor/ip6-page.ui:291
 msgid "Gateway"
 msgstr "Шлюз"
 
-#: panels/network/connection-editor/ip4-page.ui:183
-#: panels/network/connection-editor/ip6-page.ui:193
+#: panels/network/connection-editor/ip4-page.ui:189
+#: panels/network/connection-editor/ip6-page.ui:200
 msgid "Automatic DNS"
 msgstr "Автоматический DNS"
 
-#: panels/network/connection-editor/ip4-page.ui:192
-#: panels/network/connection-editor/ip6-page.ui:202
+#: panels/network/connection-editor/ip4-page.ui:198
+#: panels/network/connection-editor/ip6-page.ui:209
 msgid "DNS server address(es)"
 msgstr "Адрес(ы) сервера DNS"
 
-#: panels/network/connection-editor/ip4-page.ui:200
-#: panels/network/connection-editor/ip6-page.ui:210
+#: panels/network/connection-editor/ip4-page.ui:206
+#: panels/network/connection-editor/ip6-page.ui:217
 msgid "Separate IP addresses with commas"
 msgstr "Отделяйте IP-адреса запятыми"
 
-#: panels/network/connection-editor/ip4-page.ui:217
-#: panels/network/connection-editor/ip6-page.ui:227
+#: panels/network/connection-editor/ip4-page.ui:223
+#: panels/network/connection-editor/ip6-page.ui:234
 msgid "Routes"
 msgstr "Маршруты"
 
-#: panels/network/connection-editor/ip4-page.ui:235
-#: panels/network/connection-editor/ip6-page.ui:245
+#: panels/network/connection-editor/ip4-page.ui:241
+#: panels/network/connection-editor/ip6-page.ui:252
 msgid "Automatic Routes"
 msgstr "Автоматические маршруты"
 
 #. Translators: Please see https://en.wikipedia.org/wiki/Metrics_(networking)
-#: panels/network/connection-editor/ip4-page.ui:285
-#: panels/network/connection-editor/ip6-page.ui:295
+#: panels/network/connection-editor/ip4-page.ui:291
+#: panels/network/connection-editor/ip6-page.ui:302
 msgid "Metric"
 msgstr "Метрика"
 
-#: panels/network/connection-editor/ip4-page.ui:308
-#: panels/network/connection-editor/ip6-page.ui:318
+#: panels/network/connection-editor/ip4-page.ui:314
+#: panels/network/connection-editor/ip6-page.ui:325
 msgid "Use this connection _only for resources on its network"
 msgstr "Использовать это подключение _только для ресурсов в этой сети"
 
@@ -4009,35 +3986,41 @@ msgstr "Использовать это подключение _только д�
 msgid "IPv_6 Method"
 msgstr "Метод IPv_6"
 
-#: panels/network/connection-editor/ip6-page.ui:45
+#: panels/network/connection-editor/ip6-page.ui:47
 msgid "Automatic, DHCP only"
 msgstr "Автоматический, только DHCP"
 
-#: panels/network/connection-editor/ip6-page.ui:134
-#: panels/network/connection-editor/ip6-page.ui:272
+#: panels/network/connection-editor/ip6-page.ui:141
+#: panels/network/connection-editor/ip6-page.ui:279
 msgid "Prefix"
 msgstr "Префикс"
 
-#: panels/network/connection-editor/net-connection-editor.c:389
-msgid "Unable to open connection editor"
-msgstr "Не удалось открыть редактор соединений"
+#: panels/network/connection-editor/net-connection-editor.c:368
+#, c-format
+msgid "Unable to open connection editor: %s"
+msgstr "Не удалось открыть редактор соединений: %s"
 
-#: panels/network/connection-editor/net-connection-editor.c:405
+#: panels/network/connection-editor/net-connection-editor.c:387
 msgid "New Profile"
 msgstr "Создать профиль"
 
-#: panels/network/connection-editor/net-connection-editor.c:472
+#: panels/network/connection-editor/net-connection-editor.c:454
 #, c-format
 msgid "Invalid setting %s: %s"
 msgstr "Неверная настройка %s: %s"
 
-#: panels/network/connection-editor/net-connection-editor.c:475
+#: panels/network/connection-editor/net-connection-editor.c:457
 #, c-format
 msgid "Invalid setting %s"
 msgstr "Неверная настройка %s"
 
+#: panels/network/connection-editor/net-connection-editor.c:733
+#, c-format
+msgid "Invalid VPN configuration file"
+msgstr "Неверный файл конфигурации VPN"
+
 #. Translators: VPN add dialog Wireguard description
-#: panels/network/connection-editor/net-connection-editor.c:852
+#: panels/network/connection-editor/net-connection-editor.c:840
 msgid ""
 "Free and open-source VPN solution designed for ease of use, high speed "
 "performance and low attack surface."
@@ -4045,11 +4028,11 @@ msgstr ""
 "Бесплатное решение VPN с открытым исходным кодом, разработанное для простоты "
 "использования, высокой скорости работы и низкой площади атаки."
 
-#: panels/network/connection-editor/net-connection-editor.c:888
+#: panels/network/connection-editor/net-connection-editor.c:876
 msgid "Import from file…"
 msgstr "Импортировать из файла…"
 
-#: panels/network/connection-editor/net-connection-editor.c:914
+#: panels/network/connection-editor/net-connection-editor.c:902
 msgid "Add VPN"
 msgstr "Добавить VPN"
 
@@ -4057,11 +4040,11 @@ msgstr "Добавить VPN"
 msgid "S_ecurity"
 msgstr "_Безопасность"
 
-#: panels/network/connection-editor/vpn-helpers.c:191
-msgid "Cannot import VPN connection"
+#: panels/network/connection-editor/vpn-helpers.c:142
+msgid "Cannot Import VPN Connection"
 msgstr "Не удалось импортировать соединение VPN"
 
-#: panels/network/connection-editor/vpn-helpers.c:193
+#: panels/network/connection-editor/vpn-helpers.c:146
 #, c-format
 msgid ""
 "The file “%s” could not be read or does not contain recognized VPN "
@@ -4074,42 +4057,14 @@ msgstr ""
 "\n"
 "Ошибка: %s."
 
-#: panels/network/connection-editor/vpn-helpers.c:212
+#: panels/network/connection-editor/vpn-helpers.c:149
+#: panels/wacom/button-mapping.ui:66
+msgid "_Close"
+msgstr "_Закрыть"
+
+#: panels/network/connection-editor/vpn-helpers.c:166
 msgid "Select file to import"
 msgstr "Выберите файл для импортирования"
-
-#: panels/network/connection-editor/vpn-helpers.c:264
-#, c-format
-msgid "A file named “%s” already exists."
-msgstr "Файл с именем «%s» уже существует."
-
-#: panels/network/connection-editor/vpn-helpers.c:266
-msgid "_Replace"
-msgstr "_Заменить"
-
-#: panels/network/connection-editor/vpn-helpers.c:268
-#, c-format
-msgid "Do you want to replace %s with the VPN connection you are saving?"
-msgstr "Заменить %s сохраняемым VPN-соединением?"
-
-#: panels/network/connection-editor/vpn-helpers.c:303
-msgid "Cannot export VPN connection"
-msgstr "Не удалось экспортировать соединение VPN"
-
-#: panels/network/connection-editor/vpn-helpers.c:305
-#, c-format
-msgid ""
-"The VPN connection “%s” could not be exported to %s.\n"
-"\n"
-"Error: %s."
-msgstr ""
-"Невозможно экспортировать VPN-соединение «%s» в %s.\n"
-"\n"
-"Ошибка: %s."
-
-#: panels/network/connection-editor/vpn-helpers.c:331
-msgid "Export VPN connection"
-msgstr "Экспортировать VPN-соединение"
 
 #: panels/network/connection-editor/vpn-page.ui:34
 msgid "(Error: unable to load VPN connection editor)"
@@ -4239,7 +4194,7 @@ msgstr "Проводное соединение"
 msgid "Add new connection"
 msgstr "Добавить новое подключение"
 
-#: panels/network/net-device-wifi.c:864
+#: panels/network/net-device-wifi.c:857
 msgid ""
 "Network details for the selected networks, including passwords and any "
 "custom configuration will be lost."
@@ -4247,36 +4202,21 @@ msgstr ""
 "Сетевые данные для выделенных сетей, включая пароли и любые пользовательские "
 "настройки, будут утеряны."
 
-#: panels/network/net-device-wifi.c:868
+#: panels/network/net-device-wifi.c:863
 msgid "_Forget"
 msgstr "_Забыть"
 
-#: panels/network/net-device-wifi.c:1067
+#: panels/network/net-device-wifi.c:1068
 msgid "Saved Wi-Fi Networks"
 msgstr "Сохраненные сети Wi-Fi"
 
-#. translators: This is the label for the "Forget wireless network" functionality
-#: panels/network/net-device-wifi.c:1086
-msgctxt "Wi-Fi Network"
-msgid "_Forget"
-msgstr "_Забыть"
-
-#: panels/network/net-device-wifi.c:1244
+#: panels/network/net-device-wifi.c:1237
 msgid "System policy prohibits use as a Hotspot"
 msgstr "Использование в качестве точки доступа запрещено системной политикой"
 
-#: panels/network/net-device-wifi.c:1247
+#: panels/network/net-device-wifi.c:1240
 msgid "Wireless device does not support Hotspot mode"
 msgstr "Беспроводное устройство не поддерживает режим точки доступа"
-
-#: panels/network/network-bluetooth.ui:11
-msgid "Turn device off"
-msgstr "Выключить устройство"
-
-#: panels/network/network-ethernet.ui:45 panels/network/network-mobile.ui:310
-#: panels/power/cc-power-profile-row.ui:21
-msgid "Active"
-msgstr "Запущено"
 
 #: panels/network/network-mobile.ui:27
 #: panels/wwan/cc-wwan-details-dialog.ui:237
@@ -4286,6 +4226,10 @@ msgstr "IMEI"
 #: panels/network/network-mobile.ui:41
 msgid "Provider"
 msgstr "Провайдер"
+
+#: panels/network/network-mobile.ui:310 panels/power/cc-power-profile-row.ui:21
+msgid "Active"
+msgstr "Запущено"
 
 #: panels/network/network-vpn.ui:11
 msgid "Turn VPN connection off"
@@ -4306,25 +4250,25 @@ msgctxt "Wi-Fi Hotspot"
 msgid "Password"
 msgstr "Пароль"
 
-#: panels/network/network-wifi.ui:90
+#: panels/network/network-wifi.ui:75
 msgid "Turn Wi-Fi off"
 msgstr "Выключить Wi-Fi"
 
-#: panels/network/network-wifi.ui:99 panels/search/cc-search-panel-row.ui:39
-msgid "More options…"
-msgstr "Больше параметров…"
+#: panels/network/network-wifi.ui:83
+msgid "Saved Networks"
+msgstr "Сохраненные сети"
 
-#: panels/network/network-wifi.ui:119
+#: panels/network/network-wifi.ui:88 panels/network/network-wifi.ui:102
+msgid "Show Saved Networks"
+msgstr "Показать сохраненные сети"
+
+#: panels/network/network-wifi.ui:96
 msgid "_Connect to Hidden Network…"
 msgstr "_Подключиться к скрытой сети…"
 
-#: panels/network/network-wifi.ui:131
+#: panels/network/network-wifi.ui:110
 msgid "_Turn On Wi-Fi Hotspot…"
 msgstr "_Включить точку доступа Wi-Fi…"
-
-#: panels/network/network-wifi.ui:143
-msgid "_Saved Networks"
-msgstr "_Сохраненные сети"
 
 #. TRANSLATORS: device status
 #: panels/network/panel-common.c:37
@@ -4628,7 +4572,7 @@ msgstr "_Не беспокоить"
 
 #. Translators: Whether to show notifications on the lock screen
 #: panels/notifications/cc-notifications-panel.ui:17
-#: panels/screen/cc-screen-panel.ui:69
+#: panels/screen/cc-screen-panel.ui:66
 msgid "_Lock Screen Notifications"
 msgstr "Уведомления на экране _блокировки"
 
@@ -4659,13 +4603,13 @@ msgstr "Другое"
 msgid "%s removed"
 msgstr "%s удалён"
 
-#: panels/online-accounts/cc-online-accounts-panel.c:694
+#: panels/online-accounts/cc-online-accounts-panel.c:691
 msgid "Error removing account"
 msgstr "Ошибка при удалении учётной записи"
 
 #. Translators: This is the button which allows undoing the removal of the printer.
 #: panels/online-accounts/cc-online-accounts-panel.ui:23
-#: panels/printers/printers.ui:47
+#: panels/printers/printers.ui:48
 msgid "Undo"
 msgstr "Отменить"
 
@@ -4689,12 +4633,12 @@ msgstr "Добавить учётную запись"
 
 #. translators: This is the title of the "Show Account" dialog. The
 #. * %s is the name of the provider. e.g., 'Google'.
-#: panels/online-accounts/gnome-control-center-goa-helper.c:428
+#: panels/online-accounts/gnome-control-center-goa-helper.c:427
 #, c-format
 msgid "%s Account"
 msgstr "Учётная запись %s"
 
-#: panels/online-accounts/gnome-control-center-goa-helper.c:431
+#: panels/online-accounts/gnome-control-center-goa-helper.c:430
 msgid "Remove Account"
 msgstr "Удалить учётную запись"
 
@@ -4907,18 +4851,18 @@ msgctxt "Idle time"
 msgid "Never"
 msgstr "Никогда"
 
-#: panels/power/cc-power-panel.c:946
+#: panels/power/cc-power-panel.c:947
 msgid "Automatic suspend"
 msgstr "Автоматический режим ожидания"
 
-#: panels/power/cc-power-panel.c:1042
+#: panels/power/cc-power-panel.c:1043
 msgid ""
 "Performance mode temporarily disabled due to high operating temperature."
 msgstr ""
 "Режим высокой производительности временно запрещён из-за высокой температуры "
 "устройства."
 
-#: panels/power/cc-power-panel.c:1044
+#: panels/power/cc-power-panel.c:1045
 msgid ""
 "Lap detected: performance mode temporarily unavailable. Move the device to a "
 "stable surface to restore."
@@ -4927,11 +4871,11 @@ msgstr ""
 "на коленях. Переместите устройство на ровную поверхность для возобновления "
 "режима."
 
-#: panels/power/cc-power-panel.c:1046
+#: panels/power/cc-power-panel.c:1047
 msgid "Performance mode temporarily disabled."
 msgstr "Режим высокой производительности запрещён."
 
-#: panels/power/cc-power-panel.c:1088
+#: panels/power/cc-power-panel.c:1089
 msgid ""
 "Low battery: power saver enabled. Previous mode will be restored when "
 "battery is sufficiently charged."
@@ -4940,13 +4884,13 @@ msgstr ""
 "будет автоматически включён когда батарея будет заряжена."
 
 #. translators: "%s" is an application name
-#: panels/power/cc-power-panel.c:1096
+#: panels/power/cc-power-panel.c:1097
 #, c-format
 msgid "Power Saver mode activated by “%s”."
 msgstr "Режим низкого потребления активирован «%s»."
 
 #. translators: "%s" is an application name
-#: panels/power/cc-power-panel.c:1100
+#: panels/power/cc-power-panel.c:1101
 #, c-format
 msgid "Performance mode activated by “%s”."
 msgstr "Режим высокой производительности активирован «%s»."
@@ -5144,8 +5088,9 @@ msgid ""
 "Power;Sleep;Suspend;Hibernate;Battery;Brightness;Dim;Blank;Monitor;DPMS;Idle;"
 "Energy;"
 msgstr ""
-"Питание;Спящий;Ждущий;Батарея;Яркость;Затемнение;Экран;DPMS;Бездействующий;"
-"Энергия;"
+"Power;Sleep;Suspend;Hibernate;Battery;Brightness;Dim;Blank;Monitor;DPMS;Idle;"
+"Energy;Питание;Спящий;Ждущий;Батарея;Яркость;Затемнение;Экран;DPMS;"
+"Бездействующий;Энергия;"
 
 #. Translators: %s is the printer name
 #: panels/printers/cc-printers-panel.c:682
@@ -5165,7 +5110,7 @@ msgid "Could not load ui: %s"
 msgstr "Не удалось загрузить интерфейс пользователя: %s"
 
 #: panels/printers/cc-printers-panel.c:1313
-msgid "Unlock to Add Printers and Change Settings"
+msgid "Unlock to add printers and change settings"
 msgstr "Разблокировать для добавления принтеров и изменения настроек"
 
 #: panels/printers/gnome-printers-panel.desktop.in:3
@@ -5179,7 +5124,9 @@ msgstr "Добавление принтеров, просмотр текущих
 #. Translators: Search terms to find the Printers panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/printers/gnome-printers-panel.desktop.in:16
 msgid "Printer;Queue;Print;Paper;Ink;Toner;"
-msgstr "Принтер;Очередь;Печать;Бумага;Чернила;Тонер;"
+msgstr ""
+"Printer;Queue;Print;Paper;Ink;Toner;Принтер;Очередь;Печать;Бумага;Чернила;"
+"Тонер;"
 
 #. Translators: This is the title presented at top of the dialog.
 #: panels/printers/new-printer-dialog.ui:28
@@ -5220,14 +5167,14 @@ msgstr ""
 #: panels/printers/new-printer-dialog.ui:295
 #: panels/printers/pp-jobs-dialog.ui:42
 #: panels/user-accounts/cc-add-user-dialog.ui:94
-#: panels/user-accounts/cc-add-user-dialog.ui:338
+#: panels/user-accounts/cc-add-user-dialog.ui:342
 #: panels/wwan/cc-wwan-apn-dialog.ui:150
 msgid "Username"
 msgstr "Имя пользователя"
 
 #. Translators: This is the title of the dialog. %s is the printer name.
 #: panels/printers/pp-details-dialog.c:76
-#: panels/printers/pp-details-dialog.c:372
+#: panels/printers/pp-details-dialog.c:370
 #, c-format
 msgid "%s Details"
 msgstr "Подробности %s"
@@ -5236,11 +5183,11 @@ msgstr "Подробности %s"
 msgid "No suitable driver found"
 msgstr "Подходящий драйвер не найден"
 
-#: panels/printers/pp-details-dialog.c:266
+#: panels/printers/pp-details-dialog.c:264
 msgid "Select PPD File"
 msgstr "Выберите файл PPD"
 
-#: panels/printers/pp-details-dialog.c:275
+#: panels/printers/pp-details-dialog.c:273
 msgid ""
 "PostScript Printer Description files (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, *."
 "PPD.GZ)"
@@ -5401,7 +5348,7 @@ msgid "Move this job to the top of the queue"
 msgstr "Переместить это задание в начало очереди"
 
 #. Translators: This label shows how many jobs of this printer needs to be authenticated to be printed.
-#: panels/printers/pp-jobs-dialog.c:318
+#: panels/printers/pp-jobs-dialog.c:319
 #, c-format
 msgid "%u Job Requires Authentication"
 msgid_plural "%u Jobs Require Authentication"
@@ -5410,21 +5357,21 @@ msgstr[1] "%u задания требуют аутентификацию"
 msgstr[2] "%u заданий требуют аутентификацию"
 
 #. Translators: This is the printer name for which we are showing the active jobs
-#: panels/printers/pp-jobs-dialog.c:456
+#: panels/printers/pp-jobs-dialog.c:457
 #, c-format
 msgctxt "Printer jobs dialog title"
 msgid "%s — Active Jobs"
 msgstr "Текущие задания — %s"
 
 #. Translators: The printer needs authentication info to print.
-#: panels/printers/pp-jobs-dialog.c:460
+#: panels/printers/pp-jobs-dialog.c:461
 #, c-format
 msgid "Enter credentials to print from %s."
 msgstr "Введите учётные данные для печати из %s."
 
 #. Translators: This is a windows domain used with SMB protocol.
 #: panels/printers/pp-jobs-dialog.ui:30
-#: panels/user-accounts/cc-add-user-dialog.ui:295
+#: panels/user-accounts/cc-add-user-dialog.ui:299
 msgid "Domain"
 msgstr "Домен"
 
@@ -5657,110 +5604,110 @@ msgstr[1] "%u задания"
 msgstr[2] "%u заданий"
 
 #. Translators: Name of job which makes printer to clean its heads
-#: panels/printers/pp-printer-entry.c:651
+#: panels/printers/pp-printer-entry.c:648
 msgid "Clean print heads"
 msgstr "Очистка печатающих головок принтера"
 
 #. Translators: The printer is low on toner
-#: panels/printers/pp-printer-entry.c:719
+#: panels/printers/pp-printer-entry.c:716
 msgid "Low on toner"
 msgstr "Мало тонера"
 
 #. Translators: The printer has no toner left
-#: panels/printers/pp-printer-entry.c:721
+#: panels/printers/pp-printer-entry.c:718
 msgid "Out of toner"
 msgstr "Тонер закончился"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: panels/printers/pp-printer-entry.c:724
+#: panels/printers/pp-printer-entry.c:721
 msgid "Low on developer"
 msgstr "Мало проявителя"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: panels/printers/pp-printer-entry.c:727
+#: panels/printers/pp-printer-entry.c:724
 msgid "Out of developer"
 msgstr "Проявитель закончился"
 
 #. Translators: "marker" is one color bin of the printer
-#: panels/printers/pp-printer-entry.c:729
+#: panels/printers/pp-printer-entry.c:726
 msgid "Low on a marker supply"
 msgstr "Маркер скоро закончится"
 
 #. Translators: "marker" is one color bin of the printer
-#: panels/printers/pp-printer-entry.c:731
+#: panels/printers/pp-printer-entry.c:728
 msgid "Out of a marker supply"
 msgstr "Маркер закончился"
 
 #. Translators: One or more covers on the printer are open
-#: panels/printers/pp-printer-entry.c:733
+#: panels/printers/pp-printer-entry.c:730
 msgid "Open cover"
 msgstr "Открыта крышка"
 
 #. Translators: One or more doors on the printer are open
-#: panels/printers/pp-printer-entry.c:735
+#: panels/printers/pp-printer-entry.c:732
 msgid "Open door"
 msgstr "Открыта дверца"
 
 #. Translators: At least one input tray is low on media
-#: panels/printers/pp-printer-entry.c:737
+#: panels/printers/pp-printer-entry.c:734
 msgid "Low on paper"
 msgstr "Мало бумаги"
 
 #. Translators: At least one input tray is empty
-#: panels/printers/pp-printer-entry.c:739
+#: panels/printers/pp-printer-entry.c:736
 msgid "Out of paper"
 msgstr "Бумага закончилась"
 
 #. Translators: The printer is offline
-#: panels/printers/pp-printer-entry.c:741
+#: panels/printers/pp-printer-entry.c:738
 msgctxt "printer state"
 msgid "Offline"
 msgstr "Выключен"
 
 #. Translators: Someone has stopped the Printer
 #. Translators: Printer's state (no jobs can be processed)
-#: panels/printers/pp-printer-entry.c:743
-#: panels/printers/pp-printer-entry.c:886
+#: panels/printers/pp-printer-entry.c:740
+#: panels/printers/pp-printer-entry.c:883
 msgctxt "printer state"
 msgid "Stopped"
 msgstr "Остановлен"
 
 #. Translators: The printer marker supply waste receptacle is almost full
-#: panels/printers/pp-printer-entry.c:745
+#: panels/printers/pp-printer-entry.c:742
 msgid "Waste receptacle almost full"
 msgstr "Резервуар почти полон"
 
 #. Translators: The printer marker supply waste receptacle is full
-#: panels/printers/pp-printer-entry.c:747
+#: panels/printers/pp-printer-entry.c:744
 msgid "Waste receptacle full"
 msgstr "Резервуар заполнен"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: panels/printers/pp-printer-entry.c:749
+#: panels/printers/pp-printer-entry.c:746
 msgid "The optical photo conductor is near end of life"
 msgstr "Фотобарабан скоро выйдет из строя"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: panels/printers/pp-printer-entry.c:751
+#: panels/printers/pp-printer-entry.c:748
 msgid "The optical photo conductor is no longer functioning"
 msgstr "Фотобарабан перестал работать"
 
 #. Translators: Printer's state (can start new job without waiting)
-#: panels/printers/pp-printer-entry.c:872
+#: panels/printers/pp-printer-entry.c:869
 msgctxt "printer state"
 msgid "Ready"
 msgstr "Готов"
 
 #. Translators: Printer's state (printer is ready but doesn't accept new jobs)
-#: panels/printers/pp-printer-entry.c:877
+#: panels/printers/pp-printer-entry.c:874
 msgctxt "printer state"
 msgid "Does not accept jobs"
 msgstr "Не принимает задания"
 
 #. Translators: Printer's state (jobs are processing)
-#: panels/printers/pp-printer-entry.c:882
+#: panels/printers/pp-printer-entry.c:879
 msgctxt "printer state"
 msgid "Processing"
 msgstr "Обработка"
@@ -5806,23 +5753,31 @@ msgstr "Запустите снова когда проблема будет р�
 msgid "Restart"
 msgstr "Перезапустить"
 
+#: panels/printers/printers.ui:8
+msgid "All Connected and Network Printers"
+msgstr "Все подключённые и сетевые принтеры"
+
 #. Translators: This button adds new printer.
 #. Translators: This button adds a new printer.
-#: panels/printers/printers.ui:10 panels/printers/printers.ui:148
-msgid "Add Printer…"
-msgstr "Добавить принтер…"
+#: panels/printers/printers.ui:11 panels/printers/printers.ui:150
+msgid "_Add Printer…"
+msgstr "_Добавить принтер…"
 
-#: panels/printers/printers.ui:145
+#: panels/printers/printers.ui:109
+msgid "Search printers"
+msgstr "Поиск принтеров"
+
+#: panels/printers/printers.ui:147
 msgid "No Printers"
 msgstr "Принтеров нет"
 
 #. Translators: Title if the CUPS server is not running (we can not connect to it).
-#: panels/printers/printers.ui:168
+#: panels/printers/printers.ui:171
 msgid "No Print Service"
 msgstr "Нет службы печати"
 
 #. Translators: Description if the CUPS server is not running (we can not connect to it).
-#: panels/printers/printers.ui:169
+#: panels/printers/printers.ui:172
 msgid "The system printing service doesn’t seem to be available."
 msgstr "Системная служба печати, похоже, недоступна."
 
@@ -5832,8 +5787,8 @@ msgid "Formats"
 msgstr "Форматы"
 
 #: panels/region/cc-format-chooser.ui:76
-msgid "Search locales…"
-msgstr "Поиск местоположений…"
+msgid "Search locales"
+msgstr "Поиск местоположений"
 
 #: panels/region/cc-format-chooser.ui:116
 msgid "Common Formats"
@@ -5885,15 +5840,15 @@ msgstr "Система мер"
 msgid "Paper"
 msgstr "Бумага"
 
-#: panels/region/cc-region-panel.ui:19
+#: panels/region/cc-region-panel.ui:11
 msgid "Language and format will be changed after next login"
 msgstr "Язык и формат будут изменены после следующего входа в систему"
 
-#: panels/region/cc-region-panel.ui:29
-msgid "Logout…"
+#: panels/region/cc-region-panel.ui:12
+msgid "Log Out…"
 msgstr "Выйти…"
 
-#: panels/region/cc-region-panel.ui:45
+#: panels/region/cc-region-panel.ui:19
 msgid ""
 "The language setting is used for interface text and web pages. Formats are "
 "used for numbers, dates, and currencies."
@@ -5901,20 +5856,20 @@ msgstr ""
 "Настройка языка используется для текста интерфейса и веб-страниц. Форматы "
 "используются для чисел, дат и валют."
 
-#: panels/region/cc-region-panel.ui:51
+#: panels/region/cc-region-panel.ui:23
 msgid "Your Account"
 msgstr "Ваша учётная запись"
 
-#: panels/region/cc-region-panel.ui:56 panels/region/cc-region-panel.ui:83
-#: panels/user-accounts/cc-user-panel.ui:269
+#: panels/region/cc-region-panel.ui:28 panels/region/cc-region-panel.ui:55
+#: panels/user-accounts/cc-user-panel.ui:249
 msgid "_Language"
 msgstr "_Язык"
 
-#: panels/region/cc-region-panel.ui:66 panels/region/cc-region-panel.ui:93
+#: panels/region/cc-region-panel.ui:38 panels/region/cc-region-panel.ui:65
 msgid "_Formats"
 msgstr "_Форматы"
 
-#: panels/region/cc-region-panel.ui:78
+#: panels/region/cc-region-panel.ui:50
 msgid "Login Screen"
 msgstr "Экран входа"
 
@@ -5929,7 +5884,7 @@ msgstr "Выбор языка интерфейса и форматов"
 #. Translators: Search terms to find the Region and Language panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/region/gnome-region-panel.desktop.in:15
 msgid "Language;Layout;Keyboard;Input;"
-msgstr "Язык;Раскладка;Клавиатура;Ввод;"
+msgstr "Language;Layout;Keyboard;Input;Язык;Раскладка;Клавиатура;Ввод;"
 
 #: panels/removable-media/cc-removable-media-panel.c:256
 msgid "Ask what to do"
@@ -6044,20 +5999,20 @@ msgstr "_Приложение"
 msgid "_Other Media…"
 msgstr "Д_ругой носитель…"
 
-#: panels/removable-media/cc-removable-media-panel.ui:195
+#: panels/removable-media/cc-removable-media-panel.ui:197
 msgid "_Never prompt or start apps on media insertion"
 msgstr ""
 "_Никогда не спрашивать и не запускать приложения при подключении носителя"
 
-#: panels/removable-media/cc-removable-media-panel.ui:225
+#: panels/removable-media/cc-removable-media-panel.ui:230
 msgid "Select how other media should be handled"
 msgstr "Выберите способ обработки другого носителя"
 
-#: panels/removable-media/cc-removable-media-panel.ui:259
+#: panels/removable-media/cc-removable-media-panel.ui:264
 msgid "_Action:"
 msgstr "_Действие:"
 
-#: panels/removable-media/cc-removable-media-panel.ui:278
+#: panels/removable-media/cc-removable-media-panel.ui:283
 msgid "_Type:"
 msgstr "_Тип:"
 
@@ -6202,7 +6157,7 @@ msgctxt "blank_screen"
 msgid "Never"
 msgstr "Никогда"
 
-#: panels/screen/cc-screen-panel.ui:8
+#: panels/screen/cc-screen-panel.ui:6
 msgid ""
 "Automatically locking the screen prevents others from accessing the computer "
 "while you're away."
@@ -6226,19 +6181,19 @@ msgstr "Автоматическая _блокировка экрана"
 msgid "Locks the screen after it blanks"
 msgstr "Блокирует экран после того, как он погаснет"
 
-#: panels/screen/cc-screen-panel.ui:50
+#: panels/screen/cc-screen-panel.ui:47
 msgid "Automatic _Screen Lock Delay"
 msgstr "Задержка _автоматической блокировки экрана"
 
-#: panels/screen/cc-screen-panel.ui:51
+#: panels/screen/cc-screen-panel.ui:48
 msgid "Time from screen blank to screen lock"
 msgstr "Время от отключения экрана до блокировки экрана"
 
-#: panels/screen/cc-screen-panel.ui:87
+#: panels/screen/cc-screen-panel.ui:81
 msgid "Forbid new _USB devices"
 msgstr "Запрещать новые USB _устройств"
 
-#: panels/screen/cc-screen-panel.ui:88
+#: panels/screen/cc-screen-panel.ui:82
 msgid ""
 "Prevent new USB devices from interacting with the system when the screen is "
 "locked."
@@ -6246,11 +6201,11 @@ msgstr ""
 "Предотвращать взаимодействие новых USB устройств с системой когда экран "
 "заблокирован."
 
-#: panels/screen/cc-screen-panel.ui:108
+#: panels/screen/cc-screen-panel.ui:99
 msgid "Screen Privacy"
 msgstr "Конфиденциальность экрана"
 
-#: panels/screen/cc-screen-panel.ui:113
+#: panels/screen/cc-screen-panel.ui:104
 msgid "Restrict Viewing Angle"
 msgstr "Ограничение угла обзора"
 
@@ -6267,15 +6222,11 @@ msgstr "Автоматическая блокировка экрана"
 msgid "screen;lock;private;privacy;"
 msgstr "экран;блокировка;частное;конфиденциальность;"
 
-#: panels/search/cc-search-locations-dialog.c:674
+#: panels/search/cc-search-locations-dialog.c:675
 msgid "Select Location"
 msgstr "Выберите расположение"
 
-#: panels/search/cc-search-locations-dialog.c:678
-msgid "_OK"
-msgstr "_OK"
-
-#: panels/search/cc-search-locations-dialog.ui:8
+#: panels/search/cc-search-locations-dialog.ui:10
 #: panels/search/cc-search-panel.ui:22
 msgid "Search Locations"
 msgstr "Места поиска"
@@ -6287,25 +6238,29 @@ msgstr ""
 "Папки, такие как Файлы, Изображения и Видео, в которых осуществляется поиск "
 "системными приложениями."
 
-#: panels/search/cc-search-locations-dialog.ui:18
+#: panels/search/cc-search-locations-dialog.ui:16
 msgid "Places"
 msgstr "Места"
 
-#: panels/search/cc-search-locations-dialog.ui:35
+#: panels/search/cc-search-locations-dialog.ui:33
 msgid "Bookmarks"
 msgstr "Закладки"
 
-#: panels/search/cc-search-locations-dialog.ui:52
+#: panels/search/cc-search-locations-dialog.ui:50
 msgid "Others"
 msgstr "Прочие"
 
-#: panels/search/cc-search-locations-dialog.ui:59
+#: panels/search/cc-search-locations-dialog.ui:57
 msgid "Add Location"
 msgstr "Добавить расположение"
 
-#: panels/search/cc-search-panel.c:165
+#: panels/search/cc-search-panel.c:166
 msgid "No apps found"
 msgstr "Приложения не найдены"
+
+#: panels/search/cc-search-panel-row.ui:39
+msgid "More options…"
+msgstr "Больше параметров…"
 
 #: panels/search/cc-search-panel.ui:10
 msgid "App Search"
@@ -6334,10 +6289,12 @@ msgstr "Какие приложения показывают результат�
 #. Translators: Search terms to find the Search panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/search/gnome-search-panel.desktop.in:15
 msgid "Search;Find;Index;Hide;Privacy;Results;"
-msgstr "Поиск;Найти;Индекс;Скрыть;Конфиденциальность;Результаты;"
+msgstr ""
+"Search;Find;Index;Hide;Privacy;Results;Поиск;Найти;Индекс;Скрыть;"
+"Конфиденциальность;Результаты;"
 
 #. Label
-#: panels/sharing/cc-sharing-networks.c:270
+#: panels/sharing/cc-sharing-networks.c:269
 msgid "No networks selected for sharing"
 msgstr "Не выбрано ни одной сети для обеспечения общего доступа"
 
@@ -6345,40 +6302,40 @@ msgstr "Не выбрано ни одной сети для обеспечени
 msgid "Networks"
 msgstr "Сети"
 
-#: panels/sharing/cc-sharing-panel.c:323
+#: panels/sharing/cc-sharing-panel.c:299
 msgctxt "service is enabled"
 msgid "On"
 msgstr "Включено"
 
-#: panels/sharing/cc-sharing-panel.c:325 panels/sharing/cc-sharing-panel.c:352
+#: panels/sharing/cc-sharing-panel.c:301 panels/sharing/cc-sharing-panel.c:324
 msgctxt "service is disabled"
 msgid "Off"
 msgstr "Выключено"
 
-#: panels/sharing/cc-sharing-panel.c:355
+#: panels/sharing/cc-sharing-panel.c:327
 msgctxt "service is enabled"
 msgid "Enabled"
 msgstr "Включено"
 
-#: panels/sharing/cc-sharing-panel.c:358
+#: panels/sharing/cc-sharing-panel.c:330
 msgctxt "service is active"
 msgid "Active"
 msgstr "Запущено"
 
-#: panels/sharing/cc-sharing-panel.c:476
+#: panels/sharing/cc-sharing-panel.c:444
 msgid "Choose a Folder"
 msgstr "Выберите папку"
 
-#: panels/sharing/cc-sharing-panel.c:629 panels/wwan/cc-wwan-apn-dialog.ui:33
+#: panels/sharing/cc-sharing-panel.c:597 panels/wwan/cc-wwan-apn-dialog.ui:33
 msgid "Add"
 msgstr "Добавить"
 
-#: panels/sharing/cc-sharing-panel.c:693
+#: panels/sharing/cc-sharing-panel.c:661
 msgid "Enable media sharing"
 msgstr "Включить общий доступ к медиа"
 
 #. TRANSLATORS: %s is replaced with a link to a dav://<hostname> URL
-#: panels/sharing/cc-sharing-panel.c:715
+#: panels/sharing/cc-sharing-panel.c:683
 #, c-format
 msgid ""
 "File Sharing allows you to share your Public folder with others on your "
@@ -6388,7 +6345,7 @@ msgstr ""
 "пользователям сети с помощью: %s"
 
 #. TRANSLATORS: %s is replaced with a link to a "ssh <hostname>" command to run
-#: panels/sharing/cc-sharing-panel.c:721
+#: panels/sharing/cc-sharing-panel.c:689
 #, c-format
 msgid ""
 "When remote login is enabled, remote users can connect using the Secure "
@@ -6399,71 +6356,82 @@ msgstr ""
 "используя команду Secure Shell:\n"
 "%s"
 
-#: panels/sharing/cc-sharing-panel.c:795
+#: panels/sharing/cc-sharing-panel.c:763
 msgid "Enable personal media sharing"
 msgstr "Включить общий доступ к личным медиа"
 
-#: panels/sharing/cc-sharing-panel.c:1159
+#: panels/sharing/cc-sharing-panel.c:1124
 msgid "Device name copied"
 msgstr "Имя устройства скопировано"
 
-#: panels/sharing/cc-sharing-panel.c:1170
+#: panels/sharing/cc-sharing-panel.c:1134
 msgid "Device address copied"
 msgstr "Адрес устройства скопирован"
 
-#: panels/sharing/cc-sharing-panel.c:1181
+#: panels/sharing/cc-sharing-panel.c:1144
 msgid "Username copied"
 msgstr "Имя пользователя скопировано"
 
-#: panels/sharing/cc-sharing-panel.c:1192
+#: panels/sharing/cc-sharing-panel.c:1154
 msgid "Password copied"
 msgstr "Пароль скопирован"
 
-#: panels/sharing/cc-sharing-panel.ui:9
-#: panels/sharing/gnome-sharing-panel.desktop.in:3
-msgid "Sharing"
-msgstr "Общий доступ"
+#: panels/sharing/cc-sharing-panel.ui:23
+msgid "Share files with other devices on the current network"
+msgstr "Общий доступ к файлам с других устройств в текущей сети"
 
-#: panels/sharing/cc-sharing-panel.ui:32
+#: panels/sharing/cc-sharing-panel.ui:25
 msgid "_File Sharing"
 msgstr "Общий доступ к _файлам"
 
-#: panels/sharing/cc-sharing-panel.ui:40
+#: panels/sharing/cc-sharing-panel.ui:33
+msgid "View and control the desktop from another device"
+msgstr "Просмотр и управление рабочим столом с другого устройства"
+
+#: panels/sharing/cc-sharing-panel.ui:35
 msgid "Remote _Desktop"
 msgstr "Удаленный _рабочий стол"
 
-#: panels/sharing/cc-sharing-panel.ui:48
+#: panels/sharing/cc-sharing-panel.ui:43
+msgid "Stream music, photos and videos to devices on the current network"
+msgstr "Передача музыки, фотографий и видео на устройства в текущей сети"
+
+#: panels/sharing/cc-sharing-panel.ui:45
 msgid "_Media Sharing"
 msgstr "Общий доступ к _медиа"
 
-#: panels/sharing/cc-sharing-panel.ui:56
+#: panels/sharing/cc-sharing-panel.ui:53
+msgid "Enable SSH access for this device"
+msgstr "Включить доступ по SSH для этого устройства"
+
+#: panels/sharing/cc-sharing-panel.ui:55
 msgid "_Remote Login"
 msgstr "_Удалённая авторизация"
 
-#: panels/sharing/cc-sharing-panel.ui:66
+#: panels/sharing/cc-sharing-panel.ui:65
 msgid "File Sharing"
 msgstr "Общий доступ к файлам"
 
-#: panels/sharing/cc-sharing-panel.ui:112
+#: panels/sharing/cc-sharing-panel.ui:111
 msgid "_Require Password"
 msgstr "_Требовать пароль"
 
-#: panels/sharing/cc-sharing-panel.ui:126
-#: panels/user-accounts/cc-user-panel.ui:182
+#: panels/sharing/cc-sharing-panel.ui:125
+#: panels/user-accounts/cc-user-panel.ui:151
 msgid "_Password"
 msgstr "_Пароль"
 
-#: panels/sharing/cc-sharing-panel.ui:169
-#: panels/sharing/cc-sharing-panel.ui:205
+#: panels/sharing/cc-sharing-panel.ui:168
+#: panels/sharing/cc-sharing-panel.ui:204
 msgid "Remote Login"
 msgstr "Удалённая авторизация"
 
-#: panels/sharing/cc-sharing-panel.ui:225
-#: panels/sharing/cc-sharing-panel.ui:244
+#: panels/sharing/cc-sharing-panel.ui:224
+#: panels/sharing/cc-sharing-panel.ui:245
 msgid "Remote Desktop"
 msgstr "Удаленный рабочий стол"
 
-#: panels/sharing/cc-sharing-panel.ui:240
+#: panels/sharing/cc-sharing-panel.ui:239
 msgid ""
 "Remote desktop allows viewing and controlling your desktop from another "
 "computer."
@@ -6471,64 +6439,64 @@ msgstr ""
 "Удаленный рабочий стол позволяет просматривать и управлять рабочим столом с "
 "другого компьютера."
 
-#: panels/sharing/cc-sharing-panel.ui:245
+#: panels/sharing/cc-sharing-panel.ui:246
 msgid "Enable or disable remote desktop connections to this computer."
 msgstr ""
 "Включение или отключение подключений удаленного рабочего стола к этому "
 "компьютеру."
 
-#: panels/sharing/cc-sharing-panel.ui:258
+#: panels/sharing/cc-sharing-panel.ui:259
 msgid "Remote Control"
 msgstr "Удаленное управление"
 
-#: panels/sharing/cc-sharing-panel.ui:259
+#: panels/sharing/cc-sharing-panel.ui:260
 msgid "Allows remote connections to control the screen."
 msgstr "Разрешить удаленное подключение для управления экраном."
 
-#: panels/sharing/cc-sharing-panel.ui:273
+#: panels/sharing/cc-sharing-panel.ui:274
 msgid "How to Connect"
 msgstr "Как подключиться"
 
-#: panels/sharing/cc-sharing-panel.ui:274
+#: panels/sharing/cc-sharing-panel.ui:275
 msgid ""
 "Connect to this computer using the device name or remote desktop address."
 msgstr ""
 "Подключиться к этому компьютеру, используя имя устройства или адрес "
 "удаленного рабочего стола."
 
-#: panels/sharing/cc-sharing-panel.ui:293
-#: panels/sharing/cc-sharing-panel.ui:320
-#: panels/sharing/cc-sharing-panel.ui:347
-#: panels/sharing/cc-sharing-panel.ui:365
+#: panels/sharing/cc-sharing-panel.ui:294
+#: panels/sharing/cc-sharing-panel.ui:321
+#: panels/sharing/cc-sharing-panel.ui:348
+#: panels/sharing/cc-sharing-panel.ui:366
 msgid "Copy"
 msgstr "Копировать"
 
-#: panels/sharing/cc-sharing-panel.ui:306
+#: panels/sharing/cc-sharing-panel.ui:307
 msgid "Remote Desktop Address"
 msgstr "Адрес удаленного рабочего стола"
 
-#: panels/sharing/cc-sharing-panel.ui:336
+#: panels/sharing/cc-sharing-panel.ui:337
 msgid "Authentication"
 msgstr "Аутентификация"
 
-#: panels/sharing/cc-sharing-panel.ui:337
+#: panels/sharing/cc-sharing-panel.ui:338
 msgid "The user name and password are required to connect to this computer."
 msgstr ""
 "Имя пользователя и пароль необходимы для подключения к этому компьютеру."
 
-#: panels/sharing/cc-sharing-panel.ui:341
+#: panels/sharing/cc-sharing-panel.ui:342
 msgid "User Name"
 msgstr "Имя пользователя"
 
-#: panels/sharing/cc-sharing-panel.ui:380
+#: panels/sharing/cc-sharing-panel.ui:381
 msgid "Verify Encryption"
 msgstr "Проверить шифрование"
 
-#: panels/sharing/cc-sharing-panel.ui:409
+#: panels/sharing/cc-sharing-panel.ui:410
 msgid "Encryption Fingerprint"
 msgstr "Отпечаток пальца для шифрования"
 
-#: panels/sharing/cc-sharing-panel.ui:410
+#: panels/sharing/cc-sharing-panel.ui:411
 msgid ""
 "The encryption fingerprint can be seen in connecting clients and should be "
 "identical."
@@ -6536,17 +6504,21 @@ msgstr ""
 "Отпечаток пальца для шифрования виден подключающимся клиентам и должен быть "
 "идентичным."
 
-#: panels/sharing/cc-sharing-panel.ui:442
+#: panels/sharing/cc-sharing-panel.ui:443
 msgid "Media Sharing"
 msgstr "Общий доступ к медиа"
 
-#: panels/sharing/cc-sharing-panel.ui:464
+#: panels/sharing/cc-sharing-panel.ui:465
 msgid "Share music, photos and videos over the network."
 msgstr "Общий доступ к музыке, фото и видео по сети."
 
-#: panels/sharing/cc-sharing-panel.ui:477
+#: panels/sharing/cc-sharing-panel.ui:478
 msgid "Folders"
 msgstr "Папки"
+
+#: panels/sharing/gnome-sharing-panel.desktop.in:3
+msgid "Sharing"
+msgstr "Общий доступ"
 
 #: panels/sharing/gnome-sharing-panel.desktop.in:4
 msgid "Control what you want to share with others"
@@ -6575,23 +6547,23 @@ msgstr ""
 msgid "Custom"
 msgstr "Другой"
 
-#: panels/sound/cc-alert-chooser-window.c:342
-#: panels/sound/cc-alert-chooser-window.ui:32
+#: panels/sound/cc-alert-chooser-window.c:344
+#: panels/sound/cc-alert-chooser-window.ui:34
 msgid "Click"
 msgstr "Щелчок"
 
-#: panels/sound/cc-alert-chooser-window.c:344
-#: panels/sound/cc-alert-chooser-window.ui:74
+#: panels/sound/cc-alert-chooser-window.c:346
+#: panels/sound/cc-alert-chooser-window.ui:76
 msgid "Hum"
 msgstr "Гул"
 
-#: panels/sound/cc-alert-chooser-window.c:346
-#: panels/sound/cc-alert-chooser-window.ui:46
+#: panels/sound/cc-alert-chooser-window.c:348
+#: panels/sound/cc-alert-chooser-window.ui:48
 msgid "String"
 msgstr "Струна"
 
-#: panels/sound/cc-alert-chooser-window.c:348
-#: panels/sound/cc-alert-chooser-window.ui:60
+#: panels/sound/cc-alert-chooser-window.c:350
+#: panels/sound/cc-alert-chooser-window.ui:62
 msgid "Swing"
 msgstr "Взмах"
 
@@ -6693,77 +6665,77 @@ msgstr ""
 "Карта;Микрофон;Громкость;Затухание;Баланс;Bluetooth;Наушники;Аудио;Вход;"
 "Выход;"
 
-#: panels/thunderbolt/cc-bolt-device-dialog.c:92
+#: panels/thunderbolt/cc-bolt-device-dialog.c:81
 #: panels/thunderbolt/cc-bolt-device-entry.c:123
 msgctxt "Thunderbolt Device Status"
 msgid "Disconnected"
 msgstr "Отключено"
 
-#: panels/thunderbolt/cc-bolt-device-dialog.c:95
+#: panels/thunderbolt/cc-bolt-device-dialog.c:84
 #: panels/thunderbolt/cc-bolt-device-entry.c:126
 msgctxt "Thunderbolt Device Status"
 msgid "Connecting"
 msgstr "Подключение"
 
-#: panels/thunderbolt/cc-bolt-device-dialog.c:98
+#: panels/thunderbolt/cc-bolt-device-dialog.c:87
 #: panels/thunderbolt/cc-bolt-device-entry.c:130
 #: panels/thunderbolt/cc-bolt-device-entry.c:142
 msgctxt "Thunderbolt Device Status"
 msgid "Connected"
 msgstr "Подключено"
 
-#: panels/thunderbolt/cc-bolt-device-dialog.c:101
+#: panels/thunderbolt/cc-bolt-device-dialog.c:90
 msgctxt "Thunderbolt Device Status"
 msgid "Authorization Error"
 msgstr "Ошибка авторизации"
 
-#: panels/thunderbolt/cc-bolt-device-dialog.c:104
+#: panels/thunderbolt/cc-bolt-device-dialog.c:93
 #: panels/thunderbolt/cc-bolt-device-entry.c:136
 msgctxt "Thunderbolt Device Status"
 msgid "Authorizing"
 msgstr "Авторизация"
 
-#: panels/thunderbolt/cc-bolt-device-dialog.c:111
+#: panels/thunderbolt/cc-bolt-device-dialog.c:100
 msgctxt "Thunderbolt Device Status"
 msgid "Reduced Functionality"
 msgstr "Сокращённая функциональность"
 
-#: panels/thunderbolt/cc-bolt-device-dialog.c:113
+#: panels/thunderbolt/cc-bolt-device-dialog.c:102
 msgctxt "Thunderbolt Device Status"
 msgid "Connected & Authorized"
 msgstr "Подключено и авторизовано"
 
-#: panels/thunderbolt/cc-bolt-device-dialog.c:119
+#: panels/thunderbolt/cc-bolt-device-dialog.c:108
 #: panels/thunderbolt/cc-bolt-device-entry.c:150
 msgctxt "Thunderbolt Device Status"
 msgid "Unknown"
 msgstr "Неизвестно"
 
 #. Translators: The time point the device was authorized.
-#: panels/thunderbolt/cc-bolt-device-dialog.c:175
-msgid "Authorized at:"
-msgstr "Авторизовано в:"
+#: panels/thunderbolt/cc-bolt-device-dialog.c:163
+msgid "Authorized at"
+msgstr "Авторизовано в"
 
 #. Translators: The time point the device was connected.
-#: panels/thunderbolt/cc-bolt-device-dialog.c:181
-msgid "Connected at:"
-msgstr "Подключено в:"
+#: panels/thunderbolt/cc-bolt-device-dialog.c:169
+msgid "Connected at"
+msgstr "Подключено в"
 
 #. Translators: The time point the device was enrolled,
 #. * i.e. authorized and stored in the device database.
-#: panels/thunderbolt/cc-bolt-device-dialog.c:188
-msgid "Enrolled at:"
-msgstr "Зарегистрировано в:"
+#: panels/thunderbolt/cc-bolt-device-dialog.c:176
+msgid "Enrolled at"
+msgstr "Зарегистрировано в"
 
-#: panels/thunderbolt/cc-bolt-device-dialog.c:262
+#: panels/thunderbolt/cc-bolt-device-dialog.c:250
 msgid "Failed to authorize device: "
 msgstr "Не удалось авторизовать устройство: "
 
-#: panels/thunderbolt/cc-bolt-device-dialog.c:329
+#: panels/thunderbolt/cc-bolt-device-dialog.c:317
 msgid "Failed to forget device: "
 msgstr "Не удалось забыть устройство: "
 
-#: panels/thunderbolt/cc-bolt-device-dialog.c:485
+#: panels/thunderbolt/cc-bolt-device-dialog.c:458
 #, c-format
 msgid "Depends on %u other device"
 msgid_plural "Depends on %u other devices"
@@ -6771,28 +6743,27 @@ msgstr[0] "Зависит от %u другого устройства"
 msgstr[1] "Зависит от %u других устройств"
 msgstr[2] "Зависит от %u других устройств"
 
+#: panels/thunderbolt/cc-bolt-device-dialog.ui:25
+msgid "Status"
+msgstr "Статус"
+
+#: panels/thunderbolt/cc-bolt-device-dialog.ui:30
+msgid "UUID"
+msgstr "UUID"
+
+#: panels/thunderbolt/cc-bolt-device-dialog.ui:35
+msgid "Timestamp"
+msgstr "Отметка времени"
+
 #: panels/thunderbolt/cc-bolt-device-dialog.ui:43
-#: panels/thunderbolt/cc-bolt-panel.ui:41
-msgid "Close notification"
-msgstr "Уведомление о закрытии"
+msgid "Depends on other devices"
+msgstr "Зависит от других устройств"
 
-#: panels/thunderbolt/cc-bolt-device-dialog.ui:87
-msgid "Name:"
-msgstr "Имя:"
-
-#: panels/thunderbolt/cc-bolt-device-dialog.ui:115
-msgid "Status:"
-msgstr "Статус:"
-
-#: panels/thunderbolt/cc-bolt-device-dialog.ui:144
-msgid "UUID:"
-msgstr "UUID:"
-
-#: panels/thunderbolt/cc-bolt-device-dialog.ui:250
+#: panels/thunderbolt/cc-bolt-device-dialog.ui:73
 msgid "Authorize and Connect"
 msgstr "Подключить и авторизовать"
 
-#: panels/thunderbolt/cc-bolt-device-dialog.ui:266
+#: panels/thunderbolt/cc-bolt-device-dialog.ui:88
 msgid "Forget Device"
 msgstr "Забыть устройство"
 
@@ -6806,24 +6777,24 @@ msgctxt "Thunderbolt Device Status"
 msgid "Authorized"
 msgstr "Авторизовано"
 
-#: panels/thunderbolt/cc-bolt-panel.c:234
+#: panels/thunderbolt/cc-bolt-panel.c:233
 msgid ""
 "The Thunderbolt subsystem (boltd) is not installed or not set up properly."
 msgstr ""
 "Подсистема Thunderbolt (boltd) не установлена или настроена неправильно."
 
-#: panels/thunderbolt/cc-bolt-panel.c:490
+#: panels/thunderbolt/cc-bolt-panel.c:489
 #: panels/thunderbolt/cc-bolt-panel.ui:123
 msgid "Allow direct access to devices such as docks and external GPUs."
 msgstr ""
 "Разрешить прямой доступ к таким устройствам, как док-станции и внешние "
 "графические процессоры."
 
-#: panels/thunderbolt/cc-bolt-panel.c:491
+#: panels/thunderbolt/cc-bolt-panel.c:490
 msgid "Only USB and Display Port devices can attach."
 msgstr "Возможно подключение только устройств USB и Display Port."
 
-#: panels/thunderbolt/cc-bolt-panel.c:526
+#: panels/thunderbolt/cc-bolt-panel.c:525
 msgid ""
 "Thunderbolt could not be detected.\n"
 "Either the system lacks Thunderbolt support, it has been disabled in the "
@@ -6833,18 +6804,22 @@ msgstr ""
 "Либо в системе отсутствует поддержка Thunderbolt, отключено в BIOS, либо "
 "установлено на неподдерживаемый уровень безопасности в BIOS."
 
-#: panels/thunderbolt/cc-bolt-panel.c:570
+#: panels/thunderbolt/cc-bolt-panel.c:569
 msgid "Thunderbolt support has been disabled in the BIOS."
 msgstr "Поддержка Thunderbolt отключена в BIOS."
 
-#: panels/thunderbolt/cc-bolt-panel.c:574
+#: panels/thunderbolt/cc-bolt-panel.c:573
 msgid "Thunderbolt security level could not be determined."
 msgstr "Уровень безопасности Thunderbolt не может быть определен."
 
-#: panels/thunderbolt/cc-bolt-panel.c:694
+#: panels/thunderbolt/cc-bolt-panel.c:693
 #, c-format
 msgid "Error switching direct mode: %s"
 msgstr "Ошибка переключения в режим прямого доступа: %s"
+
+#: panels/thunderbolt/cc-bolt-panel.ui:41
+msgid "Close notification"
+msgstr "Уведомление о закрытии"
 
 #: panels/thunderbolt/cc-bolt-panel.ui:102
 msgid "No Thunderbolt Support"
@@ -6858,11 +6833,11 @@ msgstr "Не удалось подключиться к подсистеме thu
 msgid "Direct Access"
 msgstr "Прямой доступ"
 
-#: panels/thunderbolt/cc-bolt-panel.ui:191
+#: panels/thunderbolt/cc-bolt-panel.ui:192
 msgid "Pending Devices"
 msgstr "Ожидающие устройства"
 
-#: panels/thunderbolt/cc-bolt-panel.ui:285
+#: panels/thunderbolt/cc-bolt-panel.ui:286
 msgid "No devices attached"
 msgstr "Нет подключённых устройств"
 
@@ -6920,6 +6895,14 @@ msgstr "Все окно"
 msgid "_Test Flash"
 msgstr "_Проверка вспышки"
 
+#. '#' is a dummy target to make 'Sound' clickable
+#. TRANSLATORS: Don't translate  <a href='#'> and </a>
+#: panels/universal-access/cc-ua-hearing-page.c:159
+msgid "System volume can be adjusted in <a href='#'>Sound</a> settings."
+msgstr ""
+"Громкость системных звуков можно регулировать в системных настройках, в "
+"разделе <a href='#'>Звук</a>."
+
 #: panels/universal-access/cc-ua-mouse-page.ui:10
 msgid "_Mouse Keys"
 msgstr "_Клавиши мыши"
@@ -6930,7 +6913,7 @@ msgstr "Использовать цифровую клавиатуру для п
 
 #: panels/universal-access/cc-ua-mouse-page.ui:19
 msgid "_Locate Pointer"
-msgstr "О_бнаружить принтер"
+msgstr "О_бнаружить курсор"
 
 #: panels/universal-access/cc-ua-mouse-page.ui:20
 msgid "Reveal pointer location by pressing Left Ctrl"
@@ -7014,31 +6997,31 @@ msgstr "Наведение и нажатие"
 msgid "Zoom"
 msgstr "Масштабирование"
 
-#: panels/universal-access/cc-ua-panel.ui:42
+#: panels/universal-access/cc-ua-panel.ui:43
 msgid "_Accessibility Menu"
 msgstr "Меню _специальных возможностей"
 
-#: panels/universal-access/cc-ua-panel.ui:43
+#: panels/universal-access/cc-ua-panel.ui:44
 msgid "Display menu for Accessibility settings in top bar"
 msgstr "Отображать меню для настроек специальных возможностей в верхней панели"
 
-#: panels/universal-access/cc-ua-panel.ui:64
+#: panels/universal-access/cc-ua-panel.ui:65
 msgid "_Seeing"
 msgstr "_Зрение"
 
-#: panels/universal-access/cc-ua-panel.ui:74
+#: panels/universal-access/cc-ua-panel.ui:75
 msgid "_Hearing"
 msgstr "_Слух"
 
-#: panels/universal-access/cc-ua-panel.ui:84
+#: panels/universal-access/cc-ua-panel.ui:85
 msgid "_Typing"
 msgstr "_Ввод текста"
 
-#: panels/universal-access/cc-ua-panel.ui:94
+#: panels/universal-access/cc-ua-panel.ui:95
 msgid "_Pointing and Clicking"
 msgstr "_Наведение и нажатие"
 
-#: panels/universal-access/cc-ua-panel.ui:104
+#: panels/universal-access/cc-ua-panel.ui:105
 msgid "_Zoom"
 msgstr "_Масштабирование"
 
@@ -7661,41 +7644,44 @@ msgstr "Добавить пользователя"
 msgid "Administrator"
 msgstr "Администратор"
 
-#: panels/user-accounts/cc-add-user-dialog.ui:132
+#: panels/user-accounts/cc-add-user-dialog.ui:135
+#: panels/user-accounts/cc-user-panel.ui:211
 msgid ""
-"Administrators can add and remove other users, and can change settings for "
-"all users. Parental controls cannot be applied to administrators."
+"Administrators have extra abilities, including adding and removing users, "
+"changing login settings, and removing software. Parental controls cannot be "
+"applied to administrators."
 msgstr ""
-"Администраторы могут добавлять и удалять других пользователей, а также "
-"изменять настройки для всех пользователей. Родительский контроль не может "
-"быть применен к администраторам."
+"Администраторы обладают дополнительными возможностями, включая добавление и "
+"удаление пользователей, изменение настроек входа в систему и удаление "
+"программного обеспечения. К административным учётным записям родительский "
+"контроль не может быть применен."
 
-#: panels/user-accounts/cc-add-user-dialog.ui:149
+#: panels/user-accounts/cc-add-user-dialog.ui:153
 msgid "User sets password on first login"
 msgstr "Пользователь устанавливает пароль при первом входе в систему"
 
-#: panels/user-accounts/cc-add-user-dialog.ui:161
+#: panels/user-accounts/cc-add-user-dialog.ui:165
 msgid "Set password now"
 msgstr "Установить пароль сейчас"
 
-#: panels/user-accounts/cc-add-user-dialog.ui:223
+#: panels/user-accounts/cc-add-user-dialog.ui:227
 msgid "Confirm"
 msgstr "Подтвердить"
 
-#: panels/user-accounts/cc-add-user-dialog.ui:277
+#: panels/user-accounts/cc-add-user-dialog.ui:281
 msgid "Enterprise Login"
 msgstr "Корпоративная учётная запись"
 
-#: panels/user-accounts/cc-add-user-dialog.ui:278
+#: panels/user-accounts/cc-add-user-dialog.ui:282
 msgid "User accounts which are managed by a company or organization."
 msgstr ""
 "Учетные записи пользователей, которыми управляет компания или организация."
 
-#: panels/user-accounts/cc-add-user-dialog.ui:383
+#: panels/user-accounts/cc-add-user-dialog.ui:387
 msgid "You are Offline"
 msgstr "Сетевое подключение отсутствует"
 
-#: panels/user-accounts/cc-add-user-dialog.ui:384
+#: panels/user-accounts/cc-add-user-dialog.ui:388
 msgid ""
 "Enterprise login allows an existing centrally managed user account to be "
 "used on this device. You can also use this account to access company "
@@ -7706,7 +7692,7 @@ msgstr ""
 "использовать данную учётную запись для доступа к ресурсам компании в "
 "интернете."
 
-#: panels/user-accounts/cc-avatar-chooser.c:163
+#: panels/user-accounts/cc-avatar-chooser.c:169
 msgid "Browse for more pictures"
 msgstr "Найти дополнительные изображения"
 
@@ -7904,31 +7890,31 @@ msgstr ""
 "Поднимайте и прикладывайте ваш палец к устройству чтения несколько раз для "
 "добавления"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:1015
+#: panels/user-accounts/cc-fingerprint-dialog.c:1014
 msgid "_Re-enroll this finger…"
 msgstr "_Сканируйте этот палец ещё раз…"
 
 #. TRANSLATORS: This is the label for the button to enroll a new finger
-#: panels/user-accounts/cc-fingerprint-dialog.c:1030
+#: panels/user-accounts/cc-fingerprint-dialog.c:1029
 msgid "Scan new fingerprint"
 msgstr "Отсканировать новый отпечаток"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:1067
+#: panels/user-accounts/cc-fingerprint-dialog.c:1066
 #, c-format
 msgid "Failed to release fingerprint device %s: %s"
 msgstr "Не удалось освободить устройство чтения %s: %s"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:1139
+#: panels/user-accounts/cc-fingerprint-dialog.c:1138
 msgctxt "Fingerprint enroll state"
 msgid "Problem Reading Device"
 msgstr "Проблема с чтением с устройства"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:1174
+#: panels/user-accounts/cc-fingerprint-dialog.c:1173
 #, c-format
 msgid "Failed to claim fingerprint device %s: %s"
 msgstr "Не удалось зарезервировать устройство чтения %s: %s"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:1325
+#: panels/user-accounts/cc-fingerprint-dialog.c:1324
 #, c-format
 msgid "Failed to get fingerprint devices: %s"
 msgstr "Не удалось получить устройство чтения: %s"
@@ -7996,30 +7982,26 @@ msgstr "Неправильный пароль, попробуйте ещё ра�
 msgid "Couldn’t connect to the %s domain: %s"
 msgstr "Не удалось подключиться к домену %s: %s"
 
-#: panels/user-accounts/cc-user-panel.c:257
-msgid "Add User…"
-msgstr "Добавить пользователя…"
-
-#: panels/user-accounts/cc-user-panel.c:371
+#: panels/user-accounts/cc-user-panel.c:359
 msgid "Failed to delete user"
 msgstr "Не удалось удалить пользователя"
 
-#: panels/user-accounts/cc-user-panel.c:428
-#: panels/user-accounts/cc-user-panel.c:483
-#: panels/user-accounts/cc-user-panel.c:529
+#: panels/user-accounts/cc-user-panel.c:414
+#: panels/user-accounts/cc-user-panel.c:469
+#: panels/user-accounts/cc-user-panel.c:515
 msgid "Failed to revoke remotely managed user"
 msgstr "Не удалось аннулировать удалённого пользователя"
 
-#: panels/user-accounts/cc-user-panel.c:578
+#: panels/user-accounts/cc-user-panel.c:564
 msgid "You cannot delete your own account."
 msgstr "Нельзя удалить собственную учётную запись."
 
-#: panels/user-accounts/cc-user-panel.c:587
+#: panels/user-accounts/cc-user-panel.c:573
 #, c-format
 msgid "%s is still logged in"
 msgstr "%s всё ещё находится в системе"
 
-#: panels/user-accounts/cc-user-panel.c:591
+#: panels/user-accounts/cc-user-panel.c:577
 msgid ""
 "Deleting a user while they are logged in can leave the system in an "
 "inconsistent state."
@@ -8027,69 +8009,53 @@ msgstr ""
 "Удаление пользователя, с незавершённым сеансом, может привести систему в "
 "противоречивое состояние."
 
-#: panels/user-accounts/cc-user-panel.c:600
+#: panels/user-accounts/cc-user-panel.c:591
 #, c-format
-msgid "Do you want to keep %s’s files?"
-msgstr "Хотите сохранить файлы пользователя %s?"
+msgid "Remove %s?"
+msgstr "Удалить %s?"
 
-#: panels/user-accounts/cc-user-panel.c:604
-msgid ""
-"It is possible to keep the home directory, mail spool and temporary files "
-"around when deleting a user account."
-msgstr ""
-"Можно сохранить домашнюю папку, почтовый ящик и временные файлы при удалении "
-"учётной записи пользователя."
-
-#: panels/user-accounts/cc-user-panel.c:607
-msgid "_Delete Files"
-msgstr "_Удалить файлы"
-
-#: panels/user-accounts/cc-user-panel.c:608
-msgid "_Keep Files"
-msgstr "_Сохранить файлы"
-
-#: panels/user-accounts/cc-user-panel.c:622
+#: panels/user-accounts/cc-user-panel.c:600
 #, c-format
 msgid "Are you sure you want to revoke remotely managed %s’s account?"
 msgstr "Действительно аннулировать удалённую учётную запись %s?"
 
-#: panels/user-accounts/cc-user-panel.c:626
+#: panels/user-accounts/cc-user-panel.c:604
 msgid "_Delete"
 msgstr "_Удалить"
 
-#: panels/user-accounts/cc-user-panel.c:676
+#: panels/user-accounts/cc-user-panel.c:654
 msgctxt "Password mode"
 msgid "Account disabled"
 msgstr "Учётная запись отключена"
 
-#: panels/user-accounts/cc-user-panel.c:684
+#: panels/user-accounts/cc-user-panel.c:662
 msgctxt "Password mode"
 msgid "To be set at next login"
 msgstr "Установить при следующем входе в систему"
 
-#: panels/user-accounts/cc-user-panel.c:687
+#: panels/user-accounts/cc-user-panel.c:665
 msgctxt "Password mode"
 msgid "None"
 msgstr "Нет"
 
-#: panels/user-accounts/cc-user-panel.c:1183
+#: panels/user-accounts/cc-user-panel.c:1138
 msgid "Failed to contact the accounts service"
 msgstr "Не удалось связаться со службой учётных записей"
 
-#: panels/user-accounts/cc-user-panel.c:1185
+#: panels/user-accounts/cc-user-panel.c:1140
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "Убедитесь, что AccountService установлен и включён."
 
-#: panels/user-accounts/cc-user-panel.c:1207
+#: panels/user-accounts/cc-user-panel.c:1162
 msgid "This panel must be unlocked to change this setting"
 msgstr "Для изменения этой настройки панель должна быть разблокирована"
 
-#: panels/user-accounts/cc-user-panel.c:1274
+#: panels/user-accounts/cc-user-panel.c:1229
 msgid "Delete the selected user account"
 msgstr "Удалить выбранную учётную запись пользователя"
 
-#: panels/user-accounts/cc-user-panel.c:1278
-#: panels/user-accounts/cc-user-panel.c:1413
+#: panels/user-accounts/cc-user-panel.c:1233
+#: panels/user-accounts/cc-user-panel.c:1341
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -8097,8 +8063,8 @@ msgstr ""
 "Чтобы удалить выбранную учётную запись пользователя,\n"
 "сначала нажмите на значок *"
 
-#: panels/user-accounts/cc-user-panel.c:1459
-msgid "Unlock to Add Users and Change Settings"
+#: panels/user-accounts/cc-user-panel.c:1387
+msgid "Unlock to add users and change settings"
 msgstr "Разблокировать для добавления пользователей и изменения настроек"
 
 #: panels/user-accounts/cc-user-panel.ui:23
@@ -8106,76 +8072,85 @@ msgstr "Разблокировать для добавления пользов�
 msgid "Users"
 msgstr "Пользователи"
 
-#: panels/user-accounts/cc-user-panel.ui:63
+#: panels/user-accounts/cc-user-panel.ui:64
 msgid "Your session needs to be restarted for changes to take effect"
 msgstr "Необходимо перезапустить сеанс, чтобы изменения вступили в силу"
 
-#: panels/user-accounts/cc-user-panel.ui:70
+#: panels/user-accounts/cc-user-panel.ui:71
 msgid "Restart Now"
 msgstr "Перезапустить сейчас"
 
-#: panels/user-accounts/cc-user-panel.ui:79
+#: panels/user-accounts/cc-user-panel.ui:80
 msgid "Close"
 msgstr "Закрыть"
 
-#: panels/user-accounts/cc-user-panel.ui:120
+#: panels/user-accounts/cc-user-panel.ui:121
 msgid "Edit avatar"
 msgstr "Редактировать аватар"
 
-#: panels/user-accounts/cc-user-panel.ui:152
-msgid "Full name"
-msgstr "Полное имя"
-
-#: panels/user-accounts/cc-user-panel.ui:171
-#: panels/wwan/cc-wwan-apn-dialog.c:293
-msgid "Edit"
-msgstr "Редактировать"
-
 #. FIXME
-#: panels/user-accounts/cc-user-panel.ui:202
+#: panels/user-accounts/cc-user-panel.ui:171
 msgid "_Fingerprint Login"
 msgstr "_Вход по отпечатку"
 
-#: panels/user-accounts/cc-user-panel.ui:211
+#: panels/user-accounts/cc-user-panel.ui:180
 msgid "A_utomatic Login"
 msgstr "Автоматический в_ход"
 
-#: panels/user-accounts/cc-user-panel.ui:229
+#: panels/user-accounts/cc-user-panel.ui:186
+msgid ""
+"Automatic login opens the user account when the device starts, without "
+"requiring authentication. Authentication is still required at other times, "
+"such as when unlocking the screen."
+msgstr ""
+"При запуске устройства автоматический вход в систему открывает учётную "
+"запись пользователя, не требуя аутентификации. Но в других случаях, "
+"например, при разблокировки экрана, аутентификация по-прежнему требуется."
+
+#: panels/user-accounts/cc-user-panel.ui:204
 msgid "_Administrator"
 msgstr "_Администратор"
 
-#: panels/user-accounts/cc-user-panel.ui:230
-msgid ""
-"Administrators can add and remove other users, and can change settings for "
-"all users."
-msgstr ""
-"Администраторы могут добавлять и удалять пользователей, а также изменять "
-"настройки всех пользователей."
-
-#: panels/user-accounts/cc-user-panel.ui:246
+#: panels/user-accounts/cc-user-panel.ui:226
 msgid "_Parental Controls"
 msgstr "_Родительский контроль"
 
-#: panels/user-accounts/cc-user-panel.ui:247
+#: panels/user-accounts/cc-user-panel.ui:227
 msgid "Open the Parental Controls app."
 msgstr "Открыть приложение Родительский контроль."
 
-#: panels/user-accounts/cc-user-panel.ui:284
-msgid "Remove User…"
-msgstr "Удалить пользователя…"
-
-#: panels/user-accounts/cc-user-panel.ui:296
+#: panels/user-accounts/cc-user-panel.ui:261
 msgid "Other Users"
 msgstr "Другие пользователи"
 
+#: panels/user-accounts/cc-user-panel.ui:279
+msgid "_Remove User…"
+msgstr "_Удалить пользователя…"
+
+#: panels/user-accounts/cc-user-panel.ui:289
+msgid "_Add User…"
+msgstr "_Добавить пользователя…"
+
 #. Translators: This is the empty state page label which states that there are no users to show in the panel.
-#: panels/user-accounts/cc-user-panel.ui:328
+#: panels/user-accounts/cc-user-panel.ui:318
 msgid "No Users Found"
 msgstr "Пользователи не найдены"
 
-#: panels/user-accounts/cc-user-panel.ui:337
+#: panels/user-accounts/cc-user-panel.ui:327
 msgid "Unlock to add a user account."
 msgstr "Разблокируйте для добавления учётной записи пользователя."
+
+#: panels/user-accounts/cc-user-panel.ui:342
+msgid ""
+"The user will not be able to use this device once their account has been "
+"removed."
+msgstr ""
+"После удаления своей учётной записи пользователь не сможет использовать это "
+"устройство."
+
+#: panels/user-accounts/cc-user-panel.ui:354
+msgid "Delete Files and Settings"
+msgstr "Удалить файлы и настройки"
 
 #: panels/user-accounts/data/gnome-user-accounts-panel.desktop.in:4
 msgid "Add or remove users and change your password"
@@ -8187,7 +8162,9 @@ msgid ""
 "Login;Name;Fingerprint;Avatar;Logo;Face;Password;Parental Controls;Screen "
 "Time;App Restrictions;Web Restrictions;Usage;Usage Limit;Kid;Child;"
 msgstr ""
-"Вход;Имя;Отпечаток;Аватар;Логотип;Лицо;Пароль;Родительский контроль;Экран;"
+"Login;Name;Fingerprint;Avatar;Logo;Face;Password;Parental Controls;Screen "
+"Time;App Restrictions;Web Restrictions;Usage;Usage Limit;Kid;Child;Вход;Имя;"
+"Отпечаток;Аватар;Логотип;Лицо;Пароль;Родительский контроль;Экран;"
 
 #. Translators: This button enrolls the computer in the domain in order to use enterprise logins.
 #: panels/user-accounts/data/join-dialog.ui:30
@@ -8420,10 +8397,6 @@ msgstr ""
 "нажмите кнопку комбинации клавиш и нажмите новые клавиши или нажмите "
 "Backspace для очистки."
 
-#: panels/wacom/button-mapping.ui:66
-msgid "_Close"
-msgstr "_Закрыть"
-
 #: panels/wacom/calibrator/calibrator.ui:51
 msgid ""
 "Please tap the target markers as they appear on screen to calibrate the "
@@ -8479,7 +8452,7 @@ msgid "External pad device"
 msgstr "Внешнее накладное устройство"
 
 #. All displays item
-#: panels/wacom/cc-wacom-page.c:643
+#: panels/wacom/cc-wacom-page.c:644
 msgid "All Displays"
 msgstr "Все дисплеи"
 
@@ -8617,9 +8590,17 @@ msgstr "Планшет;Wacom;Перо;Ластик;Мышь;"
 msgid "New shortcut…"
 msgstr "Новая комбинация…"
 
+#: panels/wwan/cc-wwan-apn-dialog.c:293
+msgid "Edit"
+msgstr "Редактировать"
+
 #: panels/wwan/cc-wwan-apn-dialog.ui:8
 msgid "Access Points"
 msgstr "Точки доступа"
+
+#: panels/wwan/cc-wwan-apn-dialog.ui:43
+msgid "_Save"
+msgstr "_Сохранить"
 
 #: panels/wwan/cc-wwan-apn-dialog.ui:123
 msgid "APN"
@@ -9198,19 +9179,23 @@ msgstr "Конфиденциальность"
 msgid "Available panels:"
 msgstr "Доступные панели:"
 
-#: shell/cc-window.ui:30
+#: shell/cc-window.ui:27 shell/cc-window.ui:31
 msgid "All Settings"
 msgstr "Все настройки"
 
-#: shell/cc-window.ui:54 shell/cc-window.ui:56
+#: shell/cc-window.ui:55 shell/cc-window.ui:57
 msgid "Main Menu"
 msgstr "Главное меню"
 
-#: shell/cc-window.ui:154
+#: shell/cc-window.ui:72
+msgid "Search settings"
+msgstr "Поиск настроек"
+
+#: shell/cc-window.ui:161
 msgid "Warning: Development Version"
 msgstr "Предупреждение: разрабатываемая версия"
 
-#: shell/cc-window.ui:155
+#: shell/cc-window.ui:162
 msgid ""
 "This version of Settings should only be used for development purposes. You "
 "may experience incorrect system behavior, data loss, and other unexpected "
@@ -9220,7 +9205,7 @@ msgstr ""
 "разработки. Вы можете столкнуться с неправильным поведением системы, потерей "
 "данных и другими непредвиденными проблемами. "
 
-#: shell/cc-window.ui:166
+#: shell/cc-window.ui:173
 msgid "Help"
 msgstr "Справка"
 
@@ -9267,7 +9252,7 @@ msgstr "Отменить поиск"
 #. Translators: Search terms to find this app. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: shell/org.gnome.Settings.desktop.in:14
 msgid "Preferences;Settings;"
-msgstr "Настройки;Параметры;"
+msgstr "Preferences;Settings;Настройки;Параметры;"
 
 #: shell/org.gnome.Settings.gschema.xml:5
 msgid "The identifier for the last Settings panel to be opened"
@@ -9307,7 +9292,7 @@ msgstr ""
 
 #. translators:
 #. * The number of sound outputs on a particular device
-#: subprojects/gvc/gvc-mixer-control.c:1907
+#: subprojects/gvc/gvc-mixer-control.c:1915
 #, c-format
 msgid "%u Output"
 msgid_plural "%u Outputs"
@@ -9317,7 +9302,7 @@ msgstr[2] "%u выходов"
 
 #. translators:
 #. * The number of sound inputs on a particular device
-#: subprojects/gvc/gvc-mixer-control.c:1917
+#: subprojects/gvc/gvc-mixer-control.c:1925
 #, c-format
 msgid "%u Input"
 msgid_plural "%u Inputs"
@@ -9325,9 +9310,154 @@ msgstr[0] "%u вход"
 msgstr[1] "%u входа"
 msgstr[2] "%u входов"
 
-#: subprojects/gvc/gvc-mixer-control.c:2867
+#: subprojects/gvc/gvc-mixer-control.c:2876
 msgid "System Sounds"
 msgstr "Системные звуки"
+
+#~ msgid "No apps"
+#~ msgstr "Нет приложений"
+
+#~ msgid "Open"
+#~ msgstr "Открыть"
+
+#~ msgid "Device Security Report"
+#~ msgstr "Отчет о безопасности устройства"
+
+#~ msgid "Report details"
+#~ msgstr "Подробности отчета"
+
+#~ msgid "Date generated:"
+#~ msgstr "Дата создания:"
+
+#~ msgid "fwupd version:"
+#~ msgstr "Версия fwupd:"
+
+#~ msgid "Hardware model:"
+#~ msgstr "Модель оборудования:"
+
+#~ msgid "Processor:"
+#~ msgstr "Процессор:"
+
+#~ msgid "OS:"
+#~ msgstr "ОС:"
+
+#~ msgid "Security level:"
+#~ msgstr "Уровень безопасности:"
+
+#~ msgid "Tests"
+#~ msgstr "Проверки"
+
+#~ msgid "Runtime Tests"
+#~ msgstr "Проверки Runtime"
+
+#~ msgid "Host security events"
+#~ msgstr "События безопасности хоста"
+
+#~ msgid ""
+#~ "For information on the contents of this report, see https://fwupd.github."
+#~ "io/hsi.html"
+#~ msgstr ""
+#~ "Информацию о содержании данного отчета см. на сайте https://fwupd.github."
+#~ "io/hsi.html"
+
+#~ msgid "Ca_lls"
+#~ msgstr "Вы_зовы"
+
+#~ msgctxt "Wi-Fi Network"
+#~ msgid "_Forget"
+#~ msgstr "_Забыть"
+
+#~ msgid "_OK"
+#~ msgstr "_OK"
+
+#, c-format
+#~ msgid "A file named “%s” already exists."
+#~ msgstr "Файл с именем «%s» уже существует."
+
+#~ msgid "_Replace"
+#~ msgstr "_Заменить"
+
+#, c-format
+#~ msgid "Do you want to replace %s with the VPN connection you are saving?"
+#~ msgstr "Заменить %s сохраняемым VPN-соединением?"
+
+#~ msgid "Cannot export VPN connection"
+#~ msgstr "Не удалось экспортировать соединение VPN"
+
+#, c-format
+#~ msgid ""
+#~ "The VPN connection “%s” could not be exported to %s.\n"
+#~ "\n"
+#~ "Error: %s."
+#~ msgstr ""
+#~ "Невозможно экспортировать VPN-соединение «%s» в %s.\n"
+#~ "\n"
+#~ "Ошибка: %s."
+
+#~ msgid "Export VPN connection"
+#~ msgstr "Экспортировать VPN-соединение"
+
+#~ msgid "Name:"
+#~ msgstr "Имя:"
+
+#~ msgid "Information"
+#~ msgstr "Информация"
+
+#~ msgid "Learn more about color management"
+#~ msgstr "Узнать больше об управлении цветом"
+
+#~ msgid "Some settings must be unlocked before they can be changed."
+#~ msgstr "Некоторые настройки перед изменением нужно разблокировать."
+
+#~ msgid "Pointer Assistance"
+#~ msgstr "Помощь курсора"
+
+#~ msgid "Tap to click"
+#~ msgstr "Нажатие касанием"
+
+#~ msgid "Can’t Connect to Network"
+#~ msgstr "Не удается подключиться к сети"
+
+#~ msgid ""
+#~ "NetworkManager needs to be running to view or make connections. Contact a "
+#~ "system administrator or the software vendor."
+#~ msgstr ""
+#~ "NetworkManager должен быть запущен для просмотра или создания "
+#~ "подключений. Обратитесь к системному администратору или поставщику "
+#~ "программного обеспечения."
+
+#~ msgid "Other Devices"
+#~ msgstr "Другие устройства"
+
+#~ msgid "Turn device off"
+#~ msgstr "Выключить устройство"
+
+#~ msgid "Logout…"
+#~ msgstr "Выйти…"
+
+#, c-format
+#~ msgid "Do you want to keep %s’s files?"
+#~ msgstr "Хотите сохранить файлы пользователя %s?"
+
+#~ msgid ""
+#~ "It is possible to keep the home directory, mail spool and temporary files "
+#~ "around when deleting a user account."
+#~ msgstr ""
+#~ "Можно сохранить домашнюю папку, почтовый ящик и временные файлы при "
+#~ "удалении учётной записи пользователя."
+
+#~ msgid "_Keep Files"
+#~ msgstr "_Сохранить файлы"
+
+#~ msgid "Full name"
+#~ msgstr "Полное имя"
+
+#~ msgid ""
+#~ "Administrators can add and remove other users, and can change settings "
+#~ "for all users."
+#~ msgstr ""
+#~ "Администраторы могут добавлять и удалять пользователей, а также изменять "
+#~ "настройки всех пользователей."
 
 #~ msgid "This Week"
 #~ msgstr "На этой неделе"
