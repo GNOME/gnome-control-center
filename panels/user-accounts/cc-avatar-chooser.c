@@ -244,7 +244,7 @@ get_settings_facesdirs (void)
 {
         g_autoptr(GSettings) settings = g_settings_new ("org.gnome.desktop.interface");
         g_auto(GStrv) settings_dirs = g_settings_get_strv (settings, "avatar-directories");
-        GPtrArray *facesdirs = g_ptr_array_new ();
+        g_autoptr(GPtrArray) facesdirs = g_ptr_array_new ();
 
         if (settings_dirs != NULL) {
                 int i;
@@ -263,7 +263,7 @@ static GStrv
 get_system_facesdirs (void)
 {
         const char * const * data_dirs;
-        GPtrArray *facesdirs;
+        g_autoptr(GPtrArray) facesdirs = NULL;
         int i;
 
         facesdirs = g_ptr_array_new ();

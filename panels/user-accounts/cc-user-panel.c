@@ -232,8 +232,10 @@ setup_avatar_for_user (AdwAvatar *avatar, ActUser *user)
                                                            adw_avatar_get_size (avatar),
                                                            NULL);
                 if (pixbuf) {
-                        adw_avatar_set_custom_image (avatar,
-                                                     GDK_PAINTABLE (gdk_texture_new_for_pixbuf (pixbuf)));
+                        g_autoptr(GdkTexture) texture = NULL;
+
+                        texture = gdk_texture_new_for_pixbuf (pixbuf);
+                        adw_avatar_set_custom_image (avatar, GDK_PAINTABLE (texture));
                 }
         }
 }
@@ -304,7 +306,8 @@ sort_users (gconstpointer a, gconstpointer b, gpointer user_data)
 static void
 user_changed (CcUserPanel *self, ActUser *user)
 {
-        GSList *user_list, *l;
+        g_autoptr(GSList) user_list = NULL;
+        GSList *l;
 
         g_list_store_remove_all (self->other_users_model);
         user_list = act_user_manager_list_users (self->um);
