@@ -849,7 +849,7 @@ populate_blank_screen_row (AdwComboRow *combo_row)
   for (i = 0; i < G_N_ELEMENTS (minutes); i++)
     {
       g_autoptr (GObject) item = NULL;
-      gchar *text = NULL;
+      g_autofree gchar *text = NULL;
 
       /* Translators: Option for "Blank Screen" in "Power" panel */
       text = g_strdup_printf (g_dngettext (GETTEXT_PACKAGE, "%d minute", "%d minutes", minutes[i]), minutes[i]);
