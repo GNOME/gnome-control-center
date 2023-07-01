@@ -100,7 +100,7 @@ set_large_text_mapping (const GValue       *value,
 static void
 ua_seeing_interface_cursor_size_changed_cb (CcUaSeeingPage *self)
 {
-  const char *label;
+  g_autofree char *label = NULL;
   int cursor_size;
 
   g_assert (CC_IS_UA_SEEING_PAGE (self));
