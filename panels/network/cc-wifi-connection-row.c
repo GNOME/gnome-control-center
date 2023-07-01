@@ -307,6 +307,7 @@ update_ui (CcWifiConnectionRow *self)
 
   if (best_ap)
     {
+      g_autofree char *description = NULL;
       gchar *icon_name;
 
       if (strength < 20)
@@ -322,9 +323,11 @@ update_ui (CcWifiConnectionRow *self)
 
       g_object_set (self->strength_icon, "icon-name", icon_name, NULL);
       gtk_widget_set_child_visible (GTK_WIDGET (self->strength_icon), TRUE);
+
+      description = g_strdup_printf(_("Signal strength %d%%"), strength);
       gtk_accessible_update_property (GTK_ACCESSIBLE (self->strength_icon),
                                       GTK_ACCESSIBLE_PROPERTY_DESCRIPTION,
-                                      g_strdup_printf(_("Signal strength %d%%"), strength),
+                                      description,
                                       -1);
     }
   else

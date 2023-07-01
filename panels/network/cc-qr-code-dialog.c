@@ -84,6 +84,7 @@ cc_qr_code_dialog_set_property (GObject      *object,
 static void
 cc_qr_code_dialog_constructed (GObject *object)
 {
+  g_autoptr (CcQrCode) qr_code = NULL;
   g_autoptr (GVariant) variant = NULL;
   g_autoptr (GError) error = NULL;
   g_autofree gchar *qr_connection_string = NULL;
@@ -91,7 +92,6 @@ cc_qr_code_dialog_constructed (GObject *object)
   g_autofree gchar *ssid_text = NULL;
   NMSettingWireless *setting;
   CcQrCodeDialog *self;
-  CcQrCode *qr_code;
   GBytes *ssid;
 
   self = CC_QR_CODE_DIALOG (object);
