@@ -182,10 +182,22 @@ drop_cb (GtkDropTarget    *drop_target,
 }
 
 static void
+cc_search_panel_row_finalize (GObject *object)
+{
+  CcSearchPanelRow  *self = CC_SEARCH_PANEL_ROW (object);
+
+  g_clear_object (&self->app_info);
+
+  G_OBJECT_CLASS (cc_search_panel_row_parent_class)->finalize (object);
+}
+
+static void
 cc_search_panel_row_class_init (CcSearchPanelRowClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
+
+  object_class->finalize = cc_search_panel_row_finalize;
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/search/cc-search-panel-row.ui");
 
