@@ -905,8 +905,7 @@ show_user (ActUser *user, CcUserPanel *self)
         gtk_widget_set_visible (GTK_WIDGET (self->other_users), show);
         gtk_widget_set_visible (GTK_WIDGET (self->add_user_button), show && is_admin);
 
-        if (self->permission != NULL)
-                on_permission_changed (self);
+        on_permission_changed (self);
 }
 
 static void
@@ -1212,11 +1211,13 @@ would_demote_only_admin (ActUser *user)
 static void
 on_permission_changed (CcUserPanel *self)
 {
-        gboolean is_authorized;
+        gboolean is_authorized = FALSE;
         gboolean self_selected;
         ActUser *user;
 
-        is_authorized = g_permission_get_allowed (G_PERMISSION (self->permission));
+        if (self->permission != NULL) {
+                is_authorized = g_permission_get_allowed (G_PERMISSION (self->permission));
+        }
 
         gtk_widget_set_sensitive (self->add_user_button, is_authorized);
 
