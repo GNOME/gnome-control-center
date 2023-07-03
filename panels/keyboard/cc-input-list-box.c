@@ -239,10 +239,10 @@ row_layout_cb (CcInputListBox *self,
   layout_variant = cc_input_source_get_layout_variant (source);
 
   if (layout_variant && layout_variant[0])
-    commandline = g_strdup_printf ("gkbd-keyboard-display -l \"%s\t%s\"",
+    commandline = g_strdup_printf ("tecla \"%s+%s\"",
 				   layout, layout_variant);
   else
-    commandline = g_strdup_printf ("gkbd-keyboard-display -l %s",
+    commandline = g_strdup_printf ("tecla %s",
 				   layout);
 
   g_spawn_command_line_async (commandline, NULL);
