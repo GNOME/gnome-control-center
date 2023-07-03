@@ -166,7 +166,12 @@ cc_permission_infobar_set_permission (CcPermissionInfobar *self,
                                       GPermission         *permission)
 {
   g_return_if_fail (CC_IS_PERMISSION_INFOBAR (self));
-  g_return_if_fail (G_IS_PERMISSION (permission));
+
+  if (permission == NULL)
+    {
+      g_warning ("Missing GPermission object");
+      return;
+    }
 
   self->permission = permission;
 
@@ -190,8 +195,12 @@ cc_permission_infobar_set_title (CcPermissionInfobar *self,
 {
   g_return_if_fail (CC_IS_PERMISSION_INFOBAR (self));
 
+  if (self->permission == NULL)
+    title = _("Error: some settings cannot be unlocked");
+
   if (title == NULL)
     title = _("Unlock to Change Settings");
 
   adw_banner_set_title (self->banner, title);
+  adw_banner_set_button_label (self->banner, self->permission ? _("_Unlock…") : NULL);
 }
