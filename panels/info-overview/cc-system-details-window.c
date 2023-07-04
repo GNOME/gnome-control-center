@@ -52,6 +52,8 @@ struct _CcSystemDetailsWindow
 {
   AdwWindow parent;
 
+  AdwToastOverlay   *toast_overlay;
+
   /* Hardware Information */
   CcInfoEntry       *hardware_model_row;
   CcInfoEntry       *firmware_version_row;
@@ -848,6 +850,7 @@ on_copy_button_clicked_cb (GtkWidget              *widget,
   display = gdk_display_get_default ();
   clip_board = gdk_display_get_clipboard (display);
   gdk_clipboard_set_text (clip_board, result_str->str);
+  adw_toast_overlay_add_toast (self->toast_overlay, adw_toast_new (_("Details copied to clipboard")));
 }
 
 static void
@@ -921,8 +924,7 @@ cc_system_details_window_class_init (CcSystemDetailsWindowClass *klass)
   
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/info-overview/cc-system-details-window.ui");
 
-
-
+  gtk_widget_class_bind_template_child (widget_class, CcSystemDetailsWindow, toast_overlay);
   gtk_widget_class_bind_template_child (widget_class, CcSystemDetailsWindow, disk_row);
   gtk_widget_class_bind_template_child (widget_class, CcSystemDetailsWindow, gnome_version_row);
   gtk_widget_class_bind_template_child (widget_class, CcSystemDetailsWindow, graphics_row);
