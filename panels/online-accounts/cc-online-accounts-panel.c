@@ -51,7 +51,7 @@ struct _CcOnlineAccountsPanel
   GtkBox        *editor_box;
   GtkLabel      *notification_label;
   GtkRevealer   *notification_revealer;
-  GtkLabel      *offline_label;
+  AdwBanner     *offline_banner;
   GtkListBox    *providers_listbox;
   GtkButton     *remove_account_button;
   GtkBox        *accounts_vbox;
@@ -869,7 +869,7 @@ cc_online_accounts_panel_class_init (CcOnlineAccountsPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcOnlineAccountsPanel, close_notification_button);
   gtk_widget_class_bind_template_child (widget_class, CcOnlineAccountsPanel, notification_label);
   gtk_widget_class_bind_template_child (widget_class, CcOnlineAccountsPanel, notification_revealer);
-  gtk_widget_class_bind_template_child (widget_class, CcOnlineAccountsPanel, offline_label);
+  gtk_widget_class_bind_template_child (widget_class, CcOnlineAccountsPanel, offline_banner);
   gtk_widget_class_bind_template_child (widget_class, CcOnlineAccountsPanel, providers_listbox);
 
   gtk_widget_class_bind_template_callback (widget_class, on_accounts_listbox_row_activated);
@@ -901,8 +901,8 @@ cc_online_accounts_panel_init (CcOnlineAccountsPanel *self)
   monitor = g_network_monitor_get_default();
   g_object_bind_property (monitor,
                           "network-available",
-                          self->offline_label,
-                          "visible",
+                          self->offline_banner,
+                          "revealed",
                           G_BINDING_SYNC_CREATE | G_BINDING_INVERT_BOOLEAN);
 
   g_object_bind_property (monitor,
