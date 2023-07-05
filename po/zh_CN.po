@@ -35,8 +35,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2023-03-30 23:42+0000\n"
-"PO-Revision-Date: 2023-03-30 21:10-0400\n"
+"POT-Creation-Date: 2023-07-02 20:13+0000\n"
+"PO-Revision-Date: 2023-07-05 18:10+0800\n"
 "Last-Translator: Boyuan Yang <073plan@gmail.com>\n"
 "Language-Team: Chinese - China <i18n-zh@googlegroups.com>\n"
 "Language: zh_CN\n"
@@ -44,7 +44,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.2.2\n"
+"X-Generator: Poedit 3.3.1\n"
 
 #: panels/applications/cc-applications-panel.c:822
 msgid "System Bus"
@@ -191,7 +191,7 @@ msgstr "接收系统搜索并发送结果"
 #: panels/user-accounts/cc-user-panel.c:821
 #: panels/user-accounts/cc-user-panel.c:951
 #: panels/wwan/cc-wwan-device-page.c:477
-#: subprojects/gvc/gvc-mixer-control.c:1900
+#: subprojects/gvc/gvc-mixer-control.c:1908
 msgid "Disabled"
 msgstr "已禁用"
 
@@ -1291,26 +1291,26 @@ msgctxt "hotspot"
 msgid "Hotspot"
 msgstr "热点"
 
-#: panels/datetime/cc-datetime-panel.c:167
+#: panels/datetime/cc-datetime-panel.c:169
 msgid "24-hour"
 msgstr "24 小时"
 
-#: panels/datetime/cc-datetime-panel.c:169
+#: panels/datetime/cc-datetime-panel.c:171
 msgid "AM / PM"
 msgstr "上午/下午"
 
 #. Translators: This is the full date and time format used in 12-hour mode.
-#: panels/datetime/cc-datetime-panel.c:240
+#: panels/datetime/cc-datetime-panel.c:242
 msgid "%e %B %Y, %l:%M %p"
 msgstr "%Y年%m月%d日，%p %-l:%M"
 
 #. Translators: This is the full date and time format used in 24-hour mode.
-#: panels/datetime/cc-datetime-panel.c:245
+#: panels/datetime/cc-datetime-panel.c:247
 msgid "%e %B %Y, %R"
 msgstr "%Y年%m月%d日，%R"
 
 #. Translators: "city, country"
-#: panels/datetime/cc-datetime-panel.c:398
+#: panels/datetime/cc-datetime-panel.c:400
 #, c-format
 msgctxt "timezone loc"
 msgid "%s, %s"
@@ -1318,7 +1318,7 @@ msgstr "%s，%s"
 
 #. Update the timezone on the listbow row
 #. Translators: "timezone (details)"
-#: panels/datetime/cc-datetime-panel.c:415
+#: panels/datetime/cc-datetime-panel.c:417
 #, c-format
 msgctxt "timezone desc"
 msgid "%s (%s)"
@@ -1542,15 +1542,15 @@ msgstr "开"
 msgid "Off"
 msgstr "关"
 
-#: panels/display/cc-display-panel.c:936
+#: panels/display/cc-display-panel.c:937
 msgid "Apply Changes?"
 msgstr "应用更改？"
 
-#: panels/display/cc-display-panel.c:941
+#: panels/display/cc-display-panel.c:942
 msgid "Changes Cannot be Applied"
 msgstr "无法应用更改"
 
-#: panels/display/cc-display-panel.c:943
+#: panels/display/cc-display-panel.c:944
 msgid "This could be due to hardware limitations."
 msgstr "这可能是硬件限制造成的。"
 
@@ -1986,6 +1986,10 @@ msgstr "报告已复制到剪贴板"
 #: panels/firmware-security/cc-firmware-security-dialog.ui:22
 msgid "Device Security Status"
 msgstr "设备安全状态"
+
+#: panels/firmware-security/cc-firmware-security-dialog.ui:87
+msgid "Copy Technical Report"
+msgstr "复制技术性报告"
 
 #: panels/firmware-security/cc-firmware-security-help-dialog.ui:6
 msgid "About Device Security"
@@ -2607,7 +2611,7 @@ msgctxt "keyboard key"
 msgid "Print Screen"
 msgstr "打印屏幕"
 
-#: panels/keyboard/cc-keyboard-panel.c:214
+#: panels/keyboard/cc-keyboard-panel.c:215
 #, c-format
 msgid ""
 "Input sources can be switched using the %s keyboard shortcut.\n"
@@ -3157,7 +3161,7 @@ msgstr "代理"
 msgid "Save"
 msgstr "保存"
 
-#: panels/network/cc-network-panel.ui:75 panels/network/cc-network-panel.ui:80
+#: panels/network/cc-network-panel.ui:75
 msgid "Other Devices"
 msgstr "其他设备"
 
@@ -3176,19 +3180,19 @@ msgstr "未设置"
 
 #: panels/network/cc-net-proxy-page.c:168
 #: panels/network/cc-net-proxy-page.ui:24
-#: panels/network/connection-editor/ip4-page.ui:175
-#: panels/network/connection-editor/ip4-page.ui:227
+#: panels/network/connection-editor/ip4-page.ui:181
+#: panels/network/connection-editor/ip4-page.ui:233
 #: panels/network/connection-editor/ip6-page.ui:36
-#: panels/network/connection-editor/ip6-page.ui:185
-#: panels/network/connection-editor/ip6-page.ui:237
-#: panels/wacom/cc-wacom-page.c:656
+#: panels/network/connection-editor/ip6-page.ui:192
+#: panels/network/connection-editor/ip6-page.ui:244
+#: panels/wacom/cc-wacom-page.c:659
 msgid "Automatic"
 msgstr "自动"
 
 #: panels/network/cc-net-proxy-page.c:170
 #: panels/network/cc-net-proxy-page.ui:25
-#: panels/network/connection-editor/ip4-page.ui:55
-#: panels/network/connection-editor/ip6-page.ui:65
+#: panels/network/connection-editor/ip4-page.ui:58
+#: panels/network/connection-editor/ip6-page.ui:69
 msgid "Manual"
 msgstr "手动"
 
@@ -3628,8 +3632,8 @@ msgstr "DNS6"
 #: panels/network/connection-editor/ce-page-details.c:423
 #: panels/network/connection-editor/details-page.ui:175
 #: panels/network/connection-editor/details-page.ui:192
-#: panels/network/connection-editor/ip4-page.ui:165
-#: panels/network/connection-editor/ip6-page.ui:175
+#: panels/network/connection-editor/ip4-page.ui:171
+#: panels/network/connection-editor/ip6-page.ui:182
 #: panels/network/net-device-ethernet.c:169
 #: panels/network/net-device-ethernet.c:171
 #: panels/network/net-device-mobile.c:453
@@ -3664,21 +3668,21 @@ msgstr "自动"
 msgid "Identity"
 msgstr "身份"
 
-#: panels/network/connection-editor/ce-page-ip4.c:264
-#: panels/network/connection-editor/ce-page-ip6.c:245
+#: panels/network/connection-editor/ce-page-ip4.c:260
+#: panels/network/connection-editor/ce-page-ip6.c:239
 msgid "Delete Address"
 msgstr "删除地址"
 
-#: panels/network/connection-editor/ce-page-ip4.c:423
-#: panels/network/connection-editor/ce-page-ip6.c:392
+#: panels/network/connection-editor/ce-page-ip4.c:419
+#: panels/network/connection-editor/ce-page-ip6.c:386
 msgid "Delete Route"
 msgstr "删除路由"
 
-#: panels/network/connection-editor/ce-page-ip4.c:774
+#: panels/network/connection-editor/ce-page-ip4.c:763
 msgid "IPv4"
 msgstr "IPv4"
 
-#: panels/network/connection-editor/ce-page-ip6.c:744
+#: panels/network/connection-editor/ce-page-ip6.c:727
 msgid "IPv6"
 msgstr "IPv6"
 
@@ -3803,79 +3807,79 @@ msgstr "IPv4 方式(_4)"
 msgid "Automatic (DHCP)"
 msgstr "自动 (DHCP)"
 
-#: panels/network/connection-editor/ip4-page.ui:45
-#: panels/network/connection-editor/ip6-page.ui:55
+#: panels/network/connection-editor/ip4-page.ui:47
+#: panels/network/connection-editor/ip6-page.ui:58
 msgid "Link-Local Only"
 msgstr "仅本地链路"
 
-#: panels/network/connection-editor/ip4-page.ui:65
-#: panels/network/connection-editor/ip6-page.ui:75
+#: panels/network/connection-editor/ip4-page.ui:69
+#: panels/network/connection-editor/ip6-page.ui:80
 msgid "Disable"
 msgstr "禁用"
 
-#: panels/network/connection-editor/ip4-page.ui:75
-#: panels/network/connection-editor/ip6-page.ui:85
+#: panels/network/connection-editor/ip4-page.ui:80
+#: panels/network/connection-editor/ip6-page.ui:91
 msgid "Shared to other computers"
 msgstr "与其他计算机共享"
 
-#: panels/network/connection-editor/ip4-page.ui:98
-#: panels/network/connection-editor/ip6-page.ui:108
+#: panels/network/connection-editor/ip4-page.ui:104
+#: panels/network/connection-editor/ip6-page.ui:115
 msgid "Addresses"
 msgstr "地址"
 
-#: panels/network/connection-editor/ip4-page.ui:112
-#: panels/network/connection-editor/ip4-page.ui:250
-#: panels/network/connection-editor/ip6-page.ui:122
-#: panels/network/connection-editor/ip6-page.ui:260
+#: panels/network/connection-editor/ip4-page.ui:118
+#: panels/network/connection-editor/ip4-page.ui:256
+#: panels/network/connection-editor/ip6-page.ui:129
+#: panels/network/connection-editor/ip6-page.ui:267
 #: panels/printers/pp-details-dialog.ui:114
 msgid "Address"
 msgstr "地址"
 
-#: panels/network/connection-editor/ip4-page.ui:124
-#: panels/network/connection-editor/ip4-page.ui:262
+#: panels/network/connection-editor/ip4-page.ui:130
+#: panels/network/connection-editor/ip4-page.ui:268
 msgid "Netmask"
 msgstr "子网掩码"
 
-#: panels/network/connection-editor/ip4-page.ui:136
-#: panels/network/connection-editor/ip4-page.ui:274
-#: panels/network/connection-editor/ip6-page.ui:146
-#: panels/network/connection-editor/ip6-page.ui:284
+#: panels/network/connection-editor/ip4-page.ui:142
+#: panels/network/connection-editor/ip4-page.ui:280
+#: panels/network/connection-editor/ip6-page.ui:153
+#: panels/network/connection-editor/ip6-page.ui:291
 msgid "Gateway"
 msgstr "网关"
 
-#: panels/network/connection-editor/ip4-page.ui:183
-#: panels/network/connection-editor/ip6-page.ui:193
+#: panels/network/connection-editor/ip4-page.ui:189
+#: panels/network/connection-editor/ip6-page.ui:200
 msgid "Automatic DNS"
 msgstr "自动 DNS"
 
-#: panels/network/connection-editor/ip4-page.ui:192
-#: panels/network/connection-editor/ip6-page.ui:202
+#: panels/network/connection-editor/ip4-page.ui:198
+#: panels/network/connection-editor/ip6-page.ui:209
 msgid "DNS server address(es)"
 msgstr "DNS 服务器地址"
 
-#: panels/network/connection-editor/ip4-page.ui:200
-#: panels/network/connection-editor/ip6-page.ui:210
+#: panels/network/connection-editor/ip4-page.ui:206
+#: panels/network/connection-editor/ip6-page.ui:217
 msgid "Separate IP addresses with commas"
 msgstr "使用逗号分隔 IP 地址"
 
-#: panels/network/connection-editor/ip4-page.ui:217
-#: panels/network/connection-editor/ip6-page.ui:227
+#: panels/network/connection-editor/ip4-page.ui:223
+#: panels/network/connection-editor/ip6-page.ui:234
 msgid "Routes"
 msgstr "路由"
 
-#: panels/network/connection-editor/ip4-page.ui:235
-#: panels/network/connection-editor/ip6-page.ui:245
+#: panels/network/connection-editor/ip4-page.ui:241
+#: panels/network/connection-editor/ip6-page.ui:252
 msgid "Automatic Routes"
 msgstr "自动路由"
 
 #. Translators: Please see https://en.wikipedia.org/wiki/Metrics_(networking)
-#: panels/network/connection-editor/ip4-page.ui:285
-#: panels/network/connection-editor/ip6-page.ui:295
+#: panels/network/connection-editor/ip4-page.ui:291
+#: panels/network/connection-editor/ip6-page.ui:302
 msgid "Metric"
 msgstr "跃点"
 
-#: panels/network/connection-editor/ip4-page.ui:308
-#: panels/network/connection-editor/ip6-page.ui:318
+#: panels/network/connection-editor/ip4-page.ui:314
+#: panels/network/connection-editor/ip6-page.ui:325
 msgid "Use this connection _only for resources on its network"
 msgstr "仅对该网络上的资源使用此连接(_O)"
 
@@ -3883,12 +3887,12 @@ msgstr "仅对该网络上的资源使用此连接(_O)"
 msgid "IPv_6 Method"
 msgstr "IPv6 方式(_6)"
 
-#: panels/network/connection-editor/ip6-page.ui:45
+#: panels/network/connection-editor/ip6-page.ui:47
 msgid "Automatic, DHCP only"
 msgstr "自动，仅 DHCP"
 
-#: panels/network/connection-editor/ip6-page.ui:134
-#: panels/network/connection-editor/ip6-page.ui:272
+#: panels/network/connection-editor/ip6-page.ui:141
+#: panels/network/connection-editor/ip6-page.ui:279
 msgid "Prefix"
 msgstr "前缀"
 
@@ -6112,7 +6116,7 @@ msgstr "其它"
 msgid "Add Location"
 msgstr "添加位置"
 
-#: panels/search/cc-search-panel.c:165
+#: panels/search/cc-search-panel.c:166
 msgid "No apps found"
 msgstr "未找到应用"
 
@@ -6710,6 +6714,12 @@ msgstr "整个窗口"
 #: panels/universal-access/cc-ua-hearing-page.ui:63
 msgid "_Test Flash"
 msgstr "测试闪烁(_T)"
+
+#. '#' is a dummy target to make 'Sound' clickable
+#. TRANSLATORS: Don't translate  <a href='#'> and </a>
+#: panels/universal-access/cc-ua-hearing-page.c:159
+msgid "System volume can be adjusted in <a href='#'>Sound</a> settings."
+msgstr "系统音量可以在<a href='#'>声音</a>设置中调整。"
 
 #: panels/universal-access/cc-ua-mouse-page.ui:10
 msgid "_Mouse Keys"
@@ -7931,7 +7941,7 @@ msgid "Delete the selected user account"
 msgstr "删除选中的用户帐号"
 
 #: panels/user-accounts/cc-user-panel.c:1341
-#: panels/user-accounts/cc-user-panel.c:1482
+#: panels/user-accounts/cc-user-panel.c:1484
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -7939,7 +7949,7 @@ msgstr ""
 "要删除选中的用户帐号，\n"
 "请先点击 * 图标"
 
-#: panels/user-accounts/cc-user-panel.c:1528
+#: panels/user-accounts/cc-user-panel.c:1530
 msgid "Unlock to Add Users and Change Settings"
 msgstr "解锁以允许用户更改设置"
 
@@ -8312,7 +8322,7 @@ msgid "External pad device"
 msgstr "外部平板设备"
 
 #. All displays item
-#: panels/wacom/cc-wacom-page.c:643
+#: panels/wacom/cc-wacom-page.c:646
 msgid "All Displays"
 msgstr "全部显示器"
 
@@ -9128,7 +9138,7 @@ msgstr "包含应用窗口初始宽度、高度和最大化状态的元组。"
 
 #. translators:
 #. * The number of sound outputs on a particular device
-#: subprojects/gvc/gvc-mixer-control.c:1907
+#: subprojects/gvc/gvc-mixer-control.c:1915
 #, c-format
 msgid "%u Output"
 msgid_plural "%u Outputs"
@@ -9136,13 +9146,13 @@ msgstr[0] "%u 路输出"
 
 #. translators:
 #. * The number of sound inputs on a particular device
-#: subprojects/gvc/gvc-mixer-control.c:1917
+#: subprojects/gvc/gvc-mixer-control.c:1925
 #, c-format
 msgid "%u Input"
 msgid_plural "%u Inputs"
 msgstr[0] "%u 路输入"
 
-#: subprojects/gvc/gvc-mixer-control.c:2867
+#: subprojects/gvc/gvc-mixer-control.c:2876
 msgid "System Sounds"
 msgstr "系统声音"
 
