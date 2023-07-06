@@ -179,6 +179,7 @@ cc_avatar_chooser_select_file (CcAvatarChooser *self)
         pictures_folder = g_file_new_for_path (g_get_user_special_dir (G_USER_DIRECTORY_PICTURES));
         gtk_file_dialog_set_initial_folder (file_dialog, pictures_folder);
 
+        gtk_popover_popdown (GTK_POPOVER (self));
         gtk_file_dialog_open (file_dialog,
                               toplevel,
                               NULL,
