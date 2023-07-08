@@ -313,15 +313,6 @@ dialog_tick_cb (gpointer user_data)
 }
 
 static void
-dialog_enabled_notify_cb (GtkSwitch        *sw,
-                          GParamSpec       *pspec,
-                          CcNightLightPage *self)
-{
-  g_settings_set_boolean (self->settings_display, "night-light-enabled",
-                          gtk_switch_get_active (sw));
-}
-
-static void
 dialog_undisable_call_cb (GObject      *source_object,
                           GAsyncResult *res,
                           gpointer      user_data)
@@ -693,7 +684,6 @@ cc_night_light_page_class_init (CcNightLightPageClass *klass)
 
   gtk_widget_class_bind_template_callback (widget_class, dialog_am_pm_from_button_clicked_cb);
   gtk_widget_class_bind_template_callback (widget_class, dialog_am_pm_to_button_clicked_cb);
-  gtk_widget_class_bind_template_callback (widget_class, dialog_enabled_notify_cb);
   gtk_widget_class_bind_template_callback (widget_class, dialog_format_from_hours_combobox);
   gtk_widget_class_bind_template_callback (widget_class, dialog_format_to_hours_combobox);
   gtk_widget_class_bind_template_callback (widget_class, dialog_format_from_minutes_combobox);
