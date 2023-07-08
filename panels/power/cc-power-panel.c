@@ -38,29 +38,25 @@ struct _CcPowerPanel
 {
   CcPanel            parent_instance;
 
-  GtkListBoxRow     *als_row;
-  GtkSwitch         *als_switch;
+  AdwSwitchRow      *als_switch;
   GtkDialog         *automatic_suspend_dialog;
   GtkLabel          *automatic_suspend_label;
   GtkListBoxRow     *automatic_suspend_row;
   GtkListBox        *battery_listbox;
-  AdwActionRow      *battery_percentage_row;
-  GtkSwitch         *battery_percentage_switch;
+  AdwSwitchRow      *battery_percentage_switch;
   GtkSizeGroup      *battery_row_sizegroup;
   AdwPreferencesGroup *battery_section;
   AdwComboRow       *blank_screen_row;
   GtkListBox        *device_listbox;
   AdwPreferencesGroup *device_section;
-  GtkListBoxRow     *dim_screen_row;
-  GtkSwitch         *dim_screen_switch;
+  AdwSwitchRow      *dim_screen_switch;
   AdwPreferencesGroup *general_section;
   GtkSizeGroup      *level_sizegroup;
   AdwComboRow       *power_button_row;
   GtkListBox        *power_profile_listbox;
   GtkListBox        *power_profile_info_listbox;
   AdwPreferencesGroup *power_profile_section;
-  AdwActionRow      *power_saver_low_battery_row;
-  GtkSwitch         *power_saver_low_battery_switch;
+  AdwSwitchRow      *power_saver_low_battery_switch;
   GtkSizeGroup      *row_sizegroup;
   GtkComboBox       *suspend_on_battery_delay_combo;
   GtkLabel          *suspend_on_battery_delay_label;
@@ -198,7 +194,7 @@ update_power_saver_low_battery_row_visibility (CcPowerPanel *self)
 
   composite = up_client_get_display_device (self->up_client);
   g_object_get (composite, "kind", &kind, NULL);
-  gtk_widget_set_visible (GTK_WIDGET (self->power_saver_low_battery_row),
+  gtk_widget_set_visible (GTK_WIDGET (self->power_saver_low_battery_switch),
                           self->power_profiles_proxy && kind == UP_DEVICE_KIND_BATTERY);
 }
 
@@ -335,7 +331,7 @@ static void
 als_switch_changed_cb (CcPowerPanel *self)
 {
   gboolean enabled;
-  enabled = gtk_switch_get_active (self->als_switch);
+  enabled = adw_switch_row_get_active (self->als_switch);
   g_debug ("Setting ALS enabled %s", enabled ? "on" : "off");
   g_settings_set_boolean (self->gsd_settings, "ambient-enabled", enabled);
 }
@@ -353,14 +349,14 @@ als_enabled_state_changed (CcPowerPanel *self)
         visible = g_variant_get_boolean (v);
     }
 
-  if (gtk_widget_get_visible (GTK_WIDGET (self->als_row)) == visible)
+  if (gtk_widget_get_visible (GTK_WIDGET (self->als_switch)) == visible)
     return;
 
   enabled = g_settings_get_boolean (self->gsd_settings, "ambient-enabled");
   g_debug ("ALS enabled: %s", enabled ? "on" : "off");
   g_signal_handlers_block_by_func (self->als_switch, als_switch_changed_cb, self);
-  gtk_switch_set_active (self->als_switch, enabled);
-  gtk_widget_set_visible (GTK_WIDGET (self->als_row), visible && self->has_brightness);
+  adw_switch_row_set_active (self->als_switch, enabled);
+  gtk_widget_set_visible (GTK_WIDGET (self->als_switch), visible && self->has_brightness);
   g_signal_handlers_unblock_by_func (self->als_switch, als_switch_changed_cb, self);
 }
 
@@ -833,7 +829,7 @@ got_brightness_cb (GObject      *source_object,
   self = user_data;
   self->has_brightness = brightness >= 0.0;
 
-  gtk_widget_set_visible (GTK_WIDGET (self->dim_screen_row), self->has_brightness);
+  gtk_widget_set_visible (GTK_WIDGET (self->dim_screen_switch), self->has_brightness);
   als_enabled_state_changed (self);
 }
 
@@ -1379,7 +1375,7 @@ setup_general_section (CcPowerPanel *self)
 
   if (self->has_batteries)
     {
-      gtk_widget_set_visible (GTK_WIDGET (self->battery_percentage_row), TRUE);
+      gtk_widget_set_visible (GTK_WIDGET (self->battery_percentage_switch), TRUE);
 
       g_settings_bind (self->interface_settings, "show-battery-percentage",
                        self->battery_percentage_switch, "active",
@@ -1452,20 +1448,17 @@ cc_power_panel_class_init (CcPowerPanelClass *klass)
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/power/cc-power-panel.ui");
 
-  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, als_row);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, als_switch);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, automatic_suspend_dialog);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, automatic_suspend_label);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, automatic_suspend_row);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, battery_listbox);
-  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, battery_percentage_row);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, battery_percentage_switch);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, battery_row_sizegroup);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, battery_section);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, blank_screen_row);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, device_listbox);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, device_section);
-  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, dim_screen_row);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, dim_screen_switch);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, general_section);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, level_sizegroup);
@@ -1473,7 +1466,6 @@ cc_power_panel_class_init (CcPowerPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, power_profile_listbox);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, power_profile_info_listbox);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, power_profile_section);
-  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, power_saver_low_battery_row);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, power_saver_low_battery_switch);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, row_sizegroup);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, suspend_on_battery_delay_combo);

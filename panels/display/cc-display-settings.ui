@@ -13,18 +13,8 @@
           <class name="boxed-list" />
         </style>
         <child>
-          <object class="AdwActionRow" id="enabled_row">
-            <property name="activatable-widget">enabled_switch</property>
-            <child>
-              <object class="GtkSwitch" id="enabled_switch">
-                <property name="halign">end</property>
-                <property name="valign">center</property>
-                <accessibility>
-                  <property name="label" translatable="yes">Enabled</property>
-                </accessibility>
-                <signal name="notify::active" handler="on_enabled_switch_active_changed_cb" swapped="yes"/>
-              </object>
-            </child>
+          <object class="AdwSwitchRow" id="enabled_switch">
+            <signal name="notify::active" handler="on_enabled_switch_active_changed_cb" swapped="yes"/>
           </object>
         </child>
       </object>
@@ -59,18 +49,10 @@
           </object>
         </child>
         <child>
-          <object class="AdwActionRow" id="underscanning_row">
+          <object class="AdwSwitchRow" id="underscanning_switch">
             <property name="width_request">100</property>
             <property name="title" translatable="yes">Adjust for TV</property>
-            <property name="activatable-widget">underscanning_switch</property>
-            <child>
-              <object class="GtkSwitch" id="underscanning_switch">
-                <property name="can_focus">False</property>
-                <property name="halign">end</property>
-                <property name="valign">center</property>
-                <signal name="notify::active" handler="on_underscanning_switch_active_changed_cb" swapped="yes"/>
-              </object>
-            </child>
+            <signal name="notify::active" handler="on_underscanning_switch_active_changed_cb" swapped="yes"/>
           </object>
         </child>
         <child>

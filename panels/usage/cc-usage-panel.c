@@ -28,18 +28,18 @@
 
 struct _CcUsagePanel
 {
-  CcPanel     parent_instance;
+  CcPanel         parent_instance;
 
-  GSettings  *privacy_settings;
+  GSettings      *privacy_settings;
 
-  GtkSwitch   *recently_used_switch;
-  AdwComboRow *retain_history_combo;
+  AdwSwitchRow   *recently_used_switch;
+  AdwComboRow    *retain_history_combo;
 
-  GtkSwitch   *purge_trash_switch;
-  GtkSwitch   *purge_temp_switch;
-  AdwComboRow *purge_after_combo;
-  GtkButton   *purge_temp_button;
-  GtkButton   *purge_trash_button;
+  AdwSwitchRow   *purge_trash_switch;
+  AdwSwitchRow   *purge_temp_switch;
+  AdwComboRow    *purge_after_combo;
+  GtkButton      *purge_temp_button;
+  GtkButton      *purge_trash_button;
 };
 
 CC_PANEL_REGISTER (CcUsagePanel, cc_usage_panel)

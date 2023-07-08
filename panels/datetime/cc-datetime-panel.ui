@@ -118,16 +118,10 @@
         <child>
           <object class="AdwPreferencesGroup">
             <child>
-              <object class="AdwActionRow" id="auto_datetime_row">
+              <object class="AdwSwitchRow" id="network_time_switch">
                 <property name="title" translatable="yes">Automatic _Date &amp;amp; Time</property>
                 <property name="subtitle" translatable="yes">Requires internet access</property>
                 <property name="use_underline">True</property>
-                <property name="activatable_widget">network_time_switch</property>
-                <child>
-                  <object class="GtkSwitch" id="network_time_switch">
-                    <property name="valign">center</property>
-                  </object>
-                </child>
               </object>
             </child>
             <child>
@@ -155,16 +149,10 @@
         <child>
           <object class="AdwPreferencesGroup">
             <child>
-              <object class="AdwActionRow" id="auto_timezone_row">
+              <object class="AdwSwitchRow" id="auto_timezone_switch">
                 <property name="title" translatable="yes">Automatic Time _Zone</property>
                 <property name="subtitle" translatable="yes">Requires location services enabled and internet access</property>
                 <property name="use_underline">True</property>
-                <property name="activatable_widget">auto_timezone_switch</property>
-                <child>
-                  <object class="GtkSwitch" id="auto_timezone_switch">
-                    <property name="valign">center</property>
-                  </object>
-                </child>
               </object>
             </child>
             <child>
@@ -213,51 +201,28 @@
           <object class="AdwPreferencesGroup">
             <property name="title" translatable="yes">Clock &amp;amp; Calendar</property>
             <child>
-              <object class="AdwActionRow">
+              <object class="AdwSwitchRow" id="weekday_switch">
                 <property name="title" translatable="yes">Week Day</property>
                 <property name="use_underline">True</property>
-                <property name="activatable_widget">weekday_switch</property>
-                <child>
-                  <object class="GtkSwitch" id="weekday_switch">
-                    <property name="valign">center</property>
-                  </object>
-                </child>
               </object>
             </child>
             <child>
-              <object class="AdwActionRow">
+              <object class="AdwSwitchRow" id="date_switch">
                 <property name="title" translatable="yes">Date</property>
                 <property name="use_underline">True</property>
-                <property name="activatable_widget">date_switch</property>
-                <child>
-                  <object class="GtkSwitch" id="date_switch">
-                    <property name="valign">center</property>
-                  </object>
-                </child>
               </object>
             </child>
             <child>
-              <object class="AdwActionRow">
+              <object class="AdwSwitchRow" id="seconds_switch">
                 <property name="title" translatable="yes">Seconds</property>
                 <property name="use_underline">True</property>
-                <property name="activatable_widget">seconds_switch</property>
-                <child>
-                  <object class="GtkSwitch" id="seconds_switch">
-                    <property name="valign">center</property>
-                  </object>
-                </child>
               </object>
             </child>
             <child>
-              <object class="AdwActionRow">
+              <object class="AdwSwitchRow" id="week_numbers_switch">
                 <property name="title" translatable="yes">Week Numbers</property>
                 <property name="use_underline">True</property>
                 <property name="activatable_widget">week_numbers_switch</property>
-                <child>
-                  <object class="GtkSwitch" id="week_numbers_switch">
-                    <property name="valign">center</property>
-                  </object>
-                </child>
               </object>
             </child>
           </object>

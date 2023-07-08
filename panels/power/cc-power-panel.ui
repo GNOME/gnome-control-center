@@ -122,28 +122,16 @@
           <object class="AdwPreferencesGroup" id="power_saving_section">
             <property name="title" translatable="yes">Power Saving Options</property>
             <child>
-              <object class="AdwActionRow" id="als_row">
+              <object class="AdwSwitchRow" id="als_switch">
                 <property name="title" translatable="yes">Automatic Screen Brightness</property>
                 <property name="subtitle" translatable="yes">Screen brightness adjusts to the surrounding light.</property>
-                <property name="activatable_widget">als_switch</property>
-                <child>
-                  <object class="GtkSwitch" id="als_switch">
-                    <property name="valign">center</property>
-                    <signal name="notify::active" handler="als_switch_changed_cb" object="CcPowerPanel" swapped="yes"/>
-                  </object>
-                </child>
+                <signal name="notify::active" handler="als_switch_changed_cb" object="CcPowerPanel" swapped="yes"/>
               </object>
             </child>
             <child>
-              <object class="AdwActionRow" id="dim_screen_row">
+              <object class="AdwSwitchRow" id="dim_screen_switch">
                 <property name="title" translatable="yes">Dim Screen</property>
                 <property name="subtitle" translatable="yes">Reduces the screen brightness when the computer is inactive.</property>
-                <property name="activatable_widget">dim_screen_switch</property>
-                <child>
-                  <object class="GtkSwitch" id="dim_screen_switch">
-                    <property name="valign">center</property>
-                  </object>
-                </child>
               </object>
             </child>
             <child>
@@ -155,17 +143,11 @@
               </object>
             </child>
             <child>
-              <object class="AdwActionRow" id="power_saver_low_battery_row">
+              <object class="AdwSwitchRow" id="power_saver_low_battery_switch">
                 <property name="visible">False</property>
                 <property name="title" translatable="yes">Automatic Power Saver</property>
                 <property name="subtitle" translatable="yes">Enables power saver mode when battery is low.</property>
                 <property name="use_underline">True</property>
-                <property name="activatable_widget">power_saver_low_battery_switch</property>
-                <child>
-                  <object class="GtkSwitch" id="power_saver_low_battery_switch">
-                    <property name="valign">center</property>
-                  </object>
-                </child>
               </object>
             </child>
             <child>
@@ -203,17 +185,11 @@
               </object>
             </child>
             <child>
-              <object class="AdwActionRow" id="battery_percentage_row">
+              <object class="AdwSwitchRow" id="battery_percentage_switch">
                 <property name="visible">False</property>
                 <property name="title" translatable="yes">Show Battery _Percentage</property>
                 <property name="subtitle" translatable="yes">Show exact charge level in the top bar</property>
                 <property name="use_underline">True</property>
-                <property name="activatable_widget">battery_percentage_switch</property>
-                <child>
-                  <object class="GtkSwitch" id="battery_percentage_switch">
-                    <property name="valign">center</property>
-                  </object>
-                </child>
               </object>
             </child>
           </object>
@@ -232,12 +208,12 @@
   <object class="GtkSizeGroup" id="row_sizegroup">
     <property name="mode">vertical</property>
     <widgets>
-      <widget name="als_row"/>
-      <widget name="dim_screen_row"/>
+      <widget name="als_switch"/>
+      <widget name="dim_screen_switch"/>
       <widget name="blank_screen_row"/>
       <widget name="automatic_suspend_row"/>
       <widget name="power_button_row"/>
-      <widget name="battery_percentage_row"/>
+      <widget name="battery_percentage_switch"/>
     </widgets>
   </object>
 

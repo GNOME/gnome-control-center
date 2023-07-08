@@ -28,16 +28,10 @@
 
             <!-- Automatic Screen Lock row -->
             <child>
-              <object class="AdwActionRow">
+              <object class="AdwSwitchRow" id="automatic_screen_lock_switch">
                 <property name="title" translatable="yes">Automatic Screen _Lock</property>
                 <property name="subtitle" translatable="yes">Locks the screen after it blanks</property>
-                <property name="activatable-widget">automatic_screen_lock_switch</property>
                 <property name="use-underline">true</property>
-                <child>
-                  <object class="GtkSwitch" id="automatic_screen_lock_switch">
-                    <property name="valign">center</property>
-                  </object>
-                </child>
               </object>
             </child>
 
@@ -62,32 +56,20 @@
 
             <!-- Show Notifications row -->
             <child>
-              <object class="AdwActionRow">
+              <object class="AdwSwitchRow" id="show_notifications_switch">
                 <property name="title" translatable="yes" comments="Translators: Whether to show notifications on the lock screen">_Lock Screen Notifications</property>
-                <property name="activatable-widget">show_notifications_switch</property>
                 <property name="use-underline">true</property>
-                <child>
-                  <object class="GtkSwitch" id="show_notifications_switch">
-                    <property name="valign">center</property>
-                  </object>
-                </child>
               </object>
             </child>
 
             <!-- USB protection row -->
             <child>
-              <object class="AdwActionRow" id="usb_protection_row">
+              <object class="AdwSwitchRow" id="usb_protection_switch">
                 <property name="visible">false</property>
                 <property name="title" translatable="yes">Forbid new _USB devices</property>
                 <property name="subtitle" translatable="yes">Prevent new USB devices from interacting with the system when the screen is locked.</property>
                 <property name="subtitle-lines">2</property>
-                <property name="activatable-widget">usb_protection_switch</property>
                 <property name="use-underline">true</property>
-                <child>
-                  <object class="GtkSwitch" id="usb_protection_switch">
-                    <property name="valign">center</property>
-                  </object>
-                </child>
               </object>
             </child>
 
@@ -100,15 +82,9 @@
 
             <!-- Privacy Screen row -->
             <child>
-              <object class="AdwActionRow">
+              <object class="AdwSwitchRow" id="privacy_screen_switch">
                 <property name="title" translatable="yes">Restrict Viewing Angle</property>
-                <property name="activatable-widget">privacy_screen_switch</property>
                 <property name="use-underline">true</property>
-                <child>
-                  <object class="GtkSwitch" id="privacy_screen_switch">
-                    <property name="valign">center</property>
-                  </object>
-                </child>
               </object>
             </child>
           </object>

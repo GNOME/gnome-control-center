@@ -33,16 +33,9 @@
                   <class name="boxed-list"/>
                 </style>
                 <child>
-                  <object class="AdwActionRow" id="switch_row">
+                  <object class="AdwSwitchRow" id="enabled_switch">
                     <property name="activatable">False</property>
                     <property name="selectable">False</property>
-                    <property name="activatable-widget">enabled_switch</property>
-                    <child>
-                      <object class="GtkSwitch" id="enabled_switch">
-                        <property name="valign">center</property>
-                        <signal name="state-set" handler="enable_switch_changed_cb" object="CcXkbModifierDialog" swapped="yes"/>
-                      </object>
-                    </child>
                   </object>
                 </child>
               </object>

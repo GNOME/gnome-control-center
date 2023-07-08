@@ -84,9 +84,7 @@ struct _CcDateTimePanel
   GSettings *datetime_settings;
   GSettings *filechooser_settings;
   GDesktopClockFormat clock_format;
-  AdwActionRow *auto_datetime_row;
-  AdwActionRow *auto_timezone_row;
-  GtkSwitch *auto_timezone_switch;
+  AdwSwitchRow *auto_timezone_switch;
   AdwActionRow *datetime_row;
   GtkDialog *datetime_dialog;
   GtkLabel *datetime_label;
@@ -105,7 +103,7 @@ struct _CcDateTimePanel
   GtkPopover  *month_popover;
   CcListRow *month_row;
   AdwActionRow *year_row;
-  GtkSwitch *network_time_switch;
+  AdwSwitchRow *network_time_switch;
   CcTimeEditor *time_editor;
   AdwActionRow *timezone_row;
   CcTzDialog *timezone_dialog;
@@ -549,12 +547,12 @@ on_permission_changed (CcDateTimePanel *self)
   allowed = (self->permission != NULL && g_permission_get_allowed (self->permission));
   location_allowed = g_settings_get_boolean (self->location_settings, LOCATION_ENABLED);
   tz_allowed = (self->tz_permission != NULL && g_permission_get_allowed (self->tz_permission));
-  using_ntp = gtk_switch_get_active (self->network_time_switch);
-  auto_timezone = gtk_switch_get_active (self->auto_timezone_switch);
+  using_ntp = adw_switch_row_get_active (self->network_time_switch);
+  auto_timezone = adw_switch_row_get_active (self->auto_timezone_switch);
 
   /* All the widgets but the lock button and the 24h setting */
-  gtk_widget_set_sensitive (GTK_WIDGET (self->auto_datetime_row), allowed);
-  gtk_widget_set_sensitive (GTK_WIDGET (self->auto_timezone_row), location_allowed && (allowed || tz_allowed));
+  gtk_widget_set_sensitive (GTK_WIDGET (self->network_time_switch), allowed);
+  gtk_widget_set_sensitive (GTK_WIDGET (self->auto_timezone_switch), location_allowed && (allowed || tz_allowed));
   gtk_widget_set_sensitive (GTK_WIDGET (self->datetime_row), allowed && !using_ntp);
   gtk_widget_set_sensitive (GTK_WIDGET (self->timezone_row), (allowed || tz_allowed) && (!auto_timezone || !location_allowed));
 
@@ -574,7 +572,7 @@ on_location_settings_changed (CcDateTimePanel *self)
 static void
 on_can_ntp_changed (CcDateTimePanel *self)
 {
-  gtk_widget_set_visible (GTK_WIDGET (self->auto_datetime_row), is_ntp_available (self));
+  gtk_widget_set_visible (GTK_WIDGET (self->network_time_switch), is_ntp_available (self));
 }
 
 static void
@@ -665,10 +663,10 @@ switch_to_row_transform_func (GBinding        *binding,
 
 static void
 bind_switch_to_row (CcDateTimePanel *self,
-                    GtkSwitch       *gtkswitch,
+                    AdwSwitchRow    *row,
                     GtkWidget       *listrow)
 {
-  g_object_bind_property_full (gtkswitch, "active",
+  g_object_bind_property_full (row, "active",
                                listrow, "sensitive",
                                G_BINDING_SYNC_CREATE,
                                (GBindingTransformFunc) switch_to_row_transform_func,
@@ -831,8 +829,6 @@ cc_date_time_panel_class_init (CcDateTimePanelClass *klass)
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/datetime/cc-datetime-panel.ui");
 
-  gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, auto_datetime_row);
-  gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, auto_timezone_row);
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, auto_timezone_switch);
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, date_box);
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, datetime_row);
@@ -937,7 +933,7 @@ cc_date_time_panel_init (CcDateTimePanel *self)
   g_signal_connect_object (self->network_time_switch, "state-set",
                            G_CALLBACK (change_ntp), self, G_CONNECT_SWAPPED);
 
-  gtk_widget_set_visible (GTK_WIDGET (self->auto_datetime_row), is_ntp_available (self));
+  gtk_widget_set_visible (GTK_WIDGET (self->network_time_switch), is_ntp_available (self));
 
   /* Timezone settings */
   g_object_bind_property_full (self->auto_timezone_switch, "active",

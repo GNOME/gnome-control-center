@@ -49,11 +49,10 @@ struct _CcScreenPanel
   AdwComboRow         *lock_after_row;
   AdwPreferencesGroup *screen_privacy_group;
   GDBusProxy          *usb_proxy;
-  GtkListBoxRow       *usb_protection_row;
-  GtkSwitch           *automatic_screen_lock_switch;
-  GtkSwitch           *privacy_screen_switch;
-  GtkSwitch           *show_notifications_switch;
-  GtkSwitch           *usb_protection_switch;
+  AdwSwitchRow        *automatic_screen_lock_switch;
+  AdwSwitchRow        *privacy_screen_switch;
+  AdwSwitchRow        *show_notifications_switch;
+  AdwSwitchRow        *usb_protection_switch;
 };
 
 CC_PANEL_REGISTER (CcScreenPanel, cc_screen_panel)
@@ -208,7 +207,7 @@ on_usb_protection_properties_changed_cb (GDBusProxy    *usb_proxy,
     }
 
   /* Show the USB protection row only if the required daemon is up and running */
-  gtk_widget_set_visible (GTK_WIDGET (self->usb_protection_row), available);
+  gtk_widget_set_visible (GTK_WIDGET (self->usb_protection_switch), available);
 }
 
 static void
@@ -230,7 +229,7 @@ on_usb_protection_param_ready (GObject      *source_object,
                      error->message);
         }
 
-      gtk_widget_set_visible (GTK_WIDGET (self->usb_protection_row), FALSE);
+      gtk_widget_set_visible (GTK_WIDGET (self->usb_protection_switch), FALSE);
       return;
     }
   self->usb_proxy = proxy;
@@ -277,7 +276,6 @@ cc_screen_panel_class_init (CcScreenPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcScreenPanel, privacy_screen_switch);
   gtk_widget_class_bind_template_child (widget_class, CcScreenPanel, screen_privacy_group);
   gtk_widget_class_bind_template_child (widget_class, CcScreenPanel, show_notifications_switch);
-  gtk_widget_class_bind_template_child (widget_class, CcScreenPanel, usb_protection_row);
   gtk_widget_class_bind_template_child (widget_class, CcScreenPanel, usb_protection_switch);
 
   gtk_widget_class_bind_template_callback (widget_class, lock_after_name_cb);

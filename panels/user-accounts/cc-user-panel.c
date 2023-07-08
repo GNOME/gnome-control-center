@@ -97,7 +97,7 @@ struct _CcUserPanel {
         GtkMenuButton   *user_avatar_edit_button;
         GtkOverlay      *users_overlay;
         AdwMessageDialog *local_user_dialog;
-        GtkSwitch       *local_user_choice;
+        AdwSwitchRow    *local_user_choice;
 
         ActUser *selected_user;
         ActUser *pending_show_user;

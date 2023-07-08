@@ -31,7 +31,7 @@ struct _CcDiagnosticsPanel
   CcPanel              parent_instance;
 
   AdwPreferencesGroup *diagnostics_group;
-  GtkSwitch           *abrt_switch;
+  AdwSwitchRow        *abrt_switch;
 
   GSettings           *privacy_settings;
 };

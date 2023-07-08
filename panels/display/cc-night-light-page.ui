@@ -82,15 +82,8 @@
                 <property name="description" translatable="yes">Night light makes the screen color warmer. This can help to prevent eye strain and sleeplessness.</property>
                 <!-- Night Light -->
                 <child>
-                  <object class="AdwActionRow">
+                  <object class="AdwSwitchRow" id="night_light_toggle_switch">
                     <property name="title" translatable="yes">Night Light</property>
-                    <property name="activatable-widget">night_light_toggle_switch</property>
-
-                    <child>
-                      <object class="GtkSwitch" id="night_light_toggle_switch">
-                        <property name="valign">center</property>
-                      </object>
-                    </child>
                   </object>
                 </child>
 

@@ -47,8 +47,7 @@ struct _CcDisplaySettings
   GListModel       *scale_list;
 
   GtkWidget        *enabled_listbox;
-  AdwActionRow     *enabled_row;
-  GtkSwitch        *enabled_switch;
+  AdwSwitchRow     *enabled_switch;
   GtkWidget        *orientation_row;
   GtkWidget        *refresh_rate_row;
   GtkWidget        *resolution_row;
@@ -282,10 +281,10 @@ cc_display_settings_rebuild_ui (CcDisplaySettings *self)
   }
 
   /* Enabled Switch */
-  adw_preferences_row_set_title (ADW_PREFERENCES_ROW (self->enabled_row),
+  adw_preferences_row_set_title (ADW_PREFERENCES_ROW (self->enabled_switch),
                                  cc_display_monitor_get_ui_name (self->selected_output));
-  gtk_switch_set_active (GTK_SWITCH (self->enabled_switch),
-                         cc_display_monitor_is_active (self->selected_output));
+  adw_switch_row_set_active (ADW_SWITCH_ROW (self->enabled_switch),
+                             cc_display_monitor_is_active (self->selected_output));
 
   if (should_show_rotation (self))
     {
@@ -467,8 +466,8 @@ cc_display_settings_rebuild_ui (CcDisplaySettings *self)
   gtk_widget_set_visible (self->underscanning_row,
                           cc_display_monitor_supports_underscanning (self->selected_output) &&
                           !cc_display_config_is_cloning (self->config));
-  gtk_switch_set_active (GTK_SWITCH (self->underscanning_switch),
-                         cc_display_monitor_get_underscanning (self->selected_output));
+  adw_switch_row_set_active (ADW_SWITCH_ROW (self->underscanning_switch),
+                             cc_display_monitor_get_underscanning (self->selected_output));
 
   self->updating = TRUE;
   g_object_thaw_notify ((GObject*) self->enabled_switch);
@@ -503,7 +502,7 @@ on_enabled_switch_active_changed_cb (CcDisplaySettings *self)
     return;
 
   cc_display_monitor_set_active (self->selected_output,
-                                 gtk_switch_get_active (self->enabled_switch));
+                                 adw_switch_row_get_active (self->enabled_switch));
 
   g_signal_emit_by_name (G_OBJECT (self), "updated", self->selected_output);
 }
@@ -620,7 +619,7 @@ on_underscanning_switch_active_changed_cb (CcDisplaySettings *self)
     return;
 
   cc_display_monitor_set_underscanning (self->selected_output,
-                                        gtk_switch_get_active (GTK_SWITCH (self->underscanning_switch)));
+                                        adw_switch_row_get_active (ADW_SWITCH_ROW (self->underscanning_switch)));
 
   g_signal_emit_by_name (G_OBJECT (self), "updated", self->selected_output);
 }
@@ -739,7 +738,6 @@ cc_display_settings_class_init (CcDisplaySettingsClass *klass)
                 G_TYPE_NONE, 1, CC_TYPE_DISPLAY_MONITOR);
 
   gtk_widget_class_bind_template_child (widget_class, CcDisplaySettings, enabled_listbox);
-  gtk_widget_class_bind_template_child (widget_class, CcDisplaySettings, enabled_row);
   gtk_widget_class_bind_template_child (widget_class, CcDisplaySettings, enabled_switch);
   gtk_widget_class_bind_template_child (widget_class, CcDisplaySettings, orientation_row);
   gtk_widget_class_bind_template_child (widget_class, CcDisplaySettings, refresh_rate_row);
@@ -902,5 +900,5 @@ cc_display_settings_set_multimonitor (CcDisplaySettings *self,
   gtk_widget_set_visible (self->enabled_listbox, multimonitor);
 
   if (!multimonitor)
-    gtk_switch_set_active (GTK_SWITCH (self->enabled_switch), TRUE);
+    adw_switch_row_set_active (ADW_SWITCH_ROW (self->enabled_switch), TRUE);
 }

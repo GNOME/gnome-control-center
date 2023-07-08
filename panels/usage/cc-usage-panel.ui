@@ -9,15 +9,9 @@
             <property name="title" translatable="yes">File History</property>
             <property name="description" translatable="yes">File history keeps a record of files that you have used. This information is shared between apps, and makes it easier to find files that you might want to use.</property>
             <child>
-              <object class="AdwActionRow">
+              <object class="AdwSwitchRow" id="recently_used_switch">
                 <property name="title" translatable="yes">File H_istory</property>
-                <property name="activatable-widget">recently_used_switch</property>
                 <property name="use-underline">true</property>
-                <child>
-                  <object class="GtkSwitch" id="recently_used_switch">
-                    <property name="valign">center</property>
-                  </object>
-                </child>
               </object>
             </child>
             <child>
@@ -63,27 +57,15 @@
             <property name="title" translatable="yes">Trash &amp;amp; Temporary Files</property>
             <property name="description" translatable="yes">Trash and temporary files can sometimes include personal or sensitive information. Automatically deleting them can help to protect privacy.</property>
             <child>
-              <object class="AdwActionRow">
+              <object class="AdwSwitchRow" id="purge_trash_switch">
                 <property name="title" translatable="yes">Automatically Delete _Trash Content</property>
-                <property name="activatable-widget">purge_trash_switch</property>
                 <property name="use-underline">true</property>
-                <child>
-                  <object class="GtkSwitch" id="purge_trash_switch">
-                    <property name="valign">center</property>
-                  </object>
-                </child>
               </object>
             </child>
             <child>
-              <object class="AdwActionRow">
+              <object class="AdwSwitchRow" id="purge_temp_switch">
                 <property name="title" translatable="yes">Automatically Delete Temporary _Files</property>
-                <property name="activatable-widget">purge_temp_switch</property>
                 <property name="use-underline">true</property>
-                <child>
-                  <object class="GtkSwitch" id="purge_temp_switch">
-                    <property name="valign">center</property>
-                  </object>
-                </child>
               </object>
             </child>
             <child>

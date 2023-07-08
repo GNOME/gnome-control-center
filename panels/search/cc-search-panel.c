@@ -32,7 +32,7 @@ struct _CcSearchPanel
   CcPanel           parent_instance;
 
   GtkWidget        *list_box;
-  GtkSwitch        *main_switch;
+  AdwSwitchRow     *main_switch;
   GtkWidget        *search_group;
   GtkWidget        *settings_row;
   CcSearchPanelRow *selected_row;
