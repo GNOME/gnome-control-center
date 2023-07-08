@@ -44,7 +44,7 @@ struct _CcUaZoomPage
   AdwPreferencesPage  parent_instance;
 
   AdwSwitchRow       *desktop_zoom_row;
-  GtkSpinButton      *magnify_factor_spin;
+  AdwSpinRow         *magnify_factor_spin;
   AdwComboRow        *magnify_view_row;
 
   AdwSwitchRow       *magnify_outside_screen_row;

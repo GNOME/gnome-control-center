@@ -41,7 +41,7 @@ struct _CcMultitaskingPanel
   GtkCheckButton  *fixed_workspaces_radio;
   CcIllustratedRow *hot_corner_row;
   GtkSwitch       *hot_corner_switch;
-  GtkSpinButton   *number_of_workspaces_spin;
+  AdwSpinRow      *number_of_workspaces_spin;
   GtkCheckButton  *workspaces_primary_display_radio;
   GtkCheckButton  *workspaces_span_displays_radio;
 };

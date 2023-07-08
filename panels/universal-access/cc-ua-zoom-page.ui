@@ -18,23 +18,18 @@
       <object class="AdwPreferencesGroup">
         <property name="title" translatable="yes">Magnifier</property>
         <child>
-          <object class="AdwActionRow">
+          <object class="AdwSpinRow" id="magnify_factor_spin">
             <property name="title" translatable="yes">Magnification Factor</property>
-            <child type="suffix">
-              <object class="GtkSpinButton" id="magnify_factor_spin">
-                <property name="valign">center</property>
-                <property name="digits">2</property>
-                <property name="adjustment">
-                  <object class="GtkAdjustment">
-                    <property name="lower">1</property>
-                    <property name="upper">20</property>
-                    <property name="value">2</property>
-                    <property name="step-increment">0.25</property>
-                    <property name="page-increment">1</property>
-                  </object>
-                </property>
+            <property name="digits">2</property>
+            <property name="adjustment">
+              <object class="GtkAdjustment">
+                <property name="lower">1</property>
+                <property name="upper">20</property>
+                <property name="value">2</property>
+                <property name="step-increment">0.25</property>
+                <property name="page-increment">1</property>
               </object>
-            </child>
+            </property>
           </object>
         </child>
 

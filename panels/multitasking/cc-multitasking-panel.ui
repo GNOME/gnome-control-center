@@ -80,17 +80,11 @@
 
             <!-- Number of Workspaces -->
             <child>
-              <object class="AdwActionRow">
+              <object class="AdwSpinRow" id="number_of_workspaces_spin">
                 <property name="sensitive" bind-source="fixed_workspaces_radio" bind-property="active" bind-flags="default|sync-create" />
-                <property name="activatable-widget">number_of_workspaces_spin</property>
                 <property name="title" translatable="yes">_Number of Workspaces</property>
                 <property name="use_underline">True</property>
-                <child>
-                  <object class="GtkSpinButton" id="number_of_workspaces_spin">
-                    <property name="valign">center</property>
-                    <property name="adjustment">workspaces_adjustment</property>
-                  </object>
-                </child>
+                <property name="adjustment">workspaces_adjustment</property>
               </object>
             </child>
 
