@@ -145,16 +145,18 @@ lookup_wacom_device (CcWacomPanel *self,
 static void
 highlight_widget (CcWacomPanel *self, GtkWidget *widget)
 {
-	double y;
+	graphene_point_t p;
 
 	if (self->highlighted_widget == widget)
 		return;
 
-	gtk_widget_translate_coordinates (widget,
-					  self->scrollable,
-					  0, 0,
-					  NULL, &y);
-	gtk_adjustment_set_value (self->vadjustment, y);
+	if (!gtk_widget_compute_point (widget,
+                                       self->scrollable,
+                                       &GRAPHENE_POINT_INIT (0, 0),
+                                       &p))
+		return;
+
+	gtk_adjustment_set_value (self->vadjustment, p.y);
 	self->highlighted_widget = widget;
 }
 

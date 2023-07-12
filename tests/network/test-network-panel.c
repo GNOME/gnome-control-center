@@ -160,28 +160,30 @@ widget_geo_dist (GtkWidget *a,
                  GtkWidget *base)
 {
   GtkAllocation allocation;
-  double ax0, ay0, ax1, ay1, bx0, by0, bx1, by1, xdist = 0, ydist = 0;
+  graphene_point_t a0, a1, b0, b1;
+  graphene_point_t dist = GRAPHENE_POINT_INIT (0, 0);
 
   gtk_widget_get_allocation (a, &allocation);
-  if (!gtk_widget_translate_coordinates (a, base, 0, 0, &ax0, &ay0) ||
-      !gtk_widget_translate_coordinates (a, base, allocation.width, allocation.height, &ax1, &ay1))
+  if (!gtk_widget_compute_point (a, base, &GRAPHENE_POINT_INIT (0, 0), &a0) ||
+      !gtk_widget_compute_point (a, base, &GRAPHENE_POINT_INIT (allocation.width, allocation.height), &a1))
     return -G_MAXINT;
 
   gtk_widget_get_allocation (b, &allocation);
-  if (!gtk_widget_translate_coordinates (b, base, 0, 0, &bx0, &by0) ||
-      !gtk_widget_translate_coordinates (b, base, allocation.width, allocation.height, &bx1, &by1))
+  if (!gtk_widget_compute_point (b, base, &GRAPHENE_POINT_INIT (0, 0), &b0) ||
+      !gtk_widget_compute_point (b, base, &GRAPHENE_POINT_INIT (allocation.width, allocation.height), &b1))
     return +G_MAXINT;
 
-  if (bx0 >= ax1)
-    xdist = bx0 - ax1;
-  else if (ax0 >= bx1)
-    xdist = ax0 - bx1;
-  if (by0 >= ay1)
-    ydist = by0 - ay1;
-  else if (ay0 >= by1)
-    ydist = ay0 - by1;
+  if (b0.x >= a1.x)
+    graphene_point_distance (&b0, &a1, &dist.x, NULL);
+  else if (a0.x >= b1.x)
+    graphene_point_distance (&a0, &b1, &dist.x, NULL);
 
-  return xdist + ydist;
+  if (b0.y >= a1.y)
+    graphene_point_distance (&b0, &a1, NULL, &dist.y);
+  else if (a0.y >= b1.y)
+    graphene_point_distance (&a0, &b1, NULL, &dist.y);
+
+  return dist.x + dist.y;
 }
 
 static GList*
