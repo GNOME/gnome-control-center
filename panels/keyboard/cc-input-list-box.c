@@ -282,13 +282,19 @@ update_input_rows (CcInputListBox *self)
        child;
        child = gtk_widget_get_next_sibling (child)) {
     CcInputRow *row;
+    gint row_idx;
 
     if (!CC_IS_INPUT_ROW (child))
       continue;
     row = CC_INPUT_ROW (child);
+    row_idx = gtk_list_box_row_get_index (GTK_LIST_BOX_ROW (row));
 
     cc_input_row_set_removable (row, n_input_rows > 1);
     cc_input_row_set_draggable (row, n_input_rows > 1);
+
+    gtk_widget_action_set_enabled (GTK_WIDGET (row), "row.move-up", row_idx != 1);
+    gtk_widget_action_set_enabled (GTK_WIDGET (row), "row.move-down", GTK_LIST_BOX_ROW (gtk_widget_get_next_sibling (child)) != self->add_input_row);
+
   }
 }
 
