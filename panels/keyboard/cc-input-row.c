@@ -110,7 +110,11 @@ move_up_cb (GtkWidget  *widget,
   GtkListBoxRow *previous_row = gtk_list_box_get_row_at_index (list_box, previous_idx);
 
   if (previous_row == NULL || !CC_IS_INPUT_ROW (previous_row))
-    return;
+    {
+      gtk_widget_action_set_enabled (widget, "row.move-up", FALSE);
+      gtk_widget_action_set_enabled (GTK_WIDGET (gtk_list_box_get_row_at_index (list_box, 0)), "row.move-up", TRUE);
+      return;
+    }
 
   g_signal_emit (self,
                  signals[SIGNAL_MOVE_ROW],
@@ -129,7 +133,11 @@ move_down_cb (GtkWidget  *widget,
   GtkListBoxRow *next_row = gtk_list_box_get_row_at_index (list_box, next_idx);
 
   if (next_row == NULL || !CC_IS_INPUT_ROW (next_row))
-    return;
+    {
+      gtk_widget_action_set_enabled (widget, "row.move-down", FALSE);
+      gtk_widget_action_set_enabled (GTK_WIDGET (gtk_list_box_get_row_at_index (list_box, next_idx-1)), "row.move-down", TRUE);
+      return;
+    }
 
   g_signal_emit (next_row,
                  signals[SIGNAL_MOVE_ROW],
@@ -301,3 +309,4 @@ cc_input_row_set_draggable (CcInputRow *self,
   gtk_event_controller_set_propagation_phase (GTK_EVENT_CONTROLLER (self->drag_source),
                                               draggable ? GTK_PHASE_BUBBLE : GTK_PHASE_NONE);
 }
+
