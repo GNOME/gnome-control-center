@@ -44,6 +44,40 @@ enum
 static guint signals[SIGNAL_LAST] = { 0, };
 
 static void
+update_move_actions_after_row_moved_up (CcSearchPanelRow *self)
+{
+  GtkListBox *list_box = GTK_LIST_BOX (gtk_widget_get_parent (GTK_WIDGET (self)));
+  gint previous_idx = gtk_list_box_row_get_index (GTK_LIST_BOX_ROW (self)) - 1;
+  GtkListBoxRow *previous_row = gtk_list_box_get_row_at_index (list_box, previous_idx);
+
+  if (gtk_list_box_get_row_at_index (list_box, previous_idx - 1) == NULL)
+    {
+      gtk_widget_action_set_enabled (GTK_WIDGET (self), "row.move-up", FALSE);
+    }
+
+  gtk_widget_action_set_enabled (GTK_WIDGET (previous_row), "row.move-up", TRUE);
+  gtk_widget_action_set_enabled (GTK_WIDGET (previous_row), "row.move-down", gtk_widget_get_next_sibling (GTK_WIDGET (self)) != NULL);
+  gtk_widget_action_set_enabled (GTK_WIDGET (self), "row.move-down", TRUE);
+}
+
+static void
+update_move_actions_after_row_moved_down (CcSearchPanelRow *self)
+{
+  GtkListBox *list_box = GTK_LIST_BOX (gtk_widget_get_parent (GTK_WIDGET (self)));
+  gint next_idx = gtk_list_box_row_get_index (GTK_LIST_BOX_ROW (self)) + 1;
+  GtkListBoxRow *next_row = gtk_list_box_get_row_at_index (list_box, next_idx);
+
+  if (gtk_widget_get_next_sibling (GTK_WIDGET (next_row)) == NULL)
+    {
+      gtk_widget_action_set_enabled (GTK_WIDGET (self), "row.move-down", FALSE);
+    }
+
+  gtk_widget_action_set_enabled (GTK_WIDGET (next_row), "row.move-up", next_idx-1 != 0);
+  gtk_widget_action_set_enabled (GTK_WIDGET (next_row), "row.move-down", TRUE);
+  gtk_widget_action_set_enabled (GTK_WIDGET (self), "row.move-up", TRUE);
+}
+
+static void
 move_up_cb (GSimpleAction *action,
             GVariant      *parameter,
             gpointer       user_data)
@@ -55,6 +89,8 @@ move_up_cb (GSimpleAction *action,
 
   if (previous_row == NULL)
     return;
+
+  update_move_actions_after_row_moved_up (self);
 
   g_signal_emit (self,
                  signals[SIGNAL_MOVE_ROW],
@@ -74,6 +110,8 @@ move_down_cb (GSimpleAction *action,
 
   if (next_row == NULL)
     return;
+
+  update_move_actions_after_row_moved_down (self);
 
   g_signal_emit (next_row,
                  signals[SIGNAL_MOVE_ROW],
