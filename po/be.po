@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2023-03-03 18:27+0000\n"
-"PO-Revision-Date: 2023-03-07 23:47+0300\n"
+"POT-Creation-Date: 2023-05-26 09:44+0000\n"
+"PO-Revision-Date: 2023-07-17 17:04+0300\n"
 "Last-Translator: Yuras Shumovich <shumovichy@gmail.com>\n"
 "Language-Team: Belarusian <i18n-bel-gnome@googlegroups.com>\n"
 "Language: be\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Poedit 3.2.2\n"
+"X-Generator: Poedit 3.3.2\n"
 
 #: panels/applications/cc-applications-panel.c:822
 msgid "System Bus"
@@ -115,9 +115,11 @@ msgstr ""
 msgid "%s of disk space used."
 msgstr "Выкарыстана %s дыскавай прасторы."
 
+#. List of apps.
 #: panels/applications/cc-applications-panel.c:1415
 #: panels/applications/cc-applications-panel.ui:19
 #: panels/applications/gnome-applications-panel.desktop.in:3
+#: panels/notifications/cc-notifications-panel.ui:26
 msgid "Apps"
 msgstr "Праграмы"
 
@@ -169,7 +171,7 @@ msgstr "Атрыманне пошукавых запытаў сістэмы і �
 #: panels/user-accounts/cc-user-panel.c:821
 #: panels/user-accounts/cc-user-panel.c:951
 #: panels/wwan/cc-wwan-device-page.c:477
-#: subprojects/gvc/gvc-mixer-control.c:1900
+#: subprojects/gvc/gvc-mixer-control.c:1908
 msgid "Disabled"
 msgstr "Адключана"
 
@@ -345,7 +347,7 @@ msgstr "Выберыце выяву"
 #: panels/background/cc-background-chooser.c:315
 #: panels/color/cc-color-calibrate.ui:22 panels/color/cc-color-panel.c:284
 #: panels/color/cc-color-panel.c:844 panels/common/cc-language-chooser.ui:21
-#: panels/display/cc-display-panel.ui:31 panels/keyboard/cc-input-chooser.ui:11
+#: panels/display/cc-display-panel.ui:42 panels/keyboard/cc-input-chooser.ui:11
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:23
 #: panels/network/cc-wifi-hotspot-dialog.ui:125
 #: panels/network/cc-wifi-panel.c:745
@@ -1237,7 +1239,7 @@ msgstr[1] "%d гадзіны"
 msgstr[2] "%d гадзін"
 
 #. Translators: Option for "Blank Screen" in "Power" panel
-#: panels/common/cc-util.c:183 panels/power/cc-power-panel.c:849
+#: panels/common/cc-util.c:183 panels/power/cc-power-panel.c:855
 #, c-format
 msgid "%d minute"
 msgid_plural "%d minutes"
@@ -1299,26 +1301,26 @@ msgctxt "hotspot"
 msgid "Hotspot"
 msgstr "Хот-спот"
 
-#: panels/datetime/cc-datetime-panel.c:165
+#: panels/datetime/cc-datetime-panel.c:169
 msgid "24-hour"
 msgstr "24 гадзіны"
 
-#: panels/datetime/cc-datetime-panel.c:167
+#: panels/datetime/cc-datetime-panel.c:171
 msgid "AM / PM"
 msgstr "AM / PM"
 
 #. Translators: This is the full date and time format used in 12-hour mode.
-#: panels/datetime/cc-datetime-panel.c:238
+#: panels/datetime/cc-datetime-panel.c:242
 msgid "%e %B %Y, %l:%M %p"
 msgstr "%e %B %Y, %l:%M %p"
 
 #. Translators: This is the full date and time format used in 24-hour mode.
-#: panels/datetime/cc-datetime-panel.c:243
+#: panels/datetime/cc-datetime-panel.c:247
 msgid "%e %B %Y, %R"
 msgstr "%e %B %Y, %R"
 
 #. Translators: "city, country"
-#: panels/datetime/cc-datetime-panel.c:398
+#: panels/datetime/cc-datetime-panel.c:400
 #, c-format
 msgctxt "timezone loc"
 msgid "%s, %s"
@@ -1326,7 +1328,7 @@ msgstr "%s, %s"
 
 #. Update the timezone on the listbow row
 #. Translators: "timezone (details)"
-#: panels/datetime/cc-datetime-panel.c:415
+#: panels/datetime/cc-datetime-panel.c:417
 #, c-format
 msgctxt "timezone desc"
 msgid "%s (%s)"
@@ -1542,37 +1544,33 @@ msgstr "Налады аўтаматычных справаздач аб праб
 msgid "diagnostics;crash;"
 msgstr "diagnostics;crash;дыягностыка;збой;"
 
-#: panels/display/cc-display-panel.c:493
+#: panels/display/cc-display-panel.c:496
 #: panels/notifications/cc-notifications-panel.c:217
-#: panels/power/cc-power-panel.c:737 panels/power/cc-power-panel.c:744
+#: panels/power/cc-power-panel.c:743 panels/power/cc-power-panel.c:750
 msgid "On"
 msgstr "Уключана"
 
-#: panels/display/cc-display-panel.c:495 panels/network/cc-net-proxy-page.c:166
+#: panels/display/cc-display-panel.c:498 panels/network/cc-net-proxy-page.c:166
 #: panels/notifications/cc-notifications-panel.c:217
-#: panels/power/cc-power-panel.c:731 panels/power/cc-power-panel.c:742
+#: panels/power/cc-power-panel.c:737 panels/power/cc-power-panel.c:748
 msgid "Off"
 msgstr "Выключана"
 
-#: panels/display/cc-display-panel.c:931
+#: panels/display/cc-display-panel.c:937
 msgid "Apply Changes?"
 msgstr "Ужыць змены?"
 
-#: panels/display/cc-display-panel.c:936
+#: panels/display/cc-display-panel.c:942
 msgid "Changes Cannot be Applied"
 msgstr "Немагчыма ўжыць змены"
 
-#: panels/display/cc-display-panel.c:938
+#: panels/display/cc-display-panel.c:944
 msgid "This could be due to hardware limitations."
 msgstr "Магчыма, гэта з-за апаратных абмежаванняў."
 
-#: panels/display/cc-display-panel.ui:43
-#: panels/network/connection-editor/connection-editor.ui:21
-msgid "_Apply"
-msgstr "_Ужыць"
-
-#: panels/display/cc-display-panel.ui:78 panels/display/cc-display-panel.ui:209
-#: panels/display/cc-display-panel.ui:248 panels/mouse/cc-mouse-panel.ui:22
+#: panels/display/cc-display-panel.ui:33 panels/display/cc-display-panel.ui:89
+#: panels/display/cc-display-panel.ui:220
+#: panels/display/cc-display-panel.ui:259 panels/mouse/cc-mouse-panel.ui:22
 #: panels/network/cc-wifi-panel.ui:16 panels/printers/new-printer-dialog.ui:64
 #: panels/region/cc-format-chooser.ui:37
 #: panels/universal-access/cc-ua-panel.ui:19
@@ -1583,34 +1581,39 @@ msgstr "_Ужыць"
 msgid "Back"
 msgstr "Назад"
 
-#: panels/display/cc-display-panel.ui:100
+#: panels/display/cc-display-panel.ui:54
+#: panels/network/connection-editor/connection-editor.ui:21
+msgid "_Apply"
+msgstr "_Ужыць"
+
+#: panels/display/cc-display-panel.ui:111
 msgid "Display Settings Disabled"
 msgstr "Налады дысплэя адключаны"
 
-#: panels/display/cc-display-panel.ui:111
+#: panels/display/cc-display-panel.ui:122
 msgid "Multiple Displays"
 msgstr "Некалькі дысплэяў"
 
 #. 'Join' as in 'Join displays'
-#: panels/display/cc-display-panel.ui:120
+#: panels/display/cc-display-panel.ui:131
 msgid "Join"
 msgstr "Аб'яднаць"
 
-#: panels/display/cc-display-panel.ui:127
+#: panels/display/cc-display-panel.ui:138
 msgid "Mirror"
 msgstr "Адлюстраванне"
 
-#: panels/display/cc-display-panel.ui:155
+#: panels/display/cc-display-panel.ui:166
 msgid "Contains top bar and Activities"
 msgstr "Змяшчае верхнюю панэль і меню Дзейнасць"
 
-#: panels/display/cc-display-panel.ui:156
+#: panels/display/cc-display-panel.ui:167
 msgid "Primary Display"
 msgstr "Асноўны дысплэй"
 
 #. This is the redshift functionality where we suppress blue light when the sun has gone down
-#: panels/display/cc-display-panel.ui:177
-#: panels/display/cc-display-panel.ui:216
+#: panels/display/cc-display-panel.ui:188
+#: panels/display/cc-display-panel.ui:227
 #: panels/display/cc-night-light-page.ui:117
 msgid "Night Light"
 msgstr "Начное святло"
@@ -2024,6 +2027,10 @@ msgstr "Справаздача скапіявана ў буфер абмену"
 #: panels/firmware-security/cc-firmware-security-dialog.ui:22
 msgid "Device Security Status"
 msgstr "Статус бяспекі прылады"
+
+#: panels/firmware-security/cc-firmware-security-dialog.ui:87
+msgid "Copy Technical Report"
+msgstr "Скапіяваць тэхнічную справаздачу"
 
 #: panels/firmware-security/cc-firmware-security-help-dialog.ui:6
 msgid "About Device Security"
@@ -2666,7 +2673,7 @@ msgctxt "keyboard key"
 msgid "Print Screen"
 msgstr "Print Screen"
 
-#: panels/keyboard/cc-keyboard-panel.c:214
+#: panels/keyboard/cc-keyboard-panel.c:215
 #, c-format
 msgid ""
 "Input sources can be switched using the %s keyboard shortcut.\n"
@@ -2712,11 +2719,11 @@ msgstr "Спалучэнні клавіш"
 msgid "View and Customize Shortcuts"
 msgstr "Прагляд і змяненне спалучэнняў клавіш"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.c:381
+#: panels/keyboard/cc-keyboard-shortcut-dialog.c:382
 msgid "Reset All Shortcuts?"
 msgstr "Скінуць усе спалучэнні клавіш?"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.c:384
+#: panels/keyboard/cc-keyboard-shortcut-dialog.c:385
 msgid ""
 "Resetting the shortcuts may affect your custom shortcuts. This cannot be "
 "undone."
@@ -2724,14 +2731,14 @@ msgstr ""
 "Скідванне спалучэнняў клавіш можа закрануць і ўласныя спалучэнні клавіш. "
 "Гэта дзеянне немагчыма адрабіць."
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.c:388
+#: panels/keyboard/cc-keyboard-shortcut-dialog.c:389
 #: panels/network/cc-network-panel.ui:26
 #: panels/printers/ppd-selection-dialog.ui:83
 #: panels/wwan/cc-wwan-device-page.c:188
 msgid "Cancel"
 msgstr "Скасаваць"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.c:389
+#: panels/keyboard/cc-keyboard-shortcut-dialog.c:390
 msgid "Reset All"
 msgstr "Скінуць усе"
 
@@ -3243,7 +3250,7 @@ msgstr "Проксі"
 msgid "Save"
 msgstr "Захаваць"
 
-#: panels/network/cc-network-panel.ui:75 panels/network/cc-network-panel.ui:80
+#: panels/network/cc-network-panel.ui:75
 msgid "Other Devices"
 msgstr "Іншыя прылады"
 
@@ -3262,19 +3269,19 @@ msgstr "Не наладжана"
 
 #: panels/network/cc-net-proxy-page.c:168
 #: panels/network/cc-net-proxy-page.ui:24
-#: panels/network/connection-editor/ip4-page.ui:175
-#: panels/network/connection-editor/ip4-page.ui:227
+#: panels/network/connection-editor/ip4-page.ui:181
+#: panels/network/connection-editor/ip4-page.ui:233
 #: panels/network/connection-editor/ip6-page.ui:36
-#: panels/network/connection-editor/ip6-page.ui:185
-#: panels/network/connection-editor/ip6-page.ui:237
-#: panels/wacom/cc-wacom-page.c:656
+#: panels/network/connection-editor/ip6-page.ui:192
+#: panels/network/connection-editor/ip6-page.ui:244
+#: panels/wacom/cc-wacom-page.c:659
 msgid "Automatic"
 msgstr "Аўтаматычна"
 
 #: panels/network/cc-net-proxy-page.c:170
 #: panels/network/cc-net-proxy-page.ui:25
-#: panels/network/connection-editor/ip4-page.ui:55
-#: panels/network/connection-editor/ip6-page.ui:65
+#: panels/network/connection-editor/ip4-page.ui:58
+#: panels/network/connection-editor/ip6-page.ui:69
 msgid "Manual"
 msgstr "Уручную"
 
@@ -3724,8 +3731,8 @@ msgstr "DNS6"
 #: panels/network/connection-editor/ce-page-details.c:423
 #: panels/network/connection-editor/details-page.ui:175
 #: panels/network/connection-editor/details-page.ui:192
-#: panels/network/connection-editor/ip4-page.ui:165
-#: panels/network/connection-editor/ip6-page.ui:175
+#: panels/network/connection-editor/ip4-page.ui:171
+#: panels/network/connection-editor/ip6-page.ui:182
 #: panels/network/net-device-ethernet.c:169
 #: panels/network/net-device-ethernet.c:171
 #: panels/network/net-device-mobile.c:453
@@ -3760,21 +3767,21 @@ msgstr "аўтаматычна"
 msgid "Identity"
 msgstr "Ідэнтычнасць"
 
-#: panels/network/connection-editor/ce-page-ip4.c:264
-#: panels/network/connection-editor/ce-page-ip6.c:245
+#: panels/network/connection-editor/ce-page-ip4.c:260
+#: panels/network/connection-editor/ce-page-ip6.c:239
 msgid "Delete Address"
 msgstr "Выдаліць адрас"
 
-#: panels/network/connection-editor/ce-page-ip4.c:423
-#: panels/network/connection-editor/ce-page-ip6.c:392
+#: panels/network/connection-editor/ce-page-ip4.c:419
+#: panels/network/connection-editor/ce-page-ip6.c:386
 msgid "Delete Route"
 msgstr "Выдаліць маршрут"
 
-#: panels/network/connection-editor/ce-page-ip4.c:774
+#: panels/network/connection-editor/ce-page-ip4.c:763
 msgid "IPv4"
 msgstr "IPv4"
 
-#: panels/network/connection-editor/ce-page-ip6.c:744
+#: panels/network/connection-editor/ce-page-ip6.c:727
 msgid "IPv6"
 msgstr "IPv6"
 
@@ -3903,79 +3910,79 @@ msgstr "Метад IPv_4"
 msgid "Automatic (DHCP)"
 msgstr "Аўтаматычна (DHCP)"
 
-#: panels/network/connection-editor/ip4-page.ui:45
-#: panels/network/connection-editor/ip6-page.ui:55
+#: panels/network/connection-editor/ip4-page.ui:47
+#: panels/network/connection-editor/ip6-page.ui:58
 msgid "Link-Local Only"
 msgstr "Толькі лакальная сувязь"
 
-#: panels/network/connection-editor/ip4-page.ui:65
-#: panels/network/connection-editor/ip6-page.ui:75
+#: panels/network/connection-editor/ip4-page.ui:69
+#: panels/network/connection-editor/ip6-page.ui:80
 msgid "Disable"
 msgstr "Адключыць"
 
-#: panels/network/connection-editor/ip4-page.ui:75
-#: panels/network/connection-editor/ip6-page.ui:85
+#: panels/network/connection-editor/ip4-page.ui:80
+#: panels/network/connection-editor/ip6-page.ui:91
 msgid "Shared to other computers"
 msgstr "Агульны доступ для іншых камп'ютараў"
 
-#: panels/network/connection-editor/ip4-page.ui:98
-#: panels/network/connection-editor/ip6-page.ui:108
+#: panels/network/connection-editor/ip4-page.ui:104
+#: panels/network/connection-editor/ip6-page.ui:115
 msgid "Addresses"
 msgstr "Адрасы"
 
-#: panels/network/connection-editor/ip4-page.ui:112
-#: panels/network/connection-editor/ip4-page.ui:250
-#: panels/network/connection-editor/ip6-page.ui:122
-#: panels/network/connection-editor/ip6-page.ui:260
+#: panels/network/connection-editor/ip4-page.ui:118
+#: panels/network/connection-editor/ip4-page.ui:256
+#: panels/network/connection-editor/ip6-page.ui:129
+#: panels/network/connection-editor/ip6-page.ui:267
 #: panels/printers/pp-details-dialog.ui:114
 msgid "Address"
 msgstr "Адрас"
 
-#: panels/network/connection-editor/ip4-page.ui:124
-#: panels/network/connection-editor/ip4-page.ui:262
+#: panels/network/connection-editor/ip4-page.ui:130
+#: panels/network/connection-editor/ip4-page.ui:268
 msgid "Netmask"
 msgstr "Маска сеткі"
 
-#: panels/network/connection-editor/ip4-page.ui:136
-#: panels/network/connection-editor/ip4-page.ui:274
-#: panels/network/connection-editor/ip6-page.ui:146
-#: panels/network/connection-editor/ip6-page.ui:284
+#: panels/network/connection-editor/ip4-page.ui:142
+#: panels/network/connection-editor/ip4-page.ui:280
+#: panels/network/connection-editor/ip6-page.ui:153
+#: panels/network/connection-editor/ip6-page.ui:291
 msgid "Gateway"
 msgstr "Шлюз"
 
-#: panels/network/connection-editor/ip4-page.ui:183
-#: panels/network/connection-editor/ip6-page.ui:193
+#: panels/network/connection-editor/ip4-page.ui:189
+#: panels/network/connection-editor/ip6-page.ui:200
 msgid "Automatic DNS"
 msgstr "Аўтаматычны DNS"
 
-#: panels/network/connection-editor/ip4-page.ui:192
-#: panels/network/connection-editor/ip6-page.ui:202
+#: panels/network/connection-editor/ip4-page.ui:198
+#: panels/network/connection-editor/ip6-page.ui:209
 msgid "DNS server address(es)"
 msgstr "Адрас(ы) сервера DNS"
 
-#: panels/network/connection-editor/ip4-page.ui:200
-#: panels/network/connection-editor/ip6-page.ui:210
+#: panels/network/connection-editor/ip4-page.ui:206
+#: panels/network/connection-editor/ip6-page.ui:217
 msgid "Separate IP addresses with commas"
 msgstr "Раздзяляйце IP-адрасы коскамі"
 
-#: panels/network/connection-editor/ip4-page.ui:217
-#: panels/network/connection-editor/ip6-page.ui:227
+#: panels/network/connection-editor/ip4-page.ui:223
+#: panels/network/connection-editor/ip6-page.ui:234
 msgid "Routes"
 msgstr "Маршруты"
 
-#: panels/network/connection-editor/ip4-page.ui:235
-#: panels/network/connection-editor/ip6-page.ui:245
+#: panels/network/connection-editor/ip4-page.ui:241
+#: panels/network/connection-editor/ip6-page.ui:252
 msgid "Automatic Routes"
 msgstr "Аўтаматычныя маршруты"
 
 #. Translators: Please see https://en.wikipedia.org/wiki/Metrics_(networking)
-#: panels/network/connection-editor/ip4-page.ui:285
-#: panels/network/connection-editor/ip6-page.ui:295
+#: panels/network/connection-editor/ip4-page.ui:291
+#: panels/network/connection-editor/ip6-page.ui:302
 msgid "Metric"
 msgstr "Метрыка"
 
-#: panels/network/connection-editor/ip4-page.ui:308
-#: panels/network/connection-editor/ip6-page.ui:318
+#: panels/network/connection-editor/ip4-page.ui:314
+#: panels/network/connection-editor/ip6-page.ui:325
 msgid "Use this connection _only for resources on its network"
 msgstr "_Выкарыстоўваць злучэнне толькі для рэсурсаў у гэтай сетцы"
 
@@ -3983,12 +3990,12 @@ msgstr "_Выкарыстоўваць злучэнне толькі для рэ�
 msgid "IPv_6 Method"
 msgstr "Метад IPv_6"
 
-#: panels/network/connection-editor/ip6-page.ui:45
+#: panels/network/connection-editor/ip6-page.ui:47
 msgid "Automatic, DHCP only"
 msgstr "Аўтаматычна, толькі DHCP"
 
-#: panels/network/connection-editor/ip6-page.ui:134
-#: panels/network/connection-editor/ip6-page.ui:272
+#: panels/network/connection-editor/ip6-page.ui:141
+#: panels/network/connection-editor/ip6-page.ui:279
 msgid "Prefix"
 msgstr "Прэфікс"
 
@@ -4610,11 +4617,6 @@ msgstr "_Не турбаваць"
 msgid "_Lock Screen Notifications"
 msgstr "Апавяшчэнні на экране _блакіравання"
 
-#. List of apps.
-#: panels/notifications/cc-notifications-panel.ui:26
-msgid "Applications"
-msgstr "Праграмы"
-
 #: panels/notifications/gnome-notifications-panel.desktop.in:4
 msgid "Control which notifications are displayed and what they show"
 msgstr "Кіраванне апавяшчэннямі, налады паказу і зместу"
@@ -4828,7 +4830,7 @@ msgid "Gaming input device"
 msgstr "Гульнявая прылада ўводу"
 
 #. TRANSLATORS: secondary battery, misc
-#: panels/power/cc-battery-row.c:218 panels/power/cc-power-panel.c:257
+#: panels/power/cc-battery-row.c:218 panels/power/cc-power-panel.c:263
 #: panels/power/cc-power-panel.ui:58
 msgid "Battery"
 msgstr "Батарэя"
@@ -4847,51 +4849,58 @@ msgstr "Дадатковая"
 msgid "Batteries"
 msgstr "Батарэі"
 
-#: panels/power/cc-power-panel.c:514
+#. Translators: UPS is an Uninterruptible Power Supply:
+#. * https://en.wikipedia.org/wiki/Uninterruptible_power_supply
+#: panels/power/cc-power-panel.c:260
+#| msgid "USB"
+msgid "UPS"
+msgstr "UPS"
+
+#: panels/power/cc-power-panel.c:520
 msgid "When _idle"
 msgstr "Пры _бяздзейнасці"
 
-#: panels/power/cc-power-panel.c:674
+#: panels/power/cc-power-panel.c:680
 msgid "Suspend"
 msgstr "Прыпыненне працы"
 
-#: panels/power/cc-power-panel.c:675
+#: panels/power/cc-power-panel.c:681
 msgid "Power Off"
 msgstr "Выключэнне камп'ютара"
 
-#: panels/power/cc-power-panel.c:676
+#: panels/power/cc-power-panel.c:682
 msgid "Hibernate"
 msgstr "Гібернацыя"
 
-#: panels/power/cc-power-panel.c:677
+#: panels/power/cc-power-panel.c:683
 msgid "Nothing"
 msgstr "Нічога не рабіць"
 
-#: panels/power/cc-power-panel.c:733
+#: panels/power/cc-power-panel.c:739
 msgid "When on battery power"
 msgstr "Сілкуючыся ад батарэі"
 
-#: panels/power/cc-power-panel.c:735
+#: panels/power/cc-power-panel.c:741
 msgid "When plugged in"
 msgstr "Сілкуючыся ад электрасеткі"
 
-#: panels/power/cc-power-panel.c:856
+#: panels/power/cc-power-panel.c:862
 msgctxt "Idle time"
 msgid "Never"
 msgstr "Ніколі"
 
-#: panels/power/cc-power-panel.c:940
+#: panels/power/cc-power-panel.c:946
 msgid "Automatic suspend"
 msgstr "Аўтаматычнае прыпыненне працы"
 
-#: panels/power/cc-power-panel.c:1036
+#: panels/power/cc-power-panel.c:1042
 msgid ""
 "Performance mode temporarily disabled due to high operating temperature."
 msgstr ""
 "Рэжым высокай прадукцыйнасці часова адключаны, тэмпература прылады занадта "
 "высокая."
 
-#: panels/power/cc-power-panel.c:1038
+#: panels/power/cc-power-panel.c:1044
 msgid ""
 "Lap detected: performance mode temporarily unavailable. Move the device to a "
 "stable surface to restore."
@@ -4900,11 +4909,11 @@ msgstr ""
 "адключаны. Каб узнавіць яго працу, перамясціце прыладу на роўную цвёрдую "
 "паверхню."
 
-#: panels/power/cc-power-panel.c:1040
+#: panels/power/cc-power-panel.c:1046
 msgid "Performance mode temporarily disabled."
 msgstr "Рэжым высокай прадукцыйнасці часова адключаны."
 
-#: panels/power/cc-power-panel.c:1082
+#: panels/power/cc-power-panel.c:1088
 msgid ""
 "Low battery: power saver enabled. Previous mode will be restored when "
 "battery is sufficiently charged."
@@ -4913,13 +4922,13 @@ msgstr ""
 "дастаткова зарадзіцца, папярэдні рэжым будзе адноўлены."
 
 #. translators: "%s" is an application name
-#: panels/power/cc-power-panel.c:1090
+#: panels/power/cc-power-panel.c:1096
 #, c-format
 msgid "Power Saver mode activated by “%s”."
 msgstr "Праграма «%s» задзейнічала рэжым энергазберажэння."
 
 #. translators: "%s" is an application name
-#: panels/power/cc-power-panel.c:1094
+#: panels/power/cc-power-panel.c:1100
 #, c-format
 msgid "Performance mode activated by “%s”."
 msgstr "Праграма «%s» задзейнічала рэжым прадукцыйнасці."
@@ -6258,7 +6267,7 @@ msgstr "Іншае"
 msgid "Add Location"
 msgstr "Дадаць месца"
 
-#: panels/search/cc-search-panel.c:165
+#: panels/search/cc-search-panel.c:166
 msgid "No apps found"
 msgstr "Праграмы не знойдзены"
 
@@ -6879,6 +6888,13 @@ msgstr "Мільганне ўсім акном"
 msgid "_Test Flash"
 msgstr "_Праверка сігналу"
 
+#. '#' is a dummy target to make 'Sound' clickable
+#. TRANSLATORS: Don't translate  <a href='#'> and </a>
+#: panels/universal-access/cc-ua-hearing-page.c:159
+msgid "System volume can be adjusted in <a href='#'>Sound</a> settings."
+msgstr ""
+"Сістэмную гучнасць можна змяніць праз налады ў меню <a href='#'>Гук</a>."
+
 #: panels/universal-access/cc-ua-mouse-page.ui:10
 msgid "_Mouse Keys"
 msgstr "_Кіраванне ўказальнікам з клавіятуры"
@@ -7468,12 +7484,12 @@ msgid "Forever"
 msgstr "Бясконца"
 
 #: panels/usage/cc-usage-panel.c:347
-msgid "Delete all the recent files?"
-msgstr "Выдаліць усе нядаўнія файлы?"
+msgid "Clear File History?"
+msgstr "Ачысціць гісторыю файлаў?"
 
 #: panels/usage/cc-usage-panel.c:348
-msgid "All the recent files will be permanently deleted."
-msgstr "Усе нядаўнія файлы будуць незваротна выдалены."
+msgid "After clearing, lists of recently used files will appear empty."
+msgstr "Пасля ачысткі, спіс нядаўна выкарыстаных файлаў стане пустым."
 
 #: panels/usage/cc-usage-panel.c:349
 msgid "_Clear History"
@@ -8118,7 +8134,7 @@ msgid "Delete the selected user account"
 msgstr "Выдаліць вылучаны ўліковы запіс карыстальніка"
 
 #: panels/user-accounts/cc-user-panel.c:1341
-#: panels/user-accounts/cc-user-panel.c:1482
+#: panels/user-accounts/cc-user-panel.c:1484
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -8126,7 +8142,7 @@ msgstr ""
 "Каб выдаліць уліковы запіс вылучанага карыстальніка,\n"
 "спачатку націсніце на значок *"
 
-#: panels/user-accounts/cc-user-panel.c:1528
+#: panels/user-accounts/cc-user-panel.c:1530
 msgid "Unlock to Add Users and Change Settings"
 msgstr "Разблакіруйце, каб дадаваць карыстальнікаў і змяняць налады"
 
@@ -8514,7 +8530,7 @@ msgid "External pad device"
 msgstr "Знешні графічны планшэт"
 
 #. All displays item
-#: panels/wacom/cc-wacom-page.c:643
+#: panels/wacom/cc-wacom-page.c:646
 msgid "All Displays"
 msgstr "Усе дысплеі"
 
@@ -9339,7 +9355,7 @@ msgstr ""
 
 #. translators:
 #. * The number of sound outputs on a particular device
-#: subprojects/gvc/gvc-mixer-control.c:1907
+#: subprojects/gvc/gvc-mixer-control.c:1915
 #, c-format
 msgid "%u Output"
 msgid_plural "%u Outputs"
@@ -9349,7 +9365,7 @@ msgstr[2] "%u выхадаў"
 
 #. translators:
 #. * The number of sound inputs on a particular device
-#: subprojects/gvc/gvc-mixer-control.c:1917
+#: subprojects/gvc/gvc-mixer-control.c:1925
 #, c-format
 msgid "%u Input"
 msgid_plural "%u Inputs"
@@ -9357,9 +9373,18 @@ msgstr[0] "%u уваход"
 msgstr[1] "%u уваходы"
 msgstr[2] "%u уваходаў"
 
-#: subprojects/gvc/gvc-mixer-control.c:2867
+#: subprojects/gvc/gvc-mixer-control.c:2876
 msgid "System Sounds"
 msgstr "Сістэмныя гукі"
+
+#~ msgid "Applications"
+#~ msgstr "Праграмы"
+
+#~ msgid "Delete all the recent files?"
+#~ msgstr "Выдаліць усе нядаўнія файлы?"
+
+#~ msgid "All the recent files will be permanently deleted."
+#~ msgstr "Усе нядаўнія файлы будуць незваротна выдалены."
 
 #~ msgid "Primary Menu"
 #~ msgstr "Асноўнае меню"
