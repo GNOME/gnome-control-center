@@ -965,6 +965,20 @@ cc_panel_list_go_previous (CcPanelList *self)
   switch_to_view (self, previous_view);
 }
 
+/**
+ * cc_panel_list_get_current_panel:
+ * @self: a #CcPanelList
+ *
+ * Returns: (allow-none): id string of current active panel on @self, or %NULL when there's none yet.
+ */
+const gchar*
+cc_panel_list_get_current_panel (CcPanelList *self)
+{
+  g_return_val_if_fail (CC_IS_PANEL_LIST (self), NULL);
+
+  return self->current_panel_id;
+}
+
 void
 cc_panel_list_add_panel (CcPanelList        *self,
                          CcPanelCategory     category,

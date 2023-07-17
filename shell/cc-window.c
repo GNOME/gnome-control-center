@@ -723,10 +723,25 @@ cc_window_set_property (GObject      *object,
 }
 
 static void
+maybe_load_last_panel (CcWindow *self)
+{
+  g_autofree char *id = NULL;
+
+  id = g_settings_get_string (self->settings, "last-panel");
+  if (cc_panel_list_get_current_panel (self->panel_list))
+    return;
+
+  /* select the last used panel, if any, or the first visible panel */
+  if (id != NULL && cc_shell_model_has_panel (self->store, id))
+    cc_panel_list_set_active_panel (self->panel_list, id);
+  else
+    cc_panel_list_activate (self->panel_list);
+}
+
+static void
 cc_window_constructed (GObject *object)
 {
   CcWindow *self = CC_WINDOW (object);
-  g_autofree char *id = NULL;
 
   load_window_state (self);
 
@@ -734,12 +749,10 @@ cc_window_constructed (GObject *object)
   setup_model (self);
 
   /* After everything is loaded, select the last used panel, if any,
-   * or the first visible panel */
-  id = g_settings_get_string (self->settings, "last-panel");
-  if (id != NULL && cc_shell_model_has_panel (self->store, id))
-    cc_panel_list_set_active_panel (self->panel_list, id);
-  else
-    cc_panel_list_activate (self->panel_list);
+   * or the first visible panel. We do that in an idle handler so we
+   * have a chance to skip it when another panel has been explicitly
+   * activated from commandline parameter or from DBus method */
+  g_idle_add_once ((GSourceOnceFunc) maybe_load_last_panel, self);
 
   g_signal_connect_swapped (self->panel_list,
                             "notify::view",
