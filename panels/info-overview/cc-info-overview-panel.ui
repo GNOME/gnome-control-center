@@ -103,10 +103,10 @@
         </child>
 
         <child>
-          <object class="AdwPreferencesGroup">
+          <object class="AdwPreferencesGroup" id="software_updates_group">
             <!-- Software Updates -->
             <child>
-              <object class="AdwActionRow" id="software_updates_row">
+              <object class="AdwActionRow">
                 <property name="activatable">True</property>
                 <property name="title" translatable="yes">Software Updates</property>
                 <signal name="activated" handler="cc_info_panel_open_software_update" swapped="yes"/>

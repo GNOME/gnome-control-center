@@ -42,7 +42,7 @@ struct _CcInfoOverviewPanel
   GtkPicture      *os_logo;
   CcListRow       *os_name_row;
   CcListRow       *processor_row;
-  AdwActionRow    *software_updates_row;
+  AdwPreferencesGroup *software_updates_group;
 
   GtkWindow       *system_details_window;
 };
@@ -225,7 +225,7 @@ cc_info_overview_panel_class_init (CcInfoOverviewPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, os_logo);
   gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, os_name_row);
   gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, processor_row);
-  gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, software_updates_row);
+  gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, software_updates_group);
 
   gtk_widget_class_bind_template_callback (widget_class, cc_info_panel_open_software_update);
   gtk_widget_class_bind_template_callback (widget_class, cc_info_panel_open_system_details);
@@ -243,7 +243,7 @@ cc_info_overview_panel_init (CcInfoOverviewPanel *self)
   g_resources_register (cc_info_overview_get_resource ());
 
   if ((!does_gnome_software_exist () || !does_gnome_software_allow_updates ()) && !does_gpk_update_viewer_exist ())
-    gtk_widget_set_visible (GTK_WIDGET (self->software_updates_row), FALSE);
+    gtk_widget_set_visible (GTK_WIDGET (self->software_updates_group), FALSE);
 
   info_overview_panel_setup_overview (self);
 
