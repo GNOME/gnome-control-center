@@ -37,15 +37,15 @@
             </child>
             <child>
               <object class="GtkBox">
-                <property name="hexpand">true</property>
+                <property name="hexpand">false</property>
                 <property name="halign">end</property>
-                <property name="homogeneous">true</property>
                 <property name="spacing">12</property>
                 <property name="margin-top">12</property>
                 <child>
                   <object class="GtkButton" id="clear_recent_button">
                     <property name="valign">center</property>
                     <property name="label" translatable="yes">_Clear History…</property>
+                    <property name="can-shrink">True</property>
                     <property name="use_underline">1</property>
                     <signal name="clicked" handler="clear_recent" swapped="yes"/>
                     <style>
@@ -103,9 +103,8 @@
             </child>
             <child>
               <object class="GtkBox">
-                <property name="hexpand">true</property>
+                <property name="hexpand">false</property>
                 <property name="halign">end</property>
-                <property name="homogeneous">true</property>
                 <property name="margin-top">12</property>
                 <property name="spacing">12</property>
                 <child>
@@ -113,6 +112,7 @@
                     <property name="halign">end</property>
                     <property name="valign">center</property>
                     <property name="label" translatable="yes">_Empty Trash…</property>
+                    <property name="can-shrink">True</property>
                     <property name="use-underline">true</property>
                     <style>
                       <class name="destructive-action"/>
@@ -124,6 +124,7 @@
                     <property name="halign">end</property>
                     <property name="valign">center</property>
                     <property name="label" translatable="yes">_Delete Temporary Files…</property>
+                    <property name="can-shrink">True</property>
                     <property name="use-underline">true</property>
                       <style>
                         <class name="destructive-action"/>
