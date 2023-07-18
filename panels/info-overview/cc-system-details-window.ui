@@ -51,14 +51,18 @@
                 <!-- Hardware Information -->
                 <child>
                   <object class="GtkBox">
+                    <property name="accessible-role">group</property>
                     <property name="orientation">vertical</property>
                     <property name="margin-top">6</property>
                     <property name="margin-bottom">6</property>
                     <property name="margin-start">6</property>
                     <property name="margin-end">6</property>
+                    <accessibility>
+                      <relation name="labelled-by">hardware_info_label</relation>
+                    </accessibility>
 
                     <child>
-                      <object class="GtkLabel">
+                      <object class="GtkLabel" id="hardware_info_label">
                         <property name="label" translatable="yes">Hardware Information</property>
                         <property name="halign">start</property>
                         <attributes>
@@ -108,14 +112,18 @@
                 <!-- Software Information -->
                 <child>
                   <object class="GtkBox">
+                    <property name="accessible-role">group</property>
                     <property name="orientation">vertical</property>
                     <property name="margin-top">6</property>
                     <property name="margin-bottom">6</property>
                     <property name="margin-start">6</property>
                     <property name="margin-end">6</property>
+                    <accessibility>
+                      <relation name="labelled-by">software_info_label</relation>
+                    </accessibility>
 
                     <child>
-                      <object class="GtkLabel">
+                      <object class="GtkLabel" id="software_info_label">
                         <property name="label" translatable="yes">Software Information</property>
                         <property name="halign">start</property>
                         <attributes>

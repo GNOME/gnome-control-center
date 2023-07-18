@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <template class="CcInfoEntry" parent="GtkBox">
+    <property name="accessible-role">group</property>
     <property name="orientation">horizontal</property>
     <property name="margin-top">6</property>
     <property name="margin-bottom">6</property>
+    <accessibility>
+      <relation name="labelled-by">prop</relation>
+      <property name="label">Info entry</property>
+    </accessibility>
 
     <!-- Prop -->
     <child>
