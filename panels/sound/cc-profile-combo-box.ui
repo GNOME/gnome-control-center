@@ -5,7 +5,9 @@
     <property name="model">profile_model</property>
     <signal name="changed" handler="profile_changed_cb" object="CcProfileComboBox" swapped="yes"/>
     <child>
-      <object class="GtkCellRendererText"/>
+      <object class="GtkCellRendererText">
+        <property name="ellipsize">end</property>
+      </object>
       <attributes>
         <attribute name="text">0</attribute>
       </attributes>
