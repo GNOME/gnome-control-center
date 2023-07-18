@@ -19,7 +19,10 @@
  *
  */
 #include "cc-remote-login.h"
+#include "cc-systemd-service.h"
+
 #include <gio/gio.h>
+#include <polkit/polkit.h>
 
 #ifndef SSHD_SERVICE
 #define SSHD_SERVICE "sshd.service"
@@ -34,248 +37,75 @@ typedef struct
 
 G_DEFINE_AUTOPTR_CLEANUP_FUNC (CallbackData, g_free)
 
-static void
-set_switch_state (AdwSwitchRow *widget,
-                  gboolean   active)
+void
+cc_remote_login_get_enabled (AdwSwitchRow  *widget)
 {
-  if (adw_switch_row_get_active (widget) != active)
-    {
-      g_object_set_data (G_OBJECT (widget), "set-from-dbus",
-                         GINT_TO_POINTER (1));
-      adw_switch_row_set_active (widget, active);
-    }
+  /* disable the switch until the current state is known */
+  gtk_widget_set_sensitive (GTK_WIDGET (widget), FALSE);
+
+  adw_switch_row_set_active (widget, cc_is_service_active (SSHD_SERVICE, G_BUS_TYPE_SYSTEM));
+
   gtk_widget_set_sensitive (GTK_WIDGET (widget), TRUE);
 }
 
 static void
-active_state_ready_callback (GObject      *source_object,
-                             GAsyncResult *result,
-                             gpointer      user_data)
+enable_ssh_service (GError** error)
 {
-  g_autoptr(CallbackData) callback_data = user_data;
-  g_autoptr(GVariant) active_variant = NULL;
-  g_autoptr(GVariant) child_variant = NULL;
-  g_autoptr(GVariant) tmp_variant = NULL;
-  const gchar *active_state;
-  gboolean active;
-  g_autoptr(GError) error = NULL;
-
-  active_variant = g_dbus_connection_call_finish (G_DBUS_CONNECTION (source_object),
-                                                  result, &error);
-
-  if (!active_variant)
-    {
-      /* print a warning if there was an error but the operation was not
-       * cancelled */
-      if (!g_error_matches(error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
-        g_warning ("Error getting remote login state: %s", error->message);
-
-      /* the switch will be remain insensitive, since the current state could
-       * not be determined */
-      return;
-    }
-
-  child_variant = g_variant_get_child_value (active_variant, 0);
-  tmp_variant = g_variant_get_variant (child_variant);
-  active_state = g_variant_get_string (tmp_variant, NULL);
-
-  active = g_str_equal (active_state, "active");
-
-  /* set the switch to the correct state */
-  if (callback_data->widget)
-    set_switch_state (callback_data->widget, active);
+  cc_enable_service (SSHD_SERVICE, G_BUS_TYPE_SYSTEM, error);
 }
 
 static void
-path_ready_callback (GObject      *source_object,
-                     GAsyncResult *result,
-                     gpointer      user_data)
+disable_ssh_service (GError** error)
 {
-  g_autoptr(CallbackData) callback_data = user_data;
-  g_autoptr(GVariant) path_variant = NULL;
-  g_autoptr(GVariant) child_variant = NULL;
-  const gchar *object_path;
-  g_autoptr(GError) error = NULL;
-
-  path_variant = g_dbus_connection_call_finish (G_DBUS_CONNECTION (source_object),
-                                                result, &error);
-
-  if (!path_variant)
-    {
-      if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
-        return;
-
-      /* this may fail if systemd or remote login service is not available */
-      g_debug ("Error getting remote login state: %s", error->message);
-
-      /* hide the remote login row, since the service is not available */
-      if (callback_data->row)
-        gtk_widget_set_visible (callback_data->row, FALSE);
-
-      return;
-    }
-
-  child_variant = g_variant_get_child_value (path_variant, 0);
-  object_path = g_variant_get_string (child_variant, NULL);
-
-  g_dbus_connection_call (G_DBUS_CONNECTION (source_object),
-                          "org.freedesktop.systemd1",
-                          object_path,
-                          "org.freedesktop.DBus.Properties",
-                          "Get",
-                          g_variant_new ("(ss)",
-                                         "org.freedesktop.systemd1.Unit",
-                                         "ActiveState"),
-                          (GVariantType*) "(v)",
-                          G_DBUS_CALL_FLAGS_NONE,
-                          -1,
-                          callback_data->cancellable,
-                          active_state_ready_callback,
-                          callback_data);
-  g_steal_pointer (&callback_data);
+  cc_disable_service (SSHD_SERVICE, G_BUS_TYPE_SYSTEM, error);
 }
 
 static void
-state_ready_callback (GObject      *source_object,
-                      GAsyncResult *result,
-                      gpointer      user_data)
+on_permission_acquired (GObject      *source_object,
+                        GAsyncResult *res,
+                        gpointer      user_data)
 {
-  g_autoptr(CallbackData) callback_data = user_data;
-  g_autoptr(GVariant) state_variant = NULL;
-  g_autoptr(GVariant) child_variant = NULL;
-  const gchar *state_string;
-  g_autoptr(GError) error = NULL;
+  GPermission             *permission = (GPermission*) source_object;
+  g_autoptr(CallbackData)  callback_data = user_data;
+  g_autoptr(GError)        error = NULL;
 
-  state_variant = g_dbus_connection_call_finish (G_DBUS_CONNECTION (source_object),
-                                                 result, &error);
-  if (!state_variant)
+  if (!g_permission_acquire_finish (permission, res, &error))
     {
-      if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
-        return;
-
-      /* this may fail if systemd or remote login service is not available */
-      g_debug ("Error getting remote login state: %s", error->message);
-
-      /* hide the remote login row, since the service is not available */
-      if (callback_data->row)
-        gtk_widget_set_visible (callback_data->row, FALSE);
-
-      return;
-    }
-
-  child_variant = g_variant_get_child_value (state_variant, 0);
-  state_string = g_variant_get_string (child_variant, NULL);
-
-  if (g_str_equal (state_string, "enabled"))
-    {
-      /* service is enabled, so check whether it is running or not */
-      g_dbus_connection_call (G_DBUS_CONNECTION (source_object),
-                              "org.freedesktop.systemd1",
-                              "/org/freedesktop/systemd1",
-                              "org.freedesktop.systemd1.Manager",
-                              "GetUnit",
-                              g_variant_new ("(s)", SSHD_SERVICE),
-                              (GVariantType*) "(o)",
-                              G_DBUS_CALL_FLAGS_NONE,
-                              -1,
-                              callback_data->cancellable,
-                              path_ready_callback,
-                              callback_data);
-      g_steal_pointer (&callback_data);
-    }
-  else if (g_str_equal (state_string, "disabled"))
-    {
-      /* service is available, but is currently disabled */
-      set_switch_state (callback_data->widget, FALSE);
+      g_warning ("Cannot acquire '%s' permission: %s",
+                 "org.gnome.controlcenter.remote-login-helper",
+                 error->message);
     }
   else
     {
-      /* unknown state */
-      g_warning ("Unknown state %s for %s", state_string, SSHD_SERVICE);
-    }
-}
+      if (g_permission_get_allowed (permission))
+        {
+          if (adw_switch_row_get_active (callback_data->widget))
+            enable_ssh_service (&error);
+          else
+            disable_ssh_service (&error);
 
-static void
-bus_ready_callback (GObject      *source_object,
-                    GAsyncResult *result,
-                    gpointer      user_data)
-{
-  g_autoptr(CallbackData) callback_data = user_data;
-  g_autoptr(GDBusConnection) connection = NULL;
-  g_autoptr(GError) error = NULL;
-
-  connection = g_bus_get_finish (result, &error);
-
-  if (!connection)
-    {
-      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
-        g_warning ("Error getting remote login state: %s", error->message);
-
-      return;
+          /* Switch state should match service state */
+          return;
+        }
+      else
+        {
+          g_warning ("Permission: %s not granted",
+                     "org.gnome.controlcenter.remote-login-helper");
+        }
     }
 
-  g_dbus_connection_call (connection,
-                          "org.freedesktop.systemd1",
-                          "/org/freedesktop/systemd1",
-                          "org.freedesktop.systemd1.Manager",
-                          "GetUnitFileState",
-                          g_variant_new ("(s)", SSHD_SERVICE),
-                          (GVariantType*) "(s)",
-                          G_DBUS_CALL_FLAGS_NONE,
-                          -1,
-                          callback_data->cancellable,
-                          state_ready_callback,
-                          callback_data);
-  g_steal_pointer (&callback_data);
-}
-
-void
-cc_remote_login_get_enabled (GCancellable *cancellable,
-                             AdwSwitchRow    *widget,
-                             GtkWidget    *row)
-{
-  CallbackData *callback_data;
-
-  /* disable the switch until the current state is known */
-  gtk_widget_set_sensitive (GTK_WIDGET (widget), FALSE);
-
-  callback_data = g_new (CallbackData, 1);
-  callback_data->widget = widget;
-  callback_data->row = row;
-  callback_data->cancellable = cancellable;
-
-  g_bus_get (G_BUS_TYPE_SYSTEM, callback_data->cancellable,
-             bus_ready_callback, callback_data);
-}
-
-static gint std_err;
-
-static void
-child_watch_func (GPid     pid,
-                  gint     status,
-                  gpointer user_data)
-{
-  g_autoptr(CallbackData) callback_data = user_data;
-  if (status != 0)
-    {
-      g_warning ("Error enabling or disabling remote login service");
-
-      /* make sure the switch reflects the current status */
-      cc_remote_login_get_enabled (callback_data->cancellable, callback_data->widget, NULL);
-    }
-  g_spawn_close_pid (pid);
-
-  gtk_widget_set_sensitive (GTK_WIDGET (callback_data->widget), TRUE);
+  /* If permission could not be acquired, or permission was not granted,
+   * switch might be out of sync, update switch state */
+  cc_remote_login_get_enabled (callback_data->widget);
 }
 
 void
 cc_remote_login_set_enabled (GCancellable *cancellable,
                              AdwSwitchRow    *widget)
 {
-  gchar *command[] = { "pkexec", LIBEXECDIR "/cc-remote-login-helper", NULL,
-      NULL };
-  g_autoptr(GError) error = NULL;
-  GPid pid;
+  GPermission       *permission;
+  g_autoptr(GError)  error = NULL;
+
   CallbackData *callback_data;
 
   if (GPOINTER_TO_INT (g_object_get_data (G_OBJECT (widget), "set-from-dbus")) == 1)
@@ -284,24 +114,23 @@ cc_remote_login_set_enabled (GCancellable *cancellable,
       return;
     }
 
-  if (adw_switch_row_get_active (widget))
-    command[2] = "enable";
-  else
-    command[2] = "disable";
-
-  gtk_widget_set_sensitive (GTK_WIDGET (widget), FALSE);
-
-  g_spawn_async_with_pipes (NULL, command, NULL,
-                            G_SPAWN_SEARCH_PATH | G_SPAWN_DO_NOT_REAP_CHILD, NULL,
-                            NULL, &pid, NULL, NULL, &std_err, &error);
-
   callback_data = g_new0 (CallbackData, 1);
   callback_data->widget = widget;
   callback_data->cancellable = cancellable;
 
-  g_child_watch_add (pid, child_watch_func, callback_data);
+  permission = polkit_permission_new_sync ("org.gnome.controlcenter.remote-login-helper",
+                                           NULL, NULL, &error);
 
-  if (error)
-    g_error ("Error running cc-remote-login-helper: %s", error->message);
+  if (permission != NULL)
+    {
+      g_permission_acquire_async (permission, callback_data->cancellable,
+                                  on_permission_acquired, callback_data);
+    }
+  else
+    {
+      g_warning ("Cannot create '%s' permission: %s",
+                "org.gnome.controlcenter.remote-login-helper",
+                error->message);
+    }
 }
 

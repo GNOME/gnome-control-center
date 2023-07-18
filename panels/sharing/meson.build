@@ -65,29 +65,10 @@ panels_libs += static_library(
   sources: sources,
   include_directories: [ top_inc, common_inc ],
   dependencies: [
-    common_deps
+    common_deps,
+    polkit_gobject_dep,
   ],
   c_args: cflags
-)
-
-name = 'cc-remote-login-helper'
-
-deps = [
-  gio_dep,
-  glib_dep,
-]
-
-executable(
-  name,
-  sources: [
-    name + '.c',
-    'cc-systemd-service.c',
-  ],
-  include_directories: top_inc,
-  dependencies: deps,
-  c_args: cflags,
-  install: true,
-  install_dir: control_center_libexecdir
 )
 
 subdir('icons')
