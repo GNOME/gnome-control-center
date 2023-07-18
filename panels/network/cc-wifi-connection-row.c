@@ -18,6 +18,7 @@
 #include <glib/gi18n.h>
 #include <config.h>
 #include "cc-wifi-connection-row.h"
+#include "cc-qr-code.h"
 
 struct _CcWifiConnectionRow
 {
@@ -265,7 +266,7 @@ update_ui (CcWifiConnectionRow *self)
 
   gtk_widget_set_visible (GTK_WIDGET (self->active_label), active);
   gtk_widget_set_visible (GTK_WIDGET (self->options_button), active || connecting || self->known_connection);
-  gtk_widget_set_visible (GTK_WIDGET (self->qr_code_button), active || connecting || self->known_connection);
+  gtk_widget_set_visible (GTK_WIDGET (self->qr_code_button), (active || connecting || self->known_connection) && is_qr_code_supported (self->connection));
 
   if (security != NM_AP_SEC_UNKNOWN && security != NM_AP_SEC_NONE && security != NM_AP_SEC_OWE && security != NM_AP_SEC_OWE_TM)
     {

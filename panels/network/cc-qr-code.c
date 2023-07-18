@@ -240,6 +240,32 @@ get_connection_security_type (NMConnection *c)
   return "nopass";
 }
 
+gboolean
+is_qr_code_supported (NMConnection *c)
+{
+  NMSettingWirelessSecurity *setting;
+  const char *key_mgmt;
+
+  g_return_val_if_fail (c, TRUE);
+
+  setting = nm_connection_get_setting_wireless_security (c);
+
+  if (!setting)
+    return TRUE;
+
+  key_mgmt = nm_setting_wireless_security_get_key_mgmt (setting);
+
+  /* No IEEE 802.1x */
+  if (g_str_equal (key_mgmt, "none"))
+    return TRUE;
+
+  if (g_str_equal (key_mgmt, "wpa-none") ||
+      g_str_equal (key_mgmt, "wpa-psk"))
+    return TRUE;
+
+  return FALSE;
+}
+
 static gchar *
 get_wifi_password (NMConnection *c)
 {
