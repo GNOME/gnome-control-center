@@ -277,7 +277,7 @@
                             <property name="visible">False</property>
                             <property name="use_underline">True</property>
                             <property name="label" translatable="yes">_Remove User…</property>
-                            <signal name="clicked" handler="delete_user" object="CcUserPanel" swapped="yes"/>
+                            <signal name="clicked" handler="remove_user" object="CcUserPanel" swapped="yes"/>
                             <style>
                               <class name="destructive-action"/>
                             </style>
@@ -335,14 +335,14 @@
     </child>
   </template>
 
-  <object class="AdwMessageDialog" id="local_user_dialog">
+  <object class="AdwMessageDialog" id="remove_local_user_dialog">
     <property name="modal">True</property>
     <property name="hide-on-close">True</property>
     <property name="destroy_with_parent">True</property>
     <property name="body" translatable="yes">The user will not be able to use this device once their account has been removed.</property>
     <property name="default-response">cancel</property>
     <property name="close-response">cancel</property>
-    <signal name="response" handler="delete_user_response" object="CcUserPanel" swapped="yes"/>
+    <signal name="response" handler="remove_local_user_response" object="CcUserPanel" swapped="yes"/>
     <responses>
       <response id="cancel" translatable="yes">_Cancel</response>
       <response id="remove" translatable="yes" appearance="destructive">_Remove</response>
@@ -361,5 +361,18 @@
         </child>
       </object>
     </child>
+  </object>
+
+  <object class="AdwMessageDialog" id="remove_enterprise_user_dialog">
+    <property name="modal">True</property>
+    <property name="hide-on-close">True</property>
+    <property name="destroy_with_parent">True</property>
+    <property name="default-response">cancel</property>
+    <property name="close-response">cancel</property>
+    <signal name="response" handler="remove_enterprise_user_response" object="CcUserPanel" swapped="yes"/>
+    <responses>
+      <response id="cancel" translatable="yes">_Cancel</response>
+      <response id="remove" translatable="yes" appearance="destructive">_Delete</response>
+    </responses>
   </object>
 </interface>

@@ -91,12 +91,13 @@ struct _CcUserPanel {
 #endif
         CcListRow           *password_row;
         CcPermissionInfobar *permission_infobar;
+        AdwMessageDialog *remove_enterprise_user_dialog;
+        AdwMessageDialog *remove_local_user_dialog;
         GtkButton       *remove_user_button;
         GtkStack        *stack;
         AdwAvatar       *user_avatar;
         GtkMenuButton   *user_avatar_edit_button;
         GtkOverlay      *users_overlay;
-        AdwMessageDialog *local_user_dialog;
         GtkSwitch       *local_user_choice;
 
         ActUser *selected_user;
@@ -364,9 +365,9 @@ delete_user_done (ActUserManager *manager,
 }
 
 static void
-delete_user_response (CcUserPanel      *self,
-                      gchar            *response,
-                      AdwMessageDialog *dialog)
+remove_local_user_response (CcUserPanel      *self,
+                            gchar            *response,
+                            AdwMessageDialog *dialog)
 {
         ActUser *user;
         gboolean remove_files;
@@ -518,20 +519,13 @@ enterprise_user_uncached (GObject           *source,
 }
 
 static void
-delete_enterprise_user_response (CcUserPanel *self,
-                                 gint         response_id,
-                                 GtkWidget   *dialog)
+remove_enterprise_user_response (CcUserPanel *self)
 {
         AsyncDeleteData *data;
         ActUser *user;
 
-        gtk_window_destroy (GTK_WINDOW (dialog));
-
-        if (response_id != GTK_RESPONSE_ACCEPT) {
-                return;
-        }
-
         user = get_selected_user (self);
+        g_return_if_fail (user != NULL);
 
         data = g_slice_new (AsyncDeleteData);
         data->self = g_object_ref (self);
@@ -548,67 +542,46 @@ delete_enterprise_user_response (CcUserPanel *self,
 }
 
 static void
-delete_user (CcUserPanel *self)
+remove_user (CcUserPanel *self)
 {
         ActUser *user;
-        GtkWidget *dialog;
+        GtkWindow *parent;
 
         user = get_selected_user (self);
-        if (user == NULL) {
+        g_return_if_fail (user != NULL);
+
+        parent = GTK_WINDOW (gtk_widget_get_native (GTK_WIDGET (self)));
+        // FIXME: this should be in a AdwToast.
+        // There's no action other than closing the dialog.
+        // https://developer.gnome.org/hig/patterns/feedback/dialogs.html#error-dialogs
+        if (act_user_is_logged_in_anywhere (user)) {
+                GtkWidget *dialog;
+                g_autofree gchar *heading = NULL;
+                g_autofree gchar *body = NULL;
+
+                heading = g_strdup_printf (_("%s is still logged in"), get_real_or_user_name (user));
+                body = g_strdup_printf (_("Deleting a user while they are logged in can leave the system in an inconsistent state."));
+
+                dialog = adw_message_dialog_new (parent, heading, body);
+                gtk_window_present (GTK_WINDOW (dialog));
                 return;
         }
-        else if (act_user_is_logged_in_anywhere (user)) {
-                dialog = gtk_message_dialog_new (GTK_WINDOW (gtk_widget_get_native (GTK_WIDGET (self))),
-                                                 GTK_DIALOG_MODAL,
-                                                 GTK_MESSAGE_INFO,
-                                                 GTK_BUTTONS_CLOSE,
-                                                 _("%s is still logged in"),
-                                                get_real_or_user_name (user));
 
-                gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
-                                                          _("Deleting a user while they are logged in can leave the system in an inconsistent state."));
-                g_signal_connect (dialog, "response",
-                                  G_CALLBACK (gtk_window_destroy), NULL);
+        if (act_user_is_local_account (user)) {
+                gtk_window_set_transient_for (GTK_WINDOW (self->remove_local_user_dialog), parent);
+                adw_message_dialog_format_heading (self->remove_local_user_dialog,
+                                                   _("Remove %s?"),
+                                                   get_real_or_user_name (user));
+                gtk_window_present (GTK_WINDOW (self->remove_local_user_dialog));
         }
-        else if (act_user_is_local_account (user)) {
-                dialog = ADW_MESSAGE_DIALOG (self->local_user_dialog);
-
-                if (!gtk_window_get_transient_for (GTK_WINDOW (dialog))) {
-                        GtkNative *native;
-
-                        native = gtk_widget_get_native (GTK_WIDGET (self));
-                        gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (native));
-
-                        adw_message_dialog_format_heading (ADW_MESSAGE_DIALOG (dialog),
-                                                           _("Remove %s?"), 
-                                                           get_real_or_user_name (user));
-                }
+        else
+        {
+                gtk_window_set_transient_for (GTK_WINDOW (self->remove_enterprise_user_dialog), parent);
+                adw_message_dialog_format_heading (self->remove_enterprise_user_dialog,
+                                                   _("Are you sure you want to revoke remotely managed %s’s account?"),
+                                                   get_real_or_user_name (user));
+                gtk_window_present (GTK_WINDOW (self->remove_enterprise_user_dialog));
         }
-        else {
-                dialog = gtk_message_dialog_new (GTK_WINDOW (gtk_widget_get_native (GTK_WIDGET (self))),
-                                                 GTK_DIALOG_MODAL,
-                                                 GTK_MESSAGE_QUESTION,
-                                                 GTK_BUTTONS_NONE,
-                                                 _("Are you sure you want to revoke remotely managed %s’s account?"),
-                                                 get_real_or_user_name (user));
-
-                gtk_dialog_add_buttons (GTK_DIALOG (dialog),
-                                        _("_Delete"), GTK_RESPONSE_ACCEPT,
-                                        _("_Cancel"), GTK_RESPONSE_CANCEL,
-                                        NULL);
-
-                gtk_window_set_icon_name (GTK_WINDOW (dialog), "system-users");
-
-                g_signal_connect_object (dialog, "response",
-                                         G_CALLBACK (delete_enterprise_user_response), self, G_CONNECT_SWAPPED);
-        }
-
-        if (GTK_IS_MESSAGE_DIALOG (dialog)) {
-                g_signal_connect (dialog, "close",
-                                  G_CALLBACK (gtk_window_destroy), NULL);
-        }
-
-        gtk_window_present (GTK_WINDOW (dialog));
 }
 
 static const gchar *
@@ -1471,11 +1444,12 @@ cc_user_panel_class_init (CcUserPanelClass *klass)
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, password_row);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, permission_infobar);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, remove_user_button);
+        gtk_widget_class_bind_template_child (widget_class, CcUserPanel, remove_enterprise_user_dialog);
+        gtk_widget_class_bind_template_child (widget_class, CcUserPanel, remove_local_user_dialog);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, stack);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, user_avatar);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, user_avatar_edit_button);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, users_overlay);
-        gtk_widget_class_bind_template_child (widget_class, CcUserPanel, local_user_dialog);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, local_user_choice);
 
         gtk_widget_class_bind_template_callback (widget_class, account_type_changed);
@@ -1486,11 +1460,11 @@ cc_user_panel_class_init (CcUserPanelClass *klass)
         gtk_widget_class_bind_template_callback (widget_class, full_name_entry_apply_cb);
         gtk_widget_class_bind_template_callback (widget_class, full_name_entry_key_press_cb);
         gtk_widget_class_bind_template_callback (widget_class, change_password);
-        gtk_widget_class_bind_template_callback (widget_class, delete_user);
         gtk_widget_class_bind_template_callback (widget_class, dismiss_notification);
         gtk_widget_class_bind_template_callback (widget_class, restart_now);
         gtk_widget_class_bind_template_callback (widget_class, set_selected_user);
         gtk_widget_class_bind_template_callback (widget_class, on_back_button_clicked_cb);
-        gtk_widget_class_bind_template_callback (widget_class, delete_user_response);
-
+        gtk_widget_class_bind_template_callback (widget_class, remove_user);
+        gtk_widget_class_bind_template_callback (widget_class, remove_enterprise_user_response);
+        gtk_widget_class_bind_template_callback (widget_class, remove_local_user_response);
 }
