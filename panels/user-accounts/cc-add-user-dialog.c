@@ -57,7 +57,7 @@ static void   on_realm_joined      (GObject *source,
 static void   add_button_clicked_cb (CcAddUserDialog *self);
 
 struct _CcAddUserDialog {
-        GtkDialog parent_instance;
+        AdwWindow parent_instance;
 
         GtkButton          *add_button;
         CcListRow          *enterprise_button;
@@ -124,7 +124,7 @@ struct _CcAddUserDialog {
         gboolean            join_prompted;
 };
 
-G_DEFINE_TYPE (CcAddUserDialog, cc_add_user_dialog, GTK_TYPE_DIALOG);
+G_DEFINE_TYPE (CcAddUserDialog, cc_add_user_dialog, ADW_TYPE_WINDOW);
 
 static void
 show_error_dialog (CcAddUserDialog *self,
@@ -195,7 +195,7 @@ user_loaded_cb (CcAddUserDialog *self,
         act_user_set_password (user, password, "");
 
   self->user = g_object_ref (user);
-  gtk_dialog_response (GTK_DIALOG (self), GTK_RESPONSE_CLOSE);
+  gtk_window_close (GTK_WINDOW (self));
 }
 
 static void
@@ -879,7 +879,7 @@ on_register_user (GObject *source,
                 g_debug ("Successfully cached remote user: %s", act_user_get_user_name (user));
                 finish_action (self);
                 self->user = g_object_ref (user);
-                gtk_dialog_response (GTK_DIALOG (self), GTK_RESPONSE_CLOSE);
+                gtk_window_close (GTK_WINDOW (self));
         } else {
                 show_error_dialog (self, _("Failed to register account"), error);
                 g_message ("Couldn't cache user account: %s", error->message);
@@ -1702,7 +1702,7 @@ cc_add_user_dialog_new (GPermission *permission)
 {
         CcAddUserDialog *self;
 
-        self = g_object_new (CC_TYPE_ADD_USER_DIALOG, "use-header-bar", 1, NULL);
+        self = g_object_new (CC_TYPE_ADD_USER_DIALOG, NULL);
 
         if (permission != NULL)
                 self->permission = g_object_ref (permission);

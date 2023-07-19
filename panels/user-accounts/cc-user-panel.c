@@ -319,9 +319,8 @@ user_changed (CcUserPanel *self, ActUser *user)
 }
 
 static void
-on_add_user_dialog_response (CcUserPanel     *self,
-                             gint             response,
-                             CcAddUserDialog *dialog)
+on_add_user_dialog_response (CcAddUserDialog *dialog,
+                             CcUserPanel     *self)
 {
         ActUser *user;
 
@@ -345,8 +344,7 @@ add_user (CcUserPanel *self)
         gtk_window_set_transient_for (GTK_WINDOW (dialog), toplevel);
 
         gtk_window_present (GTK_WINDOW (dialog));
-        g_signal_connect_object (dialog, "response", G_CALLBACK (on_add_user_dialog_response),
-                                 self, G_CONNECT_SWAPPED);
+        g_signal_connect (dialog, "close-request", G_CALLBACK (on_add_user_dialog_response), self);
 }
 
 static void
