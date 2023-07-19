@@ -557,15 +557,6 @@ delete_user (CcUserPanel *self)
         if (user == NULL) {
                 return;
         }
-        else if (act_user_get_uid (user) == getuid ()) {
-                dialog = gtk_message_dialog_new (GTK_WINDOW (gtk_widget_get_native (GTK_WIDGET (self))),
-                                                 GTK_DIALOG_MODAL,
-                                                 GTK_MESSAGE_INFO,
-                                                 GTK_BUTTONS_CLOSE,
-                                                 _("You cannot delete your own account."));
-                g_signal_connect (dialog, "response",
-                                  G_CALLBACK (gtk_window_destroy), NULL);
-        }
         else if (act_user_is_logged_in_anywhere (user)) {
                 dialog = gtk_message_dialog_new (GTK_WINDOW (gtk_widget_get_native (GTK_WIDGET (self))),
                                                  GTK_DIALOG_MODAL,
