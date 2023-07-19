@@ -799,7 +799,7 @@ show_user (ActUser *user, CcUserPanel *self)
 {
         g_autofree gchar *lang = NULL;
         g_autofree gchar *name = NULL;
-        gboolean show, enable, is_admin;
+        gboolean show, enable, is_admin, other_user_show;
 #ifdef HAVE_MALCONTENT
         g_autofree gchar *malcontent_control_path = NULL;
 #endif
@@ -898,11 +898,12 @@ show_user (ActUser *user, CcUserPanel *self)
 
         /* Current user */
         show = act_user_get_uid (user) == getuid();
+        other_user_show = show && (g_list_model_get_n_items (G_LIST_MODEL (self->other_users_model)) > 0);
         gtk_widget_set_visible (GTK_WIDGET (self->account_settings_box), !show);
         gtk_widget_set_visible (GTK_WIDGET (self->remove_user_button), !show);
         gtk_widget_set_visible (GTK_WIDGET (self->back_button), !show);
         show_or_hide_back_button(self);
-        gtk_widget_set_visible (GTK_WIDGET (self->other_users), show);
+        gtk_widget_set_visible (GTK_WIDGET (self->other_users), other_user_show);
         gtk_widget_set_visible (GTK_WIDGET (self->add_user_button), show && is_admin);
 
         on_permission_changed (self);
