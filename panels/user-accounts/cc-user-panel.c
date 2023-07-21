@@ -75,12 +75,12 @@ struct _CcUserPanel {
         GtkSwitch       *autologin_switch;
         GtkButton       *back_button;
         CcListRow       *fingerprint_row;
+        GtkWidget       *error_page;
         GtkStack        *full_name_stack;
         GtkLabel        *full_name_label;
         GtkToggleButton *full_name_edit_button;
         GtkEntry        *full_name_entry;
         CcListRow       *language_row;
-        GtkWidget       *no_users_box;
         GtkRevealer     *notification_revealer;
         AdwPreferencesGroup *other_users;
         GtkListBox      *other_users_listbox;
@@ -1090,30 +1090,14 @@ spawn_malcontent_control (CcUserPanel *self)
 static void
 users_loaded (CcUserPanel *self)
 {
-        GtkWidget *dialog;
-
         if (act_user_manager_no_service (self->um)) {
-                GtkWidget *toplevel;
+                gtk_widget_set_visible (GTK_WIDGET (self->permission_infobar), FALSE);
+                gtk_stack_set_visible_child (self->stack, self->error_page);
 
-                toplevel = (GtkWidget *)gtk_widget_get_native (GTK_WIDGET (self));
-                dialog = gtk_message_dialog_new (GTK_WINDOW (toplevel ),
-                                                 GTK_DIALOG_MODAL,
-                                                 GTK_MESSAGE_OTHER,
-                                                 GTK_BUTTONS_CLOSE,
-                                                 _("Failed to contact the accounts service"));
-                gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
-                                                          _("Please make sure that the AccountService is installed and enabled."));
-                g_signal_connect (dialog, "response",
-                                  G_CALLBACK (gtk_window_destroy),
-                                  NULL);
-                gtk_window_present (GTK_WINDOW (dialog));
-
-                gtk_stack_set_visible_child (self->stack, self->no_users_box);
-        } else {
-                gtk_stack_set_visible_child (self->stack, GTK_WIDGET (self->users_overlay));
-                show_current_user (self);
+                return;
         }
 
+        show_current_user (self);
         g_signal_connect_object (self->um, "user-changed", G_CALLBACK (user_changed), self, G_CONNECT_SWAPPED);
         g_signal_connect_object (self->um, "user-is-logged-in-changed", G_CALLBACK (user_changed), self, G_CONNECT_SWAPPED);
         g_signal_connect_object (self->um, "user-added", G_CALLBACK (user_changed), self, G_CONNECT_SWAPPED);
@@ -1429,10 +1413,10 @@ cc_user_panel_class_init (CcUserPanelClass *klass)
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, autologin_row);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, autologin_switch);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, back_button);
+        gtk_widget_class_bind_template_child (widget_class, CcUserPanel, error_page);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, fingerprint_row);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, full_name_entry);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, language_row);
-        gtk_widget_class_bind_template_child (widget_class, CcUserPanel, no_users_box);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, notification_revealer);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, other_users);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, other_users_listbox);
