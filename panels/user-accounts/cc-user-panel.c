@@ -74,8 +74,8 @@ struct _CcUserPanel {
         GtkListBoxRow   *autologin_row;
         GtkSwitch       *autologin_switch;
         GtkButton       *back_button;
-        CcListRow       *fingerprint_row;
         GtkWidget       *error_page;
+        CcListRow       *fingerprint_row;
         GtkStack        *full_name_stack;
         GtkLabel        *full_name_label;
         GtkToggleButton *full_name_edit_button;
@@ -95,9 +95,9 @@ struct _CcUserPanel {
         AdwMessageDialog *remove_local_user_dialog;
         GtkButton       *remove_user_button;
         GtkStack        *stack;
+        AdwToastOverlay *toast_overlay;
         AdwAvatar       *user_avatar;
         GtkMenuButton   *user_avatar_edit_button;
-        GtkOverlay      *users_overlay;
         GtkSwitch       *local_user_choice;
 
         ActUser *selected_user;
@@ -130,30 +130,19 @@ async_delete_data_free (AsyncDeleteData *data)
 
 G_DEFINE_AUTOPTR_CLEANUP_FUNC (AsyncDeleteData, async_delete_data_free)
 
-static void
-show_error_dialog (CcUserPanel *self,
-                   const gchar *message,
-                   GError *error)
-{
-        GtkWidget *dialog;
-
-        dialog = gtk_message_dialog_new (GTK_WINDOW (gtk_widget_get_native (GTK_WIDGET (self))),
-                                         GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT | GTK_DIALOG_USE_HEADER_BAR,
-                                         GTK_MESSAGE_ERROR,
-                                         GTK_BUTTONS_CLOSE,
-                                         "%s", message);
-
-        if (error != NULL) {
-                g_dbus_error_strip_remote_error (error);
-                gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
-                                                          "%s", error->message);
-        }
-
-        g_signal_connect (dialog, "response", G_CALLBACK (gtk_window_destroy), NULL);
-        gtk_window_present (GTK_WINDOW (dialog));
-}
-
 static void show_user (ActUser *user, CcUserPanel *self);
+
+static void
+show_error_message (CcUserPanel *self,
+                    const gchar *message,
+                    GError      *error)
+{
+        g_autofree gchar *toast_message = NULL;
+
+        toast_message = g_strdup_printf (message, error->message);
+        adw_toast_overlay_add_toast (self->toast_overlay,
+                                     adw_toast_new (toast_message));
+}
 
 static ActUser *
 get_selected_user (CcUserPanel *self)
@@ -356,7 +345,7 @@ delete_user_done (ActUserManager *manager,
         if (!act_user_manager_delete_user_finish (manager, res, &error)) {
                 if (!g_error_matches (error, ACT_USER_MANAGER_ERROR,
                                       ACT_USER_MANAGER_ERROR_PERMISSION_DENIED))
-                        show_error_dialog (self, _("Failed to delete user"), error);
+                        show_error_message (self, _("Failed to delete user: %s"), error);
         }
 
         show_current_user (self);
@@ -411,7 +400,7 @@ enterprise_user_revoked (GObject *source,
 
         cc_realm_common_call_change_login_policy_finish (common, result, &error);
         if (error != NULL) {
-                show_error_dialog (self, _("Failed to revoke remotely managed user"), error);
+                show_error_message (self, _("Failed to revoke remotely managed user: %s"), error);
         }
 }
 
@@ -466,7 +455,7 @@ realm_manager_found (GObject *source,
 
         realm_manager = cc_realm_manager_new_finish (result, &error);
         if (error != NULL) {
-                show_error_dialog (self, _("Failed to revoke remotely managed user"), error);
+                show_error_message (self, _("Failed to revoke remotely managed user: %s"), error);
                 return;
         }
 
@@ -512,7 +501,7 @@ enterprise_user_uncached (GObject           *source,
                 cc_realm_manager_new (cc_panel_get_cancellable (CC_PANEL (self)), realm_manager_found, g_steal_pointer (&data));
         }
         else {
-                show_error_dialog (self, _("Failed to revoke remotely managed user"), error);
+                show_error_message (self, _("Failed to revoke remotely managed user: %s"), error);
         }
 }
 
@@ -1044,7 +1033,7 @@ users_loaded (CcUserPanel *self)
                 return;
         }
 
-        gtk_stack_set_visible_child (self->stack, GTK_WIDGET (self->users_overlay));
+        gtk_stack_set_visible_child (self->stack, GTK_WIDGET (self->toast_overlay));
         show_current_user (self);
         g_signal_connect_object (self->um, "user-changed", G_CALLBACK (user_changed), self, G_CONNECT_SWAPPED);
         g_signal_connect_object (self->um, "user-is-logged-in-changed", G_CALLBACK (user_changed), self, G_CONNECT_SWAPPED);
@@ -1379,9 +1368,9 @@ cc_user_panel_class_init (CcUserPanelClass *klass)
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, remove_enterprise_user_dialog);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, remove_local_user_dialog);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, stack);
+        gtk_widget_class_bind_template_child (widget_class, CcUserPanel, toast_overlay);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, user_avatar);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, user_avatar_edit_button);
-        gtk_widget_class_bind_template_child (widget_class, CcUserPanel, users_overlay);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, local_user_choice);
 
         gtk_widget_class_bind_template_callback (widget_class, account_type_changed);
