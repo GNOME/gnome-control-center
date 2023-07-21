@@ -81,6 +81,7 @@ struct _CcUserPanel {
         GtkToggleButton *full_name_edit_button;
         GtkEntry        *full_name_entry;
         CcListRow       *language_row;
+        GtkWidget       *loading_page;
         GtkRevealer     *notification_revealer;
         AdwPreferencesGroup *other_users;
         GtkListBox      *other_users_listbox;
@@ -1097,6 +1098,7 @@ users_loaded (CcUserPanel *self)
                 return;
         }
 
+        gtk_stack_set_visible_child (self->stack, GTK_WIDGET (self->users_overlay));
         show_current_user (self);
         g_signal_connect_object (self->um, "user-changed", G_CALLBACK (user_changed), self, G_CONNECT_SWAPPED);
         g_signal_connect_object (self->um, "user-is-logged-in-changed", G_CALLBACK (user_changed), self, G_CONNECT_SWAPPED);
@@ -1417,6 +1419,7 @@ cc_user_panel_class_init (CcUserPanelClass *klass)
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, fingerprint_row);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, full_name_entry);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, language_row);
+        gtk_widget_class_bind_template_child (widget_class, CcUserPanel, loading_page);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, notification_revealer);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, other_users);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, other_users_listbox);
