@@ -46,49 +46,7 @@
           <object class="GtkStack" id="stack">
             <property name="visible-child">loading_page</property>
             <child>
-              <object class="GtkOverlay" id="users_overlay">
-                <child type="overlay">
-                  <object class="GtkRevealer" id="notification_revealer">
-                    <property name="halign">GTK_ALIGN_CENTER</property>
-                    <property name="valign">GTK_ALIGN_START</property>
-                    <child>
-                      <object class="GtkBox">
-                        <property name="spacing">6</property>
-                        <style>
-                          <class name="app-notification"/>
-                        </style>
-                        <child>
-                          <object class="GtkLabel">
-                            <property name="wrap">True</property>
-                            <property name="max_width_chars">30</property>
-                            <property name="label" translatable="yes">Your session needs to be restarted for changes to take effect</property>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="GtkButton">
-                            <property name="can_focus">True</property>
-                            <property name="valign">GTK_ALIGN_CENTER</property>
-                            <property name="label" translatable="yes">Restart Now</property>
-                            <signal name="clicked" handler="restart_now" object="CcUserPanel" swapped="yes"/>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="GtkButton" id="dismiss_button">
-                            <property name="valign">GTK_ALIGN_CENTER</property>
-                            <property name="icon_name">window-close-symbolic</property>
-                            <accessibility>
-                              <property name="label" translatable="yes">Close</property>
-                            </accessibility>
-                            <signal name="clicked" handler="dismiss_notification" object="CcUserPanel" swapped="yes"/>
-                            <style>
-                              <class name="flat"/>
-                            </style>
-                          </object>
-                        </child>
-                      </object>
-                    </child>
-                  </object>
-                </child>
+              <object class="AdwToastOverlay" id="users_overlay">
                 <child>
                   <object class="AdwPreferencesPage">
                     <child>

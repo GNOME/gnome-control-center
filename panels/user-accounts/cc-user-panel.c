@@ -82,7 +82,6 @@ struct _CcUserPanel {
         GtkEntry        *full_name_entry;
         CcListRow       *language_row;
         GtkWidget       *loading_page;
-        GtkRevealer     *notification_revealer;
         AdwPreferencesGroup *other_users;
         GtkListBox      *other_users_listbox;
         GtkLabel        *password_button_label;
@@ -113,8 +112,6 @@ struct _CcUserPanel {
 };
 
 CC_PANEL_REGISTER (CcUserPanel, cc_user_panel)
-
-static void show_restart_notification (CcUserPanel *self, const gchar *locale);
 
 typedef struct {
         CcUserPanel *self;
@@ -907,66 +904,15 @@ static void
 account_type_changed (CcUserPanel *self)
 {
         ActUser *user;
-        gboolean self_selected;
         gboolean is_admin;
         ActUserAccountType account_type;
 
         user = get_selected_user (self);
-        self_selected = act_user_get_uid (user) == geteuid ();
         is_admin = gtk_switch_get_active (self->account_type_switch);
 
         account_type = is_admin ? ACT_USER_ACCOUNT_TYPE_ADMINISTRATOR : ACT_USER_ACCOUNT_TYPE_STANDARD;
         if (account_type != act_user_get_account_type (user)) {
                 act_user_set_account_type (user, account_type);
-
-                if (self_selected)
-                        show_restart_notification (self, NULL);
-        }
-}
-
-static void
-dismiss_notification (CcUserPanel *self)
-{
-        gtk_revealer_set_reveal_child (self->notification_revealer, FALSE);
-}
-
-static void
-restart_now (CcUserPanel *self)
-{
-        g_autoptr(GDBusConnection) bus = NULL;
-
-        gtk_revealer_set_reveal_child (self->notification_revealer, FALSE);
-
-        bus = g_bus_get_sync (G_BUS_TYPE_SESSION, NULL, NULL);
-        g_dbus_connection_call (bus,
-                                "org.gnome.SessionManager",
-                                "/org/gnome/SessionManager",
-                                "org.gnome.SessionManager",
-                                "Logout",
-                                g_variant_new ("(u)", 0),
-                                NULL, 0, G_MAXINT,
-                                NULL, NULL, NULL);
-}
-
-static void
-show_restart_notification (CcUserPanel *self, const gchar *locale)
-{
-        locale_t current_locale;
-        locale_t new_locale;
-
-        if (locale) {
-                new_locale = newlocale (LC_MESSAGES_MASK, locale, (locale_t) 0);
-                if (new_locale == (locale_t) 0)
-                        g_warning ("Failed to create locale %s: %s", locale, g_strerror (errno));
-                else
-                        current_locale = uselocale (new_locale);
-        }
-
-        gtk_revealer_set_reveal_child (self->notification_revealer, TRUE);
-
-        if (locale && new_locale != (locale_t) 0) {
-                uselocale (current_locale);
-                freelocale (new_locale);
         }
 }
 
@@ -1420,7 +1366,6 @@ cc_user_panel_class_init (CcUserPanelClass *klass)
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, full_name_entry);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, language_row);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, loading_page);
-        gtk_widget_class_bind_template_child (widget_class, CcUserPanel, notification_revealer);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, other_users);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, other_users_listbox);
 #ifdef HAVE_MALCONTENT
@@ -1447,8 +1392,6 @@ cc_user_panel_class_init (CcUserPanelClass *klass)
         gtk_widget_class_bind_template_callback (widget_class, full_name_entry_apply_cb);
         gtk_widget_class_bind_template_callback (widget_class, full_name_entry_key_press_cb);
         gtk_widget_class_bind_template_callback (widget_class, change_password);
-        gtk_widget_class_bind_template_callback (widget_class, dismiss_notification);
-        gtk_widget_class_bind_template_callback (widget_class, restart_now);
         gtk_widget_class_bind_template_callback (widget_class, set_selected_user);
         gtk_widget_class_bind_template_callback (widget_class, on_back_button_clicked_cb);
         gtk_widget_class_bind_template_callback (widget_class, remove_user);
