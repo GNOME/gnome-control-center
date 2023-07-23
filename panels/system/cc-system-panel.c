@@ -30,9 +30,8 @@
 struct _CcSystemPanel
 {
   CcPanel    parent_instance;
-  
-  AdwPreferencesPage *main_page;
-  AdwLeaflet         *main_leaflet;
+
+  AdwNavigationView *navigation;
 };
 
 CC_PANEL_REGISTER (CcSystemPanel, cc_system_panel)
@@ -44,8 +43,7 @@ cc_system_panel_class_init (CcSystemPanelClass *klass)
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/system/cc-system-panel.ui");
 
-  gtk_widget_class_bind_template_child (widget_class, CcSystemPanel, main_page);
-  gtk_widget_class_bind_template_child (widget_class, CcSystemPanel, main_leaflet);
+  gtk_widget_class_bind_template_child (widget_class, CcSystemPanel, navigation);
 }
 
 static void

@@ -1,34 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <template class="CcSystemPanel" parent="CcPanel">
+
     <child type="titlebar">
-      <object class="AdwHeaderBar" id="titlebar">
-        <property name="show-end-title-buttons">True</property>
-        <property name="show-start-title-buttons">False</property>
-        <property name="title-widget">
-          <object class="AdwWindowTitle" id="page_title">
-            <property name="title" translatable="yes">System</property>
-          </object>
-        </property>
-        <child type="start">
-          <object class="GtkButton" id="back_button">
-            <property name="visible">False</property>
-            <property name="icon-name">go-previous-symbolic</property>
-            <accessibility>
-              <property name="label" translatable="yes">Back</property>
-            </accessibility>
-          </object>
-        </child>
-      </object>
+      <object class="AdwBin"/>
     </child>
+
     <child type="content">
-      <object class="AdwLeaflet" id="main_leaflet">
-        <property name="can-unfold">False</property>
-        <property name="can-navigate-back">True</property>
+      <object class="AdwNavigationView" id="navigation">
+
         <child>
-          <object class="AdwPreferencesPage" id="main_page">
+          <object class="AdwNavigationPage">
+            <property name="title" translatable="yes">System</property>
+            <property name="child">
+              <object class="AdwToolbarView">
+                <property name="top-bar-style">raised</property>
+
+                <child type="top">
+                  <object class="AdwHeaderBar">
+                  </object>
+                </child>
+
+                <property name="content">
+                  <!-- ... -->
+                </property>
+
+              </object>
+            </property>
           </object>
         </child>
+
       </object>
     </child>
   </template>
