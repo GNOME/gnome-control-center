@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center.HEAD.he\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2023-07-13 08:29+0000\n"
-"PO-Revision-Date: 2023-07-13 11:36+0300\n"
+"POT-Creation-Date: 2023-07-27 23:02+0000\n"
+"PO-Revision-Date: 2023-07-28 08:59+0300\n"
 "Last-Translator: Yosef Or Boczko <yoseforb@gmail.com>\n"
 "Language-Team: Hebrew <yoseforb@gmail.com>\n"
 "Language: he\n"
@@ -80,7 +80,7 @@ msgstr "מערכת הפעלה"
 #: panels/applications/cc-applications-panel.c:847
 #: panels/keyboard/01-launchers.xml.in:6
 #: shell/appdata/org.gnome.Settings.appdata.xml.in:7 shell/cc-window.c:246
-#: shell/cc-window.c:905 shell/cc-window.ui:22
+#: shell/cc-window.c:918 shell/cc-window.ui:22
 #: shell/org.gnome.Settings.desktop.in:3
 msgid "Settings"
 msgstr "הגדרות"
@@ -1714,55 +1714,55 @@ msgstr ""
 msgid "Schedule"
 msgstr "לוח זמנים"
 
-#: panels/display/cc-night-light-page.ui:108
+#: panels/display/cc-night-light-page.ui:106
 msgid "Sunset to Sunrise"
 msgstr "מהשקיעה עד לזריחה"
 
-#: panels/display/cc-night-light-page.ui:109
+#: panels/display/cc-night-light-page.ui:107
 msgid "Manual Schedule"
 msgstr "לוח זמנים מותאם"
 
-#: panels/display/cc-night-light-page.ui:122
+#: panels/display/cc-night-light-page.ui:117
 #: panels/region/cc-format-preview.ui:35
 msgid "Times"
 msgstr "זמנים"
 
-#: panels/display/cc-night-light-page.ui:135
+#: panels/display/cc-night-light-page.ui:130
 msgid "From"
 msgstr "התחלה"
 
-#: panels/display/cc-night-light-page.ui:160
-#: panels/display/cc-night-light-page.ui:247
+#: panels/display/cc-night-light-page.ui:155
+#: panels/display/cc-night-light-page.ui:242
 msgid "Hour"
 msgstr "שעה"
 
-#: panels/display/cc-night-light-page.ui:166
-#: panels/display/cc-night-light-page.ui:253
+#: panels/display/cc-night-light-page.ui:161
+#: panels/display/cc-night-light-page.ui:248
 msgid ":"
 msgstr ":"
 
-#: panels/display/cc-night-light-page.ui:183
-#: panels/display/cc-night-light-page.ui:270
+#: panels/display/cc-night-light-page.ui:178
+#: panels/display/cc-night-light-page.ui:265
 msgid "Minute"
 msgstr "דקה"
 
 #. This is the short form for the time period in the morning
-#: panels/display/cc-night-light-page.ui:193
-#: panels/display/cc-night-light-page.ui:280
+#: panels/display/cc-night-light-page.ui:188
+#: panels/display/cc-night-light-page.ui:275
 msgid "AM"
 msgstr "AM"
 
 #. This is the short form for the time period in the afternoon
-#: panels/display/cc-night-light-page.ui:205
-#: panels/display/cc-night-light-page.ui:292
+#: panels/display/cc-night-light-page.ui:200
+#: panels/display/cc-night-light-page.ui:287
 msgid "PM"
 msgstr "PM"
 
-#: panels/display/cc-night-light-page.ui:222
+#: panels/display/cc-night-light-page.ui:217
 msgid "To"
 msgstr "סיום"
 
-#: panels/display/cc-night-light-page.ui:328
+#: panels/display/cc-night-light-page.ui:323
 msgid "Color Temperature"
 msgstr "טמפרטורת הצבע"
 
@@ -1936,10 +1936,10 @@ msgstr ""
 
 #. Translators: Unknown endpoint host for WireGuard (invalid setting)
 #: panels/firmware-security/cc-firmware-security-dialog.c:185
-#: panels/info-overview/cc-info-overview-panel.c:297
-#: panels/info-overview/cc-info-overview-panel.c:317
-#: panels/info-overview/cc-info-overview-panel.c:358
-#: panels/info-overview/cc-info-overview-panel.c:388
+#: panels/info-overview/cc-info-overview-panel.c:78
+#: panels/info-overview/cc-system-details-window.c:272
+#: panels/info-overview/cc-system-details-window.c:324
+#: panels/info-overview/cc-system-details-window.c:894
 #: panels/network/connection-editor/ce-page-wireguard.c:368
 #: panels/sound/cc-alert-chooser-window.c:352
 #: panels/wwan/cc-wwan-details-dialog.c:100
@@ -2196,37 +2196,6 @@ msgstr ""
 "מסך;צד;נעילה;ניתוח;דיאגנוסטיקה;קריסה;פרטיות;פרטי;אחרונים;אחרון;זמני;זמניים;"
 "מפתח;אינדקס;שם;רשת;זהות;פרטיות;"
 
-#. translators: This is the type of architecture for the OS
-#: panels/info-overview/cc-info-overview-panel.c:335
-#, c-format
-msgid "64-bit"
-msgstr "64 סיביות"
-
-#. translators: This is the type of architecture for the OS
-#: panels/info-overview/cc-info-overview-panel.c:338
-#, c-format
-msgid "32-bit"
-msgstr "32 סיביות"
-
-#: panels/info-overview/cc-info-overview-panel.c:626
-msgid "X11"
-msgstr "X11"
-
-#: panels/info-overview/cc-info-overview-panel.c:630
-msgid "Wayland"
-msgstr "Wayland"
-
-#: panels/info-overview/cc-info-overview-panel.c:632
-msgctxt "Windowing system (Wayland, X11, or Unknown)"
-msgid "Unknown"
-msgstr "לא ידוע"
-
-#. translators: this is the placeholder string when the GNOME Shell
-#. * version couldn't be loaded, eg. “GNOME Version: Not Available”
-#: panels/info-overview/cc-info-overview-panel.c:719
-msgid "Not Available"
-msgstr "לא זמין"
-
 #: panels/info-overview/cc-info-overview-panel.ui:18
 msgid "System Logo"
 msgstr "לוגו המערכת"
@@ -2236,73 +2205,203 @@ msgstr "לוגו המערכת"
 msgid "Device Name"
 msgstr "שם ההתקן"
 
+#. Translators: this field contains the distro name and version
 #: panels/info-overview/cc-info-overview-panel.ui:48
+msgid "Operating System"
+msgstr "מערכת הפעלה"
+
+#: panels/info-overview/cc-info-overview-panel.ui:57
 msgid "Hardware Model"
 msgstr "דגם חומרה"
 
-#: panels/info-overview/cc-info-overview-panel.ui:57
+#: panels/info-overview/cc-info-overview-panel.ui:66
+#: panels/info-overview/cc-system-details-window.ui:91
+msgid "Processor"
+msgstr "מעבד"
+
+#: panels/info-overview/cc-info-overview-panel.ui:74
+#: panels/info-overview/cc-system-details-window.ui:84
+msgid "Memory"
+msgstr "זיכרון"
+
+#: panels/info-overview/cc-info-overview-panel.ui:82
+#: panels/info-overview/cc-system-details-window.ui:105
+msgid "Disk Capacity"
+msgstr "קיבלות דיסק"
+
+#: panels/info-overview/cc-info-overview-panel.ui:83
+msgid "Calculating…"
+msgstr "מתבצע חישוב…"
+
+#: panels/info-overview/cc-info-overview-panel.ui:91
+#: panels/info-overview/cc-system-details-window.ui:4
+msgid "System Details"
+msgstr "פרטי מערכת"
+
+#: panels/info-overview/cc-info-overview-panel.ui:111
+msgid "Software Updates"
+msgstr "עדכוני תכנה"
+
+#: panels/info-overview/cc-system-details-window.c:298
+msgid "Graphics"
+msgstr "גרפיקה"
+
+#: panels/info-overview/cc-system-details-window.c:300
+#, c-format
+msgid "Graphics %d"
+msgstr "גרפיקה %d"
+
+#. translators: This is the type of architecture for the OS
+#: panels/info-overview/cc-system-details-window.c:342
+#, c-format
+msgid "64-bit"
+msgstr "64 סיביות"
+
+#. translators: This is the type of architecture for the OS
+#: panels/info-overview/cc-system-details-window.c:345
+#, c-format
+msgid "32-bit"
+msgstr "32 סיביות"
+
+#: panels/info-overview/cc-system-details-window.c:629
+msgid "X11"
+msgstr "X11"
+
+#: panels/info-overview/cc-system-details-window.c:633
+msgid "Wayland"
+msgstr "Wayland"
+
+#: panels/info-overview/cc-system-details-window.c:635
+msgctxt "Windowing system (Wayland, X11, or Unknown)"
+msgid "Unknown"
+msgstr "לא ידוע"
+
+#. translators: this is the placeholder string when the GNOME Shell
+#. * version couldn't be loaded, eg. “GNOME Version: Not Available”
+#: panels/info-overview/cc-system-details-window.c:693
+#: panels/info-overview/cc-system-details-window.c:699
+#: panels/info-overview/cc-system-details-window.c:706
+msgid "Not Available"
+msgstr "לא זמין"
+
+#: panels/info-overview/cc-system-details-window.c:756
+msgid "# System Details Report\n"
+msgstr "# דו״ח פרטי מערכת\n"
+
+#: panels/info-overview/cc-system-details-window.c:759
+msgid "## Report details\n"
+msgstr "## פרטי דיווח\n"
+
+#: panels/info-overview/cc-system-details-window.c:762
+msgid "**Date generated:**"
+msgstr "**תאריך יצירה:**"
+
+#: panels/info-overview/cc-system-details-window.c:771
+msgid "**Hardware Model:**"
+msgstr "**דגם חומרה:**"
+
+#: panels/info-overview/cc-system-details-window.c:776
+msgid "**Memory:**"
+msgstr "**זיכרון:**"
+
+#: panels/info-overview/cc-system-details-window.c:784
+msgid "**Processor:**"
+msgstr "**מעבד:**"
+
+#: panels/info-overview/cc-system-details-window.c:798
+msgid "**Graphics:**"
+msgstr "**גרפיקה:**"
+
+#: panels/info-overview/cc-system-details-window.c:800
+#, c-format
+msgid "**Graphics %d:**"
+msgstr "**גרפיקה %d:**"
+
+#: panels/info-overview/cc-system-details-window.c:807
+msgid "**Disk Capacity:**"
+msgstr "**קיבולת כונן:**"
+
+#: panels/info-overview/cc-system-details-window.c:816
+msgid "**Firmware Version:**"
+msgstr "**גרסת קושחה:**"
+
+#: panels/info-overview/cc-system-details-window.c:821
+msgid "**OS Name:**"
+msgstr "**שם מערכת הפעלה:**"
+
+#: panels/info-overview/cc-system-details-window.c:826
+msgid "**OS Build:**"
+msgstr "**מזהה בניית מערכת הפעלה:**"
+
+#: panels/info-overview/cc-system-details-window.c:831
+msgid "**OS Type:**"
+msgstr "**סוג מערכת הפעלה:**"
+
+#: panels/info-overview/cc-system-details-window.c:836
+msgid "**GNOME Version:**"
+msgstr "**גרסת GNOME:**"
+
+#: panels/info-overview/cc-system-details-window.c:841
+msgid "**Windowing System:**"
+msgstr "**מערכת חלונות:**"
+
+#: panels/info-overview/cc-system-details-window.c:845
+msgid "**Kernel Version:**"
+msgstr "**גרסת ליבה:**"
+
+#: panels/info-overview/cc-system-details-window.c:852
+msgid "Details copied to clipboard"
+msgstr "הדיווח הועתק ללוח הגזירים"
+
+#: panels/info-overview/cc-system-details-window.ui:66
+msgid "Hardware Information"
+msgstr "מידע על החומרה"
+
+#: panels/info-overview/cc-system-details-window.ui:77
+#: panels/printers/printer-entry.ui:183
+#: panels/wwan/cc-wwan-details-dialog.ui:184
+msgid "Model"
+msgstr "דגם"
+
+#: panels/info-overview/cc-system-details-window.ui:127
+msgid "Software Information"
+msgstr "מידע על התכנה"
+
+#: panels/info-overview/cc-system-details-window.ui:138
 #: panels/wwan/cc-wwan-details-dialog.ui:210
 msgid "Firmware Version"
 msgstr "גרסת קושחה"
 
-#: panels/info-overview/cc-info-overview-panel.ui:65
-msgid "Memory"
-msgstr "זיכרון"
-
-#: panels/info-overview/cc-info-overview-panel.ui:73
-msgid "Processor"
-msgstr "מעבד"
-
-#: panels/info-overview/cc-info-overview-panel.ui:81
-msgid "Graphics"
-msgstr "גרפיקה"
-
-#: panels/info-overview/cc-info-overview-panel.ui:89
-msgid "Disk Capacity"
-msgstr "קיבלות דיסק"
-
-#: panels/info-overview/cc-info-overview-panel.ui:90
-msgid "Calculating…"
-msgstr "מתבצע חישוב…"
-
 #. translators: this field contains the distro name and version
-#: panels/info-overview/cc-info-overview-panel.ui:105
+#: panels/info-overview/cc-system-details-window.ui:146
 msgid "OS Name"
 msgstr "שם מערכת הפעלה"
 
-#. translators: this field contains the distro build ID
-#: panels/info-overview/cc-info-overview-panel.ui:114
-msgid "OS Build ID"
+#. translators: this field contains the distro build
+#: panels/info-overview/cc-system-details-window.ui:154
+msgid "OS Build"
 msgstr "מזהה בניית מערכת הפעלה"
 
-#: panels/info-overview/cc-info-overview-panel.ui:122
+#. translators: this field contains the distro type
+#: panels/info-overview/cc-system-details-window.ui:162
 msgid "OS Type"
 msgstr "סוג מערכת הפעלה"
 
-#: panels/info-overview/cc-info-overview-panel.ui:130
+#: panels/info-overview/cc-system-details-window.ui:169
 msgid "GNOME Version"
 msgstr "גרסת GNOME"
 
-#. translators: this is a placeholder while the GNOME version is being fetched
-#: panels/info-overview/cc-info-overview-panel.ui:132
-msgid "Loading…"
-msgstr "בטעינה…"
-
-#: panels/info-overview/cc-info-overview-panel.ui:140
+#: panels/info-overview/cc-system-details-window.ui:176
 msgid "Windowing System"
 msgstr "מערכת חלונות"
 
-#: panels/info-overview/cc-info-overview-panel.ui:148
+#: panels/info-overview/cc-system-details-window.ui:183
 msgid "Virtualization"
 msgstr "הדמייה"
 
-#: panels/info-overview/cc-info-overview-panel.ui:157
+#: panels/info-overview/cc-system-details-window.ui:190
 msgid "Kernel Version"
 msgstr "גרסת ליבה"
-
-#: panels/info-overview/cc-info-overview-panel.ui:166
-msgid "Software Updates"
-msgstr "עדכוני תכנה"
 
 #: panels/info-overview/gnome-info-overview-panel.desktop.in:3
 msgid "About"
@@ -5662,11 +5761,6 @@ msgstr "ניקוי ראשי ההדפסה"
 msgid "Remove Printer"
 msgstr "הסרת מדפסת"
 
-#: panels/printers/printer-entry.ui:183
-#: panels/wwan/cc-wwan-details-dialog.ui:184
-msgid "Model"
-msgstr "דגם"
-
 #: panels/printers/printer-entry.ui:238
 msgid "Ink Level"
 msgstr "רמת הדיו"
@@ -7419,7 +7513,7 @@ msgstr "_היסטוריית קבצים"
 msgid "File _History Duration"
 msgstr "משך _היסטוריית קבצים"
 
-#: panels/usage/cc-usage-panel.ui:48
+#: panels/usage/cc-usage-panel.ui:47
 msgid "_Clear History…"
 msgstr "מחיקת _היסטוריה…"
 
@@ -7447,7 +7541,7 @@ msgstr "מ_חיקת הקבצים הזמניים אוטומטית"
 msgid "Automatically Delete _Period"
 msgstr "תקופת פינוי אשפה _אוטומטית"
 
-#: panels/usage/cc-usage-panel.ui:115
+#: panels/usage/cc-usage-panel.ui:114
 msgid "_Empty Trash…"
 msgstr "_פינוי האשפה…"
 
@@ -7913,24 +8007,24 @@ msgctxt "Password mode"
 msgid "None"
 msgstr "אין"
 
-#: panels/user-accounts/cc-user-panel.c:1140
+#: panels/user-accounts/cc-user-panel.c:1141
 msgid "Failed to contact the accounts service"
 msgstr "לא ניתן ליצור קשר עם שירות החשבונות"
 
-#: panels/user-accounts/cc-user-panel.c:1142
+#: panels/user-accounts/cc-user-panel.c:1143
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "נא לוודא ששירות החשבונות (AccountService) מותקן ומופעל."
 
-#: panels/user-accounts/cc-user-panel.c:1164
+#: panels/user-accounts/cc-user-panel.c:1165
 msgid "This panel must be unlocked to change this setting"
 msgstr "יש הכרח לשחרר לוח זה על מנת לשנות הגדרה זו"
 
-#: panels/user-accounts/cc-user-panel.c:1233
+#: panels/user-accounts/cc-user-panel.c:1234
 msgid "Delete the selected user account"
 msgstr "מחיקת חשבון המשתמש הנבחר"
 
-#: panels/user-accounts/cc-user-panel.c:1237
-#: panels/user-accounts/cc-user-panel.c:1345
+#: panels/user-accounts/cc-user-panel.c:1238
+#: panels/user-accounts/cc-user-panel.c:1346
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -7938,7 +8032,7 @@ msgstr ""
 "כדי למחוק את המשתמש הנבחר\n"
 "ראשית יש ללחוץ על הסמל *"
 
-#: panels/user-accounts/cc-user-panel.c:1391
+#: panels/user-accounts/cc-user-panel.c:1392
 msgid "Unlock to add users and change settings"
 msgstr "יש לשחרר כדי להוסיף משתמשים ולשנות הגדרות"
 
@@ -9174,6 +9268,9 @@ msgstr[3] "‏‫%u ערוצי קלט"
 msgid "System Sounds"
 msgstr "צלילי מערכת"
 
+#~ msgid "Loading…"
+#~ msgstr "בטעינה…"
+
 #~ msgid "Connect to your data in the cloud"
 #~ msgstr "התחברות למידע שלך שבענן"
 
@@ -9195,20 +9292,11 @@ msgstr "צלילי מערכת"
 #~ msgid "Device Security Report"
 #~ msgstr "דו״ח אבטחת התקן"
 
-#~ msgid "Report details"
-#~ msgstr "פרטי דיווח"
-
-#~ msgid "Date generated:"
-#~ msgstr "תאריך יצירה:"
-
 #~ msgid "fwupd version:"
 #~ msgstr "גרסת fwupd:"
 
 #~ msgid "Hardware model:"
 #~ msgstr "דגם חָמְרה:"
-
-#~ msgid "Processor:"
-#~ msgstr "מעבד:"
 
 #~ msgid "OS:"
 #~ msgstr "מערכת הפעלה:"
@@ -9983,9 +10071,6 @@ msgstr "צלילי מערכת"
 
 #~ msgid "1 (Default)"
 #~ msgstr "1 (בררת מחדל)"
-
-#~ msgid "Open System"
-#~ msgstr "מערכת פתוחה"
 
 #~ msgid "Shared Key"
 #~ msgstr "מפתח משותף"
@@ -10849,9 +10934,6 @@ msgstr "צלילי מערכת"
 
 #~ msgid "Setup and use privileged FUSE filesystems"
 #~ msgstr "הגדרה ושימוש במערכות קביצם מותאמות (FUSE)"
-
-#~ msgid "Access hardware information"
-#~ msgstr "גישה למידע על החומרה"
 
 #~ msgid "Provide entropy to hardware random number generator"
 #~ msgstr "לספק נקודת מוצא למייצר המספרים האקראיים של החומרה"
@@ -12709,9 +12791,6 @@ msgstr "צלילי מערכת"
 
 #~ msgid "Your settings"
 #~ msgstr "ההגדרות שלך"
-
-#~ msgid "System settings"
-#~ msgstr "הגדרות המערכת"
 
 #~ msgid "Universal Access Preferences"
 #~ msgstr "העדפות הגישה האוניברסלית"
