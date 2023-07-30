@@ -69,7 +69,17 @@ struct _CcPrintersPanel
 {
   CcPanel parent_instance;
 
-  GtkBuilder *builder;
+  GtkListBox          *content;
+  GtkStack            *main_stack;
+  GtkRevealer         *notification;
+  GtkLabel            *notification_label;
+  CcPermissionInfobar *permission_infobar;
+  GtkWidget           *printer_add_button;
+  GtkWidget           *printer_add_button_empty;
+  GtkScrolledWindow   *scrolled_window;
+  GtkSearchBar        *search_bar;
+  GtkWidget           *search_button;
+  GtkEditable         *search_entry;
 
   PpCups *cups;
 
@@ -80,7 +90,6 @@ struct _CcPrintersPanel
   gboolean is_authorized;
 
   GSettings *lockdown_settings;
-  CcPermissionInfobar *permission_infobar;
 
   PpNewPrinterDialog   *pp_new_printer_dialog;
 
@@ -92,7 +101,6 @@ struct _CcPrintersPanel
   guint            dbus_subscription_id;
   guint            remove_printer_timeout_id;
 
-  GtkRevealer  *notification;
   PPDList      *all_ppds_list;
 
   gchar    *new_printer_name;
@@ -229,16 +237,13 @@ static void
 cc_printers_panel_constructed (GObject *object)
 {
   CcPrintersPanel *self = CC_PRINTERS_PANEL (object);
-  GtkWidget *widget;
   CcShell *shell;
 
   G_OBJECT_CLASS (cc_printers_panel_parent_class)->constructed (object);
 
   shell = cc_panel_get_shell (CC_PANEL (self));
 
-  widget = (GtkWidget*)
-    gtk_builder_get_object (self->builder, "search-bar");
-  gtk_search_bar_set_key_capture_widget (GTK_SEARCH_BAR (widget),
+  gtk_search_bar_set_key_capture_widget (self->search_bar,
                                          GTK_WIDGET (shell));
 }
 
@@ -294,7 +299,6 @@ cc_printers_panel_dispose (GObject *object)
   g_clear_pointer (&self->new_printer_name, g_free);
   g_clear_pointer (&self->renamed_printer_name, g_free);
   g_clear_pointer (&self->old_printer_name, g_free);
-  g_clear_object (&self->builder);
   g_clear_object (&self->lockdown_settings);
   g_clear_object (&self->permission);
   g_clear_handle_id (&self->cups_status_check_id, g_source_remove);
@@ -317,22 +321,6 @@ static const char *
 cc_printers_panel_get_help_uri (CcPanel *panel)
 {
   return "help:gnome-help/printing";
-}
-
-static void
-cc_printers_panel_class_init (CcPrintersPanelClass *klass)
-{
-  GObjectClass *object_class = G_OBJECT_CLASS (klass);
-  CcPanelClass *panel_class = CC_PANEL_CLASS (klass);
-
-  object_class->get_property = cc_printers_panel_get_property;
-  object_class->set_property = cc_printers_panel_set_property;
-  object_class->constructed = cc_printers_panel_constructed;
-  object_class->dispose = cc_printers_panel_dispose;
-
-  panel_class->get_help_uri = cc_printers_panel_get_help_uri;
-
-  g_object_class_override_property (object_class, PROP_PARAMETERS, "parameters");
 }
 
 static void
@@ -609,22 +597,16 @@ free_dests (CcPrintersPanel *self)
 static void
 on_printer_deletion_undone (CcPrintersPanel *self)
 {
-  GtkWidget *widget;
-
   gtk_revealer_set_reveal_child (self->notification, FALSE);
 
   g_clear_pointer (&self->deleted_printer_name, g_free);
 
-  widget = (GtkWidget*) gtk_builder_get_object (self->builder, "content");
-  gtk_list_box_invalidate_filter (GTK_LIST_BOX (widget));
+  gtk_list_box_invalidate_filter (self->content);
 
   g_clear_handle_id (&self->remove_printer_timeout_id, g_source_remove);
 
   if (self->num_dests > 0)
-    {
-      widget = (GtkWidget *) gtk_builder_get_object (self->builder, "main-vbox");
-      gtk_stack_set_visible_child_name (GTK_STACK (widget), "printers-list");
-    }
+    gtk_stack_set_visible_child_name (self->main_stack, "printers-list");
 }
 
 static void
@@ -672,23 +654,18 @@ static void
 on_printer_deleted (CcPrintersPanel *self,
                     PpPrinterEntry  *printer_entry)
 {
-  GtkLabel         *label;
   g_autofree gchar *notification_message = NULL;
-  GtkWidget        *widget;
 
   on_notification_dismissed (self);
 
   /* Translators: %s is the printer name */
   notification_message = g_strdup_printf (_("Printer “%s” has been deleted"),
                                           pp_printer_entry_get_name (printer_entry));
-  label = (GtkLabel*)
-    gtk_builder_get_object (self->builder, "notification-label");
-  gtk_label_set_label (label, notification_message);
+  gtk_label_set_label (self->notification_label, notification_message);
 
   self->deleted_printer_name = g_strdup (pp_printer_entry_get_name (printer_entry));
 
-  widget = (GtkWidget*) gtk_builder_get_object (self->builder, "content");
-  gtk_list_box_invalidate_filter (GTK_LIST_BOX (widget));
+  gtk_list_box_invalidate_filter (self->content);
 
   gtk_revealer_set_reveal_child (self->notification, TRUE);
 
@@ -718,10 +695,7 @@ add_printer_entry (CcPrintersPanel *self,
                    cups_dest_t      printer)
 {
   PpPrinterEntry         *printer_entry;
-  GtkWidget              *content;
   GSList                 *widgets, *l;
-
-  content = (GtkWidget*) gtk_builder_get_object (self->builder, "content");
 
   printer_entry = pp_printer_entry_new (printer, self->is_authorized);
 
@@ -746,7 +720,7 @@ add_printer_entry (CcPrintersPanel *self,
                            self,
                            G_CONNECT_SWAPPED);
 
-  gtk_list_box_insert (GTK_LIST_BOX (content), GTK_WIDGET (printer_entry), -1);
+  gtk_list_box_insert (self->content, GTK_WIDGET (printer_entry), -1);
 
   g_hash_table_insert (self->printer_entries, g_strdup (printer.name), printer_entry);
 }
@@ -757,16 +731,14 @@ set_current_page (GObject      *source_object,
                   gpointer      user_data)
 {
   CcPrintersPanel        *self = (CcPrintersPanel *) user_data;
-  GtkWidget              *widget;
   gboolean               success;
 
   success = pp_cups_connection_test_finish (PP_CUPS (source_object), result, NULL);
 
-  widget = (GtkWidget*) gtk_builder_get_object (self->builder, "main-vbox");
   if (success)
-    gtk_stack_set_visible_child_name (GTK_STACK (widget), "empty-state");
+    gtk_stack_set_visible_child_name (self->main_stack, "empty-state");
   else
-    gtk_stack_set_visible_child_name (GTK_STACK (widget), "no-cups-page");
+    gtk_stack_set_visible_child_name (self->main_stack, "no-cups-page");
 
   update_sensitivity (user_data);
 }
@@ -799,7 +771,6 @@ actualize_printers_list_cb (GObject      *source_object,
                             gpointer      user_data)
 {
   CcPrintersPanel        *self = (CcPrintersPanel*) user_data;
-  GtkWidget              *widget;
   PpCupsDests            *cups_dests;
   GtkWidget              *child;
   gboolean                new_printer_available = FALSE;
@@ -824,22 +795,20 @@ actualize_printers_list_cb (GObject      *source_object,
   self->num_dests = cups_dests->num_of_dests;
   g_free (cups_dests);
 
-  widget = (GtkWidget*) gtk_builder_get_object (self->builder, "main-vbox");
   if ((self->num_dests == 0 && self->new_printer_name == NULL) ||
       (self->num_dests == 1 + g_list_length (self->deleted_printers) &&
        self->deleted_printer_name != NULL))
     pp_cups_connection_test_async (PP_CUPS (source_object), NULL, set_current_page, self);
   else
-    gtk_stack_set_visible_child_name (GTK_STACK (widget), "printers-list");
+    gtk_stack_set_visible_child_name (self->main_stack, "printers-list");
 
-  widget = (GtkWidget*) gtk_builder_get_object (self->builder, "content");
-  child = gtk_widget_get_first_child (widget);
+  child = gtk_widget_get_first_child (GTK_WIDGET (self->content));
   while (child)
     {
       GtkWidget *next = gtk_widget_get_next_sibling (child);
 
       if (remove_nonexisting_entry (self, PP_PRINTER_ENTRY (child)))
-        gtk_list_box_remove (GTK_LIST_BOX (widget), child);
+        gtk_list_box_remove (self->content, child);
 
       child = next;
     }
@@ -879,15 +848,12 @@ actualize_printers_list_cb (GObject      *source_object,
 
   if (self->new_printer_name != NULL)
     {
-      GtkScrolledWindow      *scrolled_window;
       GtkAllocation           allocation;
       GtkAdjustment          *adjustment;
       GtkWidget              *printer_entry;
 
       /* Scroll the view to show the newly added printer-entry. */
-      scrolled_window = GTK_SCROLLED_WINDOW (gtk_builder_get_object (self->builder,
-                                                                     "scrolled-window"));
-      adjustment = gtk_scrolled_window_get_vadjustment (scrolled_window);
+      adjustment = gtk_scrolled_window_get_vadjustment (self->scrolled_window);
 
       printer_entry = GTK_WIDGET (g_hash_table_lookup (self->printer_entries,
                                                        self->new_printer_name));
@@ -994,7 +960,6 @@ update_sensitivity (gpointer user_data)
 {
   CcPrintersPanel         *self = (CcPrintersPanel*) user_data;
   const char              *cups_server = NULL;
-  GtkWidget               *widget;
   gboolean                 local_server = TRUE;
   gboolean                 no_cups = FALSE;
   gboolean                 empty_state = FALSE;
@@ -1005,10 +970,9 @@ update_sensitivity (gpointer user_data)
     self->lockdown_settings &&
     !g_settings_get_boolean (self->lockdown_settings, "disable-print-setup");
 
-  widget = (GtkWidget*) gtk_builder_get_object (self->builder, "main-vbox");
-  if (g_strcmp0 (gtk_stack_get_visible_child_name (GTK_STACK (widget)), "no-cups-page") == 0)
+  if (g_strcmp0 (gtk_stack_get_visible_child_name (self->main_stack), "no-cups-page") == 0)
     no_cups = TRUE;
-  else if (g_strcmp0 (gtk_stack_get_visible_child_name (GTK_STACK (widget)), "empty-state") == 0)
+  else if (g_strcmp0 (gtk_stack_get_visible_child_name (self->main_stack), "empty-state") == 0)
     empty_state = TRUE;
 
   cups_server = cupsServer ();
@@ -1019,20 +983,16 @@ update_sensitivity (gpointer user_data)
       cups_server[0] != '/')
     local_server = FALSE;
 
-  widget = (GtkWidget*) gtk_builder_get_object (self->builder, "search-button");
-  gtk_widget_set_visible (widget, !no_cups);
-  gtk_widget_set_sensitive (widget, !empty_state);
+  gtk_widget_set_visible (self->search_button, !no_cups);
+  gtk_widget_set_sensitive (self->search_button, !empty_state);
 
-  widget = (GtkWidget*) gtk_builder_get_object (self->builder, "search-bar");
-  gtk_widget_set_visible (widget, !no_cups);
-  gtk_widget_set_sensitive (widget, !empty_state);
+  gtk_widget_set_visible (GTK_WIDGET (self->search_bar), !no_cups);
+  gtk_widget_set_sensitive (GTK_WIDGET (self->search_bar), !empty_state);
 
-  widget = (GtkWidget*) gtk_builder_get_object (self->builder, "printer-add-button");
-  gtk_widget_set_visible (widget, !empty_state);
-  gtk_widget_set_sensitive (widget, local_server && self->is_authorized && !no_cups && !self->new_printer_name);
+  gtk_widget_set_visible (self->printer_add_button, !empty_state);
+  gtk_widget_set_sensitive (self->printer_add_button, local_server && self->is_authorized && !no_cups && !self->new_printer_name);
 
-  widget = (GtkWidget*) gtk_builder_get_object (self->builder, "printer-add-button2");
-  gtk_widget_set_sensitive (widget, local_server && self->is_authorized && !no_cups && !self->new_printer_name);
+  gtk_widget_set_sensitive (self->printer_add_button_empty, local_server && self->is_authorized && !no_cups && !self->new_printer_name);
 }
 
 static void
@@ -1136,7 +1096,6 @@ filter_function (GtkListBoxRow *row,
 {
   CcPrintersPanel        *self = (CcPrintersPanel*) user_data;
   PpPrinterEntry         *entry = PP_PRINTER_ENTRY (row);
-  GtkWidget              *search_entry;
   gboolean                retval;
   g_autofree gchar       *search = NULL;
   g_autofree gchar       *name = NULL;
@@ -1144,9 +1103,7 @@ filter_function (GtkListBoxRow *row,
   GList                  *iter;
   const gchar            *search_text;
 
-  search_entry = (GtkWidget*)
-    gtk_builder_get_object (self->builder, "search-entry");
-  search_text = gtk_editable_get_text (GTK_EDITABLE (search_entry));
+  search_text = gtk_editable_get_text (GTK_EDITABLE (self->search_entry));
 
   if (g_utf8_strlen (search_text, -1) == 0)
     {
@@ -1210,18 +1167,48 @@ sort_function (GtkListBoxRow *row1,
 }
 
 static void
+cc_printers_panel_class_init (CcPrintersPanelClass *klass)
+{
+  GObjectClass *object_class = G_OBJECT_CLASS (klass);
+  GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
+  CcPanelClass *panel_class = CC_PANEL_CLASS (klass);
+
+  object_class->get_property = cc_printers_panel_get_property;
+  object_class->set_property = cc_printers_panel_set_property;
+  object_class->constructed = cc_printers_panel_constructed;
+  object_class->dispose = cc_printers_panel_dispose;
+
+  panel_class->get_help_uri = cc_printers_panel_get_help_uri;
+
+  g_object_class_override_property (object_class, PROP_PARAMETERS, "parameters");
+
+  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/printers/cc-printers-panel.ui");
+
+  gtk_widget_class_bind_template_child (widget_class, CcPrintersPanel, content);
+  gtk_widget_class_bind_template_child (widget_class, CcPrintersPanel, main_stack);
+  gtk_widget_class_bind_template_child (widget_class, CcPrintersPanel, notification);
+  gtk_widget_class_bind_template_child (widget_class, CcPrintersPanel, notification_label);
+  gtk_widget_class_bind_template_child (widget_class, CcPrintersPanel, permission_infobar);
+  gtk_widget_class_bind_template_child (widget_class, CcPrintersPanel, printer_add_button);
+  gtk_widget_class_bind_template_child (widget_class, CcPrintersPanel, printer_add_button_empty);
+  gtk_widget_class_bind_template_child (widget_class, CcPrintersPanel, scrolled_window);
+  gtk_widget_class_bind_template_child (widget_class, CcPrintersPanel, search_bar);
+  gtk_widget_class_bind_template_child (widget_class, CcPrintersPanel, search_button);
+  gtk_widget_class_bind_template_child (widget_class, CcPrintersPanel, search_entry);
+
+  gtk_widget_class_bind_template_callback (widget_class, printer_add_cb);
+  gtk_widget_class_bind_template_callback (widget_class, on_printer_deletion_undone);
+  gtk_widget_class_bind_template_callback (widget_class, on_notification_dismissed);
+}
+
+static void
 cc_printers_panel_init (CcPrintersPanel *self)
 {
-  GtkWidget              *top_widget;
-  GtkWidget              *widget;
-  g_autoptr(GError)       error = NULL;
-  const gchar            *objects[] = { "overlay", "permission-infobar", "top-right-buttons", "printer-add-button", "search-button", NULL };
-  guint                   builder_result;
+  gtk_widget_init_template (GTK_WIDGET (self));
 
   g_resources_register (cc_printers_get_resource ());
 
   /* initialize main data structure */
-  self->builder = gtk_builder_new ();
   self->reference = g_object_new (G_TYPE_OBJECT, NULL);
 
   self->cups = pp_cups_new ();
@@ -1235,55 +1222,16 @@ cc_printers_panel_init (CcPrintersPanel *self)
 
   g_object_set_data_full (self->reference, "self", self, NULL);
 
-  builder_result = gtk_builder_add_objects_from_resource (self->builder,
-                                                          "/org/gnome/control-center/printers/printers.ui",
-                                                          objects, &error);
-
-  if (builder_result == 0)
-    {
-      /* Translators: The XML file containing user interface can not be loaded */
-      g_warning (_("Could not load ui: %s"), error->message);
-      return;
-    }
-
-  self->notification = (GtkRevealer*)
-    gtk_builder_get_object (self->builder, "notification");
-
-  widget = (GtkWidget*)
-    gtk_builder_get_object (self->builder, "notification-undo-button");
-  g_signal_connect_object (widget, "clicked", G_CALLBACK (on_printer_deletion_undone), self, G_CONNECT_SWAPPED);
-
-  widget = (GtkWidget*)
-    gtk_builder_get_object (self->builder, "notification-dismiss-button");
-  g_signal_connect_object (widget, "clicked", G_CALLBACK (on_notification_dismissed), self, G_CONNECT_SWAPPED);
-
-  self->permission_infobar = (CcPermissionInfobar*)
-    gtk_builder_get_object (self->builder, "permission-infobar");
-
-  /* add the top level widget */
-  top_widget = (GtkWidget*)
-    gtk_builder_get_object (self->builder, "overlay");
-
   /* connect signals */
-  widget = (GtkWidget*)
-    gtk_builder_get_object (self->builder, "printer-add-button");
-  g_signal_connect_object (widget, "clicked", G_CALLBACK (printer_add_cb), self, G_CONNECT_SWAPPED);
-
-  widget = (GtkWidget*)
-    gtk_builder_get_object (self->builder, "printer-add-button2");
-  g_signal_connect_object (widget, "clicked", G_CALLBACK (printer_add_cb), self, G_CONNECT_SWAPPED);
-
-  widget = (GtkWidget*)
-    gtk_builder_get_object (self->builder, "content");
-  gtk_list_box_set_filter_func (GTK_LIST_BOX (widget),
+  gtk_list_box_set_filter_func (self->content,
                                 filter_function,
                                 self,
                                 NULL);
-  g_signal_connect_swapped (gtk_builder_get_object (self->builder, "search-entry"),
+  g_signal_connect_swapped (self->search_entry,
                             "search-changed",
                             G_CALLBACK (gtk_list_box_invalidate_filter),
-                            widget);
-  gtk_list_box_set_sort_func (GTK_LIST_BOX (widget),
+                            self->content);
+  gtk_list_box_set_sort_func (self->content,
                               sort_function,
                               NULL,
                               NULL);
@@ -1329,10 +1277,4 @@ Please check your installation");
                       self);
 
   pp_cups_connection_test_async (self->cups, cc_panel_get_cancellable (CC_PANEL (self)), connection_test_cb, self);
-  cc_panel_set_content (CC_PANEL (self), top_widget);
-
-  widget = (GtkWidget*)
-    gtk_builder_get_object (self->builder, "top-right-buttons");
-  adw_header_bar_pack_end (ADW_HEADER_BAR (cc_panel_get_titlebar (CC_PANEL (self))),
-                           widget);
 }
