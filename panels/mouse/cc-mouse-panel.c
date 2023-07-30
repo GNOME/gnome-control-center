@@ -44,9 +44,7 @@ struct _CcMousePanel
   CcSplitRow        *mouse_scroll_direction_row;
   GtkScale          *mouse_speed_scale;
   CcMouseTest       *mouse_test;
-  GtkBox            *primary_button_box;
-  GtkToggleButton   *primary_button_left;
-  GtkToggleButton   *primary_button_right;
+  AdwToggleGroup    *primary_button_toggles;
   AdwPreferencesPage*preferences;
   GtkStack          *stack;
   CcIllustratedRow  *tap_to_click_row;
@@ -76,6 +74,9 @@ struct _CcMousePanel
 CC_PANEL_REGISTER (CcMousePanel, cc_mouse_panel)
 
 #define ASSET_RESOURCES_PREFIX "/org/gnome/control-center/mouse/assets/"
+
+#define BUTTON_ID_LEFT "left"
+#define BUTTON_ID_RIGHT "right"
 
 static void
 setup_illustrations (CcMousePanel *self)
@@ -252,34 +253,52 @@ mouse_accel_set_mapping (const GValue       *value,
     return g_variant_new_string (g_value_get_boolean (value) ? "default" : "flat");
 }
 
+static gboolean
+primary_button_get_mapping (GValue   *value,
+                            GVariant *variant,
+                            gpointer  user_data)
+{
+  gboolean left_handed = g_variant_get_boolean (variant);
+
+  g_value_set_string (value, left_handed ? BUTTON_ID_RIGHT : BUTTON_ID_LEFT);
+
+  return TRUE;
+}
+
+static GVariant *
+primary_button_set_mapping (const GValue *value,
+                            const GVariantType *type,
+                            gpointer user_data)
+{
+  return g_variant_new_boolean (g_str_equal (g_value_get_string (value), BUTTON_ID_RIGHT));
+}
+
 /* Set up the property editors in the dialog. */
 static void
 setup_dialog (CcMousePanel *self)
 {
-  GtkToggleButton *button;
-
   self->mouse_test = CC_MOUSE_TEST (cc_mouse_test_new ());
 
-  gtk_widget_set_direction (GTK_WIDGET (self->primary_button_box), GTK_TEXT_DIR_LTR);
+  gtk_widget_set_direction (GTK_WIDGET (self->primary_button_toggles), GTK_TEXT_DIR_LTR);
 
   self->left_handed = g_settings_get_boolean (self->mouse_settings, "left-handed");
-  button = self->left_handed ? self->primary_button_right : self->primary_button_left;
-  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button), TRUE);
 
-  g_settings_bind (self->mouse_settings, "left-handed",
-                   self->primary_button_left, "active",
-                   G_SETTINGS_BIND_DEFAULT | G_SETTINGS_BIND_INVERT_BOOLEAN);
-  g_settings_bind (self->mouse_settings, "left-handed",
-                   self->primary_button_right, "active",
-                   G_SETTINGS_BIND_DEFAULT);
+  adw_toggle_group_set_active (ADW_TOGGLE_GROUP (self->primary_button_toggles),
+                               self->left_handed ? BUTTON_ID_LEFT : BUTTON_ID_RIGHT);
+  g_settings_bind_with_mapping (self->mouse_settings, "left-handed",
+                                self->primary_button_toggles, "active",
+                                G_SETTINGS_BIND_DEFAULT,
+                                primary_button_get_mapping,
+                                primary_button_set_mapping,
+                                NULL, NULL);
 
-  /* Allow changing orientation with either button */
-  button = self->primary_button_right;
-  self->right_gesture = gtk_gesture_click_new ();
-  handle_secondary_button (self, button, self->right_gesture);
-  button = self->primary_button_left;
-  self->left_gesture = gtk_gesture_click_new ();
-  handle_secondary_button (self, button, self->left_gesture);
+  /* FIXME: Allow changing orientation with either button */
+  /* button = self->primary_button_right; */
+  /* self->right_gesture = gtk_gesture_click_new (); */
+  /* handle_secondary_button (self, button, self->right_gesture); */
+  /* button = self->primary_button_left; */
+  /* self->left_gesture = gtk_gesture_click_new (); */
+  /* handle_secondary_button (self, button, self->left_gesture); */
 
   g_settings_bind (self->mouse_settings, "natural-scroll",
                    self->mouse_scroll_direction_row, "use-default",
@@ -434,9 +453,7 @@ cc_mouse_panel_class_init (CcMousePanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcMousePanel, mouse_group);
   gtk_widget_class_bind_template_child (widget_class, CcMousePanel, mouse_scroll_direction_row);
   gtk_widget_class_bind_template_child (widget_class, CcMousePanel, mouse_speed_scale);
-  gtk_widget_class_bind_template_child (widget_class, CcMousePanel, primary_button_box);
-  gtk_widget_class_bind_template_child (widget_class, CcMousePanel, primary_button_left);
-  gtk_widget_class_bind_template_child (widget_class, CcMousePanel, primary_button_right);
+  gtk_widget_class_bind_template_child (widget_class, CcMousePanel, primary_button_toggles);
   gtk_widget_class_bind_template_child (widget_class, CcMousePanel, preferences);
   gtk_widget_class_bind_template_child (widget_class, CcMousePanel, stack);
   gtk_widget_class_bind_template_child (widget_class, CcMousePanel, tap_to_click_row);

@@ -57,29 +57,12 @@
                         <property name="subtitle" translatable="yes">Order of physical buttons on mice and touchpads.</property>
                         <property name="subtitle-lines">0</property>
                         <child>
-                          <object class="GtkBox" id="primary_button_box">
+                          <object class="AdwToggleGroup" id="primary_button_toggles">
                             <property name="valign">center</property>
-                            <property name="homogeneous">True</property>
-                            <property name="margin_top">12</property>
-                            <property name="margin_bottom">12</property>
-                            <style>
-                             <class name="linked"/>
-                            </style>
-                            <child>
-                              <object class="GtkToggleButton" id="primary_button_left">
-                                <property name="hexpand">True</property>
-                                <property name="label" translatable="yes">Left</property>
-                                <property name="height_request">35</property>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="GtkToggleButton" id="primary_button_right">
-                                <property name="hexpand">True</property>
-                                <property name="label" translatable="yes">Right</property>
-                                <property name="group">primary_button_left</property>
-                                <property name="height_request">35</property>
-                              </object>
-                            </child>
+                            <toggles>
+                              <toggle id="left" translatable="yes">Left</toggle>
+                              <toggle id="right" translatable="yes">Right</toggle>
+                            </toggles>
                           </object>
                         </child>
                       </object>
