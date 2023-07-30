@@ -940,6 +940,8 @@ cc_system_details_window_class_init (CcSystemDetailsWindowClass *klass)
 
   gtk_widget_class_bind_template_callback (widget_class, on_copy_button_clicked_cb);
 
+  gtk_widget_class_add_binding_action (widget_class, GDK_KEY_Escape, 0, "window.close", NULL);
+
   g_type_ensure (CC_TYPE_INFO_ENTRY);
 }
 
