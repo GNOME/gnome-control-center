@@ -309,8 +309,8 @@ on_other_type_combo_box_changed (CcRemovableMediaPanel *self)
   gtk_label_set_mnemonic_widget (self->other_action_label, GTK_WIDGET (self->other_application_chooser));
 }
 
-static void
-on_extra_options_dialog_response (CcRemovableMediaPanel *self)
+static gboolean
+on_extra_options_dialog_close_request (CcRemovableMediaPanel *self)
 {
   gtk_widget_set_visible (GTK_WIDGET (self->other_type_dialog), FALSE);
 
@@ -318,6 +318,8 @@ on_extra_options_dialog_response (CcRemovableMediaPanel *self)
     gtk_box_remove (self->other_action_box, GTK_WIDGET (self->other_application_chooser));
     self->other_application_chooser = NULL;
   }
+
+  return GDK_EVENT_PROPAGATE;
 }
 
 static void
@@ -494,7 +496,7 @@ cc_removable_media_panel_class_init (CcRemovableMediaPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcRemovableMediaPanel, software_chooser);
   gtk_widget_class_bind_template_child (widget_class, CcRemovableMediaPanel, video_dvd_chooser);
 
-  gtk_widget_class_bind_template_callback (widget_class, on_extra_options_dialog_response);
+  gtk_widget_class_bind_template_callback (widget_class, on_extra_options_dialog_close_request);
   gtk_widget_class_bind_template_callback (widget_class, on_extra_options_button_clicked);
   gtk_widget_class_bind_template_callback (widget_class, on_other_type_combo_box_changed);
 }

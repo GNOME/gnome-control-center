@@ -237,22 +237,34 @@
     </child>
   </template>
 
-  <object class="GtkDialog" id="other_type_dialog">
+  <object class="AdwWindow" id="other_type_dialog">
     <property name="resizable">False</property>
     <property name="modal">True</property>
     <property name="destroy_with_parent">True</property>
-    <property name="use_header_bar">1</property>
     <property name="hide-on-close">True</property>
-    <signal name="response" handler="on_extra_options_dialog_response" object="CcRemovableMediaPanel" swapped="yes"/>
+    <signal name="close-request" handler="on_extra_options_dialog_close_request" object="CcRemovableMediaPanel" swapped="yes"/>
     <child>
-      <object class="GtkBox">
-        <property name="margin-top">18</property>
-        <property name="margin-bottom">18</property>
-        <property name="margin-start">18</property>
-        <property name="margin-end">18</property>
-        <property name="orientation">vertical</property>
+      <object class="GtkShortcutController">
+        <property name="scope">managed</property>
         <child>
+          <object class="GtkShortcut">
+            <property name="trigger">Escape</property>
+            <property name="action">action(window.close)</property>
+          </object>
+        </child>
+      </object>
+    </child>
+    <property name="content">
+      <object class="AdwToolbarView">
+        <child type="top">
+          <object class="AdwHeaderBar"/>
+        </child>
+        <property name="content">
           <object class="GtkBox">
+            <property name="margin-top">18</property>
+            <property name="margin-bottom">18</property>
+            <property name="margin-start">18</property>
+            <property name="margin-end">18</property>
             <property name="spacing">10</property>
             <property name="orientation">vertical</property>
             <child>
@@ -325,9 +337,9 @@
               </object>
             </child>
           </object>
-        </child>
+        </property>
       </object>
-    </child>
+    </property>
   </object>
   <object class="GtkListStore" id="other_type_list_store">
     <columns>
