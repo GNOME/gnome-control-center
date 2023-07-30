@@ -1,254 +1,264 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <template class="CcApplicationsPanel" parent="CcPanel">
-
     <child type="titlebar">
-      <object class="AdwHeaderBar">
-        <property name="show-end-title-buttons">True</property>
-        <property name="show-start-title-buttons" bind-source="CcApplicationsPanel" bind-property="folded" bind-flags="default|sync-create" />
-        <child type="start">
-          <object class="GtkButton">
-            <property name="visible" bind-source="CcApplicationsPanel" bind-property="folded" bind-flags="default|sync-create" />
-            <property name="icon-name">go-previous-symbolic</property>
-            <property name="action-name">window.navigate</property>
-            <property name="action-target">0</property> <!-- 0: ADW_NAVIGATION_DIRECTION_BACK -->
-          </object>
-        </child>
-        <property name="title-widget">
-          <object class="AdwWindowTitle" id="header_title">
-            <property name="title" translatable="yes">Apps</property>
-          </object>
-        </property>
+      <object class="GtkHeaderBar">
+        <property name="visible">False</property>
       </object>
     </child>
 
     <child type="content">
-      <object class="GtkStack" id="stack">
-
-        <child>
-          <object class="AdwStatusPage" id="empty_box">
-            <property name="icon-name">org.gnome.Software-symbolic</property>
-            <property name="title" translatable="yes">No Apps</property>
-            <child>
-              <object class="GtkButton" id="install_button">
-                <property name="label" translatable="yes">_Install Some…</property>
-                <property name="use-underline">True</property>
-                <property name="halign">center</property>
-                <signal name="clicked" handler="open_software_cb" object="CcApplicationsPanel" swapped="yes"/>
-                <style>
-                  <class name="pill" />
-                </style>
+      <object class="AdwToolbarView">
+        <property name="top-bar-style">raised</property>
+        <child type="top">
+          <object class="AdwHeaderBar">
+            <property name="show-end-title-buttons">True</property>
+            <property name="show-start-title-buttons" bind-source="CcApplicationsPanel" bind-property="folded" bind-flags="default|sync-create" />
+            <child type="start">
+              <object class="GtkButton">
+                <property name="visible" bind-source="CcApplicationsPanel" bind-property="folded" bind-flags="default|sync-create" />
+                <property name="icon-name">go-previous-symbolic</property>
+                <property name="action-name">window.navigate</property>
+                <property name="action-target">0</property> <!-- 0: ADW_NAVIGATION_DIRECTION_BACK -->
               </object>
             </child>
+            <property name="title-widget">
+              <object class="AdwWindowTitle" id="header_title">
+                <property name="title" translatable="yes">Apps</property>
+              </object>
+            </property>
           </object>
         </child>
 
-        <child>
-          <object class="AdwPreferencesPage" id="settings_box">
+        <property name="content">
+          <object class="GtkStack" id="stack">
 
-            <!-- App icon & buttons -->
             <child>
-              <object class="AdwPreferencesGroup">
-
+              <object class="AdwStatusPage" id="empty_box">
+                <property name="icon-name">org.gnome.Software-symbolic</property>
+                <property name="title" translatable="yes">No Apps</property>
                 <child>
-                  <object class="GtkBox">
-                    <property name="orientation">vertical</property>
-                    <property name="spacing">18</property>
-                    <child>
-                      <object class="GtkImage" id="app_icon_image">
-                        <property name="icon-name">org.gnome.Software</property>
-                        <property name="pixel-size">96</property>
-                        <style>
-                          <class name="icon-dropshadow" />
-                        </style>
-                      </object>
-                    </child>
+                  <object class="GtkButton" id="install_button">
+                    <property name="label" translatable="yes">_Install Some…</property>
+                    <property name="use-underline">True</property>
+                    <property name="halign">center</property>
+                    <signal name="clicked" handler="open_software_cb" object="CcApplicationsPanel" swapped="yes"/>
+                    <style>
+                      <class name="pill" />
+                    </style>
+                  </object>
+                </child>
+              </object>
+            </child>
 
-                    <child>
-                      <object class="GtkLabel" id="app_name_label">
-                        <property name="wrap">True</property>
-                        <style>
-                          <class name="title" />
-                          <class name="title-1" />
-                        </style>
-                      </object>
-                    </child>
+            <child>
+              <object class="AdwPreferencesPage" id="settings_box">
+
+                <!-- App icon & buttons -->
+                <child>
+                  <object class="AdwPreferencesGroup">
 
                     <child>
                       <object class="GtkBox">
-                        <property name="halign">center</property>
-                        <property name="margin-top">12</property>
-                        <property name="margin-bottom">12</property>
+                        <property name="orientation">vertical</property>
                         <property name="spacing">18</property>
                         <child>
-                          <object class="GtkButton" id="launch_button">
-                            <property name="label" translatable="yes">_Open</property>
-                            <property name="use-underline">True</property>
-                            <signal name="clicked" handler="on_launch_button_clicked_cb" object="CcApplicationsPanel" swapped="yes" />
+                          <object class="GtkImage" id="app_icon_image">
+                            <property name="icon-name">org.gnome.Software</property>
+                            <property name="pixel-size">96</property>
                             <style>
-                              <class name="pill" />
-                              <class name="suggested-action" />
+                              <class name="icon-dropshadow" />
                             </style>
                           </object>
                         </child>
+
                         <child>
-                          <object class="GtkButton" id="view_details_button">
-                            <property name="label" translatable="yes">App _Details</property>
-                            <property name="use-underline">True</property>
+                          <object class="GtkLabel" id="app_name_label">
+                            <property name="wrap">True</property>
                             <style>
-                              <class name="pill" />
+                              <class name="title" />
+                              <class name="title-1" />
                             </style>
                           </object>
                         </child>
+
+                        <child>
+                          <object class="GtkBox">
+                            <property name="halign">center</property>
+                            <property name="margin-top">12</property>
+                            <property name="margin-bottom">12</property>
+                            <property name="spacing">18</property>
+                            <child>
+                              <object class="GtkButton" id="launch_button">
+                                <property name="label" translatable="yes">_Open</property>
+                                <property name="use-underline">True</property>
+                                <signal name="clicked" handler="on_launch_button_clicked_cb" object="CcApplicationsPanel" swapped="yes" />
+                                <style>
+                                  <class name="pill" />
+                                  <class name="suggested-action" />
+                                </style>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkButton" id="view_details_button">
+                                <property name="label" translatable="yes">App _Details</property>
+                                <property name="use-underline">True</property>
+                                <style>
+                                  <class name="pill" />
+                                </style>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+
+                  </object>
+                </child>
+
+                <child>
+                  <object class="AdwPreferencesGroup" id="integration_section">
+                    <child>
+                      <object class="AdwSwitchRow" id="search">
+                        <property name="title" translatable="yes">Search</property>
+                        <property name="subtitle" translatable="yes">Receive system searches and send results</property>
+                        <signal name="notify::active" handler="search_cb" object="CcApplicationsPanel" swapped="yes"/>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="CcInfoRow" id="no_search">
+                        <property name="title" translatable="yes">Search</property>
+                        <property name="subtitle" translatable="yes">Receive system searches and send results</property>
+                        <property name="info" translatable="yes">Disabled</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="AdwSwitchRow" id="notification">
+                        <property name="title" translatable="yes">Notifications</property>
+                        <property name="subtitle" translatable="yes">Show system notifications</property>
+                        <signal name="notify::active" handler="notification_cb" object="CcApplicationsPanel" swapped="yes"/>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="AdwSwitchRow" id="background">
+                        <property name="title" translatable="yes">Run in Background</property>
+                        <property name="subtitle" translatable="yes">Allow activity when the app is closed</property>
+                        <signal name="notify::active" handler="background_cb" swapped="yes"/>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="AdwSwitchRow" id="screenshot">
+                        <property name="title" translatable="yes">Screenshots</property>
+                        <property name="subtitle" translatable="yes">Take pictures of the screen at any time</property>
+                        <signal name="notify::active" handler="screenshot_cb" object="CcApplicationsPanel" swapped="yes"/>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="AdwSwitchRow" id="wallpaper">
+                        <property name="title" translatable="yes">Change Wallpaper</property>
+                        <property name="subtitle" translatable="yes">Change the desktop wallpaper.</property>
+                        <signal name="notify::active" handler="wallpaper_cb" swapped="yes"/>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="AdwSwitchRow" id="sound">
+                        <property name="title" translatable="yes">Sounds</property>
+                        <property name="subtitle" translatable="yes">Reproduce sounds.</property>
+                        <signal name="notify::active" handler="sound_cb" object="CcApplicationsPanel" swapped="yes"/>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="CcInfoRow" id="no_sound">
+                        <property name="title" translatable="yes">Sounds</property>
+                        <property name="subtitle" translatable="yes">Reproduce sounds</property>
+                        <property name="info" translatable="yes">Disabled</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="AdwSwitchRow" id="shortcuts">
+                        <property name="title" translatable="yes">Inhibit Shortcuts</property>
+                        <property name="subtitle" translatable="yes">Block standard keyboard shortcuts</property>
+                        <signal name="notify::active" handler="shortcuts_cb" swapped="yes"/>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="AdwSwitchRow" id="camera">
+                        <property name="title" translatable="yes">Camera</property>
+                        <property name="subtitle" translatable="yes">Take pictures with the camera</property>
+                        <signal name="notify::active" handler="camera_cb" object="CcApplicationsPanel" swapped="yes"/>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="CcInfoRow" id="no_camera">
+                        <property name="title" translatable="yes">Camera</property>
+                        <property name="subtitle" translatable="yes">Take pictures with the camera</property>
+                        <property name="info" translatable="yes">Disabled</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="AdwSwitchRow" id="microphone">
+                        <property name="title" translatable="yes">Microphone</property>
+                        <property name="subtitle" translatable="yes">Record audio with the microphone</property>
+                        <signal name="notify::active" handler="microphone_cb" object="CcApplicationsPanel" swapped="yes"/>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="CcInfoRow" id="no_microphone">
+                        <property name="title" translatable="yes">Microphone</property>
+                        <property name="subtitle" translatable="yes">Record audio with the microphone</property>
+                        <property name="info" translatable="yes">Disabled</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="AdwSwitchRow" id="location">
+                        <property name="title" translatable="yes">Location Services</property>
+                        <property name="subtitle" translatable="yes">Access device location data</property>
+                        <signal name="notify::active" handler="location_cb" object="CcApplicationsPanel" swapped="yes"/>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="CcInfoRow" id="no_location">
+                        <property name="title" translatable="yes">Location Services</property>
+                        <property name="subtitle" translatable="yes">Access device location data</property>
+                        <property name="info" translatable="yes">Disabled</property>
                       </object>
                     </child>
                   </object>
                 </child>
 
-              </object>
-            </child>
-
-            <child>
-              <object class="AdwPreferencesGroup" id="integration_section">
                 <child>
-                  <object class="AdwSwitchRow" id="search">
-                    <property name="title" translatable="yes">Search</property>
-                    <property name="subtitle" translatable="yes">Receive system searches and send results</property>
-                    <signal name="notify::active" handler="search_cb" object="CcApplicationsPanel" swapped="yes"/>
-                  </object>
-                </child>
-                <child>
-                  <object class="CcInfoRow" id="no_search">
-                    <property name="title" translatable="yes">Search</property>
-                    <property name="subtitle" translatable="yes">Receive system searches and send results</property>
-                    <property name="info" translatable="yes">Disabled</property>
-                  </object>
-                </child>
-                <child>
-                  <object class="AdwSwitchRow" id="notification">
-                    <property name="title" translatable="yes">Notifications</property>
-                    <property name="subtitle" translatable="yes">Show system notifications</property>
-                    <signal name="notify::active" handler="notification_cb" object="CcApplicationsPanel" swapped="yes"/>
-                  </object>
-                </child>
-                <child>
-                  <object class="AdwSwitchRow" id="background">
-                    <property name="title" translatable="yes">Run in Background</property>
-                    <property name="subtitle" translatable="yes">Allow activity when the app is closed</property>
-                    <signal name="notify::active" handler="background_cb" swapped="yes"/>
-                  </object>
-                </child>
-                <child>
-                  <object class="AdwSwitchRow" id="screenshot">
-                    <property name="title" translatable="yes">Screenshots</property>
-                    <property name="subtitle" translatable="yes">Take pictures of the screen at any time</property>
-                    <signal name="notify::active" handler="screenshot_cb" object="CcApplicationsPanel" swapped="yes"/>
-                  </object>
-                </child>
-                <child>
-                  <object class="AdwSwitchRow" id="wallpaper">
-                    <property name="title" translatable="yes">Change Wallpaper</property>
-                    <property name="subtitle" translatable="yes">Change the desktop wallpaper.</property>
-                    <signal name="notify::active" handler="wallpaper_cb" swapped="yes"/>
-                  </object>
-                </child>
-                <child>
-                  <object class="AdwSwitchRow" id="sound">
-                    <property name="title" translatable="yes">Sounds</property>
-                    <property name="subtitle" translatable="yes">Reproduce sounds.</property>
-                    <signal name="notify::active" handler="sound_cb" object="CcApplicationsPanel" swapped="yes"/>
-                  </object>
-                </child>
-                <child>
-                  <object class="CcInfoRow" id="no_sound">
-                    <property name="title" translatable="yes">Sounds</property>
-                    <property name="subtitle" translatable="yes">Reproduce sounds</property>
-                    <property name="info" translatable="yes">Disabled</property>
-                  </object>
-                </child>
-                <child>
-                  <object class="AdwSwitchRow" id="shortcuts">
-                    <property name="title" translatable="yes">Inhibit Shortcuts</property>
-                    <property name="subtitle" translatable="yes">Block standard keyboard shortcuts</property>
-                    <signal name="notify::active" handler="shortcuts_cb" swapped="yes"/>
-                  </object>
-                </child>
-                <child>
-                  <object class="AdwSwitchRow" id="camera">
-                    <property name="title" translatable="yes">Camera</property>
-                    <property name="subtitle" translatable="yes">Take pictures with the camera</property>
-                    <signal name="notify::active" handler="camera_cb" object="CcApplicationsPanel" swapped="yes"/>
-                  </object>
-                </child>
-                <child>
-                  <object class="CcInfoRow" id="no_camera">
-                    <property name="title" translatable="yes">Camera</property>
-                    <property name="subtitle" translatable="yes">Take pictures with the camera</property>
-                    <property name="info" translatable="yes">Disabled</property>
-                  </object>
-                </child>
-                <child>
-                  <object class="AdwSwitchRow" id="microphone">
-                    <property name="title" translatable="yes">Microphone</property>
-                    <property name="subtitle" translatable="yes">Record audio with the microphone</property>
-                    <signal name="notify::active" handler="microphone_cb" object="CcApplicationsPanel" swapped="yes"/>
-                  </object>
-                </child>
-                <child>
-                  <object class="CcInfoRow" id="no_microphone">
-                    <property name="title" translatable="yes">Microphone</property>
-                    <property name="subtitle" translatable="yes">Record audio with the microphone</property>
-                    <property name="info" translatable="yes">Disabled</property>
-                  </object>
-                </child>
-                <child>
-                  <object class="AdwSwitchRow" id="location">
-                    <property name="title" translatable="yes">Location Services</property>
-                    <property name="subtitle" translatable="yes">Access device location data</property>
-                    <signal name="notify::active" handler="location_cb" object="CcApplicationsPanel" swapped="yes"/>
-                  </object>
-                </child>
-                <child>
-                  <object class="CcInfoRow" id="no_location">
-                    <property name="title" translatable="yes">Location Services</property>
-                    <property name="subtitle" translatable="yes">Access device location data</property>
-                    <property name="info" translatable="yes">Disabled</property>
-                  </object>
-                </child>
-              </object>
-            </child>
-
-            <child>
-              <object class="AdwPreferencesGroup" id="usage_section">
-                <child>
-                  <object class="CcInfoRow" id="builtin">
-                    <property name="title" translatable="yes">Required Access</property>
-                    <property name="subtitle" translatable="yes">System access that is required by the app</property>
-                    <property name="has-expander">True</property>
-                    <property name="is-link">True</property>
-                    <signal name="activated" handler="on_builtin_row_activated_cb" object="CcApplicationsPanel" swapped="yes" />
-                  </object>
-                </child>
-                <child>
-                  <object class="CcInfoRow" id="handler_row">
-                    <property name="title" translatable="yes">File &amp;amp; Link Associations</property>
-                    <property name="has-expander">True</property>
-                    <property name="is-link">True</property>
-                    <signal name="activated" handler="on_handler_row_activated_cb" object="CcApplicationsPanel" swapped="yes" />
-                  </object>
-                </child>
-                <child>
-                  <object class="CcInfoRow" id="storage">
-                    <property name="title" translatable="yes">Storage</property>
-                    <property name="has-expander">1</property>
-                    <property name="is-link">1</property>
-                    <signal name="activated" handler="on_storage_row_activated_cb" object="CcApplicationsPanel" swapped="yes" />
+                  <object class="AdwPreferencesGroup" id="usage_section">
+                    <child>
+                      <object class="CcInfoRow" id="builtin">
+                        <property name="title" translatable="yes">Required Access</property>
+                        <property name="subtitle" translatable="yes">System access that is required by the app</property>
+                        <property name="has-expander">True</property>
+                        <property name="is-link">True</property>
+                        <signal name="activated" handler="on_builtin_row_activated_cb" object="CcApplicationsPanel" swapped="yes" />
+                      </object>
+                    </child>
+                    <child>
+                      <object class="CcInfoRow" id="handler_row">
+                        <property name="title" translatable="yes">File &amp;amp; Link Associations</property>
+                        <property name="has-expander">True</property>
+                        <property name="is-link">True</property>
+                        <signal name="activated" handler="on_handler_row_activated_cb" object="CcApplicationsPanel" swapped="yes" />
+                      </object>
+                    </child>
+                    <child>
+                      <object class="CcInfoRow" id="storage">
+                        <property name="title" translatable="yes">Storage</property>
+                        <property name="has-expander">1</property>
+                        <property name="is-link">1</property>
+                        <signal name="activated" handler="on_storage_row_activated_cb" object="CcApplicationsPanel" swapped="yes" />
+                      </object>
+                    </child>
                   </object>
                 </child>
               </object>
             </child>
           </object>
-        </child>
+        </property>
       </object>
     </child>
   </template>
