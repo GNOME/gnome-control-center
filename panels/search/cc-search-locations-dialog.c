@@ -48,7 +48,7 @@ typedef struct {
 } PlaceRowWidgets;
 
 struct _CcSearchLocationsDialog {
-  AdwPreferencesWindow parent;
+  AdwWindow            parent;
 
   GSettings           *tracker_preferences;
 
@@ -64,7 +64,7 @@ struct _CcSearchLocationsDialogClass {
   AdwPreferencesWindowClass parent_class;
 };
 
-G_DEFINE_TYPE (CcSearchLocationsDialog, cc_search_locations_dialog, ADW_TYPE_PREFERENCES_WINDOW)
+G_DEFINE_TYPE (CcSearchLocationsDialog, cc_search_locations_dialog, ADW_TYPE_WINDOW)
 
 static gboolean
 keynav_failed_cb (CcSearchLocationsDialog *self,
@@ -782,4 +782,6 @@ cc_search_locations_dialog_class_init (CcSearchLocationsDialogClass *klass)
 
   gtk_widget_class_bind_template_callback (widget_class, add_button_clicked);
   gtk_widget_class_bind_template_callback (widget_class, keynav_failed_cb);
+
+  gtk_widget_class_add_binding_action (widget_class, GDK_KEY_Escape, 0, "window.close", NULL);
 }
