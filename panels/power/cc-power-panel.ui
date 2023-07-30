@@ -272,125 +272,142 @@
     </widgets>
   </object>
 
-  <object class="GtkDialog" id="automatic_suspend_dialog">
+  <object class="AdwWindow" id="automatic_suspend_dialog">
     <property name="title" translatable="yes">Automatic Suspend</property>
     <property name="resizable">False</property>
-    <property name="use_header_bar">1</property>
     <property name="hide-on-close">True</property>
     <child>
-      <object class="GtkBox">
-        <property name="margin_start">6</property>
-        <property name="margin_end">6</property>
-        <property name="margin_top">6</property>
-        <property name="margin_bottom">6</property>
-        <property name="orientation">vertical</property>
+      <object class="GtkShortcutController">
+        <property name="scope">managed</property>
         <child>
-          <object class="GtkGrid">
-            <property name="margin_start">12</property>
-            <property name="margin_end">6</property>
-            <property name="margin_top">12</property>
-            <property name="margin_bottom">12</property>
-            <property name="row_spacing">12</property>
-            <property name="column_spacing">6</property>
-            <child>
-              <object class="GtkLabel" id="suspend_on_ac_label">
-                <property name="margin_top">12</property>
-                <property name="xalign">0</property>
-                <property name="label" translatable="yes">_Plugged In</property>
-                <property name="use_underline">True</property>
-                <property name="mnemonic_widget">suspend_on_ac_switch</property>
-                <layout>
-                  <property name="column">0</property>
-                  <property name="row">2</property>
-                </layout>
-              </object>
-            </child>
-            <child>
-              <object class="GtkLabel" id="suspend_on_battery_label">
-                <property name="xalign">0</property>
-                <property name="label" translatable="yes">On _Battery Power</property>
-                <property name="use_underline">True</property>
-                <property name="mnemonic_widget">suspend_on_battery_switch</property>
-                <layout>
-                  <property name="column">0</property>
-                  <property name="row">0</property>
-                </layout>
-              </object>
-            </child>
-            <child>
-              <object class="GtkSwitch" id="suspend_on_battery_switch">
-                <property name="halign">end</property>
-                <layout>
-                  <property name="column">2</property>
-                  <property name="row">0</property>
-                </layout>
-              </object>
-            </child>
-            <child>
-              <object class="GtkComboBoxText" id="suspend_on_battery_delay_combo">
-                <property name="entry_text_column">0</property>
-                <property name="id_column">1</property>
-                <property name="model">time_liststore</property>
-                <layout>
-                  <property name="column">2</property>
-                  <property name="row">1</property>
-                </layout>
-              </object>
-            </child>
-            <child>
-              <object class="GtkLabel" id="suspend_on_battery_delay_label">
-                <property name="margin_start">20</property>
-                <property name="xalign">1</property>
-                <property name="label" translatable="yes">Delay</property>
-                <property name="mnemonic_widget">suspend_on_battery_delay_combo</property>
-                <layout>
-                  <property name="column">1</property>
-                  <property name="row">1</property>
-                </layout>
-                <style>
-                  <class name="dim-label"/>
-                </style>
-              </object>
-            </child>
-            <child>
-              <object class="GtkSwitch" id="suspend_on_ac_switch">
-                <property name="halign">end</property>
-                <property name="margin_top">12</property>
-                <layout>
-                  <property name="column">2</property>
-                  <property name="row">2</property>
-                </layout>
-              </object>
-            </child>
-            <child>
-              <object class="GtkComboBoxText" id="suspend_on_ac_delay_combo">
-                <property name="entry_text_column">0</property>
-                <property name="id_column">1</property>
-                <property name="model">time_liststore</property>
-                <layout>
-                  <property name="column">2</property>
-                  <property name="row">3</property>
-                </layout>
-              </object>
-            </child>
-            <child>
-              <object class="GtkLabel">
-                <property name="margin_start">20</property>
-                <property name="xalign">1</property>
-                <property name="label" translatable="yes">Delay</property>
-                <property name="mnemonic_widget">suspend_on_ac_delay_combo</property>
-                <layout>
-                  <property name="column">1</property>
-                  <property name="row">3</property>
-                </layout>
-                <style>
-                  <class name="dim-label"/>
-                </style>
-              </object>
-            </child>
+          <object class="GtkShortcut">
+            <property name="trigger">Escape</property>
+            <property name="action">action(window.close)</property>
           </object>
         </child>
       </object>
     </child>
+    <property name="content">
+      <object class="AdwToolbarView">
+        <child type="top">
+          <object class="AdwHeaderBar"/>
+        </child>
+        <property name="content">
+          <object class="GtkBox">
+            <property name="margin_start">6</property>
+            <property name="margin_end">6</property>
+            <property name="margin_top">6</property>
+            <property name="margin_bottom">6</property>
+            <property name="orientation">vertical</property>
+            <child>
+              <object class="GtkGrid">
+                <property name="margin_start">12</property>
+                <property name="margin_end">6</property>
+                <property name="margin_top">12</property>
+                <property name="margin_bottom">12</property>
+                <property name="row_spacing">12</property>
+                <property name="column_spacing">6</property>
+                <child>
+                  <object class="GtkLabel" id="suspend_on_ac_label">
+                    <property name="margin_top">12</property>
+                    <property name="xalign">0</property>
+                    <property name="label" translatable="yes">_Plugged In</property>
+                    <property name="use_underline">True</property>
+                    <property name="mnemonic_widget">suspend_on_ac_switch</property>
+                    <layout>
+                      <property name="column">0</property>
+                      <property name="row">2</property>
+                    </layout>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkLabel" id="suspend_on_battery_label">
+                    <property name="xalign">0</property>
+                    <property name="label" translatable="yes">On _Battery Power</property>
+                    <property name="use_underline">True</property>
+                    <property name="mnemonic_widget">suspend_on_battery_switch</property>
+                    <layout>
+                      <property name="column">0</property>
+                      <property name="row">0</property>
+                    </layout>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkSwitch" id="suspend_on_battery_switch">
+                    <property name="halign">end</property>
+                    <layout>
+                      <property name="column">2</property>
+                      <property name="row">0</property>
+                    </layout>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkComboBoxText" id="suspend_on_battery_delay_combo">
+                    <property name="entry_text_column">0</property>
+                    <property name="id_column">1</property>
+                    <property name="model">time_liststore</property>
+                    <layout>
+                      <property name="column">2</property>
+                      <property name="row">1</property>
+                    </layout>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkLabel" id="suspend_on_battery_delay_label">
+                    <property name="margin_start">20</property>
+                    <property name="xalign">1</property>
+                    <property name="label" translatable="yes">Delay</property>
+                    <property name="mnemonic_widget">suspend_on_battery_delay_combo</property>
+                    <layout>
+                      <property name="column">1</property>
+                      <property name="row">1</property>
+                    </layout>
+                    <style>
+                      <class name="dim-label"/>
+                    </style>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkSwitch" id="suspend_on_ac_switch">
+                    <property name="halign">end</property>
+                    <property name="margin_top">12</property>
+                    <layout>
+                      <property name="column">2</property>
+                      <property name="row">2</property>
+                    </layout>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkComboBoxText" id="suspend_on_ac_delay_combo">
+                    <property name="entry_text_column">0</property>
+                    <property name="id_column">1</property>
+                    <property name="model">time_liststore</property>
+                    <layout>
+                      <property name="column">2</property>
+                      <property name="row">3</property>
+                    </layout>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="margin_start">20</property>
+                    <property name="xalign">1</property>
+                    <property name="label" translatable="yes">Delay</property>
+                    <property name="mnemonic_widget">suspend_on_ac_delay_combo</property>
+                    <layout>
+                      <property name="column">1</property>
+                      <property name="row">3</property>
+                    </layout>
+                    <style>
+                      <class name="dim-label"/>
+                    </style>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+        </property>
+      </object>
+    </property>
   </object>
 </interface>

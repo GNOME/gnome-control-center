@@ -40,7 +40,7 @@ struct _CcPowerPanel
 
   GtkListBoxRow     *als_row;
   GtkSwitch         *als_switch;
-  GtkDialog         *automatic_suspend_dialog;
+  GtkWindow         *automatic_suspend_dialog;
   GtkLabel          *automatic_suspend_label;
   GtkListBoxRow     *automatic_suspend_row;
   GtkListBox        *battery_listbox;
@@ -623,9 +623,9 @@ automatic_suspend_row_activated_cb (CcPowerPanel *self)
 
   shell = cc_panel_get_shell (CC_PANEL (self));
   toplevel = cc_shell_get_toplevel (shell);
-  gtk_window_set_transient_for (GTK_WINDOW (self->automatic_suspend_dialog), GTK_WINDOW (toplevel));
-  gtk_window_set_modal (GTK_WINDOW (self->automatic_suspend_dialog), TRUE);
-  gtk_window_present (GTK_WINDOW (self->automatic_suspend_dialog));
+  gtk_window_set_transient_for (self->automatic_suspend_dialog, GTK_WINDOW (toplevel));
+  gtk_window_set_modal (self->automatic_suspend_dialog, TRUE);
+  gtk_window_present (self->automatic_suspend_dialog);
 }
 
 static gboolean
@@ -1427,7 +1427,7 @@ cc_power_panel_dispose (GObject *object)
   g_clear_object (&self->gsd_settings);
   g_clear_object (&self->session_settings);
   g_clear_object (&self->interface_settings);
-  g_clear_pointer ((GtkWindow **) &self->automatic_suspend_dialog, gtk_window_destroy);
+  g_clear_pointer (&self->automatic_suspend_dialog, gtk_window_destroy);
   g_clear_pointer (&self->devices, g_ptr_array_unref);
   g_clear_object (&self->up_client);
   g_clear_object (&self->iio_proxy);
