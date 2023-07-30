@@ -39,9 +39,8 @@
 #include "pp-utils.h"
 
 struct _PpDetailsDialog {
-  GtkDialog     parent_instance;
+  AdwWindow     parent_instance;
 
-  GtkLabel     *dialog_title;
   GtkBox       *driver_buttons;
   GtkBox       *loading_box;
   GtkLabel     *printer_address_label;
@@ -61,7 +60,7 @@ struct _PpDetailsDialog {
   PpPPDSelectionDialog *pp_ppd_selection_dialog;
 };
 
-G_DEFINE_TYPE (PpDetailsDialog, pp_details_dialog, GTK_TYPE_DIALOG)
+G_DEFINE_TYPE (PpDetailsDialog, pp_details_dialog, ADW_TYPE_WINDOW)
 
 static void
 printer_name_changed (PpDetailsDialog *self)
@@ -75,7 +74,7 @@ printer_name_changed (PpDetailsDialog *self)
     /* Translators: This is the title of the dialog. %s is the printer name. */
     title = g_strdup_printf (_("%s Details"), name);
     gtk_revealer_set_reveal_child (self->print_name_hint_revealer, FALSE);
-    gtk_label_set_label (self->dialog_title, title);
+    gtk_window_set_title (GTK_WINDOW (self), title);
   } else {
     gtk_revealer_set_reveal_child (self->print_name_hint_revealer, TRUE);
   }
@@ -135,7 +134,7 @@ set_ppd_cb (const gchar *printer_name,
 }
 
 static void
-ppd_selection_dialog_response_cb (GtkDialog *dialog,
+ppd_selection_dialog_response_cb (GtkWindow *dialog,
                                   gint       response_id,
                                   gpointer   user_data)
 {
@@ -331,7 +330,6 @@ pp_details_dialog_class_init (PpDetailsDialogClass *klass)
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/printers/pp-details-dialog.ui");
 
-  gtk_widget_class_bind_template_child (widget_class, PpDetailsDialog, dialog_title);
   gtk_widget_class_bind_template_child (widget_class, PpDetailsDialog, print_name_hint_revealer);
   gtk_widget_class_bind_template_child (widget_class, PpDetailsDialog, driver_buttons);
   gtk_widget_class_bind_template_child (widget_class, PpDetailsDialog, loading_box);
@@ -346,6 +344,8 @@ pp_details_dialog_class_init (PpDetailsDialogClass *klass)
   gtk_widget_class_bind_template_callback (widget_class, search_for_drivers);
   gtk_widget_class_bind_template_callback (widget_class, select_ppd_in_dialog);
   gtk_widget_class_bind_template_callback (widget_class, select_ppd_manually);
+
+  gtk_widget_class_add_binding_action (widget_class, GDK_KEY_Escape, 0, "window.close", NULL);
 }
 
 PpDetailsDialog *
@@ -359,16 +359,14 @@ pp_details_dialog_new (gchar   *printer_name,
   g_autofree gchar *title = NULL;
   g_autofree gchar *printer_url = NULL;
 
-  self = g_object_new (PP_DETAILS_DIALOG_TYPE,
-                       "use-header-bar", TRUE,
-                       NULL);
+  self = g_object_new (PP_DETAILS_DIALOG_TYPE, NULL);
 
   self->printer_name = g_strdup (printer_name);
   self->ppd_file_name = NULL;
 
   /* Translators: This is the title of the dialog. %s is the printer name. */
   title = g_strdup_printf (_("%s Details"), printer_name);
-  gtk_label_set_label (self->dialog_title, title);
+  gtk_window_set_title (GTK_WINDOW (self), title);
 
   printer_url = g_strdup_printf ("<a href=\"http://%s:%d\">%s</a>", printer_address, ippPort (), printer_address);
   gtk_label_set_markup (GTK_LABEL (self->printer_address_label), printer_url);

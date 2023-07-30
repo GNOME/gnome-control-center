@@ -34,7 +34,7 @@
 
 G_BEGIN_DECLS
 
-typedef void (*UserResponseCallback) (GtkDialog *dialog, gint response_id, gpointer user_data);
+typedef void (*UserResponseCallback) (GtkWindow *dialog, gint response_id, gpointer user_data);
 
 /*
  * Match level of PPD driver.

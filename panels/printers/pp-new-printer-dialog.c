@@ -63,8 +63,8 @@ static void     replace_device (PpNewPrinterDialog *self,
 static void     populate_devices_list (PpNewPrinterDialog *self);
 static void     search_entry_activated_cb (PpNewPrinterDialog *self);
 static void     search_entry_changed_cb (PpNewPrinterDialog *self);
-static void     new_printer_dialog_response_cb (PpNewPrinterDialog *self,
-                                                gint                response_id);
+static void     add_cb (PpNewPrinterDialog *self);
+static void     cancel_cb (PpNewPrinterDialog *self);
 static void     update_dialog_state (PpNewPrinterDialog *self);
 static void     add_devices_to_list (PpNewPrinterDialog  *self,
                                      GPtrArray           *devices);
@@ -85,7 +85,7 @@ enum
 
 struct _PpNewPrinterDialog
 {
-  GtkDialog parent_instance;
+  AdwWindow parent_instance;
 
   GPtrArray *local_cups_devices;
 
@@ -93,7 +93,6 @@ struct _PpNewPrinterDialog
   GtkTreeModelFilter *devices_model_filter;
 
   /* headerbar */
-  GtkHeaderBar         *headerbar;
   AdwWindowTitle       *header_title;
 
   /* headerbar topleft buttons */
@@ -155,7 +154,7 @@ struct _PpNewPrinterDialog
   guint    host_search_timeout_id;
 };
 
-G_DEFINE_TYPE (PpNewPrinterDialog, pp_new_printer_dialog, GTK_TYPE_DIALOG)
+G_DEFINE_TYPE (PpNewPrinterDialog, pp_new_printer_dialog, ADW_TYPE_WINDOW)
 
 typedef struct
 {
@@ -1539,7 +1538,7 @@ row_activated_cb (PpNewPrinterDialog *self)
         }
       else
         {
-          gtk_dialog_response (GTK_DIALOG (self), GTK_RESPONSE_OK);
+          add_cb (self);
         }
     }
 }
@@ -1648,7 +1647,7 @@ populate_devices_list (PpNewPrinterDialog *self)
 }
 
 static void
-ppd_selection_cb (GtkDialog *_dialog,
+ppd_selection_cb (GtkWindow *_dialog,
                   gint       response_id,
                   gpointer   user_data)
 {
@@ -1703,61 +1702,59 @@ ppd_selection_cb (GtkDialog *_dialog,
   /* This is needed here since parent dialog is destroyed first. */
   gtk_window_set_transient_for (GTK_WINDOW (self->ppd_selection_dialog), NULL);
 
-  self->user_callback (GTK_DIALOG (self), response_id, self->user_data);
+  self->user_callback (GTK_WINDOW (self), response_id, self->user_data);
 }
 
 static void
-new_printer_dialog_response_cb (PpNewPrinterDialog *self,
-                                gint                response_id)
+cancel_cb (PpNewPrinterDialog *self)
+{
+  self->user_callback (GTK_WINDOW (self), GTK_RESPONSE_CANCEL, self->user_data);
+}
+
+static void
+add_cb (PpNewPrinterDialog *self)
 {
   g_autoptr(PpPrintDevice)   device = NULL;
   GtkTreeModel              *model;
   GtkTreeIter                iter;
   gint                       acquisition_method;
 
-  if (response_id == GTK_RESPONSE_OK)
+  g_cancellable_cancel (self->cancellable);
+  g_clear_object (&self->cancellable);
+
+  if (gtk_tree_selection_get_selected (gtk_tree_view_get_selection (self->devices_treeview), &model, &iter))
     {
-      g_cancellable_cancel (self->cancellable);
-      g_clear_object (&self->cancellable);
-
-      if (gtk_tree_selection_get_selected (gtk_tree_view_get_selection (self->devices_treeview), &model, &iter))
-        {
-          gtk_tree_model_get (model, &iter,
-                              DEVICE_COLUMN, &device,
-                              -1);
-        }
-
-      if (device)
-        {
-          acquisition_method = pp_print_device_get_acquisition_method (device);
-          if (acquisition_method == ACQUISITION_METHOD_SAMBA ||
-              acquisition_method == ACQUISITION_METHOD_SAMBA_HOST ||
-              acquisition_method == ACQUISITION_METHOD_JETDIRECT ||
-              acquisition_method == ACQUISITION_METHOD_LPD)
-            {
-              self->new_device = pp_print_device_copy (device);
-              self->ppd_selection_dialog =
-                pp_ppd_selection_dialog_new (self->list,
-                                             NULL,
-                                             ppd_selection_cb,
-                                             self);
-
-              gtk_window_set_transient_for (GTK_WINDOW (self->ppd_selection_dialog),
-                                            GTK_WINDOW (self));
-
-              /* New device will be set at return from ppd selection */
-              gtk_widget_set_visible (GTK_WIDGET (self->ppd_selection_dialog), TRUE);
-            }
-          else
-            {
-              self->new_device = pp_print_device_copy (device);
-              self->user_callback (GTK_DIALOG (self), GTK_RESPONSE_OK, self->user_data);
-            }
-        }
+      gtk_tree_model_get (model, &iter,
+                          DEVICE_COLUMN, &device,
+                          -1);
     }
-  else
+
+  if (device)
     {
-      self->user_callback (GTK_DIALOG (self), GTK_RESPONSE_CANCEL, self->user_data);
+      acquisition_method = pp_print_device_get_acquisition_method (device);
+      if (acquisition_method == ACQUISITION_METHOD_SAMBA ||
+          acquisition_method == ACQUISITION_METHOD_SAMBA_HOST ||
+          acquisition_method == ACQUISITION_METHOD_JETDIRECT ||
+          acquisition_method == ACQUISITION_METHOD_LPD)
+        {
+          self->new_device = pp_print_device_copy (device);
+          self->ppd_selection_dialog =
+            pp_ppd_selection_dialog_new (self->list,
+                                         NULL,
+                                         ppd_selection_cb,
+                                         self);
+
+          gtk_window_set_transient_for (GTK_WINDOW (self->ppd_selection_dialog),
+                                        GTK_WINDOW (self));
+
+          /* New device will be set at return from ppd selection */
+          gtk_widget_set_visible (GTK_WIDGET (self->ppd_selection_dialog), TRUE);
+        }
+      else
+        {
+          self->new_device = pp_print_device_copy (device);
+          self->user_callback (GTK_WINDOW (self), GTK_RESPONSE_OK, self->user_data);
+        }
     }
 }
 
@@ -1780,8 +1777,6 @@ pp_new_printer_dialog_new (PPDList              *ppd_list,
   /* GCancellable for cancelling of async operations */
   self->cancellable = g_cancellable_new ();
 
-  g_signal_connect_object (self, "response", G_CALLBACK (new_printer_dialog_response_cb), self, G_CONNECT_SWAPPED);
-
   g_signal_connect_object (self->search_entry, "activate", G_CALLBACK (search_entry_activated_cb), self, G_CONNECT_SWAPPED);
   g_signal_connect_object (self->search_entry, "search-changed", G_CALLBACK (search_entry_changed_cb), self, G_CONNECT_SWAPPED);
 
@@ -1792,13 +1787,20 @@ pp_new_printer_dialog_new (PPDList              *ppd_list,
   g_signal_connect_object (self->password_entry, "changed", G_CALLBACK (auth_entries_changed), self, G_CONNECT_SWAPPED);
   g_signal_connect_object (self->go_back_button, "clicked", G_CALLBACK (on_go_back_button_clicked), self, G_CONNECT_SWAPPED);
 
-  /* Set titlebar */
-  gtk_window_set_titlebar(GTK_WINDOW (self), GTK_WIDGET (self->headerbar));
-
   /* Fill with data */
   populate_devices_list (self);
 
   return self;
+}
+
+static gboolean
+pp_new_printer_dialog_close_request (GtkWindow *window)
+{
+  PpNewPrinterDialog *self = PP_NEW_PRINTER_DIALOG (window);
+
+  cancel_cb (self);
+
+  return GDK_EVENT_STOP;
 }
 
 static void
@@ -1843,6 +1845,7 @@ pp_new_printer_dialog_dispose (GObject *object)
 void
 pp_new_printer_dialog_class_init (PpNewPrinterDialogClass *klass)
 {
+  GtkWindowClass *window_class = GTK_WINDOW_CLASS (klass);
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
   GObjectClass   *object_class = G_OBJECT_CLASS (klass);
 
@@ -1854,7 +1857,6 @@ pp_new_printer_dialog_class_init (PpNewPrinterDialogClass *klass)
   gtk_widget_class_bind_template_child (widget_class, PpNewPrinterDialog, devices_model_filter);
 
   /* headerbar */
-  gtk_widget_class_bind_template_child (widget_class, PpNewPrinterDialog, headerbar);
   gtk_widget_class_bind_template_child (widget_class, PpNewPrinterDialog, header_title);
 
   /* headerbar topleft buttons */
@@ -1883,7 +1885,13 @@ pp_new_printer_dialog_class_init (PpNewPrinterDialogClass *klass)
   gtk_widget_class_bind_template_child (widget_class, PpNewPrinterDialog, username_entry);
   gtk_widget_class_bind_template_child (widget_class, PpNewPrinterDialog, password_entry);
 
+  gtk_widget_class_bind_template_callback (widget_class, add_cb);
+  gtk_widget_class_bind_template_callback (widget_class, cancel_cb);
+
   object_class->dispose = pp_new_printer_dialog_dispose;
+  window_class->close_request = pp_new_printer_dialog_close_request;
+
+  gtk_widget_class_add_binding_action (widget_class, GDK_KEY_Escape, 0, "window.close", NULL);
 }
 
 

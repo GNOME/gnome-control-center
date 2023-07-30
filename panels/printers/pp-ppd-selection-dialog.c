@@ -46,7 +46,7 @@ enum
 
 
 struct _PpPPDSelectionDialog {
-  GtkDialog parent_instance;
+  AdwWindow parent_instance;
 
   GtkButton   *ppd_selection_select_button;
   GtkSpinner  *ppd_spinner;
@@ -64,7 +64,7 @@ struct _PpPPDSelectionDialog {
   PPDList *list;
 };
 
-G_DEFINE_TYPE (PpPPDSelectionDialog, pp_ppd_selection_dialog, GTK_TYPE_DIALOG)
+G_DEFINE_TYPE (PpPPDSelectionDialog, pp_ppd_selection_dialog, ADW_TYPE_WINDOW)
 
 static void
 manufacturer_selection_changed_cb (PpPPDSelectionDialog *self)
@@ -263,36 +263,38 @@ populate_dialog (PpPPDSelectionDialog *self)
 }
 
 static void
-ppd_selection_dialog_response_cb (PpPPDSelectionDialog *self,
-                                  gint       response_id)
+select_cb (PpPPDSelectionDialog *self)
 {
   GtkTreeSelection *selection;
   GtkTreeModel     *model;
   GtkTreeView      *models_treeview;
   GtkTreeIter       iter;
 
-  if (response_id == GTK_RESPONSE_OK)
+  models_treeview = self->ppd_selection_models_treeview;
+
+  if (models_treeview)
     {
-      models_treeview = self->ppd_selection_models_treeview;
+      selection = gtk_tree_view_get_selection (models_treeview);
 
-      if (models_treeview)
+      if (selection)
         {
-          selection = gtk_tree_view_get_selection (models_treeview);
-
-          if (selection)
+          if (gtk_tree_selection_get_selected (selection, &model, &iter))
             {
-              if (gtk_tree_selection_get_selected (selection, &model, &iter))
-                {
-                  gtk_tree_model_get (model, &iter,
-                                      PPD_NAMES_COLUMN, &self->ppd_name,
-                                      PPD_DISPLAY_NAMES_COLUMN, &self->ppd_display_name,
-                                      -1);
-                }
+              gtk_tree_model_get (model, &iter,
+                                  PPD_NAMES_COLUMN, &self->ppd_name,
+                                  PPD_DISPLAY_NAMES_COLUMN, &self->ppd_display_name,
+                                  -1);
             }
         }
     }
 
-  self->user_callback (GTK_DIALOG (self), response_id, self->user_data);
+  self->user_callback (GTK_WINDOW (self), GTK_RESPONSE_OK, self->user_data);
+}
+
+static void
+cancel_cb (PpPPDSelectionDialog *self)
+{
+  self->user_callback (GTK_WINDOW (self), GTK_RESPONSE_CANCEL, self->user_data);
 }
 
 PpPPDSelectionDialog *
@@ -312,14 +314,21 @@ pp_ppd_selection_dialog_new (PPDList              *ppd_list,
 
   self->manufacturer = get_standard_manufacturers_name (manufacturer);
 
-  /* connect signal */
-  g_signal_connect_object (self, "response", G_CALLBACK (ppd_selection_dialog_response_cb), self, G_CONNECT_SWAPPED);
-
   gtk_spinner_start (self->ppd_spinner);
 
   populate_dialog (self);
 
   return self;
+}
+
+static gboolean
+pp_ppd_selection_dialog_close_request (GtkWindow *window)
+{
+  PpPPDSelectionDialog *self = PP_PPD_SELECTION_DIALOG (window);
+
+  cancel_cb (self);
+
+  return GDK_EVENT_STOP;
 }
 
 static void
@@ -337,6 +346,7 @@ pp_ppd_selection_dialog_dispose (GObject *object)
 void
 pp_ppd_selection_dialog_class_init (PpPPDSelectionDialogClass *klass)
 {
+  GtkWindowClass *window_class = GTK_WINDOW_CLASS (klass);
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
   GObjectClass   *object_class = G_OBJECT_CLASS (klass);
 
@@ -347,7 +357,13 @@ pp_ppd_selection_dialog_class_init (PpPPDSelectionDialogClass *klass)
   gtk_widget_class_bind_template_child (widget_class, PpPPDSelectionDialog, ppd_selection_manufacturers_treeview);
   gtk_widget_class_bind_template_child (widget_class, PpPPDSelectionDialog, ppd_selection_models_treeview);
 
+  gtk_widget_class_bind_template_callback (widget_class, select_cb);
+  gtk_widget_class_bind_template_callback (widget_class, cancel_cb);
+
   object_class->dispose = pp_ppd_selection_dialog_dispose;
+  window_class->close_request = pp_ppd_selection_dialog_close_request;
+
+  gtk_widget_class_add_binding_action (widget_class, GDK_KEY_Escape, 0, "window.close", NULL);
 }
 
 void

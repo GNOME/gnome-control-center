@@ -20,13 +20,13 @@
 
 #pragma once
 
-#include <gtk/gtk.h>
+#include <adwaita.h>
 #include "pp-utils.h"
 
 G_BEGIN_DECLS
 
 #define PP_TYPE_OPTIONS_DIALOG (pp_options_dialog_get_type ())
-G_DECLARE_FINAL_TYPE (PpOptionsDialog, pp_options_dialog, PP, OPTIONS_DIALOG, GtkDialog)
+G_DECLARE_FINAL_TYPE (PpOptionsDialog, pp_options_dialog, PP, OPTIONS_DIALOG, AdwWindow)
 
 PpOptionsDialog *pp_options_dialog_new (gchar   *printer_name,
                                         gboolean sensitive);

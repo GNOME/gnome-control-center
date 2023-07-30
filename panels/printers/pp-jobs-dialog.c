@@ -44,7 +44,7 @@
 #define CLOCK_FORMAT_KEY "clock-format"
 
 struct _PpJobsDialog {
-  GtkDialog   parent_instance;
+  AdwWindow          parent_instance;
 
   GtkButton         *authenticate_button;
   GtkMenuButton     *authenticate_jobs_button;
@@ -74,7 +74,7 @@ struct _PpJobsDialog {
   GCancellable *get_jobs_cancellable;
 };
 
-G_DEFINE_TYPE (PpJobsDialog, pp_jobs_dialog, GTK_TYPE_DIALOG)
+G_DEFINE_TYPE (PpJobsDialog, pp_jobs_dialog, ADW_TYPE_WINDOW)
 
 static gboolean
 is_info_required (PpJobsDialog *self,
@@ -444,9 +444,7 @@ pp_jobs_dialog_new (const gchar *printer_name)
   g_autofree gchar *text = NULL;
   g_autofree gchar *title = NULL;
 
-  self = g_object_new (PP_TYPE_JOBS_DIALOG,
-                       "use-header-bar", 1,
-                       NULL);
+  self = g_object_new (PP_TYPE_JOBS_DIALOG, NULL);
 
   self->printer_name = g_strdup (printer_name);
   self->actual_auth_info_required = NULL;

@@ -41,11 +41,11 @@
 #include "pp-printer.h"
 
 struct _PpOptionsDialog {
-  GtkDialog    parent_instance;
+  AdwWindow    parent_instance;
 
   GtkTreeSelection *categories_selection;
   GtkTreeView      *categories_treeview;
-  GtkBox           *main_box;
+  GtkWidget        *main_box;
   GtkNotebook      *notebook;
   GtkSpinner       *spinner;
   GtkStack         *stack;
@@ -64,7 +64,7 @@ struct _PpOptionsDialog {
   gboolean sensitive;
 };
 
-G_DEFINE_TYPE (PpOptionsDialog, pp_options_dialog, GTK_TYPE_DIALOG)
+G_DEFINE_TYPE (PpOptionsDialog, pp_options_dialog, ADW_TYPE_WINDOW)
 
 enum
 {
@@ -498,7 +498,7 @@ populate_options_real (PpOptionsDialog *self)
 
   gtk_spinner_stop (self->spinner);
 
-  gtk_stack_set_visible_child (self->stack, GTK_WIDGET (self->main_box));
+  gtk_stack_set_visible_child (self->stack, self->main_box);
 
   if (self->ipp_attributes)
     {
@@ -862,9 +862,7 @@ pp_options_dialog_new (gchar   *printer_name,
 {
   PpOptionsDialog *self;
 
-  self = g_object_new (pp_options_dialog_get_type (),
-                       "use-header-bar", 1,
-                       NULL);
+  self = g_object_new (pp_options_dialog_get_type (), NULL);
 
   self->printer_name = g_strdup (printer_name);
 
@@ -926,6 +924,8 @@ pp_options_dialog_class_init (PpOptionsDialogClass *klass)
 
   gtk_widget_class_bind_template_callback (widget_class, category_selection_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, test_page_cb);
+
+  gtk_widget_class_add_binding_action (widget_class, GDK_KEY_Escape, 0, "window.close", NULL);
 }
 
 void
