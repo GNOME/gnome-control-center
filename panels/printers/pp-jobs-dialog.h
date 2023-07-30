@@ -20,13 +20,13 @@
 
 #pragma once
 
-#include <gtk/gtk.h>
+#include <adwaita.h>
 #include "pp-utils.h"
 
 G_BEGIN_DECLS
 
 #define PP_TYPE_JOBS_DIALOG (pp_jobs_dialog_get_type ())
-G_DECLARE_FINAL_TYPE (PpJobsDialog, pp_jobs_dialog, PP, JOBS_DIALOG, GtkDialog)
+G_DECLARE_FINAL_TYPE (PpJobsDialog, pp_jobs_dialog, PP, JOBS_DIALOG, AdwWindow)
 
 PpJobsDialog *pp_jobs_dialog_new               (const gchar  *printer_name);
 void          pp_jobs_dialog_update            (PpJobsDialog *dialog);

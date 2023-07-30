@@ -20,13 +20,13 @@
 
 #pragma once
 
-#include <gtk/gtk.h>
+#include <adwaita.h>
 #include "pp-utils.h"
 
 G_BEGIN_DECLS
 
 #define PP_TYPE_PPD_SELECTION_DIALOG (pp_ppd_selection_dialog_get_type ())
-G_DECLARE_FINAL_TYPE (PpPPDSelectionDialog, pp_ppd_selection_dialog, PP, PPD_SELECTION_DIALOG, GtkDialog)
+G_DECLARE_FINAL_TYPE (PpPPDSelectionDialog, pp_ppd_selection_dialog, PP, PPD_SELECTION_DIALOG, AdwWindow)
 
 PpPPDSelectionDialog *pp_ppd_selection_dialog_new                  (PPDList                   *ppd_list,
                                                                     const gchar               *manufacturer,

@@ -19,14 +19,14 @@
 
 #pragma once
 
-#include <gtk/gtk.h>
+#include <adwaita.h>
 #include "pp-new-printer.h"
 #include "pp-utils.h"
 
 G_BEGIN_DECLS
 
 #define PP_TYPE_NEW_PRINTER_DIALOG (pp_new_printer_dialog_get_type ())
-G_DECLARE_FINAL_TYPE (PpNewPrinterDialog, pp_new_printer_dialog, PP, NEW_PRINTER_DIALOG, GtkDialog)
+G_DECLARE_FINAL_TYPE (PpNewPrinterDialog, pp_new_printer_dialog, PP, NEW_PRINTER_DIALOG, AdwWindow)
 
 PpNewPrinterDialog *pp_new_printer_dialog_new                  (PPDList              *ppd_list,
                                                                 UserResponseCallback  user_callback,

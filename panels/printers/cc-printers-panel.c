@@ -914,7 +914,7 @@ printer_add_async_cb (GObject      *source_object,
 }
 
 static void
-new_printer_dialog_response_cb (GtkDialog *_dialog,
+new_printer_dialog_response_cb (GtkWindow *_dialog,
                                 gint       response_id,
                                 gpointer   user_data)
 {

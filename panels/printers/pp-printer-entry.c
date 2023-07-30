@@ -358,9 +358,8 @@ on_printer_rename_cb (GObject      *source_object,
   g_signal_emit_by_name (self, "printer-renamed", pp_printer_get_name (PP_PRINTER (source_object)));
 }
 
-static void
+static gboolean
 show_printer_details_response_cb (PpPrinterEntry  *self,
-                                  gint             reponse,
                                   PpDetailsDialog *dialog)
 {
   const gchar *new_name;
@@ -384,7 +383,7 @@ show_printer_details_response_cb (PpPrinterEntry  *self,
 
   g_signal_emit_by_name (self, "printer-changed");
 
-  gtk_window_destroy (GTK_WINDOW (dialog));
+  return GDK_EVENT_PROPAGATE;
 }
 
 static void
@@ -400,7 +399,7 @@ on_show_printer_details_dialog (GtkButton      *button,
   gtk_window_set_transient_for (GTK_WINDOW (dialog),
                                 GTK_WINDOW (gtk_widget_get_native (GTK_WIDGET (self))));
 
-  g_signal_connect_swapped (dialog, "response", G_CALLBACK (show_printer_details_response_cb), self);
+  g_signal_connect_swapped (dialog, "close-request", G_CALLBACK (show_printer_details_response_cb), self);
 
   gtk_window_present (GTK_WINDOW (dialog));
 }
@@ -561,15 +560,16 @@ pp_printer_entry_update_jobs_count (PpPrinterEntry *self)
                              self);
 }
 
-static void
-jobs_dialog_response_cb (PpPrinterEntry *self,
-                         gint            response_id)
+static gboolean
+jobs_dialog_close_request_cb (PpPrinterEntry *self)
 {
   if (self->pp_jobs_dialog != NULL)
     {
       gtk_window_destroy (GTK_WINDOW (self->pp_jobs_dialog));
       self->pp_jobs_dialog = NULL;
     }
+
+  return GDK_EVENT_STOP;
 }
 
 void
@@ -578,7 +578,7 @@ pp_printer_entry_show_jobs_dialog (PpPrinterEntry *self)
   if (self->pp_jobs_dialog == NULL)
     {
       self->pp_jobs_dialog = pp_jobs_dialog_new (self->printer_name);
-      g_signal_connect_object (self->pp_jobs_dialog, "response", G_CALLBACK (jobs_dialog_response_cb), self, G_CONNECT_SWAPPED);
+      g_signal_connect_object (self->pp_jobs_dialog, "close-request", G_CALLBACK (jobs_dialog_close_request_cb), self, G_CONNECT_SWAPPED);
       gtk_window_set_transient_for (GTK_WINDOW (self->pp_jobs_dialog), GTK_WINDOW (gtk_widget_get_native (GTK_WIDGET (self))));
       gtk_window_present (GTK_WINDOW (self->pp_jobs_dialog));
     }
