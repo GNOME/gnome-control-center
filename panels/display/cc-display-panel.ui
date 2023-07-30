@@ -122,25 +122,13 @@
                               <object class="AdwActionRow" id="config_type_switcher_row">
                                 <property name="title" translatable="yes">Multiple Displays</property>
                                 <child type="suffix">
-                                  <object class="GtkBox">
+                                  <object class="AdwToggleGroup" id="config_type_toggles">
                                     <property name="valign">center</property>
-                                    <style>
-                                      <class name="linked" />
-                                    </style>
-                                    <child>
-                                      <object class="GtkToggleButton" id="config_type_join">
-                                        <property name="label" translatable="yes" comments="'Join' as in 'Join displays'">Join</property>
-                                        <property name="active">True</property>
-                                        <signal name="toggled" handler="on_config_type_toggled_cb" swapped="yes"/>
-                                      </object>
-                                    </child>
-                                    <child>
-                                      <object class="GtkToggleButton" id="config_type_mirror">
-                                        <property name="label" translatable="yes">Mirror</property>
-                                        <property name="group">config_type_join</property>
-                                        <signal name="toggled" handler="on_config_type_toggled_cb" swapped="yes"/>
-                                      </object>
-                                    </child>
+                                    <signal name="notify::active" handler="on_config_type_toggled_cb" swapped="yes"/>
+                                    <toggles>
+                                      <toggle id="join" translatable="yes" comments="'Join' as in 'Join displays'">Join</toggle>
+                                      <toggle id="clone" translatable="yes">Mirror</toggle>
+                                    </toggles>
                                   </object>
                                 </child>
                               </object>
