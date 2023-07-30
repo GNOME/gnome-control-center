@@ -123,163 +123,192 @@
     </property>
   </object>
   <template class="CcDateTimePanel" parent="CcPanel">
-
-    <child type="titlebar-end">
-      <object class="GtkLockButton" id="lock_button">
-        <property name="valign">center</property>
+    <child type="titlebar">
+      <object class="GtkHeaderBar">
+        <property name="visible">False</property>
       </object>
     </child>
 
     <child type="content">
-      <object class="AdwPreferencesPage">
-        <child>
-          <object class="AdwPreferencesGroup">
+      <object class="AdwToolbarView">
+        <property name="top-bar-style">raised</property>
+        <child type="top">
+          <object class="AdwHeaderBar">
+            <property name="show-end-title-buttons">True</property>
+            <property name="show-start-title-buttons" bind-source="CcDateTimePanel" bind-property="folded" bind-flags="default|sync-create" />
+            <child type="start">
+              <object class="GtkButton">
+                <property name="visible" bind-source="CcDateTimePanel" bind-property="folded" bind-flags="default|sync-create" />
+                <property name="icon-name">go-previous-symbolic</property>
+                <property name="action-name">window.navigate</property>
+                <property name="action-target">0</property> <!-- 0: ADW_NAVIGATION_DIRECTION_BACK -->
+              </object>
+            </child>
+            <property name="title-widget">
+              <object class="AdwWindowTitle" id="header_title">
+                <property name="title" translatable="yes">Date &amp; Time</property>
+              </object>
+            </property>
+            <child type="end">
+              <object class="GtkLockButton" id="lock_button">
+                <property name="valign">center</property>
+              </object>
+            </child>
+          </object>
+        </child>
+
+        <property name="content">
+          <object class="AdwPreferencesPage">
             <child>
-              <object class="AdwActionRow" id="auto_datetime_row">
-                <property name="title" translatable="yes">Automatic _Date &amp;amp; Time</property>
-                <property name="subtitle" translatable="yes">Requires internet access</property>
-                <property name="use_underline">True</property>
-                <property name="activatable_widget">network_time_switch</property>
+              <object class="AdwPreferencesGroup">
                 <child>
-                  <object class="GtkSwitch" id="network_time_switch">
-                    <property name="valign">center</property>
+                  <object class="AdwActionRow" id="auto_datetime_row">
+                    <property name="title" translatable="yes">Automatic _Date &amp;amp; Time</property>
+                    <property name="subtitle" translatable="yes">Requires internet access</property>
+                    <property name="use_underline">True</property>
+                    <property name="activatable_widget">network_time_switch</property>
+                    <child>
+                      <object class="GtkSwitch" id="network_time_switch">
+                        <property name="valign">center</property>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+                <child>
+                  <object class="AdwActionRow" id="datetime_row">
+                    <property name="title" translatable="yes">Date &amp;amp; _Time</property>
+                    <property name="use_underline">True</property>
+                    <property name="activatable">True</property>
+                    <signal name="activated" handler="list_box_row_activated" swapped="yes"/>
+                    <child>
+                      <object class="GtkLabel" id="datetime_label">
+                        <property name="xalign">0</property>
+                        <property name="label">20 June 2012, 6:45 AM</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkImage">
+                        <property name="valign">center</property>
+                        <property name="icon-name">go-next-symbolic</property>
+                      </object>
+                    </child>
                   </object>
                 </child>
               </object>
             </child>
             <child>
-              <object class="AdwActionRow" id="datetime_row">
-                <property name="title" translatable="yes">Date &amp;amp; _Time</property>
-                <property name="use_underline">True</property>
-                <property name="activatable">True</property>
-                <signal name="activated" handler="list_box_row_activated" swapped="yes"/>
+              <object class="AdwPreferencesGroup">
                 <child>
-                  <object class="GtkLabel" id="datetime_label">
-                    <property name="xalign">0</property>
-                    <property name="label">20 June 2012, 6:45 AM</property>
+                  <object class="AdwActionRow" id="auto_timezone_row">
+                    <property name="title" translatable="yes">Automatic Time _Zone</property>
+                    <property name="subtitle" translatable="yes">Requires location services enabled and internet access</property>
+                    <property name="use_underline">True</property>
+                    <property name="activatable_widget">auto_timezone_switch</property>
+                    <child>
+                      <object class="GtkSwitch" id="auto_timezone_switch">
+                        <property name="valign">center</property>
+                      </object>
+                    </child>
                   </object>
                 </child>
                 <child>
-                  <object class="GtkImage">
-                    <property name="valign">center</property>
-                    <property name="icon-name">go-next-symbolic</property>
+                  <object class="AdwActionRow" id="timezone_row">
+                    <property name="title" translatable="yes">Time Z_one</property>
+                    <property name="use_underline">True</property>
+                    <property name="activatable">True</property>
+                    <signal name="activated" handler="list_box_row_activated" swapped="yes"/>
+                    <child>
+                      <object class="GtkLabel" id="timezone_label">
+                        <property name="ellipsize">end</property>
+                        <property name="xalign">0</property>
+                        <property name="label">GMT+1 (London, United Kingdom)</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkImage">
+                        <property name="valign">center</property>
+                        <property name="icon-name">go-next-symbolic</property>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="AdwPreferencesGroup">
+                <child>
+                  <object class="AdwComboRow" id="timeformat_row">
+                    <property name="title" translatable="yes">Time _Format</property>
+                    <property name="use_underline">True</property>
+                    <signal name="notify::selected-item" handler="change_clock_settings" object="CcDateTimePanel" swapped="yes"/>
+                    <property name="model">
+                      <object class="AdwEnumListModel">
+                        <property name="enum-type">GDesktopClockFormat</property>
+                      </object>
+                    </property>
+                    <property name="expression">
+                      <closure type="gchararray" function="format_clock_name_cb"/>
+                    </property>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="AdwPreferencesGroup">
+                <property name="title" translatable="yes">Clock &amp;amp; Calendar</property>
+                <property name="description" translatable="yes">Control how the time and date is shown in the top bar</property>
+                <child>
+                  <object class="AdwActionRow">
+                    <property name="title" translatable="yes">Week Day</property>
+                    <property name="use_underline">True</property>
+                    <property name="activatable_widget">weekday_switch</property>
+                    <child>
+                      <object class="GtkSwitch" id="weekday_switch">
+                        <property name="valign">center</property>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+                <child>
+                  <object class="AdwActionRow">
+                    <property name="title" translatable="yes">Date</property>
+                    <property name="use_underline">True</property>
+                    <property name="activatable_widget">date_switch</property>
+                    <child>
+                      <object class="GtkSwitch" id="date_switch">
+                        <property name="valign">center</property>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+                <child>
+                  <object class="AdwActionRow">
+                    <property name="title" translatable="yes">Seconds</property>
+                    <property name="use_underline">True</property>
+                    <property name="activatable_widget">seconds_switch</property>
+                    <child>
+                      <object class="GtkSwitch" id="seconds_switch">
+                        <property name="valign">center</property>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+                <child>
+                  <object class="AdwActionRow">
+                    <property name="title" translatable="yes">Week Numbers</property>
+                    <property name="use_underline">True</property>
+                    <property name="activatable_widget">week_numbers_switch</property>
+                    <child>
+                      <object class="GtkSwitch" id="week_numbers_switch">
+                        <property name="valign">center</property>
+                      </object>
+                    </child>
                   </object>
                 </child>
               </object>
             </child>
           </object>
-        </child>
-        <child>
-          <object class="AdwPreferencesGroup">
-            <child>
-              <object class="AdwActionRow" id="auto_timezone_row">
-                <property name="title" translatable="yes">Automatic Time _Zone</property>
-                <property name="subtitle" translatable="yes">Requires location services enabled and internet access</property>
-                <property name="use_underline">True</property>
-                <property name="activatable_widget">auto_timezone_switch</property>
-                <child>
-                  <object class="GtkSwitch" id="auto_timezone_switch">
-                    <property name="valign">center</property>
-                  </object>
-                </child>
-              </object>
-            </child>
-            <child>
-              <object class="AdwActionRow" id="timezone_row">
-                <property name="title" translatable="yes">Time Z_one</property>
-                <property name="use_underline">True</property>
-                <property name="activatable">True</property>
-                <signal name="activated" handler="list_box_row_activated" swapped="yes"/>
-                <child>
-                  <object class="GtkLabel" id="timezone_label">
-                    <property name="ellipsize">end</property>
-                    <property name="xalign">0</property>
-                    <property name="label">GMT+1 (London, United Kingdom)</property>
-                  </object>
-                </child>
-                <child>
-                  <object class="GtkImage">
-                    <property name="valign">center</property>
-                    <property name="icon-name">go-next-symbolic</property>
-                  </object>
-                </child>
-              </object>
-            </child>
-          </object>
-        </child>
-        <child>
-          <object class="AdwPreferencesGroup">
-            <child>
-              <object class="AdwComboRow" id="timeformat_row">
-                <property name="title" translatable="yes">Time _Format</property>
-                <property name="use_underline">True</property>
-                <signal name="notify::selected-item" handler="change_clock_settings" object="CcDateTimePanel" swapped="yes"/>
-                <property name="model">
-                  <object class="AdwEnumListModel">
-                    <property name="enum-type">GDesktopClockFormat</property>
-                  </object>
-                </property>
-                <property name="expression">
-                  <closure type="gchararray" function="format_clock_name_cb"/>
-                </property>
-              </object>
-            </child>
-          </object>
-        </child>
-        <child>
-          <object class="AdwPreferencesGroup">
-            <property name="title" translatable="yes">Clock &amp;amp; Calendar</property>
-            <property name="description" translatable="yes">Control how the time and date is shown in the top bar</property>
-            <child>
-              <object class="AdwActionRow">
-                <property name="title" translatable="yes">Week Day</property>
-                <property name="use_underline">True</property>
-                <property name="activatable_widget">weekday_switch</property>
-                <child>
-                  <object class="GtkSwitch" id="weekday_switch">
-                    <property name="valign">center</property>
-                  </object>
-                </child>
-              </object>
-            </child>
-            <child>
-              <object class="AdwActionRow">
-                <property name="title" translatable="yes">Date</property>
-                <property name="use_underline">True</property>
-                <property name="activatable_widget">date_switch</property>
-                <child>
-                  <object class="GtkSwitch" id="date_switch">
-                    <property name="valign">center</property>
-                  </object>
-                </child>
-              </object>
-            </child>
-            <child>
-              <object class="AdwActionRow">
-                <property name="title" translatable="yes">Seconds</property>
-                <property name="use_underline">True</property>
-                <property name="activatable_widget">seconds_switch</property>
-                <child>
-                  <object class="GtkSwitch" id="seconds_switch">
-                    <property name="valign">center</property>
-                  </object>
-                </child>
-              </object>
-            </child>
-            <child>
-              <object class="AdwActionRow">
-                <property name="title" translatable="yes">Week Numbers</property>
-                <property name="use_underline">True</property>
-                <property name="activatable_widget">week_numbers_switch</property>
-                <child>
-                  <object class="GtkSwitch" id="week_numbers_switch">
-                    <property name="valign">center</property>
-                  </object>
-                </child>
-              </object>
-            </child>
-          </object>
-        </child>
+        </property>
       </object>
     </child>
   </template>
