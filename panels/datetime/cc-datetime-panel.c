@@ -88,7 +88,7 @@ struct _CcDateTimePanel
   AdwActionRow *auto_timezone_row;
   GtkSwitch *auto_timezone_switch;
   AdwActionRow *datetime_row;
-  GtkDialog *datetime_dialog;
+  GtkWindow *datetime_dialog;
   GtkLabel *datetime_label;
   GtkSpinButton *day_spinbutton;
   AdwComboRow *timeformat_row;
@@ -615,15 +615,15 @@ on_timedated_properties_changed (CcDateTimePanel  *self,
 }
 
 static void
-run_dialog (CcDateTimePanel *self,
-            GtkDialog       *dialog)
+present_window (CcDateTimePanel *self,
+                GtkWindow       *window)
 {
   GtkWidget *parent;
 
   parent = cc_shell_get_toplevel (cc_panel_get_shell (CC_PANEL (self)));
 
-  gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (parent));
-  gtk_window_present (GTK_WINDOW (dialog));
+  gtk_window_set_transient_for (window, GTK_WINDOW (parent));
+  gtk_window_present (window);
 }
 
 static gboolean
@@ -691,11 +691,11 @@ list_box_row_activated (CcDateTimePanel *self,
 {
   if (row == GTK_LIST_BOX_ROW (self->datetime_row))
     {
-      run_dialog (self, self->datetime_dialog);
+      present_window (self, self->datetime_dialog);
     }
   else if (row == GTK_LIST_BOX_ROW (self->timezone_row))
     {
-      run_dialog (self, GTK_DIALOG (self->timezone_dialog));
+      present_window (self, self->timezone_dialog);
     }
 }
 

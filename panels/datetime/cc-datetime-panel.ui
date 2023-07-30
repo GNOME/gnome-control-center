@@ -5,105 +5,122 @@
     <signal name="tz-selected" handler="panel_tz_selection_changed_cb" swapped="yes"/>
   </object>
 
-  <object class="GtkDialog" id="datetime_dialog">
+  <object class="AdwWindow" id="datetime_dialog">
     <property name="title" translatable="yes">Date &amp; Time</property>
     <property name="modal">True</property>
     <property name="hide-on-close">True</property>
-    <property name="use_header_bar">1</property>
     <child>
-      <object class="GtkBox" id="dialog_vbox2">
-        <property name="orientation">vertical</property>
-        <property name="spacing">2</property>
-        <property name="margin_top">28</property>
-        <property name="margin_bottom">28</property>
-        <property name="margin_start">12</property>
-        <property name="margin_end">12</property>
-        <property name="spacing">18</property>
+      <object class="GtkShortcutController">
+        <property name="scope">managed</property>
         <child>
-          <object class="CcTimeEditor" id="time_editor">
-            <property name="halign">center</property>
-            <signal name="time-changed" handler="time_changed_cb" swapped="yes"/>
+          <object class="GtkShortcut">
+            <property name="trigger">Escape</property>
+            <property name="action">action(window.close)</property>
           </object>
         </child>
+      </object>
+    </child>
+    <property name="content">
+      <object class="AdwToolbarView">
+        <child type="top">
+          <object class="AdwHeaderBar"/>
+        </child>
 
-        <child>
-          <object class="AdwClamp">
-            <property name="maximum-size">600</property>
+        <property name="content">
+          <object class="GtkBox">
+            <property name="orientation">vertical</property>
+            <property name="margin_top">28</property>
+            <property name="margin_bottom">28</property>
+            <property name="margin_start">12</property>
+            <property name="margin_end">12</property>
+            <property name="spacing">18</property>
+            <child>
+              <object class="CcTimeEditor" id="time_editor">
+                <property name="halign">center</property>
+                <signal name="time-changed" handler="time_changed_cb" swapped="yes"/>
+              </object>
+            </child>
 
             <child>
-              <object class="GtkListBox" id="date_box">
-                <property name="width-request">320</property>
-                <property name="selection-mode">none</property>
-                <signal name="row-activated" handler="on_date_box_row_activated_cb" swapped="yes"/>
-                <style>
-                  <class name="boxed-list"/>
-                </style>
+              <object class="AdwClamp">
+                <property name="maximum-size">600</property>
 
-                <!-- Year row -->
                 <child>
-                  <object class="AdwActionRow" id="year_row">
-                    <property name="title" translatable="yes">Year</property>
-                    <property name="activatable-widget">year_spinbutton</property>
+                  <object class="GtkListBox" id="date_box">
+                    <property name="width-request">320</property>
+                    <property name="selection-mode">none</property>
+                    <signal name="row-activated" handler="on_date_box_row_activated_cb" swapped="yes"/>
+                    <style>
+                      <class name="boxed-list"/>
+                    </style>
 
+                    <!-- Year row -->
                     <child>
-                      <object class="GtkSpinButton" id="year_spinbutton">
-                        <property name="valign">center</property>
-                        <property name="width-chars">4</property>
-                        <property name="numeric">True</property>
-                      </object>
-                    </child>
-                  </object>
-                </child>
+                      <object class="AdwActionRow" id="year_row">
+                        <property name="title" translatable="yes">Year</property>
+                        <property name="activatable-widget">year_spinbutton</property>
 
-                <!-- Month row -->
-                <child>
-                  <object class="CcListRow" id="month_row">
-                    <property name="title" translatable="yes">Month</property>
-                    <binding name="secondary-label">
-                      <lookup name="string" type="GtkStringObject">
-                        <lookup name="selected-item">month_model</lookup>
-                      </lookup>
-                    </binding>
-                    <child type="suffix">
-                      <object class="GtkBox">
-                        <property name="valign">center</property>
                         <child>
-                          <object class="GtkImage">
-                            <property name="icon-name">pan-down-symbolic</property>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="GtkPopover" id="month_popover">
-                            <property name="child">month_grid</property>
+                          <object class="GtkSpinButton" id="year_spinbutton">
+                            <property name="valign">center</property>
+                            <property name="width-chars">4</property>
+                            <property name="numeric">True</property>
                           </object>
                         </child>
                       </object>
                     </child>
-                  </object>
-                </child>
 
-                <!-- Day row -->
-                <child>
-                  <object class="AdwActionRow" id="day_row">
-                    <property name="title" translatable="yes">Day</property>
-                    <property name="activatable-widget">day_spinbutton</property>
+                    <!-- Month row -->
                     <child>
-                      <object class="GtkSpinButton" id="day_spinbutton">
-                        <property name="valign">center</property>
-                        <property name="width-chars">3</property>
-                        <property name="numeric">True</property>
+                      <object class="CcListRow" id="month_row">
+                        <property name="title" translatable="yes">Month</property>
+                        <binding name="secondary-label">
+                          <lookup name="string" type="GtkStringObject">
+                            <lookup name="selected-item">month_model</lookup>
+                          </lookup>
+                        </binding>
+                        <child type="suffix">
+                          <object class="GtkBox">
+                            <property name="valign">center</property>
+                            <child>
+                              <object class="GtkImage">
+                                <property name="icon-name">pan-down-symbolic</property>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkPopover" id="month_popover">
+                                <property name="child">month_grid</property>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
                       </object>
                     </child>
+
+                    <!-- Day row -->
+                    <child>
+                      <object class="AdwActionRow" id="day_row">
+                        <property name="title" translatable="yes">Day</property>
+                        <property name="activatable-widget">day_spinbutton</property>
+                        <child>
+                          <object class="GtkSpinButton" id="day_spinbutton">
+                            <property name="valign">center</property>
+                            <property name="width-chars">3</property>
+                            <property name="numeric">True</property>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+
                   </object>
                 </child>
 
               </object>
             </child>
-
           </object>
-        </child>
+        </property>
       </object>
-    </child>
+    </property>
   </object>
   <template class="CcDateTimePanel" parent="CcPanel">
 

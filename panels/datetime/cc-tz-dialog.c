@@ -239,6 +239,8 @@ cc_tz_dialog_class_init (CcTzDialogClass *klass)
 
   gtk_widget_class_bind_template_callback (widget_class, tz_dialog_search_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, tz_dialog_row_activated_cb);
+
+  gtk_widget_class_add_binding_action (widget_class, GDK_KEY_Escape, 0, "window.close", NULL);
 }
 
 static void
