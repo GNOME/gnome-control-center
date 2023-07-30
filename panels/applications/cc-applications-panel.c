@@ -108,7 +108,7 @@ struct _CcApplicationsPanel
   AdwSwitchRow    *microphone;
   CcInfoRow       *no_microphone;
   CcInfoRow       *builtin;
-  GtkDialog       *builtin_dialog;
+  GtkWindow       *builtin_dialog;
   AdwPreferencesPage *builtin_page;
   GtkListBox      *builtin_list;
 #ifdef HAVE_SNAP
@@ -116,7 +116,7 @@ struct _CcApplicationsPanel
 #endif
 
   GtkButton       *handler_reset;
-  GtkDialog       *handler_dialog;
+  GtkWindow       *handler_dialog;
   AdwPreferencesPage *handler_page;
   CcInfoRow       *handler_row;
   AdwPreferencesGroup *handler_file_group;
@@ -126,7 +126,7 @@ struct _CcApplicationsPanel
 
   GtkWidget       *usage_section;
   CcInfoRow       *storage;
-  GtkDialog       *storage_dialog;
+  GtkWindow       *storage_dialog;
   CcInfoRow       *app;
   CcInfoRow       *data;
   CcInfoRow       *cache;
@@ -1207,9 +1207,9 @@ on_builtin_row_activated_cb (CcApplicationsPanel *self)
 {
   CcShell *shell = cc_panel_get_shell (CC_PANEL (self));
 
-  gtk_window_set_transient_for (GTK_WINDOW (self->builtin_dialog),
+  gtk_window_set_transient_for (self->builtin_dialog,
                                 GTK_WINDOW (cc_shell_get_toplevel (shell)));
-  gtk_window_present (GTK_WINDOW (self->builtin_dialog));
+  gtk_window_present (self->builtin_dialog);
 }
 
 static void
@@ -1217,9 +1217,9 @@ on_handler_row_activated_cb (CcApplicationsPanel *self)
 {
   CcShell *shell = cc_panel_get_shell (CC_PANEL (self));
 
-  gtk_window_set_transient_for (GTK_WINDOW (self->handler_dialog),
+  gtk_window_set_transient_for (self->handler_dialog,
                                 GTK_WINDOW (cc_shell_get_toplevel (shell)));
-  gtk_window_present (GTK_WINDOW (self->handler_dialog));
+  gtk_window_present (self->handler_dialog);
 }
 
 static void
@@ -1227,9 +1227,9 @@ on_storage_row_activated_cb (CcApplicationsPanel *self)
 {
   CcShell *shell = cc_panel_get_shell (CC_PANEL (self));
 
-  gtk_window_set_transient_for (GTK_WINDOW (self->storage_dialog),
+  gtk_window_set_transient_for (self->storage_dialog,
                                 GTK_WINDOW (cc_shell_get_toplevel (shell)));
-  gtk_window_present (GTK_WINDOW (self->storage_dialog));
+  gtk_window_present (self->storage_dialog);
 }
 
 static void
@@ -1631,6 +1631,10 @@ static void
 cc_applications_panel_dispose (GObject *object)
 {
   CcApplicationsPanel *self = CC_APPLICATIONS_PANEL (object);
+
+  g_clear_pointer (&self->builtin_dialog, gtk_window_destroy);
+  g_clear_pointer (&self->handler_dialog, gtk_window_destroy);
+  g_clear_pointer (&self->storage_dialog, gtk_window_destroy);
 
   remove_all_handler_rows (self);
 #ifdef HAVE_SNAP
