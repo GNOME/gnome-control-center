@@ -1,46 +1,74 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <template class="CcNotificationsPanel" parent="CcPanel">
+    <child type="titlebar">
+      <object class="GtkHeaderBar">
+        <property name="visible">False</property>
+      </object>
+    </child>
+
     <child type="content">
-      <object class="AdwPreferencesPage">
-        <child>
-          <object class="AdwPreferencesGroup">
+      <object class="AdwToolbarView">
+        <property name="top-bar-style">raised</property>
+        <child type="top">
+          <object class="AdwHeaderBar">
+            <property name="show-end-title-buttons">True</property>
+            <property name="show-start-title-buttons" bind-source="CcNotificationsPanel" bind-property="folded" bind-flags="default|sync-create" />
+            <child type="start">
+              <object class="GtkButton">
+                <property name="visible" bind-source="CcNotificationsPanel" bind-property="folded" bind-flags="default|sync-create" />
+                <property name="icon-name">go-previous-symbolic</property>
+                <property name="action-name">window.navigate</property>
+                <property name="action-target">0</property> <!-- 0: ADW_NAVIGATION_DIRECTION_BACK -->
+              </object>
+            </child>
+            <property name="title-widget">
+              <object class="AdwWindowTitle" id="header_title">
+                <property name="title" translatable="yes">Notifications</property>
+              </object>
+            </property>
+          </object>
+        </child>
+
+        <property name="content">
+          <object class="AdwPreferencesPage">
             <child>
-              <object class="AdwSwitchRow" id="dnd_row">
-                <property name="title" translatable="yes">_Do Not Disturb</property>
-                <property name="use-underline">True</property>
+              <object class="AdwPreferencesGroup">
+                <child>
+                  <object class="AdwSwitchRow" id="dnd_row">
+                    <property name="title" translatable="yes">_Do Not Disturb</property>
+                    <property name="use-underline">True</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="AdwSwitchRow" id="lock_screen_row">
+                    <property name="title" translatable="yes" comments="Translators: Whether to show notifications on the lock screen">_Lock Screen Notifications</property>
+                    <property name="use-underline">True</property>
+                  </object>
+                </child>
               </object>
             </child>
             <child>
-              <object class="AdwSwitchRow" id="lock_screen_row">
-                <property name="title" translatable="yes" comments="Translators: Whether to show notifications on the lock screen">_Lock Screen Notifications</property>
-                <property name="use-underline">True</property>
+              <object class="AdwPreferencesGroup" id="app_group">
+                <property name="title" translatable="yes" comments="List of apps.">App Notifications</property>
+                <child>
+                  <object class="GtkListBox" id="app_listbox">
+                    <property name="selection_mode">none</property>
+                    <signal name="row-activated" handler="select_app" object="CcNotificationsPanel" swapped="yes" />
+                    <signal name="keynav-failed" handler="keynav_failed_cb" object="CcNotificationsPanel" swapped="yes"/>
+                    <style>
+                      <class name="boxed-list"/>
+                    </style>
+                    <accessibility>
+                      <relation name="labelled-by">app_group</relation>
+                    </accessibility>
+                  </object>
+                </child>
               </object>
             </child>
           </object>
-        </child>
-        <child>
-          <object class="AdwPreferencesGroup" id="app_group">
-            <property name="title" translatable="yes" comments="List of apps.">App Notifications</property>
-            <child>
-              <object class="GtkListBox" id="app_listbox">
-                <property name="selection_mode">none</property>
-                <signal name="row-activated" handler="select_app" object="CcNotificationsPanel" swapped="yes" />
-                <signal name="keynav-failed" handler="keynav_failed_cb" object="CcNotificationsPanel" swapped="yes"/>
-                <style>
-                  <class name="boxed-list"/>
-                </style>
-                <accessibility>
-                  <relation name="labelled-by">app_group</relation>
-                </accessibility>
-              </object>
-            </child>
-          </object>
-        </child>
+        </property>
       </object>
     </child>
   </template>
-  <object class="GtkSizeGroup" id="sizegroup1">
-    <property name="mode">both</property>
-  </object>
 </interface>

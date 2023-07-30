@@ -40,7 +40,6 @@ struct _CcNotificationsPanel {
   GtkListBox        *app_listbox;
   AdwSwitchRow      *lock_screen_row;
   AdwSwitchRow      *dnd_row;
-  GtkSizeGroup      *sizegroup1;
 
   GSettings         *master_settings;
 
@@ -189,7 +188,6 @@ cc_notifications_panel_class_init (CcNotificationsPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcNotificationsPanel, app_listbox);
   gtk_widget_class_bind_template_child (widget_class, CcNotificationsPanel, lock_screen_row);
   gtk_widget_class_bind_template_child (widget_class, CcNotificationsPanel, dnd_row);
-  gtk_widget_class_bind_template_child (widget_class, CcNotificationsPanel, sizegroup1);
 
   gtk_widget_class_bind_template_callback (widget_class, select_app);
   gtk_widget_class_bind_template_callback (widget_class, keynav_failed_cb);
