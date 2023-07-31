@@ -149,6 +149,12 @@ cc_sharing_panel_dispose (GObject *object)
       self->remote_desktop_dialog = NULL;
     }
 
+  if (self->remote_desktop_fingerprint_dialog)
+    {
+      gtk_window_destroy (GTK_WINDOW (self->remote_desktop_fingerprint_dialog));
+      self->remote_desktop_fingerprint_dialog = NULL;
+    }
+
   g_clear_object (&self->sharing_proxy);
 
   if (self->remote_desktop_store_credentials_id)
@@ -466,9 +472,8 @@ cc_sharing_panel_remove_folder (CcSharingPanel *self,
   gtk_list_box_remove (GTK_LIST_BOX (self->shared_folders_listbox), row);
 }
 
-static void
-cc_sharing_panel_media_sharing_dialog_response (CcSharingPanel *self,
-                                                gint            reponse_id)
+static gboolean
+cc_sharing_panel_media_sharing_dialog_close_request (CcSharingPanel *self)
 {
   g_autoptr(GPtrArray) folders = NULL;
   GtkWidget *child;
@@ -490,6 +495,8 @@ cc_sharing_panel_media_sharing_dialog_response (CcSharingPanel *self,
   g_ptr_array_add (folders, NULL);
 
   cc_media_sharing_set_preferences ((gchar **) folders->pdata);
+
+  return GDK_EVENT_PROPAGATE;
 }
 
 #define ICON_NAME_FOLDER                "folder-symbolic"
@@ -633,8 +640,8 @@ cc_sharing_panel_setup_media_sharing_dialog (CcSharingPanel *self)
       return;
     }
 
-  g_signal_connect_object (self->media_sharing_dialog, "response",
-                           G_CALLBACK (cc_sharing_panel_media_sharing_dialog_response),
+  g_signal_connect_object (self->media_sharing_dialog, "close-request",
+                           G_CALLBACK (cc_sharing_panel_media_sharing_dialog_close_request),
                            self, G_CONNECT_SWAPPED);
 
   cc_media_sharing_get_preferences (&folders);
@@ -660,7 +667,7 @@ cc_sharing_panel_setup_media_sharing_dialog (CcSharingPanel *self)
   gtk_accessible_update_property (GTK_ACCESSIBLE (w),
                                 GTK_ACCESSIBLE_PROPERTY_LABEL, _("Enable media sharing"),
                                 -1);
-  gtk_header_bar_pack_start (GTK_HEADER_BAR (self->media_sharing_headerbar), w);
+  adw_header_bar_pack_start (ADW_HEADER_BAR (self->media_sharing_headerbar), w);
   self->media_sharing_switch = w;
 
   cc_sharing_panel_bind_networks_to_label (self, networks,
@@ -762,7 +769,7 @@ cc_sharing_panel_setup_personal_file_sharing_dialog (CcSharingPanel *self)
   gtk_accessible_update_property (GTK_ACCESSIBLE (w),
                                 GTK_ACCESSIBLE_PROPERTY_LABEL, _("Enable personal media sharing"),
                                 -1);
-  gtk_header_bar_pack_start (GTK_HEADER_BAR (self->personal_file_sharing_headerbar), w);
+  adw_header_bar_pack_start (ADW_HEADER_BAR (self->personal_file_sharing_headerbar), w);
   self->personal_file_sharing_switch = w;
 
   cc_sharing_panel_bind_networks_to_label (self,
@@ -1154,29 +1161,6 @@ on_password_copy_clicked (CcSharingPanel *self)
   add_toast (self, _("Password copied"));
 }
 
-static void
-media_sharing_dialog_response (CcSharingPanel *self)
-{
-  gtk_widget_set_visible (self->media_sharing_dialog, FALSE);
-}
-static void
-personal_file_sharing_dialog_response (CcSharingPanel *self)
-{
-  gtk_widget_set_visible (self->media_sharing_dialog, FALSE);
-}
-
-static void
-remote_login_dialog_response (CcSharingPanel *self)
-{
-  gtk_widget_set_visible (self->media_sharing_dialog, FALSE);
-}
-
-static void
-remote_desktop_dialog_response (CcSharingPanel *self)
-{
-  gtk_widget_set_visible (self->media_sharing_dialog, FALSE);
-}
-
 static pwquality_settings_t *
 get_pwq (void)
 {
@@ -1400,15 +1384,6 @@ cc_sharing_panel_init (CcSharingPanel *self)
   g_resources_register (cc_sharing_get_resource ());
 
   gtk_widget_init_template (GTK_WIDGET (self));
-
-  g_signal_connect_swapped (self->media_sharing_dialog, "response",
-                            G_CALLBACK (media_sharing_dialog_response), self);
-  g_signal_connect_swapped (self->personal_file_sharing_dialog, "response",
-                            G_CALLBACK (personal_file_sharing_dialog_response), self);
-  g_signal_connect_swapped (self->remote_login_dialog, "response",
-                            G_CALLBACK (remote_login_dialog_response), self);
-  g_signal_connect_swapped (self->remote_desktop_dialog, "response",
-                            G_CALLBACK (remote_desktop_dialog_response), self);
 
   gsd_sharing_proxy_new_for_bus (G_BUS_TYPE_SESSION,
                                  G_DBUS_PROXY_FLAGS_NONE,
