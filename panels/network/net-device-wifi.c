@@ -770,6 +770,19 @@ show_wifi_list (NetDeviceWifi *self)
 }
 
 static void
+net_device_wifi_dispose (GObject *object)
+{
+        NetDeviceWifi *self = NET_DEVICE_WIFI (object);
+
+        if (self->hotspot_dialog) {
+                gtk_window_destroy (self->hotspot_dialog);
+                self->hotspot_dialog = NULL;
+        }
+
+        G_OBJECT_CLASS (net_device_wifi_parent_class)->dispose (object);
+}
+
+static void
 net_device_wifi_finalize (GObject *object)
 {
         NetDeviceWifi *self = NET_DEVICE_WIFI (object);
@@ -1191,6 +1204,7 @@ net_device_wifi_class_init (NetDeviceWifiClass *klass)
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
         GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
+        object_class->dispose = net_device_wifi_dispose;
         object_class->finalize = net_device_wifi_finalize;
         object_class->get_property = net_device_wifi_get_property;
 
