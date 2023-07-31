@@ -1054,23 +1054,36 @@ show_history (NetDeviceWifi *self)
 {
         GtkNative *native;
         GtkWidget *dialog;
+        GtkWidget *toolbar_view;
         GtkWidget *page;
         GtkWidget *list_group;
         GtkListBox *listbox;
         GtkWidget *list;
         GtkWidget *child;
+        GtkEventController *controller;
+        GtkShortcut *shortcut;
 
-        dialog = adw_preferences_window_new ();
-        adw_preferences_window_set_search_enabled (ADW_PREFERENCES_WINDOW (dialog), FALSE);
-        adw_preferences_window_set_can_navigate_back (ADW_PREFERENCES_WINDOW (dialog), FALSE);
+        dialog = adw_window_new ();
         native = gtk_widget_get_native (GTK_WIDGET (self));
         gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (native));
         gtk_window_set_title (GTK_WINDOW (dialog), _("Saved Wi-Fi Networks"));
         gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
         gtk_window_set_default_size (GTK_WINDOW (dialog), 500, 400);
 
+        shortcut = gtk_shortcut_new (gtk_keyval_trigger_new (GDK_KEY_Escape, 0),
+                                     gtk_named_action_new ("window.close"));
+        controller = gtk_shortcut_controller_new ();
+
+        gtk_shortcut_controller_add_shortcut (GTK_SHORTCUT_CONTROLLER (controller), shortcut);
+
+        gtk_widget_add_controller (dialog, controller);
+
+        toolbar_view = adw_toolbar_view_new ();
+        adw_toolbar_view_add_top_bar (ADW_TOOLBAR_VIEW (toolbar_view), adw_header_bar_new ());
+        adw_window_set_content (ADW_WINDOW (dialog), toolbar_view);
+
         page = adw_preferences_page_new ();
-        adw_preferences_window_add (ADW_PREFERENCES_WINDOW (dialog), ADW_PREFERENCES_PAGE (page));
+        adw_toolbar_view_set_content (ADW_TOOLBAR_VIEW (toolbar_view), page);
 
         list_group = adw_preferences_group_new ();
         adw_preferences_page_add (ADW_PREFERENCES_PAGE (page), ADW_PREFERENCES_GROUP (list_group));
