@@ -1112,11 +1112,10 @@ on_permission_changed (CcUserPanel *self)
                 gtk_widget_set_visible (GTK_WIDGET (self->account_type_row), FALSE);
                 gtk_widget_set_visible (GTK_WIDGET (self->autologin_row), FALSE);
         } else if (is_authorized && act_user_is_local_account (user)) {
-                if (would_demote_only_admin (user)) {
-                        gtk_widget_set_visible (GTK_WIDGET (self->account_type_row), FALSE);
-                } else {
-                        gtk_widget_set_visible (GTK_WIDGET (self->account_type_row), TRUE);
-                }
+                gtk_widget_set_visible (GTK_WIDGET (self->account_type_row),
+                                        !would_demote_only_admin (user));
+                gtk_widget_set_sensitive (GTK_WIDGET (self->account_type_row), TRUE);
+                remove_unlock_tooltip (GTK_WIDGET (self->account_type_row));
 
                 if (get_autologin_possible (user)) {
                         gtk_widget_set_visible (GTK_WIDGET (self->autologin_row), TRUE);
@@ -1126,12 +1125,11 @@ on_permission_changed (CcUserPanel *self)
                 }
         }
         else {
-                gtk_widget_set_visible (GTK_WIDGET (self->account_type_row), FALSE);
-                if (would_demote_only_admin (user)) {
-                        gtk_widget_set_visible (GTK_WIDGET (self->account_type_row), FALSE);
-                } else {
-                        gtk_widget_set_visible (GTK_WIDGET (self->account_type_row), TRUE);
-                }
+                gtk_widget_set_visible (GTK_WIDGET (self->account_type_row),
+                                        !would_demote_only_admin (user));
+                gtk_widget_set_sensitive (GTK_WIDGET (self->account_type_row), FALSE);
+                add_unlock_tooltip (GTK_WIDGET (self->account_type_row));
+
                 gtk_widget_set_sensitive (GTK_WIDGET (self->autologin_row), FALSE);
                 add_unlock_tooltip (GTK_WIDGET (self->autologin_row));
         }
