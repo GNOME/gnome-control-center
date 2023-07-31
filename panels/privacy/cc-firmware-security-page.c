@@ -39,8 +39,8 @@ struct _CcFirmwareSecurityPage
   GtkButton        *hsi_button;
   GtkButton        *secure_boot_button;
 
-  /* Leaflet */
-  GtkWidget        *panel_leaflet;
+  /* Stack */
+  GtkWidget        *panel_stack;
 
   /* HSI button */
   GtkWidget        *hsi_grid;
@@ -375,7 +375,7 @@ on_bus_event_done_cb (GObject      *source,
 static void
 show_loading_page (CcFirmwareSecurityPage *self, const gchar *page_name)
 {
-  adw_leaflet_set_visible_child_name (ADW_LEAFLET(self->panel_leaflet), page_name);
+  gtk_stack_set_visible_child_name (GTK_STACK (self->panel_stack), page_name);
 }
 
 static int
@@ -713,7 +713,7 @@ cc_firmware_security_page_class_init (CcFirmwareSecurityPageClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcFirmwareSecurityPage, secure_boot_description);
   gtk_widget_class_bind_template_child (widget_class, CcFirmwareSecurityPage, secure_boot_icon);
   gtk_widget_class_bind_template_child (widget_class, CcFirmwareSecurityPage, secure_boot_label);
-  gtk_widget_class_bind_template_child (widget_class, CcFirmwareSecurityPage, panel_leaflet);
+  gtk_widget_class_bind_template_child (widget_class, CcFirmwareSecurityPage, panel_stack);
 
   gtk_widget_class_bind_template_callback (widget_class, on_hsi_button_clicked_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_secure_boot_button_clicked_cb);

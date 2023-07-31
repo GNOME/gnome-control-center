@@ -1,165 +1,76 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <template class="CcFirmwareSecurityDialog" parent="AdwWindow">
+    <property name="title" translatable="yes">Device Security Status</property>
     <property name="default-width">500</property>
     <property name="default-height">500</property>
     <property name="modal">True</property>
-    <child>
-      <object class="AdwLeaflet" id="leaflet">
-        <property name="can-unfold">False</property>
-        <child>
-          <object class="AdwLeafletPage">
-            <property name="child">
-              <object class="GtkBox">
-                <property name="orientation">vertical</property>
+    <property name="content">
+      <object class="AdwToastOverlay" id="toast_overlay">
+        <property name="child">
+          <object class="AdwToolbarView">
+            <child type="top">
+              <object class="AdwHeaderBar"/>
+            </child>
 
-                <child>
-                  <object class="GtkHeaderBar">
-                    <property name="valign">start</property>
-                    <property name="show-title-buttons">True</property>
-                    <property name="title-widget">
-                      <object class="AdwWindowTitle">
-                        <property name="title" translatable="yes">Device Security Status</property>
-                      </object>
-                    </property>
-                  </object>
-                </child>
+            <property name="content">
+              <object class="GtkScrolledWindow">
+                <property name="hscrollbar-policy">never</property>
+                <property name="child">
+                  <object class="GtkBox">
+                    <property name="orientation">vertical</property>
+                    <property name="spacing">24</property>
+                    <property name="margin-start">24</property>
+                    <property name="margin-end">24</property>
 
-                <child>
-                  <object class="AdwToastOverlay" id="toast_overlay">
-                    <property name="hexpand">True</property>
-                    <property name="valign">baseline</property>
-                    <property name="vexpand">True</property>
-                    <property name="child">
-                      <object class="AdwPreferencesPage">
-                        <property name="vexpand-set">True</property>
-                        <child>
-                          <object class="AdwPreferencesGroup">
-                            <child>
-                              <object class="GtkImage" id="firmware_security_dialog_icon">
-                                <property name="margin-start">16</property>
-                                <property name="margin-end">16</property>
-                                <property name="margin-top">16</property>
-                                <property name="pixel-size">32</property>
-                                <property name="halign">center</property>
-                                <property name="valign">center</property>
-                                <property name="icon-name">dialog-question-symbolic</property>
-                                <style>
-                                  <class name="security-level-icon"/>
-                                </style>
-                              </object>
-                            </child>
-                          </object>
-                        </child>
-
-                        <child>
-                          <object class="AdwPreferencesGroup">
-                            <child>
-                              <object class="GtkLabel" id="firmware_security_dialog_title_label">
-                                <style>
-                                  <class name="title-2" />
-                                </style>
-                              </object>
-                            </child>
-                          </object>
-                        </child>
-
-                        <child>
-                          <object class="AdwPreferencesGroup">
-                            <child>
-                              <object class="GtkLabel" id="firmware_security_dialog_body_label">
-                                <property name="wrap">True</property>
-                                <property name="justify">center</property>
-                                <property name="margin-start">32</property>
-                                <property name="margin-end">32</property>
-                              </object>
-                            </child>
-                          </object>
-                        </child>
-
-                         <child>
-                          <object class="AdwPreferencesGroup">
-                            <child>
-                              <object class="GtkButton" id="status_download_button">
-                                <property name="receives-default">True</property>
-                                <property name="sensitive">True</property>
-                                <property name="halign">center</property>
-                                <property name="use-underline">True</property>
-                                <property name="label" translatable="yes">_Copy Technical Report</property>
-                                <signal name="clicked" handler="on_hsi_detail_button_clicked_cb" object="CcFirmwareSecurityDialog" swapped="yes" />
-                                <style>
-                                  <class name="pill" />
-                                </style>
-                              </object>
-                            </child>
-                          </object>
-                        </child>
-
-                      </object>
-                    </property>
-                  </object>
-                </child>
-
-              </object>
-            </property>
-          </object>
-        </child>
-
-        <child>
-          <object class="AdwLeafletPage">
-            <property name="child">
-              <object class="GtkBox">
-                <property name="orientation">vertical</property>
-
-                <child>
-                  <object class="GtkHeaderBar">
-                    <property name="valign">start</property>
-                    <property name="show-title-buttons">True</property>
-                    <property name="title-widget">
-                      <object class="AdwWindowTitle" id="second_page_title" />
-                    </property>
                     <child>
-                      <object class="GtkButton">
+                      <object class="GtkImage" id="firmware_security_dialog_icon">
+                        <property name="margin-top">12</property>
+                        <property name="icon-size">large</property>
                         <property name="halign">center</property>
                         <property name="valign">center</property>
-                        <property name="height-request">12</property>
-
-                        <property name="icon-name">go-previous-symbolic</property>
-                        <signal name="clicked" handler="on_fw_back_button_clicked_cb" object="CcFirmwareSecurityDialog" swapped="yes" />
+                        <property name="icon-name">dialog-question-symbolic</property>
                         <style>
-                          <class name="image-button" />
+                          <class name="security-level-icon"/>
                         </style>
                       </object>
                     </child>
-                  </object>
-                </child>
 
-                <child>
-                  <object class="AdwPreferencesPage">
                     <child>
-                      <object class="AdwPreferencesGroup" id="firmware_security_dialog_hsi1_pg">
-                        <property name="visible">False</property>
+                      <object class="GtkLabel" id="firmware_security_dialog_title_label">
+                        <style>
+                          <class name="title-2" />
+                        </style>
                       </object>
                     </child>
-                    <child>
-                      <object class="AdwPreferencesGroup" id="firmware_security_dialog_hsi2_pg">
-                        <property name="visible">False</property>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="AdwPreferencesGroup" id="firmware_security_dialog_hsi3_pg">
-                        <property name="visible">False</property>
-                      </object>
-                    </child>
-                  </object>
-                </child>
 
+                    <child>
+                      <object class="GtkLabel" id="firmware_security_dialog_body_label">
+                        <property name="wrap">True</property>
+                        <property name="justify">center</property>
+                      </object>
+                    </child>
+
+                    <child>
+                      <object class="GtkButton" id="status_download_button">
+                        <property name="receives-default">True</property>
+                        <property name="halign">center</property>
+                        <property name="use-underline">True</property>
+                        <property name="label" translatable="yes">_Copy Technical Report</property>
+                        <signal name="clicked" handler="on_hsi_detail_button_clicked_cb" object="CcFirmwareSecurityDialog" swapped="yes" />
+                        <style>
+                          <class name="pill" />
+                        </style>
+                      </object>
+                    </child>
+
+                  </object>
+                </property>
               </object>
             </property>
           </object>
-        </child>
-
+        </property>
       </object>
-    </child>
+    </property>
   </template>
 </interface>

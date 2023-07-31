@@ -22,11 +22,10 @@
           </object>
         </child>
         <property name="content">
-          <object class="AdwLeaflet" id="panel_leaflet">
-            <property name="can-unfold">False</property>
+          <object class="GtkStack" id="panel_stack">
 
             <child>
-              <object class="AdwLeafletPage">
+              <object class="GtkStackPage">
                 <property name="name">panel_loading</property>
                 <property name="child">
                   <object class="AdwPreferencesPage">
@@ -71,7 +70,7 @@
             </child>
 
             <child>
-              <object class="AdwLeafletPage">
+              <object class="GtkStackPage">
                 <property name="name">panel_unavaliable</property>
                 <property name="child">
                   <object class="AdwPreferencesPage">
@@ -95,7 +94,7 @@
             </child>
 
             <child>
-              <object class="AdwLeafletPage">
+              <object class="GtkStackPage">
                 <property name="name">panel_show</property>
                 <property name="child">
                   <object class="AdwPreferencesPage">

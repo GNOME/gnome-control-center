@@ -43,13 +43,6 @@ struct _CcFirmwareSecurityDialog
   GtkWidget           *firmware_security_dialog_title_label;
   GtkWidget           *firmware_security_dialog_body_label;
   GtkWidget           *firmware_security_dialog_min_row;
-  GtkWidget           *firmware_security_dialog_basic_row;
-  GtkWidget           *firmware_security_dialog_extend_row;
-  GtkWidget           *firmware_security_dialog_hsi1_pg;
-  GtkWidget           *firmware_security_dialog_hsi2_pg;
-  GtkWidget           *firmware_security_dialog_hsi3_pg;
-  AdwLeaflet          *leaflet;
-  AdwWindowTitle      *second_page_title;
   AdwToastOverlay     *toast_overlay;
 
   gboolean             is_created;
@@ -154,16 +147,6 @@ update_dialog (CcFirmwareSecurityDialog *self)
                               _("Device security checks are not available for this device. "
                                 "It is not possible to tell whether it meets security requirements."));
     }
-}
-
-static void
-on_fw_back_button_clicked_cb (CcFirmwareSecurityDialog *self)
-{
-  adw_leaflet_navigate (self->leaflet, ADW_NAVIGATION_DIRECTION_BACK);
-
-  gtk_widget_set_visible (self->firmware_security_dialog_hsi1_pg, FALSE);
-  gtk_widget_set_visible (self->firmware_security_dialog_hsi2_pg, FALSE);
-  gtk_widget_set_visible (self->firmware_security_dialog_hsi3_pg, FALSE);
 }
 
 static gchar *
@@ -396,14 +379,8 @@ cc_firmware_security_dialog_class_init (CcFirmwareSecurityDialogClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcFirmwareSecurityDialog, firmware_security_dialog_icon);
   gtk_widget_class_bind_template_child (widget_class, CcFirmwareSecurityDialog, firmware_security_dialog_title_label);
   gtk_widget_class_bind_template_child (widget_class, CcFirmwareSecurityDialog, firmware_security_dialog_body_label);
-  gtk_widget_class_bind_template_child (widget_class, CcFirmwareSecurityDialog, firmware_security_dialog_hsi1_pg);
-  gtk_widget_class_bind_template_child (widget_class, CcFirmwareSecurityDialog, firmware_security_dialog_hsi2_pg);
-  gtk_widget_class_bind_template_child (widget_class, CcFirmwareSecurityDialog, firmware_security_dialog_hsi3_pg);
-  gtk_widget_class_bind_template_child (widget_class, CcFirmwareSecurityDialog, leaflet);
-  gtk_widget_class_bind_template_child (widget_class, CcFirmwareSecurityDialog, second_page_title);
   gtk_widget_class_bind_template_child (widget_class, CcFirmwareSecurityDialog, toast_overlay);
 
-  gtk_widget_class_bind_template_callback (widget_class, on_fw_back_button_clicked_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_hsi_detail_button_clicked_cb);
 }
 
