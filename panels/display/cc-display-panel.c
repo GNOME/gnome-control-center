@@ -1087,7 +1087,7 @@ cc_display_panel_init (CcDisplayPanel *self)
   gtk_widget_init_template (GTK_WIDGET (self));
 
   self->arrangement = cc_display_arrangement_new (NULL);
-  gtk_widget_set_size_request (GTK_WIDGET (self->arrangement), 375, 175);
+  gtk_widget_set_size_request (GTK_WIDGET (self->arrangement), -1, 175);
   adw_bin_set_child (self->arrangement_bin, GTK_WIDGET (self->arrangement));
 
   g_signal_connect_object (self->arrangement, "updated",
