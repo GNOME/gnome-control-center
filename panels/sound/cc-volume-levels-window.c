@@ -25,7 +25,7 @@
 
 struct _CcVolumeLevelsWindow
 {
-  GtkWindow        parent_instance;
+  AdwWindow        parent_instance;
 
   GtkListBox      *listbox;
   GtkSizeGroup    *label_size_group;
@@ -34,7 +34,7 @@ struct _CcVolumeLevelsWindow
   GListStore      *stream_list;
 };
 
-G_DEFINE_TYPE (CcVolumeLevelsWindow, cc_volume_levels_window, GTK_TYPE_WINDOW)
+G_DEFINE_TYPE (CcVolumeLevelsWindow, cc_volume_levels_window, ADW_TYPE_WINDOW)
 
 static gint
 sort_stream (gconstpointer a,
@@ -169,6 +169,8 @@ cc_volume_levels_window_class_init (CcVolumeLevelsWindowClass *klass)
 
   gtk_widget_class_bind_template_child (widget_class, CcVolumeLevelsWindow, listbox);
   gtk_widget_class_bind_template_child (widget_class, CcVolumeLevelsWindow, label_size_group);
+
+  gtk_widget_class_add_binding_action (widget_class, GDK_KEY_Escape, 0, "window.close", NULL);
 }
 
 void

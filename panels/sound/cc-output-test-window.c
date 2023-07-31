@@ -36,6 +36,8 @@ cc_output_test_window_class_init (CcOutputTestWindowClass *klass)
 
   gtk_widget_class_bind_template_child (widget_class, CcOutputTestWindow, wheel);
 
+  gtk_widget_class_add_binding_action (widget_class, GDK_KEY_Escape, 0, "window.close", NULL);
+
   g_type_ensure (CC_TYPE_OUTPUT_TEST_WHEEL);
 }
 

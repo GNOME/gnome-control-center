@@ -17,12 +17,12 @@
 
 #pragma once
 
-#include <gtk/gtk.h>
+#include <adwaita.h>
 
 G_BEGIN_DECLS
 
 #define CC_TYPE_ALERT_CHOOSER_WINDOW (cc_alert_chooser_window_get_type ())
-G_DECLARE_FINAL_TYPE (CcAlertChooserWindow, cc_alert_chooser_window, CC, ALERT_CHOOSER_WINDOW, GtkWindow)
+G_DECLARE_FINAL_TYPE (CcAlertChooserWindow, cc_alert_chooser_window, CC, ALERT_CHOOSER_WINDOW, AdwWindow)
 
 CcAlertChooserWindow *cc_alert_chooser_window_new (void);
 

@@ -26,7 +26,7 @@
 
 struct _CcAlertChooserWindow
 {
-  GtkWindow       parent_instance;
+  AdwWindow       parent_instance;
 
   GtkCheckButton *none_button;
   GtkCheckButton *click_button;
@@ -38,7 +38,7 @@ struct _CcAlertChooserWindow
   GSettings      *sound_settings;
 };
 
-G_DEFINE_TYPE (CcAlertChooserWindow, cc_alert_chooser_window, GTK_TYPE_WINDOW)
+G_DEFINE_TYPE (CcAlertChooserWindow, cc_alert_chooser_window, ADW_TYPE_WINDOW)
 
 #define CUSTOM_THEME_NAME "__custom"
 

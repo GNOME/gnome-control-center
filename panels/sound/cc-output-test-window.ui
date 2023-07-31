@@ -5,14 +5,13 @@
     <property name="modal">True</property>
     <property name="resizable">False</property>
     <property name="content">
-      <object class="GtkBox">
-        <property name="orientation">vertical</property>
-        <child>
-          <object class="GtkHeaderBar"/>
+      <object class="AdwToolbarView">
+        <child type="top">
+          <object class="AdwHeaderBar"/>
         </child>
-        <child>
+        <property name="content">
           <object class="CcOutputTestWheel" id="wheel"/>
-        </child>
+        </property>
       </object>
     </property>
   </template>

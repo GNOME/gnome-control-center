@@ -17,13 +17,13 @@
 
 #pragma once
 
-#include <gtk/gtk.h>
+#include <adwaita.h>
 #include <gvc-mixer-control.h>
 
 G_BEGIN_DECLS
 
 #define CC_TYPE_VOLUME_LEVELS_WINDOW (cc_volume_levels_window_get_type ())
-G_DECLARE_FINAL_TYPE (CcVolumeLevelsWindow, cc_volume_levels_window, CC, VOLUME_LEVELS_WINDOW, GtkWindow)
+G_DECLARE_FINAL_TYPE (CcVolumeLevelsWindow, cc_volume_levels_window, CC, VOLUME_LEVELS_WINDOW, AdwWindow)
 
 CcVolumeLevelsWindow *cc_volume_levels_window_new (GvcMixerControl *mixer_control);
 
