@@ -17,8 +17,20 @@
     </property>
   </template>
 
-  <object class="GtkLabel" id="sidebar_widget">
-    <property name="label">I'm a sidebar widget</property>
+  <object class="AdwNavigationPage" id="sidebar_widget">
+    <property name="title">Sidebar Widget</property>
+    <property name="child">
+      <object class="AdwToolbarView">
+        <child type="top">
+          <object class="AdwHeaderBar"/>
+        </child>
+        <property name="content">
+          <object class="GtkLabel">
+            <property name="label">I'm a sidebar widget</property>
+          </object>
+        </property>
+      </object>
+    </property>
   </object>
 </interface>
 

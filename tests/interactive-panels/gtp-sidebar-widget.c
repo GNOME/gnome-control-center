@@ -24,12 +24,12 @@ struct _GtpSidebarWidget
 {
   CcPanel    parent;
 
-  GtkWidget *sidebar_widget;
+  AdwNavigationPage *sidebar_widget;
 };
 
 G_DEFINE_TYPE (GtpSidebarWidget, gtp_sidebar_widget, CC_TYPE_PANEL)
 
-static GtkWidget*
+static AdwNavigationPage*
 gtp_sidebar_widget_get_sidebar_widget (CcPanel *panel)
 {
   GtpSidebarWidget *self = GTP_SIDEBAR_WIDGET (panel);

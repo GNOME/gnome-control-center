@@ -53,8 +53,9 @@ struct _CcWindow
   GtkMessageDialog  *development_warning_dialog;
   AdwHeaderBar      *header;
   AdwNavigationSplitView *split_view;
+  AdwNavigationView *sidebar_view;
+  AdwNavigationPage *main_sidebar_page;
   CcPanelList       *panel_list;
-  GtkButton         *previous_button;
   GtkSearchBar      *search_bar;
   GtkToggleButton   *search_button;
   GtkSearchEntry    *search_entry;
@@ -130,7 +131,6 @@ activate_panel (CcWindow          *self,
                 CcPanelVisibility  visibility)
 {
   g_autoptr(GTimer) timer = NULL;
-  GtkWidget *sidebar_widget;
   gdouble ellapsed_time;
 
   CC_ENTRY;
@@ -151,11 +151,9 @@ activate_panel (CcWindow          *self,
   self->current_panel = GTK_WIDGET (cc_panel_loader_load_by_name (CC_SHELL (self), id, name, parameters));
   cc_shell_set_active_panel (CC_SHELL (self), CC_PANEL (self->current_panel));
 
-  adw_navigation_split_view_set_content (self->split_view, self->current_panel);
+  adw_navigation_split_view_set_content (self->split_view, ADW_NAVIGATION_PAGE (self->current_panel));
 
-  sidebar_widget = cc_panel_get_sidebar_widget (CC_PANEL (self->current_panel));
-  cc_panel_list_add_sidebar_widget (self->panel_list, sidebar_widget);
-  /* Ensure we show the panel when the spplit view is collapsed and a sidebar
+  /* Ensure we show the panel when the split view is collapsed and a sidebar
    * widget's row is activated.
    */
   g_signal_connect_object (self->current_panel, "sidebar-activated", G_CALLBACK (on_sidebar_activated_cb), self, G_CONNECT_SWAPPED);
@@ -214,43 +212,6 @@ find_iter_for_panel_id (CcWindow    *self,
   *out_iter = iter;
 
   return valid;
-}
-
-static void
-update_list_title (CcWindow *self)
-{
-  CcPanelListView view;
-  GtkTreeIter iter;
-  g_autofree gchar *title = NULL;
-
-  CC_ENTRY;
-
-  view = cc_panel_list_get_view (self->panel_list);
-  title = NULL;
-
-  switch (view)
-    {
-    case CC_PANEL_LIST_MAIN:
-      title = g_strdup (_("Settings"));
-      break;
-
-    case CC_PANEL_LIST_WIDGET:
-      find_iter_for_panel_id (self, self->current_panel_id, &iter);
-      gtk_tree_model_get (GTK_TREE_MODEL (self->store),
-                          &iter,
-                          COL_NAME, &title,
-                          -1);
-      break;
-
-    case CC_PANEL_LIST_SEARCH:
-      title = NULL;
-      break;
-    }
-
-  if (title)
-    adw_window_title_set_title (self->sidebar_title_widget, title);
-
-  CC_EXIT;
 }
 
 static void
@@ -330,24 +291,6 @@ setup_model (CcWindow *self)
   g_signal_connect_object (model, "row-changed", G_CALLBACK (on_row_changed_cb), self, G_CONNECT_SWAPPED);
 }
 
-static void
-update_headerbar_buttons (CcWindow *self)
-{
-  gboolean is_main_view;
-
-  CC_ENTRY;
-
-  is_main_view = cc_panel_list_get_view (self->panel_list) == CC_PANEL_LIST_MAIN;
-
-  gtk_widget_set_visible (GTK_WIDGET (self->previous_button), !is_main_view);
-  gtk_widget_set_visible (GTK_WIDGET (self->search_button), is_main_view);
-  gtk_search_bar_set_key_capture_widget (self->search_bar, is_main_view ? GTK_WIDGET (self) : NULL);
-
-  update_list_title (self);
-
-  CC_EXIT;
-}
-
 static gboolean
 set_active_panel_from_id (CcWindow     *self,
                           const gchar  *start_id,
@@ -371,6 +314,15 @@ set_active_panel_from_id (CcWindow     *self,
   /* When loading the same panel again, just set its parameters */
   if (g_strcmp0 (self->current_panel_id, start_id) == 0)
     {
+      AdwNavigationPage *sidebar_widget;
+      sidebar_widget = cc_panel_get_sidebar_widget (CC_PANEL (self->current_panel));
+
+      if (sidebar_widget)
+        {
+          adw_navigation_view_push (self->sidebar_view, sidebar_widget);
+          CC_RETURN (TRUE);
+        }
+
       g_object_set (G_OBJECT (self->current_panel), "parameters", parameters, NULL);
       if (force_moving_to_the_panel || self->previous_list_view == view)
         adw_navigation_split_view_set_show_content (self->split_view, TRUE);
@@ -419,8 +371,6 @@ set_active_panel_from_id (CcWindow     *self,
   CC_TRACE_MSG ("Current panel id: %s", start_id);
 
   cc_panel_list_set_active_panel (self->panel_list, start_id);
-
-  update_headerbar_buttons (self);
 
   CC_RETURN (TRUE);
 }
@@ -479,6 +429,15 @@ on_split_view_collapsed_changed_cb (CcWindow *self)
   selection_mode = collapsed ? GTK_SELECTION_NONE : GTK_SELECTION_SINGLE;
   cc_panel_list_set_selection_mode (self->panel_list, selection_mode);
 
+  if (collapsed && adw_navigation_view_get_visible_page (self->sidebar_view) == self->main_sidebar_page)
+    {
+      AdwNavigationPage *sidebar_widget;
+      sidebar_widget = cc_panel_get_sidebar_widget (CC_PANEL (self->current_panel));
+
+      if (sidebar_widget)
+        adw_navigation_view_push (self->sidebar_view, sidebar_widget);
+    }
+
   g_object_notify (G_OBJECT (self), "collapsed");
 }
 
@@ -503,20 +462,6 @@ search_entry_activate_cb (CcWindow *self)
   changed = cc_panel_list_activate (self->panel_list);
 
   gtk_search_bar_set_search_mode (self->search_bar, !changed);
-}
-
-static void
-previous_button_clicked_cb (CcWindow *self)
-{
-  g_debug ("Num previous panels? %d", g_queue_get_length (self->previous_panels));
-
-  /* When in search, simply unset the search mode */
-  if (gtk_search_bar_get_search_mode (self->search_bar))
-    gtk_search_bar_set_search_mode (self->search_bar, FALSE);
-  else
-    cc_panel_list_go_previous (self->panel_list);
-
-  update_headerbar_buttons (self);
 }
 
 static gboolean
@@ -704,13 +649,6 @@ cc_window_constructed (GObject *object)
    * activated from commandline parameter or from DBus method */
   g_idle_add_once ((GSourceOnceFunc) maybe_load_last_panel, self);
 
-  g_signal_connect_swapped (self->panel_list,
-                            "notify::view",
-                            G_CALLBACK (update_headerbar_buttons),
-                            self);
-
-  update_headerbar_buttons (self);
-
   G_OBJECT_CLASS (cc_window_parent_class)->constructed (object);
 }
 
@@ -803,8 +741,9 @@ cc_window_class_init (CcWindowClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcWindow, development_warning_dialog);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, header);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, split_view);
+  gtk_widget_class_bind_template_child (widget_class, CcWindow, sidebar_view);
+  gtk_widget_class_bind_template_child (widget_class, CcWindow, main_sidebar_page);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, panel_list);
-  gtk_widget_class_bind_template_child (widget_class, CcWindow, previous_button);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, search_bar);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, search_button);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, search_entry);
@@ -812,10 +751,8 @@ cc_window_class_init (CcWindowClass *klass)
 
   gtk_widget_class_bind_template_callback (widget_class, on_split_view_collapsed_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_development_warning_dialog_responded_cb);
-  gtk_widget_class_bind_template_callback (widget_class, previous_button_clicked_cb);
   gtk_widget_class_bind_template_callback (widget_class, search_entry_activate_cb);
   gtk_widget_class_bind_template_callback (widget_class, show_panel_cb);
-  gtk_widget_class_bind_template_callback (widget_class, update_list_title);
   gtk_widget_class_bind_template_callback (widget_class, search_entry_key_pressed_cb);
 
   gtk_widget_class_add_binding (widget_class, GDK_KEY_Left, GDK_ALT_MASK, go_back_shortcut_cb, NULL);
@@ -841,6 +778,8 @@ cc_window_init (CcWindow *self)
   /* Add a custom CSS class on development builds */
   if (in_flatpak_sandbox ())
     gtk_widget_add_css_class (GTK_WIDGET (self), "devel");
+
+  gtk_search_bar_set_key_capture_widget (self->search_bar, GTK_WIDGET (self));
 }
 
 CcWindow *

@@ -54,7 +54,7 @@ struct _CcApplicationsPanel
 {
   CcPanel          parent;
 
-  GtkBox          *sidebar_box;
+  AdwNavigationPage *sidebar_box;
   GtkListBox      *sidebar_listbox;
   GtkEntry        *sidebar_search_entry;
   GAppInfoMonitor *monitor;
@@ -138,7 +138,8 @@ struct _CcApplicationsPanel
 };
 
 static void select_app (CcApplicationsPanel *self,
-                        const gchar         *app_id);
+                        const gchar         *app_id,
+                        gboolean             emit_activate);
 
 G_DEFINE_TYPE (CcApplicationsPanel, cc_applications_panel, CC_TYPE_PANEL)
 
@@ -1555,7 +1556,8 @@ on_perm_store_ready (GObject      *source_object,
 
 static void
 select_app (CcApplicationsPanel *self,
-            const gchar         *app_id)
+            const gchar         *app_id,
+            gboolean             emit_activate)
 {
   GtkWidget *child;
 
@@ -1568,7 +1570,8 @@ select_app (CcApplicationsPanel *self,
       if (g_str_has_prefix (g_app_info_get_id (info), app_id))
         {
           gtk_list_box_select_row (self->sidebar_listbox, GTK_LIST_BOX_ROW (row));
-          g_signal_emit_by_name (row, "activate");
+          if (emit_activate)
+            g_signal_emit_by_name (row, "activate");
           break;
         }
     }
@@ -1701,7 +1704,7 @@ cc_applications_panel_set_property (GObject      *object,
                            (gchar *)g_variant_get_type (v));
               g_variant_unref (v);
 
-              select_app (CC_APPLICATIONS_PANEL (object), first_arg);
+              select_app (CC_APPLICATIONS_PANEL (object), first_arg, TRUE);
             }
 
           return;
@@ -1724,11 +1727,57 @@ cc_applications_panel_constructed (GObject *object)
   gtk_list_box_select_row (self->sidebar_listbox, row);
 }
 
-static GtkWidget*
+static void
+notify_collapsed_cb (CcApplicationsPanel *self)
+{
+  GtkSelectionMode selection_mode;
+  gboolean collapsed;
+  GtkRoot *root;
+
+  g_assert (CC_IS_APPLICATIONS_PANEL (self));
+
+  root = gtk_widget_get_root (GTK_WIDGET (self));
+  g_object_get (root, "collapsed", &collapsed, NULL);
+
+  selection_mode = collapsed ? GTK_SELECTION_NONE : GTK_SELECTION_SINGLE;
+
+  gtk_list_box_set_selection_mode (self->sidebar_listbox, selection_mode);
+
+  if (!collapsed && self->current_app_id)
+    select_app (self, self->current_app_id, FALSE);
+}
+
+static void
+cc_applications_panel_root (GtkWidget *widget)
+{
+  CcApplicationsPanel *self = CC_APPLICATIONS_PANEL (widget);
+  GtkRoot *root;
+
+  GTK_WIDGET_CLASS (cc_applications_panel_parent_class)->root (widget);
+
+  root = gtk_widget_get_root (widget);
+
+  g_signal_connect_swapped (root, "notify::collapsed", G_CALLBACK (notify_collapsed_cb), self);
+
+  notify_collapsed_cb (self);
+}
+
+static void
+cc_applications_panel_unroot (GtkWidget *widget)
+{
+  CcApplicationsPanel *self = CC_APPLICATIONS_PANEL (widget);
+  GtkRoot *root = gtk_widget_get_root (widget);
+
+  g_signal_handlers_disconnect_by_func (root, notify_collapsed_cb, self);
+
+  GTK_WIDGET_CLASS (cc_applications_panel_parent_class)->unroot (widget);
+}
+
+static AdwNavigationPage*
 cc_applications_panel_get_sidebar_widget (CcPanel *panel)
 {
   CcApplicationsPanel *self = CC_APPLICATIONS_PANEL (panel);
-  return GTK_WIDGET (self->sidebar_box);
+  return self->sidebar_box;
 }
 
 static void
@@ -1742,6 +1791,9 @@ cc_applications_panel_class_init (CcApplicationsPanelClass *klass)
   object_class->finalize = cc_applications_panel_finalize;
   object_class->constructed = cc_applications_panel_constructed;
   object_class->set_property = cc_applications_panel_set_property;
+
+  widget_class->root = cc_applications_panel_root;
+  widget_class->unroot = cc_applications_panel_unroot;
 
   panel_class->get_sidebar_widget = cc_applications_panel_get_sidebar_widget;
 
