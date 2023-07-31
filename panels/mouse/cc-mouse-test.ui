@@ -9,31 +9,21 @@
     <signal name="value-changed" handler="on_scroll_adjustment_changed_cb"/>
   </object>
   <template class="CcMouseTest" parent="AdwWindow">
+    <property name="title" translatable="yes">Test Mouse &amp; Touchpad</property>
     <property name="modal">True</property>
     <property name="hide-on-close">True</property>
     <signal name="show" handler="on_mouse_test_show_cb"/>
-    <child>
-      <object class="GtkBox" id="test_widget">
-        <property name="hexpand">True</property>
-        <property name="vexpand">True</property>
-        <property name="orientation">vertical</property>
-        <child>
-          <object class="AdwHeaderBar">
-            <property name="title-widget">
-              <object class="AdwWindowTitle">
-                <property name="title" translatable="yes">Test Mouse &amp; Touchpad</property>
-              </object>
-            </property>
-          </object>
+    <property name="content">
+      <object class="AdwToolbarView">
+        <child type="top">
+          <object class="AdwHeaderBar"/>
         </child>
-        <child>
+        <property name="content">
           <object class="GtkBox">
             <property name="orientation">vertical</property>
-            <property name="hexpand">True</property>
-            <property name="vexpand">True</property>
             <property name="margin-start">30</property>
             <property name="margin-end">30</property>
-            <property name="margin-top">30</property>
+            <property name="margin-top">12</property>
             <property name="margin-bottom">30</property>
             <child>
               <object class="GtkOverlay">
@@ -122,8 +112,8 @@
               </object>
             </child>
           </object>
-        </child>
+        </property>
       </object>
-    </child>
+    </property>
   </template>
 </interface>
