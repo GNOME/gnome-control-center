@@ -37,6 +37,8 @@
       <object class="AdwPreferencesGroup">
         <child>
           <object class="GtkStack" id="main_stack">
+            <property name="hhomogeneous">False</property>
+            <property name="vhomogeneous">False</property>
 
             <child>
               <object class="AdwPreferencesGroup" id="automatic_view">
@@ -94,23 +96,17 @@
 
                         <!-- HTTP Port -->
                         <child>
-                          <object class="AdwActionRow">
+                          <object class="AdwSpinRow">
                             <property name="title" translatable="yes">Port</property>
-                            <child type="suffix">
-                              <object class="GtkSpinButton" id="http_port_spin_button">
-                                <property name="valign">center</property>
-                                <property name="xalign">1</property>
-                                <property name="adjustment">
-                                  <object class="GtkAdjustment" id="http_port_adjustment">
-                                    <property name="upper">65535</property>
-                                    <property name="step-increment">1</property>
-                                  </object>
-                                </property>
-                                <accessibility>
-                                  <property name="label" translatable="yes">HTTP proxy port</property>
-                                </accessibility>
+                            <property name="adjustment">
+                              <object class="GtkAdjustment" id="http_port_adjustment">
+                                <property name="upper">65535</property>
+                                <property name="step-increment">1</property>
                               </object>
-                            </child>
+                            </property>
+                            <accessibility>
+                              <property name="label" translatable="yes">HTTP proxy port</property>
+                            </accessibility>
                           </object>
                         </child>
 
@@ -139,23 +135,17 @@
 
                         <!-- HTTPS Port -->
                         <child>
-                          <object class="AdwActionRow">
+                          <object class="AdwSpinRow">
                             <property name="title" translatable="yes">Port</property>
-                            <child type="suffix">
-                              <object class="GtkSpinButton" id="https_port_spin_button">
-                                <property name="valign">center</property>
-                                <property name="xalign">1</property>
-                                <property name="adjustment">
-                                  <object class="GtkAdjustment" id="https_port_adjustment">
-                                    <property name="upper">65535</property>
-                                    <property name="step-increment">1</property>
-                                  </object>
-                                </property>
-                                <accessibility>
-                                  <property name="label" translatable="yes">HTTPS proxy port</property>
-                                </accessibility>
+                            <property name="adjustment">
+                              <object class="GtkAdjustment" id="https_port_adjustment">
+                                <property name="upper">65535</property>
+                                <property name="step-increment">1</property>
                               </object>
-                            </child>
+                            </property>
+                            <accessibility>
+                              <property name="label" translatable="yes">HTTPS proxy port</property>
+                            </accessibility>
                           </object>
                         </child>
 
@@ -184,23 +174,17 @@
 
                         <!-- FTP Port -->
                         <child>
-                          <object class="AdwActionRow">
+                          <object class="AdwSpinRow">
                             <property name="title" translatable="yes">Port</property>
-                            <child type="suffix">
-                              <object class="GtkSpinButton" id="ftp_port_spin_button">
-                                <property name="valign">center</property>
-                                <property name="xalign">1</property>
-                                <property name="adjustment">
-                                  <object class="GtkAdjustment" id="ftp_port_adjustment">
-                                    <property name="upper">65535</property>
-                                    <property name="step-increment">1</property>
-                                  </object>
-                                </property>
-                                <accessibility>
-                                  <property name="label" translatable="yes">FTP proxy port</property>
-                                </accessibility>
+                            <property name="adjustment">
+                              <object class="GtkAdjustment" id="ftp_port_adjustment">
+                                <property name="upper">65535</property>
+                                <property name="step-increment">1</property>
                               </object>
-                            </child>
+                            </property>
+                            <accessibility>
+                              <property name="label" translatable="yes">FTP proxy port</property>
+                            </accessibility>
                           </object>
                         </child>
 
@@ -229,23 +213,17 @@
 
                         <!-- SOCKS Port -->
                         <child>
-                          <object class="AdwActionRow">
+                          <object class="AdwSpinRow">
                             <property name="title" translatable="yes">Port</property>
-                            <child type="suffix">
-                              <object class="GtkSpinButton" id="socks_port_spin_button">
-                                <property name="valign">center</property>
-                                <property name="xalign">1</property>
-                                <property name="adjustment">
-                                  <object class="GtkAdjustment" id="socks_port_adjustment">
-                                    <property name="upper">65535</property>
-                                    <property name="step-increment">1</property>
-                                  </object>
-                                </property>
-                                <accessibility>
-                                  <property name="label" translatable="yes">SOCKS host port</property>
-                                </accessibility>
+                            <property name="adjustment">
+                              <object class="GtkAdjustment" id="socks_port_adjustment">
+                                <property name="upper">65535</property>
+                                <property name="step-increment">1</property>
                               </object>
-                            </child>
+                            </property>
+                            <accessibility>
+                              <property name="label" translatable="yes">SOCKS host port</property>
+                            </accessibility>
                           </object>
                         </child>
 
@@ -274,22 +252,5 @@
     </child>
 
   </template>
-
-  <object class="GtkSizeGroup">
-    <property name="mode">horizontal</property>
-    <widgets>
-      <widget name="http_host_entry"/>
-      <widget name="http_port_spin_button"/>
-
-      <widget name="https_host_entry"/>
-      <widget name="https_port_spin_button"/>
-
-      <widget name="ftp_host_entry"/>
-      <widget name="ftp_port_spin_button"/>
-
-      <widget name="socks_host_entry"/>
-      <widget name="socks_port_spin_button"/>
-    </widgets>
-  </object>
 
 </interface>
