@@ -43,7 +43,7 @@ struct _CcMousePanel
   AdwPreferencesGroup *mouse_group;
   CcSplitRow        *mouse_scroll_direction_row;
   GtkScale          *mouse_speed_scale;
-  CcMouseTest       *mouse_test;
+  GtkWindow         *mouse_test;
   GtkBox            *primary_button_box;
   GtkToggleButton   *primary_button_left;
   GtkToggleButton   *primary_button_right;
@@ -258,7 +258,7 @@ setup_dialog (CcMousePanel *self)
 {
   GtkToggleButton *button;
 
-  self->mouse_test = CC_MOUSE_TEST (cc_mouse_test_new ());
+  self->mouse_test = GTK_WINDOW (cc_mouse_test_new ());
 
   gtk_widget_set_direction (GTK_WIDGET (self->primary_button_box), GTK_TEXT_DIR_LTR);
 
@@ -364,6 +364,7 @@ cc_mouse_panel_dispose (GObject *object)
 
   g_clear_object (&self->mouse_settings);
   g_clear_object (&self->touchpad_settings);
+  g_clear_pointer (&self->mouse_test, gtk_window_destroy);
 
   G_OBJECT_CLASS (cc_mouse_panel_parent_class)->dispose (object);
 }
@@ -379,9 +380,9 @@ test_button_clicked_cb (CcMousePanel *self)
 {
   CcShell *shell = cc_panel_get_shell (CC_PANEL (self));
 
-  gtk_window_set_transient_for (GTK_WINDOW (self->mouse_test),
+  gtk_window_set_transient_for (self->mouse_test,
                                 GTK_WINDOW (cc_shell_get_toplevel (shell)));
-  gtk_window_present (GTK_WINDOW (self->mouse_test));
+  gtk_window_present (self->mouse_test);
 }
 
 static void
