@@ -38,8 +38,8 @@ stages:
   ninja -C _build install &&
   cd .. &&
   rm -rf _build/ &&
-  meson . _build ${BUILD_OPTS} -Dprofile=development &&
-  ninja -C _build 2>&1 | tee compilation.log
+  meson . _build ${BUILD_OPTS} -Dprofile=development && cd _build &&
+  meson devenv ninja 2>&1 | tee compilation.log
 
 .Run Tests: &run_tests
   echo "== Testing ==" &&
