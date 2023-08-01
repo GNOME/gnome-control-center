@@ -736,6 +736,12 @@ maybe_load_last_panel (CcWindow *self)
     cc_panel_list_set_active_panel (self->panel_list, id);
   else
     cc_panel_list_activate (self->panel_list);
+
+  g_signal_connect_swapped (self->panel_list,
+                            "notify::view",
+                            G_CALLBACK (update_headerbar_buttons),
+                            self);
+  update_headerbar_buttons (self);
 }
 
 static void
@@ -753,15 +759,6 @@ cc_window_constructed (GObject *object)
    * have a chance to skip it when another panel has been explicitly
    * activated from commandline parameter or from DBus method */
   g_idle_add_once ((GSourceOnceFunc) maybe_load_last_panel, self);
-
-  g_signal_connect_swapped (self->panel_list,
-                            "notify::view",
-                            G_CALLBACK (update_headerbar_buttons),
-                            self);
-
-  update_headerbar_buttons (self);
-  adw_leaflet_set_visible_child (self->main_leaflet,
-                                 GTK_WIDGET (self->sidebar_box));
 
   G_OBJECT_CLASS (cc_window_parent_class)->constructed (object);
 }
