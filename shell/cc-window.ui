@@ -6,6 +6,7 @@
     <child>
       <object class="AdwLeaflet" id="main_leaflet">
         <property name="can-navigate-back">True</property>
+        <property name="visible-child">sidebar_box</property>
         <signal name="notify::folded" handler="on_main_leaflet_folded_changed_cb" object="CcWindow" swapped="yes" />
 
         <child>
