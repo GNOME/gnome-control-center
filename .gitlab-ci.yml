@@ -31,9 +31,16 @@ stages:
 
 .Build procedure: &build_procedure
   echo "== Building ==" &&
+  dnf install -y dnf5-plugins &&
+  git clone https://gitlab.gnome.org/GNOME/glib.git &&
+  cd glib &&
+  dnf builddep -y glib &&
+  meson setup . _build -Dprefix=/usr -Dlibdir=lib64 &&
+  ninja -C _build install &&
+  cd .. && rm -rf _build/ &&
   git clone https://gitlab.gnome.org/GNOME/gtk.git &&
   cd gtk &&
-  dnf install -y dnf5-plugins && dnf builddep -y gtk4 &&
+  dnf builddep -y gtk4 &&
   meson setup . _build -Dprefix=/usr -Dlibdir=lib64 &&
   ninja -C _build install &&
   cd .. &&
