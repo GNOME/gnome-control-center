@@ -14,24 +14,10 @@
     </columns>
   </object>
   <template class="CcUserPanel" parent="CcPanel">
-    <child type="titlebar">
-      <object class="GtkHeaderBar">
-        <property name="visible">False</property>
-      </object>
-    </child>
-
-    <child type="content">
+    <property name="child">
       <object class="AdwToolbarView">
-        <property name="top-bar-style">raised</property>
         <child type="top">
           <object class="AdwHeaderBar">
-            <property name="show-end-title-buttons">True</property>
-            <property name="show-start-title-buttons" bind-source="CcUserPanel" bind-property="folded" bind-flags="default|sync-create" />
-            <property name="title-widget">
-              <object class="AdwWindowTitle">
-                <property name="title" translatable="yes">Users</property>
-              </object>
-            </property>
             <child type="start">
               <object class="GtkButton" id="back_button">
                 <property name="tooltip-text" translatable="yes">Back</property>
@@ -292,7 +278,7 @@
           </object>
         </property>
       </object>
-    </child>
+    </property>
   </template>
 
   <object class="AdwMessageDialog" id="remove_local_user_dialog">

@@ -1,35 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <template class="CcNetworkPanel" parent="CcPanel">
-    <!-- Header Bar -->
-    <child type="titlebar">
-      <object class="AdwHeaderBar">
-        <property name="visible">False</property>
-      </object>
-    </child>
-
-    <child type="content">
+    <property name="child">
       <object class="AdwNavigationView" id="main_nav">
         <child>
           <object class="AdwNavigationPage">
             <property name="title" translatable="yes">Network</property>
             <child>
               <object class="AdwToolbarView">
-                <property name="top-bar-style">raised</property>
                 <child type="top">
-                  <object class="AdwHeaderBar">
-                    <property name="show-end-title-buttons">True</property>
-                    <property name="show-start-title-buttons" bind-source="CcNetworkPanel" bind-property="folded" bind-flags="default|sync-create" />
-                    <child type="start">
-                      <object class="GtkButton" id="back_button">
-                        <property name="tooltip-text" translatable="yes">Back</property>
-                        <property name="visible" bind-source="CcNetworkPanel" bind-property="folded" bind-flags="sync-create"/>
-                        <property name="icon-name">go-previous-symbolic</property>
-                        <property name="action-name">window.navigate</property>
-                        <property name="action-target">0</property> <!-- ADW_NAVIGATION_DIRECTION_BACK -->
-                      </object>
-                    </child>
-                  </object>
+                  <object class="AdwHeaderBar"/>
                 </child>
                 <property name="content">
                   <object class="AdwPreferencesPage">
@@ -135,6 +115,6 @@
           <object class="CcNetProxyPage" id="proxy_page"/>
         </child>
       </object>
-    </child>
+    </property>
   </template>
 </interface>

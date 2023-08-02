@@ -531,12 +531,12 @@ on_primary_display_selected_item_changed_cb (CcDisplayPanel *self)
 }
 
 static void
-on_toplevel_folded (CcDisplayPanel *self, GParamSpec *pspec, GtkWidget *toplevel)
+on_toplevel_collapsed (CcDisplayPanel *self, GParamSpec *pspec, GtkWidget *toplevel)
 {
-  gboolean folded;
+  gboolean collapsed;
 
-  g_object_get (toplevel, "folded", &folded, NULL);
-  cc_display_settings_refresh_layout (self->settings, folded);
+  g_object_get (toplevel, "collapsed", &collapsed, NULL);
+  cc_display_settings_refresh_layout (self->settings, collapsed);
 }
 
 static gboolean
@@ -562,8 +562,8 @@ cc_display_panel_constructed (GObject *object)
   g_signal_connect_object (cc_panel_get_shell (CC_PANEL (object)), "notify::active-panel",
                            G_CALLBACK (active_panel_changed), object, G_CONNECT_SWAPPED);
 
-  g_signal_connect_swapped (toplevel, "notify::folded", G_CALLBACK (on_toplevel_folded), object);
-  on_toplevel_folded (CC_DISPLAY_PANEL (object), NULL, toplevel);
+  g_signal_connect_swapped (toplevel, "notify::collapsed", G_CALLBACK (on_toplevel_collapsed), object);
+  on_toplevel_collapsed (CC_DISPLAY_PANEL (object), NULL, toplevel);
 
   G_OBJECT_CLASS (cc_display_panel_parent_class)->constructed (object);
 }

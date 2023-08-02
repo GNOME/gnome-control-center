@@ -35,7 +35,7 @@
 #include <time.h>
 
 #include "cc-application.h"
-#include "cc-panel-private.h"
+#include "cc-panel.h"
 #include "cc-shell.h"
 #include "cc-shell-model.h"
 #include "cc-panel-list.h"
@@ -52,15 +52,13 @@ struct _CcWindow
 
   GtkMessageDialog  *development_warning_dialog;
   AdwHeaderBar      *header;
-  AdwLeaflet        *main_leaflet;
+  AdwNavigationSplitView *split_view;
   CcPanelList       *panel_list;
   GtkButton         *previous_button;
   GtkSearchBar      *search_bar;
   GtkToggleButton   *search_button;
   GtkSearchEntry    *search_entry;
-  GtkBox            *sidebar_box;
   AdwWindowTitle    *sidebar_title_widget;
-  GtkStack          *stack;
 
   GtkWidget  *old_panel;
   GtkWidget  *current_panel;
@@ -73,8 +71,6 @@ struct _CcWindow
 
   CcPanel *active_panel;
   GSettings *settings;
-
-  gboolean folded;
 
   CcPanelListView previous_list_view;
 };
@@ -89,7 +85,7 @@ enum
   PROP_0,
   PROP_ACTIVE_PANEL,
   PROP_MODEL,
-  PROP_FOLDED,
+  PROP_COLLAPSED,
 };
 
 /* Auxiliary methods */
@@ -122,7 +118,7 @@ in_flatpak_sandbox (void)
 static void
 on_sidebar_activated_cb (CcWindow *self)
 {
-  adw_leaflet_navigate (self->main_leaflet, ADW_NAVIGATION_DIRECTION_FORWARD);
+  adw_navigation_split_view_set_show_content (self->split_view, TRUE);
 }
 
 static gboolean
@@ -153,18 +149,14 @@ activate_panel (CcWindow          *self,
   if (self->current_panel)
     g_signal_handlers_disconnect_by_data (self->current_panel, self);
   self->current_panel = GTK_WIDGET (cc_panel_loader_load_by_name (CC_SHELL (self), id, name, parameters));
-  cc_panel_set_folded (CC_PANEL (self->current_panel), adw_leaflet_get_folded (self->main_leaflet));
   cc_shell_set_active_panel (CC_SHELL (self), CC_PANEL (self->current_panel));
 
-  gtk_stack_add_named (self->stack, self->current_panel, id);
-
-  /* switch to the new panel */
-  gtk_stack_set_visible_child_name (self->stack, id);
+  adw_navigation_split_view_set_content (self->split_view, self->current_panel);
 
   sidebar_widget = cc_panel_get_sidebar_widget (CC_PANEL (self->current_panel));
   cc_panel_list_add_sidebar_widget (self->panel_list, sidebar_widget);
-  /* Ensure we show the panel when the leaflet is folded and a sidebar widget's
-   * row is activated.
+  /* Ensure we show the panel when the spplit view is collapsed and a sidebar
+   * widget's row is activated.
    */
   g_signal_connect_object (self->current_panel, "sidebar-activated", G_CALLBACK (on_sidebar_activated_cb), self, G_CONNECT_SWAPPED);
 
@@ -381,7 +373,7 @@ set_active_panel_from_id (CcWindow     *self,
     {
       g_object_set (G_OBJECT (self->current_panel), "parameters", parameters, NULL);
       if (force_moving_to_the_panel || self->previous_list_view == view)
-        adw_leaflet_navigate (self->main_leaflet, ADW_NAVIGATION_DIRECTION_FORWARD);
+        adw_navigation_split_view_set_show_content (self->split_view, TRUE);
       self->previous_list_view = view;
       CC_RETURN (TRUE);
     }
@@ -393,13 +385,6 @@ set_active_panel_from_id (CcWindow     *self,
       CC_RETURN (TRUE);
     }
 
-  if (self->old_panel)
-    gtk_stack_remove (self->stack, g_steal_pointer (&self->old_panel));
-
-  /* old_panel will be removed by the on_stack_transition_running_changed_cb
-   * callback - or, if panels changed before the transition ended, by the code
-   * just above.
-   */
   self->old_panel = self->current_panel;
   if (self->old_panel)
     cc_panel_deactivate (CC_PANEL (self->old_panel));
@@ -426,7 +411,7 @@ set_active_panel_from_id (CcWindow     *self,
     add_current_panel_to_history (self, start_id);
 
   if (force_moving_to_the_panel)
-    adw_leaflet_navigate (self->main_leaflet, ADW_NAVIGATION_DIRECTION_FORWARD);
+    adw_navigation_split_view_set_show_content (self->split_view, TRUE);
 
   g_free (self->current_panel_id);
   self->current_panel_id = g_strdup (start_id);
@@ -482,29 +467,19 @@ switch_to_previous_panel (CcWindow *self)
 /* Callbacks */
 
 static void
-navigate_action_cb (GtkWidget   *widget,
-                    const gchar *action_name,
-                    GVariant    *parameter)
-{
-  CcWindow *self = CC_WINDOW (widget);
-
-  adw_leaflet_navigate (self->main_leaflet, g_variant_get_int32 (parameter));
-}
-
-static void
-on_main_leaflet_folded_changed_cb (CcWindow *self)
+on_split_view_collapsed_changed_cb (CcWindow *self)
 {
   GtkSelectionMode selection_mode;
-  gboolean folded;
+  gboolean collapsed;
 
   g_assert (CC_IS_WINDOW (self));
 
-  folded = adw_leaflet_get_folded (self->main_leaflet);
+  collapsed = adw_navigation_split_view_get_collapsed (self->split_view);
 
-  selection_mode = folded ? GTK_SELECTION_NONE : GTK_SELECTION_SINGLE;
+  selection_mode = collapsed ? GTK_SELECTION_NONE : GTK_SELECTION_SINGLE;
   cc_panel_list_set_selection_mode (self->panel_list, selection_mode);
 
-  cc_panel_set_folded (CC_PANEL (self->current_panel), folded);
+  g_object_notify (G_OBJECT (self), "collapsed");
 }
 
 static void
@@ -588,23 +563,6 @@ on_development_warning_dialog_responded_cb (CcWindow *self)
   gtk_window_close (GTK_WINDOW (self->development_warning_dialog));
 }
 
-static void
-on_stack_transition_running_changed_cb (GtkStack   *stack,
-                                        GParamSpec *pspec,
-                                        CcWindow   *self)
-{
-  gboolean transition_running;
-
-  CC_ENTRY;
-
-  transition_running = gtk_stack_get_transition_running (stack);
-
-  if (!transition_running && self->old_panel)
-    gtk_stack_remove (self->stack, g_steal_pointer (&self->old_panel));
-
-  CC_EXIT;
-}
-
 /* CcShell implementation */
 static gboolean
 cc_window_set_active_panel_from_id (CcShell      *shell,
@@ -681,8 +639,8 @@ cc_window_get_property (GObject    *object,
       g_value_set_object (value, self->store);
       break;
 
-    case PROP_FOLDED:
-      g_value_set_boolean (value, self->folded);
+    case PROP_COLLAPSED:
+      g_value_set_boolean (value, adw_navigation_split_view_get_collapsed (self->split_view));
       break;
 
     default:
@@ -709,10 +667,6 @@ cc_window_set_property (GObject      *object,
       self->store = g_value_dup_object (value);
       break;
 
-    case PROP_FOLDED:
-      self->folded = g_value_get_boolean (value);
-      break;
-
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
     }
@@ -732,12 +686,6 @@ maybe_load_last_panel (CcWindow *self)
     cc_panel_list_set_active_panel (self->panel_list, id);
   else
     cc_panel_list_activate (self->panel_list);
-
-  g_signal_connect_swapped (self->panel_list,
-                            "notify::view",
-                            G_CALLBACK (update_headerbar_buttons),
-                            self);
-  update_headerbar_buttons (self);
 }
 
 static void
@@ -755,6 +703,13 @@ cc_window_constructed (GObject *object)
    * have a chance to skip it when another panel has been explicitly
    * activated from commandline parameter or from DBus method */
   g_idle_add_once ((GSourceOnceFunc) maybe_load_last_panel, self);
+
+  g_signal_connect_swapped (self->panel_list,
+                            "notify::view",
+                            G_CALLBACK (update_headerbar_buttons),
+                            self);
+
+  update_headerbar_buttons (self);
 
   G_OBJECT_CLASS (cc_window_parent_class)->constructed (object);
 }
@@ -836,30 +791,27 @@ cc_window_class_init (CcWindowClass *klass)
                                                         G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS));
 
   g_object_class_install_property (object_class,
-                                   PROP_FOLDED,
-                                   g_param_spec_boolean ("folded",
-                                                         "Folded",
-                                                         "Whether the window is foled",
+                                   PROP_COLLAPSED,
+                                   g_param_spec_boolean ("collapsed",
+                                                         "Collapsed",
+                                                         "Whether the window is collapsed",
                                                          FALSE,
-                                                         G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
+                                                         G_PARAM_READABLE | G_PARAM_STATIC_STRINGS));
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/Settings/gtk/cc-window.ui");
 
   gtk_widget_class_bind_template_child (widget_class, CcWindow, development_warning_dialog);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, header);
-  gtk_widget_class_bind_template_child (widget_class, CcWindow, main_leaflet);
+  gtk_widget_class_bind_template_child (widget_class, CcWindow, split_view);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, panel_list);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, previous_button);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, search_bar);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, search_button);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, search_entry);
-  gtk_widget_class_bind_template_child (widget_class, CcWindow, sidebar_box);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, sidebar_title_widget);
-  gtk_widget_class_bind_template_child (widget_class, CcWindow, stack);
 
-  gtk_widget_class_bind_template_callback (widget_class, on_main_leaflet_folded_changed_cb);
+  gtk_widget_class_bind_template_callback (widget_class, on_split_view_collapsed_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_development_warning_dialog_responded_cb);
-  gtk_widget_class_bind_template_callback (widget_class, on_stack_transition_running_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, previous_button_clicked_cb);
   gtk_widget_class_bind_template_callback (widget_class, search_entry_activate_cb);
   gtk_widget_class_bind_template_callback (widget_class, show_panel_cb);
@@ -874,8 +826,6 @@ cc_window_class_init (CcWindowClass *klass)
   gtk_widget_class_add_binding_action (widget_class, GDK_KEY_w, GDK_CONTROL_MASK, "window.close", NULL);
   gtk_widget_class_add_binding_action (widget_class, GDK_KEY_W, GDK_CONTROL_MASK, "window.close", NULL);
 
-  gtk_widget_class_install_action (widget_class, "window.navigate", "i", navigate_action_cb);
-
   g_type_ensure (CC_TYPE_PANEL_LIST);
 }
 
@@ -887,12 +837,6 @@ cc_window_init (CcWindow *self)
   self->settings = g_settings_new ("org.gnome.Settings");
   self->previous_panels = g_queue_new ();
   self->previous_list_view = cc_panel_list_get_view (self->panel_list);
-
-  g_object_bind_property (self->main_leaflet,
-                          "folded",
-                          self,
-                          "folded",
-                          G_BINDING_SYNC_CREATE);
 
   /* Add a custom CSS class on development builds */
   if (in_flatpak_sandbox ())

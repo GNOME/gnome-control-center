@@ -46,9 +46,6 @@ struct _CcUaPanel
 {
   CcPanel    parent_instance;
 
-  AdwHeaderBar       *titlebar;
-  GtkButton          *back_button;
-
   AdwNavigationView  *main_nav_view;
   AdwSwitchRow       *show_ua_menu_row;
   CcListRow          *seeing_row;
@@ -61,15 +58,6 @@ struct _CcUaPanel
 };
 
 CC_PANEL_REGISTER (CcUaPanel, cc_ua_panel)
-
-static void
-ua_panel_back_clicked_cb (CcUaPanel *self)
-{
-  g_assert (CC_IS_UA_PANEL (self));
-
-  gtk_widget_activate_action (GTK_WIDGET (self), "window.navigate", "i",
-                              ADW_NAVIGATION_DIRECTION_BACK);
-}
 
 static void
 cc_ua_panel_dispose (GObject *object)
@@ -102,9 +90,6 @@ cc_ua_panel_class_init (CcUaPanelClass *klass)
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/universal-access/cc-ua-panel.ui");
 
-  gtk_widget_class_bind_template_child (widget_class, CcUaPanel, titlebar);
-  gtk_widget_class_bind_template_child (widget_class, CcUaPanel, back_button);
-
   gtk_widget_class_bind_template_child (widget_class, CcUaPanel, main_nav_view);
   gtk_widget_class_bind_template_child (widget_class, CcUaPanel, show_ua_menu_row);
   gtk_widget_class_bind_template_child (widget_class, CcUaPanel, seeing_row);
@@ -112,8 +97,6 @@ cc_ua_panel_class_init (CcUaPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcUaPanel, typing_row);
   gtk_widget_class_bind_template_child (widget_class, CcUaPanel, mouse_row);
   gtk_widget_class_bind_template_child (widget_class, CcUaPanel, zoom_row);
-
-  gtk_widget_class_bind_template_callback (widget_class, ua_panel_back_clicked_cb);
 
   g_type_ensure (CC_TYPE_UA_SEEING_PAGE);
   g_type_ensure (CC_TYPE_UA_HEARING_PAGE);

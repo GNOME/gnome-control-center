@@ -1,36 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <template class="CcUaPanel" parent="CcPanel">
-    <child type="titlebar">
-      <object class="GtkHeaderBar">
-        <property name="visible">False</property>
-      </object>
-    </child>
-
-    <child type="content">
+    <property name="child">
       <object class="AdwNavigationView" id="main_nav_view">
         <child>
           <object class="AdwNavigationPage" id="main_page">
             <property name="title" translatable="yes">Accessibility</property>
             <property name="child">
               <object class="AdwToolbarView">
-                <property name="top-bar-style">raised</property>
                 <child type="top">
-                  <object class="AdwHeaderBar" id="titlebar">
-                    <property name="show-end-title-buttons">True</property>
-                    <property name="show-start-title-buttons" bind-source="CcUaPanel" bind-property="folded" bind-flags="default|sync-create" />
-                    <child type="start">
-                      <object class="GtkButton" id="back_button">
-                        <property name="tooltip-text" translatable="yes">Back</property>
-                        <property name="visible" bind-source="CcUaPanel" bind-property="folded" bind-flags="sync-create"/>
-                        <property name="icon-name">go-previous-symbolic</property>
-                        <accessibility>
-                          <property name="label" translatable="yes">Back</property>
-                        </accessibility>
-                        <signal name="clicked" handler="ua_panel_back_clicked_cb" swapped="yes"/>
-                      </object>
-                    </child>
-                  </object>
+                  <object class="AdwHeaderBar"/>
                 </child>
                 <property name="content">
                   <object class="AdwPreferencesPage">
@@ -139,6 +118,6 @@
         </child>
 
       </object>
-    </child>
+    </property>
   </template>
 </interface>

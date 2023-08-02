@@ -40,7 +40,7 @@ CcDisplayMonitor*   cc_display_settings_get_selected_output   (CcDisplaySettings
 void                cc_display_settings_set_selected_output   (CcDisplaySettings    *settings,
                                                                CcDisplayMonitor     *output);
 void                cc_display_settings_refresh_layout        (CcDisplaySettings    *settings,
-                                                               gboolean              folded);
+                                                               gboolean              collapsed);
 void                cc_display_settings_set_multimonitor      (CcDisplaySettings    *self,
                                                                gboolean              multimonitor);
 

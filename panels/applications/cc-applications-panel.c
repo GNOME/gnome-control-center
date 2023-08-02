@@ -57,7 +57,6 @@ struct _CcApplicationsPanel
   GtkBox          *sidebar_box;
   GtkListBox      *sidebar_listbox;
   GtkEntry        *sidebar_search_entry;
-  AdwWindowTitle  *header_title;
   GAppInfoMonitor *monitor;
   gulong           monitor_id;
 #ifdef HAVE_MALCONTENT
@@ -1408,7 +1407,7 @@ update_panel (CcApplicationsPanel *self,
 
   if (row == NULL)
     {
-      adw_window_title_set_title (self->header_title, _("Apps"));
+      adw_navigation_page_set_title (ADW_NAVIGATION_PAGE (self), _("Apps"));
       gtk_stack_set_visible_child (self->stack, self->empty_box);
       gtk_widget_set_visible (GTK_WIDGET (self->view_details_button), FALSE);
       return;
@@ -1416,7 +1415,8 @@ update_panel (CcApplicationsPanel *self,
 
   info = cc_applications_row_get_info (CC_APPLICATIONS_ROW (row));
 
-  adw_window_title_set_title (self->header_title, g_app_info_get_display_name (info));
+  adw_navigation_page_set_title (ADW_NAVIGATION_PAGE (self),
+                                 g_app_info_get_display_name (info));
   gtk_stack_set_visible_child (self->stack, self->settings_box);
   gtk_widget_set_visible (GTK_WIDGET (self->view_details_button), gnome_software_is_installed ());
 
@@ -1767,7 +1767,6 @@ cc_applications_panel_class_init (CcApplicationsPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, handler_link_group);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, handler_row);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, handler_reset);
-  gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, header_title);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, install_button);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, integration_section);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, launch_button);

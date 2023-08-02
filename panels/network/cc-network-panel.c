@@ -660,7 +660,7 @@ panel_check_network_manager_version (CcNetworkPanel *self)
                 GtkWidget *status_page;
 
                 status_page = adw_status_page_new ();
-                cc_panel_set_content (CC_PANEL (self), status_page);
+                adw_navigation_page_set_child (ADW_NAVIGATION_PAGE (self), status_page);
 
                 adw_status_page_set_icon_name (ADW_STATUS_PAGE (status_page), "network-error-symbolic");
                 adw_status_page_set_title (ADW_STATUS_PAGE (status_page), _("Network Unavailable"));

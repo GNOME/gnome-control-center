@@ -34,7 +34,7 @@ struct _CcDisplaySettings
 
   gboolean          updating;
   gboolean          num_scales;
-  gboolean          folded;
+  gboolean          collapsed;
   guint             idle_udpate_id;
 
   gboolean          has_accelerometer;
@@ -462,7 +462,7 @@ cc_display_settings_rebuild_ui (CcDisplaySettings *self)
                                G_CALLBACK (on_scale_btn_active_changed_cb),
                                self, G_CONNECT_SWAPPED);
     }
-  cc_display_settings_refresh_layout (self, self->folded);
+  cc_display_settings_refresh_layout (self, self->collapsed);
 
   gtk_widget_set_visible (self->underscanning_row,
                           cc_display_monitor_supports_underscanning (self->selected_output) &&
@@ -884,12 +884,12 @@ cc_display_settings_set_selected_output (CcDisplaySettings *self,
 
 void
 cc_display_settings_refresh_layout (CcDisplaySettings *self,
-                                    gboolean           folded)
+                                    gboolean           collapsed)
 {
   gboolean use_combo;
 
-  self->folded = folded;
-  use_combo = self->num_scales > MAX_SCALE_BUTTONS || (self->num_scales > 2 && folded);
+  self->collapsed = collapsed;
+  use_combo = self->num_scales > MAX_SCALE_BUTTONS || (self->num_scales > 2 && collapsed);
 
   gtk_widget_set_visible (self->scale_combo_row, use_combo);
   gtk_widget_set_visible (self->scale_buttons_row, self->num_scales > 1 && !use_combo);

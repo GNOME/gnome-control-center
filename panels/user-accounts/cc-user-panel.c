@@ -181,15 +181,7 @@ show_current_user (CcUserPanel *self)
 static void
 on_back_button_clicked_cb (CcUserPanel *self)
 {
-
-        if (act_user_get_uid (self->selected_user) == getuid ()) {
-                gtk_widget_activate_action (GTK_WIDGET (self),
-                                            "window.navigate",
-                                            "i",
-                                            ADW_NAVIGATION_DIRECTION_BACK);
-        } else {
-                show_current_user (self);
-        }
+        show_current_user (self);
 }
 
 static const gchar *
@@ -707,13 +699,11 @@ static void
 show_or_hide_back_button (CcUserPanel *self)
 {
         gboolean show;
-        gboolean folded;
 
-        g_object_get(self, "folded", &folded, NULL);
-
-        show = folded || act_user_get_uid (self->selected_user) != getuid();
+        show = act_user_get_uid (self->selected_user) != getuid();
 
         gtk_widget_set_visible (GTK_WIDGET (self->back_button), show);
+        adw_navigation_page_set_can_pop (ADW_NAVIGATION_PAGE (self), !show);
 }
 
 static void
@@ -1287,11 +1277,6 @@ cc_user_panel_init (CcUserPanel *self)
         self->login_screen_settings = settings_or_null ("org.gnome.login-screen");
 
         setup_main_window (self);
-
-        g_signal_connect_swapped (self,
-                          "notify::folded",
-                          G_CALLBACK (show_or_hide_back_button),
-                          self);
 }
 
 static void

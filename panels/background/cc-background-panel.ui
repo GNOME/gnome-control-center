@@ -1,33 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <template class="CcBackgroundPanel" parent="CcPanel">
-    <child type="titlebar">
-      <object class="GtkHeaderBar">
-        <property name="visible">False</property>
-      </object>
-    </child>
-
-    <child type="content">
+    <property name="child">
       <object class="AdwToolbarView">
-        <property name="top-bar-style">raised</property>
         <child type="top">
-          <object class="AdwHeaderBar">
-            <property name="show-end-title-buttons">True</property>
-            <property name="show-start-title-buttons" bind-source="CcBackgroundPanel" bind-property="folded" bind-flags="default|sync-create" />
-            <child type="start">
-              <object class="GtkButton">
-                <property name="visible" bind-source="CcBackgroundPanel" bind-property="folded" bind-flags="default|sync-create" />
-                <property name="icon-name">go-previous-symbolic</property>
-                <property name="action-name">window.navigate</property>
-                <property name="action-target">0</property> <!-- 0: ADW_NAVIGATION_DIRECTION_BACK -->
-              </object>
-            </child>
-            <property name="title-widget">
-              <object class="AdwWindowTitle" id="header_title">
-                <property name="title" translatable="yes">Appearance</property>
-              </object>
-            </property>
-          </object>
+          <object class="AdwHeaderBar"/>
         </child>
 
         <property name="content">
@@ -160,6 +137,6 @@
           </object>
         </property>
       </object>
-    </child>
+    </property>
   </template>
 </interface>

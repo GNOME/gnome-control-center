@@ -15,7 +15,7 @@
       </object>
     </child>
 
-    <child>
+    <property name="child">
       <object class="AdwNavigationView" id="nav_view">
 
         <!-- Displays page -->
@@ -24,7 +24,6 @@
             <property name="title" translatable="yes">Displays</property>
             <property name="child">
               <object class="AdwToolbarView">
-                <property name="top-bar-style">raised</property>
 
                 <child type="top">
                   <object class="AdwHeaderBar" id="apply_titlebar">
@@ -62,25 +61,6 @@
                 <child type="top">
                   <object class="AdwHeaderBar" id="displays_titlebar">
                     <property name="visible" bind-source="CcDisplayPanel" bind-property="showing-apply-titlebar" bind-flags="sync-create|invert-boolean"/>
-                    <property name="show-end-title-buttons">True</property>
-                    <property name="show-start-title-buttons" bind-source="CcDisplayPanel" bind-property="folded" bind-flags="sync-create" />
-                    <child type="start">
-                      <object class="GtkButton">
-                        <property name="tooltip-text" translatable="yes">Back</property>
-                        <property name="visible" bind-source="CcDisplayPanel" bind-property="folded" bind-flags="sync-create" />
-                        <property name="icon-name">go-previous-symbolic</property>
-                        <property name="action-name">window.navigate</property>
-                        <property name="action-target">0</property> <!-- 0: ADW_NAVIGATION_DIRECTION_BACK -->
-                        <accessibility>
-                          <property name="label" translatable="yes">Back</property>
-                        </accessibility>
-                      </object>
-                    </child>
-                    <property name="title-widget">
-                      <object class="AdwWindowTitle">
-                        <property name="title" bind-source="CcDisplayPanel" bind-property="title" bind-flags="sync-create" />
-                      </object>
-                    </property>
                   </object>
                 </child>
 
@@ -194,7 +174,6 @@
             <property name="title" translatable="yes">Night Light</property>
             <property name="child">
               <object class="AdwToolbarView">
-                <property name="top-bar-style">raised</property>
 
                 <child type="top">
                   <object class="AdwHeaderBar">
@@ -236,8 +215,6 @@
                 <child type="top">
                   <object class="AdwHeaderBar" id="night_light_titlebar">
                     <property name="visible" bind-source="CcDisplayPanel" bind-property="showing-apply-titlebar" bind-flags="sync-create|invert-boolean"/>
-                    <property name="show-start-title-buttons" bind-source="CcDisplayPanel" bind-property="folded" bind-flags="sync-create" />
-                    <property name="show-end-title-buttons">True</property>
                   </object>
                 </child>
 
@@ -257,7 +234,6 @@
             <property name="tag">display-settings</property>
             <property name="child">
               <object class="AdwToolbarView">
-                <property name="top-bar-style">raised</property>
 
                 <child type="top">
                   <object class="AdwHeaderBar">
@@ -299,8 +275,6 @@
                 <child type="top">
                   <object class="AdwHeaderBar" id="display_settings_titlebar">
                     <property name="visible" bind-source="CcDisplayPanel" bind-property="showing-apply-titlebar" bind-flags="sync-create|invert-boolean"/>
-                    <property name="show-start-title-buttons" bind-source="CcDisplayPanel" bind-property="folded" bind-flags="sync-create" />
-                    <property name="show-end-title-buttons">True</property>
                   </object>
                 </child>
 
@@ -323,7 +297,7 @@
         </child>
 
       </object>
-    </child>
+    </property>
 
   </template>
 
@@ -332,16 +306,6 @@
     <widgets>
       <widget name="apply_button" />
       <widget name="cancel_button" />
-    </widgets>
-  </object>
-
-  <object class="GtkSizeGroup">
-    <property name="mode">vertical</property>
-    <widgets>
-      <widget name="apply_titlebar" />
-      <widget name="displays_titlebar" />
-      <widget name="display_settings_titlebar" />
-      <widget name="night_light_titlebar" />
     </widgets>
   </object>
 
