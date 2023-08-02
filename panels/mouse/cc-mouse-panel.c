@@ -48,7 +48,7 @@ struct _CcMousePanel
   GtkToggleButton   *primary_button_left;
   GtkToggleButton   *primary_button_right;
   AdwPreferencesPage*preferences;
-  GtkStack          *stack;
+  GtkStack          *title_stack;
   CcIllustratedRow  *tap_to_click_row;
   GtkSwitch         *tap_to_click_switch;
   AdwPreferencesGroup *touchpad_group;
@@ -131,12 +131,14 @@ setup_touchpad_options (CcMousePanel *self)
 
   if (self->have_synaptics || !self->have_touchpad) {
     adw_view_stack_page_set_visible (self->touchpad_stack_page, FALSE);
+    gtk_stack_set_visible_child_name (self->title_stack, "title");
     return;
   }
 
   cc_touchpad_check_capabilities (&have_two_finger_scrolling, &have_edge_scrolling, &have_tap_to_click);
 
   adw_view_stack_page_set_visible (self->touchpad_stack_page, TRUE);
+  gtk_stack_set_visible_child_name (self->title_stack, "switcher");
 
   gtk_widget_set_visible (GTK_WIDGET (self->touchpad_scroll_method_row), have_two_finger_scrolling);
   gtk_widget_set_visible (GTK_WIDGET (self->tap_to_click_row), have_tap_to_click);
@@ -439,7 +441,7 @@ cc_mouse_panel_class_init (CcMousePanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcMousePanel, primary_button_left);
   gtk_widget_class_bind_template_child (widget_class, CcMousePanel, primary_button_right);
   gtk_widget_class_bind_template_child (widget_class, CcMousePanel, preferences);
-  gtk_widget_class_bind_template_child (widget_class, CcMousePanel, stack);
+  gtk_widget_class_bind_template_child (widget_class, CcMousePanel, title_stack);
   gtk_widget_class_bind_template_child (widget_class, CcMousePanel, tap_to_click_row);
   gtk_widget_class_bind_template_child (widget_class, CcMousePanel, tap_to_click_switch);
   gtk_widget_class_bind_template_child (widget_class, CcMousePanel, touchpad_group);
