@@ -444,9 +444,7 @@
                           <object class="GtkBox" id="toolbar_devices">
                             <property name="visible">False</property>
                             <property name="margin_top">6</property>
-                            <property name="margin_bottom">6</property>
-                            <property name="margin_start">6</property>
-                            <property name="margin_end">6</property>
+                            <property name="spacing">6</property>
                             <child>
                               <object class="GtkBox" id="left_button_group_box">
                                 <property name="halign">start</property>
@@ -460,6 +458,7 @@
                                     <property name="has_tooltip">True</property>
                                     <property name="tooltip_text" translatable="yes">Set this profile for all users on this computer</property>
                                     <property name="use_underline">True</property>
+                                    <property name="can-shrink">True</property>
                                   </object>
                                 </child>
                                 <child>
@@ -469,6 +468,7 @@
                                     <property name="tooltip_markup" translatable="yes">Set this profile for all users on this computer</property>
                                     <property name="tooltip_text" translatable="yes">Set this profile for all users on this computer</property>
                                     <property name="use_underline">True</property>
+                                    <property name="can-shrink">True</property>
                                   </object>
                                 </child>
                               </object>
@@ -482,6 +482,7 @@
                                   <object class="GtkButton" id="toolbutton_profile_add">
                                     <property name="label" translatable="yes">_Add profile</property>
                                     <property name="use_underline">True</property>
+                                    <property name="can-shrink">True</property>
                                   </object>
                                 </child>
                                 <child>
@@ -490,18 +491,21 @@
                                     <property name="has_tooltip">True</property>
                                     <property name="tooltip_text" translatable="yes">Calibrate the device</property>
                                     <property name="use_underline">True</property>
+                                    <property name="can-shrink">True</property>
                                   </object>
                                 </child>
                                 <child>
                                   <object class="GtkButton" id="toolbutton_profile_remove">
                                     <property name="label" translatable="yes">_Remove profile</property>
                                     <property name="use_underline">True</property>
+                                    <property name="can-shrink">True</property>
                                   </object>
                                 </child>
                                 <child>
                                   <object class="GtkButton" id="toolbutton_profile_view">
                                     <property name="label" translatable="yes">_View details</property>
                                     <property name="use_underline">True</property>
+                                    <property name="can-shrink">True</property>
                                   </object>
                                 </child>
                               </object>
@@ -673,20 +677,6 @@
     <widgets>
       <widget name="label_assign_warning"/>
       <widget name="scrolledwindow_assign"/>
-    </widgets>
-  </object>
-  <object class="GtkSizeGroup" id="sizegroup_buttons">
-    <widgets>
-      <widget name="toolbutton_profile_add"/>
-      <widget name="toolbutton_device_calibrate"/>
-      <widget name="toolbutton_profile_remove"/>
-      <widget name="toolbutton_profile_view"/>
-    </widgets>
-  </object>
-  <object class="GtkSizeGroup" id="sizegroup_buttons_enable">
-    <widgets>
-      <widget name="toolbutton_device_default"/>
-      <widget name="toolbutton_device_enable"/>
     </widgets>
   </object>
   <object class="GtkSizeGroup" id="sizegroup_combos"/>
