@@ -2,7 +2,7 @@
 <interface>
   <template class="CcSplitRow" parent="CcVerticalRow">
     <child type="content">
-      <object class="GtkBox">
+      <object class="GtkBox" id="box">
         <property name="hexpand">True</property>
         <property name="homogeneous">True</property>
         <property name="spacing">24</property>
@@ -61,6 +61,8 @@
                     <child>
                       <object class="GtkLabel">
                         <property name="xalign">0.0</property>
+                        <property name="wrap">True</property>
+                        <property name="wrap-mode">word-char</property>
                         <binding name="label">
                           <lookup name="default-option-title">CcSplitRow</lookup>
                         </binding>
@@ -72,6 +74,8 @@
                     <child>
                       <object class="GtkLabel">
                         <property name="xalign">0.0</property>
+                        <property name="wrap">True</property>
+                        <property name="wrap-mode">word-char</property>
                         <binding name="label">
                           <lookup name="default-option-subtitle">CcSplitRow</lookup>
                         </binding>
@@ -139,6 +143,8 @@
                     <child>
                       <object class="GtkLabel">
                         <property name="xalign">0.0</property>
+                        <property name="wrap">True</property>
+                        <property name="wrap-mode">word-char</property>
                         <binding name="label">
                           <lookup name="alternative-option-title">CcSplitRow</lookup>
                         </binding>
@@ -150,6 +156,8 @@
                     <child>
                       <object class="GtkLabel">
                         <property name="xalign">0.0</property>
+                        <property name="wrap">True</property>
+                        <property name="wrap-mode">word-char</property>
                         <binding name="label">
                           <lookup name="alternative-option-subtitle">CcSplitRow</lookup>
                         </binding>
@@ -169,4 +177,11 @@
       </object>
     </child>
   </template>
+  <object class="GtkSizeGroup" id="size_group">
+    <property name="mode">vertical</property>
+    <widgets>
+      <widget name="default_option_checkbutton"/>
+      <widget name="alternative_option_checkbutton"/>
+    </widgets>
+  </object>
 </interface>

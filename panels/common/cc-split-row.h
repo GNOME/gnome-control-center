@@ -54,6 +54,11 @@ void         cc_split_row_set_use_default (CcSplitRow *self,
 
 gboolean     cc_split_row_get_use_default (CcSplitRow *self);
 
+void         cc_split_row_set_compact (CcSplitRow *self,
+                                       gboolean    compact);
+
+gboolean     cc_split_row_get_compact (CcSplitRow *self);
+
 const gchar *cc_split_row_get_default_option_title (CcSplitRow *self);
 
 void         cc_split_row_set_default_option_title (CcSplitRow  *self,

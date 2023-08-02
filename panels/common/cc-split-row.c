@@ -26,6 +26,9 @@ struct _CcSplitRow
 {
   CcVerticalRow      parent;
 
+  GtkWidget         *box;
+  GtkSizeGroup      *size_group;
+
   GtkPicture        *default_option_picture;
   GtkPicture        *alternative_option_picture;
 
@@ -41,6 +44,7 @@ struct _CcSplitRow
   gchar             *default_option_subtitle;
 
   gboolean           use_default;
+  gboolean           compact;
 };
 
 G_DEFINE_FINAL_TYPE (CcSplitRow, cc_split_row, CC_TYPE_VERTICAL_ROW);
@@ -49,6 +53,7 @@ enum
 {
   PROP_0,
   PROP_USE_DEFAULT,
+  PROP_COMPACT,
   PROP_ALTERNATIVE_ILLUSTRATION_RESOURCE,
   PROP_ALTERNATIVE_OPTION_TITLE,
   PROP_ALTERNATIVE_OPTION_SUBTITLE,
@@ -162,6 +167,9 @@ cc_split_row_get_property (GObject      *object,
     case PROP_USE_DEFAULT:
       g_value_set_boolean (value, gtk_check_button_get_active (self->default_option_checkbutton));
       break;
+    case PROP_COMPACT:
+      g_value_set_boolean (value, cc_split_row_get_compact (self));
+      break;
     case PROP_ALTERNATIVE_ILLUSTRATION_RESOURCE:
       g_value_set_string (value, cc_split_row_get_alternative_illustration_resource (self));
       break;
@@ -197,6 +205,9 @@ cc_split_row_set_property (GObject      *object,
     {
     case PROP_USE_DEFAULT:
       cc_split_row_set_use_default (self, g_value_get_boolean (value));
+      break;
+    case PROP_COMPACT:
+      cc_split_row_set_compact (self, g_value_get_boolean (value));
       break;
     case PROP_ALTERNATIVE_ILLUSTRATION_RESOURCE:
       cc_split_row_set_alternative_illustration_resource (self, g_value_get_string (value));
@@ -236,6 +247,13 @@ cc_split_row_class_init (CcSplitRowClass *klass)
                           "Use Default",
                           "Use Default",
                           TRUE,
+                          G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS | G_PARAM_EXPLICIT_NOTIFY);
+
+  props[PROP_COMPACT] =
+    g_param_spec_boolean ("compact",
+                          "Compact",
+                          "Compact",
+                          FALSE,
                           G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS | G_PARAM_EXPLICIT_NOTIFY);
 
   props[PROP_ALTERNATIVE_ILLUSTRATION_RESOURCE] =
@@ -279,6 +297,8 @@ cc_split_row_class_init (CcSplitRowClass *klass)
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/common/cc-split-row.ui");
 
+  gtk_widget_class_bind_template_child (widget_class, CcSplitRow, box);
+  gtk_widget_class_bind_template_child (widget_class, CcSplitRow, size_group);
   gtk_widget_class_bind_template_child (widget_class, CcSplitRow, alternative_option_checkbutton);
   gtk_widget_class_bind_template_child (widget_class, CcSplitRow, alternative_option_picture);
   gtk_widget_class_bind_template_child (widget_class, CcSplitRow, default_option_checkbutton);
@@ -365,6 +385,28 @@ gboolean
 cc_split_row_get_use_default (CcSplitRow *self)
 {
   return gtk_check_button_get_active (self->default_option_checkbutton);
+}
+
+void
+cc_split_row_set_compact (CcSplitRow *self,
+                          gboolean    compact)
+{
+  g_return_if_fail (CC_IS_SPLIT_ROW (self));
+
+  self->compact = !!compact;
+
+  gtk_orientable_set_orientation (GTK_ORIENTABLE (self->box),
+                                  compact ? GTK_ORIENTATION_VERTICAL : GTK_ORIENTATION_HORIZONTAL);
+  gtk_size_group_set_mode (self->size_group,
+                           compact ? GTK_SIZE_GROUP_NONE : GTK_SIZE_GROUP_VERTICAL);
+
+  g_object_notify_by_pspec (G_OBJECT (self), props[PROP_COMPACT]);
+}
+
+gboolean
+cc_split_row_get_compact (CcSplitRow *self)
+{
+  return self->compact;
 }
 
 const gchar *
