@@ -59,7 +59,6 @@ struct _PpPrinterEntry
   GCancellable *check_clean_heads_cancellable;
 
   /* Widgets */
-  GtkImage       *printer_icon;
   GtkLabel       *printer_status;
   GtkLabel       *printer_name_label;
   GtkLabel       *printer_model_label;
@@ -234,8 +233,6 @@ supply_levels_draw_cb (GtkDrawingArea *drawing_area,
   int                     i;
 
   context = gtk_widget_get_style_context (GTK_WIDGET (self->supply_drawing_area));
-
-  gtk_render_background (context, cr, 0, 0, width, height);
 
   if (!supply_level_is_empty (self))
     {
@@ -623,7 +620,6 @@ pp_printer_entry_get_size_group_widgets (PpPrinterEntry *self)
 {
   GSList *widgets = NULL;
 
-  widgets = g_slist_prepend (widgets, self->printer_icon);
   widgets = g_slist_prepend (widgets, self->printer_location_label);
   widgets = g_slist_prepend (widgets, self->printer_model_label);
   widgets = g_slist_prepend (widgets, self->printer_inklevel_label);
@@ -684,7 +680,6 @@ pp_printer_entry_update (PpPrinterEntry *self,
   const gchar      *printer_uri = NULL;
   const gchar      *device_uri = NULL;
   const gchar      *location = NULL;
-  g_autofree gchar *printer_icon_name = NULL;
   const gchar      *printer_make_and_model = NULL;
   const gchar      *reason = NULL;
   gchar           **printer_reasons = NULL;
@@ -884,11 +879,6 @@ pp_printer_entry_update (PpPrinterEntry *self,
         break;
     }
 
-  if (printer_is_local (printer_type, device_uri))
-    printer_icon_name = g_strdup ("printer");
-  else
-    printer_icon_name = g_strdup ("printer-network");
-
   g_free (self->printer_location);
   self->printer_location = g_strdup (location);
 
@@ -898,7 +888,6 @@ pp_printer_entry_update (PpPrinterEntry *self,
   g_free (self->printer_hostname);
   self->printer_hostname = printer_get_hostname (printer_type, device_uri, printer_uri);
 
-  gtk_image_set_from_icon_name (self->printer_icon, printer_icon_name);
   gtk_label_set_text (self->printer_status, printer_status);
   gtk_label_set_text (self->printer_name_label, instance);
   g_signal_handlers_block_by_func (self->printer_default_checkbutton, set_as_default_printer, self);
@@ -965,7 +954,6 @@ pp_printer_entry_class_init (PpPrinterEntryClass *klass)
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/printers/printer-entry.ui");
 
-  gtk_widget_class_bind_template_child (widget_class, PpPrinterEntry, printer_icon);
   gtk_widget_class_bind_template_child (widget_class, PpPrinterEntry, printer_name_label);
   gtk_widget_class_bind_template_child (widget_class, PpPrinterEntry, printer_status);
   gtk_widget_class_bind_template_child (widget_class, PpPrinterEntry, printer_model_label);
