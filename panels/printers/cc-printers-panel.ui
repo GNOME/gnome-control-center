@@ -145,17 +145,19 @@
                             <child>
                               <object class="GtkScrolledWindow" id="scrolled_window">
                                 <property name="hscrollbar-policy">never</property>
-                                <property name="min-content-height">490</property>
                                 <property name="vexpand">True</property>
                                 <child>
-                                  <object class="GtkBox">
+                                  <object class="AdwClamp">
                                     <child>
                                       <object class="GtkListBox" id="content">
-                                        <property name="selection-mode">GTK_SELECTION_NONE</property>
-                                        <property name="margin-top">32</property>
-                                        <property name="margin-bottom">32</property>
+                                        <property name="selection-mode">none</property>
+                                        <property name="valign">start</property>
+                                        <property name="margin-top">24</property>
+                                        <property name="margin-bottom">24</property>
+                                        <property name="margin-start">12</property>
+                                        <property name="margin-end">12</property>
                                         <style>
-                                          <class name="background"/>
+                                          <class name="boxed-list"/>
                                         </style>
                                       </object>
                                     </child>
