@@ -35,6 +35,7 @@
                       <object class="GtkButton" id="cancel_button">
                         <property name="use-underline">True</property>
                         <property name="label" translatable="yes">_Cancel</property>
+                        <property name="can-shrink">True</property>
                         <signal name="clicked" handler="cancel_current_configuration" object="CcDisplayPanel" swapped="yes" />
                       </object>
                     </child>
@@ -47,6 +48,7 @@
                       <object class="GtkButton" id="apply_button">
                         <property name="use-underline">True</property>
                         <property name="label" translatable="yes">_Apply</property>
+                        <property name="can-shrink">True</property>
                         <signal name="clicked" handler="apply_current_configuration" object="CcDisplayPanel" swapped="yes" />
                         <style>
                           <class name="suggested-action" />
@@ -185,6 +187,7 @@
                       <object class="GtkButton">
                         <property name="use-underline">True</property>
                         <property name="label" translatable="yes">_Cancel</property>
+                       <property name="can-shrink">True</property>
                         <signal name="clicked" handler="cancel_current_configuration" object="CcDisplayPanel" swapped="yes" />
                       </object>
                     </child>
@@ -200,6 +203,7 @@
                       <object class="GtkButton">
                         <property name="use-underline">True</property>
                         <property name="label" translatable="yes">_Apply</property>
+                        <property name="can-shrink">True</property>
                         <signal name="clicked" handler="apply_current_configuration" object="CcDisplayPanel" swapped="yes" />
                         <property name="sensitive" bind-source="apply_button" bind-property="sensitive" bind-flags="sync-create"/>
                         <style>
@@ -245,6 +249,7 @@
                       <object class="GtkButton">
                         <property name="use-underline">True</property>
                         <property name="label" translatable="yes">_Cancel</property>
+                        <property name="can-shrink">True</property>
                         <signal name="clicked" handler="cancel_current_configuration" object="CcDisplayPanel" swapped="yes" />
                       </object>
                     </child>
@@ -260,6 +265,7 @@
                       <object class="GtkButton">
                         <property name="use-underline">True</property>
                         <property name="label" translatable="yes">_Apply</property>
+                        <property name="can-shrink">True</property>
                         <signal name="clicked" handler="apply_current_configuration" object="CcDisplayPanel" swapped="yes" />
                         <property name="sensitive" bind-source="apply_button" bind-property="sensitive" bind-flags="sync-create"/>
                         <style>
