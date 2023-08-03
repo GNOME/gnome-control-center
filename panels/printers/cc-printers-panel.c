@@ -1139,6 +1139,8 @@ filter_function (GtkListBoxRow *row,
         }
     }
 
+  gtk_widget_set_visible (GTK_WIDGET (row), retval);
+
   return retval;
 }
 
