@@ -12,6 +12,7 @@
               <object class="GtkButton" id="cancel_button">
                 <property name="visible" bind-source="CcNetProxyPage" bind-property="modified" bind-flags="sync-create"/>
                 <property name="label" translatable="yes">Cancel</property>
+                <property name="can-shrink">True</property>
                 <signal name="clicked" handler="cancel_clicked_cb" swapped="yes"/>
               </object>
             </child>
@@ -20,6 +21,7 @@
               <object class="GtkButton" id="save_button">
                 <property name="visible" bind-source="CcNetProxyPage" bind-property="modified" bind-flags="sync-create"/>
                 <property name="label" translatable="yes">Save</property>
+                <property name="can-shrink">True</property>
                 <style>
                   <class name="suggested-action"/>
                 </style>
