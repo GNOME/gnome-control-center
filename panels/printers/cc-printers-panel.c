@@ -116,6 +116,7 @@ struct _CcPrintersPanel
   GVariant   *action;
 
   GtkSizeGroup *size_group;
+  gboolean      compact;
 };
 
 CC_PANEL_REGISTER (CcPrintersPanel, cc_printers_panel)
@@ -128,7 +129,8 @@ typedef struct
 
 enum {
   PROP_0,
-  PROP_PARAMETERS
+  PROP_PARAMETERS,
+  PROP_COMPACT,
 };
 
 static void actualize_printers_list (CcPrintersPanel *self);
@@ -193,8 +195,14 @@ cc_printers_panel_get_property (GObject    *object,
                                GValue     *value,
                                GParamSpec *pspec)
 {
+  CcPrintersPanel *self = CC_PRINTERS_PANEL (object);
+
   switch (property_id)
     {
+      case PROP_COMPACT:
+        g_value_set_boolean (value, self->compact);
+        break;
+
       default:
         G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
     }
@@ -228,6 +236,10 @@ cc_printers_panel_set_property (GObject      *object,
           }
         break;
 
+      case PROP_COMPACT:
+        self->compact = g_value_get_boolean (value);
+        break;
+
       default:
         G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
     }
@@ -243,6 +255,7 @@ cc_printers_panel_constructed (GObject *object)
 
   shell = cc_panel_get_shell (CC_PANEL (self));
 
+  gtk_search_bar_connect_entry (self->search_bar, self->search_entry);
   gtk_search_bar_set_key_capture_widget (self->search_bar,
                                          GTK_WIDGET (shell));
 }
@@ -720,6 +733,10 @@ add_printer_entry (CcPrintersPanel *self,
                            self,
                            G_CONNECT_SWAPPED);
 
+  g_object_bind_property (self, "compact",
+                          printer_entry, "compact",
+                          G_BINDING_SYNC_CREATE);
+
   gtk_list_box_insert (self->content, GTK_WIDGET (printer_entry), -1);
 
   g_hash_table_insert (self->printer_entries, g_strdup (printer.name), printer_entry);
@@ -1183,6 +1200,14 @@ cc_printers_panel_class_init (CcPrintersPanelClass *klass)
   panel_class->get_help_uri = cc_printers_panel_get_help_uri;
 
   g_object_class_override_property (object_class, PROP_PARAMETERS, "parameters");
+
+  g_object_class_install_property (object_class,
+                                   PROP_COMPACT,
+                                   g_param_spec_boolean ("compact",
+                                                         "compact",
+                                                         "compact",
+                                                         FALSE,
+                                                         G_PARAM_READWRITE));
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/printers/cc-printers-panel.ui");
 

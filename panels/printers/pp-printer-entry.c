@@ -59,6 +59,7 @@ struct _PpPrinterEntry
   GCancellable *check_clean_heads_cancellable;
 
   /* Widgets */
+  GtkOrientable  *header_box;
   GtkLabel       *printer_status;
   GtkLabel       *printer_name_label;
   GtkLabel       *printer_model_label;
@@ -73,6 +74,7 @@ struct _PpPrinterEntry
   GtkLabel       *error_status;
 
   gboolean        is_default;
+  gboolean        compact;
 
   /* Dialogs */
   PpJobsDialog    *pp_jobs_dialog;
@@ -103,6 +105,7 @@ static guint signals[LAST_SIGNAL] = { 0 };
 enum {
   PROP_0,
   PROP_DEFAULT,
+  PROP_COMPACT,
 };
 
 static InkLevelData *
@@ -936,6 +939,23 @@ pp_printer_entry_update (PpPrinterEntry *self,
 }
 
 static void
+set_compact (PpPrinterEntry *self,
+             gboolean        compact)
+{
+  compact = !!compact;
+
+  if (self->compact == compact)
+    return;
+
+  self->compact = compact;
+
+  if (compact)
+    gtk_orientable_set_orientation (self->header_box, GTK_ORIENTATION_VERTICAL);
+  else
+    gtk_orientable_set_orientation (self->header_box, GTK_ORIENTATION_HORIZONTAL);
+}
+
+static void
 pp_printer_entry_dispose (GObject *object)
 {
   PpPrinterEntry *self = PP_PRINTER_ENTRY (object);
@@ -968,6 +988,9 @@ pp_printer_entry_get_property (GObject    *object,
     case PROP_DEFAULT:
       g_value_set_boolean (value, self->is_default);
       break;
+    case PROP_COMPACT:
+      g_value_set_boolean (value, self->compact);
+      break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
     }
@@ -986,6 +1009,9 @@ pp_printer_entry_set_property (GObject      *object,
     case PROP_DEFAULT:
       set_as_default_printer (self);
       break;
+    case PROP_COMPACT:
+      set_compact (self, g_value_get_boolean (value));
+      break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
     }
@@ -999,6 +1025,7 @@ pp_printer_entry_class_init (PpPrinterEntryClass *klass)
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/printers/printer-entry.ui");
 
+  gtk_widget_class_bind_template_child (widget_class, PpPrinterEntry, header_box);
   gtk_widget_class_bind_template_child (widget_class, PpPrinterEntry, printer_name_label);
   gtk_widget_class_bind_template_child (widget_class, PpPrinterEntry, printer_status);
   gtk_widget_class_bind_template_child (widget_class, PpPrinterEntry, printer_model_label);
@@ -1026,6 +1053,14 @@ pp_printer_entry_class_init (PpPrinterEntryClass *klass)
                                                          "default",
                                                          FALSE,
                                                          G_PARAM_READWRITE | G_PARAM_EXPLICIT_NOTIFY));
+
+  g_object_class_install_property (object_class,
+                                   PROP_COMPACT,
+                                   g_param_spec_boolean ("compact",
+                                                         "compact",
+                                                         "compact",
+                                                         FALSE,
+                                                         G_PARAM_READWRITE));
 
   signals[IS_DEFAULT_PRINTER] =
     g_signal_new ("printer-changed",
