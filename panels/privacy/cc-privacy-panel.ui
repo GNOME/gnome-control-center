@@ -36,6 +36,7 @@
                   <object class="AdwPreferencesPage">
                     <child>
                       <object class="AdwPreferencesGroup">
+                        <property name="title" translatable="yes">System</property>
 
                         <child>
                           <object class="CcListRow">
@@ -60,6 +61,39 @@
                             <property name="action-target">'location-page'</property>
                           </object>
                         </child>
+
+                        <child>
+                          <object class="CcListRow">
+                            <property name="title" translatable="yes">_File History &amp;amp; Trash</property>
+                            <property name="subtitle" translatable="yes">Control data and files that are kept on your device</property>
+                            <property name="icon-name">trash-symbolic</property>
+                            <property name="use-underline">True</property>
+                            <property name="show-arrow">True</property>
+                            <property name="action-name">navigation.push</property>
+                            <property name="action-target">'usage-page'</property>
+                          </object>
+                        </child>
+
+                        <child>
+                          <object class="CcListRow">
+                            <property name="title" translatable="yes">_Diagnostics</property>
+                            <property name="subtitle" translatable="yes">Settings for automatic problem reporting</property>
+                            <property name="icon-name">diagnostics-symbolic</property>
+                            <property name="use-underline">True</property>
+                            <property name="show-arrow">True</property>
+                            <property name="action-name">navigation.push</property>
+                            <property name="action-target">'diagnostics-page'</property>
+                            <binding name="visible">
+                              <lookup name="visible">diagnostics_page</lookup>
+                            </binding>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+
+                    <child>
+                      <object class="AdwPreferencesGroup">
+                        <property name="title" translatable="yes">Devices</property>
 
                         <child>
                           <object class="CcListRow">
@@ -95,33 +129,6 @@
                             <property name="show-arrow">True</property>
                             <property name="action-name">navigation.push</property>
                             <property name="action-target">'bolt-page'</property>
-                          </object>
-                        </child>
-
-                        <child>
-                          <object class="CcListRow">
-                            <property name="title" translatable="yes">_File History &amp;amp; Trash</property>
-                            <property name="subtitle" translatable="yes">Control data and files that are kept on your device</property>
-                            <property name="icon-name">trash-symbolic</property>
-                            <property name="use-underline">True</property>
-                            <property name="show-arrow">True</property>
-                            <property name="action-name">navigation.push</property>
-                            <property name="action-target">'usage-page'</property>
-                          </object>
-                        </child>
-
-                        <child>
-                          <object class="CcListRow">
-                            <property name="title" translatable="yes">_Diagnostics</property>
-                            <property name="subtitle" translatable="yes">Settings for automatic problem reporting</property>
-                            <property name="icon-name">diagnostics-symbolic</property>
-                            <property name="use-underline">True</property>
-                            <property name="show-arrow">True</property>
-                            <property name="action-name">navigation.push</property>
-                            <property name="action-target">'diagnostics-page'</property>
-                            <binding name="visible">
-                              <lookup name="visible">diagnostics_page</lookup>
-                            </binding>
                           </object>
                         </child>
 
