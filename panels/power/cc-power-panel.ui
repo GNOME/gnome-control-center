@@ -394,15 +394,12 @@
     <property name="resizable">False</property>
     <property name="hide-on-close">True</property>
     <property name="content">
-      <object class="GtkBox">
-        <property name="orientation">vertical</property>
-        <child>
-          <object class="AdwHeaderBar">
-            <property name="show-start-title-buttons">True</property>
-            <property name="show-end-title-buttons">True</property>
-          </object>
+      <object class="AdwToolbarView">
+        <property name="top-bar-style">raised</property>
+        <child type="top">
+          <object class="AdwHeaderBar"/>
         </child>
-        <child>
+        <property name="content">
           <object class="AdwPreferencesPage" id="battery_health_page">
             <property name="description" translatable="yes">Current capacity indicates how much charge the battery can currently store, compared to when it was new.</property>
             <signal name="keynav-failed" handler="keynav_failed_cb" object="CcPowerPanel" swapped="yes"/>
@@ -410,7 +407,7 @@
               <class name="boxed-list"/>
             </style>
           </object>
-        </child>
+        </property>
       </object>
     </property>
   </object>
