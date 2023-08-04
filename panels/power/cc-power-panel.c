@@ -665,7 +665,7 @@ get_battery_health_category (UpDevice *device)
   else if (capacity > 0)
     category = _("Poor");
   else
-    category = _("Unavailable");
+    category = NULL;
 
   return category;
 }
@@ -715,11 +715,16 @@ build_battery_health_dialog (CcPowerPanel *self)
   for (i = 0; i < num_batteries; i++)
     {
       gboolean is_present = FALSE;
+      const gchar *capacity = NULL;
 
       device = g_ptr_array_index (self->devices, i);
 
       g_object_get (device, "is-present", &is_present, NULL);
       if (!is_present)
+        continue;
+
+      capacity = get_battery_health_category (device);
+      if (capacity == NULL)
         continue;
 
       adw_preferences_page_add (self->battery_health_page, create_battery_group (device));
