@@ -28,14 +28,14 @@
 
 struct _CcFirmwareSecurityBootDialog
 {
-  GtkDialog         parent;
+  AdwWindow         parent;
 
   GtkWidget        *secure_boot_icon;
   GtkWidget        *secure_boot_title;
   GtkWidget        *secure_boot_description;
 };
 
-G_DEFINE_TYPE (CcFirmwareSecurityBootDialog, cc_firmware_security_boot_dialog, GTK_TYPE_DIALOG)
+G_DEFINE_TYPE (CcFirmwareSecurityBootDialog, cc_firmware_security_boot_dialog, ADW_TYPE_WINDOW)
 
 static void
 cc_firmware_security_boot_dialog_class_init (CcFirmwareSecurityBootDialogClass *klass)
@@ -63,9 +63,7 @@ cc_firmware_security_boot_dialog_new (SecureBootState secure_boot_state)
   CcFirmwareSecurityBootDialog *dialog;
   g_autofree gchar *status_description = NULL;
 
-  dialog = g_object_new (CC_TYPE_FIRMWARE_SECURITY_BOOT_DIALOG,
-                         "use-header-bar", TRUE,
-                         NULL);
+  dialog = g_object_new (CC_TYPE_FIRMWARE_SECURITY_BOOT_DIALOG, NULL);
 
   switch (secure_boot_state)
     {

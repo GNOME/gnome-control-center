@@ -28,10 +28,10 @@
 
 struct _CcFirmwareSecurityHelpDialog
 {
-  GtkWindow  parent;
+  AdwWindow  parent;
 };
 
-G_DEFINE_TYPE (CcFirmwareSecurityHelpDialog, cc_firmware_security_help_dialog, GTK_TYPE_WINDOW)
+G_DEFINE_TYPE (CcFirmwareSecurityHelpDialog, cc_firmware_security_help_dialog, ADW_TYPE_WINDOW)
 
 
 static void
