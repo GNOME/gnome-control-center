@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2023-07-27 23:02+0000\n"
-"PO-Revision-Date: 2023-07-28 07:05+0200\n"
+"POT-Creation-Date: 2023-08-06 14:12+0000\n"
+"PO-Revision-Date: 2023-08-06 19:59+0200\n"
 "Last-Translator: Ekaterine Papava <papava.e@gtu.ge>\n"
 "Language-Team: Georgian <(nothing)>\n"
 "Language: ka\n"
@@ -40,8 +40,8 @@ msgid "Session Bus"
 msgstr "სესიების მატარებელი"
 
 #: panels/applications/cc-applications-panel.c:827
-#: panels/power/cc-power-panel.ui:75 panels/thunderbolt/cc-bolt-panel.ui:233
-#: panels/thunderbolt/cc-bolt-panel.ui:277
+#: panels/power/cc-power-panel.ui:96 panels/privacy/cc-bolt-page.ui:241
+#: panels/privacy/cc-bolt-page.ui:285 panels/privacy/cc-privacy-panel.ui:96
 msgid "Devices"
 msgstr "მოწყობილობა"
 
@@ -79,8 +79,8 @@ msgstr "ფაილური სისტემა"
 
 #: panels/applications/cc-applications-panel.c:847
 #: panels/keyboard/01-launchers.xml.in:6
-#: shell/appdata/org.gnome.Settings.appdata.xml.in:7 shell/cc-window.c:246
-#: shell/cc-window.c:918 shell/cc-window.ui:22
+#: shell/appdata/org.gnome.Settings.appdata.xml.in:7 shell/cc-window.c:242
+#: shell/cc-window.c:911 shell/cc-window.ui:23
 #: shell/org.gnome.Settings.desktop.in:3
 msgid "Settings"
 msgstr "მორგება"
@@ -143,8 +143,8 @@ msgstr "აპის _დეტალები"
 #: panels/keyboard/cc-input-chooser.ui:76
 #: panels/printers/new-printer-dialog.ui:230
 #: panels/region/cc-format-chooser.ui:82
-#: panels/search/gnome-search-panel.desktop.in:3 shell/cc-window.ui:41
-#: shell/cc-window.ui:43
+#: panels/search/gnome-search-panel.desktop.in:3 shell/cc-window.ui:42
+#: shell/cc-window.ui:44
 msgid "Search"
 msgstr "ძებნა"
 
@@ -251,7 +251,7 @@ msgstr "ჩაიწერეთ ხმა მიკროფონით"
 
 #: panels/applications/cc-applications-panel.ui:206
 #: panels/applications/cc-applications-panel.ui:213
-#: panels/location/gnome-location-panel.desktop.in:3
+#: panels/privacy/cc-location-page.ui:4
 msgid "Location Services"
 msgstr "მდებარეობის სერვისები"
 
@@ -282,11 +282,11 @@ msgstr "საცავი"
 msgid "Search apps"
 msgstr "აპების ძებნა"
 
-#: panels/applications/cc-applications-panel.ui:305 shell/cc-panel-list.ui:109
+#: panels/applications/cc-applications-panel.ui:305 shell/cc-panel-list.ui:64
 msgid "No results found"
 msgstr "შედეგების გარეშე"
 
-#: panels/applications/cc-applications-panel.ui:315 shell/cc-panel-list.ui:118
+#: panels/applications/cc-applications-panel.ui:315 shell/cc-panel-list.ui:73
 msgid "Try a different search"
 msgstr "სცადეთ სხვა ძებნა"
 
@@ -455,42 +455,6 @@ msgstr "ჩართეთ და გამორთეთ ბლუთუზი
 msgid "share;sharing;bluetooth;obex;"
 msgstr "share;sharing;bluetooth;obex;"
 
-#: panels/camera/cc-camera-panel.ui:11
-msgid "_Camera Access"
-msgstr "_კამერასთან წვდომა"
-
-#: panels/camera/cc-camera-panel.ui:12
-msgid "Allow permitted apps to use cameras"
-msgstr "დაშვებული აპებისთვის კამერის გამოყენების უფლების მიცემა"
-
-#: panels/camera/cc-camera-panel.ui:21 panels/location/cc-location-panel.ui:22
-#: panels/microphone/cc-microphone-panel.ui:21
-msgid "Permitted Apps"
-msgstr "დაშვებული აპები"
-
-#: panels/camera/cc-camera-panel.ui:22
-msgid ""
-"The following sandboxed apps have been given permission to use cameras. Apps "
-"that are not sandboxed can use cameras without asking for permission."
-msgstr ""
-
-#: panels/camera/cc-camera-panel.ui:36
-msgid "No sandboxed apps have asked for camera access"
-msgstr ""
-
-#: panels/camera/gnome-camera-panel.desktop.in:3
-msgid "Cameras"
-msgstr "კამერები"
-
-#: panels/camera/gnome-camera-panel.desktop.in:4
-msgid "Restrict camera access"
-msgstr "კამერასთან წვდომის შეზღუდვა"
-
-#. Translators: Search terms to find the Cameras panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
-#: panels/camera/gnome-camera-panel.desktop.in:16
-msgid "camera;photos;video;webcam;lock;private;privacy;"
-msgstr "camera;photos;video;webcam;lock;private;privacy;"
-
 #. TRANSLATORS: The user has to attach the sensor to the screen
 #: panels/color/cc-color-calibrate.c:347
 msgid "Place your calibration device over the square and press “Start”"
@@ -580,9 +544,8 @@ msgstr "ეკრანის კალიბრაცია"
 #: panels/network/connection-editor/connection-editor.ui:14
 #: panels/network/net-device-wifi.c:862
 #: panels/printers/new-printer-dialog.ui:50
-#: panels/printers/pp-details-dialog.c:267
+#: panels/printers/pp-details-dialog.c:267 panels/privacy/cc-usage-page.c:136
 #: panels/region/cc-format-chooser.ui:24 panels/sharing/cc-sharing-panel.c:447
-#: panels/usage/cc-usage-panel.c:139
 #: panels/user-accounts/cc-add-user-dialog.ui:25
 #: panels/user-accounts/cc-avatar-chooser.c:96
 #: panels/user-accounts/cc-fingerprint-dialog.ui:32
@@ -740,8 +703,7 @@ msgstr "მოწყობილობის ტიპი ამჟამად 
 
 #. Translators: This will be presented as the text of a link to the documentation
 #. translators: Text used in link to privacy policy
-#: panels/color/cc-color-panel.c:1991
-#: panels/diagnostics/cc-diagnostics-panel.c:137
+#: panels/color/cc-color-panel.c:1991 panels/privacy/cc-diagnostics-page.c:122
 msgid "Learn more"
 msgstr "მეტის გაგება"
 
@@ -1198,7 +1160,7 @@ msgid_plural "%d hours"
 msgstr[0] "%d საათი"
 
 #. Translators: Option for "Blank Screen" in "Power" panel
-#: panels/common/cc-util.c:183 panels/power/cc-power-panel.c:855
+#: panels/common/cc-util.c:183 panels/power/cc-power-panel.c:959
 #, c-format
 msgid "%d minute"
 msgid_plural "%d minutes"
@@ -1336,11 +1298,11 @@ msgstr "დროის ფორმატი"
 
 #: panels/datetime/cc-datetime-panel.ui:214
 msgid "Clock &amp; Calendar"
-msgstr ""
+msgstr "საათი &amp; კალენდარი"
 
 #: panels/datetime/cc-datetime-panel.ui:217
 msgid "Week Day"
-msgstr ""
+msgstr "კვირის დღე"
 
 #: panels/datetime/cc-datetime-panel.ui:229
 msgid "Date"
@@ -1433,7 +1395,7 @@ msgstr ""
 
 #: panels/default-apps/cc-default-apps-panel.ui:8
 msgid "Links &amp; Files"
-msgstr ""
+msgstr "ბმულები &amp; ფაილები"
 
 #: panels/default-apps/cc-default-apps-panel.ui:12
 msgid "_Web"
@@ -1462,7 +1424,7 @@ msgstr "_ფოტოები"
 
 #: panels/default-apps/cc-default-apps-panel.ui:59
 msgid "_Calls"
-msgstr ""
+msgstr "_ზარები"
 
 #: panels/default-apps/cc-default-apps-panel.ui:67
 msgid "_SMS"
@@ -1481,44 +1443,15 @@ msgstr "ნაგულისხმევი აპლიკაციები�
 msgid "default;application;preferred;media;"
 msgstr "default;application;preferred;media;"
 
-#. translators: The first '%s' is the distributor's name, such as 'Fedora', the second '%s' is a link to the privacy policy
-#: panels/diagnostics/cc-diagnostics-panel.c:139
-#, c-format
-msgid ""
-"Sending reports of technical problems helps us improve %s. Reports are sent "
-"anonymously and are scrubbed of personal data. %s"
-msgstr ""
-
-#: panels/diagnostics/cc-diagnostics-panel.ui:8
-msgid "Problem Reporting"
-msgstr "პრობლემის გადაგზავნა"
-
-#: panels/diagnostics/cc-diagnostics-panel.ui:11
-msgid "_Automatic Problem Reporting"
-msgstr "პრობლემის ავტომატური _ანგარიში"
-
-#: panels/diagnostics/gnome-diagnostics-panel.desktop.in:3
-msgid "Diagnostics"
-msgstr "დიაგნოსტიკა"
-
-#: panels/diagnostics/gnome-diagnostics-panel.desktop.in:4
-msgid "Settings for automatically problem reporting"
-msgstr "პრობლემების ავტომატური გადაგზავნის პარამეტრები"
-
-#. Translators: Search terms to find the Diagnostics panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
-#: panels/diagnostics/gnome-diagnostics-panel.desktop.in:16
-msgid "diagnostics;crash;"
-msgstr "დიაგნოსტიკა;ავარია;"
-
 #: panels/display/cc-display-panel.c:495
 #: panels/notifications/cc-notifications-panel.c:214
-#: panels/power/cc-power-panel.c:743 panels/power/cc-power-panel.c:750
+#: panels/power/cc-power-panel.c:847 panels/power/cc-power-panel.c:854
 msgid "On"
 msgstr "ჩართული"
 
 #: panels/display/cc-display-panel.c:497 panels/network/cc-net-proxy-page.c:181
 #: panels/notifications/cc-notifications-panel.c:214
-#: panels/power/cc-power-panel.c:737 panels/power/cc-power-panel.c:748
+#: panels/power/cc-power-panel.c:841 panels/power/cc-power-panel.c:852
 msgid "Off"
 msgstr "გამორთული"
 
@@ -1541,7 +1474,7 @@ msgstr "შეიძლება აპარატურული შეზღ�
 #: panels/mouse/cc-mouse-panel.ui:17 panels/mouse/cc-mouse-panel.ui:23
 #: panels/network/cc-network-panel.ui:17 panels/network/cc-wifi-panel.ui:11
 #: panels/network/cc-wifi-panel.ui:17 panels/printers/new-printer-dialog.ui:64
-#: panels/region/cc-format-chooser.ui:37
+#: panels/privacy/cc-privacy-panel.ui:28 panels/region/cc-format-chooser.ui:37
 #: panels/universal-access/cc-ua-panel.ui:16
 #: panels/universal-access/cc-ua-panel.ui:20
 #: panels/user-accounts/cc-fingerprint-dialog.ui:44
@@ -1617,7 +1550,7 @@ msgstr "%.2lf ჰც"
 #. TRANSLATORS: if the function is enabled through BIOS or OS settings.
 #. TRANSLATORS: Status of Parental Controls setup
 #: panels/display/cc-display-settings.ui:23
-#: panels/firmware-security/cc-firmware-security-utils.c:45
+#: panels/privacy/cc-firmware-security-utils.c:45
 #: panels/user-accounts/cc-user-panel.c:767
 #: panels/user-accounts/cc-user-panel.c:889
 #: panels/wwan/cc-wwan-device-page.c:475
@@ -1749,379 +1682,17 @@ msgid ""
 "redshift;color;sunset;sunrise;"
 msgstr ""
 
-#. TRANSLATORS: secure boot refers to the system firmware security mode
-#: panels/firmware-security/cc-firmware-security-boot-dialog.c:74
-#: panels/firmware-security/cc-firmware-security-panel.c:119
-msgid "Secure Boot is Active"
-msgstr "დაცული ჩატვირთვა ჩართულია"
-
-#. TRANSLATORS: this is the first section of the decription
-#: panels/firmware-security/cc-firmware-security-boot-dialog.c:79
-msgid ""
-"Secure boot prevents malicious software from being loaded when the device "
-"starts. It is currently turned on and is functioning correctly."
-msgstr ""
-
-#. TRANSLATORS: secure boot refers to the system firmware security mode
-#: panels/firmware-security/cc-firmware-security-boot-dialog.c:85
-msgid "Secure Boot Has Problems"
-msgstr "დაცული ჩარტვირთვის პრობლემები"
-
-#. TRANSLATORS: this is the first section of the decription.
-#: panels/firmware-security/cc-firmware-security-boot-dialog.c:89
-msgid ""
-"Secure boot prevents malicious software from being loaded when the device "
-"starts. It is currently turned on, but will not work due to having an "
-"invalid key."
-msgstr ""
-
-#. TRANSLATORS: this is the second section of description.
-#: panels/firmware-security/cc-firmware-security-boot-dialog.c:92
-msgid ""
-"Secure boot problems can often be resolved from your computer's UEFI "
-"firmware settings (BIOS) and your hardware manufacturer may provide "
-"information on how to do this."
-msgstr ""
-
-#. TRANSLATORS: this is the third section of description.
-#: panels/firmware-security/cc-firmware-security-boot-dialog.c:95
-msgid "For help, contact your hardware manufacturer or IT support provider."
-msgstr ""
-
-#. TRANSLATORS: secure boot refers to the system firmware security mode
-#: panels/firmware-security/cc-firmware-security-boot-dialog.c:101
-msgid "Secure Boot is Turned Off"
-msgstr "დაცული ჩატვირთვა გამორთულია"
-
-#. TRANSLATORS: this is the first section of the description.
-#: panels/firmware-security/cc-firmware-security-boot-dialog.c:105
-msgid ""
-"Secure boot prevents malicious software from being loaded when the device "
-"starts. It is currently turned off."
-msgstr ""
-
-#. TRANSLATORS: this is the second section of the description.
-#: panels/firmware-security/cc-firmware-security-boot-dialog.c:108
-msgid ""
-"Secure boot can often be turned on from your computer's UEFI firmware "
-"settings (BIOS). For help, contact your hardware manufacturer or IT support "
-"provider."
-msgstr ""
-
-#: panels/firmware-security/cc-firmware-security-boot-dialog.ui:53
-msgid ""
-"Secure boot prevents malicious software from being loaded when the device "
-"starts.\n"
-"\n"
-"For more information, contact the hardware manufacturer or IT support."
-msgstr ""
-
-#. TRANSLATORS: in reference to firmware protection: 0/4 stars
-#: panels/firmware-security/cc-firmware-security-dialog.c:113
-#: panels/firmware-security/cc-firmware-security-panel.c:542
-msgid "Checks Failed"
-msgstr "წარუმატებელი შემოწმებები"
-
-#. TRANSLATORS: This is the description to describe the failure on
-#. checking the security items.
-#: panels/firmware-security/cc-firmware-security-dialog.c:116
-msgid ""
-"Hardware does not pass checks. This means that you are not protected against "
-"common hardware security issues.\n"
-"\n"
-"It may be possible to resolve hardware security issues by updating your "
-"firmware or changing device configuration options. However, failures can "
-"stem from the physical hardware itself, and may not be reversible."
-msgstr ""
-
-#. TRANSLATORS: in reference to firmware protection: 1/4 stars
-#: panels/firmware-security/cc-firmware-security-dialog.c:127
-#: panels/firmware-security/cc-firmware-security-panel.c:549
-msgid "Checks Passed"
-msgstr "შემოწმებები გავლილია"
-
-#. TRANSLATORS: This description describes the device passing the
-#. minimum requirement of security check.
-#: panels/firmware-security/cc-firmware-security-dialog.c:130
-msgid ""
-"This device meets basic security requirements. Its hardware has protection "
-"against some of the most common security threats."
-msgstr ""
-
-#. TRANSLATORS: in reference to firmware protection: 2~4 stars
-#: panels/firmware-security/cc-firmware-security-dialog.c:141
-#: panels/firmware-security/cc-firmware-security-panel.c:558
-msgid "Protected"
-msgstr "დაცული"
-
-#. TRANSLATOR: This description describes the devices passing
-#. the extended security check.
-#: panels/firmware-security/cc-firmware-security-dialog.c:144
-msgid ""
-"This device passes current security tests. Its hardware is protected against "
-"the majority of security threats."
-msgstr ""
-
-#. TRANSLATORS: in reference to firmware protection: ??? stars
-#: panels/firmware-security/cc-firmware-security-dialog.c:152
-#: panels/firmware-security/cc-firmware-security-panel.c:565
-msgid "Checks Unavailable"
-msgstr "შემოწმებები მიუწვდომელია"
-
-#. TRANSLATORS: When the security result is unavailable, this description is shown.
-#: panels/firmware-security/cc-firmware-security-dialog.c:154
-msgid ""
-"Device security checks are not available for this device. It is not possible "
-"to tell whether it meets security requirements."
-msgstr ""
-
 #. Translators: Unknown endpoint host for WireGuard (invalid setting)
-#: panels/firmware-security/cc-firmware-security-dialog.c:185
 #: panels/info-overview/cc-info-overview-panel.c:78
 #: panels/info-overview/cc-system-details-window.c:272
 #: panels/info-overview/cc-system-details-window.c:324
 #: panels/info-overview/cc-system-details-window.c:894
 #: panels/network/connection-editor/ce-page-wireguard.c:368
+#: panels/privacy/cc-firmware-security-dialog.c:168
 #: panels/sound/cc-alert-chooser-window.c:352
 #: panels/wwan/cc-wwan-details-dialog.c:100
 msgid "Unknown"
 msgstr "უცნობი"
-
-#: panels/firmware-security/cc-firmware-security-dialog.c:384
-msgid "Report copied to clipboard"
-msgstr "ანგარიში დაკოპირდა გაცვლის ბაფერში"
-
-#: panels/firmware-security/cc-firmware-security-dialog.ui:22
-msgid "Device Security Status"
-msgstr "მოწყობილობის უსაფრთხოების მდგომარეობა"
-
-#: panels/firmware-security/cc-firmware-security-dialog.ui:88
-msgid "_Copy Technical Report"
-msgstr ""
-
-#: panels/firmware-security/cc-firmware-security-help-dialog.ui:6
-msgid "About Device Security"
-msgstr "მოწყობილობის უსაფრთხოების შესახებ"
-
-#: panels/firmware-security/cc-firmware-security-help-dialog.ui:31
-msgid ""
-"Device security provides information about how protected your device is "
-"against security issues which target the hardware itself."
-msgstr ""
-
-#: panels/firmware-security/cc-firmware-security-help-dialog.ui:51
-msgid "Aspects of hardware that affect security include:"
-msgstr ""
-
-#: panels/firmware-security/cc-firmware-security-help-dialog.ui:69
-msgid "• security features that are built into a hardware itself;"
-msgstr ""
-
-#: panels/firmware-security/cc-firmware-security-help-dialog.ui:79
-msgid "• how the hardware is configured to protect against security issues;"
-msgstr ""
-
-#: panels/firmware-security/cc-firmware-security-help-dialog.ui:89
-msgid "• the security of the software runs directly on the hardware."
-msgstr ""
-
-#: panels/firmware-security/cc-firmware-security-help-dialog.ui:107
-msgid ""
-"Security threats which affect hardware include malware and viruses that "
-"target the software that runs directly on the hardware. It also includes "
-"physical tampering, such as physical connection to the hardware to read data "
-"and implant malware."
-msgstr ""
-
-#: panels/firmware-security/cc-firmware-security-help-dialog.ui:125
-msgid ""
-"Device security is just one aspect of security, and does not reflect the "
-"overall security status of the system and applications."
-msgstr ""
-
-#: panels/firmware-security/cc-firmware-security-panel.c:120
-msgid "Protected against malicious software when the device starts."
-msgstr ""
-
-#: panels/firmware-security/cc-firmware-security-panel.c:126
-msgid "Secure Boot has Problems"
-msgstr "დაცული ჩარტვირთვის პრობლემები"
-
-#: panels/firmware-security/cc-firmware-security-panel.c:127
-msgid "Some protection when the device is started."
-msgstr ""
-
-#: panels/firmware-security/cc-firmware-security-panel.c:132
-msgid "Secure Boot is Off"
-msgstr "დაცული ჩატვირთვა გამორთულია"
-
-#: panels/firmware-security/cc-firmware-security-panel.c:133
-msgid "No protection when the device is started."
-msgstr ""
-
-#. TRANSLATORS: this is to explain an event that has already happened
-#: panels/firmware-security/cc-firmware-security-panel.c:152
-msgid ""
-"This issue could have been caused by a change in UEFI firmware settings, an "
-"operating system configuration change, or because of malicious software on "
-"this system."
-msgstr ""
-
-#. TRANSLATORS: this is to explain an event that has already happened
-#: panels/firmware-security/cc-firmware-security-panel.c:160
-msgid ""
-"This issue could have been caused by a change in the UEFI firmware settings, "
-"or because of malicious software on this system."
-msgstr ""
-
-#. TRANSLATORS: this is to explain an event that has already happened
-#: panels/firmware-security/cc-firmware-security-panel.c:167
-msgid ""
-"This issue could have been caused by an operating system configuration "
-"change, or because of malicious software on this system."
-msgstr ""
-
-#. TRANSLATOR: this is the date in "%Y-%m-%d %H:%M:%S" format,
-#. for example: 2022-08-01 22:48:00
-#: panels/firmware-security/cc-firmware-security-panel.c:225
-#, c-format
-msgid "%1$s"
-msgstr "%1$s"
-
-#. TRANSLATOR: This is the text event status output when the event status is "success"
-#: panels/firmware-security/cc-firmware-security-panel.c:231
-msgid "Pass"
-msgstr "გავლა"
-
-#. TRANSLATOR: This is the text event status output when the event status is not "success"
-#: panels/firmware-security/cc-firmware-security-panel.c:234
-msgid "! Fail"
-msgstr "! ჩაიშალა"
-
-#: panels/firmware-security/cc-firmware-security-panel.c:237
-#, c-format
-msgid "(%1$s → %2$s)"
-msgstr "(%1$s → %2$s)"
-
-#: panels/firmware-security/cc-firmware-security-panel.c:543
-msgid "Hardware does not pass checks."
-msgstr "აპარატურამ გამოცდა ვერ გაიარა."
-
-#: panels/firmware-security/cc-firmware-security-panel.c:550
-msgid "Hardware meets basic security requirements."
-msgstr "აპარატურა აკმაყოფილებს საბაზისო უსაფრთხოების პირობებს."
-
-#: panels/firmware-security/cc-firmware-security-panel.c:559
-msgid "Hardware has a good level of protection."
-msgstr "აპარატურას უსაფრთხოების მისაღები დონე გააჩნია."
-
-#: panels/firmware-security/cc-firmware-security-panel.c:566
-msgid "Security levels are not available for this device."
-msgstr "ამ მოწყობილობისთვის უსაფრთხოების დონეები ხელმისაწვდომი არაა."
-
-#: panels/firmware-security/cc-firmware-security-panel.ui:50
-msgid "Starting Device Security…"
-msgstr "მოწყობილობის უსაფრთხოების გაშვება…"
-
-#: panels/firmware-security/cc-firmware-security-panel.ui:76
-msgid "Device Security Unavailable"
-msgstr "მოწყობილობის უსაფრთხოება მიუწვდომელია"
-
-#: panels/firmware-security/cc-firmware-security-panel.ui:78
-msgid ""
-"Device Security is only available on physical hardware. No physical hardware "
-"has been detected."
-msgstr ""
-
-#: panels/firmware-security/cc-firmware-security-panel.ui:216
-msgid "Security Events"
-msgstr "უსაფრთხოების მოვლენები"
-
-#: panels/firmware-security/cc-firmware-security-panel.ui:226
-msgid "No Events"
-msgstr "ღონისძიებების გარეშე"
-
-#. TRANSLATORS: if the stauts is valid. For example security check is valid and key is valid.
-#: panels/firmware-security/cc-firmware-security-utils.c:35
-msgid "Valid"
-msgstr "სწორი"
-
-#. TRANSLATORS: if the status or key is not valid.
-#: panels/firmware-security/cc-firmware-security-utils.c:40
-msgid "Not Valid"
-msgstr "არასწორია"
-
-#. TRANSLATORS: if the function is not enabled through BIOS or OS settings.
-#: panels/firmware-security/cc-firmware-security-utils.c:50
-msgid "Not Enabled"
-msgstr "არ არის ჩართული"
-
-#. TRANSLATORS: the memory space or system mode is locked to prevent from malicious modification.
-#: panels/firmware-security/cc-firmware-security-utils.c:55
-msgid "Locked"
-msgstr "დაბლოკილი"
-
-#. TRANSLATORS: the memory space or system mode is not locked.
-#: panels/firmware-security/cc-firmware-security-utils.c:60
-msgid "Not Locked"
-msgstr "დაბლოკილი არაა"
-
-#. TRANSLATORS: The data is encrypted to prevent from malicious reading.
-#: panels/firmware-security/cc-firmware-security-utils.c:65
-msgid "Encrypted"
-msgstr "დაშიფრული"
-
-#. TRANSLATORS: the data in memory is plane text.
-#: panels/firmware-security/cc-firmware-security-utils.c:70
-msgid "Not Encrypted"
-msgstr "არ არის დაშიფრული"
-
-#. TRANSLATORS: Linux kernel is tainted by third party kernel module.
-#: panels/firmware-security/cc-firmware-security-utils.c:75
-msgid "Tainted"
-msgstr "გაფუჭებულია"
-
-#. TRANSLATORS: All the loaded kernel module are licensed.
-#: panels/firmware-security/cc-firmware-security-utils.c:80
-msgid "Not Tainted"
-msgstr "ყველა მოდული ლიცენზირებულია"
-
-#. TRANSLATORS: the feature can be detected.
-#: panels/firmware-security/cc-firmware-security-utils.c:85
-msgid "Found"
-msgstr "ნაპოვნი"
-
-#. TRANSLATORS: the feature can't be detected.
-#: panels/firmware-security/cc-firmware-security-utils.c:90
-msgid "Not Found"
-msgstr "ნაპოვნი არაა"
-
-#. TRANSLATORS: the function is supported by hardware.
-#: panels/firmware-security/cc-firmware-security-utils.c:95
-msgid "Supported"
-msgstr "მხარდაჭერილი"
-
-#. TRANSLATORS: the function isn't supported by hardware.
-#: panels/firmware-security/cc-firmware-security-utils.c:100
-msgid "Not Supported"
-msgstr "მხარდაუჭერელია"
-
-#: panels/firmware-security/gnome-firmware-security-panel.desktop.in:3
-msgid "Device Security"
-msgstr "მოწყობილობის უსაფრთხოება"
-
-#: panels/firmware-security/gnome-firmware-security-panel.desktop.in:4
-msgid "Protection against hardware security threats"
-msgstr "აპარატურული უსაფრთხოების მოწყვლადობებისგან დაცვა"
-
-#. Translators: Search terms to find the Privacy panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
-#: panels/firmware-security/gnome-firmware-security-panel.desktop.in:16
-msgid ""
-"screen;lock;diagnostics;crash;private;recent;temporary;tmp;index;name;"
-"network;identity;privacy;"
-msgstr ""
-"screen;lock;diagnostics;crash;private;recent;temporary;tmp;index;name;"
-"network;identity;privacy;"
 
 #: panels/info-overview/cc-info-overview-panel.ui:18
 msgid "System Logo"
@@ -2142,17 +1713,17 @@ msgid "Hardware Model"
 msgstr "აპარატურის მოდელი"
 
 #: panels/info-overview/cc-info-overview-panel.ui:66
-#: panels/info-overview/cc-system-details-window.ui:91
+#: panels/info-overview/cc-system-details-window.ui:83
 msgid "Processor"
 msgstr "პროცესორი"
 
 #: panels/info-overview/cc-info-overview-panel.ui:74
-#: panels/info-overview/cc-system-details-window.ui:84
+#: panels/info-overview/cc-system-details-window.ui:76
 msgid "Memory"
 msgstr "მეხსიერება"
 
 #: panels/info-overview/cc-info-overview-panel.ui:82
-#: panels/info-overview/cc-system-details-window.ui:105
+#: panels/info-overview/cc-system-details-window.ui:97
 msgid "Disk Capacity"
 msgstr "დისკის მოცულობა"
 
@@ -2280,53 +1851,53 @@ msgstr "**ბირთვის ვერსია:**"
 msgid "Details copied to clipboard"
 msgstr "დეტალები დაკოპირდა გაცვლის ბაფერში"
 
-#: panels/info-overview/cc-system-details-window.ui:66
+#: panels/info-overview/cc-system-details-window.ui:58
 msgid "Hardware Information"
 msgstr "ინფორმაცია აპარატურის შესახებ"
 
-#: panels/info-overview/cc-system-details-window.ui:77
+#: panels/info-overview/cc-system-details-window.ui:69
 #: panels/printers/printer-entry.ui:183
 #: panels/wwan/cc-wwan-details-dialog.ui:184
 msgid "Model"
 msgstr "მოდელი"
 
-#: panels/info-overview/cc-system-details-window.ui:127
+#: panels/info-overview/cc-system-details-window.ui:119
 msgid "Software Information"
 msgstr "ინფორმაცია პროგრამებზე"
 
-#: panels/info-overview/cc-system-details-window.ui:138
+#: panels/info-overview/cc-system-details-window.ui:130
 #: panels/wwan/cc-wwan-details-dialog.ui:210
 msgid "Firmware Version"
 msgstr "მიკროკოდის ვერსია"
 
 #. translators: this field contains the distro name and version
-#: panels/info-overview/cc-system-details-window.ui:146
+#: panels/info-overview/cc-system-details-window.ui:138
 msgid "OS Name"
 msgstr "ოს-ის სახელი"
 
 #. translators: this field contains the distro build
-#: panels/info-overview/cc-system-details-window.ui:154
+#: panels/info-overview/cc-system-details-window.ui:146
 msgid "OS Build"
 msgstr "ოს-ის აგება"
 
 #. translators: this field contains the distro type
-#: panels/info-overview/cc-system-details-window.ui:162
+#: panels/info-overview/cc-system-details-window.ui:154
 msgid "OS Type"
 msgstr "ოს-ის ტიპი"
 
-#: panels/info-overview/cc-system-details-window.ui:169
+#: panels/info-overview/cc-system-details-window.ui:161
 msgid "GNOME Version"
 msgstr "GNOME-ის ვერსია"
 
-#: panels/info-overview/cc-system-details-window.ui:176
+#: panels/info-overview/cc-system-details-window.ui:168
 msgid "Windowing System"
 msgstr "ფანჯრული სისტემა"
 
-#: panels/info-overview/cc-system-details-window.ui:183
+#: panels/info-overview/cc-system-details-window.ui:175
 msgid "Virtualization"
 msgstr "ვირტუალიზაცია"
 
-#: panels/info-overview/cc-system-details-window.ui:190
+#: panels/info-overview/cc-system-details-window.ui:182
 msgid "Kernel Version"
 msgstr "ბირთვის ვერსია"
 
@@ -2441,7 +2012,7 @@ msgctxt "keybinding"
 msgid "Search"
 msgstr "ძებნა"
 
-#: panels/keyboard/01-system.xml.in:2
+#: panels/keyboard/01-system.xml.in:2 panels/privacy/cc-privacy-panel.ui:39
 msgid "System"
 msgstr "სისტემა"
 
@@ -2653,7 +2224,7 @@ msgid "Methods for entering symbols and letter variants using the keyboard."
 msgstr ""
 
 #: panels/keyboard/cc-keyboard-panel.ui:82
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:9 shell/cc-window.ui:169
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:9 shell/cc-window.ui:170
 msgid "Keyboard Shortcuts"
 msgstr "კლავიატურის მალსახმობები"
 
@@ -2825,83 +2396,12 @@ msgstr ""
 
 #. Translators: Search terms to find the Keyboard panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/keyboard/gnome-keyboard-panel.desktop.in:15
-#| msgid ""
-#| "Shortcut;Workspace;Window;Resize;Zoom;Contrast;Input;Source;Lock;Volume;"
-#| "Hotkey;"
 msgid ""
 "Shortcut;Workspace;Window;Resize;Zoom;Contrast;Input;Source;Lock;Volume;"
 "Hotkey;Compose;Character;"
 msgstr ""
 "მალსახმობი;სამუშაო სივრცე;ფანჯარა;Resize;გადიდება;კონტრასტი;Input;Source;"
 "Lock;Volume;Hotkey;Compose;Character;"
-
-#: panels/location/cc-location-panel.ui:7
-msgid ""
-"Location services use GPS, Wi-Fi and cellular connections to determine the "
-"approximate location of this device. <a href='https://location.services."
-"mozilla.com/privacy'>Learn about what data is collected, and how it is used."
-"</a>"
-msgstr ""
-
-#: panels/location/cc-location-panel.ui:12
-msgid "_Location Services"
-msgstr "_მდებარეობის სერვისები"
-
-#: panels/location/cc-location-panel.ui:13
-msgid "Allow permitted apps to access location data"
-msgstr ""
-
-#: panels/location/cc-location-panel.ui:23
-msgid ""
-"The following sandboxed apps have been given access to location data. Apps "
-"that are not sandboxed can access location data without asking for "
-"permission."
-msgstr ""
-
-#: panels/location/cc-location-panel.ui:37
-msgid "No sandboxed apps have asked for location access"
-msgstr ""
-
-#: panels/location/gnome-location-panel.desktop.in:4
-msgid "Control access to your location"
-msgstr "თქვენ მდებარეობაზე წვდომის კონტროლი"
-
-#. Translators: Search terms to find the Location panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
-#: panels/location/gnome-location-panel.desktop.in:16
-msgid "location;gps;private;privacy;"
-msgstr "location;gps;private;privacy;"
-
-#: panels/microphone/cc-microphone-panel.ui:11
-msgid "_Microphone Access"
-msgstr "მიკროფონთან _წვდომა"
-
-#: panels/microphone/cc-microphone-panel.ui:12
-msgid "Allow permitted apps to use microphones"
-msgstr ""
-
-#: panels/microphone/cc-microphone-panel.ui:22
-msgid ""
-"The following sandboxed apps have been given permission to use microphones. "
-"Apps that are not sandboxed can use microphones without asking for "
-"permission."
-msgstr ""
-
-#: panels/microphone/cc-microphone-panel.ui:37
-msgid "No sandboxed apps have asked for microphone access"
-msgstr ""
-
-#: panels/microphone/gnome-microphone-panel.desktop.in:3
-msgid "Microphones"
-msgstr "მიკროფონები"
-
-#: panels/microphone/gnome-microphone-panel.desktop.in:4
-msgid "Restrict microphone access"
-msgstr "მიკროფონთან წვდომის შეზღუდვა"
-
-#. Translators: Search terms to find the Microphones panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
-#: panels/microphone/gnome-microphone-panel.desktop.in:16
-msgid "microphone;recording;application;privacy;"
-msgstr "microphone;recording;application;privacy;"
 
 #: panels/mouse/cc-mouse-panel.ui:31 panels/wacom/cc-wacom-panel.ui:9
 msgid "Test _Settings"
@@ -3192,63 +2692,63 @@ msgstr "ხელით"
 msgid "Configuration"
 msgstr "გამართვა"
 
-#: panels/network/cc-net-proxy-page.ui:53
+#: panels/network/cc-net-proxy-page.ui:55
 msgid "Configuration URL"
 msgstr "კონფიგურაციის URL"
 
-#: panels/network/cc-net-proxy-page.ui:63
+#: panels/network/cc-net-proxy-page.ui:65
 msgid ""
 "Web Proxy Autodiscovery is used when a Configuration URL is not provided. "
 "This is not recommended for untrusted public networks."
 msgstr ""
 
-#: panels/network/cc-net-proxy-page.ui:80
+#: panels/network/cc-net-proxy-page.ui:82
 msgid "HTTP Proxy"
 msgstr "HTTP პროქსი"
 
-#: panels/network/cc-net-proxy-page.ui:91
-#: panels/network/cc-net-proxy-page.ui:136
-#: panels/network/cc-net-proxy-page.ui:181
-#: panels/network/cc-net-proxy-page.ui:226
+#: panels/network/cc-net-proxy-page.ui:93
+#: panels/network/cc-net-proxy-page.ui:132
+#: panels/network/cc-net-proxy-page.ui:171
+#: panels/network/cc-net-proxy-page.ui:210
 msgid "URL"
 msgstr "URL"
 
-#: panels/network/cc-net-proxy-page.ui:98
-#: panels/network/cc-net-proxy-page.ui:143
-#: panels/network/cc-net-proxy-page.ui:188
-#: panels/network/cc-net-proxy-page.ui:233
+#: panels/network/cc-net-proxy-page.ui:100
+#: panels/network/cc-net-proxy-page.ui:139
+#: panels/network/cc-net-proxy-page.ui:178
+#: panels/network/cc-net-proxy-page.ui:217
 msgid "Port"
 msgstr "პორტი"
 
-#: panels/network/cc-net-proxy-page.ui:110
+#: panels/network/cc-net-proxy-page.ui:108
 msgid "HTTP proxy port"
 msgstr "H_TTP პროქსის პორტი"
 
-#: panels/network/cc-net-proxy-page.ui:125
+#: panels/network/cc-net-proxy-page.ui:121
 msgid "HTTPS Proxy"
 msgstr "HTTPS პროქსი"
 
-#: panels/network/cc-net-proxy-page.ui:155
+#: panels/network/cc-net-proxy-page.ui:147
 msgid "HTTPS proxy port"
 msgstr "H_TTPS პროქსის პორტი"
 
-#: panels/network/cc-net-proxy-page.ui:170
+#: panels/network/cc-net-proxy-page.ui:160
 msgid "FTP Proxy"
 msgstr "FTP პროქსი"
 
-#: panels/network/cc-net-proxy-page.ui:200
+#: panels/network/cc-net-proxy-page.ui:186
 msgid "FTP proxy port"
 msgstr "_FTP პროქსის პორტი"
 
-#: panels/network/cc-net-proxy-page.ui:215
+#: panels/network/cc-net-proxy-page.ui:199
 msgid "SOCKS Host"
 msgstr "Socks-ის ჰოსტი"
 
-#: panels/network/cc-net-proxy-page.ui:245
+#: panels/network/cc-net-proxy-page.ui:225
 msgid "SOCKS host port"
 msgstr "SOCKS-ის ჰოსტის პორტი"
 
-#: panels/network/cc-net-proxy-page.ui:261
+#: panels/network/cc-net-proxy-page.ui:239
 msgid "Ignored Hosts"
 msgstr "იგნორირებული ჰოსტები"
 
@@ -3337,7 +2837,7 @@ msgstr ""
 
 #: panels/network/cc-wifi-hotspot-dialog.c:250
 msgid "Network name cannot be empty"
-msgstr ""
+msgstr "ქსელის სახელი ცარიელი ვერ იქნება"
 
 #. SSID length needs to be in the 1-32 byte range
 #: panels/network/cc-wifi-hotspot-dialog.c:256
@@ -4112,15 +3612,15 @@ msgstr ""
 msgid "_Forget"
 msgstr "_დავიწყება"
 
-#: panels/network/net-device-wifi.c:1068
+#: panels/network/net-device-wifi.c:1069
 msgid "Saved Wi-Fi Networks"
 msgstr "შენახული Wi-Fi ქსელები"
 
-#: panels/network/net-device-wifi.c:1237
+#: panels/network/net-device-wifi.c:1250
 msgid "System policy prohibits use as a Hotspot"
 msgstr ""
 
-#: panels/network/net-device-wifi.c:1240
+#: panels/network/net-device-wifi.c:1253
 msgid "Wireless device does not support Hotspot mode"
 msgstr ""
 
@@ -4187,7 +3687,7 @@ msgid "Unmanaged"
 msgstr "უმართავი"
 
 #. TRANSLATORS: device status
-#: panels/network/panel-common.c:45
+#: panels/network/panel-common.c:45 panels/power/cc-power-panel.c:668
 msgid "Unavailable"
 msgstr "მიუწვდომელია"
 
@@ -4476,7 +3976,7 @@ msgstr "_არ შემაწუხო"
 
 #. Translators: Whether to show notifications on the lock screen
 #: panels/notifications/cc-notifications-panel.ui:16
-#: panels/screen/cc-screen-panel.ui:66
+#: panels/privacy/cc-screen-page.ui:74
 msgid "_Lock Screen Notifications"
 msgstr "_ეკრანის ბლოკირების გაფრთხილებები"
 
@@ -4688,7 +4188,7 @@ msgid "Gaming input device"
 msgstr "სათამაშო შემყვანი მოწყობილობა"
 
 #. TRANSLATORS: secondary battery, misc
-#: panels/power/cc-battery-row.c:218 panels/power/cc-power-panel.c:263
+#: panels/power/cc-battery-row.c:218 panels/power/cc-power-panel.c:268
 #: panels/power/cc-power-panel.ui:58
 msgid "Battery"
 msgstr "ელემენტი"
@@ -4703,82 +4203,112 @@ msgctxt "Battery name"
 msgid "Extra"
 msgstr "დამატებით"
 
-#: panels/power/cc-power-panel.c:255
+#: panels/power/cc-power-panel.c:260
 msgid "Batteries"
 msgstr "ელემენტები"
 
 #. Translators: UPS is an Uninterruptible Power Supply:
 #. * https://en.wikipedia.org/wiki/Uninterruptible_power_supply
-#: panels/power/cc-power-panel.c:260
+#: panels/power/cc-power-panel.c:265
 msgid "UPS"
 msgstr "UPS"
 
-#: panels/power/cc-power-panel.c:520
+#: panels/power/cc-power-panel.c:525
 msgid "When _idle"
 msgstr "უქმობისას"
 
-#: panels/power/cc-power-panel.c:680
+#: panels/power/cc-power-panel.c:662
+msgid "Good"
+msgstr "კარგი"
+
+#: panels/power/cc-power-panel.c:664
+msgid "OK"
+msgstr "დიახ"
+
+#: panels/power/cc-power-panel.c:666
+msgid "Poor"
+msgstr "ცუდი"
+
+#: panels/power/cc-power-panel.c:684
+#, c-format
+msgid "Battery %d"
+msgstr "ელემენტი %d"
+
+#: panels/power/cc-power-panel.c:685
+#, c-format
+msgid "%d%%"
+msgstr "%d%%"
+
+#: panels/power/cc-power-panel.c:694
+msgid "Health Rating"
+msgstr ""
+
+#: panels/power/cc-power-panel.c:700
+msgid "Battery Capacity"
+msgstr "ელემენტის მოცულობა"
+
+#: panels/power/cc-power-panel.c:784
 msgid "Suspend"
 msgstr "ძილი"
 
-#: panels/power/cc-power-panel.c:681
+#: panels/power/cc-power-panel.c:785
 msgid "Power Off"
 msgstr "გამორთვა"
 
-#: panels/power/cc-power-panel.c:682
+#: panels/power/cc-power-panel.c:786
 msgid "Hibernate"
 msgstr "პროგრამული ძილი"
 
-#: panels/power/cc-power-panel.c:683
+#: panels/power/cc-power-panel.c:787
 msgid "Nothing"
 msgstr "არაფერი"
 
-#: panels/power/cc-power-panel.c:739
+#: panels/power/cc-power-panel.c:843
 msgid "When on battery power"
 msgstr "ელემენტიდან კვებისას"
 
-#: panels/power/cc-power-panel.c:741
+#: panels/power/cc-power-panel.c:845
 msgid "When plugged in"
 msgstr "შეერთებული"
 
-#: panels/power/cc-power-panel.c:862
+#: panels/power/cc-power-panel.c:966
 msgctxt "Idle time"
 msgid "Never"
 msgstr "არასდროს"
 
-#: panels/power/cc-power-panel.c:947
+#: panels/power/cc-power-panel.c:1072
 msgid "Automatic suspend"
 msgstr "ავტომატურად შეჩერება"
 
-#: panels/power/cc-power-panel.c:1043
+#: panels/power/cc-power-panel.c:1168
 msgid ""
 "Performance mode temporarily disabled due to high operating temperature."
 msgstr ""
 
-#: panels/power/cc-power-panel.c:1045
+#: panels/power/cc-power-panel.c:1170
 msgid ""
 "Lap detected: performance mode temporarily unavailable. Move the device to a "
 "stable surface to restore."
 msgstr ""
 
-#: panels/power/cc-power-panel.c:1047
+#: panels/power/cc-power-panel.c:1172
 msgid "Performance mode temporarily disabled."
 msgstr ""
 
-#: panels/power/cc-power-panel.c:1089
+#: panels/power/cc-power-panel.c:1214
 msgid ""
 "Low battery: power saver enabled. Previous mode will be restored when "
 "battery is sufficiently charged."
 msgstr ""
 
 #. translators: "%s" is an application name
-#: panels/power/cc-power-panel.c:1097
+#: panels/power/cc-power-panel.c:1222
 #, c-format
 msgid "Power Saver mode activated by “%s”."
 msgstr ""
 
 #. translators: "%s" is an application name
-#: panels/power/cc-power-panel.c:1101
+#: panels/power/cc-power-panel.c:1226
 #, c-format
 msgid "Performance mode activated by “%s”."
 msgstr ""
@@ -4843,87 +4373,101 @@ msgctxt "automatic_suspend"
 msgid "2 hours"
 msgstr "2 საათი"
 
-#: panels/power/cc-power-panel.ui:93
+#: panels/power/cc-power-panel.ui:78
+msgid "_Battery Health"
+msgstr "_ელემენტის ჯანმრთელობა"
+
+#: panels/power/cc-power-panel.ui:114
 msgid "Power Mode"
 msgstr "კვების რეჟიმი"
 
-#: panels/power/cc-power-panel.ui:94
+#: panels/power/cc-power-panel.ui:115
 msgid "Affects system performance and power usage."
 msgstr ""
 
-#: panels/power/cc-power-panel.ui:123
+#: panels/power/cc-power-panel.ui:144
 msgid "Power Saving Options"
 msgstr "ენერგიის დაზოგვის მორგება"
 
-#: panels/power/cc-power-panel.ui:126
+#: panels/power/cc-power-panel.ui:147
 msgid "Automatic Screen Brightness"
 msgstr "ეკრანის ავტომატური სიკაშკაშე"
 
-#: panels/power/cc-power-panel.ui:127
+#: panels/power/cc-power-panel.ui:148
 msgid "Screen brightness adjusts to the surrounding light."
 msgstr ""
 
-#: panels/power/cc-power-panel.ui:139
+#: panels/power/cc-power-panel.ui:160
 msgid "Dim Screen"
 msgstr "ეკრანის ჩაქრობა"
 
-#: panels/power/cc-power-panel.ui:140
+#: panels/power/cc-power-panel.ui:161
 msgid "Reduces the screen brightness when the computer is inactive."
 msgstr ""
 
-#: panels/power/cc-power-panel.ui:151
+#: panels/power/cc-power-panel.ui:172
 msgid "Screen _Blank"
 msgstr "ეკრანის _გასუფთავება"
 
-#: panels/power/cc-power-panel.ui:152
+#: panels/power/cc-power-panel.ui:173
 msgid "Turns the screen off after a period of inactivity."
 msgstr ""
 
-#: panels/power/cc-power-panel.ui:160
+#: panels/power/cc-power-panel.ui:181
 msgid "Automatic Power Saver"
 msgstr "ენერგიის ავტომატური დაზოგვა"
 
-#: panels/power/cc-power-panel.ui:161
+#: panels/power/cc-power-panel.ui:182
 msgid "Enables power saver mode when battery is low."
 msgstr ""
 
-#: panels/power/cc-power-panel.ui:174
+#: panels/power/cc-power-panel.ui:195
 msgid "_Automatic Suspend"
 msgstr "ავტომატურად _შეჩერება"
 
-#: panels/power/cc-power-panel.ui:175
+#: panels/power/cc-power-panel.ui:196
 msgid "Pauses the computer after a period of inactivity."
 msgstr ""
 
-#: panels/power/cc-power-panel.ui:200
+#: panels/power/cc-power-panel.ui:221
 msgid "Po_wer Button Behavior"
 msgstr "_ჩართვის ღილაკის ქცევა"
 
-#: panels/power/cc-power-panel.ui:208
+#: panels/power/cc-power-panel.ui:229
 msgid "Show Battery _Percentage"
 msgstr "ელემენტის _პროცენტულობის ჩვენება"
 
-#: panels/power/cc-power-panel.ui:209
+#: panels/power/cc-power-panel.ui:230
 msgid "Show exact charge level in the top bar"
 msgstr ""
 
-#: panels/power/cc-power-panel.ui:245
+#: panels/power/cc-power-panel.ui:266
 msgid "Automatic Suspend"
 msgstr "ავტომატურად შეჩერება"
 
-#: panels/power/cc-power-panel.ui:268
+#: panels/power/cc-power-panel.ui:289
 msgid "_Plugged In"
 msgstr "_შეერთებული"
 
-#: panels/power/cc-power-panel.ui:280
+#: panels/power/cc-power-panel.ui:301
 msgid "On _Battery Power"
 msgstr "იკვებება _ელემენტიდან"
 
-#: panels/power/cc-power-panel.ui:313 panels/power/cc-power-panel.ui:349
+#: panels/power/cc-power-panel.ui:334 panels/power/cc-power-panel.ui:370
 #: panels/universal-access/cc-ua-mouse-page.ui:98
 #: panels/universal-access/cc-ua-typing-page.ui:124
 msgid "Delay"
 msgstr "დაყოვნება"
+
+#: panels/power/cc-power-panel.ui:393
+msgid "Battery Health"
+msgstr "ელემენტის ჯანმრთელობა"
+
+#: panels/power/cc-power-panel.ui:407
+msgid ""
+"Current capacity indicates how much charge the battery can currently store, "
+"compared to when it was new."
+msgstr ""
 
 #: panels/power/cc-power-profile-row.c:132
 msgctxt "Power profile"
@@ -4999,7 +4543,7 @@ msgstr ""
 #. Translators: Search terms to find the Printers panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/printers/gnome-printers-panel.desktop.in:16
 msgid "Printer;Queue;Print;Paper;Ink;Toner;"
-msgstr ""
+msgstr "Printer;Queue;Print;Paper;Ink;Toner;პრინტერი;რიგი;ფურცელი;ტონერი;"
 
 #. Translators: This is the title presented at top of the dialog.
 #: panels/printers/new-printer-dialog.ui:28
@@ -5644,6 +5188,1018 @@ msgstr "ბეჭდვის სერვისი მიუწვდომე�
 msgid "The system printing service doesn’t seem to be available."
 msgstr ""
 
+#: panels/privacy/cc-bolt-device-dialog.c:79
+#: panels/privacy/cc-bolt-device-entry.c:121
+msgctxt "Thunderbolt Device Status"
+msgid "Disconnected"
+msgstr "გათიშულია"
+
+#: panels/privacy/cc-bolt-device-dialog.c:82
+#: panels/privacy/cc-bolt-device-entry.c:124
+msgctxt "Thunderbolt Device Status"
+msgid "Connecting"
+msgstr "დაკავშირება"
+
+#: panels/privacy/cc-bolt-device-dialog.c:85
+#: panels/privacy/cc-bolt-device-entry.c:128
+#: panels/privacy/cc-bolt-device-entry.c:140
+msgctxt "Thunderbolt Device Status"
+msgid "Connected"
+msgstr "დაკავშირებულია"
+
+#: panels/privacy/cc-bolt-device-dialog.c:88
+msgctxt "Thunderbolt Device Status"
+msgid "Authorization Error"
+msgstr "ავტორიზაციის შეცდომა"
+
+#: panels/privacy/cc-bolt-device-dialog.c:91
+#: panels/privacy/cc-bolt-device-entry.c:134
+msgctxt "Thunderbolt Device Status"
+msgid "Authorizing"
+msgstr "ავტრიზაცია"
+
+#: panels/privacy/cc-bolt-device-dialog.c:98
+msgctxt "Thunderbolt Device Status"
+msgid "Reduced Functionality"
+msgstr "შეზღუდული ფუნქციონალი"
+
+#: panels/privacy/cc-bolt-device-dialog.c:100
+msgctxt "Thunderbolt Device Status"
+msgid "Connected & Authorized"
+msgstr "მიერთებული და ავტორიზებული"
+
+#: panels/privacy/cc-bolt-device-dialog.c:106
+#: panels/privacy/cc-bolt-device-entry.c:148
+msgctxt "Thunderbolt Device Status"
+msgid "Unknown"
+msgstr "უცნობია"
+
+#. Translators: The time point the device was authorized.
+#: panels/privacy/cc-bolt-device-dialog.c:161
+msgid "Authorized at"
+msgstr "ავტორიზებულია"
+
+#. Translators: The time point the device was connected.
+#: panels/privacy/cc-bolt-device-dialog.c:167
+msgid "Connected at"
+msgstr "დაკავშირებულია"
+
+#. Translators: The time point the device was enrolled,
+#. * i.e. authorized and stored in the device database.
+#: panels/privacy/cc-bolt-device-dialog.c:174
+msgid "Enrolled at"
+msgstr "მიერთებულია"
+
+#: panels/privacy/cc-bolt-device-dialog.c:248
+msgid "Failed to authorize device: "
+msgstr "მოწყობილობის ავტორიზაციის შეცდომა: "
+
+#: panels/privacy/cc-bolt-device-dialog.c:315
+msgid "Failed to forget device: "
+msgstr "მოწყობილობის დავიწყების შეცდომა: "
+
+#: panels/privacy/cc-bolt-device-dialog.c:455
+#, c-format
+msgid "Depends on %u other device"
+msgid_plural "Depends on %u other devices"
+msgstr[0] ""
+
+#: panels/privacy/cc-bolt-device-dialog.ui:25
+msgid "Status"
+msgstr "სტატუსი"
+
+#: panels/privacy/cc-bolt-device-dialog.ui:30
+msgid "UUID"
+msgstr "UUID"
+
+#: panels/privacy/cc-bolt-device-dialog.ui:35
+msgid "Timestamp"
+msgstr "დროის შტამპი"
+
+#: panels/privacy/cc-bolt-device-dialog.ui:43
+msgid "Depends on other devices"
+msgstr ""
+
+#: panels/privacy/cc-bolt-device-dialog.ui:73
+msgid "Authorize and Connect"
+msgstr "ავტორიზაცია და დაკავშირება"
+
+#: panels/privacy/cc-bolt-device-dialog.ui:88
+msgid "Forget Device"
+msgstr "მოწყობილობის დავიწყება"
+
+#: panels/privacy/cc-bolt-device-entry.c:131
+msgctxt "Thunderbolt Device Status"
+msgid "Error"
+msgstr "შეცდომა"
+
+#: panels/privacy/cc-bolt-device-entry.c:142
+msgctxt "Thunderbolt Device Status"
+msgid "Authorized"
+msgstr "ავტორიზებული"
+
+#: panels/privacy/cc-bolt-page.c:219
+msgid ""
+"The Thunderbolt subsystem (boltd) is not installed or not set up properly."
+msgstr ""
+
+#: panels/privacy/cc-bolt-page.c:475 panels/privacy/cc-bolt-page.ui:131
+msgid "Allow direct access to devices such as docks and external GPUs."
+msgstr ""
+
+#: panels/privacy/cc-bolt-page.c:476
+msgid "Only USB and Display Port devices can attach."
+msgstr ""
+
+#: panels/privacy/cc-bolt-page.c:511
+msgid ""
+"Thunderbolt could not be detected.\n"
+"Either the system lacks Thunderbolt support, it has been disabled in the "
+"BIOS or is set to an unsupported security level in the BIOS."
+msgstr ""
+
+#: panels/privacy/cc-bolt-page.c:555
+msgid "Thunderbolt support has been disabled in the BIOS."
+msgstr ""
+
+#: panels/privacy/cc-bolt-page.c:559
+msgid "Thunderbolt security level could not be determined."
+msgstr ""
+
+#: panels/privacy/cc-bolt-page.c:679
+#, c-format
+msgid "Error switching direct mode: %s"
+msgstr "შეცდომა მიმართვის რეჟიმის შეცვლისას: %s"
+
+#: panels/privacy/cc-bolt-page.ui:4
+msgid "Thunderbolt"
+msgstr "თანდერბოლტი"
+
+#: panels/privacy/cc-bolt-page.ui:49
+msgid "Close notification"
+msgstr "შეტყობინების დახურვა"
+
+#: panels/privacy/cc-bolt-page.ui:110
+msgid "No Thunderbolt Support"
+msgstr ""
+
+#: panels/privacy/cc-bolt-page.ui:111
+msgid "Could not connect to the thunderbolt subsystem."
+msgstr ""
+
+#: panels/privacy/cc-bolt-page.ui:128
+msgid "Direct Access"
+msgstr "პირდაპირი წვდომა"
+
+#: panels/privacy/cc-bolt-page.ui:200
+msgid "Pending Devices"
+msgstr "დარჩენილი მოწყობილობები"
+
+#: panels/privacy/cc-bolt-page.ui:294
+msgid "No devices attached"
+msgstr "მოწყობილობები მიერთებული არაა"
+
+#: panels/privacy/cc-camera-page.ui:4
+msgid "Cameras"
+msgstr "კამერები"
+
+#: panels/privacy/cc-camera-page.ui:18
+msgid "_Camera Access"
+msgstr "_კამერასთან წვდომა"
+
+#: panels/privacy/cc-camera-page.ui:19
+msgid "Allow permitted apps to use cameras"
+msgstr "დაშვებული აპებისთვის კამერის გამოყენების უფლების მიცემა"
+
+#: panels/privacy/cc-camera-page.ui:28 panels/privacy/cc-location-page.ui:29
+#: panels/privacy/cc-microphone-page.ui:28
+msgid "Permitted Apps"
+msgstr "დაშვებული აპები"
+
+#: panels/privacy/cc-camera-page.ui:29
+msgid ""
+"The following sandboxed apps have been given permission to use cameras. Apps "
+"that are not sandboxed can use cameras without asking for permission."
+msgstr ""
+
+#: panels/privacy/cc-camera-page.ui:43
+msgid "No sandboxed apps have asked for camera access"
+msgstr ""
+
+#. translators: The first '%s' is the distributor's name, such as 'Fedora', the second '%s' is a link to the privacy policy
+#: panels/privacy/cc-diagnostics-page.c:124
+#, c-format
+msgid ""
+"Sending reports of technical problems helps us improve %s. Reports are sent "
+"anonymously and are scrubbed of personal data. %s"
+msgstr ""
+
+#: panels/privacy/cc-diagnostics-page.ui:4
+msgid "Diagnostics"
+msgstr "დიაგნოსტიკა"
+
+#: panels/privacy/cc-diagnostics-page.ui:16
+msgid "Problem Reporting"
+msgstr "პრობლემის გადაგზავნა"
+
+#: panels/privacy/cc-diagnostics-page.ui:19
+msgid "_Automatic Problem Reporting"
+msgstr "პრობლემის ავტომატური _ანგარიში"
+
+#. TRANSLATORS: secure boot refers to the system firmware security mode
+#: panels/privacy/cc-firmware-security-boot-dialog.c:72
+#: panels/privacy/cc-firmware-security-page.c:120
+msgid "Secure Boot is Active"
+msgstr "დაცული ჩატვირთვა ჩართულია"
+
+#. TRANSLATORS: this is the first section of the decription
+#: panels/privacy/cc-firmware-security-boot-dialog.c:77
+msgid ""
+"Secure boot prevents malicious software from being loaded when the device "
+"starts. It is currently turned on and is functioning correctly."
+msgstr ""
+
+#. TRANSLATORS: secure boot refers to the system firmware security mode
+#: panels/privacy/cc-firmware-security-boot-dialog.c:83
+msgid "Secure Boot Has Problems"
+msgstr "დაცული ჩარტვირთვის პრობლემები"
+
+#. TRANSLATORS: this is the first section of the decription.
+#: panels/privacy/cc-firmware-security-boot-dialog.c:87
+msgid ""
+"Secure boot prevents malicious software from being loaded when the device "
+"starts. It is currently turned on, but will not work due to having an "
+"invalid key."
+msgstr ""
+
+#. TRANSLATORS: this is the second section of description.
+#: panels/privacy/cc-firmware-security-boot-dialog.c:90
+msgid ""
+"Secure boot problems can often be resolved from your computer's UEFI "
+"firmware settings (BIOS) and your hardware manufacturer may provide "
+"information on how to do this."
+msgstr ""
+
+#. TRANSLATORS: this is the third section of description.
+#: panels/privacy/cc-firmware-security-boot-dialog.c:93
+msgid "For help, contact your hardware manufacturer or IT support provider."
+msgstr ""
+
+#. TRANSLATORS: secure boot refers to the system firmware security mode
+#: panels/privacy/cc-firmware-security-boot-dialog.c:99
+msgid "Secure Boot is Turned Off"
+msgstr "დაცული ჩატვირთვა გამორთულია"
+
+#. TRANSLATORS: this is the first section of the description.
+#: panels/privacy/cc-firmware-security-boot-dialog.c:103
+msgid ""
+"Secure boot prevents malicious software from being loaded when the device "
+"starts. It is currently turned off."
+msgstr ""
+
+#. TRANSLATORS: this is the second section of the description.
+#: panels/privacy/cc-firmware-security-boot-dialog.c:106
+msgid ""
+"Secure boot can often be turned on from your computer's UEFI firmware "
+"settings (BIOS). For help, contact your hardware manufacturer or IT support "
+"provider."
+msgstr ""
+
+#: panels/privacy/cc-firmware-security-boot-dialog.ui:55
+msgid ""
+"Secure boot prevents malicious software from being loaded when the device "
+"starts.\n"
+"\n"
+"For more information, contact the hardware manufacturer or IT support."
+msgstr ""
+
+#. TRANSLATORS: in reference to firmware protection: 0/4 stars
+#: panels/privacy/cc-firmware-security-dialog.c:106
+#: panels/privacy/cc-firmware-security-page.c:537
+msgid "Checks Failed"
+msgstr "წარუმატებელი შემოწმებები"
+
+#. TRANSLATORS: This is the description to describe the failure on
+#. checking the security items.
+#: panels/privacy/cc-firmware-security-dialog.c:109
+msgid ""
+"Hardware does not pass checks. This means that you are not protected against "
+"common hardware security issues.\n"
+"\n"
+"It may be possible to resolve hardware security issues by updating your "
+"firmware or changing device configuration options. However, failures can "
+"stem from the physical hardware itself, and may not be reversible."
+msgstr ""
+
+#. TRANSLATORS: in reference to firmware protection: 1/4 stars
+#: panels/privacy/cc-firmware-security-dialog.c:120
+#: panels/privacy/cc-firmware-security-page.c:544
+msgid "Checks Passed"
+msgstr "შემოწმებები გავლილია"
+
+#. TRANSLATORS: This description describes the device passing the
+#. minimum requirement of security check.
+#: panels/privacy/cc-firmware-security-dialog.c:123
+msgid ""
+"This device meets basic security requirements. Its hardware has protection "
+"against some of the most common security threats."
+msgstr ""
+
+#. TRANSLATORS: in reference to firmware protection: 2~4 stars
+#: panels/privacy/cc-firmware-security-dialog.c:134
+#: panels/privacy/cc-firmware-security-page.c:553
+msgid "Protected"
+msgstr "დაცული"
+
+#. TRANSLATOR: This description describes the devices passing
+#. the extended security check.
+#: panels/privacy/cc-firmware-security-dialog.c:137
+msgid ""
+"This device passes current security tests. Its hardware is protected against "
+"the majority of security threats."
+msgstr ""
+
+#. TRANSLATORS: in reference to firmware protection: ??? stars
+#: panels/privacy/cc-firmware-security-dialog.c:145
+#: panels/privacy/cc-firmware-security-page.c:560
+msgid "Checks Unavailable"
+msgstr "შემოწმებები მიუწვდომელია"
+
+#. TRANSLATORS: When the security result is unavailable, this description is shown.
+#: panels/privacy/cc-firmware-security-dialog.c:147
+msgid ""
+"Device security checks are not available for this device. It is not possible "
+"to tell whether it meets security requirements."
+msgstr ""
+
+#: panels/privacy/cc-firmware-security-dialog.c:367
+msgid "Report copied to clipboard"
+msgstr "ანგარიში დაკოპირდა გაცვლის ბაფერში"
+
+#: panels/privacy/cc-firmware-security-dialog.ui:65
+msgid "_Copy Technical Report"
+msgstr ""
+
+#: panels/privacy/cc-firmware-security-help-dialog.ui:4
+msgid "About Device Security"
+msgstr "მოწყობილობის უსაფრთხოების შესახებ"
+
+#: panels/privacy/cc-firmware-security-help-dialog.ui:27
+msgid ""
+"Device security provides information about how protected your device is "
+"against security issues which target the hardware itself.\n"
+"\n"
+"Aspects of hardware that affect security include:\n"
+"\n"
+"• security features that are built into a hardware itself;\n"
+"• how the hardware is configured to protect against security issues;\n"
+"• the security of the software runs directly on the hardware.\n"
+"\n"
+"Security threats which affect hardware include malware and viruses that "
+"target the software that runs directly on the hardware. It also includes "
+"physical tampering, such as physical connection to the hardware to read data "
+"and implant malware.\n"
+"\n"
+"Device security is just one aspect of security, and does not reflect the "
+"overall security status of the system and applications."
+msgstr ""
+
+#: panels/privacy/cc-firmware-security-page.c:121
+msgid "Protected against malicious software when the device starts."
+msgstr ""
+
+#: panels/privacy/cc-firmware-security-page.c:127
+msgid "Secure Boot has Problems"
+msgstr "დაცული ჩარტვირთვის პრობლემები"
+
+#: panels/privacy/cc-firmware-security-page.c:128
+msgid "Some protection when the device is started."
+msgstr ""
+
+#: panels/privacy/cc-firmware-security-page.c:133
+msgid "Secure Boot is Off"
+msgstr "დაცული ჩატვირთვა გამორთულია"
+
+#: panels/privacy/cc-firmware-security-page.c:134
+msgid "No protection when the device is started."
+msgstr ""
+
+#. TRANSLATORS: this is to explain an event that has already happened
+#: panels/privacy/cc-firmware-security-page.c:153
+msgid ""
+"This issue could have been caused by a change in UEFI firmware settings, an "
+"operating system configuration change, or because of malicious software on "
+"this system."
+msgstr ""
+
+#. TRANSLATORS: this is to explain an event that has already happened
+#: panels/privacy/cc-firmware-security-page.c:161
+msgid ""
+"This issue could have been caused by a change in the UEFI firmware settings, "
+"or because of malicious software on this system."
+msgstr ""
+
+#. TRANSLATORS: this is to explain an event that has already happened
+#: panels/privacy/cc-firmware-security-page.c:168
+msgid ""
+"This issue could have been caused by an operating system configuration "
+"change, or because of malicious software on this system."
+msgstr ""
+
+#. TRANSLATOR: this is the date in "%Y-%m-%d %H:%M:%S" format,
+#. for example: 2022-08-01 22:48:00
+#: panels/privacy/cc-firmware-security-page.c:226
+#, c-format
+msgid "%1$s"
+msgstr "%1$s"
+
+#. TRANSLATOR: This is the text event status output when the event status is "success"
+#: panels/privacy/cc-firmware-security-page.c:232
+msgid "Pass"
+msgstr "გავლა"
+
+#. TRANSLATOR: This is the text event status output when the event status is not "success"
+#: panels/privacy/cc-firmware-security-page.c:235
+msgid "! Fail"
+msgstr "! ჩაიშალა"
+
+#: panels/privacy/cc-firmware-security-page.c:238
+#, c-format
+msgid "(%1$s → %2$s)"
+msgstr "(%1$s → %2$s)"
+
+#: panels/privacy/cc-firmware-security-page.c:538
+msgid "Hardware does not pass checks."
+msgstr "აპარატურამ გამოცდა ვერ გაიარა."
+
+#: panels/privacy/cc-firmware-security-page.c:545
+msgid "Hardware meets basic security requirements."
+msgstr "აპარატურა აკმაყოფილებს საბაზისო უსაფრთხოების პირობებს."
+
+#: panels/privacy/cc-firmware-security-page.c:554
+msgid "Hardware has a good level of protection."
+msgstr "აპარატურას უსაფრთხოების მისაღები დონე გააჩნია."
+
+#: panels/privacy/cc-firmware-security-page.c:561
+msgid "Security levels are not available for this device."
+msgstr "ამ მოწყობილობისთვის უსაფრთხოების დონეები ხელმისაწვდომი არაა."
+
+#: panels/privacy/cc-firmware-security-page.ui:4
+msgid "Device Security"
+msgstr "მოწყობილობის უსაფრთხოება"
+
+#: panels/privacy/cc-firmware-security-page.ui:57
+msgid "Starting Device Security…"
+msgstr "მოწყობილობის უსაფრთხოების გაშვება…"
+
+#: panels/privacy/cc-firmware-security-page.ui:83
+msgid "Device Security Unavailable"
+msgstr "მოწყობილობის უსაფრთხოება მიუწვდომელია"
+
+#: panels/privacy/cc-firmware-security-page.ui:85
+msgid ""
+"Device Security is only available on physical hardware. No physical hardware "
+"has been detected."
+msgstr ""
+
+#: panels/privacy/cc-firmware-security-page.ui:223
+msgid "Security Events"
+msgstr "უსაფრთხოების მოვლენები"
+
+#: panels/privacy/cc-firmware-security-page.ui:233
+msgid "No Events"
+msgstr "ღონისძიებების გარეშე"
+
+#. TRANSLATORS: if the stauts is valid. For example security check is valid and key is valid.
+#: panels/privacy/cc-firmware-security-utils.c:35
+msgid "Valid"
+msgstr "სწორი"
+
+#. TRANSLATORS: if the status or key is not valid.
+#: panels/privacy/cc-firmware-security-utils.c:40
+msgid "Not Valid"
+msgstr "არასწორია"
+
+#. TRANSLATORS: if the function is not enabled through BIOS or OS settings.
+#: panels/privacy/cc-firmware-security-utils.c:50
+msgid "Not Enabled"
+msgstr "არ არის ჩართული"
+
+#. TRANSLATORS: the memory space or system mode is locked to prevent from malicious modification.
+#: panels/privacy/cc-firmware-security-utils.c:55
+msgid "Locked"
+msgstr "დაბლოკილი"
+
+#. TRANSLATORS: the memory space or system mode is not locked.
+#: panels/privacy/cc-firmware-security-utils.c:60
+msgid "Not Locked"
+msgstr "დაბლოკილი არაა"
+
+#. TRANSLATORS: The data is encrypted to prevent from malicious reading.
+#: panels/privacy/cc-firmware-security-utils.c:65
+msgid "Encrypted"
+msgstr "დაშიფრული"
+
+#. TRANSLATORS: the data in memory is plane text.
+#: panels/privacy/cc-firmware-security-utils.c:70
+msgid "Not Encrypted"
+msgstr "არ არის დაშიფრული"
+
+#. TRANSLATORS: Linux kernel is tainted by third party kernel module.
+#: panels/privacy/cc-firmware-security-utils.c:75
+msgid "Tainted"
+msgstr "გაფუჭებულია"
+
+#. TRANSLATORS: All the loaded kernel module are licensed.
+#: panels/privacy/cc-firmware-security-utils.c:80
+msgid "Not Tainted"
+msgstr "ყველა მოდული ლიცენზირებულია"
+
+#. TRANSLATORS: the feature can be detected.
+#: panels/privacy/cc-firmware-security-utils.c:85
+msgid "Found"
+msgstr "ნაპოვნი"
+
+#. TRANSLATORS: the feature can't be detected.
+#: panels/privacy/cc-firmware-security-utils.c:90
+msgid "Not Found"
+msgstr "ნაპოვნი არაა"
+
+#. TRANSLATORS: the function is supported by hardware.
+#: panels/privacy/cc-firmware-security-utils.c:95
+msgid "Supported"
+msgstr "მხარდაჭერილი"
+
+#. TRANSLATORS: the function isn't supported by hardware.
+#: panels/privacy/cc-firmware-security-utils.c:100
+msgid "Not Supported"
+msgstr "მხარდაუჭერელია"
+
+#: panels/privacy/cc-location-page.ui:14
+msgid ""
+"Location services use GPS, Wi-Fi and cellular connections to determine the "
+"approximate location of this device. <a href='https://location.services."
+"mozilla.com/privacy'>Learn about what data is collected, and how it is used."
+"</a>"
+msgstr ""
+
+#: panels/privacy/cc-location-page.ui:19 panels/privacy/cc-privacy-panel.ui:55
+msgid "_Location Services"
+msgstr "_მდებარეობის სერვისები"
+
+#: panels/privacy/cc-location-page.ui:20
+msgid "Allow permitted apps to access location data"
+msgstr ""
+
+#: panels/privacy/cc-location-page.ui:30
+msgid ""
+"The following sandboxed apps have been given access to location data. Apps "
+"that are not sandboxed can access location data without asking for "
+"permission."
+msgstr ""
+
+#: panels/privacy/cc-location-page.ui:44
+msgid "No sandboxed apps have asked for location access"
+msgstr ""
+
+#: panels/privacy/cc-microphone-page.ui:4
+msgid "Microphones"
+msgstr "მიკროფონები"
+
+#: panels/privacy/cc-microphone-page.ui:18
+msgid "_Microphone Access"
+msgstr "მიკროფონთან _წვდომა"
+
+#: panels/privacy/cc-microphone-page.ui:19
+msgid "Allow permitted apps to use microphones"
+msgstr ""
+
+#: panels/privacy/cc-microphone-page.ui:29
+msgid ""
+"The following sandboxed apps have been given permission to use microphones. "
+"Apps that are not sandboxed can use microphones without asking for "
+"permission."
+msgstr ""
+
+#: panels/privacy/cc-microphone-page.ui:44
+msgid "No sandboxed apps have asked for microphone access"
+msgstr ""
+
+#: panels/privacy/cc-privacy-panel.ui:14
+#: panels/privacy/gnome-privacy-panel.desktop.in:3
+msgid "Privacy"
+msgstr "პირადი ინფორმაცია"
+
+#: panels/privacy/cc-privacy-panel.ui:43
+msgid "_Screen Lock"
+msgstr "ეკრანის _დაბლოკვა"
+
+#: panels/privacy/cc-privacy-panel.ui:44
+msgid "Automatic screen lock"
+msgstr "ავტომატური ეკრანის დაბლოკვა"
+
+#: panels/privacy/cc-privacy-panel.ui:56
+msgid "Control access to your location"
+msgstr "თქვენ მდებარეობაზე წვდომის კონტროლი"
+
+#: panels/privacy/cc-privacy-panel.ui:67
+msgid "_File History &amp; Trash"
+msgstr "_ფაილის ისტორია & ნაგავი"
+
+#: panels/privacy/cc-privacy-panel.ui:68
+msgid "Remove saved data and files"
+msgstr ""
+
+#: panels/privacy/cc-privacy-panel.ui:79
+msgid "_Diagnostics"
+msgstr "_დიაგნოსტიკა"
+
+#: panels/privacy/cc-privacy-panel.ui:80
+msgid "Automatic problem reporting"
+msgstr "პრობლემის ავტომატური ანგარიში"
+
+#: panels/privacy/cc-privacy-panel.ui:100
+msgid "_Cameras"
+msgstr "_კამერები"
+
+#: panels/privacy/cc-privacy-panel.ui:101
+msgid "Control camera access"
+msgstr "კამერასთან წვდომის კონტროლი"
+
+#: panels/privacy/cc-privacy-panel.ui:112
+msgid "_Microphones"
+msgstr "_მიკროფონები"
+
+#: panels/privacy/cc-privacy-panel.ui:113
+msgid "Control microphone access"
+msgstr "მიკროფონთან წვდომის კონტროლი"
+
+#: panels/privacy/cc-privacy-panel.ui:125
+msgid "_Thunderbolt"
+msgstr "_თანდერბოლტი"
+
+#: panels/privacy/cc-privacy-panel.ui:126
+msgid "Manage device access"
+msgstr "მოწყობილობებთან წვდომის მართვა"
+
+#: panels/privacy/cc-privacy-panel.ui:137
+msgid "Device _Security"
+msgstr "მოწყობილობის _უსაფრთხოება"
+
+#: panels/privacy/cc-privacy-panel.ui:138
+msgid "Hardware security status and information"
+msgstr "აპარატურის სტატუსი და ინფორმაცია"
+
+#. Translators: Option for "Lock screen after blank" in "Screen Lock" page
+#: panels/privacy/cc-screen-page.c:67
+msgctxt "lock_screen"
+msgid "Screen Turns Off"
+msgstr "ეკრანი გაითიშება"
+
+#. Translators: Option for "Lock screen after blank" in "Screen Lock" page
+#: panels/privacy/cc-screen-page.c:70
+msgctxt "lock_screen"
+msgid "30 seconds"
+msgstr "30 წამი"
+
+#. Translators: Option for "Lock screen after blank" in "Screen Lock" page
+#: panels/privacy/cc-screen-page.c:73
+msgctxt "lock_screen"
+msgid "1 minute"
+msgstr "1 წუთი"
+
+#. Translators: Option for "Lock screen after blank" in "Screen Lock" page
+#: panels/privacy/cc-screen-page.c:76
+msgctxt "lock_screen"
+msgid "2 minutes"
+msgstr "2 წუთი"
+
+#. Translators: Option for "Lock screen after blank" in "Screen Lock" page
+#: panels/privacy/cc-screen-page.c:79
+msgctxt "lock_screen"
+msgid "3 minutes"
+msgstr "3 წუთი"
+
+#. Translators: Option for "Lock screen after blank" in "Screen Lock" page
+#: panels/privacy/cc-screen-page.c:82
+msgctxt "lock_screen"
+msgid "5 minutes"
+msgstr "5 წუთი"
+
+#. Translators: Option for "Lock screen after blank" in "Screen Lock" page
+#: panels/privacy/cc-screen-page.c:85
+msgctxt "lock_screen"
+msgid "30 minutes"
+msgstr "30 წუთი"
+
+#. Translators: Option for "Lock screen after blank" in "Screen Lock" page
+#: panels/privacy/cc-screen-page.c:88
+msgctxt "lock_screen"
+msgid "1 hour"
+msgstr "1 საათი"
+
+#. Translators: Option for "Blank screen" in "Screen Lock" page
+#: panels/privacy/cc-screen-page.c:131
+msgctxt "blank_screen"
+msgid "1 minute"
+msgstr "1 წუთი"
+
+#. Translators: Option for "Blank screen" in "Screen Lock" page
+#: panels/privacy/cc-screen-page.c:134
+msgctxt "blank_screen"
+msgid "2 minutes"
+msgstr "2 წუთი"
+
+#. Translators: Option for "Blank screen" in "Screen Lock" page
+#: panels/privacy/cc-screen-page.c:137
+msgctxt "blank_screen"
+msgid "3 minutes"
+msgstr "3 წუთი"
+
+#. Translators: Option for "Blank screen" in "Screen Lock" page
+#: panels/privacy/cc-screen-page.c:140
+msgctxt "blank_screen"
+msgid "4 minutes"
+msgstr "4 წუთი"
+
+#. Translators: Option for "Blank screen" in "Screen Lock" page
+#: panels/privacy/cc-screen-page.c:143
+msgctxt "blank_screen"
+msgid "5 minutes"
+msgstr "5 წუთი"
+
+#. Translators: Option for "Blank screen" in "Screen Lock" page
+#: panels/privacy/cc-screen-page.c:146
+msgctxt "blank_screen"
+msgid "8 minutes"
+msgstr "8 წუთი"
+
+#. Translators: Option for "Blank screen" in "Screen Lock" page
+#: panels/privacy/cc-screen-page.c:149
+msgctxt "blank_screen"
+msgid "10 minutes"
+msgstr "10 წუთი"
+
+#. Translators: Option for "Blank screen" in "Screen Lock" page
+#: panels/privacy/cc-screen-page.c:152
+msgctxt "blank_screen"
+msgid "12 minutes"
+msgstr "12 წუთი"
+
+#. Translators: Option for "Blank screen" in "Screen Lock" page
+#: panels/privacy/cc-screen-page.c:155
+msgctxt "blank_screen"
+msgid "15 minutes"
+msgstr "15 წუთი"
+
+#. Translators: Option for "Blank screen" in "Screen Lock" page
+#: panels/privacy/cc-screen-page.c:158
+msgctxt "blank_screen"
+msgid "Never"
+msgstr "არასდროს"
+
+#: panels/privacy/cc-screen-page.ui:4
+msgid "Screen Lock"
+msgstr "ეკრანის დაბლოკვა"
+
+#: panels/privacy/cc-screen-page.ui:14
+msgid ""
+"Automatically locking the screen prevents others from accessing the computer "
+"while you're away."
+msgstr ""
+
+#: panels/privacy/cc-screen-page.ui:21
+msgid "Blank Screen Delay"
+msgstr "ეკრანის გასუფთავების დაყოვნება"
+
+#: panels/privacy/cc-screen-page.ui:22
+msgid "Period of inactivity until screen blanks"
+msgstr ""
+
+#: panels/privacy/cc-screen-page.ui:40
+msgid "Automatic Screen _Lock"
+msgstr "ეკრანის ავტომატური _დაბლოკვა"
+
+#: panels/privacy/cc-screen-page.ui:41
+msgid "Locks the screen after it blanks"
+msgstr "ეკრანის ჩაქრობისას მისი დაბლოკვა"
+
+#: panels/privacy/cc-screen-page.ui:55
+msgid "Automatic _Screen Lock Delay"
+msgstr "_ეკრანის ავტომატური დაბლოკვის დაყოვნება"
+
+#: panels/privacy/cc-screen-page.ui:56
+msgid "Time from screen blank to screen lock"
+msgstr ""
+
+#: panels/privacy/cc-screen-page.ui:89
+msgid "Forbid new _USB devices"
+msgstr "ახალი _USB მოწყობილობების აკრძალვა"
+
+#: panels/privacy/cc-screen-page.ui:90
+msgid ""
+"Prevent new USB devices from interacting with the system when the screen is "
+"locked."
+msgstr ""
+
+#: panels/privacy/cc-screen-page.ui:107
+msgid "Screen Privacy"
+msgstr "ეკრანის კონფიდენციალობა"
+
+#: panels/privacy/cc-screen-page.ui:112
+msgid "Restrict Viewing Angle"
+msgstr ""
+
+#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
+#: panels/privacy/cc-usage-page.c:54
+msgctxt "purge_files"
+msgid "1 hour"
+msgstr "1 საათი"
+
+#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
+#: panels/privacy/cc-usage-page.c:57
+msgctxt "purge_files"
+msgid "1 day"
+msgstr "1 დღე"
+
+#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
+#: panels/privacy/cc-usage-page.c:60
+msgctxt "purge_files"
+msgid "2 days"
+msgstr "2 დღე"
+
+#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
+#: panels/privacy/cc-usage-page.c:63
+msgctxt "purge_files"
+msgid "3 days"
+msgstr "3 დღე"
+
+#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
+#: panels/privacy/cc-usage-page.c:66
+msgctxt "purge_files"
+msgid "4 days"
+msgstr "4 დღე"
+
+#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
+#: panels/privacy/cc-usage-page.c:69
+msgctxt "purge_files"
+msgid "5 days"
+msgstr "5 დღე"
+
+#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
+#: panels/privacy/cc-usage-page.c:72
+msgctxt "purge_files"
+msgid "6 days"
+msgstr "6 დღე"
+
+#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
+#: panels/privacy/cc-usage-page.c:75
+msgctxt "purge_files"
+msgid "7 days"
+msgstr "7 დღე"
+
+#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
+#: panels/privacy/cc-usage-page.c:78
+msgctxt "purge_files"
+msgid "14 days"
+msgstr "14 დღე"
+
+#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
+#: panels/privacy/cc-usage-page.c:81
+msgctxt "purge_files"
+msgid "30 days"
+msgstr "30 დღე"
+
+#: panels/privacy/cc-usage-page.c:177
+msgid "Empty all items from Trash?"
+msgstr "გნებავთ სანაგვე ყუთიდან ყველა ელემენტის წაშლა?"
+
+#: panels/privacy/cc-usage-page.c:178
+msgid "All items in the Trash will be permanently deleted."
+msgstr ""
+"მისამართების სიის გასუფთავების შემთხვევაში, თქვენ მათ სამუდამოდ წაშლით."
+
+#: panels/privacy/cc-usage-page.c:179
+msgid "_Empty Trash"
+msgstr "ნაგვის _ყუთის დაცარიელება"
+
+#: panels/privacy/cc-usage-page.c:215
+msgid "Delete all the temporary files?"
+msgstr ""
+
+#: panels/privacy/cc-usage-page.c:216
+msgid "All the temporary files will be permanently deleted."
+msgstr ""
+
+#: panels/privacy/cc-usage-page.c:217
+msgid "_Purge Temporary Files"
+msgstr ""
+
+#. Translators: Option for "File History Duration" in "File History" group
+#: panels/privacy/cc-usage-page.c:244
+msgctxt "retain_history"
+msgid "1 day"
+msgstr "1 დღე"
+
+#. Translators: Option for "File History Duration" in "File History" group
+#: panels/privacy/cc-usage-page.c:247
+msgctxt "retain_history"
+msgid "7 days"
+msgstr "7 დღე"
+
+#. Translators: Option for "File History Duration" in "File History" group
+#: panels/privacy/cc-usage-page.c:250
+msgctxt "retain_history"
+msgid "30 days"
+msgstr "30 დღე"
+
+#. Translators: Option for "File History Duration" in "File History" group
+#: panels/privacy/cc-usage-page.c:253
+msgctxt "retain_history"
+msgid "Forever"
+msgstr "სამუდამოდ"
+
+#: panels/privacy/cc-usage-page.c:342
+msgid "Clear File History?"
+msgstr "გავასუფთავო ფაილის ისტორია?"
+
+#: panels/privacy/cc-usage-page.c:343
+msgid "After clearing, lists of recently used files will appear empty."
+msgstr ""
+
+#: panels/privacy/cc-usage-page.c:344
+msgid "_Clear History"
+msgstr "ისტორიის _გასუფთავება"
+
+#: panels/privacy/cc-usage-page.ui:4
+msgid "File History & Trash"
+msgstr "ფაილის ისტორია & ნაგავი"
+
+#: panels/privacy/cc-usage-page.ui:17
+msgid "File History"
+msgstr "ფაილის ისტორია"
+
+#: panels/privacy/cc-usage-page.ui:18
+msgid ""
+"File history keeps a record of files that you have used. This information is "
+"shared between apps, and makes it easier to find files that you might want "
+"to use."
+msgstr ""
+
+#: panels/privacy/cc-usage-page.ui:21
+msgid "File H_istory"
+msgstr "_ფაილის ისტორია"
+
+#: panels/privacy/cc-usage-page.ui:33
+msgid "File _History Duration"
+msgstr "ფაილის _ისტორიის ხანგრძლივობა"
+
+#: panels/privacy/cc-usage-page.ui:55
+msgid "_Clear History…"
+msgstr "ისტორიის _გასუფთავება…"
+
+#: panels/privacy/cc-usage-page.ui:71
+msgid "Trash &amp; Temporary Files"
+msgstr ""
+
+#: panels/privacy/cc-usage-page.ui:72
+msgid ""
+"Trash and temporary files can sometimes include personal or sensitive "
+"information. Automatically deleting them can help to protect privacy."
+msgstr ""
+
+#: panels/privacy/cc-usage-page.ui:75
+msgid "Automatically Delete _Trash Content"
+msgstr ""
+
+#: panels/privacy/cc-usage-page.ui:87
+msgid "Automatically Delete Temporary _Files"
+msgstr ""
+
+#: panels/privacy/cc-usage-page.ui:99
+msgid "Automatically Delete _Period"
+msgstr ""
+
+#: panels/privacy/cc-usage-page.ui:122
+msgid "_Empty Trash…"
+msgstr "_ნაგვის ყუთის დაცარიელება…"
+
+#: panels/privacy/cc-usage-page.ui:134
+msgid "_Delete Temporary Files…"
+msgstr "_დროებითი ფაილების წაშლა…"
+
+#: panels/privacy/gnome-privacy-panel.desktop.in:4
+msgid "Control access to hardware, services, and data"
+msgstr ""
+
+#. Translators: Search terms to find the Privacy panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#: panels/privacy/gnome-privacy-panel.desktop.in:15
+msgid ""
+"Privacy;Screen;Lock;Private;Usage;Recent;History;Files;Temporary;Tmp;Trash;"
+"Purge;Retain;Diagnostics;Crash;Location;Gps;Camera;Photos;Video;Webcam;"
+"Microphone;Recording;Security;Firmware;Thunderbolt;"
+msgstr ""
+
 #: panels/region/cc-format-chooser.c:148 panels/region/cc-format-chooser.c:196
 #: panels/region/cc-format-chooser.ui:4
 msgid "Formats"
@@ -5891,202 +6447,33 @@ msgid ""
 "removable;media;autorun;"
 msgstr ""
 
-#. Translators: Option for "Lock screen after blank" in "Screen Lock" panel
-#: panels/screen/cc-screen-panel.c:70
-msgctxt "lock_screen"
-msgid "Screen Turns Off"
-msgstr "ეკრანი გაითიშება"
-
-#. Translators: Option for "Lock screen after blank" in "Screen Lock" panel
-#: panels/screen/cc-screen-panel.c:73
-msgctxt "lock_screen"
-msgid "30 seconds"
-msgstr "30 წამი"
-
-#. Translators: Option for "Lock screen after blank" in "Screen Lock" panel
-#: panels/screen/cc-screen-panel.c:76
-msgctxt "lock_screen"
-msgid "1 minute"
-msgstr "1 წუთი"
-
-#. Translators: Option for "Lock screen after blank" in "Screen Lock" panel
-#: panels/screen/cc-screen-panel.c:79
-msgctxt "lock_screen"
-msgid "2 minutes"
-msgstr "2 წუთი"
-
-#. Translators: Option for "Lock screen after blank" in "Screen Lock" panel
-#: panels/screen/cc-screen-panel.c:82
-msgctxt "lock_screen"
-msgid "3 minutes"
-msgstr "3 წუთი"
-
-#. Translators: Option for "Lock screen after blank" in "Screen Lock" panel
-#: panels/screen/cc-screen-panel.c:85
-msgctxt "lock_screen"
-msgid "5 minutes"
-msgstr "5 წუთი"
-
-#. Translators: Option for "Lock screen after blank" in "Screen Lock" panel
-#: panels/screen/cc-screen-panel.c:88
-msgctxt "lock_screen"
-msgid "30 minutes"
-msgstr "30 წუთი"
-
-#. Translators: Option for "Lock screen after blank" in "Screen Lock" panel
-#: panels/screen/cc-screen-panel.c:91
-msgctxt "lock_screen"
-msgid "1 hour"
-msgstr "1 საათი"
-
-#. Translators: Option for "Blank screen" in "Screen Lock" panel
-#: panels/screen/cc-screen-panel.c:134
-msgctxt "blank_screen"
-msgid "1 minute"
-msgstr "1 წუთი"
-
-#. Translators: Option for "Blank screen" in "Screen Lock" panel
-#: panels/screen/cc-screen-panel.c:137
-msgctxt "blank_screen"
-msgid "2 minutes"
-msgstr "2 წუთი"
-
-#. Translators: Option for "Blank screen" in "Screen Lock" panel
-#: panels/screen/cc-screen-panel.c:140
-msgctxt "blank_screen"
-msgid "3 minutes"
-msgstr "3 წუთი"
-
-#. Translators: Option for "Blank screen" in "Screen Lock" panel
-#: panels/screen/cc-screen-panel.c:143
-msgctxt "blank_screen"
-msgid "4 minutes"
-msgstr "4 წუთი"
-
-#. Translators: Option for "Blank screen" in "Screen Lock" panel
-#: panels/screen/cc-screen-panel.c:146
-msgctxt "blank_screen"
-msgid "5 minutes"
-msgstr "5 წუთი"
-
-#. Translators: Option for "Blank screen" in "Screen Lock" panel
-#: panels/screen/cc-screen-panel.c:149
-msgctxt "blank_screen"
-msgid "8 minutes"
-msgstr "8 წუთი"
-
-#. Translators: Option for "Blank screen" in "Screen Lock" panel
-#: panels/screen/cc-screen-panel.c:152
-msgctxt "blank_screen"
-msgid "10 minutes"
-msgstr "10 წუთი"
-
-#. Translators: Option for "Blank screen" in "Screen Lock" panel
-#: panels/screen/cc-screen-panel.c:155
-msgctxt "blank_screen"
-msgid "12 minutes"
-msgstr "12 წუთი"
-
-#. Translators: Option for "Blank screen" in "Screen Lock" panel
-#: panels/screen/cc-screen-panel.c:158
-msgctxt "blank_screen"
-msgid "15 minutes"
-msgstr "15 წუთი"
-
-#. Translators: Option for "Blank screen" in "Screen Lock" panel
-#: panels/screen/cc-screen-panel.c:161
-msgctxt "blank_screen"
-msgid "Never"
-msgstr "არასდროს"
-
-#: panels/screen/cc-screen-panel.ui:6
-msgid ""
-"Automatically locking the screen prevents others from accessing the computer "
-"while you're away."
-msgstr ""
-
-#: panels/screen/cc-screen-panel.ui:13
-msgid "Blank Screen Delay"
-msgstr "ეკრანის გასუფთავების დაყოვნება"
-
-#: panels/screen/cc-screen-panel.ui:14
-msgid "Period of inactivity until screen blanks"
-msgstr ""
-
-#: panels/screen/cc-screen-panel.ui:32
-msgid "Automatic Screen _Lock"
-msgstr "ეკრანის ავტომატური _დაბლოკვა"
-
-#: panels/screen/cc-screen-panel.ui:33
-msgid "Locks the screen after it blanks"
-msgstr "ეკრანის ჩაქრობისას მისი დაბლოკვა"
-
-#: panels/screen/cc-screen-panel.ui:47
-msgid "Automatic _Screen Lock Delay"
-msgstr "_ეკრანის ავტომატური დაბლოკვის დაყოვნება"
-
-#: panels/screen/cc-screen-panel.ui:48
-msgid "Time from screen blank to screen lock"
-msgstr ""
-
-#: panels/screen/cc-screen-panel.ui:81
-msgid "Forbid new _USB devices"
-msgstr "ახალი _USB მოწყობილობების აკრძალვა"
-
-#: panels/screen/cc-screen-panel.ui:82
-msgid ""
-"Prevent new USB devices from interacting with the system when the screen is "
-"locked."
-msgstr ""
-
-#: panels/screen/cc-screen-panel.ui:99
-msgid "Screen Privacy"
-msgstr "ეკრანის კონფიდენციალობა"
-
-#: panels/screen/cc-screen-panel.ui:104
-msgid "Restrict Viewing Angle"
-msgstr ""
-
-#: panels/screen/gnome-screen-panel.desktop.in:3
-msgid "Screen Lock"
-msgstr "ეკრანის დაბლოკვა"
-
-#: panels/screen/gnome-screen-panel.desktop.in:4
-msgid "Automatically lock the screen"
-msgstr "ეკრანის ავტომატური დაბლოკვა"
-
-#. Translators: Search terms to find the Screen panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
-#: panels/screen/gnome-screen-panel.desktop.in:16
-msgid "screen;lock;private;privacy;"
-msgstr ""
-
 #: panels/search/cc-search-locations-dialog.c:675
 msgid "Select Location"
 msgstr "მდებარეობის არჩევა"
 
-#: panels/search/cc-search-locations-dialog.ui:10
+#: panels/search/cc-search-locations-dialog.ui:11
 #: panels/search/cc-search-panel.ui:22
 msgid "Search Locations"
 msgstr "ძებნის მდებარეობა"
 
-#: panels/search/cc-search-locations-dialog.ui:13
+#: panels/search/cc-search-locations-dialog.ui:19
 msgid ""
 "Folders which are searched by system apps, such as Files, Photos and Videos."
 msgstr ""
 
-#: panels/search/cc-search-locations-dialog.ui:16
+#: panels/search/cc-search-locations-dialog.ui:22
 msgid "Places"
 msgstr "ადგილები"
 
-#: panels/search/cc-search-locations-dialog.ui:33
+#: panels/search/cc-search-locations-dialog.ui:39
 msgid "Bookmarks"
 msgstr "სანიშნები"
 
-#: panels/search/cc-search-locations-dialog.ui:50
+#: panels/search/cc-search-locations-dialog.ui:56
 msgid "Others"
 msgstr "სხვები"
 
-#: panels/search/cc-search-locations-dialog.ui:57
+#: panels/search/cc-search-locations-dialog.ui:63
 msgid "Add Location"
 msgstr "მდებარეობის დამატება"
 
@@ -6478,188 +6865,6 @@ msgstr ""
 msgid ""
 "Card;Microphone;Volume;Fade;Balance;Bluetooth;Headset;Audio;Output;Input;"
 msgstr ""
-
-#: panels/thunderbolt/cc-bolt-device-dialog.c:81
-#: panels/thunderbolt/cc-bolt-device-entry.c:123
-msgctxt "Thunderbolt Device Status"
-msgid "Disconnected"
-msgstr "გათიშულია"
-
-#: panels/thunderbolt/cc-bolt-device-dialog.c:84
-#: panels/thunderbolt/cc-bolt-device-entry.c:126
-msgctxt "Thunderbolt Device Status"
-msgid "Connecting"
-msgstr "დაკავშირება"
-
-#: panels/thunderbolt/cc-bolt-device-dialog.c:87
-#: panels/thunderbolt/cc-bolt-device-entry.c:130
-#: panels/thunderbolt/cc-bolt-device-entry.c:142
-msgctxt "Thunderbolt Device Status"
-msgid "Connected"
-msgstr "დაკავშირებულია"
-
-#: panels/thunderbolt/cc-bolt-device-dialog.c:90
-msgctxt "Thunderbolt Device Status"
-msgid "Authorization Error"
-msgstr "ავტორიზაციის შეცდომა"
-
-#: panels/thunderbolt/cc-bolt-device-dialog.c:93
-#: panels/thunderbolt/cc-bolt-device-entry.c:136
-msgctxt "Thunderbolt Device Status"
-msgid "Authorizing"
-msgstr "ავტრიზაცია"
-
-#: panels/thunderbolt/cc-bolt-device-dialog.c:100
-msgctxt "Thunderbolt Device Status"
-msgid "Reduced Functionality"
-msgstr "შეზღუდული ფუნქციონალი"
-
-#: panels/thunderbolt/cc-bolt-device-dialog.c:102
-msgctxt "Thunderbolt Device Status"
-msgid "Connected & Authorized"
-msgstr "მიერთებული და ავტორიზებული"
-
-#: panels/thunderbolt/cc-bolt-device-dialog.c:108
-#: panels/thunderbolt/cc-bolt-device-entry.c:150
-msgctxt "Thunderbolt Device Status"
-msgid "Unknown"
-msgstr "უცნობია"
-
-#. Translators: The time point the device was authorized.
-#: panels/thunderbolt/cc-bolt-device-dialog.c:163
-msgid "Authorized at"
-msgstr "ავტორიზებულია"
-
-#. Translators: The time point the device was connected.
-#: panels/thunderbolt/cc-bolt-device-dialog.c:169
-msgid "Connected at"
-msgstr "დაკავშირებულია"
-
-#. Translators: The time point the device was enrolled,
-#. * i.e. authorized and stored in the device database.
-#: panels/thunderbolt/cc-bolt-device-dialog.c:176
-msgid "Enrolled at"
-msgstr "მიერთებულია"
-
-#: panels/thunderbolt/cc-bolt-device-dialog.c:250
-msgid "Failed to authorize device: "
-msgstr "მოწყობილობის ავტორიზაციის შეცდომა: "
-
-#: panels/thunderbolt/cc-bolt-device-dialog.c:317
-msgid "Failed to forget device: "
-msgstr "მოწყობილობის დავიწყების შეცდომა: "
-
-#: panels/thunderbolt/cc-bolt-device-dialog.c:458
-#, c-format
-msgid "Depends on %u other device"
-msgid_plural "Depends on %u other devices"
-msgstr[0] ""
-
-#: panels/thunderbolt/cc-bolt-device-dialog.ui:25
-msgid "Status"
-msgstr "სტატუსი"
-
-#: panels/thunderbolt/cc-bolt-device-dialog.ui:30
-#| msgid "UUID:"
-msgid "UUID"
-msgstr "UUID"
-
-#: panels/thunderbolt/cc-bolt-device-dialog.ui:35
-msgid "Timestamp"
-msgstr "დროის შტამპი"
-
-#: panels/thunderbolt/cc-bolt-device-dialog.ui:43
-msgid "Depends on other devices"
-msgstr ""
-
-#: panels/thunderbolt/cc-bolt-device-dialog.ui:73
-msgid "Authorize and Connect"
-msgstr "ავტორიზაცია და დაკავშირება"
-
-#: panels/thunderbolt/cc-bolt-device-dialog.ui:88
-msgid "Forget Device"
-msgstr "მოწყობილობის დავიწყება"
-
-#: panels/thunderbolt/cc-bolt-device-entry.c:133
-msgctxt "Thunderbolt Device Status"
-msgid "Error"
-msgstr "შეცდომა"
-
-#: panels/thunderbolt/cc-bolt-device-entry.c:144
-msgctxt "Thunderbolt Device Status"
-msgid "Authorized"
-msgstr "ავტორიზებული"
-
-#: panels/thunderbolt/cc-bolt-panel.c:233
-msgid ""
-"The Thunderbolt subsystem (boltd) is not installed or not set up properly."
-msgstr ""
-
-#: panels/thunderbolt/cc-bolt-panel.c:489
-#: panels/thunderbolt/cc-bolt-panel.ui:123
-msgid "Allow direct access to devices such as docks and external GPUs."
-msgstr ""
-
-#: panels/thunderbolt/cc-bolt-panel.c:490
-msgid "Only USB and Display Port devices can attach."
-msgstr ""
-
-#: panels/thunderbolt/cc-bolt-panel.c:525
-msgid ""
-"Thunderbolt could not be detected.\n"
-"Either the system lacks Thunderbolt support, it has been disabled in the "
-"BIOS or is set to an unsupported security level in the BIOS."
-msgstr ""
-
-#: panels/thunderbolt/cc-bolt-panel.c:569
-msgid "Thunderbolt support has been disabled in the BIOS."
-msgstr ""
-
-#: panels/thunderbolt/cc-bolt-panel.c:573
-msgid "Thunderbolt security level could not be determined."
-msgstr ""
-
-#: panels/thunderbolt/cc-bolt-panel.c:693
-#, c-format
-msgid "Error switching direct mode: %s"
-msgstr "შეცდომა მიმართვის რეჟიმის შეცვლისას: %s"
-
-#: panels/thunderbolt/cc-bolt-panel.ui:41
-msgid "Close notification"
-msgstr "შეტყობინების დახურვა"
-
-#: panels/thunderbolt/cc-bolt-panel.ui:102
-msgid "No Thunderbolt Support"
-msgstr ""
-
-#: panels/thunderbolt/cc-bolt-panel.ui:103
-msgid "Could not connect to the thunderbolt subsystem."
-msgstr ""
-
-#: panels/thunderbolt/cc-bolt-panel.ui:120
-msgid "Direct Access"
-msgstr "პირდაპირი წვდომა"
-
-#: panels/thunderbolt/cc-bolt-panel.ui:192
-msgid "Pending Devices"
-msgstr "დარჩენილი მოწყობილობები"
-
-#: panels/thunderbolt/cc-bolt-panel.ui:286
-msgid "No devices attached"
-msgstr "მოწყობილობები მიერთებული არაა"
-
-#: panels/thunderbolt/gnome-thunderbolt-panel.desktop.in:3
-msgid "Thunderbolt"
-msgstr "Thunderbolt"
-
-#: panels/thunderbolt/gnome-thunderbolt-panel.desktop.in:4
-msgid "Manage Thunderbolt device access"
-msgstr "Thunderbolt მოწყობილობებთან წვდომის მართვა"
-
-#. Translators: those are keywords for the thunderbolt control-center panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
-#: panels/thunderbolt/gnome-thunderbolt-panel.desktop.in:15
-msgid "Thunderbolt;privacy;"
-msgstr "Thunderbolt;privacy;"
 
 #: panels/universal-access/cc-cursor-size-dialog.ui:5
 msgid "Cursor Size"
@@ -7176,194 +7381,6 @@ msgid ""
 "Zoom;Screen;Reader;big;high;large;text;font;size;AccessX;Sticky;Keys;Slow;"
 "Bounce;Mouse;Double;click;Delay;Speed;Assist;Repeat;Blink;visual;hearing;"
 "audio;typing;animations;"
-msgstr ""
-
-#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
-#: panels/usage/cc-usage-panel.c:55
-msgctxt "purge_files"
-msgid "1 hour"
-msgstr "1 საათი"
-
-#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
-#: panels/usage/cc-usage-panel.c:58
-msgctxt "purge_files"
-msgid "1 day"
-msgstr "1 დღე"
-
-#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
-#: panels/usage/cc-usage-panel.c:61
-msgctxt "purge_files"
-msgid "2 days"
-msgstr "2 დღე"
-
-#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
-#: panels/usage/cc-usage-panel.c:64
-msgctxt "purge_files"
-msgid "3 days"
-msgstr "3 დღე"
-
-#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
-#: panels/usage/cc-usage-panel.c:67
-msgctxt "purge_files"
-msgid "4 days"
-msgstr "4 დღე"
-
-#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
-#: panels/usage/cc-usage-panel.c:70
-msgctxt "purge_files"
-msgid "5 days"
-msgstr "5 დღე"
-
-#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
-#: panels/usage/cc-usage-panel.c:73
-msgctxt "purge_files"
-msgid "6 days"
-msgstr "6 დღე"
-
-#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
-#: panels/usage/cc-usage-panel.c:76
-msgctxt "purge_files"
-msgid "7 days"
-msgstr "7 დღე"
-
-#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
-#: panels/usage/cc-usage-panel.c:79
-msgctxt "purge_files"
-msgid "14 days"
-msgstr "14 დღე"
-
-#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
-#: panels/usage/cc-usage-panel.c:82
-msgctxt "purge_files"
-msgid "30 days"
-msgstr "30 დღე"
-
-#: panels/usage/cc-usage-panel.c:180
-msgid "Empty all items from Trash?"
-msgstr "გნებავთ სანაგვე ყუთიდან ყველა ელემენტის წაშლა?"
-
-#: panels/usage/cc-usage-panel.c:181
-msgid "All items in the Trash will be permanently deleted."
-msgstr ""
-"მისამართების სიის გასუფთავების შემთხვევაში, თქვენ მათ სამუდამოდ წაშლით."
-
-#: panels/usage/cc-usage-panel.c:182
-msgid "_Empty Trash"
-msgstr "ნაგვის _ყუთის დაცარიელება"
-
-#: panels/usage/cc-usage-panel.c:218
-msgid "Delete all the temporary files?"
-msgstr ""
-
-#: panels/usage/cc-usage-panel.c:219
-msgid "All the temporary files will be permanently deleted."
-msgstr ""
-
-#: panels/usage/cc-usage-panel.c:220
-msgid "_Purge Temporary Files"
-msgstr ""
-
-#. Translators: Option for "File History Duration" in "File History" group
-#: panels/usage/cc-usage-panel.c:247
-msgctxt "retain_history"
-msgid "1 day"
-msgstr "1 დღე"
-
-#. Translators: Option for "File History Duration" in "File History" group
-#: panels/usage/cc-usage-panel.c:250
-msgctxt "retain_history"
-msgid "7 days"
-msgstr "7 დღე"
-
-#. Translators: Option for "File History Duration" in "File History" group
-#: panels/usage/cc-usage-panel.c:253
-msgctxt "retain_history"
-msgid "30 days"
-msgstr "30 დღე"
-
-#. Translators: Option for "File History Duration" in "File History" group
-#: panels/usage/cc-usage-panel.c:256
-msgctxt "retain_history"
-msgid "Forever"
-msgstr "სამუდამოდ"
-
-#: panels/usage/cc-usage-panel.c:347
-msgid "Clear File History?"
-msgstr "გავასუფთავო ფაილის ისტორია?"
-
-#: panels/usage/cc-usage-panel.c:348
-msgid "After clearing, lists of recently used files will appear empty."
-msgstr ""
-
-#: panels/usage/cc-usage-panel.c:349
-msgid "_Clear History"
-msgstr "ისტორიის _გასუფთავება"
-
-#: panels/usage/cc-usage-panel.ui:9
-msgid "File History"
-msgstr "ფაილის ისტორია"
-
-#: panels/usage/cc-usage-panel.ui:10
-msgid ""
-"File history keeps a record of files that you have used. This information is "
-"shared between apps, and makes it easier to find files that you might want "
-"to use."
-msgstr ""
-
-#: panels/usage/cc-usage-panel.ui:13
-msgid "File H_istory"
-msgstr "_ფაილის ისტორია"
-
-#: panels/usage/cc-usage-panel.ui:25
-msgid "File _History Duration"
-msgstr "ფაილის _ისტორიის ხანგრძლივობა"
-
-#: panels/usage/cc-usage-panel.ui:47
-msgid "_Clear History…"
-msgstr "ისტორიის _გასუფთავება…"
-
-#: panels/usage/cc-usage-panel.ui:63
-msgid "Trash &amp; Temporary Files"
-msgstr ""
-
-#: panels/usage/cc-usage-panel.ui:64
-msgid ""
-"Trash and temporary files can sometimes include personal or sensitive "
-"information. Automatically deleting them can help to protect privacy."
-msgstr ""
-
-#: panels/usage/cc-usage-panel.ui:67
-msgid "Automatically Delete _Trash Content"
-msgstr ""
-
-#: panels/usage/cc-usage-panel.ui:79
-msgid "Automatically Delete Temporary _Files"
-msgstr ""
-
-#: panels/usage/cc-usage-panel.ui:91
-msgid "Automatically Delete _Period"
-msgstr ""
-
-#: panels/usage/cc-usage-panel.ui:114
-msgid "_Empty Trash…"
-msgstr "_ნაგვის ყუთის დაცარიელება…"
-
-#: panels/usage/cc-usage-panel.ui:126
-msgid "_Delete Temporary Files…"
-msgstr "_დროებითი ფაილების წაშლა…"
-
-#: panels/usage/gnome-usage-panel.desktop.in:3
-msgid "File History & Trash"
-msgstr "ფაილის ისტორია & ნაგავი"
-
-#: panels/usage/gnome-usage-panel.desktop.in:4
-msgid "Control data and files that are kept on your device"
-msgstr ""
-
-#. Translators: Search terms to find the Usage panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
-#: panels/usage/gnome-usage-panel.desktop.in:16
-msgid ""
-"usage;recent;history;files;temporary;tmp;private;privacy;trash;purge;retain;"
 msgstr ""
 
 #: panels/user-accounts/cc-add-user-dialog.c:36
@@ -8900,38 +8917,34 @@ msgstr "[პანელი] [არგუმენტი…]"
 msgid "Settings categories"
 msgstr "პარამეტრების კატეგორიები"
 
-#: shell/cc-panel-list.ui:42 shell/cc-window.c:242
-msgid "Privacy"
-msgstr "პირადი ინფორმაცია"
-
-#: shell/cc-panel-loader.c:307
+#: shell/cc-panel-loader.c:282
 msgid "Available panels:"
 msgstr "ხელმისაწვდომი პანელები:"
 
-#: shell/cc-window.ui:27 shell/cc-window.ui:31
+#: shell/cc-window.ui:28 shell/cc-window.ui:32
 msgid "All Settings"
 msgstr "ყველა პარამეტრი"
 
-#: shell/cc-window.ui:55 shell/cc-window.ui:57
+#: shell/cc-window.ui:56 shell/cc-window.ui:58
 msgid "Main Menu"
 msgstr "მთავარი მენიუ"
 
-#: shell/cc-window.ui:72
+#: shell/cc-window.ui:73
 msgid "Search settings"
 msgstr "ძიების პარამეტრები"
 
-#: shell/cc-window.ui:161
+#: shell/cc-window.ui:162
 msgid "Warning: Development Version"
 msgstr "გაფრთხილება: სატესტო ვერსია"
 
-#: shell/cc-window.ui:162
+#: shell/cc-window.ui:163
 msgid ""
 "This version of Settings should only be used for development purposes. You "
 "may experience incorrect system behavior, data loss, and other unexpected "
 "issues. "
 msgstr ""
 
-#: shell/cc-window.ui:173
+#: shell/cc-window.ui:174
 msgid "Help"
 msgstr "დახმარება"
 
@@ -9025,9 +9038,43 @@ msgid "%u Input"
 msgid_plural "%u Inputs"
 msgstr[0] "%u შეტანა"
 
-#: subprojects/gvc/gvc-mixer-control.c:2876
+#: subprojects/gvc/gvc-mixer-control.c:2882
 msgid "System Sounds"
 msgstr "სისტემური ხმები"
+
+#~ msgid "camera;photos;video;webcam;lock;private;privacy;"
+#~ msgstr "camera;photos;video;webcam;lock;private;privacy;"
+
+#~ msgid "Settings for automatically problem reporting"
+#~ msgstr "პრობლემების ავტომატური გადაგზავნის პარამეტრები"
+
+#~ msgid "diagnostics;crash;"
+#~ msgstr "დიაგნოსტიკა;ავარია;"
+
+#~ msgid "Device Security Status"
+#~ msgstr "მოწყობილობის უსაფრთხოების მდგომარეობა"
+
+#~ msgid "Protection against hardware security threats"
+#~ msgstr "აპარატურული უსაფრთხოების მოწყვლადობებისგან დაცვა"
+
+#~ msgid ""
+#~ "screen;lock;diagnostics;crash;private;recent;temporary;tmp;index;name;"
+#~ "network;identity;privacy;"
+#~ msgstr ""
+#~ "screen;lock;diagnostics;crash;private;recent;temporary;tmp;index;name;"
+#~ "network;identity;privacy;"
+
+#~ msgid "location;gps;private;privacy;"
+#~ msgstr "location;gps;private;privacy;"
+
+#~ msgid "microphone;recording;application;privacy;"
+#~ msgstr "microphone;recording;application;privacy;"
+
+#~ msgid "Automatically lock the screen"
+#~ msgstr "ეკრანის ავტომატური დაბლოკვა"
+
+#~ msgid "Thunderbolt;privacy;"
+#~ msgstr "Thunderbolt;privacy;"
 
 #~ msgid "No apps"
 #~ msgstr "აპლიკაციების გარეშე"
@@ -9109,9 +9156,6 @@ msgstr "სისტემური ხმები"
 
 #~ msgid "Logout…"
 #~ msgstr "გამოსვლა…"
-
-#~ msgid "_OK"
-#~ msgstr "_დიახ"
 
 #~ msgid "Name:"
 #~ msgstr "სახელი:"
