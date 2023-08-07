@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: amberol\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/issues\n"
-"POT-Creation-Date: 2023-08-06 14:12+0000\n"
-"PO-Revision-Date: 2023-08-07 10:54+0330\n"
+"POT-Creation-Date: 2023-08-07 10:28+0000\n"
+"PO-Revision-Date: 2023-08-07 16:43+0330\n"
 "Last-Translator: Danial Behzadi <dani.behzi@ubuntu.com>\n"
 "Language-Team: Farsi\n"
 "Language: fa\n"
@@ -35,7 +35,7 @@ msgstr "دسترسی کامل"
 msgid "Session Bus"
 msgstr "گذرگاه نشست"
 
-#: panels/applications/cc-applications-panel.c:827 panels/power/cc-power-panel.ui:96
+#: panels/applications/cc-applications-panel.c:827 panels/power/cc-power-panel.ui:75
 #: panels/privacy/cc-bolt-page.ui:241 panels/privacy/cc-bolt-page.ui:285
 #: panels/privacy/cc-privacy-panel.ui:96
 msgid "Devices"
@@ -1151,7 +1151,7 @@ msgstr[0] "%Id ساعت"
 msgstr[1] "%Id ساعت"
 
 #. Translators: Option for "Blank Screen" in "Power" panel
-#: panels/common/cc-util.c:183 panels/power/cc-power-panel.c:959
+#: panels/common/cc-util.c:183 panels/power/cc-power-panel.c:855
 #, c-format
 msgid "%d minute"
 msgid_plural "%d minutes"
@@ -1293,67 +1293,71 @@ msgstr "_قالب زمان"
 msgid "Clock &amp; Calendar"
 msgstr "ساعت و تقویم"
 
-#: panels/datetime/cc-datetime-panel.ui:217
+#: panels/datetime/cc-datetime-panel.ui:215
+msgid "Control how the time and date is shown in the top bar"
+msgstr "واپایش چگونگی نشان دادن زمان و تاریخ در نوار بالایی"
+
+#: panels/datetime/cc-datetime-panel.ui:218
 msgid "Week Day"
 msgstr "روز هفته"
 
-#: panels/datetime/cc-datetime-panel.ui:229
+#: panels/datetime/cc-datetime-panel.ui:230
 msgid "Date"
 msgstr "تاریخ"
 
-#: panels/datetime/cc-datetime-panel.ui:241
+#: panels/datetime/cc-datetime-panel.ui:242
 msgid "Seconds"
 msgstr "ثانیه"
 
-#: panels/datetime/cc-datetime-panel.ui:253
+#: panels/datetime/cc-datetime-panel.ui:254
 msgid "Week Numbers"
 msgstr "شماره‌های هفته"
 
-#: panels/datetime/cc-datetime-panel.ui:294
+#: panels/datetime/cc-datetime-panel.ui:295
 msgid "January"
 msgstr "ژانویه"
 
-#: panels/datetime/cc-datetime-panel.ui:295
+#: panels/datetime/cc-datetime-panel.ui:296
 msgid "February"
 msgstr "فوریه"
 
-#: panels/datetime/cc-datetime-panel.ui:296
+#: panels/datetime/cc-datetime-panel.ui:297
 msgid "March"
 msgstr "مارس"
 
-#: panels/datetime/cc-datetime-panel.ui:297
+#: panels/datetime/cc-datetime-panel.ui:298
 msgid "April"
 msgstr "آوریل"
 
-#: panels/datetime/cc-datetime-panel.ui:298
+#: panels/datetime/cc-datetime-panel.ui:299
 msgid "May"
 msgstr "می"
 
-#: panels/datetime/cc-datetime-panel.ui:299
+#: panels/datetime/cc-datetime-panel.ui:300
 msgid "June"
 msgstr "ژوئن"
 
-#: panels/datetime/cc-datetime-panel.ui:300
+#: panels/datetime/cc-datetime-panel.ui:301
 msgid "July"
 msgstr "ژوئیه"
 
-#: panels/datetime/cc-datetime-panel.ui:301
+#: panels/datetime/cc-datetime-panel.ui:302
 msgid "August"
 msgstr "اوت"
 
-#: panels/datetime/cc-datetime-panel.ui:302
+#: panels/datetime/cc-datetime-panel.ui:303
 msgid "September"
 msgstr "سپتامبر"
 
-#: panels/datetime/cc-datetime-panel.ui:303
+#: panels/datetime/cc-datetime-panel.ui:304
 msgid "October"
 msgstr "اکتبر"
 
-#: panels/datetime/cc-datetime-panel.ui:304
+#: panels/datetime/cc-datetime-panel.ui:305
 msgid "November"
 msgstr "نوامبر"
 
-#: panels/datetime/cc-datetime-panel.ui:305
+#: panels/datetime/cc-datetime-panel.ui:306
 msgid "December"
 msgstr "دسامبر"
 
@@ -1438,13 +1442,13 @@ msgstr "default;application;preferred;media;پیش‌گزیده;پیش‌گزی�
 
 #: panels/display/cc-display-panel.c:495
 #: panels/notifications/cc-notifications-panel.c:214
-#: panels/power/cc-power-panel.c:847 panels/power/cc-power-panel.c:854
+#: panels/power/cc-power-panel.c:743 panels/power/cc-power-panel.c:750
 msgid "On"
 msgstr "روشن"
 
 #: panels/display/cc-display-panel.c:497 panels/network/cc-net-proxy-page.c:181
 #: panels/notifications/cc-notifications-panel.c:214
-#: panels/power/cc-power-panel.c:841 panels/power/cc-power-panel.c:852
+#: panels/power/cc-power-panel.c:737 panels/power/cc-power-panel.c:748
 msgid "Off"
 msgstr "خاموش"
 
@@ -3699,7 +3703,7 @@ msgid "Unmanaged"
 msgstr "مدیریت نشده"
 
 #. TRANSLATORS: device status
-#: panels/network/panel-common.c:45 panels/power/cc-power-panel.c:668
+#: panels/network/panel-common.c:45
 msgid "Unavailable"
 msgstr "ناموجود"
 
@@ -4207,7 +4211,7 @@ msgid "Gaming input device"
 msgstr "افزارهٔ ورودی بازی"
 
 #. TRANSLATORS: secondary battery, misc
-#: panels/power/cc-battery-row.c:218 panels/power/cc-power-panel.c:268
+#: panels/power/cc-battery-row.c:218 panels/power/cc-power-panel.c:263
 #: panels/power/cc-power-panel.ui:58
 msgid "Battery"
 msgstr "باتری"
@@ -4222,88 +4226,58 @@ msgctxt "Battery name"
 msgid "Extra"
 msgstr "اضافی"
 
-#: panels/power/cc-power-panel.c:260
+#: panels/power/cc-power-panel.c:255
 msgid "Batteries"
 msgstr "باتری‌ها"
 
 #. Translators: UPS is an Uninterruptible Power Supply:
 #. * https://en.wikipedia.org/wiki/Uninterruptible_power_supply
-#: panels/power/cc-power-panel.c:265
+#: panels/power/cc-power-panel.c:260
 msgid "UPS"
 msgstr "منبع تغذیهٔ بی‌وقفه"
 
-#: panels/power/cc-power-panel.c:525
+#: panels/power/cc-power-panel.c:520
 msgid "When _idle"
 msgstr "هنگام _بیکاری"
 
-#: panels/power/cc-power-panel.c:662
-msgid "Good"
-msgstr "خوب"
-
-#: panels/power/cc-power-panel.c:664
-msgid "OK"
-msgstr "مورد قبول"
-
-#: panels/power/cc-power-panel.c:666
-msgid "Poor"
-msgstr "ضعیف"
-
-#: panels/power/cc-power-panel.c:684
-#, c-format
-msgid "Battery %d"
-msgstr "باتری %Id"
-
-#: panels/power/cc-power-panel.c:685
-#, c-format
-msgid "%d%%"
-msgstr "%d%%"
-
-#: panels/power/cc-power-panel.c:694
-msgid "Health Rating"
-msgstr "رتبه‌بندی سلامت"
-
-#: panels/power/cc-power-panel.c:700
-msgid "Battery Capacity"
-msgstr "ظرفیت باتری"
-
-#: panels/power/cc-power-panel.c:784
+#: panels/power/cc-power-panel.c:680
 msgid "Suspend"
 msgstr "تعلیق"
 
-#: panels/power/cc-power-panel.c:785
+#: panels/power/cc-power-panel.c:681
 msgid "Power Off"
 msgstr "خاموش کردن"
 
-#: panels/power/cc-power-panel.c:786
+#: panels/power/cc-power-panel.c:682
 msgid "Hibernate"
 msgstr "خواب زمستانی"
 
-#: panels/power/cc-power-panel.c:787
+#: panels/power/cc-power-panel.c:683
 msgid "Nothing"
 msgstr "هیچکدام"
 
-#: panels/power/cc-power-panel.c:843
+#: panels/power/cc-power-panel.c:739
 msgid "When on battery power"
 msgstr "هنگام استفاده از باتری"
 
-#: panels/power/cc-power-panel.c:845
+#: panels/power/cc-power-panel.c:741
 msgid "When plugged in"
 msgstr "هنگام اتّصال به برق"
 
-#: panels/power/cc-power-panel.c:966
+#: panels/power/cc-power-panel.c:862
 msgctxt "Idle time"
 msgid "Never"
 msgstr "هرگز"
 
-#: panels/power/cc-power-panel.c:1072
+#: panels/power/cc-power-panel.c:947
 msgid "Automatic suspend"
 msgstr "تعلیق خودکار"
 
-#: panels/power/cc-power-panel.c:1168
+#: panels/power/cc-power-panel.c:1043
 msgid "Performance mode temporarily disabled due to high operating temperature."
 msgstr "حالت کارایی به خاطر دمای عملیاتی بالا، به صورت موقّتی از کار افتاده."
 
-#: panels/power/cc-power-panel.c:1170
+#: panels/power/cc-power-panel.c:1045
 msgid ""
 "Lap detected: performance mode temporarily unavailable. Move the device to a "
 "stable surface to restore."
@@ -4311,11 +4285,11 @@ msgstr ""
 "روی زانو: حالت کارایی به صورت موقّتی موجود نیست. برای بازیابی، افزاره را به سطحی "
 "پایدار جابه‌جا کنید."
 
-#: panels/power/cc-power-panel.c:1172
+#: panels/power/cc-power-panel.c:1047
 msgid "Performance mode temporarily disabled."
 msgstr "حالت کارایی به صورت موقّتی از کار افتاده."
 
-#: panels/power/cc-power-panel.c:1214
+#: panels/power/cc-power-panel.c:1089
 msgid ""
 "Low battery: power saver enabled. Previous mode will be restored when battery is "
 "sufficiently charged."
@@ -4324,13 +4298,13 @@ msgstr ""
 "شد، برخواهد گشت."
 
 #. translators: "%s" is an application name
-#: panels/power/cc-power-panel.c:1222
+#: panels/power/cc-power-panel.c:1097
 #, c-format
 msgid "Power Saver mode activated by “%s”."
 msgstr "حالت ذخیرهٔ نیرو به دست «%s» فعّال شد."
 
 #. translators: "%s" is an application name
-#: panels/power/cc-power-panel.c:1226
+#: panels/power/cc-power-panel.c:1101
 #, c-format
 msgid "Performance mode activated by “%s”."
 msgstr "حالت کارایی به دست «%s» فعّال شد."
@@ -4395,103 +4369,87 @@ msgctxt "automatic_suspend"
 msgid "2 hours"
 msgstr "۲ ساعت"
 
-#: panels/power/cc-power-panel.ui:78
-msgid "_Battery Health"
-msgstr "سلامت _باتری"
-
-#: panels/power/cc-power-panel.ui:114
+#: panels/power/cc-power-panel.ui:93
 msgid "Power Mode"
 msgstr "حالت انرژی"
 
-#: panels/power/cc-power-panel.ui:115
+#: panels/power/cc-power-panel.ui:94
 msgid "Affects system performance and power usage."
 msgstr "روی کارایی سامانه و استفادهٔ انرژی اثر می‌گذارد."
 
-#: panels/power/cc-power-panel.ui:144
+#: panels/power/cc-power-panel.ui:123
 msgid "Power Saving Options"
 msgstr "گزینه‌های ذخیرهٔ انرژی"
 
-#: panels/power/cc-power-panel.ui:147
+#: panels/power/cc-power-panel.ui:126
 msgid "Automatic Screen Brightness"
 msgstr "روشنایی خودکار صفحه"
 
-#: panels/power/cc-power-panel.ui:148
+#: panels/power/cc-power-panel.ui:127
 msgid "Screen brightness adjusts to the surrounding light."
 msgstr "روشنایی صفحه با نور محیط هماهنگ می‌شود."
 
-#: panels/power/cc-power-panel.ui:160
+#: panels/power/cc-power-panel.ui:139
 msgid "Dim Screen"
 msgstr "تاریکی صفحه"
 
-#: panels/power/cc-power-panel.ui:161
+#: panels/power/cc-power-panel.ui:140
 msgid "Reduces the screen brightness when the computer is inactive."
 msgstr "روشنایی صفحه هنگام غیرفعّال بودن رایانه کاهش می‌یابد."
 
-#: panels/power/cc-power-panel.ui:172
+#: panels/power/cc-power-panel.ui:151
 msgid "Screen _Blank"
 msgstr "_سیاهی صفحه"
 
-#: panels/power/cc-power-panel.ui:173
+#: panels/power/cc-power-panel.ui:152
 msgid "Turns the screen off after a period of inactivity."
 msgstr "صفحه پس از مدّتی غیرفعّال بودن، خاموش می‌شود."
 
-#: panels/power/cc-power-panel.ui:181
+#: panels/power/cc-power-panel.ui:160
 msgid "Automatic Power Saver"
 msgstr "ذخیره‌ساز انرژی خودکار"
 
-#: panels/power/cc-power-panel.ui:182
+#: panels/power/cc-power-panel.ui:161
 msgid "Enables power saver mode when battery is low."
 msgstr "هنگام کم بودن باتری، حالات ذخیرهٔ نیرو به کار می‌افتد."
 
-#: panels/power/cc-power-panel.ui:195
+#: panels/power/cc-power-panel.ui:174
 msgid "_Automatic Suspend"
 msgstr "_تعلیق خودکار"
 
-#: panels/power/cc-power-panel.ui:196
+#: panels/power/cc-power-panel.ui:175
 msgid "Pauses the computer after a period of inactivity."
 msgstr "رایانه پس از مدّتی غیرفعّال بودن، مکث می‌شود."
 
-#: panels/power/cc-power-panel.ui:221
+#: panels/power/cc-power-panel.ui:200
 msgid "Po_wer Button Behavior"
 msgstr "عمل دکمهٔ _خاموش"
 
-#: panels/power/cc-power-panel.ui:229
+#: panels/power/cc-power-panel.ui:208
 msgid "Show Battery _Percentage"
 msgstr "نمایش _درصد باتری"
 
-#: panels/power/cc-power-panel.ui:230
+#: panels/power/cc-power-panel.ui:209
 msgid "Show exact charge level in the top bar"
 msgstr "نمایش سطح دقیق شارژ در نوار بالایی"
 
-#: panels/power/cc-power-panel.ui:266
+#: panels/power/cc-power-panel.ui:245
 msgid "Automatic Suspend"
 msgstr "تعلیق خودکار"
 
-#: panels/power/cc-power-panel.ui:289
+#: panels/power/cc-power-panel.ui:268
 msgid "_Plugged In"
 msgstr "_متصّل به برق"
 
-#: panels/power/cc-power-panel.ui:301
+#: panels/power/cc-power-panel.ui:280
 msgid "On _Battery Power"
 msgstr "روی نیروی _باتری"
 
-#: panels/power/cc-power-panel.ui:334 panels/power/cc-power-panel.ui:370
+#: panels/power/cc-power-panel.ui:313 panels/power/cc-power-panel.ui:349
 #: panels/universal-access/cc-ua-mouse-page.ui:98
 #: panels/universal-access/cc-ua-typing-page.ui:124
 msgid "Delay"
 msgstr "تأخیر"
-
-#: panels/power/cc-power-panel.ui:393
-msgid "Battery Health"
-msgstr "سلامت باتری"
-
-#: panels/power/cc-power-panel.ui:407
-msgid ""
-"Current capacity indicates how much charge the battery can currently store, "
-"compared to when it was new."
-msgstr ""
-"ظرفیت کنونی نشان می دهد باتری می‌تواند در مقایسه با زمان نو بودنش چه‌قدر شارژ نگه "
-"دارد."
 
 #: panels/power/cc-power-profile-row.c:132
 msgctxt "Power profile"
@@ -9151,6 +9109,42 @@ msgstr[1] "%Iu ورودی"
 #: subprojects/gvc/gvc-mixer-control.c:2882
 msgid "System Sounds"
 msgstr "صداهای سامانه"
+
+#~ msgid "Good"
+#~ msgstr "خوب"
+
+#~ msgid "OK"
+#~ msgstr "مورد قبول"
+
+#~ msgid "Poor"
+#~ msgstr "ضعیف"
+
+#, c-format
+#~ msgid "Battery %d"
+#~ msgstr "باتری %Id"
+
+#, c-format
+#~ msgid "%d%%"
+#~ msgstr "%d%%"
+
+#~ msgid "Health Rating"
+#~ msgstr "رتبه‌بندی سلامت"
+
+#~ msgid "Battery Capacity"
+#~ msgstr "ظرفیت باتری"
+
+#~ msgid "_Battery Health"
+#~ msgstr "سلامت _باتری"
+
+#~ msgid "Battery Health"
+#~ msgstr "سلامت باتری"
+
+#~ msgid ""
+#~ "Current capacity indicates how much charge the battery can currently store, "
+#~ "compared to when it was new."
+#~ msgstr ""
+#~ "ظرفیت کنونی نشان می دهد باتری می‌تواند در مقایسه با زمان نو بودنش چه‌قدر شارژ نگه "
+#~ "دارد."
 
 #~ msgid "camera;photos;video;webcam;lock;private;privacy;"
 #~ msgstr ""
