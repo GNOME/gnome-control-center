@@ -94,6 +94,7 @@ struct _CcUserPanel {
         AdwMessageDialog *remove_enterprise_user_dialog;
         AdwMessageDialog *remove_local_user_dialog;
         GtkButton       *remove_user_button;
+        GtkLabel        *remove_user_label;
         GtkStack        *stack;
         AdwToastOverlay *toast_overlay;
         AdwAvatar       *user_avatar;
@@ -538,22 +539,6 @@ remove_user (CcUserPanel *self)
         g_return_if_fail (user != NULL);
 
         parent = GTK_WINDOW (gtk_widget_get_native (GTK_WIDGET (self)));
-        // FIXME: this should be in a AdwToast.
-        // There's no action other than closing the dialog.
-        // https://developer.gnome.org/hig/patterns/feedback/dialogs.html#error-dialogs
-        if (act_user_is_logged_in_anywhere (user)) {
-                GtkWidget *dialog;
-                g_autofree gchar *heading = NULL;
-                g_autofree gchar *body = NULL;
-
-                heading = g_strdup_printf (_("%s is still logged in"), get_real_or_user_name (user));
-                body = g_strdup_printf (_("Deleting a user while they are logged in can leave the system in an inconsistent state."));
-
-                dialog = adw_message_dialog_new (parent, heading, body);
-                gtk_window_present (GTK_WINDOW (dialog));
-                return;
-        }
-
         if (act_user_is_local_account (user)) {
                 gtk_window_set_transient_for (GTK_WINDOW (self->remove_local_user_dialog), parent);
                 adw_message_dialog_format_heading (self->remove_local_user_dialog,
@@ -850,6 +835,8 @@ show_user (ActUser *user, CcUserPanel *self)
         other_user_show = show && (g_list_model_get_n_items (G_LIST_MODEL (self->other_users_model)) > 0);
         gtk_widget_set_visible (GTK_WIDGET (self->account_settings_box), !show);
         gtk_widget_set_visible (GTK_WIDGET (self->remove_user_button), !show);
+        gtk_widget_set_sensitive (GTK_WIDGET (self->remove_user_button), act_user_is_logged_in_anywhere (user));
+        gtk_widget_set_visible (GTK_WIDGET (self->remove_user_label), !show && act_user_is_logged_in_anywhere (user));
         gtk_widget_set_visible (GTK_WIDGET (self->back_button), !show);
         show_or_hide_back_button(self);
         gtk_widget_set_visible (GTK_WIDGET (self->other_users), other_user_show);
@@ -1112,7 +1099,7 @@ on_permission_changed (CcUserPanel *self)
 
         self_selected = act_user_get_uid (user) == geteuid ();
         gtk_widget_set_sensitive (GTK_WIDGET (self->remove_user_button), is_authorized && !self_selected
-                                  && !would_demote_only_admin (user));
+                                  && !would_demote_only_admin (user) && !act_user_is_logged_in_anywhere (user));
         if (is_authorized) {
                 gtk_widget_set_tooltip_text (GTK_WIDGET (self->remove_user_button), _("Delete the selected user account"));
         }
@@ -1365,6 +1352,7 @@ cc_user_panel_class_init (CcUserPanelClass *klass)
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, password_row);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, permission_infobar);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, remove_user_button);
+        gtk_widget_class_bind_template_child (widget_class, CcUserPanel, remove_user_label);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, remove_enterprise_user_dialog);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, remove_local_user_dialog);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, stack);
