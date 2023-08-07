@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2023-07-27 23:02+0000\n"
-"PO-Revision-Date: 2023-07-29 18:53+0300\n"
+"POT-Creation-Date: 2023-08-07 13:31+0000\n"
+"PO-Revision-Date: 2023-08-07 23:18+0300\n"
 "Last-Translator: Yuras Shumovich <shumovichy@gmail.com>\n"
 "Language-Team: Belarusian <i18n-bel-gnome@googlegroups.com>\n"
 "Language: be\n"
@@ -37,8 +37,8 @@ msgid "Session Bus"
 msgstr "Шына сеанса"
 
 #: panels/applications/cc-applications-panel.c:827
-#: panels/power/cc-power-panel.ui:75 panels/thunderbolt/cc-bolt-panel.ui:233
-#: panels/thunderbolt/cc-bolt-panel.ui:277
+#: panels/power/cc-power-panel.ui:75 panels/privacy/cc-bolt-page.ui:241
+#: panels/privacy/cc-bolt-page.ui:285 panels/privacy/cc-privacy-panel.ui:96
 msgid "Devices"
 msgstr "Прылады"
 
@@ -76,8 +76,8 @@ msgstr "Файлавая сістэма"
 
 #: panels/applications/cc-applications-panel.c:847
 #: panels/keyboard/01-launchers.xml.in:6
-#: shell/appdata/org.gnome.Settings.appdata.xml.in:7 shell/cc-window.c:246
-#: shell/cc-window.c:918 shell/cc-window.ui:22
+#: shell/appdata/org.gnome.Settings.appdata.xml.in:7 shell/cc-window.c:242
+#: shell/cc-window.c:911 shell/cc-window.ui:23
 #: shell/org.gnome.Settings.desktop.in:3
 msgid "Settings"
 msgstr "Налады"
@@ -145,8 +145,8 @@ msgstr "_Падрабязнасці праграмы"
 #: panels/keyboard/cc-input-chooser.ui:76
 #: panels/printers/new-printer-dialog.ui:230
 #: panels/region/cc-format-chooser.ui:82
-#: panels/search/gnome-search-panel.desktop.in:3 shell/cc-window.ui:41
-#: shell/cc-window.ui:43
+#: panels/search/gnome-search-panel.desktop.in:3 shell/cc-window.ui:42
+#: shell/cc-window.ui:44
 msgid "Search"
 msgstr "Пошук"
 
@@ -253,7 +253,7 @@ msgstr "Запісваць гук праз мікрафон"
 
 #: panels/applications/cc-applications-panel.ui:206
 #: panels/applications/cc-applications-panel.ui:213
-#: panels/location/gnome-location-panel.desktop.in:3
+#: panels/privacy/cc-location-page.ui:4
 msgid "Location Services"
 msgstr "Сэрвісы месцазнаходжання"
 
@@ -284,11 +284,11 @@ msgstr "Сховішча"
 msgid "Search apps"
 msgstr "Пошук праграм"
 
-#: panels/applications/cc-applications-panel.ui:305 shell/cc-panel-list.ui:109
+#: panels/applications/cc-applications-panel.ui:305 shell/cc-panel-list.ui:64
 msgid "No results found"
 msgstr "Нічога не знойдзена"
 
-#: panels/applications/cc-applications-panel.ui:315 shell/cc-panel-list.ui:118
+#: panels/applications/cc-applications-panel.ui:315 shell/cc-panel-list.ui:73
 msgid "Try a different search"
 msgstr "Паспрабуйце змяніць пошукавы запыт"
 
@@ -461,48 +461,6 @@ msgid "share;sharing;bluetooth;obex;"
 msgstr ""
 "share;sharing;bluetooth;obex;апублікаваць;абагуліць;супольны;агульны;блютуз;"
 
-#: panels/camera/cc-camera-panel.ui:11
-msgid "_Camera Access"
-msgstr "Доступ да _камеры"
-
-#: panels/camera/cc-camera-panel.ui:12
-msgid "Allow permitted apps to use cameras"
-msgstr "Дазваляе давераным праграмам выкарыстоўваць камеры"
-
-#: panels/camera/cc-camera-panel.ui:21 panels/location/cc-location-panel.ui:22
-#: panels/microphone/cc-microphone-panel.ui:21
-msgid "Permitted Apps"
-msgstr "Давераныя праграмы"
-
-#: panels/camera/cc-camera-panel.ui:22
-msgid ""
-"The following sandboxed apps have been given permission to use cameras. Apps "
-"that are not sandboxed can use cameras without asking for permission."
-msgstr ""
-"Наступныя праграмы ў «пясочніцы» атрымалі дазвол на выкарыстанне камер. "
-"Праграмы, не ізаляваныя ў «пясочніцы», могуць выкарыстоўваць камеры не "
-"пытаючы дазволу."
-
-#: panels/camera/cc-camera-panel.ui:36
-msgid "No sandboxed apps have asked for camera access"
-msgstr ""
-"Праграмы, не ізаляваныя ў «пясочніцы» запыталі дазвол на выкарыстанне камеры"
-
-#: panels/camera/gnome-camera-panel.desktop.in:3
-msgid "Cameras"
-msgstr "Камеры"
-
-#: panels/camera/gnome-camera-panel.desktop.in:4
-msgid "Restrict camera access"
-msgstr "Абмежаваць доступ да камеры"
-
-#. Translators: Search terms to find the Cameras panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
-#: panels/camera/gnome-camera-panel.desktop.in:16
-msgid "camera;photos;video;webcam;lock;private;privacy;"
-msgstr ""
-"camera;photos;video;webcam;lock;private;privacy;камера;фота;відэа;вэб-камера;"
-"прыватнасць;асабістыя;канфідэнцыяльнасць;блакіраванне;блакаванне;"
-
 #. TRANSLATORS: The user has to attach the sensor to the screen
 #: panels/color/cc-color-calibrate.c:347
 msgid "Place your calibration device over the square and press “Start”"
@@ -596,9 +554,8 @@ msgstr "Каліброўка дысплэя"
 #: panels/network/connection-editor/connection-editor.ui:14
 #: panels/network/net-device-wifi.c:862
 #: panels/printers/new-printer-dialog.ui:50
-#: panels/printers/pp-details-dialog.c:267
+#: panels/printers/pp-details-dialog.c:267 panels/privacy/cc-usage-page.c:136
 #: panels/region/cc-format-chooser.ui:24 panels/sharing/cc-sharing-panel.c:447
-#: panels/usage/cc-usage-panel.c:139
 #: panels/user-accounts/cc-add-user-dialog.ui:25
 #: panels/user-accounts/cc-avatar-chooser.c:96
 #: panels/user-accounts/cc-fingerprint-dialog.ui:32
@@ -756,8 +713,7 @@ msgstr "Гэты тып прылад зараз не падтрымліваец�
 
 #. Translators: This will be presented as the text of a link to the documentation
 #. translators: Text used in link to privacy policy
-#: panels/color/cc-color-panel.c:1991
-#: panels/diagnostics/cc-diagnostics-panel.c:137
+#: panels/color/cc-color-panel.c:1991 panels/privacy/cc-diagnostics-page.c:122
 msgid "Learn more"
 msgstr "Даведацца больш"
 
@@ -1378,67 +1334,71 @@ msgstr "_Фармат часу"
 msgid "Clock &amp; Calendar"
 msgstr "Гадзіннік і каляндар"
 
-#: panels/datetime/cc-datetime-panel.ui:217
+#: panels/datetime/cc-datetime-panel.ui:215
+msgid "Control how the time and date is shown in the top bar"
+msgstr "Налады паказу даты і часу ў верхняй панэлі"
+
+#: panels/datetime/cc-datetime-panel.ui:218
 msgid "Week Day"
 msgstr "Дзень тыдня"
 
-#: panels/datetime/cc-datetime-panel.ui:229
+#: panels/datetime/cc-datetime-panel.ui:230
 msgid "Date"
 msgstr "Дата"
 
-#: panels/datetime/cc-datetime-panel.ui:241
+#: panels/datetime/cc-datetime-panel.ui:242
 msgid "Seconds"
 msgstr "Секунды"
 
-#: panels/datetime/cc-datetime-panel.ui:253
+#: panels/datetime/cc-datetime-panel.ui:254
 msgid "Week Numbers"
 msgstr "Нумар тыдня"
 
-#: panels/datetime/cc-datetime-panel.ui:294
+#: panels/datetime/cc-datetime-panel.ui:295
 msgid "January"
 msgstr "Студзень"
 
-#: panels/datetime/cc-datetime-panel.ui:295
+#: panels/datetime/cc-datetime-panel.ui:296
 msgid "February"
 msgstr "Люты"
 
-#: panels/datetime/cc-datetime-panel.ui:296
+#: panels/datetime/cc-datetime-panel.ui:297
 msgid "March"
 msgstr "Сакавік"
 
-#: panels/datetime/cc-datetime-panel.ui:297
+#: panels/datetime/cc-datetime-panel.ui:298
 msgid "April"
 msgstr "Красавік"
 
-#: panels/datetime/cc-datetime-panel.ui:298
+#: panels/datetime/cc-datetime-panel.ui:299
 msgid "May"
 msgstr "Май"
 
-#: panels/datetime/cc-datetime-panel.ui:299
+#: panels/datetime/cc-datetime-panel.ui:300
 msgid "June"
 msgstr "Чэрвень"
 
-#: panels/datetime/cc-datetime-panel.ui:300
+#: panels/datetime/cc-datetime-panel.ui:301
 msgid "July"
 msgstr "Ліпень"
 
-#: panels/datetime/cc-datetime-panel.ui:301
+#: panels/datetime/cc-datetime-panel.ui:302
 msgid "August"
 msgstr "Жнівень"
 
-#: panels/datetime/cc-datetime-panel.ui:302
+#: panels/datetime/cc-datetime-panel.ui:303
 msgid "September"
 msgstr "Верасень"
 
-#: panels/datetime/cc-datetime-panel.ui:303
+#: panels/datetime/cc-datetime-panel.ui:304
 msgid "October"
 msgstr "Кастрычнік"
 
-#: panels/datetime/cc-datetime-panel.ui:304
+#: panels/datetime/cc-datetime-panel.ui:305
 msgid "November"
 msgstr "Лістапад"
 
-#: panels/datetime/cc-datetime-panel.ui:305
+#: panels/datetime/cc-datetime-panel.ui:306
 msgid "December"
 msgstr "Снежань"
 
@@ -1523,37 +1483,6 @@ msgstr ""
 "default;application;preferred;media;прадвызначаны;перадвызначаны;па "
 "змаўчанні;праграма;перавагі;медыя;"
 
-#. translators: The first '%s' is the distributor's name, such as 'Fedora', the second '%s' is a link to the privacy policy
-#: panels/diagnostics/cc-diagnostics-panel.c:139
-#, c-format
-msgid ""
-"Sending reports of technical problems helps us improve %s. Reports are sent "
-"anonymously and are scrubbed of personal data. %s"
-msgstr ""
-"Справаздачы пра тэхнічныя праблемы дапамагаюць нам удасканальваць %s. Усе "
-"справаздачы адпраўляюцца ананімна і не змяшчаюць персанальных дадзеных. %s"
-
-#: panels/diagnostics/cc-diagnostics-panel.ui:8
-msgid "Problem Reporting"
-msgstr "Справаздачы аб праблемах"
-
-#: panels/diagnostics/cc-diagnostics-panel.ui:11
-msgid "_Automatic Problem Reporting"
-msgstr "_Аўтаматычныя справаздачы аб праблемах"
-
-#: panels/diagnostics/gnome-diagnostics-panel.desktop.in:3
-msgid "Diagnostics"
-msgstr "Дыягностыка"
-
-#: panels/diagnostics/gnome-diagnostics-panel.desktop.in:4
-msgid "Settings for automatically problem reporting"
-msgstr "Налады аўтаматычных справаздач аб праблемах"
-
-#. Translators: Search terms to find the Diagnostics panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
-#: panels/diagnostics/gnome-diagnostics-panel.desktop.in:16
-msgid "diagnostics;crash;"
-msgstr "diagnostics;crash;дыягностыка;збой;"
-
 #: panels/display/cc-display-panel.c:495
 #: panels/notifications/cc-notifications-panel.c:214
 #: panels/power/cc-power-panel.c:743 panels/power/cc-power-panel.c:750
@@ -1585,7 +1514,7 @@ msgstr "Магчыма, гэта з-за апаратных абмежаванн
 #: panels/mouse/cc-mouse-panel.ui:17 panels/mouse/cc-mouse-panel.ui:23
 #: panels/network/cc-network-panel.ui:17 panels/network/cc-wifi-panel.ui:11
 #: panels/network/cc-wifi-panel.ui:17 panels/printers/new-printer-dialog.ui:64
-#: panels/region/cc-format-chooser.ui:37
+#: panels/privacy/cc-privacy-panel.ui:28 panels/region/cc-format-chooser.ui:37
 #: panels/universal-access/cc-ua-panel.ui:16
 #: panels/universal-access/cc-ua-panel.ui:20
 #: panels/user-accounts/cc-fingerprint-dialog.ui:44
@@ -1661,7 +1590,7 @@ msgstr "%.2lf Гц"
 #. TRANSLATORS: if the function is enabled through BIOS or OS settings.
 #. TRANSLATORS: Status of Parental Controls setup
 #: panels/display/cc-display-settings.ui:23
-#: panels/firmware-security/cc-firmware-security-utils.c:45
+#: panels/privacy/cc-firmware-security-utils.c:45
 #: panels/user-accounts/cc-user-panel.c:767
 #: panels/user-accounts/cc-user-panel.c:889
 #: panels/wwan/cc-wwan-device-page.c:475
@@ -1802,433 +1731,17 @@ msgstr ""
 "Раздзяляльнасць;Разрознасць;Абнаўленне;Манітор;Ноч;Начное;Святло;колер;заход;"
 "усход;"
 
-#. TRANSLATORS: secure boot refers to the system firmware security mode
-#: panels/firmware-security/cc-firmware-security-boot-dialog.c:74
-#: panels/firmware-security/cc-firmware-security-panel.c:119
-msgid "Secure Boot is Active"
-msgstr "Secure Boot актыўна"
-
-#. TRANSLATORS: this is the first section of the decription
-#: panels/firmware-security/cc-firmware-security-boot-dialog.c:79
-msgid ""
-"Secure boot prevents malicious software from being loaded when the device "
-"starts. It is currently turned on and is functioning correctly."
-msgstr ""
-"Secure boot прадухіляе загрузку шкоднага праграмнага забеспячэння падчас "
-"запуску прылады. Зараз функцыя ўключана і працуе правільна."
-
-#. TRANSLATORS: secure boot refers to the system firmware security mode
-#: panels/firmware-security/cc-firmware-security-boot-dialog.c:85
-msgid "Secure Boot Has Problems"
-msgstr "Праблемы з Secure Boot"
-
-#. TRANSLATORS: this is the first section of the decription.
-#: panels/firmware-security/cc-firmware-security-boot-dialog.c:89
-msgid ""
-"Secure boot prevents malicious software from being loaded when the device "
-"starts. It is currently turned on, but will not work due to having an "
-"invalid key."
-msgstr ""
-"Secure boot прадухіляе загрузку шкоднага праграмнага забеспячэння падчас "
-"запуску прылады. Зараз функцыя ўключана, але не будзе працаваць з-за "
-"памылковага ключа."
-
-#. TRANSLATORS: this is the second section of description.
-#: panels/firmware-security/cc-firmware-security-boot-dialog.c:92
-msgid ""
-"Secure boot problems can often be resolved from your computer's UEFI "
-"firmware settings (BIOS) and your hardware manufacturer may provide "
-"information on how to do this."
-msgstr ""
-"Праблемы з Secure boot часта можна вырашыць праз налады UEFI (BIOS) "
-"камп'ютара і з дапамогай вытворцы вашага абсталявання, які можа даць "
-"інфармацыю як гэта зрабіць."
-
-#. TRANSLATORS: this is the third section of description.
-#: panels/firmware-security/cc-firmware-security-boot-dialog.c:95
-msgid "For help, contact your hardware manufacturer or IT support provider."
-msgstr ""
-"Звярніцеся па дапамогу да вытворцы вашага абсталявання або да службы "
-"абслугоўвання і падтрымкі."
-
-#. TRANSLATORS: secure boot refers to the system firmware security mode
-#: panels/firmware-security/cc-firmware-security-boot-dialog.c:101
-msgid "Secure Boot is Turned Off"
-msgstr "Secure Boot выключана"
-
-#. TRANSLATORS: this is the first section of the description.
-#: panels/firmware-security/cc-firmware-security-boot-dialog.c:105
-msgid ""
-"Secure boot prevents malicious software from being loaded when the device "
-"starts. It is currently turned off."
-msgstr ""
-"Secure boot прадухіляе загрузку шкоднага праграмнага забеспячэння падчас "
-"запуску прылады. Зараз функцыя выключана."
-
-#. TRANSLATORS: this is the second section of the description.
-#: panels/firmware-security/cc-firmware-security-boot-dialog.c:108
-msgid ""
-"Secure boot can often be turned on from your computer's UEFI firmware "
-"settings (BIOS). For help, contact your hardware manufacturer or IT support "
-"provider."
-msgstr ""
-"Secure boot часта можна ўключыць праз налады UEFI (BIOS) камп'ютара. "
-"Звярніцеся па дапамогу да вытворцы вашага абсталявання або да службы "
-"абслугоўвання і падтрымкі."
-
-#: panels/firmware-security/cc-firmware-security-boot-dialog.ui:53
-msgid ""
-"Secure boot prevents malicious software from being loaded when the device "
-"starts.\n"
-"\n"
-"For more information, contact the hardware manufacturer or IT support."
-msgstr ""
-"Secure boot прадухіляе загрузку шкоднага праграмнага забеспячэння падчас "
-"запуску прылады.\n"
-"\n"
-"Каб атрымаць дадатковыя звесткі, звярніцеся да вытворцы вашага абсталявання "
-"або да службы абслугоўвання і падтрымкі."
-
-#. TRANSLATORS: in reference to firmware protection: 0/4 stars
-#: panels/firmware-security/cc-firmware-security-dialog.c:113
-#: panels/firmware-security/cc-firmware-security-panel.c:542
-msgid "Checks Failed"
-msgstr "Праверкі не пройдзены"
-
-#. TRANSLATORS: This is the description to describe the failure on
-#. checking the security items.
-#: panels/firmware-security/cc-firmware-security-dialog.c:116
-msgid ""
-"Hardware does not pass checks. This means that you are not protected against "
-"common hardware security issues.\n"
-"\n"
-"It may be possible to resolve hardware security issues by updating your "
-"firmware or changing device configuration options. However, failures can "
-"stem from the physical hardware itself, and may not be reversible."
-msgstr ""
-"Абсталяванне не прайшло праверку бяспекі. Гэта азначае, што вы не абаронены "
-"ад распаўсюджаных праблем бяспекі ў апаратнага забеспячэння.\n"
-"\n"
-"Магчыма праблема можа быць вырашана праз абнаўленне ўбудаванага ПЗ або "
-"змяненне налад прылады. Аднак, прычынай могуць быць характарыстыкі самога "
-"абсталявання, тады рашэння няма."
-
-#. TRANSLATORS: in reference to firmware protection: 1/4 stars
-#: panels/firmware-security/cc-firmware-security-dialog.c:127
-#: panels/firmware-security/cc-firmware-security-panel.c:549
-msgid "Checks Passed"
-msgstr "Праверкі пройдзены"
-
-#. TRANSLATORS: This description describes the device passing the
-#. minimum requirement of security check.
-#: panels/firmware-security/cc-firmware-security-dialog.c:130
-msgid ""
-"This device meets basic security requirements. Its hardware has protection "
-"against some of the most common security threats."
-msgstr ""
-"Прылада адпавядае базавым патрабаванням бяспекі. Абсталяванне абаронена ад "
-"найбольш распаўсюджаных пагроз бяспекі."
-
-#. TRANSLATORS: in reference to firmware protection: 2~4 stars
-#: panels/firmware-security/cc-firmware-security-dialog.c:141
-#: panels/firmware-security/cc-firmware-security-panel.c:558
-msgid "Protected"
-msgstr "Абаронена"
-
-#. TRANSLATOR: This description describes the devices passing
-#. the extended security check.
-#: panels/firmware-security/cc-firmware-security-dialog.c:144
-msgid ""
-"This device passes current security tests. Its hardware is protected against "
-"the majority of security threats."
-msgstr ""
-"Гэта прылада праходзіць бягучыя праверкі бяспекі. Абсталяванне абаронена ад "
-"большасці пагроз бяспекі."
-
-#. TRANSLATORS: in reference to firmware protection: ??? stars
-#: panels/firmware-security/cc-firmware-security-dialog.c:152
-#: panels/firmware-security/cc-firmware-security-panel.c:565
-msgid "Checks Unavailable"
-msgstr "Праверкі недаступны"
-
-#. TRANSLATORS: When the security result is unavailable, this description is shown.
-#: panels/firmware-security/cc-firmware-security-dialog.c:154
-msgid ""
-"Device security checks are not available for this device. It is not possible "
-"to tell whether it meets security requirements."
-msgstr ""
-"Для гэтай прылады недаступны праверкі бяспекі. Немагчыма сказаць, ці "
-"адпавядае яна патрабаванням бяспекі."
-
 #. Translators: Unknown endpoint host for WireGuard (invalid setting)
-#: panels/firmware-security/cc-firmware-security-dialog.c:185
 #: panels/info-overview/cc-info-overview-panel.c:78
 #: panels/info-overview/cc-system-details-window.c:272
 #: panels/info-overview/cc-system-details-window.c:324
 #: panels/info-overview/cc-system-details-window.c:894
 #: panels/network/connection-editor/ce-page-wireguard.c:368
+#: panels/privacy/cc-firmware-security-dialog.c:168
 #: panels/sound/cc-alert-chooser-window.c:352
 #: panels/wwan/cc-wwan-details-dialog.c:100
 msgid "Unknown"
 msgstr "Невядома"
-
-#: panels/firmware-security/cc-firmware-security-dialog.c:384
-msgid "Report copied to clipboard"
-msgstr "Справаздача скапіявана ў буфер абмену"
-
-#: panels/firmware-security/cc-firmware-security-dialog.ui:22
-msgid "Device Security Status"
-msgstr "Статус бяспекі прылады"
-
-#: panels/firmware-security/cc-firmware-security-dialog.ui:88
-msgid "_Copy Technical Report"
-msgstr "_Скапіяваць тэхнічную справаздачу ў буфер абмену"
-
-#: panels/firmware-security/cc-firmware-security-help-dialog.ui:6
-msgid "About Device Security"
-msgstr "Пра бяспеку прылады"
-
-#: panels/firmware-security/cc-firmware-security-help-dialog.ui:31
-msgid ""
-"Device security provides information about how protected your device is "
-"against security issues which target the hardware itself."
-msgstr ""
-"Бяспека прылады дае інфармацыю аб тым, наколькі ваша прылада абаронена ад "
-"праблем бяспекі на апаратным узроўні."
-
-#: panels/firmware-security/cc-firmware-security-help-dialog.ui:51
-msgid "Aspects of hardware that affect security include:"
-msgstr ""
-"Разглядаюцца наступныя асаблівасці абсталявання, якія ўплываюць на бяспеку:"
-
-#: panels/firmware-security/cc-firmware-security-help-dialog.ui:69
-msgid "• security features that are built into a hardware itself;"
-msgstr "• функцыі бяспекі, убудаваныя ў само абсталяванне;"
-
-#: panels/firmware-security/cc-firmware-security-help-dialog.ui:79
-msgid "• how the hardware is configured to protect against security issues;"
-msgstr "• як абсталяванне наладжана для абароны ад праблем бяспекі;"
-
-#: panels/firmware-security/cc-firmware-security-help-dialog.ui:89
-msgid "• the security of the software runs directly on the hardware."
-msgstr ""
-"• бяспека праграмнага забеспячэння, якое непасрэдна працуе з абсталяваннем."
-
-#: panels/firmware-security/cc-firmware-security-help-dialog.ui:107
-msgid ""
-"Security threats which affect hardware include malware and viruses that "
-"target the software that runs directly on the hardware. It also includes "
-"physical tampering, such as physical connection to the hardware to read data "
-"and implant malware."
-msgstr ""
-"Пагрозы бяспекі, якія ўплываюць на апаратнае забеспячэнне, у тым ліку "
-"шкодныя праграмы і вірусы, накіраваныя на праграмнае забеспячэнне, якое "
-"непасрэдна працуе з абсталяваннем. Гэта таксама тычыцца несанкцыянаванага "
-"фізічнага доступу, напрыклад, фізічнае падключэнне да абсталявання для "
-"чытання даных і ўкаранення шкодных праграм."
-
-#: panels/firmware-security/cc-firmware-security-help-dialog.ui:125
-msgid ""
-"Device security is just one aspect of security, and does not reflect the "
-"overall security status of the system and applications."
-msgstr ""
-"Бяспека прылады - гэта толькі адзін з аспектаў бяспекі, які не адлюстроўвае "
-"агульны стан бяспекі сістэмы і праграм."
-
-#: panels/firmware-security/cc-firmware-security-panel.c:120
-msgid "Protected against malicious software when the device starts."
-msgstr "Абаронена ад шкоднага праграмнага забеспячэння падчас запуску прылады."
-
-#: panels/firmware-security/cc-firmware-security-panel.c:126
-msgid "Secure Boot has Problems"
-msgstr "Праблемы з Secure Boot"
-
-#: panels/firmware-security/cc-firmware-security-panel.c:127
-msgid "Some protection when the device is started."
-msgstr "Маецца абарона падчас запуску прылады."
-
-#: panels/firmware-security/cc-firmware-security-panel.c:132
-msgid "Secure Boot is Off"
-msgstr "Secure Boot выключана"
-
-#: panels/firmware-security/cc-firmware-security-panel.c:133
-msgid "No protection when the device is started."
-msgstr "Няма абароны падчас запуску прылады."
-
-#. TRANSLATORS: this is to explain an event that has already happened
-#: panels/firmware-security/cc-firmware-security-panel.c:152
-msgid ""
-"This issue could have been caused by a change in UEFI firmware settings, an "
-"operating system configuration change, or because of malicious software on "
-"this system."
-msgstr ""
-"Праблема магла быць выклікана змяненнем налад убудаванага ПЗ UEFI, "
-"канфігурацыі аперацыйнай сістэмы або дзеяннямі шкоднага праграмнага "
-"забеспячэння ў гэтай сістэме."
-
-#. TRANSLATORS: this is to explain an event that has already happened
-#: panels/firmware-security/cc-firmware-security-panel.c:160
-msgid ""
-"This issue could have been caused by a change in the UEFI firmware settings, "
-"or because of malicious software on this system."
-msgstr ""
-"Праблема магла быць выклікана змяненнем налад убудаванага ПЗ UEF або "
-"дзеяннямі шкоднага праграмнага забеспячэння ў гэтай сістэме."
-
-#. TRANSLATORS: this is to explain an event that has already happened
-#: panels/firmware-security/cc-firmware-security-panel.c:167
-msgid ""
-"This issue could have been caused by an operating system configuration "
-"change, or because of malicious software on this system."
-msgstr ""
-"Праблема магла быць выклікана змяненнем канфігурацыі аперацыйнай сістэмы або "
-"дзеяннямі шкоднага праграмнага забеспячэння ў гэтай сістэме."
-
-#. TRANSLATOR: this is the date in "%Y-%m-%d %H:%M:%S" format,
-#. for example: 2022-08-01 22:48:00
-#: panels/firmware-security/cc-firmware-security-panel.c:225
-#, c-format
-msgid "%1$s"
-msgstr "%1$s"
-
-#. TRANSLATOR: This is the text event status output when the event status is "success"
-#: panels/firmware-security/cc-firmware-security-panel.c:231
-msgid "Pass"
-msgstr "Пройдзена"
-
-#. TRANSLATOR: This is the text event status output when the event status is not "success"
-#: panels/firmware-security/cc-firmware-security-panel.c:234
-msgid "! Fail"
-msgstr "! Не пройдзена"
-
-#: panels/firmware-security/cc-firmware-security-panel.c:237
-#, c-format
-msgid "(%1$s → %2$s)"
-msgstr "(%1$s → %2$s)"
-
-#: panels/firmware-security/cc-firmware-security-panel.c:543
-msgid "Hardware does not pass checks."
-msgstr "Абсталяванне не прайшло праверку бяспекі."
-
-#: panels/firmware-security/cc-firmware-security-panel.c:550
-msgid "Hardware meets basic security requirements."
-msgstr "Абсталяванне адпавядае базавым патрабаванням бяспекі."
-
-#: panels/firmware-security/cc-firmware-security-panel.c:559
-msgid "Hardware has a good level of protection."
-msgstr "Абсталяванне мае добры ўзровень абароны."
-
-#: panels/firmware-security/cc-firmware-security-panel.c:566
-msgid "Security levels are not available for this device."
-msgstr "Для гэтай прылады недаступны ўзроўні бяспекі."
-
-#: panels/firmware-security/cc-firmware-security-panel.ui:50
-msgid "Starting Device Security…"
-msgstr "Запуск бяспекі прылады…"
-
-#: panels/firmware-security/cc-firmware-security-panel.ui:76
-msgid "Device Security Unavailable"
-msgstr "Бяспека прылады недаступна"
-
-#: panels/firmware-security/cc-firmware-security-panel.ui:78
-msgid ""
-"Device Security is only available on physical hardware. No physical hardware "
-"has been detected."
-msgstr ""
-"Бяспека прылады даступна толькі на фізічным абсталяванні. Фізічнае "
-"абсталяванне не выяўлена."
-
-#: panels/firmware-security/cc-firmware-security-panel.ui:216
-msgid "Security Events"
-msgstr "Падзеі бяспекі"
-
-#: panels/firmware-security/cc-firmware-security-panel.ui:226
-msgid "No Events"
-msgstr "Няма падзей"
-
-#. TRANSLATORS: if the stauts is valid. For example security check is valid and key is valid.
-#: panels/firmware-security/cc-firmware-security-utils.c:35
-msgid "Valid"
-msgstr "Сапраўдны"
-
-#. TRANSLATORS: if the status or key is not valid.
-#: panels/firmware-security/cc-firmware-security-utils.c:40
-msgid "Not Valid"
-msgstr "Несапраўдны"
-
-#. TRANSLATORS: if the function is not enabled through BIOS or OS settings.
-#: panels/firmware-security/cc-firmware-security-utils.c:50
-msgid "Not Enabled"
-msgstr "Не ўключана"
-
-#. TRANSLATORS: the memory space or system mode is locked to prevent from malicious modification.
-#: panels/firmware-security/cc-firmware-security-utils.c:55
-msgid "Locked"
-msgstr "Заблакавана"
-
-#. TRANSLATORS: the memory space or system mode is not locked.
-#: panels/firmware-security/cc-firmware-security-utils.c:60
-msgid "Not Locked"
-msgstr "Не заблакавана"
-
-#. TRANSLATORS: The data is encrypted to prevent from malicious reading.
-#: panels/firmware-security/cc-firmware-security-utils.c:65
-msgid "Encrypted"
-msgstr "Зашыфравана"
-
-#. TRANSLATORS: the data in memory is plane text.
-#: panels/firmware-security/cc-firmware-security-utils.c:70
-msgid "Not Encrypted"
-msgstr "Не зашыфравана"
-
-#. TRANSLATORS: Linux kernel is tainted by third party kernel module.
-#: panels/firmware-security/cc-firmware-security-utils.c:75
-msgid "Tainted"
-msgstr "Сапсавана"
-
-#. TRANSLATORS: All the loaded kernel module are licensed.
-#: panels/firmware-security/cc-firmware-security-utils.c:80
-msgid "Not Tainted"
-msgstr "Не сапсавана"
-
-#. TRANSLATORS: the feature can be detected.
-#: panels/firmware-security/cc-firmware-security-utils.c:85
-msgid "Found"
-msgstr "Знойдзена"
-
-#. TRANSLATORS: the feature can't be detected.
-#: panels/firmware-security/cc-firmware-security-utils.c:90
-msgid "Not Found"
-msgstr "Не знойдзена"
-
-#. TRANSLATORS: the function is supported by hardware.
-#: panels/firmware-security/cc-firmware-security-utils.c:95
-msgid "Supported"
-msgstr "Падтрымліваецца"
-
-#. TRANSLATORS: the function isn't supported by hardware.
-#: panels/firmware-security/cc-firmware-security-utils.c:100
-msgid "Not Supported"
-msgstr "Не падтрымліваецца"
-
-#: panels/firmware-security/gnome-firmware-security-panel.desktop.in:3
-msgid "Device Security"
-msgstr "Бяспека прылады"
-
-#: panels/firmware-security/gnome-firmware-security-panel.desktop.in:4
-msgid "Protection against hardware security threats"
-msgstr "Абарона ад пагроз бяспекі для апаратнага забеспячэння"
-
-#. Translators: Search terms to find the Privacy panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
-#: panels/firmware-security/gnome-firmware-security-panel.desktop.in:16
-msgid ""
-"screen;lock;diagnostics;crash;private;recent;temporary;tmp;index;name;"
-"network;identity;privacy;"
-msgstr ""
-"screen;lock;diagnostics;crash;private;recent;temporary;tmp;index;name;"
-"network;identity;privacy;экран;блакіраванне;заблакіраваць;дыягностыка;аварыя;"
-"прыватны;нядаўні;часовы;назва;імя;сетка;сеціва;ідэнтыфікацыя;асоба;"
-"прыватнасць;"
 
 #: panels/info-overview/cc-info-overview-panel.ui:18
 msgid "System Logo"
@@ -2249,17 +1762,17 @@ msgid "Hardware Model"
 msgstr "Мадэль абсталявання"
 
 #: panels/info-overview/cc-info-overview-panel.ui:66
-#: panels/info-overview/cc-system-details-window.ui:91
+#: panels/info-overview/cc-system-details-window.ui:83
 msgid "Processor"
 msgstr "Працэсар"
 
 #: panels/info-overview/cc-info-overview-panel.ui:74
-#: panels/info-overview/cc-system-details-window.ui:84
+#: panels/info-overview/cc-system-details-window.ui:76
 msgid "Memory"
 msgstr "Памяць"
 
 #: panels/info-overview/cc-info-overview-panel.ui:82
-#: panels/info-overview/cc-system-details-window.ui:105
+#: panels/info-overview/cc-system-details-window.ui:97
 msgid "Disk Capacity"
 msgstr "Ёмістасць дыска"
 
@@ -2269,10 +1782,8 @@ msgstr "Вылічэнне…"
 
 #: panels/info-overview/cc-info-overview-panel.ui:91
 #: panels/info-overview/cc-system-details-window.ui:4
-#, fuzzy
-#| msgid "%s Details"
 msgid "System Details"
-msgstr "Падрабязнасці %s"
+msgstr "Падрабязнасці пра сістэму"
 
 #: panels/info-overview/cc-info-overview-panel.ui:111
 msgid "Software Updates"
@@ -2322,45 +1833,38 @@ msgstr "Недаступна"
 
 #: panels/info-overview/cc-system-details-window.c:756
 msgid "# System Details Report\n"
-msgstr ""
+msgstr "# Справаздача пра падрабязнасці сістэмы\n"
 
 #: panels/info-overview/cc-system-details-window.c:759
 msgid "## Report details\n"
 msgstr "## Падрабязнасці справаздачы\n"
 
 #: panels/info-overview/cc-system-details-window.c:762
-#| msgid "Date generated:"
 msgid "**Date generated:**"
 msgstr "**Дата стварэння:**"
 
 #: panels/info-overview/cc-system-details-window.c:771
-#| msgid "Hardware Model"
 msgid "**Hardware Model:**"
 msgstr "**Мадэль абсталявання:**"
 
 #: panels/info-overview/cc-system-details-window.c:776
-#| msgid "Memory"
 msgid "**Memory:**"
 msgstr "**Памяць:**"
 
 #: panels/info-overview/cc-system-details-window.c:784
-#| msgid "Processor:"
 msgid "**Processor:**"
 msgstr "**Працэсар:**"
 
 #: panels/info-overview/cc-system-details-window.c:798
-#| msgid "Graphics"
 msgid "**Graphics:**"
 msgstr "**Графіка:**"
 
 #: panels/info-overview/cc-system-details-window.c:800
 #, c-format
-#| msgid "Graphics"
 msgid "**Graphics %d:**"
 msgstr "**Графіка %d:**"
 
 #: panels/info-overview/cc-system-details-window.c:807
-#| msgid "Disk Capacity"
 msgid "**Disk Capacity:**"
 msgstr "**Ёмістасць дыска:**"
 
@@ -2369,7 +1873,6 @@ msgid "**Firmware Version:**"
 msgstr "**Версія ўбудаванага ПЗ:**"
 
 #: panels/info-overview/cc-system-details-window.c:821
-#| msgid "OS Name"
 msgid "**OS Name:**"
 msgstr "**Назва АС:**"
 
@@ -2378,78 +1881,72 @@ msgid "**OS Build:**"
 msgstr "**Зборка АС:**"
 
 #: panels/info-overview/cc-system-details-window.c:831
-#| msgid "OS Type"
 msgid "**OS Type:**"
 msgstr "**Тып АС:**"
 
 #: panels/info-overview/cc-system-details-window.c:836
-#| msgid "GNOME Version"
 msgid "**GNOME Version:**"
 msgstr "**Версія GNOME:**"
 
 #: panels/info-overview/cc-system-details-window.c:841
-#| msgid "Windowing System"
 msgid "**Windowing System:**"
 msgstr "**Аконны інтэрфейс:**"
 
 #: panels/info-overview/cc-system-details-window.c:845
-#| msgid "Kernel Version"
 msgid "**Kernel Version:**"
 msgstr "**Версія ядра:**"
 
 #: panels/info-overview/cc-system-details-window.c:852
-#, fuzzy
-#| msgid "Report copied to clipboard"
 msgid "Details copied to clipboard"
-msgstr "Справаздача скапіявана ў буфер абмену"
+msgstr "Падрабязнасці скапіяваны ў буфер абмену"
 
-#: panels/info-overview/cc-system-details-window.ui:66
+#: panels/info-overview/cc-system-details-window.ui:58
 msgid "Hardware Information"
 msgstr "Звесткі пра абсталяванне"
 
-#: panels/info-overview/cc-system-details-window.ui:77
+#: panels/info-overview/cc-system-details-window.ui:69
 #: panels/printers/printer-entry.ui:183
 #: panels/wwan/cc-wwan-details-dialog.ui:184
 msgid "Model"
 msgstr "Мадэль"
 
-#: panels/info-overview/cc-system-details-window.ui:127
+#: panels/info-overview/cc-system-details-window.ui:119
 msgid "Software Information"
 msgstr "Звесткі аб праграмным забеспячэнні"
 
-#: panels/info-overview/cc-system-details-window.ui:138
+#: panels/info-overview/cc-system-details-window.ui:130
 #: panels/wwan/cc-wwan-details-dialog.ui:210
 msgid "Firmware Version"
 msgstr "Версія ўбудаванага ПЗ"
 
 #. translators: this field contains the distro name and version
-#: panels/info-overview/cc-system-details-window.ui:146
+#: panels/info-overview/cc-system-details-window.ui:138
 msgid "OS Name"
 msgstr "Назва АС"
 
 #. translators: this field contains the distro build
-#: panels/info-overview/cc-system-details-window.ui:154
+#: panels/info-overview/cc-system-details-window.ui:146
 msgid "OS Build"
 msgstr "Зборка АС"
 
 #. translators: this field contains the distro type
-#: panels/info-overview/cc-system-details-window.ui:162
+#: panels/info-overview/cc-system-details-window.ui:154
 msgid "OS Type"
 msgstr "Тып АС"
 
-#: panels/info-overview/cc-system-details-window.ui:169
+#: panels/info-overview/cc-system-details-window.ui:161
 msgid "GNOME Version"
 msgstr "Версія GNOME"
 
-#: panels/info-overview/cc-system-details-window.ui:176
+#: panels/info-overview/cc-system-details-window.ui:168
 msgid "Windowing System"
 msgstr "Аконны інтэрфейс"
 
-#: panels/info-overview/cc-system-details-window.ui:183
+#: panels/info-overview/cc-system-details-window.ui:175
 msgid "Virtualization"
 msgstr "Віртуалізацыя"
 
-#: panels/info-overview/cc-system-details-window.ui:190
+#: panels/info-overview/cc-system-details-window.ui:182
 msgid "Kernel Version"
 msgstr "Версія ядра"
 
@@ -2567,7 +2064,7 @@ msgctxt "keybinding"
 msgid "Search"
 msgstr "Пошук"
 
-#: panels/keyboard/01-system.xml.in:2
+#: panels/keyboard/01-system.xml.in:2 panels/privacy/cc-privacy-panel.ui:39
 msgid "System"
 msgstr "Сістэма"
 
@@ -2787,7 +2284,7 @@ msgid "Methods for entering symbols and letter variants using the keyboard."
 msgstr "Спосабы ўводу сімвалаў і варыянтаў літар з клавіятуры."
 
 #: panels/keyboard/cc-keyboard-panel.ui:82
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:9 shell/cc-window.ui:169
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:9 shell/cc-window.ui:170
 msgid "Keyboard Shortcuts"
 msgstr "Спалучэнні клавіш"
 
@@ -2976,88 +2473,6 @@ msgstr ""
 "Shortcut;Workspace;Window;Resize;Zoom;Contrast;Input;Source;Lock;Volume;"
 "Hotkey;Скарот;Спалучэнне;клавішы;Працоўная;Прастора;Акно;Памер;Маштаб;"
 "Кантраснасць;Увод;Крыніца;Блакіроўка;Блакіраваць;Гучнасць;Сімвал;Знак;"
-
-#: panels/location/cc-location-panel.ui:7
-msgid ""
-"Location services use GPS, Wi-Fi and cellular connections to determine the "
-"approximate location of this device. <a href='https://location.services."
-"mozilla.com/privacy'>Learn about what data is collected, and how it is used."
-"</a>"
-msgstr ""
-"Сэрвісы месцазнаходжання выкарыстоўваюць GPS, Wi-Fi і сотавую сувязь, каб "
-"вызначыць прыблізнае месцазнаходжанне прылады. <a href='https://location."
-"services.mozilla.com/privacy'>Даведайцеся, якія даныя збіраюцца і як яны "
-"выкарыстоўваюцца.</a>"
-
-#: panels/location/cc-location-panel.ui:12
-msgid "_Location Services"
-msgstr "Сэрвісы _месцазнаходжання"
-
-#: panels/location/cc-location-panel.ui:13
-msgid "Allow permitted apps to access location data"
-msgstr "Дазваляе давераным праграмам выкарыстоўваць даныя аб месцазнаходжанні"
-
-#: panels/location/cc-location-panel.ui:23
-msgid ""
-"The following sandboxed apps have been given access to location data. Apps "
-"that are not sandboxed can access location data without asking for "
-"permission."
-msgstr ""
-"Наступныя праграмы ў «пясочніцы» атрымалі дазвол на выкарыстанне даных аб "
-"месцазнаходжанні. Праграмы, не ізаляваныя ў «пясочніцы», могуць "
-"выкарыстоўваць даныя аб месцазнаходжанні не пытаючы дазволу."
-
-#: panels/location/cc-location-panel.ui:37
-msgid "No sandboxed apps have asked for location access"
-msgstr "Няма праграм у «пясочніцы», якія запыталі доступ да месцазнаходжання"
-
-#: panels/location/gnome-location-panel.desktop.in:4
-msgid "Control access to your location"
-msgstr "Кіраванне доступам да вашага месцазнаходжання"
-
-#. Translators: Search terms to find the Location panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
-#: panels/location/gnome-location-panel.desktop.in:16
-msgid "location;gps;private;privacy;"
-msgstr ""
-"location;gps;private;privacy;месцазнаходжанне;прыватнасць;канфідэнцыяльнасць;"
-
-#: panels/microphone/cc-microphone-panel.ui:11
-msgid "_Microphone Access"
-msgstr "Доступ да _мікрафона"
-
-#: panels/microphone/cc-microphone-panel.ui:12
-msgid "Allow permitted apps to use microphones"
-msgstr "Дазваляе давераным праграмам выкарыстоўваць мікрафоны"
-
-#: panels/microphone/cc-microphone-panel.ui:22
-msgid ""
-"The following sandboxed apps have been given permission to use microphones. "
-"Apps that are not sandboxed can use microphones without asking for "
-"permission."
-msgstr ""
-"Наступныя праграмы ў «пясочніцы» атрымалі дазвол на выкарыстанне мікрафона. "
-"Праграмы, не ізаляваныя ў «пясочніцы», могуць выкарыстоўваць мікрафон не "
-"пытаючы дазволу."
-
-#: panels/microphone/cc-microphone-panel.ui:37
-msgid "No sandboxed apps have asked for microphone access"
-msgstr ""
-"Праграмы, не ізаляваныя ў «пясочніцы» запыталі дазвол на выкарыстанне "
-"мікрафона"
-
-#: panels/microphone/gnome-microphone-panel.desktop.in:3
-msgid "Microphones"
-msgstr "Мікрафоны"
-
-#: panels/microphone/gnome-microphone-panel.desktop.in:4
-msgid "Restrict microphone access"
-msgstr "Абмежаваць доступ да мікрафона"
-
-#. Translators: Search terms to find the Microphones panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
-#: panels/microphone/gnome-microphone-panel.desktop.in:16
-msgid "microphone;recording;application;privacy;"
-msgstr ""
-"microphone;recording;application;privacy;мікрафон;запіс;праграма;прыватнасць;"
 
 #: panels/mouse/cc-mouse-panel.ui:31 panels/wacom/cc-wacom-panel.ui:9
 msgid "Test _Settings"
@@ -3361,11 +2776,11 @@ msgstr "Уручную"
 msgid "Configuration"
 msgstr "Канфігурацыя"
 
-#: panels/network/cc-net-proxy-page.ui:53
+#: panels/network/cc-net-proxy-page.ui:55
 msgid "Configuration URL"
 msgstr "URL канфігурацыі"
 
-#: panels/network/cc-net-proxy-page.ui:63
+#: panels/network/cc-net-proxy-page.ui:65
 msgid ""
 "Web Proxy Autodiscovery is used when a Configuration URL is not provided. "
 "This is not recommended for untrusted public networks."
@@ -3373,53 +2788,53 @@ msgstr ""
 "Аўтавыяўленне вэб-проксі выкарыстоўваецца, калі не ўказаны URL канфігурацыі. "
 "Не рэкамендуецца для ненадзейных публічных сетак."
 
-#: panels/network/cc-net-proxy-page.ui:80
+#: panels/network/cc-net-proxy-page.ui:82
 msgid "HTTP Proxy"
 msgstr "Проксі-сервер НТТР"
 
-#: panels/network/cc-net-proxy-page.ui:91
-#: panels/network/cc-net-proxy-page.ui:136
-#: panels/network/cc-net-proxy-page.ui:181
-#: panels/network/cc-net-proxy-page.ui:226
+#: panels/network/cc-net-proxy-page.ui:93
+#: panels/network/cc-net-proxy-page.ui:132
+#: panels/network/cc-net-proxy-page.ui:171
+#: panels/network/cc-net-proxy-page.ui:210
 msgid "URL"
 msgstr "URL-адрас"
 
-#: panels/network/cc-net-proxy-page.ui:98
-#: panels/network/cc-net-proxy-page.ui:143
-#: panels/network/cc-net-proxy-page.ui:188
-#: panels/network/cc-net-proxy-page.ui:233
+#: panels/network/cc-net-proxy-page.ui:100
+#: panels/network/cc-net-proxy-page.ui:139
+#: panels/network/cc-net-proxy-page.ui:178
+#: panels/network/cc-net-proxy-page.ui:217
 msgid "Port"
 msgstr "Порт"
 
-#: panels/network/cc-net-proxy-page.ui:110
+#: panels/network/cc-net-proxy-page.ui:108
 msgid "HTTP proxy port"
 msgstr "Порт проксі-сервера НТТР"
 
-#: panels/network/cc-net-proxy-page.ui:125
+#: panels/network/cc-net-proxy-page.ui:121
 msgid "HTTPS Proxy"
 msgstr "Проксі-сервер HTTPS"
 
-#: panels/network/cc-net-proxy-page.ui:155
+#: panels/network/cc-net-proxy-page.ui:147
 msgid "HTTPS proxy port"
 msgstr "Порт проксі-сервера HTTPS"
 
-#: panels/network/cc-net-proxy-page.ui:170
+#: panels/network/cc-net-proxy-page.ui:160
 msgid "FTP Proxy"
 msgstr "Проксі-сервер FTP"
 
-#: panels/network/cc-net-proxy-page.ui:200
+#: panels/network/cc-net-proxy-page.ui:186
 msgid "FTP proxy port"
 msgstr "Порт проксі-сервера FTP"
 
-#: panels/network/cc-net-proxy-page.ui:215
+#: panels/network/cc-net-proxy-page.ui:199
 msgid "SOCKS Host"
 msgstr "Хост SOCKS"
 
-#: panels/network/cc-net-proxy-page.ui:245
+#: panels/network/cc-net-proxy-page.ui:225
 msgid "SOCKS host port"
 msgstr "Порт хоста SOCKS"
 
-#: panels/network/cc-net-proxy-page.ui:261
+#: panels/network/cc-net-proxy-page.ui:239
 msgid "Ignored Hosts"
 msgstr "Хосты, якія ігнаруюцца"
 
@@ -3689,6 +3104,8 @@ msgid ""
 "Saved details for “%s” will be permanently lost. This includes passwords and "
 "any network changes."
 msgstr ""
+"Захаваныя звесткі для «%s» будуць незваротна страчаны. У тым ліку паролі і "
+"любыя змяненні сеткі."
 
 #: panels/network/connection-editor/ce-page-details.c:95
 #: panels/network/net-device-wifi.c:859
@@ -4318,15 +3735,15 @@ msgstr ""
 msgid "_Forget"
 msgstr "_Забыць"
 
-#: panels/network/net-device-wifi.c:1068
+#: panels/network/net-device-wifi.c:1069
 msgid "Saved Wi-Fi Networks"
 msgstr "Захаваныя сеткі Wi-Fi"
 
-#: panels/network/net-device-wifi.c:1237
+#: panels/network/net-device-wifi.c:1250
 msgid "System policy prohibits use as a Hotspot"
 msgstr "Палітыка сістэмы забараняе рэжым хот-спота"
 
-#: panels/network/net-device-wifi.c:1240
+#: panels/network/net-device-wifi.c:1253
 msgid "Wireless device does not support Hotspot mode"
 msgstr "Бесправадная прылада не падтрымлівае рэжым хот-спота"
 
@@ -4684,7 +4101,7 @@ msgstr "_Не турбаваць"
 
 #. Translators: Whether to show notifications on the lock screen
 #: panels/notifications/cc-notifications-panel.ui:16
-#: panels/screen/cc-screen-panel.ui:66
+#: panels/privacy/cc-screen-page.ui:74
 msgid "_Lock Screen Notifications"
 msgstr "Апавяшчэнні на экране _блакіравання"
 
@@ -4733,11 +4150,13 @@ msgstr "Закрыць апавяшчэнне"
 
 #: panels/online-accounts/cc-online-accounts-panel.ui:55
 msgid "Offline — unable to connect accounts"
-msgstr ""
+msgstr "Не ў сетцы — не ўдалося падлучыць уліковыя запісы"
 
 #: panels/online-accounts/cc-online-accounts-panel.ui:61
 msgid "Allow apps to access online services by connecting your cloud accounts."
 msgstr ""
+"Дазваляе праграмам атрымліваць доступ да сеткавых сэрвісаў праз падлучаныя "
+"воблачныя ўліковыя запісы."
 
 #: panels/online-accounts/cc-online-accounts-panel.ui:65
 msgid "Your Accounts"
@@ -4930,7 +4349,6 @@ msgstr "Батарэі"
 #. Translators: UPS is an Uninterruptible Power Supply:
 #. * https://en.wikipedia.org/wiki/Uninterruptible_power_supply
 #: panels/power/cc-power-panel.c:260
-#| msgid "USB"
 msgid "UPS"
 msgstr "UPS"
 
@@ -5882,6 +5300,1114 @@ msgstr "Няма сэрвісу друку"
 msgid "The system printing service doesn’t seem to be available."
 msgstr "Здаецца, сістэмны сэрвіс друку недаступны."
 
+#: panels/privacy/cc-bolt-device-dialog.c:79
+#: panels/privacy/cc-bolt-device-entry.c:121
+msgctxt "Thunderbolt Device Status"
+msgid "Disconnected"
+msgstr "Адлучана"
+
+#: panels/privacy/cc-bolt-device-dialog.c:82
+#: panels/privacy/cc-bolt-device-entry.c:124
+msgctxt "Thunderbolt Device Status"
+msgid "Connecting"
+msgstr "Злучэнне"
+
+#: panels/privacy/cc-bolt-device-dialog.c:85
+#: panels/privacy/cc-bolt-device-entry.c:128
+#: panels/privacy/cc-bolt-device-entry.c:140
+msgctxt "Thunderbolt Device Status"
+msgid "Connected"
+msgstr "Злучана"
+
+#: panels/privacy/cc-bolt-device-dialog.c:88
+msgctxt "Thunderbolt Device Status"
+msgid "Authorization Error"
+msgstr "Памылка аўтарызацыі"
+
+#: panels/privacy/cc-bolt-device-dialog.c:91
+#: panels/privacy/cc-bolt-device-entry.c:134
+msgctxt "Thunderbolt Device Status"
+msgid "Authorizing"
+msgstr "Аўтарызацыя"
+
+#: panels/privacy/cc-bolt-device-dialog.c:98
+msgctxt "Thunderbolt Device Status"
+msgid "Reduced Functionality"
+msgstr "Дзейнічае з абмежаваннямі"
+
+#: panels/privacy/cc-bolt-device-dialog.c:100
+msgctxt "Thunderbolt Device Status"
+msgid "Connected & Authorized"
+msgstr "Падлучана і аўтарызавана"
+
+#: panels/privacy/cc-bolt-device-dialog.c:106
+#: panels/privacy/cc-bolt-device-entry.c:148
+msgctxt "Thunderbolt Device Status"
+msgid "Unknown"
+msgstr "Невядома"
+
+#. Translators: The time point the device was authorized.
+#: panels/privacy/cc-bolt-device-dialog.c:161
+msgid "Authorized at"
+msgstr "Аўтарызавана"
+
+#. Translators: The time point the device was connected.
+#: panels/privacy/cc-bolt-device-dialog.c:167
+msgid "Connected at"
+msgstr "Злучана"
+
+#. Translators: The time point the device was enrolled,
+#. * i.e. authorized and stored in the device database.
+#: panels/privacy/cc-bolt-device-dialog.c:174
+msgid "Enrolled at"
+msgstr "Зарэгістравана"
+
+#: panels/privacy/cc-bolt-device-dialog.c:248
+msgid "Failed to authorize device: "
+msgstr "Не ўдалося аўтарызаваць прыладу: "
+
+#: panels/privacy/cc-bolt-device-dialog.c:315
+msgid "Failed to forget device: "
+msgstr "Не ўдалося забыць прыладу: "
+
+#: panels/privacy/cc-bolt-device-dialog.c:455
+#, c-format
+msgid "Depends on %u other device"
+msgid_plural "Depends on %u other devices"
+msgstr[0] "Залежыць ад %u іншай прылады"
+msgstr[1] "Залежыць ад %u іншых прылад"
+msgstr[2] "Залежыць ад %u іншых прылад"
+
+#: panels/privacy/cc-bolt-device-dialog.ui:25
+msgid "Status"
+msgstr "Стан"
+
+#: panels/privacy/cc-bolt-device-dialog.ui:30
+msgid "UUID"
+msgstr "UUID"
+
+#: panels/privacy/cc-bolt-device-dialog.ui:35
+msgid "Timestamp"
+msgstr "Часавы адбітак"
+
+#: panels/privacy/cc-bolt-device-dialog.ui:43
+msgid "Depends on other devices"
+msgstr "Залежыць ад іншых прылад"
+
+#: panels/privacy/cc-bolt-device-dialog.ui:73
+msgid "Authorize and Connect"
+msgstr "Аўтарызаваць і злучыць"
+
+#: panels/privacy/cc-bolt-device-dialog.ui:88
+msgid "Forget Device"
+msgstr "Забыць прыладу"
+
+#: panels/privacy/cc-bolt-device-entry.c:131
+msgctxt "Thunderbolt Device Status"
+msgid "Error"
+msgstr "Памылка"
+
+#: panels/privacy/cc-bolt-device-entry.c:142
+msgctxt "Thunderbolt Device Status"
+msgid "Authorized"
+msgstr "Аўтарызавана"
+
+#: panels/privacy/cc-bolt-page.c:219
+msgid ""
+"The Thunderbolt subsystem (boltd) is not installed or not set up properly."
+msgstr ""
+"Падсістэма Thunderbolt (boltd) не ўсталявана ці не наладжана належным чынам."
+
+#: panels/privacy/cc-bolt-page.c:475 panels/privacy/cc-bolt-page.ui:131
+msgid "Allow direct access to devices such as docks and external GPUs."
+msgstr "Дазволіць прамы доступ да прылад накшталт док-станцый і знешніх GPU."
+
+#: panels/privacy/cc-bolt-page.c:476
+msgid "Only USB and Display Port devices can attach."
+msgstr "Далучыцца могуць толькі прылады USB і Display Port."
+
+#: panels/privacy/cc-bolt-page.c:511
+msgid ""
+"Thunderbolt could not be detected.\n"
+"Either the system lacks Thunderbolt support, it has been disabled in the "
+"BIOS or is set to an unsupported security level in the BIOS."
+msgstr ""
+"Не ўдалося выявіць Thunderbolt.\n"
+"Thunderbolt можа не падтрымлівацца сістэмай ці быць адключаным у BIOS або не "
+"падтрымлівацца праз зададзены ў BIOS ўзровень бяспекі."
+
+#: panels/privacy/cc-bolt-page.c:555
+msgid "Thunderbolt support has been disabled in the BIOS."
+msgstr "Падтрымка Thunderbolt адключана ў BIOS."
+
+#: panels/privacy/cc-bolt-page.c:559
+msgid "Thunderbolt security level could not be determined."
+msgstr "Не ўдалося вызначыць узровень бяспекі Thunderbolt."
+
+#: panels/privacy/cc-bolt-page.c:679
+#, c-format
+msgid "Error switching direct mode: %s"
+msgstr "Памылка пераключэння рэжыму прамога доступу: %s"
+
+#: panels/privacy/cc-bolt-page.ui:4
+msgid "Thunderbolt"
+msgstr "Thunderbolt"
+
+#: panels/privacy/cc-bolt-page.ui:49
+msgid "Close notification"
+msgstr "Закрыць апавяшчэнне"
+
+#: panels/privacy/cc-bolt-page.ui:110
+msgid "No Thunderbolt Support"
+msgstr "Thunderbolt не падтрымліваецца"
+
+#: panels/privacy/cc-bolt-page.ui:111
+msgid "Could not connect to the thunderbolt subsystem."
+msgstr "Не ўдалося падлучыцца да падсістэмы thunderbolt."
+
+#: panels/privacy/cc-bolt-page.ui:128
+msgid "Direct Access"
+msgstr "Прамы доступ"
+
+#: panels/privacy/cc-bolt-page.ui:200
+msgid "Pending Devices"
+msgstr "Прылады ў чаканні"
+
+#: panels/privacy/cc-bolt-page.ui:294
+msgid "No devices attached"
+msgstr "Няма далучаных прылад"
+
+#: panels/privacy/cc-camera-page.ui:4
+msgid "Cameras"
+msgstr "Камеры"
+
+#: panels/privacy/cc-camera-page.ui:18
+msgid "_Camera Access"
+msgstr "Доступ да _камеры"
+
+#: panels/privacy/cc-camera-page.ui:19
+msgid "Allow permitted apps to use cameras"
+msgstr "Дазваляе давераным праграмам выкарыстоўваць камеры"
+
+#: panels/privacy/cc-camera-page.ui:28 panels/privacy/cc-location-page.ui:29
+#: panels/privacy/cc-microphone-page.ui:28
+msgid "Permitted Apps"
+msgstr "Давераныя праграмы"
+
+#: panels/privacy/cc-camera-page.ui:29
+msgid ""
+"The following sandboxed apps have been given permission to use cameras. Apps "
+"that are not sandboxed can use cameras without asking for permission."
+msgstr ""
+"Наступныя праграмы ў «пясочніцы» атрымалі дазвол на выкарыстанне камер. "
+"Праграмы, не ізаляваныя ў «пясочніцы», могуць выкарыстоўваць камеры не "
+"пытаючы дазволу."
+
+#: panels/privacy/cc-camera-page.ui:43
+msgid "No sandboxed apps have asked for camera access"
+msgstr ""
+"Праграмы, не ізаляваныя ў «пясочніцы» запыталі дазвол на выкарыстанне камеры"
+
+#. translators: The first '%s' is the distributor's name, such as 'Fedora', the second '%s' is a link to the privacy policy
+#: panels/privacy/cc-diagnostics-page.c:124
+#, c-format
+msgid ""
+"Sending reports of technical problems helps us improve %s. Reports are sent "
+"anonymously and are scrubbed of personal data. %s"
+msgstr ""
+"Справаздачы пра тэхнічныя праблемы дапамагаюць нам удасканальваць %s. Усе "
+"справаздачы адпраўляюцца ананімна і не змяшчаюць персанальных дадзеных. %s"
+
+#: panels/privacy/cc-diagnostics-page.ui:4
+msgid "Diagnostics"
+msgstr "Дыягностыка"
+
+#: panels/privacy/cc-diagnostics-page.ui:16
+msgid "Problem Reporting"
+msgstr "Справаздачы аб праблемах"
+
+#: panels/privacy/cc-diagnostics-page.ui:19
+msgid "_Automatic Problem Reporting"
+msgstr "_Аўтаматычныя справаздачы аб праблемах"
+
+#. TRANSLATORS: secure boot refers to the system firmware security mode
+#: panels/privacy/cc-firmware-security-boot-dialog.c:72
+#: panels/privacy/cc-firmware-security-page.c:120
+msgid "Secure Boot is Active"
+msgstr "Secure Boot актыўна"
+
+#. TRANSLATORS: this is the first section of the decription
+#: panels/privacy/cc-firmware-security-boot-dialog.c:77
+msgid ""
+"Secure boot prevents malicious software from being loaded when the device "
+"starts. It is currently turned on and is functioning correctly."
+msgstr ""
+"Secure boot прадухіляе загрузку шкоднага праграмнага забеспячэння падчас "
+"запуску прылады. Зараз функцыя ўключана і працуе правільна."
+
+#. TRANSLATORS: secure boot refers to the system firmware security mode
+#: panels/privacy/cc-firmware-security-boot-dialog.c:83
+msgid "Secure Boot Has Problems"
+msgstr "Праблемы з Secure Boot"
+
+#. TRANSLATORS: this is the first section of the decription.
+#: panels/privacy/cc-firmware-security-boot-dialog.c:87
+msgid ""
+"Secure boot prevents malicious software from being loaded when the device "
+"starts. It is currently turned on, but will not work due to having an "
+"invalid key."
+msgstr ""
+"Secure boot прадухіляе загрузку шкоднага праграмнага забеспячэння падчас "
+"запуску прылады. Зараз функцыя ўключана, але не будзе працаваць з-за "
+"памылковага ключа."
+
+#. TRANSLATORS: this is the second section of description.
+#: panels/privacy/cc-firmware-security-boot-dialog.c:90
+msgid ""
+"Secure boot problems can often be resolved from your computer's UEFI "
+"firmware settings (BIOS) and your hardware manufacturer may provide "
+"information on how to do this."
+msgstr ""
+"Праблемы з Secure boot часта можна вырашыць праз налады UEFI (BIOS) "
+"камп'ютара і з дапамогай вытворцы вашага абсталявання, які можа даць "
+"інфармацыю як гэта зрабіць."
+
+#. TRANSLATORS: this is the third section of description.
+#: panels/privacy/cc-firmware-security-boot-dialog.c:93
+msgid "For help, contact your hardware manufacturer or IT support provider."
+msgstr ""
+"Звярніцеся па дапамогу да вытворцы вашага абсталявання або да службы "
+"абслугоўвання і падтрымкі."
+
+#. TRANSLATORS: secure boot refers to the system firmware security mode
+#: panels/privacy/cc-firmware-security-boot-dialog.c:99
+msgid "Secure Boot is Turned Off"
+msgstr "Secure Boot выключана"
+
+#. TRANSLATORS: this is the first section of the description.
+#: panels/privacy/cc-firmware-security-boot-dialog.c:103
+msgid ""
+"Secure boot prevents malicious software from being loaded when the device "
+"starts. It is currently turned off."
+msgstr ""
+"Secure boot прадухіляе загрузку шкоднага праграмнага забеспячэння падчас "
+"запуску прылады. Зараз функцыя выключана."
+
+#. TRANSLATORS: this is the second section of the description.
+#: panels/privacy/cc-firmware-security-boot-dialog.c:106
+msgid ""
+"Secure boot can often be turned on from your computer's UEFI firmware "
+"settings (BIOS). For help, contact your hardware manufacturer or IT support "
+"provider."
+msgstr ""
+"Secure boot часта можна ўключыць праз налады UEFI (BIOS) камп'ютара. "
+"Звярніцеся па дапамогу да вытворцы вашага абсталявання або да службы "
+"абслугоўвання і падтрымкі."
+
+#: panels/privacy/cc-firmware-security-boot-dialog.ui:55
+msgid ""
+"Secure boot prevents malicious software from being loaded when the device "
+"starts.\n"
+"\n"
+"For more information, contact the hardware manufacturer or IT support."
+msgstr ""
+"Secure boot прадухіляе загрузку шкоднага праграмнага забеспячэння падчас "
+"запуску прылады.\n"
+"\n"
+"Каб атрымаць дадатковыя звесткі, звярніцеся да вытворцы вашага абсталявання "
+"або да службы абслугоўвання і падтрымкі."
+
+#. TRANSLATORS: in reference to firmware protection: 0/4 stars
+#: panels/privacy/cc-firmware-security-dialog.c:106
+#: panels/privacy/cc-firmware-security-page.c:537
+msgid "Checks Failed"
+msgstr "Праверкі не пройдзены"
+
+#. TRANSLATORS: This is the description to describe the failure on
+#. checking the security items.
+#: panels/privacy/cc-firmware-security-dialog.c:109
+msgid ""
+"Hardware does not pass checks. This means that you are not protected against "
+"common hardware security issues.\n"
+"\n"
+"It may be possible to resolve hardware security issues by updating your "
+"firmware or changing device configuration options. However, failures can "
+"stem from the physical hardware itself, and may not be reversible."
+msgstr ""
+"Абсталяванне не прайшло праверку бяспекі. Гэта азначае, што вы не абаронены "
+"ад распаўсюджаных праблем бяспекі ў апаратнага забеспячэння.\n"
+"\n"
+"Магчыма праблема можа быць вырашана праз абнаўленне ўбудаванага ПЗ або "
+"змяненне налад прылады. Аднак, прычынай могуць быць характарыстыкі самога "
+"абсталявання, тады рашэння няма."
+
+#. TRANSLATORS: in reference to firmware protection: 1/4 stars
+#: panels/privacy/cc-firmware-security-dialog.c:120
+#: panels/privacy/cc-firmware-security-page.c:544
+msgid "Checks Passed"
+msgstr "Праверкі пройдзены"
+
+#. TRANSLATORS: This description describes the device passing the
+#. minimum requirement of security check.
+#: panels/privacy/cc-firmware-security-dialog.c:123
+msgid ""
+"This device meets basic security requirements. Its hardware has protection "
+"against some of the most common security threats."
+msgstr ""
+"Прылада адпавядае базавым патрабаванням бяспекі. Абсталяванне абаронена ад "
+"найбольш распаўсюджаных пагроз бяспекі."
+
+#. TRANSLATORS: in reference to firmware protection: 2~4 stars
+#: panels/privacy/cc-firmware-security-dialog.c:134
+#: panels/privacy/cc-firmware-security-page.c:553
+msgid "Protected"
+msgstr "Абаронена"
+
+#. TRANSLATOR: This description describes the devices passing
+#. the extended security check.
+#: panels/privacy/cc-firmware-security-dialog.c:137
+msgid ""
+"This device passes current security tests. Its hardware is protected against "
+"the majority of security threats."
+msgstr ""
+"Гэта прылада праходзіць бягучыя праверкі бяспекі. Абсталяванне абаронена ад "
+"большасці пагроз бяспекі."
+
+#. TRANSLATORS: in reference to firmware protection: ??? stars
+#: panels/privacy/cc-firmware-security-dialog.c:145
+#: panels/privacy/cc-firmware-security-page.c:560
+msgid "Checks Unavailable"
+msgstr "Праверкі недаступны"
+
+#. TRANSLATORS: When the security result is unavailable, this description is shown.
+#: panels/privacy/cc-firmware-security-dialog.c:147
+msgid ""
+"Device security checks are not available for this device. It is not possible "
+"to tell whether it meets security requirements."
+msgstr ""
+"Для гэтай прылады недаступны праверкі бяспекі. Немагчыма сказаць, ці "
+"адпавядае яна патрабаванням бяспекі."
+
+#: panels/privacy/cc-firmware-security-dialog.c:367
+msgid "Report copied to clipboard"
+msgstr "Справаздача скапіявана ў буфер абмену"
+
+#: panels/privacy/cc-firmware-security-dialog.ui:65
+msgid "_Copy Technical Report"
+msgstr "_Скапіяваць тэхнічную справаздачу ў буфер абмену"
+
+#: panels/privacy/cc-firmware-security-help-dialog.ui:4
+msgid "About Device Security"
+msgstr "Пра бяспеку прылады"
+
+#: panels/privacy/cc-firmware-security-help-dialog.ui:27
+msgid ""
+"Device security provides information about how protected your device is "
+"against security issues which target the hardware itself.\n"
+"\n"
+"Aspects of hardware that affect security include:\n"
+"\n"
+"• security features that are built into a hardware itself;\n"
+"• how the hardware is configured to protect against security issues;\n"
+"• the security of the software runs directly on the hardware.\n"
+"\n"
+"Security threats which affect hardware include malware and viruses that "
+"target the software that runs directly on the hardware. It also includes "
+"physical tampering, such as physical connection to the hardware to read data "
+"and implant malware.\n"
+"\n"
+"Device security is just one aspect of security, and does not reflect the "
+"overall security status of the system and applications."
+msgstr ""
+"Бяспека прылады дае інфармацыю аб тым, наколькі ваша прылада абаронена ад "
+"праблем бяспекі на апаратным узроўні.\n"
+"\n"
+"Разглядаюцца наступныя асаблівасці абсталявання, якія ўплываюць на бяспеку:\n"
+"\n"
+"• функцыі бяспекі, убудаваныя ў само абсталяванне;\n"
+"• як абсталяванне наладжана для абароны ад праблем бяспекі;\n"
+"• бяспека праграмнага забеспячэння, якое непасрэдна працуе з абсталяваннем.\n"
+"\n"
+"Пагрозы бяспекі, якія ўплываюць на апаратнае забеспячэнне, у тым ліку "
+"шкодныя праграмы і вірусы, накіраваныя на праграмнае забеспячэнне, якое "
+"непасрэдна працуе з абсталяваннем. Гэта таксама тычыцца несанкцыянаванага "
+"фізічнага доступу, напрыклад, фізічнае падключэнне да абсталявання для "
+"чытання даных і ўкаранення шкодных праграм.\n"
+"\n"
+"Бяспека прылады - гэта толькі адзін з аспектаў бяспекі, які не адлюстроўвае "
+"агульны стан бяспекі сістэмы і праграм."
+
+#: panels/privacy/cc-firmware-security-page.c:121
+msgid "Protected against malicious software when the device starts."
+msgstr "Абаронена ад шкоднага праграмнага забеспячэння падчас запуску прылады."
+
+#: panels/privacy/cc-firmware-security-page.c:127
+msgid "Secure Boot has Problems"
+msgstr "Праблемы з Secure Boot"
+
+#: panels/privacy/cc-firmware-security-page.c:128
+msgid "Some protection when the device is started."
+msgstr "Маецца абарона падчас запуску прылады."
+
+#: panels/privacy/cc-firmware-security-page.c:133
+msgid "Secure Boot is Off"
+msgstr "Secure Boot выключана"
+
+#: panels/privacy/cc-firmware-security-page.c:134
+msgid "No protection when the device is started."
+msgstr "Няма абароны падчас запуску прылады."
+
+#. TRANSLATORS: this is to explain an event that has already happened
+#: panels/privacy/cc-firmware-security-page.c:153
+msgid ""
+"This issue could have been caused by a change in UEFI firmware settings, an "
+"operating system configuration change, or because of malicious software on "
+"this system."
+msgstr ""
+"Праблема магла быць выклікана змяненнем налад убудаванага ПЗ UEFI, "
+"канфігурацыі аперацыйнай сістэмы або дзеяннямі шкоднага праграмнага "
+"забеспячэння ў гэтай сістэме."
+
+#. TRANSLATORS: this is to explain an event that has already happened
+#: panels/privacy/cc-firmware-security-page.c:161
+msgid ""
+"This issue could have been caused by a change in the UEFI firmware settings, "
+"or because of malicious software on this system."
+msgstr ""
+"Праблема магла быць выклікана змяненнем налад убудаванага ПЗ UEF або "
+"дзеяннямі шкоднага праграмнага забеспячэння ў гэтай сістэме."
+
+#. TRANSLATORS: this is to explain an event that has already happened
+#: panels/privacy/cc-firmware-security-page.c:168
+msgid ""
+"This issue could have been caused by an operating system configuration "
+"change, or because of malicious software on this system."
+msgstr ""
+"Праблема магла быць выклікана змяненнем канфігурацыі аперацыйнай сістэмы або "
+"дзеяннямі шкоднага праграмнага забеспячэння ў гэтай сістэме."
+
+#. TRANSLATOR: this is the date in "%Y-%m-%d %H:%M:%S" format,
+#. for example: 2022-08-01 22:48:00
+#: panels/privacy/cc-firmware-security-page.c:226
+#, c-format
+msgid "%1$s"
+msgstr "%1$s"
+
+#. TRANSLATOR: This is the text event status output when the event status is "success"
+#: panels/privacy/cc-firmware-security-page.c:232
+msgid "Pass"
+msgstr "Пройдзена"
+
+#. TRANSLATOR: This is the text event status output when the event status is not "success"
+#: panels/privacy/cc-firmware-security-page.c:235
+msgid "! Fail"
+msgstr "! Не пройдзена"
+
+#: panels/privacy/cc-firmware-security-page.c:238
+#, c-format
+msgid "(%1$s → %2$s)"
+msgstr "(%1$s → %2$s)"
+
+#: panels/privacy/cc-firmware-security-page.c:538
+msgid "Hardware does not pass checks."
+msgstr "Абсталяванне не прайшло праверку бяспекі."
+
+#: panels/privacy/cc-firmware-security-page.c:545
+msgid "Hardware meets basic security requirements."
+msgstr "Абсталяванне адпавядае базавым патрабаванням бяспекі."
+
+#: panels/privacy/cc-firmware-security-page.c:554
+msgid "Hardware has a good level of protection."
+msgstr "Абсталяванне мае добры ўзровень абароны."
+
+#: panels/privacy/cc-firmware-security-page.c:561
+msgid "Security levels are not available for this device."
+msgstr "Для гэтай прылады недаступны ўзроўні бяспекі."
+
+#: panels/privacy/cc-firmware-security-page.ui:4
+msgid "Device Security"
+msgstr "Бяспека прылады"
+
+#: panels/privacy/cc-firmware-security-page.ui:57
+msgid "Starting Device Security…"
+msgstr "Запуск бяспекі прылады…"
+
+#: panels/privacy/cc-firmware-security-page.ui:83
+msgid "Device Security Unavailable"
+msgstr "Бяспека прылады недаступна"
+
+#: panels/privacy/cc-firmware-security-page.ui:85
+msgid ""
+"Device Security is only available on physical hardware. No physical hardware "
+"has been detected."
+msgstr ""
+"Бяспека прылады даступна толькі на фізічным абсталяванні. Фізічнае "
+"абсталяванне не выяўлена."
+
+#: panels/privacy/cc-firmware-security-page.ui:223
+msgid "Security Events"
+msgstr "Падзеі бяспекі"
+
+#: panels/privacy/cc-firmware-security-page.ui:233
+msgid "No Events"
+msgstr "Няма падзей"
+
+#. TRANSLATORS: if the stauts is valid. For example security check is valid and key is valid.
+#: panels/privacy/cc-firmware-security-utils.c:35
+msgid "Valid"
+msgstr "Сапраўдны"
+
+#. TRANSLATORS: if the status or key is not valid.
+#: panels/privacy/cc-firmware-security-utils.c:40
+msgid "Not Valid"
+msgstr "Несапраўдны"
+
+#. TRANSLATORS: if the function is not enabled through BIOS or OS settings.
+#: panels/privacy/cc-firmware-security-utils.c:50
+msgid "Not Enabled"
+msgstr "Не ўключана"
+
+#. TRANSLATORS: the memory space or system mode is locked to prevent from malicious modification.
+#: panels/privacy/cc-firmware-security-utils.c:55
+msgid "Locked"
+msgstr "Заблакавана"
+
+#. TRANSLATORS: the memory space or system mode is not locked.
+#: panels/privacy/cc-firmware-security-utils.c:60
+msgid "Not Locked"
+msgstr "Не заблакавана"
+
+#. TRANSLATORS: The data is encrypted to prevent from malicious reading.
+#: panels/privacy/cc-firmware-security-utils.c:65
+msgid "Encrypted"
+msgstr "Зашыфравана"
+
+#. TRANSLATORS: the data in memory is plane text.
+#: panels/privacy/cc-firmware-security-utils.c:70
+msgid "Not Encrypted"
+msgstr "Не зашыфравана"
+
+#. TRANSLATORS: Linux kernel is tainted by third party kernel module.
+#: panels/privacy/cc-firmware-security-utils.c:75
+msgid "Tainted"
+msgstr "Сапсавана"
+
+#. TRANSLATORS: All the loaded kernel module are licensed.
+#: panels/privacy/cc-firmware-security-utils.c:80
+msgid "Not Tainted"
+msgstr "Не сапсавана"
+
+#. TRANSLATORS: the feature can be detected.
+#: panels/privacy/cc-firmware-security-utils.c:85
+msgid "Found"
+msgstr "Знойдзена"
+
+#. TRANSLATORS: the feature can't be detected.
+#: panels/privacy/cc-firmware-security-utils.c:90
+msgid "Not Found"
+msgstr "Не знойдзена"
+
+#. TRANSLATORS: the function is supported by hardware.
+#: panels/privacy/cc-firmware-security-utils.c:95
+msgid "Supported"
+msgstr "Падтрымліваецца"
+
+#. TRANSLATORS: the function isn't supported by hardware.
+#: panels/privacy/cc-firmware-security-utils.c:100
+msgid "Not Supported"
+msgstr "Не падтрымліваецца"
+
+#: panels/privacy/cc-location-page.ui:14
+msgid ""
+"Location services use GPS, Wi-Fi and cellular connections to determine the "
+"approximate location of this device. <a href='https://location.services."
+"mozilla.com/privacy'>Learn about what data is collected, and how it is used."
+"</a>"
+msgstr ""
+"Сэрвісы месцазнаходжання выкарыстоўваюць GPS, Wi-Fi і сотавую сувязь, каб "
+"вызначыць прыблізнае месцазнаходжанне прылады. <a href='https://location."
+"services.mozilla.com/privacy'>Даведайцеся, якія даныя збіраюцца і як яны "
+"выкарыстоўваюцца.</a>"
+
+#: panels/privacy/cc-location-page.ui:19 panels/privacy/cc-privacy-panel.ui:55
+msgid "_Location Services"
+msgstr "Сэрвісы _месцазнаходжання"
+
+#: panels/privacy/cc-location-page.ui:20
+msgid "Allow permitted apps to access location data"
+msgstr "Дазваляе давераным праграмам выкарыстоўваць даныя аб месцазнаходжанні"
+
+#: panels/privacy/cc-location-page.ui:30
+msgid ""
+"The following sandboxed apps have been given access to location data. Apps "
+"that are not sandboxed can access location data without asking for "
+"permission."
+msgstr ""
+"Наступныя праграмы ў «пясочніцы» атрымалі дазвол на выкарыстанне даных аб "
+"месцазнаходжанні. Праграмы, не ізаляваныя ў «пясочніцы», могуць "
+"выкарыстоўваць даныя аб месцазнаходжанні не пытаючы дазволу."
+
+#: panels/privacy/cc-location-page.ui:44
+msgid "No sandboxed apps have asked for location access"
+msgstr "Няма праграм у «пясочніцы», якія запыталі доступ да месцазнаходжання"
+
+#: panels/privacy/cc-microphone-page.ui:4
+msgid "Microphones"
+msgstr "Мікрафоны"
+
+#: panels/privacy/cc-microphone-page.ui:18
+msgid "_Microphone Access"
+msgstr "Доступ да _мікрафона"
+
+#: panels/privacy/cc-microphone-page.ui:19
+msgid "Allow permitted apps to use microphones"
+msgstr "Дазваляе давераным праграмам выкарыстоўваць мікрафоны"
+
+#: panels/privacy/cc-microphone-page.ui:29
+msgid ""
+"The following sandboxed apps have been given permission to use microphones. "
+"Apps that are not sandboxed can use microphones without asking for "
+"permission."
+msgstr ""
+"Наступныя праграмы ў «пясочніцы» атрымалі дазвол на выкарыстанне мікрафона. "
+"Праграмы, не ізаляваныя ў «пясочніцы», могуць выкарыстоўваць мікрафон не "
+"пытаючы дазволу."
+
+#: panels/privacy/cc-microphone-page.ui:44
+msgid "No sandboxed apps have asked for microphone access"
+msgstr ""
+"Праграмы, не ізаляваныя ў «пясочніцы» запыталі дазвол на выкарыстанне "
+"мікрафона"
+
+#: panels/privacy/cc-privacy-panel.ui:14
+#: panels/privacy/gnome-privacy-panel.desktop.in:3
+msgid "Privacy"
+msgstr "Прыватнасць"
+
+#: panels/privacy/cc-privacy-panel.ui:43
+msgid "_Screen Lock"
+msgstr "_Блакіраванне экрана"
+
+#: panels/privacy/cc-privacy-panel.ui:44
+msgid "Automatic screen lock"
+msgstr "Аўтаматычнае блакіраванне экрана"
+
+#: panels/privacy/cc-privacy-panel.ui:56
+msgid "Control access to your location"
+msgstr "Кіраванне доступам да вашага месцазнаходжання"
+
+#: panels/privacy/cc-privacy-panel.ui:67
+msgid "_File History &amp; Trash"
+msgstr "_Гісторыя файлаў і сметніца"
+
+#: panels/privacy/cc-privacy-panel.ui:68
+msgid "Remove saved data and files"
+msgstr "Выдаленне захаваных даных і файлаў"
+
+#: panels/privacy/cc-privacy-panel.ui:79
+msgid "_Diagnostics"
+msgstr "_Дыягностыка"
+
+#: panels/privacy/cc-privacy-panel.ui:80
+msgid "Automatic problem reporting"
+msgstr "Аўтаматычныя справаздачы аб праблемах"
+
+#: panels/privacy/cc-privacy-panel.ui:100
+msgid "_Cameras"
+msgstr "_Камеры"
+
+#: panels/privacy/cc-privacy-panel.ui:101
+msgid "Control camera access"
+msgstr "Кіраванне доступам да камеры"
+
+#: panels/privacy/cc-privacy-panel.ui:112
+msgid "_Microphones"
+msgstr "_Мікрафоны"
+
+#: panels/privacy/cc-privacy-panel.ui:113
+msgid "Control microphone access"
+msgstr "Кіраванне доступам да мікрафона"
+
+#: panels/privacy/cc-privacy-panel.ui:125
+msgid "_Thunderbolt"
+msgstr "_Thunderbolt"
+
+#: panels/privacy/cc-privacy-panel.ui:126
+msgid "Manage device access"
+msgstr "Кіраванне доступам да прылад Thunderbolt"
+
+#: panels/privacy/cc-privacy-panel.ui:137
+msgid "Device _Security"
+msgstr "_Бяспека прылады"
+
+#: panels/privacy/cc-privacy-panel.ui:138
+msgid "Hardware security status and information"
+msgstr "Статус бяспекі абсталявання і інфармацыя"
+
+#. Translators: Option for "Lock screen after blank" in "Screen Lock" page
+#: panels/privacy/cc-screen-page.c:67
+msgctxt "lock_screen"
+msgid "Screen Turns Off"
+msgstr "Пры адключэнні экрана"
+
+#. Translators: Option for "Lock screen after blank" in "Screen Lock" page
+#: panels/privacy/cc-screen-page.c:70
+msgctxt "lock_screen"
+msgid "30 seconds"
+msgstr "30 секунд"
+
+#. Translators: Option for "Lock screen after blank" in "Screen Lock" page
+#: panels/privacy/cc-screen-page.c:73
+msgctxt "lock_screen"
+msgid "1 minute"
+msgstr "1 хвіліна"
+
+#. Translators: Option for "Lock screen after blank" in "Screen Lock" page
+#: panels/privacy/cc-screen-page.c:76
+msgctxt "lock_screen"
+msgid "2 minutes"
+msgstr "2 хвіліны"
+
+#. Translators: Option for "Lock screen after blank" in "Screen Lock" page
+#: panels/privacy/cc-screen-page.c:79
+msgctxt "lock_screen"
+msgid "3 minutes"
+msgstr "3 хвіліны"
+
+#. Translators: Option for "Lock screen after blank" in "Screen Lock" page
+#: panels/privacy/cc-screen-page.c:82
+msgctxt "lock_screen"
+msgid "5 minutes"
+msgstr "5 хвілін"
+
+#. Translators: Option for "Lock screen after blank" in "Screen Lock" page
+#: panels/privacy/cc-screen-page.c:85
+msgctxt "lock_screen"
+msgid "30 minutes"
+msgstr "30 хвілін"
+
+#. Translators: Option for "Lock screen after blank" in "Screen Lock" page
+#: panels/privacy/cc-screen-page.c:88
+msgctxt "lock_screen"
+msgid "1 hour"
+msgstr "1 гадзіна"
+
+#. Translators: Option for "Blank screen" in "Screen Lock" page
+#: panels/privacy/cc-screen-page.c:131
+msgctxt "blank_screen"
+msgid "1 minute"
+msgstr "1 хвіліна"
+
+#. Translators: Option for "Blank screen" in "Screen Lock" page
+#: panels/privacy/cc-screen-page.c:134
+msgctxt "blank_screen"
+msgid "2 minutes"
+msgstr "2 хвіліны"
+
+#. Translators: Option for "Blank screen" in "Screen Lock" page
+#: panels/privacy/cc-screen-page.c:137
+msgctxt "blank_screen"
+msgid "3 minutes"
+msgstr "3 хвіліны"
+
+#. Translators: Option for "Blank screen" in "Screen Lock" page
+#: panels/privacy/cc-screen-page.c:140
+msgctxt "blank_screen"
+msgid "4 minutes"
+msgstr "4 хвіліны"
+
+#. Translators: Option for "Blank screen" in "Screen Lock" page
+#: panels/privacy/cc-screen-page.c:143
+msgctxt "blank_screen"
+msgid "5 minutes"
+msgstr "5 хвілін"
+
+#. Translators: Option for "Blank screen" in "Screen Lock" page
+#: panels/privacy/cc-screen-page.c:146
+msgctxt "blank_screen"
+msgid "8 minutes"
+msgstr "8 хвілін"
+
+#. Translators: Option for "Blank screen" in "Screen Lock" page
+#: panels/privacy/cc-screen-page.c:149
+msgctxt "blank_screen"
+msgid "10 minutes"
+msgstr "10 хвілін"
+
+#. Translators: Option for "Blank screen" in "Screen Lock" page
+#: panels/privacy/cc-screen-page.c:152
+msgctxt "blank_screen"
+msgid "12 minutes"
+msgstr "12 хвілін"
+
+#. Translators: Option for "Blank screen" in "Screen Lock" page
+#: panels/privacy/cc-screen-page.c:155
+msgctxt "blank_screen"
+msgid "15 minutes"
+msgstr "15 хвілін"
+
+#. Translators: Option for "Blank screen" in "Screen Lock" page
+#: panels/privacy/cc-screen-page.c:158
+msgctxt "blank_screen"
+msgid "Never"
+msgstr "Ніколі"
+
+#: panels/privacy/cc-screen-page.ui:4
+msgid "Screen Lock"
+msgstr "Блакіраванне экрана"
+
+#: panels/privacy/cc-screen-page.ui:14
+msgid ""
+"Automatically locking the screen prevents others from accessing the computer "
+"while you're away."
+msgstr ""
+"Аўтаматычнае блакіраванне экрана прадухіляе доступ да камп'ютара пабочным "
+"асобам, калі вы адышлі."
+
+#: panels/privacy/cc-screen-page.ui:21
+msgid "Blank Screen Delay"
+msgstr "Затрымка да адключэння экрана"
+
+#: panels/privacy/cc-screen-page.ui:22
+msgid "Period of inactivity until screen blanks"
+msgstr "Час бяздзейнасці пасля якога экран пагасне"
+
+#: panels/privacy/cc-screen-page.ui:40
+msgid "Automatic Screen _Lock"
+msgstr "_Аўтаматычнае блакіраванне экрана"
+
+#: panels/privacy/cc-screen-page.ui:41
+msgid "Locks the screen after it blanks"
+msgstr "Блакіруе экран, калі ён пагас"
+
+#: panels/privacy/cc-screen-page.ui:55
+msgid "Automatic _Screen Lock Delay"
+msgstr "Затрымка да аўтаматычнага блакіравання экрана"
+
+#: panels/privacy/cc-screen-page.ui:56
+msgid "Time from screen blank to screen lock"
+msgstr "Час паміж адключэннем экрана і блакіраваннем"
+
+#: panels/privacy/cc-screen-page.ui:89
+msgid "Forbid new _USB devices"
+msgstr "_Забараняць новыя USB-прылады"
+
+#: panels/privacy/cc-screen-page.ui:90
+msgid ""
+"Prevent new USB devices from interacting with the system when the screen is "
+"locked."
+msgstr ""
+"Прадухіляе ўзаемадзеянне новых USB-прылад з сістэмай, калі экран "
+"заблакіраваны."
+
+#: panels/privacy/cc-screen-page.ui:107
+msgid "Screen Privacy"
+msgstr "Прыватнасць экрана"
+
+#: panels/privacy/cc-screen-page.ui:112
+msgid "Restrict Viewing Angle"
+msgstr "Абмежаваць вугал прагляду"
+
+#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
+#: panels/privacy/cc-usage-page.c:54
+msgctxt "purge_files"
+msgid "1 hour"
+msgstr "1 гадзіна"
+
+#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
+#: panels/privacy/cc-usage-page.c:57
+msgctxt "purge_files"
+msgid "1 day"
+msgstr "1 дзень"
+
+#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
+#: panels/privacy/cc-usage-page.c:60
+msgctxt "purge_files"
+msgid "2 days"
+msgstr "2 дні"
+
+#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
+#: panels/privacy/cc-usage-page.c:63
+msgctxt "purge_files"
+msgid "3 days"
+msgstr "3 дні"
+
+#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
+#: panels/privacy/cc-usage-page.c:66
+msgctxt "purge_files"
+msgid "4 days"
+msgstr "4 дні"
+
+#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
+#: panels/privacy/cc-usage-page.c:69
+msgctxt "purge_files"
+msgid "5 days"
+msgstr "5 дзён"
+
+#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
+#: panels/privacy/cc-usage-page.c:72
+msgctxt "purge_files"
+msgid "6 days"
+msgstr "6 дзён"
+
+#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
+#: panels/privacy/cc-usage-page.c:75
+msgctxt "purge_files"
+msgid "7 days"
+msgstr "7 дзён"
+
+#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
+#: panels/privacy/cc-usage-page.c:78
+msgctxt "purge_files"
+msgid "14 days"
+msgstr "14 дзён"
+
+#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
+#: panels/privacy/cc-usage-page.c:81
+msgctxt "purge_files"
+msgid "30 days"
+msgstr "30 дзён"
+
+#: panels/privacy/cc-usage-page.c:177
+msgid "Empty all items from Trash?"
+msgstr "Ачысціць сметніцу?"
+
+#: panels/privacy/cc-usage-page.c:178
+msgid "All items in the Trash will be permanently deleted."
+msgstr "Усё змесціва сметніцы будзе незваротна выдалена."
+
+#: panels/privacy/cc-usage-page.c:179
+msgid "_Empty Trash"
+msgstr "_Ачысціць сметніцу"
+
+#: panels/privacy/cc-usage-page.c:215
+msgid "Delete all the temporary files?"
+msgstr "Выдаліць усе часовыя файлы?"
+
+#: panels/privacy/cc-usage-page.c:216
+msgid "All the temporary files will be permanently deleted."
+msgstr "Усе часовыя файлы будуць незваротна выдалены."
+
+#: panels/privacy/cc-usage-page.c:217
+msgid "_Purge Temporary Files"
+msgstr "_Выдаліць часовыя файлы"
+
+#. Translators: Option for "File History Duration" in "File History" group
+#: panels/privacy/cc-usage-page.c:244
+msgctxt "retain_history"
+msgid "1 day"
+msgstr "1 дзень"
+
+#. Translators: Option for "File History Duration" in "File History" group
+#: panels/privacy/cc-usage-page.c:247
+msgctxt "retain_history"
+msgid "7 days"
+msgstr "7 дзён"
+
+#. Translators: Option for "File History Duration" in "File History" group
+#: panels/privacy/cc-usage-page.c:250
+msgctxt "retain_history"
+msgid "30 days"
+msgstr "30 дзён"
+
+#. Translators: Option for "File History Duration" in "File History" group
+#: panels/privacy/cc-usage-page.c:253
+msgctxt "retain_history"
+msgid "Forever"
+msgstr "Бясконца"
+
+#: panels/privacy/cc-usage-page.c:342
+msgid "Clear File History?"
+msgstr "Ачысціць гісторыю файлаў?"
+
+#: panels/privacy/cc-usage-page.c:343
+msgid "After clearing, lists of recently used files will appear empty."
+msgstr "Пасля ачысткі, спіс нядаўна выкарыстаных файлаў стане пустым."
+
+#: panels/privacy/cc-usage-page.c:344
+msgid "_Clear History"
+msgstr "_Ачысціць гісторыю"
+
+#: panels/privacy/cc-usage-page.ui:4
+msgid "File History & Trash"
+msgstr "Гісторыя файлаў і сметніца"
+
+#: panels/privacy/cc-usage-page.ui:17
+msgid "File History"
+msgstr "Гісторыя файлаў"
+
+#: panels/privacy/cc-usage-page.ui:18
+msgid ""
+"File history keeps a record of files that you have used. This information is "
+"shared between apps, and makes it easier to find files that you might want "
+"to use."
+msgstr ""
+"Гісторыя файлаў запісвае, якія файлы вы выкарыстоўвалі. Гэтыя звесткі "
+"абагулены паміж праграмамі і дазваляюць прасцей знайсці файлы, якія вы, "
+"магчыма, захочаце выкарыстаць."
+
+#: panels/privacy/cc-usage-page.ui:21
+msgid "File H_istory"
+msgstr "Г_історыя файлаў"
+
+#: panels/privacy/cc-usage-page.ui:33
+msgid "File _History Duration"
+msgstr "Працягласць _гісторыі файлаў"
+
+#: panels/privacy/cc-usage-page.ui:55
+msgid "_Clear History…"
+msgstr "_Ачысціць гісторыю…"
+
+#: panels/privacy/cc-usage-page.ui:71
+msgid "Trash &amp; Temporary Files"
+msgstr "Сметніца і часовыя файлы"
+
+#: panels/privacy/cc-usage-page.ui:72
+msgid ""
+"Trash and temporary files can sometimes include personal or sensitive "
+"information. Automatically deleting them can help to protect privacy."
+msgstr ""
+"Сметніца і часовыя файлы могуць змяшчаць прыватную інфармацыю. Аўтаматычнае "
+"выдаленне файлаў можа дапамагчы абараніць прыватнасць."
+
+#: panels/privacy/cc-usage-page.ui:75
+msgid "Automatically Delete _Trash Content"
+msgstr "Аўтаматычна выдаляць змесціва сметніцы"
+
+#: panels/privacy/cc-usage-page.ui:87
+msgid "Automatically Delete Temporary _Files"
+msgstr "Аўтаматычна выдаляць часовыя _файлы"
+
+#: panels/privacy/cc-usage-page.ui:99
+msgid "Automatically Delete _Period"
+msgstr "_Перыядычнасць аўтаматычнага выдалення"
+
+#: panels/privacy/cc-usage-page.ui:122
+msgid "_Empty Trash…"
+msgstr "_Ачысціць сметніцу…"
+
+#: panels/privacy/cc-usage-page.ui:134
+msgid "_Delete Temporary Files…"
+msgstr "_Выдаліць часовыя файлы…"
+
+#: panels/privacy/gnome-privacy-panel.desktop.in:4
+msgid "Control access to hardware, services, and data"
+msgstr "Кіраванне доступам да абсталявання, сэрвісаў і даных"
+
+#. Translators: Search terms to find the Privacy panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#: panels/privacy/gnome-privacy-panel.desktop.in:15
+msgid ""
+"Privacy;Screen;Lock;Private;Usage;Recent;History;Files;Temporary;Tmp;Trash;"
+"Purge;Retain;Diagnostics;Crash;Location;Gps;Camera;Photos;Video;Webcam;"
+"Microphone;Recording;Security;Firmware;Thunderbolt;"
+msgstr ""
+"Privacy;Screen;Lock;Private;Usage;Recent;History;Files;Temporary;Tmp;Trash;"
+"Purge;Retain;Diagnostics;Crash;Location;Gps;Camera;Photos;Video;Webcam;"
+"Microphone;Recording;Security;Firmware;Thunderbolt;Прыватнасць;Экран;"
+"Блакаванне;Блакіраванне;Канфідэнцыяльнасць;Канфідэнцыйнасць;Выкарыстанне;"
+"Нядаўнія;Гісторыя;Файлаў;Часовыя;Tmp;Сметніца;Дыягностыка;Збой;"
+"Месцазнаходжанне;Камера;Фота;Відэа;Вэб-камера;Мікрафон;Запіс;Бяспека;"
+
 #: panels/region/cc-format-chooser.c:148 panels/region/cc-format-chooser.c:196
 #: panels/region/cc-format-chooser.ui:4
 msgid "Formats"
@@ -6137,210 +6663,35 @@ msgstr ""
 "прадвызначаныя;дзеянні;праграма;cd;dvd;usb;гук;аўдыя;відэа;дыск;зменны;"
 "здымны;носьбіт;аўтазапуск;аўтаматычны запуск;"
 
-#. Translators: Option for "Lock screen after blank" in "Screen Lock" panel
-#: panels/screen/cc-screen-panel.c:70
-msgctxt "lock_screen"
-msgid "Screen Turns Off"
-msgstr "Пры адключэнні экрана"
-
-#. Translators: Option for "Lock screen after blank" in "Screen Lock" panel
-#: panels/screen/cc-screen-panel.c:73
-msgctxt "lock_screen"
-msgid "30 seconds"
-msgstr "30 секунд"
-
-#. Translators: Option for "Lock screen after blank" in "Screen Lock" panel
-#: panels/screen/cc-screen-panel.c:76
-msgctxt "lock_screen"
-msgid "1 minute"
-msgstr "1 хвіліна"
-
-#. Translators: Option for "Lock screen after blank" in "Screen Lock" panel
-#: panels/screen/cc-screen-panel.c:79
-msgctxt "lock_screen"
-msgid "2 minutes"
-msgstr "2 хвіліны"
-
-#. Translators: Option for "Lock screen after blank" in "Screen Lock" panel
-#: panels/screen/cc-screen-panel.c:82
-msgctxt "lock_screen"
-msgid "3 minutes"
-msgstr "3 хвіліны"
-
-#. Translators: Option for "Lock screen after blank" in "Screen Lock" panel
-#: panels/screen/cc-screen-panel.c:85
-msgctxt "lock_screen"
-msgid "5 minutes"
-msgstr "5 хвілін"
-
-#. Translators: Option for "Lock screen after blank" in "Screen Lock" panel
-#: panels/screen/cc-screen-panel.c:88
-msgctxt "lock_screen"
-msgid "30 minutes"
-msgstr "30 хвілін"
-
-#. Translators: Option for "Lock screen after blank" in "Screen Lock" panel
-#: panels/screen/cc-screen-panel.c:91
-msgctxt "lock_screen"
-msgid "1 hour"
-msgstr "1 гадзіна"
-
-#. Translators: Option for "Blank screen" in "Screen Lock" panel
-#: panels/screen/cc-screen-panel.c:134
-msgctxt "blank_screen"
-msgid "1 minute"
-msgstr "1 хвіліна"
-
-#. Translators: Option for "Blank screen" in "Screen Lock" panel
-#: panels/screen/cc-screen-panel.c:137
-msgctxt "blank_screen"
-msgid "2 minutes"
-msgstr "2 хвіліны"
-
-#. Translators: Option for "Blank screen" in "Screen Lock" panel
-#: panels/screen/cc-screen-panel.c:140
-msgctxt "blank_screen"
-msgid "3 minutes"
-msgstr "3 хвіліны"
-
-#. Translators: Option for "Blank screen" in "Screen Lock" panel
-#: panels/screen/cc-screen-panel.c:143
-msgctxt "blank_screen"
-msgid "4 minutes"
-msgstr "4 хвіліны"
-
-#. Translators: Option for "Blank screen" in "Screen Lock" panel
-#: panels/screen/cc-screen-panel.c:146
-msgctxt "blank_screen"
-msgid "5 minutes"
-msgstr "5 хвілін"
-
-#. Translators: Option for "Blank screen" in "Screen Lock" panel
-#: panels/screen/cc-screen-panel.c:149
-msgctxt "blank_screen"
-msgid "8 minutes"
-msgstr "8 хвілін"
-
-#. Translators: Option for "Blank screen" in "Screen Lock" panel
-#: panels/screen/cc-screen-panel.c:152
-msgctxt "blank_screen"
-msgid "10 minutes"
-msgstr "10 хвілін"
-
-#. Translators: Option for "Blank screen" in "Screen Lock" panel
-#: panels/screen/cc-screen-panel.c:155
-msgctxt "blank_screen"
-msgid "12 minutes"
-msgstr "12 хвілін"
-
-#. Translators: Option for "Blank screen" in "Screen Lock" panel
-#: panels/screen/cc-screen-panel.c:158
-msgctxt "blank_screen"
-msgid "15 minutes"
-msgstr "15 хвілін"
-
-#. Translators: Option for "Blank screen" in "Screen Lock" panel
-#: panels/screen/cc-screen-panel.c:161
-msgctxt "blank_screen"
-msgid "Never"
-msgstr "Ніколі"
-
-#: panels/screen/cc-screen-panel.ui:6
-msgid ""
-"Automatically locking the screen prevents others from accessing the computer "
-"while you're away."
-msgstr ""
-"Аўтаматычнае блакіраванне экрана прадухіляе доступ да камп'ютара пабочным "
-"асобам, калі вы адышлі."
-
-#: panels/screen/cc-screen-panel.ui:13
-msgid "Blank Screen Delay"
-msgstr "Затрымка да адключэння экрана"
-
-#: panels/screen/cc-screen-panel.ui:14
-msgid "Period of inactivity until screen blanks"
-msgstr "Час бяздзейнасці пасля якога экран пагасне"
-
-#: panels/screen/cc-screen-panel.ui:32
-msgid "Automatic Screen _Lock"
-msgstr "_Аўтаматычнае блакіраванне экрана"
-
-#: panels/screen/cc-screen-panel.ui:33
-msgid "Locks the screen after it blanks"
-msgstr "Блакіруе экран, калі ён пагас"
-
-#: panels/screen/cc-screen-panel.ui:47
-msgid "Automatic _Screen Lock Delay"
-msgstr "Затрымка да аўтаматычнага блакіравання экрана"
-
-#: panels/screen/cc-screen-panel.ui:48
-msgid "Time from screen blank to screen lock"
-msgstr "Час паміж адключэннем экрана і блакіраваннем"
-
-#: panels/screen/cc-screen-panel.ui:81
-msgid "Forbid new _USB devices"
-msgstr "_Забараняць новыя USB-прылады"
-
-#: panels/screen/cc-screen-panel.ui:82
-msgid ""
-"Prevent new USB devices from interacting with the system when the screen is "
-"locked."
-msgstr ""
-"Прадухіляе ўзаемадзеянне новых USB-прылад з сістэмай, калі экран "
-"заблакіраваны."
-
-#: panels/screen/cc-screen-panel.ui:99
-msgid "Screen Privacy"
-msgstr "Прыватнасць экрана"
-
-#: panels/screen/cc-screen-panel.ui:104
-msgid "Restrict Viewing Angle"
-msgstr "Абмежаваць вугал прагляду"
-
-#: panels/screen/gnome-screen-panel.desktop.in:3
-msgid "Screen Lock"
-msgstr "Блакіраванне экрана"
-
-#: panels/screen/gnome-screen-panel.desktop.in:4
-msgid "Automatically lock the screen"
-msgstr "Аўтаматычнае блакіраванне экрана"
-
-#. Translators: Search terms to find the Screen panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
-#: panels/screen/gnome-screen-panel.desktop.in:16
-msgid "screen;lock;private;privacy;"
-msgstr ""
-"screen;lock;private;privacy;экран;блакіраванне;блакаванне;прыватнасць;"
-"канфідэнцыяльнасць;"
-
 #: panels/search/cc-search-locations-dialog.c:675
 msgid "Select Location"
 msgstr "Выберыце размяшчэнне"
 
-#: panels/search/cc-search-locations-dialog.ui:10
+#: panels/search/cc-search-locations-dialog.ui:11
 #: panels/search/cc-search-panel.ui:22
 msgid "Search Locations"
 msgstr "Месцы пошуку"
 
-#: panels/search/cc-search-locations-dialog.ui:13
+#: panels/search/cc-search-locations-dialog.ui:19
 msgid ""
 "Folders which are searched by system apps, such as Files, Photos and Videos."
 msgstr ""
 "Папкі, у якіх сістэмныя праграмы выконваюць пошук, напрыклад «Файлы», «Фота» "
 "і «Відэа»."
 
-#: panels/search/cc-search-locations-dialog.ui:16
+#: panels/search/cc-search-locations-dialog.ui:22
 msgid "Places"
 msgstr "Месцы"
 
-#: panels/search/cc-search-locations-dialog.ui:33
+#: panels/search/cc-search-locations-dialog.ui:39
 msgid "Bookmarks"
 msgstr "Закладкі"
 
-#: panels/search/cc-search-locations-dialog.ui:50
+#: panels/search/cc-search-locations-dialog.ui:56
 msgid "Others"
 msgstr "Іншае"
 
-#: panels/search/cc-search-locations-dialog.ui:57
+#: panels/search/cc-search-locations-dialog.ui:63
 msgid "Add Location"
 msgstr "Дадаць месца"
 
@@ -6467,7 +6818,6 @@ msgid "Password copied"
 msgstr "Пароль скапіяваны"
 
 #: panels/sharing/cc-sharing-panel.ui:23
-#, fuzzy
 msgid "Share files with other devices on the current network"
 msgstr "Супольны доступ з іншых прылад да музыкі, фота і відэа праз сетку"
 
@@ -6484,10 +6834,8 @@ msgid "Remote _Desktop"
 msgstr "Аддалены працоўны _стол"
 
 #: panels/sharing/cc-sharing-panel.ui:43
-#, fuzzy
-#| msgid "Share music, photos and videos over the network."
 msgid "Stream music, photos and videos to devices on the current network"
-msgstr "Супольны доступ да вашай музыкі, фота і відэа праз сетку."
+msgstr "Перадача музыкі, фота і відэа на прылады ў бягучай сетцы"
 
 #: panels/sharing/cc-sharing-panel.ui:45
 msgid "_Media Sharing"
@@ -6495,7 +6843,7 @@ msgstr "Супольны доступ да _медыяфайлаў"
 
 #: panels/sharing/cc-sharing-panel.ui:53
 msgid "Enable SSH access for this device"
-msgstr ""
+msgstr "Уключыць для гэтай прылады доступ праз SSH"
 
 #: panels/sharing/cc-sharing-panel.ui:55
 msgid "_Remote Login"
@@ -6761,194 +7109,6 @@ msgstr ""
 "Card;Microphone;Volume;Fade;Balance;Bluetooth;Headset;Audio;Output;Input;"
 "Мікрафон;Гучнасць;Згасанне;Баланс;блютуз;Навушнікі;Аўдыя;Гук;Выхад;Уваход;"
 "Гук;"
-
-#: panels/thunderbolt/cc-bolt-device-dialog.c:81
-#: panels/thunderbolt/cc-bolt-device-entry.c:123
-msgctxt "Thunderbolt Device Status"
-msgid "Disconnected"
-msgstr "Адлучана"
-
-#: panels/thunderbolt/cc-bolt-device-dialog.c:84
-#: panels/thunderbolt/cc-bolt-device-entry.c:126
-msgctxt "Thunderbolt Device Status"
-msgid "Connecting"
-msgstr "Злучэнне"
-
-#: panels/thunderbolt/cc-bolt-device-dialog.c:87
-#: panels/thunderbolt/cc-bolt-device-entry.c:130
-#: panels/thunderbolt/cc-bolt-device-entry.c:142
-msgctxt "Thunderbolt Device Status"
-msgid "Connected"
-msgstr "Злучана"
-
-#: panels/thunderbolt/cc-bolt-device-dialog.c:90
-msgctxt "Thunderbolt Device Status"
-msgid "Authorization Error"
-msgstr "Памылка аўтарызацыі"
-
-#: panels/thunderbolt/cc-bolt-device-dialog.c:93
-#: panels/thunderbolt/cc-bolt-device-entry.c:136
-msgctxt "Thunderbolt Device Status"
-msgid "Authorizing"
-msgstr "Аўтарызацыя"
-
-#: panels/thunderbolt/cc-bolt-device-dialog.c:100
-msgctxt "Thunderbolt Device Status"
-msgid "Reduced Functionality"
-msgstr "Дзейнічае з абмежаваннямі"
-
-#: panels/thunderbolt/cc-bolt-device-dialog.c:102
-msgctxt "Thunderbolt Device Status"
-msgid "Connected & Authorized"
-msgstr "Падлучана і аўтарызавана"
-
-#: panels/thunderbolt/cc-bolt-device-dialog.c:108
-#: panels/thunderbolt/cc-bolt-device-entry.c:150
-msgctxt "Thunderbolt Device Status"
-msgid "Unknown"
-msgstr "Невядома"
-
-#. Translators: The time point the device was authorized.
-#: panels/thunderbolt/cc-bolt-device-dialog.c:163
-msgid "Authorized at"
-msgstr "Аўтарызавана"
-
-#. Translators: The time point the device was connected.
-#: panels/thunderbolt/cc-bolt-device-dialog.c:169
-msgid "Connected at"
-msgstr "Злучана"
-
-#. Translators: The time point the device was enrolled,
-#. * i.e. authorized and stored in the device database.
-#: panels/thunderbolt/cc-bolt-device-dialog.c:176
-msgid "Enrolled at"
-msgstr "Зарэгістравана"
-
-#: panels/thunderbolt/cc-bolt-device-dialog.c:250
-msgid "Failed to authorize device: "
-msgstr "Не ўдалося аўтарызаваць прыладу: "
-
-#: panels/thunderbolt/cc-bolt-device-dialog.c:317
-msgid "Failed to forget device: "
-msgstr "Не ўдалося забыць прыладу: "
-
-#: panels/thunderbolt/cc-bolt-device-dialog.c:458
-#, c-format
-msgid "Depends on %u other device"
-msgid_plural "Depends on %u other devices"
-msgstr[0] "Залежыць ад %u іншай прылады"
-msgstr[1] "Залежыць ад %u іншых прылад"
-msgstr[2] "Залежыць ад %u іншых прылад"
-
-#: panels/thunderbolt/cc-bolt-device-dialog.ui:25
-msgid "Status"
-msgstr "Стан"
-
-#: panels/thunderbolt/cc-bolt-device-dialog.ui:30
-#| msgid "UUID:"
-msgid "UUID"
-msgstr "UUID"
-
-#: panels/thunderbolt/cc-bolt-device-dialog.ui:35
-msgid "Timestamp"
-msgstr "Часавы адбітак"
-
-#: panels/thunderbolt/cc-bolt-device-dialog.ui:43
-msgid "Depends on other devices"
-msgstr "Залежыць ад іншых прылад"
-
-#: panels/thunderbolt/cc-bolt-device-dialog.ui:73
-msgid "Authorize and Connect"
-msgstr "Аўтарызаваць і злучыць"
-
-#: panels/thunderbolt/cc-bolt-device-dialog.ui:88
-msgid "Forget Device"
-msgstr "Забыць прыладу"
-
-#: panels/thunderbolt/cc-bolt-device-entry.c:133
-msgctxt "Thunderbolt Device Status"
-msgid "Error"
-msgstr "Памылка"
-
-#: panels/thunderbolt/cc-bolt-device-entry.c:144
-msgctxt "Thunderbolt Device Status"
-msgid "Authorized"
-msgstr "Аўтарызавана"
-
-#: panels/thunderbolt/cc-bolt-panel.c:233
-msgid ""
-"The Thunderbolt subsystem (boltd) is not installed or not set up properly."
-msgstr ""
-"Падсістэма Thunderbolt (boltd) не ўсталявана ці не наладжана належным чынам."
-
-#: panels/thunderbolt/cc-bolt-panel.c:489
-#: panels/thunderbolt/cc-bolt-panel.ui:123
-msgid "Allow direct access to devices such as docks and external GPUs."
-msgstr "Дазволіць прамы доступ да прылад накшталт док-станцый і знешніх GPU."
-
-#: panels/thunderbolt/cc-bolt-panel.c:490
-msgid "Only USB and Display Port devices can attach."
-msgstr "Далучыцца могуць толькі прылады USB і Display Port."
-
-#: panels/thunderbolt/cc-bolt-panel.c:525
-msgid ""
-"Thunderbolt could not be detected.\n"
-"Either the system lacks Thunderbolt support, it has been disabled in the "
-"BIOS or is set to an unsupported security level in the BIOS."
-msgstr ""
-"Не ўдалося выявіць Thunderbolt.\n"
-"Thunderbolt можа не падтрымлівацца сістэмай ці быць адключаным у BIOS або не "
-"падтрымлівацца праз зададзены ў BIOS ўзровень бяспекі."
-
-#: panels/thunderbolt/cc-bolt-panel.c:569
-msgid "Thunderbolt support has been disabled in the BIOS."
-msgstr "Падтрымка Thunderbolt адключана ў BIOS."
-
-#: panels/thunderbolt/cc-bolt-panel.c:573
-msgid "Thunderbolt security level could not be determined."
-msgstr "Не ўдалося вызначыць узровень бяспекі Thunderbolt."
-
-#: panels/thunderbolt/cc-bolt-panel.c:693
-#, c-format
-msgid "Error switching direct mode: %s"
-msgstr "Памылка пераключэння рэжыму прамога доступу: %s"
-
-#: panels/thunderbolt/cc-bolt-panel.ui:41
-msgid "Close notification"
-msgstr "Закрыць апавяшчэнне"
-
-#: panels/thunderbolt/cc-bolt-panel.ui:102
-msgid "No Thunderbolt Support"
-msgstr "Thunderbolt не падтрымліваецца"
-
-#: panels/thunderbolt/cc-bolt-panel.ui:103
-msgid "Could not connect to the thunderbolt subsystem."
-msgstr "Не ўдалося падлучыцца да падсістэмы thunderbolt."
-
-#: panels/thunderbolt/cc-bolt-panel.ui:120
-msgid "Direct Access"
-msgstr "Прамы доступ"
-
-#: panels/thunderbolt/cc-bolt-panel.ui:192
-msgid "Pending Devices"
-msgstr "Прылады ў чаканні"
-
-#: panels/thunderbolt/cc-bolt-panel.ui:286
-msgid "No devices attached"
-msgstr "Няма далучаных прылад"
-
-#: panels/thunderbolt/gnome-thunderbolt-panel.desktop.in:3
-msgid "Thunderbolt"
-msgstr "Thunderbolt"
-
-#: panels/thunderbolt/gnome-thunderbolt-panel.desktop.in:4
-msgid "Manage Thunderbolt device access"
-msgstr "Кіраванне доступам да прылад Thunderbolt"
-
-#. Translators: those are keywords for the thunderbolt control-center panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
-#: panels/thunderbolt/gnome-thunderbolt-panel.desktop.in:15
-msgid "Thunderbolt;privacy;"
-msgstr "Thunderbolt;privacy;прыватнасць;канфідэнцыйнасць;"
 
 #: panels/universal-access/cc-cursor-size-dialog.ui:5
 msgid "Cursor Size"
@@ -7478,201 +7638,6 @@ msgstr ""
 "Затрымка;Хуткасць;Дапамога;Паўтарэнне;Паўтор;Мільганне;візуальныя;сігналы;"
 "слых;аўдыя;увод;друк;анімацыі;"
 
-#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
-#: panels/usage/cc-usage-panel.c:55
-msgctxt "purge_files"
-msgid "1 hour"
-msgstr "1 гадзіна"
-
-#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
-#: panels/usage/cc-usage-panel.c:58
-msgctxt "purge_files"
-msgid "1 day"
-msgstr "1 дзень"
-
-#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
-#: panels/usage/cc-usage-panel.c:61
-msgctxt "purge_files"
-msgid "2 days"
-msgstr "2 дні"
-
-#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
-#: panels/usage/cc-usage-panel.c:64
-msgctxt "purge_files"
-msgid "3 days"
-msgstr "3 дні"
-
-#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
-#: panels/usage/cc-usage-panel.c:67
-msgctxt "purge_files"
-msgid "4 days"
-msgstr "4 дні"
-
-#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
-#: panels/usage/cc-usage-panel.c:70
-msgctxt "purge_files"
-msgid "5 days"
-msgstr "5 дзён"
-
-#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
-#: panels/usage/cc-usage-panel.c:73
-msgctxt "purge_files"
-msgid "6 days"
-msgstr "6 дзён"
-
-#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
-#: panels/usage/cc-usage-panel.c:76
-msgctxt "purge_files"
-msgid "7 days"
-msgstr "7 дзён"
-
-#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
-#: panels/usage/cc-usage-panel.c:79
-msgctxt "purge_files"
-msgid "14 days"
-msgstr "14 дзён"
-
-#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
-#: panels/usage/cc-usage-panel.c:82
-msgctxt "purge_files"
-msgid "30 days"
-msgstr "30 дзён"
-
-#: panels/usage/cc-usage-panel.c:180
-msgid "Empty all items from Trash?"
-msgstr "Ачысціць сметніцу?"
-
-#: panels/usage/cc-usage-panel.c:181
-msgid "All items in the Trash will be permanently deleted."
-msgstr "Усё змесціва сметніцы будзе незваротна выдалена."
-
-#: panels/usage/cc-usage-panel.c:182
-msgid "_Empty Trash"
-msgstr "_Ачысціць сметніцу"
-
-#: panels/usage/cc-usage-panel.c:218
-msgid "Delete all the temporary files?"
-msgstr "Выдаліць усе часовыя файлы?"
-
-#: panels/usage/cc-usage-panel.c:219
-msgid "All the temporary files will be permanently deleted."
-msgstr "Усе часовыя файлы будуць незваротна выдалены."
-
-#: panels/usage/cc-usage-panel.c:220
-msgid "_Purge Temporary Files"
-msgstr "_Выдаліць часовыя файлы"
-
-#. Translators: Option for "File History Duration" in "File History" group
-#: panels/usage/cc-usage-panel.c:247
-msgctxt "retain_history"
-msgid "1 day"
-msgstr "1 дзень"
-
-#. Translators: Option for "File History Duration" in "File History" group
-#: panels/usage/cc-usage-panel.c:250
-msgctxt "retain_history"
-msgid "7 days"
-msgstr "7 дзён"
-
-#. Translators: Option for "File History Duration" in "File History" group
-#: panels/usage/cc-usage-panel.c:253
-msgctxt "retain_history"
-msgid "30 days"
-msgstr "30 дзён"
-
-#. Translators: Option for "File History Duration" in "File History" group
-#: panels/usage/cc-usage-panel.c:256
-msgctxt "retain_history"
-msgid "Forever"
-msgstr "Бясконца"
-
-#: panels/usage/cc-usage-panel.c:347
-msgid "Clear File History?"
-msgstr "Ачысціць гісторыю файлаў?"
-
-#: panels/usage/cc-usage-panel.c:348
-msgid "After clearing, lists of recently used files will appear empty."
-msgstr "Пасля ачысткі, спіс нядаўна выкарыстаных файлаў стане пустым."
-
-#: panels/usage/cc-usage-panel.c:349
-msgid "_Clear History"
-msgstr "_Ачысціць гісторыю"
-
-#: panels/usage/cc-usage-panel.ui:9
-msgid "File History"
-msgstr "Гісторыя файлаў"
-
-#: panels/usage/cc-usage-panel.ui:10
-msgid ""
-"File history keeps a record of files that you have used. This information is "
-"shared between apps, and makes it easier to find files that you might want "
-"to use."
-msgstr ""
-"Гісторыя файлаў запісвае, якія файлы вы выкарыстоўвалі. Гэтыя звесткі "
-"абагулены паміж праграмамі і дазваляюць прасцей знайсці файлы, якія вы, "
-"магчыма, захочаце выкарыстаць."
-
-#: panels/usage/cc-usage-panel.ui:13
-msgid "File H_istory"
-msgstr "Г_історыя файлаў"
-
-#: panels/usage/cc-usage-panel.ui:25
-msgid "File _History Duration"
-msgstr "Працягласць _гісторыі файлаў"
-
-#: panels/usage/cc-usage-panel.ui:47
-msgid "_Clear History…"
-msgstr "_Ачысціць гісторыю…"
-
-#: panels/usage/cc-usage-panel.ui:63
-msgid "Trash &amp; Temporary Files"
-msgstr "Сметніца і часовыя файлы"
-
-#: panels/usage/cc-usage-panel.ui:64
-msgid ""
-"Trash and temporary files can sometimes include personal or sensitive "
-"information. Automatically deleting them can help to protect privacy."
-msgstr ""
-"Сметніца і часовыя файлы могуць змяшчаць прыватную інфармацыю. Аўтаматычнае "
-"выдаленне файлаў можа дапамагчы абараніць прыватнасць."
-
-#: panels/usage/cc-usage-panel.ui:67
-msgid "Automatically Delete _Trash Content"
-msgstr "Аўтаматычна выдаляць змесціва сметніцы"
-
-#: panels/usage/cc-usage-panel.ui:79
-msgid "Automatically Delete Temporary _Files"
-msgstr "Аўтаматычна выдаляць часовыя _файлы"
-
-#: panels/usage/cc-usage-panel.ui:91
-msgid "Automatically Delete _Period"
-msgstr "_Перыядычнасць аўтаматычнага выдалення"
-
-#: panels/usage/cc-usage-panel.ui:114
-msgid "_Empty Trash…"
-msgstr "_Ачысціць сметніцу…"
-
-#: panels/usage/cc-usage-panel.ui:126
-msgid "_Delete Temporary Files…"
-msgstr "_Выдаліць часовыя файлы…"
-
-#: panels/usage/gnome-usage-panel.desktop.in:3
-msgid "File History & Trash"
-msgstr "Гісторыя файлаў і сметніца"
-
-#: panels/usage/gnome-usage-panel.desktop.in:4
-msgid "Control data and files that are kept on your device"
-msgstr "Кіраванне данымі і файламі, якія захоўваюцца на вашай прыладзе"
-
-#. Translators: Search terms to find the Usage panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
-#: panels/usage/gnome-usage-panel.desktop.in:16
-msgid ""
-"usage;recent;history;files;temporary;tmp;private;privacy;trash;purge;retain;"
-msgstr ""
-"usage;recent;history;files;temporary;tmp;private;privacy;trash;purge;retain;"
-"выкарыстанне;нядаўнія;апошнія;гісторыя;файлы;часовыя;прыватнасць;прыватны;"
-"сметніца;ачыстка;выдаленне;"
-
 #: panels/user-accounts/cc-add-user-dialog.c:36
 msgid "Should match the web address of your login provider."
 msgstr "Павінна супадаць з вэб-адрасам правайдара вашага ўліковага запісу."
@@ -8190,6 +8155,9 @@ msgid ""
 "requiring authentication. Authentication is still required at other times, "
 "such as when unlocking the screen."
 msgstr ""
+"Калі прылада запускаецца, без аўтэнтыфікацыі аўтаматычна ўваходзіць ва "
+"ўліковы запіс карыстальніка. Аўтэнтыфікацыя па-ранейшаму патрабуецца ў іншы "
+"выпадках, напрыклад, калі разблакіруецца экран."
 
 #: panels/user-accounts/cc-user-panel.ui:204
 msgid "_Administrator"
@@ -8229,6 +8197,8 @@ msgid ""
 "The user will not be able to use this device once their account has been "
 "removed."
 msgstr ""
+"Адразу ж пасля выдалення ўліковага запісу, карыстальнік не зможа карыстацца "
+"гэтай прыладай."
 
 #: panels/user-accounts/cc-user-panel.ui:354
 msgid "Delete Files and Settings"
@@ -9250,31 +9220,27 @@ msgstr "[ПАНЭЛЬ] [АРГУМЕНТ…]"
 msgid "Settings categories"
 msgstr "Катэгорыі налад"
 
-#: shell/cc-panel-list.ui:42 shell/cc-window.c:242
-msgid "Privacy"
-msgstr "Прыватнасць"
-
-#: shell/cc-panel-loader.c:307
+#: shell/cc-panel-loader.c:282
 msgid "Available panels:"
 msgstr "Даступныя панэлі:"
 
-#: shell/cc-window.ui:27 shell/cc-window.ui:31
+#: shell/cc-window.ui:28 shell/cc-window.ui:32
 msgid "All Settings"
 msgstr "Усе налады"
 
-#: shell/cc-window.ui:55 shell/cc-window.ui:57
+#: shell/cc-window.ui:56 shell/cc-window.ui:58
 msgid "Main Menu"
 msgstr "Галоўнае меню"
 
-#: shell/cc-window.ui:72
+#: shell/cc-window.ui:73
 msgid "Search settings"
 msgstr "Налады пошуку"
 
-#: shell/cc-window.ui:161
+#: shell/cc-window.ui:162
 msgid "Warning: Development Version"
 msgstr "Увага. Версія для распрацоўшчыкаў"
 
-#: shell/cc-window.ui:162
+#: shell/cc-window.ui:163
 msgid ""
 "This version of Settings should only be used for development purposes. You "
 "may experience incorrect system behavior, data loss, and other unexpected "
@@ -9283,7 +9249,7 @@ msgstr ""
 "Гэтая версія Налад прызначана толькі для распрацоўкі. Вы можаце сутыкнуцца з "
 "няправільнымі паводзінамі, стратай даных і іншымі нечаканымі праблемамі. "
 
-#: shell/cc-window.ui:173
+#: shell/cc-window.ui:174
 msgid "Help"
 msgstr "Даведка"
 
@@ -9385,9 +9351,109 @@ msgstr[0] "%u уваход"
 msgstr[1] "%u уваходы"
 msgstr[2] "%u уваходаў"
 
-#: subprojects/gvc/gvc-mixer-control.c:2876
+#: subprojects/gvc/gvc-mixer-control.c:2882
 msgid "System Sounds"
 msgstr "Сістэмныя гукі"
+
+#~ msgid "camera;photos;video;webcam;lock;private;privacy;"
+#~ msgstr ""
+#~ "camera;photos;video;webcam;lock;private;privacy;камера;фота;відэа;вэб-"
+#~ "камера;прыватнасць;асабістыя;канфідэнцыяльнасць;блакіраванне;блакаванне;"
+
+#~ msgid "Settings for automatically problem reporting"
+#~ msgstr "Налады аўтаматычных справаздач аб праблемах"
+
+#~ msgid "diagnostics;crash;"
+#~ msgstr "diagnostics;crash;дыягностыка;збой;"
+
+#~ msgid "Device Security Status"
+#~ msgstr "Статус бяспекі прылады"
+
+#~ msgid ""
+#~ "Device security provides information about how protected your device is "
+#~ "against security issues which target the hardware itself."
+#~ msgstr ""
+#~ "Бяспека прылады дае інфармацыю аб тым, наколькі ваша прылада абаронена ад "
+#~ "праблем бяспекі на апаратным узроўні."
+
+#~ msgid "Aspects of hardware that affect security include:"
+#~ msgstr ""
+#~ "Разглядаюцца наступныя асаблівасці абсталявання, якія ўплываюць на "
+#~ "бяспеку:"
+
+#~ msgid "• security features that are built into a hardware itself;"
+#~ msgstr "• функцыі бяспекі, убудаваныя ў само абсталяванне;"
+
+#~ msgid "• how the hardware is configured to protect against security issues;"
+#~ msgstr "• як абсталяванне наладжана для абароны ад праблем бяспекі;"
+
+#~ msgid "• the security of the software runs directly on the hardware."
+#~ msgstr ""
+#~ "• бяспека праграмнага забеспячэння, якое непасрэдна працуе з "
+#~ "абсталяваннем."
+
+#~ msgid ""
+#~ "Security threats which affect hardware include malware and viruses that "
+#~ "target the software that runs directly on the hardware. It also includes "
+#~ "physical tampering, such as physical connection to the hardware to read "
+#~ "data and implant malware."
+#~ msgstr ""
+#~ "Пагрозы бяспекі, якія ўплываюць на апаратнае забеспячэнне, у тым ліку "
+#~ "шкодныя праграмы і вірусы, накіраваныя на праграмнае забеспячэнне, якое "
+#~ "непасрэдна працуе з абсталяваннем. Гэта таксама тычыцца несанкцыянаванага "
+#~ "фізічнага доступу, напрыклад, фізічнае падключэнне да абсталявання для "
+#~ "чытання даных і ўкаранення шкодных праграм."
+
+#~ msgid ""
+#~ "Device security is just one aspect of security, and does not reflect the "
+#~ "overall security status of the system and applications."
+#~ msgstr ""
+#~ "Бяспека прылады - гэта толькі адзін з аспектаў бяспекі, які не "
+#~ "адлюстроўвае агульны стан бяспекі сістэмы і праграм."
+
+#~ msgid "Protection against hardware security threats"
+#~ msgstr "Абарона ад пагроз бяспекі для апаратнага забеспячэння"
+
+#~ msgid ""
+#~ "screen;lock;diagnostics;crash;private;recent;temporary;tmp;index;name;"
+#~ "network;identity;privacy;"
+#~ msgstr ""
+#~ "screen;lock;diagnostics;crash;private;recent;temporary;tmp;index;name;"
+#~ "network;identity;privacy;экран;блакіраванне;заблакіраваць;дыягностыка;"
+#~ "аварыя;прыватны;нядаўні;часовы;назва;імя;сетка;сеціва;ідэнтыфікацыя;асоба;"
+#~ "прыватнасць;"
+
+#~ msgid "location;gps;private;privacy;"
+#~ msgstr ""
+#~ "location;gps;private;privacy;месцазнаходжанне;прыватнасць;"
+#~ "канфідэнцыяльнасць;"
+
+#~ msgid "microphone;recording;application;privacy;"
+#~ msgstr ""
+#~ "microphone;recording;application;privacy;мікрафон;запіс;праграма;"
+#~ "прыватнасць;"
+
+#~ msgid "Automatically lock the screen"
+#~ msgstr "Аўтаматычнае блакіраванне экрана"
+
+#~ msgid "screen;lock;private;privacy;"
+#~ msgstr ""
+#~ "screen;lock;private;privacy;экран;блакіраванне;блакаванне;прыватнасць;"
+#~ "канфідэнцыяльнасць;"
+
+#~ msgid "Thunderbolt;privacy;"
+#~ msgstr "Thunderbolt;privacy;прыватнасць;канфідэнцыйнасць;"
+
+#~ msgid "Control data and files that are kept on your device"
+#~ msgstr "Кіраванне данымі і файламі, якія захоўваюцца на вашай прыладзе"
+
+#~ msgid ""
+#~ "usage;recent;history;files;temporary;tmp;private;privacy;trash;purge;"
+#~ "retain;"
+#~ msgstr ""
+#~ "usage;recent;history;files;temporary;tmp;private;privacy;trash;purge;"
+#~ "retain;выкарыстанне;нядаўнія;апошнія;гісторыя;файлы;часовыя;прыватнасць;"
+#~ "прыватны;сметніца;ачыстка;выдаленне;"
 
 #~ msgid "No apps"
 #~ msgstr "Няма праграм"
@@ -9684,9 +9750,6 @@ msgstr "Сістэмныя гукі"
 
 #~ msgid "Hardware meets security requirements."
 #~ msgstr "Абсталяванне адпавядае патрабаванням бяспекі."
-
-#~ msgid "Host firmware security status"
-#~ msgstr "Статус бяспекі ўбудаванага ПЗ хоста"
 
 #~ msgid "Location Services Turned Off"
 #~ msgstr "Сэрвісы месцазнаходжання выключаны"
