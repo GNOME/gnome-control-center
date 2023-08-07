@@ -10,8 +10,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/iss"
 "ues\n"
-"POT-Creation-Date: 2023-08-06 14:12+0000\n"
-"PO-Revision-Date: 2023-08-06 19:09+0300\n"
+"POT-Creation-Date: 2023-08-07 13:31+0000\n"
+"PO-Revision-Date: 2023-08-07 18:58+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -39,7 +39,7 @@ msgid "Session Bus"
 msgstr "Шина сеансів"
 
 #: panels/applications/cc-applications-panel.c:827
-#: panels/power/cc-power-panel.ui:96 panels/privacy/cc-bolt-page.ui:241
+#: panels/power/cc-power-panel.ui:75 panels/privacy/cc-bolt-page.ui:241
 #: panels/privacy/cc-bolt-page.ui:285 panels/privacy/cc-privacy-panel.ui:96
 msgid "Devices"
 msgstr "Пристрої"
@@ -1195,7 +1195,7 @@ msgstr[2] "%d годин"
 msgstr[3] "%d година"
 
 #. Translators: Option for "Blank Screen" in "Power" panel
-#: panels/common/cc-util.c:183 panels/power/cc-power-panel.c:959
+#: panels/common/cc-util.c:183 panels/power/cc-power-panel.c:855
 #, c-format
 msgid "%d minute"
 msgid_plural "%d minutes"
@@ -1342,67 +1342,71 @@ msgstr "_Формат часу"
 msgid "Clock &amp; Calendar"
 msgstr "Годинник і календар"
 
-#: panels/datetime/cc-datetime-panel.ui:217
+#: panels/datetime/cc-datetime-panel.ui:215
+msgid "Control how the time and date is shown in the top bar"
+msgstr "Керує тим, як буде показано дату і час на верхній панелі"
+
+#: panels/datetime/cc-datetime-panel.ui:218
 msgid "Week Day"
 msgstr "День тижня"
 
-#: panels/datetime/cc-datetime-panel.ui:229
+#: panels/datetime/cc-datetime-panel.ui:230
 msgid "Date"
 msgstr "Дата"
 
-#: panels/datetime/cc-datetime-panel.ui:241
+#: panels/datetime/cc-datetime-panel.ui:242
 msgid "Seconds"
 msgstr "Секунди"
 
-#: panels/datetime/cc-datetime-panel.ui:253
+#: panels/datetime/cc-datetime-panel.ui:254
 msgid "Week Numbers"
 msgstr "Номери тижнів"
 
-#: panels/datetime/cc-datetime-panel.ui:294
+#: panels/datetime/cc-datetime-panel.ui:295
 msgid "January"
 msgstr "Січень"
 
-#: panels/datetime/cc-datetime-panel.ui:295
+#: panels/datetime/cc-datetime-panel.ui:296
 msgid "February"
 msgstr "Лютий"
 
-#: panels/datetime/cc-datetime-panel.ui:296
+#: panels/datetime/cc-datetime-panel.ui:297
 msgid "March"
 msgstr "Березень"
 
-#: panels/datetime/cc-datetime-panel.ui:297
+#: panels/datetime/cc-datetime-panel.ui:298
 msgid "April"
 msgstr "Квітень"
 
-#: panels/datetime/cc-datetime-panel.ui:298
+#: panels/datetime/cc-datetime-panel.ui:299
 msgid "May"
 msgstr "Травень"
 
-#: panels/datetime/cc-datetime-panel.ui:299
+#: panels/datetime/cc-datetime-panel.ui:300
 msgid "June"
 msgstr "Червень"
 
-#: panels/datetime/cc-datetime-panel.ui:300
+#: panels/datetime/cc-datetime-panel.ui:301
 msgid "July"
 msgstr "Липень"
 
-#: panels/datetime/cc-datetime-panel.ui:301
+#: panels/datetime/cc-datetime-panel.ui:302
 msgid "August"
 msgstr "Серпень"
 
-#: panels/datetime/cc-datetime-panel.ui:302
+#: panels/datetime/cc-datetime-panel.ui:303
 msgid "September"
 msgstr "Вересень"
 
-#: panels/datetime/cc-datetime-panel.ui:303
+#: panels/datetime/cc-datetime-panel.ui:304
 msgid "October"
 msgstr "Жовтень"
 
-#: panels/datetime/cc-datetime-panel.ui:304
+#: panels/datetime/cc-datetime-panel.ui:305
 msgid "November"
 msgstr "Листопад"
 
-#: panels/datetime/cc-datetime-panel.ui:305
+#: panels/datetime/cc-datetime-panel.ui:306
 msgid "December"
 msgstr "Грудень"
 
@@ -1487,13 +1491,13 @@ msgstr "типове;програма;бажане;носій;default;applicatio
 
 #: panels/display/cc-display-panel.c:495
 #: panels/notifications/cc-notifications-panel.c:214
-#: panels/power/cc-power-panel.c:847 panels/power/cc-power-panel.c:854
+#: panels/power/cc-power-panel.c:743 panels/power/cc-power-panel.c:750
 msgid "On"
 msgstr "Увімкнено"
 
 #: panels/display/cc-display-panel.c:497 panels/network/cc-net-proxy-page.c:181
 #: panels/notifications/cc-notifications-panel.c:214
-#: panels/power/cc-power-panel.c:841 panels/power/cc-power-panel.c:852
+#: panels/power/cc-power-panel.c:737 panels/power/cc-power-panel.c:748
 msgid "Off"
 msgstr "Вимкнено"
 
@@ -3814,7 +3818,7 @@ msgid "Unmanaged"
 msgstr "Некерований"
 
 #. TRANSLATORS: device status
-#: panels/network/panel-common.c:45 panels/power/cc-power-panel.c:668
+#: panels/network/panel-common.c:45
 msgid "Unavailable"
 msgstr "Недоступний"
 
@@ -4335,7 +4339,7 @@ msgid "Gaming input device"
 msgstr "Ігровий пристрій введення"
 
 #. TRANSLATORS: secondary battery, misc
-#: panels/power/cc-battery-row.c:218 panels/power/cc-power-panel.c:268
+#: panels/power/cc-battery-row.c:218 panels/power/cc-power-panel.c:263
 #: panels/power/cc-power-panel.ui:58
 msgid "Battery"
 msgstr "Батарея"
@@ -4350,96 +4354,61 @@ msgctxt "Battery name"
 msgid "Extra"
 msgstr "Додаткова"
 
-#: panels/power/cc-power-panel.c:260
+#: panels/power/cc-power-panel.c:255
 msgid "Batteries"
 msgstr "Батареї"
 
 #. Translators: UPS is an Uninterruptible Power Supply:
 #. * https://en.wikipedia.org/wiki/Uninterruptible_power_supply
-#: panels/power/cc-power-panel.c:265
+#: panels/power/cc-power-panel.c:260
 msgid "UPS"
 msgstr "ДБЖ"
 
-#: panels/power/cc-power-panel.c:525
+#: panels/power/cc-power-panel.c:520
 msgid "When _idle"
 msgstr "Коли _бездіяльний"
 
-#: panels/power/cc-power-panel.c:662
-#| msgctxt "Signal strength"
-#| msgid "Good"
-msgid "Good"
-msgstr "Добрий"
-
-#: panels/power/cc-power-panel.c:664
-#| msgid "_OK"
-msgid "OK"
-msgstr "Гаразд"
-
-#: panels/power/cc-power-panel.c:666
-msgid "Poor"
-msgstr "Поганий"
-
-#: panels/power/cc-power-panel.c:684
-#, c-format
-#| msgid "Battery"
-msgid "Battery %d"
-msgstr "Акумулятор %d"
-
-#: panels/power/cc-power-panel.c:685
-#, c-format
-msgid "%d%%"
-msgstr "%d%%"
-
-#: panels/power/cc-power-panel.c:694
-msgid "Health Rating"
-msgstr "Рівень зношеності"
-
-#: panels/power/cc-power-panel.c:700
-#| msgid "Disk Capacity"
-msgid "Battery Capacity"
-msgstr "Місткість акумулятора"
-
-#: panels/power/cc-power-panel.c:784
+#: panels/power/cc-power-panel.c:680
 msgid "Suspend"
 msgstr "Призупинити"
 
-#: panels/power/cc-power-panel.c:785
+#: panels/power/cc-power-panel.c:681
 msgid "Power Off"
 msgstr "Вимкнути"
 
-#: panels/power/cc-power-panel.c:786
+#: panels/power/cc-power-panel.c:682
 msgid "Hibernate"
 msgstr "Приспати"
 
-#: panels/power/cc-power-panel.c:787
+#: panels/power/cc-power-panel.c:683
 msgid "Nothing"
 msgstr "Нічого"
 
-#: panels/power/cc-power-panel.c:843
+#: panels/power/cc-power-panel.c:739
 msgid "When on battery power"
 msgstr "Коли живлення від батареї"
 
-#: panels/power/cc-power-panel.c:845
+#: panels/power/cc-power-panel.c:741
 msgid "When plugged in"
 msgstr "Коли під'єднано"
 
-#: panels/power/cc-power-panel.c:966
+#: panels/power/cc-power-panel.c:862
 msgctxt "Idle time"
 msgid "Never"
 msgstr "Ніколи"
 
-#: panels/power/cc-power-panel.c:1072
+#: panels/power/cc-power-panel.c:947
 msgid "Automatic suspend"
 msgstr "Автоматично призупиняти роботу"
 
-#: panels/power/cc-power-panel.c:1168
+#: panels/power/cc-power-panel.c:1043
 msgid ""
 "Performance mode temporarily disabled due to high operating temperature."
 msgstr ""
 "Режим підвищеної швидкодії тимчасово вимкнено через високу операційну "
 "температуру."
 
-#: panels/power/cc-power-panel.c:1170
+#: panels/power/cc-power-panel.c:1045
 msgid ""
 "Lap detected: performance mode temporarily unavailable. Move the device to a "
 "stable surface to restore."
@@ -4448,11 +4417,11 @@ msgstr ""
 "тимчасово недоступний. Перенесіть пристрій на стабільну поверхню, щоб "
 "відновити доступ."
 
-#: panels/power/cc-power-panel.c:1172
+#: panels/power/cc-power-panel.c:1047
 msgid "Performance mode temporarily disabled."
 msgstr "Режим підвищеної швидкодії тимчасово вимкнено."
 
-#: panels/power/cc-power-panel.c:1214
+#: panels/power/cc-power-panel.c:1089
 msgid ""
 "Low battery: power saver enabled. Previous mode will be restored when "
 "battery is sufficiently charged."
@@ -4461,13 +4430,13 @@ msgstr ""
 "режим буде відновлено за достатнього рівня заряду акумулятора."
 
 #. translators: "%s" is an application name
-#: panels/power/cc-power-panel.c:1222
+#: panels/power/cc-power-panel.c:1097
 #, c-format
 msgid "Power Saver mode activated by “%s”."
 msgstr "Режим заощадження енергії активовано «%s»."
 
 #. translators: "%s" is an application name
-#: panels/power/cc-power-panel.c:1226
+#: panels/power/cc-power-panel.c:1101
 #, c-format
 msgid "Performance mode activated by “%s”."
 msgstr "Режим високої швидкодії активовано «%s»."
@@ -4532,109 +4501,91 @@ msgctxt "automatic_suspend"
 msgid "2 hours"
 msgstr "2 години"
 
-#: panels/power/cc-power-panel.ui:78
-#| msgid "Battery"
-msgid "_Battery Health"
-msgstr "_Рівень зношеності"
-
-#: panels/power/cc-power-panel.ui:114
+#: panels/power/cc-power-panel.ui:93
 msgid "Power Mode"
 msgstr "Режим живлення"
 
-#: panels/power/cc-power-panel.ui:115
+#: panels/power/cc-power-panel.ui:94
 msgid "Affects system performance and power usage."
 msgstr "Впливає на швидкодію системи та споживання енергії."
 
-#: panels/power/cc-power-panel.ui:144
+#: panels/power/cc-power-panel.ui:123
 msgid "Power Saving Options"
 msgstr "Параметри заощадження енергії"
 
-#: panels/power/cc-power-panel.ui:147
+#: panels/power/cc-power-panel.ui:126
 msgid "Automatic Screen Brightness"
 msgstr "Автоматична яскравість екрана"
 
-#: panels/power/cc-power-panel.ui:148
+#: panels/power/cc-power-panel.ui:127
 msgid "Screen brightness adjusts to the surrounding light."
 msgstr "Яскравість екрана коригується за зовнішнім освітленням."
 
-#: panels/power/cc-power-panel.ui:160
+#: panels/power/cc-power-panel.ui:139
 msgid "Dim Screen"
 msgstr "Притлумлення екрана"
 
-#: panels/power/cc-power-panel.ui:161
+#: panels/power/cc-power-panel.ui:140
 msgid "Reduces the screen brightness when the computer is inactive."
 msgstr "Зменшує яскравість екрана, якщо комп'ютер є бездіяльним."
 
-#: panels/power/cc-power-panel.ui:172
+#: panels/power/cc-power-panel.ui:151
 msgid "Screen _Blank"
 msgstr "В_имикання екрана"
 
-#: panels/power/cc-power-panel.ui:173
+#: panels/power/cc-power-panel.ui:152
 msgid "Turns the screen off after a period of inactivity."
 msgstr ""
 "Вимикає екран, якщо комп'ютер є неактивним протягом певного періоду часу."
 
-#: panels/power/cc-power-panel.ui:181
+#: panels/power/cc-power-panel.ui:160
 msgid "Automatic Power Saver"
 msgstr "Автоматичне заощадження енергії"
 
-#: panels/power/cc-power-panel.ui:182
+#: panels/power/cc-power-panel.ui:161
 msgid "Enables power saver mode when battery is low."
 msgstr ""
 "Вмикає режим заощадження енергії при низькому рівні заряду акумулятора."
 
-#: panels/power/cc-power-panel.ui:195
+#: panels/power/cc-power-panel.ui:174
 msgid "_Automatic Suspend"
 msgstr "_Автоматично призупиняти"
 
-#: panels/power/cc-power-panel.ui:196
+#: panels/power/cc-power-panel.ui:175
 msgid "Pauses the computer after a period of inactivity."
 msgstr ""
 "Призупиняє роботу комп'ютера, якщо той є неактивним протягом певного періоду "
 "часу."
 
-#: panels/power/cc-power-panel.ui:221
+#: panels/power/cc-power-panel.ui:200
 msgid "Po_wer Button Behavior"
 msgstr "Поведінка _кнопки живлення"
 
-#: panels/power/cc-power-panel.ui:229
+#: panels/power/cc-power-panel.ui:208
 msgid "Show Battery _Percentage"
 msgstr "Показувати _відсоток заряду акумулятора"
 
-#: panels/power/cc-power-panel.ui:230
+#: panels/power/cc-power-panel.ui:209
 msgid "Show exact charge level in the top bar"
 msgstr "Показувати точний рівень заряду на верхній панелі"
 
-#: panels/power/cc-power-panel.ui:266
+#: panels/power/cc-power-panel.ui:245
 msgid "Automatic Suspend"
 msgstr "Автоматично призупиняти"
 
-#: panels/power/cc-power-panel.ui:289
+#: panels/power/cc-power-panel.ui:268
 msgid "_Plugged In"
 msgstr "_Під'єднано"
 
-#: panels/power/cc-power-panel.ui:301
+#: panels/power/cc-power-panel.ui:280
 msgid "On _Battery Power"
 msgstr "Живлення від _батареї"
 
-#: panels/power/cc-power-panel.ui:334 panels/power/cc-power-panel.ui:370
+#: panels/power/cc-power-panel.ui:313 panels/power/cc-power-panel.ui:349
 #: panels/universal-access/cc-ua-mouse-page.ui:98
 #: panels/universal-access/cc-ua-typing-page.ui:124
 msgid "Delay"
 msgstr "Затримка"
-
-#: panels/power/cc-power-panel.ui:393
-#| msgid "Battery"
-msgid "Battery Health"
-msgstr "Рівень зношеності"
-
-#: panels/power/cc-power-panel.ui:407
-msgid ""
-"Current capacity indicates how much charge the battery can currently store, "
-"compared to when it was new."
-msgstr ""
-"Поточна місткість вказує на те, скільки заряду акумулятор здатен накопичити,"
-" порівняно із новим акумулятором."
 
 #: panels/power/cc-power-profile-row.c:132
 msgctxt "Power profile"
@@ -5789,8 +5740,8 @@ msgid ""
 "Device security is just one aspect of security, and does not reflect the "
 "overall security status of the system and applications."
 msgstr ""
-"Модуль безпеки пристрою надає дані щодо того, як захищено ваш пристрій щодо"
-" загроз безпеці самого обладнання.\n"
+"Модуль безпеки пристрою надає дані щодо того, як захищено ваш пристрій щодо "
+"загроз безпеці самого обладнання.\n"
 "\n"
 "Серед аспектів, які впливають на безпеку обладнання, такі:\n"
 "\n"
@@ -5798,14 +5749,14 @@ msgstr ""
 "• спосіб налаштовування обладнання для захисту від загроз;\n"
 "• захист програмного забезпечення, що працює безпосередньо з обладнанням..\n"
 "\n"
-"Серед загроз безпеці, які стосуються самого обладнання, шкідливе програмне"
-" забезпечення та віруси, які спрямовано на програмне забезпечення, що працює"
-" безпосередньо з обладнанням. До загроз також належить фізичне втручання,"
-" зокрема фізичне з'єднання з обладнанням для читання даних та встановлення"
-" шкідливих програм.\n"
+"Серед загроз безпеці, які стосуються самого обладнання, шкідливе програмне "
+"забезпечення та віруси, які спрямовано на програмне забезпечення, що працює "
+"безпосередньо з обладнанням. До загроз також належить фізичне втручання, "
+"зокрема фізичне з'єднання з обладнанням для читання даних та встановлення "
+"шкідливих програм.\n"
 "\n"
-"Безпека пристрою є лише одним з елементів безпеки і не є повним еквівалентом"
-" загального стану безпеки системи та програм."
+"Безпека пристрою є лише одним з елементів безпеки і не є повним еквівалентом "
+"загального стану безпеки системи та програм."
 
 #: panels/privacy/cc-firmware-security-page.c:121
 msgid "Protected against malicious software when the device starts."
@@ -6058,12 +6009,10 @@ msgid "Privacy"
 msgstr "Конфіденційність"
 
 #: panels/privacy/cc-privacy-panel.ui:43
-#| msgid "Screen Lock"
 msgid "_Screen Lock"
 msgstr "Б_локування екрана"
 
 #: panels/privacy/cc-privacy-panel.ui:44
-#| msgid "Automatic Screen _Lock"
 msgid "Automatic screen lock"
 msgstr "Автоматично блокувати екран"
 
@@ -6072,7 +6021,6 @@ msgid "Control access to your location"
 msgstr "Керування доступом до даних щодо вашого перебування"
 
 #: panels/privacy/cc-privacy-panel.ui:67
-#| msgid "File History & Trash"
 msgid "_File History &amp; Trash"
 msgstr "_Журнал файлів та смітник"
 
@@ -6081,52 +6029,42 @@ msgid "Remove saved data and files"
 msgstr "Вилучити збережені дані і файли"
 
 #: panels/privacy/cc-privacy-panel.ui:79
-#| msgid "Diagnostics"
 msgid "_Diagnostics"
 msgstr "Ді_агностика"
 
 #: panels/privacy/cc-privacy-panel.ui:80
-#| msgid "_Automatic Problem Reporting"
 msgid "Automatic problem reporting"
 msgstr "_Автоматичне звітування про проблеми"
 
 #: panels/privacy/cc-privacy-panel.ui:100
-#| msgid "Cameras"
 msgid "_Cameras"
 msgstr "_Камери"
 
 #: panels/privacy/cc-privacy-panel.ui:101
-#| msgid "Restrict camera access"
 msgid "Control camera access"
 msgstr "Керування доступом до камер"
 
 #: panels/privacy/cc-privacy-panel.ui:112
-#| msgid "Microphones"
 msgid "_Microphones"
 msgstr "_Мікрофони"
 
 #: panels/privacy/cc-privacy-panel.ui:113
-#| msgid "Restrict microphone access"
 msgid "Control microphone access"
 msgstr "Керування доступом до мікрофонів"
 
 #: panels/privacy/cc-privacy-panel.ui:125
-#| msgid "Thunderbolt"
 msgid "_Thunderbolt"
 msgstr "_Thunderbolt"
 
 #: panels/privacy/cc-privacy-panel.ui:126
-#| msgid "Manage Thunderbolt device access"
 msgid "Manage device access"
 msgstr "Керування доступом до пристроїв"
 
 #: panels/privacy/cc-privacy-panel.ui:137
-#| msgid "Device Security"
 msgid "Device _Security"
 msgstr "_Безпека пристрою"
 
 #: panels/privacy/cc-privacy-panel.ui:138
-#| msgid "Host firmware security status"
 msgid "Hardware security status and information"
 msgstr "Стан апаратного захисту та відомості щодо нього"
 
@@ -6491,11 +6429,11 @@ msgid ""
 msgstr ""
 "Privacy;Screen;Lock;Private;Usage;Recent;History;Files;Temporary;Tmp;Trash;"
 "Purge;Retain;Diagnostics;Crash;Location;Gps;Camera;Photos;Video;Webcam;"
-"Microphone;Recording;Security;Firmware;Thunderbolt;конфіденційність;екран;бло"
-"кування;приватний;користування;нещодавні;недавні;журнал;файли;тимчасові;смітн"
-"ик;кошик;спорожнити;очистити;зберегти;діагностика;аварія;місце;перебування;ка"
-"мера;фотоапарат;фотографії;світлини;відео;вебкамера;мікрофон;запис;записуванн"
-"я;безпека;мікропрограма;тандерболт;"
+"Microphone;Recording;Security;Firmware;Thunderbolt;конфіденційність;екран;"
+"блокування;приватний;користування;нещодавні;недавні;журнал;файли;тимчасові;"
+"смітник;кошик;спорожнити;очистити;зберегти;діагностика;аварія;місце;"
+"перебування;камера;фотоапарат;фотографії;світлини;відео;вебкамера;мікрофон;"
+"запис;записування;безпека;мікропрограма;тандерболт;"
 
 #: panels/region/cc-format-chooser.c:148 panels/region/cc-format-chooser.c:196
 #: panels/region/cc-format-chooser.ui:4
@@ -9447,6 +9385,49 @@ msgstr[3] "%u вхід"
 #: subprojects/gvc/gvc-mixer-control.c:2882
 msgid "System Sounds"
 msgstr "Системні звуки"
+
+#~| msgctxt "Signal strength"
+#~| msgid "Good"
+#~ msgid "Good"
+#~ msgstr "Добрий"
+
+#~| msgid "_OK"
+#~ msgid "OK"
+#~ msgstr "Гаразд"
+
+#~ msgid "Poor"
+#~ msgstr "Поганий"
+
+#, c-format
+#~| msgid "Battery"
+#~ msgid "Battery %d"
+#~ msgstr "Акумулятор %d"
+
+#, c-format
+#~ msgid "%d%%"
+#~ msgstr "%d%%"
+
+#~ msgid "Health Rating"
+#~ msgstr "Рівень зношеності"
+
+#~| msgid "Disk Capacity"
+#~ msgid "Battery Capacity"
+#~ msgstr "Місткість акумулятора"
+
+#~| msgid "Battery"
+#~ msgid "_Battery Health"
+#~ msgstr "_Рівень зношеності"
+
+#~| msgid "Battery"
+#~ msgid "Battery Health"
+#~ msgstr "Рівень зношеності"
+
+#~ msgid ""
+#~ "Current capacity indicates how much charge the battery can currently "
+#~ "store, compared to when it was new."
+#~ msgstr ""
+#~ "Поточна місткість вказує на те, скільки заряду акумулятор здатен "
+#~ "накопичити, порівняно із новим акумулятором."
 
 #~ msgid "camera;photos;video;webcam;lock;private;privacy;"
 #~ msgstr ""
