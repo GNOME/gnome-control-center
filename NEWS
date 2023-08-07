@@ -1,3 +1,59 @@
+===============
+Version 45.beta
+===============
+
+- Prevent loading last-panel unconditionally on startup
+- Multiple settings rows got ported to use the AdwSwitchRow widget
+- Various accessibility label fixes
+- Various memory leak fixes
+
+About
+- New About panel displaying system information in a more compact way
+
+Applications
+- Fix crash when opening the Apps panel as the last-opened panel
+
+Datetime
+- Add description explaining the "Clock & Calendar" settings
+
+Displays
+- Replace deprecated GtkComboBox with AdwComboRow
+
+Keyboard
+- Fix "Move up/down" movement options in the input list
+- Spawn "tecla" app to display the keyboard map (replaces gkbd-keyboard-display)
+- Fix alignment of the "Set Shorcut..." button
+
+Network
+- Use an AdwSwitchRow widget to enable/disable Wi-Fi
+
+Online Accounts
+- Improve "offiline" message text
+- Use banner to indicate when the system is offline
+- Add panel description text and section titles
+
+Sound
+- Make output test whell smaller
+- Ellipsize long device name label
+
+Printers
+- Use the "card" style for printer entries
+
+Privacy
+- New Privacy panel containing all the panels under the Privacy category
+
+Region
+- Fix preview buttoins in the format chooser
+
+Search
+- Fix "Move up/down" movement options in the app search list
+
+Users
+- Show "Other Users" section only when there are users to show
+- Make entire panel insensitive when the user has no permission to make changes
+- Fix focus issues when selecting avatar image from a file
+- Fix g_critical errors when loading file metadata for avatars
+
 ================
 Version 45.alpha
 ================
