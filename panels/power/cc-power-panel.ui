@@ -71,27 +71,6 @@
           </object>
         </child>
         <child>
-          <object class="AdwPreferencesGroup" id="battery_health_section">
-            <property name="visible">False</property>
-            <child>
-              <object class="CcListRow" id="battery_health_row">
-                <property name="title" translatable="yes">_Battery Health</property>
-                <property name="use_underline">True</property>
-                <property name="activatable">True</property>
-                <property name="show-arrow">True</property>
-                <signal name="activated" handler="battery_health_row_activated_cb" swapped="yes"/>
-              </object>
-            </child>
-            <signal name="keynav-failed" handler="keynav_failed_cb" object="CcPowerPanel" swapped="yes"/>
-            <accessibility>
-              <relation name="labelled-by">battery_health_section</relation>
-            </accessibility>
-            <style>
-              <class name="boxed-list"/>
-            </style>
-          </object>
-        </child>
-        <child>
           <object class="AdwPreferencesGroup" id="device_section">
             <property name="title" translatable="yes">Devices</property>
             <child>
@@ -382,36 +361,5 @@
         </child>
       </object>
     </child>
-  </object>
-
-  <object class="AdwWindow" id="battery_health_dialog">
-    <property name="modal">True</property>
-    <property name="width-request">360</property>
-    <property name="height-request">294</property>
-    <property name="default-width">600</property>
-    <property name="default-height">540</property>
-    <property name="title" translatable="yes">Battery Health</property>
-    <property name="resizable">False</property>
-    <property name="hide-on-close">True</property>
-    <property name="content">
-      <object class="GtkBox">
-        <property name="orientation">vertical</property>
-        <child>
-          <object class="AdwHeaderBar">
-            <property name="show-start-title-buttons">True</property>
-            <property name="show-end-title-buttons">True</property>
-          </object>
-        </child>
-        <child>
-          <object class="AdwPreferencesPage" id="battery_health_page">
-            <property name="description" translatable="yes">Current capacity indicates how much charge the battery can currently store, compared to when it was new.</property>
-            <signal name="keynav-failed" handler="keynav_failed_cb" object="CcPowerPanel" swapped="yes"/>
-            <style>
-              <class name="boxed-list"/>
-            </style>
-          </object>
-        </child>
-      </object>
-    </property>
   </object>
 </interface>
