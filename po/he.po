@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center.HEAD.he\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2023-07-27 23:02+0000\n"
-"PO-Revision-Date: 2023-07-28 08:59+0300\n"
+"POT-Creation-Date: 2023-08-07 13:31+0000\n"
+"PO-Revision-Date: 2023-08-08 17:06+0300\n"
 "Last-Translator: Yosef Or Boczko <yoseforb@gmail.com>\n"
 "Language-Team: Hebrew <yoseforb@gmail.com>\n"
 "Language: he\n"
@@ -40,8 +40,8 @@ msgid "Session Bus"
 msgstr "אפיק הפעלה"
 
 #: panels/applications/cc-applications-panel.c:827
-#: panels/power/cc-power-panel.ui:75 panels/thunderbolt/cc-bolt-panel.ui:233
-#: panels/thunderbolt/cc-bolt-panel.ui:277
+#: panels/power/cc-power-panel.ui:75 panels/privacy/cc-bolt-page.ui:241
+#: panels/privacy/cc-bolt-page.ui:285 panels/privacy/cc-privacy-panel.ui:96
 msgid "Devices"
 msgstr "התקנים"
 
@@ -79,8 +79,8 @@ msgstr "מערכת הפעלה"
 
 #: panels/applications/cc-applications-panel.c:847
 #: panels/keyboard/01-launchers.xml.in:6
-#: shell/appdata/org.gnome.Settings.appdata.xml.in:7 shell/cc-window.c:246
-#: shell/cc-window.c:918 shell/cc-window.ui:22
+#: shell/appdata/org.gnome.Settings.appdata.xml.in:7 shell/cc-window.c:242
+#: shell/cc-window.c:911 shell/cc-window.ui:23
 #: shell/org.gnome.Settings.desktop.in:3
 msgid "Settings"
 msgstr "הגדרות"
@@ -148,8 +148,8 @@ msgstr "_פרטי יישום"
 #: panels/keyboard/cc-input-chooser.ui:76
 #: panels/printers/new-printer-dialog.ui:230
 #: panels/region/cc-format-chooser.ui:82
-#: panels/search/gnome-search-panel.desktop.in:3 shell/cc-window.ui:41
-#: shell/cc-window.ui:43
+#: panels/search/gnome-search-panel.desktop.in:3 shell/cc-window.ui:42
+#: shell/cc-window.ui:44
 msgid "Search"
 msgstr "חיפוש"
 
@@ -256,7 +256,7 @@ msgstr "הקלטת שמע עם המיקרופון"
 
 #: panels/applications/cc-applications-panel.ui:206
 #: panels/applications/cc-applications-panel.ui:213
-#: panels/location/gnome-location-panel.desktop.in:3
+#: panels/privacy/cc-location-page.ui:4
 msgid "Location Services"
 msgstr "שירותי איכון"
 
@@ -287,11 +287,11 @@ msgstr "אחסון"
 msgid "Search apps"
 msgstr "חיפוש יישומים"
 
-#: panels/applications/cc-applications-panel.ui:305 shell/cc-panel-list.ui:109
+#: panels/applications/cc-applications-panel.ui:305 shell/cc-panel-list.ui:64
 msgid "No results found"
 msgstr "לא נמצאו תוצאות"
 
-#: panels/applications/cc-applications-panel.ui:315 shell/cc-panel-list.ui:118
+#: panels/applications/cc-applications-panel.ui:315 shell/cc-panel-list.ui:73
 msgid "Try a different search"
 msgstr "יש לנסות חיפוש שונה"
 
@@ -461,46 +461,6 @@ msgstr "הפעלה וכיבוי של הבלוטות' והתחברות להתקנ
 msgid "share;sharing;bluetooth;obex;"
 msgstr "שיתוף;לשתף;Bluetooth;obex;בלוטות';"
 
-#: panels/camera/cc-camera-panel.ui:11
-msgid "_Camera Access"
-msgstr "גישה ל_מצלמה"
-
-#: panels/camera/cc-camera-panel.ui:12
-msgid "Allow permitted apps to use cameras"
-msgstr "לאפשר ליישומים מאושרים לגשת למצלמה"
-
-#: panels/camera/cc-camera-panel.ui:21 panels/location/cc-location-panel.ui:22
-#: panels/microphone/cc-microphone-panel.ui:21
-msgid "Permitted Apps"
-msgstr "יישומים מאושרים"
-
-#: panels/camera/cc-camera-panel.ui:22
-msgid ""
-"The following sandboxed apps have been given permission to use cameras. Apps "
-"that are not sandboxed can use cameras without asking for permission."
-msgstr ""
-"היישומים המבודדים הבאים קיבלו גישה למצלמה. יישומים שאינם מבודדים יכולים לגשת "
-"למצלמה ללא בקשת אישור."
-
-#: panels/camera/cc-camera-panel.ui:36
-msgid "No sandboxed apps have asked for camera access"
-msgstr "אף יישום מבודד לא ביקש גישה למצלמה"
-
-#: panels/camera/gnome-camera-panel.desktop.in:3
-msgid "Cameras"
-msgstr "מצלמה"
-
-#: panels/camera/gnome-camera-panel.desktop.in:4
-msgid "Restrict camera access"
-msgstr "הגבלת גישה למצלמה"
-
-#. Translators: Search terms to find the Cameras panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
-#: panels/camera/gnome-camera-panel.desktop.in:16
-msgid "camera;photos;video;webcam;lock;private;privacy;"
-msgstr ""
-"מצלמה;תמונות;תמונה;וידאו;סרט;סרטון;סרטים;מצלמת רשת;מצלמת אינטרנט;נעילה;מנעול;"
-"פרטיות;פרטי;"
-
 #. TRANSLATORS: The user has to attach the sensor to the screen
 #: panels/color/cc-color-calibrate.c:347
 msgid "Place your calibration device over the square and press “Start”"
@@ -590,9 +550,8 @@ msgstr "כיול התצוגה"
 #: panels/network/connection-editor/connection-editor.ui:14
 #: panels/network/net-device-wifi.c:862
 #: panels/printers/new-printer-dialog.ui:50
-#: panels/printers/pp-details-dialog.c:267
+#: panels/printers/pp-details-dialog.c:267 panels/privacy/cc-usage-page.c:136
 #: panels/region/cc-format-chooser.ui:24 panels/sharing/cc-sharing-panel.c:447
-#: panels/usage/cc-usage-panel.c:139
 #: panels/user-accounts/cc-add-user-dialog.ui:25
 #: panels/user-accounts/cc-avatar-chooser.c:96
 #: panels/user-accounts/cc-fingerprint-dialog.ui:32
@@ -748,8 +707,7 @@ msgstr "סוג ההתקן אינו נתמך נכון לעכשיו."
 
 #. Translators: This will be presented as the text of a link to the documentation
 #. translators: Text used in link to privacy policy
-#: panels/color/cc-color-panel.c:1991
-#: panels/diagnostics/cc-diagnostics-panel.c:137
+#: panels/color/cc-color-panel.c:1991 panels/privacy/cc-diagnostics-page.c:122
 msgid "Learn more"
 msgstr "מידע נוסף"
 
@@ -1365,67 +1323,71 @@ msgstr "_תבנית זמן"
 msgid "Clock &amp; Calendar"
 msgstr "שעון ולוח שנה"
 
-#: panels/datetime/cc-datetime-panel.ui:217
+#: panels/datetime/cc-datetime-panel.ui:215
+msgid "Control how the time and date is shown in the top bar"
+msgstr "שליטה על הצגת התאריך והשעה בלוח העליון"
+
+#: panels/datetime/cc-datetime-panel.ui:218
 msgid "Week Day"
 msgstr "יום בשבוע"
 
-#: panels/datetime/cc-datetime-panel.ui:229
+#: panels/datetime/cc-datetime-panel.ui:230
 msgid "Date"
 msgstr "תאריך"
 
-#: panels/datetime/cc-datetime-panel.ui:241
+#: panels/datetime/cc-datetime-panel.ui:242
 msgid "Seconds"
 msgstr "שניות"
 
-#: panels/datetime/cc-datetime-panel.ui:253
+#: panels/datetime/cc-datetime-panel.ui:254
 msgid "Week Numbers"
 msgstr "מספרי שבועות"
 
-#: panels/datetime/cc-datetime-panel.ui:294
+#: panels/datetime/cc-datetime-panel.ui:295
 msgid "January"
 msgstr "ינואר"
 
-#: panels/datetime/cc-datetime-panel.ui:295
+#: panels/datetime/cc-datetime-panel.ui:296
 msgid "February"
 msgstr "פברואר"
 
-#: panels/datetime/cc-datetime-panel.ui:296
+#: panels/datetime/cc-datetime-panel.ui:297
 msgid "March"
 msgstr "מרץ"
 
-#: panels/datetime/cc-datetime-panel.ui:297
+#: panels/datetime/cc-datetime-panel.ui:298
 msgid "April"
 msgstr "אפריל"
 
-#: panels/datetime/cc-datetime-panel.ui:298
+#: panels/datetime/cc-datetime-panel.ui:299
 msgid "May"
 msgstr "מאי"
 
-#: panels/datetime/cc-datetime-panel.ui:299
+#: panels/datetime/cc-datetime-panel.ui:300
 msgid "June"
 msgstr "יוני"
 
-#: panels/datetime/cc-datetime-panel.ui:300
+#: panels/datetime/cc-datetime-panel.ui:301
 msgid "July"
 msgstr "יולי"
 
-#: panels/datetime/cc-datetime-panel.ui:301
+#: panels/datetime/cc-datetime-panel.ui:302
 msgid "August"
 msgstr "אוגוסט"
 
-#: panels/datetime/cc-datetime-panel.ui:302
+#: panels/datetime/cc-datetime-panel.ui:303
 msgid "September"
 msgstr "ספטמבר"
 
-#: panels/datetime/cc-datetime-panel.ui:303
+#: panels/datetime/cc-datetime-panel.ui:304
 msgid "October"
 msgstr "אוקטובר"
 
-#: panels/datetime/cc-datetime-panel.ui:304
+#: panels/datetime/cc-datetime-panel.ui:305
 msgid "November"
 msgstr "נובמבר"
 
-#: panels/datetime/cc-datetime-panel.ui:305
+#: panels/datetime/cc-datetime-panel.ui:306
 msgid "December"
 msgstr "דצמבר"
 
@@ -1508,37 +1470,6 @@ msgstr "הגדרת יישומי בררת המחדל"
 msgid "default;application;preferred;media;"
 msgstr "ברירת מחדל;בררת מחדל;דפאולט;יישום;יישומים;מאפיינים;הגדרות;הגדרה;מדיה;"
 
-#. translators: The first '%s' is the distributor's name, such as 'Fedora', the second '%s' is a link to the privacy policy
-#: panels/diagnostics/cc-diagnostics-panel.c:139
-#, c-format
-msgid ""
-"Sending reports of technical problems helps us improve %s. Reports are sent "
-"anonymously and are scrubbed of personal data. %s"
-msgstr ""
-"שליחת דיווחים על בעיות טכניות תעזור לנו לשפר את %s. הדיווחים נשלחים בעילום "
-"שם וללא מידע אישי. %s"
-
-#: panels/diagnostics/cc-diagnostics-panel.ui:8
-msgid "Problem Reporting"
-msgstr "דיווח על בעיות"
-
-#: panels/diagnostics/cc-diagnostics-panel.ui:11
-msgid "_Automatic Problem Reporting"
-msgstr "דיווח בעיות _אוטומטית"
-
-#: panels/diagnostics/gnome-diagnostics-panel.desktop.in:3
-msgid "Diagnostics"
-msgstr "אבחון"
-
-#: panels/diagnostics/gnome-diagnostics-panel.desktop.in:4
-msgid "Settings for automatically problem reporting"
-msgstr "הגדרות לדיווח אוטומטי של בעיות"
-
-#. Translators: Search terms to find the Diagnostics panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
-#: panels/diagnostics/gnome-diagnostics-panel.desktop.in:16
-msgid "diagnostics;crash;"
-msgstr "אבחון;אבחנה;קריסה;"
-
 #: panels/display/cc-display-panel.c:495
 #: panels/notifications/cc-notifications-panel.c:214
 #: panels/power/cc-power-panel.c:743 panels/power/cc-power-panel.c:750
@@ -1570,7 +1501,7 @@ msgstr "אולי זה קשור למגבלות חומרה."
 #: panels/mouse/cc-mouse-panel.ui:17 panels/mouse/cc-mouse-panel.ui:23
 #: panels/network/cc-network-panel.ui:17 panels/network/cc-wifi-panel.ui:11
 #: panels/network/cc-wifi-panel.ui:17 panels/printers/new-printer-dialog.ui:64
-#: panels/region/cc-format-chooser.ui:37
+#: panels/privacy/cc-privacy-panel.ui:28 panels/region/cc-format-chooser.ui:37
 #: panels/universal-access/cc-ua-panel.ui:16
 #: panels/universal-access/cc-ua-panel.ui:20
 #: panels/user-accounts/cc-fingerprint-dialog.ui:44
@@ -1646,7 +1577,7 @@ msgstr "‏%.2lf הרץ"
 #. TRANSLATORS: if the function is enabled through BIOS or OS settings.
 #. TRANSLATORS: Status of Parental Controls setup
 #: panels/display/cc-display-settings.ui:23
-#: panels/firmware-security/cc-firmware-security-utils.c:45
+#: panels/privacy/cc-firmware-security-utils.c:45
 #: panels/user-accounts/cc-user-panel.c:767
 #: panels/user-accounts/cc-user-panel.c:889
 #: panels/wwan/cc-wwan-device-page.c:475
@@ -1783,418 +1714,17 @@ msgstr ""
 "לוח;מקרן;xrandr;צג;מסך;רזולוציה;הבחנה;רענון;צג;לילה;אור;תאורה;כחול;היסט "
 "לאדום;צבע;שקיעה;זריחה;"
 
-#. TRANSLATORS: secure boot refers to the system firmware security mode
-#: panels/firmware-security/cc-firmware-security-boot-dialog.c:74
-#: panels/firmware-security/cc-firmware-security-panel.c:119
-msgid "Secure Boot is Active"
-msgstr "הפעלה מאובטחת פעילה"
-
-#. TRANSLATORS: this is the first section of the decription
-#: panels/firmware-security/cc-firmware-security-boot-dialog.c:79
-msgid ""
-"Secure boot prevents malicious software from being loaded when the device "
-"starts. It is currently turned on and is functioning correctly."
-msgstr ""
-"הפעלה מאובטחת מגנה מפני טעינה של תכנה זדונית עם הפעלת ההתקן. היא פעילה כעת "
-"ופועלת בצורה תקינה."
-
-#. TRANSLATORS: secure boot refers to the system firmware security mode
-#: panels/firmware-security/cc-firmware-security-boot-dialog.c:85
-msgid "Secure Boot Has Problems"
-msgstr "יש בעיות בהפעלה מאובטחת"
-
-#. TRANSLATORS: this is the first section of the decription.
-#: panels/firmware-security/cc-firmware-security-boot-dialog.c:89
-msgid ""
-"Secure boot prevents malicious software from being loaded when the device "
-"starts. It is currently turned on, but will not work due to having an "
-"invalid key."
-msgstr ""
-"הפעלה מאובטחת מגנה מפני טעינה של תכנה זדונית עם הפעלת ההתקן. היא פעילה כעת, "
-"אך לא תעבוד עקב מפתח לא תקף."
-
-#. TRANSLATORS: this is the second section of description.
-#: panels/firmware-security/cc-firmware-security-boot-dialog.c:92
-msgid ""
-"Secure boot problems can often be resolved from your computer's UEFI "
-"firmware settings (BIOS) and your hardware manufacturer may provide "
-"information on how to do this."
-msgstr ""
-"לעתים קרובות ניתן לפתור בעיות בהפעלה מאובטחת מהגדרות קָשְחת UEFI ‏(BIOS) של "
-"המחשב. יצרן החָמְרָה שלך עשוי לספק מידע כיצד לעשות זאת."
-
-#. TRANSLATORS: this is the third section of description.
-#: panels/firmware-security/cc-firmware-security-boot-dialog.c:95
-msgid "For help, contact your hardware manufacturer or IT support provider."
-msgstr "לעזרה, יש ליצור קשר עם יצרן החָמְרָה או עם תמיכת ה־IT של הספק."
-
-#. TRANSLATORS: secure boot refers to the system firmware security mode
-#: panels/firmware-security/cc-firmware-security-boot-dialog.c:101
-msgid "Secure Boot is Turned Off"
-msgstr "הפעלה מאובטחת אינה פעילה"
-
-#. TRANSLATORS: this is the first section of the description.
-#: panels/firmware-security/cc-firmware-security-boot-dialog.c:105
-msgid ""
-"Secure boot prevents malicious software from being loaded when the device "
-"starts. It is currently turned off."
-msgstr ""
-"הפעלה מאובטחת מגנה מפני טעינה של תכנה זדונית עם הפעלת ההתקן. היא אינה פעילת "
-"כעת."
-
-#. TRANSLATORS: this is the second section of the description.
-#: panels/firmware-security/cc-firmware-security-boot-dialog.c:108
-msgid ""
-"Secure boot can often be turned on from your computer's UEFI firmware "
-"settings (BIOS). For help, contact your hardware manufacturer or IT support "
-"provider."
-msgstr ""
-"לעתים קרובות ניתן להפעיל את ההפעלה המאובטחת מהגדרות קָשְחת UEFI ‏(BIOS) של "
-"המחשב. למידע נוסף, יש ליצור קשר עם יצרן החָמְרָה או עם תמיכת ה־IT של הספק."
-
-#: panels/firmware-security/cc-firmware-security-boot-dialog.ui:53
-msgid ""
-"Secure boot prevents malicious software from being loaded when the device "
-"starts.\n"
-"\n"
-"For more information, contact the hardware manufacturer or IT support."
-msgstr ""
-"הפעלה מאובטחת מגנה מפני טעינה של תכנה זדונית עם הפעלת ההתקן.\n"
-"\n"
-"למידע נוסף, יש ליצור קשר עם יצרן החומרה או עם תמיכת IT."
-
-#. TRANSLATORS: in reference to firmware protection: 0/4 stars
-#: panels/firmware-security/cc-firmware-security-dialog.c:113
-#: panels/firmware-security/cc-firmware-security-panel.c:542
-msgid "Checks Failed"
-msgstr "בדיקות נכשלו"
-
-#. TRANSLATORS: This is the description to describe the failure on
-#. checking the security items.
-#: panels/firmware-security/cc-firmware-security-dialog.c:116
-msgid ""
-"Hardware does not pass checks. This means that you are not protected against "
-"common hardware security issues.\n"
-"\n"
-"It may be possible to resolve hardware security issues by updating your "
-"firmware or changing device configuration options. However, failures can "
-"stem from the physical hardware itself, and may not be reversible."
-msgstr ""
-"החָמְרה לא עברה את הבדיקות. המשמעות לכך היא שההתקן שלך לא מוגן מפני בעיות "
-"אבטחה נפוצות.\n"
-"\n"
-"יתכן וניתן לפתור בעיות אבטחת חָמְרה אלו על ידי עדכון הקָשְחה או עם שינוי "
-"אפשרויות תצורת ההתקן. אולם, כישלון עשוי לנבוע מהחָמְרה הפיזית עצמה, ואף יתכן "
-"שהוא אינו הפיך."
-
-#. TRANSLATORS: in reference to firmware protection: 1/4 stars
-#: panels/firmware-security/cc-firmware-security-dialog.c:127
-#: panels/firmware-security/cc-firmware-security-panel.c:549
-msgid "Checks Passed"
-msgstr "בדיקה עברה"
-
-#. TRANSLATORS: This description describes the device passing the
-#. minimum requirement of security check.
-#: panels/firmware-security/cc-firmware-security-dialog.c:130
-msgid ""
-"This device meets basic security requirements. Its hardware has protection "
-"against some of the most common security threats."
-msgstr ""
-"התקן החָמְרָה עומד בדרישות אבטחה בסיסיות. לחָמְרָה זו הגנה מפני מנעד של מרבית "
-"איומי האבטחה הנפוצים."
-
-#. TRANSLATORS: in reference to firmware protection: 2~4 stars
-#: panels/firmware-security/cc-firmware-security-dialog.c:141
-#: panels/firmware-security/cc-firmware-security-panel.c:558
-msgid "Protected"
-msgstr "מוגן"
-
-#. TRANSLATOR: This description describes the devices passing
-#. the extended security check.
-#: panels/firmware-security/cc-firmware-security-dialog.c:144
-msgid ""
-"This device passes current security tests. Its hardware is protected against "
-"the majority of security threats."
-msgstr ""
-"התקן זה עבר את בדיקות האבטחה הנוכחיות. להתקן חָמְרה זה הגנה מפני מרבית איומי "
-"האבטחה."
-
-#. TRANSLATORS: in reference to firmware protection: ??? stars
-#: panels/firmware-security/cc-firmware-security-dialog.c:152
-#: panels/firmware-security/cc-firmware-security-panel.c:565
-msgid "Checks Unavailable"
-msgstr "בדיקות לא זמינות"
-
-#. TRANSLATORS: When the security result is unavailable, this description is shown.
-#: panels/firmware-security/cc-firmware-security-dialog.c:154
-msgid ""
-"Device security checks are not available for this device. It is not possible "
-"to tell whether it meets security requirements."
-msgstr ""
-"בדיקת אבטחת התקן אינה זמינה להתקן זה. לא ניתן לדעת האם ההתקן עומד בדרישות "
-"האבטחה."
-
 #. Translators: Unknown endpoint host for WireGuard (invalid setting)
-#: panels/firmware-security/cc-firmware-security-dialog.c:185
 #: panels/info-overview/cc-info-overview-panel.c:78
 #: panels/info-overview/cc-system-details-window.c:272
 #: panels/info-overview/cc-system-details-window.c:324
 #: panels/info-overview/cc-system-details-window.c:894
 #: panels/network/connection-editor/ce-page-wireguard.c:368
+#: panels/privacy/cc-firmware-security-dialog.c:168
 #: panels/sound/cc-alert-chooser-window.c:352
 #: panels/wwan/cc-wwan-details-dialog.c:100
 msgid "Unknown"
 msgstr "לא ידוע"
-
-#: panels/firmware-security/cc-firmware-security-dialog.c:384
-msgid "Report copied to clipboard"
-msgstr "הדיווח הועתק ללוח הגזירים"
-
-#: panels/firmware-security/cc-firmware-security-dialog.ui:22
-msgid "Device Security Status"
-msgstr "מצב אבטחת התקן"
-
-#: panels/firmware-security/cc-firmware-security-dialog.ui:88
-msgid "_Copy Technical Report"
-msgstr "ה_עתקת דו״ח טכני"
-
-#: panels/firmware-security/cc-firmware-security-help-dialog.ui:6
-msgid "About Device Security"
-msgstr "על אודות אבטחת התקן"
-
-#: panels/firmware-security/cc-firmware-security-help-dialog.ui:31
-msgid ""
-"Device security provides information about how protected your device is "
-"against security issues which target the hardware itself."
-msgstr ""
-"אבטחת התקן מספקת מידע על ההגנה של ההתקן שלך נגד בעיות אבטחה המיועדות לחָמְרה "
-"עצמה."
-
-#: panels/firmware-security/cc-firmware-security-help-dialog.ui:51
-msgid "Aspects of hardware that affect security include:"
-msgstr "הֶבטים של חָמְרה שמשפיעים על האבטחה כוללים:"
-
-#: panels/firmware-security/cc-firmware-security-help-dialog.ui:69
-msgid "• security features that are built into a hardware itself;"
-msgstr "• מאפייני אבטחה שנבנו לתוך החָמְרה עצמה;"
-
-#: panels/firmware-security/cc-firmware-security-help-dialog.ui:79
-msgid "• how the hardware is configured to protect against security issues;"
-msgstr "• כיצד החָמְרה מוגדרת להגן נגד בעיות אבטחה;"
-
-#: panels/firmware-security/cc-firmware-security-help-dialog.ui:89
-msgid "• the security of the software runs directly on the hardware."
-msgstr "• אבטחת התכנה שרצה ישירות על החָמְרה."
-
-#: panels/firmware-security/cc-firmware-security-help-dialog.ui:107
-msgid ""
-"Security threats which affect hardware include malware and viruses that "
-"target the software that runs directly on the hardware. It also includes "
-"physical tampering, such as physical connection to the hardware to read data "
-"and implant malware."
-msgstr ""
-"איומי אבטחה אשר משפיעים על חָמְרה כוללים נוֹזְקוֹת ווירוסים המיועדים לתכנה שרצה "
-"ישירות על החָמְרה, וזאת לרבות מגע פיזי, כמו התחברות פיזית לחָמְרה לקריאת מידע "
-"והשתלת נוֹזְקָה."
-
-#: panels/firmware-security/cc-firmware-security-help-dialog.ui:125
-msgid ""
-"Device security is just one aspect of security, and does not reflect the "
-"overall security status of the system and applications."
-msgstr ""
-"אבטחת ההתקן מהווה רק הבט אחד של האבטחה, ואינה משקפת את מצב האבטחה הכולל של "
-"המערכת והיישומים."
-
-#: panels/firmware-security/cc-firmware-security-panel.c:120
-msgid "Protected against malicious software when the device starts."
-msgstr "הגנה כנגד תכנות זדוניות בזמן הפעלת ההתקן."
-
-#: panels/firmware-security/cc-firmware-security-panel.c:126
-msgid "Secure Boot has Problems"
-msgstr "יש בעיות בהפעלה מאובטחת"
-
-#: panels/firmware-security/cc-firmware-security-panel.c:127
-msgid "Some protection when the device is started."
-msgstr "קצת הגנה בזמן שההתקן מופעל."
-
-#: panels/firmware-security/cc-firmware-security-panel.c:132
-msgid "Secure Boot is Off"
-msgstr "הפעלה מאובטחת כבויה"
-
-#: panels/firmware-security/cc-firmware-security-panel.c:133
-msgid "No protection when the device is started."
-msgstr "אין הגנה בזמן שההתקן מופעל."
-
-#. TRANSLATORS: this is to explain an event that has already happened
-#: panels/firmware-security/cc-firmware-security-panel.c:152
-msgid ""
-"This issue could have been caused by a change in UEFI firmware settings, an "
-"operating system configuration change, or because of malicious software on "
-"this system."
-msgstr ""
-"יתכן ובעיה זו נגרמה בגלל שינוי בהגדרות קָשְחת UEFI, שינוי תצורת מערכת ההפעלה "
-"או בגלל תכנה זדונית במערכת זו."
-
-#. TRANSLATORS: this is to explain an event that has already happened
-#: panels/firmware-security/cc-firmware-security-panel.c:160
-msgid ""
-"This issue could have been caused by a change in the UEFI firmware settings, "
-"or because of malicious software on this system."
-msgstr ""
-"יתכן ובעיה זו נגרמה בגלל שינוי בהגדרות קָשְחת UEFI או בגלל תכנה זדונית במערכת "
-"זו."
-
-#. TRANSLATORS: this is to explain an event that has already happened
-#: panels/firmware-security/cc-firmware-security-panel.c:167
-msgid ""
-"This issue could have been caused by an operating system configuration "
-"change, or because of malicious software on this system."
-msgstr ""
-"יתכן ובעיה זו נגרמה בגלל שינוי תצורת מערכת ההפעלה או בגלל תכנה זדונית במערכת "
-"זו."
-
-#. TRANSLATOR: this is the date in "%Y-%m-%d %H:%M:%S" format,
-#. for example: 2022-08-01 22:48:00
-#: panels/firmware-security/cc-firmware-security-panel.c:225
-#, c-format
-msgid "%1$s"
-msgstr "%1$s"
-
-#. TRANSLATOR: This is the text event status output when the event status is "success"
-#: panels/firmware-security/cc-firmware-security-panel.c:231
-msgid "Pass"
-msgstr "עבר"
-
-#. TRANSLATOR: This is the text event status output when the event status is not "success"
-#: panels/firmware-security/cc-firmware-security-panel.c:234
-msgid "! Fail"
-msgstr "! נכשל"
-
-# msgctxt "timezone loc"
-#: panels/firmware-security/cc-firmware-security-panel.c:237
-#, c-format
-msgid "(%1$s → %2$s)"
-msgstr "‏‏(%1$s ← %2$s)"
-
-#: panels/firmware-security/cc-firmware-security-panel.c:543
-msgid "Hardware does not pass checks."
-msgstr "החָמְרה לא עברה בדיקות."
-
-#: panels/firmware-security/cc-firmware-security-panel.c:550
-msgid "Hardware meets basic security requirements."
-msgstr "החָמְרה עומדת בדרישות האבטחה הבסיסיות."
-
-#: panels/firmware-security/cc-firmware-security-panel.c:559
-msgid "Hardware has a good level of protection."
-msgstr "לחָמְרה רמת אבטחה טובה."
-
-#: panels/firmware-security/cc-firmware-security-panel.c:566
-msgid "Security levels are not available for this device."
-msgstr "רמות אבטחה אינן זמינות עבור התקן זה."
-
-#: panels/firmware-security/cc-firmware-security-panel.ui:50
-msgid "Starting Device Security…"
-msgstr "מתחיל אבטחת התקן…"
-
-#: panels/firmware-security/cc-firmware-security-panel.ui:76
-msgid "Device Security Unavailable"
-msgstr "אבטחת התקן אינה זמינה"
-
-#: panels/firmware-security/cc-firmware-security-panel.ui:78
-msgid ""
-"Device Security is only available on physical hardware. No physical hardware "
-"has been detected."
-msgstr "אבטחת התקן זמינה רק על חָמְרה פיזית. לא זוהתה חָמְרה פיזית."
-
-#: panels/firmware-security/cc-firmware-security-panel.ui:216
-msgid "Security Events"
-msgstr "אירועי אבטחה"
-
-#: panels/firmware-security/cc-firmware-security-panel.ui:226
-msgid "No Events"
-msgstr "אין אירועים"
-
-#. TRANSLATORS: if the stauts is valid. For example security check is valid and key is valid.
-#: panels/firmware-security/cc-firmware-security-utils.c:35
-msgid "Valid"
-msgstr "תקף"
-
-#. TRANSLATORS: if the status or key is not valid.
-#: panels/firmware-security/cc-firmware-security-utils.c:40
-msgid "Not Valid"
-msgstr "לא תקף"
-
-#. TRANSLATORS: if the function is not enabled through BIOS or OS settings.
-#: panels/firmware-security/cc-firmware-security-utils.c:50
-msgid "Not Enabled"
-msgstr "לא מאופשר"
-
-#. TRANSLATORS: the memory space or system mode is locked to prevent from malicious modification.
-#: panels/firmware-security/cc-firmware-security-utils.c:55
-msgid "Locked"
-msgstr "נעולה"
-
-#. TRANSLATORS: the memory space or system mode is not locked.
-#: panels/firmware-security/cc-firmware-security-utils.c:60
-msgid "Not Locked"
-msgstr "לא נעול"
-
-#. TRANSLATORS: The data is encrypted to prevent from malicious reading.
-#: panels/firmware-security/cc-firmware-security-utils.c:65
-msgid "Encrypted"
-msgstr "מוצפן"
-
-#. TRANSLATORS: the data in memory is plane text.
-#: panels/firmware-security/cc-firmware-security-utils.c:70
-msgid "Not Encrypted"
-msgstr "לא מוצפן"
-
-#. TRANSLATORS: Linux kernel is tainted by third party kernel module.
-#: panels/firmware-security/cc-firmware-security-utils.c:75
-msgid "Tainted"
-msgstr "מזוהם"
-
-#. TRANSLATORS: All the loaded kernel module are licensed.
-#: panels/firmware-security/cc-firmware-security-utils.c:80
-msgid "Not Tainted"
-msgstr "לא מזוהם"
-
-#. TRANSLATORS: the feature can be detected.
-#: panels/firmware-security/cc-firmware-security-utils.c:85
-msgid "Found"
-msgstr "נמצא"
-
-#. TRANSLATORS: the feature can't be detected.
-#: panels/firmware-security/cc-firmware-security-utils.c:90
-msgid "Not Found"
-msgstr "לא נמצא"
-
-#. TRANSLATORS: the function is supported by hardware.
-#: panels/firmware-security/cc-firmware-security-utils.c:95
-msgid "Supported"
-msgstr "נתמך"
-
-#. TRANSLATORS: the function isn't supported by hardware.
-#: panels/firmware-security/cc-firmware-security-utils.c:100
-msgid "Not Supported"
-msgstr "לא נתמך"
-
-#: panels/firmware-security/gnome-firmware-security-panel.desktop.in:3
-msgid "Device Security"
-msgstr "אבטחת התקן"
-
-#: panels/firmware-security/gnome-firmware-security-panel.desktop.in:4
-msgid "Protection against hardware security threats"
-msgstr "הגנה כנגד איומי אבטחת קָשְחה"
-
-#. Translators: Search terms to find the Privacy panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
-#: panels/firmware-security/gnome-firmware-security-panel.desktop.in:16
-msgid ""
-"screen;lock;diagnostics;crash;private;recent;temporary;tmp;index;name;"
-"network;identity;privacy;"
-msgstr ""
-"מסך;צד;נעילה;ניתוח;דיאגנוסטיקה;קריסה;פרטיות;פרטי;אחרונים;אחרון;זמני;זמניים;"
-"מפתח;אינדקס;שם;רשת;זהות;פרטיות;"
 
 #: panels/info-overview/cc-info-overview-panel.ui:18
 msgid "System Logo"
@@ -2215,17 +1745,17 @@ msgid "Hardware Model"
 msgstr "דגם חומרה"
 
 #: panels/info-overview/cc-info-overview-panel.ui:66
-#: panels/info-overview/cc-system-details-window.ui:91
+#: panels/info-overview/cc-system-details-window.ui:83
 msgid "Processor"
 msgstr "מעבד"
 
 #: panels/info-overview/cc-info-overview-panel.ui:74
-#: panels/info-overview/cc-system-details-window.ui:84
+#: panels/info-overview/cc-system-details-window.ui:76
 msgid "Memory"
 msgstr "זיכרון"
 
 #: panels/info-overview/cc-info-overview-panel.ui:82
-#: panels/info-overview/cc-system-details-window.ui:105
+#: panels/info-overview/cc-system-details-window.ui:97
 msgid "Disk Capacity"
 msgstr "קיבלות דיסק"
 
@@ -2353,53 +1883,53 @@ msgstr "**גרסת ליבה:**"
 msgid "Details copied to clipboard"
 msgstr "הדיווח הועתק ללוח הגזירים"
 
-#: panels/info-overview/cc-system-details-window.ui:66
+#: panels/info-overview/cc-system-details-window.ui:58
 msgid "Hardware Information"
 msgstr "מידע על החומרה"
 
-#: panels/info-overview/cc-system-details-window.ui:77
+#: panels/info-overview/cc-system-details-window.ui:69
 #: panels/printers/printer-entry.ui:183
 #: panels/wwan/cc-wwan-details-dialog.ui:184
 msgid "Model"
 msgstr "דגם"
 
-#: panels/info-overview/cc-system-details-window.ui:127
+#: panels/info-overview/cc-system-details-window.ui:119
 msgid "Software Information"
 msgstr "מידע על התכנה"
 
-#: panels/info-overview/cc-system-details-window.ui:138
+#: panels/info-overview/cc-system-details-window.ui:130
 #: panels/wwan/cc-wwan-details-dialog.ui:210
 msgid "Firmware Version"
 msgstr "גרסת קושחה"
 
 #. translators: this field contains the distro name and version
-#: panels/info-overview/cc-system-details-window.ui:146
+#: panels/info-overview/cc-system-details-window.ui:138
 msgid "OS Name"
 msgstr "שם מערכת הפעלה"
 
 #. translators: this field contains the distro build
-#: panels/info-overview/cc-system-details-window.ui:154
+#: panels/info-overview/cc-system-details-window.ui:146
 msgid "OS Build"
 msgstr "מזהה בניית מערכת הפעלה"
 
 #. translators: this field contains the distro type
-#: panels/info-overview/cc-system-details-window.ui:162
+#: panels/info-overview/cc-system-details-window.ui:154
 msgid "OS Type"
 msgstr "סוג מערכת הפעלה"
 
-#: panels/info-overview/cc-system-details-window.ui:169
+#: panels/info-overview/cc-system-details-window.ui:161
 msgid "GNOME Version"
 msgstr "גרסת GNOME"
 
-#: panels/info-overview/cc-system-details-window.ui:176
+#: panels/info-overview/cc-system-details-window.ui:168
 msgid "Windowing System"
 msgstr "מערכת חלונות"
 
-#: panels/info-overview/cc-system-details-window.ui:183
+#: panels/info-overview/cc-system-details-window.ui:175
 msgid "Virtualization"
 msgstr "הדמייה"
 
-#: panels/info-overview/cc-system-details-window.ui:190
+#: panels/info-overview/cc-system-details-window.ui:182
 msgid "Kernel Version"
 msgstr "גרסת ליבה"
 
@@ -2516,7 +2046,7 @@ msgctxt "keybinding"
 msgid "Search"
 msgstr "חיפוש"
 
-#: panels/keyboard/01-system.xml.in:2
+#: panels/keyboard/01-system.xml.in:2 panels/privacy/cc-privacy-panel.ui:39
 msgid "System"
 msgstr "מערכת"
 
@@ -2736,7 +2266,7 @@ msgid "Methods for entering symbols and letter variants using the keyboard."
 msgstr "שיטות למילוי סימנים והגווני אותיות באמצעות המקלדת."
 
 #: panels/keyboard/cc-keyboard-panel.ui:82
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:9 shell/cc-window.ui:169
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:9 shell/cc-window.ui:170
 msgid "Keyboard Shortcuts"
 msgstr "צירופי מקשים"
 
@@ -2920,81 +2450,6 @@ msgid ""
 msgstr ""
 "צירופי מקשים;קיצורי מקשים;מרחב עבודה;חלון;חלונות;שינוי גודל;הגדלה;ניגודיות;"
 "קלט;מקור;נעילה;עצמה;מקש חם;Compose;תו;"
-
-#: panels/location/cc-location-panel.ui:7
-msgid ""
-"Location services use GPS, Wi-Fi and cellular connections to determine the "
-"approximate location of this device. <a href='https://location.services."
-"mozilla.com/privacy'>Learn about what data is collected, and how it is used."
-"</a>"
-msgstr ""
-"שירותי המיקום עושים שימוש ב־GPS, רשת אלחוטית והתחברויות סלולר, על מנת לקבוע "
-"את המיקום המשוער של התקן זה. <a href='https://location.services.mozilla.com/"
-"privacy'>מידע נוסף על המידע שנאסף וכיצד נעשה בו שימוש</a>."
-
-#: panels/location/cc-location-panel.ui:12
-msgid "_Location Services"
-msgstr "שירותי _איכון"
-
-#: panels/location/cc-location-panel.ui:13
-msgid "Allow permitted apps to access location data"
-msgstr "לאפשר ליישומים גישה לנתוני המיקום"
-
-#: panels/location/cc-location-panel.ui:23
-msgid ""
-"The following sandboxed apps have been given access to location data. Apps "
-"that are not sandboxed can access location data without asking for "
-"permission."
-msgstr ""
-"היישומים המבודדים הבאים קיבלו גישה למידע על המיקום שלך. יישומים שאינם "
-"מבודדים יכולים לקבל גישה למיקום שלך ללא בקשת אישור."
-
-#: panels/location/cc-location-panel.ui:37
-msgid "No sandboxed apps have asked for location access"
-msgstr "אף יישום מבודד לא ביקש גישה למיקום שלך"
-
-#: panels/location/gnome-location-panel.desktop.in:4
-msgid "Control access to your location"
-msgstr "שליטה על הגישה למיקום שלך"
-
-#. Translators: Search terms to find the Location panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
-#: panels/location/gnome-location-panel.desktop.in:16
-msgid "location;gps;private;privacy;"
-msgstr "מיקום;gps;GPS;פרטיות;איכון;ג'י פי אס;"
-
-#: panels/microphone/cc-microphone-panel.ui:11
-msgid "_Microphone Access"
-msgstr "גישה ל_מיקרופון"
-
-#: panels/microphone/cc-microphone-panel.ui:12
-msgid "Allow permitted apps to use microphones"
-msgstr "לאפשר ליישומים מאושרים לגשת למיקרופון"
-
-#: panels/microphone/cc-microphone-panel.ui:22
-msgid ""
-"The following sandboxed apps have been given permission to use microphones. "
-"Apps that are not sandboxed can use microphones without asking for "
-"permission."
-msgstr ""
-"היישומים המבודדים הבאים קיבלו גישה למיקרופון שלך. יישומים שאינם מבודדים "
-"יכולים לגשת למיקרופון שלך ללא בקשת אישור."
-
-#: panels/microphone/cc-microphone-panel.ui:37
-msgid "No sandboxed apps have asked for microphone access"
-msgstr "אף יישום מבודד לא ביקש גישה למיקרופון"
-
-#: panels/microphone/gnome-microphone-panel.desktop.in:3
-msgid "Microphones"
-msgstr "מיקרופון"
-
-#: panels/microphone/gnome-microphone-panel.desktop.in:4
-msgid "Restrict microphone access"
-msgstr "הגבלת גישה למיקרופון"
-
-#. Translators: Search terms to find the Microphones panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
-#: panels/microphone/gnome-microphone-panel.desktop.in:16
-msgid "microphone;recording;application;privacy;"
-msgstr "מיקרופון;הקלטה;יישום;פרטיות;"
 
 #: panels/mouse/cc-mouse-panel.ui:31 panels/wacom/cc-wacom-panel.ui:9
 msgid "Test _Settings"
@@ -3295,11 +2750,11 @@ msgstr "ידני"
 msgid "Configuration"
 msgstr "הגדרה"
 
-#: panels/network/cc-net-proxy-page.ui:53
+#: panels/network/cc-net-proxy-page.ui:55
 msgid "Configuration URL"
 msgstr "כתובת התצורה"
 
-#: panels/network/cc-net-proxy-page.ui:63
+#: panels/network/cc-net-proxy-page.ui:65
 msgid ""
 "Web Proxy Autodiscovery is used when a Configuration URL is not provided. "
 "This is not recommended for untrusted public networks."
@@ -3307,53 +2762,53 @@ msgstr ""
 "נעשה שימוש בזיהוי אוטומטי של מתווך רשת כאשר לא מסופקת כתובת תצורה. מומלץ לא "
 "להשתמש בזה לרשתות ציבוריות לא מהימנות."
 
-#: panels/network/cc-net-proxy-page.ui:80
+#: panels/network/cc-net-proxy-page.ui:82
 msgid "HTTP Proxy"
 msgstr "מתווך HTTP"
 
-#: panels/network/cc-net-proxy-page.ui:91
-#: panels/network/cc-net-proxy-page.ui:136
-#: panels/network/cc-net-proxy-page.ui:181
-#: panels/network/cc-net-proxy-page.ui:226
+#: panels/network/cc-net-proxy-page.ui:93
+#: panels/network/cc-net-proxy-page.ui:132
+#: panels/network/cc-net-proxy-page.ui:171
+#: panels/network/cc-net-proxy-page.ui:210
 msgid "URL"
 msgstr "כתובת"
 
-#: panels/network/cc-net-proxy-page.ui:98
-#: panels/network/cc-net-proxy-page.ui:143
-#: panels/network/cc-net-proxy-page.ui:188
-#: panels/network/cc-net-proxy-page.ui:233
+#: panels/network/cc-net-proxy-page.ui:100
+#: panels/network/cc-net-proxy-page.ui:139
+#: panels/network/cc-net-proxy-page.ui:178
+#: panels/network/cc-net-proxy-page.ui:217
 msgid "Port"
 msgstr "פתחה"
 
-#: panels/network/cc-net-proxy-page.ui:110
+#: panels/network/cc-net-proxy-page.ui:108
 msgid "HTTP proxy port"
 msgstr "הפתחה של מתווך ה־HTTP"
 
-#: panels/network/cc-net-proxy-page.ui:125
+#: panels/network/cc-net-proxy-page.ui:121
 msgid "HTTPS Proxy"
 msgstr "מתווך HTTPS"
 
-#: panels/network/cc-net-proxy-page.ui:155
+#: panels/network/cc-net-proxy-page.ui:147
 msgid "HTTPS proxy port"
 msgstr "הפתחה של מתווך ה־HTTPS"
 
-#: panels/network/cc-net-proxy-page.ui:170
+#: panels/network/cc-net-proxy-page.ui:160
 msgid "FTP Proxy"
 msgstr "מתווך FTP"
 
-#: panels/network/cc-net-proxy-page.ui:200
+#: panels/network/cc-net-proxy-page.ui:186
 msgid "FTP proxy port"
 msgstr "הפתחה של מתווך ה־FTP"
 
-#: panels/network/cc-net-proxy-page.ui:215
+#: panels/network/cc-net-proxy-page.ui:199
 msgid "SOCKS Host"
 msgstr "‏SOCKS מארח"
 
-#: panels/network/cc-net-proxy-page.ui:245
+#: panels/network/cc-net-proxy-page.ui:225
 msgid "SOCKS host port"
 msgstr "פתחת מארח SOCKS"
 
-#: panels/network/cc-net-proxy-page.ui:261
+#: panels/network/cc-net-proxy-page.ui:239
 msgid "Ignored Hosts"
 msgstr "התעלמות ממארחים"
 
@@ -4245,15 +3700,15 @@ msgstr "פרטי הרשתות הנבחרות, לרבות ססמאות וכל ת�
 msgid "_Forget"
 msgstr "הת_עלמות"
 
-#: panels/network/net-device-wifi.c:1068
+#: panels/network/net-device-wifi.c:1069
 msgid "Saved Wi-Fi Networks"
 msgstr "רשתות אלחוטיות שמורות"
 
-#: panels/network/net-device-wifi.c:1237
+#: panels/network/net-device-wifi.c:1250
 msgid "System policy prohibits use as a Hotspot"
 msgstr "מדיניות המערכת אוסרת שימוש בנקודת גישה"
 
-#: panels/network/net-device-wifi.c:1240
+#: panels/network/net-device-wifi.c:1253
 msgid "Wireless device does not support Hotspot mode"
 msgstr "התקן הרשת האלחוטית אינו תומך במצב נקודת גישה"
 
@@ -4609,7 +4064,7 @@ msgstr "_נא לא להפריע"
 
 #. Translators: Whether to show notifications on the lock screen
 #: panels/notifications/cc-notifications-panel.ui:16
-#: panels/screen/cc-screen-panel.ui:66
+#: panels/privacy/cc-screen-page.ui:74
 msgid "_Lock Screen Notifications"
 msgstr "התראות במסך _נעילה"
 
@@ -5803,6 +5258,1092 @@ msgstr "אין שרת הדפסה"
 msgid "The system printing service doesn’t seem to be available."
 msgstr "כפי הנראה, שירותי ההדפסה של המערכת אינם זמינים."
 
+#: panels/privacy/cc-bolt-device-dialog.c:79
+#: panels/privacy/cc-bolt-device-entry.c:121
+msgctxt "Thunderbolt Device Status"
+msgid "Disconnected"
+msgstr "מנותק"
+
+#: panels/privacy/cc-bolt-device-dialog.c:82
+#: panels/privacy/cc-bolt-device-entry.c:124
+msgctxt "Thunderbolt Device Status"
+msgid "Connecting"
+msgstr "בהתחברות"
+
+#: panels/privacy/cc-bolt-device-dialog.c:85
+#: panels/privacy/cc-bolt-device-entry.c:128
+#: panels/privacy/cc-bolt-device-entry.c:140
+msgctxt "Thunderbolt Device Status"
+msgid "Connected"
+msgstr "מחובר"
+
+#: panels/privacy/cc-bolt-device-dialog.c:88
+msgctxt "Thunderbolt Device Status"
+msgid "Authorization Error"
+msgstr "שגיאת אימות"
+
+#: panels/privacy/cc-bolt-device-dialog.c:91
+#: panels/privacy/cc-bolt-device-entry.c:134
+msgctxt "Thunderbolt Device Status"
+msgid "Authorizing"
+msgstr "אימות"
+
+#: panels/privacy/cc-bolt-device-dialog.c:98
+msgctxt "Thunderbolt Device Status"
+msgid "Reduced Functionality"
+msgstr "תפקוד ירוד"
+
+#: panels/privacy/cc-bolt-device-dialog.c:100
+msgctxt "Thunderbolt Device Status"
+msgid "Connected & Authorized"
+msgstr "התקנים מחוברים ומאומתים"
+
+#: panels/privacy/cc-bolt-device-dialog.c:106
+#: panels/privacy/cc-bolt-device-entry.c:148
+msgctxt "Thunderbolt Device Status"
+msgid "Unknown"
+msgstr "לא ידוע"
+
+#. Translators: The time point the device was authorized.
+#: panels/privacy/cc-bolt-device-dialog.c:161
+msgid "Authorized at"
+msgstr "אומת ב־"
+
+#. Translators: The time point the device was connected.
+#: panels/privacy/cc-bolt-device-dialog.c:167
+msgid "Connected at"
+msgstr "מחובר החל מ־"
+
+#. Translators: The time point the device was enrolled,
+#. * i.e. authorized and stored in the device database.
+#: panels/privacy/cc-bolt-device-dialog.c:174
+msgid "Enrolled at"
+msgstr "נרשם ב־"
+
+#: panels/privacy/cc-bolt-device-dialog.c:248
+msgid "Failed to authorize device: "
+msgstr "אימות ההתקן נכשל: "
+
+#: panels/privacy/cc-bolt-device-dialog.c:315
+msgid "Failed to forget device: "
+msgstr "שכיחת ההתקן נכשלה: "
+
+#: panels/privacy/cc-bolt-device-dialog.c:455
+#, c-format
+msgid "Depends on %u other device"
+msgid_plural "Depends on %u other devices"
+msgstr[0] "תלוי בהתקן אחר"
+msgstr[1] "תלוי בשני התקנים אחרים"
+msgstr[2] "תלוי ב־%u התקנים אחרים"
+msgstr[3] "‫תלוי ב־%u התקנים אחרים"
+
+#: panels/privacy/cc-bolt-device-dialog.ui:25
+msgid "Status"
+msgstr "מצב"
+
+#: panels/privacy/cc-bolt-device-dialog.ui:30
+msgid "UUID"
+msgstr "‏UUID"
+
+#: panels/privacy/cc-bolt-device-dialog.ui:35
+msgid "Timestamp"
+msgstr "טביעת זמן"
+
+# msgid_plural "Depends on %u other devices"
+#: panels/privacy/cc-bolt-device-dialog.ui:43
+msgid "Depends on other devices"
+msgstr "תלוי בהתקנים אחרים"
+
+#: panels/privacy/cc-bolt-device-dialog.ui:73
+msgid "Authorize and Connect"
+msgstr "אימות והתחברות"
+
+#: panels/privacy/cc-bolt-device-dialog.ui:88
+msgid "Forget Device"
+msgstr "שכיחת ההתקן"
+
+#: panels/privacy/cc-bolt-device-entry.c:131
+msgctxt "Thunderbolt Device Status"
+msgid "Error"
+msgstr "שגיאה"
+
+#: panels/privacy/cc-bolt-device-entry.c:142
+msgctxt "Thunderbolt Device Status"
+msgid "Authorized"
+msgstr "אומת"
+
+#: panels/privacy/cc-bolt-page.c:219
+msgid ""
+"The Thunderbolt subsystem (boltd) is not installed or not set up properly."
+msgstr "מערכת הבת של Thunderbolt ‏(boltd) אינה מותקנת או לא מוגדרת כראוי."
+
+#: panels/privacy/cc-bolt-page.c:475 panels/privacy/cc-bolt-page.ui:131
+msgid "Allow direct access to devices such as docks and external GPUs."
+msgstr "לאפשר גישה ישירה להתקנים דוגמת תחנות עגינה ומעבדים גרפיים חיצוניים."
+
+#: panels/privacy/cc-bolt-page.c:476
+msgid "Only USB and Display Port devices can attach."
+msgstr "רק התקני USB ו־DisplayPort ניתנים לצירוף."
+
+#: panels/privacy/cc-bolt-page.c:511
+msgid ""
+"Thunderbolt could not be detected.\n"
+"Either the system lacks Thunderbolt support, it has been disabled in the "
+"BIOS or is set to an unsupported security level in the BIOS."
+msgstr ""
+"‏Thunderbolt לא ניתנת לזיהוי.\n"
+"או שהמערכת חסרת תמיכה ב־Thunderbolt, או שהיא הושבתה ב־BIOS או שהיא הוגדרה "
+"כשכבת אבטחה לא נתמכת ב־BIOS."
+
+#: panels/privacy/cc-bolt-page.c:555
+msgid "Thunderbolt support has been disabled in the BIOS."
+msgstr "תמיכה ב־Thunderbolt הושבתה ב־BIOS."
+
+#: panels/privacy/cc-bolt-page.c:559
+msgid "Thunderbolt security level could not be determined."
+msgstr "שכבת האבטחה של Thunderbolt לא ניתנת לקביעה."
+
+#: panels/privacy/cc-bolt-page.c:679
+#, c-format
+msgid "Error switching direct mode: %s"
+msgstr "שגיאה בשינוי המצב הישיר: %s"
+
+#: panels/privacy/cc-bolt-page.ui:4
+msgid "Thunderbolt"
+msgstr "Thunderbolt"
+
+#: panels/privacy/cc-bolt-page.ui:49
+msgid "Close notification"
+msgstr "סגירת ההתראות"
+
+#: panels/privacy/cc-bolt-page.ui:110
+msgid "No Thunderbolt Support"
+msgstr "אין תמיכה ב־Thunderbolt"
+
+#: panels/privacy/cc-bolt-page.ui:111
+msgid "Could not connect to the thunderbolt subsystem."
+msgstr "לא ניתן להתחבר אל מערכת הבת של Thunderbolt."
+
+#: panels/privacy/cc-bolt-page.ui:128
+msgid "Direct Access"
+msgstr "גישה ישירה"
+
+#: panels/privacy/cc-bolt-page.ui:200
+msgid "Pending Devices"
+msgstr "ההתקנים מתקבלים"
+
+#: panels/privacy/cc-bolt-page.ui:294
+msgid "No devices attached"
+msgstr "אף התקן לא צורף"
+
+#: panels/privacy/cc-camera-page.ui:4
+msgid "Cameras"
+msgstr "מצלמה"
+
+#: panels/privacy/cc-camera-page.ui:18
+msgid "_Camera Access"
+msgstr "גישה ל_מצלמה"
+
+#: panels/privacy/cc-camera-page.ui:19
+msgid "Allow permitted apps to use cameras"
+msgstr "לאפשר ליישומים מאושרים לגשת למצלמה"
+
+#: panels/privacy/cc-camera-page.ui:28 panels/privacy/cc-location-page.ui:29
+#: panels/privacy/cc-microphone-page.ui:28
+msgid "Permitted Apps"
+msgstr "יישומים מאושרים"
+
+#: panels/privacy/cc-camera-page.ui:29
+msgid ""
+"The following sandboxed apps have been given permission to use cameras. Apps "
+"that are not sandboxed can use cameras without asking for permission."
+msgstr ""
+"היישומים המבודדים הבאים קיבלו גישה למצלמה. יישומים שאינם מבודדים יכולים לגשת "
+"למצלמה ללא בקשת אישור."
+
+#: panels/privacy/cc-camera-page.ui:43
+msgid "No sandboxed apps have asked for camera access"
+msgstr "אף יישום מבודד לא ביקש גישה למצלמה"
+
+#. translators: The first '%s' is the distributor's name, such as 'Fedora', the second '%s' is a link to the privacy policy
+#: panels/privacy/cc-diagnostics-page.c:124
+#, c-format
+msgid ""
+"Sending reports of technical problems helps us improve %s. Reports are sent "
+"anonymously and are scrubbed of personal data. %s"
+msgstr ""
+"שליחת דיווחים על בעיות טכניות תעזור לנו לשפר את %s. הדיווחים נשלחים בעילום "
+"שם וללא מידע אישי. %s"
+
+#: panels/privacy/cc-diagnostics-page.ui:4
+msgid "Diagnostics"
+msgstr "אבחון"
+
+#: panels/privacy/cc-diagnostics-page.ui:16
+msgid "Problem Reporting"
+msgstr "דיווח על בעיות"
+
+#: panels/privacy/cc-diagnostics-page.ui:19
+msgid "_Automatic Problem Reporting"
+msgstr "דיווח בעיות _אוטומטית"
+
+#. TRANSLATORS: secure boot refers to the system firmware security mode
+#: panels/privacy/cc-firmware-security-boot-dialog.c:72
+#: panels/privacy/cc-firmware-security-page.c:120
+msgid "Secure Boot is Active"
+msgstr "הפעלה מאובטחת פעילה"
+
+#. TRANSLATORS: this is the first section of the decription
+#: panels/privacy/cc-firmware-security-boot-dialog.c:77
+msgid ""
+"Secure boot prevents malicious software from being loaded when the device "
+"starts. It is currently turned on and is functioning correctly."
+msgstr ""
+"הפעלה מאובטחת מגנה מפני טעינה של תכנה זדונית עם הפעלת ההתקן. היא פעילה כעת "
+"ופועלת בצורה תקינה."
+
+#. TRANSLATORS: secure boot refers to the system firmware security mode
+#: panels/privacy/cc-firmware-security-boot-dialog.c:83
+msgid "Secure Boot Has Problems"
+msgstr "יש בעיות בהפעלה מאובטחת"
+
+#. TRANSLATORS: this is the first section of the decription.
+#: panels/privacy/cc-firmware-security-boot-dialog.c:87
+msgid ""
+"Secure boot prevents malicious software from being loaded when the device "
+"starts. It is currently turned on, but will not work due to having an "
+"invalid key."
+msgstr ""
+"הפעלה מאובטחת מגנה מפני טעינה של תכנה זדונית עם הפעלת ההתקן. היא פעילה כעת, "
+"אך לא תעבוד עקב מפתח לא תקף."
+
+#. TRANSLATORS: this is the second section of description.
+#: panels/privacy/cc-firmware-security-boot-dialog.c:90
+msgid ""
+"Secure boot problems can often be resolved from your computer's UEFI "
+"firmware settings (BIOS) and your hardware manufacturer may provide "
+"information on how to do this."
+msgstr ""
+"לעתים קרובות ניתן לפתור בעיות בהפעלה מאובטחת מהגדרות קָשְחת UEFI ‏(BIOS) של "
+"המחשב. יצרן החָמְרָה שלך עשוי לספק מידע כיצד לעשות זאת."
+
+#. TRANSLATORS: this is the third section of description.
+#: panels/privacy/cc-firmware-security-boot-dialog.c:93
+msgid "For help, contact your hardware manufacturer or IT support provider."
+msgstr "לעזרה, יש ליצור קשר עם יצרן החָמְרָה או עם תמיכת ה־IT של הספק."
+
+#. TRANSLATORS: secure boot refers to the system firmware security mode
+#: panels/privacy/cc-firmware-security-boot-dialog.c:99
+msgid "Secure Boot is Turned Off"
+msgstr "הפעלה מאובטחת אינה פעילה"
+
+#. TRANSLATORS: this is the first section of the description.
+#: panels/privacy/cc-firmware-security-boot-dialog.c:103
+msgid ""
+"Secure boot prevents malicious software from being loaded when the device "
+"starts. It is currently turned off."
+msgstr ""
+"הפעלה מאובטחת מגנה מפני טעינה של תכנה זדונית עם הפעלת ההתקן. היא אינה פעילת "
+"כעת."
+
+#. TRANSLATORS: this is the second section of the description.
+#: panels/privacy/cc-firmware-security-boot-dialog.c:106
+msgid ""
+"Secure boot can often be turned on from your computer's UEFI firmware "
+"settings (BIOS). For help, contact your hardware manufacturer or IT support "
+"provider."
+msgstr ""
+"לעתים קרובות ניתן להפעיל את ההפעלה המאובטחת מהגדרות קָשְחת UEFI ‏(BIOS) של "
+"המחשב. למידע נוסף, יש ליצור קשר עם יצרן החָמְרָה או עם תמיכת ה־IT של הספק."
+
+#: panels/privacy/cc-firmware-security-boot-dialog.ui:55
+msgid ""
+"Secure boot prevents malicious software from being loaded when the device "
+"starts.\n"
+"\n"
+"For more information, contact the hardware manufacturer or IT support."
+msgstr ""
+"הפעלה מאובטחת מגנה מפני טעינה של תכנה זדונית עם הפעלת ההתקן.\n"
+"\n"
+"למידע נוסף, יש ליצור קשר עם יצרן החומרה או עם תמיכת IT."
+
+#. TRANSLATORS: in reference to firmware protection: 0/4 stars
+#: panels/privacy/cc-firmware-security-dialog.c:106
+#: panels/privacy/cc-firmware-security-page.c:537
+msgid "Checks Failed"
+msgstr "בדיקות נכשלו"
+
+#. TRANSLATORS: This is the description to describe the failure on
+#. checking the security items.
+#: panels/privacy/cc-firmware-security-dialog.c:109
+msgid ""
+"Hardware does not pass checks. This means that you are not protected against "
+"common hardware security issues.\n"
+"\n"
+"It may be possible to resolve hardware security issues by updating your "
+"firmware or changing device configuration options. However, failures can "
+"stem from the physical hardware itself, and may not be reversible."
+msgstr ""
+"החָמְרה לא עברה את הבדיקות. המשמעות לכך היא שההתקן שלך לא מוגן מפני בעיות "
+"אבטחה נפוצות.\n"
+"\n"
+"יתכן וניתן לפתור בעיות אבטחת חָמְרה אלו על ידי עדכון הקָשְחה או עם שינוי "
+"אפשרויות תצורת ההתקן. אולם, כישלון עשוי לנבוע מהחָמְרה הפיזית עצמה, ואף יתכן "
+"שהוא אינו הפיך."
+
+#. TRANSLATORS: in reference to firmware protection: 1/4 stars
+#: panels/privacy/cc-firmware-security-dialog.c:120
+#: panels/privacy/cc-firmware-security-page.c:544
+msgid "Checks Passed"
+msgstr "בדיקה עברה"
+
+#. TRANSLATORS: This description describes the device passing the
+#. minimum requirement of security check.
+#: panels/privacy/cc-firmware-security-dialog.c:123
+msgid ""
+"This device meets basic security requirements. Its hardware has protection "
+"against some of the most common security threats."
+msgstr ""
+"התקן החָמְרָה עומד בדרישות אבטחה בסיסיות. לחָמְרָה זו הגנה מפני מנעד של מרבית "
+"איומי האבטחה הנפוצים."
+
+#. TRANSLATORS: in reference to firmware protection: 2~4 stars
+#: panels/privacy/cc-firmware-security-dialog.c:134
+#: panels/privacy/cc-firmware-security-page.c:553
+msgid "Protected"
+msgstr "מוגן"
+
+#. TRANSLATOR: This description describes the devices passing
+#. the extended security check.
+#: panels/privacy/cc-firmware-security-dialog.c:137
+msgid ""
+"This device passes current security tests. Its hardware is protected against "
+"the majority of security threats."
+msgstr ""
+"התקן זה עבר את בדיקות האבטחה הנוכחיות. להתקן חָמְרה זה הגנה מפני מרבית איומי "
+"האבטחה."
+
+#. TRANSLATORS: in reference to firmware protection: ??? stars
+#: panels/privacy/cc-firmware-security-dialog.c:145
+#: panels/privacy/cc-firmware-security-page.c:560
+msgid "Checks Unavailable"
+msgstr "בדיקות לא זמינות"
+
+#. TRANSLATORS: When the security result is unavailable, this description is shown.
+#: panels/privacy/cc-firmware-security-dialog.c:147
+msgid ""
+"Device security checks are not available for this device. It is not possible "
+"to tell whether it meets security requirements."
+msgstr ""
+"בדיקת אבטחת התקן אינה זמינה להתקן זה. לא ניתן לדעת האם ההתקן עומד בדרישות "
+"האבטחה."
+
+#: panels/privacy/cc-firmware-security-dialog.c:367
+msgid "Report copied to clipboard"
+msgstr "הדיווח הועתק ללוח הגזירים"
+
+#: panels/privacy/cc-firmware-security-dialog.ui:65
+msgid "_Copy Technical Report"
+msgstr "ה_עתקת דו״ח טכני"
+
+#: panels/privacy/cc-firmware-security-help-dialog.ui:4
+msgid "About Device Security"
+msgstr "על אודות אבטחת התקן"
+
+#: panels/privacy/cc-firmware-security-help-dialog.ui:27
+msgid ""
+"Device security provides information about how protected your device is "
+"against security issues which target the hardware itself.\n"
+"\n"
+"Aspects of hardware that affect security include:\n"
+"\n"
+"• security features that are built into a hardware itself;\n"
+"• how the hardware is configured to protect against security issues;\n"
+"• the security of the software runs directly on the hardware.\n"
+"\n"
+"Security threats which affect hardware include malware and viruses that "
+"target the software that runs directly on the hardware. It also includes "
+"physical tampering, such as physical connection to the hardware to read data "
+"and implant malware.\n"
+"\n"
+"Device security is just one aspect of security, and does not reflect the "
+"overall security status of the system and applications."
+msgstr ""
+"אבטחת ההתקן מספקת מידע על ההגנה שיש להתקן שלך כנגד בעיות אבטחה המיועדות "
+"לחָמְרה עצמה.\n"
+".\n"
+"\n"
+"הֶבטים של חָמְרה שמשפיעים על האבטחה כוללים:\n"
+"\n"
+"• מאפייני אבטחה שנבנו לתוך החָמְרה עצמה;\n"
+"• כיצד החָמְרה מוגדרת להגן כנגד בעיות אבטחה;\n"
+"• אבטחת התכנה שרצה ישירות על החָמְרה.\n"
+"\n"
+"איומי אבטחה אשר משפיעים על חָמְרה כוללים נוֹזְקוֹת ווירוסים המיועדים לתכנה שרצה "
+"ישירות על החָמְרה, וזאת לרבות מגע פיזי, כמו התחברות פיזית לחָמְרה לקריאת מידע "
+"והשתלת נוֹזְקָה.\n"
+"\n"
+"אבטחת ההתקן מהווה רק הבט אחד של האבטחה, ואינה משקפת את מצב האבטחה הכולל של "
+"המערכת והיישומים."
+
+#: panels/privacy/cc-firmware-security-page.c:121
+msgid "Protected against malicious software when the device starts."
+msgstr "הגנה כנגד תכנות זדוניות בזמן הפעלת ההתקן."
+
+#: panels/privacy/cc-firmware-security-page.c:127
+msgid "Secure Boot has Problems"
+msgstr "יש בעיות בהפעלה מאובטחת"
+
+#: panels/privacy/cc-firmware-security-page.c:128
+msgid "Some protection when the device is started."
+msgstr "קצת הגנה בזמן שההתקן מופעל."
+
+#: panels/privacy/cc-firmware-security-page.c:133
+msgid "Secure Boot is Off"
+msgstr "הפעלה מאובטחת כבויה"
+
+#: panels/privacy/cc-firmware-security-page.c:134
+msgid "No protection when the device is started."
+msgstr "אין הגנה בזמן שההתקן מופעל."
+
+#. TRANSLATORS: this is to explain an event that has already happened
+#: panels/privacy/cc-firmware-security-page.c:153
+msgid ""
+"This issue could have been caused by a change in UEFI firmware settings, an "
+"operating system configuration change, or because of malicious software on "
+"this system."
+msgstr ""
+"יתכן ובעיה זו נגרמה בגלל שינוי בהגדרות קָשְחת UEFI, שינוי תצורת מערכת ההפעלה "
+"או בגלל תכנה זדונית במערכת זו."
+
+#. TRANSLATORS: this is to explain an event that has already happened
+#: panels/privacy/cc-firmware-security-page.c:161
+msgid ""
+"This issue could have been caused by a change in the UEFI firmware settings, "
+"or because of malicious software on this system."
+msgstr ""
+"יתכן ובעיה זו נגרמה בגלל שינוי בהגדרות קָשְחת UEFI או בגלל תכנה זדונית במערכת "
+"זו."
+
+#. TRANSLATORS: this is to explain an event that has already happened
+#: panels/privacy/cc-firmware-security-page.c:168
+msgid ""
+"This issue could have been caused by an operating system configuration "
+"change, or because of malicious software on this system."
+msgstr ""
+"יתכן ובעיה זו נגרמה בגלל שינוי תצורת מערכת ההפעלה או בגלל תכנה זדונית במערכת "
+"זו."
+
+#. TRANSLATOR: this is the date in "%Y-%m-%d %H:%M:%S" format,
+#. for example: 2022-08-01 22:48:00
+#: panels/privacy/cc-firmware-security-page.c:226
+#, c-format
+msgid "%1$s"
+msgstr "%1$s"
+
+#. TRANSLATOR: This is the text event status output when the event status is "success"
+#: panels/privacy/cc-firmware-security-page.c:232
+msgid "Pass"
+msgstr "עבר"
+
+#. TRANSLATOR: This is the text event status output when the event status is not "success"
+#: panels/privacy/cc-firmware-security-page.c:235
+msgid "! Fail"
+msgstr "! נכשל"
+
+# msgctxt "timezone loc"
+#: panels/privacy/cc-firmware-security-page.c:238
+#, c-format
+msgid "(%1$s → %2$s)"
+msgstr "‏‏(%1$s ← %2$s)"
+
+#: panels/privacy/cc-firmware-security-page.c:538
+msgid "Hardware does not pass checks."
+msgstr "החָמְרה לא עברה בדיקות."
+
+#: panels/privacy/cc-firmware-security-page.c:545
+msgid "Hardware meets basic security requirements."
+msgstr "החָמְרה עומדת בדרישות האבטחה הבסיסיות."
+
+#: panels/privacy/cc-firmware-security-page.c:554
+msgid "Hardware has a good level of protection."
+msgstr "לחָמְרה רמת אבטחה טובה."
+
+#: panels/privacy/cc-firmware-security-page.c:561
+msgid "Security levels are not available for this device."
+msgstr "רמות אבטחה אינן זמינות עבור התקן זה."
+
+#: panels/privacy/cc-firmware-security-page.ui:4
+msgid "Device Security"
+msgstr "אבטחת התקן"
+
+#: panels/privacy/cc-firmware-security-page.ui:57
+msgid "Starting Device Security…"
+msgstr "מתחיל אבטחת התקן…"
+
+#: panels/privacy/cc-firmware-security-page.ui:83
+msgid "Device Security Unavailable"
+msgstr "אבטחת התקן אינה זמינה"
+
+#: panels/privacy/cc-firmware-security-page.ui:85
+msgid ""
+"Device Security is only available on physical hardware. No physical hardware "
+"has been detected."
+msgstr "אבטחת התקן זמינה רק על חָמְרה פיזית. לא זוהתה חָמְרה פיזית."
+
+#: panels/privacy/cc-firmware-security-page.ui:223
+msgid "Security Events"
+msgstr "אירועי אבטחה"
+
+#: panels/privacy/cc-firmware-security-page.ui:233
+msgid "No Events"
+msgstr "אין אירועים"
+
+#. TRANSLATORS: if the stauts is valid. For example security check is valid and key is valid.
+#: panels/privacy/cc-firmware-security-utils.c:35
+msgid "Valid"
+msgstr "תקף"
+
+#. TRANSLATORS: if the status or key is not valid.
+#: panels/privacy/cc-firmware-security-utils.c:40
+msgid "Not Valid"
+msgstr "לא תקף"
+
+#. TRANSLATORS: if the function is not enabled through BIOS or OS settings.
+#: panels/privacy/cc-firmware-security-utils.c:50
+msgid "Not Enabled"
+msgstr "לא מאופשר"
+
+#. TRANSLATORS: the memory space or system mode is locked to prevent from malicious modification.
+#: panels/privacy/cc-firmware-security-utils.c:55
+msgid "Locked"
+msgstr "נעולה"
+
+#. TRANSLATORS: the memory space or system mode is not locked.
+#: panels/privacy/cc-firmware-security-utils.c:60
+msgid "Not Locked"
+msgstr "לא נעול"
+
+#. TRANSLATORS: The data is encrypted to prevent from malicious reading.
+#: panels/privacy/cc-firmware-security-utils.c:65
+msgid "Encrypted"
+msgstr "מוצפן"
+
+#. TRANSLATORS: the data in memory is plane text.
+#: panels/privacy/cc-firmware-security-utils.c:70
+msgid "Not Encrypted"
+msgstr "לא מוצפן"
+
+#. TRANSLATORS: Linux kernel is tainted by third party kernel module.
+#: panels/privacy/cc-firmware-security-utils.c:75
+msgid "Tainted"
+msgstr "מזוהם"
+
+#. TRANSLATORS: All the loaded kernel module are licensed.
+#: panels/privacy/cc-firmware-security-utils.c:80
+msgid "Not Tainted"
+msgstr "לא מזוהם"
+
+#. TRANSLATORS: the feature can be detected.
+#: panels/privacy/cc-firmware-security-utils.c:85
+msgid "Found"
+msgstr "נמצא"
+
+#. TRANSLATORS: the feature can't be detected.
+#: panels/privacy/cc-firmware-security-utils.c:90
+msgid "Not Found"
+msgstr "לא נמצא"
+
+#. TRANSLATORS: the function is supported by hardware.
+#: panels/privacy/cc-firmware-security-utils.c:95
+msgid "Supported"
+msgstr "נתמך"
+
+#. TRANSLATORS: the function isn't supported by hardware.
+#: panels/privacy/cc-firmware-security-utils.c:100
+msgid "Not Supported"
+msgstr "לא נתמך"
+
+#: panels/privacy/cc-location-page.ui:14
+msgid ""
+"Location services use GPS, Wi-Fi and cellular connections to determine the "
+"approximate location of this device. <a href='https://location.services."
+"mozilla.com/privacy'>Learn about what data is collected, and how it is used."
+"</a>"
+msgstr ""
+"שירותי המיקום עושים שימוש ב־GPS, רשת אלחוטית והתחברויות סלולר, על מנת לקבוע "
+"את המיקום המשוער של התקן זה. <a href='https://location.services.mozilla.com/"
+"privacy'>מידע נוסף על המידע שנאסף וכיצד נעשה בו שימוש</a>."
+
+#: panels/privacy/cc-location-page.ui:19 panels/privacy/cc-privacy-panel.ui:55
+msgid "_Location Services"
+msgstr "שירותי _איכון"
+
+#: panels/privacy/cc-location-page.ui:20
+msgid "Allow permitted apps to access location data"
+msgstr "לאפשר ליישומים גישה לנתוני המיקום"
+
+#: panels/privacy/cc-location-page.ui:30
+msgid ""
+"The following sandboxed apps have been given access to location data. Apps "
+"that are not sandboxed can access location data without asking for "
+"permission."
+msgstr ""
+"היישומים המבודדים הבאים קיבלו גישה למידע על המיקום שלך. יישומים שאינם "
+"מבודדים יכולים לקבל גישה למיקום שלך ללא בקשת אישור."
+
+#: panels/privacy/cc-location-page.ui:44
+msgid "No sandboxed apps have asked for location access"
+msgstr "אף יישום מבודד לא ביקש גישה למיקום שלך"
+
+#: panels/privacy/cc-microphone-page.ui:4
+msgid "Microphones"
+msgstr "מיקרופון"
+
+#: panels/privacy/cc-microphone-page.ui:18
+msgid "_Microphone Access"
+msgstr "גישה ל_מיקרופון"
+
+#: panels/privacy/cc-microphone-page.ui:19
+msgid "Allow permitted apps to use microphones"
+msgstr "לאפשר ליישומים מאושרים לגשת למיקרופון"
+
+#: panels/privacy/cc-microphone-page.ui:29
+msgid ""
+"The following sandboxed apps have been given permission to use microphones. "
+"Apps that are not sandboxed can use microphones without asking for "
+"permission."
+msgstr ""
+"היישומים המבודדים הבאים קיבלו גישה למיקרופון שלך. יישומים שאינם מבודדים "
+"יכולים לגשת למיקרופון שלך ללא בקשת אישור."
+
+#: panels/privacy/cc-microphone-page.ui:44
+msgid "No sandboxed apps have asked for microphone access"
+msgstr "אף יישום מבודד לא ביקש גישה למיקרופון"
+
+#: panels/privacy/cc-privacy-panel.ui:14
+#: panels/privacy/gnome-privacy-panel.desktop.in:3
+msgid "Privacy"
+msgstr "פרטיות"
+
+#: panels/privacy/cc-privacy-panel.ui:43
+msgid "_Screen Lock"
+msgstr "נעילת _מסך"
+
+#: panels/privacy/cc-privacy-panel.ui:44
+msgid "Automatic screen lock"
+msgstr "_נעילת מסך אוטומטית"
+
+#: panels/privacy/cc-privacy-panel.ui:56
+msgid "Control access to your location"
+msgstr "שליטה על הגישה למיקום שלך"
+
+#: panels/privacy/cc-privacy-panel.ui:67
+msgid "_File History &amp; Trash"
+msgstr "היסטוריית _קבצים ואשפה"
+
+#: panels/privacy/cc-privacy-panel.ui:68
+msgid "Remove saved data and files"
+msgstr "מחיקת מידע וקבצים שמורים"
+
+#: panels/privacy/cc-privacy-panel.ui:79
+msgid "_Diagnostics"
+msgstr "_אבחון"
+
+#: panels/privacy/cc-privacy-panel.ui:80
+msgid "Automatic problem reporting"
+msgstr "דיווח בעיות אוטומטית"
+
+#: panels/privacy/cc-privacy-panel.ui:100
+msgid "_Cameras"
+msgstr "_מצלמות"
+
+#: panels/privacy/cc-privacy-panel.ui:101
+msgid "Control camera access"
+msgstr "שליטה על הגישה למצלמה"
+
+#: panels/privacy/cc-privacy-panel.ui:112
+msgid "_Microphones"
+msgstr "_מיקרופון"
+
+#: panels/privacy/cc-privacy-panel.ui:113
+msgid "Control microphone access"
+msgstr "שליטה על הגישה למיקרופון"
+
+#: panels/privacy/cc-privacy-panel.ui:125
+msgid "_Thunderbolt"
+msgstr "_Thunderbolt"
+
+#: panels/privacy/cc-privacy-panel.ui:126
+msgid "Manage device access"
+msgstr "ניהול גישה להתקנים"
+
+#: panels/privacy/cc-privacy-panel.ui:137
+msgid "Device _Security"
+msgstr "_אבטחת התקן"
+
+#: panels/privacy/cc-privacy-panel.ui:138
+msgid "Hardware security status and information"
+msgstr "ומידע ומצב אבטחת החומרה"
+
+#. Translators: Option for "Lock screen after blank" in "Screen Lock" page
+#: panels/privacy/cc-screen-page.c:67
+msgctxt "lock_screen"
+msgid "Screen Turns Off"
+msgstr "המסך יכבה"
+
+#. Translators: Option for "Lock screen after blank" in "Screen Lock" page
+#: panels/privacy/cc-screen-page.c:70
+msgctxt "lock_screen"
+msgid "30 seconds"
+msgstr "חצי דקה"
+
+#. Translators: Option for "Lock screen after blank" in "Screen Lock" page
+#: panels/privacy/cc-screen-page.c:73
+msgctxt "lock_screen"
+msgid "1 minute"
+msgstr "דקה"
+
+#. Translators: Option for "Lock screen after blank" in "Screen Lock" page
+#: panels/privacy/cc-screen-page.c:76
+msgctxt "lock_screen"
+msgid "2 minutes"
+msgstr "שתי דקות"
+
+#. Translators: Option for "Lock screen after blank" in "Screen Lock" page
+#: panels/privacy/cc-screen-page.c:79
+msgctxt "lock_screen"
+msgid "3 minutes"
+msgstr "3 דקות"
+
+#. Translators: Option for "Lock screen after blank" in "Screen Lock" page
+#: panels/privacy/cc-screen-page.c:82
+msgctxt "lock_screen"
+msgid "5 minutes"
+msgstr "5 דקות"
+
+#. Translators: Option for "Lock screen after blank" in "Screen Lock" page
+#: panels/privacy/cc-screen-page.c:85
+msgctxt "lock_screen"
+msgid "30 minutes"
+msgstr "חצי שעה"
+
+#. Translators: Option for "Lock screen after blank" in "Screen Lock" page
+#: panels/privacy/cc-screen-page.c:88
+msgctxt "lock_screen"
+msgid "1 hour"
+msgstr "שעה"
+
+#. Translators: Option for "Blank screen" in "Screen Lock" page
+#: panels/privacy/cc-screen-page.c:131
+msgctxt "blank_screen"
+msgid "1 minute"
+msgstr "דקה"
+
+#. Translators: Option for "Blank screen" in "Screen Lock" page
+#: panels/privacy/cc-screen-page.c:134
+msgctxt "blank_screen"
+msgid "2 minutes"
+msgstr "2 דקות"
+
+#. Translators: Option for "Blank screen" in "Screen Lock" page
+#: panels/privacy/cc-screen-page.c:137
+msgctxt "blank_screen"
+msgid "3 minutes"
+msgstr "3 דקות"
+
+#. Translators: Option for "Blank screen" in "Screen Lock" page
+#: panels/privacy/cc-screen-page.c:140
+msgctxt "blank_screen"
+msgid "4 minutes"
+msgstr "4 דקות"
+
+#. Translators: Option for "Blank screen" in "Screen Lock" page
+#: panels/privacy/cc-screen-page.c:143
+msgctxt "blank_screen"
+msgid "5 minutes"
+msgstr "5 דקות"
+
+#. Translators: Option for "Blank screen" in "Screen Lock" page
+#: panels/privacy/cc-screen-page.c:146
+msgctxt "blank_screen"
+msgid "8 minutes"
+msgstr "8 דקות"
+
+#. Translators: Option for "Blank screen" in "Screen Lock" page
+#: panels/privacy/cc-screen-page.c:149
+msgctxt "blank_screen"
+msgid "10 minutes"
+msgstr "10 דקות"
+
+#. Translators: Option for "Blank screen" in "Screen Lock" page
+#: panels/privacy/cc-screen-page.c:152
+msgctxt "blank_screen"
+msgid "12 minutes"
+msgstr "12 דקות"
+
+#. Translators: Option for "Blank screen" in "Screen Lock" page
+#: panels/privacy/cc-screen-page.c:155
+msgctxt "blank_screen"
+msgid "15 minutes"
+msgstr "רבע שעה"
+
+#. Translators: Option for "Blank screen" in "Screen Lock" page
+#: panels/privacy/cc-screen-page.c:158
+msgctxt "blank_screen"
+msgid "Never"
+msgstr "לעולם לא"
+
+#: panels/privacy/cc-screen-page.ui:4
+msgid "Screen Lock"
+msgstr "נעילת מסך"
+
+#: panels/privacy/cc-screen-page.ui:14
+msgid ""
+"Automatically locking the screen prevents others from accessing the computer "
+"while you're away."
+msgstr ""
+"נעילה אוטומטית של המסך מונעת מאנשים אחרים לגשת למחשב שלך בזמן שאינך בנמצא."
+
+#: panels/privacy/cc-screen-page.ui:21
+msgid "Blank Screen Delay"
+msgstr "זמן החשכת מסך"
+
+#: panels/privacy/cc-screen-page.ui:22
+msgid "Period of inactivity until screen blanks"
+msgstr "פרק הזמן של חוסר פעילות שלאחריו המסך יוחשך"
+
+#: panels/privacy/cc-screen-page.ui:40
+msgid "Automatic Screen _Lock"
+msgstr "_נעילת מסך אוטומטית"
+
+#: panels/privacy/cc-screen-page.ui:41
+msgid "Locks the screen after it blanks"
+msgstr "יש לנעול את המסך לאחר ה_חשכה שלו"
+
+#: panels/privacy/cc-screen-page.ui:55
+msgid "Automatic _Screen Lock Delay"
+msgstr "זמן _נעילת מסך אוטומטית"
+
+#: panels/privacy/cc-screen-page.ui:56
+msgid "Time from screen blank to screen lock"
+msgstr "משך הזמן מהחשכת המסך לנעילת המסך"
+
+#: panels/privacy/cc-screen-page.ui:89
+msgid "Forbid new _USB devices"
+msgstr "מניעת התקני _USB חדשים"
+
+#: panels/privacy/cc-screen-page.ui:90
+msgid ""
+"Prevent new USB devices from interacting with the system when the screen is "
+"locked."
+msgstr "מניעת פעילות של התקני USB חדשים בזמן שהמסך נעול."
+
+#: panels/privacy/cc-screen-page.ui:107
+msgid "Screen Privacy"
+msgstr "פרטיות מסך"
+
+#: panels/privacy/cc-screen-page.ui:112
+msgid "Restrict Viewing Angle"
+msgstr "הגבלת זווית הצפייה"
+
+#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
+#: panels/privacy/cc-usage-page.c:54
+msgctxt "purge_files"
+msgid "1 hour"
+msgstr "שעה"
+
+#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
+#: panels/privacy/cc-usage-page.c:57
+msgctxt "purge_files"
+msgid "1 day"
+msgstr "יום"
+
+#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
+#: panels/privacy/cc-usage-page.c:60
+msgctxt "purge_files"
+msgid "2 days"
+msgstr "יומיים"
+
+#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
+#: panels/privacy/cc-usage-page.c:63
+msgctxt "purge_files"
+msgid "3 days"
+msgstr "3 ימים"
+
+#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
+#: panels/privacy/cc-usage-page.c:66
+msgctxt "purge_files"
+msgid "4 days"
+msgstr "4 ימים"
+
+#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
+#: panels/privacy/cc-usage-page.c:69
+msgctxt "purge_files"
+msgid "5 days"
+msgstr "5 ימים"
+
+#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
+#: panels/privacy/cc-usage-page.c:72
+msgctxt "purge_files"
+msgid "6 days"
+msgstr "6 ימים"
+
+#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
+#: panels/privacy/cc-usage-page.c:75
+msgctxt "purge_files"
+msgid "7 days"
+msgstr "שבוע"
+
+#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
+#: panels/privacy/cc-usage-page.c:78
+msgctxt "purge_files"
+msgid "14 days"
+msgstr "שבועיים"
+
+#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
+#: panels/privacy/cc-usage-page.c:81
+msgctxt "purge_files"
+msgid "30 days"
+msgstr "חודש"
+
+#: panels/privacy/cc-usage-page.c:177
+msgid "Empty all items from Trash?"
+msgstr "לרוקן את כל הפריטים באשפה?"
+
+#: panels/privacy/cc-usage-page.c:178
+msgid "All items in the Trash will be permanently deleted."
+msgstr "כל הפריטים באשפה ימחקו לצמיתות."
+
+#: panels/privacy/cc-usage-page.c:179
+msgid "_Empty Trash"
+msgstr "_פינוי האשפה"
+
+#: panels/privacy/cc-usage-page.c:215
+msgid "Delete all the temporary files?"
+msgstr "למחוק את כל הקבצים הזמניים?"
+
+#: panels/privacy/cc-usage-page.c:216
+msgid "All the temporary files will be permanently deleted."
+msgstr "כל הקבצים הזמניים ימחקו לצמיתות."
+
+#: panels/privacy/cc-usage-page.c:217
+msgid "_Purge Temporary Files"
+msgstr "מחיקת קבצים _זמניים"
+
+#. Translators: Option for "File History Duration" in "File History" group
+#: panels/privacy/cc-usage-page.c:244
+msgctxt "retain_history"
+msgid "1 day"
+msgstr "יום"
+
+#. Translators: Option for "File History Duration" in "File History" group
+#: panels/privacy/cc-usage-page.c:247
+msgctxt "retain_history"
+msgid "7 days"
+msgstr "שבוע"
+
+#. Translators: Option for "File History Duration" in "File History" group
+#: panels/privacy/cc-usage-page.c:250
+msgctxt "retain_history"
+msgid "30 days"
+msgstr "חודש"
+
+#. Translators: Option for "File History Duration" in "File History" group
+#: panels/privacy/cc-usage-page.c:253
+msgctxt "retain_history"
+msgid "Forever"
+msgstr "לעד"
+
+#: panels/privacy/cc-usage-page.c:342
+msgid "Clear File History?"
+msgstr "למחוק את היסטוריית הקבצים?"
+
+#: panels/privacy/cc-usage-page.c:343
+msgid "After clearing, lists of recently used files will appear empty."
+msgstr "לאחר המחיקה, רשימת הקבצים שנעשה בהם שימוש לאחרונה תישאר ריקה."
+
+#: panels/privacy/cc-usage-page.c:344
+msgid "_Clear History"
+msgstr "_מחיקת היסטוריה"
+
+#: panels/privacy/cc-usage-page.ui:4
+msgid "File History & Trash"
+msgstr "היסטוריית קבצים ואשפה"
+
+#: panels/privacy/cc-usage-page.ui:17
+msgid "File History"
+msgstr "היסטוריית קבצים"
+
+#: panels/privacy/cc-usage-page.ui:18
+msgid ""
+"File history keeps a record of files that you have used. This information is "
+"shared between apps, and makes it easier to find files that you might want "
+"to use."
+msgstr ""
+"היסטוריית קבצים שומרת תיעוד של קבצים שהיו בשימוש על ידך. מידע זה משותף בין "
+"יישומים, ומקל על מציאת קבצים שעשויים לשמש אותך."
+
+#: panels/privacy/cc-usage-page.ui:21
+msgid "File H_istory"
+msgstr "_היסטוריית קבצים"
+
+#: panels/privacy/cc-usage-page.ui:33
+msgid "File _History Duration"
+msgstr "משך _היסטוריית קבצים"
+
+#: panels/privacy/cc-usage-page.ui:55
+msgid "_Clear History…"
+msgstr "מחיקת _היסטוריה…"
+
+#: panels/privacy/cc-usage-page.ui:71
+msgid "Trash &amp; Temporary Files"
+msgstr "אשפה וקבצים זמניים"
+
+#: panels/privacy/cc-usage-page.ui:72
+msgid ""
+"Trash and temporary files can sometimes include personal or sensitive "
+"information. Automatically deleting them can help to protect privacy."
+msgstr ""
+"אשפה וקבצים זמניים עשויים לעתים להכיל מידע אישי או רגיש. מחיקה אוטומטית שלהם "
+"עשויה לעזור על הגנה על הפרטיות שלך."
+
+#: panels/privacy/cc-usage-page.ui:75
+msgid "Automatically Delete _Trash Content"
+msgstr "פינוי תוכן האשפה _אוטומטית"
+
+#: panels/privacy/cc-usage-page.ui:87
+msgid "Automatically Delete Temporary _Files"
+msgstr "מ_חיקת הקבצים הזמניים אוטומטית"
+
+#: panels/privacy/cc-usage-page.ui:99
+msgid "Automatically Delete _Period"
+msgstr "תקופת פינוי אשפה _אוטומטית"
+
+#: panels/privacy/cc-usage-page.ui:122
+msgid "_Empty Trash…"
+msgstr "_פינוי האשפה…"
+
+#: panels/privacy/cc-usage-page.ui:134
+msgid "_Delete Temporary Files…"
+msgstr "מחיקת קבצים _זמניים…"
+
+#: panels/privacy/gnome-privacy-panel.desktop.in:4
+msgid "Control access to hardware, services, and data"
+msgstr "שליטה על הגישה לחומרה, לשירותים ולמידע"
+
+#. Translators: Search terms to find the Privacy panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#: panels/privacy/gnome-privacy-panel.desktop.in:15
+msgid ""
+"Privacy;Screen;Lock;Private;Usage;Recent;History;Files;Temporary;Tmp;Trash;"
+"Purge;Retain;Diagnostics;Crash;Location;Gps;Camera;Photos;Video;Webcam;"
+"Microphone;Recording;Security;Firmware;Thunderbolt;"
+msgstr ""
+"פרטיות;פרטי;מסך;נעילה;שימוש;לאחרונה;אחרון;אחרונים;היטוריה;קבצים;קובץ;זמני;"
+"זמניים;אשפה;ניקוי;פינוי;לשמור;שמירה;להחזיק;החזקה;אבחון;דיאגנוסטיקה;קריסה;"
+"מיקום;GPS; מצלמה;תמונות;סרטים;סרטונים;וידאו;מצלמת רשת;מצלמת אינטרנט;מיקרופון;"
+"הקלטה;אבטחה;קשחה;קושחה;Thunderbolt;"
+
 #: panels/region/cc-format-chooser.c:148 panels/region/cc-format-chooser.c:196
 #: panels/region/cc-format-chooser.ui:4
 msgid "Formats"
@@ -6054,203 +6595,33 @@ msgstr ""
 "התקן;מערכת;מידע;זיכרון;זכרון;מעבד;גרסה;בררת מחדל;יישום;העדפה;מועדף;גיבוי;"
 "דיסק;תקליטור;DVD;USB;שמע;אודיו;חוזי;וידאו;נשלף;נתיק;מדיה;הפעלה אוטומטית;"
 
-#. Translators: Option for "Lock screen after blank" in "Screen Lock" panel
-#: panels/screen/cc-screen-panel.c:70
-msgctxt "lock_screen"
-msgid "Screen Turns Off"
-msgstr "המסך יכבה"
-
-#. Translators: Option for "Lock screen after blank" in "Screen Lock" panel
-#: panels/screen/cc-screen-panel.c:73
-msgctxt "lock_screen"
-msgid "30 seconds"
-msgstr "חצי דקה"
-
-#. Translators: Option for "Lock screen after blank" in "Screen Lock" panel
-#: panels/screen/cc-screen-panel.c:76
-msgctxt "lock_screen"
-msgid "1 minute"
-msgstr "דקה"
-
-#. Translators: Option for "Lock screen after blank" in "Screen Lock" panel
-#: panels/screen/cc-screen-panel.c:79
-msgctxt "lock_screen"
-msgid "2 minutes"
-msgstr "שתי דקות"
-
-#. Translators: Option for "Lock screen after blank" in "Screen Lock" panel
-#: panels/screen/cc-screen-panel.c:82
-msgctxt "lock_screen"
-msgid "3 minutes"
-msgstr "3 דקות"
-
-#. Translators: Option for "Lock screen after blank" in "Screen Lock" panel
-#: panels/screen/cc-screen-panel.c:85
-msgctxt "lock_screen"
-msgid "5 minutes"
-msgstr "5 דקות"
-
-#. Translators: Option for "Lock screen after blank" in "Screen Lock" panel
-#: panels/screen/cc-screen-panel.c:88
-msgctxt "lock_screen"
-msgid "30 minutes"
-msgstr "חצי שעה"
-
-#. Translators: Option for "Lock screen after blank" in "Screen Lock" panel
-#: panels/screen/cc-screen-panel.c:91
-msgctxt "lock_screen"
-msgid "1 hour"
-msgstr "שעה"
-
-#. Translators: Option for "Blank screen" in "Screen Lock" panel
-#: panels/screen/cc-screen-panel.c:134
-msgctxt "blank_screen"
-msgid "1 minute"
-msgstr "דקה"
-
-#. Translators: Option for "Blank screen" in "Screen Lock" panel
-#: panels/screen/cc-screen-panel.c:137
-msgctxt "blank_screen"
-msgid "2 minutes"
-msgstr "2 דקות"
-
-#. Translators: Option for "Blank screen" in "Screen Lock" panel
-#: panels/screen/cc-screen-panel.c:140
-msgctxt "blank_screen"
-msgid "3 minutes"
-msgstr "3 דקות"
-
-#. Translators: Option for "Blank screen" in "Screen Lock" panel
-#: panels/screen/cc-screen-panel.c:143
-msgctxt "blank_screen"
-msgid "4 minutes"
-msgstr "4 דקות"
-
-#. Translators: Option for "Blank screen" in "Screen Lock" panel
-#: panels/screen/cc-screen-panel.c:146
-msgctxt "blank_screen"
-msgid "5 minutes"
-msgstr "5 דקות"
-
-#. Translators: Option for "Blank screen" in "Screen Lock" panel
-#: panels/screen/cc-screen-panel.c:149
-msgctxt "blank_screen"
-msgid "8 minutes"
-msgstr "8 דקות"
-
-#. Translators: Option for "Blank screen" in "Screen Lock" panel
-#: panels/screen/cc-screen-panel.c:152
-msgctxt "blank_screen"
-msgid "10 minutes"
-msgstr "10 דקות"
-
-#. Translators: Option for "Blank screen" in "Screen Lock" panel
-#: panels/screen/cc-screen-panel.c:155
-msgctxt "blank_screen"
-msgid "12 minutes"
-msgstr "12 דקות"
-
-#. Translators: Option for "Blank screen" in "Screen Lock" panel
-#: panels/screen/cc-screen-panel.c:158
-msgctxt "blank_screen"
-msgid "15 minutes"
-msgstr "רבע שעה"
-
-#. Translators: Option for "Blank screen" in "Screen Lock" panel
-#: panels/screen/cc-screen-panel.c:161
-msgctxt "blank_screen"
-msgid "Never"
-msgstr "לעולם לא"
-
-#: panels/screen/cc-screen-panel.ui:6
-msgid ""
-"Automatically locking the screen prevents others from accessing the computer "
-"while you're away."
-msgstr ""
-"נעילה אוטומטית של המסך מונעת מאנשים אחרים לגשת למחשב שלך בזמן שאינך בנמצא."
-
-#: panels/screen/cc-screen-panel.ui:13
-msgid "Blank Screen Delay"
-msgstr "זמן החשכת מסך"
-
-#: panels/screen/cc-screen-panel.ui:14
-msgid "Period of inactivity until screen blanks"
-msgstr "פרק הזמן של חוסר פעילות שלאחריו המסך יוחשך"
-
-#: panels/screen/cc-screen-panel.ui:32
-msgid "Automatic Screen _Lock"
-msgstr "_נעילת מסך אוטומטית"
-
-#: panels/screen/cc-screen-panel.ui:33
-msgid "Locks the screen after it blanks"
-msgstr "יש לנעול את המסך לאחר ה_חשכה שלו"
-
-#: panels/screen/cc-screen-panel.ui:47
-msgid "Automatic _Screen Lock Delay"
-msgstr "זמן _נעילת מסך אוטומטית"
-
-#: panels/screen/cc-screen-panel.ui:48
-msgid "Time from screen blank to screen lock"
-msgstr "משך הזמן מהחשכת המסך לנעילת המסך"
-
-#: panels/screen/cc-screen-panel.ui:81
-msgid "Forbid new _USB devices"
-msgstr "מניעת התקני _USB חדשים"
-
-#: panels/screen/cc-screen-panel.ui:82
-msgid ""
-"Prevent new USB devices from interacting with the system when the screen is "
-"locked."
-msgstr "מניעת פעילות של התקני USB חדשים בזמן שהמסך נעול."
-
-#: panels/screen/cc-screen-panel.ui:99
-msgid "Screen Privacy"
-msgstr "פרטיות מסך"
-
-#: panels/screen/cc-screen-panel.ui:104
-msgid "Restrict Viewing Angle"
-msgstr "הגבלת זווית הצפייה"
-
-#: panels/screen/gnome-screen-panel.desktop.in:3
-msgid "Screen Lock"
-msgstr "נעילת מסך"
-
-#: panels/screen/gnome-screen-panel.desktop.in:4
-msgid "Automatically lock the screen"
-msgstr "נעילת מסך אוטומטית"
-
-#. Translators: Search terms to find the Screen panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
-#: panels/screen/gnome-screen-panel.desktop.in:16
-msgid "screen;lock;private;privacy;"
-msgstr "מסך;נעילה;פרטי;פרטיות;"
-
 #: panels/search/cc-search-locations-dialog.c:675
 msgid "Select Location"
 msgstr "בחירת מיקום"
 
-#: panels/search/cc-search-locations-dialog.ui:10
+#: panels/search/cc-search-locations-dialog.ui:11
 #: panels/search/cc-search-panel.ui:22
 msgid "Search Locations"
 msgstr "מקומות לחיפוש"
 
-#: panels/search/cc-search-locations-dialog.ui:13
+#: panels/search/cc-search-locations-dialog.ui:19
 msgid ""
 "Folders which are searched by system apps, such as Files, Photos and Videos."
 msgstr "תיקיות אשר מבוצע בהן חיפוש על ידי יישומים כמו קבצים, תמונות וסרטים."
 
-#: panels/search/cc-search-locations-dialog.ui:16
+#: panels/search/cc-search-locations-dialog.ui:22
 msgid "Places"
 msgstr "מיקומים"
 
-#: panels/search/cc-search-locations-dialog.ui:33
+#: panels/search/cc-search-locations-dialog.ui:39
 msgid "Bookmarks"
 msgstr "סימניות"
 
-#: panels/search/cc-search-locations-dialog.ui:50
+#: panels/search/cc-search-locations-dialog.ui:56
 msgid "Others"
 msgstr "אחרים"
 
-#: panels/search/cc-search-locations-dialog.ui:57
+#: panels/search/cc-search-locations-dialog.ui:63
 msgid "Add Location"
 msgstr "הוספת מיקום"
 
@@ -6651,194 +7022,6 @@ msgid ""
 msgstr ""
 "כרטיס;מיקרופון;עצמת שמע;ווליום;איזון;בלוטות׳;Bluetooth;אזניות;אוזניות;שמע;"
 "קלט;פלט;"
-
-#: panels/thunderbolt/cc-bolt-device-dialog.c:81
-#: panels/thunderbolt/cc-bolt-device-entry.c:123
-msgctxt "Thunderbolt Device Status"
-msgid "Disconnected"
-msgstr "מנותק"
-
-#: panels/thunderbolt/cc-bolt-device-dialog.c:84
-#: panels/thunderbolt/cc-bolt-device-entry.c:126
-msgctxt "Thunderbolt Device Status"
-msgid "Connecting"
-msgstr "בהתחברות"
-
-#: panels/thunderbolt/cc-bolt-device-dialog.c:87
-#: panels/thunderbolt/cc-bolt-device-entry.c:130
-#: panels/thunderbolt/cc-bolt-device-entry.c:142
-msgctxt "Thunderbolt Device Status"
-msgid "Connected"
-msgstr "מחובר"
-
-#: panels/thunderbolt/cc-bolt-device-dialog.c:90
-msgctxt "Thunderbolt Device Status"
-msgid "Authorization Error"
-msgstr "שגיאת אימות"
-
-#: panels/thunderbolt/cc-bolt-device-dialog.c:93
-#: panels/thunderbolt/cc-bolt-device-entry.c:136
-msgctxt "Thunderbolt Device Status"
-msgid "Authorizing"
-msgstr "אימות"
-
-#: panels/thunderbolt/cc-bolt-device-dialog.c:100
-msgctxt "Thunderbolt Device Status"
-msgid "Reduced Functionality"
-msgstr "תפקוד ירוד"
-
-#: panels/thunderbolt/cc-bolt-device-dialog.c:102
-msgctxt "Thunderbolt Device Status"
-msgid "Connected & Authorized"
-msgstr "התקנים מחוברים ומאומתים"
-
-#: panels/thunderbolt/cc-bolt-device-dialog.c:108
-#: panels/thunderbolt/cc-bolt-device-entry.c:150
-msgctxt "Thunderbolt Device Status"
-msgid "Unknown"
-msgstr "לא ידוע"
-
-#. Translators: The time point the device was authorized.
-#: panels/thunderbolt/cc-bolt-device-dialog.c:163
-msgid "Authorized at"
-msgstr "אומת ב־"
-
-#. Translators: The time point the device was connected.
-#: panels/thunderbolt/cc-bolt-device-dialog.c:169
-msgid "Connected at"
-msgstr "מחובר החל מ־"
-
-#. Translators: The time point the device was enrolled,
-#. * i.e. authorized and stored in the device database.
-#: panels/thunderbolt/cc-bolt-device-dialog.c:176
-msgid "Enrolled at"
-msgstr "נרשם ב־"
-
-#: panels/thunderbolt/cc-bolt-device-dialog.c:250
-msgid "Failed to authorize device: "
-msgstr "אימות ההתקן נכשל: "
-
-#: panels/thunderbolt/cc-bolt-device-dialog.c:317
-msgid "Failed to forget device: "
-msgstr "שכיחת ההתקן נכשלה: "
-
-#: panels/thunderbolt/cc-bolt-device-dialog.c:458
-#, c-format
-msgid "Depends on %u other device"
-msgid_plural "Depends on %u other devices"
-msgstr[0] "תלוי בהתקן אחר"
-msgstr[1] "תלוי בשני התקנים אחרים"
-msgstr[2] "תלוי ב־%u התקנים אחרים"
-msgstr[3] "‫תלוי ב־%u התקנים אחרים"
-
-#: panels/thunderbolt/cc-bolt-device-dialog.ui:25
-msgid "Status"
-msgstr "מצב"
-
-#: panels/thunderbolt/cc-bolt-device-dialog.ui:30
-msgid "UUID"
-msgstr "‏UUID"
-
-#: panels/thunderbolt/cc-bolt-device-dialog.ui:35
-msgid "Timestamp"
-msgstr "טביעת זמן"
-
-# msgid_plural "Depends on %u other devices"
-#: panels/thunderbolt/cc-bolt-device-dialog.ui:43
-msgid "Depends on other devices"
-msgstr "תלוי בהתקנים אחרים"
-
-#: panels/thunderbolt/cc-bolt-device-dialog.ui:73
-msgid "Authorize and Connect"
-msgstr "אימות והתחברות"
-
-#: panels/thunderbolt/cc-bolt-device-dialog.ui:88
-msgid "Forget Device"
-msgstr "שכיחת ההתקן"
-
-#: panels/thunderbolt/cc-bolt-device-entry.c:133
-msgctxt "Thunderbolt Device Status"
-msgid "Error"
-msgstr "שגיאה"
-
-#: panels/thunderbolt/cc-bolt-device-entry.c:144
-msgctxt "Thunderbolt Device Status"
-msgid "Authorized"
-msgstr "אומת"
-
-#: panels/thunderbolt/cc-bolt-panel.c:233
-msgid ""
-"The Thunderbolt subsystem (boltd) is not installed or not set up properly."
-msgstr "מערכת הבת של Thunderbolt ‏(boltd) אינה מותקנת או לא מוגדרת כראוי."
-
-#: panels/thunderbolt/cc-bolt-panel.c:489
-#: panels/thunderbolt/cc-bolt-panel.ui:123
-msgid "Allow direct access to devices such as docks and external GPUs."
-msgstr "לאפשר גישה ישירה להתקנים דוגמת תחנות עגינה ומעבדים גרפיים חיצוניים."
-
-#: panels/thunderbolt/cc-bolt-panel.c:490
-msgid "Only USB and Display Port devices can attach."
-msgstr "רק התקני USB ו־DisplayPort ניתנים לצירוף."
-
-#: panels/thunderbolt/cc-bolt-panel.c:525
-msgid ""
-"Thunderbolt could not be detected.\n"
-"Either the system lacks Thunderbolt support, it has been disabled in the "
-"BIOS or is set to an unsupported security level in the BIOS."
-msgstr ""
-"‏Thunderbolt לא ניתנת לזיהוי.\n"
-"או שהמערכת חסרת תמיכה ב־Thunderbolt, או שהיא הושבתה ב־BIOS או שהיא הוגדרה "
-"כשכבת אבטחה לא נתמכת ב־BIOS."
-
-#: panels/thunderbolt/cc-bolt-panel.c:569
-msgid "Thunderbolt support has been disabled in the BIOS."
-msgstr "תמיכה ב־Thunderbolt הושבתה ב־BIOS."
-
-#: panels/thunderbolt/cc-bolt-panel.c:573
-msgid "Thunderbolt security level could not be determined."
-msgstr "שכבת האבטחה של Thunderbolt לא ניתנת לקביעה."
-
-#: panels/thunderbolt/cc-bolt-panel.c:693
-#, c-format
-msgid "Error switching direct mode: %s"
-msgstr "שגיאה בשינוי המצב הישיר: %s"
-
-#: panels/thunderbolt/cc-bolt-panel.ui:41
-msgid "Close notification"
-msgstr "סגירת ההתראות"
-
-#: panels/thunderbolt/cc-bolt-panel.ui:102
-msgid "No Thunderbolt Support"
-msgstr "אין תמיכה ב־Thunderbolt"
-
-#: panels/thunderbolt/cc-bolt-panel.ui:103
-msgid "Could not connect to the thunderbolt subsystem."
-msgstr "לא ניתן להתחבר אל מערכת הבת של Thunderbolt."
-
-#: panels/thunderbolt/cc-bolt-panel.ui:120
-msgid "Direct Access"
-msgstr "גישה ישירה"
-
-#: panels/thunderbolt/cc-bolt-panel.ui:192
-msgid "Pending Devices"
-msgstr "ההתקנים מתקבלים"
-
-#: panels/thunderbolt/cc-bolt-panel.ui:286
-msgid "No devices attached"
-msgstr "אף התקן לא צורף"
-
-#: panels/thunderbolt/gnome-thunderbolt-panel.desktop.in:3
-msgid "Thunderbolt"
-msgstr "Thunderbolt"
-
-#: panels/thunderbolt/gnome-thunderbolt-panel.desktop.in:4
-msgid "Manage Thunderbolt device access"
-msgstr "ניהול גישה להתקני Thunderbolt"
-
-#. Translators: those are keywords for the thunderbolt control-center panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
-#: panels/thunderbolt/gnome-thunderbolt-panel.desktop.in:15
-msgid "Thunderbolt;privacy;"
-msgstr "Thunderbolt;פרטיות;"
 
 #: panels/universal-access/cc-cursor-size-dialog.ui:5
 msgid "Cursor Size"
@@ -7371,197 +7554,6 @@ msgstr ""
 "מקלדת;עכבר;a11y;נגישות;ניגודיות;ניגוד;תקריב;זום;מקריא מסך;טקסט;גופן;גודל;"
 "AccessX;מקשים דביקים;מקשים אטיים;מקשים חוזרים;מקשי עכבר;לחיצה;כפול;כפולה;"
 "המתנה;מהירות;סיוע;חזרה;הבהוב;שמיעה;שמע;הקלדה;-;הנפשה;הנפשות;אנימציה;אנימציות;"
-
-#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
-#: panels/usage/cc-usage-panel.c:55
-msgctxt "purge_files"
-msgid "1 hour"
-msgstr "שעה"
-
-#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
-#: panels/usage/cc-usage-panel.c:58
-msgctxt "purge_files"
-msgid "1 day"
-msgstr "יום"
-
-#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
-#: panels/usage/cc-usage-panel.c:61
-msgctxt "purge_files"
-msgid "2 days"
-msgstr "יומיים"
-
-#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
-#: panels/usage/cc-usage-panel.c:64
-msgctxt "purge_files"
-msgid "3 days"
-msgstr "3 ימים"
-
-#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
-#: panels/usage/cc-usage-panel.c:67
-msgctxt "purge_files"
-msgid "4 days"
-msgstr "4 ימים"
-
-#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
-#: panels/usage/cc-usage-panel.c:70
-msgctxt "purge_files"
-msgid "5 days"
-msgstr "5 ימים"
-
-#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
-#: panels/usage/cc-usage-panel.c:73
-msgctxt "purge_files"
-msgid "6 days"
-msgstr "6 ימים"
-
-#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
-#: panels/usage/cc-usage-panel.c:76
-msgctxt "purge_files"
-msgid "7 days"
-msgstr "שבוע"
-
-#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
-#: panels/usage/cc-usage-panel.c:79
-msgctxt "purge_files"
-msgid "14 days"
-msgstr "שבועיים"
-
-#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
-#: panels/usage/cc-usage-panel.c:82
-msgctxt "purge_files"
-msgid "30 days"
-msgstr "חודש"
-
-#: panels/usage/cc-usage-panel.c:180
-msgid "Empty all items from Trash?"
-msgstr "לרוקן את כל הפריטים באשפה?"
-
-#: panels/usage/cc-usage-panel.c:181
-msgid "All items in the Trash will be permanently deleted."
-msgstr "כל הפריטים באשפה ימחקו לצמיתות."
-
-#: panels/usage/cc-usage-panel.c:182
-msgid "_Empty Trash"
-msgstr "_פינוי האשפה"
-
-#: panels/usage/cc-usage-panel.c:218
-msgid "Delete all the temporary files?"
-msgstr "למחוק את כל הקבצים הזמניים?"
-
-#: panels/usage/cc-usage-panel.c:219
-msgid "All the temporary files will be permanently deleted."
-msgstr "כל הקבצים הזמניים ימחקו לצמיתות."
-
-#: panels/usage/cc-usage-panel.c:220
-msgid "_Purge Temporary Files"
-msgstr "מחיקת קבצים _זמניים"
-
-#. Translators: Option for "File History Duration" in "File History" group
-#: panels/usage/cc-usage-panel.c:247
-msgctxt "retain_history"
-msgid "1 day"
-msgstr "יום"
-
-#. Translators: Option for "File History Duration" in "File History" group
-#: panels/usage/cc-usage-panel.c:250
-msgctxt "retain_history"
-msgid "7 days"
-msgstr "שבוע"
-
-#. Translators: Option for "File History Duration" in "File History" group
-#: panels/usage/cc-usage-panel.c:253
-msgctxt "retain_history"
-msgid "30 days"
-msgstr "חודש"
-
-#. Translators: Option for "File History Duration" in "File History" group
-#: panels/usage/cc-usage-panel.c:256
-msgctxt "retain_history"
-msgid "Forever"
-msgstr "לעד"
-
-#: panels/usage/cc-usage-panel.c:347
-msgid "Clear File History?"
-msgstr "למחוק את היסטוריית הקבצים?"
-
-#: panels/usage/cc-usage-panel.c:348
-msgid "After clearing, lists of recently used files will appear empty."
-msgstr "לאחר המחיקה, רשימת הקבצים שנעשה בהם שימוש לאחרונה תישאר ריקה."
-
-#: panels/usage/cc-usage-panel.c:349
-msgid "_Clear History"
-msgstr "_מחיקת היסטוריה"
-
-#: panels/usage/cc-usage-panel.ui:9
-msgid "File History"
-msgstr "היסטוריית קבצים"
-
-#: panels/usage/cc-usage-panel.ui:10
-msgid ""
-"File history keeps a record of files that you have used. This information is "
-"shared between apps, and makes it easier to find files that you might want "
-"to use."
-msgstr ""
-"היסטוריית קבצים שומרת תיעוד של קבצים שהיו בשימוש על ידך. מידע זה משותף בין "
-"יישומים, ומקל על מציאת קבצים שעשויים לשמש אותך."
-
-#: panels/usage/cc-usage-panel.ui:13
-msgid "File H_istory"
-msgstr "_היסטוריית קבצים"
-
-#: panels/usage/cc-usage-panel.ui:25
-msgid "File _History Duration"
-msgstr "משך _היסטוריית קבצים"
-
-#: panels/usage/cc-usage-panel.ui:47
-msgid "_Clear History…"
-msgstr "מחיקת _היסטוריה…"
-
-#: panels/usage/cc-usage-panel.ui:63
-msgid "Trash &amp; Temporary Files"
-msgstr "אשפה וקבצים זמניים"
-
-#: panels/usage/cc-usage-panel.ui:64
-msgid ""
-"Trash and temporary files can sometimes include personal or sensitive "
-"information. Automatically deleting them can help to protect privacy."
-msgstr ""
-"אשפה וקבצים זמניים עשויים לעתים להכיל מידע אישי או רגיש. מחיקה אוטומטית שלהם "
-"עשויה לעזור על הגנה על הפרטיות שלך."
-
-#: panels/usage/cc-usage-panel.ui:67
-msgid "Automatically Delete _Trash Content"
-msgstr "פינוי תוכן האשפה _אוטומטית"
-
-#: panels/usage/cc-usage-panel.ui:79
-msgid "Automatically Delete Temporary _Files"
-msgstr "מ_חיקת הקבצים הזמניים אוטומטית"
-
-#: panels/usage/cc-usage-panel.ui:91
-msgid "Automatically Delete _Period"
-msgstr "תקופת פינוי אשפה _אוטומטית"
-
-#: panels/usage/cc-usage-panel.ui:114
-msgid "_Empty Trash…"
-msgstr "_פינוי האשפה…"
-
-#: panels/usage/cc-usage-panel.ui:126
-msgid "_Delete Temporary Files…"
-msgstr "מחיקת קבצים _זמניים…"
-
-#: panels/usage/gnome-usage-panel.desktop.in:3
-msgid "File History & Trash"
-msgstr "היסטוריית קבצים ואשפה"
-
-#: panels/usage/gnome-usage-panel.desktop.in:4
-msgid "Control data and files that are kept on your device"
-msgstr "שליטה על הנתונים והקבצים הנשמרים על ההתקן שלך"
-
-#. Translators: Search terms to find the Usage panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
-#: panels/usage/gnome-usage-panel.desktop.in:16
-msgid ""
-"usage;recent;history;files;temporary;tmp;private;privacy;trash;purge;retain;"
-msgstr "שימוש;ניצול;לאחרונה;היסטוריה;קבצים;זמני;פרטי;פרטיות;אשפה;ניקוי;שמירה;"
 
 #: panels/user-accounts/cc-add-user-dialog.c:36
 msgid "Should match the web address of your login provider."
@@ -9128,31 +9120,27 @@ msgstr "[PANEL] [ARGUMENT…]"
 msgid "Settings categories"
 msgstr "קטגוריות הגדרות"
 
-#: shell/cc-panel-list.ui:42 shell/cc-window.c:242
-msgid "Privacy"
-msgstr "פרטיות"
-
-#: shell/cc-panel-loader.c:307
+#: shell/cc-panel-loader.c:282
 msgid "Available panels:"
 msgstr "לוחות זמינים:"
 
-#: shell/cc-window.ui:27 shell/cc-window.ui:31
+#: shell/cc-window.ui:28 shell/cc-window.ui:32
 msgid "All Settings"
 msgstr "כל ההגדרות"
 
-#: shell/cc-window.ui:55 shell/cc-window.ui:57
+#: shell/cc-window.ui:56 shell/cc-window.ui:58
 msgid "Main Menu"
 msgstr "תפריט ראשי"
 
-#: shell/cc-window.ui:72
+#: shell/cc-window.ui:73
 msgid "Search settings"
 msgstr "חיפוש הגדרות"
 
-#: shell/cc-window.ui:161
+#: shell/cc-window.ui:162
 msgid "Warning: Development Version"
 msgstr "אזהרה: גרסת פיתוח"
 
-#: shell/cc-window.ui:162
+#: shell/cc-window.ui:163
 msgid ""
 "This version of Settings should only be used for development purposes. You "
 "may experience incorrect system behavior, data loss, and other unexpected "
@@ -9161,7 +9149,7 @@ msgstr ""
 "גרסה זו של הגדרות צריכה לשמש למטרות פיתוח בלבד. הגרסה עשויה לגרום להתנהגויות "
 "לא תקינות של המערכת, לאבדן מידע לתקלות אחרות בלתי צפויות. "
 
-#: shell/cc-window.ui:173
+#: shell/cc-window.ui:174
 msgid "Help"
 msgstr "עזרה"
 
@@ -9264,9 +9252,93 @@ msgstr[1] "שני ערוצי קלט"
 msgstr[2] "‏‫%u ערוצי קלט"
 msgstr[3] "‏‫%u ערוצי קלט"
 
-#: subprojects/gvc/gvc-mixer-control.c:2876
+#: subprojects/gvc/gvc-mixer-control.c:2882
 msgid "System Sounds"
 msgstr "צלילי מערכת"
+
+#~ msgid "camera;photos;video;webcam;lock;private;privacy;"
+#~ msgstr ""
+#~ "מצלמה;תמונות;תמונה;וידאו;סרט;סרטון;סרטים;מצלמת רשת;מצלמת אינטרנט;נעילה;"
+#~ "מנעול;פרטיות;פרטי;"
+
+#~ msgid "Settings for automatically problem reporting"
+#~ msgstr "הגדרות לדיווח אוטומטי של בעיות"
+
+#~ msgid "diagnostics;crash;"
+#~ msgstr "אבחון;אבחנה;קריסה;"
+
+#~ msgid "Device Security Status"
+#~ msgstr "מצב אבטחת התקן"
+
+#~ msgid ""
+#~ "Device security provides information about how protected your device is "
+#~ "against security issues which target the hardware itself."
+#~ msgstr ""
+#~ "אבטחת התקן מספקת מידע על ההגנה של ההתקן שלך נגד בעיות אבטחה המיועדות "
+#~ "לחָמְרה עצמה."
+
+#~ msgid "Aspects of hardware that affect security include:"
+#~ msgstr "הֶבטים של חָמְרה שמשפיעים על האבטחה כוללים:"
+
+#~ msgid "• security features that are built into a hardware itself;"
+#~ msgstr "• מאפייני אבטחה שנבנו לתוך החָמְרה עצמה;"
+
+#~ msgid "• how the hardware is configured to protect against security issues;"
+#~ msgstr "• כיצד החָמְרה מוגדרת להגן נגד בעיות אבטחה;"
+
+#~ msgid "• the security of the software runs directly on the hardware."
+#~ msgstr "• אבטחת התכנה שרצה ישירות על החָמְרה."
+
+#~ msgid ""
+#~ "Security threats which affect hardware include malware and viruses that "
+#~ "target the software that runs directly on the hardware. It also includes "
+#~ "physical tampering, such as physical connection to the hardware to read "
+#~ "data and implant malware."
+#~ msgstr ""
+#~ "איומי אבטחה אשר משפיעים על חָמְרה כוללים נוֹזְקוֹת ווירוסים המיועדים לתכנה "
+#~ "שרצה ישירות על החָמְרה, וזאת לרבות מגע פיזי, כמו התחברות פיזית לחָמְרה לקריאת "
+#~ "מידע והשתלת נוֹזְקָה."
+
+#~ msgid ""
+#~ "Device security is just one aspect of security, and does not reflect the "
+#~ "overall security status of the system and applications."
+#~ msgstr ""
+#~ "אבטחת ההתקן מהווה רק הבט אחד של האבטחה, ואינה משקפת את מצב האבטחה הכולל "
+#~ "של המערכת והיישומים."
+
+#~ msgid "Protection against hardware security threats"
+#~ msgstr "הגנה כנגד איומי אבטחת קָשְחה"
+
+#~ msgid ""
+#~ "screen;lock;diagnostics;crash;private;recent;temporary;tmp;index;name;"
+#~ "network;identity;privacy;"
+#~ msgstr ""
+#~ "מסך;צד;נעילה;ניתוח;דיאגנוסטיקה;קריסה;פרטיות;פרטי;אחרונים;אחרון;זמני;"
+#~ "זמניים;מפתח;אינדקס;שם;רשת;זהות;פרטיות;"
+
+#~ msgid "location;gps;private;privacy;"
+#~ msgstr "מיקום;gps;GPS;פרטיות;איכון;ג'י פי אס;"
+
+#~ msgid "microphone;recording;application;privacy;"
+#~ msgstr "מיקרופון;הקלטה;יישום;פרטיות;"
+
+#~ msgid "Automatically lock the screen"
+#~ msgstr "נעילת מסך אוטומטית"
+
+#~ msgid "screen;lock;private;privacy;"
+#~ msgstr "מסך;נעילה;פרטי;פרטיות;"
+
+#~ msgid "Thunderbolt;privacy;"
+#~ msgstr "Thunderbolt;פרטיות;"
+
+#~ msgid "Control data and files that are kept on your device"
+#~ msgstr "שליטה על הנתונים והקבצים הנשמרים על ההתקן שלך"
+
+#~ msgid ""
+#~ "usage;recent;history;files;temporary;tmp;private;privacy;trash;purge;"
+#~ "retain;"
+#~ msgstr ""
+#~ "שימוש;ניצול;לאחרונה;היסטוריה;קבצים;זמני;פרטי;פרטיות;אשפה;ניקוי;שמירה;"
 
 #~ msgid "Loading…"
 #~ msgstr "בטעינה…"
@@ -9561,9 +9633,6 @@ msgstr "צלילי מערכת"
 
 #~ msgid "Report your problems"
 #~ msgstr "דיווח על בעיות"
-
-#~ msgid "Host firmware security status"
-#~ msgstr "מצב אבטחת קָשְחת המארח"
 
 #~ msgid "Protect your location information"
 #~ msgstr "הגנה על פרטי המיקום שלך"
@@ -12571,9 +12640,6 @@ msgstr "צלילי מערכת"
 
 #~ msgid "Acc_eptance delay:"
 #~ msgstr "השהיית _קבלה:"
-
-#~ msgid "Control the pointer using the keypad"
-#~ msgstr "שליטה על סמן העכבר באמצעות לחצני העכבר."
 
 #~ msgid "Video Mouse"
 #~ msgstr "עכבר בווידאו"
