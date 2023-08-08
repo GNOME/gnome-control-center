@@ -394,14 +394,14 @@ iio_proxy_vanished_cb (GDBusConnection *connection,
   als_enabled_state_changed (self);
 }
 
-static gint
+static gdouble
 get_battery_capacity (UpDevice *device)
 {
   gdouble capacity;
 
   g_object_get (device, "capacity", &capacity, NULL);
 
-  return (gint) capacity;
+  return capacity;
 }
 
 static const gchar *
@@ -435,7 +435,7 @@ create_battery_group (UpDevice *device)
   static int battery_number = 1;
 
   battery_title_string = g_strdup_printf (_("Battery %d"), battery_number);
-  capacity_string = g_strdup_printf (_("%d%%"), get_battery_capacity (device));
+  capacity_string = g_strdup_printf (_("%.f%%"), get_battery_capacity (device));
 
   battery_group = ADW_PREFERENCES_GROUP (adw_preferences_group_new ());
 
