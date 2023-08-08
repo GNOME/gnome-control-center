@@ -35,8 +35,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2023-08-06 14:12+0000\n"
-"PO-Revision-Date: 2023-08-07 16:45+0800\n"
+"POT-Creation-Date: 2023-08-07 14:26+0000\n"
+"PO-Revision-Date: 2023-08-08 20:31+0800\n"
 "Last-Translator: lumingzh <lumingzh@qq.com>\n"
 "Language-Team: Chinese - China <i18n-zh@googlegroups.com>\n"
 "Language: zh_CN\n"
@@ -62,7 +62,7 @@ msgid "Session Bus"
 msgstr "会话总线"
 
 #: panels/applications/cc-applications-panel.c:827
-#: panels/power/cc-power-panel.ui:96 panels/privacy/cc-bolt-page.ui:241
+#: panels/power/cc-power-panel.ui:75 panels/privacy/cc-bolt-page.ui:241
 #: panels/privacy/cc-bolt-page.ui:285 panels/privacy/cc-privacy-panel.ui:96
 msgid "Devices"
 msgstr "设备"
@@ -1187,7 +1187,7 @@ msgid_plural "%d hours"
 msgstr[0] "%d 小时"
 
 #. Translators: Option for "Blank Screen" in "Power" panel
-#: panels/common/cc-util.c:183 panels/power/cc-power-panel.c:959
+#: panels/common/cc-util.c:183 panels/power/cc-power-panel.c:855
 #, c-format
 msgid "%d minute"
 msgid_plural "%d minutes"
@@ -1327,67 +1327,71 @@ msgstr "时间格式(_F)"
 msgid "Clock &amp; Calendar"
 msgstr "时钟和日历"
 
-#: panels/datetime/cc-datetime-panel.ui:217
+#: panels/datetime/cc-datetime-panel.ui:215
+msgid "Control how the time and date is shown in the top bar"
+msgstr "控制时间和日期在顶栏的显示方式"
+
+#: panels/datetime/cc-datetime-panel.ui:218
 msgid "Week Day"
 msgstr "工作日"
 
-#: panels/datetime/cc-datetime-panel.ui:229
+#: panels/datetime/cc-datetime-panel.ui:230
 msgid "Date"
 msgstr "日期"
 
-#: panels/datetime/cc-datetime-panel.ui:241
+#: panels/datetime/cc-datetime-panel.ui:242
 msgid "Seconds"
 msgstr "秒"
 
-#: panels/datetime/cc-datetime-panel.ui:253
+#: panels/datetime/cc-datetime-panel.ui:254
 msgid "Week Numbers"
 msgstr "周数"
 
-#: panels/datetime/cc-datetime-panel.ui:294
+#: panels/datetime/cc-datetime-panel.ui:295
 msgid "January"
 msgstr "一月"
 
-#: panels/datetime/cc-datetime-panel.ui:295
+#: panels/datetime/cc-datetime-panel.ui:296
 msgid "February"
 msgstr "二月"
 
-#: panels/datetime/cc-datetime-panel.ui:296
+#: panels/datetime/cc-datetime-panel.ui:297
 msgid "March"
 msgstr "三月"
 
-#: panels/datetime/cc-datetime-panel.ui:297
+#: panels/datetime/cc-datetime-panel.ui:298
 msgid "April"
 msgstr "四月"
 
-#: panels/datetime/cc-datetime-panel.ui:298
+#: panels/datetime/cc-datetime-panel.ui:299
 msgid "May"
 msgstr "五月"
 
-#: panels/datetime/cc-datetime-panel.ui:299
+#: panels/datetime/cc-datetime-panel.ui:300
 msgid "June"
 msgstr "六月"
 
-#: panels/datetime/cc-datetime-panel.ui:300
+#: panels/datetime/cc-datetime-panel.ui:301
 msgid "July"
 msgstr "七月"
 
-#: panels/datetime/cc-datetime-panel.ui:301
+#: panels/datetime/cc-datetime-panel.ui:302
 msgid "August"
 msgstr "八月"
 
-#: panels/datetime/cc-datetime-panel.ui:302
+#: panels/datetime/cc-datetime-panel.ui:303
 msgid "September"
 msgstr "九月"
 
-#: panels/datetime/cc-datetime-panel.ui:303
+#: panels/datetime/cc-datetime-panel.ui:304
 msgid "October"
 msgstr "十月"
 
-#: panels/datetime/cc-datetime-panel.ui:304
+#: panels/datetime/cc-datetime-panel.ui:305
 msgid "November"
 msgstr "十一月"
 
-#: panels/datetime/cc-datetime-panel.ui:305
+#: panels/datetime/cc-datetime-panel.ui:306
 msgid "December"
 msgstr "十二月"
 
@@ -1472,13 +1476,13 @@ msgstr "default;application;preferred;media;默认;应用程序;首选;偏好;�
 
 #: panels/display/cc-display-panel.c:495
 #: panels/notifications/cc-notifications-panel.c:214
-#: panels/power/cc-power-panel.c:847 panels/power/cc-power-panel.c:854
+#: panels/power/cc-power-panel.c:743 panels/power/cc-power-panel.c:750
 msgid "On"
 msgstr "开"
 
 #: panels/display/cc-display-panel.c:497 panels/network/cc-net-proxy-page.c:181
 #: panels/notifications/cc-notifications-panel.c:214
-#: panels/power/cc-power-panel.c:841 panels/power/cc-power-panel.c:852
+#: panels/power/cc-power-panel.c:737 panels/power/cc-power-panel.c:748
 msgid "Off"
 msgstr "关"
 
@@ -3745,7 +3749,7 @@ msgid "Unmanaged"
 msgstr "未托管"
 
 #. TRANSLATORS: device status
-#: panels/network/panel-common.c:45 panels/power/cc-power-panel.c:668
+#: panels/network/panel-common.c:45
 msgid "Unavailable"
 msgstr "不可用"
 
@@ -4250,7 +4254,7 @@ msgid "Gaming input device"
 msgstr "游戏输入设备"
 
 #. TRANSLATORS: secondary battery, misc
-#: panels/power/cc-battery-row.c:218 panels/power/cc-power-panel.c:268
+#: panels/power/cc-battery-row.c:218 panels/power/cc-power-panel.c:263
 #: panels/power/cc-power-panel.ui:58
 msgid "Battery"
 msgstr "电池"
@@ -4265,112 +4269,82 @@ msgctxt "Battery name"
 msgid "Extra"
 msgstr "附加电池"
 
-#: panels/power/cc-power-panel.c:260
+#: panels/power/cc-power-panel.c:255
 msgid "Batteries"
 msgstr "电池"
 
 #. Translators: UPS is an Uninterruptible Power Supply:
 #. * https://en.wikipedia.org/wiki/Uninterruptible_power_supply
-#: panels/power/cc-power-panel.c:265
+#: panels/power/cc-power-panel.c:260
 msgid "UPS"
 msgstr "UPS"
 
-#: panels/power/cc-power-panel.c:525
+#: panels/power/cc-power-panel.c:520
 msgid "When _idle"
 msgstr "空闲时(_I)"
 
-#: panels/power/cc-power-panel.c:662
-msgid "Good"
-msgstr "良好"
-
-#: panels/power/cc-power-panel.c:664
-msgid "OK"
-msgstr "合格"
-
-#: panels/power/cc-power-panel.c:666
-msgid "Poor"
-msgstr "较差"
-
-#: panels/power/cc-power-panel.c:684
-#, c-format
-msgid "Battery %d"
-msgstr "电池 %d"
-
-#: panels/power/cc-power-panel.c:685
-#, c-format
-msgid "%d%%"
-msgstr "%d%%"
-
-#: panels/power/cc-power-panel.c:694
-msgid "Health Rating"
-msgstr "健康评分"
-
-#: panels/power/cc-power-panel.c:700
-msgid "Battery Capacity"
-msgstr "电池容量"
-
-#: panels/power/cc-power-panel.c:784
+#: panels/power/cc-power-panel.c:680
 msgid "Suspend"
 msgstr "挂起"
 
-#: panels/power/cc-power-panel.c:785
+#: panels/power/cc-power-panel.c:681
 msgid "Power Off"
 msgstr "电源关闭"
 
-#: panels/power/cc-power-panel.c:786
+#: panels/power/cc-power-panel.c:682
 msgid "Hibernate"
 msgstr "休眠"
 
-#: panels/power/cc-power-panel.c:787
+#: panels/power/cc-power-panel.c:683
 msgid "Nothing"
 msgstr "不处理"
 
-#: panels/power/cc-power-panel.c:843
+#: panels/power/cc-power-panel.c:739
 msgid "When on battery power"
 msgstr "电池供电时"
 
-#: panels/power/cc-power-panel.c:845
+#: panels/power/cc-power-panel.c:741
 msgid "When plugged in"
 msgstr "插入电源时"
 
-#: panels/power/cc-power-panel.c:966
+#: panels/power/cc-power-panel.c:862
 msgctxt "Idle time"
 msgid "Never"
 msgstr "从不"
 
-#: panels/power/cc-power-panel.c:1072
+#: panels/power/cc-power-panel.c:947
 msgid "Automatic suspend"
 msgstr "自动挂起"
 
-#: panels/power/cc-power-panel.c:1168
+#: panels/power/cc-power-panel.c:1043
 msgid ""
 "Performance mode temporarily disabled due to high operating temperature."
 msgstr "由于工作温度高，性能模式暂时禁用。"
 
-#: panels/power/cc-power-panel.c:1170
+#: panels/power/cc-power-panel.c:1045
 msgid ""
 "Lap detected: performance mode temporarily unavailable. Move the device to a "
 "stable surface to restore."
 msgstr "检测到膝上使用：性能模式暂时不可用。将设备移动到稳定的表面以恢复。"
 
-#: panels/power/cc-power-panel.c:1172
+#: panels/power/cc-power-panel.c:1047
 msgid "Performance mode temporarily disabled."
 msgstr "性能模式暂时禁用。"
 
-#: panels/power/cc-power-panel.c:1214
+#: panels/power/cc-power-panel.c:1089
 msgid ""
 "Low battery: power saver enabled. Previous mode will be restored when "
 "battery is sufficiently charged."
 msgstr "电池电量低：节电模式已启用。电池充满电时，将恢复之前的模式。"
 
 #. translators: "%s" is an application name
-#: panels/power/cc-power-panel.c:1222
+#: panels/power/cc-power-panel.c:1097
 #, c-format
 msgid "Power Saver mode activated by “%s”."
 msgstr "节电模式由“%s”激活。"
 
 #. translators: "%s" is an application name
-#: panels/power/cc-power-panel.c:1226
+#: panels/power/cc-power-panel.c:1101
 #, c-format
 msgid "Performance mode activated by “%s”."
 msgstr "性能模式由“%s”激活。"
@@ -4435,101 +4409,87 @@ msgctxt "automatic_suspend"
 msgid "2 hours"
 msgstr "2 小时"
 
-#: panels/power/cc-power-panel.ui:78
-msgid "_Battery Health"
-msgstr "电池健康(_B)"
-
-#: panels/power/cc-power-panel.ui:114
+#: panels/power/cc-power-panel.ui:93
 msgid "Power Mode"
 msgstr "电源模式"
 
-#: panels/power/cc-power-panel.ui:115
+#: panels/power/cc-power-panel.ui:94
 msgid "Affects system performance and power usage."
 msgstr "影响系统性能和功耗。"
 
-#: panels/power/cc-power-panel.ui:144
+#: panels/power/cc-power-panel.ui:123
 msgid "Power Saving Options"
 msgstr "节电选项"
 
-#: panels/power/cc-power-panel.ui:147
+#: panels/power/cc-power-panel.ui:126
 msgid "Automatic Screen Brightness"
 msgstr "自动屏幕亮度"
 
-#: panels/power/cc-power-panel.ui:148
+#: panels/power/cc-power-panel.ui:127
 msgid "Screen brightness adjusts to the surrounding light."
 msgstr "屏幕亮度根据周围光线进行调整。"
 
-#: panels/power/cc-power-panel.ui:160
+#: panels/power/cc-power-panel.ui:139
 msgid "Dim Screen"
 msgstr "屏幕变暗"
 
-#: panels/power/cc-power-panel.ui:161
+#: panels/power/cc-power-panel.ui:140
 msgid "Reduces the screen brightness when the computer is inactive."
 msgstr "当计算机处于非活动状态时降低屏幕亮度。"
 
-#: panels/power/cc-power-panel.ui:172
+#: panels/power/cc-power-panel.ui:151
 msgid "Screen _Blank"
 msgstr "息屏(_B)"
 
-#: panels/power/cc-power-panel.ui:173
+#: panels/power/cc-power-panel.ui:152
 msgid "Turns the screen off after a period of inactivity."
 msgstr "在一段时间的不活动后关闭屏幕。"
 
-#: panels/power/cc-power-panel.ui:181
+#: panels/power/cc-power-panel.ui:160
 msgid "Automatic Power Saver"
 msgstr "自动节电"
 
-#: panels/power/cc-power-panel.ui:182
+#: panels/power/cc-power-panel.ui:161
 msgid "Enables power saver mode when battery is low."
 msgstr "电池电量低时启用节电模式。"
 
-#: panels/power/cc-power-panel.ui:195
+#: panels/power/cc-power-panel.ui:174
 msgid "_Automatic Suspend"
 msgstr "自动挂起(_A)"
 
-#: panels/power/cc-power-panel.ui:196
+#: panels/power/cc-power-panel.ui:175
 msgid "Pauses the computer after a period of inactivity."
 msgstr "在一段时间的不活动后暂停计算机。"
 
-#: panels/power/cc-power-panel.ui:221
+#: panels/power/cc-power-panel.ui:200
 msgid "Po_wer Button Behavior"
 msgstr "电源按钮行为(_W)"
 
-#: panels/power/cc-power-panel.ui:229
+#: panels/power/cc-power-panel.ui:208
 msgid "Show Battery _Percentage"
 msgstr "显示电量百分比(_P)"
 
-#: panels/power/cc-power-panel.ui:230
+#: panels/power/cc-power-panel.ui:209
 msgid "Show exact charge level in the top bar"
 msgstr "在顶栏显示准确的电量"
 
-#: panels/power/cc-power-panel.ui:266
+#: panels/power/cc-power-panel.ui:245
 msgid "Automatic Suspend"
 msgstr "自动挂起"
 
-#: panels/power/cc-power-panel.ui:289
+#: panels/power/cc-power-panel.ui:268
 msgid "_Plugged In"
 msgstr "已插入电源(_P)"
 
-#: panels/power/cc-power-panel.ui:301
+#: panels/power/cc-power-panel.ui:280
 msgid "On _Battery Power"
 msgstr "使用电池时(_B)"
 
-#: panels/power/cc-power-panel.ui:334 panels/power/cc-power-panel.ui:370
+#: panels/power/cc-power-panel.ui:313 panels/power/cc-power-panel.ui:349
 #: panels/universal-access/cc-ua-mouse-page.ui:98
 #: panels/universal-access/cc-ua-typing-page.ui:124
 msgid "Delay"
 msgstr "延迟"
-
-#: panels/power/cc-power-panel.ui:393
-msgid "Battery Health"
-msgstr "电池健康"
-
-#: panels/power/cc-power-panel.ui:407
-msgid ""
-"Current capacity indicates how much charge the battery can currently store, "
-"compared to when it was new."
-msgstr "当前容量提示了该电池与全新状态相比当前可以存储的充电容量。"
 
 #: panels/power/cc-power-profile-row.c:132
 msgctxt "Power profile"
@@ -9186,6 +9146,40 @@ msgstr[0] "%u 路输入"
 #: subprojects/gvc/gvc-mixer-control.c:2882
 msgid "System Sounds"
 msgstr "系统声音"
+
+#~ msgid "Good"
+#~ msgstr "良好"
+
+#~ msgid "OK"
+#~ msgstr "合格"
+
+#~ msgid "Poor"
+#~ msgstr "较差"
+
+#, c-format
+#~ msgid "Battery %d"
+#~ msgstr "电池 %d"
+
+#, c-format
+#~ msgid "%d%%"
+#~ msgstr "%d%%"
+
+#~ msgid "Health Rating"
+#~ msgstr "健康评分"
+
+#~ msgid "Battery Capacity"
+#~ msgstr "电池容量"
+
+#~ msgid "_Battery Health"
+#~ msgstr "电池健康(_B)"
+
+#~ msgid "Battery Health"
+#~ msgstr "电池健康"
+
+#~ msgid ""
+#~ "Current capacity indicates how much charge the battery can currently "
+#~ "store, compared to when it was new."
+#~ msgstr "当前容量提示了该电池与全新状态相比当前可以存储的充电容量。"
 
 #~ msgid "camera;photos;video;webcam;lock;private;privacy;"
 #~ msgstr ""
