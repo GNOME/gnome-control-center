@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2023-08-07 13:31+0000\n"
-"PO-Revision-Date: 2023-08-09 20:30+0700\n"
+"POT-Creation-Date: 2023-08-11 10:22+0000\n"
+"PO-Revision-Date: 2023-08-11 18:17+0700\n"
 "Last-Translator: Kukuh Syafaat <kukuhsyafaat@gnome.org>\n"
 "Language-Team: Indonesian <gnome-l10n-id@googlegroups.com>\n"
 "Language: id\n"
@@ -532,7 +532,7 @@ msgstr "Anda dapat melepas perangkat kalibrasi."
 #. TRANSLATORS: The user has to be careful not to knock the
 #. * display off the screen (although we do cope if this is
 #. * detected early enough)
-#: panels/color/cc-color-calibrate.c:534
+#: panels/color/cc-color-calibrate.c:534 panels/color/cc-color-calibrate.ui:64
 msgid "Do not disturb the calibration device while in progress"
 msgstr "Jangan mengganggu perangkat kalibrasi ketika tengah berlangsung"
 
@@ -1426,6 +1426,10 @@ msgstr "Untuk mengubah tatanan waktu atau tanggal, Anda perlu diautentikasi."
 msgid "Links &amp; Files"
 msgstr "Tautan &amp; Berkas"
 
+#: panels/default-apps/cc-default-apps-panel.ui:9
+msgid "Applications which are used to open common links and files."
+msgstr "Aplikasi yang digunakan untuk membuka tautan dan berkas umum."
+
 #: panels/default-apps/cc-default-apps-panel.ui:12
 msgid "_Web"
 msgstr "_Web"
@@ -1500,6 +1504,7 @@ msgstr "Ini mungkin karena keterbatasan perangkat keras."
 #: panels/display/cc-display-panel.ui:90 panels/display/cc-display-panel.ui:221
 #: panels/display/cc-display-panel.ui:260
 #: panels/keyboard/cc-keyboard-shortcut-dialog.ui:115
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:118
 #: panels/mouse/cc-mouse-panel.ui:17 panels/mouse/cc-mouse-panel.ui:23
 #: panels/network/cc-network-panel.ui:17 panels/network/cc-wifi-panel.ui:11
 #: panels/network/cc-wifi-panel.ui:17 panels/printers/new-printer-dialog.ui:64
@@ -1736,7 +1741,7 @@ msgid "System Logo"
 msgstr "Logo Sistem"
 
 #: panels/info-overview/cc-info-overview-panel.ui:33
-#: panels/sharing/cc-sharing-panel.ui:12 panels/sharing/cc-sharing-panel.ui:279
+#: panels/sharing/cc-sharing-panel.ui:12 panels/sharing/cc-sharing-panel.ui:276
 msgid "Device Name"
 msgstr "Nama Perangkat"
 
@@ -1887,6 +1892,10 @@ msgstr "**Versi Kernel:**"
 #: panels/info-overview/cc-system-details-window.c:852
 msgid "Details copied to clipboard"
 msgstr "Rincian disalin ke papan klip"
+
+#: panels/info-overview/cc-system-details-window.ui:25
+msgid "_Copy"
+msgstr "_Salin"
 
 #: panels/info-overview/cc-system-details-window.ui:58
 msgid "Hardware Information"
@@ -2943,7 +2952,7 @@ msgstr "Nama Jaringan"
 #. Translators: This is a password needed for printing.
 #: panels/network/cc-wifi-hotspot-dialog.ui:92
 #: panels/printers/new-printer-dialog.ui:316
-#: panels/printers/pp-jobs-dialog.ui:54 panels/sharing/cc-sharing-panel.ui:360
+#: panels/printers/pp-jobs-dialog.ui:54 panels/sharing/cc-sharing-panel.ui:357
 #: panels/user-accounts/cc-add-user-dialog.ui:149
 #: panels/user-accounts/cc-add-user-dialog.ui:184
 #: panels/user-accounts/cc-add-user-dialog.ui:363
@@ -3330,9 +3339,17 @@ msgstr "Peer yang belum disimpan"
 msgid "Signal Strength"
 msgstr "Kuat Sinyal"
 
+#: panels/network/connection-editor/details-page.ui:31
+msgid "Weak"
+msgstr "Lemah"
+
 #: panels/network/connection-editor/details-page.ui:46
 msgid "Link speed"
 msgstr "Kecepatan link"
+
+#: panels/network/connection-editor/details-page.ui:62
+msgid "1Mb/sec"
+msgstr "1Mb/det"
 
 #: panels/network/connection-editor/details-page.ui:126
 #: panels/network/net-device-ethernet.c:154
@@ -3474,6 +3491,7 @@ msgstr "Route Otomatis"
 #. Translators: Please see https://en.wikipedia.org/wiki/Metrics_(networking)
 #: panels/network/connection-editor/ip4-page.ui:291
 #: panels/network/connection-editor/ip6-page.ui:302
+#: panels/region/cc-format-preview.ui:98
 msgid "Metric"
 msgstr "Metrik"
 
@@ -3726,6 +3744,10 @@ msgstr "IMEI"
 #: panels/network/network-mobile.ui:41
 msgid "Provider"
 msgstr "Penyedia"
+
+#: panels/network/network-mobile.ui:300
+msgid "Not connected"
+msgstr "Tak tersambung"
 
 #: panels/network/network-mobile.ui:310 panels/power/cc-power-profile-row.ui:21
 msgid "Active"
@@ -6796,26 +6818,26 @@ msgstr "Log Masuk Ja_rak Jauh"
 msgid "File Sharing"
 msgstr "Berbagi Berkas"
 
-#: panels/sharing/cc-sharing-panel.ui:111
+#: panels/sharing/cc-sharing-panel.ui:110
 msgid "_Require Password"
 msgstr "Meme_rlukan Kata Sandi"
 
-#: panels/sharing/cc-sharing-panel.ui:125
+#: panels/sharing/cc-sharing-panel.ui:124
 #: panels/user-accounts/cc-user-panel.ui:151
 msgid "_Password"
 msgstr "Kata _Sandi"
 
-#: panels/sharing/cc-sharing-panel.ui:168
-#: panels/sharing/cc-sharing-panel.ui:204
+#: panels/sharing/cc-sharing-panel.ui:167
+#: panels/sharing/cc-sharing-panel.ui:201
 msgid "Remote Login"
 msgstr "Log Masuk Jarak Jauh"
 
-#: panels/sharing/cc-sharing-panel.ui:224
-#: panels/sharing/cc-sharing-panel.ui:245
+#: panels/sharing/cc-sharing-panel.ui:221
+#: panels/sharing/cc-sharing-panel.ui:242
 msgid "Remote Desktop"
 msgstr "Destop Jauh"
 
-#: panels/sharing/cc-sharing-panel.ui:239
+#: panels/sharing/cc-sharing-panel.ui:236
 msgid ""
 "Remote desktop allows viewing and controlling your desktop from another "
 "computer."
@@ -6823,62 +6845,62 @@ msgstr ""
 "Destop jauh memungkinkan melihat dan mengendalikan destop Anda dari komputer "
 "lain."
 
-#: panels/sharing/cc-sharing-panel.ui:246
+#: panels/sharing/cc-sharing-panel.ui:243
 msgid "Enable or disable remote desktop connections to this computer."
 msgstr "Aktifkan atau nonaktifkan koneksi destop jauh ke komputer ini."
 
-#: panels/sharing/cc-sharing-panel.ui:259
+#: panels/sharing/cc-sharing-panel.ui:256
 msgid "Remote Control"
 msgstr "Kendali Jarak Jauh"
 
-#: panels/sharing/cc-sharing-panel.ui:260
+#: panels/sharing/cc-sharing-panel.ui:257
 msgid "Allows remote connections to control the screen."
 msgstr "Izinkan koneksi mengendalikan layar."
 
-#: panels/sharing/cc-sharing-panel.ui:274
+#: panels/sharing/cc-sharing-panel.ui:271
 msgid "How to Connect"
 msgstr "Cara Menghubungkan"
 
-#: panels/sharing/cc-sharing-panel.ui:275
+#: panels/sharing/cc-sharing-panel.ui:272
 msgid ""
 "Connect to this computer using the device name or remote desktop address."
 msgstr ""
 "Sambungkan ke komputer ini menggunakan nama perangkat atau alamat destop "
 "jauh."
 
-#: panels/sharing/cc-sharing-panel.ui:294
-#: panels/sharing/cc-sharing-panel.ui:321
-#: panels/sharing/cc-sharing-panel.ui:348
-#: panels/sharing/cc-sharing-panel.ui:366
+#: panels/sharing/cc-sharing-panel.ui:291
+#: panels/sharing/cc-sharing-panel.ui:318
+#: panels/sharing/cc-sharing-panel.ui:345
+#: panels/sharing/cc-sharing-panel.ui:363
 msgid "Copy"
 msgstr "Salin"
 
-#: panels/sharing/cc-sharing-panel.ui:307
+#: panels/sharing/cc-sharing-panel.ui:304
 msgid "Remote Desktop Address"
 msgstr "Alamat Destop Jauh"
 
-#: panels/sharing/cc-sharing-panel.ui:337
+#: panels/sharing/cc-sharing-panel.ui:334
 msgid "Authentication"
 msgstr "Autentikasi"
 
-#: panels/sharing/cc-sharing-panel.ui:338
+#: panels/sharing/cc-sharing-panel.ui:335
 msgid "The user name and password are required to connect to this computer."
 msgstr ""
 "Nama pengguna dan kata sandi diperlukan untuk terhubung ke komputer ini."
 
-#: panels/sharing/cc-sharing-panel.ui:342
+#: panels/sharing/cc-sharing-panel.ui:339
 msgid "User Name"
 msgstr "Nama Pengguna"
 
-#: panels/sharing/cc-sharing-panel.ui:381
+#: panels/sharing/cc-sharing-panel.ui:378
 msgid "Verify Encryption"
 msgstr "Verifikasi Enkripsi"
 
-#: panels/sharing/cc-sharing-panel.ui:410
+#: panels/sharing/cc-sharing-panel.ui:407
 msgid "Encryption Fingerprint"
 msgstr "Sidik Jari Enkripsi"
 
-#: panels/sharing/cc-sharing-panel.ui:411
+#: panels/sharing/cc-sharing-panel.ui:408
 msgid ""
 "The encryption fingerprint can be seen in connecting clients and should be "
 "identical."
@@ -6886,15 +6908,15 @@ msgstr ""
 "Sidik jari enkripsi dapat dilihat dalam menghubungkan klien dan harus "
 "identik."
 
-#: panels/sharing/cc-sharing-panel.ui:443
+#: panels/sharing/cc-sharing-panel.ui:440
 msgid "Media Sharing"
 msgstr "Berbagi Pakai Media"
 
-#: panels/sharing/cc-sharing-panel.ui:465
+#: panels/sharing/cc-sharing-panel.ui:462
 msgid "Share music, photos and videos over the network."
 msgstr "Berbagi pakai musik, foto, dan video melalui jaringan."
 
-#: panels/sharing/cc-sharing-panel.ui:478
+#: panels/sharing/cc-sharing-panel.ui:475
 msgid "Folders"
 msgstr "Folder"
 
@@ -7562,13 +7584,13 @@ msgstr ""
 msgid ""
 "Keyboard;Mouse;a11y;Accessibility;Universal Access;Contrast;Cursor;Sound;"
 "Zoom;Screen;Reader;big;high;large;text;font;size;AccessX;Sticky;Keys;Slow;"
-"Bounce;Mouse;Double;click;Delay;Speed;Assist;Repeat;Blink;visual;hearing;"
-"audio;typing;animations;"
+"Bounce;Mouse;Double;click;Delay;Speed;Assist;Repeat;Blink;Pointer;find;"
+"locate;visual;hearing;audio;typing;animations;"
 msgstr ""
 "Papan Tik;Tetikus;a11y;Aksesibilitas;Akses Universal ;Kontras;Kursor;Suara;"
 "Zum;Layar;Pembaca;besar;tinggi;besar;teks;fonta;ukuran;AccessX;Lengket;"
 "Tombol;Lambat;Pantul;Tetikus;Dobel;klik;Tunda;Kecepatan;Bantu;Ulangi; "
-"Berkedip;visual;mendengar;audio;mengetik;animasi;"
+"Berkedip;Penunjuk;temukan;temukan;visual;mendengar;audio;mengetik;animasi;"
 
 #: panels/user-accounts/cc-add-user-dialog.c:36
 msgid "Should match the web address of your login provider."
@@ -9086,6 +9108,10 @@ msgstr "_Kunci SIM dengan PIN"
 #: panels/wwan/cc-wwan-sim-lock-dialog.ui:106
 msgid "Change PIN"
 msgstr "Ubah PIN"
+
+#: panels/wwan/cc-wwan-sim-lock-dialog.ui:123
+msgid "New PIN"
+msgstr "PIN Baru"
 
 #: panels/wwan/cc-wwan-sim-lock-dialog.ui:201
 msgid "Enter current PIN to change SIM lock settings"
