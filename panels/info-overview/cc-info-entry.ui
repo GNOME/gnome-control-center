@@ -2,9 +2,7 @@
 <interface>
   <template class="CcInfoEntry" parent="GtkBox">
     <property name="accessible-role">group</property>
-    <property name="orientation">horizontal</property>
-    <property name="margin-top">6</property>
-    <property name="margin-bottom">6</property>
+    <property name="orientation">vertical</property>
     <accessibility>
       <relation name="labelled-by">prop</relation>
       <property name="label">Info entry</property>
@@ -14,23 +12,23 @@
     <child>
       <object class="GtkLabel" id="prop">
         <property name="halign">start</property>
-        <property name="hexpand">true</property>
-        <property name="margin-end">12</property>
+        <style>
+          <class name="dim-label"/>
+        </style>
+        <attributes>
+          <attribute name="scale" value="0.8"/>
+        </attributes>
       </object>
     </child>
 
     <!-- Value -->
     <child>
       <object class="GtkLabel" id="value">
-        <property name="halign">end</property>
-        <property name="hexpand">true</property>
+        <property name="halign">start</property>
         <property name="ellipsize">end</property>
         <property name="selectable">true</property>
       </object>
     </child>
 
-    <style>
-      <class name="dim-label"/>
-    </style>
   </template>
 </interface>
