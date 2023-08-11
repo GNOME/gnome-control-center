@@ -20,8 +20,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center-master-po-gl-72290.merged\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2023-08-09 23:00+0000\n"
-"PO-Revision-Date: 2023-08-11 02:28+0200\n"
+"POT-Creation-Date: 2023-08-11 10:22+0000\n"
+"PO-Revision-Date: 2023-08-11 21:49+0200\n"
 "Last-Translator: Fran Dieguez <frandieguez@gnome.org>\n"
 "Language-Team: Galician <proxecto@trasno.gal>\n"
 "Language: gl\n"
@@ -548,7 +548,7 @@ msgstr "Pode quitar o dispositivo de calibrado."
 #. TRANSLATORS: The user has to be careful not to knock the
 #. * display off the screen (although we do cope if this is
 #. * detected early enough)
-#: panels/color/cc-color-calibrate.c:534
+#: panels/color/cc-color-calibrate.c:534 panels/color/cc-color-calibrate.ui:64
 msgid "Do not disturb the calibration device while in progress"
 msgstr "Non moleste o dispositivo de calibrado mentres está traballando"
 
@@ -1445,6 +1445,10 @@ msgstr "Para cambiar as preferencias de data e hora debe autenticarse."
 msgid "Links &amp; Files"
 msgstr "Ligazóns e ficheiros"
 
+#: panels/default-apps/cc-default-apps-panel.ui:9
+msgid "Applications which are used to open common links and files."
+msgstr "Aplicacións que se usan para abrir ligazóns e ficheiros comúns."
+
 #: panels/default-apps/cc-default-apps-panel.ui:12
 msgid "_Web"
 msgstr "_Web"
@@ -1519,6 +1523,7 @@ msgstr "Isto pode ser por limitacións do hardware."
 #: panels/display/cc-display-panel.ui:90 panels/display/cc-display-panel.ui:221
 #: panels/display/cc-display-panel.ui:260
 #: panels/keyboard/cc-keyboard-shortcut-dialog.ui:115
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:118
 #: panels/mouse/cc-mouse-panel.ui:17 panels/mouse/cc-mouse-panel.ui:23
 #: panels/network/cc-network-panel.ui:17 panels/network/cc-wifi-panel.ui:11
 #: panels/network/cc-wifi-panel.ui:17 panels/printers/new-printer-dialog.ui:64
@@ -1754,7 +1759,7 @@ msgid "System Logo"
 msgstr "Logotipo do sistema"
 
 #: panels/info-overview/cc-info-overview-panel.ui:33
-#: panels/sharing/cc-sharing-panel.ui:12 panels/sharing/cc-sharing-panel.ui:279
+#: panels/sharing/cc-sharing-panel.ui:12 panels/sharing/cc-sharing-panel.ui:276
 msgid "Device Name"
 msgstr "Nome do dispositivo"
 
@@ -1905,6 +1910,10 @@ msgstr "**Versión do núcleo:**"
 #: panels/info-overview/cc-system-details-window.c:852
 msgid "Details copied to clipboard"
 msgstr "Detalles copiados ao portapapeis"
+
+#: panels/info-overview/cc-system-details-window.ui:25
+msgid "_Copy"
+msgstr "_Copiar"
 
 #: panels/info-overview/cc-system-details-window.ui:58
 msgid "Hardware Information"
@@ -2725,15 +2734,11 @@ msgid "Network Unavailable"
 msgstr "Rede non dispoñíbel"
 
 #: panels/network/cc-network-panel.c:674
-#, fuzzy
-#| msgid ""
-#| "An error has occurred and Wi-Fi cannot be used.\n"
-#| "Error details: NetworkManager not running."
 msgid ""
 "An error has occurred and network cannot be used.\n"
 " Error details: NetworkManager not running."
 msgstr ""
-"Produciuse un erro e non pode usarse o Wifi.\n"
+"Produciuse un erro e non pode usarse o rede.\n"
 "Información do erro: NetworkManager non está executándose."
 
 #. xxx: Added to avoid confusion with the preceding VPN row
@@ -2970,7 +2975,7 @@ msgstr "Nobre de rede"
 #. Translators: This is a password needed for printing.
 #: panels/network/cc-wifi-hotspot-dialog.ui:92
 #: panels/printers/new-printer-dialog.ui:316
-#: panels/printers/pp-jobs-dialog.ui:54 panels/sharing/cc-sharing-panel.ui:360
+#: panels/printers/pp-jobs-dialog.ui:54 panels/sharing/cc-sharing-panel.ui:357
 #: panels/user-accounts/cc-add-user-dialog.ui:149
 #: panels/user-accounts/cc-add-user-dialog.ui:184
 #: panels/user-accounts/cc-add-user-dialog.ui:363
@@ -3110,6 +3115,8 @@ msgid ""
 "Saved details for “%s” will be permanently lost. This includes passwords and "
 "any network changes."
 msgstr ""
+"Os detalles gardados para «%s» perderanse permanentemente. Isto inclúe "
+"contrasinais e calquera cambio de rede."
 
 #: panels/network/connection-editor/ce-page-details.c:95
 #: panels/network/net-device-wifi.c:859
@@ -3356,9 +3363,17 @@ msgstr "Par non gardado"
 msgid "Signal Strength"
 msgstr "Intensidade do sinal"
 
+#: panels/network/connection-editor/details-page.ui:31
+msgid "Weak"
+msgstr "Débil"
+
 #: panels/network/connection-editor/details-page.ui:46
 msgid "Link speed"
 msgstr "Velocidade da ligazón"
+
+#: panels/network/connection-editor/details-page.ui:62
+msgid "1Mb/sec"
+msgstr "1Mb/sec"
 
 #: panels/network/connection-editor/details-page.ui:126
 #: panels/network/net-device-ethernet.c:154
@@ -3500,6 +3515,7 @@ msgstr "Rutas automáticas"
 #. Translators: Please see https://en.wikipedia.org/wiki/Metrics_(networking)
 #: panels/network/connection-editor/ip4-page.ui:291
 #: panels/network/connection-editor/ip6-page.ui:302
+#: panels/region/cc-format-preview.ui:98
 msgid "Metric"
 msgstr "Métrico"
 
@@ -3522,10 +3538,9 @@ msgid "Prefix"
 msgstr "Prefixo"
 
 #: panels/network/connection-editor/net-connection-editor.c:368
-#, fuzzy, c-format
-#| msgid "Unable to open connection editor"
+#, c-format
 msgid "Unable to open connection editor: %s"
-msgstr "Non foi posíbel abrir o editor de conexións"
+msgstr "Non foi posíbel abrir o editor de conexións: %s"
 
 #: panels/network/connection-editor/net-connection-editor.c:387
 msgid "New Profile"
@@ -3753,6 +3768,10 @@ msgstr "IMEI"
 #: panels/network/network-mobile.ui:41
 msgid "Provider"
 msgstr "Fornecedor"
+
+#: panels/network/network-mobile.ui:300
+msgid "Not connected"
+msgstr "Non conectado"
 
 #: panels/network/network-mobile.ui:310 panels/power/cc-power-profile-row.ui:21
 msgid "Active"
@@ -4146,11 +4165,13 @@ msgstr "Pechar a notificación"
 
 #: panels/online-accounts/cc-online-accounts-panel.ui:55
 msgid "Offline — unable to connect accounts"
-msgstr ""
+msgstr "Fóra de liña — non foi posíbel conectarse ás contas"
 
 #: panels/online-accounts/cc-online-accounts-panel.ui:61
 msgid "Allow apps to access online services by connecting your cloud accounts."
 msgstr ""
+"Permite que as aplicacións accedan aos servizos en liña conectándose ás súas "
+"contas na nube."
 
 #: panels/online-accounts/cc-online-accounts-panel.ui:65
 msgid "Your Accounts"
@@ -4623,8 +4644,6 @@ msgid "Could not load ui: %s"
 msgstr "Non foi posíbel cargar a IU: %s"
 
 #: panels/printers/cc-printers-panel.c:1313
-#, fuzzy
-#| msgid "Unlock to Add Printers and Change Settings"
 msgid "Unlock to add printers and change settings"
 msgstr "Desbloquear para engadir impresoras e cambiar as preferencias"
 
@@ -5265,7 +5284,7 @@ msgstr "Reiniciar"
 
 #: panels/printers/printers.ui:8
 msgid "All Connected and Network Printers"
-msgstr ""
+msgstr "Todas as impresoras de rede e conectadas"
 
 #. Translators: This button adds new printer.
 #. Translators: This button adds a new printer.
@@ -5684,7 +5703,7 @@ msgstr "Informe copiado ao portapapeis"
 
 #: panels/privacy/cc-firmware-security-dialog.ui:65
 msgid "_Copy Technical Report"
-msgstr ""
+msgstr "_Copiar informe técnico"
 
 #: panels/privacy/cc-firmware-security-help-dialog.ui:4
 msgid "About Device Security"
@@ -5709,6 +5728,23 @@ msgid ""
 "Device security is just one aspect of security, and does not reflect the "
 "overall security status of the system and applications."
 msgstr ""
+"A seguranza do dispositivo ofrece información sobre como está protexido o "
+"teu dispositivo contra problemas de seguranza que teñen como obxectivo o "
+"propio hardware.\n"
+"\n"
+"Os aspectos do hardware que afectan á seguranza inclúen:\n"
+"\n"
+"• funcións de seguranza integradas no propio hardware;\n"
+"• como se configura o hardware para protexer contra problemas de seguranza;\n"
+"• a seguranza do software corre directamente no hardware.\n"
+"\n"
+"Entre as ameazas de seguranza que afectan ao hardware inclúense o malware e "
+"os virus que teñen como obxectivo o software que se executa directamente no "
+"hardware. Tamén inclúe a manipulación física, como a conexión física ao "
+"hardware para ler datos e implantar malware.\n"
+"\n"
+"A seguranza do dispositivo é só un aspecto da seguranza e non reflicte o "
+"estado xeral de seguranza do sistema e das aplicacións."
 
 #: panels/privacy/cc-firmware-security-page.c:121
 msgid "Protected against malicious software when the device starts."
@@ -6366,7 +6402,7 @@ msgstr "_Eliminar os ficheiros temporais…"
 
 #: panels/privacy/gnome-privacy-panel.desktop.in:4
 msgid "Control access to hardware, services, and data"
-msgstr ""
+msgstr "Controle o acceso ao hardware, servizos e datos"
 
 #. Translators: Search terms to find the Privacy panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/privacy/gnome-privacy-panel.desktop.in:15
@@ -6375,6 +6411,9 @@ msgid ""
 "Purge;Retain;Diagnostics;Crash;Location;Gps;Camera;Photos;Video;Webcam;"
 "Microphone;Recording;Security;Firmware;Thunderbolt;"
 msgstr ""
+"Privacidade;Pantalla;Bloqueo;Privado;Uso;Recente;Historial;Ficheiros;"
+"Temporal;Tmp;Lixo;Purgar;Conservar;Diagnóstico;Fallo;Localización;GPS;Cámara;"
+"Fotos;Vídeo;Cámara web;Micrófono;Gravación;Seguridade;Firmware;Thunderbolt;"
 
 #: panels/region/cc-format-chooser.c:148 panels/region/cc-format-chooser.c:196
 #: panels/region/cc-format-chooser.ui:4
@@ -6782,44 +6821,32 @@ msgid "Password copied"
 msgstr "Contrasinal copiado"
 
 #: panels/sharing/cc-sharing-panel.ui:23
-#, fuzzy
-#| msgid "Share music, photos and videos over the network."
 msgid "Share files with other devices on the current network"
-msgstr "Compartir música, fotos e vídeos pola rede."
+msgstr "Compartir ficheiros con outros dispositivos na rede actual"
 
 #: panels/sharing/cc-sharing-panel.ui:25
 msgid "_File Sharing"
 msgstr "Compartir _ficheiros"
 
 #: panels/sharing/cc-sharing-panel.ui:33
-#, fuzzy
-#| msgid ""
-#| "Remote desktop allows viewing and controlling your desktop from another "
-#| "computer."
 msgid "View and control the desktop from another device"
-msgstr ""
-"O escritorio remoto permítelle ver e controlar o seu escritorio desde outro "
-"computador."
+msgstr "Ver e controlar o escritorio desde outro dispositivo"
 
 #: panels/sharing/cc-sharing-panel.ui:35
 msgid "Remote _Desktop"
 msgstr "Escritorio _remoto"
 
 #: panels/sharing/cc-sharing-panel.ui:43
-#, fuzzy
-#| msgid "Share music, photos and videos over the network."
 msgid "Stream music, photos and videos to devices on the current network"
-msgstr "Compartir música, fotos e vídeos pola rede."
+msgstr "Transmitir música, fotos e vídeos aos dispositivos da rede actual"
 
 #: panels/sharing/cc-sharing-panel.ui:45
 msgid "_Media Sharing"
 msgstr "Compartir _multimedia"
 
 #: panels/sharing/cc-sharing-panel.ui:53
-#, fuzzy
-#| msgid "Update firmware on this device"
 msgid "Enable SSH access for this device"
-msgstr "Actualizar o firmware neste dispositivo"
+msgstr "Activar o acceso por SSH para este dispositivo"
 
 #: panels/sharing/cc-sharing-panel.ui:55
 msgid "_Remote Login"
@@ -6829,26 +6856,26 @@ msgstr "Inicio de sesión _remoto"
 msgid "File Sharing"
 msgstr "Compartir ficheiros"
 
-#: panels/sharing/cc-sharing-panel.ui:111
+#: panels/sharing/cc-sharing-panel.ui:110
 msgid "_Require Password"
 msgstr "Requirir _contrasinal"
 
-#: panels/sharing/cc-sharing-panel.ui:125
+#: panels/sharing/cc-sharing-panel.ui:124
 #: panels/user-accounts/cc-user-panel.ui:151
 msgid "_Password"
 msgstr "_Contrasinal"
 
-#: panels/sharing/cc-sharing-panel.ui:168
-#: panels/sharing/cc-sharing-panel.ui:204
+#: panels/sharing/cc-sharing-panel.ui:167
+#: panels/sharing/cc-sharing-panel.ui:201
 msgid "Remote Login"
 msgstr "Inicio de sesión remoto"
 
-#: panels/sharing/cc-sharing-panel.ui:224
-#: panels/sharing/cc-sharing-panel.ui:245
+#: panels/sharing/cc-sharing-panel.ui:221
+#: panels/sharing/cc-sharing-panel.ui:242
 msgid "Remote Desktop"
 msgstr "Escritorio remoto"
 
-#: panels/sharing/cc-sharing-panel.ui:239
+#: panels/sharing/cc-sharing-panel.ui:236
 msgid ""
 "Remote desktop allows viewing and controlling your desktop from another "
 "computer."
@@ -6856,63 +6883,63 @@ msgstr ""
 "O escritorio remoto permítelle ver e controlar o seu escritorio desde outro "
 "computador."
 
-#: panels/sharing/cc-sharing-panel.ui:246
+#: panels/sharing/cc-sharing-panel.ui:243
 msgid "Enable or disable remote desktop connections to this computer."
 msgstr ""
 "Activar ou desactivar as conexións de escritorio remoto a este computador."
 
-#: panels/sharing/cc-sharing-panel.ui:259
+#: panels/sharing/cc-sharing-panel.ui:256
 msgid "Remote Control"
 msgstr "Control remoto"
 
-#: panels/sharing/cc-sharing-panel.ui:260
+#: panels/sharing/cc-sharing-panel.ui:257
 msgid "Allows remote connections to control the screen."
 msgstr "Permite as conexións para controlar a pantalla."
 
-#: panels/sharing/cc-sharing-panel.ui:274
+#: panels/sharing/cc-sharing-panel.ui:271
 msgid "How to Connect"
 msgstr "Como conectarse"
 
-#: panels/sharing/cc-sharing-panel.ui:275
+#: panels/sharing/cc-sharing-panel.ui:272
 msgid ""
 "Connect to this computer using the device name or remote desktop address."
 msgstr ""
 "Conéctese a este computador usando o nome de dispositivo ou enderezo de "
 "escritorio remoto."
 
-#: panels/sharing/cc-sharing-panel.ui:294
-#: panels/sharing/cc-sharing-panel.ui:321
-#: panels/sharing/cc-sharing-panel.ui:348
-#: panels/sharing/cc-sharing-panel.ui:366
+#: panels/sharing/cc-sharing-panel.ui:291
+#: panels/sharing/cc-sharing-panel.ui:318
+#: panels/sharing/cc-sharing-panel.ui:345
+#: panels/sharing/cc-sharing-panel.ui:363
 msgid "Copy"
 msgstr "Copiar"
 
-#: panels/sharing/cc-sharing-panel.ui:307
+#: panels/sharing/cc-sharing-panel.ui:304
 msgid "Remote Desktop Address"
 msgstr "Enderezo de escritorio remoto"
 
-#: panels/sharing/cc-sharing-panel.ui:337
+#: panels/sharing/cc-sharing-panel.ui:334
 msgid "Authentication"
 msgstr "Autenticación"
 
-#: panels/sharing/cc-sharing-panel.ui:338
+#: panels/sharing/cc-sharing-panel.ui:335
 msgid "The user name and password are required to connect to this computer."
 msgstr ""
 "Requírese o nome de usuario e contrasinal para conectarse a este computador."
 
-#: panels/sharing/cc-sharing-panel.ui:342
+#: panels/sharing/cc-sharing-panel.ui:339
 msgid "User Name"
 msgstr "Nome de usuario"
 
-#: panels/sharing/cc-sharing-panel.ui:381
+#: panels/sharing/cc-sharing-panel.ui:378
 msgid "Verify Encryption"
 msgstr "Comprobar cifrado"
 
-#: panels/sharing/cc-sharing-panel.ui:410
+#: panels/sharing/cc-sharing-panel.ui:407
 msgid "Encryption Fingerprint"
 msgstr "Pegada dixital do cifrado"
 
-#: panels/sharing/cc-sharing-panel.ui:411
+#: panels/sharing/cc-sharing-panel.ui:408
 msgid ""
 "The encryption fingerprint can be seen in connecting clients and should be "
 "identical."
@@ -6920,15 +6947,15 @@ msgstr ""
 "A pegada dixital do cifrado pode verse nos clientes conectándose e debería "
 "ser idéntica."
 
-#: panels/sharing/cc-sharing-panel.ui:443
+#: panels/sharing/cc-sharing-panel.ui:440
 msgid "Media Sharing"
 msgstr "Compartir multimedia"
 
-#: panels/sharing/cc-sharing-panel.ui:465
+#: panels/sharing/cc-sharing-panel.ui:462
 msgid "Share music, photos and videos over the network."
 msgstr "Compartir música, fotos e vídeos pola rede."
 
-#: panels/sharing/cc-sharing-panel.ui:478
+#: panels/sharing/cc-sharing-panel.ui:475
 msgid "Folders"
 msgstr "Cartafoles"
 
@@ -7132,6 +7159,7 @@ msgstr "_Probar escintilado"
 #: panels/universal-access/cc-ua-hearing-page.c:156
 msgid "System volume can be adjusted in <a href='#'>Sound</a> settings."
 msgstr ""
+"O volume do sistema pódese axustar na configuración de <a href='#'>Son</a>."
 
 #: panels/universal-access/cc-ua-mouse-page.ui:10
 msgid "_Mouse Keys"
@@ -7599,22 +7627,16 @@ msgstr "Faga máis doado ver, escoitar, escribir, apuntar e clicar"
 
 #. Translators: Search terms to find the Accessibility panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/universal-access/gnome-universal-access-panel.desktop.in:15
-#, fuzzy
-#| msgid ""
-#| "Keyboard;Mouse;a11y;Accessibility;Universal Access;Contrast;Cursor;Sound;"
-#| "Zoom;Screen;Reader;big;high;large;text;font;size;AccessX;Sticky;Keys;Slow;"
-#| "Bounce;Mouse;Double;click;Delay;Speed;Assist;Repeat;Blink;visual;hearing;"
-#| "audio;typing;animations;"
 msgid ""
 "Keyboard;Mouse;a11y;Accessibility;Universal Access;Contrast;Cursor;Sound;"
 "Zoom;Screen;Reader;big;high;large;text;font;size;AccessX;Sticky;Keys;Slow;"
 "Bounce;Mouse;Double;click;Delay;Speed;Assist;Repeat;Blink;Pointer;find;"
 "locate;visual;hearing;audio;typing;animations;"
 msgstr ""
-"Teclado;Rato;a11y;Accesibilidade;Contraste;Cursor;Son;Ampliación;Lector de "
-"pantalla;texto;tipo de letra;tamaño;AccessX;Persistente;Lenta;Rexeite;Rato;"
-"Dobre;clic;atraso;velocidade;asistencia;Repetición;Pestanexo;visión;audición;"
-"son;escrita;escoita;son;audio;animacións;"
+"Teclado;Rato;a11y;Accesibilidade;Acceso universal;Contraste;Cursor;Son;Zoom;"
+"Pantalla;Lector;grande;alto;grande; texto;tipo de letra;Tamaño;AccessX;"
+"Sticky;Teclas;Lento;Retardo;Velocidade;Axuda;Repetir;Parpadeo;Apuntador;"
+"Buscar;localizar;visual;audio;audio;escritura;animacións;"
 
 #: panels/user-accounts/cc-add-user-dialog.c:36
 msgid "Should match the web address of your login provider."
@@ -7678,18 +7700,14 @@ msgstr "Administrador"
 
 #: panels/user-accounts/cc-add-user-dialog.ui:135
 #: panels/user-accounts/cc-user-panel.ui:211
-#, fuzzy
-#| msgid ""
-#| "Administrators can add and remove other users, and can change settings "
-#| "for all users. Parental controls cannot be applied to administrators."
 msgid ""
 "Administrators have extra abilities, including adding and removing users, "
 "changing login settings, and removing software. Parental controls cannot be "
 "applied to administrators."
 msgstr ""
-"Os administradores poden engadir ou eliminar usuarios e poden cambiar as "
-"preferencias para todos os usuarios. Os controles parentais non se aplican "
-"aos administradores."
+"Os administradores teñen capacidades adicionais, como engadir e eliminar "
+"usuarios, cambiar a configuración de inicio de sesión e eliminar software. "
+"Os controis parentais non se poden aplicarse aos administradores."
 
 #: panels/user-accounts/cc-add-user-dialog.ui:153
 msgid "User sets password on first login"
@@ -8100,8 +8118,6 @@ msgstr ""
 "primeiro prema na icona *"
 
 #: panels/user-accounts/cc-user-panel.c:1392
-#, fuzzy
-#| msgid "Unlock to Add Users and Change Settings"
 msgid "Unlock to add users and change settings"
 msgstr "Desbloquear para engadir usuarios e cambiar as preferencias"
 
@@ -8141,6 +8157,9 @@ msgid ""
 "requiring authentication. Authentication is still required at other times, "
 "such as when unlocking the screen."
 msgstr ""
+"O inicio de sesión automático abre a conta de usuario cando se inicia o "
+"dispositivo, sen necesidade de autenticación. A autenticación aínda é "
+"necesaria noutros momentos, como cando se desbloquea a pantalla."
 
 #: panels/user-accounts/cc-user-panel.ui:204
 msgid "_Administrator"
@@ -8180,6 +8199,8 @@ msgid ""
 "The user will not be able to use this device once their account has been "
 "removed."
 msgstr ""
+"Este usuario non pode usar este dispositivo a partires de que se elimine a "
+"conta."
 
 #: panels/user-accounts/cc-user-panel.ui:354
 msgid "Delete Files and Settings"
@@ -9140,6 +9161,10 @@ msgstr "_Bloquear SIM con PIN"
 #: panels/wwan/cc-wwan-sim-lock-dialog.ui:106
 msgid "Change PIN"
 msgstr "Cambiar PIN"
+
+#: panels/wwan/cc-wwan-sim-lock-dialog.ui:123
+msgid "New PIN"
+msgstr "Novo PIN"
 
 #: panels/wwan/cc-wwan-sim-lock-dialog.ui:201
 msgid "Enter current PIN to change SIM lock settings"
