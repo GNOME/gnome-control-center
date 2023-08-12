@@ -35,8 +35,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2023-08-09 23:00+0000\n"
-"PO-Revision-Date: 2023-08-10 14:57+0800\n"
+"POT-Creation-Date: 2023-08-11 10:22+0000\n"
+"PO-Revision-Date: 2023-08-11 19:14+0800\n"
 "Last-Translator: lumingzh <lumingzh@qq.com>\n"
 "Language-Team: Chinese - China <i18n-zh@googlegroups.com>\n"
 "Language: zh_CN\n"
@@ -551,7 +551,7 @@ msgstr "您现在可以移除校准设备。"
 #. TRANSLATORS: The user has to be careful not to knock the
 #. * display off the screen (although we do cope if this is
 #. * detected early enough)
-#: panels/color/cc-color-calibrate.c:534
+#: panels/color/cc-color-calibrate.c:534 panels/color/cc-color-calibrate.ui:64
 msgid "Do not disturb the calibration device while in progress"
 msgstr "校准过程中不要干扰校准设备"
 
@@ -1428,9 +1428,13 @@ msgstr "更改时间或日期设置需要认证。"
 msgid "Links &amp; Files"
 msgstr "链接和文件"
 
+#: panels/default-apps/cc-default-apps-panel.ui:9
+msgid "Applications which are used to open common links and files."
+msgstr "用来打开常见链接和文件的应用程序。"
+
 #: panels/default-apps/cc-default-apps-panel.ui:12
 msgid "_Web"
-msgstr "Web(_W)"
+msgstr "网络(_W)"
 
 #: panels/default-apps/cc-default-apps-panel.ui:20
 msgid "_Mail"
@@ -1502,6 +1506,7 @@ msgstr "这可能是硬件限制造成的。"
 #: panels/display/cc-display-panel.ui:90 panels/display/cc-display-panel.ui:221
 #: panels/display/cc-display-panel.ui:260
 #: panels/keyboard/cc-keyboard-shortcut-dialog.ui:115
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:118
 #: panels/mouse/cc-mouse-panel.ui:17 panels/mouse/cc-mouse-panel.ui:23
 #: panels/network/cc-network-panel.ui:17 panels/network/cc-wifi-panel.ui:11
 #: panels/network/cc-wifi-panel.ui:17 panels/printers/new-printer-dialog.ui:64
@@ -1733,7 +1738,7 @@ msgid "System Logo"
 msgstr "系统标志"
 
 #: panels/info-overview/cc-info-overview-panel.ui:33
-#: panels/sharing/cc-sharing-panel.ui:12 panels/sharing/cc-sharing-panel.ui:279
+#: panels/sharing/cc-sharing-panel.ui:12 panels/sharing/cc-sharing-panel.ui:276
 msgid "Device Name"
 msgstr "设备名称"
 
@@ -1884,6 +1889,10 @@ msgstr "**内核版本：**"
 #: panels/info-overview/cc-system-details-window.c:852
 msgid "Details copied to clipboard"
 msgstr "详情已复制到剪贴板"
+
+#: panels/info-overview/cc-system-details-window.ui:25
+msgid "_Copy"
+msgstr "复制(_C)"
 
 #: panels/info-overview/cc-system-details-window.ui:58
 msgid "Hardware Information"
@@ -2923,7 +2932,7 @@ msgstr "网络名称"
 #. Translators: This is a password needed for printing.
 #: panels/network/cc-wifi-hotspot-dialog.ui:92
 #: panels/printers/new-printer-dialog.ui:316
-#: panels/printers/pp-jobs-dialog.ui:54 panels/sharing/cc-sharing-panel.ui:360
+#: panels/printers/pp-jobs-dialog.ui:54 panels/sharing/cc-sharing-panel.ui:357
 #: panels/user-accounts/cc-add-user-dialog.ui:149
 #: panels/user-accounts/cc-add-user-dialog.ui:184
 #: panels/user-accounts/cc-add-user-dialog.ui:363
@@ -3305,9 +3314,17 @@ msgstr "未保存的配对"
 msgid "Signal Strength"
 msgstr "信号强度"
 
+#: panels/network/connection-editor/details-page.ui:31
+msgid "Weak"
+msgstr "较弱"
+
 #: panels/network/connection-editor/details-page.ui:46
 msgid "Link speed"
 msgstr "链路速度"
+
+#: panels/network/connection-editor/details-page.ui:62
+msgid "1Mb/sec"
+msgstr "1Mb/s"
 
 #: panels/network/connection-editor/details-page.ui:126
 #: panels/network/net-device-ethernet.c:154
@@ -3447,6 +3464,7 @@ msgstr "自动路由"
 #. Translators: Please see https://en.wikipedia.org/wiki/Metrics_(networking)
 #: panels/network/connection-editor/ip4-page.ui:291
 #: panels/network/connection-editor/ip6-page.ui:302
+#: panels/region/cc-format-preview.ui:98
 msgid "Metric"
 msgstr "跃点"
 
@@ -3694,6 +3712,10 @@ msgstr "IMEI"
 #: panels/network/network-mobile.ui:41
 msgid "Provider"
 msgstr "提供者"
+
+#: panels/network/network-mobile.ui:300
+msgid "Not connected"
+msgstr "未连接"
 
 #: panels/network/network-mobile.ui:310 panels/power/cc-power-profile-row.ui:21
 msgid "Active"
@@ -6705,98 +6727,98 @@ msgstr "远程登录(_R)"
 msgid "File Sharing"
 msgstr "文件共享"
 
-#: panels/sharing/cc-sharing-panel.ui:111
+#: panels/sharing/cc-sharing-panel.ui:110
 msgid "_Require Password"
 msgstr "需要密码(_R)"
 
-#: panels/sharing/cc-sharing-panel.ui:125
+#: panels/sharing/cc-sharing-panel.ui:124
 #: panels/user-accounts/cc-user-panel.ui:151
 msgid "_Password"
 msgstr "密码(_P)"
 
-#: panels/sharing/cc-sharing-panel.ui:168
-#: panels/sharing/cc-sharing-panel.ui:204
+#: panels/sharing/cc-sharing-panel.ui:167
+#: panels/sharing/cc-sharing-panel.ui:201
 msgid "Remote Login"
 msgstr "远程登录"
 
-#: panels/sharing/cc-sharing-panel.ui:224
-#: panels/sharing/cc-sharing-panel.ui:245
+#: panels/sharing/cc-sharing-panel.ui:221
+#: panels/sharing/cc-sharing-panel.ui:242
 msgid "Remote Desktop"
 msgstr "远程桌面"
 
-#: panels/sharing/cc-sharing-panel.ui:239
+#: panels/sharing/cc-sharing-panel.ui:236
 msgid ""
 "Remote desktop allows viewing and controlling your desktop from another "
 "computer."
 msgstr "远程桌面允许从另一个计算机查看和操控您的桌面。"
 
-#: panels/sharing/cc-sharing-panel.ui:246
+#: panels/sharing/cc-sharing-panel.ui:243
 msgid "Enable or disable remote desktop connections to this computer."
 msgstr "启用或禁用远程桌面连接至该计算机。"
 
-#: panels/sharing/cc-sharing-panel.ui:259
+#: panels/sharing/cc-sharing-panel.ui:256
 msgid "Remote Control"
 msgstr "远程控制"
 
-#: panels/sharing/cc-sharing-panel.ui:260
+#: panels/sharing/cc-sharing-panel.ui:257
 msgid "Allows remote connections to control the screen."
 msgstr "允许远程连接操控该屏幕。"
 
-#: panels/sharing/cc-sharing-panel.ui:274
+#: panels/sharing/cc-sharing-panel.ui:271
 msgid "How to Connect"
 msgstr "如何连接"
 
-#: panels/sharing/cc-sharing-panel.ui:275
+#: panels/sharing/cc-sharing-panel.ui:272
 msgid ""
 "Connect to this computer using the device name or remote desktop address."
 msgstr "使用设备名称或远程桌面地址连接至该计算机。"
 
-#: panels/sharing/cc-sharing-panel.ui:294
-#: panels/sharing/cc-sharing-panel.ui:321
-#: panels/sharing/cc-sharing-panel.ui:348
-#: panels/sharing/cc-sharing-panel.ui:366
+#: panels/sharing/cc-sharing-panel.ui:291
+#: panels/sharing/cc-sharing-panel.ui:318
+#: panels/sharing/cc-sharing-panel.ui:345
+#: panels/sharing/cc-sharing-panel.ui:363
 msgid "Copy"
 msgstr "复制"
 
-#: panels/sharing/cc-sharing-panel.ui:307
+#: panels/sharing/cc-sharing-panel.ui:304
 msgid "Remote Desktop Address"
 msgstr "远程桌面地址"
 
-#: panels/sharing/cc-sharing-panel.ui:337
+#: panels/sharing/cc-sharing-panel.ui:334
 msgid "Authentication"
 msgstr "认证"
 
-#: panels/sharing/cc-sharing-panel.ui:338
+#: panels/sharing/cc-sharing-panel.ui:335
 msgid "The user name and password are required to connect to this computer."
 msgstr "连接至该计算机需要用户名和密码。"
 
-#: panels/sharing/cc-sharing-panel.ui:342
+#: panels/sharing/cc-sharing-panel.ui:339
 msgid "User Name"
 msgstr "用户名"
 
-#: panels/sharing/cc-sharing-panel.ui:381
+#: panels/sharing/cc-sharing-panel.ui:378
 msgid "Verify Encryption"
 msgstr "验证加密"
 
-#: panels/sharing/cc-sharing-panel.ui:410
+#: panels/sharing/cc-sharing-panel.ui:407
 msgid "Encryption Fingerprint"
 msgstr "加密指纹"
 
-#: panels/sharing/cc-sharing-panel.ui:411
+#: panels/sharing/cc-sharing-panel.ui:408
 msgid ""
 "The encryption fingerprint can be seen in connecting clients and should be "
 "identical."
 msgstr "加密指纹可以在连接的客户端中看到且应一致。"
 
-#: panels/sharing/cc-sharing-panel.ui:443
+#: panels/sharing/cc-sharing-panel.ui:440
 msgid "Media Sharing"
 msgstr "媒体共享"
 
-#: panels/sharing/cc-sharing-panel.ui:465
+#: panels/sharing/cc-sharing-panel.ui:462
 msgid "Share music, photos and videos over the network."
 msgstr "通过网络共享音乐、照片和视频。"
 
-#: panels/sharing/cc-sharing-panel.ui:478
+#: panels/sharing/cc-sharing-panel.ui:475
 msgid "Folders"
 msgstr "文件夹"
 
@@ -8963,6 +8985,10 @@ msgstr "使用 PIN 锁定 SIM (_L)"
 msgid "Change PIN"
 msgstr "更改 PIN"
 
+#: panels/wwan/cc-wwan-sim-lock-dialog.ui:123
+msgid "New PIN"
+msgstr "新 PIN"
+
 #: panels/wwan/cc-wwan-sim-lock-dialog.ui:201
 msgid "Enter current PIN to change SIM lock settings"
 msgstr "输入当前 PIN 以更改 SIM 锁设置"
@@ -10776,9 +10802,6 @@ msgstr "系统声音"
 #~ msgid "Requires Internet connection"
 #~ msgstr "需要互联网连接"
 
-#~ msgid "_Copy"
-#~ msgstr "复制(_C)"
-
 #~ msgid "Select _All"
 #~ msgstr "选择全部(_A)"
 
@@ -11172,9 +11195,6 @@ msgstr "系统声音"
 
 #~ msgid "Media Independent Interface (MII)"
 #~ msgstr "媒体独立接口 (MII)"
-
-#~ msgid "10 Mb/s"
-#~ msgstr "10 Mb/s"
 
 #~ msgid "100 Mb/s"
 #~ msgstr "100 Mb/s"
