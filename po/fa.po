@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: amberol\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/issues\n"
-"POT-Creation-Date: 2023-08-07 10:28+0000\n"
-"PO-Revision-Date: 2023-08-07 16:43+0330\n"
+"POT-Creation-Date: 2023-08-11 10:22+0000\n"
+"PO-Revision-Date: 2023-08-13 16:31+0330\n"
 "Last-Translator: Danial Behzadi <dani.behzi@ubuntu.com>\n"
 "Language-Team: Farsi\n"
 "Language: fa\n"
@@ -405,7 +405,7 @@ msgstr "هیچ بلوتوثی پیدا نشد"
 
 #: panels/bluetooth/cc-bluetooth-panel.ui:25
 msgid "Plug in a dongle to use Bluetooth."
-msgstr "برای استفاده بلوتوث یک دانگل متّصل کنید."
+msgstr "دانگلی را برای استفاده از بلوتوث وصل کنید."
 
 #: panels/bluetooth/cc-bluetooth-panel.ui:31
 msgid "Bluetooth Turned Off"
@@ -443,7 +443,7 @@ msgstr "بلوتوث"
 
 #: panels/bluetooth/gnome-bluetooth-panel.desktop.in:4
 msgid "Turn Bluetooth on and off and connect your devices"
-msgstr "بلوتوث را خاموش و روشن کنید و به افزاره‌های خود متّصل شوید"
+msgstr "بلوتوث را روشن و خاموش کرده و به افزاره‌هایتان وصل شوید"
 
 #. Translators: Search terms to find the Bluetooth panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/bluetooth/gnome-bluetooth-panel.desktop.in:15
@@ -519,7 +519,7 @@ msgstr "می‌توانید افزارهٔ واسنجی را بردارید."
 #. TRANSLATORS: The user has to be careful not to knock the
 #. * display off the screen (although we do cope if this is
 #. * detected early enough)
-#: panels/color/cc-color-calibrate.c:534
+#: panels/color/cc-color-calibrate.c:534 panels/color/cc-color-calibrate.ui:64
 msgid "Do not disturb the calibration device while in progress"
 msgstr "مزاحم افزارهٔ واسنجی در هنگام کار نشوید"
 
@@ -744,7 +744,7 @@ msgstr "گونهٔ نمایشگر"
 
 #: panels/color/cc-color-panel.ui:125
 msgid "Select the type of display that is connected."
-msgstr "گونهٔ نمایشگری که متّصل شده است را برگزینید."
+msgstr "گزینش گونهٔ نمایشگری که وصل شده."
 
 #: panels/color/cc-color-panel.ui:152
 msgid "Profile Whitepoint"
@@ -1394,6 +1394,10 @@ msgstr "برای تغییر تنظیمات تاریخ و ساعت، احتیاج
 msgid "Links &amp; Files"
 msgstr "پیوندها و پرونده‌ها"
 
+#: panels/default-apps/cc-default-apps-panel.ui:9
+msgid "Applications which are used to open common links and files."
+msgstr "برنامه‌هایی که برای گشودن پرونده‌ها و پیوندهای معمول استفاده می‌شوند"
+
 #: panels/default-apps/cc-default-apps-panel.ui:12
 msgid "_Web"
 msgstr "_وب"
@@ -1468,6 +1472,7 @@ msgstr "می‌تواند به دلیلی محدودیت‌های سخت‌اف�
 #: panels/display/cc-display-panel.ui:90 panels/display/cc-display-panel.ui:221
 #: panels/display/cc-display-panel.ui:260
 #: panels/keyboard/cc-keyboard-shortcut-dialog.ui:115
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:118
 #: panels/mouse/cc-mouse-panel.ui:17 panels/mouse/cc-mouse-panel.ui:23
 #: panels/network/cc-network-panel.ui:17 panels/network/cc-wifi-panel.ui:11
 #: panels/network/cc-wifi-panel.ui:17 panels/printers/new-printer-dialog.ui:64
@@ -1696,7 +1701,7 @@ msgid "System Logo"
 msgstr "نشان سامانه"
 
 #: panels/info-overview/cc-info-overview-panel.ui:33
-#: panels/sharing/cc-sharing-panel.ui:12 panels/sharing/cc-sharing-panel.ui:279
+#: panels/sharing/cc-sharing-panel.ui:12 panels/sharing/cc-sharing-panel.ui:276
 msgid "Device Name"
 msgstr "نام افزاره"
 
@@ -1847,6 +1852,10 @@ msgstr "**نگارش کرنل:**"
 #: panels/info-overview/cc-system-details-window.c:852
 msgid "Details copied to clipboard"
 msgstr "جزییان در تخته‌گیره رونوشت شد"
+
+#: panels/info-overview/cc-system-details-window.ui:25
+msgid "_Copy"
+msgstr "_رونوشت"
 
 #: panels/info-overview/cc-system-details-window.ui:58
 msgid "Hardware Information"
@@ -2759,7 +2768,7 @@ msgstr "میزبان‌های چشم‌پوشیده"
 #: panels/network/cc-qr-code-dialog.c:133
 #, c-format
 msgid "Scan the QR code to connect to the network <b>%s</b>."
-msgstr "رمزینهٔ پاس را بپویید تا به شبکهٔ <b>‎%s</b> متّصل شوید."
+msgstr "پویش کد پاس برای وصل شدن به شبکهٔ <b>‎%s</b>."
 
 #: panels/network/cc-qr-code-dialog.ui:9
 msgid "Share Network"
@@ -2808,7 +2817,7 @@ msgstr "قدرت سیگنال %Id٪"
 #. TRANSLATORS: device status
 #: panels/network/cc-wifi-connection-row.ui:41 panels/network/panel-common.c:63
 msgid "Connected"
-msgstr "متّصل"
+msgstr "وصل شده"
 
 #: panels/network/cc-wifi-connection-row.ui:62
 msgid "Show QR-Code"
@@ -2877,7 +2886,7 @@ msgstr "نام شبکه"
 #. Translators: This is a password needed for printing.
 #: panels/network/cc-wifi-hotspot-dialog.ui:92
 #: panels/printers/new-printer-dialog.ui:316 panels/printers/pp-jobs-dialog.ui:54
-#: panels/sharing/cc-sharing-panel.ui:360
+#: panels/sharing/cc-sharing-panel.ui:357
 #: panels/user-accounts/cc-add-user-dialog.ui:149
 #: panels/user-accounts/cc-add-user-dialog.ui:184
 #: panels/user-accounts/cc-add-user-dialog.ui:363
@@ -3256,9 +3265,17 @@ msgstr "همتاهای ذخیره نشده"
 msgid "Signal Strength"
 msgstr "قدرت سیگنال"
 
+#: panels/network/connection-editor/details-page.ui:31
+msgid "Weak"
+msgstr "ضعیف"
+
 #: panels/network/connection-editor/details-page.ui:46
 msgid "Link speed"
 msgstr "سرعت پیوند"
+
+#: panels/network/connection-editor/details-page.ui:62
+msgid "1Mb/sec"
+msgstr "۱م‌ب/ث"
 
 #: panels/network/connection-editor/details-page.ui:126
 #: panels/network/net-device-ethernet.c:154
@@ -3273,7 +3290,7 @@ msgstr "بسامدهای پشتیبانی شده"
 #: panels/network/net-device-ethernet.c:158 panels/network/net-device-ethernet.c:160
 #: panels/network/net-device-ethernet.c:162 panels/network/network-mobile.ui:191
 msgid "Default Route"
-msgstr "بسامدهای پشتیبانی شده"
+msgstr "مسیر پیش‌گزیده"
 
 #: panels/network/connection-editor/details-page.ui:208
 msgid "Last Used"
@@ -3396,6 +3413,7 @@ msgstr "مسیرهای خودکار"
 #. Translators: Please see https://en.wikipedia.org/wiki/Metrics_(networking)
 #: panels/network/connection-editor/ip4-page.ui:291
 #: panels/network/connection-editor/ip6-page.ui:302
+#: panels/region/cc-format-preview.ui:98
 msgid "Metric"
 msgstr "متریک"
 
@@ -3648,6 +3666,10 @@ msgstr "IMEI"
 #: panels/network/network-mobile.ui:41
 msgid "Provider"
 msgstr "فراهم‌کننده"
+
+#: panels/network/network-mobile.ui:300
+msgid "Not connected"
+msgstr "وصل نشده"
 
 #: panels/network/network-mobile.ui:310 panels/power/cc-power-profile-row.ui:21
 msgid "Active"
@@ -5182,7 +5204,7 @@ msgstr "در حال وصل شدن"
 #: panels/privacy/cc-bolt-device-entry.c:140
 msgctxt "Thunderbolt Device Status"
 msgid "Connected"
-msgstr "متّصل"
+msgstr "وصل شده"
 
 #: panels/privacy/cc-bolt-device-dialog.c:88
 msgctxt "Thunderbolt Device Status"
@@ -6364,23 +6386,23 @@ msgstr "رسانه‌های دیگر"
 
 #: panels/removable-media/cc-removable-media-panel.c:352
 msgid "Select an application for audio CDs"
-msgstr "یک برنامه‌ برای پخش سی‌دی‌های صوتی انتخاب کن"
+msgstr "گزینش برنامه‌‌ای برای سی‌دی‌های صوتی"
 
 #: panels/removable-media/cc-removable-media-panel.c:353
 msgid "Select an application for video DVDs"
-msgstr "یک برنامه‌ برای پخش دی‌وی‌دی‌های ویدیویی انتخاب کن"
+msgstr "گزینش برنامه‌‌ای برای دی‌وی‌دی‌های ویدیویی"
 
 #: panels/removable-media/cc-removable-media-panel.c:354
 msgid "Select an application to run when a music player is connected"
-msgstr "یک برنامه برای اجرا جهت زمانی که یک پخش‌کننده موسیقی متّصل می‌شود، انتخاب کنید"
+msgstr "گزینش برنامه‌ای برای اجرا هنگام وصل شدن پخش‌کنندهٔ آهنگ"
 
 #: panels/removable-media/cc-removable-media-panel.c:355
 msgid "Select an application to run when a camera is connected"
-msgstr "یک برنامه برای اجرا جهت زمانی که یک دوربین متّصل می‌شود، انتخاب کنید"
+msgstr "گزینش برنامه برای اجرا هنگام وصل شدن دوربین"
 
 #: panels/removable-media/cc-removable-media-panel.c:356
 msgid "Select an application for software CDs"
-msgstr "یک برنامه‌ برای سی‌دی‌های نرم‌افزار انتخاب کن"
+msgstr "گزینش برنامه‌ای برای سی‌دی‌های نرم‌افزاری"
 
 #. translators: these strings are duplicates of shared-mime-info
 #. * strings, just here to fix capitalization of the English originals.
@@ -6437,7 +6459,7 @@ msgstr "نرم‌افزار ویندوزی"
 
 #: panels/removable-media/cc-removable-media-panel.ui:32
 msgid "Select how media should be handled"
-msgstr "نرم‌افزار ویندوزی"
+msgstr "گزینش چگونگی مدیریت رسانه"
 
 #: panels/removable-media/cc-removable-media-panel.ui:52
 msgid "CD _audio"
@@ -6461,11 +6483,11 @@ msgstr "دیگر _رسانه‌ها…"
 
 #: panels/removable-media/cc-removable-media-panel.ui:197
 msgid "_Never prompt or start apps on media insertion"
-msgstr "_عدم  یا شروع کاره‌ها هنگام ورود رسانه"
+msgstr "_هنگام ورود رسانه هرگز اعلانی داده یا کاره‌ای آغاز نشود"
 
 #: panels/removable-media/cc-removable-media-panel.ui:230
 msgid "Select how other media should be handled"
-msgstr "انتخاب شیوهٔ رفتار با دیگر رسانه‌ها"
+msgstr "گزینش چگونگی مدیریت دیگر رسانه‌ها"
 
 #: panels/removable-media/cc-removable-media-panel.ui:264
 msgid "_Action:"
@@ -6620,8 +6642,8 @@ msgid ""
 "command:\n"
 "%s"
 msgstr ""
-"هنگام به کار افتادن ورود دوردست، کاربران دوردست می‌توانند با استفاده از این فرمان "
-"پوستهٔ امن متّصل شوند:\n"
+"هنگام به کار افتادن ورود دوردست، کاربران دوردست می‌توانند با استفاده از فرمان پوستهٔ "
+"امن وصل شوند:\n"
 "%s"
 
 #: panels/sharing/cc-sharing-panel.c:763
@@ -6680,91 +6702,91 @@ msgstr "ورود  _دوردست"
 msgid "File Sharing"
 msgstr "هم‌رسانی پرونده"
 
-#: panels/sharing/cc-sharing-panel.ui:111
+#: panels/sharing/cc-sharing-panel.ui:110
 msgid "_Require Password"
 msgstr "گذرواژه _لازم است"
 
-#: panels/sharing/cc-sharing-panel.ui:125 panels/user-accounts/cc-user-panel.ui:151
+#: panels/sharing/cc-sharing-panel.ui:124 panels/user-accounts/cc-user-panel.ui:151
 msgid "_Password"
 msgstr "_گذرواژه"
 
-#: panels/sharing/cc-sharing-panel.ui:168 panels/sharing/cc-sharing-panel.ui:204
+#: panels/sharing/cc-sharing-panel.ui:167 panels/sharing/cc-sharing-panel.ui:201
 msgid "Remote Login"
 msgstr "ورود دوردست"
 
-#: panels/sharing/cc-sharing-panel.ui:224 panels/sharing/cc-sharing-panel.ui:245
+#: panels/sharing/cc-sharing-panel.ui:221 panels/sharing/cc-sharing-panel.ui:242
 msgid "Remote Desktop"
 msgstr "میزکار دوردست"
 
-#: panels/sharing/cc-sharing-panel.ui:239
+#: panels/sharing/cc-sharing-panel.ui:236
 msgid ""
 "Remote desktop allows viewing and controlling your desktop from another computer."
 msgstr "میزکار دوردست می‌گذارد میزکارتان را از رایانه‌ای دیگر دیده و واپایش کنید."
 
-#: panels/sharing/cc-sharing-panel.ui:246
+#: panels/sharing/cc-sharing-panel.ui:243
 msgid "Enable or disable remote desktop connections to this computer."
 msgstr "به یا از کار انداختن اتّصال‌های میزکار دوردست به این رایانه."
 
-#: panels/sharing/cc-sharing-panel.ui:259
+#: panels/sharing/cc-sharing-panel.ui:256
 msgid "Remote Control"
 msgstr "واپایش دوردست"
 
-#: panels/sharing/cc-sharing-panel.ui:260
+#: panels/sharing/cc-sharing-panel.ui:257
 msgid "Allows remote connections to control the screen."
 msgstr "اجازه به اتّصال‌ها برای واپایش صفحه."
 
-#: panels/sharing/cc-sharing-panel.ui:274
+#: panels/sharing/cc-sharing-panel.ui:271
 msgid "How to Connect"
 msgstr "چگونگی وصل شدن"
 
-#: panels/sharing/cc-sharing-panel.ui:275
+#: panels/sharing/cc-sharing-panel.ui:272
 msgid "Connect to this computer using the device name or remote desktop address."
 msgstr "وصل شدن به این رایانه با استفاده از نام افزاره یا نشانی میزکار دوردست."
 
-#: panels/sharing/cc-sharing-panel.ui:294 panels/sharing/cc-sharing-panel.ui:321
-#: panels/sharing/cc-sharing-panel.ui:348 panels/sharing/cc-sharing-panel.ui:366
+#: panels/sharing/cc-sharing-panel.ui:291 panels/sharing/cc-sharing-panel.ui:318
+#: panels/sharing/cc-sharing-panel.ui:345 panels/sharing/cc-sharing-panel.ui:363
 msgid "Copy"
 msgstr "رونوشت"
 
-#: panels/sharing/cc-sharing-panel.ui:307
+#: panels/sharing/cc-sharing-panel.ui:304
 msgid "Remote Desktop Address"
 msgstr "نشانی میزکار دوردست"
 
-#: panels/sharing/cc-sharing-panel.ui:337
+#: panels/sharing/cc-sharing-panel.ui:334
 msgid "Authentication"
 msgstr "تأیید هویت"
 
-#: panels/sharing/cc-sharing-panel.ui:338
+#: panels/sharing/cc-sharing-panel.ui:335
 msgid "The user name and password are required to connect to this computer."
 msgstr "برای وصل شدن به این رایانه نیاز به نام کاربری و گذرواژه است."
 
-#: panels/sharing/cc-sharing-panel.ui:342
+#: panels/sharing/cc-sharing-panel.ui:339
 msgid "User Name"
 msgstr "نام کاربری"
 
-#: panels/sharing/cc-sharing-panel.ui:381
+#: panels/sharing/cc-sharing-panel.ui:378
 msgid "Verify Encryption"
 msgstr "تأیید رمزنگاری"
 
-#: panels/sharing/cc-sharing-panel.ui:410
+#: panels/sharing/cc-sharing-panel.ui:407
 msgid "Encryption Fingerprint"
 msgstr "اثر انگشت رمزنگاری"
 
-#: panels/sharing/cc-sharing-panel.ui:411
+#: panels/sharing/cc-sharing-panel.ui:408
 msgid ""
 "The encryption fingerprint can be seen in connecting clients and should be "
 "identical."
 msgstr "اثرانگشت رمزنگاری می‌تواند در کارخواه‌های وصل شده دیده شود و باید یکتا باشد."
 
-#: panels/sharing/cc-sharing-panel.ui:443
+#: panels/sharing/cc-sharing-panel.ui:440
 msgid "Media Sharing"
 msgstr "هم‌رسانی رسانه"
 
-#: panels/sharing/cc-sharing-panel.ui:465
+#: panels/sharing/cc-sharing-panel.ui:462
 msgid "Share music, photos and videos over the network."
 msgstr "هم‌رسانی آهنگ‌ها، عکس‌ها و ویدیوها روی شبکه."
 
-#: panels/sharing/cc-sharing-panel.ui:478
+#: panels/sharing/cc-sharing-panel.ui:475
 msgid "Folders"
 msgstr "پوشه‌ها"
 
@@ -7422,11 +7444,17 @@ msgstr "ساده‌تر کردن دیدن، شنیدن، نوشتن، نشانه
 
 #. Translators: Search terms to find the Accessibility panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/universal-access/gnome-universal-access-panel.desktop.in:15
+#, fuzzy
+#| msgid ""
+#| "Keyboard;Mouse;a11y;Accessibility;Universal Access;Contrast;Cursor;Sound;Zoom;"
+#| "Screen;Reader;big;high;large;text;font;size;AccessX;Sticky;Keys;Slow;Bounce;"
+#| "Mouse;Double;click;Delay;Speed;Assist;Repeat;Blink;visual;hearing;audio;typing;"
+#| "animations;"
 msgid ""
 "Keyboard;Mouse;a11y;Accessibility;Universal Access;Contrast;Cursor;Sound;Zoom;"
 "Screen;Reader;big;high;large;text;font;size;AccessX;Sticky;Keys;Slow;Bounce;Mouse;"
-"Double;click;Delay;Speed;Assist;Repeat;Blink;visual;hearing;audio;typing;"
-"animations;"
+"Double;click;Delay;Speed;Assist;Repeat;Blink;Pointer;find;locate;visual;hearing;"
+"audio;typing;animations;"
 msgstr ""
 "Keyboard;Mouse;a11y;Accessibility;Universal Access;Contrast;Cursor;Sound;Zoom;"
 "Screen;Reader;big;high;large;text;font;size;AccessX;Sticky;Keys;Slow;Bounce;Mouse;"
@@ -8924,6 +8952,10 @@ msgstr "_قفل سیم‌کارت با پین"
 #: panels/wwan/cc-wwan-sim-lock-dialog.ui:106
 msgid "Change PIN"
 msgstr "تغییر پین"
+
+#: panels/wwan/cc-wwan-sim-lock-dialog.ui:123
+msgid "New PIN"
+msgstr "پین جدید"
 
 #: panels/wwan/cc-wwan-sim-lock-dialog.ui:201
 msgid "Enter current PIN to change SIM lock settings"
