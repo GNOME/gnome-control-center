@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <template class="CcWifiHotspotPage" parent="AdwNavigationPage">
+    <signal name="shown" handler="update_hotspot_info" object="CcWifiHotspotPage" swapped="yes" />
+    <property name="child">
+      <object class="AdwToolbarView">
+        <child type="top">
+          <object class="AdwHeaderBar" id="titlebar">
+            <property name="title-widget">
+              <object class="AdwWindowTitle">
+                <property name="title" translatable="yes">Wi-Fi Hotspot</property>
+              </object>
+            </property>
+          </object>
+        </child>
+
+        <property name="content">
+          <object class="GtkBox" id="qr_code_page">
+            <property name="orientation">vertical</property>
+            <child>
+
+              <object class="AdwStatusPage" id="qrcode_status_page">
+                <property name="title" translatable="yes">Wi-Fi Hotspot Active</property>
+                <property name="description" translatable="yes">Mobile devices can scan the QR code to connect.</property>
+                <child>
+                  <object class="GtkButton">
+                    <property name="halign">center</property>
+                    <property name="margin-top">12</property>
+                    <property name="label" translatable="yes">Turn Off Hotspot…</property>
+                    <signal name="clicked" handler="on_hotspot_turned_off_cb" object="CcWifiHotspotPage" swapped="yes"/>
+                    <style>
+                      <class name="destructive-action"/>
+                    </style>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="AdwPreferencesPage">
+                <child>
+                  <object class="AdwPreferencesGroup">
+                    <child>
+                      <object class="CcListRow" id="hotspot_name_row">
+                        <property name="activatable">False</property>
+                        <property name="title" context="Wi-Fi Hotspot" translatable="yes">Network Name</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="CcListRow" id="hotspot_security_row">
+                        <property name="activatable">False</property>
+                        <property name="title" context="Wi-Fi Hotspot" translatable="yes">Security type</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="CcListRow" id="hotspot_password_row">
+                        <property name="activatable">False</property>
+                        <property name="title" context="Wi-Fi Hotspot" translatable="yes">Password</property>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+        </property>
+      </object>
+    </property>
+  </template>
+</interface>

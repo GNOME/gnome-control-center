@@ -46,8 +46,6 @@
 
 static void nm_device_wifi_refresh_ui (NetDeviceWifi *self);
 static void show_wifi_list (NetDeviceWifi *self);
-static void show_hotspot_ui (NetDeviceWifi *self);
-
 
 struct _NetDeviceWifi
 {
@@ -58,10 +56,6 @@ struct _NetDeviceWifi
         GtkSwitch               *device_off_switch;
         GtkBox                  *header_box;
         GtkPopover              *header_button_popover;
-        GtkBox                  *hotspot_box;
-        CcListRow               *hotspot_name_row;
-        CcListRow               *hotspot_security_row;
-        CcListRow               *hotspot_password_row;
         GtkBox                  *listbox_box;
         GtkStack                *stack;
 
@@ -90,8 +84,16 @@ struct _NetDeviceWifi
 enum {
         PROP_0,
         PROP_SCANNING,
+        PROP_IS_HOTSPOT,
         PROP_LAST,
 };
+
+enum {
+        SIGNAL_HOTSPOT_ROW_ACTIVATED,
+        SIGNAL_HOTSPOT_TURNED_OFF,
+        SIGNAL_LAST_SIGNAL
+};
+static guint signals[SIGNAL_LAST_SIGNAL] = { 0, };
 
 G_DEFINE_TYPE (NetDeviceWifi, net_device_wifi, ADW_TYPE_BIN)
 
@@ -161,133 +163,6 @@ device_is_hotspot (NetDeviceWifi *self)
         return connection_is_shared (c);
 }
 
-static GBytes *
-device_get_hotspot_ssid (NetDeviceWifi *self,
-                         NMDevice *device)
-{
-        NMConnection *c;
-        NMSettingWireless *sw;
-
-        c = find_connection_for_device (self, device);
-        if (c == NULL)
-                return NULL;
-
-        sw = nm_connection_get_setting_wireless (c);
-        return nm_setting_wireless_get_ssid (sw);
-}
-
-static void
-get_secrets_cb (GObject            *source_object,
-                GAsyncResult       *res,
-                gpointer            data)
-{
-        NetDeviceWifi *self = data;
-        g_autoptr(GVariant) secrets = NULL;
-        g_autoptr(GError) error = NULL;
-
-        secrets = nm_remote_connection_get_secrets_finish (NM_REMOTE_CONNECTION (source_object), res, &error);
-        if (!secrets) {
-                if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
-                        g_warning ("Could not get secrets: %s", error->message);
-                return;
-        }
-
-        nm_connection_update_secrets (NM_CONNECTION (source_object),
-                                      NM_SETTING_WIRELESS_SECURITY_SETTING_NAME,
-                                      secrets, NULL);
-
-        nm_device_wifi_refresh_ui (self);
-}
-
-static void
-device_get_hotspot_security_details (NetDeviceWifi *self,
-                                     NMDevice *device,
-                                     gchar **secret,
-                                     gchar **security)
-{
-        NMConnection *c;
-        NMSettingWirelessSecurity *sws;
-        const gchar *key_mgmt;
-        const gchar *tmp_secret;
-        const gchar *tmp_security;
-
-        c = find_connection_for_device (self, device);
-        if (c == NULL)
-                return;
-
-        sws = nm_connection_get_setting_wireless_security (c);
-        if (sws == NULL)
-                return;
-
-        tmp_secret = NULL;
-        tmp_security = C_("Wifi security", "None");
-
-        /* Key management values:
-         * "none" = WEP
-         * "wpa-none" = WPAv1 Ad-Hoc mode (not supported in NM >= 0.9.4)
-         * "wpa-psk" = WPAv2 Ad-Hoc mode (eg IBSS RSN) and AP-mode WPA v1 and v2
-         */
-        key_mgmt = nm_setting_wireless_security_get_key_mgmt (sws);
-        if (strcmp (key_mgmt, "none") == 0) {
-                tmp_secret = nm_setting_wireless_security_get_wep_key (sws, 0);
-                tmp_security = _("WEP");
-        }
-        else if (strcmp (key_mgmt, "wpa-none") == 0 ||
-                 strcmp (key_mgmt, "wpa-psk") == 0) {
-                tmp_secret = nm_setting_wireless_security_get_psk (sws);
-                tmp_security = _("WPA");
-        } else {
-                g_warning ("unhandled security key-mgmt: %s", key_mgmt);
-        }
-
-        /* If we don't have secrets, request them from NM and bail.
-         * We'll refresh the UI when secrets arrive.
-         */
-        if (tmp_secret == NULL) {
-                nm_remote_connection_get_secrets_async ((NMRemoteConnection*)c,
-                                                        NM_SETTING_WIRELESS_SECURITY_SETTING_NAME,
-                                                        self->cancellable,
-                                                        get_secrets_cb,
-                                                        self);
-                return;
-        }
-
-        if (secret)
-                *secret = g_strdup (tmp_secret);
-        if (security)
-                *security = g_strdup (tmp_security);
-}
-
-static void
-nm_device_wifi_refresh_hotspot (NetDeviceWifi *self)
-{
-        GBytes *ssid;
-        g_autofree gchar *hotspot_secret = NULL;
-        g_autofree gchar *hotspot_security = NULL;
-        g_autofree gchar *hotspot_ssid = NULL;
-
-        /* refresh hotspot ui */
-        ssid = device_get_hotspot_ssid (self, self->device);
-        if (ssid)
-                hotspot_ssid = nm_utils_ssid_to_utf8 (g_bytes_get_data (ssid, NULL), g_bytes_get_size (ssid));
-        device_get_hotspot_security_details (self,
-                                             self->device,
-                                             &hotspot_secret,
-                                             &hotspot_security);
-
-        g_debug ("Refreshing hotspot labels to name: '%s', security key: '%s', security: '%s'",
-                 hotspot_ssid, hotspot_secret, hotspot_security);
-
-        cc_list_row_set_secondary_label (self->hotspot_name_row, hotspot_ssid);
-        gtk_widget_set_visible (GTK_WIDGET (self->hotspot_name_row), hotspot_ssid != NULL);
-
-        cc_list_row_set_secondary_label (self->hotspot_password_row, hotspot_secret);
-        gtk_widget_set_visible (GTK_WIDGET (self->hotspot_password_row), hotspot_secret != NULL);
-
-        cc_list_row_set_secondary_label (self->hotspot_security_row, hotspot_security);
-        gtk_widget_set_visible (GTK_WIDGET (self->hotspot_security_row), hotspot_security != NULL);
-}
-
 static void
 set_scanning (NetDeviceWifi *self,
               gboolean       scanning,
@@ -349,8 +224,6 @@ nm_device_wifi_refresh_ui (NetDeviceWifi *self)
         g_autofree gchar *status = NULL;
 
         if (device_is_hotspot (self)) {
-                nm_device_wifi_refresh_hotspot (self);
-                show_hotspot_ui (self);
                 disable_scan_timeout (self);
                 return;
         }
@@ -587,13 +460,6 @@ is_hotspot_connection (NMConnection *connection)
 }
 
 static void
-show_hotspot_ui (NetDeviceWifi *self)
-{
-        /* show hotspot tab */
-        gtk_stack_set_visible_child (self->stack, GTK_WIDGET (self->hotspot_box));
-}
-
-static void
 activate_cb (GObject            *source_object,
              GAsyncResult       *res,
              gpointer            user_data)
@@ -607,7 +473,6 @@ activate_cb (GObject            *source_object,
                 return;
         }
 
-        /* show hotspot tab */
         nm_device_wifi_refresh_ui (user_data);
 }
 
@@ -628,7 +493,6 @@ activate_new_cb (GObject            *source_object,
                 return;
         }
 
-        /* show hotspot tab */
         nm_device_wifi_refresh_ui (user_data);
 }
 
@@ -706,6 +570,8 @@ on_wifi_hotspot_dialog_respnse_cb (GtkDialog     *dialog,
                                                                      self->cancellable,
                                                                      activate_new_cb,
                                                                      self);
+                // Signal navigation to show the hotspot page
+                g_signal_emit (self, signals[SIGNAL_HOTSPOT_ROW_ACTIVATED], 0);
         }
 
         gtk_widget_set_visible (GTK_WIDGET (self->hotspot_dialog), FALSE);
@@ -1160,9 +1026,12 @@ on_connect_hidden_network (NetDeviceWifi *self)
 }
 
 static void
-on_wifi_hotspot_network (NetDeviceWifi *self)
+on_hotspot_row_activated (NetDeviceWifi *self)
 {
-        start_hotspot (self);
+        if (device_is_hotspot (self))
+                g_signal_emit (self, signals[SIGNAL_HOTSPOT_ROW_ACTIVATED], 0);
+        else
+                start_hotspot (self);
 }
 
 static void
@@ -1216,6 +1085,22 @@ net_device_wifi_class_init (NetDeviceWifiClass *klass)
                                                                "Whether the device is scanning for access points",
                                                                FALSE,
                                                                G_PARAM_READABLE | G_PARAM_STATIC_STRINGS));
+        signals[SIGNAL_HOTSPOT_ROW_ACTIVATED] =
+            g_signal_new ("hotspot-row-activated",
+                          G_TYPE_FROM_CLASS (klass),
+                          G_SIGNAL_RUN_LAST,
+                          0,
+                          NULL, NULL, NULL,
+                          G_TYPE_NONE,
+                          0);
+        signals[SIGNAL_HOTSPOT_TURNED_OFF] =
+            g_signal_new ("hotspot-turned-off",
+                          G_TYPE_FROM_CLASS (klass),
+                          G_SIGNAL_RUN_LAST,
+                          0,
+                          NULL, NULL, NULL,
+                          G_TYPE_NONE,
+                          0);
 
         gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/network/network-wifi.ui");
 
@@ -1225,17 +1110,13 @@ net_device_wifi_class_init (NetDeviceWifiClass *klass)
         gtk_widget_class_bind_template_child (widget_class, NetDeviceWifi, connect_hidden_row);
         gtk_widget_class_bind_template_child (widget_class, NetDeviceWifi, hotspot_row);
         gtk_widget_class_bind_template_child (widget_class, NetDeviceWifi, details_box);
-        gtk_widget_class_bind_template_child (widget_class, NetDeviceWifi, hotspot_box);
-        gtk_widget_class_bind_template_child (widget_class, NetDeviceWifi, hotspot_name_row);
-        gtk_widget_class_bind_template_child (widget_class, NetDeviceWifi, hotspot_security_row);
-        gtk_widget_class_bind_template_child (widget_class, NetDeviceWifi, hotspot_password_row);
         gtk_widget_class_bind_template_child (widget_class, NetDeviceWifi, listbox_box);
         gtk_widget_class_bind_template_child (widget_class, NetDeviceWifi, stack);
 
         gtk_widget_class_bind_template_callback (widget_class, device_off_switch_changed_cb);
         gtk_widget_class_bind_template_callback (widget_class, on_show_saved_network);
         gtk_widget_class_bind_template_callback (widget_class, on_connect_hidden_network);
-        gtk_widget_class_bind_template_callback (widget_class, on_wifi_hotspot_network);
+        gtk_widget_class_bind_template_callback (widget_class, on_hotspot_row_activated);
 }
 
 static void
@@ -1345,5 +1226,6 @@ net_device_wifi_turn_off_hotspot (NetDeviceWifi *self)
         g_return_if_fail (NET_IS_DEVICE_WIFI (self));
 
         stop_shared_connection (self);
-}
 
+        g_signal_emit (self, signals[SIGNAL_HOTSPOT_TURNED_OFF], 0);
+}

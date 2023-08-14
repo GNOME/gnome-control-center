@@ -19,6 +19,7 @@
 
 #include "cc-network-resources.h"
 #include "cc-wifi-panel.h"
+#include "cc-wifi-hotspot-page.h"
 #include "cc-qr-code.h"
 #include "net-device-wifi.h"
 #include "network-dialogs.h"
@@ -54,13 +55,11 @@ struct _CcWifiPanel
   /* Main widgets */
   GtkStack           *center_stack;
   GtkStack           *device_stack;
-  GtkBox             *hotspot_box;
   GtkLabel           *list_label;
   GtkStack           *main_stack;
+  AdwNavigationView  *navigation;
   GtkWidget          *spinner;
   GtkStack           *stack;
-  GtkPicture         *wifi_qr_image;
-  CcQrCode           *qr_code;
 
   NMClient           *client;
 
@@ -147,81 +146,34 @@ cc_wifi_panel_static_init_func (void)
 
 /* Auxiliary methods */
 
-static NMConnection *
-wifi_device_get_hotspot (CcWifiPanel *self,
-                         NMDevice    *device)
+static void
+on_hotspot_turned_off (NetDeviceWifi *device,
+                       GParamSpec    *pspec,
+                       CcWifiPanel   *self)
 {
-  NMSettingIPConfig *ip4_setting;
-  NMConnection *c;
-
-  g_assert (CC_IS_WIFI_PANEL (self));
-  g_assert (NM_IS_DEVICE (device));
-
-  if (nm_device_get_active_connection (device) == NULL)
-    return NULL;
-
-  c = net_device_get_find_connection (self->client, device);
-  if (c == NULL)
-    return NULL;
-
-  ip4_setting = nm_connection_get_setting_ip4_config (c);
-  if (g_strcmp0 (nm_setting_ip_config_get_method (ip4_setting),
-                 NM_SETTING_IP4_CONFIG_METHOD_SHARED) != 0)
-    return NULL;
-
-  return c;
+  adw_navigation_view_pop_to_tag (self->navigation, "main-page");
 }
 
 static void
-wifi_panel_update_qr_image_cb (CcWifiPanel *self)
+show_hotspot_info_page (NetDeviceWifi *device,
+                        GParamSpec    *pspec,
+                        CcWifiPanel   *self)
 {
-  NetDeviceWifi *child;
-  NMConnection *hotspot;
-  NMDevice *device;
+  AdwNavigationPage *hotspot_page;
+  g_autofree gchar *page_name;
 
-  g_assert (CC_IS_WIFI_PANEL (self));
+  page_name = g_strdup_printf ("hotspot-page-%s",
+                               nm_device_get_udi (net_device_wifi_get_device (device)));
+  hotspot_page = adw_navigation_view_find_page (self->navigation, page_name);
+  if (hotspot_page != NULL) {
+    adw_navigation_view_pop_to_tag (self->navigation, page_name);
 
-  child  = NET_DEVICE_WIFI (gtk_stack_get_visible_child (self->stack));
-  device = net_device_wifi_get_device (child);
-  hotspot = wifi_device_get_hotspot (self, device);
+    return;
+  }
 
-  if (hotspot)
-    {
-      g_autofree gchar *str = NULL;
-      g_autoptr (GVariant) secrets = NULL;
-      g_autoptr (GError) error = NULL;
-
-      if (!self->qr_code)
-        self->qr_code = cc_qr_code_new ();
-
-      secrets = nm_remote_connection_get_secrets (NM_REMOTE_CONNECTION (hotspot),
-                                                  NM_SETTING_WIRELESS_SECURITY_SETTING_NAME,
-                                                  NULL, &error);
-      if (!error) {
-        nm_connection_update_secrets (hotspot,
-                                      NM_SETTING_WIRELESS_SECURITY_SETTING_NAME,
-                                      secrets, &error);
-
-        str = get_qr_string_for_connection (hotspot);
-        if (cc_qr_code_set_text (self->qr_code, str))
-          {
-            GdkPaintable *paintable;
-            gint scale;
-
-            scale = gtk_widget_get_scale_factor (GTK_WIDGET (self->wifi_qr_image));
-            paintable = cc_qr_code_get_paintable (self->qr_code, QR_IMAGE_SIZE * scale);
-            gtk_picture_set_paintable (self->wifi_qr_image, paintable);
-          }
-        }
-      else
-        {
-          g_warning ("Error: %s", error->message);
-        }
-    }
-
-  gtk_widget_set_visible (GTK_WIDGET (self->hotspot_box), hotspot != NULL);
-  gtk_widget_set_opacity (GTK_WIDGET (self->list_label), hotspot == NULL);
-  gtk_widget_set_opacity (GTK_WIDGET (self->spinner), hotspot == NULL);
+  hotspot_page = ADW_NAVIGATION_PAGE (cc_wifi_hotspot_page_new (device));
+  adw_navigation_page_set_tag (hotspot_page, page_name);
+  adw_navigation_view_push (self->navigation, hotspot_page);
 }
 
 static void
@@ -235,6 +187,12 @@ add_wifi_device (CcWifiPanel *self,
   net_device = net_device_wifi_new (CC_PANEL (self),
                                     self->client,
                                     device);
+  g_signal_connect (net_device, "hotspot-row-activated",
+                    G_CALLBACK (show_hotspot_info_page),
+                    self);
+  g_signal_connect (net_device, "hotspot-turned-off",
+                    G_CALLBACK (on_hotspot_turned_off),
+                    self);
 
   /* And add to the header widgets */
   header_widget = net_device_wifi_get_header_widget (net_device);
@@ -250,10 +208,6 @@ add_wifi_device (CcWifiPanel *self,
   gtk_stack_add_titled (self->stack, GTK_WIDGET (net_device),
                         nm_device_get_udi (device),
                         nm_device_get_description (device));
-  g_signal_connect_object (device, "state-changed",
-                           G_CALLBACK (wifi_panel_update_qr_image_cb),
-                           self,
-                           G_CONNECT_SWAPPED);
 }
 
 static void
@@ -277,11 +231,6 @@ remove_wifi_device (CcWifiPanel *self,
           break;
         }
     }
-
-  /* Disconnect the signal to prevent assertion crash */
-  g_signal_handlers_disconnect_by_func (device, 
-                                        G_CALLBACK (wifi_panel_update_qr_image_cb), 
-                                        self);
 
   /* Destroy all stack pages related to this device */
   child = gtk_stack_get_child_by_name (self->stack, id);
@@ -680,8 +629,6 @@ on_stack_visible_child_changed_cb (CcWifiPanel *self)
   const gchar *visible_device_id = NULL;
   guint i;
 
-  wifi_panel_update_qr_image_cb (self);
-
   /* Remove previous bindings */
   g_clear_pointer (&self->spinner_binding, g_binding_unbind);
 
@@ -702,53 +649,7 @@ on_stack_visible_child_changed_cb (CcWifiPanel *self)
     }
 }
 
-static void
-on_stop_hotspot_dialog_response_cb (CcWifiPanel        *self,
-                                    gchar              *response,
-                                    AdwMessageDialog   *dialog)
-{
-  if (g_strcmp0 (response, "turn-off") == 0)
-    {
-      NetDeviceWifi *child;
-
-      child = NET_DEVICE_WIFI (gtk_stack_get_visible_child (self->stack));
-      net_device_wifi_turn_off_hotspot (child);
-    }
-
-  gtk_window_destroy (GTK_WINDOW (dialog));
-}
-
-static void
-hotspot_stop_clicked_cb (CcWifiPanel *self)
-{
-  GtkWidget *dialog;
-  GtkNative *native;
-
-  g_assert (CC_IS_WIFI_PANEL (self));
-
-  native = gtk_widget_get_native (GTK_WIDGET (self));
-
-  dialog = adw_message_dialog_new (GTK_WINDOW (native),
-                                   NULL,
-                                   _("Turning off will disconnect any devices that are using the hotspot."));
-
-  adw_message_dialog_format_heading (ADW_MESSAGE_DIALOG (dialog), _("Turn Off Hotspot?"));
-  adw_message_dialog_add_responses (ADW_MESSAGE_DIALOG (dialog),
-                                    "cancel",  _("_Cancel"),
-                                    "turn-off", _("_Turn Off"),
-                                    NULL);
-  adw_message_dialog_set_response_appearance (ADW_MESSAGE_DIALOG (dialog),
-                                              "turn-off",
-                                              ADW_RESPONSE_DESTRUCTIVE);
-  adw_message_dialog_set_default_response (ADW_MESSAGE_DIALOG (dialog), "cancel");
-  adw_message_dialog_set_close_response (ADW_MESSAGE_DIALOG (dialog), "cancel");
-
-  g_signal_connect_swapped (dialog, "response", G_CALLBACK (on_stop_hotspot_dialog_response_cb), self);
-  gtk_window_present (GTK_WINDOW (dialog));
-}
-
 /* Overrides */
-
 static const gchar *
 cc_wifi_panel_get_help_uri (CcPanel *panel)
 {
@@ -854,18 +755,16 @@ cc_wifi_panel_class_init (CcWifiPanelClass *klass)
 
   gtk_widget_class_bind_template_child (widget_class, CcWifiPanel, center_stack);
   gtk_widget_class_bind_template_child (widget_class, CcWifiPanel, device_stack);
-  gtk_widget_class_bind_template_child (widget_class, CcWifiPanel, hotspot_box);
   gtk_widget_class_bind_template_child (widget_class, CcWifiPanel, list_label);
   gtk_widget_class_bind_template_child (widget_class, CcWifiPanel, main_stack);
+  gtk_widget_class_bind_template_child (widget_class, CcWifiPanel, navigation);
   gtk_widget_class_bind_template_child (widget_class, CcWifiPanel, rfkill_row);
   gtk_widget_class_bind_template_child (widget_class, CcWifiPanel, rfkill_widget);
   gtk_widget_class_bind_template_child (widget_class, CcWifiPanel, spinner);
   gtk_widget_class_bind_template_child (widget_class, CcWifiPanel, stack);
-  gtk_widget_class_bind_template_child (widget_class, CcWifiPanel, wifi_qr_image);
 
   gtk_widget_class_bind_template_callback (widget_class, rfkill_switch_notify_activate_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_stack_visible_child_changed_cb);
-  gtk_widget_class_bind_template_callback (widget_class, hotspot_stop_clicked_cb);
 
   g_object_class_override_property (object_class, PROP_PARAMETERS, "parameters");
 }
