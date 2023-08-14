@@ -773,7 +773,7 @@ cc_sharing_panel_setup_personal_file_sharing_dialog (CcSharingPanel *self)
 static void
 remote_login_switch_activate (CcSharingPanel *self)
 {
-  cc_remote_login_set_enabled (cc_panel_get_cancellable (CC_PANEL (self)), GTK_SWITCH (self->remote_login_switch));
+  cc_remote_login_set_enabled (cc_panel_get_cancellable (CC_PANEL (self)), ADW_SWITCH_ROW (self->remote_login_switch));
 }
 
 static void
@@ -787,7 +787,7 @@ cc_sharing_panel_setup_remote_login_dialog (CcSharingPanel *self)
   gtk_widget_set_sensitive (self->remote_login_switch, FALSE);
 
   cc_remote_login_get_enabled (cc_panel_get_cancellable (CC_PANEL (self)),
-                               GTK_SWITCH (self->remote_login_switch),
+                               ADW_SWITCH_ROW (self->remote_login_switch),
                                self->remote_login_row);
 }
 

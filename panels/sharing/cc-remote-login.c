@@ -27,24 +27,24 @@
 
 typedef struct
 {
-  GtkSwitch    *gtkswitch;
-  GtkWidget    *button;
+  AdwSwitchRow *widget;
+  GtkWidget    *row;
   GCancellable *cancellable;
 } CallbackData;
 
 G_DEFINE_AUTOPTR_CLEANUP_FUNC (CallbackData, g_free)
 
 static void
-set_switch_state (GtkSwitch *gtkswitch,
+set_switch_state (AdwSwitchRow *widget,
                   gboolean   active)
 {
-  if (gtk_switch_get_active (gtkswitch) != active)
+  if (adw_switch_row_get_active (widget) != active)
     {
-      g_object_set_data (G_OBJECT (gtkswitch), "set-from-dbus",
+      g_object_set_data (G_OBJECT (widget), "set-from-dbus",
                          GINT_TO_POINTER (1));
-      gtk_switch_set_active (gtkswitch, active);
+      adw_switch_row_set_active (widget, active);
     }
-  gtk_widget_set_sensitive (GTK_WIDGET (gtkswitch), TRUE);
+  gtk_widget_set_sensitive (GTK_WIDGET (widget), TRUE);
 }
 
 static void
@@ -82,8 +82,8 @@ active_state_ready_callback (GObject      *source_object,
   active = g_str_equal (active_state, "active");
 
   /* set the switch to the correct state */
-  if (callback_data->gtkswitch)
-    set_switch_state (callback_data->gtkswitch, active);
+  if (callback_data->widget)
+    set_switch_state (callback_data->widget, active);
 }
 
 static void
@@ -108,9 +108,9 @@ path_ready_callback (GObject      *source_object,
       /* this may fail if systemd or remote login service is not available */
       g_debug ("Error getting remote login state: %s", error->message);
 
-      /* hide the remote login button, since the service is not available */
-      if (callback_data->button)
-        gtk_widget_set_visible (callback_data->button, FALSE);
+      /* hide the remote login row, since the service is not available */
+      if (callback_data->row)
+        gtk_widget_set_visible (callback_data->row, FALSE);
 
       return;
     }
@@ -156,9 +156,9 @@ state_ready_callback (GObject      *source_object,
       /* this may fail if systemd or remote login service is not available */
       g_debug ("Error getting remote login state: %s", error->message);
 
-      /* hide the remote login button, since the service is not available */
-      if (callback_data->button)
-        gtk_widget_set_visible (callback_data->button, FALSE);
+      /* hide the remote login row, since the service is not available */
+      if (callback_data->row)
+        gtk_widget_set_visible (callback_data->row, FALSE);
 
       return;
     }
@@ -186,7 +186,7 @@ state_ready_callback (GObject      *source_object,
   else if (g_str_equal (state_string, "disabled"))
     {
       /* service is available, but is currently disabled */
-      set_switch_state (callback_data->gtkswitch, FALSE);
+      set_switch_state (callback_data->widget, FALSE);
     }
   else
     {
@@ -231,17 +231,17 @@ bus_ready_callback (GObject      *source_object,
 
 void
 cc_remote_login_get_enabled (GCancellable *cancellable,
-                             GtkSwitch    *gtkswitch,
-                             GtkWidget    *button)
+                             AdwSwitchRow    *widget,
+                             GtkWidget    *row)
 {
   CallbackData *callback_data;
 
   /* disable the switch until the current state is known */
-  gtk_widget_set_sensitive (GTK_WIDGET (gtkswitch), FALSE);
+  gtk_widget_set_sensitive (GTK_WIDGET (widget), FALSE);
 
   callback_data = g_new (CallbackData, 1);
-  callback_data->gtkswitch = gtkswitch;
-  callback_data->button = button;
+  callback_data->widget = widget;
+  callback_data->row = row;
   callback_data->cancellable = cancellable;
 
   g_bus_get (G_BUS_TYPE_SYSTEM, callback_data->cancellable,
@@ -261,16 +261,16 @@ child_watch_func (GPid     pid,
       g_warning ("Error enabling or disabling remote login service");
 
       /* make sure the switch reflects the current status */
-      cc_remote_login_get_enabled (callback_data->cancellable, callback_data->gtkswitch, NULL);
+      cc_remote_login_get_enabled (callback_data->cancellable, callback_data->widget, NULL);
     }
   g_spawn_close_pid (pid);
 
-  gtk_widget_set_sensitive (GTK_WIDGET (callback_data->gtkswitch), TRUE);
+  gtk_widget_set_sensitive (GTK_WIDGET (callback_data->widget), TRUE);
 }
 
 void
 cc_remote_login_set_enabled (GCancellable *cancellable,
-                             GtkSwitch    *gtkswitch)
+                             AdwSwitchRow    *widget)
 {
   gchar *command[] = { "pkexec", LIBEXECDIR "/cc-remote-login-helper", NULL,
       NULL };
@@ -278,25 +278,25 @@ cc_remote_login_set_enabled (GCancellable *cancellable,
   GPid pid;
   CallbackData *callback_data;
 
-  if (GPOINTER_TO_INT (g_object_get_data (G_OBJECT (gtkswitch), "set-from-dbus")) == 1)
+  if (GPOINTER_TO_INT (g_object_get_data (G_OBJECT (widget), "set-from-dbus")) == 1)
     {
-      g_object_set_data (G_OBJECT (gtkswitch), "set-from-dbus", NULL);
+      g_object_set_data (G_OBJECT (widget), "set-from-dbus", NULL);
       return;
     }
 
-  if (gtk_switch_get_active (gtkswitch))
+  if (adw_switch_row_get_active (widget))
     command[2] = "enable";
   else
     command[2] = "disable";
 
-  gtk_widget_set_sensitive (GTK_WIDGET (gtkswitch), FALSE);
+  gtk_widget_set_sensitive (GTK_WIDGET (widget), FALSE);
 
   g_spawn_async_with_pipes (NULL, command, NULL,
                             G_SPAWN_SEARCH_PATH | G_SPAWN_DO_NOT_REAP_CHILD, NULL,
                             NULL, &pid, NULL, NULL, &std_err, &error);
 
   callback_data = g_new0 (CallbackData, 1);
-  callback_data->gtkswitch = gtkswitch;
+  callback_data->widget = widget;
   callback_data->cancellable = cancellable;
 
   g_child_watch_add (pid, child_watch_func, callback_data);
@@ -304,3 +304,4 @@ cc_remote_login_set_enabled (GCancellable *cancellable,
   if (error)
     g_error ("Error running cc-remote-login-helper: %s", error->message);
 }
+

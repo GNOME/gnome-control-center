@@ -21,10 +21,10 @@
 
 #pragma once
 
-#include <gtk/gtk.h>
+#include <adwaita.h>
 
 void cc_remote_login_get_enabled (GCancellable *cancellable,
-                                  GtkSwitch    *gtkswitch,
-                                  GtkWidget    *button);
+                                  AdwSwitchRow *widget,
+                                  GtkWidget    *row);
 void cc_remote_login_set_enabled (GCancellable *cancellable,
-                                  GtkSwitch    *gtkswitch);
+                                  AdwSwitchRow *row);
