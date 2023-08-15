@@ -15,271 +15,282 @@
   </object>
   <template class="CcUserPanel" parent="CcPanel">
     <child type="titlebar">
-      <object class="AdwHeaderBar">
-        <property name="show-end-title-buttons">True</property>
-        <property name="show-start-title-buttons" bind-source="CcUserPanel" bind-property="folded" bind-flags="default|sync-create" />
-        <property name="title-widget">
-          <object class="AdwWindowTitle">
-            <property name="title" translatable="yes">Users</property>
-          </object>
-        </property>
-        <child type="start">
-          <object class="GtkButton" id="back_button">
-            <property name="tooltip-text" translatable="yes">Back</property>
-            <property name="visible">False</property>
-            <property name="icon-name">go-previous-symbolic</property>
-            <accessibility>
-              <property name="label" translatable="yes">Back</property>
-            </accessibility>
-            <signal name="clicked" handler="on_back_button_clicked_cb" object="CcUserPanel" swapped="yes"/>
-          </object>
-        </child>
+      <object class="GtkHeaderBar">
+        <property name="visible">False</property>
       </object>
     </child>
+
     <child type="content">
-      <object class="GtkBox">
-        <property name="orientation">vertical</property>
-        <child>
-          <object class="CcPermissionInfobar" id="permission_infobar"/>
+      <object class="AdwToolbarView">
+        <property name="top-bar-style">raised</property>
+        <child type="top">
+          <object class="AdwHeaderBar">
+            <property name="show-end-title-buttons">True</property>
+            <property name="show-start-title-buttons" bind-source="CcUserPanel" bind-property="folded" bind-flags="default|sync-create" />
+            <property name="title-widget">
+              <object class="AdwWindowTitle">
+                <property name="title" translatable="yes">Users</property>
+              </object>
+            </property>
+            <child type="start">
+              <object class="GtkButton" id="back_button">
+                <property name="tooltip-text" translatable="yes">Back</property>
+                <property name="visible">False</property>
+                <property name="icon-name">go-previous-symbolic</property>
+                <accessibility>
+                  <property name="label" translatable="yes">Back</property>
+                </accessibility>
+                <signal name="clicked" handler="on_back_button_clicked_cb" object="CcUserPanel" swapped="yes"/>
+              </object>
+            </child>
+          </object>
         </child>
-        <child>
-          <object class="GtkStack" id="stack">
-            <property name="visible-child">loading_page</property>
+        <property name="content">
+          <object class="GtkBox">
+            <property name="orientation">vertical</property>
             <child>
-              <object class="AdwToastOverlay" id="toast_overlay">
+              <object class="CcPermissionInfobar" id="permission_infobar"/>
+            </child>
+            <child>
+              <object class="GtkStack" id="stack">
+                <property name="visible-child">loading_page</property>
                 <child>
-                  <object class="AdwPreferencesPage">
+                  <object class="AdwToastOverlay" id="toast_overlay">
                     <child>
-                      <object class="AdwPreferencesGroup">
+                      <object class="AdwPreferencesPage">
                         <child>
-                          <object class="GtkOverlay">
-                            <property name="halign">center</property>
+                          <object class="AdwPreferencesGroup">
                             <child>
-                              <object class="AdwAvatar" id="user_avatar">
-                                <property name="show-initials">True</property>
-                                <property name="size">120</property>
+                              <object class="GtkOverlay">
                                 <property name="halign">center</property>
-                              </object>
-                            </child>
-                            <child type="overlay">
-                              <object class="AdwBin">
-                                <style>
-                                  <class name="cutout-button"/>
-                                </style>
-                                <property name="halign">end</property>
-                                <property name="valign">end</property>
                                 <child>
-                                  <object class="GtkMenuButton" id="user_avatar_edit_button">
-                                    <property name="sensitive">False</property>
-                                    <property name="icon-name">document-edit-symbolic</property>
-                                    <property name="popover">
-                                      <object class="CcAvatarChooser" id="avatar_chooser"/>
-                                    </property>
-                                    <accessibility>
-                                      <property name="label" translatable="yes">Edit avatar</property>
-                                    </accessibility>
+                                  <object class="AdwAvatar" id="user_avatar">
+                                    <property name="show-initials">True</property>
+                                    <property name="size">120</property>
+                                    <property name="halign">center</property>
+                                  </object>
+                                </child>
+                                <child type="overlay">
+                                  <object class="AdwBin">
                                     <style>
-                                      <class name="circular"/>
+                                      <class name="cutout-button"/>
                                     </style>
+                                    <property name="halign">end</property>
+                                    <property name="valign">end</property>
+                                    <child>
+                                      <object class="GtkMenuButton" id="user_avatar_edit_button">
+                                        <property name="sensitive">False</property>
+                                        <property name="icon-name">document-edit-symbolic</property>
+                                        <property name="popover">
+                                          <object class="CcAvatarChooser" id="avatar_chooser"/>
+                                        </property>
+                                        <accessibility>
+                                          <property name="label" translatable="yes">Edit avatar</property>
+                                        </accessibility>
+                                        <style>
+                                          <class name="circular"/>
+                                        </style>
+                                      </object>
+                                    </child>
                                   </object>
                                 </child>
                               </object>
                             </child>
                           </object>
                         </child>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="AdwPreferencesGroup" id="authentication_and_login_box">
                         <child>
-                          <object class="AdwEntryRow" id="full_name_entry">
-                            <property name="title" translatable="yes">Name</property>
-                            <property name="show-apply-button">True</property>
-                            <signal name="apply" handler="full_name_entry_apply_cb" object="CcUserPanel" swapped="yes"/>
+                          <object class="AdwPreferencesGroup" id="authentication_and_login_box">
                             <child>
-                              <object class="GtkEventControllerKey">
-                                <property name="propagation-phase">capture</property>
-                                <signal name="key-pressed" handler="full_name_entry_key_press_cb" object="CcUserPanel" swapped="yes"/>
+                              <object class="AdwEntryRow" id="full_name_entry">
+                                <property name="title" translatable="yes">Name</property>
+                                <property name="show-apply-button">True</property>
+                                <signal name="apply" handler="full_name_entry_apply_cb" object="CcUserPanel" swapped="yes"/>
+                                <child>
+                                  <object class="GtkEventControllerKey">
+                                    <property name="propagation-phase">capture</property>
+                                    <signal name="key-pressed" handler="full_name_entry_key_press_cb" object="CcUserPanel" swapped="yes"/>
+                                  </object>
+                                </child>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="CcListRow" id="password_row">
+                                <property name="title" translatable="yes">_Password</property>
+                                <property name="use_underline">True</property>
+                                <property name="activatable">True</property>
+                                <signal name="activated" handler="change_password" object="CcUserPanel" swapped="yes"/>
+                                <child>
+                                  <object class="GtkLabel" id="password_button_label"/>
+                                </child>
+                                <child>
+                                  <object class="GtkImage">
+                                    <property name="icon-name">go-next-symbolic</property>
+                                    <style>
+                                      <class name="dim-label"/>
+                                    </style>
+                                  </object>
+                                </child>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="CcListRow" id="fingerprint_row">
+                                <property name="visible">True</property> <!-- FIXME -->
+                                <property name="title" translatable="yes">_Fingerprint Login</property>
+                                <property name="use_underline">True</property>
+                                <property name="activatable">True</property>
+                                <property name="show-arrow">True</property>
+                                <signal name="activated" handler="change_fingerprint" object="CcUserPanel" swapped="yes"/>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="AdwActionRow" id="autologin_row">
+                                <property name="title" translatable="yes">A_utomatic Login</property>
+                                <property name="use_underline">True</property>
+                                <property name="activatable_widget">autologin_switch</property>
+                                <child type="suffix">
+                                  <object class="CcListRowInfoButton">
+                                    <property name="valign">center</property>
+                                    <property name="text" translatable="yes">Automatic login opens the user account when the device starts, without requiring authentication. Authentication is still required at other times, such as when unlocking the screen.</property>
+                                  </object>
+                                </child>
+                                <child type="suffix">
+                                  <object class="GtkSwitch" id="autologin_switch">
+                                    <property name="valign">center</property>
+                                    <signal name="notify::active" handler="autologin_changed" object="CcUserPanel" swapped="yes"/>
+                                  </object>
+                                </child>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+
+                        <child>
+                          <object class="AdwPreferencesGroup" id="account_settings_box">
+                            <child>
+                              <object class="AdwActionRow" id="account_type_row">
+                                <property name="title" translatable="yes">_Administrator</property>
+                                <property name="subtitle-lines">0</property>
+                                <property name="use_underline">True</property>
+                                <property name="activatable-widget">account_type_switch</property>
+                                <child type="suffix">
+                                  <object class="CcListRowInfoButton">
+                                    <property name="valign">center</property>
+                                    <property name="text" translatable="yes">Administrators have extra abilities, including adding and removing users, changing login settings, and removing software. Parental controls cannot be applied to administrators.</property>
+                                  </object>
+                                </child>
+                                <child>
+                                  <object class="GtkSwitch" id="account_type_switch">
+                                    <property name="valign">center</property>
+                                    <signal name="notify::active" handler="account_type_changed" object="CcUserPanel" swapped="yes"/>
+                                  </object>
+                                </child>
+                              </object>
+                            </child>
+
+                            <child>
+                              <object class="AdwActionRow" id="parental_controls_row">
+                                <property name="visible">False</property>
+                                <property name="title" translatable="yes">_Parental Controls</property>
+                                <property name="subtitle" translatable="yes">Open the Parental Controls app.</property>
+                                <property name="subtitle-lines">0</property>
+                                <property name="use_underline">True</property>
+                                <property name="activatable">True</property>
+                                <child>
+                                  <object class="GtkLabel" id="parental_controls_button_label">
+                                    <property name="valign">0.5</property>
+                                  </object>
+                                </child>
+                                <child>
+                                  <object class="GtkImage" id="parental_control_go_next">
+                                    <property name="icon-name">go-next-symbolic</property>
+                                    <style>
+                                      <class name="dim-label"/>
+                                    </style>
+                                  </object>
+                                </child>
+                              </object>
+                            </child>
+
+                            <child>
+                              <object class="CcListRow" id="language_row">
+                                <property name="title" translatable="yes">_Language</property>
+                                <property name="use_underline">True</property>
+                                <property name="activatable">True</property>
+                                <property name="show-arrow">True</property>
+                                <signal name="activated" handler="change_language" object="CcUserPanel" swapped="yes"/>
                               </object>
                             </child>
                           </object>
                         </child>
                         <child>
-                          <object class="CcListRow" id="password_row">
-                            <property name="title" translatable="yes">_Password</property>
-                            <property name="use_underline">True</property>
-                            <property name="activatable">True</property>
-                            <signal name="activated" handler="change_password" object="CcUserPanel" swapped="yes"/>
+                          <object class="AdwPreferencesGroup" id="other_users">
+                            <property name="visible">False</property>
+                            <property name="title" translatable="yes">Other Users</property>
                             <child>
-                              <object class="GtkLabel" id="password_button_label"/>
-                            </child>
-                            <child>
-                              <object class="GtkImage">
-                                <property name="icon-name">go-next-symbolic</property>
+                              <object class="GtkListBox" id="other_users_listbox">
+                                <property name="selection-mode">none</property>
+                                <signal name="row-activated" handler="set_selected_user" object="CcUserPanel" swapped="yes"/>
                                 <style>
-                                  <class name="dim-label"/>
+                                  <class name="boxed-list"/>
                                 </style>
                               </object>
                             </child>
                           </object>
                         </child>
                         <child>
-                          <object class="CcListRow" id="fingerprint_row">
-                            <property name="visible">True</property> <!-- FIXME -->
-                            <property name="title" translatable="yes">_Fingerprint Login</property>
-                            <property name="use_underline">True</property>
-                            <property name="activatable">True</property>
-                            <property name="show-arrow">True</property>
-                            <signal name="activated" handler="change_fingerprint" object="CcUserPanel" swapped="yes"/>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="AdwActionRow" id="autologin_row">
-                            <property name="title" translatable="yes">A_utomatic Login</property>
-                            <property name="use_underline">True</property>
-                            <property name="activatable_widget">autologin_switch</property>
-                            <child type="suffix">
-                              <object class="CcListRowInfoButton">
-                                <property name="valign">center</property>
-                                <property name="text" translatable="yes">Automatic login opens the user account when the device starts, without requiring authentication. Authentication is still required at other times, such as when unlocking the screen.</property>
-                              </object>
-                            </child>
-                            <child type="suffix">
-                              <object class="GtkSwitch" id="autologin_switch">
-                                <property name="valign">center</property>
-                                <signal name="notify::active" handler="autologin_changed" object="CcUserPanel" swapped="yes"/>
-                              </object>
-                            </child>
-                          </object>
-                        </child>
-                      </object>
-                    </child>
-
-                    <child>
-                      <object class="AdwPreferencesGroup" id="account_settings_box">
-                        <child>
-                          <object class="AdwActionRow" id="account_type_row">
-                            <property name="title" translatable="yes">_Administrator</property>
-                            <property name="subtitle-lines">0</property>
-                            <property name="use_underline">True</property>
-                            <property name="activatable-widget">account_type_switch</property>
-                            <child type="suffix">
-                              <object class="CcListRowInfoButton">
-                                <property name="valign">center</property>
-                                <property name="text" translatable="yes">Administrators have extra abilities, including adding and removing users, changing login settings, and removing software. Parental controls cannot be applied to administrators.</property>
-                              </object>
-                            </child>
+                          <object class="AdwPreferencesGroup">
                             <child>
-                              <object class="GtkSwitch" id="account_type_switch">
-                                <property name="valign">center</property>
-                                <signal name="notify::active" handler="account_type_changed" object="CcUserPanel" swapped="yes"/>
-                              </object>
-                            </child>
-                          </object>
-                        </child>
-
-                        <child>
-                          <object class="AdwActionRow" id="parental_controls_row">
-                            <property name="visible">False</property>
-                            <property name="title" translatable="yes">_Parental Controls</property>
-                            <property name="subtitle" translatable="yes">Open the Parental Controls app.</property>
-                            <property name="subtitle-lines">0</property>
-                            <property name="use_underline">True</property>
-                            <property name="activatable">True</property>
-                            <child>
-                              <object class="GtkLabel" id="parental_controls_button_label">
-                                <property name="valign">0.5</property>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="GtkImage" id="parental_control_go_next">
-                                <property name="icon-name">go-next-symbolic</property>
+                              <object class="GtkButton" id="remove_user_button">
+                                <property name="visible">False</property>
+                                <property name="use_underline">True</property>
+                                <property name="label" translatable="yes">_Remove User…</property>
+                                <signal name="clicked" handler="remove_user" object="CcUserPanel" swapped="yes"/>
                                 <style>
-                                  <class name="dim-label"/>
+                                  <class name="destructive-action"/>
                                 </style>
                               </object>
                             </child>
-                          </object>
-                        </child>
-
-                        <child>
-                          <object class="CcListRow" id="language_row">
-                            <property name="title" translatable="yes">_Language</property>
-                            <property name="use_underline">True</property>
-                            <property name="activatable">True</property>
-                            <property name="show-arrow">True</property>
-                            <signal name="activated" handler="change_language" object="CcUserPanel" swapped="yes"/>
-                          </object>
-                        </child>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="AdwPreferencesGroup" id="other_users">
-                        <property name="visible">False</property>
-                        <property name="title" translatable="yes">Other Users</property>
-                        <child>
-                          <object class="GtkListBox" id="other_users_listbox">
-                            <property name="selection-mode">none</property>
-                            <signal name="row-activated" handler="set_selected_user" object="CcUserPanel" swapped="yes"/>
-                            <style>
-                              <class name="boxed-list"/>
-                            </style>
-                          </object>
-                        </child>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="AdwPreferencesGroup">
-                        <child>
-                          <object class="GtkButton" id="remove_user_button">
-                            <property name="visible">False</property>
-                            <property name="use_underline">True</property>
-                            <property name="label" translatable="yes">_Remove User…</property>
-                            <signal name="clicked" handler="remove_user" object="CcUserPanel" swapped="yes"/>
-                            <style>
-                              <class name="destructive-action"/>
-                            </style>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="GtkLabel" id="remove_user_label">
-                            <property name="visible">False</property>
-                            <property name="margin-top">12</property>
-                            <property name="label" translatable="yes">Users cannot be removed while logged in</property>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="GtkButton" id="add_user_button">
-                            <property name="use_underline">True</property>
-                            <property name="label" translatable="yes">_Add User…</property>
-                            <signal name="clicked" handler="add_user" object="CcUserPanel" swapped="yes"/>
-                            <style>
-                              <class name="suggested-action"/>
-                            </style>
+                            <child>
+                              <object class="GtkLabel" id="remove_user_label">
+                                <property name="visible">False</property>
+                                <property name="margin-top">12</property>
+                                <property name="label" translatable="yes">Users cannot be removed while logged in</property>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkButton" id="add_user_button">
+                                <property name="use_underline">True</property>
+                                <property name="label" translatable="yes">_Add User…</property>
+                                <signal name="clicked" handler="add_user" object="CcUserPanel" swapped="yes"/>
+                                <style>
+                                  <class name="suggested-action"/>
+                                </style>
+                              </object>
+                            </child>
                           </object>
                         </child>
                       </object>
                     </child>
                   </object>
                 </child>
-              </object>
-            </child>
-            <child>
-              <object class="AdwStatusPage" id="error_page">
-                <property name="vexpand">True</property>
-                <property name="icon-name">computer-fail-symbolic</property>
-                <property name="title" translatable="yes">Error: Unable to Show User Settings</property>
-                <property name="description" translatable="yes">The system component `AccountsService` cannot be found</property>
-              </object>
-            </child>
-            <child>
-              <object class="GtkSpinner" id="loading_page">
-                <property name="spinning">True</property>
-                <property name="valign">center</property>
+                <child>
+                  <object class="AdwStatusPage" id="error_page">
+                    <property name="vexpand">True</property>
+                    <property name="icon-name">computer-fail-symbolic</property>
+                    <property name="title" translatable="yes">Error: Unable to Show User Settings</property>
+                    <property name="description" translatable="yes">The system component `AccountsService` cannot be found</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkSpinner" id="loading_page">
+                    <property name="spinning">True</property>
+                    <property name="valign">center</property>
+                  </object>
+                </child>
               </object>
             </child>
           </object>
-        </child>
+        </property>
       </object>
     </child>
   </template>
