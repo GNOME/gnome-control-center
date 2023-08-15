@@ -120,7 +120,8 @@ wireless_enabled_toggled (NetDeviceWifi *self)
         g_object_set (self->device_enable_row, "active", enabled, NULL);
         if (!enabled)
                 disable_scan_timeout (self);
-        gtk_widget_set_sensitive (GTK_WIDGET (self->connect_hidden_row), enabled);
+        gtk_widget_set_visible (GTK_WIDGET (self->connect_hidden_row), enabled);
+        gtk_widget_set_visible (GTK_WIDGET (self->hotspot_row), enabled);
         self->updating_device = FALSE;
 }
 
