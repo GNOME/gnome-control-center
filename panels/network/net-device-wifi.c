@@ -854,7 +854,7 @@ really_forget (AdwMessageDialog* dialog,
 
         cc_wifi_connection_list_freeze (list);
         nm_remote_connection_delete_async (connection, self->cancellable, really_forgotten, g_object_ref (list));
-        gtk_widget_hide (GTK_WIDGET (row));
+        gtk_widget_set_visible (GTK_WIDGET (row), FALSE);
 }
 
 static void
