@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2023-08-09 23:00+0000\n"
-"PO-Revision-Date: 2023-08-10 14:51+0300\n"
+"POT-Creation-Date: 2023-08-15 14:23+0000\n"
+"PO-Revision-Date: 2023-08-15 19:23+0300\n"
 "Last-Translator: Yuras Shumovich <shumovichy@gmail.com>\n"
 "Language-Team: Belarusian <i18n-bel-gnome@googlegroups.com>\n"
 "Language: be\n"
@@ -169,8 +169,8 @@ msgstr "Атрыманне пошукавых запытаў сістэмы і �
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:123
 #: panels/keyboard/cc-xkb-modifier-dialog.c:342
 #: panels/keyboard/keyboard-shortcuts.c:367
-#: panels/user-accounts/cc-user-panel.c:769
-#: panels/user-accounts/cc-user-panel.c:892
+#: panels/user-accounts/cc-user-panel.c:703
+#: panels/user-accounts/cc-user-panel.c:826
 #: panels/wwan/cc-wwan-device-page.c:477
 #: subprojects/gvc/gvc-mixer-control.c:1908
 msgid "Disabled"
@@ -536,7 +536,7 @@ msgstr "Можна прыбраць калібравальную прыладу.
 #. TRANSLATORS: The user has to be careful not to knock the
 #. * display off the screen (although we do cope if this is
 #. * detected early enough)
-#: panels/color/cc-color-calibrate.c:534
+#: panels/color/cc-color-calibrate.c:534 panels/color/cc-color-calibrate.ui:64
 msgid "Do not disturb the calibration device while in progress"
 msgstr "Падчас працы не чапайце калібравальную прыладу"
 
@@ -560,8 +560,8 @@ msgstr "Каліброўка дысплэя"
 #: panels/user-accounts/cc-avatar-chooser.c:96
 #: panels/user-accounts/cc-fingerprint-dialog.ui:32
 #: panels/user-accounts/cc-password-dialog.ui:20
-#: panels/user-accounts/cc-user-panel.c:608
-#: panels/user-accounts/cc-user-panel.ui:347
+#: panels/user-accounts/cc-user-panel.ui:296
+#: panels/user-accounts/cc-user-panel.ui:323
 #: panels/user-accounts/data/join-dialog.ui:17
 #: panels/wwan/cc-wwan-mode-dialog.ui:32
 #: panels/wwan/cc-wwan-network-dialog.ui:107
@@ -1435,6 +1435,12 @@ msgstr "Каб змяніць час або дату, трэба прайсці 
 msgid "Links &amp; Files"
 msgstr "Спасылкі і файлы"
 
+#: panels/default-apps/cc-default-apps-panel.ui:9
+msgid "Applications which are used to open common links and files."
+msgstr ""
+"Праграмы, якія выкарыстоўваюцца, каб адкрываць распаўсюджаныя спасылкі і "
+"файлы."
+
 #: panels/default-apps/cc-default-apps-panel.ui:12
 msgid "_Web"
 msgstr "І_нтэрнэт"
@@ -1511,6 +1517,7 @@ msgstr "Магчыма, гэта з-за апаратных абмежаванн
 #: panels/display/cc-display-panel.ui:90 panels/display/cc-display-panel.ui:221
 #: panels/display/cc-display-panel.ui:260
 #: panels/keyboard/cc-keyboard-shortcut-dialog.ui:115
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:118
 #: panels/mouse/cc-mouse-panel.ui:17 panels/mouse/cc-mouse-panel.ui:23
 #: panels/network/cc-network-panel.ui:17 panels/network/cc-wifi-panel.ui:11
 #: panels/network/cc-wifi-panel.ui:17 panels/printers/new-printer-dialog.ui:64
@@ -1591,8 +1598,8 @@ msgstr "%.2lf Гц"
 #. TRANSLATORS: Status of Parental Controls setup
 #: panels/display/cc-display-settings.ui:23
 #: panels/privacy/cc-firmware-security-utils.c:45
-#: panels/user-accounts/cc-user-panel.c:767
-#: panels/user-accounts/cc-user-panel.c:889
+#: panels/user-accounts/cc-user-panel.c:701
+#: panels/user-accounts/cc-user-panel.c:823
 #: panels/wwan/cc-wwan-device-page.c:475
 msgid "Enabled"
 msgstr "Уключана"
@@ -1748,7 +1755,7 @@ msgid "System Logo"
 msgstr "Лагатып сістэмы"
 
 #: panels/info-overview/cc-info-overview-panel.ui:33
-#: panels/sharing/cc-sharing-panel.ui:12 panels/sharing/cc-sharing-panel.ui:279
+#: panels/sharing/cc-sharing-panel.ui:12 panels/sharing/cc-sharing-panel.ui:256
 msgid "Device Name"
 msgstr "Імя прылады"
 
@@ -1762,17 +1769,17 @@ msgid "Hardware Model"
 msgstr "Мадэль абсталявання"
 
 #: panels/info-overview/cc-info-overview-panel.ui:66
-#: panels/info-overview/cc-system-details-window.ui:83
+#: panels/info-overview/cc-system-details-window.ui:84
 msgid "Processor"
 msgstr "Працэсар"
 
 #: panels/info-overview/cc-info-overview-panel.ui:74
-#: panels/info-overview/cc-system-details-window.ui:76
+#: panels/info-overview/cc-system-details-window.ui:77
 msgid "Memory"
 msgstr "Памяць"
 
 #: panels/info-overview/cc-info-overview-panel.ui:82
-#: panels/info-overview/cc-system-details-window.ui:97
+#: panels/info-overview/cc-system-details-window.ui:98
 msgid "Disk Capacity"
 msgstr "Ёмістасць дыска"
 
@@ -1900,53 +1907,57 @@ msgstr "**Версія ядра:**"
 msgid "Details copied to clipboard"
 msgstr "Падрабязнасці скапіяваны ў буфер абмену"
 
-#: panels/info-overview/cc-system-details-window.ui:58
+#: panels/info-overview/cc-system-details-window.ui:26
+msgid "_Copy"
+msgstr "_Капіяваць"
+
+#: panels/info-overview/cc-system-details-window.ui:59
 msgid "Hardware Information"
 msgstr "Звесткі пра абсталяванне"
 
-#: panels/info-overview/cc-system-details-window.ui:69
+#: panels/info-overview/cc-system-details-window.ui:70
 #: panels/printers/printer-entry.ui:183
 #: panels/wwan/cc-wwan-details-dialog.ui:184
 msgid "Model"
 msgstr "Мадэль"
 
-#: panels/info-overview/cc-system-details-window.ui:119
+#: panels/info-overview/cc-system-details-window.ui:117
 msgid "Software Information"
 msgstr "Звесткі аб праграмным забеспячэнні"
 
-#: panels/info-overview/cc-system-details-window.ui:130
+#: panels/info-overview/cc-system-details-window.ui:128
 #: panels/wwan/cc-wwan-details-dialog.ui:210
 msgid "Firmware Version"
 msgstr "Версія ўбудаванага ПЗ"
 
 #. translators: this field contains the distro name and version
-#: panels/info-overview/cc-system-details-window.ui:138
+#: panels/info-overview/cc-system-details-window.ui:136
 msgid "OS Name"
 msgstr "Назва АС"
 
 #. translators: this field contains the distro build
-#: panels/info-overview/cc-system-details-window.ui:146
+#: panels/info-overview/cc-system-details-window.ui:144
 msgid "OS Build"
 msgstr "Зборка АС"
 
 #. translators: this field contains the distro type
-#: panels/info-overview/cc-system-details-window.ui:154
+#: panels/info-overview/cc-system-details-window.ui:152
 msgid "OS Type"
 msgstr "Тып АС"
 
-#: panels/info-overview/cc-system-details-window.ui:161
+#: panels/info-overview/cc-system-details-window.ui:159
 msgid "GNOME Version"
 msgstr "Версія GNOME"
 
-#: panels/info-overview/cc-system-details-window.ui:168
+#: panels/info-overview/cc-system-details-window.ui:166
 msgid "Windowing System"
 msgstr "Аконны інтэрфейс"
 
-#: panels/info-overview/cc-system-details-window.ui:175
+#: panels/info-overview/cc-system-details-window.ui:173
 msgid "Virtualization"
 msgstr "Віртуалізацыя"
 
-#: panels/info-overview/cc-system-details-window.ui:182
+#: panels/info-overview/cc-system-details-window.ui:180
 msgid "Kernel Version"
 msgstr "Версія ядра"
 
@@ -2390,7 +2401,7 @@ msgid "Add Custom Shortcut"
 msgstr "Дадаць уласнае спалучэнне клавіш"
 
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:30
-#: panels/user-accounts/cc-user-panel.ui:348
+#: panels/user-accounts/cc-user-panel.ui:297
 msgid "_Remove"
 msgstr "_Выдаліць"
 
@@ -2412,7 +2423,7 @@ msgstr "Esc – адмена, Backspace – адключыць спалучэн�
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:161
 #: panels/printers/pp-details-dialog.ui:39
 #: panels/user-accounts/cc-add-user-dialog.ui:68
-#: panels/user-accounts/cc-user-panel.ui:138
+#: panels/user-accounts/cc-user-panel.ui:96
 #: panels/wwan/cc-wwan-apn-dialog.ui:96
 msgid "Name"
 msgstr "Назва"
@@ -2965,7 +2976,7 @@ msgstr "Назва сеткі"
 #. Translators: This is a password needed for printing.
 #: panels/network/cc-wifi-hotspot-dialog.ui:92
 #: panels/printers/new-printer-dialog.ui:316
-#: panels/printers/pp-jobs-dialog.ui:54 panels/sharing/cc-sharing-panel.ui:360
+#: panels/printers/pp-jobs-dialog.ui:54 panels/sharing/cc-sharing-panel.ui:337
 #: panels/user-accounts/cc-add-user-dialog.ui:149
 #: panels/user-accounts/cc-add-user-dialog.ui:184
 #: panels/user-accounts/cc-add-user-dialog.ui:363
@@ -3353,9 +3364,17 @@ msgstr "Незахаваны вузел"
 msgid "Signal Strength"
 msgstr "Сіла сігналу"
 
+#: panels/network/connection-editor/details-page.ui:31
+msgid "Weak"
+msgstr "Слабы"
+
 #: panels/network/connection-editor/details-page.ui:46
 msgid "Link speed"
 msgstr "Хуткасць сувязі"
+
+#: panels/network/connection-editor/details-page.ui:62
+msgid "1Mb/sec"
+msgstr "1 Мбіт/с"
 
 #: panels/network/connection-editor/details-page.ui:126
 #: panels/network/net-device-ethernet.c:154
@@ -3499,6 +3518,7 @@ msgstr "Аўтаматычныя маршруты"
 #. Translators: Please see https://en.wikipedia.org/wiki/Metrics_(networking)
 #: panels/network/connection-editor/ip4-page.ui:291
 #: panels/network/connection-editor/ip6-page.ui:302
+#: panels/region/cc-format-preview.ui:98
 msgid "Metric"
 msgstr "Метрыка"
 
@@ -3755,6 +3775,10 @@ msgstr "IMEI"
 #: panels/network/network-mobile.ui:41
 msgid "Provider"
 msgstr "Правайдар"
+
+#: panels/network/network-mobile.ui:300
+msgid "Not connected"
+msgstr "Няма злучэння"
 
 #: panels/network/network-mobile.ui:310 panels/power/cc-power-profile-row.ui:21
 msgid "Active"
@@ -5378,6 +5402,10 @@ msgstr[0] "Залежыць ад %u іншай прылады"
 msgstr[1] "Залежыць ад %u іншых прылад"
 msgstr[2] "Залежыць ад %u іншых прылад"
 
+#: panels/privacy/cc-bolt-device-dialog.ui:4
+msgid "Device Identifier"
+msgstr "Ідэнтыфікатар прылады"
+
 #: panels/privacy/cc-bolt-device-dialog.ui:25
 msgid "Status"
 msgstr "Стан"
@@ -6489,7 +6517,7 @@ msgid "Your Account"
 msgstr "Ваш уліковы запіс"
 
 #: panels/region/cc-region-panel.ui:28 panels/region/cc-region-panel.ui:55
-#: panels/user-accounts/cc-user-panel.ui:249
+#: panels/user-accounts/cc-user-panel.ui:207
 msgid "_Language"
 msgstr "_Мова"
 
@@ -6853,26 +6881,26 @@ msgstr "_Аддалены ўваход у сістэму"
 msgid "File Sharing"
 msgstr "Супольны доступ да файлаў"
 
-#: panels/sharing/cc-sharing-panel.ui:111
+#: panels/sharing/cc-sharing-panel.ui:110
 msgid "_Require Password"
 msgstr "_Патрабаваць пароль"
 
-#: panels/sharing/cc-sharing-panel.ui:125
-#: panels/user-accounts/cc-user-panel.ui:151
+#: panels/sharing/cc-sharing-panel.ui:124
+#: panels/user-accounts/cc-user-panel.ui:109
 msgid "_Password"
 msgstr "Пар_оль"
 
-#: panels/sharing/cc-sharing-panel.ui:168
-#: panels/sharing/cc-sharing-panel.ui:204
+#: panels/sharing/cc-sharing-panel.ui:167
+#: panels/sharing/cc-sharing-panel.ui:191
 msgid "Remote Login"
 msgstr "Аддалены ўваход у сістэму"
 
-#: panels/sharing/cc-sharing-panel.ui:224
-#: panels/sharing/cc-sharing-panel.ui:245
+#: panels/sharing/cc-sharing-panel.ui:201
+#: panels/sharing/cc-sharing-panel.ui:222
 msgid "Remote Desktop"
 msgstr "Аддалены працоўны стол"
 
-#: panels/sharing/cc-sharing-panel.ui:239
+#: panels/sharing/cc-sharing-panel.ui:216
 msgid ""
 "Remote desktop allows viewing and controlling your desktop from another "
 "computer."
@@ -6880,64 +6908,64 @@ msgstr ""
 "Аддалены працоўны стол дазваляе праглядаць і кіраваць вашым працоўным сталом "
 "з іншага камп'ютара."
 
-#: panels/sharing/cc-sharing-panel.ui:246
+#: panels/sharing/cc-sharing-panel.ui:223
 msgid "Enable or disable remote desktop connections to this computer."
 msgstr ""
 "Уключыць або адключыць падлучэнне да гэтага камп'ютара праз аддалены "
 "працоўны стол."
 
-#: panels/sharing/cc-sharing-panel.ui:259
+#: panels/sharing/cc-sharing-panel.ui:236
 msgid "Remote Control"
 msgstr "Аддаленае кіраванне"
 
-#: panels/sharing/cc-sharing-panel.ui:260
+#: panels/sharing/cc-sharing-panel.ui:237
 msgid "Allows remote connections to control the screen."
 msgstr "Дазваляе кіраванне экранам праз аддаленае злучэнне."
 
-#: panels/sharing/cc-sharing-panel.ui:274
+#: panels/sharing/cc-sharing-panel.ui:251
 msgid "How to Connect"
 msgstr "Як злучыцца"
 
-#: panels/sharing/cc-sharing-panel.ui:275
+#: panels/sharing/cc-sharing-panel.ui:252
 msgid ""
 "Connect to this computer using the device name or remote desktop address."
 msgstr ""
 "Падлучайцеся да гэтага камп'ютара праз імя прылады або адрас аддаленага "
 "працоўнага стала."
 
-#: panels/sharing/cc-sharing-panel.ui:294
-#: panels/sharing/cc-sharing-panel.ui:321
-#: panels/sharing/cc-sharing-panel.ui:348
-#: panels/sharing/cc-sharing-panel.ui:366
+#: panels/sharing/cc-sharing-panel.ui:271
+#: panels/sharing/cc-sharing-panel.ui:298
+#: panels/sharing/cc-sharing-panel.ui:325
+#: panels/sharing/cc-sharing-panel.ui:343
 msgid "Copy"
 msgstr "Капіяваць"
 
-#: panels/sharing/cc-sharing-panel.ui:307
+#: panels/sharing/cc-sharing-panel.ui:284
 msgid "Remote Desktop Address"
 msgstr "Адрас аддаленага працоўнага стала"
 
-#: panels/sharing/cc-sharing-panel.ui:337
+#: panels/sharing/cc-sharing-panel.ui:314
 msgid "Authentication"
 msgstr "Праверка сапраўднасці"
 
-#: panels/sharing/cc-sharing-panel.ui:338
+#: panels/sharing/cc-sharing-panel.ui:315
 msgid "The user name and password are required to connect to this computer."
 msgstr ""
 "Каб падлучыцца да гэтага камп'ютара, патрабуецца імя карыстальніка і пароль."
 
-#: panels/sharing/cc-sharing-panel.ui:342
+#: panels/sharing/cc-sharing-panel.ui:319
 msgid "User Name"
 msgstr "Імя карыстальніка"
 
-#: panels/sharing/cc-sharing-panel.ui:381
+#: panels/sharing/cc-sharing-panel.ui:358
 msgid "Verify Encryption"
 msgstr "Праверыць шыфраванне"
 
-#: panels/sharing/cc-sharing-panel.ui:410
+#: panels/sharing/cc-sharing-panel.ui:387
 msgid "Encryption Fingerprint"
 msgstr "Лічбавы адбітак для шыфравання"
 
-#: panels/sharing/cc-sharing-panel.ui:411
+#: panels/sharing/cc-sharing-panel.ui:388
 msgid ""
 "The encryption fingerprint can be seen in connecting clients and should be "
 "identical."
@@ -6945,15 +6973,15 @@ msgstr ""
 "Лічбавы адбітак для шыфравання можа сустракацца пры падлучэннні кліентаў і "
 "тады ён павінен быць аднолькавым."
 
-#: panels/sharing/cc-sharing-panel.ui:443
+#: panels/sharing/cc-sharing-panel.ui:420
 msgid "Media Sharing"
 msgstr "Супольны доступ да медыяфайлаў"
 
-#: panels/sharing/cc-sharing-panel.ui:465
+#: panels/sharing/cc-sharing-panel.ui:442
 msgid "Share music, photos and videos over the network."
 msgstr "Супольны доступ да вашай музыкі, фота і відэа праз сетку."
 
-#: panels/sharing/cc-sharing-panel.ui:478
+#: panels/sharing/cc-sharing-panel.ui:455
 msgid "Folders"
 msgstr "Папкі"
 
@@ -7689,7 +7717,7 @@ msgstr "Не ўдалося ўвайсці ў дамен"
 msgid "Unable to find the domain. Maybe you misspelled it?"
 msgstr "Не ўдалося знайсці дамен. Можа, вы памыліліся з яго напісаннем?"
 
-#: panels/user-accounts/cc-add-user-dialog.ui:15
+#: panels/user-accounts/cc-add-user-dialog.ui:13
 #: panels/user-accounts/data/join-dialog.ui:9
 msgid "Add User"
 msgstr "Дадаць карыстальніка"
@@ -7699,7 +7727,7 @@ msgid "Administrator"
 msgstr "Адміністратар"
 
 #: panels/user-accounts/cc-add-user-dialog.ui:135
-#: panels/user-accounts/cc-user-panel.ui:211
+#: panels/user-accounts/cc-user-panel.ui:169
 msgid ""
 "Administrators have extra abilities, including adding and removing users, "
 "changing login settings, and removing software. Parental controls cannot be "
@@ -8034,80 +8062,53 @@ msgstr "Памылковы пароль, паўтарыце спробу"
 msgid "Couldn’t connect to the %s domain: %s"
 msgstr "Не ўдалося злучыцца з даменам %s: %s"
 
-#: panels/user-accounts/cc-user-panel.c:362
-msgid "Failed to delete user"
-msgstr "Не ўдалося выдаліць карыстальніка"
-
-#: panels/user-accounts/cc-user-panel.c:417
-#: panels/user-accounts/cc-user-panel.c:472
-#: panels/user-accounts/cc-user-panel.c:518
-msgid "Failed to revoke remotely managed user"
-msgstr "Не ўдалося ануляваць аддаленага карыстальніка"
-
-#: panels/user-accounts/cc-user-panel.c:567
-msgid "You cannot delete your own account."
-msgstr "Нельга выдаліць уласны ўліковы запіс."
-
-#: panels/user-accounts/cc-user-panel.c:576
+#: panels/user-accounts/cc-user-panel.c:349
 #, c-format
-msgid "%s is still logged in"
-msgstr "%s не выйшаў з сістэмы"
+msgid "Failed to delete user: %s"
+msgstr "Не ўдалося выдаліць карыстальніка: %s"
 
-#: panels/user-accounts/cc-user-panel.c:580
-msgid ""
-"Deleting a user while they are logged in can leave the system in an "
-"inconsistent state."
-msgstr ""
-"Выдаленне карыстальніка, які не выйшаў з сістэмы, можа прывесці сістэму ў "
-"супярэчлівы стан."
+#: panels/user-accounts/cc-user-panel.c:404
+#: panels/user-accounts/cc-user-panel.c:459
+#: panels/user-accounts/cc-user-panel.c:505
+#, c-format
+msgid "Failed to revoke remotely managed user: %s"
+msgstr "Не ўдалося ануляваць аддаленага карыстальніка: %s"
 
-#: panels/user-accounts/cc-user-panel.c:594
+#: panels/user-accounts/cc-user-panel.c:545
 #, c-format
 msgid "Remove %s?"
 msgstr "Выдаліць «%s»?"
 
-#: panels/user-accounts/cc-user-panel.c:603
+#: panels/user-accounts/cc-user-panel.c:553
 #, c-format
 msgid "Are you sure you want to revoke remotely managed %s’s account?"
 msgstr "Сапраўды ануляваць уліковы запіс аддаленага карыстальніка %s?"
 
-#: panels/user-accounts/cc-user-panel.c:607
-msgid "_Delete"
-msgstr "_Выдаліць"
-
-#: panels/user-accounts/cc-user-panel.c:657
+#: panels/user-accounts/cc-user-panel.c:591
 msgctxt "Password mode"
 msgid "Account disabled"
 msgstr "Уліковы запіс адключаны"
 
-#: panels/user-accounts/cc-user-panel.c:665
+#: panels/user-accounts/cc-user-panel.c:599
 msgctxt "Password mode"
 msgid "To be set at next login"
 msgstr "Будзе зададзена пры наступным уваходзе"
 
-#: panels/user-accounts/cc-user-panel.c:668
+#: panels/user-accounts/cc-user-panel.c:602
 msgctxt "Password mode"
 msgid "None"
 msgstr "Няма"
 
-#: panels/user-accounts/cc-user-panel.c:1141
-msgid "Failed to contact the accounts service"
-msgstr "Не ўдалося звязацца з сэрвісам уліковых запісаў"
-
-#: panels/user-accounts/cc-user-panel.c:1143
-msgid "Please make sure that the AccountService is installed and enabled."
-msgstr "Праверце, ці ўсталяваны і ўключаны AccountService."
-
-#: panels/user-accounts/cc-user-panel.c:1165
+#: panels/user-accounts/cc-user-panel.c:1035
 msgid "This panel must be unlocked to change this setting"
 msgstr "Каб змяняць налады, трэба разблакіраваць гэту панэль"
 
-#: panels/user-accounts/cc-user-panel.c:1234
+#: panels/user-accounts/cc-user-panel.c:1104
 msgid "Delete the selected user account"
 msgstr "Выдаліць вылучаны ўліковы запіс карыстальніка"
 
-#: panels/user-accounts/cc-user-panel.c:1238
-#: panels/user-accounts/cc-user-panel.c:1346
+#: panels/user-accounts/cc-user-panel.c:1108
+#: panels/user-accounts/cc-user-panel.c:1216
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -8115,7 +8116,7 @@ msgstr ""
 "Каб выдаліць уліковы запіс вылучанага карыстальніка,\n"
 "спачатку націсніце на значок *"
 
-#: panels/user-accounts/cc-user-panel.c:1392
+#: panels/user-accounts/cc-user-panel.c:1262
 msgid "Unlock to add users and change settings"
 msgstr "Разблакіруйце, каб дадаваць карыстальнікаў і змяняць налады"
 
@@ -8124,32 +8125,20 @@ msgstr "Разблакіруйце, каб дадаваць карыстальн
 msgid "Users"
 msgstr "Карыстальнікі"
 
-#: panels/user-accounts/cc-user-panel.ui:64
-msgid "Your session needs to be restarted for changes to take effect"
-msgstr "Каб змены ўступілі ў сілу, трэба перазапусціць сеанс"
-
-#: panels/user-accounts/cc-user-panel.ui:71
-msgid "Restart Now"
-msgstr "Перазапусціць"
-
-#: panels/user-accounts/cc-user-panel.ui:80
-msgid "Close"
-msgstr "Закрыць"
-
-#: panels/user-accounts/cc-user-panel.ui:121
+#: panels/user-accounts/cc-user-panel.ui:79
 msgid "Edit avatar"
 msgstr "Змяніць аватар"
 
 #. FIXME
-#: panels/user-accounts/cc-user-panel.ui:171
+#: panels/user-accounts/cc-user-panel.ui:129
 msgid "_Fingerprint Login"
 msgstr "_Уваход праз адбітак пальца"
 
-#: panels/user-accounts/cc-user-panel.ui:180
+#: panels/user-accounts/cc-user-panel.ui:138
 msgid "A_utomatic Login"
 msgstr "_Аўтаматычны ўваход"
 
-#: panels/user-accounts/cc-user-panel.ui:186
+#: panels/user-accounts/cc-user-panel.ui:144
 msgid ""
 "Automatic login opens the user account when the device starts, without "
 "requiring authentication. Authentication is still required at other times, "
@@ -8159,40 +8148,43 @@ msgstr ""
 "ўліковы запіс карыстальніка. Аўтэнтыфікацыя па-ранейшаму патрабуецца ў іншы "
 "выпадках, напрыклад, калі разблакіруецца экран."
 
-#: panels/user-accounts/cc-user-panel.ui:204
+#: panels/user-accounts/cc-user-panel.ui:162
 msgid "_Administrator"
 msgstr "_Адміністратар"
 
-#: panels/user-accounts/cc-user-panel.ui:226
+#: panels/user-accounts/cc-user-panel.ui:184
 msgid "_Parental Controls"
 msgstr "_Бацькоўскі кантроль"
 
-#: panels/user-accounts/cc-user-panel.ui:227
+#: panels/user-accounts/cc-user-panel.ui:185
 msgid "Open the Parental Controls app."
 msgstr "Адкрыць праграму для бацькоўскага кантролю."
 
-#: panels/user-accounts/cc-user-panel.ui:261
+#: panels/user-accounts/cc-user-panel.ui:219
 msgid "Other Users"
 msgstr "Іншыя карыстальнікі"
 
-#: panels/user-accounts/cc-user-panel.ui:279
+#: panels/user-accounts/cc-user-panel.ui:237
 msgid "_Remove User…"
 msgstr "_Выдаліць карыстальніка…"
 
-#: panels/user-accounts/cc-user-panel.ui:289
+#: panels/user-accounts/cc-user-panel.ui:248
+msgid "Users cannot be removed while logged in"
+msgstr "Немагчыма выдаліць карыстальніка, які не выйшаў з сістэмы"
+
+#: panels/user-accounts/cc-user-panel.ui:254
 msgid "_Add User…"
 msgstr "_Дадаць карыстальніка…"
 
-#. Translators: This is the empty state page label which states that there are no users to show in the panel.
-#: panels/user-accounts/cc-user-panel.ui:318
-msgid "No Users Found"
-msgstr "Не знойдзена карыстальнікаў"
+#: panels/user-accounts/cc-user-panel.ui:271
+msgid "Error: Unable to Show User Settings"
+msgstr "Памылка. Немагчыма паказаць налады карыстальніка"
 
-#: panels/user-accounts/cc-user-panel.ui:327
-msgid "Unlock to add a user account."
-msgstr "Разблакіруйце, каб дадаць уліковы запіс карыстальніка."
+#: panels/user-accounts/cc-user-panel.ui:272
+msgid "The system component `AccountsService` cannot be found"
+msgstr "Немагчыма знайсці сістэмны кампанент `AccountsService`"
 
-#: panels/user-accounts/cc-user-panel.ui:342
+#: panels/user-accounts/cc-user-panel.ui:291
 msgid ""
 "The user will not be able to use this device once their account has been "
 "removed."
@@ -8200,9 +8192,13 @@ msgstr ""
 "Адразу ж пасля выдалення ўліковага запісу, карыстальнік не зможа карыстацца "
 "гэтай прыладай."
 
-#: panels/user-accounts/cc-user-panel.ui:354
+#: panels/user-accounts/cc-user-panel.ui:303
 msgid "Delete Files and Settings"
 msgstr "Выдаліць файлы і налады"
+
+#: panels/user-accounts/cc-user-panel.ui:324
+msgid "_Delete"
+msgstr "_Выдаліць"
 
 #: panels/user-accounts/data/gnome-user-accounts-panel.desktop.in:4
 msgid "Add or remove users and change your password"
@@ -9163,6 +9159,10 @@ msgstr "_Устанавіць PIN-код"
 msgid "Change PIN"
 msgstr "Змяніць PIN-код"
 
+#: panels/wwan/cc-wwan-sim-lock-dialog.ui:123
+msgid "New PIN"
+msgstr "Новы PIN-код"
+
 #: panels/wwan/cc-wwan-sim-lock-dialog.ui:201
 msgid "Enter current PIN to change SIM lock settings"
 msgstr "Увядзіце цяперашні PIN-код, каб змяняць налады блакіравання SIM-карты"
@@ -9354,6 +9354,47 @@ msgstr[2] "%u уваходаў"
 #: subprojects/gvc/gvc-mixer-control.c:2882
 msgid "System Sounds"
 msgstr "Сістэмныя гукі"
+
+#~ msgid "Failed to delete user"
+#~ msgstr "Не ўдалося выдаліць карыстальніка"
+
+#~ msgid "Failed to revoke remotely managed user"
+#~ msgstr "Не ўдалося ануляваць аддаленага карыстальніка"
+
+#~ msgid "You cannot delete your own account."
+#~ msgstr "Нельга выдаліць уласны ўліковы запіс."
+
+#, c-format
+#~ msgid "%s is still logged in"
+#~ msgstr "%s не выйшаў з сістэмы"
+
+#~ msgid ""
+#~ "Deleting a user while they are logged in can leave the system in an "
+#~ "inconsistent state."
+#~ msgstr ""
+#~ "Выдаленне карыстальніка, які не выйшаў з сістэмы, можа прывесці сістэму ў "
+#~ "супярэчлівы стан."
+
+#~ msgid "Failed to contact the accounts service"
+#~ msgstr "Не ўдалося звязацца з сэрвісам уліковых запісаў"
+
+#~ msgid "Please make sure that the AccountService is installed and enabled."
+#~ msgstr "Праверце, ці ўсталяваны і ўключаны AccountService."
+
+#~ msgid "Your session needs to be restarted for changes to take effect"
+#~ msgstr "Каб змены ўступілі ў сілу, трэба перазапусціць сеанс"
+
+#~ msgid "Restart Now"
+#~ msgstr "Перазапусціць"
+
+#~ msgid "Close"
+#~ msgstr "Закрыць"
+
+#~ msgid "No Users Found"
+#~ msgstr "Не знойдзена карыстальнікаў"
+
+#~ msgid "Unlock to add a user account."
+#~ msgstr "Разблакіруйце, каб дадаць уліковы запіс карыстальніка."
 
 #~ msgid ""
 #~ "Keyboard;Mouse;a11y;Accessibility;Universal Access;Contrast;Cursor;Sound;"
@@ -10948,9 +10989,6 @@ msgstr "Сістэмныя гукі"
 
 #~ msgid "Requires Internet connection"
 #~ msgstr "Патрабуецца інтэрнэт-злучэнне"
-
-#~ msgid "_Copy"
-#~ msgstr "_Капіяваць"
 
 #~ msgid "Select _All"
 #~ msgstr "Выбраць ус_е"
