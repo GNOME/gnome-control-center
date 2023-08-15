@@ -4,7 +4,6 @@ panels = [
   'applications',
   'background',
   'color',
-  'datetime',
   'display',
   'keyboard',
   'mouse',

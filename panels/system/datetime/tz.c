@@ -4,7 +4,7 @@
  * Copyright (C) 2000-2001 Ximian, Inc.
  *
  * Authors: Hans Petter Jansson <hpj@ximian.com>
- * 
+ *
  * Largely based on Michael Fulbright's work on Anaconda.
  *
  * This program is free software; you can redistribute it and/or modify
@@ -31,7 +31,7 @@
 #include <string.h>
 #include <ctype.h>
 #include "tz.h"
-#include "cc-datetime-resources.h"
+#include "cc-system-resources.h"
 
 
 /* Forward declarations for private functions */
@@ -79,19 +79,19 @@ tz_load_db (void)
 
 		g_strchomp(buf);
 		tmpstrarr = g_strsplit(buf,"\t", 6);
-		
+
 		latstr = g_strdup (tmpstrarr[1]);
 		p = latstr + 1;
 		while (*p != '-' && *p != '+') p++;
 		lngstr = g_strdup (p);
 		*p = '\0';
-		
+
 		loc = g_new0 (TzLocation, 1);
 		loc->country = g_strdup (tmpstrarr[0]);
 		loc->zone = g_strdup (tmpstrarr[2]);
 		loc->latitude  = convert_pos (latstr, 2);
 		loc->longitude = convert_pos (lngstr, 3);
-		
+
 #ifdef __sun
 		if (tmpstrarr[3] && *tmpstrarr[3] == '-' && tmpstrarr[4])
 			loc->comment = g_strdup (tmpstrarr[4]);
@@ -115,12 +115,12 @@ tz_load_db (void)
 
 		g_ptr_array_add (tz_db->locations, (gpointer) loc);
 	}
-	
+
 	fclose (tzfile);
-	
+
 	/* now sort by country */
 	sort_locations_by_country (tz_db->locations);
-	
+
 	/* Load up the hashtable of backward links */
 	load_backward_tz (tz_db);
 
@@ -231,13 +231,13 @@ tz_info_from_location (TzLocation *loc)
 	time_t curtime;
 	struct tm *curzone;
 	g_autofree gchar *tz_env_value = NULL;
-	
+
 	g_return_val_if_fail (loc != NULL, NULL);
 	g_return_val_if_fail (loc->zone != NULL, NULL);
-	
+
 	tz_env_value = g_strdup (getenv ("TZ"));
 	setenv ("TZ", loc->zone, 1);
-	
+
 #if 0
 	tzset ();
 #endif
@@ -269,7 +269,7 @@ void
 tz_info_free (TzInfo *tzinfo)
 {
 	g_return_if_fail (tzinfo != NULL);
-	
+
 	if (tzinfo->tzname) g_free (tzinfo->tzname);
 	g_free (tzinfo);
 }
@@ -385,9 +385,9 @@ convert_pos (gchar *pos, int digits)
 	gchar *fraction;
 	gint i;
 	float t1, t2;
-	
+
 	if (!pos || strlen(pos) < 4 || digits > 9) return 0.0;
-	
+
 	for (i = 0; i < digits + 1; i++) whole[i] = pos[i];
 	whole[i] = '\0';
 	fraction = pos + digits + 1;
@@ -406,14 +406,14 @@ convert_pos (gchar *pos, int digits)
 static void
 free_tzdata (TzLocation *tz)
 {
-	
+
 	if (tz->country)
 	  g_free(tz->country);
 	if (tz->zone)
 	  g_free(tz->zone);
 	if (tz->comment)
 	  g_free(tz->comment);
-	
+
 	g_free(tz);
 }
 #endif
@@ -424,7 +424,7 @@ compare_country_names (const void *a, const void *b)
 {
 	const TzLocation *tza = * (TzLocation **) a;
 	const TzLocation *tzb = * (TzLocation **) b;
-	
+
 	return strcmp (tza->zone, tzb->zone);
 }
 
@@ -446,7 +446,7 @@ load_backward_tz (TzDB *tz_db)
 
   tz_db->backward = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, g_free);
 
-  bytes = g_resources_lookup_data ("/org/gnome/control-center/datetime/backward",
+  bytes = g_resources_lookup_data ("/org/gnome/control-center/system/datetime/backward",
                                    G_RESOURCE_LOOKUP_FLAGS_NONE, NULL);
   contents = (const char *) g_bytes_get_data (bytes, NULL);
 

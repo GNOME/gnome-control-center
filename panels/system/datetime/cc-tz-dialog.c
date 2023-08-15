@@ -240,7 +240,7 @@ cc_tz_dialog_class_init (CcTzDialogClass *klass)
 
   gtk_widget_class_set_template_from_resource (widget_class,
                                                "/org/gnome/control-center/"
-                                               "datetime/cc-tz-dialog.ui");
+                                               "system/datetime/cc-tz-dialog.ui");
 
   gtk_widget_class_bind_template_child (widget_class, CcTzDialog, location_entry);
 
@@ -252,8 +252,6 @@ cc_tz_dialog_class_init (CcTzDialogClass *klass)
   gtk_widget_class_bind_template_callback (widget_class, tz_dialog_search_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, tz_dialog_search_stopped_cb);
   gtk_widget_class_bind_template_callback (widget_class, tz_dialog_row_activated_cb);
-
-  gtk_widget_class_add_binding_action (widget_class, GDK_KEY_Escape, 0, "window.close", NULL);
 }
 
 static void

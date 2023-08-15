@@ -111,7 +111,9 @@
       </object>
     </property>
   </object>
-  <template class="CcDateTimePanel" parent="CcPanel">
+  <template class="CcDateTimePage" parent="AdwNavigationPage">
+    <property name="title" translatable="yes">Date &amp; Time</property>
+    <property name="tag">system-date-time-page</property>
     <property name="child">
       <object class="AdwToolbarView">
         <child type="top">
@@ -207,7 +209,7 @@
                   <object class="AdwComboRow" id="timeformat_row">
                     <property name="title" translatable="yes">Time _Format</property>
                     <property name="use_underline">True</property>
-                    <signal name="notify::selected-item" handler="change_clock_settings" object="CcDateTimePanel" swapped="yes"/>
+                    <signal name="notify::selected-item" handler="change_clock_settings" object="CcDateTimePage" swapped="yes"/>
                     <property name="model">
                       <object class="AdwEnumListModel">
                         <property name="enum-type">GDesktopClockFormat</property>
@@ -295,7 +297,7 @@
     </style>
     <property name="factory">
       <object class="GtkBuilderListItemFactory">
-        <property name="resource">/org/gnome/control-center/datetime/cc-month-row.ui</property>
+        <property name="resource">/org/gnome/control-center/system/datetime/cc-month-row.ui</property>
       </object>
     </property>
     <property name="model">

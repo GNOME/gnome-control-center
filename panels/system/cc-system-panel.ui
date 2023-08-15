@@ -31,6 +31,17 @@
 
                         <child>
                           <object class="CcListRow">
+                            <property name="title" translatable="yes">_Date &amp;amp; Time</property>
+                            <property name="icon-name">org.gnome.Settings-time-symbolic</property>
+                            <property name="use-underline">True</property>
+                            <property name="show-arrow">True</property>
+                            <property name="action-name">navigation.push</property>
+                            <property name="action-target">'system-date-time-page'</property>
+                          </object>
+                        </child>
+
+                        <child>
+                          <object class="CcListRow">
                             <property name="title" translatable="yes">_Remote Desktop</property>
                             <property name="icon-name">preferences-desktop-display-symbolic</property>
                             <property name="use-underline">True</property>
@@ -62,6 +73,9 @@
 
         <child>
           <object class="CcRegionPage"/>
+        </child>
+        <child>
+          <object class="CcDateTimePage"/>
         </child>
         <child>
           <object class="CcRemoteDesktopPage"/>
