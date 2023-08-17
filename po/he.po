@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center.HEAD.he\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2023-08-07 13:31+0000\n"
-"PO-Revision-Date: 2023-08-08 17:06+0300\n"
+"POT-Creation-Date: 2023-08-15 12:14+0000\n"
+"PO-Revision-Date: 2023-08-17 16:54+0300\n"
 "Last-Translator: Yosef Or Boczko <yoseforb@gmail.com>\n"
 "Language-Team: Hebrew <yoseforb@gmail.com>\n"
 "Language: he\n"
@@ -172,8 +172,8 @@ msgstr "קבלת חיפושי מערכת ושליחת התוצאות"
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:123
 #: panels/keyboard/cc-xkb-modifier-dialog.c:342
 #: panels/keyboard/keyboard-shortcuts.c:367
-#: panels/user-accounts/cc-user-panel.c:769
-#: panels/user-accounts/cc-user-panel.c:892
+#: panels/user-accounts/cc-user-panel.c:703
+#: panels/user-accounts/cc-user-panel.c:826
 #: panels/wwan/cc-wwan-device-page.c:477
 #: subprojects/gvc/gvc-mixer-control.c:1908
 msgid "Disabled"
@@ -532,7 +532,7 @@ msgstr "ניתן להסיר את התקן הכיול."
 #. TRANSLATORS: The user has to be careful not to knock the
 #. * display off the screen (although we do cope if this is
 #. * detected early enough)
-#: panels/color/cc-color-calibrate.c:534
+#: panels/color/cc-color-calibrate.c:534 panels/color/cc-color-calibrate.ui:64
 msgid "Do not disturb the calibration device while in progress"
 msgstr "נא לא להפריע להתקן הכיול במהלך ההתקדמות"
 
@@ -556,8 +556,8 @@ msgstr "כיול התצוגה"
 #: panels/user-accounts/cc-avatar-chooser.c:96
 #: panels/user-accounts/cc-fingerprint-dialog.ui:32
 #: panels/user-accounts/cc-password-dialog.ui:20
-#: panels/user-accounts/cc-user-panel.c:608
-#: panels/user-accounts/cc-user-panel.ui:347
+#: panels/user-accounts/cc-user-panel.ui:296
+#: panels/user-accounts/cc-user-panel.ui:323
 #: panels/user-accounts/data/join-dialog.ui:17
 #: panels/wwan/cc-wwan-mode-dialog.ui:32
 #: panels/wwan/cc-wwan-network-dialog.ui:107
@@ -1424,6 +1424,10 @@ msgstr "כדי לשנות את הגדרות השעה או התאריך עליך 
 msgid "Links &amp; Files"
 msgstr "קישורים וקבצים"
 
+#: panels/default-apps/cc-default-apps-panel.ui:9
+msgid "Applications which are used to open common links and files."
+msgstr "יישומים המשמשים לפתיחת קישורים וקבצים נפוצים."
+
 #: panels/default-apps/cc-default-apps-panel.ui:12
 msgid "_Web"
 msgstr "_אינטרנט"
@@ -1498,6 +1502,7 @@ msgstr "אולי זה קשור למגבלות חומרה."
 #: panels/display/cc-display-panel.ui:90 panels/display/cc-display-panel.ui:221
 #: panels/display/cc-display-panel.ui:260
 #: panels/keyboard/cc-keyboard-shortcut-dialog.ui:115
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:118
 #: panels/mouse/cc-mouse-panel.ui:17 panels/mouse/cc-mouse-panel.ui:23
 #: panels/network/cc-network-panel.ui:17 panels/network/cc-wifi-panel.ui:11
 #: panels/network/cc-wifi-panel.ui:17 panels/printers/new-printer-dialog.ui:64
@@ -1578,8 +1583,8 @@ msgstr "‏%.2lf הרץ"
 #. TRANSLATORS: Status of Parental Controls setup
 #: panels/display/cc-display-settings.ui:23
 #: panels/privacy/cc-firmware-security-utils.c:45
-#: panels/user-accounts/cc-user-panel.c:767
-#: panels/user-accounts/cc-user-panel.c:889
+#: panels/user-accounts/cc-user-panel.c:701
+#: panels/user-accounts/cc-user-panel.c:823
 #: panels/wwan/cc-wwan-device-page.c:475
 msgid "Enabled"
 msgstr "פעיל"
@@ -1731,7 +1736,7 @@ msgid "System Logo"
 msgstr "לוגו המערכת"
 
 #: panels/info-overview/cc-info-overview-panel.ui:33
-#: panels/sharing/cc-sharing-panel.ui:12 panels/sharing/cc-sharing-panel.ui:279
+#: panels/sharing/cc-sharing-panel.ui:12 panels/sharing/cc-sharing-panel.ui:256
 msgid "Device Name"
 msgstr "שם ההתקן"
 
@@ -1745,17 +1750,17 @@ msgid "Hardware Model"
 msgstr "דגם חומרה"
 
 #: panels/info-overview/cc-info-overview-panel.ui:66
-#: panels/info-overview/cc-system-details-window.ui:83
+#: panels/info-overview/cc-system-details-window.ui:84
 msgid "Processor"
 msgstr "מעבד"
 
 #: panels/info-overview/cc-info-overview-panel.ui:74
-#: panels/info-overview/cc-system-details-window.ui:76
+#: panels/info-overview/cc-system-details-window.ui:77
 msgid "Memory"
 msgstr "זיכרון"
 
 #: panels/info-overview/cc-info-overview-panel.ui:82
-#: panels/info-overview/cc-system-details-window.ui:97
+#: panels/info-overview/cc-system-details-window.ui:98
 msgid "Disk Capacity"
 msgstr "קיבלות דיסק"
 
@@ -1883,53 +1888,57 @@ msgstr "**גרסת ליבה:**"
 msgid "Details copied to clipboard"
 msgstr "הדיווח הועתק ללוח הגזירים"
 
-#: panels/info-overview/cc-system-details-window.ui:58
+#: panels/info-overview/cc-system-details-window.ui:26
+msgid "_Copy"
+msgstr "ה_עתקה"
+
+#: panels/info-overview/cc-system-details-window.ui:59
 msgid "Hardware Information"
 msgstr "מידע על החומרה"
 
-#: panels/info-overview/cc-system-details-window.ui:69
+#: panels/info-overview/cc-system-details-window.ui:70
 #: panels/printers/printer-entry.ui:183
 #: panels/wwan/cc-wwan-details-dialog.ui:184
 msgid "Model"
 msgstr "דגם"
 
-#: panels/info-overview/cc-system-details-window.ui:119
+#: panels/info-overview/cc-system-details-window.ui:117
 msgid "Software Information"
 msgstr "מידע על התכנה"
 
-#: panels/info-overview/cc-system-details-window.ui:130
+#: panels/info-overview/cc-system-details-window.ui:128
 #: panels/wwan/cc-wwan-details-dialog.ui:210
 msgid "Firmware Version"
 msgstr "גרסת קושחה"
 
 #. translators: this field contains the distro name and version
-#: panels/info-overview/cc-system-details-window.ui:138
+#: panels/info-overview/cc-system-details-window.ui:136
 msgid "OS Name"
 msgstr "שם מערכת הפעלה"
 
 #. translators: this field contains the distro build
-#: panels/info-overview/cc-system-details-window.ui:146
+#: panels/info-overview/cc-system-details-window.ui:144
 msgid "OS Build"
 msgstr "מזהה בניית מערכת הפעלה"
 
 #. translators: this field contains the distro type
-#: panels/info-overview/cc-system-details-window.ui:154
+#: panels/info-overview/cc-system-details-window.ui:152
 msgid "OS Type"
 msgstr "סוג מערכת הפעלה"
 
-#: panels/info-overview/cc-system-details-window.ui:161
+#: panels/info-overview/cc-system-details-window.ui:159
 msgid "GNOME Version"
 msgstr "גרסת GNOME"
 
-#: panels/info-overview/cc-system-details-window.ui:168
+#: panels/info-overview/cc-system-details-window.ui:166
 msgid "Windowing System"
 msgstr "מערכת חלונות"
 
-#: panels/info-overview/cc-system-details-window.ui:175
+#: panels/info-overview/cc-system-details-window.ui:173
 msgid "Virtualization"
 msgstr "הדמייה"
 
-#: panels/info-overview/cc-system-details-window.ui:182
+#: panels/info-overview/cc-system-details-window.ui:180
 msgid "Kernel Version"
 msgstr "גרסת ליבה"
 
@@ -2368,7 +2377,7 @@ msgid "Add Custom Shortcut"
 msgstr "הוספת צירוף מקשים חדש"
 
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:30
-#: panels/user-accounts/cc-user-panel.ui:348
+#: panels/user-accounts/cc-user-panel.ui:297
 msgid "_Remove"
 msgstr "הס_רה"
 
@@ -2390,7 +2399,7 @@ msgstr "יש ללחוץ Esc לביטול או Backspace להשבתת צירופ�
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:161
 #: panels/printers/pp-details-dialog.ui:39
 #: panels/user-accounts/cc-add-user-dialog.ui:68
-#: panels/user-accounts/cc-user-panel.ui:138
+#: panels/user-accounts/cc-user-panel.ui:96
 #: panels/wwan/cc-wwan-apn-dialog.ui:96
 msgid "Name"
 msgstr "שם"
@@ -2940,7 +2949,7 @@ msgstr "שם הרשת"
 #. Translators: This is a password needed for printing.
 #: panels/network/cc-wifi-hotspot-dialog.ui:92
 #: panels/printers/new-printer-dialog.ui:316
-#: panels/printers/pp-jobs-dialog.ui:54 panels/sharing/cc-sharing-panel.ui:360
+#: panels/printers/pp-jobs-dialog.ui:54 panels/sharing/cc-sharing-panel.ui:337
 #: panels/user-accounts/cc-add-user-dialog.ui:149
 #: panels/user-accounts/cc-add-user-dialog.ui:184
 #: panels/user-accounts/cc-add-user-dialog.ui:363
@@ -3326,9 +3335,18 @@ msgstr "עמית לא שמור"
 msgid "Signal Strength"
 msgstr "עצמת הקליטה"
 
+#: panels/network/connection-editor/details-page.ui:31
+# msgctxt "Signal strength"
+msgid "Weak"
+msgstr "חלשה"
+
 #: panels/network/connection-editor/details-page.ui:46
 msgid "Link speed"
 msgstr "מהירות הקישור"
+
+#: panels/network/connection-editor/details-page.ui:62
+msgid "1Mb/sec"
+msgstr "10 מ״ב/שנייה"
 
 #: panels/network/connection-editor/details-page.ui:126
 #: panels/network/net-device-ethernet.c:154
@@ -3468,6 +3486,7 @@ msgstr "נתיבים אוטומטיים"
 #. Translators: Please see https://en.wikipedia.org/wiki/Metrics_(networking)
 #: panels/network/connection-editor/ip4-page.ui:291
 #: panels/network/connection-editor/ip6-page.ui:302
+#: panels/region/cc-format-preview.ui:98
 msgid "Metric"
 msgstr "מטריקה"
 
@@ -3720,6 +3739,10 @@ msgstr "IMEI (מס׳ ברזל)"
 #: panels/network/network-mobile.ui:41
 msgid "Provider"
 msgstr "ספק"
+
+#: panels/network/network-mobile.ui:300
+msgid "Not connected"
+msgstr "לא מחובר"
 
 #: panels/network/network-mobile.ui:310 panels/power/cc-power-profile-row.ui:21
 msgid "Active"
@@ -5337,6 +5360,10 @@ msgstr[1] "תלוי בשני התקנים אחרים"
 msgstr[2] "תלוי ב־%u התקנים אחרים"
 msgstr[3] "‫תלוי ב־%u התקנים אחרים"
 
+#: panels/privacy/cc-bolt-device-dialog.ui:4
+msgid "Device Identifier"
+msgstr "מזה התקן"
+
 #: panels/privacy/cc-bolt-device-dialog.ui:25
 msgid "Status"
 msgstr "מצב"
@@ -6424,7 +6451,7 @@ msgid "Your Account"
 msgstr "החשבון שלך"
 
 #: panels/region/cc-region-panel.ui:28 panels/region/cc-region-panel.ui:55
-#: panels/user-accounts/cc-user-panel.ui:249
+#: panels/user-accounts/cc-user-panel.ui:207
 msgid "_Language"
 msgstr "_שפה"
 
@@ -6781,98 +6808,98 @@ msgstr "כניסה מ_רוחקת"
 msgid "File Sharing"
 msgstr "שיתוף קבצים"
 
-#: panels/sharing/cc-sharing-panel.ui:111
+#: panels/sharing/cc-sharing-panel.ui:110
 msgid "_Require Password"
 msgstr "ד_רישת ססמה"
 
-#: panels/sharing/cc-sharing-panel.ui:125
-#: panels/user-accounts/cc-user-panel.ui:151
+#: panels/sharing/cc-sharing-panel.ui:124
+#: panels/user-accounts/cc-user-panel.ui:109
 msgid "_Password"
 msgstr "_ססמה"
 
-#: panels/sharing/cc-sharing-panel.ui:168
-#: panels/sharing/cc-sharing-panel.ui:204
+#: panels/sharing/cc-sharing-panel.ui:167
+#: panels/sharing/cc-sharing-panel.ui:191
 msgid "Remote Login"
 msgstr "התחברות מרוחקת"
 
-#: panels/sharing/cc-sharing-panel.ui:224
-#: panels/sharing/cc-sharing-panel.ui:245
+#: panels/sharing/cc-sharing-panel.ui:201
+#: panels/sharing/cc-sharing-panel.ui:222
 msgid "Remote Desktop"
 msgstr "שולחן עבודה מרוחק"
 
-#: panels/sharing/cc-sharing-panel.ui:239
+#: panels/sharing/cc-sharing-panel.ui:216
 msgid ""
 "Remote desktop allows viewing and controlling your desktop from another "
 "computer."
 msgstr "שולחן עבודה מרוחק מאפשר צפייה ושליטה בשולחן העבודה שלך ממחשב אחר."
 
-#: panels/sharing/cc-sharing-panel.ui:246
+#: panels/sharing/cc-sharing-panel.ui:223
 msgid "Enable or disable remote desktop connections to this computer."
 msgstr "הפעלה או השבתה של התחברות מרוחקת לשולחן העבודה של מחשב זה."
 
-#: panels/sharing/cc-sharing-panel.ui:259
+#: panels/sharing/cc-sharing-panel.ui:236
 msgid "Remote Control"
 msgstr "שליטה מרחוק"
 
-#: panels/sharing/cc-sharing-panel.ui:260
+#: panels/sharing/cc-sharing-panel.ui:237
 msgid "Allows remote connections to control the screen."
 msgstr "לאפשר להתחברויות מרוחקות לשלוט במסך זה."
 
-#: panels/sharing/cc-sharing-panel.ui:274
+#: panels/sharing/cc-sharing-panel.ui:251
 msgid "How to Connect"
 msgstr "כיצד להתחבר"
 
-#: panels/sharing/cc-sharing-panel.ui:275
+#: panels/sharing/cc-sharing-panel.ui:252
 msgid ""
 "Connect to this computer using the device name or remote desktop address."
 msgstr "התחברות למחשב זה באמצעות שם ההתקן או כתובת שולחן העבודה המרוחק."
 
-#: panels/sharing/cc-sharing-panel.ui:294
-#: panels/sharing/cc-sharing-panel.ui:321
-#: panels/sharing/cc-sharing-panel.ui:348
-#: panels/sharing/cc-sharing-panel.ui:366
+#: panels/sharing/cc-sharing-panel.ui:271
+#: panels/sharing/cc-sharing-panel.ui:298
+#: panels/sharing/cc-sharing-panel.ui:325
+#: panels/sharing/cc-sharing-panel.ui:343
 msgid "Copy"
 msgstr "העתקה"
 
-#: panels/sharing/cc-sharing-panel.ui:307
+#: panels/sharing/cc-sharing-panel.ui:284
 msgid "Remote Desktop Address"
 msgstr "כתובת שולחן עבודה מרוחק"
 
-#: panels/sharing/cc-sharing-panel.ui:337
+#: panels/sharing/cc-sharing-panel.ui:314
 msgid "Authentication"
 msgstr "אימות"
 
-#: panels/sharing/cc-sharing-panel.ui:338
+#: panels/sharing/cc-sharing-panel.ui:315
 msgid "The user name and password are required to connect to this computer."
 msgstr "שם משתמש וססמה נדרשים על מנת להתחבר למחשב זה."
 
-#: panels/sharing/cc-sharing-panel.ui:342
+#: panels/sharing/cc-sharing-panel.ui:319
 msgid "User Name"
 msgstr "שם משתמש"
 
-#: panels/sharing/cc-sharing-panel.ui:381
+#: panels/sharing/cc-sharing-panel.ui:358
 msgid "Verify Encryption"
 msgstr "אימות הצפנה"
 
-#: panels/sharing/cc-sharing-panel.ui:410
+#: panels/sharing/cc-sharing-panel.ui:387
 msgid "Encryption Fingerprint"
 msgstr "הצפנת טביעת אצבע"
 
-#: panels/sharing/cc-sharing-panel.ui:411
+#: panels/sharing/cc-sharing-panel.ui:388
 msgid ""
 "The encryption fingerprint can be seen in connecting clients and should be "
 "identical."
 msgstr "הצפנת טביעת האצבע ניתנת לצפייה בצד הלקוח המתחבר וצריכה להיות זהה."
 
-#: panels/sharing/cc-sharing-panel.ui:443
+#: panels/sharing/cc-sharing-panel.ui:420
 msgid "Media Sharing"
 msgstr "שיתוף מדיה"
 
-#: panels/sharing/cc-sharing-panel.ui:465
+#: panels/sharing/cc-sharing-panel.ui:442
 msgid "Share music, photos and videos over the network."
 msgstr "שיתוף מוזיקה, תמונות וסרטים ברשת."
 
-#: panels/sharing/cc-sharing-panel.ui:478
+#: panels/sharing/cc-sharing-panel.ui:455
 msgid "Folders"
 msgstr "תיקיות"
 
@@ -7548,8 +7575,8 @@ msgstr "להקל ראייה, שמיעה, הקלדה, הצבעה ולחיצה"
 msgid ""
 "Keyboard;Mouse;a11y;Accessibility;Universal Access;Contrast;Cursor;Sound;"
 "Zoom;Screen;Reader;big;high;large;text;font;size;AccessX;Sticky;Keys;Slow;"
-"Bounce;Mouse;Double;click;Delay;Speed;Assist;Repeat;Blink;visual;hearing;"
-"audio;typing;animations;"
+"Bounce;Mouse;Double;click;Delay;Speed;Assist;Repeat;Blink;Pointer;find;"
+"locate;visual;hearing;audio;typing;animations;"
 msgstr ""
 "מקלדת;עכבר;a11y;נגישות;ניגודיות;ניגוד;תקריב;זום;מקריא מסך;טקסט;גופן;גודל;"
 "AccessX;מקשים דביקים;מקשים אטיים;מקשים חוזרים;מקשי עכבר;לחיצה;כפול;כפולה;"
@@ -7606,7 +7633,7 @@ msgstr "ההתחברות למתחם נכשלה"
 msgid "Unable to find the domain. Maybe you misspelled it?"
 msgstr "לא ניתן למצוא את התחום. אולי שגית באיות?"
 
-#: panels/user-accounts/cc-add-user-dialog.ui:15
+#: panels/user-accounts/cc-add-user-dialog.ui:13
 #: panels/user-accounts/data/join-dialog.ui:9
 msgid "Add User"
 msgstr "הוספת משתמש"
@@ -7616,7 +7643,7 @@ msgid "Administrator"
 msgstr "מנהל"
 
 #: panels/user-accounts/cc-add-user-dialog.ui:135
-#: panels/user-accounts/cc-user-panel.ui:211
+#: panels/user-accounts/cc-user-panel.ui:169
 msgid ""
 "Administrators have extra abilities, including adding and removing users, "
 "changing login settings, and removing software. Parental controls cannot be "
@@ -7945,78 +7972,53 @@ msgstr "הססמה שגויה, נא לנסות שוב"
 msgid "Couldn’t connect to the %s domain: %s"
 msgstr "לא ניתן להתחבר אל התחום %s:‏ %s"
 
-#: panels/user-accounts/cc-user-panel.c:362
-msgid "Failed to delete user"
-msgstr "מחיקת משתמש נכשלה"
-
-#: panels/user-accounts/cc-user-panel.c:417
-#: panels/user-accounts/cc-user-panel.c:472
-#: panels/user-accounts/cc-user-panel.c:518
-msgid "Failed to revoke remotely managed user"
-msgstr "ביטול המשתמש המנוהל מרחוק נכשל"
-
-#: panels/user-accounts/cc-user-panel.c:567
-msgid "You cannot delete your own account."
-msgstr "מחיקת החשבון שלך על ידיך אינה אפשרית."
-
-#: panels/user-accounts/cc-user-panel.c:576
+#: panels/user-accounts/cc-user-panel.c:349
 #, c-format
-msgid "%s is still logged in"
-msgstr "%s עדיין במערכת"
+msgid "Failed to delete user: %s"
+msgstr "מחיקת משתמש נכשלה: %s"
 
-#: panels/user-accounts/cc-user-panel.c:580
-msgid ""
-"Deleting a user while they are logged in can leave the system in an "
-"inconsistent state."
-msgstr "מחיקת משתמש כשהוא מחובר עלולה להשאיר את המערכת במצב בלתי יציב."
+#: panels/user-accounts/cc-user-panel.c:404
+#: panels/user-accounts/cc-user-panel.c:459
+#: panels/user-accounts/cc-user-panel.c:505
+#, c-format
+msgid "Failed to revoke remotely managed user: %s"
+msgstr "ביטול המשתמש המנוהל מרחוק נכשל: %s"
 
-#: panels/user-accounts/cc-user-panel.c:594
+#: panels/user-accounts/cc-user-panel.c:545
 #, c-format
 msgid "Remove %s?"
 msgstr "להסיר את %s?"
 
-#: panels/user-accounts/cc-user-panel.c:603
+#: panels/user-accounts/cc-user-panel.c:553
 #, c-format
 msgid "Are you sure you want to revoke remotely managed %s’s account?"
 msgstr "לשלול את החשבון של %s שמנוהל מרחוק?"
 
-#: panels/user-accounts/cc-user-panel.c:607
-msgid "_Delete"
-msgstr "מ_חיקה"
-
-#: panels/user-accounts/cc-user-panel.c:657
+#: panels/user-accounts/cc-user-panel.c:591
 msgctxt "Password mode"
 msgid "Account disabled"
 msgstr "חשבון מושבת"
 
-#: panels/user-accounts/cc-user-panel.c:665
+#: panels/user-accounts/cc-user-panel.c:599
 msgctxt "Password mode"
 msgid "To be set at next login"
 msgstr "להגדרה בהתחברות הבאה"
 
-#: panels/user-accounts/cc-user-panel.c:668
+#: panels/user-accounts/cc-user-panel.c:602
 msgctxt "Password mode"
 msgid "None"
 msgstr "אין"
 
-#: panels/user-accounts/cc-user-panel.c:1141
-msgid "Failed to contact the accounts service"
-msgstr "לא ניתן ליצור קשר עם שירות החשבונות"
-
-#: panels/user-accounts/cc-user-panel.c:1143
-msgid "Please make sure that the AccountService is installed and enabled."
-msgstr "נא לוודא ששירות החשבונות (AccountService) מותקן ומופעל."
-
-#: panels/user-accounts/cc-user-panel.c:1165
+#: panels/user-accounts/cc-user-panel.c:1035
 msgid "This panel must be unlocked to change this setting"
 msgstr "יש הכרח לשחרר לוח זה על מנת לשנות הגדרה זו"
 
-#: panels/user-accounts/cc-user-panel.c:1234
+#: panels/user-accounts/cc-user-panel.c:1104
 msgid "Delete the selected user account"
 msgstr "מחיקת חשבון המשתמש הנבחר"
 
-#: panels/user-accounts/cc-user-panel.c:1238
-#: panels/user-accounts/cc-user-panel.c:1346
+#: panels/user-accounts/cc-user-panel.c:1108
+#: panels/user-accounts/cc-user-panel.c:1216
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -8024,7 +8026,7 @@ msgstr ""
 "כדי למחוק את המשתמש הנבחר\n"
 "ראשית יש ללחוץ על הסמל *"
 
-#: panels/user-accounts/cc-user-panel.c:1392
+#: panels/user-accounts/cc-user-panel.c:1262
 msgid "Unlock to add users and change settings"
 msgstr "יש לשחרר כדי להוסיף משתמשים ולשנות הגדרות"
 
@@ -8033,33 +8035,20 @@ msgstr "יש לשחרר כדי להוסיף משתמשים ולשנות הגדר
 msgid "Users"
 msgstr "משתמשים"
 
-#: panels/user-accounts/cc-user-panel.ui:64
-msgid "Your session needs to be restarted for changes to take effect"
-msgstr ""
-"יש להפעיל מחדש את ההפעלה שלך כדי שהשינויים ייכנסו לתוקף (יש לצאת ולהיכנס)"
-
-#: panels/user-accounts/cc-user-panel.ui:71
-msgid "Restart Now"
-msgstr "הפעלה מחדש כעת"
-
-#: panels/user-accounts/cc-user-panel.ui:80
-msgid "Close"
-msgstr "סגירה"
-
-#: panels/user-accounts/cc-user-panel.ui:121
+#: panels/user-accounts/cc-user-panel.ui:79
 msgid "Edit avatar"
 msgstr "עריכת תמונה"
 
 #. FIXME
-#: panels/user-accounts/cc-user-panel.ui:171
+#: panels/user-accounts/cc-user-panel.ui:129
 msgid "_Fingerprint Login"
 msgstr "כניסה באמצעות _טביעת אצבע"
 
-#: panels/user-accounts/cc-user-panel.ui:180
+#: panels/user-accounts/cc-user-panel.ui:138
 msgid "A_utomatic Login"
 msgstr "כניסה _אוטומטית"
 
-#: panels/user-accounts/cc-user-panel.ui:186
+#: panels/user-accounts/cc-user-panel.ui:144
 msgid ""
 "Automatic login opens the user account when the device starts, without "
 "requiring authentication. Authentication is still required at other times, "
@@ -8068,48 +8057,55 @@ msgstr ""
 "התחברות אוטומטית פותחת את חשבון המשתמש עם עליית ההתקן, ללא כל בקשה לאימות. "
 "אימות עדיין יידרש בהזדמנויות אחרות, כגון בעת שחרור מסך הנעילה."
 
-#: panels/user-accounts/cc-user-panel.ui:204
+#: panels/user-accounts/cc-user-panel.ui:162
 msgid "_Administrator"
 msgstr "_מנהל"
 
-#: panels/user-accounts/cc-user-panel.ui:226
+#: panels/user-accounts/cc-user-panel.ui:184
 msgid "_Parental Controls"
 msgstr "_בקרת הורים"
 
-#: panels/user-accounts/cc-user-panel.ui:227
+#: panels/user-accounts/cc-user-panel.ui:185
 msgid "Open the Parental Controls app."
 msgstr "פתיחת יישום בקרת הורים."
 
-#: panels/user-accounts/cc-user-panel.ui:261
+#: panels/user-accounts/cc-user-panel.ui:219
 msgid "Other Users"
 msgstr "משתמשים אחרים"
 
-#: panels/user-accounts/cc-user-panel.ui:279
+#: panels/user-accounts/cc-user-panel.ui:237
 msgid "_Remove User…"
 msgstr "ה_סרת משתמש…"
 
-#: panels/user-accounts/cc-user-panel.ui:289
+#: panels/user-accounts/cc-user-panel.ui:248
+msgid "Users cannot be removed while logged in"
+msgstr "לא ניתן למחוק משתמש בזמן שהוא מחובר"
+
+#: panels/user-accounts/cc-user-panel.ui:254
 msgid "_Add User…"
 msgstr "הו_ספת משתמש…"
 
-#. Translators: This is the empty state page label which states that there are no users to show in the panel.
-#: panels/user-accounts/cc-user-panel.ui:318
-msgid "No Users Found"
-msgstr "לא נמצאו משתמשים"
+#: panels/user-accounts/cc-user-panel.ui:271
+msgid "Error: Unable to Show User Settings"
+msgstr "יש לשחרר לשינוי הגדרותשגיאה: לא ניתן להציג את הגדרות המשתמש"
 
-#: panels/user-accounts/cc-user-panel.ui:327
-msgid "Unlock to add a user account."
-msgstr "שחרור על מנת להוסיף משתמש."
+#: panels/user-accounts/cc-user-panel.ui:272
+msgid "The system component `AccountsService` cannot be found"
+msgstr "רכיב המערכת „AccountsService” לא נמצא"
 
-#: panels/user-accounts/cc-user-panel.ui:342
+#: panels/user-accounts/cc-user-panel.ui:291
 msgid ""
 "The user will not be able to use this device once their account has been "
 "removed."
 msgstr "המשתמש לא יוכל להשתמש בהתקן זה לאחר שהחשבון שלו יוסר."
 
-#: panels/user-accounts/cc-user-panel.ui:354
+#: panels/user-accounts/cc-user-panel.ui:303
 msgid "Delete Files and Settings"
 msgstr "מחיקת קבצים והגדרות"
+
+#: panels/user-accounts/cc-user-panel.ui:324
+msgid "_Delete"
+msgstr "מ_חיקה"
 
 #: panels/user-accounts/data/gnome-user-accounts-panel.desktop.in:4
 msgid "Add or remove users and change your password"
@@ -9061,6 +9057,10 @@ msgstr "_נעילת SIM ב־PIN"
 msgid "Change PIN"
 msgstr "החלפת PIN"
 
+#: panels/wwan/cc-wwan-sim-lock-dialog.ui:123
+msgid "New PIN"
+msgstr "‏PIN חדש"
+
 #: panels/wwan/cc-wwan-sim-lock-dialog.ui:201
 msgid "Enter current PIN to change SIM lock settings"
 msgstr "נא להקליד את ה־PIN הנוכחי כדי לשנות את הגדרות נעילת ה־SIM"
@@ -9255,6 +9255,40 @@ msgstr[3] "‏‫%u ערוצי קלט"
 #: subprojects/gvc/gvc-mixer-control.c:2882
 msgid "System Sounds"
 msgstr "צלילי מערכת"
+
+#~ msgid "You cannot delete your own account."
+#~ msgstr "מחיקת החשבון שלך על ידיך אינה אפשרית."
+
+#, c-format
+#~ msgid "%s is still logged in"
+#~ msgstr "%s עדיין במערכת"
+
+#~ msgid ""
+#~ "Deleting a user while they are logged in can leave the system in an "
+#~ "inconsistent state."
+#~ msgstr "מחיקת משתמש כשהוא מחובר עלולה להשאיר את המערכת במצב בלתי יציב."
+
+#~ msgid "Failed to contact the accounts service"
+#~ msgstr "לא ניתן ליצור קשר עם שירות החשבונות"
+
+#~ msgid "Please make sure that the AccountService is installed and enabled."
+#~ msgstr "נא לוודא ששירות החשבונות (AccountService) מותקן ומופעל."
+
+#~ msgid "Your session needs to be restarted for changes to take effect"
+#~ msgstr ""
+#~ "יש להפעיל מחדש את ההפעלה שלך כדי שהשינויים ייכנסו לתוקף (יש לצאת ולהיכנס)"
+
+#~ msgid "Restart Now"
+#~ msgstr "הפעלה מחדש כעת"
+
+#~ msgid "Close"
+#~ msgstr "סגירה"
+
+#~ msgid "No Users Found"
+#~ msgstr "לא נמצאו משתמשים"
+
+#~ msgid "Unlock to add a user account."
+#~ msgstr "שחרור על מנת להוסיף משתמש."
 
 #~ msgid "camera;photos;video;webcam;lock;private;privacy;"
 #~ msgstr ""
@@ -10842,9 +10876,6 @@ msgstr "צלילי מערכת"
 #~ msgid "Requires Internet connection"
 #~ msgstr "נדרש חיבור לאינטרנט"
 
-#~ msgid "_Copy"
-#~ msgstr "ה_עתקה"
-
 #~ msgid "Select _All"
 #~ msgstr "בחירה בה_כול"
 
@@ -11347,9 +11378,6 @@ msgstr "צלילי מערכת"
 
 #~ msgid "Media Independent Interface (MII)"
 #~ msgstr "מנשק בלתי תלוי במדיה (MII)"
-
-#~ msgid "10 Mb/s"
-#~ msgstr "10 מסל״ש"
 
 #~ msgid "100 Mb/s"
 #~ msgstr "100 מסל״ש"
