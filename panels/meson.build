@@ -25,7 +25,7 @@ panels = [
 ]
 
 if host_is_linux
-  panels += ['network']
+  panels += ['network', 'internet']
 endif
 
 if host_is_linux_not_s390
