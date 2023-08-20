@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
 "POT-Creation-Date: 2023-08-15 12:14+0000\n"
-"PO-Revision-Date: 2023-08-20 10:54+0600\n"
+"PO-Revision-Date: 2023-08-20 12:58+0600\n"
 "Last-Translator: Baurzhan Muftakhidinov <baurthefirst@gmail.com>\n"
 "Language-Team: Kazakh <kk_KZ@googlegroups.com>\n"
 "Language: kk\n"
@@ -28,7 +28,7 @@ msgstr "Жүйелік шина"
 #: panels/applications/cc-applications-panel.c:836
 #: panels/applications/cc-applications-panel.c:841
 msgid "Full access"
-msgstr "Толық қатынау құқығы"
+msgstr "Толық қол жеткізу рұқсаты"
 
 #: panels/applications/cc-applications-panel.c:823
 msgid "Session Bus"
@@ -90,6 +90,8 @@ msgid ""
 "<b>%s</b> requires access to the following system resources. To stop this "
 "access, the app must be removed."
 msgstr ""
+"<b>%s</b> келесі жүйелік ресурстарға қол жеткізуді талап етеді. Бұл қол "
+"жеткізуді тоқтату үшін қолданбаны өшіру керек."
 
 #: panels/applications/cc-applications-panel.c:1191
 #, c-format
@@ -120,10 +122,8 @@ msgid "No Apps"
 msgstr "Қолданбалар жоқ"
 
 #: panels/applications/cc-applications-panel.ui:34
-#, fuzzy
-#| msgid "Install some…"
 msgid "_Install Some…"
-msgstr "Бірнешеуін орнату…"
+msgstr "_Бірнешеуін орнату…"
 
 #: panels/applications/cc-applications-panel.ui:85
 #: panels/printers/pp-details-dialog.c:268
@@ -148,10 +148,8 @@ msgstr "Іздеу"
 
 #: panels/applications/cc-applications-panel.ui:116
 #: panels/applications/cc-applications-panel.ui:123
-#, fuzzy
-#| msgid "Receive system searches and send results."
 msgid "Receive system searches and send results"
-msgstr "Жүйелік іздеулерді алу және нәтижелерді жіберу."
+msgstr "Жүйелік іздеулерді алу және нәтижелерді жіберу"
 
 #. This label is displayed in a treeview cell displaying
 #. * a disabled accelerator key combination.
@@ -180,30 +178,24 @@ msgid "Notifications"
 msgstr "Хабарламалар"
 
 #: panels/applications/cc-applications-panel.ui:130
-#, fuzzy
-#| msgid "Show system notifications."
 msgid "Show system notifications"
-msgstr "Жүйелік хабарламаларды көрсету."
+msgstr "Жүйелік хабарламаларды көрсету"
 
 #: panels/applications/cc-applications-panel.ui:136
 msgid "Run in Background"
 msgstr "Фонда орындау"
 
 #: panels/applications/cc-applications-panel.ui:137
-#, fuzzy
-#| msgid "Allow activity when the app is closed."
 msgid "Allow activity when the app is closed"
-msgstr "Қолданба жабылған кезде белсенділікті рұқсат ету."
+msgstr "Қолданба жабылған кезде белсенділікті рұқсат ету"
 
 #: panels/applications/cc-applications-panel.ui:143
 msgid "Screenshots"
 msgstr "Скриншоттар"
 
 #: panels/applications/cc-applications-panel.ui:144
-#, fuzzy
-#| msgid "Take pictures of the screen at any time."
 msgid "Take pictures of the screen at any time"
-msgstr "Экран скриншоттарын кез келген уақытта түсіріңіз."
+msgstr "Экран скриншоттарын кез келген уақытта түсіру"
 
 #: panels/applications/cc-applications-panel.ui:150
 msgid "Change Wallpaper"
@@ -232,10 +224,8 @@ msgid "Inhibit Shortcuts"
 msgstr "Жарлықтарды басу"
 
 #: panels/applications/cc-applications-panel.ui:172
-#, fuzzy
-#| msgid "Block standard keyboard shortcuts."
 msgid "Block standard keyboard shortcuts"
-msgstr "Жүйелік пернетақта жарлықтарын басу."
+msgstr "Пернетақтаның стандартты жарлықтарын блоктау"
 
 #: panels/applications/cc-applications-panel.ui:178
 #: panels/applications/cc-applications-panel.ui:185
@@ -265,17 +255,13 @@ msgstr "Орналасулар қызметі"
 
 #: panels/applications/cc-applications-panel.ui:207
 #: panels/applications/cc-applications-panel.ui:214
-#, fuzzy
-#| msgid "Access device location data."
 msgid "Access device location data"
-msgstr "Құрылғының орналасу деректеріне қатынау."
+msgstr "Құрылғының орналасу деректеріне қол жеткізу"
 
 #: panels/applications/cc-applications-panel.ui:225
 #: panels/applications/cc-applications-panel.ui:330
-#, fuzzy
-#| msgid "Direct Access"
 msgid "Required Access"
-msgstr "Тікелей қатынау"
+msgstr "Керек қол жеткізу деңгейі"
 
 #: panels/applications/cc-applications-panel.ui:226
 msgid "System access that is required by the app"
@@ -322,10 +308,6 @@ msgid "Reset"
 msgstr "Тастау"
 
 #: panels/applications/cc-applications-panel.ui:414
-#, fuzzy
-#| msgid ""
-#| "How much disk space this application is occupying with app data and "
-#| "caches."
 msgid "How much disk space this app is occupying with app data and caches."
 msgstr ""
 "Бұл қолданба өз деректері мен кэш деректерімен қанша диск орнын алып тұр."
@@ -351,8 +333,6 @@ msgid "_Clear Cache…"
 msgstr "Кэшті та_зарту…"
 
 #: panels/applications/gnome-applications-panel.desktop.in:4
-#, fuzzy
-#| msgid "Control various application permissions and settings"
 msgid "Control various app permissions and settings"
 msgstr "Қолданбалардың түрлі рұқсаттарын және баптауларын басқару"
 
@@ -437,26 +417,20 @@ msgid "Bluetooth Turned Off"
 msgstr "Bluetooth сөндірілген"
 
 #: panels/bluetooth/cc-bluetooth-panel.ui:32
-#, fuzzy
-#| msgid "Turn on to connect devices and receive file transfers."
 msgid "Turn on to connect devices and receive file transfers"
-msgstr "Құрылғылармен байланысу және файларды қабылдау үшін іске қосыңыз."
+msgstr "Құрылғылармен байланысу және файларды қабылдау үшін іске қосыңыз"
 
 #: panels/bluetooth/cc-bluetooth-panel.ui:38
 msgid "Airplane Mode is On"
 msgstr "Ұшақтағы режим іске қосулы тұр"
 
 #: panels/bluetooth/cc-bluetooth-panel.ui:39
-#, fuzzy
-#| msgid "Bluetooth is disabled when airplane mode is on."
 msgid "Bluetooth is disabled when airplane mode is on"
-msgstr "Ұшақтағы режим іске қосулы кезінде Bluetooth сөндірілген болады."
+msgstr "Ұшақтағы режим іске қосулы кезінде Bluetooth сөндірілген болады"
 
 #: panels/bluetooth/cc-bluetooth-panel.ui:42
-#, fuzzy
-#| msgid "Turn Off Airplane Mode"
 msgid "_Turn Off Airplane Mode"
-msgstr "Ұшақтағы режимді сөндіру"
+msgstr "Ұшақтағы режимді сөн_діру"
 
 #: panels/bluetooth/cc-bluetooth-panel.ui:58
 msgid "Hardware Airplane Mode is On"
@@ -737,12 +711,11 @@ msgstr "Көбірек білу"
 
 #. Translators: %s is a link to the documentation with the label "Learn more"
 #: panels/color/cc-color-panel.c:1993
-#, fuzzy, c-format
-#| msgid "Each device needs an up to date color profile to be color managed."
+#, c-format
 msgid "Each device needs an up to date color profile to be color managed. %s"
 msgstr ""
 "Түстерін басқару үшін әр құрылғыда жаңа болып тұрған түстер профилі болуы "
-"керек."
+"керек. %s"
 
 #: panels/color/cc-color-panel.ui:4 panels/wacom/calibrator/calibrator.ui:40
 msgid "Screen Calibration"
@@ -1457,7 +1430,7 @@ msgstr "Сілтемелер және файлдар"
 
 #: panels/default-apps/cc-default-apps-panel.ui:9
 msgid "Applications which are used to open common links and files."
-msgstr ""
+msgstr "Жалпы сілтемелер мен файлдарды ашу үшін қолданылатын қолданбалар."
 
 #: panels/default-apps/cc-default-apps-panel.ui:12
 msgid "_Web"
@@ -1497,8 +1470,6 @@ msgid "Default Apps"
 msgstr "Үнсіз келісім қолданбалары"
 
 #: panels/default-apps/gnome-default-apps-panel.desktop.in:4
-#, fuzzy
-#| msgid "Configure Default Applications"
 msgid "Configure Default Apps"
 msgstr "Үнсіз келісім қолданбаларын баптау"
 
@@ -1649,7 +1620,7 @@ msgstr "Масштабтау"
 
 #: panels/display/cc-night-light-page.c:268
 msgid "Night Light cannot be used from a virtual machine."
-msgstr ""
+msgstr "Түнгі жарықты виртуалды машинада қолдану мүмкін емес."
 
 #: panels/display/cc-night-light-page.ui:25
 msgid "Night Light Unavailable"
@@ -1742,10 +1713,10 @@ msgid "Displays"
 msgstr "Экран­дар"
 
 #: panels/display/gnome-display-panel.desktop.in:4
-#, fuzzy
-#| msgid "Choose how to use connected monitors and projectors"
 msgid "Use Night Light and choose how to use connected monitors and projectors"
-msgstr "Жалғанған мониторлар мен проекторларды қолдану тәсілін таңдаңыз"
+msgstr ""
+"Түнгі жарықты қолдану және жалғанған мониторлар мен проекторларды қолдану "
+"тәсілін таңдау"
 
 #. Translators: Search terms to find the Displays panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/display/gnome-display-panel.desktop.in:15
@@ -1859,7 +1830,7 @@ msgstr "Қолжетімді емес"
 
 #: panels/info-overview/cc-system-details-window.c:756
 msgid "# System Details Report\n"
-msgstr ""
+msgstr "# Жүйелік ақпарат есептемесі\n"
 
 #: panels/info-overview/cc-system-details-window.c:759
 msgid "## Report details\n"
@@ -1870,10 +1841,8 @@ msgid "**Date generated:**"
 msgstr "**Жасалған күні:**"
 
 #: panels/info-overview/cc-system-details-window.c:771
-#, fuzzy
-#| msgid "Hardware Model"
 msgid "**Hardware Model:**"
-msgstr "Құрылғы моделі"
+msgstr "**Құрылғы моделі:**"
 
 #: panels/info-overview/cc-system-details-window.c:776
 #| msgid "Memory"
@@ -2115,7 +2084,7 @@ msgstr "Блоктау экраны"
 #: panels/universal-access/cc-ua-panel.c:128
 #: panels/universal-access/gnome-universal-access-panel.desktop.in:3
 msgid "Accessibility"
-msgstr "Қолжетерлілік"
+msgstr "Қолжетімділік"
 
 #: panels/keyboard/50-accessibility.xml.in:4
 msgid "Turn zoom on or off"
@@ -2500,26 +2469,21 @@ msgstr ""
 
 #. Translators: Search terms to find the Keyboard panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/keyboard/gnome-keyboard-panel.desktop.in:15
-#, fuzzy
-#| msgid ""
-#| "Shortcut;Workspace;Window;Resize;Zoom;Contrast;Input;Source;Lock;Volume;"
 msgid ""
 "Shortcut;Workspace;Window;Resize;Zoom;Contrast;Input;Source;Lock;Volume;"
 "Hotkey;Compose;Character;"
 msgstr ""
 "Shortcut;Workspace;Window;Resize;Zoom;Contrast;Input;Source;Lock;Volume;"
-"Жарлық;Жұмыс орны;Терезе;Өлшемді өзгерту;Масштаб;Контраст;Енгізу;Қайнар көзі;"
-"Блоктау;Дыбыс;"
+"Hotkey;Compose;Character;Жарлық;Жұмыс орны;Терезе;Өлшемді өзгерту;Масштаб;"
+"Контраст;Енгізу;Қайнар көзі;Блоктау;Дыбыс;Ыстық перне;Кешенді теру;Таңба;"
 
 #: panels/mouse/cc-mouse-panel.ui:31 panels/wacom/cc-wacom-panel.ui:9
 msgid "Test _Settings"
 msgstr "Ба_птауларды тексеру"
 
 #: panels/mouse/cc-mouse-panel.ui:32
-#, fuzzy
-#| msgid "Mouse & Touchpad Settings"
 msgid "Test Mouse and Touchpad Settings"
-msgstr "Тышқан және тачпад баптаулары"
+msgstr "Тышқан және тачпад баптауларын сынау"
 
 #: panels/mouse/cc-mouse-panel.ui:46 panels/mouse/cc-mouse-panel.ui:92
 msgid "Mouse"
@@ -2535,10 +2499,8 @@ msgid "Primary Button"
 msgstr "Біріншілік батырма"
 
 #: panels/mouse/cc-mouse-panel.ui:57
-#, fuzzy
-#| msgid "Sets the order of physical buttons on mice and touchpads."
 msgid "Order of physical buttons on mice and touchpads."
-msgstr "Тышқандар және тачпадтарда физикалық батырмалар ретін орнатады."
+msgstr "Тышқандар және тачпадтарда физикалық батырмалар реті."
 
 #: panels/mouse/cc-mouse-panel.ui:71
 msgid "Left"
@@ -2570,10 +2532,8 @@ msgid "Mouse Acceleration"
 msgstr "Тышқан курсорының үдетілуі"
 
 #: panels/mouse/cc-mouse-panel.ui:122
-#, fuzzy
-#| msgid "Read system and application logs"
 msgid "Recommended for most users and applications"
-msgstr "Жүйелік және қолданба журналдарын оқу"
+msgstr "Көпшілік пайдаланушыларға ұсынылады"
 
 #: panels/mouse/cc-mouse-panel.ui:127
 msgid ""
@@ -2619,7 +2579,7 @@ msgstr "Шерту үшін тию"
 
 #: panels/mouse/cc-mouse-panel.ui:211
 msgid "Quickly touch the touchpad to click"
-msgstr ""
+msgstr "Шерту үшін тачпадты жылдам тиіңіз"
 
 #: panels/mouse/cc-mouse-panel.ui:226
 msgid "Scrolling"
@@ -2635,15 +2595,15 @@ msgstr "Қос саусақ"
 
 #: panels/mouse/cc-mouse-panel.ui:231
 msgid "Drag two fingers on the touchpad"
-msgstr ""
+msgstr "Тачпадта екі саусақты өткізіңіз"
 
 #: panels/mouse/cc-mouse-panel.ui:232
 msgid "Edge"
-msgstr ""
+msgstr "Шеті"
 
 #: panels/mouse/cc-mouse-panel.ui:233
 msgid "Drag one finger on the edge"
-msgstr ""
+msgstr "Бір саусақпен шеттен өткізіңіз"
 
 #: panels/mouse/cc-mouse-test.c:68 panels/mouse/cc-mouse-test.ui:96
 msgid "Single Click"
@@ -2654,10 +2614,8 @@ msgid "Double Click"
 msgstr "Қос шерту"
 
 #: panels/mouse/cc-mouse-test.ui:24
-#, fuzzy
-#| msgid "Mouse & Touchpad"
 msgid "Test Mouse & Touchpad"
-msgstr "Тышқан және тач­пад"
+msgstr "Тышқан және тачпадты сынау"
 
 #: panels/mouse/gnome-mouse-panel.desktop.in:3
 msgid "Mouse & Touchpad"
@@ -2741,8 +2699,6 @@ msgid "Include apps from all _workspaces"
 msgstr "Барлық _жұмыс орындарынан қолданбаларды есепке алу"
 
 #: panels/multitasking/cc-multitasking-panel.ui:160
-#, fuzzy
-#| msgid "Include applications from the _current workspace only"
 msgid "Include apps from the _current workspace only"
 msgstr "Тек ағымдағы _жұмыс орнынан қолданбаларды есепке алу"
 
@@ -2771,6 +2727,8 @@ msgid ""
 "An error has occurred and network cannot be used.\n"
 " Error details: NetworkManager not running."
 msgstr ""
+"Қате орын алды және желіні пайдалану мүмкін емес.\n"
+" Қате туралы мәліметтер: NetworkManager жұмыс істемейді."
 
 #. xxx: Added to avoid confusion with the preceding VPN row
 #: panels/network/cc-network-panel.c:759 panels/network/cc-network-panel.ui:141
@@ -2823,14 +2781,12 @@ msgid "Configuration URL"
 msgstr "Баптау URL-ы"
 
 #: panels/network/cc-net-proxy-page.ui:65
-#, fuzzy
-#| msgid ""
-#| "Web Proxy Autodiscovery is used when a Configuration URL is not provided."
 msgid ""
 "Web Proxy Autodiscovery is used when a Configuration URL is not provided. "
 "This is not recommended for untrusted public networks."
 msgstr ""
-"Баптау сілтемесі көрсетілмеген кезде веб проксиін автоанықтау қолданылады."
+"Баптау сілтемесі көрсетілмеген кезде Web Proxy Autodiscovery қолданылады. "
+"Бұл сенімсіз ортақ желілер үшін ұсынылмайды."
 
 #: panels/network/cc-net-proxy-page.ui:82
 msgid "HTTP Proxy"
@@ -2887,10 +2843,9 @@ msgstr "Еленбейтін хосттар"
 #. * The string placeholder will be replaced by the Wi-Fi networks SSID.
 #.
 #: panels/network/cc-qr-code-dialog.c:133
-#, fuzzy, c-format
-#| msgid "Switch off to connect to a Wi-Fi network"
+#, c-format
 msgid "Scan the QR code to connect to the network <b>%s</b>."
-msgstr "Wi-Fi желісіне байланысу үшін сөндіру"
+msgstr "<b>%s</b> желісіне байланысу үшін QR кодын сканерлеңіз."
 
 #: panels/network/cc-qr-code-dialog.ui:9
 msgid "Share Network"
@@ -2970,7 +2925,7 @@ msgstr ""
 
 #: panels/network/cc-wifi-hotspot-dialog.c:250
 msgid "Network name cannot be empty"
-msgstr ""
+msgstr "Желі атауы бос болмауы тиіс"
 
 #. SSID length needs to be in the 1-32 byte range
 #: panels/network/cc-wifi-hotspot-dialog.c:256
@@ -3096,6 +3051,8 @@ msgid ""
 "An error has occurred and Wi-Fi cannot be used.\n"
 "Error details: NetworkManager not running."
 msgstr ""
+"Қате орын алды және Wi-Fi желісін пайдалану мүмкін емес.\n"
+"Қате туралы мәліметтер: NetworkManager жұмыс істемейді."
 
 #: panels/network/connection-editor/8021x-security-page.ui:16
 msgid "802.1x _Security"
@@ -3384,7 +3341,7 @@ msgstr "WireGuard"
 
 #: panels/network/connection-editor/ce-page-wireguard.c:405
 msgid "Unsaved peer"
-msgstr ""
+msgstr "Сақталмаған торап"
 
 #: panels/network/connection-editor/details-page.ui:14
 #: panels/wwan/cc-wwan-details-dialog.ui:73
@@ -3587,10 +3544,9 @@ msgid "Invalid setting %s"
 msgstr "Жарамсыз баптау %s"
 
 #: panels/network/connection-editor/net-connection-editor.c:735
-#, fuzzy, c-format
-#| msgid "IP configuration failed"
+#, c-format
 msgid "Invalid VPN configuration file"
-msgstr "IP баптауы сәтсіз"
+msgstr "VPN баптаулар файлы жарамсыз"
 
 #. Translators: VPN add dialog Wireguard description
 #: panels/network/connection-editor/net-connection-editor.c:842
@@ -3612,8 +3568,6 @@ msgid "S_ecurity"
 msgstr "Қауі_псіздік"
 
 #: panels/network/connection-editor/vpn-helpers.c:142
-#, fuzzy
-#| msgid "Cannot import VPN connection"
 msgid "Cannot Import VPN Connection"
 msgstr "VPN байланысын импорттау мүмкін емес"
 
@@ -3677,7 +3631,7 @@ msgstr "Жеке кілтті көрсету/жасыру"
 
 #: panels/network/connection-editor/wireguard-page.ui:93
 msgid "_Listen Port"
-msgstr ""
+msgstr "_Тыңдау порты"
 
 #: panels/network/connection-editor/wireguard-page.ui:104
 msgid ""
@@ -3704,20 +3658,16 @@ msgid "_MTU"
 msgstr "_MTU"
 
 #: panels/network/connection-editor/wireguard-page.ui:197
-#, fuzzy
-#| msgid "_Add profile"
 msgid "_Add peer routes"
-msgstr "Профильді қ_осу"
+msgstr "Торап бағдарларын қ_осу"
 
 #: panels/network/connection-editor/wireguard-page.ui:222
 msgid "_Peers"
-msgstr ""
+msgstr "То_раптар"
 
 #: panels/network/connection-editor/wireguard-page.ui:257
-#, fuzzy
-#| msgid "Not set up"
 msgid "No peers set up"
-msgstr "Бапталмаған"
+msgstr "Тораптар бапталмаған"
 
 #: panels/network/gnome-network-panel.desktop.in:4
 msgid "Control how you connect to the Internet"
@@ -3864,7 +3814,7 @@ msgstr "Басқарылмайтын"
 #. TRANSLATORS: device status
 #: panels/network/panel-common.c:45
 msgid "Unavailable"
-msgstr "Қолжетерсіз"
+msgstr "Қолжетімді емес"
 
 #. TRANSLATORS: device status
 #: panels/network/panel-common.c:55
@@ -4207,6 +4157,8 @@ msgstr "Желіде емес — тіркелгілерді байланыст�
 #: panels/online-accounts/cc-online-accounts-panel.ui:61
 msgid "Allow apps to access online services by connecting your cloud accounts."
 msgstr ""
+"Бұлттық тіркелгілерді қосу арқылы қолданбаларға онлайн қызметтерге қол "
+"жеткізуге рұқсат беру."
 
 #: panels/online-accounts/cc-online-accounts-panel.ui:65
 msgid "Your Accounts"
@@ -4593,7 +4545,7 @@ msgstr "Батарея _пайызын көрсету"
 
 #: panels/power/cc-power-panel.ui:209
 msgid "Show exact charge level in the top bar"
-msgstr ""
+msgstr "Жоғарғы панельде зарядтың нақты шамасын көрсету"
 
 #: panels/power/cc-power-panel.ui:245
 msgid "Automatic Suspend"
@@ -5341,14 +5293,8 @@ msgstr "Баспаға шығару қызметі жоқ"
 
 #. Translators: Description if the CUPS server is not running (we can not connect to it).
 #: panels/printers/printers.ui:172
-#, fuzzy
-#| msgid ""
-#| "Sorry! The system printing service\n"
-#| "    doesn’t seem to be available."
 msgid "The system printing service doesn’t seem to be available."
-msgstr ""
-"Кешіріңіз! Жүйелік баспаға шығару қызметі\n"
-"    қолжетімді емес сияқты."
+msgstr "Жүйелік баспаға шығару қызметі қолжетімді емес сияқты."
 
 #: panels/privacy/cc-bolt-device-dialog.c:79
 #: panels/privacy/cc-bolt-device-entry.c:121
@@ -5409,10 +5355,8 @@ msgstr "Байланысқан уақыты"
 #. Translators: The time point the device was enrolled,
 #. * i.e. authorized and stored in the device database.
 #: panels/privacy/cc-bolt-device-dialog.c:174
-#, fuzzy
-#| msgid "Enrolled at:"
 msgid "Enrolled at"
-msgstr "Тіркелген уақыты:"
+msgstr "Тіркелген уақыты"
 
 #: panels/privacy/cc-bolt-device-dialog.c:248
 msgid "Failed to authorize device: "
@@ -5429,10 +5373,8 @@ msgid_plural "Depends on %u other devices"
 msgstr[0] "Басқа %u құрылғыға тәуелді"
 
 #: panels/privacy/cc-bolt-device-dialog.ui:4
-#, fuzzy
-#| msgid "Device Details"
 msgid "Device Identifier"
-msgstr "Құрылғы ақпараты"
+msgstr "Құрылғы идентификаторы"
 
 #: panels/privacy/cc-bolt-device-dialog.ui:25
 msgid "Status"
@@ -5545,10 +5487,8 @@ msgid "_Camera Access"
 msgstr "_Камераға қол жеткізу"
 
 #: panels/privacy/cc-camera-page.ui:19
-#, fuzzy
-#| msgid "Allow the applications below to use your camera."
 msgid "Allow permitted apps to use cameras"
-msgstr "Төмендегі қолданбаларға камераңызды қолдануды рұқсат ету."
+msgstr "Рұқсат етілген қолданбаларға камераларды қолдануды рұқсат ету"
 
 #: panels/privacy/cc-camera-page.ui:28 panels/privacy/cc-location-page.ui:29
 #: panels/privacy/cc-microphone-page.ui:28
@@ -5562,10 +5502,8 @@ msgid ""
 msgstr ""
 
 #: panels/privacy/cc-camera-page.ui:43
-#, fuzzy
-#| msgid "No Applications Have Asked for Camera Access"
 msgid "No sandboxed apps have asked for camera access"
-msgstr "Ешбір қолданба Камераға қатынау рұқсатын сұрамады"
+msgstr "Құмсалғыштағы ешбір қолданба камераға қол жеткізу рұқсатын сұрамады"
 
 #. translators: The first '%s' is the distributor's name, such as 'Fedora', the second '%s' is a link to the privacy policy
 #: panels/privacy/cc-diagnostics-page.c:124
@@ -5668,10 +5606,8 @@ msgstr ""
 #. TRANSLATORS: in reference to firmware protection: 0/4 stars
 #: panels/privacy/cc-firmware-security-dialog.c:106
 #: panels/privacy/cc-firmware-security-page.c:537
-#, fuzzy
-#| msgid "PIN check failed"
 msgid "Checks Failed"
-msgstr "PIN кодын тексеру сәтсіз"
+msgstr "Тексеруден өте алмады"
 
 #. TRANSLATORS: This is the description to describe the failure on
 #. checking the security items.
@@ -5688,10 +5624,8 @@ msgstr ""
 #. TRANSLATORS: in reference to firmware protection: 1/4 stars
 #: panels/privacy/cc-firmware-security-dialog.c:120
 #: panels/privacy/cc-firmware-security-page.c:544
-#, fuzzy
-#| msgid "Change Password"
 msgid "Checks Passed"
-msgstr "Парольді өзгерту"
+msgstr "Тексеруден өтті"
 
 #. TRANSLATORS: This description describes the device passing the
 #. minimum requirement of security check.
@@ -5718,10 +5652,8 @@ msgstr ""
 #. TRANSLATORS: in reference to firmware protection: ??? stars
 #: panels/privacy/cc-firmware-security-dialog.c:145
 #: panels/privacy/cc-firmware-security-page.c:560
-#, fuzzy
-#| msgid "Unavailable"
 msgid "Checks Unavailable"
-msgstr "Қолжетерсіз"
+msgstr "Тексеру қолжетімді емес"
 
 #. TRANSLATORS: When the security result is unavailable, this description is shown.
 #: panels/privacy/cc-firmware-security-dialog.c:147
@@ -5736,13 +5668,11 @@ msgstr "Есептеме алмасу буферіне көшірілді"
 
 #: panels/privacy/cc-firmware-security-dialog.ui:65
 msgid "_Copy Technical Report"
-msgstr ""
+msgstr "Техникалық есептемені _көшіріп алу"
 
 #: panels/privacy/cc-firmware-security-help-dialog.ui:4
-#, fuzzy
-#| msgid "Device Security"
 msgid "About Device Security"
-msgstr "Қолдауы жоқ"
+msgstr "Құрылғы қауіпсіздігі туралы"
 
 #: panels/privacy/cc-firmware-security-help-dialog.ui:27
 msgid ""
@@ -5774,7 +5704,7 @@ msgstr "Қауіпсіз жүктеуде мәселелер бар"
 
 #: panels/privacy/cc-firmware-security-page.c:128
 msgid "Some protection when the device is started."
-msgstr ""
+msgstr "Құрылғы іске қосылған кезіндегі кейбір қорғаныс бар."
 
 #: panels/privacy/cc-firmware-security-page.c:133
 msgid "Secure Boot is Off"
@@ -5782,7 +5712,7 @@ msgstr "Қауіпсіз жүктеу сөндірулі"
 
 #: panels/privacy/cc-firmware-security-page.c:134
 msgid "No protection when the device is started."
-msgstr ""
+msgstr "Құрылғы іске қосылған кезіндегі ешқандай қорғаныс жоқ."
 
 #. TRANSLATORS: this is to explain an event that has already happened
 #: panels/privacy/cc-firmware-security-page.c:153
@@ -5830,41 +5760,39 @@ msgstr "(%1$s → %2$s)"
 
 #: panels/privacy/cc-firmware-security-page.c:538
 msgid "Hardware does not pass checks."
-msgstr ""
+msgstr "Құрылғы тексеруден өтпейді."
 
 #: panels/privacy/cc-firmware-security-page.c:545
 msgid "Hardware meets basic security requirements."
-msgstr ""
+msgstr "Құрылғы негізгі қауіпсіздік талаптарына сай келеді."
 
 #: panels/privacy/cc-firmware-security-page.c:554
 msgid "Hardware has a good level of protection."
-msgstr ""
+msgstr "Құрылғының қорғаныс деңгейі жақсы."
 
 #: panels/privacy/cc-firmware-security-page.c:561
 msgid "Security levels are not available for this device."
-msgstr ""
+msgstr "Қорғаныс деңгейлері бұл құрылғы үшін қолжетімді емес."
 
 #: panels/privacy/cc-firmware-security-page.ui:4
 msgid "Device Security"
 msgstr "Қолдауы жоқ"
 
 #: panels/privacy/cc-firmware-security-page.ui:57
-#, fuzzy
-#| msgid "Device Security"
 msgid "Starting Device Security…"
-msgstr "Қолдауы жоқ"
+msgstr "Құрылғы қауіпсіздігін іске қосу…"
 
 #: panels/privacy/cc-firmware-security-page.ui:83
-#, fuzzy
-#| msgid "Device Security"
 msgid "Device Security Unavailable"
-msgstr "Қолдауы жоқ"
+msgstr "Құрылғы қауіпсіздігі қолжетімді емес"
 
 #: panels/privacy/cc-firmware-security-page.ui:85
 msgid ""
 "Device Security is only available on physical hardware. No physical hardware "
 "has been detected."
 msgstr ""
+"Құрылғы қауіпсіздігі тек физикалық құрылғыларда қолжетімді. Ешқандай "
+"физикалық құрылғы анықталмады."
 
 #: panels/privacy/cc-firmware-security-page.ui:223
 msgid "Security Events"
@@ -5912,12 +5840,12 @@ msgstr "Шифрленген емес"
 #. TRANSLATORS: Linux kernel is tainted by third party kernel module.
 #: panels/privacy/cc-firmware-security-utils.c:75
 msgid "Tainted"
-msgstr ""
+msgstr "Бүлінген"
 
 #. TRANSLATORS: All the loaded kernel module are licensed.
 #: panels/privacy/cc-firmware-security-utils.c:80
 msgid "Not Tainted"
-msgstr ""
+msgstr "Бүлінген емес"
 
 #. TRANSLATORS: the feature can be detected.
 #: panels/privacy/cc-firmware-security-utils.c:85
@@ -5954,6 +5882,7 @@ msgstr "_Орналасулар қызметі"
 #: panels/privacy/cc-location-page.ui:20
 msgid "Allow permitted apps to access location data"
 msgstr ""
+"Рұқса етілген қолданбаларға орналасу ақпаратына қол жеткізуді рұқсат ету"
 
 #: panels/privacy/cc-location-page.ui:30
 msgid ""
@@ -5963,10 +5892,8 @@ msgid ""
 msgstr ""
 
 #: panels/privacy/cc-location-page.ui:44
-#, fuzzy
-#| msgid "No Applications Have Asked for Location Access"
 msgid "No sandboxed apps have asked for location access"
-msgstr "Ешбір қолданба Орналасуға қатынау рұқсатын сұрамады"
+msgstr "Құмсалғыштағы ешбір қолданба орналасуға қол жеткізу рұқсатын сұрамады"
 
 #: panels/privacy/cc-microphone-page.ui:4
 msgid "Microphones"
@@ -5977,10 +5904,8 @@ msgid "_Microphone Access"
 msgstr "_Микрофонға қол жеткізу"
 
 #: panels/privacy/cc-microphone-page.ui:19
-#, fuzzy
-#| msgid "Allow the applications below to use your microphone."
 msgid "Allow permitted apps to use microphones"
-msgstr "Төмендегі қолданбаларға микрофоныңызды қолдануды рұқсат ету."
+msgstr "Рұқсат етілген қолданбаларға микрофондарды қолдануды рұқсат ету"
 
 #: panels/privacy/cc-microphone-page.ui:29
 msgid ""
@@ -5990,10 +5915,8 @@ msgid ""
 msgstr ""
 
 #: panels/privacy/cc-microphone-page.ui:44
-#, fuzzy
-#| msgid "No Applications Have Asked for Microphone Access"
 msgid "No sandboxed apps have asked for microphone access"
-msgstr "Ешбір қолданба Микрофонға қатынау рұқсатын сұрамады"
+msgstr "Құмсалғыштағы ешбір қолданба микрофонға қол жеткізу рұқсатын сұрамады"
 
 #: panels/privacy/cc-privacy-panel.ui:14
 #: panels/privacy/gnome-privacy-panel.desktop.in:3
@@ -6001,26 +5924,20 @@ msgid "Privacy"
 msgstr "Жекелік"
 
 #: panels/privacy/cc-privacy-panel.ui:43
-#, fuzzy
-#| msgid "Screen Lock"
 msgid "_Screen Lock"
-msgstr "Экранды блоктау"
+msgstr "_Экранды блоктау"
 
 #: panels/privacy/cc-privacy-panel.ui:44
-#, fuzzy
-#| msgid "Automatic Screen _Lock"
 msgid "Automatic screen lock"
-msgstr "Экранды автоматты б_локтау"
+msgstr "Экранды автоматты блоктау"
 
 #: panels/privacy/cc-privacy-panel.ui:56
 msgid "Control access to your location"
 msgstr "Орналасуыңызға қол жеткізуді басқару"
 
 #: panels/privacy/cc-privacy-panel.ui:67
-#, fuzzy
-#| msgid "File History & Trash"
 msgid "_File History &amp; Trash"
-msgstr "Файлдар тарихы және қоқыс шелегі"
+msgstr "_Файлдар тарихы және қоқыс шелегі"
 
 #: panels/privacy/cc-privacy-panel.ui:68
 msgid "Remove saved data and files"
@@ -6031,10 +5948,8 @@ msgid "_Diagnostics"
 msgstr "_Диагностика"
 
 #: panels/privacy/cc-privacy-panel.ui:80
-#, fuzzy
-#| msgid "_Automatic Problem Reporting"
 msgid "Automatic problem reporting"
-msgstr "Мәселелер жөнінде _автохабарлау"
+msgstr "Мәселелер жөнінде автохабарлау"
 
 #: panels/privacy/cc-privacy-panel.ui:100
 msgid "_Cameras"
@@ -6058,16 +5973,12 @@ msgid "_Thunderbolt"
 msgstr "_Thunderbolt"
 
 #: panels/privacy/cc-privacy-panel.ui:126
-#, fuzzy
-#| msgid "Manage online accounts"
 msgid "Manage device access"
-msgstr "Желідегі тіркелгілерді басқару"
+msgstr "Құрылғыға қол жеткізуді басқару"
 
 #: panels/privacy/cc-privacy-panel.ui:137
-#, fuzzy
-#| msgid "Device Security"
 msgid "Device _Security"
-msgstr "Қолдауы жоқ"
+msgstr "Құрылғы қауіп_сіздігі"
 
 #: panels/privacy/cc-privacy-panel.ui:138
 msgid "Hardware security status and information"
@@ -6198,10 +6109,8 @@ msgid "Blank Screen Delay"
 msgstr "Экранды тазарту кідірісі"
 
 #: panels/privacy/cc-screen-page.ui:22
-#, fuzzy
-#| msgid "Period of inactivity after which the screen will go blank."
 msgid "Period of inactivity until screen blanks"
-msgstr "Экран тазартылу үшін өтуі керек белсенсіздік мерзімі."
+msgstr "Экран тазартылу үшін өтуі керек белсенсіздік мерзімі"
 
 #: panels/privacy/cc-screen-page.ui:40
 msgid "Automatic Screen _Lock"
@@ -6348,14 +6257,12 @@ msgid "Forever"
 msgstr "Мәңгі"
 
 #: panels/privacy/cc-usage-page.c:342
-#, fuzzy
-#| msgid "File History"
 msgid "Clear File History?"
-msgstr "Файлдар тарихы"
+msgstr "Файлдар тарихын өшіру керек пе?"
 
 #: panels/privacy/cc-usage-page.c:343
 msgid "After clearing, lists of recently used files will appear empty."
-msgstr ""
+msgstr "Тазартудан кейін жуырда қолданылған файлдар тізімі бос болып көрінеді."
 
 #: panels/privacy/cc-usage-page.c:344
 msgid "_Clear History"
@@ -6370,11 +6277,6 @@ msgid "File History"
 msgstr "Файлдар тарихы"
 
 #: panels/privacy/cc-usage-page.ui:18
-#, fuzzy
-#| msgid ""
-#| "File history keeps a record of files that you have used. This information "
-#| "is shared between applications, and makes it easier to find files that "
-#| "you might want to use."
 msgid ""
 "File history keeps a record of files that you have used. This information is "
 "shared between apps, and makes it easier to find files that you might want "
@@ -6431,7 +6333,7 @@ msgstr "Уақытша файлдарды ө_шіру…"
 
 #: panels/privacy/gnome-privacy-panel.desktop.in:4
 msgid "Control access to hardware, services, and data"
-msgstr ""
+msgstr "Құрылғылар, қызметтер мен деректерге қол жеткізуді басқарады"
 
 #. Translators: Search terms to find the Privacy panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/privacy/gnome-privacy-panel.desktop.in:15
@@ -6660,8 +6562,6 @@ msgid "_Other Media…"
 msgstr "Б_асқа медиа…"
 
 #: panels/removable-media/cc-removable-media-panel.ui:197
-#, fuzzy
-#| msgid "_Never prompt or start programs on media insertion"
 msgid "_Never prompt or start apps on media insertion"
 msgstr "Тасушы са_лынған кезде ешқашан сұрамау және бағдарламаларды жөнелтпеу"
 
@@ -6705,10 +6605,6 @@ msgid "Search Locations"
 msgstr "Іздеу орналасулары"
 
 #: panels/search/cc-search-locations-dialog.ui:19
-#, fuzzy
-#| msgid ""
-#| "Folders which are searched by system applications, such as Files, Photos "
-#| "and Videos."
 msgid ""
 "Folders which are searched by system apps, such as Files, Photos and Videos."
 msgstr ""
@@ -6743,14 +6639,10 @@ msgid "App Search"
 msgstr "Қолданба іздеу"
 
 #: panels/search/cc-search-panel.ui:11
-#, fuzzy
-#| msgid "Include application-provided search results."
 msgid "Include app-provided search results."
 msgstr "Қолданбалар ұсынатын іздеу нәтижелерін есепке алу."
 
 #: panels/search/cc-search-panel.ui:23
-#, fuzzy
-#| msgid "Folders which are searched by system applications."
 msgid "Folders which are searched by system apps."
 msgstr "Жүйелік қолданбалар іздейтін бумалар."
 
@@ -6763,11 +6655,8 @@ msgid "Results are displayed according to the list order."
 msgstr "Нәтижелер тізімдік ретке сәйкес көрсетіледі."
 
 #: panels/search/gnome-search-panel.desktop.in:4
-#, fuzzy
-#| msgid ""
-#| "Control which applications show search results in the Activities Overview"
 msgid "Control which apps show search results in the Activities Overview"
-msgstr "Көріністе қай қолданбалар іздеу нәтижелерін көрсететінінді басқарыңыз"
+msgstr "Көріністе қай қолданбалар іздеу нәтижелерін көрсететінінді басқару"
 
 #. Translators: Search terms to find the Search panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/search/gnome-search-panel.desktop.in:15
@@ -6793,7 +6682,7 @@ msgstr "Іске қосулы"
 #: panels/sharing/cc-sharing-panel.c:301 panels/sharing/cc-sharing-panel.c:324
 msgctxt "service is disabled"
 msgid "Off"
-msgstr "Сөнд."
+msgstr "Сөнд"
 
 #: panels/sharing/cc-sharing-panel.c:327
 msgctxt "service is enabled"
@@ -6868,14 +6757,8 @@ msgid "_File Sharing"
 msgstr "_Файлдармен бөлісу"
 
 #: panels/sharing/cc-sharing-panel.ui:33
-#, fuzzy
-#| msgid ""
-#| "Remote desktop allows viewing and controlling your desktop from another "
-#| "computer."
 msgid "View and control the desktop from another device"
-msgstr ""
-"Қашықтағы жұмыс үстелі жұмыс үстелін басқа компьютерден көруге және "
-"басқаруға мүмкіндік береді."
+msgstr "Жұмыс үстелін басқа құрылғыдан қарау және басқару"
 
 #: panels/sharing/cc-sharing-panel.ui:35
 msgid "Remote _Desktop"
@@ -6890,10 +6773,8 @@ msgid "_Media Sharing"
 msgstr "_Медиамен бөлісу"
 
 #: panels/sharing/cc-sharing-panel.ui:53
-#, fuzzy
-#| msgid "Update firmware on this device"
 msgid "Enable SSH access for this device"
-msgstr "Құрылғы үшін бинарлық кодтарды жаңарту"
+msgstr "Бұл құрылғы үшін SSH арқылы қатынауды іске қосу"
 
 #: panels/sharing/cc-sharing-panel.ui:55
 msgid "_Remote Login"
@@ -7068,10 +6949,8 @@ msgid "Fade"
 msgstr "Сөндіру"
 
 #: panels/sound/cc-output-test-wheel.c:206
-#, fuzzy
-#| msgid "Select a file"
 msgid "Select a Speaker"
-msgstr "Файлды таңдау"
+msgstr "Динамикті таңдау"
 
 #: panels/sound/cc-output-test-window.ui:4
 msgid "Test Speakers"
@@ -7160,10 +7039,8 @@ msgid "Cursor Size"
 msgstr "Курсор өлшемі"
 
 #: panels/universal-access/cc-ua-hearing-page.ui:9
-#, fuzzy
-#| msgid "_Magnification:"
 msgid "_Overamplification"
-msgstr "Үлке_йту:"
+msgstr "Аса үлке_йту"
 
 #: panels/universal-access/cc-ua-hearing-page.ui:10
 msgid "Allow volume to exceed 100%. This will result in quality loss"
@@ -7175,10 +7052,8 @@ msgid "Visual Alerts"
 msgstr "Бейнелік хабарлау"
 
 #: panels/universal-access/cc-ua-hearing-page.ui:32
-#, fuzzy
-#| msgid "Use a visual indication when an alert sound occurs."
 msgid "Use a visual indication when an alert sound occurs"
-msgstr "Хабарлау дыбысы кезінде визуалды хабарлауды көрсету."
+msgstr "Хабарлау дыбысы кезінде визуалды хабарлауды көрсету"
 
 #: panels/universal-access/cc-ua-hearing-page.ui:36
 msgid "_Visual Alerts"
@@ -7189,27 +7064,23 @@ msgid "_Flash Area"
 msgstr ""
 
 #: panels/universal-access/cc-ua-hearing-page.ui:50
-#, fuzzy
-#| msgctxt "keyboard key"
-#| msgid "Print Screen"
 msgid "Entire Screen"
-msgstr "Print Screen"
+msgstr "Бүкіл экран"
 
 #: panels/universal-access/cc-ua-hearing-page.ui:51
 msgid "Entire Window"
 msgstr "Терезе толығымен"
 
 #: panels/universal-access/cc-ua-hearing-page.ui:61
-#, fuzzy
-#| msgid "_Test flash"
 msgid "_Test Flash"
-msgstr "Жыпылықтауды сы_нау"
+msgstr "Жарқырауды сы_нау"
 
 #. '#' is a dummy target to make 'Sound' clickable
 #. TRANSLATORS: Don't translate  <a href='#'> and </a>
 #: panels/universal-access/cc-ua-hearing-page.c:156
 msgid "System volume can be adjusted in <a href='#'>Sound</a> settings."
 msgstr ""
+"Жүйелік дыбыс деңгейін <a href='#'>Дыбыс</a> баптауларында келтіруге болады."
 
 #: panels/universal-access/cc-ua-mouse-page.ui:10
 msgid "_Mouse Keys"
@@ -7217,7 +7088,7 @@ msgstr "Ты_шқан пернелері"
 
 #: panels/universal-access/cc-ua-mouse-page.ui:11
 msgid "Use numeric keypad to move your mouse pointer"
-msgstr ""
+msgstr "Тышқан курсорын жылжыту үшін цифрлық пернетақтаны қолдану"
 
 #: panels/universal-access/cc-ua-mouse-page.ui:18
 msgid "_Locate Pointer"
@@ -7225,7 +7096,7 @@ msgstr "Курсорды _табу"
 
 #: panels/universal-access/cc-ua-mouse-page.ui:19
 msgid "Reveal pointer location by pressing Left Ctrl"
-msgstr ""
+msgstr "Сол жақ Ctrl пернесін басу арқылы курсор орнын көрсету"
 
 #: panels/universal-access/cc-ua-mouse-page.ui:26
 msgid "_Double-Click Delay"
@@ -7260,10 +7131,8 @@ msgid "_Simulated Secondary Click"
 msgstr "_Симуляцияланған ккіншілік шерту"
 
 #: panels/universal-access/cc-ua-mouse-page.ui:60
-#, fuzzy
-#| msgid "Trigger a secondary click by holding down the primary button"
 msgid "Secondary click by holding down the primary mouse button"
-msgstr "Біріншілік батырманы басып ұстау арқылы екіншілік шертуді генерациялау"
+msgstr "Біріншілік батырманы басып ұстау арқылы екіншілік шерту"
 
 #: panels/universal-access/cc-ua-mouse-page.ui:65
 #: panels/universal-access/cc-ua-typing-page.ui:176
@@ -7280,10 +7149,8 @@ msgid "Trigger a click when the pointer hovers"
 msgstr "Курсор үстінен өткен кезде шерту оқиғасын жіберу"
 
 #: panels/universal-access/cc-ua-mouse-page.ui:124
-#, fuzzy
-#| msgid "Motion _threshold:"
 msgid "Motion Threshold"
-msgstr "Жылжудың _табалдырықты мәні:"
+msgstr "Жылжудың табалдырықты мәні"
 
 #: panels/universal-access/cc-ua-mouse-page.ui:129
 msgid "Small"
@@ -7310,14 +7177,12 @@ msgid "Zoom"
 msgstr "Үлкейту"
 
 #: panels/universal-access/cc-ua-panel.ui:43
-#, fuzzy
-#| msgid "Accessibility"
 msgid "_Accessibility Menu"
-msgstr "Қолжетерлілік"
+msgstr "Қол_жетімділік мәзірі"
 
 #: panels/universal-access/cc-ua-panel.ui:44
 msgid "Display menu for Accessibility settings in top bar"
-msgstr ""
+msgstr "Жоғарыдағы панельде Қолжетімділік баптауларының мәзірін көрсету"
 
 #: panels/universal-access/cc-ua-panel.ui:64
 msgid "_Seeing"
@@ -7379,6 +7244,8 @@ msgstr "Ж_оғары контраст"
 #: panels/universal-access/cc-ua-seeing-page.ui:11
 msgid "Increase color contrast of foreground and background interface elements"
 msgstr ""
+"Алдыңғы көрініс пен фондағы интерфейс элементтерінің арасындағы түстер "
+"контрастын үлкейту"
 
 #: panels/universal-access/cc-ua-seeing-page.ui:18
 msgid "_Reduce Animation"
@@ -7386,7 +7253,7 @@ msgstr "Анимацияны аза_йту"
 
 #: panels/universal-access/cc-ua-seeing-page.ui:19
 msgid "Reduce animations in the user interface to reduce motion"
-msgstr ""
+msgstr "Қозғалысты азайту үшін пайдаланушы интерфейсінде анимацияларды азайту"
 
 #: panels/universal-access/cc-ua-seeing-page.ui:26
 msgid "_Large Text"
@@ -7394,61 +7261,49 @@ msgstr "Ү_лкен мәтін"
 
 #: panels/universal-access/cc-ua-seeing-page.ui:27
 msgid "Increase the size of all text in the user interface"
-msgstr ""
+msgstr "Пайдаланушы интерфейсінде барлық мәтіннің өлшемін үлкейту"
 
 #: panels/universal-access/cc-ua-seeing-page.ui:34
 msgid "_Cursor Size"
 msgstr "_Курсор өлшемі"
 
 #: panels/universal-access/cc-ua-seeing-page.ui:35
-#, fuzzy
-#| msgid ""
-#| "Cursor size can be combined with zoom to make it easier to see the cursor."
 msgid "The size of the cursor can be increased to make it easier to see"
-msgstr ""
-"Курсорды көруді жақсарту үшін курсор өлшемін масштабпен бірге қолдануға "
-"болады."
+msgstr "Курсорды көруді жақсарту үшін курсор өлшемін үлкейтуге болады"
 
 #: panels/universal-access/cc-ua-seeing-page.ui:44
 msgid "_Sound Keys"
 msgstr "_Дыбыс пернелері"
 
 #: panels/universal-access/cc-ua-seeing-page.ui:45
-#, fuzzy
-#| msgid "Beep when Num Lock or Caps Lock are turned on or off."
 msgid "Beep when Num Lock or Caps Lock are turned on or off"
-msgstr "Num Lock немесе Caps Lock іске қосулы/сөндірулі кезінде дыбыс беру."
+msgstr "Num Lock немесе Caps Lock іске қосулы/сөндірулі кезінде дыбыс беру"
 
 #: panels/universal-access/cc-ua-seeing-page.ui:52
 msgid "_Overlay Scrollbars"
-msgstr ""
+msgstr "Құра_ма үстіндегі айналдыру жолақтары"
 
 #: panels/universal-access/cc-ua-seeing-page.ui:53
 msgid "Use scrollbars that overlay the content and automatically hide"
 msgstr ""
+"Құраманың үстінде көрсетіліп, автоматты түрде жасырылатын айналдыру "
+"жолақтарын қолдану"
 
 #: panels/universal-access/cc-ua-seeing-page.ui:65
 msgid "Screen _Reader"
 msgstr "Экраннан оқитын қол_данба"
 
 #: panels/universal-access/cc-ua-seeing-page.ui:66
-#, fuzzy
-#| msgid "The screen reader reads displayed text as you move the focus."
 msgid "The screen reader reads displayed text as you move the focus"
-msgstr ""
-"Экраннан оқу қолданбасы фокус ауысу кезінде көрсетілетін мәтінді оқиды."
+msgstr "Экраннан оқу қолданбасы фокус ауысу кезінде көрсетілетін мәтінді оқиды"
 
 #: panels/universal-access/cc-ua-typing-page.ui:9
-#, fuzzy
-#| msgid "Screen _Keyboard"
 msgid "_Screen Keyboard"
 msgstr "Экрандағы перне_тақта"
 
 #: panels/universal-access/cc-ua-typing-page.ui:10
-#, fuzzy
-#| msgid "Turn on-screen keyboard on or off"
 msgid "Use the on-screen keyboard to type in input fields"
-msgstr "Экрандағы пернетақтаны іске қосу/сөндіру"
+msgstr "Экрандағы пернетақтаны енгізу өрістеріне теру үшін қолдану"
 
 #: panels/universal-access/cc-ua-typing-page.ui:16
 msgid "_Enable by Keyboard"
@@ -7467,26 +7322,21 @@ msgid "_Cursor Blinking"
 msgstr "_Курсор жыпылықтауы"
 
 #: panels/universal-access/cc-ua-typing-page.ui:31
-#, fuzzy
-#| msgid "Cursor blinks in text fields."
 msgid "Change if the cursor blinks in text fields"
-msgstr "Курсор мәтіндік өрістерде жыпылықтайды."
+msgstr "Курсор мәтіндік өрістерде жыпылықтайды да, соны көрсетіңіз"
 
 #: panels/universal-access/cc-ua-typing-page.ui:38
-#, fuzzy
 #| msgid "Link speed"
 msgid "_Blink Speed"
-msgstr "Деректерді өткізу жылдамдығы"
+msgstr "_Жыпылықтау жиілігі"
 
 #: panels/universal-access/cc-ua-typing-page.ui:44
-#, fuzzy
-#| msgid "Link speed"
 msgid "Blink Speed"
-msgstr "Деректерді өткізу жылдамдығы"
+msgstr "Жыпылықтау жиілігі"
 
 #: panels/universal-access/cc-ua-typing-page.ui:74
 msgid "Test Entry"
-msgstr ""
+msgstr "Енгізуді тексеру"
 
 #: panels/universal-access/cc-ua-typing-page.ui:79
 msgid "Type to test"
@@ -7501,10 +7351,8 @@ msgid "_Repeat Keys"
 msgstr "Пернелер қа_йталануы"
 
 #: panels/universal-access/cc-ua-typing-page.ui:95
-#, fuzzy
-#| msgid "Key presses repeat when key is held down."
 msgid "Key presses repeat when the key is held down"
-msgstr "Перне басулы кезінде перне басулары қайталанады."
+msgstr "Пернені басып тұру кезінде перне басулары қайталанады"
 
 #: panels/universal-access/cc-ua-typing-page.ui:100
 msgid "Speed"
@@ -7515,11 +7363,10 @@ msgid "_Sticky Keys"
 msgstr "Жабы_сқақ пернелер"
 
 #: panels/universal-access/cc-ua-typing-page.ui:152
-#, fuzzy
-#| msgid "Treats a sequence of modifier keys as a key combination"
 msgid "Sequences of modifier keys act as a key combination"
 msgstr ""
-"Түрлендіргіш пернелер басылу тізбегін пернелер комбинациясы ретінде талдайды"
+"Түрлендіргіш пернелер басылу тізбектері пернелер комбинациясы ретінде әрекет "
+"етеді"
 
 #: panels/universal-access/cc-ua-typing-page.ui:157
 msgid "Disable if two keys are pressed together"
@@ -7534,43 +7381,33 @@ msgid "S_low Keys"
 msgstr "Ба_яу пернелер"
 
 #: panels/universal-access/cc-ua-typing-page.ui:171
-#, fuzzy
-#| msgid "Puts a delay between when a key is pressed and when it is accepted"
 msgid "Delay between when a key is pressed and when it is accepted"
-msgstr "Перне басылған және қабылданған кездері арасында кідірісті орнатады"
+msgstr "Перне басылғаны және қабылданғаны арасындағы кідіріс"
 
 #: panels/universal-access/cc-ua-typing-page.ui:199
-#, fuzzy
-#| msgid "Beep when a key is pr_essed"
 msgid "Beep when a key is pressed"
-msgstr "Перне _басылған кезде дыбыс беру"
+msgstr "Перне басылған кезде дыбыс беру"
 
 #: panels/universal-access/cc-ua-typing-page.ui:204
-#, fuzzy
-#| msgid "Beep when a key is _accepted"
 msgid "Beep when a key is accepted"
-msgstr "Перне қ_абылданған кезде дыбыс беру"
+msgstr "Перне қабылданған кезде дыбыс беру"
 
 #: panels/universal-access/cc-ua-typing-page.ui:209
 #: panels/universal-access/cc-ua-typing-page.ui:246
-#, fuzzy
-#| msgid "Beep when a key is _rejected"
 msgid "Beep when a key is rejected"
-msgstr "Перне та_йдырылған кезде дыбыс беру"
+msgstr "Перне тайдырылған кезде дыбыс беру"
 
 #: panels/universal-access/cc-ua-typing-page.ui:217
 msgid "_Bounce Keys"
 msgstr "Қа_йталанатын пернелер"
 
 #: panels/universal-access/cc-ua-typing-page.ui:218
-#, fuzzy
-#| msgid "Ignores fast duplicate keypresses"
 msgid "Ignore fast duplicate keypresses"
-msgstr "Жылдам қайталатын пернелер басуларын елемейді"
+msgstr "Жылдам қайталатын пернелер басуларын елемеу"
 
 #: panels/universal-access/cc-ua-zoom-page.ui:9
 msgid "_Desktop Zoom"
-msgstr ""
+msgstr "_Жұмыс үстелі масштабы"
 
 #: panels/universal-access/cc-ua-zoom-page.ui:10
 msgid "Magnify the entire screen"
@@ -7589,23 +7426,17 @@ msgid "_Magnifier View"
 msgstr "Ү_лкейткіш көрінісі"
 
 #: panels/universal-access/cc-ua-zoom-page.ui:49
-#, fuzzy
-#| msgid "_Follow mouse cursor"
 msgid "Follow Mouse Cursor"
-msgstr "Тышқан курсоры соңынан _еру"
+msgstr "Тышқан курсоры соңынан еру"
 
 #: panels/universal-access/cc-ua-zoom-page.ui:50
 #: panels/universal-access/cc-ua-zoom-page.ui:68
-#, fuzzy
-#| msgid "Screen Reader"
 msgid "Screen Area"
-msgstr "Экраннан оқитын қолданба"
+msgstr "Экран аймағы"
 
 #: panels/universal-access/cc-ua-zoom-page.ui:59
-#, fuzzy
-#| msgid "_Active Screen Edges"
 msgid "_Extend Outside Screen Edges"
-msgstr "_Белсенді экран шеттері"
+msgstr "_Экранның шеттерінен сыртқа кеңейту"
 
 #: panels/universal-access/cc-ua-zoom-page.ui:72
 msgid "Full Screen"
@@ -7640,20 +7471,16 @@ msgid "Pushes Contents Around"
 msgstr "Құраманы жылжытады"
 
 #: panels/universal-access/cc-ua-zoom-page.ui:93
-#, fuzzy
-#| msgid "Registered"
 msgid "Remains Centered"
-msgstr "Тіркелген"
+msgstr "Ортасымен тураланған болады"
 
 #: panels/universal-access/cc-ua-zoom-page.ui:105
 msgid "Crosshairs"
 msgstr "Қиылысу"
 
 #: panels/universal-access/cc-ua-zoom-page.ui:115
-#, fuzzy
-#| msgid "_Overlaps mouse cursor"
 msgid "_Overlap Mouse Cursor"
-msgstr "Тышқан курсорының үстін _басу"
+msgstr "Тышқан курсорының үстін басу"
 
 #: panels/universal-access/cc-ua-zoom-page.ui:122
 msgid "Thickness"
@@ -7696,7 +7523,7 @@ msgstr "_Терістелген"
 
 #: panels/universal-access/cc-ua-zoom-page.ui:209
 msgid "Invert colors in the magnifier region"
-msgstr ""
+msgstr "Үлкейткіш аймағында түстерді терістеу"
 
 #: panels/universal-access/cc-ua-zoom-page.ui:216
 msgid "Brightness"
@@ -7726,12 +7553,6 @@ msgstr "Көру, есту, теру, көрсету және шертуді ж�
 
 #. Translators: Search terms to find the Accessibility panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/universal-access/gnome-universal-access-panel.desktop.in:15
-#, fuzzy
-#| msgid ""
-#| "Keyboard;Mouse;a11y;Accessibility;Universal Access;Contrast;Cursor;Sound;"
-#| "Zoom;Screen;Reader;big;high;large;text;font;size;AccessX;Sticky;Keys;Slow;"
-#| "Bounce;Mouse;Double;click;Delay;Speed;Assist;Repeat;Blink;visual;hearing;"
-#| "audio;typing;animations;"
 msgid ""
 "Keyboard;Mouse;a11y;Accessibility;Universal Access;Contrast;Cursor;Sound;"
 "Zoom;Screen;Reader;big;high;large;text;font;size;AccessX;Sticky;Keys;Slow;"
@@ -7740,11 +7561,12 @@ msgid ""
 msgstr ""
 "Keyboard;Mouse;a11y;Accessibility;Universal Access;Contrast;Cursor;Sound;"
 "Zoom;Screen;Reader;big;high;large;text;font;size;AccessX;Sticky;Keys;Slow;"
-"Bounce;Mouse;Double;click;Delay;Speed;Assist;Repeat;Blink;visual;hearing;"
-"audio;typing;animations;пернетақта;тышқан;қолжетерлілік;әмбепап қатынау;"
-"контраст;курсор;дыбыс;масштаб;экран;оқу;үлкен;жоғары;мәтін;қаріп;өлшем;"
-"жабысқақ;баяу;қайталанатын;қос;шерту;кідіріс;жылдамдық;көмекші;қайталау;"
-"жыпылықтау;визуалды;есту;аудио;теру;анимациялар;"
+"Bounce;Mouse;Double;click;Delay;Speed;Assist;Repeat;Blink;Pointer;find;"
+"locate;visual;hearing;audio;typing;animations;пернетақта;тышқан;"
+"қолжетімділік;әмбепап қатынау;контраст;курсор;дыбыс;масштаб;экран;оқу;үлкен;"
+"жоғары;мәтін;қаріп;өлшем;жабысқақ;баяу;қайталанатын;қос;шерту;кідіріс;"
+"жылдамдық;көмекші;қайталау;жыпылықтау;курсор;табу;анықтау;визуалды;есту;"
+"аудио;теру;анимациялар;"
 
 #: panels/user-accounts/cc-add-user-dialog.c:36
 msgid "Should match the web address of your login provider."
@@ -8152,10 +7974,9 @@ msgstr "Пайдаланушыны өшіру сәтсіз аяқталды: %s"
 #: panels/user-accounts/cc-user-panel.c:404
 #: panels/user-accounts/cc-user-panel.c:459
 #: panels/user-accounts/cc-user-panel.c:505
-#, fuzzy, c-format
-#| msgid "Failed to revoke remotely managed user"
+#, c-format
 msgid "Failed to revoke remotely managed user: %s"
-msgstr "Қашықтағы пайдаланушының күшін жою сәтсіз аяқталды"
+msgstr "Қашықтағы пайдаланушының күшін жою сәтсіз аяқталды: %s"
 
 #: panels/user-accounts/cc-user-panel.c:545
 #, c-format
@@ -8200,8 +8021,6 @@ msgstr ""
 "алдымен * таңбашасына шертіңіз"
 
 #: panels/user-accounts/cc-user-panel.c:1262
-#, fuzzy
-#| msgid "Unlock to Add Users and Change Settings"
 msgid "Unlock to add users and change settings"
 msgstr ""
 "Пайдаланушыларды қосу және параметрлерді өзгерту үшін бұғаттауын шешіңіз"
@@ -8230,6 +8049,9 @@ msgid ""
 "requiring authentication. Authentication is still required at other times, "
 "such as when unlocking the screen."
 msgstr ""
+"Автоматты түрде кіру аутентификацияны қажет етпей, құрылғы іске қосылғанда "
+"пайдаланушы тіркелгісін ашады. Аутентификация экран құлпын ашу сияқты басқа "
+"уақытта да қажет болады."
 
 #: panels/user-accounts/cc-user-panel.ui:162
 msgid "_Administrator"
@@ -8253,7 +8075,7 @@ msgstr "Пайдаланушыны ө_шіру…"
 
 #: panels/user-accounts/cc-user-panel.ui:248
 msgid "Users cannot be removed while logged in"
-msgstr ""
+msgstr "Пайдаланушылар жүйеге кірген кезде оларды өшіру мүмкін емес"
 
 #: panels/user-accounts/cc-user-panel.ui:254
 msgid "_Add User…"
@@ -8265,19 +8087,18 @@ msgstr "Қате: Пайдаланушы баптауларын көрсету �
 
 #: panels/user-accounts/cc-user-panel.ui:272
 msgid "The system component `AccountsService` cannot be found"
-msgstr ""
+msgstr "`AccountsService` жүйелік компонентті табу мүмкін емес"
 
 #: panels/user-accounts/cc-user-panel.ui:291
 msgid ""
 "The user will not be able to use this device once their account has been "
 "removed."
 msgstr ""
+"Тіркелгісі өшірілгеннен кейін пайдаланушы бұл құрылғыны пайдалана алмайды."
 
 #: panels/user-accounts/cc-user-panel.ui:303
-#, fuzzy
-#| msgid "_Delete Files"
 msgid "Delete Files and Settings"
-msgstr "Файлдарды ө_шіру"
+msgstr "Файлдар мен баптауларды өшіру"
 
 #: panels/user-accounts/cc-user-panel.ui:324
 msgid "_Delete"
@@ -9302,7 +9123,7 @@ msgstr "Баптаулар санаттары"
 
 #: shell/cc-panel-loader.c:282
 msgid "Available panels:"
-msgstr "Қолжетерлік панельдер:"
+msgstr "Қолжетімді панельдер:"
 
 #: shell/cc-window.ui:28 shell/cc-window.ui:32
 msgid "All Settings"
@@ -9355,8 +9176,6 @@ msgid "Show help"
 msgstr "Көмекті көрсету"
 
 #: shell/help-overlay.ui:35
-#, fuzzy
-#| msgid "Keyboard Shortcuts"
 msgctxt "shortcut window"
 msgid "Keyboard shortcuts"
 msgstr "Пернетақта жарлықтары"
@@ -9409,16 +9228,12 @@ msgid "Initial state of the window"
 msgstr "Терезенің бастапқы күйі"
 
 #: shell/org.gnome.Settings.gschema.xml:21
-#, fuzzy
-#| msgid ""
-#| "A tuple containing the initial width, height and maximized state of the "
-#| "application window."
 msgid ""
 "A tuple containing the initial width, height and maximized state of the app "
 "window."
 msgstr ""
 "Қолданба терезесінің бастапқы енін, биіктігін және максималды күйін "
-"сақтайтын кортеж."
+"сақтайтын жазба."
 
 #. translators:
 #. * The number of sound outputs on a particular device
