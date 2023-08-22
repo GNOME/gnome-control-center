@@ -11,7 +11,7 @@
           <property name="label" translatable="yes">More information</property>
         </accessibility>
         <property name="popover">
-          <object class="GtkPopover">
+          <object class="GtkPopover" id="popover">
             <child>
               <object class="GtkLabel" id="label">
                 <property name="halign">center</property>
@@ -22,7 +22,8 @@
                 <property name="max-width-chars">50</property>
                 <property name="valign">center</property>
                 <property name="wrap">True</property>
-                <property name="selectable">true</property>
+                <!-- This is a hack to make the screen reader read the text of the label. See issue #2508 -->
+                <property name="selectable" bind-source="popover" bind-property="visible" bind-flags="invert-boolean">True</property>
               </object>
             </child>
           </object>
