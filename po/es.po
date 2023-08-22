@@ -15,23 +15,22 @@
 # Jorge González <jorgegonz@svn.gnome.org>, 2007, 2008, 2009, 2010, 2011.
 # leo <daniel.mustieles@gmail.com>, 2022.
 # Daniel Mustieles <daniel.mustieles@gmail.com>, 2021-2023.
-# Daniel Mustieles García <daniel.mustieles@gmail.com>, 2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2023-08-07 13:31+0000\n"
-"PO-Revision-Date: 2023-08-08 09:31+0200\n"
-"Last-Translator: Daniel Mustieles García <daniel.mustieles@gmail.com>\n"
+"POT-Creation-Date: 2023-08-21 17:29+0000\n"
+"PO-Revision-Date: 2023-08-22 13:36+0200\n"
+"Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Spanish - Spain <gnome-es-list@gnome.org>\n"
 "Language: es_ES\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"X-Generator: Gtranslator 42.0\n"
+"X-Generator: Gtranslator 45.alpha0\n"
 
 #: panels/applications/cc-applications-panel.c:821
 msgid "System Bus"
@@ -180,8 +179,8 @@ msgstr "Recibir búsquedas del sistema y enviar los resultados"
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:123
 #: panels/keyboard/cc-xkb-modifier-dialog.c:342
 #: panels/keyboard/keyboard-shortcuts.c:367
-#: panels/user-accounts/cc-user-panel.c:769
-#: panels/user-accounts/cc-user-panel.c:892
+#: panels/user-accounts/cc-user-panel.c:703
+#: panels/user-accounts/cc-user-panel.c:826
 #: panels/wwan/cc-wwan-device-page.c:477
 #: subprojects/gvc/gvc-mixer-control.c:1908
 msgid "Disabled"
@@ -548,7 +547,7 @@ msgstr "Puede quitar el dispositivo de calibración."
 #. TRANSLATORS: The user has to be careful not to knock the
 #. * display off the screen (although we do cope if this is
 #. * detected early enough)
-#: panels/color/cc-color-calibrate.c:534
+#: panels/color/cc-color-calibrate.c:534 panels/color/cc-color-calibrate.ui:64
 msgid "Do not disturb the calibration device while in progress"
 msgstr "No interrumpir al dispositivo de calibración cuando está en progreso"
 
@@ -572,8 +571,8 @@ msgstr "Calibración de la pantalla"
 #: panels/user-accounts/cc-avatar-chooser.c:96
 #: panels/user-accounts/cc-fingerprint-dialog.ui:32
 #: panels/user-accounts/cc-password-dialog.ui:20
-#: panels/user-accounts/cc-user-panel.c:608
-#: panels/user-accounts/cc-user-panel.ui:347
+#: panels/user-accounts/cc-user-panel.ui:296
+#: panels/user-accounts/cc-user-panel.ui:323
 #: panels/user-accounts/data/join-dialog.ui:17
 #: panels/wwan/cc-wwan-mode-dialog.ui:32
 #: panels/wwan/cc-wwan-network-dialog.ui:107
@@ -852,13 +851,13 @@ msgstr "Requiere un medio escribible"
 
 #: panels/color/cc-color-panel.ui:313
 msgid ""
-"You may find these instructions on how to use the profile on <a href=\"linux"
-"\">GNU/Linux</a>, <a href=\"osx\">Apple OS X</a> and <a href=\"windows"
-"\">Microsoft Windows</a> systems useful."
+"You may find these instructions on how to use the profile on <a "
+"href=\"linux\">GNU/Linux</a>, <a href=\"osx\">Apple OS X</a> and <a "
+"href=\"windows\">Microsoft Windows</a> systems useful."
 msgstr ""
 "Puede encontrar instrucciones útiles sobre cómo usar el perfil en sistemas "
-"<a href=\"linux\">GNU/Linux</a>, <a href=\"osx\">Apple OS X</a> y <a href="
-"\"windows\">Microsoft Windows</a>."
+"<a href=\"linux\">GNU/Linux</a>, <a href=\"osx\">Apple OS X</a> y <a "
+"href=\"windows\">Microsoft Windows</a>."
 
 #: panels/color/cc-color-panel.ui:335
 msgid "Add Profile"
@@ -1447,6 +1446,10 @@ msgstr ""
 msgid "Links &amp; Files"
 msgstr "Enlaces y archivos"
 
+#: panels/default-apps/cc-default-apps-panel.ui:9
+msgid "Applications which are used to open common links and files."
+msgstr "Aplicaciones que se usan para abrir enlaces comunes y archivos."
+
 #: panels/default-apps/cc-default-apps-panel.ui:12
 msgid "_Web"
 msgstr "_Web"
@@ -1521,6 +1524,7 @@ msgstr "Esto puede deber a limitaciones hardware."
 #: panels/display/cc-display-panel.ui:90 panels/display/cc-display-panel.ui:221
 #: panels/display/cc-display-panel.ui:260
 #: panels/keyboard/cc-keyboard-shortcut-dialog.ui:115
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:118
 #: panels/mouse/cc-mouse-panel.ui:17 panels/mouse/cc-mouse-panel.ui:23
 #: panels/network/cc-network-panel.ui:17 panels/network/cc-wifi-panel.ui:11
 #: panels/network/cc-wifi-panel.ui:17 panels/printers/new-printer-dialog.ui:64
@@ -1601,8 +1605,8 @@ msgstr "%.2lf Hz"
 #. TRANSLATORS: Status of Parental Controls setup
 #: panels/display/cc-display-settings.ui:23
 #: panels/privacy/cc-firmware-security-utils.c:45
-#: panels/user-accounts/cc-user-panel.c:767
-#: panels/user-accounts/cc-user-panel.c:889
+#: panels/user-accounts/cc-user-panel.c:701
+#: panels/user-accounts/cc-user-panel.c:823
 #: panels/wwan/cc-wwan-device-page.c:475
 msgid "Enabled"
 msgstr "Activada"
@@ -1757,7 +1761,7 @@ msgid "System Logo"
 msgstr "Logo del sistema"
 
 #: panels/info-overview/cc-info-overview-panel.ui:33
-#: panels/sharing/cc-sharing-panel.ui:12 panels/sharing/cc-sharing-panel.ui:279
+#: panels/sharing/cc-sharing-panel.ui:12 panels/sharing/cc-sharing-panel.ui:256
 msgid "Device Name"
 msgstr "Nombre del dispositivo"
 
@@ -1771,17 +1775,17 @@ msgid "Hardware Model"
 msgstr "Modelo de hardware"
 
 #: panels/info-overview/cc-info-overview-panel.ui:66
-#: panels/info-overview/cc-system-details-window.ui:83
+#: panels/info-overview/cc-system-details-window.ui:84
 msgid "Processor"
 msgstr "Procesador"
 
 #: panels/info-overview/cc-info-overview-panel.ui:74
-#: panels/info-overview/cc-system-details-window.ui:76
+#: panels/info-overview/cc-system-details-window.ui:77
 msgid "Memory"
 msgstr "Memoria"
 
 #: panels/info-overview/cc-info-overview-panel.ui:82
-#: panels/info-overview/cc-system-details-window.ui:97
+#: panels/info-overview/cc-system-details-window.ui:98
 msgid "Disk Capacity"
 msgstr "Capacidad del disco"
 
@@ -1909,53 +1913,57 @@ msgstr "**Versión del núcleo:**"
 msgid "Details copied to clipboard"
 msgstr "Detalles copiados al portapapeles"
 
-#: panels/info-overview/cc-system-details-window.ui:58
+#: panels/info-overview/cc-system-details-window.ui:26
+msgid "_Copy"
+msgstr "_Copiar"
+
+#: panels/info-overview/cc-system-details-window.ui:59
 msgid "Hardware Information"
 msgstr "Información de hardware"
 
-#: panels/info-overview/cc-system-details-window.ui:69
+#: panels/info-overview/cc-system-details-window.ui:70
 #: panels/printers/printer-entry.ui:183
 #: panels/wwan/cc-wwan-details-dialog.ui:184
 msgid "Model"
 msgstr "Modelo"
 
-#: panels/info-overview/cc-system-details-window.ui:119
+#: panels/info-overview/cc-system-details-window.ui:117
 msgid "Software Information"
 msgstr "Información de software"
 
-#: panels/info-overview/cc-system-details-window.ui:130
+#: panels/info-overview/cc-system-details-window.ui:128
 #: panels/wwan/cc-wwan-details-dialog.ui:210
 msgid "Firmware Version"
 msgstr "Versión de firmware"
 
 #. translators: this field contains the distro name and version
-#: panels/info-overview/cc-system-details-window.ui:138
+#: panels/info-overview/cc-system-details-window.ui:136
 msgid "OS Name"
 msgstr "Nombre del SO"
 
 #. translators: this field contains the distro build
-#: panels/info-overview/cc-system-details-window.ui:146
+#: panels/info-overview/cc-system-details-window.ui:144
 msgid "OS Build"
 msgstr "Construcción de SO"
 
 #. translators: this field contains the distro type
-#: panels/info-overview/cc-system-details-window.ui:154
+#: panels/info-overview/cc-system-details-window.ui:152
 msgid "OS Type"
 msgstr "Tipo de SO"
 
-#: panels/info-overview/cc-system-details-window.ui:161
+#: panels/info-overview/cc-system-details-window.ui:159
 msgid "GNOME Version"
 msgstr "Versión de GNOME"
 
-#: panels/info-overview/cc-system-details-window.ui:168
+#: panels/info-overview/cc-system-details-window.ui:166
 msgid "Windowing System"
 msgstr "Sistema de ventanas"
 
-#: panels/info-overview/cc-system-details-window.ui:175
+#: panels/info-overview/cc-system-details-window.ui:173
 msgid "Virtualization"
 msgstr "Virtualización"
 
-#: panels/info-overview/cc-system-details-window.ui:182
+#: panels/info-overview/cc-system-details-window.ui:180
 msgid "Kernel Version"
 msgstr "Verificación del núcleo"
 
@@ -2397,7 +2405,7 @@ msgid "Add Custom Shortcut"
 msgstr "Añadir un atajo personalizado"
 
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:30
-#: panels/user-accounts/cc-user-panel.ui:348
+#: panels/user-accounts/cc-user-panel.ui:297
 msgid "_Remove"
 msgstr "_Quitar"
 
@@ -2420,7 +2428,7 @@ msgstr ""
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:161
 #: panels/printers/pp-details-dialog.ui:39
 #: panels/user-accounts/cc-add-user-dialog.ui:68
-#: panels/user-accounts/cc-user-panel.ui:138
+#: panels/user-accounts/cc-user-panel.ui:96
 #: panels/wwan/cc-wwan-apn-dialog.ui:96
 msgid "Name"
 msgstr "Nombre"
@@ -2969,7 +2977,7 @@ msgstr "Nombre de red"
 #. Translators: This is a password needed for printing.
 #: panels/network/cc-wifi-hotspot-dialog.ui:92
 #: panels/printers/new-printer-dialog.ui:316
-#: panels/printers/pp-jobs-dialog.ui:54 panels/sharing/cc-sharing-panel.ui:360
+#: panels/printers/pp-jobs-dialog.ui:54 panels/sharing/cc-sharing-panel.ui:337
 #: panels/user-accounts/cc-add-user-dialog.ui:149
 #: panels/user-accounts/cc-add-user-dialog.ui:184
 #: panels/user-accounts/cc-add-user-dialog.ui:363
@@ -3357,9 +3365,17 @@ msgstr "Par no guardado"
 msgid "Signal Strength"
 msgstr "Fortaleza de la señal"
 
+#: panels/network/connection-editor/details-page.ui:31
+msgid "Weak"
+msgstr "Débil"
+
 #: panels/network/connection-editor/details-page.ui:46
 msgid "Link speed"
 msgstr "Velocidad de conexión"
+
+#: panels/network/connection-editor/details-page.ui:62
+msgid "1Mb/sec"
+msgstr "1Mb/sec"
 
 #: panels/network/connection-editor/details-page.ui:126
 #: panels/network/net-device-ethernet.c:154
@@ -3501,6 +3517,7 @@ msgstr "Rutas automáticas"
 #. Translators: Please see https://en.wikipedia.org/wiki/Metrics_(networking)
 #: panels/network/connection-editor/ip4-page.ui:291
 #: panels/network/connection-editor/ip6-page.ui:302
+#: panels/region/cc-format-preview.ui:98
 msgid "Metric"
 msgstr "Métrica"
 
@@ -3754,6 +3771,10 @@ msgstr "IMEI"
 #: panels/network/network-mobile.ui:41
 msgid "Provider"
 msgstr "Proveedor"
+
+#: panels/network/network-mobile.ui:300
+msgid "Not connected"
+msgstr "No conectado"
 
 #: panels/network/network-mobile.ui:310 panels/power/cc-power-profile-row.ui:21
 msgid "Active"
@@ -5371,6 +5392,10 @@ msgid_plural "Depends on %u other devices"
 msgstr[0] "Depende de %u otro dispositivo"
 msgstr[1] "Depende de %u otros dispositivos"
 
+#: panels/privacy/cc-bolt-device-dialog.ui:4
+msgid "Device Identifier"
+msgstr "Identificador del dispositivo"
+
 #: panels/privacy/cc-bolt-device-dialog.ui:25
 msgid "Status"
 msgstr "Estado"
@@ -6481,7 +6506,7 @@ msgid "Your Account"
 msgstr "Su cuenta"
 
 #: panels/region/cc-region-panel.ui:28 panels/region/cc-region-panel.ui:55
-#: panels/user-accounts/cc-user-panel.ui:249
+#: panels/user-accounts/cc-user-panel.ui:207
 msgid "_Language"
 msgstr "_Idioma"
 
@@ -6844,90 +6869,90 @@ msgstr "Inicio de sesión _remoto"
 msgid "File Sharing"
 msgstr "Compartición de archivos"
 
-#: panels/sharing/cc-sharing-panel.ui:111
+#: panels/sharing/cc-sharing-panel.ui:110
 msgid "_Require Password"
 msgstr "_Solicitar contraseña"
 
-#: panels/sharing/cc-sharing-panel.ui:125
-#: panels/user-accounts/cc-user-panel.ui:151
+#: panels/sharing/cc-sharing-panel.ui:124
+#: panels/user-accounts/cc-user-panel.ui:109
 msgid "_Password"
 msgstr "_Contraseña"
 
-#: panels/sharing/cc-sharing-panel.ui:168
-#: panels/sharing/cc-sharing-panel.ui:204
+#: panels/sharing/cc-sharing-panel.ui:167
+#: panels/sharing/cc-sharing-panel.ui:191
 msgid "Remote Login"
 msgstr "Inicio de sesión remoto"
 
-#: panels/sharing/cc-sharing-panel.ui:224
-#: panels/sharing/cc-sharing-panel.ui:245
+#: panels/sharing/cc-sharing-panel.ui:201
+#: panels/sharing/cc-sharing-panel.ui:222
 msgid "Remote Desktop"
 msgstr "Escritorio remoto"
 
-#: panels/sharing/cc-sharing-panel.ui:239
+#: panels/sharing/cc-sharing-panel.ui:216
 msgid ""
 "Remote desktop allows viewing and controlling your desktop from another "
 "computer."
 msgstr ""
 "El escritor remoto permite ver y controlar su escritorio desde otro equipo."
 
-#: panels/sharing/cc-sharing-panel.ui:246
+#: panels/sharing/cc-sharing-panel.ui:223
 msgid "Enable or disable remote desktop connections to this computer."
 msgstr ""
 "Activar o desactivar las conexiones de escritorio remoto para este equipo."
 
-#: panels/sharing/cc-sharing-panel.ui:259
+#: panels/sharing/cc-sharing-panel.ui:236
 msgid "Remote Control"
 msgstr "Control remoto"
 
-#: panels/sharing/cc-sharing-panel.ui:260
+#: panels/sharing/cc-sharing-panel.ui:237
 msgid "Allows remote connections to control the screen."
 msgstr "Permitir conexiones para controlar la pantalla"
 
-#: panels/sharing/cc-sharing-panel.ui:274
+#: panels/sharing/cc-sharing-panel.ui:251
 msgid "How to Connect"
 msgstr "Cómo conectarse"
 
-#: panels/sharing/cc-sharing-panel.ui:275
+#: panels/sharing/cc-sharing-panel.ui:252
 msgid ""
 "Connect to this computer using the device name or remote desktop address."
 msgstr ""
 "Conectarse a este equipo usando el nombre del dispositivo o la dirección del "
 "escritorio remoto."
 
-#: panels/sharing/cc-sharing-panel.ui:294
-#: panels/sharing/cc-sharing-panel.ui:321
-#: panels/sharing/cc-sharing-panel.ui:348
-#: panels/sharing/cc-sharing-panel.ui:366
+#: panels/sharing/cc-sharing-panel.ui:271
+#: panels/sharing/cc-sharing-panel.ui:298
+#: panels/sharing/cc-sharing-panel.ui:325
+#: panels/sharing/cc-sharing-panel.ui:343
 msgid "Copy"
 msgstr "Copiar"
 
-#: panels/sharing/cc-sharing-panel.ui:307
+#: panels/sharing/cc-sharing-panel.ui:284
 msgid "Remote Desktop Address"
 msgstr "Dirección del escritorio remoto"
 
-#: panels/sharing/cc-sharing-panel.ui:337
+#: panels/sharing/cc-sharing-panel.ui:314
 msgid "Authentication"
 msgstr "Autenticación"
 
-#: panels/sharing/cc-sharing-panel.ui:338
+#: panels/sharing/cc-sharing-panel.ui:315
 msgid "The user name and password are required to connect to this computer."
 msgstr ""
 "El nombre de usuario y la contraseña requeridos para conectarse a este "
 "equipo."
 
-#: panels/sharing/cc-sharing-panel.ui:342
+#: panels/sharing/cc-sharing-panel.ui:319
 msgid "User Name"
 msgstr "Nombre de usuario"
 
-#: panels/sharing/cc-sharing-panel.ui:381
+#: panels/sharing/cc-sharing-panel.ui:358
 msgid "Verify Encryption"
 msgstr "Verificar cifrado"
 
-#: panels/sharing/cc-sharing-panel.ui:410
+#: panels/sharing/cc-sharing-panel.ui:387
 msgid "Encryption Fingerprint"
 msgstr "Cifrado de huella dactilar"
 
-#: panels/sharing/cc-sharing-panel.ui:411
+#: panels/sharing/cc-sharing-panel.ui:388
 msgid ""
 "The encryption fingerprint can be seen in connecting clients and should be "
 "identical."
@@ -6935,15 +6960,15 @@ msgstr ""
 "El cifrado de huella dactilar se puede ver en los clientes que se conectan y "
 "debe ser idéntica."
 
-#: panels/sharing/cc-sharing-panel.ui:443
+#: panels/sharing/cc-sharing-panel.ui:420
 msgid "Media Sharing"
 msgstr "Compartición multimedia"
 
-#: panels/sharing/cc-sharing-panel.ui:465
+#: panels/sharing/cc-sharing-panel.ui:442
 msgid "Share music, photos and videos over the network."
 msgstr "Compartir música, fotos y vídeos mediante la red."
 
-#: panels/sharing/cc-sharing-panel.ui:478
+#: panels/sharing/cc-sharing-panel.ui:455
 msgid "Folders"
 msgstr "Carpetas"
 
@@ -7620,8 +7645,8 @@ msgstr "Hacer más sencillo de ver, escuchar, escribir y apuntar y pulsar"
 msgid ""
 "Keyboard;Mouse;a11y;Accessibility;Universal Access;Contrast;Cursor;Sound;"
 "Zoom;Screen;Reader;big;high;large;text;font;size;AccessX;Sticky;Keys;Slow;"
-"Bounce;Mouse;Double;click;Delay;Speed;Assist;Repeat;Blink;visual;hearing;"
-"audio;typing;animations;"
+"Bounce;Mouse;Double;click;Delay;Speed;Assist;Repeat;Blink;Pointer;find;"
+"locate;visual;hearing;audio;typing;animations;"
 msgstr ""
 "Teclado;Ratón;a11y;Accesibilidad;Acceso universal;Contraste;Cursor;Sonido;"
 "Ampliación;Pantalla;Lector;grande;alto;texto;tipografía;AccesoX;persistentes;"
@@ -7679,7 +7704,7 @@ msgstr "Falló al iniciar sesión en el dominio"
 msgid "Unable to find the domain. Maybe you misspelled it?"
 msgstr "No se pudo encontrar el dominio. ¿Está bien escrito?"
 
-#: panels/user-accounts/cc-add-user-dialog.ui:15
+#: panels/user-accounts/cc-add-user-dialog.ui:13
 #: panels/user-accounts/data/join-dialog.ui:9
 msgid "Add User"
 msgstr "Añadir usuario"
@@ -7689,7 +7714,7 @@ msgid "Administrator"
 msgstr "Administrador"
 
 #: panels/user-accounts/cc-add-user-dialog.ui:135
-#: panels/user-accounts/cc-user-panel.ui:211
+#: panels/user-accounts/cc-user-panel.ui:169
 msgid ""
 "Administrators have extra abilities, including adding and removing users, "
 "changing login settings, and removing software. Parental controls cannot be "
@@ -8026,81 +8051,54 @@ msgstr "Contraseña no válida, inténtelo de nuevo"
 msgid "Couldn’t connect to the %s domain: %s"
 msgstr "No se pudo conectar al dominio %s: %s"
 
-#: panels/user-accounts/cc-user-panel.c:362
-msgid "Failed to delete user"
-msgstr "Falló al eliminar el usuario"
-
-#: panels/user-accounts/cc-user-panel.c:417
-#: panels/user-accounts/cc-user-panel.c:472
-#: panels/user-accounts/cc-user-panel.c:518
-msgid "Failed to revoke remotely managed user"
-msgstr "Falló al revocar remotamente el usuario gestionado"
-
-#: panels/user-accounts/cc-user-panel.c:567
-msgid "You cannot delete your own account."
-msgstr "No puede eliminar su propia cuenta."
-
-#: panels/user-accounts/cc-user-panel.c:576
+#: panels/user-accounts/cc-user-panel.c:349
 #, c-format
-msgid "%s is still logged in"
-msgstr "%s aún está registrado en el sistema"
+msgid "Failed to delete user: %s"
+msgstr "Falló al eliminar el usuario: %s"
 
-#: panels/user-accounts/cc-user-panel.c:580
-msgid ""
-"Deleting a user while they are logged in can leave the system in an "
-"inconsistent state."
-msgstr ""
-"Eliminar un usuario mientras está registrado en el sistema puede dejar el "
-"sistema en un estado inconsistente."
+#: panels/user-accounts/cc-user-panel.c:404
+#: panels/user-accounts/cc-user-panel.c:459
+#: panels/user-accounts/cc-user-panel.c:505
+#, c-format
+msgid "Failed to revoke remotely managed user: %s"
+msgstr "Falló al revocar remotamente el usuario gestionado: %s"
 
-#: panels/user-accounts/cc-user-panel.c:594
+#: panels/user-accounts/cc-user-panel.c:545
 #, c-format
 msgid "Remove %s?"
 msgstr "¿Quitar %s?"
 
-#: panels/user-accounts/cc-user-panel.c:603
+#: panels/user-accounts/cc-user-panel.c:553
 #, c-format
 msgid "Are you sure you want to revoke remotely managed %s’s account?"
 msgstr ""
 "¿Está seguro de que quiere revocar remotamente la cuenta gestionada de %s?"
 
-#: panels/user-accounts/cc-user-panel.c:607
-msgid "_Delete"
-msgstr "_Eliminar"
-
-#: panels/user-accounts/cc-user-panel.c:657
+#: panels/user-accounts/cc-user-panel.c:591
 msgctxt "Password mode"
 msgid "Account disabled"
 msgstr "Cuenta desactivada"
 
-#: panels/user-accounts/cc-user-panel.c:665
+#: panels/user-accounts/cc-user-panel.c:599
 msgctxt "Password mode"
 msgid "To be set at next login"
 msgstr "Para configurar en el siguiente inicio de sesión"
 
-#: panels/user-accounts/cc-user-panel.c:668
+#: panels/user-accounts/cc-user-panel.c:602
 msgctxt "Password mode"
 msgid "None"
 msgstr "Ninguno"
 
-#: panels/user-accounts/cc-user-panel.c:1141
-msgid "Failed to contact the accounts service"
-msgstr "Falló al contactar con el servicio de cuentas"
-
-#: panels/user-accounts/cc-user-panel.c:1143
-msgid "Please make sure that the AccountService is installed and enabled."
-msgstr "Asegúrese de que el servicio de cuentas está instalado y activado."
-
-#: panels/user-accounts/cc-user-panel.c:1165
+#: panels/user-accounts/cc-user-panel.c:1035
 msgid "This panel must be unlocked to change this setting"
 msgstr "Se debe desbloquear este panel para cambiar esta opción"
 
-#: panels/user-accounts/cc-user-panel.c:1234
+#: panels/user-accounts/cc-user-panel.c:1104
 msgid "Delete the selected user account"
 msgstr "Quitar la cuenta de usuario seleccionada"
 
-#: panels/user-accounts/cc-user-panel.c:1238
-#: panels/user-accounts/cc-user-panel.c:1346
+#: panels/user-accounts/cc-user-panel.c:1108
+#: panels/user-accounts/cc-user-panel.c:1216
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -8108,7 +8106,7 @@ msgstr ""
 "Para eliminar la cuenta de usuario seleccionada\n"
 "pulse primero el icono *"
 
-#: panels/user-accounts/cc-user-panel.c:1392
+#: panels/user-accounts/cc-user-panel.c:1262
 msgid "Unlock to add users and change settings"
 msgstr "Desbloquear para añadir usuarios y cambiar la configuración"
 
@@ -8117,32 +8115,20 @@ msgstr "Desbloquear para añadir usuarios y cambiar la configuración"
 msgid "Users"
 msgstr "Usuarios"
 
-#: panels/user-accounts/cc-user-panel.ui:64
-msgid "Your session needs to be restarted for changes to take effect"
-msgstr "Debe reiniciar la sesión para que se apliquen los cambios"
-
-#: panels/user-accounts/cc-user-panel.ui:71
-msgid "Restart Now"
-msgstr "Reiniciar ahora"
-
-#: panels/user-accounts/cc-user-panel.ui:80
-msgid "Close"
-msgstr "Cerrar"
-
-#: panels/user-accounts/cc-user-panel.ui:121
+#: panels/user-accounts/cc-user-panel.ui:79
 msgid "Edit avatar"
 msgstr "Editar avatar"
 
 #. FIXME
-#: panels/user-accounts/cc-user-panel.ui:171
+#: panels/user-accounts/cc-user-panel.ui:129
 msgid "_Fingerprint Login"
 msgstr "Inicio de sesión con _huella"
 
-#: panels/user-accounts/cc-user-panel.ui:180
+#: panels/user-accounts/cc-user-panel.ui:138
 msgid "A_utomatic Login"
 msgstr "_Inicio de sesión automático"
 
-#: panels/user-accounts/cc-user-panel.ui:186
+#: panels/user-accounts/cc-user-panel.ui:144
 msgid ""
 "Automatic login opens the user account when the device starts, without "
 "requiring authentication. Authentication is still required at other times, "
@@ -8152,40 +8138,43 @@ msgstr ""
 "dispositivo, sin solicitar autenticación. Esta autenticación todavía se "
 "requiere otras veces, tales como al desbloquear la pantalla."
 
-#: panels/user-accounts/cc-user-panel.ui:204
+#: panels/user-accounts/cc-user-panel.ui:162
 msgid "_Administrator"
 msgstr "_Administrador"
 
-#: panels/user-accounts/cc-user-panel.ui:226
+#: panels/user-accounts/cc-user-panel.ui:184
 msgid "_Parental Controls"
 msgstr "Controles _parentales"
 
-#: panels/user-accounts/cc-user-panel.ui:227
+#: panels/user-accounts/cc-user-panel.ui:185
 msgid "Open the Parental Controls app."
 msgstr "Abrir la aplicación de control parental."
 
-#: panels/user-accounts/cc-user-panel.ui:261
+#: panels/user-accounts/cc-user-panel.ui:219
 msgid "Other Users"
 msgstr "Otros usuarios"
 
-#: panels/user-accounts/cc-user-panel.ui:279
+#: panels/user-accounts/cc-user-panel.ui:237
 msgid "_Remove User…"
 msgstr "_Quitar usuario…"
 
-#: panels/user-accounts/cc-user-panel.ui:289
+#: panels/user-accounts/cc-user-panel.ui:248
+msgid "Users cannot be removed while logged in"
+msgstr "Los usuarios no se pueden eliminar mientras tengan la sesión iniciada"
+
+#: panels/user-accounts/cc-user-panel.ui:254
 msgid "_Add User…"
 msgstr "_Añadir usuario…"
 
-#. Translators: This is the empty state page label which states that there are no users to show in the panel.
-#: panels/user-accounts/cc-user-panel.ui:318
-msgid "No Users Found"
-msgstr "No se han encontrado usuarios"
+#: panels/user-accounts/cc-user-panel.ui:271
+msgid "Error: Unable to Show User Settings"
+msgstr "Error: no se puede mostrar la configuración del usuario"
 
-#: panels/user-accounts/cc-user-panel.ui:327
-msgid "Unlock to add a user account."
-msgstr "Desbloquear para añadir una cuenta de usuario."
+#: panels/user-accounts/cc-user-panel.ui:272
+msgid "The system component `AccountsService` cannot be found"
+msgstr "No se puede encontrar el componente del sistema «AccountsService»"
 
-#: panels/user-accounts/cc-user-panel.ui:342
+#: panels/user-accounts/cc-user-panel.ui:291
 msgid ""
 "The user will not be able to use this device once their account has been "
 "removed."
@@ -8193,9 +8182,13 @@ msgstr ""
 "EL usuario no podrá usar este dispositivo una vez que se haya eliminado su "
 "cuenta."
 
-#: panels/user-accounts/cc-user-panel.ui:354
+#: panels/user-accounts/cc-user-panel.ui:303
 msgid "Delete Files and Settings"
 msgstr "Eliminar archivos y configuración"
+
+#: panels/user-accounts/cc-user-panel.ui:324
+msgid "_Delete"
+msgstr "_Eliminar"
 
 #: panels/user-accounts/data/gnome-user-accounts-panel.desktop.in:4
 msgid "Add or remove users and change your password"
@@ -9152,6 +9145,10 @@ msgstr "_Bloquear tarjeta SIM con PIN"
 msgid "Change PIN"
 msgstr "Cambiar PIN"
 
+#: panels/wwan/cc-wwan-sim-lock-dialog.ui:123
+msgid "New PIN"
+msgstr "Nuevo PIN"
+
 #: panels/wwan/cc-wwan-sim-lock-dialog.ui:201
 msgid "Enter current PIN to change SIM lock settings"
 msgstr ""
@@ -9346,6 +9343,41 @@ msgstr[1] "%u entradas"
 #: subprojects/gvc/gvc-mixer-control.c:2882
 msgid "System Sounds"
 msgstr "Sonidos del sistema"
+
+#~ msgid "You cannot delete your own account."
+#~ msgstr "No puede eliminar su propia cuenta."
+
+#, c-format
+#~ msgid "%s is still logged in"
+#~ msgstr "%s aún está registrado en el sistema"
+
+#~ msgid ""
+#~ "Deleting a user while they are logged in can leave the system in an "
+#~ "inconsistent state."
+#~ msgstr ""
+#~ "Eliminar un usuario mientras está registrado en el sistema puede dejar el "
+#~ "sistema en un estado inconsistente."
+
+#~ msgid "Failed to contact the accounts service"
+#~ msgstr "Falló al contactar con el servicio de cuentas"
+
+#~ msgid "Please make sure that the AccountService is installed and enabled."
+#~ msgstr "Asegúrese de que el servicio de cuentas está instalado y activado."
+
+#~ msgid "Your session needs to be restarted for changes to take effect"
+#~ msgstr "Debe reiniciar la sesión para que se apliquen los cambios"
+
+#~ msgid "Restart Now"
+#~ msgstr "Reiniciar ahora"
+
+#~ msgid "Close"
+#~ msgstr "Cerrar"
+
+#~ msgid "No Users Found"
+#~ msgstr "No se han encontrado usuarios"
+
+#~ msgid "Unlock to add a user account."
+#~ msgstr "Desbloquear para añadir una cuenta de usuario."
 
 #~ msgid "No apps"
 #~ msgstr "No hay aplicaciones"
@@ -10898,8 +10930,8 @@ msgstr "Sonidos del sistema"
 #~ msgstr "No se puede cambiar"
 
 #~ msgid ""
-#~ "Individual permissions for applications can be reviewed in the <a href="
-#~ "\"privacy\">Privacy</a> Settings."
+#~ "Individual permissions for applications can be reviewed in the <a "
+#~ "href=\"privacy\">Privacy</a> Settings."
 #~ msgstr ""
 #~ "Se pueden revisar los permisos individuales de cada aplicación en la "
 #~ "configuración de la <a href=\"privacy\">Privacidad</a>."
@@ -10979,9 +11011,6 @@ msgstr "Sonidos del sistema"
 
 #~ msgid "_Screen Reader"
 #~ msgstr "_Lector de pantalla"
-
-#~ msgid "_Copy"
-#~ msgstr "_Copiar"
 
 #~ msgid "Select _All"
 #~ msgstr "Seleccionar _todo"
@@ -11589,9 +11618,6 @@ msgstr "Sonidos del sistema"
 
 #~ msgid "Media Independent Interface (MII)"
 #~ msgstr "Interfaz independiente de medios (MII)"
-
-#~ msgid "10 Mb/s"
-#~ msgstr "10 Mb/s"
 
 #~ msgid "100 Mb/s"
 #~ msgstr "100 Mb/s"
