@@ -663,6 +663,14 @@ on_input_sources_listbox_selected_rows_changed_cb (CcInputChooser *self)
   gboolean sensitive = TRUE;
   GtkListBoxRow *row;
 
+  if (!self->input_sources_listbox)
+    {
+      /* The rows are changing because the GtkListBox is being destroyed.
+       * during CcInputChooser dispose. We must bail.
+       */
+      return;
+    }
+
   row = gtk_list_box_get_selected_row (self->input_sources_listbox);
   if (!row || g_object_get_data (G_OBJECT (row), "back"))
     sensitive = FALSE;
