@@ -37,6 +37,7 @@
 
 #define GNOME_DESKTOP_INPUT_SOURCES_DIR "org.gnome.desktop.input-sources"
 #define KEY_INPUT_SOURCES        "sources"
+#define KEY_MRU_SOURCES          "mru-sources"
 
 struct _CcInputListBox {
   AdwBin          parent_instance;
@@ -420,6 +421,8 @@ set_input_settings (CcInputListBox *self)
 {
   GVariantBuilder builder;
   GtkWidget *child;
+  GVariant *value;
+  GVariant *previous_value = g_settings_get_value (self->input_settings, KEY_INPUT_SOURCES);
 
   g_variant_builder_init (&builder, G_VARIANT_TYPE ("a(ss)"));
 
@@ -443,7 +446,24 @@ set_input_settings (CcInputListBox *self)
     }
   }
 
-  g_settings_set_value (self->input_settings, KEY_INPUT_SOURCES, g_variant_builder_end (&builder));
+  value = g_variant_ref_sink (g_variant_builder_end (&builder));
+  g_settings_set_value (self->input_settings, KEY_INPUT_SOURCES, value);
+
+  /* We need to make sure it's always possible to compute the current input
+   * source from the settings, e.g. so distro installers can distinguish between
+   * configured input sources vs. current input source. Writing the sources
+   * setting alone is insufficient. If the mru-sources setting has never been
+   * written, then the user has never changed input sources, and we can set
+   * mru-sources to the previous value of the sources setting to indicate that
+   * the first previously-configured input source is the current input source.
+   * If mru-sources has been written, then the user has changed input sources
+   * and we don't need to do anything extra.
+   */
+  if (g_settings_get_user_value (self->input_settings, KEY_MRU_SOURCES) == NULL)
+    g_settings_set_value (self->input_settings, KEY_MRU_SOURCES, previous_value);
+
+  g_variant_unref (value);
+  g_variant_unref (previous_value);
 }
 
 static void set_localed_input (CcInputListBox *self);
