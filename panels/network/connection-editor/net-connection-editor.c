@@ -199,8 +199,8 @@ static void
 update_complete (NetConnectionEditor *self,
                  gboolean             success)
 {
-        gtk_widget_set_visible (GTK_WIDGET (self), FALSE);
         g_signal_emit (self, signals[DONE], 0, success);
+        gtk_window_destroy (GTK_WINDOW (self));
 }
 
 static void
@@ -213,12 +213,12 @@ device_reapply_cb (GObject      *source_object,
         gboolean success = TRUE;
 
         if (!nm_device_reapply_finish (NM_DEVICE (source_object), res, &error)) {
-                if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
-                        g_warning ("Failed to reapply changes on device: %s", error->message);
+                g_warning ("Failed to reapply changes on device: %s", error->message);
                 success = FALSE;
         }
 
         update_complete (self, success);
+        g_object_unref (self);
 }
 
 static void
@@ -228,21 +228,19 @@ updated_connection_cb (GObject            *source_object,
 {
         NetConnectionEditor *self = user_data;
         g_autoptr(GError) error = NULL;
-        gboolean success = TRUE;
 
         if (!nm_remote_connection_commit_changes_finish (NM_REMOTE_CONNECTION (source_object),
                                                          res, &error)) {
-                if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
-                        g_warning ("Failed to commit changes: %s", error->message);
-                success = FALSE;
-                update_complete (self, success);
+                g_warning ("Failed to commit changes: %s", error->message);
+                update_complete (self, FALSE);
+                g_object_unref (self);
                 return;
         }
 
         nm_connection_clear_secrets (NM_CONNECTION (source_object));
 
         nm_device_reapply_async (self->device, NM_CONNECTION (self->orig_connection),
-                                 0, 0, self->cancellable, device_reapply_cb, self);
+                                 0, 0, NULL, device_reapply_cb, self /* owned */);
 }
 
 static void
@@ -255,16 +253,15 @@ added_connection_cb (GObject            *source_object,
         gboolean success = TRUE;
 
         if (!nm_client_add_connection_finish (NM_CLIENT (source_object), res, &error)) {
-                if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
-                        g_warning ("Failed to add connection: %s", error->message);
+                g_warning ("Failed to add connection: %s", error->message);
                 success = FALSE;
-                /* Leave the editor open */
                 update_complete (self, success);
+                g_object_unref (self);
                 return;
         }
 
         nm_device_reapply_async (self->device, NM_CONNECTION (self->orig_connection),
-                                 0, 0, self->cancellable, device_reapply_cb, self);
+                                 0, 0, NULL, device_reapply_cb, self /* owned */);
 }
 
 static void
@@ -278,17 +275,18 @@ apply_clicked_cb (NetConnectionEditor *self)
                 nm_client_add_connection_async (self->client,
                                                 self->orig_connection,
                                                 TRUE,
-                                                self->cancellable,
+                                                NULL,
                                                 added_connection_cb,
-                                                self);
+                                                g_object_ref (self));
         } else {
                 nm_remote_connection_commit_changes_async (NM_REMOTE_CONNECTION (self->orig_connection),
                                                            TRUE,
-                                                           self->cancellable,
-                                                           updated_connection_cb, self);
+                                                           NULL,
+                                                           updated_connection_cb,
+                                                           g_object_ref (self));
         }
 
-        gtk_window_destroy (GTK_WINDOW (self));
+        gtk_widget_set_visible (GTK_WIDGET (self), FALSE);
 }
 
 static void
