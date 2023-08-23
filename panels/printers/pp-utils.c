@@ -119,7 +119,7 @@ normalize (const gchar *input_string)
       g_autofree gchar *tmp = g_strstrip (g_ascii_strdown (input_string, -1));
       if (tmp)
         {
-          g_autofree gchar *res = g_new (gchar, 2 * strlen (tmp));
+          g_autofree gchar *res = g_new (gchar, 2 * strlen (tmp) + 1);
 
           for (i = 0; i < strlen (tmp); i++)
             {
