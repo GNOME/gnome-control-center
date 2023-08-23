@@ -250,6 +250,10 @@ test:
         ninja dist -C _build
       fi
 
+  artifacts:
+    reports:
+        junit: "_build/meson-logs/testlog.junit.xml"
+
   except:
     variables:
       - $CI_PIPELINE_SOURCE == "schedule"
