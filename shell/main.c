@@ -78,7 +78,7 @@ main (gint    argc,
 
   if (!is_supported_desktop ())
     {
-      g_message ("Running gnome-control-center is only supported under GNOME and Unity, exiting");
+      g_printerr ("Running gnome-control-center is only supported under GNOME and Unity, exiting\n");
       return 1;
     }
 
