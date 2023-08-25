@@ -271,6 +271,11 @@ apply_clicked_cb (NetConnectionEditor *self)
 
         eap_method_ca_cert_ignore_save (self->connection);
 
+        if (!self->device) {
+                update_complete (self, TRUE);
+                return;
+        }
+
         if (self->is_new_connection) {
                 nm_client_add_connection_async (self->client,
                                                 self->orig_connection,
