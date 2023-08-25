@@ -1,3 +1,5 @@
+find_program('setxkbmap')
+
 test_units = [
   'test-keyboard-shortcuts'
 ]
