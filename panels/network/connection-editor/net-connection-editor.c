@@ -213,7 +213,8 @@ device_reapply_cb (GObject      *source_object,
         gboolean success = TRUE;
 
         if (!nm_device_reapply_finish (NM_DEVICE (source_object), res, &error)) {
-                g_warning ("Failed to reapply changes on device: %s", error->message);
+                if (!g_error_matches (error, NM_DEVICE_ERROR, NM_DEVICE_ERROR_NOT_ACTIVE))
+                        g_warning ("Failed to reapply changes on device: %s", error->message);
                 success = FALSE;
         }
 
