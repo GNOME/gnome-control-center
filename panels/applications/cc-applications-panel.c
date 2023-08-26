@@ -1743,8 +1743,18 @@ notify_collapsed_cb (CcApplicationsPanel *self)
 
   gtk_list_box_set_selection_mode (self->sidebar_listbox, selection_mode);
 
-  if (!collapsed && self->current_app_id)
-    select_app (self, self->current_app_id, FALSE);
+  if (!collapsed)
+    {
+      if (self->current_app_id)
+        select_app (self, self->current_app_id, FALSE);
+      else
+        {
+          GtkListBoxRow *row;
+
+          row = gtk_list_box_get_row_at_index (self->sidebar_listbox, 0);
+          row_activated_cb (self, row);
+        }
+    }
 }
 
 static void
