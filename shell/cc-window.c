@@ -429,7 +429,7 @@ on_split_view_collapsed_changed_cb (CcWindow *self)
   selection_mode = collapsed ? GTK_SELECTION_NONE : GTK_SELECTION_SINGLE;
   cc_panel_list_set_selection_mode (self->panel_list, selection_mode);
 
-  if (collapsed && adw_navigation_view_get_visible_page (self->sidebar_view) == self->main_sidebar_page)
+  if (collapsed && self->current_panel && adw_navigation_view_get_visible_page (self->sidebar_view) == self->main_sidebar_page)
     {
       AdwNavigationPage *sidebar_widget;
       sidebar_widget = cc_panel_get_sidebar_widget (CC_PANEL (self->current_panel));
