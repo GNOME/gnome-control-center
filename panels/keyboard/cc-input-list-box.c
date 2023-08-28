@@ -459,7 +459,7 @@ set_input_settings (CcInputListBox *self)
    * and we don't need to do anything extra.
    */
   if (g_settings_get_user_value (self->input_settings, KEY_MRU_SOURCES) == NULL)
-    g_settings_set_value (self->input_settings, KEY_MRU_SOURCES, value);
+    g_settings_set_value (self->input_settings, KEY_MRU_SOURCES, previous_value);
 
   g_variant_unref (value);
   g_variant_unref (previous_value);
