@@ -24,6 +24,7 @@
 
 #define GNOME_DESKTOP_USE_UNSTABLE_API
 #include <libgnome-desktop/gnome-xkb-info.h>
+#include <libgnome-desktop/gnome-languages.h>
 
 #include "cc-input-list-box.h"
 #include "cc-input-chooser.h"
@@ -351,6 +352,75 @@ add_input_sources (CcInputListBox *self,
   }
 }
 
+static gboolean
+settings_have_input_sources (CcInputListBox *self)
+{
+  g_autoptr(GVariant) user_value = NULL;
+
+  user_value = g_settings_get_user_value (self->input_settings, KEY_INPUT_SOURCES);
+
+  return user_value != NULL;
+}
+
+static void
+on_got_default_sources (GObject      *source,
+                        GAsyncResult *res,
+                        gpointer      data)
+{
+  CcInputListBox *self = data;
+  g_autoptr (GError) error = NULL;
+  gboolean success = FALSE;
+  g_auto (GStrv) ids = NULL;
+  g_auto (GStrv) types = NULL;
+  gsize number_of_input_sources = 0;
+  gsize i;
+
+  success = gnome_get_default_input_sources_finish (res, &ids, &types, NULL, &error);
+
+  if (!success) {
+    g_warning ("Could not fetch default input sources: %s", error->message);
+    gtk_widget_set_visible (GTK_WIDGET (self->no_inputs_row), TRUE);
+    return;
+  }
+
+  number_of_input_sources = g_strv_length (ids);
+
+  if (number_of_input_sources == 0) {
+    gtk_widget_set_visible (GTK_WIDGET (self->no_inputs_row), TRUE);
+    return;
+  }
+
+  for (i = 0; ids[i] != NULL && types[i] != NULL; i++) {
+    g_autoptr(CcInputSource) source = NULL;
+    const char *id = ids[i];
+    const char *type = types[i];
+
+    if (g_str_equal (type, "xkb")) {
+      source = CC_INPUT_SOURCE (cc_input_source_xkb_new_from_id (self->xkb_info, id));
+    } else if (g_str_equal (type, "ibus")) {
+      source = CC_INPUT_SOURCE (cc_input_source_ibus_new (id));
+#ifdef HAVE_IBUS
+      if (self->ibus_engines) {
+	IBusEngineDesc *engine_desc = g_hash_table_lookup (self->ibus_engines, id);
+	if (engine_desc != NULL)
+	  cc_input_source_ibus_set_engine_desc (CC_INPUT_SOURCE_IBUS (source), engine_desc);
+	}
+#endif
+    } else {
+      g_warning ("Unhandled input source type '%s'", type);
+      continue;
+    }
+
+    add_input_row (self, source);
+  }
+}
+
+static void
+add_input_sources_from_defaults (CcInputListBox *self)
+{
+  gnome_get_default_input_sources (self->cancellable, on_got_default_sources, self);
+}
+
 static void
 add_input_sources_from_settings (CcInputListBox *self)
 {
@@ -402,6 +472,12 @@ input_sources_changed (CcInputListBox *self,
 {
   CcInputRow *selected;
   g_autoptr(CcInputSource) source = NULL;
+
+  if (!settings_have_input_sources (self)) {
+    clear_input_sources (self);
+    add_input_sources_from_defaults (self);
+    return;
+  }
 
   selected = CC_INPUT_ROW (gtk_list_box_get_selected_row (self->listbox));
   if (selected)
@@ -661,47 +737,6 @@ input_row_activated_cb (CcInputListBox *self, GtkListBoxRow *row)
 }
 
 static void
-add_input_sources_from_localed (CcInputListBox *self)
-{
-  g_autoptr(GVariant) layout_property = NULL;
-  g_autoptr(GVariant) variant_property = NULL;
-  const gchar *s;
-  g_auto(GStrv) layouts = NULL;
-  g_auto(GStrv) variants = NULL;
-  gint i, n;
-
-  if (!self->localed)
-    return;
-
-  layout_property = g_dbus_proxy_get_cached_property (self->localed, "X11Layout");
-  if (layout_property) {
-    s = g_variant_get_string (layout_property, NULL);
-    layouts = g_strsplit (s, ",", -1);
-  }
-
-  variant_property = g_dbus_proxy_get_cached_property (self->localed, "X11Variant");
-  if (variant_property) {
-    s = g_variant_get_string (variant_property, NULL);
-    if (s && *s)
-      variants = g_strsplit (s, ",", -1);
-  }
-
-  if (variants && variants[0])
-    n = MIN (g_strv_length (layouts), g_strv_length (variants));
-  else if (layouts && layouts[0])
-    n = g_strv_length (layouts);
-  else
-    n = 0;
-
-  for (i = 0; i < n && layouts[i][0]; i++) {
-    const char *variant = variants ? variants[i] : NULL;
-    g_autoptr(CcInputSourceXkb) source = cc_input_source_xkb_new (self->xkb_info, layouts[i], variant);
-    add_input_row (self, CC_INPUT_SOURCE (source));
-  }
-  gtk_widget_set_visible (GTK_WIDGET (self->no_inputs_row), n == 0);
-}
-
-static void
 set_localed_input (CcInputListBox *self)
 {
   g_autoptr(GString) layouts = NULL;
@@ -813,7 +848,10 @@ cc_input_list_box_init (CcInputListBox *self)
   g_signal_connect_object (self->input_settings, "changed::" KEY_INPUT_SOURCES,
                            G_CALLBACK (input_sources_changed), self, G_CONNECT_SWAPPED);
 
-  add_input_sources_from_settings (self);
+  if (!settings_have_input_sources (self))
+    add_input_sources_from_defaults (self);
+  else
+    add_input_sources_from_settings (self);
 }
 
 void
@@ -821,8 +859,8 @@ cc_input_list_box_set_login (CcInputListBox *self, gboolean login)
 {
   self->login = login;
   clear_input_sources (self);
-  if (login)
-    add_input_sources_from_localed (self);
+  if (login || !settings_have_input_sources (self))
+    add_input_sources_from_defaults (self);
   else
     add_input_sources_from_settings (self);
 }
