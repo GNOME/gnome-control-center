@@ -248,6 +248,9 @@ update_qr_image (CcWifiHotspotPage *self)
         return;
     }
 
+    if (!is_qr_code_supported (hotspot))
+        return;
+
     if (!self->qr_code)
         self->qr_code = cc_qr_code_new ();
 
@@ -255,6 +258,9 @@ update_qr_image (CcWifiHotspotPage *self)
     if (cc_qr_code_set_text (self->qr_code, str)) {
         GdkPaintable *paintable;
         gint scale;
+
+        adw_status_page_set_description (self->qrcode_status_page,
+                                         _("Mobile devices can scan the QR code to connect."));
 
         scale = gtk_widget_get_scale_factor (GTK_WIDGET (self->qrcode_status_page));
         paintable = cc_qr_code_get_paintable (self->qr_code, QR_IMAGE_SIZE * scale);
