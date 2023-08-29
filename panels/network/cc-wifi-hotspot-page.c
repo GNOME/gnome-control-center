@@ -53,6 +53,7 @@ struct _CcWifiHotspotPage
     gchar           *host_name;
     gboolean         wpa_supported; /* WPA/WPA2 supported */
   
+    GtkStack        *qrcode_stack;
     AdwStatusPage   *qrcode_status_page;
     CcListRow       *hotspot_name_row;
     CcListRow       *hotspot_security_row;
@@ -248,8 +249,11 @@ update_qr_image (CcWifiHotspotPage *self)
         return;
     }
 
-    if (!is_qr_code_supported (hotspot))
+    if (!is_qr_code_supported (hotspot)) {
+        gtk_stack_set_visible_child (self->qrcode_stack, GTK_WIDGET (self->qrcode_status_page));
+
         return;
+    }
 
     if (!self->qr_code)
         self->qr_code = cc_qr_code_new ();
@@ -265,6 +269,8 @@ update_qr_image (CcWifiHotspotPage *self)
         scale = gtk_widget_get_scale_factor (GTK_WIDGET (self->qrcode_status_page));
         paintable = cc_qr_code_get_paintable (self->qr_code, QR_IMAGE_SIZE * scale);
         adw_status_page_set_paintable (self->qrcode_status_page, paintable);
+
+        gtk_stack_set_visible_child (self->qrcode_stack, GTK_WIDGET (self->qrcode_status_page));
     }
 }
 
@@ -309,6 +315,7 @@ cc_wifi_hotspot_page_class_init (CcWifiHotspotPageClass *klass)
     gtk_widget_class_bind_template_child (widget_class, CcWifiHotspotPage, hotspot_name_row);
     gtk_widget_class_bind_template_child (widget_class, CcWifiHotspotPage, hotspot_security_row);
     gtk_widget_class_bind_template_child (widget_class, CcWifiHotspotPage, hotspot_password_row);
+    gtk_widget_class_bind_template_child (widget_class, CcWifiHotspotPage, qrcode_stack);
     gtk_widget_class_bind_template_child (widget_class, CcWifiHotspotPage, qrcode_status_page);
 
     gtk_widget_class_bind_template_callback (widget_class, update_hotspot_info);

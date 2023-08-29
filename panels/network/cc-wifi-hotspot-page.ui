@@ -18,18 +18,26 @@
           <object class="GtkBox" id="qr_code_page">
             <property name="orientation">vertical</property>
             <child>
-
-              <object class="AdwStatusPage" id="qrcode_status_page">
-                <property name="title" translatable="yes">Wi-Fi Hotspot Active</property>
+              <object class="GtkStack" id="qrcode_stack">
                 <child>
-                  <object class="GtkButton">
-                    <property name="halign">center</property>
-                    <property name="margin-top">12</property>
-                    <property name="label" translatable="yes">Turn Off Hotspot…</property>
-                    <signal name="clicked" handler="on_hotspot_turned_off_cb" object="CcWifiHotspotPage" swapped="yes"/>
-                    <style>
-                      <class name="destructive-action"/>
-                    </style>
+                  <object class="GtkSpinner">
+                    <property name="spinning">True</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="AdwStatusPage" id="qrcode_status_page">
+                    <property name="title" translatable="yes">Wi-Fi Hotspot Active</property>
+                    <child>
+                      <object class="GtkButton">
+                        <property name="halign">center</property>
+                        <property name="margin-top">12</property>
+                        <property name="label" translatable="yes">Turn Off Hotspot…</property>
+                        <signal name="clicked" handler="on_hotspot_turned_off_cb" object="CcWifiHotspotPage" swapped="yes"/>
+                        <style>
+                          <class name="destructive-action"/>
+                        </style>
+                      </object>
+                    </child>
                   </object>
                 </child>
               </object>
