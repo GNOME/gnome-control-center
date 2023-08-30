@@ -47,6 +47,7 @@
 static void nm_device_wifi_refresh_ui (NetDeviceWifi *self);
 static void show_wifi_list (NetDeviceWifi *self);
 static void show_hotspot_ui (NetDeviceWifi *self);
+static void nm_client_on_permission_change (NetDeviceWifi *self);
 
 
 struct _NetDeviceWifi
@@ -118,8 +119,12 @@ wireless_enabled_toggled (NetDeviceWifi *self)
 
         self->updating_device = TRUE;
         g_object_set (self->device_enable_row, "active", enabled, NULL);
-        if (!enabled)
+        if (!enabled) {
                 disable_scan_timeout (self);
+                gtk_widget_set_sensitive (GTK_WIDGET (self->hotspot_row), FALSE);
+        } else {
+                nm_client_on_permission_change(self);
+        }
         gtk_widget_set_sensitive (GTK_WIDGET (self->connect_hidden_row), enabled);
         self->updating_device = FALSE;
 }
@@ -1266,8 +1271,9 @@ nm_client_on_permission_change (NetDeviceWifi *self) {
         } else if (!(caps & (NM_WIFI_DEVICE_CAP_AP | NM_WIFI_DEVICE_CAP_ADHOC))) {
                 gtk_widget_set_tooltip_text (GTK_WIDGET (self->hotspot_row), _("Wireless device does not support Hotspot mode"));
                 gtk_widget_set_sensitive (GTK_WIDGET (self->hotspot_row), FALSE);
-        } else
-                gtk_widget_set_sensitive (GTK_WIDGET (self->hotspot_row), TRUE);
+        } else {
+                gtk_widget_set_sensitive (GTK_WIDGET (self->hotspot_row), nm_client_wireless_get_enabled (self->client));
+        }
 
 }
 
