@@ -197,9 +197,6 @@ update_search (CcPanelList *self)
     }
   else if (self->view == CC_PANEL_LIST_SEARCH)
     {
-      GtkSelectionMode selection_mode;
-      gboolean autoselect_panel;
-
       /* Don't autoselect first panel when going back from search view */
       self->autoselect_panel = FALSE;
 
