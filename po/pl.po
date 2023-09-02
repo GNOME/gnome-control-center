@@ -14,8 +14,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2023-08-25 15:55+0000\n"
-"PO-Revision-Date: 2023-08-25 17:57+0200\n"
+"POT-Creation-Date: 2023-08-31 19:12+0000\n"
+"PO-Revision-Date: 2023-09-02 15:29+0200\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <community-poland@mozilla.org>\n"
 "Language: pl\n"
@@ -80,7 +80,7 @@ msgstr "System plików"
 
 #: panels/applications/cc-applications-panel.c:847
 #: panels/keyboard/01-launchers.xml.in:6
-#: shell/appdata/org.gnome.Settings.appdata.xml.in:7 shell/cc-window.c:794
+#: shell/appdata/org.gnome.Settings.appdata.xml.in:7 shell/cc-window.c:802
 #: shell/cc-window.ui:24 shell/cc-window.ui:31
 #: shell/org.gnome.Settings.desktop.in:3
 msgid "Settings"
@@ -875,7 +875,7 @@ msgstr "Za_importuj plik…"
 
 #: panels/color/cc-color-panel.ui:390 panels/keyboard/cc-input-chooser.ui:18
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:41
-#: panels/network/connection-editor/net-connection-editor.c:606
+#: panels/network/connection-editor/net-connection-editor.c:610
 #: panels/printers/new-printer-dialog.ui:91
 #: panels/user-accounts/cc-add-user-dialog.ui:39
 msgid "_Add"
@@ -2729,7 +2729,7 @@ msgstr ""
 " Szczegóły błędu: usługa NetworkManager nie jest uruchomiona."
 
 #: panels/network/cc-network-panel.ui:46 panels/network/cc-network-panel.ui:80
-#: panels/network/connection-editor/net-connection-editor.c:694
+#: panels/network/connection-editor/net-connection-editor.c:698
 msgid "VPN"
 msgstr "VPN"
 
@@ -2768,6 +2768,10 @@ msgstr "Ręcznie"
 #: panels/network/cc-net-proxy-page.ui:23
 msgid "Save"
 msgstr "Zapisz"
+
+#: panels/network/cc-net-proxy-page.ui:40
+msgid "Network Proxy"
+msgstr "Pośrednik sieciowy"
 
 #: panels/network/cc-net-proxy-page.ui:52 panels/sound/cc-sound-panel.ui:82
 #: panels/sound/cc-sound-panel.ui:290
@@ -2859,33 +2863,33 @@ msgid "Scan to Connect"
 msgstr "Proszę zeskanować, aby się połączyć"
 
 #. TRANSLATORS: This happens when the connection name does not contain the SSID.
-#: panels/network/cc-wifi-connection-row.c:222
+#: panels/network/cc-wifi-connection-row.c:223
 #, c-format
 msgctxt "Wi-Fi Connection"
 msgid "%s (SSID: %s)"
 msgstr "%s (SSID: %s)"
 
-#: panels/network/cc-wifi-connection-row.c:282
+#: panels/network/cc-wifi-connection-row.c:283
 msgid "Insecure network (WEP)"
 msgstr "Niezabezpieczona sieć (WEP)"
 
-#: panels/network/cc-wifi-connection-row.c:286
+#: panels/network/cc-wifi-connection-row.c:287
 msgid "Secure network (WPA)"
 msgstr "Zabezpieczona sieć (WPA)"
 
-#: panels/network/cc-wifi-connection-row.c:290
+#: panels/network/cc-wifi-connection-row.c:291
 msgid "Secure network (WPA2)"
 msgstr "Zabezpieczona sieć (WPA2)"
 
-#: panels/network/cc-wifi-connection-row.c:294
+#: panels/network/cc-wifi-connection-row.c:295
 msgid "Secure network (WPA3)"
 msgstr "Zabezpieczona sieć (WPA3)"
 
-#: panels/network/cc-wifi-connection-row.c:298
+#: panels/network/cc-wifi-connection-row.c:299
 msgid "Secure network"
 msgstr "Zabezpieczona sieć"
 
-#: panels/network/cc-wifi-connection-row.c:327
+#: panels/network/cc-wifi-connection-row.c:328
 #, c-format
 msgid "Signal strength %d%%"
 msgstr "Siła sygnału %d%%"
@@ -3340,7 +3344,7 @@ msgid "WPA3 Personal"
 msgstr "WPA3 Personal"
 
 #: panels/network/connection-editor/ce-page-wireguard.c:106
-#: panels/network/connection-editor/net-connection-editor.c:854
+#: panels/network/connection-editor/net-connection-editor.c:858
 msgid "WireGuard"
 msgstr "WireGuard"
 
@@ -3527,32 +3531,32 @@ msgstr "Automatycznie, tylko DHCP"
 msgid "Prefix"
 msgstr "Przedrostek"
 
-#: panels/network/connection-editor/net-connection-editor.c:368
+#: panels/network/connection-editor/net-connection-editor.c:372
 #, c-format
 msgid "Unable to open connection editor: %s"
 msgstr "Nie można otworzyć edytora połączeń: %s"
 
-#: panels/network/connection-editor/net-connection-editor.c:387
+#: panels/network/connection-editor/net-connection-editor.c:391
 msgid "New Profile"
 msgstr "Nowy profil"
 
-#: panels/network/connection-editor/net-connection-editor.c:454
+#: panels/network/connection-editor/net-connection-editor.c:458
 #, c-format
 msgid "Invalid setting %s: %s"
 msgstr "Nieprawidłowe ustawienie %s: %s"
 
-#: panels/network/connection-editor/net-connection-editor.c:457
+#: panels/network/connection-editor/net-connection-editor.c:461
 #, c-format
 msgid "Invalid setting %s"
 msgstr "Nieprawidłowe ustawienie %s"
 
-#: panels/network/connection-editor/net-connection-editor.c:735
+#: panels/network/connection-editor/net-connection-editor.c:739
 #, c-format
 msgid "Invalid VPN configuration file"
 msgstr "Nieprawidłowy plik konfiguracji VPN"
 
 #. Translators: VPN add dialog Wireguard description
-#: panels/network/connection-editor/net-connection-editor.c:842
+#: panels/network/connection-editor/net-connection-editor.c:846
 msgid ""
 "Free and open-source VPN solution designed for ease of use, high speed "
 "performance and low attack surface."
@@ -3561,11 +3565,11 @@ msgstr ""
 "zaprojektowana pod kątem łatwości użycia, wysokiej prędkości i małej "
 "powierzchni podatnej na ataki."
 
-#: panels/network/connection-editor/net-connection-editor.c:878
+#: panels/network/connection-editor/net-connection-editor.c:882
 msgid "Import from file…"
 msgstr "Zaimportuj z pliku…"
 
-#: panels/network/connection-editor/net-connection-editor.c:904
+#: panels/network/connection-editor/net-connection-editor.c:908
 msgid "Add VPN"
 msgstr "Dodanie połączenia VPN"
 
