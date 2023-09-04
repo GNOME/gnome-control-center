@@ -21,7 +21,7 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2023-08-27 12:09+0000\n"
+"POT-Creation-Date: 2023-08-31 19:12+0000\n"
 "PO-Revision-Date: 2023-08-28 09:00+0200\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Spanish - Spain <gnome-es-list@gnome.org>\n"
@@ -87,7 +87,7 @@ msgstr "Sistema de achivos"
 
 #: panels/applications/cc-applications-panel.c:847
 #: panels/keyboard/01-launchers.xml.in:6
-#: shell/appdata/org.gnome.Settings.appdata.xml.in:7 shell/cc-window.c:794
+#: shell/appdata/org.gnome.Settings.appdata.xml.in:7 shell/cc-window.c:802
 #: shell/cc-window.ui:24 shell/cc-window.ui:31
 #: shell/org.gnome.Settings.desktop.in:3
 msgid "Settings"
@@ -879,7 +879,7 @@ msgstr "_Importar archivo…"
 
 #: panels/color/cc-color-panel.ui:390 panels/keyboard/cc-input-chooser.ui:18
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:41
-#: panels/network/connection-editor/net-connection-editor.c:606
+#: panels/network/connection-editor/net-connection-editor.c:610
 #: panels/printers/new-printer-dialog.ui:91
 #: panels/user-accounts/cc-add-user-dialog.ui:39
 msgid "_Add"
@@ -2570,7 +2570,7 @@ msgstr "Velocidad del puntero"
 
 #: panels/mouse/cc-mouse-panel.ui:230
 msgid "Clicking"
-msgstr "Pulsacioń"
+msgstr "Pulsación"
 
 #: panels/mouse/cc-mouse-panel.ui:235
 msgid "Tap to Click"
@@ -2729,7 +2729,7 @@ msgstr ""
 " Detalles de error: NetworkManager no está en ejecución."
 
 #: panels/network/cc-network-panel.ui:46 panels/network/cc-network-panel.ui:80
-#: panels/network/connection-editor/net-connection-editor.c:694
+#: panels/network/connection-editor/net-connection-editor.c:698
 msgid "VPN"
 msgstr "VPN"
 
@@ -2768,6 +2768,10 @@ msgstr "Manual"
 #: panels/network/cc-net-proxy-page.ui:23
 msgid "Save"
 msgstr "Guardar"
+
+#: panels/network/cc-net-proxy-page.ui:40
+msgid "Network Proxy"
+msgstr "Proxy de la red"
 
 #: panels/network/cc-net-proxy-page.ui:52 panels/sound/cc-sound-panel.ui:82
 #: panels/sound/cc-sound-panel.ui:290
@@ -2858,33 +2862,33 @@ msgid "Scan to Connect"
 msgstr "Escanear para conectarse"
 
 #. TRANSLATORS: This happens when the connection name does not contain the SSID.
-#: panels/network/cc-wifi-connection-row.c:222
+#: panels/network/cc-wifi-connection-row.c:223
 #, c-format
 msgctxt "Wi-Fi Connection"
 msgid "%s (SSID: %s)"
 msgstr "%s (SSID: %s)"
 
-#: panels/network/cc-wifi-connection-row.c:282
+#: panels/network/cc-wifi-connection-row.c:283
 msgid "Insecure network (WEP)"
 msgstr "Red insegura (WEP)"
 
-#: panels/network/cc-wifi-connection-row.c:286
+#: panels/network/cc-wifi-connection-row.c:287
 msgid "Secure network (WPA)"
 msgstr "Red segura (WPA)"
 
-#: panels/network/cc-wifi-connection-row.c:290
+#: panels/network/cc-wifi-connection-row.c:291
 msgid "Secure network (WPA2)"
 msgstr "Red segura (WPA2)"
 
-#: panels/network/cc-wifi-connection-row.c:294
+#: panels/network/cc-wifi-connection-row.c:295
 msgid "Secure network (WPA3)"
 msgstr "Red segura (WPA3)"
 
-#: panels/network/cc-wifi-connection-row.c:298
+#: panels/network/cc-wifi-connection-row.c:299
 msgid "Secure network"
 msgstr "Red segura"
 
-#: panels/network/cc-wifi-connection-row.c:327
+#: panels/network/cc-wifi-connection-row.c:328
 #, c-format
 msgid "Signal strength %d%%"
 msgstr "Fuerza de la señal %d%%"
@@ -3338,7 +3342,7 @@ msgid "WPA3 Personal"
 msgstr "WPA3 personal"
 
 #: panels/network/connection-editor/ce-page-wireguard.c:106
-#: panels/network/connection-editor/net-connection-editor.c:854
+#: panels/network/connection-editor/net-connection-editor.c:858
 msgid "WireGuard"
 msgstr "WireGuard"
 
@@ -3525,32 +3529,32 @@ msgstr "Automático, DHCP únicamente"
 msgid "Prefix"
 msgstr "Prefijo"
 
-#: panels/network/connection-editor/net-connection-editor.c:368
+#: panels/network/connection-editor/net-connection-editor.c:372
 #, c-format
 msgid "Unable to open connection editor: %s"
 msgstr "No se pudo abrir el editor de conexiones: %s"
 
-#: panels/network/connection-editor/net-connection-editor.c:387
+#: panels/network/connection-editor/net-connection-editor.c:391
 msgid "New Profile"
 msgstr "Perfil nuevo"
 
-#: panels/network/connection-editor/net-connection-editor.c:454
+#: panels/network/connection-editor/net-connection-editor.c:458
 #, c-format
 msgid "Invalid setting %s: %s"
 msgstr "Ajuste %s no válido: %s"
 
-#: panels/network/connection-editor/net-connection-editor.c:457
+#: panels/network/connection-editor/net-connection-editor.c:461
 #, c-format
 msgid "Invalid setting %s"
 msgstr "Ajuste no válido %s"
 
-#: panels/network/connection-editor/net-connection-editor.c:735
+#: panels/network/connection-editor/net-connection-editor.c:739
 #, c-format
 msgid "Invalid VPN configuration file"
 msgstr "Archivo de configuración de VPN no válido"
 
 #. Translators: VPN add dialog Wireguard description
-#: panels/network/connection-editor/net-connection-editor.c:842
+#: panels/network/connection-editor/net-connection-editor.c:846
 msgid ""
 "Free and open-source VPN solution designed for ease of use, high speed "
 "performance and low attack surface."
@@ -3558,11 +3562,11 @@ msgstr ""
 "Solución de VPN libre y de código abierto diseñada para se fácil de usar, "
 "con un alto rendimiento y baja exposición frente a ataques."
 
-#: panels/network/connection-editor/net-connection-editor.c:878
+#: panels/network/connection-editor/net-connection-editor.c:882
 msgid "Import from file…"
 msgstr "Importar desde un archivo…"
 
-#: panels/network/connection-editor/net-connection-editor.c:904
+#: panels/network/connection-editor/net-connection-editor.c:908
 msgid "Add VPN"
 msgstr "Añadir VPN"
 
@@ -10083,9 +10087,6 @@ msgstr "Sonidos del sistema"
 
 #~ msgid "This is not recommended for untrusted public networks."
 #~ msgstr "No se recomienda para redes públicas en las que no se confía."
-
-#~ msgid "Network Proxy"
-#~ msgstr "Proxy de la red"
 
 #~ msgid "_Socks Host"
 #~ msgstr "_Servidor socks"
