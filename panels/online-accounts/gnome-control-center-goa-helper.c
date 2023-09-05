@@ -476,7 +476,7 @@ log_handler (const gchar    *domain,
              const gchar    *message,
              gpointer        user_data)
 {
-  g_printerr ("%s: %s", domain, message);
+  g_printerr ("%s: %s\n", domain, message);
 }
 
 int
@@ -492,6 +492,12 @@ main (int    argc,
   if (argc < 2)
     return EXIT_FAILURE;
 
+  /*
+  * This helper currently communicates to the gnome-control-center parent process
+  * by writing information to stdout using g_print. Therefore we need
+  * a custom logging handler, so to not write logs into stdout,
+  * which would confuse the parent process.
+  */
   g_log_set_default_handler (log_handler, NULL);
 
   for (i = 0; i < G_N_ELEMENTS (commands); i++)
