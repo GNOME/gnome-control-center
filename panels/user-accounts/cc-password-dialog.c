@@ -208,6 +208,8 @@ update_sensitivity (CcPasswordDialog *self)
                 can_change = TRUE;
         }
 
+        gtk_widget_set_sensitive (GTK_WIDGET (self->password_entry), self->old_password_ok);
+        gtk_widget_set_sensitive (GTK_WIDGET (self->verify_entry), self->old_password_ok);
         gtk_widget_set_sensitive (GTK_WIDGET (self->ok_button), can_change);
 }
 
@@ -218,8 +220,8 @@ mode_change (CcPasswordDialog *self,
         gboolean active;
 
         active = (mode == ACT_USER_PASSWORD_MODE_REGULAR);
-        gtk_widget_set_sensitive (GTK_WIDGET (self->password_entry), active);
-        gtk_widget_set_sensitive (GTK_WIDGET (self->verify_entry), active);
+        gtk_widget_set_sensitive (GTK_WIDGET (self->password_entry), self->old_password_ok);
+        gtk_widget_set_sensitive (GTK_WIDGET (self->verify_entry), self->old_password_ok);
         gtk_widget_set_sensitive (GTK_WIDGET (self->old_password_entry), active);
         gtk_check_button_set_active (GTK_CHECK_BUTTON (self->action_now_radio), active);
         gtk_check_button_set_active (GTK_CHECK_BUTTON (self->action_login_radio), !active);
@@ -395,6 +397,8 @@ old_password_entry_changed (CcPasswordDialog *self)
         gtk_widget_set_sensitive (GTK_WIDGET (self->ok_button), FALSE);
 
         self->old_password_ok = FALSE;
+        gtk_widget_set_sensitive (GTK_WIDGET (self->password_entry), self->old_password_ok);
+        gtk_widget_set_sensitive (GTK_WIDGET (self->verify_entry), self->old_password_ok);
         self->old_password_entry_timeout_id = g_timeout_add (PASSWORD_CHECK_TIMEOUT,
                                                              (GSourceFunc) old_password_entry_timeout,
                                                              self);
