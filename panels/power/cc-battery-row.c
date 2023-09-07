@@ -285,7 +285,7 @@ cc_battery_row_new (UpDevice *device,
   /* Percentage label */
   if (battery_level == UP_DEVICE_LEVEL_NONE)
   {
-    s = g_strdup_printf ("%d%%", (int)percentage);
+    s = g_strdup_printf ("%d %%", (int)percentage);
     gtk_label_set_text (self->percentage_label, s);
     gtk_label_set_text (self->primary_percentage_label, s);
   }
