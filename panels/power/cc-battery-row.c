@@ -285,7 +285,8 @@ cc_battery_row_new (UpDevice *device,
   /* Percentage label */
   if (battery_level == UP_DEVICE_LEVEL_NONE)
   {
-    s = g_strdup_printf ("%d %%", (int)percentage);
+    /* TRANSLATORS: This is the battery charge level percentage (e.g. 50%). This could be localized to account for local Percent sign formatting guidelines. See https://en.wikipedia.org/wiki/Percent_sign#Correct_style */
+    s = g_strdup_printf (_("%d %%"), (int)percentage);
     gtk_label_set_text (self->percentage_label, s);
     gtk_label_set_text (self->primary_percentage_label, s);
   }
