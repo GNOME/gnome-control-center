@@ -246,6 +246,7 @@ row_layout_cb (CcInputListBox *self,
     commandline = g_strdup_printf (KEYBOARD_PREVIEWER_EXEC " %s",
 				   layout);
 
+  g_debug ("Launching keyboard previewer with command line: '%s'\n", commandline);
   g_spawn_command_line_async (commandline, NULL);
 }
 
