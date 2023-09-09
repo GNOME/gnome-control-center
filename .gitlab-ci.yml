@@ -227,8 +227,20 @@ build:
 ##
 # Stage: Test
 #
+# Runs static checks.
 # Runs the unit tests.
 ##
+style-check-diff:
+  extends:
+  - '.fdo.distribution-image@fedora'
+  - '.fedora.container.common'
+  needs:
+  - build.container.fedora@x86_64
+  stage: test
+  when: always
+  script:
+    - .gitlab-ci/run-style-check-diff.sh
+
 test:
   extends:
     - '.fdo.distribution-image@fedora'
