@@ -915,6 +915,17 @@ system_details_window_setup_overview (CcSystemDetailsWindow *self)
 }
 
 static void
+unset_focus (CcSystemDetailsWindow *self)
+{
+  GtkWidget *focus;
+
+  focus = gtk_window_get_focus (GTK_WINDOW (self));
+  if (GTK_IS_LABEL (focus))
+    gtk_label_select_region (GTK_LABEL (focus), 0, 0);
+  gtk_window_set_focus (GTK_WINDOW (self), NULL);
+}
+
+static void
 cc_system_details_window_class_init (CcSystemDetailsWindowClass *klass)
 {
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
@@ -952,6 +963,9 @@ cc_system_details_window_init (CcSystemDetailsWindow *self)
 
   system_details_window_setup_overview (self);
   system_details_window_setup_virt (self);
+
+  /* Workaround for issue gtk#4377, taken from gnome-software. See issue #2636. */
+  g_signal_connect_after (self, "show", G_CALLBACK (unset_focus), NULL);
 }
 
 CcSystemDetailsWindow *
