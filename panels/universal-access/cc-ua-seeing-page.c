@@ -169,11 +169,14 @@ ua_seeing_interface_settings_changed_cb (CcUaSeeingPage *self)
   if (self->is_self_change)
     return;
 
-  g_free (self->old_gtk_theme);
-  g_free (self->old_icon_theme);
+  if (!g_settings_get_boolean (self->a11y_interface_settings, KEY_HIGH_CONTRAST))
+    {
+      g_free (self->old_gtk_theme);
+      g_free (self->old_icon_theme);
 
-  self->old_gtk_theme = g_settings_get_string (self->interface_settings, KEY_GTK_THEME);
-  self->old_icon_theme = g_settings_get_string (self->interface_settings, KEY_ICON_THEME);
+      self->old_gtk_theme = g_settings_get_string (self->interface_settings, KEY_GTK_THEME);
+      self->old_icon_theme = g_settings_get_string (self->interface_settings, KEY_ICON_THEME);
+    }
 }
 
 static void
