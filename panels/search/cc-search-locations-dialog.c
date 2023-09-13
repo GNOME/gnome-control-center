@@ -649,7 +649,7 @@ add_file_chooser_response (GObject      *source,
   g_autoptr(Place) place = NULL;
   g_autoptr(GPtrArray) new_values = NULL;
   g_autoptr(GError) error = NULL;
-  g_autoptr(GFile) file = NULL;
+  GFile *file;
 
   file = gtk_file_dialog_select_folder_finish (file_dialog, res, &error);
   if (!file)
