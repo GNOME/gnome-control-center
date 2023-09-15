@@ -236,6 +236,9 @@ get_connection_security_type (NMConnection *c)
   if (g_strcmp0 (key_mgmt, "wpa-psk") == 0)
     return "WPA";
 
+  if (g_strcmp0 (key_mgmt, "sae") == 0)
+    return "SAE";
+
   return "nopass";
 }
 
@@ -264,7 +267,8 @@ is_qr_code_supported (NMConnection *c)
   key_mgmt = nm_setting_wireless_security_get_key_mgmt (setting);
 
   if (g_str_equal (key_mgmt, "none") ||
-      g_str_equal (key_mgmt, "wpa-psk"))
+      g_str_equal (key_mgmt, "wpa-psk") ||
+      g_str_equal (key_mgmt, "sae"))
     return TRUE;
 
   return FALSE;
