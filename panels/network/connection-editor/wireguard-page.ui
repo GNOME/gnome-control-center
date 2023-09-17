@@ -41,7 +41,7 @@
                   <object class="GtkLabel">
                     <property name="halign">end</property>
                     <property name="hexpand">0</property>
-                    <property name="label" translatable="1">_Interface Name</property>
+                    <property name="label" translatable="yes">_Interface Name</property>
                     <property name="use-underline">1</property>
                     <layout>
                       <property name="column">0</property>
@@ -51,7 +51,7 @@
                 </child>
                 <child>
                   <object class="GtkEntry" id="entry_ifname">
-                    <property name="tooltip-text" translatable="1">The name of the wireguard interface to create.</property>
+                    <property name="tooltip-text" translatable="yes">The name of the wireguard interface to create.</property>
                     <property name="hexpand">1</property>
                     <signal name="changed" handler="ce_page_changed" object="CEPageWireguard" swapped="yes"/>
                     <layout>
@@ -63,7 +63,7 @@
                 <child>
                   <object class="GtkLabel">
                     <property name="halign">end</property>
-                    <property name="label" translatable="1">_Private Key</property>
+                    <property name="label" translatable="yes">_Private Key</property>
                     <property name="use-underline">1</property>
                     <layout>
                       <property name="column">0</property>
@@ -73,12 +73,12 @@
                 </child>
                 <child>
                   <object class="GtkEntry" id="entry_private_key">
-                    <property name="tooltip-text" translatable="1">The 256 bit private key in base64 encoding</property>
+                    <property name="tooltip-text" translatable="yes">The 256 bit private key in base64 encoding</property>
                     <property name="visibility">0</property>
                     <property name="invisible-char">●</property>
                     <property name="truncate-multiline">1</property>
                     <property name="secondary-icon-name">dialog-password</property>
-                    <property name="secondary-icon-tooltip-text" translatable="1">Show/hide private key</property>
+                    <property name="secondary-icon-tooltip-text" translatable="yes">Show/hide private key</property>
                     <signal name="changed" handler="ce_page_changed" object="CEPageWireguard" swapped="yes"/>
                     <layout>
                       <property name="column">1</property>
@@ -90,7 +90,7 @@
                   <object class="GtkLabel">
                     <property name="halign">end</property>
                     <property name="hexpand">0</property>
-                    <property name="label" translatable="1">_Listen Port</property>
+                    <property name="label" translatable="yes">_Listen Port</property>
                     <property name="use-underline">1</property>
                     <layout>
                       <property name="column">0</property>
@@ -101,8 +101,8 @@
                 <child>
                   <object class="GtkSpinButton" id="spin_listen_port">
                     <property name="width-request">5</property>
-                    <property name="tooltip-text" translatable="1">A port to listen on. If set to &apos;automatic&apos;, the port will be chosen randomly when the interface comes up.</property>
-                    <property name="text" translatable="1">0</property>
+                    <property name="tooltip-text" translatable="yes">A port to listen on. If set to &apos;automatic&apos;, the port will be chosen randomly when the interface comes up.</property>
+                    <property name="text" translatable="yes">0</property>
                     <property name="adjustment">
                       <object class="GtkAdjustment">
                         <property name="upper">65535</property>
@@ -123,7 +123,7 @@
                   <object class="GtkLabel">
                     <property name="halign">end</property>
                     <property name="hexpand">0</property>
-                    <property name="label" translatable="1">_fwmark</property>
+                    <property name="label" translatable="yes">_fwmark</property>
                     <property name="use-underline">1</property>
                     <layout>
                       <property name="column">0</property>
@@ -134,8 +134,8 @@
                 <child>
                   <object class="GtkSpinButton" id="spin_fwmark">
                     <property name="width-request">10</property>
-                    <property name="tooltip-text" translatable="1">A 32-bit fwmark for outgoing packets. Leave it to &apos;off&apos; to disable fwmark.</property>
-                    <property name="text" translatable="1">0</property>
+                    <property name="tooltip-text" translatable="yes">A 32-bit fwmark for outgoing packets. Leave it to &apos;off&apos; to disable fwmark.</property>
+                    <property name="text" translatable="yes">0</property>
                     <property name="adjustment">
                       <object class="GtkAdjustment">
                         <property name="upper">4294967295</property>
@@ -155,7 +155,7 @@
                   <object class="GtkLabel">
                     <property name="halign">end</property>
                     <property name="hexpand">0</property>
-                    <property name="label" translatable="1">_MTU</property>
+                    <property name="label" translatable="yes">_MTU</property>
                     <property name="use-underline">1</property>
                     <layout>
                       <property name="column">0</property>
@@ -184,7 +184,7 @@
                 <child>
                   <object class="GtkLabel">
                     <property name="halign">start</property>
-                    <property name="label" translatable="1">bytes</property>
+                    <property name="label" translatable="yes">bytes</property>
                     <property name="justify">fill</property>
                     <layout>
                       <property name="column">2</property>
@@ -194,7 +194,7 @@
                 </child>
                 <child>
                   <object class="GtkCheckButton" id="checkbutton_peer_routes">
-                    <property name="label" translatable="1">_Add peer routes</property>
+                    <property name="label" translatable="yes">_Add peer routes</property>
                     <property name="halign">start</property>
                     <property name="use-underline">1</property>
                     <signal name="toggled" handler="ce_page_changed" object="CEPageWireguard" swapped="yes"/>
@@ -219,7 +219,7 @@
                         <child>
                           <object class="GtkLabel">
                             <property name="hexpand">1</property>
-                            <property name="label" translatable="1">_Peers</property>
+                            <property name="label" translatable="yes">_Peers</property>
                             <property name="use-underline">1</property>
                             <property name="xalign">0</property>
                             <attributes>
@@ -232,7 +232,7 @@
                             <property name="receives-default">1</property>
                             <property name="icon-name">list-add-symbolic</property>
                             <accessibility>
-                              <property name="label" translatable="Yes">Add WireGuard peer</property>
+                              <property name="label" translatable="yes">Add WireGuard peer</property>
                             </accessibility>
                             <style>
                               <class name="flat" />
@@ -254,7 +254,7 @@
                                 </style>
                                 <child>
                                   <object class="AdwActionRow">
-                                    <property name="title" translatable="1">No peers set up</property>
+                                    <property name="title" translatable="yes">No peers set up</property>
                                   </object>
                                 </child>
                               </object>
