@@ -10,8 +10,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/iss"
 "ues\n"
-"POT-Creation-Date: 2023-08-25 15:55+0000\n"
-"PO-Revision-Date: 2023-08-26 20:43+0300\n"
+"POT-Creation-Date: 2023-09-18 13:21+0000\n"
+"PO-Revision-Date: 2023-09-18 22:56+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -78,7 +78,7 @@ msgstr "Файлова система"
 
 #: panels/applications/cc-applications-panel.c:847
 #: panels/keyboard/01-launchers.xml.in:6
-#: shell/appdata/org.gnome.Settings.appdata.xml.in:7 shell/cc-window.c:794
+#: shell/appdata/org.gnome.Settings.appdata.xml.in:7 shell/cc-window.c:802
 #: shell/cc-window.ui:24 shell/cc-window.ui:31
 #: shell/org.gnome.Settings.desktop.in:3
 msgid "Settings"
@@ -873,7 +873,7 @@ msgstr "_Імпортувати файл…"
 
 #: panels/color/cc-color-panel.ui:390 panels/keyboard/cc-input-chooser.ui:18
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:41
-#: panels/network/connection-editor/net-connection-editor.c:606
+#: panels/network/connection-editor/net-connection-editor.c:610
 #: panels/printers/new-printer-dialog.ui:91
 #: panels/user-accounts/cc-add-user-dialog.ui:39
 msgid "_Add"
@@ -2734,7 +2734,7 @@ msgstr ""
 "Подробиці щодо помилки: NetworkManager не запущено."
 
 #: panels/network/cc-network-panel.ui:46 panels/network/cc-network-panel.ui:80
-#: panels/network/connection-editor/net-connection-editor.c:694
+#: panels/network/connection-editor/net-connection-editor.c:698
 msgid "VPN"
 msgstr "VPN"
 
@@ -2773,6 +2773,10 @@ msgstr "Вручну"
 #: panels/network/cc-net-proxy-page.ui:23
 msgid "Save"
 msgstr "Зберегти"
+
+#: panels/network/cc-net-proxy-page.ui:40
+msgid "Network Proxy"
+msgstr "Проксі-сервер мережі"
 
 #: panels/network/cc-net-proxy-page.ui:52 panels/sound/cc-sound-panel.ui:82
 #: panels/sound/cc-sound-panel.ui:290
@@ -2864,33 +2868,33 @@ msgid "Scan to Connect"
 msgstr "Скануйте, щоб з'єднатися"
 
 #. TRANSLATORS: This happens when the connection name does not contain the SSID.
-#: panels/network/cc-wifi-connection-row.c:222
+#: panels/network/cc-wifi-connection-row.c:223
 #, c-format
 msgctxt "Wi-Fi Connection"
 msgid "%s (SSID: %s)"
 msgstr "%s (SSID: %s)"
 
-#: panels/network/cc-wifi-connection-row.c:282
+#: panels/network/cc-wifi-connection-row.c:283
 msgid "Insecure network (WEP)"
 msgstr "Незахищена мережа (WEP)"
 
-#: panels/network/cc-wifi-connection-row.c:286
+#: panels/network/cc-wifi-connection-row.c:287
 msgid "Secure network (WPA)"
 msgstr "Захищена мережа (WPA)"
 
-#: panels/network/cc-wifi-connection-row.c:290
+#: panels/network/cc-wifi-connection-row.c:291
 msgid "Secure network (WPA2)"
 msgstr "Захищена мережа (WPA2)"
 
-#: panels/network/cc-wifi-connection-row.c:294
+#: panels/network/cc-wifi-connection-row.c:295
 msgid "Secure network (WPA3)"
 msgstr "Захищена мережа (WPA3)"
 
-#: panels/network/cc-wifi-connection-row.c:298
+#: panels/network/cc-wifi-connection-row.c:299
 msgid "Secure network"
 msgstr "Захищена мережа"
 
-#: panels/network/cc-wifi-connection-row.c:327
+#: panels/network/cc-wifi-connection-row.c:328
 #, c-format
 msgid "Signal strength %d%%"
 msgstr "Потужність сигналу %d%%"
@@ -3056,9 +3060,6 @@ msgid "Wi-Fi Unavailable"
 msgstr "Wi-Fi недоступний"
 
 #: panels/network/cc-wifi-panel.ui:194
-#| msgid ""
-#| "An error has occurred and Wi-Fi cannot be used.\n"
-#| "Error details: NetworkManager not running."
 msgid ""
 "An error has occurred and Wi-Fi cannot be used.\n"
 "    Error details: NetworkManager not running."
@@ -3351,7 +3352,7 @@ msgid "WPA3 Personal"
 msgstr "Особистий WPA3"
 
 #: panels/network/connection-editor/ce-page-wireguard.c:106
-#: panels/network/connection-editor/net-connection-editor.c:854
+#: panels/network/connection-editor/net-connection-editor.c:858
 msgid "WireGuard"
 msgstr "WireGuard"
 
@@ -3540,32 +3541,32 @@ msgstr "Автоматично, лише DHCP"
 msgid "Prefix"
 msgstr "Префікс"
 
-#: panels/network/connection-editor/net-connection-editor.c:368
+#: panels/network/connection-editor/net-connection-editor.c:372
 #, c-format
 msgid "Unable to open connection editor: %s"
 msgstr "Не вдалося відкрити редактор з'єднань: %s"
 
-#: panels/network/connection-editor/net-connection-editor.c:387
+#: panels/network/connection-editor/net-connection-editor.c:391
 msgid "New Profile"
 msgstr "Створити профіль"
 
-#: panels/network/connection-editor/net-connection-editor.c:454
+#: panels/network/connection-editor/net-connection-editor.c:458
 #, c-format
 msgid "Invalid setting %s: %s"
 msgstr "Некоректний параметр %s: %s"
 
-#: panels/network/connection-editor/net-connection-editor.c:457
+#: panels/network/connection-editor/net-connection-editor.c:461
 #, c-format
 msgid "Invalid setting %s"
 msgstr "Некоректний параметр %s"
 
-#: panels/network/connection-editor/net-connection-editor.c:735
+#: panels/network/connection-editor/net-connection-editor.c:739
 #, c-format
 msgid "Invalid VPN configuration file"
 msgstr "Некоректний файл налаштувань VPN"
 
 #. Translators: VPN add dialog Wireguard description
-#: panels/network/connection-editor/net-connection-editor.c:842
+#: panels/network/connection-editor/net-connection-editor.c:846
 msgid ""
 "Free and open-source VPN solution designed for ease of use, high speed "
 "performance and low attack surface."
@@ -3573,11 +3574,11 @@ msgstr ""
 "Вільні рішення VPN з відкритим кодом створено для спрощення користування, "
 "швидкодії та зниження ймовірності атак."
 
-#: panels/network/connection-editor/net-connection-editor.c:878
+#: panels/network/connection-editor/net-connection-editor.c:882
 msgid "Import from file…"
 msgstr "Імпортувати з файла…"
 
-#: panels/network/connection-editor/net-connection-editor.c:904
+#: panels/network/connection-editor/net-connection-editor.c:908
 msgid "Add VPN"
 msgstr "Додати VPN"
 
@@ -3687,9 +3688,89 @@ msgstr "_Додати маршрути вузлів"
 msgid "_Peers"
 msgstr "_Вузли"
 
+#: panels/network/connection-editor/wireguard-page.ui:235
+#| msgid "WireGuard"
+msgid "Add WireGuard peer"
+msgstr "Додати вузол WireGuard"
+
 #: panels/network/connection-editor/wireguard-page.ui:257
 msgid "No peers set up"
 msgstr "Вузлів не налаштовано"
+
+#: panels/network/connection-editor/wireguard-peer.ui:88
+msgid "_Endpoint"
+msgstr "_Кінцева точка"
+
+#: panels/network/connection-editor/wireguard-peer.ui:98
+msgid ""
+"An endpoint IP or hostname, followed by a colon, and then a port number."
+msgstr "IP-адреса кінцевої точки або назва вузла, двокрапка і номер порту."
+
+#: panels/network/connection-editor/wireguard-peer.ui:110
+msgid "_Public key"
+msgstr "_Відкритий ключ"
+
+#: panels/network/connection-editor/wireguard-peer.ui:120
+msgid "A base64 public key calculated by 'wg pubkey' from a private key."
+msgstr ""
+"Відкритий ключ base64, який обчислено за допомогою «wg pubkey» з закритого "
+"ключа."
+
+#: panels/network/connection-editor/wireguard-peer.ui:135
+#| msgid "Shared Key"
+msgid "_Pre-shared key"
+msgstr "Спі_льний ключ"
+
+#: panels/network/connection-editor/wireguard-peer.ui:145
+msgid ""
+"A base64 preshared key generated by 'wg genpsk'. Optional, and may be "
+"omitted. Adds an additional layer of symmetric-key cryptography to be mixed "
+"into the already existing public-key cryptography, for post-quantum "
+"resistance."
+msgstr ""
+"Попередньо поширений ключ у форматі base64, який створено wg genpsk. "
+"Необов'язковий, можна не вказувати. за допомогою цього параметра можна "
+"додати шар шифрування симетричним ключем до вже наявного шифрування "
+"відкритим ключем для підвищення постквантового захисту."
+
+#: panels/network/connection-editor/wireguard-peer.ui:162
+#| msgid "_Cloned Address"
+msgid "Allowed _IP addresses"
+msgstr "Дозволені _IP-адреси"
+
+#: panels/network/connection-editor/wireguard-peer.ui:172
+msgid ""
+"Comma-separated list of IP (v4 or v6) addresses with CIDR masks from which "
+"incoming traffic for this peer is allowed and to which outgoing traffic for "
+"this peer is directed."
+msgstr ""
+"Список відокремлених комами IP-адрес (v4 або v6) з масками CIDR, з яких "
+"дозволено надсилати дані для цього вузла і до яких спрямовано вихідні дані з "
+"цього вузла."
+
+#: panels/network/connection-editor/wireguard-peer.ui:184
+msgid "_Persistent keepalive"
+msgstr "П_остійне утримання з'єднання"
+
+#: panels/network/connection-editor/wireguard-peer.ui:197
+msgid ""
+"How often to send an authenticated empty packet to the peer for the purpose "
+"of keeping a stateful firewall or NAT mapping valid. This is optional and "
+"not recommended outside of specific setups."
+msgstr ""
+"Наскільки часто слід надсилати порожній пакет до вузла з метою підтримання "
+"роботи брандмауера або прив'зяки NAT. Цей параметр є необов'язковим — не "
+"рекомендуємо ним користуватися, окрім особливих випадків."
+
+#: panels/network/connection-editor/wireguard-peer.ui:206
+#| msgid "0 seconds"
+msgid "seconds"
+msgstr "секунд"
+
+#: panels/network/connection-editor/wireguard-peer.ui:222
+#| msgid "_Apply"
+msgid "Apply"
+msgstr "Застосувати"
 
 #: panels/network/gnome-network-panel.desktop.in:4
 msgid "Control how you connect to the Internet"
@@ -3762,6 +3843,11 @@ msgstr "Системна політика забороняє використо�
 #: panels/network/net-device-wifi.c:1267
 msgid "Wireless device does not support Hotspot mode"
 msgstr "Бездротовий пристрій не підтримує режиму гарячої точки"
+
+#: panels/network/network-ethernet.ui:10
+#| msgid "Add new connection"
+msgid "Add Ethernet connection"
+msgstr "Додати з'єднання Ethernet"
 
 #: panels/network/network-mobile.ui:27
 #: panels/wwan/cc-wwan-details-dialog.ui:237
@@ -5309,7 +5395,6 @@ msgstr "Рівень чорнила"
 
 #. Translators: This is the message which follows the printer error.
 #: panels/printers/printer-entry.ui:207
-#| msgid "Please restart when the problem is resolved."
 msgid "Please restart when the problem is resolved"
 msgstr "Перезапустіть, коли проблему буде виправлено"
 
@@ -10361,9 +10446,6 @@ msgstr "Системні звуки"
 #~ msgid "1 (Default)"
 #~ msgstr "1 (типово)"
 
-#~ msgid "Shared Key"
-#~ msgstr "Спільний ключ"
-
 #~ msgid "_Key"
 #~ msgstr "_Ключ"
 
@@ -10457,9 +10539,6 @@ msgstr "Системні звуки"
 
 #~ msgid "This is not recommended for untrusted public networks."
 #~ msgstr "Це не рекомендовано для ненадійних прилюдних мереж."
-
-#~ msgid "Network Proxy"
-#~ msgstr "Проксі-сервер мережі"
 
 #~ msgid "_Socks Host"
 #~ msgstr "_Вузол Socks:"
