@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center.HEAD.he\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2023-08-25 15:55+0000\n"
-"PO-Revision-Date: 2023-08-26 20:55+0300\n"
+"POT-Creation-Date: 2023-09-18 13:21+0000\n"
+"PO-Revision-Date: 2023-09-18 20:51+0300\n"
 "Last-Translator: Yosef Or Boczko <yoseforb@gmail.com>\n"
 "Language-Team: Hebrew <yoseforb@gmail.com>\n"
 "Language: he\n"
@@ -79,7 +79,7 @@ msgstr "מערכת הפעלה"
 
 #: panels/applications/cc-applications-panel.c:847
 #: panels/keyboard/01-launchers.xml.in:6
-#: shell/appdata/org.gnome.Settings.appdata.xml.in:7 shell/cc-window.c:794
+#: shell/appdata/org.gnome.Settings.appdata.xml.in:7 shell/cc-window.c:802
 #: shell/cc-window.ui:24 shell/cc-window.ui:31
 #: shell/org.gnome.Settings.desktop.in:3
 msgid "Settings"
@@ -854,7 +854,7 @@ msgstr "_ייבוא קובץ…"
 
 #: panels/color/cc-color-panel.ui:390 panels/keyboard/cc-input-chooser.ui:18
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:41
-#: panels/network/connection-editor/net-connection-editor.c:606
+#: panels/network/connection-editor/net-connection-editor.c:610
 #: panels/printers/new-printer-dialog.ui:91
 #: panels/user-accounts/cc-add-user-dialog.ui:39
 msgid "_Add"
@@ -2700,7 +2700,7 @@ msgstr ""
 " פרטי שגיאה: NetworkManager לא פועל."
 
 #: panels/network/cc-network-panel.ui:46 panels/network/cc-network-panel.ui:80
-#: panels/network/connection-editor/net-connection-editor.c:694
+#: panels/network/connection-editor/net-connection-editor.c:698
 msgid "VPN"
 msgstr "VPN"
 
@@ -2739,6 +2739,10 @@ msgstr "ידני"
 #: panels/network/cc-net-proxy-page.ui:23
 msgid "Save"
 msgstr "שמירה"
+
+#: panels/network/cc-net-proxy-page.ui:40
+msgid "Network Proxy"
+msgstr "מתווך הרשת"
 
 #: panels/network/cc-net-proxy-page.ui:52 panels/sound/cc-sound-panel.ui:82
 #: panels/sound/cc-sound-panel.ui:290
@@ -2829,33 +2833,33 @@ msgid "Scan to Connect"
 msgstr "סריקה להתחברות"
 
 #. TRANSLATORS: This happens when the connection name does not contain the SSID.
-#: panels/network/cc-wifi-connection-row.c:222
+#: panels/network/cc-wifi-connection-row.c:223
 #, c-format
 msgctxt "Wi-Fi Connection"
 msgid "%s (SSID: %s)"
 msgstr "‏%s ‏(SSID: ‏%s)"
 
-#: panels/network/cc-wifi-connection-row.c:282
+#: panels/network/cc-wifi-connection-row.c:283
 msgid "Insecure network (WEP)"
 msgstr "רשת לא מאובטחת (WEP)"
 
-#: panels/network/cc-wifi-connection-row.c:286
+#: panels/network/cc-wifi-connection-row.c:287
 msgid "Secure network (WPA)"
 msgstr "רשת מאובטחת (WPA)"
 
-#: panels/network/cc-wifi-connection-row.c:290
+#: panels/network/cc-wifi-connection-row.c:291
 msgid "Secure network (WPA2)"
 msgstr "רשת מאובטחת (WPA2)"
 
-#: panels/network/cc-wifi-connection-row.c:294
+#: panels/network/cc-wifi-connection-row.c:295
 msgid "Secure network (WPA3)"
 msgstr "רשת מאובטחת (WPA3)"
 
-#: panels/network/cc-wifi-connection-row.c:298
+#: panels/network/cc-wifi-connection-row.c:299
 msgid "Secure network"
 msgstr "רשת מאובטחת"
 
-#: panels/network/cc-wifi-connection-row.c:327
+#: panels/network/cc-wifi-connection-row.c:328
 #, c-format
 msgid "Signal strength %d%%"
 msgstr "עצמת אות %d%%"
@@ -3308,7 +3312,7 @@ msgid "WPA3 Personal"
 msgstr "‏WPA3 אישי"
 
 #: panels/network/connection-editor/ce-page-wireguard.c:106
-#: panels/network/connection-editor/net-connection-editor.c:854
+#: panels/network/connection-editor/net-connection-editor.c:858
 msgid "WireGuard"
 msgstr "WireGuard"
 
@@ -3494,32 +3498,32 @@ msgstr "אוטומטי, DHCP בלבד"
 msgid "Prefix"
 msgstr "קידומת"
 
-#: panels/network/connection-editor/net-connection-editor.c:368
+#: panels/network/connection-editor/net-connection-editor.c:372
 #, c-format
 msgid "Unable to open connection editor: %s"
 msgstr "לא ניתן לפתוח את עורך החיבורים: %s"
 
-#: panels/network/connection-editor/net-connection-editor.c:387
+#: panels/network/connection-editor/net-connection-editor.c:391
 msgid "New Profile"
 msgstr "פרופיל חדש"
 
-#: panels/network/connection-editor/net-connection-editor.c:454
+#: panels/network/connection-editor/net-connection-editor.c:458
 #, c-format
 msgid "Invalid setting %s: %s"
 msgstr "הגדרה %s לא תקפה: ‏%s"
 
-#: panels/network/connection-editor/net-connection-editor.c:457
+#: panels/network/connection-editor/net-connection-editor.c:461
 #, c-format
 msgid "Invalid setting %s"
 msgstr "הגדרה %s לא תקפה"
 
-#: panels/network/connection-editor/net-connection-editor.c:735
+#: panels/network/connection-editor/net-connection-editor.c:739
 #, c-format
 msgid "Invalid VPN configuration file"
 msgstr "קובץ תצורת ה־VPN לא תקף"
 
 #. Translators: VPN add dialog Wireguard description
-#: panels/network/connection-editor/net-connection-editor.c:842
+#: panels/network/connection-editor/net-connection-editor.c:846
 msgid ""
 "Free and open-source VPN solution designed for ease of use, high speed "
 "performance and low attack surface."
@@ -3527,11 +3531,11 @@ msgstr ""
 "פתרון VPN חינמי ובקוד פתוח לשימוש קל, מהירות וביצועים גבוהים ומרחב פגיעות "
 "קטן."
 
-#: panels/network/connection-editor/net-connection-editor.c:878
+#: panels/network/connection-editor/net-connection-editor.c:882
 msgid "Import from file…"
 msgstr "יבוא מקובץ…"
 
-#: panels/network/connection-editor/net-connection-editor.c:904
+#: panels/network/connection-editor/net-connection-editor.c:908
 msgid "Add VPN"
 msgstr "הוספת VPN"
 
@@ -3639,9 +3643,76 @@ msgstr "הו_ספת ניתובי עמיתים"
 msgid "_Peers"
 msgstr "_עמיתים"
 
+#: panels/network/connection-editor/wireguard-page.ui:235
+msgid "Add WireGuard peer"
+msgstr "הוספת עמית WireGuard"
+
 #: panels/network/connection-editor/wireguard-page.ui:257
 msgid "No peers set up"
 msgstr "לא הוגדרו עמיתים"
+
+#: panels/network/connection-editor/wireguard-peer.ui:88
+msgid "_Endpoint"
+msgstr "נקודת _קצה"
+
+#: panels/network/connection-editor/wireguard-peer.ui:98
+msgid ""
+"An endpoint IP or hostname, followed by a colon, and then a port number."
+msgstr "כתובת ‏IP של נקודת קצת או שם מארח, ואחריו נקודתיים, ואז מספר הפתחה."
+
+#: panels/network/connection-editor/wireguard-peer.ui:110
+msgid "_Public key"
+msgstr "מפתח _ציבורי"
+
+#: panels/network/connection-editor/wireguard-peer.ui:120
+msgid "A base64 public key calculated by 'wg pubkey' from a private key."
+msgstr "מפתח ציבורי ב־base64 מחושב על ידי 'wg pubkey' ממפתח פרטי."
+
+#: panels/network/connection-editor/wireguard-peer.ui:135
+#, fuzzy
+#| msgid "Shared Key"
+msgid "_Pre-shared key"
+msgstr "מפתח משותף"
+
+#: panels/network/connection-editor/wireguard-peer.ui:145
+msgid ""
+"A base64 preshared key generated by 'wg genpsk'. Optional, and may be "
+"omitted. Adds an additional layer of symmetric-key cryptography to be mixed "
+"into the already existing public-key cryptography, for post-quantum "
+"resistance."
+msgstr ""
+
+#: panels/network/connection-editor/wireguard-peer.ui:162
+#, fuzzy
+#| msgid "Allowed users"
+msgid "Allowed _IP addresses"
+msgstr "משתמשים מורשים"
+
+#: panels/network/connection-editor/wireguard-peer.ui:172
+msgid ""
+"Comma-separated list of IP (v4 or v6) addresses with CIDR masks from which "
+"incoming traffic for this peer is allowed and to which outgoing traffic for "
+"this peer is directed."
+msgstr ""
+
+#: panels/network/connection-editor/wireguard-peer.ui:184
+msgid "_Persistent keepalive"
+msgstr ""
+
+#: panels/network/connection-editor/wireguard-peer.ui:197
+msgid ""
+"How often to send an authenticated empty packet to the peer for the purpose "
+"of keeping a stateful firewall or NAT mapping valid. This is optional and "
+"not recommended outside of specific setups."
+msgstr ""
+
+#: panels/network/connection-editor/wireguard-peer.ui:206
+msgid "seconds"
+msgstr "שניות"
+
+#: panels/network/connection-editor/wireguard-peer.ui:222
+msgid "Apply"
+msgstr "החלה"
 
 #: panels/network/gnome-network-panel.desktop.in:4
 msgid "Control how you connect to the Internet"
@@ -3716,6 +3787,12 @@ msgstr "מדיניות המערכת אוסרת שימוש בנקודת גישה"
 #: panels/network/net-device-wifi.c:1267
 msgid "Wireless device does not support Hotspot mode"
 msgstr "התקן הרשת האלחוטית אינו תומך במצב נקודת גישה"
+
+#: panels/network/network-ethernet.ui:10
+#, fuzzy
+#| msgid "Add new connection"
+msgid "Add Ethernet connection"
+msgstr "הוספת התחברות חדשה"
 
 #: panels/network/network-mobile.ui:27
 #: panels/wwan/cc-wwan-details-dialog.ui:237
@@ -10169,9 +10246,6 @@ msgstr "צלילי מערכת"
 #~ msgid "1 (Default)"
 #~ msgstr "1 (בררת מחדל)"
 
-#~ msgid "Shared Key"
-#~ msgstr "מפתח משותף"
-
 #~ msgid "_Key"
 #~ msgstr "מ_פתח"
 
@@ -10248,9 +10322,6 @@ msgstr "צלילי מערכת"
 
 #~ msgid "This is not recommended for untrusted public networks."
 #~ msgstr "מצב זה אינו מומלץ לרשתות ציבוריות שאינן מהימנות."
-
-#~ msgid "Network Proxy"
-#~ msgstr "מתווך הרשת"
 
 #~ msgid "_Socks Host"
 #~ msgstr "מ_ארח Socks"
@@ -13314,9 +13385,6 @@ msgstr "צלילי מערכת"
 
 #~ msgid "_Back"
 #~ msgstr "_חזרה"
-
-#~ msgid "Allowed users"
-#~ msgstr "משתמשים מורשים"
 
 #~ msgid "Account _type"
 #~ msgstr "סוג ה_חשבון"
