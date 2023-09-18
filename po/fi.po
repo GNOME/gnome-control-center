@@ -26,8 +26,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2023-08-25 15:55+0000\n"
-"PO-Revision-Date: 2023-08-26 21:48+0300\n"
+"POT-Creation-Date: 2023-09-18 13:21+0000\n"
+"PO-Revision-Date: 2023-09-18 20:54+0300\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos+l10n@iki.fi>\n"
 "Language-Team: suomi <lokalisointi-lista@googlegroups.com>\n"
 "Language: fi\n"
@@ -94,7 +94,7 @@ msgstr "Tiedostojärjestelmä"
 
 #: panels/applications/cc-applications-panel.c:847
 #: panels/keyboard/01-launchers.xml.in:6
-#: shell/appdata/org.gnome.Settings.appdata.xml.in:7 shell/cc-window.c:794
+#: shell/appdata/org.gnome.Settings.appdata.xml.in:7 shell/cc-window.c:802
 #: shell/cc-window.ui:24 shell/cc-window.ui:31
 #: shell/org.gnome.Settings.desktop.in:3
 msgid "Settings"
@@ -881,7 +881,7 @@ msgstr "_Tuo tiedosto\t…"
 
 #: panels/color/cc-color-panel.ui:390 panels/keyboard/cc-input-chooser.ui:18
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:41
-#: panels/network/connection-editor/net-connection-editor.c:606
+#: panels/network/connection-editor/net-connection-editor.c:610
 #: panels/printers/new-printer-dialog.ui:91
 #: panels/user-accounts/cc-add-user-dialog.ui:39
 msgid "_Add"
@@ -2733,7 +2733,7 @@ msgstr ""
 " Virheen tiedot: NetworkManager ei ole käynnissä."
 
 #: panels/network/cc-network-panel.ui:46 panels/network/cc-network-panel.ui:80
-#: panels/network/connection-editor/net-connection-editor.c:694
+#: panels/network/connection-editor/net-connection-editor.c:698
 msgid "VPN"
 msgstr "VPN"
 
@@ -2772,6 +2772,10 @@ msgstr "Manuaalinen"
 #: panels/network/cc-net-proxy-page.ui:23
 msgid "Save"
 msgstr "Tallenna"
+
+#: panels/network/cc-net-proxy-page.ui:40
+msgid "Network Proxy"
+msgstr "Verkon välityspalvelin"
 
 #: panels/network/cc-net-proxy-page.ui:52 panels/sound/cc-sound-panel.ui:82
 #: panels/sound/cc-sound-panel.ui:290
@@ -2863,33 +2867,33 @@ msgid "Scan to Connect"
 msgstr "Skannaa yhdistääksesi"
 
 #. TRANSLATORS: This happens when the connection name does not contain the SSID.
-#: panels/network/cc-wifi-connection-row.c:222
+#: panels/network/cc-wifi-connection-row.c:223
 #, c-format
 msgctxt "Wi-Fi Connection"
 msgid "%s (SSID: %s)"
 msgstr "%s (SSID: %s)"
 
-#: panels/network/cc-wifi-connection-row.c:282
+#: panels/network/cc-wifi-connection-row.c:283
 msgid "Insecure network (WEP)"
 msgstr "Turvaton verkko (WEP)"
 
-#: panels/network/cc-wifi-connection-row.c:286
+#: panels/network/cc-wifi-connection-row.c:287
 msgid "Secure network (WPA)"
 msgstr "Turvallinen verkko (WPA)"
 
-#: panels/network/cc-wifi-connection-row.c:290
+#: panels/network/cc-wifi-connection-row.c:291
 msgid "Secure network (WPA2)"
 msgstr "Turvallinen verkko (WPA2)"
 
-#: panels/network/cc-wifi-connection-row.c:294
+#: panels/network/cc-wifi-connection-row.c:295
 msgid "Secure network (WPA3)"
 msgstr "Turvallinen verkko (WPA3)"
 
-#: panels/network/cc-wifi-connection-row.c:298
+#: panels/network/cc-wifi-connection-row.c:299
 msgid "Secure network"
 msgstr "Turvallinen verkko"
 
-#: panels/network/cc-wifi-connection-row.c:327
+#: panels/network/cc-wifi-connection-row.c:328
 #, c-format
 msgid "Signal strength %d%%"
 msgstr "Signaalin vahvuus %d%%"
@@ -3342,7 +3346,7 @@ msgid "WPA3 Personal"
 msgstr "WPA3-Personal"
 
 #: panels/network/connection-editor/ce-page-wireguard.c:106
-#: panels/network/connection-editor/net-connection-editor.c:854
+#: panels/network/connection-editor/net-connection-editor.c:858
 msgid "WireGuard"
 msgstr "WireGuard"
 
@@ -3531,32 +3535,32 @@ msgstr "Automaattinen, vain DHCP"
 msgid "Prefix"
 msgstr "Etuliite"
 
-#: panels/network/connection-editor/net-connection-editor.c:368
+#: panels/network/connection-editor/net-connection-editor.c:372
 #, c-format
 msgid "Unable to open connection editor: %s"
 msgstr "Yhteysmuokkaimen avaaminen epäonnistui: %s"
 
-#: panels/network/connection-editor/net-connection-editor.c:387
+#: panels/network/connection-editor/net-connection-editor.c:391
 msgid "New Profile"
 msgstr "Uusi profiili"
 
-#: panels/network/connection-editor/net-connection-editor.c:454
+#: panels/network/connection-editor/net-connection-editor.c:458
 #, c-format
 msgid "Invalid setting %s: %s"
 msgstr "Virheellinen asetus %s: %s"
 
-#: panels/network/connection-editor/net-connection-editor.c:457
+#: panels/network/connection-editor/net-connection-editor.c:461
 #, c-format
 msgid "Invalid setting %s"
 msgstr "Virheellinen asetus %s"
 
-#: panels/network/connection-editor/net-connection-editor.c:735
+#: panels/network/connection-editor/net-connection-editor.c:739
 #, c-format
 msgid "Invalid VPN configuration file"
 msgstr "Virheellinen VPN-asetustiedosto"
 
 #. Translators: VPN add dialog Wireguard description
-#: panels/network/connection-editor/net-connection-editor.c:842
+#: panels/network/connection-editor/net-connection-editor.c:846
 msgid ""
 "Free and open-source VPN solution designed for ease of use, high speed "
 "performance and low attack surface."
@@ -3564,11 +3568,11 @@ msgstr ""
 "Vapaa ja avoimen lähdekoodin VPN-ratkaisu, joka on suunniteltu "
 "helppokäyttöiseksi, suorituskykyiseksi ja tietoturvalliseksi."
 
-#: panels/network/connection-editor/net-connection-editor.c:878
+#: panels/network/connection-editor/net-connection-editor.c:882
 msgid "Import from file…"
 msgstr "Tuo tiedostosta…"
 
-#: panels/network/connection-editor/net-connection-editor.c:904
+#: panels/network/connection-editor/net-connection-editor.c:908
 msgid "Add VPN"
 msgstr "Lisää VPN"
 
@@ -3678,9 +3682,86 @@ msgstr "_Lisää vertaisreittejä"
 msgid "_Peers"
 msgstr "_Vertaiset"
 
+#: panels/network/connection-editor/wireguard-page.ui:235
+msgid "Add WireGuard peer"
+msgstr "Lisää WireGuard-vertainen"
+
 #: panels/network/connection-editor/wireguard-page.ui:257
 msgid "No peers set up"
 msgstr "Vertaisia ei ole määritetty"
+
+#: panels/network/connection-editor/wireguard-peer.ui:88
+msgid "_Endpoint"
+msgstr "_Päätepiste"
+
+#: panels/network/connection-editor/wireguard-peer.ui:98
+msgid ""
+"An endpoint IP or hostname, followed by a colon, and then a port number."
+msgstr ""
+"Päätepisteen IP-osoite tai konenimi, jonka perässä kaksoispiste ja "
+"porttinumero."
+
+#: panels/network/connection-editor/wireguard-peer.ui:110
+msgid "_Public key"
+msgstr "_Julkinen avain"
+
+#: panels/network/connection-editor/wireguard-peer.ui:120
+msgid "A base64 public key calculated by 'wg pubkey' from a private key."
+msgstr ""
+"Julkinen avain, 'wg pubkey'-komennon laskemana yksityisestä avaimesta base64:"
+"nä."
+
+#: panels/network/connection-editor/wireguard-peer.ui:135
+msgid "_Pre-shared key"
+msgstr "_Esi-jaettu avain"
+
+#: panels/network/connection-editor/wireguard-peer.ui:145
+msgid ""
+"A base64 preshared key generated by 'wg genpsk'. Optional, and may be "
+"omitted. Adds an additional layer of symmetric-key cryptography to be mixed "
+"into the already existing public-key cryptography, for post-quantum "
+"resistance."
+msgstr ""
+"Esijaettu avain, 'wg genpsk'-komennon luomana base64:nä. Valinnainen, voi "
+"jättää tyhjäksi. Lisää lisätason symmetrisen avaimen salausta "
+"sekoitettavaksi olemassa olevaan julkisen avaimen salaukseen, kvanttiajan "
+"jälkeistä suojausta varten."
+
+#: panels/network/connection-editor/wireguard-peer.ui:162
+msgid "Allowed _IP addresses"
+msgstr "Sallitut _IP-osoitteet"
+
+#: panels/network/connection-editor/wireguard-peer.ui:172
+msgid ""
+"Comma-separated list of IP (v4 or v6) addresses with CIDR masks from which "
+"incoming traffic for this peer is allowed and to which outgoing traffic for "
+"this peer is directed."
+msgstr ""
+"Pilkuin erotettu luettelo IP-osoitteista (v4 tai v6), CIDR-maskein, joista "
+"saapuva liikenne tälle vertaiselle on sallittu ja joihin lähtevä liikenne "
+"tälle vertaiselle ohjataan."
+
+#: panels/network/connection-editor/wireguard-peer.ui:184
+msgid "_Persistent keepalive"
+msgstr "_Pysyvä keepalive"
+
+#: panels/network/connection-editor/wireguard-peer.ui:197
+msgid ""
+"How often to send an authenticated empty packet to the peer for the purpose "
+"of keeping a stateful firewall or NAT mapping valid. This is optional and "
+"not recommended outside of specific setups."
+msgstr ""
+"Kuinka usein todennettu tyhjä paketti lähetetään vertaiselle, jotta "
+"tilallinen palomuuri tai NAT-sidos pidetään kelvollisena. Tämä on "
+"valinainen, eikä se ole suositeltu kuin vain tietyissä tapauksissa."
+
+#: panels/network/connection-editor/wireguard-peer.ui:206
+msgid "seconds"
+msgstr "sekuntia"
+
+#: panels/network/connection-editor/wireguard-peer.ui:222
+msgid "Apply"
+msgstr "Toteuta"
 
 #: panels/network/gnome-network-panel.desktop.in:4
 msgid "Control how you connect to the Internet"
@@ -3756,6 +3837,10 @@ msgstr "Järjestelmäkäytännöt estävät käytön yhteyspisteenä"
 #: panels/network/net-device-wifi.c:1267
 msgid "Wireless device does not support Hotspot mode"
 msgstr "Langaton verkkolaite ei tue yhteyspisteeksi asettamista"
+
+#: panels/network/network-ethernet.ui:10
+msgid "Add Ethernet connection"
+msgstr "Lisää Ethernet-yhteys"
 
 #: panels/network/network-mobile.ui:27
 #: panels/wwan/cc-wwan-details-dialog.ui:237
@@ -10061,9 +10146,6 @@ msgstr "Järjestelmän äänet"
 #~ msgid "This is not recommended for untrusted public networks."
 #~ msgstr "Tämä ei ole suositeltavaa julkisissa verkoissa."
 
-#~ msgid "Network Proxy"
-#~ msgstr "Verkon välityspalvelin"
-
 #~ msgid "_Socks Host"
 #~ msgstr "_Socks-palvelin"
 
@@ -10305,9 +10387,6 @@ msgstr "Järjestelmän äänet"
 
 #~ msgid "1 (Default)"
 #~ msgstr "1 (Oletus)"
-
-#~ msgid "Shared Key"
-#~ msgstr "Jaettu avain"
 
 #~ msgid "_Key"
 #~ msgstr "_Avain"
