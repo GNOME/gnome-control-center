@@ -484,7 +484,7 @@ get_cpu_info ()
   /* count duplicates */
   for (i = 0; i != info->ncpu; ++i)
     {
-      const char * const keys[] = { "model name", "cpu", "Processor" };
+      const char * const keys[] = { "model name", "cpu", "Processor", "Model Name" };
       char *model;
       int  *count;
 
