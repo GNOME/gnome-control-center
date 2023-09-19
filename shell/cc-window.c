@@ -51,13 +51,10 @@ struct _CcWindow
   AdwApplicationWindow parent;
 
   GtkMessageDialog  *development_warning_dialog;
-  AdwHeaderBar      *header;
   AdwNavigationSplitView *split_view;
   CcPanelList       *panel_list;
   GtkSearchBar      *search_bar;
-  GtkToggleButton   *search_button;
   GtkSearchEntry    *search_entry;
-  AdwWindowTitle    *sidebar_title_widget;
 
   GtkWidget  *old_panel;
   GtkWidget  *current_panel;
@@ -724,13 +721,10 @@ cc_window_class_init (CcWindowClass *klass)
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/Settings/gtk/cc-window.ui");
 
   gtk_widget_class_bind_template_child (widget_class, CcWindow, development_warning_dialog);
-  gtk_widget_class_bind_template_child (widget_class, CcWindow, header);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, split_view);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, panel_list);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, search_bar);
-  gtk_widget_class_bind_template_child (widget_class, CcWindow, search_button);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, search_entry);
-  gtk_widget_class_bind_template_child (widget_class, CcWindow, sidebar_title_widget);
 
   gtk_widget_class_bind_template_callback (widget_class, on_split_view_collapsed_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_development_warning_dialog_responded_cb);
