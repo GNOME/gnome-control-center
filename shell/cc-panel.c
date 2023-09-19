@@ -55,12 +55,6 @@ static GtkBuildableIface *parent_buildable_iface;
 
 enum
 {
-  SIDEBAR_ACTIVATED,
-  LAST_SIGNAL
-};
-
-enum
-{
   PROP_0,
   PROP_SHELL,
   PROP_PARAMETERS,
@@ -68,8 +62,6 @@ enum
 };
 
 static GParamSpec *properties [N_PROPS];
-
-static guint signals [LAST_SIGNAL] = { 0 };
 
 /* GtkBuildable interface */
 
@@ -165,13 +157,6 @@ cc_panel_class_init (CcPanelClass *klass)
   object_class->get_property = cc_panel_get_property;
   object_class->set_property = cc_panel_set_property;
   object_class->finalize = cc_panel_finalize;
-
-  signals[SIDEBAR_ACTIVATED] = g_signal_new ("sidebar-activated",
-                                             G_TYPE_FROM_CLASS (object_class),
-                                             G_SIGNAL_RUN_LAST,
-                                             0, NULL, NULL,
-                                             g_cclosure_marshal_VOID__VOID,
-                                             G_TYPE_NONE, 0);
 
   properties[PROP_SHELL] = g_param_spec_object ("shell",
                                                 "Shell",

@@ -111,12 +111,6 @@ in_flatpak_sandbox (void)
   return g_strcmp0 (PROFILE, "development") == 0;
 }
 
-static void
-on_sidebar_activated_cb (CcWindow *self)
-{
-  adw_navigation_split_view_set_show_content (self->split_view, TRUE);
-}
-
 static gboolean
 activate_panel (CcWindow          *self,
                 const gchar       *id,
@@ -147,11 +141,6 @@ activate_panel (CcWindow          *self,
   cc_shell_set_active_panel (CC_SHELL (self), CC_PANEL (self->current_panel));
 
   adw_navigation_split_view_set_content (self->split_view, ADW_NAVIGATION_PAGE (self->current_panel));
-
-  /* Ensure we show the panel when the split view is collapsed and a sidebar
-   * widget's row is activated.
-   */
-  g_signal_connect_object (self->current_panel, "sidebar-activated", G_CALLBACK (on_sidebar_activated_cb), self, G_CONNECT_SWAPPED);
 
   /* Finish profiling */
   g_timer_stop (timer);
