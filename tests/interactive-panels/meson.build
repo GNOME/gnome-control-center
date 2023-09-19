@@ -6,7 +6,6 @@ subdir('applications')
 
 sources = files(
   'gtp-dynamic-panel.c',
-  'gtp-sidebar-widget.c',
   'gtp-static-init.c',
   'main.c',
 )

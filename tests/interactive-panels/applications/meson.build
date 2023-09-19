@@ -4,9 +4,7 @@
 
 desktop_files = [
   'dynamic-panel',
-  'sidebar-widget',
   'static-init',
-  'toplevel-sidebar-widget',
 ]
 
 foreach desktop_file : desktop_files

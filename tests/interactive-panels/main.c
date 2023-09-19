@@ -30,15 +30,12 @@
 #include "test-panels-resources.h"
 
 #include "gtp-dynamic-panel.h"
-#include "gtp-sidebar-widget.h"
 #include "gtp-static-init.h"
 
 /* Test panels */
 static CcPanelLoaderVtable test_panels[] = {
   { "dynamic-panel",           gtp_dynamic_panel_get_type,  NULL                 },
-  { "sidebar-widget",          gtp_sidebar_widget_get_type, NULL                 },
   { "static-init",             gtp_static_init_get_type,    gtp_static_init_func },
-  { "toplevel-sidebar-widget", gtp_sidebar_widget_get_type, NULL                 },
 };
 
 static void

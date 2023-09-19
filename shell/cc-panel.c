@@ -225,24 +225,6 @@ cc_panel_get_help_uri (CcPanel *panel)
   return NULL;
 }
 
-AdwNavigationPage*
-cc_panel_get_sidebar_widget (CcPanel *panel)
-{
-  CcPanelClass *class = CC_PANEL_GET_CLASS (panel);
-
-  if (class->get_sidebar_widget)
-    {
-      AdwNavigationPage *sidebar_widget;
-
-      sidebar_widget = class->get_sidebar_widget (panel);
-      g_assert (sidebar_widget != NULL);
-
-      return sidebar_widget;
-    }
-
-  return NULL;
-}
-
 GCancellable *
 cc_panel_get_cancellable (CcPanel *panel)
 {

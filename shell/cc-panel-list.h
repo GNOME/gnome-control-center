@@ -55,8 +55,7 @@ void                 cc_panel_list_add_panel                     (CcPanelList   
                                                                   const gchar        *description,
                                                                   const GStrv         keywords,
                                                                   const gchar        *icon,
-                                                                  CcPanelVisibility   visibility,
-                                                                  gboolean            has_sidebar);
+                                                                  CcPanelVisibility   visibility);
 
 const gchar*         cc_panel_list_get_current_panel             (CcPanelList        *self);
 
