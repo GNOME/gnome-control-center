@@ -53,8 +53,6 @@ struct _CcWindow
   GtkMessageDialog  *development_warning_dialog;
   AdwHeaderBar      *header;
   AdwNavigationSplitView *split_view;
-  AdwNavigationView *sidebar_view;
-  AdwNavigationPage *main_sidebar_page;
   CcPanelList       *panel_list;
   GtkSearchBar      *search_bar;
   GtkToggleButton   *search_button;
@@ -728,8 +726,6 @@ cc_window_class_init (CcWindowClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcWindow, development_warning_dialog);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, header);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, split_view);
-  gtk_widget_class_bind_template_child (widget_class, CcWindow, sidebar_view);
-  gtk_widget_class_bind_template_child (widget_class, CcWindow, main_sidebar_page);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, panel_list);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, search_bar);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, search_button);

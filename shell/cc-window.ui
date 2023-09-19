@@ -17,81 +17,73 @@
 
         <property name="sidebar">
           <object class="AdwNavigationPage">
+            <property name="title" translatable="yes">Settings</property>
             <property name="child">
-              <object class="AdwNavigationView" id="sidebar_view">
-                <child>
-                  <object class="AdwNavigationPage" id="main_sidebar_page">
-                    <property name="title" translatable="yes">Settings</property>
-                    <property name="child">
-                      <object class="AdwToolbarView">
-                        <child type="top">
-                          <object class="AdwHeaderBar" id="header">
-                            <property name="title-widget">
-                              <object class="AdwWindowTitle" id="sidebar_title_widget">
-                                <property name="title" translatable="yes">Settings</property>
-                              </object>
-                            </property>
-                            <child>
-                              <object class="GtkToggleButton" id="search_button">
-                                <property name="icon_name">edit-find-symbolic</property>
-                                <property name="tooltip_text" translatable="yes">Search</property>
-                                <accessibility>
-                                  <property name="label" translatable="yes">Search</property>
-                                </accessibility>
-                                <style>
-                                  <class name="image-button"/>
-                                </style>
-                              </object>
-                            </child>
-                            <child type="end">
-                              <object class="GtkMenuButton">
-                                <property name="icon-name">open-menu-symbolic</property>
-                                <property name="menu-model">primary_menu</property>
-                                <property name="primary">True</property>
-                                <property name="tooltip_text" translatable="yes">Main Menu</property>
-                                <accessibility>
-                                  <property name="label" translatable="yes">Main Menu</property>
-                                </accessibility>
-                                <style>
-                                  <class name="image-button"/>
-                                </style>
-                              </object>
-                            </child>
-                          </object>
-                        </child>
-                        <child type="top">
-                          <object class="GtkSearchBar" id="search_bar">
-                            <property name="search_mode_enabled" bind-source="search_button" bind-property="active" bind-flags="sync-create|bidirectional" />
-                            <child>
-                              <object class="GtkSearchEntry" id="search_entry">
-                                <property name="hexpand">True</property>
-                                <property name="placeholder_text" translatable="yes">Search settings</property>
-                                <signal name="activate" handler="search_entry_activate_cb" object="CcWindow" swapped="yes" />
-                                <child>
-                                  <object class="GtkEventControllerKey">
-                                    <signal name="key-pressed" handler="search_entry_key_pressed_cb" object="CcWindow" swapped="yes" />
-                                  </object>
-                                </child>
-                              </object>
-                            </child>
-                          </object>
-                        </child>
-                        <property name="content">
-                          <object class="GtkScrolledWindow">
-                            <property name="hscrollbar_policy">never</property>
-                            <child>
-                              <object class="CcPanelList" id="panel_list">
-                                <property name="search-mode" bind-source="search_bar" bind-property="search-mode-enabled" bind-flags="bidirectional" />
-                                <property name="search-query" bind-source="search_entry" bind-property="text" bind-flags="default" />
-                                <signal name="show-panel" handler="show_panel_cb" object="CcWindow" swapped="yes" />
-                              </object>
-                            </child>
-                          </object>
-                        </property>
+              <object class="AdwToolbarView">
+                <child type="top">
+                  <object class="AdwHeaderBar" id="header">
+                    <property name="title-widget">
+                      <object class="AdwWindowTitle" id="sidebar_title_widget">
+                        <property name="title" translatable="yes">Settings</property>
                       </object>
                     </property>
+                    <child>
+                      <object class="GtkToggleButton" id="search_button">
+                        <property name="icon_name">edit-find-symbolic</property>
+                        <property name="tooltip_text" translatable="yes">Search</property>
+                        <accessibility>
+                          <property name="label" translatable="yes">Search</property>
+                        </accessibility>
+                        <style>
+                          <class name="image-button"/>
+                        </style>
+                      </object>
+                    </child>
+                    <child type="end">
+                      <object class="GtkMenuButton">
+                        <property name="icon-name">open-menu-symbolic</property>
+                        <property name="menu-model">primary_menu</property>
+                        <property name="primary">True</property>
+                        <property name="tooltip_text" translatable="yes">Main Menu</property>
+                        <accessibility>
+                          <property name="label" translatable="yes">Main Menu</property>
+                        </accessibility>
+                        <style>
+                          <class name="image-button"/>
+                        </style>
+                      </object>
+                    </child>
                   </object>
                 </child>
+                <child type="top">
+                  <object class="GtkSearchBar" id="search_bar">
+                    <property name="search_mode_enabled" bind-source="search_button" bind-property="active" bind-flags="sync-create|bidirectional" />
+                    <child>
+                      <object class="GtkSearchEntry" id="search_entry">
+                        <property name="hexpand">True</property>
+                        <property name="placeholder_text" translatable="yes">Search settings</property>
+                        <signal name="activate" handler="search_entry_activate_cb" object="CcWindow" swapped="yes" />
+                        <child>
+                          <object class="GtkEventControllerKey">
+                            <signal name="key-pressed" handler="search_entry_key_pressed_cb" object="CcWindow" swapped="yes" />
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+                <property name="content">
+                  <object class="GtkScrolledWindow">
+                    <property name="hscrollbar_policy">never</property>
+                    <child>
+                      <object class="CcPanelList" id="panel_list">
+                        <property name="search-mode" bind-source="search_bar" bind-property="search-mode-enabled" bind-flags="bidirectional" />
+                        <property name="search-query" bind-source="search_entry" bind-property="text" bind-flags="default" />
+                        <signal name="show-panel" handler="show_panel_cb" object="CcWindow" swapped="yes" />
+                      </object>
+                    </child>
+                  </object>
+                </property>
               </object>
             </property>
           </object>
