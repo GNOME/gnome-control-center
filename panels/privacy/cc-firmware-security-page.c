@@ -64,6 +64,7 @@ struct _CcFirmwareSecurityPage
   GtkWidget        *firmware_security_log_pgroup;
 
   GCancellable     *cancellable;
+  guint             timeout_id;
 
   GDBusProxy       *bus_proxy;
   GDBusProxy       *properties_bus_proxy;
@@ -383,6 +384,7 @@ on_timeout_cb (gpointer user_data)
 {
   CcFirmwareSecurityPage *self = CC_FIRMWARE_SECURITY_PAGE (user_data);
   show_loading_page (self, "panel_show");
+  self->timeout_id = 0;
   return 0;
 }
 
@@ -391,6 +393,7 @@ on_timeout_unavaliable (gpointer user_data)
 {
   CcFirmwareSecurityPage *self = CC_FIRMWARE_SECURITY_PAGE (user_data);
   show_loading_page (self, "panel_unavaliable");
+  self->timeout_id = 0;
   return 0;
 }
 
@@ -406,13 +409,13 @@ on_bus_done (GObject      *source,
   val = g_dbus_proxy_call_finish (G_DBUS_PROXY (source), res, &error);
   if (val == NULL)
     {
-      g_timeout_add (1500, on_timeout_unavaliable, self);
+      self->timeout_id = g_timeout_add (1500, on_timeout_unavaliable, self);
       return;
     }
 
   parse_array_from_variant (self, val, FALSE);
   set_secure_boot_button_view (self);
-  g_timeout_add (1500, on_timeout_cb, self);
+  self->timeout_id = g_timeout_add (1500, on_timeout_cb, self);
 }
 
 static void
@@ -688,6 +691,9 @@ cc_firmware_security_page_finalize (GObject *object)
 
   g_cancellable_cancel (self->cancellable);
   g_clear_object (&self->cancellable);
+
+  if (self->timeout_id)
+    g_clear_handle_id (&self->timeout_id, g_source_remove);
 
   G_OBJECT_CLASS (cc_firmware_security_page_parent_class)->finalize (object);
 }
