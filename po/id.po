@@ -13,16 +13,16 @@ msgstr ""
 "Project-Id-Version: gnome-control-center main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2023-08-28 08:12+0000\n"
-"PO-Revision-Date: 2023-08-30 14:04+0700\n"
-"Last-Translator: Kukuh Syafaat <kukuhsyafaat@gnome.org>\n"
+"POT-Creation-Date: 2023-09-18 13:21+0000\n"
+"PO-Revision-Date: 2023-09-19 13:41+0700\n"
+"Last-Translator: Andika Triwidada <andika@gmail.com>\n"
 "Language-Team: Indonesian <gnome-l10n-id@googlegroups.com>\n"
 "Language: id\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.3.1\n"
+"X-Generator: Poedit 3.3.2\n"
 
 #: panels/applications/cc-applications-panel.c:821
 msgid "System Bus"
@@ -79,7 +79,7 @@ msgstr "Sistem Berkas"
 
 #: panels/applications/cc-applications-panel.c:847
 #: panels/keyboard/01-launchers.xml.in:6
-#: shell/appdata/org.gnome.Settings.appdata.xml.in:7 shell/cc-window.c:794
+#: shell/appdata/org.gnome.Settings.appdata.xml.in:7 shell/cc-window.c:802
 #: shell/cc-window.ui:24 shell/cc-window.ui:31
 #: shell/org.gnome.Settings.desktop.in:3
 msgid "Settings"
@@ -865,7 +865,7 @@ msgstr "_Impor Berkas…"
 
 #: panels/color/cc-color-panel.ui:390 panels/keyboard/cc-input-chooser.ui:18
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:41
-#: panels/network/connection-editor/net-connection-editor.c:606
+#: panels/network/connection-editor/net-connection-editor.c:610
 #: panels/printers/new-printer-dialog.ui:91
 #: panels/user-accounts/cc-add-user-dialog.ui:39
 msgid "_Add"
@@ -2706,7 +2706,7 @@ msgstr ""
 " Detail galat: NetworkManager tidak berjalan."
 
 #: panels/network/cc-network-panel.ui:46 panels/network/cc-network-panel.ui:80
-#: panels/network/connection-editor/net-connection-editor.c:694
+#: panels/network/connection-editor/net-connection-editor.c:698
 msgid "VPN"
 msgstr "VPN"
 
@@ -2839,33 +2839,33 @@ msgid "Scan to Connect"
 msgstr "Pindai untuk Terhubung"
 
 #. TRANSLATORS: This happens when the connection name does not contain the SSID.
-#: panels/network/cc-wifi-connection-row.c:222
+#: panels/network/cc-wifi-connection-row.c:223
 #, c-format
 msgctxt "Wi-Fi Connection"
 msgid "%s (SSID: %s)"
 msgstr "%s (SSID: %s)"
 
-#: panels/network/cc-wifi-connection-row.c:282
+#: panels/network/cc-wifi-connection-row.c:283
 msgid "Insecure network (WEP)"
 msgstr "Jaringan tidak aman (WEP)"
 
-#: panels/network/cc-wifi-connection-row.c:286
+#: panels/network/cc-wifi-connection-row.c:287
 msgid "Secure network (WPA)"
 msgstr "Jaringan aman (WPA)"
 
-#: panels/network/cc-wifi-connection-row.c:290
+#: panels/network/cc-wifi-connection-row.c:291
 msgid "Secure network (WPA2)"
 msgstr "Jaringan aman (WPA2)"
 
-#: panels/network/cc-wifi-connection-row.c:294
+#: panels/network/cc-wifi-connection-row.c:295
 msgid "Secure network (WPA3)"
 msgstr "Jaringan aman (WPA3)"
 
-#: panels/network/cc-wifi-connection-row.c:298
+#: panels/network/cc-wifi-connection-row.c:299
 msgid "Secure network"
 msgstr "Jaringan aman"
 
-#: panels/network/cc-wifi-connection-row.c:327
+#: panels/network/cc-wifi-connection-row.c:328
 #, c-format
 msgid "Signal strength %d%%"
 msgstr "Kuat sinyal %d%%"
@@ -3316,7 +3316,7 @@ msgid "WPA3 Personal"
 msgstr "WPA3 Pribadi"
 
 #: panels/network/connection-editor/ce-page-wireguard.c:106
-#: panels/network/connection-editor/net-connection-editor.c:854
+#: panels/network/connection-editor/net-connection-editor.c:858
 msgid "WireGuard"
 msgstr "WireGuard"
 
@@ -3503,32 +3503,32 @@ msgstr "Otomatis, hanya DHCP"
 msgid "Prefix"
 msgstr "Awalan"
 
-#: panels/network/connection-editor/net-connection-editor.c:368
+#: panels/network/connection-editor/net-connection-editor.c:372
 #, c-format
 msgid "Unable to open connection editor: %s"
 msgstr "Tak bisa membuka penyunting koneksi: %s"
 
-#: panels/network/connection-editor/net-connection-editor.c:387
+#: panels/network/connection-editor/net-connection-editor.c:391
 msgid "New Profile"
 msgstr "Profil Baru"
 
-#: panels/network/connection-editor/net-connection-editor.c:454
+#: panels/network/connection-editor/net-connection-editor.c:458
 #, c-format
 msgid "Invalid setting %s: %s"
 msgstr "Pengaturan tidak valid %s: %s"
 
-#: panels/network/connection-editor/net-connection-editor.c:457
+#: panels/network/connection-editor/net-connection-editor.c:461
 #, c-format
 msgid "Invalid setting %s"
 msgstr "Pengaturan tidak valid %s"
 
-#: panels/network/connection-editor/net-connection-editor.c:735
+#: panels/network/connection-editor/net-connection-editor.c:739
 #, c-format
 msgid "Invalid VPN configuration file"
 msgstr "Berkas konfigurasi VPN tidak valid"
 
 #. Translators: VPN add dialog Wireguard description
-#: panels/network/connection-editor/net-connection-editor.c:842
+#: panels/network/connection-editor/net-connection-editor.c:846
 msgid ""
 "Free and open-source VPN solution designed for ease of use, high speed "
 "performance and low attack surface."
@@ -3536,11 +3536,11 @@ msgstr ""
 "Solusi VPN gratis dan sumber terbuka yang dirancang untuk kemudahan "
 "penggunaan, kinerja kecepatan tinggi, dan permukaan serangan rendah."
 
-#: panels/network/connection-editor/net-connection-editor.c:878
+#: panels/network/connection-editor/net-connection-editor.c:882
 msgid "Import from file…"
 msgstr "Impor dari berkas…"
 
-#: panels/network/connection-editor/net-connection-editor.c:904
+#: panels/network/connection-editor/net-connection-editor.c:908
 msgid "Add VPN"
 msgstr "Tambah VPN"
 
@@ -3650,9 +3650,83 @@ msgstr "T_ambahkan rute peer"
 msgid "_Peers"
 msgstr "_Peer"
 
+#: panels/network/connection-editor/wireguard-page.ui:235
+msgid "Add WireGuard peer"
+msgstr "Tambah peer WireGuard"
+
 #: panels/network/connection-editor/wireguard-page.ui:257
 msgid "No peers set up"
 msgstr "Tidak ada peer yang disiapkan"
+
+#: panels/network/connection-editor/wireguard-peer.ui:88
+msgid "_Endpoint"
+msgstr "Titik _Akhir"
+
+#: panels/network/connection-editor/wireguard-peer.ui:98
+msgid ""
+"An endpoint IP or hostname, followed by a colon, and then a port number."
+msgstr ""
+"IP atau nama host titik akhir, diikuti oleh titik dua, lalu nomor port."
+
+#: panels/network/connection-editor/wireguard-peer.ui:110
+msgid "_Public key"
+msgstr "Kunci _publik"
+
+#: panels/network/connection-editor/wireguard-peer.ui:120
+msgid "A base64 public key calculated by 'wg pubkey' from a private key."
+msgstr ""
+"Kunci publik base64 yang dihitung dengan 'wg pubkey' dari suatu kunci privat."
+
+#: panels/network/connection-editor/wireguard-peer.ui:135
+msgid "_Pre-shared key"
+msgstr "Kunci _bersama"
+
+#: panels/network/connection-editor/wireguard-peer.ui:145
+msgid ""
+"A base64 preshared key generated by 'wg genpsk'. Optional, and may be "
+"omitted. Adds an additional layer of symmetric-key cryptography to be mixed "
+"into the already existing public-key cryptography, for post-quantum "
+"resistance."
+msgstr ""
+"Kunci bersama base64 yang dibangkitkan oleh 'wg genpsk'. Opsional, dan dapat "
+"dilewati. Menambahkan lapisan kriptografi kunci simetrik untuk dicampur ke "
+"dalam kriptografi kunci publik yang telah ada, untuk ketahanan pasca kuantum."
+
+#: panels/network/connection-editor/wireguard-peer.ui:162
+msgid "Allowed _IP addresses"
+msgstr "Alamat _IP yang diizinkan"
+
+#: panels/network/connection-editor/wireguard-peer.ui:172
+msgid ""
+"Comma-separated list of IP (v4 or v6) addresses with CIDR masks from which "
+"incoming traffic for this peer is allowed and to which outgoing traffic for "
+"this peer is directed."
+msgstr ""
+"Daftar alamat IP yang dipisah koma (v4 atau v6) dengan mask CIDR dari mana "
+"lalu lintas masuk untuk peer ini diizinkan dan ke mana lalu lintas keluar "
+"untuk peer ini diarahkan."
+
+#: panels/network/connection-editor/wireguard-peer.ui:184
+msgid "_Persistent keepalive"
+msgstr "Keepalive _persisten"
+
+#: panels/network/connection-editor/wireguard-peer.ui:197
+msgid ""
+"How often to send an authenticated empty packet to the peer for the purpose "
+"of keeping a stateful firewall or NAT mapping valid. This is optional and "
+"not recommended outside of specific setups."
+msgstr ""
+"Seberapa sering mengirim paket kosong terotentikasi ke peer dengan tujuan "
+"menjaga firewall stateful atau pemetaan NAT valid. Ini adalah opsional dan "
+"tidak disarankan di luar dari penyiapan spesifik."
+
+#: panels/network/connection-editor/wireguard-peer.ui:206
+msgid "seconds"
+msgstr "detik"
+
+#: panels/network/connection-editor/wireguard-peer.ui:222
+msgid "Apply"
+msgstr "Terapkan"
 
 #: panels/network/gnome-network-panel.desktop.in:4
 msgid "Control how you connect to the Internet"
@@ -3725,6 +3799,10 @@ msgstr "Kebijakan sistem melarang pemakaian sebagai Hotspot"
 #: panels/network/net-device-wifi.c:1267
 msgid "Wireless device does not support Hotspot mode"
 msgstr "Perangkat nirkabel tak mendukung mode Hotspot"
+
+#: panels/network/network-ethernet.ui:10
+msgid "Add Ethernet connection"
+msgstr "Tambah sambungan Ethernet"
 
 #: panels/network/network-mobile.ui:27
 #: panels/wwan/cc-wwan-details-dialog.ui:237
@@ -9268,134 +9346,3 @@ msgstr[0] "%u Masukan"
 #: subprojects/gvc/gvc-mixer-control.c:2882
 msgid "System Sounds"
 msgstr "Suara Sistem"
-
-#, c-format
-#~ msgid "Could not load ui: %s"
-#~ msgstr "Tak dapat memuat ui: %s"
-
-#~ msgid "All Settings"
-#~ msgstr "Semua Pengaturan"
-
-#~ msgid "You cannot delete your own account."
-#~ msgstr "Anda tak bisa menghapus akunmu sendiri."
-
-#, c-format
-#~ msgid "%s is still logged in"
-#~ msgstr "%s masih log masuk"
-
-#~ msgid ""
-#~ "Deleting a user while they are logged in can leave the system in an "
-#~ "inconsistent state."
-#~ msgstr ""
-#~ "Menghapus pengguna saat mereka log masuk dapat menjerumuskan sistem ke "
-#~ "dalam keadaan tak konsisten."
-
-#~ msgid "Failed to contact the accounts service"
-#~ msgstr "Gagal menghubungi layanan akun"
-
-#~ msgid "Please make sure that the AccountService is installed and enabled."
-#~ msgstr "Pastikan bahwa AccountService ini telah terpasang dan diaktifkan."
-
-#~ msgid "Your session needs to be restarted for changes to take effect"
-#~ msgstr "Sesi Anda perlu dimulai ulang agar perubahan berefek"
-
-#~ msgid "Restart Now"
-#~ msgstr "Nyalakan Ulang Sekarang"
-
-#~ msgid "Close"
-#~ msgstr "Tutup"
-
-#~ msgid "No Users Found"
-#~ msgstr "Tak Ditemukan Pengguna"
-
-#~ msgid "Unlock to add a user account."
-#~ msgstr "Buka kunci untuk menambahkan akun pengguna."
-
-#~ msgid "camera;photos;video;webcam;lock;private;privacy;"
-#~ msgstr "kamera;foto;video;kamera web;kunci;pribadi;privasi;"
-
-#~ msgid "Settings for automatically problem reporting"
-#~ msgstr "Pengaturan untuk pelaporan masalah secara otomatis"
-
-#~ msgid "diagnostics;crash;"
-#~ msgstr "diagnostik;kres;"
-
-#~ msgid "Device Security Status"
-#~ msgstr "Status Keamanan Perangkat"
-
-#~ msgid ""
-#~ "Device security provides information about how protected your device is "
-#~ "against security issues which target the hardware itself."
-#~ msgstr ""
-#~ "Keamanan perangkat memberikan informasi tentang seberapa terlindungi "
-#~ "perangkat Anda terhadap masalah keamanan yang menargetkan perangkat keras "
-#~ "itu sendiri."
-
-#~ msgid "Aspects of hardware that affect security include:"
-#~ msgstr "Aspek perangkat keras yang mempengaruhi keamanan meliputi:"
-
-#~ msgid "• security features that are built into a hardware itself;"
-#~ msgstr ""
-#~ "• fitur keamanan yang dibangun ke dalam perangkat keras itu sendiri;"
-
-#~ msgid "• how the hardware is configured to protect against security issues;"
-#~ msgstr ""
-#~ "• bagaimana perangkat keras dikonfigurasi untuk melindungi dari masalah "
-#~ "keamanan;"
-
-#~ msgid "• the security of the software runs directly on the hardware."
-#~ msgstr ""
-#~ "• keamanan perangkat lunak yang berjalan langsung pada perangkat keras."
-
-#~ msgid ""
-#~ "Security threats which affect hardware include malware and viruses that "
-#~ "target the software that runs directly on the hardware. It also includes "
-#~ "physical tampering, such as physical connection to the hardware to read "
-#~ "data and implant malware."
-#~ msgstr ""
-#~ "Ancaman keamanan yang mempengaruhi perangkat keras termasuk malware dan "
-#~ "virus yang menargetkan perangkat lunak yang berjalan langsung pada "
-#~ "perangkat keras. Ini juga termasuk gangguan fisik, seperti koneksi fisik "
-#~ "ke perangkat keras untuk membaca data dan menanamkan malware."
-
-#~ msgid ""
-#~ "Device security is just one aspect of security, and does not reflect the "
-#~ "overall security status of the system and applications."
-#~ msgstr ""
-#~ "Keamanan perangkat hanyalah salah satu aspek keamanan, dan tidak "
-#~ "mencerminkan status keamanan sistem dan aplikasi secara keseluruhan."
-
-#~ msgid "Protection against hardware security threats"
-#~ msgstr "Perlindungan terhadap ancaman keamanan perangkat keras"
-
-#~ msgid ""
-#~ "screen;lock;diagnostics;crash;private;recent;temporary;tmp;index;name;"
-#~ "network;identity;privacy;"
-#~ msgstr ""
-#~ "layar;kunci;diagnostik;crash;privat;terkini;temporer;tmp;indeks;nama;"
-#~ "jaringan;identitas;privasi;"
-
-#~ msgid "location;gps;private;privacy;"
-#~ msgstr "lokasi;gps;pribadi;privasi;"
-
-#~ msgid "microphone;recording;application;privacy;"
-#~ msgstr "mikrofon;rekaman;aplikasi;privasi;"
-
-#~ msgid "Automatically lock the screen"
-#~ msgstr "Kunci layar secara otomatis"
-
-#~ msgid "screen;lock;private;privacy;"
-#~ msgstr "layar;kunci;pribadi;privasi;"
-
-#~ msgid "Thunderbolt;privacy;"
-#~ msgstr "Thunderbolt;privasi;"
-
-#~ msgid "Control data and files that are kept on your device"
-#~ msgstr "Kontrol data dan berkas yang disimpan di perangkat Anda"
-
-#~ msgid ""
-#~ "usage;recent;history;files;temporary;tmp;private;privacy;trash;purge;"
-#~ "retain;"
-#~ msgstr ""
-#~ "penggunaan;terkini;riwayat;berkas;sementara;tmp;pribadi;privasi;sampah;"
-#~ "pembersihan;simpan;"
