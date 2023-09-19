@@ -10,8 +10,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/iss"
 "ues\n"
-"POT-Creation-Date: 2023-09-18 13:21+0000\n"
-"PO-Revision-Date: 2023-09-18 22:56+0300\n"
+"POT-Creation-Date: 2023-09-19 09:32+0000\n"
+"PO-Revision-Date: 2023-09-19 19:24+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -1080,8 +1080,8 @@ msgid "This profile may no longer be accurate"
 msgstr "Цей профіль може бути неточним"
 
 #: panels/color/gnome-color-panel.desktop.in:3
-#: panels/universal-access/cc-ua-zoom-page.ui:197
-#: panels/universal-access/cc-ua-zoom-page.ui:271
+#: panels/universal-access/cc-ua-zoom-page.ui:198
+#: panels/universal-access/cc-ua-zoom-page.ui:274
 msgid "Color"
 msgstr "Колір"
 
@@ -2433,7 +2433,7 @@ msgstr "Скорочення"
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:247
 #: panels/sound/cc-alert-chooser-window.c:342
 #: panels/sound/cc-alert-chooser-window.ui:20
-#: panels/universal-access/cc-ua-zoom-page.ui:275
+#: panels/universal-access/cc-ua-zoom-page.ui:278
 msgid "None"
 msgstr "Немає"
 
@@ -3689,7 +3689,6 @@ msgid "_Peers"
 msgstr "_Вузли"
 
 #: panels/network/connection-editor/wireguard-page.ui:235
-#| msgid "WireGuard"
 msgid "Add WireGuard peer"
 msgstr "Додати вузол WireGuard"
 
@@ -3717,7 +3716,6 @@ msgstr ""
 "ключа."
 
 #: panels/network/connection-editor/wireguard-peer.ui:135
-#| msgid "Shared Key"
 msgid "_Pre-shared key"
 msgstr "Спі_льний ключ"
 
@@ -3734,7 +3732,6 @@ msgstr ""
 "відкритим ключем для підвищення постквантового захисту."
 
 #: panels/network/connection-editor/wireguard-peer.ui:162
-#| msgid "_Cloned Address"
 msgid "Allowed _IP addresses"
 msgstr "Дозволені _IP-адреси"
 
@@ -3763,12 +3760,10 @@ msgstr ""
 "рекомендуємо ним користуватися, окрім особливих випадків."
 
 #: panels/network/connection-editor/wireguard-peer.ui:206
-#| msgid "0 seconds"
 msgid "seconds"
 msgstr "секунд"
 
 #: panels/network/connection-editor/wireguard-peer.ui:222
-#| msgid "_Apply"
 msgid "Apply"
 msgstr "Застосувати"
 
@@ -3845,7 +3840,6 @@ msgid "Wireless device does not support Hotspot mode"
 msgstr "Бездротовий пристрій не підтримує режиму гарячої точки"
 
 #: panels/network/network-ethernet.ui:10
-#| msgid "Add new connection"
 msgid "Add Ethernet connection"
 msgstr "Додати з'єднання Ethernet"
 
@@ -4451,6 +4445,12 @@ msgstr "Основна"
 msgctxt "Battery name"
 msgid "Extra"
 msgstr "Додаткова"
+
+#. TRANSLATORS: This is the battery charge level percentage (e.g. 50%). This could be localized to account for local Percent sign formatting guidelines. See https://en.wikipedia.org/wiki/Percent_sign#Correct_style
+#: panels/power/cc-battery-row.c:289
+#, c-format
+msgid "%d %%"
+msgstr "%d %%"
 
 #: panels/power/cc-power-panel.c:255
 msgid "Batteries"
@@ -7318,7 +7318,7 @@ msgstr "Затримка п_одвійного клацання"
 #: panels/universal-access/cc-ua-typing-page.ui:137
 #: panels/universal-access/cc-ua-typing-page.ui:189
 #: panels/universal-access/cc-ua-typing-page.ui:236
-#: panels/universal-access/cc-ua-zoom-page.ui:173
+#: panels/universal-access/cc-ua-zoom-page.ui:174
 msgid "Short"
 msgstr "Коротка"
 
@@ -7328,7 +7328,7 @@ msgstr "Коротка"
 #: panels/universal-access/cc-ua-typing-page.ui:140
 #: panels/universal-access/cc-ua-typing-page.ui:192
 #: panels/universal-access/cc-ua-typing-page.ui:239
-#: panels/universal-access/cc-ua-zoom-page.ui:177
+#: panels/universal-access/cc-ua-zoom-page.ui:178
 msgid "Long"
 msgstr "Довга"
 
@@ -7696,53 +7696,53 @@ msgstr "Тонкий"
 msgid "Thick"
 msgstr "Товстий"
 
-#: panels/universal-access/cc-ua-zoom-page.ui:166
+#: panels/universal-access/cc-ua-zoom-page.ui:167
 msgid "Length"
 msgstr "Довжина"
 
-#: panels/universal-access/cc-ua-zoom-page.ui:174
+#: panels/universal-access/cc-ua-zoom-page.ui:175
 msgid "1/4 screen"
 msgstr "1/4 екрана"
 
-#: panels/universal-access/cc-ua-zoom-page.ui:175
+#: panels/universal-access/cc-ua-zoom-page.ui:176
 msgid "1/2 Screen"
 msgstr "1/2 екрана"
 
-#: panels/universal-access/cc-ua-zoom-page.ui:176
+#: panels/universal-access/cc-ua-zoom-page.ui:177
 msgid "3/4 Screen"
 msgstr "3/4 екрана"
 
-#: panels/universal-access/cc-ua-zoom-page.ui:212
+#: panels/universal-access/cc-ua-zoom-page.ui:213
 msgid "Color Filters"
 msgstr "Фільтри кольорів"
 
-#: panels/universal-access/cc-ua-zoom-page.ui:216
+#: panels/universal-access/cc-ua-zoom-page.ui:217
 msgid "_Inverted"
 msgstr "_Інвертовані"
 
-#: panels/universal-access/cc-ua-zoom-page.ui:217
+#: panels/universal-access/cc-ua-zoom-page.ui:218
 msgid "Invert colors in the magnifier region"
 msgstr "Інвертувати кольори в області лупи"
 
-#: panels/universal-access/cc-ua-zoom-page.ui:224
+#: panels/universal-access/cc-ua-zoom-page.ui:225
 msgid "Brightness"
 msgstr "Яскравість"
 
-#: panels/universal-access/cc-ua-zoom-page.ui:229
-#: panels/universal-access/cc-ua-zoom-page.ui:252
+#: panels/universal-access/cc-ua-zoom-page.ui:230
+#: panels/universal-access/cc-ua-zoom-page.ui:254
 msgid "Low"
 msgstr "Низька"
 
-#: panels/universal-access/cc-ua-zoom-page.ui:230
-#: panels/universal-access/cc-ua-zoom-page.ui:253
+#: panels/universal-access/cc-ua-zoom-page.ui:231
+#: panels/universal-access/cc-ua-zoom-page.ui:255
 msgid "High"
 msgstr "Висока"
 
-#: panels/universal-access/cc-ua-zoom-page.ui:248
+#: panels/universal-access/cc-ua-zoom-page.ui:250
 msgid "Contrast"
 msgstr "Контрастність"
 
-#: panels/universal-access/cc-ua-zoom-page.ui:276
+#: panels/universal-access/cc-ua-zoom-page.ui:279
 msgid "Full"
 msgstr "Повна"
 
