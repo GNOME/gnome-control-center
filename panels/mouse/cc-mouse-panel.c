@@ -254,15 +254,33 @@ mouse_accel_set_mapping (const GValue       *value,
     return g_variant_new_string (g_value_get_boolean (value) ? "default" : "flat");
 }
 
+static void
+update_primary_mouse_button_order (CcMousePanel *self)
+{
+  /* Manually reorder Left/Right buttons to preserve direction in RTL instead
+   * of calling gtk_widget_set_direction (self->primary_button_box, GTK_TEXT_DIR_LTR)
+   * which won't preserve the correct behavior of the CSS "linked" style class.
+   * See https://gitlab.gnome.org/GNOME/gnome-control-center/-/issues/1101
+   * and https://gitlab.gnome.org/GNOME/gnome-control-center/-/issues/2649 */
+  if (gtk_widget_get_direction (GTK_WIDGET (self)) == GTK_TEXT_DIR_RTL) {
+    gtk_box_reorder_child_after (self->primary_button_box,
+                                 GTK_WIDGET (self->primary_button_left),
+                                 GTK_WIDGET (self->primary_button_right));
+  } else {
+    gtk_box_reorder_child_after (self->primary_button_box,
+                                 GTK_WIDGET (self->primary_button_right),
+                                 GTK_WIDGET (self->primary_button_left));
+  }
+}
+
 /* Set up the property editors in the dialog. */
 static void
 setup_dialog (CcMousePanel *self)
 {
   GtkToggleButton *button;
 
+  update_primary_mouse_button_order (self);
   self->mouse_test = GTK_WINDOW (cc_mouse_test_new ());
-
-  gtk_widget_set_direction (GTK_WIDGET (self->primary_button_box), GTK_TEXT_DIR_LTR);
 
   self->left_handed = g_settings_get_boolean (self->mouse_settings, "left-handed");
   button = self->left_handed ? self->primary_button_right : self->primary_button_left;
@@ -360,6 +378,17 @@ device_changed (CcMousePanel *self)
 }
 
 static void
+cc_mouse_panel_direction_changed (GtkWidget        *widget,
+                                  GtkTextDirection  previous_direction)
+{
+  CcMousePanel *self = CC_MOUSE_PANEL (widget);
+
+  update_primary_mouse_button_order (self);
+
+  GTK_WIDGET_CLASS (cc_mouse_panel_parent_class)->direction_changed (widget, previous_direction);
+}
+
+static void
 cc_mouse_panel_dispose (GObject *object)
 {
   CcMousePanel *self = CC_MOUSE_PANEL (object);
@@ -426,6 +455,7 @@ cc_mouse_panel_class_init (CcMousePanelClass *klass)
   panel_class->get_help_uri = cc_mouse_panel_get_help_uri;
 
   object_class->dispose = cc_mouse_panel_dispose;
+  widget_class->direction_changed = cc_mouse_panel_direction_changed;
 
   g_type_ensure (CC_TYPE_ILLUSTRATED_ROW);
   g_type_ensure (CC_TYPE_SPLIT_ROW);
