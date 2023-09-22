@@ -19,8 +19,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2023-09-09 09:59+0000\n"
-"PO-Revision-Date: 2023-09-12 00:14+0200\n"
+"POT-Creation-Date: 2023-09-22 10:43+0000\n"
+"PO-Revision-Date: 2023-09-23 00:48+0200\n"
 "Last-Translator: Balázs Úr <ur.balazs at fsf dot hu>\n"
 "Language-Team: Hungarian <openscope at fsf dot hu>\n"
 "Language: hu\n"
@@ -30,32 +30,32 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Lokalize 23.04.3\n"
 
-#: panels/applications/cc-applications-panel.c:821
+#: panels/applications/cc-applications-panel.c:824
 msgid "System Bus"
 msgstr "Rendszerbusz"
 
-#: panels/applications/cc-applications-panel.c:821
-#: panels/applications/cc-applications-panel.c:823
-#: panels/applications/cc-applications-panel.c:836
-#: panels/applications/cc-applications-panel.c:841
+#: panels/applications/cc-applications-panel.c:824
+#: panels/applications/cc-applications-panel.c:826
+#: panels/applications/cc-applications-panel.c:839
+#: panels/applications/cc-applications-panel.c:844
 msgid "Full access"
 msgstr "Teljes hozzáférés"
 
-#: panels/applications/cc-applications-panel.c:823
+#: panels/applications/cc-applications-panel.c:826
 msgid "Session Bus"
 msgstr "Munkamenetbusz"
 
-#: panels/applications/cc-applications-panel.c:827
+#: panels/applications/cc-applications-panel.c:830
 #: panels/power/cc-power-panel.ui:81 panels/privacy/cc-bolt-page.ui:240
 #: panels/privacy/cc-bolt-page.ui:284 panels/privacy/cc-privacy-panel.ui:78
 msgid "Devices"
 msgstr "Eszközök"
 
-#: panels/applications/cc-applications-panel.c:827
+#: panels/applications/cc-applications-panel.c:830
 msgid "Full access to /dev"
 msgstr "Teljes hozzáférés a /dev könyvtárhoz"
 
-#: panels/applications/cc-applications-panel.c:831
+#: panels/applications/cc-applications-panel.c:834
 #: panels/network/cc-network-panel.ui:8
 #: panels/network/gnome-network-panel.desktop.in:3
 #: panels/network/network-mobile.ui:235 panels/wwan/cc-wwan-device-page.ui:61
@@ -63,27 +63,27 @@ msgstr "Teljes hozzáférés a /dev könyvtárhoz"
 msgid "Network"
 msgstr "Hálózat"
 
-#: panels/applications/cc-applications-panel.c:831
+#: panels/applications/cc-applications-panel.c:834
 msgid "Has network access"
 msgstr "Van hálózati kapcsolata"
 
-#: panels/applications/cc-applications-panel.c:836
-#: panels/applications/cc-applications-panel.c:838
+#: panels/applications/cc-applications-panel.c:839
+#: panels/applications/cc-applications-panel.c:841
 #: panels/search/cc-search-locations-dialog.c:384
 msgid "Home"
 msgstr "Saját mappa"
 
-#: panels/applications/cc-applications-panel.c:838
-#: panels/applications/cc-applications-panel.c:843
+#: panels/applications/cc-applications-panel.c:841
+#: panels/applications/cc-applications-panel.c:846
 msgid "Read-only"
 msgstr "Csak olvasható"
 
-#: panels/applications/cc-applications-panel.c:841
-#: panels/applications/cc-applications-panel.c:843
+#: panels/applications/cc-applications-panel.c:844
+#: panels/applications/cc-applications-panel.c:846
 msgid "File System"
 msgstr "Fájlrendszer"
 
-#: panels/applications/cc-applications-panel.c:847
+#: panels/applications/cc-applications-panel.c:850
 #: panels/keyboard/01-launchers.xml.in:6
 #: shell/appdata/org.gnome.Settings.appdata.xml.in:7 shell/cc-window.c:802
 #: shell/cc-window.ui:24 shell/cc-window.ui:31
@@ -91,11 +91,11 @@ msgstr "Fájlrendszer"
 msgid "Settings"
 msgstr "Beállítások"
 
-#: panels/applications/cc-applications-panel.c:847
+#: panels/applications/cc-applications-panel.c:850
 msgid "Can change settings"
 msgstr "Megváltoztathatja a beállításokat"
 
-#: panels/applications/cc-applications-panel.c:849
+#: panels/applications/cc-applications-panel.c:852
 #, c-format
 msgid ""
 "<b>%s</b> requires access to the following system resources. To stop this "
@@ -104,14 +104,14 @@ msgstr ""
 "A(z) <b>%s</b> hozzáférést igényel a következő rendszererőforrásokhoz. A "
 "hozzáférés leállításához el kell távolítani az alkalmazást."
 
-#: panels/applications/cc-applications-panel.c:1191
+#: panels/applications/cc-applications-panel.c:1194
 #, c-format
 msgid "%u file and link type that is opened by the app"
 msgid_plural "%u file and link types that are opened by the app"
 msgstr[0] "Az alkalmazás által megnyitott %u fájl- és hivatkozástípus"
 msgstr[1] "Az alkalmazás által megnyitott %u fájl- és hivatkozástípus"
 
-#: panels/applications/cc-applications-panel.c:1198
+#: panels/applications/cc-applications-panel.c:1201
 #, c-format
 msgid "<b>%s</b> is used to open the following types of files and links."
 msgstr ""
@@ -119,37 +119,42 @@ msgstr ""
 "megnyitásához."
 
 #. Translators: '%s' is the formatted size, e.g. "26.2 MB"
-#: panels/applications/cc-applications-panel.c:1247
+#: panels/applications/cc-applications-panel.c:1250
 #, c-format
 msgid "%s of disk space used."
 msgstr "%s lemezterület van használatban."
 
-#: panels/applications/cc-applications-panel.c:1411
-#: panels/applications/cc-applications-panel.ui:247
+#: panels/applications/cc-applications-panel.ui:10
 #: panels/applications/gnome-applications-panel.desktop.in:3
 msgid "Apps"
 msgstr "Alkalmazások"
 
-#: panels/applications/cc-applications-panel.ui:16
-msgid "No Apps"
-msgstr "Nincsenek alkalmazások"
+#: panels/applications/cc-applications-panel.ui:27
+msgid "Search apps"
+msgstr "Alkalmazások keresése"
 
-#: panels/applications/cc-applications-panel.ui:19
-msgid "_Install Some…"
-msgstr "Néhány _telepítése…"
+#: panels/applications/cc-applications-panel.ui:44
+#: panels/applications/cc-applications-panel.ui:77
+msgid "Default Apps"
+msgstr "Alapértelmezett alkalmazások"
 
-#: panels/applications/cc-applications-panel.ui:70
+#: panels/applications/cc-applications-panel.ui:106
+#| msgid "Settings"
+msgid "App Settings"
+msgstr "Alkalmazás beállításai"
+
+#: panels/applications/cc-applications-panel.ui:152
 #: panels/printers/pp-details-dialog.c:267
 #: panels/sharing/cc-sharing-panel.c:454
 msgid "_Open"
 msgstr "_Megnyitás"
 
-#: panels/applications/cc-applications-panel.ui:82
+#: panels/applications/cc-applications-panel.ui:164
 msgid "App _Details"
 msgstr "Alkalmazás _részletei"
 
-#: panels/applications/cc-applications-panel.ui:102
-#: panels/applications/cc-applications-panel.ui:109
+#: panels/applications/cc-applications-panel.ui:184
+#: panels/applications/cc-applications-panel.ui:191
 #: panels/keyboard/01-launchers.xml.in:16
 #: panels/keyboard/cc-input-chooser.ui:76
 #: panels/printers/new-printer-dialog.ui:216
@@ -159,8 +164,8 @@ msgstr "Alkalmazás _részletei"
 msgid "Search"
 msgstr "Keresés"
 
-#: panels/applications/cc-applications-panel.ui:103
-#: panels/applications/cc-applications-panel.ui:110
+#: panels/applications/cc-applications-panel.ui:185
+#: panels/applications/cc-applications-panel.ui:192
 msgid "Receive system searches and send results"
 msgstr "Rendszerkeresések fogadása és a találatok küldése"
 
@@ -170,11 +175,11 @@ msgstr "Rendszerkeresések fogadása és a találatok küldése"
 #. TRANSLATORS: Status of Parental Controls setup
 #. translators:
 #. * The device has been disabled
-#: panels/applications/cc-applications-panel.ui:111
-#: panels/applications/cc-applications-panel.ui:153
-#: panels/applications/cc-applications-panel.ui:174
-#: panels/applications/cc-applications-panel.ui:188
-#: panels/applications/cc-applications-panel.ui:202
+#: panels/applications/cc-applications-panel.ui:193
+#: panels/applications/cc-applications-panel.ui:235
+#: panels/applications/cc-applications-panel.ui:256
+#: panels/applications/cc-applications-panel.ui:270
+#: panels/applications/cc-applications-panel.ui:284
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:123
 #: panels/keyboard/cc-xkb-modifier-dialog.c:342
 #: panels/keyboard/keyboard-shortcuts.c:367
@@ -185,121 +190,109 @@ msgstr "Rendszerkeresések fogadása és a találatok küldése"
 msgid "Disabled"
 msgstr "Letiltva"
 
-#: panels/applications/cc-applications-panel.ui:116
+#: panels/applications/cc-applications-panel.ui:198
 #: panels/notifications/gnome-notifications-panel.desktop.in:3
 msgid "Notifications"
 msgstr "Értesítések"
 
-#: panels/applications/cc-applications-panel.ui:117
+#: panels/applications/cc-applications-panel.ui:199
 msgid "Show system notifications"
 msgstr "Rendszerértesítések megjelenítése"
 
-#: panels/applications/cc-applications-panel.ui:123
+#: panels/applications/cc-applications-panel.ui:205
 msgid "Run in Background"
 msgstr "Futtatás a háttérben"
 
-#: panels/applications/cc-applications-panel.ui:124
+#: panels/applications/cc-applications-panel.ui:206
 msgid "Allow activity when the app is closed"
 msgstr "Tevékenység engedélyezése, ha az alkalmazás be van zárva"
 
-#: panels/applications/cc-applications-panel.ui:130
+#: panels/applications/cc-applications-panel.ui:212
 msgid "Screenshots"
 msgstr "Képernyőképek"
 
-#: panels/applications/cc-applications-panel.ui:131
+#: panels/applications/cc-applications-panel.ui:213
 msgid "Take pictures of the screen at any time"
 msgstr "Képek készítése a képernyőről bármikor"
 
-#: panels/applications/cc-applications-panel.ui:137
+#: panels/applications/cc-applications-panel.ui:219
 msgid "Change Wallpaper"
 msgstr "Háttérkép megváltoztatása"
 
-#: panels/applications/cc-applications-panel.ui:138
+#: panels/applications/cc-applications-panel.ui:220
 msgid "Change the desktop wallpaper."
 msgstr "Az asztal háttérképének megváltoztatása."
 
-#: panels/applications/cc-applications-panel.ui:144
-#: panels/applications/cc-applications-panel.ui:151
+#: panels/applications/cc-applications-panel.ui:226
+#: panels/applications/cc-applications-panel.ui:233
 #: panels/sound/cc-sound-panel.ui:358
 msgid "Sounds"
 msgstr "Hangok"
 
-#: panels/applications/cc-applications-panel.ui:145
+#: panels/applications/cc-applications-panel.ui:227
 msgid "Reproduce sounds."
 msgstr "Hangok reprodukálása."
 
-#: panels/applications/cc-applications-panel.ui:152
+#: panels/applications/cc-applications-panel.ui:234
 msgid "Reproduce sounds"
 msgstr "Hangok reprodukálása"
 
-#: panels/applications/cc-applications-panel.ui:158
+#: panels/applications/cc-applications-panel.ui:240
 msgid "Inhibit Shortcuts"
 msgstr "Gyorsbillentyűk elnyomása"
 
-#: panels/applications/cc-applications-panel.ui:159
+#: panels/applications/cc-applications-panel.ui:241
 msgid "Block standard keyboard shortcuts"
 msgstr "A szabványos gyorsbillentyűk tiltása"
 
-#: panels/applications/cc-applications-panel.ui:165
-#: panels/applications/cc-applications-panel.ui:172
+#: panels/applications/cc-applications-panel.ui:247
+#: panels/applications/cc-applications-panel.ui:254
 msgid "Camera"
 msgstr "Kamera"
 
-#: panels/applications/cc-applications-panel.ui:166
-#: panels/applications/cc-applications-panel.ui:173
+#: panels/applications/cc-applications-panel.ui:248
+#: panels/applications/cc-applications-panel.ui:255
 msgid "Take pictures with the camera"
 msgstr "Fényképek készítése a kamerával"
 
-#: panels/applications/cc-applications-panel.ui:179
-#: panels/applications/cc-applications-panel.ui:186
+#: panels/applications/cc-applications-panel.ui:261
+#: panels/applications/cc-applications-panel.ui:268
 msgid "Microphone"
 msgstr "Mikrofon"
 
-#: panels/applications/cc-applications-panel.ui:180
-#: panels/applications/cc-applications-panel.ui:187
+#: panels/applications/cc-applications-panel.ui:262
+#: panels/applications/cc-applications-panel.ui:269
 msgid "Record audio with the microphone"
 msgstr "Hang rögzítése a mikrofonnal"
 
-#: panels/applications/cc-applications-panel.ui:193
-#: panels/applications/cc-applications-panel.ui:200
+#: panels/applications/cc-applications-panel.ui:275
+#: panels/applications/cc-applications-panel.ui:282
 #: panels/privacy/cc-location-page.ui:4
 msgid "Location Services"
 msgstr "Helymeghatározó szolgáltatások"
 
-#: panels/applications/cc-applications-panel.ui:194
-#: panels/applications/cc-applications-panel.ui:201
+#: panels/applications/cc-applications-panel.ui:276
+#: panels/applications/cc-applications-panel.ui:283
 msgid "Access device location data"
 msgstr "Hozzáférés az eszköz helyadataihoz"
 
-#: panels/applications/cc-applications-panel.ui:212
+#: panels/applications/cc-applications-panel.ui:294
 #: panels/applications/cc-applications-panel.ui:332
 msgid "Required Access"
 msgstr "Szükséges hozzáférés"
 
-#: panels/applications/cc-applications-panel.ui:213
+#: panels/applications/cc-applications-panel.ui:295
 msgid "System access that is required by the app"
 msgstr "Az alkalmazás által megkövetelt rendszerhozzáférések"
 
-#: panels/applications/cc-applications-panel.ui:221
+#: panels/applications/cc-applications-panel.ui:303
 msgid "File &amp; Link Associations"
 msgstr "Fájl- és hivatkozás-hozzárendelések"
 
-#: panels/applications/cc-applications-panel.ui:229
+#: panels/applications/cc-applications-panel.ui:311
 #: panels/applications/cc-applications-panel.ui:441
 msgid "Storage"
 msgstr "Tároló"
-
-#: panels/applications/cc-applications-panel.ui:260
-msgid "Search apps"
-msgstr "Alkalmazások keresése"
-
-#: panels/applications/cc-applications-panel.ui:304 shell/cc-panel-list.ui:64
-msgid "No results found"
-msgstr "Nincs találat"
-
-#: panels/applications/cc-applications-panel.ui:314 shell/cc-panel-list.ui:73
-msgid "Try a different search"
-msgstr "Próbáljon valami mást keresni"
 
 #: panels/applications/cc-applications-panel.ui:378
 msgid "File & Link Associations"
@@ -345,14 +338,222 @@ msgstr "<b>Összesen</b>"
 msgid "_Clear Cache…"
 msgstr "Gyorsítótár ü_rítése…"
 
+#: panels/applications/cc-applications-panel.ui:534
+#| msgid "No apps found"
+msgid "No Apps Found"
+msgstr "Nem találhatók alkalmazások"
+
+#: panels/applications/cc-applications-panel.ui:543
+msgid "_Install Some…"
+msgstr "Néhány _telepítése…"
+
+#: panels/applications/cc-default-apps-page.ui:4
+msgid "Links &amp; Files"
+msgstr "Hivatkozások és fájlok"
+
+#: panels/applications/cc-default-apps-page.ui:5
+#| msgid "Applications which are used to open common links and files."
+msgid "Apps which are used to open common links and files"
+msgstr "A gyakori hivatkozások és fájlok megnyitásához használt alkalmazások"
+
+#: panels/applications/cc-default-apps-page.ui:8
+msgid "_Web"
+msgstr "_Web"
+
+#: panels/applications/cc-default-apps-page.ui:16
+msgid "_Mail"
+msgstr "_Levelezés"
+
+#: panels/applications/cc-default-apps-page.ui:23
+msgid "_Calendar"
+msgstr "_Naptár"
+
+#: panels/applications/cc-default-apps-page.ui:30
+msgid "M_usic"
+msgstr "_Zene"
+
+#: panels/applications/cc-default-apps-page.ui:38
+msgid "_Video"
+msgstr "_Videó"
+
+#: panels/applications/cc-default-apps-page.ui:46
+#: panels/applications/cc-removable-media-settings.ui:58
+msgid "_Photos"
+msgstr "_Fényképek"
+
+#. Translators: This is a telephone call
+#: panels/applications/cc-default-apps-page.ui:55
+msgid "_Calls"
+msgstr "_Hívások"
+
+#: panels/applications/cc-default-apps-page.ui:63
+msgid "_SMS"
+msgstr "_SMS"
+
+#: panels/applications/cc-removable-media-settings.c:290
+msgid "Ask what to do"
+msgstr "Kérdezze meg, mi a teendő"
+
+#: panels/applications/cc-removable-media-settings.c:294
+msgid "Do nothing"
+msgstr "Ne tegyen semmit"
+
+#: panels/applications/cc-removable-media-settings.c:298
+msgid "Open folder"
+msgstr "Mappa megnyitása"
+
+#: panels/applications/cc-removable-media-settings.c:370
+msgid "Other Media"
+msgstr "Egyéb média"
+
+#: panels/applications/cc-removable-media-settings.c:391
+#| msgid "Select an application for audio CDs"
+msgid "Select an app for audio CDs"
+msgstr "Válasszon alkalmazást hang CD-khez"
+
+#: panels/applications/cc-removable-media-settings.c:392
+#| msgid "Select an application for video DVDs"
+msgid "Select an app for video DVDs"
+msgstr "Válasszon alkalmazást videó DVD-khez"
+
+#: panels/applications/cc-removable-media-settings.c:393
+#| msgid "Select an application to run when a music player is connected"
+msgid "Select an app to run when a music player is connected"
+msgstr "Válassza ki a zenelejátszó csatlakoztatásakor futtatandó alkalmazást"
+
+#: panels/applications/cc-removable-media-settings.c:394
+#| msgid "Select an application to run when a camera is connected"
+msgid "Select an app to run when a camera is connected"
+msgstr "Válassza ki a fényképezőgép csatlakoztatásakor futtatandó alkalmazást"
+
+#: panels/applications/cc-removable-media-settings.c:395
+#| msgid "Select an application for software CDs"
+msgid "Select an app for software CDs"
+msgstr "Válasszon alkalmazást szoftver CD-khez"
+
+#. translators: these strings are duplicates of shared-mime-info
+#. * strings, just here to fix capitalization of the English originals.
+#. * If the shared-mime-info translation works for your language,
+#. * simply leave these untranslated.
+#.
+#: panels/applications/cc-removable-media-settings.c:407
+msgid "audio DVD"
+msgstr "hang DVD"
+
+#: panels/applications/cc-removable-media-settings.c:408
+msgid "blank Blu-ray disc"
+msgstr "üres Blu-Ray lemez"
+
+#: panels/applications/cc-removable-media-settings.c:409
+msgid "blank CD disc"
+msgstr "üres CD-lemez"
+
+#: panels/applications/cc-removable-media-settings.c:410
+msgid "blank DVD disc"
+msgstr "üres DVD-lemez"
+
+#: panels/applications/cc-removable-media-settings.c:411
+msgid "blank HD DVD disc"
+msgstr "üres HD DVD-lemez"
+
+#: panels/applications/cc-removable-media-settings.c:412
+msgid "Blu-ray video disc"
+msgstr "Blu-ray videolemez"
+
+#: panels/applications/cc-removable-media-settings.c:413
+msgid "e-book reader"
+msgstr "e-könyvolvasó"
+
+#: panels/applications/cc-removable-media-settings.c:414
+msgid "HD DVD video disc"
+msgstr "HD DVD videolemez"
+
+#: panels/applications/cc-removable-media-settings.c:415
+msgid "Picture CD"
+msgstr "Picture CD"
+
+#: panels/applications/cc-removable-media-settings.c:416
+msgid "Super Video CD"
+msgstr "Super Video CD"
+
+#: panels/applications/cc-removable-media-settings.c:417
+msgid "Video CD"
+msgstr "Video CD"
+
+#: panels/applications/cc-removable-media-settings.c:418
+msgid "Windows software"
+msgstr "Windows-szoftver"
+
+#: panels/applications/cc-removable-media-settings.ui:5
+msgid "Removable Media"
+msgstr "Külső adathordozók"
+
+#: panels/applications/cc-removable-media-settings.ui:6
+msgid "Apps which are launched when media or drives are connected"
+msgstr "Adathordozók vagy meghajtók csatlakoztatásakor induló alkalmazások"
+
+#: panels/applications/cc-removable-media-settings.ui:9
+msgid "D_isable Autostart"
+msgstr "Automatikus _indítás letiltása"
+
+#: panels/applications/cc-removable-media-settings.ui:10
+#| msgid "_Never prompt or start apps on media insertion"
+msgid "Never prompt or start programs on media insertion"
+msgstr "Soha ne kérdezzen vagy indítson programokat adathordozó behelyezésekor"
+
+#: panels/applications/cc-removable-media-settings.ui:22
+msgid "CD _audio"
+msgstr "CD _hang"
+
+#: panels/applications/cc-removable-media-settings.ui:34
+msgid "_DVD video"
+msgstr "_DVD videó"
+
+#: panels/applications/cc-removable-media-settings.ui:46
+msgid "_Music player"
+msgstr "_Zenelejátszó"
+
+#: panels/applications/cc-removable-media-settings.ui:70
+msgid "_Software"
+msgstr "Sz_oftver"
+
+#: panels/applications/cc-removable-media-settings.ui:82
+msgid "_Other Media…"
+msgstr "_Egyéb adathordozók…"
+
+#: panels/applications/cc-removable-media-settings.ui:86
+#| msgid "Configuration"
+msgid "_Configure action"
+msgstr "Művelet _beállítása"
+
+#: panels/applications/cc-removable-media-settings.ui:141
+msgid "Select how other media should be handled"
+msgstr "Válassza ki az egyéb adathordozók kezelésének módját"
+
+#: panels/applications/cc-removable-media-settings.ui:175
+msgid "_Action:"
+msgstr "_Művelet:"
+
+#: panels/applications/cc-removable-media-settings.ui:194
+msgid "_Type:"
+msgstr "_Típus:"
+
 #: panels/applications/gnome-applications-panel.desktop.in:4
 msgid "Control various app permissions and settings"
 msgstr "Különböző alkalmazások jogosultságainak és beállításainak szabályozása"
 
 #. Translators: Search terms to find the Apps panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/applications/gnome-applications-panel.desktop.in:16
-msgid "application;flatpak;permission;setting;"
-msgstr "alkalmazás;flatpak;jogosultság;beállítás;"
+#| msgid ""
+#| "device;system;default;application;preferred;cd;dvd;usb;audio;video;disc;"
+#| "removable;media;autorun;"
+msgid ""
+"application;flatpak;permission;setting;default;preferred;media;autorun;cd;"
+"dvd;usb;audio;video;disc;removable;device;system;"
+msgstr ""
+"alkalmazás;flatpak;jogosultság;beállítás;alapértelmezett;előnyben "
+"részesített;média;adathordozó;automatikus futtatás;cd;dvd;usb;hang;videó;"
+"lemez;eltávolítható;cserélhető;eszköz;rendszer;"
 
 #: panels/background/cc-background-chooser.c:320
 msgid "Select a picture"
@@ -1078,8 +1279,8 @@ msgid "This profile may no longer be accurate"
 msgstr "Ez a profil már nem feltétlenül pontos"
 
 #: panels/color/gnome-color-panel.desktop.in:3
-#: panels/universal-access/cc-ua-zoom-page.ui:197
-#: panels/universal-access/cc-ua-zoom-page.ui:271
+#: panels/universal-access/cc-ua-zoom-page.ui:198
+#: panels/universal-access/cc-ua-zoom-page.ui:274
 msgid "Color"
 msgstr "Szín"
 
@@ -1434,61 +1635,6 @@ msgstr "Rendszer dátum- és időbeállításainak megváltoztatása"
 #: panels/datetime/org.gnome.controlcenter.datetime.policy.in:12
 msgid "To change time or date settings, you need to authenticate."
 msgstr "Hitelesítés szükséges a dátum- és időbeállítások megváltoztatásához."
-
-#: panels/default-apps/cc-default-apps-panel.ui:14
-msgid "Links &amp; Files"
-msgstr "Hivatkozások és fájlok"
-
-#: panels/default-apps/cc-default-apps-panel.ui:15
-msgid "Applications which are used to open common links and files."
-msgstr "A gyakori hivatkozások és fájlok megnyitásához használt alkalmazások."
-
-#: panels/default-apps/cc-default-apps-panel.ui:18
-msgid "_Web"
-msgstr "_Web"
-
-#: panels/default-apps/cc-default-apps-panel.ui:26
-msgid "_Mail"
-msgstr "_Levelezés"
-
-#: panels/default-apps/cc-default-apps-panel.ui:33
-msgid "_Calendar"
-msgstr "_Naptár"
-
-#: panels/default-apps/cc-default-apps-panel.ui:40
-msgid "M_usic"
-msgstr "_Zene"
-
-#: panels/default-apps/cc-default-apps-panel.ui:48
-msgid "_Video"
-msgstr "_Videó"
-
-#: panels/default-apps/cc-default-apps-panel.ui:56
-#: panels/removable-media/cc-removable-media-panel.ui:133
-msgid "_Photos"
-msgstr "_Fényképek"
-
-#. Translators: This is a telephone call
-#: panels/default-apps/cc-default-apps-panel.ui:65
-msgid "_Calls"
-msgstr "_Hívások"
-
-#: panels/default-apps/cc-default-apps-panel.ui:73
-msgid "_SMS"
-msgstr "_SMS"
-
-#: panels/default-apps/gnome-default-apps-panel.desktop.in:3
-msgid "Default Apps"
-msgstr "Alapértelmezett alkalmazások"
-
-#: panels/default-apps/gnome-default-apps-panel.desktop.in:4
-msgid "Configure Default Apps"
-msgstr "Alapértelmezett alkalmazások beállítása"
-
-#. Translators: Search terms to find the Default Apps panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
-#: panels/default-apps/gnome-default-apps-panel.desktop.in:15
-msgid "default;application;preferred;media;"
-msgstr "alap;alapértelmezett;alkalmazás;előnyben részesített;média;"
 
 #: panels/display/cc-display-panel.c:510
 #: panels/notifications/cc-notifications-panel.c:212
@@ -1891,7 +2037,6 @@ msgid "Details copied to clipboard"
 msgstr "Részletek másolva a vágólapra"
 
 #: panels/info-overview/cc-system-details-window.ui:31
-#| msgid "Copy"
 msgid "_Copy"
 msgstr "_Másolás"
 
@@ -2425,7 +2570,7 @@ msgstr "Gyorsbillentyű"
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:247
 #: panels/sound/cc-alert-chooser-window.c:342
 #: panels/sound/cc-alert-chooser-window.ui:20
-#: panels/universal-access/cc-ua-zoom-page.ui:275
+#: panels/universal-access/cc-ua-zoom-page.ui:278
 msgid "None"
 msgstr "Nincs"
 
@@ -2767,7 +2912,6 @@ msgid "Save"
 msgstr "Mentés"
 
 #: panels/network/cc-net-proxy-page.ui:40
-#| msgid "Network Type"
 msgid "Network Proxy"
 msgstr "Hálózati proxy"
 
@@ -3051,9 +3195,6 @@ msgid "Wi-Fi Unavailable"
 msgstr "A Wi-Fi nem érhető el"
 
 #: panels/network/cc-wifi-panel.ui:194
-#| msgid ""
-#| "An error has occurred and Wi-Fi cannot be used.\n"
-#| "Error details: NetworkManager not running."
 msgid ""
 "An error has occurred and Wi-Fi cannot be used.\n"
 "    Error details: NetworkManager not running."
@@ -3358,8 +3499,6 @@ msgid "Signal Strength"
 msgstr "Jelerősség"
 
 #: panels/network/connection-editor/details-page.ui:31
-#| msgctxt "Signal strength"
-#| msgid "Weak"
 msgid "Weak"
 msgstr "Gyenge"
 
@@ -3682,9 +3821,91 @@ msgstr "Partnerútvonalak _hozzáadása"
 msgid "_Peers"
 msgstr "_Partnerek"
 
+#: panels/network/connection-editor/wireguard-page.ui:235
+#| msgid "WireGuard"
+msgid "Add WireGuard peer"
+msgstr "WireGuard-partner hozzáadása"
+
 #: panels/network/connection-editor/wireguard-page.ui:257
 msgid "No peers set up"
 msgstr "Nincsenek partnerek beállítva"
+
+#: panels/network/connection-editor/wireguard-peer.ui:88
+msgid "_Endpoint"
+msgstr "_Végpont"
+
+#: panels/network/connection-editor/wireguard-peer.ui:98
+msgid ""
+"An endpoint IP or hostname, followed by a colon, and then a port number."
+msgstr ""
+"Egy végpont IP-címe vagy gépneve, amelyet egy kettőspont, majd egy portszám "
+"követ."
+
+#: panels/network/connection-editor/wireguard-peer.ui:110
+msgid "_Public key"
+msgstr "_Nyilvános kulcs"
+
+#: panels/network/connection-editor/wireguard-peer.ui:120
+msgid "A base64 public key calculated by 'wg pubkey' from a private key."
+msgstr ""
+"Egy személyes kulcsból a „wg pubkey” által kiszámított Base64-kódolású "
+"nyilvános kulcs."
+
+#: panels/network/connection-editor/wireguard-peer.ui:135
+msgid "_Pre-shared key"
+msgstr "_Előre megosztott kulcs"
+
+#: panels/network/connection-editor/wireguard-peer.ui:145
+msgid ""
+"A base64 preshared key generated by 'wg genpsk'. Optional, and may be "
+"omitted. Adds an additional layer of symmetric-key cryptography to be mixed "
+"into the already existing public-key cryptography, for post-quantum "
+"resistance."
+msgstr ""
+"A „wg genpsk” által előállított Base64-kódolású előre megosztott kulcs. "
+"Elhagyható, nem kötelező. A szimmetrikus kulcsú kriptográfia egy további "
+"rétegét adja hozzá a már meglévő nyilvános kulcsú kriptográfiába való "
+"keveréshez a kvantum utáni ellenállás érdekében."
+
+#: panels/network/connection-editor/wireguard-peer.ui:162
+#| msgid "_Cloned Address"
+msgid "Allowed _IP addresses"
+msgstr "Engedélyezett _IP-címek"
+
+#: panels/network/connection-editor/wireguard-peer.ui:172
+msgid ""
+"Comma-separated list of IP (v4 or v6) addresses with CIDR masks from which "
+"incoming traffic for this peer is allowed and to which outgoing traffic for "
+"this peer is directed."
+msgstr ""
+"Azoknak a CIDR-maszkkal ellátott IP-címeknek (v4 vagy v6) a vesszővel "
+"elválasztott listája, amelyekről ennek a partnernek a bejövő forgalma "
+"engedélyezett, és amelyek felé ennek a partnernek a kimenő forgalma "
+"irányított."
+
+#: panels/network/connection-editor/wireguard-peer.ui:184
+msgid "_Persistent keepalive"
+msgstr "_Tartós életben tartás"
+
+#: panels/network/connection-editor/wireguard-peer.ui:197
+msgid ""
+"How often to send an authenticated empty packet to the peer for the purpose "
+"of keeping a stateful firewall or NAT mapping valid. This is optional and "
+"not recommended outside of specific setups."
+msgstr ""
+"Milyen gyakran kell hitelesített üres csomagot küldeni a partner felé, hogy "
+"egy állapotfüggő tűzfal vagy NAT-leképezés érvényes maradjon. Ez nem "
+"kötelező, és nem ajánlott bizonyos beállításokon kívül."
+
+#: panels/network/connection-editor/wireguard-peer.ui:206
+#| msgid "0 seconds"
+msgid "seconds"
+msgstr "másodperc"
+
+#: panels/network/connection-editor/wireguard-peer.ui:222
+#| msgid "_Apply"
+msgid "Apply"
+msgstr "Alkalmaz"
 
 #: panels/network/gnome-network-panel.desktop.in:4
 msgid "Control how you connect to the Internet"
@@ -3759,6 +3980,11 @@ msgstr "A rendszer házirendje megtiltja a hotspotként való használatot"
 msgid "Wireless device does not support Hotspot mode"
 msgstr "A vezeték nélküli eszköz nem támogatja a hotspot módot"
 
+#: panels/network/network-ethernet.ui:10
+#| msgid "Add new connection"
+msgid "Add Ethernet connection"
+msgstr "Ethernet-kapcsolat hozzáadása"
+
 #: panels/network/network-mobile.ui:27
 #: panels/wwan/cc-wwan-details-dialog.ui:237
 msgid "IMEI"
@@ -3769,7 +3995,6 @@ msgid "Provider"
 msgstr "Szolgáltató"
 
 #: panels/network/network-mobile.ui:300
-#| msgid "Connected"
 msgid "Not connected"
 msgstr "Nincs kapcsolódva"
 
@@ -4353,6 +4578,12 @@ msgstr "Elsődleges"
 msgctxt "Battery name"
 msgid "Extra"
 msgstr "Extra"
+
+#. TRANSLATORS: This is the battery charge level percentage (e.g. 50%). This could be localized to account for local Percent sign formatting guidelines. See https://en.wikipedia.org/wiki/Percent_sign#Correct_style
+#: panels/power/cc-battery-row.c:289
+#, c-format
+msgid "%d %%"
+msgstr "%d%%"
 
 #: panels/power/cc-power-panel.c:255
 msgid "Batteries"
@@ -5294,7 +5525,6 @@ msgstr "Tintaszint"
 
 #. Translators: This is the message which follows the printer error.
 #: panels/printers/printer-entry.ui:207
-#| msgid "Please restart when the problem is resolved."
 msgid "Please restart when the problem is resolved"
 msgstr "Indítsa újra, ha a probléma megoldódott"
 
@@ -5403,7 +5633,6 @@ msgstr[0] "%u egyéb eszköztől függ"
 msgstr[1] "%u egyéb eszköztől függ"
 
 #: panels/privacy/cc-bolt-device-dialog.ui:4
-#| msgid "Device Details"
 msgid "Device Identifier"
 msgstr "Eszközazonosító"
 
@@ -5560,7 +5789,7 @@ msgstr "_Automatikus hibajelentés"
 
 #. TRANSLATORS: secure boot refers to the system firmware security mode
 #: panels/privacy/cc-firmware-security-boot-dialog.c:72
-#: panels/privacy/cc-firmware-security-page.c:120
+#: panels/privacy/cc-firmware-security-page.c:121
 msgid "Secure Boot is Active"
 msgstr "A biztonságos rendszerindítás aktív"
 
@@ -5648,7 +5877,7 @@ msgstr ""
 
 #. TRANSLATORS: in reference to firmware protection: 0/4 stars
 #: panels/privacy/cc-firmware-security-dialog.c:106
-#: panels/privacy/cc-firmware-security-page.c:537
+#: panels/privacy/cc-firmware-security-page.c:540
 msgid "Checks Failed"
 msgstr "Az ellenőrzések sikertelenek"
 
@@ -5673,7 +5902,7 @@ msgstr ""
 
 #. TRANSLATORS: in reference to firmware protection: 1/4 stars
 #: panels/privacy/cc-firmware-security-dialog.c:120
-#: panels/privacy/cc-firmware-security-page.c:544
+#: panels/privacy/cc-firmware-security-page.c:547
 msgid "Checks Passed"
 msgstr "Az ellenőrzések sikeresek"
 
@@ -5689,7 +5918,7 @@ msgstr ""
 
 #. TRANSLATORS: in reference to firmware protection: 2~4 stars
 #: panels/privacy/cc-firmware-security-dialog.c:134
-#: panels/privacy/cc-firmware-security-page.c:553
+#: panels/privacy/cc-firmware-security-page.c:556
 msgid "Protected"
 msgstr "Védett"
 
@@ -5705,7 +5934,7 @@ msgstr ""
 
 #. TRANSLATORS: in reference to firmware protection: ??? stars
 #: panels/privacy/cc-firmware-security-dialog.c:145
-#: panels/privacy/cc-firmware-security-page.c:560
+#: panels/privacy/cc-firmware-security-page.c:563
 msgid "Checks Unavailable"
 msgstr "Az ellenőrzések nem érhetők el"
 
@@ -5768,28 +5997,28 @@ msgstr ""
 "Az eszközbiztonság csak egy szempontja a biztonságnak, és nem tükrözi a "
 "rendszer és az alkalmazások általános biztonsági állapotát."
 
-#: panels/privacy/cc-firmware-security-page.c:121
+#: panels/privacy/cc-firmware-security-page.c:122
 msgid "Protected against malicious software when the device starts."
 msgstr "Védelem a rosszindulatú szoftverek ellen az eszköz indításakor."
 
-#: panels/privacy/cc-firmware-security-page.c:127
+#: panels/privacy/cc-firmware-security-page.c:128
 msgid "Secure Boot has Problems"
 msgstr "A biztonságos rendszerindításnak problémái vannak"
 
-#: panels/privacy/cc-firmware-security-page.c:128
+#: panels/privacy/cc-firmware-security-page.c:129
 msgid "Some protection when the device is started."
 msgstr "Némi védelem az eszköz indításakor."
 
-#: panels/privacy/cc-firmware-security-page.c:133
+#: panels/privacy/cc-firmware-security-page.c:134
 msgid "Secure Boot is Off"
 msgstr "A biztonságos rendszerindítás ki van kapcsolva"
 
-#: panels/privacy/cc-firmware-security-page.c:134
+#: panels/privacy/cc-firmware-security-page.c:135
 msgid "No protection when the device is started."
 msgstr "Nincs védelem az eszköz indításakor."
 
 #. TRANSLATORS: this is to explain an event that has already happened
-#: panels/privacy/cc-firmware-security-page.c:153
+#: panels/privacy/cc-firmware-security-page.c:154
 msgid ""
 "This issue could have been caused by a change in UEFI firmware settings, an "
 "operating system configuration change, or because of malicious software on "
@@ -5800,7 +6029,7 @@ msgstr ""
 "rendszerben lévő rosszindulatú szoftver okozhatta."
 
 #. TRANSLATORS: this is to explain an event that has already happened
-#: panels/privacy/cc-firmware-security-page.c:161
+#: panels/privacy/cc-firmware-security-page.c:162
 msgid ""
 "This issue could have been caused by a change in the UEFI firmware settings, "
 "or because of malicious software on this system."
@@ -5809,7 +6038,7 @@ msgstr ""
 "változtatás vagy a rendszerben lévő rosszindulatú szoftver okozhatta."
 
 #. TRANSLATORS: this is to explain an event that has already happened
-#: panels/privacy/cc-firmware-security-page.c:168
+#: panels/privacy/cc-firmware-security-page.c:169
 msgid ""
 "This issue could have been caused by an operating system configuration "
 "change, or because of malicious software on this system."
@@ -5819,39 +6048,39 @@ msgstr ""
 
 #. TRANSLATOR: this is the date in "%Y-%m-%d %H:%M:%S" format,
 #. for example: 2022-08-01 22:48:00
-#: panels/privacy/cc-firmware-security-page.c:226
+#: panels/privacy/cc-firmware-security-page.c:227
 #, c-format
 msgid "%1$s"
 msgstr "%1$s"
 
 #. TRANSLATOR: This is the text event status output when the event status is "success"
-#: panels/privacy/cc-firmware-security-page.c:232
+#: panels/privacy/cc-firmware-security-page.c:233
 msgid "Pass"
 msgstr "Sikeres"
 
 #. TRANSLATOR: This is the text event status output when the event status is not "success"
-#: panels/privacy/cc-firmware-security-page.c:235
+#: panels/privacy/cc-firmware-security-page.c:236
 msgid "! Fail"
 msgstr "! Sikertelen"
 
-#: panels/privacy/cc-firmware-security-page.c:238
+#: panels/privacy/cc-firmware-security-page.c:239
 #, c-format
 msgid "(%1$s → %2$s)"
 msgstr "(%1$s → %2$s)"
 
-#: panels/privacy/cc-firmware-security-page.c:538
+#: panels/privacy/cc-firmware-security-page.c:541
 msgid "Hardware does not pass checks."
 msgstr "A hardver nem felel meg az ellenőrzéseknek."
 
-#: panels/privacy/cc-firmware-security-page.c:545
+#: panels/privacy/cc-firmware-security-page.c:548
 msgid "Hardware meets basic security requirements."
 msgstr "A hardver megfelel az alapvető biztonsági követelményeknek."
 
-#: panels/privacy/cc-firmware-security-page.c:554
+#: panels/privacy/cc-firmware-security-page.c:557
 msgid "Hardware has a good level of protection."
 msgstr "A hardver megfelelő szintű védelemmel rendelkezik."
 
-#: panels/privacy/cc-firmware-security-page.c:561
+#: panels/privacy/cc-firmware-security-page.c:564
 msgid "Security levels are not available for this device."
 msgstr "A biztonsági szintek nem érhetők el ehhez az eszközhöz."
 
@@ -6018,12 +6247,10 @@ msgid "Privacy"
 msgstr "Adatvédelem"
 
 #: panels/privacy/cc-privacy-panel.ui:25
-#| msgid "Screen Lock"
 msgid "_Screen Lock"
 msgstr "_Képernyőzárolás"
 
 #: panels/privacy/cc-privacy-panel.ui:26
-#| msgid "Automatic Screen _Lock"
 msgid "Automatic screen lock"
 msgstr "Automatikus képernyőzárolás"
 
@@ -6032,7 +6259,6 @@ msgid "Control access to your location"
 msgstr "A helyzetéhez való hozzáférés szabályozása"
 
 #: panels/privacy/cc-privacy-panel.ui:49
-#| msgid "File History & Trash"
 msgid "_File History &amp; Trash"
 msgstr "_Fájlelőzmények és kuka"
 
@@ -6041,52 +6267,42 @@ msgid "Remove saved data and files"
 msgstr "Mentett adatok és fájlok eltávolítása"
 
 #: panels/privacy/cc-privacy-panel.ui:61
-#| msgid "Diagnostics"
 msgid "_Diagnostics"
 msgstr "_Diagnosztika"
 
 #: panels/privacy/cc-privacy-panel.ui:62
-#| msgid "_Automatic Problem Reporting"
 msgid "Automatic problem reporting"
 msgstr "Automatikus hibajelentés"
 
 #: panels/privacy/cc-privacy-panel.ui:82
-#| msgid "Cameras"
 msgid "_Cameras"
 msgstr "_Kamerák"
 
 #: panels/privacy/cc-privacy-panel.ui:83
-#| msgid "Restrict camera access"
 msgid "Control camera access"
 msgstr "Kamera-hozzáférés szabályozása"
 
 #: panels/privacy/cc-privacy-panel.ui:94
-#| msgid "Microphones"
 msgid "_Microphones"
 msgstr "_Mikrofonok"
 
 #: panels/privacy/cc-privacy-panel.ui:95
-#| msgid "Restrict microphone access"
 msgid "Control microphone access"
 msgstr "Mikrofon-hozzáférés szabályozása"
 
 #: panels/privacy/cc-privacy-panel.ui:107
-#| msgid "Thunderbolt"
 msgid "_Thunderbolt"
 msgstr "_Thunderbolt"
 
 #: panels/privacy/cc-privacy-panel.ui:108
-#| msgid "Manage Thunderbolt device access"
 msgid "Manage device access"
 msgstr "Eszközhozzáférés kezelése"
 
 #: panels/privacy/cc-privacy-panel.ui:119
-#| msgid "Device Security"
 msgid "Device _Security"
 msgstr "Eszköz_biztonság"
 
 #: panels/privacy/cc-privacy-panel.ui:120
-#| msgid "Hardware Information"
 msgid "Hardware security status and information"
 msgstr "Hardver biztonsági állapota és információi"
 
@@ -6559,154 +6775,6 @@ msgstr "Válassza ki a felület nyelvét és az adatformátumokat"
 #: panels/region/gnome-region-panel.desktop.in:15
 msgid "Language;Layout;Keyboard;Input;"
 msgstr "Nyelv;kiosztás;billentyűzet;bevitel;"
-
-#: panels/removable-media/cc-removable-media-panel.c:281
-msgid "Ask what to do"
-msgstr "Kérdezze meg, mi a teendő"
-
-#: panels/removable-media/cc-removable-media-panel.c:285
-msgid "Do nothing"
-msgstr "Ne tegyen semmit"
-
-#: panels/removable-media/cc-removable-media-panel.c:289
-msgid "Open folder"
-msgstr "Mappa megnyitása"
-
-#: panels/removable-media/cc-removable-media-panel.c:360
-msgid "Other Media"
-msgstr "Egyéb média"
-
-#: panels/removable-media/cc-removable-media-panel.c:381
-msgid "Select an application for audio CDs"
-msgstr "Válasszon alkalmazást CD-khez"
-
-#: panels/removable-media/cc-removable-media-panel.c:382
-msgid "Select an application for video DVDs"
-msgstr "Válasszon alkalmazást videó DVD-khez"
-
-#: panels/removable-media/cc-removable-media-panel.c:383
-msgid "Select an application to run when a music player is connected"
-msgstr "Válassza ki a zenelejátszó csatlakoztatásakor futtatandó alkalmazást"
-
-#: panels/removable-media/cc-removable-media-panel.c:384
-msgid "Select an application to run when a camera is connected"
-msgstr "Válassza ki a fényképezőgép csatlakoztatásakor futtatandó alkalmazást"
-
-#: panels/removable-media/cc-removable-media-panel.c:385
-msgid "Select an application for software CDs"
-msgstr "Válasszon alkalmazást szoftver CD-khez"
-
-#. translators: these strings are duplicates of shared-mime-info
-#. * strings, just here to fix capitalization of the English originals.
-#. * If the shared-mime-info translation works for your language,
-#. * simply leave these untranslated.
-#.
-#: panels/removable-media/cc-removable-media-panel.c:397
-msgid "audio DVD"
-msgstr "hang DVD"
-
-#: panels/removable-media/cc-removable-media-panel.c:398
-msgid "blank Blu-ray disc"
-msgstr "üres Blu-Ray lemez"
-
-#: panels/removable-media/cc-removable-media-panel.c:399
-msgid "blank CD disc"
-msgstr "üres CD-lemez"
-
-#: panels/removable-media/cc-removable-media-panel.c:400
-msgid "blank DVD disc"
-msgstr "üres DVD-lemez"
-
-#: panels/removable-media/cc-removable-media-panel.c:401
-msgid "blank HD DVD disc"
-msgstr "üres HD DVD-lemez"
-
-#: panels/removable-media/cc-removable-media-panel.c:402
-msgid "Blu-ray video disc"
-msgstr "Blu-ray videolemez"
-
-#: panels/removable-media/cc-removable-media-panel.c:403
-msgid "e-book reader"
-msgstr "e-könyvolvasó"
-
-#: panels/removable-media/cc-removable-media-panel.c:404
-msgid "HD DVD video disc"
-msgstr "HD DVD videolemez"
-
-#: panels/removable-media/cc-removable-media-panel.c:405
-msgid "Picture CD"
-msgstr "Picture CD"
-
-#: panels/removable-media/cc-removable-media-panel.c:406
-msgid "Super Video CD"
-msgstr "Super Video CD"
-
-#: panels/removable-media/cc-removable-media-panel.c:407
-msgid "Video CD"
-msgstr "Video CD"
-
-#: panels/removable-media/cc-removable-media-panel.c:408
-msgid "Windows software"
-msgstr "Windows-szoftver"
-
-#: panels/removable-media/cc-removable-media-panel.ui:38
-msgid "Select how media should be handled"
-msgstr "Válassza ki az adathordozók kezelésének módját"
-
-#: panels/removable-media/cc-removable-media-panel.ui:58
-msgid "CD _audio"
-msgstr "CD _hang"
-
-#: panels/removable-media/cc-removable-media-panel.ui:73
-msgid "_DVD video"
-msgstr "_DVD videó"
-
-#: panels/removable-media/cc-removable-media-panel.ui:108
-msgid "_Music player"
-msgstr "_Zenelejátszó"
-
-#: panels/removable-media/cc-removable-media-panel.ui:158
-msgid "_Software"
-msgstr "Sz_oftver"
-
-#: panels/removable-media/cc-removable-media-panel.ui:184
-msgid "_Other Media…"
-msgstr "_Egyéb adathordozók…"
-
-#: panels/removable-media/cc-removable-media-panel.ui:203
-msgid "_Never prompt or start apps on media insertion"
-msgstr ""
-"Soha _ne kérdezzen vagy indítson alkalmazásokat adathordozó behelyezésekor"
-
-#: panels/removable-media/cc-removable-media-panel.ui:250
-msgid "Select how other media should be handled"
-msgstr "Válassza ki az egyéb adathordozók kezelésének módját"
-
-#: panels/removable-media/cc-removable-media-panel.ui:284
-msgid "_Action:"
-msgstr "_Művelet:"
-
-#: panels/removable-media/cc-removable-media-panel.ui:303
-msgid "_Type:"
-msgstr "_Típus:"
-
-#: panels/removable-media/gnome-removable-media-panel.desktop.in:3
-msgid "Removable Media"
-msgstr "Külső adathordozók"
-
-#: panels/removable-media/gnome-removable-media-panel.desktop.in:4
-msgid "Configure Removable Media settings"
-msgstr "Külső adathordozók beállításai"
-
-#. Translators: Search terms to find the Removable Media panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
-#: panels/removable-media/gnome-removable-media-panel.desktop.in:15
-msgid ""
-"device;system;default;application;preferred;cd;dvd;usb;audio;video;disc;"
-"removable;media;autorun;"
-msgstr ""
-"eszköz;rendszer;információk;memória;processzor;verzió;alapértelmezett;"
-"alkalmazás;előnyben részesített;cd;dvd;usb;hang;videó;lemez;eltávolítható;"
-"cserélhető;média;automatikus futtatás;autorun;"
 
 #: panels/search/cc-search-locations-dialog.c:675
 msgid "Select Location"
@@ -7234,7 +7302,7 @@ msgstr "_Dupla kattintás késleltetése"
 #: panels/universal-access/cc-ua-typing-page.ui:137
 #: panels/universal-access/cc-ua-typing-page.ui:189
 #: panels/universal-access/cc-ua-typing-page.ui:236
-#: panels/universal-access/cc-ua-zoom-page.ui:173
+#: panels/universal-access/cc-ua-zoom-page.ui:174
 msgid "Short"
 msgstr "Rövid"
 
@@ -7244,7 +7312,7 @@ msgstr "Rövid"
 #: panels/universal-access/cc-ua-typing-page.ui:140
 #: panels/universal-access/cc-ua-typing-page.ui:192
 #: panels/universal-access/cc-ua-typing-page.ui:239
-#: panels/universal-access/cc-ua-zoom-page.ui:177
+#: panels/universal-access/cc-ua-zoom-page.ui:178
 msgid "Long"
 msgstr "Hosszú"
 
@@ -7613,53 +7681,53 @@ msgstr "Vékony"
 msgid "Thick"
 msgstr "Vastag"
 
-#: panels/universal-access/cc-ua-zoom-page.ui:166
+#: panels/universal-access/cc-ua-zoom-page.ui:167
 msgid "Length"
 msgstr "Hossz"
 
-#: panels/universal-access/cc-ua-zoom-page.ui:174
+#: panels/universal-access/cc-ua-zoom-page.ui:175
 msgid "1/4 screen"
 msgstr "1/4 képernyő"
 
-#: panels/universal-access/cc-ua-zoom-page.ui:175
+#: panels/universal-access/cc-ua-zoom-page.ui:176
 msgid "1/2 Screen"
 msgstr "1/2 képernyő"
 
-#: panels/universal-access/cc-ua-zoom-page.ui:176
+#: panels/universal-access/cc-ua-zoom-page.ui:177
 msgid "3/4 Screen"
 msgstr "3/4 képernyő"
 
-#: panels/universal-access/cc-ua-zoom-page.ui:212
+#: panels/universal-access/cc-ua-zoom-page.ui:213
 msgid "Color Filters"
 msgstr "Színszűrők"
 
-#: panels/universal-access/cc-ua-zoom-page.ui:216
+#: panels/universal-access/cc-ua-zoom-page.ui:217
 msgid "_Inverted"
 msgstr "_Fordított"
 
-#: panels/universal-access/cc-ua-zoom-page.ui:217
+#: panels/universal-access/cc-ua-zoom-page.ui:218
 msgid "Invert colors in the magnifier region"
 msgstr "A színek megfordítása a nagyító tartományában"
 
-#: panels/universal-access/cc-ua-zoom-page.ui:224
+#: panels/universal-access/cc-ua-zoom-page.ui:225
 msgid "Brightness"
 msgstr "Fényerő"
 
-#: panels/universal-access/cc-ua-zoom-page.ui:229
-#: panels/universal-access/cc-ua-zoom-page.ui:252
+#: panels/universal-access/cc-ua-zoom-page.ui:230
+#: panels/universal-access/cc-ua-zoom-page.ui:254
 msgid "Low"
 msgstr "Alacsony"
 
-#: panels/universal-access/cc-ua-zoom-page.ui:230
-#: panels/universal-access/cc-ua-zoom-page.ui:253
+#: panels/universal-access/cc-ua-zoom-page.ui:231
+#: panels/universal-access/cc-ua-zoom-page.ui:255
 msgid "High"
 msgstr "Magas"
 
-#: panels/universal-access/cc-ua-zoom-page.ui:248
+#: panels/universal-access/cc-ua-zoom-page.ui:250
 msgid "Contrast"
 msgstr "Kontraszt"
 
-#: panels/universal-access/cc-ua-zoom-page.ui:276
+#: panels/universal-access/cc-ua-zoom-page.ui:279
 msgid "Full"
 msgstr "Teljes"
 
@@ -7669,11 +7737,6 @@ msgstr "A látás, hallás, gépelés, mutatás és kattintás egyszerűbbé té
 
 #. Translators: Search terms to find the Accessibility panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/universal-access/gnome-universal-access-panel.desktop.in:15
-#| msgid ""
-#| "Keyboard;Mouse;a11y;Accessibility;Universal Access;Contrast;Cursor;Sound;"
-#| "Zoom;Screen;Reader;big;high;large;text;font;size;AccessX;Sticky;Keys;Slow;"
-#| "Bounce;Mouse;Double;click;Delay;Speed;Assist;Repeat;Blink;visual;hearing;"
-#| "audio;typing;animations;"
 msgid ""
 "Keyboard;Mouse;a11y;Accessibility;Universal Access;Contrast;Cursor;Sound;"
 "Zoom;Screen;Reader;big;high;large;text;font;size;AccessX;Sticky;Keys;Slow;"
@@ -8084,7 +8147,6 @@ msgstr "Nem lehet csatlakozni a(z) %s tartományhoz: %s"
 
 #: panels/user-accounts/cc-user-panel.c:341
 #, c-format
-#| msgid "Failed to delete user"
 msgid "Failed to delete user: %s"
 msgstr "Nem sikerült törölni a felhasználót: %s"
 
@@ -8092,7 +8154,6 @@ msgstr "Nem sikerült törölni a felhasználót: %s"
 #: panels/user-accounts/cc-user-panel.c:451
 #: panels/user-accounts/cc-user-panel.c:497
 #, c-format
-#| msgid "Failed to revoke remotely managed user"
 msgid "Failed to revoke remotely managed user: %s"
 msgstr "Nem sikerült visszavonni a távmenedzselt felhasználót: %s"
 
@@ -8196,7 +8257,6 @@ msgid "_Add User…"
 msgstr "Felhasználó _hozzáadása…"
 
 #: panels/user-accounts/cc-user-panel.ui:266
-#| msgid "Unlock to Change Settings"
 msgid "Error: Unable to Show User Settings"
 msgstr "Hiba: nem lehet megjeleníteni a felhasználó beállításait"
 
@@ -9180,7 +9240,6 @@ msgid "Change PIN"
 msgstr "PIN-kód megváltoztatása"
 
 #: panels/wwan/cc-wwan-sim-lock-dialog.ui:123
-#| msgid "Enter New PIN"
 msgid "New PIN"
 msgstr "Új PIN-kód"
 
@@ -9243,7 +9302,15 @@ msgstr "[PANEL] [ARGUMENTUM…]"
 msgid "Settings categories"
 msgstr "Beállítások kategóriái"
 
-#: shell/cc-panel-loader.c:282
+#: shell/cc-panel-list.ui:64
+msgid "No results found"
+msgstr "Nincs találat"
+
+#: shell/cc-panel-list.ui:73
+msgid "Try a different search"
+msgstr "Próbáljon valami mást keresni"
+
+#: shell/cc-panel-loader.c:278
 msgid "Available panels:"
 msgstr "Elérhető panelek:"
 
