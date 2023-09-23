@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: amberol\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/issues\n"
-"POT-Creation-Date: 2023-08-28 08:12+0000\n"
-"PO-Revision-Date: 2023-08-28 13:09+0330\n"
+"POT-Creation-Date: 2023-09-19 16:33+0000\n"
+"PO-Revision-Date: 2023-09-23 18:53+0330\n"
 "Last-Translator: Danial Behzadi <dani.behzi@ubuntu.com>\n"
 "Language-Team: Farsi\n"
 "Language: fa\n"
@@ -75,7 +75,7 @@ msgstr "سامانه پرونده"
 
 #: panels/applications/cc-applications-panel.c:847
 #: panels/keyboard/01-launchers.xml.in:6
-#: shell/appdata/org.gnome.Settings.appdata.xml.in:7 shell/cc-window.c:794
+#: shell/appdata/org.gnome.Settings.appdata.xml.in:7 shell/cc-window.c:802
 #: shell/cc-window.ui:24 shell/cc-window.ui:31 shell/org.gnome.Settings.desktop.in:3
 msgid "Settings"
 msgstr "تنظیمات"
@@ -838,7 +838,7 @@ msgstr "درون‌ریزی _پرونده…"
 
 #: panels/color/cc-color-panel.ui:390 panels/keyboard/cc-input-chooser.ui:18
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:41
-#: panels/network/connection-editor/net-connection-editor.c:606
+#: panels/network/connection-editor/net-connection-editor.c:610
 #: panels/printers/new-printer-dialog.ui:91
 #: panels/user-accounts/cc-add-user-dialog.ui:39
 msgid "_Add"
@@ -2647,7 +2647,7 @@ msgstr ""
 "جزییات خطا: مدیر شبکه در حال اجرا نیست."
 
 #: panels/network/cc-network-panel.ui:46 panels/network/cc-network-panel.ui:80
-#: panels/network/connection-editor/net-connection-editor.c:694
+#: panels/network/connection-editor/net-connection-editor.c:698
 msgid "VPN"
 msgstr "وی‌پی‌ان"
 
@@ -2773,33 +2773,33 @@ msgid "Scan to Connect"
 msgstr "برای اتّصال بپویید"
 
 #. TRANSLATORS: This happens when the connection name does not contain the SSID.
-#: panels/network/cc-wifi-connection-row.c:222
+#: panels/network/cc-wifi-connection-row.c:223
 #, c-format
 msgctxt "Wi-Fi Connection"
 msgid "%s (SSID: %s)"
 msgstr "%s (SSID: %s)"
 
-#: panels/network/cc-wifi-connection-row.c:282
+#: panels/network/cc-wifi-connection-row.c:283
 msgid "Insecure network (WEP)"
 msgstr "شبکهٔ ناامن (WEP)"
 
-#: panels/network/cc-wifi-connection-row.c:286
+#: panels/network/cc-wifi-connection-row.c:287
 msgid "Secure network (WPA)"
 msgstr "شبکهٔ امن (WPA)"
 
-#: panels/network/cc-wifi-connection-row.c:290
+#: panels/network/cc-wifi-connection-row.c:291
 msgid "Secure network (WPA2)"
 msgstr "شبکهٔ امن (WPA2)"
 
-#: panels/network/cc-wifi-connection-row.c:294
+#: panels/network/cc-wifi-connection-row.c:295
 msgid "Secure network (WPA3)"
 msgstr "شبکهٔ امن (WPA3)"
 
-#: panels/network/cc-wifi-connection-row.c:298
+#: panels/network/cc-wifi-connection-row.c:299
 msgid "Secure network"
 msgstr "شبکهٔ امن"
 
-#: panels/network/cc-wifi-connection-row.c:327
+#: panels/network/cc-wifi-connection-row.c:328
 #, c-format
 msgid "Signal strength %d%%"
 msgstr "قدرت سیگنال %Id٪"
@@ -3242,7 +3242,7 @@ msgid "WPA3 Personal"
 msgstr "WPA3 شخصی"
 
 #: panels/network/connection-editor/ce-page-wireguard.c:106
-#: panels/network/connection-editor/net-connection-editor.c:854
+#: panels/network/connection-editor/net-connection-editor.c:858
 msgid "WireGuard"
 msgstr "وایرگارد"
 
@@ -3425,32 +3425,32 @@ msgstr "خودکار، فقط DHCP"
 msgid "Prefix"
 msgstr "پیشوند"
 
-#: panels/network/connection-editor/net-connection-editor.c:368
+#: panels/network/connection-editor/net-connection-editor.c:372
 #, c-format
 msgid "Unable to open connection editor: %s"
 msgstr "ناتوان در گودن ویرایشگر اتّصال: %s"
 
-#: panels/network/connection-editor/net-connection-editor.c:387
+#: panels/network/connection-editor/net-connection-editor.c:391
 msgid "New Profile"
 msgstr "نمایهٔ جدید"
 
-#: panels/network/connection-editor/net-connection-editor.c:454
+#: panels/network/connection-editor/net-connection-editor.c:458
 #, c-format
 msgid "Invalid setting %s: %s"
 msgstr "تنظیم نامعتبر %s: %s"
 
-#: panels/network/connection-editor/net-connection-editor.c:457
+#: panels/network/connection-editor/net-connection-editor.c:461
 #, c-format
 msgid "Invalid setting %s"
 msgstr "تنظیم نامعتبر %s"
 
-#: panels/network/connection-editor/net-connection-editor.c:735
+#: panels/network/connection-editor/net-connection-editor.c:739
 #, c-format
 msgid "Invalid VPN configuration file"
 msgstr "پروندهٔ پیکربندی وی‌پی‌ان نامعتبر"
 
 #. Translators: VPN add dialog Wireguard description
-#: panels/network/connection-editor/net-connection-editor.c:842
+#: panels/network/connection-editor/net-connection-editor.c:846
 msgid ""
 "Free and open-source VPN solution designed for ease of use, high speed performance "
 "and low attack surface."
@@ -3458,11 +3458,11 @@ msgstr ""
 "راهکار نرم‌افزار آزاد VPN طرّاحی شده برای سادگی استفاده، کارایی با سرعت بالا و سطح "
 "حملهٔ پایین."
 
-#: panels/network/connection-editor/net-connection-editor.c:878
+#: panels/network/connection-editor/net-connection-editor.c:882
 msgid "Import from file…"
 msgstr "درون ریزی از پرونده…"
 
-#: panels/network/connection-editor/net-connection-editor.c:904
+#: panels/network/connection-editor/net-connection-editor.c:908
 msgid "Add VPN"
 msgstr "افزودن وی‌پی‌ان"
 
@@ -3570,9 +3570,78 @@ msgstr "_افزودن مسیرهای همتا"
 msgid "_Peers"
 msgstr "_همتاها"
 
+#: panels/network/connection-editor/wireguard-page.ui:235
+msgid "Add WireGuard peer"
+msgstr "افزودن نقطهٔ وایرگارد"
+
 #: panels/network/connection-editor/wireguard-page.ui:257
 msgid "No peers set up"
 msgstr "همتایی برپا نشده"
+
+#: panels/network/connection-editor/wireguard-peer.ui:88
+msgid "_Endpoint"
+msgstr "_نقطهٔ نهایی"
+
+#: panels/network/connection-editor/wireguard-peer.ui:98
+msgid "An endpoint IP or hostname, followed by a colon, and then a port number."
+msgstr "آی‌پی یا نام میزبان، دونقطه و سپس شمارهٔ درگاه."
+
+#: panels/network/connection-editor/wireguard-peer.ui:110
+msgid "_Public key"
+msgstr "_کلید عمومی"
+
+#: panels/network/connection-editor/wireguard-peer.ui:120
+msgid "A base64 public key calculated by 'wg pubkey' from a private key."
+msgstr "کلید عمومی base64 محاسبه شده با wg pubkey از یک کلید خصوصی."
+
+#: panels/network/connection-editor/wireguard-peer.ui:135
+msgid "_Pre-shared key"
+msgstr "_کلید هم‌رسانده"
+
+#: panels/network/connection-editor/wireguard-peer.ui:145
+msgid ""
+"A base64 preshared key generated by 'wg genpsk'. Optional, and may be omitted. "
+"Adds an additional layer of symmetric-key cryptography to be mixed into the "
+"already existing public-key cryptography, for post-quantum resistance."
+msgstr ""
+"کلید هم‌رساندهٔ base64 محاسبه شده با wg genpsk. اختیاری و دارای احتمال حذف. برای "
+"مقاومت در برابر پساکوانتوم، لایه‌ای اضافی از رمزنگاری کلید متفاررن را به رمزنگاری "
+"موجود کلید عمومی می‌افزاید."
+
+#: panels/network/connection-editor/wireguard-peer.ui:162
+msgid "Allowed _IP addresses"
+msgstr "نشانی‌های آی‌پی _مجاز"
+
+#: panels/network/connection-editor/wireguard-peer.ui:172
+msgid ""
+"Comma-separated list of IP (v4 or v6) addresses with CIDR masks from which "
+"incoming traffic for this peer is allowed and to which outgoing traffic for this "
+"peer is directed."
+msgstr ""
+"سیاهه‌ای جدا شده با کاما از نشانی‌های آی‌پی (ن۴ یا ن۶) با نقاب‌های CIDR که شدآمد ورودی "
+"برای این نقطه از آن مجاز بوده و شدآمد خروجی برای این نقطه به آن هدایت می‌شود."
+
+#: panels/network/connection-editor/wireguard-peer.ui:184
+msgid "_Persistent keepalive"
+msgstr "زنده‌نگه‌دار _ماندگار"
+
+#: panels/network/connection-editor/wireguard-peer.ui:197
+msgid ""
+"How often to send an authenticated empty packet to the peer for the purpose of "
+"keeping a stateful firewall or NAT mapping valid. This is optional and not "
+"recommended outside of specific setups."
+msgstr ""
+"هر چند وقت یک بار بستهٔ خالی هویت‌سنجیده‌ای با هدف معتبر نگه داشتن دیوار آتش حالت‌دار "
+"یا نگاشت NAT فرستاده شود. این مقدار اختیاری بوده و خارج از پرباسازی‌های خاص توصیه "
+"نمی‌شود."
+
+#: panels/network/connection-editor/wireguard-peer.ui:206
+msgid "seconds"
+msgstr "ثانیه"
+
+#: panels/network/connection-editor/wireguard-peer.ui:222
+msgid "Apply"
+msgstr "اعمال"
 
 #: panels/network/gnome-network-panel.desktop.in:4
 msgid "Control how you connect to the Internet"
@@ -3648,6 +3717,10 @@ msgstr "سیاست سامانه استفاده از نقطهٔ داغ را من�
 #: panels/network/net-device-wifi.c:1267
 msgid "Wireless device does not support Hotspot mode"
 msgstr "افزارهٔ بی‌سیم از حالت نقطهٔ داغ پشتیبانی نمی‌کند"
+
+#: panels/network/network-ethernet.ui:10
+msgid "Add Ethernet connection"
+msgstr "افزودن اتّصال اترنت"
 
 #: panels/network/network-mobile.ui:27 panels/wwan/cc-wwan-details-dialog.ui:237
 msgid "IMEI"
