@@ -41,7 +41,7 @@ struct _CcMultitaskingPanel
   GtkCheckButton  *fixed_workspaces_radio;
   CcIllustratedRow *hot_corner_row;
   GtkSwitch       *hot_corner_switch;
-  GtkSpinButton   *number_of_workspaces_spin;
+  AdwSpinRow      *number_of_workspaces_spin;
   GtkCheckButton  *workspaces_primary_display_radio;
   GtkCheckButton  *workspaces_span_displays_radio;
 };
@@ -91,6 +91,8 @@ cc_multitasking_panel_class_init (CcMultitaskingPanelClass *klass)
 static void
 cc_multitasking_panel_init (CcMultitaskingPanel *self)
 {
+  gboolean is_dynamic_workspaces;
+
   g_resources_register (cc_multitasking_get_resource ());
 
   gtk_widget_init_template (GTK_WIDGET (self));
@@ -120,7 +122,8 @@ cc_multitasking_panel_init (CcMultitaskingPanel *self)
                    "active",
                    G_SETTINGS_BIND_DEFAULT);
 
-  if (g_settings_get_boolean (self->mutter_settings, "dynamic-workspaces"))
+  is_dynamic_workspaces = g_settings_get_boolean (self->mutter_settings, "dynamic-workspaces");
+  if (is_dynamic_workspaces)
     gtk_check_button_set_active (self->dynamic_workspaces_radio, TRUE);
   else
     gtk_check_button_set_active (self->fixed_workspaces_radio, TRUE);
@@ -137,6 +140,8 @@ cc_multitasking_panel_init (CcMultitaskingPanel *self)
                    self->number_of_workspaces_spin,
                    "value",
                    G_SETTINGS_BIND_DEFAULT);
+
+  gtk_widget_set_sensitive (GTK_WIDGET (self->number_of_workspaces_spin), !is_dynamic_workspaces);
 
   self->shell_settings = g_settings_new ("org.gnome.shell.app-switcher");
 
