@@ -44,7 +44,7 @@ struct _CcUaZoomPage
   AdwNavigationPage   parent_instance;
 
   AdwSwitchRow       *desktop_zoom_row;
-  GtkSpinButton      *magnify_factor_spin;
+  AdwSpinRow         *magnify_factor_spin;
   AdwComboRow        *magnify_view_row;
 
   AdwSwitchRow       *magnify_outside_screen_row;
@@ -365,7 +365,7 @@ cc_ua_zoom_page_init (CcUaZoomPage *self)
                    self->desktop_zoom_row, "active",
                    G_SETTINGS_BIND_DEFAULT);
   g_settings_bind (self->magnifier_settings, "mag-factor",
-                   gtk_spin_button_get_adjustment (self->magnify_factor_spin),
+                   adw_spin_row_get_adjustment (self->magnify_factor_spin),
                    "value", G_SETTINGS_BIND_DEFAULT);
   g_settings_bind (self->magnifier_settings, "scroll-at-edges",
                    self->magnify_outside_screen_row, "active",
