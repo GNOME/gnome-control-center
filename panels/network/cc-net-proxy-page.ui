@@ -11,7 +11,8 @@
             <child type="start">
               <object class="GtkButton" id="cancel_button">
                 <property name="visible" bind-source="CcNetProxyPage" bind-property="modified" bind-flags="sync-create"/>
-                <property name="label" translatable="yes">Cancel</property>
+                <property name="label" translatable="yes">_Cancel</property>
+                <property name="use-underline">True</property>
                 <property name="can-shrink">True</property>
                 <signal name="clicked" handler="cancel_clicked_cb" swapped="yes"/>
               </object>
@@ -20,7 +21,8 @@
             <child type="end">
               <object class="GtkButton" id="save_button">
                 <property name="visible" bind-source="CcNetProxyPage" bind-property="modified" bind-flags="sync-create"/>
-                <property name="label" translatable="yes">Save</property>
+                <property name="label" translatable="yes">_Save</property>
+                <property name="use-underline">True</property>
                 <property name="can-shrink">True</property>
                 <style>
                   <class name="suggested-action"/>
@@ -37,7 +39,7 @@
               <object class="AdwPreferencesGroup">
                 <child>
                   <object class="AdwSwitchRow" id="enable_proxy_row">
-                    <property name="title" translatable="yes">Network Proxy</property>
+                    <property name="title" translatable="yes">_Network Proxy</property>
                     <property name="active" bind-source="CcNetProxyPage" bind-property="enabled" bind-flags="bidirectional|sync-create"/>
                   </object>
                 </child>
@@ -49,7 +51,8 @@
               <object class="AdwPreferencesGroup">
                 <child>
                   <object class="AdwComboRow" id="proxy_type_row">
-                    <property name="title" translatable="yes">Configuration</property>
+                    <property name="title" translatable="yes">C_onfiguration</property>
+                    <property name="use-underline">True</property>
                     <signal name="notify::selected-item" handler="proxy_configuration_changed_cb" swapped="yes"/>
 
                     <property name="model">
