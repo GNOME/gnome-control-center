@@ -41,7 +41,7 @@ struct _CcMultitaskingPanel
   GtkCheckButton  *fixed_workspaces_radio;
   CcIllustratedRow *hot_corner_row;
   GtkSwitch       *hot_corner_switch;
-  AdwSpinRow      *number_of_workspaces_spin;
+  AdwSpinRow      *number_of_workspaces_spin_row;
   GtkCheckButton  *workspaces_primary_display_radio;
   GtkCheckButton  *workspaces_span_displays_radio;
 };
@@ -83,7 +83,7 @@ cc_multitasking_panel_class_init (CcMultitaskingPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcMultitaskingPanel, fixed_workspaces_radio);
   gtk_widget_class_bind_template_child (widget_class, CcMultitaskingPanel, hot_corner_row);
   gtk_widget_class_bind_template_child (widget_class, CcMultitaskingPanel, hot_corner_switch);
-  gtk_widget_class_bind_template_child (widget_class, CcMultitaskingPanel, number_of_workspaces_spin);
+  gtk_widget_class_bind_template_child (widget_class, CcMultitaskingPanel, number_of_workspaces_spin_row);
   gtk_widget_class_bind_template_child (widget_class, CcMultitaskingPanel, workspaces_primary_display_radio);
   gtk_widget_class_bind_template_child (widget_class, CcMultitaskingPanel, workspaces_span_displays_radio);
 }
@@ -134,7 +134,7 @@ cc_multitasking_panel_init (CcMultitaskingPanel *self)
   self->wm_settings = g_settings_new ("org.gnome.desktop.wm.preferences");
   g_settings_bind (self->wm_settings,
                    "num-workspaces",
-                   self->number_of_workspaces_spin,
+                   self->number_of_workspaces_spin_row,
                    "value",
                    G_SETTINGS_BIND_DEFAULT | G_SETTINGS_BIND_NO_SENSITIVITY);
 

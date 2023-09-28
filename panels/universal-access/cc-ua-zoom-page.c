@@ -44,7 +44,7 @@ struct _CcUaZoomPage
   AdwNavigationPage   parent_instance;
 
   AdwSwitchRow       *desktop_zoom_row;
-  AdwSpinRow         *magnify_factor_spin;
+  AdwSpinRow         *magnify_factor_spin_row;
   AdwComboRow        *magnify_view_row;
 
   AdwSwitchRow       *magnify_outside_screen_row;
@@ -326,7 +326,7 @@ cc_ua_zoom_page_class_init (CcUaZoomPageClass *klass)
                                                "universal-access/cc-ua-zoom-page.ui");
 
   gtk_widget_class_bind_template_child (widget_class, CcUaZoomPage, desktop_zoom_row);
-  gtk_widget_class_bind_template_child (widget_class, CcUaZoomPage, magnify_factor_spin);
+  gtk_widget_class_bind_template_child (widget_class, CcUaZoomPage, magnify_factor_spin_row);
   gtk_widget_class_bind_template_child (widget_class, CcUaZoomPage, magnify_view_row);
 
   gtk_widget_class_bind_template_child (widget_class, CcUaZoomPage, magnify_outside_screen_row);
@@ -365,7 +365,7 @@ cc_ua_zoom_page_init (CcUaZoomPage *self)
                    self->desktop_zoom_row, "active",
                    G_SETTINGS_BIND_DEFAULT);
   g_settings_bind (self->magnifier_settings, "mag-factor",
-                   adw_spin_row_get_adjustment (self->magnify_factor_spin),
+                   adw_spin_row_get_adjustment (self->magnify_factor_spin_row),
                    "value", G_SETTINGS_BIND_DEFAULT);
   g_settings_bind (self->magnifier_settings, "scroll-at-edges",
                    self->magnify_outside_screen_row, "active",
