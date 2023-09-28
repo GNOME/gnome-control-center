@@ -91,8 +91,6 @@ cc_multitasking_panel_class_init (CcMultitaskingPanelClass *klass)
 static void
 cc_multitasking_panel_init (CcMultitaskingPanel *self)
 {
-  gboolean is_dynamic_workspaces;
-
   g_resources_register (cc_multitasking_get_resource ());
 
   gtk_widget_init_template (GTK_WIDGET (self));
@@ -122,8 +120,7 @@ cc_multitasking_panel_init (CcMultitaskingPanel *self)
                    "active",
                    G_SETTINGS_BIND_DEFAULT);
 
-  is_dynamic_workspaces = g_settings_get_boolean (self->mutter_settings, "dynamic-workspaces");
-  if (is_dynamic_workspaces)
+  if (g_settings_get_boolean (self->mutter_settings, "dynamic-workspaces"))
     gtk_check_button_set_active (self->dynamic_workspaces_radio, TRUE);
   else
     gtk_check_button_set_active (self->fixed_workspaces_radio, TRUE);
@@ -139,9 +136,7 @@ cc_multitasking_panel_init (CcMultitaskingPanel *self)
                    "num-workspaces",
                    self->number_of_workspaces_spin,
                    "value",
-                   G_SETTINGS_BIND_DEFAULT);
-
-  gtk_widget_set_sensitive (GTK_WIDGET (self->number_of_workspaces_spin), !is_dynamic_workspaces);
+                   G_SETTINGS_BIND_DEFAULT | G_SETTINGS_BIND_NO_SENSITIVITY);
 
   self->shell_settings = g_settings_new ("org.gnome.shell.app-switcher");
 
