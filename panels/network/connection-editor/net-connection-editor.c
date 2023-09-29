@@ -240,6 +240,12 @@ updated_connection_cb (GObject            *source_object,
 
         nm_connection_clear_secrets (NM_CONNECTION (source_object));
 
+        if (!self->device) {
+                update_complete (self, TRUE);
+                g_object_unref (self);
+                return;
+        }
+
         nm_device_reapply_async (self->device, NM_CONNECTION (self->orig_connection),
                                  0, 0, NULL, device_reapply_cb, self /* owned */);
 }
@@ -251,12 +257,16 @@ added_connection_cb (GObject            *source_object,
 {
         NetConnectionEditor *self = user_data;
         g_autoptr(GError) error = NULL;
-        gboolean success = TRUE;
 
         if (!nm_client_add_connection_finish (NM_CLIENT (source_object), res, &error)) {
                 g_warning ("Failed to add connection: %s", error->message);
-                success = FALSE;
-                update_complete (self, success);
+                update_complete (self, FALSE);
+                g_object_unref (self);
+                return;
+        }
+
+        if (!self->device) {
+                update_complete (self, TRUE);
                 g_object_unref (self);
                 return;
         }
@@ -271,11 +281,6 @@ apply_clicked_cb (NetConnectionEditor *self)
         update_connection (self);
 
         eap_method_ca_cert_ignore_save (self->connection);
-
-        if (!self->device) {
-                update_complete (self, TRUE);
-                return;
-        }
 
         if (self->is_new_connection) {
                 nm_client_add_connection_async (self->client,
