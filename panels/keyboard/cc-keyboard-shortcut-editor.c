@@ -271,7 +271,8 @@ static void
 set_header_mode (CcKeyboardShortcutEditor *self,
                  HeaderMode                mode)
 {
-  gtk_header_bar_set_show_title_buttons (self->headerbar, mode == HEADER_MODE_CUSTOM_EDIT);
+  gtk_header_bar_set_show_title_buttons (self->headerbar, mode == HEADER_MODE_CUSTOM_EDIT ||
+                                                          mode == HEADER_MODE_NONE);
 
   gtk_widget_set_visible (GTK_WIDGET (self->add_button), mode == HEADER_MODE_ADD);
   gtk_widget_set_visible (GTK_WIDGET (self->cancel_button), mode != HEADER_MODE_NONE &&
