@@ -751,7 +751,7 @@ get_login_time_text (ActUser *user)
                 return g_strdup_printf(C_("login date-time", "%s, %s"), date_str, time_str);
         }
         else {
-                return g_strdup ("—");
+                return NULL;
         }
 }
 
@@ -854,6 +854,7 @@ show_user (ActUser *user, CcUserPanel *self)
 {
         g_autofree gchar *lang = NULL;
         g_autofree gchar *name = NULL;
+        g_autofree gchar *last_login_text = NULL;
         gboolean show, enable;
         ActUser *current;
 #ifdef HAVE_MALCONTENT
@@ -970,16 +971,10 @@ show_user (ActUser *user, CcUserPanel *self)
         current = act_user_manager_get_user_by_id (self->um, getuid ());
         show = act_user_get_uid (user) == getuid () ||
                act_user_get_account_type (current) == ACT_USER_ACCOUNT_TYPE_ADMINISTRATOR;
-        if (show) {
-                g_autofree gchar *text = NULL;
-
-                text = get_login_time_text (user);
-                cc_list_row_set_secondary_label (self->last_login_row, text);
-        }
-        gtk_widget_set_visible (GTK_WIDGET (self->last_login_row), show);
-
+        last_login_text = get_login_time_text (user);
         enable = act_user_get_login_history (user) != NULL;
-        gtk_widget_set_sensitive (GTK_WIDGET (self->last_login_row), enable);
+        gtk_widget_set_visible (GTK_WIDGET (self->last_login_row), show && enable && last_login_text != NULL);
+        cc_list_row_set_secondary_label (self->last_login_row, last_login_text);
 
         if (self->permission != NULL)
                 on_permission_changed (self);
