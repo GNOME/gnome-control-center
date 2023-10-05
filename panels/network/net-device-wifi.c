@@ -780,7 +780,7 @@ net_device_wifi_dispose (GObject *object)
         NetDeviceWifi *self = NET_DEVICE_WIFI (object);
 
         if (self->hotspot_dialog) {
-                gtk_window_destroy (self->hotspot_dialog);
+                gtk_window_destroy (GTK_WINDOW (self->hotspot_dialog));
                 self->hotspot_dialog = NULL;
         }
 
