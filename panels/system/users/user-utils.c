@@ -34,13 +34,10 @@
 #endif
 
 #include <gio/gio.h>
-#include <gio/gunixoutputstream.h>
 #include <glib/gi18n.h>
 #include <glib/gstdio.h>
 
 #include "user-utils.h"
-
-#define IMAGE_SIZE 512
 
 /* Taken from defines.h in shadow-utils. On Linux, this value is much smaller
  * than the sysconf limit LOGIN_NAME_MAX, and values larger than this will
@@ -259,180 +256,77 @@ is_valid_username_finish (GAsyncResult *result,
         return g_task_propagate_boolean (task, error);
 }
 
-GdkPixbuf *
-round_image (GdkPixbuf *pixbuf)
+/* This function was taken from AdwAvatar and modified so that it's possible to
+ * export a GdkTexture at a different size than the AdwAvatar is rendered
+ * See: https://gitlab.gnome.org/GNOME/libadwaita/-/blob/afd0fab86ff9b4332d165b985a435ea6f822d41b/src/adw-avatar.c#L751
+ * License: LGPL-2.1-or-later */
+GdkTexture *
+draw_avatar_to_texture (AdwAvatar *avatar, int size)
 {
-        GdkPixbuf *dest = NULL;
-        cairo_surface_t *surface;
-        cairo_t *cr;
-        gint size;
+        GdkTexture *result;
+        GskRenderNode *node;
+        GtkSnapshot *snapshot;
+        GdkPaintable *paintable;
+        GtkNative *native;
+        GskRenderer *renderer;
+        int real_size;
+        graphene_matrix_t transform;
+        gboolean transform_ok;
 
-        size = gdk_pixbuf_get_width (pixbuf);
-        surface = cairo_image_surface_create (CAIRO_FORMAT_ARGB32, size, size);
-        cr = cairo_create (surface);
+        real_size = adw_avatar_get_size (avatar);
 
-        /* Clip a circle */
-        cairo_arc (cr, size/2, size/2, size/2, 0, 2 * G_PI);
-        cairo_clip (cr);
-        cairo_new_path (cr);
+        /* This works around the issue that when the custom-image or text of the AdwAvatar changes the
+         * allocation gets invalidated and therefore we can't snapshot the widget till the allocation
+         * is recalculated */
+        gtk_widget_measure (GTK_WIDGET (avatar), GTK_ORIENTATION_HORIZONTAL, real_size, NULL, NULL, NULL, NULL);
+        gtk_widget_allocate (GTK_WIDGET (avatar), real_size, real_size, -1, NULL);
 
-        gdk_cairo_set_source_pixbuf (cr, pixbuf, 0, 0);
-        cairo_paint (cr);
+        transform_ok = gtk_widget_compute_transform (GTK_WIDGET (avatar),
+                                                     gtk_widget_get_first_child (GTK_WIDGET (avatar)),
+                                                     &transform);
 
-        dest = gdk_pixbuf_get_from_surface (surface, 0, 0, size, size);
-        cairo_surface_destroy (surface);
-        cairo_destroy (cr);
+        g_assert (transform_ok);
 
-        return dest;
-}
+        snapshot = gtk_snapshot_new ();
+        gtk_snapshot_transform_matrix (snapshot, &transform);
+        GTK_WIDGET_GET_CLASS (avatar)->snapshot (GTK_WIDGET (avatar), snapshot);
 
-static gchar *
-extract_initials_from_name (const gchar *name)
-{
-        GString *initials;
-        g_autofree gchar *p = NULL;
-        g_autofree gchar *normalized = NULL;
-        gunichar unichar;
-        gpointer q = NULL;
+        /* Create first a GdkPaintable at the size the avatar was drawn
+         * then create a GdkSnapshot of it at the size requested */
+        paintable = gtk_snapshot_free_to_paintable (snapshot, &GRAPHENE_SIZE_INIT (real_size, real_size));
+        snapshot = gtk_snapshot_new ();
+        gdk_paintable_snapshot (paintable, snapshot, size, size);
+        g_object_unref (paintable);
 
-        g_return_val_if_fail (name != NULL, NULL);
+        node = gtk_snapshot_free_to_node (snapshot);
 
-        p = g_utf8_strup (name, -1);
-        normalized = g_utf8_normalize (g_strstrip (p), -1, G_NORMALIZE_DEFAULT_COMPOSE);
-        if (normalized == NULL) {
-                return NULL;
-        }
+        native = gtk_widget_get_native (GTK_WIDGET (avatar));
+        renderer = gtk_native_get_renderer (native);
 
-        initials = g_string_new ("");
+        result = gsk_renderer_render_texture (renderer, node, &GRAPHENE_RECT_INIT (-1, 0, size, size));
 
-        unichar = g_utf8_get_char (normalized);
-        g_string_append_unichar (initials, unichar);
+        gsk_render_node_unref (node);
 
-        q = g_utf8_strrchr (normalized, -1, ' ');
-        if (q != NULL && g_utf8_next_char (q) != NULL) {
-                q = g_utf8_next_char (q);
-
-                unichar = g_utf8_get_char (q);
-                g_string_append_unichar (initials, unichar);
-        }
-
-        return g_string_free (initials, FALSE);
-}
-
-static GdkRGBA
-get_color_for_name (const gchar *name)
-{
-        // https://gitlab.gnome.org/Community/Design/HIG-app-icons/blob/master/GNOME%20HIG.gpl
-        static gdouble gnome_color_palette[][3] = {
-                {  98, 160, 234 },
-                {  53, 132, 228 },
-                {  28, 113, 216 },
-                {  26,  95, 180 },
-                {  87, 227, 137 },
-                {  51, 209, 122 },
-                {  46, 194, 126 },
-                {  38, 162, 105 },
-                { 248, 228,  92 },
-                { 246, 211,  45 },
-                { 245, 194,  17 },
-                { 229, 165,  10 },
-                { 255, 163,  72 },
-                { 255, 120,   0 },
-                { 230,  97,   0 },
-                { 198,  70,   0 },
-                { 237,  51,  59 },
-                { 224,  27,  36 },
-                { 192,  28,  40 },
-                { 165,  29,  45 },
-                { 192,  97, 203 },
-                { 163,  71, 186 },
-                { 129,  61, 156 },
-                {  97,  53, 131 },
-                { 181, 131,  90 },
-                { 152, 106,  68 },
-                { 134,  94,  60 },
-                {  99,  69,  44 }
-        };
-
-        GdkRGBA color = { 255, 255, 255, 1.0 };
-        guint hash;
-        gint number_of_colors;
-        gint idx;
-
-        if (name == NULL || strlen (name) == 0)
-                return color;
-
-        hash = g_str_hash (name);
-        number_of_colors = G_N_ELEMENTS (gnome_color_palette);
-        idx = hash % number_of_colors;
-
-        color.red   = gnome_color_palette[idx][0];
-        color.green = gnome_color_palette[idx][1];
-        color.blue  = gnome_color_palette[idx][2];
-
-        return color;
-}
-
-static cairo_surface_t *
-generate_user_picture (const gchar *name, gint size)
-{
-        PangoFontDescription *font_desc;
-        g_autofree gchar *initials = extract_initials_from_name (name);
-        g_autofree gchar *font = g_strdup_printf ("Sans %d", (int)ceil (size / 2.5));
-        PangoLayout *layout;
-        GdkRGBA color = get_color_for_name (name);
-        cairo_surface_t *surface;
-        gint width, height;
-        cairo_t *cr;
-
-        surface = cairo_image_surface_create (CAIRO_FORMAT_ARGB32,
-                                              size,
-                                              size);
-        cr = cairo_create (surface);
-        cairo_rectangle (cr, 0, 0, size, size);
-        cairo_set_source_rgb (cr, color.red/255.0, color.green/255.0, color.blue/255.0);
-        cairo_fill (cr);
-
-        /* Draw the initials on top */
-        cairo_set_source_rgb (cr, 1.0, 1.0, 1.0);
-        layout = pango_cairo_create_layout (cr);
-        pango_layout_set_text (layout, initials, -1);
-        font_desc = pango_font_description_from_string (font);
-        pango_layout_set_font_description (layout, font_desc);
-        pango_font_description_free (font_desc);
-
-        pango_layout_get_size (layout, &width, &height);
-        cairo_translate (cr, size/2, size/2);
-        cairo_move_to (cr, - ((double)width / PANGO_SCALE)/2, - ((double)height/PANGO_SCALE)/2);
-        pango_cairo_show_layout (cr, layout);
-        cairo_destroy (cr);
-
-        return surface;
+        return result;
 }
 
 void
 set_user_icon_data (ActUser   *user,
-                    GdkPixbuf *pixbuf)
+                    GdkTexture *texture)
 {
         g_autofree gchar *path = NULL;
-        gint fd;
-        g_autoptr(GOutputStream) stream = NULL;
         g_autoptr(GError) error = NULL;
+        int fd;
 
-        path = g_build_filename (g_get_tmp_dir (), "gnome-control-center-user-icon-XXXXXX", NULL);
-        fd = g_mkstemp (path);
+        fd = g_file_open_tmp ("gnome-control-center-user-icon-XXXXXX", &path, &error);
 
         if (fd == -1) {
-                g_warning ("failed to create temporary file for image data");
+                g_warning ("Failed to create temporary user icon: %s", error->message);
                 return;
         }
 
-        stream = g_unix_output_stream_new (fd, TRUE);
-
-        if (!gdk_pixbuf_save_to_stream (pixbuf, stream, "png", NULL, &error, NULL)) {
-                g_warning ("failed to save image: %s", error->message);
-                return;
-        }
+        gdk_texture_save_to_png (texture, path);
+        close (fd);
 
         act_user_set_icon_file (user, path);
 
@@ -477,34 +371,6 @@ setup_avatar_for_user (AdwAvatar *avatar, ActUser *user)
                         adw_avatar_set_custom_image (avatar, GDK_PAINTABLE (texture));
                 }
         }
-}
-
-GdkPixbuf *
-generate_default_avatar (ActUser *user, gint size)
-{
-        const gchar *name;
-        GdkPixbuf *pixbuf = NULL;
-        cairo_surface_t *surface;
-
-        name = act_user_get_real_name (user);
-        if (name == NULL)
-                name = "";
-        surface = generate_user_picture (name, size);
-
-        pixbuf = gdk_pixbuf_get_from_surface (surface, 0, 0, size, size);
-        cairo_surface_destroy (surface);
-
-        return pixbuf;
-}
-
-void
-set_default_avatar (ActUser *user)
-{
-        g_autoptr(GdkPixbuf) pixbuf = NULL;
-
-        pixbuf = generate_default_avatar (user, IMAGE_SIZE);
-
-        set_user_icon_data (user, pixbuf);
 }
 
 GSettings *

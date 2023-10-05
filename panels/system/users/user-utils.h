@@ -26,6 +26,8 @@
 
 G_BEGIN_DECLS
 
+#define AVATAR_PIXEL_SIZE 512
+
 void     set_entry_generation_icon        (GtkEntry    *entry);
 void     set_entry_validation_checkmark   (GtkEntry    *entry);
 void     set_entry_validation_error       (GtkEntry    *entry,
@@ -44,12 +46,10 @@ gboolean is_valid_username_finish         (GAsyncResult *result,
                                            gchar **tip,
                                            gchar **username,
                                            GError **error);
-GdkPixbuf *round_image                    (GdkPixbuf   *pixbuf);
-GdkPixbuf *generate_default_avatar        (ActUser     *user,
-                                           gint         size);
-void       set_default_avatar             (ActUser     *user);
+GdkTexture *draw_avatar_to_texture        (AdwAvatar *avatar,
+                                           int        size);
 void       set_user_icon_data             (ActUser     *user,
-                                           GdkPixbuf   *pixbuf);
+                                           GdkTexture  *texture);
 void       setup_avatar_for_user          (AdwAvatar *avatar,
                                            ActUser *user);
 GSettings *settings_or_null               (const gchar *schema);

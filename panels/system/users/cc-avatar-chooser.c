@@ -38,7 +38,6 @@
 
 #define ROW_SPAN 5
 #define AVATAR_CHOOSER_PIXEL_SIZE 80
-#define PIXEL_SIZE 512
 
 struct _CcAvatarChooser {
         GtkPopover parent;
@@ -61,6 +60,7 @@ crop_dialog_response (CcAvatarChooser *self,
 {
         g_autoptr(GdkPixbuf) pb = NULL;
         g_autoptr(GdkPixbuf) pb2 = NULL;
+        g_autoptr(GdkTexture) texture = NULL;
 
         if (response_id != GTK_RESPONSE_ACCEPT) {
                 self->crop_area = NULL;
@@ -69,9 +69,10 @@ crop_dialog_response (CcAvatarChooser *self,
         }
 
         pb = cc_crop_area_create_pixbuf (CC_CROP_AREA (self->crop_area));
-        pb2 = gdk_pixbuf_scale_simple (pb, PIXEL_SIZE, PIXEL_SIZE, GDK_INTERP_BILINEAR);
+        pb2 = gdk_pixbuf_scale_simple (pb, AVATAR_PIXEL_SIZE, AVATAR_PIXEL_SIZE, GDK_INTERP_BILINEAR);
+        texture = gdk_texture_new_for_pixbuf (pb2);
 
-        set_user_icon_data (self->user, pb2);
+        set_user_icon_data (self->user, texture);
 
         self->crop_area = NULL;
         gtk_window_destroy (GTK_WINDOW (dialog));
@@ -185,6 +186,7 @@ face_widget_activated (CcAvatarChooser *self,
 {
         const gchar *filename;
         GtkWidget   *image;
+        g_autoptr(GdkTexture) texture = NULL;
 
         image = gtk_flow_box_child_get_child (child);
         filename = g_object_get_data (G_OBJECT (image), "filename");
@@ -199,34 +201,26 @@ create_face_widget (gpointer item,
                     gpointer user_data)
 {
         g_autofree gchar *image_path = NULL;
-        g_autoptr(GdkPixbuf) source_pixbuf = NULL;
-        g_autoptr(GdkPixbuf) pixbuf = NULL;
-        GtkWidget *image;
+        g_autoptr(GtkWidget) avatar = NULL;
+        g_autoptr(GdkTexture) source_image = NULL;
 
         image_path = g_file_get_path (G_FILE (item));
 
-        source_pixbuf = gdk_pixbuf_new_from_file_at_size (image_path,
-                                                          AVATAR_CHOOSER_PIXEL_SIZE,
-                                                          AVATAR_CHOOSER_PIXEL_SIZE,
-                                                          NULL);
-        if (source_pixbuf == NULL) {
-                image = gtk_image_new_from_icon_name ("image-missing");
-                gtk_image_set_pixel_size (GTK_IMAGE (image), AVATAR_CHOOSER_PIXEL_SIZE);
+        avatar = adw_avatar_new (AVATAR_CHOOSER_PIXEL_SIZE, NULL, false);
 
-                g_object_set_data_full (G_OBJECT (image),
+        if (image_path) {
+                source_image = gdk_texture_new_from_filename (image_path, NULL);
+                g_object_set_data_full (G_OBJECT (avatar),
                                         "filename", g_steal_pointer (&image_path), g_free);
-
-                return image;
         }
 
-        pixbuf = round_image (source_pixbuf);
-        image = gtk_image_new_from_pixbuf (pixbuf);
-        gtk_image_set_pixel_size (GTK_IMAGE (image), AVATAR_CHOOSER_PIXEL_SIZE);
+        if (source_image == NULL) {
+                adw_avatar_set_icon_name (ADW_AVATAR (avatar), "image-missing");
+        } else {
+                adw_avatar_set_custom_image (ADW_AVATAR (avatar), GDK_PAINTABLE (source_image));
+        }
 
-        g_object_set_data_full (G_OBJECT (image),
-                                "filename", g_steal_pointer (&image_path), g_free);
-
-        return image;
+        return g_steal_pointer (&avatar);
 }
 
 static GStrv
