@@ -31,9 +31,8 @@ G_DECLARE_FINAL_TYPE (CcAvatarChooser, cc_avatar_chooser, CC, AVATAR_CHOOSER, Gt
 
 typedef struct _CcAvatarChooser CcAvatarChooser;
 
-CcAvatarChooser *cc_avatar_chooser_new      (GtkWidget       *transient_for);
-void             cc_avatar_chooser_free     (CcAvatarChooser *dialog);
-void             cc_avatar_chooser_set_user (CcAvatarChooser *dialog,
-                                             ActUser       *user);
+CcAvatarChooser *cc_avatar_chooser_new      (void);
+void             cc_avatar_chooser_set_user (CcAvatarChooser *self,
+                                             ActUser         *user);
 
 G_END_DECLS

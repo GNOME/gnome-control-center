@@ -652,7 +652,7 @@ cc_user_page_init (CcUserPage *self)
 {
     gtk_widget_init_template (GTK_WIDGET (self));
 
-    self->avatar_chooser = cc_avatar_chooser_new (GTK_WIDGET (self));
+    self->avatar_chooser = cc_avatar_chooser_new ();
     gtk_menu_button_set_popover (self->avatar_edit_button, GTK_WIDGET (self->avatar_chooser));
 
 #ifdef HAVE_MALCONTENT

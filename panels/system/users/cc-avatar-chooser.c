@@ -43,8 +43,6 @@
 struct _CcAvatarChooser {
         GtkPopover parent;
 
-        GtkWidget *transient_for;
-
         GtkWidget *crop_area;
         GtkWidget *user_flowbox;
         GtkWidget *flowbox;
@@ -87,11 +85,9 @@ cc_avatar_chooser_crop (CcAvatarChooser *self,
                         GdkPixbuf       *pixbuf)
 {
         GtkWidget *dialog;
-        GtkWindow *toplevel;
 
-        toplevel = (GtkWindow *)gtk_widget_get_native (GTK_WIDGET (self->transient_for));
         dialog = gtk_dialog_new_with_buttons ("",
-                                              toplevel,
+                                              GTK_WINDOW (gtk_widget_get_root (GTK_WIDGET (self))),
                                               GTK_DIALOG_USE_HEADER_BAR,
                                               _("_Cancel"),
                                               GTK_RESPONSE_CANCEL,
@@ -159,11 +155,8 @@ cc_avatar_chooser_select_file (CcAvatarChooser *self)
         GtkFileDialog *file_dialog;
         GtkFileFilter *filter;
         GListStore *filters;
-        GtkWindow *toplevel;
 
         g_return_if_fail (CC_IS_AVATAR_CHOOSER (self));
-
-        toplevel = GTK_WINDOW (gtk_widget_get_native (GTK_WIDGET (self->transient_for)));
 
         file_dialog = gtk_file_dialog_new ();
         gtk_file_dialog_set_title (file_dialog, _("Browse for more pictures"));
@@ -181,7 +174,7 @@ cc_avatar_chooser_select_file (CcAvatarChooser *self)
 
         gtk_popover_popdown (GTK_POPOVER (self));
         gtk_file_dialog_open (file_dialog,
-                              toplevel,
+                              GTK_WINDOW (gtk_widget_get_root (GTK_WIDGET (self))),
                               NULL,
                               file_dialog_open_cb,
                               self);
@@ -357,18 +350,10 @@ setup_photo_popup (CcAvatarChooser *self)
 }
 
 CcAvatarChooser *
-cc_avatar_chooser_new (GtkWidget *transient_for)
+cc_avatar_chooser_new (void)
 {
-        CcAvatarChooser *self;
-
-        self = g_object_new (CC_TYPE_AVATAR_CHOOSER,
+        return g_object_new (CC_TYPE_AVATAR_CHOOSER,
                              NULL);
-        self->transient_for = transient_for;
-        self->thumb_factory = gnome_desktop_thumbnail_factory_new (GNOME_DESKTOP_THUMBNAIL_SIZE_NORMAL);
-
-        setup_photo_popup (self);
-
-        return self;
 }
 
 static void
@@ -386,6 +371,12 @@ static void
 cc_avatar_chooser_init (CcAvatarChooser *self)
 {
         gtk_widget_init_template (GTK_WIDGET (self));
+
+        self->thumb_factory = gnome_desktop_thumbnail_factory_new (GNOME_DESKTOP_THUMBNAIL_SIZE_NORMAL);
+
+        setup_photo_popup (self);
+
+        g_signal_connect_object (self->user_flowbox, "child-activated", G_CALLBACK (face_widget_activated), self, G_CONNECT_SWAPPED);
 }
 
 static void
