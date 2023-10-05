@@ -46,12 +46,8 @@ typedef struct
   GCancellable *cancellable;
 } CcPanelPrivate;
 
-static void cc_panel_buildable_init (GtkBuildableIface *iface);
-
 G_DEFINE_ABSTRACT_TYPE_WITH_CODE (CcPanel, cc_panel, ADW_TYPE_NAVIGATION_PAGE,
                                   G_ADD_PRIVATE (CcPanel))
-
-static GtkBuildableIface *parent_buildable_iface;
 
 enum
 {
