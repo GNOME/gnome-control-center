@@ -71,7 +71,14 @@ config_h.set('USER_DIR_MODE', '0700',
              description: 'Permissions for creating the user\'s config, cache and data directories')
 
 # compiler flags
-common_flags = ['-DHAVE_CONFIG_H']
+common_flags = [
+  # We have so many deprecation warnings that it becomes impossible to notice any other useful
+  # warning, thus making the compiler output completely useless. Ideally, we should fix all
+  # of those but, until then, it's better to add this flag so that we avoid adding even more
+  # warnings by accident. If you want to fix some of those, just comment the line below temporarely.
+  '-Wno-deprecated-declarations',
+  '-DHAVE_CONFIG_H'
+]
 
 # Only add this when optimizing is enabled (default)
 optimized_src = '''
