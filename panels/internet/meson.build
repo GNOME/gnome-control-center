@@ -19,6 +19,7 @@ i18n.merge_file(
 
 sources = files(
   'cc-internet-panel.c',
+  'cc-net-proxy-page.c',
 )
 
 sources += gnome.compile_resources(

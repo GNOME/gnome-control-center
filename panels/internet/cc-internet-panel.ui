@@ -18,6 +18,16 @@
                   <object class="AdwPreferencesPage">
                     <child>
                       <object class="AdwPreferencesGroup">
+                        <child>
+                          <object class="CcListRow" id="proxy_row">
+                            <property name="show-arrow">True</property>
+                            <property name="title" translatable="yes">Network Proxy</property>
+                            <property name="subtitle" bind-source="proxy_page" bind-property="state-text" bind-flags="sync-create"/>
+                            <property name="icon-name">network-server-symbolic</property>
+                            <property name="action-name">navigation.push</property>
+                            <property name="action-target">'network-proxy-page'</property>
+                          </object>
+                        </child>
                       </object>
                     </child>
 
@@ -38,6 +48,12 @@
 
               </object>
             </property>
+          </object>
+        </child>
+
+        <child>
+          <object class="CcNetProxyPage" id="proxy_page">
+            <property name="tag">network-proxy-page</property>
           </object>
         </child>
 
