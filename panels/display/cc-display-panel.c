@@ -739,7 +739,7 @@ move_display_settings_to_separate_page (CcDisplayPanel *self)
 static void
 rebuild_ui (CcDisplayPanel *self)
 {
-  guint n_outputs, n_active_outputs, n_usable_outputs;
+  guint n_active_outputs, n_usable_outputs;
   GList *outputs, *l;
   CcDisplayConfigType type;
 
@@ -805,7 +805,6 @@ rebuild_ui (CcDisplayPanel *self)
   /* Sync the rebuild lists/buttons */
   set_current_output (self, self->current_output, TRUE);
 
-  n_outputs = g_list_length (outputs);
   type = config_get_current_type (self);
 
   if (n_usable_outputs > 1)

@@ -1695,8 +1695,6 @@ cc_applications_panel_set_property (GObject      *object,
 static void
 cc_applications_panel_constructed (GObject *object)
 {
-  CcApplicationsPanel *self = CC_APPLICATIONS_PANEL (object);
-
   G_OBJECT_CLASS (cc_applications_panel_parent_class)->constructed (object);
 }
 
