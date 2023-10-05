@@ -892,7 +892,7 @@ layout_lists_intersection (GList *first_list,
 
   while (first_list != NULL)
     {
-      const char *layout;
+      char *layout;
 
       layout = first_list->data;
       g_hash_table_insert (first_set, layout, layout);
@@ -901,7 +901,7 @@ layout_lists_intersection (GList *first_list,
 
   while (second_list != NULL)
     {
-      const char *layout;
+      char *layout;
 
       layout = second_list->data;
       if (g_hash_table_remove (first_set, layout))
