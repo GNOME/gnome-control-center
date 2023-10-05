@@ -778,7 +778,7 @@ static void
 ce_page_ip4_init (CEPageIP4 *self)
 {
         const GActionEntry ip4_entries[] = {
-                { "ip4method", on_ip4_method_activated_cb, "s", "'automatic'", NULL},
+                { "ip4method", on_ip4_method_activated_cb, "s", "'automatic'", NULL, { 0 } },
         };
         self->method_group = G_ACTION_GROUP (g_simple_action_group_new ());
 

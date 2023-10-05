@@ -742,7 +742,7 @@ static void
 ce_page_ip6_init (CEPageIP6 *self)
 {
         const GActionEntry ip6_entries[] = {
-                { "ip6method", on_ip6_method_activated_cb, "s", "'automatic'", NULL},
+                { "ip6method", on_ip6_method_activated_cb, "s", "'automatic'", NULL, { 0 } },
         };
         self->method_group = G_ACTION_GROUP (g_simple_action_group_new ());
 
