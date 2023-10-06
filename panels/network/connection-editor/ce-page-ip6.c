@@ -83,6 +83,28 @@ enum {
 };
 
 static void
+sync_dns_entry_warning (CEPageIP6 *self)
+{
+        g_autoptr(GVariant) method_variant = NULL;
+        const gchar *method;
+
+        method_variant = g_action_group_get_action_state (self->method_group, "ip6method");
+        method = g_variant_get_string (method_variant, NULL);
+
+        if (gtk_entry_get_text_length (self->dns_entry) &&
+            gtk_switch_get_active (self->auto_dns_switch) &&
+            (g_strcmp0 (method, "automatic") == 0 || g_strcmp0 (method, "dhcp") == 0)) {
+                gtk_entry_set_icon_from_icon_name (self->dns_entry, GTK_ENTRY_ICON_SECONDARY, "dialog-warning-symbolic");
+                gtk_entry_set_icon_tooltip_text (self->dns_entry, GTK_ENTRY_ICON_SECONDARY, _("Automatic DNS is enabled. Did you intend to disable Automatic DNS?"));
+                gtk_widget_add_css_class (GTK_WIDGET (self->dns_entry), "warning");
+        } else {
+                gtk_entry_set_icon_from_icon_name (self->dns_entry, GTK_ENTRY_ICON_SECONDARY, NULL);
+                gtk_entry_set_icon_tooltip_text (self->dns_entry, GTK_ENTRY_ICON_SECONDARY, NULL);
+                gtk_widget_remove_css_class (GTK_WIDGET (self->dns_entry), "warning");
+        }
+}
+
+static void
 method_changed (CEPageIP6 *self)
 {
         gboolean addr_enabled;
@@ -109,6 +131,8 @@ method_changed (CEPageIP6 *self)
         gtk_widget_set_sensitive (GTK_WIDGET (self->dns_entry), dns_enabled);
         gtk_widget_set_sensitive (GTK_WIDGET (self->routes_list), routes_enabled);
         gtk_widget_set_sensitive (GTK_WIDGET (self->never_default_check), routes_enabled);
+
+        sync_dns_entry_warning (self);
 
         ce_page_changed (CE_PAGE (self));
 }
@@ -290,6 +314,7 @@ add_dns_section (CEPageIP6 *self)
 
         gtk_switch_set_active (self->auto_dns_switch, !nm_setting_ip_config_get_ignore_auto_dns (self->setting));
         g_signal_connect_object (self->auto_dns_switch, "notify::active", G_CALLBACK (ce_page_changed), self, G_CONNECT_SWAPPED);
+        g_signal_connect_object (self->auto_dns_switch, "notify::active", G_CALLBACK (sync_dns_entry_warning), self, G_CONNECT_SWAPPED);
 
         string = g_string_new ("");
 
@@ -308,6 +333,9 @@ add_dns_section (CEPageIP6 *self)
         gtk_editable_set_text (GTK_EDITABLE (self->dns_entry), string->str);
 
         g_signal_connect_object (self->dns_entry, "notify::text", G_CALLBACK (ce_page_changed), self, G_CONNECT_SWAPPED);
+        g_signal_connect_object (self->dns_entry, "notify::text", G_CALLBACK (sync_dns_entry_warning), self, G_CONNECT_SWAPPED);
+
+        sync_dns_entry_warning (self);
 
         g_string_free (string, TRUE);
 }
