@@ -617,6 +617,9 @@ ui_to_setting (CEPageIP6 *self)
                 }
         }
 
+        if (dns_text[0] == '\0')
+                widget_unset_error (GTK_WIDGET (self->dns_entry));
+
         nm_setting_ip_config_clear_routes (self->setting);
         add_routes = g_str_equal (method, NM_SETTING_IP6_CONFIG_METHOD_AUTO) ||
                      g_str_equal (method, NM_SETTING_IP6_CONFIG_METHOD_DHCP) ||
