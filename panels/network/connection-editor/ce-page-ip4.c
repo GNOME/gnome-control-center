@@ -640,6 +640,9 @@ ui_to_setting (CEPageIP4 *self)
         }
         g_clear_pointer (&dns_addresses, g_strfreev);
 
+        if (dns_text[0] == '\0')
+                widget_unset_error (GTK_WIDGET (self->dns_entry));
+
         if (dns_servers->len == 0) {
                 g_ptr_array_free (dns_servers, TRUE);
                 dns_servers = NULL;
