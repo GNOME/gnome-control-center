@@ -797,8 +797,7 @@ static void
 select_vpn_type (NetConnectionEditor *self, GtkListBox *list)
 {
         GSList *vpn_plugins, *iter;
-        GtkWidget *row, *row_box;
-        GtkWidget *name_label, *desc_label;
+        GtkWidget *row;
         GtkWidget *child;
 
         /* Get the available VPN types */
@@ -823,26 +822,11 @@ select_vpn_type (NetConnectionEditor *self, GtkListBox *list)
                               NULL);
                 desc_markup = g_markup_printf_escaped ("<span size='smaller'>%s</span>", desc);
 
-                row = gtk_list_box_row_new ();
+                row = adw_action_row_new ();
+                gtk_list_box_row_set_activatable (GTK_LIST_BOX_ROW (row), TRUE);
+                adw_preferences_row_set_title (ADW_PREFERENCES_ROW (row), name);
+                adw_action_row_set_subtitle (ADW_ACTION_ROW (row), desc_markup);
 
-                row_box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 6);
-                gtk_widget_set_margin_start (row_box, 12);
-                gtk_widget_set_margin_end (row_box, 12);
-                gtk_widget_set_margin_top (row_box, 12);
-                gtk_widget_set_margin_bottom (row_box, 12);
-
-                name_label = gtk_label_new (name);
-                gtk_widget_set_halign (name_label, GTK_ALIGN_START);
-                gtk_box_append (GTK_BOX (row_box), name_label);
-
-                desc_label = gtk_label_new (NULL);
-                gtk_label_set_markup (GTK_LABEL (desc_label), desc_markup);
-                gtk_label_set_wrap (GTK_LABEL (desc_label), TRUE);
-                gtk_widget_set_halign (desc_label, GTK_ALIGN_START);
-                gtk_widget_add_css_class (desc_label, "dim-label");
-                gtk_box_append (GTK_BOX (row_box), desc_label);
-
-                gtk_list_box_row_set_child (GTK_LIST_BOX_ROW (row), row_box);
                 g_object_set_data_full (G_OBJECT (row), "service_name", g_steal_pointer (&service_name), g_free);
                 gtk_list_box_append (list, row);
         }
@@ -852,43 +836,19 @@ select_vpn_type (NetConnectionEditor *self, GtkListBox *list)
                         "of use, high speed performance and low attack surface.");
         gchar *desc_markup = g_markup_printf_escaped ("<span size='smaller'>%s</span>", desc);
 
-        row = gtk_list_box_row_new ();
+        row = adw_action_row_new ();
+        gtk_list_box_row_set_activatable (GTK_LIST_BOX_ROW (row), TRUE);
+        adw_preferences_row_set_title (ADW_PREFERENCES_ROW (row), _("WireGuard"));
+        adw_action_row_set_subtitle (ADW_ACTION_ROW (row), desc_markup);
 
-        row_box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 6);
-        gtk_widget_set_margin_start (row_box, 12);
-        gtk_widget_set_margin_end (row_box, 12);
-        gtk_widget_set_margin_top (row_box, 12);
-        gtk_widget_set_margin_bottom (row_box, 12);
-
-        name_label = gtk_label_new (_("WireGuard"));
-        gtk_widget_set_halign (name_label, GTK_ALIGN_START);
-        gtk_box_append (GTK_BOX (row_box), name_label);
-
-        desc_label = gtk_label_new (NULL);
-        gtk_label_set_markup (GTK_LABEL (desc_label), desc_markup);
-        gtk_label_set_wrap (GTK_LABEL (desc_label), TRUE);
-        gtk_widget_set_halign (desc_label, GTK_ALIGN_START);
-        gtk_widget_add_css_class (desc_label, "dim-label");
-        gtk_box_append (GTK_BOX (row_box), desc_label);
-
-        gtk_list_box_row_set_child (GTK_LIST_BOX_ROW (row), row_box);
         g_object_set_data (G_OBJECT (row), "service_name", "wireguard");
         gtk_list_box_append (list, row);
 
         /* Import */
-        row = gtk_list_box_row_new ();
+        row = adw_action_row_new ();
+        gtk_list_box_row_set_activatable (GTK_LIST_BOX_ROW (row), TRUE);
+        adw_preferences_row_set_title (ADW_PREFERENCES_ROW (row), _("Import from file…"));
 
-        row_box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 6);
-        gtk_widget_set_margin_start (row_box, 12);
-        gtk_widget_set_margin_end (row_box, 12);
-        gtk_widget_set_margin_top (row_box, 12);
-        gtk_widget_set_margin_bottom (row_box, 12);
-
-        name_label = gtk_label_new (_("Import from file…"));
-        gtk_widget_set_halign (name_label, GTK_ALIGN_START);
-        gtk_box_append (GTK_BOX (row_box), name_label);
-
-        gtk_list_box_row_set_child (GTK_LIST_BOX_ROW (row), row_box);
         g_object_set_data (G_OBJECT (row), "service_name", "import");
         gtk_list_box_append (list, row);
 
@@ -903,6 +863,7 @@ net_connection_editor_add_connection (NetConnectionEditor *self)
 
         list = GTK_LIST_BOX (gtk_list_box_new ());
         gtk_list_box_set_selection_mode (list, GTK_SELECTION_NONE);
+        gtk_widget_add_css_class (GTK_WIDGET (list), "boxed-list");
 
         select_vpn_type (self, list);
 
