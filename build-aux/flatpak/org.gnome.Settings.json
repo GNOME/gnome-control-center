@@ -302,6 +302,8 @@
             "buildsystem" : "meson",
             "config-opts" : [
                 "-Dsystemdsystemunitdir=/app/lib/systemd/system",
+                "-Dudevrulesdir=/app/lib/udev",
+                "-Dudevhwdbdir=/app/lib/udev",
                 "-Dgtk-doc=false",
                 "-Dman=false",
                 "-Dintrospection=disabled"
@@ -361,6 +363,7 @@
                 "-Dselinux=false",
                 "-Dsession_tracking=no",
                 "-Dsystemdsystemunitdir='no'",
+                "-Dudev_dir=/app/lib/udev",
                 "-Dsystemd_journal=false",
                 "-Dtests=no",
                 "-Dvapi=false"
@@ -424,7 +427,7 @@
             "config-opts" : [
                 "-Dintrospection=false",
                 "-Dbash_completion=false",
-                "-Dudevdir=/app/lib",
+                "-Dudevdir=/app/lib/udev",
                 "-Dsystemdsystemunitdir=/app/lib/systemd/system",
                 "-Dmbim=false",
                 "-Dplugin_dell=disabled",
@@ -445,6 +448,7 @@
             "name" : "gnome-settings-daemon",
             "buildsystem" : "meson",
             "config-opts" : [
+                "-Dudev_dir=/app/lib/udev",
                 "-Dsystemd=false"
             ],
             "sources" : [
