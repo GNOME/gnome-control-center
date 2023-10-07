@@ -49,7 +49,7 @@ static guint signals[LAST_SIGNAL] = { 0 };
 
 struct _NetConnectionEditor
 {
-        GtkDialog parent;
+        AdwWindow parent;
 
         GtkBox           *add_connection_box;
         AdwBin           *add_connection_frame;
@@ -76,7 +76,7 @@ struct _NetConnectionEditor
         gboolean          title_set;
 };
 
-G_DEFINE_TYPE (NetConnectionEditor, net_connection_editor, GTK_TYPE_DIALOG)
+G_DEFINE_TYPE (NetConnectionEditor, net_connection_editor, ADW_TYPE_WINDOW)
 
 /* Used as both GSettings keys and GObject data tags */
 #define IGNORE_CA_CERT_TAG "ignore-ca-cert"
@@ -174,10 +174,12 @@ cancel_editing (NetConnectionEditor *self)
         gtk_window_destroy (GTK_WINDOW (self));
 }
 
-static void
-close_request_cb (NetConnectionEditor *self)
+static gboolean
+net_connection_editor_close_request (GtkWindow *window)
 {
-        cancel_editing (self);
+        cancel_editing (NET_CONNECTION_EDITOR (window));
+
+        return GTK_WINDOW_CLASS (net_connection_editor_parent_class)->close_request (window);
 }
 
 static void
@@ -327,10 +329,13 @@ net_connection_editor_class_init (NetConnectionEditorClass *class)
 {
         GObjectClass *object_class = G_OBJECT_CLASS (class);
         GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (class);
+        GtkWindowClass *window_class = GTK_WINDOW_CLASS (class);
 
         g_resources_register (net_connection_editor_get_resource ());
 
         object_class->finalize = net_connection_editor_finalize;
+
+        window_class->close_request = net_connection_editor_close_request;
 
         signals[DONE] = g_signal_new ("done",
                                       G_OBJECT_CLASS_TYPE (object_class),
@@ -339,6 +344,8 @@ net_connection_editor_class_init (NetConnectionEditorClass *class)
                                       NULL, NULL,
                                       NULL,
                                       G_TYPE_NONE, 1, G_TYPE_BOOLEAN);
+
+        gtk_widget_class_add_binding_action (widget_class, GDK_KEY_Escape, 0, "window.close", NULL);
 
         gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/network/connection-editor.ui");
 
@@ -351,7 +358,6 @@ net_connection_editor_class_init (NetConnectionEditorClass *class)
         gtk_widget_class_bind_template_child (widget_class, NetConnectionEditor, toplevel_stack);
 
         gtk_widget_class_bind_template_callback (widget_class, cancel_clicked_cb);
-        gtk_widget_class_bind_template_callback (widget_class, close_request_cb);
         gtk_widget_class_bind_template_callback (widget_class, apply_clicked_cb);
 }
 
@@ -898,10 +904,7 @@ net_connection_editor_new (NMConnection     *connection,
 {
         NetConnectionEditor *self;
 
-        self = g_object_new (net_connection_editor_get_type (),
-                             /* This doesn't seem to work for a template, so it is also hardcoded. */
-                             "use-header-bar", 1,
-                             NULL);
+        self = g_object_new (net_connection_editor_get_type (), NULL);
 
         self->cancellable = g_cancellable_new ();
 

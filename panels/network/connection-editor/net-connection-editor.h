@@ -21,12 +21,13 @@
 
 #pragma once
 
+#include <adwaita.h>
 #include <gtk/gtk.h>
 #include <NetworkManager.h>
 
 G_BEGIN_DECLS
 
-G_DECLARE_FINAL_TYPE (NetConnectionEditor, net_connection_editor, NET, CONNECTION_EDITOR, GtkDialog)
+G_DECLARE_FINAL_TYPE (NetConnectionEditor, net_connection_editor, NET, CONNECTION_EDITOR, AdwWindow)
 
 NetConnectionEditor *net_connection_editor_new      (NMConnection     *connection,
                                                      NMDevice         *device,
