@@ -264,6 +264,7 @@ remove_wifi_device (CcWifiPanel *self,
   GtkWidget *child;
   const gchar *id;
   guint i;
+  gboolean is_visible_device;
 
   id = nm_device_get_udi (device);
 
@@ -286,6 +287,7 @@ remove_wifi_device (CcWifiPanel *self,
 
   /* Destroy all stack pages related to this device */
   child = gtk_stack_get_child_by_name (self->stack, id);
+  is_visible_device = (child == gtk_stack_get_visible_child (self->stack));
   gtk_stack_remove (self->stack, child);
 
   child = gtk_stack_get_child_by_name (self->device_stack, id);
@@ -293,6 +295,15 @@ remove_wifi_device (CcWifiPanel *self,
 
   /* Update the title widget */
   update_devices_names (self);
+
+  if (is_visible_device)
+    {
+      /* The binding for the visible wifi device would have been
+         removed as part of device (binding source) removal above. So,
+         we clear the reference to the binding, so we don't try
+         unbinding an invalid binding later. */
+      self->spinner_binding = NULL;
+    }
 }
 
 static void
