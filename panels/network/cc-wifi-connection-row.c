@@ -326,6 +326,7 @@ update_ui (CcWifiConnectionRow *self)
       gtk_widget_set_child_visible (GTK_WIDGET (self->strength_icon), TRUE);
 
       description = g_strdup_printf(_("Signal strength %d%%"), strength);
+      gtk_widget_set_tooltip_text (GTK_WIDGET (self->strength_icon), description);
       gtk_accessible_update_property (GTK_ACCESSIBLE (self->strength_icon),
                                       GTK_ACCESSIBLE_PROPERTY_DESCRIPTION,
                                       description,

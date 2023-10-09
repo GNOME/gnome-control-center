@@ -57,9 +57,10 @@
             <property name="icon_name">qr-code-symbolic</property>
             <property name="halign">center</property>
             <property name="valign">center</property>
+            <property name="tooltip-text" translatable="yes">Show QR Code</property>
             <signal name="clicked" handler="qr_code_clicked_cb" object="CcWifiConnectionRow" swapped="yes"/>
             <accessibility>
-              <property name="label" translatable="yes">Show QR-Code</property>
+              <relation name="labelled-by">qr_code_button</relation>
             </accessibility>
             <style>
               <class name="flat"/>
@@ -72,9 +73,10 @@
             <property name="icon_name">emblem-system-symbolic</property>
             <property name="halign">center</property>
             <property name="valign">center</property>
+            <property name="tooltip-text" translatable="yes">Options…</property>
             <signal name="clicked" handler="configure_clicked_cb" object="CcWifiConnectionRow" swapped="yes"/>
             <accessibility>
-              <property name="label" translatable="yes">Options…</property>
+              <relation name="labelled-by">options_button</relation>
             </accessibility>
             <style>
               <class name="flat"/>
