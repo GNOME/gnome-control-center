@@ -311,8 +311,9 @@ draw_avatar_to_texture (AdwAvatar *avatar, int size)
 }
 
 void
-set_user_icon_data (ActUser   *user,
-                    GdkTexture *texture)
+set_user_icon_data (ActUser     *user,
+                    GdkTexture  *texture,
+                    const gchar *image_source)
 {
         g_autofree gchar *path = NULL;
         g_autoptr(GError) error = NULL;
@@ -325,7 +326,13 @@ set_user_icon_data (ActUser   *user,
                 return;
         }
 
-        gdk_texture_save_to_png (texture, path);
+        g_autoptr(GdkPixbuf) pixbuf = gdk_pixbuf_get_from_texture (texture);
+        gdk_pixbuf_save (pixbuf, path, "png", &error, IMAGE_SOURCE_KEY, image_source, NULL);
+
+        if (error != NULL) {
+            g_warning ("Failed to create temporary user icon: %s", error->message);
+        }
+
         close (fd);
 
         act_user_set_icon_file (user, path);
@@ -359,12 +366,26 @@ setup_avatar_for_user (AdwAvatar *avatar, ActUser *user)
         avatar_file = act_user_get_icon_file (user);
         if (avatar_file) {
                 g_autoptr(GdkPixbuf) pixbuf = NULL;
+                const gchar *image_source;
+                gboolean is_generated = TRUE;
 
                 pixbuf = gdk_pixbuf_new_from_file_at_size (avatar_file,
                                                            adw_avatar_get_size (avatar),
                                                            adw_avatar_get_size (avatar),
                                                            NULL);
+
                 if (pixbuf) {
+                        image_source = gdk_pixbuf_get_option (pixbuf, IMAGE_SOURCE_KEY);
+
+                        if (image_source == NULL)
+                                g_debug ("User avatar's source isn't defined");
+                        else
+                                g_debug ("User avatar's source is %s", image_source);
+
+                        is_generated = g_strcmp0 (image_source, "gnome-generated") == 0;
+                }
+
+                if (!is_generated) {
                         g_autoptr(GdkTexture) texture = NULL;
 
                         texture = gdk_texture_new_for_pixbuf (pixbuf);

@@ -28,6 +28,15 @@ G_BEGIN_DECLS
 
 #define AVATAR_PIXEL_SIZE 512
 
+/* Key and values that are written as metadata to the exported user avatar this
+ * way it's possible to know how the image was initially created.
+ * If set to generated we can regenerated the avatar when the style changes or
+ * when the users full name changes. The other two values don't have a specific use yet */
+#define IMAGE_SOURCE_KEY "tEXt::source"
+#define IMAGE_SOURCE_VALUE_GENERATED "gnome-generated"
+#define IMAGE_SOURCE_VALUE_FACE "gnome-face"
+#define IMAGE_SOURCE_VALUE_CUSTOM "gnome-custom"
+
 void     set_entry_generation_icon        (GtkEntry    *entry);
 void     set_entry_validation_checkmark   (GtkEntry    *entry);
 void     set_entry_validation_error       (GtkEntry    *entry,
@@ -49,7 +58,8 @@ gboolean is_valid_username_finish         (GAsyncResult *result,
 GdkTexture *draw_avatar_to_texture        (AdwAvatar *avatar,
                                            int        size);
 void       set_user_icon_data             (ActUser     *user,
-                                           GdkTexture  *texture);
+                                           GdkTexture  *texture,
+                                           const gchar *image_source);
 void       setup_avatar_for_user          (AdwAvatar *avatar,
                                            ActUser *user);
 GSettings *settings_or_null               (const gchar *schema);

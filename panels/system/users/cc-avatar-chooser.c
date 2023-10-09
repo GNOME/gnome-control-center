@@ -72,7 +72,7 @@ crop_dialog_response (CcAvatarChooser *self,
         pb2 = gdk_pixbuf_scale_simple (pb, AVATAR_PIXEL_SIZE, AVATAR_PIXEL_SIZE, GDK_INTERP_BILINEAR);
         texture = gdk_texture_new_for_pixbuf (pb2);
 
-        set_user_icon_data (self->user, texture);
+        set_user_icon_data (self->user, texture, IMAGE_SOURCE_VALUE_CUSTOM);
 
         self->crop_area = NULL;
         gtk_window_destroy (GTK_WINDOW (dialog));
@@ -187,11 +187,20 @@ face_widget_activated (CcAvatarChooser *self,
         const gchar *filename;
         GtkWidget   *image;
         g_autoptr(GdkTexture) texture = NULL;
+        g_autoptr(GError) error = NULL;
 
         image = gtk_flow_box_child_get_child (child);
         filename = g_object_get_data (G_OBJECT (image), "filename");
 
-        act_user_set_icon_file (self->user, filename);
+        if (filename != NULL) {
+                texture = gdk_texture_new_from_filename (filename, &error);
+        }
+
+        if (error != NULL) {
+                g_warning ("Failed to load selected avatar image: %s", error->message);
+        } else {
+                set_user_icon_data (self->user, texture, IMAGE_SOURCE_VALUE_FACE);
+        }
 
         gtk_popover_popdown (GTK_POPOVER (self));
 }
