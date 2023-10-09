@@ -18,11 +18,11 @@
 
 #pragma once
 
-#include <gtk/gtk.h>
+#include <adwaita.h>
 
 G_BEGIN_DECLS
 
-G_DECLARE_FINAL_TYPE (CcCursorSizeDialog, cc_cursor_size_dialog, CC, CURSOR_SIZE_DIALOG, GtkDialog)
+G_DECLARE_FINAL_TYPE (CcCursorSizeDialog, cc_cursor_size_dialog, CC, CURSOR_SIZE_DIALOG, AdwWindow)
 
 CcCursorSizeDialog *cc_cursor_size_dialog_new (void);
 

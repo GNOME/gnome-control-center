@@ -23,14 +23,14 @@
 
 struct _CcCursorSizeDialog
 {
-  GtkDialog parent;
+  AdwWindow parent;
 
   GtkGrid *size_grid;
 
   GSettings *interface_settings;
 };
 
-G_DEFINE_TYPE (CcCursorSizeDialog, cc_cursor_size_dialog, GTK_TYPE_DIALOG);
+G_DEFINE_TYPE (CcCursorSizeDialog, cc_cursor_size_dialog, ADW_TYPE_WINDOW);
 
 static void
 cursor_size_toggled (CcCursorSizeDialog *self, GtkWidget *button)
@@ -115,7 +115,5 @@ cc_cursor_size_dialog_init (CcCursorSizeDialog *self)
 CcCursorSizeDialog *
 cc_cursor_size_dialog_new (void)
 {
-  return g_object_new (cc_cursor_size_dialog_get_type (),
-                       "use-header-bar", TRUE,
-                       NULL);
+  return g_object_new (cc_cursor_size_dialog_get_type (), NULL);
 }
