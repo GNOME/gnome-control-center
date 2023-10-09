@@ -356,19 +356,47 @@ net_connection_editor_class_init (NetConnectionEditorClass *class)
 }
 
 static void
+nm_connection_editor_watch_cb (GPid pid,
+                               gint status,
+                               gpointer user_data)
+{
+        g_debug ("Child %d" G_PID_FORMAT " exited %s", pid,
+                 g_spawn_check_wait_status (status, NULL) ? "normally" : "abnormally");
+
+        g_spawn_close_pid (pid);
+        /* Close the dialog when nm-connection-editor exits. */
+        gtk_window_destroy (GTK_WINDOW (user_data));
+}
+
+static void
 net_connection_editor_do_fallback (NetConnectionEditor *self, const gchar *type)
 {
-        g_autofree gchar *cmdline = NULL;
         g_autoptr(GError) error = NULL;
+        g_autoptr(GStrvBuilder) builder = NULL;
+        g_auto(GStrv) argv = NULL;
+        GPid child_pid;
+
+        builder = g_strv_builder_new ();
+        g_strv_builder_add (builder, "nm-connection-editor");
 
         if (self->is_new_connection) {
-                cmdline = g_strdup_printf ("nm-connection-editor --type='%s' --create", type);
+                g_autofree gchar *type_str = NULL;
+
+                type_str = g_strdup_printf ("--type=%s", type);
+                g_strv_builder_add (builder, type_str);
+                g_strv_builder_add (builder, "--create");
         } else {
-                cmdline = g_strdup_printf ("nm-connection-editor --edit='%s'",
-                                           nm_connection_get_uuid (self->connection));
+                g_autofree gchar *edit_str = NULL;
+
+                edit_str = g_strdup_printf ("--edit=%s", nm_connection_get_uuid (self->connection));
+                g_strv_builder_add (builder, edit_str);
         }
 
-        g_spawn_command_line_async (cmdline, &error);
+        g_strv_builder_add (builder, NULL);
+        argv = g_strv_builder_end (builder);
+
+        g_spawn_async_with_pipes (NULL, argv, NULL, G_SPAWN_DO_NOT_REAP_CHILD | G_SPAWN_SEARCH_PATH,
+                                  NULL, NULL, &child_pid, NULL, NULL, NULL, &error);
 
         if (error) {
                 AdwToast *toast;
@@ -378,6 +406,8 @@ net_connection_editor_do_fallback (NetConnectionEditor *self, const gchar *type)
                 toast = adw_toast_new (message);
 
                 adw_toast_overlay_add_toast (self->toast_overlay, toast);
+        } else {
+                g_child_watch_add (child_pid, nm_connection_editor_watch_cb, self);
         }
 
         g_signal_emit (self, signals[DONE], 0, FALSE);
