@@ -25,7 +25,7 @@ struct _CcCursorSizeDialog
 {
   AdwWindow parent;
 
-  GtkGrid *size_grid;
+  GtkBox *cursor_box;
 
   GSettings *interface_settings;
 };
@@ -65,7 +65,7 @@ cc_cursor_size_dialog_class_init (CcCursorSizeDialogClass *klass)
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/universal-access/cc-cursor-size-dialog.ui");
 
-  gtk_widget_class_bind_template_child (widget_class, CcCursorSizeDialog, size_grid);
+  gtk_widget_class_bind_template_child (widget_class, CcCursorSizeDialog, cursor_box);
 }
 
 static void
@@ -73,7 +73,6 @@ cc_cursor_size_dialog_init (CcCursorSizeDialog *self)
 {
   guint cursor_sizes[] = { 24, 32, 48, 64, 96 };
   guint current_cursor_size, i;
-  GtkSizeGroup *size_group;
   GtkWidget *last_radio_button = NULL;
 
   gtk_widget_init_template (GTK_WIDGET (self));
@@ -82,7 +81,6 @@ cc_cursor_size_dialog_init (CcCursorSizeDialog *self)
 
   current_cursor_size = g_settings_get_int (self->interface_settings,
                                             KEY_MOUSE_CURSOR_SIZE);
-  size_group = gtk_size_group_new (GTK_SIZE_GROUP_BOTH);
 
   for (i = 0; i < G_N_ELEMENTS(cursor_sizes); i++)
     {
@@ -101,8 +99,7 @@ cc_cursor_size_dialog_init (CcCursorSizeDialog *self)
       g_object_set_data (G_OBJECT (button), "cursor-size", GUINT_TO_POINTER (cursor_sizes[i]));
 
       gtk_button_set_child (GTK_BUTTON (button), image);
-      gtk_grid_attach (GTK_GRID (self->size_grid), button, i, 0, 1, 1);
-      gtk_size_group_add_widget (size_group, button);
+      gtk_box_append (self->cursor_box, button);
 
       g_signal_connect_object (button, "toggled",
                                G_CALLBACK (cursor_size_toggled), self, G_CONNECT_SWAPPED);
