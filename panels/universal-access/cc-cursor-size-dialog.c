@@ -88,10 +88,8 @@ cc_cursor_size_dialog_init (CcCursorSizeDialog *self)
       g_autofree gchar *cursor_image_name = NULL;
 
       cursor_image_name = g_strdup_printf ("/org/gnome/control-center/universal-access/left_ptr_%dpx.png", cursor_sizes[i]);
-      image = gtk_image_new_from_resource (cursor_image_name);
-      gtk_image_set_pixel_size (GTK_IMAGE (image), cursor_sizes[i]);
-      gtk_widget_set_halign (image, GTK_ALIGN_CENTER);
-      gtk_widget_set_valign (image, GTK_ALIGN_CENTER);
+      image = gtk_picture_new_for_resource (cursor_image_name);
+      gtk_picture_set_content_fit (GTK_PICTURE (image), GTK_CONTENT_FIT_SCALE_DOWN);
 
       button = gtk_toggle_button_new ();
       gtk_toggle_button_set_group (GTK_TOGGLE_BUTTON (button), GTK_TOGGLE_BUTTON (last_radio_button));
