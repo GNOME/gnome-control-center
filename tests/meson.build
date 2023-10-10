@@ -10,5 +10,4 @@ if not libadwaita_is_subproject
 endif
 
 subdir('printers')
-subdir('info')
 subdir('keyboard')

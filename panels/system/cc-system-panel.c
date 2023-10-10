@@ -27,6 +27,7 @@
 #include "cc-system-panel.h"
 #include "cc-system-resources.h"
 
+#include "about/cc-about-page.h"
 #include "region/cc-region-page.h"
 #include "remote-desktop/cc-remote-desktop-page.h"
 
@@ -48,6 +49,7 @@ cc_system_panel_class_init (CcSystemPanelClass *klass)
 
   gtk_widget_class_bind_template_child (widget_class, CcSystemPanel, navigation);
 
+  g_type_ensure (CC_TYPE_ABOUT_PAGE);
   g_type_ensure (CC_TYPE_REGION_PAGE);
   g_type_ensure (CC_TYPE_REMOTE_DESKTOP_PAGE);
 }

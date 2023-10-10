@@ -39,7 +39,6 @@ extern GType cc_bluetooth_panel_get_type (void);
 extern GType cc_color_panel_get_type (void);
 extern GType cc_date_time_panel_get_type (void);
 extern GType cc_display_panel_get_type (void);
-extern GType cc_info_overview_panel_get_type (void);
 extern GType cc_keyboard_panel_get_type (void);
 extern GType cc_mouse_panel_get_type (void);
 extern GType cc_multitasking_panel_get_type (void);
@@ -94,7 +93,6 @@ static CcPanelLoaderVtable default_panels[] =
   PANEL_TYPE("color",            cc_color_panel_get_type,                NULL),
   PANEL_TYPE("datetime",         cc_date_time_panel_get_type,            NULL),
   PANEL_TYPE("display",          cc_display_panel_get_type,              NULL),
-  PANEL_TYPE("info-overview",    cc_info_overview_panel_get_type,        NULL),
   PANEL_TYPE("keyboard",         cc_keyboard_panel_get_type,             NULL),
   PANEL_TYPE("mouse",            cc_mouse_panel_get_type,                NULL),
   PANEL_TYPE("multitasking",     cc_multitasking_panel_get_type,         NULL),

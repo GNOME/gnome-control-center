@@ -12,6 +12,10 @@ i18n.merge_file(
 
 sources = files(
   'cc-system-panel.c',
+  'about/cc-about-page.c',
+  'about/cc-system-details-window.c',
+  'about/cc-info-entry.c',
+  'about/info-cleanup.c',
   'region/cc-region-page.c',
   'region/cc-format-chooser.c',
   'region/cc-format-preview.c',
@@ -30,16 +34,21 @@ sources += gnome.compile_resources(
 
 libsecret_dep = dependency('libsecret-1')
 gnutls_dep = dependency('gnutls')
+libgtop2 = dependency('libgtop-2.0')
+udisks2 = dependency('udisks2', version: '>= 2.8.2')
 
 deps = common_deps + [
   accounts_dep,
   gcr_dep,
   gnome_desktop_dep,
   gnutls_dep,
+  gudev_dep,
+  libgtop2,
   liblanguage_dep,
   libsecret_dep,
   polkit_gobject_dep,
   pwquality_dep,
+  udisks2,
 ]
 
 if enable_ibus
@@ -56,6 +65,11 @@ sources += gnome.gdbus_codegen(
   namespace: 'Gsd'
 )
 
+cflags += [
+   '-DDATADIR="@0@"'.format(control_center_datadir),
+   '-DLIBEXECDIR="@0@"'.format(control_center_libexecdir),
+]
+
 subdir('region')
 
 panels_libs += static_library(
@@ -65,3 +79,5 @@ panels_libs += static_library(
   dependencies: deps,
   c_args: cflags
 )
+
+subdir('about')

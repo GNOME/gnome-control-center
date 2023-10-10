@@ -20,21 +20,17 @@
  *
  */
 
-#include <config.h>
-
+#include "cc-about-page.h"
 #include "cc-hostname-entry.h"
-
-#include "cc-info-overview-resources.h"
-
-#include <glib/gi18n.h>
-
 #include "cc-list-row.h"
 #include "cc-system-details-window.h"
-#include "cc-info-overview-panel.h"
 
-struct _CcInfoOverviewPanel
+#include <config.h>
+#include <glib/gi18n.h>
+
+struct _CcAboutPage
 {
-  CcPanel          parent_instance;
+  AdwNavigationPage parent_instance;
 
   CcListRow       *disk_row;
   CcListRow       *hardware_model_row;
@@ -47,10 +43,10 @@ struct _CcInfoOverviewPanel
   GtkWindow       *system_details_window;
 };
 
-G_DEFINE_TYPE (CcInfoOverviewPanel, cc_info_overview_panel, CC_TYPE_PANEL)
+G_DEFINE_TYPE (CcAboutPage, cc_about_page, ADW_TYPE_NAVIGATION_PAGE)
 
 static void
-info_overview_panel_setup_overview (CcInfoOverviewPanel *self)
+about_page_setup_overview (CcAboutPage *self)
 {
   guint64 ram_size;
   g_autofree char *memory_text = NULL;
@@ -81,7 +77,7 @@ info_overview_panel_setup_overview (CcInfoOverviewPanel *self)
   os_name_text = get_os_name ();
   cc_list_row_set_secondary_label (self->os_name_row, os_name_text);
 
-  self->system_details_window = GTK_WINDOW (cc_system_details_window_new());
+  self->system_details_window = GTK_WINDOW (cc_system_details_window_new ());
   parent = (GtkWindow *) gtk_widget_get_native (GTK_WIDGET (self));
   gtk_window_set_transient_for (GTK_WINDOW (self->system_details_window), parent);
 }
@@ -123,18 +119,17 @@ does_gpk_update_viewer_exist (void)
 }
 
 static void
-cc_info_panel_open_system_details (CcInfoOverviewPanel *self)
+cc_about_page_open_system_details (CcAboutPage *self)
 {
-  GtkWidget *parent;
+  GtkNative *parent;
 
-  parent = cc_shell_get_toplevel (cc_panel_get_shell (CC_PANEL (self)));
-
+  parent = gtk_widget_get_native (GTK_WIDGET (self));
   gtk_window_set_transient_for (self->system_details_window, GTK_WINDOW (parent));
   gtk_window_present (GTK_WINDOW (self->system_details_window));
 }
 
 static void
-cc_info_panel_open_software_update (CcInfoOverviewPanel *self)
+cc_about_page_open_software_update (CcAboutPage *self)
 {
   g_autoptr(GError) error = NULL;
   gboolean ret;
@@ -158,7 +153,7 @@ cc_info_panel_open_software_update (CcInfoOverviewPanel *self)
 
 #if !defined(DISTRIBUTOR_LOGO) || defined(DARK_MODE_DISTRIBUTOR_LOGO)
 static gboolean
-use_dark_theme (CcInfoOverviewPanel *self)
+use_dark_theme (CcAboutPage *self)
 {
   AdwStyleManager *style_manager = adw_style_manager_get_default ();
 
@@ -167,7 +162,7 @@ use_dark_theme (CcInfoOverviewPanel *self)
 #endif
 
 static void
-setup_os_logo (CcInfoOverviewPanel *self)
+setup_os_logo (CcAboutPage *self)
 {
 #ifdef DISTRIBUTOR_LOGO
 #ifdef DARK_MODE_DISTRIBUTOR_LOGO
@@ -211,50 +206,41 @@ setup_os_logo (CcInfoOverviewPanel *self)
 }
 
 static void
-cc_info_overview_panel_class_init (CcInfoOverviewPanelClass *klass)
+cc_about_page_class_init (CcAboutPageClass *klass)
 {
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
   g_type_ensure (CC_TYPE_HOSTNAME_ENTRY);
 
-  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/info-overview/cc-info-overview-panel.ui");
+  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/system/about/cc-about-page.ui");
 
-  gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, disk_row);
-  gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, hardware_model_row);
-  gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, memory_row);
-  gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, os_logo);
-  gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, os_name_row);
-  gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, processor_row);
-  gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, software_updates_group);
+  gtk_widget_class_bind_template_child (widget_class, CcAboutPage, disk_row);
+  gtk_widget_class_bind_template_child (widget_class, CcAboutPage, hardware_model_row);
+  gtk_widget_class_bind_template_child (widget_class, CcAboutPage, memory_row);
+  gtk_widget_class_bind_template_child (widget_class, CcAboutPage, os_logo);
+  gtk_widget_class_bind_template_child (widget_class, CcAboutPage, os_name_row);
+  gtk_widget_class_bind_template_child (widget_class, CcAboutPage, processor_row);
+  gtk_widget_class_bind_template_child (widget_class, CcAboutPage, software_updates_group);
 
-  gtk_widget_class_bind_template_callback (widget_class, cc_info_panel_open_software_update);
-  gtk_widget_class_bind_template_callback (widget_class, cc_info_panel_open_system_details);
+  gtk_widget_class_bind_template_callback (widget_class, cc_about_page_open_software_update);
+  gtk_widget_class_bind_template_callback (widget_class, cc_about_page_open_system_details);
 
   g_type_ensure (CC_TYPE_LIST_ROW);
 }
 
 static void
-cc_info_overview_panel_init (CcInfoOverviewPanel *self)
+cc_about_page_init (CcAboutPage *self)
 {
   AdwStyleManager *style_manager;
 
   gtk_widget_init_template (GTK_WIDGET (self));
 
-  g_resources_register (cc_info_overview_get_resource ());
-
   if ((!does_gnome_software_exist () || !does_gnome_software_allow_updates ()) && !does_gpk_update_viewer_exist ())
     gtk_widget_set_visible (GTK_WIDGET (self->software_updates_group), FALSE);
 
-  info_overview_panel_setup_overview (self);
+  about_page_setup_overview (self);
 
   style_manager = adw_style_manager_get_default ();
   g_signal_connect_swapped (style_manager, "notify::dark", G_CALLBACK (setup_os_logo), self);
   setup_os_logo (self);
-}
-
-GtkWidget *
-cc_info_overview_panel_new (void)
-{
-  return g_object_new (CC_TYPE_INFO_OVERVIEW_PANEL,
-                       NULL);
 }

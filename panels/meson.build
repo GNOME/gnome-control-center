@@ -6,7 +6,6 @@ panels = [
   'color',
   'datetime',
   'display',
-  'info-overview',
   'keyboard',
   'mouse',
   'multitasking',

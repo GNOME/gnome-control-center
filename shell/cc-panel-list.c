@@ -379,7 +379,6 @@ static const gchar * const panel_order[] = {
   "user-accounts",
   "reset-settings",
   "datetime",
-  "info-overview",
 };
 
 static guint

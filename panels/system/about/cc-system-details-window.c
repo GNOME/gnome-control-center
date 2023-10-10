@@ -930,7 +930,7 @@ cc_system_details_window_class_init (CcSystemDetailsWindowClass *klass)
 {
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
-  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/info-overview/cc-system-details-window.ui");
+  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/system/about/cc-system-details-window.ui");
 
   gtk_widget_class_bind_template_child (widget_class, CcSystemDetailsWindow, toast_overlay);
   gtk_widget_class_bind_template_child (widget_class, CcSystemDetailsWindow, disk_row);

@@ -23,9 +23,7 @@
 
 G_BEGIN_DECLS
 
-#define CC_TYPE_INFO_OVERVIEW_PANEL (cc_info_overview_panel_get_type ())
-G_DECLARE_FINAL_TYPE (CcInfoOverviewPanel, cc_info_overview_panel, CC, INFO_OVERVIEW_PANEL, CcPanel)
-
-GtkWidget *cc_info_overview_panel_new (void);
+#define CC_TYPE_ABOUT_PAGE (cc_about_page_get_type ())
+G_DECLARE_FINAL_TYPE (CcAboutPage, cc_about_page, CC, ABOUT_PAGE, AdwNavigationPage)
 
 G_END_DECLS

@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
-  <template class="CcInfoOverviewPanel" parent="CcPanel">
+  <template class="CcAboutPage" parent="AdwNavigationPage">
+    <property name="title" translatable="yes">About</property>
+    <property name="tag">system-about-page</property>
     <property name="child">
       <object class="AdwToolbarView">
         <child type="top">
@@ -95,7 +97,7 @@
                   <object class="AdwActionRow">
                     <property name="activatable">True</property>
                     <property name="title" translatable="yes">System Details</property>
-                    <signal name="activated" handler="cc_info_panel_open_system_details" swapped="yes"/>
+                    <signal name="activated" handler="cc_about_page_open_system_details" swapped="yes"/>
                     <child type="suffix">
                       <object class="GtkImage">
                         <property name="valign">center</property>
@@ -115,7 +117,7 @@
                   <object class="AdwActionRow">
                     <property name="activatable">True</property>
                     <property name="title" translatable="yes">Software Updates</property>
-                    <signal name="activated" handler="cc_info_panel_open_software_update" swapped="yes"/>
+                    <signal name="activated" handler="cc_about_page_open_software_update" swapped="yes"/>
                     <child type="suffix">
                       <object class="GtkImage">
                         <property name="valign">center</property>

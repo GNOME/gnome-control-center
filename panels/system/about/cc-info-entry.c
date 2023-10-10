@@ -109,7 +109,7 @@ cc_info_entry_class_init (CcInfoEntryClass *klass)
 
   g_object_class_install_properties (object_class, N_PROPS, properties);
 
-  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/info-overview/cc-info-entry.ui");
+  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/system/about/cc-info-entry.ui");
 
   gtk_widget_class_bind_template_child (widget_class, CcInfoEntry, prop);
   gtk_widget_class_bind_template_child (widget_class, CcInfoEntry, value); 
