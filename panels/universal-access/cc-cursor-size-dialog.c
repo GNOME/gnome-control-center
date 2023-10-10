@@ -63,6 +63,8 @@ cc_cursor_size_dialog_class_init (CcCursorSizeDialogClass *klass)
 
   object_class->dispose = cc_cursor_size_dialog_dispose;
 
+  gtk_widget_class_add_binding_action (widget_class, GDK_KEY_Escape, 0, "window.close", NULL);
+
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/universal-access/cc-cursor-size-dialog.ui");
 
   gtk_widget_class_bind_template_child (widget_class, CcCursorSizeDialog, size_grid);
