@@ -57,6 +57,16 @@
                             <property name="action-target">'system-remote-desktop-page'</property>
                           </object>
                         </child>
+                        <child>
+                          <object class="CcListRow">
+                            <property name="title" translatable="yes">About</property>
+                            <property name="icon-name">info-symbolic</property>
+                            <property name="use-underline">True</property>
+                            <property name="show-arrow">True</property>
+                            <property name="action-name">navigation.push</property>
+                            <property name="action-target">'system-about-page'</property>
+                          </object>
+                        </child>
 
                       </object>
                     </child>
@@ -73,6 +83,9 @@
         </child>
         <child>
           <object class="CcSystemRemoteDesktopPage"/>
+        </child>
+        <child>
+          <object class="CcAboutPage"/>
         </child>
 
       </object>

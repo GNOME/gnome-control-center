@@ -27,6 +27,7 @@
 
 #include "cc-system-region-language-page.h"
 #include "cc-system-remote-desktop-page.h"
+#include "about/cc-about-page.h"
 
 struct _CcSystemPanel
 {
@@ -50,6 +51,7 @@ cc_system_panel_class_init (CcSystemPanelClass *klass)
 
   g_type_ensure (CC_TYPE_SYSTEM_REGION_LANGUAGE_PAGE);
   g_type_ensure (CC_TYPE_SYSTEM_REMOTE_PAGE);
+  g_type_ensure (CC_TYPE_ABOUT_PAGE);
 }
 
 static void

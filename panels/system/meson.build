@@ -19,6 +19,10 @@ sources = files(
   'cc-gnome-remote-desktop.c',
   'cc-tls-certificate.c',
   'cc-systemd-service.c',
+  'about/cc-about-page.c',
+  'about/cc-system-details-window.c',
+  'about/cc-info-entry.c',
+  'about/info-cleanup.c'
 )
 
 sources += gnome.compile_resources(
@@ -28,10 +32,16 @@ sources += gnome.compile_resources(
   export : true
 )
 
+libsecret_dep = dependency('libsecret-1')
+gnutls_dep = dependency('gnutls')
+
 deps = common_deps + [
   common_deps,
   accounts_dep,
   gnome_desktop_dep,
+  dependency('udisks2', version: '>= 2.8.2'),
+  dependency('libgtop-2.0'),
+  gudev_dep,
   liblanguage_dep,
   polkit_gobject_dep,
   libsecret_dep,
@@ -54,8 +64,10 @@ sources += gnome.gdbus_codegen(
   namespace: 'Gsd'
 )
 
-libsecret_dep = dependency('libsecret-1')
-gnutls_dep = dependency('gnutls')
+cflags += [
+   '-DDATADIR="@0@"'.format(control_center_datadir),
+   '-DLIBEXECDIR="@0@"'.format(control_center_libexecdir),
+]
 
 panels_libs += static_library(
   cappletname,
@@ -64,3 +76,5 @@ panels_libs += static_library(
   dependencies: deps,
   c_args: cflags
 )
+
+subdir('about')
