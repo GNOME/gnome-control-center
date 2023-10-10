@@ -15,6 +15,10 @@ sources = files(
   'cc-system-region-language-page.c',
   'cc-format-chooser.c',
   'cc-format-preview.c',
+  'cc-system-remote-desktop-page.c',
+  'cc-gnome-remote-desktop.c',
+  'cc-tls-certificate.c',
+  'cc-systemd-service.c',
 )
 
 sources += gnome.compile_resources(
@@ -25,15 +29,33 @@ sources += gnome.compile_resources(
 )
 
 deps = common_deps + [
+  common_deps,
   accounts_dep,
   gnome_desktop_dep,
   liblanguage_dep,
-  polkit_gobject_dep
+  polkit_gobject_dep,
+  libsecret_dep,
+  gnutls_dep,
+  gcr_dep,
+  pwquality_dep,
 ]
 
 if enable_ibus
   deps += ibus_dep
 endif
+
+settings_daemon = 'org.gnome.SettingsDaemon'
+gdbus = settings_daemon + '.Sharing'
+
+sources += gnome.gdbus_codegen(
+  gdbus,
+  gdbus + '.xml',
+  interface_prefix: settings_daemon + '.',
+  namespace: 'Gsd'
+)
+
+libsecret_dep = dependency('libsecret-1')
+gnutls_dep = dependency('gnutls')
 
 panels_libs += static_library(
   cappletname,

@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <template class="CcSystemRemoteDesktopPage" parent="AdwNavigationPage">
+    <property name="title" translatable="yes">Remote Desktop</property>
+    <property name="tag">system-remote-desktop-page</property>
+
+    <property name="child">
+      <object class="AdwToolbarView">
+        <property name="top-bar-style">raised</property>
+        <child type="top">
+          <object class="AdwHeaderBar"/>
+        </child>
+        <property name="content">
+          <object class="AdwToastOverlay" id="remote_desktop_toast_overlay">
+            <child>
+              <object class="AdwPreferencesPage">
+                <child>
+                  <object class="AdwPreferencesGroup">
+                    <property name="description" translatable="yes">Remote desktop allows viewing and controlling your desktop from another computer.</property>
+
+                    <child>
+                      <object class="AdwActionRow">
+                        <property name="title" translatable="yes">Remote Desktop</property>
+                        <property name="subtitle" translatable="yes">Enable or disable remote desktop connections to this computer.</property>
+                        <property name="activatable_widget">remote_desktop_switch</property>
+                        <child type="suffix">
+                          <object class="GtkSwitch" id="remote_desktop_switch">
+                            <property name="active">False</property>
+                            <property name="valign">center</property>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+
+                    <child>
+                      <object class="AdwActionRow">
+                        <property name="title" translatable="yes">Remote Control</property>
+                        <property name="subtitle" translatable="yes">Allows remote connections to control the screen.</property>
+                        <property name="activatable_widget">remote_control_switch</property>
+                        <child type="suffix">
+                          <object class="GtkSwitch" id="remote_control_switch">
+                            <property name="valign">center</property>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+
+                <child>
+                  <object class="AdwPreferencesGroup">
+                    <property name="title" translatable="yes">How to Connect</property>
+                    <property name="description" translatable="yes">Connect to this computer using the device name or remote desktop address.</property>
+
+                    <child>
+                      <object class="AdwActionRow">
+                        <property name="title" translatable="yes">Device Name</property>
+                        <child type="suffix">
+                          <object class="GtkBox">
+                            <property name="spacing">10</property>
+                            <child>
+                              <object class="GtkLabel" id="remote_desktop_device_name_label">
+                                <property name="selectable">True</property>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkButton">
+                                <property name="valign">center</property>
+                                <property name="icon-name">edit-copy-symbolic</property>
+                                <signal name="clicked" handler="on_device_name_copy_clicked" swapped="yes"/>
+                                <accessibility>
+                                  <property name="label" translatable="yes">Copy</property>
+                                </accessibility>
+                                <style>
+                                  <class name="flat"/>
+                                </style>
+                              </object>
+                            </child>
+                         </object>
+                        </child>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="AdwActionRow">
+                        <property name="title" translatable="yes">Remote Desktop Address</property>
+                        <child type="suffix">
+                          <object class="GtkBox">
+                            <property name="spacing">10</property>
+                            <child>
+                              <object class="GtkLabel" id="remote_desktop_address_label">
+                                <property name="selectable">True</property>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkButton">
+                                <property name="valign">center</property>
+                                <property name="icon-name">edit-copy-symbolic</property>
+                                <signal name="clicked" handler="on_device_address_copy_clicked" swapped="yes"/>
+                                <accessibility>
+                                  <property name="label" translatable="yes">Copy</property>
+                                </accessibility>
+                                <style>
+                                  <class name="flat"/>
+                                </style>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+
+                <child>
+                  <object class="AdwPreferencesGroup">
+                    <property name="title" translatable="yes">Authentication</property>
+                    <property name="description" translatable="yes">The user name and password are required to connect to this computer.</property>
+
+                    <child>
+                      <object class="AdwEntryRow" id="remote_desktop_username_entry">
+                        <property name="title" translatable="yes">User Name</property>
+                        <child type="suffix">
+                          <object class="GtkButton">
+                            <property name="valign">center</property>
+                            <property name="icon-name">edit-copy-symbolic</property>
+                            <signal name="clicked" handler="on_username_copy_clicked" swapped="yes"/>
+                            <accessibility>
+                              <property name="label" translatable="yes">Copy</property>
+                            </accessibility>
+                            <style>
+                              <class name="flat"/>
+                            </style>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+
+                    <child>
+                      <object class="AdwPasswordEntryRow" id="remote_desktop_password_entry">
+                        <property name="title" translatable="yes">Password</property>
+                        <child type="suffix">
+                          <object class="GtkButton">
+                            <property name="valign">center</property>
+                            <property name="icon-name">edit-copy-symbolic</property>
+                            <signal name="clicked" handler="on_password_copy_clicked" swapped="yes"/>
+                            <accessibility>
+                              <property name="label" translatable="yes">Copy</property>
+                            </accessibility>
+                            <style>
+                              <class name="flat"/>
+                            </style>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+
+                    <child>
+                      <object class="GtkButton" id="remote_desktop_verify_encryption">
+                        <property name="sensitive">False</property>
+                        <property name="halign">end</property>
+                        <property name="margin-top">12</property>
+                        <property name="label" translatable="yes">Verify Encryption</property>
+                        <signal name="clicked" handler="remote_desktop_show_encryption_fingerprint" swapped="yes"/>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+
+              </object>
+            </child>
+          </object>
+        </property>
+      </object>
+    </property>
+  </template>
+
+  <object class="AdwWindow" id="remote_desktop_fingerprint_dialog">
+    <property name="default-width">360</property>
+    <property name="default-height">360</property>
+    <property name="hide-on-close">True</property>
+    <property name="modal">True</property>
+
+    <child>
+      <object class="GtkBox">
+        <property name="orientation">vertical</property>
+        <child>
+          <object class="GtkWindowControls">
+            <property name="halign">end</property>
+            <property name="side">end</property>
+          </object>
+        </child>
+        <child>
+          <object class="AdwStatusPage">
+            <property name="title" translatable="yes">Encryption Fingerprint</property>
+            <property name="description" translatable="yes">The encryption fingerprint can be seen in connecting clients and should be identical.</property>
+            <property name="vexpand">True</property>
+            <child>
+              <object class="GtkBox">
+                <property name="orientation">horizontal</property>
+                <property name="halign">center</property>
+                <style>
+                  <class name="tls-cert-verification" />
+                </style>
+                <child>
+                  <object class="GtkLabel" id="remote_desktop_fingerprint_left">
+                    <style>
+                      <class name="tls-cert-fingerprint" />
+                    </style>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkLabel" id="remote_desktop_fingerprint_right">
+                    <style>
+                      <class name="tls-cert-fingerprint" />
+                    </style>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+  </object>
+
+</interface>

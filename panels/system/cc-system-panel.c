@@ -1,6 +1,4 @@
 /*
- * cc-system-panel.c
- *
  * Copyright 2023 Gotam Gorabh <gautamy672@gmail.com>
  *
  * This program is free software: you can redistribute it and/or modify
@@ -28,6 +26,7 @@
 #include "cc-system-resources.h"
 
 #include "cc-system-region-language-page.h"
+#include "cc-system-remote-desktop-page.h"
 
 struct _CcSystemPanel
 {
@@ -50,11 +49,13 @@ cc_system_panel_class_init (CcSystemPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcSystemPanel, navigation);
 
   g_type_ensure (CC_TYPE_SYSTEM_REGION_LANGUAGE_PAGE);
+  g_type_ensure (CC_TYPE_SYSTEM_REMOTE_PAGE);
 }
 
 static void
 cc_system_panel_init (CcSystemPanel *self)
 {
   g_resources_register (cc_system_get_resource ());
+
   gtk_widget_init_template (GTK_WIDGET (self));
 }
