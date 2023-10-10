@@ -62,6 +62,7 @@ struct _CcUserPage {
     AdwAvatar           *avatar;
     CcAvatarChooser     *avatar_chooser;
     GtkMenuButton       *avatar_edit_button;
+    GtkButton           *avatar_remove_button;
     AdwSwitchRow        *auto_login_row;
     CcListRow           *fingerprint_row;
     CcListRow           *language_row;
@@ -227,6 +228,17 @@ account_type_changed (CcUserPage *self)
     if (account_type != act_user_get_account_type (self->user)) {
         act_user_set_account_type (self->user, account_type);
     }
+}
+
+static void
+update_generated_avatar (CcUserPage *self)
+{
+        g_autoptr(GdkTexture) texture = NULL;
+
+        adw_avatar_set_custom_image (self->avatar, NULL);
+
+        texture = draw_avatar_to_texture (self->avatar, AVATAR_PIXEL_SIZE);
+        set_user_icon_data (self->user, texture, IMAGE_SOURCE_VALUE_GENERATED);
 }
 
 static void
@@ -426,6 +438,13 @@ remove_user (CcUserPage *self)
 }
 
 static void
+remove_avatar (CcUserPage *self)
+{
+    gtk_widget_set_visible (GTK_WIDGET (self->avatar_remove_button), FALSE);
+    update_generated_avatar (self);
+}
+
+static void
 cc_user_page_buildable_add_child (GtkBuildable *buildable,
                                   GtkBuilder   *builder,
                                   GObject      *child,
@@ -622,6 +641,7 @@ cc_user_page_class_init (CcUserPageClass * klass)
     gtk_widget_class_bind_template_child (widget_class, CcUserPage, action_area);
     gtk_widget_class_bind_template_child (widget_class, CcUserPage, avatar);
     gtk_widget_class_bind_template_child (widget_class, CcUserPage, avatar_edit_button);
+    gtk_widget_class_bind_template_child (widget_class, CcUserPage, avatar_remove_button);
     gtk_widget_class_bind_template_child (widget_class, CcUserPage, account_type_row);
     gtk_widget_class_bind_template_child (widget_class, CcUserPage, account_type_switch);
     gtk_widget_class_bind_template_child (widget_class, CcUserPage, auto_login_row);
@@ -645,6 +665,7 @@ cc_user_page_class_init (CcUserPageClass * klass)
     gtk_widget_class_bind_template_callback (widget_class, fullname_entry_apply_cb);
     gtk_widget_class_bind_template_callback (widget_class, remove_local_user_response);
     gtk_widget_class_bind_template_callback (widget_class, remove_user);
+    gtk_widget_class_bind_template_callback (widget_class, remove_avatar);
 }
 
 static void
@@ -693,6 +714,9 @@ cc_user_page_set_user (CcUserPage  *self,
 
     cc_avatar_chooser_set_user (self->avatar_chooser, self->user);
     setup_avatar_for_user (self->avatar, self->user);
+    gtk_widget_set_visible (GTK_WIDGET (self->avatar_remove_button),
+                            adw_avatar_get_custom_image (self->avatar) != NULL);
+
 
     gtk_editable_set_text (GTK_EDITABLE (self->fullname_row), act_user_get_real_name (user));
 

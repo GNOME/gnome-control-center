@@ -49,6 +49,28 @@
                             </child>
                           </object>
                         </child>
+                        <child type="overlay">
+                          <object class="AdwBin">
+                            <style>
+                              <class name="cutout-button"/>
+                            </style>
+                            <property name="halign">end</property>
+                            <property name="valign">start</property>
+                            <child>
+                              <object class="GtkButton" id="avatar_remove_button">
+                                <property name="icon-name">user-trash-symbolic</property>
+                                <signal name="clicked" handler="remove_avatar" object="CcUserPage" swapped="yes"/>
+                                <accessibility>
+                                  <property name="label" translatable="yes">Remove avatar</property>
+                                </accessibility>
+                                <style>
+                                  <class name="circular"/>
+                                  <class name="destructive-image-button"/>
+                                </style>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
                       </object>
                     </child>
                   </object>
