@@ -248,7 +248,13 @@ fullname_entry_apply_cb (CcUserPage *self)
 
     text = gtk_editable_get_text (GTK_EDITABLE (self->fullname_row));
     if (g_strcmp0 (text, act_user_get_real_name (self->user)) != 0 && is_valid_name (text)) {
+        adw_avatar_set_text (self->avatar, text);
+
         act_user_set_real_name (self->user, text);
+
+        if (adw_avatar_get_custom_image (self->avatar) == NULL) {
+            update_generated_avatar (self);
+        }
 
         g_debug ("Updating real name to: %s", text);
     }
