@@ -28,8 +28,6 @@
 #include "file-share-properties.h"
 #include "cc-media-sharing.h"
 #include "cc-sharing-networks.h"
-#include "cc-gnome-remote-desktop.h"
-#include "cc-tls-certificate.h"
 #include "cc-systemd-service.h"
 #include "org.gnome.SettingsDaemon.Sharing.h"
 
@@ -83,47 +81,18 @@ struct _CcSharingPanel
   GtkWidget *remote_login_row;
   GtkWidget *remote_login_switch;
 
-  GtkWidget *remote_control_switch;
-  GtkWidget *remote_control_checkbutton;
-  GtkWidget *remote_desktop_toast_overlay;
-  GtkWidget *remote_desktop_password_entry;
-  GtkWidget *remote_desktop_password_copy;
-  GtkWidget *remote_desktop_username_entry;
-  GtkWidget *remote_desktop_username_copy;
-  GtkWidget *remote_desktop_dialog;
-  GtkWidget *remote_desktop_device_name_label;
-  GtkWidget *remote_desktop_device_name_copy;
-  GtkWidget *remote_desktop_address_label;
-  GtkWidget *remote_desktop_address_copy;
-  GtkWidget *remote_desktop_row;
-  GtkWidget *remote_desktop_switch;
-  GtkWidget *remote_desktop_verify_encryption;
-  GtkWidget *remote_desktop_fingerprint_dialog;
-  GtkWidget *remote_desktop_fingerprint_left;
-  GtkWidget *remote_desktop_fingerprint_right;
-
   GtkWidget *shared_folders_grid;
   GtkWidget *shared_folders_listbox;
 
   GDBusProxy *sharing_proxy;
-
-  guint remote_desktop_name_watch;
-  guint remote_desktop_store_credentials_id;
-  GTlsCertificate *remote_desktop_certificate;
 };
 
 CC_PANEL_REGISTER (CcSharingPanel, cc_sharing_panel)
-
-static gboolean store_remote_desktop_credentials_timeout (gpointer user_data);
 
 static void
 cc_sharing_panel_dispose (GObject *object)
 {
   CcSharingPanel *self = CC_SHARING_PANEL (object);
-
-  if (self->remote_desktop_name_watch)
-    g_bus_unwatch_name (self->remote_desktop_name_watch);
-  self->remote_desktop_name_watch = 0;
 
   if (self->media_sharing_dialog)
     {
@@ -143,27 +112,6 @@ cc_sharing_panel_dispose (GObject *object)
       self->remote_login_dialog = NULL;
     }
 
-  if (self->remote_desktop_dialog)
-    {
-      gtk_window_destroy (GTK_WINDOW (self->remote_desktop_dialog));
-      self->remote_desktop_dialog = NULL;
-    }
-
-  if (self->remote_desktop_fingerprint_dialog)
-    {
-      gtk_window_destroy (GTK_WINDOW (self->remote_desktop_fingerprint_dialog));
-      self->remote_desktop_fingerprint_dialog = NULL;
-    }
-
-  g_clear_object (&self->sharing_proxy);
-
-  if (self->remote_desktop_store_credentials_id)
-    {
-      g_clear_handle_id (&self->remote_desktop_store_credentials_id,
-                         g_source_remove);
-      store_remote_desktop_credentials_timeout (self);
-    }
-
   G_OBJECT_CLASS (cc_sharing_panel_parent_class)->dispose (object);
 }
 
@@ -171,62 +119,6 @@ static const char *
 cc_sharing_panel_get_help_uri (CcPanel *panel)
 {
   return "help:gnome-help/prefs-sharing";
-}
-
-static void
-remote_desktop_show_encryption_fingerprint (CcSharingPanel *self)
-{
-  g_autoptr(GByteArray) der = NULL;
-  g_autoptr(GcrCertificate) gcr_cert = NULL;
-  g_autofree char *fingerprint = NULL;
-  g_auto(GStrv) fingerprintv = NULL;
-  g_autofree char *left_string = NULL;
-  g_autofree char *right_string = NULL;
-
-  g_return_if_fail (self->remote_desktop_certificate);
-
-  g_object_get (self->remote_desktop_certificate,
-                "certificate", &der, NULL);
-  gcr_cert = gcr_simple_certificate_new (der->data, der->len);
-  if (!gcr_cert)
-    {
-      g_warning ("Failed to load GCR TLS certificate representation");
-      return;
-    }
-
-  fingerprint = gcr_certificate_get_fingerprint_hex (gcr_cert, G_CHECKSUM_SHA256);
-
-  fingerprintv = g_strsplit (fingerprint, " ", -1);
-  g_return_if_fail (g_strv_length (fingerprintv) == 32);
-
-  left_string = g_strdup_printf (
-    "%s:%s:%s:%s\n"
-    "%s:%s:%s:%s\n"
-    "%s:%s:%s:%s\n"
-    "%s:%s:%s:%s\n",
-    fingerprintv[0], fingerprintv[1], fingerprintv[2], fingerprintv[3],
-    fingerprintv[8], fingerprintv[9], fingerprintv[10], fingerprintv[11],
-    fingerprintv[16], fingerprintv[17], fingerprintv[18], fingerprintv[19],
-    fingerprintv[24], fingerprintv[25], fingerprintv[26], fingerprintv[27]);
-
- right_string = g_strdup_printf (
-   "%s:%s:%s:%s\n"
-   "%s:%s:%s:%s\n"
-   "%s:%s:%s:%s\n"
-   "%s:%s:%s:%s\n",
-   fingerprintv[4], fingerprintv[5], fingerprintv[6], fingerprintv[7],
-   fingerprintv[12], fingerprintv[13], fingerprintv[14], fingerprintv[15],
-   fingerprintv[20], fingerprintv[21], fingerprintv[22], fingerprintv[23],
-   fingerprintv[28], fingerprintv[29], fingerprintv[30], fingerprintv[31]);
-
-  gtk_label_set_label (GTK_LABEL (self->remote_desktop_fingerprint_left),
-                       left_string);
-  gtk_label_set_label (GTK_LABEL (self->remote_desktop_fingerprint_right),
-                       right_string);
-
-  gtk_window_set_transient_for (GTK_WINDOW (self->remote_desktop_fingerprint_dialog),
-                                GTK_WINDOW (self->remote_desktop_dialog));
-  gtk_window_present (GTK_WINDOW (self->remote_desktop_fingerprint_dialog));
 }
 
 static void
@@ -260,26 +152,7 @@ cc_sharing_panel_class_init (CcSharingPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, remote_login_label);
   gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, remote_login_row);
   gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, remote_login_switch);
-  gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, remote_desktop_dialog);
-  gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, remote_desktop_toast_overlay);
-  gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, remote_desktop_switch);
-  gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, remote_control_switch);
-  gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, remote_desktop_username_entry);
-  gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, remote_desktop_username_copy);
-  gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, remote_desktop_password_entry);
-  gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, remote_desktop_password_copy);
-  gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, remote_desktop_device_name_label);
-  gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, remote_desktop_device_name_copy);
-  gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, remote_desktop_address_label);
-  gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, remote_desktop_address_copy);
-  gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, remote_desktop_verify_encryption);
-  gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, remote_desktop_fingerprint_dialog);
-  gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, remote_desktop_row);
-  gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, remote_desktop_fingerprint_left);
-  gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, remote_desktop_fingerprint_right);
   gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, shared_folders_listbox);
-
-  gtk_widget_class_bind_template_callback (widget_class, remote_desktop_show_encryption_fingerprint);
 
   g_type_ensure (CC_TYPE_LIST_ROW);
   g_type_ensure (CC_TYPE_HOSTNAME_ENTRY);
@@ -695,10 +568,6 @@ cc_sharing_panel_setup_label_with_hostname (CcSharingPanel *self,
       /* TRANSLATORS: %s is replaced with a link to a "ssh <hostname>" command to run */
       text = g_strdup_printf (_("When remote login is enabled, remote users can connect using the Secure Shell command:\n%s"), command);
     }
-  else if (label == self->remote_desktop_address_label)
-    {
-      text = g_strdup_printf ("ms-rd://%s", hostname);
-    }
   else
     g_assert_not_reached ();
 
@@ -816,515 +685,6 @@ cc_sharing_panel_check_schema_available (CcSharingPanel *self,
   return TRUE;
 }
 
-static gboolean
-store_remote_desktop_credentials_timeout (gpointer user_data)
-{
-  CcSharingPanel *self = CC_SHARING_PANEL (user_data);
-  const char *username, *password;
-
-  username = gtk_editable_get_text (GTK_EDITABLE (self->remote_desktop_username_entry));
-  password = gtk_editable_get_text (GTK_EDITABLE (self->remote_desktop_password_entry));
-
-  if (username && password)
-    {
-      cc_grd_store_rdp_credentials (username, password,
-                                    cc_panel_get_cancellable (CC_PANEL (self)));
-    }
-
-  self->remote_desktop_store_credentials_id = 0;
-
-  return G_SOURCE_REMOVE;
-}
-
-static void
-remote_desktop_credentials_changed (CcSharingPanel *self)
-{
-  g_clear_handle_id (&self->remote_desktop_store_credentials_id,
-                     g_source_remove);
-
-  self->remote_desktop_store_credentials_id =
-    g_timeout_add_seconds (REMOTE_DESKTOP_STORE_CREDENTIALS_TIMEOUT_S,
-                           store_remote_desktop_credentials_timeout,
-                           self);
-}
-
-static gboolean
-is_remote_desktop_enabled (CcSharingPanel *self)
-{
-  g_autoptr(GSettings) rdp_settings = NULL;
-
-  rdp_settings = g_settings_new (GNOME_REMOTE_DESKTOP_RDP_SCHEMA_ID);
-
-  if (!g_settings_get_boolean (rdp_settings, "enable"))
-    return FALSE;
-
-  return cc_is_service_active (REMOTE_DESKTOP_SERVICE, G_BUS_TYPE_SESSION);
-}
-
-static void
-enable_gnome_remote_desktop_service (CcSharingPanel *self)
-{
-  g_autoptr(GError) error = NULL;
-
-  if (is_remote_desktop_enabled (self))
-    return;
-
-  if (!cc_enable_service (REMOTE_DESKTOP_SERVICE,
-                          G_BUS_TYPE_SESSION,
-                          &error))
-    g_warning ("Failed to enable remote desktop service: %s", error->message);
-}
-
-static void
-disable_gnome_remote_desktop_service (CcSharingPanel *self)
-{
-  g_autoptr(GError) error = NULL;
-  g_autoptr(GSettings) rdp_settings = NULL;
-
-  rdp_settings = g_settings_new (GNOME_REMOTE_DESKTOP_RDP_SCHEMA_ID);
-
-  g_settings_set_boolean (rdp_settings, "enable", FALSE);
-
-  if (!cc_disable_service (REMOTE_DESKTOP_SERVICE,
-                           G_BUS_TYPE_SESSION,
-                           &error))
-    g_warning ("Failed to enable remote desktop service: %s", error->message);
-}
-
-static void
-calc_default_tls_paths (char **out_dir_path,
-                        char **out_cert_path,
-                        char **out_key_path)
-{
-  g_autofree char *dir_path = NULL;
-
-  dir_path = g_strdup_printf ("%s/gnome-remote-desktop",
-                              g_get_user_data_dir ());
-
-  if (out_cert_path)
-    *out_cert_path = g_strdup_printf ("%s/rdp-tls.crt", dir_path);
-  if (out_key_path)
-    *out_key_path = g_strdup_printf ("%s/rdp-tls.key", dir_path);
-
-  if (out_dir_path)
-    *out_dir_path = g_steal_pointer (&dir_path);
-}
-
-static void
-set_tls_certificate (CcSharingPanel  *self,
-                     GTlsCertificate *tls_certificate)
-{
-  g_set_object (&self->remote_desktop_certificate,
-                tls_certificate);
-  gtk_widget_set_sensitive (self->remote_desktop_verify_encryption, TRUE);
-}
-
-static void
-on_certificate_generated (GObject      *source_object,
-                          GAsyncResult *res,
-                          gpointer      user_data)
-{
-  CcSharingPanel *self;
-  g_autoptr(GTlsCertificate) tls_certificate = NULL;
-  g_autoptr(GError) error = NULL;
-  g_autofree char *cert_path = NULL;
-  g_autofree char *key_path = NULL;
-  g_autoptr(GSettings) rdp_settings = NULL;
-
-  tls_certificate = bonsai_tls_certificate_new_generate_finish (res, &error);
-  if (!tls_certificate)
-    {
-      if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
-        return;
-
-      g_warning ("Failed to generate TLS certificate: %s", error->message);
-      return;
-    }
-
-  self = CC_SHARING_PANEL (user_data);
-
-  calc_default_tls_paths (NULL, &cert_path, &key_path);
-
-  rdp_settings = g_settings_new (GNOME_REMOTE_DESKTOP_RDP_SCHEMA_ID);
-
-  g_settings_set_string (rdp_settings, "tls-cert", cert_path);
-  g_settings_set_string (rdp_settings, "tls-key", key_path);
-
-  set_tls_certificate (self, tls_certificate);
-
-  enable_gnome_remote_desktop_service (self);
-}
-
-static void
-enable_gnome_remote_desktop (CcSharingPanel *self)
-{
-  g_autofree char *dir_path = NULL;
-  g_autofree char *cert_path = NULL;
-  g_autofree char *key_path = NULL;
-  g_autoptr(GFile) dir = NULL;
-  g_autoptr(GFile) cert_file = NULL;
-  g_autoptr(GFile) key_file = NULL;
-  g_autoptr(GError) error = NULL;
-  g_autoptr(GSettings) rdp_settings = NULL;
-
-  rdp_settings = g_settings_new (GNOME_REMOTE_DESKTOP_RDP_SCHEMA_ID);
-
-  g_settings_set_boolean (rdp_settings, "enable", TRUE);
-
-  cert_path = g_settings_get_string (rdp_settings, "tls-cert");
-  key_path = g_settings_get_string (rdp_settings, "tls-key");
-  if (strlen (cert_path) > 0 &&
-      strlen (key_path) > 0)
-    {
-      g_autoptr(GTlsCertificate) tls_certificate = NULL;
-
-      tls_certificate = g_tls_certificate_new_from_file (cert_path, &error);
-      if (tls_certificate)
-        {
-          set_tls_certificate (self, tls_certificate);
-
-          enable_gnome_remote_desktop_service (self);
-          return;
-        }
-
-      g_warning ("Configured TLS certificate invalid: %s", error->message);
-      return;
-    }
-
-  calc_default_tls_paths (&dir_path, &cert_path, &key_path);
-
-  dir = g_file_new_for_path (dir_path);
-  if (!g_file_query_exists (dir, NULL))
-    {
-      if (!g_file_make_directory_with_parents (dir, NULL, &error))
-        {
-          g_warning ("Failed to create remote desktop certificate directory: %s",
-                     error->message);
-          return;
-        }
-    }
-
-  cert_file = g_file_new_for_path (cert_path);
-  key_file = g_file_new_for_path (key_path);
-
-  if (g_file_query_exists (cert_file, NULL) &&
-      g_file_query_exists (key_file, NULL))
-    {
-      g_autoptr(GTlsCertificate) tls_certificate = NULL;
-
-      tls_certificate = g_tls_certificate_new_from_file (cert_path, &error);
-      if (tls_certificate)
-        {
-          g_settings_set_string (rdp_settings, "tls-cert", cert_path);
-          g_settings_set_string (rdp_settings, "tls-key", key_path);
-
-          set_tls_certificate (self, tls_certificate);
-
-          enable_gnome_remote_desktop_service (self);
-          return;
-        }
-
-      g_warning ("Existing TLS certificate invalid: %s", error->message);
-      return;
-    }
-
-  bonsai_tls_certificate_new_generate_async (cert_path,
-                                             key_path,
-                                             "US",
-                                             "GNOME",
-                                             cc_panel_get_cancellable (CC_PANEL (self)),
-                                             on_certificate_generated,
-                                             self);
-}
-
-static void
-on_remote_desktop_active_changed (CcSharingPanel *self)
-{
-  if (gtk_switch_get_active (GTK_SWITCH (self->remote_desktop_switch)))
-    enable_gnome_remote_desktop (self);
-  else
-    disable_gnome_remote_desktop_service (self);
-}
-
-static char *
-get_hostname (void)
-{
-  g_autoptr(GDBusConnection) bus = NULL;
-  g_autoptr(GVariant) res = NULL;
-  g_autoptr(GVariant) inner = NULL;
-  g_autoptr(GError) error = NULL;
-  const char *hostname;
-
-  bus = g_bus_get_sync (G_BUS_TYPE_SYSTEM, NULL, &error);
-  if (bus == NULL)
-    {
-      g_warning ("Failed to get system bus connection: %s", error->message);
-      return NULL;
-    }
-  res = g_dbus_connection_call_sync (bus,
-                                     "org.freedesktop.hostname1",
-                                     "/org/freedesktop/hostname1",
-                                     "org.freedesktop.DBus.Properties",
-                                     "Get",
-                                     g_variant_new ("(ss)",
-                                                    "org.freedesktop.hostname1",
-                                                    "PrettyHostname"),
-                                     (GVariantType*)"(v)",
-                                     G_DBUS_CALL_FLAGS_NONE,
-                                     -1,
-                                     NULL,
-                                     &error);
-
-  if (res == NULL)
-    {
-      g_warning ("Getting pretty hostname failed: %s", error->message);
-      return NULL;
-    }
-
-  g_variant_get (res, "(v)", &inner);
-  hostname = g_variant_get_string (inner, NULL);
-  if (g_strcmp0 (hostname, "") != 0)
-    return g_strdup (hostname);
-
-  g_clear_pointer (&inner, g_variant_unref);
-  g_clear_pointer (&res, g_variant_unref);
-
-  res = g_dbus_connection_call_sync (bus,
-                                     "org.freedesktop.hostname1",
-                                     "/org/freedesktop/hostname1",
-                                     "org.freedesktop.DBus.Properties",
-                                     "Get",
-                                     g_variant_new ("(ss)",
-                                                    "org.freedesktop.hostname1",
-                                                    "Hostname"),
-                                     (GVariantType*)"(v)",
-                                     G_DBUS_CALL_FLAGS_NONE,
-                                     -1,
-                                     NULL,
-                                     &error);
-
-  if (res == NULL)
-    {
-      g_warning ("Getting hostname failed: %s", error->message);
-      return NULL;
-    }
-
-  g_variant_get (res, "(v)", &inner);
-  return g_variant_dup_string (inner, NULL);
-}
-
-static void
-add_toast (CcSharingPanel *self,
-           const char     *message)
-{
-  adw_toast_overlay_add_toast (ADW_TOAST_OVERLAY (self->remote_desktop_toast_overlay),
-                               adw_toast_new (message));
-}
-
-static void
-on_device_name_copy_clicked (CcSharingPanel *self)
-{
-  GtkLabel *label = GTK_LABEL (self->remote_desktop_device_name_label);
-
-  gdk_clipboard_set_text (gtk_widget_get_clipboard (GTK_WIDGET (self->remote_desktop_device_name_copy)),
-                          gtk_label_get_text (label));
-  add_toast (self, _("Device name copied"));
-}
-
-static void
-on_device_address_copy_clicked (CcSharingPanel *self)
-{
-  GtkLabel *label = GTK_LABEL (self->remote_desktop_address_label);
-
-  gdk_clipboard_set_text (gtk_widget_get_clipboard (GTK_WIDGET (self->remote_desktop_address_copy)),
-                          gtk_label_get_text (label));
-  add_toast (self, _("Device address copied"));
-}
-
-static void
-on_username_copy_clicked (CcSharingPanel *self)
-{
-  GtkEditable *editable = GTK_EDITABLE (self->remote_desktop_username_entry);
-
-  gdk_clipboard_set_text (gtk_widget_get_clipboard (GTK_WIDGET (self->remote_desktop_username_copy)),
-                          gtk_editable_get_text (editable));
-  add_toast (self, _("Username copied"));
-}
-
-static void
-on_password_copy_clicked (CcSharingPanel *self)
-{
-  GtkEditable *editable = GTK_EDITABLE (self->remote_desktop_password_entry);
-
-  gdk_clipboard_set_text (gtk_widget_get_clipboard (GTK_WIDGET (self->remote_desktop_password_copy)),
-                          gtk_editable_get_text (editable));
-  add_toast (self, _("Password copied"));
-}
-
-static pwquality_settings_t *
-get_pwq (void)
-{
-  static pwquality_settings_t *settings;
-
-  if (settings == NULL)
-    {
-      gchar *err = NULL;
-      gint rv = 0;
-
-      settings = pwquality_default_settings ();
-      pwquality_set_int_value (settings, PWQ_SETTING_MAX_SEQUENCE, 4);
-
-      rv = pwquality_read_config (settings, NULL, (gpointer)&err);
-      if (rv < 0)
-        {
-          g_warning ("Failed to read pwquality configuration: %s\n",
-                     pwquality_strerror (NULL, 0, rv, err));
-          pwquality_free_settings (settings);
-
-          /* Load just default settings in case of failure. */
-          settings = pwquality_default_settings ();
-          pwquality_set_int_value (settings, PWQ_SETTING_MAX_SEQUENCE, 4);
-        }
-    }
-
-  return settings;
-}
-
-static char *
-pw_generate (void)
-{
-  char *res;
-  int rv;
-
-  rv = pwquality_generate (get_pwq (), 0, &res);
-
-  if (rv < 0) {
-      g_warning ("Password generation failed: %s\n",
-                 pwquality_strerror (NULL, 0, rv, NULL));
-      return NULL;
-  }
-
-  return res;
-}
-
-static void
-cc_sharing_panel_setup_remote_desktop_dialog (CcSharingPanel *self)
-{
-  const gchar *username = NULL;
-  const gchar *password = NULL;
-  g_autoptr(GSettings) rdp_settings = NULL;
-  g_autofree char *hostname = NULL;
-
-  cc_sharing_panel_bind_switch_to_label (self, self->remote_desktop_switch,
-                                         self->remote_desktop_row);
-
-  rdp_settings = g_settings_new (GNOME_REMOTE_DESKTOP_RDP_SCHEMA_ID);
-
-  g_settings_bind (rdp_settings,
-                   "view-only",
-                   self->remote_control_switch,
-                   "active",
-                   G_SETTINGS_BIND_DEFAULT | G_SETTINGS_BIND_INVERT_BOOLEAN);
-  g_object_bind_property (self->remote_desktop_switch, "active",
-                          self->remote_control_switch, "sensitive",
-                          G_BINDING_SYNC_CREATE);
-
-  hostname = get_hostname ();
-  gtk_label_set_label (GTK_LABEL (self->remote_desktop_device_name_label),
-                       hostname);
-
-  username = cc_grd_lookup_rdp_username (cc_panel_get_cancellable (CC_PANEL (self)));
-  password = cc_grd_lookup_rdp_password (cc_panel_get_cancellable (CC_PANEL (self)));
-  if (username != NULL)
-    gtk_editable_set_text (GTK_EDITABLE (self->remote_desktop_username_entry), username);
-  if (password != NULL)
-    gtk_editable_set_text (GTK_EDITABLE (self->remote_desktop_password_entry), password);
-
-  g_signal_connect_swapped (self->remote_desktop_username_entry,
-                            "notify::text",
-                            G_CALLBACK (remote_desktop_credentials_changed),
-                            self);
-  g_signal_connect_swapped (self->remote_desktop_password_entry,
-                            "notify::text",
-                            G_CALLBACK (remote_desktop_credentials_changed),
-                            self);
-  if (username == NULL)
-    {
-      struct passwd *pw = getpwuid (getuid ());
-      if (pw != NULL)
-        {
-          gtk_editable_set_text (GTK_EDITABLE (self->remote_desktop_username_entry),
-                                 pw->pw_name);
-        }
-      else
-        {
-          g_warning ("Failed to get username: %s", g_strerror (errno));
-        }
-    }
-
-  if (password == NULL) 
-    {
-      char * pw = pw_generate ();
-      if (pw)
-        gtk_editable_set_text (GTK_EDITABLE (self->remote_desktop_password_entry),
-                               pw );
-    }
-  g_signal_connect_swapped (self->remote_desktop_device_name_copy,
-                            "clicked", G_CALLBACK (on_device_name_copy_clicked),
-                            self);
-  g_signal_connect_swapped (self->remote_desktop_address_copy,
-                            "clicked", G_CALLBACK (on_device_address_copy_clicked),
-                            self);
-  g_signal_connect_swapped (self->remote_desktop_username_copy,
-                            "clicked", G_CALLBACK (on_username_copy_clicked),
-                            self);
-  g_signal_connect_swapped (self->remote_desktop_password_copy,
-                            "clicked", G_CALLBACK (on_password_copy_clicked),
-                            self);
-
-  g_signal_connect_swapped (self->remote_desktop_switch, "notify::active",
-                            G_CALLBACK (on_remote_desktop_active_changed), self);
-
-  if (is_remote_desktop_enabled (self))
-    {
-      gtk_switch_set_active (GTK_SWITCH (self->remote_desktop_switch),
-                             TRUE);
-    }
-}
-
-static void
-remote_desktop_name_appeared (GDBusConnection *connection,
-                              const gchar     *name,
-                              const gchar     *name_owner,
-                              gpointer         user_data)
-{
-  CcSharingPanel *self = CC_SHARING_PANEL (user_data);
-
-  g_bus_unwatch_name (self->remote_desktop_name_watch);
-  self->remote_desktop_name_watch = 0;
-
-  cc_sharing_panel_setup_remote_desktop_dialog (self);
-  gtk_widget_set_visible (self->remote_desktop_row, TRUE);
-}
-
-static void
-check_remote_desktop_available (CcSharingPanel *self)
-{
-  if (!cc_sharing_panel_check_schema_available (self, GNOME_REMOTE_DESKTOP_SCHEMA_ID))
-    return;
-
-  if (!cc_sharing_panel_check_schema_available (self, GNOME_REMOTE_DESKTOP_RDP_SCHEMA_ID))
-    return;
-
-  self->remote_desktop_name_watch = g_bus_watch_name (G_BUS_TYPE_SESSION,
-                                                      "org.gnome.Mutter.RemoteDesktop",
-                                                      G_BUS_NAME_WATCHER_FLAGS_NONE,
-                                                      remote_desktop_name_appeared,
-                                                      NULL,
-                                                      self,
-                                                      NULL);
-}
-
 static void
 sharing_proxy_ready (GObject      *source,
                      GAsyncResult *res,
@@ -1357,10 +717,6 @@ sharing_proxy_ready (GObject      *source,
   /* remote login */
   cc_sharing_panel_setup_remote_login_dialog (self);
 
-  /* screen sharing */
-  check_remote_desktop_available (self);
-  gtk_widget_set_visible (self->remote_desktop_row, FALSE);
-
   parent = cc_shell_get_toplevel (cc_panel_get_shell (CC_PANEL (self)));
   gtk_window_set_transient_for (GTK_WINDOW (self->media_sharing_dialog),
                                 GTK_WINDOW (parent));
@@ -1368,12 +724,9 @@ sharing_proxy_ready (GObject      *source,
                                 GTK_WINDOW (parent));
   gtk_window_set_transient_for (GTK_WINDOW (self->remote_login_dialog),
                                 GTK_WINDOW (parent));
-  gtk_window_set_transient_for (GTK_WINDOW (self->remote_desktop_dialog),
-                                GTK_WINDOW (parent));
 
   cc_sharing_panel_setup_label_with_hostname (self, self->personal_file_sharing_label);
   cc_sharing_panel_setup_label_with_hostname (self, self->remote_login_label);
-  cc_sharing_panel_setup_label_with_hostname (self, self->remote_desktop_address_label);
 }
 
 static void

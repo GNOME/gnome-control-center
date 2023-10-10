@@ -34,8 +34,6 @@ sources = files(
   'cc-media-sharing.c',
   'cc-remote-login.c',
   'cc-sharing-networks.c',
-  'cc-gnome-remote-desktop.c',
-  'cc-tls-certificate.c',
   'cc-systemd-service.c',
   'file-share-properties.c',
 )
@@ -62,17 +60,12 @@ cflags += [
   '-DSYSCONFDIR="@0@"'.format(control_center_sysconfdir)
 ]
 
-libsecret_dep = dependency('libsecret-1')
-gnutls_dep = dependency('gnutls')
-
 panels_libs += static_library(
   cappletname,
   sources: sources,
   include_directories: [ top_inc, common_inc ],
   dependencies: [
     common_deps,
-    libsecret_dep,
-    gnutls_dep,
     gcr_dep,
     pwquality_dep,
   ],

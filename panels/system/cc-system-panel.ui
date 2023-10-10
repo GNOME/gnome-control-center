@@ -29,6 +29,17 @@
                           </object>
                         </child>
 
+                        <child>
+                          <object class="CcListRow">
+                            <property name="title" translatable="yes">_Remote Desktop</property>
+                            <property name="icon-name">preferences-desktop-display-symbolic</property>
+                            <property name="use-underline">True</property>
+                            <property name="show-arrow">True</property>
+                            <property name="action-name">navigation.push</property>
+                            <property name="action-target">'system-remote-desktop-page'</property>
+                          </object>
+                        </child>
+
                       </object>
                     </child>
                   </object>
@@ -41,6 +52,9 @@
 
         <child>
           <object class="CcRegionPage"/>
+        </child>
+        <child>
+          <object class="CcRemoteDesktopPage"/>
         </child>
 
       </object>

@@ -15,6 +15,10 @@ sources = files(
   'region/cc-region-page.c',
   'region/cc-format-chooser.c',
   'region/cc-format-preview.c',
+  'remote-desktop/cc-gnome-remote-desktop.c',
+  'remote-desktop/cc-remote-desktop-page.c',
+  'remote-desktop/cc-tls-certificate.c',
+  'remote-desktop/cc-systemd-service.c',
 )
 
 sources += gnome.compile_resources(
@@ -24,16 +28,33 @@ sources += gnome.compile_resources(
   export : true
 )
 
+libsecret_dep = dependency('libsecret-1')
+gnutls_dep = dependency('gnutls')
+
 deps = common_deps + [
   accounts_dep,
+  gcr_dep,
   gnome_desktop_dep,
+  gnutls_dep,
   liblanguage_dep,
-  polkit_gobject_dep
+  libsecret_dep,
+  polkit_gobject_dep,
+  pwquality_dep,
 ]
 
 if enable_ibus
   deps += ibus_dep
 endif
+
+settings_daemon = 'org.gnome.SettingsDaemon'
+gdbus = settings_daemon + '.Sharing'
+
+sources += gnome.gdbus_codegen(
+  gdbus,
+  gdbus + '.xml',
+  interface_prefix: settings_daemon + '.',
+  namespace: 'Gsd'
+)
 
 subdir('region')
 

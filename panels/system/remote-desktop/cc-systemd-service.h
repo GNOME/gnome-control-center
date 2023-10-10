@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018 Red Hat, Inc.
+ * Copyright (C) 2023 Red Hat, Inc
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,18 +19,15 @@
 
 #pragma once
 
-#include <libsecret/secret.h>
+#include <gio/gio.h>
 
-G_BEGIN_DECLS
+gboolean cc_is_service_active (const char  *service,
+                               GBusType     bus_type);
 
-const SecretSchema * cc_grd_rdp_credentials_get_schema (void);
-#define CC_GRD_RDP_CREDENTIALS_SCHEMA cc_grd_rdp_credentials_get_schema ()
+gboolean cc_enable_service (const char  *service,
+                            GBusType     bus_type,
+                            GError     **error);
 
-void cc_grd_store_rdp_credentials (const gchar  *username,
-                                   const gchar  *password,
-                                   GCancellable *cancellable);
-
-gchar * cc_grd_lookup_rdp_username (GCancellable *cancellable);
-gchar * cc_grd_lookup_rdp_password (GCancellable *cancellable);
-
-G_END_DECLS
+gboolean cc_disable_service (const char  *service,
+                             GBusType     bus_type,
+                             GError     **error);

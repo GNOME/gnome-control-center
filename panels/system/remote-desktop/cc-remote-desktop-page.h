@@ -1,6 +1,4 @@
 /*
- * cc-system-panel.h
- *
  * Copyright 2023 Gotam Gorabh <gautamy672@gmail.com>
  *
  * This program is free software: you can redistribute it and/or modify
@@ -21,11 +19,12 @@
 
 #pragma once
 
-#include <shell/cc-panel.h>
+#include <adwaita.h>
 
 G_BEGIN_DECLS
 
-#define CC_TYPE_SYSTEM_PANEL (cc_system_panel_get_type ())
-G_DECLARE_FINAL_TYPE (CcSystemPanel, cc_system_panel, CC, SYSTEM_PANEL, CcPanel)
+#define CC_TYPE_REMOTE_DESKTOP_PAGE (cc_remote_desktop_page_get_type ())
+
+G_DECLARE_FINAL_TYPE (CcRemoteDesktopPage, cc_remote_desktop_page, CC, CC_TYPE_REMOTE_DESKTOP_PAGE, AdwNavigationPage)
 
 G_END_DECLS
