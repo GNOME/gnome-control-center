@@ -90,7 +90,7 @@ struct _CcDateTimePanel
   AdwActionRow *datetime_row;
   GtkWindow *datetime_dialog;
   GtkLabel *datetime_label;
-  GtkSpinButton *day_spinbutton;
+  AdwSpinRow *day_spin_row;
   AdwComboRow *timeformat_row;
   GtkSpinButton *h_spinbutton;
   GtkWidget *weekday_row;
@@ -100,17 +100,15 @@ struct _CcDateTimePanel
   GtkWidget *week_numbers_switch;
   GtkLockButton *lock_button;
   GtkListBox *date_box;
-  AdwActionRow *day_row;
   GtkSingleSelection *month_model;
   GtkPopover  *month_popover;
   CcListRow *month_row;
-  AdwActionRow *year_row;
   GtkSwitch *network_time_switch;
   CcTimeEditor *time_editor;
   AdwActionRow *timezone_row;
   CcTzDialog *timezone_dialog;
   GtkLabel *timezone_label;
-  GtkSpinButton *year_spinbutton;
+  AdwSpinRow *year_spin_row;
 
   GnomeWallClock *clock_tracker;
 
@@ -373,8 +371,8 @@ change_date (CcDateTimePanel *self)
   guint y, d;
   g_autoptr(GDateTime) old_date = NULL;
 
-  y = gtk_spin_button_get_value_as_int (self->year_spinbutton);
-  d = gtk_spin_button_get_value_as_int (self->day_spinbutton);
+  y = (guint)adw_spin_row_get_value (self->year_spin_row);
+  d = (guint)adw_spin_row_get_value (self->day_spin_row);
 
   old_date = self->date;
   self->date = g_date_time_new_local (y, self->month, d,
@@ -462,16 +460,16 @@ month_year_changed (CcDateTimePanel *self)
   guint num_days;
   GtkAdjustment *adj;
 
-  y = gtk_spin_button_get_value_as_int (self->year_spinbutton);
+  y = (guint)adw_spin_row_get_value (self->year_spin_row);
 
   /* Check the number of days in that month */
   num_days = g_date_get_days_in_month (self->month, y);
 
-  adj = GTK_ADJUSTMENT (gtk_spin_button_get_adjustment (self->day_spinbutton));
+  adj = GTK_ADJUSTMENT (adw_spin_row_get_adjustment (self->day_spin_row));
   gtk_adjustment_set_upper (adj, num_days + 1);
 
-  if (gtk_spin_button_get_value_as_int (self->day_spinbutton) > num_days)
-    gtk_spin_button_set_value (self->day_spinbutton, num_days);
+  if ((guint)adw_spin_row_get_value (self->day_spin_row) > num_days)
+    adw_spin_row_set_value (self->day_spin_row, num_days);
 
   change_date (self);
 }
@@ -751,16 +749,16 @@ setup_datetime_dialog (CcDateTimePanel *self)
                                        g_date_time_get_year (self->date));
   adjustment = (GtkAdjustment*) gtk_adjustment_new (g_date_time_get_day_of_month (self->date), 1,
                                                     num_days + 1, 1, 10, 1);
-  gtk_spin_button_set_adjustment (self->day_spinbutton, adjustment);
-  g_signal_connect_object (G_OBJECT (self->day_spinbutton), "value-changed",
+  adw_spin_row_set_adjustment (self->day_spin_row, adjustment);
+  g_signal_connect_object (G_OBJECT (self->day_spin_row), "changed",
                            G_CALLBACK (day_changed), self, G_CONNECT_SWAPPED);
 
   /* Year */
   adjustment = (GtkAdjustment*) gtk_adjustment_new (g_date_time_get_year (self->date),
                                                     1, G_MAXDOUBLE, 1,
                                                     10, 1);
-  gtk_spin_button_set_adjustment (self->year_spinbutton, adjustment);
-  g_signal_connect_object (G_OBJECT (self->year_spinbutton), "value-changed",
+  adw_spin_row_set_adjustment (self->year_spin_row, adjustment);
+  g_signal_connect_object (G_OBJECT (self->year_spin_row), "changed",
                            G_CALLBACK (month_year_changed), self, G_CONNECT_SWAPPED);
 
   /* Month */
@@ -777,9 +775,9 @@ sort_date_box (GtkListBoxRow   *a,
 
   g_assert (CC_IS_DATE_TIME_PANEL (self));
 
-  day_row = GTK_LIST_BOX_ROW (self->day_row);
+  day_row = GTK_LIST_BOX_ROW (self->day_spin_row);
   month_row = GTK_LIST_BOX_ROW (self->month_row);
-  year_row = GTK_LIST_BOX_ROW (self->year_row);
+  year_row = GTK_LIST_BOX_ROW (self->year_spin_row);
 
   switch (date_endian_get_default (FALSE)) {
   case DATE_ENDIANESS_BIG:
@@ -838,8 +836,7 @@ cc_date_time_panel_class_init (CcDateTimePanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, datetime_row);
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, datetime_dialog);
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, datetime_label);
-  gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, day_row);
-  gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, day_spinbutton);
+  gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, day_spin_row);
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, timeformat_row);
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, weekday_switch);
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, date_switch);
@@ -854,8 +851,7 @@ cc_date_time_panel_class_init (CcDateTimePanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, timezone_row);
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, timezone_dialog);
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, timezone_label);
-  gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, year_row);
-  gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, year_spinbutton);
+  gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, year_spin_row);
 
   gtk_widget_class_bind_template_callback (widget_class, panel_tz_selection_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, list_box_row_activated);
