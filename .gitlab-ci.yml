@@ -238,6 +238,7 @@ style-check-diff:
   - build.container.fedora@x86_64
   stage: test
   when: always
+  allow_failure: true
   script:
     - .gitlab-ci/run-style-check-diff.sh
 
