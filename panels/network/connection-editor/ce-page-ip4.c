@@ -45,14 +45,17 @@ struct _CEPageIP4
         GtkLabel          *address_gateway_label;
         GtkLabel          *address_netmask_label;
         GtkSizeGroup      *address_sizegroup;
+        GtkLabel          *auto_dns_label;
         GtkSwitch         *auto_dns_switch;
+        GtkLabel          *auto_routes_label;
         GtkSwitch         *auto_routes_switch;
         GtkBox            *content_box;
-        GtkCheckButton    *disabled_radio;
+        GtkBox            *dns_box;
         GtkEntry          *dns_entry;
         GtkGrid           *main_box;
         GtkCheckButton    *never_default_check;
         GtkBox            *routes_box;
+        GtkBox            *route_config_box;
         GtkLabel          *routes_address_label;
         GtkLabel          *routes_gateway_label;
         GtkLabel          *routes_netmask_label;
@@ -62,7 +65,6 @@ struct _CEPageIP4
         GtkSizeGroup      *routes_netmask_sizegroup;
         GtkSizeGroup      *routes_metric_sizegroup;
         GtkSizeGroup      *routes_sizegroup;
-        GtkCheckButton    *shared_radio;
 
         NMSettingIPConfig *setting;
 
@@ -110,6 +112,7 @@ method_changed (CEPageIP4 *self)
         gboolean addr_enabled;
         gboolean dns_enabled;
         gboolean routes_enabled;
+        gboolean auto_enabled;
         g_autoptr(GVariant) method_variant = NULL;
         const gchar *method;
 
@@ -121,16 +124,22 @@ method_changed (CEPageIP4 *self)
                 addr_enabled = FALSE;
                 dns_enabled = FALSE;
                 routes_enabled = FALSE;
+                auto_enabled = FALSE;
         } else {
                 addr_enabled = g_str_equal (method, "manual");
-                routes_enabled = !g_str_equal (method, "local");
                 dns_enabled = !g_str_equal (method, "local");
+                routes_enabled = !g_str_equal (method, "local");
+                auto_enabled = g_str_equal (method, "automatic");
         }
 
         gtk_widget_set_visible (GTK_WIDGET (self->address_box), addr_enabled);
-        gtk_widget_set_sensitive (GTK_WIDGET (self->dns_entry), dns_enabled);
-        gtk_widget_set_sensitive (GTK_WIDGET (self->routes_list), routes_enabled);
-        gtk_widget_set_sensitive (GTK_WIDGET (self->never_default_check), routes_enabled);
+        gtk_widget_set_sensitive (GTK_WIDGET (self->dns_box), dns_enabled);
+        gtk_widget_set_sensitive (GTK_WIDGET (self->routes_box), routes_enabled);
+
+        gtk_widget_set_sensitive (GTK_WIDGET (self->auto_dns_label), auto_enabled);
+        gtk_widget_set_sensitive (GTK_WIDGET (self->auto_dns_switch), auto_enabled);
+        gtk_widget_set_sensitive (GTK_WIDGET (self->auto_routes_label), auto_enabled);
+        gtk_widget_set_sensitive (GTK_WIDGET (self->auto_routes_switch), auto_enabled);
 
         sync_dns_entry_warning (self);
 
@@ -476,14 +485,14 @@ ensure_empty_routes_row (CEPageIP4 *self)
 }
 
 static void
-add_routes_box (CEPageIP4 *self)
+add_route_config_box (CEPageIP4 *self)
 {
         GtkWidget *list;
         gint i;
 
         self->routes_list = list = gtk_list_box_new ();
         gtk_list_box_set_selection_mode (GTK_LIST_BOX (list), GTK_SELECTION_NONE);
-        gtk_box_append (GTK_BOX (self->routes_box), list);
+        gtk_box_append (GTK_BOX (self->route_config_box), list);
         gtk_switch_set_active (self->auto_routes_switch, !nm_setting_ip_config_get_ignore_auto_routes (self->setting));
         g_signal_connect_object (self->auto_routes_switch, "notify::active", G_CALLBACK (ce_page_changed), self, G_CONNECT_SWAPPED);
 
@@ -517,18 +526,9 @@ connect_ip4_page (CEPageIP4 *self)
 
         add_address_box (self);
         add_dns_section (self);
-        add_routes_box (self);
+        add_route_config_box (self);
 
         str_method = nm_setting_ip_config_get_method (self->setting);
-        g_signal_connect_object (self->disabled_radio, "notify::active", G_CALLBACK (ce_page_changed), self, G_CONNECT_SWAPPED);
-        g_object_bind_property (self->disabled_radio, "active",
-                                self->content_box, "sensitive",
-                                G_BINDING_SYNC_CREATE | G_BINDING_INVERT_BOOLEAN);
-
-        g_signal_connect_object (self->shared_radio, "notify::active", G_CALLBACK (ce_page_changed), self, G_CONNECT_SWAPPED);
-        g_object_bind_property (self->shared_radio, "active",
-                                self->content_box, "sensitive",
-                                G_BINDING_SYNC_CREATE | G_BINDING_INVERT_BOOLEAN);
 
         method = "automatic";
         if (g_strcmp0 (str_method, NM_SETTING_IP4_CONFIG_METHOD_LINK_LOCAL) == 0) {
@@ -833,10 +833,12 @@ ce_page_ip4_class_init (CEPageIP4Class *klass)
 
         gtk_widget_class_bind_template_child (widget_class, CEPageIP4, address_box);
         gtk_widget_class_bind_template_child (widget_class, CEPageIP4, address_sizegroup);
+        gtk_widget_class_bind_template_child (widget_class, CEPageIP4, auto_dns_label);
         gtk_widget_class_bind_template_child (widget_class, CEPageIP4, auto_dns_switch);
+        gtk_widget_class_bind_template_child (widget_class, CEPageIP4, auto_routes_label);
         gtk_widget_class_bind_template_child (widget_class, CEPageIP4, auto_routes_switch);
         gtk_widget_class_bind_template_child (widget_class, CEPageIP4, content_box);
-        gtk_widget_class_bind_template_child (widget_class, CEPageIP4, disabled_radio);
+        gtk_widget_class_bind_template_child (widget_class, CEPageIP4, dns_box);
         gtk_widget_class_bind_template_child (widget_class, CEPageIP4, dns_entry);
         gtk_widget_class_bind_template_child (widget_class, CEPageIP4, main_box);
         gtk_widget_class_bind_template_child (widget_class, CEPageIP4, never_default_check);
@@ -844,6 +846,7 @@ ce_page_ip4_class_init (CEPageIP4Class *klass)
         gtk_widget_class_bind_template_child (widget_class, CEPageIP4, address_netmask_label);
         gtk_widget_class_bind_template_child (widget_class, CEPageIP4, address_gateway_label);
         gtk_widget_class_bind_template_child (widget_class, CEPageIP4, routes_box);
+        gtk_widget_class_bind_template_child (widget_class, CEPageIP4, route_config_box);
         gtk_widget_class_bind_template_child (widget_class, CEPageIP4, routes_address_label);
         gtk_widget_class_bind_template_child (widget_class, CEPageIP4, routes_netmask_label);
         gtk_widget_class_bind_template_child (widget_class, CEPageIP4, routes_gateway_label);
@@ -853,7 +856,6 @@ ce_page_ip4_class_init (CEPageIP4Class *klass)
         gtk_widget_class_bind_template_child (widget_class, CEPageIP4, routes_gateway_sizegroup);
         gtk_widget_class_bind_template_child (widget_class, CEPageIP4, routes_metric_sizegroup);
         gtk_widget_class_bind_template_child (widget_class, CEPageIP4, routes_sizegroup);
-        gtk_widget_class_bind_template_child (widget_class, CEPageIP4, shared_radio);
 }
 
 static void
