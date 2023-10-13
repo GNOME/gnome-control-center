@@ -161,85 +161,59 @@
                       </object>
                     </child>
                     <child>
-                      <object class="GtkBox">
-                        <property name="margin_top">24</property>
+                      <object class="GtkBox" id="dns_box">
+                        <property name="orientation">vertical</property>
                         <property name="spacing">6</property>
                         <child>
-                          <object class="GtkLabel" id="dns4_label">
-                            <property name="hexpand">True</property>
-                            <property name="xalign">0</property>
-                            <property name="label" translatable="yes">DNS</property>
-                            <attributes>
-                              <attribute name="weight" value="bold"/>
-                            </attributes>
+                          <object class="GtkBox">
+                            <property name="margin_top">24</property>
+                            <property name="spacing">6</property>
+                            <child>
+                              <object class="GtkLabel" id="dns4_label">
+                                <property name="hexpand">True</property>
+                                <property name="xalign">0</property>
+                                <property name="label" translatable="yes">DNS</property>
+                                <attributes>
+                                  <attribute name="weight" value="bold"/>
+                                </attributes>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkLabel" id="auto_dns_label">
+                                <property name="hexpand">True</property>
+                                <property name="xalign">1</property>
+                                <property name="label" translatable="yes">Automatic</property>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkSwitch" id="auto_dns_switch">
+                                <property name="halign">end</property>
+                                <property name="valign">center</property>
+                                <accessibility>
+                                  <property name="label" translatable="yes">Automatic DNS</property>
+                                </accessibility>
+                              </object>
+                            </child>
                           </object>
                         </child>
                         <child>
-                          <object class="GtkLabel">
-                            <property name="hexpand">True</property>
-                            <property name="xalign">1</property>
-                            <property name="label" translatable="yes">Automatic</property>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="GtkSwitch" id="auto_dns_switch">
-                            <property name="halign">end</property>
-                            <property name="valign">center</property>
+                          <object class="GtkEntry" id="dns_entry">
                             <accessibility>
-                              <property name="label" translatable="yes">Automatic DNS</property>
+                              <property name="label" translatable="yes">DNS server address(es)</property>
+                              <relation name="described-by">dns_multiple_help</relation>
                             </accessibility>
                           </object>
                         </child>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkEntry" id="dns_entry">
-                        <accessibility>
-                          <property name="label" translatable="yes">DNS server address(es)</property>
-                          <relation name="described-by">dns_multiple_help</relation>
-                        </accessibility>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkLabel" id="dns_multiple_help">
-                        <property name="xalign">0</property>
-                        <property name="label" translatable="yes">Separate IP addresses with commas</property>
-                        <style>
-                          <class name="dim-label" />
-                        </style>
-                        <attributes>
-                          <attribute name="scale" value="0.8"/>
-                        </attributes>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkBox">
-                        <property name="margin_top">24</property>
-                        <property name="spacing">6</property>
                         <child>
-                          <object class="GtkLabel">
+                          <object class="GtkLabel" id="dns_multiple_help">
                             <property name="xalign">0</property>
-                            <property name="hexpand">True</property>
-                            <property name="label" translatable="yes">Routes</property>
+                            <property name="label" translatable="yes">Separate IP addresses with commas</property>
+                            <style>
+                              <class name="dim-label" />
+                            </style>
                             <attributes>
-                              <attribute name="weight" value="bold"/>
+                              <attribute name="scale" value="0.8"/>
                             </attributes>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="GtkLabel">
-                            <property name="hexpand">True</property>
-                            <property name="xalign">1</property>
-                            <property name="label" translatable="yes">Automatic</property>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="GtkSwitch" id="auto_routes_switch">
-                            <property name="halign">end</property>
-                            <property name="valign">center</property>
-                            <accessibility>
-                              <property name="label" translatable="yes">Automatic Routes</property>
-                            </accessibility>
                           </object>
                         </child>
                       </object>
@@ -247,69 +221,107 @@
                     <child>
                       <object class="GtkBox" id="routes_box">
                         <property name="orientation">vertical</property>
+                        <property name="spacing">6</property>
                         <child>
                           <object class="GtkBox">
-                            <property name="orientation">horizontal</property>
+                            <property name="margin_top">24</property>
+                            <property name="spacing">6</property>
                             <child>
-                              <object class="GtkLabel" id="routes_address_label">
-                                <property name="label" translatable="yes">Address</property>
-                                <style>
-                                  <class name="dim-label" />
-                                </style>
+                              <object class="GtkLabel">
+                                <property name="xalign">0</property>
+                                <property name="hexpand">True</property>
+                                <property name="label" translatable="yes">Routes</property>
                                 <attributes>
-                                  <attribute name="scale" value="0.8"/>
+                                  <attribute name="weight" value="bold"/>
                                 </attributes>
                               </object>
                             </child>
                             <child>
-                              <object class="GtkLabel" id="routes_netmask_label">
-                                <property name="label" translatable="yes">Netmask</property>
-                                <style>
-                                  <class name="dim-label" />
-                                </style>
-                                <attributes>
-                                  <attribute name="scale" value="0.8"/>
-                                </attributes>
+                              <object class="GtkLabel" id="auto_routes_label">
+                                <property name="hexpand">True</property>
+                                <property name="xalign">1</property>
+                                <property name="label" translatable="yes">Automatic</property>
                               </object>
                             </child>
                             <child>
-                              <object class="GtkLabel" id="routes_gateway_label">
-                                <property name="label" translatable="yes">Gateway</property>
-                                <style>
-                                  <class name="dim-label" />
-                                </style>
-                                <attributes>
-                                  <attribute name="scale" value="0.8"/>
-                                </attributes>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="GtkLabel" id="routes_metric_label">
-                                <property name="label" translatable="yes" comments="Translators: Please see https://en.wikipedia.org/wiki/Metrics_(networking)">Metric</property>
-                                <style>
-                                  <class name="dim-label" />
-                                </style>
-                                <attributes>
-                                  <attribute name="scale" value="0.8"/>
-                                </attributes>
-                              </object>
-                            </child>
-
-                            <!-- This invisible box is used to add some width in the
-                                 end of the header row, assuming the space used by the
-                                 delete button in the rows -->
-                            <child>
-                              <object class="GtkBox" id="routes_stub_box">
+                              <object class="GtkSwitch" id="auto_routes_switch">
+                                <property name="halign">end</property>
+                                <property name="valign">center</property>
+                                <accessibility>
+                                  <property name="label" translatable="yes">Automatic Routes</property>
+                                </accessibility>
                               </object>
                             </child>
                           </object>
                         </child>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkCheckButton" id="never_default_check">
-                        <property name="label" translatable="yes">Use this connection _only for resources on its network</property>
-                        <property name="use_underline">True</property>
+                        <child>
+                          <object class="GtkBox" id="route_config_box">
+                            <property name="orientation">vertical</property>
+                            <child>
+                              <object class="GtkBox">
+                                <property name="orientation">horizontal</property>
+                                <child>
+                                  <object class="GtkLabel" id="routes_address_label">
+                                    <property name="label" translatable="yes">Address</property>
+                                    <style>
+                                      <class name="dim-label" />
+                                    </style>
+                                    <attributes>
+                                      <attribute name="scale" value="0.8"/>
+                                    </attributes>
+                                  </object>
+                                </child>
+                                <child>
+                                  <object class="GtkLabel" id="routes_netmask_label">
+                                    <property name="label" translatable="yes">Netmask</property>
+                                    <style>
+                                      <class name="dim-label" />
+                                    </style>
+                                    <attributes>
+                                      <attribute name="scale" value="0.8"/>
+                                    </attributes>
+                                  </object>
+                                </child>
+                                <child>
+                                  <object class="GtkLabel" id="routes_gateway_label">
+                                    <property name="label" translatable="yes">Gateway</property>
+                                    <style>
+                                      <class name="dim-label" />
+                                    </style>
+                                    <attributes>
+                                      <attribute name="scale" value="0.8"/>
+                                    </attributes>
+                                  </object>
+                                </child>
+                                <child>
+                                  <object class="GtkLabel" id="routes_metric_label">
+                                    <property name="label" translatable="yes" comments="Translators: Please see https://en.wikipedia.org/wiki/Metrics_(networking)">Metric</property>
+                                    <style>
+                                      <class name="dim-label" />
+                                    </style>
+                                    <attributes>
+                                      <attribute name="scale" value="0.8"/>
+                                    </attributes>
+                                  </object>
+                                </child>
+
+                                <!-- This invisible box is used to add some width in the
+                                     end of the header row, assuming the space used by the
+                                     delete button in the rows -->
+                                <child>
+                                  <object class="GtkBox" id="routes_stub_box">
+                                  </object>
+                                </child>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkCheckButton" id="never_default_check">
+                            <property name="label" translatable="yes">Use this connection _only for resources on its network</property>
+                            <property name="use_underline">True</property>
+                          </object>
+                        </child>
                       </object>
                     </child>
                   </object>
@@ -358,3 +370,4 @@
     </widgets>
   </object>
 </interface>
+
