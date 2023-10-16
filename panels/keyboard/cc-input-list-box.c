@@ -44,7 +44,7 @@ struct _CcInputListBox {
 
   GtkListBoxRow   *add_input_row;
   GtkListBox      *listbox;
-  GtkListBoxRow   *no_inputs_row;
+  AdwActionRow    *no_inputs_row;
 
   GCancellable    *cancellable;
 
