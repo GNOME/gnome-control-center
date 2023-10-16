@@ -142,15 +142,6 @@ file_size_finish (GFile        *file,
   return TRUE;
 }
 
-void
-listbox_remove_all (GtkListBox *listbox)
-{
-  GtkWidget *child;
-
-  while ((child = gtk_widget_get_first_child (GTK_WIDGET (listbox))))
-    gtk_list_box_remove (listbox, child);
-}
-
 static gchar *
 get_output_of (const gchar **argv)
 {
