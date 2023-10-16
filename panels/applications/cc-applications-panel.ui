@@ -15,7 +15,7 @@
                 </child>
 
                 <property name="content">
-                  <object class="AdwPreferencesPage">
+                  <object class="AdwPreferencesPage" id="app_search_stack_page">
                     <!-- Searchbar -->
                     <child>
                       <object class="AdwPreferencesGroup">
@@ -54,11 +54,59 @@
                     <child>
                       <object class="AdwPreferencesGroup">
                         <child>
-                          <object class="GtkListBox" id="app_listbox">
-                            <property name="selection-mode">none</property>
-                            <style>
-                              <class name="boxed-list" />
-                            </style>
+                          <object class="GtkStack" id="app_listbox_stack">
+                            <property name="vhomogeneous">False</property>
+                            <child>
+                              <!-- Empty search results placeholder -->
+                              <object class="GtkBox" id="empty_search_placeholder">
+                                <property name="halign">center</property>
+                                <property name="valign">center</property>
+                                <property name="margin-top">32</property>
+                                <property name="margin-bottom">32</property>
+                                <property name="margin-start">32</property>
+                                <property name="margin-end">32</property>
+                                <property name="orientation">vertical</property>
+                                <property name="spacing">18</property>
+                                <child>
+                                  <object class="GtkImage">
+                                    <property name="pixel_size">96</property>
+                                    <property name="icon_name">org.gnome.Software-symbolic</property>
+                                    <style>
+                                      <class name="dim-label"/>
+                                    </style>
+                                  </object>
+                                </child>
+                                <child>
+                                  <object class="GtkLabel">
+                                    <property name="label" translatable="yes">No Apps Found</property>
+                                    <attributes>
+                                      <attribute name="weight" value="bold"/>
+                                      <attribute name="scale" value="1.44"/>
+                                    </attributes>
+                                  </object>
+                                </child>
+                                <child>
+                                  <object class="GtkButton" id="install_button">
+                                    <property name="label" translatable="yes">_Install Some…</property>
+                                    <property name="use_underline">True</property>
+                                    <property name="halign">center</property>
+                                    <signal name="clicked" handler="open_software_cb" object="CcApplicationsPanel" swapped="yes"/>
+                                    <style>
+                                      <class name="pill" />
+                                    </style>
+                                  </object>
+                                </child>
+                              </object>
+
+                            </child>
+                            <child>
+                              <object class="GtkListBox" id="app_listbox">
+                                <property name="selection-mode">none</property>
+                                <style>
+                                  <class name="boxed-list" />
+                                </style>
+                              </object>
+                            </child>
                           </object>
                         </child>
                       </object>
@@ -512,49 +560,6 @@
         </property>
       </object>
     </property>
-  </object>
-
-  <!-- Empty search results placeholder -->
-  <object class="GtkBox" id="empty_search_placeholder">
-    <property name="halign">center</property>
-    <property name="valign">center</property>
-    <property name="hexpand">True</property>
-    <property name="vexpand">True</property>
-    <property name="margin-top">32</property>
-    <property name="margin-bottom">32</property>
-    <property name="margin-start">32</property>
-    <property name="margin-end">32</property>
-    <property name="orientation">vertical</property>
-    <property name="spacing">18</property>
-    <child>
-      <object class="GtkImage">
-        <property name="pixel_size">96</property>
-        <property name="icon_name">org.gnome.Software-symbolic</property>
-        <style>
-          <class name="dim-label"/>
-        </style>
-      </object>
-    </child>
-    <child>
-      <object class="GtkLabel">
-        <property name="label" translatable="yes">No Apps Found</property>
-        <attributes>
-          <attribute name="weight" value="bold"/>
-          <attribute name="scale" value="1.44"/>
-        </attributes>
-      </object>
-    </child>
-    <child>
-      <object class="GtkButton" id="install_button">
-        <property name="label" translatable="yes">_Install Some…</property>
-        <property name="use_underline">True</property>
-        <property name="halign">center</property>
-        <signal name="clicked" handler="open_software_cb" object="CcApplicationsPanel" swapped="yes"/>
-        <style>
-          <class name="pill" />
-        </style>
-      </object>
-    </child>
   </object>
 
   <object class="GtkSizeGroup">
