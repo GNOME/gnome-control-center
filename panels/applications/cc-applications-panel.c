@@ -832,7 +832,7 @@ add_static_permissions (CcApplicationsPanel *self,
 static void
 remove_static_permissions (CcApplicationsPanel *self)
 {
-  listbox_remove_all (self->builtin_list);
+  gtk_list_box_remove_all (self->builtin_list);
 }
 
 /* --- header section --- */
@@ -1415,7 +1415,7 @@ populate_applications (CcApplicationsPanel *self)
   g_autolist(GObject) infos = NULL;
   GList *l;
 
-  listbox_remove_all (self->app_listbox);
+  gtk_list_box_remove_all (self->app_listbox);
   gtk_list_box_set_placeholder (self->app_listbox, self->empty_search_placeholder);
 #ifdef HAVE_MALCONTENT
   g_signal_handler_block (self->manager, self->app_filter_id);

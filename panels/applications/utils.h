@@ -44,8 +44,6 @@ gboolean  file_size_finish     (GFile               *file,
                                 guint64             *size,
                                 GError             **error);
 
-void      listbox_remove_all   (GtkListBox          *listbox);
-
 GKeyFile* get_flatpak_metadata (const gchar         *app_id);
 
 guint64   get_flatpak_app_size (const gchar         *app_id);
