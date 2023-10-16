@@ -61,6 +61,7 @@ struct _CcApplicationsPanel
   GtkListBox      *app_listbox;
   GtkEntry        *app_search_entry;
   GtkWidget       *empty_search_placeholder;
+  GtkStack        *app_listbox_stack;
   GAppInfoMonitor *monitor;
   gulong           monitor_id;
 #ifdef HAVE_MALCONTENT
@@ -770,6 +771,8 @@ add_static_permission_row (CcApplicationsPanel *self,
                       "info", subtitle,
                       NULL);
   gtk_list_box_append (self->builtin_list, row);
+  gtk_stack_set_visible_child (self->app_listbox_stack,
+                               GTK_WIDGET (self->app_listbox));
 
   return 1;
 }
@@ -1416,7 +1419,8 @@ populate_applications (CcApplicationsPanel *self)
   GList *l;
 
   gtk_list_box_remove_all (self->app_listbox);
-  gtk_list_box_set_placeholder (self->app_listbox, self->empty_search_placeholder);
+  gtk_stack_set_visible_child (self->app_listbox_stack,
+                               self->empty_search_placeholder);
 #ifdef HAVE_MALCONTENT
   g_signal_handler_block (self->manager, self->app_filter_id);
 #endif
@@ -1444,6 +1448,8 @@ populate_applications (CcApplicationsPanel *self)
 
       row = GTK_WIDGET (cc_applications_row_new (info));
       gtk_list_box_append (self->app_listbox, row);
+      gtk_stack_set_visible_child (self->app_listbox_stack,
+                                   GTK_WIDGET (self->app_listbox));
 
       id = get_app_id (info);
       if (g_strcmp0 (id, self->current_app_id) == 0)
@@ -1732,6 +1738,7 @@ cc_applications_panel_class_init (CcApplicationsPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, data);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, default_apps_page);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, empty_search_placeholder);
+  gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, app_listbox_stack);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, handler_dialog);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, handler_page);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, handler_file_group);
@@ -1819,8 +1826,6 @@ cc_applications_panel_init (CcApplicationsPanel *self)
   gtk_list_box_set_filter_func (self->app_listbox,
                                 filter_app_rows,
                                 self, NULL);
-
-  gtk_list_box_set_placeholder (self->app_listbox, self->empty_search_placeholder);
 
   self->location_settings = g_settings_new ("org.gnome.system.location");
   self->privacy_settings = g_settings_new ("org.gnome.desktop.privacy");
