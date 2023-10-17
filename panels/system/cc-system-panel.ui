@@ -44,6 +44,18 @@
 
                         <child>
                           <object class="CcListRow">
+                            <property name="title" translatable="yes">Users</property>
+                            <property name="subtitle" bind-source="users_page" bind-property="summary" bind-flags="sync-create|bidirectional"/>
+                            <property name="icon-name">org.gnome.Settings-users-symbolic</property>
+                            <property name="use-underline">True</property>
+                            <property name="show-arrow">True</property>
+                            <property name="action-name">navigation.push</property>
+                            <property name="action-target">'system-users-page'</property>
+                          </object>
+                        </child>
+
+                        <child>
+                          <object class="CcListRow">
                             <property name="title" translatable="yes">_Remote Desktop</property>
                             <property name="subtitle" bind-source="remote_desktop_page" bind-property="summary" bind-flags="sync-create|bidirectional"/>
                             <property name="icon-name">preferences-desktop-display-symbolic</property>
@@ -53,6 +65,7 @@
                             <property name="action-target">'system-remote-desktop-page'</property>
                           </object>
                         </child>
+
                         <child>
                           <object class="CcListRow">
                             <property name="title" translatable="yes">About</property>
@@ -82,12 +95,14 @@
           <object class="CcDateTimePage" id="datetime_page"/>
         </child>
         <child>
+          <object class="CcUsersPage" id="users_page"/>
+        </child>
+        <child>
           <object class="CcRemoteDesktopPage" id="remote_desktop_page"/>
         </child>
         <child>
           <object class="CcAboutPage" id="about_page"/>
         </child>
-
       </object>
     </child>
   </template>

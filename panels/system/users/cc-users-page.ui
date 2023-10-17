@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <template class="CcUsersPage" parent="CcSystemPage">
+    <property name="tag">system-users-page</property>
+
+    <property name="child">
+      <object class="AdwNavigationView" id="navigation">
+
+        <child>
+          <object class="CcUserPage" id="current_user_page">
+            <property name="title" translatable="yes">Users</property>
+            <property name="tag">current-user</property>
+
+            <child>
+              <object class="AdwPreferencesGroup">
+                <property name="title" translatable="yes">Other Users</property>
+                <child>
+                  <object class="GtkListBox" id="user_list">
+                    <property name="selection-mode">none</property>
+                    <signal name="row-activated" handler="on_user_row_activated" swapped="yes" object="CcUsersPage"/>
+                    <style>
+                      <class name="boxed-list"/>
+                    </style>
+                  </object>
+                </child>
+              </object>
+            </child>
+              
+            <child>
+              <object class="GtkButton">
+                <property name="label" translatable="yes">Add User</property>
+                <property name="halign">center</property>
+                <style>
+                  <class name="suggested-action"/>
+                  <class name="pill"/>
+                </style>
+              </object>
+            </child>
+
+          </object>
+        </child>
+      </object>
+    </property>
+  </template>
+</interface>

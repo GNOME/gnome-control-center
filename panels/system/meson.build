@@ -10,6 +10,15 @@ i18n.merge_file(
   install_dir: control_center_desktopdir
 )
 
+polkit = 'org.gnome.controlcenter.user-accounts.policy'.format(cappletname)
+i18n.merge_file(
+  input: 'users/' + polkit + '.in',
+  output: polkit,
+  po_dir: po_dir,
+  install: true,
+  install_dir: join_paths(control_center_datadir, 'polkit-1', 'actions')
+) 
+
 sources = files(
   'cc-system-panel.c',
   'cc-system-page.c',
@@ -29,6 +38,12 @@ sources = files(
   'remote-desktop/cc-remote-desktop-page.c',
   'remote-desktop/cc-tls-certificate.c',
   'remote-desktop/cc-systemd-service.c',
+  'users/cc-user-page.c',
+  'users/cc-users-page.c',
+  'users/cc-password-dialog.c',
+  'users/pw-utils.c',
+  'users/run-passwd.c',
+  'users/user-utils.c',
 )
 
 sources += gnome.compile_resources(

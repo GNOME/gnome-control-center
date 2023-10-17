@@ -31,6 +31,7 @@
 #include "datetime/cc-datetime-page.h"
 #include "region/cc-region-page.h"
 #include "remote-desktop/cc-remote-desktop-page.h"
+#include "users/cc-users-page.h"
 
 struct _CcSystemPanel
 {
@@ -54,6 +55,7 @@ cc_system_panel_class_init (CcSystemPanelClass *klass)
   g_type_ensure (CC_TYPE_DATE_TIME_PAGE);
   g_type_ensure (CC_TYPE_REGION_PAGE);
   g_type_ensure (CC_TYPE_REMOTE_DESKTOP_PAGE);
+  g_type_ensure (CC_TYPE_USERS_PAGE);
 }
 
 static void
