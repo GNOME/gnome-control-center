@@ -442,6 +442,43 @@ set_user_icon_data (ActUser   *user,
         g_remove (path);
 }
 
+const gchar *
+get_real_or_user_name (ActUser *user)
+{
+  const gchar *name;
+
+  name = act_user_get_real_name (user);
+  if (name == NULL)
+    name = act_user_get_user_name (user);
+
+  return name;
+}
+
+void
+setup_avatar_for_user (AdwAvatar *avatar, ActUser *user)
+{
+        const gchar *avatar_file;
+
+        adw_avatar_set_custom_image (avatar, NULL);
+        adw_avatar_set_text (avatar, get_real_or_user_name (user));
+
+        avatar_file = act_user_get_icon_file (user);
+        if (avatar_file) {
+                g_autoptr(GdkPixbuf) pixbuf = NULL;
+
+                pixbuf = gdk_pixbuf_new_from_file_at_size (avatar_file,
+                                                           adw_avatar_get_size (avatar),
+                                                           adw_avatar_get_size (avatar),
+                                                           NULL);
+                if (pixbuf) {
+                        g_autoptr(GdkTexture) texture = NULL;
+
+                        texture = gdk_texture_new_for_pixbuf (pixbuf);
+                        adw_avatar_set_custom_image (avatar, GDK_PAINTABLE (texture));
+                }
+        }
+}
+
 GdkPixbuf *
 generate_default_avatar (ActUser *user, gint size)
 {
@@ -468,4 +505,23 @@ set_default_avatar (ActUser *user)
         pixbuf = generate_default_avatar (user, IMAGE_SIZE);
 
         set_user_icon_data (user, pixbuf);
+}
+
+GSettings *
+settings_or_null (const gchar *schema)
+{
+        GSettingsSchemaSource *source = NULL;
+        g_auto(GStrv) non_relocatable = NULL;
+        GSettings *settings = NULL;
+
+        source = g_settings_schema_source_get_default ();
+        if (!source)
+                return NULL;
+
+        g_settings_schema_source_list_schemas (source, TRUE, &non_relocatable, NULL);
+
+        if (g_strv_contains ((const gchar * const *)non_relocatable, schema))
+                settings = g_settings_new (schema);
+
+        return settings;
 }

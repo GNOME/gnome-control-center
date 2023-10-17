@@ -32,7 +32,6 @@
 #include <act/act.h>
 
 #include "cc-password-dialog.h"
-#include "cc-user-accounts-resources.h"
 #include "pw-utils.h"
 #include "run-passwd.h"
 #include "user-utils.h"
@@ -455,7 +454,7 @@ cc_password_dialog_class_init (CcPasswordDialogClass *klass)
 
         gtk_widget_class_add_binding_action (widget_class, GDK_KEY_Escape, 0, "window.close", NULL);
 
-        gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/user-accounts/cc-password-dialog.ui");
+        gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/system/users/cc-password-dialog.ui");
 
         gtk_widget_class_bind_template_child (widget_class, CcPasswordDialog, action_login_radio);
         gtk_widget_class_bind_template_child (widget_class, CcPasswordDialog, action_now_radio);
@@ -484,8 +483,6 @@ cc_password_dialog_class_init (CcPasswordDialogClass *klass)
 static void
 cc_password_dialog_init (CcPasswordDialog *self)
 {
-        g_resources_register (cc_user_accounts_get_resource ());
-
         gtk_widget_init_template (GTK_WIDGET (self));
 }
 

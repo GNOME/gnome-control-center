@@ -1,15 +1,3 @@
-panels_list += cappletname
-desktop = 'gnome-@0@-panel.desktop'.format(cappletname)
-
-i18n.merge_file(
-  type: 'desktop',
-  input: 'data/' + desktop + '.in',
-  output: desktop,
-  po_dir: po_dir,
-  install: true,
-  install_dir: control_center_desktopdir
-)
-
 image_data = files(
   'data/faces/bicycle.jpg',
   'data/faces/book.jpg',
@@ -75,8 +63,7 @@ meson.add_install_script('sh', '-c',
                           ln -sf legacy/$(basename $f) $DESTDIR@1@/$(basename $f);
                           done'''.format(legacy_image_dir, image_dir))
 
-polkit = 'org.gnome.controlcenter.@0@.policy'.format(cappletname)
-
+polkit = 'org.gnome.controlcenter.user-accounts.policy'
 i18n.merge_file(
   input: polkit + '.in',
   output: polkit,
@@ -85,23 +72,8 @@ i18n.merge_file(
   install_dir: join_paths(control_center_datadir, 'polkit-1', 'actions')
 )
 
-common_sources = files(
-  'cc-add-user-dialog.c',
-  'cc-realm-manager.c',
-  'pw-utils.c',
-  'user-utils.c',
-)
-
-common_sources += gnome.compile_resources(
-  'cc-' + cappletname + '-resources',
-  cappletname + '.gresource.xml',
-  c_name: 'cc_' + cappletname.underscorify(),
-  export: true
-)
-
 realmd_namespace = 'org.freedesktop.realmd'
-
-common_sources += gnome.gdbus_codegen(
+sources += gnome.gdbus_codegen(
   'cc-realm-generated',
   'data/' + realmd_namespace + '.xml',
   interface_prefix: realmd_namespace + '.',
@@ -110,8 +82,13 @@ common_sources += gnome.gdbus_codegen(
   annotations: ['org.freedesktop.realmd.Realm', 'org.gtk.GDBus.C.Name', 'Common']
 )
 
+sources += gnome.mkenums_simple(
+  'cc-user-accounts-enum-types',
+  sources: ['cc-fingerprint-manager.h']
+)
+
 fprintd_namespace = 'net.reactivated.Fprint'
-common_sources += gnome.gdbus_codegen(
+sources += gnome.gdbus_codegen(
   'cc-fprintd-generated',
   sources: [
     'data' / fprintd_namespace + '.Manager.xml',
@@ -122,55 +99,14 @@ common_sources += gnome.gdbus_codegen(
   autocleanup: 'all',
 )
 
-enum_headers = [
-  'cc-fingerprint-manager.h',
-]
-
-sources = common_sources + files(
-  'cc-avatar-chooser.c',
-  'cc-crop-area.c',
-  'cc-fingerprint-manager.c',
-  'cc-fingerprint-dialog.c',
-  'cc-password-dialog.c',
-  'cc-user-panel.c',
-  'run-passwd.c',
-)
-
-sources += gnome.mkenums_simple(
-  'cc-user-accounts-enum-types',
-  sources: files(enum_headers))
-
 # Kerberos support
 krb_dep = dependency('krb5', required: false)
 assert(krb_dep.found(), 'kerberos libraries not found in your path')
-
-deps = common_deps + [
-  accounts_dep,
-  gdk_pixbuf_dep,
-  gnome_desktop_dep,
-  liblanguage_dep,
-  krb_dep,
-  m_dep,
-  polkit_gobject_dep,
-  pwquality_dep,
-]
-
-if enable_malcontent
-  deps += malcontent_dep
-endif
 
 cflags += [
   '-DGNOMELOCALEDIR="@0@"'.format(control_center_localedir),
   '-DHAVE_LIBPWQUALITY',
   '-DUM_PIXMAP_DIR="@0@"'.format(join_paths(control_center_pkgdatadir, 'pixmaps'))
 ]
-
-panels_libs += static_library(
-  cappletname,
-  sources: sources,
-  include_directories: [top_inc, shell_inc],
-  dependencies: deps,
-  c_args: cflags
-)
 
 subdir('icons')

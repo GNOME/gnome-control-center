@@ -10,6 +10,15 @@ i18n.merge_file(
   install_dir: control_center_desktopdir
 )
 
+polkit = 'org.gnome.controlcenter.user-accounts.policy'.format(cappletname)
+i18n.merge_file(
+  input: 'users/' + polkit + '.in',
+  output: polkit,
+  po_dir: po_dir,
+  install: true,
+  install_dir: join_paths(control_center_datadir, 'polkit-1', 'actions')
+)
+
 sources = files(
   'cc-system-panel.c',
   'about/cc-about-page.c',
@@ -28,6 +37,18 @@ sources = files(
   'remote-desktop/cc-remote-desktop-page.c',
   'remote-desktop/cc-tls-certificate.c',
   'remote-desktop/cc-systemd-service.c',
+  'users/cc-add-user-dialog.c',
+  'users/cc-avatar-chooser.c',
+  'users/cc-crop-area.c',
+  'users/cc-fingerprint-dialog.c',
+  'users/cc-fingerprint-manager.c',
+  'users/cc-password-dialog.c',
+  'users/cc-realm-manager.c',
+  'users/cc-user-page.c',
+  'users/cc-users-page.c',
+  'users/pw-utils.c',
+  'users/run-passwd.c',
+  'users/user-utils.c',
 )
 
 sources += gnome.compile_resources(
@@ -37,12 +58,12 @@ sources += gnome.compile_resources(
   export : true
 )
 
-enums = 'gdesktop-enums-types'
 enums_header = files(
   gsettings_desktop_dep.get_variable(pkgconfig: 'prefix') + '/include/gsettings-desktop-schemas/gdesktop-enums.h',
   'datetime/cc-datetime-page.h'
 )
 
+enums = 'gdesktop-enums-types'
 sources += gnome.mkenums(
   enums + '.h',
   sources: enums_header,
@@ -67,6 +88,10 @@ gnutls_dep = dependency('gnutls')
 libgtop2 = dependency('libgtop-2.0')
 udisks2 = dependency('udisks2', version: '>= 2.8.2')
 
+# Kerberos support
+krb_dep = dependency('krb5', required: false)
+assert(krb_dep.found(), 'kerberos libraries not found in your path')
+
 deps = common_deps + [
   accounts_dep,
   gcr_dep,
@@ -77,6 +102,7 @@ deps = common_deps + [
   libgtop2,
   liblanguage_dep,
   libsecret_dep,
+  krb_dep,
   polkit_gobject_dep,
   pwquality_dep,
   udisks2,
@@ -84,6 +110,10 @@ deps = common_deps + [
 
 if enable_ibus
   deps += ibus_dep
+endif
+
+if enable_malcontent
+  deps += malcontent_dep
 endif
 
 settings_daemon = 'org.gnome.SettingsDaemon'
@@ -105,11 +135,12 @@ cflags += [
 subdir('about')
 subdir('datetime')
 subdir('region')
+subdir('users')
 
 panels_libs += static_library(
   cappletname,
   sources: sources,
-  include_directories: [ top_inc, common_inc, include_directories('.')],
+  include_directories: [ top_inc, common_inc, include_directories('.'), include_directories('users')],
   dependencies: deps,
   c_args: cflags
 )

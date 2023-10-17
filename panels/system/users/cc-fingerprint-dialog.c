@@ -1266,7 +1266,7 @@ cc_fingerprint_dialog_init (CcFingerprintDialog *self)
 
   provider = gtk_css_provider_new ();
   gtk_css_provider_load_from_resource (provider,
-                                       "/org/gnome/control-center/user-accounts/cc-fingerprint-dialog.css");
+                                       "/org/gnome/control-center/system/users/cc-fingerprint-dialog.css");
   gtk_style_context_add_provider_for_display (gdk_display_get_default (),
                                               GTK_STYLE_PROVIDER (provider),
                                               GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
@@ -1470,7 +1470,7 @@ cc_fingerprint_dialog_class_init (CcFingerprintDialogClass *klass)
   gtk_widget_class_add_binding_action (widget_class, GDK_KEY_Escape, 0, "window.close", NULL);
 
   gtk_widget_class_set_template_from_resource (widget_class,
-    "/org/gnome/control-center/user-accounts/cc-fingerprint-dialog.ui");
+    "/org/gnome/control-center/system/users/cc-fingerprint-dialog.ui");
 
   object_class->constructed = cc_fingerprint_dialog_constructed;
   object_class->get_property = cc_fingerprint_dialog_get_property;

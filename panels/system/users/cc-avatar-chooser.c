@@ -394,7 +394,7 @@ cc_avatar_chooser_class_init (CcAvatarChooserClass *klass)
         GtkWidgetClass *wclass = GTK_WIDGET_CLASS (klass);
         GObjectClass *oclass = G_OBJECT_CLASS (klass);
 
-        gtk_widget_class_set_template_from_resource (wclass, "/org/gnome/control-center/user-accounts/cc-avatar-chooser.ui");
+        gtk_widget_class_set_template_from_resource (wclass, "/org/gnome/control-center/system/users/cc-avatar-chooser.ui");
 
         gtk_widget_class_bind_template_child (wclass, CcAvatarChooser, user_flowbox);
         gtk_widget_class_bind_template_child (wclass, CcAvatarChooser, flowbox);

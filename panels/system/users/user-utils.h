@@ -20,6 +20,7 @@
 
 #pragma once
 
+#include <adwaita.h>
 #include <gtk/gtk.h>
 #include <act/act.h>
 
@@ -31,6 +32,7 @@ void     set_entry_validation_error       (GtkEntry    *entry,
                                            const gchar *text);
 void     clear_entry_validation_error     (GtkEntry    *entry);
 
+const gchar *get_real_or_user_name        (ActUser *user);
 gsize    get_username_max_length          (void);
 gboolean is_username_used                 (const gchar *username);
 gboolean is_valid_name                    (const gchar *name);
@@ -48,5 +50,8 @@ GdkPixbuf *generate_default_avatar        (ActUser     *user,
 void       set_default_avatar             (ActUser     *user);
 void       set_user_icon_data             (ActUser     *user,
                                            GdkPixbuf   *pixbuf);
+void       setup_avatar_for_user          (AdwAvatar *avatar,
+                                           ActUser *user);
+GSettings *settings_or_null               (const gchar *schema);
 
 G_END_DECLS
