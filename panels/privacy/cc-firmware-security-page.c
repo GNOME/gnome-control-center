@@ -637,7 +637,7 @@ update_page_visibility (CcFirmwareSecurityPage *self)
   gboolean visible = TRUE;
   const gchar *chassis_type;
 
-  connection = g_bus_get_sync (G_BUS_TYPE_SYSTEM, NULL, &error);
+  connection = g_bus_get_sync (G_BUS_TYPE_SYSTEM, self->cancellable, &error);
   if (!connection)
     {
       g_warning ("system bus not available: %s", error->message);
@@ -654,7 +654,7 @@ update_page_visibility (CcFirmwareSecurityPage *self)
                                          NULL,
                                          G_DBUS_CALL_FLAGS_NONE,
                                          -1,
-                                         NULL,
+                                         self->cancellable,
                                          &error);
   if (!variant)
     {

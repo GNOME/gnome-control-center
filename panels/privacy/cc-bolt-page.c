@@ -999,7 +999,7 @@ cc_bolt_page_init (CcBoltPage *self)
   gtk_widget_init_template (GTK_WIDGET (self));
 
   self->cancellable = g_cancellable_new ();
-  bolt_client_new_async (self->cancellable, on_visibility_client_ready, g_object_ref (self));
+  bolt_client_new_async (self->cancellable, on_visibility_client_ready, self);
 
   gtk_stack_set_visible_child_name (self->container, "loading");
 
