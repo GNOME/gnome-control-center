@@ -156,7 +156,7 @@ update_visibility (BoltClient  *client,
 
   if (client)
     {
-      devices = bolt_client_list_devices (client, NULL, NULL);
+      devices = bolt_client_list_devices (client, self->cancellable, NULL);
       if (devices)
         visible = devices->len > 0;
     }
@@ -998,7 +998,8 @@ cc_bolt_page_init (CcBoltPage *self)
 {
   gtk_widget_init_template (GTK_WIDGET (self));
 
-  bolt_client_new_async (NULL, on_visibility_client_ready, self);
+  self->cancellable = g_cancellable_new ();
+  bolt_client_new_async (self->cancellable, on_visibility_client_ready, g_object_ref (self));
 
   gtk_stack_set_visible_child_name (self->container, "loading");
 
@@ -1015,8 +1016,6 @@ cc_bolt_page_init (CcBoltPage *self)
   self->devices = g_hash_table_new_full (g_str_hash, g_str_equal, NULL, NULL);
 
   self->device_dialog = cc_bolt_device_dialog_new ();
-
-  self->cancellable = g_cancellable_new ();
 
   bolt_client_new_async (self->cancellable, bolt_client_ready, g_object_ref (self));
 }
