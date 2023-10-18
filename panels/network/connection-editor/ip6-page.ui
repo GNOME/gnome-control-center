@@ -263,7 +263,6 @@
                             <property name="orientation">horizontal</property>
                             <child>
                               <object class="GtkLabel" id="routes_address_label">
-                                <property name="hexpand">True</property>
                                 <property name="label" translatable="yes">Address</property>
                                 <style>
                                   <class name="dim-label" />
@@ -275,7 +274,6 @@
                             </child>
                             <child>
                               <object class="GtkLabel" id="routes_prefix_label">
-                                <property name="hexpand">True</property>
                                 <property name="label" translatable="yes">Prefix</property>
                                 <style>
                                   <class name="dim-label" />
@@ -287,7 +285,6 @@
                             </child>
                             <child>
                               <object class="GtkLabel" id="routes_gateway_label">
-                                <property name="hexpand">True</property>
                                 <property name="label" translatable="yes">Gateway</property>
                                 <style>
                                   <class name="dim-label" />
@@ -335,6 +332,24 @@
       </object>
     </child>
   </template>
+  <object class="GtkSizeGroup" id="routes_address_sizegroup">
+    <property name="mode">horizontal</property>
+    <widgets>
+      <widget name="routes_address_label" />
+    </widgets>
+  </object>
+  <object class="GtkSizeGroup" id="routes_prefix_sizegroup">
+    <property name="mode">horizontal</property>
+    <widgets>
+      <widget name="routes_prefix_label"/>
+    </widgets>
+  </object>
+  <object class="GtkSizeGroup" id="routes_gateway_sizegroup">
+    <property name="mode">horizontal</property>
+    <widgets>
+      <widget name="routes_gateway_label" />
+    </widgets>
+  </object>
   <object class="GtkSizeGroup" id="routes_metric_sizegroup">
     <property name="mode">horizontal</property>
     <widgets>
