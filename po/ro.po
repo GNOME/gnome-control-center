@@ -17,8 +17,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2023-10-09 16:10+0000\n"
-"PO-Revision-Date: 2023-10-08 15:45+0300\n"
+"POT-Creation-Date: 2023-10-09 21:29+0000\n"
+"PO-Revision-Date: 2023-10-10 11:20+0300\n"
 "Last-Translator: Florentina Mușat <florentina [dot] musat [dot] 28 [at] "
 "gmail [dot] com>\n"
 "Language-Team: Romanian Gnome Team\n"
@@ -32,32 +32,32 @@ msgstr ""
 "X-Launchpad-Export-Date: 2014-07-13 17:08+0000\n"
 "X-Project-Style: gnome\n"
 
-#: panels/applications/cc-applications-panel.c:798
+#: panels/applications/cc-applications-panel.c:821
 msgid "System Bus"
 msgstr "Magistrala sistemului"
 
-#: panels/applications/cc-applications-panel.c:798
-#: panels/applications/cc-applications-panel.c:800
-#: panels/applications/cc-applications-panel.c:813
-#: panels/applications/cc-applications-panel.c:818
+#: panels/applications/cc-applications-panel.c:821
+#: panels/applications/cc-applications-panel.c:823
+#: panels/applications/cc-applications-panel.c:836
+#: panels/applications/cc-applications-panel.c:841
 msgid "Full access"
 msgstr "Acces complet"
 
-#: panels/applications/cc-applications-panel.c:800
+#: panels/applications/cc-applications-panel.c:823
 msgid "Session Bus"
 msgstr "Magistrala sesiunilor"
 
-#: panels/applications/cc-applications-panel.c:804
+#: panels/applications/cc-applications-panel.c:827
 #: panels/power/cc-power-panel.ui:81 panels/privacy/cc-bolt-page.ui:240
 #: panels/privacy/cc-bolt-page.ui:284 panels/privacy/cc-privacy-panel.ui:78
 msgid "Devices"
 msgstr "Dispozitive"
 
-#: panels/applications/cc-applications-panel.c:804
+#: panels/applications/cc-applications-panel.c:827
 msgid "Full access to /dev"
 msgstr "Acces total la /dev"
 
-#: panels/applications/cc-applications-panel.c:808
+#: panels/applications/cc-applications-panel.c:831
 #: panels/network/cc-network-panel.ui:8
 #: panels/network/gnome-network-panel.desktop.in:3
 #: panels/network/network-mobile.ui:235 panels/wwan/cc-wwan-device-page.ui:61
@@ -65,38 +65,39 @@ msgstr "Acces total la /dev"
 msgid "Network"
 msgstr "Rețea"
 
-#: panels/applications/cc-applications-panel.c:808
+#: panels/applications/cc-applications-panel.c:831
 msgid "Has network access"
 msgstr "Are acces la rețea"
 
-#: panels/applications/cc-applications-panel.c:813
-#: panels/applications/cc-applications-panel.c:815
+#: panels/applications/cc-applications-panel.c:836
+#: panels/applications/cc-applications-panel.c:838
 #: panels/search/cc-search-locations-dialog.c:384
 msgid "Home"
 msgstr "Acasă"
 
-#: panels/applications/cc-applications-panel.c:815
-#: panels/applications/cc-applications-panel.c:820
+#: panels/applications/cc-applications-panel.c:838
+#: panels/applications/cc-applications-panel.c:843
 msgid "Read-only"
 msgstr "Doar citire"
 
-#: panels/applications/cc-applications-panel.c:818
-#: panels/applications/cc-applications-panel.c:820
+#: panels/applications/cc-applications-panel.c:841
+#: panels/applications/cc-applications-panel.c:843
 msgid "File System"
 msgstr "Sistem de fișiere"
 
-#: panels/applications/cc-applications-panel.c:824
+#: panels/applications/cc-applications-panel.c:847
 #: panels/keyboard/01-launchers.xml.in:6
-#: shell/appdata/org.gnome.Settings.appdata.xml.in:7 shell/cc-window.c:760
-#: shell/cc-window.ui:20 shell/org.gnome.Settings.desktop.in:3
+#: shell/appdata/org.gnome.Settings.appdata.xml.in:7 shell/cc-window.c:802
+#: shell/cc-window.ui:24 shell/cc-window.ui:31
+#: shell/org.gnome.Settings.desktop.in:3
 msgid "Settings"
 msgstr "Configurări"
 
-#: panels/applications/cc-applications-panel.c:824
+#: panels/applications/cc-applications-panel.c:847
 msgid "Can change settings"
 msgstr "Poate administra configurări"
 
-#: panels/applications/cc-applications-panel.c:826
+#: panels/applications/cc-applications-panel.c:849
 #, c-format
 msgid ""
 "<b>%s</b> requires access to the following system resources. To stop this "
@@ -105,7 +106,7 @@ msgstr ""
 "<b>%s</b> necesită acces la următoarele resurse de sistem. Pentru a opri "
 "acest acces, aplicația trebuie eliminată."
 
-#: panels/applications/cc-applications-panel.c:1168
+#: panels/applications/cc-applications-panel.c:1191
 #, c-format
 msgid "%u file and link type that is opened by the app"
 msgid_plural "%u file and link types that are opened by the app"
@@ -113,7 +114,7 @@ msgstr[0] "%u tip de fișier și legătură care este deschis de aplicație"
 msgstr[1] "%u tipuri de fișier și legătură care sunt deschise de aplicație"
 msgstr[2] "%u de tipuri de fișier și legătură care sunt deschise de aplicație"
 
-#: panels/applications/cc-applications-panel.c:1175
+#: panels/applications/cc-applications-panel.c:1198
 #, c-format
 msgid "<b>%s</b> is used to open the following types of files and links."
 msgstr ""
@@ -121,52 +122,48 @@ msgstr ""
 "legături."
 
 #. Translators: '%s' is the formatted size, e.g. "26.2 MB"
-#: panels/applications/cc-applications-panel.c:1224
+#: panels/applications/cc-applications-panel.c:1247
 #, c-format
 msgid "%s of disk space used."
 msgstr "Utilizat %s din spațiul pe disc."
 
-#: panels/applications/cc-applications-panel.ui:10
+#: panels/applications/cc-applications-panel.c:1411
+#: panels/applications/cc-applications-panel.ui:247
 #: panels/applications/gnome-applications-panel.desktop.in:3
 msgid "Apps"
 msgstr "Aplicații"
 
-#: panels/applications/cc-applications-panel.ui:27
-msgid "Search apps"
-msgstr "Caută aplicații"
+#: panels/applications/cc-applications-panel.ui:16
+msgid "No Apps"
+msgstr "Nu sunt aplicații"
 
-#: panels/applications/cc-applications-panel.ui:44
-#: panels/applications/cc-applications-panel.ui:77
-msgid "Default Apps"
-msgstr "Aplicații implicite"
+#: panels/applications/cc-applications-panel.ui:19
+msgid "_Install Some…"
+msgstr "_Instalează unele…"
 
-#: panels/applications/cc-applications-panel.ui:106
-msgid "App Settings"
-msgstr "Configurări aplicație"
-
-#: panels/applications/cc-applications-panel.ui:152
+#: panels/applications/cc-applications-panel.ui:70
 #: panels/printers/pp-details-dialog.c:267
 #: panels/sharing/cc-sharing-panel.c:454
 msgid "_Open"
 msgstr "_Deschide"
 
-#: panels/applications/cc-applications-panel.ui:164
+#: panels/applications/cc-applications-panel.ui:82
 msgid "App _Details"
 msgstr "_Detalii aplicație"
 
-#: panels/applications/cc-applications-panel.ui:184
-#: panels/applications/cc-applications-panel.ui:191
+#: panels/applications/cc-applications-panel.ui:102
+#: panels/applications/cc-applications-panel.ui:109
 #: panels/keyboard/01-launchers.xml.in:16
 #: panels/keyboard/cc-input-chooser.ui:76
 #: panels/printers/new-printer-dialog.ui:216
 #: panels/region/cc-format-chooser.ui:82
-#: panels/search/gnome-search-panel.desktop.in:3 shell/cc-window.ui:28
-#: shell/cc-window.ui:30
+#: panels/search/gnome-search-panel.desktop.in:3 shell/cc-window.ui:37
+#: shell/cc-window.ui:39
 msgid "Search"
 msgstr "Căutare"
 
-#: panels/applications/cc-applications-panel.ui:185
-#: panels/applications/cc-applications-panel.ui:192
+#: panels/applications/cc-applications-panel.ui:103
+#: panels/applications/cc-applications-panel.ui:110
 msgid "Receive system searches and send results"
 msgstr "Primește căutările sistemului și trimite rezultatele"
 
@@ -176,11 +173,11 @@ msgstr "Primește căutările sistemului și trimite rezultatele"
 #. TRANSLATORS: Status of Parental Controls setup
 #. translators:
 #. * The device has been disabled
-#: panels/applications/cc-applications-panel.ui:193
-#: panels/applications/cc-applications-panel.ui:235
-#: panels/applications/cc-applications-panel.ui:256
-#: panels/applications/cc-applications-panel.ui:270
-#: panels/applications/cc-applications-panel.ui:284
+#: panels/applications/cc-applications-panel.ui:111
+#: panels/applications/cc-applications-panel.ui:153
+#: panels/applications/cc-applications-panel.ui:174
+#: panels/applications/cc-applications-panel.ui:188
+#: panels/applications/cc-applications-panel.ui:202
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:123
 #: panels/keyboard/cc-xkb-modifier-dialog.c:342
 #: panels/keyboard/keyboard-shortcuts.c:367
@@ -191,109 +188,121 @@ msgstr "Primește căutările sistemului și trimite rezultatele"
 msgid "Disabled"
 msgstr "Dezactivat"
 
-#: panels/applications/cc-applications-panel.ui:198
+#: panels/applications/cc-applications-panel.ui:116
 #: panels/notifications/gnome-notifications-panel.desktop.in:3
 msgid "Notifications"
 msgstr "Notificări"
 
-#: panels/applications/cc-applications-panel.ui:199
+#: panels/applications/cc-applications-panel.ui:117
 msgid "Show system notifications"
 msgstr "Arată înștiințările de sistem"
 
-#: panels/applications/cc-applications-panel.ui:205
+#: panels/applications/cc-applications-panel.ui:123
 msgid "Run in Background"
 msgstr "Rulează pe fundal"
 
-#: panels/applications/cc-applications-panel.ui:206
+#: panels/applications/cc-applications-panel.ui:124
 msgid "Allow activity when the app is closed"
 msgstr "Permite activitatea când aplicația este închisă"
 
-#: panels/applications/cc-applications-panel.ui:212
+#: panels/applications/cc-applications-panel.ui:130
 msgid "Screenshots"
 msgstr "Capturi de ecran"
 
-#: panels/applications/cc-applications-panel.ui:213
+#: panels/applications/cc-applications-panel.ui:131
 msgid "Take pictures of the screen at any time"
 msgstr "Face poze ecranului în orice moment"
 
-#: panels/applications/cc-applications-panel.ui:219
+#: panels/applications/cc-applications-panel.ui:137
 msgid "Change Wallpaper"
 msgstr "Modifică imaginea de fundal"
 
-#: panels/applications/cc-applications-panel.ui:220
+#: panels/applications/cc-applications-panel.ui:138
 msgid "Change the desktop wallpaper."
 msgstr "Modifică imaginea de fundal de pe desktop."
 
-#: panels/applications/cc-applications-panel.ui:226
-#: panels/applications/cc-applications-panel.ui:233
+#: panels/applications/cc-applications-panel.ui:144
+#: panels/applications/cc-applications-panel.ui:151
 #: panels/sound/cc-sound-panel.ui:358
 msgid "Sounds"
 msgstr "Sunete"
 
-#: panels/applications/cc-applications-panel.ui:227
+#: panels/applications/cc-applications-panel.ui:145
 msgid "Reproduce sounds."
 msgstr "Reproduce sunete."
 
-#: panels/applications/cc-applications-panel.ui:234
+#: panels/applications/cc-applications-panel.ui:152
 msgid "Reproduce sounds"
 msgstr "Reproduce sunete"
 
-#: panels/applications/cc-applications-panel.ui:240
+#: panels/applications/cc-applications-panel.ui:158
 msgid "Inhibit Shortcuts"
 msgstr "Inhibează scurtăturile"
 
-#: panels/applications/cc-applications-panel.ui:241
+#: panels/applications/cc-applications-panel.ui:159
 msgid "Block standard keyboard shortcuts"
 msgstr "Blochează scurtăturile de tastatură standard"
 
-#: panels/applications/cc-applications-panel.ui:247
-#: panels/applications/cc-applications-panel.ui:254
+#: panels/applications/cc-applications-panel.ui:165
+#: panels/applications/cc-applications-panel.ui:172
 msgid "Camera"
 msgstr "Cameră"
 
-#: panels/applications/cc-applications-panel.ui:248
-#: panels/applications/cc-applications-panel.ui:255
+#: panels/applications/cc-applications-panel.ui:166
+#: panels/applications/cc-applications-panel.ui:173
 msgid "Take pictures with the camera"
 msgstr "Ia poze cu camera"
 
-#: panels/applications/cc-applications-panel.ui:261
-#: panels/applications/cc-applications-panel.ui:268
+#: panels/applications/cc-applications-panel.ui:179
+#: panels/applications/cc-applications-panel.ui:186
 msgid "Microphone"
 msgstr "Microfon"
 
-#: panels/applications/cc-applications-panel.ui:262
-#: panels/applications/cc-applications-panel.ui:269
+#: panels/applications/cc-applications-panel.ui:180
+#: panels/applications/cc-applications-panel.ui:187
 msgid "Record audio with the microphone"
 msgstr "Înregistrează audio cu microfonul"
 
-#: panels/applications/cc-applications-panel.ui:275
-#: panels/applications/cc-applications-panel.ui:282
+#: panels/applications/cc-applications-panel.ui:193
+#: panels/applications/cc-applications-panel.ui:200
 #: panels/privacy/cc-location-page.ui:4
 msgid "Location Services"
 msgstr "Servicii de locație"
 
-#: panels/applications/cc-applications-panel.ui:276
-#: panels/applications/cc-applications-panel.ui:283
+#: panels/applications/cc-applications-panel.ui:194
+#: panels/applications/cc-applications-panel.ui:201
 msgid "Access device location data"
 msgstr "Accesează datele de locație ale dispozitivului"
 
-#: panels/applications/cc-applications-panel.ui:294
+#: panels/applications/cc-applications-panel.ui:212
 #: panels/applications/cc-applications-panel.ui:332
 msgid "Required Access"
 msgstr "Acces necesar"
 
-#: panels/applications/cc-applications-panel.ui:295
+#: panels/applications/cc-applications-panel.ui:213
 msgid "System access that is required by the app"
 msgstr "Accesul la sistem necesar acestei aplicații"
 
-#: panels/applications/cc-applications-panel.ui:303
+#: panels/applications/cc-applications-panel.ui:221
 msgid "File &amp; Link Associations"
 msgstr "Asocieri de fișiere &amp; legături"
 
-#: panels/applications/cc-applications-panel.ui:311
+#: panels/applications/cc-applications-panel.ui:229
 #: panels/applications/cc-applications-panel.ui:441
 msgid "Storage"
 msgstr "Stocare"
+
+#: panels/applications/cc-applications-panel.ui:260
+msgid "Search apps"
+msgstr "Caută aplicații"
+
+#: panels/applications/cc-applications-panel.ui:304 shell/cc-panel-list.ui:64
+msgid "No results found"
+msgstr "Nu s-au găsit rezultate"
+
+#: panels/applications/cc-applications-panel.ui:314 shell/cc-panel-list.ui:73
+msgid "Try a different search"
+msgstr "Încercați o căutare diferită"
 
 #: panels/applications/cc-applications-panel.ui:378
 msgid "File & Link Associations"
@@ -337,424 +346,8 @@ msgid "<b>Total</b>"
 msgstr "<b>Total</b>"
 
 #: panels/applications/cc-applications-panel.ui:498
-msgid "_Clear Cache"
-msgstr "_Curăță cache-ul"
-
-#: panels/applications/cc-applications-panel.ui:534
-msgid "No Apps Found"
-msgstr "Nu s-au găsit aplicații"
-
-#: panels/applications/cc-applications-panel.ui:543
-msgid "_Install Some…"
-msgstr "_Instalează unele…"
-
-#: panels/applications/cc-default-apps-page.ui:4
-msgid "Links &amp; Files"
-msgstr "Legături &amp; fișiere"
-
-#: panels/applications/cc-default-apps-page.ui:5
-msgid "Apps which are used to open common links and files"
-msgstr ""
-"Aplicații care sunt utilizate pentru a deschide legături și fișiere comune"
-
-#: panels/applications/cc-default-apps-page.ui:8
-msgid "_Web"
-msgstr "_Web"
-
-#: panels/applications/cc-default-apps-page.ui:16
-msgid "_Mail"
-msgstr "E-_mail"
-
-#: panels/applications/cc-default-apps-page.ui:23
-msgid "_Calendar"
-msgstr "_Calendar"
-
-#: panels/applications/cc-default-apps-page.ui:30
-msgid "M_usic"
-msgstr "M_uzică"
-
-#: panels/applications/cc-default-apps-page.ui:38
-msgid "_Video"
-msgstr "_Video"
-
-#: panels/applications/cc-default-apps-page.ui:46
-#: panels/applications/cc-removable-media-settings.ui:58
-msgid "_Photos"
-msgstr "_Fotografii"
-
-#. Translators: This is a telephone call
-#: panels/applications/cc-default-apps-page.ui:55
-msgid "_Calls"
-msgstr "_Apeluri"
-
-#: panels/applications/cc-default-apps-page.ui:63
-msgid "_SMS"
-msgstr "_SMS"
-
-#: panels/applications/cc-removable-media-settings.c:290
-msgid "Ask what to do"
-msgstr "Întreabă-mă ce să fac"
-
-#: panels/applications/cc-removable-media-settings.c:294
-msgid "Do nothing"
-msgstr "Nu fă nimic"
-
-#: panels/applications/cc-removable-media-settings.c:298
-msgid "Open folder"
-msgstr "Deschide dosarul"
-
-#: panels/applications/cc-removable-media-settings.c:370
-msgid "Other Media"
-msgstr "Deschide suportul multimedia"
-
-#: panels/applications/cc-removable-media-settings.c:391
-msgid "Select an app for audio CDs"
-msgstr "Selectați o aplicație pentru CD-uri audio"
-
-#: panels/applications/cc-removable-media-settings.c:392
-msgid "Select an app for video DVDs"
-msgstr "Selectați o aplicație pentru DVD-uri video"
-
-#: panels/applications/cc-removable-media-settings.c:393
-msgid "Select an app to run when a music player is connected"
-msgstr "Selectați o aplicație de rulat la conectarea unui player de muzică"
-
-#: panels/applications/cc-removable-media-settings.c:394
-msgid "Select an app to run when a camera is connected"
-msgstr "Selectați o aplicație de rulat la conectarea unei camere"
-
-#: panels/applications/cc-removable-media-settings.c:395
-msgid "Select an app for software CDs"
-msgstr "Selectați o aplicație pentru CD-uri software"
-
-#. translators: these strings are duplicates of shared-mime-info
-#. * strings, just here to fix capitalization of the English originals.
-#. * If the shared-mime-info translation works for your language,
-#. * simply leave these untranslated.
-#.
-#: panels/applications/cc-removable-media-settings.c:407
-msgid "audio DVD"
-msgstr "DVD audio"
-
-#: panels/applications/cc-removable-media-settings.c:408
-msgid "blank Blu-ray disc"
-msgstr "disc Blu-Ray gol"
-
-#: panels/applications/cc-removable-media-settings.c:409
-msgid "blank CD disc"
-msgstr "disc CD gol"
-
-#: panels/applications/cc-removable-media-settings.c:410
-msgid "blank DVD disc"
-msgstr "disc DVD gol"
-
-#: panels/applications/cc-removable-media-settings.c:411
-msgid "blank HD DVD disc"
-msgstr "disc HD DVD gol"
-
-#: panels/applications/cc-removable-media-settings.c:412
-msgid "Blu-ray video disc"
-msgstr "Disc video Blu-ray"
-
-#: panels/applications/cc-removable-media-settings.c:413
-msgid "e-book reader"
-msgstr "cititor de cărți electronice"
-
-#: panels/applications/cc-removable-media-settings.c:414
-msgid "HD DVD video disc"
-msgstr "Disc video HD DVD"
-
-#: panels/applications/cc-removable-media-settings.c:415
-msgid "Picture CD"
-msgstr "Picture CD"
-
-#: panels/applications/cc-removable-media-settings.c:416
-msgid "Super Video CD"
-msgstr "Super Video CD"
-
-#: panels/applications/cc-removable-media-settings.c:417
-msgid "Video CD"
-msgstr "CD video"
-
-#: panels/applications/cc-removable-media-settings.c:418
-msgid "Windows software"
-msgstr "Software Windows"
-
-#: panels/applications/cc-removable-media-settings.ui:5
-msgid "Removable Media"
-msgstr "Medii detașabile"
-
-#: panels/applications/cc-removable-media-settings.ui:6
-msgid "Apps which are launched when media or drives are connected"
-msgstr "Aplicații care sunt lansate când sunt conectate media sau unități"
-
-#: panels/applications/cc-removable-media-settings.ui:9
-msgid "D_isable Autostart"
-msgstr "Dezact_ivează pornirea automată"
-
-#: panels/applications/cc-removable-media-settings.ui:10
-msgid "Never prompt or start programs on media insertion"
-msgstr "Nu solicita și nu porni niciodată programe la inserarea media"
-
-#: panels/applications/cc-removable-media-settings.ui:22
-msgid "CD _audio"
-msgstr "CD _audio"
-
-#: panels/applications/cc-removable-media-settings.ui:34
-msgid "_DVD video"
-msgstr "_DVD video"
-
-#: panels/applications/cc-removable-media-settings.ui:46
-msgid "_Music player"
-msgstr "Player _muzical"
-
-#: panels/applications/cc-removable-media-settings.ui:70
-msgid "_Software"
-msgstr "_Software"
-
-#: panels/applications/cc-removable-media-settings.ui:82
-msgid "_Other Media"
-msgstr "Al_te media"
-
-#: panels/applications/cc-removable-media-settings.ui:86
-msgid "_Configure Action…"
-msgstr "_Configurare acțiune…"
-
-#: panels/applications/cc-removable-media-settings.ui:141
-msgid "Select how other media should be handled"
-msgstr "Selectați cum ar trebui să se opereze cu alte fișiere media"
-
-#: panels/applications/cc-removable-media-settings.ui:175
-msgid "_Action:"
-msgstr "_Acțiune:"
-
-#: panels/applications/cc-removable-media-settings.ui:194
-msgid "_Type:"
-msgstr "_Tip:"
-
-#: panels/applications/cc-snap-row.c:253
-msgid "Add user accounts and change passwords"
-msgstr "Adaugă conturi de utilizator și schimbă parole"
-
-#: panels/applications/cc-snap-row.c:255 panels/applications/cc-snap-row.c:329
-msgid "Play and record sound"
-msgstr "Redă și înregistrează sunet"
-
-#: panels/applications/cc-snap-row.c:257
-msgid "Play audio"
-msgstr "Redă audio"
-
-#: panels/applications/cc-snap-row.c:259
-msgid "Record audio"
-msgstr "Înregistrează audio"
-
-#: panels/applications/cc-snap-row.c:261
-msgid "Detect network devices using mDNS/DNS-SD (Bonjour/zeroconf)"
-msgstr ""
-"Detectează dispozitivul de rețea folosind mDNS/DNS-SD (Bonjour/zeroconf)"
-
-#: panels/applications/cc-snap-row.c:263
-msgid "Access bluetooth hardware directly"
-msgstr "Accesează dispozitivul bluetooth direct"
-
-#: panels/applications/cc-snap-row.c:265
-msgid "Use bluetooth devices"
-msgstr "Utilizează dispozitive bluetooth"
-
-#: panels/applications/cc-snap-row.c:267
-msgid "Use your camera"
-msgstr "Utilizează camera"
-
-#: panels/applications/cc-snap-row.c:269
-msgid "Print documents"
-msgstr "Tipărește documente"
-
-#: panels/applications/cc-snap-row.c:271
-msgid "Use any connected joystick"
-msgstr "Utilizează orice joystick conectat"
-
-#: panels/applications/cc-snap-row.c:273
-msgid "Allow connecting to the Docker service"
-msgstr "Permite conexiunea la serviciul Docker"
-
-#: panels/applications/cc-snap-row.c:275
-msgid "Configure network firewall"
-msgstr "Configurează firewall-ul rețelei"
-
-#: panels/applications/cc-snap-row.c:277
-msgid "Setup and use privileged FUSE filesystems"
-msgstr "Configurează și folosește sisteme de fișiere privilegiate FUSE"
-
-#: panels/applications/cc-snap-row.c:279
-msgid "Update firmware on this device"
-msgstr "Actualizează firmware-ul pe acest dispozitiv"
-
-#: panels/applications/cc-snap-row.c:281
-msgid "Access hardware information"
-msgstr "Accesează informațiile hardware"
-
-#: panels/applications/cc-snap-row.c:283
-msgid "Provide entropy to hardware random number generator"
-msgstr "Oferă entropie pentru generarea aleatorie a numerelor prin hardware"
-
-#: panels/applications/cc-snap-row.c:285
-msgid "Use hardware-generated random numbers"
-msgstr "Utilizează numere generate aleatoriu prin hardware"
-
-#: panels/applications/cc-snap-row.c:287
-msgid "Access files in your home folder"
-msgstr "Accesează fișierele din dosarul personal"
-
-#: panels/applications/cc-snap-row.c:289
-msgid "Access libvirt service"
-msgstr "Accesează serviciul libvirt"
-
-#: panels/applications/cc-snap-row.c:291
-msgid "Change system language and region settings"
-msgstr "Schimbă configurările pentru limba și regiune ale sistemului"
-
-#: panels/applications/cc-snap-row.c:293
-msgid "Change location settings and providers"
-msgstr "Schimbă configurările și furnizorii locației"
-
-#: panels/applications/cc-snap-row.c:295
-msgid "Access your location"
-msgstr "Accesează locația"
-
-#: panels/applications/cc-snap-row.c:297
-msgid "Read system and application logs"
-msgstr "Citiți jurnalele de sistem și aplicații"
-
-#: panels/applications/cc-snap-row.c:299
-msgid "Access LXD service"
-msgstr "Accesează serviciul LXD"
-
-#: panels/applications/cc-snap-row.c:301
-msgid "Use and configure modems"
-msgstr "Utilizează și configurează modemuri"
-
-#: panels/applications/cc-snap-row.c:303
-msgid "Read system mount information and disk quotas"
-msgstr "Citește informații de montare ale sistemelor și cotele discurilor"
-
-#: panels/applications/cc-snap-row.c:305
-msgid "Control music and video players"
-msgstr "Controlează muzica și playerele video"
-
-#: panels/applications/cc-snap-row.c:307
-msgid "Change low-level network settings"
-msgstr "Schimbă configurările de rețea de nivel scăzut"
-
-#: panels/applications/cc-snap-row.c:309
-msgid "Access the NetworkManager service to read and change network settings"
-msgstr ""
-"Accesează serviciul NetworkManager pentru a citi și modifica configurări de "
-"rețea"
-
-#: panels/applications/cc-snap-row.c:311
-msgid "Read access to network settings"
-msgstr "Acces de citire la configurările de rețea"
-
-#: panels/applications/cc-snap-row.c:313
-msgid "Change network settings"
-msgstr "Schimbă configurările de rețea"
-
-#: panels/applications/cc-snap-row.c:315
-msgid "Read network settings"
-msgstr "Citiți configurările de rețea"
-
-#: panels/applications/cc-snap-row.c:317
-msgid ""
-"Access the ofono service to read and change network settings for mobile "
-"telephony"
-msgstr ""
-"Accesează serviciul ofono pentru a citi și modifica configurări de rețea "
-"pentru telefonia mobilă"
-
-#: panels/applications/cc-snap-row.c:319
-msgid "Control Open vSwitch hardware"
-msgstr "Controlează hardware deschis vSwitch"
-
-#: panels/applications/cc-snap-row.c:321
-msgid "Read from CD/DVD"
-msgstr "Citește de pe CD/DVD"
-
-#: panels/applications/cc-snap-row.c:323
-msgid "Read, add, change, or remove saved passwords"
-msgstr "Citește, adaugă, modifică, sau elimină parole salvate"
-
-#: panels/applications/cc-snap-row.c:325
-msgid ""
-"Access pppd and ppp devices for configuring Point-to-Point Protocol "
-"connections"
-msgstr ""
-"Accesează dispozitive pppd și ppp pentru configurarea conexiunilor ce "
-"folosesc Point-to-Point Protocol"
-
-#: panels/applications/cc-snap-row.c:327
-msgid "Pause or end any process on the system"
-msgstr "Pune pe pauză sau termină orice proces din sistem"
-
-#: panels/applications/cc-snap-row.c:331
-msgid "Access USB hardware directly"
-msgstr "Accesează direct hardware USB"
-
-#: panels/applications/cc-snap-row.c:333
-msgid "Read/write files on removable storage devices"
-msgstr "Citește/scrie fișiere pe dispozitive de stocare amovibile"
-
-#: panels/applications/cc-snap-row.c:335
-msgid "Prevent screen sleep/lock"
-msgstr "Previne adormirea/blocarea ecranului"
-
-#: panels/applications/cc-snap-row.c:337
-msgid "Access serial port hardware"
-msgstr "Accesează hardware prin port serial"
-
-#: panels/applications/cc-snap-row.c:339
-msgid "Restart or power off the device"
-msgstr "Repornește sau oprește dispozitivul"
-
-#: panels/applications/cc-snap-row.c:341
-msgid "Install, remove and configure software"
-msgstr "Instalează, elimină și configurează software"
-
-#: panels/applications/cc-snap-row.c:343
-msgid "Access Storage Framework service"
-msgstr "Accesează serviciul Storage Framework"
-
-#: panels/applications/cc-snap-row.c:345
-msgid "Read process and system information"
-msgstr "Citiți informațiile de sistem și de procese"
-
-#: panels/applications/cc-snap-row.c:347
-msgid "Monitor and control any running program"
-msgstr "Monitorizează și controlează orice program ce rulează"
-
-#: panels/applications/cc-snap-row.c:349
-msgid "Change the date and time"
-msgstr "Modifică data și ora"
-
-#: panels/applications/cc-snap-row.c:351
-msgid "Change time server settings"
-msgstr "Schimbă configurările serverului de timp"
-
-#: panels/applications/cc-snap-row.c:353
-msgid "Change the time zone"
-msgstr "Modifică fusul orar"
-
-#: panels/applications/cc-snap-row.c:355
-msgid "Access the UDisks2 service for configuring disks and removable media"
-msgstr ""
-"Accesează serviciul UDisks2 pentru a configura discuri și medii amovibile"
-
-#: panels/applications/cc-snap-row.c:357
-msgid "Access energy usage data"
-msgstr "Accesează datele de utilizare a energiei"
-
-#: panels/applications/cc-snap-row.c:359
-msgid "Read/write access to U2F devices exposed"
-msgstr "Acces de citire/scriere la dispozitivele U2F expus"
+msgid "_Clear Cache…"
+msgstr "_Curăță cache-ul…"
 
 #: panels/applications/gnome-applications-panel.desktop.in:4
 msgid "Control various app permissions and settings"
@@ -762,13 +355,9 @@ msgstr "Controlați diferite permisiuni și configurări ale aplicației"
 
 #. Translators: Search terms to find the Apps panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/applications/gnome-applications-panel.desktop.in:16
-msgid ""
-"application;flatpak;permission;setting;default;preferred;media;autorun;cd;"
-"dvd;usb;audio;video;disc;removable;device;system;"
+msgid "application;flatpak;permission;setting;"
 msgstr ""
-"application;flatpak;permission;setting;default;preferred;media;autorun;cd;"
-"dvd;usb;audio;video;disc;removable;device;system;aplicație;permisiune;"
-"implicit;preferat;rulare automată;detașabil;dispozitiv;sistem;"
+"application;flatpak;permission;setting;aplicație;permisiune;configurare;"
 
 #: panels/background/cc-background-chooser.c:320
 msgid "Select a picture"
@@ -979,7 +568,7 @@ msgstr "Calibrare afișaj"
 #: panels/network/cc-wifi-panel.c:737
 #: panels/network/connection-editor/ce-page-details.c:99
 #: panels/network/connection-editor/connection-editor.ui:14
-#: panels/network/net-device-wifi.c:880
+#: panels/network/net-device-wifi.c:875
 #: panels/printers/new-printer-dialog.ui:54
 #: panels/printers/pp-details-dialog.c:266 panels/privacy/cc-usage-page.c:136
 #: panels/region/cc-format-chooser.ui:24 panels/sharing/cc-sharing-panel.c:453
@@ -1503,8 +1092,8 @@ msgid "This profile may no longer be accurate"
 msgstr "Este posibil ca acest profil să nu mai fie corect"
 
 #: panels/color/gnome-color-panel.desktop.in:3
-#: panels/universal-access/cc-ua-zoom-page.ui:193
-#: panels/universal-access/cc-ua-zoom-page.ui:269
+#: panels/universal-access/cc-ua-zoom-page.ui:197
+#: panels/universal-access/cc-ua-zoom-page.ui:271
 msgid "Color"
 msgstr "Culoare"
 
@@ -1863,6 +1452,64 @@ msgstr "Modifică data și ora sistemului"
 #: panels/datetime/org.gnome.controlcenter.datetime.policy.in:12
 msgid "To change time or date settings, you need to authenticate."
 msgstr "Pentru a schimba data sau ora, trebuie să vă autentificați."
+
+#: panels/default-apps/cc-default-apps-panel.ui:14
+msgid "Links &amp; Files"
+msgstr "Legături &amp; fișiere"
+
+#: panels/default-apps/cc-default-apps-panel.ui:15
+msgid "Applications which are used to open common links and files."
+msgstr ""
+"Aplicații care sunt utilizate pentru a deschide legături și fișiere comune."
+
+#: panels/default-apps/cc-default-apps-panel.ui:18
+msgid "_Web"
+msgstr "_Web"
+
+#: panels/default-apps/cc-default-apps-panel.ui:26
+msgid "_Mail"
+msgstr "E-_mail"
+
+#: panels/default-apps/cc-default-apps-panel.ui:33
+msgid "_Calendar"
+msgstr "_Calendar"
+
+#: panels/default-apps/cc-default-apps-panel.ui:40
+msgid "M_usic"
+msgstr "M_uzică"
+
+#: panels/default-apps/cc-default-apps-panel.ui:48
+msgid "_Video"
+msgstr "_Video"
+
+#: panels/default-apps/cc-default-apps-panel.ui:56
+#: panels/removable-media/cc-removable-media-panel.ui:133
+msgid "_Photos"
+msgstr "_Fotografii"
+
+#. Translators: This is a telephone call
+#: panels/default-apps/cc-default-apps-panel.ui:65
+msgid "_Calls"
+msgstr "_Apeluri"
+
+#: panels/default-apps/cc-default-apps-panel.ui:73
+msgid "_SMS"
+msgstr "_SMS"
+
+#: panels/default-apps/gnome-default-apps-panel.desktop.in:3
+msgid "Default Apps"
+msgstr "Aplicații implicite"
+
+#: panels/default-apps/gnome-default-apps-panel.desktop.in:4
+msgid "Configure Default Apps"
+msgstr "Configurează aplicațiile implicite"
+
+#. Translators: Search terms to find the Default Apps panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#: panels/default-apps/gnome-default-apps-panel.desktop.in:15
+msgid "default;application;preferred;media;"
+msgstr ""
+"default;application;preferred;media;implicit;implicită;implicite;aplicație;"
+"preferată;preferate;"
 
 #: panels/display/cc-display-panel.c:510
 #: panels/notifications/cc-notifications-panel.c:212
@@ -2654,7 +2301,7 @@ msgstr ""
 "Metode de a introduce variante de simboluri și litere utilizând tastatura."
 
 #: panels/keyboard/cc-keyboard-panel.ui:87
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:9 shell/cc-window.ui:105
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:9 shell/cc-window.ui:118
 msgid "Keyboard Shortcuts"
 msgstr "Scurtături tastatură"
 
@@ -2800,7 +2447,7 @@ msgstr "Scurtătură"
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:247
 #: panels/sound/cc-alert-chooser-window.c:342
 #: panels/sound/cc-alert-chooser-window.ui:20
-#: panels/universal-access/cc-ua-zoom-page.ui:273
+#: panels/universal-access/cc-ua-zoom-page.ui:275
 msgid "None"
 msgstr "Niciuna"
 
@@ -3047,31 +2694,31 @@ msgstr "Spații de lucru _fixe"
 msgid "Specify a number of permanent workspaces."
 msgstr "Specifică un număr permanent de spații de lucru."
 
-#: panels/multitasking/cc-multitasking-panel.ui:91
+#: panels/multitasking/cc-multitasking-panel.ui:92
 msgid "_Number of Workspaces"
 msgstr "_Număr de spații de lucru"
 
-#: panels/multitasking/cc-multitasking-panel.ui:102
+#: panels/multitasking/cc-multitasking-panel.ui:108
 msgid "Multi-Monitor"
 msgstr "Monitoare multiple"
 
-#: panels/multitasking/cc-multitasking-panel.ui:108
+#: panels/multitasking/cc-multitasking-panel.ui:114
 msgid "Workspaces on _primary display only"
 msgstr "Spațiile de lucru doar pe afișajul _principal"
 
-#: panels/multitasking/cc-multitasking-panel.ui:123
+#: panels/multitasking/cc-multitasking-panel.ui:129
 msgid "Workspaces on all d_isplays"
 msgstr "Spații de lucru pe toate _ecranele"
 
-#: panels/multitasking/cc-multitasking-panel.ui:140
+#: panels/multitasking/cc-multitasking-panel.ui:146
 msgid "App Switching"
 msgstr "Comutare aplicații"
 
-#: panels/multitasking/cc-multitasking-panel.ui:146
+#: panels/multitasking/cc-multitasking-panel.ui:152
 msgid "Include apps from all _workspaces"
 msgstr "Include aplicații din toate _spațiile de lucru"
 
-#: panels/multitasking/cc-multitasking-panel.ui:160
+#: panels/multitasking/cc-multitasking-panel.ui:166
 msgid "Include apps from the _current workspace only"
 msgstr "Include aplicații doar din spațiul de lucru _curent"
 
@@ -3488,19 +3135,19 @@ msgstr ""
 "parolele și orice modificări ale rețelei."
 
 #: panels/network/connection-editor/ce-page-details.c:95
-#: panels/network/net-device-wifi.c:877
+#: panels/network/net-device-wifi.c:872
 msgid "Forget Connection?"
 msgstr "Se uită conexiunea?"
 
 #. TRANSLATORS: this WEP WiFi security
 #: panels/network/connection-editor/ce-page-details.c:128
-#: panels/network/net-device-wifi.c:237
+#: panels/network/net-device-wifi.c:232
 msgid "WEP"
 msgstr "WEP"
 
 #. TRANSLATORS: this WPA WiFi security
 #: panels/network/connection-editor/ce-page-details.c:132
-#: panels/network/net-device-wifi.c:242
+#: panels/network/net-device-wifi.c:237
 msgid "WPA"
 msgstr "WPA"
 
@@ -3526,7 +3173,7 @@ msgid "Enterprise"
 msgstr "Enterprise"
 
 #: panels/network/connection-editor/ce-page-details.c:166
-#: panels/network/net-device-wifi.c:227
+#: panels/network/net-device-wifi.c:222
 msgctxt "Wifi security"
 msgid "None"
 msgstr "Nimic"
@@ -3668,21 +3315,21 @@ msgstr "automat"
 msgid "Identity"
 msgstr "Identitate"
 
-#: panels/network/connection-editor/ce-page-ip4.c:260
-#: panels/network/connection-editor/ce-page-ip6.c:239
+#: panels/network/connection-editor/ce-page-ip4.c:257
+#: panels/network/connection-editor/ce-page-ip6.c:236
 msgid "Delete Address"
 msgstr "Șterge adresa"
 
-#: panels/network/connection-editor/ce-page-ip4.c:419
-#: panels/network/connection-editor/ce-page-ip6.c:386
+#: panels/network/connection-editor/ce-page-ip4.c:416
+#: panels/network/connection-editor/ce-page-ip6.c:383
 msgid "Delete Route"
 msgstr "Șterge ruta"
 
-#: panels/network/connection-editor/ce-page-ip4.c:763
+#: panels/network/connection-editor/ce-page-ip4.c:759
 msgid "IPv4"
 msgstr "IPv4"
 
-#: panels/network/connection-editor/ce-page-ip6.c:727
+#: panels/network/connection-editor/ce-page-ip6.c:723
 msgid "IPv6"
 msgstr "IPv6"
 
@@ -4183,7 +3830,7 @@ msgstr "Cu fir"
 msgid "Add new connection"
 msgstr "Adaugă o nouă conexiune"
 
-#: panels/network/net-device-wifi.c:875
+#: panels/network/net-device-wifi.c:870
 msgid ""
 "Network details for the selected networks, including passwords and any "
 "custom configuration will be lost."
@@ -4191,19 +3838,19 @@ msgstr ""
 "Detaliile rețelei pentru rețelile selectate, inclusiv parolele și alte "
 "configurări se vor pierde."
 
-#: panels/network/net-device-wifi.c:881
+#: panels/network/net-device-wifi.c:876
 msgid "_Forget"
 msgstr "_Uită"
 
-#: panels/network/net-device-wifi.c:1087
+#: panels/network/net-device-wifi.c:1082
 msgid "Saved Wi-Fi Networks"
 msgstr "Salvează rețelele Wi-Fi"
 
-#: panels/network/net-device-wifi.c:1269
+#: panels/network/net-device-wifi.c:1264
 msgid "System policy prohibits use as a Hotspot"
 msgstr "Politica de sistem nu permite folosirea ca hotspot"
 
-#: panels/network/net-device-wifi.c:1272
+#: panels/network/net-device-wifi.c:1267
 msgid "Wireless device does not support Hotspot mode"
 msgstr "Dispozitivul wireless nu suporta modul Hotspot"
 
@@ -4808,12 +4455,6 @@ msgstr "Principal"
 msgctxt "Battery name"
 msgid "Extra"
 msgstr "Extra"
-
-#. TRANSLATORS: This is the battery charge level percentage (e.g. 50%). This could be localized to account for local Percent sign formatting guidelines. See https://en.wikipedia.org/wiki/Percent_sign#Correct_style
-#: panels/power/cc-battery-row.c:289
-#, c-format
-msgid "%d %%"
-msgstr "%d %%"
 
 #: panels/power/cc-power-panel.c:255
 msgid "Batteries"
@@ -7007,6 +6648,153 @@ msgstr "Selectați limba afișată și formatele"
 msgid "Language;Layout;Keyboard;Input;"
 msgstr "Language;Layout;Keyboard;Input;Limbă;Aranjament;Intrare;"
 
+#: panels/removable-media/cc-removable-media-panel.c:281
+msgid "Ask what to do"
+msgstr "Întreabă-mă ce să fac"
+
+#: panels/removable-media/cc-removable-media-panel.c:285
+msgid "Do nothing"
+msgstr "Nu fă nimic"
+
+#: panels/removable-media/cc-removable-media-panel.c:289
+msgid "Open folder"
+msgstr "Deschide dosarul"
+
+#: panels/removable-media/cc-removable-media-panel.c:360
+msgid "Other Media"
+msgstr "Deschide suportul multimedia"
+
+#: panels/removable-media/cc-removable-media-panel.c:381
+msgid "Select an application for audio CDs"
+msgstr "Selectați o aplicație pentru CD-uri audio"
+
+#: panels/removable-media/cc-removable-media-panel.c:382
+msgid "Select an application for video DVDs"
+msgstr "Selectați o aplicație pentru DVD-uri video"
+
+#: panels/removable-media/cc-removable-media-panel.c:383
+msgid "Select an application to run when a music player is connected"
+msgstr "Selectați o aplicație de rulat la conectarea unui player de muzică"
+
+#: panels/removable-media/cc-removable-media-panel.c:384
+msgid "Select an application to run when a camera is connected"
+msgstr "Selectați o aplicație de rulat la conectarea unei camere"
+
+#: panels/removable-media/cc-removable-media-panel.c:385
+msgid "Select an application for software CDs"
+msgstr "Selectați o aplicație pentru CD-uri software"
+
+#. translators: these strings are duplicates of shared-mime-info
+#. * strings, just here to fix capitalization of the English originals.
+#. * If the shared-mime-info translation works for your language,
+#. * simply leave these untranslated.
+#.
+#: panels/removable-media/cc-removable-media-panel.c:397
+msgid "audio DVD"
+msgstr "DVD audio"
+
+#: panels/removable-media/cc-removable-media-panel.c:398
+msgid "blank Blu-ray disc"
+msgstr "disc Blu-Ray gol"
+
+#: panels/removable-media/cc-removable-media-panel.c:399
+msgid "blank CD disc"
+msgstr "disc CD gol"
+
+#: panels/removable-media/cc-removable-media-panel.c:400
+msgid "blank DVD disc"
+msgstr "disc DVD gol"
+
+#: panels/removable-media/cc-removable-media-panel.c:401
+msgid "blank HD DVD disc"
+msgstr "disc HD DVD gol"
+
+#: panels/removable-media/cc-removable-media-panel.c:402
+msgid "Blu-ray video disc"
+msgstr "Disc video Blu-ray"
+
+#: panels/removable-media/cc-removable-media-panel.c:403
+msgid "e-book reader"
+msgstr "cititor de cărți electronice"
+
+#: panels/removable-media/cc-removable-media-panel.c:404
+msgid "HD DVD video disc"
+msgstr "Disc video HD DVD"
+
+#: panels/removable-media/cc-removable-media-panel.c:405
+msgid "Picture CD"
+msgstr "Picture CD"
+
+#: panels/removable-media/cc-removable-media-panel.c:406
+msgid "Super Video CD"
+msgstr "Super Video CD"
+
+#: panels/removable-media/cc-removable-media-panel.c:407
+msgid "Video CD"
+msgstr "CD video"
+
+#: panels/removable-media/cc-removable-media-panel.c:408
+msgid "Windows software"
+msgstr "Software Windows"
+
+#: panels/removable-media/cc-removable-media-panel.ui:38
+msgid "Select how media should be handled"
+msgstr "Selectați cum ar trebui să se opereze cu fișiere media"
+
+#: panels/removable-media/cc-removable-media-panel.ui:58
+msgid "CD _audio"
+msgstr "CD _audio"
+
+#: panels/removable-media/cc-removable-media-panel.ui:73
+msgid "_DVD video"
+msgstr "_DVD video"
+
+#: panels/removable-media/cc-removable-media-panel.ui:108
+msgid "_Music player"
+msgstr "Player _muzical"
+
+#: panels/removable-media/cc-removable-media-panel.ui:158
+msgid "_Software"
+msgstr "_Software"
+
+#: panels/removable-media/cc-removable-media-panel.ui:184
+msgid "_Other Media…"
+msgstr "Alte medii de st_ocare…"
+
+#: panels/removable-media/cc-removable-media-panel.ui:203
+msgid "_Never prompt or start apps on media insertion"
+msgstr "Nu solicita și nu porni _niciodată programe la inserarea media"
+
+#: panels/removable-media/cc-removable-media-panel.ui:250
+msgid "Select how other media should be handled"
+msgstr "Selectați cum ar trebui să se opereze cu alte fișiere media"
+
+#: panels/removable-media/cc-removable-media-panel.ui:284
+msgid "_Action:"
+msgstr "_Acțiune:"
+
+#: panels/removable-media/cc-removable-media-panel.ui:303
+msgid "_Type:"
+msgstr "_Tip:"
+
+#: panels/removable-media/gnome-removable-media-panel.desktop.in:3
+msgid "Removable Media"
+msgstr "Medii detașabile"
+
+#: panels/removable-media/gnome-removable-media-panel.desktop.in:4
+msgid "Configure Removable Media settings"
+msgstr "Configurează medii detașabile"
+
+#. Translators: Search terms to find the Removable Media panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#: panels/removable-media/gnome-removable-media-panel.desktop.in:15
+msgid ""
+"device;system;default;application;preferred;cd;dvd;usb;audio;video;disc;"
+"removable;media;autorun;"
+msgstr ""
+"device;system;default;application;preferred;cd;dvd;usb;audio;video;disc;"
+"removable;media;autorun;dispozitiv;sistem;implicit;aplicație;preferat;"
+"detașabil;rulare automată;"
+
 #: panels/search/cc-search-locations-dialog.c:675
 msgid "Select Location"
 msgstr "Selectează locația"
@@ -7036,8 +6824,8 @@ msgid "Others"
 msgstr "Alții"
 
 #: panels/search/cc-search-locations-dialog.ui:63
-msgid "Add Location…"
-msgstr "Adaugă locație…"
+msgid "Add Location"
+msgstr "Adaugă o locație"
 
 #: panels/search/cc-search-panel.c:166
 msgid "No apps found"
@@ -7538,7 +7326,7 @@ msgstr "Întârziere pentru clic-_dublu"
 #: panels/universal-access/cc-ua-typing-page.ui:137
 #: panels/universal-access/cc-ua-typing-page.ui:189
 #: panels/universal-access/cc-ua-typing-page.ui:236
-#: panels/universal-access/cc-ua-zoom-page.ui:169
+#: panels/universal-access/cc-ua-zoom-page.ui:173
 msgid "Short"
 msgstr "Scurt"
 
@@ -7548,7 +7336,7 @@ msgstr "Scurt"
 #: panels/universal-access/cc-ua-typing-page.ui:140
 #: panels/universal-access/cc-ua-typing-page.ui:192
 #: panels/universal-access/cc-ua-typing-page.ui:239
-#: panels/universal-access/cc-ua-zoom-page.ui:173
+#: panels/universal-access/cc-ua-zoom-page.ui:177
 msgid "Long"
 msgstr "Lungă"
 
@@ -7846,126 +7634,126 @@ msgstr "Lupă"
 msgid "Magnification Factor"
 msgstr "Factor de mărire"
 
-#: panels/universal-access/cc-ua-zoom-page.ui:46
+#: panels/universal-access/cc-ua-zoom-page.ui:51
 msgid "_Magnifier View"
 msgstr "Vizualizare _lupă"
 
-#: panels/universal-access/cc-ua-zoom-page.ui:52
+#: panels/universal-access/cc-ua-zoom-page.ui:57
 msgid "Follow Mouse Cursor"
 msgstr "Urmărește cursorul mausului"
 
-#: panels/universal-access/cc-ua-zoom-page.ui:53
-#: panels/universal-access/cc-ua-zoom-page.ui:71
+#: panels/universal-access/cc-ua-zoom-page.ui:58
+#: panels/universal-access/cc-ua-zoom-page.ui:76
 msgid "Screen Area"
 msgstr "Zonă de ecran"
 
-#: panels/universal-access/cc-ua-zoom-page.ui:62
+#: panels/universal-access/cc-ua-zoom-page.ui:67
 msgid "_Extend Outside Screen Edges"
 msgstr "_Extinde în afara marginilor ecranului"
 
-#: panels/universal-access/cc-ua-zoom-page.ui:75
+#: panels/universal-access/cc-ua-zoom-page.ui:80
 msgid "Full Screen"
 msgstr "Ecran complet"
 
-#: panels/universal-access/cc-ua-zoom-page.ui:76
+#: panels/universal-access/cc-ua-zoom-page.ui:81
 msgid "Top Half"
 msgstr "Jumătatea superioară"
 
-#: panels/universal-access/cc-ua-zoom-page.ui:77
+#: panels/universal-access/cc-ua-zoom-page.ui:82
 msgid "Bottom Half"
 msgstr "Jumătatea inferioară"
 
-#: panels/universal-access/cc-ua-zoom-page.ui:78
+#: panels/universal-access/cc-ua-zoom-page.ui:83
 msgid "Left Half"
 msgstr "Jumătatea stângă"
 
-#: panels/universal-access/cc-ua-zoom-page.ui:79
+#: panels/universal-access/cc-ua-zoom-page.ui:84
 msgid "Right Half"
 msgstr "Jumătatea dreaptă"
 
-#: panels/universal-access/cc-ua-zoom-page.ui:89
+#: panels/universal-access/cc-ua-zoom-page.ui:94
 msgid "Follow Behavior"
 msgstr "Urmărește comportamentul"
 
-#: panels/universal-access/cc-ua-zoom-page.ui:94
+#: panels/universal-access/cc-ua-zoom-page.ui:99
 msgid "Moves with Contents"
 msgstr "Mută cu conținutul"
 
-#: panels/universal-access/cc-ua-zoom-page.ui:95
+#: panels/universal-access/cc-ua-zoom-page.ui:100
 msgid "Pushes Contents Around"
 msgstr "Împinge conținutul în jur"
 
-#: panels/universal-access/cc-ua-zoom-page.ui:96
+#: panels/universal-access/cc-ua-zoom-page.ui:101
 msgid "Remains Centered"
 msgstr "Rămâne centrat"
 
-#: panels/universal-access/cc-ua-zoom-page.ui:108
+#: panels/universal-access/cc-ua-zoom-page.ui:113
 msgid "Crosshairs"
 msgstr "Țintă"
 
-#: panels/universal-access/cc-ua-zoom-page.ui:118
+#: panels/universal-access/cc-ua-zoom-page.ui:123
 msgid "_Overlap Mouse Cursor"
 msgstr "Suprapun_e cursorul mausului"
 
-#: panels/universal-access/cc-ua-zoom-page.ui:125
+#: panels/universal-access/cc-ua-zoom-page.ui:130
 msgid "Thickness"
 msgstr "Grosime"
 
-#: panels/universal-access/cc-ua-zoom-page.ui:129
+#: panels/universal-access/cc-ua-zoom-page.ui:134
 msgid "Thin"
 msgstr "Subțire"
 
-#: panels/universal-access/cc-ua-zoom-page.ui:130
+#: panels/universal-access/cc-ua-zoom-page.ui:135
 msgid "Thick"
 msgstr "Gros"
 
-#: panels/universal-access/cc-ua-zoom-page.ui:162
+#: panels/universal-access/cc-ua-zoom-page.ui:166
 msgid "Length"
 msgstr "Lungime"
 
-#: panels/universal-access/cc-ua-zoom-page.ui:170
+#: panels/universal-access/cc-ua-zoom-page.ui:174
 msgid "1/4 screen"
 msgstr "ecran 1/4"
 
-#: panels/universal-access/cc-ua-zoom-page.ui:171
+#: panels/universal-access/cc-ua-zoom-page.ui:175
 msgid "1/2 Screen"
 msgstr "Ecran 1/2"
 
-#: panels/universal-access/cc-ua-zoom-page.ui:172
+#: panels/universal-access/cc-ua-zoom-page.ui:176
 msgid "3/4 Screen"
 msgstr "Ecran 3/4"
 
-#: panels/universal-access/cc-ua-zoom-page.ui:208
+#: panels/universal-access/cc-ua-zoom-page.ui:212
 msgid "Color Filters"
 msgstr "Filtre de culoare"
 
-#: panels/universal-access/cc-ua-zoom-page.ui:212
+#: panels/universal-access/cc-ua-zoom-page.ui:216
 msgid "_Inverted"
 msgstr "_Inversat"
 
-#: panels/universal-access/cc-ua-zoom-page.ui:213
+#: panels/universal-access/cc-ua-zoom-page.ui:217
 msgid "Invert colors in the magnifier region"
 msgstr "Inversează culorile în regiunea lupă"
 
-#: panels/universal-access/cc-ua-zoom-page.ui:220
+#: panels/universal-access/cc-ua-zoom-page.ui:224
 msgid "Brightness"
 msgstr "Luminozitate"
 
-#: panels/universal-access/cc-ua-zoom-page.ui:225
-#: panels/universal-access/cc-ua-zoom-page.ui:249
+#: panels/universal-access/cc-ua-zoom-page.ui:229
+#: panels/universal-access/cc-ua-zoom-page.ui:252
 msgid "Low"
 msgstr "Scăzută"
 
-#: panels/universal-access/cc-ua-zoom-page.ui:226
-#: panels/universal-access/cc-ua-zoom-page.ui:250
+#: panels/universal-access/cc-ua-zoom-page.ui:230
+#: panels/universal-access/cc-ua-zoom-page.ui:253
 msgid "High"
 msgstr "Ridicată"
 
-#: panels/universal-access/cc-ua-zoom-page.ui:245
+#: panels/universal-access/cc-ua-zoom-page.ui:248
 msgid "Contrast"
 msgstr "Contrast"
 
-#: panels/universal-access/cc-ua-zoom-page.ui:274
+#: panels/universal-access/cc-ua-zoom-page.ui:276
 msgid "Full"
 msgstr "Completă"
 
@@ -9548,31 +9336,23 @@ msgstr "[PANEL] [ARGUMENT…]"
 msgid "Settings categories"
 msgstr "Categorii de configurări"
 
-#: shell/cc-panel-list.ui:64
-msgid "No results found"
-msgstr "Nu s-au găsit rezultate"
-
-#: shell/cc-panel-list.ui:73
-msgid "Try a different search"
-msgstr "Încercați o căutare diferită"
-
-#: shell/cc-panel-loader.c:278
+#: shell/cc-panel-loader.c:282
 msgid "Available panels:"
 msgstr "Panouri disponibile:"
 
-#: shell/cc-window.ui:42 shell/cc-window.ui:44
+#: shell/cc-window.ui:51 shell/cc-window.ui:53
 msgid "Main Menu"
 msgstr "Meniu principal"
 
-#: shell/cc-window.ui:59
+#: shell/cc-window.ui:68
 msgid "Search settings"
 msgstr "Configurări căutare"
 
-#: shell/cc-window.ui:97
+#: shell/cc-window.ui:110
 msgid "Warning: Development Version"
 msgstr "Avertisment: versiune de dezvoltare"
 
-#: shell/cc-window.ui:98
+#: shell/cc-window.ui:111
 msgid ""
 "This version of Settings should only be used for development purposes. You "
 "may experience incorrect system behavior, data loss, and other unexpected "
@@ -9582,7 +9362,7 @@ msgstr ""
 "dezvoltare. Este posibil să experimentați un comportament incorect al "
 "sistemului, pierderi de date, și alte probleme neașteptate. "
 
-#: shell/cc-window.ui:109
+#: shell/cc-window.ui:122
 msgid "Help"
 msgstr "Ajutor"
 
@@ -9691,33 +9471,211 @@ msgstr[2] "%u de intrări"
 msgid "System Sounds"
 msgstr "Sunete de sistem"
 
-#~ msgid "No Apps"
-#~ msgstr "Nu sunt aplicații"
+#~ msgid "App Settings"
+#~ msgstr "Configurări aplicație"
 
-#~ msgid "application;flatpak;permission;setting;"
+#~ msgid "No Apps Found"
+#~ msgstr "Nu s-au găsit aplicații"
+
+#~ msgid "Apps which are launched when media or drives are connected"
+#~ msgstr "Aplicații care sunt lansate când sunt conectate media sau unități"
+
+#~ msgid "D_isable Autostart"
+#~ msgstr "Dezact_ivează pornirea automată"
+
+#~ msgid "_Other Media"
+#~ msgstr "Al_te media"
+
+#~ msgid "_Configure Action…"
+#~ msgstr "_Configurare acțiune…"
+
+#~ msgid "Add user accounts and change passwords"
+#~ msgstr "Adaugă conturi de utilizator și schimbă parole"
+
+#~ msgid "Play and record sound"
+#~ msgstr "Redă și înregistrează sunet"
+
+#~ msgid "Play audio"
+#~ msgstr "Redă audio"
+
+#~ msgid "Record audio"
+#~ msgstr "Înregistrează audio"
+
+#~ msgid "Detect network devices using mDNS/DNS-SD (Bonjour/zeroconf)"
 #~ msgstr ""
-#~ "application;flatpak;permission;setting;aplicație;permisiune;configurare;"
+#~ "Detectează dispozitivul de rețea folosind mDNS/DNS-SD (Bonjour/zeroconf)"
 
-#~ msgid "Configure Default Apps"
-#~ msgstr "Configurează aplicațiile implicite"
+#~ msgid "Access bluetooth hardware directly"
+#~ msgstr "Accesează dispozitivul bluetooth direct"
 
-#~ msgid "default;application;preferred;media;"
+#~ msgid "Use bluetooth devices"
+#~ msgstr "Utilizează dispozitive bluetooth"
+
+#~ msgid "Use your camera"
+#~ msgstr "Utilizează camera"
+
+#~ msgid "Print documents"
+#~ msgstr "Tipărește documente"
+
+#~ msgid "Use any connected joystick"
+#~ msgstr "Utilizează orice joystick conectat"
+
+#~ msgid "Allow connecting to the Docker service"
+#~ msgstr "Permite conexiunea la serviciul Docker"
+
+#~ msgid "Configure network firewall"
+#~ msgstr "Configurează firewall-ul rețelei"
+
+#~ msgid "Setup and use privileged FUSE filesystems"
+#~ msgstr "Configurează și folosește sisteme de fișiere privilegiate FUSE"
+
+#~ msgid "Update firmware on this device"
+#~ msgstr "Actualizează firmware-ul pe acest dispozitiv"
+
+#~ msgid "Access hardware information"
+#~ msgstr "Accesează informațiile hardware"
+
+#~ msgid "Provide entropy to hardware random number generator"
+#~ msgstr "Oferă entropie pentru generarea aleatorie a numerelor prin hardware"
+
+#~ msgid "Use hardware-generated random numbers"
+#~ msgstr "Utilizează numere generate aleatoriu prin hardware"
+
+#~ msgid "Access files in your home folder"
+#~ msgstr "Accesează fișierele din dosarul personal"
+
+#~ msgid "Access libvirt service"
+#~ msgstr "Accesează serviciul libvirt"
+
+#~ msgid "Change system language and region settings"
+#~ msgstr "Schimbă configurările pentru limba și regiune ale sistemului"
+
+#~ msgid "Change location settings and providers"
+#~ msgstr "Schimbă configurările și furnizorii locației"
+
+#~ msgid "Access your location"
+#~ msgstr "Accesează locația"
+
+#~ msgid "Read system and application logs"
+#~ msgstr "Citiți jurnalele de sistem și aplicații"
+
+#~ msgid "Access LXD service"
+#~ msgstr "Accesează serviciul LXD"
+
+#~ msgid "Use and configure modems"
+#~ msgstr "Utilizează și configurează modemuri"
+
+#~ msgid "Read system mount information and disk quotas"
+#~ msgstr "Citește informații de montare ale sistemelor și cotele discurilor"
+
+#~ msgid "Control music and video players"
+#~ msgstr "Controlează muzica și playerele video"
+
+#~ msgid "Change low-level network settings"
+#~ msgstr "Schimbă configurările de rețea de nivel scăzut"
+
+#~ msgid ""
+#~ "Access the NetworkManager service to read and change network settings"
 #~ msgstr ""
-#~ "default;application;preferred;media;implicit;implicită;implicite;"
-#~ "aplicație;preferată;preferate;"
+#~ "Accesează serviciul NetworkManager pentru a citi și modifica configurări "
+#~ "de rețea"
+
+#~ msgid "Read access to network settings"
+#~ msgstr "Acces de citire la configurările de rețea"
+
+#~ msgid "Change network settings"
+#~ msgstr "Schimbă configurările de rețea"
+
+#~ msgid "Read network settings"
+#~ msgstr "Citiți configurările de rețea"
+
+#~ msgid ""
+#~ "Access the ofono service to read and change network settings for mobile "
+#~ "telephony"
+#~ msgstr ""
+#~ "Accesează serviciul ofono pentru a citi și modifica configurări de rețea "
+#~ "pentru telefonia mobilă"
+
+#~ msgid "Control Open vSwitch hardware"
+#~ msgstr "Controlează hardware deschis vSwitch"
+
+#~ msgid "Read from CD/DVD"
+#~ msgstr "Citește de pe CD/DVD"
+
+#~ msgid "Read, add, change, or remove saved passwords"
+#~ msgstr "Citește, adaugă, modifică, sau elimină parole salvate"
+
+#~ msgid ""
+#~ "Access pppd and ppp devices for configuring Point-to-Point Protocol "
+#~ "connections"
+#~ msgstr ""
+#~ "Accesează dispozitive pppd și ppp pentru configurarea conexiunilor ce "
+#~ "folosesc Point-to-Point Protocol"
+
+#~ msgid "Pause or end any process on the system"
+#~ msgstr "Pune pe pauză sau termină orice proces din sistem"
+
+#~ msgid "Access USB hardware directly"
+#~ msgstr "Accesează direct hardware USB"
+
+#~ msgid "Read/write files on removable storage devices"
+#~ msgstr "Citește/scrie fișiere pe dispozitive de stocare amovibile"
+
+#~ msgid "Prevent screen sleep/lock"
+#~ msgstr "Previne adormirea/blocarea ecranului"
+
+#~ msgid "Access serial port hardware"
+#~ msgstr "Accesează hardware prin port serial"
+
+#~ msgid "Restart or power off the device"
+#~ msgstr "Repornește sau oprește dispozitivul"
+
+#~ msgid "Install, remove and configure software"
+#~ msgstr "Instalează, elimină și configurează software"
+
+#~ msgid "Access Storage Framework service"
+#~ msgstr "Accesează serviciul Storage Framework"
+
+#~ msgid "Read process and system information"
+#~ msgstr "Citiți informațiile de sistem și de procese"
+
+#~ msgid "Monitor and control any running program"
+#~ msgstr "Monitorizează și controlează orice program ce rulează"
+
+#~ msgid "Change the date and time"
+#~ msgstr "Modifică data și ora"
+
+#~ msgid "Change time server settings"
+#~ msgstr "Schimbă configurările serverului de timp"
+
+#~ msgid "Change the time zone"
+#~ msgstr "Modifică fusul orar"
+
+#~ msgid "Access the UDisks2 service for configuring disks and removable media"
+#~ msgstr ""
+#~ "Accesează serviciul UDisks2 pentru a configura discuri și medii amovibile"
+
+#~ msgid "Access energy usage data"
+#~ msgstr "Accesează datele de utilizare a energiei"
+
+#~ msgid "Read/write access to U2F devices exposed"
+#~ msgstr "Acces de citire/scriere la dispozitivele U2F expus"
+
+#~ msgid ""
+#~ "application;flatpak;permission;setting;default;preferred;media;autorun;cd;"
+#~ "dvd;usb;audio;video;disc;removable;device;system;"
+#~ msgstr ""
+#~ "application;flatpak;permission;setting;default;preferred;media;autorun;cd;"
+#~ "dvd;usb;audio;video;disc;removable;device;system;aplicație;permisiune;"
+#~ "implicit;preferat;rulare automată;detașabil;dispozitiv;sistem;"
+
+#, c-format
+#~ msgid "%d %%"
+#~ msgstr "%d %%"
 
 #, c-format
 #~ msgid "Could not load ui: %s"
 #~ msgstr "Nu s-a putut încărca interfața cu utilizatorul: %s"
-
-#~ msgid "Select how media should be handled"
-#~ msgstr "Selectați cum ar trebui să se opereze cu fișiere media"
-
-#~ msgid "_Other Media…"
-#~ msgstr "Alte medii de st_ocare…"
-
-#~ msgid "Configure Removable Media settings"
-#~ msgstr "Configurează medii detașabile"
 
 #~ msgid "You cannot delete your own account."
 #~ msgstr "Nu vă puteți șterge propriul cont."
