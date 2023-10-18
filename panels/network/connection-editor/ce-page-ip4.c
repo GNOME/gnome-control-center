@@ -52,12 +52,15 @@ struct _CEPageIP4
         GtkEntry          *dns_entry;
         GtkGrid           *main_box;
         GtkCheckButton    *never_default_check;
-        GtkLabel          *routes_address_label;
         GtkBox            *routes_box;
+        GtkLabel          *routes_address_label;
         GtkLabel          *routes_gateway_label;
-        GtkLabel          *routes_metric_label;
-        GtkSizeGroup      *routes_metric_sizegroup;
         GtkLabel          *routes_netmask_label;
+        GtkLabel          *routes_metric_label;
+        GtkSizeGroup      *routes_address_sizegroup;
+        GtkSizeGroup      *routes_gateway_sizegroup;
+        GtkSizeGroup      *routes_netmask_sizegroup;
+        GtkSizeGroup      *routes_metric_sizegroup;
         GtkSizeGroup      *routes_sizegroup;
         GtkCheckButton    *shared_radio;
 
@@ -371,6 +374,8 @@ add_route_row (CEPageIP4   *self,
                                         -1);
         gtk_box_append (GTK_BOX (row_box), widget);
 
+        gtk_size_group_add_widget (self->routes_address_sizegroup, widget);
+
         widget = GTK_WIDGET (ce_netmask_entry_new ());
         g_signal_connect_object (widget, "changed", G_CALLBACK (ce_page_changed), self, G_CONNECT_SWAPPED);
         g_signal_connect_object (widget, "activate", G_CALLBACK (ensure_empty_routes_row), self, G_CONNECT_SWAPPED);
@@ -383,6 +388,8 @@ add_route_row (CEPageIP4   *self,
                                         -1);
         gtk_box_append (GTK_BOX (row_box), widget);
 
+        gtk_size_group_add_widget (self->routes_netmask_sizegroup, widget);
+
         widget = GTK_WIDGET (ce_ip_address_entry_new (AF_INET));
         g_signal_connect_object (widget, "changed", G_CALLBACK (ce_page_changed), self, G_CONNECT_SWAPPED);
         g_signal_connect_object (widget, "activate", G_CALLBACK (ensure_empty_routes_row), self, G_CONNECT_SWAPPED);
@@ -394,6 +401,8 @@ add_route_row (CEPageIP4   *self,
                                         GTK_ACCESSIBLE_RELATION_LABELLED_BY, self->routes_gateway_label, NULL,
                                         -1);
         gtk_box_append (GTK_BOX (row_box), widget);
+
+        gtk_size_group_add_widget (self->routes_gateway_sizegroup, widget);
 
         widget = gtk_entry_new ();
         g_signal_connect_object (widget, "changed", G_CALLBACK (ce_page_changed), self, G_CONNECT_SWAPPED);
@@ -812,6 +821,9 @@ ce_page_ip4_class_init (CEPageIP4Class *klass)
         gtk_widget_class_bind_template_child (widget_class, CEPageIP4, routes_netmask_label);
         gtk_widget_class_bind_template_child (widget_class, CEPageIP4, routes_gateway_label);
         gtk_widget_class_bind_template_child (widget_class, CEPageIP4, routes_metric_label);
+        gtk_widget_class_bind_template_child (widget_class, CEPageIP4, routes_address_sizegroup);
+        gtk_widget_class_bind_template_child (widget_class, CEPageIP4, routes_netmask_sizegroup);
+        gtk_widget_class_bind_template_child (widget_class, CEPageIP4, routes_gateway_sizegroup);
         gtk_widget_class_bind_template_child (widget_class, CEPageIP4, routes_metric_sizegroup);
         gtk_widget_class_bind_template_child (widget_class, CEPageIP4, routes_sizegroup);
         gtk_widget_class_bind_template_child (widget_class, CEPageIP4, shared_radio);
