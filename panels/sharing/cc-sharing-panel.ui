@@ -467,9 +467,13 @@
 
   <object class="AdwWindow" id="media_sharing_dialog">
     <property name="title" translatable="yes">Media Sharing</property>
-    <property name="resizable">False</property>
     <property name="modal">True</property>
     <property name="hide-on-close">True</property>
+    <property name="destroy-with-parent">True</property>
+    <property name="width-request">360</property>
+    <property name="height-request">294</property>
+    <property name="default-width">360</property>
+    <property name="default-height">500</property>
     <child>
       <object class="GtkShortcutController">
         <property name="scope">managed</property>
@@ -487,52 +491,61 @@
           <object class="AdwHeaderBar" id="media_sharing_headerbar"/>
         </child>
         <property name="content">
-          <object class="GtkGrid" id="shared_folders_grid">
-            <property name="margin_start">24</property>
-            <property name="margin_end">24</property>
-            <property name="margin_top">24</property>
-            <property name="margin_bottom">24</property>
-            <property name="row_spacing">12</property>
-            <property name="column_spacing">6</property>
+          <object class="GtkScrolledWindow">
+            <property name="hscrollbar_policy">never</property>
             <child>
-              <object class="GtkLabel" id="label13">
-                <property name="xalign">0</property>
-                <property name="label" translatable="yes">Share music, photos and videos over the network.</property>
-                <property name="max-width-chars">36</property>
-                <property name="wrap">True</property>
-                <layout>
-                  <property name="column">0</property>
-                  <property name="row">0</property>
-                  <property name="column-span">2</property>
-                </layout>
-              </object>
-            </child>
-            <child>
-              <object class="GtkLabel" id="label15">
-                <property name="xalign">0</property>
-                <property name="label" translatable="yes">Folders</property>
-                <property name="mnemonic_widget">shared_folders_listbox</property>
-                <layout>
-                  <property name="column">0</property>
-                  <property name="row">1</property>
-                  <property name="column-span">2</property>
-                </layout>
-                <style>
-                  <class name="heading"/>
-                </style>
-              </object>
-            </child>
-            <child>
-              <object class="GtkListBox" id="shared_folders_listbox">
-                <property name="selection-mode">none</property>
-                <style>
-                  <class name="boxed-list" />
-                </style>
-                <layout>
-                  <property name="column">0</property>
-                  <property name="row">3</property>
-                  <property name="column-span">2</property>
-                </layout>
+              <object class="AdwClamp">
+                <child>
+                  <object class="GtkGrid" id="shared_folders_grid">
+                    <property name="margin_start">12</property>
+                    <property name="margin_end">12</property>
+                    <property name="margin_top">12</property>
+                    <property name="margin_bottom">12</property>
+                    <property name="row_spacing">12</property>
+                    <property name="column_spacing">6</property>
+                    <child>
+                      <object class="GtkLabel" id="label13">
+                        <property name="xalign">0</property>
+                        <property name="label" translatable="yes">Share music, photos and videos over the network.</property>
+                        <property name="max-width-chars">36</property>
+                        <property name="wrap">True</property>
+                        <layout>
+                          <property name="column">0</property>
+                          <property name="row">0</property>
+                          <property name="column-span">2</property>
+                        </layout>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkLabel" id="label15">
+                        <property name="xalign">0</property>
+                        <property name="label" translatable="yes">Folders</property>
+                        <property name="mnemonic_widget">shared_folders_listbox</property>
+                        <layout>
+                          <property name="column">0</property>
+                          <property name="row">1</property>
+                          <property name="column-span">2</property>
+                        </layout>
+                        <style>
+                          <class name="heading"/>
+                        </style>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkListBox" id="shared_folders_listbox">
+                        <property name="selection-mode">none</property>
+                        <style>
+                          <class name="boxed-list" />
+                        </style>
+                        <layout>
+                          <property name="column">0</property>
+                          <property name="row">3</property>
+                          <property name="column-span">2</property>
+                        </layout>
+                      </object>
+                    </child>
+                  </object>
+                </child>
               </object>
             </child>
           </object>
