@@ -248,6 +248,7 @@ cc_sharing_networks_new_current_row (CcSharingNetworks *self)
   w = gtk_switch_new ();
   gtk_widget_set_valign (w, GTK_ALIGN_CENTER);
   adw_action_row_add_suffix (ADW_ACTION_ROW (row), w);
+  adw_action_row_set_activatable_widget (ADW_ACTION_ROW (row), w);
   g_signal_connect_object (G_OBJECT (w), "state-set",
                            G_CALLBACK (cc_sharing_networks_enable_network), self, G_CONNECT_SWAPPED);
   self->current_switch = w;
