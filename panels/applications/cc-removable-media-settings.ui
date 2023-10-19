@@ -78,18 +78,12 @@
         </object>
       </child>
       <child>
-        <object class="AdwActionRow" id="other_media_row">
+        <object class="CcListRow" id="other_media_row">
           <property name="title" translatable="yes">_Other Media</property>
           <property name="use_underline">True</property>
-          <child>
-            <object class="GtkButton" id="extra_options_button">
-              <property name="label" translatable="yes">_Configure Action…</property>
-              <property name="receives_default">True</property>
-              <property name="valign">center</property>
-              <property name="use_underline">True</property>
-              <signal name="clicked" handler="on_extra_options_button_clicked" object="CcRemovableMediaSettings" swapped="yes"/>
-            </object>
-          </child>
+          <property name="show-arrow">True</property>
+          <property name="subtitle" translatable="yes">Select how other media should be handled</property>
+          <signal name="activated" handler="on_extra_options_button_clicked" object="CcRemovableMediaSettings"/>
         </object>
       </child>
   </template>
@@ -101,7 +95,6 @@
       <widget name="music_player_chooser"/>
       <widget name="dcf_chooser"/>
       <widget name="software_chooser"/>
-      <widget name="extra_options_button"/>
     </widgets>
   </object>
 
@@ -135,15 +128,6 @@
             <property name="margin-end">18</property>
             <property name="spacing">10</property>
             <property name="orientation">vertical</property>
-            <child>
-              <object class="GtkLabel">
-                <property name="xalign">0</property>
-                <property name="label" translatable="yes">Select how other media should be handled</property>
-                <attributes>
-                  <attribute name="weight" value="bold"/>
-                </attributes>
-              </object>
-            </child>
             <child>
               <object class="GtkBox">
                 <property name="spacing">6</property>

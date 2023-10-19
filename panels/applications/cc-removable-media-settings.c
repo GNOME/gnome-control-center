@@ -56,7 +56,6 @@ struct _CcRemovableMediaSettings
 
   GtkAppChooserButton *audio_cdda_chooser;
   GtkAppChooserButton *dcf_chooser;
-  GtkButton           *extra_options_button;
   GtkAppChooserButton *music_player_chooser;
   GtkDialog           *other_type_dialog;
   GtkLabel            *other_action_label;
@@ -552,7 +551,6 @@ cc_removable_media_settings_class_init (CcRemovableMediaSettingsClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcRemovableMediaSettings, audio_cdda_chooser);
   gtk_widget_class_bind_template_child (widget_class, CcRemovableMediaSettings, autorun_never_switch);
   gtk_widget_class_bind_template_child (widget_class, CcRemovableMediaSettings, dcf_chooser);
-  gtk_widget_class_bind_template_child (widget_class, CcRemovableMediaSettings, extra_options_button);
   gtk_widget_class_bind_template_child (widget_class, CcRemovableMediaSettings, music_player_chooser);
   gtk_widget_class_bind_template_child (widget_class, CcRemovableMediaSettings, other_type_dialog);
   gtk_widget_class_bind_template_child (widget_class, CcRemovableMediaSettings, other_action_box);
