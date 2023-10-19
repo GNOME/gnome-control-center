@@ -20,6 +20,7 @@
 
 #pragma once
 
+#include <adwaita.h>
 #include <gtk/gtk.h>
 
 G_BEGIN_DECLS
@@ -40,7 +41,7 @@ typedef struct
 } CcXkbModifier;
 
 #define CC_TYPE_XKB_MODIFIER_DIALOG (cc_xkb_modifier_dialog_get_type())
-G_DECLARE_FINAL_TYPE (CcXkbModifierDialog, cc_xkb_modifier_dialog, CC, XKB_MODIFIER_DIALOG, GtkDialog)
+G_DECLARE_FINAL_TYPE (CcXkbModifierDialog, cc_xkb_modifier_dialog, CC, XKB_MODIFIER_DIALOG, AdwWindow)
 
 CcXkbModifierDialog *cc_xkb_modifier_dialog_new (GSettings *input_settings, const CcXkbModifier*);
 

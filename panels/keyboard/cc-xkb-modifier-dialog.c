@@ -25,7 +25,7 @@
 
 struct _CcXkbModifierDialog
 {
-  GtkDialog       parent_instance;
+  AdwWindow       parent_instance;
 
   GtkLabel       *description_label;
   GtkSwitch      *enabled_switch;
@@ -38,7 +38,7 @@ struct _CcXkbModifierDialog
   GSList         *radio_group;
 };
 
-G_DEFINE_TYPE (CcXkbModifierDialog, cc_xkb_modifier_dialog, GTK_TYPE_DIALOG)
+G_DEFINE_TYPE (CcXkbModifierDialog, cc_xkb_modifier_dialog, ADW_TYPE_WINDOW)
 
 static const gchar *custom_css =
 ".xkb-option-button {"
@@ -227,6 +227,8 @@ cc_xkb_modifier_dialog_class_init (CcXkbModifierDialogClass *klass)
 
   object_class->finalize = cc_xkb_modifier_dialog_finalize;
 
+  gtk_widget_class_add_binding_action (widget_class, GDK_KEY_Escape, 0, "window.close", NULL);
+
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/keyboard/cc-xkb-modifier-dialog.ui");
 
   gtk_widget_class_bind_template_child (widget_class, CcXkbModifierDialog, description_label);
@@ -301,9 +303,7 @@ cc_xkb_modifier_dialog_new (GSettings *input_settings,
 {
   CcXkbModifierDialog *self;
 
-  self = g_object_new (CC_TYPE_XKB_MODIFIER_DIALOG,
-                       "use-header-bar", TRUE,
-                       NULL);
+  self = g_object_new (CC_TYPE_XKB_MODIFIER_DIALOG, NULL);
   self->input_source_settings = g_object_ref (input_settings);
 
   self->modifier = modifier;
