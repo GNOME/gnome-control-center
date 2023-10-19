@@ -45,6 +45,7 @@
                             <property name="placeholder_text" translatable="yes">Search shortcuts</property>
                             <property name="hexpand">True</property>
                             <signal name="search-changed" handler="shortcut_search_entry_changed_cb" swapped="yes" />
+                            <signal name="stop-search" handler="shortcut_search_entry_stopped_cb" swapped="yes" />
                             <accessibility>
                               <property name="label" translatable="yes">Search Shortcuts</property>
                             </accessibility>
