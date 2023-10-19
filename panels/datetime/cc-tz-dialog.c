@@ -169,6 +169,18 @@ tz_dialog_search_changed_cb (CcTzDialog *self)
 }
 
 static void
+tz_dialog_search_stopped_cb (CcTzDialog *self)
+{
+  const char *search_text;
+  search_text = gtk_editable_get_text (GTK_EDITABLE (self->location_entry));
+
+  if (search_text && g_strcmp0 (search_text, "") != 0)
+    gtk_editable_set_text (GTK_EDITABLE (self->location_entry), "");
+  else
+    gtk_window_close (GTK_WINDOW (self));
+}
+
+static void
 tz_dialog_row_activated_cb (CcTzDialog *self,
                             guint       position)
 {
@@ -238,6 +250,7 @@ cc_tz_dialog_class_init (CcTzDialogClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcTzDialog, tz_view);
 
   gtk_widget_class_bind_template_callback (widget_class, tz_dialog_search_changed_cb);
+  gtk_widget_class_bind_template_callback (widget_class, tz_dialog_search_stopped_cb);
   gtk_widget_class_bind_template_callback (widget_class, tz_dialog_row_activated_cb);
 
   gtk_widget_class_add_binding_action (widget_class, GDK_KEY_Escape, 0, "window.close", NULL);
