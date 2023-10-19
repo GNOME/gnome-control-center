@@ -252,7 +252,7 @@ up_client_changed (CcPowerPanel *self)
     }
 
   if (n_batteries > 1)
-    adw_preferences_group_set_title (self->battery_section, _("Batteries"));
+    adw_preferences_group_set_title (self->battery_section, _("Battery Levels"));
   else if (on_ups)
     {
       /* Translators: UPS is an Uninterruptible Power Supply:
@@ -260,7 +260,7 @@ up_client_changed (CcPowerPanel *self)
       adw_preferences_group_set_title (self->battery_section, _("UPS"));
     }
   else
-    adw_preferences_group_set_title (self->battery_section, _("Battery"));
+    adw_preferences_group_set_title (self->battery_section, _("Battery Level"));
 
   if (!on_ups && n_batteries > 1)
     add_battery (self, composite, TRUE);

@@ -61,7 +61,6 @@
           <object class="AdwPreferencesPage">
             <child>
               <object class="AdwPreferencesGroup" id="battery_section">
-                <property name="title" translatable="yes">Battery</property>
                 <child>
                   <object class="GtkListBox" id="battery_listbox">
                     <property name="selection-mode">none</property>
@@ -78,7 +77,7 @@
             </child>
             <child>
               <object class="AdwPreferencesGroup" id="device_section">
-                <property name="title" translatable="yes">Devices</property>
+                <property name="title" translatable="yes">Connected Devices</property>
                 <child>
                   <object class="GtkListBox" id="device_listbox">
                     <property name="selection-mode">none</property>
@@ -97,7 +96,6 @@
               <object class="AdwPreferencesGroup" id="power_profile_section">
                 <property name="visible">False</property>
                 <property name="title" translatable="yes">Power Mode</property>
-                <property name="description" translatable="yes">Affects system performance and power usage.</property>
                 <child>
                   <object class="GtkListBox" id="power_profile_listbox">
                     <property name="selection-mode">none</property>
@@ -126,7 +124,7 @@
             </child>
             <child>
               <object class="AdwPreferencesGroup" id="power_saving_section">
-                <property name="title" translatable="yes">Power Saving Options</property>
+                <property name="title" translatable="yes">Power Saving</property>
                 <child>
                   <object class="AdwActionRow" id="als_row">
                     <property name="title" translatable="yes">Automatic Screen Brightness</property>
@@ -200,6 +198,7 @@
             </child>
             <child>
               <object class="AdwPreferencesGroup" id="general_section">
+                <property name="title" translatable="yes">General</property>
                 <child>
                   <object class="AdwComboRow" id="power_button_row">
                     <property name="visible">False</property>
