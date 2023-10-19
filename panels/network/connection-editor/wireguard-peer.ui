@@ -42,6 +42,9 @@
                     <property name="direction">left</property>
                     <property name="popover">peer_popover</property>
                     <property name="icon-name">emblem-system-symbolic</property>
+                    <accessibility>
+                      <property name="label" translatable="yes">Options</property>
+                    </accessibility>
                     <style>
                       <class name="flat" />
                     </style>
@@ -52,6 +55,9 @@
                     <property name="receives-default">1</property>
                     <property name="use-underline">1</property>
                     <property name="icon-name">edit-delete-symbolic</property>
+                    <accessibility>
+                      <property name="label" translatable="yes">Delete</property>
+                    </accessibility>
                     <style>
                       <class name="destructive-action"/>
                     </style>
@@ -87,6 +93,7 @@
                 <property name="halign">end</property>
                 <property name="label" translatable="yes">_Endpoint</property>
                 <property name="use-underline">1</property>
+                <property name="mnemonic-widget">entry_endpoint</property>
                 <layout>
                   <property name="column">0</property>
                   <property name="row">0</property>
@@ -109,6 +116,7 @@
                 <property name="halign">end</property>
                 <property name="label" translatable="yes">_Public key</property>
                 <property name="use-underline">1</property>
+                <property name="mnemonic-widget">entry_public_key</property>
                 <layout>
                   <property name="column">0</property>
                   <property name="row">1</property>
@@ -134,6 +142,7 @@
                 <property name="halign">end</property>
                 <property name="label" translatable="yes">_Pre-shared key</property>
                 <property name="use-underline">1</property>
+                <property name="mnemonic-widget">entry_psk</property>
                 <layout>
                   <property name="column">0</property>
                   <property name="row">2</property>
@@ -161,6 +170,7 @@
                 <property name="halign">end</property>
                 <property name="label" translatable="yes">Allowed _IP addresses</property>
                 <property name="use-underline">1</property>
+                <property name="mnemonic-widget">entry_allowed_ips</property>
                 <layout>
                   <property name="column">0</property>
                   <property name="row">3</property>
@@ -183,6 +193,7 @@
                 <property name="halign">end</property>
                 <property name="label" translatable="yes">_Persistent keepalive</property>
                 <property name="use-underline">1</property>
+                <property name="mnemonic-widget">spin_persistent_keepalive</property>
                 <layout>
                   <property name="column">0</property>
                   <property name="row">4</property>
