@@ -158,6 +158,13 @@ cc_default_apps_row_set_property (GObject      *object,
 }
 
 static void
+idle_connect_notify_selected_item (CcDefaultAppsRow *self)
+{
+  g_signal_connect (self, "notify::selected-item",
+                    G_CALLBACK (notify_selected_item_cb), NULL);
+}
+
+static void
 cc_default_apps_row_constructed (GObject *object)
 {
   CcDefaultAppsRow *self;
@@ -187,9 +194,8 @@ cc_default_apps_row_constructed (GObject *object)
 
   adw_combo_row_set_model (ADW_COMBO_ROW (self), G_LIST_MODEL (self->model));
 
-  g_signal_connect (self,
-                    "notify::selected-item",
-                    G_CALLBACK (notify_selected_item_cb), NULL);
+  /* Prevent unsolicited "notify::selected-item" firing. Fixes #2626 #2683 */
+  g_idle_add_once ((GSourceOnceFunc) idle_connect_notify_selected_item, self);
 
   name_expr = gtk_cclosure_expression_new (G_TYPE_STRING, NULL,
                                            0, NULL,
