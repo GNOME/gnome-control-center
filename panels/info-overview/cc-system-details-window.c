@@ -765,7 +765,7 @@ on_copy_button_clicked_cb (GtkWidget              *widget,
 
   g_string_append_printf (result_str, "%s\n\n", date_string);
 
-  g_string_append (result_str, "## Hardware Information:\n");
+  g_string_append (result_str, _("## Hardware Information:\n"));
 
   g_string_append (result_str, "- ");
   system_details_window_title_print_padding (_("**Hardware Model:**"), result_str, 0);
@@ -810,7 +810,7 @@ on_copy_button_clicked_cb (GtkWidget              *widget,
 
   g_string_append (result_str, "\n");
 
-  g_string_append (result_str, "## Software Information:\n");
+  g_string_append (result_str, _("## Software Information:\n"));
   
   g_string_append (result_str, "- ");
   system_details_window_title_print_padding (_("**Firmware Version:**"), result_str, 0);
