@@ -27,4 +27,6 @@ G_BEGIN_DECLS
 #define CC_TYPE_DEFAULT_APPS_ROW (cc_default_apps_row_get_type ())
 G_DECLARE_FINAL_TYPE (CcDefaultAppsRow, cc_default_apps_row, CC, DEFAULT_APPS_ROW, AdwComboRow)
 
+void    cc_default_apps_row_update_default_app  (CcDefaultAppsRow *self);
+
 G_END_DECLS

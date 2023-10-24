@@ -41,74 +41,6 @@ enum {
 
 static GParamSpec *properties [N_PROPS];
 
-static void
-notify_selected_item_cb (CcDefaultAppsRow *self)
-{
-  g_autoptr(GAppInfo) info = NULL;
-  g_autoptr(GError) error = NULL;
-  int i;
-
-  info = G_APP_INFO (adw_combo_row_get_selected_item (ADW_COMBO_ROW (self)));
-
-  if (!info)
-    return;
-
-  if (g_app_info_set_as_default_for_type (info, self->content_type, &error) == FALSE)
-    {
-      g_warning ("Failed to set '%s' as the default app for '%s': %s",
-                 g_app_info_get_name (info), self->content_type, error->message);
-    }
-  else
-    {
-      g_debug ("Set '%s' as the default handler for '%s'",
-               g_app_info_get_name (info), self->content_type);
-    }
-
-  if (self->filters)
-    {
-      g_auto(GStrv) entries = NULL;
-      const char *const *mime_types;
-      g_autoptr(GPtrArray) patterns = NULL;
-
-      entries = g_strsplit (self->filters, ";", -1);
-      patterns = g_ptr_array_new_with_free_func ((GDestroyNotify) g_pattern_spec_free);
-      for (i = 0; entries[i] != NULL; i++)
-        {
-          GPatternSpec *pattern = g_pattern_spec_new (entries[i]);
-          g_ptr_array_add (patterns, pattern);
-        }
-
-      mime_types = g_app_info_get_supported_types (info);
-      for (i = 0; mime_types && mime_types[i]; i++)
-        {
-          int j;
-          gboolean matched = FALSE;
-          g_autoptr(GError) local_error = NULL;
-
-          for (j = 0; j < patterns->len; j++)
-            {
-              GPatternSpec *pattern = g_ptr_array_index (patterns, j);
-              if (g_pattern_spec_match_string (pattern, mime_types[i]))
-                matched = TRUE;
-            }
-          if (!matched)
-            continue;
-
-          if (g_app_info_set_as_default_for_type (info, mime_types[i], &local_error) == FALSE)
-            {
-              g_warning ("Failed to set '%s' as the default app for secondary "
-                         "content type '%s': %s",
-                         g_app_info_get_name (info), mime_types[i], local_error->message);
-            }
-          else
-            {
-              g_debug ("Set '%s' as the default handler for '%s'",
-              g_app_info_get_name (info), mime_types[i]);
-            }
-        }
-    }
-}
-
 static char *
 get_app_display_name (GAppInfo *info)
 {
@@ -187,10 +119,6 @@ cc_default_apps_row_constructed (GObject *object)
 
   adw_combo_row_set_model (ADW_COMBO_ROW (self), G_LIST_MODEL (self->model));
 
-  g_signal_connect (self,
-                    "notify::selected-item",
-                    G_CALLBACK (notify_selected_item_cb), NULL);
-
   name_expr = gtk_cclosure_expression_new (G_TYPE_STRING, NULL,
                                            0, NULL,
                                            G_CALLBACK (get_app_display_name),
@@ -223,4 +151,72 @@ static void
 cc_default_apps_row_init (CcDefaultAppsRow *self)
 {
 
+}
+
+void
+cc_default_apps_row_update_default_app (CcDefaultAppsRow *self)
+{
+  g_autoptr(GAppInfo) info = NULL;
+  g_autoptr(GError) error = NULL;
+  int i;
+
+  info = G_APP_INFO (adw_combo_row_get_selected_item (ADW_COMBO_ROW (self)));
+
+  if (!info)
+    return;
+
+  if (g_app_info_set_as_default_for_type (info, self->content_type, &error) == FALSE)
+    {
+      g_warning ("Failed to set '%s' as the default app for '%s': %s",
+                 g_app_info_get_name (info), self->content_type, error->message);
+    }
+  else
+    {
+      g_debug ("Set '%s' as the default handler for '%s'",
+               g_app_info_get_name (info), self->content_type);
+    }
+
+  if (self->filters)
+    {
+      g_auto(GStrv) entries = NULL;
+      const char *const *mime_types;
+      g_autoptr(GPtrArray) patterns = NULL;
+
+      entries = g_strsplit (self->filters, ";", -1);
+      patterns = g_ptr_array_new_with_free_func ((GDestroyNotify) g_pattern_spec_free);
+      for (i = 0; entries[i] != NULL; i++)
+        {
+          GPatternSpec *pattern = g_pattern_spec_new (entries[i]);
+          g_ptr_array_add (patterns, pattern);
+        }
+
+      mime_types = g_app_info_get_supported_types (info);
+      for (i = 0; mime_types && mime_types[i]; i++)
+        {
+          int j;
+          gboolean matched = FALSE;
+          g_autoptr(GError) local_error = NULL;
+
+          for (j = 0; j < patterns->len; j++)
+            {
+              GPatternSpec *pattern = g_ptr_array_index (patterns, j);
+              if (g_pattern_spec_match_string (pattern, mime_types[i]))
+                matched = TRUE;
+            }
+          if (!matched)
+            continue;
+
+          if (g_app_info_set_as_default_for_type (info, mime_types[i], &local_error) == FALSE)
+            {
+              g_warning ("Failed to set '%s' as the default app for secondary "
+                         "content type '%s': %s",
+                         g_app_info_get_name (info), mime_types[i], local_error->message);
+            }
+          else
+            {
+              g_debug ("Set '%s' as the default handler for '%s'",
+              g_app_info_get_name (info), mime_types[i]);
+            }
+        }
+    }
 }

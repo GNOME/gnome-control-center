@@ -77,6 +77,12 @@ update_modem_apps_visibility (CcDefaultAppsPage *self)
 #endif
 
 static void
+on_row_selected_item_changed (CcDefaultAppsRow *row)
+{
+  cc_default_apps_row_update_default_app (row);
+}
+
+static void
 cc_default_apps_page_class_init (CcDefaultAppsPageClass *klass)
 {
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
@@ -90,6 +96,8 @@ cc_default_apps_page_class_init (CcDefaultAppsPageClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcDefaultAppsPage, photos_row);
   gtk_widget_class_bind_template_child (widget_class, CcDefaultAppsPage, calls_row);
   gtk_widget_class_bind_template_child (widget_class, CcDefaultAppsPage, sms_row);
+
+  gtk_widget_class_bind_template_callback (widget_class, on_row_selected_item_changed);
 }
 
 static void
