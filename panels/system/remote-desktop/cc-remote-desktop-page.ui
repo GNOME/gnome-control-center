@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
-  <template class="CcRemoteDesktopPage" parent="AdwNavigationPage">
+  <template class="CcRemoteDesktopPage" parent="CcSystemPage">
     <property name="title" translatable="yes">Remote Desktop</property>
     <property name="tag">system-remote-desktop-page</property>
 
@@ -26,6 +26,7 @@
                           <object class="GtkSwitch" id="remote_desktop_switch">
                             <property name="active">False</property>
                             <property name="valign">center</property>
+                            <signal name="notify::active" handler="update_page_summary" object="CcRemoteDesktopPage" swapped="yes"/>
                           </object>
                         </child>
                       </object>

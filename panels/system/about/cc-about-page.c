@@ -30,7 +30,7 @@
 
 struct _CcAboutPage
 {
-  AdwNavigationPage parent_instance;
+  CcSystemPage parent_instance;
 
   CcListRow       *disk_row;
   CcListRow       *hardware_model_row;
@@ -43,7 +43,7 @@ struct _CcAboutPage
   GtkWindow       *system_details_window;
 };
 
-G_DEFINE_TYPE (CcAboutPage, cc_about_page, ADW_TYPE_NAVIGATION_PAGE)
+G_DEFINE_TYPE (CcAboutPage, cc_about_page, CC_TYPE_SYSTEM_PAGE)
 
 static void
 about_page_setup_overview (CcAboutPage *self)
@@ -76,6 +76,7 @@ about_page_setup_overview (CcAboutPage *self)
 
   os_name_text = get_os_name ();
   cc_list_row_set_secondary_label (self->os_name_row, os_name_text);
+  cc_system_page_set_summary (CC_SYSTEM_PAGE (self), os_name_text);
 
   self->system_details_window = GTK_WINDOW (cc_system_details_window_new ());
   parent = (GtkWindow *) gtk_widget_get_native (GTK_WIDGET (self));

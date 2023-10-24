@@ -20,10 +20,11 @@
 #pragma once
 
 #include <shell/cc-panel.h>
+#include "cc-system-page.h"
 
 G_BEGIN_DECLS
 
 #define CC_TYPE_ABOUT_PAGE (cc_about_page_get_type ())
-G_DECLARE_FINAL_TYPE (CcAboutPage, cc_about_page, CC, ABOUT_PAGE, AdwNavigationPage)
+G_DECLARE_FINAL_TYPE (CcAboutPage, cc_about_page, CC, ABOUT_PAGE, CcSystemPage)
 
 G_END_DECLS

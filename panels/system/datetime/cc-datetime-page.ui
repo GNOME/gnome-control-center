@@ -111,7 +111,7 @@
       </object>
     </property>
   </object>
-  <template class="CcDateTimePage" parent="AdwNavigationPage">
+  <template class="CcDateTimePage" parent="CcSystemPage">
     <property name="title" translatable="yes">Date &amp; Time</property>
     <property name="tag">system-date-time-page</property>
     <property name="child">
@@ -139,6 +139,7 @@
                     <child>
                       <object class="GtkSwitch" id="network_time_switch">
                         <property name="valign">center</property>
+                        <signal name="notify::active" handler="update_page_summary" object="CcDateTimePage" swapped="yes"/>
                       </object>
                     </child>
                   </object>

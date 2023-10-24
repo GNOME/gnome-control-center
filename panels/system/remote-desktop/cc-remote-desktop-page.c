@@ -55,7 +55,7 @@
 #define REMOTE_DESKTOP_SERVICE "gnome-remote-desktop.service"
 
 struct _CcRemoteDesktopPage {
-  AdwNavigationPage  parent_instance;
+  CcSystemPage  parent_instance;
 
   GtkWidget *remote_control_switch;
   GtkWidget *remote_desktop_toast_overlay;
@@ -78,7 +78,7 @@ struct _CcRemoteDesktopPage {
   GCancellable *cancellable;
 };
 
-G_DEFINE_TYPE (CcRemoteDesktopPage, cc_remote_desktop_page, ADW_TYPE_NAVIGATION_PAGE)
+G_DEFINE_TYPE (CcRemoteDesktopPage, cc_remote_desktop_page, CC_TYPE_SYSTEM_PAGE)
 
 static void
 remote_desktop_show_encryption_fingerprint (CcRemoteDesktopPage *self)
@@ -572,6 +572,16 @@ pw_generate (void)
 }
 
 static void
+update_page_summary (CcRemoteDesktopPage *self)
+{
+  gboolean enabled =
+    gtk_switch_get_active (GTK_SWITCH (self->remote_desktop_switch));
+
+  cc_system_page_set_summary (CC_SYSTEM_PAGE (self),
+                              enabled ? _("Enabled") : ("Disabled"));
+}
+
+static void
 cc_remote_desktop_page_setup_remote_desktop_dialog (CcRemoteDesktopPage *self)
 {
   const gchar *username = NULL;
@@ -589,6 +599,8 @@ cc_remote_desktop_page_setup_remote_desktop_dialog (CcRemoteDesktopPage *self)
   g_object_bind_property (self->remote_desktop_switch, "active",
                           self->remote_control_switch, "sensitive",
                           G_BINDING_SYNC_CREATE);
+
+  update_page_summary (self);
 
   hostname = get_hostname ();
   gtk_label_set_label (GTK_LABEL (self->remote_desktop_device_name_label),
@@ -718,6 +730,7 @@ cc_remote_desktop_page_class_init (CcRemoteDesktopPageClass * klass)
   gtk_widget_class_bind_template_callback (widget_class, on_device_address_copy_clicked);
   gtk_widget_class_bind_template_callback (widget_class, on_username_copy_clicked);
   gtk_widget_class_bind_template_callback (widget_class, on_password_copy_clicked);
+  gtk_widget_class_bind_template_callback (widget_class, update_page_summary);
   gtk_widget_class_bind_template_callback (widget_class, remote_desktop_show_encryption_fingerprint);
 }
 

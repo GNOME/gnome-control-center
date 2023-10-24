@@ -1,5 +1,7 @@
 /*
- * Copyright 2023 Gotam Gorabh <gautamy672@gmail.com>
+ * cc-system-page.h
+ *
+ * Copyright 2023 Red Hat Inc
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -15,16 +17,30 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  * SPDX-License-Identifier: GPL-3.0-or-later
+ *
+ * Author(s):
+ *  Felipe Borges <felipeborges@gnome.org>
  */
 
 #pragma once
 
-#include "cc-system-page.h"
+
+#include <adwaita.h>
 
 G_BEGIN_DECLS
 
-#define CC_TYPE_REMOTE_DESKTOP_PAGE (cc_remote_desktop_page_get_type ())
+#define CC_TYPE_SYSTEM_PAGE (cc_system_page_get_type ())
+G_DECLARE_DERIVABLE_TYPE (CcSystemPage, cc_system_page, CC, SYSTEM_PAGE, AdwNavigationPage)
 
-G_DECLARE_FINAL_TYPE (CcRemoteDesktopPage, cc_remote_desktop_page, CC, CC_TYPE_REMOTE_DESKTOP_PAGE, CcSystemPage)
+struct _CcSystemPageClass
+{
+  AdwNavigationPageClass parent;
+};
+
+const gchar *cc_system_page_get_summary (CcSystemPage *self);
+
+void         cc_system_page_set_summary (CcSystemPage *self,
+                                         const gchar  *summary);
 
 G_END_DECLS
+

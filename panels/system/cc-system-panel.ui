@@ -21,6 +21,7 @@
                         <child>
                           <object class="CcListRow">
                             <property name="title" translatable="yes">_Region &amp;amp; Language</property>
+                            <property name="subtitle" bind-source="region_page" bind-property="summary" bind-flags="sync-create|bidirectional"/>
                             <property name="icon-name">org.gnome.Settings-region-symbolic</property>
                             <property name="use-underline">True</property>
                             <property name="show-arrow">True</property>
@@ -32,6 +33,7 @@
                         <child>
                           <object class="CcListRow">
                             <property name="title" translatable="yes">_Date &amp;amp; Time</property>
+                            <property name="subtitle" bind-source="datetime_page" bind-property="summary" bind-flags="sync-create|bidirectional"/>
                             <property name="icon-name">org.gnome.Settings-time-symbolic</property>
                             <property name="use-underline">True</property>
                             <property name="show-arrow">True</property>
@@ -43,6 +45,7 @@
                         <child>
                           <object class="CcListRow">
                             <property name="title" translatable="yes">_Remote Desktop</property>
+                            <property name="subtitle" bind-source="remote_desktop_page" bind-property="summary" bind-flags="sync-create|bidirectional"/>
                             <property name="icon-name">preferences-desktop-display-symbolic</property>
                             <property name="use-underline">True</property>
                             <property name="show-arrow">True</property>
@@ -53,6 +56,7 @@
                         <child>
                           <object class="CcListRow">
                             <property name="title" translatable="yes">About</property>
+                            <property name="subtitle" bind-source="about_page" bind-property="summary" bind-flags="sync-create|bidirectional"/>
                             <property name="icon-name">info-symbolic</property>
                             <property name="use-underline">True</property>
                             <property name="show-arrow">True</property>
@@ -72,16 +76,16 @@
         </child>
 
         <child>
-          <object class="CcRegionPage"/>
+          <object class="CcRegionPage" id="region_page"/>
         </child>
         <child>
-          <object class="CcDateTimePage"/>
+          <object class="CcDateTimePage" id="datetime_page"/>
         </child>
         <child>
-          <object class="CcRemoteDesktopPage"/>
+          <object class="CcRemoteDesktopPage" id="remote_desktop_page"/>
         </child>
         <child>
-          <object class="CcAboutPage"/>
+          <object class="CcAboutPage" id="about_page"/>
         </child>
 
       </object>
