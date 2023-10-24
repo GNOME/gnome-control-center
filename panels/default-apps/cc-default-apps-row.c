@@ -41,8 +41,8 @@ enum {
 
 static GParamSpec *properties [N_PROPS];
 
-static void
-notify_selected_item_cb (CcDefaultAppsRow *self)
+void
+cc_default_apps_row_update_default_app (CcDefaultAppsRow *self)
 {
   g_autoptr(GAppInfo) info = NULL;
   g_autoptr(GError) error = NULL;
@@ -186,10 +186,6 @@ cc_default_apps_row_constructed (GObject *object)
   }
 
   adw_combo_row_set_model (ADW_COMBO_ROW (self), G_LIST_MODEL (self->model));
-
-  g_signal_connect (self,
-                    "notify::selected-item",
-                    G_CALLBACK (notify_selected_item_cb), NULL);
 
   name_expr = gtk_cclosure_expression_new (G_TYPE_STRING, NULL,
                                            0, NULL,
