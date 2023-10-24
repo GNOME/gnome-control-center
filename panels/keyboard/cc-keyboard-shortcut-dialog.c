@@ -562,13 +562,16 @@ cc_keyboard_shortcut_dialog_class_init (CcKeyboardShortcutDialogClass *klass)
 static void
 cc_keyboard_shortcut_dialog_init (CcKeyboardShortcutDialog *self)
 {
+  GtkWindow *toplevel;
+
   gtk_widget_init_template (GTK_WIDGET (self));
   gtk_search_entry_set_key_capture_widget (self->search_entry, GTK_WIDGET (self));
   shortcut_dialog_visible_page_changed_cb (self);
 
   self->manager = cc_keyboard_manager_new ();
 
-  self->shortcut_editor = cc_keyboard_shortcut_editor_new (self->manager);
+  toplevel = GTK_WINDOW (gtk_widget_get_native (GTK_WIDGET (self)));
+  self->shortcut_editor = cc_keyboard_shortcut_editor_new (toplevel, self->manager);
   shortcut_dialog_visible_page_changed_cb (self);
 
   self->sections = g_list_store_new (G_TYPE_LIST_STORE);

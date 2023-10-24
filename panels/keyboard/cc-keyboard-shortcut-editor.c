@@ -26,7 +26,7 @@
 
 struct _CcKeyboardShortcutEditor
 {
-  GtkDialog           parent;
+  AdwWindow           parent;
 
   GtkButton          *add_button;
   GtkButton          *cancel_button;
@@ -35,7 +35,7 @@ struct _CcKeyboardShortcutEditor
   GtkGrid            *custom_grid;
   GtkShortcutLabel   *custom_shortcut_accel_label;
   GtkBox             *edit_box;
-  GtkHeaderBar       *headerbar;
+  AdwHeaderBar       *headerbar;
   GtkEntry           *name_entry;
   GtkLabel           *new_shortcut_conflict_label;
   GtkButton          *remove_button;
@@ -70,7 +70,7 @@ static void          command_entry_changed_cb                    (CcKeyboardShor
 static void          name_entry_changed_cb                       (CcKeyboardShortcutEditor *self);
 static void          set_button_clicked_cb                       (CcKeyboardShortcutEditor *self);
 
-G_DEFINE_TYPE (CcKeyboardShortcutEditor, cc_keyboard_shortcut_editor, GTK_TYPE_DIALOG)
+G_DEFINE_TYPE (CcKeyboardShortcutEditor, cc_keyboard_shortcut_editor, ADW_TYPE_WINDOW)
 
 enum
 {
@@ -193,7 +193,7 @@ cancel_editing (CcKeyboardShortcutEditor *self)
   cc_keyboard_shortcut_editor_set_item (self, NULL);
   clear_custom_entries (self);
 
-  gtk_widget_set_visible (GTK_WIDGET (self), FALSE);
+  gtk_window_close (GTK_WINDOW (self));
 }
 
 static gboolean
@@ -271,8 +271,9 @@ static void
 set_header_mode (CcKeyboardShortcutEditor *self,
                  HeaderMode                mode)
 {
-  gtk_header_bar_set_show_title_buttons (self->headerbar, mode == HEADER_MODE_CUSTOM_EDIT ||
-                                                          mode == HEADER_MODE_NONE);
+  gboolean show_end_title_buttons = mode == HEADER_MODE_CUSTOM_EDIT ||
+                                    mode == HEADER_MODE_NONE;
+  adw_header_bar_set_show_end_title_buttons (self->headerbar, show_end_title_buttons);
 
   gtk_widget_set_visible (GTK_WIDGET (self->add_button), mode == HEADER_MODE_ADD);
   gtk_widget_set_visible (GTK_WIDGET (self->cancel_button), mode != HEADER_MODE_NONE &&
@@ -280,25 +281,6 @@ set_header_mode (CcKeyboardShortcutEditor *self,
   gtk_widget_set_visible (GTK_WIDGET (self->replace_button), mode == HEADER_MODE_REPLACE);
   gtk_widget_set_visible (GTK_WIDGET (self->set_button), mode == HEADER_MODE_SET);
   gtk_widget_set_visible (GTK_WIDGET (self->remove_button), mode == HEADER_MODE_CUSTOM_EDIT);
-
-  /* By setting the default response, the action button gets the 'suggested-action' applied */
-  switch (mode)
-    {
-    case HEADER_MODE_SET:
-      gtk_dialog_set_default_response (GTK_DIALOG (self), GTK_RESPONSE_APPLY);
-      break;
-
-    case HEADER_MODE_REPLACE:
-      gtk_dialog_set_default_response (GTK_DIALOG (self), GTK_RESPONSE_ACCEPT);
-      break;
-
-    case HEADER_MODE_ADD:
-      gtk_dialog_set_default_response (GTK_DIALOG (self), GTK_RESPONSE_OK);
-      break;
-
-    default:
-      gtk_dialog_set_default_response (GTK_DIALOG (self), GTK_RESPONSE_NONE);
-    }
 }
 
 static void
@@ -440,7 +422,7 @@ add_button_clicked_cb (CcKeyboardShortcutEditor *self)
 
   cc_keyboard_manager_add_custom_shortcut (self->manager, item);
 
-  gtk_widget_set_visible (GTK_WIDGET (self), FALSE);
+  gtk_window_close (GTK_WINDOW (self));
 }
 
 static void
@@ -472,9 +454,8 @@ name_entry_changed_cb (CcKeyboardShortcutEditor *self)
 static void
 remove_button_clicked_cb (CcKeyboardShortcutEditor *self)
 {
-  gtk_widget_set_visible (GTK_WIDGET (self), FALSE);
-
   cc_keyboard_manager_remove_custom_shortcut (self->manager, self->item);
+  gtk_window_close (GTK_WINDOW (self));
 }
 
 static void
@@ -518,7 +499,7 @@ static void
 set_button_clicked_cb (CcKeyboardShortcutEditor *self)
 {
   update_shortcut (self);
-  gtk_widget_set_visible (GTK_WIDGET (self), FALSE);
+  gtk_window_close (GTK_WINDOW (self));
 }
 
 static void
@@ -737,28 +718,15 @@ on_key_pressed_cb (CcKeyboardShortcutEditor *self,
   return GDK_EVENT_STOP;
 }
 
-static void
-cc_keyboard_shortcut_editor_close (GtkDialog *dialog)
+static gboolean
+cc_keyboard_shortcut_editor_close_request (GtkWindow *window)
 {
-  CcKeyboardShortcutEditor *self = CC_KEYBOARD_SHORTCUT_EDITOR (dialog);
+  CcKeyboardShortcutEditor *self = CC_KEYBOARD_SHORTCUT_EDITOR (window);
 
-  if (self->mode == CC_SHORTCUT_EDITOR_EDIT)
+  if (self->mode == CC_SHORTCUT_EDITOR_EDIT && get_shortcut_editor_page (self) != PAGE_STANDARD)
     update_shortcut (self);
 
-  GTK_DIALOG_CLASS (cc_keyboard_shortcut_editor_parent_class)->close (dialog);
-}
-
-static void
-cc_keyboard_shortcut_editor_response (GtkDialog *dialog,
-                                      gint       response_id)
-{
-  CcKeyboardShortcutEditor *self = CC_KEYBOARD_SHORTCUT_EDITOR (dialog);
-
-  if (response_id == GTK_RESPONSE_DELETE_EVENT &&
-      self->mode == CC_SHORTCUT_EDITOR_EDIT)
-    {
-      update_shortcut (self);
-    }
+  return GTK_WINDOW_CLASS (cc_keyboard_shortcut_editor_parent_class)->close_request (window);
 }
 
 static gboolean
@@ -804,7 +772,7 @@ static void
 cc_keyboard_shortcut_editor_class_init (CcKeyboardShortcutEditorClass *klass)
 {
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
-  GtkDialogClass *dialog_class = GTK_DIALOG_CLASS (klass);
+  GtkWindowClass *window_class = GTK_WINDOW_CLASS (klass);
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
   object_class->finalize = cc_keyboard_shortcut_editor_finalize;
@@ -814,8 +782,7 @@ cc_keyboard_shortcut_editor_class_init (CcKeyboardShortcutEditorClass *klass)
   widget_class->show = cc_keyboard_shortcut_editor_show;
   widget_class->unrealize = cc_keyboard_shortcut_editor_unrealize;
 
-  dialog_class->close = cc_keyboard_shortcut_editor_close;
-  dialog_class->response = cc_keyboard_shortcut_editor_response;
+  window_class->close_request = cc_keyboard_shortcut_editor_close_request;
 
   /**
    * CcKeyboardShortcutEditor:keyboard-item:
@@ -898,11 +865,12 @@ cc_keyboard_shortcut_editor_init (CcKeyboardShortcutEditor *self)
  * Returns: (transfer full): a newly created #CcKeyboardShortcutEditor.
  */
 GtkWidget*
-cc_keyboard_shortcut_editor_new (CcKeyboardManager *manager)
+cc_keyboard_shortcut_editor_new (GtkWindow         *parent_window,
+                                 CcKeyboardManager *manager)
 {
   return g_object_new (CC_TYPE_KEYBOARD_SHORTCUT_EDITOR,
+                       "transient-for", parent_window,
                        "manager", manager,
-                       "use-header-bar", 1,
                        NULL);
 }
 
