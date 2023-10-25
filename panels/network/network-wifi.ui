@@ -114,4 +114,25 @@
     </child>
 
   </object>
+
+  <object class="AdwWindow" id="saved_networks_dialog">
+    <property name="title" translatable="yes">Saved Wi-Fi Networks</property>
+    <property name="destroy-with-parent">True</property>
+    <property name="hide-on-close">True</property>
+    <property name="modal">True</property>
+    <property name="width_request">360</property>
+    <property name="height_request">294</property>
+    <property name="default_width">500</property>
+    <property name="default_height">600</property>
+    <child>
+      <object class="AdwToolbarView">
+        <child type="top">
+          <object class="AdwHeaderBar"/>
+        </child>
+        <child>
+          <object class="AdwToastOverlay" id="saved_networks_toast_overlay"/>
+        </child>
+      </object>
+    </child>
+  </object>
 </interface>
