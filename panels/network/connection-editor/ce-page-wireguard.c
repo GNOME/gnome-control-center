@@ -113,6 +113,11 @@ ui_to_setting (CEPageWireguard *self,
         // Transform UI values to NM_SETTING
         NMSettingSecretFlags secret_flags;
 
+        // Ensure that the spin boxes are updated
+        gtk_spin_button_update (self->spin_listen_port);
+        gtk_spin_button_update (self->spin_fwmark);
+        gtk_spin_button_update (self->spin_mtu);
+
         // Update peers
         GtkWidget *widget;
         GList *peers = NULL;
