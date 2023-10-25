@@ -7,7 +7,7 @@ test_units = [
 
 cflags = [
   '-DTEST_SRCDIR="@0@"'.format(meson.current_source_dir()),
-  '-DTEST_TOPSRCDIR="@0@"'.format(meson.source_root())
+  '-DTEST_TOPSRCDIR="@0@"'.format(meson.project_source_root())
 ]
 
 foreach unit: test_units

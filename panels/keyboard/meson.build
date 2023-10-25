@@ -84,7 +84,7 @@ endif
 if tecla_is_subproject
   keyboard_previewer_exec = get_option('prefix') / get_option('bindir') / 'tecla'
 else
-  keyboard_previewer_exec = tecla_dep.get_pkgconfig_variable('app')
+  keyboard_previewer_exec = tecla_dep.get_variable('app')
 endif
 
 keyboard_panel_lib = static_library(
