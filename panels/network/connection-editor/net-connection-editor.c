@@ -637,8 +637,7 @@ net_connection_editor_set_connection (NetConnectionEditor *self,
         is_vpn = g_str_equal (type, NM_SETTING_VPN_SETTING_NAME);
         is_wireguard = g_str_equal (type, NM_SETTING_WIREGUARD_SETTING_NAME);
 
-        if (!self->is_new_connection)
-                add_page (self, CE_PAGE (ce_page_details_new (self->connection, self->device, self->ap, self)));
+        add_page (self, CE_PAGE (ce_page_details_new (self->connection, self->device, self->ap, self, self->is_new_connection)));
 
         if (is_wifi)
                 add_page (self, CE_PAGE (ce_page_wifi_new (self->connection, self->client)));

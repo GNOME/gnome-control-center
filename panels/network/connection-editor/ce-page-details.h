@@ -34,6 +34,7 @@ G_DECLARE_FINAL_TYPE (CEPageDetails, ce_page_details, CE, PAGE_DETAILS, GtkGrid)
 CEPageDetails *ce_page_details_new (NMConnection        *connection,
                                     NMDevice            *device,
                                     NMAccessPoint       *ap,
-                                    NetConnectionEditor *editor);
+                                    NetConnectionEditor *editor,
+                                    gboolean            is_new_connection);
 
 G_END_DECLS
