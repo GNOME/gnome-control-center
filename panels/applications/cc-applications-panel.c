@@ -1443,7 +1443,7 @@ populate_applications (CcApplicationsPanel *self)
 #endif
 
       row = GTK_WIDGET (cc_applications_row_new (info));
-      gtk_list_box_insert (self->app_listbox, row, -1);
+      gtk_list_box_append (self->app_listbox, row);
 
       id = get_app_id (info);
       if (g_strcmp0 (id, self->current_app_id) == 0)
