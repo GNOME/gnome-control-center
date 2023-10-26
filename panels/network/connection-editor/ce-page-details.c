@@ -474,7 +474,7 @@ connect_details_page (CEPageDetails *self)
                 gtk_widget_set_visible (GTK_WIDGET (self->route_label), FALSE);
         }
 
-        if (!device_is_active && self->connection)
+        if (!device_is_active && self->connection && !self->is_new_connection)
                 update_last_used (self, self->connection);
         else {
                 gtk_widget_set_visible (GTK_WIDGET (self->last_used_heading_label), FALSE);
