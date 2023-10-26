@@ -1022,7 +1022,7 @@ static void
 add_unlock_tooltip (GtkWidget *widget)
 {
         gtk_widget_set_tooltip_text (widget,
-                                     _("This panel must be unlocked to change this setting"));
+                                     _("Unlock to Change This Setting"));
 }
 
 static void
