@@ -64,6 +64,9 @@ struct _CcApplicationsPanel
   GtkStack        *app_listbox_stack;
   GAppInfoMonitor *monitor;
   gulong           monitor_id;
+  GListModel      *app_model;
+  GListModel      *filter_model;
+  GtkFilter       *filter;
 #ifdef HAVE_MALCONTENT
   GCancellable    *cancellable;
 
@@ -771,8 +774,6 @@ add_static_permission_row (CcApplicationsPanel *self,
                       "info", subtitle,
                       NULL);
   gtk_list_box_append (self->builtin_list, row);
-  gtk_stack_set_visible_child (self->app_listbox_stack,
-                               GTK_WIDGET (self->app_listbox));
 
   return 1;
 }
@@ -1213,6 +1214,23 @@ on_storage_row_activated_cb (CcApplicationsPanel *self)
 }
 
 static void
+on_items_changed_cb (GListModel *list,
+                  guint       position,
+                  guint       removed,
+                  guint       added,
+                  gpointer    data)
+{
+  CcApplicationsPanel *self = data;
+
+  if (g_list_model_get_n_items (list) == 0)
+    gtk_stack_set_visible_child (self->app_listbox_stack,
+                                 self->empty_search_placeholder);
+  else
+    gtk_stack_set_visible_child (self->app_listbox_stack,
+                                 GTK_WIDGET (self->app_listbox));
+}
+
+static void
 update_total_size (CcApplicationsPanel *self)
 {
   g_autofree gchar *formatted_size = NULL;
@@ -1412,15 +1430,34 @@ update_panel (CcApplicationsPanel *self,
   self->current_portal_app_id = get_portal_app_id (info);
 }
 
+
+static gint
+compare_rows (gconstpointer  a,
+              gconstpointer  b,
+              gpointer       data)
+{
+  GAppInfo *item1 = (GAppInfo *) a;
+  GAppInfo *item2 = (GAppInfo *) b;
+
+  g_autofree gchar *key1 = NULL;
+  g_autofree gchar *key2 = NULL;
+
+  key1 = g_utf8_casefold (g_app_info_get_display_name (item1), -1);
+  key2 = g_utf8_casefold (g_app_info_get_display_name (item2), -1);
+
+  const gchar *sort_key1 = g_utf8_collate_key (key1, -1);
+  const gchar *sort_key2 = g_utf8_collate_key (key2, -1);
+
+  return strcmp (sort_key1, sort_key2);
+}
+
 static void
 populate_applications (CcApplicationsPanel *self)
 {
   g_autolist(GObject) infos = NULL;
   GList *l;
 
-  gtk_list_box_remove_all (self->app_listbox);
-  gtk_stack_set_visible_child (self->app_listbox_stack,
-                               self->empty_search_placeholder);
+  g_list_store_remove_all (G_LIST_STORE (self->app_model));
 #ifdef HAVE_MALCONTENT
   g_signal_handler_block (self->manager, self->app_filter_id);
 #endif
@@ -1447,9 +1484,7 @@ populate_applications (CcApplicationsPanel *self)
 #endif
 
       row = GTK_WIDGET (cc_applications_row_new (info));
-      gtk_list_box_append (self->app_listbox, row);
-      gtk_stack_set_visible_child (self->app_listbox_stack,
-                                   GTK_WIDGET (self->app_listbox));
+      g_list_store_insert_sorted (G_LIST_STORE (self->app_model), info, compare_rows, NULL);
 
       id = get_app_id (info);
       if (g_strcmp0 (id, self->current_app_id) == 0)
@@ -1460,26 +1495,15 @@ populate_applications (CcApplicationsPanel *self)
 #endif
 }
 
-static gint
-compare_rows (GtkListBoxRow *row1,
-              GtkListBoxRow *row2,
-              gpointer       data)
-{
-  const gchar *key1 = cc_applications_row_get_sort_key (CC_APPLICATIONS_ROW (row1));
-  const gchar *key2 = cc_applications_row_get_sort_key (CC_APPLICATIONS_ROW (row2));
-
-  return strcmp (key1, key2);
-}
-
 static gboolean
-filter_app_rows (GtkListBoxRow *row,
-                 gpointer       data)
+filter_app_rows (GObject   *item,
+                 gpointer   data)
 {
   CcApplicationsPanel *self = CC_APPLICATIONS_PANEL (data);
   g_autofree gchar *app_name = NULL;
   g_autofree gchar *search_text = NULL;
   const gchar *text;
-  GAppInfo *info;
+  GAppInfo *info = G_APP_INFO (item);
 
   text = gtk_editable_get_text (GTK_EDITABLE (self->app_search_entry));
 
@@ -1487,7 +1511,6 @@ filter_app_rows (GtkListBoxRow *row,
   if (g_utf8_strlen (text, -1) < 2)
     return TRUE;
 
-  info = cc_applications_row_get_info (CC_APPLICATIONS_ROW (row));
   app_name = cc_util_normalize_casefold_and_unaccent (g_app_info_get_name (info));
   search_text = cc_util_normalize_casefold_and_unaccent (text);
 
@@ -1605,7 +1628,7 @@ on_app_search_entry_activated_cb (CcApplicationsPanel *self)
 static void
 on_app_search_entry_search_changed_cb (CcApplicationsPanel *self)
 {
-  gtk_list_box_invalidate_filter (self->app_listbox);
+  gtk_filter_changed (self->filter, GTK_FILTER_CHANGE_DIFFERENT);
 }
 
 static void
@@ -1794,6 +1817,15 @@ cc_applications_panel_class_init (CcApplicationsPanelClass *klass)
   gtk_widget_class_bind_template_callback (widget_class, on_storage_row_activated_cb);
 }
 
+static GtkWidget *
+app_row_new (gpointer item,
+             gpointer user_data)
+{
+  GAppInfo *info = item;
+
+  return GTK_WIDGET (cc_applications_row_new (info));
+}
+
 static void
 cc_applications_panel_init (CcApplicationsPanel *self)
 {
@@ -1819,13 +1851,20 @@ cc_applications_panel_init (CcApplicationsPanel *self)
                            self,
                            G_CONNECT_SWAPPED);
 
-  gtk_list_box_set_sort_func (self->app_listbox,
-                              compare_rows,
-                              NULL, NULL);
+  self->filter = GTK_FILTER (gtk_custom_filter_new ((GtkCustomFilterFunc) filter_app_rows,
+                                                    self, NULL));
 
-  gtk_list_box_set_filter_func (self->app_listbox,
-                                filter_app_rows,
-                                self, NULL);
+  self->app_model = G_LIST_MODEL (g_list_store_new (G_TYPE_APP_INFO));
+  self->filter_model = G_LIST_MODEL (gtk_filter_list_model_new (self->app_model,
+                                                                GTK_FILTER (self->filter)));
+  g_signal_connect (self->filter_model, "items-changed",
+                    G_CALLBACK (on_items_changed_cb), self);
+
+  gtk_list_box_bind_model (self->app_listbox,
+                           self->filter_model,
+                           app_row_new,
+                           NULL,
+                           NULL);
 
   self->location_settings = g_settings_new ("org.gnome.system.location");
   self->privacy_settings = g_settings_new ("org.gnome.desktop.privacy");

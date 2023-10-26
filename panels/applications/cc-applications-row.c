@@ -29,7 +29,6 @@ struct _CcApplicationsRow
   AdwActionRow  parent;
 
   GAppInfo     *info;
-  gchar        *sortkey;
 };
 
 G_DEFINE_TYPE (CcApplicationsRow, cc_applications_row, ADW_TYPE_ACTION_ROW)
@@ -40,7 +39,6 @@ cc_applications_row_finalize (GObject *object)
   CcApplicationsRow *self = CC_APPLICATIONS_ROW (object);
 
   g_object_unref (self->info);
-  g_free (self->sortkey);
 
   G_OBJECT_CLASS (cc_applications_row_parent_class)->finalize (object);
 }
@@ -66,16 +64,12 @@ CcApplicationsRow *
 cc_applications_row_new (GAppInfo *info)
 {
   CcApplicationsRow *self;
-  g_autofree gchar *key = NULL;
   g_autoptr(GIcon) icon = NULL;
   GtkWidget *w;
 
   self = g_object_new (CC_TYPE_APPLICATIONS_ROW, NULL);
 
   self->info = g_object_ref (info);
-
-  key = g_utf8_casefold (g_app_info_get_display_name (info), -1);
-  self->sortkey = g_utf8_collate_key (key, -1);
 
   gtk_list_box_row_set_activatable (GTK_LIST_BOX_ROW (self), TRUE);
   adw_preferences_row_set_title (ADW_PREFERENCES_ROW (self),
@@ -98,10 +92,4 @@ GAppInfo *
 cc_applications_row_get_info (CcApplicationsRow *self)
 {
   return self->info;
-}
-
-const gchar *
-cc_applications_row_get_sort_key (CcApplicationsRow *self)
-{
-  return self->sortkey;
 }

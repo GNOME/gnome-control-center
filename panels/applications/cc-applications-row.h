@@ -32,6 +32,4 @@ CcApplicationsRow* cc_applications_row_new          (GAppInfo          *info);
 
 GAppInfo*          cc_applications_row_get_info     (CcApplicationsRow *row);
 
-const gchar*       cc_applications_row_get_sort_key (CcApplicationsRow *row);
-
 G_END_DECLS
