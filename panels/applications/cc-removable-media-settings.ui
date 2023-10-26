@@ -9,6 +9,7 @@
           <property name="title" translatable="yes">D_isable Autostart</property>
           <property name="subtitle" translatable="yes">Never prompt or start apps on media insertion</property>
           <property name="use_underline">True</property>
+          <property name="activatable_widget">autorun_never_switch</property>
           <child>
             <object class="GtkSwitch" id="autorun_never_switch">
               <property name="receives_default">False</property>
@@ -21,6 +22,7 @@
         <object class="AdwActionRow" id="cd_audio_row">
           <property name="title" translatable="yes">CD _audio</property>
           <property name="use_underline">True</property>
+          <property name="activatable_widget">audio_cdda_chooser</property>
           <child>
             <object class="GtkAppChooserButton" id="audio_cdda_chooser">
               <property name="valign">center</property>
@@ -33,6 +35,7 @@
         <object class="AdwActionRow" id="dvd_video_row">
           <property name="title" translatable="yes">_DVD video</property>
           <property name="use_underline">True</property>
+          <property name="activatable_widget">video_dvd_chooser</property>
           <child>
             <object class="GtkAppChooserButton" id="video_dvd_chooser">
               <property name="valign">center</property>
@@ -45,6 +48,7 @@
         <object class="AdwActionRow" id="music_player_row">
           <property name="title" translatable="yes">_Music player</property>
           <property name="use_underline">True</property>
+          <property name="activatable_widget">music_player_chooser</property>
           <child>
             <object class="GtkAppChooserButton" id="music_player_chooser">
               <property name="valign">center</property>
@@ -57,6 +61,7 @@
         <object class="AdwActionRow" id="photos_row">
           <property name="title" translatable="yes">_Photos</property>
           <property name="use_underline">True</property>
+          <property name="activatable_widget">dcf_chooser</property>
           <child>
             <object class="GtkAppChooserButton" id="dcf_chooser">
               <property name="valign">center</property>
@@ -69,6 +74,7 @@
         <object class="AdwActionRow" id="software_row">
           <property name="title" translatable="yes">_Software</property>
           <property name="use_underline">True</property>
+          <property name="activatable_widget">software_chooser</property>
           <child>
             <object class="GtkAppChooserButton" id="software_chooser">
               <property name="valign">center</property>
