@@ -289,6 +289,7 @@ get_all_providers (GError **error)
   goa_provider_get_all (get_all_providers_cb, &data);
 
   g_main_loop_run (data.mainloop);
+  g_main_loop_unref (data.mainloop);
 
   if (data.error)
     g_propagate_error (error, data.error);
