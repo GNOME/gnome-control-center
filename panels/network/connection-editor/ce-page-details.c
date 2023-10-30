@@ -252,8 +252,10 @@ update_restrict_data (CEPageDetails *self)
         /* Disable for VPN; NetworkManager does not implement that yet (see
          * bug https://bugzilla.gnome.org/show_bug.cgi?id=792618) */
         type = nm_setting_connection_get_connection_type (s_con);
-        if (g_str_equal (type, NM_SETTING_VPN_SETTING_NAME))
+        if (g_str_equal(type, NM_SETTING_VPN_SETTING_NAME)) {
+                gtk_widget_set_visible(GTK_WIDGET (self->restrict_data_check), FALSE);
                 return;
+        }
 
         metered = nm_setting_connection_get_metered (s_con);
 
