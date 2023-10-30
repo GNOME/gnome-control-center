@@ -699,10 +699,13 @@ on_client_remove_account_finish_cb (GoaAccount   *account,
 static void
 on_notification_closed_cb (CcOnlineAccountsPanel *self)
 {
-  goa_account_call_remove (goa_object_peek_account (self->removed_object),
-                           cc_panel_get_cancellable (CC_PANEL (self)),
-                           (GAsyncReadyCallback) on_client_remove_account_finish_cb,
-                           g_object_ref (self));
+  if (self->removed_object != NULL)
+    {
+      goa_account_call_remove (goa_object_peek_account (self->removed_object),
+                               cc_panel_get_cancellable (CC_PANEL (self)),
+                               (GAsyncReadyCallback) on_client_remove_account_finish_cb,
+                               g_object_ref (self));
+    }
 
   gtk_revealer_set_reveal_child (self->notification_revealer, FALSE);
 
