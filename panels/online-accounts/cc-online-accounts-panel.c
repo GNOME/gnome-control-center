@@ -412,7 +412,10 @@ list_providers (CcOnlineAccountsPanel *self)
   g_variant_iter_init (&iter, providers_variant);
 
   while ((provider = g_variant_iter_next_value (&iter)))
-    add_provider_row (self, provider);
+    {
+      add_provider_row (self, provider);
+      g_variant_unref (provider);
+    }
 }
 
 static void
