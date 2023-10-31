@@ -498,6 +498,8 @@ unexport_window_handle (CcOnlineAccountsPanel *self)
       gdk_wayland_toplevel_unexport_handle (GDK_TOPLEVEL (surface));
     }
 #endif
+
+  g_clear_pointer (&self->window_export_handle, g_free);
 }
 
 static void
