@@ -252,7 +252,8 @@ update_restrict_data (CEPageDetails *self)
         /* Disable for VPN; NetworkManager does not implement that yet (see
          * bug https://bugzilla.gnome.org/show_bug.cgi?id=792618) */
         type = nm_setting_connection_get_connection_type (s_con);
-        if (g_str_equal(type, NM_SETTING_VPN_SETTING_NAME)) {
+        if (g_str_equal (type, NM_SETTING_VPN_SETTING_NAME) ||
+            g_str_equal (type, NM_SETTING_WIREGUARD_SETTING_NAME)) {
                 gtk_widget_set_visible(GTK_WIDGET (self->restrict_data_check), FALSE);
                 return;
         }
@@ -484,7 +485,8 @@ connect_details_page (CEPageDetails *self)
         }
 
         /* Auto connect check */
-        if (g_str_equal (type, NM_SETTING_VPN_SETTING_NAME)) {
+        if (g_str_equal (type, NM_SETTING_VPN_SETTING_NAME) ||
+            g_str_equal(type, NM_SETTING_WIREGUARD_SETTING_NAME)) {
                 gtk_widget_set_visible (GTK_WIDGET (self->auto_connect_check), FALSE);
         } else {
                 g_object_bind_property (sc, "autoconnect",
