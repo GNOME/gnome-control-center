@@ -17,6 +17,7 @@
 
 #pragma once
 
+#include <adwaita.h>
 #include <gtk/gtk.h>
 
 #include "cc-input-source.h"
@@ -27,7 +28,7 @@
 G_BEGIN_DECLS
 
 #define CC_TYPE_INPUT_CHOOSER (cc_input_chooser_get_type ())
-G_DECLARE_FINAL_TYPE (CcInputChooser, cc_input_chooser, CC, INPUT_CHOOSER, GtkDialog)
+G_DECLARE_FINAL_TYPE (CcInputChooser, cc_input_chooser, CC, INPUT_CHOOSER, AdwWindow)
 
 CcInputChooser *cc_input_chooser_new              (gboolean       is_login,
                                                    GnomeXkbInfo  *xkb_info,
