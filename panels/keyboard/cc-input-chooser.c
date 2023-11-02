@@ -629,6 +629,8 @@ static void
 show_more (CcInputChooser *self)
 {
   gtk_widget_set_visible (GTK_WIDGET (self->filter_entry), TRUE);
+
+  gtk_search_entry_set_key_capture_widget (self->filter_entry, GTK_WIDGET (self));
   gtk_widget_grab_focus (GTK_WIDGET (self->filter_entry));
 
   self->showing_extra = TRUE;
@@ -703,8 +705,7 @@ on_input_sources_listbox_selected_rows_changed_cb (CcInputChooser *self)
 static void
 on_stop_search_cb (CcInputChooser *self)
 {
-  const char *search_text;
-  search_text = gtk_editable_get_text (GTK_EDITABLE (self->filter_entry));
+  const char *search_text = gtk_editable_get_text (GTK_EDITABLE (self->filter_entry));
 
   if (search_text && g_strcmp0 (search_text, "") != 0)
     gtk_editable_set_text (GTK_EDITABLE (self->filter_entry), "");
@@ -1116,8 +1117,6 @@ void
 cc_input_chooser_init (CcInputChooser *self)
 {
   gtk_widget_init_template (GTK_WIDGET (self));
-
-  gtk_search_entry_set_key_capture_widget (self->filter_entry, GTK_WIDGET (self));
 }
 
 CcInputChooser *
