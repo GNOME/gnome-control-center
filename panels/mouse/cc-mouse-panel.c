@@ -59,6 +59,7 @@ struct _CcMousePanel
   GtkScale          *touchpad_speed_scale;
   AdwActionRow      *touchpad_toggle_row;
   GtkSwitch         *touchpad_toggle_switch;
+  AdwSwitchRow      *touchpad_typing_row;
 
   GSettings         *mouse_settings;
   GSettings         *touchpad_settings;
@@ -329,6 +330,13 @@ setup_dialog (CcMousePanel *self)
                                 touchpad_enabled_set_mapping,
                                 NULL, NULL);
 
+  g_settings_bind_with_mapping (self->touchpad_settings, "send-events",
+                                self->touchpad_typing_row, "sensitive",
+                                G_SETTINGS_BIND_GET,
+                                touchpad_enabled_get_mapping,
+                                touchpad_enabled_set_mapping,
+                                NULL, NULL);
+
   g_settings_bind (self->touchpad_settings, "natural-scroll",
                    self->touchpad_scroll_direction_row, "use-default",
                    G_SETTINGS_BIND_INVERT_BOOLEAN |
@@ -353,6 +361,10 @@ setup_dialog (CcMousePanel *self)
                    self->touchpad_scroll_method_row, "use-default",
                    G_SETTINGS_BIND_INVERT_BOOLEAN |
                    G_SETTINGS_BIND_NO_SENSITIVITY);
+
+  g_settings_bind (self->touchpad_settings, "disable-while-typing",
+                   self->touchpad_typing_row, "active",
+                   G_SETTINGS_BIND_INVERT_BOOLEAN);
 
   setup_touchpad_options (self);
 
@@ -482,6 +494,7 @@ cc_mouse_panel_class_init (CcMousePanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcMousePanel, touchpad_speed_scale);
   gtk_widget_class_bind_template_child (widget_class, CcMousePanel, touchpad_toggle_row);
   gtk_widget_class_bind_template_child (widget_class, CcMousePanel, touchpad_toggle_switch);
+  gtk_widget_class_bind_template_child (widget_class, CcMousePanel, touchpad_typing_row);
 
   gtk_widget_class_bind_template_callback (widget_class, on_touchpad_scroll_method_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, test_button_clicked_cb);
