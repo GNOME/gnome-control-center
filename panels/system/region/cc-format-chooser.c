@@ -141,6 +141,18 @@ padded_label_new (const char *text)
 }
 
 static void
+on_stop_search (CcFormatChooser *self)
+{
+  const char *search_text;
+  search_text = gtk_editable_get_text (GTK_EDITABLE (self->region_filter_entry));
+
+  if (search_text && g_strcmp0 (search_text, "") != 0)
+    gtk_editable_set_text (GTK_EDITABLE (self->region_filter_entry), "");
+  else
+    gtk_window_close (GTK_WINDOW (self));
+}
+
+static void
 format_chooser_back_button_clicked_cb (CcFormatChooser *self)
 {
   g_assert (CC_IS_FORMAT_CHOOSER (self));
@@ -490,6 +502,7 @@ cc_format_chooser_class_init (CcFormatChooserClass *klass)
         gtk_widget_class_bind_template_callback (widget_class, format_chooser_leaflet_fold_changed_cb);
         gtk_widget_class_bind_template_callback (widget_class, filter_changed);
         gtk_widget_class_bind_template_callback (widget_class, row_activated);
+        gtk_widget_class_bind_template_callback (widget_class, on_stop_search);
 }
 
 void
