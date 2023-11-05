@@ -157,10 +157,13 @@
                     <child>
                       <object class="GtkButton" id="remote_desktop_verify_encryption">
                         <property name="sensitive">False</property>
-                        <property name="halign">end</property>
-                        <property name="margin-top">12</property>
+                        <property name="halign">center</property>
+                        <property name="margin-top">24</property>
                         <property name="label" translatable="yes">Verify Encryption</property>
                         <signal name="clicked" handler="remote_desktop_show_encryption_fingerprint" swapped="yes"/>
+                        <style>
+                          <class name="pill"/>
+                        </style>
                       </object>
                     </child>
                   </object>
