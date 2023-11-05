@@ -63,12 +63,10 @@ struct _CcPowerPanel
   GtkSwitch         *power_saver_low_battery_switch;
   GtkSizeGroup      *row_sizegroup;
   GtkComboBox       *suspend_on_battery_delay_combo;
-  GtkLabel          *suspend_on_battery_delay_label;
-  GtkLabel          *suspend_on_battery_label;
-  GtkSwitch         *suspend_on_battery_switch;
+  AdwSwitchRow      *suspend_on_battery_switch_row;
+  GtkWidget         *suspend_on_battery_group;
   GtkComboBox       *suspend_on_ac_delay_combo;
-  GtkLabel          *suspend_on_ac_label;
-  GtkSwitch         *suspend_on_ac_switch;
+  AdwSwitchRow      *suspend_on_ac_switch_row;
 
   GSettings     *gsd_settings;
   GSettings     *session_settings;
@@ -513,11 +511,8 @@ set_ac_battery_ui_mode (CcPowerPanel *self)
 
   if (!self->has_batteries)
     {
-      gtk_widget_set_visible (GTK_WIDGET (self->suspend_on_battery_switch), FALSE);
-      gtk_widget_set_visible (GTK_WIDGET (self->suspend_on_battery_label), FALSE);
-      gtk_widget_set_visible (GTK_WIDGET (self->suspend_on_battery_delay_label), FALSE);
-      gtk_widget_set_visible (GTK_WIDGET (self->suspend_on_battery_delay_combo), FALSE);
-      gtk_label_set_label (self->suspend_on_ac_label, _("When _Idle"));
+      gtk_widget_set_visible (GTK_WIDGET (self->suspend_on_battery_group), FALSE);
+      adw_preferences_row_set_title (ADW_PREFERENCES_ROW (self->suspend_on_ac_switch_row), _("When _Idle"));
     }
 }
 
@@ -950,7 +945,7 @@ setup_power_saving (CcPowerPanel *self)
       g_signal_connect_object (self->gsd_settings, "changed", G_CALLBACK (on_suspend_settings_changed), self, G_CONNECT_SWAPPED);
 
       g_settings_bind_with_mapping (self->gsd_settings, "sleep-inactive-battery-type",
-                                    self->suspend_on_battery_switch, "active",
+                                    self->suspend_on_battery_switch_row, "active",
                                     G_SETTINGS_BIND_DEFAULT,
                                     get_sleep_type, set_sleep_type, NULL, NULL);
 
@@ -959,11 +954,11 @@ setup_power_saving (CcPowerPanel *self)
       set_value_for_combo (self->suspend_on_battery_delay_combo, value);
       g_signal_connect_object (self->suspend_on_battery_delay_combo, "changed",
                                G_CALLBACK (combo_time_changed_cb), self, G_CONNECT_SWAPPED);
-      g_object_bind_property (self->suspend_on_battery_switch, "active", self->suspend_on_battery_delay_combo, "sensitive",
+      g_object_bind_property (self->suspend_on_battery_switch_row, "active", self->suspend_on_battery_delay_combo, "sensitive",
                               G_BINDING_DEFAULT | G_BINDING_SYNC_CREATE);
 
       g_settings_bind_with_mapping (self->gsd_settings, "sleep-inactive-ac-type",
-                                    self->suspend_on_ac_switch, "active",
+                                    self->suspend_on_ac_switch_row, "active",
                                     G_SETTINGS_BIND_DEFAULT,
                                     get_sleep_type, set_sleep_type, NULL, NULL);
 
@@ -972,7 +967,7 @@ setup_power_saving (CcPowerPanel *self)
       set_value_for_combo (self->suspend_on_ac_delay_combo, value);
       g_signal_connect_object (self->suspend_on_ac_delay_combo, "changed",
                                G_CALLBACK (combo_time_changed_cb), self, G_CONNECT_SWAPPED);
-      g_object_bind_property (self->suspend_on_ac_switch, "active", self->suspend_on_ac_delay_combo, "sensitive",
+      g_object_bind_property (self->suspend_on_ac_switch_row, "active", self->suspend_on_ac_delay_combo, "sensitive",
                               G_BINDING_DEFAULT | G_BINDING_SYNC_CREATE);
 
       set_ac_battery_ui_mode (self);
@@ -1477,12 +1472,10 @@ cc_power_panel_class_init (CcPowerPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, power_saver_low_battery_switch);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, row_sizegroup);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, suspend_on_battery_delay_combo);
-  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, suspend_on_battery_delay_label);
-  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, suspend_on_battery_label);
-  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, suspend_on_battery_switch);
+  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, suspend_on_battery_switch_row);
+  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, suspend_on_battery_group);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, suspend_on_ac_delay_combo);
-  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, suspend_on_ac_label);
-  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, suspend_on_ac_switch);
+  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, suspend_on_ac_switch_row);
 
   gtk_widget_class_bind_template_callback (widget_class, als_switch_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, automatic_suspend_label_mnemonic_activate_cb);
