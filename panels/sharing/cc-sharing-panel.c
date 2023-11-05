@@ -68,12 +68,11 @@ struct _CcSharingPanel
   GtkWidget *media_sharing_row;
   GtkWidget *media_sharing_switch;
   GtkWidget *personal_file_sharing_dialog;
-  GtkWidget *personal_file_sharing_grid;
+  GtkWidget *personal_file_sharing_vbox;
   GtkWidget *personal_file_sharing_headerbar;
   GtkWidget *personal_file_sharing_label;
-  GtkWidget *personal_file_sharing_password_entry;
-  GtkWidget *personal_file_sharing_password_label;
-  GtkWidget *personal_file_sharing_require_password_switch;
+  GtkWidget *personal_file_sharing_password_entry_row;
+  GtkWidget *personal_file_sharing_require_password_switch_row;
   GtkWidget *personal_file_sharing_row;
   GtkWidget *personal_file_sharing_switch;
   GtkWidget *remote_login_dialog;
@@ -141,12 +140,11 @@ cc_sharing_panel_class_init (CcSharingPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, media_sharing_headerbar);
   gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, media_sharing_row);
   gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, personal_file_sharing_dialog);
-  gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, personal_file_sharing_grid);
   gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, personal_file_sharing_headerbar);
   gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, personal_file_sharing_label);
-  gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, personal_file_sharing_password_entry);
-  gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, personal_file_sharing_password_label);
-  gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, personal_file_sharing_require_password_switch);
+  gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, personal_file_sharing_password_entry_row);
+  gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, personal_file_sharing_require_password_switch_row);
+  gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, personal_file_sharing_vbox);
   gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, personal_file_sharing_row);
   gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, remote_login_dialog);
   gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, remote_login_label);
@@ -235,28 +233,6 @@ cc_sharing_panel_bind_networks_to_label (CcSharingPanel *self,
                                G_BINDING_SYNC_CREATE,
                                (GBindingTransformFunc) cc_sharing_panel_networks_to_label_transform_func,
                                NULL, self, NULL);
-}
-
-static void
-cc_sharing_panel_bind_switch_to_widgets (GtkWidget *gtkswitch,
-                                         GtkWidget *first_widget,
-                                         ...)
-{
-  va_list w;
-  GtkWidget *widget;
-
-  va_start (w, first_widget);
-
-  g_object_bind_property (gtkswitch, "active", first_widget,
-                          "sensitive", G_BINDING_SYNC_CREATE);
-
-  while ((widget = va_arg (w, GtkWidget*)))
-    {
-      g_object_bind_property (gtkswitch, "active", widget,
-                              "sensitive", G_BINDING_SYNC_CREATE);
-    }
-
-  va_end (w);
 }
 
 static void
@@ -601,7 +577,7 @@ file_sharing_set_require_password (const GValue       *value,
 static void
 file_sharing_password_changed (CcSharingPanel *self)
 {
-  file_share_write_out_password (gtk_editable_get_text (GTK_EDITABLE (self->personal_file_sharing_password_entry)));
+  file_share_write_out_password (gtk_editable_get_text (GTK_EDITABLE (self->personal_file_sharing_password_entry_row)));
 }
 
 static void
@@ -610,29 +586,28 @@ cc_sharing_panel_setup_personal_file_sharing_dialog (CcSharingPanel *self)
   GSettings *settings;
   GtkWidget *networks, *w;
 
-  cc_sharing_panel_bind_switch_to_widgets (self->personal_file_sharing_require_password_switch,
-                                           self->personal_file_sharing_password_entry,
-                                           self->personal_file_sharing_password_label,
-                                           NULL);
+  g_object_bind_property (self->personal_file_sharing_require_password_switch_row, "active",
+                          self->personal_file_sharing_password_entry_row, "sensitive",
+                          G_BINDING_SYNC_CREATE);
 
   /* the password cannot be read, so just make sure the entry is not empty */
-  gtk_editable_set_text (GTK_EDITABLE (self->personal_file_sharing_password_entry),
+  gtk_editable_set_text (GTK_EDITABLE (self->personal_file_sharing_password_entry_row),
                          "password");
 
   settings = g_settings_new (FILE_SHARING_SCHEMA_ID);
   g_settings_bind_with_mapping (settings, "require-password",
-                                self->personal_file_sharing_require_password_switch,
+                                self->personal_file_sharing_require_password_switch_row,
                                 "active",
                                 G_SETTINGS_BIND_DEFAULT,
                                 file_sharing_get_require_password,
                                 file_sharing_set_require_password, NULL, NULL);
 
-  g_signal_connect_swapped (self->personal_file_sharing_password_entry,
+  g_signal_connect_swapped (self->personal_file_sharing_password_entry_row,
                             "notify::text", G_CALLBACK (file_sharing_password_changed),
                             self);
 
   networks = cc_sharing_networks_new (self->sharing_proxy, "gnome-user-share-webdav");
-  gtk_grid_attach (GTK_GRID (self->personal_file_sharing_grid), networks, 0, 3, 2, 1);
+  gtk_box_append (GTK_BOX (self->personal_file_sharing_vbox), networks);
 
   w = create_switch_with_bindings (GTK_SWITCH (g_object_get_data (G_OBJECT (networks), "switch")));
   gtk_accessible_update_property (GTK_ACCESSIBLE (w),
