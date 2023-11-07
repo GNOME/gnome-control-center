@@ -708,9 +708,26 @@ sharing_proxy_ready (GObject      *source,
 }
 
 static void
+cc_remote_desktop_page_dispose (GObject *object)
+{
+  CcRemoteDesktopPage *self = (CcRemoteDesktopPage *)object;
+
+  g_cancellable_cancel (self->cancellable);
+  g_clear_object (&self->cancellable);
+
+  g_clear_handle_id (&self->remote_desktop_store_credentials_id, g_source_remove);
+  self->remote_desktop_store_credentials_id = 0;
+
+  G_OBJECT_CLASS (cc_remote_desktop_page_parent_class)->dispose (object);
+}
+
+static void
 cc_remote_desktop_page_class_init (CcRemoteDesktopPageClass * klass)
 {
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
+  GObjectClass   *object_class = G_OBJECT_CLASS (klass);
+
+  object_class->dispose = cc_remote_desktop_page_dispose;
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/system/remote-desktop/cc-remote-desktop-page.ui");
 
@@ -741,6 +758,7 @@ cc_remote_desktop_page_init (CcRemoteDesktopPage *self)
 
   gtk_widget_init_template (GTK_WIDGET (self));
 
+  self->cancellable = g_cancellable_new ();
   gsd_sharing_proxy_new_for_bus (G_BUS_TYPE_SESSION,
                                  G_DBUS_PROXY_FLAGS_NONE,
                                  "org.gnome.SettingsDaemon.Sharing",
