@@ -233,8 +233,7 @@ get_connection_security_type (NMConnection *c)
   if (g_strcmp0 (key_mgmt, "none") == 0)
     return "WEP";
 
-  if (g_strcmp0 (key_mgmt, "wpa-none") == 0 ||
-      g_strcmp0 (key_mgmt, "wpa-psk") == 0)
+  if (g_strcmp0 (key_mgmt, "wpa-psk") == 0)
     return "WPA";
 
   return "nopass";
@@ -255,11 +254,7 @@ is_qr_code_supported (NMConnection *c)
 
   key_mgmt = nm_setting_wireless_security_get_key_mgmt (setting);
 
-  /* No IEEE 802.1x */
-  if (g_str_equal (key_mgmt, "none"))
-    return TRUE;
-
-  if (g_str_equal (key_mgmt, "wpa-none") ||
+  if (g_str_equal (key_mgmt, "none") ||
       g_str_equal (key_mgmt, "wpa-psk"))
     return TRUE;
 

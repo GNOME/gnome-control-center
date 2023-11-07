@@ -98,8 +98,7 @@ get_default_type_for_security (NMSettingWirelessSecurity *sec)
         }
 #endif
 
-        if (   !strcmp (key_mgmt, "wpa-none")
-            || !strcmp (key_mgmt, "wpa-psk")) {
+        if (   !strcmp (key_mgmt, "wpa-psk")) {
                 if (find_proto (sec, "rsn"))
                         return NMU_SEC_WPA2_PSK;
                 else if (find_proto (sec, "wpa"))
