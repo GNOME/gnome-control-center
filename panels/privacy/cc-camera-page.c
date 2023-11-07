@@ -323,7 +323,7 @@ on_perm_store_ready (GObject      *source_object,
                      gpointer      user_data)
 {
   CcCameraPage *self;
-  g_autoptr(GVariant) params = NULL;
+  GVariant *params;
   g_autoptr(GError) error = NULL;
   GDBusProxy *proxy;
 
