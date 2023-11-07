@@ -13,3 +13,23 @@
    */
   opacity: 0.5;
 }
+
+/* FIXME: This is a mimic of AdwStatusPage, which would show an unwanted scrollbar in this case
+* see: https://gitlab.gnome.org/GNOME/libadwaita/-/issues/697
+*/
+
+clamp.status-page {
+	margin: 36px 12px;
+}
+
+clamp.status-page .icon:not(:last-child) {
+	margin-bottom: 36px;
+}
+
+clamp.status-page .title:not(:last-child) {
+	margin-bottom: 12px;
+}
+
+clamp.status-page .pill {
+	margin-top: 36px;
+}
