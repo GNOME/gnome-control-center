@@ -843,3 +843,11 @@ cc_wifi_connection_list_get_list_box (CcWifiConnectionList *self)
 
   return self->listbox;
 }
+
+gboolean
+cc_wifi_connection_list_is_empty (CcWifiConnectionList *self)
+{
+  g_return_val_if_fail (CC_IS_WIFI_CONNECTION_LIST (self), TRUE);
+
+  return self->connections->len == 0;
+}

@@ -39,4 +39,6 @@ void                  cc_wifi_connection_list_thaw   (CcWifiConnectionList  *lis
 
 GtkListBox           *cc_wifi_connection_list_get_list_box (CcWifiConnectionList *self);
 
+gboolean              cc_wifi_connection_list_is_empty (CcWifiConnectionList *self);
+
 G_END_DECLS

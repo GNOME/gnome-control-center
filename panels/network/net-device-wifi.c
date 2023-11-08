@@ -351,6 +351,7 @@ request_scan (gpointer user_data)
 static void
 nm_device_wifi_refresh_ui (NetDeviceWifi *self)
 {
+        CcWifiConnectionList *saved_networks_list;
         g_autofree gchar *status = NULL;
 
         if (device_is_hotspot (self)) {
@@ -374,6 +375,11 @@ nm_device_wifi_refresh_ui (NetDeviceWifi *self)
         adw_window_title_set_subtitle (self->wifi_headerbar_title, status);
         /* update list of APs */
         show_wifi_list (self);
+
+        saved_networks_list = cc_wifi_connection_list_new (self->client, NM_DEVICE_WIFI (self->device), FALSE, FALSE, FALSE, TRUE);
+        gtk_widget_set_visible (GTK_WIDGET (self->saved_network_row), !cc_wifi_connection_list_is_empty (saved_networks_list));
+        g_object_ref_sink (saved_networks_list);
+        g_object_unref (saved_networks_list);
 }
 
 static void
