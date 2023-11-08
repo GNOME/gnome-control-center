@@ -1387,6 +1387,9 @@ on_permission_changed (CcUserPanel *self)
                 if (self->fingerprint_manager)
                         fingerprint_state = cc_fingerprint_manager_get_state (self->fingerprint_manager);
 
+                gtk_widget_set_sensitive (GTK_WIDGET (self->user_avatar), TRUE);
+                remove_unlock_tooltip (GTK_WIDGET (self->user_avatar));
+
                 gtk_widget_set_sensitive (GTK_WIDGET (self->user_avatar_edit_button), TRUE);
                 remove_unlock_tooltip (GTK_WIDGET (self->user_avatar_edit_button));
 
@@ -1404,6 +1407,9 @@ on_permission_changed (CcUserPanel *self)
                 remove_unlock_tooltip (GTK_WIDGET (self->last_login_row));
         }
         else {
+                gtk_widget_set_sensitive (GTK_WIDGET (self->user_avatar), FALSE);
+                add_unlock_tooltip (GTK_WIDGET (self->user_avatar));
+
                 gtk_widget_set_sensitive (GTK_WIDGET (self->user_avatar_edit_button), FALSE);
                 add_unlock_tooltip (GTK_WIDGET (self->user_avatar_edit_button));
 
@@ -1462,8 +1468,6 @@ setup_main_window (CcUserPanel *self)
                                  (GtkListBoxCreateWidgetFunc)create_user_row,
                                  self,
                                  NULL);
-
-        add_unlock_tooltip (GTK_WIDGET (self->user_avatar));
 
         self->permission = (GPermission *)polkit_permission_new_sync (USER_ACCOUNTS_PERMISSION, NULL, NULL, &error);
         if (self->permission != NULL) {
