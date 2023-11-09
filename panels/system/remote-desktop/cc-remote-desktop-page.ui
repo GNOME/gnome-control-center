@@ -19,7 +19,8 @@
 
                     <child>
                       <object class="AdwActionRow">
-                        <property name="title" translatable="yes">Remote Desktop</property>
+                        <property name="title" translatable="yes">Remote _Desktop</property>
+                        <property name="use-underline">True</property>
                         <property name="subtitle" translatable="yes">Enable or disable remote desktop connections to this computer.</property>
                         <property name="activatable_widget">remote_desktop_switch</property>
                         <child type="suffix">
@@ -34,7 +35,8 @@
 
                     <child>
                       <object class="AdwActionRow">
-                        <property name="title" translatable="yes">Remote Control</property>
+                        <property name="title" translatable="yes">Remote _Control</property>
+                        <property name="use-underline">True</property>
                         <property name="subtitle" translatable="yes">Allows remote connections to control the screen.</property>
                         <property name="activatable_widget">remote_control_switch</property>
                         <child type="suffix">
@@ -159,7 +161,8 @@
                         <property name="sensitive">False</property>
                         <property name="halign">center</property>
                         <property name="margin-top">24</property>
-                        <property name="label" translatable="yes">Verify Encryption</property>
+                        <property name="label" translatable="yes">_Verify Encryption</property>
+                        <property name="use-underline">True</property>
                         <signal name="clicked" handler="remote_desktop_show_encryption_fingerprint" swapped="yes"/>
                         <style>
                           <class name="pill"/>
