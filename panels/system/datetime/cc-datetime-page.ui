@@ -57,7 +57,8 @@
                     <!-- Year row -->
                     <child>
                       <object class="AdwSpinRow" id="year_spin_row">
-                        <property name="title" translatable="yes">Year</property>
+                        <property name="title" translatable="yes">_Year</property>
+                        <property name="use-underline">True</property>
                         <property name="valign">center</property>
                         <property name="width-chars">4</property>
                         <property name="numeric">True</property>
@@ -67,7 +68,8 @@
                     <!-- Month row -->
                     <child>
                       <object class="CcListRow" id="month_row">
-                        <property name="title" translatable="yes">Month</property>
+                        <property name="title" translatable="yes">_Month</property>
+                        <property name="use-underline">True</property>
                         <binding name="secondary-label">
                           <lookup name="string" type="GtkStringObject">
                             <lookup name="selected-item">month_model</lookup>
@@ -94,7 +96,8 @@
                     <!-- Day row -->
                     <child>
                       <object class="AdwSpinRow" id="day_spin_row">
-                        <property name="title" translatable="yes">Day</property>
+                        <property name="title" translatable="yes">_Day</property>
+                        <property name="use-underline">True</property>
                         <property name="valign">center</property>
                         <property name="width-chars">3</property>
                         <property name="numeric">True</property>
