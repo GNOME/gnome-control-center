@@ -33,36 +33,6 @@
 #include "cc-log.h"
 #include "cc-application.h"
 
-static char **
-get_current_desktops (void)
-{
-  const char *envvar;
-
-  envvar = g_getenv ("XDG_CURRENT_DESKTOP");
-
-  if (!envvar)
-    return g_new0 (char *, 0 + 1);
-
-  return g_strsplit (envvar, G_SEARCHPATH_SEPARATOR_S, 0);
-}
-
-static gboolean
-is_supported_desktop (void)
-{
-  g_auto(GStrv) desktops = NULL;
-  guint i;
-
-  desktops = get_current_desktops ();
-  for (i = 0; desktops[i] != NULL; i++)
-    {
-      /* This matches OnlyShowIn in gnome-control-center.desktop.in.in */
-      if (g_ascii_strcasecmp (desktops[i], "GNOME") == 0)
-        return TRUE;
-    }
-
-  return FALSE;
-}
-
 int
 main (gint    argc,
       gchar **argv)
@@ -75,12 +45,6 @@ main (gint    argc,
 
   setlocale (LC_ALL, "");
   cc_log_init ();
-
-  if (!is_supported_desktop ())
-    {
-      g_printerr ("Running gnome-control-center is only supported under GNOME and Unity, exiting\n");
-      return 1;
-    }
 
   application = cc_application_new ();
 
