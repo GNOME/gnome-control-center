@@ -74,6 +74,30 @@ cc_stream_row_init (CcStreamRow *self)
   gtk_widget_init_template (GTK_WIDGET (self));
 }
 
+static GIcon *
+get_app_info_icon_from_stream_name (const gchar *stream_name)
+{
+  g_autolist(GObject) infos = NULL;
+  GList *l;
+
+  infos = g_app_info_get_all ();
+  for (l = infos; l; l = l->next)
+    {
+      GAppInfo *info = l->data;
+
+      if (g_str_equal (g_app_info_get_display_name (info), stream_name))
+        {
+          GIcon *icon = g_app_info_get_icon (info);
+          if (icon)
+            g_object_ref (icon);
+
+          return icon;
+        }
+    }
+
+  return NULL;
+}
+
 CcStreamRow *
 cc_stream_row_new (GtkSizeGroup    *size_group,
                    GvcMixerStream  *stream,
@@ -98,7 +122,11 @@ cc_stream_row_new (GtkSizeGroup    *size_group,
   else if (gtk_icon_theme_has_icon (gtk_icon_theme_get_for_display (gdk_display_get_default ()), icon_name))
     gicon = g_themed_icon_new_with_default_fallbacks (icon_name);
   else
-    gicon = g_themed_icon_new_with_default_fallbacks ("application-x-executable");
+    {
+      gicon = get_app_info_icon_from_stream_name (stream_name);
+      if (!gicon)
+        gicon = g_themed_icon_new_with_default_fallbacks ("application-x-executable");
+    }
 
   gtk_image_set_from_gicon (self->icon_image, gicon);
 
