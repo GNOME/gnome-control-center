@@ -130,15 +130,15 @@ cc_power_profile_row_new (CcPowerProfile power_profile)
     {
       case CC_POWER_PROFILE_PERFORMANCE:
         text = C_("Power profile", "Performance");
-        subtext = _("High performance and power usage.");
+        subtext = _("High performance and power usage");
         break;
       case CC_POWER_PROFILE_BALANCED:
         text = C_("Power profile", "Balanced");
-        subtext = _("Standard performance and power usage.");
+        subtext = _("Standard performance and power usage");
         break;
       case CC_POWER_PROFILE_POWER_SAVER:
         text = C_("Power profile", "Power Saver");
-        subtext = _("Reduced performance and power usage.");
+        subtext = _("Reduced performance and power usage");
         break;
       default:
         g_assert_not_reached ();
