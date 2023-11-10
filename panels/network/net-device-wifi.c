@@ -835,15 +835,24 @@ really_forgotten (GObject              *source_object,
                   GAsyncResult         *res,
                   gpointer              user_data)
 {
-        g_autoptr(CcWifiConnectionList) list = user_data;
+        NetDeviceWifi *self = NET_DEVICE_WIFI (user_data);
+        g_autoptr(CcWifiConnectionList) list = NULL;
         g_autoptr(GError) error = NULL;
 
+        list = CC_WIFI_CONNECTION_LIST (g_object_get_data (G_OBJECT (self), "list"));
         cc_wifi_connection_list_thaw (list);
 
         if (!nm_remote_connection_delete_finish (NM_REMOTE_CONNECTION (source_object), res, &error))
                 g_warning ("failed to delete connection %s: %s",
                            nm_object_get_path (NM_OBJECT (source_object)),
                            error->message);
+
+        if (cc_wifi_connection_list_is_empty (list)) {
+            gtk_window_close (GTK_WINDOW (self->saved_networks_dialog));
+            gtk_widget_set_visible (GTK_WIDGET (self->saved_network_row), FALSE);
+        }
+
+        g_object_set_data (G_OBJECT (self), "list", NULL);
 }
 
 static void
@@ -861,7 +870,8 @@ really_forget (AdwToast *toast, CcWifiConnectionRow *row)
         connection = NM_REMOTE_CONNECTION (cc_wifi_connection_row_get_connection (row));
 
         cc_wifi_connection_list_freeze (list);
-        nm_remote_connection_delete_async (connection, self->cancellable, really_forgotten, g_object_ref (list));
+        g_object_set_data (G_OBJECT (self), "list", g_object_ref (list));
+        nm_remote_connection_delete_async (connection, self->cancellable, really_forgotten, self);
 }
 
 static void
