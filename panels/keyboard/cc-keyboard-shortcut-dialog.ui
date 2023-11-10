@@ -19,18 +19,7 @@
             <property name="child">
               <object class="AdwToolbarView">
                 <child type="top">
-                  <object class="AdwHeaderBar">
-
-                    <!-- Reset All… button -->
-                    <child>
-                      <object class="GtkButton" id="reset_all_button">
-                        <property name="label" translatable="yes">Reset All…</property>
-                        <property name="tooltip-text" translatable="yes">Reset all shortcuts to their default keybindings</property>
-                        <signal name="clicked" handler="reset_all_clicked_cb" swapped="yes" />
-                      </object>
-                    </child>
-
-                  </object> <!-- ./AdwHeaderBar main_header_bar -->
+                  <object class="AdwHeaderBar"/>
                 </child>
 
                 <!-- Search Entry -->
@@ -71,6 +60,21 @@
                                 <signal name="row-activated" handler="shortcut_section_row_activated_cb" swapped="yes"/>
                                 <style>
                                   <class name="boxed-list"/>
+                                </style>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="AdwPreferencesGroup">
+                            <child>
+                              <object class="GtkButton" id="reset_all_button">
+                                <property name="label" translatable="yes">Reset All…</property>
+                                <signal name="clicked" handler="reset_all_clicked_cb" swapped="yes" />
+                                <property name="halign">center</property>
+                                <style>
+                                  <class name="destructive-action"/>
+                                  <class name="pill"/>
                                 </style>
                               </object>
                             </child>
