@@ -143,6 +143,8 @@ create_widget_func (gpointer model_item,
       gtk_widget_add_css_class (button, "circular");
       gtk_widget_add_css_class (button, "remove-button");
 
+     gtk_widget_set_tooltip_text (GTK_WIDGET (button), _("Remove Background"));
+
       g_signal_connect (button,
                         "clicked",
                         G_CALLBACK (on_delete_background_clicked_cb),
