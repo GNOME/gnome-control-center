@@ -36,12 +36,9 @@
 #endif
 #include <glib/gi18n.h>
 
-#include <pwquality.h>
-
 #include <config.h>
 
 #include <unistd.h>
-#include <pwd.h>
 
 static GtkWidget *cc_sharing_panel_new_media_sharing_row (const char     *uri_or_path,
                                                           CcSharingPanel *self);
