@@ -109,10 +109,12 @@
             <child>
               <object class="AdwPreferencesGroup">
                 <property name="title" translatable="yes">Crosshairs</property>
-                <child type="header-suffix">
-                  <object class="GtkSwitch" id="crosshair_switch">
-                    <property name="valign">center</property>
-                    <property name="margin-end">14</property>
+
+                <child>
+                  <object class="AdwSwitchRow" id="crosshair_row">
+                    <property name="title" translatable="yes">_Crosshair Lines</property>
+                    <property name="subtitle" translatable="yes">Mark the cursor location in the magnifier region using lines</property>
+                    <property name="use-underline">True</property>
                   </object>
                 </child>
 
