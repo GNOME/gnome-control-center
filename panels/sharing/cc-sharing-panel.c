@@ -36,9 +36,6 @@
 #endif
 #include <glib/gi18n.h>
 
-#define GCR_API_SUBJECT_TO_CHANGE
-#include <gcr/gcr-base.h>
-
 #include <pwquality.h>
 
 #include <config.h>

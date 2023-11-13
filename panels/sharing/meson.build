@@ -66,7 +66,6 @@ panels_libs += static_library(
   include_directories: [ top_inc, common_inc ],
   dependencies: [
     common_deps,
-    gcr_dep,
     pwquality_dep,
   ],
   c_args: cflags
