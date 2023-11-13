@@ -41,6 +41,8 @@ struct _CcVolumeSlider
 
 G_DEFINE_TYPE (CcVolumeSlider, cc_volume_slider, GTK_TYPE_WIDGET)
 
+static void notify_is_muted_cb (CcVolumeSlider *self);
+
 static void
 update_volume_icon (CcVolumeSlider *self)
 {
@@ -137,7 +139,10 @@ update_ranges (CcVolumeSlider *self)
   gtk_adjustment_set_page_increment (self->volume_adjustment, vol_max_norm / 100.0);
 
   if (self->stream)
-    notify_volume_cb (self);
+    {
+      notify_volume_cb (self);
+      notify_is_muted_cb (self);
+    }
 }
 
 static void
