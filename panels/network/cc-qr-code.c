@@ -244,8 +244,17 @@ is_qr_code_supported (NMConnection *c)
 {
   NMSettingWirelessSecurity *setting;
   const char *key_mgmt;
+  NMSettingConnection *s_con;
+  guint64 timestamp;
 
   g_return_val_if_fail (c, TRUE);
+
+  s_con = nm_connection_get_setting_connection (c);
+  timestamp = nm_setting_connection_get_timestamp (s_con);
+
+  /* Check timestamp to determine if connection was successful in the past */
+  if (timestamp == 0)
+    return FALSE;
 
   setting = nm_connection_get_setting_wireless_security (c);
 
