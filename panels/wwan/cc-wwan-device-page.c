@@ -29,7 +29,7 @@
 #include <glib/gi18n.h>
 #include <libmm-glib.h>
 #define GCR_API_SUBJECT_TO_CHANGE
-#include <gcr/gcr-base.h>
+#include <gcr/gcr.h>
 
 #include "cc-list-row.h"
 #include "cc-wwan-data.h"

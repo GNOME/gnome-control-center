@@ -194,7 +194,7 @@ gudev_dep = dependency('gudev-1.0', version: '>= 232')
 x11_dep = dependency('x11', version: '>= 1.8')
 xi_dep = dependency('xi', version: '>= 1.2')
 epoxy_dep = dependency('epoxy')
-gcr_dep = dependency('gcr-base-3')
+gcr_dep = dependency('gcr-4', version: '>= 4.1.0')
 pwquality_dep = dependency('pwquality', version: '>= 1.2.2')
 
 m_dep = cc.find_library('m')

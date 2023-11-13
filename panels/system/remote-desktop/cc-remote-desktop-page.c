@@ -42,7 +42,7 @@
 #endif
 
 #define GCR_API_SUBJECT_TO_CHANGE
-#include <gcr/gcr-base.h>
+#include <gcr/gcr.h>
 
 #include "org.gnome.SettingsDaemon.Sharing.h"
 
