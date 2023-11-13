@@ -973,15 +973,10 @@ unset_cb (CcApplicationsPanel *self,
           GtkButton           *button)
 {
   const gchar *type;
-  GtkListBoxRow *selected;
-  GAppInfo *info;
-
-  selected = gtk_list_box_get_selected_row (self->app_listbox);
-  info = cc_applications_row_get_info (CC_APPLICATIONS_ROW (selected));
 
   type = (const gchar *)g_object_get_data (G_OBJECT (button), "type");
 
-  g_app_info_remove_supports_type (info, type, NULL);
+  g_app_info_remove_supports_type (self->current_app_info, type, NULL);
 }
 
 static void
@@ -1086,15 +1081,10 @@ app_info_recommended_for (GAppInfo    *info,
 static void
 handler_reset_cb (CcApplicationsPanel *self)
 {
-  GtkListBoxRow *selected;
-  GAppInfo *info;
   const gchar **types;
   gint i;
 
-  selected = gtk_list_box_get_selected_row (self->app_listbox);
-  info = cc_applications_row_get_info (CC_APPLICATIONS_ROW (selected));
-
-  types = g_app_info_get_supported_types (info);
+  types = g_app_info_get_supported_types (self->current_app_info);
   if (types == NULL || types[0] == NULL)
     return;
 
@@ -1102,7 +1092,7 @@ handler_reset_cb (CcApplicationsPanel *self)
   for (i = 0; types[i]; i++)
     {
       gchar *ctype = g_content_type_from_mime_type (types[i]);
-      g_app_info_add_supports_type (info, ctype, NULL);
+      g_app_info_add_supports_type (self->current_app_info, ctype, NULL);
     }
   g_signal_handler_unblock (self->monitor, self->monitor_id);
   g_signal_emit_by_name (self->monitor, "changed");
