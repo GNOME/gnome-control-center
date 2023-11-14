@@ -49,35 +49,58 @@ struct _CcWacomStylusPage
 
 G_DEFINE_TYPE (CcWacomStylusPage, cc_wacom_stylus_page, GTK_TYPE_BOX)
 
-/* GSettings stores pressurecurve as 4 values like the driver. We map slider
- * scale to these values given the array below. These settings were taken from
- * wacomcpl, where they've been around for years.
- */
-#define N_PRESSURE_CURVES 7
-static const gint32 PRESSURE_CURVES[N_PRESSURE_CURVES][4] = {
-		{	0,	75,	25,	100	},	/* soft */
-		{	0,	50,	50,	100	},
-		{	0,	25,	75,	100	},
-		{	0,	0,	100,	100	},	/* neutral */
-		{	25,	0,	100,	75	},
-		{	50,	0,	100,	50	},
-		{	75,	0,	100,	25	}	/* firm */
-};
+static const graphene_point_t P1MIN = GRAPHENE_POINT_INIT (-75, 75);
+static const graphene_point_t P1MAX = GRAPHENE_POINT_INIT (75, -75);
+static const graphene_point_t P2MIN = GRAPHENE_POINT_INIT (25, 175);
+static const graphene_point_t P2MAX = GRAPHENE_POINT_INIT (175, 25);
+
+static void
+map_pressurecurve (unsigned int val, graphene_point_t *p1, graphene_point_t *p2)
+{
+	g_return_if_fail (val >= 0 && val <= 100);
+
+	p1->x = P1MIN.x + ((P1MAX.x - P1MIN.x) * val/100.0);
+	p1->y = P1MIN.y + ((P1MAX.y - P1MIN.y) * val/100.0);
+	p2->x = P2MIN.x + ((P2MAX.x - P2MIN.x) * val/100.0);
+	p2->y = P2MIN.y + ((P2MAX.y - P2MIN.y) * val/100.0);
+
+	p1->x = (int)CLAMP(p1->x, 0, 100);
+	p1->y = (int)CLAMP(p1->y, 0, 100);
+	p2->x = (int)CLAMP(p2->x, 0, 100);
+	p2->y = (int)CLAMP(p2->y, 0, 100);
+}
 
 static void
 set_pressurecurve (GtkRange *range, GSettings *settings, const gchar *key)
 {
-	gint		slider_val = gtk_range_get_value (range);
-	GVariant	*values[4],
-			*array;
-	int		i;
+	gint			slider_val = gtk_range_get_value (range);
+	graphene_point_t	p1, p2;
+	GVariantBuilder		builder;
 
-	for (i = 0; i < G_N_ELEMENTS (values); i++)
-		values[i] = g_variant_new_int32 (PRESSURE_CURVES[slider_val][i]);
+	g_return_if_fail (slider_val >= 0 && slider_val <= 100);
 
-	array = g_variant_new_array (G_VARIANT_TYPE_INT32, values, G_N_ELEMENTS (values));
+	/* slider goes from 0 to 100, inclusive, and produces this sequence
+	 * of previously hardcoded values:
+	 *   0: {       0,      75,     25,     100     },      soft
+	 *      {       0,      50,     50,     100     },
+	 *      {       0,      25,     75,     100     },
+	 *  50: {       0,      0,      100,    100     },      neutral
+	 *      {       25,     0,      100,    75      },
+	 *      {       50,     0,      100,    50      },
+	 * 100: {       75,     0,      100,    25      }       firm
+	 * These settings were taken from wacomcpl, where they've been around for years.
+	 */
 
-	g_settings_set_value (settings, key, array);
+	map_pressurecurve (slider_val, &p1, &p2);
+
+	g_variant_builder_init (&builder, G_VARIANT_TYPE ("ai"));
+	g_variant_builder_add (&builder, "i", (int)p1.x);
+	g_variant_builder_add (&builder, "i", (int)p1.y);
+	g_variant_builder_add (&builder, "i", (int)p2.x);
+	g_variant_builder_add (&builder, "i", (int)p2.y);
+
+	g_settings_set_value (settings, key, g_variant_builder_end (&builder));
+
 }
 
 static void
@@ -95,10 +118,11 @@ on_eraser_pressure_value_changed (CcWacomStylusPage *page)
 static void
 set_feel_from_gsettings (GtkAdjustment *adjustment, GSettings *settings, const gchar *key)
 {
-	GVariant	*variant;
-	const gint32	*values;
-	gsize		nvalues;
-	int		i;
+	GVariant		*variant;
+	const gint32		*values;
+	gsize			 nvalues;
+	int			 i;
+	graphene_point_t	 p1, p2;
 
 	variant = g_settings_get_value (settings, key);
 	values = g_variant_get_fixed_array (variant, &nvalues, sizeof (gint32));
@@ -108,10 +132,41 @@ set_feel_from_gsettings (GtkAdjustment *adjustment, GSettings *settings, const g
 		return;
 	}
 
-	for (i = 0; i < N_PRESSURE_CURVES; i++) {
-		if (memcmp (PRESSURE_CURVES[i], values, sizeof (gint32) * 4) == 0) {
-			gtk_adjustment_set_value (adjustment, i);
+	p1 = GRAPHENE_POINT_INIT (values[0], values[1]);
+	p2 = GRAPHENE_POINT_INIT (values[2], values[3]);
+
+	/* Our functions in set_pressurecurve() are lossy thanks to CLAMP so
+	 * we calculate a (possibly wrong) slider value from our points, compare
+	 * what points that value would produce and if they match - hooray!
+	 */
+	for (i = 0; i < 4; i++) {
+		double val;
+
+		switch (i) {
+		case 0:
+			val = (p1.x - P1MIN.x) / (P1MAX.x - P1MIN.x);
 			break;
+		case 1:
+			val = (p1.y - P1MIN.y) / (P1MAX.y - P1MIN.y);
+			break;
+		case 2:
+			val = (p2.x - P2MIN.x) / (P2MAX.x - P2MIN.x);
+			break;
+		case 3:
+			val = (p2.y - P2MIN.y) / (P2MAX.y - P2MIN.y);
+			break;
+		}
+
+		if (val >= 0.0 && val <= 1.0) {
+			unsigned int slider_val;
+			graphene_point_t mapped_p1, mapped_p2;
+
+			slider_val = (int)(val * 100 + 0.5);
+			map_pressurecurve (slider_val, &mapped_p1, &mapped_p2);
+			if (graphene_point_equal(&p1, &mapped_p1) && graphene_point_equal(&p2, &mapped_p2)) {
+				gtk_adjustment_set_value (adjustment, slider_val);
+				break;
+			}
 		}
 	}
 }
