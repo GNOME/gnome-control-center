@@ -27,7 +27,8 @@
                 <property name="title" translatable="yes">Magnifier</property>
                 <child>
                   <object class="AdwSpinRow" id="magnify_factor_spin_row">
-                    <property name="title" translatable="yes">Magnification Factor</property>
+                    <property name="title" translatable="yes">_Magnification Factor</property>
+                    <property name="use-underline">True</property>
                     <property name="digits">2</property>
                     <property name="adjustment">
                       <object class="GtkAdjustment">
@@ -43,7 +44,7 @@
 
                 <child>
                   <object class="AdwComboRow" id="magnify_view_row">
-                    <property name="title" translatable="yes">_Magnifier View</property>
+                    <property name="title" translatable="yes">M_agnifier View</property>
                     <property name="use-underline">True</property>
                     <signal name="notify::selected" handler="ua_zoom_magnify_postion_row_changed_cb" swapped="yes" />
                     <property name="model">
@@ -68,7 +69,8 @@
                   <object class="AdwComboRow" id="zoom_screen_area_row">
                     <property name="sensitive" bind-source="magnify_outside_screen_row" bind-flags="sync-create"/>
                     <signal name="notify::selected" handler="ua_zoom_screen_area_row_changed_cb" swapped="yes"/>
-                    <property name="title" translatable="yes">Screen Area</property>
+                    <property name="title" translatable="yes">_Screen Area</property>
+                    <property name="use-underline">True</property>
                     <property name="model">
                       <object class="GtkStringList">
                         <items>
@@ -86,7 +88,8 @@
                 <child>
                   <object class="AdwComboRow" id="zoom_follow_behaviour_row">
                     <property name="sensitive" bind-source="magnify_outside_screen_row" bind-flags="sync-create"/>
-                    <property name="title" translatable="yes">Follow Behavior</property>
+                    <property name="title" translatable="yes">_Follow Behavior</property>
+                    <property name="use-underline">True</property>
                     <signal name="notify::selected" handler="ua_zoom_behaviour_row_changed_cb" swapped="yes" />
                     <property name="model">
                       <object class="GtkStringList">
@@ -122,7 +125,8 @@
 
                 <child>
                   <object class="AdwActionRow">
-                    <property name="title" translatable="yes">Thickness</property>
+                    <property name="title" translatable="yes">_Thickness</property>
+                    <property name="use-underline">True</property>
                     <child type="suffix">
                       <object class="GtkScale" id="crosshair_thickness_scale">
                         <marks>
@@ -159,7 +163,8 @@
                         <child>
                           <object class="GtkLabel">
                             <property name="xalign">0.0</property>
-                            <property name="label" translatable="yes">Length</property>
+                            <property name="label" translatable="yes">Len_gth</property>
+                            <property name="use-underline">True</property>
                           </object>
                         </child>
                         <child>
@@ -190,7 +195,9 @@
 
                 <child>
                   <object class="AdwActionRow">
-                    <property name="title" translatable="yes">Color</property>
+                    <property name="title" translatable="yes">Colo_r</property>
+                    <property name="use-underline">True</property>
+                    <property name="activatable_widget">crosshair_color_button</property>
                     <child>
                       <object class="GtkColorButton" id="crosshair_color_button">
                         <property name="valign">center</property>
@@ -217,7 +224,8 @@
 
                 <child>
                   <object class="AdwActionRow">
-                    <property name="title" translatable="yes">Brightness</property>
+                    <property name="title" translatable="yes">_Brightness</property>
+                    <property name="use-underline">True</property>
                     <child type="suffix">
                       <object class="GtkScale" id="brightness_scale">
                         <property name="width-request">240</property>
@@ -242,7 +250,8 @@
 
                 <child>
                   <object class="AdwActionRow">
-                    <property name="title" translatable="yes">Contrast</property>
+                    <property name="title" translatable="yes">Co_ntrast</property>
+                    <property name="use-underline">True</property>
                     <child type="suffix">
                       <object class="GtkScale" id="contrast_scale">
                         <marks>
@@ -266,7 +275,8 @@
 
                 <child>
                   <object class="AdwActionRow">
-                    <property name="title" translatable="yes">Color</property>
+                    <property name="title" translatable="yes">Co_lor</property>
+                    <property name="use-underline">True</property>
                     <child type="suffix">
                       <object class="GtkScale" id="grayscale_scale">
                         <marks>
