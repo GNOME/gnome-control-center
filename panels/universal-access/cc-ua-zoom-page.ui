@@ -122,6 +122,7 @@
                   <object class="AdwSwitchRow" id="crosshair_overlap_mouse_row">
                     <property name="title" translatable="yes">_Overlap Mouse Cursor</property>
                     <property name="use-underline">True</property>
+                    <property name="sensitive" bind-source="crosshair_row" bind-property="active" bind-flags="sync-create"/>
                   </object>
                 </child>
 
@@ -129,6 +130,7 @@
                   <object class="AdwActionRow">
                     <property name="title" translatable="yes">_Thickness</property>
                     <property name="use-underline">True</property>
+                    <property name="sensitive" bind-source="crosshair_row" bind-property="active" bind-flags="sync-create"/>
                     <child type="suffix">
                       <object class="GtkScale" id="crosshair_thickness_scale">
                         <marks>
@@ -154,6 +156,7 @@
                   <object class="AdwPreferencesRow">
                     <property name="activatable">False</property>
                     <property name="selectable">False</property>
+                    <property name="sensitive" bind-source="crosshair_row" bind-property="active" bind-flags="sync-create"/>
                     <child>
                       <object class="GtkBox">
                         <property name="margin-start">12</property>
@@ -200,6 +203,7 @@
                     <property name="title" translatable="yes">Colo_r</property>
                     <property name="use-underline">True</property>
                     <property name="activatable_widget">crosshair_color_button</property>
+                    <property name="sensitive" bind-source="crosshair_row" bind-property="active" bind-flags="sync-create"/>
                     <child>
                       <object class="GtkColorButton" id="crosshair_color_button">
                         <property name="valign">center</property>
