@@ -88,6 +88,7 @@ struct _CcApplicationsPanel
   GtkButton       *view_details_button;
 
   GDBusProxy      *perm_store;
+  GtkListBoxRow   *perm_store_pending_row;
   GSettings       *notification_settings;
   GSettings       *location_settings;
   GSettings       *privacy_settings;
@@ -1390,7 +1391,8 @@ update_panel (CcApplicationsPanel *self,
 
   if (self->perm_store == NULL)
     {
-      g_message ("No permissions store proxy yet, come back later");
+      /* Async permission store not initialized, row will be re-activated in the callback */
+      self->perm_store_pending_row = row;
       return;
     }
 
@@ -1549,6 +1551,11 @@ on_perm_store_ready (GObject      *source_object,
     }
 
   self->perm_store = proxy;
+
+  if (self->perm_store_pending_row)
+    g_signal_emit_by_name (self->perm_store_pending_row, "activate");
+
+  self->perm_store_pending_row = NULL;
 }
 
 static void
