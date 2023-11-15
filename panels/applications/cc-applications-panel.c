@@ -142,6 +142,8 @@ struct _CcApplicationsPanel
 static void select_app (CcApplicationsPanel *self,
                         const gchar         *app_id);
 
+static void update_handler_dialog (CcApplicationsPanel *self, GAppInfo *info);
+
 G_DEFINE_TYPE (CcApplicationsPanel, cc_applications_panel, CC_TYPE_PANEL)
 
 enum
@@ -1002,6 +1004,7 @@ unset_cb (CcApplicationsPanel *self,
   type = (const gchar *)g_object_get_data (G_OBJECT (button), "type");
 
   g_app_info_remove_supports_type (info, type, NULL);
+  update_handler_dialog (self, self->current_app_info);
 }
 
 static void
@@ -1126,6 +1129,7 @@ handler_reset_cb (CcApplicationsPanel *self)
     }
   g_signal_handler_unblock (self->monitor, self->monitor_id);
   g_signal_emit_by_name (self->monitor, "changed");
+  update_handler_dialog(self, self->current_app_info);
 }
 
 static void
