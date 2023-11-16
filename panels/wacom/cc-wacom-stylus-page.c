@@ -49,10 +49,10 @@ struct _CcWacomStylusPage
 
 G_DEFINE_TYPE (CcWacomStylusPage, cc_wacom_stylus_page, GTK_TYPE_BOX)
 
-static const graphene_point_t P1MIN = GRAPHENE_POINT_INIT (-75, 75);
-static const graphene_point_t P1MAX = GRAPHENE_POINT_INIT (75, -75);
-static const graphene_point_t P2MIN = GRAPHENE_POINT_INIT (25, 175);
-static const graphene_point_t P2MAX = GRAPHENE_POINT_INIT (175, 25);
+static const graphene_point_t P1MIN = GRAPHENE_POINT_INIT (-100, 100);
+static const graphene_point_t P1MAX = GRAPHENE_POINT_INIT (100, -100);
+static const graphene_point_t P2MIN = GRAPHENE_POINT_INIT (0, 200);
+static const graphene_point_t P2MAX = GRAPHENE_POINT_INIT (200, 0);
 
 static void
 map_pressurecurve (unsigned int val, graphene_point_t *p1, graphene_point_t *p2)
