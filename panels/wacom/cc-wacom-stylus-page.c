@@ -49,47 +49,37 @@ struct _CcWacomStylusPage
 
 G_DEFINE_TYPE (CcWacomStylusPage, cc_wacom_stylus_page, GTK_TYPE_BOX)
 
-static const graphene_point_t P1MIN = GRAPHENE_POINT_INIT (-100, 100);
-static const graphene_point_t P1MAX = GRAPHENE_POINT_INIT (100, -100);
-static const graphene_point_t P2MIN = GRAPHENE_POINT_INIT (0, 200);
-static const graphene_point_t P2MAX = GRAPHENE_POINT_INIT (200, 0);
-
 static void
-map_pressurecurve (unsigned int val, graphene_point_t *p1, graphene_point_t *p2)
+map_pressurecurve (double val, graphene_point_t *p1, graphene_point_t *p2)
 {
-	g_return_if_fail (val >= 0 && val <= 100);
+	g_return_if_fail (val >= 0.0 && val <= 100.0);
 
-	p1->x = P1MIN.x + ((P1MAX.x - P1MIN.x) * val/100.0);
-	p1->y = P1MIN.y + ((P1MAX.y - P1MIN.y) * val/100.0);
-	p2->x = P2MIN.x + ((P2MAX.x - P2MIN.x) * val/100.0);
-	p2->y = P2MIN.y + ((P2MAX.y - P2MIN.y) * val/100.0);
+	/* The second point's x/y axis is an inverse of the first point's y/x axis,
+	 * so that:
+	 *    0% maps to 0/100  0/100
+	 *   10% maps to 0/80  20/100
+	 *   50% maps to 0/0   100/100
+	 *   60% maps to 20/0  100/80
+	 *  100% maps to 100/0 100/0
+	 */
 
-	p1->x = (int)CLAMP(p1->x, 0, 100);
-	p1->y = (int)CLAMP(p1->y, 0, 100);
-	p2->x = (int)CLAMP(p2->x, 0, 100);
-	p2->y = (int)CLAMP(p2->y, 0, 100);
+	p1->x = -100 + val * 2;
+	p1->y = 100 - val * 2;
+	p1->x = CLAMP(p1->x, 0, 100);
+	p1->y = CLAMP(p1->y, 0, 100);
+
+	p2->x = 100 - p1->y;
+	p2->y = 100 - p1->x;
 }
 
 static void
 set_pressurecurve (GtkRange *range, GSettings *settings, const gchar *key)
 {
-	gint			slider_val = gtk_range_get_value (range);
+	gint			slider_val = gtk_range_get_value (range) / 2;
 	graphene_point_t	p1, p2;
 	GVariantBuilder		builder;
 
 	g_return_if_fail (slider_val >= 0 && slider_val <= 100);
-
-	/* slider goes from 0 to 100, inclusive, and produces this sequence
-	 * of previously hardcoded values:
-	 *   0: {       0,      75,     25,     100     },      soft
-	 *      {       0,      50,     50,     100     },
-	 *      {       0,      25,     75,     100     },
-	 *  50: {       0,      0,      100,    100     },      neutral
-	 *      {       25,     0,      100,    75      },
-	 *      {       50,     0,      100,    50      },
-	 * 100: {       75,     0,      100,    25      }       firm
-	 * These settings were taken from wacomcpl, where they've been around for years.
-	 */
 
 	map_pressurecurve (slider_val, &p1, &p2);
 
@@ -144,27 +134,25 @@ set_feel_from_gsettings (GtkAdjustment *adjustment, GSettings *settings, const g
 
 		switch (i) {
 		case 0:
-			val = (p1.x - P1MIN.x) / (P1MAX.x - P1MIN.x);
+			val = (p1.x + 100) / 2.0;
 			break;
 		case 1:
-			val = (p1.y - P1MIN.y) / (P1MAX.y - P1MIN.y);
+			val = (-p1.y + 100) / 2.0;
 			break;
 		case 2:
-			val = (p2.x - P2MIN.x) / (P2MAX.x - P2MIN.x);
+			val = p2.x / 2.0;
 			break;
 		case 3:
-			val = (p2.y - P2MIN.y) / (P2MAX.y - P2MIN.y);
+			val = (-p2.y + 200) / 2.0;
 			break;
 		}
 
-		if (val >= 0.0 && val <= 1.0) {
-			unsigned int slider_val;
+		if (val >= 0.0 && val <= 100.0) {
 			graphene_point_t mapped_p1, mapped_p2;
 
-			slider_val = (int)(val * 100 + 0.5);
-			map_pressurecurve (slider_val, &mapped_p1, &mapped_p2);
+			map_pressurecurve (val, &mapped_p1, &mapped_p2);
 			if (graphene_point_equal(&p1, &mapped_p1) && graphene_point_equal(&p2, &mapped_p2)) {
-				gtk_adjustment_set_value (adjustment, slider_val);
+				gtk_adjustment_set_value (adjustment, (int)(val * 2));
 				break;
 			}
 		}
