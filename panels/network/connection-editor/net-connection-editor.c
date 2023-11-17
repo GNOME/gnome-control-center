@@ -35,6 +35,7 @@
 #include "ce-page-ip6.h"
 #include "ce-page-security.h"
 #include "ce-page-ethernet.h"
+#include "ce-page-bluetooth.h"
 #include "ce-page-8021x-security.h"
 #include "ce-page-vpn.h"
 #include "ce-page-wireguard.h"
@@ -613,6 +614,7 @@ net_connection_editor_set_connection (NetConnectionEditor *self,
         gboolean is_wifi;
         gboolean is_vpn;
         gboolean is_wireguard;
+        gboolean is_bluetooth;
 
         self->is_new_connection = !nm_client_get_connection_by_uuid (self->client,
                                                                        nm_connection_get_uuid (connection));
@@ -636,6 +638,7 @@ net_connection_editor_set_connection (NetConnectionEditor *self,
         is_wifi = g_str_equal (type, NM_SETTING_WIRELESS_SETTING_NAME);
         is_vpn = g_str_equal (type, NM_SETTING_VPN_SETTING_NAME);
         is_wireguard = g_str_equal (type, NM_SETTING_WIREGUARD_SETTING_NAME);
+        is_bluetooth = g_str_equal (type, NM_SETTING_BLUETOOTH_SETTING_NAME);
 
         add_page (self, CE_PAGE (ce_page_details_new (self->connection, self->device, self->ap, self, self->is_new_connection)));
 
@@ -647,6 +650,8 @@ net_connection_editor_set_connection (NetConnectionEditor *self,
                 add_page (self, CE_PAGE (ce_page_vpn_new (self->connection)));
         else if (is_wireguard)
                 add_page (self, CE_PAGE (ce_page_wireguard_new (self->connection)));
+        else if (is_bluetooth)
+                add_page (self, CE_PAGE (ce_page_bluetooth_new (self->connection)));
         else {
                 /* Unsupported type */
                 net_connection_editor_do_fallback (self, type);

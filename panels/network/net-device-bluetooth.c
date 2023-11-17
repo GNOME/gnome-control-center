@@ -29,6 +29,8 @@
 
 #include "panel-common.h"
 
+#include "connection-editor/net-connection-editor.h"
+
 #include "net-device-bluetooth.h"
 
 struct _NetDeviceBluetooth
@@ -78,10 +80,6 @@ nm_device_bluetooth_refresh_ui (NetDeviceBluetooth *self)
                                 state != NM_DEVICE_STATE_UNAVAILABLE
                                 && state != NM_DEVICE_STATE_UNMANAGED);
         update_off_switch_from_device_state (self->device_off_switch, state, self);
-
-        /* set up the Options button */
-        path = g_find_program_in_path ("nm-connection-editor");
-        gtk_widget_set_visible (GTK_WIDGET (self->options_button), state != NM_DEVICE_STATE_UNMANAGED && path != NULL);
 }
 
 static void
@@ -122,19 +120,24 @@ device_off_switch_changed_cb (NetDeviceBluetooth *self)
 }
 
 static void
+editor_done (NetDeviceBluetooth *self)
+{
+        nm_device_bluetooth_refresh_ui (self);
+}
+
+static void
 options_button_clicked_cb (NetDeviceBluetooth *self)
 {
-        const gchar *uuid;
-        g_autofree gchar *cmdline = NULL;
-        g_autoptr(GError) error = NULL;
         NMConnection *connection;
+        NetConnectionEditor *editor;
 
         connection = net_device_get_find_connection (self->client, self->device);
-        uuid = nm_connection_get_uuid (connection);
-        cmdline = g_strdup_printf ("nm-connection-editor --edit %s", uuid);
-        g_debug ("Launching '%s'\n", cmdline);
-        if (!g_spawn_command_line_async (cmdline, &error))
-                g_warning ("Failed to launch nm-connection-editor: %s", error->message);
+
+        editor = net_connection_editor_new (connection, self->device, NULL, self->client);
+        gtk_window_set_transient_for (GTK_WINDOW (editor), GTK_WINDOW (gtk_widget_get_native (GTK_WIDGET (self))));
+        net_connection_editor_set_title (editor, _("Bluetooth"));
+        g_signal_connect_object (editor, "done", G_CALLBACK (editor_done), self, G_CONNECT_SWAPPED);
+        gtk_window_present (GTK_WINDOW (editor));
 }
 
 static void
@@ -169,12 +172,7 @@ net_device_bluetooth_class_init (NetDeviceBluetoothClass *klass)
 static void
 net_device_bluetooth_init (NetDeviceBluetooth *self)
 {
-        g_autofree gchar *path = NULL;
-
         gtk_widget_init_template (GTK_WIDGET (self));
-
-        path = g_find_program_in_path ("nm-connection-editor");
-        gtk_widget_set_visible (GTK_WIDGET (self->options_button), path != NULL);
 }
 
 NetDeviceBluetooth *

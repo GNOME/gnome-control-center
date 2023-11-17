@@ -512,6 +512,8 @@ connect_details_page (CEPageDetails *self)
                         gtk_button_set_label (self->forget_button, _("Forget Connection"));
                 else if (g_str_equal (type, NM_SETTING_WIRED_SETTING_NAME))
                         gtk_button_set_label (self->forget_button, _("Remove Connection Profile"));
+                else if (g_str_equal (type, NM_SETTING_BLUETOOTH_SETTING_NAME))
+                        gtk_button_set_label (self->forget_button, _("Remove Connection"));
                 else if (g_str_equal (type, NM_SETTING_VPN_SETTING_NAME) ||
                         g_str_equal (type, NM_SETTING_WIREGUARD_SETTING_NAME))
                         gtk_button_set_label (self->forget_button, _("Remove VPN"));
