@@ -50,7 +50,7 @@ struct _CcWindow
 {
   AdwApplicationWindow parent;
 
-  GtkMessageDialog  *development_warning_dialog;
+  AdwMessageDialog  *development_warning_dialog;
   AdwNavigationSplitView *split_view;
   CcPanelList       *panel_list;
   GtkSearchBar      *search_bar;
