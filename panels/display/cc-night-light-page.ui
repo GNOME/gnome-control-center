@@ -83,7 +83,8 @@
                 <!-- Night Light -->
                 <child>
                   <object class="AdwActionRow">
-                    <property name="title" translatable="yes">Night Light</property>
+                    <property name="title" translatable="yes">_Night Light</property>
+                    <property name="use-underline">True</property>
                     <property name="activatable-widget">night_light_toggle_switch</property>
 
                     <child>
@@ -97,7 +98,8 @@
                 <!-- Schedule -->
                 <child>
                   <object class="AdwComboRow" id="schedule_type_row">
-                    <property name="title" translatable="yes">Schedule</property>
+                    <property name="title" translatable="yes">_Schedule</property>
+                    <property name="use-underline">True</property>
                     <property name="sensitive" bind-source="night_light_toggle_switch" bind-property="active" bind-flags="default|sync-create" />
                     <signal name="notify::selected" handler="on_schedule_type_row_selected_changed_cb" object="CcNightLightPage" swapped="yes" />
                     <property name="model">
@@ -114,7 +116,8 @@
                 <!-- Time -->
                 <child>
                   <object class="AdwActionRow">
-                    <property name="title" translatable="yes">Times</property>
+                    <property name="title" translatable="yes">_Times</property>
+                    <property name="use-underline">True</property>
                     <property name="sensitive" bind-source="night_light_toggle_switch" bind-property="active" bind-flags="default|sync-create" />
 
                     <child>
@@ -320,11 +323,11 @@
 
                         <child>
                           <object class="GtkLabel" id="title">
-                            <property name="label" translatable="yes">Color Temperature</property>
+                            <property name="label" translatable="yes">_Color Temperature</property>
+                            <property name="use-underline">True</property>
                             <property name="ellipsize">none</property>
                             <property name="lines">0</property>
                             <property name="xalign">0.0</property>
-                            <property name="mnemonic_widget">scale_color_temperature</property>
                             <style>
                               <class name="title"/>
                             </style>
