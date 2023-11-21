@@ -378,8 +378,8 @@ reset_all_clicked_cb (CcKeyboardShortcutDialog *self)
                                   _("Resetting the shortcuts may affect your custom shortcuts. This cannot be undone."));
 
   adw_message_dialog_add_responses (ADW_MESSAGE_DIALOG (dialog),
-                                    "cancel",    _("Cancel"),
-                                    "reset_all", _("Reset All"),
+                                    "cancel",    _("_Cancel"),
+                                    "reset_all", _("_Reset All"),
                                     NULL);
 
   adw_message_dialog_set_response_appearance (ADW_MESSAGE_DIALOG (dialog),
