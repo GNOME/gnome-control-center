@@ -38,7 +38,8 @@
                           <object class="GtkLabel" id="output_device_label">
                             <property name="ellipsize">end</property>
                             <property name="xalign">0</property>
-                            <property name="label" translatable="yes">Output Device</property>
+                            <property name="label" translatable="yes">_Output Device</property>
+                            <property name="use-underline">True</property>
                           </object>
                         </child>
                         <child>
@@ -55,7 +56,8 @@
                             </child>
                             <child>
                               <object class="GtkButton">
-                                <property name="label" translatable="yes">Test</property>
+                                <property name="label" translatable="yes">_Test</property>
+                                <property name="use-underline">True</property>
                                 <signal name="clicked" handler="test_output_configuration_button_clicked_cb" object="CcSoundPanel" swapped="yes"/>
                               </object>
                             </child>
@@ -79,7 +81,8 @@
                           <object class="GtkLabel" id="output_configuration_label">
                             <property name="ellipsize">end</property>
                             <property name="xalign">0</property>
-                            <property name="label" translatable="yes">Configuration</property>
+                            <property name="label" translatable="yes">_Configuration</property>
+                            <property name="use-underline">True</property>
                           </object>
                         </child>
                         <child>
@@ -116,7 +119,8 @@
                           <object class="GtkLabel" id="output_volume_label">
                             <property name="ellipsize">end</property>
                             <property name="xalign">0</property>
-                            <property name="label" translatable="yes">Output Volume</property>
+                            <property name="label" translatable="yes">O_utput Volume</property>
+                            <property name="use-underline">True</property>
                           </object>
                         </child>
                         <child>
@@ -142,7 +146,8 @@
                           <object class="GtkLabel" id="output_balance_label">
                             <property name="ellipsize">end</property>
                             <property name="xalign">0</property>
-                            <property name="label" translatable="yes">Balance</property>
+                            <property name="label" translatable="yes">_Balance</property>
+                            <property name="use-underline">True</property>
                           </object>
                         </child>
                         <child>
@@ -168,7 +173,8 @@
                           <object class="GtkLabel" id="output_fade_label">
                             <property name="ellipsize">end</property>
                             <property name="xalign">0</property>
-                            <property name="label" translatable="yes">Fade</property>
+                            <property name="label" translatable="yes">Fad_e</property>
+                            <property name="use-underline">True</property>
                           </object>
                         </child>
                         <child>
@@ -194,7 +200,8 @@
                           <object class="GtkLabel" id="output_subwoofer_label">
                             <property name="ellipsize">end</property>
                             <property name="xalign">0</property>
-                            <property name="label" translatable="yes">Subwoofer</property>
+                            <property name="label" translatable="yes">_Subwoofer</property>
+                            <property name="use-underline">True</property>
                           </object>
                         </child>
                         <child>
@@ -250,7 +257,8 @@
                           <object class="GtkLabel" id="input_device_label">
                             <property name="ellipsize">end</property>
                             <property name="xalign">0</property>
-                            <property name="label" translatable="yes">Input Device</property>
+                            <property name="label" translatable="yes">_Input Device</property>
+                            <property name="use-underline">True</property>
                           </object>
                         </child>
                         <child>
@@ -287,7 +295,8 @@
                           <object class="GtkLabel" id="input_configuration_label">
                             <property name="ellipsize">end</property>
                             <property name="xalign">0</property>
-                            <property name="label" translatable="yes">Configuration</property>
+                            <property name="label" translatable="yes">Con_figuration</property>
+                            <property name="use-underline">True</property>
                           </object>
                         </child>
                         <child>
@@ -321,7 +330,8 @@
                           <object class="GtkLabel" id="input_volume_label">
                             <property name="ellipsize">end</property>
                             <property name="xalign">0</property>
-                            <property name="label" translatable="yes">Input Volume</property>
+                            <property name="label" translatable="yes">I_nput Volume</property>
+                            <property name="use-underline">True</property>
                           </object>
                         </child>
                         <child>
@@ -358,7 +368,8 @@
                 <property name="title" translatable="yes">Sounds</property>
                 <child>
                   <object class="AdwActionRow">
-                    <property name="title" translatable="yes">Volume Levels</property>
+                    <property name="title" translatable="yes">Vo_lume Levels</property>
+                    <property name="use-underline">True</property>
                     <property name="activatable">True</property>
                     <signal name="activated" handler="volume_levels_activated_cb" swapped="yes"/>
                     <child>
@@ -370,7 +381,8 @@
                 </child>
                 <child>
                   <object class="AdwActionRow">
-                    <property name="title" translatable="yes">Alert Sound</property>
+                    <property name="title" translatable="yes">_Alert Sound</property>
+                    <property name="use-underline">True</property>
                     <property name="activatable">True</property>
                     <accessibility>
                       <relation name="described-by">alert_sound_label</relation>
