@@ -40,28 +40,32 @@
         <child>
           <object class="AdwComboRow" id="orientation_row">
             <property name="width_request">100</property>
-            <property name="title" translatable="yes" context="display setting">Orientation</property>
+            <property name="title" translatable="yes" context="display setting">_Orientation</property>
+            <property name="use-underline">True</property>
             <signal name="notify::selected-item" handler="on_orientation_selection_changed_cb" swapped="yes"/>
           </object>
         </child>
         <child>
           <object class="AdwComboRow" id="resolution_row">
             <property name="width_request">100</property>
-            <property name="title" translatable="yes" context="display setting">Resolution</property>
+            <property name="title" translatable="yes" context="display setting">_Resolution</property>
+            <property name="use-underline">True</property>
             <signal name="notify::selected-item" handler="on_resolution_selection_changed_cb" swapped="yes"/>
           </object>
         </child>
         <child>
           <object class="AdwComboRow" id="refresh_rate_row">
             <property name="width_request">100</property>
-            <property name="title" translatable="yes">Refresh Rate</property>
+            <property name="title" translatable="yes">R_efresh Rate</property>
+            <property name="use-underline">True</property>
             <signal name="notify::selected-item" handler="on_refresh_rate_selection_changed_cb" swapped="yes"/>
           </object>
         </child>
         <child>
           <object class="AdwActionRow" id="underscanning_row">
             <property name="width_request">100</property>
-            <property name="title" translatable="yes">Adjust for TV</property>
+            <property name="title" translatable="yes">Adjust for _TV</property>
+            <property name="use-underline">True</property>
             <property name="activatable-widget">underscanning_switch</property>
             <child>
               <object class="GtkSwitch" id="underscanning_switch">
@@ -76,7 +80,8 @@
         <child>
           <object class="AdwActionRow" id="scale_buttons_row">
             <property name="width_request">100</property>
-            <property name="title" translatable="yes" context="display setting">Scale</property>
+            <property name="title" translatable="yes" context="display setting">_Scale</property>
+            <property name="use-underline">True</property>
             <child>
               <object class="GtkBox" id="scale_bbox">
                 <property name="halign">end</property>
@@ -91,7 +96,8 @@
         <child>
           <object class="AdwComboRow" id="scale_combo_row">
             <property name="width_request">100</property>
-            <property name="title" translatable="yes" context="display setting">Scale</property>
+            <property name="title" translatable="yes" context="display setting">_Scale</property>
+            <property name="use-underline">True</property>
             <signal name="notify::selected-item" handler="on_scale_selection_changed_cb" swapped="yes"/>
           </object>
         </child>
