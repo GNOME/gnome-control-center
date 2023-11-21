@@ -96,14 +96,16 @@
                                 </style>
                                 <child>
                                   <object class="GtkToggleButton" id="config_type_join">
-                                    <property name="label" translatable="yes" comments="'Join' as in 'Join displays'">Join</property>
+                                    <property name="label" translatable="yes" comments="'Join' as in 'Join displays'">_Join</property>
+                                    <property name="use-underline">True</property>
                                     <property name="active">True</property>
                                     <signal name="toggled" handler="on_config_type_toggled_cb" swapped="yes"/>
                                   </object>
                                 </child>
                                 <child>
                                   <object class="GtkToggleButton" id="config_type_mirror">
-                                    <property name="label" translatable="yes">Mirror</property>
+                                    <property name="label" translatable="yes">_Mirror</property>
+                                    <property name="use-underline">True</property>
                                     <property name="group">config_type_join</property>
                                     <signal name="toggled" handler="on_config_type_toggled_cb" swapped="yes"/>
                                   </object>
@@ -132,7 +134,8 @@
                         <child>
                           <object class="AdwComboRow" id="primary_display_row">
                             <property name="subtitle" translatable="yes">Contains top bar and Activities</property>
-                            <property name="title" translatable="yes">Primary Display</property>
+                            <property name="title" translatable="yes">_Primary Display</property>
+                            <property name="use-underline">True</property>
                             <signal name="notify::selected-item" handler="on_primary_display_selected_item_changed_cb" swapped="yes"/>
                           </object>
                         </child>
@@ -153,7 +156,7 @@
                         <child>
                           <object class="CcListRow" id="night_light_row">
                             <property name="activatable">True</property>
-                            <property name="title" translatable="yes" comments="This is the redshift functionality where we suppress blue light when the sun has gone down">Night Light</property>
+                            <property name="title" translatable="yes" comments="This is the redshift functionality where we suppress blue light when the sun has gone down">_Night Light</property>
                             <property name="show-arrow">True</property>
                             <property name="action-name">navigation.push</property>
                             <property name="action-target">'night-light'</property>
