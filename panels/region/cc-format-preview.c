@@ -133,16 +133,18 @@ update_format_examples (CcFormatPreview *self)
     old_locale = uselocale (locale);
 
   fmt = nl_langinfo (_NL_MEASUREMENT_MEASUREMENT);
-  if (fmt && *fmt == 2)
-    gtk_label_set_text (GTK_LABEL (self->measurement_format_label), C_("measurement format", "Imperial"));
-  else
-    gtk_label_set_text (GTK_LABEL (self->measurement_format_label), C_("measurement format", "Metric"));
 
   if (locale != (locale_t) 0)
     {
       uselocale (old_locale);
       freelocale (locale);
     }
+
+  if (fmt && *fmt == 2)
+    gtk_label_set_text (GTK_LABEL (self->measurement_format_label), C_("measurement format", "Imperial"));
+  else
+    gtk_label_set_text (GTK_LABEL (self->measurement_format_label), C_("measurement format", "Metric"));
+
 #endif
 
 #ifdef LC_PAPER
