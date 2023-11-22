@@ -21,12 +21,13 @@
 
 #pragma once
 
+#include <adwaita.h>
 #include <gtk/gtk.h>
 #include <NetworkManager.h>
 
 G_BEGIN_DECLS
 
-G_DECLARE_FINAL_TYPE (CEPageSecurity, ce_page_security, CE, PAGE_SECURITY, GtkGrid)
+G_DECLARE_FINAL_TYPE (CEPageSecurity, ce_page_security, CE, PAGE_SECURITY, AdwBin)
 
 CEPageSecurity *ce_page_security_new (NMConnection *connection);
 

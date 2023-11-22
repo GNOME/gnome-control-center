@@ -31,7 +31,7 @@
 
 struct _CEPageSecurity
 {
-        GtkGrid parent;
+        AdwBin parent;
 
         GtkBox      *box;
         GtkComboBox *security_combo;
@@ -45,7 +45,7 @@ struct _CEPageSecurity
 
 static void ce_page_iface_init (CEPageInterface *);
 
-G_DEFINE_TYPE_WITH_CODE (CEPageSecurity, ce_page_security, GTK_TYPE_GRID,
+G_DEFINE_TYPE_WITH_CODE (CEPageSecurity, ce_page_security, ADW_TYPE_BIN,
                          G_IMPLEMENT_INTERFACE (ce_page_get_type (), ce_page_iface_init))
 
 enum {
