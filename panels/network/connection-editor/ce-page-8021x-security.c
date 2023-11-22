@@ -32,7 +32,7 @@
 #include "nma-ws.h"
 
 struct _CEPage8021xSecurity {
-	GtkGrid parent;
+        AdwBin parent;
 
         GtkBox      *box;
         GtkSwitch   *enable_8021x_switch;
@@ -46,7 +46,7 @@ struct _CEPage8021xSecurity {
 
 static void ce_page_iface_init (CEPageInterface *);
 
-G_DEFINE_TYPE_WITH_CODE (CEPage8021xSecurity, ce_page_8021x_security, GTK_TYPE_GRID,
+G_DEFINE_TYPE_WITH_CODE (CEPage8021xSecurity, ce_page_8021x_security, ADW_TYPE_BIN,
                          G_IMPLEMENT_INTERFACE (ce_page_get_type (), ce_page_iface_init))
 
 static void
