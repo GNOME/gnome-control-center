@@ -31,7 +31,7 @@
 
 struct _CEPageEthernet
 {
-        GtkGrid parent;
+        AdwBin parent;
 
         GtkComboBoxText *cloned_mac_combo;
         GtkComboBoxText *mac_combo;
@@ -46,7 +46,7 @@ struct _CEPageEthernet
 
 static void ce_page_iface_init (CEPageInterface *);
 
-G_DEFINE_TYPE_WITH_CODE (CEPageEthernet, ce_page_ethernet, GTK_TYPE_GRID,
+G_DEFINE_TYPE_WITH_CODE (CEPageEthernet, ce_page_ethernet, ADW_TYPE_BIN,
                          G_IMPLEMENT_INTERFACE (ce_page_get_type (), ce_page_iface_init))
 
 static void
