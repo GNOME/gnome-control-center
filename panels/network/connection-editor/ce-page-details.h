@@ -29,7 +29,7 @@
 
 G_BEGIN_DECLS
 
-G_DECLARE_FINAL_TYPE (CEPageDetails, ce_page_details, CE, PAGE_DETAILS, GtkGrid)
+G_DECLARE_FINAL_TYPE (CEPageDetails, ce_page_details, CE, PAGE_DETAILS, AdwBin)
 
 CEPageDetails *ce_page_details_new (NMConnection        *connection,
                                     NMDevice            *device,

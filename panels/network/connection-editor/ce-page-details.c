@@ -32,7 +32,7 @@
 
 struct _CEPageDetails
 {
-        GtkGrid parent;
+        AdwBin parent;
 
         GtkCheckButton *all_user_check;
         GtkCheckButton *auto_connect_check;
@@ -70,7 +70,7 @@ struct _CEPageDetails
 
 static void ce_page_iface_init (CEPageInterface *);
 
-G_DEFINE_TYPE_WITH_CODE (CEPageDetails, ce_page_details, GTK_TYPE_GRID,
+G_DEFINE_TYPE_WITH_CODE (CEPageDetails, ce_page_details, ADW_TYPE_BIN,
                          G_IMPLEMENT_INTERFACE (ce_page_get_type (), ce_page_iface_init))
 
 static void
