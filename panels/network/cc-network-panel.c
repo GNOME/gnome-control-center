@@ -74,6 +74,7 @@ struct _CcNetworkPanel
         GtkWidget        *proxy_row;
         GtkWidget        *save_button;
         GtkWidget        *vpn_stack;
+        GtkWidget        *toolbar_view;
 
         /* wireless dialog stuff */
         CmdlineOperation  arg_operation;
@@ -660,7 +661,7 @@ panel_check_network_manager_version (CcNetworkPanel *self)
                 GtkWidget *status_page;
 
                 status_page = adw_status_page_new ();
-                adw_navigation_page_set_child (ADW_NAVIGATION_PAGE (self), status_page);
+                adw_toolbar_view_set_content (ADW_TOOLBAR_VIEW (self->toolbar_view), status_page);
 
                 adw_status_page_set_icon_name (ADW_STATUS_PAGE (status_page), "network-error-symbolic");
                 adw_status_page_set_title (ADW_STATUS_PAGE (status_page), _("Network Unavailable"));
@@ -722,6 +723,7 @@ cc_network_panel_class_init (CcNetworkPanelClass *klass)
         gtk_widget_class_bind_template_child (widget_class, CcNetworkPanel, empty_listbox);
         gtk_widget_class_bind_template_child (widget_class, CcNetworkPanel, proxy_row);
         gtk_widget_class_bind_template_child (widget_class, CcNetworkPanel, vpn_stack);
+        gtk_widget_class_bind_template_child (widget_class, CcNetworkPanel, toolbar_view);
 
         gtk_widget_class_bind_template_callback (widget_class, create_connection_cb);
 
