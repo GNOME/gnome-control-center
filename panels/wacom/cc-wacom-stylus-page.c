@@ -244,12 +244,7 @@ cc_wacom_stylus_page_class_init (CcWacomStylusPageClass *klass)
 static void
 add_marks (GtkScale *scale)
 {
-#if 0
-	gint i;
-
-	for (i = 0; i < N_PRESSURE_CURVES; i++)
-		gtk_scale_add_mark (scale, i, GTK_POS_BOTTOM, NULL);
-#endif
+	gtk_scale_add_mark (scale, 100, GTK_POS_BOTTOM, NULL);
 }
 
 static void
