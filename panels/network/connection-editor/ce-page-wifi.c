@@ -31,7 +31,7 @@
 
 struct _CEPageWifi
 {
-        GtkGrid parent;
+        AdwBin parent;
 
         GtkComboBoxText *bssid_combo;
         GtkComboBoxText *cloned_mac_combo;
@@ -44,7 +44,7 @@ struct _CEPageWifi
 
 static void ce_page_iface_init (CEPageInterface *);
 
-G_DEFINE_TYPE_WITH_CODE (CEPageWifi, ce_page_wifi, GTK_TYPE_GRID,
+G_DEFINE_TYPE_WITH_CODE (CEPageWifi, ce_page_wifi, ADW_TYPE_BIN,
                          G_IMPLEMENT_INTERFACE (ce_page_get_type (), ce_page_iface_init))
 
 static void
