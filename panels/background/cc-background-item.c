@@ -177,19 +177,6 @@ update_size (CcBackgroundItem *item)
 	}
 }
 
-static GdkPixbuf *
-render_at_size (GnomeBG *bg,
-                gint width,
-                gint height)
-{
-        GdkPixbuf *pixbuf;
-
-        pixbuf = gdk_pixbuf_new (GDK_COLORSPACE_RGB, FALSE, 8, width, height);
-        gnome_bg_draw (bg, pixbuf);
-
-        return pixbuf;
-}
-
 GdkPixbuf *
 cc_background_item_get_frame_thumbnail (CcBackgroundItem             *item,
                                         GnomeDesktopThumbnailFactory *thumbs,
@@ -197,13 +184,15 @@ cc_background_item_get_frame_thumbnail (CcBackgroundItem             *item,
                                         int                           height,
                                         int                           scale_factor,
                                         int                           frame,
-                                        gboolean                      force_size,
                                         gboolean                      dark)
 {
-        g_autoptr(GdkPixbuf) pixbuf = NULL;
-        g_autoptr(GdkPixbuf) retval = NULL;
+        GdkPixbuf *pixbuf;
         CachedThumbnail *thumbnail;
         GnomeBG *bg;
+        g_autoptr(GdkMonitor) monitor = NULL;
+        GdkDisplay *display;
+        GListModel *monitors;
+        GdkRectangle monitor_layout;
 
 	g_return_val_if_fail (CC_IS_BACKGROUND_ITEM (item), NULL);
 	g_return_val_if_fail (width > 0 && height > 0, NULL);
@@ -221,44 +210,25 @@ cc_background_item_get_frame_thumbnail (CcBackgroundItem             *item,
 
         set_bg_properties (item);
 
-        if (force_size) {
-                /* FIXME: this doesn't play nice with slideshow stepping at all,
-                 * because it will always render the current slideshow frame, which
-                 * might not be what we want.
-                 * We're lacking an API to draw a high-res GnomeBG manually choosing
-                 * the slideshow frame though, so we can't do much better than this
-                 * for now.
-                 */
-                pixbuf = render_at_size (bg, width, height);
+        display = gdk_display_get_default ();
+        monitors = gdk_display_get_monitors (display);
+        monitor = g_list_model_get_item (monitors, 0);
+        gdk_monitor_get_geometry (monitor, &monitor_layout);
+
+        if (frame >= 0) {
+                pixbuf = gnome_bg_create_frame_thumbnail (bg,
+                                                          thumbs,
+                                                          &monitor_layout,
+                                                          width,
+                                                          height,
+                                                          frame);
         } else {
-                g_autoptr(GdkMonitor) monitor = NULL;
-                GdkDisplay *display;
-                GListModel *monitors;
-                GdkRectangle monitor_layout;
-
-
-                display = gdk_display_get_default ();
-                monitors = gdk_display_get_monitors (display);
-                monitor = g_list_model_get_item (monitors, 0);
-                gdk_monitor_get_geometry (monitor, &monitor_layout);
-
-                if (frame >= 0) {
-                        pixbuf = gnome_bg_create_frame_thumbnail (bg,
-                                                                  thumbs,
-                                                                  &monitor_layout,
-                                                                  width,
-                                                                  height,
-                                                                  frame);
-                } else {
-                        pixbuf = gnome_bg_create_thumbnail (bg,
-                                                            thumbs,
-                                                            &monitor_layout,
-                                                            width,
-                                                            height);
-                }
+                pixbuf = gnome_bg_create_thumbnail (bg,
+                                                    thumbs,
+                                                    &monitor_layout,
+                                                    width,
+                                                    height);
         }
-
-        retval = g_steal_pointer (&pixbuf);
 
         gnome_bg_get_image_size (bg,
                                  thumbs,
@@ -270,13 +240,13 @@ cc_background_item_get_frame_thumbnail (CcBackgroundItem             *item,
         update_size (item);
 
         /* Cache the new thumbnail */
-        g_set_object (&thumbnail->thumbnail, retval);
+        g_set_object (&thumbnail->thumbnail, pixbuf);
         thumbnail->width = width;
         thumbnail->height = height;
         thumbnail->scale_factor = scale_factor;
         thumbnail->frame = frame;
 
-        return g_steal_pointer (&retval);
+        return pixbuf;
 }
 
 
@@ -288,7 +258,7 @@ cc_background_item_get_thumbnail (CcBackgroundItem             *item,
                                   int                           scale_factor,
                                   gboolean                      dark)
 {
-        return cc_background_item_get_frame_thumbnail (item, thumbs, width, height, scale_factor, -1, FALSE, dark);
+        return cc_background_item_get_frame_thumbnail (item, thumbs, width, height, scale_factor, -1, dark);
 }
 
 static void

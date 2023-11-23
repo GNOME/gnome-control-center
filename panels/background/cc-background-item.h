@@ -64,7 +64,6 @@ GdkPixbuf *        cc_background_item_get_frame_thumbnail (CcBackgroundItem     
                                                            int                           height,
                                                            int                           scale_factor,
                                                            int                           frame,
-                                                           gboolean                      force_size,
                                                            gboolean                      dark);
 
 GDesktopBackgroundStyle   cc_background_item_get_placement  (CcBackgroundItem *item);
