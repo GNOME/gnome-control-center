@@ -10,6 +10,11 @@
         <property name="content">
           <object class="GtkStack" id="stack">
 
+            <!-- This "fake" empty box is there to show instead of the AdwStatusPage before the panel is initialized -->
+            <child>
+              <object class="GtkBox"/>
+            </child>
+
             <child>
               <object class="AdwStatusPage" id="empty_box">
                 <property name="icon-name">org.gnome.Software-symbolic</property>
