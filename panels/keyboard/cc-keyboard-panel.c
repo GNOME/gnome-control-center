@@ -89,6 +89,7 @@ static const CcXkbModifier COMPOSE_MODIFIER = {
     { NC_("keyboard key", "Caps Lock"),    "compose:caps" },
     { NC_("keyboard key", "Scroll Lock"),  "compose:sclk" },
     { NC_("keyboard key", "Print Screen"), "compose:prsc" },
+    { NC_("keyboard key", "Insert"),       "compose:ins" },
     { NULL,                                NULL }
   },
   NULL,
