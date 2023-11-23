@@ -65,16 +65,13 @@ draw_preview_func (GtkDrawingArea *drawing_area,
     return;
 
   scale_factor = gtk_widget_get_scale_factor (GTK_WIDGET (drawing_area));
-  pixbuf = cc_background_item_get_frame_thumbnail (self->item,
-                                                   self->thumbnail_factory,
-                                                   width,
-                                                   height,
-                                                   scale_factor,
-                                                   0,
-                                                   TRUE,
-                                                   self->is_dark &&
-                                                   cc_background_item_has_dark_version (self->item));
-
+  pixbuf = cc_background_item_get_thumbnail (self->item,
+                                             self->thumbnail_factory,
+                                             width,
+                                             height,
+                                             scale_factor,
+                                             self->is_dark &&
+                                             cc_background_item_has_dark_version (self->item));
 
   gdk_cairo_set_source_pixbuf (cr, pixbuf, 0, 0);
   cairo_paint (cr);
