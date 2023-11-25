@@ -509,14 +509,14 @@ connect_details_page (CEPageDetails *self)
                 g_signal_connect_object (self->forget_button, "clicked", G_CALLBACK (forget_cb), self, G_CONNECT_SWAPPED);
                 
                 if (g_str_equal (type, NM_SETTING_WIRELESS_SETTING_NAME))
-                        gtk_button_set_label (self->forget_button, _("Forget Connection"));
+                        gtk_button_set_label (self->forget_button, _("Forget Connection…"));
                 else if (g_str_equal (type, NM_SETTING_WIRED_SETTING_NAME))
-                        gtk_button_set_label (self->forget_button, _("Remove Connection Profile"));
+                        gtk_button_set_label (self->forget_button, _("Remove Connection Profile…"));
                 else if (g_str_equal (type, NM_SETTING_BLUETOOTH_SETTING_NAME))
-                        gtk_button_set_label (self->forget_button, _("Remove Connection"));
+                        gtk_button_set_label (self->forget_button, _("Remove Connection…"));
                 else if (g_str_equal (type, NM_SETTING_VPN_SETTING_NAME) ||
                         g_str_equal (type, NM_SETTING_WIREGUARD_SETTING_NAME))
-                        gtk_button_set_label (self->forget_button, _("Remove VPN"));
+                        gtk_button_set_label (self->forget_button, _("Remove VPN…"));
                 else
                         gtk_widget_set_visible (GTK_WIDGET (self->forget_button), FALSE);
         } else {
