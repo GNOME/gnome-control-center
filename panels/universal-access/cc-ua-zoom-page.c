@@ -377,7 +377,7 @@ cc_ua_zoom_page_init (CcUaZoomPage *self)
                    G_SETTINGS_BIND_DEFAULT);
   g_settings_bind (self->magnifier_settings, "cross-hairs-clip",
                    self->crosshair_overlap_mouse_row, "active",
-                   G_SETTINGS_BIND_INVERT_BOOLEAN);
+                   G_SETTINGS_BIND_INVERT_BOOLEAN | G_SETTINGS_BIND_NO_SENSITIVITY);
 
   g_settings_bind (self->magnifier_settings, "cross-hairs-thickness",
                    gtk_range_get_adjustment (GTK_RANGE (self->crosshair_thickness_scale)), "value",
