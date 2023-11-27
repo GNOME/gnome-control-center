@@ -168,6 +168,9 @@ update_size (CcBackgroundItem *item)
 		if (gnome_bg_has_multiple_sizes (item->bg) || gnome_bg_changes_with_time (item->bg)) {
 			item->size = g_strdup (_("multiple sizes"));
 		} else {
+			gdk_pixbuf_get_file_info (gnome_bg_get_filename (item->bg),
+						  &item->width,
+						  &item->height);
 			/* translators: 100 × 100px
 			 * Note that this is not an "x", but U+00D7 MULTIPLICATION SIGN */
 			item->size = g_strdup_printf (_("%d × %d"),
@@ -229,13 +232,6 @@ cc_background_item_get_frame_thumbnail (CcBackgroundItem             *item,
                                                     width,
                                                     height);
         }
-
-        gnome_bg_get_image_size (bg,
-                                 thumbs,
-                                 width,
-                                 height,
-                                 &item->width,
-                                 &item->height);
 
         update_size (item);
 
