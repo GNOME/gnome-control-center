@@ -84,13 +84,14 @@ shortcut_group_row_activated_cb (CcKeyboardShortcutGroup *self,
       CcKeyboardItem *item;
 
       item = cc_keyboard_shortcut_row_get_item (CC_KEYBOARD_SHORTCUT_ROW (row));
-      cc_keyboard_shortcut_editor_set_mode (shortcut_editor, CC_SHORTCUT_EDITOR_EDIT);
+
       cc_keyboard_shortcut_editor_set_item (shortcut_editor, item);
+      cc_keyboard_shortcut_editor_set_mode (shortcut_editor, CC_SHORTCUT_EDITOR_EDIT);
     }
   else  /* Add shortcut row */
     {
-      cc_keyboard_shortcut_editor_set_mode (shortcut_editor, CC_SHORTCUT_EDITOR_CREATE);
       cc_keyboard_shortcut_editor_set_item (shortcut_editor, NULL);
+      cc_keyboard_shortcut_editor_set_mode (shortcut_editor, CC_SHORTCUT_EDITOR_CREATE);
     }
 
   adw_dialog_present (ADW_DIALOG (shortcut_editor), GTK_WIDGET (self));
