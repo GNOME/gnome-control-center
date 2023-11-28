@@ -17,10 +17,14 @@ install_data(
 
 common_sources = []
 
+common_sources += gnome.mkenums_simple(
+  'cc-background-enum-types',
+  sources: ['cc-background-item.h']
+)
+
 enums = 'gdesktop-enums-types'
 enums_header = files(
-  gsettings_desktop_dep.get_variable(pkgconfig: 'prefix') + '/include/gsettings-desktop-schemas/gdesktop-enums.h',
-  'cc-background-item.h'
+  gsettings_desktop_dep.get_variable(pkgconfig: 'prefix') + '/include/gsettings-desktop-schemas/gdesktop-enums.h'
 )
 
 common_sources += gnome.mkenums(
