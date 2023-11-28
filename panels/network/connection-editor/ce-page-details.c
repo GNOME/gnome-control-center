@@ -281,7 +281,7 @@ connect_details_page (CEPageDetails *self)
         const gchar *type;
         const gchar *hw_address = NULL;
         g_autofree gchar *security_string = NULL;
-        g_autofree gchar *freq_string = NULL;
+        const gchar *freq_string = NULL;
         const gchar *strength_label;
         gboolean device_is_active;
         NMIPConfig *ipv4_config = NULL, *ipv6_config = NULL;
@@ -342,13 +342,24 @@ connect_details_page (CEPageDetails *self)
         gtk_widget_set_visible (GTK_WIDGET (self->mac_label), hw_address != NULL);
 
         if (wifi_caps & NM_WIFI_DEVICE_CAP_FREQ_VALID) {
+/* Check 6 GHz support in Network Manager */
+#if NM_CHECK_VERSION (1, 45, 4)
+                if (wifi_caps & NM_WIFI_DEVICE_CAP_FREQ_2GHZ &&
+                    wifi_caps & NM_WIFI_DEVICE_CAP_FREQ_5GHZ &&
+                    wifi_caps & NM_WIFI_DEVICE_CAP_FREQ_6GHZ)
+                        freq_string = _("2.4 GHz / 5 GHz / 6 GHz");
+                else if (wifi_caps & NM_WIFI_DEVICE_CAP_FREQ_5GHZ &&
+                         wifi_caps & NM_WIFI_DEVICE_CAP_FREQ_6GHZ)
+                        freq_string = _("5 GHz / 6 GHz");
+                else
+#endif
                 if (wifi_caps & NM_WIFI_DEVICE_CAP_FREQ_2GHZ &&
                     wifi_caps & NM_WIFI_DEVICE_CAP_FREQ_5GHZ)
-                        freq_string = g_strdup (_("2.4 GHz / 5 GHz"));
+                        freq_string = _("2.4 GHz / 5 GHz");
                 else if (wifi_caps & NM_WIFI_DEVICE_CAP_FREQ_2GHZ)
-                        freq_string = g_strdup (_("2.4 GHz"));
+                        freq_string = _("2.4 GHz");
                 else if (wifi_caps & NM_WIFI_DEVICE_CAP_FREQ_5GHZ)
-                        freq_string = g_strdup (_("5 GHz"));
+                        freq_string = _("5 GHz");
         }
 
         gtk_label_set_label (self->freq_label, freq_string);
