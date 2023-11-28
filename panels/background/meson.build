@@ -19,7 +19,7 @@ common_sources = []
 
 common_sources += gnome.mkenums_simple(
   'cc-background-enum-types',
-  sources: ['cc-background-item.h']
+  sources: ['cc-background-item.h', 'cc-background-paintable.h']
 )
 
 enums = 'gdesktop-enums-types'

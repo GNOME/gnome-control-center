@@ -112,7 +112,7 @@ create_widget_func (gpointer model_item,
   source = BG_SOURCE (user_data);
   item = CC_BACKGROUND_ITEM (model_item);
 
-  paintable = cc_background_paintable_new (source, item);
+  paintable = cc_background_paintable_new (source, item, CC_BACKGROUND_PAINT_LIGHT_DARK);
 
   picture = gtk_picture_new_for_paintable (GDK_PAINTABLE (paintable));
   gtk_picture_set_can_shrink (GTK_PICTURE (picture), FALSE);

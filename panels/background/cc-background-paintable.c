@@ -19,6 +19,7 @@
 
 #include <config.h>
 
+#include "cc-background-enum-types.h"
 #include "cc-background-paintable.h"
 
 struct _CcBackgroundPaintable
@@ -32,6 +33,8 @@ struct _CcBackgroundPaintable
 
   GdkPaintable     *texture;
   GdkPaintable     *dark_texture;
+
+  CcBackgroundPaintFlags  paint_flags;
 };
 
 enum
@@ -41,6 +44,7 @@ enum
   PROP_ITEM,
   PROP_SCALE_FACTOR,
   PROP_TEXT_DIRECTION,
+  PROP_PAINT_FLAGS,
   N_PROPS
 };
 
@@ -55,9 +59,11 @@ G_DEFINE_TYPE_WITH_CODE (CcBackgroundPaintable, cc_background_paintable, G_TYPE_
 static void
 update_cache (CcBackgroundPaintable *self)
 {
-  g_autoptr (GdkPixbuf) pixbuf = NULL;
+  g_autoptr(GdkPixbuf) pixbuf = NULL;
+  g_autoptr(GdkPixbuf) dark_pixbuf = NULL;
   GnomeDesktopThumbnailFactory *factory;
   int width, height;
+  gboolean has_dark;
 
   g_clear_object (&self->texture);
   g_clear_object (&self->dark_texture);
@@ -65,20 +71,21 @@ update_cache (CcBackgroundPaintable *self)
   factory = bg_source_get_thumbnail_factory (self->source);
   width = bg_source_get_thumbnail_width (self->source);
   height = bg_source_get_thumbnail_height (self->source);
+  has_dark = cc_background_item_has_dark_version (self->item);
 
-  pixbuf = cc_background_item_get_thumbnail (self->item,
-                                             factory,
-                                             width,
-                                             height,
-                                             self->scale_factor,
-                                             FALSE);
-
-  self->texture = GDK_PAINTABLE (gdk_texture_new_for_pixbuf (pixbuf));
-
-  if (cc_background_item_has_dark_version (self->item))
+  if ((self->paint_flags & CC_BACKGROUND_PAINT_LIGHT) || !has_dark)
     {
-      g_autoptr (GdkPixbuf) dark_pixbuf = NULL;
+      pixbuf = cc_background_item_get_thumbnail (self->item,
+                                                 factory,
+                                                 width,
+                                                 height,
+                                                 self->scale_factor,
+                                                 FALSE);
+      self->texture = GDK_PAINTABLE (gdk_texture_new_for_pixbuf (pixbuf));
+    }
 
+  if ((self->paint_flags & CC_BACKGROUND_PAINT_DARK) && has_dark)
+    {
       dark_pixbuf = cc_background_item_get_thumbnail (self->item,
                                                       factory,
                                                       width,
@@ -140,6 +147,10 @@ cc_background_paintable_get_property (GObject    *object,
       g_value_set_enum (value, self->text_direction);
       break;
 
+    case PROP_PAINT_FLAGS:
+      g_value_set_flags (value, self->paint_flags);
+      break;
+
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
     }
@@ -171,6 +182,10 @@ cc_background_paintable_set_property (GObject      *object,
     case PROP_TEXT_DIRECTION:
       self->text_direction = g_value_get_enum (value);
       gdk_paintable_invalidate_contents (GDK_PAINTABLE (self));
+      break;
+
+    case PROP_PAINT_FLAGS:
+      self->paint_flags = g_value_get_flags (value);
       break;
 
     default:
@@ -223,6 +238,16 @@ cc_background_paintable_class_init (CcBackgroundPaintableClass *klass)
                        G_PARAM_READWRITE |
                        G_PARAM_STATIC_STRINGS);
 
+  properties[PROP_PAINT_FLAGS] =
+    g_param_spec_flags ("paint-flags",
+                        "Paint Flags",
+                        "Paint Flags",
+                        CC_TYPE_BACKGROUND_PAINT_FLAGS,
+                        CC_BACKGROUND_PAINT_LIGHT,
+                        G_PARAM_READWRITE |
+                        G_PARAM_CONSTRUCT_ONLY |
+                        G_PARAM_STATIC_STRINGS);
+
   g_object_class_install_properties (object_class, N_PROPS, properties);
 }
 
@@ -245,6 +270,12 @@ cc_background_paintable_snapshot (GdkPaintable *paintable,
   if (!self->dark_texture)
     {
       gdk_paintable_snapshot (self->texture, snapshot, width, height);
+      return;
+    }
+
+  if (!self->texture)
+    {
+      gdk_paintable_snapshot (self->dark_texture, snapshot, width, height);
       return;
     }
 
@@ -271,24 +302,27 @@ static int
 cc_background_paintable_get_intrinsic_width (GdkPaintable *paintable)
 {
   CcBackgroundPaintable *self = CC_BACKGROUND_PAINTABLE (paintable);
+  GdkPaintable *valid_texture = self->texture ? self->texture : self->dark_texture;
 
-  return gdk_paintable_get_intrinsic_width (self->texture) / self->scale_factor;
+  return gdk_paintable_get_intrinsic_width (valid_texture) / self->scale_factor;
 }
 
 static int
 cc_background_paintable_get_intrinsic_height (GdkPaintable *paintable)
 {
   CcBackgroundPaintable *self = CC_BACKGROUND_PAINTABLE (paintable);
+  GdkPaintable *valid_texture = self->texture ? self->texture : self->dark_texture;
 
-  return gdk_paintable_get_intrinsic_height (self->texture) / self->scale_factor;
+  return gdk_paintable_get_intrinsic_height (valid_texture) / self->scale_factor;
 }
 
 static double
 cc_background_paintable_get_intrinsic_aspect_ratio (GdkPaintable *paintable)
 {
   CcBackgroundPaintable *self = CC_BACKGROUND_PAINTABLE (paintable);
+  GdkPaintable *valid_texture = self->texture ? self->texture : self->dark_texture;
 
-  return gdk_paintable_get_intrinsic_aspect_ratio (self->texture);
+  return gdk_paintable_get_intrinsic_aspect_ratio (valid_texture);
 }
 
 static void
@@ -301,8 +335,9 @@ cc_background_paintable_paintable_init (GdkPaintableInterface *iface)
 }
 
 CcBackgroundPaintable *
-cc_background_paintable_new (BgSource         *source,
-                             CcBackgroundItem *item)
+cc_background_paintable_new (BgSource               *source,
+                             CcBackgroundItem       *item,
+                             CcBackgroundPaintFlags  paint_flags)
 {
   g_return_val_if_fail (BG_IS_SOURCE (source), NULL);
   g_return_val_if_fail (CC_IS_BACKGROUND_ITEM (item), NULL);
@@ -310,5 +345,6 @@ cc_background_paintable_new (BgSource         *source,
   return g_object_new (CC_TYPE_BACKGROUND_PAINTABLE,
                        "source", source,
                        "item", item,
+                       "paint-flags", paint_flags,
                        NULL);
 }
