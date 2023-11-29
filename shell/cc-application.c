@@ -53,6 +53,10 @@ static void help_activated         (GSimpleAction *action,
                                     GVariant      *parameter,
                                     gpointer       user_data);
 
+static void about_activated        (GSimpleAction *action,
+                                    GVariant      *parameter,
+                                    gpointer       user_data);
+
 static gboolean cmd_verbose_cb     (const char    *option_name,
                                     const char    *value,
                                     gpointer       data,
@@ -72,7 +76,8 @@ const GOptionEntry all_options[] = {
 static const GActionEntry cc_app_actions[] = {
   { "launch-panel", launch_panel_activated, "(sav)", NULL, NULL, { 0 } },
   { "help", help_activated, NULL, NULL, NULL, { 0 } },
-  { "quit", cc_application_quit, NULL, NULL, NULL, { 0 } }
+  { "quit", cc_application_quit, NULL, NULL, NULL, { 0 } },
+  { "about", about_activated, NULL, NULL, NULL, { 0 } }
 };
 
 static void
@@ -93,6 +98,21 @@ help_activated (GSimpleAction *action,
   gtk_show_uri (GTK_WINDOW (window),
                 uri ? uri : "help:gnome-help/prefs",
                 GDK_CURRENT_TIME);
+}
+
+static void
+about_activated (GSimpleAction *action,
+                 GVariant      *parameter,
+                 gpointer       user_data)
+
+{
+  CcApplication *self = CC_APPLICATION (user_data);
+  GtkWidget *about_window;
+
+  about_window = adw_about_window_new_from_appdata ("/org/gnome/Settings/appdata", VERSION);
+
+  gtk_window_set_transient_for (GTK_WINDOW (about_window), GTK_WINDOW (self->window));
+  gtk_window_present (GTK_WINDOW (about_window));
 }
 
 static gboolean
