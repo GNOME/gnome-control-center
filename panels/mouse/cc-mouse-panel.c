@@ -364,7 +364,7 @@ setup_dialog (CcMousePanel *self)
 
   g_settings_bind (self->touchpad_settings, "disable-while-typing",
                    self->touchpad_typing_row, "active",
-                   G_SETTINGS_BIND_INVERT_BOOLEAN);
+                   G_SETTINGS_BIND_DEFAULT);
 
   setup_touchpad_options (self);
 
