@@ -85,6 +85,7 @@ static const CcXkbModifier COMPOSE_MODIFIER = {
     { NC_("keyboard key", "Left Super"),   "compose:lwin" },
     { NC_("keyboard key", "Right Super"),  "compose:rwin" },
     { NC_("keyboard key", "Menu key"),     "compose:menu" },
+    { NC_("keyboard key", "Left Ctrl"),    "compose:lctrl" },
     { NC_("keyboard key", "Right Ctrl"),   "compose:rctrl" },
     { NC_("keyboard key", "Caps Lock"),    "compose:caps" },
     { NC_("keyboard key", "Scroll Lock"),  "compose:sclk" },
