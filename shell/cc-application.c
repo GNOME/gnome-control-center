@@ -110,6 +110,8 @@ about_activated (GSimpleAction *action,
   GtkWidget *about_window;
 
   about_window = adw_about_window_new_from_appdata ("/org/gnome/Settings/appdata", VERSION);
+  /* Translators should localize the following string which will be displayed in the About dialog giving credit to the translator(s). */
+  adw_about_window_set_translator_credits (ADW_ABOUT_WINDOW (about_window), _("translator-credits"));
   gtk_window_set_transient_for (GTK_WINDOW (about_window), GTK_WINDOW (self->window));
 
   gtk_window_present (GTK_WINDOW (about_window));
