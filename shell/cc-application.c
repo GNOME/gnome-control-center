@@ -110,8 +110,8 @@ about_activated (GSimpleAction *action,
   GtkWidget *about_window;
 
   about_window = adw_about_window_new_from_appdata ("/org/gnome/Settings/appdata", VERSION);
-
   gtk_window_set_transient_for (GTK_WINDOW (about_window), GTK_WINDOW (self->window));
+
   gtk_window_present (GTK_WINDOW (about_window));
 }
 
