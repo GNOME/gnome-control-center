@@ -210,18 +210,33 @@
             <child>
               <object class="AdwPreferencesGroup">
                 <child>
-                  <object class="AdwComboRow" id="timeformat_row">
+                  <object class="AdwActionRow">
                     <property name="title" translatable="yes">Time _Format</property>
                     <property name="use_underline">True</property>
-                    <signal name="notify::selected-item" handler="change_clock_settings" object="CcDateTimePage" swapped="yes"/>
-                    <property name="model">
-                      <object class="AdwEnumListModel">
-                        <property name="enum-type">GDesktopClockFormat</property>
+                    <child type="suffix">
+                      <object class="GtkBox">
+                        <property name="valign">center</property>
+                        <property name="homogeneous">True</property>
+                        <style>
+                          <class name="linked"/>
+                        </style>
+                        <child>
+                          <object class="GtkToggleButton" id="twentyfour_format_button">
+                            <property name="label" translatable="yes">_24-hour</property>
+                            <property name="use-underline">True</property>
+                            <property name="group">ampm_format_button</property>
+                            <signal name="toggled" handler="change_clock_settings" object="CcDateTimePage" swapped="yes"/>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkToggleButton" id="ampm_format_button">
+                            <property name="label" translatable="yes">_AM / PM</property>
+                            <property name="use-underline">True</property>
+                            <signal name="toggled" handler="change_clock_settings" object="CcDateTimePage" swapped="yes"/>
+                          </object>
+                        </child>
                       </object>
-                    </property>
-                    <property name="expression">
-                      <closure type="gchararray" function="format_clock_name_cb"/>
-                    </property>
+                    </child>
                   </object>
                 </child>
               </object>

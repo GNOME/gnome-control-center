@@ -90,7 +90,8 @@ struct _CcDateTimePage
   GtkWindow *datetime_dialog;
   GtkLabel *datetime_label;
   AdwSpinRow *day_spin_row;
-  AdwComboRow *timeformat_row;
+  GtkToggleButton *twentyfour_format_button;
+  GtkToggleButton *ampm_format_button;
   GtkSpinButton *h_spinbutton;
   GtkWidget *weekday_row;
   GtkWidget *weekday_switch;
@@ -162,33 +163,18 @@ cc_date_time_page_dispose (GObject *object)
 static void clock_settings_changed_cb (CcDateTimePage *self,
                                        gchar          *key);
 
-static char *
-format_clock_name_cb (AdwEnumListItem *item,
-                      gpointer         user_data)
-{
-
-  switch (adw_enum_list_item_get_value (item))
-    {
-    case G_DESKTOP_CLOCK_FORMAT_24H:
-      return g_strdup (_("24-hour"));
-    case G_DESKTOP_CLOCK_FORMAT_12H:
-      return g_strdup (_("AM / PM"));
-    default:
-      return NULL;
-    }
-}
-
 static void
 change_clock_settings (CcDateTimePage *self)
 {
   GDesktopClockFormat value;
-  AdwEnumListItem *item;
 
   g_signal_handlers_block_by_func (self->clock_settings, clock_settings_changed_cb,
                                    self);
 
-  item = ADW_ENUM_LIST_ITEM (adw_combo_row_get_selected_item (self->timeformat_row));
-  value = adw_enum_list_item_get_value (item);
+  if (gtk_toggle_button_get_active (self->twentyfour_format_button))
+    value = G_DESKTOP_CLOCK_FORMAT_24H;
+  else
+    value = G_DESKTOP_CLOCK_FORMAT_12H;
 
   g_settings_set_enum (self->clock_settings, CLOCK_FORMAT_KEY, value);
   g_settings_set_enum (self->filechooser_settings, CLOCK_FORMAT_KEY, value);
@@ -209,15 +195,19 @@ clock_settings_changed_cb (CcDateTimePage *self,
   value = g_settings_get_enum (self->clock_settings, CLOCK_FORMAT_KEY);
   self->clock_format = value;
 
-  g_signal_handlers_block_by_func (self->timeformat_row, change_clock_settings, self);
+  g_signal_handlers_block_by_func (self->ampm_format_button, change_clock_settings, self);
+  g_signal_handlers_block_by_func (self->twentyfour_format_button, change_clock_settings, self);
 
-  adw_combo_row_set_selected (self->timeformat_row, value);
-
+  gtk_toggle_button_set_active (self->twentyfour_format_button,
+                                value == G_DESKTOP_CLOCK_FORMAT_24H);
+  gtk_toggle_button_set_active (self->ampm_format_button,
+                                value == G_DESKTOP_CLOCK_FORMAT_12H);
   cc_time_editor_set_am_pm (self->time_editor,
                             value == G_DESKTOP_CLOCK_FORMAT_12H);
   update_time (self);
 
-  g_signal_handlers_unblock_by_func (self->timeformat_row, change_clock_settings, self);
+  g_signal_handlers_unblock_by_func (self->twentyfour_format_button, change_clock_settings, self);
+  g_signal_handlers_unblock_by_func (self->ampm_format_button, change_clock_settings, self);
 }
 
 
@@ -839,7 +829,8 @@ cc_date_time_page_class_init (CcDateTimePageClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePage, datetime_dialog);
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePage, datetime_label);
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePage, day_spin_row);
-  gtk_widget_class_bind_template_child (widget_class, CcDateTimePage, timeformat_row);
+  gtk_widget_class_bind_template_child (widget_class, CcDateTimePage, twentyfour_format_button);
+  gtk_widget_class_bind_template_child (widget_class, CcDateTimePage, ampm_format_button);
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePage, weekday_switch);
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePage, date_switch);
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePage, seconds_switch);
@@ -859,7 +850,6 @@ cc_date_time_page_class_init (CcDateTimePageClass *klass)
   gtk_widget_class_bind_template_callback (widget_class, list_box_row_activated);
   gtk_widget_class_bind_template_callback (widget_class, time_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, change_clock_settings);
-  gtk_widget_class_bind_template_callback (widget_class, format_clock_name_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_date_box_row_activated_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_month_selection_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, update_page_summary);
