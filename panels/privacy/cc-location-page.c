@@ -195,6 +195,7 @@ add_location_app (CcLocationPage *self,
 
   icon = g_app_info_get_icon (G_APP_INFO (app_info));
   w = gtk_image_new_from_gicon (icon);
+  gtk_image_set_icon_size (GTK_IMAGE (w), GTK_ICON_SIZE_LARGE);
   gtk_widget_set_valign (w, GTK_ALIGN_CENTER);
   gtk_size_group_add_widget (self->location_icon_size_group, w);
   adw_action_row_add_prefix (ADW_ACTION_ROW (row), w);
