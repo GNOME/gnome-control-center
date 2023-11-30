@@ -157,8 +157,7 @@ bg_wallpapers_source_class_init (BgWallpapersSourceClass *klass)
 }
 
 BgWallpapersSource *
-bg_wallpapers_source_new (GtkWidget *widget)
+bg_wallpapers_source_new (void)
 {
-  return g_object_new (BG_TYPE_WALLPAPERS_SOURCE, "widget", widget, NULL);
+  return g_object_new (BG_TYPE_WALLPAPERS_SOURCE, NULL);
 }
-

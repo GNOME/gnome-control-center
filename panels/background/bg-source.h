@@ -35,12 +35,4 @@ struct _BgSourceClass
 
 GListStore* bg_source_get_liststore (BgSource *source);
 
-gint bg_source_get_scale_factor (BgSource *source);
-
-gint bg_source_get_thumbnail_height (BgSource *source);
-
-gint bg_source_get_thumbnail_width (BgSource *source);
-
-GnomeDesktopThumbnailFactory* bg_source_get_thumbnail_factory (BgSource *source);
-
 G_END_DECLS

@@ -223,15 +223,15 @@ cc_background_item_get_frame_thumbnail (CcBackgroundItem             *item,
                 pixbuf = gnome_bg_create_frame_thumbnail (bg,
                                                           thumbs,
                                                           &monitor_layout,
-                                                          width,
-                                                          height,
+                                                          scale_factor * width,
+                                                          scale_factor * height,
                                                           frame);
         } else {
                 pixbuf = gnome_bg_create_thumbnail (bg,
                                                     thumbs,
                                                     &monitor_layout,
-                                                    width,
-                                                    height);
+                                                    scale_factor * width,
+                                                    scale_factor * height);
         }
 
         update_size (item);

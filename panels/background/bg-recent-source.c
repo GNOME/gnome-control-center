@@ -396,11 +396,9 @@ bg_recent_source_init (BgRecentSource *self)
 }
 
 BgRecentSource*
-bg_recent_source_new (GtkWidget *widget)
+bg_recent_source_new (void)
 {
-  return g_object_new (BG_TYPE_RECENT_SOURCE,
-                       "widget", widget,
-                       NULL);
+  return g_object_new (BG_TYPE_RECENT_SOURCE, NULL);
 }
 
 void

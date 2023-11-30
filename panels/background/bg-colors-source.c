@@ -212,8 +212,8 @@ bg_colors_source_class_init (BgColorsSourceClass *klass)
 }
 
 BgColorsSource *
-bg_colors_source_new (GtkWidget *widget)
+bg_colors_source_new (void)
 {
-  return g_object_new (BG_TYPE_COLORS_SOURCE, "widget", widget, NULL);
+  return g_object_new (BG_TYPE_COLORS_SOURCE, NULL);
 }
 

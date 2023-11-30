@@ -23,6 +23,7 @@
 
 #include "bg-source.h"
 #include "cc-background-item.h"
+#include <libgnome-desktop/gnome-desktop-thumbnail.h>
 
 G_BEGIN_DECLS
 
@@ -37,8 +38,10 @@ typedef enum {
 #define CC_BACKGROUND_PAINT_LIGHT_DARK (CC_BACKGROUND_PAINT_LIGHT |	\
                                         CC_BACKGROUND_PAINT_DARK)
 
-CcBackgroundPaintable * cc_background_paintable_new (BgSource               *source,
-                                                     CcBackgroundItem       *item,
-                                                     CcBackgroundPaintFlags  paint_flags);
+CcBackgroundPaintable * cc_background_paintable_new (GnomeDesktopThumbnailFactory *thumbnail_factory,
+                                                     CcBackgroundItem             *item,
+                                                     CcBackgroundPaintFlags        paint_flags,
+                                                     int                           width,
+                                                     int                           height);
 
 G_END_DECLS

@@ -26,8 +26,10 @@ struct _CcBackgroundPaintable
 {
   GObject           parent_instance;
 
-  BgSource         *source;
+  GnomeDesktopThumbnailFactory *thumbnail_factory;
   CcBackgroundItem *item;
+  int               width;
+  int               height;
   int               scale_factor;
   GtkTextDirection  text_direction;
 
@@ -40,8 +42,10 @@ struct _CcBackgroundPaintable
 enum
 {
   PROP_0,
-  PROP_SOURCE,
+  PROP_THUMBNAIL_FACTORY,
   PROP_ITEM,
+  PROP_WIDTH,
+  PROP_HEIGHT,
   PROP_SCALE_FACTOR,
   PROP_TEXT_DIRECTION,
   PROP_PAINT_FLAGS,
@@ -61,24 +65,19 @@ update_cache (CcBackgroundPaintable *self)
 {
   g_autoptr(GdkPixbuf) pixbuf = NULL;
   g_autoptr(GdkPixbuf) dark_pixbuf = NULL;
-  GnomeDesktopThumbnailFactory *factory;
-  int width, height;
   gboolean has_dark;
 
   g_clear_object (&self->texture);
   g_clear_object (&self->dark_texture);
 
-  factory = bg_source_get_thumbnail_factory (self->source);
-  width = bg_source_get_thumbnail_width (self->source);
-  height = bg_source_get_thumbnail_height (self->source);
   has_dark = cc_background_item_has_dark_version (self->item);
 
   if ((self->paint_flags & CC_BACKGROUND_PAINT_LIGHT) || !has_dark)
     {
       pixbuf = cc_background_item_get_thumbnail (self->item,
-                                                 factory,
-                                                 width,
-                                                 height,
+                                                 self->thumbnail_factory,
+                                                 self->width,
+                                                 self->height,
                                                  self->scale_factor,
                                                  FALSE);
       self->texture = GDK_PAINTABLE (gdk_texture_new_for_pixbuf (pixbuf));
@@ -87,9 +86,9 @@ update_cache (CcBackgroundPaintable *self)
   if ((self->paint_flags & CC_BACKGROUND_PAINT_DARK) && has_dark)
     {
       dark_pixbuf = cc_background_item_get_thumbnail (self->item,
-                                                      factory,
-                                                      width,
-                                                      height,
+                                                      self->thumbnail_factory,
+                                                      self->width,
+                                                      self->height,
                                                       self->scale_factor,
                                                       TRUE);
       self->dark_texture = GDK_PAINTABLE (gdk_texture_new_for_pixbuf (dark_pixbuf));
@@ -104,7 +103,7 @@ cc_background_paintable_dispose (GObject *object)
   CcBackgroundPaintable *self = CC_BACKGROUND_PAINTABLE (object);
 
   g_clear_object (&self->item);
-  g_clear_object (&self->source);
+  g_clear_object (&self->thumbnail_factory);
   g_clear_object (&self->texture);
   g_clear_object (&self->dark_texture);
 
@@ -131,12 +130,20 @@ cc_background_paintable_get_property (GObject    *object,
 
   switch (prop_id)
     {
-    case PROP_SOURCE:
-      g_value_set_object (value, self->source);
+    case PROP_THUMBNAIL_FACTORY:
+      g_value_set_object (value, self->thumbnail_factory);
       break;
 
     case PROP_ITEM:
       g_value_set_object (value, self->item);
+      break;
+
+    case PROP_WIDTH:
+      g_value_set_int (value, self->width);
+      break;
+
+    case PROP_HEIGHT:
+      g_value_set_int (value, self->height);
       break;
 
     case PROP_SCALE_FACTOR:
@@ -166,12 +173,20 @@ cc_background_paintable_set_property (GObject      *object,
 
   switch (prop_id)
     {
-    case PROP_SOURCE:
-      g_set_object (&self->source, g_value_get_object (value));
+    case PROP_THUMBNAIL_FACTORY:
+      g_set_object (&self->thumbnail_factory, g_value_get_object (value));
       break;
 
     case PROP_ITEM:
       g_set_object (&self->item, g_value_get_object (value));
+      break;
+
+    case PROP_WIDTH:
+      self->width = g_value_get_int (value);
+      break;
+
+    case PROP_HEIGHT:
+      self->height = g_value_get_int (value);
       break;
 
     case PROP_SCALE_FACTOR:
@@ -203,11 +218,11 @@ cc_background_paintable_class_init (CcBackgroundPaintableClass *klass)
   object_class->get_property = cc_background_paintable_get_property;
   object_class->set_property = cc_background_paintable_set_property;
 
-  properties[PROP_SOURCE] =
-    g_param_spec_object ("source",
-                         "Source",
-                         "Source",
-                         BG_TYPE_SOURCE,
+  properties[PROP_THUMBNAIL_FACTORY] =
+    g_param_spec_object ("thumbnail-factory",
+                         "Thumbnail factory",
+                         "Thumbnail factory",
+                         GNOME_DESKTOP_TYPE_THUMBNAIL_FACTORY,
                          G_PARAM_READWRITE |
                          G_PARAM_CONSTRUCT_ONLY |
                          G_PARAM_STATIC_STRINGS);
@@ -220,6 +235,24 @@ cc_background_paintable_class_init (CcBackgroundPaintableClass *klass)
                          G_PARAM_READWRITE |
                          G_PARAM_CONSTRUCT_ONLY |
                          G_PARAM_STATIC_STRINGS);
+
+  properties[PROP_WIDTH] =
+    g_param_spec_int ("width",
+                      "Width",
+                      "Width",
+                      1, G_MAXINT, 144,
+                      G_PARAM_READWRITE |
+                      G_PARAM_CONSTRUCT_ONLY |
+                      G_PARAM_STATIC_STRINGS);
+
+  properties[PROP_HEIGHT] =
+    g_param_spec_int ("height",
+                      "Height",
+                      "Height",
+                      1, G_MAXINT, 144 * 3 / 4,
+                      G_PARAM_READWRITE |
+                      G_PARAM_CONSTRUCT_ONLY |
+                      G_PARAM_STATIC_STRINGS);
 
   properties[PROP_SCALE_FACTOR] =
     g_param_spec_int ("scale-factor",
@@ -334,17 +367,24 @@ cc_background_paintable_paintable_init (GdkPaintableInterface *iface)
   iface->get_intrinsic_aspect_ratio = cc_background_paintable_get_intrinsic_aspect_ratio;
 }
 
+/* Workaround for a typo in libgnome-desktop, see gnome-desktop!160 */
+#define G_TYPE_INSTANCE_CHECK_TYPE G_TYPE_CHECK_INSTANCE_TYPE
+
 CcBackgroundPaintable *
-cc_background_paintable_new (BgSource               *source,
-                             CcBackgroundItem       *item,
-                             CcBackgroundPaintFlags  paint_flags)
+cc_background_paintable_new (GnomeDesktopThumbnailFactory *thumbnail_factory,
+                             CcBackgroundItem             *item,
+                             CcBackgroundPaintFlags        paint_flags,
+                             int                           width,
+                             int                           height)
 {
-  g_return_val_if_fail (BG_IS_SOURCE (source), NULL);
+  g_return_val_if_fail (GNOME_DESKTOP_IS_THUMBNAIL_FACTORY (thumbnail_factory), NULL);
   g_return_val_if_fail (CC_IS_BACKGROUND_ITEM (item), NULL);
 
   return g_object_new (CC_TYPE_BACKGROUND_PAINTABLE,
-                       "source", source,
+                       "thumbnail-factory", thumbnail_factory,
                        "item", item,
                        "paint-flags", paint_flags,
+                       "width", width,
+                       "height", height,
                        NULL);
 }
