@@ -600,8 +600,6 @@ cc_remote_desktop_page_setup_remote_desktop_dialog (CcRemoteDesktopPage *self)
                           self->remote_control_switch, "sensitive",
                           G_BINDING_SYNC_CREATE);
 
-  update_page_summary (self);
-
   hostname = get_hostname ();
   gtk_label_set_label (GTK_LABEL (self->remote_desktop_device_name_label),
                        hostname);
@@ -757,6 +755,10 @@ cc_remote_desktop_page_init (CcRemoteDesktopPage *self)
   g_autoptr(GtkCssProvider) provider = NULL;
 
   gtk_widget_init_template (GTK_WIDGET (self));
+
+  gtk_switch_set_active (GTK_SWITCH (self->remote_desktop_switch),
+                         is_remote_desktop_enabled (self));
+  update_page_summary (self);
 
   self->cancellable = g_cancellable_new ();
   gsd_sharing_proxy_new_for_bus (G_BUS_TYPE_SESSION,
