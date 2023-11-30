@@ -21,12 +21,16 @@
 #include <libgnome-desktop/gnome-desktop-thumbnail.h>
 
 #include "cc-background-preview.h"
+#include "cc-background-paintable.h"
+
+#define THUMBNAIL_WIDTH 256 /* No use asking for more, gnome_bg caps at 256 */
+#define THUMBNAIL_HEIGHT (THUMBNAIL_WIDTH * 3 / 4)
 
 struct _CcBackgroundPreview
 {
   GtkWidget         parent;
 
-  GtkWidget        *drawing_area;
+  GtkWidget        *picture;
   GtkWidget        *light_dark_window;
   GtkWidget        *dark_window;
 
@@ -48,35 +52,6 @@ enum
 
 static GParamSpec *properties [N_PROPS];
 
-/* Callbacks */
-
-static void
-draw_preview_func (GtkDrawingArea *drawing_area,
-                   cairo_t        *cr,
-                   gint            width,
-                   gint            height,
-                   gpointer        user_data)
-{
-  CcBackgroundPreview *self = CC_BACKGROUND_PREVIEW (user_data);
-  g_autoptr(GdkPixbuf) pixbuf = NULL;
-  gint scale_factor;
-
-  if (!self->item)
-    return;
-
-  scale_factor = gtk_widget_get_scale_factor (GTK_WIDGET (drawing_area));
-  pixbuf = cc_background_item_get_thumbnail (self->item,
-                                             self->thumbnail_factory,
-                                             width,
-                                             height,
-                                             scale_factor,
-                                             self->is_dark &&
-                                             cc_background_item_has_dark_version (self->item));
-
-  gdk_cairo_set_source_pixbuf (cr, pixbuf, 0, 0);
-  cairo_paint (cr);
-}
-
 /* GObject overrides */
 
 static void
@@ -84,7 +59,7 @@ cc_background_preview_dispose (GObject *object)
 {
   CcBackgroundPreview *self = (CcBackgroundPreview *)object;
 
-  g_clear_pointer (&self->drawing_area, gtk_widget_unparent);
+  g_clear_pointer (&self->picture, gtk_widget_unparent);
   g_clear_pointer (&self->light_dark_window, gtk_widget_unparent);
   g_clear_pointer (&self->dark_window, gtk_widget_unparent);
 
@@ -173,36 +148,6 @@ cc_background_preview_get_request_mode (GtkWidget *widget)
 }
 
 static void
-get_primary_monitor_geometry (int *width, int *height)
-{
-  GdkDisplay *display;
-  GListModel *monitors;
-
-  display = gdk_display_get_default ();
-
-  monitors = gdk_display_get_monitors (display);
-  if (monitors)
-    {
-      g_autoptr(GdkMonitor) primary_monitor = NULL;
-      GdkRectangle monitor_layout;
-
-      primary_monitor = g_list_model_get_item (monitors, 0);
-      gdk_monitor_get_geometry (primary_monitor, &monitor_layout);
-      if (width)
-        *width = monitor_layout.width;
-      if (height)
-        *height = monitor_layout.height;
-
-      return;
-    }
-
-  if (width)
-    *width = 1920;
-  if (height)
-    *height = 1080;
-}
-
-static void
 cc_background_preview_measure (GtkWidget      *widget,
                                GtkOrientation  orientation,
                                gint            for_size,
@@ -212,12 +157,9 @@ cc_background_preview_measure (GtkWidget      *widget,
                                gint           *natural_baseline)
 {
   GtkWidget *child;
-  int width;
-
-  get_primary_monitor_geometry (&width, NULL);
 
   if (orientation == GTK_ORIENTATION_HORIZONTAL)
-    *natural = width;
+    *natural = THUMBNAIL_WIDTH;
   else if (for_size < 0)
     *natural = 0;
   else
@@ -269,7 +211,7 @@ cc_background_preview_size_allocate (GtkWidget *widget,
     gsk_transform_translate (NULL, &GRAPHENE_POINT_INIT (is_rtl ? margin_x : opposite_margin_x,
                                                          margin_y));
 
-  gtk_widget_allocate (self->drawing_area, width, height, baseline, NULL);
+  gtk_widget_allocate (self->picture, width, height, baseline, NULL);
   gtk_widget_allocate (self->dark_window, window_width, window_height,
                        baseline, back_transform);
   gtk_widget_allocate (self->light_dark_window, window_width, window_height,
@@ -307,7 +249,7 @@ cc_background_preview_class_init (CcBackgroundPreviewClass *klass)
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/background/cc-background-preview.ui");
 
-  gtk_widget_class_bind_template_child (widget_class, CcBackgroundPreview, drawing_area);
+  gtk_widget_class_bind_template_child (widget_class, CcBackgroundPreview, picture);
   gtk_widget_class_bind_template_child (widget_class, CcBackgroundPreview, light_dark_window);
   gtk_widget_class_bind_template_child (widget_class, CcBackgroundPreview, dark_window);
 
@@ -334,15 +276,27 @@ void
 cc_background_preview_set_item (CcBackgroundPreview *self,
                                 CcBackgroundItem    *item)
 {
+  g_autoptr(CcBackgroundPaintable) paintable;
+  CcBackgroundPaintFlags paint_flags;
+
   g_return_if_fail (CC_IS_BACKGROUND_PREVIEW (self));
   g_return_if_fail (CC_IS_BACKGROUND_ITEM (item));
 
   if (!g_set_object (&self->item, item))
     return;
 
-  gtk_drawing_area_set_draw_func (GTK_DRAWING_AREA (self->drawing_area),
-                                  draw_preview_func, self, NULL);
-  gtk_widget_queue_draw (self->drawing_area);
+  paint_flags = self->is_dark ? CC_BACKGROUND_PAINT_DARK : CC_BACKGROUND_PAINT_LIGHT;
+
+  paintable = cc_background_paintable_new (self->thumbnail_factory,
+                                           item,
+                                           paint_flags,
+                                           THUMBNAIL_WIDTH,
+                                           THUMBNAIL_HEIGHT);
+
+  g_object_bind_property (self->picture, "scale-factor",
+                          paintable, "scale-factor", G_BINDING_SYNC_CREATE);
+
+  gtk_picture_set_paintable (GTK_PICTURE (self->picture), GDK_PAINTABLE (paintable));
 
   g_object_notify_by_pspec (G_OBJECT (self), properties[PROP_ITEM]);
 }
