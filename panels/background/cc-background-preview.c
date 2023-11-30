@@ -159,16 +159,15 @@ cc_background_preview_measure (GtkWidget      *widget,
   GtkWidget *child;
 
   if (orientation == GTK_ORIENTATION_HORIZONTAL)
-    *natural = THUMBNAIL_WIDTH;
-  else if (for_size < 0)
-    *natural = 0;
+    {
+      *natural = THUMBNAIL_WIDTH;
+      *minimum = 0;
+    }
   else
-    *natural = floor ((double) for_size * 0.75); /* 4:3 aspect ratio */
-
-  if (orientation == GTK_ORIENTATION_VERTICAL)
-    *minimum = *natural;
-  else
-    *minimum = 0;
+    {
+      *natural = MAX (0, for_size * 3 / 4); /* 4:3 aspect ratio */
+      *minimum = *natural;
+    }
 
   for (child = gtk_widget_get_first_child (widget);
        child;
