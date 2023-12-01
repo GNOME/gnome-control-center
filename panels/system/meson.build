@@ -12,7 +12,6 @@ i18n.merge_file(
 
 sources = files(
   'cc-system-panel.c',
-  'cc-system-page.c',
   'about/cc-about-page.c',
   'about/cc-system-details-window.c',
   'about/cc-info-entry.c',
