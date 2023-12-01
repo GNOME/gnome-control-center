@@ -68,7 +68,7 @@
 
 struct _CcDateTimePage
 {
-  CcSystemPage  parent_instance;
+  AdwNavigationPage  parent_instance;
 
   GList *toplevels;
 
@@ -124,7 +124,7 @@ struct _CcDateTimePage
   int        month; /* index starts from 1 */
 };
 
-G_DEFINE_TYPE (CcDateTimePage, cc_date_time_page, CC_TYPE_SYSTEM_PAGE)
+G_DEFINE_TYPE (CcDateTimePage, cc_date_time_page, ADW_TYPE_NAVIGATION_PAGE)
 
 static void update_time (CcDateTimePage *self);
 
@@ -796,17 +796,6 @@ sort_date_box (GtkListBoxRow  *a,
 }
 
 static void
-update_page_summary (CcDateTimePage *self)
-{
-  gboolean enabled =
-    gtk_switch_get_active (GTK_SWITCH (self->network_time_switch));
-
-  cc_system_page_set_summary (CC_SYSTEM_PAGE (self), enabled ?
-                              _("Automatic date and time") :
-                              gtk_label_get_text (self->timezone_label));
-}
-
-static void
 cc_date_time_page_class_init (CcDateTimePageClass *klass)
 {
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
@@ -852,7 +841,6 @@ cc_date_time_page_class_init (CcDateTimePageClass *klass)
   gtk_widget_class_bind_template_callback (widget_class, change_clock_settings);
   gtk_widget_class_bind_template_callback (widget_class, on_date_box_row_activated_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_month_selection_changed_cb);
-  gtk_widget_class_bind_template_callback (widget_class, update_page_summary);
 
   bind_textdomain_codeset (GETTEXT_PACKAGE_TIMEZONES, "UTF-8");
 }
@@ -910,8 +898,6 @@ cc_date_time_page_init (CcDateTimePage *self)
 
   /* setup_timezone_dialog (self); */
   setup_datetime_dialog (self);
-
-  update_page_summary (self);
 
   /* set up network time switch */
   bind_switch_to_row (self,
