@@ -35,7 +35,6 @@
 #include "cc-region-page.h"
 
 #include <act/act.h>
-#include <adwaita.h>
 #include <errno.h>
 #include <glib/gi18n.h>
 #include <gio/gio.h>
@@ -60,7 +59,7 @@ typedef enum {
 } CcLocaleTarget;
 
 struct _CcRegionPage {
-        CcSystemPage     parent_instance;
+        AdwNavigationPage parent_instance;
 
         CcListRow       *formats_row;
         AdwBanner       *banner;
@@ -87,7 +86,7 @@ struct _CcRegionPage {
         GCancellable    *cancellable;
 };
 
-G_DEFINE_TYPE (CcRegionPage, cc_region_page, CC_TYPE_SYSTEM_PAGE)
+G_DEFINE_TYPE (CcRegionPage, cc_region_page, ADW_TYPE_NAVIGATION_PAGE)
 
 /* Auxiliary methods */
 
@@ -527,7 +526,6 @@ update_user_language_row (CcRegionPage *self)
                 name = gnome_get_language_from_locale (DEFAULT_LOCALE, DEFAULT_LOCALE);
 
         adw_action_row_set_subtitle (ADW_ACTION_ROW (self->language_row), name);
-        cc_system_page_set_summary (CC_SYSTEM_PAGE (self), name);
 
         /* Formats will change too if not explicitly set. */
         update_user_region_row (self);
