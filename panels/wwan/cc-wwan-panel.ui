@@ -33,6 +33,7 @@
                       <object class="GtkBox">
                         <property name="hexpand">True</property>
                         <property name="orientation">vertical</property>
+                        <property name="valign">center</property>
                         <child>
                           <object class="GtkStack" id="main_stack">
                             <property name="vhomogeneous">False</property>
@@ -44,37 +45,10 @@
                               <object class="GtkStackPage">
                                 <property name="name">no-wwan-devices</property>
                                 <property name="child">
-                                  <object class="GtkBox">
-                                    <property name="hexpand">True</property>
-                                    <property name="vexpand">True</property>
-                                    <property name="valign">center</property>
-                                    <property name="orientation">vertical</property>
-                                    <child>
-                                      <object class="GtkImage">
-                                        <property name="icon-name">network-cellular-offline-symbolic</property>
-                                        <property name="pixel-size">192</property>
-                                        <property name="margin-bottom">18</property>
-                                        <style>
-                                          <class name="dim-label"/>
-                                        </style>
-                                      </object>
-                                    </child>
-                                    <child>
-                                      <object class="GtkLabel">
-                                        <property name="wrap">True</property>
-                                        <property name="label" translatable="yes">No WWAN Adapter Found</property>
-                                        <attributes>
-                                          <attribute name="weight" value="bold"></attribute>
-                                          <attribute name="scale" value="1.2"></attribute>
-                                        </attributes>
-                                      </object>
-                                    </child>
-                                    <child>
-                                      <object class="GtkLabel">
-                                        <property name="wrap">True</property>
-                                        <property name="label" translatable="yes">Make sure you have a Wireless Wan/Cellular device</property>
-                                      </object>
-                                    </child>
+                                  <object class="AdwStatusPage" id="disabled_page">
+                                    <property name="icon-name">network-cellular-offline-symbolic</property>
+                                    <property name="title" translatable="yes">No WWAN Adapter Found</property>
+                                    <property name="description" translatable="yes">Make sure you have a Wireless Wan/Cellular device</property>
                                   </object>
                                 </property>
                               </object>
@@ -85,46 +59,23 @@
                               <object class="GtkStackPage">
                                 <property name="name">airplane-mode</property>
                                 <property name="child">
-                                  <object class="GtkBox">
-                                    <property name="hexpand">True</property>
-                                    <property name="vexpand">True</property>
-                                    <property name="orientation">vertical</property>
-                                    <property name="valign">center</property>
-                                    <child>
-                                      <object class="GtkImage">
-                                        <property name="icon-name">airplane-mode-symbolic</property>
-                                        <property name="pixel-size">192</property>
-                                        <property name="margin-bottom">18</property>
-                                        <style>
-                                          <class name="dim-label"/>
-                                        </style>
-                                      </object>
-                                    </child>
-                                    <child>
-                                      <object class="GtkLabel">
-                                        <property name="wrap">True</property>
-                                        <property name="label" translatable="yes">Airplane Mode On</property>
-                                        <attributes>
-                                          <attribute name="weight" value="bold"></attribute>
-                                          <attribute name="scale" value="1.2"></attribute>
-                                        </attributes>
-                                      </object>
-                                    </child>
-                                    <child>
-                                      <object class="GtkLabel">
-                                        <property name="wrap">True</property>
-                                        <property name="label" translatable="yes">Wireless Wan is disabled when airplane mode is on</property>
-                                      </object>
-                                    </child>
-                                    <child>
+                                  <object class="AdwStatusPage">
+                                    <property name="icon-name">airplane-mode-symbolic</property>
+                                    <property name="title" translatable="yes">Airplane Mode On</property>
+                                    <property name="description" translatable="yes">Wireless Wan is disabled when airplane mode is on</property>
+                                    <property name="child">
                                       <object class="GtkButton">
                                         <property name="halign">center</property>
                                         <property name="use-underline">True</property>
                                         <property name="margin-top">24</property>
                                         <property name="label" translatable="yes">_Turn off Airplane Mode</property>
                                         <signal name="clicked" handler="wwan_on_airplane_off_clicked_cb" swapped="yes"/>
+                                        <style>
+                                          <class name="pill"/>
+                                          <class name="suggested-action"/>
+                                        </style>
                                       </object>
-                                    </child>
+                                    </property>
                                   </object>
                                 </property>
                               </object>
