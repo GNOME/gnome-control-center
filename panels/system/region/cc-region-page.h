@@ -23,12 +23,13 @@
 
 #pragma once
 
-#include <adwaita.h>
+
+#include "cc-system-page.h"
 
 G_BEGIN_DECLS
 
 #define CC_TYPE_REGION_PAGE (cc_region_page_get_type ())
 
-G_DECLARE_FINAL_TYPE (CcRegionPage, cc_region_page, CC, REGION_PAGE, AdwNavigationPage)
+G_DECLARE_FINAL_TYPE (CcRegionPage, cc_region_page, CC, REGION_PAGE, CcSystemPage)
 
 G_END_DECLS

@@ -55,7 +55,7 @@
 #define REMOTE_DESKTOP_SERVICE "gnome-remote-desktop.service"
 
 struct _CcRemoteDesktopPage {
-  AdwNavigationPage parent_instance;
+  CcSystemPage  parent_instance;
 
   GtkWidget *remote_control_switch;
   GtkWidget *remote_desktop_toast_overlay;
@@ -78,7 +78,7 @@ struct _CcRemoteDesktopPage {
   GCancellable *cancellable;
 };
 
-G_DEFINE_TYPE (CcRemoteDesktopPage, cc_remote_desktop_page, ADW_TYPE_NAVIGATION_PAGE)
+G_DEFINE_TYPE (CcRemoteDesktopPage, cc_remote_desktop_page, CC_TYPE_SYSTEM_PAGE)
 
 static void
 remote_desktop_show_encryption_fingerprint (CcRemoteDesktopPage *self)
@@ -572,6 +572,16 @@ pw_generate (void)
 }
 
 static void
+update_page_summary (CcRemoteDesktopPage *self)
+{
+  gboolean enabled =
+    gtk_switch_get_active (GTK_SWITCH (self->remote_desktop_switch));
+
+  cc_system_page_set_summary (CC_SYSTEM_PAGE (self),
+                              enabled ? _("Enabled") : ("Disabled"));
+}
+
+static void
 cc_remote_desktop_page_setup_remote_desktop_dialog (CcRemoteDesktopPage *self)
 {
   const gchar *username = NULL;
@@ -740,6 +750,7 @@ cc_remote_desktop_page_class_init (CcRemoteDesktopPageClass * klass)
   gtk_widget_class_bind_template_callback (widget_class, on_device_address_copy_clicked);
   gtk_widget_class_bind_template_callback (widget_class, on_username_copy_clicked);
   gtk_widget_class_bind_template_callback (widget_class, on_password_copy_clicked);
+  gtk_widget_class_bind_template_callback (widget_class, update_page_summary);
   gtk_widget_class_bind_template_callback (widget_class, remote_desktop_show_encryption_fingerprint);
 }
 
@@ -752,6 +763,7 @@ cc_remote_desktop_page_init (CcRemoteDesktopPage *self)
 
   gtk_switch_set_active (GTK_SWITCH (self->remote_desktop_switch),
                          is_remote_desktop_enabled (self));
+  update_page_summary (self);
 
   self->cancellable = g_cancellable_new ();
   gsd_sharing_proxy_new_for_bus (G_BUS_TYPE_SESSION,
