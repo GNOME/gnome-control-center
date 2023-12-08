@@ -239,10 +239,24 @@
                             </child>
                           </object>
                         </child>
+
                         <child>
                           <object class="AdwPreferencesGroup">
                             <property name="title" translatable="yes">Clicking</property>
+                            <child>
+                              <object class="CcSplitRow" id="two_finger_push_row">
+                                <property name="title" translatable="yes">Secondary Click</property>
+                                <property name="default-option-title" translatable="yes">Two Finger Push</property>
+                                <property name="default-option-subtitle" translatable="yes">Push anywhere with 2 fingers</property>
+                                <property name="alternative-option-title" translatable="yes">Corner Push</property>
+                                <property name="alternative-option-subtitle" translatable="yes">Push with a single finger in the corner</property>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
 
+                        <child>
+                          <object class="AdwPreferencesGroup">
                             <child>
                               <object class="CcIllustratedRow" id="tap_to_click_row">
                                 <property name="visible">False</property>
