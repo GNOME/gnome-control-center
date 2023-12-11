@@ -34,7 +34,7 @@ G_BEGIN_DECLS
 #define CC_TYPE_WWAN_MODE_DIALOG (cc_wwan_mode_dialog_get_type())
 G_DECLARE_FINAL_TYPE (CcWwanModeDialog, cc_wwan_mode_dialog, CC, WWAN_MODE_DIALOG, GtkDialog)
 
-CcWwanModeDialog *cc_wwan_mode_dialog_new (GtkWindow    *parent_window,
-                                           CcWwanDevice *device);
+GtkWindow *cc_wwan_mode_dialog_new (GtkWindow    *parent_window,
+                                    CcWwanDevice *device);
 
 G_END_DECLS

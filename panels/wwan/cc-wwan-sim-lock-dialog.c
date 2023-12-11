@@ -293,16 +293,16 @@ cc_wwan_sim_lock_dialog_init (CcWwanSimLockDialog *self)
   gtk_widget_init_template (GTK_WIDGET (self));
 }
 
-CcWwanSimLockDialog *
+GtkWindow *
 cc_wwan_sim_lock_dialog_new (GtkWindow    *parent_window,
                              CcWwanDevice *device)
 {
   g_return_val_if_fail (GTK_IS_WINDOW (parent_window), NULL);
   g_return_val_if_fail (CC_IS_WWAN_DEVICE (device), NULL);
 
-  return g_object_new (CC_TYPE_WWAN_SIM_LOCK_DIALOG,
-                       "transient-for", parent_window,
-                       "use-header-bar", 1,
-                       "device", device,
-                       NULL);
+  return GTK_WINDOW (g_object_new (CC_TYPE_WWAN_SIM_LOCK_DIALOG,
+                                   "transient-for", parent_window,
+                                   "use-header-bar", 1,
+                                   "device", device,
+                                   NULL));
 }

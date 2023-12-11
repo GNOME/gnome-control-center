@@ -78,11 +78,11 @@ struct _CcWwanDevicePage
   CcWwanData    *wwan_data;
   GDBusProxy    *wwan_proxy;
 
-  CcWwanApnDialog     *apn_dialog;
-  CcWwanDetailsDialog *details_dialog;
-  CcWwanModeDialog    *network_mode_dialog;
-  CcWwanNetworkDialog *network_dialog;
-  CcWwanSimLockDialog *sim_lock_dialog;
+  GtkWindow     *apn_dialog;
+  GtkWindow     *details_dialog;
+  GtkWindow     *network_mode_dialog;
+  GtkWindow     *network_dialog;
+  GtkWindow     *sim_lock_dialog;
 
   gint                 sim_index;
   /* Set if a change is triggered in a signal’s callback,
@@ -533,11 +533,11 @@ cc_wwan_device_page_dispose (GObject *object)
 {
   CcWwanDevicePage *self = (CcWwanDevicePage *)object;
 
-  g_clear_pointer ((GtkWindow **)&self->apn_dialog, gtk_window_destroy);
-  g_clear_pointer ((GtkWindow **)&self->details_dialog, gtk_window_destroy);
-  g_clear_pointer ((GtkWindow **)&self->network_mode_dialog, gtk_window_destroy);
-  g_clear_pointer ((GtkWindow **)&self->network_dialog, gtk_window_destroy);
-  g_clear_pointer ((GtkWindow **)&self->sim_lock_dialog, gtk_window_destroy);
+  g_clear_pointer (&self->apn_dialog, gtk_window_destroy);
+  g_clear_pointer (&self->details_dialog, gtk_window_destroy);
+  g_clear_pointer (&self->network_mode_dialog, gtk_window_destroy);
+  g_clear_pointer (&self->network_dialog, gtk_window_destroy);
+  g_clear_pointer (&self->sim_lock_dialog, gtk_window_destroy);
 
   g_clear_object (&self->wwan_proxy);
   g_clear_object (&self->device);

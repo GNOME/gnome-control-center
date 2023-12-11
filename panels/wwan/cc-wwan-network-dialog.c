@@ -415,16 +415,16 @@ cc_wwan_network_dialog_init (CcWwanNetworkDialog *self)
   self->search_cancellable = g_cancellable_new ();
 }
 
-CcWwanNetworkDialog *
+GtkWindow *
 cc_wwan_network_dialog_new (GtkWindow    *parent_window,
                             CcWwanDevice *device)
 {
   g_return_val_if_fail (GTK_IS_WINDOW (parent_window), NULL);
   g_return_val_if_fail (CC_IS_WWAN_DEVICE (device), NULL);
 
-  return g_object_new (CC_TYPE_WWAN_NETWORK_DIALOG,
-                       "transient-for", parent_window,
-                       "use-header-bar", 1,
-                       "device", device,
-                       NULL);
+  return GTK_WINDOW (g_object_new (CC_TYPE_WWAN_NETWORK_DIALOG,
+                                   "transient-for", parent_window,
+                                   "use-header-bar", 1,
+                                   "device", device,
+                                   NULL));
 }
