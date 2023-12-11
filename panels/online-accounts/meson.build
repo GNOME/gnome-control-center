@@ -29,6 +29,7 @@ sources += gnome.compile_resources(
 
 deps = common_deps + [
   goa_dep,
+  dependency('goa-backend-1.0', version: goa_req_version),
 ]
 
 panels_libs += static_library(
@@ -37,34 +38,6 @@ panels_libs += static_library(
   include_directories: [ top_inc, common_inc ],
   dependencies: deps,
   c_args: cflags
-)
-
-goa_helper_deps = [
-  dependency('goa-backend-1.0', version: goa_req_version),
-]
-
-goa_helper_cflags = cflags + [
-  '-DGNOMELOCALEDIR="@0@"'.format(control_center_localedir),
-]
-
-gtk_x11_dep = dependency('gtk+-x11-3.0', required: false)
-if gtk_x11_dep.found()
-  goa_helper_cflags += ['-DHAVE_GTK_X11']
-endif
-
-gtk_wayland_dep = dependency('gtk+-wayland-3.0', required: false)
-if gtk_wayland_dep.found()
-  goa_helper_cflags += ['-DHAVE_GTK_WAYLAND']
-endif
-
-executable(
-  'gnome-control-center-goa-helper',
-  'gnome-control-center-goa-helper.c',
-  include_directories: [ top_inc ],
-  dependencies: goa_helper_deps,
-  c_args: goa_helper_cflags,
-  install: true,
-  install_dir: control_center_libexecdir,
 )
 
 subdir('icons')

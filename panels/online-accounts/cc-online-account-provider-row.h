@@ -21,12 +21,16 @@
 #include <gtk/gtk.h>
 #include <adwaita.h>
 
+#define GOA_API_IS_SUBJECT_TO_CHANGE
+#define GOA_BACKEND_API_IS_SUBJECT_TO_CHANGE
+#include <goabackend/goabackend.h>
+
 G_BEGIN_DECLS
 
 G_DECLARE_FINAL_TYPE (CcOnlineAccountProviderRow, cc_online_account_provider_row, CC, ONLINE_ACCOUNT_PROVIDER_ROW, AdwActionRow)
 
-CcOnlineAccountProviderRow *cc_online_account_provider_row_new          (GVariant *provider);
+CcOnlineAccountProviderRow *cc_online_account_provider_row_new          (GoaProvider *provider);
 
-GVariant                   *cc_online_account_provider_row_get_provider (CcOnlineAccountProviderRow *row);
+GoaProvider                *cc_online_account_provider_row_get_provider (CcOnlineAccountProviderRow *row);
 
 G_END_DECLS

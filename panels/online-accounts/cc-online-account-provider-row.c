@@ -19,6 +19,10 @@
 #include <config.h>
 #include <glib/gi18n.h>
 
+#define GOA_API_IS_SUBJECT_TO_CHANGE
+#define GOA_BACKEND_API_IS_SUBJECT_TO_CHANGE
+#include <goabackend/goabackend.h>
+
 #include "cc-online-account-provider-row.h"
 #include "cc-online-accounts-resources.h"
 
@@ -28,7 +32,7 @@ struct _CcOnlineAccountProviderRow
 
   GtkImage *icon_image;
 
-  GVariant *provider;
+  GoaProvider *provider;
 };
 
 G_DEFINE_TYPE (CcOnlineAccountProviderRow, cc_online_account_provider_row, ADW_TYPE_ACTION_ROW)
@@ -56,7 +60,7 @@ cc_online_account_provider_row_dispose (GObject *object)
 {
   CcOnlineAccountProviderRow *self = CC_ONLINE_ACCOUNT_PROVIDER_ROW (object);
 
-  g_clear_pointer (&self->provider, g_variant_unref);
+  g_clear_object (&self->provider);
 
   G_OBJECT_CLASS (cc_online_account_provider_row_parent_class)->dispose (object);
 }
@@ -81,7 +85,7 @@ cc_online_account_provider_row_init (CcOnlineAccountProviderRow *self)
 }
 
 CcOnlineAccountProviderRow *
-cc_online_account_provider_row_new (GVariant *provider)
+cc_online_account_provider_row_new (GoaProvider *provider)
 {
   CcOnlineAccountProviderRow *self;
   g_autoptr(GIcon) icon = NULL;
@@ -96,18 +100,9 @@ cc_online_account_provider_row_new (GVariant *provider)
     }
   else
     {
-      g_autoptr(GVariant) icon_variant = NULL;
-
-      self->provider = g_variant_ref (provider);
-
-      g_variant_get (provider, "(ssviu)",
-                     NULL,
-                     &name,
-                     &icon_variant,
-                     NULL,
-                     NULL);
-
-      icon = g_icon_deserialize (icon_variant);
+      self->provider = g_object_ref (provider);
+      icon = goa_provider_get_provider_icon (provider, NULL);
+      name = goa_provider_get_provider_name (provider, NULL);
     }
 
   gtk_image_set_from_gicon (self->icon_image, icon);
@@ -127,7 +122,7 @@ cc_online_account_provider_row_new (GVariant *provider)
   return self;
 }
 
-GVariant *
+GoaProvider *
 cc_online_account_provider_row_get_provider (CcOnlineAccountProviderRow *self)
 {
   g_return_val_if_fail (CC_IS_ONLINE_ACCOUNT_PROVIDER_ROW (self), NULL);
