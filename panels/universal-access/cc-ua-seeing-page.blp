@@ -69,10 +69,45 @@ template $CcUaSeeingPage: Adw.NavigationPage {
           }
         }
 
-        Adw.SwitchRow large_text_row {
-          title: _("_Large Text");
-          subtitle: _("Increase the size of all text in the user interface");
-          use-underline: true;
+        Adw.PreferencesRow {
+          Box {
+            margin-start: 12;
+            margin-end: 12;
+            margin-top: 6;
+            margin-bottom: 6;
+            orientation: vertical;
+            spacing: 6;
+
+            Label {
+              xalign: 0.0;
+              label: _("_Text Size");
+              use-underline: true;
+            }
+
+            Scale text_size_scale {
+              margin-start: 20;
+              margin-end: 20;
+              hexpand: true;
+
+              marks [
+                mark (1.00, bottom, _("Default")),
+                mark (1.05),
+                mark (1.10),
+                mark (1.15),
+                mark (1.20),
+                mark (1.25),
+                mark (1.30),
+              ]
+
+              adjustment: Adjustment {
+                lower: 1.00;
+                upper: 1.30;
+                value: 1.00;
+                step-increment: 0.01;
+                page-increment: 0.05;
+              };
+            }
+          }
         }
 
         $CcListRow cursor_size_row {

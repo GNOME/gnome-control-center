@@ -50,7 +50,7 @@ struct _CcUaSeeingPage
   AdwSwitchRow       *high_contrast_row;
   AdwSwitchRow       *status_shapes_row;
   GtkSwitch          *animation_effects_switch;
-  AdwSwitchRow       *large_text_row;
+  GtkScale           *text_size_scale;
   CcListRow          *cursor_size_row;
   AdwSwitchRow       *sound_keys_row;
   AdwSwitchRow       *show_scrollbars_row;
@@ -128,34 +128,6 @@ on_orca_proxy_ready (GObject      *source_object,
     }
 
   check_orca_show_preferences_support (self);
-}
-
-static gboolean
-get_large_text_mapping (GValue   *value,
-                        GVariant *variant,
-                        gpointer  user_data)
-{
-  gdouble factor;
-
-  factor = g_variant_get_double (variant);
-  g_value_set_boolean (value, factor > DPI_FACTOR_NORMAL);
-
-  return TRUE;
-}
-
-static GVariant *
-set_large_text_mapping (const GValue       *value,
-                        const GVariantType *expected_type,
-                        gpointer            user_data)
-{
-  GSettings *settings = user_data;
-
-  if (g_value_get_boolean (value))
-    return g_variant_new_double (DPI_FACTOR_LARGE);
-
-  g_settings_reset (settings, KEY_TEXT_SCALING_FACTOR);
-
-  return NULL;
 }
 
 static void
@@ -273,7 +245,7 @@ cc_ua_seeing_page_class_init (CcUaSeeingPageClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcUaSeeingPage, high_contrast_row);
   gtk_widget_class_bind_template_child (widget_class, CcUaSeeingPage, status_shapes_row);
   gtk_widget_class_bind_template_child (widget_class, CcUaSeeingPage, animation_effects_switch);
-  gtk_widget_class_bind_template_child (widget_class, CcUaSeeingPage, large_text_row);
+  gtk_widget_class_bind_template_child (widget_class, CcUaSeeingPage, text_size_scale);
   gtk_widget_class_bind_template_child (widget_class, CcUaSeeingPage, cursor_size_row);
   gtk_widget_class_bind_template_child (widget_class, CcUaSeeingPage, sound_keys_row);
   gtk_widget_class_bind_template_child (widget_class, CcUaSeeingPage, show_scrollbars_row);
@@ -310,14 +282,10 @@ cc_ua_seeing_page_init (CcUaSeeingPage *self)
                    self->animation_effects_switch, "active",
                    G_SETTINGS_BIND_DEFAULT);
 
-  /* Large Text */
-  g_settings_bind_with_mapping (self->interface_settings, KEY_TEXT_SCALING_FACTOR,
-                                self->large_text_row,
-                                "active", G_SETTINGS_BIND_DEFAULT,
-                                get_large_text_mapping,
-                                set_large_text_mapping,
-                                self->interface_settings,
-                                NULL);
+  /* Text Size */
+  g_settings_bind (self->interface_settings, KEY_TEXT_SCALING_FACTOR,
+                   gtk_range_get_adjustment (GTK_RANGE (self->text_size_scale)), "value",
+                   G_SETTINGS_BIND_DEFAULT);
 
   /* Sound Keys */
   g_settings_bind (self->kb_settings, KEY_TOGGLEKEYS_ENABLED,
