@@ -36,6 +36,7 @@
 # include "config.h"
 #endif
 
+#include <math.h>
 #include <glib/gi18n-lib.h>
 
 #include "cc-list-row.h"
@@ -67,6 +68,17 @@ struct _CcUaSeeingPage
 };
 
 G_DEFINE_TYPE (CcUaSeeingPage, cc_ua_seeing_page, ADW_TYPE_NAVIGATION_PAGE)
+
+static gboolean
+ua_text_size_change_value (GtkRange      *text_size_range,
+                           GtkScrollType *scroll,
+                           gdouble        value)
+{
+  /* Always round to 0.05 multiples */
+  gtk_range_set_value (text_size_range, round (value / 0.05) * 0.05);
+
+  return TRUE;
+}
 
 static void
 orca_get_version_cb (GObject      *source_object,
@@ -286,6 +298,9 @@ cc_ua_seeing_page_init (CcUaSeeingPage *self)
   g_settings_bind (self->interface_settings, KEY_TEXT_SCALING_FACTOR,
                    gtk_range_get_adjustment (GTK_RANGE (self->text_size_scale)), "value",
                    G_SETTINGS_BIND_DEFAULT);
+
+  g_signal_connect (GTK_RANGE (self->text_size_scale), "change-value",
+                    G_CALLBACK (ua_text_size_change_value), NULL);
 
   /* Sound Keys */
   g_settings_bind (self->kb_settings, KEY_TOGGLEKEYS_ENABLED,

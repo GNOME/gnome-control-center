@@ -103,8 +103,8 @@ template $CcUaSeeingPage: Adw.NavigationPage {
                 lower: 1.00;
                 upper: 1.30;
                 value: 1.00;
-                step-increment: 0.01;
-                page-increment: 0.05;
+                step-increment: 0.06;
+                page-increment: 0.06;
               };
             }
           }
@@ -114,7 +114,7 @@ template $CcUaSeeingPage: Adw.NavigationPage {
           title: _("_Cursor Size");
           subtitle: _("Increase the size of the cursor");
           activated => $ua_cursor_row_activated_cb(template);
-          show-arrow: true;
+          show-arrow: "True";
         }
 
         Adw.SwitchRow sound_keys_row {
