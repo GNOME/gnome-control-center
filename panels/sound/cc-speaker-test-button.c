@@ -202,7 +202,7 @@ cc_speaker_test_button_init (CcSpeakerTestButton *self)
   g_signal_connect (self, "clicked", G_CALLBACK (clicked_cb), NULL);
 }
 
-CcSpeakerTestButton *
+GtkWidget *
 cc_speaker_test_button_new (GSoundContext         *context,
                             pa_channel_position_t  position)
 {
@@ -217,12 +217,12 @@ cc_speaker_test_button_new (GSoundContext         *context,
                                   -1);
 
 
-  return self;
+  return GTK_WIDGET (self);
 }
 
 void
-cc_speaker_test_button_set_channel_position (CcSpeakerTestButton  *self,
-                                             pa_channel_position_t position)
+cc_speaker_test_button_set_channel_position (CcSpeakerTestButton   *self,
+                                             pa_channel_position_t  position)
 {
   g_return_if_fail (CC_IS_SPEAKER_TEST_BUTTON (self));
 

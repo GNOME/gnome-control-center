@@ -23,22 +23,22 @@
 
 struct _CcOutputTestWheel
 {
-  GtkWidget            parent_instance;
+  GtkWidget      parent_instance;
 
-  GtkWidget           *label;
-  CcSpeakerTestButton *front_center_speaker_button;
-  CcSpeakerTestButton *front_left_speaker_button;
-  CcSpeakerTestButton *front_left_of_center_speaker_button;
-  CcSpeakerTestButton *front_right_of_center_speaker_button;
-  CcSpeakerTestButton *front_right_speaker_button;
-  CcSpeakerTestButton *lfe_speaker_button;
-  CcSpeakerTestButton *rear_center_speaker_button;
-  CcSpeakerTestButton *rear_left_speaker_button;
-  CcSpeakerTestButton *rear_right_speaker_button;
-  CcSpeakerTestButton *side_left_speaker_button;
-  CcSpeakerTestButton *side_right_speaker_button;
+  GtkWidget     *label;
+  GtkWidget     *front_center_speaker_button;
+  GtkWidget     *front_left_speaker_button;
+  GtkWidget     *front_left_of_center_speaker_button;
+  GtkWidget     *front_right_of_center_speaker_button;
+  GtkWidget     *front_right_speaker_button;
+  GtkWidget     *lfe_speaker_button;
+  GtkWidget     *rear_center_speaker_button;
+  GtkWidget     *rear_left_speaker_button;
+  GtkWidget     *rear_right_speaker_button;
+  GtkWidget     *side_left_speaker_button;
+  GtkWidget     *side_right_speaker_button;
 
-  GSoundContext       *context;
+  GSoundContext *context;
 };
 
 G_DEFINE_TYPE (CcOutputTestWheel, cc_output_test_wheel, GTK_TYPE_WIDGET)
@@ -55,25 +55,25 @@ load_custom_css (CcOutputTestWheel *self)
                                               GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
 }
 
-static CcSpeakerTestButton*
+static GtkWidget*
 create_speaker_button (CcOutputTestWheel     *self,
                        pa_channel_position_t  position)
 {
-  CcSpeakerTestButton *button;
+  GtkWidget *button;
 
   button = cc_speaker_test_button_new (self->context, position);
-  gtk_widget_add_css_class (GTK_WIDGET (button), "circular");
-  gtk_widget_add_css_class (GTK_WIDGET (button), "opaque");
-  gtk_widget_set_parent (GTK_WIDGET (button), GTK_WIDGET (self));
+  gtk_widget_add_css_class (button, "circular");
+  gtk_widget_add_css_class (button, "opaque");
+  gtk_widget_set_parent (button, GTK_WIDGET (self));
 
   return button;
 }
 
 static void
-allocate_speaker_button (CcSpeakerTestButton *button,
-                         int                  width,
-                         int                  height,
-                         double               angle)
+allocate_speaker_button (GtkWidget *button,
+                         int        width,
+                         int        height,
+                         double     angle)
 {
   double rad, norm_x, norm_y;
   GtkRequisition nat;
@@ -83,14 +83,14 @@ allocate_speaker_button (CcSpeakerTestButton *button,
   norm_x = -(cos(rad) - 1) / 2;
   norm_y = -(sin(rad) - 1) / 2;
 
-  gtk_widget_get_preferred_size (GTK_WIDGET (button), NULL, &nat);
+  gtk_widget_get_preferred_size (button, NULL, &nat);
 
   allocation.width = nat.width;
   allocation.height = nat.height;
   allocation.x = (norm_x * width) - (allocation.width / 2);
   allocation.y = (norm_y * height) - (allocation.height / 2);
 
-  gtk_widget_size_allocate (GTK_WIDGET (button), &allocation, -1);
+  gtk_widget_size_allocate (button, &allocation, -1);
 }
 
 static void
@@ -136,13 +136,13 @@ cc_output_test_wheel_size_allocate (GtkWidget *widget,
   allocate_speaker_button (self->rear_center_speaker_button, width, height, 270);
   allocate_speaker_button (self->rear_left_speaker_button, width, height, 315);
 
-  gtk_widget_get_preferred_size(GTK_WIDGET (self->lfe_speaker_button), NULL, &natural_size);
+  gtk_widget_get_preferred_size(self->lfe_speaker_button, NULL, &natural_size);
   allocation.width = natural_size.width;
   allocation.height = natural_size.height;
   allocation.x = (width / 2) - (allocation.width / 2);
   allocation.y = (height * 0.2) - (allocation.height / 2);
 
-  gtk_widget_size_allocate (GTK_WIDGET (self->lfe_speaker_button), &allocation, -1);
+  gtk_widget_size_allocate (self->lfe_speaker_button, &allocation, -1);
 }
 
 static void
@@ -152,17 +152,17 @@ cc_output_test_wheel_dispose (GObject *object)
 
   g_clear_pointer (&self->label, gtk_widget_unparent);
 
-  g_clear_pointer ((GtkWidget**) &self->front_center_speaker_button, gtk_widget_unparent);
-  g_clear_pointer ((GtkWidget**) &self->front_left_speaker_button, gtk_widget_unparent);
-  g_clear_pointer ((GtkWidget**) &self->front_left_of_center_speaker_button, gtk_widget_unparent);
-  g_clear_pointer ((GtkWidget**) &self->front_right_of_center_speaker_button, gtk_widget_unparent);
-  g_clear_pointer ((GtkWidget**) &self->front_right_speaker_button, gtk_widget_unparent);
-  g_clear_pointer ((GtkWidget**) &self->lfe_speaker_button, gtk_widget_unparent);
-  g_clear_pointer ((GtkWidget**) &self->rear_center_speaker_button, gtk_widget_unparent);
-  g_clear_pointer ((GtkWidget**) &self->rear_left_speaker_button, gtk_widget_unparent);
-  g_clear_pointer ((GtkWidget**) &self->rear_right_speaker_button, gtk_widget_unparent);
-  g_clear_pointer ((GtkWidget**) &self->side_left_speaker_button, gtk_widget_unparent);
-  g_clear_pointer ((GtkWidget**) &self->side_right_speaker_button, gtk_widget_unparent);
+  g_clear_pointer (&self->front_center_speaker_button, gtk_widget_unparent);
+  g_clear_pointer (&self->front_left_speaker_button, gtk_widget_unparent);
+  g_clear_pointer (&self->front_left_of_center_speaker_button, gtk_widget_unparent);
+  g_clear_pointer (&self->front_right_of_center_speaker_button, gtk_widget_unparent);
+  g_clear_pointer (&self->front_right_speaker_button, gtk_widget_unparent);
+  g_clear_pointer (&self->lfe_speaker_button, gtk_widget_unparent);
+  g_clear_pointer (&self->rear_center_speaker_button, gtk_widget_unparent);
+  g_clear_pointer (&self->rear_left_speaker_button, gtk_widget_unparent);
+  g_clear_pointer (&self->rear_right_speaker_button, gtk_widget_unparent);
+  g_clear_pointer (&self->side_left_speaker_button, gtk_widget_unparent);
+  g_clear_pointer (&self->side_right_speaker_button, gtk_widget_unparent);
 
   g_clear_object (&self->context);
 
@@ -229,16 +229,16 @@ cc_output_test_wheel_set_stream (CcOutputTestWheel *self,
 {
   const GvcChannelMap *map = gvc_mixer_stream_get_channel_map (stream);
 
-  gtk_widget_set_visible (GTK_WIDGET (self->front_left_speaker_button), gvc_channel_map_has_position (map, PA_CHANNEL_POSITION_FRONT_LEFT));
-  gtk_widget_set_visible (GTK_WIDGET (self->front_left_of_center_speaker_button), gvc_channel_map_has_position (map, PA_CHANNEL_POSITION_FRONT_LEFT_OF_CENTER));
-  gtk_widget_set_visible (GTK_WIDGET (self->front_right_of_center_speaker_button), gvc_channel_map_has_position (map, PA_CHANNEL_POSITION_FRONT_RIGHT_OF_CENTER));
-  gtk_widget_set_visible (GTK_WIDGET (self->front_right_speaker_button), gvc_channel_map_has_position (map, PA_CHANNEL_POSITION_FRONT_RIGHT));
-  gtk_widget_set_visible (GTK_WIDGET (self->lfe_speaker_button), gvc_channel_map_has_position (map, PA_CHANNEL_POSITION_LFE));
-  gtk_widget_set_visible (GTK_WIDGET (self->rear_center_speaker_button), gvc_channel_map_has_position (map, PA_CHANNEL_POSITION_REAR_CENTER));
-  gtk_widget_set_visible (GTK_WIDGET (self->rear_left_speaker_button), gvc_channel_map_has_position (map, PA_CHANNEL_POSITION_REAR_LEFT));
-  gtk_widget_set_visible (GTK_WIDGET (self->rear_right_speaker_button), gvc_channel_map_has_position (map, PA_CHANNEL_POSITION_REAR_RIGHT));
-  gtk_widget_set_visible (GTK_WIDGET (self->side_left_speaker_button), gvc_channel_map_has_position (map, PA_CHANNEL_POSITION_SIDE_LEFT));
-  gtk_widget_set_visible (GTK_WIDGET (self->side_right_speaker_button), gvc_channel_map_has_position (map, PA_CHANNEL_POSITION_SIDE_RIGHT));
+  gtk_widget_set_visible (self->front_left_speaker_button, gvc_channel_map_has_position (map, PA_CHANNEL_POSITION_FRONT_LEFT));
+  gtk_widget_set_visible (self->front_left_of_center_speaker_button, gvc_channel_map_has_position (map, PA_CHANNEL_POSITION_FRONT_LEFT_OF_CENTER));
+  gtk_widget_set_visible (self->front_right_of_center_speaker_button, gvc_channel_map_has_position (map, PA_CHANNEL_POSITION_FRONT_RIGHT_OF_CENTER));
+  gtk_widget_set_visible (self->front_right_speaker_button, gvc_channel_map_has_position (map, PA_CHANNEL_POSITION_FRONT_RIGHT));
+  gtk_widget_set_visible (self->lfe_speaker_button, gvc_channel_map_has_position (map, PA_CHANNEL_POSITION_LFE));
+  gtk_widget_set_visible (self->rear_center_speaker_button, gvc_channel_map_has_position (map, PA_CHANNEL_POSITION_REAR_CENTER));
+  gtk_widget_set_visible (self->rear_left_speaker_button, gvc_channel_map_has_position (map, PA_CHANNEL_POSITION_REAR_LEFT));
+  gtk_widget_set_visible (self->rear_right_speaker_button, gvc_channel_map_has_position (map, PA_CHANNEL_POSITION_REAR_RIGHT));
+  gtk_widget_set_visible (self->side_left_speaker_button, gvc_channel_map_has_position (map, PA_CHANNEL_POSITION_SIDE_LEFT));
+  gtk_widget_set_visible (self->side_right_speaker_button, gvc_channel_map_has_position (map, PA_CHANNEL_POSITION_SIDE_RIGHT));
 
   /* Replace the center channel with a mono channel */
   if (gvc_channel_map_has_position (map, PA_CHANNEL_POSITION_MONO))
@@ -246,12 +246,14 @@ cc_output_test_wheel_set_stream (CcOutputTestWheel *self,
       if (gvc_channel_map_has_position (map, PA_CHANNEL_POSITION_FRONT_CENTER))
         g_warning ("Testing output with both front center and mono channels - front center is hidden");
 
-      cc_speaker_test_button_set_channel_position (self->front_center_speaker_button, PA_CHANNEL_POSITION_MONO);
+      cc_speaker_test_button_set_channel_position (CC_SPEAKER_TEST_BUTTON (self->front_center_speaker_button),
+                                                   PA_CHANNEL_POSITION_MONO);
       gtk_widget_set_visible (GTK_WIDGET (self->front_center_speaker_button), TRUE);
     }
   else if (gvc_channel_map_has_position (map, PA_CHANNEL_POSITION_FRONT_CENTER))
     {
-      cc_speaker_test_button_set_channel_position (self->front_center_speaker_button, PA_CHANNEL_POSITION_FRONT_CENTER);
+      cc_speaker_test_button_set_channel_position (CC_SPEAKER_TEST_BUTTON (self->front_center_speaker_button),
+                                                   PA_CHANNEL_POSITION_FRONT_CENTER);
       gtk_widget_set_visible (GTK_WIDGET (self->front_center_speaker_button), TRUE);
     }
   else
