@@ -48,6 +48,7 @@ sources = files(
   'users/cc-add-user-dialog.c',
   'users/cc-avatar-chooser.c',
   'users/cc-crop-area.c',
+  'users/cc-entry-feedback.c',
   'users/cc-fingerprint-dialog.c',
   'users/cc-fingerprint-manager.c',
   'users/cc-password-dialog.c',
