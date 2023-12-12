@@ -41,9 +41,27 @@
               </object>
             </child>
 
+            <child>
+              <object class="GtkButton" id="add_enterprise_user_button">
+                <property name="label" translatable="yes">Add Enterprise User</property>
+                <property name="halign">center</property>
+                <signal name="clicked" handler="add_enterprise_user" object="CcUsersPage" swapped="yes"/>
+                <style>
+                  <class name="pill"/>
+                </style>
+              </object>
+            </child>
+
           </object>
         </child>
       </object>
     </property>
   </template>
+
+  <object class="GtkSizeGroup">
+    <widgets>
+      <widget name="add_user_button"/>
+      <widget name="add_enterprise_user_button"/>
+    </widgets>
+  </object>
 </interface>

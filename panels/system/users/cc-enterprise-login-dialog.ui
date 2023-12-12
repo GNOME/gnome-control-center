@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <template class="CcEnterpriseLoginDialog" parent="AdwWindow">
+    <property name="modal">True</property>
+    <property name="width-request">360</property>
+    <property name="height-request">294</property>
+    <property name="default-width">600</property>
+    <property name="default-height">540</property>
+
+    <child>
+      <object class="AdwNavigationView" id="navigation">
+        <property name="pop-on-escape">False</property>
+        <child>
+          <object class="AdwNavigationPage" id="offline_page">
+            <property name="title" translatable="yes">Offline</property>
+            <property name="child">
+              <object class="AdwToolbarView">
+                <child type="top">
+                  <object class="AdwHeaderBar"/>
+                </child>
+                <property name="content">
+                  <object class="AdwStatusPage">
+                    <property name="icon-name">network-offline-symbolic</property>
+                    <property name="title" translatable="yes">Offline</property>
+                    <property name="description" translatable="yes">A network connection is needed to add enterprise login accounts.</property>
+                  </object>
+                </property>
+              </object>
+            </property>
+          </object>
+        </child>
+
+        <child>
+          <object class="AdwNavigationPage" id="main_page">
+            <property name="title" translatable="yes">Add Enterprise Login</property>
+            <property name="child">
+              <object class="AdwToolbarView">
+                <child type="top">
+                  <object class="AdwHeaderBar">
+                    <property name="show-back-button">False</property>
+                    <property name="show-end-title-buttons">False</property>
+                    <property name="show-start-title-buttons">False</property>
+
+                    <child type="start">
+                      <object class="GtkButton" id="cancel_button">
+                        <property name="label" translatable="yes">_Cancel</property>
+                        <property name="use-underline">True</property>
+                        <signal name="clicked" handler="gtk_window_close" object="CcEnterpriseLoginDialog" swapped="yes"/>
+                      </object>
+                    </child>
+                    <child type="end">
+                      <object class="GtkButton" id="add_button">
+                        <property name="sensitive" bind-source="spinner" bind-property="visible" bind-flags="invert-boolean">False</property>
+                        <property name="label" translatable="yes">_Add</property>
+                        <property name="use-underline">True</property>
+                        <signal name="clicked" handler="add_user" object="CcEnterpriseLoginDialog" swapped="yes"/>
+                        <style>
+                          <class name="suggested-action"/>
+                        </style>
+                      </object>
+                    </child>
+                    <child type="end">
+                      <object class="GtkSpinner" id="spinner">
+                        <property name="visible">False</property>
+                        <property name="spinning">True</property>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+
+                <property name="content">
+                  <object class="AdwToastOverlay" id="toast_overlay">
+                    <child>
+                      <object class="AdwPreferencesPage">
+                        <property name="description" translatable="yes">Enterprise Login allows an existing centrally managed account to be used on this device.</property>
+                        <child>
+                          <object class="AdwPreferencesGroup">
+                            <child>
+                              <object class="AdwEntryRow" id="domain_row">
+                                <property name="title" translatable="yes">Domain</property>
+                                <signal name="changed" handler="validate_dialog" object="CcEnterpriseLoginDialog" swapped="yes"/>
+                                <signal name="changed" handler="on_domain_entry_changed_cb" object="CcEnterpriseLoginDialog" swapped="yes"/>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="CcEntryFeedback" id="domain_feedback"/>
+                            </child>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="AdwPreferencesGroup">
+                            <child>
+                              <object class="AdwEntryRow" id="username_row">
+                                <property name="title" translatable="yes">Username</property>
+                                <signal name="changed" handler="validate_dialog" object="CcEnterpriseLoginDialog" swapped="yes"/>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="AdwPasswordEntryRow" id="password_row">
+                                <property name="title" translatable="yes">Password</property>
+                                <signal name="changed" handler="validate_dialog" object="CcEnterpriseLoginDialog" swapped="yes"/>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                </property>
+              </object>
+            </property>
+          </object>
+        </child>
+
+        <child>
+          <object class="AdwNavigationPage" id="domain_enroll_page">
+           <property name="title" translatable="yes">Enroll This Device?</property>
+            <property name="child">
+              <object class="AdwToolbarView">
+                <child type="top">
+                  <object class="AdwHeaderBar">
+                    <property name="show-end-title-buttons">False</property>
+                    <property name="show-start-title-buttons">False</property>
+                    <child type="end">
+                      <object class="GtkButton" id="enrol_button">
+                        <property name="sensitive">False</property>
+                        <property name="label" translatable="yes">Enrol</property>
+                        <signal name="clicked" handler="on_domain_enrol_clicked_cb" object="CcEnterpriseLoginDialog" swapped="yes"/>
+                        <style>
+                          <class name="suggested-action"/>
+                        </style>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+                <property name="content">
+                  <object class="AdwPreferencesPage" id="enrol_preferences_page">
+                    <child>
+                      <object class="AdwPreferencesGroup">
+                        <child>
+                          <object class="AdwEntryRow" id="admin_name_row">
+                            <property name="title" translatable="yes">Administrator Name</property>
+                            <signal name="changed" handler="on_enrol_page_validate" object="CcEnterpriseLoginDialog" swapped="yes"/>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="AdwPasswordEntryRow" id="admin_password_row">
+                            <property name="title" translatable="yes">Administrator Password</property>
+                            <signal name="changed" handler="on_enrol_page_validate" object="CcEnterpriseLoginDialog" swapped="yes"/>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                </property>
+              </object>
+            </property>
+          </object>
+        </child>
+      </object>
+    </child>
+  </template>
+
+  <object class="GtkSizeGroup">
+    <widgets>
+      <widget name="add_button"/>
+      <widget name="cancel_button"/>
+    </widgets>
+  </object>
+</interface>

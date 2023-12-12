@@ -30,6 +30,7 @@
 #endif
 
 #include "cc-add-user-dialog.h"
+#include "cc-enterprise-login-dialog.h"
 #include "cc-users-page.h"
 #include "cc-list-row.h"
 #include "cc-user-page.h"
@@ -61,6 +62,16 @@ struct _CcUsersPage {
 };
 
 G_DEFINE_TYPE (CcUsersPage, cc_users_page, ADW_TYPE_NAVIGATION_PAGE)
+
+static void
+add_enterprise_user (CcUsersPage *self)
+{
+    CcEnterpriseLoginDialog *dialog = cc_enterprise_login_dialog_new ();
+
+    gtk_window_set_transient_for (GTK_WINDOW (dialog),
+                                  GTK_WINDOW (gtk_widget_get_native (GTK_WIDGET (self))));
+    gtk_window_present (GTK_WINDOW (dialog));
+}
 
 static void
 add_user (CcUsersPage *self)
@@ -301,5 +312,6 @@ cc_users_page_class_init (CcUsersPageClass * klass)
     gtk_widget_class_bind_template_child (widget_class, CcUsersPage, user_list);
 
     gtk_widget_class_bind_template_callback (widget_class, add_user);
+    gtk_widget_class_bind_template_callback (widget_class, add_enterprise_user);
     gtk_widget_class_bind_template_callback (widget_class, on_user_row_activated);
 }
