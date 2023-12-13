@@ -65,8 +65,8 @@ struct _NetDeviceWifi
         CcListRow               *hotspot_password_row;
         GtkBox                  *listbox_box;
         GtkStack                *stack;
-        AdwWindow               *saved_networks_dialog;
-        GtkWidget               *saved_networks_toast_overlay;
+        GtkWindow               *saved_networks_dialog;
+        AdwToastOverlay         *saved_networks_toast_overlay;
         AdwToast                *saved_networks_undo_toast;
 
         AdwSwitchRow *device_enable_row;
@@ -848,7 +848,7 @@ really_forgotten (GObject              *source_object,
                            error->message);
 
         if (cc_wifi_connection_list_is_empty (list)) {
-            gtk_window_close (GTK_WINDOW (self->saved_networks_dialog));
+            gtk_window_close (self->saved_networks_dialog);
             gtk_widget_set_visible (GTK_WIDGET (self->saved_network_row), FALSE);
         }
 
@@ -908,7 +908,7 @@ forget_selected (NetDeviceWifi *self, CcWifiConnectionRow *row, CcWifiConnection
         g_signal_connect (self->saved_networks_undo_toast, "button-clicked", G_CALLBACK (on_saved_networks_forget_undo), row);
         g_signal_connect (self->saved_networks_undo_toast, "dismissed", G_CALLBACK (really_forget), row);
 
-        adw_toast_overlay_add_toast (ADW_TOAST_OVERLAY (self->saved_networks_toast_overlay), self->saved_networks_undo_toast);
+        adw_toast_overlay_add_toast (self->saved_networks_toast_overlay, self->saved_networks_undo_toast);
 }
 
 static void
@@ -1097,7 +1097,7 @@ set_up_saved_network (NetDeviceWifi *self)
 
         /* Set up saved network page and populate with latest saved networks */
         page = adw_preferences_page_new ();
-        adw_toast_overlay_set_child (ADW_TOAST_OVERLAY (self->saved_networks_toast_overlay), page);
+        adw_toast_overlay_set_child (self->saved_networks_toast_overlay, page);
 
         list_group = adw_preferences_group_new ();
         adw_preferences_page_add (ADW_PREFERENCES_PAGE (page), ADW_PREFERENCES_GROUP (list_group));
@@ -1151,9 +1151,9 @@ on_show_saved_network (NetDeviceWifi *self)
         if (!adw_toast_overlay_get_child (self->saved_networks_toast_overlay))
                 set_up_saved_network (self);
 
-        gtk_window_set_transient_for (GTK_WINDOW (self->saved_networks_dialog),
+        gtk_window_set_transient_for (self->saved_networks_dialog,
                                       GTK_WINDOW (gtk_widget_get_native (GTK_WIDGET (self))));
-        gtk_window_present (GTK_WINDOW (self->saved_networks_dialog));
+        gtk_window_present (self->saved_networks_dialog);
 }
 
 static void
