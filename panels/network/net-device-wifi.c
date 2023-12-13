@@ -69,10 +69,10 @@ struct _NetDeviceWifi
         AdwToastOverlay         *saved_networks_toast_overlay;
         AdwToast                *saved_networks_undo_toast;
 
-        AdwSwitchRow *device_enable_row;
-        CcListRow *saved_network_row;
-        CcListRow *connect_hidden_row;
-        CcListRow *hotspot_row;
+        AdwSwitchRow            *device_enable_row;
+        CcListRow               *saved_network_row;
+        CcListRow               *connect_hidden_row;
+        CcListRow               *hotspot_row;
 
         CcPanel                 *panel;
         NMClient                *client;
@@ -695,7 +695,7 @@ overwrite_ssid_cb (GObject      *source_object,
 }
 
 static void
-on_wifi_hotspot_dialog_respnse_cb (GtkDialog     *dialog,
+on_wifi_hotspot_dialog_response_cb (GtkDialog     *dialog,
                                    gint           response,
                                    NetDeviceWifi *self)
 {
@@ -742,7 +742,7 @@ start_hotspot (NetDeviceWifi *self)
         if (c)
                 cc_wifi_hotspot_dialog_set_connection (self->hotspot_dialog, c);
 
-        g_signal_connect_after (self->hotspot_dialog, "response", G_CALLBACK (on_wifi_hotspot_dialog_respnse_cb), self);
+        g_signal_connect_after (self->hotspot_dialog, "response", G_CALLBACK (on_wifi_hotspot_dialog_response_cb), self);
         gtk_window_present (GTK_WINDOW (self->hotspot_dialog));
 }
 
@@ -911,29 +911,6 @@ forget_selected (NetDeviceWifi *self, CcWifiConnectionRow *row, CcWifiConnection
         adw_toast_overlay_add_toast (self->saved_networks_toast_overlay, self->saved_networks_undo_toast);
 }
 
-static void
-check_toggled (CcWifiConnectionRow *row, GParamSpec *pspec, CcWifiConnectionList *list)
-{
-        GtkWidget *forget;
-        gboolean active;
-        GList *rows;
-
-        active = cc_wifi_connection_row_get_checked (row);
-        rows = g_object_steal_data (G_OBJECT (list), "rows");
-
-        if (active) {
-                cc_wifi_connection_list_freeze (list);
-                rows = g_list_prepend (rows, row);
-        } else {
-                cc_wifi_connection_list_thaw (list);
-                rows = g_list_remove (rows, row);
-        }
-
-        g_object_set_data_full (G_OBJECT (list), "rows", rows, (GDestroyNotify)g_list_free);
-        forget = g_object_get_data (G_OBJECT (list), "forget");
-        gtk_widget_set_sensitive (forget, rows != NULL);
-}
-
 static gint
 history_sort (gconstpointer a, gconstpointer b, gpointer data)
 {
@@ -1048,52 +1025,12 @@ show_qr_code_for_row (NetDeviceWifi *self, CcWifiConnectionRow *row, CcWifiConne
 }
 
 static void
-on_connection_list_row_added_cb (NetDeviceWifi        *self,
-                                 CcWifiConnectionRow  *row,
-                                 CcWifiConnectionList *list)
-{
-        g_signal_connect (row, "notify::checked",
-                          G_CALLBACK (check_toggled), list);
-}
-
-static void
-on_connection_list_row_removed_cb (NetDeviceWifi        *self,
-                                   CcWifiConnectionRow  *row,
-                                   CcWifiConnectionList *list)
-{
-        GList *rows = g_object_steal_data (G_OBJECT (list), "rows");
-        GList *item;
-        GtkWidget *forget;
-
-        item = g_list_find (rows, row);
-        if (item)
-          {
-            rows = g_list_remove (rows, row);
-            cc_wifi_connection_list_thaw (list);
-          }
-        g_object_set_data_full (G_OBJECT (list), "rows", rows, (GDestroyNotify)g_list_free);
-
-        forget = g_object_get_data (G_OBJECT (list), "forget");
-        if (forget != NULL)
-            gtk_widget_set_sensitive (forget, rows != NULL);
-}
-
-static void
-on_connection_list_row_activated_cb (NetDeviceWifi        *self,
-                                     CcWifiConnectionRow  *row,
-                                     CcWifiConnectionList *list)
-{
-  cc_wifi_connection_row_set_checked (row, !cc_wifi_connection_row_get_checked (row));
-}
-
-static void
 set_up_saved_network (NetDeviceWifi *self)
 {
         GtkWidget *page;
         GtkWidget *list_group;
         GtkListBox *listbox;
         GtkWidget *list;
-        GtkWidget *child;
 
         /* Set up saved network page and populate with latest saved networks */
         page = adw_preferences_page_new ();
@@ -1110,18 +1047,6 @@ set_up_saved_network (NetDeviceWifi *self)
         gtk_list_box_set_sort_func (listbox, (GtkListBoxSortFunc)history_sort, NULL, NULL);
         adw_preferences_group_add (ADW_PREFERENCES_GROUP (list_group), list);
 
-        g_signal_connect_object (list, "add-row",
-                                 G_CALLBACK (on_connection_list_row_added_cb),
-                                 self,
-                                 G_CONNECT_SWAPPED);
-        g_signal_connect_object (list, "remove-row",
-                                 G_CALLBACK (on_connection_list_row_removed_cb),
-                                 self,
-                                 G_CONNECT_SWAPPED);
-        g_signal_connect_object (listbox, "row-activated",
-                                 G_CALLBACK (on_connection_list_row_activated_cb),
-                                 self,
-                                 G_CONNECT_SWAPPED);
         g_signal_connect_object (list, "configure",
                                  G_CALLBACK (show_details_for_row),
                                  self,
@@ -1134,15 +1059,6 @@ set_up_saved_network (NetDeviceWifi *self)
                                  G_CALLBACK (show_qr_code_for_row),
                                  self,
                                  G_CONNECT_SWAPPED);
-
-        for (child = gtk_widget_get_first_child (GTK_WIDGET (listbox));
-             child;
-             child = gtk_widget_get_next_sibling (child))
-          {
-            on_connection_list_row_added_cb (self,
-                                             CC_WIFI_CONNECTION_ROW (child),
-                                             CC_WIFI_CONNECTION_LIST (list));
-          }
 }
 
 static void
@@ -1275,7 +1191,6 @@ nm_client_on_permission_change (NetDeviceWifi *self) {
         } else {
                 gtk_widget_set_sensitive (GTK_WIDGET (self->hotspot_row), nm_client_wireless_get_enabled (self->client));
         }
-
 }
 
 NetDeviceWifi *
@@ -1352,4 +1267,3 @@ net_device_wifi_turn_off_hotspot (NetDeviceWifi *self)
 
         stop_shared_connection (self);
 }
-
