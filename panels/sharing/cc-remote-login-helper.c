@@ -25,6 +25,10 @@
 #define SSHD_SERVICE "sshd.service"
 #endif
 
+#ifndef SSHD_SOCKET
+#define SSHD_SOCKET "sshd.socket"
+#endif
+
 int
 main (int    argc,
       char **argv)
@@ -39,9 +43,16 @@ main (int    argc,
     {
       g_autoptr(GError) error = NULL;
 
-      if (!cc_enable_service (SSHD_SERVICE, G_BUS_TYPE_SYSTEM, &error))
+      /* on lunar+ we want to ensure the service is disabled and enable the
+         socket to match the default behaviour */
+      if (!cc_disable_service (SSHD_SERVICE, G_BUS_TYPE_SYSTEM, &error))
         {
           g_critical ("Failed to enable %s: %s", SSHD_SERVICE, error->message);
+          return EXIT_FAILURE;
+        }
+      else if (!cc_enable_service (SSHD_SOCKET, G_BUS_TYPE_SYSTEM, &error))
+        {
+          g_critical ("Failed to enable %s: %s", SSHD_SOCKET, error->message);
           return EXIT_FAILURE;
         }
       else
@@ -55,7 +66,12 @@ main (int    argc,
 
       if (!cc_disable_service (SSHD_SERVICE, G_BUS_TYPE_SYSTEM, &error))
         {
-          g_critical ("Failed to enable %s: %s", SSHD_SERVICE, error->message);
+          g_critical ("Failed to disable %s: %s", SSHD_SERVICE, error->message);
+          return EXIT_FAILURE;
+        }
+      else if (!cc_disable_service (SSHD_SOCKET, G_BUS_TYPE_SYSTEM, &error))
+        {
+          g_critical ("Failed to disable %s: %s", SSHD_SOCKET, error->message);
           return EXIT_FAILURE;
         }
       else
