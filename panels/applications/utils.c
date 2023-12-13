@@ -105,7 +105,7 @@ file_size_thread_func (GTask        *task,
 
   g_private_replace (&size_key, g_new0 (guint64, 1));
 
-  nftw (path, ftw_size_cb, 20, FTW_DEPTH);
+  nftw (path, ftw_size_cb, 20, FTW_PHYS | FTW_DEPTH);
 
   total = g_new0 (guint64, 1);
   *total = *(guint64*)g_private_get (&size_key);
