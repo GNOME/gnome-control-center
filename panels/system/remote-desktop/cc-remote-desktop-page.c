@@ -57,6 +57,7 @@
 struct _CcRemoteDesktopPage {
   CcSystemPage  parent_instance;
 
+  AdwPreferencesPage *remote_desktop_page;
   GtkWidget *remote_control_switch;
   GtkWidget *remote_desktop_toast_overlay;
   GtkWidget *remote_desktop_password_entry;
@@ -734,6 +735,7 @@ cc_remote_desktop_page_class_init (CcRemoteDesktopPageClass * klass)
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/system/remote-desktop/cc-remote-desktop-page.ui");
 
+  gtk_widget_class_bind_template_child (widget_class, CcRemoteDesktopPage, remote_desktop_page);
   gtk_widget_class_bind_template_child (widget_class, CcRemoteDesktopPage, remote_desktop_toast_overlay);
   gtk_widget_class_bind_template_child (widget_class, CcRemoteDesktopPage, remote_desktop_switch);
   gtk_widget_class_bind_template_child (widget_class, CcRemoteDesktopPage, remote_control_switch);
@@ -757,6 +759,9 @@ cc_remote_desktop_page_class_init (CcRemoteDesktopPageClass * klass)
 static void
 cc_remote_desktop_page_init (CcRemoteDesktopPage *self)
 {
+  g_autofree gchar *learn_more_link = NULL;
+  g_autofree gchar *page_description = NULL;
+
   g_autoptr(GtkCssProvider) provider = NULL;
 
   gtk_widget_init_template (GTK_WIDGET (self));
@@ -773,6 +778,12 @@ cc_remote_desktop_page_init (CcRemoteDesktopPage *self)
                                  self->cancellable,
                                  sharing_proxy_ready,
                                  self);
+
+  /* Translators: This will be presented as the text of a link to the documentation */
+  learn_more_link = g_strdup_printf ("<a href='help:gnome-help/sharing-desktop'>%s</a>", _("learn how to use it"));
+  /* Translators: %s is a link to the documentation with the label "learn how to use it" */
+  page_description = g_strdup_printf (_("Remote desktop allows viewing and controlling your desktop from another computer - %s"), learn_more_link);
+  adw_preferences_page_set_description (self->remote_desktop_page, page_description);
 
   provider = gtk_css_provider_new ();
   gtk_css_provider_load_from_resource (provider,
