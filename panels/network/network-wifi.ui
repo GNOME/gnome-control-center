@@ -141,7 +141,15 @@
           <object class="AdwHeaderBar"/>
         </child>
         <child>
-          <object class="AdwToastOverlay" id="saved_networks_toast_overlay"/>
+          <object class="AdwToastOverlay" id="saved_networks_toast_overlay">
+            <child>
+              <object class="AdwPreferencesPage">
+                <child>
+                  <object class="AdwPreferencesGroup" id="saved_networks_box"/>
+                </child>
+              </object>
+            </child>
+          </object>
         </child>
       </object>
     </child>

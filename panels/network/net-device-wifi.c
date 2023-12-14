@@ -65,6 +65,7 @@ struct _NetDeviceWifi
         CcListRow               *hotspot_password_row;
         GtkBox                  *listbox_box;
         GtkStack                *stack;
+        AdwPreferencesGroup     *saved_networks_box;
         GtkWindow               *saved_networks_dialog;
         AdwToastOverlay         *saved_networks_toast_overlay;
         AdwToast                *saved_networks_undo_toast;
@@ -1025,48 +1026,8 @@ show_qr_code_for_row (NetDeviceWifi *self, CcWifiConnectionRow *row, CcWifiConne
 }
 
 static void
-set_up_saved_network (NetDeviceWifi *self)
-{
-        GtkWidget *page;
-        GtkWidget *list_group;
-        GtkListBox *listbox;
-        GtkWidget *list;
-
-        /* Set up saved network page and populate with latest saved networks */
-        page = adw_preferences_page_new ();
-        adw_toast_overlay_set_child (self->saved_networks_toast_overlay, page);
-
-        list_group = adw_preferences_group_new ();
-        adw_preferences_page_add (ADW_PREFERENCES_PAGE (page), ADW_PREFERENCES_GROUP (list_group));
-
-        list = GTK_WIDGET (cc_wifi_connection_list_new (self->client,
-                                                        NM_DEVICE_WIFI (self->device),
-                                                        FALSE, FALSE, FALSE, TRUE));
-        listbox = cc_wifi_connection_list_get_list_box (CC_WIFI_CONNECTION_LIST (list));
-        gtk_list_box_set_selection_mode (listbox, GTK_SELECTION_NONE);
-        gtk_list_box_set_sort_func (listbox, (GtkListBoxSortFunc)history_sort, NULL, NULL);
-        adw_preferences_group_add (ADW_PREFERENCES_GROUP (list_group), list);
-
-        g_signal_connect_object (list, "configure",
-                                 G_CALLBACK (show_details_for_row),
-                                 self,
-                                 G_CONNECT_SWAPPED);
-        g_signal_connect_object (list, "forget",
-                                G_CALLBACK (forget_selected),
-                                self,
-                                G_CONNECT_SWAPPED);
-        g_signal_connect_object (list, "show_qr_code",
-                                 G_CALLBACK (show_qr_code_for_row),
-                                 self,
-                                 G_CONNECT_SWAPPED);
-}
-
-static void
 on_show_saved_network (NetDeviceWifi *self)
 {
-        if (!adw_toast_overlay_get_child (self->saved_networks_toast_overlay))
-                set_up_saved_network (self);
-
         gtk_window_set_transient_for (self->saved_networks_dialog,
                                       GTK_WINDOW (gtk_widget_get_native (GTK_WIDGET (self))));
         gtk_window_present (self->saved_networks_dialog);
@@ -1152,6 +1113,7 @@ net_device_wifi_class_init (NetDeviceWifiClass *klass)
         gtk_widget_class_bind_template_child (widget_class, NetDeviceWifi, stack);
         gtk_widget_class_bind_template_child (widget_class, NetDeviceWifi, saved_networks_dialog);
         gtk_widget_class_bind_template_child (widget_class, NetDeviceWifi, saved_networks_toast_overlay);
+        gtk_widget_class_bind_template_child (widget_class, NetDeviceWifi, saved_networks_box);
 
         gtk_widget_class_bind_template_callback (widget_class, device_off_switch_changed_cb);
         gtk_widget_class_bind_template_callback (widget_class, on_show_saved_network);
@@ -1198,7 +1160,7 @@ net_device_wifi_new (CcPanel *panel, NMClient *client, NMDevice *device)
 {
         NetDeviceWifi *self;
         GtkListBox *listbox;
-        GtkWidget *list;
+        CcWifiConnectionList *list;
 
         self = g_object_new (net_device_wifi_get_type (), NULL);
         self->panel = panel;
@@ -1210,10 +1172,11 @@ net_device_wifi_new (CcPanel *panel, NMClient *client, NMDevice *device)
 
         g_signal_connect_object (device, "state-changed", G_CALLBACK (nm_device_wifi_refresh_ui), self, G_CONNECT_SWAPPED);
 
-        list = GTK_WIDGET (cc_wifi_connection_list_new (client, NM_DEVICE_WIFI (device), TRUE, TRUE, FALSE, FALSE));
-        gtk_box_append (self->listbox_box, list);
+        /* Set up the main Visible Networks list */
+        list = cc_wifi_connection_list_new (client, NM_DEVICE_WIFI (device), TRUE, TRUE, FALSE, FALSE);
+        gtk_box_append (self->listbox_box, GTK_WIDGET (list));
 
-        listbox = cc_wifi_connection_list_get_list_box (CC_WIFI_CONNECTION_LIST (list));
+        listbox = cc_wifi_connection_list_get_list_box (list);
         gtk_list_box_set_sort_func (listbox, (GtkListBoxSortFunc)ap_sort, self, NULL);
 
         g_signal_connect_object (listbox, "row-activated",
@@ -1224,6 +1187,20 @@ net_device_wifi_new (CcPanel *panel, NMClient *client, NMDevice *device)
                                  G_CALLBACK (show_qr_code_for_row), self, G_CONNECT_SWAPPED);
         g_signal_connect_object (client, "notify",
                                  G_CALLBACK(nm_client_on_permission_change), self, G_CONNECT_SWAPPED);
+
+        /* Set up the Saved Networks list */
+        list = cc_wifi_connection_list_new (self->client, NM_DEVICE_WIFI (device), FALSE, FALSE, FALSE, TRUE);
+        adw_preferences_group_add (self->saved_networks_box, GTK_WIDGET (list));
+
+        listbox = cc_wifi_connection_list_get_list_box (list);
+        gtk_list_box_set_sort_func (listbox, (GtkListBoxSortFunc)history_sort, NULL, NULL);
+
+        g_signal_connect_object (list, "configure",
+                                 G_CALLBACK (show_details_for_row), self, G_CONNECT_SWAPPED);
+        g_signal_connect_object (list, "forget",
+                                 G_CALLBACK (forget_selected), self, G_CONNECT_SWAPPED);
+        g_signal_connect_object (list, "show_qr_code",
+                                 G_CALLBACK (show_qr_code_for_row), self, G_CONNECT_SWAPPED);
 
         nm_client_on_permission_change(self);
 
