@@ -1087,7 +1087,7 @@ on_connection_list_row_activated_cb (NetDeviceWifi        *self,
 }
 
 static void
-on_show_saved_network (NetDeviceWifi *self)
+set_up_saved_network (NetDeviceWifi *self)
 {
         GtkWidget *page;
         GtkWidget *list_group;
@@ -1095,9 +1095,7 @@ on_show_saved_network (NetDeviceWifi *self)
         GtkWidget *list;
         GtkWidget *child;
 
-        /* Clean up saved network page and repopulate with latest saved networks */
-        adw_toast_overlay_set_child (ADW_TOAST_OVERLAY (self->saved_networks_toast_overlay), NULL);
-
+        /* Set up saved network page and populate with latest saved networks */
         page = adw_preferences_page_new ();
         adw_toast_overlay_set_child (ADW_TOAST_OVERLAY (self->saved_networks_toast_overlay), page);
 
@@ -1145,6 +1143,13 @@ on_show_saved_network (NetDeviceWifi *self)
                                              CC_WIFI_CONNECTION_ROW (child),
                                              CC_WIFI_CONNECTION_LIST (list));
           }
+}
+
+static void
+on_show_saved_network (NetDeviceWifi *self)
+{
+        if (!adw_toast_overlay_get_child (self->saved_networks_toast_overlay))
+                set_up_saved_network (self);
 
         gtk_window_set_transient_for (GTK_WINDOW (self->saved_networks_dialog),
                                       GTK_WINDOW (gtk_widget_get_native (GTK_WIDGET (self))));
