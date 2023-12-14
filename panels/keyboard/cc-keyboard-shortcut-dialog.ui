@@ -68,9 +68,10 @@
                           <object class="AdwPreferencesGroup">
                             <child>
                               <object class="GtkButton" id="reset_all_button">
-                                <property name="label" translatable="yes">Reset All…</property>
-                                <signal name="clicked" handler="reset_all_clicked_cb" swapped="yes" />
+                                <property name="label" translatable="yes">_Reset All…</property>
+                                <property name="use-underline">True</property>
                                 <property name="halign">center</property>
+                                <signal name="clicked" handler="reset_all_clicked_cb" swapped="yes" />
                                 <style>
                                   <class name="destructive-action"/>
                                   <class name="pill"/>
