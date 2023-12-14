@@ -66,6 +66,7 @@ struct _NetDeviceWifi
         GtkBox                  *listbox_box;
         GtkStack                *stack;
         AdwPreferencesGroup     *saved_networks_box;
+        CcWifiConnectionList    *saved_networks_list;
         GtkWindow               *saved_networks_dialog;
         AdwToastOverlay         *saved_networks_toast_overlay;
         AdwToast                *saved_networks_undo_toast;
@@ -352,7 +353,6 @@ request_scan (gpointer user_data)
 static void
 nm_device_wifi_refresh_ui (NetDeviceWifi *self)
 {
-        CcWifiConnectionList *saved_networks_list;
         g_autofree gchar *status = NULL;
 
         if (device_is_hotspot (self)) {
@@ -377,10 +377,7 @@ nm_device_wifi_refresh_ui (NetDeviceWifi *self)
         /* update list of APs */
         show_wifi_list (self);
 
-        saved_networks_list = cc_wifi_connection_list_new (self->client, NM_DEVICE_WIFI (self->device), FALSE, FALSE, FALSE, TRUE);
-        gtk_widget_set_visible (GTK_WIDGET (self->saved_network_row), !cc_wifi_connection_list_is_empty (saved_networks_list));
-        g_object_ref_sink (saved_networks_list);
-        g_object_unref (saved_networks_list);
+        gtk_widget_set_visible (GTK_WIDGET (self->saved_network_row), !cc_wifi_connection_list_is_empty (self->saved_networks_list));
 }
 
 static void
@@ -792,6 +789,8 @@ net_device_wifi_dispose (GObject *object)
                 self->hotspot_dialog = NULL;
         }
 
+        g_clear_pointer (&self->saved_networks_dialog, gtk_window_destroy);
+
         G_OBJECT_CLASS (net_device_wifi_parent_class)->dispose (object);
 }
 
@@ -806,6 +805,7 @@ net_device_wifi_finalize (GObject *object)
 
         g_clear_object (&self->client);
         g_clear_object (&self->device);
+        g_clear_object (&self->saved_networks_list);
         g_clear_pointer (&self->selected_ssid_title, g_free);
         g_clear_pointer (&self->selected_connection_id, g_free);
         g_clear_pointer (&self->selected_ap_id, g_free);
@@ -836,7 +836,7 @@ really_forgotten (GObject              *source_object,
                   GAsyncResult         *res,
                   gpointer              user_data)
 {
-        NetDeviceWifi *self = NET_DEVICE_WIFI (user_data);
+        g_autoptr(NetDeviceWifi) self = NET_DEVICE_WIFI (user_data);
         g_autoptr(CcWifiConnectionList) list = NULL;
         g_autoptr(GError) error = NULL;
 
@@ -852,8 +852,6 @@ really_forgotten (GObject              *source_object,
             gtk_window_close (self->saved_networks_dialog);
             gtk_widget_set_visible (GTK_WIDGET (self->saved_network_row), FALSE);
         }
-
-        g_object_set_data (G_OBJECT (self), "list", NULL);
 }
 
 static void
@@ -871,7 +869,7 @@ really_forget (AdwToast *toast, CcWifiConnectionRow *row)
         connection = NM_REMOTE_CONNECTION (cc_wifi_connection_row_get_connection (row));
 
         g_object_set_data (G_OBJECT (self), "list", g_object_ref (list));
-        nm_remote_connection_delete_async (connection, self->cancellable, really_forgotten, self);
+        nm_remote_connection_delete_async (connection, self->cancellable, really_forgotten, g_object_ref (self));
 }
 
 static void
@@ -1190,6 +1188,7 @@ net_device_wifi_new (CcPanel *panel, NMClient *client, NMDevice *device)
 
         /* Set up the Saved Networks list */
         list = cc_wifi_connection_list_new (self->client, NM_DEVICE_WIFI (device), FALSE, FALSE, FALSE, TRUE);
+        self->saved_networks_list = g_object_ref_sink (list);
         adw_preferences_group_add (self->saved_networks_box, GTK_WIDGET (list));
 
         listbox = cc_wifi_connection_list_get_list_box (list);
