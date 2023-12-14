@@ -869,7 +869,6 @@ really_forget (AdwToast *toast, CcWifiConnectionRow *row)
         list = CC_WIFI_CONNECTION_LIST (g_object_get_data (G_OBJECT (row), "list"));
         connection = NM_REMOTE_CONNECTION (cc_wifi_connection_row_get_connection (row));
 
-        cc_wifi_connection_list_freeze (list);
         g_object_set_data (G_OBJECT (self), "list", g_object_ref (list));
         nm_remote_connection_delete_async (connection, self->cancellable, really_forgotten, self);
 }
@@ -878,9 +877,13 @@ static void
 on_saved_networks_forget_undo (AdwToast *toast, CcWifiConnectionRow *row)
 {
         NetDeviceWifi *self;
+        CcWifiConnectionList *list;
 
         self = NET_DEVICE_WIFI (g_object_get_data (G_OBJECT (row), "net"));
         self->saved_networks_undo_toast = NULL;
+
+        list = CC_WIFI_CONNECTION_LIST (g_object_get_data (G_OBJECT (row), "list"));
+        cc_wifi_connection_list_thaw (list);
 
         gtk_widget_set_visible (GTK_WIDGET (row), TRUE);
 }
@@ -891,6 +894,7 @@ forget_selected (NetDeviceWifi *self, CcWifiConnectionRow *row, CcWifiConnection
         g_autofree gchar *message = NULL;
 
         gtk_widget_set_visible (GTK_WIDGET (row), FALSE);
+        cc_wifi_connection_list_freeze (list);
 
         message = g_strdup_printf (_("Network “%s” has been deleted"),
                                    adw_preferences_row_get_title (ADW_PREFERENCES_ROW (row)));
