@@ -32,6 +32,8 @@ struct _CcLocationPage
 {
   AdwNavigationPage parent_instance;
 
+  AdwPreferencesPage *location_services_page;
+
   GtkListBox   *location_apps_list_box;
   AdwSwitchRow *location_row;
 
@@ -390,6 +392,7 @@ cc_location_page_class_init (CcLocationPageClass *klass)
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/privacy/cc-location-page.ui");
 
+  gtk_widget_class_bind_template_child (widget_class, CcLocationPage, location_services_page);
   gtk_widget_class_bind_template_child (widget_class, CcLocationPage, location_apps_list_box);
   gtk_widget_class_bind_template_child (widget_class, CcLocationPage, location_row);
 }
@@ -397,12 +400,21 @@ cc_location_page_class_init (CcLocationPageClass *klass)
 static void
 cc_location_page_init (CcLocationPage *self)
 {
+  g_autofree gchar *privacy_policy_link = NULL;
+  g_autofree gchar *page_description = NULL;
+
   gtk_widget_init_template (GTK_WIDGET (self));
 
   self->location_icon_size_group = gtk_size_group_new (GTK_SIZE_GROUP_BOTH);
   self->location_settings = g_settings_new ("org.gnome.system.location");
 
   self->cancellable = g_cancellable_new ();
+
+  /* Translators: This will be presented as the text of a link to the privacy policy */
+  privacy_policy_link = g_strdup_printf ("<a href='https://location.services.mozilla.com/privacy'>%s</a>", _("Learn about what data is collected, and how it is used."));
+  /* Translators: %s is a link to the privacy policy with the label "Learn about what data is collected, and how it is used." */
+  page_description = g_strdup_printf (_("Location services use GPS, Wi-Fi and cellular connections to determine the approximate location of this device.\n\n%s"), privacy_policy_link);
+  adw_preferences_page_set_description (self->location_services_page, page_description);
 
   g_settings_bind (self->location_settings,
                    LOCATION_ENABLED,
