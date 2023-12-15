@@ -782,7 +782,7 @@ cc_remote_desktop_page_init (CcRemoteDesktopPage *self)
   /* Translators: This will be presented as the text of a link to the documentation */
   learn_more_link = g_strdup_printf ("<a href='help:gnome-help/sharing-desktop'>%s</a>", _("learn how to use it"));
   /* Translators: %s is a link to the documentation with the label "learn how to use it" */
-  page_description = g_strdup_printf (_("Remote desktop allows viewing and controlling your desktop from another computer - %s"), learn_more_link);
+  page_description = g_strdup_printf (_("Remote desktop allows viewing and controlling your desktop from another computer - %s."), learn_more_link);
   adw_preferences_page_set_description (self->remote_desktop_page, page_description);
 
   provider = gtk_css_provider_new ();
