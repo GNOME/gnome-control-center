@@ -52,7 +52,7 @@ struct _CcUaSeeingPage
   AdwSwitchRow       *large_text_row;
   CcListRow          *cursor_size_row;
   AdwSwitchRow       *sound_keys_row;
-  AdwSwitchRow       *overlay_scrollbars_row;
+  AdwSwitchRow       *show_scrollbars_row;
 
   AdwSwitchRow       *screen_reader_row;
 
@@ -227,7 +227,7 @@ cc_ua_seeing_page_class_init (CcUaSeeingPageClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcUaSeeingPage, large_text_row);
   gtk_widget_class_bind_template_child (widget_class, CcUaSeeingPage, cursor_size_row);
   gtk_widget_class_bind_template_child (widget_class, CcUaSeeingPage, sound_keys_row);
-  gtk_widget_class_bind_template_child (widget_class, CcUaSeeingPage, overlay_scrollbars_row);
+  gtk_widget_class_bind_template_child (widget_class, CcUaSeeingPage, show_scrollbars_row);
 
   gtk_widget_class_bind_template_child (widget_class, CcUaSeeingPage, screen_reader_row);
 
@@ -270,8 +270,8 @@ cc_ua_seeing_page_init (CcUaSeeingPage *self)
 
   /* Overlay Scrollbars */
   g_settings_bind (self->interface_settings, KEY_OVERLAY_SCROLLING,
-                   self->overlay_scrollbars_row, "active",
-                   G_SETTINGS_BIND_DEFAULT);
+                   self->show_scrollbars_row, "active",
+                   G_SETTINGS_BIND_DEFAULT | G_SETTINGS_BIND_INVERT_BOOLEAN);
 
   /* Screen Reader */
   g_settings_bind (self->application_settings, KEY_SCREEN_READER_ENABLED,
