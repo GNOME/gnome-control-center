@@ -25,22 +25,22 @@
 
 #include "cc-mouse-test.h"
 
-#define RESET_TEST_BUTTON_STATE_INTERVAL 1
-
 struct _CcMouseTest
 {
     AdwWindow  parent_instance;
 
     GtkWidget *arrow_down;
     GtkWidget *arrow_up;
-    GtkWidget *double_click_button;
+    GtkWidget *primary_click_image;
+    GtkWidget *secondary_click_image;
+    GtkWidget *double_click_image;
     GtkWidget *image;
     GtkAdjustment *scrolled_window_adjustment;
-    GtkWidget *single_click_button;
     GtkWidget *viewport;
 
-    gint test_buttons_timeout_id;
-    gint double_click_button_timeout_id;
+    gint double_click_delay;
+    guint reset_timeout_id;
+    guint primary_timeout_id;
 };
 
 G_DEFINE_TYPE (CcMouseTest, cc_mouse_test, ADW_TYPE_WINDOW);
@@ -61,15 +61,33 @@ on_scroll_adjustment_changed_cb (GtkAdjustment *adjustment,
     gtk_widget_set_visible (self->arrow_down, !is_bottom);
 }
 
-static gboolean
-test_buttons_timeout (CcMouseTest *self)
+static void
+clear_timeout (guint *timeout_id)
 {
-    gtk_widget_remove_css_class (self->single_click_button, "success");
-    gtk_button_set_label (GTK_BUTTON (self->single_click_button), _("Single Click"));
-    gtk_widget_remove_css_class (self->double_click_button, "success");
-    gtk_button_set_label (GTK_BUTTON (self->double_click_button), _("Double Click"));
+    if (*timeout_id != 0) {
+        g_source_remove (*timeout_id);
+        *timeout_id = 0;
+    }
+}
 
-    self->test_buttons_timeout_id = 0;
+static gboolean
+reset_indicators (CcMouseTest *self)
+{
+    clear_timeout (&self->reset_timeout_id);
+
+    gtk_widget_remove_css_class (self->primary_click_image, "success");
+    gtk_widget_remove_css_class (self->secondary_click_image, "success");
+    gtk_widget_remove_css_class (self->double_click_image, "success");
+
+    return FALSE;
+}
+
+static gboolean
+primary_click_timeout (CcMouseTest *self)
+{
+    clear_timeout (&self->primary_timeout_id);
+
+    gtk_widget_add_css_class (self->primary_click_image, "success");
 
     return FALSE;
 }
@@ -82,24 +100,29 @@ on_test_button_clicked_cb (GtkGestureClick *gesture,
                            gpointer         user_data)
 {
     CcMouseTest *self = CC_MOUSE_TEST (user_data);
-    GtkWidget *button = gtk_event_controller_get_widget (GTK_EVENT_CONTROLLER (gesture));
-    guint n_success_press = (button == self->single_click_button) ? 1 : 2;
+    guint button;
+    guint reset_indicators_delay = self->double_click_delay * 2;
 
-    if (n_press == n_success_press) {
-        gtk_widget_add_css_class (button, "success");
-        gtk_button_set_icon_name (GTK_BUTTON (button), "object-select-symbolic");
-    } else {
-        gtk_widget_remove_css_class (button, "success");
-        gtk_button_set_icon_name (GTK_BUTTON (button), "process-stop-symbolic");
+    clear_timeout (&self->reset_timeout_id);
+    clear_timeout (&self->primary_timeout_id);
+
+    reset_indicators (self);
+
+    button = gtk_gesture_single_get_current_button (GTK_GESTURE_SINGLE (gesture));
+    if (button == 3) {
+        gtk_widget_add_css_class (self->secondary_click_image, "success");
+    } else if (n_press == 2) {
+        gtk_widget_add_css_class (self->double_click_image, "success");
+    } else if (n_press == 1) {
+        self->primary_timeout_id =
+            g_timeout_add (self->double_click_delay, (GSourceFunc) primary_click_timeout, self);
+        reset_indicators_delay = self->double_click_delay * 3;
     }
 
-    if (self->test_buttons_timeout_id != 0) {
-        g_source_remove (self->test_buttons_timeout_id);
-        self->test_buttons_timeout_id = 0;
-    }
-
-    self->test_buttons_timeout_id =
-        g_timeout_add_seconds (RESET_TEST_BUTTON_STATE_INTERVAL, (GSourceFunc) test_buttons_timeout, self);
+    /* Reset the buttons to default state after double_click_delay * 2 for double or secondary
+       click, or double_click_delay * 3 for primary click to always indicate equally long. */
+    self->reset_timeout_id =
+        g_timeout_add (reset_indicators_delay, (GSourceFunc) reset_indicators, self);
 }
 
 static void
@@ -126,10 +149,8 @@ cc_mouse_test_finalize (GObject *object)
 {
     CcMouseTest *self = CC_MOUSE_TEST (object);
 
-    if (self->test_buttons_timeout_id != 0) {
-        g_source_remove (self->test_buttons_timeout_id);
-        self->test_buttons_timeout_id = 0;
-    }
+    clear_timeout (&self->reset_timeout_id);
+    clear_timeout (&self->primary_timeout_id);
 
     G_OBJECT_CLASS (cc_mouse_test_parent_class)->finalize (object);
 }
@@ -148,10 +169,11 @@ cc_mouse_test_class_init (CcMouseTestClass *klass)
 
     gtk_widget_class_bind_template_child (widget_class, CcMouseTest, arrow_down);
     gtk_widget_class_bind_template_child (widget_class, CcMouseTest, arrow_up);
-    gtk_widget_class_bind_template_child (widget_class, CcMouseTest, double_click_button);
+    gtk_widget_class_bind_template_child (widget_class, CcMouseTest, primary_click_image);
+    gtk_widget_class_bind_template_child (widget_class, CcMouseTest, secondary_click_image);
+    gtk_widget_class_bind_template_child (widget_class, CcMouseTest, double_click_image);
     gtk_widget_class_bind_template_child (widget_class, CcMouseTest, image);
     gtk_widget_class_bind_template_child (widget_class, CcMouseTest, scrolled_window_adjustment);
-    gtk_widget_class_bind_template_child (widget_class, CcMouseTest, single_click_button);
     gtk_widget_class_bind_template_child (widget_class, CcMouseTest, viewport);
 
     gtk_widget_class_bind_template_callback (widget_class, on_mouse_test_show_cb);
@@ -162,9 +184,12 @@ cc_mouse_test_class_init (CcMouseTestClass *klass)
 static void
 cc_mouse_test_init (CcMouseTest *self)
 {
+    g_autoptr(GSettings) mouse_settings = NULL;
+
     gtk_widget_init_template (GTK_WIDGET (self));
 
-    self->test_buttons_timeout_id = 0;
+    mouse_settings = g_settings_new ("org.gnome.desktop.peripherals.mouse");
+    self->double_click_delay = g_settings_get_int (mouse_settings, "double-click");
 
     setup_dialog (self);
 }
