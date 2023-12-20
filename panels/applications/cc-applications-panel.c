@@ -86,6 +86,8 @@ struct _CcApplicationsPanel
   GtkLabel        *app_name_label;
   GtkButton       *launch_button;
   GtkButton       *view_details_button;
+  AdwBanner       *sandbox_banner;
+  GtkWidget       *sandbox_info_button;
 
   GDBusProxy      *perm_store;
   GtkListBoxRow   *perm_store_pending_row;
@@ -765,6 +767,22 @@ add_snap_permissions (CcApplicationsPanel *self,
 }
 #endif
 
+static void
+update_sandbox_banner (CcApplicationsPanel *self,
+                       const gchar         *display_name,
+                       gboolean             is_sandboxed)
+{
+  g_autofree gchar *sandbox_banner_message = NULL;
+
+  gtk_widget_set_visible (GTK_WIDGET (self->sandbox_banner), !is_sandboxed);
+  if (is_sandboxed)
+    return;
+
+  /* Translators: %s is an app name. (e.g. "Firefox is not sandboxed") */
+  sandbox_banner_message = g_strdup_printf (_("%s is not sandboxed"), display_name);
+  adw_banner_set_title (self->sandbox_banner, sandbox_banner_message);
+}
+
 static gint
 add_static_permission_row (CcApplicationsPanel *self,
                            const gchar         *title,
@@ -794,9 +812,14 @@ add_static_permissions (CcApplicationsPanel *self,
   g_autofree gchar *str = NULL;
   gint added = 0;
   g_autofree gchar *text = NULL;
+  gboolean is_sandboxed, is_snap = FALSE;
 
-  if (app_id && !g_str_has_prefix (app_id, PORTAL_SNAP_PREFIX))
+  is_snap = app_id && g_str_has_prefix (app_id, PORTAL_SNAP_PREFIX);
+  if (app_id && !is_snap)
     keyfile = get_flatpak_metadata (app_id);
+
+  is_sandboxed = (keyfile != NULL) || is_snap;
+  update_sandbox_banner (self, g_app_info_get_display_name (info), is_sandboxed);
   if (keyfile == NULL)
     return FALSE;
 
@@ -1643,6 +1666,7 @@ cc_applications_panel_dispose (GObject *object)
 {
   CcApplicationsPanel *self = CC_APPLICATIONS_PANEL (object);
 
+  g_clear_pointer (&self->sandbox_info_button, gtk_widget_unparent);
   g_clear_pointer (&self->builtin_dialog, gtk_window_destroy);
   g_clear_pointer (&self->handler_dialog, gtk_window_destroy);
   g_clear_pointer (&self->storage_dialog, gtk_window_destroy);
@@ -1784,6 +1808,8 @@ cc_applications_panel_class_init (CcApplicationsPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, background);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, wallpaper);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, removable_media_settings);
+  gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, sandbox_banner);
+  gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, sandbox_info_button);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, screenshot);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, shortcuts);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, search);
