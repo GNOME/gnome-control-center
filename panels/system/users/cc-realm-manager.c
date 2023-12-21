@@ -444,6 +444,40 @@ find_supported_credentials (CcRealmKerberosMembership *membership,
         return NULL;
 }
 
+static void
+join_cb (GObject      *source,
+         GAsyncResult *result,
+         gpointer      user_data)
+{
+        g_autoptr(GTask) task = G_TASK (user_data);
+        g_autoptr(GError) call_error = NULL;
+        g_autofree gchar *dbus_error = NULL;
+
+        if (cc_realm_kerberos_membership_call_join_finish (CC_REALM_KERBEROS_MEMBERSHIP (source), result, &call_error)) {
+                g_debug ("Completed Join() method call");
+
+                g_task_return_boolean (task, TRUE);
+                return;
+        }
+
+        dbus_error = g_dbus_error_get_remote_error (call_error);
+        if (dbus_error == NULL) {
+                g_debug ("Join() failed because of %s", call_error->message);
+                g_task_return_error (task, g_steal_pointer (&call_error));
+                return;
+        }
+
+        g_dbus_error_strip_remote_error (call_error);
+
+        if (g_str_equal (dbus_error, "org.freedesktop.realmd.Error.AuthenticationFailed")) {
+                g_debug ("Join() failed because of invalid/insufficient credentials");
+                g_task_return_new_error (task, CC_REALM_ERROR, CC_REALM_ERROR_BAD_LOGIN, "%s", call_error->message);
+        } else {
+                g_debug ("Join() failed because of %s", call_error->message);
+                g_task_return_error (task, g_steal_pointer (&call_error));
+        }
+}
+
 static gboolean
 realm_join_as_owner (CcRealmObject *realm,
                      const gchar *owner,
@@ -460,6 +494,7 @@ realm_join_as_owner (CcRealmObject *realm,
         GVariant *option;
         GVariant *creds;
         const gchar *type;
+        GTask *task;
 
         membership = cc_realm_object_get_kerberos_membership (realm);
         g_return_val_if_fail (membership != NULL, FALSE);
@@ -491,8 +526,9 @@ realm_join_as_owner (CcRealmObject *realm,
 
         g_debug ("Calling the Join() method with %s credentials", owner);
 
+        task = g_task_new (realm, cancellable, callback, user_data);
         cc_realm_kerberos_membership_call_join (membership, creds, options,
-                                                cancellable, callback, user_data);
+                                                cancellable, join_cb, task);
 
         return TRUE;
 }
@@ -542,40 +578,10 @@ cc_realm_join_finish (CcRealmObject *realm,
                       GAsyncResult *result,
                       GError **error)
 {
-        g_autoptr(CcRealmKerberosMembership) membership = NULL;
-        g_autoptr(GError) call_error = NULL;
-        g_autofree gchar *dbus_error = NULL;
-
         g_return_val_if_fail (CC_REALM_IS_OBJECT (realm), FALSE);
         g_return_val_if_fail (error == NULL || *error == NULL, FALSE);
 
-        membership = cc_realm_object_get_kerberos_membership (realm);
-        g_return_val_if_fail (membership != NULL, FALSE);
-
-        if (cc_realm_kerberos_membership_call_join_finish (membership, result, &call_error)) {
-                g_debug ("Completed Join() method call");
-                return TRUE;
-        }
-
-        dbus_error = g_dbus_error_get_remote_error (call_error);
-        if (dbus_error == NULL) {
-                g_debug ("Join() failed because of %s", call_error->message);
-                g_propagate_error (error, g_steal_pointer (&call_error));
-                return FALSE;
-        }
-
-        g_dbus_error_strip_remote_error (call_error);
-
-        if (g_str_equal (dbus_error, "org.freedesktop.realmd.Error.AuthenticationFailed")) {
-                g_debug ("Join() failed because of invalid/insufficient credentials");
-                g_set_error (error, CC_REALM_ERROR, CC_REALM_ERROR_BAD_LOGIN,
-                             "%s", call_error->message);
-        } else {
-                g_debug ("Join() failed because of %s", call_error->message);
-                g_propagate_error (error, g_steal_pointer (&call_error));
-        }
-
-        return FALSE;
+        return g_task_propagate_boolean (G_TASK (result), error);
 }
 
 typedef struct {
