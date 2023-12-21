@@ -21,6 +21,7 @@
 #define G_LOG_DOMAIN "cc-remote-desktop-page"
 
 #include "cc-gnome-remote-desktop.h"
+#include "cc-hostname.h"
 #include "cc-list-row.h"
 #include "cc-remote-desktop-page.h"
 #include "cc-tls-certificate.h"
@@ -143,68 +144,7 @@ remote_desktop_show_encryption_fingerprint (CcRemoteDesktopPage *self)
 static char *
 get_hostname (void)
 {
-  g_autoptr(GDBusConnection) bus = NULL;
-  g_autoptr(GVariant) res = NULL;
-  g_autoptr(GVariant) inner = NULL;
-  g_autoptr(GError) error = NULL;
-  const char *hostname;
-
-  bus = g_bus_get_sync (G_BUS_TYPE_SYSTEM, NULL, &error);
-  if (bus == NULL)
-    {
-      g_warning ("Failed to get system bus connection: %s", error->message);
-      return NULL;
-    }
-  res = g_dbus_connection_call_sync (bus,
-                                     "org.freedesktop.hostname1",
-                                     "/org/freedesktop/hostname1",
-                                     "org.freedesktop.DBus.Properties",
-                                     "Get",
-                                     g_variant_new ("(ss)",
-                                                    "org.freedesktop.hostname1",
-                                                    "PrettyHostname"),
-                                     (GVariantType*)"(v)",
-                                     G_DBUS_CALL_FLAGS_NONE,
-                                     -1,
-                                     NULL,
-                                     &error);
-
-  if (res == NULL)
-    {
-      g_warning ("Getting pretty hostname failed: %s", error->message);
-      return NULL;
-    }
-
-  g_variant_get (res, "(v)", &inner);
-  hostname = g_variant_get_string (inner, NULL);
-  if (g_strcmp0 (hostname, "") != 0)
-    return g_strdup (hostname);
-
-  g_clear_pointer (&inner, g_variant_unref);
-  g_clear_pointer (&res, g_variant_unref);
-
-  res = g_dbus_connection_call_sync (bus,
-                                     "org.freedesktop.hostname1",
-                                     "/org/freedesktop/hostname1",
-                                     "org.freedesktop.DBus.Properties",
-                                     "Get",
-                                     g_variant_new ("(ss)",
-                                                    "org.freedesktop.hostname1",
-                                                    "Hostname"),
-                                     (GVariantType*)"(v)",
-                                     G_DBUS_CALL_FLAGS_NONE,
-                                     -1,
-                                     NULL,
-                                     &error);
-
-  if (res == NULL)
-    {
-      g_warning ("Getting hostname failed: %s", error->message);
-      return NULL;
-    }
-
-  g_variant_get (res, "(v)", &inner);
-  return g_variant_dup_string (inner, NULL);
+  return cc_hostname_get_display_hostname (cc_hostname_get_default ());
 }
 
 static void
