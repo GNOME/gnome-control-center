@@ -108,10 +108,13 @@ about_activated (GSimpleAction *action,
 {
   CcApplication *self = CC_APPLICATION (user_data);
   GtkWidget *about_window;
+  const char *developer_name;
 
   about_window = adw_about_window_new_from_appdata ("/org/gnome/Settings/appdata", VERSION);
+  developer_name = adw_about_window_get_developer_name (ADW_ABOUT_WINDOW (about_window));
   /* Translators should localize the following string which will be displayed in the About dialog giving credit to the translator(s). */
   adw_about_window_set_translator_credits (ADW_ABOUT_WINDOW (about_window), _("translator-credits"));
+  adw_about_window_set_copyright (ADW_ABOUT_WINDOW (about_window), g_strdup_printf (_("© 1998 %s"), developer_name));
   gtk_window_set_transient_for (GTK_WINDOW (about_window), GTK_WINDOW (self->window));
 
   gtk_window_present (GTK_WINDOW (about_window));
