@@ -30,6 +30,7 @@
 #include <polkit/polkit.h>
 
 #include "cc-wifi-hotspot-dialog.h"
+#include "cc-hostname.h"
 #include "hostname-helper.h"
 #include "network-dialogs.h"
 #include "panel-common.h"
@@ -530,42 +531,6 @@ wireless_try_to_connect (NetDeviceWifi *self,
         }
 }
 
-static gchar *
-get_hostname (void)
-{
-        g_autoptr(GDBusConnection) bus = NULL;
-        g_autoptr(GVariant) res = NULL;
-        g_autoptr(GVariant) inner = NULL;
-        g_autoptr(GError) error = NULL;
-
-        bus = g_bus_get_sync (G_BUS_TYPE_SYSTEM, NULL, &error);
-        if (bus == NULL) {
-                g_warning ("Failed to get system bus connection: %s", error->message);
-                return NULL;
-        }
-        res = g_dbus_connection_call_sync (bus,
-                                           "org.freedesktop.hostname1",
-                                           "/org/freedesktop/hostname1",
-                                           "org.freedesktop.DBus.Properties",
-                                           "Get",
-                                           g_variant_new ("(ss)",
-                                                          "org.freedesktop.hostname1",
-                                                          "PrettyHostname"),
-                                           (GVariantType*)"(v)",
-                                           G_DBUS_CALL_FLAGS_NONE,
-                                           -1,
-                                           NULL,
-                                           &error);
-
-        if (res == NULL) {
-                g_warning ("Getting pretty hostname failed: %s", error->message);
-                return NULL;
-        }
-
-        g_variant_get (res, "(v)", &inner);
-        return g_variant_dup_string (inner, NULL);
-}
-
 static gboolean
 is_hotspot_connection (NMConnection *connection)
 {
@@ -735,7 +700,7 @@ start_hotspot (NetDeviceWifi *self)
                 g_object_ref_sink (self->hotspot_dialog);
         }
         cc_wifi_hotspot_dialog_set_device (self->hotspot_dialog, NM_DEVICE_WIFI (self->device));
-        hostname = get_hostname ();
+        hostname = cc_hostname_get_display_hostname (cc_hostname_get_default ());
         ssid =  pretty_hostname_to_ssid (hostname);
         cc_wifi_hotspot_dialog_set_hostname (self->hotspot_dialog, ssid);
                 c = net_device_wifi_get_hotspot_connection (self);
