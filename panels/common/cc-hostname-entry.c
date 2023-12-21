@@ -20,6 +20,7 @@
 
 
 #include "cc-common-resources.h"
+#include "cc-hostname.h"
 #include "cc-hostname-entry.h"
 #include "hostname-helper.h"
 
@@ -29,7 +30,6 @@ struct _CcHostnameEntry
 {
   AdwEntryRow          parent;
 
-  GDBusProxy          *hostnamed_proxy;
   guint                set_hostname_timeout_source_id;
 };
 
@@ -37,102 +37,15 @@ G_DEFINE_TYPE (CcHostnameEntry, cc_hostname_entry, ADW_TYPE_ENTRY_ROW)
 
 #define SET_HOSTNAME_TIMEOUT 1
 
-static void
-cc_hostname_entry_set_hostname (CcHostnameEntry *self)
-{
-  g_autofree gchar *hostname = NULL;
-  g_autoptr(GVariant) pretty_result = NULL;
-  g_autoptr(GVariant) static_result = NULL;
-  g_autoptr(GError) pretty_error = NULL;
-  g_autoptr(GError) static_error = NULL;
-  const gchar *text;
-
-  text = gtk_editable_get_text (GTK_EDITABLE (self));
-
-  g_debug ("Setting PrettyHostname to '%s'", text);
-  pretty_result = g_dbus_proxy_call_sync (self->hostnamed_proxy,
-                                          "SetPrettyHostname",
-                                          g_variant_new ("(sb)", text, FALSE),
-                                          G_DBUS_CALL_FLAGS_NONE,
-                                          -1, NULL, &pretty_error);
-  if (pretty_result == NULL)
-    g_warning ("Could not set PrettyHostname: %s", pretty_error->message);
-
-  /* Set the static hostname */
-  hostname = pretty_hostname_to_static (text, FALSE);
-  g_assert (hostname);
-
-  g_debug ("Setting StaticHostname to '%s'", hostname);
-  static_result = g_dbus_proxy_call_sync (self->hostnamed_proxy,
-                                          "SetStaticHostname",
-                                          g_variant_new ("(sb)", hostname, FALSE),
-                                          G_DBUS_CALL_FLAGS_NONE,
-                                          -1, NULL, &static_error);
-  if (static_result == NULL)
-    g_warning ("Could not set StaticHostname: %s", static_error->message);
-}
-
-static char *
-get_hostname_property (CcHostnameEntry *self,
-                       const char      *property)
-{
-  g_autoptr(GVariant) variant = NULL;
-
-  if (!self->hostnamed_proxy)
-    return g_strdup ("");
-
-  variant = g_dbus_proxy_get_cached_property (self->hostnamed_proxy,
-                                              property);
-  if (!variant)
-    {
-      g_autoptr(GError) error = NULL;
-      g_autoptr(GVariant) inner = NULL;
-
-      /* Work around systemd-hostname not sending us back
-       * the property value when changing values */
-      variant = g_dbus_proxy_call_sync (self->hostnamed_proxy,
-                                        "org.freedesktop.DBus.Properties.Get",
-                                        g_variant_new ("(ss)", "org.freedesktop.hostname1", property),
-                                        G_DBUS_CALL_FLAGS_NONE,
-                                        -1,
-                                        NULL,
-                                        &error);
-      if (variant == NULL)
-        {
-          g_warning ("Failed to get property '%s': %s", property, error->message);
-          return NULL;
-        }
-
-      g_variant_get (variant, "(v)", &inner);
-      return g_variant_dup_string (inner, NULL);
-    }
-  else
-    {
-      return g_variant_dup_string (variant, NULL);
-    }
-}
-
-static char *
-cc_hostname_entry_get_display_hostname (CcHostnameEntry  *self)
-{
-  g_autofree gchar *str = NULL;
-
-  str = get_hostname_property (self, "PrettyHostname");
-
-  /* Empty strings means that we need to fallback */
-  if (str != NULL &&
-      *str == '\0')
-    return get_hostname_property (self, "Hostname");
-
-  return g_steal_pointer (&str);
-}
-
 static gboolean
 set_hostname_timeout (CcHostnameEntry *self)
 {
+  const gchar *text = NULL;
+
   self->set_hostname_timeout_source_id = 0;
 
-  cc_hostname_entry_set_hostname (self);
+  text = gtk_editable_get_text (GTK_EDITABLE (self));
+  cc_hostname_set_hostname (cc_hostname_get_default (), text);
 
   return FALSE;
 }
@@ -173,8 +86,6 @@ cc_hostname_entry_dispose (GObject *object)
       set_hostname_timeout (self);
     }
 
-  g_clear_object (&self->hostnamed_proxy);
-
   G_OBJECT_CLASS (cc_hostname_entry_parent_class)->dispose (object);
 }
 
@@ -207,25 +118,7 @@ cc_hostname_entry_constructed (GObject *object)
       gtk_widget_set_sensitive (GTK_WIDGET (self), FALSE);
     }
 
-  self->hostnamed_proxy = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM,
-                                                         G_DBUS_PROXY_FLAGS_NONE,
-                                                         NULL,
-                                                         "org.freedesktop.hostname1",
-                                                         "/org/freedesktop/hostname1",
-                                                         "org.freedesktop.hostname1",
-                                                         NULL,
-                                                         &error);
-
-  /* This could only happen if the policy file was installed
-   * but not hostnamed, which points to a system bug */
-  if (self->hostnamed_proxy == NULL)
-    {
-      g_debug ("Couldn't get hostnamed to start, bailing: %s", error->message);
-      return;
-    }
-
-  str = cc_hostname_entry_get_display_hostname (CC_HOSTNAME_ENTRY (self));
-
+  str = cc_hostname_get_display_hostname (cc_hostname_get_default ());
   if (str != NULL)
     gtk_editable_set_text (GTK_EDITABLE (self), str);
   else
@@ -255,10 +148,4 @@ CcHostnameEntry *
 cc_hostname_entry_new (void)
 {
   return g_object_new (CC_TYPE_HOSTNAME_ENTRY, NULL);
-}
-
-gchar*
-cc_hostname_entry_get_hostname (CcHostnameEntry *entry)
-{
-  return get_hostname_property (entry, "Hostname");
 }
