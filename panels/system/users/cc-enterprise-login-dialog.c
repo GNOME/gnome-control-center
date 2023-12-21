@@ -545,6 +545,11 @@ domain_validate (CcEnterpriseLoginDialog *self)
 {
   self->domain_timeout_id = 0;
 
+  /* This is needed to stop previous calls to avoid rewriting feedback. */
+  g_cancellable_cancel (self->cancellable);
+  g_object_unref (self->cancellable);
+  self->cancellable = g_cancellable_new ();
+
   cc_realm_manager_discover (self->realm_manager,
                              gtk_editable_get_text (GTK_EDITABLE (self->domain_row)),
                              self->cancellable,
