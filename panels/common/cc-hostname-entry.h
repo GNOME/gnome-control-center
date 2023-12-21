@@ -28,6 +28,5 @@ G_BEGIN_DECLS
 G_DECLARE_FINAL_TYPE (CcHostnameEntry, cc_hostname_entry, CC, HOSTNAME_ENTRY, AdwEntryRow)
 
 CcHostnameEntry *cc_hostname_entry_new (void);
-gchar* cc_hostname_entry_get_hostname (CcHostnameEntry *entry);
 
 G_END_DECLS
