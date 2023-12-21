@@ -46,6 +46,7 @@
 #endif
 
 #include "cc-system-details-window.h"
+#include "cc-hostname.h"
 #include "cc-info-entry.h"
 
 struct _CcSystemDetailsWindow
@@ -390,48 +391,17 @@ get_primary_disk_info (void)
   return NULL;
 }
 
-static char *
-get_hostnamed_property (const char *property_name)
-{
-  g_autoptr(GDBusProxy) hostnamed_proxy = NULL;
-  g_autoptr(GVariant) property_variant = NULL;
-  g_autoptr(GError) error = NULL;
-
-  hostnamed_proxy = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM,
-                                                   G_DBUS_PROXY_FLAGS_NONE,
-                                                   NULL,
-                                                   "org.freedesktop.hostname1",
-                                                   "/org/freedesktop/hostname1",
-                                                   "org.freedesktop.hostname1",
-                                                   NULL,
-                                                   &error);
-  if (hostnamed_proxy == NULL)
-    {
-      g_debug ("Couldn't get hostnamed to start, bailing: %s", error->message);
-      return NULL;
-    }
-
-  property_variant = g_dbus_proxy_get_cached_property (hostnamed_proxy, property_name);
-  if (!property_variant)
-    {
-      g_debug ("Unable to retrieve org.freedesktop.hostname1.%s property", property_name);
-      return NULL;
-    }
-
-  return g_variant_dup_string (property_variant, NULL);
-}
-
 char *
 get_hardware_model_string (void)
 {
   g_autofree char *vendor_string = NULL;
   g_autofree char *model_string = NULL;
 
-  vendor_string = get_hostnamed_property ("HardwareVendor");
+  vendor_string = cc_hostname_get_property (cc_hostname_get_default (), "HardwareVendor");
   if (!vendor_string || g_strcmp0 (vendor_string, "") == 0)
     return NULL;
 
-  model_string = get_hostnamed_property ("HardwareModel");
+  model_string = cc_hostname_get_property (cc_hostname_get_default (), "HardwareModel");
   if (!model_string || g_strcmp0 (model_string, "") == 0)
     return NULL;
 
@@ -443,7 +413,7 @@ get_firmware_version_string ()
 {
   g_autofree char *firmware_version_string = NULL;
 
-  firmware_version_string = get_hostnamed_property ("FirmwareVersion");
+  firmware_version_string = cc_hostname_get_property (cc_hostname_get_default (), "FirmwareVersion");
   if (!firmware_version_string || g_strcmp0 (firmware_version_string, "") == 0)
     return NULL;
 
@@ -456,11 +426,11 @@ get_kernel_version_string ()
   g_autofree char *kernel_name = NULL;
   g_autofree char *kernel_release = NULL;
 
-  kernel_name = get_hostnamed_property ("KernelName");
+  kernel_name = cc_hostname_get_property (cc_hostname_get_default (), "KernelName");
   if (!kernel_name || g_strcmp0 (kernel_name, "") == 0)
     return NULL;
 
-  kernel_release = get_hostnamed_property ("KernelRelease");
+  kernel_release = cc_hostname_get_property (cc_hostname_get_default (), "KernelRelease");
   if (!kernel_release || g_strcmp0 (kernel_release, "") == 0)
     return NULL;
 
