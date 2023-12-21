@@ -54,6 +54,7 @@ libwidgets_dep = declare_dependency(
 
 sources = common_sources + files(
   'cc-common-language.c',
+  'cc-hostname.c',
   'cc-illustrated-row.c',
   'cc-language-chooser.c',
   'cc-language-row.c',
