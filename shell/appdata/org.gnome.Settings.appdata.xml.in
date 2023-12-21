@@ -34,7 +34,11 @@
   <url type="vcs-browser">https://gitlab.gnome.org/GNOME/gnome-control-center/</url>
   <project_group>GNOME</project_group>
   <launchable type="desktop-id">org.gnome.Settings.desktop</launchable>
+  <!-- developer_name tag deprecated with Appstream 1.0 -->
   <developer_name>The GNOME Project</developer_name>
+  <developer id="gnome.org">
+    <name>The GNOME Project</name>
+  </developer>
   <compulsory_for_desktop>GNOME</compulsory_for_desktop>
   <kudos>
     <kudo>HiDpiIcon</kudo>
@@ -54,7 +58,7 @@
       </ul>
     </description>
     </release>
-    <release version="45.rc" date="2023-08-25">
+    <release version="45~rc" date="2023-08-25">
     <description>
       <ul>
         <li>Settings panels have been ported to modern libadwaita navigation widgets</li>
@@ -63,7 +67,7 @@
       </ul>
     </description>
     </release>
-    <release version="45.beta" date="2023-08-07">
+    <release version="45~beta" date="2023-08-07">
     <description>
       <ul>
         <li>Performance improvements when loading a panel at startup</li>
@@ -80,8 +84,7 @@
   </releases>
 
   <translation type="gettext">gnome-control-center-2.0</translation>
-  <custom>
-    <value key="Purism::form_factor">workstation</value>
-    <value key="Purism::form_factor">mobile</value>
-  </custom>
+  <requires>
+    <display_length compare="ge">360</display_length>
+  </requires>
 </component>
