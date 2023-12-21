@@ -28,6 +28,7 @@
 
 #include "shell/cc-object-storage.h"
 #include "cc-battery-row.h"
+#include "cc-hostname.h"
 #include "cc-power-profile-row.h"
 #include "cc-power-profile-info-row.h"
 #include "cc-power-panel.h"
@@ -95,48 +96,6 @@ static const char *
 cc_power_panel_get_help_uri (CcPanel *panel)
 {
   return "help:gnome-help/power";
-}
-
-static char *
-get_chassis_type (GCancellable *cancellable)
-{
-  g_autoptr(GError) error = NULL;
-  g_autoptr(GVariant) inner = NULL;
-  g_autoptr(GVariant) variant = NULL;
-  g_autoptr(GDBusConnection) connection = NULL;
-
-  connection = g_bus_get_sync (G_BUS_TYPE_SYSTEM,
-                               cancellable,
-                               &error);
-  if (!connection)
-    {
-      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
-        g_warning ("system bus not available: %s", error->message);
-      return NULL;
-    }
-
-  variant = g_dbus_connection_call_sync (connection,
-                                         "org.freedesktop.hostname1",
-                                         "/org/freedesktop/hostname1",
-                                         "org.freedesktop.DBus.Properties",
-                                         "Get",
-                                         g_variant_new ("(ss)",
-                                                        "org.freedesktop.hostname1",
-                                                        "Chassis"),
-                                         NULL,
-                                         G_DBUS_CALL_FLAGS_NONE,
-                                         -1,
-                                         cancellable,
-                                         &error);
-  if (!variant)
-    {
-      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
-        g_debug ("Failed to get property '%s': %s", "Chassis", error->message);
-      return NULL;
-    }
-
-  g_variant_get (variant, "(v)", &inner);
-  return g_variant_dup_string (inner, NULL);
 }
 
 static void
@@ -1489,7 +1448,7 @@ cc_power_panel_init (CcPowerPanel *self)
   load_custom_css (self, "/org/gnome/control-center/power/battery-levels.css");
   load_custom_css (self, "/org/gnome/control-center/power/power-profiles.css");
 
-  self->chassis_type = get_chassis_type (cc_panel_get_cancellable (CC_PANEL (self)));
+  self->chassis_type = cc_hostname_get_chassis_type (cc_hostname_get_default ());
 
   self->up_client = up_client_new ();
 
