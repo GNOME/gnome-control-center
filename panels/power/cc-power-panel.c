@@ -51,6 +51,7 @@ struct _CcPowerPanel
   AdwPreferencesGroup *device_section;
   AdwSwitchRow      *dim_screen_row;
   AdwPreferencesGroup *general_section;
+  GtkListStore      *mobile_time_liststore;
   AdwComboRow       *power_button_row;
   GtkListBox        *power_profile_listbox;
   GtkListBox        *power_profile_info_listbox;
@@ -1383,6 +1384,7 @@ cc_power_panel_class_init (CcPowerPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, device_section);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, dim_screen_row);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, general_section);
+  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, mobile_time_liststore);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, power_button_row);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, power_profile_listbox);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, power_profile_info_listbox);
@@ -1413,6 +1415,17 @@ cc_power_panel_init (CcPowerPanel *self)
   load_custom_css (self, "/org/gnome/control-center/power/power-profiles.css");
 
   self->chassis_type = cc_hostname_get_chassis_type (cc_hostname_get_default ());
+
+  /* Use a different list of suspend times based on the chassis type */
+  if (g_strcmp0 (self->chassis_type, "tablet") == 0 ||
+      g_strcmp0 (self->chassis_type, "watch") == 0 ||
+      g_strcmp0 (self->chassis_type, "handset") == 0)
+    {
+      gtk_combo_box_set_model (GTK_COMBO_BOX (self->suspend_on_battery_delay_combo),
+                               GTK_TREE_MODEL (self->mobile_time_liststore));
+      gtk_combo_box_set_model (GTK_COMBO_BOX (self->suspend_on_ac_delay_combo),
+                               GTK_TREE_MODEL (self->mobile_time_liststore));
+    }
 
   self->up_client = up_client_new ();
 
