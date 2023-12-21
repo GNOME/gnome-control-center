@@ -51,6 +51,7 @@ struct _CcUsersPage {
     AdwNavigationPage  parent_instance;
 
     GtkButton         *add_user_button;
+    GtkButton         *add_enterprise_user_button;
     CcUserPage        *current_user_page;
     AdwNavigationView *navigation;
     GtkWidget         *other_users_group;
@@ -220,6 +221,57 @@ users_loaded (CcUsersPage *self)
 }
 
 static void
+check_realmd_list_names_cb (GObject      *object,
+                            GAsyncResult *result,
+                            gpointer      user_data)
+{
+    g_autoptr(CcUsersPage) self = CC_USERS_PAGE (user_data);
+    g_autoptr(GVariant) ret = NULL;
+    g_autoptr(GVariant) names = NULL;
+    GVariantIter iter;
+    gchar *name;
+    g_autoptr(GError) error = NULL;
+
+    ret = g_dbus_connection_call_finish (G_DBUS_CONNECTION (object), result, &error);
+    if (ret == NULL) {
+        g_warning ("Unable to query dbus: %s", error->message);
+        return;
+    }
+
+    names = g_variant_get_child_value (ret, 0);
+    g_variant_iter_init (&iter, names);
+    while (g_variant_iter_loop (&iter, "&s", &name)) {
+        if (g_str_equal (name, "org.freedesktop.realmd"))
+            gtk_widget_set_visible (GTK_WIDGET (self->add_enterprise_user_button), TRUE);
+    }
+}
+
+static void
+check_realmd (CcUsersPage *self)
+{
+    g_autoptr(GDBusConnection) connection = NULL;
+    g_autoptr(GError) error = NULL;
+
+    connection = g_bus_get_sync (G_BUS_TYPE_SYSTEM, NULL, &error);
+    if (connection == NULL) {
+        g_warning ("Unable to connect to dbus: %s", error->message);
+        return;
+    }
+
+    g_dbus_connection_call (connection,
+                            "org.freedesktop.DBus",
+                            "/org/freedesktop/DBus",
+                            "org.freedesktop.DBus",
+                            "ListActivatableNames",
+                            NULL,
+                            G_VARIANT_TYPE ("(as)"),
+                            G_DBUS_CALL_FLAGS_NONE,
+                            -1, NULL,
+                            check_realmd_list_names_cb,
+                            g_object_ref (self));
+}
+
+static void
 cc_users_page_dispose (GObject *object)
 {
     CcUsersPage *self = CC_USERS_PAGE (object);
@@ -290,6 +342,8 @@ cc_users_page_init (CcUsersPage *self)
     if (is_loaded) {
         users_loaded (self);
     }
+
+    check_realmd (self);
 }
 
 static void
@@ -305,6 +359,7 @@ cc_users_page_class_init (CcUsersPageClass * klass)
 
     gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/system/users/cc-users-page.ui");
 
+    gtk_widget_class_bind_template_child (widget_class, CcUsersPage, add_enterprise_user_button);
     gtk_widget_class_bind_template_child (widget_class, CcUsersPage, add_user_button);
     gtk_widget_class_bind_template_child (widget_class, CcUsersPage, current_user_page);
     gtk_widget_class_bind_template_child (widget_class, CcUsersPage, navigation);
