@@ -28,6 +28,7 @@ typedef enum {
         CC_REALM_ERROR_BAD_LOGIN,
         CC_REALM_ERROR_BAD_PASSWORD,
         CC_REALM_ERROR_CANNOT_AUTH,
+        CC_REALM_ERROR_BAD_HOSTNAME,
         CC_REALM_ERROR_GENERIC,
 } CcRealmErrors;
 

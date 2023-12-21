@@ -292,6 +292,12 @@ realm_login_as_admin_cb (GObject      *source,
       message = _("That login password didn’t work");
       gtk_widget_grab_focus (GTK_WIDGET (self->admin_password_row));
     }
+  else if (g_error_matches (error, CC_REALM_ERROR, CC_REALM_ERROR_BAD_HOSTNAME))
+    {
+      g_debug ("Bad host name: %s", error->message);
+
+      message = _("That hostname didn’t work");
+    }
   /* Other login failure */
   else
     {
@@ -390,7 +396,8 @@ realm_join_as_user_cb (GObject      *source,
     }
   /* Credential failure while joining domain, prompt for admin creds */
   else if (g_error_matches (error, CC_REALM_ERROR, CC_REALM_ERROR_BAD_LOGIN) ||
-           g_error_matches (error, CC_REALM_ERROR, CC_REALM_ERROR_BAD_PASSWORD))
+           g_error_matches (error, CC_REALM_ERROR, CC_REALM_ERROR_BAD_PASSWORD) ||
+           g_error_matches (error, CC_REALM_ERROR, CC_REALM_ERROR_BAD_HOSTNAME))
     {
       g_debug ("Joining realm failed due to credentials");
 

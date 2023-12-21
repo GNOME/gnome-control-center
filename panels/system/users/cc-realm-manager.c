@@ -472,6 +472,9 @@ join_cb (GObject      *source,
         if (g_str_equal (dbus_error, "org.freedesktop.realmd.Error.AuthenticationFailed")) {
                 g_debug ("Join() failed because of invalid/insufficient credentials");
                 g_task_return_new_error (task, CC_REALM_ERROR, CC_REALM_ERROR_BAD_LOGIN, "%s", call_error->message);
+        } else if (g_str_equal (dbus_error, "org.freedesktop.realmd.Error.BadHostname")) {
+                g_debug ("Join() failed because of invalid/conflicting host name");
+                g_task_return_new_error (task, CC_REALM_ERROR, CC_REALM_ERROR_BAD_HOSTNAME, "%s", call_error->message);
         } else {
                 g_debug ("Join() failed because of %s", call_error->message);
                 g_task_return_error (task, g_steal_pointer (&call_error));
