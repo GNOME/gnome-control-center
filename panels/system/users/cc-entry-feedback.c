@@ -26,108 +26,112 @@
 #define G_LOG_DOMAIN "cc-entry-feedback"
 
 #ifdef HAVE_CONFIG_H
-# include "config.h"
+#include "config.h"
 #endif
 
 #include "cc-entry-feedback.h"
 
-struct _CcEntryFeedback {
-    GtkBox       parent_instance;
+struct _CcEntryFeedback
+{
+  GtkBox       parent_instance;
 
-    GtkImage    *image;
-    GtkLabel    *label;
+  GtkImage    *image;
+  GtkLabel    *label;
 };
 
 G_DEFINE_TYPE (CcEntryFeedback, cc_entry_feedback, GTK_TYPE_BOX)
 
-enum {
-    PROP_0,
-    PROP_ICON_NAME,
-    PROP_TEXT,
+enum
+{
+  PROP_0,
+  PROP_ICON_NAME,
+  PROP_TEXT,
 };
 
 static void
 cc_entry_feedback_get_property (GObject    *object,
-                           guint       prop_id,
-                           GValue     *value,
-                           GParamSpec *pspec)
+                                guint       prop_id,
+                                GValue     *value,
+                                GParamSpec *pspec)
 {
-    CcEntryFeedback *self = CC_ENTRY_FEEDBACK (object);
+  CcEntryFeedback *self = CC_ENTRY_FEEDBACK (object);
 
-    switch (prop_id) {
+  switch (prop_id)
+    {
     case PROP_ICON_NAME:
-        g_value_set_string (value, gtk_image_get_icon_name (self->image));
-        break;
+      g_value_set_string (value, gtk_image_get_icon_name (self->image));
+      break;
     case PROP_TEXT:
-        g_value_set_string (value, gtk_label_get_label (self->label));
-        break;
+      g_value_set_string (value, gtk_label_get_label (self->label));
+      break;
     default:
-        G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
     }
 }
 
 static void
 cc_entry_feedback_set_property (GObject      *object,
-                           guint         prop_id,
-                           const GValue *value,
-                           GParamSpec   *pspec)
+                                guint         prop_id,
+                                const GValue *value,
+                                GParamSpec   *pspec)
 {
-    CcEntryFeedback *self = CC_ENTRY_FEEDBACK (object);
+  CcEntryFeedback *self = CC_ENTRY_FEEDBACK (object);
 
-    switch (prop_id) {
+  switch (prop_id)
+    {
     case PROP_ICON_NAME:
-        gtk_image_set_from_icon_name (self->image, g_value_get_string (value));
-        break;
+      gtk_image_set_from_icon_name (self->image, g_value_get_string (value));
+      break;
     case PROP_TEXT:
-        gtk_label_set_label (self->label, g_value_get_string (value));
-        break;
+      gtk_label_set_label (self->label, g_value_get_string (value));
+      break;
     default:
-        G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
     }
 }
 
 static void
 cc_entry_feedback_init (CcEntryFeedback *self)
 {
-    gtk_widget_init_template (GTK_WIDGET (self));
+  gtk_widget_init_template (GTK_WIDGET (self));
 }
 
 static void
 cc_entry_feedback_class_init (CcEntryFeedbackClass * klass)
 {
-    GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
-    GObjectClass *object_class = G_OBJECT_CLASS (klass);
+  GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
+  GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
-    object_class->get_property = cc_entry_feedback_get_property;
-    object_class->set_property = cc_entry_feedback_set_property;
+  object_class->get_property = cc_entry_feedback_get_property;
+  object_class->set_property = cc_entry_feedback_set_property;
 
-    gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/system/users/cc-entry-feedback.ui");
+  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/system/users/cc-entry-feedback.ui");
 
-    gtk_widget_class_bind_template_child (widget_class, CcEntryFeedback, image);
-    gtk_widget_class_bind_template_child (widget_class, CcEntryFeedback, label);
+  gtk_widget_class_bind_template_child (widget_class, CcEntryFeedback, image);
+  gtk_widget_class_bind_template_child (widget_class, CcEntryFeedback, label);
 
-    g_object_class_install_property (object_class,
-                                    PROP_ICON_NAME,
-                                    g_param_spec_string ("icon-name",
-                                                         "Icon name",
-                                                         "The icon theme name for the icon to be shown",
-                                                         NULL,
-                                                         G_PARAM_READWRITE));
-    g_object_class_install_property (object_class,
-                                     PROP_TEXT,
-                                     g_param_spec_string ("text",
-                                                          "Text",
-                                                          "The text to be displayed.",
-                                                          NULL,
-                                                          G_PARAM_READWRITE));
+  g_object_class_install_property (object_class,
+                                   PROP_ICON_NAME,
+                                   g_param_spec_string ("icon-name",
+                                                        "Icon name",
+                                                        "The icon theme name for the icon to be shown",
+                                                        NULL,
+                                                        G_PARAM_READWRITE));
+  g_object_class_install_property (object_class,
+                                   PROP_TEXT,
+                                   g_param_spec_string ("text",
+                                                        "Text",
+                                                        "The text to be displayed.",
+                                                        NULL,
+                                                        G_PARAM_READWRITE));
 }
 
 void
 cc_entry_feedback_reset (CcEntryFeedback *self)
 {
-    // FIXME: assert
-    gtk_image_set_from_icon_name (self->image, NULL);
-    gtk_label_set_label (self->label, NULL);
+  // FIXME: assert
+  gtk_image_set_from_icon_name (self->image, NULL);
+  gtk_label_set_label (self->label, NULL);
 }
 
 void
@@ -135,8 +139,7 @@ cc_entry_feedback_update (CcEntryFeedback *self,
                           const gchar     *icon_name,
                           const gchar     *text)
 {
-
-    // FIXME: assert
-    gtk_image_set_from_icon_name (self->image, icon_name);
-    gtk_label_set_label (self->label, text);
+  // FIXME: assert
+  gtk_image_set_from_icon_name (self->image, icon_name);
+  gtk_label_set_label (self->label, text);
 }
