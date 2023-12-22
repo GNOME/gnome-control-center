@@ -33,7 +33,6 @@
 #include "cc-background-item.h"
 #include "cc-background-preview.h"
 #include "cc-background-resources.h"
-#include "cc-background-xml.h"
 
 #define WP_PATH_ID "org.gnome.desktop.background"
 #define WP_LOCK_PATH_ID "org.gnome.desktop.screensaver"
@@ -185,30 +184,15 @@ update_preview (CcBackgroundPanel *self)
   cc_background_preview_set_item (self->dark_preview, current_background);
 }
 
-static gchar *
-get_save_path (void)
-{
-  return g_build_filename (g_get_user_config_dir (),
-                           "gnome-control-center",
-                           "backgrounds",
-                           "last-edited.xml",
-                           NULL);
-}
-
 static void
 reload_current_bg (CcBackgroundPanel *self)
 {
-  g_autoptr(CcBackgroundItem) saved = NULL;
   CcBackgroundItem *configured;
   GSettings *settings = NULL;
   g_autofree gchar *uri = NULL;
   g_autofree gchar *dark_uri = NULL;
   g_autofree gchar *pcolor = NULL;
   g_autofree gchar *scolor = NULL;
-
-  /* Load the saved configuration */
-  uri = get_save_path ();
-  saved = cc_background_xml_get_item (uri);
 
   /* initalise the current background information from settings */
   settings = self->settings;
@@ -231,41 +215,10 @@ reload_current_bg (CcBackgroundPanel *self)
                 "secondary-color", scolor,
                 NULL);
 
-  if (saved != NULL && cc_background_item_compare (saved, configured))
-    {
-      CcBackgroundItemFlags flags;
-      flags = cc_background_item_get_flags (saved);
-      /* Special case for colours */
-      if (cc_background_item_get_placement (saved) == G_DESKTOP_BACKGROUND_STYLE_NONE)
-        flags &=~ (CC_BACKGROUND_ITEM_HAS_PCOLOR | CC_BACKGROUND_ITEM_HAS_SCOLOR);
-      g_object_set (G_OBJECT (configured),
-		    "name", cc_background_item_get_name (saved),
-		    "flags", flags,
-		    "source-url", cc_background_item_get_source_url (saved),
-		    "source-xml", cc_background_item_get_source_xml (saved),
-		    NULL);
-    }
-
   g_clear_object (&self->current_background);
   self->current_background = configured;
   cc_background_item_load (configured, NULL);
-}
 
-static gboolean
-create_save_dir (void)
-{
-  g_autofree char *path = NULL;
-
-  path = g_build_filename (g_get_user_config_dir (),
-			   "gnome-control-center",
-			   "backgrounds",
-			   NULL);
-  if (g_mkdir_with_parents (path, USER_DIR_MODE) < 0)
-    {
-      g_warning ("Failed to create directory '%s'", path);
-      return FALSE;
-    }
-  return TRUE;
 }
 
 static void
@@ -370,11 +323,6 @@ set_background (CcBackgroundPanel *self,
 
   /* Clean out dconf if the user went back to distro defaults */
   reset_settings_if_defaults (self, settings, set_dark);
-
-  /* Save the source XML if there is one */
-  filename = get_save_path ();
-  if (create_save_dir ())
-    cc_background_xml_save (self->current_background, filename);
 }
 
 static void
