@@ -70,13 +70,13 @@ struct _CcSharingPanel
   GtkWidget *personal_file_sharing_dialog;
   GtkWidget *personal_file_sharing_vbox;
   GtkWidget *personal_file_sharing_headerbar;
-  GtkWidget *personal_file_sharing_label;
+  AdwPreferencesPage *personal_file_sharing_page;
   GtkWidget *personal_file_sharing_password_entry_row;
   GtkWidget *personal_file_sharing_require_password_switch_row;
   GtkWidget *personal_file_sharing_row;
   GtkWidget *personal_file_sharing_switch;
   GtkWidget *remote_login_dialog;
-  GtkWidget *remote_login_label;
+  AdwPreferencesPage *remote_login_page;
   GtkWidget *remote_login_row;
   GtkWidget *remote_login_switch;
 
@@ -141,13 +141,13 @@ cc_sharing_panel_class_init (CcSharingPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, media_sharing_row);
   gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, personal_file_sharing_dialog);
   gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, personal_file_sharing_headerbar);
-  gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, personal_file_sharing_label);
+  gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, personal_file_sharing_page);
   gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, personal_file_sharing_password_entry_row);
   gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, personal_file_sharing_require_password_switch_row);
   gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, personal_file_sharing_vbox);
   gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, personal_file_sharing_row);
   gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, remote_login_dialog);
-  gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, remote_login_label);
+  gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, remote_login_page);
   gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, remote_login_row);
   gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, remote_login_switch);
   gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, shared_folders_listbox);
@@ -525,20 +525,20 @@ cc_sharing_panel_setup_media_sharing_dialog (CcSharingPanel *self)
 
 static void
 cc_sharing_panel_setup_label_with_hostname (CcSharingPanel *self,
-                                            GtkWidget      *label)
+                                            AdwPreferencesPage *page)
 {
   g_autofree gchar *text = NULL;
   const gchar *hostname;
 
   hostname = gtk_editable_get_text (GTK_EDITABLE (self->hostname_entry));
 
-  if (label == self->personal_file_sharing_label)
+  if (page == self->personal_file_sharing_page)
     {
       g_autofree gchar *url = g_strdup_printf ("<a href=\"dav://%s\">dav://%s</a>", hostname, hostname);
       /* TRANSLATORS: %s is replaced with a link to a dav://<hostname> URL */
       text = g_strdup_printf (_("File Sharing allows you to share your Public folder with others on your current network using: %s"), url);
     }
-  else if (label == self->remote_login_label)
+  else if (page == self->remote_login_page)
     {
       g_autofree gchar *command = g_strdup_printf ("<a href=\"ssh %s\">ssh %s</a>", hostname, hostname);
       /* TRANSLATORS: %s is replaced with a link to a "ssh <hostname>" command to run */
@@ -547,7 +547,7 @@ cc_sharing_panel_setup_label_with_hostname (CcSharingPanel *self,
   else
     g_assert_not_reached ();
 
-  gtk_label_set_label (GTK_LABEL (label), text);
+  adw_preferences_page_set_description (ADW_PREFERENCES_PAGE (page), text);
 }
 
 static gboolean
@@ -700,8 +700,8 @@ sharing_proxy_ready (GObject      *source,
   gtk_window_set_transient_for (GTK_WINDOW (self->remote_login_dialog),
                                 GTK_WINDOW (parent));
 
-  cc_sharing_panel_setup_label_with_hostname (self, self->personal_file_sharing_label);
-  cc_sharing_panel_setup_label_with_hostname (self, self->remote_login_label);
+  cc_sharing_panel_setup_label_with_hostname (self, self->personal_file_sharing_page);
+  cc_sharing_panel_setup_label_with_hostname (self, self->remote_login_page);
 }
 
 static void

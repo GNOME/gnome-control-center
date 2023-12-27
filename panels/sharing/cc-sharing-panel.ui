@@ -81,44 +81,36 @@
           <object class="AdwHeaderBar" id="personal_file_sharing_headerbar"/>
         </child>
         <property name="content">
-          <object class="GtkScrolledWindow">
-            <property name="hscrollbar_policy">never</property>
+          <object class="AdwPreferencesPage" id="personal_file_sharing_page">
             <child>
-              <object class="AdwClamp">
-                <property name="margin_start">12</property>
-                <property name="margin_end">12</property>
-                <property name="margin_top">12</property>
-                <property name="margin_bottom">12</property>
+              <object class="AdwPreferencesGroup">
+                <child>
+                  <object class="AdwSwitchRow" id="personal_file_sharing_require_password_switch_row">
+                    <property name="title" translatable="yes">_Require Password</property>
+                    <property name="use_underline">True</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="AdwPasswordEntryRow" id="personal_file_sharing_password_entry_row">
+                    <property name="title" translatable="yes">_Password</property>
+                    <property name="use_underline">True</property>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="AdwPreferencesGroup">
+                <property name="title" translatable="yes">Networks</property>
                 <child>
                   <object class="GtkBox" id="personal_file_sharing_vbox">
                     <property name="orientation">vertical</property>
                     <property name="spacing">12</property>
-                    <child>
-                      <object class="GtkLabel" id="personal_file_sharing_label">
-                        <property name="xalign">0</property>
-                        <property name="use_markup">True</property>
-                        <property name="wrap">True</property>
-                        <property name="max-width-chars">36</property>
-                      </object>
-                    </child>
                     <child>
                       <object class="GtkListBox">
                         <property name="selection-mode">none</property>
                         <style>
                           <class name="boxed-list"/>
                         </style>
-                        <child>
-                          <object class="AdwSwitchRow" id="personal_file_sharing_require_password_switch_row">
-                            <property name="title" translatable="yes">_Require Password</property>
-                            <property name="use_underline">True</property>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="AdwPasswordEntryRow" id="personal_file_sharing_password_entry_row">
-                            <property name="title" translatable="yes">_Password</property>
-                            <property name="use_underline">True</property>
-                          </object>
-                        </child>
                       </object>
                     </child>
                   </object>
@@ -136,6 +128,10 @@
     <property name="resizable">False</property>
     <property name="modal">True</property>
     <property name="hide-on-close">True</property>
+    <property name="width-request">360</property>
+    <property name="height-request">294</property>
+    <property name="default-width">360</property>
+    <property name="default-height">294</property>
     <child>
       <object class="GtkShortcutController">
         <property name="scope">managed</property>
@@ -153,21 +149,7 @@
           <object class="AdwHeaderBar"/>
         </child>
         <property name="content">
-          <object class="GtkBox">
-            <property name="margin-top">12</property>
-            <property name="margin-bottom">12</property>
-            <property name="margin-start">12</property>
-            <property name="margin-end">12</property>
-            <property name="spacing">12</property>
-            <property name="orientation">vertical</property>
-            <child>
-              <object class="GtkLabel" id="remote_login_label">
-                <property name="xalign">0</property>
-                <property name="use_markup">True</property>
-                <property name="wrap">True</property>
-                <property name="max-width-chars">36</property>
-              </object>
-            </child>
+          <object class="AdwPreferencesPage" id="remote_login_page">
             <child>
               <object class="AdwPreferencesGroup">
                 <child>
@@ -209,46 +191,15 @@
           <object class="AdwHeaderBar" id="media_sharing_headerbar"/>
         </child>
         <property name="content">
-          <object class="GtkScrolledWindow">
-            <property name="hscrollbar_policy">never</property>
+          <object class="AdwPreferencesPage">
+            <property name="description" translatable="yes">Share music, photos and videos over the network.</property>
             <child>
-              <object class="AdwClamp">
+              <object class="AdwPreferencesGroup">
+                <property name="title" translatable="yes">Folders</property>
                 <child>
                   <object class="GtkGrid" id="shared_folders_grid">
-                    <property name="margin_start">12</property>
-                    <property name="margin_end">12</property>
-                    <property name="margin_top">12</property>
-                    <property name="margin_bottom">12</property>
                     <property name="row_spacing">12</property>
                     <property name="column_spacing">6</property>
-                    <child>
-                      <object class="GtkLabel" id="label13">
-                        <property name="xalign">0</property>
-                        <property name="label" translatable="yes">Share music, photos and videos over the network.</property>
-                        <property name="max-width-chars">36</property>
-                        <property name="wrap">True</property>
-                        <layout>
-                          <property name="column">0</property>
-                          <property name="row">0</property>
-                          <property name="column-span">2</property>
-                        </layout>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkLabel" id="label15">
-                        <property name="xalign">0</property>
-                        <property name="label" translatable="yes">Folders</property>
-                        <property name="mnemonic_widget">shared_folders_listbox</property>
-                        <layout>
-                          <property name="column">0</property>
-                          <property name="row">1</property>
-                          <property name="column-span">2</property>
-                        </layout>
-                        <style>
-                          <class name="heading"/>
-                        </style>
-                      </object>
-                    </child>
                     <child>
                       <object class="GtkListBox" id="shared_folders_listbox">
                         <property name="selection-mode">none</property>
