@@ -69,6 +69,7 @@ update_format_examples (CcFormatPreview *self)
   g_autofree gchar *s = NULL;
 #ifdef LC_MEASUREMENT
   const gchar *fmt;
+  gboolean is_imperial = FALSE;
 #endif
   g_autoptr(GtkPaperSize) paper = NULL;
 
@@ -133,6 +134,9 @@ update_format_examples (CcFormatPreview *self)
     old_locale = uselocale (locale);
 
   fmt = nl_langinfo (_NL_MEASUREMENT_MEASUREMENT);
+  /* The returned pointer of nl_langinfo could be invalid after switching
+     locale, so we must use it here. */
+  is_imperial = fmt && *fmt == 2;
 
   if (locale != (locale_t) 0)
     {
@@ -140,7 +144,7 @@ update_format_examples (CcFormatPreview *self)
       freelocale (locale);
     }
 
-  if (fmt && *fmt == 2)
+  if (is_imperial)
     gtk_label_set_text (GTK_LABEL (self->measurement_format_label), C_("measurement format", "Imperial"));
   else
     gtk_label_set_text (GTK_LABEL (self->measurement_format_label), C_("measurement format", "Metric"));
