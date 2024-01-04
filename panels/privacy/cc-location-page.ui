@@ -9,7 +9,7 @@
           <object class="AdwHeaderBar"/>
         </child>
         <property name="content">
-          <object class="AdwPreferencesPage" id="location_services_page">
+          <object class="AdwPreferencesPage">
             <child>
               <object class="AdwPreferencesGroup">
                 <child>
@@ -17,6 +17,36 @@
                     <property name="title" translatable="yes">_Location Services</property>
                     <property name="subtitle" translatable="yes">Allow permitted apps to access location data</property>
                     <property name="use-underline">True</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkBox">
+                    <property name="orientation">vertical</property>
+                    <property name="margin-top">12</property>
+                    <property name="spacing">12</property>
+                    <child>
+                      <object class="GtkLabel">
+                        <property name="label" translatable="yes">Automatic device location uses sources like GPS, Wi-Fi and cellular to determine an approximate location for this device. Location data is sent to Mozilla Location Services as part of this feature.</property>
+                        <property name="wrap">True</property>
+                        <property name="wrap-mode">word-char</property>
+                        <property name="xalign">0</property>
+                        <style>
+                          <class name="caption"/>
+                        </style>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkLabel" id="privacy_policy_link">
+                        <property name="use-markup">True</property>
+                        <property name="wrap">True</property>
+                        <property name="wrap-mode">word-char</property>
+                        <property name="xalign">0</property>
+                        <style>
+                          <class name="dim-label"/>
+                          <class name="caption"/>
+                        </style>
+                      </object>
+                    </child>
                   </object>
                 </child>
               </object>
