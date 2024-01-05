@@ -42,5 +42,6 @@ GdkPaintable *cc_qr_code_get_paintable (CcQrCode    *self,
                                         gint         size);
 gchar        *get_qr_string_for_connection (NMConnection *c);
 gboolean      is_qr_code_supported         (NMConnection *c);
+gchar        *get_wifi_password            (NMConnection *c);
 
 G_END_DECLS

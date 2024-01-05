@@ -45,11 +45,24 @@
                 </child>
 
                 <child>
-                  <object class="GtkLabel" id="qr_subtitle">
-                    <property name="wrap">True</property>
-                    <property name="halign">center</property>
-                    <property name="justify">center</property>
-                    <property name="natural-wrap-mode">none</property>
+                  <object class="GtkBox">
+                    <property name="orientation">vertical</property>
+                    <child>
+                      <object class="GtkLabel" id="qr_subtitle_ssid">
+                        <property name="wrap">True</property>
+                        <property name="halign">center</property>
+                        <property name="justify">center</property>
+                        <property name="natural-wrap-mode">none</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkLabel" id="qr_subtitle_password">
+                        <property name="wrap">True</property>
+                        <property name="halign">center</property>
+                        <property name="justify">center</property>
+                        <property name="natural-wrap-mode">none</property>
+                      </object>
+                    </child>
                   </object>
                 </child>
 

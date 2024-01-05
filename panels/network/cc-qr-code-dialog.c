@@ -27,7 +27,8 @@ struct _CcQrCodeDialog
   AdwWindow     parent_instance;
   NMConnection *connection;
   GtkWidget    *qr_image;
-  GtkWidget    *qr_subtitle;
+  GtkWidget    *qr_subtitle_ssid;
+  GtkWidget    *qr_subtitle_password;
 };
 
 enum
@@ -90,6 +91,11 @@ cc_qr_code_dialog_constructed (GObject *object)
   g_autofree gchar *qr_connection_string = NULL;
   g_autofree gchar *subtitle_text = NULL;
   g_autofree gchar *ssid_text = NULL;
+  g_autofree gchar *password_text = NULL;
+  g_autofree gchar *ssid_subtitle_text = NULL;
+  g_autofree gchar *password_subtitle_text = NULL;
+
+
   NMSettingWireless *setting;
   CcQrCodeDialog *self;
   GBytes *ssid;
@@ -125,14 +131,22 @@ cc_qr_code_dialog_constructed (GObject *object)
   setting = nm_connection_get_setting_wireless (self->connection);
   ssid = nm_setting_wireless_get_ssid (setting);
   ssid_text = nm_utils_ssid_to_utf8 (g_bytes_get_data (ssid, NULL), g_bytes_get_size (ssid));
+  password_text = get_wifi_password (self->connection);
 
   /*
-   * translators: This is the format string for the text shown underneath the Wi-Fi QR code.
-   * The string placeholder will be replaced by the Wi-Fi networks SSID.
+   * translators: Subtitle underneath the Wi-Fi QR code is constructed with two labels.
+   * The first label holds Network Name, the second Wi-Fi password.
    */
-  subtitle_text = g_markup_printf_escaped (_("Scan the QR code to connect to the network <b>%s</b>."),
-                                           ssid_text);
-  gtk_label_set_markup (GTK_LABEL (self->qr_subtitle), subtitle_text);
+  ssid_subtitle_text = g_markup_printf_escaped (_("<b>Network Name</b>: %s"), ssid_text);
+  gtk_label_set_markup (GTK_LABEL (self->qr_subtitle_ssid), ssid_subtitle_text);
+
+  if (password_text)
+    {
+      password_subtitle_text = g_markup_printf_escaped (_("<b>Password</b>: %s"), password_text);
+      gtk_label_set_markup (GTK_LABEL (self->qr_subtitle_password), password_subtitle_text);
+    }
+  else
+    gtk_widget_set_visible (self->qr_subtitle_password, FALSE);
 
   qr_code = cc_qr_code_new ();
   qr_connection_string = get_qr_string_for_connection (self->connection);
@@ -178,7 +192,8 @@ cc_qr_code_dialog_class_init (CcQrCodeDialogClass *klass)
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/network/cc-qr-code-dialog.ui");
   gtk_widget_class_bind_template_child (widget_class, CcQrCodeDialog, qr_image);
-  gtk_widget_class_bind_template_child (widget_class, CcQrCodeDialog, qr_subtitle);
+  gtk_widget_class_bind_template_child (widget_class, CcQrCodeDialog, qr_subtitle_ssid);
+  gtk_widget_class_bind_template_child (widget_class, CcQrCodeDialog, qr_subtitle_password);
 
   gtk_widget_class_add_binding_action (widget_class, GDK_KEY_Escape, 0, "window.close", NULL);
 }

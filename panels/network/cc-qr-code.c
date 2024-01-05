@@ -274,7 +274,7 @@ is_qr_code_supported (NMConnection *c)
   return FALSE;
 }
 
-static gchar *
+gchar *
 get_wifi_password (NMConnection *c)
 {
   NMSettingWirelessSecurity *setting;
@@ -297,7 +297,7 @@ get_wifi_password (NMConnection *c)
       password = nm_setting_wireless_security_get_psk (setting);
     }
 
-  return escape_string (password, FALSE);
+  return g_strdup (password);
 }
 
 /* Generate a string representing the connection
@@ -315,6 +315,7 @@ get_qr_string_for_connection (NMConnection *c)
   g_autofree char *ssid_text = NULL;
   g_autofree char *escaped_ssid = NULL;
   g_autofree char *password_str = NULL;
+  g_autofree char *escaped_password = NULL;
   GString *string;
   GBytes *ssid;
   gboolean hidden;
@@ -342,8 +343,9 @@ get_qr_string_for_connection (NMConnection *c)
   /* Password */
   g_string_append (string, "P:");
   password_str = get_wifi_password (c);
-  if (password_str)
-    g_string_append (string, password_str);
+  escaped_password = escape_string (password_str, FALSE);
+  if (escaped_password)
+    g_string_append (string, escaped_password);
   g_string_append_c (string, ';');
 
   /* WiFi Hidden */
