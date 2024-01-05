@@ -730,8 +730,10 @@ start_hotspot (NetDeviceWifi *self)
 
         native = gtk_widget_get_native (GTK_WIDGET (self));
 
-        if (!self->hotspot_dialog)
+        if (!self->hotspot_dialog) {
                 self->hotspot_dialog = cc_wifi_hotspot_dialog_new (GTK_WINDOW (native));
+                g_object_ref_sink (self->hotspot_dialog);
+        }
         cc_wifi_hotspot_dialog_set_device (self->hotspot_dialog, NM_DEVICE_WIFI (self->device));
         hostname = get_hostname ();
         ssid =  pretty_hostname_to_ssid (hostname);
@@ -786,6 +788,7 @@ net_device_wifi_dispose (GObject *object)
 
         if (self->hotspot_dialog) {
                 gtk_window_destroy (GTK_WINDOW (self->hotspot_dialog));
+                g_object_unref (self->hotspot_dialog);
                 self->hotspot_dialog = NULL;
         }
 
