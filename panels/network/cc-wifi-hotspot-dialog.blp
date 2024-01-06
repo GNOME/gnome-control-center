@@ -3,6 +3,8 @@ using Adw 1;
 
 template $CcWifiHotspotDialog: Adw.Dialog {
   title: _("Turn On Wi-Fi Hotspot?");
+  content-width: 460;
+  content-height: 460;
 
   child: Adw.ToolbarView {
     [top]
@@ -30,46 +32,14 @@ template $CcWifiHotspotDialog: Adw.Dialog {
       }
     }
 
-    content: Box {
-      orientation: vertical;
-      margin-top: 30;
-      margin-bottom: 30;
-      margin-start: 30;
-      margin-end: 30;
-      spacing: 20;
+    content: Adw.PreferencesPage wifi_hotspot_page {
+      description: _("Wi-Fi hotspot allows others to share your internet connection, by creating a Wi-Fi network that they can connect to. To do this, you must have an internet connection through a source other than Wi-Fi.");
 
-      Label label {
-        wrap: true;
-        max-width-chars: 50;
-        label: _("Wi-Fi hotspot allows others to share your internet connection, by creating a Wi-Fi network that they can connect to. To do this, you must have an internet connection through a source other than Wi-Fi.");
-        xalign: 0.0;
-      }
+      Adw.PreferencesGroup {
+        title: _("Hotspot Details");
 
-      Label connection_label {
-        margin-bottom: 18;
-        wrap: true;
-        max-width-chars: 40;
-        use-markup: true;
-        xalign: 0.0;
-      }
-
-      Grid {
-        row-spacing: 6;
-        column-spacing: 12;
-
-        Label {
-          label: _("Network Name");
-          halign: end;
-          mnemonic-widget: name_entry;
-
-          layout {
-            column: 0;
-            row: 0;
-          }
-        }
-
-        Entry name_entry {
-          hexpand: true;
+        Adw.EntryRow name_entry {
+          title: _("Network Name");
           max-length: 64;
           changed => $hotspot_entry_changed_cb(template);
 
@@ -77,68 +47,54 @@ template $CcWifiHotspotDialog: Adw.Dialog {
             error-message: name_error_label;
             required: true;
           }
-
-          layout {
-            column: 1;
-            row: 0;
-          }
         }
 
-        Label name_error_label {
-          halign: start;
-
-          layout {
-            column: 1;
-            row: 1;
-          }
-
-          styles [
-            "dim-label",
-            "caption",
-          ]
-        }
-
-        Label {
-          label: _("Password");
-          halign: end;
-          mnemonic-widget: password_entry;
-
-          layout {
-            column: 0;
-            row: 2;
-          }
-        }
-
-        Entry password_entry {
+        Adw.PasswordEntryRow password_entry {
+          title: _("Password");
           max-length: 64;
-          secondary-icon-name: "view-refresh-symbolic";
-          secondary-icon-tooltip-text: _("Generate Random Password");
-          placeholder-text: _("Autogenerate Password");
-          icon-press => $generate_password_clicked_cb(template);
           changed => $hotspot_entry_changed_cb(template);
 
           accessibility {
             error-message: password_error_label;
           }
 
-          layout {
-            column: 1;
-            row: 2;
+          [suffix]
+          Button {
+            valign: center;
+            icon-name: "view-refresh-symbolic";
+            tooltip-text: _("Generate Random Password");
+            clicked => $generate_password_clicked_cb(template);
+
+            styles [
+              "flat",
+            ]
           }
         }
 
-        Label password_error_label {
-          halign: start;
+        Box {
+          orientation: vertical;
+          spacing: 6;
+          margin-top: 12;
 
-          layout {
-            column: 1;
-            row: 3;
+          Label name_error_label {
+            halign: start;
+            wrap: true;
+
+            styles [
+              "dim-label",
+              "caption",
+            ]
           }
 
-          styles [
-            "dim-label",
-            "caption",
-          ]
+          Label password_error_label {
+            halign: start;
+            wrap: true;
+
+            styles [
+              "dim-label",
+              "caption",
+            ]
+          }
         }
       }
     };

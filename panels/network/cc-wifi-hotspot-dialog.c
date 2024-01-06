@@ -36,10 +36,10 @@
 struct _CcWifiHotspotDialog {
     AdwDialog parent_instance;
 
-    GtkLabel *connection_label;
-    GtkEntry *name_entry;
+    AdwPreferencesPage *wifi_hotspot_page;
+    AdwEntryRow *name_entry;
     GtkLabel *name_error_label;
-    GtkEntry *password_entry;
+    AdwPasswordEntryRow *password_entry;
     GtkLabel *password_error_label;
     GtkButton *ok_button;
 
@@ -89,11 +89,9 @@ wifi_hotspot_dialog_update_main_label (CcWifiHotspotDialog *self)
     g_autofree gchar *active_ssid = NULL;
     g_autofree gchar *escape = NULL;
     g_autofree gchar *ssid_text = NULL;
-    g_autofree gchar *label = NULL;
+    g_autofree gchar *description = NULL;
 
     g_assert (CC_IS_WIFI_HOTSPOT_DIALOG (self));
-
-    gtk_label_set_markup (self->connection_label, "");
 
     if (!self->device)
         return;
@@ -110,11 +108,14 @@ wifi_hotspot_dialog_update_main_label (CcWifiHotspotDialog *self)
 
     escape = g_markup_escape_text (active_ssid, -1);
     ssid_text = g_strdup_printf ("<b>%s</b>", escape);
-    /* TRANSLATORS: ‘%s’ is a Wi-Fi Network(SSID) name */
-    label = g_strdup_printf (_("Turning on the hotspot will disconnect from %s, "
-                             "and it will not be possible to access the internet through Wi-Fi."),
-                               ssid_text);
-    gtk_label_set_markup (self->connection_label, label);
+    /* TRANSLATORS: ‘%s’ is a Wi-Fi Network (SSID) name */
+    description = g_strdup_printf (_("Wi-Fi hotspot allows others to share your internet connection, by creating a "
+                                     "Wi-Fi network that they can connect to. To do this, you must have an internet "
+                                     "connection through a source other than Wi-Fi.\n\n"
+                                     "Turning on the hotspot will disconnect from %s, and it will not be possible to "
+                                     "access the internet through Wi-Fi."),
+                                     ssid_text);
+    adw_preferences_page_set_description (self->wifi_hotspot_page, description);
 }
 
 static void
@@ -231,14 +232,15 @@ hotspot_entry_changed_cb (CcWifiHotspotDialog *self)
         widget_unset_error (GTK_WIDGET (self->password_entry));
     } else {
         if (strlen (password) < 8) {
-            password_error_label = _("Must have a minimum of 8 characters");
+            password_error_label = _("Password must have a minimum of 8 characters");
         } else {
             /* 63 is the maximum WPA-PSK passphrase length (IEEE 802.11 / WPA spec). */
             guint max_chars = 63;
 
-            password_error_label = g_strdup_printf (
-                ngettext ("Must have a maximum of %d character", "Must have a maximum of %d characters", max_chars),
-                max_chars);
+            password_error_label =
+                g_strdup_printf (ngettext ("Password must have a maximum of %d character",
+                                           "Password must have a maximum of %d characters", max_chars),
+                                 max_chars);
         }
 
         widget_set_error (GTK_WIDGET (self->password_entry));
@@ -402,7 +404,7 @@ cc_wifi_hotspot_dialog_class_init (CcWifiHotspotDialogClass *klass)
     signals[SIGNAL_HOTSPOT_ENABLED] = g_signal_new ("hotspot-enabled", CC_TYPE_WIFI_HOTSPOT_DIALOG, G_SIGNAL_RUN_LAST,
                                                     0, NULL, NULL, NULL, G_TYPE_NONE, 0, NULL);
 
-    gtk_widget_class_bind_template_child (widget_class, CcWifiHotspotDialog, connection_label);
+    gtk_widget_class_bind_template_child (widget_class, CcWifiHotspotDialog, wifi_hotspot_page);
     gtk_widget_class_bind_template_child (widget_class, CcWifiHotspotDialog, name_entry);
     gtk_widget_class_bind_template_child (widget_class, CcWifiHotspotDialog, name_error_label);
     gtk_widget_class_bind_template_child (widget_class, CcWifiHotspotDialog, password_entry);
