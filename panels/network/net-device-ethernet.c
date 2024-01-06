@@ -213,8 +213,9 @@ device_ethernet_refresh_ui (NetDeviceEthernet *self)
         if (state != NM_DEVICE_STATE_UNAVAILABLE) {
                 guint speed = nm_device_ethernet_get_speed (NM_DEVICE_ETHERNET (self->device));
                 if (speed > 0) {
-                        /* Translators: network device speed */
-                        speed_text = g_strdup_printf (_("%d Mb/s"), speed);
+                        /* Translators: the %'d is replaced by the network device speed with
+                         * thousands separator, so do not change to %d */
+                        speed_text = g_strdup_printf (_("%'d Mb/s"), speed);
                 }
         }
         status = panel_device_status_to_localized_string (self->device, speed_text);
