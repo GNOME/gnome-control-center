@@ -58,7 +58,7 @@ struct _CcRemovableMediaSettings
   GtkAppChooserButton *dcf_chooser;
   GtkAppChooserButton *music_player_chooser;
   GtkDialog           *other_type_dialog;
-  GtkLabel            *other_action_label;
+  AdwActionRow        *other_action_row;
   GtkBox              *other_action_box;
   GtkComboBox         *other_type_combo_box;
   GtkListStore        *other_type_list_store;
@@ -341,7 +341,7 @@ on_other_type_combo_box_changed (CcRemovableMediaSettings *self)
   gtk_box_append (self->other_action_box, GTK_WIDGET (self->other_application_chooser));
   prepare_chooser (self, self->other_application_chooser, NULL);
 
-  gtk_label_set_mnemonic_widget (self->other_action_label, GTK_WIDGET (self->other_application_chooser));
+  adw_action_row_set_activatable_widget (self->other_action_row, GTK_WIDGET (self->other_application_chooser));
 }
 
 static gboolean
@@ -553,8 +553,8 @@ cc_removable_media_settings_class_init (CcRemovableMediaSettingsClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcRemovableMediaSettings, dcf_chooser);
   gtk_widget_class_bind_template_child (widget_class, CcRemovableMediaSettings, music_player_chooser);
   gtk_widget_class_bind_template_child (widget_class, CcRemovableMediaSettings, other_type_dialog);
+  gtk_widget_class_bind_template_child (widget_class, CcRemovableMediaSettings, other_action_row);
   gtk_widget_class_bind_template_child (widget_class, CcRemovableMediaSettings, other_action_box);
-  gtk_widget_class_bind_template_child (widget_class, CcRemovableMediaSettings, other_action_label);
   gtk_widget_class_bind_template_child (widget_class, CcRemovableMediaSettings, other_type_combo_box);
   gtk_widget_class_bind_template_child (widget_class, CcRemovableMediaSettings, other_type_list_store);
   gtk_widget_class_bind_template_child (widget_class, CcRemovableMediaSettings, software_chooser);
