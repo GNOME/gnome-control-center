@@ -57,7 +57,7 @@ struct _CcRemovableMediaSettings
   GtkAppChooserButton *audio_cdda_chooser;
   GtkAppChooserButton *dcf_chooser;
   GtkAppChooserButton *music_player_chooser;
-  GtkDialog           *other_type_dialog;
+  AdwWindow           *other_type_dialog;
   AdwActionRow        *other_action_row;
   GtkBox              *other_action_box;
   GtkComboBox         *other_type_combo_box;
@@ -365,8 +365,6 @@ on_extra_options_button_clicked (CcRemovableMediaSettings *self)
   GtkWidget *toplevel = cc_shell_get_toplevel (shell);
 
   gtk_window_set_transient_for (GTK_WINDOW (self->other_type_dialog), GTK_WINDOW (toplevel));
-  gtk_window_set_modal (GTK_WINDOW (self->other_type_dialog), TRUE);
-  gtk_window_set_title (GTK_WINDOW (self->other_type_dialog), _("Other Media"));
   /* update other_application_chooser */
   on_other_type_combo_box_changed (self);
   gtk_window_present (GTK_WINDOW (self->other_type_dialog));
