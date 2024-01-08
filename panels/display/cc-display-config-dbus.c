@@ -52,6 +52,7 @@ struct _CcDisplayModeDBus
   int width;
   int height;
   double refresh_rate;
+  CcDisplayModeRefreshRateMode refresh_rate_mode;
   double preferred_scale;
   GArray *supported_scales;
   guint32 flags;
@@ -73,6 +74,7 @@ cc_display_mode_dbus_equal (const CcDisplayModeDBus *m1,
   return m1->width == m2->width &&
     m1->height == m2->height &&
     m1->refresh_rate == m2->refresh_rate &&
+    m1->refresh_rate_mode == m2->refresh_rate_mode &&
     (m1->flags & MODE_INTERLACED) == (m2->flags & MODE_INTERLACED);
 }
 
@@ -123,6 +125,13 @@ cc_display_mode_dbus_is_supported_scale (CcDisplayMode *pself,
   return FALSE;
 }
 
+static CcDisplayModeRefreshRateMode
+cc_display_mode_dbus_get_refresh_rate_mode (CcDisplayMode *pself)
+{
+  CcDisplayModeDBus *self = CC_DISPLAY_MODE_DBUS (pself);
+
+  return self->refresh_rate_mode;
+}
 
 static gboolean
 cc_display_mode_dbus_is_interlaced (CcDisplayMode *pself)
@@ -185,6 +194,7 @@ cc_display_mode_dbus_class_init (CcDisplayModeDBusClass *klass)
   parent_class->get_resolution = cc_display_mode_dbus_get_resolution;
   parent_class->get_supported_scales = cc_display_mode_dbus_get_supported_scales;
   parent_class->get_preferred_scale = cc_display_mode_dbus_get_preferred_scale;
+  parent_class->get_refresh_rate_mode = cc_display_mode_dbus_get_refresh_rate_mode;
   parent_class->is_interlaced = cc_display_mode_dbus_is_interlaced;
   parent_class->is_preferred = cc_display_mode_dbus_is_preferred;
   parent_class->get_freq = cc_display_mode_dbus_get_freq;
@@ -220,6 +230,7 @@ cc_display_mode_dbus_new (CcDisplayMonitorDBus *monitor,
   gboolean is_current;
   gboolean is_preferred;
   gboolean is_interlaced;
+  char *refresh_rate_mode_str;
   CcDisplayModeDBus *self = g_object_new (CC_TYPE_DISPLAY_MODE_DBUS, NULL);
 
   self->monitor = monitor;
@@ -242,6 +253,8 @@ cc_display_mode_dbus_new (CcDisplayMonitorDBus *monitor,
     is_preferred = FALSE;
   if (!g_variant_lookup (properties_variant, "is-interlaced", "b", &is_interlaced))
     is_interlaced = FALSE;
+  if (!g_variant_lookup (properties_variant, "refresh-rate-mode", "s", &refresh_rate_mode_str))
+    refresh_rate_mode_str = "fixed";
 
   if (is_current)
     self->flags |= MODE_CURRENT;
@@ -249,6 +262,11 @@ cc_display_mode_dbus_new (CcDisplayMonitorDBus *monitor,
     self->flags |= MODE_PREFERRED;
   if (is_interlaced)
     self->flags |= MODE_INTERLACED;
+
+  if (g_strcmp0 (refresh_rate_mode_str, "fixed") == 0)
+    self->refresh_rate_mode = MODE_REFRESH_RATE_MODE_FIXED;
+  else if (g_strcmp0 (refresh_rate_mode_str, "variable") == 0)
+    self->refresh_rate_mode = MODE_REFRESH_RATE_MODE_VARIABLE;
 
   return self;
 }
@@ -347,6 +365,8 @@ struct _CcDisplayMonitorDBus
   GList *modes;
   CcDisplayMode *current_mode;
   CcDisplayMode *preferred_mode;
+
+  gboolean supports_variable_refresh_rate;
 
   CcDisplayLogicalMonitor *logical_monitor;
 };
@@ -611,6 +631,14 @@ cc_display_monitor_dbus_get_modes (CcDisplayMonitor *pself)
 }
 
 static gboolean
+cc_display_monitor_dbus_supports_variable_refresh_rate (CcDisplayMonitor *pself)
+{
+  CcDisplayMonitorDBus *self = CC_DISPLAY_MONITOR_DBUS (pself);
+
+  return self->supports_variable_refresh_rate;
+}
+
+static gboolean
 cc_display_monitor_dbus_supports_underscanning (CcDisplayMonitor *pself)
 {
   CcDisplayMonitorDBus *self = CC_DISPLAY_MONITOR_DBUS (pself);
@@ -650,11 +678,12 @@ cc_display_monitor_dbus_set_underscanning (CcDisplayMonitor *pself,
 }
 
 static CcDisplayMode *
-cc_display_monitor_dbus_get_closest_mode (CcDisplayMonitorDBus *self,
-                                          int                   width,
-                                          int                   height,
-                                          double                refresh_rate,
-                                          guint32               flags)
+cc_display_monitor_dbus_get_closest_mode (CcDisplayMonitorDBus         *self,
+                                          int                           width,
+                                          int                           height,
+                                          double                        refresh_rate,
+                                          CcDisplayModeRefreshRateMode  refresh_rate_mode,
+                                          guint32                       flags)
 {
   CcDisplayModeDBus *best = NULL;
   GList *l;
@@ -664,7 +693,8 @@ cc_display_monitor_dbus_get_closest_mode (CcDisplayMonitorDBus *self,
       CcDisplayModeDBus *similar = l->data;
 
       if (similar->width != width ||
-          similar->height != height)
+          similar->height != height ||
+          similar->refresh_rate_mode != refresh_rate_mode)
         continue;
 
       if (similar->refresh_rate == refresh_rate &&
@@ -699,6 +729,7 @@ cc_display_monitor_dbus_set_mode (CcDisplayMonitor *pself,
                                                        mode_dbus->width,
                                                        mode_dbus->height,
                                                        mode_dbus->refresh_rate,
+                                                       mode_dbus->refresh_rate_mode,
                                                        mode_dbus->flags);
 
   self->current_mode = new_mode;
@@ -745,6 +776,28 @@ cc_display_monitor_dbus_set_compatible_clone_mode (CcDisplayMonitor *pself,
   g_return_if_fail (best_mode);
 
   cc_display_monitor_set_mode (CC_DISPLAY_MONITOR (self), best_mode);
+}
+
+static void
+cc_display_monitor_dbus_set_refresh_rate_mode (CcDisplayMonitor             *pself,
+                                               CcDisplayModeRefreshRateMode  refresh_rate_mode)
+{
+  CcDisplayMonitorDBus *self = CC_DISPLAY_MONITOR_DBUS (pself);
+  CcDisplayModeDBus *mode_dbus = CC_DISPLAY_MODE_DBUS (self->current_mode);
+  CcDisplayMode *new_mode;
+
+  g_return_if_fail (mode_dbus != NULL);
+
+  new_mode = cc_display_monitor_dbus_get_closest_mode (self,
+                                                       mode_dbus->width,
+                                                       mode_dbus->height,
+                                                       mode_dbus->refresh_rate,
+                                                       refresh_rate_mode,
+                                                       mode_dbus->flags);
+
+  g_return_if_fail (new_mode != NULL);
+
+  cc_display_monitor_set_mode (CC_DISPLAY_MONITOR (self), new_mode);
 }
 
 static void
@@ -857,12 +910,14 @@ cc_display_monitor_dbus_class_init (CcDisplayMonitorDBusClass *klass)
   parent_class->get_preferred_mode = cc_display_monitor_dbus_get_preferred_mode;
   parent_class->get_id = cc_display_monitor_dbus_get_id;
   parent_class->get_modes = cc_display_monitor_dbus_get_modes;
+  parent_class->supports_variable_refresh_rate = cc_display_monitor_dbus_supports_variable_refresh_rate;
   parent_class->supports_underscanning = cc_display_monitor_dbus_supports_underscanning;
   parent_class->get_underscanning = cc_display_monitor_dbus_get_underscanning;
   parent_class->set_underscanning = cc_display_monitor_dbus_set_underscanning;
   parent_class->get_privacy = cc_display_monitor_dbus_get_privacy;
   parent_class->set_mode = cc_display_monitor_dbus_set_mode;
   parent_class->set_compatible_clone_mode = cc_display_monitor_dbus_set_compatible_clone_mode;
+  parent_class->set_refresh_rate_mode = cc_display_monitor_dbus_set_refresh_rate_mode;
   parent_class->set_position = cc_display_monitor_dbus_set_position;
   parent_class->get_scale = cc_display_monitor_dbus_get_scale;
   parent_class->set_scale = cc_display_monitor_dbus_set_scale;
@@ -888,6 +943,9 @@ construct_modes (CcDisplayMonitorDBus *self,
         self->preferred_mode = CC_DISPLAY_MODE (mode);
       if (mode->flags & MODE_CURRENT)
         self->current_mode = CC_DISPLAY_MODE (mode);
+
+      if (mode->refresh_rate_mode == MODE_REFRESH_RATE_MODE_VARIABLE)
+        self->supports_variable_refresh_rate = TRUE;
     }
 
   self->modes = g_list_reverse (self->modes);

@@ -52,6 +52,33 @@
           </object>
         </child>
         <child>
+          <object class="AdwExpanderRow" id="refresh_rate_expander_row">
+            <property name="width_request">100</property>
+            <property name="title" translatable="yes">R_efresh Rate</property>
+            <property name="use-underline">True</property>
+            <child type="suffix">
+              <object class="GtkLabel" id="refresh_rate_expander_suffix_label">
+              </object>
+            </child>
+            <child>
+              <object class="AdwSwitchRow" id="variable_refresh_rate_row">
+                <property name="width_request">100</property>
+                <property name="title" translatable="yes">_Variable Refresh Rate</property>
+                <property name="use-underline">True</property>
+                <signal name="notify::active" handler="on_variable_refresh_rate_active_changed_cb" swapped="yes"/>
+              </object>
+            </child>
+            <child>
+              <object class="AdwComboRow" id="preferred_refresh_rate_row">
+                <property name="width_request">100</property>
+                <property name="title" translatable="yes">Re_fresh Rate</property>
+                <property name="use-underline">True</property>
+                <property name="selected" bind-source="refresh_rate_row" bind-flags="bidirectional"/>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
           <object class="AdwSwitchRow" id="underscanning_row">
             <property name="width_request">100</property>
             <property name="title" translatable="yes">Adjust for _TV</property>

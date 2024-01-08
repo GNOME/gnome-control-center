@@ -114,6 +114,12 @@ cc_display_mode_get_preferred_scale (CcDisplayMode *self)
   return CC_DISPLAY_MODE_GET_CLASS (self)->get_preferred_scale (self);
 }
 
+CcDisplayModeRefreshRateMode
+cc_display_mode_get_refresh_rate_mode (CcDisplayMode *self)
+{
+  return CC_DISPLAY_MODE_GET_CLASS (self)->get_refresh_rate_mode (self);
+}
+
 gboolean
 cc_display_mode_is_interlaced (CcDisplayMode *self)
 {
@@ -316,6 +322,12 @@ cc_display_monitor_get_modes (CcDisplayMonitor *self)
 }
 
 gboolean
+cc_display_monitor_supports_variable_refresh_rate (CcDisplayMonitor *self)
+{
+  return CC_DISPLAY_MONITOR_GET_CLASS (self)->supports_variable_refresh_rate (self);
+}
+
+gboolean
 cc_display_monitor_supports_underscanning (CcDisplayMonitor *self)
 {
   return CC_DISPLAY_MONITOR_GET_CLASS (self)->supports_underscanning (self);
@@ -350,6 +362,13 @@ void
 cc_display_monitor_set_compatible_clone_mode (CcDisplayMonitor *self, CcDisplayMode *m)
 {
   return CC_DISPLAY_MONITOR_GET_CLASS (self)->set_mode (self, m);
+}
+
+void
+cc_display_monitor_set_refresh_rate_mode (CcDisplayMonitor             *self,
+                                          CcDisplayModeRefreshRateMode  refresh_rate_mode)
+{
+  return CC_DISPLAY_MONITOR_GET_CLASS (self)->set_refresh_rate_mode (self, refresh_rate_mode);
 }
 
 void

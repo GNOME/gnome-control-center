@@ -50,6 +50,10 @@ struct _CcDisplaySettings
   AdwSwitchRow     *enabled_row;
   GtkWidget        *orientation_row;
   GtkWidget        *refresh_rate_row;
+  AdwExpanderRow   *refresh_rate_expander_row;
+  GtkLabel         *refresh_rate_expander_suffix_label;
+  AdwSwitchRow     *variable_refresh_rate_row;
+  AdwComboRow      *preferred_refresh_rate_row;
   GtkWidget        *resolution_row;
   GtkWidget        *scale_bbox;
   GtkWidget        *scale_buttons_row;
@@ -178,6 +182,54 @@ make_refresh_rate_string (CcDisplayMode *mode)
 }
 
 static gchar *
+make_variable_refresh_rate_string (CcDisplayMode *mode)
+{
+  /* Translators: "Variable" is an adjective that refers to the refresh rate */
+  return g_strdup_printf (_("Variable (up to %.2lf Hz)"),
+                          cc_display_mode_get_freq_f (mode));
+}
+
+static gchar *
+make_expander_refresh_rate_string (CcDisplayMode *mode)
+{
+  switch (cc_display_mode_get_refresh_rate_mode (mode))
+    {
+    case MODE_REFRESH_RATE_MODE_FIXED:
+      return make_refresh_rate_string (mode);
+    case MODE_REFRESH_RATE_MODE_VARIABLE:
+      return make_variable_refresh_rate_string (mode);
+    default:
+      g_assert_not_reached();
+    }
+
+  return NULL;
+}
+
+static gboolean
+mode_to_refresh_rate_transform_func (GBinding          *binding,
+                                     const GValue      *source_value,
+                                     GValue            *target_value)
+{
+  CcDisplayMode *mode;
+  gchar *refresh_rate_string;
+
+  if (!G_VALUE_HOLDS_OBJECT (source_value))
+    return FALSE;
+
+  if (!G_VALUE_HOLDS_STRING (target_value))
+    return FALSE;
+
+  mode = CC_DISPLAY_MODE (g_value_get_object (source_value));
+  g_return_val_if_fail (mode != NULL, FALSE);
+
+  refresh_rate_string = make_expander_refresh_rate_string (mode);
+
+  g_value_take_string (target_value, refresh_rate_string);
+
+  return TRUE;
+}
+
+static gchar *
 make_resolution_string (CcDisplayMode *mode)
 {
   const char *interlaced;
@@ -225,9 +277,18 @@ sort_modes_by_area_desc (CcDisplayMode *a, CcDisplayMode *b)
 }
 
 static gint
-sort_modes_by_freq_desc (CcDisplayMode *a, CcDisplayMode *b)
+sort_modes_by_refresh_rate_desc (CcDisplayMode *a, CcDisplayMode *b)
 {
+  if (cc_display_mode_get_refresh_rate_mode (a) != cc_display_mode_get_refresh_rate_mode (b))
+    {
+      if (cc_display_mode_get_refresh_rate_mode (a) == MODE_REFRESH_RATE_MODE_VARIABLE)
+        return -1;
+      else
+        return 1;
+    }
+
   double delta = (cc_display_mode_get_freq_f (b) - cc_display_mode_get_freq_f (a))*1000.;
+
   return delta;
 }
 
@@ -251,6 +312,7 @@ cc_display_settings_rebuild_ui (CcDisplaySettings *self)
       gtk_widget_set_visible (self->enabled_listbox, FALSE);
       gtk_widget_set_visible (self->orientation_row, FALSE);
       gtk_widget_set_visible (self->refresh_rate_row, FALSE);
+      gtk_widget_set_visible (GTK_WIDGET (self->refresh_rate_expander_row), FALSE);
       gtk_widget_set_visible (self->resolution_row, FALSE);
       gtk_widget_set_visible (self->scale_combo_row, FALSE);
       gtk_widget_set_visible (self->scale_buttons_row, FALSE);
@@ -262,6 +324,9 @@ cc_display_settings_rebuild_ui (CcDisplaySettings *self)
   g_object_freeze_notify ((GObject*) self->enabled_row);
   g_object_freeze_notify ((GObject*) self->orientation_row);
   g_object_freeze_notify ((GObject*) self->refresh_rate_row);
+  g_object_freeze_notify ((GObject*) self->refresh_rate_expander_row);
+  g_object_freeze_notify ((GObject*) self->variable_refresh_rate_row);
+  g_object_freeze_notify ((GObject*) self->preferred_refresh_rate_row);
   g_object_freeze_notify ((GObject*) self->resolution_row);
   g_object_freeze_notify ((GObject*) self->scale_combo_row);
   g_object_freeze_notify ((GObject*) self->underscanning_row);
@@ -325,9 +390,12 @@ cc_display_settings_rebuild_ui (CcDisplaySettings *self)
   if (!cc_display_config_is_cloning (self->config))
     {
       GList *item;
-      gdouble freq;
+      gdouble current_freq;
+      CcDisplayModeRefreshRateMode current_refresh_rate_mode;
+      gboolean has_variable_refresh_rate_modes = FALSE;
 
-      freq = cc_display_mode_get_freq_f (current_mode);
+      current_freq = cc_display_mode_get_freq_f (current_mode);
+      current_refresh_rate_mode = cc_display_mode_get_refresh_rate_mode (current_mode);
 
       modes = cc_display_monitor_get_modes (self->selected_output);
 
@@ -338,9 +406,18 @@ cc_display_settings_rebuild_ui (CcDisplaySettings *self)
           gint w, h;
           guint new;
           CcDisplayMode *mode = CC_DISPLAY_MODE (item->data);
+          CcDisplayModeRefreshRateMode refresh_rate_mode;
 
           cc_display_mode_get_resolution (mode, &w, &h);
           if (w != width || h != height)
+            continue;
+
+          refresh_rate_mode = cc_display_mode_get_refresh_rate_mode (mode);
+
+          if (refresh_rate_mode == MODE_REFRESH_RATE_MODE_VARIABLE)
+            has_variable_refresh_rate_modes = TRUE;
+
+          if (current_refresh_rate_mode != refresh_rate_mode)
             continue;
 
           /* At some point we used to filter very close resolutions,
@@ -348,17 +425,36 @@ cc_display_settings_rebuild_ui (CcDisplaySettings *self)
            */
           new = g_list_store_insert_sorted (self->refresh_rate_list,
                                             mode,
-                                            (GCompareDataFunc) sort_modes_by_freq_desc,
+                                            (GCompareDataFunc) sort_modes_by_refresh_rate_desc,
                                             NULL);
-          if (freq == cc_display_mode_get_freq_f (mode))
-            adw_combo_row_set_selected (ADW_COMBO_ROW (self->refresh_rate_row), new);
+
+          if (current_freq != cc_display_mode_get_freq_f (mode))
+            continue;
+
+          adw_combo_row_set_selected (ADW_COMBO_ROW (self->refresh_rate_row), new);
+          adw_combo_row_set_selected (self->preferred_refresh_rate_row, new);
         }
 
-      gtk_widget_set_visible (self->refresh_rate_row, TRUE);
+      adw_switch_row_set_active (self->variable_refresh_rate_row,
+                                 current_refresh_rate_mode == MODE_REFRESH_RATE_MODE_VARIABLE);
+      gtk_widget_set_sensitive (GTK_WIDGET (self->variable_refresh_rate_row),
+                                has_variable_refresh_rate_modes);
+
+      if (cc_display_monitor_supports_variable_refresh_rate (self->selected_output))
+        {
+          gtk_widget_set_visible (self->refresh_rate_row, FALSE);
+          gtk_widget_set_visible (GTK_WIDGET (self->refresh_rate_expander_row), TRUE);
+        }
+      else
+        {
+          gtk_widget_set_visible (self->refresh_rate_row, TRUE);
+          gtk_widget_set_visible (GTK_WIDGET (self->refresh_rate_expander_row), FALSE);
+        }
     }
   else
     {
       gtk_widget_set_visible (self->refresh_rate_row, FALSE);
+      gtk_widget_set_visible (GTK_WIDGET (self->refresh_rate_expander_row), FALSE);
     }
 
 
@@ -472,6 +568,9 @@ cc_display_settings_rebuild_ui (CcDisplaySettings *self)
   g_object_thaw_notify ((GObject*) self->enabled_row);
   g_object_thaw_notify ((GObject*) self->orientation_row);
   g_object_thaw_notify ((GObject*) self->refresh_rate_row);
+  g_object_thaw_notify ((GObject*) self->refresh_rate_expander_row);
+  g_object_thaw_notify ((GObject*) self->variable_refresh_rate_row);
+  g_object_thaw_notify ((GObject*) self->preferred_refresh_rate_row);
   g_object_thaw_notify ((GObject*) self->resolution_row);
   g_object_thaw_notify ((GObject*) self->scale_combo_row);
   g_object_thaw_notify ((GObject*) self->underscanning_row);
@@ -543,6 +642,26 @@ on_refresh_rate_selection_changed_cb (CcDisplaySettings *self)
     return;
 
   cc_display_monitor_set_mode (self->selected_output, mode);
+
+  g_signal_emit_by_name (G_OBJECT (self), "updated", self->selected_output);
+}
+
+static void
+on_variable_refresh_rate_active_changed_cb (CcDisplaySettings *self)
+{
+  if (self->updating)
+    return;
+
+  if (!adw_switch_row_get_active (self->variable_refresh_rate_row))
+    {
+      cc_display_monitor_set_refresh_rate_mode (self->selected_output,
+                                                MODE_REFRESH_RATE_MODE_FIXED);
+    }
+  else
+    {
+      cc_display_monitor_set_refresh_rate_mode (self->selected_output,
+                                                MODE_REFRESH_RATE_MODE_VARIABLE);
+    }
 
   g_signal_emit_by_name (G_OBJECT (self), "updated", self->selected_output);
 }
@@ -738,6 +857,10 @@ cc_display_settings_class_init (CcDisplaySettingsClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcDisplaySettings, enabled_row);
   gtk_widget_class_bind_template_child (widget_class, CcDisplaySettings, orientation_row);
   gtk_widget_class_bind_template_child (widget_class, CcDisplaySettings, refresh_rate_row);
+  gtk_widget_class_bind_template_child (widget_class, CcDisplaySettings, refresh_rate_expander_row);
+  gtk_widget_class_bind_template_child (widget_class, CcDisplaySettings, refresh_rate_expander_suffix_label);
+  gtk_widget_class_bind_template_child (widget_class, CcDisplaySettings, variable_refresh_rate_row);
+  gtk_widget_class_bind_template_child (widget_class, CcDisplaySettings, preferred_refresh_rate_row);
   gtk_widget_class_bind_template_child (widget_class, CcDisplaySettings, resolution_row);
   gtk_widget_class_bind_template_child (widget_class, CcDisplaySettings, scale_bbox);
   gtk_widget_class_bind_template_child (widget_class, CcDisplaySettings, scale_buttons_row);
@@ -747,6 +870,7 @@ cc_display_settings_class_init (CcDisplaySettingsClass *klass)
   gtk_widget_class_bind_template_callback (widget_class, on_enabled_row_active_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_orientation_selection_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_refresh_rate_selection_changed_cb);
+  gtk_widget_class_bind_template_callback (widget_class, on_variable_refresh_rate_active_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_resolution_selection_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_scale_selection_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_underscanning_row_active_changed_cb);
@@ -778,6 +902,18 @@ cc_display_settings_init (CcDisplaySettings *self)
   adw_combo_row_set_expression (ADW_COMBO_ROW (self->refresh_rate_row), expression);
   adw_combo_row_set_model (ADW_COMBO_ROW (self->refresh_rate_row),
                            G_LIST_MODEL (self->refresh_rate_list));
+
+  adw_combo_row_set_expression (self->preferred_refresh_rate_row, expression);
+  adw_combo_row_set_model (self->preferred_refresh_rate_row,
+                           G_LIST_MODEL (self->refresh_rate_list));
+
+  g_object_bind_property_full (self->preferred_refresh_rate_row,
+                               "selected-item",
+                               self->refresh_rate_expander_suffix_label,
+                               "label",
+                               G_BINDING_DEFAULT,
+                               (GBindingTransformFunc) mode_to_refresh_rate_transform_func,
+                               NULL, NULL, NULL);
 
   expression = gtk_cclosure_expression_new (G_TYPE_STRING,
                                             NULL, 0, NULL,
@@ -870,6 +1006,8 @@ cc_display_settings_set_selected_output (CcDisplaySettings *self,
                                          CcDisplayMonitor  *output)
 {
   self->selected_output = output;
+
+  adw_expander_row_set_expanded (self->refresh_rate_expander_row, FALSE);
 
   cc_display_settings_rebuild_ui (self);
 
