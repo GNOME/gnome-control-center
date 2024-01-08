@@ -52,8 +52,6 @@ struct _CcRemovableMediaSettings
   GtkWidget           *software_row;
   GtkWidget           *other_media_row;
 
-  AdwSwitchRow        *disable_autostart_row;
-
   GtkAppChooserButton *audio_cdda_chooser;
   GtkAppChooserButton *dcf_chooser;
   GtkAppChooserButton *music_player_chooser;
@@ -473,12 +471,6 @@ info_panel_setup_media (CcRemovableMediaSettings *self)
 
   g_settings_bind (self->settings,
                    PREF_MEDIA_AUTORUN_NEVER,
-                   self->disable_autostart_row,
-                   "active",
-                   G_SETTINGS_BIND_DEFAULT);
-
-  g_settings_bind (self->settings,
-                   PREF_MEDIA_AUTORUN_NEVER,
                    self->cd_audio_row,
                    "sensitive",
                    G_SETTINGS_BIND_INVERT_BOOLEAN);
@@ -547,7 +539,6 @@ cc_removable_media_settings_class_init (CcRemovableMediaSettingsClass *klass)
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/applications/cc-removable-media-settings.ui");
 
   gtk_widget_class_bind_template_child (widget_class, CcRemovableMediaSettings, audio_cdda_chooser);
-  gtk_widget_class_bind_template_child (widget_class, CcRemovableMediaSettings, disable_autostart_row);
   gtk_widget_class_bind_template_child (widget_class, CcRemovableMediaSettings, dcf_chooser);
   gtk_widget_class_bind_template_child (widget_class, CcRemovableMediaSettings, music_player_chooser);
   gtk_widget_class_bind_template_child (widget_class, CcRemovableMediaSettings, other_type_dialog);

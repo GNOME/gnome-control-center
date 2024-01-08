@@ -53,7 +53,9 @@
 struct _CcApplicationsPanel
 {
   CcPanel          parent;
-  CcDefaultAppsPage *default_apps_page;
+
+  CcDefaultAppsPage        *default_apps_page;
+  AdwSwitchRow             *autorun_never_switch;
   CcRemovableMediaSettings *removable_media_settings;
 
   AdwNavigationView *navigation_view;
@@ -90,6 +92,7 @@ struct _CcApplicationsPanel
   GtkWidget       *sandbox_info_button;
 
   GDBusProxy      *perm_store;
+  GSettings       *media_handling_settings;
   GtkListBoxRow   *perm_store_pending_row;
   GSettings       *notification_settings;
   GSettings       *location_settings;
@@ -1696,6 +1699,7 @@ cc_applications_panel_finalize (GObject *object)
 
   g_clear_object (&self->manager);
 #endif
+  g_clear_object (&self->media_handling_settings);
   g_clear_object (&self->notification_settings);
   g_clear_object (&self->location_settings);
   g_clear_object (&self->privacy_settings);
@@ -1778,6 +1782,7 @@ cc_applications_panel_class_init (CcApplicationsPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, app_search_entry);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, app_settings_page);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, other_permissions_section);
+  gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, autorun_never_switch);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, builtin);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, builtin_dialog);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, builtin_page);
@@ -1898,6 +1903,14 @@ cc_applications_panel_init (CcApplicationsPanel *self)
   self->location_settings = g_settings_new ("org.gnome.system.location");
   self->privacy_settings = g_settings_new ("org.gnome.desktop.privacy");
   self->search_settings = g_settings_new ("org.gnome.desktop.search-providers");
+  self->media_handling_settings = g_settings_new ("org.gnome.desktop.media-handling");
+
+  g_settings_bind (self->media_handling_settings,
+                   "autorun-never",
+                   self->autorun_never_switch,
+                   "active",
+                   G_SETTINGS_BIND_DEFAULT);
+
 #ifdef HAVE_MALCONTENT
    /* FIXME: should become asynchronous */
   system_bus = g_bus_get_sync (G_BUS_TYPE_SYSTEM, self->cancellable, &error);

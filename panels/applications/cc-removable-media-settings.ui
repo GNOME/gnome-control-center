@@ -2,15 +2,6 @@
 <interface>
   <!-- interface-requires gtk+ 3.0 -->
   <template class="CcRemovableMediaSettings" parent="AdwPreferencesGroup">
-    <property name="title" translatable="yes">Removable Media</property>
-    <property name="description" translatable="yes">Apps which are launched when media or drives are connected</property>
-      <child>
-        <object class="AdwSwitchRow" id="disable_autostart_row">
-          <property name="title" translatable="yes">D_isable Autostart</property>
-          <property name="subtitle" translatable="yes">Never prompt or start apps on media insertion</property>
-          <property name="use_underline">True</property>
-        </object>
-      </child>
       <child>
         <object class="AdwActionRow" id="cd_audio_row">
           <property name="title" translatable="yes">CD _Audio</property>
