@@ -72,7 +72,7 @@ struct _CcUserPage {
 #endif
     CcListRow           *password_row;
     CcPermissionInfobar *permission_infobar;
-    GtkSwitch           *remove_local_files_choice;
+    AdwSwitchRow        *remove_local_files_choice;
     GtkWidget           *remove_user_button;
     AdwMessageDialog    *remove_local_user_dialog;
 
@@ -408,7 +408,7 @@ remove_local_user_response (CcUserPage       *self,
 {
     gboolean remove_files;
 
-    g_assert (GTK_IS_SWITCH (self->remove_local_files_choice));
+    g_assert (ADW_IS_SWITCH_ROW (self->remove_local_files_choice));
 
     if (g_strcmp0 (response, "cancel") == 0) {
         return;
@@ -422,7 +422,7 @@ remove_local_user_response (CcUserPage       *self,
     /* Prevent user to click again while deleting, issue #2341 */
     gtk_widget_set_sensitive (GTK_WIDGET (self->remove_user_button), FALSE);
 
-    remove_files = gtk_switch_get_active (GTK_SWITCH (self->remove_local_files_choice));
+    remove_files = adw_switch_row_get_active (self->remove_local_files_choice);
     act_user_manager_delete_user_async (act_user_manager_get_default (),
                                         self->user,
                                         remove_files,
