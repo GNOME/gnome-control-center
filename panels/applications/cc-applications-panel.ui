@@ -374,10 +374,9 @@
                         </child>
                       </object>
                     </child>
-             
+
                     <child>
-                      <object class="AdwPreferencesGroup" id="usage_section">
-                        <property name="title" translatable="yes">General</property>
+                      <object class="AdwPreferencesGroup" id="other_permissions_section">
                         <child>
                           <object class="CcInfoRow" id="builtin">
                             <property name="title" translatable="yes">Re_quired Access</property>
@@ -387,6 +386,12 @@
                             <signal name="activated" handler="on_builtin_row_activated_cb" object="CcApplicationsPanel" swapped="yes" />
                           </object>
                         </child>
+                      </object>
+                    </child>
+
+                    <child>
+                      <object class="AdwPreferencesGroup" id="usage_section">
+                        <property name="title" translatable="yes">General</property>
                         <child>
                           <object class="CcInfoRow" id="handler_row">
                             <property name="title" translatable="yes">_File &amp;amp; Link Associations</property>

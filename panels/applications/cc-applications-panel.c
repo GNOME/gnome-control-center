@@ -114,6 +114,7 @@ struct _CcApplicationsPanel
   AdwSwitchRow    *shortcuts;
   AdwSwitchRow    *microphone;
   CcInfoRow       *no_microphone;
+  AdwPreferencesGroup *other_permissions_section;
   CcInfoRow       *builtin;
   GtkWindow       *builtin_dialog;
   AdwPreferencesPage *builtin_page;
@@ -1403,7 +1404,7 @@ update_usage_section (CcApplicationsPanel *self,
 
   remove_static_permissions (self);
   has_builtin = add_static_permissions (self, info, portal_app_id);
-  gtk_widget_set_visible (GTK_WIDGET (self->builtin), has_builtin);
+  gtk_widget_set_visible (GTK_WIDGET (self->other_permissions_section), has_builtin);
 
   gtk_widget_set_visible (GTK_WIDGET (self->usage_section), portal_app_id || has_builtin);
 }
@@ -1776,6 +1777,7 @@ cc_applications_panel_class_init (CcApplicationsPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, app_name_label);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, app_search_entry);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, app_settings_page);
+  gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, other_permissions_section);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, builtin);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, builtin_dialog);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, builtin_page);
