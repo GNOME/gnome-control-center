@@ -44,7 +44,6 @@ struct _CcAvatarChooser {
         GtkPopover parent;
 
         GtkWidget *crop_area;
-        GtkWidget *user_flowbox;
         GtkWidget *flowbox;
 
         GnomeDesktopThumbnailFactory *thumb_factory;
@@ -375,8 +374,6 @@ cc_avatar_chooser_init (CcAvatarChooser *self)
         self->thumb_factory = gnome_desktop_thumbnail_factory_new (GNOME_DESKTOP_THUMBNAIL_SIZE_NORMAL);
 
         setup_photo_popup (self);
-
-        g_signal_connect_object (self->user_flowbox, "child-activated", G_CALLBACK (face_widget_activated), self, G_CONNECT_SWAPPED);
 }
 
 static void
@@ -387,7 +384,6 @@ cc_avatar_chooser_class_init (CcAvatarChooserClass *klass)
 
         gtk_widget_class_set_template_from_resource (wclass, "/org/gnome/control-center/system/users/cc-avatar-chooser.ui");
 
-        gtk_widget_class_bind_template_child (wclass, CcAvatarChooser, user_flowbox);
         gtk_widget_class_bind_template_child (wclass, CcAvatarChooser, flowbox);
 
         gtk_widget_class_bind_template_callback (wclass, cc_avatar_chooser_select_file);
@@ -395,47 +391,12 @@ cc_avatar_chooser_class_init (CcAvatarChooserClass *klass)
         oclass->dispose = cc_avatar_chooser_dispose;
 }
 
-static void
-user_flowbox_activated (CcAvatarChooser *self)
-{
-        set_default_avatar (self->user);
-
-        gtk_popover_popdown (GTK_POPOVER (self));
-}
-
 void
 cc_avatar_chooser_set_user (CcAvatarChooser *self,
                             ActUser         *user)
 {
-        g_autoptr(GdkPixbuf) pixbuf = NULL;
-        const gchar *name;
-        GtkWidget *avatar;
-
         g_return_if_fail (self != NULL);
 
-        if (self->user) {
-                GtkWidget *child;
-
-                child = gtk_widget_get_first_child (GTK_WIDGET (self->user_flowbox));
-                while (child) {
-                        GtkWidget *next = gtk_widget_get_next_sibling (child);
-
-                        if (GTK_FLOW_BOX_CHILD (child))
-                                gtk_flow_box_remove (GTK_FLOW_BOX (self->user_flowbox), child);
-
-                        child = next;
-                }
-
-                g_clear_object (&self->user);
-        }
+        g_clear_object (&self->user);
         self->user = g_object_ref (user);
-
-        name = act_user_get_real_name (user);
-        if (name == NULL)
-                name = act_user_get_user_name (user);
-        avatar = adw_avatar_new (AVATAR_CHOOSER_PIXEL_SIZE, name, TRUE);
-        gtk_flow_box_append (GTK_FLOW_BOX (self->user_flowbox), avatar);
-
-        g_signal_connect_object (self->user_flowbox, "child-activated", G_CALLBACK (user_flowbox_activated), self, G_CONNECT_SWAPPED);
 }
-
