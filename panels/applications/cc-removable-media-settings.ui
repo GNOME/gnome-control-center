@@ -5,17 +5,10 @@
     <property name="title" translatable="yes">Removable Media</property>
     <property name="description" translatable="yes">Apps which are launched when media or drives are connected</property>
       <child>
-        <object class="AdwActionRow" id="disable_autostart_row">
+        <object class="AdwSwitchRow" id="disable_autostart_row">
           <property name="title" translatable="yes">D_isable Autostart</property>
           <property name="subtitle" translatable="yes">Never prompt or start apps on media insertion</property>
           <property name="use_underline">True</property>
-          <property name="activatable_widget">autorun_never_switch</property>
-          <child>
-            <object class="GtkSwitch" id="autorun_never_switch">
-              <property name="receives_default">False</property>
-              <property name="valign">center</property>
-            </object>
-          </child>
         </object>
       </child>
       <child>
