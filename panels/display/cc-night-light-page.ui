@@ -82,16 +82,9 @@
                 <property name="description" translatable="yes">Night light makes the screen color warmer. This can help to prevent eye strain and sleeplessness.</property>
                 <!-- Night Light -->
                 <child>
-                  <object class="AdwActionRow">
+                  <object class="AdwSwitchRow" id="night_light_toggle_row">
                     <property name="title" translatable="yes">_Night Light</property>
                     <property name="use-underline">True</property>
-                    <property name="activatable-widget">night_light_toggle_switch</property>
-
-                    <child>
-                      <object class="GtkSwitch" id="night_light_toggle_switch">
-                        <property name="valign">center</property>
-                      </object>
-                    </child>
                   </object>
                 </child>
 
@@ -100,7 +93,7 @@
                   <object class="AdwComboRow" id="schedule_type_row">
                     <property name="title" translatable="yes">_Schedule</property>
                     <property name="use-underline">True</property>
-                    <property name="sensitive" bind-source="night_light_toggle_switch" bind-property="active" bind-flags="default|sync-create" />
+                    <property name="sensitive" bind-source="night_light_toggle_row" bind-property="active" bind-flags="default|sync-create" />
                     <signal name="notify::selected" handler="on_schedule_type_row_selected_changed_cb" object="CcNightLightPage" swapped="yes" />
                     <property name="model">
                       <object class="GtkStringList">
@@ -118,7 +111,7 @@
                   <object class="AdwActionRow">
                     <property name="title" translatable="yes">_Times</property>
                     <property name="use-underline">True</property>
-                    <property name="sensitive" bind-source="night_light_toggle_switch" bind-property="active" bind-flags="default|sync-create" />
+                    <property name="sensitive" bind-source="night_light_toggle_row" bind-property="active" bind-flags="default|sync-create" />
 
                     <child>
                       <object class="GtkBox" id="box_manual">
@@ -310,7 +303,7 @@
                 <child>
                   <object class="AdwPreferencesRow">
                     <property name="activatable">False</property>
-                    <property name="sensitive" bind-source="night_light_toggle_switch" bind-property="active" bind-flags="default|sync-create" />
+                    <property name="sensitive" bind-source="night_light_toggle_row" bind-property="active" bind-flags="default|sync-create" />
 
                     <child>
                       <object class="GtkBox">

@@ -43,7 +43,7 @@ struct _CcNightLightPage {
   GtkWidget           *infobar_unsupported_description;
   GtkWidget           *infobar_disabled;
   GtkWidget           *scale_color_temperature;
-  GtkWidget           *night_light_toggle_switch;
+  AdwSwitchRow        *night_light_toggle_row;
   AdwComboRow         *schedule_type_row;
   GtkWidget           *from_spinbuttons_box;
   GtkSpinButton       *spinbutton_from_hours;
@@ -679,7 +679,7 @@ cc_night_light_page_class_init (CcNightLightPageClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcNightLightPage, infobar_unsupported);
   gtk_widget_class_bind_template_child (widget_class, CcNightLightPage, infobar_unsupported_description);
   gtk_widget_class_bind_template_child (widget_class, CcNightLightPage, infobar_disabled);
-  gtk_widget_class_bind_template_child (widget_class, CcNightLightPage, night_light_toggle_switch);
+  gtk_widget_class_bind_template_child (widget_class, CcNightLightPage, night_light_toggle_row);
   gtk_widget_class_bind_template_child (widget_class, CcNightLightPage, schedule_type_row);
   gtk_widget_class_bind_template_child (widget_class, CcNightLightPage, scale_color_temperature);
   gtk_widget_class_bind_template_child (widget_class, CcNightLightPage, from_spinbuttons_box);
@@ -737,11 +737,11 @@ cc_night_light_page_init (CcNightLightPage *self)
   build_schedule_combo_row (self);
 
   g_settings_bind (self->settings_display, "night-light-enabled",
-                   self->night_light_toggle_switch, "active",
+                   self->night_light_toggle_row, "active",
                    G_SETTINGS_BIND_DEFAULT);
 
   g_settings_bind_writable (self->settings_display, "night-light-enabled",
-                            self->night_light_toggle_switch, "sensitive",
+                            self->night_light_toggle_row, "sensitive",
                             FALSE);
 
   g_settings_bind_writable (self->settings_display, "night-light-schedule-from",
