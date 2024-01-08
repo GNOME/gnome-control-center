@@ -218,7 +218,7 @@ cc_remote_desktop_page_setup_label_with_hostname (CcRemoteDesktopPage *self,
 
   if (label == self->remote_desktop_address_label)
     {
-      text = g_strdup_printf ("ms-rd://%s", hostname);
+      text = g_strdup_printf ("rdp://%s", hostname);
     }
   else
     g_assert_not_reached ();
