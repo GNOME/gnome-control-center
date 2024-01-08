@@ -55,7 +55,7 @@ struct _CcApplicationsPanel
   CcPanel          parent;
 
   CcDefaultAppsPage        *default_apps_page;
-  AdwSwitchRow             *autorun_never_switch;
+  AdwSwitchRow             *autorun_never_row;
   CcRemovableMediaSettings *removable_media_settings;
 
   AdwNavigationView *navigation_view;
@@ -1782,7 +1782,7 @@ cc_applications_panel_class_init (CcApplicationsPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, app_search_entry);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, app_settings_page);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, other_permissions_section);
-  gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, autorun_never_switch);
+  gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, autorun_never_row);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, builtin);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, builtin_dialog);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, builtin_page);
@@ -1907,9 +1907,9 @@ cc_applications_panel_init (CcApplicationsPanel *self)
 
   g_settings_bind (self->media_handling_settings,
                    "autorun-never",
-                   self->autorun_never_switch,
+                   self->autorun_never_row,
                    "active",
-                   G_SETTINGS_BIND_DEFAULT);
+                   G_SETTINGS_BIND_INVERT_BOOLEAN);
 
 #ifdef HAVE_MALCONTENT
    /* FIXME: should become asynchronous */
