@@ -1,3 +1,131 @@
+================
+Version 46.alpha
+================
+
+- Introduce the new "System" panel, grouping the settings of Region & Language, Date & Time, Users, Remote Desktop, and About.
+- Add an "About Settings" dialog
+- Various appdata improvements
+- Various mnemonics added
+- Various tooltips added
+- Various CI fixes
+- Various accessibility fixes
+- Make "gnome-control-center --version" work on non-supported environments
+- Bump meson dependency to >= 0.58
+- Disable "deprecated-declarations" by default for builds 
+- Introduce -Ddeprecated-declarations=enabled meson build option
+- Add CODEOWNERS file
+
+Accessibility
+- Rename "Overlay Scrollbars" to "Always Show Scrollbars" and invert this setting logic
+- Reword the "Accessibility Menu" row
+- Add description text to "Cursor Size" dialog
+- Port Cursor Size dialog to AdwWindow
+- Use AdwSpinRow in Zoom -> Magnification Factor row
+ 
+Appearance
+- Improve overall load and resize performance of background thumbnails
+- Improve background chooser performance
+- Make background preview thumbnails sharpier
+
+Apps
+- Drop sidebar by implementing a new mockup with a search bar inside the panel
+- Move "Default Apps" and "Removable Media" panels into the "Apps" panel
+- Add a banner indicating when an app isn't sandboxed
+- Separate the "Required Permissions" row into its own section
+- Add headings to rows from the app settings section
+- Port "Removable Media Settings" row to AdwSwitchRow
+- Ignore symlinks when measuring cache/data size to improve accuracy
+- Use "computer-fail-symbolic" icon instead of GNOME Software's icon
+- Fix "File & Link Associations" crash
+- Fix "File & Link Associations" UI not updating
+- Fix launching an app page from the command line (ex.: "gnome-control-center application $APP_ID)
+- Replace snapd-glib with a native implementation
+
+Cellular
+- Various HIG compliance changes
+
+Date & Time
+- Add description to "Week Numbers" row
+
+Displays
+- Port custom switch rows to AdwSwitchRow
+
+Keyboard
+- Add "Left Ctrl" key to Compose Key options
+- Add "Insert" key to Compose Key options
+- Port Shortcut Editor from deprecated GtkDialog to AdwWindow/AdwToolbarView
+- Fix showing window decoration buttons when showing the "Unsupported network daemon" status page
+- Show title buttons at the initial state of "Set Shortcuts" dialog
+- Add visual outline to shortcut graphic arrows
+
+Mouse
+- Add "Secondary Click" option for Touchpads (aka "Click Method")
+- Add "Disable While Typing" setting to Touchpad page
+- Update edge-scroll animation to represent better dimensions of physical devices
+- Port custom switch rows to AdwSwitchRow
+- Split "Scroll Method" and "Direction" into separate row groups
+- Prevent test window arrows from interferingf with scrolling events
+- Fix illustrations looking blurry on small window sizes
+- Fix the linked-style of the primary mouse button setting to work on RTL languages
+
+Network
+- Use period as thousands separator on network speed label
+- Avoid critical warning for floating reference in hotspot dialog
+- Various UI spacing and alignment changes in the connection editor pages
+- Share WPA3 (SAE) networks with QRCode
+- Hide QRCode icon when connection not successful
+- Handle bluetooth device connections ourselves (instead of depending on NM connection-editor)
+- Don't show "Saved Wi-Fi Networks" row when there's nothing to show
+- Use a "Undo" toast to allow users to undo forgetting a network in "Saved Wi-Fi Networks"
+- Make the "forget network" button show only an icon (instead of a icon+label)
+- Fix sensitivity of DNS and route configuration widgets
+- Warn user if both automatic and manual DNS is configured
+- Unset DNS entry errors when entry is empty
+- Disable Wi-Fi Hotspot row when Wi-Fi is not active
+
+Notifications
+- Stop listing system services on the panel
+
+Online Accounts
+- Various memory leak fixes
+
+Power
+- Add mnemonics to help navigate the automatic suspend dialog
+- Modernize the Suspend dialog
+
+Privacy & Security
+- Rename panel from "Privacy" to "Privacy & Security"
+- Update panel description text
+- Rename "Location Services" page to "Location"
+- Make icons larger in Location/Camera/Microphone pages
+- Make page visibility checks cancellable to avoid crashes
+- Fix crashes on Camera and Firmware Security pages
+- Rename location switch title to "Automatic Device Location"
+- Reword and re-style the "Privacy" policy text 
+
+Region
+- Preview measurement format in current locale
+
+Remote Desktop
+- Use "rdp" instead of "ms-rd" for hostname URL
+- Add documentation link to instruct how to use remote desktop
+
+Sharing
+- Make panel adaptative
+- Use AdwPreferencesPage/AdwPreferencesGroup in all dialogs
+
+Users
+- Port to AdwNavigationView/Page widgets
+- Move into the "System" panel
+- Use AdwAvatar to generate default user icon and mark generated avatars as such
+
+Wacom
+- Update illustration style
+- Generate a smooth pressure curve instead of just 7
+- Introduce mark indicating the center-point of the stylus pressure curve
+- Extend ther pressurecurve range by 25% in each direction
+- Use the ExpressKey Remote name for the EKR
+
 ============
 Version 45.0
 ============
