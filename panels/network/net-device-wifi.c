@@ -71,6 +71,7 @@ struct _NetDeviceWifi
         GtkWindow               *saved_networks_dialog;
         AdwToastOverlay         *saved_networks_toast_overlay;
         AdwToast                *saved_networks_undo_toast;
+        GPtrArray               *saved_networks_forgotten_rows;
 
         AdwSwitchRow            *device_enable_row;
         CcListRow               *saved_network_row;
@@ -815,14 +816,13 @@ really_forgotten (GObject              *source_object,
 }
 
 static void
-really_forget (AdwToast *toast, CcWifiConnectionRow *row)
+really_forget (gpointer data)
 {
+        CcWifiConnectionRow *row = CC_WIFI_CONNECTION_ROW (data);
         NMRemoteConnection *connection;
         NetDeviceWifi *self;
 
         self = NET_DEVICE_WIFI (g_object_get_data (G_OBJECT (row), "net"));
-        if (self->saved_networks_undo_toast == NULL)
-            return;
 
         connection = NM_REMOTE_CONNECTION (cc_wifi_connection_row_get_connection (row));
 
@@ -830,16 +830,32 @@ really_forget (AdwToast *toast, CcWifiConnectionRow *row)
 }
 
 static void
-on_saved_networks_forget_undo (AdwToast *toast, CcWifiConnectionRow *row)
+undo_forget (gpointer data)
 {
+        CcWifiConnectionRow *row = CC_WIFI_CONNECTION_ROW (data);
         NetDeviceWifi *self;
 
         self = NET_DEVICE_WIFI (g_object_get_data (G_OBJECT (row), "net"));
-        self->saved_networks_undo_toast = NULL;
-
-        cc_wifi_connection_list_thaw (self->saved_networks_list);
 
         gtk_widget_set_visible (GTK_WIDGET (row), TRUE);
+
+        cc_wifi_connection_list_thaw (self->saved_networks_list);
+}
+
+static void
+on_saved_networks_forget_dismissed (NetDeviceWifi *self)
+{
+        self->saved_networks_undo_toast = NULL;
+
+        /* Since the free function is set to either undo or really forget,
+           this always does the right thing */
+        g_clear_pointer (&self->saved_networks_forgotten_rows, g_ptr_array_unref);
+}
+
+static void
+on_saved_networks_forget_undo (NetDeviceWifi *self)
+{
+        g_ptr_array_set_free_func (self->saved_networks_forgotten_rows, undo_forget);
 }
 
 static void
@@ -847,19 +863,38 @@ forget_selected (NetDeviceWifi *self, CcWifiConnectionRow *row, CcWifiConnection
 {
         g_autofree gchar *message = NULL;
 
-        gtk_widget_set_visible (GTK_WIDGET (row), FALSE);
         cc_wifi_connection_list_freeze (list);
 
-        message = g_strdup_printf (_("Network “%s” has been deleted"),
-                                   adw_preferences_row_get_title (ADW_PREFERENCES_ROW (row)));
-        self->saved_networks_undo_toast = adw_toast_new (message);
-        adw_toast_set_use_markup (self->saved_networks_undo_toast, FALSE);
-        adw_toast_set_button_label (self->saved_networks_undo_toast, _("_Undo"));
-
+        gtk_widget_set_visible (GTK_WIDGET (row), FALSE);
         g_object_set_data (G_OBJECT (row), "net", self);
 
-        g_signal_connect (self->saved_networks_undo_toast, "button-clicked", G_CALLBACK (on_saved_networks_forget_undo), row);
-        g_signal_connect (self->saved_networks_undo_toast, "dismissed", G_CALLBACK (really_forget), row);
+        /* Add row to the array of rows to be handled by the undo toast */
+        if (!self->saved_networks_forgotten_rows)
+                self->saved_networks_forgotten_rows = g_ptr_array_new_with_free_func (really_forget);
+
+        g_ptr_array_add (self->saved_networks_forgotten_rows, row);
+
+        /* If undo toast does not exist, create it, otherwise update title and extend timeout */
+        if (!self->saved_networks_undo_toast) {
+                message = g_strdup (_("Network deleted"));
+                self->saved_networks_undo_toast = adw_toast_new (message);
+                adw_toast_set_button_label (self->saved_networks_undo_toast, _("_Undo"));
+
+                g_signal_connect_swapped (self->saved_networks_undo_toast,
+                                          "button-clicked",
+                                          G_CALLBACK (on_saved_networks_forget_undo),
+                                          self);
+
+                g_signal_connect_swapped (self->saved_networks_undo_toast,
+                                          "dismissed",
+                                          G_CALLBACK (on_saved_networks_forget_dismissed),
+                                          self);
+        } else {
+                message = g_strdup_printf (_("%d networks deleted"), self->saved_networks_forgotten_rows->len);
+                adw_toast_set_title (self->saved_networks_undo_toast, message);
+
+                g_object_ref (self->saved_networks_undo_toast);
+        }
 
         adw_toast_overlay_add_toast (self->saved_networks_toast_overlay, self->saved_networks_undo_toast);
 }
