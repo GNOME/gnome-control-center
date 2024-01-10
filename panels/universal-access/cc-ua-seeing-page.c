@@ -60,10 +60,6 @@ struct _CcUaSeeingPage
   GSettings          *interface_settings;
   GSettings          *application_settings;
   GSettings          *a11y_interface_settings;
-
-  char               *old_gtk_theme;
-
-  gboolean            is_self_change;
 };
 
 G_DEFINE_TYPE (CcUaSeeingPage, cc_ua_seeing_page, ADW_TYPE_NAVIGATION_PAGE)
@@ -138,22 +134,6 @@ ua_seeing_interface_cursor_size_changed_cb (CcUaSeeingPage *self)
 }
 
 static void
-ua_seeing_interface_settings_changed_cb (CcUaSeeingPage *self)
-{
-  g_assert (CC_IS_UA_SEEING_PAGE (self));
-
-  if (self->is_self_change)
-    return;
-
-  if (!g_settings_get_boolean (self->a11y_interface_settings, KEY_HIGH_CONTRAST))
-    {
-      g_free (self->old_gtk_theme);
-
-      self->old_gtk_theme = g_settings_get_string (self->interface_settings, KEY_GTK_THEME);
-    }
-}
-
-static void
 ua_cursor_row_activated_cb (CcUaSeeingPage *self)
 {
   GtkWindow *dialog;
@@ -177,8 +157,6 @@ cc_ua_seeing_page_dispose (GObject *object)
   g_clear_object (&self->interface_settings);
   g_clear_object (&self->application_settings);
   g_clear_object (&self->a11y_interface_settings);
-
-  g_clear_pointer (&self->old_gtk_theme, g_free);
 
   G_OBJECT_CLASS (cc_ua_seeing_page_parent_class)->dispose (object);
 }
@@ -255,11 +233,6 @@ cc_ua_seeing_page_init (CcUaSeeingPage *self)
                            G_CALLBACK (ua_seeing_interface_cursor_size_changed_cb),
                            self, G_CONNECT_SWAPPED | G_CONNECT_AFTER);
 
-  g_signal_connect_object (self->interface_settings, "changed",
-                           G_CALLBACK (ua_seeing_interface_settings_changed_cb),
-                           self, G_CONNECT_SWAPPED | G_CONNECT_AFTER);
-
-  ua_seeing_interface_settings_changed_cb (self);
   ua_seeing_interface_cursor_size_changed_cb (self);
 }
 
