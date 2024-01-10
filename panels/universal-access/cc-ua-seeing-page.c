@@ -48,6 +48,7 @@ struct _CcUaSeeingPage
   AdwNavigationPage   parent_instance;
 
   AdwSwitchRow       *high_contrast_row;
+  AdwSwitchRow       *status_shapes_row;
   AdwSwitchRow       *animations_row;
   AdwSwitchRow       *large_text_row;
   CcListRow          *cursor_size_row;
@@ -174,6 +175,7 @@ cc_ua_seeing_page_class_init (CcUaSeeingPageClass *klass)
                                                "universal-access/cc-ua-seeing-page.ui");
 
   gtk_widget_class_bind_template_child (widget_class, CcUaSeeingPage, high_contrast_row);
+  gtk_widget_class_bind_template_child (widget_class, CcUaSeeingPage, status_shapes_row);
   gtk_widget_class_bind_template_child (widget_class, CcUaSeeingPage, animations_row);
   gtk_widget_class_bind_template_child (widget_class, CcUaSeeingPage, large_text_row);
   gtk_widget_class_bind_template_child (widget_class, CcUaSeeingPage, cursor_size_row);
@@ -198,6 +200,11 @@ cc_ua_seeing_page_init (CcUaSeeingPage *self)
   /* High contrast */
   g_settings_bind (self->a11y_interface_settings, KEY_HIGH_CONTRAST,
                    self->high_contrast_row, "active",
+                   G_SETTINGS_BIND_DEFAULT);
+
+  /* Switch shapes */
+  g_settings_bind (self->a11y_interface_settings, KEY_STATUS_SHAPES,
+                   self->status_shapes_row, "active",
                    G_SETTINGS_BIND_DEFAULT);
 
   /* Enable Animations */
