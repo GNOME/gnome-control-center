@@ -799,18 +799,16 @@ really_forgotten (GObject              *source_object,
                   gpointer              user_data)
 {
         g_autoptr(NetDeviceWifi) self = NET_DEVICE_WIFI (user_data);
-        g_autoptr(CcWifiConnectionList) list = NULL;
         g_autoptr(GError) error = NULL;
 
-        list = CC_WIFI_CONNECTION_LIST (g_object_get_data (G_OBJECT (self), "list"));
-        cc_wifi_connection_list_thaw (list);
+        cc_wifi_connection_list_thaw (self->saved_networks_list);
 
         if (!nm_remote_connection_delete_finish (NM_REMOTE_CONNECTION (source_object), res, &error))
                 g_warning ("failed to delete connection %s: %s",
                            nm_object_get_path (NM_OBJECT (source_object)),
                            error->message);
 
-        if (cc_wifi_connection_list_is_empty (list)) {
+        if (cc_wifi_connection_list_is_empty (self->saved_networks_list)) {
             gtk_window_close (self->saved_networks_dialog);
             gtk_widget_set_visible (GTK_WIDGET (self->saved_network_row), FALSE);
         }
@@ -820,17 +818,14 @@ static void
 really_forget (AdwToast *toast, CcWifiConnectionRow *row)
 {
         NMRemoteConnection *connection;
-        CcWifiConnectionList *list;
         NetDeviceWifi *self;
 
         self = NET_DEVICE_WIFI (g_object_get_data (G_OBJECT (row), "net"));
         if (self->saved_networks_undo_toast == NULL)
             return;
 
-        list = CC_WIFI_CONNECTION_LIST (g_object_get_data (G_OBJECT (row), "list"));
         connection = NM_REMOTE_CONNECTION (cc_wifi_connection_row_get_connection (row));
 
-        g_object_set_data (G_OBJECT (self), "list", g_object_ref (list));
         nm_remote_connection_delete_async (connection, self->cancellable, really_forgotten, g_object_ref (self));
 }
 
@@ -838,13 +833,11 @@ static void
 on_saved_networks_forget_undo (AdwToast *toast, CcWifiConnectionRow *row)
 {
         NetDeviceWifi *self;
-        CcWifiConnectionList *list;
 
         self = NET_DEVICE_WIFI (g_object_get_data (G_OBJECT (row), "net"));
         self->saved_networks_undo_toast = NULL;
 
-        list = CC_WIFI_CONNECTION_LIST (g_object_get_data (G_OBJECT (row), "list"));
-        cc_wifi_connection_list_thaw (list);
+        cc_wifi_connection_list_thaw (self->saved_networks_list);
 
         gtk_widget_set_visible (GTK_WIDGET (row), TRUE);
 }
@@ -864,7 +857,6 @@ forget_selected (NetDeviceWifi *self, CcWifiConnectionRow *row, CcWifiConnection
         adw_toast_set_button_label (self->saved_networks_undo_toast, _("_Undo"));
 
         g_object_set_data (G_OBJECT (row), "net", self);
-        g_object_set_data (G_OBJECT (row), "list", list);
 
         g_signal_connect (self->saved_networks_undo_toast, "button-clicked", G_CALLBACK (on_saved_networks_forget_undo), row);
         g_signal_connect (self->saved_networks_undo_toast, "dismissed", G_CALLBACK (really_forget), row);
