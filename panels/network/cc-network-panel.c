@@ -614,13 +614,12 @@ static void
 add_connection (CcNetworkPanel *self, NMConnection *connection)
 {
         NMSettingConnection *s_con;
-        const gchar *type, *iface;
+        const gchar *type;
 
         s_con = NM_SETTING_CONNECTION (nm_connection_get_setting (connection,
                                                                   NM_TYPE_SETTING_CONNECTION));
         type = nm_setting_connection_get_connection_type (s_con);
-        iface = nm_connection_get_interface_name (connection);
-        if (g_strcmp0 (type, "vpn") != 0 && iface == NULL)
+        if (g_strcmp0 (type, "vpn") != 0 && g_strcmp0 (type, "wireguard") != 0)
                 return;
 
         /* Don't add the libvirtd bridge to the UI */
@@ -630,8 +629,7 @@ add_connection (CcNetworkPanel *self, NMConnection *connection)
         g_debug ("add %s/%s remote connection: %s",
                  type, g_type_name_from_instance ((GTypeInstance*)connection),
                  nm_connection_get_path (connection));
-        if (!iface || g_strcmp0 (type, "wireguard") == 0)
-                panel_add_vpn_device (self, connection);
+        panel_add_vpn_device (self, connection);
 }
 
 static void
