@@ -287,6 +287,8 @@ language_chooser_response (CcUserPage        *self,
 
     language_name = gnome_get_language_from_locale (selected_language, NULL);
     cc_list_row_set_secondary_label (self->language_row, language_name);
+
+    gtk_window_close (GTK_WINDOW (chooser));
 }
 
 static void
