@@ -24,7 +24,7 @@
 
 struct _CcQrCodeDialog
 {
-  GtkWindow     parent_instance;
+  AdwWindow     parent_instance;
   NMConnection *connection;
   GtkWidget    *qr_image;
   GtkWidget    *qr_subtitle;
@@ -37,7 +37,7 @@ enum
   PROP_LAST
 };
 
-G_DEFINE_TYPE (CcQrCodeDialog, cc_qr_code_dialog, GTK_TYPE_WINDOW)
+G_DEFINE_TYPE (CcQrCodeDialog, cc_qr_code_dialog, ADW_TYPE_WINDOW)
 
 static GParamSpec *props[PROP_LAST];
 

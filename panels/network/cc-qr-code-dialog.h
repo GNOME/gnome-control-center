@@ -25,7 +25,7 @@ G_BEGIN_DECLS
 typedef struct _CcQrCodeDialog CcQrCodeDialog;
 
 #define CC_TYPE_QR_CODE_DIALOG (cc_qr_code_dialog_get_type ())
-G_DECLARE_FINAL_TYPE (CcQrCodeDialog, cc_qr_code_dialog, CC, QR_CODE_DIALOG, GtkWindow)
+G_DECLARE_FINAL_TYPE (CcQrCodeDialog, cc_qr_code_dialog, CC, QR_CODE_DIALOG, AdwWindow)
 
 GtkWidget *cc_qr_code_dialog_new (NMConnection *connection);
 
