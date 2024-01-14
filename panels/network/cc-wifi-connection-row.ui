@@ -57,11 +57,8 @@
             <property name="icon_name">qr-code-symbolic</property>
             <property name="halign">center</property>
             <property name="valign">center</property>
-            <property name="tooltip-text" translatable="yes">Show QR Code</property>
+            <property name="tooltip-text" translatable="yes">Share Network</property>
             <signal name="clicked" handler="qr_code_clicked_cb" object="CcWifiConnectionRow" swapped="yes"/>
-            <accessibility>
-              <relation name="labelled-by">qr_code_button</relation>
-            </accessibility>
             <style>
               <class name="flat"/>
             </style>
@@ -73,11 +70,8 @@
             <property name="icon_name">emblem-system-symbolic</property>
             <property name="halign">center</property>
             <property name="valign">center</property>
-            <property name="tooltip-text" translatable="yes">Options…</property>
+            <property name="tooltip-text" translatable="yes">Network Options</property>
             <signal name="clicked" handler="configure_clicked_cb" object="CcWifiConnectionRow" swapped="yes"/>
-            <accessibility>
-              <relation name="labelled-by">options_button</relation>
-            </accessibility>
             <style>
               <class name="flat"/>
             </style>
@@ -88,10 +82,8 @@
             <property name="icon_name">user-trash-symbolic</property>
             <property name="halign">center</property>
             <property name="valign">center</property>
+            <property name="tooltip-text" translatable="yes">Forget Network</property>
             <signal name="clicked" handler="forget_clicked_cb" object="CcWifiConnectionRow" swapped="yes"/>
-            <accessibility>
-              <property name="label" translatable="yes">Forget</property>
-            </accessibility>
             <style>
               <class name="flat"/>
             </style>
