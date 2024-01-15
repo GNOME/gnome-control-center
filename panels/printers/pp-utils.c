@@ -1213,6 +1213,7 @@ get_ipp_attributes_idle_cb (gpointer user_data)
   GIAData *data = (GIAData *) user_data;
 
   data->callback (data->result, data->user_data);
+  data->result = NULL;
 
   return FALSE;
 }
