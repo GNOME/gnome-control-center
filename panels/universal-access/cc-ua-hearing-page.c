@@ -147,13 +147,16 @@ cc_ua_hearing_page_class_init (CcUaHearingPageClass *klass)
 static void
 cc_ua_hearing_page_init (CcUaHearingPage *self)
 {
-  const char *label;
+  g_autofree gchar *sound_panel_link = NULL;
+  g_autofree gchar *label = NULL;
 
   gtk_widget_init_template (GTK_WIDGET (self));
 
-  /* '#' is a dummy target to make 'Sound' clickable */
-  /* TRANSLATORS: Don't translate  <a href='#'> and </a> */
-  label = _("System volume can be adjusted in <a href='#'>Sound</a> settings.");
+  /* Translators: This will be presented as the text of a link to the Sound panel */
+  sound_panel_link = g_strdup_printf ("<a href='#'>%s</a>", _("Sound"));
+  /* Translators: %s is a link to the Sound panel with the label "Sound" */
+  label = g_strdup_printf (_("System volume can be adjusted in %s settings"), sound_panel_link);
+
   gtk_label_set_label (self->sound_settings_label, label);
 
   self->sound_settings = g_settings_new (SOUND_SETTINGS);
