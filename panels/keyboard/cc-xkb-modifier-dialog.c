@@ -27,10 +27,10 @@ struct _CcXkbModifierDialog
 {
   AdwWindow       parent_instance;
 
-  GtkLabel       *description_label;
+  AdwPreferencesPage *xkb_modifier_page;
   GtkSwitch      *enabled_switch;
   GtkListBox     *listbox;
-  GtkListBox     *switch_listbox;
+  AdwPreferencesGroup *switch_group;
   AdwActionRow   *switch_row;
 
   GSettings      *input_source_settings;
@@ -231,10 +231,10 @@ cc_xkb_modifier_dialog_class_init (CcXkbModifierDialogClass *klass)
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/keyboard/cc-xkb-modifier-dialog.ui");
 
-  gtk_widget_class_bind_template_child (widget_class, CcXkbModifierDialog, description_label);
+  gtk_widget_class_bind_template_child (widget_class, CcXkbModifierDialog, xkb_modifier_page);
   gtk_widget_class_bind_template_child (widget_class, CcXkbModifierDialog, enabled_switch);
   gtk_widget_class_bind_template_child (widget_class, CcXkbModifierDialog, listbox);
-  gtk_widget_class_bind_template_child (widget_class, CcXkbModifierDialog, switch_listbox);
+  gtk_widget_class_bind_template_child (widget_class, CcXkbModifierDialog, switch_group);
   gtk_widget_class_bind_template_child (widget_class, CcXkbModifierDialog, switch_row);
 
   gtk_widget_class_bind_template_callback (widget_class, enable_switch_changed_cb);
@@ -309,8 +309,8 @@ cc_xkb_modifier_dialog_new (GSettings *input_settings,
   self->modifier = modifier;
   gtk_window_set_title (GTK_WINDOW (self), gettext (modifier->title));
   adw_preferences_row_set_title (ADW_PREFERENCES_ROW (self->switch_row), gettext (modifier->title));
-  gtk_label_set_markup (self->description_label, gettext (modifier->description));
-  gtk_widget_set_visible (GTK_WIDGET (self->switch_listbox), modifier->default_option == NULL);
+  adw_preferences_page_set_description (self->xkb_modifier_page, gettext (modifier->description));
+  gtk_widget_set_visible (GTK_WIDGET (self->switch_group), modifier->default_option == NULL);
   add_radio_buttons (self);
   update_active_radio (self);
   gtk_widget_set_sensitive (GTK_WIDGET (self->listbox), gtk_switch_get_state (self->enabled_switch));
