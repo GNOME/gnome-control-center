@@ -31,11 +31,11 @@ struct _CcUsagePage
 
   GSettings  *privacy_settings;
 
-  GtkSwitch   *recently_used_switch;
+  AdwSwitchRow *recently_used_row;
   AdwComboRow *retain_history_combo;
 
-  GtkSwitch   *purge_trash_switch;
-  GtkSwitch   *purge_temp_switch;
+  AdwSwitchRow   *purge_trash_row;
+  AdwSwitchRow   *purge_temp_row;
   AdwComboRow *purge_after_combo;
   GtkButton   *purge_temp_button;
   GtkButton   *purge_trash_button;
@@ -296,7 +296,7 @@ cc_usage_page_init (CcUsagePage *self)
 
   g_settings_bind (self->privacy_settings,
                    "remember-recent-files",
-                   self->recently_used_switch,
+                   self->recently_used_row,
                    "active",
                    G_SETTINGS_BIND_DEFAULT);
 
@@ -309,11 +309,11 @@ cc_usage_page_init (CcUsagePage *self)
                    G_SETTINGS_BIND_GET);
 
   g_settings_bind (self->privacy_settings, "remove-old-trash-files",
-                   self->purge_trash_switch, "active",
+                   self->purge_trash_row, "active",
                    G_SETTINGS_BIND_DEFAULT);
 
   g_settings_bind (self->privacy_settings, "remove-old-temp-files",
-                   self->purge_temp_switch, "active",
+                   self->purge_temp_row, "active",
                    G_SETTINGS_BIND_DEFAULT);
 
   set_purge_after_value_for_combo (self->purge_after_combo, self);
@@ -361,11 +361,11 @@ cc_usage_page_class_init (CcUsagePageClass *klass)
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/privacy/cc-usage-page.ui");
 
   gtk_widget_class_bind_template_child (widget_class, CcUsagePage, purge_after_combo);
-  gtk_widget_class_bind_template_child (widget_class, CcUsagePage, purge_temp_switch);
+  gtk_widget_class_bind_template_child (widget_class, CcUsagePage, purge_temp_row);
   gtk_widget_class_bind_template_child (widget_class, CcUsagePage, purge_trash_button);
-  gtk_widget_class_bind_template_child (widget_class, CcUsagePage, purge_trash_switch);
+  gtk_widget_class_bind_template_child (widget_class, CcUsagePage, purge_trash_row);
   gtk_widget_class_bind_template_child (widget_class, CcUsagePage, purge_temp_button);
-  gtk_widget_class_bind_template_child (widget_class, CcUsagePage, recently_used_switch);
+  gtk_widget_class_bind_template_child (widget_class, CcUsagePage, recently_used_row);
   gtk_widget_class_bind_template_child (widget_class, CcUsagePage, retain_history_combo);
 
   gtk_widget_class_bind_template_callback (widget_class, clear_recent);
