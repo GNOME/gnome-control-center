@@ -17,31 +17,18 @@
                   <object class="AdwPreferencesGroup">
 
                     <child>
-                      <object class="AdwActionRow">
+                      <object class="AdwSwitchRow" id="remote_desktop_row">
                         <property name="title" translatable="yes">Remote _Desktop</property>
                         <property name="use-underline">True</property>
                         <property name="subtitle" translatable="yes">Enable or disable remote desktop connections to this computer.</property>
-                        <property name="activatable_widget">remote_desktop_switch</property>
-                        <child type="suffix">
-                          <object class="GtkSwitch" id="remote_desktop_switch">
-                            <property name="active">False</property>
-                            <property name="valign">center</property>
-                          </object>
-                        </child>
                       </object>
                     </child>
 
                     <child>
-                      <object class="AdwActionRow">
+                      <object class="AdwSwitchRow" id="remote_control_row">
                         <property name="title" translatable="yes">Remote _Control</property>
                         <property name="use-underline">True</property>
                         <property name="subtitle" translatable="yes">Allows remote connections to control the screen.</property>
-                        <property name="activatable_widget">remote_control_switch</property>
-                        <child type="suffix">
-                          <object class="GtkSwitch" id="remote_control_switch">
-                            <property name="valign">center</property>
-                          </object>
-                        </child>
                       </object>
                     </child>
                   </object>

@@ -58,13 +58,13 @@ struct _CcRemoteDesktopPage {
   AdwNavigationPage parent_instance;
 
   AdwPreferencesPage *remote_desktop_page;
-  GtkWidget *remote_control_switch;
+  AdwSwitchRow *remote_control_row;
   GtkWidget *remote_desktop_toast_overlay;
   GtkWidget *remote_desktop_password_entry;
   GtkWidget *remote_desktop_username_entry;
   GtkWidget *remote_desktop_device_name_label;
   GtkWidget *remote_desktop_address_label;
-  GtkWidget *remote_desktop_switch;
+  AdwSwitchRow *remote_desktop_row;
   GtkWidget *remote_desktop_verify_encryption;
   GtkWidget *remote_desktop_fingerprint_dialog;
   GtkWidget *remote_desktop_fingerprint_left;
@@ -467,7 +467,7 @@ enable_gnome_remote_desktop (CcRemoteDesktopPage *self)
 static void
 on_remote_desktop_active_changed (CcRemoteDesktopPage *self)
 {
-  if (gtk_switch_get_active (GTK_SWITCH (self->remote_desktop_switch)))
+  if (adw_switch_row_get_active (self->remote_desktop_row))
     enable_gnome_remote_desktop (self);
   else
     disable_gnome_remote_desktop_service (self);
@@ -584,16 +584,16 @@ cc_remote_desktop_page_setup_remote_desktop_dialog (CcRemoteDesktopPage *self)
 
   g_settings_bind (rdp_settings,
                    "enable",
-                   self->remote_desktop_switch,
+                   self->remote_desktop_row,
                    "active",
                    G_SETTINGS_BIND_DEFAULT);
   g_settings_bind (rdp_settings,
                    "view-only",
-                   self->remote_control_switch,
+                   self->remote_control_row,
                    "active",
                    G_SETTINGS_BIND_DEFAULT | G_SETTINGS_BIND_INVERT_BOOLEAN);
-  g_object_bind_property (self->remote_desktop_switch, "active",
-                          self->remote_control_switch, "sensitive",
+  g_object_bind_property (self->remote_desktop_row, "active",
+                          self->remote_control_row, "sensitive",
                           G_BINDING_SYNC_CREATE);
 
   hostname = get_hostname ();
@@ -635,10 +635,10 @@ cc_remote_desktop_page_setup_remote_desktop_dialog (CcRemoteDesktopPage *self)
 
   if (is_remote_desktop_enabled (self))
     {
-      gtk_switch_set_active (GTK_SWITCH (self->remote_desktop_switch),
+      adw_switch_row_set_active (self->remote_desktop_row,
                              TRUE);
     }
-  g_signal_connect_object (self->remote_desktop_switch, "notify::active",
+  g_signal_connect_object (self->remote_desktop_row, "notify::active",
                            G_CALLBACK (on_remote_desktop_active_changed), self,
                            G_CONNECT_SWAPPED);
   on_remote_desktop_active_changed (self);
@@ -727,8 +727,8 @@ cc_remote_desktop_page_class_init (CcRemoteDesktopPageClass * klass)
 
   gtk_widget_class_bind_template_child (widget_class, CcRemoteDesktopPage, remote_desktop_page);
   gtk_widget_class_bind_template_child (widget_class, CcRemoteDesktopPage, remote_desktop_toast_overlay);
-  gtk_widget_class_bind_template_child (widget_class, CcRemoteDesktopPage, remote_desktop_switch);
-  gtk_widget_class_bind_template_child (widget_class, CcRemoteDesktopPage, remote_control_switch);
+  gtk_widget_class_bind_template_child (widget_class, CcRemoteDesktopPage, remote_desktop_row);
+  gtk_widget_class_bind_template_child (widget_class, CcRemoteDesktopPage, remote_control_row);
   gtk_widget_class_bind_template_child (widget_class, CcRemoteDesktopPage, remote_desktop_username_entry);
   gtk_widget_class_bind_template_child (widget_class, CcRemoteDesktopPage, remote_desktop_password_entry);
   gtk_widget_class_bind_template_child (widget_class, CcRemoteDesktopPage, remote_desktop_device_name_label);
@@ -755,7 +755,7 @@ cc_remote_desktop_page_init (CcRemoteDesktopPage *self)
 
   gtk_widget_init_template (GTK_WIDGET (self));
 
-  gtk_switch_set_active (GTK_SWITCH (self->remote_desktop_switch),
+  adw_switch_row_set_active (self->remote_desktop_row,
                          is_remote_desktop_enabled (self));
 
   self->cancellable = g_cancellable_new ();
