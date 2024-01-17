@@ -791,10 +791,10 @@ add_static_permission_row (CcApplicationsPanel *self,
 {
   GtkWidget *row;
 
-  row = g_object_new (CC_TYPE_INFO_ROW,
-                      "title", title,
-                      "info", subtitle,
-                      NULL);
+  row = adw_action_row_new ();
+  adw_preferences_row_set_title (ADW_PREFERENCES_ROW (row), title);
+  adw_action_row_set_subtitle (ADW_ACTION_ROW (row), subtitle);
+  gtk_widget_add_css_class (row, "property");
   gtk_list_box_append (self->builtin_list, row);
 
   return 1;
