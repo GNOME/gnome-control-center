@@ -30,7 +30,7 @@ struct _CcDiagnosticsPage
   AdwNavigationPage    parent_instance;
 
   AdwPreferencesGroup *diagnostics_group;
-  GtkSwitch           *abrt_switch;
+  AdwSwitchRow        *abrt_row;
 
   GSettings           *privacy_settings;
 };
@@ -83,7 +83,7 @@ cc_diagnostics_page_class_init (CcDiagnosticsPageClass *klass)
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/privacy/cc-diagnostics-page.ui");
 
   gtk_widget_class_bind_template_child (widget_class, CcDiagnosticsPage, diagnostics_group);
-  gtk_widget_class_bind_template_child (widget_class, CcDiagnosticsPage, abrt_switch);
+  gtk_widget_class_bind_template_child (widget_class, CcDiagnosticsPage, abrt_row);
 }
 
 static void
@@ -109,7 +109,7 @@ cc_diagnostics_page_init (CcDiagnosticsPage *self)
   self->privacy_settings = g_settings_new ("org.gnome.desktop.privacy");
 
   g_settings_bind (self->privacy_settings, "report-technical-problems",
-                   self->abrt_switch, "active",
+                   self->abrt_row, "active",
                    G_SETTINGS_BIND_DEFAULT);
 
   os_name = g_get_os_info (G_OS_INFO_KEY_NAME);
