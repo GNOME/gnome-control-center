@@ -170,16 +170,10 @@
             <child>
               <object class="AdwPreferencesGroup">
                 <child>
-                  <object class="AdwActionRow" id="auto_timezone_row">
+                  <object class="AdwSwitchRow" id="auto_timezone_row">
                     <property name="title" translatable="yes">Automatic Time _Zone</property>
                     <property name="subtitle" translatable="yes">Requires location services enabled and internet access</property>
                     <property name="use_underline">True</property>
-                    <property name="activatable_widget">auto_timezone_switch</property>
-                    <child>
-                      <object class="GtkSwitch" id="auto_timezone_switch">
-                        <property name="valign">center</property>
-                      </object>
-                    </child>
                   </object>
                 </child>
                 <child>
@@ -244,52 +238,28 @@
                 <property name="title" translatable="yes">Clock &amp;amp; Calendar</property>
                 <property name="description" translatable="yes">Control how the time and date is shown in the top bar</property>
                 <child>
-                  <object class="AdwActionRow">
+                  <object class="AdwSwitchRow" id="weekday_row">
                     <property name="title" translatable="yes">_Week Day</property>
                     <property name="use_underline">True</property>
-                    <property name="activatable_widget">weekday_switch</property>
-                    <child>
-                      <object class="GtkSwitch" id="weekday_switch">
-                        <property name="valign">center</property>
-                      </object>
-                    </child>
                   </object>
                 </child>
                 <child>
-                  <object class="AdwActionRow">
+                  <object class="AdwSwitchRow" id="date_row">
                     <property name="title" translatable="yes">D_ate</property>
                     <property name="use_underline">True</property>
-                    <property name="activatable_widget">date_switch</property>
-                    <child>
-                      <object class="GtkSwitch" id="date_switch">
-                        <property name="valign">center</property>
-                      </object>
-                    </child>
                   </object>
                 </child>
                 <child>
-                  <object class="AdwActionRow">
+                  <object class="AdwSwitchRow" id="seconds_row">
                     <property name="title" translatable="yes">_Seconds</property>
                     <property name="use_underline">True</property>
-                    <property name="activatable_widget">seconds_switch</property>
-                    <child>
-                      <object class="GtkSwitch" id="seconds_switch">
-                        <property name="valign">center</property>
-                      </object>
-                    </child>
                   </object>
                 </child>
                 <child>
-                  <object class="AdwActionRow">
+                  <object class="AdwSwitchRow" id="week_numbers_row">
                     <property name="title" translatable="yes">Week _Numbers</property>
                     <property name="subtitle" translatable="yes">Shown in the dropdown calendar</property>
                     <property name="use_underline">True</property>
-                    <property name="activatable_widget">week_numbers_switch</property>
-                    <child>
-                      <object class="GtkSwitch" id="week_numbers_switch">
-                        <property name="valign">center</property>
-                      </object>
-                    </child>
                   </object>
                 </child>
               </object>

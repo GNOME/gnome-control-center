@@ -84,8 +84,7 @@ struct _CcDateTimePage
   GSettings *filechooser_settings;
   GDesktopClockFormat clock_format;
   AdwActionRow *auto_datetime_row;
-  AdwActionRow *auto_timezone_row;
-  GtkSwitch *auto_timezone_switch;
+  AdwSwitchRow *auto_timezone_row;
   AdwActionRow *datetime_row;
   GtkWindow *datetime_dialog;
   GtkLabel *datetime_label;
@@ -93,11 +92,10 @@ struct _CcDateTimePage
   GtkToggleButton *twentyfour_format_button;
   GtkToggleButton *ampm_format_button;
   GtkSpinButton *h_spinbutton;
-  GtkWidget *weekday_row;
-  GtkWidget *weekday_switch;
-  GtkWidget *date_switch;
-  GtkWidget *seconds_switch;
-  GtkWidget *week_numbers_switch;
+  AdwSwitchRow *weekday_row;
+  AdwSwitchRow *date_row;
+  AdwSwitchRow *seconds_row;
+  AdwSwitchRow *week_numbers_row;
   GtkLockButton *lock_button;
   GtkListBox *date_box;
   GtkSingleSelection *month_model;
@@ -531,7 +529,7 @@ on_permission_changed (CcDateTimePage *self)
   location_allowed = g_settings_get_boolean (self->location_settings, LOCATION_ENABLED);
   tz_allowed = (self->tz_permission != NULL && g_permission_get_allowed (self->tz_permission));
   using_ntp = gtk_switch_get_active (self->network_time_switch);
-  auto_timezone = gtk_switch_get_active (self->auto_timezone_switch);
+  auto_timezone = adw_switch_row_get_active (self->auto_timezone_row);
 
   /* All the widgets but the lock button and the 24h setting */
   gtk_widget_set_sensitive (GTK_WIDGET (self->auto_datetime_row), allowed);
@@ -812,7 +810,7 @@ cc_date_time_page_class_init (CcDateTimePageClass *klass)
 
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePage, auto_datetime_row);
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePage, auto_timezone_row);
-  gtk_widget_class_bind_template_child (widget_class, CcDateTimePage, auto_timezone_switch);
+  gtk_widget_class_bind_template_child (widget_class, CcDateTimePage, auto_timezone_row);
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePage, date_box);
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePage, datetime_row);
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePage, datetime_dialog);
@@ -820,10 +818,10 @@ cc_date_time_page_class_init (CcDateTimePageClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePage, day_spin_row);
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePage, twentyfour_format_button);
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePage, ampm_format_button);
-  gtk_widget_class_bind_template_child (widget_class, CcDateTimePage, weekday_switch);
-  gtk_widget_class_bind_template_child (widget_class, CcDateTimePage, date_switch);
-  gtk_widget_class_bind_template_child (widget_class, CcDateTimePage, seconds_switch);
-  gtk_widget_class_bind_template_child (widget_class, CcDateTimePage, week_numbers_switch);
+  gtk_widget_class_bind_template_child (widget_class, CcDateTimePage, weekday_row);
+  gtk_widget_class_bind_template_child (widget_class, CcDateTimePage, date_row);
+  gtk_widget_class_bind_template_child (widget_class, CcDateTimePage, seconds_row);
+  gtk_widget_class_bind_template_child (widget_class, CcDateTimePage, week_numbers_row);
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePage, lock_button);
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePage, month_model);
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePage, month_popover);
@@ -913,7 +911,7 @@ cc_date_time_page_init (CcDateTimePage *self)
   gtk_widget_set_visible (GTK_WIDGET (self->auto_datetime_row), is_ntp_available (self));
 
   /* Timezone settings */
-  g_object_bind_property_full (self->auto_timezone_switch, "active",
+  g_object_bind_property_full (self->auto_timezone_row, "active",
                                self->timezone_row, "sensitive",
                                G_BINDING_SYNC_CREATE,
                                (GBindingTransformFunc) tz_switch_to_row_transform_func,
@@ -921,7 +919,7 @@ cc_date_time_page_init (CcDateTimePage *self)
 
   self->datetime_settings = g_settings_new (DATETIME_SCHEMA);
   g_settings_bind (self->datetime_settings, AUTO_TIMEZONE_KEY,
-                   self->auto_timezone_switch, "active",
+                   self->auto_timezone_row, "active",
                    G_SETTINGS_BIND_DEFAULT);
 
   /* Clock settings */
@@ -937,22 +935,22 @@ cc_date_time_page_init (CcDateTimePage *self)
 
   /* setup top bar clock setting switches */
   g_settings_bind (self->clock_settings, CLOCK_SHOW_WEEKDAY_KEY,
-                   self->weekday_switch, "active",
+                   self->weekday_row, "active",
                    G_SETTINGS_BIND_DEFAULT);
 
   g_settings_bind (self->clock_settings, CLOCK_SHOW_DATE_KEY,
-                   self->date_switch, "active",
+                   self->date_row, "active",
                    G_SETTINGS_BIND_DEFAULT);
 
   g_settings_bind (self->clock_settings, CLOCK_SHOW_SECONDS_KEY,
-                   self->seconds_switch, "active",
+                   self->seconds_row, "active",
                    G_SETTINGS_BIND_DEFAULT);
 
   /* Calendar settings */
   self->calendar_settings = g_settings_new (CALENDAR_SCHEMA);
 
   g_settings_bind (self->calendar_settings, CALENDAR_SHOW_WEEK_NUMBERS_KEY,
-                   self->week_numbers_switch, "active",
+                   self->week_numbers_row, "active",
                    G_SETTINGS_BIND_DEFAULT);
 
   update_time (self);
