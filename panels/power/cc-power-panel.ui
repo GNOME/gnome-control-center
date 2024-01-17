@@ -26,6 +26,43 @@
               </object>
             </child>
             <child>
+              <object class="AdwPreferencesGroup" id="battery_charging_section">
+                <property name="title" translatable="yes">Battery Charging</property>
+
+                <!-- Maximize Charge -->
+                <child>
+                  <object class="AdwActionRow">
+                    <property name="activatable-widget">maximize_charge_radio</property>
+                    <property name="title" translatable="yes">_Maximize Charge</property>
+                    <property name="subtitle" translatable="yes">Uses all battery capacity. Degrades batteries more quickly.</property>
+                    <property name="use_underline">True</property>
+                    <child type="prefix">
+                      <object class="GtkCheckButton" id="maximize_charge_radio">
+                        <property name="valign">center</property>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+
+                <!-- Preserve Battery Health -->
+                <child>
+                  <object class="AdwActionRow">
+                    <property name="activatable-widget">preserve_battery_radio</property>
+                    <property name="title" translatable="yes">Preserve Battery _Health</property>
+                    <property name="subtitle" translatable="yes">Increases battery longevity by maintaining lower charge levels</property>
+                    <property name="use_underline">True</property>
+                    <child type="prefix">
+                      <object class="GtkCheckButton" id="preserve_battery_radio">
+                        <property name="valign">center</property>
+                        <property name="group">maximize_charge_radio</property>
+                        <signal name="notify::active" handler="battery_health_radio_changed_cb" object="CcPowerPanel" swapped="yes"/>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <child>
               <object class="AdwPreferencesGroup" id="device_section">
                 <property name="title" translatable="yes">Connected Devices</property>
                 <child>

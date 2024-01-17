@@ -43,6 +43,7 @@ struct _CcPowerPanel
   AdwSwitchRow      *als_row;
   AdwDialog         *automatic_suspend_dialog;
   CcListRow         *automatic_suspend_row;
+  AdwPreferencesGroup *battery_charging_section;
   GtkListBox        *battery_listbox;
   AdwSwitchRow      *battery_percentage_row;
   AdwPreferencesGroup *battery_section;
@@ -51,6 +52,8 @@ struct _CcPowerPanel
   AdwPreferencesGroup *device_section;
   AdwSwitchRow      *dim_screen_row;
   AdwPreferencesGroup *general_section;
+  GtkCheckButton    *maximize_charge_radio;
+  GtkCheckButton    *preserve_battery_radio;
   CcNumberRow       *power_button_row;
   GtkListBox        *power_profile_listbox;
   GtkListBox        *power_profile_info_listbox;
@@ -135,20 +138,83 @@ update_power_saver_low_battery_row_visibility (CcPowerPanel *self)
 }
 
 static void
+battery_health_radio_changed_cb (CcPowerPanel *self)
+{
+  guint i;
+  g_autoptr (GDBusConnection) connection = NULL;
+  g_autoptr (GVariant) variant = NULL;
+  g_autoptr (GError) error = NULL;
+  gboolean enabled;
+
+  enabled = gtk_check_button_get_active (GTK_CHECK_BUTTON (self->preserve_battery_radio));
+  g_debug ("Setting preserve battery health enabled %s", enabled ? "on" : "off");
+
+  connection = g_bus_get_sync (G_BUS_TYPE_SYSTEM,
+                               cc_panel_get_cancellable (CC_PANEL (self)),
+                               &error);
+  if (!connection)
+    {
+      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+        g_warning ("system bus not available: %s", error->message);
+      return;
+    }
+
+  for (i = 0; self->devices != NULL && i < self->devices->len; i++)
+    {
+      UpDevice *device = (UpDevice*) g_ptr_array_index (self->devices, i);
+      UpDeviceKind kind;
+      gboolean is_power_supply = FALSE;
+      gboolean is_charge_threshold_supported = FALSE;
+      gboolean is_charge_threshold_enabled = FALSE;
+      g_object_get (device,
+                    "kind", &kind,
+                    "power-supply", &is_power_supply,
+                    "charge-threshold-supported", &is_charge_threshold_supported,
+                    "charge-threshold-enabled", &is_charge_threshold_enabled,
+                    NULL);
+      if (kind == UP_DEVICE_KIND_BATTERY && is_power_supply && is_charge_threshold_supported)
+        {
+          g_debug ("%s charge limit for %s", enabled ? "Enable": "Disable", up_device_get_object_path (device));
+          variant = g_dbus_connection_call_sync (connection,
+                                                 "org.freedesktop.UPower",
+                                                 up_device_get_object_path (device),
+                                                 "org.freedesktop.UPower.Device",
+                                                 "EnableChargeThreshold",
+                                                 g_variant_new ("(b)", enabled),
+                                                 NULL,
+                                                 G_DBUS_CALL_FLAGS_NONE,
+                                                 -1,
+                                                 NULL,
+                                                 &error);
+          if (!variant)
+            {
+              if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+                g_debug ("Failed to call %s(): %s", "EnableChargeThreshold", error->message);
+            }
+        }
+    }
+}
+
+static void
 up_client_changed (CcPowerPanel *self)
 {
   gint i;
   UpDeviceKind kind;
   guint n_batteries;
   gboolean on_ups;
+  gboolean charge_threshold_supported;
+  gboolean charge_threshold_enabled;
   g_autoptr(UpDevice) composite = NULL;
 
   empty_listbox (self->battery_listbox);
   gtk_widget_set_visible (GTK_WIDGET (self->battery_section), FALSE);
 
+  gtk_widget_set_visible (GTK_WIDGET (self->battery_charging_section), FALSE);
   empty_listbox (self->device_listbox);
   gtk_widget_set_visible (GTK_WIDGET (self->device_section), FALSE);
 
+  charge_threshold_supported = FALSE;
+  charge_threshold_enabled = FALSE;
   on_ups = FALSE;
   n_batteries = 0;
   composite = up_client_get_display_device (self->up_client);
@@ -166,6 +232,9 @@ up_client_changed (CcPowerPanel *self)
         {
           UpDevice *device = (UpDevice*) g_ptr_array_index (self->devices, i);
           gboolean is_power_supply = FALSE;
+          gboolean is_charge_threshold_supported = FALSE;
+          gboolean is_charge_threshold_enabled = FALSE;
+
           g_object_get (device,
                         "kind", &kind,
                         "power-supply", &is_power_supply,
@@ -179,6 +248,18 @@ up_client_changed (CcPowerPanel *self)
                   is_extra_battery = TRUE;
                   g_object_set_data (G_OBJECT (device), "is-main-battery", GINT_TO_POINTER(TRUE));
                 }
+
+                g_object_get (device,
+                              "charge-threshold-enabled", &is_charge_threshold_enabled,
+                              "charge-threshold-supported", &is_charge_threshold_supported,
+                               NULL);
+
+                /* If any of the batteries support setting charge thresholds show a switch */
+                if (is_charge_threshold_supported)
+                  charge_threshold_supported = TRUE;
+
+                if (is_charge_threshold_enabled)
+                  charge_threshold_enabled = TRUE;
             }
         }
     }
@@ -225,6 +306,19 @@ up_client_changed (CcPowerPanel *self)
         {
           add_device (self, device);
         }
+    }
+
+  if (charge_threshold_supported)
+    {
+      if (charge_threshold_enabled)
+        {
+          gtk_check_button_set_active (self->preserve_battery_radio, TRUE);
+        }
+      else
+        {
+          gtk_check_button_set_active (self->maximize_charge_radio, TRUE);
+        }
+      gtk_widget_set_visible (GTK_WIDGET (self->battery_charging_section), TRUE);
     }
 
   update_power_saver_low_battery_row_visibility (self);
@@ -1163,6 +1257,7 @@ cc_power_panel_class_init (CcPowerPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, als_row);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, automatic_suspend_dialog);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, automatic_suspend_row);
+  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, battery_charging_section);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, battery_listbox);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, battery_percentage_row);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, battery_section);
@@ -1171,6 +1266,8 @@ cc_power_panel_class_init (CcPowerPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, device_section);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, dim_screen_row);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, general_section);
+  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, maximize_charge_radio);
+  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, preserve_battery_radio);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, power_button_row);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, power_profile_listbox);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, power_profile_info_listbox);
@@ -1184,6 +1281,7 @@ cc_power_panel_class_init (CcPowerPanelClass *klass)
 
   gtk_widget_class_bind_template_callback (widget_class, als_row_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, keynav_failed_cb);
+  gtk_widget_class_bind_template_callback (widget_class, battery_health_radio_changed_cb);
 }
 
 static void
