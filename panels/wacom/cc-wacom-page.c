@@ -66,10 +66,8 @@ struct _CcWacomPage
 	GtkWidget      *tablet_display;
 	GtkWidget      *tablet_calibrate;
 	GtkWidget      *tablet_map_buttons;
-	GtkWidget      *tablet_mode;
-	GtkWidget      *tablet_mode_switch;
-	GtkWidget      *tablet_left_handed;
-	GtkWidget      *tablet_left_handed_switch;
+	AdwSwitchRow   *tablet_mode_row;
+	AdwSwitchRow   *tablet_left_handed_row;
 	GtkWidget      *tablet_aspect_ratio;
 	GtkWidget      *tablet_aspect_ratio_switch;
 	GtkWidget      *display_section;
@@ -580,10 +578,8 @@ cc_wacom_page_class_init (CcWacomPageClass *klass)
 	gtk_widget_class_bind_template_child (widget_class, CcWacomPage, tablet_display);
 	gtk_widget_class_bind_template_child (widget_class, CcWacomPage, tablet_calibrate);
 	gtk_widget_class_bind_template_child (widget_class, CcWacomPage, tablet_map_buttons);
-	gtk_widget_class_bind_template_child (widget_class, CcWacomPage, tablet_mode);
-	gtk_widget_class_bind_template_child (widget_class, CcWacomPage, tablet_mode_switch);
-	gtk_widget_class_bind_template_child (widget_class, CcWacomPage, tablet_left_handed);
-	gtk_widget_class_bind_template_child (widget_class, CcWacomPage, tablet_left_handed_switch);
+	gtk_widget_class_bind_template_child (widget_class, CcWacomPage, tablet_mode_row);
+	gtk_widget_class_bind_template_child (widget_class, CcWacomPage, tablet_left_handed_row);
 	gtk_widget_class_bind_template_child (widget_class, CcWacomPage, tablet_aspect_ratio);
 	gtk_widget_class_bind_template_child (widget_class, CcWacomPage, tablet_aspect_ratio_switch);
 	gtk_widget_class_bind_template_child (widget_class, CcWacomPage, display_section);
@@ -793,7 +789,7 @@ cc_wacom_page_new (CcWacomPanel  *panel,
 	page->panel = panel;
 	page->stylus = stylus;
 
-	gtk_widget_set_visible (page->tablet_left_handed,
+	gtk_widget_set_visible (GTK_WIDGET (page->tablet_left_handed_row),
 				get_layout_type (stylus) == LAYOUT_REVERSIBLE);
 	gtk_widget_set_visible (page->tablet_calibrate,
 				get_layout_type (stylus) == LAYOUT_SCREEN);
@@ -808,7 +804,7 @@ cc_wacom_page_new (CcWacomPanel  *panel,
 					       cc_wacom_device_get_description (stylus));
 
 	g_settings_bind_with_mapping (page->wacom_settings, "mapping",
-				      page->tablet_mode_switch, "active",
+				      page->tablet_mode_row, "active",
 				      G_SETTINGS_BIND_DEFAULT,
 				      tablet_mode_bind_get,
 				      tablet_mode_bind_set,
@@ -820,7 +816,7 @@ cc_wacom_page_new (CcWacomPanel  *panel,
 				      tablet_mode_bind_set,
 				      NULL, NULL);
 	g_settings_bind (page->wacom_settings, "left-handed",
-			 page->tablet_left_handed_switch, "active",
+			 page->tablet_left_handed_row, "active",
 			 G_SETTINGS_BIND_DEFAULT);
 	g_settings_bind (page->wacom_settings, "keep-aspect",
 			 page->tablet_aspect_ratio_switch, "active",
