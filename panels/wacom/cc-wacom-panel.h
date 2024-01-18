@@ -20,6 +20,8 @@
 
 #pragma once
 
+#include <gdesktop-enums.h>
+
 #include <shell/cc-panel.h>
 
 G_BEGIN_DECLS
@@ -38,5 +40,7 @@ void  cc_wacom_panel_set_osd_visibility (CcWacomPanel *self,
 GDBusProxy * cc_wacom_panel_get_gsd_wacom_bus_proxy (CcWacomPanel *self);
 
 GDBusProxy * cc_wacom_panel_get_input_mapping_bus_proxy (CcWacomPanel *self);
+
+const char * cc_wacom_panel_get_stylus_button_action_label (GDesktopStylusButtonAction action);
 
 G_END_DECLS

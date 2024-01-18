@@ -1,5 +1,6 @@
-/*
- * Copyright © 2011 Red Hat, Inc.
+/* cc-wacom-stylus-action-dialog.h
+ *
+ * Copyright © 2024 Red Hat, Inc.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -14,27 +15,21 @@
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
  *
- * Authors: Peter Hutterer <peter.hutterer@redhat.com>
- *          Bastien Nocera <hadess@hadess.net>
+ * SPDX-License-Identifier: GPL-2.0-or-later
  */
 
 #pragma once
 
-#include <gtk/gtk.h>
-#include "cc-wacom-panel.h"
-#include "cc-wacom-tool.h"
+#include <adwaita.h>
 
 G_BEGIN_DECLS
 
-#define CC_TYPE_WACOM_STYLUS_PAGE (cc_wacom_stylus_page_get_type ())
-G_DECLARE_FINAL_TYPE (CcWacomStylusPage, cc_wacom_stylus_page, CC, WACOM_STYLUS_PAGE, GtkBox)
+#define CC_TYPE_WACOM_STYLUS_ACTION_DIALOG (cc_wacom_stylus_action_dialog_get_type ())
 
-GtkWidget * cc_wacom_stylus_page_new (CcWacomPanel *panel,
-				      CcWacomTool  *stylus);
+G_DECLARE_FINAL_TYPE (CcWacomStylusActionDialog, cc_wacom_stylus_action_dialog, CC, WACOM_STYLUS_ACTION_DIALOG, AdwWindow)
 
-CcWacomTool * cc_wacom_stylus_page_get_tool (CcWacomStylusPage *page);
-
-void cc_wacom_stylus_page_set_highlight (CcWacomStylusPage *page,
-					 gboolean           highlight);
+GtkWidget* cc_wacom_stylus_action_dialog_new (GSettings  *settings,
+					      guint       button,
+					      const char *key);
 
 G_END_DECLS

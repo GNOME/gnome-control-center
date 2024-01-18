@@ -50,30 +50,60 @@
           </object>
         </child>
         <child>
-          <object class="AdwComboRow" id="stylus_button1_action">
-            <property name="width_request">100</property>
-            <property name="title" translatable="yes" context="display setting">Button _1</property>
-            <property name="model">button_model</property>
-            <property name="use-underline">true</property>
-            <signal name="notify::selected-item" handler="on_stylus_button1_action_selected" swapped="yes"/>
+          <object class="CcListRow" id="stylus_button1_action_row">
+            <property name="title" translatable="yes">Button _1</property>
+            <property name="activatable">True</property>
+            <signal name="activated" handler="on_stylus_button1_action_activated" object="CcWacomStylusPage" swapped="yes" />
+            <child>
+              <object class="GtkLabel" id="stylus_button1_action_label">
+                <property name="use-underline">True</property>
+                <property name="halign">end</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkImage">
+                <property name="valign">center</property>
+                <property name="icon-name">go-next-symbolic</property>
+              </object>
+            </child>
           </object>
         </child>
         <child>
-          <object class="AdwComboRow" id="stylus_button2_action">
-            <property name="width_request">100</property>
-            <property name="title" translatable="yes" context="display setting">Button _2</property>
-            <property name="model">button_model</property>
-            <property name="use-underline">true</property>
-            <signal name="notify::selected-item" handler="on_stylus_button2_action_selected" swapped="yes"/>
+          <object class="CcListRow" id="stylus_button2_action_row">
+            <property name="title" translatable="yes">Button _2</property>
+            <property name="activatable">True</property>
+            <signal name="activated" handler="on_stylus_button2_action_activated" object="CcWacomStylusPage" swapped="yes" />
+            <child>
+              <object class="GtkLabel" id="stylus_button2_action_label">
+                <property name="use-underline">True</property>
+                <property name="halign">end</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkImage">
+                <property name="valign">center</property>
+                <property name="icon-name">go-next-symbolic</property>
+              </object>
+            </child>
           </object>
         </child>
         <child>
-          <object class="AdwComboRow" id="stylus_button3_action">
-            <property name="width_request">100</property>
-            <property name="title" translatable="yes" context="display setting">Button _3</property>
-            <property name="model">button_model</property>
-            <property name="use-underline">true</property>
-            <signal name="notify::selected-item" handler="on_stylus_button3_action_selected" swapped="yes"/>
+          <object class="CcListRow" id="stylus_button3_action_row">
+            <property name="title" translatable="yes">Button _3</property>
+            <property name="activatable">True</property>
+            <signal name="activated" handler="on_stylus_button3_action_activated" object="CcWacomStylusPage" swapped="yes" />
+            <child>
+              <object class="GtkLabel" id="stylus_button3_action_label">
+                <property name="use-underline">True</property>
+                <property name="halign">end</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkImage">
+                <property name="valign">center</property>
+                <property name="icon-name">go-next-symbolic</property>
+              </object>
+            </child>
           </object>
         </child>
         <child>
@@ -132,14 +162,5 @@
       <widget name="stylus_tip_pressure_box" />
       <widget name="stylus_eraser_pressure_box" />
     </widgets>
-  </object>
-  <object class="GtkStringList" id="button_model">
-    <items>
-      <item translatable="yes">Default</item>
-      <item translatable="yes">Middle Mouse Button Click</item>
-      <item translatable="yes">Right Mouse Button Click</item>
-      <item translatable="yes">Back</item>
-      <item translatable="yes">Forward</item>
-    </items>
   </object>
 </interface>

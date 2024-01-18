@@ -2,10 +2,30 @@
 #include "config.h"
 
 #include <glib/gi18n.h>
+#include <shell/cc-panel.h>
 
+#include "cc-wacom-panel.h"
 #include "cc-wacom-page.h"
 
 #define FIXED_WIDTH 675
+
+CcShell *
+cc_panel_get_shell (CcPanel *self)
+{
+	return NULL;
+}
+
+GtkWidget *
+cc_shell_get_toplevel (CcShell *shell)
+{
+	return NULL;
+}
+
+GType
+cc_panel_get_type ()
+{
+	return 1234;
+}
 
 void
 cc_wacom_panel_switch_to_panel (CcWacomPanel *self, const char *panel)

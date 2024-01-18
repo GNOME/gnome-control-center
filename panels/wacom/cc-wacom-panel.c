@@ -349,7 +349,7 @@ add_stylus (CcWacomPanel *self,
 	if (g_hash_table_lookup (self->stylus_pages, tool))
 		return FALSE;
 
-	page = cc_wacom_stylus_page_new (tool);
+	page = cc_wacom_stylus_page_new (self, tool);
 	gtk_box_append (GTK_BOX (self->styli), page);
 	g_hash_table_insert (self->stylus_pages, tool, page);
 

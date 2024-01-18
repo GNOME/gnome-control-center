@@ -23,9 +23,12 @@
 
 #include <adwaita.h>
 #include <glib/gi18n.h>
+#include <shell/cc-panel.h>
+#include "cc-wacom-panel.h"
 #include "cc-wacom-stylus-page.h"
+#include "cc-wacom-stylus-action-dialog.h"
+#include "panels/common/cc-list-row.h"
 #include <gtk/gtk.h>
-#include <gdesktop-enums.h>
 
 #include <string.h>
 
@@ -33,11 +36,15 @@ struct _CcWacomStylusPage
 {
 	GtkBox          parent_instance;
 
+	CcWacomPanel   *panel;
 	GtkWidget      *stylus_section;
 	GtkWidget      *stylus_icon;
-	GtkWidget      *stylus_button1_action;
-	GtkWidget      *stylus_button2_action;
-	GtkWidget      *stylus_button3_action;
+	GtkWidget      *stylus_button1_action_row;
+	GtkWidget      *stylus_button2_action_row;
+	GtkWidget      *stylus_button3_action_row;
+	GtkLabel       *stylus_button1_action_label;
+	GtkLabel       *stylus_button2_action_label;
+	GtkLabel       *stylus_button3_action_label;
 	GtkWidget      *stylus_eraser_pressure;
 	GtkWidget      *stylus_tip_pressure_scale;
 	GtkWidget      *stylus_eraser_pressure_scale;
@@ -188,30 +195,36 @@ cc_wacom_stylus_page_set_property (GObject      *object,
 }
 
 static void
-on_stylus_button1_action_selected (CcWacomStylusPage *page)
+present_action_dialog (CcWacomStylusPage *page,
+		       guint		 button,
+		       const char        *key)
 {
-	gint idx;
+	GtkWindow *window;
+	GtkWidget *action_dialog;
 
-	idx = adw_combo_row_get_selected (ADW_COMBO_ROW (page->stylus_button1_action));
-	g_settings_set_enum (page->stylus_settings, "button-action", idx);
+	window = GTK_WINDOW (cc_shell_get_toplevel (cc_panel_get_shell (CC_PANEL (page->panel))));
+	action_dialog = cc_wacom_stylus_action_dialog_new (page->stylus_settings, button, key);
+
+	gtk_window_set_transient_for (GTK_WINDOW (action_dialog), window);
+	gtk_window_present (GTK_WINDOW (action_dialog));
 }
 
 static void
-on_stylus_button2_action_selected (CcWacomStylusPage *page)
+on_stylus_button1_action_activated (CcWacomStylusPage *page)
 {
-	gint idx;
-
-	idx = adw_combo_row_get_selected (ADW_COMBO_ROW (page->stylus_button2_action));
-	g_settings_set_enum (page->stylus_settings, "secondary-button-action", idx);
+	present_action_dialog (page, 1, "button-action");
 }
 
 static void
-on_stylus_button3_action_selected (CcWacomStylusPage *page)
+on_stylus_button2_action_activated (CcWacomStylusPage *page)
 {
-	gint idx;
+	present_action_dialog (page, 2, "secondary-button-action");
+}
 
-	idx = adw_combo_row_get_selected (ADW_COMBO_ROW (page->stylus_button3_action));
-	g_settings_set_enum (page->stylus_settings, "tertiary-button-action", idx);
+static void
+on_stylus_button3_action_activated (CcWacomStylusPage *page)
+{
+	present_action_dialog (page, 3, "tertiary-button-action");
 }
 
 static void
@@ -223,22 +236,27 @@ cc_wacom_stylus_page_class_init (CcWacomStylusPageClass *klass)
 	object_class->get_property = cc_wacom_stylus_page_get_property;
 	object_class->set_property = cc_wacom_stylus_page_set_property;
 
+	g_type_ensure (CC_TYPE_LIST_ROW);
+
 	gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/wacom/cc-wacom-stylus-page.ui");
 
 	gtk_widget_class_bind_template_child (widget_class, CcWacomStylusPage, stylus_section);
 	gtk_widget_class_bind_template_child (widget_class, CcWacomStylusPage, stylus_icon);
-	gtk_widget_class_bind_template_child (widget_class, CcWacomStylusPage, stylus_button1_action);
-	gtk_widget_class_bind_template_child (widget_class, CcWacomStylusPage, stylus_button2_action);
-	gtk_widget_class_bind_template_child (widget_class, CcWacomStylusPage, stylus_button3_action);
+	gtk_widget_class_bind_template_child (widget_class, CcWacomStylusPage, stylus_button1_action_row);
+	gtk_widget_class_bind_template_child (widget_class, CcWacomStylusPage, stylus_button2_action_row);
+	gtk_widget_class_bind_template_child (widget_class, CcWacomStylusPage, stylus_button3_action_row);
+	gtk_widget_class_bind_template_child (widget_class, CcWacomStylusPage, stylus_button1_action_label);
+	gtk_widget_class_bind_template_child (widget_class, CcWacomStylusPage, stylus_button2_action_label);
+	gtk_widget_class_bind_template_child (widget_class, CcWacomStylusPage, stylus_button3_action_label);
 	gtk_widget_class_bind_template_child (widget_class, CcWacomStylusPage, stylus_eraser_pressure);
 	gtk_widget_class_bind_template_child (widget_class, CcWacomStylusPage, stylus_tip_pressure_scale);
 	gtk_widget_class_bind_template_child (widget_class, CcWacomStylusPage, stylus_eraser_pressure_scale);
 	gtk_widget_class_bind_template_child (widget_class, CcWacomStylusPage, stylus_tip_pressure_adjustment);
 	gtk_widget_class_bind_template_child (widget_class, CcWacomStylusPage, stylus_eraser_pressure_adjustment);
 
-	gtk_widget_class_bind_template_callback (widget_class, on_stylus_button1_action_selected);
-	gtk_widget_class_bind_template_callback (widget_class, on_stylus_button2_action_selected);
-	gtk_widget_class_bind_template_callback (widget_class, on_stylus_button3_action_selected);
+	gtk_widget_class_bind_template_callback (widget_class, on_stylus_button1_action_activated);
+	gtk_widget_class_bind_template_callback (widget_class, on_stylus_button2_action_activated);
+	gtk_widget_class_bind_template_callback (widget_class, on_stylus_button3_action_activated);
 	gtk_widget_class_bind_template_callback (widget_class, on_tip_pressure_value_changed);
 	gtk_widget_class_bind_template_callback (widget_class, on_eraser_pressure_value_changed);
 }
@@ -270,8 +288,22 @@ set_icon_name (CcWacomStylusPage *page,
 	gtk_picture_set_resource (GTK_PICTURE (page->stylus_icon), resource);
 }
 
+static void
+on_button_action_changed (GSettings *settings,
+			  gchar *key,
+			  gpointer user_data)
+{
+	GDesktopStylusButtonAction action = g_settings_get_enum (settings, key);
+	GtkLabel *label = GTK_LABEL (user_data);
+	const char *text = cc_wacom_panel_get_stylus_button_action_label (action);
+
+	if (text)
+		gtk_label_set_label (label, text);
+}
+
 GtkWidget *
-cc_wacom_stylus_page_new (CcWacomTool *stylus)
+cc_wacom_stylus_page_new (CcWacomPanel *panel,
+			  CcWacomTool  *stylus)
 {
 	CcWacomStylusPage *page;
 	guint num_buttons;
@@ -281,6 +313,7 @@ cc_wacom_stylus_page_new (CcWacomTool *stylus)
 
 	page = g_object_new (CC_TYPE_WACOM_STYLUS_PAGE, NULL);
 
+	page->panel = panel;
 	page->stylus = stylus;
 
 	/* Stylus name */
@@ -297,26 +330,42 @@ cc_wacom_stylus_page_new (CcWacomTool *stylus)
 	has_paired_eraser = cc_wacom_tool_get_has_paired_eraser (stylus);
 
 	num_buttons = cc_wacom_tool_get_num_buttons (stylus);
-	gtk_widget_set_visible (page->stylus_button3_action,
+	gtk_widget_set_visible (page->stylus_button3_action_row,
 				num_buttons >= 3);
-	gtk_widget_set_visible (page->stylus_button2_action,
+	gtk_widget_set_visible (page->stylus_button2_action_row,
 				num_buttons >= 2);
-	gtk_widget_set_visible (page->stylus_button1_action,
+	gtk_widget_set_visible (page->stylus_button1_action_row,
 				num_buttons >= 1);
 	gtk_widget_set_visible (page->stylus_eraser_pressure,
 				has_paired_eraser);
-
-        adw_combo_row_set_selected (ADW_COMBO_ROW (page->stylus_button1_action),
-				    g_settings_get_enum (page->stylus_settings, "button-action"));
-        adw_combo_row_set_selected (ADW_COMBO_ROW (page->stylus_button2_action),
-				    g_settings_get_enum (page->stylus_settings, "secondary-button-action"));
-        adw_combo_row_set_selected (ADW_COMBO_ROW (page->stylus_button3_action),
-				    g_settings_get_enum (page->stylus_settings, "tertiary-button-action"));
 
 	set_feel_from_gsettings (page->stylus_tip_pressure_adjustment,
 				 page->stylus_settings, "pressure-curve");
 	set_feel_from_gsettings (page->stylus_eraser_pressure_adjustment,
 				 page->stylus_settings, "eraser-pressure-curve");
+
+	g_signal_connect (G_OBJECT (page->stylus_settings),
+			  "changed::button-action",
+			  G_CALLBACK (on_button_action_changed),
+			  page->stylus_button1_action_label);
+	g_signal_connect (G_OBJECT (page->stylus_settings),
+			  "changed::secondary-button-action",
+			  G_CALLBACK (on_button_action_changed),
+			  page->stylus_button2_action_label);
+	g_signal_connect (G_OBJECT (page->stylus_settings),
+			  "changed::tertiary-button-action",
+			  G_CALLBACK (on_button_action_changed),
+			  page->stylus_button3_action_label);
+
+	on_button_action_changed (page->stylus_settings,
+				  "button-action",
+				  page->stylus_button1_action_label);
+	on_button_action_changed (page->stylus_settings,
+				  "secondary-button-action",
+				  page->stylus_button2_action_label);
+	on_button_action_changed (page->stylus_settings,
+				  "tertiary-button-action",
+				  page->stylus_button3_action_label);
 
 	return GTK_WIDGET (page);
 }
@@ -335,4 +384,32 @@ cc_wacom_stylus_page_set_highlight (CcWacomStylusPage *page,
 		set_icon_name (page, cc_wacom_tool_get_icon_name (page->stylus), highlight);
 		page->highlighted = highlight;
 	}
+}
+
+const char *
+cc_wacom_panel_get_stylus_button_action_label (GDesktopStylusButtonAction action)
+{
+	const char *text = NULL;
+
+	switch (action) {
+		case G_DESKTOP_STYLUS_BUTTON_ACTION_DEFAULT:
+			text = _("Left Mousebutton Click");
+			break;
+		case G_DESKTOP_STYLUS_BUTTON_ACTION_MIDDLE:
+			text = _("Middle Mousebutton Click");
+			break;
+		case G_DESKTOP_STYLUS_BUTTON_ACTION_RIGHT:
+			text = _("Right Mousebutton Click");
+			break;
+		case G_DESKTOP_STYLUS_BUTTON_ACTION_BACK:
+			/* Translators: this is the "go back" action of a button  */
+			text = _("Back");
+			break;
+		case G_DESKTOP_STYLUS_BUTTON_ACTION_FORWARD:
+			/* Translators: this is the "go forward" action of a button  */
+			text = _("Forward");
+			break;
+	}
+
+	return text;
 }
