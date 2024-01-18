@@ -39,12 +39,15 @@ else
 endif
 application_id = 'org.gnome.Settings@0@'.format(profile)
 
+version_split = meson.project_version().split('.')
+
 # defines
 set_defines = [
   # package
   ['PACKAGE', meson.project_name()],
   ['PACKAGE_VERSION', meson.project_version()],
   ['VERSION', meson.project_version()],
+  ['MAJOR_VERSION', version_split[0]],
   ['PROFILE', get_option('profile')],
   # i18n
   ['GETTEXT_PACKAGE', control_center_gettext]

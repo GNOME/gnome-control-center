@@ -668,47 +668,6 @@ get_ram_size_dmi (void)
   return ram_total;
 }
 
-static char *
-get_gnome_version ()
-{
-  GDBusProxy *shell_proxy;
-  g_autoptr(GError) error = NULL;
-  g_autoptr(GVariant) variant = NULL;
-  const char *gnome_version = NULL;
-
-  shell_proxy = cc_object_storage_create_dbus_proxy_sync (
-      G_BUS_TYPE_SESSION,
-      G_DBUS_PROXY_FLAGS_DO_NOT_CONNECT_SIGNALS |
-      G_DBUS_PROXY_FLAGS_DO_NOT_AUTO_START,
-      "org.gnome.Shell",
-      "/org/gnome/Shell",
-      "org.gnome.Shell",
-      NULL,
-      &error);
-
-
-  if (!shell_proxy)
-    {
-      if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
-        return g_strdup (_("Not Available"));
-      g_warning ("Failed to contact gnome-shell: %s", error->message);
-    }
-
-  variant = g_dbus_proxy_get_cached_property (shell_proxy, "ShellVersion");
-  if (!variant)
-    return g_strdup (_("Not Available"));
-
-  gnome_version = g_variant_get_string (variant, NULL);
-  if (!gnome_version || *gnome_version == '\0')
-    {
-      /* translators: this is the placeholder string when the GNOME Shell
-       * version couldn't be loaded, eg. “GNOME Version: Not Available” */
-      return g_strdup (_("Not Available"));
-    }
-  else
-    return g_strdup (gnome_version);
-}
-
 static void
 system_details_window_title_print_padding (const gchar *title, GString *dst_string, gsize maxlen)
 {
@@ -741,7 +700,6 @@ on_copy_button_clicked_cb (GtkWidget              *widget,
   g_autofree char *os_type_text = NULL;
   g_autofree char *os_name_text = NULL;
   g_autofree char *os_build_text = NULL;
-  g_autofree char *gnome_version_text = NULL;
   g_autofree char *hardware_model_text = NULL;
   g_autofree char *firmware_version_text = NULL;
   g_autofree char *windowing_system_text = NULL;
@@ -834,8 +792,7 @@ on_copy_button_clicked_cb (GtkWidget              *widget,
 
   g_string_append (result_str, "- ");
   system_details_window_title_print_padding (_("**GNOME Version:**"), result_str, 0);
-  gnome_version_text = get_gnome_version ();
-  g_string_append_printf (result_str, "%s\n", gnome_version_text);
+  g_string_append_printf (result_str, "%s\n", MAJOR_VERSION);
 
   g_string_append (result_str, "- ");
   system_details_window_title_print_padding (_("**Windowing System:**"), result_str, 0);
@@ -855,14 +812,12 @@ on_copy_button_clicked_cb (GtkWidget              *widget,
 static void
 system_details_window_setup_overview (CcSystemDetailsWindow *self)
 {
-  g_autofree gchar *gnome_version = NULL;
   guint64 ram_size;
   g_autofree char *memory_text = NULL;
   g_autofree char *cpu_text = NULL;
   g_autofree char *os_type_text = NULL;
   g_autofree char *os_name_text = NULL;
   g_autofree char *os_build_text = NULL;
-  g_autofree char *gnome_version_text = NULL;
   g_autofree char *hardware_model_text = NULL;
   g_autofree char *firmware_version_text = NULL;
   g_autofree char *kernel_version_text = NULL;
@@ -904,8 +859,7 @@ system_details_window_setup_overview (CcSystemDetailsWindow *self)
   os_type_text = get_os_type ();
   cc_info_entry_set_value (self->os_type_row, os_type_text);
 
-  gnome_version_text = get_gnome_version ();
-  cc_info_entry_set_value (self->gnome_version_row, gnome_version_text);
+  cc_info_entry_set_value (self->gnome_version_row, MAJOR_VERSION);
 
   cc_info_entry_set_value (self->windowing_system_row, get_windowing_system ());
 
