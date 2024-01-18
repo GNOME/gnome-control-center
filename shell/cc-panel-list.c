@@ -354,29 +354,36 @@ static const gchar * const panel_order[] = {
   "wwan",
   "mobile-broadband",
   "bluetooth",
+
+  "separator",
+
+  "display",
+  "sound",
+  "power",
+  "multitasking",
   "background",
+
+  "separator",
+
+  "applications",
   "notifications",
   "search",
-  "multitasking",
-  "applications",
-  "privacy",
   "online-accounts",
   "sharing",
 
-  /* Devices page */
-  "sound",
-  "power",
-  "display",
+  "separator",
+
   "mouse",
   "keyboard",
+  "color",
   "printers",
   "wacom",
-  "color",
 
-  /* Details page */
-  "system",
+  "separator",
+
   "universal-access",
-  "user-accounts",
+  "privacy",
+  "system",
   "reset-settings",
 };
 
@@ -460,15 +467,13 @@ header_func (GtkListBoxRow *row,
              GtkListBoxRow *before,
              gpointer       user_data)
 {
-  RowData *row_data, *before_data;
+  guint pid;
 
   if (!before)
     return;
 
-  row_data = g_object_get_data (G_OBJECT (row), "data");
-  before_data = g_object_get_data (G_OBJECT (before), "data");
-
-  if (row_data->category != before_data->category)
+  pid = get_panel_id_index (get_panel_id_from_row (user_data, row));
+  if (g_str_equal (panel_order[pid-1], "separator"))
     {
       GtkWidget *separator;
 
