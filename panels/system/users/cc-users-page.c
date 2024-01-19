@@ -103,7 +103,7 @@ create_user_row (gpointer item, gpointer user_data)
     ActUser *user;
     GtkWidget *row, *user_image;
 
-    row = adw_action_row_new ();
+    row = g_object_new (CC_TYPE_LIST_ROW, "show-arrow", TRUE, NULL);
     gtk_list_box_row_set_activatable (GTK_LIST_BOX_ROW (row), TRUE);
 
     user = item;
