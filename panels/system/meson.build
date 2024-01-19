@@ -38,6 +38,7 @@ sources = files(
   'region/cc-region-page.c',
   'region/cc-format-chooser.c',
   'region/cc-format-preview.c',
+  'remote-desktop/cc-desktop-sharing-page.c',
   'remote-desktop/cc-gnome-remote-desktop.c',
   'remote-desktop/cc-remote-desktop-page.c',
   'remote-desktop/cc-tls-certificate.c',
