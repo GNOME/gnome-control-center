@@ -85,7 +85,8 @@
                         <property name="tooltip-text" translatable="yes">Unlock to Change This Setting</property>
                         <property name="input-purpose">name</property>
                         <property name="show-apply-button">True</property>
-                        <property name="title" translatable="yes">Name</property>
+                        <property name="title" translatable="yes">_Name</property>
+                        <property name="use-underline">True</property>
                         <signal name="apply" handler="fullname_entry_apply_cb" object="CcUserPage" swapped="yes"/>
                       </object>
                     </child>
@@ -95,7 +96,7 @@
                         <property name="has-tooltip" bind-source="CcUserPage" bind-property="editable" bind-flags="invert-boolean"/>
                         <property name="tooltip-text" translatable="yes">Unlock to Change This Setting</property>
                         <property name="activatable">True</property>
-                        <property name="title" translatable="yes">Password</property>
+                        <property name="title" translatable="yes">Pa_ssword</property>
                         <property name="use_underline">True</property>
                         <property name="show-arrow">True</property>
                         <signal name="activated" handler="change_password" object="CcUserPage" swapped="yes"/>
@@ -116,7 +117,8 @@
                     </child>
                     <child>
                       <object class="AdwSwitchRow" id="auto_login_row">
-                        <property name="title" translatable="yes">Automatic Login</property>
+                        <property name="title" translatable="yes">A_utomatic Login</property>
+                        <property name="use-underline">True</property>
                         <property name="sensitive" bind-source="CcUserPage" bind-property="locked" bind-flags="invert-boolean"/>
                         <property name="has-tooltip" bind-source="CcUserPage" bind-property="locked" bind-flags="sync-create"/>
                         <property name="tooltip-text" translatable="yes">Unlock to Change This Setting</property>
@@ -190,7 +192,8 @@
                           <object class="GtkButton" id="remove_user_button">
                             <property name="visible" bind-source="CcUserPage" bind-property="is-current-user" bind-flags="invert-boolean"/>
                             <property name="sensitive" bind-source="CcUserPage" bind-property="editable" bind-flags="sync-create"/>
-                            <property name="label" translatable="yes">Remove User</property>
+                            <property name="label" translatable="yes">_Remove User</property>
+                            <property name="use-underline">True</property>
                             <property name="halign">center</property>
                             <signal name="clicked" handler="remove_user" object="CcUserPage" swapped="yes"/>
                             <style>
