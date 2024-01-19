@@ -11,25 +11,24 @@
           <object class="AdwHeaderBar"/>
         </child>
         <property name="content">
-          <object class="AdwToastOverlay" id="remote_desktop_toast_overlay">
+          <object class="AdwToastOverlay" id="toast_overlay">
             <child>
-              <object class="AdwPreferencesPage" id="remote_desktop_page">
+              <object class="AdwPreferencesPage">
                 <child>
                   <object class="AdwPreferencesGroup">
-
                     <child>
-                      <object class="AdwSwitchRow" id="remote_desktop_row">
-                        <property name="title" translatable="yes">Remote _Desktop</property>
+                      <object class="AdwSwitchRow" id="desktop_sharing_row">
+                        <property name="title" translatable="yes">_Desktop Sharing</property>
                         <property name="use-underline">True</property>
-                        <property name="subtitle" translatable="yes">Enable or disable remote desktop connections to this computer</property>
+                        <property name="subtitle" translatable="yes">Share your screen with remote connections</property>
                       </object>
                     </child>
 
                     <child>
-                      <object class="AdwSwitchRow" id="remote_control_row">
+                      <object class="AdwSwitchRow" id="desktop_sharing_remote_control_row">
                         <property name="title" translatable="yes">Remote _Control</property>
                         <property name="use-underline">True</property>
-                        <property name="subtitle" translatable="yes">Allows remote connections to control the screen</property>
+                        <property name="subtitle" translatable="yes">Allows desktop sharing connections to control the screen</property>
                       </object>
                     </child>
                   </object>
@@ -37,19 +36,17 @@
 
                 <child>
                   <object class="AdwPreferencesGroup">
-                    <property name="title" translatable="yes">How to Connect</property>
-                    <property name="description" translatable="yes">Connect to this computer using the device name or remote desktop address</property>
-
+                    <property name="title" translatable="yes">Connection Details</property>
                     <child>
                       <object class="AdwActionRow">
-                        <property name="title" translatable="yes">D_evice Name</property>
+                        <property name="title" translatable="yes">Address</property>
                         <property name="use-underline">True</property>
                         <property name="activatable-widget">copy_device_name_button</property>
                         <child type="suffix">
                           <object class="GtkBox">
                             <property name="spacing">10</property>
                             <child>
-                              <object class="GtkLabel" id="remote_desktop_device_name_label">
+                              <object class="GtkLabel" id="desktop_sharing_address_label">
                                 <property name="selectable">True</property>
                               </object>
                             </child>
@@ -58,7 +55,7 @@
                                 <property name="tooltip-text" translatable="yes">Copy</property>
                                 <property name="valign">center</property>
                                 <property name="icon-name">edit-copy-symbolic</property>
-                                <signal name="clicked" handler="on_device_name_copy_clicked" swapped="yes"/>
+                                <signal name="clicked" handler="on_desktop_sharing_address_copy_clicked" swapped="yes"/>
                                 <accessibility>
                                   <property name="label" translatable="yes">Copy</property>
                                 </accessibility>
@@ -73,14 +70,14 @@
                     </child>
                     <child>
                       <object class="AdwActionRow">
-                        <property name="title" translatable="yes">Re_mote Desktop Address</property>
+                        <property name="title" translatable="yes">IP Address</property>
                         <property name="use-underline">True</property>
                         <property name="activatable-widget">copy_device_address_button</property>
                         <child type="suffix">
                           <object class="GtkBox">
                             <property name="spacing">10</property>
                             <child>
-                              <object class="GtkLabel" id="remote_desktop_address_label">
+                              <object class="GtkLabel" id="desktop_sharing_ip_address_label">
                                 <property name="selectable">True</property>
                               </object>
                             </child>
@@ -89,7 +86,7 @@
                                 <property name="tooltip-text" translatable="yes">Copy</property>
                                 <property name="valign">center</property>
                                 <property name="icon-name">edit-copy-symbolic</property>
-                                <signal name="clicked" handler="on_device_address_copy_clicked" swapped="yes"/>
+                                <signal name="clicked" handler="on_desktop_sharing_ip_address_copy_clicked" swapped="yes"/>
                                 <accessibility>
                                   <property name="label" translatable="yes">Copy</property>
                                 </accessibility>
@@ -107,11 +104,9 @@
 
                 <child>
                   <object class="AdwPreferencesGroup">
-                    <property name="title" translatable="yes">Authentication</property>
-                    <property name="description" translatable="yes">The user name and password are required to connect to this computer</property>
-
+                    <property name="title" translatable="yes">Login Details</property>
                     <child>
-                      <object class="AdwEntryRow" id="remote_desktop_username_entry">
+                      <object class="AdwEntryRow" id="desktop_sharing_username_entry">
                         <property name="title" translatable="yes">_User Name</property>
                         <property name="use-underline">True</property>
                         <child type="suffix">
@@ -119,7 +114,7 @@
                             <property name="tooltip-text" translatable="yes">Copy</property>
                             <property name="valign">center</property>
                             <property name="icon-name">edit-copy-symbolic</property>
-                            <signal name="clicked" handler="on_username_copy_clicked" swapped="yes"/>
+                            <signal name="clicked" handler="on_desktop_sharing_username_copy_clicked" swapped="yes"/>
                             <accessibility>
                               <property name="label" translatable="yes">Copy</property>
                             </accessibility>
@@ -132,7 +127,7 @@
                     </child>
 
                     <child>
-                      <object class="AdwPasswordEntryRow" id="remote_desktop_password_entry">
+                      <object class="AdwPasswordEntryRow" id="desktop_sharing_password_entry">
                         <property name="title" translatable="yes">_Password</property>
                         <property name="use-underline">True</property>
                         <child type="suffix">
@@ -140,7 +135,7 @@
                             <property name="tooltip-text" translatable="yes">Copy</property>
                             <property name="valign">center</property>
                             <property name="icon-name">edit-copy-symbolic</property>
-                            <signal name="clicked" handler="on_password_copy_clicked" swapped="yes"/>
+                            <signal name="clicked" handler="on_desktop_sharing_password_copy_clicked" swapped="yes"/>
                             <accessibility>
                               <property name="label" translatable="yes">Copy</property>
                             </accessibility>
@@ -153,13 +148,13 @@
                     </child>
 
                     <child>
-                      <object class="GtkButton" id="remote_desktop_verify_encryption">
+                      <object class="GtkButton" id="desktop_sharing_verify_encryption">
                         <property name="sensitive">False</property>
                         <property name="halign">center</property>
                         <property name="margin-top">24</property>
                         <property name="label" translatable="yes">_Verify Encryption</property>
                         <property name="use-underline">True</property>
-                        <signal name="clicked" handler="remote_desktop_show_encryption_fingerprint" swapped="yes"/>
+                        <signal name="clicked" handler="on_desktop_sharing_verify_encryption_button_clicked" swapped="yes"/>
                         <style>
                           <class name="pill"/>
                         </style>
