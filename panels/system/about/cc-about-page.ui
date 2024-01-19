@@ -38,7 +38,8 @@
                 <!-- Device name -->
                 <child>
                   <object class="CcHostnameEntry" id="hostname_row">
-                    <property name="title" translatable="yes">Device Name</property>
+                    <property name="title" translatable="yes">_Device Name</property>
+                    <property name="use-underline">True</property>
                   </object>
                 </child>
 
@@ -96,7 +97,7 @@
                 <child>
                   <object class="AdwActionRow">
                     <property name="activatable">True</property>
-                    <property name="title" translatable="yes">System _Details</property>
+                    <property name="title" translatable="yes">_System Details</property>
                     <property name="use-underline">True</property>
                     <signal name="activated" handler="cc_about_page_open_system_details" swapped="yes"/>
                     <child type="suffix">
