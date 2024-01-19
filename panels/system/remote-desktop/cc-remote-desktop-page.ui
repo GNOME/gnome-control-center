@@ -41,7 +41,9 @@
 
                     <child>
                       <object class="AdwActionRow">
-                        <property name="title" translatable="yes">Device Name</property>
+                        <property name="title" translatable="yes">D_evice Name</property>
+                        <property name="use-underline">True</property>
+                        <property name="activatable-widget">copy_device_name_button</property>
                         <child type="suffix">
                           <object class="GtkBox">
                             <property name="spacing">10</property>
@@ -51,7 +53,7 @@
                               </object>
                             </child>
                             <child>
-                              <object class="GtkButton">
+                              <object class="GtkButton" id="copy_device_name_button">
                                 <property name="tooltip-text" translatable="yes">Copy</property>
                                 <property name="valign">center</property>
                                 <property name="icon-name">edit-copy-symbolic</property>
@@ -70,7 +72,9 @@
                     </child>
                     <child>
                       <object class="AdwActionRow">
-                        <property name="title" translatable="yes">Remote Desktop Address</property>
+                        <property name="title" translatable="yes">Re_mote Desktop Address</property>
+                        <property name="use-underline">True</property>
+                        <property name="activatable-widget">copy_device_address_button</property>
                         <child type="suffix">
                           <object class="GtkBox">
                             <property name="spacing">10</property>
@@ -80,7 +84,7 @@
                               </object>
                             </child>
                             <child>
-                              <object class="GtkButton">
+                              <object class="GtkButton" id="copy_device_address_button">
                                 <property name="tooltip-text" translatable="yes">Copy</property>
                                 <property name="valign">center</property>
                                 <property name="icon-name">edit-copy-symbolic</property>
@@ -107,7 +111,8 @@
 
                     <child>
                       <object class="AdwEntryRow" id="remote_desktop_username_entry">
-                        <property name="title" translatable="yes">User Name</property>
+                        <property name="title" translatable="yes">_User Name</property>
+                        <property name="use-underline">True</property>
                         <child type="suffix">
                           <object class="GtkButton">
                             <property name="tooltip-text" translatable="yes">Copy</property>
@@ -127,7 +132,8 @@
 
                     <child>
                       <object class="AdwPasswordEntryRow" id="remote_desktop_password_entry">
-                        <property name="title" translatable="yes">Password</property>
+                        <property name="title" translatable="yes">_Password</property>
+                        <property name="use-underline">True</property>
                         <child type="suffix">
                           <object class="GtkButton">
                             <property name="tooltip-text" translatable="yes">Copy</property>
