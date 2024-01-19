@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <template class="CcDesktopSharingPage" parent="AdwBin">
+    <property name="visible">False</property>
+
+    <child>
+      <object class="AdwToastOverlay" id="toast_overlay">
+        <property name="child">
+          <object class="AdwPreferencesPage">
+            <child>
+              <object class="AdwPreferencesGroup">
+                <child>
+                  <object class="AdwSwitchRow" id="desktop_sharing_row">
+                    <property name="title" translatable="yes">_Desktop Sharing</property>
+                    <property name="use-underline">True</property>
+                    <property name="subtitle" translatable="yes">Share your screen with remote connections</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="AdwSwitchRow" id="remote_control_row">
+                    <property name="title" translatable="yes">Remote _Control</property>
+                    <property name="use-underline">True</property>
+                    <property name="subtitle" translatable="yes">Allows desktop sharing connections to control the screen</property>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="AdwPreferencesGroup">
+                <property name="title" translatable="yes">Connection Details</property>
+                <child>
+                  <object class="AdwActionRow">
+                    <property name="title" translatable="yes">Address</property>
+                    <child type="suffix">
+                      <object class="GtkBox">
+                        <property name="spacing">10</property>
+                        <child>
+                          <object class="GtkLabel" id="address_label">
+                            <property name="selectable">True</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkButton">
+                            <property name="tooltip-text" translatable="yes">Copy</property>
+                            <property name="valign">center</property>
+                            <property name="icon-name">edit-copy-symbolic</property>
+                            <signal name="clicked" handler="on_address_copy_clicked" swapped="yes"/>
+                            <accessibility>
+                              <property name="label" translatable="yes">Copy</property>
+                            </accessibility>
+                            <style>
+                              <class name="flat"/>
+                            </style>
+                          </object>
+                        </child>
+                     </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
+
+            <child>
+              <object class="AdwPreferencesGroup">
+                <property name="title" translatable="yes">Login Details</property>
+
+                <child>
+                  <object class="AdwEntryRow" id="username_entry">
+                    <property name="title" translatable="yes">User Name</property>
+                    <child type="suffix">
+                      <object class="GtkButton">
+                        <property name="tooltip-text" translatable="yes">Copy</property>
+                        <property name="valign">center</property>
+                        <property name="icon-name">edit-copy-symbolic</property>
+                        <signal name="clicked" handler="on_username_copy_clicked" swapped="yes"/>
+                        <accessibility>
+                          <property name="label" translatable="yes">Copy</property>
+                        </accessibility>
+                        <style>
+                          <class name="flat"/>
+                        </style>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+
+                <child>
+                  <object class="AdwPasswordEntryRow" id="password_entry">
+                    <property name="title" translatable="yes">Password</property>
+                    <child type="suffix">
+                      <object class="GtkButton">
+                        <property name="tooltip-text" translatable="yes">Copy</property>
+                        <property name="valign">center</property>
+                        <property name="icon-name">edit-copy-symbolic</property>
+                        <signal name="clicked" handler="on_password_copy_clicked" swapped="yes"/>
+                        <accessibility>
+                          <property name="label" translatable="yes">Copy</property>
+                        </accessibility>
+                        <style>
+                          <class name="flat"/>
+                        </style>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+
+                <child>
+                  <object class="GtkButton" id="verify_encryption_button">
+                    <property name="sensitive">False</property>
+                    <property name="halign">center</property>
+                    <property name="margin-top">24</property>
+                    <property name="label" translatable="yes">_Verify Encryption</property>
+                    <property name="use-underline">True</property>
+                    <signal name="clicked" handler="on_verify_encryption_button_clicked" swapped="yes"/>
+                    <style>
+                      <class name="pill"/>
+                    </style>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+        </property>
+      </object>
+    </child>
+  </template>
+
+  <object class="AdwWindow" id="fingerprint_dialog">
+    <property name="default-width">360</property>
+    <property name="default-height">360</property>
+    <property name="hide-on-close">True</property>
+    <property name="modal">True</property>
+
+    <child>
+      <object class="GtkBox">
+        <property name="orientation">vertical</property>
+        <child>
+          <object class="GtkWindowControls">
+            <property name="halign">end</property>
+            <property name="side">end</property>
+          </object>
+        </child>
+        <child>
+          <object class="AdwStatusPage">
+            <property name="title" translatable="yes">Encryption Fingerprint</property>
+            <property name="description" translatable="yes">The encryption fingerprint can be seen in connecting clients and should be identical</property>
+            <property name="vexpand">True</property>
+            <child>
+              <object class="GtkBox">
+                <property name="orientation">horizontal</property>
+                <property name="halign">center</property>
+                <style>
+                  <class name="tls-cert-verification" />
+                </style>
+                <child>
+                  <object class="GtkLabel" id="fingerprint_left_label">
+                    <style>
+                      <class name="tls-cert-fingerprint" />
+                    </style>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkLabel" id="fingerprint_right_label">
+                    <style>
+                      <class name="tls-cert-fingerprint" />
+                    </style>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+  </object>
+
+</interface>
