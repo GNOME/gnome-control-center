@@ -32,16 +32,14 @@
 
 struct _CcPowerProfileRow
 {
-  GtkListBoxRow parent_instance;
+  AdwActionRow parent_instance;
 
   GtkCheckButton *button;
-  GtkLabel       *subtitle_label;
-  GtkLabel       *title_label;
 
   CcPowerProfile power_profile;
 };
 
-G_DEFINE_TYPE (CcPowerProfileRow, cc_power_profile_row, GTK_TYPE_LIST_BOX_ROW)
+G_DEFINE_TYPE (CcPowerProfileRow, cc_power_profile_row, ADW_TYPE_ACTION_ROW)
 
 enum {
   BUTTON_TOGGLED,
@@ -64,8 +62,6 @@ cc_power_profile_row_class_init (CcPowerProfileRowClass *klass)
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/power/cc-power-profile-row.ui");
 
   gtk_widget_class_bind_template_child (widget_class, CcPowerProfileRow, button);
-  gtk_widget_class_bind_template_child (widget_class, CcPowerProfileRow, subtitle_label);
-  gtk_widget_class_bind_template_child (widget_class, CcPowerProfileRow, title_label);
 
   gtk_widget_class_bind_template_callback (widget_class, cc_power_profile_row_button_toggled_cb);
 
@@ -129,23 +125,23 @@ cc_power_profile_row_new (CcPowerProfile power_profile)
   switch (self->power_profile)
     {
       case CC_POWER_PROFILE_PERFORMANCE:
-        text = C_("Power profile", "Performance");
+        text = C_("Power profile", "P_erformance");
         subtext = _("High performance and power usage");
         break;
       case CC_POWER_PROFILE_BALANCED:
-        text = C_("Power profile", "Balanced");
+        text = C_("Power profile", "Ba_lanced");
         subtext = _("Standard performance and power usage");
         break;
       case CC_POWER_PROFILE_POWER_SAVER:
-        text = C_("Power profile", "Power Saver");
+        text = C_("Power profile", "P_ower Saver");
         subtext = _("Reduced performance and power usage");
         break;
       default:
         g_assert_not_reached ();
     }
 
-  gtk_label_set_markup (self->title_label, text);
-  gtk_label_set_markup (self->subtitle_label, subtext);
+  adw_preferences_row_set_title (ADW_PREFERENCES_ROW (self), text);
+  adw_action_row_set_subtitle (ADW_ACTION_ROW (self), subtext);
 
   return self;
 }
