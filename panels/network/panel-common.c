@@ -330,6 +330,10 @@ panel_device_status_to_localized_string (NMDevice *nm_device,
                         /* TRANSLATORS: device status */
                         state_str = _("Cable unplugged");
                 }
+        } else if (state == NM_DEVICE_STATE_DISCONNECTED &&
+                   NM_IS_DEVICE_ETHERNET (nm_device)) {
+                /* TRANSLATORS: device status */
+                state_str = _("Disabled");
         }
         if (!state_str)
                 state_str = device_state_to_localized_string (state);
