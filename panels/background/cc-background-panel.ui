@@ -52,7 +52,9 @@
                             </child>
                             <child>
                               <object class="GtkLabel" id="default_label">
-                                <property name="label" translatable="yes">Default</property>
+                                <property name="label" translatable="yes">_Default</property>
+                                <property name="use-underline">True</property>
+                                <property name="mnemonic-widget">default_toggle</property>
                                 <layout>
                                   <property name="column">0</property>
                                   <property name="row">1</property>
@@ -82,7 +84,9 @@
                             </child>
                             <child>
                               <object class="GtkLabel" id="dark_label">
-                                <property name="label" translatable="yes">Dark</property>
+                                <property name="label" translatable="yes">Da_rk</property>
+                                <property name="use-underline">True</property>
+                                <property name="mnemonic-widget">dark_toggle</property>
                                 <layout>
                                   <property name="column">1</property>
                                   <property name="row">1</property>
@@ -107,7 +111,8 @@
                     <child>
                       <object class="AdwButtonContent">
                         <property name="icon-name">list-add-symbolic</property>
-                        <property name="label" translatable="yes">Add Picture…</property>
+                        <property name="label" translatable="yes">_Add Picture…</property>
+                        <property name="use-underline">True</property>
                       </object>
                     </child>
                     <signal name="clicked" handler="on_add_picture_button_clicked_cb" object="CcBackgroundPanel" swapped="yes" />
