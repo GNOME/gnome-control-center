@@ -13,6 +13,21 @@
                 </child>
                 <property name="content">
                   <object class="AdwPreferencesPage">
+                    <child>
+                      <object class="AdwPreferencesGroup">
+                        <child>
+                          <object class="CcListRow" id="proxy_row">
+                            <property name="title" translatable="yes">Network _Proxy</property>
+                            <property name="show-arrow">True</property>
+                            <property name="icon-name">preferences-system-network-proxy-symbolic</property>
+                            <property name="subtitle" bind-source="proxy_page" bind-property="state-text" bind-flags="sync-create"/>
+                            <property name="action-name">navigation.push</property>
+                            <property name="action-target">'proxy'</property>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+
                     <!-- Each group below will contain GtkStacks from the NetDevices -->
                     <child>
                       <object class="AdwPreferencesGroup">
@@ -90,22 +105,6 @@
                       </object>
                     </child>
 
-                    <child>
-                      <object class="AdwPreferencesGroup">
-                        <!-- xxx: Added to avoid confusion with the preceding VPN row -->
-                        <property name="title" translatable="yes">Proxy</property>
-                        <child>
-                          <object class="CcListRow" id="proxy_row">
-                            <property name="title" translatable="yes">_Proxy</property>
-                            <property name="show-arrow">True</property>
-                            <property name="icon-name">preferences-system-network-proxy-symbolic</property>
-                            <property name="subtitle" bind-source="proxy_page" bind-property="state-text" bind-flags="sync-create"/>
-                            <property name="action-name">navigation.push</property>
-                            <property name="action-target">'proxy'</property>
-                          </object>
-                        </child>
-                      </object>
-                    </child>
                   </object>
                 </property>
               </object>
