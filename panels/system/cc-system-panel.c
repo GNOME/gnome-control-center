@@ -43,9 +43,40 @@ struct _CcSystemPanel
 CC_PANEL_REGISTER (CcSystemPanel, cc_system_panel)
 
 static void
+load_subpages (CcSystemPanel *self)
+{
+  guint i;
+  GType pages[] =
+  {
+    CC_TYPE_REGION_PAGE,
+    CC_TYPE_DATE_TIME_PAGE,
+    CC_TYPE_USERS_PAGE,
+    CC_TYPE_REMOTE_DESKTOP_PAGE,
+    CC_TYPE_ABOUT_PAGE,
+  };
+
+  for (i = 0; i < G_N_ELEMENTS (pages); i++)
+    {
+      adw_navigation_view_add (self->navigation,
+                               ADW_NAVIGATION_PAGE (g_object_new (pages[i], NULL)));
+    }
+}
+
+static void
+cc_system_panel_constructed (GObject *object)
+{
+  g_idle_add_once ((GSourceOnceFunc) load_subpages, object);
+
+  G_OBJECT_CLASS (cc_system_panel_parent_class)->constructed (object);
+}
+
+static void
 cc_system_panel_class_init (CcSystemPanelClass *klass)
 {
+  GObjectClass *object_class = G_OBJECT_CLASS (klass);
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
+
+  object_class->constructed = cc_system_panel_constructed;
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/system/cc-system-panel.ui");
 
