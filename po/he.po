@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center.HEAD.he\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2024-01-18 12:44+0000\n"
-"PO-Revision-Date: 2024-01-20 20:33+0200\n"
+"POT-Creation-Date: 2024-01-22 09:21+0000\n"
+"PO-Revision-Date: 2024-01-22 18:38+0200\n"
 "Last-Translator: Yosef Or Boczko <yoseforb@gmail.com>\n"
 "Language-Team: Hebrew\n"
 "Language: he\n"
@@ -28,7 +28,7 @@ msgstr ""
 #: panels/applications/cc-applications-panel.c:783
 #, c-format
 msgid "%s is not sandboxed"
-msgstr ""
+msgstr "‏היישום %s לא מבודד"
 
 #: panels/applications/cc-applications-panel.c:829
 msgid "System Bus"
@@ -157,6 +157,8 @@ msgid ""
 "App settings cannot be fully enforced for apps which are not sandboxed. "
 "These apps may use permissions which are not shown."
 msgstr ""
+"לא ניתן לאכוף באופן מלא הגדרות יישום על יישומים שאינם מבודדים. יישומים אלה "
+"עשויים להשתמש בהרשאות שלא מופיעות כאן."
 
 #: panels/applications/cc-applications-panel.ui:230
 #: panels/printers/pp-details-dialog.c:267
@@ -169,10 +171,8 @@ msgid "App _Details"
 msgstr "_פרטי יישום"
 
 #: panels/applications/cc-applications-panel.ui:260
-#, fuzzy
-#| msgid "Built-in Permissions"
 msgid "Permissions"
-msgstr "הרשאות מובנות"
+msgstr "הרשאות"
 
 #: panels/applications/cc-applications-panel.ui:263
 #: panels/applications/cc-applications-panel.ui:271
@@ -300,7 +300,7 @@ msgstr "גישה למערכת הנדרשת על ידי היישום"
 #: panels/applications/cc-applications-panel.ui:394
 #: panels/mouse/cc-mouse-panel.ui:79
 #: panels/multitasking/cc-multitasking-panel.ui:15
-#: panels/power/cc-power-panel.ui:203
+#: panels/power/cc-power-panel.ui:185
 msgid "General"
 msgstr "כללי"
 
@@ -1615,7 +1615,7 @@ msgstr[2] "‫%d שעות"
 msgstr[3] "‫%d שעות"
 
 #. Translators: Option for "Blank Screen" in "Power" panel
-#: panels/common/cc-util.c:184 panels/power/cc-power-panel.c:850
+#: panels/common/cc-util.c:184 panels/power/cc-power-panel.c:846
 #, c-format
 msgid "%d minute"
 msgid_plural "%d minutes"
@@ -1681,13 +1681,13 @@ msgstr "נקודת גישה"
 
 #: panels/display/cc-display-panel.c:510
 #: panels/notifications/cc-notifications-panel.c:212
-#: panels/power/cc-power-panel.c:738 panels/power/cc-power-panel.c:745
+#: panels/power/cc-power-panel.c:734 panels/power/cc-power-panel.c:741
 msgid "On"
 msgstr "פעיל"
 
 #: panels/display/cc-display-panel.c:512 panels/network/cc-net-proxy-page.c:182
 #: panels/notifications/cc-notifications-panel.c:212
-#: panels/power/cc-power-panel.c:732 panels/power/cc-power-panel.c:743
+#: panels/power/cc-power-panel.c:728 panels/power/cc-power-panel.c:739
 msgid "Off"
 msgstr "כבוי"
 
@@ -2539,28 +2539,24 @@ msgid "Clicking"
 msgstr "נקישה"
 
 #: panels/mouse/cc-mouse-panel.ui:242
-#, fuzzy
-#| msgid "Secondary click delay"
 msgid "Secondary Click"
-msgstr "השהיית לחיצה משנית"
+msgstr "לחיצה משנית"
 
 #: panels/mouse/cc-mouse-panel.ui:243
-#, fuzzy
-#| msgid "T_wo Finger"
 msgid "Two Finger Push"
-msgstr "_שתי אצבעות"
+msgstr "לחיצה עם שתי אצבעות"
 
 #: panels/mouse/cc-mouse-panel.ui:244
 msgid "Push anywhere with 2 fingers"
-msgstr ""
+msgstr "לחיצה עם 2 אצבעות בכל מקום"
 
 #: panels/mouse/cc-mouse-panel.ui:245
 msgid "Corner Push"
-msgstr ""
+msgstr "לחיצה בפינה"
 
 #: panels/mouse/cc-mouse-panel.ui:246
 msgid "Push with a single finger in the corner"
-msgstr ""
+msgstr "לחיצה עם אצבע אחת בפינה"
 
 #: panels/mouse/cc-mouse-panel.ui:257
 msgid "T_ap to Click"
@@ -2714,7 +2710,7 @@ msgstr ""
 #: panels/network/connection-editor/ip6-page.ui:37
 #: panels/network/connection-editor/ip6-page.ui:197
 #: panels/network/connection-editor/ip6-page.ui:255
-#: panels/wacom/cc-wacom-page.c:657
+#: panels/wacom/cc-wacom-page.c:653
 msgid "Automatic"
 msgstr "אוטומטי"
 
@@ -2967,7 +2963,7 @@ msgstr "שם הרשת"
 #: panels/network/cc-wifi-hotspot-dialog.ui:92
 #: panels/printers/new-printer-dialog.ui:302
 #: panels/printers/pp-jobs-dialog.ui:54
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:143
+#: panels/system/remote-desktop/cc-remote-desktop-page.ui:130
 #: panels/system/users/cc-add-user-dialog.ui:149
 #: panels/system/users/cc-add-user-dialog.ui:184
 #: panels/system/users/cc-add-user-dialog.ui:363
@@ -3798,10 +3794,9 @@ msgstr "שימוש אחרון"
 #. Translators: the %'d is replaced by the network device speed with
 #. * thousands separator, so do not change to %d
 #: panels/network/net-device-ethernet.c:218
-#, fuzzy, c-format
-#| msgid "%d Mb/s"
+#, c-format
 msgid "%'d Mb/s"
-msgstr "‏%d מ״ב/שנייה"
+msgstr "‏‎%'d מ״ב/שנייה"
 
 #. Translators: This is used as the title of the connection
 #. * details window for ethernet, if there is only a single
@@ -4168,34 +4163,34 @@ msgid "_Notifications"
 msgstr "ה_תראות"
 
 #. This is the setting to configure sounds associated with notifications.
-#: panels/notifications/cc-app-notifications-dialog.ui:35
+#: panels/notifications/cc-app-notifications-dialog.ui:28
 msgctxt "notifications"
 msgid "Sound _Alerts"
 msgstr "ה_תראות צליל"
 
-#: panels/notifications/cc-app-notifications-dialog.ui:48
+#: panels/notifications/cc-app-notifications-dialog.ui:35
 msgctxt "notifications"
 msgid "Notification _Popups"
 msgstr "התראות _קופצות"
 
-#: panels/notifications/cc-app-notifications-dialog.ui:49
+#: panels/notifications/cc-app-notifications-dialog.ui:36
 msgid ""
 "Notifications will continue to appear in the notification list when popups "
 "are disabled."
 msgstr "התראות עדיין תופענה ברשימה ההתראות כאשר חלוניות קופצות מושבתות."
 
 #. Popups here refers to message tray notifications in the middle of the screen.
-#: panels/notifications/cc-app-notifications-dialog.ui:62
+#: panels/notifications/cc-app-notifications-dialog.ui:43
 msgctxt "notifications"
 msgid "Show Message _Content in Popups"
 msgstr "הצגת תוכן הודעה בחלונות קופ_צים"
 
-#: panels/notifications/cc-app-notifications-dialog.ui:75
+#: panels/notifications/cc-app-notifications-dialog.ui:50
 msgctxt "notifications"
 msgid "_Lock Screen Notifications"
 msgstr "התראות במסך _נעילה"
 
-#: panels/notifications/cc-app-notifications-dialog.ui:88
+#: panels/notifications/cc-app-notifications-dialog.ui:57
 msgctxt "notifications"
 msgid "Show Message C_ontent on Lock Screen"
 msgstr "הצגת _תוכן הודעה במסך נעילה"
@@ -4456,63 +4451,63 @@ msgstr "נוסף"
 msgid "%d %%"
 msgstr "%d %%"
 
-#: panels/power/cc-power-panel.c:253
+#: panels/power/cc-power-panel.c:249
 msgid "Battery Levels"
 msgstr "רמות טעינת סוללה"
 
 #. Translators: UPS is an Uninterruptible Power Supply:
 #. * https://en.wikipedia.org/wiki/Uninterruptible_power_supply
-#: panels/power/cc-power-panel.c:258
+#: panels/power/cc-power-panel.c:254
 msgid "UPS"
 msgstr "אל־פסק"
 
-#: panels/power/cc-power-panel.c:261
+#: panels/power/cc-power-panel.c:257
 msgid "Battery Level"
 msgstr "רמת טעינת סוללה"
 
-#: panels/power/cc-power-panel.c:515
+#: panels/power/cc-power-panel.c:511
 msgid "When _Idle"
 msgstr "ב_חוסר פעילות"
 
-#: panels/power/cc-power-panel.c:675
+#: panels/power/cc-power-panel.c:671
 msgid "Suspend"
 msgstr "השהיה"
 
-#: panels/power/cc-power-panel.c:676
+#: panels/power/cc-power-panel.c:672
 msgid "Power Off"
 msgstr "כיבוי"
 
-#: panels/power/cc-power-panel.c:677
+#: panels/power/cc-power-panel.c:673
 msgid "Hibernate"
 msgstr "מצב תרדמת"
 
-#: panels/power/cc-power-panel.c:678
+#: panels/power/cc-power-panel.c:674
 msgid "Nothing"
 msgstr "לא לעשות דבר"
 
-#: panels/power/cc-power-panel.c:734
+#: panels/power/cc-power-panel.c:730
 msgid "When on battery power"
 msgstr "בעת הפעלה מהסוללה"
 
-#: panels/power/cc-power-panel.c:736
+#: panels/power/cc-power-panel.c:732
 msgid "When plugged in"
 msgstr "עם חיבור לחשמל"
 
-#: panels/power/cc-power-panel.c:857
+#: panels/power/cc-power-panel.c:853
 msgctxt "Idle time"
 msgid "Never"
 msgstr "לעולם לא"
 
-#: panels/power/cc-power-panel.c:942
+#: panels/power/cc-power-panel.c:938
 msgid "Automatic suspend"
 msgstr "השהיה אוטומטית"
 
-#: panels/power/cc-power-panel.c:1038
+#: panels/power/cc-power-panel.c:1034
 msgid ""
 "Performance mode temporarily disabled due to high operating temperature."
 msgstr "מצב הביצועים הושבת זמנית עקב טמפרטורה גבוהה בזמן הפעילות."
 
-#: panels/power/cc-power-panel.c:1040
+#: panels/power/cc-power-panel.c:1036
 msgid ""
 "Lap detected: performance mode temporarily unavailable. Move the device to a "
 "stable surface to restore."
@@ -4520,11 +4515,11 @@ msgstr ""
 "זוהו ירכיים: מצב הביצועים אינו זמין באופן זמני. יש להעביר את המכשיר למשטח "
 "יציב כדי לשחזר את המצב הקודם."
 
-#: panels/power/cc-power-panel.c:1042
+#: panels/power/cc-power-panel.c:1038
 msgid "Performance mode temporarily disabled."
 msgstr "מצב הביצועים מושבת זמנית."
 
-#: panels/power/cc-power-panel.c:1084
+#: panels/power/cc-power-panel.c:1080
 msgid ""
 "Low battery: power saver enabled. Previous mode will be restored when "
 "battery is sufficiently charged."
@@ -4533,13 +4528,13 @@ msgstr ""
 "מספק."
 
 #. translators: "%s" is an application name
-#: panels/power/cc-power-panel.c:1092
+#: panels/power/cc-power-panel.c:1088
 #, c-format
 msgid "Power Saver mode activated by “%s”."
 msgstr "מצב החיסכון בחשמל הופעל על ידי „%s”."
 
 #. translators: "%s" is an application name
-#: panels/power/cc-power-panel.c:1096
+#: panels/power/cc-power-panel.c:1092
 #, c-format
 msgid "Performance mode activated by “%s”."
 msgstr "מצב הביצועים מופעל על ידי „%s”."
@@ -4625,73 +4620,69 @@ msgstr "בהירות מסך _אוטומטית"
 msgid "Screen brightness adjusts to the surrounding light."
 msgstr "בהירות המסך מתכווננת לפי האור שמסביב."
 
-#: panels/power/cc-power-panel.ui:144
+#: panels/power/cc-power-panel.ui:138
 msgid "_Dim Screen"
 msgstr "_עמעום מסך"
 
-#: panels/power/cc-power-panel.ui:145
+#: panels/power/cc-power-panel.ui:139
 msgid "Reduces the screen brightness when the computer is inactive."
 msgstr "מפחית את בהירות המסך כאשר המחשב אינו פעיל."
 
-#: panels/power/cc-power-panel.ui:157
+#: panels/power/cc-power-panel.ui:145
 msgid "Screen _Blank"
 msgstr "ה_חשכת מסך"
 
-#: panels/power/cc-power-panel.ui:158
+#: panels/power/cc-power-panel.ui:146
 msgid "Turns the screen off after a period of inactivity."
 msgstr "מכבה את המסך לאחר זמן מה של חוסר פעילות."
 
-#: panels/power/cc-power-panel.ui:166
+#: panels/power/cc-power-panel.ui:154
 msgid "Automatic Power _Saver"
 msgstr "חיסכון _אוטומטי בחשמל"
 
-#: panels/power/cc-power-panel.ui:167
+#: panels/power/cc-power-panel.ui:155
 msgid "Enables power saver mode when battery is low."
 msgstr "מאפשר מצב חיסכון בחשמל כאשר הסוללה חלשה."
 
-#: panels/power/cc-power-panel.ui:180
+#: panels/power/cc-power-panel.ui:162
 msgid "_Automatic Suspend"
 msgstr "השהיה _אוטומטית"
 
-#: panels/power/cc-power-panel.ui:181
+#: panels/power/cc-power-panel.ui:163
 msgid "Pauses the computer after a period of inactivity."
 msgstr "משהה את המחשב זמן מה של חוסר פעילות."
 
-#: panels/power/cc-power-panel.ui:207
+#: panels/power/cc-power-panel.ui:189
 msgid "Po_wer Button Behavior"
 msgstr "פעולת כפתור _כיבוי"
 
-#: panels/power/cc-power-panel.ui:215
+#: panels/power/cc-power-panel.ui:197
 msgid "Show Battery _Percentage"
 msgstr "הצגת אחוז ה_סוללה"
 
-#: panels/power/cc-power-panel.ui:216
+#: panels/power/cc-power-panel.ui:198
 msgid "Show exact charge level in the top bar"
 msgstr "הצגת אחוז מדויק של טעינת הסוללה בלוח העליון"
 
-#: panels/power/cc-power-panel.ui:254
+#: panels/power/cc-power-panel.ui:230
 msgid "Automatic Suspend"
 msgstr "השהיה אוטומטית"
 
-#: panels/power/cc-power-panel.ui:283
+#: panels/power/cc-power-panel.ui:259
 msgid "On _Battery Power"
 msgstr "על _סוללה"
 
-#: panels/power/cc-power-panel.ui:290
-#, fuzzy
-#| msgid "_Delay:"
+#: panels/power/cc-power-panel.ui:266
 msgid "_Delay"
-msgstr "ה_שהיה:"
+msgstr "ה_שהיה"
 
-#: panels/power/cc-power-panel.ui:308
+#: panels/power/cc-power-panel.ui:284
 msgid "_Plugged In"
 msgstr "ב_חיבור לחשמל"
 
-#: panels/power/cc-power-panel.ui:314
-#, fuzzy
-#| msgid "D_elay:"
+#: panels/power/cc-power-panel.ui:290
 msgid "D_elay"
-msgstr "ה_שהיה:"
+msgstr "ה_שהיה"
 
 #: panels/power/cc-power-profile-row.c:132
 msgctxt "Power profile"
@@ -6055,26 +6046,18 @@ msgid "Not Supported"
 msgstr "לא נתמך"
 
 #: panels/privacy/cc-location-page.ui:17
-#, fuzzy
-#| msgid "Automatic configuration"
 msgid "_Automatic Device Location"
-msgstr "תצורה אוטומטית"
+msgstr "איכון התקן _אוטומטי"
 
 #: panels/privacy/cc-location-page.ui:28
-#, fuzzy
-#| msgid ""
-#| "Location services use GPS, Wi-Fi and cellular connections to determine "
-#| "the approximate location of this device. <a href='https://location."
-#| "services.mozilla.com/privacy'>Learn about what data is collected, and how "
-#| "it is used.</a>"
 msgid ""
 "Automatic device location uses sources like GPS, Wi-Fi and cellular to "
 "determine an approximate location for this device. Location data is sent to "
 "Mozilla Location Services as part of this feature."
 msgstr ""
-"שירותי המיקום עושים שימוש ב־GPS, רשת אלחוטית והתחברויות סלולר, על מנת לקבוע "
-"את המיקום המשוער של התקן זה. <a href='https://location.services.mozilla.com/"
-"privacy'>מידע נוסף על המידע שנאסף וכיצד נעשה בו שימוש</a>."
+"איכון מיקום ההתקן עושה שימוש ב־GPS, רשת אלחוטית והתחברויות סלולר, על מנת "
+"לקבוע את המיקום המשוער של התקן זה. נתוני המיקום נשלחים לשרת המיקומים של "
+"מוזילה כחלק מתכונה זו."
 
 #: panels/privacy/cc-location-page.ui:56
 msgid ""
@@ -6092,7 +6075,7 @@ msgstr "אף יישום מבודד לא ביקש גישה למיקום שלך"
 #. Translators: This will be presented as the text of a link to the privacy policy
 #: panels/privacy/cc-location-page.c:413
 msgid "Learn about what data is collected, and how it is used."
-msgstr ""
+msgstr "ללמוד עוד על איסוף נתונים והשימוש שנעשה בהם."
 
 #: panels/privacy/cc-microphone-page.ui:4
 msgid "Microphones"
@@ -6133,10 +6116,8 @@ msgid "Automatic screen lock"
 msgstr "נעילת מסך אוטומטית"
 
 #: panels/privacy/cc-privacy-panel.ui:36
-#, fuzzy
-#| msgid "Location"
 msgid "_Location"
-msgstr "מיקום"
+msgstr "_מיקום"
 
 #: panels/privacy/cc-privacy-panel.ui:37
 msgid "Control access to your location"
@@ -6174,126 +6155,126 @@ msgstr "_מיקרופון"
 msgid "Control microphone access"
 msgstr "שליטה על הגישה למיקרופון"
 
-#: panels/privacy/cc-privacy-panel.ui:101
+#: panels/privacy/cc-privacy-panel.ui:102
 msgid "_Thunderbolt"
 msgstr "_Thunderbolt"
 
-#: panels/privacy/cc-privacy-panel.ui:102
+#: panels/privacy/cc-privacy-panel.ui:103
 msgid "Manage device access"
 msgstr "ניהול גישה להתקנים"
 
-#: panels/privacy/cc-privacy-panel.ui:112
+#: panels/privacy/cc-privacy-panel.ui:113
 msgid "Device _Security"
 msgstr "_אבטחת התקן"
 
-#: panels/privacy/cc-privacy-panel.ui:113
+#: panels/privacy/cc-privacy-panel.ui:114
 msgid "Hardware security status and information"
 msgstr "מידע ומצב אבטחת החָמְרה"
 
 #. Translators: Option for "Lock screen after blank" in "Screen Lock" page
-#: panels/privacy/cc-screen-page.c:67
+#: panels/privacy/cc-screen-page.c:66
 msgctxt "lock_screen"
 msgid "Screen Turns Off"
 msgstr "עם החשכת המסך"
 
 #. Translators: Option for "Lock screen after blank" in "Screen Lock" page
-#: panels/privacy/cc-screen-page.c:70
+#: panels/privacy/cc-screen-page.c:69
 msgctxt "lock_screen"
 msgid "30 seconds"
 msgstr "חצי דקה"
 
 #. Translators: Option for "Lock screen after blank" in "Screen Lock" page
-#: panels/privacy/cc-screen-page.c:73
+#: panels/privacy/cc-screen-page.c:72
 msgctxt "lock_screen"
 msgid "1 minute"
 msgstr "דקה"
 
 #. Translators: Option for "Lock screen after blank" in "Screen Lock" page
-#: panels/privacy/cc-screen-page.c:76
+#: panels/privacy/cc-screen-page.c:75
 msgctxt "lock_screen"
 msgid "2 minutes"
 msgstr "שתי דקות"
 
 #. Translators: Option for "Lock screen after blank" in "Screen Lock" page
-#: panels/privacy/cc-screen-page.c:79
+#: panels/privacy/cc-screen-page.c:78
 msgctxt "lock_screen"
 msgid "3 minutes"
 msgstr "3 דקות"
 
 #. Translators: Option for "Lock screen after blank" in "Screen Lock" page
-#: panels/privacy/cc-screen-page.c:82
+#: panels/privacy/cc-screen-page.c:81
 msgctxt "lock_screen"
 msgid "5 minutes"
 msgstr "5 דקות"
 
 #. Translators: Option for "Lock screen after blank" in "Screen Lock" page
-#: panels/privacy/cc-screen-page.c:85
+#: panels/privacy/cc-screen-page.c:84
 msgctxt "lock_screen"
 msgid "30 minutes"
 msgstr "חצי שעה"
 
 #. Translators: Option for "Lock screen after blank" in "Screen Lock" page
-#: panels/privacy/cc-screen-page.c:88
+#: panels/privacy/cc-screen-page.c:87
 msgctxt "lock_screen"
 msgid "1 hour"
 msgstr "שעה"
 
 #. Translators: Option for "Blank screen" in "Screen Lock" page
-#: panels/privacy/cc-screen-page.c:131
+#: panels/privacy/cc-screen-page.c:130
 msgctxt "blank_screen"
 msgid "1 minute"
 msgstr "דקה"
 
 #. Translators: Option for "Blank screen" in "Screen Lock" page
-#: panels/privacy/cc-screen-page.c:134
+#: panels/privacy/cc-screen-page.c:133
 msgctxt "blank_screen"
 msgid "2 minutes"
 msgstr "2 דקות"
 
 #. Translators: Option for "Blank screen" in "Screen Lock" page
-#: panels/privacy/cc-screen-page.c:137
+#: panels/privacy/cc-screen-page.c:136
 msgctxt "blank_screen"
 msgid "3 minutes"
 msgstr "3 דקות"
 
 #. Translators: Option for "Blank screen" in "Screen Lock" page
-#: panels/privacy/cc-screen-page.c:140
+#: panels/privacy/cc-screen-page.c:139
 msgctxt "blank_screen"
 msgid "4 minutes"
 msgstr "4 דקות"
 
 #. Translators: Option for "Blank screen" in "Screen Lock" page
-#: panels/privacy/cc-screen-page.c:143
+#: panels/privacy/cc-screen-page.c:142
 msgctxt "blank_screen"
 msgid "5 minutes"
 msgstr "5 דקות"
 
 #. Translators: Option for "Blank screen" in "Screen Lock" page
-#: panels/privacy/cc-screen-page.c:146
+#: panels/privacy/cc-screen-page.c:145
 msgctxt "blank_screen"
 msgid "8 minutes"
 msgstr "8 דקות"
 
 #. Translators: Option for "Blank screen" in "Screen Lock" page
-#: panels/privacy/cc-screen-page.c:149
+#: panels/privacy/cc-screen-page.c:148
 msgctxt "blank_screen"
 msgid "10 minutes"
 msgstr "10 דקות"
 
 #. Translators: Option for "Blank screen" in "Screen Lock" page
-#: panels/privacy/cc-screen-page.c:152
+#: panels/privacy/cc-screen-page.c:151
 msgctxt "blank_screen"
 msgid "12 minutes"
 msgstr "12 דקות"
 
 #. Translators: Option for "Blank screen" in "Screen Lock" page
-#: panels/privacy/cc-screen-page.c:155
+#: panels/privacy/cc-screen-page.c:154
 msgctxt "blank_screen"
 msgid "15 minutes"
 msgstr "רבע שעה"
 
 #. Translators: Option for "Blank screen" in "Screen Lock" page
-#: panels/privacy/cc-screen-page.c:158
+#: panels/privacy/cc-screen-page.c:157
 msgctxt "blank_screen"
 msgid "Never"
 msgstr "לעולם לא"
@@ -6325,34 +6306,34 @@ msgstr "_נעילת מסך אוטומטית"
 msgid "Locks the screen after it blanks"
 msgstr "יש לנעול את המסך לאחר החשכה שלו"
 
-#: panels/privacy/cc-screen-page.ui:54
+#: panels/privacy/cc-screen-page.ui:48
 msgid "Automatic _Screen Lock Delay"
 msgstr "זמן _נעילת מסך אוטומטית"
 
-#: panels/privacy/cc-screen-page.ui:55
+#: panels/privacy/cc-screen-page.ui:49
 msgid "Time from screen blank to screen lock"
 msgstr "משך הזמן מהחשכת המסך לנעילת המסך"
 
 #. Translators: Whether to show notifications on the lock screen
-#: panels/privacy/cc-screen-page.ui:73
+#: panels/privacy/cc-screen-page.ui:67
 msgid "Lock Screen _Notifications"
 msgstr "התראות במסך _נעילה"
 
-#: panels/privacy/cc-screen-page.ui:88
+#: panels/privacy/cc-screen-page.ui:76
 msgid "Forbid New _USB Devices"
 msgstr "מניעת התקני _USB חדשים"
 
-#: panels/privacy/cc-screen-page.ui:89
+#: panels/privacy/cc-screen-page.ui:77
 msgid ""
 "Prevent new USB devices from interacting with the system when the screen is "
 "locked."
 msgstr "מניעת פעילות של התקני USB חדשים בזמן שהמסך נעול."
 
-#: panels/privacy/cc-screen-page.ui:106
+#: panels/privacy/cc-screen-page.ui:88
 msgid "Screen Privacy"
 msgstr "פרטיות מסך"
 
-#: panels/privacy/cc-screen-page.ui:111
+#: panels/privacy/cc-screen-page.ui:93
 msgid "Restrict Viewing _Angle"
 msgstr "הגבלת _זווית הצפייה"
 
@@ -6497,19 +6478,19 @@ msgstr ""
 msgid "File H_istory"
 msgstr "_היסטוריית קבצים"
 
-#: panels/privacy/cc-usage-page.ui:32
+#: panels/privacy/cc-usage-page.ui:26
 msgid "File _History Duration"
 msgstr "משך _היסטוריית קבצים"
 
-#: panels/privacy/cc-usage-page.ui:54
+#: panels/privacy/cc-usage-page.ui:48
 msgid "_Clear History…"
 msgstr "מחיקת _היסטוריה…"
 
-#: panels/privacy/cc-usage-page.ui:70
+#: panels/privacy/cc-usage-page.ui:64
 msgid "Trash &amp; Temporary Files"
 msgstr "אשפה וקבצים זמניים"
 
-#: panels/privacy/cc-usage-page.ui:71
+#: panels/privacy/cc-usage-page.ui:65
 msgid ""
 "Trash and temporary files can sometimes include personal or sensitive "
 "information. Automatically deleting them can help to protect privacy."
@@ -6517,23 +6498,23 @@ msgstr ""
 "אשפה וקבצים זמניים עשויים לעתים להכיל מידע אישי או רגיש. מחיקה אוטומטית שלהם "
 "עשויה לעזור על הגנה על הפרטיות שלך."
 
-#: panels/privacy/cc-usage-page.ui:74
+#: panels/privacy/cc-usage-page.ui:68
 msgid "Automatically Delete _Trash Content"
 msgstr "פינוי תוכן האשפה _אוטומטית"
 
-#: panels/privacy/cc-usage-page.ui:86
+#: panels/privacy/cc-usage-page.ui:74
 msgid "Automatically Delete Temporary _Files"
 msgstr "מ_חיקת הקבצים הזמניים אוטומטית"
 
-#: panels/privacy/cc-usage-page.ui:98
+#: panels/privacy/cc-usage-page.ui:80
 msgid "Automatically Delete _Period"
 msgstr "תקופת פינוי אשפה _אוטומטית"
 
-#: panels/privacy/cc-usage-page.ui:121
+#: panels/privacy/cc-usage-page.ui:103
 msgid "_Empty Trash…"
 msgstr "_פינוי האשפה…"
 
-#: panels/privacy/cc-usage-page.ui:133
+#: panels/privacy/cc-usage-page.ui:115
 msgid "_Delete Temporary Files…"
 msgstr "מחיקת קבצים _זמניים…"
 
@@ -6543,10 +6524,15 @@ msgstr "שליטה על הגישה למידע ולחומרה, אבטחת התק�
 
 #. Translators: Search terms to find the Privacy panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/privacy/gnome-privacy-panel.desktop.in:15
+#, fuzzy
+#| msgid ""
+#| "Privacy;Screen;Lock;Private;Usage;Recent;History;Files;Temporary;Tmp;"
+#| "Trash;Purge;Retain;Diagnostics;Crash;Location;Gps;Camera;Photos;Video;"
+#| "Webcam;Microphone;Recording;Security;Firmware;Thunderbolt;"
 msgid ""
 "Privacy;Screen;Lock;Private;Usage;Recent;History;Files;Temporary;Tmp;Trash;"
 "Purge;Retain;Diagnostics;Crash;Location;Gps;Camera;Photos;Video;Webcam;"
-"Microphone;Recording;Security;Firmware;Thunderbolt;"
+"Recording;Security;Firmware;Thunderbolt;"
 msgstr ""
 "פרטיות;פרטי;מסך;נעילה;שימוש;לאחרונה;אחרון;אחרונים;היטוריה;קבצים;קובץ;זמני;"
 "זמניים;אשפה;ניקוי;פינוי;לשמור;שמירה;להחזיק;החזקה;אבחון;דיאגנוסטיקה;קריסה;"
@@ -6693,7 +6679,7 @@ msgstr "הפעלת שיתוף מדיה פרטי"
 
 #: panels/sharing/cc-sharing-panel.ui:16
 #: panels/system/about/cc-about-page.ui:41
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:57
+#: panels/system/remote-desktop/cc-remote-desktop-page.ui:44
 msgid "Device Name"
 msgstr "שם ההתקן"
 
@@ -7162,30 +7148,24 @@ msgid "_Region &amp; Language"
 msgstr "_אזור ושפה"
 
 #: panels/system/cc-system-panel.ui:24
-#, fuzzy
-#| msgid "Change system language and region settings"
 msgid "System language and localization"
-msgstr "שינוי הגדרות השפה והאזור של המערכת"
+msgstr "שפה והתאמה מקומית של המערכת"
 
 #: panels/system/cc-system-panel.ui:34
 msgid "_Date &amp; Time"
 msgstr "_תאריך ושעה"
 
 #: panels/system/cc-system-panel.ui:35
-#, fuzzy
-#| msgid "Test Mouse and Touchpad Settings"
 msgid "Time zone and clock settings"
-msgstr "בדיקת הגדרות עכבר ומשטח מגע"
+msgstr "הגדרות שעה ואזור זמן"
 
 #: panels/system/cc-system-panel.ui:45 panels/system/users/cc-users-page.ui:11
 msgid "Users"
 msgstr "משתמשים"
 
 #: panels/system/cc-system-panel.ui:46
-#, fuzzy
-#| msgid "Add user accounts and change passwords"
 msgid "Add and remove accounts, change password"
-msgstr "הוספת משתמשים ושינוי הססמה שלך"
+msgstr "הוספה והסרת משתמשים, שינוי ססמה"
 
 #: panels/system/cc-system-panel.ui:57
 msgid "_Remote Desktop"
@@ -7193,24 +7173,24 @@ msgstr "שולחן עבודה _מרוחק"
 
 #: panels/system/cc-system-panel.ui:58
 msgid "Allow this device to be used remotely"
-msgstr ""
+msgstr "לאפשר להשתמש בהתקן זה מרחוק"
 
 #: panels/system/cc-system-panel.ui:69
 msgid "Hardware details and software versions"
-msgstr ""
+msgstr "מידע על החומרה וגרסות התכנה"
 
 #. Translators: This is the full date and time format used in 12-hour mode.
-#: panels/system/datetime/cc-datetime-page.c:234
+#: panels/system/datetime/cc-datetime-page.c:232
 msgid "%e %B %Y, %l:%M %p"
 msgstr "%e ב%B %Y, %l:%M %p"
 
 #. Translators: This is the full date and time format used in 24-hour mode.
-#: panels/system/datetime/cc-datetime-page.c:239
+#: panels/system/datetime/cc-datetime-page.c:237
 msgid "%e %B %Y, %R"
 msgstr "%e ב%B %Y, %R"
 
 #. Translators: "city, country"
-#: panels/system/datetime/cc-datetime-page.c:392
+#: panels/system/datetime/cc-datetime-page.c:390
 #, c-format
 msgctxt "timezone loc"
 msgid "%s, %s"
@@ -7218,7 +7198,7 @@ msgstr "%s, %s"
 
 #. Update the timezone on the listbow row
 #. Translators: "timezone (details)"
-#: panels/system/datetime/cc-datetime-page.c:409
+#: panels/system/datetime/cc-datetime-page.c:407
 #, c-format
 msgctxt "timezone desc"
 msgid "%s (%s)"
@@ -7261,95 +7241,95 @@ msgstr "אזור _זמן אוטומטי"
 msgid "Requires location services enabled and internet access"
 msgstr "נדרשת גישה לשירותי מיקום וחיבור לאינטרנט"
 
-#: panels/system/datetime/cc-datetime-page.ui:187
+#: panels/system/datetime/cc-datetime-page.ui:181
 msgid "Time Z_one"
 msgstr "_אזור זמן"
 
-#: panels/system/datetime/cc-datetime-page.ui:212
+#: panels/system/datetime/cc-datetime-page.ui:206
 msgid "Time _Format"
 msgstr "_תבנית זמן"
 
-#: panels/system/datetime/cc-datetime-page.ui:223
+#: panels/system/datetime/cc-datetime-page.ui:217
 msgid "_24-hour"
 msgstr "24 _שעות"
 
-#: panels/system/datetime/cc-datetime-page.ui:231
+#: panels/system/datetime/cc-datetime-page.ui:225
 msgid "AM / _PM"
 msgstr "AM / _PM"
 
-#: panels/system/datetime/cc-datetime-page.ui:244
+#: panels/system/datetime/cc-datetime-page.ui:238
 msgid "Clock &amp; Calendar"
 msgstr "שעון ולוח שנה"
 
-#: panels/system/datetime/cc-datetime-page.ui:245
+#: panels/system/datetime/cc-datetime-page.ui:239
 msgid "Control how the time and date is shown in the top bar"
 msgstr "שליטה על הצגת התאריך והשעה בלוח העליון"
 
-#: panels/system/datetime/cc-datetime-page.ui:248
+#: panels/system/datetime/cc-datetime-page.ui:242
 msgid "_Week Day"
 msgstr "יום ב_שבוע"
 
-#: panels/system/datetime/cc-datetime-page.ui:260
+#: panels/system/datetime/cc-datetime-page.ui:248
 msgid "D_ate"
 msgstr "_תאריך"
 
-#: panels/system/datetime/cc-datetime-page.ui:272
+#: panels/system/datetime/cc-datetime-page.ui:254
 msgid "_Seconds"
 msgstr "_שניות"
 
-#: panels/system/datetime/cc-datetime-page.ui:284
+#: panels/system/datetime/cc-datetime-page.ui:260
 msgid "Week _Numbers"
 msgstr "מספרי _שבועות"
 
-#: panels/system/datetime/cc-datetime-page.ui:285
+#: panels/system/datetime/cc-datetime-page.ui:261
 msgid "Shown in the dropdown calendar"
 msgstr "מופיע בלוח השנה הנפתח מלמעלה"
 
-#: panels/system/datetime/cc-datetime-page.ui:328
+#: panels/system/datetime/cc-datetime-page.ui:298
 msgid "January"
 msgstr "ינואר"
 
-#: panels/system/datetime/cc-datetime-page.ui:329
+#: panels/system/datetime/cc-datetime-page.ui:299
 msgid "February"
 msgstr "פברואר"
 
-#: panels/system/datetime/cc-datetime-page.ui:330
+#: panels/system/datetime/cc-datetime-page.ui:300
 msgid "March"
 msgstr "מרץ"
 
-#: panels/system/datetime/cc-datetime-page.ui:331
+#: panels/system/datetime/cc-datetime-page.ui:301
 msgid "April"
 msgstr "אפריל"
 
-#: panels/system/datetime/cc-datetime-page.ui:332
+#: panels/system/datetime/cc-datetime-page.ui:302
 msgid "May"
 msgstr "מאי"
 
-#: panels/system/datetime/cc-datetime-page.ui:333
+#: panels/system/datetime/cc-datetime-page.ui:303
 msgid "June"
 msgstr "יוני"
 
-#: panels/system/datetime/cc-datetime-page.ui:334
+#: panels/system/datetime/cc-datetime-page.ui:304
 msgid "July"
 msgstr "יולי"
 
-#: panels/system/datetime/cc-datetime-page.ui:335
+#: panels/system/datetime/cc-datetime-page.ui:305
 msgid "August"
 msgstr "אוגוסט"
 
-#: panels/system/datetime/cc-datetime-page.ui:336
+#: panels/system/datetime/cc-datetime-page.ui:306
 msgid "September"
 msgstr "ספטמבר"
 
-#: panels/system/datetime/cc-datetime-page.ui:337
+#: panels/system/datetime/cc-datetime-page.ui:307
 msgid "October"
 msgstr "אוקטובר"
 
-#: panels/system/datetime/cc-datetime-page.ui:338
+#: panels/system/datetime/cc-datetime-page.ui:308
 msgid "November"
 msgstr "נובמבר"
 
-#: panels/system/datetime/cc-datetime-page.ui:339
+#: panels/system/datetime/cc-datetime-page.ui:309
 msgid "December"
 msgstr "דצמבר"
 
@@ -7520,14 +7500,11 @@ msgstr "ללמוד איך להשתמש בזה"
 
 #. Translators: %s is a link to the documentation with the label "learn how to use it"
 #: panels/system/remote-desktop/cc-remote-desktop-page.c:773
-#, fuzzy, c-format
-#| msgid ""
-#| "Remote desktop allows viewing and controlling your desktop from another "
-#| "computer - %s"
+#, c-format
 msgid ""
 "Remote desktop allows viewing and controlling your desktop from another "
 "computer – %s."
-msgstr "שולחן עבודה מרוחק מאפשר צפייה ושליטה בשולחן העבודה שלך ממחשב אחר - %s"
+msgstr "שולחן עבודה מרוחק מאפשר צפייה ושליטה בשולחן העבודה שלך ממחשב אחר - %s."
 
 #: panels/system/remote-desktop/cc-remote-desktop-page.ui:4
 msgid "Remote Desktop"
@@ -7541,59 +7518,59 @@ msgstr "_שולחן עבודה מרוחק"
 msgid "Enable or disable remote desktop connections to this computer."
 msgstr "הפעלה או השבתה של התחברות מרוחקת לשולחן העבודה של מחשב זה."
 
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:36
+#: panels/system/remote-desktop/cc-remote-desktop-page.ui:29
 msgid "Remote _Control"
 msgstr "_שליטה מרחוק"
 
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:38
+#: panels/system/remote-desktop/cc-remote-desktop-page.ui:31
 msgid "Allows remote connections to control the screen."
 msgstr "לאפשר להתחברויות מרוחקות לשלוט במסך זה."
 
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:52
+#: panels/system/remote-desktop/cc-remote-desktop-page.ui:39
 msgid "How to Connect"
 msgstr "כיצד להתחבר"
 
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:53
+#: panels/system/remote-desktop/cc-remote-desktop-page.ui:40
 msgid ""
 "Connect to this computer using the device name or remote desktop address."
 msgstr "התחברות למחשב זה באמצעות שם ההתקן או כתובת שולחן העבודה המרוחק."
 
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:68
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:73
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:97
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:102
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:126
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:131
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:146
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:151
+#: panels/system/remote-desktop/cc-remote-desktop-page.ui:55
+#: panels/system/remote-desktop/cc-remote-desktop-page.ui:60
+#: panels/system/remote-desktop/cc-remote-desktop-page.ui:84
+#: panels/system/remote-desktop/cc-remote-desktop-page.ui:89
+#: panels/system/remote-desktop/cc-remote-desktop-page.ui:113
+#: panels/system/remote-desktop/cc-remote-desktop-page.ui:118
+#: panels/system/remote-desktop/cc-remote-desktop-page.ui:133
+#: panels/system/remote-desktop/cc-remote-desktop-page.ui:138
 msgid "Copy"
 msgstr "העתקה"
 
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:86
+#: panels/system/remote-desktop/cc-remote-desktop-page.ui:73
 msgid "Remote Desktop Address"
 msgstr "כתובת שולחן עבודה מרוחק"
 
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:118
+#: panels/system/remote-desktop/cc-remote-desktop-page.ui:105
 msgid "Authentication"
 msgstr "אימות"
 
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:119
+#: panels/system/remote-desktop/cc-remote-desktop-page.ui:106
 msgid "The user name and password are required to connect to this computer."
 msgstr "שם משתמש וססמה נדרשים על מנת להתחבר למחשב זה."
 
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:123
+#: panels/system/remote-desktop/cc-remote-desktop-page.ui:110
 msgid "User Name"
 msgstr "שם משתמש"
 
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:166
+#: panels/system/remote-desktop/cc-remote-desktop-page.ui:153
 msgid "_Verify Encryption"
 msgstr "_אימות הצפנה"
 
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:202
+#: panels/system/remote-desktop/cc-remote-desktop-page.ui:189
 msgid "Encryption Fingerprint"
 msgstr "הצפנת טביעת אצבע"
 
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:203
+#: panels/system/remote-desktop/cc-remote-desktop-page.ui:190
 msgid ""
 "The encryption fingerprint can be seen in connecting clients and should be "
 "identical."
@@ -8010,10 +7987,8 @@ msgid "Remove %s?"
 msgstr "להסיר את %s?"
 
 #: panels/system/users/cc-user-page.c:768
-#, fuzzy
-#| msgid "Error: some settings cannot be unlocked"
 msgid "Some settings are locked"
-msgstr "שגיאה: לא ניתן לשחרר חלק מההגדרות"
+msgstr "חלק מההגדרות נעולות"
 
 #: panels/system/users/cc-user-page.ui:24
 #: panels/system/users/cc-user-page.ui:85
@@ -8030,20 +8005,16 @@ msgid "Edit avatar"
 msgstr "עריכת תמונה"
 
 #: panels/system/users/cc-user-page.ui:64
-#, fuzzy
-#| msgid "Remove Layout"
 msgid "Remove avatar"
-msgstr "הסרת פריסה"
+msgstr "הסרת תמונה"
 
 #: panels/system/users/cc-user-page.ui:110
 msgid "_Fingerprint Login"
 msgstr "כניסה באמצעות _טביעת אצבע"
 
 #: panels/system/users/cc-user-page.ui:119
-#, fuzzy
-#| msgid "A_utomatic Login"
 msgid "Automatic Login"
-msgstr "כניסה _אוטומטית"
+msgstr "כניסה אוטומטית"
 
 #: panels/system/users/cc-user-page.ui:137
 msgid "_Administrator"
@@ -8058,10 +8029,8 @@ msgid "Open the Parental Controls app."
 msgstr "פתיחת יישום בקרת הורים."
 
 #: panels/system/users/cc-user-page.ui:193
-#, fuzzy
-#| msgid "_Remove User…"
 msgid "Remove User"
-msgstr "ה_סרת משתמש…"
+msgstr "הסרת משתמש"
 
 #: panels/system/users/cc-user-page.ui:218
 msgid ""
@@ -8070,20 +8039,16 @@ msgid ""
 msgstr "המשתמש לא יוכל להשתמש בהתקן זה לאחר שהחשבון שלו יוסר."
 
 #: panels/system/users/cc-user-page.ui:230
-#, fuzzy
-#| msgid "Delete Files and Settings"
 msgid "_Delete Files and Settings"
-msgstr "מחיקת קבצים והגדרות"
+msgstr "_מחיקת קבצים והגדרות"
 
 #: panels/system/users/cc-users-page.ui:17
 msgid "Other Users"
 msgstr "משתמשים אחרים"
 
 #: panels/system/users/cc-users-page.ui:33
-#, fuzzy
-#| msgid "_Add User…"
 msgid "Add User…"
-msgstr "הו_ספת משתמש…"
+msgstr "הוספת משתמש…"
 
 #. Translators: This button enrolls the computer in the domain in order to use enterprise logins.
 #: panels/system/users/data/join-dialog.ui:30
@@ -8303,10 +8268,9 @@ msgstr "ניתן להגדיל את סמן העכבר על מנת להקל עלי
 
 #. Translators: %s is a link to the Sound panel with the label "Sound"
 #: panels/universal-access/cc-ua-hearing-page.c:158
-#, fuzzy, c-format
-#| msgid "System volume can be adjusted in <a href='#'>Sound</a> settings."
+#, c-format
 msgid "System volume can be adjusted in %s settings"
-msgstr "ניתן להתאים את עצמת השמע של המערכת בהגדרות <a href='#'>צליל</a>."
+msgstr "ניתן להתאים את עצמת השמע של המערכת בהגדרות %s."
 
 #: panels/universal-access/cc-ua-hearing-page.ui:4
 msgid "Hearing"
@@ -8556,14 +8520,12 @@ msgid "Beep when Num Lock or Caps Lock are turned on or off"
 msgstr "צפצוף כאשר Num Lock או Caps Lock מופעלים או מושבתים"
 
 #: panels/universal-access/cc-ua-seeing-page.ui:59
-#, fuzzy
-#| msgid "_Overlay Scrollbars"
 msgid "Always Show Scroll_bars"
-msgstr "ה_סתרת פסי גלילה"
+msgstr "תמיד להציג _פסי גלילה"
 
 #: panels/universal-access/cc-ua-seeing-page.ui:60
 msgid "Make scrollbars always visible"
-msgstr ""
+msgstr "לגרום לפסי הגלילה להיות גלויים תמיד"
 
 #: panels/universal-access/cc-ua-seeing-page.ui:72
 msgid "Screen _Reader"
@@ -8884,7 +8846,7 @@ msgstr ""
 "המתנה;מהירות;סיוע;חזרה;הבהוב;שמיעה;שמע;הקלדה;-;הנפשה;הנפשות;אנימציה;אנימציות;"
 
 #: panels/wacom/button-mapping.ui:7 panels/wacom/cc-wacom-ekr-page.ui:18
-#: panels/wacom/cc-wacom-page.ui:40
+#: panels/wacom/cc-wacom-page.ui:28
 msgid "Map Buttons"
 msgstr "מיפוי לחצנים"
 
@@ -8948,7 +8910,7 @@ msgid "External tablet device"
 msgstr "מחשב לוח חיצוני"
 
 #. All displays item
-#: panels/wacom/cc-wacom-page.c:644
+#: panels/wacom/cc-wacom-page.c:640
 msgid "All Displays"
 msgstr "כל הצגים"
 
@@ -8960,28 +8922,28 @@ msgstr "מצב מחשב לוח"
 msgid "Use absolute positioning for the pen"
 msgstr "שימוש במיקום מוחלט עבור העט"
 
-#: panels/wacom/cc-wacom-page.ui:28
+#: panels/wacom/cc-wacom-page.ui:22
 msgid "Left Hand Orientation"
 msgstr "התאמה הכיווניות לשמאליים"
 
-#: panels/wacom/cc-wacom-page.ui:29
+#: panels/wacom/cc-wacom-page.ui:23
 msgid "Tablet and Express Keys™ are rotated for left hand use"
 msgstr "מחשב לוח וכפתורים מותאמים (Express Keys™) מסובבים לשימוש שמאליים"
 
-#: panels/wacom/cc-wacom-page.ui:54
+#: panels/wacom/cc-wacom-page.ui:42
 msgctxt "display setting"
 msgid "Map to Monitor"
 msgstr "מיפוי לצג"
 
-#: panels/wacom/cc-wacom-page.ui:60
+#: panels/wacom/cc-wacom-page.ui:48
 msgid "Keep Aspect Ratio"
 msgstr "שמירה על יחס התצוגה"
 
-#: panels/wacom/cc-wacom-page.ui:61
+#: panels/wacom/cc-wacom-page.ui:49
 msgid "Only use a portion of the tablet surface to keep monitor aspect ratio"
 msgstr "שימוש חלק במשטח מחשב הלוח על מנת לשמור על יחס תצוגה"
 
-#: panels/wacom/cc-wacom-page.ui:72
+#: panels/wacom/cc-wacom-page.ui:60
 msgid "Calibrate"
 msgstr "כיול"
 
@@ -9677,7 +9639,7 @@ msgstr ""
 #: shell/cc-application.c:117
 #, c-format
 msgid "© 1998 %s"
-msgstr ""
+msgstr "© 1998 %s"
 
 #: shell/cc-panel-list.ui:18
 msgid "Settings categories"
@@ -9721,20 +9683,16 @@ msgid "_OK"
 msgstr "_אישור"
 
 #: shell/cc-window.ui:107
-#, fuzzy
-#| msgid "Keyboard Shortcuts"
 msgid "_Keyboard Shortcuts"
-msgstr "צירופי מקשים"
+msgstr "_צירופי מקשים"
 
 #: shell/cc-window.ui:111
 msgid "_Help"
 msgstr "_עזרה"
 
 #: shell/cc-window.ui:115
-#, fuzzy
-#| msgid "About Settings"
 msgid "_About Settings"
-msgstr "על אודות ההגדרות"
+msgstr "_על אודות ההגדרות"
 
 #: shell/help-overlay.ui:13
 msgctxt "shortcut window"
