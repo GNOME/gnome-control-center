@@ -70,10 +70,8 @@ struct _CcNetworkPanel
         GtkWidget        *box_vpn;
         GtkWidget        *box_wired;
         GtkWidget        *container_bluetooth;
-        GtkWidget        *empty_listbox;
         GtkWidget        *proxy_row;
         GtkWidget        *save_button;
-        GtkWidget        *vpn_stack;
         GtkWidget        *toolbar_view;
 
         /* wireless dialog stuff */
@@ -356,13 +354,6 @@ handle_argv (CcNetworkPanel *self)
 }
 
 static void
-update_vpn_section (CcNetworkPanel *self)
-{
-        gtk_stack_set_visible_child (GTK_STACK (self->vpn_stack),
-                                     self->vpns->len == 0 ? self->empty_listbox : self->box_vpn);
-}
-
-static void
 update_bluetooth_section (CcNetworkPanel *self)
 {
         gtk_widget_set_visible (self->container_bluetooth, self->bluetooth_devices->len > 0);
@@ -481,9 +472,6 @@ panel_remove_device (CcNetworkPanel *self, NMDevice *device)
 
         gtk_box_remove (GTK_BOX (gtk_widget_get_parent (net_device)), net_device);
 
-        /* update vpn widgets */
-        update_vpn_section (self);
-
         /* update device_bluetooth widgets */
         update_bluetooth_section (self);
 }
@@ -601,13 +589,10 @@ panel_add_vpn_device (CcNetworkPanel *self, NMConnection *connection)
         }
 
         net_vpn = net_vpn_new (self->client, connection);
-        gtk_list_box_append (GTK_LIST_BOX (self->box_vpn), GTK_WIDGET (net_vpn));
+        adw_preferences_group_add (ADW_PREFERENCES_GROUP (self->box_vpn), GTK_WIDGET (net_vpn));
 
         /* store in the devices array */
         g_ptr_array_add (self->vpns, net_vpn);
-
-        /* update vpn widgets */
-        update_vpn_section (self);
 }
 
 static void
@@ -643,8 +628,7 @@ client_connection_removed_cb (CcNetworkPanel *self, NMConnection *connection)
                 NetVpn *vpn = g_ptr_array_index (self->vpns, i);
                 if (net_vpn_get_connection (vpn) == connection) {
                         g_ptr_array_remove (self->vpns, vpn);
-                        gtk_list_box_remove (GTK_LIST_BOX (self->box_vpn), GTK_WIDGET (vpn));
-                        update_vpn_section (self);
+                        adw_preferences_group_remove (ADW_PREFERENCES_GROUP (self->box_vpn), GTK_WIDGET (vpn));
                         return;
                 }
         }
@@ -720,9 +704,7 @@ cc_network_panel_class_init (CcNetworkPanelClass *klass)
         gtk_widget_class_bind_template_child (widget_class, CcNetworkPanel, box_vpn);
         gtk_widget_class_bind_template_child (widget_class, CcNetworkPanel, box_wired);
         gtk_widget_class_bind_template_child (widget_class, CcNetworkPanel, container_bluetooth);
-        gtk_widget_class_bind_template_child (widget_class, CcNetworkPanel, empty_listbox);
         gtk_widget_class_bind_template_child (widget_class, CcNetworkPanel, proxy_row);
-        gtk_widget_class_bind_template_child (widget_class, CcNetworkPanel, vpn_stack);
         gtk_widget_class_bind_template_child (widget_class, CcNetworkPanel, toolbar_view);
 
         gtk_widget_class_bind_template_callback (widget_class, create_connection_cb);
