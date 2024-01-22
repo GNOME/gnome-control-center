@@ -34,4 +34,7 @@ NetDeviceEthernet *net_device_ethernet_new        (NMClient          *client,
 
 NMDevice          *net_device_ethernet_get_device (NetDeviceEthernet *device);
 
+void               net_device_ethernet_set_title  (NetDeviceEthernet *device,
+                                                   const gchar       *title);
+
 G_END_DECLS

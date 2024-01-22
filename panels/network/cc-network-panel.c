@@ -68,7 +68,7 @@ struct _CcNetworkPanel
         /* widgets */
         GtkWidget        *box_bluetooth;
         GtkWidget        *box_vpn;
-        GtkWidget        *box_wired;
+        AdwPreferencesGroup *net_devices_group;
         GtkWidget        *container_bluetooth;
         GtkWidget        *proxy_row;
         GtkWidget        *save_button;
@@ -273,7 +273,7 @@ panel_refresh_device_titles (CcNetworkPanel *self)
                 if (NM_IS_DEVICE_BT (nm_devices[i]))
                         adw_preferences_row_set_title (ADW_PREFERENCES_ROW (devices[i]), nm_device_bt_get_name (NM_DEVICE_BT (nm_devices[i])));
                 else if (NET_IS_DEVICE_ETHERNET (devices[i]))
-                        adw_preferences_group_set_title (ADW_PREFERENCES_GROUP (devices[i]), titles[i]);
+                        net_device_ethernet_set_title (NET_DEVICE_ETHERNET (devices[i]), titles[i]);
                 else if (NET_IS_DEVICE_MOBILE (devices[i]))
                         net_device_mobile_set_title (NET_DEVICE_MOBILE (devices[i]), titles[i]);
         }
@@ -403,7 +403,7 @@ panel_add_device (CcNetworkPanel *self, NMDevice *device)
         case NM_DEVICE_TYPE_ETHERNET:
         case NM_DEVICE_TYPE_INFINIBAND:
                 device_ethernet = net_device_ethernet_new (self->client, device);
-                gtk_box_append (GTK_BOX (self->box_wired), GTK_WIDGET (device_ethernet));
+                adw_preferences_group_add (self->net_devices_group, GTK_WIDGET (device_ethernet));
                 g_ptr_array_add (self->ethernet_devices, device_ethernet);
                 g_hash_table_insert (self->nm_device_to_device, device, device_ethernet);
                 break;
@@ -429,7 +429,7 @@ panel_add_device (CcNetworkPanel *self, NMDevice *device)
                 }
 
                 device_mobile = net_device_mobile_new (self->client, device, modem_object);
-                gtk_box_append (GTK_BOX (self->box_wired), GTK_WIDGET (device_mobile));
+                adw_preferences_group_add (self->net_devices_group, GTK_WIDGET (device_mobile));
                 g_ptr_array_add (self->mobile_devices, device_mobile);
                 g_hash_table_insert (self->nm_device_to_device, device, device_mobile);
                 break;
@@ -702,7 +702,7 @@ cc_network_panel_class_init (CcNetworkPanelClass *klass)
 
         gtk_widget_class_bind_template_child (widget_class, CcNetworkPanel, box_bluetooth);
         gtk_widget_class_bind_template_child (widget_class, CcNetworkPanel, box_vpn);
-        gtk_widget_class_bind_template_child (widget_class, CcNetworkPanel, box_wired);
+        gtk_widget_class_bind_template_child (widget_class, CcNetworkPanel, net_devices_group);
         gtk_widget_class_bind_template_child (widget_class, CcNetworkPanel, container_bluetooth);
         gtk_widget_class_bind_template_child (widget_class, CcNetworkPanel, proxy_row);
         gtk_widget_class_bind_template_child (widget_class, CcNetworkPanel, toolbar_view);

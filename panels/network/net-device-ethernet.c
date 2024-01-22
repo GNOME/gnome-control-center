@@ -40,8 +40,7 @@ struct _NetDeviceEthernet
         GtkStack           *connection_stack;
         GtkButton          *details_button;
         GtkListBox         *details_listbox;
-        AdwActionRow       *details_row;
-        GtkSwitch          *device_off_switch;
+        AdwSwitchRow       *details_row;
 
         NMClient           *client;
         NMDevice           *device;
@@ -50,133 +49,6 @@ struct _NetDeviceEthernet
 };
 
 G_DEFINE_TYPE (NetDeviceEthernet, net_device_ethernet, ADW_TYPE_PREFERENCES_GROUP)
-
-static void
-add_details_row (GtkWidget *details, gint top, const gchar *heading, const gchar *value)
-{
-        GtkWidget *heading_label;
-        GtkWidget *value_label;
-
-        heading_label = gtk_label_new (heading);
-        gtk_widget_add_css_class (heading_label, "dim-label");
-        gtk_widget_set_halign (heading_label, GTK_ALIGN_END);
-        gtk_widget_set_valign (heading_label, GTK_ALIGN_START);
-        gtk_widget_set_hexpand (heading_label, TRUE);
-
-        gtk_grid_attach (GTK_GRID (details), heading_label, 0, top, 1, 1);
-
-        value_label = gtk_label_new (value);
-        gtk_widget_set_halign (value_label, GTK_ALIGN_START);
-        gtk_widget_set_hexpand (value_label, TRUE);
-        gtk_label_set_selectable (GTK_LABEL (value_label), TRUE);
-
-        gtk_label_set_mnemonic_widget (GTK_LABEL (heading_label), value_label);
-
-        gtk_grid_attach (GTK_GRID (details), value_label, 1, top, 1, 1);
-}
-
-static gchar *
-get_last_used_string (NMConnection *connection)
-{
-        g_autoptr(GDateTime) now = NULL;
-        g_autoptr(GDateTime) then = NULL;
-        gint days;
-        GTimeSpan diff;
-        guint64 timestamp;
-        NMSettingConnection *s_con;
-
-        s_con = nm_connection_get_setting_connection (connection);
-        if (s_con == NULL)
-                return NULL;
-        timestamp = nm_setting_connection_get_timestamp (s_con);
-        if (timestamp == 0)
-                return g_strdup (_("never"));
-
-        /* calculate the amount of time that has elapsed */
-        now = g_date_time_new_now_utc ();
-        then = g_date_time_new_from_unix_utc (timestamp);
-        diff = g_date_time_difference  (now, then);
-        days = diff / G_TIME_SPAN_DAY;
-        if (days == 0)
-                return g_strdup (_("today"));
-        else if (days == 1)
-                return g_strdup (_("yesterday"));
-        else
-                return g_strdup_printf (ngettext ("%i day ago", "%i days ago", days), days);
-}
-
-static void
-add_details (GtkWidget *details, NMDevice *device, NMConnection *connection)
-{
-        NMIPConfig *ip4_config = NULL;
-        NMIPConfig *ip6_config = NULL;
-        const gchar *ip4_address = NULL;
-        const gchar *ip4_route = NULL;
-        g_autofree gchar *ip4_dns = NULL;
-        g_autofree gchar *ip6_addresses = NULL;
-        const gchar *ip6_route = NULL;
-        g_autofree gchar *ip6_dns = NULL;
-        gint i = 0;
-
-        ip4_config = nm_device_get_ip4_config (device);
-        if (ip4_config) {
-                GPtrArray *addresses;
-
-                addresses = nm_ip_config_get_addresses (ip4_config);
-                if (addresses->len > 0)
-                        ip4_address = nm_ip_address_get_address (g_ptr_array_index (addresses, 0));
-
-                ip4_route = nm_ip_config_get_gateway (ip4_config);
-                ip4_dns = g_strjoinv (" ", (char **) nm_ip_config_get_nameservers (ip4_config));
-                if (!*ip4_dns)
-                        ip4_dns = NULL;
-        }
-        ip6_config = nm_device_get_ip6_config (device);
-        if (ip6_config) {
-                ip6_addresses = net_device_get_ip6_addresses (ip6_config);
-                ip6_route = nm_ip_config_get_gateway (ip6_config);
-                ip6_dns = g_strjoinv (" ", (char **) nm_ip_config_get_nameservers (ip6_config));
-                if (!*ip6_dns)
-                        ip6_dns = NULL;
-        }
-
-        if (ip4_address && ip6_addresses) {
-                add_details_row (details, i++, _("IPv4 Address"), ip4_address);
-                gtk_widget_set_valign (details, GTK_ALIGN_START);
-                add_details_row (details, i++, _("IPv6 Address"), ip6_addresses);
-                gtk_widget_set_valign (details, GTK_ALIGN_START);
-        } else if (ip4_address) {
-                add_details_row (details, i++, _("IP Address"), ip4_address);
-        } else if (ip6_addresses) {
-                add_details_row (details, i++, _("IP Address"), ip6_addresses);
-        }
-
-        add_details_row (details, i++, _("Hardware Address"), nm_device_get_hw_address (device));
-
-        if (ip4_route && ip6_route) {
-                g_autofree gchar *ip_routes = g_strjoin ("\n", ip4_route, ip6_route, NULL);
-                add_details_row (details, i++, _("Default Route"), ip_routes);
-        } else if (ip4_route) {
-                add_details_row (details, i++, _("Default Route"), ip4_route);
-        } else if (ip6_route) {
-                add_details_row (details, i++, _("Default Route"), ip6_route);
-        }
-
-        if (ip4_dns && ip6_dns) {
-                add_details_row (details, i++, _("DNS4"), ip4_dns);
-                add_details_row (details, i++, _("DNS6"), ip6_dns);
-        } else if (ip4_dns) {
-                add_details_row (details, i++, _("DNS"), ip4_dns);
-        } else if (ip6_dns) {
-                add_details_row (details, i++, _("DNS"), ip6_dns);
-        }
-
-        if (nm_device_get_state (device) != NM_DEVICE_STATE_ACTIVATED) {
-                g_autofree gchar *last_used = NULL;
-                last_used = get_last_used_string (connection);
-                add_details_row (details, i++, _("Last used"), last_used);
-        }
-}
 
 static void populate_ui (NetDeviceEthernet *self);
 
@@ -203,11 +75,11 @@ device_ethernet_refresh_ui (NetDeviceEthernet *self)
         g_autofree gchar *status = NULL;
 
         state = nm_device_get_state (self->device);
-        gtk_widget_set_sensitive (GTK_WIDGET (self->device_off_switch),
+        gtk_widget_set_sensitive (GTK_WIDGET (self->details_row),
                                   state != NM_DEVICE_STATE_UNAVAILABLE
                                   && state != NM_DEVICE_STATE_UNMANAGED);
         self->updating_device = TRUE;
-        gtk_switch_set_active (self->device_off_switch, device_state_to_off_switch (state));
+        adw_switch_row_set_active (self->details_row, device_state_to_off_switch (state));
         self->updating_device = FALSE;
 
         if (state != NM_DEVICE_STATE_UNAVAILABLE) {
@@ -262,7 +134,7 @@ details_button_clicked_cb (NetDeviceEthernet *self)
          * profile. It is also used to display ethernet in the
          * device list.
          */
-        show_details (self, self->details_button, _("Wired"));
+        show_details (self, self->details_button, NULL);
 }
 
 static void
@@ -270,8 +142,6 @@ add_row (NetDeviceEthernet *self, NMConnection *connection)
 {
         GtkWidget *row;
         GtkWidget *widget;
-        GtkWidget *box;
-        GtkWidget *details;
         NMActiveConnection *aconn;
         gboolean active;
 
@@ -285,50 +155,21 @@ add_row (NetDeviceEthernet *self, NMConnection *connection)
                 active = g_strcmp0 (uuid1, uuid2) == 0;
         }
 
-        row = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
-        box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
-        gtk_box_append (GTK_BOX (row), box);
-        widget = gtk_label_new (nm_connection_get_id (connection));
-        gtk_widget_set_margin_start (widget, 12);
-        gtk_widget_set_margin_end (widget, 12);
-        gtk_widget_set_margin_top (widget, 8);
-        gtk_widget_set_margin_bottom (widget, 8);
-        gtk_box_append (GTK_BOX (box), widget);
-
-        if (active) {
-                widget = gtk_image_new_from_icon_name ("object-select-symbolic");
-                gtk_widget_set_halign (widget, GTK_ALIGN_CENTER);
-                gtk_widget_set_valign (widget, GTK_ALIGN_CENTER);
-                gtk_box_append (GTK_BOX (box), widget);
-
-                details = gtk_grid_new ();
-                gtk_grid_set_row_spacing (GTK_GRID (details), 10);
-                gtk_grid_set_column_spacing (GTK_GRID (details), 10);
-
-                gtk_box_append (GTK_BOX (row), details);
-
-                add_details (details, self->device, connection);
-        }
-
-        /* filler */
-        widget = gtk_label_new ("");
-        gtk_widget_set_hexpand (widget, TRUE);
-        gtk_box_append (GTK_BOX (box), widget);
+        row = adw_switch_row_new ();
+        adw_preferences_row_set_title (ADW_PREFERENCES_ROW (row), nm_connection_get_id (connection));
+        adw_action_row_set_icon_name (ADW_ACTION_ROW (row), active ? "network-wired-symbolic" : "network-wired-disconnected-symbolic");
+        adw_switch_row_set_active (ADW_SWITCH_ROW (row), active);
 
         widget = gtk_button_new_from_icon_name ("emblem-system-symbolic");
-        gtk_widget_set_margin_start (widget, 12);
-        gtk_widget_set_margin_end (widget, 12);
-        gtk_widget_set_margin_top (widget, 8);
-        gtk_widget_set_margin_bottom (widget, 8);
-        gtk_widget_set_halign (widget, GTK_ALIGN_CENTER);
+        gtk_widget_add_css_class (widget, "flat");
         gtk_widget_set_valign (widget, GTK_ALIGN_CENTER);
         gtk_accessible_update_property (GTK_ACCESSIBLE (widget),
                                         GTK_ACCESSIBLE_PROPERTY_LABEL, _("Options…"),
                                         -1);
-        gtk_box_append (GTK_BOX (box), widget);
         g_object_set_data (G_OBJECT (widget), "edit", widget);
         g_object_set_data (G_OBJECT (widget), "row", row);
         g_signal_connect_object (widget, "clicked", G_CALLBACK (show_details_for_row), self, G_CONNECT_SWAPPED);
+        adw_action_row_add_suffix (ADW_ACTION_ROW (row), widget);
 
         g_object_set_data (G_OBJECT (row), "connection", connection);
 
@@ -437,7 +278,7 @@ device_off_switch_changed_cb (NetDeviceEthernet *self)
         if (self->updating_device)
                 return;
 
-        if (gtk_switch_get_active (self->device_off_switch)) {
+        if (adw_switch_row_get_active (self->details_row)) {
                 connection = net_device_get_find_connection (self->client, self->device);
                 if (connection != NULL) {
                         nm_client_activate_connection_async (self->client,
@@ -496,7 +337,6 @@ net_device_ethernet_class_init (NetDeviceEthernetClass *klass)
         gtk_widget_class_bind_template_child (widget_class, NetDeviceEthernet, details_button);
         gtk_widget_class_bind_template_child (widget_class, NetDeviceEthernet, details_listbox);
         gtk_widget_class_bind_template_child (widget_class, NetDeviceEthernet, details_row);
-        gtk_widget_class_bind_template_child (widget_class, NetDeviceEthernet, device_off_switch);
 
         gtk_widget_class_bind_template_callback (widget_class, connection_list_row_activated_cb);
         gtk_widget_class_bind_template_callback (widget_class, device_off_switch_changed_cb);
@@ -538,4 +378,16 @@ net_device_ethernet_get_device (NetDeviceEthernet *self)
 {
         g_return_val_if_fail (NET_IS_DEVICE_ETHERNET (self), NULL);
         return self->device;
+}
+
+void
+net_device_ethernet_set_title (NetDeviceEthernet *self,
+                               const gchar       *title)
+{
+        g_return_if_fail (NET_IS_DEVICE_ETHERNET (self));
+
+        adw_preferences_row_set_title (ADW_PREFERENCES_ROW (self->details_row), title);
+        if (gtk_stack_get_visible_child (self->connection_stack) == GTK_WIDGET (self->connection_list)) {
+                adw_preferences_group_set_title (ADW_PREFERENCES_GROUP (self), title);
+        }
 }
