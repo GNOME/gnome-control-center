@@ -82,18 +82,28 @@ get_renderer_from_session (void)
   char *renderer;
   g_autoptr(GError) error = NULL;
 
-  session_proxy = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SESSION,
-                                                 G_DBUS_PROXY_FLAGS_NONE,
-                                                 NULL,
-                                                 "org.gnome.SessionManager",
-                                                 "/org/gnome/SessionManager",
-                                                 "org.gnome.SessionManager",
-                                                 NULL, &error);
-  if (error != NULL)
+
+  if (!cc_object_storage_has_object (CC_OBJECT_SESSION_MANAGER_PROXY))
     {
-      g_warning ("Unable to connect to create a proxy for org.gnome.SessionManager: %s",
-                 error->message);
-      return NULL;
+      session_proxy = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SESSION,
+                                                     G_DBUS_PROXY_FLAGS_NONE,
+                                                     NULL,
+                                                     "org.gnome.SessionManager",
+                                                     "/org/gnome/SessionManager",
+                                                     "org.gnome.SessionManager",
+                                                     NULL, &error);
+      if (error != NULL)
+        {
+          g_warning ("Unable to connect to create a proxy for org.gnome.SessionManager: %s",
+                     error->message);
+          return NULL;
+        }
+
+      cc_object_storage_add_object (CC_OBJECT_SESSION_MANAGER_PROXY, session_proxy);
+    }
+  else
+    {
+      session_proxy = cc_object_storage_get_object (CC_OBJECT_SESSION_MANAGER_PROXY);
     }
 
   renderer_variant = g_dbus_proxy_get_cached_property (session_proxy, "Renderer");

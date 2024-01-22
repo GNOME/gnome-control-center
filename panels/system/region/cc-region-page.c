@@ -33,6 +33,7 @@
 #include "cc-language-chooser.h"
 #include "cc-list-row.h"
 #include "cc-region-page.h"
+#include "shell/cc-object-storage.h"
 
 #include <act/act.h>
 #include <errno.h>
@@ -749,6 +750,10 @@ session_proxy_ready (GObject      *source,
                 return;
         }
 
+        if (!cc_object_storage_has_object (CC_OBJECT_SESSION_MANAGER_PROXY)) {
+                cc_object_storage_add_object (CC_OBJECT_SESSION_MANAGER_PROXY, proxy);
+        }
+
         self->session = proxy;
 }
 
@@ -864,15 +869,19 @@ cc_region_page_init (CcRegionPage *self)
 
         self->user_manager = act_user_manager_get_default ();
 
-        g_dbus_proxy_new_for_bus (G_BUS_TYPE_SESSION,
-                                  G_DBUS_PROXY_FLAGS_NONE,
-                                  NULL,
-                                  "org.gnome.SessionManager",
-                                  "/org/gnome/SessionManager",
-                                  "org.gnome.SessionManager",
-                                  self->cancellable,
-                                  session_proxy_ready,
-                                  self);
+        if (cc_object_storage_has_object (CC_OBJECT_SESSION_MANAGER_PROXY)) {
+                self->session = cc_object_storage_get_object (CC_OBJECT_SESSION_MANAGER_PROXY);
+        } else {
+                g_dbus_proxy_new_for_bus (G_BUS_TYPE_SESSION,
+                                          G_DBUS_PROXY_FLAGS_NONE,
+                                          NULL,
+                                          "org.gnome.SessionManager",
+                                          "/org/gnome/SessionManager",
+                                          "org.gnome.SessionManager",
+                                          self->cancellable,
+                                          session_proxy_ready,
+                                          self);
+        }
 
         setup_login_permission (self);
         setup_language_section (self);

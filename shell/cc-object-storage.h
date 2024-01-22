@@ -25,7 +25,7 @@ G_BEGIN_DECLS
 
 /* Default storage keys */
 #define CC_OBJECT_NMCLIENT  "CcObjectStorage::nm-client"
-
+#define CC_OBJECT_SESSION_MANAGER_PROXY "CcObjectStorage::session-manager-proxy"
 
 #define CC_TYPE_OBJECT_STORAGE (cc_object_storage_get_type())
 
