@@ -32,4 +32,7 @@ GtkWidget * cc_wacom_stylus_page_new (CcWacomTool *stylus);
 
 CcWacomTool * cc_wacom_stylus_page_get_tool (CcWacomStylusPage *page);
 
+void cc_wacom_stylus_page_set_highlight (CcWacomStylusPage *page,
+					 gboolean           highlight);
+
 G_END_DECLS

@@ -371,12 +371,19 @@ update_initial_state (CcWacomPanel *self)
 
 static void
 update_highlighted_stylus (CcWacomPanel *self,
-			   CcWacomTool  *stylus)
+			   CcWacomTool  *stylus_to_highlight)
 {
-	GtkWidget *widget;
+	GHashTableIter iter;
+	CcWacomTool *stylus;
+	CcWacomStylusPage *page;
 
-	widget = g_hash_table_lookup (self->stylus_pages, stylus);
-	highlight_widget (self, widget);
+	g_hash_table_iter_init (&iter, self->stylus_pages);
+	while (g_hash_table_iter_next (&iter, (gpointer *)&stylus, (gpointer *)&page)) {
+		gboolean highlight = stylus == stylus_to_highlight;
+		cc_wacom_stylus_page_set_highlight (page, highlight);
+		if (highlight)
+			highlight_widget (self, GTK_WIDGET (page));
+	}
 }
 
 static void

@@ -45,6 +45,8 @@ struct _CcWacomStylusPage
 	GtkAdjustment  *stylus_eraser_pressure_adjustment;
 	CcWacomTool    *stylus;
 	GSettings      *stylus_settings;
+
+	gboolean        highlighted;
 };
 
 G_DEFINE_TYPE (CcWacomStylusPage, cc_wacom_stylus_page, GTK_TYPE_BOX)
@@ -258,11 +260,13 @@ cc_wacom_stylus_page_init (CcWacomStylusPage *page)
 
 static void
 set_icon_name (CcWacomStylusPage *page,
-	       const char        *icon_name)
+	       const char        *icon_name,
+	       gboolean           use_highlight)
 {
 	g_autofree gchar *resource = NULL;
 
-	resource = g_strdup_printf ("/org/gnome/control-center/wacom/%s.svg", icon_name);
+	resource = g_strdup_printf ("/org/gnome/control-center/wacom/%s%s.svg",
+				    icon_name, use_highlight ? "-highlighted" : "");
 	gtk_picture_set_resource (GTK_PICTURE (page->stylus_icon), resource);
 }
 
@@ -286,7 +290,7 @@ cc_wacom_stylus_page_new (CcWacomTool *stylus)
 					       cc_wacom_tool_get_description (stylus));
 
 	/* Icon */
-	set_icon_name (page, cc_wacom_tool_get_icon_name (stylus));
+	set_icon_name (page, cc_wacom_tool_get_icon_name (stylus), FALSE);
 
 	/* Settings */
 	page->stylus_settings = cc_wacom_tool_get_settings (stylus);
@@ -321,4 +325,14 @@ CcWacomTool *
 cc_wacom_stylus_page_get_tool (CcWacomStylusPage *page)
 {
 	return page->stylus;
+}
+
+void
+cc_wacom_stylus_page_set_highlight (CcWacomStylusPage *page,
+				    gboolean           highlight)
+{
+	if (page->highlighted != highlight) {
+		set_icon_name (page, cc_wacom_tool_get_icon_name (page->stylus), highlight);
+		page->highlighted = highlight;
+	}
 }
