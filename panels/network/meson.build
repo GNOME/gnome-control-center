@@ -35,7 +35,7 @@ sources = files(
   'cc-net-proxy-page.c',
   'cc-wifi-connection-row.c',
   'cc-wifi-connection-list.c',
-  'cc-wifi-panel.c',
+  'cc-wifi-page.c',
   'cc-wifi-hotspot-dialog.c',
   'net-device-bluetooth.c',
   'net-device-ethernet.c',

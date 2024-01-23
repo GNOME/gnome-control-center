@@ -16,6 +16,16 @@
                     <child>
                       <object class="AdwPreferencesGroup">
                         <child>
+                          <object class="CcListRow" id="wifi_row">
+                            <property name="title" translatable="yes">_Wi-Fi</property>
+                            <property name="show-arrow">True</property>
+                            <property name="icon-name">network-wireless-symbolic</property>
+                            <property name="subtitle" bind-source="wifi_page" bind-property="state-text" bind-flags="sync-create"/>
+                            <property name="action-name">navigation.push</property>
+                            <property name="action-target">'wifi'</property>
+                          </object>
+                        </child>
+                        <child>
                           <object class="CcListRow">
                             <property name="title" translatable="yes">VPN</property>
                             <property name="subtitle" translatable="yes">Not Set Up</property>
@@ -112,7 +122,9 @@
             </child>
           </object>
         </child>
-
+        <child>
+          <object class="CcWifiPage" id="wifi_page"/>
+        </child>
       </object>
     </property>
   </template>

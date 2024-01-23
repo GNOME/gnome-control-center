@@ -18,7 +18,7 @@
  */
 
 #include "cc-network-resources.h"
-#include "cc-wifi-panel.h"
+#include "cc-wifi-page.h"
 #include "cc-qr-code.h"
 #include "net-device-wifi.h"
 #include "network-dialogs.h"
@@ -42,7 +42,7 @@ typedef enum
   OPERATION_CONNECT_8021X
 } CmdlineOperation;
 
-struct _CcWifiPanel
+struct _CcWifiPage
 {
   CcPanel             parent;
 
@@ -74,11 +74,11 @@ struct _CcWifiPanel
   gchar              *arg_access_point;
 };
 
-static void          rfkill_switch_notify_activate_cb            (CcWifiPanel        *self);
+static void          rfkill_switch_notify_activate_cb            (CcWifiPage        *self);
 
-static void          update_devices_names                        (CcWifiPanel        *self);
+static void          update_devices_names                        (CcWifiPage        *self);
 
-G_DEFINE_TYPE (CcWifiPanel, cc_wifi_panel, CC_TYPE_PANEL)
+G_DEFINE_TYPE (CcWifiPage, cc_wifi_page, CC_TYPE_PANEL)
 
 enum
 {
@@ -93,7 +93,6 @@ static void
 update_panel_visibility (NMClient *client)
 {
   const GPtrArray *devices;
-  CcApplication *application;
   gboolean visible;
   guint i;
 
@@ -113,16 +112,12 @@ update_panel_visibility (NMClient *client)
     }
 
   /* Set the new visibility */
-  application = CC_APPLICATION (g_application_get_default ());
-  cc_shell_model_set_panel_visibility (cc_application_get_model (application),
-                                       "wifi",
-                                       visible ? CC_PANEL_VISIBLE : CC_PANEL_VISIBLE_IN_SEARCH);
-
+  // FIXME
   g_debug ("Wi-Fi panel visible: %s", visible ? "yes" : "no");
 }
 
 void
-cc_wifi_panel_static_init_func (void)
+cc_wifi_page_static_init_func (void)
 {
   g_autoptr(NMClient) client = NULL;
 
@@ -148,13 +143,13 @@ cc_wifi_panel_static_init_func (void)
 /* Auxiliary methods */
 
 static NMConnection *
-wifi_device_get_hotspot (CcWifiPanel *self,
+wifi_device_get_hotspot (CcWifiPage *self,
                          NMDevice    *device)
 {
   NMSettingIPConfig *ip4_setting;
   NMConnection *c;
 
-  g_assert (CC_IS_WIFI_PANEL (self));
+  g_assert (CC_IS_WIFI_PAGE (self));
   g_assert (NM_IS_DEVICE (device));
 
   if (nm_device_get_active_connection (device) == NULL)
@@ -173,13 +168,13 @@ wifi_device_get_hotspot (CcWifiPanel *self,
 }
 
 static void
-wifi_panel_update_qr_image_cb (CcWifiPanel *self)
+wifi_page_update_qr_image_cb (CcWifiPage *self)
 {
   NetDeviceWifi *child;
   NMConnection *hotspot;
   NMDevice *device;
 
-  g_assert (CC_IS_WIFI_PANEL (self));
+  g_assert (CC_IS_WIFI_PAGE (self));
 
   child  = NET_DEVICE_WIFI (gtk_stack_get_visible_child (self->stack));
   device = net_device_wifi_get_device (child);
@@ -225,7 +220,7 @@ wifi_panel_update_qr_image_cb (CcWifiPanel *self)
 }
 
 static void
-add_wifi_device (CcWifiPanel *self,
+add_wifi_device (CcWifiPage *self,
                  NMDevice    *device)
 {
   GtkWidget *header_widget;
@@ -251,13 +246,13 @@ add_wifi_device (CcWifiPanel *self,
                         nm_device_get_udi (device),
                         nm_device_get_description (device));
   g_signal_connect_object (device, "state-changed",
-                           G_CALLBACK (wifi_panel_update_qr_image_cb),
+                           G_CALLBACK (wifi_page_update_qr_image_cb),
                            self,
                            G_CONNECT_SWAPPED);
 }
 
 static void
-remove_wifi_device (CcWifiPanel *self,
+remove_wifi_device (CcWifiPage *self,
                     NMDevice    *device)
 {
   GtkWidget *child;
@@ -280,7 +275,7 @@ remove_wifi_device (CcWifiPanel *self,
 
   /* Disconnect the signal to prevent assertion crash */
   g_signal_handlers_disconnect_by_func (device, 
-                                        G_CALLBACK (wifi_panel_update_qr_image_cb), 
+                                        G_CALLBACK (wifi_page_update_qr_image_cb), 
                                         self);
 
   /* Destroy all stack pages related to this device */
@@ -295,7 +290,7 @@ remove_wifi_device (CcWifiPanel *self,
 }
 
 static void
-check_main_stack_page (CcWifiPanel *self)
+check_main_stack_page (CcWifiPage *self)
 {
   const gchar *nm_version;
   gboolean airplane_mode_active;
@@ -316,7 +311,7 @@ check_main_stack_page (CcWifiPanel *self)
 }
 
 static void
-load_wifi_devices (CcWifiPanel *self)
+load_wifi_devices (CcWifiPage *self)
 {
   const GPtrArray *devices;
   guint i;
@@ -341,7 +336,7 @@ load_wifi_devices (CcWifiPanel *self)
 }
 
 static inline gboolean
-get_cached_rfkill_property (CcWifiPanel *self,
+get_cached_rfkill_property (CcWifiPage *self,
                             const gchar *property)
 {
   g_autoptr(GVariant) result = NULL;
@@ -351,7 +346,7 @@ get_cached_rfkill_property (CcWifiPanel *self,
 }
 
 static void
-sync_airplane_mode_switch (CcWifiPanel *self)
+sync_airplane_mode_switch (CcWifiPage *self)
 {
   gboolean enabled, should_show, hw_enabled;
 
@@ -385,7 +380,7 @@ sync_airplane_mode_switch (CcWifiPanel *self)
 }
 
 static void
-update_devices_names (CcWifiPanel *self)
+update_devices_names (CcWifiPage *self)
 {
   guint number_of_devices = self->devices->len;
 
@@ -436,7 +431,7 @@ update_devices_names (CcWifiPanel *self)
 /* Command-line arguments */
 
 static void
-reset_command_line_args (CcWifiPanel *self)
+reset_command_line_args (CcWifiPage *self)
 {
   self->arg_operation = OPERATION_NULL;
   g_clear_pointer (&self->arg_device, g_free);
@@ -444,7 +439,7 @@ reset_command_line_args (CcWifiPanel *self)
 }
 
 static gboolean
-handle_argv_for_device (CcWifiPanel *self, NetDeviceWifi *net_device)
+handle_argv_for_device (CcWifiPage *self, NetDeviceWifi *net_device)
 {
   GtkWidget *toplevel;
   NMDevice *device;
@@ -488,7 +483,7 @@ handle_argv_for_device (CcWifiPanel *self, NetDeviceWifi *net_device)
 }
 
 static void
-handle_argv (CcWifiPanel *self)
+handle_argv (CcWifiPage *self)
 {
   guint i;
 
@@ -524,7 +519,7 @@ variant_av_to_string_array (GVariant *array)
 }
 
 static gboolean
-verify_argv (CcWifiPanel  *self,
+verify_argv (CcWifiPage  *self,
              const char  **args)
 {
   switch (self->arg_operation)
@@ -544,7 +539,7 @@ verify_argv (CcWifiPanel  *self,
 /* Callbacks */
 
 static void
-device_state_changed_cb (CcWifiPanel *self, GParamSpec *pspec, NMDevice *device)
+device_state_changed_cb (CcWifiPage *self, GParamSpec *pspec, NMDevice *device)
 {
   const gchar *id;
 
@@ -570,7 +565,7 @@ device_state_changed_cb (CcWifiPanel *self, GParamSpec *pspec, NMDevice *device)
 }
 
 static void
-device_added_cb (CcWifiPanel *self, NMDevice *device)
+device_added_cb (CcWifiPage *self, NMDevice *device)
 {
   if (!NM_IS_DEVICE_WIFI (device))
     return;
@@ -589,7 +584,7 @@ device_added_cb (CcWifiPanel *self, NMDevice *device)
 }
 
 static void
-device_removed_cb (CcWifiPanel *self, NMDevice *device)
+device_removed_cb (CcWifiPage *self, NMDevice *device)
 {
   const gchar *id;
 
@@ -610,13 +605,13 @@ device_removed_cb (CcWifiPanel *self, NMDevice *device)
 }
 
 static void
-wireless_enabled_cb (CcWifiPanel *self)
+wireless_enabled_cb (CcWifiPage *self)
 {
   check_main_stack_page (self);
 }
 
 static void
-on_rfkill_proxy_properties_changed_cb (CcWifiPanel *self)
+on_rfkill_proxy_properties_changed_cb (CcWifiPage *self)
 {
   g_debug ("Rfkill properties changed");
 
@@ -628,7 +623,7 @@ rfkill_proxy_acquired_cb (GObject      *source_object,
                           GAsyncResult *res,
                           gpointer      user_data)
 {
-  CcWifiPanel *self;
+  CcWifiPage *self;
   GDBusProxy *proxy;
   g_autoptr(GError) error = NULL;
 
@@ -642,7 +637,7 @@ rfkill_proxy_acquired_cb (GObject      *source_object,
       return;
     }
 
-  self = CC_WIFI_PANEL (user_data);
+  self = CC_WIFI_PAGE (user_data);
 
   self->rfkill_proxy = proxy;
 
@@ -656,7 +651,7 @@ rfkill_proxy_acquired_cb (GObject      *source_object,
 }
 
 static void
-rfkill_switch_notify_activate_cb (CcWifiPanel *self)
+rfkill_switch_notify_activate_cb (CcWifiPage *self)
 {
   gboolean enable;
 
@@ -675,12 +670,12 @@ rfkill_switch_notify_activate_cb (CcWifiPanel *self)
 }
 
 static void
-on_stack_visible_child_changed_cb (CcWifiPanel *self)
+on_stack_visible_child_changed_cb (CcWifiPage *self)
 {
   const gchar *visible_device_id = NULL;
   guint i;
 
-  wifi_panel_update_qr_image_cb (self);
+  wifi_page_update_qr_image_cb (self);
 
   /* Remove previous bindings */
   g_clear_pointer (&self->spinner_binding, g_binding_unbind);
@@ -703,7 +698,7 @@ on_stack_visible_child_changed_cb (CcWifiPanel *self)
 }
 
 static void
-on_stop_hotspot_dialog_response_cb (CcWifiPanel        *self,
+on_stop_hotspot_dialog_response_cb (CcWifiPage        *self,
                                     gchar              *response,
                                     AdwMessageDialog   *dialog)
 {
@@ -719,12 +714,12 @@ on_stop_hotspot_dialog_response_cb (CcWifiPanel        *self,
 }
 
 static void
-hotspot_stop_clicked_cb (CcWifiPanel *self)
+hotspot_stop_clicked_cb (CcWifiPage *self)
 {
   GtkWidget *dialog;
   GtkNative *native;
 
-  g_assert (CC_IS_WIFI_PANEL (self));
+  g_assert (CC_IS_WIFI_PAGE (self));
 
   native = gtk_widget_get_native (GTK_WIDGET (self));
 
@@ -747,18 +742,10 @@ hotspot_stop_clicked_cb (CcWifiPanel *self)
   gtk_window_present (GTK_WINDOW (dialog));
 }
 
-/* Overrides */
-
-static const gchar *
-cc_wifi_panel_get_help_uri (CcPanel *panel)
-{
-  return "help:gnome-help/net-wireless";
-}
-
 static void
-cc_wifi_panel_finalize (GObject *object)
+cc_wifi_page_finalize (GObject *object)
 {
-  CcWifiPanel *self = (CcWifiPanel *)object;
+  CcWifiPage *self = (CcWifiPage *)object;
 
   g_clear_object (&self->client);
   g_clear_object (&self->rfkill_proxy);
@@ -767,11 +754,11 @@ cc_wifi_panel_finalize (GObject *object)
 
   reset_command_line_args (self);
 
-  G_OBJECT_CLASS (cc_wifi_panel_parent_class)->finalize (object);
+  G_OBJECT_CLASS (cc_wifi_page_parent_class)->finalize (object);
 }
 
 static void
-cc_wifi_panel_get_property (GObject    *object,
+cc_wifi_page_get_property (GObject    *object,
                             guint       prop_id,
                             GValue     *value,
                             GParamSpec *pspec)
@@ -780,12 +767,12 @@ cc_wifi_panel_get_property (GObject    *object,
 }
 
 static void
-cc_wifi_panel_set_property (GObject      *object,
+cc_wifi_page_set_property (GObject      *object,
                             guint         prop_id,
                             const GValue *value,
                             GParamSpec   *pspec)
 {
-  CcWifiPanel *self = CC_WIFI_PANEL (object);
+  CcWifiPage *self = CC_WIFI_PAGE (object);
   GVariant *parameters;
 
   switch (prop_id)
@@ -838,30 +825,27 @@ cc_wifi_panel_set_property (GObject      *object,
 }
 
 static void
-cc_wifi_panel_class_init (CcWifiPanelClass *klass)
+cc_wifi_page_class_init (CcWifiPageClass *klass)
 {
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
-  CcPanelClass *panel_class = CC_PANEL_CLASS (klass);
 
-  panel_class->get_help_uri = cc_wifi_panel_get_help_uri;
+  object_class->finalize = cc_wifi_page_finalize;
+  object_class->get_property = cc_wifi_page_get_property;
+  object_class->set_property = cc_wifi_page_set_property;
 
-  object_class->finalize = cc_wifi_panel_finalize;
-  object_class->get_property = cc_wifi_panel_get_property;
-  object_class->set_property = cc_wifi_panel_set_property;
+  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/network/cc-wifi-page.ui");
 
-  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/network/cc-wifi-panel.ui");
-
-  gtk_widget_class_bind_template_child (widget_class, CcWifiPanel, center_stack);
-  gtk_widget_class_bind_template_child (widget_class, CcWifiPanel, device_stack);
-  gtk_widget_class_bind_template_child (widget_class, CcWifiPanel, hotspot_box);
-  gtk_widget_class_bind_template_child (widget_class, CcWifiPanel, list_label);
-  gtk_widget_class_bind_template_child (widget_class, CcWifiPanel, main_stack);
-  gtk_widget_class_bind_template_child (widget_class, CcWifiPanel, rfkill_row);
-  gtk_widget_class_bind_template_child (widget_class, CcWifiPanel, rfkill_widget);
-  gtk_widget_class_bind_template_child (widget_class, CcWifiPanel, spinner);
-  gtk_widget_class_bind_template_child (widget_class, CcWifiPanel, stack);
-  gtk_widget_class_bind_template_child (widget_class, CcWifiPanel, wifi_qr_image);
+  gtk_widget_class_bind_template_child (widget_class, CcWifiPage, center_stack);
+  gtk_widget_class_bind_template_child (widget_class, CcWifiPage, device_stack);
+  gtk_widget_class_bind_template_child (widget_class, CcWifiPage, hotspot_box);
+  gtk_widget_class_bind_template_child (widget_class, CcWifiPage, list_label);
+  gtk_widget_class_bind_template_child (widget_class, CcWifiPage, main_stack);
+  gtk_widget_class_bind_template_child (widget_class, CcWifiPage, rfkill_row);
+  gtk_widget_class_bind_template_child (widget_class, CcWifiPage, rfkill_widget);
+  gtk_widget_class_bind_template_child (widget_class, CcWifiPage, spinner);
+  gtk_widget_class_bind_template_child (widget_class, CcWifiPage, stack);
+  gtk_widget_class_bind_template_child (widget_class, CcWifiPage, wifi_qr_image);
 
   gtk_widget_class_bind_template_callback (widget_class, rfkill_switch_notify_activate_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_stack_visible_child_changed_cb);
@@ -871,7 +855,7 @@ cc_wifi_panel_class_init (CcWifiPanelClass *klass)
 }
 
 static void
-cc_wifi_panel_init (CcWifiPanel *self)
+cc_wifi_page_init (CcWifiPage *self)
 {
   g_autoptr(GtkCssProvider) provider = NULL;
 

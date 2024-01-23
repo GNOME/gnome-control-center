@@ -32,6 +32,7 @@
 
 #include "cc-list-row.h"
 #include "cc-net-proxy-page.h"
+#include "cc-wifi-page.h"
 #include "net-device-bluetooth.h"
 #include "net-device-ethernet.h"
 #include "net-device-mobile.h"
@@ -709,6 +710,7 @@ cc_network_panel_class_init (CcNetworkPanelClass *klass)
 
         gtk_widget_class_bind_template_callback (widget_class, create_connection_cb);
 
+        g_type_ensure (CC_TYPE_WIFI_PAGE);
         g_type_ensure (CC_TYPE_LIST_ROW);
         g_type_ensure (CC_TYPE_NET_PROXY_PAGE);
 }
