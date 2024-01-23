@@ -70,6 +70,18 @@
                         </child>
                       </object>
                     </child>
+                    <!-- Airplane Mode -->
+                    <child>
+                      <object class="AdwPreferencesGroup" id="rfkill_widget">
+                        <child>
+                          <object class="AdwSwitchRow" id="rfkill_row">
+                            <property name="title" translatable="yes">Airplane Mode</property>
+                            <property name="subtitle" translatable="yes">Disables Wi-Fi, Bluetooth and mobile broadband</property>
+                            <signal name="notify::active" handler="rfkill_switch_notify_activate_cb" object="CcNetworkPanel" swapped="yes" />
+                          </object>
+                        </child>
+                      </object>
+                    </child>
                   </object>
                 </property>
               </object>
