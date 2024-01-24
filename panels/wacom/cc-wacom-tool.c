@@ -322,9 +322,9 @@ cc_wacom_tool_get_description (CcWacomTool *tool)
 	else if ((~axes & (WACOM_AXIS_TYPE_TILT | WACOM_AXIS_TYPE_PRESSURE | WACOM_AXIS_TYPE_ROTATION_Z)) == 0)
 		return _("Airbrush stylus with pressure, tilt, and rotation");
 	else if ((~axes & (WACOM_AXIS_TYPE_TILT | WACOM_AXIS_TYPE_PRESSURE)) == 0)
-		return _("Standard stylus with pressure and tilt");
+		return _("Stylus with pressure and tilt");
 	else if ((~axes & WACOM_AXIS_TYPE_PRESSURE) == 0)
-		return _("Standard stylus with pressure");
+		return _("Stylus with pressure");
 
 	return NULL;
 }
