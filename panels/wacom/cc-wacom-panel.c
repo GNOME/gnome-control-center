@@ -58,7 +58,7 @@ struct _CcWacomPanel
 	GtkWidget        *panel_empty_state;
 	GHashTable       *devices; /* key=GsdDevice, value=CcWacomDevice */
 	GHashTable       *pages; /* key=CcWacomDevice, value=GtkWidget */
-	GHashTable       *stylus_pages; /* key=CcWacomTool, value=GtkWidget */
+	GHashTable       *stylus_pages; /* key=CcWacomTool, value=CcWacomStylusPage */
 	guint             mock_stylus_id;
 
 	CcTabletToolMap  *tablet_tool_map;
@@ -305,7 +305,7 @@ check_remove_stylus_pages (CcWacomPanel *self)
 	GHashTableIter iter;
 	CcWacomDevice *device;
 	CcWacomTool *tool;
-	GtkWidget *page;
+	CcWacomStylusPage *page;
 	GList *tools;
 	g_autoptr(GList) total = NULL;
 
@@ -324,9 +324,10 @@ check_remove_stylus_pages (CcWacomPanel *self)
 		if (g_list_find (total, tool))
 			continue;
 
-		gtk_box_remove (GTK_BOX (self->styli), page);
+		gtk_box_remove (GTK_BOX (self->styli), GTK_WIDGET (page));
 		g_hash_table_iter_remove (&iter);
 	}
+
 }
 
 static gboolean
