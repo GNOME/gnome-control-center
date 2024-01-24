@@ -45,32 +45,32 @@
 
 struct _CcWacomPanel
 {
-	CcPanel           parent_instance;
+	CcPanel                 parent_instance;
 
-	GtkWidget        *test_popover;
-	GtkWidget        *test_draw_area;
-	GtkWidget        *test_button;
-	GtkWidget        *scrollable;
-	GtkWidget        *tablets;
-	GtkWidget        *styli;
-	GtkWidget        *initial_state_stack;
-	GtkWidget        *panel_view;
-	GtkWidget        *panel_empty_state;
-	GHashTable       *devices; /* key=GsdDevice, value=CcWacomDevice */
-	GHashTable       *pages; /* key=CcWacomDevice, value=GtkWidget */
-	GHashTable       *stylus_pages; /* key=CcWacomTool, value=CcWacomStylusPage */
-	guint             mock_stylus_id;
+	GtkWidget              *test_popover;
+	GtkWidget              *test_draw_area;
+	GtkWidget              *test_button;
+	GtkWidget              *scrollable;
+	GtkWidget              *tablets;
+	GtkWidget              *styli;
+	GtkWidget              *initial_state_stack;
+	GtkWidget              *panel_view;
+	GtkWidget              *panel_empty_state;
+	GHashTable             *devices; /* key=GsdDevice, value=CcWacomDevice */
+	GHashTable             *pages; /* key=CcWacomDevice, value=GtkWidget */
+	GHashTable             *stylus_pages; /* key=CcWacomTool, value=CcWacomStylusPage */
+	guint                   mock_stylus_id;
 
-	CcTabletToolMap  *tablet_tool_map;
+	CcTabletToolMap        *tablet_tool_map;
 
-	GtkAdjustment    *vadjustment;
-	GtkGesture       *stylus_gesture;
+	GtkAdjustment          *vadjustment;
+	GtkGesture             *stylus_gesture;
 
-	GtkWidget        *highlighted_widget;
+	GtkWidget              *highlighted_widget;
 
 	/* DBus */
-	GDBusProxy    *proxy;
-	GDBusProxy    *input_mapping_proxy;
+	GDBusProxy             *proxy;
+	GDBusProxy             *input_mapping_proxy;
 };
 
 CC_PANEL_REGISTER (CcWacomPanel, cc_wacom_panel)
