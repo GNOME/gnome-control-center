@@ -42,6 +42,7 @@
 
 #define EKR_VENDOR "056a"
 #define EKR_PRODUCT "0331"
+#define POLL_MS 300
 
 struct _CcWacomPanel
 {
@@ -67,6 +68,8 @@ struct _CcWacomPanel
 	GtkGesture             *stylus_gesture;
 
 	GtkWidget              *highlighted_widget;
+	CcWacomStylusPage      *highlighted_stylus_page;
+	guint                   highlight_timeout_id;
 
 	/* DBus */
 	GDBusProxy             *proxy;
@@ -295,6 +298,8 @@ cc_wacom_panel_dispose (GObject *object)
 	g_clear_pointer (&self->pages, g_hash_table_unref);
 	g_clear_pointer (&self->stylus_pages, g_hash_table_unref);
 	g_clear_handle_id (&self->mock_stylus_id, g_source_remove);
+	g_clear_handle_id (&self->highlight_timeout_id, g_source_remove);
+	g_clear_object (&self->highlighted_stylus_page);
 
 	G_OBJECT_CLASS (cc_wacom_panel_parent_class)->dispose (object);
 }
@@ -323,6 +328,11 @@ check_remove_stylus_pages (CcWacomPanel *self)
 	while (g_hash_table_iter_next (&iter, (gpointer*) &tool, (gpointer*) &page)) {
 		if (g_list_find (total, tool))
 			continue;
+
+		if (page == self->highlighted_stylus_page) {
+			g_clear_object (&self->highlighted_stylus_page);
+			g_clear_handle_id (&self->highlight_timeout_id, g_source_remove);
+		}
 
 		gtk_box_remove (GTK_BOX (self->styli), GTK_WIDGET (page));
 		g_hash_table_iter_remove (&iter);
@@ -370,6 +380,16 @@ update_initial_state (CcWacomPanel *self)
 }
 
 static void
+on_stylus_timeout (gpointer data)
+{
+	CcWacomPanel *panel = CC_WACOM_PANEL (data);
+
+	cc_wacom_stylus_page_set_highlight (panel->highlighted_stylus_page, FALSE);
+	g_clear_object (&panel->highlighted_stylus_page);
+	panel->highlight_timeout_id = 0;
+}
+
+static void
 update_highlighted_stylus (CcWacomPanel *self,
 			   CcWacomTool  *stylus_to_highlight)
 {
@@ -381,9 +401,15 @@ update_highlighted_stylus (CcWacomPanel *self,
 	while (g_hash_table_iter_next (&iter, (gpointer *)&stylus, (gpointer *)&page)) {
 		gboolean highlight = stylus == stylus_to_highlight;
 		cc_wacom_stylus_page_set_highlight (page, highlight);
-		if (highlight)
+		if (highlight) {
 			highlight_widget (self, GTK_WIDGET (page));
+			g_clear_object (&self->highlighted_stylus_page);
+			g_clear_handle_id (&self->highlight_timeout_id, g_source_remove);
+			self->highlight_timeout_id = g_timeout_add_once (POLL_MS, on_stylus_timeout, self);
+			self->highlighted_stylus_page = g_object_ref (page);
+		}
 	}
+
 }
 
 static void
