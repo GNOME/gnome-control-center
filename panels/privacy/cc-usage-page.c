@@ -341,7 +341,7 @@ clear_recent (CcUsagePage *self)
   dialog = run_warning (self,
                         _("Clear File History?"),
                         _("After clearing, lists of recently used files will appear empty."),
-                        _("_Clear History"));
+                        _("Clear _History"));
 
   g_signal_connect_object (dialog,
                            "response",
