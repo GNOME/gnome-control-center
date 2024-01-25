@@ -1,5 +1,5 @@
 /* -*- Mode: C; tab-width: 2; indent-tabs-mode: nil; c-basic-offset: 2 -*- */
-/* cc-wwan-panel.h
+/* cc-wwan-page.h
  *
  * Copyright 2019 Purism SPC
  *
@@ -24,13 +24,11 @@
 
 #pragma once
 
-#include <shell/cc-panel.h>
+#include <adwaita.h>
 
 G_BEGIN_DECLS
 
-#define CC_TYPE_WWAN_PANEL (cc_wwan_panel_get_type())
-G_DECLARE_FINAL_TYPE (CcWwanPanel, cc_wwan_panel, CC, WWAN_PANEL, CcPanel)
-
-void                 cc_wwan_panel_static_init_func              (void);
+#define CC_TYPE_WWAN_PAGE (cc_wwan_page_get_type())
+G_DECLARE_FINAL_TYPE (CcWwanPage, cc_wwan_page, CC, WWAN_PAGE, AdwNavigationPage)
 
 G_END_DECLS

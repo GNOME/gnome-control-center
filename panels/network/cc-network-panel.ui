@@ -26,6 +26,15 @@
                           </object>
                         </child>
                         <child>
+                          <object class="CcListRow" id="wwan_row">
+                            <property name="title" translatable="yes">Cellular</property>
+                            <property name="show-arrow">True</property>
+                            <property name="icon-name">network-cellular-signal-excellent-symbolic</property>
+                            <property name="action-name">navigation.push</property>
+                            <property name="action-target">'wwan'</property>
+                          </object>
+                        </child>
+                        <child>
                           <object class="CcListRow">
                             <property name="title" translatable="yes">VPN</property>
                             <property name="subtitle" translatable="yes">Not Set Up</property>
@@ -136,6 +145,9 @@
         </child>
         <child>
           <object class="CcWifiPage" id="wifi_page"/>
+        </child>
+        <child>
+          <object class="CcWwanPage" id="wwan_page"/>
         </child>
       </object>
     </property>

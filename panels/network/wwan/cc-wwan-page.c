@@ -1,5 +1,5 @@
 /* -*- Mode: C; tab-width: 2; indent-tabs-mode: nil; c-basic-offset: 2 -*- */
-/* cc-wwan-panel.c
+/* cc-wwan-page.c
  *
  * Copyright 2019,2022 Purism SPC
  *
@@ -23,7 +23,7 @@
  */
 
 #undef G_LOG_DOMAIN
-#define G_LOG_DOMAIN "cc-wwan-panel"
+#define G_LOG_DOMAIN "cc-wwan-page"
 
 #include <config.h>
 #include <glib/gi18n.h>
@@ -32,7 +32,7 @@
 #include "cc-wwan-device.h"
 #include "cc-wwan-data.h"
 #include "cc-wwan-device-page.h"
-#include "cc-wwan-panel.h"
+#include "cc-wwan-page.h"
 #include "cc-wwan-resources.h"
 
 #include "shell/cc-application.h"
@@ -44,9 +44,9 @@ typedef enum {
   OPERATION_SHOW_DEVICE,
 } CmdlineOperation;
 
-struct _CcWwanPanel
+struct _CcWwanPage
 {
-  CcPanel parent_instance;
+  AdwNavigationPage parent_instance;
 
   AdwToastOverlay  *toast_overlay;
   AdwComboRow      *data_list_row;
@@ -77,7 +77,7 @@ enum {
   PROP_PARAMETERS
 };
 
-G_DEFINE_TYPE (CcWwanPanel, cc_wwan_panel, CC_TYPE_PANEL)
+G_DEFINE_TYPE (CcWwanPage, cc_wwan_page, ADW_TYPE_NAVIGATION_PAGE)
 
 
 #define CC_TYPE_DATA_DEVICE_ROW (cc_data_device_row_get_type())
@@ -114,14 +114,14 @@ cmdline_operation_from_string (const gchar *str)
 }
 
 static void
-reset_command_line_args (CcWwanPanel *self)
+reset_command_line_args (CcWwanPage *self)
 {
   self->arg_operation = OPERATION_NULL;
   g_clear_pointer (&self->arg_device, g_free);
 }
 
 static gboolean
-verify_argv (CcWwanPanel  *self,
+verify_argv (CcWwanPage  *self,
              const char  **args)
 {
 	switch (self->arg_operation)
@@ -138,7 +138,7 @@ verify_argv (CcWwanPanel  *self,
 }
 
 static void
-handle_argv (CcWwanPanel *self)
+handle_argv (CcWwanPage *self)
 {
   if (self->arg_operation == OPERATION_SHOW_DEVICE &&
       self->arg_operation)
@@ -163,7 +163,7 @@ handle_argv (CcWwanPanel *self)
 }
 
 static gboolean
-wwan_panel_device_is_supported (GDBusObject *object)
+wwan_page_device_is_supported (GDBusObject *object)
 {
   MMObject *mm_object;
   MMModem *modem;
@@ -233,7 +233,7 @@ wwan_model_get_item_from_mm_object (GListModel *model,
 }
 
 static void
-cc_wwan_panel_update_data_selection (CcWwanPanel *self)
+cc_wwan_page_update_data_selection (CcWwanPage *self)
 {
   int i;
 
@@ -247,7 +247,7 @@ cc_wwan_panel_update_data_selection (CcWwanPanel *self)
 }
 
 static void
-cc_wwan_data_item_activate_cb (CcWwanPanel  *self,
+cc_wwan_data_item_activate_cb (CcWwanPage  *self,
                                CcWwanDevice *device)
 {
   CcWwanData *data;
@@ -269,11 +269,11 @@ cc_wwan_data_item_activate_cb (CcWwanPanel  *self,
   cc_wwan_data_save_settings (data, NULL, NULL, NULL);
 
   self->data_device = device;
-  cc_wwan_panel_update_data_selection (self);
+  cc_wwan_page_update_data_selection (self);
 }
 
 static void
-wwan_on_airplane_off_clicked_cb (CcWwanPanel *self)
+wwan_on_airplane_off_clicked_cb (CcWwanPage *self)
 {
   g_debug ("Airplane Mode Off clicked, disabling airplane mode");
   g_dbus_proxy_call (self->rfkill_proxy,
@@ -289,12 +289,12 @@ wwan_on_airplane_off_clicked_cb (CcWwanPanel *self)
 }
 
 static void
-wwan_data_list_selected_sim_changed_cb (CcWwanPanel *self)
+wwan_data_list_selected_sim_changed_cb (CcWwanPage *self)
 {
   CcWwanDevice *device;
   GObject *selected;
 
-  g_assert (CC_IS_WWAN_PANEL (self));
+  g_assert (CC_IS_WWAN_PAGE (self));
 
   selected = adw_combo_row_get_selected_item (self->data_list_row);
   if (!selected)
@@ -305,7 +305,7 @@ wwan_data_list_selected_sim_changed_cb (CcWwanPanel *self)
 }
 
 static gboolean
-cc_wwan_panel_get_cached_dbus_property (GDBusProxy  *proxy,
+cc_wwan_page_get_cached_dbus_property (GDBusProxy  *proxy,
                                         const gchar *property)
 {
   g_autoptr(GVariant) result = NULL;
@@ -320,17 +320,17 @@ cc_wwan_panel_get_cached_dbus_property (GDBusProxy  *proxy,
 }
 
 static void
-cc_wwan_panel_update_view (CcWwanPanel *self)
+cc_wwan_page_update_view (CcWwanPage *self)
 {
   gboolean has_airplane, is_airplane = FALSE, enabled = FALSE;
 
-  has_airplane = cc_wwan_panel_get_cached_dbus_property (self->rfkill_proxy, "HasAirplaneMode");
-  has_airplane &= cc_wwan_panel_get_cached_dbus_property (self->rfkill_proxy, "ShouldShowAirplaneMode");
+  has_airplane = cc_wwan_page_get_cached_dbus_property (self->rfkill_proxy, "HasAirplaneMode");
+  has_airplane &= cc_wwan_page_get_cached_dbus_property (self->rfkill_proxy, "ShouldShowAirplaneMode");
 
   if (has_airplane)
     {
-      is_airplane = cc_wwan_panel_get_cached_dbus_property (self->rfkill_proxy, "AirplaneMode");
-      is_airplane |= cc_wwan_panel_get_cached_dbus_property (self->rfkill_proxy, "HardwareAirplaneMode");
+      is_airplane = cc_wwan_page_get_cached_dbus_property (self->rfkill_proxy, "AirplaneMode");
+      is_airplane |= cc_wwan_page_get_cached_dbus_property (self->rfkill_proxy, "HardwareAirplaneMode");
     }
 
   if (self->nm_client)
@@ -351,7 +351,7 @@ cc_wwan_panel_update_view (CcWwanPanel *self)
 }
 
 static void
-cc_wwan_panel_add_device (CcWwanPanel  *self,
+cc_wwan_page_add_device (CcWwanPage  *self,
                           CcWwanDevice *device)
 {
   CcWwanDevicePage *device_page;
@@ -372,8 +372,8 @@ cc_wwan_panel_add_device (CcWwanPanel  *self,
 }
 
 static void
-cc_wwan_panel_update_page_title (CcWwanDevicePage *device_page,
-                                 CcWwanPanel      *self)
+cc_wwan_page_update_page_title (CcWwanDevicePage *device_page,
+                                 CcWwanPage      *self)
 {
   g_autofree gchar *title = NULL;
   g_autofree gchar *name = NULL;
@@ -400,7 +400,7 @@ cc_wwan_panel_update_page_title (CcWwanDevicePage *device_page,
 }
 
 static void
-cc_wwan_panel_remove_mm_object (CcWwanPanel *self,
+cc_wwan_page_remove_mm_object (CcWwanPage *self,
                                 MMObject    *mm_object)
 {
   g_autoptr(CcWwanDevice) device = NULL;
@@ -435,11 +435,11 @@ cc_wwan_panel_remove_mm_object (CcWwanPanel *self,
   for (GtkWidget *child = gtk_widget_get_first_child (GTK_WIDGET (self->devices_stack));
        child;
        child = gtk_widget_get_next_sibling (child))
-    cc_wwan_panel_update_page_title (CC_WWAN_DEVICE_PAGE (child), self);
+    cc_wwan_page_update_page_title (CC_WWAN_DEVICE_PAGE (child), self);
 }
 
 static void
-wwan_panel_add_data_device_to_list (CcWwanPanel  *self,
+wwan_page_add_data_device_to_list (CcWwanPage  *self,
                                     CcWwanDevice *device)
 {
   g_autoptr(GtkStringObject) str = NULL;
@@ -460,7 +460,7 @@ wwan_panel_add_data_device_to_list (CcWwanPanel  *self,
 }
 
 static void
-cc_wwan_panel_update_data_connections (CcWwanPanel *self)
+cc_wwan_page_update_data_connections (CcWwanPage *self)
 {
   CcWwanData *device_data, *active_data = NULL;
   guint n_items;
@@ -494,15 +494,15 @@ cc_wwan_panel_update_data_connections (CcWwanPanel *self)
         }
 
       if (cc_wwan_data_get_enabled (device_data))
-        wwan_panel_add_data_device_to_list (self, device);
+        wwan_page_add_data_device_to_list (self, device);
     }
 
   if (active_data)
-    cc_wwan_panel_update_data_selection (self);
+    cc_wwan_page_update_data_selection (self);
 }
 
 static void
-cc_wwan_panel_update_devices (CcWwanPanel *self)
+cc_wwan_page_update_devices (CcWwanPage *self)
 {
   GList *devices, *iter;
 
@@ -513,49 +513,49 @@ cc_wwan_panel_update_devices (CcWwanPanel *self)
       MMObject *mm_object = iter->data;
       CcWwanDevice *device;
 
-      if(!wwan_panel_device_is_supported (iter->data))
+      if(!wwan_page_device_is_supported (iter->data))
         continue;
 
       device = cc_wwan_device_new (mm_object, G_OBJECT (self->nm_client));
-      cc_wwan_panel_add_device (self, device);
+      cc_wwan_page_add_device (self, device);
       g_signal_connect_object (device, "notify::has-data",
-                               G_CALLBACK (cc_wwan_panel_update_data_connections),
+                               G_CALLBACK (cc_wwan_page_update_data_connections),
                                self, G_CONNECT_SWAPPED);
 
       if (cc_wwan_device_get_data (device))
-        wwan_panel_add_data_device_to_list (self, device);
+        wwan_page_add_data_device_to_list (self, device);
     }
 
-  cc_wwan_panel_update_data_connections (self);
+  cc_wwan_page_update_data_connections (self);
   handle_argv (self);
 }
 
 static void
-wwan_panel_device_added_cb (CcWwanPanel *self,
+wwan_page_device_added_cb (CcWwanPage *self,
                             GDBusObject *object)
 {
   CcWwanDevice *device;
 
-  if(!wwan_panel_device_is_supported (object))
+  if(!wwan_page_device_is_supported (object))
     return;
 
   device = cc_wwan_device_new (MM_OBJECT (object), G_OBJECT (self->nm_client));
-  cc_wwan_panel_add_device (self, device);
+  cc_wwan_page_add_device (self, device);
   g_signal_connect_object (device, "notify::has-data",
-                           G_CALLBACK (cc_wwan_panel_update_data_connections),
+                           G_CALLBACK (cc_wwan_page_update_data_connections),
                            self, G_CONNECT_SWAPPED);
-  cc_wwan_panel_update_view (self);
+  cc_wwan_page_update_view (self);
   handle_argv (self);
 }
 
 static void
-wwan_panel_device_removed_cb (CcWwanPanel *self,
+wwan_page_device_removed_cb (CcWwanPage *self,
                               GDBusObject *object)
 {
-  if (!wwan_panel_device_is_supported (object))
+  if (!wwan_page_device_is_supported (object))
     return;
 
-  cc_wwan_panel_remove_mm_object (self, MM_OBJECT (object));
+  cc_wwan_page_remove_mm_object (self, MM_OBJECT (object));
 
   gtk_revealer_set_reveal_child (self->multi_device_revealer,
                                  g_list_model_get_n_items (G_LIST_MODEL (self->devices)) > 1);
@@ -583,12 +583,12 @@ variant_av_to_string_array (GVariant *array)
 }
 
 static void
-cc_wwan_panel_set_property (GObject      *object,
+cc_wwan_page_set_property (GObject      *object,
                             guint         property_id,
                             const GValue *value,
                             GParamSpec   *pspec)
 {
-  CcWwanPanel *self = CC_WWAN_PANEL (object);
+  CcWwanPage *self = CC_WWAN_PAGE (object);
 
   switch (property_id)
     {
@@ -630,9 +630,9 @@ cc_wwan_panel_set_property (GObject      *object,
 }
 
 static void
-cc_wwan_panel_dispose (GObject *object)
+cc_wwan_page_dispose (GObject *object)
 {
-  CcWwanPanel *self = (CcWwanPanel *)object;
+  CcWwanPage *self = (CcWwanPage *)object;
 
   g_cancellable_cancel (self->cancellable);
 
@@ -645,31 +645,31 @@ cc_wwan_panel_dispose (GObject *object)
   g_clear_object (&self->rfkill_proxy);
   g_clear_pointer (&self->arg_device, g_free);
 
-  G_OBJECT_CLASS (cc_wwan_panel_parent_class)->dispose (object);
+  G_OBJECT_CLASS (cc_wwan_page_parent_class)->dispose (object);
 }
 
 static void
-cc_wwan_panel_class_init (CcWwanPanelClass *klass)
+cc_wwan_page_class_init (CcWwanPageClass *klass)
 {
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
-  object_class->set_property = cc_wwan_panel_set_property;
-  object_class->dispose = cc_wwan_panel_dispose;
+  object_class->set_property = cc_wwan_page_set_property;
+  object_class->dispose = cc_wwan_page_dispose;
 
   g_object_class_override_property (object_class, PROP_PARAMETERS, "parameters");
 
   gtk_widget_class_set_template_from_resource (widget_class,
-                                               "/org/gnome/control-center/wwan/cc-wwan-panel.ui");
+                                               "/org/gnome/control-center/wwan/cc-wwan-page.ui");
 
-  gtk_widget_class_bind_template_child (widget_class, CcWwanPanel, toast_overlay);
-  gtk_widget_class_bind_template_child (widget_class, CcWwanPanel, data_list_row);
-  gtk_widget_class_bind_template_child (widget_class, CcWwanPanel, data_sim_select_listbox);
-  gtk_widget_class_bind_template_child (widget_class, CcWwanPanel, devices_stack);
-  gtk_widget_class_bind_template_child (widget_class, CcWwanPanel, devices_switcher);
-  gtk_widget_class_bind_template_child (widget_class, CcWwanPanel, enable_switch);
-  gtk_widget_class_bind_template_child (widget_class, CcWwanPanel, main_stack);
-  gtk_widget_class_bind_template_child (widget_class, CcWwanPanel, multi_device_revealer);
+  gtk_widget_class_bind_template_child (widget_class, CcWwanPage, toast_overlay);
+  gtk_widget_class_bind_template_child (widget_class, CcWwanPage, data_list_row);
+  gtk_widget_class_bind_template_child (widget_class, CcWwanPage, data_sim_select_listbox);
+  gtk_widget_class_bind_template_child (widget_class, CcWwanPage, devices_stack);
+  gtk_widget_class_bind_template_child (widget_class, CcWwanPage, devices_switcher);
+  gtk_widget_class_bind_template_child (widget_class, CcWwanPage, enable_switch);
+  gtk_widget_class_bind_template_child (widget_class, CcWwanPage, main_stack);
+  gtk_widget_class_bind_template_child (widget_class, CcWwanPage, multi_device_revealer);
 
   gtk_widget_class_bind_template_callback (widget_class, wwan_data_list_selected_sim_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, wwan_on_airplane_off_clicked_cb);
@@ -677,7 +677,7 @@ cc_wwan_panel_class_init (CcWwanPanelClass *klass)
 }
 
 static void
-cc_wwan_panel_init (CcWwanPanel *self)
+cc_wwan_page_init (CcWwanPage *self)
 {
   g_autoptr(GError) error = NULL;
 
@@ -697,7 +697,7 @@ cc_wwan_panel_init (CcWwanPanel *self)
       self->nm_client = cc_object_storage_get_object (CC_OBJECT_NMCLIENT);
       g_signal_connect_object (self->nm_client,
                                "notify::wwan-enabled",
-                               G_CALLBACK (cc_wwan_panel_update_view),
+                               G_CALLBACK (cc_wwan_page_update_view),
                                self, G_CONNECT_SWAPPED);
 
     }
@@ -718,13 +718,13 @@ cc_wwan_panel_init (CcWwanPanel *self)
       self->mm_manager = cc_object_storage_get_object ("CcObjectStorage::mm-manager");
 
       g_signal_connect_object (self->mm_manager, "object-added",
-                               G_CALLBACK (wwan_panel_device_added_cb),
+                               G_CALLBACK (wwan_page_device_added_cb),
                                self, G_CONNECT_SWAPPED);
       g_signal_connect_object (self->mm_manager, "object-removed",
-                               G_CALLBACK (wwan_panel_device_removed_cb),
+                               G_CALLBACK (wwan_page_device_removed_cb),
                                self, G_CONNECT_SWAPPED);
 
-      cc_wwan_panel_update_devices (self);
+      cc_wwan_page_update_devices (self);
     }
   else
     {
@@ -749,88 +749,9 @@ cc_wwan_panel_init (CcWwanPanel *self)
     {
       g_signal_connect_object (self->rfkill_proxy,
                                "g-properties-changed",
-                               G_CALLBACK (cc_wwan_panel_update_view),
+                               G_CALLBACK (cc_wwan_page_update_view),
                                self, G_CONNECT_SWAPPED);
 
-      cc_wwan_panel_update_view (self);
+      cc_wwan_page_update_view (self);
     }
-}
-
-static void
-wwan_update_panel_visibility (MMManager *mm_manager)
-{
-  CcApplication *application;
-  GList *devices;
-  gboolean has_wwan;
-
-  g_assert (MM_IS_MANAGER (mm_manager));
-
-  CC_TRACE_MSG ("Updating WWAN panel visibility");
-
-  has_wwan = FALSE;
-  devices = g_dbus_object_manager_get_objects (G_DBUS_OBJECT_MANAGER (mm_manager));
-
-  for (GList *item = devices; item != NULL; item = item->next)
-    {
-      if(wwan_panel_device_is_supported (item->data))
-        {
-          has_wwan = TRUE;
-          break;
-        }
-    }
-
-  /* Set the new visibility */
-  application = CC_APPLICATION (g_application_get_default ());
-  cc_shell_model_set_panel_visibility (cc_application_get_model (application),
-                                       "wwan",
-                                       has_wwan ? CC_PANEL_VISIBLE : CC_PANEL_VISIBLE_IN_SEARCH);
-
-  g_debug ("WWAN panel visible: %s", has_wwan ? "yes" : "no");
-
-  g_list_free_full (devices, (GDestroyNotify)g_object_unref);
-}
-
-void
-cc_wwan_panel_static_init_func (void)
-{
-  g_autoptr(GDBusConnection) system_bus = NULL;
-  g_autoptr(MMManager) mm_manager = NULL;
-  g_autoptr(GError) error = NULL;
-
-  /*
-   * There could be other modems that are only handled by rfkill,
-   * and not available via ModemManager.  But as this panel
-   * makes use of ModemManager APIs, we only care devices
-   * supported by ModemManager.
-   */
-  system_bus = g_bus_get_sync (G_BUS_TYPE_SYSTEM, NULL, &error);
-  if (system_bus == NULL)
-    g_warning ("Error connecting to system D-Bus: %s", error->message);
-  else
-    mm_manager = mm_manager_new_sync (system_bus,
-                                      G_DBUS_OBJECT_MANAGER_CLIENT_FLAGS_NONE,
-                                      NULL, &error);
-
-  if (mm_manager == NULL)
-    {
-      CcApplication *application;
-
-      g_warning ("Error connecting to ModemManager: %s", error->message);
-
-      application = CC_APPLICATION (g_application_get_default ());
-      cc_shell_model_set_panel_visibility (cc_application_get_model (application),
-                                           "wwan", FALSE);
-      return;
-    }
-  else
-    {
-      cc_object_storage_add_object ("CcObjectStorage::mm-manager", mm_manager);
-    }
-
-  g_debug ("Monitoring ModemManager for WWAN devices");
-
-  g_signal_connect (mm_manager, "object-added", G_CALLBACK (wwan_update_panel_visibility), NULL);
-  g_signal_connect (mm_manager, "object-removed", G_CALLBACK (wwan_update_panel_visibility), NULL);
-
-  wwan_update_panel_visibility (mm_manager);
 }

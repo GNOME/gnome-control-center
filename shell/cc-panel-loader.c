@@ -58,17 +58,11 @@ extern GType cc_ua_panel_get_type (void);
 #ifdef BUILD_WACOM
 extern GType cc_wacom_panel_get_type (void);
 #endif /* BUILD_WACOM */
-#ifdef BUILD_WWAN
-extern GType cc_wwan_panel_get_type (void);
-#endif /* BUILD_WWAN */
 
 /* Static init functions */
 #ifdef BUILD_WACOM
 extern void cc_wacom_panel_static_init_func (void);
 #endif /* BUILD_WACOM */
-#ifdef BUILD_WWAN
-extern void cc_wwan_panel_static_init_func (void);
-#endif /* BUILD_WWAN */
 
 #define PANEL_TYPE(name, get_type, init_func) { name, get_type, init_func }
 
@@ -105,9 +99,6 @@ static CcPanelLoaderVtable default_panels[] =
   PANEL_TYPE("universal-access", cc_ua_panel_get_type,                   NULL),
 #ifdef BUILD_WACOM
   PANEL_TYPE("wacom",            cc_wacom_panel_get_type,                cc_wacom_panel_static_init_func),
-#endif
-#ifdef BUILD_WWAN
-  PANEL_TYPE("wwan",             cc_wwan_panel_get_type,                 cc_wwan_panel_static_init_func),
 #endif
 };
 

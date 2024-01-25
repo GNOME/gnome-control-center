@@ -10,7 +10,7 @@ subdir('icons')
 
 panel_names = [
   cappletname,
-  'wifi'
+  'wifi',
 ]
 
 panels_list += panel_names
@@ -27,6 +27,8 @@ foreach name: panel_names
     install_dir: control_center_desktopdir
   )
 endforeach
+
+subdir('wwan')
 
 sources = files(
   'cc-qr-code.c',
