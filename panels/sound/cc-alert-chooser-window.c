@@ -26,7 +26,7 @@
 
 struct _CcAlertChooserWindow
 {
-  AdwWindow       parent_instance;
+  AdwDialog       parent_instance;
 
   GtkCheckButton *none_button;
   GtkCheckButton *click_button;
@@ -38,7 +38,7 @@ struct _CcAlertChooserWindow
   GSettings      *sound_settings;
 };
 
-G_DEFINE_TYPE (CcAlertChooserWindow, cc_alert_chooser_window, ADW_TYPE_WINDOW)
+G_DEFINE_TYPE (CcAlertChooserWindow, cc_alert_chooser_window, ADW_TYPE_DIALOG)
 
 #define CUSTOM_THEME_NAME "__custom"
 
@@ -266,8 +266,6 @@ cc_alert_chooser_window_class_init (CcAlertChooserWindowClass *klass)
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
   object_class->dispose = cc_alert_chooser_window_dispose;
-
-  gtk_widget_class_add_binding_action (widget_class, GDK_KEY_Escape, 0, "window.close", NULL);
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/sound/cc-alert-chooser-window.ui");
 

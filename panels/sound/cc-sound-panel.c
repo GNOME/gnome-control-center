@@ -246,20 +246,14 @@ static void
 alert_sound_activated_cb (CcSoundPanel *self)
 {
   CcAlertChooserWindow *alert_chooser;
-  GtkWindow *toplevel;
-  CcShell *shell;
-
-  shell = cc_panel_get_shell (CC_PANEL (self));
-  toplevel = GTK_WINDOW (cc_shell_get_toplevel (shell));
 
   alert_chooser = cc_alert_chooser_window_new ();
-  gtk_window_set_transient_for (GTK_WINDOW (alert_chooser), toplevel);
 
   g_signal_connect_object (alert_chooser, "destroy",
                            G_CALLBACK (update_alert_sound_label),
                            self, G_CONNECT_SWAPPED);
 
-  gtk_window_present (GTK_WINDOW (alert_chooser));
+  adw_dialog_present (ADW_DIALOG (alert_chooser), GTK_WIDGET (self));
 }
 
 static const char *
