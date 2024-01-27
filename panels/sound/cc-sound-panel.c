@@ -212,19 +212,13 @@ test_output_configuration_button_clicked_cb (CcSoundPanel *self)
   GvcMixerUIDevice *device;
   GvcMixerStream *stream = NULL;
   CcOutputTestWindow *window;
-  GtkWidget *toplevel;
-  CcShell *shell;
 
   device = cc_device_combo_box_get_device (self->output_device_combo_box);
   if (device != NULL)
     stream = gvc_mixer_control_get_stream_from_device (self->mixer_control, device);
 
-  shell = cc_panel_get_shell (CC_PANEL (self));
-  toplevel = cc_shell_get_toplevel (shell);
-
   window = cc_output_test_window_new (stream);
-  gtk_window_set_transient_for (GTK_WINDOW (window), GTK_WINDOW (toplevel));
-  gtk_window_present (GTK_WINDOW (window));
+  adw_dialog_present (ADW_DIALOG (window), GTK_WIDGET (self));
 }
 
 static void

@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
-  <template class="CcOutputTestWindow" parent="AdwWindow">
+  <template class="CcOutputTestWindow" parent="AdwDialog">
     <property name="title" translatable="yes">Test Speakers</property>
-    <property name="modal">True</property>
-    <property name="resizable">False</property>
-    <property name="content">
+    <property name="follows-content-size">False</property>
+    <property name="child">
       <object class="AdwToolbarView">
         <child type="top">
           <object class="AdwHeaderBar"/>

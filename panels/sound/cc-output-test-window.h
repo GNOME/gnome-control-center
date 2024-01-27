@@ -23,7 +23,7 @@
 G_BEGIN_DECLS
 
 #define CC_TYPE_OUTPUT_TEST_WINDOW (cc_output_test_window_get_type ())
-G_DECLARE_FINAL_TYPE (CcOutputTestWindow, cc_output_test_window, CC, OUTPUT_TEST_WINDOW, AdwWindow)
+G_DECLARE_FINAL_TYPE (CcOutputTestWindow, cc_output_test_window, CC, OUTPUT_TEST_WINDOW, AdwDialog)
 
 CcOutputTestWindow *cc_output_test_window_new (GvcMixerStream *stream);
 

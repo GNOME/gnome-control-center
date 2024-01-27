@@ -20,12 +20,12 @@
 
 struct _CcOutputTestWindow
 {
-  AdwWindow          parent_instance;
+  AdwDialog          parent_instance;
 
   CcOutputTestWheel *wheel;
 };
 
-G_DEFINE_TYPE (CcOutputTestWindow, cc_output_test_window, ADW_TYPE_WINDOW)
+G_DEFINE_TYPE (CcOutputTestWindow, cc_output_test_window, ADW_TYPE_DIALOG)
 
 void
 cc_output_test_window_class_init (CcOutputTestWindowClass *klass)
@@ -35,8 +35,6 @@ cc_output_test_window_class_init (CcOutputTestWindowClass *klass)
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/sound/cc-output-test-window.ui");
 
   gtk_widget_class_bind_template_child (widget_class, CcOutputTestWindow, wheel);
-
-  gtk_widget_class_add_binding_action (widget_class, GDK_KEY_Escape, 0, "window.close", NULL);
 
   g_type_ensure (CC_TYPE_OUTPUT_TEST_WHEEL);
 }
