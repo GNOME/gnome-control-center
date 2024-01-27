@@ -225,15 +225,9 @@ static void
 volume_levels_activated_cb (CcSoundPanel *self)
 {
   CcVolumeLevelsWindow *volume_levels;
-  GtkWindow *toplevel;
-  CcShell *shell;
-
-  shell = cc_panel_get_shell (CC_PANEL (self));
-  toplevel = GTK_WINDOW (cc_shell_get_toplevel (shell));
 
   volume_levels = cc_volume_levels_window_new (self->mixer_control);
-  gtk_window_set_transient_for (GTK_WINDOW (volume_levels), toplevel);
-  gtk_window_present (GTK_WINDOW (volume_levels));
+  adw_dialog_present (ADW_DIALOG (volume_levels), GTK_WIDGET (self));
 }
 
 static void

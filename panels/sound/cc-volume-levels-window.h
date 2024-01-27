@@ -23,7 +23,7 @@
 G_BEGIN_DECLS
 
 #define CC_TYPE_VOLUME_LEVELS_WINDOW (cc_volume_levels_window_get_type ())
-G_DECLARE_FINAL_TYPE (CcVolumeLevelsWindow, cc_volume_levels_window, CC, VOLUME_LEVELS_WINDOW, AdwWindow)
+G_DECLARE_FINAL_TYPE (CcVolumeLevelsWindow, cc_volume_levels_window, CC, VOLUME_LEVELS_WINDOW, AdwDialog)
 
 CcVolumeLevelsWindow *cc_volume_levels_window_new (GvcMixerControl *mixer_control);
 
