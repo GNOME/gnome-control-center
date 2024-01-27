@@ -30,7 +30,7 @@ G_BEGIN_DECLS
 
 #define CC_TYPE_FIRMWARE_SECURITY_BOOT_DIALOG (cc_firmware_security_boot_dialog_get_type ())
 G_DECLARE_FINAL_TYPE (CcFirmwareSecurityBootDialog, cc_firmware_security_boot_dialog,
-                      CC, FIRMWARE_SECURITY_BOOT_DIALOG, AdwWindow)
+                      CC, FIRMWARE_SECURITY_BOOT_DIALOG, AdwDialog)
 
 GtkWidget *cc_firmware_security_boot_dialog_new (SecureBootState secure_boot_state);
 

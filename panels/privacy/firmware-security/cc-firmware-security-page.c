@@ -476,13 +476,10 @@ on_hsi_button_clicked_cb (CcFirmwareSecurityPage *self)
 static void
 on_secure_boot_button_clicked_cb (CcFirmwareSecurityPage *self)
 {
-  GtkWindow *toplevel;
   GtkWidget *boot_dialog;
 
   boot_dialog = cc_firmware_security_boot_dialog_new (self->secure_boot_state);
-  toplevel = GTK_WINDOW (gtk_widget_get_root (GTK_WIDGET (self)));
-  gtk_window_set_transient_for (GTK_WINDOW (boot_dialog), toplevel);
-  gtk_window_present (GTK_WINDOW (boot_dialog));
+  adw_dialog_present (ADW_DIALOG (boot_dialog), GTK_WIDGET (self));
 }
 
 static void

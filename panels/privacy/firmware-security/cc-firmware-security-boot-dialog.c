@@ -28,23 +28,22 @@
 
 struct _CcFirmwareSecurityBootDialog
 {
-  AdwWindow         parent;
+  AdwDialog         parent;
 
   GtkWidget        *secure_boot_icon;
   GtkWidget        *secure_boot_title;
   GtkWidget        *secure_boot_description;
 };
 
-G_DEFINE_TYPE (CcFirmwareSecurityBootDialog, cc_firmware_security_boot_dialog, ADW_TYPE_WINDOW)
+G_DEFINE_TYPE (CcFirmwareSecurityBootDialog, cc_firmware_security_boot_dialog, ADW_TYPE_DIALOG)
 
 static void
 cc_firmware_security_boot_dialog_class_init (CcFirmwareSecurityBootDialogClass *klass)
 {
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
-  gtk_widget_class_add_binding_action (widget_class, GDK_KEY_Escape, 0, "window.close", NULL);
-
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/privacy/firmware-security/cc-firmware-security-boot-dialog.ui");
+
   gtk_widget_class_bind_template_child (widget_class, CcFirmwareSecurityBootDialog, secure_boot_title);
   gtk_widget_class_bind_template_child (widget_class, CcFirmwareSecurityBootDialog, secure_boot_icon);
   gtk_widget_class_bind_template_child (widget_class, CcFirmwareSecurityBootDialog, secure_boot_description);
