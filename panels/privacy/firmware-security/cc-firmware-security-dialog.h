@@ -27,7 +27,7 @@
 G_BEGIN_DECLS
 
 #define CC_TYPE_FIRMWARE_SECURITY_DIALOG (cc_firmware_security_dialog_get_type ())
-G_DECLARE_FINAL_TYPE (CcFirmwareSecurityDialog, cc_firmware_security_dialog, CC, FIRMWARE_SECURITY_DIALOG, AdwWindow)
+G_DECLARE_FINAL_TYPE (CcFirmwareSecurityDialog, cc_firmware_security_dialog, CC, FIRMWARE_SECURITY_DIALOG, AdwDialog)
 
 GtkWidget * cc_firmware_security_dialog_new (guint       hsi_number,
                                              GHashTable *hsi1_dict,

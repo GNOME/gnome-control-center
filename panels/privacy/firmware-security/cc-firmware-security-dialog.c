@@ -34,7 +34,7 @@
 
 struct _CcFirmwareSecurityDialog
 {
-  AdwWindow            parent;
+  AdwDialog            parent;
 
   GtkWidget           *firmware_security_dialog_icon;
 
@@ -58,7 +58,7 @@ struct _CcFirmwareSecurityDialog
   guint                hsi_number;
 };
 
-G_DEFINE_TYPE (CcFirmwareSecurityDialog, cc_firmware_security_dialog, ADW_TYPE_WINDOW)
+G_DEFINE_TYPE (CcFirmwareSecurityDialog, cc_firmware_security_dialog, ADW_TYPE_DIALOG)
 
 static void
 set_dialog_item_layer1 (CcFirmwareSecurityDialog *self,
@@ -371,8 +371,6 @@ static void
 cc_firmware_security_dialog_class_init (CcFirmwareSecurityDialogClass *klass)
 {
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
-
-  gtk_widget_class_add_binding_action (widget_class, GDK_KEY_Escape, 0, "window.close", NULL);
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/privacy/firmware-security/cc-firmware-security-dialog.ui");
 

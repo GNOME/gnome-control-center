@@ -458,7 +458,6 @@ on_bus_ready_cb (GObject       *source_object,
 static void
 on_hsi_button_clicked_cb (CcFirmwareSecurityPage *self)
 {
-  GtkWindow *toplevel;
   GtkWidget *dialog;
 
   dialog = cc_firmware_security_dialog_new (self->hsi_number,
@@ -468,9 +467,7 @@ on_hsi_button_clicked_cb (CcFirmwareSecurityPage *self)
                                             self->hsi4_dict,
                                             self->runtime_dict,
                                             self->event_log_output);
-  toplevel = GTK_WINDOW (gtk_widget_get_root (GTK_WIDGET (self)));
-  gtk_window_set_transient_for (GTK_WINDOW (dialog), toplevel);
-  gtk_window_present (GTK_WINDOW (dialog));
+  adw_dialog_present (ADW_DIALOG (dialog), GTK_WIDGET (self));
 }
 
 static void
