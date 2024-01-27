@@ -28,7 +28,7 @@ G_BEGIN_DECLS
 
 #define CC_TYPE_FIRMWARE_SECURITY_HELP_DIALOG (cc_firmware_security_help_dialog_get_type ())
 G_DECLARE_FINAL_TYPE (CcFirmwareSecurityHelpDialog, cc_firmware_security_help_dialog,
-                      CC, FIRMWARE_SECURITY_HELP_DIALOG, AdwWindow)
+                      CC, FIRMWARE_SECURITY_HELP_DIALOG, AdwDialog)
 
 GtkWidget * cc_firmware_security_help_dialog_new (void);
 

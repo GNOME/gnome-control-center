@@ -483,12 +483,9 @@ static void
 on_fw_help_button_clicked_cb (CcFirmwareSecurityPage *self)
 {
   GtkWidget *help_dialog;
-  GtkWindow *toplevel;
 
   help_dialog = cc_firmware_security_help_dialog_new ();
-  toplevel = GTK_WINDOW (gtk_widget_get_root (GTK_WIDGET (self)));
-  gtk_window_set_transient_for (GTK_WINDOW (help_dialog), toplevel);
-  gtk_window_present (GTK_WINDOW (help_dialog));
+  adw_dialog_present (ADW_DIALOG (help_dialog), GTK_WIDGET (self));
 }
 
 static void

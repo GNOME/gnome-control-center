@@ -28,18 +28,16 @@
 
 struct _CcFirmwareSecurityHelpDialog
 {
-  AdwWindow  parent;
+  AdwDialog  parent;
 };
 
-G_DEFINE_TYPE (CcFirmwareSecurityHelpDialog, cc_firmware_security_help_dialog, ADW_TYPE_WINDOW)
+G_DEFINE_TYPE (CcFirmwareSecurityHelpDialog, cc_firmware_security_help_dialog, ADW_TYPE_DIALOG)
 
 
 static void
 cc_firmware_security_help_dialog_class_init (CcFirmwareSecurityHelpDialogClass *klass)
 {
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
-
-  gtk_widget_class_add_binding_action (widget_class, GDK_KEY_Escape, 0, "window.close", NULL);
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/privacy/firmware-security/cc-firmware-security-help-dialog.ui");
 }
