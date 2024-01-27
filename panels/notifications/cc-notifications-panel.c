@@ -466,11 +466,6 @@ select_app (CcNotificationsPanel *self,
   Application *app;
   g_autofree gchar *app_id = NULL;
   CcAppNotificationsDialog *dialog;
-  GtkWidget *toplevel;
-  CcShell *shell;
-
-  shell = cc_panel_get_shell (CC_PANEL (self));
-  toplevel = cc_shell_get_toplevel (shell);
 
   app = g_object_get_qdata (G_OBJECT (row), application_quark ());
 
@@ -479,8 +474,7 @@ select_app (CcNotificationsPanel *self,
     app_id[strlen (app_id) - strlen (".desktop")] = '\0';
 
   dialog = cc_app_notifications_dialog_new (app_id, g_app_info_get_name (app->app_info), app->settings, self->master_settings, self->perm_store);
-  gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (toplevel));
-  gtk_window_present (GTK_WINDOW (dialog));
+  adw_dialog_present (ADW_DIALOG (dialog), GTK_WIDGET (self));
 }
 
 static int

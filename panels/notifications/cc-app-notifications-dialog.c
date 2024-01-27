@@ -48,7 +48,7 @@ static void update_sound_row (CcAppNotificationsDialog *dialog);
 static void update_notification_row (CcAppNotificationsDialog *dialog);
 
 struct _CcAppNotificationsDialog {
-  AdwWindow            parent;
+  AdwDialog            parent;
 
   GSettings           *settings;
   GSettings           *master_settings;
@@ -63,7 +63,7 @@ struct _CcAppNotificationsDialog {
   AdwSwitchRow        *lock_screen_content_row;
 };
 
-G_DEFINE_TYPE (CcAppNotificationsDialog, cc_app_notifications_dialog, ADW_TYPE_WINDOW)
+G_DEFINE_TYPE (CcAppNotificationsDialog, cc_app_notifications_dialog, ADW_TYPE_DIALOG)
 
 static void
 on_perm_store_set_done (GObject *source_object,
@@ -354,8 +354,6 @@ cc_app_notifications_dialog_class_init (CcAppNotificationsDialogClass *klass)
   gtk_widget_class_bind_template_callback (widget_class, notification_banners_content_row_state_set_cb);
   gtk_widget_class_bind_template_callback (widget_class, lock_screen_notifications_row_state_set_cb);
   gtk_widget_class_bind_template_callback (widget_class, lock_screen_content_row_state_set_cb);
-
-  gtk_widget_class_add_binding_action (widget_class, GDK_KEY_Escape, 0, "window.close", NULL);
 }
 
 void
@@ -375,7 +373,7 @@ cc_app_notifications_dialog_new (const gchar          *app_id,
 
   dialog = g_object_new (CC_TYPE_APP_NOTIFICATIONS_DIALOG, NULL);
 
-  gtk_window_set_title (GTK_WINDOW (dialog), title);
+  adw_dialog_set_title (ADW_DIALOG (dialog), title);
   dialog->settings = g_object_ref (settings);
   dialog->master_settings = g_object_ref (master_settings);
   dialog->app_id = g_strdup (app_id);
