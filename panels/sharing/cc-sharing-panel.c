@@ -421,11 +421,9 @@ cc_sharing_panel_new_media_sharing_row (const char     *uri_or_path,
 
   /* Remove button */
   w = gtk_button_new_from_icon_name ("edit-delete-symbolic");
+  gtk_widget_set_tooltip_text (GTK_WIDGET (w), _("Remove Folder"));
   gtk_widget_add_css_class (w, "flat");
   gtk_widget_set_valign (w, GTK_ALIGN_CENTER);
-  gtk_accessible_update_property (GTK_ACCESSIBLE (w),
-                                GTK_ACCESSIBLE_PROPERTY_LABEL, _("Remove"),
-                                -1);
   adw_action_row_add_suffix (ADW_ACTION_ROW (row), w);
   g_signal_connect_object (G_OBJECT (w), "clicked",
                            G_CALLBACK (cc_sharing_panel_remove_folder), self, G_CONNECT_SWAPPED);
@@ -446,12 +444,10 @@ cc_sharing_panel_new_add_media_sharing_row (CcSharingPanel *self)
   gtk_list_box_row_set_child (GTK_LIST_BOX_ROW (row), box);
 
   w = gtk_image_new_from_icon_name ("list-add-symbolic");
+  gtk_widget_set_tooltip_text (GTK_WIDGET (w), _("Add Folder"));
   gtk_widget_set_hexpand (w, TRUE);
   gtk_widget_set_margin_top (w, 12);
   gtk_widget_set_margin_bottom (w, 12);
-  gtk_accessible_update_property (GTK_ACCESSIBLE (w),
-                                GTK_ACCESSIBLE_PROPERTY_LABEL, _("Add"),
-                                -1);
   gtk_box_append (GTK_BOX (box), w);
 
   g_object_set_data (G_OBJECT (w), "row", row);
