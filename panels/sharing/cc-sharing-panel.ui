@@ -79,10 +79,20 @@
     <property name="content">
       <object class="AdwToolbarView">
         <child type="top">
-          <object class="AdwHeaderBar" id="personal_file_sharing_headerbar"/>
+          <object class="AdwHeaderBar"/>
         </child>
         <property name="content">
           <object class="AdwPreferencesPage" id="personal_file_sharing_page">
+            <child>
+              <object class="AdwPreferencesGroup">
+                <child>
+                  <object class="AdwActionRow" id="personal_file_sharing_enable_row">
+                    <property name="title" translatable="yes">_File Sharing</property>
+                    <property name="use-underline">True</property>
+                  </object>
+                </child>
+              </object>
+            </child>
             <child>
               <object class="AdwPreferencesGroup">
                 <child>
@@ -190,11 +200,21 @@
     <property name="content">
       <object class="AdwToolbarView">
         <child type="top">
-          <object class="AdwHeaderBar" id="media_sharing_headerbar"/>
+          <object class="AdwHeaderBar"/>
         </child>
         <property name="content">
           <object class="AdwPreferencesPage">
             <property name="description" translatable="yes">Share music, photos and videos over the network.</property>
+            <child>
+              <object class="AdwPreferencesGroup">
+                <child>
+                  <object class="AdwActionRow" id="media_sharing_enable_row">
+                    <property name="title" translatable="yes">_Media Sharing</property>
+                    <property name="use-underline">True</property>
+                  </object>
+                </child>
+              </object>
+            </child>
             <child>
               <object class="AdwPreferencesGroup">
                 <property name="title" translatable="yes">Folders</property>

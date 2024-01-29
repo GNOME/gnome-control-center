@@ -64,12 +64,12 @@ struct _CcSharingPanel
   GtkWidget *hostname_entry;
   GtkWidget *main_list_box;
   GtkWidget *media_sharing_dialog;
-  GtkWidget *media_sharing_headerbar;
+  AdwActionRow *media_sharing_enable_row;
   GtkWidget *media_sharing_row;
   GtkWidget *media_sharing_switch;
   GtkWidget *personal_file_sharing_dialog;
   GtkWidget *personal_file_sharing_vbox;
-  GtkWidget *personal_file_sharing_headerbar;
+  AdwActionRow *personal_file_sharing_enable_row;
   AdwPreferencesPage *personal_file_sharing_page;
   GtkWidget *personal_file_sharing_password_entry_row;
   GtkWidget *personal_file_sharing_require_password_switch_row;
@@ -137,10 +137,10 @@ cc_sharing_panel_class_init (CcSharingPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, shared_folders_grid);
   gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, main_list_box);
   gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, media_sharing_dialog);
-  gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, media_sharing_headerbar);
+  gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, media_sharing_enable_row);
   gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, media_sharing_row);
   gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, personal_file_sharing_dialog);
-  gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, personal_file_sharing_headerbar);
+  gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, personal_file_sharing_enable_row);
   gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, personal_file_sharing_page);
   gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, personal_file_sharing_password_entry_row);
   gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, personal_file_sharing_require_password_switch_row);
@@ -513,10 +513,9 @@ cc_sharing_panel_setup_media_sharing_dialog (CcSharingPanel *self)
   gtk_grid_attach (GTK_GRID (self->shared_folders_grid), networks, 0, 4, 2, 1);
 
   w = create_switch_with_bindings (GTK_SWITCH (g_object_get_data (G_OBJECT (networks), "switch")));
-  gtk_accessible_update_property (GTK_ACCESSIBLE (w),
-                                GTK_ACCESSIBLE_PROPERTY_LABEL, _("Enable media sharing"),
-                                -1);
-  adw_header_bar_pack_start (ADW_HEADER_BAR (self->media_sharing_headerbar), w);
+  gtk_widget_set_valign (w, GTK_ALIGN_CENTER);
+  adw_action_row_add_suffix (self->media_sharing_enable_row, w);
+  adw_action_row_set_activatable_widget (self->media_sharing_enable_row, w);
   self->media_sharing_switch = w;
 
   cc_sharing_panel_bind_networks_to_label (self, networks,
@@ -610,10 +609,9 @@ cc_sharing_panel_setup_personal_file_sharing_dialog (CcSharingPanel *self)
   gtk_box_append (GTK_BOX (self->personal_file_sharing_vbox), networks);
 
   w = create_switch_with_bindings (GTK_SWITCH (g_object_get_data (G_OBJECT (networks), "switch")));
-  gtk_accessible_update_property (GTK_ACCESSIBLE (w),
-                                GTK_ACCESSIBLE_PROPERTY_LABEL, _("Enable personal media sharing"),
-                                -1);
-  adw_header_bar_pack_start (ADW_HEADER_BAR (self->personal_file_sharing_headerbar), w);
+  gtk_widget_set_valign (w, GTK_ALIGN_CENTER);
+  adw_action_row_add_suffix (self->personal_file_sharing_enable_row, w);
+  adw_action_row_set_activatable_widget (self->personal_file_sharing_enable_row, w);
   self->personal_file_sharing_switch = w;
 
   cc_sharing_panel_bind_networks_to_label (self,
