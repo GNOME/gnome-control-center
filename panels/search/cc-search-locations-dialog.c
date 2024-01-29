@@ -576,6 +576,7 @@ create_row_for_place (CcSearchLocationsDialog *self, Place *place)
 
       remove_button = gtk_button_new_from_icon_name ("edit-delete-symbolic");
       g_object_set_data (G_OBJECT (remove_button), "place", place);
+      gtk_widget_set_tooltip_text (GTK_WIDGET (remove_button), _("Remove Folder"));
       gtk_widget_set_valign (remove_button, GTK_ALIGN_CENTER);
       gtk_widget_add_css_class (remove_button, "flat");
       adw_action_row_add_suffix (ADW_ACTION_ROW (widgets->row), remove_button);
