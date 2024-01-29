@@ -199,6 +199,7 @@ add_microphone_app (CcMicrophonePage *self,
   gtk_widget_set_valign (w, GTK_ALIGN_CENTER);
   gtk_size_group_add_widget (self->microphone_icon_size_group, w);
   adw_action_row_add_prefix (ADW_ACTION_ROW (row), w);
+  adw_action_row_set_activatable_widget (ADW_ACTION_ROW (row), w);
 
   adw_preferences_row_set_title (ADW_PREFERENCES_ROW (row),
                                  g_app_info_get_name (G_APP_INFO (app_info)));

@@ -211,6 +211,7 @@ add_camera_app (CcCameraPage *self,
   gtk_switch_set_active (GTK_SWITCH (w), enabled);
   gtk_widget_set_valign (w, GTK_ALIGN_CENTER);
   adw_action_row_add_suffix (ADW_ACTION_ROW (row), w);
+  adw_action_row_set_activatable_widget (ADW_ACTION_ROW (row), w);
 
   g_settings_bind_with_mapping (self->privacy_settings,
                                 "disable-camera",
