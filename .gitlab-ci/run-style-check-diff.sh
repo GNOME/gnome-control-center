@@ -43,7 +43,7 @@ git diff -U0 --no-color "${newest_common_ancestor_sha}" | .gitlab-ci/clang-forma
 exit_status=$?
 
 # The style check is not infallible. The clang-format configuration cannot
-# perfectly describe GGNOME Settings’ coding style: in particular, it cannot align
+# perfectly describe GNOME Settings’ coding style: in particular, it cannot align
 # function arguments. The documented coding style for GNOME Settings takes priority over
 # clang-format suggestions. Hopefully we can eventually improve clang-format to
 # be configurable enough for our coding style. That’s why this CI check is OK
