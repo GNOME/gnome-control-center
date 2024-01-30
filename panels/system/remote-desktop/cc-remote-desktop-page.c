@@ -75,6 +75,7 @@ struct _CcRemoteDesktopPage {
   guint remote_desktop_store_credentials_id;
   GTlsCertificate *remote_desktop_certificate;
 
+  GSettings *rdp_settings;
   GCancellable *cancellable;
 };
 
@@ -205,11 +206,7 @@ store_remote_desktop_credentials_timeout (gpointer user_data)
 static gboolean
 is_remote_desktop_enabled (CcRemoteDesktopPage *self)
 {
-  g_autoptr(GSettings) rdp_settings = NULL;
-
-  rdp_settings = g_settings_new (GNOME_REMOTE_DESKTOP_RDP_SCHEMA_ID);
-
-  if (!g_settings_get_boolean (rdp_settings, "enable"))
+  if (!g_settings_get_boolean (self->rdp_settings, "enable"))
     return FALSE;
 
   return cc_is_service_active (REMOTE_DESKTOP_SERVICE, G_BUS_TYPE_SESSION);
@@ -278,7 +275,6 @@ on_certificate_generated (GObject      *source_object,
   g_autoptr(GError) error = NULL;
   g_autofree char *cert_path = NULL;
   g_autofree char *key_path = NULL;
-  g_autoptr(GSettings) rdp_settings = NULL;
 
   tls_certificate = bonsai_tls_certificate_new_generate_finish (res, &error);
   if (!tls_certificate)
@@ -294,10 +290,8 @@ on_certificate_generated (GObject      *source_object,
 
   calc_default_tls_paths (NULL, &cert_path, &key_path);
 
-  rdp_settings = g_settings_new (GNOME_REMOTE_DESKTOP_RDP_SCHEMA_ID);
-
-  g_settings_set_string (rdp_settings, "tls-cert", cert_path);
-  g_settings_set_string (rdp_settings, "tls-key", key_path);
+  g_settings_set_string (self->rdp_settings, "tls-cert", cert_path);
+  g_settings_set_string (self->rdp_settings, "tls-key", key_path);
 
   set_tls_certificate (self, tls_certificate);
 
@@ -308,11 +302,8 @@ static void
 disable_gnome_remote_desktop_service (CcRemoteDesktopPage *self)
 {
   g_autoptr(GError) error = NULL;
-  g_autoptr(GSettings) rdp_settings = NULL;
 
-  rdp_settings = g_settings_new (GNOME_REMOTE_DESKTOP_RDP_SCHEMA_ID);
-
-  g_settings_set_boolean (rdp_settings, "enable", FALSE);
+  g_settings_set_boolean (self->rdp_settings, "enable", FALSE);
 
   if (!cc_disable_service (REMOTE_DESKTOP_SERVICE,
                            G_BUS_TYPE_SESSION,
@@ -330,14 +321,11 @@ enable_gnome_remote_desktop (CcRemoteDesktopPage *self)
   g_autoptr(GFile) cert_file = NULL;
   g_autoptr(GFile) key_file = NULL;
   g_autoptr(GError) error = NULL;
-  g_autoptr(GSettings) rdp_settings = NULL;
 
-  rdp_settings = g_settings_new (GNOME_REMOTE_DESKTOP_RDP_SCHEMA_ID);
+  g_settings_set_boolean (self->rdp_settings, "enable", TRUE);
 
-  g_settings_set_boolean (rdp_settings, "enable", TRUE);
-
-  cert_path = g_settings_get_string (rdp_settings, "tls-cert");
-  key_path = g_settings_get_string (rdp_settings, "tls-key");
+  cert_path = g_settings_get_string (self->rdp_settings, "tls-cert");
+  key_path = g_settings_get_string (self->rdp_settings, "tls-key");
   if (strlen (cert_path) > 0 &&
       strlen (key_path) > 0)
     {
@@ -380,8 +368,8 @@ enable_gnome_remote_desktop (CcRemoteDesktopPage *self)
       tls_certificate = g_tls_certificate_new_from_file (cert_path, &error);
       if (tls_certificate)
         {
-          g_settings_set_string (rdp_settings, "tls-cert", cert_path);
-          g_settings_set_string (rdp_settings, "tls-key", key_path);
+          g_settings_set_string (self->rdp_settings, "tls-cert", cert_path);
+          g_settings_set_string (self->rdp_settings, "tls-key", key_path);
 
           set_tls_certificate (self, tls_certificate);
 
@@ -515,18 +503,17 @@ cc_remote_desktop_page_setup_remote_desktop_dialog (CcRemoteDesktopPage *self)
 {
   const gchar *username = NULL;
   const gchar *password = NULL;
-  g_autoptr(GSettings) rdp_settings = NULL;
   g_autofree char *hostname = NULL;
 
-  rdp_settings = g_settings_new (GNOME_REMOTE_DESKTOP_RDP_SCHEMA_ID);
+  self->rdp_settings = g_settings_new (GNOME_REMOTE_DESKTOP_RDP_SCHEMA_ID);
 
   adw_switch_row_set_active (self->remote_desktop_row, is_remote_desktop_enabled (self));
-  g_settings_bind (rdp_settings,
+  g_settings_bind (self->rdp_settings,
                    "enable",
                    self->remote_desktop_row,
                    "active",
                    G_SETTINGS_BIND_DEFAULT);
-  g_settings_bind (rdp_settings,
+  g_settings_bind (self->rdp_settings,
                    "view-only",
                    self->remote_control_row,
                    "active",
@@ -628,6 +615,8 @@ cc_remote_desktop_page_dispose (GObject *object)
 
   g_clear_handle_id (&self->remote_desktop_store_credentials_id, g_source_remove);
   self->remote_desktop_store_credentials_id = 0;
+
+  g_clear_object (&self->rdp_settings);
 
   G_OBJECT_CLASS (cc_remote_desktop_page_parent_class)->dispose (object);
 }
