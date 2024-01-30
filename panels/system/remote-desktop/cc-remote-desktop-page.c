@@ -71,8 +71,6 @@ struct _CcRemoteDesktopPage {
   GtkWidget *remote_desktop_fingerprint_left;
   GtkWidget *remote_desktop_fingerprint_right;
 
-  GDBusProxy *sharing_proxy;
-
   guint remote_desktop_name_watch;
   guint remote_desktop_store_credentials_id;
   GTlsCertificate *remote_desktop_certificate;
@@ -617,31 +615,6 @@ check_remote_desktop_available (CcRemoteDesktopPage *self)
 }
 
 static void
-sharing_proxy_ready (GObject      *source,
-                     GAsyncResult *res,
-                     gpointer      user_data)
-{
-  CcRemoteDesktopPage *self;
-  GDBusProxy *proxy;
-  g_autoptr(GError) error = NULL;
-
-  proxy = G_DBUS_PROXY (gsd_sharing_proxy_new_for_bus_finish (res, &error));
-  if (!proxy) {
-    if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
-      g_warning ("Failed to get sharing proxy: %s", error->message);
-    return;
-  }
-
-  self = (CcRemoteDesktopPage *)user_data;
-  self->sharing_proxy = proxy;
-
-  /* screen sharing */
-  check_remote_desktop_available (self);
-
-  cc_remote_desktop_page_setup_label_with_hostname (self, self->remote_desktop_address_label);
-}
-
-static void
 cc_remote_desktop_page_dispose (GObject *object)
 {
   CcRemoteDesktopPage *self = (CcRemoteDesktopPage *)object;
@@ -699,13 +672,9 @@ cc_remote_desktop_page_init (CcRemoteDesktopPage *self)
                          is_remote_desktop_enabled (self));
 
   self->cancellable = g_cancellable_new ();
-  gsd_sharing_proxy_new_for_bus (G_BUS_TYPE_SESSION,
-                                 G_DBUS_PROXY_FLAGS_NONE,
-                                 "org.gnome.SettingsDaemon.Sharing",
-                                 "/org/gnome/SettingsDaemon/Sharing",
-                                 self->cancellable,
-                                 sharing_proxy_ready,
-                                 self);
+  check_remote_desktop_available (self);
+
+  cc_remote_desktop_page_setup_label_with_hostname (self, self->remote_desktop_address_label);
 
   /* Translators: This will be presented as the text of a link to the documentation */
   learn_more_link = g_strdup_printf ("<a href='help:gnome-help/sharing-desktop'>%s</a>", _("learn how to use it"));
