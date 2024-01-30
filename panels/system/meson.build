@@ -42,6 +42,9 @@ sources = files(
   'remote-desktop/cc-remote-desktop-page.c',
   'remote-desktop/cc-tls-certificate.c',
   'remote-desktop/cc-systemd-service.c',
+  'remote-login/cc-remote-login.c',
+  'remote-login/cc-remote-login-page.c',
+  'remote-login/cc-systemd-service.c',
   'users/cc-add-user-dialog.c',
   'users/cc-avatar-chooser.c',
   'users/cc-crop-area.c',
@@ -141,6 +144,7 @@ subdir('about')
 subdir('datetime')
 subdir('region')
 subdir('remote-desktop')
+subdir('remote-login')
 subdir('users')
 
 panels_libs += static_library(

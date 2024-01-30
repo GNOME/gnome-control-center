@@ -66,6 +66,16 @@
 
                         <child>
                           <object class="CcListRow">
+                            <property name="title" translatable="yes">Secu_re Shell</property>
+                            <property name="subtitle" translatable="yes">SSH network access</property>
+                            <property name="icon-name">utilities-terminal-symbolic</property>
+                            <property name="show-arrow">True</property>
+                            <signal name="activated" handler="on_secure_shell_row_clicked" object="CcSystemPanel" swapped="yes"/>
+                          </object>
+                        </child>
+
+                        <child>
+                          <object class="CcListRow">
                             <property name="title" translatable="yes">_About</property>
                             <property name="subtitle" translatable="yes">Hardware details and software versions</property>
                             <property name="icon-name">org.gnome.Settings-about-symbolic</property>
