@@ -520,6 +520,7 @@ cc_remote_desktop_page_setup_remote_desktop_dialog (CcRemoteDesktopPage *self)
 
   rdp_settings = g_settings_new (GNOME_REMOTE_DESKTOP_RDP_SCHEMA_ID);
 
+  adw_switch_row_set_active (self->remote_desktop_row, is_remote_desktop_enabled (self));
   g_settings_bind (rdp_settings,
                    "enable",
                    self->remote_desktop_row,
@@ -593,17 +594,20 @@ remote_desktop_name_appeared (GDBusConnection *connection,
   g_bus_unwatch_name (self->remote_desktop_name_watch);
   self->remote_desktop_name_watch = 0;
 
+  gtk_widget_set_visible (GTK_WIDGET (self), TRUE);
+
   cc_remote_desktop_page_setup_remote_desktop_dialog (self);
 }
 
 static void
 check_remote_desktop_available (CcRemoteDesktopPage *self)
 {
-  if (!cc_remote_desktop_page_check_schema_available (self, GNOME_REMOTE_DESKTOP_SCHEMA_ID))
-    return;
-
-  if (!cc_remote_desktop_page_check_schema_available (self, GNOME_REMOTE_DESKTOP_RDP_SCHEMA_ID))
-    return;
+  if (!cc_remote_desktop_page_check_schema_available (self, GNOME_REMOTE_DESKTOP_SCHEMA_ID) ||
+      !cc_remote_desktop_page_check_schema_available (self, GNOME_REMOTE_DESKTOP_RDP_SCHEMA_ID))
+    {
+      gtk_widget_set_visible (GTK_WIDGET (self), FALSE);
+      return;
+    }
 
   self->remote_desktop_name_watch = g_bus_watch_name (G_BUS_TYPE_SESSION,
                                                       "org.gnome.Mutter.RemoteDesktop",
@@ -667,9 +671,6 @@ cc_remote_desktop_page_init (CcRemoteDesktopPage *self)
   g_autoptr(GtkCssProvider) provider = NULL;
 
   gtk_widget_init_template (GTK_WIDGET (self));
-
-  adw_switch_row_set_active (self->remote_desktop_row,
-                         is_remote_desktop_enabled (self));
 
   self->cancellable = g_cancellable_new ();
   check_remote_desktop_available (self);
