@@ -110,7 +110,7 @@ about_activated (GSimpleAction *action,
   GtkWidget *about_window;
   const char *developer_name;
 
-  about_window = adw_about_window_new_from_appdata ("/org/gnome/Settings/appdata", VERSION);
+  about_window = adw_about_window_new_from_appdata ("/org/gnome/Settings/appdata", NULL);
   adw_about_window_set_version (ADW_ABOUT_WINDOW (about_window), VERSION);
   developer_name = adw_about_window_get_developer_name (ADW_ABOUT_WINDOW (about_window));
   /* Translators should localize the following string which will be displayed in the About dialog giving credit to the translator(s). */
