@@ -241,6 +241,6 @@ cc_about_page_init (CcAboutPage *self)
   about_page_setup_overview (self);
 
   style_manager = adw_style_manager_get_default ();
-  g_signal_connect_swapped (style_manager, "notify::dark", G_CALLBACK (setup_os_logo), self);
+  g_signal_connect_object (style_manager, "notify::dark", G_CALLBACK (setup_os_logo), self, G_CONNECT_SWAPPED);
   setup_os_logo (self);
 }
