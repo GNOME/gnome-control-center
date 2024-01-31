@@ -651,7 +651,10 @@ cc_display_monitor_dbus_set_underscanning (CcDisplayMonitor *pself,
 
 static CcDisplayMode *
 cc_display_monitor_dbus_get_closest_mode (CcDisplayMonitorDBus *self,
-                                          CcDisplayModeDBus *mode)
+                                          int                   width,
+                                          int                   height,
+                                          double                refresh_rate,
+                                          guint32               flags)
 {
   CcDisplayModeDBus *best = NULL;
   GList *l;
@@ -660,12 +663,12 @@ cc_display_monitor_dbus_get_closest_mode (CcDisplayMonitorDBus *self,
     {
       CcDisplayModeDBus *similar = l->data;
 
-      if (similar->width != mode->width ||
-          similar->height != mode->height)
+      if (similar->width != width ||
+          similar->height != height)
         continue;
 
-      if (similar->refresh_rate == mode->refresh_rate &&
-          (similar->flags & MODE_INTERLACED) == (mode->flags & MODE_INTERLACED))
+      if (similar->refresh_rate == refresh_rate &&
+          (similar->flags & MODE_INTERLACED) == (flags & MODE_INTERLACED))
         {
           best = similar;
           break;
@@ -692,7 +695,11 @@ cc_display_monitor_dbus_set_mode (CcDisplayMonitor *pself,
 
   g_return_if_fail (mode_dbus != NULL);
 
-  new_mode = cc_display_monitor_dbus_get_closest_mode (self, mode_dbus);
+  new_mode = cc_display_monitor_dbus_get_closest_mode (self,
+                                                       mode_dbus->width,
+                                                       mode_dbus->height,
+                                                       mode_dbus->refresh_rate,
+                                                       mode_dbus->flags);
 
   self->current_mode = new_mode;
 
