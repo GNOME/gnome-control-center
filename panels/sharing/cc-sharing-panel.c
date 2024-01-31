@@ -68,7 +68,7 @@ struct _CcSharingPanel
   GtkWidget *personal_file_sharing_row;
   GtkWidget *personal_file_sharing_switch;
 
-  GtkWidget *shared_folders_grid;
+  GtkWidget *media_sharing_vbox;
   GtkWidget *shared_folders_listbox;
 
   GDBusProxy *sharing_proxy;
@@ -116,7 +116,7 @@ cc_sharing_panel_class_init (CcSharingPanelClass *klass)
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/sharing/cc-sharing-panel.ui");
 
   gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, hostname_entry);
-  gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, shared_folders_grid);
+  gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, media_sharing_vbox);
   gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, main_list_box);
   gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, media_sharing_dialog);
   gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, media_sharing_enable_row);
@@ -484,7 +484,7 @@ cc_sharing_panel_setup_media_sharing_dialog (CcSharingPanel *self)
                            G_CALLBACK (cc_sharing_panel_add_folder), self, G_CONNECT_SWAPPED);
 
   networks = cc_sharing_networks_new (self->sharing_proxy, "rygel");
-  gtk_grid_attach (GTK_GRID (self->shared_folders_grid), networks, 0, 4, 2, 1);
+  gtk_box_append (GTK_BOX (self->media_sharing_vbox), networks);
 
   w = create_switch_with_bindings (GTK_SWITCH (g_object_get_data (G_OBJECT (networks), "switch")));
   gtk_widget_set_valign (w, GTK_ALIGN_CENTER);
