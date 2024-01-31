@@ -186,7 +186,8 @@ build.container.fedora@x86_64:
         meson . _build --prefix=/usr && \
         ninja -C _build && \
         ninja -C _build install && \
-        cd ..
+        cd .. && \
+      dnf remove -y systemtap-runtime
 
 ##
 # Stage: Build
