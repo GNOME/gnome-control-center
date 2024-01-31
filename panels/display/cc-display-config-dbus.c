@@ -684,19 +684,20 @@ cc_display_monitor_dbus_get_closest_mode (CcDisplayMonitorDBus *self,
 
 static void
 cc_display_monitor_dbus_set_mode (CcDisplayMonitor *pself,
-                                  CcDisplayMode *new_mode)
+                                  CcDisplayMode    *mode)
 {
   CcDisplayMonitorDBus *self = CC_DISPLAY_MONITOR_DBUS (pself);
-  CcDisplayMode *mode;
+  CcDisplayModeDBus *mode_dbus = CC_DISPLAY_MODE_DBUS (mode);
+  CcDisplayMode *new_mode;
 
-  g_return_if_fail (new_mode != NULL);
+  g_return_if_fail (mode_dbus != NULL);
 
-  mode = cc_display_monitor_dbus_get_closest_mode (self, CC_DISPLAY_MODE_DBUS (new_mode));
+  new_mode = cc_display_monitor_dbus_get_closest_mode (self, mode_dbus);
 
-  self->current_mode = mode;
+  self->current_mode = new_mode;
 
-  if (!cc_display_mode_dbus_is_supported_scale (mode, cc_display_monitor_get_scale (pself)))
-    cc_display_monitor_set_scale (pself, cc_display_mode_get_preferred_scale (mode));
+  if (!cc_display_mode_dbus_is_supported_scale (new_mode, cc_display_monitor_get_scale (pself)))
+    cc_display_monitor_set_scale (pself, cc_display_mode_get_preferred_scale (new_mode));
 
   g_signal_emit_by_name (self, "mode");
 }
