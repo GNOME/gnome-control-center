@@ -715,12 +715,21 @@ check_add_pad (CcWacomPage *page,
 	       GsdDevice   *gsd_device)
 {
 	g_autoptr(CcWacomDevice) wacom_device = NULL;
+	const gchar *stylus_vendor, *stylus_product;
+	const gchar *pad_vendor, *pad_product;
+	GsdDevice *stylus_device;
 
 	if ((gsd_device_get_device_type (gsd_device) & GSD_DEVICE_TYPE_PAD) == 0)
 		return;
 
-	if (!gsd_device_shares_group (cc_wacom_device_get_device (page->stylus),
-				      gsd_device))
+	stylus_device = cc_wacom_device_get_device (page->stylus);
+	gsd_device_get_device_ids (cc_wacom_device_get_device (page->stylus),
+				   &stylus_vendor, &stylus_product);
+	gsd_device_get_device_ids (gsd_device, &pad_vendor, &pad_product);
+
+	if (!gsd_device_shares_group (stylus_device, gsd_device) ||
+	    g_strcmp0 (stylus_vendor, pad_vendor) != 0 ||
+	    g_strcmp0 (stylus_product, pad_product) != 0)
 		return;
 
 	wacom_device = cc_wacom_device_new (gsd_device);
