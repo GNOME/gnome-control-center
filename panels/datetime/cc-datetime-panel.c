@@ -695,7 +695,7 @@ list_box_row_activated (CcDateTimePanel *self,
     }
   else if (row == GTK_LIST_BOX_ROW (self->timezone_row))
     {
-      present_window (self, self->timezone_dialog);
+      present_window (self, GTK_WINDOW (self->timezone_dialog));
     }
 }
 
