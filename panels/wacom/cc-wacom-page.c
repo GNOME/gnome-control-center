@@ -57,7 +57,7 @@ struct _CcWacomPage
 
 	CcWacomPanel   *panel;
 	CcWacomDevice  *stylus;
-	GList          *pads;
+	CcWacomDevice  *pad;
 	CcCalibArea    *area;
 	GSettings      *wacom_settings;
 
@@ -376,7 +376,7 @@ setup_button_mapping (CcWacomPage *page)
 	GSettings *settings;
 
 	list_box = MWID ("shortcuts_list");
-	pad = page->pads->data;
+	pad = page->pad;
 	n_buttons = cc_wacom_device_get_num_buttons (pad);
 
 	for (i = 0; i < n_buttons; i++) {
@@ -466,7 +466,7 @@ set_osd_visibility (CcWacomPage *page)
 	proxy = cc_wacom_panel_get_gsd_wacom_bus_proxy (page->panel);
 
 	/* Pick the first device, the OSD may change later between them */
-	gsd_device = cc_wacom_device_get_device (page->pads->data);
+	gsd_device = cc_wacom_device_get_device (page->pad);
 
 	device_path = gsd_device_get_device_file (gsd_device);
 
@@ -550,9 +550,8 @@ cc_wacom_page_dispose (GObject *object)
 	g_clear_object (&self->cancellable);
 	g_clear_pointer (&self->area, cc_calib_area_free);
 	g_clear_pointer (&self->button_map, gtk_window_destroy);
-	g_list_free_full (self->pads, g_object_unref);
+	g_clear_object (&self->pad);
 	g_clear_object (&self->rr_screen);
-	self->pads = NULL;
 
 	self->panel = NULL;
 
@@ -707,7 +706,7 @@ has_monitor (CcWacomPage *page)
 static void
 update_pad_availability (CcWacomPage *page)
 {
-	gtk_widget_set_visible (page->tablet_map_buttons, page->pads != NULL);
+	gtk_widget_set_visible (page->tablet_map_buttons, page->pad != NULL);
 }
 
 static void
@@ -732,32 +731,22 @@ check_add_pad (CcWacomPage *page,
 	    g_strcmp0 (stylus_product, pad_product) != 0)
 		return;
 
-	wacom_device = cc_wacom_device_new (gsd_device);
-	if (!wacom_device)
-		return;
-
-	page->pads = g_list_prepend (page->pads, g_steal_pointer (&wacom_device));
-	update_pad_availability (page);
+	page->pad = cc_wacom_device_new (gsd_device);
+	if (page->pad)
+		update_pad_availability (page);
 }
 
 static void
 check_remove_pad (CcWacomPage *page,
 		  GsdDevice   *gsd_device)
 {
-	GList *l;
-
 	if ((gsd_device_get_device_type (gsd_device) & GSD_DEVICE_TYPE_PAD) == 0)
 		return;
 
-	for (l = page->pads; l; l = l->next) {
-		CcWacomDevice *wacom_device = l->data;
-		if (cc_wacom_device_get_device (wacom_device) == gsd_device) {
-			page->pads = g_list_delete_link (page->pads, l);
-			g_object_unref (wacom_device);
-		}
+	if (cc_wacom_device_get_device (page->pad) == gsd_device) {
+		g_clear_object (&page->pad);
+		update_pad_availability (page);
 	}
-
-	update_pad_availability (page);
 }
 
 static GVariant *
