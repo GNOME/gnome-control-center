@@ -588,10 +588,7 @@ detach_from_cups_notifier (gpointer data)
 
   self->subscription_id = 0;
 
-  if (self->subscription_renewal_id != 0) {
-    g_source_remove (self->subscription_renewal_id);
-    self->subscription_renewal_id = 0;
-  }
+  g_clear_handle_id (&self->subscription_renewal_id, g_source_remove);
 
   g_clear_object (&self->cups_proxy);
 }
@@ -1049,8 +1046,7 @@ cups_status_check_cb (GObject      *source_object,
       actualize_printers_list (self);
       attach_to_cups_notifier (self);
 
-      g_source_remove (self->cups_status_check_id);
-      self->cups_status_check_id = 0;
+      g_clear_handle_id (&self->cups_status_check_id, g_source_remove);
     }
 }
 

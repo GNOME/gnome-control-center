@@ -689,9 +689,7 @@ cc_display_settings_finalize (GObject *object)
   g_clear_object (&self->resolution_list);
   g_clear_object (&self->scale_list);
 
-  if (self->idle_udpate_id)
-    g_source_remove (self->idle_udpate_id);
-  self->idle_udpate_id = 0;
+  g_clear_handle_id (&self->idle_udpate_id, g_source_remove);
 
   G_OBJECT_CLASS (cc_display_settings_parent_class)->finalize (object);
 }

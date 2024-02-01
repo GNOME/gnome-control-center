@@ -277,10 +277,7 @@ password_entry_timeout (CcPasswordDialog *self)
 static void
 recheck_password_match (CcPasswordDialog *self)
 {
-        if (self->password_entry_timeout_id != 0) {
-                g_source_remove (self->password_entry_timeout_id);
-                self->password_entry_timeout_id = 0;
-        }
+        g_clear_handle_id (&self->password_entry_timeout_id, g_source_remove);
 
         gtk_widget_set_sensitive (GTK_WIDGET (self->ok_button), FALSE);
 
@@ -307,10 +304,7 @@ verify_entry_changed (CcPasswordDialog *self)
 static gboolean
 password_entry_focus_out_cb (CcPasswordDialog *self)
 {
-        if (self->password_entry_timeout_id != 0) {
-                g_source_remove (self->password_entry_timeout_id);
-                self->password_entry_timeout_id = 0;
-        }
+        g_clear_handle_id (&self->password_entry_timeout_id, g_source_remove);
 
         if (self->user != NULL)
                 password_entry_timeout (self);
@@ -326,10 +320,7 @@ password_entry_key_press_cb (CcPasswordDialog      *self,
                              GdkModifierType        state,
                              GtkEventControllerKey *controller)
 {
-        if (self->password_entry_timeout_id != 0) {
-                g_source_remove (self->password_entry_timeout_id);
-                self->password_entry_timeout_id = 0;
-        }
+        g_clear_handle_id (&self->password_entry_timeout_id, g_source_remove);
 
         if (keyval == GDK_KEY_Tab)
                password_entry_timeout (self);
@@ -373,10 +364,7 @@ old_password_entry_timeout (CcPasswordDialog *self)
 static gboolean
 old_password_entry_focus_out_cb (CcPasswordDialog *self)
 {
-        if (self->old_password_entry_timeout_id != 0) {
-                g_source_remove (self->old_password_entry_timeout_id);
-                self->old_password_entry_timeout_id = 0;
-        }
+        g_clear_handle_id (&self->old_password_entry_timeout_id, g_source_remove);
 
         if (self->user != NULL)
                 old_password_entry_timeout (self);
@@ -387,10 +375,7 @@ old_password_entry_focus_out_cb (CcPasswordDialog *self)
 static void
 old_password_entry_changed (CcPasswordDialog *self)
 {
-        if (self->old_password_entry_timeout_id != 0) {
-                g_source_remove (self->old_password_entry_timeout_id);
-                self->old_password_entry_timeout_id = 0;
-        }
+        g_clear_handle_id (&self->old_password_entry_timeout_id, g_source_remove);
 
         gtk_widget_add_css_class (GTK_WIDGET (self->old_password_entry), "error");
         gtk_widget_set_sensitive (GTK_WIDGET (self->ok_button), FALSE);
@@ -431,15 +416,8 @@ cc_password_dialog_dispose (GObject *object)
                 self->passwd_handler = NULL;
         }
 
-        if (self->old_password_entry_timeout_id != 0) {
-                g_source_remove (self->old_password_entry_timeout_id);
-                self->old_password_entry_timeout_id = 0;
-        }
- 
-        if (self->password_entry_timeout_id != 0) {
-                g_source_remove (self->password_entry_timeout_id);
-                self->password_entry_timeout_id = 0;
-        }
+        g_clear_handle_id (&self->old_password_entry_timeout_id, g_source_remove);
+        g_clear_handle_id (&self->password_entry_timeout_id, g_source_remove);
 
         G_OBJECT_CLASS (cc_password_dialog_parent_class)->dispose (object);
 }

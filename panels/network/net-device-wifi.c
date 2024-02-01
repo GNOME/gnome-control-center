@@ -106,14 +106,8 @@ static void
 disable_scan_timeout (NetDeviceWifi *self)
 {
         g_debug ("Disabling periodic Wi-Fi scan");
-        if (self->monitor_scanning_id > 0) {
-                g_source_remove (self->monitor_scanning_id);
-                self->monitor_scanning_id = 0;
-        }
-        if (self->scan_id > 0) {
-                g_source_remove (self->scan_id);
-                self->scan_id = 0;
-        }
+        g_clear_handle_id (&self->monitor_scanning_id, g_source_remove);
+        g_clear_handle_id (&self->scan_id, g_source_remove);
 }
 
 static void

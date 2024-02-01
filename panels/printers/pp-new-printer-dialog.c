@@ -1309,11 +1309,7 @@ search_address (const gchar        *text,
                   search_data->host_port = port;
                   search_data->dialog = self;
 
-                  if (self->host_search_timeout_id != 0)
-                    {
-                      g_source_remove (self->host_search_timeout_id);
-                      self->host_search_timeout_id = 0;
-                    }
+                  g_clear_handle_id (&self->host_search_timeout_id, g_source_remove);
 
                   if (delay_search)
                     {

@@ -241,13 +241,7 @@ static void
 free_passwd_resources (PasswdHandler *passwd_handler)
 {
         /* Remove the child watcher */
-        if (passwd_handler->backend_child_watch_id != 0) {
-
-                g_source_remove (passwd_handler->backend_child_watch_id);
-
-                passwd_handler->backend_child_watch_id = 0;
-        }
-
+        g_clear_handle_id (&passwd_handler->backend_child_watch_id, g_source_remove);
 
         /* Close IO channels (internal file descriptors are automatically closed) */
         if (passwd_handler->backend_stdin != NULL) {
@@ -271,12 +265,7 @@ free_passwd_resources (PasswdHandler *passwd_handler)
         }
 
         /* Remove IO watcher */
-        if (passwd_handler->backend_stdout_watch_id != 0) {
-
-                g_source_remove (passwd_handler->backend_stdout_watch_id);
-
-                passwd_handler->backend_stdout_watch_id = 0;
-        }
+        g_clear_handle_id (&passwd_handler->backend_stdout_watch_id, g_source_remove);
 
         /* Close PID */
         if (passwd_handler->backend_pid != -1) {

@@ -626,10 +626,7 @@ cc_background_xml_finalize (GObject *object)
         g_slist_free_full (xml->monitors, g_object_unref);
 
 	g_clear_pointer (&xml->wp_hash, g_hash_table_destroy);
-	if (xml->item_added_id != 0) {
-		g_source_remove (xml->item_added_id);
-		xml->item_added_id = 0;
-	}
+	g_clear_handle_id (&xml->item_added_id, g_source_remove);
 	g_clear_pointer (&xml->item_added_queue, g_async_queue_unref);
 
         G_OBJECT_CLASS (cc_background_xml_parent_class)->finalize (object);

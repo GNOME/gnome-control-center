@@ -607,8 +607,7 @@ cc_night_light_page_finalize (GObject *object)
   g_clear_object (&self->proxy_color_props);
   g_clear_object (&self->settings_display);
   g_clear_object (&self->settings_clock);
-  if (self->timer_id > 0)
-    g_source_remove (self->timer_id);
+  g_clear_handle_id (&self->timer_id, g_source_remove);
 
   G_OBJECT_CLASS (cc_night_light_page_parent_class)->finalize (object);
 }

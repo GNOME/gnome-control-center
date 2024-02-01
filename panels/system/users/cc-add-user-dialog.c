@@ -359,10 +359,7 @@ local_username_timeout (CcAddUserDialog *self)
 static gboolean
 local_username_combo_focus_out_event_cb (CcAddUserDialog *self)
 {
-        if (self->local_username_timeout_id != 0) {
-                g_source_remove (self->local_username_timeout_id);
-                self->local_username_timeout_id = 0;
-        }
+        g_clear_handle_id (&self->local_username_timeout_id, g_source_remove);
 
         local_username_timeout (self);
 
@@ -381,10 +378,7 @@ local_username_combo_changed_cb (CcAddUserDialog *self)
                  gtk_combo_box_get_active (GTK_COMBO_BOX (self->local_username_combo)) > 0)
                 self->has_custom_username = TRUE;
 
-        if (self->local_username_timeout_id != 0) {
-                g_source_remove (self->local_username_timeout_id);
-                self->local_username_timeout_id = 0;
-        }
+        g_clear_handle_id (&self->local_username_timeout_id, g_source_remove);
 
         gtk_image_set_from_icon_name (self->local_username_status_icon, "dialog-warning-symbolic");
         gtk_widget_set_sensitive (GTK_WIDGET (self->add_button), FALSE);
@@ -406,10 +400,7 @@ local_name_timeout (CcAddUserDialog *self)
 static gboolean
 local_name_entry_focus_out_event_cb (CcAddUserDialog *self)
 {
-        if (self->local_name_timeout_id != 0) {
-                g_source_remove (self->local_name_timeout_id);
-                self->local_name_timeout_id = 0;
-        }
+        g_clear_handle_id (&self->local_name_timeout_id, g_source_remove);
 
         local_name_timeout (self);
 
@@ -655,10 +646,7 @@ local_name_entry_changed_cb (CcAddUserDialog *self)
                         gtk_combo_box_set_active (GTK_COMBO_BOX (self->local_username_combo), 0);
         }
 
-        if (self->local_name_timeout_id != 0) {
-                g_source_remove (self->local_name_timeout_id);
-                self->local_name_timeout_id = 0;
-        }
+        g_clear_handle_id (&self->local_name_timeout_id, g_source_remove);
 
         gtk_image_set_from_icon_name (self->local_name_status_icon, "dialog-warning-symbolic");
         gtk_widget_set_sensitive (GTK_WIDGET (self->add_button), FALSE);
@@ -713,10 +701,7 @@ local_password_timeout (CcAddUserDialog *self)
 static gboolean
 password_focus_out_event_cb (CcAddUserDialog *self)
 {
-        if (self->local_password_timeout_id != 0) {
-                g_source_remove (self->local_password_timeout_id);
-                self->local_password_timeout_id = 0;
-        }
+        g_clear_handle_id (&self->local_password_timeout_id, g_source_remove);
 
         local_password_timeout (self);
 
@@ -739,10 +724,7 @@ local_password_entry_key_press_event_cb (CcAddUserDialog       *self,
 static void
 recheck_password_match (CcAddUserDialog *self)
 {
-        if (self->local_password_timeout_id != 0) {
-                g_source_remove (self->local_password_timeout_id);
-                self->local_password_timeout_id = 0;
-        }
+        g_clear_handle_id (&self->local_password_timeout_id, g_source_remove);
 
         gtk_widget_set_sensitive (GTK_WIDGET (self->add_button), FALSE);
 
@@ -1397,10 +1379,7 @@ enterprise_domain_timeout (CcAddUserDialog *self)
 static void
 enterprise_domain_combo_changed_cb (CcAddUserDialog *self)
 {
-        if (self->enterprise_domain_timeout_id != 0) {
-                g_source_remove (self->enterprise_domain_timeout_id);
-                self->enterprise_domain_timeout_id = 0;
-        }
+        g_clear_handle_id (&self->enterprise_domain_timeout_id, g_source_remove);
 
         g_clear_object (&self->selected_realm);
         gtk_image_set_from_icon_name (self->enterprise_domain_status_icon, "dialog-warning-symbolic");
@@ -1414,10 +1393,7 @@ enterprise_domain_combo_changed_cb (CcAddUserDialog *self)
 static gboolean
 enterprise_domain_combo_focus_out_event_cb (CcAddUserDialog *self)
 {
-        if (self->enterprise_domain_timeout_id != 0) {
-                g_source_remove (self->enterprise_domain_timeout_id);
-                self->enterprise_domain_timeout_id = 0;
-        }
+        g_clear_handle_id (&self->enterprise_domain_timeout_id, g_source_remove);
 
         if (self->selected_realm == NULL) {
                 enterprise_check_domain (self);
@@ -1591,25 +1567,10 @@ cc_add_user_dialog_dispose (GObject *obj)
                 g_clear_object (&self->realm_manager);
         }
 
-        if (self->local_password_timeout_id != 0) {
-                g_source_remove (self->local_password_timeout_id);
-                self->local_password_timeout_id = 0;
-        }
-
-        if (self->local_name_timeout_id != 0) {
-                g_source_remove (self->local_name_timeout_id);
-                self->local_name_timeout_id = 0;
-        }
-
-        if (self->local_username_timeout_id != 0) {
-                g_source_remove (self->local_username_timeout_id);
-                self->local_username_timeout_id = 0;
-        }
-
-        if (self->enterprise_domain_timeout_id != 0) {
-                g_source_remove (self->enterprise_domain_timeout_id);
-                self->enterprise_domain_timeout_id = 0;
-        }
+        g_clear_handle_id (&self->local_password_timeout_id, g_source_remove);
+        g_clear_handle_id (&self->local_name_timeout_id, g_source_remove);
+        g_clear_handle_id (&self->local_username_timeout_id, g_source_remove);
+        g_clear_handle_id (&self->enterprise_domain_timeout_id, g_source_remove);
 
         if (self->join_dialog != NULL) {
                 gtk_window_destroy (GTK_WINDOW (self->join_dialog));
