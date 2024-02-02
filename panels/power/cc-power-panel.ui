@@ -128,7 +128,7 @@
                 <child>
                   <object class="AdwSwitchRow" id="als_row">
                     <property name="title" translatable="yes">A_utomatic Screen Brightness</property>
-                    <property name="subtitle" translatable="yes">Screen brightness adjusts to the surrounding light.</property>
+                    <property name="subtitle" translatable="yes">Screen brightness adjusts to the surrounding light</property>
                     <property name="use_underline">True</property>
                     <signal name="notify::active" handler="als_row_changed_cb" object="CcPowerPanel" swapped="yes"/>
                   </object>
@@ -136,14 +136,14 @@
                 <child>
                   <object class="AdwSwitchRow" id="dim_screen_row">
                     <property name="title" translatable="yes">_Dim Screen</property>
-                    <property name="subtitle" translatable="yes">Reduces the screen brightness when the computer is inactive.</property>
+                    <property name="subtitle" translatable="yes">Reduces the screen brightness when the computer is inactive</property>
                     <property name="use_underline">True</property>
                   </object>
                 </child>
                 <child>
                   <object class="AdwComboRow" id="blank_screen_row">
                     <property name="title" translatable="yes">Screen _Blank</property>
-                    <property name="subtitle" translatable="yes">Turns the screen off after a period of inactivity.</property>
+                    <property name="subtitle" translatable="yes">Turns the screen off after a period of inactivity</property>
                     <property name="use_underline">True</property>
                     <signal name="notify::selected-item" handler="blank_screen_row_changed_cb" object="CcPowerPanel" swapped="yes"/>
                   </object>
@@ -152,7 +152,7 @@
                   <object class="AdwSwitchRow" id="power_saver_low_battery_row">
                     <property name="visible">False</property>
                     <property name="title" translatable="yes">Automatic Power _Saver</property>
-                    <property name="subtitle" translatable="yes">Enables power saver mode when battery is low.</property>
+                    <property name="subtitle" translatable="yes">Enables power saver mode when battery is low</property>
                     <property name="use_underline">True</property>
                   </object>
                 </child>
@@ -160,7 +160,7 @@
                   <object class="AdwActionRow" id="automatic_suspend_row">
                     <property name="visible">False</property>
                     <property name="title" translatable="yes">_Automatic Suspend</property>
-                    <property name="subtitle" translatable="yes">Pauses the computer after a period of inactivity.</property>
+                    <property name="subtitle" translatable="yes">Pauses the computer after a period of inactivity</property>
                     <property name="use_underline">True</property>
                     <property name="activatable">True</property>
                     <signal name="activated" handler="automatic_suspend_row_activated_cb" swapped="yes"/>
