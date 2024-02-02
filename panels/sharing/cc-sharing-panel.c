@@ -618,13 +618,13 @@ remote_login_switch_activate (CcSharingPanel *self)
 static void
 cc_sharing_panel_setup_remote_login_dialog (CcSharingPanel *self)
 {
+  cc_remote_login_get_enabled (ADW_SWITCH_ROW (self->remote_login_switch));
+
   cc_sharing_panel_bind_switch_to_label (self, self->remote_login_switch,
                                          self->remote_login_row);
 
   g_signal_connect_object (self->remote_login_switch, "notify::active",
                            G_CALLBACK (remote_login_switch_activate), self, G_CONNECT_SWAPPED);
-
-  cc_remote_login_get_enabled (ADW_SWITCH_ROW (self->remote_login_switch));
 }
 
 static gboolean
