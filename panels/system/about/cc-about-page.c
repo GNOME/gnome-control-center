@@ -119,7 +119,10 @@ cc_about_page_open_system_details (CcAboutPage *self)
   GtkNative *parent;
 
   if (!self->system_details_window)
-    self->system_details_window = GTK_WINDOW (cc_system_details_window_new ());
+    {
+      self->system_details_window = GTK_WINDOW (cc_system_details_window_new ());
+      g_object_ref_sink (self->system_details_window);
+    }
 
   parent = gtk_widget_get_native (GTK_WIDGET (self));
   gtk_window_set_transient_for (self->system_details_window, GTK_WINDOW (parent));
@@ -204,9 +207,24 @@ setup_os_logo (CcAboutPage *self)
 }
 
 static void
+cc_about_page_dispose (GObject *object)
+{
+  CcAboutPage *self = CC_ABOUT_PAGE (object);
+
+  if (self->system_details_window)
+    gtk_window_destroy (self->system_details_window);
+  g_clear_object (&self->system_details_window);
+
+  G_OBJECT_CLASS (cc_about_page_parent_class)->dispose (object);
+}
+
+static void
 cc_about_page_class_init (CcAboutPageClass *klass)
 {
+  GObjectClass *object_class = G_OBJECT_CLASS (klass);
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
+
+  object_class->dispose = cc_about_page_dispose;
 
   g_type_ensure (CC_TYPE_HOSTNAME_ENTRY);
 
