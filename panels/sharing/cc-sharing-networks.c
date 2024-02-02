@@ -216,7 +216,7 @@ cc_sharing_networks_new_row (const char        *uuid,
   adw_preferences_row_set_title (ADW_PREFERENCES_ROW (row), network_name);
 
   /* Remove button */
-  w = gtk_button_new_from_icon_name ("window-close-symbolic");
+  w = gtk_button_new_from_icon_name ("edit-delete-symbolic");
   gtk_widget_add_css_class (w, "flat");
   gtk_widget_set_valign (w, GTK_ALIGN_CENTER);
   gtk_accessible_update_property (GTK_ACCESSIBLE (w),
