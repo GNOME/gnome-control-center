@@ -54,7 +54,6 @@ about_page_setup_overview (CcAboutPage *self)
   g_autofree char *os_name_text = NULL;
   g_autofree char *hardware_model_text = NULL;
   g_autofree gchar *disk_capacity_string = NULL;
-  GtkWindow *parent;
 
   hardware_model_text = get_hardware_model_string ();
   cc_list_row_set_secondary_label (self->hardware_model_row, hardware_model_text);
@@ -76,10 +75,6 @@ about_page_setup_overview (CcAboutPage *self)
 
   os_name_text = get_os_name ();
   cc_list_row_set_secondary_label (self->os_name_row, os_name_text);
-
-  self->system_details_window = GTK_WINDOW (cc_system_details_window_new ());
-  parent = (GtkWindow *) gtk_widget_get_native (GTK_WIDGET (self));
-  gtk_window_set_transient_for (GTK_WINDOW (self->system_details_window), parent);
 }
 
 static gboolean
@@ -122,6 +117,9 @@ static void
 cc_about_page_open_system_details (CcAboutPage *self)
 {
   GtkNative *parent;
+
+  if (!self->system_details_window)
+    self->system_details_window = GTK_WINDOW (cc_system_details_window_new ());
 
   parent = gtk_widget_get_native (GTK_WIDGET (self));
   gtk_window_set_transient_for (self->system_details_window, GTK_WINDOW (parent));
