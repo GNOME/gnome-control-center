@@ -341,6 +341,9 @@ get_tracker_locations (CcSearchLocationsDialog *self)
     {
       path = path_from_tracker_dir (locations[idx]);
 
+      if (path == NULL)
+        continue;
+
       file = g_file_new_for_commandline_arg (path);
       location = place_new (self,
                             file,
@@ -443,12 +446,18 @@ switch_tracker_get_mapping (GValue *value,
   GFile *location;
   gint idx;
   gboolean found;
+  const gchar *path;
 
   found = FALSE;
   locations = g_variant_get_strv (variant, NULL);
   for (idx = 0; locations[idx] != NULL; idx++)
     {
-      location = g_file_new_for_path (path_from_tracker_dir(locations[idx]));
+      path = path_from_tracker_dir (locations[idx]);
+
+      if (path == NULL)
+        continue;
+
+      location = g_file_new_for_path (path);
       found = g_file_equal (location, place->location);
       g_object_unref (location);
 
