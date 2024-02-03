@@ -45,7 +45,14 @@ struct _CcSearchPanel
 
 CC_PANEL_REGISTER (CcSearchPanel, cc_search_panel)
 
+enum
+{
+  PROP_0,
+  PROP_PARAMETERS
+};
+
 #define SHELL_PROVIDER_GROUP "Shell Search Provider"
+#define SEARCH_LOCATIONS_DIALOG_PARAM "locations"
 
 static gboolean
 keynav_failed_cb (CcSearchPanel *self, GtkDirectionType direction, GtkWidget *list)
@@ -627,6 +634,45 @@ populate_search_providers (CcSearchPanel *self)
 }
 
 static void
+cc_search_panel_set_property (GObject      *object,
+                              guint         property_id,
+                              const GValue *value,
+                              GParamSpec   *pspec)
+{
+  switch (property_id)
+    {
+      case PROP_PARAMETERS:
+        {
+          GVariant *parameters = g_value_get_variant (value);
+          g_autoptr (GVariant) v = NULL;
+          const gchar *parameter = NULL;
+
+          if (parameters == NULL || g_variant_n_children (parameters) <= 0)
+            return;
+
+          g_variant_get_child (parameters, 0, "v", &v);
+          if (!g_variant_is_of_type (v, G_VARIANT_TYPE_STRING))
+            {
+              g_warning ("Wrong type for the second argument GVariant, expected 's' but got '%s'",
+                         (gchar *)g_variant_get_type (v));
+              return;
+            }
+
+          parameter = g_variant_get_string (v, NULL);
+
+          if (g_str_equal (parameter, SEARCH_LOCATIONS_DIALOG_PARAM))
+            show_search_locations_dialog (CC_SEARCH_PANEL (object));
+          else
+            g_warning ("Ignoring unknown parameter %s", parameter);
+
+          return;
+        }
+      default:
+        G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
+    }
+}
+
+static void
 cc_search_panel_finalize (GObject *object)
 {
   CcSearchPanel *self = CC_SEARCH_PANEL (object);
@@ -683,8 +729,11 @@ cc_search_panel_class_init (CcSearchPanelClass *klass)
   GObjectClass *oclass = G_OBJECT_CLASS (klass);
 
   oclass->finalize = cc_search_panel_finalize;
+  oclass->set_property = cc_search_panel_set_property;
 
   g_type_ensure (CC_TYPE_LIST_ROW);
+
+  g_object_class_override_property (oclass, PROP_PARAMETERS, "parameters");
 
   gtk_widget_class_set_template_from_resource (widget_class,
                                                "/org/gnome/control-center/search/cc-search-panel.ui");
