@@ -710,13 +710,11 @@ other_places_refresh (CcSearchLocationsDialog *self)
 }
 
 CcSearchLocationsDialog *
-cc_search_locations_dialog_new (CcSearchPanel *panel)
+cc_search_locations_dialog_new (void)
 {
   CcSearchLocationsDialog *self;
   GSettingsSchemaSource *source;
   g_autoptr(GSettingsSchema) schema = NULL;
-  GtkWidget *toplevel;
-  CcShell *shell;
 
   self = g_object_new (CC_SEARCH_LOCATIONS_DIALOG_TYPE, NULL);
 
@@ -734,10 +732,6 @@ cc_search_locations_dialog_new (CcSearchPanel *panel)
 
   g_signal_connect_swapped (self->tracker_preferences, "changed::" TRACKER_KEY_RECURSIVE_DIRECTORIES,
                             G_CALLBACK (other_places_refresh), self);
-
-  shell = cc_panel_get_shell (CC_PANEL (panel));
-  toplevel = cc_shell_get_toplevel (shell);
-  gtk_window_set_transient_for (GTK_WINDOW (self), GTK_WINDOW (toplevel));
 
   return self;
 }
