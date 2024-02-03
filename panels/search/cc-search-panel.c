@@ -284,7 +284,7 @@ row_moved_cb (CcSearchPanel    *self,
 }
 
 static void
-settings_row_activated (CcSearchPanel *self)
+show_search_locations_dialog (CcSearchPanel *self)
 {
   if (self->locations_dialog == NULL)
     {
@@ -694,6 +694,6 @@ cc_search_panel_class_init (CcSearchPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcSearchPanel, search_group);
   gtk_widget_class_bind_template_child (widget_class, CcSearchPanel, settings_row);
 
-  gtk_widget_class_bind_template_callback (widget_class, settings_row_activated);
+  gtk_widget_class_bind_template_callback (widget_class, show_search_locations_dialog);
   gtk_widget_class_bind_template_callback (widget_class, keynav_failed_cb);
 }
