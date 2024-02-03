@@ -30,8 +30,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2023-11-28 13:51+0000\n"
-"PO-Revision-Date: 2024-01-24 15:07+0100\n"
+"POT-Creation-Date: 2024-01-28 13:14+0000\n"
+"PO-Revision-Date: 2024-01-31 22:06+0100\n"
 "Last-Translator: Jürgen Benvenuti <gastornis@posteo.org>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "Language: de\n"
@@ -39,7 +39,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #: panels/applications/cc-applications-panel.c:823
 msgid "System Bus"
@@ -309,7 +309,7 @@ msgstr "Anwendungen durchsuchen"
 msgid "No results found"
 msgstr "Keine Ergebnisse gefunden"
 
-#: panels/applications/cc-applications-panel.ui:319 shell/cc-panel-list.ui:73
+#: panels/applications/cc-applications-panel.ui:319 shell/cc-panel-list.ui:76
 msgid "Try a different search"
 msgstr "Versuchen Sie eine andere Suchanfrage"
 
@@ -894,7 +894,7 @@ msgstr "Datei _importieren …"
 
 #: panels/color/cc-color-panel.ui:390 panels/keyboard/cc-input-chooser.ui:18
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:41
-#: panels/network/connection-editor/net-connection-editor.c:615
+#: panels/network/connection-editor/net-connection-editor.c:645
 #: panels/printers/new-printer-dialog.ui:91
 #: panels/user-accounts/cc-add-user-dialog.ui:39
 msgid "_Add"
@@ -2756,7 +2756,7 @@ msgstr ""
 " Fehlerdetails: NetworkManager läuft nicht."
 
 #: panels/network/cc-network-panel.ui:46 panels/network/cc-network-panel.ui:80
-#: panels/network/connection-editor/net-connection-editor.c:703
+#: panels/network/connection-editor/net-connection-editor.c:733
 msgid "VPN"
 msgstr "VPN"
 
@@ -3373,7 +3373,7 @@ msgid "WPA3 Personal"
 msgstr "WPA3 Personal"
 
 #: panels/network/connection-editor/ce-page-wireguard.c:106
-#: panels/network/connection-editor/net-connection-editor.c:863
+#: panels/network/connection-editor/net-connection-editor.c:893
 msgid "WireGuard"
 msgstr "WireGuard"
 
@@ -3561,32 +3561,32 @@ msgstr "Automatisch, nur DHCP"
 msgid "Prefix"
 msgstr "Präfix"
 
-#: panels/network/connection-editor/net-connection-editor.c:377
+#: panels/network/connection-editor/net-connection-editor.c:405
 #, c-format
 msgid "Unable to open connection editor: %s"
 msgstr "Öffnen des Verbindungseditors fehlgeschlagen: %s"
 
-#: panels/network/connection-editor/net-connection-editor.c:396
+#: panels/network/connection-editor/net-connection-editor.c:426
 msgid "New Profile"
 msgstr "Neues Profil"
 
-#: panels/network/connection-editor/net-connection-editor.c:463
+#: panels/network/connection-editor/net-connection-editor.c:493
 #, c-format
 msgid "Invalid setting %s: %s"
 msgstr "Ungültige Einstellung %s: %s"
 
-#: panels/network/connection-editor/net-connection-editor.c:466
+#: panels/network/connection-editor/net-connection-editor.c:496
 #, c-format
 msgid "Invalid setting %s"
 msgstr "Ungültige Einstellung %s"
 
-#: panels/network/connection-editor/net-connection-editor.c:744
+#: panels/network/connection-editor/net-connection-editor.c:774
 #, c-format
 msgid "Invalid VPN configuration file"
 msgstr "Ungültige VPN-Konfigurationsdatei"
 
 #. Translators: VPN add dialog Wireguard description
-#: panels/network/connection-editor/net-connection-editor.c:851
+#: panels/network/connection-editor/net-connection-editor.c:881
 msgid ""
 "Free and open-source VPN solution designed for ease of use, high speed "
 "performance and low attack surface."
@@ -3594,11 +3594,11 @@ msgstr ""
 "Freie und quelloffene VPN-Lösung, die auf einfache Benutzbarkeit, "
 "Hochgeschwindigkeitsleistung und geringe Angriffsfläche ausgelegt ist."
 
-#: panels/network/connection-editor/net-connection-editor.c:887
+#: panels/network/connection-editor/net-connection-editor.c:917
 msgid "Import from file…"
 msgstr "Aus Datei importieren …"
 
-#: panels/network/connection-editor/net-connection-editor.c:913
+#: panels/network/connection-editor/net-connection-editor.c:943
 msgid "Add VPN"
 msgstr "VPN hinzufügen"
 
@@ -3748,6 +3748,11 @@ msgid ""
 "into the already existing public-key cryptography, for post-quantum "
 "resistance."
 msgstr ""
+"Ein mit base64 codierter, zuvor vereinbarter Schlüssel, der mit »wg genpsk« "
+"erstellt wurde. Er ist optional und darf weggelassen werden. Es kommt eine "
+"zusätzliche Schicht mit symmetrischer Kryptographie hinzu zur Kryptographie "
+"mit öffentlichen Schlüsseln. Dient der Resistenz gegenüber Quanten-"
+"Kryptographie."
 
 #: panels/network/connection-editor/wireguard-peer.ui:162
 msgid "Allowed _IP addresses"
@@ -3759,10 +3764,13 @@ msgid ""
 "incoming traffic for this peer is allowed and to which outgoing traffic for "
 "this peer is directed."
 msgstr ""
+"Eine mit Kommata getrennte Liste mit IP-Adressen (v4 und v6) mit CIDR-"
+"Masken, von denen aus eingehender Datenverkehr für diese Gegenstelle erlaubt "
+"ist, und an welche ausgehender Verkehr für diese Gegenstelle gerichtet wird."
 
 #: panels/network/connection-editor/wireguard-peer.ui:184
 msgid "_Persistent keepalive"
-msgstr ""
+msgstr "_Dauerhaftes keepalive"
 
 #: panels/network/connection-editor/wireguard-peer.ui:197
 msgid ""
@@ -3770,6 +3778,10 @@ msgid ""
 "of keeping a stateful firewall or NAT mapping valid. This is optional and "
 "not recommended outside of specific setups."
 msgstr ""
+"Legt fest, wie oft ein leeres legitimiertes Datenpaket an die Gegenstelle "
+"gesendet wird, mit dem Zweck, eine zustandsbehaftete Firewall oder NAT-"
+"Weiterleitung gültig zu halten. Ist optional und nur für bestimmte Szenarien "
+"empfohlen."
 
 #: panels/network/connection-editor/wireguard-peer.ui:206
 msgid "seconds"
@@ -6574,12 +6586,12 @@ msgstr "Es kann nach Ländern oder Sprachen gesucht werden."
 msgid "Preview"
 msgstr "Vorschau"
 
-#: panels/region/cc-format-preview.c:144
+#: panels/region/cc-format-preview.c:148
 msgctxt "measurement format"
 msgid "Imperial"
 msgstr "Imperial"
 
-#: panels/region/cc-format-preview.c:146
+#: panels/region/cc-format-preview.c:150
 msgctxt "measurement format"
 msgid "Metric"
 msgstr "Metrisch"
