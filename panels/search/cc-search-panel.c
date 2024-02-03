@@ -293,11 +293,18 @@ row_moved_cb (CcSearchPanel    *self,
 static void
 show_search_locations_dialog (CcSearchPanel *self)
 {
+  CcShell *shell;
+  GtkWidget *toplevel;
+
   if (self->locations_dialog == NULL)
     {
-      self->locations_dialog = cc_search_locations_dialog_new (self);
+      self->locations_dialog = cc_search_locations_dialog_new ();
       g_object_add_weak_pointer (G_OBJECT (self->locations_dialog),
                                  (gpointer *) &self->locations_dialog);
+
+      shell = cc_panel_get_shell (CC_PANEL (self));
+      toplevel = cc_shell_get_toplevel (shell);
+      gtk_window_set_transient_for (GTK_WINDOW (self->locations_dialog), GTK_WINDOW (toplevel));
     }
 
   gtk_window_present (GTK_WINDOW (self->locations_dialog));
