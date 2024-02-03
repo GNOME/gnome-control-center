@@ -664,7 +664,8 @@ add_file_chooser_response (GObject      *source,
   file = gtk_file_dialog_select_folder_finish (file_dialog, res, &error);
   if (!file)
     {
-      g_warning ("Failed to add search location: %s", error->message);
+      if (error->code != GTK_DIALOG_ERROR_DISMISSED)
+        g_warning ("Failed to add search location: %s", error->message);
       return;
     }
 
