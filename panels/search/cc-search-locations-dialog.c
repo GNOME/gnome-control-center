@@ -66,6 +66,8 @@ struct _CcSearchLocationsDialogClass {
 
 G_DEFINE_TYPE (CcSearchLocationsDialog, cc_search_locations_dialog, ADW_TYPE_WINDOW)
 
+static const gchar *path_from_tracker_dir (const gchar *value);
+
 static gboolean
 keynav_failed_cb (CcSearchLocationsDialog *self,
                   GtkDirectionType         direction)
@@ -98,6 +100,30 @@ cc_search_locations_dialog_init (CcSearchLocationsDialog *self)
   gtk_widget_init_template (GTK_WIDGET (self));
 }
 
+static gboolean
+location_in_path_strv (GFile       *location,
+                       const char **paths)
+{
+  gint i;
+  const gchar *path;
+
+  for (i = 0; paths[i] != NULL; i++)
+    {
+      g_autoptr(GFile) tracker_location = NULL;
+
+      path = path_from_tracker_dir (paths[i]);
+
+      if (path == NULL)
+        continue;
+
+      tracker_location = g_file_new_for_path (path);
+      if (g_file_equal (location, tracker_location))
+        return TRUE;
+    }
+
+  return FALSE;
+}
+
 static Place *
 place_new (CcSearchLocationsDialog *dialog,
            GFile *location,
@@ -105,6 +131,14 @@ place_new (CcSearchLocationsDialog *dialog,
            PlaceType place_type)
 {
   Place *new_place = g_new0 (Place, 1);
+  g_autoptr(GVariant) single_dir_default_var = NULL;
+  g_autofree const char **single_dir_default = NULL;
+  g_auto(GStrv) single_dir = NULL;
+
+  single_dir_default_var = g_settings_get_default_value (dialog->tracker_preferences,
+                                                         TRACKER_KEY_SINGLE_DIRECTORIES);
+  single_dir_default = g_variant_get_strv (single_dir_default_var, NULL);
+  single_dir = g_settings_get_strv (dialog->tracker_preferences, TRACKER_KEY_SINGLE_DIRECTORIES);
 
   new_place->dialog = dialog;
   new_place->location = location;
@@ -112,7 +146,9 @@ place_new (CcSearchLocationsDialog *dialog,
     new_place->display_name = display_name;
   else
     new_place->display_name = g_file_get_basename (location);
-  if (g_strcmp0 (g_file_get_path (location), g_get_home_dir ()) == 0)
+
+  if (location_in_path_strv (new_place->location, single_dir_default) ||
+      location_in_path_strv (new_place->location, (const char **) single_dir))
     new_place->settings_key = TRACKER_KEY_SINGLE_DIRECTORIES;
   else
     new_place->settings_key = TRACKER_KEY_RECURSIVE_DIRECTORIES;
@@ -327,19 +363,25 @@ place_get_new_settings_values (CcSearchLocationsDialog *self,
 static GList *
 get_tracker_locations (CcSearchLocationsDialog *self)
 {
+  g_auto(GStrv) locations_single = NULL;
   g_auto(GStrv) locations = NULL;
+  g_auto(GStrv) locations_all = NULL;
   GFile *file;
   GList *list;
-  gint idx;
   Place *location;
   const gchar *path;
+  g_autoptr (GStrvBuilder) builder = g_strv_builder_new ();
 
   locations = g_settings_get_strv (self->tracker_preferences, TRACKER_KEY_RECURSIVE_DIRECTORIES);
+  locations_single = g_settings_get_strv (self->tracker_preferences, TRACKER_KEY_SINGLE_DIRECTORIES);
+  g_strv_builder_addv (builder, (const char **) locations);
+  g_strv_builder_addv (builder, (const char **) locations_single);
+  locations_all = g_strv_builder_end (builder);
   list = NULL;
 
-  for (idx = 0; locations[idx] != NULL; idx++)
+  for (guint idx = 0; locations_all[idx] != NULL; idx++)
     {
-      path = path_from_tracker_dir (locations[idx]);
+      path = path_from_tracker_dir (locations_all[idx]);
 
       if (path == NULL)
         continue;
@@ -735,6 +777,8 @@ cc_search_locations_dialog_new (void)
                               (GtkListBoxSortFunc) place_compare_func, NULL, NULL);
 
   g_signal_connect_swapped (self->tracker_preferences, "changed::" TRACKER_KEY_RECURSIVE_DIRECTORIES,
+                            G_CALLBACK (other_places_refresh), self);
+  g_signal_connect_swapped (self->tracker_preferences, "changed::" TRACKER_KEY_SINGLE_DIRECTORIES,
                             G_CALLBACK (other_places_refresh), self);
 
   return self;
