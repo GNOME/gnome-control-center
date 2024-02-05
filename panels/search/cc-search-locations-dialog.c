@@ -588,6 +588,8 @@ create_row_for_place (CcSearchLocationsDialog *self, Place *place)
   adw_action_row_add_suffix (ADW_ACTION_ROW (widgets->row), widgets->switch_);
   adw_action_row_set_activatable_widget (ADW_ACTION_ROW (widgets->row), widgets->switch_);
   adw_preferences_row_set_title (ADW_PREFERENCES_ROW (widgets->row), place->display_name);
+  if (g_str_equal (place->settings_key, TRACKER_KEY_SINGLE_DIRECTORIES))
+    adw_action_row_set_subtitle (ADW_ACTION_ROW (widgets->row), _("Setting for this folder does not apply to subfolders"));
 
   g_object_set_data_full (G_OBJECT (widgets->row), "place", place, (GDestroyNotify) place_free);
 
