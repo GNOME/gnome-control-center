@@ -456,7 +456,7 @@ pp_jobs_dialog_new (const gchar *printer_name)
   gtk_window_set_title (GTK_WINDOW (self), title);
 
   /* Translators: The printer needs authentication info to print. */
-  text = g_strdup_printf (_("Enter credentials to print from %s."), printer_name);
+  text = g_strdup_printf (_("Enter credentials to print from %s"), printer_name);
   gtk_label_set_text (self->authentication_label, text);
 
   self->store = g_list_store_new (pp_job_get_type ());
