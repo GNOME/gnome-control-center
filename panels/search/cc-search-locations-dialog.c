@@ -387,19 +387,7 @@ get_tracker_locations (CcSearchLocationsDialog *self)
                             NULL,
                             PLACE_OTHER);
 
-      if (file != NULL && g_file_query_exists (file, NULL))
-        {
-          list = g_list_prepend (list, location);
-        }
-      else
-        {
-          g_autoptr(GPtrArray) new_values = NULL;
-
-          new_values = place_get_new_settings_values (self, location, TRUE);
-          g_settings_set_strv (self->tracker_preferences,
-                               TRACKER_KEY_RECURSIVE_DIRECTORIES,
-                               (const gchar **) new_values->pdata);
-        }
+      list = g_list_prepend (list, location);
     }
 
   return g_list_reverse (list);
