@@ -137,7 +137,7 @@ get_bookmarks (CcSearchLocationsDialog *self)
   g_autofree gchar *contents = NULL;
   g_autofree gchar *path = NULL;
   GList *bookmarks = NULL;
-  GError *error = NULL;
+  g_autoptr(GError) error = NULL;
 
   path = g_build_filename (g_get_user_config_dir (), "gtk-3.0",
                            "bookmarks", NULL);
