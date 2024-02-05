@@ -572,6 +572,9 @@ create_row_for_place (CcSearchLocationsDialog *self, Place *place)
 
   g_object_set_data_full (G_OBJECT (row), "place", place, (GDestroyNotify) place_free);
 
+  if (g_str_equal (place->settings_key, TRACKER_KEY_SINGLE_DIRECTORIES))
+    adw_action_row_set_subtitle (row, _("Subfolders must be manually added for this location"));
+
   if (place->place_type == PLACE_OTHER)
     {
       /* Other locations can only be removed */
