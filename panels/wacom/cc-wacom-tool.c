@@ -341,11 +341,13 @@ cc_wacom_tool_get_num_buttons (CcWacomTool *tool)
 }
 
 gboolean
-cc_wacom_tool_get_has_eraser (CcWacomTool *tool)
+cc_wacom_tool_get_has_paired_eraser (CcWacomTool *tool)
 {
 	g_return_val_if_fail (CC_IS_WACOM_TOOL (tool), FALSE);
 
-	return libwacom_stylus_is_eraser (tool->wstylus);
+	/* True if there is some other tool that is an eraser and
+	 * is physically associated with this tool */
+	return libwacom_stylus_has_eraser (tool->wstylus);
 }
 
 const gchar *

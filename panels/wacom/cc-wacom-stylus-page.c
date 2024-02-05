@@ -271,7 +271,7 @@ cc_wacom_stylus_page_new (CcWacomTool *stylus)
 {
 	CcWacomStylusPage *page;
 	guint num_buttons;
-	gboolean has_eraser;
+	gboolean has_paired_eraser;
 
 	g_return_val_if_fail (CC_IS_WACOM_TOOL (stylus), NULL);
 
@@ -290,7 +290,7 @@ cc_wacom_stylus_page_new (CcWacomTool *stylus)
 
 	/* Settings */
 	page->stylus_settings = cc_wacom_tool_get_settings (stylus);
-	has_eraser = cc_wacom_tool_get_has_eraser (stylus);
+	has_paired_eraser = cc_wacom_tool_get_has_paired_eraser (stylus);
 
 	num_buttons = cc_wacom_tool_get_num_buttons (stylus);
 	gtk_widget_set_visible (page->stylus_button3_action,
@@ -300,7 +300,7 @@ cc_wacom_stylus_page_new (CcWacomTool *stylus)
 	gtk_widget_set_visible (page->stylus_button1_action,
 				num_buttons >= 1);
 	gtk_widget_set_visible (page->stylus_eraser_pressure,
-				has_eraser);
+				has_paired_eraser);
 
         adw_combo_row_set_selected (ADW_COMBO_ROW (page->stylus_button1_action),
 				    g_settings_get_enum (page->stylus_settings, "button-action"));
