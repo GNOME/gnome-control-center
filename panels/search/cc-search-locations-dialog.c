@@ -531,8 +531,8 @@ place_compare_func (gconstpointer a,
 {
   GtkWidget *child_a, *child_b;
   Place *place_a, *place_b;
-  g_autofree gchar *path = NULL;
-  gboolean is_home;
+  g_autofree char *path_a = NULL;
+  g_autofree char *path_b = NULL;
 
   child_a = GTK_WIDGET (a);
   child_b = GTK_WIDGET (b);
@@ -540,22 +540,15 @@ place_compare_func (gconstpointer a,
   place_a = g_object_get_data (G_OBJECT (child_a), "place");
   place_b = g_object_get_data (G_OBJECT (child_b), "place");
 
-  path = g_file_get_path (place_a->location);
-  is_home = (g_strcmp0 (path, g_get_home_dir ()) == 0);
+  path_a = g_file_get_path (place_a->location);
+  path_b = g_file_get_path (place_b->location);
 
-  if (is_home)
+  if (g_strcmp0 (path_a, g_get_home_dir ()) == 0)
     return -1;
+  else if (g_strcmp0 (path_b, g_get_home_dir ()) == 0)
+    return 1;
 
-  if (place_a->place_type == place_b->place_type)
-    return g_utf8_collate (place_a->display_name, place_b->display_name);
-
-  if (place_a->place_type == PLACE_XDG)
-    return -1;
-
-  if ((place_a->place_type == PLACE_BOOKMARKS) && (place_b->place_type == PLACE_OTHER))
-    return -1;
-
-  return 1;
+  return g_utf8_collate (place_a->display_name, place_b->display_name);
 }
 
 static GtkWidget *
@@ -737,8 +730,12 @@ cc_search_locations_dialog_new (void)
 
   populate_list_boxes (self);
 
+  gtk_list_box_set_sort_func (GTK_LIST_BOX (self->places_list),
+                              (GtkListBoxSortFunc) place_compare_func, NULL, NULL);
+  gtk_list_box_set_sort_func (GTK_LIST_BOX (self->bookmarks_list),
+                              (GtkListBoxSortFunc) place_compare_func, NULL, NULL);
   gtk_list_box_set_sort_func (GTK_LIST_BOX (self->others_list),
-                              (GtkListBoxSortFunc)place_compare_func, NULL, NULL);
+                              (GtkListBoxSortFunc) place_compare_func, NULL, NULL);
 
   g_signal_connect_swapped (self->tracker_preferences, "changed::" TRACKER_KEY_RECURSIVE_DIRECTORIES,
                             G_CALLBACK (other_places_refresh), self);
