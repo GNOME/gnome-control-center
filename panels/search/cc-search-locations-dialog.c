@@ -142,7 +142,7 @@ get_bookmarks (CcSearchLocationsDialog *self)
   g_autofree gchar *contents = NULL;
   g_autofree gchar *path = NULL;
   GList *bookmarks = NULL;
-  GError *error = NULL;
+  g_autoptr(GError) error = NULL;
 
   path = g_build_filename (g_get_user_config_dir (), "gtk-3.0",
                            "bookmarks", NULL);
@@ -489,14 +489,13 @@ place_query_info_ready (GObject *source,
                         gpointer user_data)
 {
   g_autoptr(GFileInfo) info = NULL;
-  PlaceRowWidgets *widgets;
+  g_autofree PlaceRowWidgets *widgets = user_data;
   Place *place;
 
   info = g_file_query_info_finish (G_FILE (source), res, NULL);
   if (!info)
     return;
 
-  widgets = user_data;
   place = g_object_get_data (G_OBJECT (widgets->row), "place");
   g_clear_object (&place->cancellable);
 
