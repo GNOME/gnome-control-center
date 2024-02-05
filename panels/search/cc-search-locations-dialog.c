@@ -485,9 +485,13 @@ place_query_info_ready (GObject *source,
 {
   AdwActionRow *row = ADW_ACTION_ROW (user_data);
   g_autoptr(GFileInfo) info = NULL;
+  g_autoptr(GError) error = NULL;
   Place *place;
 
-  info = g_file_query_info_finish (G_FILE (source), res, NULL);
+  info = g_file_query_info_finish (G_FILE (source), res, &error);
+
+  if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_NOT_FOUND))
+    adw_action_row_set_subtitle (row, _("Location not found"));
 
   place = g_object_get_data (G_OBJECT (row), "place");
   g_clear_object (&place->cancellable);
