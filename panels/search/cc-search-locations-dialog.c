@@ -392,19 +392,7 @@ get_tracker_locations (CcSearchLocationsDialog *self)
                             NULL,
                             PLACE_OTHER);
 
-      if (file != NULL && g_file_query_exists (file, NULL))
-        {
-          list = g_list_prepend (list, location);
-        }
-      else
-        {
-          g_autoptr(GPtrArray) new_values = NULL;
-
-          new_values = place_get_new_settings_values (self, location, TRUE);
-          g_settings_set_strv (self->tracker_preferences,
-                               TRACKER_KEY_RECURSIVE_DIRECTORIES,
-                               (const gchar **) new_values->pdata);
-        }
+      list = g_list_prepend (list, location);
     }
 
   return g_list_reverse (list);
@@ -515,9 +503,13 @@ place_query_info_ready (GObject *source,
 {
   g_autoptr(GFileInfo) info = NULL;
   g_autofree PlaceRowWidgets *widgets = user_data;
+  g_autoptr(GError) error = NULL;
   Place *place;
 
-  info = g_file_query_info_finish (G_FILE (source), res, NULL);
+  info = g_file_query_info_finish (G_FILE (source), res, &error);
+  if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_NOT_FOUND))
+    adw_action_row_set_subtitle (ADW_ACTION_ROW (widgets->row),
+                                 _("This folder no longer exists or is unmounted"));
   if (!info)
     return;
 
