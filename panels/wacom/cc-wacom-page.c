@@ -626,7 +626,7 @@ update_displays_model (CcWacomPage *page)
 						   &vendor,
 						   &product,
 						   &serial);
-		variant = g_variant_new_strv ((const gchar *[]) { vendor, product, serial }, 3);
+		variant = g_variant_new_strv ((const gchar *[]) { vendor, product, serial, name }, 4);
 
 		gtk_string_list_append (list, text);
 		obj = g_list_model_get_item (G_LIST_MODEL (list), idx);
