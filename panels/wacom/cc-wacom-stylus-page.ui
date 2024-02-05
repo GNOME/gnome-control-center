@@ -13,7 +13,8 @@
         </property>
         <child>
           <object class="AdwActionRow" id="stylus_tip_pressure">
-            <property name="title" translatable="yes">Tip Pressure Feel</property>
+            <property name="title" translatable="yes">Tip _Pressure Feel</property>
+            <property name="use-underline">true</property>
             <child>
               <object class="GtkBox" id="stylus_tip_pressure_box">
                 <child>
@@ -51,30 +52,34 @@
         <child>
           <object class="AdwComboRow" id="stylus_button1_action">
             <property name="width_request">100</property>
-            <property name="title" translatable="yes" context="display setting">Button 1</property>
+            <property name="title" translatable="yes" context="display setting">Button _1</property>
             <property name="model">button_model</property>
+            <property name="use-underline">true</property>
             <signal name="notify::selected-item" handler="on_stylus_button1_action_selected" swapped="yes"/>
           </object>
         </child>
         <child>
           <object class="AdwComboRow" id="stylus_button2_action">
             <property name="width_request">100</property>
-            <property name="title" translatable="yes" context="display setting">Button 2</property>
+            <property name="title" translatable="yes" context="display setting">Button _2</property>
             <property name="model">button_model</property>
+            <property name="use-underline">true</property>
             <signal name="notify::selected-item" handler="on_stylus_button2_action_selected" swapped="yes"/>
           </object>
         </child>
         <child>
           <object class="AdwComboRow" id="stylus_button3_action">
             <property name="width_request">100</property>
-            <property name="title" translatable="yes" context="display setting">Button 3</property>
+            <property name="title" translatable="yes" context="display setting">Button _3</property>
             <property name="model">button_model</property>
+            <property name="use-underline">true</property>
             <signal name="notify::selected-item" handler="on_stylus_button3_action_selected" swapped="yes"/>
           </object>
         </child>
         <child>
           <object class="AdwActionRow" id="stylus_eraser_pressure">
-            <property name="title" translatable="yes">Eraser Pressure Feel</property>
+            <property name="title" translatable="yes">_Eraser Pressure Feel</property>
+            <property name="use-underline">true</property>
             <child>
               <object class="GtkBox" id="stylus_eraser_pressure_box">
                 <child>
