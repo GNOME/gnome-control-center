@@ -485,27 +485,10 @@ switch_tracker_get_mapping (GValue *value,
 {
   Place *place = user_data;
   g_autofree const gchar **locations = NULL;
-  GFile *location;
-  gint idx;
   gboolean found;
-  const gchar *path;
 
-  found = FALSE;
   locations = g_variant_get_strv (variant, NULL);
-  for (idx = 0; locations[idx] != NULL; idx++)
-    {
-      path = path_from_tracker_dir (locations[idx]);
-
-      if (path == NULL)
-        continue;
-
-      location = g_file_new_for_path (path);
-      found = g_file_equal (location, place->location);
-      g_object_unref (location);
-
-      if (found)
-        break;
-    }
+  found = location_in_path_strv (place->location, locations);
 
   g_value_set_boolean (value, found);
   return TRUE;
