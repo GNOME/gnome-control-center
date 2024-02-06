@@ -16,10 +16,10 @@
         </child>
         <property name="content">
           <object class="AdwPreferencesPage">
-            <property name="description" translatable="yes">Folders which are searched by system apps, such as Files, Photos and Videos</property>
+            <property name="description" translatable="yes">Filesystem locations which are searched by system apps, such as Files</property>
             <child>
               <object class="AdwPreferencesGroup" id="places_group">
-                <property name="title" translatable="yes">Places</property>
+                <property name="title" translatable="yes">Default Locations</property>
                 <child>
                   <object class="GtkListBox" id="places_list">
                     <property name="selection-mode">none</property>
@@ -36,7 +36,7 @@
             </child>
             <child>
               <object class="AdwPreferencesGroup" id="bookmarks_group">
-                <property name="title" translatable="yes">Bookmarks</property>
+                <property name="title" translatable="yes">Bookmarked Locations</property>
                 <child>
                   <object class="GtkListBox" id="bookmarks_list">
                     <property name="selection-mode">none</property>
@@ -53,7 +53,7 @@
             </child>
             <child>
               <object class="AdwPreferencesGroup" id="others_group">
-                <property name="title" translatable="yes">Others</property>
+                <property name="title" translatable="yes">Custom Locations</property>
                 <property name="header-suffix">
                   <object class="GtkButton" id="locations_add">
                     <property name="valign">center</property>
