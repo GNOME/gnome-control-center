@@ -516,7 +516,8 @@ place_query_info_ready (GObject *source,
   place = g_object_get_data (G_OBJECT (widgets->row), "place");
   g_clear_object (&place->cancellable);
 
-  gtk_widget_set_visible (widgets->switch_, TRUE);
+  if (place->place_type != PLACE_OTHER)
+    gtk_widget_set_visible (widgets->switch_, TRUE);
   g_settings_bind_with_mapping (place->dialog->tracker_preferences, place->settings_key,
                                 widgets->switch_, "active",
                                 G_SETTINGS_BIND_DEFAULT,
