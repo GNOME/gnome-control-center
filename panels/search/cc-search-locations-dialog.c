@@ -42,11 +42,6 @@ typedef struct {
   const gchar *settings_key;
 } Place;
 
-typedef struct {
-  GtkWidget *row;
-  GtkWidget *switch_;
-} PlaceRowWidgets;
-
 struct _CcSearchLocationsDialog {
   AdwWindow            parent;
 
@@ -488,28 +483,14 @@ place_query_info_ready (GObject *source,
                         GAsyncResult *res,
                         gpointer user_data)
 {
+  AdwActionRow *row = ADW_ACTION_ROW (user_data);
   g_autoptr(GFileInfo) info = NULL;
-  PlaceRowWidgets *widgets;
   Place *place;
 
   info = g_file_query_info_finish (G_FILE (source), res, NULL);
-  if (!info)
-    return;
 
-  widgets = user_data;
-  place = g_object_get_data (G_OBJECT (widgets->row), "place");
+  place = g_object_get_data (G_OBJECT (row), "place");
   g_clear_object (&place->cancellable);
-
-  gtk_widget_set_visible (widgets->switch_, TRUE);
-  g_settings_bind_with_mapping (place->dialog->tracker_preferences, place->settings_key,
-                                widgets->switch_, "active",
-                                G_SETTINGS_BIND_DEFAULT,
-                                switch_tracker_get_mapping,
-                                switch_tracker_set_mapping,
-                                place, NULL);
-
-  adw_preferences_row_set_title (ADW_PREFERENCES_ROW (widgets->row),
-                                 place->display_name);
 }
 
 static void
@@ -554,45 +535,51 @@ place_compare_func (gconstpointer a,
 static GtkWidget *
 create_row_for_place (CcSearchLocationsDialog *self, Place *place)
 {
-  PlaceRowWidgets *widgets;
-  GtkWidget *remove_button, *separator;
+  AdwActionRow *row;
+  GtkWidget *index_switch, *remove_button;
 
-  widgets = g_new0 (PlaceRowWidgets, 1);
+  row = ADW_ACTION_ROW (adw_action_row_new ());
+  adw_preferences_row_set_title (ADW_PREFERENCES_ROW (row), place->display_name);
 
-  widgets->row = adw_action_row_new ();
-  widgets->switch_ = gtk_switch_new ();
-
-  gtk_widget_set_visible (widgets->switch_, FALSE);
-  gtk_widget_set_valign (widgets->switch_, GTK_ALIGN_CENTER);
-  adw_action_row_add_suffix (ADW_ACTION_ROW (widgets->row), widgets->switch_);
-  adw_action_row_set_activatable_widget (ADW_ACTION_ROW (widgets->row), widgets->switch_);
-
-  g_object_set_data_full (G_OBJECT (widgets->row), "place", place, (GDestroyNotify) place_free);
+  g_object_set_data_full (G_OBJECT (row), "place", place, (GDestroyNotify) place_free);
 
   if (place->place_type == PLACE_OTHER)
     {
-      separator = gtk_separator_new (GTK_ORIENTATION_VERTICAL);
-      gtk_widget_set_margin_top (separator, 12);
-      gtk_widget_set_margin_bottom (separator, 12);
-      adw_action_row_add_suffix (ADW_ACTION_ROW (widgets->row), separator);
-
+      /* Other locations can only be removed */
       remove_button = gtk_button_new_from_icon_name ("edit-delete-symbolic");
+
       g_object_set_data (G_OBJECT (remove_button), "place", place);
       gtk_widget_set_tooltip_text (GTK_WIDGET (remove_button), _("Remove Folder"));
       gtk_widget_set_valign (remove_button, GTK_ALIGN_CENTER);
       gtk_widget_add_css_class (remove_button, "flat");
-      adw_action_row_add_suffix (ADW_ACTION_ROW (widgets->row), remove_button);
+      adw_action_row_add_suffix (ADW_ACTION_ROW (row), remove_button);
 
       g_signal_connect_swapped (remove_button, "clicked",
                                 G_CALLBACK (remove_button_clicked), self);
+    }
+  else
+    {
+      /* Indexing for default/bookmark locations can be switched off, but not removed  */
+      index_switch = gtk_switch_new ();
+
+      gtk_widget_set_valign (index_switch, GTK_ALIGN_CENTER);
+      adw_action_row_add_suffix (row, index_switch);
+      adw_action_row_set_activatable_widget (row, index_switch);
+
+      g_settings_bind_with_mapping (place->dialog->tracker_preferences, place->settings_key,
+                                    index_switch, "active",
+                                    G_SETTINGS_BIND_DEFAULT,
+                                    switch_tracker_get_mapping,
+                                    switch_tracker_set_mapping,
+                                    place, NULL);
     }
 
   place->cancellable = g_cancellable_new ();
   g_file_query_info_async (place->location, G_FILE_ATTRIBUTE_STANDARD_DISPLAY_NAME,
                            G_FILE_QUERY_INFO_NONE, G_PRIORITY_DEFAULT,
-                           place->cancellable, place_query_info_ready, widgets);
+                           place->cancellable, place_query_info_ready, row);
 
-  return widgets->row;
+  return GTK_WIDGET (row);
 }
 
 static void
