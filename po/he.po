@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center.HEAD.he\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2024-02-05 10:58+0000\n"
-"PO-Revision-Date: 2024-02-05 20:47+0200\n"
+"POT-Creation-Date: 2024-02-06 12:36+0000\n"
+"PO-Revision-Date: 2024-02-06 15:55+0200\n"
 "Last-Translator: Yosef Or Boczko <yoseforb@gmail.com>\n"
 "Language-Team: Hebrew\n"
 "Language: he\n"
@@ -875,7 +875,7 @@ msgstr "יש לכבות את מצב הטיסה על מנת לאפשר בלוטו
 #: panels/bluetooth/gnome-bluetooth-panel.desktop.in:3
 #: panels/network/cc-network-panel.ui:30
 #: panels/network/net-device-bluetooth.c:138
-#: panels/printers/pp-new-printer-dialog.c:1382
+#: panels/printers/pp-new-printer-dialog.c:1378
 msgid "Bluetooth"
 msgstr "בלוטות'"
 
@@ -2319,7 +2319,7 @@ msgstr "הגדרת צירופי מקשים"
 msgid "Enter new shortcut to change <b>%s</b>"
 msgstr "יש להקיש צירופי מקשים חדשים לשינוי <b>%s</b>"
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.c:940
+#: panels/keyboard/cc-keyboard-shortcut-editor.c:937
 msgid "Add Custom Shortcut"
 msgstr "הוספת צירוף מקשים חדש"
 
@@ -2821,13 +2821,18 @@ msgid "_Proxy"
 msgstr "מ_תווך"
 
 #.
-#. * translators: This is the format string for the text shown underneath the Wi-Fi QR code.
-#. * The string placeholder will be replaced by the Wi-Fi networks SSID.
+#. * translators: Subtitle underneath the Wi-Fi QR code is constructed with two labels.
+#. * The first label holds Network Name, the second Wi-Fi password.
 #.
-#: panels/network/cc-qr-code-dialog.c:133
+#: panels/network/cc-qr-code-dialog.c:140
 #, c-format
-msgid "Scan the QR code to connect to the network <b>%s</b>."
-msgstr "יש לסרוק את קוד ה־QR על מנת להתחבר לרשת <b>%s</b>."
+msgid "<b>Network Name</b>: %s"
+msgstr "<b>שם הרשת</b>: %s"
+
+#: panels/network/cc-qr-code-dialog.c:145
+#, c-format
+msgid "<b>Password</b>: %s"
+msgstr "<b>ססמה</b>: %s"
 
 #: panels/network/cc-qr-code-dialog.ui:9
 #: panels/network/cc-wifi-connection-row.ui:60
@@ -3103,13 +3108,13 @@ msgstr "לשכוח"
 
 #. TRANSLATORS: this WEP WiFi security
 #: panels/network/connection-editor/ce-page-details.c:129
-#: panels/network/net-device-wifi.c:242
+#: panels/network/net-device-wifi.c:237
 msgid "WEP"
 msgstr "WEP"
 
 #. TRANSLATORS: this WPA WiFi security
 #: panels/network/connection-editor/ce-page-details.c:133
-#: panels/network/net-device-wifi.c:246
+#: panels/network/net-device-wifi.c:241
 msgid "WPA"
 msgstr "WPA"
 
@@ -3135,7 +3140,7 @@ msgid "Enterprise"
 msgstr "ארגוני"
 
 #: panels/network/connection-editor/ce-page-details.c:167
-#: panels/network/net-device-wifi.c:233
+#: panels/network/net-device-wifi.c:228
 msgctxt "Wifi security"
 msgid "None"
 msgstr "ללא"
@@ -3808,20 +3813,24 @@ msgstr "קווי"
 msgid "Add new connection"
 msgstr "הוספת התחברות חדשה"
 
-#: panels/network/net-device-wifi.c:866
-#, c-format
-msgid "Network “%s” has been deleted"
-msgstr "הרשת „%s” נמחקה"
+#: panels/network/net-device-wifi.c:879
+msgid "Network deleted"
+msgstr "רשת נמחקה"
 
-#: panels/network/net-device-wifi.c:870
+#: panels/network/net-device-wifi.c:881
 msgid "_Undo"
 msgstr "_ביטול"
 
-#: panels/network/net-device-wifi.c:1114
+#: panels/network/net-device-wifi.c:893
+#, c-format
+msgid "%d networks deleted"
+msgstr "‏%d רשתות נמחקו"
+
+#: panels/network/net-device-wifi.c:1135
 msgid "System policy prohibits use as a Hotspot"
 msgstr "מדיניות המערכת אוסרת שימוש בנקודת גישה"
 
-#: panels/network/net-device-wifi.c:1117
+#: panels/network/net-device-wifi.c:1138
 msgid "Wireless device does not support Hotspot mode"
 msgstr "התקן הרשת האלחוטית אינו תומך במצב נקודת גישה"
 
@@ -4724,17 +4733,17 @@ msgstr ""
 "אנרגיה;"
 
 #. Translators: %s is the printer name
-#: panels/printers/cc-printers-panel.c:675
+#: panels/printers/cc-printers-panel.c:672
 #, c-format
 msgid "Printer “%s” has been deleted"
 msgstr "המדפסת „%s” נמחקה"
 
 #. Translators: Addition of the new printer failed.
-#: panels/printers/cc-printers-panel.c:921
+#: panels/printers/cc-printers-panel.c:918
 msgid "Failed to add new printer."
 msgstr "הוספת המדפסת החדשה נכשלה."
 
-#: panels/printers/cc-printers-panel.c:1288
+#: panels/printers/cc-printers-panel.c:1284
 msgid "Unlock to add printers and change settings"
 msgstr "יש לשחרר כדי להוסיף מדפסות ולשנות הגדרות"
 
@@ -5028,8 +5037,8 @@ msgstr "%s - הדפסות פעילות"
 #. Translators: The printer needs authentication info to print.
 #: panels/printers/pp-jobs-dialog.c:459
 #, c-format
-msgid "Enter credentials to print from %s."
-msgstr "יש להזין אישור על מנת להדפיס מ־%s."
+msgid "Enter credentials to print from %s"
+msgstr "יש להזין אישור על מנת להדפיס מ־%s"
 
 #. Translators: This is a windows domain used with SMB protocol.
 #: panels/printers/pp-jobs-dialog.ui:30
@@ -5077,34 +5086,34 @@ msgid "Searching for Printers"
 msgstr "חיפוש מדפסות"
 
 #. Translators: The found device is a printer connected via USB
-#: panels/printers/pp-new-printer-dialog.c:1365
+#: panels/printers/pp-new-printer-dialog.c:1361
 msgid "USB"
 msgstr "USB"
 
 #. Translators: The found device is a printer connected via serial port
-#: panels/printers/pp-new-printer-dialog.c:1370
+#: panels/printers/pp-new-printer-dialog.c:1366
 msgid "Serial Port"
 msgstr "יציאה טורית"
 
 #. Translators: The found device is a printer connected via parallel port
-#: panels/printers/pp-new-printer-dialog.c:1377
+#: panels/printers/pp-new-printer-dialog.c:1373
 msgid "Parallel Port"
 msgstr "יציאה מקבילית"
 
 #. Translators: Location of found network printer (e.g. Kitchen, Reception)
-#: panels/printers/pp-new-printer-dialog.c:1419
+#: panels/printers/pp-new-printer-dialog.c:1415
 #, c-format
 msgid "Location: %s"
 msgstr "מיקום: %s"
 
 #. Translators: Network address of found printer
-#: panels/printers/pp-new-printer-dialog.c:1424
+#: panels/printers/pp-new-printer-dialog.c:1420
 #, c-format
 msgid "Address: %s"
 msgstr "כתובת: %s"
 
 #. Translators: This item is a server which needs authentication to show its printers
-#: panels/printers/pp-new-printer-dialog.c:1451
+#: panels/printers/pp-new-printer-dialog.c:1447
 msgid "Server requires authentication"
 msgstr "אימות _פנימי"
 
@@ -7572,25 +7581,25 @@ msgstr "צריך להתאים את כתובת האינטרנט של ספק הח�
 msgid "Failed to add account"
 msgstr "הוספת החשבון נכשלה"
 
-#: panels/system/users/cc-add-user-dialog.c:680
+#: panels/system/users/cc-add-user-dialog.c:668
 msgid "The passwords do not match."
 msgstr "הססמאות אינן תואמות."
 
-#: panels/system/users/cc-add-user-dialog.c:884
+#: panels/system/users/cc-add-user-dialog.c:866
+#: panels/system/users/cc-add-user-dialog.c:905
 #: panels/system/users/cc-add-user-dialog.c:923
-#: panels/system/users/cc-add-user-dialog.c:941
 msgid "Failed to register account"
 msgstr "הרשמת החשבון נכשלה"
 
-#: panels/system/users/cc-add-user-dialog.c:1056
+#: panels/system/users/cc-add-user-dialog.c:1038
 msgid "No supported way to authenticate with this domain"
 msgstr "אין שיטה נתמכת לאימות עם מתחם זה (domain)"
 
-#: panels/system/users/cc-add-user-dialog.c:1120
+#: panels/system/users/cc-add-user-dialog.c:1102
 msgid "Failed to join domain"
 msgstr "ההצטרפות למתחם נכשלה"
 
-#: panels/system/users/cc-add-user-dialog.c:1175
+#: panels/system/users/cc-add-user-dialog.c:1157
 msgid ""
 "That login name didn’t work.\n"
 "Please try again."
@@ -7598,7 +7607,7 @@ msgstr ""
 "שם התחברות זה לא עובד.\n"
 "נא לנסות שוב."
 
-#: panels/system/users/cc-add-user-dialog.c:1182
+#: panels/system/users/cc-add-user-dialog.c:1164
 msgid ""
 "That login password didn’t work.\n"
 "Please try again."
@@ -7606,11 +7615,11 @@ msgstr ""
 "ססמה זו לא עובדת.\n"
 "נא לנסות שוב."
 
-#: panels/system/users/cc-add-user-dialog.c:1190
+#: panels/system/users/cc-add-user-dialog.c:1172
 msgid "Failed to log into domain"
 msgstr "ההתחברות למתחם נכשלה"
 
-#: panels/system/users/cc-add-user-dialog.c:1245
+#: panels/system/users/cc-add-user-dialog.c:1227
 msgid "Unable to find the domain. Maybe you misspelled it?"
 msgstr "לא ניתן למצוא את התחום. אולי שגית באיות?"
 
@@ -8201,51 +8210,51 @@ msgid ""
 "Adding more letters, numbers and punctuation will make the password stronger."
 msgstr "הוספת תווים נוספים, מספרים וסימני פיסוק תחזק את הססמה עוד יותר."
 
-#: panels/system/users/run-passwd.c:401
+#: panels/system/users/run-passwd.c:390
 msgid "Authentication failed"
 msgstr "האימות נכשל"
 
-#: panels/system/users/run-passwd.c:480
+#: panels/system/users/run-passwd.c:469
 #, c-format
 msgid "The new password is too short"
 msgstr "הססמה החדשה קצרה מדי"
 
-#: panels/system/users/run-passwd.c:486
+#: panels/system/users/run-passwd.c:475
 #, c-format
 msgid "The new password is too simple"
 msgstr "הססמה החדשה פשוטה מדי"
 
-#: panels/system/users/run-passwd.c:492
+#: panels/system/users/run-passwd.c:481
 #, c-format
 msgid "The old and new passwords are too similar"
 msgstr "הססמאות הישנה והחדשה דומות מדי"
 
-#: panels/system/users/run-passwd.c:495
+#: panels/system/users/run-passwd.c:484
 #, c-format
 msgid "The new password has already been used recently."
 msgstr "הססמה החדשה כבר הייתה בשימוש לאחרונה."
 
-#: panels/system/users/run-passwd.c:498
+#: panels/system/users/run-passwd.c:487
 #, c-format
 msgid "The new password must contain numeric or special characters"
 msgstr "על הססמה החדשה להכיל תווים מספריים או מיוחדים"
 
-#: panels/system/users/run-passwd.c:502
+#: panels/system/users/run-passwd.c:491
 #, c-format
 msgid "The old and new passwords are the same"
 msgstr "הססמאות הישנה והחדשה זהות"
 
-#: panels/system/users/run-passwd.c:506
+#: panels/system/users/run-passwd.c:495
 #, c-format
 msgid "Your password has been changed since you initially authenticated!"
 msgstr "ססמתך הוחלפה מאז שביצעת אימות לראשונה!"
 
-#: panels/system/users/run-passwd.c:510
+#: panels/system/users/run-passwd.c:499
 #, c-format
 msgid "The new password does not contain enough different characters"
 msgstr "הססמה החדשה לא מכילה מספיק תווים השונים זה מזה"
 
-#: panels/system/users/run-passwd.c:514 panels/wwan/cc-wwan-errors-private.h:72
+#: panels/system/users/run-passwd.c:503 panels/wwan/cc-wwan-errors-private.h:72
 #, c-format
 msgid "Unknown error"
 msgstr "שגיאה בלתי ידועה"
@@ -8290,8 +8299,8 @@ msgid "_Overamplification"
 msgstr "ה_גברת יתר"
 
 #: panels/universal-access/cc-ua-hearing-page.ui:18
-msgid "Allow volume to exceed 100%, this will result in quality loss"
-msgstr "לאפשר לעצמת השמע לחרוג מ־100%. איכות השמע תפגע כתוצאה מכ"
+msgid "Allow volume to exceed 100%, with reduced sound quality"
+msgstr "לאפשר לעצמת השמע לחרוג מ־100%. איכות השמע תפגע כתוצאה מכך"
 
 #: panels/universal-access/cc-ua-hearing-page.ui:39
 msgid "Visual Alerts"
@@ -8938,8 +8947,8 @@ msgstr "מחשב לוח וכפתורים מותאמים (Express Keys™) מסו
 msgid "Map _Buttons"
 msgstr "מיפוי _לחצנים"
 
-#: panels/wacom/cc-wacom-page.ui:44
 # msgctxt "display setting"
+#: panels/wacom/cc-wacom-page.ui:44
 msgctxt "display setting"
 msgid "Map to _Monitor"
 msgstr "מיפוי ל_צג"
@@ -8982,20 +8991,20 @@ msgstr "עט רגיל עם לחץ"
 msgid "Firm"
 msgstr "נוקשה"
 
-#: panels/wacom/cc-wacom-stylus-page.ui:55
 # msgctxt "display setting"
+#: panels/wacom/cc-wacom-stylus-page.ui:55
 msgctxt "display setting"
 msgid "Button _1"
 msgstr "לחצן _1"
 
-#: panels/wacom/cc-wacom-stylus-page.ui:64
 # msgctxt "display setting"
+#: panels/wacom/cc-wacom-stylus-page.ui:64
 msgctxt "display setting"
 msgid "Button _2"
 msgstr "לחצן _2"
 
-#: panels/wacom/cc-wacom-stylus-page.ui:73
 # msgctxt "display setting"
+#: panels/wacom/cc-wacom-stylus-page.ui:73
 msgctxt "display setting"
 msgid "Button _3"
 msgstr "לחצן _3"
@@ -9812,6 +9821,14 @@ msgstr[3] "‏‫%u ערוצי קלט"
 #: subprojects/gvc/gvc-mixer-control.c:2882
 msgid "System Sounds"
 msgstr "צלילי מערכת"
+
+#, c-format
+#~ msgid "Scan the QR code to connect to the network <b>%s</b>."
+#~ msgstr "יש לסרוק את קוד ה־QR על מנת להתחבר לרשת <b>%s</b>."
+
+#, c-format
+#~ msgid "Network “%s” has been deleted"
+#~ msgstr "הרשת „%s” נמחקה"
 
 #~ msgid "Reproduce sounds."
 #~ msgstr "הפקת צלילים."
@@ -12735,9 +12752,6 @@ msgstr "צלילי מערכת"
 
 #~ msgid "Job State"
 #~ msgstr "מצב המשימה"
-
-#~ msgid "Password:"
-#~ msgstr "ססמה:"
 
 #~ msgctxt "universal access, contrast"
 #~ msgid "Color"
