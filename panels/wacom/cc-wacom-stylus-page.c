@@ -203,7 +203,9 @@ present_action_dialog (CcWacomStylusPage *page,
 	GtkWidget *action_dialog;
 
 	window = GTK_WINDOW (cc_shell_get_toplevel (cc_panel_get_shell (CC_PANEL (page->panel))));
-	action_dialog = cc_wacom_stylus_action_dialog_new (page->stylus_settings, button, key);
+	action_dialog = cc_wacom_stylus_action_dialog_new (page->stylus_settings,
+							   cc_wacom_tool_get_name (page->stylus),
+							   button, key);
 
 	gtk_window_set_transient_for (GTK_WINDOW (action_dialog), window);
 	gtk_window_present (GTK_WINDOW (action_dialog));

@@ -31,7 +31,7 @@ struct _CcWacomStylusActionDialog
 {
 	AdwWindow             parent_instance;
 
-	GtkLabel             *description_label;
+	AdwPreferencesGroup  *preferences_group;
 
 	AdwActionRow         *left_button_row;
 	AdwActionRow         *right_button_row;
@@ -99,7 +99,7 @@ cc_wacom_stylus_action_dialog_class_init (CcWacomStylusActionDialogClass *klass)
 						     "/org/gnome/control-center/"
 						     "wacom/cc-wacom-stylus-action-dialog.ui");
 
-	gtk_widget_class_bind_template_child (widget_class, CcWacomStylusActionDialog, description_label);
+	gtk_widget_class_bind_template_child (widget_class, CcWacomStylusActionDialog, preferences_group);
 
 	gtk_widget_class_bind_template_child (widget_class, CcWacomStylusActionDialog, left_button_row);
 	gtk_widget_class_bind_template_child (widget_class, CcWacomStylusActionDialog, right_button_row);
@@ -135,6 +135,7 @@ cc_wacom_stylus_action_dialog_init (CcWacomStylusActionDialog *self)
 
 GtkWidget*
 cc_wacom_stylus_action_dialog_new (GSettings   *settings,
+				   const char  *stylus_name,
 				   guint        button,
 				   const char  *key)
 {
@@ -149,11 +150,13 @@ cc_wacom_stylus_action_dialog_new (GSettings   *settings,
 	dialog->settings = settings;
 	dialog->key = g_strdup (key);
 
+	gtk_window_set_title (GTK_WINDOW (dialog), stylus_name);
+
 	text = g_strdup_printf (_("Choose an action when button %d on the stylus is pressed"), button);
-	gtk_label_set_text (dialog->description_label, text);
+	adw_preferences_group_set_description (dialog->preferences_group, text);
 
 	title = g_strdup_printf (_("Button %d Mapping"), button);
-	gtk_window_set_title (GTK_WINDOW (dialog), title);
+	adw_preferences_group_set_title (dialog->preferences_group, title);
 
 	action = g_settings_get_enum (settings, key);
 	switch (action) {
