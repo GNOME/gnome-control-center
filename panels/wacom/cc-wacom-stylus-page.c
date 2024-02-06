@@ -393,21 +393,21 @@ cc_wacom_panel_get_stylus_button_action_label (GDesktopStylusButtonAction action
 
 	switch (action) {
 		case G_DESKTOP_STYLUS_BUTTON_ACTION_DEFAULT:
-			text = _("Left Mousebutton Click");
+			text = _("_Left Mousebutton Click");
 			break;
 		case G_DESKTOP_STYLUS_BUTTON_ACTION_MIDDLE:
-			text = _("Middle Mousebutton Click");
+			text = _("_Middle Mousebutton Click");
 			break;
 		case G_DESKTOP_STYLUS_BUTTON_ACTION_RIGHT:
-			text = _("Right Mousebutton Click");
+			text = _("_Right Mousebutton Click");
 			break;
 		case G_DESKTOP_STYLUS_BUTTON_ACTION_BACK:
 			/* Translators: this is the "go back" action of a button  */
-			text = _("Back");
+			text = _("_Back");
 			break;
 		case G_DESKTOP_STYLUS_BUTTON_ACTION_FORWARD:
 			/* Translators: this is the "go forward" action of a button  */
-			text = _("Forward");
+			text = _("_Forward");
 			break;
 	}
 
