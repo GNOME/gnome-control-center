@@ -225,8 +225,7 @@ style-check-diff:
   needs:
   - build.container.fedora@x86_64
   stage: test
-  rules:
-    - if: $CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH || $CI_PROJECT_NAMESPACE != "GNOME"
+  when: always
   allow_failure: true
   script:
     - .gitlab-ci/run-style-check-diff.sh
