@@ -219,12 +219,12 @@ run_calibration (CcWacomPage *page,
 	g_assert (page->area == NULL);
 
 	page->area = cc_calib_area_new (NULL,
-                                        monitor,
-                                        cc_wacom_page_get_gdk_device (page),
-                                        finish_calibration,
-                                        page,
-                                        THRESHOLD_MISCLICK,
-                                        THRESHOLD_DOUBLECLICK);
+					monitor,
+					cc_wacom_page_get_gdk_device (page),
+					finish_calibration,
+					page,
+					THRESHOLD_MISCLICK,
+					THRESHOLD_DOUBLECLICK);
 
 	g_object_set_data_full (G_OBJECT (page),
 				"old-calibration",

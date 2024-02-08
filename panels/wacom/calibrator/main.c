@@ -258,7 +258,7 @@ static struct Calib* main_common(int argc, char** argv)
             if (strcmp("--fake", argv[i]) == 0) {
                 fake = TRUE;
             }
-            
+
             /* unknown option */
             else {
                 fprintf(stderr, "Unknown option: %s\n\n", argv[i]);
@@ -267,7 +267,7 @@ static struct Calib* main_common(int argc, char** argv)
             }
         }
     }
-    
+
 
     /* Choose the device to calibrate */
     XID         device_id   = (XID) -1;
@@ -410,8 +410,8 @@ int main(int argc, char** argv)
                                     calibrator->threshold_doubleclick,
                                     calibrator->threshold_misclick);
 
-		mainloop = g_main_loop_new (NULL, FALSE);
-		g_main_loop_run (mainloop);
+    mainloop = g_main_loop_new (NULL, FALSE);
+    g_main_loop_run (mainloop);
 
     cc_calib_area_free (calib_area);
 
