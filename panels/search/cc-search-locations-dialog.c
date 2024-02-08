@@ -611,9 +611,6 @@ update_list_visibility (CcSearchLocationsDialog *self)
   gtk_widget_set_visible (self->bookmarks_group,
                           gtk_list_box_get_row_at_index (GTK_LIST_BOX (self->bookmarks_list), 0)
                           != NULL);
-  gtk_widget_set_visible (self->others_list,
-                          gtk_list_box_get_row_at_index (GTK_LIST_BOX (self->others_list), 0)
-                          != NULL);
 }
 
 static void
