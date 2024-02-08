@@ -19,7 +19,7 @@
                   <object class="AdwActionRow">
                     <property name="title" translatable="yes">None</property>
                     <property name="activatable-widget">none_button</property>
-                    <child>
+                    <child type="prefix">
                       <object class="GtkCheckButton" id="none_button">
                         <property name="valign">center</property>
                         <signal name="toggled" handler="toggled_cb" swapped="yes"/>
@@ -31,7 +31,7 @@
                   <object class="AdwActionRow">
                     <property name="title" translatable="yes">Click</property>
                     <property name="activatable-widget">click_button</property>
-                    <child>
+                    <child type="prefix">
                       <object class="GtkCheckButton" id="click_button">
                         <property name="valign">center</property>
                         <property name="group">none_button</property>
@@ -45,7 +45,7 @@
                   <object class="AdwActionRow">
                     <property name="title" translatable="yes">String</property>
                     <property name="activatable-widget">string_button</property>
-                    <child>
+                    <child type="prefix">
                       <object class="GtkCheckButton" id="string_button">
                         <property name="valign">center</property>
                         <property name="group">none_button</property>
@@ -59,7 +59,7 @@
                   <object class="AdwActionRow">
                     <property name="title" translatable="yes">Swing</property>
                     <property name="activatable-widget">swing_button</property>
-                    <child>
+                    <child type="prefix">
                       <object class="GtkCheckButton" id="swing_button">
                         <property name="valign">center</property>
                         <property name="group">none_button</property>
@@ -73,7 +73,7 @@
                   <object class="AdwActionRow">
                     <property name="title" translatable="yes">Hum</property>
                     <property name="activatable-widget">hum_button</property>
-                    <child>
+                    <child type="prefix">
                       <object class="GtkCheckButton" id="hum_button">
                         <property name="valign">center</property>
                         <property name="group">none_button</property>
