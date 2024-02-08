@@ -32,12 +32,11 @@ python = py.find_installation('python3')
 
 config_h.set_quoted('TEST_NM_PYTHON', python.full_path())
 
+application_id = 'org.gnome.Settings'
+
 if get_option('profile') == 'development'
-    profile = 'Devel'
-else
-    profile = ''
+    application_id += '.' + 'Devel'
 endif
-application_id = 'org.gnome.Settings@0@'.format(profile)
 
 version_split = meson.project_version().split('.')
 

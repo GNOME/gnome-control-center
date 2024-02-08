@@ -1,11 +1,9 @@
 appdata_conf = configuration_data()
 appdata_conf.set('appid', application_id)
 
-appdata = 'org.gnome.Settings.appdata.xml'
-
 appdata_file = i18n.merge_file(
   input: configure_file(
-    input: appdata + '.in',
+    input: 'org.gnome.Settings.appdata.xml.in.in',
     output: 'org.gnome.Settings.appdata.xml.in',
     configuration: appdata_conf
   ),

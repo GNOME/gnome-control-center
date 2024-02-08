@@ -57,10 +57,17 @@ common_sources = files(
 generated_sources = files()
 
 #Resources
+gresource_file = configure_file(
+  input: meson.project_name() + '.gresource.xml.in',
+  output: meson.project_name() + '.gresource.xml',
+  configuration: service_conf
+)
+
 generated_sources += gnome.compile_resources(
   'resources',
-  meson.project_name() + '.gresource.xml',
-  export : true
+  gresource_file,
+  export : true,
+  dependencies: [gresource_file, appdata_file]
 )
 
 common_sources += generated_sources
