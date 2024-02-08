@@ -6,7 +6,7 @@ common_sources = files(
   'cc-clock.c',
 )
 
-calibrator_deps = deps + [m_dep]
+calibrator_deps = deps + [libdevice_dep, m_dep]
 
 libwacom_calibrator = static_library(
   cappletname + '-calibrator',

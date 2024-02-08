@@ -39,7 +39,7 @@ struct _CcCalibArea
   XYinfo       axis;
   gboolean     swap;
   gboolean     success;
-  GdkDevice   *device;
+  GsdDevice   *device;
 
   GtkWidget  *error_revealer;
   GtkWidget  *title_revealer;
@@ -142,9 +142,11 @@ on_gesture_press (CcCalibArea     *area,
                   gdouble          y,
                   GtkGestureClick *gesture)
 {
+  GsdDeviceManager *manager = gsd_device_manager_get ();
   gint num_clicks;
   gboolean success;
   GdkDevice *source;
+  GsdDevice *device;
 
   if (area->success)
     return;
@@ -154,8 +156,10 @@ on_gesture_press (CcCalibArea     *area,
   if (gdk_device_get_source (source) == GDK_SOURCE_TOUCHSCREEN)
     return;
 
+  device = gsd_device_manager_lookup_gdk_device (manager, source);
+
   /* Check matching device if a device was provided */
-  if (area->device && area->device != source)
+  if (area->device && area->device != device)
     {
       g_debug ("Ignoring input from device %s",
 	       gdk_device_get_name (source));
@@ -346,7 +350,7 @@ cc_calib_area_init (CcCalibArea *calib_area)
 CcCalibArea *
 cc_calib_area_new (GdkDisplay     *display,
                    GdkMonitor     *monitor,
-                   GdkDevice      *device,
+                   GsdDevice      *device,
                    FinishCallback  callback,
                    gpointer        user_data,
                    int             threshold_doubleclick,

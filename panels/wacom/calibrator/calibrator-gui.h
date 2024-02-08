@@ -27,6 +27,8 @@
 
 G_BEGIN_DECLS
 
+#include "gsd-device-manager.h"
+
 /* struct to hold min/max info of the X and Y axis */
 typedef struct
 {
@@ -43,7 +45,7 @@ typedef void (*FinishCallback) (CcCalibArea *area, gpointer user_data);
 
 CcCalibArea * cc_calib_area_new (GdkDisplay      *display,
                                  GdkMonitor     *monitor,
-                                 GdkDevice      *device,
+                                 GsdDevice      *device,
                                  FinishCallback  callback,
                                  gpointer        user_data,
                                  int             threshold_doubleclick,
