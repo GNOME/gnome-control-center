@@ -166,8 +166,10 @@ on_gesture_press (CcCalibArea     *area,
       return;
     }
 
+  /* Reset the clock */
+  cc_clock_set_duration (CC_CLOCK (area->clock), MAX_TIME);
+
   /* Handle click */
-  /* FIXME: reset clock */
   success = add_click(&area->calibrator,
                       (int) x,
                       (int) y);
