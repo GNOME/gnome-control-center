@@ -411,14 +411,14 @@ get_places_list (CcSearchLocationsDialog *self)
                      g_file_new_for_path (g_get_home_dir ()),
                      g_strdup (_("Home")),
                      PLACE_XDG);
-  g_hash_table_insert (places, place->location, place);
+  g_hash_table_replace (places, place->location, place);
 
   /* first, load the XDG dirs */
   xdg_list = get_xdg_dirs (self);
   for (l = xdg_list; l != NULL; l = l->next)
     {
       place = l->data;
-      g_hash_table_insert (places, place->location, place);
+      g_hash_table_replace (places, place->location, place);
     }
 
   /* then, insert all the tracker locations that are not XDG dirs */
@@ -429,7 +429,7 @@ get_places_list (CcSearchLocationsDialog *self)
       old_place = g_hash_table_lookup (places, p->location);
       if (old_place == NULL)
         {
-          g_hash_table_insert (places, p->location, p);
+          g_hash_table_replace (places, p->location, p);
           g_steal_pointer (&p);
         }
     }
@@ -442,7 +442,7 @@ get_places_list (CcSearchLocationsDialog *self)
       old_place = g_hash_table_lookup (places, p->location);
       if (old_place == NULL)
         {
-          g_hash_table_insert (places, p->location, p);
+          g_hash_table_replace (places, p->location, p);
           g_steal_pointer (&p);
         }
       else
