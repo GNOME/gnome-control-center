@@ -65,6 +65,11 @@ enum
 	LR = 3  /* Lower-right */
 };
 
+struct Point
+{
+    int x, y;
+};
+
 struct Calib
 {
     /* Geometry of the calibration window */
@@ -74,7 +79,7 @@ struct Calib
     int num_clicks;
 
     /* click coordinates */
-    int clicked_x[4], clicked_y[4];
+    struct Point clicked[4];
 
     /* Threshold to keep the same point from being clicked twice.
      * Set to zero if you don't want this check

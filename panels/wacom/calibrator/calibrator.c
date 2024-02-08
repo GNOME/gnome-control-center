@@ -39,13 +39,12 @@ reset (struct Calib *c)
 
 /* check whether the coordinates are along the respective axis */
 static gboolean
-along_axis (struct Calib *c,
-            int           xy,
-            int           x0,
-            int           y0)
+along_axis (struct Calib       *c,
+            int                 xy,
+            const struct Point *p)
 {
-    return ((abs(xy - x0) <= c->threshold_misclick) ||
-            (abs(xy - y0) <= c->threshold_misclick));
+    return ((abs(xy - p->x) <= c->threshold_misclick) ||
+            (abs(xy - p->y) <= c->threshold_misclick));
 }
 
 /* add a click with the given coordinates */
@@ -62,8 +61,8 @@ add_click (struct Calib *c,
         int i = c->num_clicks-1;
         while (i >= 0)
         {
-            if (abs(x - c->clicked_x[i]) <= c->threshold_doubleclick &&
-                abs(y - c->clicked_y[i]) <= c->threshold_doubleclick)
+            if (abs(x - c->clicked[i].x) <= c->threshold_doubleclick &&
+                abs(y - c->clicked[i].y) <= c->threshold_doubleclick)
             {
                 g_debug ("Detected double-click, ignoring");
                 return FALSE;
@@ -80,8 +79,7 @@ add_click (struct Calib *c,
         if (c->num_clicks == 1)
         {
             /* check that along one axis of first point */
-            if (along_axis(c, x,c->clicked_x[0],c->clicked_y[0]) ||
-                along_axis(c, y,c->clicked_x[0],c->clicked_y[0]))
+            if (along_axis(c, x, &c->clicked[0]) || along_axis(c, y, &c->clicked[0]))
             {
                 misclick = FALSE;
             }
@@ -89,10 +87,8 @@ add_click (struct Calib *c,
         else if (c->num_clicks == 2)
         {
             /* check that along other axis of first point than second point */
-            if ((along_axis(c, y,c->clicked_x[0],c->clicked_y[0]) &&
-                 along_axis(c, c->clicked_x[1],c->clicked_x[0],c->clicked_y[0])) ||
-                (along_axis(c, x,c->clicked_x[0],c->clicked_y[0]) &&
-                 along_axis(c, c->clicked_y[1],c->clicked_x[0],c->clicked_y[0])))
+            if ((along_axis(c, y, &c->clicked[0]) && along_axis(c, c->clicked[1].x, &c->clicked[0])) ||
+                (along_axis(c, x, &c->clicked[0]) && along_axis(c, c->clicked[1].y, &c->clicked[0])))
             {
                 misclick = FALSE;
             }
@@ -100,10 +96,8 @@ add_click (struct Calib *c,
         else if (c->num_clicks == 3)
         {
             /* check that along both axis of second and third point */
-            if ((along_axis(c, x,c->clicked_x[1],c->clicked_y[1]) &&
-                 along_axis(c, y,c->clicked_x[2],c->clicked_y[2])) ||
-                (along_axis(c, y,c->clicked_x[1],c->clicked_y[1]) &&
-                 along_axis(c, x,c->clicked_x[2],c->clicked_y[2])))
+            if ((along_axis(c, x, &c->clicked[1]) && along_axis(c, y, &c->clicked[2])) ||
+                (along_axis(c, y, &c->clicked[1]) && along_axis(c, x, &c->clicked[2])))
             {
                 misclick = FALSE;
             }
@@ -118,8 +112,8 @@ add_click (struct Calib *c,
     }
 
     g_debug ("Click (%d, %d) added", x, y);
-    c->clicked_x[c->num_clicks] = x;
-    c->clicked_y[c->num_clicks] = y;
+    c->clicked[c->num_clicks].x = x;
+    c->clicked[c->num_clicks].y = y;
     c->num_clicks++;
 
     return TRUE;
@@ -153,10 +147,10 @@ finish (struct Calib *c,
     scale_x = 1 / (float)c->geometry.width;
     scale_y = 1 / (float)c->geometry.height;
 
-    axis.x_min = ((((c->clicked_x[UL] + c->clicked_x[LL]) / 2)) * scale_x);
-    axis.x_max = ((((c->clicked_x[UR] + c->clicked_x[LR]) / 2)) * scale_x);
-    axis.y_min = ((((c->clicked_y[UL] + c->clicked_y[UR]) / 2)) * scale_y);
-    axis.y_max = ((((c->clicked_y[LL] + c->clicked_y[LR]) / 2)) * scale_y);
+    axis.x_min = ((((c->clicked[UL].x + c->clicked[LL].x) / 2)) * scale_x);
+    axis.x_max = ((((c->clicked[UR].x + c->clicked[LR].x) / 2)) * scale_x);
+    axis.y_min = ((((c->clicked[UL].y + c->clicked[UR].y) / 2)) * scale_y);
+    axis.y_max = ((((c->clicked[LL].y + c->clicked[LR].y) / 2)) * scale_y);
 
     /* Add/subtract the offset that comes from not having the points in the
      * corners (using the same coordinate system they are currently in)
