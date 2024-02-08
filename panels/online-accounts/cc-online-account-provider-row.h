@@ -29,8 +29,8 @@ G_BEGIN_DECLS
 
 G_DECLARE_FINAL_TYPE (CcOnlineAccountProviderRow, cc_online_account_provider_row, CC, ONLINE_ACCOUNT_PROVIDER_ROW, AdwActionRow)
 
-CcOnlineAccountProviderRow *cc_online_account_provider_row_new          (GoaProvider *provider);
+CcOnlineAccountProviderRow *cc_online_account_provider_row_new (GoaProvider *provider);
 
-GoaProvider                *cc_online_account_provider_row_get_provider (CcOnlineAccountProviderRow *row);
+GoaProvider *cc_online_account_provider_row_get_provider (CcOnlineAccountProviderRow *row);
 
 G_END_DECLS
