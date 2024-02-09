@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center HEAD\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2024-02-03 23:05+0000\n"
-"PO-Revision-Date: 2024-02-04 21:29+0100\n"
+"POT-Creation-Date: 2024-02-09 15:46+0000\n"
+"PO-Revision-Date: 2024-02-09 23:17+0100\n"
 "Last-Translator: Quentin PAGÈS\n"
 "Language-Team: Tot en òc\n"
 "Language: oc\n"
@@ -67,7 +67,7 @@ msgstr "A accès a la ret"
 
 #: panels/applications/cc-applications-panel.c:844
 #: panels/applications/cc-applications-panel.c:846
-#: panels/search/cc-search-locations-dialog.c:384
+#: panels/search/cc-search-locations-dialog.c:412
 msgid "Home"
 msgstr "Dorsièr personal"
 
@@ -98,6 +98,8 @@ msgid ""
 "<b>%s</b> requires access to the following system resources. To stop this "
 "access, the app must be removed."
 msgstr ""
+"<b>%s</b> requerís l’accès a las ressorsas sistèma seguentas. Per arrestar "
+"aqueste accès, l’aplicacion deu èsser suprimida."
 
 #: panels/applications/cc-applications-panel.c:1191
 #, c-format
@@ -113,8 +115,9 @@ msgstr "<b>%s</b> dubrís aquestes tipes de fichièrs e ligams."
 
 #. Translators: '%s' is the formatted size, e.g. "26.2 MB"
 #: panels/applications/cc-applications-panel.c:1264
-#, c-format
-msgid "%s of disk space used."
+#, fuzzy, c-format
+#| msgid "%s of disk space used."
+msgid "%s of disk space used"
 msgstr "%s de l’espaci disc utilizat."
 
 #: panels/applications/cc-applications-panel.ui:10
@@ -208,10 +211,8 @@ msgid "Show system notifications"
 msgstr "Afichar las notificacions sistèma"
 
 #: panels/applications/cc-applications-panel.ui:288
-#, fuzzy
-#| msgid "Run in Background"
 msgid "_Run in Background"
-msgstr "Executar en rèireplan"
+msgstr "_Executar en rèireplan"
 
 #: panels/applications/cc-applications-panel.ui:289
 #, fuzzy
@@ -230,13 +231,13 @@ msgid "Take pictures of the screen at any time"
 msgstr "Prendre de fòtos amb la camèra."
 
 #: panels/applications/cc-applications-panel.ui:304
-#, fuzzy
-#| msgid "Change Wallpaper"
 msgid "Change _Wallpaper"
-msgstr "Cambiar lo rèireplan"
+msgstr "Cambiar lo _rèireplan"
 
 #: panels/applications/cc-applications-panel.ui:305
-msgid "Change the desktop wallpaper."
+#, fuzzy
+#| msgid "Change the desktop wallpaper."
+msgid "Change the desktop wallpaper"
 msgstr "Modificar lo rèireplan."
 
 #: panels/applications/cc-applications-panel.ui:312
@@ -245,9 +246,6 @@ msgid "So_unds"
 msgstr "So_ns"
 
 #: panels/applications/cc-applications-panel.ui:313
-msgid "Reproduce sounds."
-msgstr "Legir los sons."
-
 #: panels/applications/cc-applications-panel.ui:321
 #, fuzzy
 #| msgid "Reproduce sounds."
@@ -283,10 +281,8 @@ msgstr "C_amèra"
 
 #: panels/applications/cc-applications-panel.ui:349
 #: panels/applications/cc-applications-panel.ui:357
-#, fuzzy
-#| msgid "_Microphones"
 msgid "_Microphone"
-msgstr "_Microfòns"
+msgstr "_Microfòn"
 
 #: panels/applications/cc-applications-panel.ui:350
 #: panels/applications/cc-applications-panel.ui:358
@@ -306,10 +302,8 @@ msgid "Access device location data"
 msgstr "Accès a las donadas de localizacion de l’aparelh"
 
 #: panels/applications/cc-applications-panel.ui:384
-#, fuzzy
-#| msgid "Required Access"
 msgid "Re_quired Access"
-msgstr "Accès requerit"
+msgstr "Accès re_querit"
 
 #: panels/applications/cc-applications-panel.ui:385
 msgid "System access that is required by the app"
@@ -329,10 +323,8 @@ msgid "_File &amp; Link Associations"
 msgstr "Fichièr e associacions"
 
 #: panels/applications/cc-applications-panel.ui:407
-#, fuzzy
-#| msgid "Storage"
 msgid "S_torage"
-msgstr "Emmagazinatge"
+msgstr "Emmagazina_tge"
 
 #: panels/applications/cc-applications-panel.ui:430
 msgid "Required Access"
@@ -363,7 +355,7 @@ msgstr "Emmagazinatge"
 #| msgid ""
 #| "How much disk space this application is occupying with app data and "
 #| "caches."
-msgid "How much disk space this app is occupying with app data and caches."
+msgid "How much disk space this app is occupying with app data and caches"
 msgstr ""
 "Espaci de disc consumit per aquesta aplicacion per sas donadas e son cache."
 
@@ -389,11 +381,11 @@ msgstr "_Escafar lo cache"
 
 #: panels/applications/cc-default-apps-page.ui:4
 msgid "Links &amp; Files"
-msgstr ""
+msgstr "Ligams e fichièrs"
 
 #: panels/applications/cc-default-apps-page.ui:5
 msgid "Apps which are used to open common links and files"
-msgstr ""
+msgstr "Aplicacions que son utilizadas per dobrir los fichièrs e ligams comuns"
 
 #: panels/applications/cc-default-apps-page.ui:8
 msgid "_Web"
@@ -521,7 +513,7 @@ msgstr "Mèdias amovibles"
 
 #: panels/applications/cc-removable-media-settings.ui:6
 msgid "Apps which are launched when media or drives are connected"
-msgstr ""
+msgstr "Aplicacions que son lançadas quand un mèdia o lector es connectat"
 
 #: panels/applications/cc-removable-media-settings.ui:9
 #, fuzzy
@@ -540,26 +532,18 @@ msgid "CD _Audio"
 msgstr "_CD àudio"
 
 #: panels/applications/cc-removable-media-settings.ui:29
-#, fuzzy
-#| msgid "_DVD video"
 msgid "_DVD Video"
 msgstr "_DVD vidèo"
 
 #: panels/applications/cc-removable-media-settings.ui:42
-#, fuzzy
-#| msgid "_Music player"
 msgid "Music Pla_yer"
 msgstr "_Lector de musica"
 
 #: panels/applications/cc-removable-media-settings.ui:55
-#, fuzzy
-#| msgid "_Photos"
 msgid "P_hotos"
 msgstr "_Fòtos"
 
 #: panels/applications/cc-removable-media-settings.ui:68
-#, fuzzy
-#| msgid "_Software"
 msgid "Sof_tware"
 msgstr "_Logicials"
 
@@ -604,17 +588,15 @@ msgstr "Enregistrar l’àudio"
 #: panels/applications/cc-snap-row.c:261
 msgid "Detect network devices using mDNS/DNS-SD (Bonjour/zeroconf)"
 msgstr ""
+"Detectar los periferics ret en utilizant mDNS/DNS-SD (Bonjour/zeroconf)"
 
 #: panels/applications/cc-snap-row.c:263
 msgid "Access bluetooth hardware directly"
-msgstr ""
+msgstr "Accedir al material bluetooth dirèctament"
 
 #: panels/applications/cc-snap-row.c:265
-#, fuzzy
-#| msgid "Depends on %u other device"
-#| msgid_plural "Depends on %u other devices"
 msgid "Use bluetooth devices"
-msgstr "Depend de %u autre periferic"
+msgstr "Utilizar de periferics bluetooth"
 
 #: panels/applications/cc-snap-row.c:267
 msgid "Use your camera"
@@ -635,10 +617,8 @@ msgid "Allow connecting to the Docker service"
 msgstr "Autorizar los connectats a distància a contrarotlar l’ecran"
 
 #: panels/applications/cc-snap-row.c:275
-#, fuzzy
-#| msgid "Configure input source"
 msgid "Configure network firewall"
-msgstr "Configurar la font d'entrada"
+msgstr "Configurar lo parafuòc"
 
 #: panels/applications/cc-snap-row.c:277
 msgid "Setup and use privileged FUSE filesystems"
@@ -673,10 +653,8 @@ msgid "Access libvirt service"
 msgstr "Accedir al servici libvirt"
 
 #: panels/applications/cc-snap-row.c:291
-#, fuzzy
-#| msgid "Change system time and date settings"
 msgid "Change system language and region settings"
-msgstr "Modificar la data e l'ora del sistèma"
+msgstr "Modificar la lenga, l'ora del sistèma e los paramètres regionals"
 
 #: panels/applications/cc-snap-row.c:293
 msgid "Change location settings and providers"
@@ -724,7 +702,7 @@ msgstr ""
 
 #: panels/applications/cc-snap-row.c:311
 msgid "Read access to network settings"
-msgstr ""
+msgstr "Legir l’accès als paramètres ret"
 
 #: panels/applications/cc-snap-row.c:313
 #, fuzzy
@@ -776,7 +754,7 @@ msgstr ""
 
 #: panels/applications/cc-snap-row.c:335
 msgid "Prevent screen sleep/lock"
-msgstr ""
+msgstr "Empachar la mesa en velha/verrolhatge de l’ecran"
 
 #: panels/applications/cc-snap-row.c:337
 msgid "Access serial port hardware"
@@ -788,7 +766,7 @@ msgstr ""
 
 #: panels/applications/cc-snap-row.c:341
 msgid "Install, remove and configure software"
-msgstr ""
+msgstr "Installar, surprimir e configurar los logicials"
 
 #: panels/applications/cc-snap-row.c:343
 #, fuzzy
@@ -798,7 +776,7 @@ msgstr "Cap de servici telefonic"
 
 #: panels/applications/cc-snap-row.c:345
 msgid "Read process and system information"
-msgstr ""
+msgstr "Legir los processes e l’informacion sistèma"
 
 #: panels/applications/cc-snap-row.c:347
 msgid "Monitor and control any running program"
@@ -811,10 +789,8 @@ msgid "Change the date and time"
 msgstr "Modificar la data e l'ora, inclús lo fus orari"
 
 #: panels/applications/cc-snap-row.c:351
-#, fuzzy
-#| msgid "Change system time and date settings"
 msgid "Change time server settings"
-msgstr "Modificar la data e l'ora del sistèma"
+msgstr "Modificar los paramètres del servidor de temps"
 
 #: panels/applications/cc-snap-row.c:353
 #, fuzzy
@@ -925,7 +901,9 @@ msgid "No Bluetooth Found"
 msgstr "Cap d'adaptator Bluetooth pas trobat"
 
 #: panels/bluetooth/cc-bluetooth-panel.ui:30
-msgid "Plug in a dongle to use Bluetooth."
+#, fuzzy
+#| msgid "Plug in a dongle to use Bluetooth."
+msgid "Plug in a dongle to use Bluetooth"
 msgstr "Brancatz la clau per utilizar lo Bluetooth."
 
 #: panels/bluetooth/cc-bluetooth-panel.ui:36
@@ -956,14 +934,16 @@ msgid "Hardware Airplane Mode is On"
 msgstr "Mòde avion material activat"
 
 #: panels/bluetooth/cc-bluetooth-panel.ui:64
-msgid "Turn off the Airplane mode switch to enable Bluetooth."
+#, fuzzy
+#| msgid "Turn off the Airplane mode switch to enable Bluetooth."
+msgid "Turn off the Airplane mode switch to enable Bluetooth"
 msgstr "Desactivatz lo mòde avion per activar lo Bluetooth."
 
 #. Translators: The found device is a printer connected via Bluetooth
 #: panels/bluetooth/gnome-bluetooth-panel.desktop.in:3
 #: panels/network/cc-network-panel.ui:30
 #: panels/network/net-device-bluetooth.c:138
-#: panels/printers/pp-new-printer-dialog.c:1382
+#: panels/printers/pp-new-printer-dialog.c:1378
 msgid "Bluetooth"
 msgstr "Bluetooth"
 
@@ -1080,7 +1060,7 @@ msgstr "Escandalhatge de l'ecran"
 #: panels/system/users/cc-avatar-chooser.c:92
 #: panels/system/users/cc-fingerprint-dialog.ui:32
 #: panels/system/users/cc-password-dialog.ui:21
-#: panels/system/users/cc-user-page.ui:226
+#: panels/system/users/cc-user-page.ui:222
 #: panels/system/users/data/join-dialog.ui:17
 #: panels/wwan/cc-wwan-mode-dialog.ui:32
 #: panels/wwan/cc-wwan-network-dialog.ui:107
@@ -1637,8 +1617,6 @@ msgid "More…"
 msgstr "Mai…"
 
 #: panels/common/cc-list-row-info-button.ui:6
-#, fuzzy
-#| msgid "More information"
 msgid "More Information"
 msgstr "Mai d'informacions"
 
@@ -1991,10 +1969,8 @@ msgid "To"
 msgstr "a"
 
 #: panels/display/cc-night-light-page.ui:319
-#, fuzzy
-#| msgid "Color Temperature"
 msgid "_Color Temperature"
-msgstr "Temperatura de color"
+msgstr "_Temperatura de color"
 
 #: panels/display/gnome-display-panel.desktop.in:4
 #, fuzzy
@@ -2326,7 +2302,9 @@ msgid "Input Sources"
 msgstr "Fonts d'entrada"
 
 #: panels/keyboard/cc-keyboard-panel.ui:23
-msgid "Includes keyboard layouts and input methods."
+#, fuzzy
+#| msgid "Includes keyboard layouts and input methods."
+msgid "Includes keyboard layouts and input methods"
 msgstr "Inclutz l'agençaments de clavièr e los metòdes d’entrada."
 
 #: panels/keyboard/cc-keyboard-panel.ui:33
@@ -2346,7 +2324,9 @@ msgid "Special Character Entry"
 msgstr "Entrada de caractèrs especials"
 
 #: panels/keyboard/cc-keyboard-panel.ui:65
-msgid "Methods for entering symbols and letter variants using the keyboard."
+#, fuzzy
+#| msgid "Methods for entering symbols and letter variants using the keyboard."
+msgid "Methods for entering symbols and letter variants using the keyboard"
 msgstr ""
 "Metòdes per picar de simbòls e de variantas de letras en utilizant lo "
 "clavièr."
@@ -2383,10 +2363,8 @@ msgid "All changes to keyboard shortcuts will be lost."
 msgstr ""
 
 #: panels/keyboard/cc-keyboard-shortcut-dialog.c:382
-#, fuzzy
-#| msgid "Reset All"
 msgid "_Reset All"
-msgstr "Reïnicializar tot"
+msgstr "_Reïnicializar tot"
 
 #: panels/keyboard/cc-keyboard-shortcut-dialog.ui:34
 msgid "Search shortcuts"
@@ -2397,25 +2375,26 @@ msgid "Search Shortcuts"
 msgstr "Cercar d’acorchis"
 
 #: panels/keyboard/cc-keyboard-shortcut-dialog.ui:71
-#, fuzzy
-#| msgid "Reset All…"
 msgid "_Reset All…"
-msgstr "Reïnicializar tot…"
+msgstr "_Reïnicializar tot…"
 
 #: panels/keyboard/cc-keyboard-shortcut-dialog.ui:93
 msgid "No keyboard shortcut found"
 msgstr "Cap d'acorchi de clavièr pas trobat"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:94
-msgid "Try a different search."
-msgstr "Ensajatz una autra recèrca."
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:94 shell/cc-panel-list.ui:45
+msgid "Try a different search"
+msgstr "Ensajatz una autra recèrca"
 
 #: panels/keyboard/cc-keyboard-shortcut-dialog.ui:126
 msgid "Add Custom Shortcuts"
 msgstr "Apondre un acorchi personalizat"
 
 #: panels/keyboard/cc-keyboard-shortcut-dialog.ui:127
-msgid "Set up custom shortcuts for launching apps, running scripts, and more."
+#, fuzzy
+#| msgid ""
+#| "Set up custom shortcuts for launching apps, running scripts, and more."
+msgid "Set up custom shortcuts for launching apps, running scripts, and more"
 msgstr ""
 "Definir d'acorchis personalizats per lançar las aplicacions, executar de "
 "scripts e encara mai."
@@ -2457,12 +2436,12 @@ msgstr "Definir un acorchi"
 msgid "Enter new shortcut to change <b>%s</b>"
 msgstr "Picatz un acorchi novèl per cambiar %s."
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.c:940
+#: panels/keyboard/cc-keyboard-shortcut-editor.c:937
 msgid "Add Custom Shortcut"
 msgstr "Apondre un acorchi personalizat"
 
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:22
-#: panels/system/users/cc-user-page.ui:227
+#: panels/system/users/cc-user-page.ui:223
 msgid "_Remove"
 msgstr "_Suprimir"
 
@@ -2478,7 +2457,9 @@ msgid "_Set"
 msgstr "_Definir"
 
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:103
-msgid "Press Esc to cancel or Backspace to disable the keyboard shortcut."
+#, fuzzy
+#| msgid "Press Esc to cancel or Backspace to disable the keyboard shortcut."
+msgid "Press Esc to cancel or Backspace to disable the keyboard shortcut"
 msgstr ""
 "Quichar sus Escap per anullar o sus Retorn arrièr per desactivar l'acorchi "
 "de clavièr."
@@ -2555,17 +2536,17 @@ msgstr ""
 "Verrolhar;Volum;Abracar;Accelarator;"
 
 #: panels/mouse/cc-mouse-panel.ui:58
-#, fuzzy
-#| msgid "Mouse"
 msgid "_Mouse"
-msgstr "Mirga"
+msgstr "_Mirga"
 
 #: panels/mouse/cc-mouse-panel.ui:69
 msgid "Primary Button"
 msgstr "Boton principal"
 
 #: panels/mouse/cc-mouse-panel.ui:70
-msgid "Order of physical buttons on mice and touchpads."
+#, fuzzy
+#| msgid "Order of physical buttons on mice and touchpads."
+msgid "Order of physical buttons on mice and touchpads"
 msgstr "Òrdre dels botons fisics sus las mirgas e los pavats tactils."
 
 #: panels/mouse/cc-mouse-panel.ui:84
@@ -2604,7 +2585,7 @@ msgstr "Rapid"
 
 #: panels/mouse/cc-mouse-panel.ui:137
 msgid "Mouse _Acceleration"
-msgstr ""
+msgstr "_Acceleracion de la mirga"
 
 #: panels/mouse/cc-mouse-panel.ui:138
 msgid "Recommended for most users and applications"
@@ -2621,20 +2602,16 @@ msgid "Scroll Direction"
 msgstr "Direccion del defilament"
 
 #: panels/mouse/cc-mouse-panel.ui:157
-#, fuzzy
-#| msgid "Traditional"
 msgid "Tra_ditional"
-msgstr "Tradicional"
+msgstr "Tra_dicional"
 
 #: panels/mouse/cc-mouse-panel.ui:158 panels/mouse/cc-mouse-panel.ui:298
 msgid "Scrolling moves the view"
 msgstr "Lo desfilament desplaça la vista"
 
 #: panels/mouse/cc-mouse-panel.ui:159 panels/mouse/cc-mouse-panel.ui:299
-#, fuzzy
-#| msgid "Natural"
 msgid "_Natural"
-msgstr "Natural"
+msgstr "_Natural"
 
 #: panels/mouse/cc-mouse-panel.ui:160 panels/mouse/cc-mouse-panel.ui:301
 msgid "Scrolling moves the content"
@@ -2652,10 +2629,8 @@ msgid "Test Mouse and Touchpad Settings"
 msgstr "Paramètres de la mirga e del pavat tactil"
 
 #: panels/mouse/cc-mouse-panel.ui:192
-#, fuzzy
-#| msgid "Touchpad"
 msgid "_Touchpad"
-msgstr "Pavat tactil"
+msgstr "_Pavat tactil"
 
 #: panels/mouse/cc-mouse-panel.ui:200
 msgid "T_ouchpad"
@@ -2736,10 +2711,8 @@ msgid "Drag one finger on the edge"
 msgstr ""
 
 #: panels/mouse/cc-mouse-panel.ui:297
-#, fuzzy
-#| msgid "Traditional"
 msgid "T_raditional"
-msgstr "Tradicional"
+msgstr "T_radicional"
 
 #: panels/mouse/cc-mouse-test.ui:12
 #, fuzzy
@@ -2748,10 +2721,8 @@ msgid "Test Mouse & Touchpad"
 msgstr "Mirga & pavat tac­til"
 
 #: panels/mouse/cc-mouse-test.ui:43
-#, fuzzy
-#| msgid "Click"
 msgid "Click Here"
-msgstr "Click"
+msgstr "Clicar aquí"
 
 #: panels/mouse/cc-mouse-test.ui:87
 #, fuzzy
@@ -2785,7 +2756,9 @@ msgid "_Hot Corner"
 msgstr "_Bòrd reactiu"
 
 #: panels/multitasking/cc-multitasking-panel.ui:22
-msgid "Touch the top-left corner to open the Activities Overview."
+#, fuzzy
+#| msgid "Touch the top-left corner to open the Activities Overview."
+msgid "Touch the top-left corner to open the Activities Overview"
 msgstr "Tocar lo caire naut esquèr per dobrir l’apercebut de las activitats."
 
 #: panels/multitasking/cc-multitasking-panel.ui:37
@@ -2793,8 +2766,11 @@ msgid "_Active Screen Edges"
 msgstr "_Bordaduras d’ecran actiu"
 
 #: panels/multitasking/cc-multitasking-panel.ui:38
+#, fuzzy
+#| msgid ""
+#| "Drag windows against the top, left, and right screen edges to resize them."
 msgid ""
-"Drag windows against the top, left, and right screen edges to resize them."
+"Drag windows against the top, left, and right screen edges to resize them"
 msgstr ""
 "Lisatz las fenèstras contra los bòrds superiors a man esquèrra e drecha per "
 "los redimencionar."
@@ -2810,7 +2786,9 @@ msgid "_Dynamic Workspaces"
 msgstr "_Espacis de trabalh dinamics"
 
 #: panels/multitasking/cc-multitasking-panel.ui:61
-msgid "Automatically removes empty workspaces."
+#, fuzzy
+#| msgid "Automatically removes empty workspaces."
+msgid "Automatically removes empty workspaces"
 msgstr "Suprimir automaticament los espacis de trabalhs voids."
 
 #: panels/multitasking/cc-multitasking-panel.ui:75
@@ -2820,7 +2798,9 @@ msgid "_Fixed Number of Workspaces"
 msgstr "_Nombre d’espacis de trabalh fixe"
 
 #: panels/multitasking/cc-multitasking-panel.ui:76
-msgid "Specify a number of permanent workspaces."
+#, fuzzy
+#| msgid "Specify a number of permanent workspaces."
+msgid "Specify a number of permanent workspaces"
 msgstr "Especificatz un nombre d’espacis de trabalh permanents."
 
 #: panels/multitasking/cc-multitasking-panel.ui:91
@@ -2878,7 +2858,7 @@ msgstr ""
 #: panels/network/connection-editor/ip6-page.ui:37
 #: panels/network/connection-editor/ip6-page.ui:197
 #: panels/network/connection-editor/ip6-page.ui:255
-#: panels/wacom/cc-wacom-page.c:653
+#: panels/wacom/cc-wacom-page.c:652
 msgid "Automatic"
 msgstr "Automatic"
 
@@ -2909,10 +2889,8 @@ msgid "C_onfiguration"
 msgstr "C_onfiguracion"
 
 #: panels/network/cc-net-proxy-page.ui:84
-#, fuzzy
-#| msgid "Configuration URL"
 msgid "Con_figuration URL"
-msgstr "URL de configuracion"
+msgstr "URL de con_figuracion"
 
 #: panels/network/cc-net-proxy-page.ui:92
 #, fuzzy
@@ -3000,20 +2978,23 @@ msgid "Not set up"
 msgstr "Pas configurat"
 
 #: panels/network/cc-network-panel.ui:96
-#, fuzzy
-#| msgid "Proxy"
 msgid "_Proxy"
-msgstr "Mandatari"
+msgstr "_Servidor mandatari "
 
 #.
-#. * translators: This is the format string for the text shown underneath the Wi-Fi QR code.
-#. * The string placeholder will be replaced by the Wi-Fi networks SSID.
+#. * translators: Subtitle underneath the Wi-Fi QR code is constructed with two labels.
+#. * The first label holds Network Name, the second Wi-Fi password.
 #.
-#: panels/network/cc-qr-code-dialog.c:133
+#: panels/network/cc-qr-code-dialog.c:140
 #, fuzzy, c-format
-#| msgid "Switch off to connect to a Wi-Fi network"
-msgid "Scan the QR code to connect to the network <b>%s</b>."
-msgstr "Atudar per se connectar a una ret Wi-Fi"
+#| msgid "Network Name"
+msgid "<b>Network Name</b>: %s"
+msgstr "Nom de la ret"
+
+#: panels/network/cc-qr-code-dialog.c:145
+#, c-format
+msgid "<b>Password</b>: %s"
+msgstr "<b>Senhal </b>: %s"
 
 #: panels/network/cc-qr-code-dialog.ui:9
 #: panels/network/cc-wifi-connection-row.ui:60
@@ -3067,16 +3048,12 @@ msgstr "Connectat"
 
 #: panels/network/cc-wifi-connection-row.ui:73
 #: panels/network/network-ethernet.ui:47
-#, fuzzy
-#| msgid "Network timeout"
 msgid "Network Options"
-msgstr "Relambi d'espèra de la ret"
+msgstr "Opcions de ret"
 
 #: panels/network/cc-wifi-connection-row.ui:85
-#, fuzzy
-#| msgid "Share Network"
 msgid "Forget Network"
-msgstr "Partejar la ret"
+msgstr "Oblidar la ret"
 
 #. TRANSLATORS: ‘%s’ is a Wi-Fi Network(SSID) name
 #: panels/network/cc-wifi-hotspot-dialog.c:134
@@ -3227,7 +3204,7 @@ msgstr "_Seguretat 802.1x"
 #: panels/network/connection-editor/ethernet-page.ui:27
 #: panels/network/connection-editor/vpn-page.ui:23
 #: panels/system/users/cc-add-user-dialog.ui:68
-#: panels/system/users/cc-user-page.ui:88
+#: panels/system/users/cc-user-page.ui:84
 msgid "_Name"
 msgstr "_Nom"
 
@@ -3293,13 +3270,13 @@ msgstr "Oblidar"
 
 #. TRANSLATORS: this WEP WiFi security
 #: panels/network/connection-editor/ce-page-details.c:129
-#: panels/network/net-device-wifi.c:242
+#: panels/network/net-device-wifi.c:237
 msgid "WEP"
 msgstr "WEP"
 
 #. TRANSLATORS: this WPA WiFi security
 #: panels/network/connection-editor/ce-page-details.c:133
-#: panels/network/net-device-wifi.c:246
+#: panels/network/net-device-wifi.c:241
 msgid "WPA"
 msgstr "WPA"
 
@@ -3325,7 +3302,7 @@ msgid "Enterprise"
 msgstr "Entrepresa"
 
 #: panels/network/connection-editor/ce-page-details.c:167
-#: panels/network/net-device-wifi.c:233
+#: panels/network/net-device-wifi.c:228
 msgctxt "Wifi security"
 msgid "None"
 msgstr "Pas cap"
@@ -3898,10 +3875,8 @@ msgid "A base64 public key calculated by 'wg pubkey' from a private key."
 msgstr ""
 
 #: panels/network/connection-editor/wireguard-peer.ui:143
-#, fuzzy
-#| msgid "Shared Key"
 msgid "_Pre-shared key"
-msgstr "Clau partejada"
+msgstr "_Clau partejada"
 
 #: panels/network/connection-editor/wireguard-peer.ui:154
 msgid ""
@@ -3924,7 +3899,7 @@ msgstr ""
 
 #: panels/network/connection-editor/wireguard-peer.ui:194
 msgid "_Persistent keepalive"
-msgstr ""
+msgstr "_Manténer persistent"
 
 #: panels/network/connection-editor/wireguard-peer.ui:208
 msgid ""
@@ -3996,21 +3971,24 @@ msgstr "Filara"
 msgid "Add new connection"
 msgstr "Apondre una novèla connexion"
 
-#: panels/network/net-device-wifi.c:866
-#, fuzzy, c-format
-#| msgid "Printer “%s” has been deleted"
-msgid "Network “%s” has been deleted"
-msgstr "L’imprimenta « %s » es estada suprimida"
+#: panels/network/net-device-wifi.c:879
+msgid "Network deleted"
+msgstr "Ret suprimit"
 
-#: panels/network/net-device-wifi.c:870
+#: panels/network/net-device-wifi.c:881
 msgid "_Undo"
 msgstr "_Anullar"
 
-#: panels/network/net-device-wifi.c:1114
+#: panels/network/net-device-wifi.c:893
+#, c-format
+msgid "%d networks deleted"
+msgstr "%d rets suprimits"
+
+#: panels/network/net-device-wifi.c:1135
 msgid "System policy prohibits use as a Hotspot"
 msgstr "Las règlas del sistèma interdison son utilizacion coma punt d'accès"
 
-#: panels/network/net-device-wifi.c:1117
+#: panels/network/net-device-wifi.c:1138
 msgid "Wireless device does not support Hotspot mode"
 msgstr "Lo periferic sens fial pren pas en carga lo mòde « punt d'accès »"
 
@@ -4071,10 +4049,8 @@ msgid "_Connect to Hidden Network…"
 msgstr "_Connexion a una ret amagada…"
 
 #: panels/network/network-wifi.ui:99
-#, fuzzy
-#| msgid "_Connect to Hidden Network…"
 msgid "Connect to hidden network"
-msgstr "_Connexion a una ret amagada…"
+msgstr "_Connexion a una ret amagada"
 
 #: panels/network/network-wifi.ui:107
 msgid "_Turn On Wi-Fi Hotspot…"
@@ -4357,9 +4333,13 @@ msgid "Notification _Popups"
 msgstr "_Bandièras de notificacions"
 
 #: panels/notifications/cc-app-notifications-dialog.ui:36
+#, fuzzy
+#| msgid ""
+#| "Notifications will continue to appear in the notification list when "
+#| "popups are disabled."
 msgid ""
 "Notifications will continue to appear in the notification list when popups "
-"are disabled."
+"are disabled"
 msgstr ""
 "Las notificacions contunhan de s’afichar dins la lista del tirador quand "
 "l’afichatge de las bandièras es desactivat."
@@ -4437,10 +4417,10 @@ msgstr "Tampar las notificacions sistèma"
 
 #: panels/online-accounts/cc-online-accounts-panel.ui:61
 msgid "Offline — unable to connect accounts"
-msgstr ""
+msgstr "Fòra linha — connexion impossibla als comptes"
 
 #: panels/online-accounts/cc-online-accounts-panel.ui:67
-msgid "Allow apps to access online services by connecting your cloud accounts."
+msgid "Allow apps to access online services by connecting your cloud accounts"
 msgstr ""
 
 #: panels/online-accounts/cc-online-accounts-panel.ui:71
@@ -4626,7 +4606,7 @@ msgstr "Segondària"
 #: panels/power/cc-battery-row.c:289
 #, c-format
 msgid "%d %%"
-msgstr ""
+msgstr "%d %%"
 
 #: panels/power/cc-power-panel.c:208
 msgid "Battery Levels"
@@ -4799,7 +4779,9 @@ msgid "A_utomatic Screen Brightness"
 msgstr "Luminositat d'ecran automatica"
 
 #: panels/power/cc-power-panel.ui:131
-msgid "Screen brightness adjusts to the surrounding light."
+#, fuzzy
+#| msgid "Screen brightness adjusts to the surrounding light."
+msgid "Screen brightness adjusts to the surrounding light"
 msgstr "La luminositat de l'ecran s’adapta a la luminositat ambienta."
 
 #: panels/power/cc-power-panel.ui:138
@@ -4809,7 +4791,9 @@ msgid "_Dim Screen"
 msgstr "Escuresir l’ecran"
 
 #: panels/power/cc-power-panel.ui:139
-msgid "Reduces the screen brightness when the computer is inactive."
+#, fuzzy
+#| msgid "Reduces the screen brightness when the computer is inactive."
+msgid "Reduces the screen brightness when the computer is inactive"
 msgstr "Redusís la luminositat de l’ecran quand l'ordenador es inactiu."
 
 #: panels/power/cc-power-panel.ui:145
@@ -4817,7 +4801,9 @@ msgid "Screen _Blank"
 msgstr "Ecran void"
 
 #: panels/power/cc-power-panel.ui:146
-msgid "Turns the screen off after a period of inactivity."
+#, fuzzy
+#| msgid "Turns the screen off after a period of inactivity."
+msgid "Turns the screen off after a period of inactivity"
 msgstr "Atuda l’ecran aprèp un periòde d’inactivitat."
 
 #: panels/power/cc-power-panel.ui:154
@@ -4827,7 +4813,9 @@ msgid "Automatic Power _Saver"
 msgstr "Estalviador d'energia automatic"
 
 #: panels/power/cc-power-panel.ui:155
-msgid "Enables power saver mode when battery is low."
+#, fuzzy
+#| msgid "Enables power saver mode when battery is low."
+msgid "Enables power saver mode when battery is low"
 msgstr "Activa l’estalviador d’energia quand la batariá es febla."
 
 #: panels/power/cc-power-panel.ui:162
@@ -4835,7 +4823,9 @@ msgid "_Automatic Suspend"
 msgstr "Mesa en velha _automatica"
 
 #: panels/power/cc-power-panel.ui:163
-msgid "Pauses the computer after a period of inactivity."
+#, fuzzy
+#| msgid "Pauses the computer after a period of inactivity."
+msgid "Pauses the computer after a period of inactivity"
 msgstr "Met en pausa l’ordenador aprèp un periòde d’inactivitat."
 
 #: panels/power/cc-power-panel.ui:189
@@ -4927,17 +4917,17 @@ msgstr ""
 "luminositat;negre;ecran;DPMS;inactiu;som;dormir;"
 
 #. Translators: %s is the printer name
-#: panels/printers/cc-printers-panel.c:675
+#: panels/printers/cc-printers-panel.c:672
 #, c-format
 msgid "Printer “%s” has been deleted"
 msgstr "L’imprimenta « %s » es estada suprimida"
 
 #. Translators: Addition of the new printer failed.
-#: panels/printers/cc-printers-panel.c:921
+#: panels/printers/cc-printers-panel.c:918
 msgid "Failed to add new printer."
 msgstr "L'apondon de la novèla imprimenta a fracassat."
 
-#: panels/printers/cc-printers-panel.c:1288
+#: panels/printers/cc-printers-panel.c:1293
 #, fuzzy
 #| msgid "Unlock to Add Printers and Change Settings"
 msgid "Unlock to add printers and change settings"
@@ -4973,7 +4963,7 @@ msgstr "Cap de servici d’impression"
 #| msgid ""
 #| "Sorry! The system printing service\n"
 #| "    doesn’t seem to be available."
-msgid "The system printing service doesn’t seem to be available."
+msgid "The system printing service doesn’t seem to be available"
 msgstr ""
 "O planhèm ! Lo servici d’impression del sistèma\n"
 "    sembla pas disponible."
@@ -5003,7 +4993,7 @@ msgstr "Apondre una imprimenta"
 #: panels/printers/new-printer-dialog.ui:69
 #: panels/system/region/cc-format-chooser.ui:37
 #: panels/system/users/cc-fingerprint-dialog.ui:44
-#: panels/wacom/cc-wacom-stylus-page.ui:136
+#: panels/wacom/cc-wacom-stylus-page.ui:141
 #: panels/wwan/cc-wwan-apn-dialog.ui:21
 msgid "Back"
 msgstr "Precedent"
@@ -5031,7 +5021,9 @@ msgid "Authentication Required"
 msgstr "Autentificacion requesida"
 
 #: panels/printers/new-printer-dialog.ui:272
-msgid "Enter username and password to view printers on Print Server."
+#, fuzzy
+#| msgid "Enter username and password to view printers on Print Server."
+msgid "Enter username and password to view printers on Print Server"
 msgstr ""
 "Picatz vòstre nom d’utilizaire e vòstre senhal per afichar las imprimentas "
 "sul servidor."
@@ -5241,8 +5233,9 @@ msgstr "%s - prètzfaits d’impression actius"
 
 #. Translators: The printer needs authentication info to print.
 #: panels/printers/pp-jobs-dialog.c:459
-#, c-format
-msgid "Enter credentials to print from %s."
+#, fuzzy, c-format
+#| msgid "Enter credentials to print from %s."
+msgid "Enter credentials to print from %s"
 msgstr ""
 "Picatz vòstras informacions d’autentificacion per imprimir a partir de %s."
 
@@ -5294,34 +5287,34 @@ msgid "Searching for Printers"
 msgstr "Recèrca d’imprimentas"
 
 #. Translators: The found device is a printer connected via USB
-#: panels/printers/pp-new-printer-dialog.c:1365
+#: panels/printers/pp-new-printer-dialog.c:1361
 msgid "USB"
 msgstr "USB"
 
 #. Translators: The found device is a printer connected via serial port
-#: panels/printers/pp-new-printer-dialog.c:1370
+#: panels/printers/pp-new-printer-dialog.c:1366
 msgid "Serial Port"
 msgstr "Pòrt seria"
 
 #. Translators: The found device is a printer connected via parallel port
-#: panels/printers/pp-new-printer-dialog.c:1377
+#: panels/printers/pp-new-printer-dialog.c:1373
 msgid "Parallel Port"
 msgstr "Pòrt parallèl"
 
 #. Translators: Location of found network printer (e.g. Kitchen, Reception)
-#: panels/printers/pp-new-printer-dialog.c:1419
+#: panels/printers/pp-new-printer-dialog.c:1415
 #, c-format
 msgid "Location: %s"
 msgstr "Emplaçament : %s"
 
 #. Translators: Network address of found printer
-#: panels/printers/pp-new-printer-dialog.c:1424
+#: panels/printers/pp-new-printer-dialog.c:1420
 #, c-format
 msgid "Address: %s"
 msgstr "Adreça : %s"
 
 #. Translators: This item is a server which needs authentication to show its printers
-#: panels/printers/pp-new-printer-dialog.c:1451
+#: panels/printers/pp-new-printer-dialog.c:1447
 msgid "Server requires authentication"
 msgstr "Lo servidor necessita una autentificacion"
 
@@ -5414,15 +5407,20 @@ msgid "Advanced"
 msgstr "Avançat"
 
 #. Translators: Name of job which makes printer to print test page
-#. Translators: This button triggers the printing of a test page.
 #: panels/printers/pp-options-dialog.c:839
-#: panels/printers/pp-options-dialog.ui:17
 msgid "Test Page"
 msgstr "Pagina de pròva"
 
 #. Translators: Name of job which makes printer to print test page
 #: panels/printers/pp-options-dialog.c:852
 msgid "Test page"
+msgstr "Pagina de pròva"
+
+#. Translators: This button triggers the printing of a test page.
+#: panels/printers/pp-options-dialog.ui:17
+#, fuzzy
+#| msgid "Test Page"
+msgid "_Test Page"
 msgstr "Pagina de pròva"
 
 #. Translators: this is an option of "Paper Source"
@@ -5762,7 +5760,7 @@ msgid ""
 msgstr ""
 "Lo sossistèma Thunderbolt (boltd) es pas installat o es mal configurat."
 
-#: panels/privacy/cc-bolt-page.c:475 panels/privacy/cc-bolt-page.ui:130
+#: panels/privacy/cc-bolt-page.c:475
 msgid "Allow direct access to devices such as docks and external GPUs."
 msgstr ""
 "Autorizar l’accès dirècte als periferics tals coma las estacions d’acuèlh e "
@@ -5809,12 +5807,22 @@ msgid "No Thunderbolt Support"
 msgstr "Pas cap de presa en carga de Thunderbolt"
 
 #: panels/privacy/cc-bolt-page.ui:110
-msgid "Could not connect to the thunderbolt subsystem."
+#, fuzzy
+#| msgid "Could not connect to the thunderbolt subsystem."
+msgid "Could not connect to the thunderbolt subsystem"
 msgstr "Connexion impossibla al subsistèma Thunderbold."
 
 #: panels/privacy/cc-bolt-page.ui:127
 msgid "Direct Access"
 msgstr "Accès dirècte"
+
+#: panels/privacy/cc-bolt-page.ui:130
+#, fuzzy
+#| msgid "Allow direct access to devices such as docks and external GPUs."
+msgid "Allow direct access to devices such as docks and external GPUs"
+msgstr ""
+"Autorizar l’accès dirècte als periferics tals coma las estacions d’acuèlh e "
+"processors grafics extèrnes."
 
 #: panels/privacy/cc-bolt-page.ui:199
 msgid "Pending Devices"
@@ -6180,10 +6188,8 @@ msgid ""
 msgstr ""
 
 #: panels/privacy/cc-firmware-security-page.ui:223
-#, fuzzy
-#| msgid "Security Level"
 msgid "Security Events"
-msgstr "Nivèl de seguretat"
+msgstr "Eveniment de seguretat"
 
 #: panels/privacy/cc-firmware-security-page.ui:233
 msgid "No Events"
@@ -6322,10 +6328,8 @@ msgstr "Cap d’aplicacion a pas demandat l’accès al microfòn"
 
 #: panels/privacy/cc-privacy-panel.ui:9
 #: panels/privacy/gnome-privacy-panel.desktop.in:3
-#, fuzzy
-#| msgid "Device Security"
 msgid "Privacy & Security"
-msgstr "Seguretat de l’aparelh"
+msgstr "Vida privada e seguretat"
 
 #: panels/privacy/cc-privacy-panel.ui:25
 msgid "_Screen Lock"
@@ -6341,7 +6345,7 @@ msgstr "_Emplaçament"
 
 #: panels/privacy/cc-privacy-panel.ui:37
 msgid "Control access to your location"
-msgstr ""
+msgstr "Controlar de l'accès a vòstra localizacion"
 
 #: panels/privacy/cc-privacy-panel.ui:47
 #, fuzzy
@@ -6351,7 +6355,7 @@ msgstr "Istoric e escobilhièr"
 
 #: panels/privacy/cc-privacy-panel.ui:48
 msgid "Remove saved data and files"
-msgstr ""
+msgstr "Suprimir los fichièrs e donadas enregistradas"
 
 #: panels/privacy/cc-privacy-panel.ui:58
 msgid "_Diagnostics"
@@ -6512,9 +6516,13 @@ msgid "Screen Lock"
 msgstr "Verrolhatge de l'ecran"
 
 #: panels/privacy/cc-screen-page.ui:13
+#, fuzzy
+#| msgid ""
+#| "Automatically locking the screen prevents others from accessing the "
+#| "computer while you're away."
 msgid ""
 "Automatically locking the screen prevents others from accessing the computer "
-"while you're away."
+"while you're away"
 msgstr ""
 "Verrolhar automaticament l’ecran empacha qual que siá d’accedir a vòstre "
 "ordenador quand vos absentatz."
@@ -6559,9 +6567,13 @@ msgid "Forbid New _USB Devices"
 msgstr "Interdire los periferics _USB novèls"
 
 #: panels/privacy/cc-screen-page.ui:77
+#, fuzzy
+#| msgid ""
+#| "Prevent new USB devices from interacting with the system when the screen "
+#| "is locked."
 msgid ""
 "Prevent new USB devices from interacting with the system when the screen is "
-"locked."
+"locked"
 msgstr ""
 "Empacha los periferics USB novèls d’interagir amb lo sistèma del temps que "
 "l’ecran es verrolhat."
@@ -6774,12 +6786,22 @@ msgid ""
 "Recording;Security;Firmware;Thunderbolt;"
 msgstr ""
 
-#: panels/search/cc-search-locations-dialog.c:579
+#: panels/search/cc-search-locations-dialog.c:507
+#, fuzzy
+#| msgid "Modem not found"
+msgid "Location not found"
+msgstr "Modèm pas trobat"
+
+#: panels/search/cc-search-locations-dialog.c:564
+msgid "Subfolders must be manually added for this location"
+msgstr ""
+
+#: panels/search/cc-search-locations-dialog.c:572
 #: panels/sharing/cc-sharing-panel.c:418
 msgid "Remove Folder"
 msgstr "Suprimir un dorsièr"
 
-#: panels/search/cc-search-locations-dialog.c:676
+#: panels/search/cc-search-locations-dialog.c:683
 msgid "Select Location"
 msgstr "Seleccionar un emplaçament"
 
@@ -6792,29 +6814,36 @@ msgstr "Emplaçaments de la recèrca"
 #| msgid ""
 #| "Folders which are searched by system applications, such as Files, Photos "
 #| "and Videos."
-msgid ""
-"Folders which are searched by system apps, such as Files, Photos and Videos."
+msgid "Filesystem locations which are searched by system apps, such as Files"
 msgstr ""
 "Dorsièrs recercats per las aplicacions sistèmas, tals coma Fichièrs, Fòtos e "
 "Vidèos."
 
 #: panels/search/cc-search-locations-dialog.ui:22
-msgid "Places"
-msgstr "Emplaçaments"
+msgid "Default Locations"
+msgstr "Localizacions per defaut"
 
 #: panels/search/cc-search-locations-dialog.ui:39
-msgid "Bookmarks"
-msgstr "Signets"
+#, fuzzy
+#| msgid "Search Locations"
+msgid "Bookmarked Locations"
+msgstr "Emplaçaments de la recèrca"
 
 #: panels/search/cc-search-locations-dialog.ui:56
-msgid "Others"
-msgstr "Autres"
+msgid "Custom Locations"
+msgstr "Localizacions personalizadas"
 
 #: panels/search/cc-search-locations-dialog.ui:63
 msgid "_Add Location…"
 msgstr "_Apondre un emplaçament…"
 
-#: panels/search/cc-search-panel.c:166
+#: panels/search/cc-search-locations-dialog.ui:89
+#, fuzzy
+#| msgid "Search Locations"
+msgid "No custom search locations"
+msgstr "Emplaçaments de la recèrca"
+
+#: panels/search/cc-search-panel.c:173
 msgid "No apps found"
 msgstr "Cap d'aplicacion pas trobada"
 
@@ -6825,7 +6854,7 @@ msgstr "Recèrca d’_aplicacions"
 #: panels/search/cc-search-panel.ui:17
 #, fuzzy
 #| msgid "Include application-provided search results."
-msgid "Include app-provided search results."
+msgid "Include app-provided search results"
 msgstr "Inclure los resultats de recèrca provesits per l’aplicacion."
 
 #: panels/search/cc-search-panel.ui:29
@@ -6837,7 +6866,7 @@ msgstr "Emplaçaments de la recèrca"
 #: panels/search/cc-search-panel.ui:30
 #, fuzzy
 #| msgid "Folders which are searched by system applications."
-msgid "Folders which are searched by system apps."
+msgid "Filesystem locations which are searched by system apps"
 msgstr "Dorsièrs recercats per las aplicacions sistèmas."
 
 #: panels/search/cc-search-panel.ui:40
@@ -6845,7 +6874,9 @@ msgid "Search Results"
 msgstr "Resultats de la recèrca"
 
 #: panels/search/cc-search-panel.ui:41
-msgid "Results are displayed according to the list order."
+#, fuzzy
+#| msgid "Results are displayed according to the list order."
+msgid "Results are displayed according to the list order"
 msgstr "Los resultats son afichats segon l’òrdre de la lista."
 
 #: panels/search/gnome-search-panel.desktop.in:4
@@ -6924,26 +6955,22 @@ msgstr ""
 
 #: panels/sharing/cc-sharing-panel.ui:16
 #: panels/system/about/cc-about-page.ui:41
-#, fuzzy
-#| msgid "Device Name"
 msgid "_Device Name"
-msgstr "Nom del periferic"
+msgstr "_Nom del periferic"
 
 #: panels/sharing/cc-sharing-panel.ui:28
-#, fuzzy
-#| msgid "Share music, photos and videos over the network."
 msgid "Share files with other devices on the current network"
-msgstr "Partejar de la musica, de fòtos e de vidèos sus la ret."
+msgstr ""
+"Partejar de la musica, de fòtos e de vidèos sus la ret actuala amb d’autres "
+"periferics"
 
 #: panels/sharing/cc-sharing-panel.ui:29 panels/sharing/cc-sharing-panel.ui:90
 msgid "_File Sharing"
 msgstr "Partiment de _fichièrs"
 
 #: panels/sharing/cc-sharing-panel.ui:37
-#, fuzzy
-#| msgid "Share music, photos and videos over the network."
 msgid "Stream music, photos and videos to devices on the current network"
-msgstr "Partejar de la musica, de fòtos e de vidèos sus la ret."
+msgstr "Partejar de la musica, de fòtos e de vidèos sus la ret actuala"
 
 #: panels/sharing/cc-sharing-panel.ui:38 panels/sharing/cc-sharing-panel.ui:212
 msgid "_Media Sharing"
@@ -6951,7 +6978,7 @@ msgstr "Partejar los _mèdias"
 
 #: panels/sharing/cc-sharing-panel.ui:46
 msgid "Enable SSH access for this device"
-msgstr ""
+msgstr "Activar l'accès SSH per aqueste dispositiu"
 
 #: panels/sharing/cc-sharing-panel.ui:47 panels/sharing/cc-sharing-panel.ui:168
 msgid "_Remote Login"
@@ -6980,8 +7007,8 @@ msgid "Media Sharing"
 msgstr "Partejar los mèdias"
 
 #: panels/sharing/cc-sharing-panel.ui:207
-msgid "Share music, photos and videos over the network."
-msgstr "Partejar de la musica, de fòtos e de vidèos sus la ret."
+msgid "Share music, photos and videos over the network"
+msgstr "Partejar de la musica, de fòtos e de vidèos sus la ret"
 
 #: panels/sharing/cc-sharing-panel.ui:220
 msgid "Folders"
@@ -7062,10 +7089,8 @@ msgid "Output"
 msgstr "Sortida"
 
 #: panels/sound/cc-sound-panel.ui:41
-#, fuzzy
-#| msgid "Output Device"
 msgid "_Output Device"
-msgstr "Periferic de sortida"
+msgstr "Periferic de _sortida"
 
 #: panels/sound/cc-sound-panel.ui:59
 #, fuzzy
@@ -7114,10 +7139,8 @@ msgid "Input"
 msgstr "Entrada"
 
 #: panels/sound/cc-sound-panel.ui:260
-#, fuzzy
-#| msgid "Input Device"
 msgid "_Input Device"
-msgstr "Periferic d’entrada"
+msgstr "Periferic d’_entrada"
 
 #: panels/sound/cc-sound-panel.ui:298
 msgid "Con_figuration"
@@ -7142,16 +7165,22 @@ msgid "Sounds"
 msgstr "Sons"
 
 #: panels/sound/cc-sound-panel.ui:371
-#, fuzzy
-#| msgid "Volume Levels"
 msgid "Vo_lume Levels"
-msgstr "Nivèls de volum"
+msgstr "Nivèls de vo_lum"
 
 #: panels/sound/cc-sound-panel.ui:384
 #, fuzzy
 #| msgid "Alert Sound"
 msgid "_Alert Sound"
 msgstr "Son d’alèrta"
+
+#. Translators: This is the tooltip for a speaker test button, %s is an already translated
+#. speaker position, like "Front Left" or "Rear Center".
+#: panels/sound/cc-speaker-test-button.c:218
+#, fuzzy, c-format
+#| msgid "Test Speakers"
+msgid "%s Speaker"
+msgstr "Provar los nautparlaires"
 
 #: panels/sound/cc-subwoofer-slider.ui:8
 msgid "Subwoofer"
@@ -7237,10 +7266,8 @@ msgid "_System Details"
 msgstr "Detalhs del _sistèma"
 
 #: panels/system/about/cc-about-page.ui:121
-#, fuzzy
-#| msgid "Software Updates"
 msgid "Software _Updates"
-msgstr "Mesa a jorn dels logicials"
+msgstr "Mesa a jorn dels _logicials"
 
 #: panels/system/about/cc-system-details-window.c:299
 msgid "Graphics"
@@ -7302,10 +7329,8 @@ msgid "**Hardware Model:**"
 msgstr "Modèl material"
 
 #: panels/system/about/cc-system-details-window.c:704
-#, fuzzy
-#| msgid "Memory"
 msgid "**Memory:**"
-msgstr "Memòria"
+msgstr "**Memòria :**"
 
 #: panels/system/about/cc-system-details-window.c:712
 msgid "**Processor:**"
@@ -7324,10 +7349,8 @@ msgid "**Graphics %d:**"
 msgstr "Grafisme"
 
 #: panels/system/about/cc-system-details-window.c:735
-#, fuzzy
-#| msgid "Disk Capacity"
 msgid "**Disk Capacity:**"
-msgstr "Capacitat del disc"
+msgstr "**Capacitat del disc : **"
 
 #: panels/system/about/cc-system-details-window.c:741
 #, fuzzy
@@ -7358,10 +7381,8 @@ msgid "**GNOME Version:**"
 msgstr "**Version de GNOME :**"
 
 #: panels/system/about/cc-system-details-window.c:768
-#, fuzzy
-#| msgid "Windowing System"
 msgid "**Windowing System:**"
-msgstr "Gestionari de fenèstras"
+msgstr "**Gestionari de fenèstras :**"
 
 #: panels/system/about/cc-system-details-window.c:772
 msgid "**Kernel Version:**"
@@ -7430,16 +7451,12 @@ msgid "Kernel Version"
 msgstr "Version del nuclèu"
 
 #: panels/system/cc-system-panel.ui:23
-#, fuzzy
-#| msgid "Region & Language"
 msgid "_Region &amp; Language"
-msgstr "País e lenga"
+msgstr "_Region e lenga"
 
 #: panels/system/cc-system-panel.ui:24
-#, fuzzy
-#| msgid "Change system time and date settings"
 msgid "System language and localization"
-msgstr "Modificar la data e l'ora del sistèma"
+msgstr "Lenga del sistèma e localizacion"
 
 #: panels/system/cc-system-panel.ui:34
 msgid "_Date &amp; Time"
@@ -7462,10 +7479,8 @@ msgid "Add and remove accounts, change password"
 msgstr "Apondre o suprimir d'utilizaires e modificar vòstre senhal"
 
 #: panels/system/cc-system-panel.ui:58
-#, fuzzy
-#| msgid "Remote Desktop"
 msgid "R_emote Desktop"
-msgstr "Burèu distant"
+msgstr "Burèu _distant"
 
 #: panels/system/cc-system-panel.ui:59
 msgid "Allow this device to be used remotely"
@@ -7514,10 +7529,8 @@ msgid "_Year"
 msgstr "_Annada"
 
 #: panels/system/datetime/cc-datetime-page.ui:71
-#, fuzzy
-#| msgid "Month"
 msgid "_Month"
-msgstr "Mes"
+msgstr "_Mes"
 
 #: panels/system/datetime/cc-datetime-page.ui:98
 msgid "_Day"
@@ -7664,7 +7677,7 @@ msgstr "Vos cal vos autentificar per modificar la data o l'ora."
 
 #: panels/system/gnome-system-panel.desktop.in:4
 msgid "Language and time settings, system information"
-msgstr ""
+msgstr "Paramètres de lenga e d’ora e informacion del sistèma"
 
 #. Translators: Search terms to find the System panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/system/gnome-system-panel.desktop.in:15
@@ -7704,7 +7717,9 @@ msgid "No Search Results"
 msgstr "Pas cap de resultat de recèrca"
 
 #: panels/system/region/cc-format-chooser.ui:204
-msgid "Searches can be for countries or languages."
+#, fuzzy
+#| msgid "Searches can be for countries or languages."
+msgid "Searches can be for countries or languages"
 msgstr "Las recèrcas pòdon èsser per país o lenga."
 
 #: panels/system/region/cc-format-chooser.ui:240
@@ -7770,7 +7785,7 @@ msgid "Your Account"
 msgstr "Vòstre compte"
 
 #: panels/system/region/cc-region-page.ui:34
-#: panels/system/users/cc-user-page.ui:174
+#: panels/system/users/cc-user-page.ui:170
 msgid "_Language"
 msgstr "_Lenga"
 
@@ -7783,16 +7798,12 @@ msgid "Login Screen"
 msgstr "Ecran de connexion"
 
 #: panels/system/region/cc-region-page.ui:58
-#, fuzzy
-#| msgid "Language"
 msgid "L_anguage"
-msgstr "Lenga"
+msgstr "L_enga"
 
 #: panels/system/region/cc-region-page.ui:67
-#, fuzzy
-#| msgid "Formats"
 msgid "Fo_rmats"
-msgstr "Formats"
+msgstr "Fo_rmats"
 
 #: panels/system/remote-desktop/cc-remote-desktop-page.c:418
 msgid "Device name copied"
@@ -7839,7 +7850,9 @@ msgid "Remote _Desktop"
 msgstr "Burèu _distant"
 
 #: panels/system/remote-desktop/cc-remote-desktop-page.ui:24
-msgid "Enable or disable remote desktop connections to this computer."
+#, fuzzy
+#| msgid "Enable or disable remote desktop connections to this computer."
+msgid "Enable or disable remote desktop connections to this computer"
 msgstr "Activar o desactivar una connexion distanta a aqueste ordenador."
 
 #: panels/system/remote-desktop/cc-remote-desktop-page.ui:30
@@ -7847,7 +7860,9 @@ msgid "Remote _Control"
 msgstr "_Contraròtle a distància"
 
 #: panels/system/remote-desktop/cc-remote-desktop-page.ui:32
-msgid "Allows remote connections to control the screen."
+#, fuzzy
+#| msgid "Allows remote connections to control the screen."
+msgid "Allows remote connections to control the screen"
 msgstr "Autorizar los connectats a distància a contrarotlar l’ecran"
 
 #: panels/system/remote-desktop/cc-remote-desktop-page.ui:40
@@ -7856,16 +7871,14 @@ msgstr "Cossí se connectar"
 
 #: panels/system/remote-desktop/cc-remote-desktop-page.ui:41
 msgid ""
-"Connect to this computer using the device name or remote desktop address."
+"Connect to this computer using the device name or remote desktop address"
 msgstr ""
 "Connectatz-vos a aqueste ordenador en utilizant lo nom d’aparelh  o l’adreça "
-"de burèu a distància."
+"de burèu a distància"
 
 #: panels/system/remote-desktop/cc-remote-desktop-page.ui:45
-#, fuzzy
-#| msgid "Device Name"
 msgid "D_evice Name"
-msgstr "Nom del periferic"
+msgstr "Nom d_el periferic"
 
 #: panels/system/remote-desktop/cc-remote-desktop-page.ui:58
 #: panels/system/remote-desktop/cc-remote-desktop-page.ui:63
@@ -7889,15 +7902,15 @@ msgid "Authentication"
 msgstr "Autentificacion"
 
 #: panels/system/remote-desktop/cc-remote-desktop-page.ui:111
-msgid "The user name and password are required to connect to this computer."
+#, fuzzy
+#| msgid "The user name and password are required to connect to this computer."
+msgid "The user name and password are required to connect to this computer"
 msgstr ""
 "Per se connectar a aqueste ordenador cal un nom d’utilizaire e un senhal."
 
 #: panels/system/remote-desktop/cc-remote-desktop-page.ui:115
-#, fuzzy
-#| msgid "User Name"
 msgid "_User Name"
-msgstr "Nom d’utilizaire"
+msgstr "_Nom d’utilizaire"
 
 #: panels/system/remote-desktop/cc-remote-desktop-page.ui:160
 #, fuzzy
@@ -7910,9 +7923,13 @@ msgid "Encryption Fingerprint"
 msgstr "Chiframent per emprentas"
 
 #: panels/system/remote-desktop/cc-remote-desktop-page.ui:197
+#, fuzzy
+#| msgid ""
+#| "The encryption fingerprint can be seen in connecting clients and should "
+#| "be identical."
 msgid ""
 "The encryption fingerprint can be seen in connecting clients and should be "
-"identical."
+"identical"
 msgstr ""
 "L'emprunta de chiframent se vei pendent la connexion als clients e deu èsser "
 "identica."
@@ -7925,26 +7942,25 @@ msgstr "Deu correspondre a l’adreça Web de vòstre provesidor d’accès."
 msgid "Failed to add account"
 msgstr "L'apondon del compte a fracassat"
 
-#: panels/system/users/cc-add-user-dialog.c:680
-#: panels/system/users/cc-password-dialog.ui:100
+#: panels/system/users/cc-add-user-dialog.c:668
 msgid "The passwords do not match."
 msgstr "Los senhals concòrdan pas."
 
-#: panels/system/users/cc-add-user-dialog.c:884
+#: panels/system/users/cc-add-user-dialog.c:866
+#: panels/system/users/cc-add-user-dialog.c:905
 #: panels/system/users/cc-add-user-dialog.c:923
-#: panels/system/users/cc-add-user-dialog.c:941
 msgid "Failed to register account"
 msgstr "L'enregistrament del compte a fracassat"
 
-#: panels/system/users/cc-add-user-dialog.c:1056
+#: panels/system/users/cc-add-user-dialog.c:1038
 msgid "No supported way to authenticate with this domain"
 msgstr "Impossible de s'autentificar alprèp d'aqueste domeni"
 
-#: panels/system/users/cc-add-user-dialog.c:1120
+#: panels/system/users/cc-add-user-dialog.c:1102
 msgid "Failed to join domain"
 msgstr "Impossible de jónher aqueste domeni"
 
-#: panels/system/users/cc-add-user-dialog.c:1175
+#: panels/system/users/cc-add-user-dialog.c:1157
 msgid ""
 "That login name didn’t work.\n"
 "Please try again."
@@ -7952,7 +7968,7 @@ msgstr ""
 "Aqueste identificant de connexion fonciona pas.\n"
 "Reensajatz."
 
-#: panels/system/users/cc-add-user-dialog.c:1182
+#: panels/system/users/cc-add-user-dialog.c:1164
 msgid ""
 "That login password didn’t work.\n"
 "Please try again."
@@ -7960,11 +7976,11 @@ msgstr ""
 "Aqueste senhal de connexion fonciona pas.\n"
 "Reensajatz."
 
-#: panels/system/users/cc-add-user-dialog.c:1190
+#: panels/system/users/cc-add-user-dialog.c:1172
 msgid "Failed to log into domain"
 msgstr "La connexion a aqueste domeni a fracassat"
 
-#: panels/system/users/cc-add-user-dialog.c:1245
+#: panels/system/users/cc-add-user-dialog.c:1227
 msgid "Unable to find the domain. Maybe you misspelled it?"
 msgstr "Impossible de trobar aqueste domeni. Verificatz son ortografia."
 
@@ -7985,7 +8001,7 @@ msgid "Ad_ministrator"
 msgstr "Administrator"
 
 #: panels/system/users/cc-add-user-dialog.ui:138
-#: panels/system/users/cc-user-page.ui:145
+#: panels/system/users/cc-user-page.ui:141
 #, fuzzy
 #| msgid ""
 #| "Administrators can add and remove other users, and can change settings "
@@ -8024,7 +8040,9 @@ msgid "_Enterprise Login"
 msgstr "Identificant d'entrepresa"
 
 #: panels/system/users/cc-add-user-dialog.ui:290
-msgid "User accounts which are managed by a company or organization."
+#, fuzzy
+#| msgid "User accounts which are managed by a company or organization."
+msgid "User accounts which are managed by a company or organization"
 msgstr ""
 "Los comptes utilizaire que son gerits per una entrepresa o una organizacion."
 
@@ -8249,7 +8267,9 @@ msgid "No Fingerprint device"
 msgstr "Cap de periferics d’emprenta"
 
 #: panels/system/users/cc-fingerprint-dialog.ui:193
-msgid "Ensure the device is properly connected."
+#, fuzzy
+#| msgid "Ensure the device is properly connected."
+msgid "Ensure the device is properly connected"
 msgstr "Asseguratz-vos que lo periferic es connectat coma cal."
 
 #: panels/system/users/cc-fingerprint-dialog.ui:201
@@ -8312,6 +8332,10 @@ msgstr "Senhal novèl"
 msgid "Confirm Password"
 msgstr "Confirmar lo senhal"
 
+#: panels/system/users/cc-password-dialog.ui:100
+msgid "The passwords do not match"
+msgstr "Los senhals concòrdan pas"
+
 #: panels/system/users/cc-password-dialog.ui:136
 msgid "Allow user to change their password on next login"
 msgstr "Autoriser l’utilizaire a changer son senhal a la prochaine connexion"
@@ -8364,72 +8388,68 @@ msgid "Remove %s?"
 msgstr "Suprimir %s ?"
 
 #: panels/system/users/cc-user-page.c:768
-#, fuzzy
-#| msgid "Settings categories"
 msgid "Some settings are locked"
-msgstr "Categorias de paramètres"
+msgstr "D’unes paramètres son verrolhats"
 
 #: panels/system/users/cc-user-page.ui:24
-#: panels/system/users/cc-user-page.ui:85
-#: panels/system/users/cc-user-page.ui:97
-#: panels/system/users/cc-user-page.ui:109
-#: panels/system/users/cc-user-page.ui:124
-#: panels/system/users/cc-user-page.ui:138
-#: panels/system/users/cc-user-page.ui:173
+#: panels/system/users/cc-user-page.ui:81
+#: panels/system/users/cc-user-page.ui:93
+#: panels/system/users/cc-user-page.ui:105
+#: panels/system/users/cc-user-page.ui:120
+#: panels/system/users/cc-user-page.ui:134
+#: panels/system/users/cc-user-page.ui:169
 #, fuzzy
 #| msgid "Unlock to Change Settings"
 msgid "Unlock to Change This Setting"
 msgstr "Desverrolhar per modificar los paramètres"
 
-#: panels/system/users/cc-user-page.ui:43
-msgid "Edit avatar"
-msgstr "Modificar avatar"
+#: panels/system/users/cc-user-page.ui:41
+msgid "Change Avatar"
+msgstr "Cambiar l'avatar"
 
-#: panels/system/users/cc-user-page.ui:64
-msgid "Remove avatar"
+#: panels/system/users/cc-user-page.ui:59
+msgid "Remove Avatar"
 msgstr "Suprimir l’avatar"
 
-#: panels/system/users/cc-user-page.ui:99
+#: panels/system/users/cc-user-page.ui:95
 msgid "Pa_ssword"
 msgstr "Se_nhal"
 
-#: panels/system/users/cc-user-page.ui:111
+#: panels/system/users/cc-user-page.ui:107
 msgid "_Fingerprint Login"
 msgstr "Connexion per _reconeissença d'emprentas"
 
-#: panels/system/users/cc-user-page.ui:120
+#: panels/system/users/cc-user-page.ui:116
 msgid "A_utomatic Login"
 msgstr "Connexion a_utomatica"
 
-#: panels/system/users/cc-user-page.ui:139
+#: panels/system/users/cc-user-page.ui:135
 msgid "_Administrator"
 msgstr "_Administrator"
 
-#: panels/system/users/cc-user-page.ui:160
+#: panels/system/users/cc-user-page.ui:156
 msgid "_Parental Controls"
 msgstr "Contròle _parental"
 
-#: panels/system/users/cc-user-page.ui:161
+#: panels/system/users/cc-user-page.ui:157
 #, fuzzy
 #| msgid "Open the Parental Controls application."
-msgid "Open the Parental Controls app."
+msgid "Open the Parental Controls app"
 msgstr "Dobrir l'aplicacion de Contraròtle parental."
 
-#: panels/system/users/cc-user-page.ui:195
+#: panels/system/users/cc-user-page.ui:191
 msgid "_Remove User"
 msgstr "_Suprimir l’utilizaire"
 
-#: panels/system/users/cc-user-page.ui:221
+#: panels/system/users/cc-user-page.ui:217
 msgid ""
 "The user will not be able to use this device once their account has been "
-"removed."
+"removed"
 msgstr ""
 
-#: panels/system/users/cc-user-page.ui:233
-#, fuzzy
-#| msgid "Delete Files and Settings"
+#: panels/system/users/cc-user-page.ui:229
 msgid "_Delete Files and Settings"
-msgstr "Suprimir los fichièrs e paramètres"
+msgstr "_Suprimir los fichièrs e paramètres"
 
 #: panels/system/users/cc-users-page.ui:11
 msgid "Users"
@@ -8582,51 +8602,51 @@ msgid ""
 "Adding more letters, numbers and punctuation will make the password stronger."
 msgstr "L’apondre de letras, de chifras e de pontuacions renforçarà lo senhal."
 
-#: panels/system/users/run-passwd.c:401
+#: panels/system/users/run-passwd.c:390
 msgid "Authentication failed"
 msgstr "Fracàs d'autentificacion"
 
-#: panels/system/users/run-passwd.c:480
+#: panels/system/users/run-passwd.c:469
 #, c-format
 msgid "The new password is too short"
 msgstr "Lo senhal novèl es tròp cort"
 
-#: panels/system/users/run-passwd.c:486
+#: panels/system/users/run-passwd.c:475
 #, c-format
 msgid "The new password is too simple"
 msgstr "Lo senhal novèl es tròp simple"
 
-#: panels/system/users/run-passwd.c:492
+#: panels/system/users/run-passwd.c:481
 #, c-format
 msgid "The old and new passwords are too similar"
 msgstr "L'ancian e lo senhal novèl son tròp semblants"
 
-#: panels/system/users/run-passwd.c:495
+#: panels/system/users/run-passwd.c:484
 #, c-format
 msgid "The new password has already been used recently."
 msgstr "Lo senhal novèl es ja estat utilizat recentament."
 
-#: panels/system/users/run-passwd.c:498
+#: panels/system/users/run-passwd.c:487
 #, c-format
 msgid "The new password must contain numeric or special characters"
 msgstr "Lo senhal novèl deu conténer de caractèrs especials o numerics"
 
-#: panels/system/users/run-passwd.c:502
+#: panels/system/users/run-passwd.c:491
 #, c-format
 msgid "The old and new passwords are the same"
 msgstr "L'ancian e lo novèl senhal son identics"
 
-#: panels/system/users/run-passwd.c:506
+#: panels/system/users/run-passwd.c:495
 #, c-format
 msgid "Your password has been changed since you initially authenticated!"
 msgstr "Vòstre senhal es estat modificat dempuèi que vos sètz autentificat !"
 
-#: panels/system/users/run-passwd.c:510
+#: panels/system/users/run-passwd.c:499
 #, c-format
 msgid "The new password does not contain enough different characters"
 msgstr "Lo senhal novèl compòrta pas pro de caractèrs diferents"
 
-#: panels/system/users/run-passwd.c:514 panels/wwan/cc-wwan-errors-private.h:72
+#: panels/system/users/run-passwd.c:503 panels/wwan/cc-wwan-errors-private.h:72
 #, c-format
 msgid "Unknown error"
 msgstr "Error desconeguda"
@@ -8658,7 +8678,7 @@ msgstr "Talha del cursor"
 #| msgid ""
 #| "Cursor size can be combined with zoom to make it easier to see the cursor."
 msgid ""
-"Cursor size can be combined with Zoom to make it easier to see the cursor."
+"Cursor size can be combined with Zoom to make it easier to see the cursor"
 msgstr ""
 "La talha del cursor pòt èsser associada al zoom per facilitar sa visibilitat."
 
@@ -8678,7 +8698,7 @@ msgid "_Overamplification"
 msgstr "A_grandiment"
 
 #: panels/universal-access/cc-ua-hearing-page.ui:18
-msgid "Allow volume to exceed 100%. This will result in quality loss"
+msgid "Allow volume to exceed 100%, with reduced sound quality"
 msgstr ""
 
 #: panels/universal-access/cc-ua-hearing-page.ui:39
@@ -8706,8 +8726,6 @@ msgid "Entire Window"
 msgstr "Fenèstra entièra"
 
 #: panels/universal-access/cc-ua-hearing-page.ui:69
-#, fuzzy
-#| msgid "_Test flash"
 msgid "_Test Flash"
 msgstr "_Tèst rapid"
 
@@ -8852,32 +8870,32 @@ msgstr "_Zoom"
 
 #. translators: the labels will read:
 #. * Cursor Size: Default
-#: panels/universal-access/cc-ua-seeing-page.c:110
+#: panels/universal-access/cc-ua-seeing-page.c:111
 msgctxt "cursor size"
 msgid "Default"
 msgstr "Per defaut"
 
-#: panels/universal-access/cc-ua-seeing-page.c:113
+#: panels/universal-access/cc-ua-seeing-page.c:114
 msgctxt "cursor size"
 msgid "Medium"
 msgstr "Mejan"
 
-#: panels/universal-access/cc-ua-seeing-page.c:116
+#: panels/universal-access/cc-ua-seeing-page.c:117
 msgctxt "cursor size"
 msgid "Large"
 msgstr "Grand"
 
-#: panels/universal-access/cc-ua-seeing-page.c:119
+#: panels/universal-access/cc-ua-seeing-page.c:120
 msgctxt "cursor size"
 msgid "Larger"
 msgstr "Mai grand"
 
-#: panels/universal-access/cc-ua-seeing-page.c:122
+#: panels/universal-access/cc-ua-seeing-page.c:123
 msgctxt "cursor size"
 msgid "Largest"
 msgstr "Lo mai grand"
 
-#: panels/universal-access/cc-ua-seeing-page.c:126
+#: panels/universal-access/cc-ua-seeing-page.c:127
 #, c-format
 msgid "%d pixel"
 msgid_plural "%d pixels"
@@ -8897,28 +8915,36 @@ msgid "Increase color contrast of foreground and background interface elements"
 msgstr ""
 
 #: panels/universal-access/cc-ua-seeing-page.ui:26
+msgid "_On/Off Shapes"
+msgstr ""
+
+#: panels/universal-access/cc-ua-seeing-page.ui:27
+msgid "Use shapes to indicate state in addition to or instead of color"
+msgstr ""
+
+#: panels/universal-access/cc-ua-seeing-page.ui:34
 #, fuzzy
 #| msgid "_Reduce Animation"
 msgid "Reduce _Animation"
 msgstr "_Redusir l’animacion"
 
-#: panels/universal-access/cc-ua-seeing-page.ui:27
+#: panels/universal-access/cc-ua-seeing-page.ui:35
 msgid "Reduce animations in the user interface to reduce motion"
 msgstr ""
 
-#: panels/universal-access/cc-ua-seeing-page.ui:34
+#: panels/universal-access/cc-ua-seeing-page.ui:42
 msgid "_Large Text"
 msgstr "_Grand tèxte"
 
-#: panels/universal-access/cc-ua-seeing-page.ui:35
+#: panels/universal-access/cc-ua-seeing-page.ui:43
 msgid "Increase the size of all text in the user interface"
 msgstr ""
 
-#: panels/universal-access/cc-ua-seeing-page.ui:42
+#: panels/universal-access/cc-ua-seeing-page.ui:50
 msgid "_Cursor Size"
 msgstr "_Talha del cursor"
 
-#: panels/universal-access/cc-ua-seeing-page.ui:43
+#: panels/universal-access/cc-ua-seeing-page.ui:51
 #, fuzzy
 #| msgid ""
 #| "Cursor size can be combined with zoom to make it easier to see the cursor."
@@ -8926,30 +8952,30 @@ msgid "The size of the cursor can be increased to make it easier to see"
 msgstr ""
 "La talha del cursor pòt èsser associada al zoom per facilitar sa visibilitat."
 
-#: panels/universal-access/cc-ua-seeing-page.ui:51
+#: panels/universal-access/cc-ua-seeing-page.ui:59
 msgid "_Sound Keys"
 msgstr "Tòcas _son"
 
-#: panels/universal-access/cc-ua-seeing-page.ui:52
+#: panels/universal-access/cc-ua-seeing-page.ui:60
 #, fuzzy
 #| msgid "Beep when Num Lock or Caps Lock are turned on or off."
 msgid "Beep when Num Lock or Caps Lock are turned on or off"
 msgstr ""
 "Emet un bip al moment d'una quichada sus las tòcas Verr. Num. o Verr. Maj."
 
-#: panels/universal-access/cc-ua-seeing-page.ui:59
+#: panels/universal-access/cc-ua-seeing-page.ui:67
 msgid "Always Show Scroll_bars"
 msgstr ""
 
-#: panels/universal-access/cc-ua-seeing-page.ui:60
+#: panels/universal-access/cc-ua-seeing-page.ui:68
 msgid "Make scrollbars always visible"
 msgstr ""
 
-#: panels/universal-access/cc-ua-seeing-page.ui:72
+#: panels/universal-access/cc-ua-seeing-page.ui:80
 msgid "Screen _Reader"
 msgstr "_Lector d'ecran"
 
-#: panels/universal-access/cc-ua-seeing-page.ui:73
+#: panels/universal-access/cc-ua-seeing-page.ui:81
 #, fuzzy
 #| msgid "The screen reader reads displayed text as you move the focus."
 msgid "The screen reader reads displayed text as you move the focus"
@@ -8957,8 +8983,6 @@ msgstr ""
 "Lo lector d'ecran legís lo tèxte afichat a mesura que desplaçatz lo focus."
 
 #: panels/universal-access/cc-ua-typing-page.ui:17
-#, fuzzy
-#| msgid "_Screen Keyboard"
 msgid "Screen _Keyboard"
 msgstr "Cla_vièr visual"
 
@@ -8984,10 +9008,8 @@ msgid "Text Cursor"
 msgstr "Cursor de tèxte"
 
 #: panels/universal-access/cc-ua-typing-page.ui:38
-#, fuzzy
-#| msgid "Cursor Blinking"
 msgid "_Cursor Blinking"
-msgstr "Cluquejament del cursor"
+msgstr "_Cluquejament del cursor"
 
 #: panels/universal-access/cc-ua-typing-page.ui:39
 #, fuzzy
@@ -9271,10 +9293,8 @@ msgid "Invert colors in the magnifier region"
 msgstr "Inversar las colors de la zòna de la lópia"
 
 #: panels/universal-access/cc-ua-zoom-page.ui:233
-#, fuzzy
-#| msgid "Brightness"
 msgid "_Brightness"
-msgstr "Brilhança"
+msgstr "_Luminositat"
 
 #. Translators: This is a mark in the Brightness scale
 #. Translators: This is a mark in the Contrast scale
@@ -9324,7 +9344,6 @@ msgstr ""
 "relambi;delai;lenga;lengatge;audicion;repetir;visual;animacions;"
 
 #: panels/wacom/button-mapping.ui:7 panels/wacom/cc-wacom-ekr-page.ui:18
-#: panels/wacom/cc-wacom-page.ui:28
 msgid "Map Buttons"
 msgstr "Associar los botons"
 
@@ -9333,18 +9352,27 @@ msgid "Map buttons to functions"
 msgstr "Associar los botons a las foncions"
 
 #: panels/wacom/button-mapping.ui:51
+#, fuzzy
+#| msgid ""
+#| "To edit a shortcut, choose the “Send Keystroke” action, press the "
+#| "keyboard shortcut button and hold down the new keys or press Backspace to "
+#| "clear."
 msgid ""
 "To edit a shortcut, choose the “Send Keystroke” action, press the keyboard "
-"shortcut button and hold down the new keys or press Backspace to clear."
+"shortcut button and hold down the new keys or press Backspace to clear"
 msgstr ""
 "Per modificar un acorchi, causissètz l’accion « Send Keystroke », quichatz "
 "sul boton de l'acorchi de clavièr e tenètz quichadas las novèlas tòcas. "
 "Siquenon, quichatz sus la tòca Retorn arrièr per anullar."
 
 #: panels/wacom/calibrator/calibrator.ui:51
+#, fuzzy
+#| msgid ""
+#| "Please tap the target markers as they appear on screen to calibrate the "
+#| "tablet."
 msgid ""
 "Please tap the target markers as they appear on screen to calibrate the "
-"tablet."
+"tablet"
 msgstr ""
 "Picatz sus las ciblas quand apareisson a l'ecran per escandalhar la tauleta ."
 
@@ -9390,127 +9418,145 @@ msgid "External tablet device"
 msgstr "Aparelh tauleta extèrna"
 
 #. All displays item
-#: panels/wacom/cc-wacom-page.c:640
+#: panels/wacom/cc-wacom-page.c:639
 msgid "All Displays"
 msgstr "Totes los ecrans"
 
 #: panels/wacom/cc-wacom-page.ui:16
-msgid "Tablet Mode"
+#, fuzzy
+#| msgid "Tablet Mode"
+msgid "_Tablet Mode"
 msgstr "Mòde tauleta"
 
 #: panels/wacom/cc-wacom-page.ui:17
 msgid "Use absolute positioning for the pen"
 msgstr "Utilizar lo posicionament absolut per l'estilò"
 
-#: panels/wacom/cc-wacom-page.ui:22
-msgid "Left Hand Orientation"
+#: panels/wacom/cc-wacom-page.ui:23
+#, fuzzy
+#| msgid "Left Hand Orientation"
+msgid "_Left Hand Orientation"
 msgstr "Orientacion per esquerrièr"
 
-#: panels/wacom/cc-wacom-page.ui:23
+#: panels/wacom/cc-wacom-page.ui:24
 msgid "Tablet and Express Keys™ are rotated for left hand use"
 msgstr "La tauleta e Express Keys™ son viradas per l’usatge de la man esquèrra"
 
-#: panels/wacom/cc-wacom-page.ui:42
-msgctxt "display setting"
-msgid "Map to Monitor"
-msgstr "Associar al monitor"
+#: panels/wacom/cc-wacom-page.ui:30
+#, fuzzy
+#| msgid "Map Buttons"
+msgid "Map _Buttons"
+msgstr "Associar los botons"
 
-#: panels/wacom/cc-wacom-page.ui:48
-msgid "Keep Aspect Ratio"
+#: panels/wacom/cc-wacom-page.ui:44
+msgctxt "display setting"
+msgid "Map to _Monitor"
+msgstr "Associar al _monitor"
+
+#: panels/wacom/cc-wacom-page.ui:51
+#, fuzzy
+#| msgid "Keep Aspect Ratio"
+msgid "_Keep Aspect Ratio"
 msgstr "Conservar las proporcions"
 
-#: panels/wacom/cc-wacom-page.ui:49
+#: panels/wacom/cc-wacom-page.ui:52
 msgid "Only use a portion of the tablet surface to keep monitor aspect ratio"
 msgstr ""
 "Utilizar sonque un airal reduch de la susfàcia de la tauleta per gardar la "
 "proporcion del monitor"
 
-#: panels/wacom/cc-wacom-page.ui:60
-msgid "Calibrate"
-msgstr "Calibrar"
+#: panels/wacom/cc-wacom-page.ui:64
+msgid "_Calibrate"
+msgstr "_Calibrar"
 
 #: panels/wacom/cc-wacom-panel.ui:57
 msgid "No tablet detected"
 msgstr "Cap de tauleta  pas detectada"
 
 #: panels/wacom/cc-wacom-panel.ui:58
-msgid "Please plug in or turn on your Wacom tablet."
+#, fuzzy
+#| msgid "Please plug in or turn on your Wacom tablet."
+msgid "Please plug in or turn on your Wacom tablet"
 msgstr "Connectatz o alucatz vòstra tauleta Wacom."
 
 #: panels/wacom/cc-wacom-stylus-page.ui:16
-msgid "Tip Pressure Feel"
+#, fuzzy
+#| msgid "Tip Pressure Feel"
+msgid "Tip _Pressure Feel"
 msgstr "Pression ressentida sus la punta"
 
-#: panels/wacom/cc-wacom-stylus-page.ui:21
-#: panels/wacom/cc-wacom-stylus-page.ui:82
+#: panels/wacom/cc-wacom-stylus-page.ui:22
+#: panels/wacom/cc-wacom-stylus-page.ui:87
 msgid "Soft"
 msgstr "Doça"
 
-#: panels/wacom/cc-wacom-stylus-page.ui:35
+#: panels/wacom/cc-wacom-stylus-page.ui:36
 msgid "Stylus tip pressure"
 msgstr "Pression de la punta de l’estilò"
 
-#: panels/wacom/cc-wacom-stylus-page.ui:41
-#: panels/wacom/cc-wacom-stylus-page.ui:102
+#: panels/wacom/cc-wacom-stylus-page.ui:42
+#: panels/wacom/cc-wacom-stylus-page.ui:107
 msgid "Firm"
 msgstr "Fèrma"
 
-#: panels/wacom/cc-wacom-stylus-page.ui:54
+#: panels/wacom/cc-wacom-stylus-page.ui:55
 msgctxt "display setting"
-msgid "Button 1"
-msgstr "Boton 1"
+msgid "Button _1"
+msgstr "Boton _1"
 
-#: panels/wacom/cc-wacom-stylus-page.ui:62
+#: panels/wacom/cc-wacom-stylus-page.ui:64
 msgctxt "display setting"
-msgid "Button 2"
-msgstr "Boton 2"
+msgid "Button _2"
+msgstr "Boton _2"
 
-#: panels/wacom/cc-wacom-stylus-page.ui:70
+#: panels/wacom/cc-wacom-stylus-page.ui:73
 msgctxt "display setting"
-msgid "Button 3"
-msgstr "Boton 3"
+msgid "Button _3"
+msgstr "Boton _3"
 
-#: panels/wacom/cc-wacom-stylus-page.ui:77
-msgid "Eraser Pressure Feel"
+#: panels/wacom/cc-wacom-stylus-page.ui:81
+#, fuzzy
+#| msgid "Eraser Pressure Feel"
+msgid "_Eraser Pressure Feel"
 msgstr "Pression ressentida sus la goma"
 
-#: panels/wacom/cc-wacom-stylus-page.ui:96
+#: panels/wacom/cc-wacom-stylus-page.ui:101
 msgid "Eraser pressure"
 msgstr "Pression de la goma"
 
-#: panels/wacom/cc-wacom-stylus-page.ui:133
+#: panels/wacom/cc-wacom-stylus-page.ui:138
 msgid "Default"
 msgstr "Per defaut"
 
-#: panels/wacom/cc-wacom-stylus-page.ui:134
+#: panels/wacom/cc-wacom-stylus-page.ui:139
 msgid "Middle Mouse Button Click"
 msgstr "Clic del boton central de la mirga"
 
-#: panels/wacom/cc-wacom-stylus-page.ui:135
+#: panels/wacom/cc-wacom-stylus-page.ui:140
 msgid "Right Mouse Button Click"
 msgstr "Clic del boton dreit de la mirga"
 
-#: panels/wacom/cc-wacom-stylus-page.ui:137
+#: panels/wacom/cc-wacom-stylus-page.ui:142
 msgid "Forward"
 msgstr "En avant"
 
-#: panels/wacom/cc-wacom-tool.c:321
+#: panels/wacom/cc-wacom-tool.c:361
 msgid "Airbrush stylus with pressure, tilt, and integrated slider"
 msgstr "Estilò aerograf amb pression, enclinason, e barra de defilament"
 
-#: panels/wacom/cc-wacom-tool.c:323
+#: panels/wacom/cc-wacom-tool.c:363
 #, fuzzy
 #| msgid "Airbrush stylus with pressure, tilt, and rotation"
 msgid "Art pen with pressure, tilt, and rotation"
 msgstr "Estilò aerograf amb pression, enclinason, e rotacion"
 
-#: panels/wacom/cc-wacom-tool.c:325
+#: panels/wacom/cc-wacom-tool.c:365
 #, fuzzy
 #| msgid "Standard stylus with pressure and tilt"
 msgid "Stylus with pressure and tilt"
 msgstr "Estilò aerograf amb pression e enclinason"
 
-#: panels/wacom/cc-wacom-tool.c:327
+#: panels/wacom/cc-wacom-tool.c:367
 #, fuzzy
 #| msgid "Stylus tip pressure"
 msgid "Stylus with pressure"
@@ -10130,14 +10176,8 @@ msgid "Settings categories"
 msgstr "Categorias de paramètres"
 
 #: shell/cc-panel-list.ui:44
-#, fuzzy
-#| msgid "No results found"
 msgid "No Results Found"
 msgstr "Cap de resultat pas trobat"
-
-#: shell/cc-panel-list.ui:45
-msgid "Try a different search"
-msgstr "Ensajatz una autra recèrca"
 
 #: shell/cc-panel-loader.c:273
 msgid "Available panels:"
@@ -10170,10 +10210,8 @@ msgid "_OK"
 msgstr "_D'acòrdi"
 
 #: shell/cc-window.ui:107
-#, fuzzy
-#| msgid "Keyboard Shortcuts"
 msgid "_Keyboard Shortcuts"
-msgstr "Acorchis de clavièr"
+msgstr "_Acorchis clavièr"
 
 #: shell/cc-window.ui:111
 msgid "_Help"
@@ -10290,6 +10328,34 @@ msgstr[1] "%u entradas"
 #: subprojects/gvc/gvc-mixer-control.c:2882
 msgid "System Sounds"
 msgstr "Sons sistèma"
+
+#~ msgid "Reproduce sounds."
+#~ msgstr "Legir los sons."
+
+#~ msgid "Try a different search."
+#~ msgstr "Ensajatz una autra recèrca."
+
+#, fuzzy
+#~| msgid "Switch off to connect to a Wi-Fi network"
+#~ msgid "Scan the QR code to connect to the network <b>%s</b>."
+#~ msgstr "Atudar per se connectar a una ret Wi-Fi"
+
+#, fuzzy
+#~| msgid "Printer “%s” has been deleted"
+#~ msgid "Network “%s” has been deleted"
+#~ msgstr "L’imprimenta « %s » es estada suprimida"
+
+#~ msgid "Places"
+#~ msgstr "Emplaçaments"
+
+#~ msgid "Bookmarks"
+#~ msgstr "Signets"
+
+#~ msgid "Others"
+#~ msgstr "Autres"
+
+#~ msgid "Edit avatar"
+#~ msgstr "Modificar avatar"
 
 #~ msgid "Microphone"
 #~ msgstr "Micrò"
@@ -10925,9 +10991,6 @@ msgstr "Sons sistèma"
 
 #~ msgid "Search for a city"
 #~ msgstr "Recercar una vila"
-
-#~ msgid "Default Applications"
-#~ msgstr "Aplicacions per defaut"
 
 #~ msgid "Device conforms to HSI level %d"
 #~ msgstr "L’aparelh es confòrme al nivèl HSI %d"
@@ -14279,9 +14342,6 @@ msgstr "Sons sistèma"
 #~ msgstr ""
 #~ "Los periferics mobiles a large bande (3G, 4G, WiMax, etc.) ont besonh de "
 #~ "poténcia suplementària"
-
-#~ msgid "Password:"
-#~ msgstr "Senhal :"
 
 #~ msgid "_Off"
 #~ msgstr "_Désactivat"
