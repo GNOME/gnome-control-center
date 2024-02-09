@@ -49,7 +49,7 @@
 
 #define MWID(x) (GtkWidget *) gtk_builder_get_object (page->mapping_builder, x)
 
-#define THRESHOLD_MISCLICK	15
+#define THRESHOLD_MISCLICK	50
 #define THRESHOLD_DOUBLECLICK	7
 
 struct _CcWacomPage
