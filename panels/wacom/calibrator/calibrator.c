@@ -43,6 +43,9 @@ along_axis (struct Calib       *c,
             int                 xy,
             const struct Point *p)
 {
+    if (c->threshold_misclick <= 0)
+        return TRUE;
+
     return ((abs(xy - p->x) <= c->threshold_misclick) ||
             (abs(xy - p->y) <= c->threshold_misclick));
 }
@@ -53,8 +56,11 @@ add_click (struct Calib *c,
            int           x,
            int           y)
 {
-    g_debug ("Trying to add click (%d, %d)", x, y);
+    gboolean misclick = TRUE;
 
+    g_return_val_if_fail (c->num_clicks < _NUM_CORNERS, FALSE);
+
+    g_debug ("Trying to add click (%d, %d)", x, y);
     /* Double-click detection */
     if (c->threshold_doubleclick > 0 && c->num_clicks > 0)
     {
@@ -72,43 +78,27 @@ add_click (struct Calib *c,
     }
 
     /* Mis-click detection */
-    if (c->threshold_misclick > 0 && c->num_clicks > 0)
+    switch (c->num_clicks)
     {
-        gboolean misclick = TRUE;
+    case UL:
+        misclick = FALSE;
+        break;
+    case UR: /* must be y-aligned with UL */
+        misclick = !along_axis (c, y, &c->clicked[UL]);
+        break;
+    case LL: /* must be x-aligned with UL */
+        misclick = !along_axis (c, x, &c->clicked[UL]);
+        break;
+    case LR: /* must be x-aligned with UR, y-aligned with LL */
+        misclick = !along_axis (c, x, &c->clicked[UR]) || !along_axis (c, y, &c->clicked[LL]);
+        break;
+    }
 
-        if (c->num_clicks == 1)
-        {
-            /* check that along one axis of first point */
-            if (along_axis(c, x, &c->clicked[0]) || along_axis(c, y, &c->clicked[0]))
-            {
-                misclick = FALSE;
-            }
-        }
-        else if (c->num_clicks == 2)
-        {
-            /* check that along other axis of first point than second point */
-            if ((along_axis(c, y, &c->clicked[0]) && along_axis(c, c->clicked[1].x, &c->clicked[0])) ||
-                (along_axis(c, x, &c->clicked[0]) && along_axis(c, c->clicked[1].y, &c->clicked[0])))
-            {
-                misclick = FALSE;
-            }
-        }
-        else if (c->num_clicks == 3)
-        {
-            /* check that along both axis of second and third point */
-            if ((along_axis(c, x, &c->clicked[1]) && along_axis(c, y, &c->clicked[2])) ||
-                (along_axis(c, y, &c->clicked[1]) && along_axis(c, x, &c->clicked[2])))
-            {
-                misclick = FALSE;
-            }
-        }
-
-        if (misclick)
-        {
-            g_debug ("Detected misclick, resetting");
-            reset(c);
-            return FALSE;
-        }
+    if (misclick)
+    {
+        g_debug ("Detected misclick, resetting");
+        reset (c);
+        return FALSE;
     }
 
     g_debug ("Click (%d, %d) added", x, y);

@@ -62,7 +62,8 @@ enum
 	UL = 0, /* Upper-left  */
 	UR = 1, /* Upper-right */
 	LL = 2, /* Lower-left  */
-	LR = 3  /* Lower-right */
+	LR = 3, /* Lower-right */
+	_NUM_CORNERS
 };
 
 struct Point
@@ -79,7 +80,7 @@ struct Calib
     int num_clicks;
 
     /* click coordinates */
-    struct Point clicked[4];
+    struct Point clicked[_NUM_CORNERS];
 
     /* Threshold to keep the same point from being clicked twice.
      * Set to zero if you don't want this check
