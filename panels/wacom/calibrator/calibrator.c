@@ -53,6 +53,11 @@
  */
 #define NUM_BLOCKS 8
 
+typedef enum {
+    HORIZONTAL,
+    VERTICAL,
+} Alignment;
+
 typedef struct
 {
     int x, y;
@@ -149,14 +154,28 @@ cc_calibrator_update_geometry (CcCalibrator *c,
  */
 static gboolean
 along_axis (CcCalibrator       *c,
-            int                 xy,
-            const Point        *p)
+            const Point        *new_point,
+            Alignment           alignment,
+            const Point        *reference)
 {
+    gboolean result;
+
     if (c->threshold_misclick <= 0)
         return TRUE;
 
-    return ((abs(xy - p->x) <= c->threshold_misclick) ||
-            (abs(xy - p->y) <= c->threshold_misclick));
+    switch (alignment)
+    {
+    case VERTICAL:
+        result = (abs (new_point->x - reference->x) <= c->threshold_misclick);
+        break;
+    case HORIZONTAL:
+        result = (abs (new_point->y - reference->y) <= c->threshold_misclick);
+        break;
+    default:
+        g_return_val_if_reached (FALSE);
+    }
+
+    return result;
 }
 
 /* add a click with the given coordinates */
@@ -166,6 +185,7 @@ cc_calibrator_add_click (CcCalibrator *c,
                          int           y)
 {
     gboolean misclick = TRUE;
+    const Point p = { x, y };
 
     g_return_val_if_fail (c->state < CC_CALIBRATOR_STATE_COMPLETE, FALSE);
 
@@ -193,14 +213,14 @@ cc_calibrator_add_click (CcCalibrator *c,
         misclick = FALSE;
         break;
     case CC_CALIBRATOR_STATE_UPPER_RIGHT: /* must be y-aligned with UL */
-        misclick = !along_axis (c, y, &c->clicked[CC_CALIBRATOR_STATE_UPPER_LEFT]);
+        misclick = !along_axis (c, &p, HORIZONTAL, &c->clicked[CC_CALIBRATOR_STATE_UPPER_LEFT]);
         break;
     case CC_CALIBRATOR_STATE_LOWER_LEFT: /* must be x-aligned with UL */
-        misclick = !along_axis (c, x, &c->clicked[CC_CALIBRATOR_STATE_UPPER_LEFT]);
+        misclick = !along_axis (c, &p, VERTICAL, &c->clicked[CC_CALIBRATOR_STATE_UPPER_LEFT]);
         break;
     case CC_CALIBRATOR_STATE_LOWER_RIGHT: /* must be x-aligned with UR, y-aligned with LL */
-        misclick = !along_axis (c, x, &c->clicked[CC_CALIBRATOR_STATE_UPPER_RIGHT]) ||
-                   !along_axis (c, y, &c->clicked[CC_CALIBRATOR_STATE_LOWER_LEFT]);
+        misclick = !along_axis (c, &p, VERTICAL, &c->clicked[CC_CALIBRATOR_STATE_UPPER_RIGHT]) ||
+                   !along_axis (c, &p, HORIZONTAL, &c->clicked[CC_CALIBRATOR_STATE_LOWER_LEFT]);
         break;
     default:
         g_return_val_if_reached (FALSE);
@@ -214,9 +234,7 @@ cc_calibrator_add_click (CcCalibrator *c,
     }
 
     g_debug ("Click (%d, %d) added", x, y);
-    c->clicked[c->state].x = x;
-    c->clicked[c->state].y = y;
-    c->state++;
+    c->clicked[c->state++] = p;
 
     return TRUE;
 }
