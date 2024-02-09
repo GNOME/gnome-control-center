@@ -19,6 +19,11 @@ i18n.merge_file(
   install_dir: join_paths(control_center_datadir, 'polkit-1', 'actions')
 )
 
+install_data(
+  'org.gnome.Settings-system-symbolic.svg',
+  install_dir: join_paths(control_center_icondir, 'hicolor', 'scalable', 'apps')
+)
+
 sources = files(
   'cc-system-panel.c',
   'about/cc-about-page.c',
@@ -135,6 +140,7 @@ cflags += [
 subdir('about')
 subdir('datetime')
 subdir('region')
+subdir('remote-desktop')
 subdir('users')
 
 panels_libs += static_library(
