@@ -184,8 +184,8 @@ run_calibration (CcWacomPage *page,
 					cc_wacom_device_get_device (page->stylus),
 					finish_calibration,
 					page,
-					THRESHOLD_MISCLICK,
-					THRESHOLD_DOUBLECLICK);
+					THRESHOLD_DOUBLECLICK,
+					THRESHOLD_MISCLICK);
 
 	g_object_set_data_full (G_OBJECT (page),
 				"old-calibration",
