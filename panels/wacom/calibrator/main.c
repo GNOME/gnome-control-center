@@ -171,11 +171,9 @@ static void usage(char* cmd, unsigned thr_misclick)
     fprintf(stderr, "\t--fake: emulate a fake device (for testing purposes)\n");
 }
 
-static struct Calib* CalibratorXorgPrint(const char* const device_name0, const XYinfo *axis0, const gboolean verbose0, const int thr_misclick, const int thr_doubleclick)
+static CcCalibrator * CalibratorXorgPrint(const char* const device_name0, const XYinfo *axis0, const gboolean verbose0, const int thr_misclick, const int thr_doubleclick)
 {
-    struct Calib* c = (struct Calib*)calloc(1, sizeof(struct Calib));
-    c->threshold_misclick = thr_misclick;
-    c->threshold_doubleclick = thr_doubleclick;
+    CcCalibrator* c = cc_calibrator_new (thr_doubleclick, thr_misclick);
 
     printf("Calibrating standard Xorg driver \"%s\"\n", device_name0);
     printf("\tcurrent calibration values: min_x=%lf, max_x=%lf and min_y=%lf, max_y=%lf\n",
@@ -185,7 +183,7 @@ static struct Calib* CalibratorXorgPrint(const char* const device_name0, const X
     return c;
 }
 
-static struct Calib* main_common(int argc, char** argv)
+static CcCalibrator * main_common(int argc, char** argv)
 {
     gboolean verbose = FALSE;
     gboolean list_devices = FALSE;
@@ -390,9 +388,9 @@ calibration_finished_cb (CcCalibArea *area,
 
 int main(int argc, char** argv)
 {
-
-    struct Calib* calibrator = main_common(argc, argv);
+    CcCalibrator *calibrator = main_common(argc, argv);
     CcCalibArea *calib_area;
+    int threshold_doubleclick, threshold_misclick;
 
     bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
     bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
@@ -402,13 +400,15 @@ int main(int argc, char** argv)
 
     g_setenv ("G_MESSAGES_DEBUG", "all", TRUE);
 
+    cc_calibrator_get_thresholds (calibrator, &threshold_doubleclick, &threshold_misclick);
+
     calib_area = cc_calib_area_new (NULL,
                                     NULL,  /* monitor */
                                     NULL, /* NULL to accept input from any device */
                                     calibration_finished_cb,
                                     NULL,
-                                    calibrator->threshold_doubleclick,
-                                    calibrator->threshold_misclick);
+                                    threshold_doubleclick,
+                                    threshold_misclick);
 
     mainloop = g_main_loop_new (NULL, FALSE);
     g_main_loop_run (mainloop);

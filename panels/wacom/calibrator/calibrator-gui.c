@@ -35,11 +35,11 @@ struct _CcCalibArea
 {
   GtkWindow parent_instance;
 
-  struct Calib calibrator;
-  XYinfo       axis;
-  gboolean     swap;
-  gboolean     success;
-  GsdDevice   *device;
+  CcCalibrator *calibrator;
+  XYinfo        axis;
+  gboolean      swap;
+  gboolean      success;
+  GsdDevice    *device;
 
   GtkWidget  *error_revealer;
   GtkWidget  *title_revealer;
@@ -92,7 +92,7 @@ set_success (CcCalibArea *area)
 static void
 set_calibration_status (CcCalibArea *area)
 {
-  area->success = finish (&area->calibrator, &area->axis, &area->swap);
+  area->success = cc_calibrator_finish (area->calibrator, &area->axis, &area->swap);
 
   if (area->success)
     {
@@ -120,8 +120,8 @@ hide_error_message (CcCalibArea *area)
 }
 
 static void
-set_active_target (CcCalibArea *area,
-                   int          n_target)
+set_active_target (CcCalibArea       *area,
+                   CcCalibratorState  which)
 {
   GtkWidget *targets[] = {
     area->target1,
@@ -131,8 +131,10 @@ set_active_target (CcCalibArea *area,
   };
   int i;
 
+  g_return_if_fail (which < G_N_ELEMENTS (targets));
+
   for (i = 0; i < G_N_ELEMENTS (targets); i++)
-    gtk_widget_set_sensitive (targets[i], i == n_target);
+    gtk_widget_set_sensitive (targets[i], i == which);
 }
 
 static void
@@ -143,7 +145,7 @@ on_gesture_press (CcCalibArea     *area,
                   GtkGestureClick *gesture)
 {
   GsdDeviceManager *manager = gsd_device_manager_get ();
-  gint num_clicks;
+  CcCalibratorState state;
   gboolean success;
   GdkDevice *source;
   GsdDevice *device;
@@ -170,25 +172,20 @@ on_gesture_press (CcCalibArea     *area,
   cc_clock_set_duration (CC_CLOCK (area->clock), MAX_TIME);
 
   /* Handle click */
-  success = add_click(&area->calibrator,
-                      (int) x,
-                      (int) y);
-
-  num_clicks = area->calibrator.num_clicks;
-
-  if (!success && num_clicks == 0)
+  success = cc_calibrator_add_click (area->calibrator, (int) x, (int) y);
+  if (!success)
     show_error_message (area);
   else
     hide_error_message (area);
 
-  /* Are we done yet? */
-  if (num_clicks >= 4)
+  state = cc_calibrator_get_state (area->calibrator) ;
+  if (state == CC_CALIBRATOR_STATE_COMPLETE)
     {
       set_calibration_status (area);
       return;
     }
 
-  set_active_target (area, num_clicks);
+  set_active_target (area, state);
 }
 
 static gboolean
@@ -252,16 +249,9 @@ cc_calib_area_size_allocate (GtkWidget *widget,
 {
   CcCalibArea *calib_area = CC_CALIB_AREA (widget);
 
-  if (calib_area->calibrator.geometry.width != width ||
-      calib_area->calibrator.geometry.height != height)
-    {
-      calib_area->calibrator.geometry.width = width;
-      calib_area->calibrator.geometry.height = height;
-
-      /* reset calibration if already started */
-      reset (&calib_area->calibrator);
-      set_active_target (calib_area, 0);
-    }
+  cc_calibrator_update_geometry (calib_area->calibrator, width, height);
+  if (cc_calibrator_get_state (calib_area->calibrator) == CC_CALIBRATOR_STATE_UPPER_LEFT)
+      set_active_target (calib_area, CC_CALIBRATOR_STATE_UPPER_LEFT);
 
   GTK_WIDGET_CLASS (cc_calib_area_parent_class)->size_allocate (widget,
                                                                 width,
@@ -366,9 +356,7 @@ cc_calib_area_new (GdkDisplay     *display,
   calib_area->callback = callback;
   calib_area->user_data = user_data;
   calib_area->device = device;
-  calib_area->calibrator.threshold_doubleclick = threshold_doubleclick;
-  calib_area->calibrator.threshold_misclick = threshold_misclick;
-
+  calib_area->calibrator = cc_calibrator_new (threshold_doubleclick, threshold_misclick);
   /* Move to correct screen */
   if (monitor)
     gtk_window_fullscreen_on_monitor (GTK_WINDOW (calib_area), monitor);
@@ -402,6 +390,7 @@ cc_calib_area_finish (CcCalibArea *area)
 void
 cc_calib_area_free (CcCalibArea *area)
 {
+  g_clear_object (&area->calibrator);
   gtk_window_destroy (GTK_WINDOW (area));
 }
 

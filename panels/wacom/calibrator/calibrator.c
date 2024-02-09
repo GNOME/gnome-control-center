@@ -25,23 +25,132 @@
 
 #include "calibrator.h"
 
+/*
+ * Number of blocks. We partition the screen into 'num_blocks' x 'num_blocks'
+ * rectangles of equal size. We then ask the user to press points that are
+ * located at the corner closes to the center of the four blocks in the corners
+ * of the screen. The following ascii art illustrates the situation. We partition
+ * the screen into 8 blocks in each direction. We then let the user press the
+ * points marked with 'O'.
+ *
+ *   +--+--+--+--+--+--+--+--+
+ *   |  |  |  |  |  |  |  |  |
+ *   +--O--+--+--+--+--+--O--+
+ *   |  |  |  |  |  |  |  |  |
+ *   +--+--+--+--+--+--+--+--+
+ *   |  |  |  |  |  |  |  |  |
+ *   +--+--+--+--+--+--+--+--+
+ *   |  |  |  |  |  |  |  |  |
+ *   +--+--+--+--+--+--+--+--+
+ *   |  |  |  |  |  |  |  |  |
+ *   +--+--+--+--+--+--+--+--+
+ *   |  |  |  |  |  |  |  |  |
+ *   +--+--+--+--+--+--+--+--+
+ *   |  |  |  |  |  |  |  |  |
+ *   +--O--+--+--+--+--+--O--+
+ *   |  |  |  |  |  |  |  |  |
+ *   +--+--+--+--+--+--+--+--+
+ */
+#define NUM_BLOCKS 8
+
+typedef struct
+{
+    int x, y;
+} Point;
+
+struct _CcCalibrator
+{
+    /* Geometry of the calibration window */
+    GdkRectangle geometry;
+
+    CcCalibratorState state;
+
+    /* click coordinates */
+    Point clicked[CC_CALIBRATOR_STATE_COMPLETE];
+
+    /* Threshold to keep the same point from being clicked twice.
+     * Set to zero if you don't want this check
+     */
+    int threshold_doubleclick;
+
+    /* Threshold to detect mis-clicks (clicks not along axes)
+     * A lower value forces more precise calibration
+     * Set to zero if you don't want this check
+     */
+    int threshold_misclick;
+};
+
+G_DEFINE_TYPE (CcCalibrator, cc_calibrator, G_TYPE_OBJECT)
+
 #define SWAP(valtype,x,y)		\
     G_STMT_START {			\
     valtype t; t = (x); x = (y); y = t;	\
     } G_STMT_END
 
-/* reset clicks */
-void
-reset (struct Calib *c)
+static void
+cc_calibrator_init (CcCalibrator *c)
 {
-    c->num_clicks = 0;
+    c->state = CC_CALIBRATOR_STATE_UPPER_LEFT;
 }
 
-/* check whether the coordinates are along the respective axis */
+static void
+cc_calibrator_class_init (CcCalibratorClass *klass)
+{
+}
+
+CcCalibrator *
+cc_calibrator_new (int threshold_doubleclick,
+                   int threshold_misclick)
+{
+    CcCalibrator *c = g_object_new (CC_TYPE_CALIBRATOR, NULL);
+
+    c->threshold_doubleclick = threshold_doubleclick;
+    c->threshold_misclick = threshold_misclick;
+
+    return c;
+}
+
+void cc_calibrator_get_thresholds (CcCalibrator *c,
+                                   int *threshold_doubleclick,
+                                   int *threshold_misclick)
+{
+    *threshold_doubleclick = c->threshold_doubleclick;
+    *threshold_misclick = c->threshold_misclick;
+}
+
+void
+cc_calibrator_reset (CcCalibrator *c)
+{
+    c->state = CC_CALIBRATOR_STATE_UPPER_LEFT;
+}
+
+CcCalibratorState
+cc_calibrator_get_state (CcCalibrator *c)
+{
+    return c->state;
+}
+
+void
+cc_calibrator_update_geometry (CcCalibrator *c,
+                               int           width,
+                               int           height)
+{
+    if (c->geometry.width == width && c->geometry.height == height)
+        return;
+
+    c->geometry.width = width;
+    c->geometry.height = height;
+
+    cc_calibrator_reset (c);
+};
+
+/* Check whether the coordinates are along the respective axis and
+ * return true if the value is within the range, false otherwise.
+ */
 static gboolean
-along_axis (struct Calib       *c,
+along_axis (CcCalibrator       *c,
             int                 xy,
-            const struct Point *p)
+            const Point        *p)
 {
     if (c->threshold_misclick <= 0)
         return TRUE;
@@ -52,19 +161,19 @@ along_axis (struct Calib       *c,
 
 /* add a click with the given coordinates */
 gboolean
-add_click (struct Calib *c,
-           int           x,
-           int           y)
+cc_calibrator_add_click (CcCalibrator *c,
+                         int           x,
+                         int           y)
 {
     gboolean misclick = TRUE;
 
-    g_return_val_if_fail (c->num_clicks < _NUM_CORNERS, FALSE);
+    g_return_val_if_fail (c->state < CC_CALIBRATOR_STATE_COMPLETE, FALSE);
 
     g_debug ("Trying to add click (%d, %d)", x, y);
     /* Double-click detection */
-    if (c->threshold_doubleclick > 0 && c->num_clicks > 0)
+    if (c->threshold_doubleclick > 0 && c->state > CC_CALIBRATOR_STATE_UPPER_LEFT)
     {
-        int i = c->num_clicks-1;
+        int i = c->state - 1;
         while (i >= 0)
         {
             if (abs(x - c->clicked[i].x) <= c->threshold_doubleclick &&
@@ -78,42 +187,45 @@ add_click (struct Calib *c,
     }
 
     /* Mis-click detection */
-    switch (c->num_clicks)
+    switch (c->state)
     {
-    case UL:
+    case CC_CALIBRATOR_STATE_UPPER_LEFT:
         misclick = FALSE;
         break;
-    case UR: /* must be y-aligned with UL */
-        misclick = !along_axis (c, y, &c->clicked[UL]);
+    case CC_CALIBRATOR_STATE_UPPER_RIGHT: /* must be y-aligned with UL */
+        misclick = !along_axis (c, y, &c->clicked[CC_CALIBRATOR_STATE_UPPER_LEFT]);
         break;
-    case LL: /* must be x-aligned with UL */
-        misclick = !along_axis (c, x, &c->clicked[UL]);
+    case CC_CALIBRATOR_STATE_LOWER_LEFT: /* must be x-aligned with UL */
+        misclick = !along_axis (c, x, &c->clicked[CC_CALIBRATOR_STATE_UPPER_LEFT]);
         break;
-    case LR: /* must be x-aligned with UR, y-aligned with LL */
-        misclick = !along_axis (c, x, &c->clicked[UR]) || !along_axis (c, y, &c->clicked[LL]);
+    case CC_CALIBRATOR_STATE_LOWER_RIGHT: /* must be x-aligned with UR, y-aligned with LL */
+        misclick = !along_axis (c, x, &c->clicked[CC_CALIBRATOR_STATE_UPPER_RIGHT]) ||
+                   !along_axis (c, y, &c->clicked[CC_CALIBRATOR_STATE_LOWER_LEFT]);
         break;
+    default:
+        g_return_val_if_reached (FALSE);
     }
 
     if (misclick)
     {
         g_debug ("Detected misclick, resetting");
-        reset (c);
+        cc_calibrator_reset (c);
         return FALSE;
     }
 
     g_debug ("Click (%d, %d) added", x, y);
-    c->clicked[c->num_clicks].x = x;
-    c->clicked[c->num_clicks].y = y;
-    c->num_clicks++;
+    c->clicked[c->state].x = x;
+    c->clicked[c->state].y = y;
+    c->state++;
 
     return TRUE;
 }
 
 /* calculate and apply the calibration */
 gboolean
-finish (struct Calib *c,
-        XYinfo       *new_axis,
-        gboolean         *swap)
+cc_calibrator_finish (CcCalibrator *c,
+                      XYinfo       *new_axis,
+                      gboolean      *swap)
 {
     gboolean swap_xy;
     float scale_x;
@@ -122,7 +234,7 @@ finish (struct Calib *c,
     float delta_y;
     XYinfo axis = {-1, -1, -1, -1};
 
-    if (c->num_clicks != 4)
+    if (c->state != CC_CALIBRATOR_STATE_COMPLETE)
         return FALSE;
 
     /* Should x and y be swapped? If the device and output are wider
@@ -137,10 +249,10 @@ finish (struct Calib *c,
     scale_x = 1 / (float)c->geometry.width;
     scale_y = 1 / (float)c->geometry.height;
 
-    axis.x_min = ((((c->clicked[UL].x + c->clicked[LL].x) / 2)) * scale_x);
-    axis.x_max = ((((c->clicked[UR].x + c->clicked[LR].x) / 2)) * scale_x);
-    axis.y_min = ((((c->clicked[UL].y + c->clicked[UR].y) / 2)) * scale_y);
-    axis.y_max = ((((c->clicked[LL].y + c->clicked[LR].y) / 2)) * scale_y);
+    axis.x_min = ((((c->clicked[CC_CALIBRATOR_STATE_UPPER_LEFT].x + c->clicked[CC_CALIBRATOR_STATE_LOWER_LEFT].x) / 2)) * scale_x);
+    axis.x_max = ((((c->clicked[CC_CALIBRATOR_STATE_UPPER_RIGHT].x + c->clicked[CC_CALIBRATOR_STATE_LOWER_RIGHT].x) / 2)) * scale_x);
+    axis.y_min = ((((c->clicked[CC_CALIBRATOR_STATE_UPPER_LEFT].y + c->clicked[CC_CALIBRATOR_STATE_UPPER_RIGHT].y) / 2)) * scale_y);
+    axis.y_max = ((((c->clicked[CC_CALIBRATOR_STATE_LOWER_LEFT].y + c->clicked[CC_CALIBRATOR_STATE_LOWER_RIGHT].y) / 2)) * scale_y);
 
     /* Add/subtract the offset that comes from not having the points in the
      * corners (using the same coordinate system they are currently in)
