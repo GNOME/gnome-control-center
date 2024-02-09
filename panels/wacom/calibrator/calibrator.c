@@ -166,10 +166,12 @@ along_axis (CcCalibrator       *c,
     switch (alignment)
     {
     case VERTICAL:
-        result = (abs (new_point->x - reference->x) <= c->threshold_misclick);
+        result = (abs (new_point->x - reference->x) <= c->threshold_misclick) &&
+                 (new_point->y > reference->y);
         break;
     case HORIZONTAL:
-        result = (abs (new_point->y - reference->y) <= c->threshold_misclick);
+        result = (abs (new_point->y - reference->y) <= c->threshold_misclick) &&
+                 (new_point->x > reference->x);
         break;
     default:
         g_return_val_if_reached (FALSE);
