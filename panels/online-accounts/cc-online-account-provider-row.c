@@ -37,6 +37,42 @@ struct _CcOnlineAccountProviderRow
 
 G_DEFINE_TYPE (CcOnlineAccountProviderRow, cc_online_account_provider_row, ADW_TYPE_ACTION_ROW)
 
+static const char *
+_goa_provider_get_provider_title (GoaProvider *provider)
+{
+  const char *provider_type = NULL;
+
+  g_assert (GOA_IS_PROVIDER (provider));
+
+  /* The order here is the same used to sort accounts and providers in the UI,
+   * The title, if present, should bump the provider name to subtitle.
+   */
+  struct
+  {
+    const char *provider;
+    const char *title;
+  } goa_metadata[] = {
+    {"imap_smtp", N_("Email")},                   /* IMAP and SMTP */
+    {"webdav", N_("Calendars, Contacts, Files")}, /* WebDAV */
+    {"owncloud", NULL},                           /* Nextcloud */
+    {"google", NULL},                             /* Google */
+    {"ms_graph", NULL},                           /* Microsoft 365 */
+    {"exchange", NULL},                           /* Microsoft Exchange */
+    {"windows_live", NULL},                       /* Microsoft Personal */
+    {"kerberos", N_("Enterprise Login")},         /* Enterprise Login (Kerberos) */
+    {"fedora", NULL},                             /* Fedora */
+  };
+
+  provider_type = goa_provider_get_provider_type (provider);
+  for (size_t i = 0; i < G_N_ELEMENTS (goa_metadata); i++)
+    {
+      if (g_str_equal (goa_metadata[i].provider, provider_type))
+        return goa_metadata[i].title;
+    }
+
+  return NULL;
+}
+
 static gboolean
 is_gicon_symbolic (GtkWidget *widget,
                    GIcon     *icon)
@@ -90,6 +126,7 @@ cc_online_account_provider_row_new (GoaProvider *provider)
   CcOnlineAccountProviderRow *self;
   g_autoptr(GIcon) icon = NULL;
   g_autofree gchar *name = NULL;
+  const char *title = NULL;
 
   self = g_object_new (cc_online_account_provider_row_get_type (), NULL);
 
@@ -103,6 +140,7 @@ cc_online_account_provider_row_new (GoaProvider *provider)
       self->provider = g_object_ref (provider);
       icon = goa_provider_get_provider_icon (provider, NULL);
       name = goa_provider_get_provider_name (provider, NULL);
+      title = _goa_provider_get_provider_title (provider);
     }
 
   gtk_image_set_from_gicon (self->icon_image, icon);
@@ -117,7 +155,15 @@ cc_online_account_provider_row_new (GoaProvider *provider)
       gtk_widget_add_css_class (GTK_WIDGET (self->icon_image), "lowres-icon");
     }
 
-  adw_preferences_row_set_title (ADW_PREFERENCES_ROW (self), name);
+  if (title != NULL)
+    {
+      adw_preferences_row_set_title (ADW_PREFERENCES_ROW (self), title);
+      adw_action_row_set_subtitle (ADW_ACTION_ROW (self), name);
+    }
+  else
+    {
+      adw_preferences_row_set_title (ADW_PREFERENCES_ROW (self), name);
+    }
 
   return self;
 }
