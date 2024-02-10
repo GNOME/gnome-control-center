@@ -42,6 +42,7 @@ sources = files(
   'remote-desktop/cc-encryption-fingerprint-dialog.c',
   'remote-desktop/cc-gnome-remote-desktop.c',
   'remote-desktop/cc-remote-desktop-page.c',
+  'remote-desktop/cc-remote-session-page.c',
   'remote-desktop/cc-tls-certificate.c',
   'remote-desktop/cc-systemd-service.c',
   'remote-login/cc-remote-login.c',
@@ -140,6 +141,7 @@ sources += gnome.gdbus_codegen(
 
 cflags += [
    '-DDATADIR="@0@"'.format(control_center_datadir),
+   '-DSYSCONFDIR="@0@"'.format(control_center_sysconfdir),
    '-DLIBEXECDIR="@0@"'.format(control_center_libexecdir),
   '-DGNOMECC_DATA_DIR="@0@"'.format(control_center_pkgdatadir)
 ]

@@ -32,5 +32,8 @@ G_DECLARE_FINAL_TYPE (CcEncryptionFingerprintDialog, cc_encryption_fingerprint_d
 
 void cc_encryption_fingerprint_dialog_set_certificate (CcEncryptionFingerprintDialog *self,
                                                        GTlsCertificate                *certificate);
+void cc_encryption_fingerprint_dialog_set_fingerprint (CcEncryptionFingerprintDialog *self,
+                                                       const gchar                   *fingerprint,
+                                                       const gchar                    *separator);
 
 G_END_DECLS
