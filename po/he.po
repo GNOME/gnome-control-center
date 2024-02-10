@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center.HEAD.he\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2024-02-06 12:36+0000\n"
-"PO-Revision-Date: 2024-02-06 15:55+0200\n"
+"POT-Creation-Date: 2024-02-09 15:46+0000\n"
+"PO-Revision-Date: 2024-02-10 22:00+0200\n"
 "Last-Translator: Yosef Or Boczko <yoseforb@gmail.com>\n"
 "Language-Team: Hebrew\n"
 "Language: he\n"
@@ -69,7 +69,7 @@ msgstr "יש גישה לרשת"
 
 #: panels/applications/cc-applications-panel.c:844
 #: panels/applications/cc-applications-panel.c:846
-#: panels/search/cc-search-locations-dialog.c:384
+#: panels/search/cc-search-locations-dialog.c:412
 msgid "Home"
 msgstr "בית"
 
@@ -987,7 +987,7 @@ msgstr "כיול התצוגה"
 #: panels/system/users/cc-avatar-chooser.c:92
 #: panels/system/users/cc-fingerprint-dialog.ui:32
 #: panels/system/users/cc-password-dialog.ui:21
-#: panels/system/users/cc-user-page.ui:226
+#: panels/system/users/cc-user-page.ui:222
 #: panels/system/users/data/join-dialog.ui:17
 #: panels/wwan/cc-wwan-mode-dialog.ui:32
 #: panels/wwan/cc-wwan-network-dialog.ui:107
@@ -2324,7 +2324,7 @@ msgid "Add Custom Shortcut"
 msgstr "הוספת צירוף מקשים חדש"
 
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:22
-#: panels/system/users/cc-user-page.ui:227
+#: panels/system/users/cc-user-page.ui:223
 msgid "_Remove"
 msgstr "הס_רה"
 
@@ -3042,7 +3042,7 @@ msgstr "_אבטחת 802.1x"
 #: panels/network/connection-editor/ethernet-page.ui:27
 #: panels/network/connection-editor/vpn-page.ui:23
 #: panels/system/users/cc-add-user-dialog.ui:68
-#: panels/system/users/cc-user-page.ui:88
+#: panels/system/users/cc-user-page.ui:84
 msgid "_Name"
 msgstr "_שם"
 
@@ -4743,7 +4743,7 @@ msgstr "המדפסת „%s” נמחקה"
 msgid "Failed to add new printer."
 msgstr "הוספת המדפסת החדשה נכשלה."
 
-#: panels/printers/cc-printers-panel.c:1284
+#: panels/printers/cc-printers-panel.c:1293
 msgid "Unlock to add printers and change settings"
 msgstr "יש לשחרר כדי להוסיף מדפסות ולשנות הגדרות"
 
@@ -5206,9 +5206,7 @@ msgid "Advanced"
 msgstr "מתקדם"
 
 #. Translators: Name of job which makes printer to print test page
-#. Translators: This button triggers the printing of a test page.
 #: panels/printers/pp-options-dialog.c:839
-#: panels/printers/pp-options-dialog.ui:17
 msgid "Test Page"
 msgstr "דף בדיקה"
 
@@ -5216,6 +5214,11 @@ msgstr "דף בדיקה"
 #: panels/printers/pp-options-dialog.c:852
 msgid "Test page"
 msgstr "דף בדיקה"
+
+#. Translators: This button triggers the printing of a test page.
+#: panels/printers/pp-options-dialog.ui:17
+msgid "_Test Page"
+msgstr "דף _בדיקה"
 
 #. Translators: this is an option of "Paper Source"
 #: panels/printers/pp-ppd-option-widget.c:75
@@ -6543,12 +6546,20 @@ msgstr ""
 "מיקום;GPS; מצלמה;תמונות;סרטים;סרטונים;וידאו;מצלמת רשת;מצלמת אינטרנט;מיקרופון;"
 "הקלטה;אבטחה;קשחה;קושחה;Thunderbolt;"
 
-#: panels/search/cc-search-locations-dialog.c:579
+#: panels/search/cc-search-locations-dialog.c:507
+msgid "Location not found"
+msgstr "המיקום לא נמצא"
+
+#: panels/search/cc-search-locations-dialog.c:564
+msgid "Subfolders must be manually added for this location"
+msgstr "יש להוסיף תתי־תיקיות של תיקייה זו באופן ידני"
+
+#: panels/search/cc-search-locations-dialog.c:572
 #: panels/sharing/cc-sharing-panel.c:418
 msgid "Remove Folder"
 msgstr "הסרת תיקייה"
 
-#: panels/search/cc-search-locations-dialog.c:676
+#: panels/search/cc-search-locations-dialog.c:683
 msgid "Select Location"
 msgstr "בחירת מיקום"
 
@@ -6557,27 +6568,32 @@ msgid "Search Locations"
 msgstr "מקומות לחיפוש"
 
 #: panels/search/cc-search-locations-dialog.ui:19
-msgid ""
-"Folders which are searched by system apps, such as Files, Photos and Videos"
-msgstr "תיקיות אשר מבוצע בהן חיפוש על ידי יישומים כמו קבצים, תמונות וסרטים"
+msgid "Filesystem locations which are searched by system apps, such as Files"
+msgstr ""
+"מקומות במערכת הקבצים אשר מבוצע בהם חיפוש על ידי יישומים כמו קבצים, תמונות "
+"וסרטים"
 
 #: panels/search/cc-search-locations-dialog.ui:22
-msgid "Places"
-msgstr "מיקומים"
+msgid "Default Locations"
+msgstr "מקומות בררת המחדל"
 
 #: panels/search/cc-search-locations-dialog.ui:39
-msgid "Bookmarks"
-msgstr "סימניות"
+msgid "Bookmarked Locations"
+msgstr "מקומות בסימניות"
 
 #: panels/search/cc-search-locations-dialog.ui:56
-msgid "Others"
-msgstr "אחרים"
+msgid "Custom Locations"
+msgstr "מקומות מותאמים אישית"
 
 #: panels/search/cc-search-locations-dialog.ui:63
 msgid "_Add Location…"
 msgstr "הו_ספת מיקום…"
 
-#: panels/search/cc-search-panel.c:166
+#: panels/search/cc-search-locations-dialog.ui:89
+msgid "No custom search locations"
+msgstr "אין מקומות מותאמים אישית לחיפוש"
+
+#: panels/search/cc-search-panel.c:173
 msgid "No apps found"
 msgstr "לא נמצאו יישומים"
 
@@ -6594,8 +6610,8 @@ msgid "Search _Locations"
 msgstr "_מקומות לחיפוש"
 
 #: panels/search/cc-search-panel.ui:30
-msgid "Folders which are searched by system apps"
-msgstr "תיקיות אשר מבוצע בהן חיפוש על ידי יישומי מערכת"
+msgid "Filesystem locations which are searched by system apps"
+msgstr "מקומות במערכת הקבצים אשר מבוצע בהם חיפוש על ידי יישומי מערכת"
 
 #: panels/search/cc-search-panel.ui:40
 msgid "Search Results"
@@ -6881,6 +6897,13 @@ msgstr "_עצמת שמע"
 #: panels/sound/cc-sound-panel.ui:384
 msgid "_Alert Sound"
 msgstr "צליל ה_תראה"
+
+#. Translators: This is the tooltip for a speaker test button, %s is an already translated
+#. speaker position, like "Front Left" or "Rear Center".
+#: panels/sound/cc-speaker-test-button.c:218
+#, c-format
+msgid "%s Speaker"
+msgstr "רמקול %s"
 
 #: panels/sound/cc-subwoofer-slider.ui:8
 msgid "Subwoofer"
@@ -7450,7 +7473,7 @@ msgid "Your Account"
 msgstr "החשבון שלך"
 
 #: panels/system/region/cc-region-page.ui:34
-#: panels/system/users/cc-user-page.ui:174
+#: panels/system/users/cc-user-page.ui:170
 msgid "_Language"
 msgstr "_שפה"
 
@@ -7638,7 +7661,7 @@ msgid "Ad_ministrator"
 msgstr "_מנהל"
 
 #: panels/system/users/cc-add-user-dialog.ui:138
-#: panels/system/users/cc-user-page.ui:145
+#: panels/system/users/cc-user-page.ui:141
 msgid ""
 "Administrators have extra abilities, including adding and removing users, "
 "changing login settings, and removing software. Parental controls cannot be "
@@ -8005,58 +8028,58 @@ msgid "Some settings are locked"
 msgstr "חלק מההגדרות נעולות"
 
 #: panels/system/users/cc-user-page.ui:24
-#: panels/system/users/cc-user-page.ui:85
-#: panels/system/users/cc-user-page.ui:97
-#: panels/system/users/cc-user-page.ui:109
-#: panels/system/users/cc-user-page.ui:124
-#: panels/system/users/cc-user-page.ui:138
-#: panels/system/users/cc-user-page.ui:173
+#: panels/system/users/cc-user-page.ui:81
+#: panels/system/users/cc-user-page.ui:93
+#: panels/system/users/cc-user-page.ui:105
+#: panels/system/users/cc-user-page.ui:120
+#: panels/system/users/cc-user-page.ui:134
+#: panels/system/users/cc-user-page.ui:169
 msgid "Unlock to Change This Setting"
 msgstr "יש לשחרר לשינוי הגדרה זו"
 
-#: panels/system/users/cc-user-page.ui:43
-msgid "Edit avatar"
-msgstr "עריכת תמונה"
+#: panels/system/users/cc-user-page.ui:41
+msgid "Change Avatar"
+msgstr "שינוי תמונה אישית"
 
-#: panels/system/users/cc-user-page.ui:64
-msgid "Remove avatar"
-msgstr "הסרת תמונה"
+#: panels/system/users/cc-user-page.ui:59
+msgid "Remove Avatar"
+msgstr "הסרת תמונה אישית"
 
-#: panels/system/users/cc-user-page.ui:99
+#: panels/system/users/cc-user-page.ui:95
 msgid "Pa_ssword"
 msgstr "_ססמה"
 
-#: panels/system/users/cc-user-page.ui:111
+#: panels/system/users/cc-user-page.ui:107
 msgid "_Fingerprint Login"
 msgstr "כניסה באמצעות _טביעת אצבע"
 
-#: panels/system/users/cc-user-page.ui:120
+#: panels/system/users/cc-user-page.ui:116
 msgid "A_utomatic Login"
 msgstr "כניסה _אוטומטית"
 
-#: panels/system/users/cc-user-page.ui:139
+#: panels/system/users/cc-user-page.ui:135
 msgid "_Administrator"
 msgstr "_מנהל"
 
-#: panels/system/users/cc-user-page.ui:160
+#: panels/system/users/cc-user-page.ui:156
 msgid "_Parental Controls"
 msgstr "_בקרת הורים"
 
-#: panels/system/users/cc-user-page.ui:161
+#: panels/system/users/cc-user-page.ui:157
 msgid "Open the Parental Controls app"
 msgstr "פתיחת יישום בקרת הורים"
 
-#: panels/system/users/cc-user-page.ui:195
+#: panels/system/users/cc-user-page.ui:191
 msgid "_Remove User"
 msgstr "ה_סרת משתמש"
 
-#: panels/system/users/cc-user-page.ui:221
+#: panels/system/users/cc-user-page.ui:217
 msgid ""
 "The user will not be able to use this device once their account has been "
 "removed"
 msgstr "המשתמש לא יוכל להשתמש בהתקן זה לאחר שהחשבון שלו יוסר"
 
-#: panels/system/users/cc-user-page.ui:233
+#: panels/system/users/cc-user-page.ui:229
 msgid "_Delete Files and Settings"
 msgstr "_מחיקת קבצים והגדרות"
 
@@ -8458,32 +8481,32 @@ msgstr "ת_קריב"
 
 #. translators: the labels will read:
 #. * Cursor Size: Default
-#: panels/universal-access/cc-ua-seeing-page.c:110
+#: panels/universal-access/cc-ua-seeing-page.c:111
 msgctxt "cursor size"
 msgid "Default"
 msgstr "בררת מחדל"
 
-#: panels/universal-access/cc-ua-seeing-page.c:113
+#: panels/universal-access/cc-ua-seeing-page.c:114
 msgctxt "cursor size"
 msgid "Medium"
 msgstr "בינוני"
 
-#: panels/universal-access/cc-ua-seeing-page.c:116
+#: panels/universal-access/cc-ua-seeing-page.c:117
 msgctxt "cursor size"
 msgid "Large"
 msgstr "גדול"
 
-#: panels/universal-access/cc-ua-seeing-page.c:119
+#: panels/universal-access/cc-ua-seeing-page.c:120
 msgctxt "cursor size"
 msgid "Larger"
 msgstr "גדול יותר"
 
-#: panels/universal-access/cc-ua-seeing-page.c:122
+#: panels/universal-access/cc-ua-seeing-page.c:123
 msgctxt "cursor size"
 msgid "Largest"
 msgstr "ענק"
 
-#: panels/universal-access/cc-ua-seeing-page.c:126
+#: panels/universal-access/cc-ua-seeing-page.c:127
 #, c-format
 msgid "%d pixel"
 msgid_plural "%d pixels"
@@ -8504,52 +8527,60 @@ msgstr "ניגודיות _גבוהה"
 msgid "Increase color contrast of foreground and background interface elements"
 msgstr "הגדלת ניגודיות הצבע של חזית ורקע רכיבי ממשק"
 
-# msgctxt "Thunderbolt Device Status"
 #: panels/universal-access/cc-ua-seeing-page.ui:26
+msgid "_On/Off Shapes"
+msgstr "צורות _פועל/כבוי"
+
+#: panels/universal-access/cc-ua-seeing-page.ui:27
+msgid "Use shapes to indicate state in addition to or instead of color"
+msgstr "שימוש בצורות לציון מצב בנוסף או במקום צבע"
+
+# msgctxt "Thunderbolt Device Status"
+#: panels/universal-access/cc-ua-seeing-page.ui:34
 msgid "Reduce _Animation"
 msgstr "ה_פחתת הנפשות"
 
-#: panels/universal-access/cc-ua-seeing-page.ui:27
+#: panels/universal-access/cc-ua-seeing-page.ui:35
 msgid "Reduce animations in the user interface to reduce motion"
 msgstr "הפחתת הנפשות בממשק המשתמש להפחתת תנועה"
 
-#: panels/universal-access/cc-ua-seeing-page.ui:34
+#: panels/universal-access/cc-ua-seeing-page.ui:42
 msgid "_Large Text"
 msgstr "טקסט _גדול"
 
-#: panels/universal-access/cc-ua-seeing-page.ui:35
+#: panels/universal-access/cc-ua-seeing-page.ui:43
 msgid "Increase the size of all text in the user interface"
 msgstr "הגדלת הגודל של כל הטקסט בממשק המשתמש"
 
-#: panels/universal-access/cc-ua-seeing-page.ui:42
+#: panels/universal-access/cc-ua-seeing-page.ui:50
 msgid "_Cursor Size"
 msgstr "גודל _סמן"
 
-#: panels/universal-access/cc-ua-seeing-page.ui:43
+#: panels/universal-access/cc-ua-seeing-page.ui:51
 msgid "The size of the cursor can be increased to make it easier to see"
 msgstr "סמן העכבר ניתן להגדלה על מנת להקל עליך לראות אותו"
 
-#: panels/universal-access/cc-ua-seeing-page.ui:51
+#: panels/universal-access/cc-ua-seeing-page.ui:59
 msgid "_Sound Keys"
 msgstr "_צלילי מקשים"
 
-#: panels/universal-access/cc-ua-seeing-page.ui:52
+#: panels/universal-access/cc-ua-seeing-page.ui:60
 msgid "Beep when Num Lock or Caps Lock are turned on or off"
 msgstr "צפצוף כאשר Num Lock או Caps Lock מופעלים או מושבתים"
 
-#: panels/universal-access/cc-ua-seeing-page.ui:59
+#: panels/universal-access/cc-ua-seeing-page.ui:67
 msgid "Always Show Scroll_bars"
 msgstr "תמיד להציג _פסי גלילה"
 
-#: panels/universal-access/cc-ua-seeing-page.ui:60
+#: panels/universal-access/cc-ua-seeing-page.ui:68
 msgid "Make scrollbars always visible"
 msgstr "לגרום לפסי הגלילה להיות גלויים תמיד"
 
-#: panels/universal-access/cc-ua-seeing-page.ui:72
+#: panels/universal-access/cc-ua-seeing-page.ui:80
 msgid "Screen _Reader"
 msgstr "מ_קריא מסך"
 
-#: panels/universal-access/cc-ua-seeing-page.ui:73
+#: panels/universal-access/cc-ua-seeing-page.ui:81
 msgid "The screen reader reads displayed text as you move the focus"
 msgstr "קורא המסך קורא את הטקסט המוצג כאשר המוקד זז"
 
@@ -9822,6 +9853,18 @@ msgstr[3] "‏‫%u ערוצי קלט"
 msgid "System Sounds"
 msgstr "צלילי מערכת"
 
+#~ msgid "Places"
+#~ msgstr "מיקומים"
+
+#~ msgid "Bookmarks"
+#~ msgstr "סימניות"
+
+#~ msgid "Others"
+#~ msgstr "אחרים"
+
+#~ msgid "Edit avatar"
+#~ msgstr "עריכת תמונה"
+
 #, c-format
 #~ msgid "Scan the QR code to connect to the network <b>%s</b>."
 #~ msgstr "יש לסרוק את קוד ה־QR על מנת להתחבר לרשת <b>%s</b>."
@@ -10491,9 +10534,6 @@ msgstr "צלילי מערכת"
 
 #~ msgid "Application"
 #~ msgstr "יישום"
-
-#~ msgid "Default Applications"
-#~ msgstr "יישומי בררת המחדל"
 
 #~ msgid "_Known Wi-Fi Networks"
 #~ msgstr "רשתות אלחוטיות לא _ידועות"
@@ -13087,9 +13127,6 @@ msgstr "צלילי מערכת"
 #~ msgid "Passwords do not match"
 #~ msgstr "הססמאות אינן תואמות"
 
-#~ msgid "Domain not found."
-#~ msgstr "המתחם לא נמצא"
-
 #~ msgid "Export"
 #~ msgstr "יצוא"
 
@@ -14063,9 +14100,6 @@ msgstr "צלילי מערכת"
 
 #~ msgid "Issue this callback when the value associated with key gets changed"
 #~ msgstr "Issue this callback when the value associated with key gets changed"
-
-#~ msgid "Change set"
-#~ msgstr "Change set"
 
 #~ msgid ""
 #~ "GConf change set containing data to be forwarded to the gconf client on "
