@@ -361,6 +361,7 @@ struct _CcDisplayMonitorDBus
   CcDisplayMonitorPrivacy privacy_screen;
   int max_width;
   int max_height;
+  int min_refresh_rate;
 
   GList *modes;
   CcDisplayMode *current_mode;
@@ -598,6 +599,14 @@ cc_display_monitor_dbus_get_geometry (CcDisplayMonitor *pself,
       if (h)
         *h = -1;
     }
+}
+
+static int
+cc_display_monitor_dbus_get_min_freq (CcDisplayMonitor *pself)
+{
+  CcDisplayMonitorDBus *self = CC_DISPLAY_MONITOR_DBUS (pself);
+
+  return self->min_refresh_rate;
 }
 
 static CcDisplayMode *
@@ -906,6 +915,7 @@ cc_display_monitor_dbus_class_init (CcDisplayMonitorDBusClass *klass)
   parent_class->supports_rotation = cc_display_monitor_dbus_supports_rotation;
   parent_class->get_physical_size = cc_display_monitor_dbus_get_physical_size;
   parent_class->get_geometry = cc_display_monitor_dbus_get_geometry;
+  parent_class->get_min_freq = cc_display_monitor_dbus_get_min_freq;
   parent_class->get_mode = cc_display_monitor_dbus_get_mode;
   parent_class->get_preferred_mode = cc_display_monitor_dbus_get_preferred_mode;
   parent_class->get_id = cc_display_monitor_dbus_get_id;
@@ -1021,6 +1031,10 @@ cc_display_monitor_dbus_new (GVariant *variant,
 
           if (locked)
             self->privacy_screen |= CC_DISPLAY_MONITOR_PRIVACY_LOCKED;
+        }
+      else if (g_str_equal (s, "min-refresh-rate"))
+        {
+          g_variant_get (v, "i", &self->min_refresh_rate);
         }
     }
 

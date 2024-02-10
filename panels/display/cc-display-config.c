@@ -297,6 +297,12 @@ cc_display_monitor_get_geometry (CcDisplayMonitor *self, int *x, int *y, int *w,
   return CC_DISPLAY_MONITOR_GET_CLASS (self)->get_geometry (self, x, y, w, h);
 }
 
+int
+cc_display_monitor_get_min_freq (CcDisplayMonitor *self)
+{
+  return CC_DISPLAY_MONITOR_GET_CLASS (self)->get_min_freq (self);
+}
+
 CcDisplayMode *
 cc_display_monitor_get_mode (CcDisplayMonitor *self)
 {
