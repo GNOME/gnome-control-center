@@ -278,44 +278,66 @@ load_custom_css (void)
 
 /* Callbacks */
 
-static gint
+static int
+goa_provider_priority (const char *provider_type)
+{
+  static const char *goa_priority[] = {
+    "imap_smtp",    /* Email (IMAP and SMTP) */
+    "webdav",       /* Calendars, Contacts, Files (WebDAV) */
+    "owncloud",     /* Nextcloud */
+    "google",       /* Google */
+    "ms_graph",     /* Microsoft 365 */
+    "exchange",     /* Microsoft Exchange */
+    "windows_live", /* Microsoft Personal */
+    "kerberos",     /* Enterprise Login (Kerberos) */
+    "fedora",       /* Fedora */
+  };
+
+  for (size_t i = 0; i < G_N_ELEMENTS (goa_priority); i++)
+    {
+      if (g_str_equal (goa_priority[i], provider_type))
+        return i;
+    }
+
+  /* New or unknown providers are sorted last */
+  return G_N_ELEMENTS (goa_priority) + 1;
+}
+
+static int
 sort_accounts_func (GtkListBoxRow *a,
                     GtkListBoxRow *b,
-                    gpointer       user_data)
+                    gpointer user_data)
 {
   GoaAccount *a_account, *b_account;
   GoaObject *a_object, *b_object;
+  const char *a_name, *b_name;
 
   a_object = cc_online_account_row_get_object (CC_ONLINE_ACCOUNT_ROW (a));
   a_account = goa_object_peek_account (a_object);
+  a_name = goa_account_get_provider_type (a_account);
 
   b_object = cc_online_account_row_get_object (CC_ONLINE_ACCOUNT_ROW (b));
   b_account = goa_object_peek_account (b_object);
+  b_name = goa_account_get_provider_type (b_account);
 
-  return g_strcmp0 (goa_account_get_id (a_account), goa_account_get_id (b_account));
+  return goa_provider_priority (a_name) - goa_provider_priority (b_name);
 }
 
-static gint
+static int
 sort_providers_func (GtkListBoxRow *a,
                      GtkListBoxRow *b,
-                     gpointer       user_data)
+                     gpointer user_data)
 {
   GoaProvider *a_provider, *b_provider;
-  gboolean a_branded, b_branded;
-  GoaProviderFeatures a_features, b_features;
+  const char *a_name, *b_name;
 
   a_provider = cc_online_account_provider_row_get_provider (CC_ONLINE_ACCOUNT_PROVIDER_ROW (a));
-  a_features = goa_provider_get_provider_features (a_provider);
-  a_branded = (a_features & GOA_PROVIDER_FEATURE_BRANDED) != 0;
+  a_name = goa_provider_get_provider_type (a_provider);
 
   b_provider = cc_online_account_provider_row_get_provider (CC_ONLINE_ACCOUNT_PROVIDER_ROW (b));
-  b_features = goa_provider_get_provider_features (b_provider);
-  b_branded = (b_features & GOA_PROVIDER_FEATURE_BRANDED) != 0;
+  b_name = goa_provider_get_provider_type (b_provider);
 
-  if (a_branded != b_branded)
-    return a_branded ? -1 : 1;
-
-  return gtk_list_box_row_get_index (b) - gtk_list_box_row_get_index (a);
+  return goa_provider_priority (a_name) - goa_provider_priority (b_name);
 }
 
 static void
