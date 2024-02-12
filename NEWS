@@ -1,3 +1,90 @@
+===============
+Version 46.beta
+===============
+
+- Drop pkexec dependency
+- Bump gcr dependency to gcr4
+- Reorder sidebar/panel list
+- Use g_clear_handle_id with g_source_remove to remove GSources
+- Add CcHostname as a wrapper to interact with system-hostnamed
+- Remove periods in subtitles/descriptions/labels according to the HIG
+- Various string/sentence rewording (for clarity)
+- Various style changes in symbolic icons
+- Various ports of custom widgets to modern libadwaita alternatives
+- Various new mnemonics added
+- Various CI fixes
+
+Accessibility
+- Expose new "show-status-shapes" setting
+- Rephrase overamplification string in the "Hearing" settings
+- Stop tracking old GTK theme
+- Stop forcing HighContrast icon theme (The theme is considered deprecated)
+
+Apps
+- Tweak headings & descriptions from Default Apps sections
+- Tweak the autorun-never option design (inverting the autorun-never option logic)
+- Use modern libadwaita widgets in the Removable Media settings
+
+Keyboard
+- Use AdwActionRow to show the key modifier options (improves accessibility)
+
+Network
+- Fix missing VPN entries
+
+Mouse
+- Add "Test Settings" button to the body of the panel
+- Modernize mouse test dialog (adds secondary-click test)
+
+Printers
+- Add padding to the sidebar items from "Printer Options"
+- Add .suggested-action style class to "Test Page" button
+
+Privacy
+- Hide non-functional microphone panel
+
+Search
+- Add commandline parameter for opening the Search Locations dialog directly
+- Stop removing non-existent folders from tracker
+- Expose single directory setting
+- Add placeholder for custom locations
+- Set title for non-existent bookmarks
+- Always show switch for default/bookmarks
+- Handle unset XDG dirs
+- Tweak search locations labels
+
+Sharing
+- Fix alignment of networks section in the File/Media sharing dialogs
+- Use edit-delete-symbolic in networks list rather than window-close-symbolic
+- Move main switches from dialog headerbars into the dialog's content area
+
+Sound
+- Show radio buttons as prefix for the Alert Sound rows
+- Add tooltips to all speaker test buttons
+
+System
+- Move "Remote Login" from sharing panel to System (now named "Secure Shell")
+- Use polkit to request permissions to enable/disable sshd
+- Create CcSystemDetailsWindow upon opening (speed up System panel startup time)
+- Fix crash in About page after dark mode switch
+- Don't show Remote Desktop settings when backend is not available
+- Show gnome-control-center version on the "GNOME Version" row in the About page
+- Fix language chooser dialog not closing in Users page
+
+Wacom
+- Port some widgets to modern libadwaita alternatives
+- Switch to using a dialog for stylus button assignments
+- Highlight the currently active stylus
+- Give proper ids and classes to the stylus SVG components
+- Provide connector name for disambiguation
+- Drop list to handle pads
+- Pair only builtin pads with tablets
+- Prefer the stylus over the eraser
+- Don't call the standard styli "Standard stylus"
+
+Wi-Fi
+- Show password when sharing QR Code
+- Fix crash with toast notifications in the Saved Networks dialog
+
 ================
 Version 46.alpha
 ================
