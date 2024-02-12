@@ -484,14 +484,14 @@ cc_online_accounts_panel_set_property (GObject      *object,
             }
 
           /* Waiting for the client to load */
-          if (!gtk_widget_get_sensitive (GTK_WIDGET (self)))
+          if (self->client == NULL)
             {
               g_clear_pointer (&self->parameters, g_variant_unref);
               self->parameters = g_value_dup_variant (value);
             }
           else if (g_strcmp0 (first_arg, "add") == 0)
             {
-              command_add (CC_ONLINE_ACCOUNTS_PANEL (object), self->parameters);
+              command_add (CC_ONLINE_ACCOUNTS_PANEL (object), parameters);
             }
           else if (first_arg != NULL)
             {
