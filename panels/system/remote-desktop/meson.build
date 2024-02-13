@@ -3,6 +3,14 @@ install_data(
   install_dir: join_paths(control_center_icondir, 'hicolor', 'scalable', 'apps')
 )
 
+gnome_remote_desktop = 'org.gnome.RemoteDesktop'
+sources += gnome.gdbus_codegen(
+  gnome_remote_desktop,
+  gnome_remote_desktop + '.xml',
+  interface_prefix: 'org.gnome.',
+  namespace: 'Gsd'
+)
+
 polkit_conf = configuration_data()
 polkit_conf.set('libexecdir', control_center_libexecdir)
 polkit = 'org.gnome.controlcenter.remote-session-helper.policy'
