@@ -48,19 +48,21 @@
                   <object class="AdwPreferencesGroup">
                     <child>
                       <object class="AdwSwitchRow" id="remote_login_row">
-                        <property name="title" translatable="yes">Secu_re Shell</property>
+                        <property name="title" translatable="yes">_Secure Shell</property>
                         <property name="use-underline">True</property>
                         <property name="sensitive">False</property>
                       </object>
                     </child>
                     <child>
                       <object class="AdwActionRow" id="hostname_row">
-                        <property name="title" translatable="yes">SSH Login Command</property>
+                        <property name="title" translatable="yes">SSH Login _Command</property>
+                        <property name="activatable-widget">copy_ssh_login_command_button</property>
+                        <property name="use-underline">True</property>
                         <style>
                           <class name="property"/>
                         </style>
                         <child type="suffix">
-                          <object class="GtkButton">
+                          <object class="GtkButton" id="copy_ssh_login_command_button">
                             <property name="valign">center</property>
                             <property name="tooltip-text" translatable="yes">Copy</property>
                             <property name="icon-name">edit-copy-symbolic</property>
