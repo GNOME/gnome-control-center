@@ -42,12 +42,6 @@ static GtkWidget *cc_sharing_panel_new_media_sharing_row (const char     *uri_or
                                                           CcSharingPanel *self);
 
 #define FILE_SHARING_SCHEMA_ID "org.gnome.desktop.file-sharing"
-#define GNOME_REMOTE_DESKTOP_SCHEMA_ID "org.gnome.desktop.remote-desktop"
-#define GNOME_REMOTE_DESKTOP_RDP_SCHEMA_ID "org.gnome.desktop.remote-desktop.rdp"
-
-#define REMOTE_DESKTOP_STORE_CREDENTIALS_TIMEOUT_S 1
-
-#define REMOTE_DESKTOP_SERVICE "gnome-remote-desktop.service"
 
 struct _CcSharingPanel
 {
@@ -135,30 +129,6 @@ cc_sharing_panel_class_init (CcSharingPanelClass *klass)
 }
 
 static gboolean
-cc_sharing_panel_switch_to_label_transform_func (GBinding       *binding,
-                                                 const GValue   *source_value,
-                                                 GValue         *target_value,
-                                                 CcSharingPanel *self)
-{
-  gboolean active;
-
-  if (!G_VALUE_HOLDS_BOOLEAN (source_value))
-    return FALSE;
-
-  if (!G_VALUE_HOLDS_STRING (target_value))
-    return FALSE;
-
-  active = g_value_get_boolean (source_value);
-
-  if (active)
-    g_value_set_string (target_value, C_("service is enabled", "On"));
-  else
-    g_value_set_string (target_value, C_("service is disabled", "Off"));
-
-  return TRUE;
-}
-
-static gboolean
 cc_sharing_panel_networks_to_label_transform_func (GBinding       *binding,
                                                    const GValue   *source_value,
                                                    GValue         *target_value,
@@ -189,17 +159,6 @@ cc_sharing_panel_networks_to_label_transform_func (GBinding       *binding,
   }
 
   return TRUE;
-}
-
-static void
-cc_sharing_panel_bind_switch_to_label (CcSharingPanel *self,
-                                       GtkWidget      *gtkswitch,
-                                       GtkWidget      *row)
-{
-  g_object_bind_property_full (gtkswitch, "active", row, "secondary-label",
-                               G_BINDING_SYNC_CREATE,
-                               (GBindingTransformFunc) cc_sharing_panel_switch_to_label_transform_func,
-                               NULL, self, NULL);
 }
 
 static void
