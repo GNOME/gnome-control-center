@@ -244,6 +244,17 @@ style-check-diff:
   script:
     - .gitlab-ci/run-style-check-diff.sh
 
+check-potfiles:
+  extends:
+  - '.fdo.distribution-image@fedora'
+  - '.fedora.container.common'
+  needs:
+  - build.container.fedora@x86_64
+  stage: test
+  when: always
+  script:
+    - .gitlab-ci/check-potfiles.sh
+
 test:
   extends:
     - '.fdo.distribution-image@fedora'
