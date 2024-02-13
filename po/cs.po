@@ -26,8 +26,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2024-02-09 15:46+0000\n"
-"PO-Revision-Date: 2024-02-10 00:02+0100\n"
+"POT-Creation-Date: 2024-02-13 13:09+0000\n"
+"PO-Revision-Date: 2024-02-13 23:16+0100\n"
 "Last-Translator: Daniel Rusek <mail@asciiwolf.com>\n"
 "Language-Team: Czech <gnome-cs-list@gnome.org>\n"
 "Language: cs\n"
@@ -39,37 +39,37 @@ msgstr ""
 "X-Project-Style: gnome\n"
 
 #. Translators: %s is an app name. (e.g. "Firefox is not sandboxed")
-#: panels/applications/cc-applications-panel.c:783
+#: panels/applications/cc-applications-panel.c:786
 #, c-format
 msgid "%s is not sandboxed"
 msgstr "%s není v izolovaném prostředí"
 
-#: panels/applications/cc-applications-panel.c:829
+#: panels/applications/cc-applications-panel.c:832
 msgid "System Bus"
 msgstr "Systémová sběrnice"
 
-#: panels/applications/cc-applications-panel.c:829
-#: panels/applications/cc-applications-panel.c:831
-#: panels/applications/cc-applications-panel.c:844
-#: panels/applications/cc-applications-panel.c:849
+#: panels/applications/cc-applications-panel.c:832
+#: panels/applications/cc-applications-panel.c:834
+#: panels/applications/cc-applications-panel.c:847
+#: panels/applications/cc-applications-panel.c:852
 msgid "Full access"
 msgstr "Plný přístup"
 
-#: panels/applications/cc-applications-panel.c:831
+#: panels/applications/cc-applications-panel.c:834
 msgid "Session Bus"
 msgstr "Sběrnice sezení"
 
-#: panels/applications/cc-applications-panel.c:835
+#: panels/applications/cc-applications-panel.c:838
 #: panels/privacy/cc-bolt-page.ui:240 panels/privacy/cc-bolt-page.ui:284
 #: panels/privacy/cc-privacy-panel.ui:74
 msgid "Devices"
 msgstr "Zařízení"
 
-#: panels/applications/cc-applications-panel.c:835
+#: panels/applications/cc-applications-panel.c:838
 msgid "Full access to /dev"
 msgstr "Úplný přístup k /dev"
 
-#: panels/applications/cc-applications-panel.c:839
+#: panels/applications/cc-applications-panel.c:842
 #: panels/network/cc-network-panel.ui:8
 #: panels/network/gnome-network-panel.desktop.in:3
 #: panels/network/network-mobile.ui:235 panels/wwan/cc-wwan-device-page.ui:61
@@ -77,38 +77,38 @@ msgstr "Úplný přístup k /dev"
 msgid "Network"
 msgstr "Síť"
 
-#: panels/applications/cc-applications-panel.c:839
+#: panels/applications/cc-applications-panel.c:842
 msgid "Has network access"
 msgstr "Má přístup k síti"
 
-#: panels/applications/cc-applications-panel.c:844
-#: panels/applications/cc-applications-panel.c:846
+#: panels/applications/cc-applications-panel.c:847
+#: panels/applications/cc-applications-panel.c:849
 #: panels/search/cc-search-locations-dialog.c:412
 msgid "Home"
 msgstr "Domů"
 
-#: panels/applications/cc-applications-panel.c:846
-#: panels/applications/cc-applications-panel.c:851
+#: panels/applications/cc-applications-panel.c:849
+#: panels/applications/cc-applications-panel.c:854
 msgid "Read-only"
 msgstr "Jen ke čtení"
 
-#: panels/applications/cc-applications-panel.c:849
-#: panels/applications/cc-applications-panel.c:851
+#: panels/applications/cc-applications-panel.c:852
+#: panels/applications/cc-applications-panel.c:854
 msgid "File System"
 msgstr "Souborový systém"
 
-#: panels/applications/cc-applications-panel.c:855
+#: panels/applications/cc-applications-panel.c:858
 #: panels/keyboard/01-launchers.xml.in:6
 #: shell/appdata/org.gnome.Settings.appdata.xml.in:7 shell/cc-window.c:760
 #: shell/cc-window.ui:20 shell/org.gnome.Settings.desktop.in:3
 msgid "Settings"
 msgstr "Nastavení"
 
-#: panels/applications/cc-applications-panel.c:855
+#: panels/applications/cc-applications-panel.c:858
 msgid "Can change settings"
 msgstr "Nastavení lze měnit"
 
-#: panels/applications/cc-applications-panel.c:857
+#: panels/applications/cc-applications-panel.c:860
 #, c-format
 msgid ""
 "<b>%s</b> requires access to the following system resources. To stop this "
@@ -117,7 +117,7 @@ msgstr ""
 "Aplikace <b>%s</b> požaduje přístup k následujícím systémovým zdrojům. Pro "
 "zastavení tohoto přístupu musí být aplikace odebrána."
 
-#: panels/applications/cc-applications-panel.c:1191
+#: panels/applications/cc-applications-panel.c:1194
 #, c-format
 msgid "%u file and link type that is opened by the app"
 msgid_plural "%u file and link types that are opened by the app"
@@ -125,13 +125,13 @@ msgstr[0] "%u typ souboru a odkazu, který otevírá tato aplikace"
 msgstr[1] "%u typy souborů a odkazů, které otevírá tato aplikace"
 msgstr[2] "%u typů souborů a odkazů, které otevírá tato aplikace"
 
-#: panels/applications/cc-applications-panel.c:1198
+#: panels/applications/cc-applications-panel.c:1201
 #, c-format
 msgid "<b>%s</b> is used to open the following types of files and links."
 msgstr "<b>%s</b> se používá k otevření následujících typů souborů a odkazů."
 
 #. Translators: '%s' is the formatted size, e.g. "26.2 MB"
-#: panels/applications/cc-applications-panel.c:1264
+#: panels/applications/cc-applications-panel.c:1267
 #, c-format
 msgid "%s of disk space used"
 msgstr "Z místa na disku je využito %s"
@@ -158,14 +158,27 @@ msgid "_Find in Software"
 msgstr "Najít v So_ftware"
 
 #: panels/applications/cc-applications-panel.ui:140
+#: panels/applications/cc-default-apps-page.ui:4
 msgid "Default Apps"
 msgstr "Výchozí aplikace"
 
-#: panels/applications/cc-applications-panel.ui:169
+#: panels/applications/cc-applications-panel.ui:158
+msgid "Removable Media"
+msgstr "Výměnná média"
+
+#: panels/applications/cc-applications-panel.ui:161
+msgid "Automat_ically Launch Apps"
+msgstr "Automat_icky spouštět aplikace"
+
+#: panels/applications/cc-applications-panel.ui:162
+msgid "Start apps when media is connected or inserted"
+msgstr "Spustit aplikace po připojení nebo vložení média"
+
+#: panels/applications/cc-applications-panel.ui:183
 msgid "App Settings"
 msgstr "Nastavení aplikací"
 
-#: panels/applications/cc-applications-panel.ui:189
+#: panels/applications/cc-applications-panel.ui:203
 msgid ""
 "App settings cannot be fully enforced for apps which are not sandboxed. "
 "These apps may use permissions which are not shown."
@@ -173,27 +186,27 @@ msgstr ""
 "Nastavení aplikací nelze plně vynutit u aplikací, které nejsou v izolovaném "
 "prostoru. Tyto aplikace mohou používat oprávnění, která nejsou zobrazena."
 
-#: panels/applications/cc-applications-panel.ui:232
+#: panels/applications/cc-applications-panel.ui:246
 #: panels/printers/pp-details-dialog.c:267
-#: panels/sharing/cc-sharing-panel.c:297
+#: panels/sharing/cc-sharing-panel.c:240
 msgid "_Open"
 msgstr "_Otevřít"
 
-#: panels/applications/cc-applications-panel.ui:244
+#: panels/applications/cc-applications-panel.ui:258
 msgid "App _Details"
 msgstr "Po_drobnosti o aplikaci"
 
-#: panels/applications/cc-applications-panel.ui:262
+#: panels/applications/cc-applications-panel.ui:276
 msgid "Permissions"
 msgstr "Oprávnění"
 
-#: panels/applications/cc-applications-panel.ui:265
-#: panels/applications/cc-applications-panel.ui:273
+#: panels/applications/cc-applications-panel.ui:279
+#: panels/applications/cc-applications-panel.ui:287
 msgid "_Search"
 msgstr "_Hledat"
 
-#: panels/applications/cc-applications-panel.ui:266
-#: panels/applications/cc-applications-panel.ui:274
+#: panels/applications/cc-applications-panel.ui:280
+#: panels/applications/cc-applications-panel.ui:288
 msgid "Receive system searches and send results"
 msgstr "Přijímat od systému požadavky na hledání a předávat výsledky"
 
@@ -202,11 +215,11 @@ msgstr "Přijímat od systému požadavky na hledání a předávat výsledky"
 #.
 #. translators:
 #. * The device has been disabled
-#: panels/applications/cc-applications-panel.ui:275
-#: panels/applications/cc-applications-panel.ui:322
-#: panels/applications/cc-applications-panel.ui:344
-#: panels/applications/cc-applications-panel.ui:359
-#: panels/applications/cc-applications-panel.ui:374
+#: panels/applications/cc-applications-panel.ui:289
+#: panels/applications/cc-applications-panel.ui:336
+#: panels/applications/cc-applications-panel.ui:358
+#: panels/applications/cc-applications-panel.ui:373
+#: panels/applications/cc-applications-panel.ui:388
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:123
 #: panels/keyboard/cc-xkb-modifier-dialog.c:342
 #: panels/keyboard/keyboard-shortcuts.c:367
@@ -216,231 +229,223 @@ msgstr "Přijímat od systému požadavky na hledání a předávat výsledky"
 msgid "Disabled"
 msgstr "Vypnuto"
 
-#: panels/applications/cc-applications-panel.ui:280
+#: panels/applications/cc-applications-panel.ui:294
 msgid "_Notifications"
 msgstr "_Upozornění"
 
-#: panels/applications/cc-applications-panel.ui:281
+#: panels/applications/cc-applications-panel.ui:295
 msgid "Show system notifications"
 msgstr "Zobrazovat systémová upozornění"
 
-#: panels/applications/cc-applications-panel.ui:288
+#: panels/applications/cc-applications-panel.ui:302
 msgid "_Run in Background"
 msgstr "_Běh na pozadí"
 
-#: panels/applications/cc-applications-panel.ui:289
+#: panels/applications/cc-applications-panel.ui:303
 msgid "Allow activity when the app is closed"
 msgstr "Povolit činnost, i když je aplikace zavřená"
 
-#: panels/applications/cc-applications-panel.ui:296
+#: panels/applications/cc-applications-panel.ui:310
 msgid "Scr_eenshots"
 msgstr "_Snímky obrazovky"
 
-#: panels/applications/cc-applications-panel.ui:297
+#: panels/applications/cc-applications-panel.ui:311
 msgid "Take pictures of the screen at any time"
 msgstr "Kdykoliv pořizovat snímky obrazovky"
 
-#: panels/applications/cc-applications-panel.ui:304
+#: panels/applications/cc-applications-panel.ui:318
 msgid "Change _Wallpaper"
 msgstr "Změnit _tapetu"
 
-#: panels/applications/cc-applications-panel.ui:305
+#: panels/applications/cc-applications-panel.ui:319
 msgid "Change the desktop wallpaper"
 msgstr "Měnit tapetu na ploše"
 
-#: panels/applications/cc-applications-panel.ui:312
-#: panels/applications/cc-applications-panel.ui:320
+#: panels/applications/cc-applications-panel.ui:326
+#: panels/applications/cc-applications-panel.ui:334
 msgid "So_unds"
 msgstr "Zv_uky"
 
-#: panels/applications/cc-applications-panel.ui:313
-#: panels/applications/cc-applications-panel.ui:321
+#: panels/applications/cc-applications-panel.ui:327
+#: panels/applications/cc-applications-panel.ui:335
 msgid "Reproduce sounds"
 msgstr "Produkovat zvuky"
 
-#: panels/applications/cc-applications-panel.ui:327
+#: panels/applications/cc-applications-panel.ui:341
 msgid "_Inhibit Shortcuts"
 msgstr "_Blokovat klávesové zkratky"
 
-#: panels/applications/cc-applications-panel.ui:328
+#: panels/applications/cc-applications-panel.ui:342
 msgid "Block standard keyboard shortcuts"
 msgstr "Znemožňovat použití standardních klávesových zkratek"
 
-#: panels/applications/cc-applications-panel.ui:335
+#: panels/applications/cc-applications-panel.ui:349
 msgid "Camera"
 msgstr "Kamera"
 
-#: panels/applications/cc-applications-panel.ui:336
-#: panels/applications/cc-applications-panel.ui:343
+#: panels/applications/cc-applications-panel.ui:350
+#: panels/applications/cc-applications-panel.ui:357
 msgid "Take pictures with the camera"
 msgstr "Pořizovat obrázky pomocí kamery"
 
-#: panels/applications/cc-applications-panel.ui:342
+#: panels/applications/cc-applications-panel.ui:356
 msgid "C_amera"
 msgstr "K_amera"
 
-#: panels/applications/cc-applications-panel.ui:349
-#: panels/applications/cc-applications-panel.ui:357
+#: panels/applications/cc-applications-panel.ui:363
+#: panels/applications/cc-applications-panel.ui:371
 msgid "_Microphone"
 msgstr "_Mikrofon"
 
-#: panels/applications/cc-applications-panel.ui:350
-#: panels/applications/cc-applications-panel.ui:358
+#: panels/applications/cc-applications-panel.ui:364
+#: panels/applications/cc-applications-panel.ui:372
 msgid "Record audio with the microphone"
 msgstr "Nahrávat zvuk pomocí mikrofonu"
 
-#: panels/applications/cc-applications-panel.ui:364
-#: panels/applications/cc-applications-panel.ui:372
+#: panels/applications/cc-applications-panel.ui:378
+#: panels/applications/cc-applications-panel.ui:386
 msgid "_Location Services"
 msgstr "Služby určování po_lohy"
 
-#: panels/applications/cc-applications-panel.ui:365
-#: panels/applications/cc-applications-panel.ui:373
+#: panels/applications/cc-applications-panel.ui:379
+#: panels/applications/cc-applications-panel.ui:387
 msgid "Access device location data"
 msgstr "Přistupovat k údajům o zeměpisné poloze zařízení"
 
-#: panels/applications/cc-applications-panel.ui:384
+#: panels/applications/cc-applications-panel.ui:398
 msgid "Re_quired Access"
 msgstr "Poža_dovaný přístup"
 
-#: panels/applications/cc-applications-panel.ui:385
+#: panels/applications/cc-applications-panel.ui:399
 msgid "System access that is required by the app"
 msgstr "Přístup k systému, který tato aplikace požaduje."
 
-#: panels/applications/cc-applications-panel.ui:396
+#: panels/applications/cc-applications-panel.ui:410
 #: panels/mouse/cc-mouse-panel.ui:66
 #: panels/multitasking/cc-multitasking-panel.ui:15
 #: panels/power/cc-power-panel.ui:185
 msgid "General"
 msgstr "Obecné"
 
-#: panels/applications/cc-applications-panel.ui:399
+#: panels/applications/cc-applications-panel.ui:413
 msgid "_File &amp; Link Associations"
 msgstr "Přiřazené _soubory a odkazy"
 
-#: panels/applications/cc-applications-panel.ui:407
+#: panels/applications/cc-applications-panel.ui:421
 msgid "S_torage"
 msgstr "Úložiš_tě"
 
-#: panels/applications/cc-applications-panel.ui:430
+#: panels/applications/cc-applications-panel.ui:444
 msgid "Required Access"
 msgstr "Požadovaný přístup"
 
-#: panels/applications/cc-applications-panel.ui:476
+#: panels/applications/cc-applications-panel.ui:490
 msgid "File & Link Associations"
 msgstr "Přiřazené soubory a odkazy"
 
-#: panels/applications/cc-applications-panel.ui:505
+#: panels/applications/cc-applications-panel.ui:519
 msgid "File Types"
 msgstr "Typy souborů"
 
-#: panels/applications/cc-applications-panel.ui:511
+#: panels/applications/cc-applications-panel.ui:525
 msgid "Link Types"
 msgstr "Typy odkazů"
 
-#: panels/applications/cc-applications-panel.ui:521
+#: panels/applications/cc-applications-panel.ui:535
 msgid "_Reset"
 msgstr "_Původní"
 
-#: panels/applications/cc-applications-panel.ui:542
+#: panels/applications/cc-applications-panel.ui:556
 msgid "Storage"
 msgstr "Úložiště"
 
-#: panels/applications/cc-applications-panel.ui:567
+#: panels/applications/cc-applications-panel.ui:581
 msgid "How much disk space this app is occupying with app data and caches"
 msgstr "Kolik místa na disku tato aplikace zabírá, včetně dat a mezipamětí"
 
-#: panels/applications/cc-applications-panel.ui:572
+#: panels/applications/cc-applications-panel.ui:586
 msgid "App"
 msgstr "Aplikace"
 
-#: panels/applications/cc-applications-panel.ui:578
+#: panels/applications/cc-applications-panel.ui:592
 msgid "Data"
 msgstr "Data"
 
-#: panels/applications/cc-applications-panel.ui:584
+#: panels/applications/cc-applications-panel.ui:598
 msgid "Cache"
 msgstr "Mezipaměť"
 
-#: panels/applications/cc-applications-panel.ui:590
+#: panels/applications/cc-applications-panel.ui:604
 msgid "<b>Total</b>"
 msgstr "<b>Celkem</b>"
 
-#: panels/applications/cc-applications-panel.ui:600
+#: panels/applications/cc-applications-panel.ui:614
 msgid "_Clear Cache"
 msgstr "_Vyprázdnit mezipaměť"
 
-#: panels/applications/cc-default-apps-page.ui:4
-msgid "Links &amp; Files"
-msgstr "Odkazy a soubory"
-
-#: panels/applications/cc-default-apps-page.ui:5
-msgid "Apps which are used to open common links and files"
-msgstr "Aplikace, které se používají k otevírání běžných odkazů a souborů"
-
-#: panels/applications/cc-default-apps-page.ui:8
+#: panels/applications/cc-default-apps-page.ui:7
 msgid "_Web"
 msgstr "_Web"
 
-#: panels/applications/cc-default-apps-page.ui:17
+#: panels/applications/cc-default-apps-page.ui:16
 msgid "_Mail"
 msgstr "_Pošta"
 
-#: panels/applications/cc-default-apps-page.ui:25
+#: panels/applications/cc-default-apps-page.ui:24
 msgid "_Calendar"
 msgstr "_Kalendář"
 
-#: panels/applications/cc-default-apps-page.ui:33
+#: panels/applications/cc-default-apps-page.ui:32
 msgid "M_usic"
 msgstr "H_udba"
 
-#: panels/applications/cc-default-apps-page.ui:42
+#: panels/applications/cc-default-apps-page.ui:41
 msgid "_Video"
 msgstr "_Video"
 
-#: panels/applications/cc-default-apps-page.ui:51
+#: panels/applications/cc-default-apps-page.ui:50
 msgid "_Photos"
 msgstr "_Fotografie"
 
 #. Translators: This is a telephone call
-#: panels/applications/cc-default-apps-page.ui:61
+#: panels/applications/cc-default-apps-page.ui:60
 msgid "Ca_lls"
 msgstr "Vo_lání"
 
-#: panels/applications/cc-default-apps-page.ui:70
+#: panels/applications/cc-default-apps-page.ui:69
 msgid "_SMS"
 msgstr "_SMS"
 
-#: panels/applications/cc-removable-media-settings.c:289
+#: panels/applications/cc-removable-media-settings.c:287
 msgid "Ask what to do"
 msgstr "Zeptat se na další postup"
 
-#: panels/applications/cc-removable-media-settings.c:293
+#: panels/applications/cc-removable-media-settings.c:291
 msgid "Do nothing"
 msgstr "Nic nedělat"
 
-#: panels/applications/cc-removable-media-settings.c:297
+#: panels/applications/cc-removable-media-settings.c:295
 msgid "Open folder"
 msgstr "Otevřít složku"
 
-#: panels/applications/cc-removable-media-settings.c:388
+#: panels/applications/cc-removable-media-settings.c:386
 msgid "Select an app for audio CDs"
 msgstr "Vyberte aplikaci pro zvuková CD"
 
-#: panels/applications/cc-removable-media-settings.c:389
+#: panels/applications/cc-removable-media-settings.c:387
 msgid "Select an app for video DVDs"
 msgstr "Vyberte aplikaci pro DVD s videem"
 
-#: panels/applications/cc-removable-media-settings.c:390
+#: panels/applications/cc-removable-media-settings.c:388
 msgid "Select an app to run when a music player is connected"
 msgstr ""
 "Vyberte aplikaci, která má být spuštěna po připojení hudebního přehrávače"
 
-#: panels/applications/cc-removable-media-settings.c:391
+#: panels/applications/cc-removable-media-settings.c:389
 msgid "Select an app to run when a camera is connected"
 msgstr "Vyberte aplikaci, která má být spuštěna po připojení fotoaparátu"
 
-#: panels/applications/cc-removable-media-settings.c:392
+#: panels/applications/cc-removable-media-settings.c:390
 msgid "Select an app for software CDs"
 msgstr "Vyberte aplikaci pro CD se softwarem"
 
@@ -449,107 +454,91 @@ msgstr "Vyberte aplikaci pro CD se softwarem"
 #. * If the shared-mime-info translation works for your language,
 #. * simply leave these untranslated.
 #.
-#: panels/applications/cc-removable-media-settings.c:404
+#: panels/applications/cc-removable-media-settings.c:402
 msgid "audio DVD"
 msgstr "zvukové DVD"
 
-#: panels/applications/cc-removable-media-settings.c:405
+#: panels/applications/cc-removable-media-settings.c:403
 msgid "blank Blu-ray disc"
 msgstr "prázdný disk Blu-ray"
 
-#: panels/applications/cc-removable-media-settings.c:406
+#: panels/applications/cc-removable-media-settings.c:404
 msgid "blank CD disc"
 msgstr "prázdný disk CD"
 
-#: panels/applications/cc-removable-media-settings.c:407
+#: panels/applications/cc-removable-media-settings.c:405
 msgid "blank DVD disc"
 msgstr "prázdný disk DVD"
 
-#: panels/applications/cc-removable-media-settings.c:408
+#: panels/applications/cc-removable-media-settings.c:406
 msgid "blank HD DVD disc"
 msgstr "prázdný disk HD DVD"
 
-#: panels/applications/cc-removable-media-settings.c:409
+#: panels/applications/cc-removable-media-settings.c:407
 msgid "Blu-ray video disc"
 msgstr "videodisk Blu-ray"
 
-#: panels/applications/cc-removable-media-settings.c:410
+#: panels/applications/cc-removable-media-settings.c:408
 msgid "e-book reader"
 msgstr "čtečka elektronických knih"
 
-#: panels/applications/cc-removable-media-settings.c:411
+#: panels/applications/cc-removable-media-settings.c:409
 msgid "HD DVD video disc"
 msgstr "videodisk HD DVD"
 
-#: panels/applications/cc-removable-media-settings.c:412
+#: panels/applications/cc-removable-media-settings.c:410
 msgid "Picture CD"
 msgstr "Picture CD"
 
-#: panels/applications/cc-removable-media-settings.c:413
+#: panels/applications/cc-removable-media-settings.c:411
 msgid "Super Video CD"
 msgstr "Super Video CD"
 
-#: panels/applications/cc-removable-media-settings.c:414
+#: panels/applications/cc-removable-media-settings.c:412
 msgid "Video CD"
 msgstr "Video CD"
 
-#: panels/applications/cc-removable-media-settings.c:415
+#: panels/applications/cc-removable-media-settings.c:413
 msgid "Windows software"
 msgstr "Software Windows"
 
-#: panels/applications/cc-removable-media-settings.ui:5
-msgid "Removable Media"
-msgstr "Výměnná média"
-
-#: panels/applications/cc-removable-media-settings.ui:6
-msgid "Apps which are launched when media or drives are connected"
-msgstr "Aplikace, které jsou spuštěny po připojení médií nebo jednotek"
-
-#: panels/applications/cc-removable-media-settings.ui:9
-msgid "D_isable Autostart"
-msgstr "Zakázat automat_ické spouštění"
-
-#: panels/applications/cc-removable-media-settings.ui:10
-msgid "Never prompt or start apps on media insertion"
-msgstr "Nikdy se nedotazovat nebo spouštět aplikace na vloženém médiu"
-
-#: panels/applications/cc-removable-media-settings.ui:16
+#: panels/applications/cc-removable-media-settings.ui:7
 msgid "CD _Audio"
 msgstr "Zvukové _CD"
 
-#: panels/applications/cc-removable-media-settings.ui:29
+#: panels/applications/cc-removable-media-settings.ui:20
 msgid "_DVD Video"
 msgstr "Videodisk _DVD"
 
-#: panels/applications/cc-removable-media-settings.ui:42
+#: panels/applications/cc-removable-media-settings.ui:33
 msgid "Music Pla_yer"
 msgstr "_Hudební přehrávač"
 
-#: panels/applications/cc-removable-media-settings.ui:55
+#: panels/applications/cc-removable-media-settings.ui:46
 msgid "P_hotos"
 msgstr "_Fotografie"
 
-#: panels/applications/cc-removable-media-settings.ui:68
+#: panels/applications/cc-removable-media-settings.ui:59
 msgid "Sof_tware"
 msgstr "Sof_tware"
 
-#: panels/applications/cc-removable-media-settings.ui:81
+#: panels/applications/cc-removable-media-settings.ui:72
 msgid "_Other Media"
 msgstr "_Ostatní média"
 
-#: panels/applications/cc-removable-media-settings.ui:83
+#: panels/applications/cc-removable-media-settings.ui:74
 msgid "Select how other media should be handled"
 msgstr "Vyberte, jak by měla být obsluhována ostatní média"
 
-#: panels/applications/cc-removable-media-settings.ui:100
+#: panels/applications/cc-removable-media-settings.ui:91
 msgid "Other Media"
 msgstr "Ostatní média"
 
-#: panels/applications/cc-removable-media-settings.ui:132
+#: panels/applications/cc-removable-media-settings.ui:123
 msgid "_Type"
 msgstr "_Typ"
 
-#: panels/applications/cc-removable-media-settings.ui:152
+#: panels/applications/cc-removable-media-settings.ui:143
 msgid "_Action"
 msgstr "Č_innost"
 
@@ -1001,7 +990,7 @@ msgstr "Kalibrace displeje"
 #: panels/network/connection-editor/connection-editor.ui:16
 #: panels/printers/new-printer-dialog.ui:54
 #: panels/printers/pp-details-dialog.c:266 panels/privacy/cc-usage-page.c:136
-#: panels/sharing/cc-sharing-panel.c:296
+#: panels/sharing/cc-sharing-panel.c:239
 #: panels/system/region/cc-format-chooser.ui:24
 #: panels/system/users/cc-add-user-dialog.ui:25
 #: panels/system/users/cc-avatar-chooser.c:92
@@ -4270,60 +4259,46 @@ msgstr "Určit, jak jsou upozornění zobrazována a co ukazují"
 msgid "Notifications;Banner;Message;Tray;Popup;"
 msgstr "upozornění;proužek;zpráva;oblast;pruh;cedule;baner;banner;vyskakovací;"
 
-#: panels/online-accounts/cc-online-account-provider-row.c:95
+#: panels/online-accounts/cc-online-account-provider-row.c:55
+msgid "Email"
+msgstr "E-mail"
+
+#. IMAP and SMTP
+#: panels/online-accounts/cc-online-account-provider-row.c:56
+msgid "Calendars, Contacts, Files"
+msgstr "Kalendáře, kontakty, soubory"
+
+#. WebDAV
+#. Nextcloud
+#. Google
+#. Microsoft 365
+#. Microsoft Exchange
+#. Microsoft Personal
+#: panels/online-accounts/cc-online-account-provider-row.c:62
+msgid "Enterprise Login"
+msgstr "Podnikové přihlašování"
+
+#: panels/online-accounts/cc-online-account-provider-row.c:136
 msgctxt "Online Account"
 msgid "Other"
 msgstr "Jiný"
 
-#. Translators: The %s is the username (eg., debarshi.ray@gmail.com
-#. * or rishi).
-#.
-#: panels/online-accounts/cc-online-accounts-panel.c:280
-#, c-format
-msgid "%s removed"
-msgstr "%s byl odebrán"
-
-#: panels/online-accounts/cc-online-accounts-panel.c:696
-msgid "Error removing account"
-msgstr "Chyba při odebírání účtu"
-
-#. Translators: This is the button which allows undoing the removal of the printer.
-#: panels/online-accounts/cc-online-accounts-panel.ui:29
-#: panels/printers/cc-printers-panel.ui:81
-msgid "Undo"
-msgstr "Zpět"
-
-#: panels/online-accounts/cc-online-accounts-panel.ui:37
-msgid "Close the notification"
-msgstr "Zavřít upozornění"
-
-#: panels/online-accounts/cc-online-accounts-panel.ui:61
+#: panels/online-accounts/cc-online-accounts-panel.ui:16
 msgid "Offline — unable to connect accounts"
 msgstr "Offline — účty nelze připojit"
 
-#: panels/online-accounts/cc-online-accounts-panel.ui:67
+#: panels/online-accounts/cc-online-accounts-panel.ui:22
 msgid "Allow apps to access online services by connecting your cloud accounts"
 msgstr ""
 "Povolte aplikacím přístup ke službám online připojením vašich cloudových účtů"
 
-#: panels/online-accounts/cc-online-accounts-panel.ui:71
+#: panels/online-accounts/cc-online-accounts-panel.ui:26
 msgid "Your Accounts"
 msgstr "Vaše účty"
 
-#: panels/online-accounts/cc-online-accounts-panel.ui:91
+#: panels/online-accounts/cc-online-accounts-panel.ui:46
 msgid "Connect an Account"
 msgstr "Připojit účet"
-
-#. translators: This is the title of the "Show Account" dialog. The
-#. * %s is the name of the provider. e.g., 'Google'.
-#: panels/online-accounts/gnome-control-center-goa-helper.c:428
-#, c-format
-msgid "%s Account"
-msgstr "Účet %s"
-
-#: panels/online-accounts/gnome-control-center-goa-helper.c:431
-msgid "Remove Account"
-msgstr "Odebrat účet"
 
 #: panels/online-accounts/gnome-online-accounts-panel.desktop.in:3
 msgid "Online Accounts"
@@ -4661,40 +4636,40 @@ msgid "A_utomatic Screen Brightness"
 msgstr "A_utomatický jas obrazovky"
 
 #: panels/power/cc-power-panel.ui:131
-msgid "Screen brightness adjusts to the surrounding light"
-msgstr "Jas obrazovky se přizpůsobuje okolnímu světlu"
+msgid "Adjust screen brightness to the surrounding light"
+msgstr "Přizpůsobit jas obrazovky okolnímu světlu"
 
 #: panels/power/cc-power-panel.ui:138
 msgid "_Dim Screen"
 msgstr "_Stmívání obrazovky"
 
 #: panels/power/cc-power-panel.ui:139
-msgid "Reduces the screen brightness when the computer is inactive"
-msgstr "Sníží jas obrazovky, když je počítač neaktivní"
+msgid "Reduce screen brightness when the computer is inactive"
+msgstr "Snížit jas obrazovky, když je počítač neaktivní"
 
 #: panels/power/cc-power-panel.ui:145
 msgid "Screen _Blank"
 msgstr "Zhasínat _obrazovku"
 
 #: panels/power/cc-power-panel.ui:146
-msgid "Turns the screen off after a period of inactivity"
-msgstr "Vypne obrazovku po nějaké době nečinnosti"
+msgid "Turn the screen off after a period of inactivity"
+msgstr "Vypnout obrazovku po nějaké době nečinnosti"
 
 #: panels/power/cc-power-panel.ui:154
 msgid "Automatic Power _Saver"
 msgstr "Automatický režim š_etření energií"
 
 #: panels/power/cc-power-panel.ui:155
-msgid "Enables power saver mode when battery is low"
-msgstr "Zapne režim šetření energií, když je nízký stav baterie"
+msgid "Turn on power saver mode when battery power is low"
+msgstr "Zapnout režim šetření energií, když je nízký stav baterie"
 
 #: panels/power/cc-power-panel.ui:162
 msgid "_Automatic Suspend"
 msgstr "_Automaticky uspat"
 
 #: panels/power/cc-power-panel.ui:163
-msgid "Pauses the computer after a period of inactivity"
-msgstr "Pozastaví běh počítače po nějaké době nečinnosti"
+msgid "Pause the computer after a period of inactivity"
+msgstr "Pozastavit běh počítače po nějaké době nečinnosti"
 
 #: panels/power/cc-power-panel.ui:189
 msgid "Po_wer Button Behavior"
@@ -4802,6 +4777,11 @@ msgstr "Přid_at tiskárnu…"
 msgid "Search printers"
 msgstr "hledat tiskárny"
 
+#. Translators: This is the button which allows undoing the removal of the printer.
+#: panels/printers/cc-printers-panel.ui:81
+msgid "Undo"
+msgstr "Zpět"
+
 #: panels/printers/cc-printers-panel.ui:166
 msgid "No Printers"
 msgstr "Žádné tiskárny"
@@ -4842,7 +4822,6 @@ msgstr "Přidat tiskárnu"
 #: panels/printers/new-printer-dialog.ui:69
 #: panels/system/region/cc-format-chooser.ui:37
 #: panels/system/users/cc-fingerprint-dialog.ui:44
-#: panels/wacom/cc-wacom-stylus-page.ui:141
 #: panels/wwan/cc-wwan-apn-dialog.ui:21
 msgid "Back"
 msgstr "Zpět"
@@ -6613,7 +6592,7 @@ msgid "Subfolders must be manually added for this location"
 msgstr "Pro toto umístění je nutné ručně přidat podsložky"
 
 #: panels/search/cc-search-locations-dialog.c:572
-#: panels/sharing/cc-sharing-panel.c:418
+#: panels/sharing/cc-sharing-panel.c:361
 msgid "Remove Folder"
 msgstr "Odebrat složku"
 
@@ -6695,41 +6674,31 @@ msgstr "hledání;hledat;najít;index;skrýt;soukromí;privátní;výsledky;"
 msgid "No networks selected for sharing"
 msgstr "Nebyly zvoleny žádné sítě pro sdílení"
 
-#: panels/sharing/cc-sharing-networks.ui:13
-#: panels/sharing/cc-sharing-panel.ui:114
-msgid "Networks"
-msgstr "Sítě"
-
-#: panels/sharing/cc-sharing-panel.c:170
-msgctxt "service is enabled"
-msgid "On"
-msgstr "Zapnuto"
-
-#: panels/sharing/cc-sharing-panel.c:172 panels/sharing/cc-sharing-panel.c:195
+#: panels/sharing/cc-sharing-panel.c:149
 msgctxt "service is disabled"
 msgid "Off"
 msgstr "Vypnuto"
 
-#: panels/sharing/cc-sharing-panel.c:198
+#: panels/sharing/cc-sharing-panel.c:152
 msgctxt "service is enabled"
 msgid "Enabled"
 msgstr "Zapnuto"
 
-#: panels/sharing/cc-sharing-panel.c:201
+#: panels/sharing/cc-sharing-panel.c:155
 msgctxt "service is active"
 msgid "Active"
 msgstr "Aktivní"
 
-#: panels/sharing/cc-sharing-panel.c:293
+#: panels/sharing/cc-sharing-panel.c:236
 msgid "Choose a Folder"
 msgstr "Výběr složky"
 
-#: panels/sharing/cc-sharing-panel.c:441
+#: panels/sharing/cc-sharing-panel.c:384
 msgid "Add Folder"
 msgstr "Přidat složku"
 
 #. TRANSLATORS: %s is replaced with a link to a dav://<hostname> URL
-#: panels/sharing/cc-sharing-panel.c:528
+#: panels/sharing/cc-sharing-panel.c:471
 #, c-format
 msgid ""
 "File Sharing allows you to share your Public folder with others on your "
@@ -6737,18 +6706,6 @@ msgid ""
 msgstr ""
 "Sdílení souborů vám umožňuje sdílet složku Veřejné s ostatními v aktuální "
 "síti pomocí: %s"
-
-#. TRANSLATORS: %s is replaced with a link to a "ssh <hostname>" command to run
-#: panels/sharing/cc-sharing-panel.c:534
-#, c-format
-msgid ""
-"When remote login is enabled, remote users can connect using the Secure "
-"Shell command:\n"
-"%s"
-msgstr ""
-"Když je vzdálené přihlašování povolené, mohou se vzdálení uživatelé připojit "
-"příkazem Secure Shell:\n"
-"%s"
 
 #: panels/sharing/cc-sharing-panel.ui:16
 #: panels/system/about/cc-about-page.ui:41
@@ -6759,7 +6716,7 @@ msgstr "Název _zařízení"
 msgid "Share files with other devices on the current network"
 msgstr "Sdílet soubory s jinými zařízeními v aktuální síti"
 
-#: panels/sharing/cc-sharing-panel.ui:29 panels/sharing/cc-sharing-panel.ui:90
+#: panels/sharing/cc-sharing-panel.ui:29 panels/sharing/cc-sharing-panel.ui:81
 msgid "_File Sharing"
 msgstr "S_dílení souborů"
 
@@ -6767,45 +6724,38 @@ msgstr "S_dílení souborů"
 msgid "Stream music, photos and videos to devices on the current network"
 msgstr "Streamovat hudbu, fotografie a videa do zařízení v aktuální síti"
 
-#: panels/sharing/cc-sharing-panel.ui:38 panels/sharing/cc-sharing-panel.ui:212
+#: panels/sharing/cc-sharing-panel.ui:38 panels/sharing/cc-sharing-panel.ui:152
 msgid "_Media Sharing"
 msgstr "Sdílení _multimédií"
 
-#: panels/sharing/cc-sharing-panel.ui:46
-msgid "Enable SSH access for this device"
-msgstr "Povolit přístup SSH pro toto zařízení"
-
-#: panels/sharing/cc-sharing-panel.ui:47 panels/sharing/cc-sharing-panel.ui:168
-msgid "_Remote Login"
-msgstr "_Vzdálené přihlášení"
-
-#: panels/sharing/cc-sharing-panel.ui:60
+#: panels/sharing/cc-sharing-panel.ui:51
 msgid "File Sharing"
 msgstr "Sdílení souborů"
 
-#: panels/sharing/cc-sharing-panel.ui:100
+#: panels/sharing/cc-sharing-panel.ui:91
 msgid "_Require Password"
 msgstr "V_yžadovat heslo"
 
-#: panels/sharing/cc-sharing-panel.ui:106
+#: panels/sharing/cc-sharing-panel.ui:97
 #: panels/system/remote-desktop/cc-remote-desktop-page.ui:136
 #: panels/system/users/cc-add-user-dialog.ui:373
 msgid "_Password"
 msgstr "_Heslo"
 
-#: panels/sharing/cc-sharing-panel.ui:138
-msgid "Remote Login"
-msgstr "Vzdálené přihlášení"
+#: panels/sharing/cc-sharing-panel.ui:105
+#: panels/sharing/cc-sharing-panel.ui:173
+msgid "Networks"
+msgstr "Sítě"
 
-#: panels/sharing/cc-sharing-panel.ui:181
+#: panels/sharing/cc-sharing-panel.ui:121
 msgid "Media Sharing"
 msgstr "Sdílení multimédií"
 
-#: panels/sharing/cc-sharing-panel.ui:207
+#: panels/sharing/cc-sharing-panel.ui:147
 msgid "Share music, photos and videos over the network"
 msgstr "Sdílet hudbu, fotografie a videa po síti"
 
-#: panels/sharing/cc-sharing-panel.ui:220
+#: panels/sharing/cc-sharing-panel.ui:160
 msgid "Folders"
 msgstr "Složky"
 
@@ -6826,16 +6776,6 @@ msgstr ""
 "sdílet;sdílení;ssh;hostitel;název;vzdálený;obrazovka;desktop;pracovní plocha;"
 "multimédia;zvuk;video;obraz;obrázky;fotografie;filmy;server;vykreslování;"
 "renderer;"
-
-#: panels/sharing/org.gnome.controlcenter.remote-login-helper.policy.in.in:11
-msgid "Enable or disable remote login"
-msgstr "Povolit nebo zakázat vzdálené přihlášení"
-
-#: panels/sharing/org.gnome.controlcenter.remote-login-helper.policy.in.in:12
-msgid "Authentication is required to enable or disable remote login"
-msgstr ""
-"Pro povolení nebo zakázání vzdáleného přihlášení je vyžadováno ověření "
-"totožnosti"
 
 #: panels/sound/cc-alert-chooser-window.c:169
 msgid "Custom"
@@ -7251,10 +7191,19 @@ msgid "Allow this device to be used remotely"
 msgstr "Povolit vzdálené používání tohoto zařízení"
 
 #: panels/system/cc-system-panel.ui:69
+#: panels/system/remote-login/cc-remote-login-page.ui:51
+msgid "Secu_re Shell"
+msgstr "Zab_ezpečený Shell"
+
+#: panels/system/cc-system-panel.ui:70
+msgid "SSH network access"
+msgstr "Síťový přístup SSH"
+
+#: panels/system/cc-system-panel.ui:79
 msgid "_About"
 msgstr "_O systému"
 
-#: panels/system/cc-system-panel.ui:70
+#: panels/system/cc-system-panel.ui:80
 msgid "Hardware details and software versions"
 msgstr "Podrobnosti o hardwaru a verze softwaru"
 
@@ -7631,6 +7580,7 @@ msgstr "Název z_ařízení"
 #: panels/system/remote-desktop/cc-remote-desktop-page.ui:124
 #: panels/system/remote-desktop/cc-remote-desktop-page.ui:140
 #: panels/system/remote-desktop/cc-remote-desktop-page.ui:145
+#: panels/system/remote-login/cc-remote-login-page.ui:65
 msgid "Copy"
 msgstr "Zkopírovat"
 
@@ -7666,6 +7616,32 @@ msgid ""
 msgstr ""
 "Otisk šifrovacího klíče by měl být vidět na připojovaném klientovi a měl by "
 "se shodovat"
+
+#: panels/system/remote-login/cc-remote-login-page.c:53
+msgid "Command copied"
+msgstr "Příkaz zkopírován"
+
+#: panels/system/remote-login/cc-remote-login-page.ui:4
+msgid "Secure Shell"
+msgstr "Zabezpečený Shell"
+
+#: panels/system/remote-login/cc-remote-login-page.ui:39
+msgid "Access this device using Secure Shell (SSH)"
+msgstr "Přistupujte k tomuto zařízení pomocí Zabezpečeného Shellu (SSH)"
+
+#: panels/system/remote-login/cc-remote-login-page.ui:58
+msgid "SSH Login Command"
+msgstr "Přihlašovací příkaz SSH"
+
+#: panels/system/remote-login/org.gnome.controlcenter.remote-login-helper.policy.in.in:11
+msgid "Enable or disable remote login"
+msgstr "Povolit nebo zakázat vzdálené přihlášení"
+
+#: panels/system/remote-login/org.gnome.controlcenter.remote-login-helper.policy.in.in:12
+msgid "Authentication is required to enable or disable remote login"
+msgstr ""
+"Pro povolení nebo zakázání vzdáleného přihlášení je vyžadováno ověření "
+"totožnosti"
 
 #: panels/system/users/cc-add-user-dialog.c:36
 msgid "Should match the web address of your login provider."
@@ -9083,12 +9059,44 @@ msgstr "Nenalezen žádný tablet"
 msgid "Please plug in or turn on your Wacom tablet"
 msgstr "Připojte prosím, nebo zapněte, grafický tablet"
 
+#: panels/wacom/cc-wacom-stylus-action-dialog.c:155
+#, c-format
+msgid "Choose an action when button %d on the stylus is pressed"
+msgstr "Vyberte akci, když je stisknuto tlačítko %d na stylusu"
+
+#: panels/wacom/cc-wacom-stylus-action-dialog.c:158
+#, c-format
+msgid "Button %d Mapping"
+msgstr "Mapování tlačítka %d"
+
+#: panels/wacom/cc-wacom-stylus-page.c:398
+msgid "_Left Mousebutton Click"
+msgstr "Kliknutí _levým tlačítkem myši"
+
+#: panels/wacom/cc-wacom-stylus-page.c:401
+msgid "_Middle Mousebutton Click"
+msgstr "Kliknutí prostřední_m tlačítkem myši"
+
+#: panels/wacom/cc-wacom-stylus-page.c:404
+msgid "_Right Mousebutton Click"
+msgstr "Kliknutí p_ravým tlačítkem myši"
+
+#. Translators: this is the "go back" action of a button
+#: panels/wacom/cc-wacom-stylus-page.c:408
+msgid "_Back"
+msgstr "_Zpět"
+
+#. Translators: this is the "go forward" action of a button
+#: panels/wacom/cc-wacom-stylus-page.c:412
+msgid "_Forward"
+msgstr "V_před"
+
 #: panels/wacom/cc-wacom-stylus-page.ui:16
 msgid "Tip _Pressure Feel"
 msgstr "Pocit z _přítlaku hrotu"
 
 #: panels/wacom/cc-wacom-stylus-page.ui:22
-#: panels/wacom/cc-wacom-stylus-page.ui:87
+#: panels/wacom/cc-wacom-stylus-page.ui:117
 msgid "Soft"
 msgstr "Měkký"
 
@@ -9097,48 +9105,29 @@ msgid "Stylus tip pressure"
 msgstr "Přítlak hrotu stylusu"
 
 #: panels/wacom/cc-wacom-stylus-page.ui:42
-#: panels/wacom/cc-wacom-stylus-page.ui:107
+#: panels/wacom/cc-wacom-stylus-page.ui:137
 msgid "Firm"
 msgstr "Tvrdý"
 
-#: panels/wacom/cc-wacom-stylus-page.ui:55
-msgctxt "display setting"
+#: panels/wacom/cc-wacom-stylus-page.ui:54
 msgid "Button _1"
 msgstr "Tlačítko _1"
 
-#: panels/wacom/cc-wacom-stylus-page.ui:64
-msgctxt "display setting"
+#: panels/wacom/cc-wacom-stylus-page.ui:73
 msgid "Button _2"
 msgstr "Tlačítko _2"
 
-#: panels/wacom/cc-wacom-stylus-page.ui:73
-msgctxt "display setting"
+#: panels/wacom/cc-wacom-stylus-page.ui:92
 msgid "Button _3"
 msgstr "Tlačítko _3"
 
-#: panels/wacom/cc-wacom-stylus-page.ui:81
+#: panels/wacom/cc-wacom-stylus-page.ui:111
 msgid "_Eraser Pressure Feel"
 msgstr "Pocit z přítlaku _gumy"
 
-#: panels/wacom/cc-wacom-stylus-page.ui:101
+#: panels/wacom/cc-wacom-stylus-page.ui:131
 msgid "Eraser pressure"
 msgstr "Přítlak gumy"
-
-#: panels/wacom/cc-wacom-stylus-page.ui:138
-msgid "Default"
-msgstr "Výchozí"
-
-#: panels/wacom/cc-wacom-stylus-page.ui:139
-msgid "Middle Mouse Button Click"
-msgstr "Kliknutí prostředním tlačítkem myši"
-
-#: panels/wacom/cc-wacom-stylus-page.ui:140
-msgid "Right Mouse Button Click"
-msgstr "Kliknutí pravým tlačítkem myši"
-
-#: panels/wacom/cc-wacom-stylus-page.ui:142
-msgid "Forward"
-msgstr "Vpřed"
 
 #: panels/wacom/cc-wacom-tool.c:361
 msgid "Airbrush stylus with pressure, tilt, and integrated slider"
@@ -9919,6 +9908,64 @@ msgstr[2] "%u vstupů"
 msgid "System Sounds"
 msgstr "Systémové zvuky"
 
+#~ msgid "Links &amp; Files"
+#~ msgstr "Odkazy a soubory"
+
+#~ msgid "Apps which are used to open common links and files"
+#~ msgstr "Aplikace, které se používají k otevírání běžných odkazů a souborů"
+
+#~ msgid "Apps which are launched when media or drives are connected"
+#~ msgstr "Aplikace, které jsou spuštěny po připojení médií nebo jednotek"
+
+#~ msgid "D_isable Autostart"
+#~ msgstr "Zakázat automat_ické spouštění"
+
+#~ msgid "Never prompt or start apps on media insertion"
+#~ msgstr "Nikdy se nedotazovat nebo spouštět aplikace na vloženém médiu"
+
+#, c-format
+#~ msgid "%s removed"
+#~ msgstr "%s byl odebrán"
+
+#~ msgid "Error removing account"
+#~ msgstr "Chyba při odebírání účtu"
+
+#~ msgid "Close the notification"
+#~ msgstr "Zavřít upozornění"
+
+#, c-format
+#~ msgid "%s Account"
+#~ msgstr "Účet %s"
+
+#~ msgid "Remove Account"
+#~ msgstr "Odebrat účet"
+
+#~ msgctxt "service is enabled"
+#~ msgid "On"
+#~ msgstr "Zapnuto"
+
+#, c-format
+#~ msgid ""
+#~ "When remote login is enabled, remote users can connect using the Secure "
+#~ "Shell command:\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Když je vzdálené přihlašování povolené, mohou se vzdálení uživatelé "
+#~ "připojit příkazem Secure Shell:\n"
+#~ "%s"
+
+#~ msgid "Enable SSH access for this device"
+#~ msgstr "Povolit přístup SSH pro toto zařízení"
+
+#~ msgid "_Remote Login"
+#~ msgstr "_Vzdálené přihlášení"
+
+#~ msgid "Remote Login"
+#~ msgstr "Vzdálené přihlášení"
+
+#~ msgid "Default"
+#~ msgstr "Výchozí"
+
 #~ msgid "Places"
 #~ msgstr "Místa"
 
@@ -10373,9 +10420,6 @@ msgstr "Systémové zvuky"
 
 #~ msgid "Add an account"
 #~ msgstr "Přidat účet"
-
-#~ msgid "Automatically lock the screen"
-#~ msgstr "Automaticky uzamykat obrazovku"
 
 #~ msgid "screen;lock;private;privacy;"
 #~ msgstr "obrazovka;zámek;zamknutí;zamčení;uzamknutí;uzamčení;soukromí;"
