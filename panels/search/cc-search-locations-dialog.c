@@ -293,6 +293,7 @@ get_xdg_dirs (CcSearchLocationsDialog *self)
   for (idx = 0; idx < G_USER_N_DIRECTORIES; idx++)
     {
       path = get_user_special_dir_if_not_home (idx);
+      /* XDG Dirs pointing to HOME are ignored */
       if (path == NULL)
         continue;
 
