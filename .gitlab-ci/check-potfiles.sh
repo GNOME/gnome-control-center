@@ -40,7 +40,10 @@ invalid=$(while IFS= read -r f; do
             ! grep -q "$f" <<< "$files" && echo "$f"
           done < <(grep '^[^#]' po/POTFILES.in))
 
-if [ ${#missing} -eq 0 ] && [ ${#invalid} -eq 0 ]; then
+# find out if POTFILES.in is sorted correctly, ignoring empty lines
+sorted=$(grep '^[^#]' po/POTFILES.in | sort -cu 2>&1 >/dev/null | awk -F ': *' '{print $5}')
+
+if [ ${#missing} -eq 0 ] && [ ${#invalid} -eq 0 ] && [ ${#sorted} -eq 0 ]; then
   exit 0
 fi
 
@@ -64,6 +67,15 @@ EOT
   for f in $invalid; do
     echo "  $f" >&2
   done
+fi
+
+if [ ${#sorted} -ne 0 ]; then
+  cat >&2 << EOT
+
+The following file is not sorted properly in po/POTFILES.in:
+
+EOT
+  echo "  $sorted" >&2
 fi
 
 echo >&2
