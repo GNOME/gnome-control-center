@@ -52,7 +52,7 @@ stages:
     # stable branch.
     # Could probably also switch away from rawhide,
     # to stable fedora branch as well.
-    FDO_DISTRIBUTION_TAG: '2024-02-26.0-main'
+    FDO_DISTRIBUTION_TAG: '2024-03-25.0-main'
     FDO_DISTRIBUTION_VERSION: rawhide
 
 #############################################
@@ -72,6 +72,7 @@ build.container.fedora@x86_64:
     FDO_EXPIRES_AFTER: 8w
     # NOTES:
     # - gobject-introspection-devel is needed for gsettings-desktop-schemas
+    # - glibc-langpack-en is needed for sorting in run-style-check-diff.sh
     FDO_DISTRIBUTION_PACKAGES: >-
       @c-development @development-tools
       git
@@ -89,6 +90,7 @@ build.container.fedora@x86_64:
       gdk-pixbuf2-devel
       gettext
       glib2-devel
+      glibc-langpack-en
       gobject-introspection-devel
       gnome-bluetooth-libs-devel
       gnome-desktop3-devel

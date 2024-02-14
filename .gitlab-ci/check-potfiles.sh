@@ -41,7 +41,9 @@ invalid=$(while IFS= read -r f; do
           done < <(grep '^[^#]' po/POTFILES.in))
 
 # find out if POTFILES.in is sorted correctly, ignoring empty lines
-sorted=$(grep '^[^#]' po/POTFILES.in | sort -cu 2>&1 >/dev/null | awk -F ': *' '{print $5}')
+sorted=$(grep '^[^#]' po/POTFILES.in | \
+         LC_ALL=en_US.UTF-8 sort -cu 2>&1 >/dev/null | \
+         awk -F ': *' '{print $5}')
 
 if [ ${#missing} -eq 0 ] && [ ${#invalid} -eq 0 ] && [ ${#sorted} -eq 0 ]; then
   exit 0
