@@ -569,23 +569,14 @@ place_compare_func (gconstpointer a,
                     gconstpointer b,
                     gpointer user_data)
 {
-  GtkWidget *child_a, *child_b;
   Place *place_a, *place_b;
-  g_autofree char *path_a = NULL;
-  g_autofree char *path_b = NULL;
 
-  child_a = GTK_WIDGET (a);
-  child_b = GTK_WIDGET (b);
+  place_a = g_object_get_data (G_OBJECT (a), "place");
+  place_b = g_object_get_data (G_OBJECT (b), "place");
 
-  place_a = g_object_get_data (G_OBJECT (child_a), "place");
-  place_b = g_object_get_data (G_OBJECT (child_b), "place");
-
-  path_a = g_file_get_path (place_a->location);
-  path_b = g_file_get_path (place_b->location);
-
-  if (g_strcmp0 (path_a, g_get_home_dir ()) == 0)
+  if (g_ptr_array_find_with_equal_func (place_a->tracker_dirs, "$HOME", g_str_equal, NULL))
     return -1;
-  else if (g_strcmp0 (path_b, g_get_home_dir ()) == 0)
+  else if (g_ptr_array_find_with_equal_func (place_b->tracker_dirs, "$HOME", g_str_equal, NULL))
     return 1;
 
   return g_utf8_collate (place_a->display_name, place_b->display_name);
