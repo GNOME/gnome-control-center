@@ -62,8 +62,6 @@ struct _CcSearchLocationsDialogClass {
 
 G_DEFINE_TYPE (CcSearchLocationsDialog, cc_search_locations_dialog, ADW_TYPE_WINDOW)
 
-static const gchar *path_from_tracker_dir (const gchar *value);
-
 typedef struct {
   GUserDirectory  xdg_dir;
   const char     *tracker_dir;
@@ -114,23 +112,13 @@ cc_search_locations_dialog_init (CcSearchLocationsDialog *self)
 }
 
 static gboolean
-location_in_path_strv (GFile       *location,
-                       const char **paths)
+place_in_paths (Place       *place,
+                const char **paths)
 {
-  gint i;
-  const gchar *path;
-
-  for (i = 0; paths[i] != NULL; i++)
+  for (guint i = 0; i < place->tracker_dirs->len; i++)
     {
-      g_autoptr(GFile) tracker_location = NULL;
-
-      path = path_from_tracker_dir (paths[i]);
-
-      if (path == NULL)
-        continue;
-
-      tracker_location = g_file_new_for_path (path);
-      if (g_file_equal (location, tracker_location))
+      char *tracker_dir = g_ptr_array_index (place->tracker_dirs, i);
+      if (g_strv_contains (paths, tracker_dir))
         return TRUE;
     }
 
@@ -164,8 +152,8 @@ place_new (CcSearchLocationsDialog *dialog,
   else
     new_place->display_name = g_file_get_basename (location);
 
-  if (location_in_path_strv (new_place->location, single_dir_default) ||
-      location_in_path_strv (new_place->location, (const char **) single_dir))
+  if (place_in_paths (new_place, single_dir_default) ||
+      place_in_paths (new_place, (const char **) single_dir))
     new_place->settings_key = TRACKER_KEY_SINGLE_DIRECTORIES;
   else
     new_place->settings_key = TRACKER_KEY_RECURSIVE_DIRECTORIES;
@@ -314,69 +302,29 @@ get_xdg_dirs (CcSearchLocationsDialog *self)
   return g_list_reverse (xdg_dirs);
 }
 
-static const gchar *
-path_to_tracker_dir (const gchar *path)
-{
-  const gchar *value;
-
-  if (g_strcmp0 (path, get_user_special_dir_if_not_home (G_USER_DIRECTORY_DESKTOP)) == 0)
-    value = "&DESKTOP";
-  else if (g_strcmp0 (path, get_user_special_dir_if_not_home (G_USER_DIRECTORY_DOCUMENTS)) == 0)
-    value = "&DOCUMENTS";
-  else if (g_strcmp0 (path, get_user_special_dir_if_not_home (G_USER_DIRECTORY_DOWNLOAD)) == 0)
-    value = "&DOWNLOAD";
-  else if (g_strcmp0 (path, get_user_special_dir_if_not_home (G_USER_DIRECTORY_MUSIC)) == 0)
-    value = "&MUSIC";
-  else if (g_strcmp0 (path, get_user_special_dir_if_not_home (G_USER_DIRECTORY_PICTURES)) == 0)
-    value = "&PICTURES";
-  else if (g_strcmp0 (path, get_user_special_dir_if_not_home (G_USER_DIRECTORY_PUBLIC_SHARE)) == 0)
-    value = "&PUBLIC_SHARE";
-  else if (g_strcmp0 (path, get_user_special_dir_if_not_home (G_USER_DIRECTORY_TEMPLATES)) == 0)
-    value = "&TEMPLATES";
-  else if (g_strcmp0 (path, get_user_special_dir_if_not_home (G_USER_DIRECTORY_VIDEOS)) == 0)
-    value = "&VIDEOS";
-  else if (g_strcmp0 (path, g_get_home_dir ()) == 0)
-    value = "$HOME";
-  else
-    value = path;
-
-  return value;
-}
-
 static GPtrArray *
 place_get_new_settings_values (CcSearchLocationsDialog *self,
                                Place *place,
                                gboolean remove)
 {
   g_auto(GStrv) values = NULL;
-  g_autofree gchar *path = NULL;
   GPtrArray *new_values;
-  const gchar *tracker_dir;
-  gboolean found;
-  gint idx;
 
-  new_values = g_ptr_array_new_with_free_func (g_free);
   values = g_settings_get_strv (self->tracker_preferences, place->settings_key);
-  path = g_file_get_path (place->location);
-  tracker_dir = path_to_tracker_dir (path);
+  new_values = g_ptr_array_new_from_null_terminated_array ((gpointer *) values, (GCopyFunc) g_strdup, NULL, g_free);
 
-  found = FALSE;
-
-  for (idx = 0; values[idx] != NULL; idx++)
+  for (guint i = 0; i < place->tracker_dirs->len; i++)
     {
-      if (g_strcmp0 (values[idx], tracker_dir) == 0)
-        {
-          found = TRUE;
+      char *cur_dir = g_ptr_array_index (place->tracker_dirs, i);
+      guint remove_index;
+      gboolean found;
 
-          if (remove)
-            continue;
-        }
-
-      g_ptr_array_add (new_values, g_strdup (values[idx]));
+      found = g_ptr_array_find_with_equal_func (new_values, cur_dir, g_str_equal, &remove_index);
+      if (remove && found)
+        g_ptr_array_remove_index (new_values, remove_index);
+      else if (!found)
+        g_ptr_array_add (new_values, g_strdup (cur_dir));
     }
-
-  if (!found && !remove)
-    g_ptr_array_add (new_values, g_strdup (tracker_dir));
 
   g_ptr_array_add (new_values, NULL);
 
@@ -513,7 +461,7 @@ switch_tracker_get_mapping (GValue *value,
   gboolean found;
 
   locations = g_variant_get_strv (variant, NULL);
-  found = location_in_path_strv (place->location, locations);
+  found = place_in_paths (place, locations);
 
   g_value_set_boolean (value, found);
   return TRUE;
