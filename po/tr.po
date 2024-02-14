@@ -20,9 +20,9 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2024-02-12 08:49+0000\n"
-"PO-Revision-Date: 2024-02-13 15:57+0300\n"
-"Last-Translator: Emin Tufan Çetin <etcetin@gmail.com>\n"
+"POT-Creation-Date: 2024-02-13 13:09+0000\n"
+"PO-Revision-Date: 2024-02-14 01:26+0300\n"
+"Last-Translator: Sabri Ünal <libreajans@gmail.com>\n"
 "Language-Team: Turkish <takim@gnome.org.tr>\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
@@ -179,7 +179,7 @@ msgstr ""
 
 #: panels/applications/cc-applications-panel.ui:246
 #: panels/printers/pp-details-dialog.c:267
-#: panels/sharing/cc-sharing-panel.c:297
+#: panels/sharing/cc-sharing-panel.c:240
 msgid "_Open"
 msgstr "_Aç"
 
@@ -984,7 +984,7 @@ msgstr "Ekran Kalibrasyonu"
 #: panels/network/connection-editor/connection-editor.ui:16
 #: panels/printers/new-printer-dialog.ui:54
 #: panels/printers/pp-details-dialog.c:266 panels/privacy/cc-usage-page.c:136
-#: panels/sharing/cc-sharing-panel.c:296
+#: panels/sharing/cc-sharing-panel.c:239
 #: panels/system/region/cc-format-chooser.ui:24
 #: panels/system/users/cc-add-user-dialog.ui:25
 #: panels/system/users/cc-avatar-chooser.c:92
@@ -1267,9 +1267,9 @@ msgstr "Yazılabilir ortam gerektirir"
 
 #: panels/color/cc-color-panel.ui:313
 msgid ""
-"You may find these instructions on how to use the profile on <a "
-"href=\"linux\">GNU/Linux</a>, <a href=\"osx\">Apple OS X</a> and <a "
-"href=\"windows\">Microsoft Windows</a> systems useful."
+"You may find these instructions on how to use the profile on <a href=\"linux"
+"\">GNU/Linux</a>, <a href=\"osx\">Apple OS X</a> and <a href=\"windows"
+"\">Microsoft Windows</a> systems useful."
 msgstr ""
 "Profili <a href=\"linux\">GNU/Linux</a>, <a href=\"osx\">Apple OS X</a> ve "
 "<a href=\"windows\">Microsoft Windows</a> sistemleri üzerinde nasıl "
@@ -1284,8 +1284,8 @@ msgid ""
 "Problems detected. The profile may not work correctly. <a href=\"\">Show "
 "details.</a>"
 msgstr ""
-"Bazı sorunlar saptandı. Bu profil düzgün çalışmayabilir. <a "
-"href=\"\">Ayrıntıları göster.</a>"
+"Bazı sorunlar saptandı. Bu profil düzgün çalışmayabilir. <a href="
+"\"\">Ayrıntıları göster.</a>"
 
 #: panels/color/cc-color-panel.ui:384
 msgid "_Import File…"
@@ -4232,61 +4232,47 @@ msgstr "Hangi bildirimlerin gösterileceğini ve ne göstereceklerini ayarlayın
 msgid "Notifications;Banner;Message;Tray;Popup;"
 msgstr "Bildirimler;Pencerecik;İleti;Mesaj;Tepsi;Açılır Pencere;"
 
-#: panels/online-accounts/cc-online-account-provider-row.c:95
+#: panels/online-accounts/cc-online-account-provider-row.c:55
+msgid "Email"
+msgstr "Eposta"
+
+#. IMAP and SMTP
+#: panels/online-accounts/cc-online-account-provider-row.c:56
+msgid "Calendars, Contacts, Files"
+msgstr "Takvimler, Kişiler, Dosyalar"
+
+#. WebDAV
+#. Nextcloud
+#. Google
+#. Microsoft 365
+#. Microsoft Exchange
+#. Microsoft Personal
+#: panels/online-accounts/cc-online-account-provider-row.c:62
+msgid "Enterprise Login"
+msgstr "Kurumsal Giriş"
+
+#: panels/online-accounts/cc-online-account-provider-row.c:136
 msgctxt "Online Account"
 msgid "Other"
 msgstr "Diğer"
 
-#. Translators: The %s is the username (eg., debarshi.ray@gmail.com
-#. * or rishi).
-#.
-#: panels/online-accounts/cc-online-accounts-panel.c:280
-#, c-format
-msgid "%s removed"
-msgstr "%s kaldırıldı"
-
-#: panels/online-accounts/cc-online-accounts-panel.c:696
-msgid "Error removing account"
-msgstr "Hesap kaldırılırken hata oluştu"
-
-#. Translators: This is the button which allows undoing the removal of the printer.
-#: panels/online-accounts/cc-online-accounts-panel.ui:29
-#: panels/printers/cc-printers-panel.ui:81
-msgid "Undo"
-msgstr "Geri Al"
-
-#: panels/online-accounts/cc-online-accounts-panel.ui:37
-msgid "Close the notification"
-msgstr "Bildirimi kapat"
-
-#: panels/online-accounts/cc-online-accounts-panel.ui:61
+#: panels/online-accounts/cc-online-accounts-panel.ui:16
 msgid "Offline — unable to connect accounts"
 msgstr "Çevrim dışı — hesaplara bağlanamadı"
 
-#: panels/online-accounts/cc-online-accounts-panel.ui:67
+#: panels/online-accounts/cc-online-accounts-panel.ui:22
 msgid "Allow apps to access online services by connecting your cloud accounts"
 msgstr ""
 "Bulut hesaplarınızı bağlayarak uygulamaların çevrim içi hizmetlere "
 "erişmesine izin verin"
 
-#: panels/online-accounts/cc-online-accounts-panel.ui:71
+#: panels/online-accounts/cc-online-accounts-panel.ui:26
 msgid "Your Accounts"
 msgstr "Hesaplarınız"
 
-#: panels/online-accounts/cc-online-accounts-panel.ui:91
+#: panels/online-accounts/cc-online-accounts-panel.ui:46
 msgid "Connect an Account"
 msgstr "Hesap Bağla"
-
-#. translators: This is the title of the "Show Account" dialog. The
-#. * %s is the name of the provider. e.g., 'Google'.
-#: panels/online-accounts/gnome-control-center-goa-helper.c:428
-#, c-format
-msgid "%s Account"
-msgstr "%s Hesabı"
-
-#: panels/online-accounts/gnome-control-center-goa-helper.c:431
-msgid "Remove Account"
-msgstr "Hesabı Kaldır"
 
 #: panels/online-accounts/gnome-online-accounts-panel.desktop.in:3
 msgid "Online Accounts"
@@ -4619,40 +4605,40 @@ msgid "A_utomatic Screen Brightness"
 msgstr "_Kendiliğinden Ekran Parlaklığı"
 
 #: panels/power/cc-power-panel.ui:131
-msgid "Screen brightness adjusts to the surrounding light"
-msgstr "Ekran parlaklığı çevredeki ışığa uyarlanacak"
+msgid "Adjust screen brightness to the surrounding light"
+msgstr "Ekran parlaklığını çevredeki ışığa uyarla"
 
 #: panels/power/cc-power-panel.ui:138
 msgid "_Dim Screen"
 msgstr "_Ekran Işığını Azalt"
 
 #: panels/power/cc-power-panel.ui:139
-msgid "Reduces the screen brightness when the computer is inactive"
-msgstr "Bilgisayar kullanılmıyorken ekran parlaklığını düşürür"
+msgid "Reduce screen brightness when the computer is inactive"
+msgstr "Bilgisayar kullanılmıyorken ekran parlaklığını düşür"
 
 #: panels/power/cc-power-panel.ui:145
 msgid "Screen _Blank"
 msgstr "Ekranı _Kapat"
 
 #: panels/power/cc-power-panel.ui:146
-msgid "Turns the screen off after a period of inactivity"
-msgstr "Bir süre işlem yapılmadığında ekranı kapatır"
+msgid "Turn the screen off after a period of inactivity"
+msgstr "Bir süre işlem yapılmadığında ekranı kapat"
 
 #: panels/power/cc-power-panel.ui:154
 msgid "Automatic Power _Saver"
 msgstr "Kendiliğinden Güç _Tutumu"
 
 #: panels/power/cc-power-panel.ui:155
-msgid "Enables power saver mode when battery is low"
-msgstr "Pil düşükken güç tutum kipini etkinleştirir"
+msgid "Turn on power saver mode when battery power is low"
+msgstr "Pil düşükken güç tutumu kipini aç"
 
 #: panels/power/cc-power-panel.ui:162
 msgid "_Automatic Suspend"
 msgstr "_Kendiliğinden Askıya Al"
 
 #: panels/power/cc-power-panel.ui:163
-msgid "Pauses the computer after a period of inactivity"
-msgstr "Bir süre işlem yapılmadığında bilgisayarı duraklatır"
+msgid "Pause the computer after a period of inactivity"
+msgstr "Bir süre işlem yapılmadığında bilgisayarı duraklat"
 
 #: panels/power/cc-power-panel.ui:189
 msgid "Po_wer Button Behavior"
@@ -4759,6 +4745,11 @@ msgstr "Yazıcı _Ekle…"
 #: panels/printers/cc-printers-panel.ui:52
 msgid "Search printers"
 msgstr "Yazıcı ara"
+
+#. Translators: This is the button which allows undoing the removal of the printer.
+#: panels/printers/cc-printers-panel.ui:81
+msgid "Undo"
+msgstr "Geri Al"
 
 #: panels/printers/cc-printers-panel.ui:166
 msgid "No Printers"
@@ -6555,7 +6546,7 @@ msgid "Subfolders must be manually added for this location"
 msgstr "Bu konum için alt klasörler elle eklenmelidir"
 
 #: panels/search/cc-search-locations-dialog.c:572
-#: panels/sharing/cc-sharing-panel.c:418
+#: panels/sharing/cc-sharing-panel.c:361
 msgid "Remove Folder"
 msgstr "Klasörü Kaldır"
 
@@ -6635,41 +6626,31 @@ msgstr "Ara;Bul;Endeks;Gizle;Gizlilik;Sonuçlar;"
 msgid "No networks selected for sharing"
 msgstr "Paylaşımı için ağ seçilmedi"
 
-#: panels/sharing/cc-sharing-networks.ui:13
-#: panels/sharing/cc-sharing-panel.ui:114
-msgid "Networks"
-msgstr "Ağlar"
-
-#: panels/sharing/cc-sharing-panel.c:170
-msgctxt "service is enabled"
-msgid "On"
-msgstr "Açık"
-
-#: panels/sharing/cc-sharing-panel.c:172 panels/sharing/cc-sharing-panel.c:195
+#: panels/sharing/cc-sharing-panel.c:149
 msgctxt "service is disabled"
 msgid "Off"
 msgstr "Kapalı"
 
-#: panels/sharing/cc-sharing-panel.c:198
+#: panels/sharing/cc-sharing-panel.c:152
 msgctxt "service is enabled"
 msgid "Enabled"
 msgstr "Etkin"
 
-#: panels/sharing/cc-sharing-panel.c:201
+#: panels/sharing/cc-sharing-panel.c:155
 msgctxt "service is active"
 msgid "Active"
 msgstr "Etkin"
 
-#: panels/sharing/cc-sharing-panel.c:293
+#: panels/sharing/cc-sharing-panel.c:236
 msgid "Choose a Folder"
 msgstr "Klasör Seç"
 
-#: panels/sharing/cc-sharing-panel.c:441
+#: panels/sharing/cc-sharing-panel.c:384
 msgid "Add Folder"
 msgstr "Klasör Ekle"
 
 #. TRANSLATORS: %s is replaced with a link to a dav://<hostname> URL
-#: panels/sharing/cc-sharing-panel.c:528
+#: panels/sharing/cc-sharing-panel.c:471
 #, c-format
 msgid ""
 "File Sharing allows you to share your Public folder with others on your "
@@ -6677,18 +6658,6 @@ msgid ""
 msgstr ""
 "Dosya Paylaşımı, Genel klasörünüzü ağınızdaki diğer kişilerle şununla "
 "paylaşmanızı sağlar: %s"
-
-#. TRANSLATORS: %s is replaced with a link to a "ssh <hostname>" command to run
-#: panels/sharing/cc-sharing-panel.c:534
-#, c-format
-msgid ""
-"When remote login is enabled, remote users can connect using the Secure "
-"Shell command:\n"
-"%s"
-msgstr ""
-"Uzaktan oturum açma etkinleştirildiğinde, uzak kullanıcılar Güvenli Kabuk "
-"komutunu kullanarak bağlanabilirler:\n"
-"%s"
 
 #: panels/sharing/cc-sharing-panel.ui:16
 #: panels/system/about/cc-about-page.ui:41
@@ -6699,7 +6668,7 @@ msgstr "_Aygıt Adı"
 msgid "Share files with other devices on the current network"
 msgstr "Dosyaları, ağdaki diğer aygıtlarla paylaş"
 
-#: panels/sharing/cc-sharing-panel.ui:29 panels/sharing/cc-sharing-panel.ui:90
+#: panels/sharing/cc-sharing-panel.ui:29 panels/sharing/cc-sharing-panel.ui:81
 msgid "_File Sharing"
 msgstr "Dosya _Paylaşımı"
 
@@ -6707,45 +6676,38 @@ msgstr "Dosya _Paylaşımı"
 msgid "Stream music, photos and videos to devices on the current network"
 msgstr "Müzikleri, fotoğrafları ve videoları ağdaki diğer aygıtlara akıt"
 
-#: panels/sharing/cc-sharing-panel.ui:38 panels/sharing/cc-sharing-panel.ui:212
+#: panels/sharing/cc-sharing-panel.ui:38 panels/sharing/cc-sharing-panel.ui:152
 msgid "_Media Sharing"
 msgstr "_Ortam Paylaşımı"
 
-#: panels/sharing/cc-sharing-panel.ui:46
-msgid "Enable SSH access for this device"
-msgstr "Bu aygıt için SSH erişimini etkinleştir"
-
-#: panels/sharing/cc-sharing-panel.ui:47 panels/sharing/cc-sharing-panel.ui:168
-msgid "_Remote Login"
-msgstr "_Uzaktan Oturum Aç"
-
-#: panels/sharing/cc-sharing-panel.ui:60
+#: panels/sharing/cc-sharing-panel.ui:51
 msgid "File Sharing"
 msgstr "Dosya Paylaşımı"
 
-#: panels/sharing/cc-sharing-panel.ui:100
+#: panels/sharing/cc-sharing-panel.ui:91
 msgid "_Require Password"
 msgstr "Parola _Gerektir"
 
-#: panels/sharing/cc-sharing-panel.ui:106
+#: panels/sharing/cc-sharing-panel.ui:97
 #: panels/system/remote-desktop/cc-remote-desktop-page.ui:136
 #: panels/system/users/cc-add-user-dialog.ui:373
 msgid "_Password"
 msgstr "_Parola"
 
-#: panels/sharing/cc-sharing-panel.ui:138
-msgid "Remote Login"
-msgstr "Uzaktan Oturum Aç"
+#: panels/sharing/cc-sharing-panel.ui:105
+#: panels/sharing/cc-sharing-panel.ui:173
+msgid "Networks"
+msgstr "Ağlar"
 
-#: panels/sharing/cc-sharing-panel.ui:181
+#: panels/sharing/cc-sharing-panel.ui:121
 msgid "Media Sharing"
 msgstr "Ortam Paylaşımı"
 
-#: panels/sharing/cc-sharing-panel.ui:207
+#: panels/sharing/cc-sharing-panel.ui:147
 msgid "Share music, photos and videos over the network"
 msgstr "Müzikleri, fotoğrafları ve videoları ağda paylaşın"
 
-#: panels/sharing/cc-sharing-panel.ui:220
+#: panels/sharing/cc-sharing-panel.ui:160
 msgid "Folders"
 msgstr "Klasörler"
 
@@ -6765,16 +6727,6 @@ msgid ""
 msgstr ""
 "paylaş;paylaşım;ssh;makine;host;isim;ad;uzak;masaüstü;ortam;ses;video;"
 "görüntü;resimler;fotoğraflar;filmler;sunucu;renderer;yorumlayıcı;"
-
-#: panels/sharing/org.gnome.controlcenter.remote-login-helper.policy.in.in:11
-msgid "Enable or disable remote login"
-msgstr "Uzaktan oturum açmayı etkinleştir veya devre dışı bırak"
-
-#: panels/sharing/org.gnome.controlcenter.remote-login-helper.policy.in.in:12
-msgid "Authentication is required to enable or disable remote login"
-msgstr ""
-"Uzaktan oturum açmayı etkinleştirmek veya devre dışı bırakmak için kimlik "
-"doğrulaması gerekiyor"
 
 #: panels/sound/cc-alert-chooser-window.c:169
 msgid "Custom"
@@ -7189,10 +7141,19 @@ msgid "Allow this device to be used remotely"
 msgstr "Bu aygıtın uzaktan kullanılmasına izin ver"
 
 #: panels/system/cc-system-panel.ui:69
+#: panels/system/remote-login/cc-remote-login-page.ui:51
+msgid "Secu_re Shell"
+msgstr "_Güvenli Kabuk"
+
+#: panels/system/cc-system-panel.ui:70
+msgid "SSH network access"
+msgstr "SSH ağ erişimi"
+
+#: panels/system/cc-system-panel.ui:79
 msgid "_About"
 msgstr "_Hakkında"
 
-#: panels/system/cc-system-panel.ui:70
+#: panels/system/cc-system-panel.ui:80
 msgid "Hardware details and software versions"
 msgstr "Donanım ayrıntıları ve yazılım sürümleri"
 
@@ -7570,6 +7531,7 @@ msgstr "A_ygıt Adı"
 #: panels/system/remote-desktop/cc-remote-desktop-page.ui:124
 #: panels/system/remote-desktop/cc-remote-desktop-page.ui:140
 #: panels/system/remote-desktop/cc-remote-desktop-page.ui:145
+#: panels/system/remote-login/cc-remote-login-page.ui:65
 msgid "Copy"
 msgstr "Kopyala"
 
@@ -7604,6 +7566,32 @@ msgid ""
 msgstr ""
 "Bağlanan istemcilerde şifreleme parmak izi görünmelidir ve birbiriyle aynı "
 "olmalıdır"
+
+#: panels/system/remote-login/cc-remote-login-page.c:53
+msgid "Command copied"
+msgstr "Komut kopyalandı"
+
+#: panels/system/remote-login/cc-remote-login-page.ui:4
+msgid "Secure Shell"
+msgstr "Güvenli Kabuk"
+
+#: panels/system/remote-login/cc-remote-login-page.ui:39
+msgid "Access this device using Secure Shell (SSH)"
+msgstr "Güvenli Kabuk (SSH) kullanarak bu aygıta eriş"
+
+#: panels/system/remote-login/cc-remote-login-page.ui:58
+msgid "SSH Login Command"
+msgstr "SSH Oturum Açma Komutu"
+
+#: panels/system/remote-login/org.gnome.controlcenter.remote-login-helper.policy.in.in:11
+msgid "Enable or disable remote login"
+msgstr "Uzaktan oturum açmayı etkinleştir veya devre dışı bırak"
+
+#: panels/system/remote-login/org.gnome.controlcenter.remote-login-helper.policy.in.in:12
+msgid "Authentication is required to enable or disable remote login"
+msgstr ""
+"Uzaktan oturum açmayı etkinleştirmek veya devre dışı bırakmak için kimlik "
+"doğrulaması gerekiyor"
 
 #: panels/system/users/cc-add-user-dialog.c:36
 msgid "Should match the web address of your login provider."
@@ -9856,6 +9844,43 @@ msgstr[0] "%u Girdi"
 #: subprojects/gvc/gvc-mixer-control.c:2882
 msgid "System Sounds"
 msgstr "Sistem Sesleri"
+
+#~ msgid "%s removed"
+#~ msgstr "%s kaldırıldı"
+
+#~ msgid "Error removing account"
+#~ msgstr "Hesap kaldırılırken hata oluştu"
+
+#~ msgid "Close the notification"
+#~ msgstr "Bildirimi kapat"
+
+#~ msgid "%s Account"
+#~ msgstr "%s Hesabı"
+
+#~ msgid "Remove Account"
+#~ msgstr "Hesabı Kaldır"
+
+#~ msgctxt "service is enabled"
+#~ msgid "On"
+#~ msgstr "Açık"
+
+#~ msgid ""
+#~ "When remote login is enabled, remote users can connect using the Secure "
+#~ "Shell command:\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Uzaktan oturum açma etkinleştirildiğinde, uzak kullanıcılar Güvenli Kabuk "
+#~ "komutunu kullanarak bağlanabilirler:\n"
+#~ "%s"
+
+#~ msgid "Enable SSH access for this device"
+#~ msgstr "Bu aygıt için SSH erişimini etkinleştir"
+
+#~ msgid "_Remote Login"
+#~ msgstr "_Uzaktan Oturum Aç"
+
+#~ msgid "Remote Login"
+#~ msgstr "Uzaktan Oturum Aç"
 
 #~ msgid "Links &amp; Files"
 #~ msgstr "Bağlantılar ve Dosyalar"
