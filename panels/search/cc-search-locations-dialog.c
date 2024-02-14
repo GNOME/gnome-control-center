@@ -37,6 +37,7 @@ typedef struct {
   CcSearchLocationsDialog *dialog;
   GFile *location;
   gchar *display_name;
+  GPtrArray *tracker_dirs;
   PlaceType place_type;
   GCancellable *cancellable;
   const gchar *settings_key;
@@ -138,9 +139,10 @@ location_in_path_strv (GFile       *location,
 
 static Place *
 place_new (CcSearchLocationsDialog *dialog,
-           GFile *location,
-           gchar *display_name,
-           PlaceType place_type)
+           GFile                   *location,
+           const char              *tracker_dir,
+           gchar                   *display_name,
+           PlaceType                place_type)
 {
   Place *new_place = g_new0 (Place, 1);
   g_autoptr(GVariant) single_dir_default_var = NULL;
@@ -151,6 +153,9 @@ place_new (CcSearchLocationsDialog *dialog,
                                                          TRACKER_KEY_SINGLE_DIRECTORIES);
   single_dir_default = g_variant_get_strv (single_dir_default_var, NULL);
   single_dir = g_settings_get_strv (dialog->tracker_preferences, TRACKER_KEY_SINGLE_DIRECTORIES);
+
+  new_place->tracker_dirs = g_ptr_array_new_with_free_func (g_free);
+  g_ptr_array_add (new_place->tracker_dirs, g_strdup (tracker_dir));
 
   new_place->dialog = dialog;
   new_place->location = location;
@@ -177,6 +182,7 @@ place_free (Place * p)
 
   g_object_unref (p->location);
   g_free (p->display_name);
+  g_ptr_array_free (p->tracker_dirs, TRUE);
 
   g_free (p);
 }
@@ -210,6 +216,8 @@ get_bookmarks (CcSearchLocationsDialog *self)
               /* we must seperate the bookmark uri and the potential label */
               char *space, *label;
               Place *bookmark;
+              g_autoptr (GFile) location = NULL;
+              g_autofree char *path = NULL;
 
               label = NULL;
               space = strchr (lines[idx], ' ');
@@ -219,8 +227,12 @@ get_bookmarks (CcSearchLocationsDialog *self)
                   label = g_strdup (space + 1);
                 }
 
+              location = g_file_new_for_uri (lines[idx]);
+              path = g_file_get_path (location);
+
               bookmark = place_new (self,
-                                    g_file_new_for_uri (lines[idx]),
+                                    g_steal_pointer (&location),
+                                    path,
                                     label,
                                     PLACE_BOOKMARKS);
 
@@ -258,6 +270,18 @@ path_from_tracker_dir (const gchar *value)
   return value;
 }
 
+static const gchar *
+xdg_to_tracker_dir (GUserDirectory user_dir)
+{
+  for (guint i = 0; user_dir_to_tracker[i].tracker_dir != NULL; i++)
+    {
+      if (user_dir_to_tracker[i].xdg_dir == user_dir)
+        return user_dir_to_tracker[i].tracker_dir;
+    }
+
+  g_return_val_if_reached (NULL);
+}
+
 static GList *
 get_xdg_dirs (CcSearchLocationsDialog *self)
 {
@@ -279,6 +303,7 @@ get_xdg_dirs (CcSearchLocationsDialog *self)
 
       xdg_dir = place_new (self,
                            g_file_new_for_path (path),
+                           xdg_to_tracker_dir (idx),
                            NULL,
                            PLACE_XDG);
 
@@ -387,6 +412,7 @@ get_tracker_locations (CcSearchLocationsDialog *self)
       file = g_file_new_for_commandline_arg (path);
       location = place_new (self,
                             file,
+                            locations_all[idx],
                             NULL,
                             PLACE_OTHER);
 
@@ -412,6 +438,7 @@ get_places_list (CcSearchLocationsDialog *self)
   /* add home */
   place = place_new (self,
                      g_file_new_for_path (g_get_home_dir ()),
+                     "$HOME",
                      g_strdup (_("Home")),
                      PLACE_XDG);
   g_hash_table_replace (places, place->location, place);
@@ -420,8 +447,19 @@ get_places_list (CcSearchLocationsDialog *self)
   xdg_list = get_xdg_dirs (self);
   for (l = xdg_list; l != NULL; l = l->next)
     {
-      place = l->data;
-      g_hash_table_replace (places, place->location, place);
+      g_autoptr(Place) p = l->data;
+
+      old_place = g_hash_table_lookup (places, p->location);
+      if (old_place == NULL)
+        {
+          g_hash_table_replace (places, p->location, p);
+          g_steal_pointer (&p);
+        }
+      else
+        {
+          char *tracker_dir = g_strdup (g_ptr_array_index (p->tracker_dirs, 0));
+          g_ptr_array_add (old_place->tracker_dirs, tracker_dir);
+        }
     }
 
   /* then, insert all the tracker locations that are not XDG dirs */
@@ -660,6 +698,7 @@ add_file_chooser_response (GObject      *source,
   g_autoptr(GPtrArray) new_values = NULL;
   g_autoptr(GError) error = NULL;
   GFile *file;
+  g_autofree char *path = NULL;
 
   file = gtk_file_dialog_select_folder_finish (file_dialog, res, &error);
   if (!file)
@@ -669,7 +708,8 @@ add_file_chooser_response (GObject      *source,
       return;
     }
 
-  place = place_new (self, file, NULL, 0);
+  path = g_file_get_path (file);
+  place = place_new (self, file, path, NULL, 0);
 
   place->settings_key = TRACKER_KEY_RECURSIVE_DIRECTORIES;
 
