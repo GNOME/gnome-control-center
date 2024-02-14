@@ -63,6 +63,23 @@ G_DEFINE_TYPE (CcSearchLocationsDialog, cc_search_locations_dialog, ADW_TYPE_WIN
 
 static const gchar *path_from_tracker_dir (const gchar *value);
 
+typedef struct {
+  GUserDirectory  xdg_dir;
+  const char     *tracker_dir;
+} UserDirToTracker;
+
+static UserDirToTracker user_dir_to_tracker [] = {
+  { G_USER_DIRECTORY_DESKTOP, "&DESKTOP" },
+  { G_USER_DIRECTORY_DOCUMENTS, "&DOCUMENTS" },
+  { G_USER_DIRECTORY_DOWNLOAD, "&DOWNLOAD" },
+  { G_USER_DIRECTORY_MUSIC, "&MUSIC" },
+  { G_USER_DIRECTORY_PICTURES, "&PICTURES" },
+  { G_USER_DIRECTORY_PUBLIC_SHARE, "&PUBLIC_SHARE" },
+  { G_USER_DIRECTORY_TEMPLATES, "&TEMPLATES" },
+  { G_USER_DIRECTORY_VIDEOS, "&VIDEOS" },
+  { G_USER_N_DIRECTORIES, NULL }
+};
+
 static gboolean
 keynav_failed_cb (CcSearchLocationsDialog *self,
                   GtkDirectionType         direction)
@@ -226,6 +243,21 @@ get_user_special_dir_if_not_home (GUserDirectory idx)
   return path;
 }
 
+static const gchar *
+path_from_tracker_dir (const gchar *value)
+{
+  if (g_strcmp0 (value, "$HOME") == 0)
+    return g_get_home_dir ();
+
+  for (guint i = 0; user_dir_to_tracker[i].tracker_dir != NULL; i++)
+    {
+      if (g_strcmp0 (value, user_dir_to_tracker[i].tracker_dir) == 0)
+        return get_user_special_dir_if_not_home (user_dir_to_tracker[i].xdg_dir);
+    }
+
+  return value;
+}
+
 static GList *
 get_xdg_dirs (CcSearchLocationsDialog *self)
 {
@@ -283,35 +315,6 @@ path_to_tracker_dir (const gchar *path)
     value = path;
 
   return value;
-}
-
-static const gchar *
-path_from_tracker_dir (const gchar *value)
-{
-  const gchar *path;
-
-  if (g_strcmp0 (value, "&DESKTOP") == 0)
-    path = get_user_special_dir_if_not_home (G_USER_DIRECTORY_DESKTOP);
-  else if (g_strcmp0 (value, "&DOCUMENTS") == 0)
-    path = get_user_special_dir_if_not_home (G_USER_DIRECTORY_DOCUMENTS);
-  else if (g_strcmp0 (value, "&DOWNLOAD") == 0)
-    path = get_user_special_dir_if_not_home (G_USER_DIRECTORY_DOWNLOAD);
-  else if (g_strcmp0 (value, "&MUSIC") == 0)
-    path = get_user_special_dir_if_not_home (G_USER_DIRECTORY_MUSIC);
-  else if (g_strcmp0 (value, "&PICTURES") == 0)
-    path = get_user_special_dir_if_not_home (G_USER_DIRECTORY_PICTURES);
-  else if (g_strcmp0 (value, "&PUBLIC_SHARE") == 0)
-    path = get_user_special_dir_if_not_home (G_USER_DIRECTORY_PUBLIC_SHARE);
-  else if (g_strcmp0 (value, "&TEMPLATES") == 0)
-    path = get_user_special_dir_if_not_home (G_USER_DIRECTORY_TEMPLATES);
-  else if (g_strcmp0 (value, "&VIDEOS") == 0)
-    path = get_user_special_dir_if_not_home (G_USER_DIRECTORY_VIDEOS);
-  else if (g_strcmp0 (value, "$HOME") == 0)
-    path = g_get_home_dir ();
-  else
-    path = value;
-
-  return path;
 }
 
 static GPtrArray *
