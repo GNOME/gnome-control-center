@@ -252,6 +252,8 @@ check-potfiles:
   - build.container.fedora@x86_64
   stage: test
   when: always
+  variables:
+    GIT_SUBMODULE_STRATEGY: normal
   script:
     - .gitlab-ci/check-potfiles.sh
 
