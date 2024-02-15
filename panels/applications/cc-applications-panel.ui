@@ -284,8 +284,8 @@
                             </child>
                             <child>
                               <object class="CcInfoRow" id="no_search">
-                                <property name="title" translatable="yes">_Search</property>
-                                <property name="subtitle" translatable="yes">Receive system searches and send results</property>
+                                <property name="title" bind-source="search" bind-property="title" bind-flags="sync-create"/>
+                                <property name="subtitle" bind-source="search" bind-property="subtitle" bind-flags="sync-create"/>
                                 <property name="info" translatable="yes">Disabled</property>
                               </object>
                             </child>
