@@ -21,12 +21,15 @@
 #pragma once
 
 #include <gtk/gtk.h>
+#include "cc-background-item.h"
 
 G_BEGIN_DECLS
 
 #define CC_TYPE_BACKGROUND_CHOOSER (cc_background_chooser_get_type())
 G_DECLARE_FINAL_TYPE (CcBackgroundChooser, cc_background_chooser, CC, BACKGROUND_CHOOSER, GtkBox)
 
-void cc_background_chooser_select_file (CcBackgroundChooser *self);
+void cc_background_chooser_select_file     (CcBackgroundChooser *self);
+void cc_background_chooser_set_active_item (CcBackgroundChooser *self,
+                                            CcBackgroundItem    *active_item);
 
 G_END_DECLS

@@ -219,6 +219,7 @@ reload_current_bg (CcBackgroundPanel *self)
   self->current_background = configured;
   cc_background_item_load (configured, NULL);
 
+  cc_background_chooser_set_active_item (self->background_chooser, configured);
 }
 
 static void
