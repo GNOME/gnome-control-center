@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: amberol\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/issues\n"
-"POT-Creation-Date: 2024-02-12 08:49+0000\n"
-"PO-Revision-Date: 2024-02-12 20:07+0330\n"
+"POT-Creation-Date: 2024-02-13 13:09+0000\n"
+"PO-Revision-Date: 2024-02-16 00:28+0330\n"
 "Last-Translator: Danial Behzadi <dani.behzi@ubuntu.com>\n"
 "Language-Team: Farsi\n"
 "Language: fa\n"
@@ -167,7 +167,7 @@ msgstr ""
 "است چنین کاره‌هایی از اجازه‌هایی استفاده کنند که نشان داده نمی‌شوند."
 
 #: panels/applications/cc-applications-panel.ui:246
-#: panels/printers/pp-details-dialog.c:267 panels/sharing/cc-sharing-panel.c:297
+#: panels/printers/pp-details-dialog.c:267 panels/sharing/cc-sharing-panel.c:240
 msgid "_Open"
 msgstr "_باز کردن"
 
@@ -950,7 +950,7 @@ msgstr "واسنجی نمایشگر"
 #: panels/network/connection-editor/ce-page-details.c:100
 #: panels/network/connection-editor/connection-editor.ui:16
 #: panels/printers/new-printer-dialog.ui:54 panels/printers/pp-details-dialog.c:266
-#: panels/privacy/cc-usage-page.c:136 panels/sharing/cc-sharing-panel.c:296
+#: panels/privacy/cc-usage-page.c:136 panels/sharing/cc-sharing-panel.c:239
 #: panels/system/region/cc-format-chooser.ui:24
 #: panels/system/users/cc-add-user-dialog.ui:25
 #: panels/system/users/cc-avatar-chooser.c:92
@@ -4128,59 +4128,45 @@ msgstr "واپایش آگاهی‌های نمایش داده شده و آن‌چ
 msgid "Notifications;Banner;Message;Tray;Popup;"
 msgstr "Notifications;Banner;Message;Tray;Popup;آگاهیها;بنر;پیام;سینی;واشو;"
 
-#: panels/online-accounts/cc-online-account-provider-row.c:95
+#: panels/online-accounts/cc-online-account-provider-row.c:55
+msgid "Email"
+msgstr "رایانامه"
+
+#. IMAP and SMTP
+#: panels/online-accounts/cc-online-account-provider-row.c:56
+msgid "Calendars, Contacts, Files"
+msgstr "تقویم‌ها، آشنایان، پرونده‌ها"
+
+#. WebDAV
+#. Nextcloud
+#. Google
+#. Microsoft 365
+#. Microsoft Exchange
+#. Microsoft Personal
+#: panels/online-accounts/cc-online-account-provider-row.c:62
+msgid "Enterprise Login"
+msgstr "ورود تجاری"
+
+#: panels/online-accounts/cc-online-account-provider-row.c:136
 msgctxt "Online Account"
 msgid "Other"
 msgstr "موارد دیگر"
 
-#. Translators: The %s is the username (eg., debarshi.ray@gmail.com
-#. * or rishi).
-#.
-#: panels/online-accounts/cc-online-accounts-panel.c:280
-#, c-format
-msgid "%s removed"
-msgstr "%s حذف شد"
-
-#: panels/online-accounts/cc-online-accounts-panel.c:696
-msgid "Error removing account"
-msgstr "خطای برداشتن حساب"
-
-#. Translators: This is the button which allows undoing the removal of the printer.
-#: panels/online-accounts/cc-online-accounts-panel.ui:29
-#: panels/printers/cc-printers-panel.ui:81
-msgid "Undo"
-msgstr "برگردان"
-
-#: panels/online-accounts/cc-online-accounts-panel.ui:37
-msgid "Close the notification"
-msgstr "بستن آگاهی"
-
-#: panels/online-accounts/cc-online-accounts-panel.ui:61
+#: panels/online-accounts/cc-online-accounts-panel.ui:16
 msgid "Offline — unable to connect accounts"
 msgstr "برون‌خط — ناتوان در وصل شدن به حساب‌ها"
 
-#: panels/online-accounts/cc-online-accounts-panel.ui:67
+#: panels/online-accounts/cc-online-accounts-panel.ui:22
 msgid "Allow apps to access online services by connecting your cloud accounts"
 msgstr "اجازه به کاره‌ها برای دسترسی به خدمت‌های برخط با وصل شدن به حساب‌های ابریتان"
 
-#: panels/online-accounts/cc-online-accounts-panel.ui:71
+#: panels/online-accounts/cc-online-accounts-panel.ui:26
 msgid "Your Accounts"
 msgstr "حساب‌هایتان"
 
-#: panels/online-accounts/cc-online-accounts-panel.ui:91
+#: panels/online-accounts/cc-online-accounts-panel.ui:46
 msgid "Connect an Account"
 msgstr "وصل کردن یک حساب"
-
-#. translators: This is the title of the "Show Account" dialog. The
-#. * %s is the name of the provider. e.g., 'Google'.
-#: panels/online-accounts/gnome-control-center-goa-helper.c:428
-#, c-format
-msgid "%s Account"
-msgstr "حساب %s"
-
-#: panels/online-accounts/gnome-control-center-goa-helper.c:431
-msgid "Remove Account"
-msgstr "برداشتن حساب"
 
 #: panels/online-accounts/gnome-online-accounts-panel.desktop.in:3
 msgid "Online Accounts"
@@ -4512,40 +4498,40 @@ msgid "A_utomatic Screen Brightness"
 msgstr "_روشنایی خودکار صفحه"
 
 #: panels/power/cc-power-panel.ui:131
-msgid "Screen brightness adjusts to the surrounding light"
-msgstr "روشنایی صفحه با نور محیط هماهنگ می‌شود"
+msgid "Adjust screen brightness to the surrounding light"
+msgstr "هماهنگی روشنایی صفحه با نور محیط"
 
 #: panels/power/cc-power-panel.ui:138
 msgid "_Dim Screen"
 msgstr "_تاریکی صفحه"
 
 #: panels/power/cc-power-panel.ui:139
-msgid "Reduces the screen brightness when the computer is inactive"
-msgstr "روشنایی صفحه هنگام غیرفعّال بودن رایانه کاهش می‌یابد"
+msgid "Reduce screen brightness when the computer is inactive"
+msgstr "کاهش روشنایی صفحه هنگام غیرفعّال بودن رایانه"
 
 #: panels/power/cc-power-panel.ui:145
 msgid "Screen _Blank"
 msgstr "_سیاهی صفحه"
 
 #: panels/power/cc-power-panel.ui:146
-msgid "Turns the screen off after a period of inactivity"
-msgstr "صفحه پس از مدّتی غیرفعّال بودن، خاموش می‌شود"
+msgid "Turn the screen off after a period of inactivity"
+msgstr "خاموشی صفحه پس از مدّتی غیرفعّال بودن"
 
 #: panels/power/cc-power-panel.ui:154
 msgid "Automatic Power _Saver"
 msgstr "_ذخیره‌ساز نیروی خودکار"
 
 #: panels/power/cc-power-panel.ui:155
-msgid "Enables power saver mode when battery is low"
-msgstr "هنگام کم بودن باتری، حالت ذخیرهٔ نیرو به کار می‌افتد"
+msgid "Turn on power saver mode when battery power is low"
+msgstr "روشنی حلت ذخیرهٔ نیرو هنگام کم بودن باتری"
 
 #: panels/power/cc-power-panel.ui:162
 msgid "_Automatic Suspend"
 msgstr "_تعلیق خودکار"
 
 #: panels/power/cc-power-panel.ui:163
-msgid "Pauses the computer after a period of inactivity"
-msgstr "رایانه پس از مدّتی غیرفعّال بودن، مکث می‌شود"
+msgid "Pause the computer after a period of inactivity"
+msgstr "مکث رایانه پس از مدّتی غیرفعّال بودن"
 
 #: panels/power/cc-power-panel.ui:189
 msgid "Po_wer Button Behavior"
@@ -4651,6 +4637,11 @@ msgstr "_افزودن چاپگر…"
 #: panels/printers/cc-printers-panel.ui:52
 msgid "Search printers"
 msgstr "جست‌وجوی چاپگرها"
+
+#. Translators: This is the button which allows undoing the removal of the printer.
+#: panels/printers/cc-printers-panel.ui:81
+msgid "Undo"
+msgstr "برگردان"
 
 #: panels/printers/cc-printers-panel.ui:166
 msgid "No Printers"
@@ -6418,7 +6409,7 @@ msgid "Subfolders must be manually added for this location"
 msgstr "زیرشاخه‌ها برای این مکان باید به صورت دستی افزوده شوند"
 
 #: panels/search/cc-search-locations-dialog.c:572
-#: panels/sharing/cc-sharing-panel.c:418
+#: panels/sharing/cc-sharing-panel.c:361
 msgid "Remove Folder"
 msgstr "برداشتن شاخه"
 
@@ -6498,40 +6489,31 @@ msgstr ""
 msgid "No networks selected for sharing"
 msgstr "هیچ شبکه‌ای برای هم‌رسانی انتخاب نشده"
 
-#: panels/sharing/cc-sharing-networks.ui:13 panels/sharing/cc-sharing-panel.ui:114
-msgid "Networks"
-msgstr "شبکه‌ها"
-
-#: panels/sharing/cc-sharing-panel.c:170
-msgctxt "service is enabled"
-msgid "On"
-msgstr "روشن"
-
-#: panels/sharing/cc-sharing-panel.c:172 panels/sharing/cc-sharing-panel.c:195
+#: panels/sharing/cc-sharing-panel.c:149
 msgctxt "service is disabled"
 msgid "Off"
 msgstr "خاموش"
 
-#: panels/sharing/cc-sharing-panel.c:198
+#: panels/sharing/cc-sharing-panel.c:152
 msgctxt "service is enabled"
 msgid "Enabled"
 msgstr "فعال شده"
 
-#: panels/sharing/cc-sharing-panel.c:201
+#: panels/sharing/cc-sharing-panel.c:155
 msgctxt "service is active"
 msgid "Active"
 msgstr "فعّال"
 
-#: panels/sharing/cc-sharing-panel.c:293
+#: panels/sharing/cc-sharing-panel.c:236
 msgid "Choose a Folder"
 msgstr "گزینش یک شاخه"
 
-#: panels/sharing/cc-sharing-panel.c:441
+#: panels/sharing/cc-sharing-panel.c:384
 msgid "Add Folder"
 msgstr "افزودن شاخه"
 
 #. TRANSLATORS: %s is replaced with a link to a dav://<hostname> URL
-#: panels/sharing/cc-sharing-panel.c:528
+#: panels/sharing/cc-sharing-panel.c:471
 #, c-format
 msgid ""
 "File Sharing allows you to share your Public folder with others on your current "
@@ -6539,18 +6521,6 @@ msgid ""
 msgstr ""
 "هم‌رسانی پرونده، می‌گذارد شاخهٔ عمومیتان را با استفاده از این پیوند روی شبکهٔ جاریتان "
 "با دیگران هم‌رسانی کنید: %s"
-
-#. TRANSLATORS: %s is replaced with a link to a "ssh <hostname>" command to run
-#: panels/sharing/cc-sharing-panel.c:534
-#, c-format
-msgid ""
-"When remote login is enabled, remote users can connect using the Secure Shell "
-"command:\n"
-"%s"
-msgstr ""
-"هنگام به کار افتادن ورود دوردست، کاربران دوردست می‌توانند با استفاده از فرمان پوستهٔ "
-"امن وصل شوند:\n"
-"%s"
 
 #: panels/sharing/cc-sharing-panel.ui:16 panels/system/about/cc-about-page.ui:41
 msgid "_Device Name"
@@ -6560,7 +6530,7 @@ msgstr "_نام افزاره"
 msgid "Share files with other devices on the current network"
 msgstr "هم‌رسانی پرونده‌ها با دیگر خدمت‌های روی شبکهٔ کنونی"
 
-#: panels/sharing/cc-sharing-panel.ui:29 panels/sharing/cc-sharing-panel.ui:90
+#: panels/sharing/cc-sharing-panel.ui:29 panels/sharing/cc-sharing-panel.ui:81
 msgid "_File Sharing"
 msgstr "هم‌رسانی _پرونده"
 
@@ -6568,45 +6538,37 @@ msgstr "هم‌رسانی _پرونده"
 msgid "Stream music, photos and videos to devices on the current network"
 msgstr "جریان آهنگ‌ها، عکس‌ها و ویدیوها به افزاره‌های روی شبکهٔ کنونی"
 
-#: panels/sharing/cc-sharing-panel.ui:38 panels/sharing/cc-sharing-panel.ui:212
+#: panels/sharing/cc-sharing-panel.ui:38 panels/sharing/cc-sharing-panel.ui:152
 msgid "_Media Sharing"
 msgstr "هم‌رسانی _رسانه"
 
-#: panels/sharing/cc-sharing-panel.ui:46
-msgid "Enable SSH access for this device"
-msgstr "به کار انداختن دسترسی پوستهٔ امن برای این افزاره"
-
-#: panels/sharing/cc-sharing-panel.ui:47 panels/sharing/cc-sharing-panel.ui:168
-msgid "_Remote Login"
-msgstr "ورود  _دوردست"
-
-#: panels/sharing/cc-sharing-panel.ui:60
+#: panels/sharing/cc-sharing-panel.ui:51
 msgid "File Sharing"
 msgstr "هم‌رسانی پرونده"
 
-#: panels/sharing/cc-sharing-panel.ui:100
+#: panels/sharing/cc-sharing-panel.ui:91
 msgid "_Require Password"
 msgstr "گذرواژه _لازم است"
 
-#: panels/sharing/cc-sharing-panel.ui:106
+#: panels/sharing/cc-sharing-panel.ui:97
 #: panels/system/remote-desktop/cc-remote-desktop-page.ui:136
 #: panels/system/users/cc-add-user-dialog.ui:373
 msgid "_Password"
 msgstr "_گذرواژه"
 
-#: panels/sharing/cc-sharing-panel.ui:138
-msgid "Remote Login"
-msgstr "ورود دوردست"
+#: panels/sharing/cc-sharing-panel.ui:105 panels/sharing/cc-sharing-panel.ui:173
+msgid "Networks"
+msgstr "شبکه‌ها"
 
-#: panels/sharing/cc-sharing-panel.ui:181
+#: panels/sharing/cc-sharing-panel.ui:121
 msgid "Media Sharing"
 msgstr "هم‌رسانی رسانه"
 
-#: panels/sharing/cc-sharing-panel.ui:207
+#: panels/sharing/cc-sharing-panel.ui:147
 msgid "Share music, photos and videos over the network"
 msgstr "هم‌رسانی آهنگ‌ها، عکس‌ها و ویدیوها روی شبکه"
 
-#: panels/sharing/cc-sharing-panel.ui:220
+#: panels/sharing/cc-sharing-panel.ui:160
 msgid "Folders"
 msgstr "پوشه‌ها"
 
@@ -6627,14 +6589,6 @@ msgstr ""
 "share;sharing;ssh;host;name;remote;desktop;media;audio;video;pictures;photos;"
 "movies;server;renderer;هم‌رسانی;اشتراک;میزبان;نام;دور;میزکار;ریانه;صدا;آهنگ;ویدیو;"
 "فیلم;عکس;تصویر;کارساز;سرور;"
-
-#: panels/sharing/org.gnome.controlcenter.remote-login-helper.policy.in.in:11
-msgid "Enable or disable remote login"
-msgstr "به یا از کار انداختن ورود دوردست"
-
-#: panels/sharing/org.gnome.controlcenter.remote-login-helper.policy.in.in:12
-msgid "Authentication is required to enable or disable remote login"
-msgstr "برای به یا از کار انداختن ورود دوردست، تأیید هویت لازم است"
 
 #: panels/sound/cc-alert-chooser-window.c:169
 msgid "Custom"
@@ -7049,10 +7003,19 @@ msgid "Allow this device to be used remotely"
 msgstr "اجازه به این افزاره برای استفاده از دوردست"
 
 #: panels/system/cc-system-panel.ui:69
+#: panels/system/remote-login/cc-remote-login-page.ui:51
+msgid "Secu_re Shell"
+msgstr "_پوستهٔ امن"
+
+#: panels/system/cc-system-panel.ui:70
+msgid "SSH network access"
+msgstr "دسترسی شبکهٔ SSH"
+
+#: panels/system/cc-system-panel.ui:79
 msgid "_About"
 msgstr "_درباره"
 
-#: panels/system/cc-system-panel.ui:70
+#: panels/system/cc-system-panel.ui:80
 msgid "Hardware details and software versions"
 msgstr "نگارش نرم‌افزارها و جزییات سخت‌افزاری"
 
@@ -7424,6 +7387,7 @@ msgstr "نام ا_فزاره"
 #: panels/system/remote-desktop/cc-remote-desktop-page.ui:124
 #: panels/system/remote-desktop/cc-remote-desktop-page.ui:140
 #: panels/system/remote-desktop/cc-remote-desktop-page.ui:145
+#: panels/system/remote-login/cc-remote-login-page.ui:65
 msgid "Copy"
 msgstr "رونوشت"
 
@@ -7456,6 +7420,30 @@ msgid ""
 "The encryption fingerprint can be seen in connecting clients and should be "
 "identical"
 msgstr "اثرانگشت رمزنگاری می‌تواند در کارخواه‌های وصل شده دیده شود و باید یکتا باشد"
+
+#: panels/system/remote-login/cc-remote-login-page.c:53
+msgid "Command copied"
+msgstr "فرمان رونوشت شد"
+
+#: panels/system/remote-login/cc-remote-login-page.ui:4
+msgid "Secure Shell"
+msgstr "پوستهٔ امن"
+
+#: panels/system/remote-login/cc-remote-login-page.ui:39
+msgid "Access this device using Secure Shell (SSH)"
+msgstr "دسترسی به این افزاره با استفاده از پوستهٔ امن (SSH)"
+
+#: panels/system/remote-login/cc-remote-login-page.ui:58
+msgid "SSH Login Command"
+msgstr "فرمان ورود پوستهٔ امن"
+
+#: panels/system/remote-login/org.gnome.controlcenter.remote-login-helper.policy.in.in:11
+msgid "Enable or disable remote login"
+msgstr "به یا از کار انداختن ورود دوردست"
+
+#: panels/system/remote-login/org.gnome.controlcenter.remote-login-helper.policy.in.in:12
+msgid "Authentication is required to enable or disable remote login"
+msgstr "برای به یا از کار انداختن ورود دوردست، تأیید هویت لازم است"
 
 #: panels/system/users/cc-add-user-dialog.c:36
 msgid "Should match the web address of your login provider."
@@ -9678,6 +9666,46 @@ msgstr[1] "%Iu ورودی"
 #: subprojects/gvc/gvc-mixer-control.c:2882
 msgid "System Sounds"
 msgstr "صداهای سامانه"
+
+#, c-format
+#~ msgid "%s removed"
+#~ msgstr "%s حذف شد"
+
+#~ msgid "Error removing account"
+#~ msgstr "خطای برداشتن حساب"
+
+#~ msgid "Close the notification"
+#~ msgstr "بستن آگاهی"
+
+#, c-format
+#~ msgid "%s Account"
+#~ msgstr "حساب %s"
+
+#~ msgid "Remove Account"
+#~ msgstr "برداشتن حساب"
+
+#~ msgctxt "service is enabled"
+#~ msgid "On"
+#~ msgstr "روشن"
+
+#, c-format
+#~ msgid ""
+#~ "When remote login is enabled, remote users can connect using the Secure Shell "
+#~ "command:\n"
+#~ "%s"
+#~ msgstr ""
+#~ "هنگام به کار افتادن ورود دوردست، کاربران دوردست می‌توانند با استفاده از فرمان "
+#~ "پوستهٔ امن وصل شوند:\n"
+#~ "%s"
+
+#~ msgid "Enable SSH access for this device"
+#~ msgstr "به کار انداختن دسترسی پوستهٔ امن برای این افزاره"
+
+#~ msgid "_Remote Login"
+#~ msgstr "ورود  _دوردست"
+
+#~ msgid "Remote Login"
+#~ msgstr "ورود دوردست"
 
 #~ msgid "Reproduce sounds."
 #~ msgstr "بازتولید صداها."
