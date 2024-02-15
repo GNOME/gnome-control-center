@@ -940,24 +940,17 @@ files_equal (const char *a,
 {
 	g_autoptr(GFile) file1 = NULL;
 	g_autoptr(GFile) file2 = NULL;
-	gboolean retval;
 
-	if (a == NULL &&
-	    b == NULL)
+	if (a == NULL && b == NULL)
 		return TRUE;
 
-	if (a == NULL ||
-	    b == NULL)
+	if (a == NULL || b == NULL)
 		return FALSE;
 
 	file1 = g_file_new_for_commandline_arg (a);
 	file2 = g_file_new_for_commandline_arg (b);
-	if (g_file_equal (file1, file2) == FALSE)
-		retval = FALSE;
-	else
-		retval = TRUE;
 
-	return retval;
+	return g_file_equal (file1, file2);
 }
 
 static gboolean
