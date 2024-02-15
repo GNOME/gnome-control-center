@@ -68,7 +68,6 @@ add_file_from_info (BgRecentSource *self,
                     GFileInfo      *info)
 {
   g_autoptr(CcBackgroundItem) item = NULL;
-  CcBackgroundItemFlags flags = 0;
   g_autofree gchar *source_uri = NULL;
   g_autofree gchar *uri = NULL;
   GListStore *store;
@@ -83,9 +82,7 @@ add_file_from_info (BgRecentSource *self,
 
   uri = g_file_get_uri (file);
   item = cc_background_item_new (uri);
-  flags |= CC_BACKGROUND_ITEM_HAS_SHADING | CC_BACKGROUND_ITEM_HAS_PLACEMENT;
   g_object_set (G_OBJECT (item),
-                "flags", flags,
                 "shading", G_DESKTOP_BACKGROUND_SHADING_SOLID,
                 "placement", G_DESKTOP_BACKGROUND_STYLE_ZOOM,
                 "modified", mtime,

@@ -145,8 +145,6 @@ emit_added_in_idle (CcBackgroundXml *xml,
 }
 
 #define NONE "(none)"
-#define UNSET_FLAG(flag) G_STMT_START{ (flags&=~(flag)); }G_STMT_END
-#define SET_FLAG(flag) G_STMT_START{ (flags|=flag); }G_STMT_END
 
 static gboolean
 cc_background_xml_load_xml_internal (CcBackgroundXml *xml,
@@ -173,12 +171,10 @@ cc_background_xml_load_xml_internal (CcBackgroundXml *xml,
   for (list = root->children; list != NULL; list = list->next) {
     if (!strcmp ((gchar *)list->name, "wallpaper")) {
       g_autoptr(CcBackgroundItem) item = NULL;
-      CcBackgroundItemFlags flags;
       g_autofree gchar *uri = NULL;
       g_autofree gchar *cname = NULL;
       g_autofree gchar *id = NULL;
 
-      flags = 0;
       item = cc_background_item_new (NULL);
 
       g_object_set (G_OBJECT (item),
@@ -205,7 +201,6 @@ cc_background_xml_load_xml_internal (CcBackgroundXml *xml,
 	      file = g_file_new_for_commandline_arg_and_cwd (content, dirname);
 	      bg_uri = g_file_get_uri (file);
 	    }
-	    SET_FLAG(CC_BACKGROUND_ITEM_HAS_URI);
 	    g_object_set (G_OBJECT (item), "uri", bg_uri, NULL);
 	  } else {
 	    break;
@@ -226,7 +221,6 @@ cc_background_xml_load_xml_internal (CcBackgroundXml *xml,
 	      file = g_file_new_for_commandline_arg_and_cwd (content, dirname);
 	      bg_uri = g_file_get_uri (file);
 	    }
-	    SET_FLAG(CC_BACKGROUND_ITEM_HAS_URI_DARK);
 	    g_object_set (G_OBJECT (item), "uri-dark", bg_uri, NULL);
 	  } else {
 	    break;
@@ -261,26 +255,22 @@ cc_background_xml_load_xml_internal (CcBackgroundXml *xml,
 	    g_object_set (G_OBJECT (item), "placement",
 			  enum_string_to_value (G_DESKTOP_TYPE_DESKTOP_BACKGROUND_STYLE,
 						g_strstrip ((gchar *)wpa->last->content)), NULL);
-	    SET_FLAG(CC_BACKGROUND_ITEM_HAS_PLACEMENT);
 	  }
 	} else if (!strcmp ((gchar *)wpa->name, "shade_type")) {
 	  if (wpa->last != NULL) {
 	    g_object_set (G_OBJECT (item), "shading",
 			  enum_string_to_value (G_DESKTOP_TYPE_DESKTOP_BACKGROUND_SHADING,
 						g_strstrip ((gchar *)wpa->last->content)), NULL);
-	    SET_FLAG(CC_BACKGROUND_ITEM_HAS_SHADING);
 	  }
 	} else if (!strcmp ((gchar *)wpa->name, "pcolor")) {
 	  if (wpa->last != NULL) {
 	    g_object_set (G_OBJECT (item), "primary-color",
 			  g_strstrip ((gchar *)wpa->last->content), NULL);
-	    SET_FLAG(CC_BACKGROUND_ITEM_HAS_PCOLOR);
 	  }
 	} else if (!strcmp ((gchar *)wpa->name, "scolor")) {
 	  if (wpa->last != NULL) {
 	    g_object_set (G_OBJECT (item), "secondary-color",
 			  g_strstrip ((gchar *)wpa->last->content), NULL);
-	    SET_FLAG(CC_BACKGROUND_ITEM_HAS_SCOLOR);
 	  }
 	} else if (!strcmp ((gchar *)wpa->name, "source_url")) {
 	   if (wpa->last != NULL) {
@@ -325,7 +315,6 @@ cc_background_xml_load_xml_internal (CcBackgroundXml *xml,
 	continue;
       }
 
-      g_object_set (G_OBJECT (item), "flags", flags, NULL);
       g_hash_table_insert (xml->wp_hash,
                            g_strdup (id),
                            g_object_ref (item));

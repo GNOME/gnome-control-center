@@ -355,6 +355,14 @@ cc_background_item_get_name (CcBackgroundItem *item)
 }
 
 static void
+_add_flag (CcBackgroundItem      *item,
+           CcBackgroundItemFlags  flag)
+{
+        item->flags |= flag;
+        g_object_notify_by_pspec (G_OBJECT (item), props[PROP_FLAGS]);
+}
+
+static void
 _set_uri (CcBackgroundItem *item,
 	  const char       *value)
 {
@@ -366,6 +374,7 @@ _set_uri (CcBackgroundItem *item,
 			g_warning ("URI '%s' is invalid", value);
 		item->uri = g_strdup (value);
 	}
+        _add_flag (item, CC_BACKGROUND_ITEM_HAS_URI);
 }
 
 
@@ -381,6 +390,7 @@ _set_uri_dark (CcBackgroundItem *item,
 			g_warning ("URI '%s' is invalid", value);
 		item->uri_dark = g_strdup (value);
 	}
+        _add_flag (item, CC_BACKGROUND_ITEM_HAS_URI_DARK);
 }
 
 const char *
@@ -404,6 +414,7 @@ _set_placement (CcBackgroundItem        *item,
                 GDesktopBackgroundStyle  value)
 {
         item->placement = value;
+        _add_flag (item, CC_BACKGROUND_ITEM_HAS_PLACEMENT);
 }
 
 static void
@@ -411,6 +422,7 @@ _set_shading (CcBackgroundItem          *item,
               GDesktopBackgroundShading  value)
 {
         item->shading = value;
+        _add_flag (item, CC_BACKGROUND_ITEM_HAS_SHADING);
 }
 
 static void
@@ -419,6 +431,7 @@ _set_primary_color (CcBackgroundItem *item,
 {
         g_free (item->primary_color);
         item->primary_color = g_strdup (value);
+        _add_flag (item, CC_BACKGROUND_ITEM_HAS_PCOLOR);
 }
 
 const char *
@@ -435,6 +448,7 @@ _set_secondary_color (CcBackgroundItem *item,
 {
         g_free (item->secondary_color);
         item->secondary_color = g_strdup (value);
+        _add_flag (item, CC_BACKGROUND_ITEM_HAS_SCOLOR);
 }
 
 const char *
@@ -498,13 +512,6 @@ cc_background_item_get_source_xml (CcBackgroundItem *item)
 	g_return_val_if_fail (CC_IS_BACKGROUND_ITEM (item), NULL);
 
 	return item->source_xml;
-}
-
-static void
-_set_flags (CcBackgroundItem      *item,
-            CcBackgroundItemFlags  value)
-{
-	item->flags = value;
 }
 
 CcBackgroundItemFlags
@@ -593,9 +600,6 @@ cc_background_item_set_property (GObject      *object,
 		break;
 	case PROP_SOURCE_XML:
 		_set_source_xml (self, g_value_get_string (value));
-		break;
-	case PROP_FLAGS:
-		_set_flags (self, g_value_get_flags (value));
 		break;
 	case PROP_NEEDS_DOWNLOAD:
 		_set_needs_download (self, g_value_get_boolean (value));
@@ -759,7 +763,7 @@ cc_background_item_class_init (CcBackgroundItemClass *klass)
                                                 "flags",
                                                 CC_TYPE_BACKGROUND_ITEM_FLAGS,
                                                 0,
-                                                G_PARAM_READWRITE);
+                                                G_PARAM_READABLE);
 
         props[PROP_SIZE] = g_param_spec_string ("size",
                                                 "size",
