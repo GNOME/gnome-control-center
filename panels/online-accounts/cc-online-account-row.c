@@ -90,7 +90,7 @@ cc_online_account_row_new (GoaObject *object)
   g_autoptr(GIcon) gicon = NULL;
   g_autoptr(GError) error = NULL;
 
-  self = g_object_new (cc_online_account_row_get_type (), NULL);
+  self = g_object_new (CC_TYPE_ONLINE_ACCOUNT_ROW, NULL);
 
   self->object = g_object_ref (object);
 

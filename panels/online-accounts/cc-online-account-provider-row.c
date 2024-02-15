@@ -128,7 +128,7 @@ cc_online_account_provider_row_new (GoaProvider *provider)
   g_autofree gchar *name = NULL;
   const char *title = NULL;
 
-  self = g_object_new (cc_online_account_provider_row_get_type (), NULL);
+  self = g_object_new (CC_TYPE_ONLINE_ACCOUNT_PROVIDER_ROW, NULL);
 
   if (provider == NULL)
     {

@@ -26,6 +26,8 @@
 
 G_BEGIN_DECLS
 
+#define CC_TYPE_ONLINE_ACCOUNT_ROW (cc_online_account_row_get_type ())
+
 G_DECLARE_FINAL_TYPE (CcOnlineAccountRow, cc_online_account_row, CC, ONLINE_ACCOUNT_ROW, AdwActionRow)
 
 CcOnlineAccountRow *cc_online_account_row_new        (GoaObject *object);
