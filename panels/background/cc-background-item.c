@@ -88,8 +88,11 @@ enum {
         PROP_FLAGS,
         PROP_SIZE,
         PROP_NEEDS_DOWNLOAD,
-        PROP_MODIFIED
+        PROP_MODIFIED,
+        N_PROPS
 };
+
+static GParamSpec *props [N_PROPS];
 
 static void     cc_background_item_finalize       (GObject               *object);
 
@@ -689,117 +692,96 @@ cc_background_item_class_init (CcBackgroundItemClass *klass)
         object_class->constructor = cc_background_item_constructor;
         object_class->finalize = cc_background_item_finalize;
 
-        g_object_class_install_property (object_class,
-                                         PROP_NAME,
-                                         g_param_spec_string ("name",
-                                                              "name",
-                                                              "name",
-                                                              NULL,
-                                                              G_PARAM_READWRITE));
-        g_object_class_install_property (object_class,
-                                         PROP_URI,
-                                         g_param_spec_string ("uri",
-                                                              "uri",
-                                                              "uri",
-                                                              NULL,
-                                                              G_PARAM_READWRITE));
-        g_object_class_install_property (object_class,
-                                         PROP_URI_DARK,
-                                         g_param_spec_string ("uri-dark",
-                                                              "uri-dark",
-                                                              "uri-dark",
-                                                              NULL,
-                                                              G_PARAM_READWRITE));
-        g_object_class_install_property (object_class,
-                                         PROP_PLACEMENT,
-					 g_param_spec_enum ("placement",
-							    "placement",
-							    "placement",
-							    G_DESKTOP_TYPE_DESKTOP_BACKGROUND_STYLE,
-							    G_DESKTOP_BACKGROUND_STYLE_SCALED,
-							    G_PARAM_READWRITE));
+        props[PROP_NAME] = g_param_spec_string ("name",
+                                                "name",
+                                                "name",
+                                                NULL,
+                                                G_PARAM_READWRITE);
 
-        g_object_class_install_property (object_class,
-                                         PROP_SHADING,
-                                         g_param_spec_enum ("shading",
-							    "shading",
-							    "shading",
-							    G_DESKTOP_TYPE_DESKTOP_BACKGROUND_SHADING,
-							    G_DESKTOP_BACKGROUND_SHADING_SOLID,
-							    G_PARAM_READWRITE));
-        g_object_class_install_property (object_class,
-                                         PROP_PRIMARY_COLOR,
-                                         g_param_spec_string ("primary-color",
-                                                              "primary-color",
-                                                              "primary-color",
-                                                              "#000000000000",
-                                                              G_PARAM_READWRITE));
-        g_object_class_install_property (object_class,
-                                         PROP_SECONDARY_COLOR,
-                                         g_param_spec_string ("secondary-color",
-                                                              "secondary-color",
-                                                              "secondary-color",
-                                                              "#000000000000",
-                                                              G_PARAM_READWRITE));
+        props[PROP_URI] = g_param_spec_string ("uri",
+                                               "uri",
+                                               "uri",
+                                               NULL,
+                                               G_PARAM_READWRITE);
 
-        g_object_class_install_property (object_class,
-                                         PROP_IS_DELETED,
-                                         g_param_spec_boolean ("is-deleted",
-                                                               NULL,
-                                                               NULL,
-                                                               FALSE,
-                                                               G_PARAM_READWRITE));
+        props[PROP_URI_DARK] = g_param_spec_string ("uri-dark",
+                                                    "uri-dark",
+                                                    "uri-dark",
+                                                    NULL,
+                                                    G_PARAM_READWRITE);
 
-        g_object_class_install_property (object_class,
-                                         PROP_SOURCE_URL,
-                                         g_param_spec_string ("source-url",
-                                                              "source-url",
-                                                              "source-url",
-                                                              NULL,
-                                                              G_PARAM_READWRITE));
+        props[PROP_PLACEMENT] = g_param_spec_enum ("placement",
+                                                   "placement",
+                                                   "placement",
+                                                   G_DESKTOP_TYPE_DESKTOP_BACKGROUND_STYLE,
+                                                   G_DESKTOP_BACKGROUND_STYLE_SCALED,
+                                                   G_PARAM_READWRITE);
 
-        g_object_class_install_property (object_class,
-                                         PROP_SOURCE_XML,
-                                         g_param_spec_string ("source-xml",
-                                                              "source-xml",
-                                                              "source-xml",
-                                                              NULL,
-                                                              G_PARAM_READWRITE));
+        props[PROP_SHADING] = g_param_spec_enum ("shading",
+                                                 "shading",
+                                                 "shading",
+                                                 G_DESKTOP_TYPE_DESKTOP_BACKGROUND_SHADING,
+                                                 G_DESKTOP_BACKGROUND_SHADING_SOLID,
+                                                 G_PARAM_READWRITE);
 
-	g_object_class_install_property (object_class,
-					 PROP_FLAGS,
-					 g_param_spec_flags ("flags",
-							     "flags",
-							     "flags",
-							     CC_TYPE_BACKGROUND_ITEM_FLAGS,
-							     0,
-							     G_PARAM_READWRITE));
+        props[PROP_PRIMARY_COLOR] = g_param_spec_string ("primary-color",
+                                                         "primary-color",
+                                                         "primary-color",
+                                                         "#000000000000",
+                                                         G_PARAM_READWRITE);
 
-        g_object_class_install_property (object_class,
-                                         PROP_SIZE,
-                                         g_param_spec_string ("size",
-                                                              "size",
-                                                              "size",
-                                                              NULL,
-                                                              G_PARAM_READABLE));
+        props[PROP_SECONDARY_COLOR] = g_param_spec_string ("secondary-color",
+                                                           "secondary-color",
+                                                           "secondary-color",
+                                                           "#000000000000",
+                                                           G_PARAM_READWRITE);
 
-        g_object_class_install_property (object_class,
-                                         PROP_NEEDS_DOWNLOAD,
-                                         g_param_spec_boolean ("needs-download",
-                                                               NULL,
-                                                               NULL,
-                                                               TRUE,
-                                                               G_PARAM_READWRITE));
+        props[PROP_IS_DELETED] = g_param_spec_boolean ("is-deleted",
+                                                       NULL,
+                                                       NULL,
+                                                       FALSE,
+                                                       G_PARAM_READWRITE);
 
-        g_object_class_install_property (object_class,
-                                         PROP_MODIFIED,
-                                         g_param_spec_uint64 ("modified",
-                                                              "modified",
-                                                              NULL,
-                                                              0,
-                                                              G_MAXUINT64,
-                                                              0,
-                                                              G_PARAM_READWRITE));
+        props[PROP_SOURCE_URL] = g_param_spec_string ("source-url",
+                                                      "source-url",
+                                                      "source-url",
+                                                      NULL,
+                                                      G_PARAM_READWRITE);
+
+        props[PROP_SOURCE_XML] = g_param_spec_string ("source-xml",
+                                                      "source-xml",
+                                                      "source-xml",
+                                                      NULL,
+                                                      G_PARAM_READWRITE);
+
+        props[PROP_FLAGS] = g_param_spec_flags ("flags",
+                                                "flags",
+                                                "flags",
+                                                CC_TYPE_BACKGROUND_ITEM_FLAGS,
+                                                0,
+                                                G_PARAM_READWRITE);
+
+        props[PROP_SIZE] = g_param_spec_string ("size",
+                                                "size",
+                                                "size",
+                                                NULL,
+                                                G_PARAM_READABLE);
+
+        props[PROP_NEEDS_DOWNLOAD] = g_param_spec_boolean ("needs-download",
+                                                           NULL,
+                                                           NULL,
+                                                           TRUE,
+                                                           G_PARAM_READWRITE);
+
+        props[PROP_MODIFIED] = g_param_spec_uint64 ("modified",
+                                                    "modified",
+                                                    NULL,
+                                                    0,
+                                                    G_MAXUINT64,
+                                                    0,
+                                                    G_PARAM_READWRITE);
+
+        g_object_class_install_properties (object_class, N_PROPS, props);
 }
 
 static void
