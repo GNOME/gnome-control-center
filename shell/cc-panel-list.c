@@ -339,6 +339,9 @@ filter_func (GtkListBoxRow *row,
   for (j = 0; !retval && self->search_words[j] != NULL; j++) {
     const gchar *search_word = self->search_words[j];
 
+    if (search_word[0] == '\0')
+      continue;
+
     // Compare keywords
     for (i = 0; !retval && data->keywords[i] != NULL; i++)
       retval = (strstr (data->keywords[i], search_word) == data->keywords[i]);
