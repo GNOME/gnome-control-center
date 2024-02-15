@@ -32,6 +32,7 @@
 #include "cc-applications-panel.h"
 #include "cc-applications-row.h"
 #include "cc-info-row.h"
+#include "cc-list-row.h"
 #include "cc-default-apps-page.h"
 #include "cc-removable-media-settings.h"
 #include "cc-applications-resources.h"
@@ -134,7 +135,7 @@ struct _CcApplicationsPanel
   GList           *link_handler_rows;
 
   GtkWidget       *usage_section;
-  CcInfoRow       *storage;
+  CcListRow       *storage;
   GtkWindow       *storage_dialog;
   CcInfoRow       *app;
   CcInfoRow       *data;
@@ -1250,16 +1251,13 @@ static void
 update_total_size (CcApplicationsPanel *self)
 {
   g_autofree gchar *formatted_size = NULL;
-  g_autofree gchar *subtitle = NULL;
   guint64 total;
 
   total = self->app_size + self->data_size + self->cache_size;
   formatted_size = g_format_size (total);
   g_object_set (self->total, "info", formatted_size, NULL);
 
-  /* Translators: '%s' is the formatted size, e.g. "26.2 MB" */
-  subtitle = g_strdup_printf (_("%s of disk space used"), formatted_size);
-  g_object_set (self->storage, "subtitle", subtitle, NULL);
+  cc_list_row_set_secondary_label (self->storage, formatted_size);
 }
 
 static void
@@ -1864,7 +1862,8 @@ cc_applications_panel_init (CcApplicationsPanel *self)
 
   g_resources_register (cc_applications_get_resource ());
 
-  g_type_ensure(CC_TYPE_INFO_ROW);
+  g_type_ensure (CC_TYPE_INFO_ROW);
+  g_type_ensure (CC_TYPE_LIST_ROW);
 
   gtk_widget_init_template (GTK_WIDGET (self));
 
