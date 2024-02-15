@@ -53,6 +53,7 @@ struct _CcPanelList
 
   gchar              *current_panel_id;
   gchar              *search_query;
+  gchar             **search_words;
 
   CcPanelListView     previous_view;
   CcPanelListView     view;
@@ -313,7 +314,6 @@ filter_func (GtkListBoxRow *row,
   CcPanelList *self;
   RowData *data;
   g_autofree gchar *panel_text = NULL;
-  g_autofree gchar **search_words = NULL;
   g_autofree gchar *panel_description = NULL;
   gboolean retval = FALSE;
   gint i, j;
@@ -321,12 +321,10 @@ filter_func (GtkListBoxRow *row,
   self = CC_PANEL_LIST (user_data);
   data = g_object_get_data (G_OBJECT (row), "data");
 
-  if (!self->search_query)
+  if (!self->search_words)
     return TRUE;
 
   panel_text = cc_util_normalize_casefold_and_unaccent (data->name);
-  // Split words separated by a space
-  search_words = g_strsplit (g_strstrip (cc_util_normalize_casefold_and_unaccent (self->search_query)), " ", -1);
   panel_description = cc_util_normalize_casefold_and_unaccent (data->description);
 
   g_strstrip (panel_text);
@@ -338,14 +336,16 @@ filter_func (GtkListBoxRow *row,
    */
   gtk_widget_set_visible (data->description_label, self->view == CC_PANEL_LIST_SEARCH);
 
-  for (j = 0; !retval && search_words[j] != NULL; j++) {
+  for (j = 0; !retval && self->search_words[j] != NULL; j++) {
+    const gchar *search_word = self->search_words[j];
+
     // Compare keywords
     for (i = 0; !retval && data->keywords[i] != NULL; i++)
-      retval = (strstr (data->keywords[i], search_words[j]) == data->keywords[i]);
+      retval = (strstr (data->keywords[i], search_word) == data->keywords[i]);
 
     // Compare panel title and description
-    retval = retval || (g_strstr_len (panel_text, -1, search_words[j]) != NULL ||
-                        g_strstr_len (panel_description, -1, search_words[j]) != NULL);
+    retval = retval || (g_strstr_len (panel_text, -1, search_word) != NULL ||
+                        g_strstr_len (panel_description, -1, search_word) != NULL);
   }
 
   return retval;
@@ -582,6 +582,7 @@ cc_panel_list_finalize (GObject *object)
   CcPanelList *self = (CcPanelList *)object;
 
   g_clear_pointer (&self->search_query, g_free);
+  g_clear_pointer (&self->search_words, g_strfreev);
   g_clear_pointer (&self->current_panel_id, g_free);
   g_clear_pointer (&self->id_to_data, g_hash_table_destroy);
   g_clear_pointer (&self->id_to_search_data, g_hash_table_destroy);
@@ -833,8 +834,16 @@ cc_panel_list_set_search_query (CcPanelList *self,
 
   if (g_strcmp0 (self->search_query, search) != 0)
     {
+      g_autofree gchar *search_query_normalized;
+
       g_clear_pointer (&self->search_query, g_free);
+      g_clear_pointer (&self->search_words, g_strfreev);
+
       self->search_query = g_strdup (search);
+
+      /* Split on spaces */
+      search_query_normalized = cc_util_normalize_casefold_and_unaccent (search);
+      self->search_words = g_strsplit (g_strstrip (search_query_normalized), " ", 0);
 
       update_search (self);
 
