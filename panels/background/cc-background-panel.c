@@ -69,6 +69,8 @@ struct _CcBackgroundPanel
 
 CC_PANEL_REGISTER (CcBackgroundPanel, cc_background_panel)
 
+static void on_settings_changed (CcBackgroundPanel *self);
+
 static void
 load_custom_css (CcBackgroundPanel *self)
 {
@@ -330,8 +332,14 @@ static void
 on_chooser_background_chosen_cb (CcBackgroundPanel *self,
                                  CcBackgroundItem  *item)
 {
+  g_signal_handlers_block_by_func (self->settings, on_settings_changed, self);
+
   set_background (self, self->settings, item, TRUE);
   set_background (self, self->lock_settings, item, FALSE);
+
+  on_settings_changed (self);
+
+  g_signal_handlers_unblock_by_func (self->settings, on_settings_changed, self);
 }
 
 static void
