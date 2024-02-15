@@ -315,7 +315,7 @@ filter_func (GtkListBoxRow *row,
   RowData *data;
   g_autofree gchar *panel_text = NULL;
   g_autofree gchar *panel_description = NULL;
-  gboolean retval = FALSE;
+  gboolean retval = TRUE;
   gint i, j;
 
   self = CC_PANEL_LIST (user_data);
@@ -336,19 +336,23 @@ filter_func (GtkListBoxRow *row,
    */
   gtk_widget_set_visible (data->description_label, self->view == CC_PANEL_LIST_SEARCH);
 
-  for (j = 0; !retval && self->search_words[j] != NULL; j++) {
+  for (j = 0; retval && self->search_words[j] != NULL; j++) {
     const gchar *search_word = self->search_words[j];
+    gboolean match = FALSE;
 
     if (search_word[0] == '\0')
       continue;
 
     // Compare keywords
-    for (i = 0; !retval && data->keywords[i] != NULL; i++)
-      retval = (strstr (data->keywords[i], search_word) == data->keywords[i]);
+    for (i = 0; !match && data->keywords[i] != NULL; i++)
+      match = (strstr (data->keywords[i], search_word) == data->keywords[i]);
 
     // Compare panel title and description
-    retval = retval || (g_strstr_len (panel_text, -1, search_word) != NULL ||
-                        g_strstr_len (panel_description, -1, search_word) != NULL);
+    match = match || (g_strstr_len (panel_text, -1, search_word) != NULL ||
+                      g_strstr_len (panel_description, -1, search_word) != NULL);
+
+    // All search words must match
+    retval = retval && match;
   }
 
   return retval;
@@ -422,6 +426,9 @@ sort_function (GtkListBoxRow *a,
   return get_panel_id_index (a_id) - get_panel_id_index (b_id);
 }
 
+
+/* FIXME: This is now different from the "match all words" search.
+          Maybe add a search score based on number of matches in filter_func()? */
 static gint
 search_sort_function (GtkListBoxRow *a,
                       GtkListBoxRow *b,
