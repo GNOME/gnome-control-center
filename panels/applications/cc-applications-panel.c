@@ -1924,7 +1924,7 @@ cc_applications_panel_init (CcApplicationsPanel *self)
   self->manager = mct_manager_new (system_bus);
   self->app_filter = mct_manager_get_app_filter (self->manager,
                                                  getuid (),
-                                                 MCT_GET_APP_FILTER_FLAGS_NONE,
+                                                 MCT_MANAGER_GET_VALUE_FLAGS_NONE,
                                                  self->cancellable,
                                                  &error);
   if (error)

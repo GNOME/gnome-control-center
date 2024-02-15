@@ -528,7 +528,7 @@ is_parental_controls_enabled_for_user (ActUser *user)
     manager = mct_manager_new (system_bus);
     app_filter = mct_manager_get_app_filter (manager,
                                              act_user_get_uid (user),
-                                             MCT_GET_APP_FILTER_FLAGS_NONE,
+                                             MCT_MANAGER_GET_VALUE_FLAGS_NONE,
                                              NULL,
                                              &error);
     if (error) {
