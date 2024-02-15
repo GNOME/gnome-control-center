@@ -276,7 +276,7 @@
                             <property name="title" translatable="yes">Permissions</property>
                             <child>
                               <object class="AdwSwitchRow" id="search">
-                                <property name="title" translatable="yes">_Search</property>
+                                <property name="title" translatable="yes" comments="Translators: This row shows/sets whether the app shown in this page can add results to the GNOME Shell search results. Internally this enables/disables the app's Shell Search Provider">_Search</property>
                                 <property name="subtitle" translatable="yes">Receive system searches and send results</property>
                                 <property name="use-underline">True</property>
                                 <signal name="notify::active" handler="search_cb" object="CcApplicationsPanel" swapped="yes"/>
