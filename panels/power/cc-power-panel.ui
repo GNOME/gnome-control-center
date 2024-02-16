@@ -157,25 +157,12 @@
                   </object>
                 </child>
                 <child>
-                  <object class="AdwActionRow" id="automatic_suspend_row">
+                  <object class="CcListRow" id="automatic_suspend_row">
                     <property name="visible">False</property>
                     <property name="title" translatable="yes">_Automatic Suspend</property>
                     <property name="subtitle" translatable="yes">Pause the computer after a period of inactivity</property>
-                    <property name="use_underline">True</property>
-                    <property name="activatable">True</property>
+                    <property name="show-arrow">True</property>
                     <signal name="activated" handler="automatic_suspend_row_activated_cb" swapped="yes"/>
-                    <child>
-                      <object class="GtkLabel" id="automatic_suspend_label">
-                        <property name="halign">end</property>
-                        <signal name="mnemonic-activate" handler="automatic_suspend_label_mnemonic_activate_cb" object="CcPowerPanel" swapped="yes"/>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkImage">
-                        <property name="valign">center</property>
-                        <property name="icon-name">go-next-symbolic</property>
-                      </object>
-                    </child>
                   </object>
                 </child>
               </object>
