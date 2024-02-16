@@ -890,6 +890,7 @@ forget_selected (NetDeviceWifi *self, CcWifiConnectionRow *row, CcWifiConnection
                                           G_CALLBACK (on_saved_networks_forget_dismissed),
                                           self);
         } else {
+                /* Translators: %d is the number of network connections deleted. */
                 message = g_strdup_printf (ngettext ("%d network deleted",
                                                      "%d networks deleted",
                                                      self->saved_networks_forgotten_rows->len),
