@@ -890,7 +890,11 @@ forget_selected (NetDeviceWifi *self, CcWifiConnectionRow *row, CcWifiConnection
                                           G_CALLBACK (on_saved_networks_forget_dismissed),
                                           self);
         } else {
-                message = g_strdup_printf (_("%d networks deleted"), self->saved_networks_forgotten_rows->len);
+                message = g_strdup_printf (ngettext ("%d network deleted",
+                                                     "%d networks deleted",
+                                                     self->saved_networks_forgotten_rows->len),
+                                           self->saved_networks_forgotten_rows->len);
+
                 adw_toast_set_title (self->saved_networks_undo_toast, message);
 
                 g_object_ref (self->saved_networks_undo_toast);
