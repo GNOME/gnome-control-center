@@ -45,20 +45,17 @@ struct _CcPowerPanel
   GtkListBoxRow     *automatic_suspend_row;
   GtkListBox        *battery_listbox;
   AdwSwitchRow      *battery_percentage_row;
-  GtkSizeGroup      *battery_row_sizegroup;
   AdwPreferencesGroup *battery_section;
   AdwComboRow       *blank_screen_row;
   GtkListBox        *device_listbox;
   AdwPreferencesGroup *device_section;
   AdwSwitchRow      *dim_screen_row;
   AdwPreferencesGroup *general_section;
-  GtkSizeGroup      *level_sizegroup;
   AdwComboRow       *power_button_row;
   GtkListBox        *power_profile_listbox;
   GtkListBox        *power_profile_info_listbox;
   AdwPreferencesGroup *power_profile_section;
   AdwSwitchRow      *power_saver_low_battery_row;
-  GtkSizeGroup      *row_sizegroup;
   GtkComboBox       *suspend_on_battery_delay_combo;
   AdwSwitchRow      *suspend_on_battery_switch_row;
   GtkWidget         *suspend_on_battery_group;
@@ -116,8 +113,6 @@ static void
 add_battery (CcPowerPanel *self, UpDevice *device, gboolean primary)
 {
   CcBatteryRow *row = cc_battery_row_new (device, primary);
-  cc_battery_row_set_level_sizegroup (row, self->level_sizegroup);
-  cc_battery_row_set_row_sizegroup (row, self->battery_row_sizegroup);
 
   gtk_list_box_append (self->battery_listbox, GTK_WIDGET (row));
   gtk_widget_set_visible (GTK_WIDGET (self->battery_section), TRUE);
@@ -127,8 +122,6 @@ static void
 add_device (CcPowerPanel *self, UpDevice *device)
 {
   CcBatteryRow *row = cc_battery_row_new (device, FALSE);
-  cc_battery_row_set_level_sizegroup (row, self->level_sizegroup);
-  cc_battery_row_set_row_sizegroup (row, self->row_sizegroup);
 
   gtk_list_box_append (self->device_listbox, GTK_WIDGET (row));
   gtk_widget_set_visible (GTK_WIDGET (self->device_section), TRUE);
@@ -1276,7 +1269,6 @@ setup_power_profiles (CcPowerPanel *self)
                                0);
       self->power_profiles_row[profile] = row;
       gtk_list_box_append (self->power_profile_listbox, GTK_WIDGET (row));
-      gtk_size_group_add_widget (self->row_sizegroup, GTK_WIDGET (row));
 
       /* Connect radio button to group */
       button = cc_power_profile_row_get_radio_button (row);
@@ -1408,20 +1400,17 @@ cc_power_panel_class_init (CcPowerPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, automatic_suspend_row);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, battery_listbox);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, battery_percentage_row);
-  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, battery_row_sizegroup);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, battery_section);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, blank_screen_row);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, device_listbox);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, device_section);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, dim_screen_row);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, general_section);
-  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, level_sizegroup);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, power_button_row);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, power_profile_listbox);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, power_profile_info_listbox);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, power_profile_section);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, power_saver_low_battery_row);
-  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, row_sizegroup);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, suspend_on_battery_delay_combo);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, suspend_on_battery_switch_row);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, suspend_on_battery_group);

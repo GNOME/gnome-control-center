@@ -317,34 +317,6 @@ cc_battery_row_new (UpDevice *device,
 
 
 
-void
-cc_battery_row_set_level_sizegroup (CcBatteryRow *self,
-                                    GtkSizeGroup *sizegroup)
-{
-  gtk_size_group_add_widget (sizegroup, GTK_WIDGET (self->levelbar));
-}
-
-void
-cc_battery_row_set_row_sizegroup (CcBatteryRow *self,
-                                  GtkSizeGroup *sizegroup)
-{
-  gtk_size_group_add_widget (sizegroup, GTK_WIDGET (self));
-}
-
-void
-cc_battery_row_set_charge_sizegroup (CcBatteryRow *self,
-                                     GtkSizeGroup *sizegroup)
-{
-  gtk_size_group_add_widget (sizegroup, GTK_WIDGET (self->percentage_label));
-}
-
-void
-cc_battery_row_set_battery_sizegroup (CcBatteryRow *self,
-                                      GtkSizeGroup *sizegroup)
-{
-  gtk_size_group_add_widget (sizegroup, GTK_WIDGET (self->battery_box));
-}
-
 gboolean
 cc_battery_row_get_primary (CcBatteryRow *self)
 {
