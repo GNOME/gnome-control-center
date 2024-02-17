@@ -9,15 +9,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: amberol\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/issues\n"
-"POT-Creation-Date: 2024-02-13 13:09+0000\n"
-"PO-Revision-Date: 2024-02-16 00:28+0330\n"
+"POT-Creation-Date: 2024-02-16 09:50+0000\n"
+"PO-Revision-Date: 2024-02-17 16:11+0330\n"
 "Last-Translator: Danial Behzadi <dani.behzi@ubuntu.com>\n"
 "Language-Team: Farsi\n"
 "Language: fa\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n==0 || n==1);\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Poedit 3.4.2\n"
 
 #. Translators: %s is an app name. (e.g. "Firefox is not sandboxed")
@@ -745,30 +745,30 @@ msgstr ""
 "audio;video;disc;removable;device;system;برنامه;فلت‌پک;اجازه;تنظیمات;پیش‌گزیده;"
 "ترجیحی;رسانه;اجرای خودکار;سی‌دی;دی‌وی‌دی;یواس‌بی;صدا;ویدیو;دیسک;برداشتنی;افزاره;سامانه;"
 
-#: panels/background/cc-background-chooser.c:157
+#: panels/background/cc-background-chooser.c:160
 msgid "Remove Background"
 msgstr "برداشتن پس‌زمینه"
 
-#: panels/background/cc-background-chooser.c:339
+#: panels/background/cc-background-chooser.c:345
 msgid "Select a picture"
 msgstr "گزینش یک عکس"
 
-#: panels/background/cc-background-item.c:170
+#: panels/background/cc-background-item.c:173
 msgid "multiple sizes"
 msgstr "اندازه‌های چندگانه"
 
 #. translators: 100 × 100px
 #. * Note that this is not an "x", but U+00D7 MULTIPLICATION SIGN
-#: panels/background/cc-background-item.c:177
+#: panels/background/cc-background-item.c:180
 #, c-format
 msgid "%d × %d"
 msgstr "%Id × %Id"
 
-#: panels/background/cc-background-item.c:292
+#: panels/background/cc-background-item.c:295
 msgid "No Desktop Background"
 msgstr "بدون تصویر پس‌زمینه"
 
-#: panels/background/cc-background-panel.c:226
+#: panels/background/cc-background-panel.c:212
 msgid "Current background"
 msgstr "تصویر پس‌زمینه کنونی"
 
@@ -3082,12 +3082,12 @@ msgstr[1] "%Ii روز پیش"
 #: panels/network/connection-editor/ce-page-details.c:330
 #, c-format
 msgid "%d Mb/s (%1.1f GHz)"
-msgstr "%Id مگابیت/ثانیه (%I1.1f گیگاهرتز)"
+msgstr "%Id م‌ب/ث (%I1.1f گ‌ه)"
 
 #: panels/network/connection-editor/ce-page-details.c:332
 #, c-format
 msgid "%d Mb/s"
-msgstr "%Id مگابیت/ثانیه"
+msgstr "%Id م‌ب/ث"
 
 #: panels/network/connection-editor/ce-page-details.c:347
 msgid "2.4 GHz / 5 GHz"
@@ -3726,16 +3726,19 @@ msgstr "شبکه حذف شد"
 msgid "_Undo"
 msgstr "_برگردان"
 
-#: panels/network/net-device-wifi.c:893
+#. Translators: %d is the number of network connections deleted.
+#: panels/network/net-device-wifi.c:894
 #, c-format
-msgid "%d networks deleted"
-msgstr "%Id شبکه حذف شد"
+msgid "%d network deleted"
+msgid_plural "%d networks deleted"
+msgstr[0] "%Id شبکه حذف شد"
+msgstr[1] "%Id شبکه حذف شدند"
 
-#: panels/network/net-device-wifi.c:1135
+#: panels/network/net-device-wifi.c:1140
 msgid "System policy prohibits use as a Hotspot"
 msgstr "سیاست سامانه استفاده از نقطهٔ داغ را منع کرده است"
 
-#: panels/network/net-device-wifi.c:1138
+#: panels/network/net-device-wifi.c:1143
 msgid "Wireless device does not support Hotspot mode"
 msgstr "افزارهٔ بی‌سیم از حالت نقطهٔ داغ پشتیبانی نمی‌کند"
 
@@ -6530,7 +6533,7 @@ msgstr "_نام افزاره"
 msgid "Share files with other devices on the current network"
 msgstr "هم‌رسانی پرونده‌ها با دیگر خدمت‌های روی شبکهٔ کنونی"
 
-#: panels/sharing/cc-sharing-panel.ui:29 panels/sharing/cc-sharing-panel.ui:81
+#: panels/sharing/cc-sharing-panel.ui:29 panels/sharing/cc-sharing-panel.ui:80
 msgid "_File Sharing"
 msgstr "هم‌رسانی _پرونده"
 
@@ -6538,7 +6541,7 @@ msgstr "هم‌رسانی _پرونده"
 msgid "Stream music, photos and videos to devices on the current network"
 msgstr "جریان آهنگ‌ها، عکس‌ها و ویدیوها به افزاره‌های روی شبکهٔ کنونی"
 
-#: panels/sharing/cc-sharing-panel.ui:38 panels/sharing/cc-sharing-panel.ui:152
+#: panels/sharing/cc-sharing-panel.ui:38 panels/sharing/cc-sharing-panel.ui:150
 msgid "_Media Sharing"
 msgstr "هم‌رسانی _رسانه"
 
@@ -6546,29 +6549,29 @@ msgstr "هم‌رسانی _رسانه"
 msgid "File Sharing"
 msgstr "هم‌رسانی پرونده"
 
-#: panels/sharing/cc-sharing-panel.ui:91
+#: panels/sharing/cc-sharing-panel.ui:90
 msgid "_Require Password"
 msgstr "گذرواژه _لازم است"
 
-#: panels/sharing/cc-sharing-panel.ui:97
+#: panels/sharing/cc-sharing-panel.ui:96
 #: panels/system/remote-desktop/cc-remote-desktop-page.ui:136
 #: panels/system/users/cc-add-user-dialog.ui:373
 msgid "_Password"
 msgstr "_گذرواژه"
 
-#: panels/sharing/cc-sharing-panel.ui:105 panels/sharing/cc-sharing-panel.ui:173
+#: panels/sharing/cc-sharing-panel.ui:104 panels/sharing/cc-sharing-panel.ui:171
 msgid "Networks"
 msgstr "شبکه‌ها"
 
-#: panels/sharing/cc-sharing-panel.ui:121
+#: panels/sharing/cc-sharing-panel.ui:120
 msgid "Media Sharing"
 msgstr "هم‌رسانی رسانه"
 
-#: panels/sharing/cc-sharing-panel.ui:147
+#: panels/sharing/cc-sharing-panel.ui:145
 msgid "Share music, photos and videos over the network"
 msgstr "هم‌رسانی آهنگ‌ها، عکس‌ها و ویدیوها روی شبکه"
 
-#: panels/sharing/cc-sharing-panel.ui:160
+#: panels/sharing/cc-sharing-panel.ui:158
 msgid "Folders"
 msgstr "پوشه‌ها"
 
