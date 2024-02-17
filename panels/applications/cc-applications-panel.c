@@ -773,18 +773,14 @@ add_snap_permissions (CcApplicationsPanel *self,
 
 static void
 update_sandbox_banner (CcApplicationsPanel *self,
-                       const gchar         *display_name,
                        gboolean             is_sandboxed)
 {
-  g_autofree gchar *sandbox_banner_message = NULL;
 
   gtk_widget_set_visible (GTK_WIDGET (self->sandbox_banner), !is_sandboxed);
   if (is_sandboxed)
     return;
 
-  /* Translators: %s is an app name. (e.g. "Firefox is not sandboxed") */
-  sandbox_banner_message = g_strdup_printf (_("%s is not sandboxed"), display_name);
-  adw_banner_set_title (self->sandbox_banner, sandbox_banner_message);
+  adw_banner_set_title (self->sandbox_banner, _("App is not sandboxed"));
 }
 
 static gint
@@ -823,7 +819,7 @@ add_static_permissions (CcApplicationsPanel *self,
     keyfile = get_flatpak_metadata (app_id);
 
   is_sandboxed = (keyfile != NULL) || is_snap;
-  update_sandbox_banner (self, g_app_info_get_display_name (info), is_sandboxed);
+  update_sandbox_banner (self, is_sandboxed);
   if (keyfile == NULL)
     return FALSE;
 
