@@ -41,9 +41,77 @@ struct _CcSystemPanel
   AdwNavigationView *navigation;
 
   GtkWidget *remote_login_dialog;
+  AdwNavigationPage *software_updates_group;
 };
 
 CC_PANEL_REGISTER (CcSystemPanel, cc_system_panel)
+
+static gboolean
+gnome_software_allows_updates (void)
+{
+  const gchar *schema_id  = "org.gnome.software";
+  GSettingsSchemaSource *source;
+  g_autoptr(GSettingsSchema) schema = NULL;
+  g_autoptr(GSettings) settings = NULL;
+
+  source = g_settings_schema_source_get_default ();
+
+  if (source == NULL)
+    return FALSE;
+
+  schema = g_settings_schema_source_lookup (source, schema_id, FALSE);
+
+  if (schema == NULL)
+    return FALSE;
+
+  settings = g_settings_new (schema_id);
+  return g_settings_get_boolean (settings, "allow-updates");
+}
+
+static gboolean
+gnome_software_exists (void)
+{
+  g_autofree gchar *path = g_find_program_in_path ("gnome-software");
+  return path != NULL;
+}
+
+static gboolean
+gpk_update_viewer_exists (void)
+{
+  g_autofree gchar *path = g_find_program_in_path ("gpk-update-viewer");
+  return path != NULL;
+}
+
+static gboolean
+show_software_updates_group (CcSystemPanel *self)
+{
+  return (gnome_software_exists () && gnome_software_allows_updates ()) ||
+         gpk_update_viewer_exists ();
+}
+
+static void
+cc_system_page_open_software_update (CcSystemPanel *self)
+{
+  g_autoptr(GError) error = NULL;
+  gboolean ret;
+  char *argv[3];
+
+  if (gnome_software_exists ())
+    {
+      argv[0] = "gnome-software";
+      argv[1] = "--mode=updates";
+      argv[2] = NULL;
+    }
+  else
+    {
+      argv[0] = "gpk-update-viewer";
+      argv[1] = NULL;
+    }
+
+  ret = g_spawn_async (NULL, argv, NULL, G_SPAWN_SEARCH_PATH, NULL, NULL, NULL, &error);
+  if (!ret)
+    g_warning ("Failed to spawn %s: %s", argv[0], error->message);
+}
 
 static void
 on_secure_shell_row_clicked (CcSystemPanel *self)
@@ -68,7 +136,9 @@ cc_system_panel_class_init (CcSystemPanelClass *klass)
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/system/cc-system-panel.ui");
 
   gtk_widget_class_bind_template_child (widget_class, CcSystemPanel, navigation);
+  gtk_widget_class_bind_template_child (widget_class, CcSystemPanel, software_updates_group);
 
+  gtk_widget_class_bind_template_callback (widget_class, cc_system_page_open_software_update);
   gtk_widget_class_bind_template_callback (widget_class, on_secure_shell_row_clicked);
 
   g_type_ensure (CC_TYPE_ABOUT_PAGE);
@@ -84,4 +154,6 @@ cc_system_panel_init (CcSystemPanel *self)
 {
   g_resources_register (cc_system_get_resource ());
   gtk_widget_init_template (GTK_WIDGET (self));
+
+  gtk_widget_set_visible (GTK_WIDGET (self->software_updates_group), show_software_updates_group (self));
 }

@@ -38,7 +38,6 @@ struct _CcAboutPage
   GtkPicture      *os_logo;
   CcListRow       *os_name_row;
   CcListRow       *processor_row;
-  AdwPreferencesGroup *software_updates_group;
 
   GtkWindow       *system_details_window;
   guint            create_system_details_id;
@@ -79,42 +78,6 @@ about_page_setup_overview (CcAboutPage *self)
 }
 
 static gboolean
-does_gnome_software_allow_updates (void)
-{
-  const gchar *schema_id  = "org.gnome.software";
-  GSettingsSchemaSource *source;
-  g_autoptr(GSettingsSchema) schema = NULL;
-  g_autoptr(GSettings) settings = NULL;
-
-  source = g_settings_schema_source_get_default ();
-
-  if (source == NULL)
-    return FALSE;
-
-  schema = g_settings_schema_source_lookup (source, schema_id, FALSE);
-
-  if (schema == NULL)
-    return FALSE;
-
-  settings = g_settings_new (schema_id);
-  return g_settings_get_boolean (settings, "allow-updates");
-}
-
-static gboolean
-does_gnome_software_exist (void)
-{
-  g_autofree gchar *path = g_find_program_in_path ("gnome-software");
-  return path != NULL;
-}
-
-static gboolean
-does_gpk_update_viewer_exist (void)
-{
-  g_autofree gchar *path = g_find_program_in_path ("gpk-update-viewer");
-  return path != NULL;
-}
-
-static gboolean
 cc_about_page_create_system_details (CcAboutPage *self)
 {
   if (!self->system_details_window)
@@ -138,29 +101,6 @@ cc_about_page_open_system_details (CcAboutPage *self)
   parent = gtk_widget_get_native (GTK_WIDGET (self));
   gtk_window_set_transient_for (self->system_details_window, GTK_WINDOW (parent));
   gtk_window_present (GTK_WINDOW (self->system_details_window));
-}
-
-static void
-cc_about_page_open_software_update (CcAboutPage *self)
-{
-  g_autoptr(GError) error = NULL;
-  gboolean ret;
-  char *argv[3];
-
-  if (does_gnome_software_exist ())
-    {
-      argv[0] = "gnome-software";
-      argv[1] = "--mode=updates";
-      argv[2] = NULL;
-    }
-  else
-    {
-      argv[0] = "gpk-update-viewer";
-      argv[1] = NULL;
-    }
-  ret = g_spawn_async (NULL, argv, NULL, G_SPAWN_SEARCH_PATH, NULL, NULL, NULL, &error);
-  if (!ret)
-      g_warning ("Failed to spawn %s: %s", argv[0], error->message);
 }
 
 #if !defined(DISTRIBUTOR_LOGO) || defined(DARK_MODE_DISTRIBUTOR_LOGO)
@@ -249,9 +189,7 @@ cc_about_page_class_init (CcAboutPageClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcAboutPage, os_logo);
   gtk_widget_class_bind_template_child (widget_class, CcAboutPage, os_name_row);
   gtk_widget_class_bind_template_child (widget_class, CcAboutPage, processor_row);
-  gtk_widget_class_bind_template_child (widget_class, CcAboutPage, software_updates_group);
 
-  gtk_widget_class_bind_template_callback (widget_class, cc_about_page_open_software_update);
   gtk_widget_class_bind_template_callback (widget_class, cc_about_page_open_system_details);
 
   g_type_ensure (CC_TYPE_LIST_ROW);
@@ -263,9 +201,6 @@ cc_about_page_init (CcAboutPage *self)
   AdwStyleManager *style_manager;
 
   gtk_widget_init_template (GTK_WIDGET (self));
-
-  if ((!does_gnome_software_exist () || !does_gnome_software_allow_updates ()) && !does_gpk_update_viewer_exist ())
-    gtk_widget_set_visible (GTK_WIDGET (self->software_updates_group), FALSE);
 
   about_page_setup_overview (self);
 

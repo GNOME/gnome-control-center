@@ -87,6 +87,26 @@
 
                       </object>
                     </child>
+                    <child>
+                      <!-- Software Updates -->
+                      <object class="AdwPreferencesGroup" id="software_updates_group">
+                        <property name="visible">False</property>
+                        <child>
+                          <object class="AdwActionRow">
+                            <property name="activatable">True</property>
+                            <property name="title" translatable="yes">Software _Updates</property>
+                            <property name="use-underline">True</property>
+                            <signal name="activated" handler="cc_system_page_open_software_update" swapped="yes"/>
+                            <child type="suffix">
+                              <object class="GtkImage">
+                                <property name="valign">center</property>
+                                <property name="icon-name">adw-external-link-symbolic</property>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
                   </object>
                 </property>
 
