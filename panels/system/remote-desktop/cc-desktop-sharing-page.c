@@ -46,19 +46,26 @@
 #include <pwquality.h>
 #include <unistd.h>
 
+#include "org.gnome.RemoteDesktop.h"
+
 #define GNOME_REMOTE_DESKTOP_SCHEMA_ID "org.gnome.desktop.remote-desktop"
 #define GNOME_REMOTE_DESKTOP_RDP_SCHEMA_ID "org.gnome.desktop.remote-desktop.rdp"
 #define REMOTE_DESKTOP_STORE_CREDENTIALS_TIMEOUT_S 1
 #define REMOTE_DESKTOP_SERVICE "gnome-remote-desktop.service"
+#define RDP_SERVER_DBUS_SERVICE "org.gnome.RemoteDesktop.User"
+#define RDP_SERVER_OBJECT_PATH "/org/gnome/RemoteDesktop/Rdp/Server"
 
 struct _CcDesktopSharingPage {
   AdwBin parent_instance;
 
   GtkWidget *toast_overlay;
 
+  GsdRemoteDesktopRdpServer *rdp_server;
+
   AdwSwitchRow *desktop_sharing_row;
   AdwSwitchRow *remote_control_row;
-  GtkWidget *address_label;
+  AdwActionRow *hostname_row;
+  AdwActionRow *port_row;
   GtkWidget *username_entry;
   GtkWidget *password_entry;
   GtkWidget *verify_encryption_button;
@@ -342,11 +349,18 @@ static void
 on_address_copy_clicked (CcDesktopSharingPage *self,
                          GtkButton           *button)
 {
-  GtkLabel *label = GTK_LABEL (self->address_label);
-
   gdk_clipboard_set_text (gtk_widget_get_clipboard (GTK_WIDGET (button)),
-                          gtk_label_get_text (label));
+                          adw_action_row_get_subtitle (self->hostname_row));
   add_toast (self, _("Device address copied"));
+}
+
+static void
+on_port_copy_clicked (CcDesktopSharingPage *self,
+                      GtkButton            *button)
+{
+  gdk_clipboard_set_text (gtk_widget_get_clipboard (GTK_WIDGET (button)),
+                          adw_action_row_get_subtitle (self->port_row));
+  add_toast (self, _("Port number copied"));
 }
 
 static void
@@ -428,7 +442,7 @@ setup_desktop_sharing_page (CcDesktopSharingPage *self)
   self->rdp_settings = g_settings_new (GNOME_REMOTE_DESKTOP_RDP_SCHEMA_ID);
 
   hostname = get_hostname ();
-  gtk_label_set_label (GTK_LABEL (self->address_label), hostname);
+  adw_action_row_set_subtitle (self->hostname_row, hostname);
 
   username = cc_grd_lookup_rdp_username (self->cancellable);
   password = cc_grd_lookup_rdp_password (self->cancellable);
@@ -528,6 +542,7 @@ cc_desktop_sharing_page_dispose (GObject *object)
   g_clear_pointer ((GtkWindow **) &self->fingerprint_dialog, gtk_window_destroy);
   g_clear_handle_id (&self->store_credentials_id, g_source_remove);
 
+  g_clear_object (&self->rdp_server);
   g_clear_object (&self->rdp_settings);
 
   G_OBJECT_CLASS (cc_desktop_sharing_page_parent_class)->dispose (object);
@@ -547,15 +562,84 @@ cc_desktop_sharing_page_class_init (CcDesktopSharingPageClass * klass)
 
   gtk_widget_class_bind_template_child (widget_class, CcDesktopSharingPage, desktop_sharing_row);
   gtk_widget_class_bind_template_child (widget_class, CcDesktopSharingPage, remote_control_row);
+  gtk_widget_class_bind_template_child (widget_class, CcDesktopSharingPage, hostname_row);
+  gtk_widget_class_bind_template_child (widget_class, CcDesktopSharingPage, port_row);
   gtk_widget_class_bind_template_child (widget_class, CcDesktopSharingPage, username_entry);
   gtk_widget_class_bind_template_child (widget_class, CcDesktopSharingPage, password_entry);
-  gtk_widget_class_bind_template_child (widget_class, CcDesktopSharingPage, address_label);
   gtk_widget_class_bind_template_child (widget_class, CcDesktopSharingPage, verify_encryption_button);
 
   gtk_widget_class_bind_template_callback (widget_class, on_address_copy_clicked);
+  gtk_widget_class_bind_template_callback (widget_class, on_port_copy_clicked);
   gtk_widget_class_bind_template_callback (widget_class, on_username_copy_clicked);
   gtk_widget_class_bind_template_callback (widget_class, on_password_copy_clicked);
   gtk_widget_class_bind_template_callback (widget_class, on_verify_encryption_button_clicked);
+}
+
+static gboolean
+format_port_for_row (GBinding     *binding,
+                     const GValue *from_value,
+                     GValue       *to_value,
+                     gpointer      user_data)
+{
+  int port = g_value_get_int (from_value);
+
+  if (port <= 0)
+    g_value_set_string (to_value, "");
+  else
+    g_value_take_string (to_value, g_strdup_printf ("%u", port));
+
+  return TRUE;
+}
+
+static void
+on_connected_to_remote_desktop_rdp_server (GObject      *source_object,
+                                           GAsyncResult *result,
+                                           gpointer      user_data)
+{
+  CcDesktopSharingPage *self = user_data;
+  g_autoptr (GError) error = NULL;
+
+  g_clear_object (&self->rdp_server);
+  self->rdp_server = gsd_remote_desktop_rdp_server_proxy_new_finish (result, &error);
+
+  if (error)
+    {
+      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+        g_warning ("Failed to create remote desktop proxy: %s", error->message);
+      return;
+    }
+
+  g_object_bind_property_full (self->rdp_server, "port",
+                               self->port_row, "subtitle",
+                               G_BINDING_SYNC_CREATE,
+                               format_port_for_row,
+                               NULL,
+                               NULL,
+                               NULL);
+}
+
+static void
+connect_to_remote_desktop_rdp_server (CcDesktopSharingPage *self)
+{
+  g_autoptr (GError) error = NULL;
+  g_autoptr (GDBusConnection) connection = NULL;
+
+  connection = g_bus_get_sync (G_BUS_TYPE_SESSION, self->cancellable, &error);
+
+  if (error)
+    g_warning ("Could not connect to system message bus: %s", error->message);
+
+  if (!connection)
+    return;
+
+  gsd_remote_desktop_rdp_server_proxy_new (connection,
+                                           G_DBUS_PROXY_FLAGS_DO_NOT_AUTO_START_AT_CONSTRUCTION,
+                                           RDP_SERVER_DBUS_SERVICE,
+                                           RDP_SERVER_OBJECT_PATH,
+                                           self->cancellable,
+                                           (GAsyncReadyCallback)
+                                           on_connected_to_remote_desktop_rdp_server,
+                                           self);
 }
 
 static void
@@ -567,6 +651,7 @@ cc_desktop_sharing_page_init (CcDesktopSharingPage *self)
 
   self->cancellable = g_cancellable_new ();
   check_desktop_sharing_available (self);
+  connect_to_remote_desktop_rdp_server (self);
 
   provider = gtk_css_provider_new ();
   gtk_css_provider_load_from_resource (provider,
