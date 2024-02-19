@@ -44,6 +44,12 @@ struct _CcSystemPanel
   AdwNavigationPage *software_updates_group;
 };
 
+enum
+{
+  PROP_0,
+  PROP_PARAMETERS
+};
+
 CC_PANEL_REGISTER (CcSystemPanel, cc_system_panel)
 
 static gboolean
@@ -114,6 +120,48 @@ cc_system_page_open_software_update (CcSystemPanel *self)
 }
 
 static void
+cc_system_panel_set_property (GObject      *object,
+                              guint         property_id,
+                              const GValue *value,
+                              GParamSpec   *pspec)
+{
+  CcSystemPanel *self = CC_SYSTEM_PANEL (object);
+
+  switch (property_id)
+    {
+      case PROP_PARAMETERS:
+        {
+          GVariant *parameters = g_value_get_variant (value);
+          g_autoptr (GVariant) v = NULL;
+          const gchar *parameter = NULL;
+          AdwNavigationPage *subpage = NULL;
+
+          if (parameters == NULL || g_variant_n_children (parameters) <= 0)
+            return;
+
+          g_variant_get_child (parameters, 0, "v", &v);
+          if (!g_variant_is_of_type (v, G_VARIANT_TYPE_STRING))
+            {
+              g_warning ("Wrong type for the second argument GVariant, expected 's' but got '%s'",
+                         (gchar *)g_variant_get_type (v));
+              return;
+            }
+
+          parameter = g_variant_get_string (v, NULL);
+          subpage = adw_navigation_view_find_page (self->navigation, parameter);
+          if (subpage)
+            adw_navigation_view_push (self->navigation, subpage);
+          else
+            g_warning ("No subpage named '%s' found", parameter);
+
+          return;
+        }
+      default:
+        G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
+    }
+}
+
+static void
 on_secure_shell_row_clicked (CcSystemPanel *self)
 {
   if (self->remote_login_dialog == NULL) {
@@ -132,6 +180,11 @@ static void
 cc_system_panel_class_init (CcSystemPanelClass *klass)
 {
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
+  GObjectClass   *object_class = G_OBJECT_CLASS (klass);
+
+  object_class->set_property = cc_system_panel_set_property;
+
+  g_object_class_override_property (object_class, PROP_PARAMETERS, "parameters");
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/system/cc-system-panel.ui");
 
