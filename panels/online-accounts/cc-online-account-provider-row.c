@@ -52,15 +52,15 @@ _goa_provider_get_provider_title (GoaProvider *provider)
     const char *provider;
     const char *title;
   } goa_metadata[] = {
-    {"imap_smtp", N_("Email")},                   /* IMAP and SMTP */
-    {"webdav", N_("Calendars, Contacts, Files")}, /* WebDAV */
-    {"owncloud", NULL},                           /* Nextcloud */
-    {"google", NULL},                             /* Google */
-    {"ms_graph", NULL},                           /* Microsoft 365 */
-    {"exchange", NULL},                           /* Microsoft Exchange */
-    {"windows_live", NULL},                       /* Microsoft Personal */
-    {"kerberos", N_("Enterprise Login")},         /* Enterprise Login (Kerberos) */
-    {"fedora", NULL},                             /* Fedora */
+    { "imap_smtp", N_("Email") },                     /* IMAP and SMTP */
+    { "webdav", N_("Calendar, Contacts and Files") }, /* WebDAV */
+    { "owncloud", NULL },                             /* Nextcloud */
+    { "google", NULL },                               /* Google */
+    { "ms_graph", NULL },                             /* Microsoft 365 */
+    { "exchange", NULL },                             /* Microsoft Exchange */
+    { "windows_live", NULL },                         /* Microsoft Personal */
+    { "kerberos", N_("Enterprise Login") },           /* Enterprise Login (Kerberos) */
+    { "fedora", NULL },                               /* Fedora */
   };
 
   provider_type = goa_provider_get_provider_type (provider);
