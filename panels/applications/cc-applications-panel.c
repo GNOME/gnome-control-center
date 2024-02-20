@@ -1027,7 +1027,6 @@ add_scheme (CcApplicationsPanel *self,
   gtk_widget_add_css_class (button, "flat");
   gtk_widget_add_css_class (button, "circular");
   adw_action_row_add_suffix (ADW_ACTION_ROW (row), button);
-  adw_action_row_set_activatable_widget (ADW_ACTION_ROW (row), button);
   g_object_set_data_full (G_OBJECT (button), "type", g_strdup (type), g_free);
   g_signal_connect_object (button, "clicked", G_CALLBACK (unset_cb), self, G_CONNECT_SWAPPED);
 
@@ -1059,7 +1058,6 @@ add_file_type (CcApplicationsPanel *self,
   gtk_widget_add_css_class (button, "flat");
   gtk_widget_add_css_class (button, "circular");
   adw_action_row_add_suffix (ADW_ACTION_ROW (row), button);
-  adw_action_row_set_activatable_widget (ADW_ACTION_ROW (row), button);
   g_object_set_data_full (G_OBJECT (button), "type", g_strdup (type), g_free);
   g_signal_connect_object (button, "clicked", G_CALLBACK (unset_cb), self, G_CONNECT_SWAPPED);
 
