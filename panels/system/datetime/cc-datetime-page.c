@@ -85,9 +85,8 @@ struct _CcDateTimePage
   GDesktopClockFormat clock_format;
   AdwActionRow *auto_datetime_row;
   AdwSwitchRow *auto_timezone_row;
-  AdwActionRow *datetime_row;
+  CcListRow *datetime_row;
   GtkWindow *datetime_dialog;
-  GtkLabel *datetime_label;
   AdwSpinRow *day_spin_row;
   GtkToggleButton *twentyfour_format_button;
   GtkToggleButton *ampm_format_button;
@@ -103,9 +102,8 @@ struct _CcDateTimePage
   CcListRow *month_row;
   GtkSwitch *network_time_switch;
   CcTimeEditor *time_editor;
-  AdwActionRow *timezone_row;
+  CcListRow *timezone_row;
   CcTzDialog *timezone_dialog;
-  GtkLabel *timezone_label;
   AdwSpinRow *year_spin_row;
 
   GnomeWallClock *clock_tracker;
@@ -239,7 +237,7 @@ update_time (CcDateTimePage *self)
 
   self->month = g_date_time_get_month (self->date);
   gtk_single_selection_set_selected (self->month_model, self->month - 1);
-  gtk_label_set_text (self->datetime_label, label);
+  cc_list_row_set_secondary_label (self->datetime_row, label);
 }
 
 static void
@@ -407,7 +405,7 @@ update_timezone (CcDateTimePage *self)
   label = g_strdup_printf (C_("timezone desc", "%s (%s)"),
                            g_date_time_get_timezone_abbreviation (self->date),
                            city_country);
-  gtk_label_set_text (self->timezone_label, label);
+  cc_list_row_set_secondary_label (self->timezone_row, label);
 }
 
 static void
@@ -814,7 +812,6 @@ cc_date_time_page_class_init (CcDateTimePageClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePage, date_box);
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePage, datetime_row);
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePage, datetime_dialog);
-  gtk_widget_class_bind_template_child (widget_class, CcDateTimePage, datetime_label);
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePage, day_spin_row);
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePage, twentyfour_format_button);
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePage, ampm_format_button);
@@ -830,7 +827,6 @@ cc_date_time_page_class_init (CcDateTimePageClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePage, time_editor);
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePage, timezone_row);
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePage, timezone_dialog);
-  gtk_widget_class_bind_template_child (widget_class, CcDateTimePage, timezone_label);
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePage, year_spin_row);
 
   gtk_widget_class_bind_template_callback (widget_class, panel_tz_selection_changed_cb);
