@@ -1023,6 +1023,7 @@ add_scheme (CcApplicationsPanel *self,
   adw_preferences_row_set_title (ADW_PREFERENCES_ROW (row), title);
 
   button = gtk_button_new_from_icon_name ("edit-delete-symbolic");
+  gtk_widget_set_tooltip_text (button, _("Remove Link Type"));
   gtk_widget_set_valign (button, GTK_ALIGN_CENTER);
   gtk_widget_set_halign (button, GTK_ALIGN_END);
   gtk_widget_add_css_class (button, "flat");
@@ -1054,6 +1055,7 @@ add_file_type (CcApplicationsPanel *self,
   adw_action_row_set_subtitle (ADW_ACTION_ROW (row), glob ? glob : "");
 
   button = gtk_button_new_from_icon_name ("edit-delete-symbolic");
+  gtk_widget_set_tooltip_text (button, _("Remove File Type"));
   gtk_widget_set_valign (button, GTK_ALIGN_CENTER);
   gtk_widget_set_halign (button, GTK_ALIGN_END);
   gtk_widget_add_css_class (button, "flat");
