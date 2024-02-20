@@ -14,21 +14,17 @@
       </object>
     </child>
     <child>
-      <object class="GtkRevealer" id = "reset_revealer">
+      <object class="GtkRevealer" id="reset_revealer">
         <property name="transition-type">slide-right</property>
         <child>
           <object class="GtkButton" id="reset_button">
             <property name="valign">center</property>
             <property name="icon-name">edit-clear-symbolic</property>
-            <property name="tooltip-text" translatable="yes">Reset the shortcut to its default value</property>
-            <accessibility>
-              <property name="label" translatable="yes">Reset</property>
-            </accessibility>
+            <property name="tooltip-text" translatable="yes">Reset Shortcut</property>
             <signal name="clicked" handler="reset_shortcut_cb" swapped="true"/>
             <style>
               <class name="flat" />
               <class name="circular" />
-              <class name="reset-shortcut-button" />
             </style>
           </object>
         </child>
