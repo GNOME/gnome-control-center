@@ -145,9 +145,19 @@ on_user_changed (CcUsersPage *self,
                  ActUser     *user)
 {
     CcUserPage *visible_user_page;
+    uid_t changed_user_uid;
 
     visible_user_page = CC_USER_PAGE (adw_navigation_view_get_visible_page (self->navigation));
-    cc_user_page_set_user (visible_user_page, user, self->permission);
+
+    /* We only keep two CcUserPages at the time. The current_user_page (logged user) and the visible page.
+     * This makes sure that we update the right CcUserPage. An user-changed signal can be emitted for the
+     * current_user while we present another user. */
+    changed_user_uid = act_user_get_uid (user);
+    if (changed_user_uid == act_user_get_uid (cc_user_page_get_user (visible_user_page))) {
+        cc_user_page_set_user (visible_user_page, user, self->permission);
+    } else if (changed_user_uid == act_user_get_uid (cc_user_page_get_user (self->current_user_page))) {
+        cc_user_page_set_user (self->current_user_page, user, self->permission);
+    }
 }
 
 static void
