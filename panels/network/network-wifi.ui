@@ -80,7 +80,6 @@
       <object class="CcListRow" id="saved_network_row">
         <property name="title" translatable="yes">Saved Networks</property>
         <property name="show-arrow">True</property>
-        <property name="activatable">True</property>
         <signal name="activated" handler="on_show_saved_network" object="NetDeviceWifi" swapped="yes"/>
         <accessibility>
           <property name="label" translatable="yes">Show Saved Networks</property>
@@ -93,7 +92,6 @@
       <object class="CcListRow" id="connect_hidden_row">
         <property name="title" translatable="yes">_Connect to Hidden Network…</property>
         <property name="show-arrow">True</property>
-        <property name="activatable">True</property>
         <signal name="activated" handler="on_connect_hidden_network" object="NetDeviceWifi" swapped="yes"/>
         <accessibility>
           <property name="label" translatable="yes">Connect to hidden network</property>
@@ -106,7 +104,6 @@
       <object class="CcListRow" id="hotspot_row">
         <property name="title" translatable="yes">_Turn On Wi-Fi Hotspot…</property>
         <property name="show-arrow">True</property>
-        <property name="activatable">True</property>
         <signal name="activated" handler="on_wifi_hotspot_network" object="NetDeviceWifi" swapped="yes"/>
       </object>
     </child>
