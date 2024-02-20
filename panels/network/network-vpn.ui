@@ -14,12 +14,10 @@
     </child>
     <child type="suffix">
       <object class="GtkButton" id="options_button">
+        <property name="tooltip-text" translatable="yes">VPN Options</property>
         <property name="valign">center</property>
         <property name="icon_name">emblem-system-symbolic</property>
         <signal name="clicked" handler="edit_connection" object="NetVpn" swapped="yes"/>
-        <accessibility>
-          <property name="label" translatable="yes">Options…</property>
-        </accessibility>
         <style>
           <class name="flat"/>
         </style>
