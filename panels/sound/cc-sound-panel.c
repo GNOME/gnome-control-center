@@ -29,6 +29,7 @@
 #include <pulse/pulseaudio.h>
 #include <gvc-mixer-control.h>
 
+#include "cc-list-row.h"
 #include "cc-alert-chooser-window.h"
 #include "cc-balance-slider.h"
 #include "cc-device-combo-box.h"
@@ -65,7 +66,7 @@ struct _CcSoundPanel
   CcProfileComboBox   *input_profile_combo_box;
   CcVolumeSlider      *input_volume_slider;
   AdwPreferencesGroup *input_no_devices_group;
-  GtkLabel            *alert_sound_label;
+  CcListRow           *alert_sound_row;
 
   GvcMixerControl   *mixer_control;
   GSettings         *sound_settings;
@@ -85,7 +86,7 @@ static void
 update_alert_sound_label (CcSoundPanel *self)
 {
   const gchar *alert_name = get_selected_alert_display_name ();
-  gtk_label_set_label (self->alert_sound_label, alert_name);
+  cc_list_row_set_secondary_label (self->alert_sound_row, alert_name);
 }
 
 static void
@@ -312,7 +313,7 @@ cc_sound_panel_class_init (CcSoundPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcSoundPanel, input_profile_combo_box);
   gtk_widget_class_bind_template_child (widget_class, CcSoundPanel, input_volume_slider);
   gtk_widget_class_bind_template_child (widget_class, CcSoundPanel, input_no_devices_group);
-  gtk_widget_class_bind_template_child (widget_class, CcSoundPanel, alert_sound_label);
+  gtk_widget_class_bind_template_child (widget_class, CcSoundPanel, alert_sound_row);
 
   gtk_widget_class_bind_template_callback (widget_class, input_device_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, output_device_changed_cb);
@@ -327,6 +328,7 @@ cc_sound_panel_class_init (CcSoundPanelClass *klass)
   g_type_ensure (CC_TYPE_PROFILE_COMBO_BOX);
   g_type_ensure (CC_TYPE_SUBWOOFER_SLIDER);
   g_type_ensure (CC_TYPE_VOLUME_SLIDER);
+  g_type_ensure (CC_TYPE_LIST_ROW);
 }
 
 static void

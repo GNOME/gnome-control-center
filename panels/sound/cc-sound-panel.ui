@@ -367,35 +367,17 @@
               <object class="AdwPreferencesGroup">
                 <property name="title" translatable="yes">Sounds</property>
                 <child>
-                  <object class="AdwActionRow">
+                  <object class="CcListRow">
                     <property name="title" translatable="yes">Vo_lume Levels</property>
-                    <property name="use-underline">True</property>
-                    <property name="activatable">True</property>
+                    <property name="show-arrow">True</property>
                     <signal name="activated" handler="volume_levels_activated_cb" swapped="yes"/>
-                    <child>
-                      <object class="GtkImage">
-                        <property name="icon-name">go-next-symbolic</property>
-                      </object>
-                    </child>
                   </object>
                 </child>
                 <child>
-                  <object class="AdwActionRow">
+                  <object class="CcListRow" id="alert_sound_row">
                     <property name="title" translatable="yes">_Alert Sound</property>
-                    <property name="use-underline">True</property>
-                    <property name="activatable">True</property>
-                    <accessibility>
-                      <relation name="described-by">alert_sound_label</relation>
-                    </accessibility>
+                    <property name="show-arrow">True</property>
                     <signal name="activated" handler="alert_sound_activated_cb" swapped="yes"/>
-                    <child>
-                      <object class="GtkLabel" id="alert_sound_label"/>
-                    </child>
-                    <child>
-                      <object class="GtkImage">
-                        <property name="icon-name">go-next-symbolic</property>
-                      </object>
-                    </child>
                   </object>
                 </child>
               </object>
