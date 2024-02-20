@@ -66,7 +66,6 @@
                 <child>
                   <object class="CcListRow" id="alt_chars_row">
                     <property name="title" translatable="yes">A_lternate Characters Key</property>
-                    <property name="activatable">True</property>
                     <property name="show-arrow">True</property>
                     <property name="secondary-label" translatable="no">Right Alt</property>
                     <signal name="activated" handler="alt_chars_row_activated" object="CcKeyboardPanel" swapped="yes" />
@@ -76,7 +75,6 @@
                   <object class="CcListRow" id="compose_row">
                     <property name="title" translatable="yes">_Compose Key</property>
                     <property name="show-arrow">True</property>
-                    <property name="activatable">True</property>
                     <signal name="activated" handler="compose_row_activated" object="CcKeyboardPanel" swapped="yes" />
                   </object>
                 </child>
@@ -88,7 +86,6 @@
                 <child>
                   <object class="CcListRow" id="common_shortcuts_row">
                     <property name="title" translatable="yes">_View and Customize Shortcuts</property>
-                    <property name="activatable">True</property>
                     <property name="show-arrow">True</property>
                     <signal name="activated" handler="keyboard_shortcuts_activated" object="CcKeyboardPanel" swapped="yes" />
                   </object>
