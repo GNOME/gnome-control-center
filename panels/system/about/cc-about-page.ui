@@ -95,17 +95,10 @@
 
                 <!-- System Details -->
                 <child>
-                  <object class="AdwActionRow">
-                    <property name="activatable">True</property>
+                  <object class="CcListRow">
                     <property name="title" translatable="yes">_System Details</property>
-                    <property name="use-underline">True</property>
+                    <property name="show-arrow">True</property>
                     <signal name="activated" handler="cc_about_page_open_system_details" swapped="yes"/>
-                    <child type="suffix">
-                      <object class="GtkImage">
-                        <property name="valign">center</property>
-                        <property name="icon-name">go-next-symbolic</property>
-                      </object>
-                    </child>
                   </object>
                 </child>
 
