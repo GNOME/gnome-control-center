@@ -51,45 +51,55 @@
 
                 <!-- OS Name -->
                 <child>
-                  <object class="CcListRow" id="os_name_row">
-                    <property name="activatable">False</property>
+                  <object class="AdwActionRow" id="os_name_row">
                     <property name="title" translatable="yes"
                               comments="Translators: this field contains the distro name and version">Operating System</property>
+                    <style>
+                      <class name="property"/>
+                    </style>
                   </object>
                 </child>
 
                 <!-- Hardware Model -->
                 <child>
-                  <object class="CcListRow" id="hardware_model_row">
+                  <object class="AdwActionRow" id="hardware_model_row">
                     <property name="visible">False</property>
-                    <property name="activatable">False</property>
                     <property name="title" translatable="yes">Hardware Model</property>
+                    <style>
+                      <class name="property"/>
+                    </style>
                   </object>
                 </child>
 
 
                 <!-- Processor -->
                 <child>
-                  <object class="CcListRow" id="processor_row">
-                    <property name="activatable">False</property>
+                  <object class="AdwActionRow" id="processor_row">
                     <property name="title" translatable="yes">Processor</property>
+                    <style>
+                      <class name="property"/>
+                    </style>
                   </object>
                 </child>
 
                 <!-- Memory -->
                 <child>
-                  <object class="CcListRow" id="memory_row">
-                    <property name="activatable">False</property>
+                  <object class="AdwActionRow" id="memory_row">
                     <property name="title" translatable="yes">Memory</property>
+                    <style>
+                      <class name="property"/>
+                    </style>
                   </object>
                 </child>
 
                 <!-- Disk Capacity -->
                 <child>
-                  <object class="CcListRow" id="disk_row">
-                    <property name="activatable">False</property>
+                  <object class="AdwActionRow" id="disk_row">
                     <property name="title" translatable="yes">Disk Capacity</property>
-                    <property name="secondary-label" translatable="yes">Calculating…</property>
+                    <property name="subtitle" translatable="yes">Calculating…</property>
+                    <style>
+                      <class name="property"/>
+                    </style>
                   </object>
                 </child>
 
