@@ -153,7 +153,7 @@ cc_ua_hearing_page_init (CcUaHearingPage *self)
   gtk_widget_init_template (GTK_WIDGET (self));
 
   /* Translators: This will be presented as the text of a link to the Sound panel */
-  sound_panel_link = g_strdup_printf ("<a href='#'>%s</a>", _("Sound"));
+  sound_panel_link = g_strdup_printf ("<a href='#'>%s</a>", C_("Sound panel name", "Sound"));
   /* Translators: %s is a link to the Sound panel with the label "Sound" */
   label = g_strdup_printf (_("System volume can be adjusted in %s settings"), sound_panel_link);
 
