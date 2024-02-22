@@ -370,10 +370,10 @@
                           <object class="AdwPreferencesGroup" id="usage_section">
                             <property name="title" translatable="yes">General</property>
                             <child>
-                              <object class="CcInfoRow" id="handler_row">
-                                <property name="title" translatable="yes">_File &amp;amp; Link Associations</property>
-                                <property name="has-expander">True</property>
-                                <property name="is-link">True</property>
+                              <object class="CcListRow" id="handler_row">
+                                <property name="title" translatable="yes">_Files &amp;amp; Links</property>
+                                <property name="subtitle" translatable="yes">File and link types that are opened by the app</property>
+                                <property name="show-arrow">True</property>
                                 <signal name="activated" handler="on_handler_row_activated_cb" object="CcApplicationsPanel" swapped="yes" />
                               </object>
                             </child>

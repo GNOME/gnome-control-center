@@ -128,7 +128,7 @@ struct _CcApplicationsPanel
   GtkButton       *handler_reset;
   GtkWindow       *handler_dialog;
   AdwPreferencesPage *handler_page;
-  CcInfoRow       *handler_row;
+  CcListRow       *handler_row;
   AdwPreferencesGroup *handler_file_group;
   AdwPreferencesGroup *handler_link_group;
   GList           *file_handler_rows;
@@ -1185,14 +1185,14 @@ update_handler_dialog (CcApplicationsPanel *self,
 
   if (n_associations > 0)
     {
-      g_autofree gchar *subtitle = NULL;
+      g_autofree gchar *types_number = NULL;
 
-      subtitle = g_strdup_printf (g_dngettext (GETTEXT_PACKAGE,
-                                               "%u file and link type that is opened by the app",
-                                               "%u file and link types that are opened by the app",
-                                               n_associations),
-                                  n_associations);
-      adw_action_row_set_subtitle (ADW_ACTION_ROW (self->handler_row), subtitle);
+      types_number = g_strdup_printf (g_dngettext (GETTEXT_PACKAGE,
+                                                   "%u type",
+                                                   "%u types",
+                                                   n_associations),
+                                      n_associations);
+      cc_list_row_set_secondary_label (self->handler_row, types_number);
     }
 
   header_title = g_strdup_printf (_("<b>%s</b> is used to open the following types of files and links."),
