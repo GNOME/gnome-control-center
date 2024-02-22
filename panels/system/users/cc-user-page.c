@@ -720,6 +720,10 @@ cc_user_page_set_user (CcUserPage  *self,
     g_object_notify (G_OBJECT (self), "is-current-user");
     g_object_notify (G_OBJECT (self), "is-admin");
 
+    if (!is_current_user (user))
+      adw_navigation_page_set_title (ADW_NAVIGATION_PAGE (self), get_real_or_user_name (user));
+    adw_navigation_page_set_tag (ADW_NAVIGATION_PAGE (self), act_user_get_user_name (user));
+
     cc_avatar_chooser_set_user (self->avatar_chooser, self->user);
     setup_avatar_for_user (self->avatar, self->user);
     gtk_widget_set_visible (GTK_WIDGET (self->avatar_remove_button),

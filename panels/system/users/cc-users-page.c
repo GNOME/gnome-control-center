@@ -97,8 +97,6 @@ on_user_row_activated (CcUsersPage  *self,
 
     user_page = cc_user_page_new ();
     cc_user_page_set_user (user_page, user, self->permission);
-    adw_navigation_page_set_title (ADW_NAVIGATION_PAGE (user_page), get_real_or_user_name (user));
-
     adw_navigation_view_push (self->navigation, ADW_NAVIGATION_PAGE (user_page));
 }
 
@@ -156,37 +154,50 @@ static void
 on_user_changed (CcUsersPage *self,
                  ActUser     *user)
 {
-    CcUserPage *visible_user_page;
+  CcUserPage *page;
+  guint position;
 
-    visible_user_page = CC_USER_PAGE (adw_navigation_view_get_visible_page (self->navigation));
-    cc_user_page_set_user (visible_user_page, user, self->permission);
+  /* Refresh the users list */
+  g_list_store_sort (self->model, sort_users, self);
+
+  /* If the user has a page open, refresh that page */
+  page = CC_USER_PAGE (adw_navigation_view_find_page (self->navigation, act_user_get_user_name (user)));
+  if (page != NULL)
+    cc_user_page_set_user (page, user, self->permission);
 }
 
 static void
 on_user_added (CcUsersPage *self,
                ActUser     *user)
 {
-    CcUserPage *user_page;
-    g_list_store_insert_sorted (self->model, user, sort_users, self);
+  CcUserPage *page;
+  g_list_store_insert_sorted (self->model, user, sort_users, self);
 
-    user_page = cc_user_page_new ();
-    cc_user_page_set_user (user_page, user, self->permission);
-    adw_navigation_page_set_title (ADW_NAVIGATION_PAGE (user_page), get_real_or_user_name (user));
+  page = CC_USER_PAGE (adw_navigation_view_get_visible_page (self->navigation));
+  if (page != self->current_user_page)
+    return;
 
-    adw_navigation_view_push (self->navigation, ADW_NAVIGATION_PAGE (user_page));
+  /* We're on the current user's page and a new user was just created. It's very likely the user
+   * was just created by our own add-user dialog. So let's display the new user */
+
+  page = cc_user_page_new ();
+  cc_user_page_set_user (page, user, self->permission);
+  adw_navigation_view_push (self->navigation, ADW_NAVIGATION_PAGE (page));
 }
 
 static void
 on_user_removed (CcUsersPage *self,
                  ActUser     *user)
 {
-    guint position;
+  AdwNavigationPage *page;
+  guint position;
 
-    if (g_list_store_find (self->model, user, &position)) {
-        g_list_store_remove (self->model, position);
-    }
+  if (g_list_store_find (self->model, user, &position))
+    g_list_store_remove (self->model, position);
 
-    adw_navigation_view_pop (self->navigation);
+  page = adw_navigation_view_find_page (self->navigation, act_user_get_user_name (user));
+  if (page != NULL)
+    adw_navigation_view_pop_to_page (self->navigation, ADW_NAVIGATION_PAGE (self->current_user_page));
 }
 
 static void
