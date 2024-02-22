@@ -188,7 +188,6 @@ template $CcUserPage: Adw.NavigationPage {
 }
 
 Adw.AlertDialog remove_local_user_dialog {
-  body: _("The user will not be able to use this device once their account has been removed");
   default-response: "cancel";
   close-response: "cancel";
   response::remove => $remove_local_user_response(template);

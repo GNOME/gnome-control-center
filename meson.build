@@ -222,7 +222,8 @@ gmobile_dep = dependency(
 config_h.set('HAVE_GMOBILE', gmobile_dep.found(),
              description: 'Define to 1 if gmobile is available')
 
-accounts_dep = dependency('accountsservice', version: '>= 23.11.69')
+accounts_dep = dependency('accountsservice', version: '>= 26.27.3')
+
 colord_dep = dependency('colord', version: '>= 0.1.34')
 gdk_pixbuf_dep = dependency('gdk-pixbuf-2.0', version: '>= 2.23.0')
 gio_dep = dependency('gio-2.0')

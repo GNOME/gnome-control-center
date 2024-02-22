@@ -406,9 +406,23 @@ remove_local_user_response (CcUserPage *self)
 static void
 remove_user (CcUserPage *self)
 {
+    gboolean homed = act_user_uses_homed (self->user);
+
     // TODO: Handle enterprise accounts
     adw_alert_dialog_format_heading (self->remove_local_user_dialog, _("Remove %s?"),
                                                                        get_real_or_user_name (self->user));
+
+    if (homed)
+        adw_alert_dialog_set_body (self->remove_local_user_dialog,
+                                   _("The user's files and settings will be deleted, and they will not be able to use this device once their account has been removed"));
+    else
+        adw_alert_dialog_set_body (
+            self->remove_local_user_dialog,
+            _("The user will not be able to use this device once their account has been removed"));
+
+    adw_switch_row_set_active (self->remove_local_files_choice, homed);
+    gtk_widget_set_visible (adw_alert_dialog_get_extra_child (self->remove_local_user_dialog), !homed);
+
     adw_dialog_present (ADW_DIALOG (self->remove_local_user_dialog), GTK_WIDGET (self));
 }
 
