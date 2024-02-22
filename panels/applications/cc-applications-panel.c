@@ -136,6 +136,7 @@ struct _CcApplicationsPanel
   GtkWidget       *usage_section;
   CcInfoRow       *storage;
   GtkWindow       *storage_dialog;
+  AdwPreferencesPage *storage_prefs_page;
   CcInfoRow       *app;
   CcInfoRow       *data;
   CcInfoRow       *cache;
@@ -1223,7 +1224,12 @@ static void
 on_storage_row_activated_cb (CcApplicationsPanel *self)
 {
   CcShell *shell = cc_panel_get_shell (CC_PANEL (self));
+  g_autofree gchar *description = NULL;
 
+  /* Translators: %s is an app name. */
+  description = g_strdup_printf (_("%s is using the following disk space."),
+                                 g_app_info_get_display_name (self->current_app_info));
+  adw_preferences_page_set_description (self->storage_prefs_page, description);
   gtk_window_set_transient_for (self->storage_dialog,
                                 GTK_WINDOW (cc_shell_get_toplevel (shell)));
   gtk_window_present (self->storage_dialog);
@@ -1817,6 +1823,7 @@ cc_applications_panel_class_init (CcApplicationsPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, sound);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, storage);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, storage_dialog);
+  gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, storage_prefs_page);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, total);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, usage_section);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, view_details_button);
