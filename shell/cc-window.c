@@ -406,12 +406,27 @@ on_split_view_collapsed_changed_cb (CcWindow *self)
 
 static void
 show_panel_cb (CcWindow    *self,
-               const gchar *panel_id)
+               const gchar *panel_id,
+               const gchar *parent_id)
 {
+  GVariant *parameters;
+  GVariantBuilder builder;
+
   if (!panel_id)
     return;
 
-  set_active_panel_from_id (self, panel_id, NULL, TRUE, FALSE, NULL);
+  if (!parent_id)
+    {
+      set_active_panel_from_id (self, panel_id, NULL, TRUE, FALSE, NULL);
+
+      return;
+    }
+
+  g_variant_builder_init (&builder, G_VARIANT_TYPE ("av"));
+  g_variant_builder_add (&builder, "v", g_variant_new_string (panel_id));
+  parameters = g_variant_builder_end (&builder);
+
+  set_active_panel_from_id (self, parent_id, parameters, TRUE, FALSE, NULL);
 }
 
 static void

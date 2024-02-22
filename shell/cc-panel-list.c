@@ -497,6 +497,7 @@ row_activated_cb (GtkWidget     *listbox,
                   CcPanelList   *self)
 {
   RowData *data;
+  const gchar *parent_panel = 0;
 
   /*
    * Since we're not sure that the activated row is in the
@@ -505,8 +506,10 @@ row_activated_cb (GtkWidget     *listbox,
   switch_to_view (self, get_view_from_listbox (self, listbox));
 
   data = g_object_get_data (G_OBJECT (row), "data");
+  if (data->category == CC_CATEGORY_SYSTEM)
+    parent_panel = "system";
 
-  g_signal_emit (self, signals[SHOW_PANEL], 0, data->id);
+  g_signal_emit (self, signals[SHOW_PANEL], 0, data->id, parent_panel);
 
   /* After selecting the panel and eventually changing the view, reset the
    * autoselect flag. If necessary, cc_panel_list_set_active_panel() will
@@ -676,7 +679,8 @@ cc_panel_list_class_init (CcPanelListClass *klass)
                                       G_SIGNAL_RUN_LAST,
                                       0, NULL, NULL, NULL,
                                       G_TYPE_NONE,
-                                      1,
+                                      2,
+                                      G_TYPE_STRING,
                                       G_TYPE_STRING);
 
   /**
