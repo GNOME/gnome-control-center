@@ -1045,17 +1045,6 @@ power_profile_update_info_boxes (CcPowerPanel *self)
     }
 }
 
-static void
-power_profiles_row_activated_cb (GtkListBox    *box,
-                                 GtkListBoxRow *box_row,
-                                 gpointer       user_data)
-{
-  if (!gtk_widget_is_sensitive (GTK_WIDGET (box_row)))
-    return;
-
-  cc_power_profile_row_set_active (CC_POWER_PROFILE_ROW(box_row), TRUE);
-}
-
 static gint
 perf_profile_list_box_sort (GtkListBoxRow *row1,
                             GtkListBoxRow *row2,
@@ -1409,7 +1398,6 @@ cc_power_panel_class_init (CcPowerPanelClass *klass)
   gtk_widget_class_bind_template_callback (widget_class, blank_screen_row_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, keynav_failed_cb);
   gtk_widget_class_bind_template_callback (widget_class, power_button_row_changed_cb);
-  gtk_widget_class_bind_template_callback (widget_class, power_profiles_row_activated_cb);
   gtk_widget_class_bind_template_callback (widget_class, automatic_suspend_row_activated_cb);
 }
 
