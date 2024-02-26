@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <template class="CcEncryptionFingerprintDialog" parent="AdwWindow">
+    <property name="default-width">360</property>
+    <property name="default-height">360</property>
+    <property name="hide-on-close">True</property>
+    <property name="modal">True</property>
+
+    <child>
+      <object class="GtkBox">
+        <property name="orientation">vertical</property>
+        <child>
+          <object class="GtkWindowControls">
+            <property name="halign">end</property>
+            <property name="side">end</property>
+          </object>
+        </child>
+        <child>
+          <object class="AdwStatusPage">
+            <property name="title" translatable="yes">Encryption Fingerprint</property>
+            <property name="description" translatable="yes">The encryption fingerprint can be seen in connecting clients and should be identical</property>
+            <property name="vexpand">True</property>
+            <child>
+              <object class="GtkBox">
+                <property name="orientation">horizontal</property>
+                <property name="halign">center</property>
+                <style>
+                  <class name="tls-cert-verification" />
+                </style>
+                <child>
+                  <object class="GtkLabel" id="fingerprint_left_label">
+                    <style>
+                      <class name="tls-cert-fingerprint" />
+                    </style>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkLabel" id="fingerprint_right_label">
+                    <style>
+                      <class name="tls-cert-fingerprint" />
+                    </style>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+  </template>
+
+</interface>

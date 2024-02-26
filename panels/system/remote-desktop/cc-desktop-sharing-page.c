@@ -21,6 +21,7 @@
 #define G_LOG_DOMAIN "cc-desktop-sharing-page"
 
 #include "cc-desktop-sharing-page.h"
+#include "cc-encryption-fingerprint-dialog.h"
 #include "cc-gnome-remote-desktop.h"
 #include "cc-hostname.h"
 #include "cc-list-row.h"
@@ -40,9 +41,6 @@
 #ifdef GDK_WINDOWING_WAYLAND
 #include <gdk/wayland/gdkwayland.h>
 #endif
-
-#define GCR_API_SUBJECT_TO_CHANGE
-#include <gcr/gcr.h>
 
 #include <pwd.h>
 #include <pwquality.h>
@@ -65,9 +63,7 @@ struct _CcDesktopSharingPage {
   GtkWidget *password_entry;
   GtkWidget *verify_encryption_button;
 
-  GtkWidget *fingerprint_dialog;
-  GtkWidget *fingerprint_left_label;
-  GtkWidget *fingerprint_right_label;
+  CcEncryptionFingerprintDialog *fingerprint_dialog;
 
   guint desktop_sharing_name_watch;
   guint store_credentials_id;
@@ -82,54 +78,16 @@ G_DEFINE_TYPE (CcDesktopSharingPage, cc_desktop_sharing_page, ADW_TYPE_BIN)
 static void
 on_verify_encryption_button_clicked (CcDesktopSharingPage *self)
 {
-  g_autoptr(GByteArray) der = NULL;
-  g_autoptr(GcrCertificate) gcr_cert = NULL;
-  g_autofree char *fingerprint = NULL;
-  g_auto(GStrv) fingerprintv = NULL;
-  g_autofree char *left_string = NULL;
-  g_autofree char *right_string = NULL;
   GtkNative *native;
 
   g_return_if_fail (self->certificate);
 
-  g_object_get (self->certificate, "certificate", &der, NULL);
-  gcr_cert = gcr_simple_certificate_new (der->data, der->len);
-  if (!gcr_cert)
-    {
-      g_warning ("Failed to load GCR TLS certificate representation");
-      return;
-    }
-
-  fingerprint = gcr_certificate_get_fingerprint_hex (gcr_cert, G_CHECKSUM_SHA256);
-
-  fingerprintv = g_strsplit (fingerprint, " ", -1);
-  g_return_if_fail (g_strv_length (fingerprintv) == 32);
-
-  left_string = g_strdup_printf (
-    "%s:%s:%s:%s\n"
-    "%s:%s:%s:%s\n"
-    "%s:%s:%s:%s\n"
-    "%s:%s:%s:%s\n",
-    fingerprintv[0], fingerprintv[1], fingerprintv[2], fingerprintv[3],
-    fingerprintv[8], fingerprintv[9], fingerprintv[10], fingerprintv[11],
-    fingerprintv[16], fingerprintv[17], fingerprintv[18], fingerprintv[19],
-    fingerprintv[24], fingerprintv[25], fingerprintv[26], fingerprintv[27]);
-
- right_string = g_strdup_printf (
-   "%s:%s:%s:%s\n"
-   "%s:%s:%s:%s\n"
-   "%s:%s:%s:%s\n"
-   "%s:%s:%s:%s\n",
-   fingerprintv[4], fingerprintv[5], fingerprintv[6], fingerprintv[7],
-   fingerprintv[12], fingerprintv[13], fingerprintv[14], fingerprintv[15],
-   fingerprintv[20], fingerprintv[21], fingerprintv[22], fingerprintv[23],
-   fingerprintv[28], fingerprintv[29], fingerprintv[30], fingerprintv[31]);
-
-  gtk_label_set_label (GTK_LABEL (self->fingerprint_left_label), left_string);
-  gtk_label_set_label (GTK_LABEL (self->fingerprint_right_label), right_string);
+  if (!self->fingerprint_dialog)
+    self->fingerprint_dialog = g_object_new (CC_TYPE_ENCRYPTION_FINGERPRINT_DIALOG, NULL);
 
   native = gtk_widget_get_native (GTK_WIDGET (self));
   gtk_window_set_transient_for (GTK_WINDOW (self->fingerprint_dialog), GTK_WINDOW (native));
+  cc_encryption_fingerprint_dialog_set_certificate (self->fingerprint_dialog, self->certificate);
   gtk_window_present (GTK_WINDOW (self->fingerprint_dialog));
 }
 
@@ -567,6 +525,7 @@ cc_desktop_sharing_page_dispose (GObject *object)
   g_cancellable_cancel (self->cancellable);
   g_clear_object (&self->cancellable);
 
+  g_clear_pointer ((GtkWindow **) &self->fingerprint_dialog, gtk_window_destroy);
   g_clear_handle_id (&self->store_credentials_id, g_source_remove);
 
   g_clear_object (&self->rdp_settings);
@@ -592,10 +551,6 @@ cc_desktop_sharing_page_class_init (CcDesktopSharingPageClass * klass)
   gtk_widget_class_bind_template_child (widget_class, CcDesktopSharingPage, password_entry);
   gtk_widget_class_bind_template_child (widget_class, CcDesktopSharingPage, address_label);
   gtk_widget_class_bind_template_child (widget_class, CcDesktopSharingPage, verify_encryption_button);
-
-  gtk_widget_class_bind_template_child (widget_class, CcDesktopSharingPage, fingerprint_dialog);
-  gtk_widget_class_bind_template_child (widget_class, CcDesktopSharingPage, fingerprint_left_label);
-  gtk_widget_class_bind_template_child (widget_class, CcDesktopSharingPage, fingerprint_right_label);
 
   gtk_widget_class_bind_template_callback (widget_class, on_address_copy_clicked);
   gtk_widget_class_bind_template_callback (widget_class, on_username_copy_clicked);
