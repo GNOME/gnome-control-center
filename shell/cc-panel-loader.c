@@ -122,6 +122,21 @@ static CcPanelLoaderVtable default_panels[] =
 static CcPanelLoaderVtable *panels_vtable = default_panels;
 static gsize panels_vtable_len = G_N_ELEMENTS (default_panels);
 
+typedef struct
+{
+  CcPanelCategory category;
+  const gchar *name;
+} CcSubpageLoaderVtable;
+
+static CcSubpageLoaderVtable default_subpages[] =
+{
+  {CC_CATEGORY_SYSTEM, "about"},
+  {CC_CATEGORY_SYSTEM, "datetime"},
+  {CC_CATEGORY_SYSTEM, "region"},
+  {CC_CATEGORY_SYSTEM, "users"},
+};
+static CcSubpageLoaderVtable *subpages_vtable = default_subpages;
+static gsize supages_vtable_len = G_N_ELEMENTS (default_subpages);
 
 static int
 parse_categories (GDesktopAppInfo *app)
@@ -245,6 +260,24 @@ cc_panel_loader_fill_model (CcShellModel *model)
         continue;
 
       cc_shell_model_add_item (model, category, G_APP_INFO (app), panels_vtable[i].name);
+    }
+
+  for (i = 0; i < supages_vtable_len; i++)
+    {
+      g_autoptr(GDesktopAppInfo) app = NULL;
+      g_autofree gchar *desktop_name = NULL;
+
+      desktop_name = g_strconcat ("gnome-", subpages_vtable[i].name, "-panel.desktop", NULL);
+      app = g_desktop_app_info_new (desktop_name);
+
+      if (!app)
+        {
+          g_warning ("Ignoring broken panel %s (missing desktop file)", subpages_vtable[i].name);
+          continue;
+        }
+
+      cc_shell_model_add_item (model, subpages_vtable[i].category, G_APP_INFO (app), subpages_vtable[i].name);
+      cc_shell_model_set_panel_visibility (model, subpages_vtable[i].name, CC_PANEL_VISIBLE_IN_SEARCH);
     }
 
   /* If there's an static init function, execute it after adding all panels to
