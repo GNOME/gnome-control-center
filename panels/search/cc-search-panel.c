@@ -32,7 +32,7 @@ struct _CcSearchPanel
   CcPanel           parent_instance;
 
   GtkWidget        *list_box;
-  GtkSwitch        *main_switch;
+  AdwSwitchRow     *app_search_row;
   GtkWidget        *search_group;
   GtkWidget        *settings_row;
   CcSearchPanelRow *selected_row;
@@ -708,12 +708,12 @@ cc_search_panel_init (CcSearchPanel *self)
   self->search_settings = g_settings_new ("org.gnome.desktop.search-providers");
   g_settings_bind (self->search_settings,
                    "disable-external",
-                   self->main_switch,
+                   self->app_search_row,
                    "active",
                    G_SETTINGS_BIND_DEFAULT |
                    G_SETTINGS_BIND_INVERT_BOOLEAN);
 
-  g_object_bind_property (self->main_switch,
+  g_object_bind_property (self->app_search_row,
                           "active",
                           self->search_group,
                           "sensitive",
@@ -746,7 +746,7 @@ cc_search_panel_class_init (CcSearchPanelClass *klass)
                                                "/org/gnome/control-center/search/cc-search-panel.ui");
 
   gtk_widget_class_bind_template_child (widget_class, CcSearchPanel, list_box);
-  gtk_widget_class_bind_template_child (widget_class, CcSearchPanel, main_switch);
+  gtk_widget_class_bind_template_child (widget_class, CcSearchPanel, app_search_row);
   gtk_widget_class_bind_template_child (widget_class, CcSearchPanel, search_group);
   gtk_widget_class_bind_template_child (widget_class, CcSearchPanel, settings_row);
 
