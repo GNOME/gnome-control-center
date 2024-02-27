@@ -68,8 +68,7 @@ struct _CcWacomPage
 	GtkWidget      *tablet_map_buttons;
 	AdwSwitchRow   *tablet_mode_row;
 	AdwSwitchRow   *tablet_left_handed_row;
-	GtkWidget      *tablet_aspect_ratio;
-	GtkWidget      *tablet_aspect_ratio_switch;
+	AdwSwitchRow   *tablet_aspect_ratio_row;
 	GtkWidget      *display_section;
 
 	GnomeRRScreen  *rr_screen;
@@ -540,8 +539,7 @@ cc_wacom_page_class_init (CcWacomPageClass *klass)
 	gtk_widget_class_bind_template_child (widget_class, CcWacomPage, tablet_map_buttons);
 	gtk_widget_class_bind_template_child (widget_class, CcWacomPage, tablet_mode_row);
 	gtk_widget_class_bind_template_child (widget_class, CcWacomPage, tablet_left_handed_row);
-	gtk_widget_class_bind_template_child (widget_class, CcWacomPage, tablet_aspect_ratio);
-	gtk_widget_class_bind_template_child (widget_class, CcWacomPage, tablet_aspect_ratio_switch);
+	gtk_widget_class_bind_template_child (widget_class, CcWacomPage, tablet_aspect_ratio_row);
 	gtk_widget_class_bind_template_child (widget_class, CcWacomPage, display_section);
 
 	gtk_widget_class_bind_template_callback (widget_class, on_map_buttons_activated);
@@ -778,7 +776,7 @@ cc_wacom_page_new (CcWacomPanel  *panel,
 			 page->tablet_left_handed_row, "active",
 			 G_SETTINGS_BIND_DEFAULT);
 	g_settings_bind (page->wacom_settings, "keep-aspect",
-			 page->tablet_aspect_ratio_switch, "active",
+			 page->tablet_aspect_ratio_row, "active",
 			 G_SETTINGS_BIND_DEFAULT);
 
 	/* Tablet icon */
