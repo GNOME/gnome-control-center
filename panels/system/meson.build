@@ -25,6 +25,7 @@ install_data(
 )
 
 sources = files(
+  'cc-password-utils.c',
   'cc-system-panel.c',
   'about/cc-about-page.c',
   'about/cc-system-details-window.c',

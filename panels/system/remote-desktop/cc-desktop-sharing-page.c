@@ -24,6 +24,7 @@
 #include "cc-encryption-fingerprint-dialog.h"
 #include "cc-gnome-remote-desktop.h"
 #include "cc-hostname.h"
+#include "cc-password-utils.h"
 #include "cc-list-row.h"
 #include "cc-tls-certificate.h"
 #include "cc-systemd-service.h"
@@ -68,6 +69,7 @@ struct _CcDesktopSharingPage {
   AdwActionRow *port_row;
   GtkWidget *username_entry;
   GtkWidget *password_entry;
+  GtkWidget *generate_password_button;
   GtkWidget *verify_encryption_button;
 
   CcEncryptionFingerprintDialog *fingerprint_dialog;
@@ -81,6 +83,14 @@ struct _CcDesktopSharingPage {
 };
 
 G_DEFINE_TYPE (CcDesktopSharingPage, cc_desktop_sharing_page, ADW_TYPE_BIN)
+
+static void
+on_generate_password_button_clicked (CcDesktopSharingPage *self)
+{
+  g_autofree char *new_password = cc_generate_password ();
+
+  gtk_editable_set_text (GTK_EDITABLE (self->password_entry), new_password);
+}
 
 static void
 on_verify_encryption_button_clicked (CcDesktopSharingPage *self)
@@ -385,53 +395,6 @@ on_password_copy_clicked (CcDesktopSharingPage *self,
   add_toast (self, _("Password copied"));
 }
 
-static pwquality_settings_t *
-get_pwq (void)
-{
-  static pwquality_settings_t *settings;
-
-  if (settings == NULL)
-    {
-      gchar *err = NULL;
-      gint rv = 0;
-
-      settings = pwquality_default_settings ();
-      pwquality_set_int_value (settings, PWQ_SETTING_MAX_SEQUENCE, 4);
-
-      rv = pwquality_read_config (settings, NULL, (gpointer)&err);
-      if (rv < 0)
-        {
-          g_warning ("Failed to read pwquality configuration: %s\n",
-                     pwquality_strerror (NULL, 0, rv, err));
-          pwquality_free_settings (settings);
-
-          /* Load just default settings in case of failure. */
-          settings = pwquality_default_settings ();
-          pwquality_set_int_value (settings, PWQ_SETTING_MAX_SEQUENCE, 4);
-        }
-    }
-
-  return settings;
-}
-
-static char *
-pw_generate (void)
-{
-  g_autofree gchar *res = NULL;
-  int rv;
-
-  rv = pwquality_generate (get_pwq (), 0, &res);
-
-  if (rv < 0)
-    {
-      g_warning ("Password generation failed: %s\n",
-                 pwquality_strerror (NULL, 0, rv, NULL));
-      return NULL;
-    }
-
-  return g_steal_pointer (&res);
-}
-
 static void
 setup_desktop_sharing_page (CcDesktopSharingPage *self)
 {
@@ -471,7 +434,7 @@ setup_desktop_sharing_page (CcDesktopSharingPage *self)
 
   if (password == NULL)
     {
-      g_autofree gchar *pw = pw_generate ();
+      g_autofree gchar *pw = cc_generate_password ();
       if (pw != NULL)
         gtk_editable_set_text (GTK_EDITABLE (self->password_entry), pw);
     }
@@ -495,6 +458,9 @@ setup_desktop_sharing_page (CcDesktopSharingPage *self)
   g_object_bind_property (self->desktop_sharing_row, "active",
                           self->remote_control_row, "sensitive",
                           G_BINDING_SYNC_CREATE);
+  g_object_bind_property (self->password_entry, "sensitive",
+		          self->generate_password_button, "sensitive",
+			  G_BINDING_SYNC_CREATE);
 }
 
 static void
@@ -566,12 +532,14 @@ cc_desktop_sharing_page_class_init (CcDesktopSharingPageClass * klass)
   gtk_widget_class_bind_template_child (widget_class, CcDesktopSharingPage, port_row);
   gtk_widget_class_bind_template_child (widget_class, CcDesktopSharingPage, username_entry);
   gtk_widget_class_bind_template_child (widget_class, CcDesktopSharingPage, password_entry);
+  gtk_widget_class_bind_template_child (widget_class, CcDesktopSharingPage, generate_password_button);
   gtk_widget_class_bind_template_child (widget_class, CcDesktopSharingPage, verify_encryption_button);
 
   gtk_widget_class_bind_template_callback (widget_class, on_address_copy_clicked);
   gtk_widget_class_bind_template_callback (widget_class, on_port_copy_clicked);
   gtk_widget_class_bind_template_callback (widget_class, on_username_copy_clicked);
   gtk_widget_class_bind_template_callback (widget_class, on_password_copy_clicked);
+  gtk_widget_class_bind_template_callback (widget_class, on_generate_password_button_clicked);
   gtk_widget_class_bind_template_callback (widget_class, on_verify_encryption_button_clicked);
 }
 

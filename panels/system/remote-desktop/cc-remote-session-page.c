@@ -29,6 +29,7 @@
 #include "cc-remote-session-page.h"
 #include "cc-encryption-fingerprint-dialog.h"
 #include "cc-hostname.h"
+#include "cc-password-utils.h"
 #include "cc-permission-infobar.h"
 #include "cc-tls-certificate.h"
 #include "cc-systemd-service.h"
@@ -58,6 +59,7 @@ struct _CcRemoteSessionPage {
   GtkWidget    *credentials_group;
   GtkWidget    *username_entry;
   GtkWidget    *password_entry;
+  GtkWidget    *generate_password_button;
   GtkWidget    *verify_encryption_button;
 
   GTlsCertificate *certificate;
@@ -124,6 +126,14 @@ on_password_copy_clicked (CcRemoteSessionPage *self,
   gdk_clipboard_set_text (gtk_widget_get_clipboard (GTK_WIDGET (button)),
                           gtk_editable_get_text (editable));
   add_toast (self, _("Password copied"));
+}
+
+static void
+on_generate_password_button_clicked (CcRemoteSessionPage *self)
+{
+  g_autofree char *new_password = cc_generate_password ();
+
+  gtk_editable_set_text (GTK_EDITABLE (self->password_entry), new_password);
 }
 
 static void
@@ -530,12 +540,14 @@ cc_remote_session_page_class_init (CcRemoteSessionPageClass * klass)
   gtk_widget_class_bind_template_child (widget_class, CcRemoteSessionPage, credentials_group);
   gtk_widget_class_bind_template_child (widget_class, CcRemoteSessionPage, username_entry);
   gtk_widget_class_bind_template_child (widget_class, CcRemoteSessionPage, password_entry);
+  gtk_widget_class_bind_template_child (widget_class, CcRemoteSessionPage, generate_password_button);
   gtk_widget_class_bind_template_child (widget_class, CcRemoteSessionPage, verify_encryption_button);
 
   gtk_widget_class_bind_template_callback (widget_class, on_address_copy_clicked);
   gtk_widget_class_bind_template_callback (widget_class, on_port_copy_clicked);
   gtk_widget_class_bind_template_callback (widget_class, on_username_copy_clicked);
   gtk_widget_class_bind_template_callback (widget_class, on_password_copy_clicked);
+  gtk_widget_class_bind_template_callback (widget_class, on_generate_password_button_clicked);
   gtk_widget_class_bind_template_callback (widget_class, on_verify_encryption_button_clicked);
 }
 
@@ -725,6 +737,9 @@ cc_remote_session_page_init (CcRemoteSessionPage *self)
                             G_CALLBACK (sync_permissions),
                             self);
 
+  g_object_bind_property (self->password_entry, "sensitive",
+                          self->generate_password_button, "sensitive",
+                          G_BINDING_SYNC_CREATE);
   cc_permission_infobar_set_permission (self->permission_infobar, self->permission);
   cc_permission_infobar_set_title (self->permission_infobar, _("Some settings are locked"));
 
