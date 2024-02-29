@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: amberol\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/issues\n"
-"POT-Creation-Date: 2024-02-21 14:37+0000\n"
-"PO-Revision-Date: 2024-02-21 19:22+0330\n"
+"POT-Creation-Date: 2024-02-29 07:52+0000\n"
+"PO-Revision-Date: 2024-02-29 23:25+0330\n"
 "Last-Translator: Danial Behzadi <dani.behzi@ubuntu.com>\n"
 "Language-Team: Farsi\n"
 "Language: fa\n"
@@ -78,7 +78,7 @@ msgstr "سامانه پرونده"
 
 #: panels/applications/cc-applications-panel.c:854
 #: panels/keyboard/01-launchers.xml.in:6
-#: shell/appdata/org.gnome.Settings.appdata.xml.in:7 shell/cc-window.c:760
+#: shell/appdata/org.gnome.Settings.appdata.xml.in:7 shell/cc-window.c:775
 #: shell/cc-window.ui:20 shell/org.gnome.Settings.desktop.in:3
 msgid "Settings"
 msgstr "تنظیمات"
@@ -296,7 +296,7 @@ msgid "System access that is required by the app"
 msgstr "دسترسی‌های سامانه‌ای مورد نیاز کاره"
 
 #: panels/applications/cc-applications-panel.ui:409 panels/mouse/cc-mouse-panel.ui:66
-#: panels/multitasking/cc-multitasking-panel.ui:15 panels/power/cc-power-panel.ui:172
+#: panels/multitasking/cc-multitasking-panel.ui:15 panels/power/cc-power-panel.ui:171
 msgid "General"
 msgstr "عمومی"
 
@@ -950,6 +950,7 @@ msgstr "واسنجی نمایشگر"
 #: panels/privacy/cc-usage-page.c:136 panels/sharing/cc-sharing-panel.c:239
 #: panels/system/region/cc-format-chooser.ui:24
 #: panels/system/users/cc-add-user-dialog.ui:25
+#: panels/system/users/cc-enterprise-login-dialog.ui:58
 #: panels/system/users/cc-avatar-chooser.c:92
 #: panels/system/users/cc-fingerprint-dialog.ui:32
 #: panels/system/users/cc-password-dialog.ui:21
@@ -1249,8 +1250,9 @@ msgstr "درون‌ریزی _پرونده…"
 #: panels/color/cc-color-panel.ui:390 panels/keyboard/cc-input-chooser.ui:28
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:33
 #: panels/network/connection-editor/net-connection-editor.c:653
-#: panels/printers/new-printer-dialog.ui:91
+#: panels/printers/new-printer-dialog.ui:85
 #: panels/system/users/cc-add-user-dialog.ui:39
+#: panels/system/users/cc-enterprise-login-dialog.ui:66
 msgid "_Add"
 msgstr "_اضافه کردن"
 
@@ -1623,13 +1625,13 @@ msgid "Hotspot"
 msgstr "نقطهٔ داغ"
 
 #: panels/display/cc-display-panel.c:510
-#: panels/notifications/cc-notifications-panel.c:212
+#: panels/notifications/cc-notifications-panel.c:213
 #: panels/power/cc-power-panel.c:679 panels/power/cc-power-panel.c:686
 msgid "On"
 msgstr "روشن"
 
 #: panels/display/cc-display-panel.c:512 panels/network/cc-net-proxy-page.c:182
-#: panels/notifications/cc-notifications-panel.c:212
+#: panels/notifications/cc-notifications-panel.c:213
 #: panels/power/cc-power-panel.c:673 panels/power/cc-power-panel.c:684
 msgid "Off"
 msgstr "خاموش"
@@ -1926,7 +1928,7 @@ msgid "Home folder"
 msgstr "پوشه‌ٔ خانه"
 
 #: panels/keyboard/01-launchers.xml.in:16 panels/keyboard/cc-input-chooser.ui:50
-#: panels/printers/cc-printers-panel.ui:21 panels/printers/new-printer-dialog.ui:216
+#: panels/printers/cc-printers-panel.ui:21 panels/printers/new-printer-dialog.ui:210
 #: panels/search/gnome-search-panel.desktop.in:3
 #: panels/system/region/cc-format-chooser.ui:82 shell/cc-window.ui:28
 #: shell/cc-window.ui:30
@@ -2758,7 +2760,7 @@ msgstr "<b>نام شبکه</b>: %s"
 msgid "<b>Password</b>: %s"
 msgstr "<b>گذرواژه</b>: %s"
 
-#: panels/network/cc-qr-code-dialog.ui:9 panels/network/cc-wifi-connection-row.ui:60
+#: panels/network/cc-qr-code-dialog.ui:9 panels/network/cc-wifi-connection-row.ui:53
 msgid "Share Network"
 msgstr "هم‌رسانی شبکه"
 
@@ -2803,15 +2805,15 @@ msgid "Signal strength %d%%"
 msgstr "قدرت سیگنال %Id٪"
 
 #. TRANSLATORS: device status
-#: panels/network/cc-wifi-connection-row.ui:41 panels/network/panel-common.c:63
+#: panels/network/cc-wifi-connection-row.ui:35 panels/network/panel-common.c:63
 msgid "Connected"
 msgstr "وصل شده"
 
-#: panels/network/cc-wifi-connection-row.ui:73 panels/network/network-ethernet.ui:47
+#: panels/network/cc-wifi-connection-row.ui:65 panels/network/network-ethernet.ui:47
 msgid "Network Options"
 msgstr "گزینه‌های شبکه"
 
-#: panels/network/cc-wifi-connection-row.ui:85
+#: panels/network/cc-wifi-connection-row.ui:76
 msgid "Forget Network"
 msgstr "فراموشی شبکه"
 
@@ -2864,8 +2866,8 @@ msgstr "نام شبکه"
 
 #. Translators: This is a password needed for printing.
 #: panels/network/cc-wifi-hotspot-dialog.ui:92
-#: panels/printers/new-printer-dialog.ui:302 panels/printers/pp-jobs-dialog.ui:54
-#: panels/system/users/cc-add-user-dialog.ui:152
+#: panels/printers/new-printer-dialog.ui:296 panels/printers/pp-jobs-dialog.ui:54
+#: panels/system/users/cc-add-user-dialog.ui:150
 #: panels/wwan/cc-wwan-apn-dialog.ui:175
 msgid "Password"
 msgstr "گذرواژه"
@@ -2958,7 +2960,7 @@ msgstr "_امنیت 802.1x"
 #: panels/network/connection-editor/bluetooth-page.ui:16
 #: panels/network/connection-editor/ethernet-page.ui:27
 #: panels/network/connection-editor/vpn-page.ui:23
-#: panels/system/users/cc-add-user-dialog.ui:68
+#: panels/system/users/cc-add-user-dialog.ui:66
 #: panels/system/users/cc-user-page.ui:84
 msgid "_Name"
 msgstr "_نام"
@@ -4485,79 +4487,79 @@ msgstr "افزاره‌های وصل شده"
 msgid "Power Mode"
 msgstr "حالت نیرو"
 
-#: panels/power/cc-power-panel.ui:127
+#: panels/power/cc-power-panel.ui:126
 msgid "Power Saving"
 msgstr "ذخیرهٔ نیرو"
 
-#: panels/power/cc-power-panel.ui:130
+#: panels/power/cc-power-panel.ui:129
 msgid "A_utomatic Screen Brightness"
 msgstr "_روشنایی خودکار صفحه"
 
-#: panels/power/cc-power-panel.ui:131
+#: panels/power/cc-power-panel.ui:130
 msgid "Adjust screen brightness to the surrounding light"
 msgstr "هماهنگی روشنایی صفحه با نور محیط"
 
-#: panels/power/cc-power-panel.ui:138
+#: panels/power/cc-power-panel.ui:137
 msgid "_Dim Screen"
 msgstr "_تاریکی صفحه"
 
-#: panels/power/cc-power-panel.ui:139
+#: panels/power/cc-power-panel.ui:138
 msgid "Reduce screen brightness when the computer is inactive"
 msgstr "کاهش روشنایی صفحه هنگام غیرفعّال بودن رایانه"
 
-#: panels/power/cc-power-panel.ui:145
+#: panels/power/cc-power-panel.ui:144
 msgid "Screen _Blank"
 msgstr "_سیاهی صفحه"
 
-#: panels/power/cc-power-panel.ui:146
+#: panels/power/cc-power-panel.ui:145
 msgid "Turn the screen off after a period of inactivity"
 msgstr "خاموشی صفحه پس از مدّتی غیرفعّال بودن"
 
-#: panels/power/cc-power-panel.ui:154
+#: panels/power/cc-power-panel.ui:153
 msgid "Automatic Power _Saver"
 msgstr "_ذخیره‌ساز نیروی خودکار"
 
-#: panels/power/cc-power-panel.ui:155
+#: panels/power/cc-power-panel.ui:154
 msgid "Turn on power saver mode when battery power is low"
 msgstr "روشنی حلت ذخیرهٔ نیرو هنگام کم بودن باتری"
 
-#: panels/power/cc-power-panel.ui:162
+#: panels/power/cc-power-panel.ui:161
 msgid "_Automatic Suspend"
 msgstr "_تعلیق خودکار"
 
-#: panels/power/cc-power-panel.ui:163
+#: panels/power/cc-power-panel.ui:162
 msgid "Pause the computer after a period of inactivity"
 msgstr "مکث رایانه پس از مدّتی غیرفعّال بودن"
 
-#: panels/power/cc-power-panel.ui:176
+#: panels/power/cc-power-panel.ui:175
 msgid "Po_wer Button Behavior"
 msgstr "عمل دکمهٔ _خاموش"
 
-#: panels/power/cc-power-panel.ui:184
+#: panels/power/cc-power-panel.ui:183
 msgid "Show Battery _Percentage"
 msgstr "نمایش _درصد باتری"
 
-#: panels/power/cc-power-panel.ui:185
+#: panels/power/cc-power-panel.ui:184
 msgid "Show exact charge level in the top bar"
 msgstr "نمایش سطح دقیق شارژ در نوار بالایی"
 
-#: panels/power/cc-power-panel.ui:198
+#: panels/power/cc-power-panel.ui:197
 msgid "Automatic Suspend"
 msgstr "تعلیق خودکار"
 
-#: panels/power/cc-power-panel.ui:227
+#: panels/power/cc-power-panel.ui:226
 msgid "On _Battery Power"
 msgstr "روی نیروی _باتری"
 
-#: panels/power/cc-power-panel.ui:234
+#: panels/power/cc-power-panel.ui:233
 msgid "_Delay"
 msgstr "_تأخیر"
 
-#: panels/power/cc-power-panel.ui:252
+#: panels/power/cc-power-panel.ui:251
 msgid "_Plugged In"
 msgstr "_متصّل به برق"
 
-#: panels/power/cc-power-panel.ui:258
+#: panels/power/cc-power-panel.ui:257
 msgid "D_elay"
 msgstr "تأ_خیر"
 
@@ -4620,36 +4622,36 @@ msgstr "شکست در افزودن چاپگر جدید."
 msgid "Unlock to add printers and change settings"
 msgstr "قفل‌گشایی برای افزودن چاپگرها و دگرگونی تنظیمات"
 
-#: panels/printers/cc-printers-panel.ui:30
+#: panels/printers/cc-printers-panel.ui:27
 msgid "All Connected and Network Printers"
 msgstr "همهٔ چاپگرهای شبکه و وصل شده"
 
 #. Translators: This button adds new printer.
 #. Translators: This button adds a new printer.
-#: panels/printers/cc-printers-panel.ui:34 panels/printers/cc-printers-panel.ui:169
+#: panels/printers/cc-printers-panel.ui:31 panels/printers/cc-printers-panel.ui:166
 msgid "_Add Printer…"
 msgstr "_افزودن چاپگر…"
 
-#: panels/printers/cc-printers-panel.ui:52
+#: panels/printers/cc-printers-panel.ui:49
 msgid "Search printers"
 msgstr "جست‌وجوی چاپگرها"
 
 #. Translators: This is the button which allows undoing the removal of the printer.
-#: panels/printers/cc-printers-panel.ui:81
+#: panels/printers/cc-printers-panel.ui:78
 msgid "Undo"
 msgstr "برگردان"
 
-#: panels/printers/cc-printers-panel.ui:166
+#: panels/printers/cc-printers-panel.ui:163
 msgid "No Printers"
 msgstr "هیچ چاپگری نیست"
 
 #. Translators: Title if the CUPS server is not running (we can not connect to it).
-#: panels/printers/cc-printers-panel.ui:191
+#: panels/printers/cc-printers-panel.ui:188
 msgid "No Print Service"
 msgstr "بدون خدمت چاپ"
 
 #. Translators: Description if the CUPS server is not running (we can not connect to it).
-#: panels/printers/cc-printers-panel.ui:192
+#: panels/printers/cc-printers-panel.ui:189
 msgid "The system printing service doesn’t seem to be available"
 msgstr "به نظر نمی‌رسد خدمت چاپ سامانه در دسترس باشد"
 
@@ -4673,7 +4675,7 @@ msgstr "Printer;Queue;Print;Paper;Ink;Toner;چاپگر;صف;چاپ;کاغذ;جو
 msgid "Add Printer"
 msgstr "افزودن چاپگر"
 
-#: panels/printers/new-printer-dialog.ui:69
+#: panels/printers/new-printer-dialog.ui:67
 #: panels/system/region/cc-format-chooser.ui:37
 #: panels/system/users/cc-fingerprint-dialog.ui:44
 #: panels/wwan/cc-wwan-apn-dialog.ui:21
@@ -4682,31 +4684,31 @@ msgstr "بازگشت"
 
 #. Translators: This button opens authentication dialog for selected server.
 #. Translators: This buttons submits the credentials for the selected server.
-#: panels/printers/new-printer-dialog.ui:108
-#: panels/printers/new-printer-dialog.ui:123 panels/wwan/cc-wwan-device-page.ui:38
+#: panels/printers/new-printer-dialog.ui:102
+#: panels/printers/new-printer-dialog.ui:117 panels/wwan/cc-wwan-device-page.ui:38
 msgid "_Unlock"
 msgstr "_قفل‌گشایی"
 
 #. Translators: No printers were detected
-#: panels/printers/new-printer-dialog.ui:174
+#: panels/printers/new-printer-dialog.ui:168
 msgid "No Printers Found"
 msgstr "هیچ چاپگری پیدا نشد"
 
 #. Translators: The entered text should contain network address of a printer or a text which will filter found devices (their names and locations)
-#: panels/printers/new-printer-dialog.ui:211
+#: panels/printers/new-printer-dialog.ui:205
 msgid "Enter a network address or search for a printer"
 msgstr "ورود یک نشانی شبکه جست‌وجوی چاپگر"
 
-#: panels/printers/new-printer-dialog.ui:256
+#: panels/printers/new-printer-dialog.ui:250
 msgid "Authentication Required"
 msgstr "تصدیق هویت لازم است"
 
-#: panels/printers/new-printer-dialog.ui:272
+#: panels/printers/new-printer-dialog.ui:266
 msgid "Enter username and password to view printers on Print Server"
 msgstr "ورود نام‌کاربری و گذرواژه برای دیدن چاپگرهای روی کارساز چاپ"
 
 #. Translators: This is a username on a print server.
-#: panels/printers/new-printer-dialog.ui:281 panels/printers/pp-jobs-dialog.ui:42
+#: panels/printers/new-printer-dialog.ui:275 panels/printers/pp-jobs-dialog.ui:42
 #: panels/wwan/cc-wwan-apn-dialog.ui:150
 msgid "Username"
 msgstr "نام‌کاربری"
@@ -6548,7 +6550,7 @@ msgstr "گذرواژه _لازم است"
 
 #: panels/sharing/cc-sharing-panel.ui:96
 #: panels/system/remote-desktop/cc-remote-desktop-page.ui:136
-#: panels/system/users/cc-add-user-dialog.ui:373
+#: panels/system/users/cc-enterprise-login-dialog.ui:114
 msgid "_Password"
 msgstr "_گذرواژه"
 
@@ -6706,7 +6708,7 @@ msgstr "صداها"
 msgid "Vo_lume Levels"
 msgstr "_سطح‌های حجم صدا"
 
-#: panels/sound/cc-sound-panel.ui:384
+#: panels/sound/cc-sound-panel.ui:378
 msgid "_Alert Sound"
 msgstr "صدای _هشدار"
 
@@ -6785,7 +6787,7 @@ msgid "Memory"
 msgstr "حافظه"
 
 #: panels/system/about/cc-about-page.ui:91
-#: panels/system/about/cc-system-details-window.ui:102
+#: panels/system/about/cc-system-details-window.ui:103
 msgid "Disk Capacity"
 msgstr "ظرفیت دیسک"
 
@@ -6920,43 +6922,43 @@ msgstr "_رونوشت"
 msgid "Hardware Information"
 msgstr "اطّلاعات سخت‌افزاری"
 
-#: panels/system/about/cc-system-details-window.ui:122
+#: panels/system/about/cc-system-details-window.ui:123
 msgid "Software Information"
 msgstr "اطّلاعات نرم‌افزاری"
 
-#: panels/system/about/cc-system-details-window.ui:133
+#: panels/system/about/cc-system-details-window.ui:134
 #: panels/wwan/cc-wwan-details-dialog.ui:210
 msgid "Firmware Version"
 msgstr "نگارش ثابت‌افزار"
 
 #. translators: this field contains the distro name and version
-#: panels/system/about/cc-system-details-window.ui:141
+#: panels/system/about/cc-system-details-window.ui:142
 msgid "OS Name"
 msgstr "نام سیستم‌عامل"
 
 #. translators: this field contains the distro build
-#: panels/system/about/cc-system-details-window.ui:149
+#: panels/system/about/cc-system-details-window.ui:150
 msgid "OS Build"
 msgstr "ساخت سیستم‌عامل"
 
 #. translators: this field contains the distro type
-#: panels/system/about/cc-system-details-window.ui:157
+#: panels/system/about/cc-system-details-window.ui:158
 msgid "OS Type"
 msgstr "گونهٔ سیستم‌عامل"
 
-#: panels/system/about/cc-system-details-window.ui:164
+#: panels/system/about/cc-system-details-window.ui:165
 msgid "GNOME Version"
 msgstr "نگارش گنوم"
 
-#: panels/system/about/cc-system-details-window.ui:171
+#: panels/system/about/cc-system-details-window.ui:172
 msgid "Windowing System"
 msgstr "سامانهٔ پنجره"
 
-#: panels/system/about/cc-system-details-window.ui:178
+#: panels/system/about/cc-system-details-window.ui:179
 msgid "Virtualization"
 msgstr "مجازی‌سازی"
 
-#: panels/system/about/cc-system-details-window.ui:185
+#: panels/system/about/cc-system-details-window.ui:186
 msgid "Kernel Version"
 msgstr "نگارش کرنل"
 
@@ -7014,17 +7016,17 @@ msgid "Software _Updates"
 msgstr "_به‌روز رسانی‌های نرم‌افزاری"
 
 #. Translators: This is the full date and time format used in 12-hour mode.
-#: panels/system/datetime/cc-datetime-page.c:232
+#: panels/system/datetime/cc-datetime-page.c:230
 msgid "%e %B %Y, %l:%M %p"
 msgstr "%Oe %B %OY، ⁦%Ol:%OM⁩ %p"
 
 #. Translators: This is the full date and time format used in 24-hour mode.
-#: panels/system/datetime/cc-datetime-page.c:237
+#: panels/system/datetime/cc-datetime-page.c:235
 msgid "%e %B %Y, %R"
 msgstr "%Oe %B %OY، ⁦%OH:%OM⁩"
 
 #. Translators: "city, country"
-#: panels/system/datetime/cc-datetime-page.c:390
+#: panels/system/datetime/cc-datetime-page.c:388
 #, c-format
 msgctxt "timezone loc"
 msgid "%s, %s"
@@ -7032,7 +7034,7 @@ msgstr "%s، %s"
 
 #. Update the timezone on the listbow row
 #. Translators: "timezone (details)"
-#: panels/system/datetime/cc-datetime-page.c:407
+#: panels/system/datetime/cc-datetime-page.c:405
 #, c-format
 msgctxt "timezone desc"
 msgid "%s (%s)"
@@ -7067,103 +7069,103 @@ msgstr "احتیاج به دسترسی به اینترنت دارد"
 msgid "Date &amp; _Time"
 msgstr "تاریخ و _زمان"
 
-#: panels/system/datetime/cc-datetime-page.ui:174
+#: panels/system/datetime/cc-datetime-page.ui:161
 msgid "Automatic Time _Zone"
 msgstr "_منطقه زمانی خودکار"
 
-#: panels/system/datetime/cc-datetime-page.ui:175
+#: panels/system/datetime/cc-datetime-page.ui:162
 msgid "Requires location services enabled and internet access"
 msgstr "نیاز به خدمت مکان‌یابی به کار افتاده و دسترسی به اینترنت"
 
-#: panels/system/datetime/cc-datetime-page.ui:181
+#: panels/system/datetime/cc-datetime-page.ui:168
 msgid "Time Z_one"
 msgstr "منطقه ز_مانی"
 
-#: panels/system/datetime/cc-datetime-page.ui:206
+#: panels/system/datetime/cc-datetime-page.ui:179
 msgid "Time _Format"
 msgstr "_قالب زمان"
 
-#: panels/system/datetime/cc-datetime-page.ui:217
+#: panels/system/datetime/cc-datetime-page.ui:190
 msgid "_24-hour"
 msgstr "_۲۴ ساعته"
 
-#: panels/system/datetime/cc-datetime-page.ui:225
+#: panels/system/datetime/cc-datetime-page.ui:198
 msgid "AM / _PM"
 msgstr "_صبح / عصر"
 
-#: panels/system/datetime/cc-datetime-page.ui:238
+#: panels/system/datetime/cc-datetime-page.ui:211
 msgid "Clock &amp; Calendar"
 msgstr "ساعت و تقویم"
 
-#: panels/system/datetime/cc-datetime-page.ui:239
+#: panels/system/datetime/cc-datetime-page.ui:212
 msgid "Control how the time and date is shown in the top bar"
 msgstr "واپایش چگونگی نشان دادن زمان و تاریخ در نوار بالایی"
 
-#: panels/system/datetime/cc-datetime-page.ui:242
+#: panels/system/datetime/cc-datetime-page.ui:215
 msgid "_Week Day"
 msgstr "_روز هفته"
 
-#: panels/system/datetime/cc-datetime-page.ui:248
+#: panels/system/datetime/cc-datetime-page.ui:221
 msgid "D_ate"
 msgstr "_تاریخ"
 
-#: panels/system/datetime/cc-datetime-page.ui:254
+#: panels/system/datetime/cc-datetime-page.ui:227
 msgid "_Seconds"
 msgstr "_ثانیه"
 
-#: panels/system/datetime/cc-datetime-page.ui:260
+#: panels/system/datetime/cc-datetime-page.ui:233
 msgid "Week _Numbers"
 msgstr "_شماره‌های هفته"
 
-#: panels/system/datetime/cc-datetime-page.ui:261
+#: panels/system/datetime/cc-datetime-page.ui:234
 msgid "Shown in the dropdown calendar"
 msgstr "نماش داده در تقویم پایین افتادنی"
 
-#: panels/system/datetime/cc-datetime-page.ui:298
+#: panels/system/datetime/cc-datetime-page.ui:271
 msgid "January"
 msgstr "ژانویه"
 
-#: panels/system/datetime/cc-datetime-page.ui:299
+#: panels/system/datetime/cc-datetime-page.ui:272
 msgid "February"
 msgstr "فوریه"
 
-#: panels/system/datetime/cc-datetime-page.ui:300
+#: panels/system/datetime/cc-datetime-page.ui:273
 msgid "March"
 msgstr "مارس"
 
-#: panels/system/datetime/cc-datetime-page.ui:301
+#: panels/system/datetime/cc-datetime-page.ui:274
 msgid "April"
 msgstr "آوریل"
 
-#: panels/system/datetime/cc-datetime-page.ui:302
+#: panels/system/datetime/cc-datetime-page.ui:275
 msgid "May"
 msgstr "می"
 
-#: panels/system/datetime/cc-datetime-page.ui:303
+#: panels/system/datetime/cc-datetime-page.ui:276
 msgid "June"
 msgstr "ژوئن"
 
-#: panels/system/datetime/cc-datetime-page.ui:304
+#: panels/system/datetime/cc-datetime-page.ui:277
 msgid "July"
 msgstr "ژوئیه"
 
-#: panels/system/datetime/cc-datetime-page.ui:305
+#: panels/system/datetime/cc-datetime-page.ui:278
 msgid "August"
 msgstr "اوت"
 
-#: panels/system/datetime/cc-datetime-page.ui:306
+#: panels/system/datetime/cc-datetime-page.ui:279
 msgid "September"
 msgstr "سپتامبر"
 
-#: panels/system/datetime/cc-datetime-page.ui:307
+#: panels/system/datetime/cc-datetime-page.ui:280
 msgid "October"
 msgstr "اکتبر"
 
-#: panels/system/datetime/cc-datetime-page.ui:308
+#: panels/system/datetime/cc-datetime-page.ui:281
 msgid "November"
 msgstr "نوامبر"
 
-#: panels/system/datetime/cc-datetime-page.ui:309
+#: panels/system/datetime/cc-datetime-page.ui:282
 msgid "December"
 msgstr "دسامبر"
 
@@ -7439,71 +7441,29 @@ msgstr "به یا از کار انداختن ورود دوردست"
 msgid "Authentication is required to enable or disable remote login"
 msgstr "برای به یا از کار انداختن ورود دوردست، تأیید هویت لازم است"
 
-#: panels/system/users/cc-add-user-dialog.c:36
-msgid "Should match the web address of your login provider."
-msgstr "باید با آدرس اینترنتی فراهم‌کننده‌ٔ حساب شما یکسان باشد."
-
-#: panels/system/users/cc-add-user-dialog.c:217
+#: panels/system/users/cc-add-user-dialog.c:159
 msgid "Failed to add account"
 msgstr "افزودن حساب شکست خورد"
 
-#: panels/system/users/cc-add-user-dialog.c:668
+#: panels/system/users/cc-add-user-dialog.c:610
 msgid "The passwords do not match."
 msgstr "گذرواژه‌ها برابر نیستند."
-
-#: panels/system/users/cc-add-user-dialog.c:866
-#: panels/system/users/cc-add-user-dialog.c:905
-#: panels/system/users/cc-add-user-dialog.c:923
-msgid "Failed to register account"
-msgstr "ثبت حساب شکست خورد"
-
-#: panels/system/users/cc-add-user-dialog.c:1038
-msgid "No supported way to authenticate with this domain"
-msgstr "هیچ راه پیشتیبانی شده‌ای برای تصدیق‌هویت با این دامنه وجود ندارد"
-
-#: panels/system/users/cc-add-user-dialog.c:1102
-msgid "Failed to join domain"
-msgstr "پیوستن به دامنه شکست خورد"
-
-#: panels/system/users/cc-add-user-dialog.c:1157
-msgid ""
-"That login name didn’t work.\n"
-"Please try again."
-msgstr ""
-"نام ورود کار نکرد.\n"
-"لطفاً دوباره تلاش کنید."
-
-#: panels/system/users/cc-add-user-dialog.c:1164
-msgid ""
-"That login password didn’t work.\n"
-"Please try again."
-msgstr ""
-"گذواژهٔ ورود کار نکرد.\n"
-"لطفاً دوباره تلاش کنید."
-
-#: panels/system/users/cc-add-user-dialog.c:1172
-msgid "Failed to log into domain"
-msgstr "ورود به دامنه شکست خورد"
-
-#: panels/system/users/cc-add-user-dialog.c:1227
-msgid "Unable to find the domain. Maybe you misspelled it?"
-msgstr "ناتوان در یافتن دامنه. شاید اشتباه نوشته‌اید؟"
 
 #: panels/system/users/cc-add-user-dialog.ui:13
 #: panels/system/users/data/join-dialog.ui:9
 msgid "Add User"
 msgstr "افزودن کاربر"
 
-#: panels/system/users/cc-add-user-dialog.ui:95
-#: panels/system/users/cc-add-user-dialog.ui:351
+#: panels/system/users/cc-add-user-dialog.ui:93
+#: panels/system/users/cc-enterprise-login-dialog.ui:107
 msgid "_Username"
 msgstr "نام _کاربری"
 
-#: panels/system/users/cc-add-user-dialog.ui:133
+#: panels/system/users/cc-add-user-dialog.ui:131
 msgid "Ad_ministrator"
 msgstr "_مدیر"
 
-#: panels/system/users/cc-add-user-dialog.ui:138
+#: panels/system/users/cc-add-user-dialog.ui:136
 #: panels/system/users/cc-user-page.ui:141
 msgid ""
 "Administrators have extra abilities, including adding and removing users, changing "
@@ -7513,47 +7473,129 @@ msgstr ""
 "مدیران قابلیت‌هایی بیش‌تر چون افزودن و برداشتن کاربران، دگرگونی تنظیمات ورود و "
 "برداشتن نرم‌افزارها را دارند. واپایش‌های والدین نمی‌تواند به مدیران اعمال شود."
 
-#: panels/system/users/cc-add-user-dialog.ui:156
+#: panels/system/users/cc-add-user-dialog.ui:154
 msgid "User sets password on _first login"
 msgstr "کاربران در _نخستین ورود گذرواژه‌ را تنظیم می‌کنند"
 
-#: panels/system/users/cc-add-user-dialog.ui:169
+#: panels/system/users/cc-add-user-dialog.ui:167
 msgid "Set password n_ow"
 msgstr "گذرواژه _هم‌اکنون تنظیم شود"
 
-#: panels/system/users/cc-add-user-dialog.ui:189
+#: panels/system/users/cc-add-user-dialog.ui:187
 msgid "Pass_word"
 msgstr "_گذرواژه"
 
-#: panels/system/users/cc-add-user-dialog.ui:233
+#: panels/system/users/cc-add-user-dialog.ui:231
 msgid "_Confirm"
 msgstr "_تأیید"
 
-#: panels/system/users/cc-add-user-dialog.ui:288
-msgid "_Enterprise Login"
-msgstr "ورود _تجاری"
+#: panels/system/users/cc-enterprise-login-dialog.c:133
+#: panels/system/users/cc-enterprise-login-dialog.c:171
+#: panels/system/users/cc-enterprise-login-dialog.c:186
+msgid "Failed to register account"
+msgstr "ثبت حساب شکست خورد"
 
-#: panels/system/users/cc-add-user-dialog.ui:290
-msgid "User accounts which are managed by a company or organization"
-msgstr "حساب‌های کاربری که به دست یک شرکت یا سازمان مدیریت می‌شوند"
+#: panels/system/users/cc-enterprise-login-dialog.c:240
+#: panels/system/users/cc-enterprise-login-dialog.c:411
+msgid "Failed to join domain"
+msgstr "پیوستن به دامنه شکست خورد"
 
-#: panels/system/users/cc-add-user-dialog.ui:307
+#: panels/system/users/cc-enterprise-login-dialog.c:275
+msgid "No supported way to authenticate with this domain"
+msgstr "هیچ راه پیشتیبانی شده‌ای برای تصدیق‌هویت با این دامنه وجود ندارد"
+
+#: panels/system/users/cc-enterprise-login-dialog.c:285
+#: panels/system/users/cc-enterprise-login-dialog.c:476
+msgid "That login name didn’t work"
+msgstr "نام ورود کار نکرد"
+
+#: panels/system/users/cc-enterprise-login-dialog.c:292
+#: panels/system/users/cc-enterprise-login-dialog.c:483
+msgid "That login password didn’t work"
+msgstr "گذواژهٔ ورود کار نکرد"
+
+#: panels/system/users/cc-enterprise-login-dialog.c:299
+msgid "That hostname didn’t work"
+msgstr "نام میزبان کار نکرد"
+
+#: panels/system/users/cc-enterprise-login-dialog.c:306
+#: panels/system/users/cc-enterprise-login-dialog.c:491
+msgid "Failed to log into domain"
+msgstr "ورود به دامنه شکست خورد"
+
+#. Translators: The "%s" is a domain address (e.g. "demo1.freeipa.org").
+#: panels/system/users/cc-enterprise-login-dialog.c:352
+#, c-format
+msgid ""
+"To add an enterprise login account, this device needs to be enrolled with <b>%s</"
+"b>. To enroll, have your domain administrator enter their name and password."
+msgstr ""
+"بری استفاده از ورود تجاری، این رایانه باید روی <b>%s</b> ثبت شده باشد. برای ثبت "
+"باید مدیر دامنه‌تان نام و گذرواژه‌اش را وارد کند."
+
+#: panels/system/users/cc-enterprise-login-dialog.c:538
+msgid "Valid domain"
+msgstr "دامنهٔ معتبر"
+
+#: panels/system/users/cc-enterprise-login-dialog.c:542
+msgid "Domain not found"
+msgstr "دامنه پیدا نشد"
+
+#: panels/system/users/cc-enterprise-login-dialog.c:585
+msgid "Checking domain…"
+msgstr "بررسی کردن دامنه…"
+
+#: panels/system/users/cc-enterprise-login-dialog.c:629
+msgid "Failed to contact realmd service"
+msgstr "شکست در ارتباط با خدمت realmd"
+
+#: panels/system/users/cc-enterprise-login-dialog.ui:28
+#: panels/system/users/cc-enterprise-login-dialog.ui:48
+msgid "Add Enterprise Login"
+msgstr "افزودن ورود تجاری"
+
+#: panels/system/users/cc-enterprise-login-dialog.ui:37
+msgid "Offline"
+msgstr "برون‌خط"
+
+#: panels/system/users/cc-enterprise-login-dialog.ui:38
+msgid "A network connection is needed to add enterprise login accounts."
+msgstr "برای افزودن حساب‌های ورود تجاری نیاز به اتّصال شبکه‌ایست."
+
+#: panels/system/users/cc-enterprise-login-dialog.ui:84
+msgid ""
+"Enterprise login allows an existing centrally managed account to be used on this "
+"device."
+msgstr ""
+"ورود تجاری می‌گذارد حساب از پیش مدیریت شدهٔ متمرکزی روی این افزاره استفاده شود."
+
+#: panels/system/users/cc-enterprise-login-dialog.ui:89
 #: panels/system/users/data/join-dialog.ui:90
 msgid "_Domain"
 msgstr "_دامنه"
 
-#: panels/system/users/cc-add-user-dialog.ui:396
-msgid "You are Offline"
-msgstr "شما برون‌خط هستید"
+#: panels/system/users/cc-enterprise-login-dialog.ui:97
+msgid "Should match the web domain of the account provider"
+msgstr "باید با دامنهٔ وب فراهم‌کننده‌ٔ حساب مطابق باشد"
 
-#: panels/system/users/cc-add-user-dialog.ui:397
-msgid ""
-"Enterprise login allows an existing centrally managed user account to be used on "
-"this device. You can also use this account to access company resources on the "
-"internet."
-msgstr ""
-"ورود تجاری می‌گذارد حساب کاربری مدیریت شدهٔ متمرکزی در این افزاره استفاده شود. "
-"همچنین از این حساب می‌توان برای دسترسی به منابع شرکت در اینترنت استفاده کرد."
+#: panels/system/users/cc-enterprise-login-dialog.ui:130
+msgid "Enroll Device"
+msgstr "ثبت افزاره"
+
+#. Translators: This button enrolls the computer in the domain in order to use enterprise logins.
+#: panels/system/users/cc-enterprise-login-dialog.ui:140
+#: panels/system/users/data/join-dialog.ui:30
+msgid "_Enroll"
+msgstr "_ثبت"
+
+#: panels/system/users/cc-enterprise-login-dialog.ui:162
+#: panels/system/users/data/join-dialog.ui:112
+msgid "Administrator _Name"
+msgstr "_نام مدیر"
+
+#: panels/system/users/cc-enterprise-login-dialog.ui:169
+msgid "Administrator _Password"
+msgstr "_گذرواژهٔ مدیر"
 
 #: panels/system/users/cc-avatar-chooser.c:162
 msgid "Browse for more pictures"
@@ -7830,17 +7872,17 @@ msgstr "نمی‌توان به‌طور خودکار به این گونه از �
 msgid "No such domain or realm found"
 msgstr "چنین دامنه یا محدوده‌ای پیدا نشد"
 
-#: panels/system/users/cc-realm-manager.c:712
-#: panels/system/users/cc-realm-manager.c:726
+#: panels/system/users/cc-realm-manager.c:721
+#: panels/system/users/cc-realm-manager.c:735
 #, c-format
 msgid "Cannot log in as %s at the %s domain"
 msgstr "نمی توان به عنوان %s وارد دامنهٔ %s شد"
 
-#: panels/system/users/cc-realm-manager.c:718
+#: panels/system/users/cc-realm-manager.c:727
 msgid "Invalid password, please try again"
 msgstr "گذرواژهٔ نادرست، لطفاً دوباره تلاش کنید"
 
-#: panels/system/users/cc-realm-manager.c:731
+#: panels/system/users/cc-realm-manager.c:740
 #, c-format
 msgid "Couldn’t connect to the %s domain: %s"
 msgstr "نمی‌توان به دامنهٔ %s وصل شد: %s"
@@ -7933,10 +7975,9 @@ msgstr "دیگر کاربران"
 msgid "_Add User…"
 msgstr "_افزودن کاربر…"
 
-#. Translators: This button enrolls the computer in the domain in order to use enterprise logins.
-#: panels/system/users/data/join-dialog.ui:30
-msgid "_Enroll"
-msgstr "_ثبت"
+#: panels/system/users/cc-users-page.ui:47
+msgid "Add Enterprise User"
+msgstr "افزودن کاربر تجاری"
 
 #: panels/system/users/data/join-dialog.ui:59
 msgid "Domain Administrator Login"
@@ -7951,10 +7992,6 @@ msgstr ""
 "بری استفاده از ورود سازمانی، لازم است این رایانه\n"
 "در دامنه ثبت‌شده باشد. لطفاً از مدیر شبکه‌تان بخواهید\n"
 "گذرواژه‌اش را این‌جا بنویسد."
-
-#: panels/system/users/data/join-dialog.ui:112
-msgid "Administrator _Name"
-msgstr "_نام مدیر"
 
 #: panels/system/users/data/join-dialog.ui:135
 msgid "Administrator Password"
@@ -9531,7 +9568,7 @@ msgstr "دسته‌های تنظیمات"
 msgid "No Results Found"
 msgstr "هیچ نتیجه‌ای پیدا نشد"
 
-#: shell/cc-panel-loader.c:273
+#: shell/cc-panel-loader.c:308
 msgid "Available panels:"
 msgstr "تابلوهای موجود:"
 
@@ -9666,6 +9703,18 @@ msgstr[1] "%Iu ورودی"
 #: subprojects/gvc/gvc-mixer-control.c:2882
 msgid "System Sounds"
 msgstr "صداهای سامانه"
+
+#~ msgid "Unable to find the domain. Maybe you misspelled it?"
+#~ msgstr "ناتوان در یافتن دامنه. شاید اشتباه نوشته‌اید؟"
+
+#~ msgid "_Enterprise Login"
+#~ msgstr "ورود _تجاری"
+
+#~ msgid "User accounts which are managed by a company or organization"
+#~ msgstr "حساب‌های کاربری که به دست یک شرکت یا سازمان مدیریت می‌شوند"
+
+#~ msgid "You are Offline"
+#~ msgstr "شما برون‌خط هستید"
 
 #~ msgid "Automatic suspend"
 #~ msgstr "تعلیق خودکار"
@@ -9970,9 +10019,6 @@ msgstr "صداهای سامانه"
 #~ "inconsistent state."
 #~ msgstr ""
 #~ "حذف یک کاربر در حالی که وارد بودن ممکن است سامانه را در حالتی متناقض قرار دهد."
-
-#~ msgid "Failed to contact the accounts service"
-#~ msgstr "ارتباط با سرویس حساب شکست خورد"
 
 #~ msgid "Please make sure that the AccountService is installed and enabled."
 #~ msgstr "لطفاً مطمئن شوید که AccountService نصب و به کار افتاده است."
