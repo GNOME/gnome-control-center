@@ -10,8 +10,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/iss"
 "ues\n"
-"POT-Creation-Date: 2024-02-21 14:37+0000\n"
-"PO-Revision-Date: 2024-02-22 14:53+0200\n"
+"POT-Creation-Date: 2024-02-29 07:52+0000\n"
+"PO-Revision-Date: 2024-02-29 20:26+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -82,7 +82,7 @@ msgstr "Файлова система"
 
 #: panels/applications/cc-applications-panel.c:854
 #: panels/keyboard/01-launchers.xml.in:6
-#: shell/appdata/org.gnome.Settings.appdata.xml.in:7 shell/cc-window.c:760
+#: shell/appdata/org.gnome.Settings.appdata.xml.in:7 shell/cc-window.c:775
 #: shell/cc-window.ui:20 shell/org.gnome.Settings.desktop.in:3
 msgid "Settings"
 msgstr "Параметри"
@@ -308,7 +308,7 @@ msgstr "Рівень доступу до системи, який потрібе
 #: panels/applications/cc-applications-panel.ui:409
 #: panels/mouse/cc-mouse-panel.ui:66
 #: panels/multitasking/cc-multitasking-panel.ui:15
-#: panels/power/cc-power-panel.ui:172
+#: panels/power/cc-power-panel.ui:171
 msgid "General"
 msgstr "Загальне"
 
@@ -986,6 +986,7 @@ msgstr "Калібрування екрана"
 #: panels/sharing/cc-sharing-panel.c:239
 #: panels/system/region/cc-format-chooser.ui:24
 #: panels/system/users/cc-add-user-dialog.ui:25
+#: panels/system/users/cc-enterprise-login-dialog.ui:58
 #: panels/system/users/cc-avatar-chooser.c:92
 #: panels/system/users/cc-fingerprint-dialog.ui:32
 #: panels/system/users/cc-password-dialog.ui:21
@@ -1296,8 +1297,9 @@ msgstr "_Імпортувати файл…"
 #: panels/color/cc-color-panel.ui:390 panels/keyboard/cc-input-chooser.ui:28
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:33
 #: panels/network/connection-editor/net-connection-editor.c:653
-#: panels/printers/new-printer-dialog.ui:91
+#: panels/printers/new-printer-dialog.ui:85
 #: panels/system/users/cc-add-user-dialog.ui:39
+#: panels/system/users/cc-enterprise-login-dialog.ui:66
 msgid "_Add"
 msgstr "_Додати"
 
@@ -1683,13 +1685,13 @@ msgid "Hotspot"
 msgstr "Хот-спот"
 
 #: panels/display/cc-display-panel.c:510
-#: panels/notifications/cc-notifications-panel.c:212
+#: panels/notifications/cc-notifications-panel.c:213
 #: panels/power/cc-power-panel.c:679 panels/power/cc-power-panel.c:686
 msgid "On"
 msgstr "Увімкнено"
 
 #: panels/display/cc-display-panel.c:512 panels/network/cc-net-proxy-page.c:182
-#: panels/notifications/cc-notifications-panel.c:212
+#: panels/notifications/cc-notifications-panel.c:213
 #: panels/power/cc-power-panel.c:673 panels/power/cc-power-panel.c:684
 msgid "Off"
 msgstr "Вимкнено"
@@ -1994,7 +1996,7 @@ msgstr "Домівка"
 #: panels/keyboard/01-launchers.xml.in:16
 #: panels/keyboard/cc-input-chooser.ui:50
 #: panels/printers/cc-printers-panel.ui:21
-#: panels/printers/new-printer-dialog.ui:216
+#: panels/printers/new-printer-dialog.ui:210
 #: panels/search/gnome-search-panel.desktop.in:3
 #: panels/system/region/cc-format-chooser.ui:82 shell/cc-window.ui:28
 #: shell/cc-window.ui:30
@@ -2856,7 +2858,7 @@ msgid "<b>Password</b>: %s"
 msgstr "<b>Пароль</b>: %s"
 
 #: panels/network/cc-qr-code-dialog.ui:9
-#: panels/network/cc-wifi-connection-row.ui:60
+#: panels/network/cc-wifi-connection-row.ui:53
 msgid "Share Network"
 msgstr "Поділитися мережею"
 
@@ -2901,16 +2903,16 @@ msgid "Signal strength %d%%"
 msgstr "Потужність сигналу %d%%"
 
 #. TRANSLATORS: device status
-#: panels/network/cc-wifi-connection-row.ui:41 panels/network/panel-common.c:63
+#: panels/network/cc-wifi-connection-row.ui:35 panels/network/panel-common.c:63
 msgid "Connected"
 msgstr "З'єднано"
 
-#: panels/network/cc-wifi-connection-row.ui:73
+#: panels/network/cc-wifi-connection-row.ui:65
 #: panels/network/network-ethernet.ui:47
 msgid "Network Options"
 msgstr "Параметри мережі"
 
-#: panels/network/cc-wifi-connection-row.ui:85
+#: panels/network/cc-wifi-connection-row.ui:76
 msgid "Forget Network"
 msgstr "Забути мережу"
 
@@ -2967,9 +2969,9 @@ msgstr "Назва мережі"
 
 #. Translators: This is a password needed for printing.
 #: panels/network/cc-wifi-hotspot-dialog.ui:92
-#: panels/printers/new-printer-dialog.ui:302
+#: panels/printers/new-printer-dialog.ui:296
 #: panels/printers/pp-jobs-dialog.ui:54
-#: panels/system/users/cc-add-user-dialog.ui:152
+#: panels/system/users/cc-add-user-dialog.ui:150
 #: panels/wwan/cc-wwan-apn-dialog.ui:175
 msgid "Password"
 msgstr "Пароль"
@@ -3065,7 +3067,7 @@ msgstr "_Безпека 802.1x"
 #: panels/network/connection-editor/bluetooth-page.ui:16
 #: panels/network/connection-editor/ethernet-page.ui:27
 #: panels/network/connection-editor/vpn-page.ui:23
-#: panels/system/users/cc-add-user-dialog.ui:68
+#: panels/system/users/cc-add-user-dialog.ui:66
 #: panels/system/users/cc-user-page.ui:84
 msgid "_Name"
 msgstr "_Назва"
@@ -4631,83 +4633,83 @@ msgstr "З’єднані пристрої"
 msgid "Power Mode"
 msgstr "Режим живлення"
 
-#: panels/power/cc-power-panel.ui:127
+#: panels/power/cc-power-panel.ui:126
 msgid "Power Saving"
 msgstr "Заощадження енергії"
 
-#: panels/power/cc-power-panel.ui:130
+#: panels/power/cc-power-panel.ui:129
 msgid "A_utomatic Screen Brightness"
 msgstr "_Автоматична яскравість екрана"
 
-#: panels/power/cc-power-panel.ui:131
+#: panels/power/cc-power-panel.ui:130
 msgid "Adjust screen brightness to the surrounding light"
 msgstr "Коригувати яскравість екрана за зовнішнім освітленням"
 
-#: panels/power/cc-power-panel.ui:138
+#: panels/power/cc-power-panel.ui:137
 msgid "_Dim Screen"
 msgstr "П_ритлумлення екрана"
 
-#: panels/power/cc-power-panel.ui:139
+#: panels/power/cc-power-panel.ui:138
 msgid "Reduce screen brightness when the computer is inactive"
 msgstr "Зменшити яскравість екрана, якщо комп'ютер є бездіяльним"
 
-#: panels/power/cc-power-panel.ui:145
+#: panels/power/cc-power-panel.ui:144
 msgid "Screen _Blank"
 msgstr "В_имикання екрана"
 
-#: panels/power/cc-power-panel.ui:146
+#: panels/power/cc-power-panel.ui:145
 msgid "Turn the screen off after a period of inactivity"
 msgstr ""
 "Вимикати екран, якщо комп'ютер є неактивним протягом певного періоду часу"
 
-#: panels/power/cc-power-panel.ui:154
+#: panels/power/cc-power-panel.ui:153
 msgid "Automatic Power _Saver"
 msgstr "Автоматичне зао_щадження енергії"
 
-#: panels/power/cc-power-panel.ui:155
+#: panels/power/cc-power-panel.ui:154
 msgid "Turn on power saver mode when battery power is low"
 msgstr ""
 "Увімкнути режим заощадження енергії при низькому рівні заряду акумулятора"
 
-#: panels/power/cc-power-panel.ui:162
+#: panels/power/cc-power-panel.ui:161
 msgid "_Automatic Suspend"
 msgstr "_Автоматично призупиняти"
 
-#: panels/power/cc-power-panel.ui:163
+#: panels/power/cc-power-panel.ui:162
 msgid "Pause the computer after a period of inactivity"
 msgstr ""
 "Призупинити роботу комп'ютера, якщо той є неактивним протягом певного "
 "періоду часу"
 
-#: panels/power/cc-power-panel.ui:176
+#: panels/power/cc-power-panel.ui:175
 msgid "Po_wer Button Behavior"
 msgstr "Поведінка _кнопки живлення"
 
-#: panels/power/cc-power-panel.ui:184
+#: panels/power/cc-power-panel.ui:183
 msgid "Show Battery _Percentage"
 msgstr "Показувати _відсоток заряду акумулятора"
 
-#: panels/power/cc-power-panel.ui:185
+#: panels/power/cc-power-panel.ui:184
 msgid "Show exact charge level in the top bar"
 msgstr "Показувати точний рівень заряду на верхній панелі"
 
-#: panels/power/cc-power-panel.ui:198
+#: panels/power/cc-power-panel.ui:197
 msgid "Automatic Suspend"
 msgstr "Автоматично призупиняти"
 
-#: panels/power/cc-power-panel.ui:227
+#: panels/power/cc-power-panel.ui:226
 msgid "On _Battery Power"
 msgstr "Живлення від _батареї"
 
-#: panels/power/cc-power-panel.ui:234
+#: panels/power/cc-power-panel.ui:233
 msgid "_Delay"
 msgstr "З_атримка"
 
-#: panels/power/cc-power-panel.ui:252
+#: panels/power/cc-power-panel.ui:251
 msgid "_Plugged In"
 msgstr "_Під'єднано"
 
-#: panels/power/cc-power-panel.ui:258
+#: panels/power/cc-power-panel.ui:257
 msgid "D_elay"
 msgstr "За_тримка"
 
@@ -4771,37 +4773,37 @@ msgstr "Не вдалось додати принтер."
 msgid "Unlock to add printers and change settings"
 msgstr "Розблокуйте, щоб додати принтери і змінити налаштування"
 
-#: panels/printers/cc-printers-panel.ui:30
+#: panels/printers/cc-printers-panel.ui:27
 msgid "All Connected and Network Printers"
 msgstr "Усі з'єднані і мережеві принтери"
 
 #. Translators: This button adds new printer.
 #. Translators: This button adds a new printer.
-#: panels/printers/cc-printers-panel.ui:34
-#: panels/printers/cc-printers-panel.ui:169
+#: panels/printers/cc-printers-panel.ui:31
+#: panels/printers/cc-printers-panel.ui:166
 msgid "_Add Printer…"
 msgstr "_Додати принтер…"
 
-#: panels/printers/cc-printers-panel.ui:52
+#: panels/printers/cc-printers-panel.ui:49
 msgid "Search printers"
 msgstr "Шукати принтери"
 
 #. Translators: This is the button which allows undoing the removal of the printer.
-#: panels/printers/cc-printers-panel.ui:81
+#: panels/printers/cc-printers-panel.ui:78
 msgid "Undo"
 msgstr "Повернути"
 
-#: panels/printers/cc-printers-panel.ui:166
+#: panels/printers/cc-printers-panel.ui:163
 msgid "No Printers"
 msgstr "Немає принтерів"
 
 #. Translators: Title if the CUPS server is not running (we can not connect to it).
-#: panels/printers/cc-printers-panel.ui:191
+#: panels/printers/cc-printers-panel.ui:188
 msgid "No Print Service"
 msgstr "Немає служби друку"
 
 #. Translators: Description if the CUPS server is not running (we can not connect to it).
-#: panels/printers/cc-printers-panel.ui:192
+#: panels/printers/cc-printers-panel.ui:189
 msgid "The system printing service doesn’t seem to be available"
 msgstr "Загальносистемна служба друкування, здається, недоступна"
 
@@ -4827,7 +4829,7 @@ msgstr "Принтер;Черга;Друк;Папір;Чорнило;Тонер;
 msgid "Add Printer"
 msgstr "Додати принтер"
 
-#: panels/printers/new-printer-dialog.ui:69
+#: panels/printers/new-printer-dialog.ui:67
 #: panels/system/region/cc-format-chooser.ui:37
 #: panels/system/users/cc-fingerprint-dialog.ui:44
 #: panels/wwan/cc-wwan-apn-dialog.ui:21
@@ -4836,33 +4838,33 @@ msgstr "Назад"
 
 #. Translators: This button opens authentication dialog for selected server.
 #. Translators: This buttons submits the credentials for the selected server.
-#: panels/printers/new-printer-dialog.ui:108
-#: panels/printers/new-printer-dialog.ui:123
+#: panels/printers/new-printer-dialog.ui:102
+#: panels/printers/new-printer-dialog.ui:117
 #: panels/wwan/cc-wwan-device-page.ui:38
 msgid "_Unlock"
 msgstr "_Розблокувати"
 
 #. Translators: No printers were detected
-#: panels/printers/new-printer-dialog.ui:174
+#: panels/printers/new-printer-dialog.ui:168
 msgid "No Printers Found"
 msgstr "Не знайдено жодного принтера"
 
 #. Translators: The entered text should contain network address of a printer or a text which will filter found devices (their names and locations)
-#: panels/printers/new-printer-dialog.ui:211
+#: panels/printers/new-printer-dialog.ui:205
 msgid "Enter a network address or search for a printer"
 msgstr "Уведіть адресу мережі або знайдіть принтер"
 
-#: panels/printers/new-printer-dialog.ui:256
+#: panels/printers/new-printer-dialog.ui:250
 msgid "Authentication Required"
 msgstr "Потрібно засвідчитись"
 
-#: panels/printers/new-printer-dialog.ui:272
+#: panels/printers/new-printer-dialog.ui:266
 msgid "Enter username and password to view printers on Print Server"
 msgstr ""
 "Введіть користувача та пароль, щоб переглянути доступні принтери на сервері"
 
 #. Translators: This is a username on a print server.
-#: panels/printers/new-printer-dialog.ui:281
+#: panels/printers/new-printer-dialog.ui:275
 #: panels/printers/pp-jobs-dialog.ui:42 panels/wwan/cc-wwan-apn-dialog.ui:150
 msgid "Username"
 msgstr "Користувач"
@@ -6764,7 +6766,7 @@ msgstr "Вимагати па_роль"
 
 #: panels/sharing/cc-sharing-panel.ui:96
 #: panels/system/remote-desktop/cc-remote-desktop-page.ui:136
-#: panels/system/users/cc-add-user-dialog.ui:373
+#: panels/system/users/cc-enterprise-login-dialog.ui:114
 msgid "_Password"
 msgstr "_Пароль"
 
@@ -6922,7 +6924,7 @@ msgstr "Звуки"
 msgid "Vo_lume Levels"
 msgstr "Рівні г_учності"
 
-#: panels/sound/cc-sound-panel.ui:384
+#: panels/sound/cc-sound-panel.ui:378
 msgid "_Alert Sound"
 msgstr "Звук п_опередження"
 
@@ -7002,7 +7004,7 @@ msgid "Memory"
 msgstr "Пам'ять"
 
 #: panels/system/about/cc-about-page.ui:91
-#: panels/system/about/cc-system-details-window.ui:102
+#: panels/system/about/cc-system-details-window.ui:103
 msgid "Disk Capacity"
 msgstr "Місткість диска"
 
@@ -7137,43 +7139,43 @@ msgstr "_Копіювати"
 msgid "Hardware Information"
 msgstr "Дані щодо обладнання"
 
-#: panels/system/about/cc-system-details-window.ui:122
+#: panels/system/about/cc-system-details-window.ui:123
 msgid "Software Information"
 msgstr "Дані щодо програмного забезпечення"
 
-#: panels/system/about/cc-system-details-window.ui:133
+#: panels/system/about/cc-system-details-window.ui:134
 #: panels/wwan/cc-wwan-details-dialog.ui:210
 msgid "Firmware Version"
 msgstr "Версія мікропрограми"
 
 #. translators: this field contains the distro name and version
-#: panels/system/about/cc-system-details-window.ui:141
+#: panels/system/about/cc-system-details-window.ui:142
 msgid "OS Name"
 msgstr "Назва ОС"
 
 #. translators: this field contains the distro build
-#: panels/system/about/cc-system-details-window.ui:149
+#: panels/system/about/cc-system-details-window.ui:150
 msgid "OS Build"
 msgstr "Збірка ОС"
 
 #. translators: this field contains the distro type
-#: panels/system/about/cc-system-details-window.ui:157
+#: panels/system/about/cc-system-details-window.ui:158
 msgid "OS Type"
 msgstr "Тип ОС"
 
-#: panels/system/about/cc-system-details-window.ui:164
+#: panels/system/about/cc-system-details-window.ui:165
 msgid "GNOME Version"
 msgstr "Версія GNOME"
 
-#: panels/system/about/cc-system-details-window.ui:171
+#: panels/system/about/cc-system-details-window.ui:172
 msgid "Windowing System"
 msgstr "Керування вікнами"
 
-#: panels/system/about/cc-system-details-window.ui:178
+#: panels/system/about/cc-system-details-window.ui:179
 msgid "Virtualization"
 msgstr "Віртуалізація"
 
-#: panels/system/about/cc-system-details-window.ui:185
+#: panels/system/about/cc-system-details-window.ui:186
 msgid "Kernel Version"
 msgstr "Версія ядра"
 
@@ -7231,17 +7233,17 @@ msgid "Software _Updates"
 msgstr "_Оновлення програм"
 
 #. Translators: This is the full date and time format used in 12-hour mode.
-#: panels/system/datetime/cc-datetime-page.c:232
+#: panels/system/datetime/cc-datetime-page.c:230
 msgid "%e %B %Y, %l:%M %p"
 msgstr "%e %B %Y, %l:%M %p"
 
 #. Translators: This is the full date and time format used in 24-hour mode.
-#: panels/system/datetime/cc-datetime-page.c:237
+#: panels/system/datetime/cc-datetime-page.c:235
 msgid "%e %B %Y, %R"
 msgstr "%e %B %Y, %R"
 
 #. Translators: "city, country"
-#: panels/system/datetime/cc-datetime-page.c:390
+#: panels/system/datetime/cc-datetime-page.c:388
 #, c-format
 msgctxt "timezone loc"
 msgid "%s, %s"
@@ -7249,7 +7251,7 @@ msgstr "%s, %s"
 
 #. Update the timezone on the listbow row
 #. Translators: "timezone (details)"
-#: panels/system/datetime/cc-datetime-page.c:407
+#: panels/system/datetime/cc-datetime-page.c:405
 #, c-format
 msgctxt "timezone desc"
 msgid "%s (%s)"
@@ -7284,104 +7286,104 @@ msgstr "Потребує зв'язок з інтернетом"
 msgid "Date &amp; _Time"
 msgstr "Дата й _час"
 
-#: panels/system/datetime/cc-datetime-page.ui:174
+#: panels/system/datetime/cc-datetime-page.ui:161
 msgid "Automatic Time _Zone"
 msgstr "Автоматичні часові _пояси"
 
-#: panels/system/datetime/cc-datetime-page.ui:175
+#: panels/system/datetime/cc-datetime-page.ui:162
 msgid "Requires location services enabled and internet access"
 msgstr ""
 "Вимагає увімкнених служб даних місця перебування і доступу до інтернету"
 
-#: panels/system/datetime/cc-datetime-page.ui:181
+#: panels/system/datetime/cc-datetime-page.ui:168
 msgid "Time Z_one"
 msgstr "_Часовий пояс"
 
-#: panels/system/datetime/cc-datetime-page.ui:206
+#: panels/system/datetime/cc-datetime-page.ui:179
 msgid "Time _Format"
 msgstr "_Формат часу"
 
-#: panels/system/datetime/cc-datetime-page.ui:217
+#: panels/system/datetime/cc-datetime-page.ui:190
 msgid "_24-hour"
 msgstr "_24 години"
 
-#: panels/system/datetime/cc-datetime-page.ui:225
+#: panels/system/datetime/cc-datetime-page.ui:198
 msgid "AM / _PM"
 msgstr "До / після по_лудня "
 
-#: panels/system/datetime/cc-datetime-page.ui:238
+#: panels/system/datetime/cc-datetime-page.ui:211
 msgid "Clock &amp; Calendar"
 msgstr "Годинник і календар"
 
-#: panels/system/datetime/cc-datetime-page.ui:239
+#: panels/system/datetime/cc-datetime-page.ui:212
 msgid "Control how the time and date is shown in the top bar"
 msgstr "Керує тим, як буде показано дату і час на верхній панелі"
 
-#: panels/system/datetime/cc-datetime-page.ui:242
+#: panels/system/datetime/cc-datetime-page.ui:215
 msgid "_Week Day"
 msgstr "Д_ень тижня"
 
-#: panels/system/datetime/cc-datetime-page.ui:248
+#: panels/system/datetime/cc-datetime-page.ui:221
 msgid "D_ate"
 msgstr "Д_ата"
 
-#: panels/system/datetime/cc-datetime-page.ui:254
+#: panels/system/datetime/cc-datetime-page.ui:227
 msgid "_Seconds"
 msgstr "С_екунди"
 
-#: panels/system/datetime/cc-datetime-page.ui:260
+#: panels/system/datetime/cc-datetime-page.ui:233
 msgid "Week _Numbers"
 msgstr "_Номери тижнів"
 
-#: panels/system/datetime/cc-datetime-page.ui:261
+#: panels/system/datetime/cc-datetime-page.ui:234
 msgid "Shown in the dropdown calendar"
 msgstr "Показано на перекидному календарі"
 
-#: panels/system/datetime/cc-datetime-page.ui:298
+#: panels/system/datetime/cc-datetime-page.ui:271
 msgid "January"
 msgstr "Січень"
 
-#: panels/system/datetime/cc-datetime-page.ui:299
+#: panels/system/datetime/cc-datetime-page.ui:272
 msgid "February"
 msgstr "Лютий"
 
-#: panels/system/datetime/cc-datetime-page.ui:300
+#: panels/system/datetime/cc-datetime-page.ui:273
 msgid "March"
 msgstr "Березень"
 
-#: panels/system/datetime/cc-datetime-page.ui:301
+#: panels/system/datetime/cc-datetime-page.ui:274
 msgid "April"
 msgstr "Квітень"
 
-#: panels/system/datetime/cc-datetime-page.ui:302
+#: panels/system/datetime/cc-datetime-page.ui:275
 msgid "May"
 msgstr "Травень"
 
-#: panels/system/datetime/cc-datetime-page.ui:303
+#: panels/system/datetime/cc-datetime-page.ui:276
 msgid "June"
 msgstr "Червень"
 
-#: panels/system/datetime/cc-datetime-page.ui:304
+#: panels/system/datetime/cc-datetime-page.ui:277
 msgid "July"
 msgstr "Липень"
 
-#: panels/system/datetime/cc-datetime-page.ui:305
+#: panels/system/datetime/cc-datetime-page.ui:278
 msgid "August"
 msgstr "Серпень"
 
-#: panels/system/datetime/cc-datetime-page.ui:306
+#: panels/system/datetime/cc-datetime-page.ui:279
 msgid "September"
 msgstr "Вересень"
 
-#: panels/system/datetime/cc-datetime-page.ui:307
+#: panels/system/datetime/cc-datetime-page.ui:280
 msgid "October"
 msgstr "Жовтень"
 
-#: panels/system/datetime/cc-datetime-page.ui:308
+#: panels/system/datetime/cc-datetime-page.ui:281
 msgid "November"
 msgstr "Листопад"
 
-#: panels/system/datetime/cc-datetime-page.ui:309
+#: panels/system/datetime/cc-datetime-page.ui:282
 msgid "December"
 msgstr "Грудень"
 
@@ -7669,71 +7671,29 @@ msgstr "Увімкнути або вимкнути віддалений вхід
 msgid "Authentication is required to enable or disable remote login"
 msgstr "Потрібно засвідчення, щоб увімкнути або вимкнути віддалений вхід"
 
-#: panels/system/users/cc-add-user-dialog.c:36
-msgid "Should match the web address of your login provider."
-msgstr "Мусить збігатись з адресою вашого постачальника."
-
-#: panels/system/users/cc-add-user-dialog.c:217
+#: panels/system/users/cc-add-user-dialog.c:159
 msgid "Failed to add account"
 msgstr "Не вдалось додати обліковий запис"
 
-#: panels/system/users/cc-add-user-dialog.c:668
+#: panels/system/users/cc-add-user-dialog.c:610
 msgid "The passwords do not match."
 msgstr "Паролі не збігаються."
-
-#: panels/system/users/cc-add-user-dialog.c:866
-#: panels/system/users/cc-add-user-dialog.c:905
-#: panels/system/users/cc-add-user-dialog.c:923
-msgid "Failed to register account"
-msgstr "Не вдалося зареєструвати обліковий запис"
-
-#: panels/system/users/cc-add-user-dialog.c:1038
-msgid "No supported way to authenticate with this domain"
-msgstr "Непідтримуваний спосіб автентифікації з цим доменом"
-
-#: panels/system/users/cc-add-user-dialog.c:1102
-msgid "Failed to join domain"
-msgstr "Не вдалось долучитись до домену"
-
-#: panels/system/users/cc-add-user-dialog.c:1157
-msgid ""
-"That login name didn’t work.\n"
-"Please try again."
-msgstr ""
-"Цей користувач не спрацював.\n"
-"Спробуйте ще."
-
-#: panels/system/users/cc-add-user-dialog.c:1164
-msgid ""
-"That login password didn’t work.\n"
-"Please try again."
-msgstr ""
-"Цей пароль не спрацював.\n"
-"Спробуйте ще."
-
-#: panels/system/users/cc-add-user-dialog.c:1172
-msgid "Failed to log into domain"
-msgstr "Не вдалось увійти до домену"
-
-#: panels/system/users/cc-add-user-dialog.c:1227
-msgid "Unable to find the domain. Maybe you misspelled it?"
-msgstr "Не вдалося знайти домен. Можливо, ви неправильно це написали?"
 
 #: panels/system/users/cc-add-user-dialog.ui:13
 #: panels/system/users/data/join-dialog.ui:9
 msgid "Add User"
 msgstr "Додати користувача"
 
-#: panels/system/users/cc-add-user-dialog.ui:95
-#: panels/system/users/cc-add-user-dialog.ui:351
+#: panels/system/users/cc-add-user-dialog.ui:93
+#: panels/system/users/cc-enterprise-login-dialog.ui:107
 msgid "_Username"
 msgstr "_Користувач"
 
-#: panels/system/users/cc-add-user-dialog.ui:133
+#: panels/system/users/cc-add-user-dialog.ui:131
 msgid "Ad_ministrator"
 msgstr "_Адміністратор"
 
-#: panels/system/users/cc-add-user-dialog.ui:138
+#: panels/system/users/cc-add-user-dialog.ui:136
 #: panels/system/users/cc-user-page.ui:141
 msgid ""
 "Administrators have extra abilities, including adding and removing users, "
@@ -7745,49 +7705,160 @@ msgstr ""
 "і вилучати програмне забезпечення. До записів адміністраторів не можна "
 "застосовувати батьківський контроль."
 
-#: panels/system/users/cc-add-user-dialog.ui:156
+#: panels/system/users/cc-add-user-dialog.ui:154
 msgid "User sets password on _first login"
 msgstr "Користувач встановлює пароль при пер_шому вході"
 
-#: panels/system/users/cc-add-user-dialog.ui:169
+#: panels/system/users/cc-add-user-dialog.ui:167
 msgid "Set password n_ow"
 msgstr "В_казати пароль зараз"
 
-#: panels/system/users/cc-add-user-dialog.ui:189
+#: panels/system/users/cc-add-user-dialog.ui:187
 msgid "Pass_word"
 msgstr "_Пароль"
 
-#: panels/system/users/cc-add-user-dialog.ui:233
+#: panels/system/users/cc-add-user-dialog.ui:231
 msgid "_Confirm"
 msgstr "Пі_дтвердити"
 
-#: panels/system/users/cc-add-user-dialog.ui:288
-msgid "_Enterprise Login"
-msgstr "_Комерційний вхід"
+#: panels/system/users/cc-enterprise-login-dialog.c:133
+#: panels/system/users/cc-enterprise-login-dialog.c:171
+#: panels/system/users/cc-enterprise-login-dialog.c:186
+msgid "Failed to register account"
+msgstr "Не вдалося зареєструвати обліковий запис"
 
-#: panels/system/users/cc-add-user-dialog.ui:290
-msgid "User accounts which are managed by a company or organization"
+#: panels/system/users/cc-enterprise-login-dialog.c:240
+#: panels/system/users/cc-enterprise-login-dialog.c:411
+msgid "Failed to join domain"
+msgstr "Не вдалось долучитись до домену"
+
+#: panels/system/users/cc-enterprise-login-dialog.c:275
+msgid "No supported way to authenticate with this domain"
+msgstr "Непідтримуваний спосіб автентифікації з цим доменом"
+
+#: panels/system/users/cc-enterprise-login-dialog.c:285
+#: panels/system/users/cc-enterprise-login-dialog.c:476
+#| msgid ""
+#| "That login name didn’t work.\n"
+#| "Please try again."
+msgid "That login name didn’t work"
+msgstr "Цей користувач не спрацював"
+
+#: panels/system/users/cc-enterprise-login-dialog.c:292
+#: panels/system/users/cc-enterprise-login-dialog.c:483
+#| msgid ""
+#| "That login password didn’t work.\n"
+#| "Please try again."
+msgid "That login password didn’t work"
+msgstr "Цей пароль не спрацював"
+
+#: panels/system/users/cc-enterprise-login-dialog.c:299
+#| msgid ""
+#| "That login name didn’t work.\n"
+#| "Please try again."
+msgid "That hostname didn’t work"
+msgstr "Ця назва вузла не спрацювала"
+
+#: panels/system/users/cc-enterprise-login-dialog.c:306
+#: panels/system/users/cc-enterprise-login-dialog.c:491
+msgid "Failed to log into domain"
+msgstr "Не вдалось увійти до домену"
+
+#. Translators: The "%s" is a domain address (e.g. "demo1.freeipa.org").
+#: panels/system/users/cc-enterprise-login-dialog.c:352
+#, c-format
+#| msgid ""
+#| "In order to use enterprise logins, this computer needs to be\n"
+#| "enrolled in the domain. Please have your network administrator\n"
+#| "type their domain password here."
+msgid ""
+"To add an enterprise login account, this device needs to be enrolled with "
+"<b>%s</b>. To enroll, have your domain administrator enter their name and "
+"password."
 msgstr ""
-"Облікові записи користувачів, які керуються компанією або організацією"
+"Щоб додати комерційний обліковий запис, цьому пристрою слід надати роль за"
+" допомогою <b>%s</b>. Для надання ролі адміністратору домену доведеться"
+" ввести назву його облікового запису та пароль."
 
-#: panels/system/users/cc-add-user-dialog.ui:307
+#: panels/system/users/cc-enterprise-login-dialog.c:538
+#| msgid "Failed to join domain"
+msgid "Valid domain"
+msgstr "Коректний домен"
+
+#: panels/system/users/cc-enterprise-login-dialog.c:542
+#| msgid "Location not found"
+msgid "Domain not found"
+msgstr "Домен не знайдено"
+
+#: panels/system/users/cc-enterprise-login-dialog.c:585
+msgid "Checking domain…"
+msgstr "Перевіряємо домен…"
+
+#: panels/system/users/cc-enterprise-login-dialog.c:629
+#| msgid "Failed to contact the accounts service"
+msgid "Failed to contact realmd service"
+msgstr "Не вдалося встановити зв'язок зі службою realmd"
+
+#: panels/system/users/cc-enterprise-login-dialog.ui:28
+#: panels/system/users/cc-enterprise-login-dialog.ui:48
+#| msgid "Enterprise Login"
+msgid "Add Enterprise Login"
+msgstr "Додати комерційний вхід"
+
+#: panels/system/users/cc-enterprise-login-dialog.ui:37
+#| msgctxt "printer state"
+#| msgid "Offline"
+msgid "Offline"
+msgstr "Поза мережею"
+
+#: panels/system/users/cc-enterprise-login-dialog.ui:38
+#| msgid "No internet connection — connect to set up new online accounts"
+msgid "A network connection is needed to add enterprise login accounts."
+msgstr ""
+"Для додавання комерційних облікових записів потрібне з'єднання з мережею."
+
+#: panels/system/users/cc-enterprise-login-dialog.ui:84
+#| msgid ""
+#| "Enterprise login allows an existing centrally managed user account to be "
+#| "used on this device. You can also use this account to access company "
+#| "resources on the internet."
+msgid ""
+"Enterprise login allows an existing centrally managed account to be used on "
+"this device."
+msgstr ""
+"Комерційний вхід дозволяє наявним обліковим записам централізовано "
+"використовуватись на цьому пристрою."
+
+#: panels/system/users/cc-enterprise-login-dialog.ui:89
 #: panels/system/users/data/join-dialog.ui:90
 msgid "_Domain"
 msgstr "_Домен"
 
-#: panels/system/users/cc-add-user-dialog.ui:396
-msgid "You are Offline"
-msgstr "Ви поза мережею"
+#: panels/system/users/cc-enterprise-login-dialog.ui:97
+#| msgid "Should match the web address of your login provider."
+msgid "Should match the web domain of the account provider"
+msgstr "Має збігатися із доменом інтернету надавача послуг облікового запису"
 
-#: panels/system/users/cc-add-user-dialog.ui:397
-msgid ""
-"Enterprise login allows an existing centrally managed user account to be "
-"used on this device. You can also use this account to access company "
-"resources on the internet."
-msgstr ""
-"Комерційний вхід дозволяє наявним обліковим записам централізовано "
-"використовуватись на цьому пристрою. Можете також використовувати цей "
-"обліковий запис для доступу ресурсів компанії через інтернет."
+#: panels/system/users/cc-enterprise-login-dialog.ui:130
+#| msgid "Input Device"
+msgid "Enroll Device"
+msgstr "Надання ролі пристрою"
+
+#. Translators: This button enrolls the computer in the domain in order to use enterprise logins.
+#: panels/system/users/cc-enterprise-login-dialog.ui:140
+#: panels/system/users/data/join-dialog.ui:30
+msgid "_Enroll"
+msgstr "З_ареєструвати"
+
+#: panels/system/users/cc-enterprise-login-dialog.ui:162
+#: panels/system/users/data/join-dialog.ui:112
+msgid "Administrator _Name"
+msgstr "_Адміністратор"
+
+#: panels/system/users/cc-enterprise-login-dialog.ui:169
+#| msgid "Administrator Password"
+msgid "Administrator _Password"
+msgstr "П_ароль адміністратора"
 
 #: panels/system/users/cc-avatar-chooser.c:162
 msgid "Browse for more pictures"
@@ -8068,17 +8139,17 @@ msgstr "Неможливо автоматично долучити цей тип
 msgid "No such domain or realm found"
 msgstr "Нема такого домену чи області"
 
-#: panels/system/users/cc-realm-manager.c:712
-#: panels/system/users/cc-realm-manager.c:726
+#: panels/system/users/cc-realm-manager.c:721
+#: panels/system/users/cc-realm-manager.c:735
 #, c-format
 msgid "Cannot log in as %s at the %s domain"
 msgstr "Неможливо ввійти як %s на домен %s"
 
-#: panels/system/users/cc-realm-manager.c:718
+#: panels/system/users/cc-realm-manager.c:727
 msgid "Invalid password, please try again"
 msgstr "Неправильний пароль, спробуйте ще раз"
 
-#: panels/system/users/cc-realm-manager.c:731
+#: panels/system/users/cc-realm-manager.c:740
 #, c-format
 msgid "Couldn’t connect to the %s domain: %s"
 msgstr "Неможливо з'єднатися із доменом %s: %s"
@@ -8177,10 +8248,10 @@ msgstr "Інші користувачі"
 msgid "_Add User…"
 msgstr "_Додати користувача…"
 
-#. Translators: This button enrolls the computer in the domain in order to use enterprise logins.
-#: panels/system/users/data/join-dialog.ui:30
-msgid "_Enroll"
-msgstr "З_ареєструвати"
+#: panels/system/users/cc-users-page.ui:47
+#| msgid "Enterprise"
+msgid "Add Enterprise User"
+msgstr "Додати комерційного користувача"
 
 #: panels/system/users/data/join-dialog.ui:59
 msgid "Domain Administrator Login"
@@ -8195,10 +8266,6 @@ msgstr ""
 "Комп'ютер потрібно зареєструвати в домені, щоб\n"
 "використовувати комерційний вхід. Попрохайте вашого \n"
 "мережевого адміністратора ввести тут пароль домену."
-
-#: panels/system/users/data/join-dialog.ui:112
-msgid "Administrator _Name"
-msgstr "_Адміністратор"
 
 #: panels/system/users/data/join-dialog.ui:135
 msgid "Administrator Password"
@@ -8394,7 +8461,6 @@ msgstr ""
 
 #. Translators: This will be presented as the text of a link to the Sound panel
 #: panels/universal-access/cc-ua-hearing-page.c:156
-#| msgid "Sound"
 msgctxt "Sound panel name"
 msgid "Sound"
 msgstr "Звук"
@@ -9809,7 +9875,7 @@ msgstr "Категорії параметрів"
 msgid "No Results Found"
 msgstr "Нічого не знайдено"
 
-#: shell/cc-panel-loader.c:273
+#: shell/cc-panel-loader.c:308
 msgid "Available panels:"
 msgstr "Доступні панелі:"
 
@@ -9955,6 +10021,19 @@ msgstr[3] "%u вхід"
 #: subprojects/gvc/gvc-mixer-control.c:2882
 msgid "System Sounds"
 msgstr "Системні звуки"
+
+#~ msgid "Unable to find the domain. Maybe you misspelled it?"
+#~ msgstr "Не вдалося знайти домен. Можливо, ви неправильно це написали?"
+
+#~ msgid "_Enterprise Login"
+#~ msgstr "_Комерційний вхід"
+
+#~ msgid "User accounts which are managed by a company or organization"
+#~ msgstr ""
+#~ "Облікові записи користувачів, які керуються компанією або організацією"
+
+#~ msgid "You are Offline"
+#~ msgstr "Ви поза мережею"
 
 #~ msgid "Automatic suspend"
 #~ msgstr "Автоматично призупиняти роботу"
@@ -10251,9 +10330,6 @@ msgstr "Системні звуки"
 #~ "Вилучивши користувача, коли він у системі, змусить його покинути систему "
 #~ "в нестійкому стані."
 
-#~ msgid "Failed to contact the accounts service"
-#~ msgstr "Не вдалось зв'язатись зі службою облікових записів"
-
 #~ msgid "Please make sure that the AccountService is installed and enabled."
 #~ msgstr ""
 #~ "Будь ласка, переконайтесь, що AccountService встановлено та ввімкнено."
@@ -10473,10 +10549,6 @@ msgstr "Системні звуки"
 
 #~ msgid "Connect to your data in the cloud"
 #~ msgstr "З'єднати ваші дані з хмарою"
-
-#~ msgid "No internet connection — connect to set up new online accounts"
-#~ msgstr ""
-#~ "Немає інтернету — з'єднайтеся з мережею, щоб створювати облікові записи"
 
 #~ msgid "Add an account"
 #~ msgstr "Додати обліковий запис"
