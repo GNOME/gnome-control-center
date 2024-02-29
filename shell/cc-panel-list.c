@@ -381,6 +381,7 @@ static const gchar * const panel_order[] = {
   "search",
   "online-accounts",
   "sharing",
+  "wellbeing",
 
   "separator",
 

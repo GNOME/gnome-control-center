@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  SPDX-License-Identifier: GPL-3.0-or-later
+  SPDX-FileCopyrightText: 2024 GNOME Foundation, Inc.
+-->
+<interface>
+  <template class="CcWellbeingPanel" parent="CcPanel">
+    <property name="child">
+      <object class="AdwToolbarView">
+        <child type="top">
+          <object class="AdwHeaderBar"/>
+        </child>
+
+        <property name="content">
+          <object class="AdwPreferencesPage">
+          </object>
+        </property>
+      </object>
+    </property>
+  </template>
+</interface>

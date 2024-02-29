@@ -18,7 +18,8 @@ panels = [
   'sound',
   'system',
   'universal-access',
- 'wwan',
+  'wellbeing',
+  'wwan',
 ]
 
 if host_is_linux
