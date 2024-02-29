@@ -144,7 +144,7 @@ cc_wacom_device_initable_init (GInitable     *initable,
 	wacom_db = cc_wacom_device_database_get ();
 	node_path = gsd_device_get_device_file (device->device);
 	wacom_error = libwacom_error_new ();
-	device->wdevice = libwacom_new_from_path (wacom_db, node_path, FALSE, wacom_error);
+	device->wdevice = libwacom_new_from_path (wacom_db, node_path, WFALLBACK_NONE, wacom_error);
 
 	if (!device->wdevice) {
 		g_debug ("libwacom_new_from_path() failed: %s", libwacom_error_get_message (wacom_error));
