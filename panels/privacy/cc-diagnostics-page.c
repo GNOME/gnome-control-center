@@ -116,13 +116,20 @@ cc_diagnostics_page_init (CcDiagnosticsPage *self)
   if (!os_name)
     os_name = g_strdup ("GNOME");
   url = g_get_os_info (G_OS_INFO_KEY_PRIVACY_POLICY_URL);
-  if (!url)
-    url = g_strdup ("http://www.gnome.org/privacy-policy");
-  /* translators: Text used in link to privacy policy */
-  link = g_strdup_printf ("<a href=\"%s\">%s</a>", url, _("Learn more"));
-  /* translators: The first '%s' is the distributor's name, such as 'Fedora', the second '%s' is a link to the privacy policy */
-  msg = g_strdup_printf (_("Sending reports of technical problems helps us improve %s. Reports "
+
+  if (url) {
+    /* translators: Text used in link to privacy policy */
+    link = g_strdup_printf ("<a href=\"%s\">%s</a>", url, _("Learn more"));
+
+    /* translators: The first '%s' is the distributor's name, such as 'Fedora', the second '%s' is a link to the privacy policy */
+    msg = g_strdup_printf (_("Sending reports of technical problems helps us improve %s. Reports "
                            "are sent anonymously and are scrubbed of personal data. %s"),
-                         os_name, link);
+                           os_name, link);
+  } else {
+    /* translators: The '%s' is the distributor's name, such as 'Fedora' */
+    msg = g_strdup_printf (_("Sending reports of technical problems helps us improve %s. Reports "
+                           "are sent anonymously and are scrubbed of personal data."),
+                           os_name);
+  }
   adw_preferences_group_set_description (self->diagnostics_group, msg);
 }
