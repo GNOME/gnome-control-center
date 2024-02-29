@@ -24,14 +24,8 @@
                   <object class="AdwHeaderBar">
                     <child>
                       <object class="GtkToggleButton" id="search_button">
-                        <property name="icon_name">edit-find-symbolic</property>
-                        <property name="tooltip_text" translatable="yes">Search</property>
-                        <accessibility>
-                          <property name="label" translatable="yes">Search</property>
-                        </accessibility>
-                        <style>
-                          <class name="image-button"/>
-                        </style>
+                        <property name="icon-name">edit-find-symbolic</property>
+                        <property name="tooltip-text" translatable="yes">Search</property>
                       </object>
                     </child>
                     <child type="end">
@@ -39,24 +33,18 @@
                         <property name="icon-name">open-menu-symbolic</property>
                         <property name="menu-model">primary_menu</property>
                         <property name="primary">True</property>
-                        <property name="tooltip_text" translatable="yes">Main Menu</property>
-                        <accessibility>
-                          <property name="label" translatable="yes">Main Menu</property>
-                        </accessibility>
-                        <style>
-                          <class name="image-button"/>
-                        </style>
+                        <property name="tooltip-text" translatable="yes">Main Menu</property>
                       </object>
                     </child>
                   </object>
                 </child>
                 <child type="top">
                   <object class="GtkSearchBar" id="search_bar">
-                    <property name="search_mode_enabled" bind-source="search_button" bind-property="active" bind-flags="sync-create|bidirectional" />
+                    <property name="search-mode-enabled" bind-source="search_button" bind-property="active" bind-flags="sync-create|bidirectional" />
                     <child>
                       <object class="GtkSearchEntry" id="search_entry">
                         <property name="hexpand">True</property>
-                        <property name="placeholder_text" translatable="yes">Search settings</property>
+                        <property name="placeholder-text" translatable="yes">Search settings</property>
                         <signal name="activate" handler="search_entry_activate_cb" object="CcWindow" swapped="yes" />
                         <child>
                           <object class="GtkEventControllerKey">
@@ -69,7 +57,7 @@
                 </child>
                 <property name="content">
                   <object class="GtkScrolledWindow">
-                    <property name="hscrollbar_policy">never</property>
+                    <property name="hscrollbar-policy">never</property>
                     <child>
                       <object class="CcPanelList" id="panel_list">
                         <property name="search-mode" bind-source="search_bar" bind-property="search-mode-enabled" bind-flags="bidirectional" />
