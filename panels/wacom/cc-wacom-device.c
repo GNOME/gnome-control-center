@@ -187,12 +187,11 @@ cc_wacom_device_new_fake (const gchar *name)
 					       name, wacom_error);
 	if (wacom_device == NULL) {
 		g_debug ("libwacom_new_fake() failed: %s", libwacom_error_get_message (wacom_error));
-		libwacom_error_free (&wacom_error);
-		return NULL;
+		g_clear_object (&device);
+	} else {
+		device->wdevice = wacom_device;
 	}
 	libwacom_error_free (&wacom_error);
-
-	device->wdevice = wacom_device;
 
 	return device;
 }
