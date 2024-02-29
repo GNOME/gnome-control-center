@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center.HEAD.he\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2024-02-21 14:37+0000\n"
-"PO-Revision-Date: 2024-02-22 12:12+0200\n"
+"POT-Creation-Date: 2024-02-29 07:52+0000\n"
+"PO-Revision-Date: 2024-02-29 10:02+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -83,7 +83,7 @@ msgstr "מערכת הפעלה"
 
 #: panels/applications/cc-applications-panel.c:854
 #: panels/keyboard/01-launchers.xml.in:6
-#: shell/appdata/org.gnome.Settings.appdata.xml.in:7 shell/cc-window.c:760
+#: shell/appdata/org.gnome.Settings.appdata.xml.in:7 shell/cc-window.c:775
 #: shell/cc-window.ui:20 shell/org.gnome.Settings.desktop.in:3
 msgid "Settings"
 msgstr "הגדרות"
@@ -305,7 +305,7 @@ msgstr "גישה למערכת הנדרשת על ידי היישום"
 #: panels/applications/cc-applications-panel.ui:409
 #: panels/mouse/cc-mouse-panel.ui:66
 #: panels/multitasking/cc-multitasking-panel.ui:15
-#: panels/power/cc-power-panel.ui:172
+#: panels/power/cc-power-panel.ui:171
 msgid "General"
 msgstr "כללי"
 
@@ -958,6 +958,7 @@ msgstr "כיול התצוגה"
 #: panels/privacy/cc-usage-page.c:136 panels/sharing/cc-sharing-panel.c:239
 #: panels/system/region/cc-format-chooser.ui:24
 #: panels/system/users/cc-add-user-dialog.ui:25
+#: panels/system/users/cc-enterprise-login-dialog.ui:58
 #: panels/system/users/cc-avatar-chooser.c:92
 #: panels/system/users/cc-fingerprint-dialog.ui:32
 #: panels/system/users/cc-password-dialog.ui:21
@@ -1254,8 +1255,9 @@ msgstr "_ייבוא קובץ…"
 #: panels/color/cc-color-panel.ui:390 panels/keyboard/cc-input-chooser.ui:28
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:33
 #: panels/network/connection-editor/net-connection-editor.c:653
-#: panels/printers/new-printer-dialog.ui:91
+#: panels/printers/new-printer-dialog.ui:85
 #: panels/system/users/cc-add-user-dialog.ui:39
+#: panels/system/users/cc-enterprise-login-dialog.ui:66
 msgid "_Add"
 msgstr "הו_ספה"
 
@@ -1639,13 +1641,13 @@ msgid "Hotspot"
 msgstr "נקודת גישה"
 
 #: panels/display/cc-display-panel.c:510
-#: panels/notifications/cc-notifications-panel.c:212
+#: panels/notifications/cc-notifications-panel.c:213
 #: panels/power/cc-power-panel.c:679 panels/power/cc-power-panel.c:686
 msgid "On"
 msgstr "פעיל"
 
 #: panels/display/cc-display-panel.c:512 panels/network/cc-net-proxy-page.c:182
-#: panels/notifications/cc-notifications-panel.c:212
+#: panels/notifications/cc-notifications-panel.c:213
 #: panels/power/cc-power-panel.c:673 panels/power/cc-power-panel.c:684
 msgid "Off"
 msgstr "כבוי"
@@ -1945,7 +1947,7 @@ msgstr "תיקיית הבית"
 
 #: panels/keyboard/01-launchers.xml.in:16 panels/keyboard/cc-input-chooser.ui:50
 #: panels/printers/cc-printers-panel.ui:21
-#: panels/printers/new-printer-dialog.ui:216
+#: panels/printers/new-printer-dialog.ui:210
 #: panels/search/gnome-search-panel.desktop.in:3
 #: panels/system/region/cc-format-chooser.ui:82 shell/cc-window.ui:28
 #: shell/cc-window.ui:30
@@ -2782,7 +2784,7 @@ msgid "<b>Password</b>: %s"
 msgstr "<b>ססמה</b>: %s"
 
 #: panels/network/cc-qr-code-dialog.ui:9
-#: panels/network/cc-wifi-connection-row.ui:60
+#: panels/network/cc-wifi-connection-row.ui:53
 msgid "Share Network"
 msgstr "שיתוף רשת"
 
@@ -2827,16 +2829,16 @@ msgid "Signal strength %d%%"
 msgstr "עצמת אות %d%%"
 
 #. TRANSLATORS: device status
-#: panels/network/cc-wifi-connection-row.ui:41 panels/network/panel-common.c:63
+#: panels/network/cc-wifi-connection-row.ui:35 panels/network/panel-common.c:63
 msgid "Connected"
 msgstr "מחובר"
 
-#: panels/network/cc-wifi-connection-row.ui:73
+#: panels/network/cc-wifi-connection-row.ui:65
 #: panels/network/network-ethernet.ui:47
 msgid "Network Options"
 msgstr "אפשרויות רשת"
 
-#: panels/network/cc-wifi-connection-row.ui:85
+#: panels/network/cc-wifi-connection-row.ui:76
 msgid "Forget Network"
 msgstr "לשכוח את הרשת"
 
@@ -2867,10 +2869,10 @@ msgstr "חובה 8 תווים לכל הפחות"
 #, c-format
 msgid "Must have a maximum of %d character"
 msgid_plural "Must have a maximum of %d characters"
-msgstr[0] "חייב להיות לפחות תו אחד"
-msgstr[1] "חייבים להיות לפחות שני תווים"
-msgstr[2] "חייבים להיות לפחות %d תווים"
-msgstr[3] "חייבים להיות לפחות %d תווים"
+msgstr[0] "חייב להיות תו אחד לכל היותר"
+msgstr[1] "חייבים להיות שני תווים לכל היותר"
+msgstr[2] "חייבים להיות %d תווים לכל היותר"
+msgstr[3] "חייבים להיות %d תווים לכל היותר"
 
 #: panels/network/cc-wifi-hotspot-dialog.ui:4
 msgid "Turn On Wi-Fi Hotspot?"
@@ -2892,8 +2894,8 @@ msgstr "שם הרשת"
 
 #. Translators: This is a password needed for printing.
 #: panels/network/cc-wifi-hotspot-dialog.ui:92
-#: panels/printers/new-printer-dialog.ui:302 panels/printers/pp-jobs-dialog.ui:54
-#: panels/system/users/cc-add-user-dialog.ui:152
+#: panels/printers/new-printer-dialog.ui:296 panels/printers/pp-jobs-dialog.ui:54
+#: panels/system/users/cc-add-user-dialog.ui:150
 #: panels/wwan/cc-wwan-apn-dialog.ui:175
 msgid "Password"
 msgstr "ססמה"
@@ -2986,7 +2988,7 @@ msgstr "_אבטחת 802.1x"
 #: panels/network/connection-editor/bluetooth-page.ui:16
 #: panels/network/connection-editor/ethernet-page.ui:27
 #: panels/network/connection-editor/vpn-page.ui:23
-#: panels/system/users/cc-add-user-dialog.ui:68
+#: panels/system/users/cc-add-user-dialog.ui:66
 #: panels/system/users/cc-user-page.ui:84
 msgid "_Name"
 msgstr "_שם"
@@ -4525,79 +4527,79 @@ msgid "Power Mode"
 msgstr "מצב כיבוי"
 
 # msgctxt "Power profile"
-#: panels/power/cc-power-panel.ui:127
+#: panels/power/cc-power-panel.ui:126
 msgid "Power Saving"
 msgstr "חיסכון בחשמל"
 
-#: panels/power/cc-power-panel.ui:130
+#: panels/power/cc-power-panel.ui:129
 msgid "A_utomatic Screen Brightness"
 msgstr "בהירות מסך _אוטומטית"
 
-#: panels/power/cc-power-panel.ui:131
+#: panels/power/cc-power-panel.ui:130
 msgid "Adjust screen brightness to the surrounding light"
 msgstr "לכוון את בהירות המסך לאור שמסביב"
 
-#: panels/power/cc-power-panel.ui:138
+#: panels/power/cc-power-panel.ui:137
 msgid "_Dim Screen"
 msgstr "_עמעום מסך"
 
-#: panels/power/cc-power-panel.ui:139
+#: panels/power/cc-power-panel.ui:138
 msgid "Reduce screen brightness when the computer is inactive"
 msgstr "הפחתת בהירות המסך כשהמחשב לא פעיל"
 
-#: panels/power/cc-power-panel.ui:145
+#: panels/power/cc-power-panel.ui:144
 msgid "Screen _Blank"
 msgstr "ה_חשכת מסך"
 
-#: panels/power/cc-power-panel.ui:146
+#: panels/power/cc-power-panel.ui:145
 msgid "Turn the screen off after a period of inactivity"
 msgstr "כיבוי המסך לאחר פרק זמן של חוסר פעילות"
 
-#: panels/power/cc-power-panel.ui:154
+#: panels/power/cc-power-panel.ui:153
 msgid "Automatic Power _Saver"
 msgstr "חיסכון _אוטומטי בחשמל"
 
-#: panels/power/cc-power-panel.ui:155
+#: panels/power/cc-power-panel.ui:154
 msgid "Turn on power saver mode when battery power is low"
 msgstr "הפעלת מצב חיסכון בחשמל כאשר עוצמת הסוללה נמוכה"
 
-#: panels/power/cc-power-panel.ui:162
+#: panels/power/cc-power-panel.ui:161
 msgid "_Automatic Suspend"
 msgstr "השהיה _אוטומטית"
 
-#: panels/power/cc-power-panel.ui:163
+#: panels/power/cc-power-panel.ui:162
 msgid "Pause the computer after a period of inactivity"
 msgstr "השהיית המחשב לאחר פרק זמן של חוסר פעילות"
 
-#: panels/power/cc-power-panel.ui:176
+#: panels/power/cc-power-panel.ui:175
 msgid "Po_wer Button Behavior"
 msgstr "פעולת כפתור _כיבוי"
 
-#: panels/power/cc-power-panel.ui:184
+#: panels/power/cc-power-panel.ui:183
 msgid "Show Battery _Percentage"
 msgstr "הצגת אחוז ה_סוללה"
 
-#: panels/power/cc-power-panel.ui:185
+#: panels/power/cc-power-panel.ui:184
 msgid "Show exact charge level in the top bar"
 msgstr "הצגת אחוז מדויק של טעינת הסוללה בלוח העליון"
 
-#: panels/power/cc-power-panel.ui:198
+#: panels/power/cc-power-panel.ui:197
 msgid "Automatic Suspend"
 msgstr "השהיה אוטומטית"
 
-#: panels/power/cc-power-panel.ui:227
+#: panels/power/cc-power-panel.ui:226
 msgid "On _Battery Power"
 msgstr "על _סוללה"
 
-#: panels/power/cc-power-panel.ui:234
+#: panels/power/cc-power-panel.ui:233
 msgid "_Delay"
 msgstr "ה_שהיה"
 
-#: panels/power/cc-power-panel.ui:252
+#: panels/power/cc-power-panel.ui:251
 msgid "_Plugged In"
 msgstr "ב_חיבור לחשמל"
 
-#: panels/power/cc-power-panel.ui:258
+#: panels/power/cc-power-panel.ui:257
 msgid "D_elay"
 msgstr "ה_שהיה"
 
@@ -4662,36 +4664,36 @@ msgstr "הוספת המדפסת החדשה נכשלה."
 msgid "Unlock to add printers and change settings"
 msgstr "יש לשחרר כדי להוסיף מדפסות ולשנות הגדרות"
 
-#: panels/printers/cc-printers-panel.ui:30
+#: panels/printers/cc-printers-panel.ui:27
 msgid "All Connected and Network Printers"
 msgstr "כל המדפסות הזמינות"
 
 #. Translators: This button adds new printer.
 #. Translators: This button adds a new printer.
-#: panels/printers/cc-printers-panel.ui:34 panels/printers/cc-printers-panel.ui:169
+#: panels/printers/cc-printers-panel.ui:31 panels/printers/cc-printers-panel.ui:166
 msgid "_Add Printer…"
 msgstr "הוס_פת מדפסת…"
 
-#: panels/printers/cc-printers-panel.ui:52
+#: panels/printers/cc-printers-panel.ui:49
 msgid "Search printers"
 msgstr "חיפוש מדפסות"
 
 #. Translators: This is the button which allows undoing the removal of the printer.
-#: panels/printers/cc-printers-panel.ui:81
+#: panels/printers/cc-printers-panel.ui:78
 msgid "Undo"
 msgstr "ביטול"
 
-#: panels/printers/cc-printers-panel.ui:166
+#: panels/printers/cc-printers-panel.ui:163
 msgid "No Printers"
 msgstr "אין מדפסות בנמצא"
 
 #. Translators: Title if the CUPS server is not running (we can not connect to it).
-#: panels/printers/cc-printers-panel.ui:191
+#: panels/printers/cc-printers-panel.ui:188
 msgid "No Print Service"
 msgstr "אין שרת הדפסה"
 
 #. Translators: Description if the CUPS server is not running (we can not connect to it).
-#: panels/printers/cc-printers-panel.ui:192
+#: panels/printers/cc-printers-panel.ui:189
 msgid "The system printing service doesn’t seem to be available"
 msgstr "כפי הנראה, שירותי ההדפסה של המערכת אינם זמינים"
 
@@ -4716,7 +4718,7 @@ msgstr "מדפסת;תור;הדפסה;דף;דיו;טונר;"
 msgid "Add Printer"
 msgstr "הוספת מדפסת"
 
-#: panels/printers/new-printer-dialog.ui:69
+#: panels/printers/new-printer-dialog.ui:67
 #: panels/system/region/cc-format-chooser.ui:37
 #: panels/system/users/cc-fingerprint-dialog.ui:44
 #: panels/wwan/cc-wwan-apn-dialog.ui:21
@@ -4725,31 +4727,31 @@ msgstr "חזרה"
 
 #. Translators: This button opens authentication dialog for selected server.
 #. Translators: This buttons submits the credentials for the selected server.
-#: panels/printers/new-printer-dialog.ui:108
-#: panels/printers/new-printer-dialog.ui:123 panels/wwan/cc-wwan-device-page.ui:38
+#: panels/printers/new-printer-dialog.ui:102
+#: panels/printers/new-printer-dialog.ui:117 panels/wwan/cc-wwan-device-page.ui:38
 msgid "_Unlock"
 msgstr "_שחרור"
 
 #. Translators: No printers were detected
-#: panels/printers/new-printer-dialog.ui:174
+#: panels/printers/new-printer-dialog.ui:168
 msgid "No Printers Found"
 msgstr "לא נמצא מדפסות"
 
 #. Translators: The entered text should contain network address of a printer or a text which will filter found devices (their names and locations)
-#: panels/printers/new-printer-dialog.ui:211
+#: panels/printers/new-printer-dialog.ui:205
 msgid "Enter a network address or search for a printer"
 msgstr "יש להזין כתובת רשת או חיפוש מדפסת"
 
-#: panels/printers/new-printer-dialog.ui:256
+#: panels/printers/new-printer-dialog.ui:250
 msgid "Authentication Required"
 msgstr "נדרש אימות"
 
-#: panels/printers/new-printer-dialog.ui:272
+#: panels/printers/new-printer-dialog.ui:266
 msgid "Enter username and password to view printers on Print Server"
 msgstr "יש להזין שם משתמש וססמה להצגת מדפסות זמינות על שרת ההדפסה"
 
 #. Translators: This is a username on a print server.
-#: panels/printers/new-printer-dialog.ui:281 panels/printers/pp-jobs-dialog.ui:42
+#: panels/printers/new-printer-dialog.ui:275 panels/printers/pp-jobs-dialog.ui:42
 #: panels/wwan/cc-wwan-apn-dialog.ui:150
 msgid "Username"
 msgstr "שם משתמש"
@@ -5186,7 +5188,7 @@ msgstr "אין משימות פעילות"
 #, c-format
 msgid "%u Job"
 msgid_plural "%u Jobs"
-msgstr[0] "משימה אחת"
+msgstr[0] "משימה"
 msgstr[1] "שתי משימות"
 msgstr[2] "‫%u משימות"
 msgstr[3] "‫%u משימות"
@@ -6594,7 +6596,7 @@ msgstr "ד_רישת ססמה"
 
 #: panels/sharing/cc-sharing-panel.ui:96
 #: panels/system/remote-desktop/cc-remote-desktop-page.ui:136
-#: panels/system/users/cc-add-user-dialog.ui:373
+#: panels/system/users/cc-enterprise-login-dialog.ui:114
 msgid "_Password"
 msgstr "_ססמה"
 
@@ -6751,7 +6753,7 @@ msgstr "שמע"
 msgid "Vo_lume Levels"
 msgstr "_עצמת שמע"
 
-#: panels/sound/cc-sound-panel.ui:384
+#: panels/sound/cc-sound-panel.ui:378
 msgid "_Alert Sound"
 msgstr "צליל ה_תראה"
 
@@ -6830,7 +6832,7 @@ msgid "Memory"
 msgstr "זיכרון"
 
 #: panels/system/about/cc-about-page.ui:91
-#: panels/system/about/cc-system-details-window.ui:102
+#: panels/system/about/cc-system-details-window.ui:103
 msgid "Disk Capacity"
 msgstr "קיבלות דיסק"
 
@@ -6965,43 +6967,43 @@ msgstr "ה_עתקה"
 msgid "Hardware Information"
 msgstr "מידע על החומרה"
 
-#: panels/system/about/cc-system-details-window.ui:122
+#: panels/system/about/cc-system-details-window.ui:123
 msgid "Software Information"
 msgstr "מידע על התכנה"
 
-#: panels/system/about/cc-system-details-window.ui:133
+#: panels/system/about/cc-system-details-window.ui:134
 #: panels/wwan/cc-wwan-details-dialog.ui:210
 msgid "Firmware Version"
 msgstr "גרסת קושחה"
 
 #. translators: this field contains the distro name and version
-#: panels/system/about/cc-system-details-window.ui:141
+#: panels/system/about/cc-system-details-window.ui:142
 msgid "OS Name"
 msgstr "שם מערכת הפעלה"
 
 #. translators: this field contains the distro build
-#: panels/system/about/cc-system-details-window.ui:149
+#: panels/system/about/cc-system-details-window.ui:150
 msgid "OS Build"
 msgstr "מזהה בניית מערכת הפעלה"
 
 #. translators: this field contains the distro type
-#: panels/system/about/cc-system-details-window.ui:157
+#: panels/system/about/cc-system-details-window.ui:158
 msgid "OS Type"
 msgstr "סוג מערכת הפעלה"
 
-#: panels/system/about/cc-system-details-window.ui:164
+#: panels/system/about/cc-system-details-window.ui:165
 msgid "GNOME Version"
 msgstr "גרסת GNOME"
 
-#: panels/system/about/cc-system-details-window.ui:171
+#: panels/system/about/cc-system-details-window.ui:172
 msgid "Windowing System"
 msgstr "מערכת חלונות"
 
-#: panels/system/about/cc-system-details-window.ui:178
+#: panels/system/about/cc-system-details-window.ui:179
 msgid "Virtualization"
 msgstr "הדמייה"
 
-#: panels/system/about/cc-system-details-window.ui:185
+#: panels/system/about/cc-system-details-window.ui:186
 msgid "Kernel Version"
 msgstr "גרסת ליבה"
 
@@ -7059,17 +7061,17 @@ msgid "Software _Updates"
 msgstr "_עדכוני תכנה"
 
 #. Translators: This is the full date and time format used in 12-hour mode.
-#: panels/system/datetime/cc-datetime-page.c:232
+#: panels/system/datetime/cc-datetime-page.c:230
 msgid "%e %B %Y, %l:%M %p"
 msgstr "%e ב%B %Y, %l:%M %p"
 
 #. Translators: This is the full date and time format used in 24-hour mode.
-#: panels/system/datetime/cc-datetime-page.c:237
+#: panels/system/datetime/cc-datetime-page.c:235
 msgid "%e %B %Y, %R"
 msgstr "%e ב%B %Y, %R"
 
 #. Translators: "city, country"
-#: panels/system/datetime/cc-datetime-page.c:390
+#: panels/system/datetime/cc-datetime-page.c:388
 #, c-format
 msgctxt "timezone loc"
 msgid "%s, %s"
@@ -7077,7 +7079,7 @@ msgstr "%s, %s"
 
 #. Update the timezone on the listbow row
 #. Translators: "timezone (details)"
-#: panels/system/datetime/cc-datetime-page.c:407
+#: panels/system/datetime/cc-datetime-page.c:405
 #, c-format
 msgctxt "timezone desc"
 msgid "%s (%s)"
@@ -7112,103 +7114,103 @@ msgstr "נדרש חיבור לאינטרנט"
 msgid "Date &amp; _Time"
 msgstr "תאריך ו_שעה"
 
-#: panels/system/datetime/cc-datetime-page.ui:174
+#: panels/system/datetime/cc-datetime-page.ui:161
 msgid "Automatic Time _Zone"
 msgstr "אזור _זמן אוטומטי"
 
-#: panels/system/datetime/cc-datetime-page.ui:175
+#: panels/system/datetime/cc-datetime-page.ui:162
 msgid "Requires location services enabled and internet access"
 msgstr "נדרשת גישה לשירותי מיקום וחיבור לאינטרנט"
 
-#: panels/system/datetime/cc-datetime-page.ui:181
+#: panels/system/datetime/cc-datetime-page.ui:168
 msgid "Time Z_one"
 msgstr "_אזור זמן"
 
-#: panels/system/datetime/cc-datetime-page.ui:206
+#: panels/system/datetime/cc-datetime-page.ui:179
 msgid "Time _Format"
 msgstr "_תבנית זמן"
 
-#: panels/system/datetime/cc-datetime-page.ui:217
+#: panels/system/datetime/cc-datetime-page.ui:190
 msgid "_24-hour"
 msgstr "24 _שעות"
 
-#: panels/system/datetime/cc-datetime-page.ui:225
+#: panels/system/datetime/cc-datetime-page.ui:198
 msgid "AM / _PM"
 msgstr "AM / _PM"
 
-#: panels/system/datetime/cc-datetime-page.ui:238
+#: panels/system/datetime/cc-datetime-page.ui:211
 msgid "Clock &amp; Calendar"
 msgstr "שעון ולוח שנה"
 
-#: panels/system/datetime/cc-datetime-page.ui:239
+#: panels/system/datetime/cc-datetime-page.ui:212
 msgid "Control how the time and date is shown in the top bar"
 msgstr "שליטה על הצגת התאריך והשעה בלוח העליון"
 
-#: panels/system/datetime/cc-datetime-page.ui:242
+#: panels/system/datetime/cc-datetime-page.ui:215
 msgid "_Week Day"
 msgstr "יום ב_שבוע"
 
-#: panels/system/datetime/cc-datetime-page.ui:248
+#: panels/system/datetime/cc-datetime-page.ui:221
 msgid "D_ate"
 msgstr "_תאריך"
 
-#: panels/system/datetime/cc-datetime-page.ui:254
+#: panels/system/datetime/cc-datetime-page.ui:227
 msgid "_Seconds"
 msgstr "_שניות"
 
-#: panels/system/datetime/cc-datetime-page.ui:260
+#: panels/system/datetime/cc-datetime-page.ui:233
 msgid "Week _Numbers"
 msgstr "מספרי _שבועות"
 
-#: panels/system/datetime/cc-datetime-page.ui:261
+#: panels/system/datetime/cc-datetime-page.ui:234
 msgid "Shown in the dropdown calendar"
 msgstr "מופיע בלוח השנה הנפתח מלמעלה"
 
-#: panels/system/datetime/cc-datetime-page.ui:298
+#: panels/system/datetime/cc-datetime-page.ui:271
 msgid "January"
 msgstr "ינואר"
 
-#: panels/system/datetime/cc-datetime-page.ui:299
+#: panels/system/datetime/cc-datetime-page.ui:272
 msgid "February"
 msgstr "פברואר"
 
-#: panels/system/datetime/cc-datetime-page.ui:300
+#: panels/system/datetime/cc-datetime-page.ui:273
 msgid "March"
 msgstr "מרץ"
 
-#: panels/system/datetime/cc-datetime-page.ui:301
+#: panels/system/datetime/cc-datetime-page.ui:274
 msgid "April"
 msgstr "אפריל"
 
-#: panels/system/datetime/cc-datetime-page.ui:302
+#: panels/system/datetime/cc-datetime-page.ui:275
 msgid "May"
 msgstr "מאי"
 
-#: panels/system/datetime/cc-datetime-page.ui:303
+#: panels/system/datetime/cc-datetime-page.ui:276
 msgid "June"
 msgstr "יוני"
 
-#: panels/system/datetime/cc-datetime-page.ui:304
+#: panels/system/datetime/cc-datetime-page.ui:277
 msgid "July"
 msgstr "יולי"
 
-#: panels/system/datetime/cc-datetime-page.ui:305
+#: panels/system/datetime/cc-datetime-page.ui:278
 msgid "August"
 msgstr "אוגוסט"
 
-#: panels/system/datetime/cc-datetime-page.ui:306
+#: panels/system/datetime/cc-datetime-page.ui:279
 msgid "September"
 msgstr "ספטמבר"
 
-#: panels/system/datetime/cc-datetime-page.ui:307
+#: panels/system/datetime/cc-datetime-page.ui:280
 msgid "October"
 msgstr "אוקטובר"
 
-#: panels/system/datetime/cc-datetime-page.ui:308
+#: panels/system/datetime/cc-datetime-page.ui:281
 msgid "November"
 msgstr "נובמבר"
 
-#: panels/system/datetime/cc-datetime-page.ui:309
+#: panels/system/datetime/cc-datetime-page.ui:282
 msgid "December"
 msgstr "דצמבר"
 
@@ -7483,71 +7485,29 @@ msgstr "הפעלה או השבתה של התחברות מרוחקת"
 msgid "Authentication is required to enable or disable remote login"
 msgstr "נדרש אימות כדי להפעיל או להשבית התחברות מרחוק"
 
-#: panels/system/users/cc-add-user-dialog.c:36
-msgid "Should match the web address of your login provider."
-msgstr "צריך להתאים את כתובת האינטרנט של ספק החשבון שלך."
-
-#: panels/system/users/cc-add-user-dialog.c:217
+#: panels/system/users/cc-add-user-dialog.c:159
 msgid "Failed to add account"
 msgstr "הוספת החשבון נכשלה"
 
-#: panels/system/users/cc-add-user-dialog.c:668
+#: panels/system/users/cc-add-user-dialog.c:610
 msgid "The passwords do not match."
 msgstr "הססמאות אינן תואמות."
-
-#: panels/system/users/cc-add-user-dialog.c:866
-#: panels/system/users/cc-add-user-dialog.c:905
-#: panels/system/users/cc-add-user-dialog.c:923
-msgid "Failed to register account"
-msgstr "הרשמת החשבון נכשלה"
-
-#: panels/system/users/cc-add-user-dialog.c:1038
-msgid "No supported way to authenticate with this domain"
-msgstr "אין שיטה נתמכת לאימות עם מתחם זה (domain)"
-
-#: panels/system/users/cc-add-user-dialog.c:1102
-msgid "Failed to join domain"
-msgstr "ההצטרפות למתחם נכשלה"
-
-#: panels/system/users/cc-add-user-dialog.c:1157
-msgid ""
-"That login name didn’t work.\n"
-"Please try again."
-msgstr ""
-"שם התחברות זה לא עובד.\n"
-"נא לנסות שוב."
-
-#: panels/system/users/cc-add-user-dialog.c:1164
-msgid ""
-"That login password didn’t work.\n"
-"Please try again."
-msgstr ""
-"ססמה זו לא עובדת.\n"
-"נא לנסות שוב."
-
-#: panels/system/users/cc-add-user-dialog.c:1172
-msgid "Failed to log into domain"
-msgstr "ההתחברות למתחם נכשלה"
-
-#: panels/system/users/cc-add-user-dialog.c:1227
-msgid "Unable to find the domain. Maybe you misspelled it?"
-msgstr "לא ניתן למצוא את התחום. אולי שגית באיות?"
 
 #: panels/system/users/cc-add-user-dialog.ui:13
 #: panels/system/users/data/join-dialog.ui:9
 msgid "Add User"
 msgstr "הוספת משתמש"
 
-#: panels/system/users/cc-add-user-dialog.ui:95
-#: panels/system/users/cc-add-user-dialog.ui:351
+#: panels/system/users/cc-add-user-dialog.ui:93
+#: panels/system/users/cc-enterprise-login-dialog.ui:107
 msgid "_Username"
 msgstr "_שם משתמש"
 
-#: panels/system/users/cc-add-user-dialog.ui:133
+#: panels/system/users/cc-add-user-dialog.ui:131
 msgid "Ad_ministrator"
 msgstr "_מנהל"
 
-#: panels/system/users/cc-add-user-dialog.ui:138
+#: panels/system/users/cc-add-user-dialog.ui:136
 #: panels/system/users/cc-user-page.ui:141
 msgid ""
 "Administrators have extra abilities, including adding and removing users, "
@@ -7557,47 +7517,128 @@ msgstr ""
 "למנהל יש יכולות נרחבות, לרבות הוספה והסרת משתמשים, שינוי הגדרות התחברות והסרת "
 "תכנה. בקרת הורים לא ניתנת להחלה על מנהל."
 
-#: panels/system/users/cc-add-user-dialog.ui:156
+#: panels/system/users/cc-add-user-dialog.ui:154
 msgid "User sets password on _first login"
 msgstr "הגדרת ססמה בכניסה ה_ראשונה של המשתמש"
 
-#: panels/system/users/cc-add-user-dialog.ui:169
+#: panels/system/users/cc-add-user-dialog.ui:167
 msgid "Set password n_ow"
 msgstr "הגדרת ססמה _כעת"
 
-#: panels/system/users/cc-add-user-dialog.ui:189
+#: panels/system/users/cc-add-user-dialog.ui:187
 msgid "Pass_word"
 msgstr "_ססמה"
 
-#: panels/system/users/cc-add-user-dialog.ui:233
+#: panels/system/users/cc-add-user-dialog.ui:231
 msgid "_Confirm"
 msgstr "_אישור"
 
-#: panels/system/users/cc-add-user-dialog.ui:288
-msgid "_Enterprise Login"
-msgstr "כניסה _ארגונית"
+#: panels/system/users/cc-enterprise-login-dialog.c:133
+#: panels/system/users/cc-enterprise-login-dialog.c:171
+#: panels/system/users/cc-enterprise-login-dialog.c:186
+msgid "Failed to register account"
+msgstr "הרשמת החשבון נכשלה"
 
-#: panels/system/users/cc-add-user-dialog.ui:290
-msgid "User accounts which are managed by a company or organization"
-msgstr "חשבונות משתמש המנוהלים על ידי חברה או ארגון"
+#: panels/system/users/cc-enterprise-login-dialog.c:240
+#: panels/system/users/cc-enterprise-login-dialog.c:411
+msgid "Failed to join domain"
+msgstr "ההצטרפות למתחם נכשלה"
 
-#: panels/system/users/cc-add-user-dialog.ui:307
+#: panels/system/users/cc-enterprise-login-dialog.c:275
+msgid "No supported way to authenticate with this domain"
+msgstr "אין שיטה נתמכת לאימות עם מתחם זה (domain)"
+
+#: panels/system/users/cc-enterprise-login-dialog.c:285
+#: panels/system/users/cc-enterprise-login-dialog.c:476
+msgid "That login name didn’t work"
+msgstr "שם הכניסה הזה לא עבר"
+
+#: panels/system/users/cc-enterprise-login-dialog.c:292
+#: panels/system/users/cc-enterprise-login-dialog.c:483
+msgid "That login password didn’t work"
+msgstr "ססמת כניסה זו לא עבדה"
+
+#: panels/system/users/cc-enterprise-login-dialog.c:299
+msgid "That hostname didn’t work"
+msgstr "שם מארח זה לא עבד"
+
+#: panels/system/users/cc-enterprise-login-dialog.c:306
+#: panels/system/users/cc-enterprise-login-dialog.c:491
+msgid "Failed to log into domain"
+msgstr "ההתחברות למתחם נכשלה"
+
+#. Translators: The "%s" is a domain address (e.g. "demo1.freeipa.org").
+#: panels/system/users/cc-enterprise-login-dialog.c:352
+#, c-format
+msgid ""
+"To add an enterprise login account, this device needs to be enrolled with <b>%s</"
+"b>. To enroll, have your domain administrator enter their name and password."
+msgstr ""
+"כדי להוסיף חשבון כניסה ארגונית, יש לרשום את המכשיר הזה מול <b>%s</b>. כדי לרשום, "
+"מנהל שם התחום שלך צריך למלא את השם והססמה שלו."
+
+#: panels/system/users/cc-enterprise-login-dialog.c:538
+msgid "Valid domain"
+msgstr "שם תחום תקף"
+
+#: panels/system/users/cc-enterprise-login-dialog.c:542
+msgid "Domain not found"
+msgstr "שם התחום לא נמצא"
+
+#: panels/system/users/cc-enterprise-login-dialog.c:585
+msgid "Checking domain…"
+msgstr "שם התחום נבדק…"
+
+#: panels/system/users/cc-enterprise-login-dialog.c:629
+msgid "Failed to contact realmd service"
+msgstr "יצירת קשר עם שירות realmd נכשלה"
+
+#: panels/system/users/cc-enterprise-login-dialog.ui:28
+#: panels/system/users/cc-enterprise-login-dialog.ui:48
+msgid "Add Enterprise Login"
+msgstr "הוספת כניסה ארגונית"
+
+#: panels/system/users/cc-enterprise-login-dialog.ui:37
+msgid "Offline"
+msgstr "מנותקת"
+
+#: panels/system/users/cc-enterprise-login-dialog.ui:38
+msgid "A network connection is needed to add enterprise login accounts."
+msgstr "צריך חיבור לאינטרנט כדי להוסיף חשבונות עם כניסה ארגונית."
+
+#: panels/system/users/cc-enterprise-login-dialog.ui:84
+msgid ""
+"Enterprise login allows an existing centrally managed account to be used on this "
+"device."
+msgstr "כניסה ארגונית מאפשר להשתמש בחשבון קיים שמנוהל בצורה מרכזית במכשיר הזה."
+
+#: panels/system/users/cc-enterprise-login-dialog.ui:89
 #: panels/system/users/data/join-dialog.ui:90
 msgid "_Domain"
 msgstr "מ_תחם"
 
-#: panels/system/users/cc-add-user-dialog.ui:396
-msgid "You are Offline"
-msgstr "התנתקת"
+#: panels/system/users/cc-enterprise-login-dialog.ui:97
+msgid "Should match the web domain of the account provider"
+msgstr "אמור להיות תואם לשם התחום באינטרנט של ספק החשבון"
 
-#: panels/system/users/cc-add-user-dialog.ui:397
-msgid ""
-"Enterprise login allows an existing centrally managed user account to be used on "
-"this device. You can also use this account to access company resources on the "
-"internet."
-msgstr ""
-"התחברות ארגונית מאפשרת ניהול חשבון משתמש מרוכז לשימוש בהתקן זה. נתן גם להשתמש "
-"בחשבון זה לגישה למשאבי חברות באינטרנט."
+#: panels/system/users/cc-enterprise-login-dialog.ui:130
+msgid "Enroll Device"
+msgstr "רישום מכשיר"
+
+#. Translators: This button enrolls the computer in the domain in order to use enterprise logins.
+#: panels/system/users/cc-enterprise-login-dialog.ui:140
+#: panels/system/users/data/join-dialog.ui:30
+msgid "_Enroll"
+msgstr "ה_רשמה"
+
+#: panels/system/users/cc-enterprise-login-dialog.ui:162
+#: panels/system/users/data/join-dialog.ui:112
+msgid "Administrator _Name"
+msgstr "_שם המנהל"
+
+#: panels/system/users/cc-enterprise-login-dialog.ui:169
+msgid "Administrator _Password"
+msgstr "ססמת _ניהול"
 
 #: panels/system/users/cc-avatar-chooser.c:162
 msgid "Browse for more pictures"
@@ -7874,17 +7915,17 @@ msgstr "לא ניתן להצטרף אוטומטית לסוג כזה של תחו�
 msgid "No such domain or realm found"
 msgstr "לא נמצאו תחום או מתחם כאלה"
 
-#: panels/system/users/cc-realm-manager.c:712
-#: panels/system/users/cc-realm-manager.c:726
+#: panels/system/users/cc-realm-manager.c:721
+#: panels/system/users/cc-realm-manager.c:735
 #, c-format
 msgid "Cannot log in as %s at the %s domain"
 msgstr "לא ניתן להיכנס בשם %s לתחום %s"
 
-#: panels/system/users/cc-realm-manager.c:718
+#: panels/system/users/cc-realm-manager.c:727
 msgid "Invalid password, please try again"
 msgstr "הססמה שגויה, נא לנסות שוב"
 
-#: panels/system/users/cc-realm-manager.c:731
+#: panels/system/users/cc-realm-manager.c:740
 #, c-format
 msgid "Couldn’t connect to the %s domain: %s"
 msgstr "לא ניתן להתחבר אל התחום %s:‏ %s"
@@ -7977,10 +8018,9 @@ msgstr "משתמשים אחרים"
 msgid "_Add User…"
 msgstr "הו_ספת משתמש…"
 
-#. Translators: This button enrolls the computer in the domain in order to use enterprise logins.
-#: panels/system/users/data/join-dialog.ui:30
-msgid "_Enroll"
-msgstr "ה_רשמה"
+#: panels/system/users/cc-users-page.ui:47
+msgid "Add Enterprise User"
+msgstr "הוספת משתמש ארגוני"
 
 #: panels/system/users/data/join-dialog.ui:59
 msgid "Domain Administrator Login"
@@ -7995,10 +8035,6 @@ msgstr ""
 "כדי להשתמש בכניסה ארגונית, על מחשב זה להיות רשום\n"
 "במתחם. נא לבקש ממנהל הרשת להקליד את ססמת המתחם\n"
 "שלו להלן."
-
-#: panels/system/users/data/join-dialog.ui:112
-msgid "Administrator _Name"
-msgstr "_שם המנהל"
 
 #: panels/system/users/data/join-dialog.ui:135
 msgid "Administrator Password"
@@ -9603,7 +9639,7 @@ msgstr "קטגוריות הגדרות"
 msgid "No Results Found"
 msgstr "לא נמצאו תוצאות"
 
-#: shell/cc-panel-loader.c:273
+#: shell/cc-panel-loader.c:308
 msgid "Available panels:"
 msgstr "לוחות זמינים:"
 
@@ -9743,6 +9779,18 @@ msgstr[3] "‏‫%u ערוצי קלט"
 #: subprojects/gvc/gvc-mixer-control.c:2882
 msgid "System Sounds"
 msgstr "צלילי מערכת"
+
+#~ msgid "Unable to find the domain. Maybe you misspelled it?"
+#~ msgstr "לא ניתן למצוא את התחום. אולי שגית באיות?"
+
+#~ msgid "_Enterprise Login"
+#~ msgstr "כניסה _ארגונית"
+
+#~ msgid "User accounts which are managed by a company or organization"
+#~ msgstr "חשבונות משתמש המנוהלים על ידי חברה או ארגון"
+
+#~ msgid "You are Offline"
+#~ msgstr "התנתקת"
 
 #~ msgid "Automatic suspend"
 #~ msgstr "השהיה אוטומטית"
@@ -10075,9 +10123,6 @@ msgstr "צלילי מערכת"
 #~ "inconsistent state."
 #~ msgstr "מחיקת משתמש כשהוא מחובר עלולה להשאיר את המערכת במצב בלתי יציב."
 
-#~ msgid "Failed to contact the accounts service"
-#~ msgstr "לא ניתן ליצור קשר עם שירות החשבונות"
-
 #~ msgid "Please make sure that the AccountService is installed and enabled."
 #~ msgstr "נא לוודא ששירות החשבונות (AccountService) מותקן ומופעל."
 
@@ -10181,9 +10226,6 @@ msgstr "צלילי מערכת"
 
 #~ msgid "Connect to your data in the cloud"
 #~ msgstr "התחברות למידע שלך שבענן"
-
-#~ msgid "No internet connection — connect to set up new online accounts"
-#~ msgstr "אין חיבור לאינטרנט - יש להתחבר על מנת להגדיר חשבון מקוון חדש"
 
 #~ msgid "Add an account"
 #~ msgstr "הוספת חשבון"
