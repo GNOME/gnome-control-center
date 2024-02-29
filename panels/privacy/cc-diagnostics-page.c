@@ -119,11 +119,11 @@ cc_diagnostics_page_init (CcDiagnosticsPage *self)
 
   if (url) {
     /* translators: Text used in link to privacy policy */
-    link = g_strdup_printf ("<a href=\"%s\">%s</a>", url, _("Learn more"));
+    link = g_strdup_printf ("<a href=\"%s\">%s</a>", url, _("learn more"));
 
     /* translators: The first '%s' is the distributor's name, such as 'Fedora', the second '%s' is a link to the privacy policy */
     msg = g_strdup_printf (_("Sending reports of technical problems helps us improve %s. Reports "
-                           "are sent anonymously and are scrubbed of personal data. %s"),
+                           "are sent anonymously and are scrubbed of personal data – %s."),
                            os_name, link);
   } else {
     /* translators: The '%s' is the distributor's name, such as 'Fedora' */
