@@ -153,7 +153,7 @@ shortcut_removed_cb (CcKeyboardShortcutDialog *self,
 }
 
 static void
-shortuct_custom_items_changed (CcKeyboardShortcutDialog *self)
+shortcut_custom_items_changed (CcKeyboardShortcutDialog *self)
 {
   GListStore *section;
   GtkWidget *page;
@@ -251,7 +251,7 @@ shortcuts_loaded_cb (CcKeyboardShortcutDialog *self)
   filtered_lists = g_list_store_new (G_TYPE_LIST_MODEL);
 
   g_signal_connect_object (custom_store, "items-changed",
-                           G_CALLBACK (shortuct_custom_items_changed),
+                           G_CALLBACK (shortcut_custom_items_changed),
                            self, G_CONNECT_SWAPPED);
 
   g_list_store_sort (self->sections, compare_sections_title, NULL);
@@ -491,7 +491,7 @@ shortcut_section_row_activated_cb (CcKeyboardShortcutDialog *self,
   page = g_object_get_data (G_OBJECT (section), "page");
   gtk_stack_set_visible_child (self->shortcut_list_stack, page);
   adw_navigation_view_push (self->navigation_view, self->subview_page);
-  shortuct_custom_items_changed (self);
+  shortcut_custom_items_changed (self);
 }
 
 static void
