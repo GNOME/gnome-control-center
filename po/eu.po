@@ -10,8 +10,8 @@
 msgid ""
 msgstr "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/issues\n"
-"POT-Creation-Date: 2024-02-21 14:37+0000\n"
-"PO-Revision-Date: 2024-02-25 14:00+0100\n"
+"POT-Creation-Date: 2024-02-29 07:52+0000\n"
+"PO-Revision-Date: 2024-03-01 14:00+0100\n"
 "Last-Translator: Asier Sarasua Garmendia <asiersarasua@ni.eus>\n"
 "Language-Team: Basque <librezale@librezale.eus>\n"
 "Language: eu\n"
@@ -79,7 +79,7 @@ msgstr "Fitxategi-sistema"
 
 #: panels/applications/cc-applications-panel.c:854
 #: panels/keyboard/01-launchers.xml.in:6
-#: shell/appdata/org.gnome.Settings.appdata.xml.in:7 shell/cc-window.c:760
+#: shell/appdata/org.gnome.Settings.appdata.xml.in:7 shell/cc-window.c:775
 #: shell/cc-window.ui:20 shell/org.gnome.Settings.desktop.in:3
 msgid "Settings"
 msgstr "Ezarpenak"
@@ -297,7 +297,7 @@ msgstr "Aplikazioak behar duen sistema-sarbidea"
 #: panels/applications/cc-applications-panel.ui:409
 #: panels/mouse/cc-mouse-panel.ui:66
 #: panels/multitasking/cc-multitasking-panel.ui:15
-#: panels/power/cc-power-panel.ui:172
+#: panels/power/cc-power-panel.ui:171
 msgid "General"
 msgstr "Orokorra"
 
@@ -955,6 +955,7 @@ msgstr "Pantailaren kalibrazioa"
 #: panels/sharing/cc-sharing-panel.c:239
 #: panels/system/region/cc-format-chooser.ui:24
 #: panels/system/users/cc-add-user-dialog.ui:25
+#: panels/system/users/cc-enterprise-login-dialog.ui:58
 #: panels/system/users/cc-avatar-chooser.c:92
 #: panels/system/users/cc-fingerprint-dialog.ui:32
 #: panels/system/users/cc-password-dialog.ui:21
@@ -1245,8 +1246,9 @@ msgstr "_Inportatu fitxategia…"
 #: panels/color/cc-color-panel.ui:390 panels/keyboard/cc-input-chooser.ui:28
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:33
 #: panels/network/connection-editor/net-connection-editor.c:653
-#: panels/printers/new-printer-dialog.ui:91
+#: panels/printers/new-printer-dialog.ui:85
 #: panels/system/users/cc-add-user-dialog.ui:39
+#: panels/system/users/cc-enterprise-login-dialog.ui:66
 msgid "_Add"
 msgstr "_Gehitu"
 
@@ -1626,13 +1628,13 @@ msgid "Hotspot"
 msgstr "Wifigunea"
 
 #: panels/display/cc-display-panel.c:510
-#: panels/notifications/cc-notifications-panel.c:212
+#: panels/notifications/cc-notifications-panel.c:213
 #: panels/power/cc-power-panel.c:679 panels/power/cc-power-panel.c:686
 msgid "On"
 msgstr "Aktibatuta"
 
 #: panels/display/cc-display-panel.c:512 panels/network/cc-net-proxy-page.c:182
-#: panels/notifications/cc-notifications-panel.c:212
+#: panels/notifications/cc-notifications-panel.c:213
 #: panels/power/cc-power-panel.c:673 panels/power/cc-power-panel.c:684
 msgid "Off"
 msgstr "Desaktibatuta"
@@ -1928,7 +1930,7 @@ msgstr "Karpeta nagusia"
 #: panels/keyboard/01-launchers.xml.in:16
 #: panels/keyboard/cc-input-chooser.ui:50
 #: panels/printers/cc-printers-panel.ui:21
-#: panels/printers/new-printer-dialog.ui:216
+#: panels/printers/new-printer-dialog.ui:210
 #: panels/search/gnome-search-panel.desktop.in:3
 #: panels/system/region/cc-format-chooser.ui:82 shell/cc-window.ui:28
 #: shell/cc-window.ui:30
@@ -2757,7 +2759,7 @@ msgid "<b>Password</b>: %s"
 msgstr "<b>Pasahitza</b>: %s"
 
 #: panels/network/cc-qr-code-dialog.ui:9
-#: panels/network/cc-wifi-connection-row.ui:60
+#: panels/network/cc-wifi-connection-row.ui:53
 msgid "Share Network"
 msgstr "Partekatu sarea"
 
@@ -2802,16 +2804,16 @@ msgid "Signal strength %d%%"
 msgstr "Seinalearen sendotasuna: %d%%"
 
 #. TRANSLATORS: device status
-#: panels/network/cc-wifi-connection-row.ui:41 panels/network/panel-common.c:63
+#: panels/network/cc-wifi-connection-row.ui:35 panels/network/panel-common.c:63
 msgid "Connected"
 msgstr "Konektatuta"
 
-#: panels/network/cc-wifi-connection-row.ui:73
+#: panels/network/cc-wifi-connection-row.ui:65
 #: panels/network/network-ethernet.ui:47
 msgid "Network Options"
 msgstr "Sareko aukerak"
 
-#: panels/network/cc-wifi-connection-row.ui:85
+#: panels/network/cc-wifi-connection-row.ui:76
 msgid "Forget Network"
 msgstr "Ahaztu sarea"
 
@@ -2860,9 +2862,9 @@ msgstr "Sarearen izena"
 
 #. Translators: This is a password needed for printing.
 #: panels/network/cc-wifi-hotspot-dialog.ui:92
-#: panels/printers/new-printer-dialog.ui:302
+#: panels/printers/new-printer-dialog.ui:296
 #: panels/printers/pp-jobs-dialog.ui:54
-#: panels/system/users/cc-add-user-dialog.ui:152
+#: panels/system/users/cc-add-user-dialog.ui:150
 #: panels/wwan/cc-wwan-apn-dialog.ui:175
 msgid "Password"
 msgstr "Pasahitza"
@@ -2955,7 +2957,7 @@ msgstr "802.1x segurtasuna"
 #: panels/network/connection-editor/bluetooth-page.ui:16
 #: panels/network/connection-editor/ethernet-page.ui:27
 #: panels/network/connection-editor/vpn-page.ui:23
-#: panels/system/users/cc-add-user-dialog.ui:68
+#: panels/system/users/cc-add-user-dialog.ui:66
 #: panels/system/users/cc-user-page.ui:84
 msgid "_Name"
 msgstr "_Izena"
@@ -4466,79 +4468,79 @@ msgstr "Konektatutako gailuak"
 msgid "Power Mode"
 msgstr "Energiaren modua"
 
-#: panels/power/cc-power-panel.ui:127
+#: panels/power/cc-power-panel.ui:126
 msgid "Power Saving"
 msgstr "Energia aurreztea"
 
-#: panels/power/cc-power-panel.ui:130
+#: panels/power/cc-power-panel.ui:129
 msgid "A_utomatic Screen Brightness"
 msgstr "Pantailaren distira a_utomatikoa"
 
-#: panels/power/cc-power-panel.ui:131
+#: panels/power/cc-power-panel.ui:130
 msgid "Adjust screen brightness to the surrounding light"
 msgstr "Doitu pantailaren distira inguruko argiaren arabera"
 
-#: panels/power/cc-power-panel.ui:138
+#: panels/power/cc-power-panel.ui:137
 msgid "_Dim Screen"
 msgstr "I_lundu pantaila"
 
-#: panels/power/cc-power-panel.ui:139
+#: panels/power/cc-power-panel.ui:138
 msgid "Reduce screen brightness when the computer is inactive"
 msgstr "Murriztu pantailaren distira ordenagailua aktibo ez dagoenean"
 
-#: panels/power/cc-power-panel.ui:145
+#: panels/power/cc-power-panel.ui:144
 msgid "Screen _Blank"
 msgstr "I_tzali pantaila"
 
-#: panels/power/cc-power-panel.ui:146
+#: panels/power/cc-power-panel.ui:145
 msgid "Turn the screen off after a period of inactivity"
 msgstr "Itzali pantaila aktibitaterik gabe denbora batez egon ondoren"
 
-#: panels/power/cc-power-panel.ui:154
+#: panels/power/cc-power-panel.ui:153
 msgid "Automatic Power _Saver"
 msgstr "Energiaren aurrezte au_tomatikoa"
 
-#: panels/power/cc-power-panel.ui:155
+#: panels/power/cc-power-panel.ui:154
 msgid "Turn on power saver mode when battery power is low"
 msgstr "Gaitu energia aurrezteko modua bateria baxu dagoenean"
 
-#: panels/power/cc-power-panel.ui:162
+#: panels/power/cc-power-panel.ui:161
 msgid "_Automatic Suspend"
 msgstr "Eseki _automatikoki"
 
-#: panels/power/cc-power-panel.ui:163
+#: panels/power/cc-power-panel.ui:162
 msgid "Pause the computer after a period of inactivity"
 msgstr "Pausatu ordenagailua aktibitaterik gabe denbora batez egon ondoren"
 
-#: panels/power/cc-power-panel.ui:176
+#: panels/power/cc-power-panel.ui:175
 msgid "Po_wer Button Behavior"
 msgstr "Pi_zteko botoiaren portaera"
 
-#: panels/power/cc-power-panel.ui:184
+#: panels/power/cc-power-panel.ui:183
 msgid "Show Battery _Percentage"
 msgstr "Erakutsi bateriaren _ehunekoa"
 
-#: panels/power/cc-power-panel.ui:185
+#: panels/power/cc-power-panel.ui:184
 msgid "Show exact charge level in the top bar"
 msgstr "Erakutsi karga-maila zehatza goiko barran"
 
-#: panels/power/cc-power-panel.ui:198
+#: panels/power/cc-power-panel.ui:197
 msgid "Automatic Suspend"
 msgstr "Esekitze automatikoa"
 
-#: panels/power/cc-power-panel.ui:227
+#: panels/power/cc-power-panel.ui:226
 msgid "On _Battery Power"
 msgstr "_Bateriaren energiarekin"
 
-#: panels/power/cc-power-panel.ui:234
+#: panels/power/cc-power-panel.ui:233
 msgid "_Delay"
 msgstr "_Atzerapena"
 
-#: panels/power/cc-power-panel.ui:252
+#: panels/power/cc-power-panel.ui:251
 msgid "_Plugged In"
 msgstr "_Entxufea konektatutakoan"
 
-#: panels/power/cc-power-panel.ui:258
+#: panels/power/cc-power-panel.ui:257
 msgid "D_elay"
 msgstr "A_tzerapena"
 
@@ -4599,37 +4601,37 @@ msgstr "Huts egin du inprimagailu berria gehitzean."
 msgid "Unlock to add printers and change settings"
 msgstr "Desblokeatu inprimagailuak gehitzeko eta ezarpenak aldatzeko"
 
-#: panels/printers/cc-printers-panel.ui:30
+#: panels/printers/cc-printers-panel.ui:27
 msgid "All Connected and Network Printers"
 msgstr "Konektatutako eta sareko inprimagailu guztiak"
 
 #. Translators: This button adds new printer.
 #. Translators: This button adds a new printer.
-#: panels/printers/cc-printers-panel.ui:34
-#: panels/printers/cc-printers-panel.ui:169
+#: panels/printers/cc-printers-panel.ui:31
+#: panels/printers/cc-printers-panel.ui:166
 msgid "_Add Printer…"
 msgstr "Ge_hitu inprimagailua…"
 
-#: panels/printers/cc-printers-panel.ui:52
+#: panels/printers/cc-printers-panel.ui:49
 msgid "Search printers"
 msgstr "Bilatu inprimagailuak"
 
 #. Translators: This is the button which allows undoing the removal of the printer.
-#: panels/printers/cc-printers-panel.ui:81
+#: panels/printers/cc-printers-panel.ui:78
 msgid "Undo"
 msgstr "Desegin"
 
-#: panels/printers/cc-printers-panel.ui:166
+#: panels/printers/cc-printers-panel.ui:163
 msgid "No Printers"
 msgstr "Inprimagailurik ez"
 
 #. Translators: Title if the CUPS server is not running (we can not connect to it).
-#: panels/printers/cc-printers-panel.ui:191
+#: panels/printers/cc-printers-panel.ui:188
 msgid "No Print Service"
 msgstr "Ez dago inprimatzeko zerbitzurik"
 
 #. Translators: Description if the CUPS server is not running (we can not connect to it).
-#: panels/printers/cc-printers-panel.ui:192
+#: panels/printers/cc-printers-panel.ui:189
 msgid "The system printing service doesn’t seem to be available"
 msgstr "Badirudi sistemako inprimatzeko zerbitzua ez dagoela erabilgarri"
 
@@ -4654,7 +4656,7 @@ msgstr "Inprimagailua;Ilara;Inprimatu;Papera;Tinta;Tonerra;"
 msgid "Add Printer"
 msgstr "Gehitu inprimagailua"
 
-#: panels/printers/new-printer-dialog.ui:69
+#: panels/printers/new-printer-dialog.ui:67
 #: panels/system/region/cc-format-chooser.ui:37
 #: panels/system/users/cc-fingerprint-dialog.ui:44
 #: panels/wwan/cc-wwan-apn-dialog.ui:21
@@ -4663,32 +4665,32 @@ msgstr "Atzera"
 
 #. Translators: This button opens authentication dialog for selected server.
 #. Translators: This buttons submits the credentials for the selected server.
-#: panels/printers/new-printer-dialog.ui:108
-#: panels/printers/new-printer-dialog.ui:123
+#: panels/printers/new-printer-dialog.ui:102
+#: panels/printers/new-printer-dialog.ui:117
 #: panels/wwan/cc-wwan-device-page.ui:38
 msgid "_Unlock"
 msgstr "_Desblokeatu"
 
 #. Translators: No printers were detected
-#: panels/printers/new-printer-dialog.ui:174
+#: panels/printers/new-printer-dialog.ui:168
 msgid "No Printers Found"
 msgstr "Ez da inprimakirik aurkitu"
 
 #. Translators: The entered text should contain network address of a printer or a text which will filter found devices (their names and locations)
-#: panels/printers/new-printer-dialog.ui:211
+#: panels/printers/new-printer-dialog.ui:205
 msgid "Enter a network address or search for a printer"
 msgstr "Sartu sareko helbidea edo bilatu inprimagailu bat"
 
-#: panels/printers/new-printer-dialog.ui:256
+#: panels/printers/new-printer-dialog.ui:250
 msgid "Authentication Required"
 msgstr "Autentifikazioa behar da"
 
-#: panels/printers/new-printer-dialog.ui:272
+#: panels/printers/new-printer-dialog.ui:266
 msgid "Enter username and password to view printers on Print Server"
 msgstr "Sartu zure erabiltzaile-izena eta pasahitza inprimatze-zerbitzarian"
 
 #. Translators: This is a username on a print server.
-#: panels/printers/new-printer-dialog.ui:281
+#: panels/printers/new-printer-dialog.ui:275
 #: panels/printers/pp-jobs-dialog.ui:42 panels/wwan/cc-wwan-apn-dialog.ui:150
 msgid "Username"
 msgstr "Erabiltzaile-izena"
@@ -6482,7 +6484,7 @@ msgstr "_Eskatu pasahitza"
 
 #: panels/sharing/cc-sharing-panel.ui:96
 #: panels/system/remote-desktop/cc-remote-desktop-page.ui:136
-#: panels/system/users/cc-add-user-dialog.ui:373
+#: panels/system/users/cc-enterprise-login-dialog.ui:114
 msgid "_Password"
 msgstr "_Pasahitza"
 
@@ -6638,7 +6640,7 @@ msgstr "Soinuak"
 msgid "Vo_lume Levels"
 msgstr "Bo_lumen-mailak"
 
-#: panels/sound/cc-sound-panel.ui:384
+#: panels/sound/cc-sound-panel.ui:378
 msgid "_Alert Sound"
 msgstr "_Alertako soinua"
 
@@ -6716,7 +6718,7 @@ msgid "Memory"
 msgstr "Memoria"
 
 #: panels/system/about/cc-about-page.ui:91
-#: panels/system/about/cc-system-details-window.ui:102
+#: panels/system/about/cc-system-details-window.ui:103
 msgid "Disk Capacity"
 msgstr "Diskoaren ahalmena"
 
@@ -6851,43 +6853,43 @@ msgstr "_Kopiatu"
 msgid "Hardware Information"
 msgstr "Hardwarearen informazioa"
 
-#: panels/system/about/cc-system-details-window.ui:122
+#: panels/system/about/cc-system-details-window.ui:123
 msgid "Software Information"
 msgstr "Softwarearen informazioa"
 
-#: panels/system/about/cc-system-details-window.ui:133
+#: panels/system/about/cc-system-details-window.ui:134
 #: panels/wwan/cc-wwan-details-dialog.ui:210
 msgid "Firmware Version"
 msgstr "Firmwarearen bertsioa"
 
 #. translators: this field contains the distro name and version
-#: panels/system/about/cc-system-details-window.ui:141
+#: panels/system/about/cc-system-details-window.ui:142
 msgid "OS Name"
 msgstr "SEaren izena"
 
 #. translators: this field contains the distro build
-#: panels/system/about/cc-system-details-window.ui:149
+#: panels/system/about/cc-system-details-window.ui:150
 msgid "OS Build"
 msgstr "SEaren eraikuntza"
 
 #. translators: this field contains the distro type
-#: panels/system/about/cc-system-details-window.ui:157
+#: panels/system/about/cc-system-details-window.ui:158
 msgid "OS Type"
 msgstr "SE mota"
 
-#: panels/system/about/cc-system-details-window.ui:164
+#: panels/system/about/cc-system-details-window.ui:165
 msgid "GNOME Version"
 msgstr "GNOMEren bertsioa"
 
-#: panels/system/about/cc-system-details-window.ui:171
+#: panels/system/about/cc-system-details-window.ui:172
 msgid "Windowing System"
 msgstr "Leiho-sistema"
 
-#: panels/system/about/cc-system-details-window.ui:178
+#: panels/system/about/cc-system-details-window.ui:179
 msgid "Virtualization"
 msgstr "Birtualizazioa"
 
-#: panels/system/about/cc-system-details-window.ui:185
+#: panels/system/about/cc-system-details-window.ui:186
 msgid "Kernel Version"
 msgstr "Kernelaren bertsioa"
 
@@ -6945,17 +6947,17 @@ msgid "Software _Updates"
 msgstr "Software-eg_uneratzeak"
 
 #. Translators: This is the full date and time format used in 12-hour mode.
-#: panels/system/datetime/cc-datetime-page.c:232
+#: panels/system/datetime/cc-datetime-page.c:230
 msgid "%e %B %Y, %l:%M %p"
 msgstr "%Y/%B/%e, %l:%M %p"
 
 #. Translators: This is the full date and time format used in 24-hour mode.
-#: panels/system/datetime/cc-datetime-page.c:237
+#: panels/system/datetime/cc-datetime-page.c:235
 msgid "%e %B %Y, %R"
 msgstr "%Y/%B/%e, %R"
 
 #. Translators: "city, country"
-#: panels/system/datetime/cc-datetime-page.c:390
+#: panels/system/datetime/cc-datetime-page.c:388
 #, c-format
 msgctxt "timezone loc"
 msgid "%s, %s"
@@ -6963,7 +6965,7 @@ msgstr "%s, %s"
 
 #. Update the timezone on the listbow row
 #. Translators: "timezone (details)"
-#: panels/system/datetime/cc-datetime-page.c:407
+#: panels/system/datetime/cc-datetime-page.c:405
 #, c-format
 msgctxt "timezone desc"
 msgid "%s (%s)"
@@ -6998,103 +7000,103 @@ msgstr "Interneteko konexioa behar da"
 msgid "Date &amp; _Time"
 msgstr "Data eta _ordua"
 
-#: panels/system/datetime/cc-datetime-page.ui:174
+#: panels/system/datetime/cc-datetime-page.ui:161
 msgid "Automatic Time _Zone"
 msgstr "Ordu-_zona automatikoa"
 
-#: panels/system/datetime/cc-datetime-page.ui:175
+#: panels/system/datetime/cc-datetime-page.ui:162
 msgid "Requires location services enabled and internet access"
 msgstr "Kokaleku-zerbitzuek gaituta egon behar dute eta Interneterako sarbide eduki behar da"
 
-#: panels/system/datetime/cc-datetime-page.ui:181
+#: panels/system/datetime/cc-datetime-page.ui:168
 msgid "Time Z_one"
 msgstr "Ordu-_zona"
 
-#: panels/system/datetime/cc-datetime-page.ui:206
+#: panels/system/datetime/cc-datetime-page.ui:179
 msgid "Time _Format"
 msgstr "Orduaren _formatua"
 
-#: panels/system/datetime/cc-datetime-page.ui:217
+#: panels/system/datetime/cc-datetime-page.ui:190
 msgid "_24-hour"
 msgstr "_24 ordu"
 
-#: panels/system/datetime/cc-datetime-page.ui:225
+#: panels/system/datetime/cc-datetime-page.ui:198
 msgid "AM / _PM"
 msgstr "AM / _PM"
 
-#: panels/system/datetime/cc-datetime-page.ui:238
+#: panels/system/datetime/cc-datetime-page.ui:211
 msgid "Clock &amp; Calendar"
 msgstr "Ordua eta egutegia"
 
-#: panels/system/datetime/cc-datetime-page.ui:239
+#: panels/system/datetime/cc-datetime-page.ui:212
 msgid "Control how the time and date is shown in the top bar"
 msgstr "Kontrola ordua eta data nola erakusten diren goiko barran"
 
-#: panels/system/datetime/cc-datetime-page.ui:242
+#: panels/system/datetime/cc-datetime-page.ui:215
 msgid "_Week Day"
 msgstr "_Asteguna"
 
-#: panels/system/datetime/cc-datetime-page.ui:248
+#: panels/system/datetime/cc-datetime-page.ui:221
 msgid "D_ate"
 msgstr "_Data"
 
-#: panels/system/datetime/cc-datetime-page.ui:254
+#: panels/system/datetime/cc-datetime-page.ui:227
 msgid "_Seconds"
 msgstr "_Segundoak"
 
-#: panels/system/datetime/cc-datetime-page.ui:260
+#: panels/system/datetime/cc-datetime-page.ui:233
 msgid "Week _Numbers"
 msgstr "Asteko _zenbakiak"
 
-#: panels/system/datetime/cc-datetime-page.ui:261
+#: panels/system/datetime/cc-datetime-page.ui:234
 msgid "Shown in the dropdown calendar"
 msgstr "Erakutsi goitibeherako egutegian"
 
-#: panels/system/datetime/cc-datetime-page.ui:298
+#: panels/system/datetime/cc-datetime-page.ui:271
 msgid "January"
 msgstr "Urtarrila"
 
-#: panels/system/datetime/cc-datetime-page.ui:299
+#: panels/system/datetime/cc-datetime-page.ui:272
 msgid "February"
 msgstr "Otsaila"
 
-#: panels/system/datetime/cc-datetime-page.ui:300
+#: panels/system/datetime/cc-datetime-page.ui:273
 msgid "March"
 msgstr "Martxoa"
 
-#: panels/system/datetime/cc-datetime-page.ui:301
+#: panels/system/datetime/cc-datetime-page.ui:274
 msgid "April"
 msgstr "Apirila"
 
-#: panels/system/datetime/cc-datetime-page.ui:302
+#: panels/system/datetime/cc-datetime-page.ui:275
 msgid "May"
 msgstr "Maiatza"
 
-#: panels/system/datetime/cc-datetime-page.ui:303
+#: panels/system/datetime/cc-datetime-page.ui:276
 msgid "June"
 msgstr "Ekaina"
 
-#: panels/system/datetime/cc-datetime-page.ui:304
+#: panels/system/datetime/cc-datetime-page.ui:277
 msgid "July"
 msgstr "Uztaila"
 
-#: panels/system/datetime/cc-datetime-page.ui:305
+#: panels/system/datetime/cc-datetime-page.ui:278
 msgid "August"
 msgstr "Abuztua"
 
-#: panels/system/datetime/cc-datetime-page.ui:306
+#: panels/system/datetime/cc-datetime-page.ui:279
 msgid "September"
 msgstr "Iraila"
 
-#: panels/system/datetime/cc-datetime-page.ui:307
+#: panels/system/datetime/cc-datetime-page.ui:280
 msgid "October"
 msgstr "Urria"
 
-#: panels/system/datetime/cc-datetime-page.ui:308
+#: panels/system/datetime/cc-datetime-page.ui:281
 msgid "November"
 msgstr "Azaroa"
 
-#: panels/system/datetime/cc-datetime-page.ui:309
+#: panels/system/datetime/cc-datetime-page.ui:282
 msgid "December"
 msgstr "Abendua"
 
@@ -7365,69 +7367,29 @@ msgstr "Gaitu edo desgaitu urruneko saio-hasiera"
 msgid "Authentication is required to enable or disable remote login"
 msgstr "Autentifikazioa behar da urruneko saioa gaitu edo desgaitzeko"
 
-#: panels/system/users/cc-add-user-dialog.c:36
-msgid "Should match the web address of your login provider."
-msgstr "Zure kontuaren hornitzailearen web helbidearekin bat etorri behar du."
-
-#: panels/system/users/cc-add-user-dialog.c:217
+#: panels/system/users/cc-add-user-dialog.c:159
 msgid "Failed to add account"
 msgstr "Huts egin du kontua gehitzean"
 
-#: panels/system/users/cc-add-user-dialog.c:668
+#: panels/system/users/cc-add-user-dialog.c:610
 msgid "The passwords do not match."
 msgstr "Pasahitzak ez datoz bat."
-
-#: panels/system/users/cc-add-user-dialog.c:866
-#: panels/system/users/cc-add-user-dialog.c:905
-#: panels/system/users/cc-add-user-dialog.c:923
-msgid "Failed to register account"
-msgstr "Huts egin du kontua erregistratzean"
-
-#: panels/system/users/cc-add-user-dialog.c:1038
-msgid "No supported way to authenticate with this domain"
-msgstr "Ez dago modurik onartuta domeinu honekin autentifikatzeko"
-
-#: panels/system/users/cc-add-user-dialog.c:1102
-msgid "Failed to join domain"
-msgstr "Huts egin du domeinuarekin elkartzean"
-
-#: panels/system/users/cc-add-user-dialog.c:1157
-msgid ""
-"That login name didn’t work.\n"
-"Please try again."
-msgstr "Saioaren hasierako izenak ez du funtzionatzen.\n"
-"Saiatu berriro."
-
-#: panels/system/users/cc-add-user-dialog.c:1164
-msgid ""
-"That login password didn’t work.\n"
-"Please try again."
-msgstr "Saioaren hasierako pasahitzak ez du funtzionatzen.\n"
-"Saiatu berriro."
-
-#: panels/system/users/cc-add-user-dialog.c:1172
-msgid "Failed to log into domain"
-msgstr "Huts egin du domeinuan saioa hastean"
-
-#: panels/system/users/cc-add-user-dialog.c:1227
-msgid "Unable to find the domain. Maybe you misspelled it?"
-msgstr "Ezin da domeinua aurkitu. Ongi idatzi duzu?"
 
 #: panels/system/users/cc-add-user-dialog.ui:13
 #: panels/system/users/data/join-dialog.ui:9
 msgid "Add User"
 msgstr "Gehitu erabiltzailea"
 
-#: panels/system/users/cc-add-user-dialog.ui:95
-#: panels/system/users/cc-add-user-dialog.ui:351
+#: panels/system/users/cc-add-user-dialog.ui:93
+#: panels/system/users/cc-enterprise-login-dialog.ui:107
 msgid "_Username"
 msgstr "_Erabiltzaile-izena:"
 
-#: panels/system/users/cc-add-user-dialog.ui:133
+#: panels/system/users/cc-add-user-dialog.ui:131
 msgid "Ad_ministrator"
 msgstr "Ad_ministratzailea"
 
-#: panels/system/users/cc-add-user-dialog.ui:138
+#: panels/system/users/cc-add-user-dialog.ui:136
 #: panels/system/users/cc-user-page.ui:141
 msgid ""
 "Administrators have extra abilities, including adding and removing users, "
@@ -7435,45 +7397,127 @@ msgid ""
 "applied to administrators."
 msgstr "Administratzaileek ahalmen gehiago dituzte, adibidez erabiltzaileak gehitzea eta kentzea, saioa hasteko ezarpenak aldatzea eta softwarea kentzea. Administratzaileei ezin zaizkie guraso-kontrolak aplikatu."
 
-#: panels/system/users/cc-add-user-dialog.ui:156
+#: panels/system/users/cc-add-user-dialog.ui:154
 msgid "User sets password on _first login"
 msgstr "Erabiltzaileak pasahitza ezarriko du _lehen saioa hastean"
 
-#: panels/system/users/cc-add-user-dialog.ui:169
+#: panels/system/users/cc-add-user-dialog.ui:167
 msgid "Set password n_ow"
 msgstr "Ezarri pasahitza _orain"
 
-#: panels/system/users/cc-add-user-dialog.ui:189
+#: panels/system/users/cc-add-user-dialog.ui:187
 msgid "Pass_word"
 msgstr "_Pasahitza"
 
-#: panels/system/users/cc-add-user-dialog.ui:233
+#: panels/system/users/cc-add-user-dialog.ui:231
 msgid "_Confirm"
 msgstr "_Berretsi"
 
-#: panels/system/users/cc-add-user-dialog.ui:288
-msgid "_Enterprise Login"
-msgstr "_Enpresako saio-hasiera"
+#: panels/system/users/cc-enterprise-login-dialog.c:133
+#: panels/system/users/cc-enterprise-login-dialog.c:171
+#: panels/system/users/cc-enterprise-login-dialog.c:186
+msgid "Failed to register account"
+msgstr "Huts egin du kontua erregistratzean"
 
-#: panels/system/users/cc-add-user-dialog.ui:290
-msgid "User accounts which are managed by a company or organization"
-msgstr "Enpresa edo erakunde batek kudeatzen dituen erabiltzaile-kontuak"
+#: panels/system/users/cc-enterprise-login-dialog.c:240
+#: panels/system/users/cc-enterprise-login-dialog.c:411
+msgid "Failed to join domain"
+msgstr "Huts egin du domeinuarekin elkartzean"
 
-#: panels/system/users/cc-add-user-dialog.ui:307
+#: panels/system/users/cc-enterprise-login-dialog.c:275
+msgid "No supported way to authenticate with this domain"
+msgstr "Ez dago modurik onartuta domeinu honekin autentifikatzeko"
+
+#: panels/system/users/cc-enterprise-login-dialog.c:285
+#: panels/system/users/cc-enterprise-login-dialog.c:476
+msgid "That login name didn’t work"
+msgstr "Saioaren hasierako izenak ez du funtzionatzen"
+
+#: panels/system/users/cc-enterprise-login-dialog.c:292
+#: panels/system/users/cc-enterprise-login-dialog.c:483
+msgid "That login password didn’t work"
+msgstr "Saioaren hasierako pasahitzak ez du funtzionatzen"
+
+#: panels/system/users/cc-enterprise-login-dialog.c:299
+msgid "That hostname didn’t work"
+msgstr "Ostalari-izenak ez du funtzionatzen"
+
+#: panels/system/users/cc-enterprise-login-dialog.c:306
+#: panels/system/users/cc-enterprise-login-dialog.c:491
+msgid "Failed to log into domain"
+msgstr "Huts egin du domeinuan saioa hastean"
+
+#. Translators: The "%s" is a domain address (e.g. "demo1.freeipa.org").
+#: panels/system/users/cc-enterprise-login-dialog.c:352
+#, c-format
+msgid ""
+"To add an enterprise login account, this device needs to be enrolled with "
+"<b>%s</b>. To enroll, have your domain administrator enter their name and "
+"password."
+msgstr "Enpresako saio-hasierako kontua gehitzeko, gailu honek <b>%s</b> domeinuan egon behar du.Domeinuan erregistratzeko, esan zure domeinu-administratzaileari bere izena eta pasahitza sar ditzan."
+
+#: panels/system/users/cc-enterprise-login-dialog.c:538
+msgid "Valid domain"
+msgstr "Baliozko domeinua"
+
+#: panels/system/users/cc-enterprise-login-dialog.c:542
+msgid "Domain not found"
+msgstr "Ez da domeinua aurkitu"
+
+#: panels/system/users/cc-enterprise-login-dialog.c:585
+msgid "Checking domain…"
+msgstr "Domeinua egiaztatzen…"
+
+#: panels/system/users/cc-enterprise-login-dialog.c:629
+msgid "Failed to contact realmd service"
+msgstr "Huts egin du realmd zerbitzuarekin kontaktatzeak"
+
+#: panels/system/users/cc-enterprise-login-dialog.ui:28
+#: panels/system/users/cc-enterprise-login-dialog.ui:48
+msgid "Add Enterprise Login"
+msgstr "Gehitu enpresako saio-hasiera"
+
+#: panels/system/users/cc-enterprise-login-dialog.ui:37
+msgid "Offline"
+msgstr "Lineaz kanpo"
+
+#: panels/system/users/cc-enterprise-login-dialog.ui:38
+msgid "A network connection is needed to add enterprise login accounts."
+msgstr "Sare-konexioa behar da enpresako saio-haierako kontuak gehitzeko."
+
+#: panels/system/users/cc-enterprise-login-dialog.ui:84
+msgid ""
+"Enterprise login allows an existing centrally managed account to be used on "
+"this device."
+msgstr "Enpresako saio-hasierak gailu honetan kontu zentralizatua erabiltzea ahalbidetzen du."
+
+#: panels/system/users/cc-enterprise-login-dialog.ui:89
 #: panels/system/users/data/join-dialog.ui:90
 msgid "_Domain"
 msgstr "_Domeinua"
 
-#: panels/system/users/cc-add-user-dialog.ui:396
-msgid "You are Offline"
-msgstr "Deskonektatuta zaude"
+#: panels/system/users/cc-enterprise-login-dialog.ui:97
+msgid "Should match the web domain of the account provider"
+msgstr "Kontu-hornitzailearen web-domeinuarekin bat etorri behar du"
 
-#: panels/system/users/cc-add-user-dialog.ui:397
-msgid ""
-"Enterprise login allows an existing centrally managed user account to be "
-"used on this device. You can also use this account to access company "
-"resources on the internet."
-msgstr "Enpresako saio-hasieran baimenduta dago erabiltzaileen kontu zentralizatua erabiltzea gailu honetan. Kontu hau enpresaren interneteko baliabideak atzitzeko ere erabil dezakezu."
+#: panels/system/users/cc-enterprise-login-dialog.ui:130
+msgid "Enroll Device"
+msgstr "Erregistratu gailua"
+
+#. Translators: This button enrolls the computer in the domain in order to use enterprise logins.
+#: panels/system/users/cc-enterprise-login-dialog.ui:140
+#: panels/system/users/data/join-dialog.ui:30
+msgid "_Enroll"
+msgstr "_Elkartu"
+
+#: panels/system/users/cc-enterprise-login-dialog.ui:162
+#: panels/system/users/data/join-dialog.ui:112
+msgid "Administrator _Name"
+msgstr "Administratzailearen _izena"
+
+#: panels/system/users/cc-enterprise-login-dialog.ui:169
+msgid "Administrator _Password"
+msgstr "Administratzailearen _pasahitza"
 
 #: panels/system/users/cc-avatar-chooser.c:162
 msgid "Browse for more pictures"
@@ -7749,17 +7793,17 @@ msgstr "Ezin da automatikoki honelako domeinu motarekin elkartu"
 msgid "No such domain or realm found"
 msgstr "Ez da halako domeinurik aurkitu"
 
-#: panels/system/users/cc-realm-manager.c:712
-#: panels/system/users/cc-realm-manager.c:726
+#: panels/system/users/cc-realm-manager.c:721
+#: panels/system/users/cc-realm-manager.c:735
 #, c-format
 msgid "Cannot log in as %s at the %s domain"
 msgstr "Ezin da %s gisa saioa-hasi %s domeinuan"
 
-#: panels/system/users/cc-realm-manager.c:718
+#: panels/system/users/cc-realm-manager.c:727
 msgid "Invalid password, please try again"
 msgstr "Baliogabeko pasahitza, saiatu berriro"
 
-#: panels/system/users/cc-realm-manager.c:731
+#: panels/system/users/cc-realm-manager.c:740
 #, c-format
 msgid "Couldn’t connect to the %s domain: %s"
 msgstr "Ezin izan da %s domeinuarekin konektatu: %s"
@@ -7856,10 +7900,9 @@ msgstr "Beste erabiltzaileak"
 msgid "_Add User…"
 msgstr "Ge_hitu erabiltzailea…"
 
-#. Translators: This button enrolls the computer in the domain in order to use enterprise logins.
-#: panels/system/users/data/join-dialog.ui:30
-msgid "_Enroll"
-msgstr "_Elkartu"
+#: panels/system/users/cc-users-page.ui:47
+msgid "Add Enterprise User"
+msgstr "Gehitu enpresako erabiltzailea"
 
 #: panels/system/users/data/join-dialog.ui:59
 msgid "Domain Administrator Login"
@@ -7873,10 +7916,6 @@ msgid ""
 msgstr "Enpresako saioa erabil ahal izateko, ordenagailu honek\n"
 "domeinun erregistratuta egon behar du. Eskatu iezaiozu sareko\n"
 "administratzaileari domeinuaren bere pasahitza idazteko hemen."
-
-#: panels/system/users/data/join-dialog.ui:112
-msgid "Administrator _Name"
-msgstr "Administratzailearen _izena"
 
 #: panels/system/users/data/join-dialog.ui:135
 msgid "Administrator Password"
@@ -9445,7 +9484,7 @@ msgstr "Ezarpenen kategoriak"
 msgid "No Results Found"
 msgstr "Ez da emaitzarik aurkitu"
 
-#: shell/cc-panel-loader.c:273
+#: shell/cc-panel-loader.c:308
 msgid "Available panels:"
 msgstr "Panel erabilgarriak:"
 
@@ -9579,6 +9618,18 @@ msgstr[1] "%u sarrera"
 #: subprojects/gvc/gvc-mixer-control.c:2882
 msgid "System Sounds"
 msgstr "Sistemaren soinuak"
+
+#~ msgid "Unable to find the domain. Maybe you misspelled it?"
+#~ msgstr "Ezin da domeinua aurkitu. Ongi idatzi duzu?"
+
+#~ msgid "_Enterprise Login"
+#~ msgstr "_Enpresako saio-hasiera"
+
+#~ msgid "User accounts which are managed by a company or organization"
+#~ msgstr "Enpresa edo erakunde batek kudeatzen dituen erabiltzaile-kontuak"
+
+#~ msgid "You are Offline"
+#~ msgstr "Deskonektatuta zaude"
 
 #~ msgid "Automatic suspend"
 #~ msgstr "Eseki automatikoki"
@@ -9874,9 +9925,6 @@ msgstr "Sistemaren soinuak"
 #~ "Erabiltzailea ezabatzen bada saioan sartuta dagoen bitartean, sistema "
 #~ "egoera inkoherentean utz daiteke."
 
-#~ msgid "Failed to contact the accounts service"
-#~ msgstr "Huts egin du kontuaren zerbitzuarekin kontaktatzean"
-
 #~ msgid "Please make sure that the AccountService is installed and enabled."
 #~ msgstr "Ziurtatu zaitez kontuen zerbitzua instalatuta eta gaituta dagoela."
 
@@ -10078,11 +10126,6 @@ msgstr "Sistemaren soinuak"
 
 #~ msgid "Connect to your data in the cloud"
 #~ msgstr "Konektatu zure datuak lainoan"
-
-#~ msgid "No internet connection — connect to set up new online accounts"
-#~ msgstr ""
-#~ "Ez dago Interneteko konexiorik — konektatu lineako kontu berriak "
-#~ "konfiguratzeko"
 
 #~ msgid "Add an account"
 #~ msgstr "Gehitu kontua"
