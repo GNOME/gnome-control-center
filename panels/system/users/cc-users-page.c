@@ -69,9 +69,7 @@ add_enterprise_user (CcUsersPage *self)
 {
     CcEnterpriseLoginDialog *dialog = cc_enterprise_login_dialog_new ();
 
-    gtk_window_set_transient_for (GTK_WINDOW (dialog),
-                                  GTK_WINDOW (gtk_widget_get_native (GTK_WIDGET (self))));
-    gtk_window_present (GTK_WINDOW (dialog));
+    adw_dialog_present (ADW_DIALOG (dialog), GTK_WIDGET (self));
 }
 
 static void

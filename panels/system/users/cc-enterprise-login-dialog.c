@@ -49,7 +49,7 @@
 
 struct _CcEnterpriseLoginDialog
 {
-  AdwWindow            parent_instance;
+  AdwDialog           parent_instance;
 
   AdwNavigationView   *navigation;
   AdwNavigationPage   *offline_page;
@@ -79,7 +79,7 @@ struct _CcEnterpriseLoginDialog
   GCancellable        *cancellable;
 };
 
-G_DEFINE_TYPE (CcEnterpriseLoginDialog, cc_enterprise_login_dialog, ADW_TYPE_WINDOW)
+G_DEFINE_TYPE (CcEnterpriseLoginDialog, cc_enterprise_login_dialog, ADW_TYPE_DIALOG)
 
 static void
 show_operation_progress (CcEnterpriseLoginDialog *self,
@@ -124,7 +124,7 @@ cache_user_cb (GObject      *source,
     {
       g_debug ("Successfully cached remote user: %s", act_user_get_user_name (user));
 
-      gtk_window_close (GTK_WINDOW (self));
+      adw_dialog_close (ADW_DIALOG (self));
     }
   else
     {
