@@ -18,49 +18,52 @@
  * Author: Matthias Clasen <mclasen@redhat.com>
  */
 
-#include "cc-camera-page.h"
+#include "cc-location-page.h"
 #include "cc-util.h"
 
 #include <gio/gdesktopappinfo.h>
 #include <glib/gi18n.h>
 
-#define APP_PERMISSIONS_TABLE "devices"
-#define APP_PERMISSIONS_ID "camera"
+#define LOCATION_ENABLED "enabled"
+#define APP_PERMISSIONS_TABLE "location"
+#define APP_PERMISSIONS_ID "location"
 
-struct _CcCameraPage
+struct _CcLocationPage
 {
   AdwNavigationPage parent_instance;
 
-  GtkListBox   *camera_apps_list_box;
-  AdwSwitchRow *camera_row;
+  GtkLabel     *privacy_policy_link;
 
-  GSettings    *privacy_settings;
+  GtkListBox   *location_apps_list_box;
+  AdwSwitchRow *location_row;
+
+  GSettings    *location_settings;
   GCancellable *cancellable;
 
   GDBusProxy   *perm_store;
-  GVariant     *camera_apps_perms;
-  GVariant     *camera_apps_data;
-  GHashTable   *camera_app_switches;
+  GVariant     *location_apps_perms;
+  GVariant     *location_apps_data;
+  GHashTable   *location_app_switches;
 
-  GtkSizeGroup *camera_icon_size_group;
+  GtkSizeGroup *location_icon_size_group;
 };
 
-G_DEFINE_TYPE (CcCameraPage, cc_camera_page, ADW_TYPE_NAVIGATION_PAGE)
+G_DEFINE_TYPE (CcLocationPage, cc_location_page, ADW_TYPE_NAVIGATION_PAGE)
 
 typedef struct
 {
-  CcCameraPage *self;
-  GtkWidget *widget;
-  gchar *app_id;
-  gboolean changing_state;
-  gboolean pending_state;
-} CameraAppStateData;
+  CcLocationPage *self;
+  GtkWidget      *widget;
+  gchar          *app_id;
+  gboolean        changing_state;
+  gboolean        pending_state;
+} LocationAppStateData;
 
 static void
-camera_app_state_data_free (CameraAppStateData *data)
+location_app_state_data_free (LocationAppStateData *data)
 {
     g_free (data->app_id);
-    g_slice_free (CameraAppStateData, data);
+    g_slice_free (LocationAppStateData, data);
 }
 
 static void
@@ -70,7 +73,7 @@ on_perm_store_set_done (GObject      *source_object,
 {
   g_autoptr(GVariant) results = NULL;
   g_autoptr(GError) error = NULL;
-  CameraAppStateData *data;
+  LocationAppStateData *data;
 
   results = g_dbus_proxy_call_finish (G_DBUS_PROXY (source_object),
                                       res,
@@ -79,58 +82,49 @@ on_perm_store_set_done (GObject      *source_object,
     {
       if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
         g_warning ("Failed to store permissions: %s", error->message);
+
       return;
     }
 
-  data = (CameraAppStateData *) user_data;
+  data = (LocationAppStateData *) user_data;
   data->changing_state = FALSE;
   gtk_switch_set_state (GTK_SWITCH (data->widget), data->pending_state);
 }
 
 static gboolean
-on_camera_app_state_set (GtkSwitch *widget,
-                         gboolean   state,
-                         gpointer   user_data)
+on_location_app_state_set (GtkSwitch *widget,
+                           gboolean   state,
+                           gpointer   user_data)
 {
-  CameraAppStateData *data = (CameraAppStateData *) user_data;
-  GVariantBuilder builder;
-  CcCameraPage *self;
-  GVariantIter iter;
+  LocationAppStateData *data = (LocationAppStateData *) user_data;
+  CcLocationPage *self = data->self;
   GVariant *params;
+  GVariantIter iter;
   const gchar *key;
   gchar **value;
-  gboolean active_camera;
-
-  self = data->self;
+  GVariantBuilder builder;
+  gboolean active_location;
 
   if (data->changing_state)
     return TRUE;
 
-  active_camera = !g_settings_get_boolean (self->privacy_settings,
-                                           "disable-camera");
+  active_location = g_settings_get_boolean (self->location_settings,
+                                            LOCATION_ENABLED);
   data->changing_state = TRUE;
-  data->pending_state = active_camera && state;
+  data->pending_state = active_location && state;
 
-  g_variant_iter_init (&iter, self->camera_apps_perms);
+  g_variant_iter_init (&iter, self->location_apps_perms);
   g_variant_builder_init (&builder, G_VARIANT_TYPE_ARRAY);
   while (g_variant_iter_loop (&iter, "{&s^a&s}", &key, &value))
     {
-      gchar *tmp = NULL;
-
       /* It's OK to drop the entry if it's not in expected format */
-      if (g_strv_length (value) != 1)
+      if (g_strv_length (value) < 2)
         continue;
 
       if (g_strcmp0 (data->app_id, key) == 0)
-        {
-          tmp = value[0];
-          value[0] = state ? "yes" : "no";
-        }
+        value[0] = state ? "EXACT" : "NONE";
 
       g_variant_builder_add (&builder, "{s^as}", key, value);
-
-      if (tmp != NULL)
-        value[0] = tmp;
     }
 
   params = g_variant_new ("(sbsa{sas}v)",
@@ -138,7 +132,7 @@ on_camera_app_state_set (GtkSwitch *widget,
                           TRUE,
                           APP_PERMISSIONS_ID,
                           &builder,
-                          self->camera_apps_data);
+                          self->location_apps_data);
 
   g_dbus_proxy_call (self->perm_store,
                      "Set",
@@ -158,13 +152,13 @@ update_app_switch_state (GValue   *value,
                          gpointer  data)
 {
   GtkSwitch *w = GTK_SWITCH (data);
-  gboolean active_camera;
+  gboolean active_location;
   gboolean active_app;
   gboolean state;
 
-  active_camera = !g_variant_get_boolean (variant);
+  active_location = g_variant_get_boolean (variant);
   active_app = gtk_switch_get_active (w);
-  state = active_camera && active_app;
+  state = active_location && active_app;
 
   g_value_set_boolean (value, state);
 
@@ -172,17 +166,20 @@ update_app_switch_state (GValue   *value,
 }
 
 static void
-add_camera_app (CcCameraPage *self,
-                const gchar  *app_id,
-                gboolean      enabled)
+add_location_app (CcLocationPage *self,
+                  const gchar    *app_id,
+                  gboolean        enabled,
+                  gint64          last_used)
 {
-  g_autofree gchar *desktop_id = NULL;
-  CameraAppStateData *data;
+  LocationAppStateData *data;
   GDesktopAppInfo *app_info;
+  GDateTime *t;
   GtkWidget *row, *w;
   GIcon *icon;
+  gchar *last_used_str;
+  gchar *desktop_id;
 
-  w = g_hash_table_lookup (self->camera_app_switches, app_id);
+  w = g_hash_table_lookup (self->location_app_switches, app_id);
   if (w != NULL)
     {
       gtk_switch_set_active (GTK_SWITCH (w), enabled);
@@ -191,21 +188,32 @@ add_camera_app (CcCameraPage *self,
 
   desktop_id = g_strdup_printf ("%s.desktop", app_id);
   app_info = g_desktop_app_info_new (desktop_id);
-  if (!app_info)
-    return;
+  g_free (desktop_id);
+  if (app_info == NULL)
+      return;
 
   row = adw_action_row_new ();
-  gtk_list_box_append (self->camera_apps_list_box, row);
+  gtk_list_box_append (self->location_apps_list_box, row);
 
   icon = g_app_info_get_icon (G_APP_INFO (app_info));
   w = gtk_image_new_from_gicon (icon);
   gtk_image_set_icon_size (GTK_IMAGE (w), GTK_ICON_SIZE_LARGE);
   gtk_widget_set_valign (w, GTK_ALIGN_CENTER);
-  gtk_size_group_add_widget (self->camera_icon_size_group, w);
+  gtk_size_group_add_widget (self->location_icon_size_group, w);
   adw_action_row_add_prefix (ADW_ACTION_ROW (row), w);
 
   adw_preferences_row_set_title (ADW_PREFERENCES_ROW (row),
                                  g_app_info_get_name (G_APP_INFO (app_info)));
+
+  t = g_date_time_new_from_unix_utc (last_used);
+  last_used_str = cc_util_get_smart_date (t);
+  w = gtk_label_new (last_used_str);
+  g_free (last_used_str);
+  gtk_widget_add_css_class (w, "dim-label");
+  gtk_widget_set_margin_start (w, 12);
+  gtk_widget_set_margin_end (w, 12);
+  gtk_widget_set_valign (w, GTK_ALIGN_CENTER);
+  adw_action_row_add_suffix (ADW_ACTION_ROW (row), w);
 
   w = gtk_switch_new ();
   gtk_switch_set_active (GTK_SWITCH (w), enabled);
@@ -213,8 +221,8 @@ add_camera_app (CcCameraPage *self,
   adw_action_row_add_suffix (ADW_ACTION_ROW (row), w);
   adw_action_row_set_activatable_widget (ADW_ACTION_ROW (row), w);
 
-  g_settings_bind_with_mapping (self->privacy_settings,
-                                "disable-camera",
+  g_settings_bind_with_mapping (self->location_settings,
+                                LOCATION_ENABLED,
                                 w,
                                 "state",
                                 G_SETTINGS_BIND_GET,
@@ -223,52 +231,55 @@ add_camera_app (CcCameraPage *self,
                                 g_object_ref (w),
                                 g_object_unref);
 
-  g_hash_table_insert (self->camera_app_switches,
+  g_hash_table_insert (self->location_app_switches,
                        g_strdup (app_id),
                        g_object_ref (w));
 
-  data = g_slice_new (CameraAppStateData);
+  data = g_slice_new (LocationAppStateData);
   data->self = self;
   data->app_id = g_strdup (app_id);
   data->widget = w;
   data->changing_state = FALSE;
-  g_signal_connect_data (G_OBJECT (w),
+  g_signal_connect_data (w,
                          "state-set",
-                         G_CALLBACK (on_camera_app_state_set),
+                         G_CALLBACK (on_location_app_state_set),
                          data,
-                         (GClosureNotify) camera_app_state_data_free,
+                         (GClosureNotify) location_app_state_data_free,
                          0);
 }
 
 /* Steals permissions and permissions_data references */
 static void
-update_perm_store (CcCameraPage *self,
-                   GVariant     *permissions,
-                   GVariant     *permissions_data)
+update_perm_store (CcLocationPage *self,
+                   GVariant       *permissions,
+                   GVariant       *permissions_data)
 {
   GVariantIter iter;
   const gchar *key;
   gchar **value;
 
-  g_clear_pointer (&self->camera_apps_perms, g_variant_unref);
-  self->camera_apps_perms = permissions;
-  g_clear_pointer (&self->camera_apps_data, g_variant_unref);
-  self->camera_apps_data = permissions_data;
+  g_clear_pointer (&self->location_apps_perms, g_variant_unref);
+  self->location_apps_perms = permissions;
+
+  g_clear_pointer (&self->location_apps_data, g_variant_unref);
+  self->location_apps_data = permissions_data;
 
   g_variant_iter_init (&iter, permissions);
   while (g_variant_iter_loop (&iter, "{&s^a&s}", &key, &value))
     {
       gboolean enabled;
+      gint64 last_used;
 
-      if (g_strv_length (value) != 1)
+      if (g_strv_length (value) < 2)
         {
           g_debug ("Permissions for %s in incorrect format, ignoring..", key);
           continue;
         }
 
-      enabled = (g_strcmp0 (value[0], "no") != 0);
+      enabled = (g_strcmp0 (value[0], "NONE") != 0);
+      last_used = g_ascii_strtoll (value[1], NULL, 10);
 
-      add_camera_app (self, key, enabled);
+      add_location_app (self, key, enabled, last_used);
     }
 }
 
@@ -290,13 +301,12 @@ on_perm_store_signal (GDBusProxy *proxy,
 }
 
 static void
-on_perm_store_lookup_done (GObject      *source_object,
-                           GAsyncResult *res,
-                           gpointer      user_data)
+on_perm_store_lookup_done(GObject *source_object,
+                          GAsyncResult *res,
+                          gpointer user_data)
 {
-  CcCameraPage *self = user_data;
-  GVariant *ret, *permissions, *permissions_data;
   g_autoptr(GError) error = NULL;
+  GVariant *ret, *permissions, *permissions_data;
 
   ret = g_dbus_proxy_call_finish (G_DBUS_PROXY (source_object),
                                   res,
@@ -304,7 +314,8 @@ on_perm_store_lookup_done (GObject      *source_object,
   if (ret == NULL)
     {
       if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
-        g_warning ("Failed fetch permissions from flatpak permission store: %s", error->message);
+        g_warning ("Failed fetch permissions from flatpak permission store: %s",
+                   error->message);
       return;
     }
 
@@ -315,7 +326,7 @@ on_perm_store_lookup_done (GObject      *source_object,
   g_signal_connect_object (source_object,
                            "g-signal",
                            G_CALLBACK (on_perm_store_signal),
-                           self,
+                           user_data,
                            0);
 }
 
@@ -324,16 +335,18 @@ on_perm_store_ready (GObject      *source_object,
                      GAsyncResult *res,
                      gpointer      user_data)
 {
-  CcCameraPage *self;
-  GVariant *params;
   g_autoptr(GError) error = NULL;
+  CcLocationPage *self;
   GDBusProxy *proxy;
+  GVariant *params;
 
   proxy = g_dbus_proxy_new_for_bus_finish (res, &error);
   if (proxy == NULL)
     {
       if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
-        g_warning ("Failed to connect to flatpak permission store: %s", error->message);
+          g_warning ("Failed to connect to flatpak permission store: %s",
+                     error->message);
+
       return;
     }
   self = user_data;
@@ -353,56 +366,64 @@ on_perm_store_ready (GObject      *source_object,
 }
 
 static void
-cc_camera_page_finalize (GObject *object)
+cc_location_page_finalize (GObject *object)
 {
-  CcCameraPage *self = CC_CAMERA_PAGE (object);
+  CcLocationPage *self = CC_LOCATION_PAGE (object);
 
   g_cancellable_cancel (self->cancellable);
   g_clear_object (&self->cancellable);
 
-  g_clear_object (&self->privacy_settings);
+  g_clear_object (&self->location_settings);
   g_clear_object (&self->perm_store);
-  g_clear_object (&self->camera_icon_size_group);
-  g_clear_pointer (&self->camera_apps_perms, g_variant_unref);
-  g_clear_pointer (&self->camera_apps_data, g_variant_unref);
-  g_clear_pointer (&self->camera_app_switches, g_hash_table_unref);
+  g_clear_object (&self->location_icon_size_group);
+  g_clear_pointer (&self->location_apps_perms, g_variant_unref);
+  g_clear_pointer (&self->location_apps_data, g_variant_unref);
+  g_clear_pointer (&self->location_app_switches, g_hash_table_unref);
 
-  G_OBJECT_CLASS (cc_camera_page_parent_class)->finalize (object);
+  G_OBJECT_CLASS (cc_location_page_parent_class)->finalize (object);
 }
 
 static void
-cc_camera_page_class_init (CcCameraPageClass *klass)
+cc_location_page_class_init (CcLocationPageClass *klass)
 {
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
-  object_class->finalize = cc_camera_page_finalize;
+  object_class->finalize = cc_location_page_finalize;
 
-  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/privacy/cc-camera-page.ui");
+  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/privacy/location/cc-location-page.ui");
 
-  gtk_widget_class_bind_template_child (widget_class, CcCameraPage, camera_apps_list_box);
-  gtk_widget_class_bind_template_child (widget_class, CcCameraPage, camera_row);
+  gtk_widget_class_bind_template_child (widget_class, CcLocationPage, privacy_policy_link);
+  gtk_widget_class_bind_template_child (widget_class, CcLocationPage, location_apps_list_box);
+  gtk_widget_class_bind_template_child (widget_class, CcLocationPage, location_row);
 }
 
 static void
-cc_camera_page_init (CcCameraPage *self)
+cc_location_page_init (CcLocationPage *self)
 {
+  g_autofree gchar *privacy_policy_link = NULL;
+
   gtk_widget_init_template (GTK_WIDGET (self));
 
-  self->camera_icon_size_group = gtk_size_group_new (GTK_SIZE_GROUP_BOTH);
-
-  self->privacy_settings = g_settings_new ("org.gnome.desktop.privacy");
+  self->location_icon_size_group = gtk_size_group_new (GTK_SIZE_GROUP_BOTH);
+  self->location_settings = g_settings_new ("org.gnome.system.location");
 
   self->cancellable = g_cancellable_new ();
 
-  g_settings_bind (self->privacy_settings, "disable-camera",
-                   self->camera_row, "active",
-                   G_SETTINGS_BIND_INVERT_BOOLEAN);
+  /* Translators: This will be presented as the text of a link to the privacy policy */
+  privacy_policy_link = g_strdup_printf ("<a href='https://location.services.mozilla.com/privacy'>%s</a>", _("Learn about what data is collected, and how it is used."));
+  gtk_label_set_label (GTK_LABEL (self->privacy_policy_link), privacy_policy_link);
 
-  self->camera_app_switches = g_hash_table_new_full (g_str_hash,
-                                                     g_str_equal,
-                                                     g_free,
-                                                     g_object_unref);
+  g_settings_bind (self->location_settings,
+                   LOCATION_ENABLED,
+                   self->location_row,
+                   "active",
+                   G_SETTINGS_BIND_DEFAULT);
+
+  self->location_app_switches = g_hash_table_new_full (g_str_hash,
+                                                       g_str_equal,
+                                                       g_free,
+                                                       g_object_unref);
 
   g_dbus_proxy_new_for_bus (G_BUS_TYPE_SESSION,
                             G_DBUS_PROXY_FLAGS_NONE,

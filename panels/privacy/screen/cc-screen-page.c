@@ -265,7 +265,7 @@ cc_screen_page_class_init (CcScreenPageClass *klass)
 
   g_type_ensure (CC_TYPE_SCREEN_PAGE_LOCK_AFTER);
   g_type_ensure (CC_TYPE_SCREEN_PAGE_BLANK_SCREEN_DELAY);
-  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/privacy/cc-screen-page.ui");
+  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/privacy/screen/cc-screen-page.ui");
 
   gtk_widget_class_bind_template_child (widget_class, CcScreenPage, automatic_screen_lock_row);
   gtk_widget_class_bind_template_child (widget_class, CcScreenPage, blank_screen_row);

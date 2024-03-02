@@ -18,62 +18,59 @@
  * Author: Matthias Clasen <mclasen@redhat.com>
  */
 
-#include "cc-location-page.h"
+#include "cc-microphone-page.h"
 #include "cc-util.h"
 
 #include <gio/gdesktopappinfo.h>
 #include <glib/gi18n.h>
 
-#define LOCATION_ENABLED "enabled"
-#define APP_PERMISSIONS_TABLE "location"
-#define APP_PERMISSIONS_ID "location"
+#define APP_PERMISSIONS_TABLE "devices"
+#define APP_PERMISSIONS_ID "microphone"
 
-struct _CcLocationPage
+struct _CcMicrophonePage
 {
   AdwNavigationPage parent_instance;
 
-  GtkLabel     *privacy_policy_link;
+  AdwSwitchRow *microphone_row;
+  GtkListBox   *microphone_apps_list_box;
 
-  GtkListBox   *location_apps_list_box;
-  AdwSwitchRow *location_row;
-
-  GSettings    *location_settings;
+  GSettings    *privacy_settings;
   GCancellable *cancellable;
 
   GDBusProxy   *perm_store;
-  GVariant     *location_apps_perms;
-  GVariant     *location_apps_data;
-  GHashTable   *location_app_switches;
+  GVariant     *microphone_apps_perms;
+  GVariant     *microphone_apps_data;
+  GHashTable   *microphone_app_switches;
 
-  GtkSizeGroup *location_icon_size_group;
+  GtkSizeGroup *microphone_icon_size_group;
 };
 
-G_DEFINE_TYPE (CcLocationPage, cc_location_page, ADW_TYPE_NAVIGATION_PAGE)
+G_DEFINE_TYPE (CcMicrophonePage, cc_microphone_page, ADW_TYPE_NAVIGATION_PAGE)
 
 typedef struct
 {
-  CcLocationPage *self;
-  GtkWidget      *widget;
-  gchar          *app_id;
-  gboolean        changing_state;
-  gboolean        pending_state;
-} LocationAppStateData;
+  CcMicrophonePage *self;
+  GtkWidget *widget;
+  gchar *app_id;
+  gboolean changing_state;
+  gboolean pending_state;
+} MicrophoneAppStateData;
 
 static void
-location_app_state_data_free (LocationAppStateData *data)
+microphone_app_state_data_free (MicrophoneAppStateData *data)
 {
     g_free (data->app_id);
-    g_slice_free (LocationAppStateData, data);
+    g_slice_free (MicrophoneAppStateData, data);
 }
 
 static void
-on_perm_store_set_done (GObject      *source_object,
+on_perm_store_set_done (GObject *source_object,
                         GAsyncResult *res,
-                        gpointer      user_data)
+                        gpointer user_data)
 {
-  g_autoptr(GVariant) results = NULL;
-  g_autoptr(GError) error = NULL;
-  LocationAppStateData *data;
+  MicrophoneAppStateData *data;
+  GVariant *results;
+  GError *error = NULL;
 
   results = g_dbus_proxy_call_finish (G_DBUS_PROXY (source_object),
                                       res,
@@ -82,47 +79,49 @@ on_perm_store_set_done (GObject      *source_object,
     {
       if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
         g_warning ("Failed to store permissions: %s", error->message);
+      g_error_free (error);
 
       return;
     }
+  g_variant_unref (results);
 
-  data = (LocationAppStateData *) user_data;
+  data = (MicrophoneAppStateData *) user_data;
   data->changing_state = FALSE;
   gtk_switch_set_state (GTK_SWITCH (data->widget), data->pending_state);
 }
 
 static gboolean
-on_location_app_state_set (GtkSwitch *widget,
+on_microphone_app_state_set (GtkSwitch *widget,
                            gboolean   state,
                            gpointer   user_data)
 {
-  LocationAppStateData *data = (LocationAppStateData *) user_data;
-  CcLocationPage *self = data->self;
+  MicrophoneAppStateData *data = (MicrophoneAppStateData *) user_data;
+  CcMicrophonePage *self = data->self;
   GVariant *params;
   GVariantIter iter;
   const gchar *key;
   gchar **value;
   GVariantBuilder builder;
-  gboolean active_location;
+  gboolean active_microphone;
 
   if (data->changing_state)
     return TRUE;
 
-  active_location = g_settings_get_boolean (self->location_settings,
-                                            LOCATION_ENABLED);
+  active_microphone = !g_settings_get_boolean (self->privacy_settings,
+                                               "disable-microphone");
   data->changing_state = TRUE;
-  data->pending_state = active_location && state;
+  data->pending_state = active_microphone && state;
 
-  g_variant_iter_init (&iter, self->location_apps_perms);
+  g_variant_iter_init (&iter, self->microphone_apps_perms);
   g_variant_builder_init (&builder, G_VARIANT_TYPE_ARRAY);
   while (g_variant_iter_loop (&iter, "{&s^a&s}", &key, &value))
     {
-      /* It's OK to drop the entry if it's not in expected format */
-      if (g_strv_length (value) < 2)
+      if (g_strv_length (value) != 1)
+        /* It's OK to drop the entry if it's not in expected format */
         continue;
 
       if (g_strcmp0 (data->app_id, key) == 0)
-        value[0] = state ? "EXACT" : "NONE";
+        value[0] = state ? "yes" : "no";
 
       g_variant_builder_add (&builder, "{s^as}", key, value);
     }
@@ -132,7 +131,7 @@ on_location_app_state_set (GtkSwitch *widget,
                           TRUE,
                           APP_PERMISSIONS_ID,
                           &builder,
-                          self->location_apps_data);
+                          self->microphone_apps_data);
 
   g_dbus_proxy_call (self->perm_store,
                      "Set",
@@ -152,37 +151,36 @@ update_app_switch_state (GValue   *value,
                          gpointer  data)
 {
   GtkSwitch *w = GTK_SWITCH (data);
-  gboolean active_location;
+  gboolean active_microphone;
   gboolean active_app;
   gboolean state;
 
-  active_location = g_variant_get_boolean (variant);
+  active_microphone = !g_variant_get_boolean (variant);
   active_app = gtk_switch_get_active (w);
-  state = active_location && active_app;
+  state = active_microphone && active_app;
 
   g_value_set_boolean (value, state);
 
   return TRUE;
 }
 
+
 static void
-add_location_app (CcLocationPage *self,
+add_microphone_app (CcMicrophonePage *self,
                   const gchar    *app_id,
-                  gboolean        enabled,
-                  gint64          last_used)
+                  gboolean        enabled)
 {
-  LocationAppStateData *data;
   GDesktopAppInfo *app_info;
-  GDateTime *t;
+  char *desktop_id;
   GtkWidget *row, *w;
   GIcon *icon;
-  gchar *last_used_str;
-  gchar *desktop_id;
+  MicrophoneAppStateData *data;
 
-  w = g_hash_table_lookup (self->location_app_switches, app_id);
+  w = g_hash_table_lookup (self->microphone_app_switches, app_id);
   if (w != NULL)
     {
       gtk_switch_set_active (GTK_SWITCH (w), enabled);
+
       return;
     }
 
@@ -193,36 +191,26 @@ add_location_app (CcLocationPage *self,
       return;
 
   row = adw_action_row_new ();
-  gtk_list_box_append (self->location_apps_list_box, row);
+  gtk_list_box_append (self->microphone_apps_list_box, row);
 
   icon = g_app_info_get_icon (G_APP_INFO (app_info));
   w = gtk_image_new_from_gicon (icon);
   gtk_image_set_icon_size (GTK_IMAGE (w), GTK_ICON_SIZE_LARGE);
   gtk_widget_set_valign (w, GTK_ALIGN_CENTER);
-  gtk_size_group_add_widget (self->location_icon_size_group, w);
+  gtk_size_group_add_widget (self->microphone_icon_size_group, w);
   adw_action_row_add_prefix (ADW_ACTION_ROW (row), w);
+  adw_action_row_set_activatable_widget (ADW_ACTION_ROW (row), w);
 
   adw_preferences_row_set_title (ADW_PREFERENCES_ROW (row),
                                  g_app_info_get_name (G_APP_INFO (app_info)));
-
-  t = g_date_time_new_from_unix_utc (last_used);
-  last_used_str = cc_util_get_smart_date (t);
-  w = gtk_label_new (last_used_str);
-  g_free (last_used_str);
-  gtk_widget_add_css_class (w, "dim-label");
-  gtk_widget_set_margin_start (w, 12);
-  gtk_widget_set_margin_end (w, 12);
-  gtk_widget_set_valign (w, GTK_ALIGN_CENTER);
-  adw_action_row_add_suffix (ADW_ACTION_ROW (row), w);
 
   w = gtk_switch_new ();
   gtk_switch_set_active (GTK_SWITCH (w), enabled);
   gtk_widget_set_valign (w, GTK_ALIGN_CENTER);
   adw_action_row_add_suffix (ADW_ACTION_ROW (row), w);
-  adw_action_row_set_activatable_widget (ADW_ACTION_ROW (row), w);
 
-  g_settings_bind_with_mapping (self->location_settings,
-                                LOCATION_ENABLED,
+  g_settings_bind_with_mapping (self->privacy_settings,
+                                "disable-microphone",
                                 w,
                                 "state",
                                 G_SETTINGS_BIND_GET,
@@ -231,55 +219,52 @@ add_location_app (CcLocationPage *self,
                                 g_object_ref (w),
                                 g_object_unref);
 
-  g_hash_table_insert (self->location_app_switches,
+  g_hash_table_insert (self->microphone_app_switches,
                        g_strdup (app_id),
                        g_object_ref (w));
 
-  data = g_slice_new (LocationAppStateData);
+  data = g_slice_new (MicrophoneAppStateData);
   data->self = self;
   data->app_id = g_strdup (app_id);
   data->widget = w;
   data->changing_state = FALSE;
-  g_signal_connect_data (w,
+  g_signal_connect_data (G_OBJECT (w),
                          "state-set",
-                         G_CALLBACK (on_location_app_state_set),
+                         G_CALLBACK (on_microphone_app_state_set),
                          data,
-                         (GClosureNotify) location_app_state_data_free,
+                         (GClosureNotify) microphone_app_state_data_free,
                          0);
 }
 
 /* Steals permissions and permissions_data references */
 static void
-update_perm_store (CcLocationPage *self,
-                   GVariant       *permissions,
-                   GVariant       *permissions_data)
+update_perm_store (CcMicrophonePage *self,
+                   GVariant *permissions,
+                   GVariant *permissions_data)
 {
   GVariantIter iter;
   const gchar *key;
   gchar **value;
 
-  g_clear_pointer (&self->location_apps_perms, g_variant_unref);
-  self->location_apps_perms = permissions;
-
-  g_clear_pointer (&self->location_apps_data, g_variant_unref);
-  self->location_apps_data = permissions_data;
+  g_clear_pointer (&self->microphone_apps_perms, g_variant_unref);
+  self->microphone_apps_perms = permissions;
+  g_clear_pointer (&self->microphone_apps_data, g_variant_unref);
+  self->microphone_apps_data = permissions_data;
 
   g_variant_iter_init (&iter, permissions);
   while (g_variant_iter_loop (&iter, "{&s^a&s}", &key, &value))
     {
       gboolean enabled;
-      gint64 last_used;
 
-      if (g_strv_length (value) < 2)
+      if (g_strv_length (value) != 1)
         {
-          g_debug ("Permissions for %s in incorrect format, ignoring..", key);
+          g_debug ("Permissions for %s in incorrect format, ignoring.", key);
           continue;
         }
 
-      enabled = (g_strcmp0 (value[0], "NONE") != 0);
-      last_used = g_ascii_strtoll (value[1], NULL, 10);
+      enabled = (g_strcmp0 (value[0], "no") != 0);
 
-      add_location_app (self, key, enabled, last_used);
+      add_microphone_app (self, key, enabled);
     }
 }
 
@@ -301,10 +286,11 @@ on_perm_store_signal (GDBusProxy *proxy,
 }
 
 static void
-on_perm_store_lookup_done(GObject *source_object,
-                          GAsyncResult *res,
-                          gpointer user_data)
+on_perm_store_lookup_done (GObject      *source_object,
+                           GAsyncResult *res,
+                           gpointer      user_data)
 {
+  CcMicrophonePage *self = user_data;
   g_autoptr(GError) error = NULL;
   GVariant *ret, *permissions, *permissions_data;
 
@@ -314,8 +300,7 @@ on_perm_store_lookup_done(GObject *source_object,
   if (ret == NULL)
     {
       if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
-        g_warning ("Failed fetch permissions from flatpak permission store: %s",
-                   error->message);
+        g_warning ("Failed fetch permissions from flatpak permission store: %s", error->message);
       return;
     }
 
@@ -326,7 +311,7 @@ on_perm_store_lookup_done(GObject *source_object,
   g_signal_connect_object (source_object,
                            "g-signal",
                            G_CALLBACK (on_perm_store_signal),
-                           user_data,
+                           self,
                            0);
 }
 
@@ -335,8 +320,8 @@ on_perm_store_ready (GObject      *source_object,
                      GAsyncResult *res,
                      gpointer      user_data)
 {
+  CcMicrophonePage *self;
   g_autoptr(GError) error = NULL;
-  CcLocationPage *self;
   GDBusProxy *proxy;
   GVariant *params;
 
@@ -344,9 +329,7 @@ on_perm_store_ready (GObject      *source_object,
   if (proxy == NULL)
     {
       if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
-          g_warning ("Failed to connect to flatpak permission store: %s",
-                     error->message);
-
+        g_warning ("Failed to connect to flatpak permission store: %s", error->message);
       return;
     }
   self = user_data;
@@ -366,61 +349,55 @@ on_perm_store_ready (GObject      *source_object,
 }
 
 static void
-cc_location_page_finalize (GObject *object)
+cc_microphone_page_finalize (GObject *object)
 {
-  CcLocationPage *self = CC_LOCATION_PAGE (object);
+  CcMicrophonePage *self = CC_MICROPHONE_PAGE (object);
 
   g_cancellable_cancel (self->cancellable);
   g_clear_object (&self->cancellable);
 
-  g_clear_object (&self->location_settings);
+  g_clear_object (&self->privacy_settings);
   g_clear_object (&self->perm_store);
-  g_clear_object (&self->location_icon_size_group);
-  g_clear_pointer (&self->location_apps_perms, g_variant_unref);
-  g_clear_pointer (&self->location_apps_data, g_variant_unref);
-  g_clear_pointer (&self->location_app_switches, g_hash_table_unref);
+  g_clear_object (&self->microphone_icon_size_group);
+  g_clear_pointer (&self->microphone_apps_perms, g_variant_unref);
+  g_clear_pointer (&self->microphone_apps_data, g_variant_unref);
+  g_clear_pointer (&self->microphone_app_switches, g_hash_table_unref);
 
-  G_OBJECT_CLASS (cc_location_page_parent_class)->finalize (object);
+  G_OBJECT_CLASS (cc_microphone_page_parent_class)->finalize (object);
 }
 
 static void
-cc_location_page_class_init (CcLocationPageClass *klass)
+cc_microphone_page_class_init (CcMicrophonePageClass *klass)
 {
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
-  object_class->finalize = cc_location_page_finalize;
+  object_class->finalize = cc_microphone_page_finalize;
 
-  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/privacy/cc-location-page.ui");
+  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/privacy/microphone/cc-microphone-page.ui");
 
-  gtk_widget_class_bind_template_child (widget_class, CcLocationPage, privacy_policy_link);
-  gtk_widget_class_bind_template_child (widget_class, CcLocationPage, location_apps_list_box);
-  gtk_widget_class_bind_template_child (widget_class, CcLocationPage, location_row);
+  gtk_widget_class_bind_template_child (widget_class, CcMicrophonePage, microphone_row);
+  gtk_widget_class_bind_template_child (widget_class, CcMicrophonePage, microphone_apps_list_box);
 }
 
 static void
-cc_location_page_init (CcLocationPage *self)
+cc_microphone_page_init (CcMicrophonePage *self)
 {
-  g_autofree gchar *privacy_policy_link = NULL;
-
   gtk_widget_init_template (GTK_WIDGET (self));
 
-  self->location_icon_size_group = gtk_size_group_new (GTK_SIZE_GROUP_BOTH);
-  self->location_settings = g_settings_new ("org.gnome.system.location");
+  self->microphone_icon_size_group = gtk_size_group_new (GTK_SIZE_GROUP_BOTH);
+
+  self->privacy_settings = g_settings_new ("org.gnome.desktop.privacy");
 
   self->cancellable = g_cancellable_new ();
 
-  /* Translators: This will be presented as the text of a link to the privacy policy */
-  privacy_policy_link = g_strdup_printf ("<a href='https://location.services.mozilla.com/privacy'>%s</a>", _("Learn about what data is collected, and how it is used."));
-  gtk_label_set_label (GTK_LABEL (self->privacy_policy_link), privacy_policy_link);
-
-  g_settings_bind (self->location_settings,
-                   LOCATION_ENABLED,
-                   self->location_row,
+  g_settings_bind (self->privacy_settings,
+                   "disable-microphone",
+                   self->microphone_row,
                    "active",
-                   G_SETTINGS_BIND_DEFAULT);
+                   G_SETTINGS_BIND_INVERT_BOOLEAN);
 
-  self->location_app_switches = g_hash_table_new_full (g_str_hash,
+  self->microphone_app_switches = g_hash_table_new_full (g_str_hash,
                                                        g_str_equal,
                                                        g_free,
                                                        g_object_unref);

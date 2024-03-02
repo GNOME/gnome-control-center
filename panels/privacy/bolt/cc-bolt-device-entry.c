@@ -25,7 +25,7 @@
 
 #include <glib/gi18n.h>
 
-#define RESOURCE_UI "/org/gnome/control-center/privacy/cc-bolt-device-entry.ui"
+#define RESOURCE_UI "/org/gnome/control-center/privacy/bolt/cc-bolt-device-entry.ui"
 
 struct _CcBoltDeviceEntry
 {

@@ -971,7 +971,7 @@ cc_bolt_page_class_init (CcBoltPageClass *klass)
   object_class->dispose = cc_bolt_page_dispose;
   object_class->finalize = cc_bolt_page_finalize;
 
-  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/privacy/cc-bolt-page.ui");
+  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/privacy/bolt/cc-bolt-page.ui");
 
   gtk_widget_class_bind_template_child (widget_class, CcBoltPage, authmode_spinner);
   gtk_widget_class_bind_template_child (widget_class, CcBoltPage, authmode_switch);

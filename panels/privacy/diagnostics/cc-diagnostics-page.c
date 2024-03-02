@@ -80,7 +80,7 @@ cc_diagnostics_page_class_init (CcDiagnosticsPageClass *klass)
 
   oclass->finalize = cc_diagnostics_page_finalize;
 
-  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/privacy/cc-diagnostics-page.ui");
+  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/privacy/diagnostics/cc-diagnostics-page.ui");
 
   gtk_widget_class_bind_template_child (widget_class, CcDiagnosticsPage, diagnostics_group);
   gtk_widget_class_bind_template_child (widget_class, CcDiagnosticsPage, abrt_row);

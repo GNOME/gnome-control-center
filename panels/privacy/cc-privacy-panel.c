@@ -23,17 +23,17 @@
 #include "cc-privacy-panel.h"
 
 #ifdef BUILD_THUNDERBOLT
-#include "cc-bolt-page.h"
+#include "bolt/cc-bolt-page.h"
 #endif
-#include "cc-camera-page.h"
-#include "cc-diagnostics-page.h"
-#include "cc-firmware-security-page.h"
+#include "camera/cc-camera-page.h"
+#include "diagnostics/cc-diagnostics-page.h"
+#include "firmware-security/cc-firmware-security-page.h"
 #include "cc-list-row.h"
-#include "cc-location-page.h"
-#include "cc-microphone-page.h"
+#include "location/cc-location-page.h"
+#include "microphone/cc-microphone-page.h"
 #include "cc-privacy-resources.h"
-#include "cc-screen-page.h"
-#include "cc-usage-page.h"
+#include "screen/cc-screen-page.h"
+#include "usage/cc-usage-page.h"
 
 struct _CcPrivacyPanel
 {

@@ -11,38 +11,38 @@ i18n.merge_file(
 )
 
 sources = files(
-  'cc-camera-page.c',
-  'cc-diagnostics-page.c',
-  'cc-firmware-security-boot-dialog.c',
-  'cc-firmware-security-dialog.c',
-  'cc-firmware-security-help-dialog.c',
-  'cc-firmware-security-page.c',
-  'cc-firmware-security-utils.c',
-  'cc-location-page.c',
-  'cc-microphone-page.c',
+  'camera/cc-camera-page.c',
+  'diagnostics/cc-diagnostics-page.c',
+  'firmware-security/cc-firmware-security-boot-dialog.c',
+  'firmware-security/cc-firmware-security-dialog.c',
+  'firmware-security/cc-firmware-security-help-dialog.c',
+  'firmware-security/cc-firmware-security-page.c',
+  'firmware-security/cc-firmware-security-utils.c',
+  'location/cc-location-page.c',
+  'microphone/cc-microphone-page.c',
   'cc-privacy-panel.c',
-  'cc-screen-page.c',
-  'cc-usage-page.c',
+  'screen/cc-screen-page.c',
+  'usage/cc-usage-page.c',
 )
 
 if host_is_linux_not_s390
   sources += files(
-    'bolt-client.c',
-    'bolt-device.c',
-    'bolt-enums.c',
-    'bolt-error.c',
-    'bolt-names.c',
-    'bolt-proxy.c',
-    'bolt-str.c',
-    'bolt-time.c',
-    'cc-bolt-device-dialog.c',
-    'cc-bolt-device-entry.c',
-    'cc-bolt-page.c',
+    'bolt/bolt-client.c',
+    'bolt/bolt-device.c',
+    'bolt/bolt-enums.c',
+    'bolt/bolt-error.c',
+    'bolt/bolt-names.c',
+    'bolt/bolt-proxy.c',
+    'bolt/bolt-str.c',
+    'bolt/bolt-time.c',
+    'bolt/cc-bolt-device-dialog.c',
+    'bolt/cc-bolt-device-entry.c',
+    'bolt/cc-bolt-page.c',
   )
 
   enum_headers = [
-    'bolt-enums.h',
-    'bolt-error.h'
+    'bolt/bolt-enums.h',
+    'bolt/bolt-error.h'
   ]
 
   sources += gnome.mkenums_simple(
@@ -54,12 +54,12 @@ endif
 
 sources += gnome.mkenums_simple(
   'cc-screen-page-enums',
-  sources: ['cc-screen-page.h'],
+  sources: ['screen/cc-screen-page.h'],
 )
 
 sources += gnome.mkenums_simple(
   'cc-usage-page-enums',
-  sources: ['cc-usage-page.h'],
+  sources: ['usage/cc-usage-page.h'],
 )
 
 sources += gnome.compile_resources(

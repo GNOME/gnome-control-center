@@ -225,7 +225,7 @@ static void
 on_hsi_detail_button_clicked_cb (CcFirmwareSecurityDialog *self)
 {
   GdkClipboard *clip_board;
-  GdkDisplay *display; 
+  GdkDisplay *display;
   g_autoptr (GList) hash_keys;
   g_autoptr (GString) result_str;
   g_autofree gchar *date_string = NULL;
@@ -238,7 +238,7 @@ on_hsi_detail_button_clicked_cb (CcFirmwareSecurityDialog *self)
   g_autofree gchar *cpu_model = NULL;
   const gchar *hsi_result;
   g_autoptr (GString) tmp_str;
-  
+
   GHashTable *hsi_dict = NULL;
 
   tmp_str = g_string_new (NULL);
@@ -316,7 +316,7 @@ on_hsi_detail_button_clicked_cb (CcFirmwareSecurityDialog *self)
           g_string_append_printf (result_str, "%i ", i);
           g_string_append (result_str, "Tests");
           g_string_append (result_str, "\n");
-        } 
+        }
       else
         {
           g_string_append (result_str, "Runtime Tests");
@@ -374,7 +374,7 @@ cc_firmware_security_dialog_class_init (CcFirmwareSecurityDialogClass *klass)
 
   gtk_widget_class_add_binding_action (widget_class, GDK_KEY_Escape, 0, "window.close", NULL);
 
-  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/privacy/cc-firmware-security-dialog.ui");
+  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/privacy/firmware-security/cc-firmware-security-dialog.ui");
 
   gtk_widget_class_bind_template_child (widget_class, CcFirmwareSecurityDialog, firmware_security_dialog_icon);
   gtk_widget_class_bind_template_child (widget_class, CcFirmwareSecurityDialog, firmware_security_dialog_title_label);
@@ -388,7 +388,7 @@ static void
 cc_firmware_security_dialog_init (CcFirmwareSecurityDialog *dialog)
 {
   gtk_widget_init_template (GTK_WIDGET (dialog));
-  load_custom_css ("/org/gnome/control-center/privacy/security-level.css");
+  load_custom_css ("/org/gnome/control-center/privacy/firmware-security/security-level.css");
 }
 
 GtkWidget *

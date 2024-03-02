@@ -60,7 +60,7 @@ static void     on_connect_button_clicked_cb (CcBoltDeviceDialog *dialog);
 
 G_DEFINE_TYPE (CcBoltDeviceDialog, cc_bolt_device_dialog, ADW_TYPE_WINDOW);
 
-#define RESOURCE_UI "/org/gnome/control-center/privacy/cc-bolt-device-dialog.ui"
+#define RESOURCE_UI "/org/gnome/control-center/privacy/bolt/cc-bolt-device-dialog.ui"
 
 static const char *
 status_to_string_for_ui (BoltDevice *dev)

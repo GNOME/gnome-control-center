@@ -679,7 +679,7 @@ cc_firmware_security_page_class_init (CcFirmwareSecurityPageClass *klass)
 
   object_class->finalize = cc_firmware_security_page_finalize;
 
-  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/privacy/cc-firmware-security-page.ui");
+  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/privacy/firmware-security/cc-firmware-security-page.ui");
 
   gtk_widget_class_bind_template_child (widget_class, CcFirmwareSecurityPage, firmware_security_log_pgroup);
   gtk_widget_class_bind_template_child (widget_class, CcFirmwareSecurityPage, firmware_security_log_stack);
@@ -713,7 +713,7 @@ cc_firmware_security_page_init (CcFirmwareSecurityPage *self)
   self->event_log_output = g_string_new (NULL);
   self->cancellable = g_cancellable_new ();
 
-  load_custom_css ("/org/gnome/control-center/privacy/security-level.css");
+  load_custom_css ("/org/gnome/control-center/privacy/firmware-security/security-level.css");
 
   g_dbus_proxy_new_for_bus (G_BUS_TYPE_SYSTEM,
                             G_DBUS_PROXY_FLAGS_NONE,

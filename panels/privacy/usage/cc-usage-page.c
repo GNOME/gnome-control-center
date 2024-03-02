@@ -358,7 +358,7 @@ cc_usage_page_class_init (CcUsagePageClass *klass)
 
   oclass->finalize = cc_usage_page_finalize;
 
-  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/privacy/cc-usage-page.ui");
+  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/privacy/usage/cc-usage-page.ui");
 
   gtk_widget_class_bind_template_child (widget_class, CcUsagePage, purge_after_combo);
   gtk_widget_class_bind_template_child (widget_class, CcUsagePage, purge_temp_row);
