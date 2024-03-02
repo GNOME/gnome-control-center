@@ -2,7 +2,6 @@
 <interface>
   <template class="CcDesktopSharingPage" parent="AdwBin">
     <property name="visible">False</property>
-
     <child>
       <object class="AdwToastOverlay" id="toast_overlay">
         <property name="child">
@@ -52,23 +51,15 @@
                       <class name="property"/>
                     </style>
                     <child type="suffix">
-                      <object class="GtkBox">
-                        <property name="spacing">10</property>
-                        <child>
-                          <object class="GtkButton" id="copy_address_button">
-                            <property name="tooltip-text" translatable="yes">Copy</property>
-                            <property name="valign">center</property>
-                            <property name="icon-name">edit-copy-symbolic</property>
-                            <signal name="clicked" handler="on_address_copy_clicked" swapped="yes"/>
-                            <accessibility>
-                              <property name="label" translatable="yes">Copy</property>
-                            </accessibility>
-                            <style>
-                              <class name="flat"/>
-                            </style>
-                          </object>
-                        </child>
-                     </object>
+                      <object class="GtkButton" id="copy_address_button">
+                        <property name="tooltip-text" translatable="yes">Copy</property>
+                        <property name="valign">center</property>
+                        <property name="icon-name">edit-copy-symbolic</property>
+                        <signal name="clicked" handler="on_address_copy_clicked" swapped="yes"/>
+                        <style>
+                          <class name="flat"/>
+                        </style>
+                      </object>
                     </child>
                   </object>
                 </child>
@@ -76,53 +67,37 @@
                   <object class="AdwActionRow" id="port_row">
                     <property name="title" translatable="yes">_Port</property>
                     <property name="use-underline">True</property>
-                    <property name="activatable-widget">copy_address_button</property>
+                    <property name="activatable-widget">copy_port_button</property>
                     <style>
                       <class name="property"/>
                     </style>
                     <child type="suffix">
-                      <object class="GtkBox">
-                        <property name="spacing">10</property>
-                        <child>
-                          <object class="GtkButton" id="copy_port_button">
-                            <property name="tooltip-text" translatable="yes">Copy</property>
-                            <property name="valign">center</property>
-                            <property name="icon-name">edit-copy-symbolic</property>
-                            <signal name="clicked" handler="on_port_copy_clicked" swapped="yes"/>
-                            <accessibility>
-                              <property name="label" translatable="yes">Copy</property>
-                            </accessibility>
-                            <style>
-                              <class name="flat"/>
-                            </style>
-                          </object>
-                        </child>
-                     </object>
+                      <object class="GtkButton" id="copy_port_button">
+                        <property name="tooltip-text" translatable="yes">Copy</property>
+                        <property name="valign">center</property>
+                        <property name="icon-name">edit-copy-symbolic</property>
+                        <signal name="clicked" handler="on_port_copy_clicked" swapped="yes"/>
+                        <style>
+                          <class name="flat"/>
+                        </style>
+                      </object>
                     </child>
                   </object>
                 </child>
               </object>
             </child>
-
             <child>
               <object class="AdwPreferencesGroup">
                 <property name="title" translatable="yes">Login Details</property>
-
                 <child>
                   <object class="AdwEntryRow" id="username_entry">
                     <property name="title" translatable="yes">Username</property>
-                    <style>
-                      <class name="property"/>
-                    </style>
                     <child type="suffix">
                       <object class="GtkButton">
                         <property name="tooltip-text" translatable="yes">Copy</property>
                         <property name="valign">center</property>
                         <property name="icon-name">edit-copy-symbolic</property>
                         <signal name="clicked" handler="on_username_copy_clicked" swapped="yes"/>
-                        <accessibility>
-                          <property name="label" translatable="yes">Copy</property>
-                        </accessibility>
                         <style>
                           <class name="flat"/>
                         </style>
@@ -130,22 +105,15 @@
                     </child>
                   </object>
                 </child>
-
                 <child>
                   <object class="AdwPasswordEntryRow" id="password_entry">
                     <property name="title" translatable="yes">Password</property>
-                    <style>
-                      <class name="property"/>
-                    </style>
                     <child type="suffix">
                       <object class="GtkButton">
                         <property name="tooltip-text" translatable="yes">Copy</property>
                         <property name="valign">center</property>
                         <property name="icon-name">edit-copy-symbolic</property>
                         <signal name="clicked" handler="on_password_copy_clicked" swapped="yes"/>
-                        <accessibility>
-                          <property name="label" translatable="yes">Copy</property>
-                        </accessibility>
                         <style>
                           <class name="flat"/>
                         </style>
@@ -153,37 +121,36 @@
                     </child>
                   </object>
                 </child>
-
                 <child>
                   <object class="GtkBox">
-                     <property name="spacing">10</property>
-                     <child>
-                       <object class="GtkButton" id="generate_password_button">
-                         <property name="sensitive">False</property>
-                         <property name="halign">left</property>
-                         <property name="margin-top">24</property>
-                         <property name="label" translatable="yes">_Generate New Password</property>
-                         <property name="use-underline">True</property>
-                         <signal name="clicked" handler="on_generate_password_button_clicked" swapped="yes"/>
-                       </object>
-                     </child>
-		     <child>
-                        <object class="GtkBox" id="spacer_box">
-                          <property name="visible">True</property>
-                          <property name="can-focus">False</property>
-                          <property name="hexpand">True</property>
-                        </object>
-                     </child>
-                     <child>
-                       <object class="GtkButton" id="verify_encryption_button">
-                         <property name="sensitive">False</property>
-                         <property name="halign">right</property>
-                         <property name="margin-top">24</property>
-                         <property name="label" translatable="yes">_Verify Encryption</property>
-                         <property name="use-underline">True</property>
-                         <signal name="clicked" handler="on_verify_encryption_button_clicked" swapped="yes"/>
-                       </object>
-                     </child>
+                    <property name="spacing">10</property>
+                    <child>
+                      <object class="GtkButton" id="generate_password_button">
+                        <property name="sensitive">False</property>
+                        <property name="halign">left</property>
+                        <property name="margin-top">24</property>
+                        <property name="label" translatable="yes">_Generate New Password</property>
+                        <property name="use-underline">True</property>
+                        <signal name="clicked" handler="on_generate_password_button_clicked" swapped="yes"/>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkBox" id="spacer_box">
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <property name="hexpand">True</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkButton" id="verify_encryption_button">
+                        <property name="sensitive">False</property>
+                        <property name="halign">right</property>
+                        <property name="margin-top">24</property>
+                        <property name="label" translatable="yes">_Verify Encryption</property>
+                        <property name="use-underline">True</property>
+                        <signal name="clicked" handler="on_verify_encryption_button_clicked" swapped="yes"/>
+                      </object>
+                    </child>
                   </object>
                 </child>
               </object>
