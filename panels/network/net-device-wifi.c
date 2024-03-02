@@ -1003,7 +1003,6 @@ static void
 show_qr_code_for_row (NetDeviceWifi *self, CcWifiConnectionRow *row, CcWifiConnectionList *list)
 {
         NMConnection *connection;
-        GtkNative *native;
         GtkWidget *dialog;
 
         connection = cc_wifi_connection_row_get_connection (row);
@@ -1012,9 +1011,7 @@ show_qr_code_for_row (NetDeviceWifi *self, CcWifiConnectionRow *row, CcWifiConne
         connection = NM_CONNECTION (nm_client_get_connection_by_id (self->client, nm_connection_get_id (connection)));
 
         dialog = cc_qr_code_dialog_new (connection);
-        native = gtk_widget_get_native (GTK_WIDGET (self));
-        gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (native));
-        gtk_window_present (GTK_WINDOW (dialog));
+        adw_dialog_present (ADW_DIALOG (dialog), GTK_WIDGET (self));
 }
 
 static void
