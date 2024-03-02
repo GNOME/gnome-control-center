@@ -26,8 +26,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2024-02-29 07:52+0000\n"
-"PO-Revision-Date: 2024-03-02 17:08+0200\n"
+"POT-Creation-Date: 2024-03-02 18:21+0000\n"
+"PO-Revision-Date: 2024-03-02 20:48+0200\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos+l10n@iki.fi>\n"
 "Language-Team: suomi <lokalisointi-lista@googlegroups.com>\n"
 "Language: fi\n"
@@ -1753,30 +1753,46 @@ msgstr "_Yövalo"
 msgid "Night Light"
 msgstr "Yövalo"
 
-#: panels/display/cc-display-settings.c:107
+#: panels/display/cc-display-settings.c:111
 msgctxt "Display rotation"
 msgid "Landscape"
 msgstr "Vaaka"
 
-#: panels/display/cc-display-settings.c:110
+#: panels/display/cc-display-settings.c:114
 msgctxt "Display rotation"
 msgid "Portrait Right"
 msgstr "Pysty oikea"
 
-#: panels/display/cc-display-settings.c:113
+#: panels/display/cc-display-settings.c:117
 msgctxt "Display rotation"
 msgid "Portrait Left"
 msgstr "Pysty vasen"
 
-#: panels/display/cc-display-settings.c:116
+#: panels/display/cc-display-settings.c:120
 msgctxt "Display rotation"
 msgid "Landscape (flipped)"
 msgstr "Vaaka (käännetty)"
 
-#: panels/display/cc-display-settings.c:177
+#: panels/display/cc-display-settings.c:181
 #, c-format
 msgid "%.2lf Hz"
 msgstr "%.2lf Hz"
+
+#. Translators:
+#. * 1. "Variable" is an adjective that refers to the refresh rate
+#. * 2. The formatting sequence is a range separated by an en-dash
+#. *    (unicode "\u2013"). For example: "Variable (48–144.97 Hz)"
+#.
+#: panels/display/cc-display-settings.c:198
+#, c-format
+msgid "Variable (%d–%.2lf Hz)"
+msgstr "Vaihteleva (%d–%.2lf Hz)"
+
+#. Translators: "Variable" is an adjective that refers to the refresh rate
+#: panels/display/cc-display-settings.c:205
+#, c-format
+msgid "Variable (up to %.2lf Hz)"
+msgstr "Vaihteleva (enintään %.2lf Hz)"
 
 #: panels/display/cc-display-settings.ui:33
 msgctxt "display setting"
@@ -1789,15 +1805,24 @@ msgid "_Resolution"
 msgstr "_Tarkkuus"
 
 #: panels/display/cc-display-settings.ui:49
+#: panels/display/cc-display-settings.ui:57
 msgid "R_efresh Rate"
 msgstr "P_äivitystaajuus"
 
-#: panels/display/cc-display-settings.ui:57
+#: panels/display/cc-display-settings.ui:66
+msgid "_Variable Refresh Rate"
+msgstr "Vai_hteleva päivitystaajuus"
+
+#: panels/display/cc-display-settings.ui:74
+msgid "Re_fresh Rate"
+msgstr "P_äivitystaajuus"
+
+#: panels/display/cc-display-settings.ui:84
 msgid "Adjust for _TV"
 msgstr "Sovita _TV:hen"
 
-#: panels/display/cc-display-settings.ui:65
-#: panels/display/cc-display-settings.ui:81
+#: panels/display/cc-display-settings.ui:92
+#: panels/display/cc-display-settings.ui:108
 msgctxt "display setting"
 msgid "_Scale"
 msgstr "S_kaalaus"
@@ -1990,13 +2015,12 @@ msgstr "Käynnistä internetselain"
 msgid "Home folder"
 msgstr "Kotikansio"
 
+#. Translators: this is a verb.
+#. Translators: "Search" should be phrased as a verb (in both "Name" and "Keywords" fields).
+#. Translators: this is a verb.
 #: panels/keyboard/01-launchers.xml.in:16
-#: panels/keyboard/cc-input-chooser.ui:50
 #: panels/printers/cc-printers-panel.ui:21
-#: panels/printers/new-printer-dialog.ui:210
-#: panels/search/gnome-search-panel.desktop.in:3
-#: panels/system/region/cc-format-chooser.ui:82 shell/cc-window.ui:28
-#: shell/cc-window.ui:30
+#: panels/search/gnome-search-panel.desktop.in:4 shell/cc-window.ui:28
 msgid "Search"
 msgstr "Haku"
 
@@ -2070,7 +2094,7 @@ msgstr "Muu"
 msgid "Add Input Source"
 msgstr "Lisää syötelähde"
 
-#: panels/keyboard/cc-input-chooser.ui:60
+#: panels/keyboard/cc-input-chooser.ui:57
 msgid "Input methods can’t be used on the login screen"
 msgstr "Syötemenetelmiä ei voi käyttää kirjautumisruudussa"
 
@@ -2718,7 +2742,7 @@ msgstr ""
 #: panels/network/connection-editor/ip6-page.ui:37
 #: panels/network/connection-editor/ip6-page.ui:197
 #: panels/network/connection-editor/ip6-page.ui:255
-#: panels/wacom/cc-wacom-page.c:613
+#: panels/wacom/cc-wacom-page.c:611
 msgid "Automatic"
 msgstr "Automaattinen"
 
@@ -2845,13 +2869,11 @@ msgstr "V_älityspalvelin"
 #.
 #: panels/network/cc-qr-code-dialog.c:140
 #, c-format
-#| msgid "Network Name"
 msgid "<b>Network Name</b>: %s"
 msgstr "<b>Verkon nimi</b>: %s"
 
 #: panels/network/cc-qr-code-dialog.c:145
 #, c-format
-#| msgid "Password:"
 msgid "<b>Password</b>: %s"
 msgstr "<b>Salasana</b>: %s"
 
@@ -2964,7 +2986,7 @@ msgstr "Verkon nimi"
 
 #. Translators: This is a password needed for printing.
 #: panels/network/cc-wifi-hotspot-dialog.ui:92
-#: panels/printers/new-printer-dialog.ui:296
+#: panels/printers/new-printer-dialog.ui:293
 #: panels/printers/pp-jobs-dialog.ui:54
 #: panels/system/users/cc-add-user-dialog.ui:150
 #: panels/wwan/cc-wwan-apn-dialog.ui:175
@@ -3828,7 +3850,6 @@ msgstr "Viimeksi käytetty"
 #. * thousands separator, so do not change to %d
 #: panels/network/net-device-ethernet.c:218
 #, c-format
-#| msgid "%d Mb/s"
 msgid "%'d Mb/s"
 msgstr "%'d Mb/s"
 
@@ -3857,7 +3878,6 @@ msgstr "_Kumoa"
 #. Translators: %d is the number of network connections deleted.
 #: panels/network/net-device-wifi.c:894
 #, c-format
-#| msgid "No network service"
 msgid "%d network deleted"
 msgid_plural "%d networks deleted"
 msgstr[0] "%d verkko poistettu"
@@ -4841,18 +4861,18 @@ msgstr "Tulostimia ei löytynyt"
 msgid "Enter a network address or search for a printer"
 msgstr "Kirjoita verkko-osoite tai etsi tulostinta"
 
-#: panels/printers/new-printer-dialog.ui:250
+#: panels/printers/new-printer-dialog.ui:247
 msgid "Authentication Required"
 msgstr "Tunnistautuminen vaaditaan"
 
-#: panels/printers/new-printer-dialog.ui:266
+#: panels/printers/new-printer-dialog.ui:263
 msgid "Enter username and password to view printers on Print Server"
 msgstr ""
 "Syötä käyttäjätunnus ja salasana nähdäksesi tulostuspalvelimella olevat "
 "tulostimet"
 
 #. Translators: This is a username on a print server.
-#: panels/printers/new-printer-dialog.ui:275
+#: panels/printers/new-printer-dialog.ui:272
 #: panels/printers/pp-jobs-dialog.ui:42 panels/wwan/cc-wwan-apn-dialog.ui:150
 msgid "Username"
 msgstr "Käyttäjätunnus"
@@ -6637,31 +6657,31 @@ msgstr "Sovellusten _haku"
 msgid "Include app-provided search results"
 msgstr "Sisällytä sovellusten tarjoamat hakutulokset"
 
-#: panels/search/cc-search-panel.ui:29
+#: panels/search/cc-search-panel.ui:23
 msgid "Search _Locations"
 msgstr "Haku_kohteet"
 
-#: panels/search/cc-search-panel.ui:30
+#: panels/search/cc-search-panel.ui:24
 msgid "Filesystem locations which are searched by system apps"
 msgstr ""
 "Tiedostojärjestelmän sijainnit, joista järjestelmäsovellukset suorittavat "
 "haun"
 
-#: panels/search/cc-search-panel.ui:39
+#: panels/search/cc-search-panel.ui:33
 msgid "Search Results"
 msgstr "Hakutulokset"
 
-#: panels/search/cc-search-panel.ui:40
+#: panels/search/cc-search-panel.ui:34
 msgid "Results are displayed according to the list order"
 msgstr "Tulokset näytetään tässä järjestyksessä"
 
-#: panels/search/gnome-search-panel.desktop.in:4
+#: panels/search/gnome-search-panel.desktop.in:5
 msgid "Control which apps show search results in the Activities Overview"
 msgstr ""
 "Valitse mitkä sovellukset näyttävät hakutuloksia Toiminnot-yleisnäkymässä"
 
 #. Translators: Search terms to find the Search panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
-#: panels/search/gnome-search-panel.desktop.in:15
+#: panels/search/gnome-search-panel.desktop.in:16
 msgid "Search;Find;Index;Hide;Privacy;Results;"
 msgstr ""
 "Search;Find;Index;Hide;Privacy;Results;Haku;Etsi;Indeksi;Piilota;Yksityisyys;"
@@ -6736,7 +6756,6 @@ msgid "_Require Password"
 msgstr "Vaa_di salasana"
 
 #: panels/sharing/cc-sharing-panel.ui:96
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:136
 #: panels/system/users/cc-enterprise-login-dialog.ui:114
 msgid "_Password"
 msgstr "_Salasana"
@@ -6903,7 +6922,6 @@ msgstr "_Hälytysääni"
 #. speaker position, like "Front Left" or "Rear Center".
 #: panels/sound/cc-speaker-test-button.c:218
 #, c-format
-#| msgid "Test Speakers"
 msgid "%s Speaker"
 msgstr "%s - kaiutin"
 
@@ -7036,7 +7054,6 @@ msgid "**Date generated:**"
 msgstr "**Luontipäivä:**"
 
 #: panels/system/about/cc-system-details-window.c:696
-#| msgid "Hardware Information"
 msgid "## Hardware Information:\n"
 msgstr "## Laitteistotiedot:\n"
 
@@ -7066,7 +7083,6 @@ msgid "**Disk Capacity:**"
 msgstr "**Levyn kapasiteetti:**"
 
 #: panels/system/about/cc-system-details-window.c:741
-#| msgid "Software Information"
 msgid "## Software Information:\n"
 msgstr "## Ohjelmistotiedot:\n"
 
@@ -7388,9 +7404,6 @@ msgstr "Kieli- ja aika-asetukset, järjestelmän tiedot"
 
 #. Translators: Search terms to find the System panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/system/gnome-system-panel.desktop.in:15
-#| msgid ""
-#| "device;system;information;hostname;memory;processor;version;default;"
-#| "application;preferred;cd;dvd;usb;audio;video;disc;removable;media;autorun;"
 msgid ""
 "device;system;information;details;hostname;memory;processor;version;software;"
 "operating;os;model;language;region;country;formats;numbers;units;clock;"
@@ -7413,23 +7426,23 @@ msgstr "Muotoilut"
 msgid "Search locales"
 msgstr "Etsi maa-asetustoja"
 
-#: panels/system/region/cc-format-chooser.ui:117
+#: panels/system/region/cc-format-chooser.ui:114
 msgid "Common Formats"
 msgstr "Yleiset muotoilut"
 
-#: panels/system/region/cc-format-chooser.ui:144
+#: panels/system/region/cc-format-chooser.ui:141
 msgid "All Formats"
 msgstr "Kaikki muotoilut"
 
-#: panels/system/region/cc-format-chooser.ui:192
+#: panels/system/region/cc-format-chooser.ui:189
 msgid "No Search Results"
 msgstr "Ei hakutuloksia"
 
-#: panels/system/region/cc-format-chooser.ui:204
+#: panels/system/region/cc-format-chooser.ui:201
 msgid "Searches can be for countries or languages"
 msgstr "Haut voivat kohdistua maihin tai kieliin"
 
-#: panels/system/region/cc-format-chooser.ui:240
+#: panels/system/region/cc-format-chooser.ui:237
 msgid "Preview"
 msgstr "Esikatselu"
 
@@ -7512,123 +7525,23 @@ msgstr "_Kieli"
 msgid "Fo_rmats"
 msgstr "_Muotoilut"
 
-#: panels/system/remote-desktop/cc-remote-desktop-page.c:418
-msgid "Device name copied"
-msgstr "Laitteen nimi kopioitu"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.c:429
-msgid "Device address copied"
-msgstr "Laiteosoite kopioitu"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.c:440
-msgid "Username copied"
-msgstr "Käyttäjätunnus kopioitu"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.c:451
-msgid "Password copied"
-msgstr "Salasana kopioitu"
-
-#. Translators: This will be presented as the text of a link to the documentation
-#: panels/system/remote-desktop/cc-remote-desktop-page.c:670
-msgid "learn how to use it"
-msgstr "lue miten voit käyttää sitä"
-
-#. Translators: %s is a link to the documentation with the label "learn how to use it"
-#: panels/system/remote-desktop/cc-remote-desktop-page.c:672
-#, c-format
-msgid ""
-"Remote desktop allows viewing and controlling your desktop from another "
-"computer – %s."
-msgstr ""
-"Etätyöpöytä mahdollistaa tietokoneen työpöydän katselun ja ohjaamisen "
-"toiselta tietokoneelta – %s."
-
 #: panels/system/remote-desktop/cc-remote-desktop-page.ui:4
 msgid "Remote Desktop"
 msgstr "Etätyöpöytä"
 
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:22
-msgid "Remote _Desktop"
-msgstr "Et_ätyöpöytä"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:24
-msgid "Enable or disable remote desktop connections to this computer"
-msgstr ""
-"Ota käyttöön tai poista käytöstä etätyöpöytäyhteydet tähän tietokoneeseen"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:30
-msgid "Remote _Control"
-msgstr "Etä_hallinta"
+#: panels/system/remote-desktop/cc-remote-desktop-page.ui:23
+msgid "Desktop Sharing"
+msgstr "Työpöydän jako"
 
 #: panels/system/remote-desktop/cc-remote-desktop-page.ui:32
-msgid "Allows remote connections to control the screen"
-msgstr "Sallii etäyhteyksien hallita näyttöä"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:40
-msgid "How to Connect"
-msgstr "Miten yhdistää"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:41
-msgid ""
-"Connect to this computer using the device name or remote desktop address"
-msgstr ""
-"Yhdistä tähän tietokoneeseen käyttäen laitenimeä tai etätyöpöydän osoitetta"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:45
-msgid "D_evice Name"
-msgstr "Laitt_een nimi"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:58
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:63
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:89
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:94
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:119
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:124
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:140
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:145
-#: panels/system/remote-login/cc-remote-login-page.ui:65
-msgid "Copy"
-msgstr "Kopioi"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:76
-msgid "Re_mote Desktop Address"
-msgstr "Etätyöpöytäosoite"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:110
-msgid "Authentication"
-msgstr "Tunnistautuminen"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:111
-msgid "The user name and password are required to connect to this computer"
-msgstr ""
-"Käyttäjätunnus ja salasana vaaditaan tähän tietokoneeseen yhdistämiseksi"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:115
-msgid "_User Name"
-msgstr "_Käyttäjätunnus"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:160
-msgid "_Verify Encryption"
-msgstr "Vahvista _salaus"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:196
-msgid "Encryption Fingerprint"
-msgstr "Salauksen sormenjälki"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:197
-msgid ""
-"The encryption fingerprint can be seen in connecting clients and should be "
-"identical"
-msgstr ""
-"Salauksen sormenjälki on näkyvissä yhdistäville asiakkaille ja sen pitäisi "
-"olla identtinen"
+msgid "Remote Login"
+msgstr "Etäkirjautuminen"
 
 #: panels/system/remote-login/cc-remote-login-page.c:53
 msgid "Command copied"
 msgstr "Komento kopioitu"
 
 #: panels/system/remote-login/cc-remote-login-page.ui:4
-#| msgid "Secure network"
 msgid "Secure Shell"
 msgstr "Secure Shell"
 
@@ -7639,6 +7552,10 @@ msgstr "Käytä tätä laitetta Secure Shell (SSH) -yhteydellä"
 #: panels/system/remote-login/cc-remote-login-page.ui:58
 msgid "SSH Login Command"
 msgstr "SSH-kirjautumiskomento"
+
+#: panels/system/remote-login/cc-remote-login-page.ui:65
+msgid "Copy"
+msgstr "Kopioi"
 
 #: panels/system/remote-login/org.gnome.controlcenter.remote-login-helper.policy.in.in:11
 msgid "Enable or disable remote login"
@@ -9048,20 +8965,20 @@ msgctxt "Wacom action-type"
 msgid "Show On-Screen Help"
 msgstr "Näytä ohjeet näytöllä"
 
-#: panels/wacom/cc-wacom-device.c:431
+#: panels/wacom/cc-wacom-device.c:430
 msgid "Tablet mounted on laptop panel"
 msgstr "Piirtopöytä kiinnitettynä kannettavan paneeliin"
 
-#: panels/wacom/cc-wacom-device.c:433
+#: panels/wacom/cc-wacom-device.c:432
 msgid "Tablet mounted on external display"
 msgstr "Piirtopöytä kiinnitettynä erilliseen näyttöön"
 
-#: panels/wacom/cc-wacom-device.c:435
+#: panels/wacom/cc-wacom-device.c:434
 msgid "External tablet device"
 msgstr "Ulkoinen piirtopöytälaite"
 
 #. All displays item
-#: panels/wacom/cc-wacom-page.c:600
+#: panels/wacom/cc-wacom-page.c:598
 msgid "All Displays"
 msgstr "Kaikki näytöt"
 
@@ -9100,7 +9017,7 @@ msgstr "Säilytä _kuvasuhde"
 msgid "Only use a portion of the tablet surface to keep monitor aspect ratio"
 msgstr "Käytä vain osaa piirtopöydän alasta säilyttääksesi näytön kuvasuhteen"
 
-#: panels/wacom/cc-wacom-page.ui:64
+#: panels/wacom/cc-wacom-page.ui:58
 msgid "_Calibrate"
 msgstr "_Kalibroi"
 
@@ -9821,19 +9738,19 @@ msgstr "Tuloksia ei löytynyt"
 msgid "Available panels:"
 msgstr "Käytettävissä olevat paneelit:"
 
-#: shell/cc-window.ui:42 shell/cc-window.ui:44
+#: shell/cc-window.ui:36
 msgid "Main Menu"
 msgstr "Päävalikko"
 
-#: shell/cc-window.ui:59
+#: shell/cc-window.ui:47
 msgid "Search settings"
 msgstr "Etsi asetuksia"
 
-#: shell/cc-window.ui:94
+#: shell/cc-window.ui:82
 msgid "Warning: Development Version"
 msgstr "Varoitus: kehitysversio"
 
-#: shell/cc-window.ui:95
+#: shell/cc-window.ui:83
 msgid ""
 "This version of Settings should only be used for development purposes. You "
 "may experience incorrect system behavior, data loss, and other unexpected "
@@ -9843,20 +9760,19 @@ msgstr ""
 "Saatat kohdata virheellistä järjestelmän toimintaa, tietojen menetystä tai "
 "muita odottamattomia ongelmia. "
 
-#: shell/cc-window.ui:99
+#: shell/cc-window.ui:87
 msgid "_OK"
 msgstr "_OK"
 
-#: shell/cc-window.ui:107
+#: shell/cc-window.ui:95
 msgid "_Keyboard Shortcuts"
 msgstr "_Pikanäppäimet"
 
-#: shell/cc-window.ui:111
+#: shell/cc-window.ui:99
 msgid "_Help"
 msgstr "_Ohje"
 
-#: shell/cc-window.ui:115
-#| msgid "Account Settings"
+#: shell/cc-window.ui:103
 msgid "_About Settings"
 msgstr "_Tietoja - Asetukset"
 
@@ -9961,6 +9877,80 @@ msgstr[1] "%u sisääntuloa"
 #: subprojects/gvc/gvc-mixer-control.c:2882
 msgid "System Sounds"
 msgstr "Järjestelmän äänet"
+
+#~ msgid "Device name copied"
+#~ msgstr "Laitteen nimi kopioitu"
+
+#~ msgid "Device address copied"
+#~ msgstr "Laiteosoite kopioitu"
+
+#~ msgid "Username copied"
+#~ msgstr "Käyttäjätunnus kopioitu"
+
+#~ msgid "Password copied"
+#~ msgstr "Salasana kopioitu"
+
+#~ msgid "learn how to use it"
+#~ msgstr "lue miten voit käyttää sitä"
+
+#, c-format
+#~ msgid ""
+#~ "Remote desktop allows viewing and controlling your desktop from another "
+#~ "computer – %s."
+#~ msgstr ""
+#~ "Etätyöpöytä mahdollistaa tietokoneen työpöydän katselun ja ohjaamisen "
+#~ "toiselta tietokoneelta – %s."
+
+#~ msgid "Remote _Desktop"
+#~ msgstr "Et_ätyöpöytä"
+
+#~ msgid "Enable or disable remote desktop connections to this computer"
+#~ msgstr ""
+#~ "Ota käyttöön tai poista käytöstä etätyöpöytäyhteydet tähän tietokoneeseen"
+
+#~ msgid "Remote _Control"
+#~ msgstr "Etä_hallinta"
+
+#~ msgid "Allows remote connections to control the screen"
+#~ msgstr "Sallii etäyhteyksien hallita näyttöä"
+
+#~ msgid "How to Connect"
+#~ msgstr "Miten yhdistää"
+
+#~ msgid ""
+#~ "Connect to this computer using the device name or remote desktop address"
+#~ msgstr ""
+#~ "Yhdistä tähän tietokoneeseen käyttäen laitenimeä tai etätyöpöydän "
+#~ "osoitetta"
+
+#~ msgid "D_evice Name"
+#~ msgstr "Laitt_een nimi"
+
+#~ msgid "Re_mote Desktop Address"
+#~ msgstr "Etätyöpöytäosoite"
+
+#~ msgid "Authentication"
+#~ msgstr "Tunnistautuminen"
+
+#~ msgid "The user name and password are required to connect to this computer"
+#~ msgstr ""
+#~ "Käyttäjätunnus ja salasana vaaditaan tähän tietokoneeseen yhdistämiseksi"
+
+#~ msgid "_User Name"
+#~ msgstr "_Käyttäjätunnus"
+
+#~ msgid "_Verify Encryption"
+#~ msgstr "Vahvista _salaus"
+
+#~ msgid "Encryption Fingerprint"
+#~ msgstr "Salauksen sormenjälki"
+
+#~ msgid ""
+#~ "The encryption fingerprint can be seen in connecting clients and should "
+#~ "be identical"
+#~ msgstr ""
+#~ "Salauksen sormenjälki on näkyvissä yhdistäville asiakkaille ja sen "
+#~ "pitäisi olla identtinen"
 
 #~ msgid "No Apps"
 #~ msgstr "Ei sovelluksia"
@@ -10152,9 +10142,6 @@ msgstr "Järjestelmän äänet"
 
 #~ msgid "_Remote Login"
 #~ msgstr "_Etäkirjautuminen"
-
-#~ msgid "Remote Login"
-#~ msgstr "Etäkirjautuminen"
 
 #~ msgid "_Accessibility Menu"
 #~ msgstr "_Esteettömyysvalikko"
