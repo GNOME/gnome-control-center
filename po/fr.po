@@ -39,15 +39,16 @@ msgstr ""
 "Project-Id-Version: gnome-control-center HEAD\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2024-02-22 09:48+0000\n"
-"PO-Revision-Date: 2024-02-16 13:19+0100\n"
-"Last-Translator: Alexandre Franke <afranke@gnome.org>\n"
+"POT-Creation-Date: 2024-02-29 07:52+0000\n"
+"PO-Revision-Date: 2024-03-01 17:34+0100\n"
+"Last-Translator: Irénée Thirion <irenee.thirion@e.email>\n"
 "Language-Team: GNOME French Team <gnomefr@traduc.org>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #: panels/applications/cc-applications-panel.c:783
 msgid "App is not sandboxed"
@@ -108,7 +109,7 @@ msgstr "Système de fichiers"
 
 #: panels/applications/cc-applications-panel.c:854
 #: panels/keyboard/01-launchers.xml.in:6
-#: shell/appdata/org.gnome.Settings.appdata.xml.in:7 shell/cc-window.c:760
+#: shell/appdata/org.gnome.Settings.appdata.xml.in:7 shell/cc-window.c:775
 #: shell/cc-window.ui:20 shell/org.gnome.Settings.desktop.in:3
 msgid "Settings"
 msgstr "Paramètres"
@@ -332,7 +333,7 @@ msgstr "L’accès au système qui est requis par l’application"
 #: panels/applications/cc-applications-panel.ui:409
 #: panels/mouse/cc-mouse-panel.ui:66
 #: panels/multitasking/cc-multitasking-panel.ui:15
-#: panels/power/cc-power-panel.ui:172
+#: panels/power/cc-power-panel.ui:171
 msgid "General"
 msgstr "Général"
 
@@ -1014,6 +1015,7 @@ msgstr "Étalonnage de l’écran"
 #: panels/sharing/cc-sharing-panel.c:239
 #: panels/system/region/cc-format-chooser.ui:24
 #: panels/system/users/cc-add-user-dialog.ui:25
+#: panels/system/users/cc-enterprise-login-dialog.ui:58
 #: panels/system/users/cc-avatar-chooser.c:92
 #: panels/system/users/cc-fingerprint-dialog.ui:32
 #: panels/system/users/cc-password-dialog.ui:21
@@ -1325,8 +1327,9 @@ msgstr "_Importer un fichier…"
 #: panels/color/cc-color-panel.ui:390 panels/keyboard/cc-input-chooser.ui:28
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:33
 #: panels/network/connection-editor/net-connection-editor.c:653
-#: panels/printers/new-printer-dialog.ui:91
+#: panels/printers/new-printer-dialog.ui:85
 #: panels/system/users/cc-add-user-dialog.ui:39
+#: panels/system/users/cc-enterprise-login-dialog.ui:66
 msgid "_Add"
 msgstr "_Ajouter"
 
@@ -2019,7 +2022,7 @@ msgstr "Dossier personnel"
 #: panels/keyboard/01-launchers.xml.in:16
 #: panels/keyboard/cc-input-chooser.ui:50
 #: panels/printers/cc-printers-panel.ui:21
-#: panels/printers/new-printer-dialog.ui:216
+#: panels/printers/new-printer-dialog.ui:210
 #: panels/search/gnome-search-panel.desktop.in:3
 #: panels/system/region/cc-format-chooser.ui:82 shell/cc-window.ui:28
 #: shell/cc-window.ui:30
@@ -2884,7 +2887,7 @@ msgid "<b>Password</b>: %s"
 msgstr "<b>Mot de _passe</b> : %s"
 
 #: panels/network/cc-qr-code-dialog.ui:9
-#: panels/network/cc-wifi-connection-row.ui:60
+#: panels/network/cc-wifi-connection-row.ui:53
 msgid "Share Network"
 msgstr "Partager le réseau"
 
@@ -2929,16 +2932,16 @@ msgid "Signal strength %d%%"
 msgstr "Force du signal %d%%"
 
 #. TRANSLATORS: device status
-#: panels/network/cc-wifi-connection-row.ui:41 panels/network/panel-common.c:63
+#: panels/network/cc-wifi-connection-row.ui:35 panels/network/panel-common.c:63
 msgid "Connected"
 msgstr "Connecté"
 
-#: panels/network/cc-wifi-connection-row.ui:73
+#: panels/network/cc-wifi-connection-row.ui:65
 #: panels/network/network-ethernet.ui:47
 msgid "Network Options"
 msgstr "Options du réseau"
 
-#: panels/network/cc-wifi-connection-row.ui:85
+#: panels/network/cc-wifi-connection-row.ui:76
 msgid "Forget Network"
 msgstr "Oublier le réseau"
 
@@ -2993,9 +2996,9 @@ msgstr "Nom du réseau"
 
 #. Translators: This is a password needed for printing.
 #: panels/network/cc-wifi-hotspot-dialog.ui:92
-#: panels/printers/new-printer-dialog.ui:302
+#: panels/printers/new-printer-dialog.ui:296
 #: panels/printers/pp-jobs-dialog.ui:54
-#: panels/system/users/cc-add-user-dialog.ui:152
+#: panels/system/users/cc-add-user-dialog.ui:150
 #: panels/wwan/cc-wwan-apn-dialog.ui:175
 msgid "Password"
 msgstr "Mot de passe"
@@ -3092,7 +3095,7 @@ msgstr "_Sécurité 802.1x"
 #: panels/network/connection-editor/bluetooth-page.ui:16
 #: panels/network/connection-editor/ethernet-page.ui:27
 #: panels/network/connection-editor/vpn-page.ui:23
-#: panels/system/users/cc-add-user-dialog.ui:68
+#: panels/system/users/cc-add-user-dialog.ui:66
 #: panels/system/users/cc-user-page.ui:84
 msgid "_Name"
 msgstr "_Nom"
@@ -4647,80 +4650,80 @@ msgstr "Périphériques connectés"
 msgid "Power Mode"
 msgstr "Mode d’énergie"
 
-#: panels/power/cc-power-panel.ui:127
+#: panels/power/cc-power-panel.ui:126
 msgid "Power Saving"
 msgstr "Économie d’énergie"
 
-#: panels/power/cc-power-panel.ui:130
+#: panels/power/cc-power-panel.ui:129
 msgid "A_utomatic Screen Brightness"
 msgstr "Luminosité de l’écran a_utomatique"
 
-#: panels/power/cc-power-panel.ui:131
+#: panels/power/cc-power-panel.ui:130
 msgid "Adjust screen brightness to the surrounding light"
 msgstr "La luminosité de l’écran s’adapte à la luminosité ambiante"
 
-#: panels/power/cc-power-panel.ui:138
+#: panels/power/cc-power-panel.ui:137
 msgid "_Dim Screen"
 msgstr "Écran as_sombri"
 
-#: panels/power/cc-power-panel.ui:139
+#: panels/power/cc-power-panel.ui:138
 msgid "Reduce screen brightness when the computer is inactive"
 msgstr "Réduit la luminosité de l’écran quand l’ordinateur est inactif"
 
-#: panels/power/cc-power-panel.ui:145
+#: panels/power/cc-power-panel.ui:144
 msgid "Screen _Blank"
 msgstr "Écran _noir"
 
-#: panels/power/cc-power-panel.ui:146
+#: panels/power/cc-power-panel.ui:145
 msgid "Turn the screen off after a period of inactivity"
 msgstr "Éteint l’écran après une période d’inactivité"
 
-#: panels/power/cc-power-panel.ui:154
+#: panels/power/cc-power-panel.ui:153
 msgid "Automatic Power _Saver"
 msgstr "É_conomie d’énergie automatique"
 
-#: panels/power/cc-power-panel.ui:155
+#: panels/power/cc-power-panel.ui:154
 msgid "Turn on power saver mode when battery power is low"
 msgstr ""
 "Activer le mode économie d’énergie quand le niveau de batterie est faible"
 
-#: panels/power/cc-power-panel.ui:162
+#: panels/power/cc-power-panel.ui:161
 msgid "_Automatic Suspend"
 msgstr "Mise en veille _automatique"
 
-#: panels/power/cc-power-panel.ui:163
+#: panels/power/cc-power-panel.ui:162
 msgid "Pause the computer after a period of inactivity"
 msgstr "Met l’ordinateur en pause après une période d’inactivité"
 
-#: panels/power/cc-power-panel.ui:176
+#: panels/power/cc-power-panel.ui:175
 msgid "Po_wer Button Behavior"
 msgstr "Action du bouton d’e_xtinction"
 
-#: panels/power/cc-power-panel.ui:184
+#: panels/power/cc-power-panel.ui:183
 msgid "Show Battery _Percentage"
 msgstr "Afficher le _pourcentage de batterie"
 
-#: panels/power/cc-power-panel.ui:185
+#: panels/power/cc-power-panel.ui:184
 msgid "Show exact charge level in the top bar"
 msgstr "Afficher l’état de charge exact dans la barre supérieure"
 
-#: panels/power/cc-power-panel.ui:198
+#: panels/power/cc-power-panel.ui:197
 msgid "Automatic Suspend"
 msgstr "Mise en veille automatique"
 
-#: panels/power/cc-power-panel.ui:227
+#: panels/power/cc-power-panel.ui:226
 msgid "On _Battery Power"
 msgstr "Sur _batterie"
 
-#: panels/power/cc-power-panel.ui:234
+#: panels/power/cc-power-panel.ui:233
 msgid "_Delay"
 msgstr "_Délai"
 
-#: panels/power/cc-power-panel.ui:252
+#: panels/power/cc-power-panel.ui:251
 msgid "_Plugged In"
 msgstr "_Câble branché"
 
-#: panels/power/cc-power-panel.ui:258
+#: panels/power/cc-power-panel.ui:257
 msgid "D_elay"
 msgstr "Dé_lai"
 
@@ -4785,37 +4788,37 @@ msgstr "L’ajout de la nouvelle imprimante a échoué."
 msgid "Unlock to add printers and change settings"
 msgstr "Déverrouiller pour ajouter des imprimantes et modifier les paramètres"
 
-#: panels/printers/cc-printers-panel.ui:30
+#: panels/printers/cc-printers-panel.ui:27
 msgid "All Connected and Network Printers"
 msgstr "Toutes les imprimantes connectées et en réseau"
 
 #. Translators: This button adds new printer.
 #. Translators: This button adds a new printer.
-#: panels/printers/cc-printers-panel.ui:34
-#: panels/printers/cc-printers-panel.ui:169
+#: panels/printers/cc-printers-panel.ui:31
+#: panels/printers/cc-printers-panel.ui:166
 msgid "_Add Printer…"
 msgstr "_Ajouter une imprimante…"
 
-#: panels/printers/cc-printers-panel.ui:52
+#: panels/printers/cc-printers-panel.ui:49
 msgid "Search printers"
 msgstr "Recherche d’imprimantes"
 
 #. Translators: This is the button which allows undoing the removal of the printer.
-#: panels/printers/cc-printers-panel.ui:81
+#: panels/printers/cc-printers-panel.ui:78
 msgid "Undo"
 msgstr "Annuler"
 
-#: panels/printers/cc-printers-panel.ui:166
+#: panels/printers/cc-printers-panel.ui:163
 msgid "No Printers"
 msgstr "Aucune imprimante"
 
 #. Translators: Title if the CUPS server is not running (we can not connect to it).
-#: panels/printers/cc-printers-panel.ui:191
+#: panels/printers/cc-printers-panel.ui:188
 msgid "No Print Service"
 msgstr "Aucun service d’impression"
 
 #. Translators: Description if the CUPS server is not running (we can not connect to it).
-#: panels/printers/cc-printers-panel.ui:192
+#: panels/printers/cc-printers-panel.ui:189
 msgid "The system printing service doesn’t seem to be available"
 msgstr "Le service d’impression du système ne semble pas être disponible"
 
@@ -4842,7 +4845,7 @@ msgstr "Imprimante;File;Queue;Impression;Papier;Encre;Toner;"
 msgid "Add Printer"
 msgstr "Ajouter une imprimante"
 
-#: panels/printers/new-printer-dialog.ui:69
+#: panels/printers/new-printer-dialog.ui:67
 #: panels/system/region/cc-format-chooser.ui:37
 #: panels/system/users/cc-fingerprint-dialog.ui:44
 #: panels/wwan/cc-wwan-apn-dialog.ui:21
@@ -4851,34 +4854,34 @@ msgstr "Précédent"
 
 #. Translators: This button opens authentication dialog for selected server.
 #. Translators: This buttons submits the credentials for the selected server.
-#: panels/printers/new-printer-dialog.ui:108
-#: panels/printers/new-printer-dialog.ui:123
+#: panels/printers/new-printer-dialog.ui:102
+#: panels/printers/new-printer-dialog.ui:117
 #: panels/wwan/cc-wwan-device-page.ui:38
 msgid "_Unlock"
 msgstr "_Déverrouiller"
 
 #. Translators: No printers were detected
-#: panels/printers/new-printer-dialog.ui:174
+#: panels/printers/new-printer-dialog.ui:168
 msgid "No Printers Found"
 msgstr "Aucune imprimante trouvée"
 
 #. Translators: The entered text should contain network address of a printer or a text which will filter found devices (their names and locations)
-#: panels/printers/new-printer-dialog.ui:211
+#: panels/printers/new-printer-dialog.ui:205
 msgid "Enter a network address or search for a printer"
 msgstr "Saisissez l’adresse d’un réseau ou recherchez une imprimante"
 
-#: panels/printers/new-printer-dialog.ui:256
+#: panels/printers/new-printer-dialog.ui:250
 msgid "Authentication Required"
 msgstr "Authentification requise"
 
-#: panels/printers/new-printer-dialog.ui:272
+#: panels/printers/new-printer-dialog.ui:266
 msgid "Enter username and password to view printers on Print Server"
 msgstr ""
 "Saisissez votre nom d’utilisateur et votre mot de passe pour afficher les "
 "imprimantes sur le serveur"
 
 #. Translators: This is a username on a print server.
-#: panels/printers/new-printer-dialog.ui:281
+#: panels/printers/new-printer-dialog.ui:275
 #: panels/printers/pp-jobs-dialog.ui:42 panels/wwan/cc-wwan-apn-dialog.ui:150
 msgid "Username"
 msgstr "Nom d’utilisateur"
@@ -6651,8 +6654,8 @@ msgstr "Emplacements de la recherche"
 #: panels/search/cc-search-locations-dialog.ui:19
 msgid "Filesystem locations which are searched by system apps, such as Files"
 msgstr ""
-"Emplacements du système de fichiers recherchés par les applications "
-"système, telles que Fichiers"
+"Emplacements du système de fichiers recherchés par les applications système, "
+"telles que Fichiers"
 
 #: panels/search/cc-search-locations-dialog.ui:22
 msgid "Default Locations"
@@ -6783,7 +6786,7 @@ msgstr "Demander le mot de _passe"
 
 #: panels/sharing/cc-sharing-panel.ui:96
 #: panels/system/remote-desktop/cc-remote-desktop-page.ui:136
-#: panels/system/users/cc-add-user-dialog.ui:373
+#: panels/system/users/cc-enterprise-login-dialog.ui:114
 msgid "_Password"
 msgstr "Mot de _passe"
 
@@ -7689,71 +7692,29 @@ msgid "Authentication is required to enable or disable remote login"
 msgstr ""
 "Authentification requise pour activer ou désactiver une connexion distante"
 
-#: panels/system/users/cc-add-user-dialog.c:36
-msgid "Should match the web address of your login provider."
-msgstr "Doit correspondre à l’adresse web de votre fournisseur d’accès."
-
-#: panels/system/users/cc-add-user-dialog.c:217
+#: panels/system/users/cc-add-user-dialog.c:159
 msgid "Failed to add account"
 msgstr "L’ajout du compte a échoué"
 
-#: panels/system/users/cc-add-user-dialog.c:668
+#: panels/system/users/cc-add-user-dialog.c:610
 msgid "The passwords do not match."
 msgstr "Les mots de passe ne concordent pas."
-
-#: panels/system/users/cc-add-user-dialog.c:866
-#: panels/system/users/cc-add-user-dialog.c:905
-#: panels/system/users/cc-add-user-dialog.c:923
-msgid "Failed to register account"
-msgstr "L’enregistrement du compte a échoué"
-
-#: panels/system/users/cc-add-user-dialog.c:1038
-msgid "No supported way to authenticate with this domain"
-msgstr "Impossible de s’authentifier auprès de ce domaine"
-
-#: panels/system/users/cc-add-user-dialog.c:1102
-msgid "Failed to join domain"
-msgstr "Impossible de joindre ce domaine"
-
-#: panels/system/users/cc-add-user-dialog.c:1157
-msgid ""
-"That login name didn’t work.\n"
-"Please try again."
-msgstr ""
-"Cet identifiant de connexion ne fonctionne pas.\n"
-"Veuillez réessayer."
-
-#: panels/system/users/cc-add-user-dialog.c:1164
-msgid ""
-"That login password didn’t work.\n"
-"Please try again."
-msgstr ""
-"Ce mot de passe de connexion ne fonctionne pas.\n"
-"Veuillez réessayer."
-
-#: panels/system/users/cc-add-user-dialog.c:1172
-msgid "Failed to log into domain"
-msgstr "La connexion à ce domaine a échoué"
-
-#: panels/system/users/cc-add-user-dialog.c:1227
-msgid "Unable to find the domain. Maybe you misspelled it?"
-msgstr "Impossible de trouver ce domaine. Vérifiez son orthographe."
 
 #: panels/system/users/cc-add-user-dialog.ui:13
 #: panels/system/users/data/join-dialog.ui:9
 msgid "Add User"
 msgstr "Ajouter un utilisateur"
 
-#: panels/system/users/cc-add-user-dialog.ui:95
-#: panels/system/users/cc-add-user-dialog.ui:351
+#: panels/system/users/cc-add-user-dialog.ui:93
+#: panels/system/users/cc-enterprise-login-dialog.ui:107
 msgid "_Username"
 msgstr "Nom d’_utilisateur"
 
-#: panels/system/users/cc-add-user-dialog.ui:133
+#: panels/system/users/cc-add-user-dialog.ui:131
 msgid "Ad_ministrator"
 msgstr "Ad_ministrateur"
 
-#: panels/system/users/cc-add-user-dialog.ui:138
+#: panels/system/users/cc-add-user-dialog.ui:136
 #: panels/system/users/cc-user-page.ui:141
 msgid ""
 "Administrators have extra abilities, including adding and removing users, "
@@ -7765,50 +7726,133 @@ msgstr ""
 "installer des logiciels. Les contrôles parentaux ne peuvent s’appliquer aux "
 "administrateurs."
 
-#: panels/system/users/cc-add-user-dialog.ui:156
+#: panels/system/users/cc-add-user-dialog.ui:154
 msgid "User sets password on _first login"
 msgstr "L’utilisateur dé_finit son mot de passe lors de la première connexion"
 
-#: panels/system/users/cc-add-user-dialog.ui:169
+#: panels/system/users/cc-add-user-dialog.ui:167
 msgid "Set password n_ow"
 msgstr "Définir un m_ot de passe maintenant"
 
-#: panels/system/users/cc-add-user-dialog.ui:189
+#: panels/system/users/cc-add-user-dialog.ui:187
 msgid "Pass_word"
 msgstr "Mot de _passe"
 
-#: panels/system/users/cc-add-user-dialog.ui:233
+#: panels/system/users/cc-add-user-dialog.ui:231
 msgid "_Confirm"
 msgstr "_Confirmer"
 
-#: panels/system/users/cc-add-user-dialog.ui:288
-msgid "_Enterprise Login"
-msgstr "Compte d’_entreprise"
+#: panels/system/users/cc-enterprise-login-dialog.c:133
+#: panels/system/users/cc-enterprise-login-dialog.c:171
+#: panels/system/users/cc-enterprise-login-dialog.c:186
+msgid "Failed to register account"
+msgstr "L’enregistrement du compte a échoué"
 
-#: panels/system/users/cc-add-user-dialog.ui:290
-msgid "User accounts which are managed by a company or organization"
+#: panels/system/users/cc-enterprise-login-dialog.c:240
+#: panels/system/users/cc-enterprise-login-dialog.c:411
+msgid "Failed to join domain"
+msgstr "Impossible de joindre ce domaine"
+
+#: panels/system/users/cc-enterprise-login-dialog.c:275
+msgid "No supported way to authenticate with this domain"
+msgstr "Impossible de s’authentifier auprès de ce domaine"
+
+#: panels/system/users/cc-enterprise-login-dialog.c:285
+#: panels/system/users/cc-enterprise-login-dialog.c:476
+msgid "That login name didn’t work"
+msgstr "Cet identifiant de connexion ne fonctionne pas"
+
+#: panels/system/users/cc-enterprise-login-dialog.c:292
+#: panels/system/users/cc-enterprise-login-dialog.c:483
+msgid "That login password didn’t work"
+msgstr "Ce mot de passe de connexion ne fonctionne pas"
+
+#: panels/system/users/cc-enterprise-login-dialog.c:299
+msgid "That hostname didn’t work"
+msgstr "Cet nom d’hôte ne fonctionne pas"
+
+#: panels/system/users/cc-enterprise-login-dialog.c:306
+#: panels/system/users/cc-enterprise-login-dialog.c:491
+msgid "Failed to log into domain"
+msgstr "La connexion à ce domaine a échoué"
+
+#. Translators: The "%s" is a domain address (e.g. "demo1.freeipa.org").
+#: panels/system/users/cc-enterprise-login-dialog.c:352
+#, c-format
+msgid ""
+"To add an enterprise login account, this device needs to be enrolled with "
+"<b>%s</b>. To enroll, have your domain administrator enter their name and "
+"password."
 msgstr ""
-"Les comptes des utilisateurs sont gérés par une entreprise ou une "
-"organisation"
+"Pour ajouter des identifiants d’entreprise, cet ordinateur doit être inscrit "
+"avec <b>%s</b>. Pour vous inscrire, veuillez demander à votre administrateur "
+"de domaine de saisir son nom et son mot de passe."
 
-#: panels/system/users/cc-add-user-dialog.ui:307
+#: panels/system/users/cc-enterprise-login-dialog.c:538
+msgid "Valid domain"
+msgstr "Domaine valide"
+
+#: panels/system/users/cc-enterprise-login-dialog.c:542
+msgid "Domain not found"
+msgstr "Domaine non trouvé"
+
+#: panels/system/users/cc-enterprise-login-dialog.c:585
+msgid "Checking domain…"
+msgstr "Vérification du domaine…"
+
+#: panels/system/users/cc-enterprise-login-dialog.c:629
+msgid "Failed to contact realmd service"
+msgstr "Échec du contact du service realmd"
+
+#: panels/system/users/cc-enterprise-login-dialog.ui:28
+#: panels/system/users/cc-enterprise-login-dialog.ui:48
+msgid "Add Enterprise Login"
+msgstr "Ajouter un compte d’entreprise"
+
+#: panels/system/users/cc-enterprise-login-dialog.ui:37
+msgid "Offline"
+msgstr "Hors ligne"
+
+#: panels/system/users/cc-enterprise-login-dialog.ui:38
+msgid "A network connection is needed to add enterprise login accounts."
+msgstr ""
+"Une connexion réseau est nécessaire pour ajouter des comptes d’entreprise."
+
+#: panels/system/users/cc-enterprise-login-dialog.ui:84
+msgid ""
+"Enterprise login allows an existing centrally managed account to be used on "
+"this device."
+msgstr ""
+"Un compte d’entreprise autorise l’usage d’un compte utilisateur centralisé à "
+"partir de ce périphérique."
+
+#: panels/system/users/cc-enterprise-login-dialog.ui:89
 #: panels/system/users/data/join-dialog.ui:90
 msgid "_Domain"
 msgstr "_Domaine"
 
-#: panels/system/users/cc-add-user-dialog.ui:396
-msgid "You are Offline"
-msgstr "Vous êtes hors ligne"
+#: panels/system/users/cc-enterprise-login-dialog.ui:97
+msgid "Should match the web domain of the account provider"
+msgstr "Doit correspondre au domaine web de votre fournisseur du compte"
 
-#: panels/system/users/cc-add-user-dialog.ui:397
-msgid ""
-"Enterprise login allows an existing centrally managed user account to be "
-"used on this device. You can also use this account to access company "
-"resources on the internet."
-msgstr ""
-"Un compte d’entreprise autorise l’usage d’un compte utilisateur centralisé à "
-"partir de ce périphérique. Il permet aussi d’accéder aux différents sites de "
-"la compagnie présents sur Internet."
+#: panels/system/users/cc-enterprise-login-dialog.ui:130
+msgid "Enroll Device"
+msgstr "Inscrire l’appareil"
+
+#. Translators: This button enrolls the computer in the domain in order to use enterprise logins.
+#: panels/system/users/cc-enterprise-login-dialog.ui:140
+#: panels/system/users/data/join-dialog.ui:30
+msgid "_Enroll"
+msgstr "_Inscrire"
+
+#: panels/system/users/cc-enterprise-login-dialog.ui:162
+#: panels/system/users/data/join-dialog.ui:112
+msgid "Administrator _Name"
+msgstr "_Nom de l’administrateur"
+
+#: panels/system/users/cc-enterprise-login-dialog.ui:169
+msgid "Administrator _Password"
+msgstr "Mot de _passe de l’administrateur"
 
 #: panels/system/users/cc-avatar-chooser.c:162
 msgid "Browse for more pictures"
@@ -8092,17 +8136,17 @@ msgstr "Impossible de rejoindre ce type de domaine automatiquement"
 msgid "No such domain or realm found"
 msgstr "Aucun domaine trouvé"
 
-#: panels/system/users/cc-realm-manager.c:712
-#: panels/system/users/cc-realm-manager.c:726
+#: panels/system/users/cc-realm-manager.c:721
+#: panels/system/users/cc-realm-manager.c:735
 #, c-format
 msgid "Cannot log in as %s at the %s domain"
 msgstr "Impossible de se connecter en tant que %s au domaine %s"
 
-#: panels/system/users/cc-realm-manager.c:718
+#: panels/system/users/cc-realm-manager.c:727
 msgid "Invalid password, please try again"
 msgstr "Mot de passe non valide, essayez à nouveau"
 
-#: panels/system/users/cc-realm-manager.c:731
+#: panels/system/users/cc-realm-manager.c:740
 #, c-format
 msgid "Couldn’t connect to the %s domain: %s"
 msgstr "Connexion au domaine %s impossible : %s"
@@ -8201,10 +8245,9 @@ msgstr "Autres utilisateurs"
 msgid "_Add User…"
 msgstr "_Ajouter un utilisateur…"
 
-#. Translators: This button enrolls the computer in the domain in order to use enterprise logins.
-#: panels/system/users/data/join-dialog.ui:30
-msgid "_Enroll"
-msgstr "_Inscrire"
+#: panels/system/users/cc-users-page.ui:47
+msgid "Add Enterprise User"
+msgstr "Ajouter un utilisateur d’entreprise"
 
 #: panels/system/users/data/join-dialog.ui:59
 msgid "Domain Administrator Login"
@@ -8219,10 +8262,6 @@ msgstr ""
 "Pour utiliser des identifiants d’entreprise, cet ordinateur doit\n"
 "être inscrit au domaine. Veuillez demander à votre administrateur\n"
 "réseau de saisir son mot de passe du domaine ici."
-
-#: panels/system/users/data/join-dialog.ui:112
-msgid "Administrator _Name"
-msgstr "_Nom de l’administrateur"
 
 #: panels/system/users/data/join-dialog.ui:135
 msgid "Administrator Password"
@@ -9837,7 +9876,7 @@ msgstr "Catégories de paramètres"
 msgid "No Results Found"
 msgstr "Aucun résultat trouvé"
 
-#: shell/cc-panel-loader.c:273
+#: shell/cc-panel-loader.c:308
 msgid "Available panels:"
 msgstr "Volets disponibles :"
 
@@ -9982,3 +10021,17 @@ msgstr[1] "%u entrées"
 #: subprojects/gvc/gvc-mixer-control.c:2882
 msgid "System Sounds"
 msgstr "Sons système"
+
+#~ msgid "Unable to find the domain. Maybe you misspelled it?"
+#~ msgstr "Impossible de trouver ce domaine. Vérifiez son orthographe."
+
+#~ msgid "_Enterprise Login"
+#~ msgstr "Compte d’_entreprise"
+
+#~ msgid "User accounts which are managed by a company or organization"
+#~ msgstr ""
+#~ "Les comptes des utilisateurs sont gérés par une entreprise ou une "
+#~ "organisation"
+
+#~ msgid "You are Offline"
+#~ msgstr "Vous êtes hors ligne"
