@@ -561,7 +561,7 @@ on_got_rdp_credentials (GObject      *source_object,
                         gpointer      user_data)
 {
   CcRemoteSessionPage *self = user_data;
-  gboolean got_credentials;
+  gboolean got_credentials, has_fingerprint;
   g_autoptr(GVariant) credentials = NULL;
   g_autoptr(GError) error = NULL;
   const gchar *fingerprint;
@@ -598,7 +598,13 @@ on_got_rdp_credentials (GObject      *source_object,
 
   /* Fetch TLS certificate fingerprint */
   fingerprint = gsd_remote_desktop_rdp_server_get_tls_fingerprint (self->rdp_server);
-  if (fingerprint)
+
+  if (fingerprint && strlen (fingerprint) > 0)
+     has_fingerprint = TRUE;
+  else
+     has_fingerprint = FALSE;
+
+  if (has_fingerprint)
     {
       self->fingerprint_dialog = g_object_new (CC_TYPE_ENCRYPTION_FINGERPRINT_DIALOG, NULL);
 
@@ -607,7 +613,7 @@ on_got_rdp_credentials (GObject      *source_object,
       cc_encryption_fingerprint_dialog_set_fingerprint (self->fingerprint_dialog, fingerprint, ":");
     }
 
-    gtk_widget_set_sensitive (self->verify_encryption_button, fingerprint != NULL);
+  gtk_widget_set_sensitive (self->verify_encryption_button, has_fingerprint);
 }
 
 static void
