@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: amberol\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/issues\n"
-"POT-Creation-Date: 2024-02-29 07:52+0000\n"
-"PO-Revision-Date: 2024-02-29 23:25+0330\n"
+"POT-Creation-Date: 2024-03-02 18:21+0000\n"
+"PO-Revision-Date: 2024-03-02 23:26+0330\n"
 "Last-Translator: Danial Behzadi <dani.behzi@ubuntu.com>\n"
 "Language-Team: Farsi\n"
 "Language: fa\n"
@@ -1693,30 +1693,46 @@ msgstr "نور _شب"
 msgid "Night Light"
 msgstr "نور شب"
 
-#: panels/display/cc-display-settings.c:107
+#: panels/display/cc-display-settings.c:111
 msgctxt "Display rotation"
 msgid "Landscape"
 msgstr "افقی"
 
-#: panels/display/cc-display-settings.c:110
+#: panels/display/cc-display-settings.c:114
 msgctxt "Display rotation"
 msgid "Portrait Right"
 msgstr "عمودی راست"
 
-#: panels/display/cc-display-settings.c:113
+#: panels/display/cc-display-settings.c:117
 msgctxt "Display rotation"
 msgid "Portrait Left"
 msgstr "عمودی چپ"
 
-#: panels/display/cc-display-settings.c:116
+#: panels/display/cc-display-settings.c:120
 msgctxt "Display rotation"
 msgid "Landscape (flipped)"
 msgstr "افقی (معکوس)"
 
-#: panels/display/cc-display-settings.c:177
+#: panels/display/cc-display-settings.c:181
 #, c-format
 msgid "%.2lf Hz"
 msgstr "%.2lf هرتز"
+
+#. Translators:
+#. * 1. "Variable" is an adjective that refers to the refresh rate
+#. * 2. The formatting sequence is a range separated by an en-dash
+#. *    (unicode "\u2013"). For example: "Variable (48–144.97 Hz)"
+#.
+#: panels/display/cc-display-settings.c:198
+#, c-format
+msgid "Variable (%d–%.2lf Hz)"
+msgstr "متغیّر (%Id–%I.2lf ه)"
+
+#. Translators: "Variable" is an adjective that refers to the refresh rate
+#: panels/display/cc-display-settings.c:205
+#, c-format
+msgid "Variable (up to %.2lf Hz)"
+msgstr "متغیّر (تا %I.2lf ه)"
 
 #: panels/display/cc-display-settings.ui:33
 msgctxt "display setting"
@@ -1728,15 +1744,23 @@ msgctxt "display setting"
 msgid "_Resolution"
 msgstr "_تفکیک‌پذیری"
 
-#: panels/display/cc-display-settings.ui:49
+#: panels/display/cc-display-settings.ui:49 panels/display/cc-display-settings.ui:57
 msgid "R_efresh Rate"
 msgstr "_آهنگ نوسازی"
 
-#: panels/display/cc-display-settings.ui:57
+#: panels/display/cc-display-settings.ui:66
+msgid "_Variable Refresh Rate"
+msgstr "آهنگ نوسازی _متغیّر"
+
+#: panels/display/cc-display-settings.ui:74
+msgid "Re_fresh Rate"
+msgstr "_آهنگ نوسازی"
+
+#: panels/display/cc-display-settings.ui:84
 msgid "Adjust for _TV"
 msgstr "تنظیم برای _تلویزیون"
 
-#: panels/display/cc-display-settings.ui:65 panels/display/cc-display-settings.ui:81
+#: panels/display/cc-display-settings.ui:92 panels/display/cc-display-settings.ui:108
 msgctxt "display setting"
 msgid "_Scale"
 msgstr "_مقیاس کردن"
@@ -1927,11 +1951,11 @@ msgstr "راه‌اندازی مرورگر وب"
 msgid "Home folder"
 msgstr "پوشه‌ٔ خانه"
 
-#: panels/keyboard/01-launchers.xml.in:16 panels/keyboard/cc-input-chooser.ui:50
-#: panels/printers/cc-printers-panel.ui:21 panels/printers/new-printer-dialog.ui:210
-#: panels/search/gnome-search-panel.desktop.in:3
-#: panels/system/region/cc-format-chooser.ui:82 shell/cc-window.ui:28
-#: shell/cc-window.ui:30
+#. Translators: this is a verb.
+#. Translators: "Search" should be phrased as a verb (in both "Name" and "Keywords" fields).
+#. Translators: this is a verb.
+#: panels/keyboard/01-launchers.xml.in:16 panels/printers/cc-printers-panel.ui:21
+#: panels/search/gnome-search-panel.desktop.in:4 shell/cc-window.ui:28
 msgid "Search"
 msgstr "جست‌وجو"
 
@@ -2003,7 +2027,7 @@ msgstr "موارد دیگر"
 msgid "Add Input Source"
 msgstr "افزودن منبع ورودی"
 
-#: panels/keyboard/cc-input-chooser.ui:60
+#: panels/keyboard/cc-input-chooser.ui:57
 msgid "Input methods can’t be used on the login screen"
 msgstr "روش‌های ورودی نمی‌توانند در صفحهٔ ورود استفاده شوند"
 
@@ -2631,7 +2655,7 @@ msgstr ""
 #: panels/network/connection-editor/ip4-page.ui:244
 #: panels/network/connection-editor/ip6-page.ui:37
 #: panels/network/connection-editor/ip6-page.ui:197
-#: panels/network/connection-editor/ip6-page.ui:255 panels/wacom/cc-wacom-page.c:613
+#: panels/network/connection-editor/ip6-page.ui:255 panels/wacom/cc-wacom-page.c:611
 msgid "Automatic"
 msgstr "خودکار"
 
@@ -2866,7 +2890,7 @@ msgstr "نام شبکه"
 
 #. Translators: This is a password needed for printing.
 #: panels/network/cc-wifi-hotspot-dialog.ui:92
-#: panels/printers/new-printer-dialog.ui:296 panels/printers/pp-jobs-dialog.ui:54
+#: panels/printers/new-printer-dialog.ui:293 panels/printers/pp-jobs-dialog.ui:54
 #: panels/system/users/cc-add-user-dialog.ui:150
 #: panels/wwan/cc-wwan-apn-dialog.ui:175
 msgid "Password"
@@ -4699,16 +4723,16 @@ msgstr "هیچ چاپگری پیدا نشد"
 msgid "Enter a network address or search for a printer"
 msgstr "ورود یک نشانی شبکه جست‌وجوی چاپگر"
 
-#: panels/printers/new-printer-dialog.ui:250
+#: panels/printers/new-printer-dialog.ui:247
 msgid "Authentication Required"
 msgstr "تصدیق هویت لازم است"
 
-#: panels/printers/new-printer-dialog.ui:266
+#: panels/printers/new-printer-dialog.ui:263
 msgid "Enter username and password to view printers on Print Server"
 msgstr "ورود نام‌کاربری و گذرواژه برای دیدن چاپگرهای روی کارساز چاپ"
 
 #. Translators: This is a username on a print server.
-#: panels/printers/new-printer-dialog.ui:275 panels/printers/pp-jobs-dialog.ui:42
+#: panels/printers/new-printer-dialog.ui:272 panels/printers/pp-jobs-dialog.ui:42
 #: panels/wwan/cc-wwan-apn-dialog.ui:150
 msgid "Username"
 msgstr "نام‌کاربری"
@@ -6455,28 +6479,28 @@ msgstr "_جست‌وجوی کاره"
 msgid "Include app-provided search results"
 msgstr "شامل نتیجه‌های جست‌وجوی فراهم شده به دست کاره‌ها"
 
-#: panels/search/cc-search-panel.ui:29
+#: panels/search/cc-search-panel.ui:23
 msgid "Search _Locations"
 msgstr "جست‌وجوی _مکان‌ها"
 
-#: panels/search/cc-search-panel.ui:30
+#: panels/search/cc-search-panel.ui:24
 msgid "Filesystem locations which are searched by system apps"
 msgstr "شاخه‌هایی که به دست کاره‌های سامانه‌ای جست‌وجو می‌شوند"
 
-#: panels/search/cc-search-panel.ui:39
+#: panels/search/cc-search-panel.ui:33
 msgid "Search Results"
 msgstr "نتایج جست‌وجو"
 
-#: panels/search/cc-search-panel.ui:40
+#: panels/search/cc-search-panel.ui:34
 msgid "Results are displayed according to the list order"
 msgstr "نتیجه‌ها با توجّه به ترتیب سیاهه نمایش داده شده‌اند"
 
-#: panels/search/gnome-search-panel.desktop.in:4
+#: panels/search/gnome-search-panel.desktop.in:5
 msgid "Control which apps show search results in the Activities Overview"
 msgstr "واپایش کاره‌هایی که در نمای کلّی فعّالیت‌ها، نتیجه نشان می‌دهند"
 
 #. Translators: Search terms to find the Search panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
-#: panels/search/gnome-search-panel.desktop.in:15
+#: panels/search/gnome-search-panel.desktop.in:16
 msgid "Search;Find;Index;Hide;Privacy;Results;"
 msgstr ""
 "Search;Find;Index;Hide;Privacy;Results;جست‌وجو;پیدا;فهرست;مخفی; حریم خصوصی;محرمانگی;"
@@ -6549,7 +6573,6 @@ msgid "_Require Password"
 msgstr "گذرواژه _لازم است"
 
 #: panels/sharing/cc-sharing-panel.ui:96
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:136
 #: panels/system/users/cc-enterprise-login-dialog.ui:114
 msgid "_Password"
 msgstr "_گذرواژه"
@@ -7216,23 +7239,23 @@ msgstr "قالب‌ها"
 msgid "Search locales"
 msgstr "جست‌وجوی موقعیت‌ها"
 
-#: panels/system/region/cc-format-chooser.ui:117
+#: panels/system/region/cc-format-chooser.ui:114
 msgid "Common Formats"
 msgstr "قالب‌های معمول"
 
-#: panels/system/region/cc-format-chooser.ui:144
+#: panels/system/region/cc-format-chooser.ui:141
 msgid "All Formats"
 msgstr "تمام قالب‌ها"
 
-#: panels/system/region/cc-format-chooser.ui:192
+#: panels/system/region/cc-format-chooser.ui:189
 msgid "No Search Results"
 msgstr "بدون نتایج جست‌وجو"
 
-#: panels/system/region/cc-format-chooser.ui:204
+#: panels/system/region/cc-format-chooser.ui:201
 msgid "Searches can be for countries or languages"
 msgstr "جست‌وجوها می‌توانند برای کشورها یا زبان‌ها باشند"
 
-#: panels/system/region/cc-format-chooser.ui:240
+#: panels/system/region/cc-format-chooser.ui:237
 msgid "Preview"
 msgstr "پیش‌نمایش"
 
@@ -7314,108 +7337,17 @@ msgstr "_زبان"
 msgid "Fo_rmats"
 msgstr "_قالب‌ها"
 
-#: panels/system/remote-desktop/cc-remote-desktop-page.c:418
-msgid "Device name copied"
-msgstr "نام افزاره رونوشت شد"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.c:429
-msgid "Device address copied"
-msgstr "نشانی افزاره رونوشت شد"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.c:440
-msgid "Username copied"
-msgstr "نام کاربری رونوشت شد"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.c:451
-msgid "Password copied"
-msgstr "گذرواژه رونوشت شد"
-
-#. Translators: This will be presented as the text of a link to the documentation
-#: panels/system/remote-desktop/cc-remote-desktop-page.c:670
-msgid "learn how to use it"
-msgstr "آموزش چگونگی استفاده"
-
-#. Translators: %s is a link to the documentation with the label "learn how to use it"
-#: panels/system/remote-desktop/cc-remote-desktop-page.c:672
-#, c-format
-msgid ""
-"Remote desktop allows viewing and controlling your desktop from another computer – "
-"%s."
-msgstr "میزکار دوردست می‌گذارد میزکارتان را از رایانه‌ای دیگر دیده و وابپایید – %s."
-
 #: panels/system/remote-desktop/cc-remote-desktop-page.ui:4
 msgid "Remote Desktop"
 msgstr "میزکار دوردست"
 
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:22
-msgid "Remote _Desktop"
-msgstr "_میزکار دوردست"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:24
-msgid "Enable or disable remote desktop connections to this computer"
-msgstr "به یا از کار انداختن اتّصال‌های میزکار دوردست به این رایانه"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:30
-msgid "Remote _Control"
-msgstr "_واپایش دوردست"
+#: panels/system/remote-desktop/cc-remote-desktop-page.ui:23
+msgid "Desktop Sharing"
+msgstr "هم‌رسانی میزکار"
 
 #: panels/system/remote-desktop/cc-remote-desktop-page.ui:32
-msgid "Allows remote connections to control the screen"
-msgstr "اجازه به اتّصال‌ها برای واپایش صفحه"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:40
-msgid "How to Connect"
-msgstr "چگونگی وصل شدن"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:41
-msgid "Connect to this computer using the device name or remote desktop address"
-msgstr "وصل شدن به این رایانه با استفاده از نام افزاره یا نشانی میزکار دوردست"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:45
-msgid "D_evice Name"
-msgstr "نام ا_فزاره"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:58
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:63
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:89
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:94
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:119
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:124
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:140
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:145
-#: panels/system/remote-login/cc-remote-login-page.ui:65
-msgid "Copy"
-msgstr "رونوشت"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:76
-msgid "Re_mote Desktop Address"
-msgstr "نشانی میزکار _دوردست"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:110
-msgid "Authentication"
-msgstr "تأیید هویت"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:111
-msgid "The user name and password are required to connect to this computer"
-msgstr "برای وصل شدن به این رایانه نیاز به نام کاربری و گذرواژه است"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:115
-msgid "_User Name"
-msgstr "_نام کاربری"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:160
-msgid "_Verify Encryption"
-msgstr "_تأیید رمزنگاری"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:196
-msgid "Encryption Fingerprint"
-msgstr "اثر انگشت رمزنگاری"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:197
-msgid ""
-"The encryption fingerprint can be seen in connecting clients and should be "
-"identical"
-msgstr "اثرانگشت رمزنگاری می‌تواند در کارخواه‌های وصل شده دیده شود و باید یکتا باشد"
+msgid "Remote Login"
+msgstr "ورود دوردست"
 
 #: panels/system/remote-login/cc-remote-login-page.c:53
 msgid "Command copied"
@@ -7432,6 +7364,10 @@ msgstr "دسترسی به این افزاره با استفاده از پوست�
 #: panels/system/remote-login/cc-remote-login-page.ui:58
 msgid "SSH Login Command"
 msgstr "فرمان ورود پوستهٔ امن"
+
+#: panels/system/remote-login/cc-remote-login-page.ui:65
+msgid "Copy"
+msgstr "رونوشت"
 
 #: panels/system/remote-login/org.gnome.controlcenter.remote-login-helper.policy.in.in:11
 msgid "Enable or disable remote login"
@@ -8804,20 +8740,20 @@ msgctxt "Wacom action-type"
 msgid "Show On-Screen Help"
 msgstr "نمایش راهنمای روی-صفحه"
 
-#: panels/wacom/cc-wacom-device.c:431
+#: panels/wacom/cc-wacom-device.c:430
 msgid "Tablet mounted on laptop panel"
 msgstr "رایانک سوار شده روی تابلوی لپ‌تاپ"
 
-#: panels/wacom/cc-wacom-device.c:433
+#: panels/wacom/cc-wacom-device.c:432
 msgid "Tablet mounted on external display"
 msgstr "رایانک سوار شده روی نمایشگر خارجی"
 
-#: panels/wacom/cc-wacom-device.c:435
+#: panels/wacom/cc-wacom-device.c:434
 msgid "External tablet device"
 msgstr "افزارهٔ رایانک خارجی"
 
 #. All displays item
-#: panels/wacom/cc-wacom-page.c:600
+#: panels/wacom/cc-wacom-page.c:598
 msgid "All Displays"
 msgstr "تمامی نمایشگرها"
 
@@ -8854,7 +8790,7 @@ msgstr "_نگه داشتن نسبت ابعاد"
 msgid "Only use a portion of the tablet surface to keep monitor aspect ratio"
 msgstr "استفاده از فقط بخشی از سطح رایانک برای نگه داشتن نسبت ابعاد نمایشگر"
 
-#: panels/wacom/cc-wacom-page.ui:64
+#: panels/wacom/cc-wacom-page.ui:58
 msgid "_Calibrate"
 msgstr "_واسنجی"
 
@@ -9572,19 +9508,19 @@ msgstr "هیچ نتیجه‌ای پیدا نشد"
 msgid "Available panels:"
 msgstr "تابلوهای موجود:"
 
-#: shell/cc-window.ui:42 shell/cc-window.ui:44
+#: shell/cc-window.ui:36
 msgid "Main Menu"
 msgstr "فهرست اصلی"
 
-#: shell/cc-window.ui:59
+#: shell/cc-window.ui:47
 msgid "Search settings"
 msgstr "جست‌وجوی تنظیمات"
 
-#: shell/cc-window.ui:94
+#: shell/cc-window.ui:82
 msgid "Warning: Development Version"
 msgstr "هشدار: نگارش در حال توسعه"
 
-#: shell/cc-window.ui:95
+#: shell/cc-window.ui:83
 msgid ""
 "This version of Settings should only be used for development purposes. You may "
 "experience incorrect system behavior, data loss, and other unexpected issues. "
@@ -9592,19 +9528,19 @@ msgstr ""
 "این نگارش از تنظیمات باید فقط برای مقاصد توسعه استفاده شود. ممکن است با رفتار "
 "نادرست سامانه، از دست رفتن داده یا دیگر مشکلات غیرمنتظره برخورد کنید. "
 
-#: shell/cc-window.ui:99
+#: shell/cc-window.ui:87
 msgid "_OK"
 msgstr "_تأیید"
 
-#: shell/cc-window.ui:107
+#: shell/cc-window.ui:95
 msgid "_Keyboard Shortcuts"
 msgstr "_میان‌برهای صفحه‌کلید"
 
-#: shell/cc-window.ui:111
+#: shell/cc-window.ui:99
 msgid "_Help"
 msgstr "_راهنما"
 
-#: shell/cc-window.ui:115
+#: shell/cc-window.ui:103
 msgid "_About Settings"
 msgstr "_دربارهٔ تنظیمات"
 
@@ -9704,6 +9640,71 @@ msgstr[1] "%Iu ورودی"
 msgid "System Sounds"
 msgstr "صداهای سامانه"
 
+#~ msgid "Device name copied"
+#~ msgstr "نام افزاره رونوشت شد"
+
+#~ msgid "Device address copied"
+#~ msgstr "نشانی افزاره رونوشت شد"
+
+#~ msgid "Username copied"
+#~ msgstr "نام کاربری رونوشت شد"
+
+#~ msgid "Password copied"
+#~ msgstr "گذرواژه رونوشت شد"
+
+#~ msgid "learn how to use it"
+#~ msgstr "آموزش چگونگی استفاده"
+
+#, c-format
+#~ msgid ""
+#~ "Remote desktop allows viewing and controlling your desktop from another "
+#~ "computer – %s."
+#~ msgstr "میزکار دوردست می‌گذارد میزکارتان را از رایانه‌ای دیگر دیده و وابپایید – %s."
+
+#~ msgid "Remote _Desktop"
+#~ msgstr "_میزکار دوردست"
+
+#~ msgid "Enable or disable remote desktop connections to this computer"
+#~ msgstr "به یا از کار انداختن اتّصال‌های میزکار دوردست به این رایانه"
+
+#~ msgid "Remote _Control"
+#~ msgstr "_واپایش دوردست"
+
+#~ msgid "Allows remote connections to control the screen"
+#~ msgstr "اجازه به اتّصال‌ها برای واپایش صفحه"
+
+#~ msgid "How to Connect"
+#~ msgstr "چگونگی وصل شدن"
+
+#~ msgid "Connect to this computer using the device name or remote desktop address"
+#~ msgstr "وصل شدن به این رایانه با استفاده از نام افزاره یا نشانی میزکار دوردست"
+
+#~ msgid "D_evice Name"
+#~ msgstr "نام ا_فزاره"
+
+#~ msgid "Re_mote Desktop Address"
+#~ msgstr "نشانی میزکار _دوردست"
+
+#~ msgid "Authentication"
+#~ msgstr "تأیید هویت"
+
+#~ msgid "The user name and password are required to connect to this computer"
+#~ msgstr "برای وصل شدن به این رایانه نیاز به نام کاربری و گذرواژه است"
+
+#~ msgid "_User Name"
+#~ msgstr "_نام کاربری"
+
+#~ msgid "_Verify Encryption"
+#~ msgstr "_تأیید رمزنگاری"
+
+#~ msgid "Encryption Fingerprint"
+#~ msgstr "اثر انگشت رمزنگاری"
+
+#~ msgid ""
+#~ "The encryption fingerprint can be seen in connecting clients and should be "
+#~ "identical"
+#~ msgstr "اثرانگشت رمزنگاری می‌تواند در کارخواه‌های وصل شده دیده شود و باید یکتا باشد"
+
 #~ msgid "Unable to find the domain. Maybe you misspelled it?"
 #~ msgstr "ناتوان در یافتن دامنه. شاید اشتباه نوشته‌اید؟"
 
@@ -9755,9 +9756,6 @@ msgstr "صداهای سامانه"
 
 #~ msgid "_Remote Login"
 #~ msgstr "ورود  _دوردست"
-
-#~ msgid "Remote Login"
-#~ msgstr "ورود دوردست"
 
 #~ msgid "Reproduce sounds."
 #~ msgstr "بازتولید صداها."
