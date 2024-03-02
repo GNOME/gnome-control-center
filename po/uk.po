@@ -10,8 +10,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/iss"
 "ues\n"
-"POT-Creation-Date: 2024-02-29 07:52+0000\n"
-"PO-Revision-Date: 2024-02-29 20:26+0200\n"
+"POT-Creation-Date: 2024-03-02 18:21+0000\n"
+"PO-Revision-Date: 2024-03-02 22:45+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -1754,30 +1754,46 @@ msgstr "_Нічний режим"
 msgid "Night Light"
 msgstr "Нічне світло"
 
-#: panels/display/cc-display-settings.c:107
+#: panels/display/cc-display-settings.c:111
 msgctxt "Display rotation"
 msgid "Landscape"
 msgstr "Альбомна"
 
-#: panels/display/cc-display-settings.c:110
+#: panels/display/cc-display-settings.c:114
 msgctxt "Display rotation"
 msgid "Portrait Right"
 msgstr "Портретна праворуч"
 
-#: panels/display/cc-display-settings.c:113
+#: panels/display/cc-display-settings.c:117
 msgctxt "Display rotation"
 msgid "Portrait Left"
 msgstr "Портретна ліворуч"
 
-#: panels/display/cc-display-settings.c:116
+#: panels/display/cc-display-settings.c:120
 msgctxt "Display rotation"
 msgid "Landscape (flipped)"
 msgstr "Альбомна перевернута"
 
-#: panels/display/cc-display-settings.c:177
+#: panels/display/cc-display-settings.c:181
 #, c-format
 msgid "%.2lf Hz"
 msgstr "%.2lf Гц"
+
+#. Translators:
+#. * 1. "Variable" is an adjective that refers to the refresh rate
+#. * 2. The formatting sequence is a range separated by an en-dash
+#. *    (unicode "\u2013"). For example: "Variable (48–144.97 Hz)"
+#.
+#: panels/display/cc-display-settings.c:198
+#, c-format
+msgid "Variable (%d–%.2lf Hz)"
+msgstr "Змінна (%d–%.2lf Гц)"
+
+#. Translators: "Variable" is an adjective that refers to the refresh rate
+#: panels/display/cc-display-settings.c:205
+#, c-format
+msgid "Variable (up to %.2lf Hz)"
+msgstr "Змінна (до %.2lf Гц)"
 
 #: panels/display/cc-display-settings.ui:33
 msgctxt "display setting"
@@ -1790,15 +1806,26 @@ msgid "_Resolution"
 msgstr "_Роздільна здатність"
 
 #: panels/display/cc-display-settings.ui:49
+#: panels/display/cc-display-settings.ui:57
 msgid "R_efresh Rate"
 msgstr "_Частота оновлення"
 
-#: panels/display/cc-display-settings.ui:57
+#: panels/display/cc-display-settings.ui:66
+#| msgid "R_efresh Rate"
+msgid "_Variable Refresh Rate"
+msgstr "З_мінна частота оновлення"
+
+#: panels/display/cc-display-settings.ui:74
+#| msgid "R_efresh Rate"
+msgid "Re_fresh Rate"
+msgstr "_Частота оновлення"
+
+#: panels/display/cc-display-settings.ui:84
 msgid "Adjust for _TV"
 msgstr "Підкоригувати для те_лебачення"
 
-#: panels/display/cc-display-settings.ui:65
-#: panels/display/cc-display-settings.ui:81
+#: panels/display/cc-display-settings.ui:92
+#: panels/display/cc-display-settings.ui:108
 msgctxt "display setting"
 msgid "_Scale"
 msgstr "Мас_штабувати"
@@ -1993,13 +2020,12 @@ msgstr "Запустити переглядача тенет"
 msgid "Home folder"
 msgstr "Домівка"
 
+#. Translators: this is a verb.
+#. Translators: "Search" should be phrased as a verb (in both "Name" and "Keywords" fields).
+#. Translators: this is a verb.
 #: panels/keyboard/01-launchers.xml.in:16
-#: panels/keyboard/cc-input-chooser.ui:50
 #: panels/printers/cc-printers-panel.ui:21
-#: panels/printers/new-printer-dialog.ui:210
-#: panels/search/gnome-search-panel.desktop.in:3
-#: panels/system/region/cc-format-chooser.ui:82 shell/cc-window.ui:28
-#: shell/cc-window.ui:30
+#: panels/search/gnome-search-panel.desktop.in:4 shell/cc-window.ui:28
 msgid "Search"
 msgstr "Пошук"
 
@@ -2073,7 +2099,7 @@ msgstr "Інше"
 msgid "Add Input Source"
 msgstr "Додати джерело введення"
 
-#: panels/keyboard/cc-input-chooser.ui:60
+#: panels/keyboard/cc-input-chooser.ui:57
 msgid "Input methods can’t be used on the login screen"
 msgstr "Способи введення неможливо використовувати у вікні входу"
 
@@ -2722,7 +2748,7 @@ msgstr ""
 #: panels/network/connection-editor/ip6-page.ui:37
 #: panels/network/connection-editor/ip6-page.ui:197
 #: panels/network/connection-editor/ip6-page.ui:255
-#: panels/wacom/cc-wacom-page.c:613
+#: panels/wacom/cc-wacom-page.c:611
 msgid "Automatic"
 msgstr "Автоматично"
 
@@ -2969,7 +2995,7 @@ msgstr "Назва мережі"
 
 #. Translators: This is a password needed for printing.
 #: panels/network/cc-wifi-hotspot-dialog.ui:92
-#: panels/printers/new-printer-dialog.ui:296
+#: panels/printers/new-printer-dialog.ui:293
 #: panels/printers/pp-jobs-dialog.ui:54
 #: panels/system/users/cc-add-user-dialog.ui:150
 #: panels/wwan/cc-wwan-apn-dialog.ui:175
@@ -4854,17 +4880,17 @@ msgstr "Не знайдено жодного принтера"
 msgid "Enter a network address or search for a printer"
 msgstr "Уведіть адресу мережі або знайдіть принтер"
 
-#: panels/printers/new-printer-dialog.ui:250
+#: panels/printers/new-printer-dialog.ui:247
 msgid "Authentication Required"
 msgstr "Потрібно засвідчитись"
 
-#: panels/printers/new-printer-dialog.ui:266
+#: panels/printers/new-printer-dialog.ui:263
 msgid "Enter username and password to view printers on Print Server"
 msgstr ""
 "Введіть користувача та пароль, щоб переглянути доступні принтери на сервері"
 
 #. Translators: This is a username on a print server.
-#: panels/printers/new-printer-dialog.ui:275
+#: panels/printers/new-printer-dialog.ui:272
 #: panels/printers/pp-jobs-dialog.ui:42 panels/wwan/cc-wwan-apn-dialog.ui:150
 msgid "Username"
 msgstr "Користувач"
@@ -6668,31 +6694,31 @@ msgstr "Пошук п_рограм"
 msgid "Include app-provided search results"
 msgstr "Включити надані програмами результати пошуку"
 
-#: panels/search/cc-search-panel.ui:29
+#: panels/search/cc-search-panel.ui:23
 msgid "Search _Locations"
 msgstr "Місця по_шуку"
 
-#: panels/search/cc-search-panel.ui:30
+#: panels/search/cc-search-panel.ui:24
 msgid "Filesystem locations which are searched by system apps"
 msgstr ""
 "Місця у файловій системі, у яких виконуватимуть пошук загальносистемні "
 "програми"
 
-#: panels/search/cc-search-panel.ui:39
+#: panels/search/cc-search-panel.ui:33
 msgid "Search Results"
 msgstr "Результати пошуку"
 
-#: panels/search/cc-search-panel.ui:40
+#: panels/search/cc-search-panel.ui:34
 msgid "Results are displayed according to the list order"
 msgstr "Результати показано відповідно до порядку у списку"
 
-#: panels/search/gnome-search-panel.desktop.in:4
+#: panels/search/gnome-search-panel.desktop.in:5
 msgid "Control which apps show search results in the Activities Overview"
 msgstr ""
 "Вказує, які програми показувати у результатах пошуку в огляді діяльності"
 
 #. Translators: Search terms to find the Search panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
-#: panels/search/gnome-search-panel.desktop.in:15
+#: panels/search/gnome-search-panel.desktop.in:16
 msgid "Search;Find;Index;Hide;Privacy;Results;"
 msgstr "Пошук;Знайти;Індекс;Сховати;Конфіденційність;Результати;"
 
@@ -6765,7 +6791,6 @@ msgid "_Require Password"
 msgstr "Вимагати па_роль"
 
 #: panels/sharing/cc-sharing-panel.ui:96
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:136
 #: panels/system/users/cc-enterprise-login-dialog.ui:114
 msgid "_Password"
 msgstr "_Пароль"
@@ -7435,23 +7460,23 @@ msgstr "Формати"
 msgid "Search locales"
 msgstr "Шукати локалі"
 
-#: panels/system/region/cc-format-chooser.ui:117
+#: panels/system/region/cc-format-chooser.ui:114
 msgid "Common Formats"
 msgstr "Загальні формати"
 
-#: panels/system/region/cc-format-chooser.ui:144
+#: panels/system/region/cc-format-chooser.ui:141
 msgid "All Formats"
 msgstr "Всі формати"
 
-#: panels/system/region/cc-format-chooser.ui:192
+#: panels/system/region/cc-format-chooser.ui:189
 msgid "No Search Results"
 msgstr "Нічого не знайдено"
 
-#: panels/system/region/cc-format-chooser.ui:204
+#: panels/system/region/cc-format-chooser.ui:201
 msgid "Searches can be for countries or languages"
 msgstr "Пошук може бути виконано за країнами або мовами"
 
-#: panels/system/region/cc-format-chooser.ui:240
+#: panels/system/region/cc-format-chooser.ui:237
 msgid "Preview"
 msgstr "Перегляд"
 
@@ -7534,118 +7559,18 @@ msgstr "_Мова"
 msgid "Fo_rmats"
 msgstr "_Формати"
 
-#: panels/system/remote-desktop/cc-remote-desktop-page.c:418
-msgid "Device name copied"
-msgstr "Скопійовано назву пристрою"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.c:429
-msgid "Device address copied"
-msgstr "Скопійовано адресу пристрою"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.c:440
-msgid "Username copied"
-msgstr "Ім'я користувача скопійовано"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.c:451
-msgid "Password copied"
-msgstr "Пароль скопійовано"
-
-#. Translators: This will be presented as the text of a link to the documentation
-#: panels/system/remote-desktop/cc-remote-desktop-page.c:670
-msgid "learn how to use it"
-msgstr "дізнатися про спосіб користування"
-
-#. Translators: %s is a link to the documentation with the label "learn how to use it"
-#: panels/system/remote-desktop/cc-remote-desktop-page.c:672
-#, c-format
-msgid ""
-"Remote desktop allows viewing and controlling your desktop from another "
-"computer – %s."
-msgstr ""
-"За допомогою інструментів віддаленої стільниці можна переглядати і керувати "
-"вашою стільницею з іншого комп'ютера — %s."
-
 #: panels/system/remote-desktop/cc-remote-desktop-page.ui:4
 msgid "Remote Desktop"
 msgstr "Віддалена стільниця"
 
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:22
-msgid "Remote _Desktop"
-msgstr "Віддалена с_тільниця"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:24
-msgid "Enable or disable remote desktop connections to this computer"
-msgstr ""
-"Увімкнути або вимкнути віддалені з'єднання зі стільницею на цьому комп'ютері"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:30
-msgid "Remote _Control"
-msgstr "Дистан_ційне керування"
+#: panels/system/remote-desktop/cc-remote-desktop-page.ui:23
+#| msgid "File Sharing"
+msgid "Desktop Sharing"
+msgstr "Спільні стільниці"
 
 #: panels/system/remote-desktop/cc-remote-desktop-page.ui:32
-msgid "Allows remote connections to control the screen"
-msgstr "Уможливлює керування екраном за допомогою віддалених з'єднань"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:40
-msgid "How to Connect"
-msgstr "Як з'єднатися"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:41
-msgid ""
-"Connect to this computer using the device name or remote desktop address"
-msgstr ""
-"З'єднатися з цим комп'ютером на основі назви пристрою та адреси віддаленої "
-"стільниці"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:45
-msgid "D_evice Name"
-msgstr "_Назва пристрою"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:58
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:63
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:89
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:94
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:119
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:124
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:140
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:145
-#: panels/system/remote-login/cc-remote-login-page.ui:65
-msgid "Copy"
-msgstr "Копіювати"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:76
-msgid "Re_mote Desktop Address"
-msgstr "Адреса _віддаленої стільниці"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:110
-msgid "Authentication"
-msgstr "Розпізнавання"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:111
-msgid "The user name and password are required to connect to this computer"
-msgstr ""
-"Для встановлення з'єднання із цим комп'ютером потрібне ім'я користувача і "
-"пароль"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:115
-msgid "_User Name"
-msgstr "_Користувач"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:160
-msgid "_Verify Encryption"
-msgstr "П_еревірити шифрування"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:196
-msgid "Encryption Fingerprint"
-msgstr "Відбиток шифрування"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:197
-msgid ""
-"The encryption fingerprint can be seen in connecting clients and should be "
-"identical"
-msgstr ""
-"Відбиток шифрування можна переглянути у клієнтах з'єднання — він має бути "
-"таким самим"
+msgid "Remote Login"
+msgstr "Віддалений вхід"
 
 #: panels/system/remote-login/cc-remote-login-page.c:53
 msgid "Command copied"
@@ -7662,6 +7587,10 @@ msgstr "Доступ до цього пристрою за допомогою з
 #: panels/system/remote-login/cc-remote-login-page.ui:58
 msgid "SSH Login Command"
 msgstr "Команда входу до SSH"
+
+#: panels/system/remote-login/cc-remote-login-page.ui:65
+msgid "Copy"
+msgstr "Копіювати"
 
 #: panels/system/remote-login/org.gnome.controlcenter.remote-login-helper.policy.in.in:11
 msgid "Enable or disable remote login"
@@ -7738,24 +7667,15 @@ msgstr "Непідтримуваний спосіб автентифікації
 
 #: panels/system/users/cc-enterprise-login-dialog.c:285
 #: panels/system/users/cc-enterprise-login-dialog.c:476
-#| msgid ""
-#| "That login name didn’t work.\n"
-#| "Please try again."
 msgid "That login name didn’t work"
 msgstr "Цей користувач не спрацював"
 
 #: panels/system/users/cc-enterprise-login-dialog.c:292
 #: panels/system/users/cc-enterprise-login-dialog.c:483
-#| msgid ""
-#| "That login password didn’t work.\n"
-#| "Please try again."
 msgid "That login password didn’t work"
 msgstr "Цей пароль не спрацював"
 
 #: panels/system/users/cc-enterprise-login-dialog.c:299
-#| msgid ""
-#| "That login name didn’t work.\n"
-#| "Please try again."
 msgid "That hostname didn’t work"
 msgstr "Ця назва вузла не спрацювала"
 
@@ -7767,26 +7687,20 @@ msgstr "Не вдалось увійти до домену"
 #. Translators: The "%s" is a domain address (e.g. "demo1.freeipa.org").
 #: panels/system/users/cc-enterprise-login-dialog.c:352
 #, c-format
-#| msgid ""
-#| "In order to use enterprise logins, this computer needs to be\n"
-#| "enrolled in the domain. Please have your network administrator\n"
-#| "type their domain password here."
 msgid ""
 "To add an enterprise login account, this device needs to be enrolled with "
 "<b>%s</b>. To enroll, have your domain administrator enter their name and "
 "password."
 msgstr ""
-"Щоб додати комерційний обліковий запис, цьому пристрою слід надати роль за"
-" допомогою <b>%s</b>. Для надання ролі адміністратору домену доведеться"
-" ввести назву його облікового запису та пароль."
+"Щоб додати комерційний обліковий запис, цьому пристрою слід надати роль за "
+"допомогою <b>%s</b>. Для надання ролі адміністратору домену доведеться "
+"ввести назву його облікового запису та пароль."
 
 #: panels/system/users/cc-enterprise-login-dialog.c:538
-#| msgid "Failed to join domain"
 msgid "Valid domain"
 msgstr "Коректний домен"
 
 #: panels/system/users/cc-enterprise-login-dialog.c:542
-#| msgid "Location not found"
 msgid "Domain not found"
 msgstr "Домен не знайдено"
 
@@ -7795,33 +7709,24 @@ msgid "Checking domain…"
 msgstr "Перевіряємо домен…"
 
 #: panels/system/users/cc-enterprise-login-dialog.c:629
-#| msgid "Failed to contact the accounts service"
 msgid "Failed to contact realmd service"
 msgstr "Не вдалося встановити зв'язок зі службою realmd"
 
 #: panels/system/users/cc-enterprise-login-dialog.ui:28
 #: panels/system/users/cc-enterprise-login-dialog.ui:48
-#| msgid "Enterprise Login"
 msgid "Add Enterprise Login"
 msgstr "Додати комерційний вхід"
 
 #: panels/system/users/cc-enterprise-login-dialog.ui:37
-#| msgctxt "printer state"
-#| msgid "Offline"
 msgid "Offline"
 msgstr "Поза мережею"
 
 #: panels/system/users/cc-enterprise-login-dialog.ui:38
-#| msgid "No internet connection — connect to set up new online accounts"
 msgid "A network connection is needed to add enterprise login accounts."
 msgstr ""
 "Для додавання комерційних облікових записів потрібне з'єднання з мережею."
 
 #: panels/system/users/cc-enterprise-login-dialog.ui:84
-#| msgid ""
-#| "Enterprise login allows an existing centrally managed user account to be "
-#| "used on this device. You can also use this account to access company "
-#| "resources on the internet."
 msgid ""
 "Enterprise login allows an existing centrally managed account to be used on "
 "this device."
@@ -7835,12 +7740,10 @@ msgid "_Domain"
 msgstr "_Домен"
 
 #: panels/system/users/cc-enterprise-login-dialog.ui:97
-#| msgid "Should match the web address of your login provider."
 msgid "Should match the web domain of the account provider"
 msgstr "Має збігатися із доменом інтернету надавача послуг облікового запису"
 
 #: panels/system/users/cc-enterprise-login-dialog.ui:130
-#| msgid "Input Device"
 msgid "Enroll Device"
 msgstr "Надання ролі пристрою"
 
@@ -7856,7 +7759,6 @@ msgid "Administrator _Name"
 msgstr "_Адміністратор"
 
 #: panels/system/users/cc-enterprise-login-dialog.ui:169
-#| msgid "Administrator Password"
 msgid "Administrator _Password"
 msgstr "П_ароль адміністратора"
 
@@ -8249,7 +8151,6 @@ msgid "_Add User…"
 msgstr "_Додати користувача…"
 
 #: panels/system/users/cc-users-page.ui:47
-#| msgid "Enterprise"
 msgid "Add Enterprise User"
 msgstr "Додати комерційного користувача"
 
@@ -9100,20 +9001,20 @@ msgctxt "Wacom action-type"
 msgid "Show On-Screen Help"
 msgstr "Показати екранну довідку"
 
-#: panels/wacom/cc-wacom-device.c:431
+#: panels/wacom/cc-wacom-device.c:430
 msgid "Tablet mounted on laptop panel"
 msgstr "Планшет, який змонтовано на панелі ноутбука"
 
-#: panels/wacom/cc-wacom-device.c:433
+#: panels/wacom/cc-wacom-device.c:432
 msgid "Tablet mounted on external display"
 msgstr "Планшет, який змонтовано на зовнішньому дисплеї"
 
-#: panels/wacom/cc-wacom-device.c:435
+#: panels/wacom/cc-wacom-device.c:434
 msgid "External tablet device"
 msgstr "Зовнішній пристрій планшета"
 
 #. All displays item
-#: panels/wacom/cc-wacom-page.c:600
+#: panels/wacom/cc-wacom-page.c:598
 msgid "All Displays"
 msgstr "Усі дисплеї"
 
@@ -9152,7 +9053,7 @@ msgstr ""
 "Використовувати лише частину поверхні планшета для збереження пропорцій "
 "монітора"
 
-#: panels/wacom/cc-wacom-page.ui:64
+#: panels/wacom/cc-wacom-page.ui:58
 msgid "_Calibrate"
 msgstr "_Калібрувати"
 
@@ -9879,19 +9780,19 @@ msgstr "Нічого не знайдено"
 msgid "Available panels:"
 msgstr "Доступні панелі:"
 
-#: shell/cc-window.ui:42 shell/cc-window.ui:44
+#: shell/cc-window.ui:36
 msgid "Main Menu"
 msgstr "Головне меню"
 
-#: shell/cc-window.ui:59
+#: shell/cc-window.ui:47
 msgid "Search settings"
 msgstr "Пошук параметрів"
 
-#: shell/cc-window.ui:94
+#: shell/cc-window.ui:82
 msgid "Warning: Development Version"
 msgstr "Попередження: розробницька версія"
 
-#: shell/cc-window.ui:95
+#: shell/cc-window.ui:83
 msgid ""
 "This version of Settings should only be used for development purposes. You "
 "may experience incorrect system behavior, data loss, and other unexpected "
@@ -9901,19 +9802,19 @@ msgstr ""
 "спостерігати неправильну роботу системи, втрату даних та інші "
 "непередбачувані проблеми. "
 
-#: shell/cc-window.ui:99
+#: shell/cc-window.ui:87
 msgid "_OK"
 msgstr "_Гаразд"
 
-#: shell/cc-window.ui:107
+#: shell/cc-window.ui:95
 msgid "_Keyboard Shortcuts"
 msgstr "_Клавіатурні скорочення"
 
-#: shell/cc-window.ui:111
+#: shell/cc-window.ui:99
 msgid "_Help"
 msgstr "_Довідка"
 
-#: shell/cc-window.ui:115
+#: shell/cc-window.ui:103
 msgid "_About Settings"
 msgstr "_Про «Параметри»"
 
@@ -10021,6 +9922,82 @@ msgstr[3] "%u вхід"
 #: subprojects/gvc/gvc-mixer-control.c:2882
 msgid "System Sounds"
 msgstr "Системні звуки"
+
+#~ msgid "Device name copied"
+#~ msgstr "Скопійовано назву пристрою"
+
+#~ msgid "Device address copied"
+#~ msgstr "Скопійовано адресу пристрою"
+
+#~ msgid "Username copied"
+#~ msgstr "Ім'я користувача скопійовано"
+
+#~ msgid "Password copied"
+#~ msgstr "Пароль скопійовано"
+
+#~ msgid "learn how to use it"
+#~ msgstr "дізнатися про спосіб користування"
+
+#, c-format
+#~ msgid ""
+#~ "Remote desktop allows viewing and controlling your desktop from another "
+#~ "computer – %s."
+#~ msgstr ""
+#~ "За допомогою інструментів віддаленої стільниці можна переглядати і "
+#~ "керувати вашою стільницею з іншого комп'ютера — %s."
+
+#~ msgid "Remote _Desktop"
+#~ msgstr "Віддалена с_тільниця"
+
+#~ msgid "Enable or disable remote desktop connections to this computer"
+#~ msgstr ""
+#~ "Увімкнути або вимкнути віддалені з'єднання зі стільницею на цьому "
+#~ "комп'ютері"
+
+#~ msgid "Remote _Control"
+#~ msgstr "Дистан_ційне керування"
+
+#~ msgid "Allows remote connections to control the screen"
+#~ msgstr "Уможливлює керування екраном за допомогою віддалених з'єднань"
+
+#~ msgid "How to Connect"
+#~ msgstr "Як з'єднатися"
+
+#~ msgid ""
+#~ "Connect to this computer using the device name or remote desktop address"
+#~ msgstr ""
+#~ "З'єднатися з цим комп'ютером на основі назви пристрою та адреси "
+#~ "віддаленої стільниці"
+
+#~ msgid "D_evice Name"
+#~ msgstr "_Назва пристрою"
+
+#~ msgid "Re_mote Desktop Address"
+#~ msgstr "Адреса _віддаленої стільниці"
+
+#~ msgid "Authentication"
+#~ msgstr "Розпізнавання"
+
+#~ msgid "The user name and password are required to connect to this computer"
+#~ msgstr ""
+#~ "Для встановлення з'єднання із цим комп'ютером потрібне ім'я користувача і "
+#~ "пароль"
+
+#~ msgid "_User Name"
+#~ msgstr "_Користувач"
+
+#~ msgid "_Verify Encryption"
+#~ msgstr "П_еревірити шифрування"
+
+#~ msgid "Encryption Fingerprint"
+#~ msgstr "Відбиток шифрування"
+
+#~ msgid ""
+#~ "The encryption fingerprint can be seen in connecting clients and should "
+#~ "be identical"
+#~ msgstr ""
+#~ "Відбиток шифрування можна переглянути у клієнтах з'єднання — він має бути "
+#~ "таким самим"
 
 #~ msgid "Unable to find the domain. Maybe you misspelled it?"
 #~ msgstr "Не вдалося знайти домен. Можливо, ви неправильно це написали?"
@@ -10221,9 +10198,6 @@ msgstr "Системні звуки"
 
 #~ msgid "_Remote Login"
 #~ msgstr "Віддалений в_хід"
-
-#~ msgid "Remote Login"
-#~ msgstr "Віддалений вхід"
 
 #~ msgid "_Accessibility Menu"
 #~ msgstr "Меню д_оступності"
