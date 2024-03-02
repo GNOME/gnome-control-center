@@ -26,8 +26,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2024-02-29 13:53+0000\n"
-"PO-Revision-Date: 2024-03-01 01:42+0100\n"
+"POT-Creation-Date: 2024-03-02 23:02+0000\n"
+"PO-Revision-Date: 2024-03-03 00:24+0100\n"
 "Last-Translator: Daniel Rusek <mail@asciiwolf.com>\n"
 "Language-Team: Czech <gnome-cs-list@gnome.org>\n"
 "Language: cs\n"
@@ -1755,30 +1755,46 @@ msgstr "_Noční světlo"
 msgid "Night Light"
 msgstr "Noční světlo"
 
-#: panels/display/cc-display-settings.c:107
+#: panels/display/cc-display-settings.c:111
 msgctxt "Display rotation"
 msgid "Landscape"
 msgstr "Na šířku"
 
-#: panels/display/cc-display-settings.c:110
+#: panels/display/cc-display-settings.c:114
 msgctxt "Display rotation"
 msgid "Portrait Right"
 msgstr "Na výšku vpravo"
 
-#: panels/display/cc-display-settings.c:113
+#: panels/display/cc-display-settings.c:117
 msgctxt "Display rotation"
 msgid "Portrait Left"
 msgstr "Na výšku vlevo"
 
-#: panels/display/cc-display-settings.c:116
+#: panels/display/cc-display-settings.c:120
 msgctxt "Display rotation"
 msgid "Landscape (flipped)"
 msgstr "Na šířku (překlopené)"
 
-#: panels/display/cc-display-settings.c:177
+#: panels/display/cc-display-settings.c:181
 #, c-format
 msgid "%.2lf Hz"
 msgstr "%.2lf Hz"
+
+#. Translators:
+#. * 1. "Variable" is an adjective that refers to the refresh rate
+#. * 2. The formatting sequence is a range separated by an en-dash
+#. *    (unicode "\u2013"). For example: "Variable (48–144.97 Hz)"
+#.
+#: panels/display/cc-display-settings.c:198
+#, c-format
+msgid "Variable (%d–%.2lf Hz)"
+msgstr "Variabilní (%d – %.2lf Hz)"
+
+#. Translators: "Variable" is an adjective that refers to the refresh rate
+#: panels/display/cc-display-settings.c:205
+#, c-format
+msgid "Variable (up to %.2lf Hz)"
+msgstr "Variabilní (do %.2lf Hz)"
 
 #: panels/display/cc-display-settings.ui:33
 msgctxt "display setting"
@@ -1791,15 +1807,24 @@ msgid "_Resolution"
 msgstr "_Rozlišení"
 
 #: panels/display/cc-display-settings.ui:49
+#: panels/display/cc-display-settings.ui:57
 msgid "R_efresh Rate"
 msgstr "Obnovovací fr_ekvence"
 
-#: panels/display/cc-display-settings.ui:57
+#: panels/display/cc-display-settings.ui:66
+msgid "_Variable Refresh Rate"
+msgstr "_Variabilní obnovovací frekvence"
+
+#: panels/display/cc-display-settings.ui:74
+msgid "Re_fresh Rate"
+msgstr "Obnovovací _frekvence"
+
+#: panels/display/cc-display-settings.ui:84
 msgid "Adjust for _TV"
 msgstr "Přizpůsobit pro _TV"
 
-#: panels/display/cc-display-settings.ui:65
-#: panels/display/cc-display-settings.ui:81
+#: panels/display/cc-display-settings.ui:92
+#: panels/display/cc-display-settings.ui:108
 msgctxt "display setting"
 msgid "_Scale"
 msgstr "Š_kálovat"
@@ -6735,7 +6760,6 @@ msgid "_Require Password"
 msgstr "V_yžadovat heslo"
 
 #: panels/sharing/cc-sharing-panel.ui:96
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:136
 #: panels/system/users/cc-enterprise-login-dialog.ui:114
 msgid "_Password"
 msgstr "_Heslo"
@@ -7501,117 +7525,17 @@ msgstr "Jazy_k"
 msgid "Fo_rmats"
 msgstr "Fo_rmáty"
 
-#: panels/system/remote-desktop/cc-remote-desktop-page.c:418
-msgid "Device name copied"
-msgstr "Byl zkopírován název zařízení"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.c:429
-msgid "Device address copied"
-msgstr "Byla zkopírována adresa zařízení"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.c:440
-msgid "Username copied"
-msgstr "Bylo zkopírováno uživatelské jméno"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.c:451
-msgid "Password copied"
-msgstr "Bylo zkopírováno heslo"
-
-#. Translators: This will be presented as the text of a link to the documentation
-#: panels/system/remote-desktop/cc-remote-desktop-page.c:670
-msgid "learn how to use it"
-msgstr "naučte se ji používat"
-
-#. Translators: %s is a link to the documentation with the label "learn how to use it"
-#: panels/system/remote-desktop/cc-remote-desktop-page.c:672
-#, c-format
-msgid ""
-"Remote desktop allows viewing and controlling your desktop from another "
-"computer – %s."
-msgstr ""
-"Vzdálená plocha umožňuje zobrazení a ovládání vašeho uživatelského prostředí "
-"z jiného počítače – %s."
-
 #: panels/system/remote-desktop/cc-remote-desktop-page.ui:4
 msgid "Remote Desktop"
 msgstr "Vzdálená plocha"
 
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:22
-msgid "Remote _Desktop"
-msgstr "Vz_dálená plocha"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:24
-msgid "Enable or disable remote desktop connections to this computer"
-msgstr ""
-"Povolit nebo zakázat u tohoto počítače přihlášení přes vzdálenou plochu"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:30
-msgid "Remote _Control"
-msgstr "Vzdálené _ovládání"
+#: panels/system/remote-desktop/cc-remote-desktop-page.ui:23
+msgid "Desktop Sharing"
+msgstr "Sdílení plochy"
 
 #: panels/system/remote-desktop/cc-remote-desktop-page.ui:32
-msgid "Allows remote connections to control the screen"
-msgstr "Umožnit vzdálenému připojení ovládat obrazovku"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:40
-msgid "How to Connect"
-msgstr "Jak se připojovat"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:41
-msgid ""
-"Connect to this computer using the device name or remote desktop address"
-msgstr ""
-"Připojovat se k tomuto počítači pomocí názvu zařízení nebo adresy vzdálené "
-"plochy"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:45
-msgid "D_evice Name"
-msgstr "Název z_ařízení"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:58
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:63
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:89
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:94
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:119
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:124
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:140
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:145
-#: panels/system/remote-login/cc-remote-login-page.ui:65
-msgid "Copy"
-msgstr "Zkopírovat"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:76
-msgid "Re_mote Desktop Address"
-msgstr "Adresa vz_dálené plochy"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:110
-msgid "Authentication"
-msgstr "Ověření totožnosti"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:111
-msgid "The user name and password are required to connect to this computer"
-msgstr ""
-"Pro připojení k tomuto počítači je vyžadováno uživatelské jméno a heslo"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:115
-msgid "_User Name"
-msgstr "_Uživatelské jméno"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:160
-msgid "_Verify Encryption"
-msgstr "_Ověřit šifrování"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:196
-msgid "Encryption Fingerprint"
-msgstr "Otisk šifrovacího klíče"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:197
-msgid ""
-"The encryption fingerprint can be seen in connecting clients and should be "
-"identical"
-msgstr ""
-"Otisk šifrovacího klíče by měl být vidět na připojovaném klientovi a měl by "
-"se shodovat"
+msgid "Remote Login"
+msgstr "Vzdálené přihlášení"
 
 #: panels/system/remote-login/cc-remote-login-page.c:53
 msgid "Command copied"
@@ -7628,6 +7552,10 @@ msgstr "Přistupujte k tomuto zařízení pomocí Zabezpečeného Shellu (SSH)"
 #: panels/system/remote-login/cc-remote-login-page.ui:58
 msgid "SSH Login Command"
 msgstr "Přihlašovací příkaz SSH"
+
+#: panels/system/remote-login/cc-remote-login-page.ui:65
+msgid "Copy"
+msgstr "Zkopírovat"
 
 #: panels/system/remote-login/org.gnome.controlcenter.remote-login-helper.policy.in.in:11
 msgid "Enable or disable remote login"
@@ -9946,6 +9874,80 @@ msgstr[2] "%u vstupů"
 msgid "System Sounds"
 msgstr "Systémové zvuky"
 
+#~ msgid "Device name copied"
+#~ msgstr "Byl zkopírován název zařízení"
+
+#~ msgid "Device address copied"
+#~ msgstr "Byla zkopírována adresa zařízení"
+
+#~ msgid "Username copied"
+#~ msgstr "Bylo zkopírováno uživatelské jméno"
+
+#~ msgid "Password copied"
+#~ msgstr "Bylo zkopírováno heslo"
+
+#~ msgid "learn how to use it"
+#~ msgstr "naučte se ji používat"
+
+#, c-format
+#~ msgid ""
+#~ "Remote desktop allows viewing and controlling your desktop from another "
+#~ "computer – %s."
+#~ msgstr ""
+#~ "Vzdálená plocha umožňuje zobrazení a ovládání vašeho uživatelského "
+#~ "prostředí z jiného počítače – %s."
+
+#~ msgid "Remote _Desktop"
+#~ msgstr "Vz_dálená plocha"
+
+#~ msgid "Enable or disable remote desktop connections to this computer"
+#~ msgstr ""
+#~ "Povolit nebo zakázat u tohoto počítače přihlášení přes vzdálenou plochu"
+
+#~ msgid "Remote _Control"
+#~ msgstr "Vzdálené _ovládání"
+
+#~ msgid "Allows remote connections to control the screen"
+#~ msgstr "Umožnit vzdálenému připojení ovládat obrazovku"
+
+#~ msgid "How to Connect"
+#~ msgstr "Jak se připojovat"
+
+#~ msgid ""
+#~ "Connect to this computer using the device name or remote desktop address"
+#~ msgstr ""
+#~ "Připojovat se k tomuto počítači pomocí názvu zařízení nebo adresy "
+#~ "vzdálené plochy"
+
+#~ msgid "D_evice Name"
+#~ msgstr "Název z_ařízení"
+
+#~ msgid "Re_mote Desktop Address"
+#~ msgstr "Adresa vz_dálené plochy"
+
+#~ msgid "Authentication"
+#~ msgstr "Ověření totožnosti"
+
+#~ msgid "The user name and password are required to connect to this computer"
+#~ msgstr ""
+#~ "Pro připojení k tomuto počítači je vyžadováno uživatelské jméno a heslo"
+
+#~ msgid "_User Name"
+#~ msgstr "_Uživatelské jméno"
+
+#~ msgid "_Verify Encryption"
+#~ msgstr "_Ověřit šifrování"
+
+#~ msgid "Encryption Fingerprint"
+#~ msgstr "Otisk šifrovacího klíče"
+
+#~ msgid ""
+#~ "The encryption fingerprint can be seen in connecting clients and should "
+#~ "be identical"
+#~ msgstr ""
+#~ "Otisk šifrovacího klíče by měl být vidět na připojovaném klientovi a měl "
+#~ "by se shodovat"
+
 #~ msgid "Unable to find the domain. Maybe you misspelled it?"
 #~ msgstr "Nelze najít doménu. Nemáte v názvu překlep?"
 
@@ -10012,9 +10014,6 @@ msgstr "Systémové zvuky"
 
 #~ msgid "_Remote Login"
 #~ msgstr "_Vzdálené přihlášení"
-
-#~ msgid "Remote Login"
-#~ msgstr "Vzdálené přihlášení"
 
 #~ msgid "Default"
 #~ msgstr "Výchozí"
