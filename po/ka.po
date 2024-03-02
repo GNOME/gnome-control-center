@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2024-03-02 16:51+0000\n"
-"PO-Revision-Date: 2024-03-02 19:05+0100\n"
+"POT-Creation-Date: 2024-03-02 18:21+0000\n"
+"PO-Revision-Date: 2024-03-02 19:58+0100\n"
 "Last-Translator: Ekaterine Papava <papava.e@gtu.ge>\n"
 "Language-Team: Georgian <(nothing)>\n"
 "Language: ka\n"
@@ -1738,30 +1738,46 @@ msgstr "ღამის სი_ნათლე"
 msgid "Night Light"
 msgstr "ღამის სინათლე"
 
-#: panels/display/cc-display-settings.c:107
+#: panels/display/cc-display-settings.c:111
 msgctxt "Display rotation"
 msgid "Landscape"
 msgstr "ლანდშაფტი"
 
-#: panels/display/cc-display-settings.c:110
+#: panels/display/cc-display-settings.c:114
 msgctxt "Display rotation"
 msgid "Portrait Right"
 msgstr "პორტრეტი მარჯვნივ"
 
-#: panels/display/cc-display-settings.c:113
+#: panels/display/cc-display-settings.c:117
 msgctxt "Display rotation"
 msgid "Portrait Left"
 msgstr "პორტრეტი მარცხნივ"
 
-#: panels/display/cc-display-settings.c:116
+#: panels/display/cc-display-settings.c:120
 msgctxt "Display rotation"
 msgid "Landscape (flipped)"
 msgstr "ლანდშაფტი (გადაბრუნებული)"
 
-#: panels/display/cc-display-settings.c:177
+#: panels/display/cc-display-settings.c:181
 #, c-format
 msgid "%.2lf Hz"
 msgstr "%.2lf ჰც"
+
+#. Translators:
+#. * 1. "Variable" is an adjective that refers to the refresh rate
+#. * 2. The formatting sequence is a range separated by an en-dash
+#. *    (unicode "\u2013"). For example: "Variable (48–144.97 Hz)"
+#.
+#: panels/display/cc-display-settings.c:198
+#, c-format
+msgid "Variable (%d–%.2lf Hz)"
+msgstr "ცვლადი (%d–%.2lf ჰც)"
+
+#. Translators: "Variable" is an adjective that refers to the refresh rate
+#: panels/display/cc-display-settings.c:205
+#, c-format
+msgid "Variable (up to %.2lf Hz)"
+msgstr "ცვლადი (%.2lf ჰერცამდე)"
 
 #: panels/display/cc-display-settings.ui:33
 msgctxt "display setting"
@@ -1774,15 +1790,24 @@ msgid "_Resolution"
 msgstr "გა_რჩევადობა"
 
 #: panels/display/cc-display-settings.ui:49
+#: panels/display/cc-display-settings.ui:57
 msgid "R_efresh Rate"
 msgstr "განახლ_ების სიხშირე"
 
-#: panels/display/cc-display-settings.ui:57
+#: panels/display/cc-display-settings.ui:66
+msgid "_Variable Refresh Rate"
+msgstr "ც_ვლადი განახლების სიხშირე"
+
+#: panels/display/cc-display-settings.ui:74
+msgid "Re_fresh Rate"
+msgstr "განახლების ს_იხშირე"
+
+#: panels/display/cc-display-settings.ui:84
 msgid "Adjust for _TV"
 msgstr "_TV-სთვის მორგება"
 
-#: panels/display/cc-display-settings.ui:65
-#: panels/display/cc-display-settings.ui:81
+#: panels/display/cc-display-settings.ui:92
+#: panels/display/cc-display-settings.ui:108
 msgctxt "display setting"
 msgid "_Scale"
 msgstr "გადიდ_ება"
