@@ -79,6 +79,7 @@ G_DEFINE_TYPE (CcRemoteSessionPage, cc_remote_session_page, ADW_TYPE_BIN)
 static void on_remote_session_active_changed (CcRemoteSessionPage *self);
 static void enable_remote_session_service (CcRemoteSessionPage *self);
 static void connect_to_remote_desktop_rdp_server (CcRemoteSessionPage *self);
+static void fetch_credentials (CcRemoteSessionPage *self);
 
 static void
 add_toast (CcRemoteSessionPage *self,
@@ -431,6 +432,9 @@ on_set_rdp_credentials (GsdRemoteDesktopRdpServer *rdp_server,
       g_debug ("Could not set credentials for remote session access: %s", error->message);
       return;
     }
+
+  /* Do a roundtrip to make sure it stuck and also so we repopulate the tls fingerprint */
+  fetch_credentials (self);
 }
 
 static gboolean
