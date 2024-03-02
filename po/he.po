@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center.HEAD.he\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2024-02-29 07:52+0000\n"
-"PO-Revision-Date: 2024-02-29 10:02+0200\n"
+"POT-Creation-Date: 2024-03-02 18:21+0000\n"
+"PO-Revision-Date: 2024-03-03 00:12+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -1709,30 +1709,46 @@ msgstr "תאורת _לילה"
 msgid "Night Light"
 msgstr "תאורת לילה"
 
-#: panels/display/cc-display-settings.c:107
+#: panels/display/cc-display-settings.c:111
 msgctxt "Display rotation"
 msgid "Landscape"
 msgstr "לרוחב"
 
-#: panels/display/cc-display-settings.c:110
+#: panels/display/cc-display-settings.c:114
 msgctxt "Display rotation"
 msgid "Portrait Right"
 msgstr "ימין לאורך"
 
-#: panels/display/cc-display-settings.c:113
+#: panels/display/cc-display-settings.c:117
 msgctxt "Display rotation"
 msgid "Portrait Left"
 msgstr "שמאל לאורך"
 
-#: panels/display/cc-display-settings.c:116
+#: panels/display/cc-display-settings.c:120
 msgctxt "Display rotation"
 msgid "Landscape (flipped)"
 msgstr "לרוחב (הפוך)"
 
-#: panels/display/cc-display-settings.c:177
+#: panels/display/cc-display-settings.c:181
 #, c-format
 msgid "%.2lf Hz"
 msgstr "‏%.2lf הרץ"
+
+#. Translators:
+#. * 1. "Variable" is an adjective that refers to the refresh rate
+#. * 2. The formatting sequence is a range separated by an en-dash
+#. *    (unicode "\u2013"). For example: "Variable (48–144.97 Hz)"
+#.
+#: panels/display/cc-display-settings.c:198
+#, c-format
+msgid "Variable (%d–%.2lf Hz)"
+msgstr "משתנה (%d–%.2lf הרץ)"
+
+#. Translators: "Variable" is an adjective that refers to the refresh rate
+#: panels/display/cc-display-settings.c:205
+#, c-format
+msgid "Variable (up to %.2lf Hz)"
+msgstr "משתנה (עד %.2lf הרץ)"
 
 # msgctxt "display setting"
 #: panels/display/cc-display-settings.ui:33
@@ -1746,16 +1762,25 @@ msgid "_Resolution"
 msgstr "_הבחנה"
 
 #: panels/display/cc-display-settings.ui:49
+#: panels/display/cc-display-settings.ui:57
 msgid "R_efresh Rate"
 msgstr "תדירות _רענון"
 
-#: panels/display/cc-display-settings.ui:57
+#: panels/display/cc-display-settings.ui:66
+msgid "_Variable Refresh Rate"
+msgstr "תדירות _רענון משתנה"
+
+#: panels/display/cc-display-settings.ui:74
+msgid "Re_fresh Rate"
+msgstr "תדירות _רענון"
+
+#: panels/display/cc-display-settings.ui:84
 msgid "Adjust for _TV"
 msgstr "התאמה ל_טלויזיה"
 
 # msgctxt "display setting"
-#: panels/display/cc-display-settings.ui:65
-#: panels/display/cc-display-settings.ui:81
+#: panels/display/cc-display-settings.ui:92
+#: panels/display/cc-display-settings.ui:108
 msgctxt "display setting"
 msgid "_Scale"
 msgstr "_קנה מידה"
@@ -1945,12 +1970,11 @@ msgstr "הפעלת דפדפן האינטרנט"
 msgid "Home folder"
 msgstr "תיקיית הבית"
 
-#: panels/keyboard/01-launchers.xml.in:16 panels/keyboard/cc-input-chooser.ui:50
-#: panels/printers/cc-printers-panel.ui:21
-#: panels/printers/new-printer-dialog.ui:210
-#: panels/search/gnome-search-panel.desktop.in:3
-#: panels/system/region/cc-format-chooser.ui:82 shell/cc-window.ui:28
-#: shell/cc-window.ui:30
+#. Translators: this is a verb.
+#. Translators: "Search" should be phrased as a verb (in both "Name" and "Keywords" fields).
+#. Translators: this is a verb.
+#: panels/keyboard/01-launchers.xml.in:16 panels/printers/cc-printers-panel.ui:21
+#: panels/search/gnome-search-panel.desktop.in:4 shell/cc-window.ui:28
 msgid "Search"
 msgstr "חיפוש"
 
@@ -2023,7 +2047,7 @@ msgstr "אחר"
 msgid "Add Input Source"
 msgstr "הוספת מקור קלט"
 
-#: panels/keyboard/cc-input-chooser.ui:60
+#: panels/keyboard/cc-input-chooser.ui:57
 msgid "Input methods can’t be used on the login screen"
 msgstr "לא ניתן להשתמש בשיטות קלט במסך הכניסה"
 
@@ -2654,7 +2678,7 @@ msgstr ""
 #: panels/network/connection-editor/ip6-page.ui:37
 #: panels/network/connection-editor/ip6-page.ui:197
 #: panels/network/connection-editor/ip6-page.ui:255
-#: panels/wacom/cc-wacom-page.c:613
+#: panels/wacom/cc-wacom-page.c:611
 msgid "Automatic"
 msgstr "אוטומטי"
 
@@ -2894,7 +2918,7 @@ msgstr "שם הרשת"
 
 #. Translators: This is a password needed for printing.
 #: panels/network/cc-wifi-hotspot-dialog.ui:92
-#: panels/printers/new-printer-dialog.ui:296 panels/printers/pp-jobs-dialog.ui:54
+#: panels/printers/new-printer-dialog.ui:293 panels/printers/pp-jobs-dialog.ui:54
 #: panels/system/users/cc-add-user-dialog.ui:150
 #: panels/wwan/cc-wwan-apn-dialog.ui:175
 msgid "Password"
@@ -4742,16 +4766,16 @@ msgstr "לא נמצא מדפסות"
 msgid "Enter a network address or search for a printer"
 msgstr "יש להזין כתובת רשת או חיפוש מדפסת"
 
-#: panels/printers/new-printer-dialog.ui:250
+#: panels/printers/new-printer-dialog.ui:247
 msgid "Authentication Required"
 msgstr "נדרש אימות"
 
-#: panels/printers/new-printer-dialog.ui:266
+#: panels/printers/new-printer-dialog.ui:263
 msgid "Enter username and password to view printers on Print Server"
 msgstr "יש להזין שם משתמש וססמה להצגת מדפסות זמינות על שרת ההדפסה"
 
 #. Translators: This is a username on a print server.
-#: panels/printers/new-printer-dialog.ui:275 panels/printers/pp-jobs-dialog.ui:42
+#: panels/printers/new-printer-dialog.ui:272 panels/printers/pp-jobs-dialog.ui:42
 #: panels/wwan/cc-wwan-apn-dialog.ui:150
 msgid "Username"
 msgstr "שם משתמש"
@@ -6503,28 +6527,28 @@ msgstr "חיפוש _יישום"
 msgid "Include app-provided search results"
 msgstr "לכלול תוצאות חיפוש מספקי יישומים"
 
-#: panels/search/cc-search-panel.ui:29
+#: panels/search/cc-search-panel.ui:23
 msgid "Search _Locations"
 msgstr "_מקומות לחיפוש"
 
-#: panels/search/cc-search-panel.ui:30
+#: panels/search/cc-search-panel.ui:24
 msgid "Filesystem locations which are searched by system apps"
 msgstr "מקומות במערכת הקבצים אשר מבוצע בהם חיפוש על ידי יישומי מערכת"
 
-#: panels/search/cc-search-panel.ui:39
+#: panels/search/cc-search-panel.ui:33
 msgid "Search Results"
 msgstr "תוצאות חיפוש"
 
-#: panels/search/cc-search-panel.ui:40
+#: panels/search/cc-search-panel.ui:34
 msgid "Results are displayed according to the list order"
 msgstr "תוצאות מוצגות לפי סדר הרשימה"
 
-#: panels/search/gnome-search-panel.desktop.in:4
+#: panels/search/gnome-search-panel.desktop.in:5
 msgid "Control which apps show search results in the Activities Overview"
 msgstr "שליטה באילו יישומים יציגו תוצאות חיפוש בסקירת פעילויות"
 
 #. Translators: Search terms to find the Search panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
-#: panels/search/gnome-search-panel.desktop.in:15
+#: panels/search/gnome-search-panel.desktop.in:16
 msgid "Search;Find;Index;Hide;Privacy;Results;"
 msgstr "חיפוש;מציאה;חפש;מצא;למצוא;לחפש;אינדקס;מפתח;הסתרה;החבאה;פרטיות;תוצאות;"
 
@@ -6595,7 +6619,6 @@ msgid "_Require Password"
 msgstr "ד_רישת ססמה"
 
 #: panels/sharing/cc-sharing-panel.ui:96
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:136
 #: panels/system/users/cc-enterprise-login-dialog.ui:114
 msgid "_Password"
 msgstr "_ססמה"
@@ -7259,23 +7282,23 @@ msgstr "תבניות"
 msgid "Search locales"
 msgstr "חיפוש שפות"
 
-#: panels/system/region/cc-format-chooser.ui:117
+#: panels/system/region/cc-format-chooser.ui:114
 msgid "Common Formats"
 msgstr "תבניות נפוצות"
 
-#: panels/system/region/cc-format-chooser.ui:144
+#: panels/system/region/cc-format-chooser.ui:141
 msgid "All Formats"
 msgstr "כל התבניות"
 
-#: panels/system/region/cc-format-chooser.ui:192
+#: panels/system/region/cc-format-chooser.ui:189
 msgid "No Search Results"
 msgstr "לא נמצאו תוצאות"
 
-#: panels/system/region/cc-format-chooser.ui:204
+#: panels/system/region/cc-format-chooser.ui:201
 msgid "Searches can be for countries or languages"
 msgstr "ניתן לחפש מדינות או שפות"
 
-#: panels/system/region/cc-format-chooser.ui:240
+#: panels/system/region/cc-format-chooser.ui:237
 msgid "Preview"
 msgstr "תצוגה מקדימה"
 
@@ -7358,108 +7381,17 @@ msgstr "_שפה"
 msgid "Fo_rmats"
 msgstr "_תבניות"
 
-#: panels/system/remote-desktop/cc-remote-desktop-page.c:418
-msgid "Device name copied"
-msgstr "שם ההתקן הועתק"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.c:429
-msgid "Device address copied"
-msgstr "כתובת ההתקן הועתקה"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.c:440
-msgid "Username copied"
-msgstr "שם המשתמש הועתק"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.c:451
-msgid "Password copied"
-msgstr "ססמה הועתקה"
-
-#. Translators: This will be presented as the text of a link to the documentation
-#: panels/system/remote-desktop/cc-remote-desktop-page.c:670
-msgid "learn how to use it"
-msgstr "ללמוד איך להשתמש בזה"
-
-#. Translators: %s is a link to the documentation with the label "learn how to use it"
-#: panels/system/remote-desktop/cc-remote-desktop-page.c:672
-#, c-format
-msgid ""
-"Remote desktop allows viewing and controlling your desktop from another computer "
-"– %s."
-msgstr "שולחן עבודה מרוחק מאפשר צפייה ושליטה בשולחן העבודה שלך ממחשב אחר - %s."
-
 #: panels/system/remote-desktop/cc-remote-desktop-page.ui:4
 msgid "Remote Desktop"
 msgstr "שולחן עבודה מרוחק"
 
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:22
-msgid "Remote _Desktop"
-msgstr "_שולחן עבודה מרוחק"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:24
-msgid "Enable or disable remote desktop connections to this computer"
-msgstr "הפעלה או השבתה של התחברות מרוחקת לשולחן העבודה של מחשב זה"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:30
-msgid "Remote _Control"
-msgstr "_שליטה מרחוק"
+#: panels/system/remote-desktop/cc-remote-desktop-page.ui:23
+msgid "Desktop Sharing"
+msgstr "שיתוף שולחן עבודה"
 
 #: panels/system/remote-desktop/cc-remote-desktop-page.ui:32
-msgid "Allows remote connections to control the screen"
-msgstr "לאפשר להתחברויות מרוחקות לשלוט במסך זה"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:40
-msgid "How to Connect"
-msgstr "כיצד להתחבר"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:41
-msgid "Connect to this computer using the device name or remote desktop address"
-msgstr "התחברות למחשב זה באמצעות שם ההתקן או כתובת שולחן העבודה המרוחק"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:45
-msgid "D_evice Name"
-msgstr "שם הה_תקן"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:58
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:63
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:89
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:94
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:119
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:124
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:140
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:145
-#: panels/system/remote-login/cc-remote-login-page.ui:65
-msgid "Copy"
-msgstr "העתקה"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:76
-msgid "Re_mote Desktop Address"
-msgstr "כתובת שולחן עבודה מ_רוחק"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:110
-msgid "Authentication"
-msgstr "אימות"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:111
-msgid "The user name and password are required to connect to this computer"
-msgstr "שם משתמש וססמה נדרשים על מנת להתחבר למחשב זה"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:115
-msgid "_User Name"
-msgstr "שם _משתמש"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:160
-msgid "_Verify Encryption"
-msgstr "_אימות הצפנה"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:196
-msgid "Encryption Fingerprint"
-msgstr "הצפנת טביעת אצבע"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:197
-msgid ""
-"The encryption fingerprint can be seen in connecting clients and should be "
-"identical"
-msgstr "הצפנת טביעת האצבע ניתנת לצפייה בצד הלקוח המתחבר וצריכה להיות זהה"
+msgid "Remote Login"
+msgstr "התחברות מרוחקת"
 
 #: panels/system/remote-login/cc-remote-login-page.c:53
 msgid "Command copied"
@@ -7476,6 +7408,10 @@ msgstr "גישה למכשיר הזה דרך מעטפת מאובטחת (SSH)"
 #: panels/system/remote-login/cc-remote-login-page.ui:58
 msgid "SSH Login Command"
 msgstr "פקודת כניסה עם SSH"
+
+#: panels/system/remote-login/cc-remote-login-page.ui:65
+msgid "Copy"
+msgstr "העתקה"
 
 #: panels/system/remote-login/org.gnome.controlcenter.remote-login-helper.policy.in.in:11
 msgid "Enable or disable remote login"
@@ -8860,20 +8796,20 @@ msgctxt "Wacom action-type"
 msgid "Show On-Screen Help"
 msgstr "הצגת עזרה על גבי המסך"
 
-#: panels/wacom/cc-wacom-device.c:431
+#: panels/wacom/cc-wacom-device.c:430
 msgid "Tablet mounted on laptop panel"
 msgstr "מחשב לוח מעוגן על לוח מחשב נייד"
 
-#: panels/wacom/cc-wacom-device.c:433
+#: panels/wacom/cc-wacom-device.c:432
 msgid "Tablet mounted on external display"
 msgstr "מחשב לוח מעוגן על צג חיצוני"
 
-#: panels/wacom/cc-wacom-device.c:435
+#: panels/wacom/cc-wacom-device.c:434
 msgid "External tablet device"
 msgstr "מחשב לוח חיצוני"
 
 #. All displays item
-#: panels/wacom/cc-wacom-page.c:600
+#: panels/wacom/cc-wacom-page.c:598
 msgid "All Displays"
 msgstr "כל הצגים"
 
@@ -8911,7 +8847,7 @@ msgstr "שמירה על _יחס התצוגה"
 msgid "Only use a portion of the tablet surface to keep monitor aspect ratio"
 msgstr "שימוש חלק במשטח מחשב הלוח על מנת לשמור על יחס תצוגה"
 
-#: panels/wacom/cc-wacom-page.ui:64
+#: panels/wacom/cc-wacom-page.ui:58
 msgid "_Calibrate"
 msgstr "_כיול"
 
@@ -9643,19 +9579,19 @@ msgstr "לא נמצאו תוצאות"
 msgid "Available panels:"
 msgstr "לוחות זמינים:"
 
-#: shell/cc-window.ui:42 shell/cc-window.ui:44
+#: shell/cc-window.ui:36
 msgid "Main Menu"
 msgstr "תפריט ראשי"
 
-#: shell/cc-window.ui:59
+#: shell/cc-window.ui:47
 msgid "Search settings"
 msgstr "חיפוש הגדרות"
 
-#: shell/cc-window.ui:94
+#: shell/cc-window.ui:82
 msgid "Warning: Development Version"
 msgstr "אזהרה: גרסת פיתוח"
 
-#: shell/cc-window.ui:95
+#: shell/cc-window.ui:83
 msgid ""
 "This version of Settings should only be used for development purposes. You may "
 "experience incorrect system behavior, data loss, and other unexpected issues. "
@@ -9663,19 +9599,19 @@ msgstr ""
 "גרסה זו של הגדרות צריכה לשמש למטרות פיתוח בלבד. הגרסה עשויה לגרום להתנהגויות לא "
 "תקינות של המערכת, לאבדן מידע לתקלות אחרות בלתי צפויות. "
 
-#: shell/cc-window.ui:99
+#: shell/cc-window.ui:87
 msgid "_OK"
 msgstr "_אישור"
 
-#: shell/cc-window.ui:107
+#: shell/cc-window.ui:95
 msgid "_Keyboard Shortcuts"
 msgstr "_צירופי מקשים"
 
-#: shell/cc-window.ui:111
+#: shell/cc-window.ui:99
 msgid "_Help"
 msgstr "_עזרה"
 
-#: shell/cc-window.ui:115
+#: shell/cc-window.ui:103
 msgid "_About Settings"
 msgstr "_על אודות ההגדרות"
 
@@ -9780,6 +9716,71 @@ msgstr[3] "‏‫%u ערוצי קלט"
 msgid "System Sounds"
 msgstr "צלילי מערכת"
 
+#~ msgid "Device name copied"
+#~ msgstr "שם ההתקן הועתק"
+
+#~ msgid "Device address copied"
+#~ msgstr "כתובת ההתקן הועתקה"
+
+#~ msgid "Username copied"
+#~ msgstr "שם המשתמש הועתק"
+
+#~ msgid "Password copied"
+#~ msgstr "ססמה הועתקה"
+
+#~ msgid "learn how to use it"
+#~ msgstr "ללמוד איך להשתמש בזה"
+
+#, c-format
+#~ msgid ""
+#~ "Remote desktop allows viewing and controlling your desktop from another "
+#~ "computer – %s."
+#~ msgstr "שולחן עבודה מרוחק מאפשר צפייה ושליטה בשולחן העבודה שלך ממחשב אחר - %s."
+
+#~ msgid "Remote _Desktop"
+#~ msgstr "_שולחן עבודה מרוחק"
+
+#~ msgid "Enable or disable remote desktop connections to this computer"
+#~ msgstr "הפעלה או השבתה של התחברות מרוחקת לשולחן העבודה של מחשב זה"
+
+#~ msgid "Remote _Control"
+#~ msgstr "_שליטה מרחוק"
+
+#~ msgid "Allows remote connections to control the screen"
+#~ msgstr "לאפשר להתחברויות מרוחקות לשלוט במסך זה"
+
+#~ msgid "How to Connect"
+#~ msgstr "כיצד להתחבר"
+
+#~ msgid "Connect to this computer using the device name or remote desktop address"
+#~ msgstr "התחברות למחשב זה באמצעות שם ההתקן או כתובת שולחן העבודה המרוחק"
+
+#~ msgid "D_evice Name"
+#~ msgstr "שם הה_תקן"
+
+#~ msgid "Re_mote Desktop Address"
+#~ msgstr "כתובת שולחן עבודה מ_רוחק"
+
+#~ msgid "Authentication"
+#~ msgstr "אימות"
+
+#~ msgid "The user name and password are required to connect to this computer"
+#~ msgstr "שם משתמש וססמה נדרשים על מנת להתחבר למחשב זה"
+
+#~ msgid "_User Name"
+#~ msgstr "שם _משתמש"
+
+#~ msgid "_Verify Encryption"
+#~ msgstr "_אימות הצפנה"
+
+#~ msgid "Encryption Fingerprint"
+#~ msgstr "הצפנת טביעת אצבע"
+
+#~ msgid ""
+#~ "The encryption fingerprint can be seen in connecting clients and should be "
+#~ "identical"
+#~ msgstr "הצפנת טביעת האצבע ניתנת לצפייה בצד הלקוח המתחבר וצריכה להיות זהה"
+
 #~ msgid "Unable to find the domain. Maybe you misspelled it?"
 #~ msgstr "לא ניתן למצוא את התחום. אולי שגית באיות?"
 
@@ -9846,9 +9847,6 @@ msgstr "צלילי מערכת"
 
 #~ msgid "_Remote Login"
 #~ msgstr "כניסה מ_רוחקת"
-
-#~ msgid "Remote Login"
-#~ msgstr "התחברות מרוחקת"
 
 #~ msgid "Default"
 #~ msgstr "בררת מחדל"
