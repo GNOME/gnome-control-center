@@ -20,9 +20,9 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2024-03-02 18:21+0000\n"
-"PO-Revision-Date: 2024-03-02 23:42+0300\n"
-"Last-Translator: Sabri Ünal <yakushabb@gmail.com>\n"
+"POT-Creation-Date: 2024-03-03 18:43+0000\n"
+"PO-Revision-Date: 2024-03-03 08:00+0300\n"
+"Last-Translator: Emin Tufan Çetin <etcetin@gmail.com>\n"
 "Language-Team: Turkish <takim@gnome.org.tr>\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
@@ -212,7 +212,7 @@ msgstr "Sistem aramaları al ve sonuçları gönder"
 #: panels/keyboard/cc-xkb-modifier-dialog.c:342
 #: panels/keyboard/keyboard-shortcuts.c:367
 #: panels/system/users/cc-user-page.c:379
-#: panels/system/users/cc-user-page.c:745 panels/wwan/cc-wwan-device-page.c:477
+#: panels/system/users/cc-user-page.c:749 panels/wwan/cc-wwan-device-page.c:477
 #: subprojects/gvc/gvc-mixer-control.c:1908
 msgid "Disabled"
 msgstr "Devre dışı"
@@ -1265,9 +1265,9 @@ msgstr "Yazılabilir ortam gerektirir"
 
 #: panels/color/cc-color-panel.ui:313
 msgid ""
-"You may find these instructions on how to use the profile on <a href=\"linux"
-"\">GNU/Linux</a>, <a href=\"osx\">Apple OS X</a> and <a href=\"windows"
-"\">Microsoft Windows</a> systems useful."
+"You may find these instructions on how to use the profile on <a "
+"href=\"linux\">GNU/Linux</a>, <a href=\"osx\">Apple OS X</a> and <a "
+"href=\"windows\">Microsoft Windows</a> systems useful."
 msgstr ""
 "Profili <a href=\"linux\">GNU/Linux</a>, <a href=\"osx\">Apple OS X</a> ve "
 "<a href=\"windows\">Microsoft Windows</a> sistemleri üzerinde nasıl "
@@ -1282,8 +1282,8 @@ msgid ""
 "Problems detected. The profile may not work correctly. <a href=\"\">Show "
 "details.</a>"
 msgstr ""
-"Bazı sorunlar saptandı. Bu profil düzgün çalışmayabilir. <a href="
-"\"\">Ayrıntıları göster.</a>"
+"Bazı sorunlar saptandı. Bu profil düzgün çalışmayabilir. <a "
+"href=\"\">Ayrıntıları göster.</a>"
 
 #: panels/color/cc-color-panel.ui:384
 msgid "_Import File…"
@@ -2970,6 +2970,8 @@ msgstr "Ağ Adı"
 #: panels/network/cc-wifi-hotspot-dialog.ui:92
 #: panels/printers/new-printer-dialog.ui:293
 #: panels/printers/pp-jobs-dialog.ui:54
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:110
+#: panels/system/remote-desktop/cc-remote-session-page.ui:108
 #: panels/system/users/cc-add-user-dialog.ui:150
 #: panels/wwan/cc-wwan-apn-dialog.ui:175
 msgid "Password"
@@ -4845,7 +4847,10 @@ msgstr ""
 
 #. Translators: This is a username on a print server.
 #: panels/printers/new-printer-dialog.ui:272
-#: panels/printers/pp-jobs-dialog.ui:42 panels/wwan/cc-wwan-apn-dialog.ui:150
+#: panels/printers/pp-jobs-dialog.ui:42
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:94
+#: panels/system/remote-desktop/cc-remote-session-page.ui:92
+#: panels/wwan/cc-wwan-apn-dialog.ui:150
 msgid "Username"
 msgstr "Kullanıcı Adı"
 
@@ -6006,7 +6011,7 @@ msgstr "Geçersiz"
 #. TRANSLATORS: Status of Parental Controls setup
 #: panels/privacy/cc-firmware-security-utils.c:45
 #: panels/system/users/cc-user-page.c:377
-#: panels/system/users/cc-user-page.c:745 panels/wwan/cc-wwan-device-page.c:475
+#: panels/system/users/cc-user-page.c:749 panels/wwan/cc-wwan-device-page.c:475
 msgid "Enabled"
 msgstr "Etkin"
 
@@ -7475,17 +7480,151 @@ msgstr "_Dil"
 msgid "Fo_rmats"
 msgstr "_Biçimler"
 
+#: panels/system/remote-desktop/cc-desktop-sharing-page.c:364
+#: panels/system/remote-desktop/cc-remote-session-page.c:98
+msgid "Device address copied"
+msgstr "Aygıt adresi kopyalandı"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.c:373
+#: panels/system/remote-desktop/cc-remote-session-page.c:107
+msgid "Port number copied"
+msgstr "Bağlantı noktası numarası kopyalandı"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.c:384
+#: panels/system/remote-desktop/cc-remote-session-page.c:118
+msgid "Username copied"
+msgstr "Kullanıcı adı kopyalandı"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.c:395
+#: panels/system/remote-desktop/cc-remote-session-page.c:129
+msgid "Password copied"
+msgstr "Parola kopyalandı"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:13
+msgid ""
+"Share your existing desktop with other devices. The remote connection uses "
+"the existing screen resolution"
+msgstr ""
+"Geçerli masaüstünüzü diğer aygıtlarla paylaşın. Uzak bağlantı, var olan ekran "
+"çözünürlüğünü kullanır"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:28
+msgid "_Desktop Sharing"
+msgstr "_Masaüstü Paylaşımı"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:34
+msgid "Remote _Control"
+msgstr "Uzaktan _Denetim"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:36
+msgid "Allows desktop shares to control the screen"
+msgstr "Masaüstü paylaşımlarının ekranı denetlemesini sağlar"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:43
+#: panels/system/remote-desktop/cc-remote-session-page.ui:41
+msgid "How to Connect"
+msgstr "Nasıl Bağlanılır"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:44
+msgid ""
+"Use a remote desktop app to connect using the RDP protocol. Additional "
+"information about the device’s network location may also be required."
+msgstr ""
+"RDP iletişim kuralıyla bağlanmak için uzak masaüstü uygulaması kullanın. "
+"Aygıtın ağ konumuyla ilgili ek bilgiler de gerekebilir."
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:47
+#: panels/system/remote-desktop/cc-remote-session-page.ui:45
+msgid "_Hostname"
+msgstr "_Makine Adı"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:55
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:76
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:97
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:113
+#: panels/system/remote-desktop/cc-remote-session-page.ui:53
+#: panels/system/remote-desktop/cc-remote-session-page.ui:74
+#: panels/system/remote-desktop/cc-remote-session-page.ui:95
+#: panels/system/remote-desktop/cc-remote-session-page.ui:111
+#: panels/system/remote-login/cc-remote-login-page.ui:65
+msgid "Copy"
+msgstr "Kopyala"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:68
+#: panels/system/remote-desktop/cc-remote-session-page.ui:66
+msgid "_Port"
+msgstr "_Bağlantı Noktası"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:91
+#: panels/system/remote-desktop/cc-remote-session-page.ui:89
+msgid "Login Details"
+msgstr "Oturum Açma Ayrıntıları"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:132
+#: panels/system/remote-desktop/cc-remote-session-page.ui:130
+msgid "_Generate New Password"
+msgstr "Yeni Parola _Oluştur"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:143
+#: panels/system/remote-desktop/cc-remote-session-page.ui:141
+msgid "_Verify Encryption"
+msgstr "Şifrelemeyi _Doğrula"
+
 #: panels/system/remote-desktop/cc-remote-desktop-page.ui:4
 msgid "Remote Desktop"
 msgstr "Uzak Masaüstü"
 
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:23
+#: panels/system/remote-desktop/cc-remote-desktop-page.ui:39
 msgid "Desktop Sharing"
 msgstr "Masaüstü Paylaşımı"
 
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:32
+#: panels/system/remote-desktop/cc-remote-desktop-page.ui:48
+#: panels/system/remote-desktop/cc-remote-session-page.ui:33
 msgid "Remote Login"
 msgstr "Uzaktan Giriş"
+
+#: panels/system/remote-desktop/cc-remote-session-page.c:774
+#: panels/system/users/cc-user-page.c:772
+msgid "Some settings are locked"
+msgstr "Kimi ayarlar kilitli"
+
+#: panels/system/remote-desktop/cc-remote-session-page.ui:18
+msgid ""
+"Remotely connect to your user account when it isn’t being used. The display "
+"resolution can be set from the remote."
+msgstr ""
+"Kullanılmadığında, kullanıcı hesabınıza uzaktan bağlanın. Ekran çözünürlüğü "
+"uzaktan ayarlanabilir."
+
+#: panels/system/remote-desktop/cc-remote-session-page.ui:42
+msgid ""
+"Use a remote desktop app to connect using the RDP protocol. Additional "
+"information about the device's network location may also be required"
+msgstr ""
+"RDP iletişim kuralıyla bağlanmak için uzak masaüstü uygulaması kullanın. "
+"Aygıtın ağ konumuyla ilgili ek bilgiler de gerekebilir"
+
+#: panels/system/remote-desktop/cc-encryption-fingerprint-dialog.ui:20
+msgid "Encryption Fingerprint"
+msgstr "Şifreleme Parmak İzi"
+
+#: panels/system/remote-desktop/cc-encryption-fingerprint-dialog.ui:21
+msgid ""
+"The encryption fingerprint can be seen in connecting clients and should be "
+"identical"
+msgstr ""
+"Bağlanan istemcilerde şifreleme parmak izi görünmelidir ve birbiriyle aynı "
+"olmalıdır"
+
+#: panels/system/remote-desktop/org.gnome.controlcenter.remote-session-helper.policy.in.in:11
+msgid "Enable or disable remote sessions"
+msgstr "Uzak oturumları etkinleştir ya da devre dışı bırak"
+
+#: panels/system/remote-desktop/org.gnome.controlcenter.remote-session-helper.policy.in.in:12
+msgid "Authentication is required to enable or disable remote sessions"
+msgstr ""
+"Uzak oturumları etkinleştirmek ya da devre dışı bırakmak için kimlik "
+"doğrulama gerekli"
 
 #: panels/system/remote-login/cc-remote-login-page.c:53
 msgid "Command copied"
@@ -7502,10 +7641,6 @@ msgstr "Güvenli Kabuk (SSH) kullanarak bu aygıta eriş"
 #: panels/system/remote-login/cc-remote-login-page.ui:58
 msgid "SSH Login Command"
 msgstr "SSH Oturum Açma Komutu"
-
-#: panels/system/remote-login/cc-remote-login-page.ui:65
-msgid "Copy"
-msgstr "Kopyala"
 
 #: panels/system/remote-login/org.gnome.controlcenter.remote-login-helper.policy.in.in:11
 msgid "Enable or disable remote login"
@@ -7604,8 +7739,8 @@ msgstr "Etki alanına girilemedi"
 #: panels/system/users/cc-enterprise-login-dialog.c:352
 #, c-format
 msgid ""
-"To add an enterprise login account, this device needs to be enrolled with <b>"
-"%s</b>. To enroll, have your domain administrator enter their name and "
+"To add an enterprise login account, this device needs to be enrolled with "
+"<b>%s</b>. To enroll, have your domain administrator enter their name and "
 "password."
 msgstr ""
 "Kurumsal giriş hesabı eklemek için, bu aygıt <b>%s</b> etki alanına kayıtlı "
@@ -7991,10 +8126,6 @@ msgstr "Hiçbiri"
 msgid "Remove %s?"
 msgstr "%s kaldırılsın mı?"
 
-#: panels/system/users/cc-user-page.c:768
-msgid "Some settings are locked"
-msgstr "Kimi ayarlar kilitli"
-
 #: panels/system/users/cc-user-page.ui:24
 #: panels/system/users/cc-user-page.ui:81
 #: panels/system/users/cc-user-page.ui:93
@@ -8055,15 +8186,15 @@ msgstr "Dosyaları ve Ayarları _Sil"
 msgid "Users"
 msgstr "Kullanıcılar"
 
-#: panels/system/users/cc-users-page.ui:17
+#: panels/system/users/cc-users-page.ui:16
 msgid "Other Users"
 msgstr "Diğer Kullanıcılar"
 
-#: panels/system/users/cc-users-page.ui:33
+#: panels/system/users/cc-users-page.ui:32
 msgid "_Add User…"
 msgstr "Kullanıcı _Ekle…"
 
-#: panels/system/users/cc-users-page.ui:47
+#: panels/system/users/cc-users-page.ui:46
 msgid "Add Enterprise User"
 msgstr "Kurumsal Kullanıcı Ekle"
 
@@ -9815,15 +9946,6 @@ msgstr "Sistem Sesleri"
 #~ msgid "Device name copied"
 #~ msgstr "Aygıt adı kopyalandı"
 
-#~ msgid "Device address copied"
-#~ msgstr "Aygıt adresi kopyalandı"
-
-#~ msgid "Username copied"
-#~ msgstr "Kullanıcı adı kopyalandı"
-
-#~ msgid "Password copied"
-#~ msgstr "Parola kopyalandı"
-
 #~ msgid "learn how to use it"
 #~ msgstr "nasıl kullanılacağını öğren"
 
@@ -9834,19 +9956,10 @@ msgstr "Sistem Sesleri"
 #~ "Uzak masaüstü, başka bilgisayardan masaüstünüzü görmeyi ve denetlemenizi "
 #~ "sağlar – %s."
 
-#~ msgid "Remote _Desktop"
-#~ msgstr "Uzak _Masaüstü"
-
 #~ msgid "Enable or disable remote desktop connections to this computer"
 #~ msgstr ""
 #~ "Bu bilgisayara uzak masaüstü bağlantısını etkinleştir veya devre dışı "
 #~ "bırak"
-
-#~ msgid "Allows remote connections to control the screen"
-#~ msgstr "Uzaktan bağlantıların ekranı denetlemesini sağlar"
-
-#~ msgid "How to Connect"
-#~ msgstr "Nasıl Bağlanılır"
 
 #~ msgid ""
 #~ "Connect to this computer using the device name or remote desktop address"
@@ -9867,19 +9980,6 @@ msgstr "Sistem Sesleri"
 
 #~ msgid "_User Name"
 #~ msgstr "_Kullanıcı Adı"
-
-#~ msgid "_Verify Encryption"
-#~ msgstr "Şifrelemeyi _Doğrula"
-
-#~ msgid "Encryption Fingerprint"
-#~ msgstr "Şifreleme Parmak İzi"
-
-#~ msgid ""
-#~ "The encryption fingerprint can be seen in connecting clients and should "
-#~ "be identical"
-#~ msgstr ""
-#~ "Bağlanan istemcilerde şifreleme parmak izi görünmelidir ve birbiriyle "
-#~ "aynı olmalıdır"
 
 #~ msgid "Unable to find the domain. Maybe you misspelled it?"
 #~ msgstr "Etki alanı bulunamadı. Yanlış yazmış olabilir misiniz?"
