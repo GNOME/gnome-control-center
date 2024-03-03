@@ -26,8 +26,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2024-03-03 12:36+0000\n"
-"PO-Revision-Date: 2024-03-03 14:44+0100\n"
+"POT-Creation-Date: 2024-03-03 17:04+0000\n"
+"PO-Revision-Date: 2024-03-03 19:22+0100\n"
 "Last-Translator: Daniel Rusek <mail@asciiwolf.com>\n"
 "Language-Team: Czech <gnome-cs-list@gnome.org>\n"
 "Language: cs\n"
@@ -2994,6 +2994,7 @@ msgstr "Název sítě"
 #: panels/network/cc-wifi-hotspot-dialog.ui:92
 #: panels/printers/new-printer-dialog.ui:293
 #: panels/printers/pp-jobs-dialog.ui:54
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:110
 #: panels/system/remote-desktop/cc-remote-session-page.ui:108
 #: panels/system/users/cc-add-user-dialog.ui:150
 #: panels/wwan/cc-wwan-apn-dialog.ui:175
@@ -4881,6 +4882,7 @@ msgstr ""
 #. Translators: This is a username on a print server.
 #: panels/printers/new-printer-dialog.ui:272
 #: panels/printers/pp-jobs-dialog.ui:42
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:94
 #: panels/system/remote-desktop/cc-remote-session-page.ui:92
 #: panels/wwan/cc-wwan-apn-dialog.ui:150
 msgid "Username"
@@ -7548,6 +7550,76 @@ msgstr "Bylo zkopírováno uživatelské jméno"
 msgid "Password copied"
 msgstr "Bylo zkopírováno heslo"
 
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:13
+msgid ""
+"Share your existing desktop with other devices. The remote connection uses "
+"the existing screen resolution"
+msgstr ""
+"Sdílejte svou stávající plochu s jinými zařízeními. Vzdálené připojení "
+"používá stávající rozlišení obrazovky"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:28
+msgid "_Desktop Sharing"
+msgstr "S_dílení plochy"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:34
+msgid "Remote _Control"
+msgstr "Vzdálené _ovládání"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:36
+msgid "Allows desktop shares to control the screen"
+msgstr "Umožňuje sdílením plochy ovládat obrazovku"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:43
+#: panels/system/remote-desktop/cc-remote-session-page.ui:41
+msgid "How to Connect"
+msgstr "Jak se připojovat"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:44
+msgid ""
+"Use a remote desktop app to connect using the RDP protocol. Additional "
+"information about the device’s network location may also be required."
+msgstr ""
+"Pro připojení pomocí protokolu RDP použijte aplikaci pro vzdálenou plochu. "
+"Mohou být také vyžadovány další informace o umístění zařízení v síti."
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:47
+#: panels/system/remote-desktop/cc-remote-session-page.ui:45
+msgid "_Hostname"
+msgstr "Název _hostitele"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:55
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:76
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:97
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:113
+#: panels/system/remote-desktop/cc-remote-session-page.ui:53
+#: panels/system/remote-desktop/cc-remote-session-page.ui:74
+#: panels/system/remote-desktop/cc-remote-session-page.ui:95
+#: panels/system/remote-desktop/cc-remote-session-page.ui:111
+#: panels/system/remote-login/cc-remote-login-page.ui:65
+msgid "Copy"
+msgstr "Zkopírovat"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:68
+#: panels/system/remote-desktop/cc-remote-session-page.ui:66
+msgid "_Port"
+msgstr "_Port"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:91
+#: panels/system/remote-desktop/cc-remote-session-page.ui:89
+msgid "Login Details"
+msgstr "Podrobnosti o přihlášení"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:132
+#: panels/system/remote-desktop/cc-remote-session-page.ui:130
+msgid "_Generate New Password"
+msgstr "Vy_generovat nové heslo"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:143
+#: panels/system/remote-desktop/cc-remote-session-page.ui:141
+msgid "_Verify Encryption"
+msgstr "_Ověřit šifrování"
+
 #: panels/system/remote-desktop/cc-remote-desktop-page.ui:4
 msgid "Remote Desktop"
 msgstr "Vzdálená plocha"
@@ -7561,7 +7633,7 @@ msgstr "Sdílení plochy"
 msgid "Remote Login"
 msgstr "Vzdálené přihlášení"
 
-#: panels/system/remote-desktop/cc-remote-session-page.c:754
+#: panels/system/remote-desktop/cc-remote-session-page.c:774
 #: panels/system/users/cc-user-page.c:772
 msgid "Some settings are locked"
 msgstr "Některá nastavení jsou uzamčena"
@@ -7574,10 +7646,6 @@ msgstr ""
 "Vzdáleně se připojte ke svému uživatelskému účtu, když jej nepoužíváte. "
 "Rozlišení displeje lze nastavit ze vzdáleného připojení."
 
-#: panels/system/remote-desktop/cc-remote-session-page.ui:41
-msgid "How to Connect"
-msgstr "Jak se připojovat"
-
 #: panels/system/remote-desktop/cc-remote-session-page.ui:42
 msgid ""
 "Use a remote desktop app to connect using the RDP protocol. Additional "
@@ -7585,34 +7653,6 @@ msgid ""
 msgstr ""
 "Pro připojení pomocí protokolu RDP použijte aplikaci pro vzdálenou plochu. "
 "Mohou být také vyžadovány další informace o umístění zařízení v síti"
-
-#: panels/system/remote-desktop/cc-remote-session-page.ui:45
-msgid "_Hostname"
-msgstr "Název _hostitele"
-
-#: panels/system/remote-desktop/cc-remote-session-page.ui:53
-#: panels/system/remote-desktop/cc-remote-session-page.ui:74
-#: panels/system/remote-desktop/cc-remote-session-page.ui:95
-#: panels/system/remote-desktop/cc-remote-session-page.ui:111
-#: panels/system/remote-login/cc-remote-login-page.ui:65
-msgid "Copy"
-msgstr "Zkopírovat"
-
-#: panels/system/remote-desktop/cc-remote-session-page.ui:66
-msgid "_Port"
-msgstr "_Port"
-
-#: panels/system/remote-desktop/cc-remote-session-page.ui:89
-msgid "Login Details"
-msgstr "Podrobnosti o přihlášení"
-
-#: panels/system/remote-desktop/cc-remote-session-page.ui:130
-msgid "_Generate New Password"
-msgstr "Vy_generovat nové heslo"
-
-#: panels/system/remote-desktop/cc-remote-session-page.ui:141
-msgid "_Verify Encryption"
-msgstr "_Ověřit šifrování"
 
 #: panels/system/remote-desktop/cc-encryption-fingerprint-dialog.ui:20
 msgid "Encryption Fingerprint"
@@ -9981,12 +10021,6 @@ msgstr "Systémové zvuky"
 #~ msgid "Enable or disable remote desktop connections to this computer"
 #~ msgstr ""
 #~ "Povolit nebo zakázat u tohoto počítače přihlášení přes vzdálenou plochu"
-
-#~ msgid "Remote _Control"
-#~ msgstr "Vzdálené _ovládání"
-
-#~ msgid "Allows remote connections to control the screen"
-#~ msgstr "Umožnit vzdálenému připojení ovládat obrazovku"
 
 #~ msgid ""
 #~ "Connect to this computer using the device name or remote desktop address"
