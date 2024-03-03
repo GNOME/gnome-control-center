@@ -26,8 +26,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2024-03-02 18:21+0000\n"
-"PO-Revision-Date: 2024-03-02 20:48+0200\n"
+"POT-Creation-Date: 2024-03-03 17:04+0000\n"
+"PO-Revision-Date: 2024-03-03 21:18+0200\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos+l10n@iki.fi>\n"
 "Language-Team: suomi <lokalisointi-lista@googlegroups.com>\n"
 "Language: fi\n"
@@ -224,7 +224,7 @@ msgstr "Vastaanota hakuja järjestelmältä ja lähetä tuloksia"
 #: panels/keyboard/cc-xkb-modifier-dialog.c:342
 #: panels/keyboard/keyboard-shortcuts.c:367
 #: panels/system/users/cc-user-page.c:379
-#: panels/system/users/cc-user-page.c:745 panels/wwan/cc-wwan-device-page.c:477
+#: panels/system/users/cc-user-page.c:749 panels/wwan/cc-wwan-device-page.c:477
 #: subprojects/gvc/gvc-mixer-control.c:1908
 msgid "Disabled"
 msgstr "Ei käytössä"
@@ -2988,6 +2988,8 @@ msgstr "Verkon nimi"
 #: panels/network/cc-wifi-hotspot-dialog.ui:92
 #: panels/printers/new-printer-dialog.ui:293
 #: panels/printers/pp-jobs-dialog.ui:54
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:110
+#: panels/system/remote-desktop/cc-remote-session-page.ui:108
 #: panels/system/users/cc-add-user-dialog.ui:150
 #: panels/wwan/cc-wwan-apn-dialog.ui:175
 msgid "Password"
@@ -4873,7 +4875,10 @@ msgstr ""
 
 #. Translators: This is a username on a print server.
 #: panels/printers/new-printer-dialog.ui:272
-#: panels/printers/pp-jobs-dialog.ui:42 panels/wwan/cc-wwan-apn-dialog.ui:150
+#: panels/printers/pp-jobs-dialog.ui:42
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:94
+#: panels/system/remote-desktop/cc-remote-session-page.ui:92
+#: panels/wwan/cc-wwan-apn-dialog.ui:150
 msgid "Username"
 msgstr "Käyttäjätunnus"
 
@@ -6041,7 +6046,7 @@ msgstr "Ei kelvollinen"
 #. TRANSLATORS: Status of Parental Controls setup
 #: panels/privacy/cc-firmware-security-utils.c:45
 #: panels/system/users/cc-user-page.c:377
-#: panels/system/users/cc-user-page.c:745 panels/wwan/cc-wwan-device-page.c:475
+#: panels/system/users/cc-user-page.c:749 panels/wwan/cc-wwan-device-page.c:475
 msgid "Enabled"
 msgstr "Käytössä"
 
@@ -7525,17 +7530,150 @@ msgstr "_Kieli"
 msgid "Fo_rmats"
 msgstr "_Muotoilut"
 
+#: panels/system/remote-desktop/cc-desktop-sharing-page.c:364
+#: panels/system/remote-desktop/cc-remote-session-page.c:98
+msgid "Device address copied"
+msgstr "Laiteosoite kopioitu"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.c:373
+#: panels/system/remote-desktop/cc-remote-session-page.c:107
+msgid "Port number copied"
+msgstr "Porttinumero kopioitu"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.c:384
+#: panels/system/remote-desktop/cc-remote-session-page.c:118
+msgid "Username copied"
+msgstr "Käyttäjätunnus kopioitu"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.c:395
+#: panels/system/remote-desktop/cc-remote-session-page.c:129
+msgid "Password copied"
+msgstr "Salasana kopioitu"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:13
+msgid ""
+"Share your existing desktop with other devices. The remote connection uses "
+"the existing screen resolution"
+msgstr ""
+"Jaa työpöytäsi muiden laitteiden kanssa. Etäyhteys käyttää olemassa olevaa "
+"näytön tarkkuutta"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:28
+msgid "_Desktop Sharing"
+msgstr "_Työpöydän jako"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:34
+msgid "Remote _Control"
+msgstr "Etä_hallinta"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:36
+msgid "Allows desktop shares to control the screen"
+msgstr "Sallii etäyhteyksien hallita näyttöä"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:43
+#: panels/system/remote-desktop/cc-remote-session-page.ui:41
+msgid "How to Connect"
+msgstr "Miten yhdistää"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:44
+msgid ""
+"Use a remote desktop app to connect using the RDP protocol. Additional "
+"information about the device’s network location may also be required."
+msgstr ""
+"Käytä etätyöpöytäsovellusta yhdistääksesi RDP-yhteyskäytännöllä. Laitteen "
+"sijainnista verkosta saatetaan tarvita lisätietoja."
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:47
+#: panels/system/remote-desktop/cc-remote-session-page.ui:45
+msgid "_Hostname"
+msgstr "P_alvelin"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:55
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:76
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:97
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:113
+#: panels/system/remote-desktop/cc-remote-session-page.ui:53
+#: panels/system/remote-desktop/cc-remote-session-page.ui:74
+#: panels/system/remote-desktop/cc-remote-session-page.ui:95
+#: panels/system/remote-desktop/cc-remote-session-page.ui:111
+#: panels/system/remote-login/cc-remote-login-page.ui:65
+msgid "Copy"
+msgstr "Kopioi"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:68
+#: panels/system/remote-desktop/cc-remote-session-page.ui:66
+msgid "_Port"
+msgstr "_Portti"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:91
+#: panels/system/remote-desktop/cc-remote-session-page.ui:89
+msgid "Login Details"
+msgstr "Kirjautumistiedot"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:132
+#: panels/system/remote-desktop/cc-remote-session-page.ui:130
+msgid "_Generate New Password"
+msgstr "_Luo uusi salasana"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:143
+#: panels/system/remote-desktop/cc-remote-session-page.ui:141
+msgid "_Verify Encryption"
+msgstr "Vahvista _salaus"
+
 #: panels/system/remote-desktop/cc-remote-desktop-page.ui:4
 msgid "Remote Desktop"
 msgstr "Etätyöpöytä"
 
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:23
+#: panels/system/remote-desktop/cc-remote-desktop-page.ui:39
 msgid "Desktop Sharing"
 msgstr "Työpöydän jako"
 
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:32
+#: panels/system/remote-desktop/cc-remote-desktop-page.ui:48
+#: panels/system/remote-desktop/cc-remote-session-page.ui:33
 msgid "Remote Login"
 msgstr "Etäkirjautuminen"
+
+#: panels/system/remote-desktop/cc-remote-session-page.c:774
+#: panels/system/users/cc-user-page.c:772
+msgid "Some settings are locked"
+msgstr "Jotkin asetukset on lukittu"
+
+#: panels/system/remote-desktop/cc-remote-session-page.ui:18
+msgid ""
+"Remotely connect to your user account when it isn’t being used. The display "
+"resolution can be set from the remote."
+msgstr ""
+"Yhdistä etäältä tiliisi, kun se ei ole käytössä. Näytön tarkkuus on "
+"mahdollista asettaa etäältä."
+
+#: panels/system/remote-desktop/cc-remote-session-page.ui:42
+msgid ""
+"Use a remote desktop app to connect using the RDP protocol. Additional "
+"information about the device's network location may also be required"
+msgstr ""
+"Käytä etätyöpöytäsovellusta yhdistääksesi RDP-yhteyskäytännöllä. Laitteen "
+"sijainnista verkosta saatetaan tarvita lisätietoja"
+
+#: panels/system/remote-desktop/cc-encryption-fingerprint-dialog.ui:20
+msgid "Encryption Fingerprint"
+msgstr "Salauksen sormenjälki"
+
+#: panels/system/remote-desktop/cc-encryption-fingerprint-dialog.ui:21
+msgid ""
+"The encryption fingerprint can be seen in connecting clients and should be "
+"identical"
+msgstr ""
+"Salauksen sormenjälki on näkyvissä yhdistäville asiakkaille ja sen pitäisi "
+"olla identtinen"
+
+#: panels/system/remote-desktop/org.gnome.controlcenter.remote-session-helper.policy.in.in:11
+msgid "Enable or disable remote sessions"
+msgstr "Käytä tai poista käytöstä etäistunnot"
+
+#: panels/system/remote-desktop/org.gnome.controlcenter.remote-session-helper.policy.in.in:12
+msgid "Authentication is required to enable or disable remote sessions"
+msgstr ""
+"Etäistuntojen käyttöönotto tai käytöstä poistaminen vaatii tunnistautuminen"
 
 #: panels/system/remote-login/cc-remote-login-page.c:53
 msgid "Command copied"
@@ -7552,10 +7690,6 @@ msgstr "Käytä tätä laitetta Secure Shell (SSH) -yhteydellä"
 #: panels/system/remote-login/cc-remote-login-page.ui:58
 msgid "SSH Login Command"
 msgstr "SSH-kirjautumiskomento"
-
-#: panels/system/remote-login/cc-remote-login-page.ui:65
-msgid "Copy"
-msgstr "Kopioi"
 
 #: panels/system/remote-login/org.gnome.controlcenter.remote-login-helper.policy.in.in:11
 msgid "Enable or disable remote login"
@@ -8041,10 +8175,6 @@ msgstr "Ei mitään"
 msgid "Remove %s?"
 msgstr "Poistetaanko %s?"
 
-#: panels/system/users/cc-user-page.c:768
-msgid "Some settings are locked"
-msgstr "Jotkin asetukset on lukittu"
-
 #: panels/system/users/cc-user-page.ui:24
 #: panels/system/users/cc-user-page.ui:81
 #: panels/system/users/cc-user-page.ui:93
@@ -8107,15 +8237,15 @@ msgstr "_Poista tiedostot ja asetukset"
 msgid "Users"
 msgstr "Käyttäjät"
 
-#: panels/system/users/cc-users-page.ui:17
+#: panels/system/users/cc-users-page.ui:16
 msgid "Other Users"
 msgstr "Muut käyttäjät"
 
-#: panels/system/users/cc-users-page.ui:33
+#: panels/system/users/cc-users-page.ui:32
 msgid "_Add User…"
 msgstr "_Lisää käyttäjä…"
 
-#: panels/system/users/cc-users-page.ui:47
+#: panels/system/users/cc-users-page.ui:46
 msgid "Add Enterprise User"
 msgstr "Lisää yrityskäyttäjä"
 
@@ -9881,15 +10011,6 @@ msgstr "Järjestelmän äänet"
 #~ msgid "Device name copied"
 #~ msgstr "Laitteen nimi kopioitu"
 
-#~ msgid "Device address copied"
-#~ msgstr "Laiteosoite kopioitu"
-
-#~ msgid "Username copied"
-#~ msgstr "Käyttäjätunnus kopioitu"
-
-#~ msgid "Password copied"
-#~ msgstr "Salasana kopioitu"
-
 #~ msgid "learn how to use it"
 #~ msgstr "lue miten voit käyttää sitä"
 
@@ -9907,15 +10028,6 @@ msgstr "Järjestelmän äänet"
 #~ msgid "Enable or disable remote desktop connections to this computer"
 #~ msgstr ""
 #~ "Ota käyttöön tai poista käytöstä etätyöpöytäyhteydet tähän tietokoneeseen"
-
-#~ msgid "Remote _Control"
-#~ msgstr "Etä_hallinta"
-
-#~ msgid "Allows remote connections to control the screen"
-#~ msgstr "Sallii etäyhteyksien hallita näyttöä"
-
-#~ msgid "How to Connect"
-#~ msgstr "Miten yhdistää"
 
 #~ msgid ""
 #~ "Connect to this computer using the device name or remote desktop address"
@@ -9938,19 +10050,6 @@ msgstr "Järjestelmän äänet"
 
 #~ msgid "_User Name"
 #~ msgstr "_Käyttäjätunnus"
-
-#~ msgid "_Verify Encryption"
-#~ msgstr "Vahvista _salaus"
-
-#~ msgid "Encryption Fingerprint"
-#~ msgstr "Salauksen sormenjälki"
-
-#~ msgid ""
-#~ "The encryption fingerprint can be seen in connecting clients and should "
-#~ "be identical"
-#~ msgstr ""
-#~ "Salauksen sormenjälki on näkyvissä yhdistäville asiakkaille ja sen "
-#~ "pitäisi olla identtinen"
 
 #~ msgid "No Apps"
 #~ msgstr "Ei sovelluksia"
@@ -10573,9 +10672,6 @@ msgstr "Järjestelmän äänet"
 #~ msgstr ""
 #~ "%s omaa seuraavat sisäänrakennetut oikeudet. Niitä ei voi muuttaa. Jos "
 #~ "olet huolissasi näistä oikeuksia, harkitse sovelluksen poistamista."
-
-#~ msgid "View Details"
-#~ msgstr "Näytä tiedot"
 
 #~ msgid "Application"
 #~ msgstr "Sovellus"
