@@ -1,6 +1,5 @@
 .mouse-test-viewport {
     background: #26a269;
-    border-radius: 5px;
 }
 
 .mouse-test-arrow {
@@ -10,6 +9,12 @@
 
 .click-status-emblem {
     border-radius: 9999px;
-    background-color: @borders;
+    background-color: alpha(currentColor, .2);
+    color: alpha(currentColor, .5);
     padding: 10px;
+}
+
+.click-status-emblem.success {
+    background-color: @success_bg_color;
+    color: @success_fg_color;
 }
