@@ -405,9 +405,22 @@ format_port_for_row (GBinding     *binding,
   int port = g_value_get_int (from_value);
 
   if (port <= 0)
-    g_value_set_string (to_value, "");
+    g_value_set_string (to_value, " ");
   else
     g_value_take_string (to_value, g_strdup_printf ("%u", port));
+
+  return TRUE;
+}
+
+static gboolean
+sensitize_row_from_port (GBinding     *binding,
+                         const GValue *from_value,
+                         GValue       *to_value,
+                         gpointer      user_data)
+{
+  int port = g_value_get_int (from_value);
+
+  g_value_set_boolean (to_value, port > 0);
 
   return TRUE;
 }
@@ -672,6 +685,13 @@ on_connected_to_remote_desktop_rdp_server (GObject      *source_object,
                                self->port_row, "subtitle",
                                G_BINDING_SYNC_CREATE,
                                format_port_for_row,
+                               NULL,
+                               NULL,
+                               NULL);
+  g_object_bind_property_full (self->rdp_server, "port",
+                               self->port_row, "sensitive",
+                               G_BINDING_SYNC_CREATE,
+                               sensitize_row_from_port,
                                NULL,
                                NULL,
                                NULL);
