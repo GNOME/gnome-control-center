@@ -26,8 +26,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2024-03-02 23:02+0000\n"
-"PO-Revision-Date: 2024-03-03 00:24+0100\n"
+"POT-Creation-Date: 2024-03-03 12:36+0000\n"
+"PO-Revision-Date: 2024-03-03 14:44+0100\n"
 "Last-Translator: Daniel Rusek <mail@asciiwolf.com>\n"
 "Language-Team: Czech <gnome-cs-list@gnome.org>\n"
 "Language: cs\n"
@@ -221,7 +221,7 @@ msgstr "Přijímat od systému požadavky na hledání a předávat výsledky"
 #: panels/keyboard/cc-xkb-modifier-dialog.c:342
 #: panels/keyboard/keyboard-shortcuts.c:367
 #: panels/system/users/cc-user-page.c:379
-#: panels/system/users/cc-user-page.c:745 panels/wwan/cc-wwan-device-page.c:477
+#: panels/system/users/cc-user-page.c:749 panels/wwan/cc-wwan-device-page.c:477
 #: subprojects/gvc/gvc-mixer-control.c:1908
 msgid "Disabled"
 msgstr "Vypnuto"
@@ -2994,6 +2994,7 @@ msgstr "Název sítě"
 #: panels/network/cc-wifi-hotspot-dialog.ui:92
 #: panels/printers/new-printer-dialog.ui:293
 #: panels/printers/pp-jobs-dialog.ui:54
+#: panels/system/remote-desktop/cc-remote-session-page.ui:108
 #: panels/system/users/cc-add-user-dialog.ui:150
 #: panels/wwan/cc-wwan-apn-dialog.ui:175
 msgid "Password"
@@ -4879,7 +4880,9 @@ msgstr ""
 
 #. Translators: This is a username on a print server.
 #: panels/printers/new-printer-dialog.ui:272
-#: panels/printers/pp-jobs-dialog.ui:42 panels/wwan/cc-wwan-apn-dialog.ui:150
+#: panels/printers/pp-jobs-dialog.ui:42
+#: panels/system/remote-desktop/cc-remote-session-page.ui:92
+#: panels/wwan/cc-wwan-apn-dialog.ui:150
 msgid "Username"
 msgstr "Uživatelské jméno"
 
@@ -6051,7 +6054,7 @@ msgstr "Neplatné"
 #. TRANSLATORS: Status of Parental Controls setup
 #: panels/privacy/cc-firmware-security-utils.c:45
 #: panels/system/users/cc-user-page.c:377
-#: panels/system/users/cc-user-page.c:745 panels/wwan/cc-wwan-device-page.c:475
+#: panels/system/users/cc-user-page.c:749 panels/wwan/cc-wwan-device-page.c:475
 msgid "Enabled"
 msgstr "Zapnuto"
 
@@ -7525,17 +7528,111 @@ msgstr "Jazy_k"
 msgid "Fo_rmats"
 msgstr "Fo_rmáty"
 
+#: panels/system/remote-desktop/cc-desktop-sharing-page.c:364
+#: panels/system/remote-desktop/cc-remote-session-page.c:98
+msgid "Device address copied"
+msgstr "Byla zkopírována adresa zařízení"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.c:373
+#: panels/system/remote-desktop/cc-remote-session-page.c:107
+msgid "Port number copied"
+msgstr "Číslo portu zkopírováno"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.c:384
+#: panels/system/remote-desktop/cc-remote-session-page.c:118
+msgid "Username copied"
+msgstr "Bylo zkopírováno uživatelské jméno"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.c:395
+#: panels/system/remote-desktop/cc-remote-session-page.c:129
+msgid "Password copied"
+msgstr "Bylo zkopírováno heslo"
+
 #: panels/system/remote-desktop/cc-remote-desktop-page.ui:4
 msgid "Remote Desktop"
 msgstr "Vzdálená plocha"
 
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:23
+#: panels/system/remote-desktop/cc-remote-desktop-page.ui:39
 msgid "Desktop Sharing"
 msgstr "Sdílení plochy"
 
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:32
+#: panels/system/remote-desktop/cc-remote-desktop-page.ui:48
+#: panels/system/remote-desktop/cc-remote-session-page.ui:33
 msgid "Remote Login"
 msgstr "Vzdálené přihlášení"
+
+#: panels/system/remote-desktop/cc-remote-session-page.c:754
+#: panels/system/users/cc-user-page.c:772
+msgid "Some settings are locked"
+msgstr "Některá nastavení jsou uzamčena"
+
+#: panels/system/remote-desktop/cc-remote-session-page.ui:18
+msgid ""
+"Remotely connect to your user account when it isn’t being used. The display "
+"resolution can be set from the remote."
+msgstr ""
+"Vzdáleně se připojte ke svému uživatelskému účtu, když jej nepoužíváte. "
+"Rozlišení displeje lze nastavit ze vzdáleného připojení."
+
+#: panels/system/remote-desktop/cc-remote-session-page.ui:41
+msgid "How to Connect"
+msgstr "Jak se připojovat"
+
+#: panels/system/remote-desktop/cc-remote-session-page.ui:42
+msgid ""
+"Use a remote desktop app to connect using the RDP protocol. Additional "
+"information about the device's network location may also be required"
+msgstr ""
+"Pro připojení pomocí protokolu RDP použijte aplikaci pro vzdálenou plochu. "
+"Mohou být také vyžadovány další informace o umístění zařízení v síti"
+
+#: panels/system/remote-desktop/cc-remote-session-page.ui:45
+msgid "_Hostname"
+msgstr "Název _hostitele"
+
+#: panels/system/remote-desktop/cc-remote-session-page.ui:53
+#: panels/system/remote-desktop/cc-remote-session-page.ui:74
+#: panels/system/remote-desktop/cc-remote-session-page.ui:95
+#: panels/system/remote-desktop/cc-remote-session-page.ui:111
+#: panels/system/remote-login/cc-remote-login-page.ui:65
+msgid "Copy"
+msgstr "Zkopírovat"
+
+#: panels/system/remote-desktop/cc-remote-session-page.ui:66
+msgid "_Port"
+msgstr "_Port"
+
+#: panels/system/remote-desktop/cc-remote-session-page.ui:89
+msgid "Login Details"
+msgstr "Podrobnosti o přihlášení"
+
+#: panels/system/remote-desktop/cc-remote-session-page.ui:130
+msgid "_Generate New Password"
+msgstr "Vy_generovat nové heslo"
+
+#: panels/system/remote-desktop/cc-remote-session-page.ui:141
+msgid "_Verify Encryption"
+msgstr "_Ověřit šifrování"
+
+#: panels/system/remote-desktop/cc-encryption-fingerprint-dialog.ui:20
+msgid "Encryption Fingerprint"
+msgstr "Otisk šifrovacího klíče"
+
+#: panels/system/remote-desktop/cc-encryption-fingerprint-dialog.ui:21
+msgid ""
+"The encryption fingerprint can be seen in connecting clients and should be "
+"identical"
+msgstr ""
+"Otisk šifrovacího klíče by měl být vidět na připojovaném klientovi a měl by "
+"se shodovat"
+
+#: panels/system/remote-desktop/org.gnome.controlcenter.remote-session-helper.policy.in.in:11
+msgid "Enable or disable remote sessions"
+msgstr "Povolit nebo zakázat vzdálená sezení"
+
+#: panels/system/remote-desktop/org.gnome.controlcenter.remote-session-helper.policy.in.in:12
+msgid "Authentication is required to enable or disable remote sessions"
+msgstr "Pro povolení nebo zakázání vzdálených sezení je vyžadováno ověření"
 
 #: panels/system/remote-login/cc-remote-login-page.c:53
 msgid "Command copied"
@@ -7553,19 +7650,13 @@ msgstr "Přistupujte k tomuto zařízení pomocí Zabezpečeného Shellu (SSH)"
 msgid "SSH Login Command"
 msgstr "Přihlašovací příkaz SSH"
 
-#: panels/system/remote-login/cc-remote-login-page.ui:65
-msgid "Copy"
-msgstr "Zkopírovat"
-
 #: panels/system/remote-login/org.gnome.controlcenter.remote-login-helper.policy.in.in:11
 msgid "Enable or disable remote login"
 msgstr "Povolit nebo zakázat vzdálené přihlášení"
 
 #: panels/system/remote-login/org.gnome.controlcenter.remote-login-helper.policy.in.in:12
 msgid "Authentication is required to enable or disable remote login"
-msgstr ""
-"Pro povolení nebo zakázání vzdáleného přihlášení je vyžadováno ověření "
-"totožnosti"
+msgstr "Pro povolení nebo zakázání vzdáleného přihlášení je vyžadováno ověření"
 
 #: panels/system/users/cc-add-user-dialog.c:159
 msgid "Failed to add account"
@@ -8042,10 +8133,6 @@ msgstr "Žádné"
 msgid "Remove %s?"
 msgstr "Odebrat %s?"
 
-#: panels/system/users/cc-user-page.c:768
-msgid "Some settings are locked"
-msgstr "Některá nastavení jsou uzamčena"
-
 #: panels/system/users/cc-user-page.ui:24
 #: panels/system/users/cc-user-page.ui:81
 #: panels/system/users/cc-user-page.ui:93
@@ -8107,15 +8194,15 @@ msgstr "O_dstranit soubory a nastavení"
 msgid "Users"
 msgstr "Uživatelé"
 
-#: panels/system/users/cc-users-page.ui:17
+#: panels/system/users/cc-users-page.ui:16
 msgid "Other Users"
 msgstr "Ostatní uživatelé"
 
-#: panels/system/users/cc-users-page.ui:33
+#: panels/system/users/cc-users-page.ui:32
 msgid "_Add User…"
 msgstr "Přid_at uživatele…"
 
-#: panels/system/users/cc-users-page.ui:47
+#: panels/system/users/cc-users-page.ui:46
 msgid "Add Enterprise User"
 msgstr "Přidat podnikového uživatele"
 
@@ -8143,7 +8230,7 @@ msgstr "Správa uživatelských účtů"
 
 #: panels/system/users/org.gnome.controlcenter.user-accounts.policy.in:12
 msgid "Authentication is required to change user data"
-msgstr "Ke změně uživatelských dat je vyžadováno ověření."
+msgstr "Pro změnu uživatelských dat je vyžadováno ověření"
 
 #: panels/system/users/pw-utils.c:94
 msgctxt "Password hint"
@@ -9877,15 +9964,6 @@ msgstr "Systémové zvuky"
 #~ msgid "Device name copied"
 #~ msgstr "Byl zkopírován název zařízení"
 
-#~ msgid "Device address copied"
-#~ msgstr "Byla zkopírována adresa zařízení"
-
-#~ msgid "Username copied"
-#~ msgstr "Bylo zkopírováno uživatelské jméno"
-
-#~ msgid "Password copied"
-#~ msgstr "Bylo zkopírováno heslo"
-
 #~ msgid "learn how to use it"
 #~ msgstr "naučte se ji používat"
 
@@ -9910,9 +9988,6 @@ msgstr "Systémové zvuky"
 #~ msgid "Allows remote connections to control the screen"
 #~ msgstr "Umožnit vzdálenému připojení ovládat obrazovku"
 
-#~ msgid "How to Connect"
-#~ msgstr "Jak se připojovat"
-
 #~ msgid ""
 #~ "Connect to this computer using the device name or remote desktop address"
 #~ msgstr ""
@@ -9934,19 +10009,6 @@ msgstr "Systémové zvuky"
 
 #~ msgid "_User Name"
 #~ msgstr "_Uživatelské jméno"
-
-#~ msgid "_Verify Encryption"
-#~ msgstr "_Ověřit šifrování"
-
-#~ msgid "Encryption Fingerprint"
-#~ msgstr "Otisk šifrovacího klíče"
-
-#~ msgid ""
-#~ "The encryption fingerprint can be seen in connecting clients and should "
-#~ "be identical"
-#~ msgstr ""
-#~ "Otisk šifrovacího klíče by měl být vidět na připojovaném klientovi a měl "
-#~ "by se shodovat"
 
 #~ msgid "Unable to find the domain. Maybe you misspelled it?"
 #~ msgstr "Nelze najít doménu. Nemáte v názvu překlep?"
@@ -10578,9 +10640,6 @@ msgstr "Systémové zvuky"
 
 #~ msgid "Applications"
 #~ msgstr "Aplikace"
-
-#~ msgid "View Details"
-#~ msgstr "Zobrazit podrobnosti"
 
 #~ msgid "Application"
 #~ msgstr "Aplikace"
