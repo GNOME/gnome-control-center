@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: unnamed project\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2024-03-02 18:21+0000\n"
-"PO-Revision-Date: 2024-03-03 13:33+0100\n"
+"POT-Creation-Date: 2024-03-03 12:36+0000\n"
+"PO-Revision-Date: 2024-03-03 14:19+0100\n"
 "Last-Translator: Brage <bragefuglseth@gnome.org>\n"
 "Language-Team: Afar <>\n"
 "Language: nb\n"
@@ -202,7 +202,7 @@ msgstr "Motta søkeord og vise treff"
 #: panels/keyboard/cc-xkb-modifier-dialog.c:342
 #: panels/keyboard/keyboard-shortcuts.c:367
 #: panels/system/users/cc-user-page.c:379
-#: panels/system/users/cc-user-page.c:745 panels/wwan/cc-wwan-device-page.c:477
+#: panels/system/users/cc-user-page.c:749 panels/wwan/cc-wwan-device-page.c:477
 #: subprojects/gvc/gvc-mixer-control.c:1908
 msgid "Disabled"
 msgstr "Slått av"
@@ -1018,7 +1018,7 @@ msgstr "%s-skjerm"
 #: panels/color/cc-color-common.c:69
 #, c-format
 msgid "%s Scanner"
-msgstr "%s-kanner"
+msgstr "%s-skanner"
 
 #. TRANSLATORS: a camera device, e.g. 'Nikon D60 Camera'
 #: panels/color/cc-color-common.c:73
@@ -2951,6 +2951,7 @@ msgstr "Nettverksnavn"
 #: panels/network/cc-wifi-hotspot-dialog.ui:92
 #: panels/printers/new-printer-dialog.ui:293
 #: panels/printers/pp-jobs-dialog.ui:54
+#: panels/system/remote-desktop/cc-remote-session-page.ui:108
 #: panels/system/users/cc-add-user-dialog.ui:150
 #: panels/wwan/cc-wwan-apn-dialog.ui:175
 msgid "Password"
@@ -4817,7 +4818,9 @@ msgstr "Skriv inn brukernavn og passord for å se skrivere på tjeneren"
 
 #. Translators: This is a username on a print server.
 #: panels/printers/new-printer-dialog.ui:272
-#: panels/printers/pp-jobs-dialog.ui:42 panels/wwan/cc-wwan-apn-dialog.ui:150
+#: panels/printers/pp-jobs-dialog.ui:42
+#: panels/system/remote-desktop/cc-remote-session-page.ui:92
+#: panels/wwan/cc-wwan-apn-dialog.ui:150
 msgid "Username"
 msgstr "Brukernavn"
 
@@ -5973,7 +5976,7 @@ msgstr "Ugyldig"
 #. TRANSLATORS: Status of Parental Controls setup
 #: panels/privacy/cc-firmware-security-utils.c:45
 #: panels/system/users/cc-user-page.c:377
-#: panels/system/users/cc-user-page.c:745 panels/wwan/cc-wwan-device-page.c:475
+#: panels/system/users/cc-user-page.c:749 panels/wwan/cc-wwan-device-page.c:475
 msgid "Enabled"
 msgstr "Slått på"
 
@@ -7438,17 +7441,110 @@ msgstr "S_pråk"
 msgid "Fo_rmats"
 msgstr "Skrive_måter"
 
+#: panels/system/remote-desktop/cc-desktop-sharing-page.c:364
+#: panels/system/remote-desktop/cc-remote-session-page.c:98
+msgid "Device address copied"
+msgstr "Enhetsadresse kopiert til utklippstavlen"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.c:373
+#: panels/system/remote-desktop/cc-remote-session-page.c:107
+msgid "Port number copied"
+msgstr "Portnavn kopiert til utklippstavlen"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.c:384
+#: panels/system/remote-desktop/cc-remote-session-page.c:118
+msgid "Username copied"
+msgstr "Brukernavn kopiert til utklippstavlen"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.c:395
+#: panels/system/remote-desktop/cc-remote-session-page.c:129
+msgid "Password copied"
+msgstr "Passord kopiert til utklippstavlen"
+
 #: panels/system/remote-desktop/cc-remote-desktop-page.ui:4
 msgid "Remote Desktop"
 msgstr "Fjernbruk"
 
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:23
+#: panels/system/remote-desktop/cc-remote-desktop-page.ui:39
 msgid "Desktop Sharing"
 msgstr "Skjermdeling"
 
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:32
+#: panels/system/remote-desktop/cc-remote-desktop-page.ui:48
+#: panels/system/remote-desktop/cc-remote-session-page.ui:33
 msgid "Remote Login"
 msgstr "Fjerninnlogging"
+
+#: panels/system/remote-desktop/cc-remote-session-page.c:754
+#: panels/system/users/cc-user-page.c:772
+msgid "Some settings are locked"
+msgstr "Enkelte instillinger må låses opp"
+
+#: panels/system/remote-desktop/cc-remote-session-page.ui:18
+msgid ""
+"Remotely connect to your user account when it isn’t being used. The display "
+"resolution can be set from the remote."
+msgstr ""
+"Koble til brukeren din eksternt når den ikke er innlogget. Skjermoppløsning "
+"kan velges fra den eksterne enheten."
+
+#: panels/system/remote-desktop/cc-remote-session-page.ui:41
+msgid "How to Connect"
+msgstr "Instruksjoner for tilkobling"
+
+#: panels/system/remote-desktop/cc-remote-session-page.ui:42
+msgid ""
+"Use a remote desktop app to connect using the RDP protocol. Additional "
+"information about the device's network location may also be required"
+msgstr ""
+"Bruk en fjernbruksapp til å koble til med RDP-protokollen. "
+"Tilleggsinformasjon om enhetens nettverksplassering kan være nødvendig"
+
+#: panels/system/remote-desktop/cc-remote-session-page.ui:45
+msgid "_Hostname"
+msgstr "_Enhetsnavn"
+
+#: panels/system/remote-desktop/cc-remote-session-page.ui:53
+#: panels/system/remote-desktop/cc-remote-session-page.ui:74
+#: panels/system/remote-desktop/cc-remote-session-page.ui:95
+#: panels/system/remote-desktop/cc-remote-session-page.ui:111
+#: panels/system/remote-login/cc-remote-login-page.ui:65
+msgid "Copy"
+msgstr "Kopier"
+
+#: panels/system/remote-desktop/cc-remote-session-page.ui:66
+msgid "_Port"
+msgstr "_Port"
+
+#: panels/system/remote-desktop/cc-remote-session-page.ui:89
+msgid "Login Details"
+msgstr "Innloggingsinformasjon"
+
+#: panels/system/remote-desktop/cc-remote-session-page.ui:130
+msgid "_Generate New Password"
+msgstr "_Generer nytt passord"
+
+#: panels/system/remote-desktop/cc-remote-session-page.ui:141
+msgid "_Verify Encryption"
+msgstr "_Verifiser kryptering"
+
+#: panels/system/remote-desktop/cc-encryption-fingerprint-dialog.ui:20
+msgid "Encryption Fingerprint"
+msgstr "Krypteringsavtrykk"
+
+#: panels/system/remote-desktop/cc-encryption-fingerprint-dialog.ui:21
+msgid ""
+"The encryption fingerprint can be seen in connecting clients and should be "
+"identical"
+msgstr ""
+"Krypteringsavtrykket vises på tilkoblede enheter, og bør samsvare med dette"
+
+#: panels/system/remote-desktop/org.gnome.controlcenter.remote-session-helper.policy.in.in:11
+msgid "Enable or disable remote sessions"
+msgstr "Slå av eller på fjernøkter"
+
+#: panels/system/remote-desktop/org.gnome.controlcenter.remote-session-helper.policy.in.in:12
+msgid "Authentication is required to enable or disable remote sessions"
+msgstr "Autentisering kreves for å slå av eller på fjernøkter"
 
 #: panels/system/remote-login/cc-remote-login-page.c:53
 msgid "Command copied"
@@ -7465,10 +7561,6 @@ msgstr "Koble til enheten med Secure Shell (SSH)"
 #: panels/system/remote-login/cc-remote-login-page.ui:58
 msgid "SSH Login Command"
 msgstr "Kommando til SSH-innlogging"
-
-#: panels/system/remote-login/cc-remote-login-page.ui:65
-msgid "Copy"
-msgstr "Kopier"
 
 #: panels/system/remote-login/org.gnome.controlcenter.remote-login-helper.policy.in.in:11
 msgid "Enable or disable remote login"
@@ -7947,10 +8039,6 @@ msgstr "Intet"
 msgid "Remove %s?"
 msgstr "Fjerne %s?"
 
-#: panels/system/users/cc-user-page.c:768
-msgid "Some settings are locked"
-msgstr "Enkelte instillinger må låses opp"
-
 #: panels/system/users/cc-user-page.ui:24
 #: panels/system/users/cc-user-page.ui:81
 #: panels/system/users/cc-user-page.ui:93
@@ -8013,15 +8101,15 @@ msgstr "_Slett filer og innstillinger"
 msgid "Users"
 msgstr "Brukere"
 
-#: panels/system/users/cc-users-page.ui:17
+#: panels/system/users/cc-users-page.ui:16
 msgid "Other Users"
 msgstr "Andre brukere"
 
-#: panels/system/users/cc-users-page.ui:33
+#: panels/system/users/cc-users-page.ui:32
 msgid "_Add User…"
 msgstr "_Legg til bruker…"
 
-#: panels/system/users/cc-users-page.ui:47
+#: panels/system/users/cc-users-page.ui:46
 msgid "Add Enterprise User"
 msgstr "Legg til organisasjonsbruker"
 
@@ -9768,15 +9856,6 @@ msgstr "Systemlyder"
 #~ msgid "Device name copied"
 #~ msgstr "Enhetsnavn kopiert til utklippstavlen"
 
-#~ msgid "Device address copied"
-#~ msgstr "Enhetsadresse kopiert til utklippstavlen"
-
-#~ msgid "Username copied"
-#~ msgstr "Brukernavn kopiert til utklippstavlen"
-
-#~ msgid "Password copied"
-#~ msgstr "Passord kopiert til utklippstavlen"
-
 #~ msgid "learn how to use it"
 #~ msgstr "lær mer her"
 
@@ -9794,9 +9873,6 @@ msgstr "Systemlyder"
 
 #~ msgid "Allows remote connections to control the screen"
 #~ msgstr "La andre enheter styre skjermen"
-
-#~ msgid "How to Connect"
-#~ msgstr "Instruksjoner for tilkobling"
 
 #~ msgid ""
 #~ "Connect to this computer using the device name or remote desktop address"
@@ -9816,19 +9892,6 @@ msgstr "Systemlyder"
 
 #~ msgid "_User Name"
 #~ msgstr "_Brukernavn"
-
-#~ msgid "_Verify Encryption"
-#~ msgstr "_Verifiser kryptering"
-
-#~ msgid "Encryption Fingerprint"
-#~ msgstr "Krypteringsavtrykk"
-
-#~ msgid ""
-#~ "The encryption fingerprint can be seen in connecting clients and should "
-#~ "be identical"
-#~ msgstr ""
-#~ "Krypteringsavtrykket vises på tilkoblede enheter, og bør samsvare med "
-#~ "dette"
 
 #~ msgid "Unable to find the domain. Maybe you misspelled it?"
 #~ msgstr "Kan ikke finne domenet. Kanskje det ble skrevet feil?"
