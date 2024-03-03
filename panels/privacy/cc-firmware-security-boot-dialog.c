@@ -87,7 +87,7 @@ cc_firmware_security_boot_dialog_new (SecureBootState secure_boot_state)
                                             _("Secure boot prevents malicious software from being loaded when the device "
                                               "starts. It is currently turned on, but will not work due to having an invalid key."),
                                             /* TRANSLATORS: this is the second section of description. */
-                                            _("Secure boot problems can often be resolved from your computer's UEFI firmware settings "
+                                            _("Secure boot problems can often be resolved from your device's UEFI firmware settings "
                                               "(BIOS) and your hardware manufacturer may provide information on how to do this."),
                                             /* TRANSLATORS: this is the third section of description. */
                                             _("For help, contact your hardware manufacturer or IT support provider."));
@@ -103,7 +103,7 @@ cc_firmware_security_boot_dialog_new (SecureBootState secure_boot_state)
                                             _("Secure boot prevents malicious software from being loaded when the device starts. It is "
                                               "currently turned off."),
                                             /* TRANSLATORS: this is the second section of the description. */
-                                            _("Secure boot can often be turned on from your computer's UEFI firmware settings (BIOS). "
+                                            _("Secure boot can often be turned on from your device's UEFI firmware settings (BIOS). "
                                               "For help, contact your hardware manufacturer or IT support provider."));
       break;
     }
