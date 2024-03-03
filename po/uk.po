@@ -10,8 +10,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/iss"
 "ues\n"
-"POT-Creation-Date: 2024-03-02 18:21+0000\n"
-"PO-Revision-Date: 2024-03-02 22:45+0200\n"
+"POT-Creation-Date: 2024-03-03 17:04+0000\n"
+"PO-Revision-Date: 2024-03-03 20:43+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -209,7 +209,7 @@ msgstr "Отримання сигналів системи про пошук і 
 #: panels/keyboard/cc-xkb-modifier-dialog.c:342
 #: panels/keyboard/keyboard-shortcuts.c:367
 #: panels/system/users/cc-user-page.c:379
-#: panels/system/users/cc-user-page.c:745 panels/wwan/cc-wwan-device-page.c:477
+#: panels/system/users/cc-user-page.c:749 panels/wwan/cc-wwan-device-page.c:477
 #: subprojects/gvc/gvc-mixer-control.c:1908
 msgid "Disabled"
 msgstr "Вимкнено"
@@ -1811,12 +1811,10 @@ msgid "R_efresh Rate"
 msgstr "_Частота оновлення"
 
 #: panels/display/cc-display-settings.ui:66
-#| msgid "R_efresh Rate"
 msgid "_Variable Refresh Rate"
 msgstr "З_мінна частота оновлення"
 
 #: panels/display/cc-display-settings.ui:74
-#| msgid "R_efresh Rate"
 msgid "Re_fresh Rate"
 msgstr "_Частота оновлення"
 
@@ -2997,6 +2995,8 @@ msgstr "Назва мережі"
 #: panels/network/cc-wifi-hotspot-dialog.ui:92
 #: panels/printers/new-printer-dialog.ui:293
 #: panels/printers/pp-jobs-dialog.ui:54
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:110
+#: panels/system/remote-desktop/cc-remote-session-page.ui:108
 #: panels/system/users/cc-add-user-dialog.ui:150
 #: panels/wwan/cc-wwan-apn-dialog.ui:175
 msgid "Password"
@@ -4891,7 +4891,10 @@ msgstr ""
 
 #. Translators: This is a username on a print server.
 #: panels/printers/new-printer-dialog.ui:272
-#: panels/printers/pp-jobs-dialog.ui:42 panels/wwan/cc-wwan-apn-dialog.ui:150
+#: panels/printers/pp-jobs-dialog.ui:42
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:94
+#: panels/system/remote-desktop/cc-remote-session-page.ui:92
+#: panels/wwan/cc-wwan-apn-dialog.ui:150
 msgid "Username"
 msgstr "Користувач"
 
@@ -6070,7 +6073,7 @@ msgstr "Нечинний"
 #. TRANSLATORS: Status of Parental Controls setup
 #: panels/privacy/cc-firmware-security-utils.c:45
 #: panels/system/users/cc-user-page.c:377
-#: panels/system/users/cc-user-page.c:745 panels/wwan/cc-wwan-device-page.c:475
+#: panels/system/users/cc-user-page.c:749 panels/wwan/cc-wwan-device-page.c:475
 msgid "Enabled"
 msgstr "Увімкнено"
 
@@ -7559,18 +7562,161 @@ msgstr "_Мова"
 msgid "Fo_rmats"
 msgstr "_Формати"
 
+#: panels/system/remote-desktop/cc-desktop-sharing-page.c:364
+#: panels/system/remote-desktop/cc-remote-session-page.c:98
+msgid "Device address copied"
+msgstr "Скопійовано адресу пристрою"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.c:373
+#: panels/system/remote-desktop/cc-remote-session-page.c:107
+#| msgid "Username copied"
+msgid "Port number copied"
+msgstr "Номер порту скопійовано"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.c:384
+#: panels/system/remote-desktop/cc-remote-session-page.c:118
+msgid "Username copied"
+msgstr "Ім'я користувача скопійовано"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.c:395
+#: panels/system/remote-desktop/cc-remote-session-page.c:129
+msgid "Password copied"
+msgstr "Пароль скопійовано"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:13
+msgid ""
+"Share your existing desktop with other devices. The remote connection uses "
+"the existing screen resolution"
+msgstr ""
+"Оприлюднити вашу наявну стільницю на інші пристрої. Для віддаленого"
+" з'єднання буде використано наявну роздільну здатність екрана."
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:28
+#| msgid "Desktop Sharing"
+msgid "_Desktop Sharing"
+msgstr "Спі_льні стільниці"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:34
+msgid "Remote _Control"
+msgstr "Дистан_ційне керування"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:36
+#| msgid "Allows remote connections to control the screen"
+msgid "Allows desktop shares to control the screen"
+msgstr "Дозволяє спільним сеансам стільниці керування екраном"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:43
+#: panels/system/remote-desktop/cc-remote-session-page.ui:41
+msgid "How to Connect"
+msgstr "Як з'єднатися"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:44
+msgid ""
+"Use a remote desktop app to connect using the RDP protocol. Additional "
+"information about the device’s network location may also be required."
+msgstr ""
+"Використати віддалену стільницю для встановлення з'єднання за використанням"
+" протоколу RDP. Можливо, знадобляться додаткові дані щодо розташування"
+" пристрою у мережі."
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:47
+#: panels/system/remote-desktop/cc-remote-session-page.ui:45
+#| msgid "_Username"
+msgid "_Hostname"
+msgstr "Назва _вузла"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:55
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:76
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:97
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:113
+#: panels/system/remote-desktop/cc-remote-session-page.ui:53
+#: panels/system/remote-desktop/cc-remote-session-page.ui:74
+#: panels/system/remote-desktop/cc-remote-session-page.ui:95
+#: panels/system/remote-desktop/cc-remote-session-page.ui:111
+#: panels/system/remote-login/cc-remote-login-page.ui:65
+msgid "Copy"
+msgstr "Копіювати"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:68
+#: panels/system/remote-desktop/cc-remote-session-page.ui:66
+#| msgid "Port"
+msgid "_Port"
+msgstr "П_орт"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:91
+#: panels/system/remote-desktop/cc-remote-session-page.ui:89
+#| msgid "View Details"
+msgid "Login Details"
+msgstr "Подробиці щодо реєстрації"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:132
+#: panels/system/remote-desktop/cc-remote-session-page.ui:130
+#| msgid "Generate Random Password"
+msgid "_Generate New Password"
+msgstr "С_творити пароль"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:143
+#: panels/system/remote-desktop/cc-remote-session-page.ui:141
+msgid "_Verify Encryption"
+msgstr "П_еревірити шифрування"
+
 #: panels/system/remote-desktop/cc-remote-desktop-page.ui:4
 msgid "Remote Desktop"
 msgstr "Віддалена стільниця"
 
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:23
-#| msgid "File Sharing"
+#: panels/system/remote-desktop/cc-remote-desktop-page.ui:39
 msgid "Desktop Sharing"
 msgstr "Спільні стільниці"
 
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:32
+#: panels/system/remote-desktop/cc-remote-desktop-page.ui:48
+#: panels/system/remote-desktop/cc-remote-session-page.ui:33
 msgid "Remote Login"
 msgstr "Віддалений вхід"
+
+#: panels/system/remote-desktop/cc-remote-session-page.c:774
+#: panels/system/users/cc-user-page.c:772
+msgid "Some settings are locked"
+msgstr "Деякі з параметрів заблоковано"
+
+#: panels/system/remote-desktop/cc-remote-session-page.ui:18
+msgid ""
+"Remotely connect to your user account when it isn’t being used. The display "
+"resolution can be set from the remote."
+msgstr ""
+"Віддалено встановити з'єднання з вашим обліковим записом користувача, якщо"
+" його ще не використано. Роздільність екрана може бути встановлено з"
+" віддаленого комп'ютера."
+
+#: panels/system/remote-desktop/cc-remote-session-page.ui:42
+msgid ""
+"Use a remote desktop app to connect using the RDP protocol. Additional "
+"information about the device's network location may also be required"
+msgstr ""
+"Використати віддалену стільницю для встановлення з'єднання за використанням"
+" протоколу RDP. Можливо, знадобляться додаткові дані щодо розташування"
+" пристрою у мережі"
+
+#: panels/system/remote-desktop/cc-encryption-fingerprint-dialog.ui:20
+msgid "Encryption Fingerprint"
+msgstr "Відбиток шифрування"
+
+#: panels/system/remote-desktop/cc-encryption-fingerprint-dialog.ui:21
+msgid ""
+"The encryption fingerprint can be seen in connecting clients and should be "
+"identical"
+msgstr ""
+"Відбиток шифрування можна переглянути у клієнтах з'єднання — він має бути "
+"таким самим"
+
+#: panels/system/remote-desktop/org.gnome.controlcenter.remote-session-helper.policy.in.in:11
+#| msgid "Enable or disable remote login"
+msgid "Enable or disable remote sessions"
+msgstr "Увімкнути або вимкнути віддалені сеанси"
+
+#: panels/system/remote-desktop/org.gnome.controlcenter.remote-session-helper.policy.in.in:12
+#| msgid "Authentication is required to enable or disable remote login"
+msgid "Authentication is required to enable or disable remote sessions"
+msgstr "Потрібно засвідчення, щоб увімкнути або вимкнути віддалені сеанси"
 
 #: panels/system/remote-login/cc-remote-login-page.c:53
 msgid "Command copied"
@@ -7587,10 +7733,6 @@ msgstr "Доступ до цього пристрою за допомогою з
 #: panels/system/remote-login/cc-remote-login-page.ui:58
 msgid "SSH Login Command"
 msgstr "Команда входу до SSH"
-
-#: panels/system/remote-login/cc-remote-login-page.ui:65
-msgid "Copy"
-msgstr "Копіювати"
 
 #: panels/system/remote-login/org.gnome.controlcenter.remote-login-helper.policy.in.in:11
 msgid "Enable or disable remote login"
@@ -8076,10 +8218,6 @@ msgstr "Немає"
 msgid "Remove %s?"
 msgstr "Вилучити %s?"
 
-#: panels/system/users/cc-user-page.c:768
-msgid "Some settings are locked"
-msgstr "Деякі з параметрів заблоковано"
-
 #: panels/system/users/cc-user-page.ui:24
 #: panels/system/users/cc-user-page.ui:81
 #: panels/system/users/cc-user-page.ui:93
@@ -8142,15 +8280,15 @@ msgstr "Ви_лучити файли і параметри"
 msgid "Users"
 msgstr "Користувачі"
 
-#: panels/system/users/cc-users-page.ui:17
+#: panels/system/users/cc-users-page.ui:16
 msgid "Other Users"
 msgstr "Інші користувачі"
 
-#: panels/system/users/cc-users-page.ui:33
+#: panels/system/users/cc-users-page.ui:32
 msgid "_Add User…"
 msgstr "_Додати користувача…"
 
-#: panels/system/users/cc-users-page.ui:47
+#: panels/system/users/cc-users-page.ui:46
 msgid "Add Enterprise User"
 msgstr "Додати комерційного користувача"
 
@@ -9926,15 +10064,6 @@ msgstr "Системні звуки"
 #~ msgid "Device name copied"
 #~ msgstr "Скопійовано назву пристрою"
 
-#~ msgid "Device address copied"
-#~ msgstr "Скопійовано адресу пристрою"
-
-#~ msgid "Username copied"
-#~ msgstr "Ім'я користувача скопійовано"
-
-#~ msgid "Password copied"
-#~ msgstr "Пароль скопійовано"
-
 #~ msgid "learn how to use it"
 #~ msgstr "дізнатися про спосіб користування"
 
@@ -9953,15 +10082,6 @@ msgstr "Системні звуки"
 #~ msgstr ""
 #~ "Увімкнути або вимкнути віддалені з'єднання зі стільницею на цьому "
 #~ "комп'ютері"
-
-#~ msgid "Remote _Control"
-#~ msgstr "Дистан_ційне керування"
-
-#~ msgid "Allows remote connections to control the screen"
-#~ msgstr "Уможливлює керування екраном за допомогою віддалених з'єднань"
-
-#~ msgid "How to Connect"
-#~ msgstr "Як з'єднатися"
 
 #~ msgid ""
 #~ "Connect to this computer using the device name or remote desktop address"
@@ -9985,19 +10105,6 @@ msgstr "Системні звуки"
 
 #~ msgid "_User Name"
 #~ msgstr "_Користувач"
-
-#~ msgid "_Verify Encryption"
-#~ msgstr "П_еревірити шифрування"
-
-#~ msgid "Encryption Fingerprint"
-#~ msgstr "Відбиток шифрування"
-
-#~ msgid ""
-#~ "The encryption fingerprint can be seen in connecting clients and should "
-#~ "be identical"
-#~ msgstr ""
-#~ "Відбиток шифрування можна переглянути у клієнтах з'єднання — він має бути "
-#~ "таким самим"
 
 #~ msgid "Unable to find the domain. Maybe you misspelled it?"
 #~ msgstr "Не вдалося знайти домен. Можливо, ви неправильно це написали?"
@@ -10757,9 +10864,6 @@ msgstr "Системні звуки"
 #~ msgstr ""
 #~ "%s має вказані нижче вбудовані дозволи. Це неможливо змінити. Якщо вас "
 #~ "турбують ці дозволи, розгляньте можливість вилучення цієї програми."
-
-#~ msgid "View Details"
-#~ msgstr "Переглянути подробиці"
 
 #~ msgid "Application"
 #~ msgstr "Програма"
