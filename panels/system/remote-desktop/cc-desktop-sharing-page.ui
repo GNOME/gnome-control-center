@@ -123,29 +123,23 @@
                 </child>
                 <child>
                   <object class="GtkBox">
+                    <property name="margin-top">24</property>
                     <property name="spacing">10</property>
                     <child>
                       <object class="GtkButton" id="generate_password_button">
                         <property name="sensitive">False</property>
-                        <property name="halign">left</property>
-                        <property name="margin-top">24</property>
+                        <property name="can-shrink">True</property>
                         <property name="label" translatable="yes">_Generate New Password</property>
                         <property name="use-underline">True</property>
                         <signal name="clicked" handler="on_generate_password_button_clicked" swapped="yes"/>
                       </object>
                     </child>
                     <child>
-                      <object class="GtkBox" id="spacer_box">
-                        <property name="visible">True</property>
-                        <property name="can-focus">False</property>
-                        <property name="hexpand">True</property>
-                      </object>
-                    </child>
-                    <child>
                       <object class="GtkButton" id="verify_encryption_button">
                         <property name="sensitive">False</property>
-                        <property name="halign">right</property>
-                        <property name="margin-top">24</property>
+                        <property name="hexpand">True</property>
+                        <property name="halign">end</property>
+                        <property name="can-shrink">True</property>
                         <property name="label" translatable="yes">_Verify Encryption</property>
                         <property name="use-underline">True</property>
                         <signal name="clicked" handler="on_verify_encryption_button_clicked" swapped="yes"/>
