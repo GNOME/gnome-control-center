@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2024-03-02 18:21+0000\n"
-"PO-Revision-Date: 2024-03-02 19:58+0100\n"
+"POT-Creation-Date: 2024-03-03 17:04+0000\n"
+"PO-Revision-Date: 2024-03-03 20:39+0100\n"
 "Last-Translator: Ekaterine Papava <papava.e@gtu.ge>\n"
 "Language-Team: Georgian <(nothing)>\n"
 "Language: ka\n"
@@ -205,7 +205,7 @@ msgstr "სისტემის ძებნის მიღება და �
 #: panels/keyboard/cc-xkb-modifier-dialog.c:342
 #: panels/keyboard/keyboard-shortcuts.c:367
 #: panels/system/users/cc-user-page.c:379
-#: panels/system/users/cc-user-page.c:745 panels/wwan/cc-wwan-device-page.c:477
+#: panels/system/users/cc-user-page.c:749 panels/wwan/cc-wwan-device-page.c:477
 #: subprojects/gvc/gvc-mixer-control.c:1908
 msgid "Disabled"
 msgstr "გამორთული"
@@ -2966,6 +2966,8 @@ msgstr "ქსელის სახელი"
 #: panels/network/cc-wifi-hotspot-dialog.ui:92
 #: panels/printers/new-printer-dialog.ui:293
 #: panels/printers/pp-jobs-dialog.ui:54
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:110
+#: panels/system/remote-desktop/cc-remote-session-page.ui:108
 #: panels/system/users/cc-add-user-dialog.ui:150
 #: panels/wwan/cc-wwan-apn-dialog.ui:175
 msgid "Password"
@@ -4839,7 +4841,10 @@ msgstr ""
 
 #. Translators: This is a username on a print server.
 #: panels/printers/new-printer-dialog.ui:272
-#: panels/printers/pp-jobs-dialog.ui:42 panels/wwan/cc-wwan-apn-dialog.ui:150
+#: panels/printers/pp-jobs-dialog.ui:42
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:94
+#: panels/system/remote-desktop/cc-remote-session-page.ui:92
+#: panels/wwan/cc-wwan-apn-dialog.ui:150
 msgid "Username"
 msgstr "მომხმარებლის სახელი"
 
@@ -6002,7 +6007,7 @@ msgstr "არასწორია"
 #. TRANSLATORS: Status of Parental Controls setup
 #: panels/privacy/cc-firmware-security-utils.c:45
 #: panels/system/users/cc-user-page.c:377
-#: panels/system/users/cc-user-page.c:745 panels/wwan/cc-wwan-device-page.c:475
+#: panels/system/users/cc-user-page.c:749 panels/wwan/cc-wwan-device-page.c:475
 msgid "Enabled"
 msgstr "ჩართულია"
 
@@ -7480,17 +7485,149 @@ msgstr "ენ_ა"
 msgid "Fo_rmats"
 msgstr "ფო_რმატები"
 
+#: panels/system/remote-desktop/cc-desktop-sharing-page.c:364
+#: panels/system/remote-desktop/cc-remote-session-page.c:98
+msgid "Device address copied"
+msgstr "მოწყობილობის მისამართი კოპირებულია"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.c:373
+#: panels/system/remote-desktop/cc-remote-session-page.c:107
+msgid "Port number copied"
+msgstr "პორტის ნომერი დაკოპირდა"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.c:384
+#: panels/system/remote-desktop/cc-remote-session-page.c:118
+msgid "Username copied"
+msgstr "მომხმარებლის სახელი კოპირებულია"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.c:395
+#: panels/system/remote-desktop/cc-remote-session-page.c:129
+msgid "Password copied"
+msgstr "პაროლი დაკოპირდა"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:13
+msgid ""
+"Share your existing desktop with other devices. The remote connection uses "
+"the existing screen resolution"
+msgstr ""
+"გაუზიარეთ თქვენი არსებული სამუშაო მაგიდა სხვა მოწყობილობებს. დაშორებული "
+"მიერთება არსებული ეკრანის გაფართოებას იყენებს"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:28
+msgid "_Desktop Sharing"
+msgstr "სამუშაო მაგი_დის გაზიარება"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:34
+msgid "Remote _Control"
+msgstr "დაშორებული _მართვა"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:36
+msgid "Allows desktop shares to control the screen"
+msgstr "დაშორებული მიერთებებისთვის ეკრანის კონტროლის უფლების მიცემა"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:43
+#: panels/system/remote-desktop/cc-remote-session-page.ui:41
+msgid "How to Connect"
+msgstr "როგორ დავუკავშირდე"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:44
+msgid ""
+"Use a remote desktop app to connect using the RDP protocol. Additional "
+"information about the device’s network location may also be required."
+msgstr ""
+"გამოიყენეთ დაშორებული სამუშაო მაგიდის აპი, რომ მიუერთდეთ RDP პროტოკოლით. "
+"ასევე დაგჭირდებათ დამატებითი ინფორმაცია მოწყობილობის მდებარეობის შესახებ."
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:47
+#: panels/system/remote-desktop/cc-remote-session-page.ui:45
+msgid "_Hostname"
+msgstr "_ჰოსტის სახელი"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:55
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:76
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:97
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:113
+#: panels/system/remote-desktop/cc-remote-session-page.ui:53
+#: panels/system/remote-desktop/cc-remote-session-page.ui:74
+#: panels/system/remote-desktop/cc-remote-session-page.ui:95
+#: panels/system/remote-desktop/cc-remote-session-page.ui:111
+#: panels/system/remote-login/cc-remote-login-page.ui:65
+msgid "Copy"
+msgstr "კოპირება"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:68
+#: panels/system/remote-desktop/cc-remote-session-page.ui:66
+msgid "_Port"
+msgstr "_პორტი"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:91
+#: panels/system/remote-desktop/cc-remote-session-page.ui:89
+msgid "Login Details"
+msgstr "შესვლის დეტალები"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:132
+#: panels/system/remote-desktop/cc-remote-session-page.ui:130
+msgid "_Generate New Password"
+msgstr "ახალი პაროლის _გენერაცია"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:143
+#: panels/system/remote-desktop/cc-remote-session-page.ui:141
+msgid "_Verify Encryption"
+msgstr "დაშიფ_ვრის შემოწმება"
+
 #: panels/system/remote-desktop/cc-remote-desktop-page.ui:4
 msgid "Remote Desktop"
 msgstr "დაშორებული სამუშაო მაგიდა"
 
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:23
+#: panels/system/remote-desktop/cc-remote-desktop-page.ui:39
 msgid "Desktop Sharing"
 msgstr "სამუშაო მაგიდის გაზიარება"
 
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:32
+#: panels/system/remote-desktop/cc-remote-desktop-page.ui:48
+#: panels/system/remote-desktop/cc-remote-session-page.ui:33
 msgid "Remote Login"
 msgstr "დაშორებული ჰოსტი"
+
+#: panels/system/remote-desktop/cc-remote-session-page.c:774
+#: panels/system/users/cc-user-page.c:772
+msgid "Some settings are locked"
+msgstr "ზოგიერთი პარამეტრი დაბლოკილია"
+
+#: panels/system/remote-desktop/cc-remote-session-page.ui:18
+msgid ""
+"Remotely connect to your user account when it isn’t being used. The display "
+"resolution can be set from the remote."
+msgstr ""
+"დაუკავშირდით თქვენს მომხმარებელს, როცა ის არ გამოიყენება. ეკრანის გაფართოება "
+"დაშორებული კომპიუტერის მიერ მიეთითება."
+
+#: panels/system/remote-desktop/cc-remote-session-page.ui:42
+msgid ""
+"Use a remote desktop app to connect using the RDP protocol. Additional "
+"information about the device's network location may also be required"
+msgstr ""
+"გამოიყენეთ დაშორებული სამუშაო მაგიდის აპი, რომ მიუერთდეთ RDP პროტოკოლით. "
+"ასევე დაგჭირდებათ დამატებითი ინფორმაცია მოწყობილობის მდებარეობის შესახებ"
+
+#: panels/system/remote-desktop/cc-encryption-fingerprint-dialog.ui:20
+msgid "Encryption Fingerprint"
+msgstr "შიფრაციის ანაბეჭდი"
+
+#: panels/system/remote-desktop/cc-encryption-fingerprint-dialog.ui:21
+msgid ""
+"The encryption fingerprint can be seen in connecting clients and should be "
+"identical"
+msgstr ""
+"დაშიფვრის ანაბეჭდი შეგძლიათ, მოერთებულ კლიენტებში დაინახოთ და ის იდენტური "
+"უნდა იყოს"
+
+#: panels/system/remote-desktop/org.gnome.controlcenter.remote-session-helper.policy.in.in:11
+msgid "Enable or disable remote sessions"
+msgstr "დაშორებული სესიების ჩართვა ან გამორთვა"
+
+#: panels/system/remote-desktop/org.gnome.controlcenter.remote-session-helper.policy.in.in:12
+msgid "Authentication is required to enable or disable remote sessions"
+msgstr "დაშორებული სესიების გასათიშად/ჩასართავად ავთენტიკაციაა საჭირო"
 
 #: panels/system/remote-login/cc-remote-login-page.c:53
 msgid "Command copied"
@@ -7507,10 +7644,6 @@ msgstr "ამ მოწყობილობასთან დაცული 
 #: panels/system/remote-login/cc-remote-login-page.ui:58
 msgid "SSH Login Command"
 msgstr "SSH შესვლის ბრძანება"
-
-#: panels/system/remote-login/cc-remote-login-page.ui:65
-msgid "Copy"
-msgstr "კოპირება"
 
 #: panels/system/remote-login/org.gnome.controlcenter.remote-login-helper.policy.in.in:11
 msgid "Enable or disable remote login"
@@ -7994,10 +8127,6 @@ msgstr "არა"
 msgid "Remove %s?"
 msgstr "წავშალო %s?"
 
-#: panels/system/users/cc-user-page.c:768
-msgid "Some settings are locked"
-msgstr "ზოგიერთი პარამეტრი დაბლოკილია"
-
 #: panels/system/users/cc-user-page.ui:24
 #: panels/system/users/cc-user-page.ui:81
 #: panels/system/users/cc-user-page.ui:93
@@ -8058,15 +8187,15 @@ msgstr "_ფაილებისა და პარამეტრების
 msgid "Users"
 msgstr "მომხმარებლები"
 
-#: panels/system/users/cc-users-page.ui:17
+#: panels/system/users/cc-users-page.ui:16
 msgid "Other Users"
 msgstr "სხვა მომხმარებლები"
 
-#: panels/system/users/cc-users-page.ui:33
+#: panels/system/users/cc-users-page.ui:32
 msgid "_Add User…"
 msgstr "მომხმარებლის _დამატება…"
 
-#: panels/system/users/cc-users-page.ui:47
+#: panels/system/users/cc-users-page.ui:46
 msgid "Add Enterprise User"
 msgstr "კომპანიის მომხმარებლის სამატება"
 
@@ -9823,15 +9952,6 @@ msgstr "სისტემური ხმები"
 #~ msgid "Device name copied"
 #~ msgstr "მოწყობილობის სახელი კოპირებული"
 
-#~ msgid "Device address copied"
-#~ msgstr "მოწყობილობის მისამართი კოპირებულია"
-
-#~ msgid "Username copied"
-#~ msgstr "მომხმარებლის სახელი კოპირებულია"
-
-#~ msgid "Password copied"
-#~ msgstr "პაროლი დაკოპირდა"
-
 #~ msgid "learn how to use it"
 #~ msgstr "გაიგეთ. როგორ გამოიყენოთ"
 
@@ -9848,15 +9968,6 @@ msgstr "სისტემური ხმები"
 
 #~ msgid "Enable or disable remote desktop connections to this computer"
 #~ msgstr "ამ კომპიუტერზე დაშორებული სამუშაო მაგიდის ჩართვა ან გამორთვა"
-
-#~ msgid "Remote _Control"
-#~ msgstr "დაშორებული _მართვა"
-
-#~ msgid "Allows remote connections to control the screen"
-#~ msgstr "დაშორებული მიერთებებისთვის ეკრანის კონტროლის უფლების მიცემა"
-
-#~ msgid "How to Connect"
-#~ msgstr "როგორ დავუკავშირდე"
 
 #~ msgid ""
 #~ "Connect to this computer using the device name or remote desktop address"
@@ -9879,19 +9990,6 @@ msgstr "სისტემური ხმები"
 
 #~ msgid "_User Name"
 #~ msgstr "_მომხმარებლის სახელი"
-
-#~ msgid "_Verify Encryption"
-#~ msgstr "დაშიფ_ვრის შემოწმება"
-
-#~ msgid "Encryption Fingerprint"
-#~ msgstr "შიფრაციის ანაბეჭდი"
-
-#~ msgid ""
-#~ "The encryption fingerprint can be seen in connecting clients and should "
-#~ "be identical"
-#~ msgstr ""
-#~ "დაშიფვრის ანაბეჭდი შეგძლიათ, მოერთებულ კლიენტებში დაინახოთ და ის იდენტური "
-#~ "უნდა იყოს"
 
 #~ msgid "Unable to find the domain. Maybe you misspelled it?"
 #~ msgstr "დომენი ვერ ვპოვე. სწორად დაწერეთ?"
@@ -10437,9 +10535,6 @@ msgstr "სისტემური ხმები"
 #~ msgstr ""
 #~ "%s-ს შემდეგი წვდოები გააჩნია. მათი შეცვლა შეუძლებელია. თუ ნერვიულობთ "
 #~ "უსაფრთხოებაზე, სჯობს წაშალოთ ეს აპლიკაცია."
-
-#~ msgid "View Details"
-#~ msgstr "დეტალური ხედი"
 
 #~ msgid "UTC%:::z"
 #~ msgstr "UTC%:::z"
