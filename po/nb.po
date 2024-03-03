@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: unnamed project\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2024-02-21 14:37+0000\n"
-"PO-Revision-Date: 2024-02-24 02:51+0100\n"
+"POT-Creation-Date: 2024-03-02 18:21+0000\n"
+"PO-Revision-Date: 2024-03-03 13:33+0100\n"
 "Last-Translator: Brage <bragefuglseth@gnome.org>\n"
 "Language-Team: Afar <>\n"
 "Language: nb\n"
@@ -79,7 +79,7 @@ msgstr "Filsystem"
 
 #: panels/applications/cc-applications-panel.c:854
 #: panels/keyboard/01-launchers.xml.in:6
-#: shell/appdata/org.gnome.Settings.appdata.xml.in:7 shell/cc-window.c:760
+#: shell/appdata/org.gnome.Settings.appdata.xml.in:7 shell/cc-window.c:775
 #: shell/cc-window.ui:20 shell/org.gnome.Settings.desktop.in:3
 msgid "Settings"
 msgstr "Innstillinger"
@@ -173,7 +173,7 @@ msgstr "_Åpne"
 
 #: panels/applications/cc-applications-panel.ui:257
 msgid "App _Details"
-msgstr "App_-informasjon"
+msgstr "Informasjon"
 
 #: panels/applications/cc-applications-panel.ui:275
 msgid "Permissions"
@@ -302,7 +302,7 @@ msgstr "Tilgang til systemet som er nødvendig for appen"
 #: panels/applications/cc-applications-panel.ui:409
 #: panels/mouse/cc-mouse-panel.ui:66
 #: panels/multitasking/cc-multitasking-panel.ui:15
-#: panels/power/cc-power-panel.ui:172
+#: panels/power/cc-power-panel.ui:171
 msgid "General"
 msgstr "Generelt"
 
@@ -754,7 +754,7 @@ msgstr ""
 
 #: panels/background/cc-background-chooser.c:160
 msgid "Remove Background"
-msgstr "Fjern bakgrunnsbilde"
+msgstr "Fjern bakgrunn"
 
 #: panels/background/cc-background-chooser.c:345
 msgid "Select a picture"
@@ -773,7 +773,7 @@ msgstr "%d × %d"
 
 #: panels/background/cc-background-item.c:295
 msgid "No Desktop Background"
-msgstr "Intet bakgrunnsbilde"
+msgstr "Ingen bakgrunn"
 
 #: panels/background/cc-background-panel.c:212
 msgid "Current background"
@@ -793,7 +793,7 @@ msgstr "_Mørk"
 
 #: panels/background/cc-background-panel.ui:108
 msgid "Background"
-msgstr "Bakgrunnsbilde"
+msgstr "Bakgrunn"
 
 #: panels/background/cc-background-panel.ui:114
 msgid "_Add Picture…"
@@ -805,7 +805,7 @@ msgstr "Utseende"
 
 #: panels/background/gnome-background-panel.desktop.in:4
 msgid "Change your background image or the UI colors"
-msgstr "Bytt bakgrunnsbilde og farger på systemet"
+msgstr "Bytt bakgrunn og farger på systemet"
 
 #. Translators: Search terms to find the Appearance panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/background/gnome-background-panel.desktop.in:15
@@ -968,6 +968,7 @@ msgstr "Vis kalibrering"
 #: panels/sharing/cc-sharing-panel.c:239
 #: panels/system/region/cc-format-chooser.ui:24
 #: panels/system/users/cc-add-user-dialog.ui:25
+#: panels/system/users/cc-enterprise-login-dialog.ui:58
 #: panels/system/users/cc-avatar-chooser.c:92
 #: panels/system/users/cc-fingerprint-dialog.ui:32
 #: panels/system/users/cc-password-dialog.ui:21
@@ -1130,8 +1131,7 @@ msgstr "Lær mer"
 #: panels/color/cc-color-panel.c:1993
 #, c-format
 msgid "Each device needs an up to date color profile to be color managed. %s"
-msgstr ""
-"Enhetene trenger moderne fargeprofiler for å kunne bruke fargestyring. %s"
+msgstr "Enheter trenger moderne fargeprofiler for å fargestyres. %s"
 
 #: panels/color/cc-color-panel.ui:4 panels/wacom/calibrator/calibrator.ui:40
 msgid "Screen Calibration"
@@ -1271,8 +1271,9 @@ msgstr "_Importer fil…"
 #: panels/color/cc-color-panel.ui:390 panels/keyboard/cc-input-chooser.ui:28
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:33
 #: panels/network/connection-editor/net-connection-editor.c:653
-#: panels/printers/new-printer-dialog.ui:91
+#: panels/printers/new-printer-dialog.ui:85
 #: panels/system/users/cc-add-user-dialog.ui:39
+#: panels/system/users/cc-enterprise-login-dialog.ui:66
 msgid "_Add"
 msgstr "_Legg til"
 
@@ -1652,13 +1653,13 @@ msgid "Hotspot"
 msgstr "Tilgangspunkt"
 
 #: panels/display/cc-display-panel.c:510
-#: panels/notifications/cc-notifications-panel.c:212
+#: panels/notifications/cc-notifications-panel.c:213
 #: panels/power/cc-power-panel.c:679 panels/power/cc-power-panel.c:686
 msgid "On"
 msgstr "På"
 
 #: panels/display/cc-display-panel.c:512 panels/network/cc-net-proxy-page.c:182
-#: panels/notifications/cc-notifications-panel.c:212
+#: panels/notifications/cc-notifications-panel.c:213
 #: panels/power/cc-power-panel.c:673 panels/power/cc-power-panel.c:684
 msgid "Off"
 msgstr "Av"
@@ -1678,7 +1679,7 @@ msgstr "Dette kan skyldes begrensninger med enheten."
 #: panels/display/cc-display-panel.ui:24
 #: panels/display/gnome-display-panel.desktop.in:3
 msgid "Displays"
-msgstr "Skjermer"
+msgstr "Skjerm"
 
 #: panels/display/cc-display-panel.ui:50 panels/display/cc-display-panel.ui:207
 #: panels/display/cc-display-panel.ui:269
@@ -1721,30 +1722,46 @@ msgstr "_Nattlys"
 msgid "Night Light"
 msgstr "Nattlys"
 
-#: panels/display/cc-display-settings.c:107
+#: panels/display/cc-display-settings.c:111
 msgctxt "Display rotation"
 msgid "Landscape"
-msgstr "Landskap"
+msgstr "Liggende"
 
-#: panels/display/cc-display-settings.c:110
+#: panels/display/cc-display-settings.c:114
 msgctxt "Display rotation"
 msgid "Portrait Right"
-msgstr "Portrett (høyrevendt)"
+msgstr "Stående (høyrevendt)"
 
-#: panels/display/cc-display-settings.c:113
+#: panels/display/cc-display-settings.c:117
 msgctxt "Display rotation"
 msgid "Portrait Left"
-msgstr "Portrett (venstrevendt)"
+msgstr "Stående (venstrevendt)"
 
-#: panels/display/cc-display-settings.c:116
+#: panels/display/cc-display-settings.c:120
 msgctxt "Display rotation"
 msgid "Landscape (flipped)"
-msgstr "Landskap (opp ned)"
+msgstr "Liggende (opp ned)"
 
-#: panels/display/cc-display-settings.c:177
+#: panels/display/cc-display-settings.c:181
 #, c-format
 msgid "%.2lf Hz"
 msgstr "%.2lf Hz"
+
+#. Translators:
+#. * 1. "Variable" is an adjective that refers to the refresh rate
+#. * 2. The formatting sequence is a range separated by an en-dash
+#. *    (unicode "\u2013"). For example: "Variable (48–144.97 Hz)"
+#.
+#: panels/display/cc-display-settings.c:198
+#, c-format
+msgid "Variable (%d–%.2lf Hz)"
+msgstr "Variabel (%d-%.2lf Hz)"
+
+#. Translators: "Variable" is an adjective that refers to the refresh rate
+#: panels/display/cc-display-settings.c:205
+#, c-format
+msgid "Variable (up to %.2lf Hz)"
+msgstr "Variabel (opp til %.2lf Hz)"
 
 #: panels/display/cc-display-settings.ui:33
 msgctxt "display setting"
@@ -1757,22 +1774,31 @@ msgid "_Resolution"
 msgstr "_Oppløsning"
 
 #: panels/display/cc-display-settings.ui:49
+#: panels/display/cc-display-settings.ui:57
 msgid "R_efresh Rate"
 msgstr "Oppdaterings_frekvens"
 
-#: panels/display/cc-display-settings.ui:57
+#: panels/display/cc-display-settings.ui:66
+msgid "_Variable Refresh Rate"
+msgstr "_Variabel oppdateringsfrekvens"
+
+#: panels/display/cc-display-settings.ui:74
+msgid "Re_fresh Rate"
+msgstr "Oppdaterings_frekvens"
+
+#: panels/display/cc-display-settings.ui:84
 msgid "Adjust for _TV"
 msgstr "_Tilpass TV"
 
-#: panels/display/cc-display-settings.ui:65
-#: panels/display/cc-display-settings.ui:81
+#: panels/display/cc-display-settings.ui:92
+#: panels/display/cc-display-settings.ui:108
 msgctxt "display setting"
 msgid "_Scale"
 msgstr "_Skalering"
 
 #: panels/display/cc-night-light-page.c:226
 msgid "Night Light cannot be used from a virtual machine."
-msgstr "Nattlys kan ikke brukes fra virtuelle maskiner."
+msgstr "Nattlys kan ikke brukes på virtuelle maskiner."
 
 #: panels/display/cc-night-light-page.ui:25
 msgid "Night Light Unavailable"
@@ -1806,7 +1832,7 @@ msgstr ""
 
 #: panels/display/cc-night-light-page.ui:94
 msgid "_Schedule"
-msgstr "_Periode"
+msgstr "_Tidsrom"
 
 #: panels/display/cc-night-light-page.ui:101
 msgid "Sunset to Sunrise"
@@ -1869,8 +1895,9 @@ msgid ""
 "Panel;Projector;xrandr;Screen;Resolution;Refresh;Monitor;Night;Light;Blue;"
 "redshift;color;sunset;sunrise;"
 msgstr ""
-"Prosjektor;xrandr;Skjerm;Oppløsning;Monitor;fps;Oppdateringsfrekvens;Natt;"
-"Lys;Blå;redshift;farge;solnedgang;soloppgang;tv;"
+"Prosjektor;xrandr;Skjermer;Oppløsning;Monitor;fps;Oppdateringsfrekvens;"
+"Bilder per sekund;Oppfriskningshastighet;Refresh rate;Natt;Lys;Blå;redshift;"
+"farge;solnedgang;soloppgang;tv;"
 
 #: panels/keyboard/00-multimedia.xml.in:2
 msgid "Sound and Media"
@@ -1957,13 +1984,12 @@ msgstr "Åpne nettleser"
 msgid "Home folder"
 msgstr "Åpne hjem-mappe"
 
+#. Translators: this is a verb.
+#. Translators: "Search" should be phrased as a verb (in both "Name" and "Keywords" fields).
+#. Translators: this is a verb.
 #: panels/keyboard/01-launchers.xml.in:16
-#: panels/keyboard/cc-input-chooser.ui:50
 #: panels/printers/cc-printers-panel.ui:21
-#: panels/printers/new-printer-dialog.ui:216
-#: panels/search/gnome-search-panel.desktop.in:3
-#: panels/system/region/cc-format-chooser.ui:82 shell/cc-window.ui:28
-#: shell/cc-window.ui:30
+#: panels/search/gnome-search-panel.desktop.in:4 shell/cc-window.ui:28
 msgid "Search"
 msgstr "Søk"
 
@@ -2037,17 +2063,17 @@ msgstr "Andre"
 msgid "Add Input Source"
 msgstr "Legg til inndatakilde"
 
-#: panels/keyboard/cc-input-chooser.ui:60
+#: panels/keyboard/cc-input-chooser.ui:57
 msgid "Input methods can’t be used on the login screen"
 msgstr "Inndatametoder kan ikke brukes på innloggingsskjermen"
 
 #: panels/keyboard/cc-input-list-box.ui:18
 msgid "No input source selected"
-msgstr "Ingen inndatakilde valgt"
+msgstr "Ingen kilde valgt"
 
 #: panels/keyboard/cc-input-list-box.ui:42
 msgid "_Add Input Source…"
-msgstr "_Legg til inndatakilde…"
+msgstr "_Legg til kilde…"
 
 #: panels/keyboard/cc-input-row.ui:16 panels/printers/printer-entry.ui:49
 #: panels/search/cc-search-panel-row.ui:35
@@ -2193,11 +2219,11 @@ msgstr "Bytting av inndatakilder"
 
 #: panels/keyboard/cc-keyboard-panel.ui:36
 msgid "Use the _same source for all windows"
-msgstr "Bruk _samme inndatakilde i alle vinduer"
+msgstr "_Samme inndatakilde for alle vinduer"
 
 #: panels/keyboard/cc-keyboard-panel.ui:48
 msgid "Switch input sources _individually for each window"
-msgstr "Bytt inndatakilde _individuelt for hvert vindu"
+msgstr "Egen inndatakilde for _hvert vindu"
 
 #: panels/keyboard/cc-keyboard-panel.ui:64
 msgid "Special Character Entry"
@@ -2254,7 +2280,7 @@ msgstr "Ingen tastatursnarveier funnet"
 
 #: panels/keyboard/cc-keyboard-shortcut-dialog.ui:94 shell/cc-panel-list.ui:45
 msgid "Try a different search"
-msgstr "Prøv et annet søkeord"
+msgstr "Prøv et annet søk"
 
 #: panels/keyboard/cc-keyboard-shortcut-dialog.ui:126
 msgid "Add Custom Shortcuts"
@@ -2441,7 +2467,7 @@ msgstr "Peker_akselerasjon"
 
 #: panels/mouse/cc-mouse-panel.ui:138
 msgid "Recommended for most users and applications"
-msgstr "Anbefales for de fleste apper og bruksområder"
+msgstr "Anbefales til de fleste apper og bruksområder"
 
 #: panels/mouse/cc-mouse-panel.ui:144
 msgid ""
@@ -2639,11 +2665,11 @@ msgstr "Flere skjermer"
 
 #: panels/multitasking/cc-multitasking-panel.ui:108
 msgid "Workspaces on _primary display only"
-msgstr "Bare forskjellige områder på _hovedskjermen"
+msgstr "Kun områdebytting på _hovedskjermen"
 
 #: panels/multitasking/cc-multitasking-panel.ui:123
 msgid "Workspaces on all d_isplays"
-msgstr "Hvert område dekker alle _skjermer"
+msgstr "Områdebytting på alle _skjermer"
 
 #: panels/multitasking/cc-multitasking-panel.ui:140
 msgid "App Switching"
@@ -2680,7 +2706,7 @@ msgstr ""
 #: panels/network/connection-editor/ip6-page.ui:37
 #: panels/network/connection-editor/ip6-page.ui:197
 #: panels/network/connection-editor/ip6-page.ui:255
-#: panels/wacom/cc-wacom-page.c:613
+#: panels/wacom/cc-wacom-page.c:611
 msgid "Automatic"
 msgstr "Automatisk"
 
@@ -2702,7 +2728,7 @@ msgstr "_Lagre"
 
 #: panels/network/cc-net-proxy-page.ui:42
 msgid "_Network Proxy"
-msgstr "_Nettverksmellomtjener"
+msgstr "_Mellomtjener"
 
 #: panels/network/cc-net-proxy-page.ui:55
 msgid "C_onfiguration"
@@ -2710,15 +2736,15 @@ msgstr "_Oppsett"
 
 #: panels/network/cc-net-proxy-page.ui:84
 msgid "Con_figuration URL"
-msgstr "Oppsetts_lenke"
+msgstr "_Oppsettsadresse"
 
 #: panels/network/cc-net-proxy-page.ui:92
 msgid ""
 "Web Proxy Autodiscovery is used when a Configuration URL is not provided. "
 "This is not recommended for untrusted public networks."
 msgstr ""
-"Mellomtjenere vil letes etter automatisk når en oppsettslenke ikke er "
-"angitt. Dette er ikke anbefalt å gjøre på usikre offentlige nettverk."
+"Mellomtjenere vil letes etter automatisk når oppsettsadresse ikke er angitt. "
+"Dette anbefales ikke på usikre offentlige nettverk."
 
 #: panels/network/cc-net-proxy-page.ui:109
 msgid "HTTP Proxy"
@@ -2729,7 +2755,7 @@ msgstr "HTTP-mellomtjener"
 #: panels/network/cc-net-proxy-page.ui:171
 #: panels/network/cc-net-proxy-page.ui:200
 msgid "URL"
-msgstr "Lenke"
+msgstr "Adresse"
 
 #: panels/network/cc-net-proxy-page.ui:120
 #: panels/network/cc-net-proxy-page.ui:149
@@ -2815,7 +2841,7 @@ msgid "<b>Password</b>: %s"
 msgstr "<b>Passord</b>: %s"
 
 #: panels/network/cc-qr-code-dialog.ui:9
-#: panels/network/cc-wifi-connection-row.ui:60
+#: panels/network/cc-wifi-connection-row.ui:53
 msgid "Share Network"
 msgstr "Del nettverk"
 
@@ -2860,16 +2886,16 @@ msgid "Signal strength %d%%"
 msgstr "Signalstyrke: %d %%"
 
 #. TRANSLATORS: device status
-#: panels/network/cc-wifi-connection-row.ui:41 panels/network/panel-common.c:63
+#: panels/network/cc-wifi-connection-row.ui:35 panels/network/panel-common.c:63
 msgid "Connected"
 msgstr "Tilkoblet"
 
-#: panels/network/cc-wifi-connection-row.ui:73
+#: panels/network/cc-wifi-connection-row.ui:65
 #: panels/network/network-ethernet.ui:47
 msgid "Network Options"
 msgstr "Nettverksinnstillinger"
 
-#: panels/network/cc-wifi-connection-row.ui:85
+#: panels/network/cc-wifi-connection-row.ui:76
 msgid "Forget Network"
 msgstr "Glem nettverk"
 
@@ -2923,9 +2949,9 @@ msgstr "Nettverksnavn"
 
 #. Translators: This is a password needed for printing.
 #: panels/network/cc-wifi-hotspot-dialog.ui:92
-#: panels/printers/new-printer-dialog.ui:302
+#: panels/printers/new-printer-dialog.ui:293
 #: panels/printers/pp-jobs-dialog.ui:54
-#: panels/system/users/cc-add-user-dialog.ui:152
+#: panels/system/users/cc-add-user-dialog.ui:150
 #: panels/wwan/cc-wwan-apn-dialog.ui:175
 msgid "Password"
 msgstr "Passord"
@@ -3019,7 +3045,7 @@ msgstr "802.1x-_sikkerhet"
 #: panels/network/connection-editor/bluetooth-page.ui:16
 #: panels/network/connection-editor/ethernet-page.ui:27
 #: panels/network/connection-editor/vpn-page.ui:23
-#: panels/system/users/cc-add-user-dialog.ui:68
+#: panels/system/users/cc-add-user-dialog.ui:66
 #: panels/system/users/cc-user-page.ui:84
 msgid "_Name"
 msgstr "_Navn"
@@ -3387,8 +3413,7 @@ msgstr ""
 #: panels/network/connection-editor/details-page.ui:425
 msgid ""
 "Software updates and other large downloads will not be started automatically."
-msgstr ""
-"Oppdateringer og andre store nedlastninger vil ikke startes automatisk."
+msgstr "Oppdateringer og andre store nedlastinger vil ikke startes automatisk."
 
 #: panels/network/connection-editor/ethernet-page.ui:48
 #: panels/network/connection-editor/wifi-page.ui:57
@@ -4567,79 +4592,79 @@ msgstr "Tilkoblede enheter"
 msgid "Power Mode"
 msgstr "Strømmodus"
 
-#: panels/power/cc-power-panel.ui:127
+#: panels/power/cc-power-panel.ui:126
 msgid "Power Saving"
 msgstr "Strømsparing"
 
-#: panels/power/cc-power-panel.ui:130
+#: panels/power/cc-power-panel.ui:129
 msgid "A_utomatic Screen Brightness"
 msgstr "_Automatisk lysstyrke"
 
-#: panels/power/cc-power-panel.ui:131
+#: panels/power/cc-power-panel.ui:130
 msgid "Adjust screen brightness to the surrounding light"
 msgstr "Juster skjermens lysstyrke i forhold til omgivelsene"
 
-#: panels/power/cc-power-panel.ui:138
+#: panels/power/cc-power-panel.ui:137
 msgid "_Dim Screen"
 msgstr "_Demp lysstyrke"
 
-#: panels/power/cc-power-panel.ui:139
+#: panels/power/cc-power-panel.ui:138
 msgid "Reduce screen brightness when the computer is inactive"
 msgstr "Demp skjermens lysstyrke ved inaktivitet"
 
-#: panels/power/cc-power-panel.ui:145
+#: panels/power/cc-power-panel.ui:144
 msgid "Screen _Blank"
 msgstr "Slå av skjerm"
 
-#: panels/power/cc-power-panel.ui:146
+#: panels/power/cc-power-panel.ui:145
 msgid "Turn the screen off after a period of inactivity"
 msgstr "Slå av skjermen ved inaktivitet"
 
-#: panels/power/cc-power-panel.ui:154
+#: panels/power/cc-power-panel.ui:153
 msgid "Automatic Power _Saver"
 msgstr "Automatisk _strømsparing"
 
-#: panels/power/cc-power-panel.ui:155
+#: panels/power/cc-power-panel.ui:154
 msgid "Turn on power saver mode when battery power is low"
 msgstr "Slå på strømsparingsmodus ved lavt batterinivå"
 
-#: panels/power/cc-power-panel.ui:162
+#: panels/power/cc-power-panel.ui:161
 msgid "_Automatic Suspend"
 msgstr "Automatisk _hvilemodus"
 
-#: panels/power/cc-power-panel.ui:163
+#: panels/power/cc-power-panel.ui:162
 msgid "Pause the computer after a period of inactivity"
 msgstr "Sett enheten i hvilemodus ved inaktivitet"
 
-#: panels/power/cc-power-panel.ui:176
+#: panels/power/cc-power-panel.ui:175
 msgid "Po_wer Button Behavior"
 msgstr "Ved trykk på av-knapp"
 
-#: panels/power/cc-power-panel.ui:184
+#: panels/power/cc-power-panel.ui:183
 msgid "Show Battery _Percentage"
 msgstr "Batteriprosent"
 
-#: panels/power/cc-power-panel.ui:185
+#: panels/power/cc-power-panel.ui:184
 msgid "Show exact charge level in the top bar"
 msgstr "Vis nøyaktig batterinivå i topplinjen"
 
-#: panels/power/cc-power-panel.ui:198
+#: panels/power/cc-power-panel.ui:197
 msgid "Automatic Suspend"
 msgstr "Automatisk hvilemodus"
 
-#: panels/power/cc-power-panel.ui:227
+#: panels/power/cc-power-panel.ui:226
 msgid "On _Battery Power"
 msgstr "Når enheten går på _batteristrøm"
 
-#: panels/power/cc-power-panel.ui:234
+#: panels/power/cc-power-panel.ui:233
 msgid "_Delay"
 msgstr "_Nedtelling"
 
-#: panels/power/cc-power-panel.ui:252
+#: panels/power/cc-power-panel.ui:251
 msgid "_Plugged In"
 msgstr "Når enheten er _tilkoblet"
 
-#: panels/power/cc-power-panel.ui:258
+#: panels/power/cc-power-panel.ui:257
 msgid "D_elay"
 msgstr "N_edtelling"
 
@@ -4702,37 +4727,37 @@ msgstr "Tilkobling til ny skriver mislyktes."
 msgid "Unlock to add printers and change settings"
 msgstr "Lås opp for å legge til skrivere og endre innstillinger"
 
-#: panels/printers/cc-printers-panel.ui:30
+#: panels/printers/cc-printers-panel.ui:27
 msgid "All Connected and Network Printers"
 msgstr "Alle tilkoblede og tilgjengelige skrivere"
 
 #. Translators: This button adds new printer.
 #. Translators: This button adds a new printer.
-#: panels/printers/cc-printers-panel.ui:34
-#: panels/printers/cc-printers-panel.ui:169
+#: panels/printers/cc-printers-panel.ui:31
+#: panels/printers/cc-printers-panel.ui:166
 msgid "_Add Printer…"
 msgstr "_Legg til skriver…"
 
-#: panels/printers/cc-printers-panel.ui:52
+#: panels/printers/cc-printers-panel.ui:49
 msgid "Search printers"
 msgstr "Søk etter skrivere"
 
 #. Translators: This is the button which allows undoing the removal of the printer.
-#: panels/printers/cc-printers-panel.ui:81
+#: panels/printers/cc-printers-panel.ui:78
 msgid "Undo"
 msgstr "Angre"
 
-#: panels/printers/cc-printers-panel.ui:166
+#: panels/printers/cc-printers-panel.ui:163
 msgid "No Printers"
 msgstr "Ingen skrivere"
 
 #. Translators: Title if the CUPS server is not running (we can not connect to it).
-#: panels/printers/cc-printers-panel.ui:191
+#: panels/printers/cc-printers-panel.ui:188
 msgid "No Print Service"
 msgstr "Ingen utskriftstjeneste"
 
 #. Translators: Description if the CUPS server is not running (we can not connect to it).
-#: panels/printers/cc-printers-panel.ui:192
+#: panels/printers/cc-printers-panel.ui:189
 msgid "The system printing service doesn’t seem to be available"
 msgstr "Systemets utskriftstjeneste er utilgjengelig"
 
@@ -4757,7 +4782,7 @@ msgstr "Skriver;Printer;Papir;Blekk;Toner;Utskrift;Skriv ut;"
 msgid "Add Printer"
 msgstr "Legg til skriver"
 
-#: panels/printers/new-printer-dialog.ui:69
+#: panels/printers/new-printer-dialog.ui:67
 #: panels/system/region/cc-format-chooser.ui:37
 #: panels/system/users/cc-fingerprint-dialog.ui:44
 #: panels/wwan/cc-wwan-apn-dialog.ui:21
@@ -4766,32 +4791,32 @@ msgstr "Tilbake"
 
 #. Translators: This button opens authentication dialog for selected server.
 #. Translators: This buttons submits the credentials for the selected server.
-#: panels/printers/new-printer-dialog.ui:108
-#: panels/printers/new-printer-dialog.ui:123
+#: panels/printers/new-printer-dialog.ui:102
+#: panels/printers/new-printer-dialog.ui:117
 #: panels/wwan/cc-wwan-device-page.ui:38
 msgid "_Unlock"
 msgstr "_Lås opp"
 
 #. Translators: No printers were detected
-#: panels/printers/new-printer-dialog.ui:174
+#: panels/printers/new-printer-dialog.ui:168
 msgid "No Printers Found"
 msgstr "Fant ingen skrivere"
 
 #. Translators: The entered text should contain network address of a printer or a text which will filter found devices (their names and locations)
-#: panels/printers/new-printer-dialog.ui:211
+#: panels/printers/new-printer-dialog.ui:205
 msgid "Enter a network address or search for a printer"
 msgstr "Skriv inn en nettverksadresse eller søk etter en printer"
 
-#: panels/printers/new-printer-dialog.ui:256
+#: panels/printers/new-printer-dialog.ui:247
 msgid "Authentication Required"
 msgstr "Autentisering kreves"
 
-#: panels/printers/new-printer-dialog.ui:272
+#: panels/printers/new-printer-dialog.ui:263
 msgid "Enter username and password to view printers on Print Server"
 msgstr "Skriv inn brukernavn og passord for å se skrivere på tjeneren"
 
 #. Translators: This is a username on a print server.
-#: panels/printers/new-printer-dialog.ui:281
+#: panels/printers/new-printer-dialog.ui:272
 #: panels/printers/pp-jobs-dialog.ui:42 panels/wwan/cc-wwan-apn-dialog.ui:150
 msgid "Username"
 msgstr "Brukernavn"
@@ -4897,22 +4922,22 @@ msgstr "Kortside"
 #. Translators: this is an option of "Orientation"
 #: panels/printers/pp-ipp-option-widget.c:70
 msgid "Portrait"
-msgstr "Portrett"
+msgstr "Stående"
 
 #. Translators: this is an option of "Orientation"
 #: panels/printers/pp-ipp-option-widget.c:72
 msgid "Landscape"
-msgstr "Landskap"
+msgstr "Liggende"
 
 #. Translators: this is an option of "Orientation"
 #: panels/printers/pp-ipp-option-widget.c:74
 msgid "Reverse landscape"
-msgstr "Omvendt landskap"
+msgstr "Omvendt liggende"
 
 #. Translators: this is an option of "Orientation"
 #: panels/printers/pp-ipp-option-widget.c:76
 msgid "Reverse portrait"
-msgstr "Omvendt portrett"
+msgstr "Omvendt stående"
 
 #: panels/printers/pp-job-row.c:55
 msgid "Resume"
@@ -5589,11 +5614,11 @@ msgid ""
 "that are not sandboxed can use cameras without asking for permission."
 msgstr ""
 "Disse innhegnede appene har fått tillatelse til å bruke kamera. Apper som "
-"ikke er innhegnede kan bruke kamera uten å spørre om tillatelse først."
+"ikke er innhegnede, kan bruke kamera uten å be om tillatelse først."
 
 #: panels/privacy/cc-camera-page.ui:42
 msgid "No sandboxed apps have asked for camera access"
-msgstr "Ingen innhegnede apper har spurt om kameratilgang"
+msgstr "Ingen innhegnede apper har bedt om kameratilgang"
 
 #. translators: The first '%s' is the distributor's name, such as 'Fedora', the second '%s' is a link to the privacy policy
 #: panels/privacy/cc-diagnostics-page.c:124
@@ -6555,28 +6580,28 @@ msgstr "_Appsøk"
 msgid "Include app-provided search results"
 msgstr "Vis søketreff fra apper"
 
-#: panels/search/cc-search-panel.ui:29
+#: panels/search/cc-search-panel.ui:23
 msgid "Search _Locations"
 msgstr "Søke_områder"
 
-#: panels/search/cc-search-panel.ui:30
+#: panels/search/cc-search-panel.ui:24
 msgid "Filesystem locations which are searched by system apps"
 msgstr "Mapper som blir søkt i av systemet"
 
-#: panels/search/cc-search-panel.ui:39
+#: panels/search/cc-search-panel.ui:33
 msgid "Search Results"
 msgstr "Søketreff"
 
-#: panels/search/cc-search-panel.ui:40
+#: panels/search/cc-search-panel.ui:34
 msgid "Results are displayed according to the list order"
 msgstr "Treff vises i denne rekkefølgen"
 
-#: panels/search/gnome-search-panel.desktop.in:4
+#: panels/search/gnome-search-panel.desktop.in:5
 msgid "Control which apps show search results in the Activities Overview"
 msgstr "Styr hvilke apper som viser søketreff i oversikten"
 
 #. Translators: Search terms to find the Search panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
-#: panels/search/gnome-search-panel.desktop.in:15
+#: panels/search/gnome-search-panel.desktop.in:16
 msgid "Search;Find;Index;Hide;Privacy;Results;"
 msgstr "Søk;Finn;Indeks;Personvern;Apper;Resultater;"
 
@@ -6633,7 +6658,7 @@ msgstr "_Fildeling"
 
 #: panels/sharing/cc-sharing-panel.ui:37
 msgid "Stream music, photos and videos to devices on the current network"
-msgstr "Strøm musikk, bilder og videoer til enheter på nettverket"
+msgstr "Strøm musikk, bilder og videoer til andre enheter på nettverket"
 
 #: panels/sharing/cc-sharing-panel.ui:38 panels/sharing/cc-sharing-panel.ui:150
 msgid "_Media Sharing"
@@ -6648,8 +6673,7 @@ msgid "_Require Password"
 msgstr "Passord_beskyttelse"
 
 #: panels/sharing/cc-sharing-panel.ui:96
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:136
-#: panels/system/users/cc-add-user-dialog.ui:373
+#: panels/system/users/cc-enterprise-login-dialog.ui:114
 msgid "_Password"
 msgstr "_Passord"
 
@@ -6807,7 +6831,7 @@ msgstr "Lyder"
 msgid "Vo_lume Levels"
 msgstr "_Lydstyrke"
 
-#: panels/sound/cc-sound-panel.ui:384
+#: panels/sound/cc-sound-panel.ui:378
 msgid "_Alert Sound"
 msgstr "_Hintlyd"
 
@@ -6887,7 +6911,7 @@ msgid "Memory"
 msgstr "Minne"
 
 #: panels/system/about/cc-about-page.ui:91
-#: panels/system/about/cc-system-details-window.ui:102
+#: panels/system/about/cc-system-details-window.ui:103
 msgid "Disk Capacity"
 msgstr "Lagringsplass"
 
@@ -7000,11 +7024,11 @@ msgstr "**GNOME-versjon:**"
 
 #: panels/system/about/cc-system-details-window.c:768
 msgid "**Windowing System:**"
-msgstr "**Vindussystem:**"
+msgstr "**Visningssystem:**"
 
 #: panels/system/about/cc-system-details-window.c:772
 msgid "**Kernel Version:**"
-msgstr "**Kjerneversjon:**"
+msgstr "**Kjerne:**"
 
 #: panels/system/about/cc-system-details-window.c:779
 msgid "Details copied to clipboard"
@@ -7022,45 +7046,45 @@ msgstr "_Kopier"
 msgid "Hardware Information"
 msgstr "Enhetsinformasjon"
 
-#: panels/system/about/cc-system-details-window.ui:122
+#: panels/system/about/cc-system-details-window.ui:123
 msgid "Software Information"
 msgstr "Programvareinformasjon"
 
-#: panels/system/about/cc-system-details-window.ui:133
+#: panels/system/about/cc-system-details-window.ui:134
 #: panels/wwan/cc-wwan-details-dialog.ui:210
 msgid "Firmware Version"
 msgstr "Fastvareversjon"
 
 #. translators: this field contains the distro name and version
-#: panels/system/about/cc-system-details-window.ui:141
+#: panels/system/about/cc-system-details-window.ui:142
 msgid "OS Name"
 msgstr "Operativsystem"
 
 #. translators: this field contains the distro build
-#: panels/system/about/cc-system-details-window.ui:149
+#: panels/system/about/cc-system-details-window.ui:150
 msgid "OS Build"
 msgstr "Utgave"
 
 #. translators: this field contains the distro type
-#: panels/system/about/cc-system-details-window.ui:157
+#: panels/system/about/cc-system-details-window.ui:158
 msgid "OS Type"
 msgstr "Type"
 
-#: panels/system/about/cc-system-details-window.ui:164
+#: panels/system/about/cc-system-details-window.ui:165
 msgid "GNOME Version"
 msgstr "GNOME-versjon"
 
-#: panels/system/about/cc-system-details-window.ui:171
+#: panels/system/about/cc-system-details-window.ui:172
 msgid "Windowing System"
-msgstr "Vindussystem"
+msgstr "Visningssystem"
 
-#: panels/system/about/cc-system-details-window.ui:178
+#: panels/system/about/cc-system-details-window.ui:179
 msgid "Virtualization"
 msgstr "Virtualisering"
 
-#: panels/system/about/cc-system-details-window.ui:185
+#: panels/system/about/cc-system-details-window.ui:186
 msgid "Kernel Version"
-msgstr "Kjerneversjon"
+msgstr "Kjerne"
 
 #: panels/system/cc-system-panel.ui:23
 msgid "_Region &amp; Language"
@@ -7084,7 +7108,7 @@ msgstr "_Brukere"
 
 #: panels/system/cc-system-panel.ui:46
 msgid "Add and remove accounts, change password"
-msgstr "Legg til eller fjern brukere, og endre passord"
+msgstr "Legg til eller fjern brukere og endre passord"
 
 #: panels/system/cc-system-panel.ui:58
 msgid "R_emote Desktop"
@@ -7116,17 +7140,17 @@ msgid "Software _Updates"
 msgstr "_Oppdateringer"
 
 #. Translators: This is the full date and time format used in 12-hour mode.
-#: panels/system/datetime/cc-datetime-page.c:232
+#: panels/system/datetime/cc-datetime-page.c:230
 msgid "%e %B %Y, %l:%M %p"
 msgstr "%e. %B %Y, %l∶%M %p"
 
 #. Translators: This is the full date and time format used in 24-hour mode.
-#: panels/system/datetime/cc-datetime-page.c:237
+#: panels/system/datetime/cc-datetime-page.c:235
 msgid "%e %B %Y, %R"
 msgstr "%e. %B %Y, %R"
 
 #. Translators: "city, country"
-#: panels/system/datetime/cc-datetime-page.c:390
+#: panels/system/datetime/cc-datetime-page.c:388
 #, c-format
 msgctxt "timezone loc"
 msgid "%s, %s"
@@ -7134,7 +7158,7 @@ msgstr "%s, %s"
 
 #. Update the timezone on the listbow row
 #. Translators: "timezone (details)"
-#: panels/system/datetime/cc-datetime-page.c:407
+#: panels/system/datetime/cc-datetime-page.c:405
 #, c-format
 msgctxt "timezone desc"
 msgid "%s (%s)"
@@ -7169,103 +7193,103 @@ msgstr "Krever tilgang til internett"
 msgid "Date &amp; _Time"
 msgstr "Dato og _tid"
 
-#: panels/system/datetime/cc-datetime-page.ui:174
+#: panels/system/datetime/cc-datetime-page.ui:161
 msgid "Automatic Time _Zone"
 msgstr "Automatisk _tidssone"
 
-#: panels/system/datetime/cc-datetime-page.ui:175
+#: panels/system/datetime/cc-datetime-page.ui:162
 msgid "Requires location services enabled and internet access"
 msgstr "Krever tilgang til posisjon og internett"
 
-#: panels/system/datetime/cc-datetime-page.ui:181
+#: panels/system/datetime/cc-datetime-page.ui:168
 msgid "Time Z_one"
 msgstr "Tids_sone"
 
-#: panels/system/datetime/cc-datetime-page.ui:206
+#: panels/system/datetime/cc-datetime-page.ui:179
 msgid "Time _Format"
 msgstr "Tids_format"
 
-#: panels/system/datetime/cc-datetime-page.ui:217
+#: panels/system/datetime/cc-datetime-page.ui:190
 msgid "_24-hour"
 msgstr "_24-timers"
 
-#: panels/system/datetime/cc-datetime-page.ui:225
+#: panels/system/datetime/cc-datetime-page.ui:198
 msgid "AM / _PM"
 msgstr "AM / _PM"
 
-#: panels/system/datetime/cc-datetime-page.ui:238
+#: panels/system/datetime/cc-datetime-page.ui:211
 msgid "Clock &amp; Calendar"
 msgstr "Klokke og kalender"
 
-#: panels/system/datetime/cc-datetime-page.ui:239
+#: panels/system/datetime/cc-datetime-page.ui:212
 msgid "Control how the time and date is shown in the top bar"
 msgstr "Velg hvordan klokkeslett og dato skal vises i topplinjen"
 
-#: panels/system/datetime/cc-datetime-page.ui:242
+#: panels/system/datetime/cc-datetime-page.ui:215
 msgid "_Week Day"
 msgstr "_Ukedag"
 
-#: panels/system/datetime/cc-datetime-page.ui:248
+#: panels/system/datetime/cc-datetime-page.ui:221
 msgid "D_ate"
 msgstr "D_ato"
 
-#: panels/system/datetime/cc-datetime-page.ui:254
+#: panels/system/datetime/cc-datetime-page.ui:227
 msgid "_Seconds"
 msgstr "_Sekunder"
 
-#: panels/system/datetime/cc-datetime-page.ui:260
+#: panels/system/datetime/cc-datetime-page.ui:233
 msgid "Week _Numbers"
 msgstr "Uke_nummer"
 
-#: panels/system/datetime/cc-datetime-page.ui:261
+#: panels/system/datetime/cc-datetime-page.ui:234
 msgid "Shown in the dropdown calendar"
 msgstr "Vises i kalenderen i topplinjen"
 
-#: panels/system/datetime/cc-datetime-page.ui:298
+#: panels/system/datetime/cc-datetime-page.ui:271
 msgid "January"
 msgstr "Januar"
 
-#: panels/system/datetime/cc-datetime-page.ui:299
+#: panels/system/datetime/cc-datetime-page.ui:272
 msgid "February"
 msgstr "Februar"
 
-#: panels/system/datetime/cc-datetime-page.ui:300
+#: panels/system/datetime/cc-datetime-page.ui:273
 msgid "March"
 msgstr "Mars"
 
-#: panels/system/datetime/cc-datetime-page.ui:301
+#: panels/system/datetime/cc-datetime-page.ui:274
 msgid "April"
 msgstr "April"
 
-#: panels/system/datetime/cc-datetime-page.ui:302
+#: panels/system/datetime/cc-datetime-page.ui:275
 msgid "May"
 msgstr "Mai"
 
-#: panels/system/datetime/cc-datetime-page.ui:303
+#: panels/system/datetime/cc-datetime-page.ui:276
 msgid "June"
 msgstr "Juni"
 
-#: panels/system/datetime/cc-datetime-page.ui:304
+#: panels/system/datetime/cc-datetime-page.ui:277
 msgid "July"
 msgstr "Juli"
 
-#: panels/system/datetime/cc-datetime-page.ui:305
+#: panels/system/datetime/cc-datetime-page.ui:278
 msgid "August"
 msgstr "August"
 
-#: panels/system/datetime/cc-datetime-page.ui:306
+#: panels/system/datetime/cc-datetime-page.ui:279
 msgid "September"
 msgstr "September"
 
-#: panels/system/datetime/cc-datetime-page.ui:307
+#: panels/system/datetime/cc-datetime-page.ui:280
 msgid "October"
 msgstr "Oktober"
 
-#: panels/system/datetime/cc-datetime-page.ui:308
+#: panels/system/datetime/cc-datetime-page.ui:281
 msgid "November"
 msgstr "November"
 
-#: panels/system/datetime/cc-datetime-page.ui:309
+#: panels/system/datetime/cc-datetime-page.ui:282
 msgid "December"
 msgstr "Desember"
 
@@ -7303,7 +7327,7 @@ msgstr ""
 "enhet;system;informasjon;detaljer;minne;ram;prosessor;versjoner;programvare;"
 "operativsystem;os;modell;språk;område;region;land;formater;skrivemåter;"
 "lokalisering;tall;måleenheter;klokkeslett;tidssone;dato;fjernbruk;remote;rdp;"
-"vnc;"
+"vnc;oppdateringer;om systemet;"
 
 #: panels/system/region/cc-format-chooser.c:160
 #: panels/system/region/cc-format-chooser.c:208
@@ -7315,23 +7339,23 @@ msgstr "Skrivemåter"
 msgid "Search locales"
 msgstr "Søk etter skrivemåter"
 
-#: panels/system/region/cc-format-chooser.ui:117
+#: panels/system/region/cc-format-chooser.ui:114
 msgid "Common Formats"
 msgstr "Vanlige skrivemåter"
 
-#: panels/system/region/cc-format-chooser.ui:144
+#: panels/system/region/cc-format-chooser.ui:141
 msgid "All Formats"
 msgstr "Alle skrivemåter"
 
-#: panels/system/region/cc-format-chooser.ui:192
+#: panels/system/region/cc-format-chooser.ui:189
 msgid "No Search Results"
 msgstr "Ingen treff"
 
-#: panels/system/region/cc-format-chooser.ui:204
+#: panels/system/region/cc-format-chooser.ui:201
 msgid "Searches can be for countries or languages"
 msgstr "Søk etter land eller språk"
 
-#: panels/system/region/cc-format-chooser.ui:240
+#: panels/system/region/cc-format-chooser.ui:237
 msgid "Preview"
 msgstr "Forhåndsvisning"
 
@@ -7414,110 +7438,17 @@ msgstr "S_pråk"
 msgid "Fo_rmats"
 msgstr "Skrive_måter"
 
-#: panels/system/remote-desktop/cc-remote-desktop-page.c:418
-msgid "Device name copied"
-msgstr "Enhetsnavn kopiert til utklippstavlen"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.c:429
-msgid "Device address copied"
-msgstr "Enhetsadresse kopiert til utklippstavlen"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.c:440
-msgid "Username copied"
-msgstr "Brukernavn kopiert til utklippstavlen"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.c:451
-msgid "Password copied"
-msgstr "Passord kopiert til utklippstavlen"
-
-#. Translators: This will be presented as the text of a link to the documentation
-#: panels/system/remote-desktop/cc-remote-desktop-page.c:670
-msgid "learn how to use it"
-msgstr "lær mer her"
-
-#. Translators: %s is a link to the documentation with the label "learn how to use it"
-#: panels/system/remote-desktop/cc-remote-desktop-page.c:672
-#, c-format
-msgid ""
-"Remote desktop allows viewing and controlling your desktop from another "
-"computer – %s."
-msgstr "Fjernbruk lar systemet brukes fra andre enheter – %s."
-
 #: panels/system/remote-desktop/cc-remote-desktop-page.ui:4
 msgid "Remote Desktop"
 msgstr "Fjernbruk"
 
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:22
-msgid "Remote _Desktop"
-msgstr "_Fjernbruk"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:24
-msgid "Enable or disable remote desktop connections to this computer"
-msgstr "Slå av eller på tilgang til systemet for andre enheter"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:30
-msgid "Remote _Control"
-msgstr "Fjern_kontroll"
+#: panels/system/remote-desktop/cc-remote-desktop-page.ui:23
+msgid "Desktop Sharing"
+msgstr "Skjermdeling"
 
 #: panels/system/remote-desktop/cc-remote-desktop-page.ui:32
-msgid "Allows remote connections to control the screen"
-msgstr "La andre enheter styre skjermen"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:40
-msgid "How to Connect"
-msgstr "Instruksjoner for tilkobling"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:41
-msgid ""
-"Connect to this computer using the device name or remote desktop address"
-msgstr "Koble til enheten ved å bruke enhetsnavnet eller fjernbruksadressen"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:45
-msgid "D_evice Name"
-msgstr "_Navn"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:58
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:63
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:89
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:94
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:119
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:124
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:140
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:145
-#: panels/system/remote-login/cc-remote-login-page.ui:65
-msgid "Copy"
-msgstr "Kopier"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:76
-msgid "Re_mote Desktop Address"
-msgstr "_Adresse"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:110
-msgid "Authentication"
-msgstr "Autentisering"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:111
-msgid "The user name and password are required to connect to this computer"
-msgstr "Brukernavn og passord kreves for å koble til enheten"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:115
-msgid "_User Name"
-msgstr "_Brukernavn"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:160
-msgid "_Verify Encryption"
-msgstr "_Verifiser kryptering"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:196
-msgid "Encryption Fingerprint"
-msgstr "Krypteringsavtrykk"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:197
-msgid ""
-"The encryption fingerprint can be seen in connecting clients and should be "
-"identical"
-msgstr ""
-"Krypteringsavtrykket vises på tilkoblede enheter, og bør samsvare med dette"
+msgid "Remote Login"
+msgstr "Fjerninnlogging"
 
 #: panels/system/remote-login/cc-remote-login-page.c:53
 msgid "Command copied"
@@ -7535,6 +7466,10 @@ msgstr "Koble til enheten med Secure Shell (SSH)"
 msgid "SSH Login Command"
 msgstr "Kommando til SSH-innlogging"
 
+#: panels/system/remote-login/cc-remote-login-page.ui:65
+msgid "Copy"
+msgstr "Kopier"
+
 #: panels/system/remote-login/org.gnome.controlcenter.remote-login-helper.policy.in.in:11
 msgid "Enable or disable remote login"
 msgstr "Slå av eller på ekstern innlogging"
@@ -7543,71 +7478,29 @@ msgstr "Slå av eller på ekstern innlogging"
 msgid "Authentication is required to enable or disable remote login"
 msgstr "Autentisering kreves for å slå av eller på ekstern innlogging"
 
-#: panels/system/users/cc-add-user-dialog.c:36
-msgid "Should match the web address of your login provider."
-msgstr "Bør samsvare med nettadressen til innloggingstjenesten din."
-
-#: panels/system/users/cc-add-user-dialog.c:217
+#: panels/system/users/cc-add-user-dialog.c:159
 msgid "Failed to add account"
 msgstr "Innlogging mislyktes"
 
-#: panels/system/users/cc-add-user-dialog.c:668
+#: panels/system/users/cc-add-user-dialog.c:610
 msgid "The passwords do not match."
 msgstr "Passordene samsvarer ikke."
-
-#: panels/system/users/cc-add-user-dialog.c:866
-#: panels/system/users/cc-add-user-dialog.c:905
-#: panels/system/users/cc-add-user-dialog.c:923
-msgid "Failed to register account"
-msgstr "Registrering mislyktes"
-
-#: panels/system/users/cc-add-user-dialog.c:1038
-msgid "No supported way to authenticate with this domain"
-msgstr "Kan ikke autentisere med dette domenet"
-
-#: panels/system/users/cc-add-user-dialog.c:1102
-msgid "Failed to join domain"
-msgstr "Registrering mislyktes"
-
-#: panels/system/users/cc-add-user-dialog.c:1157
-msgid ""
-"That login name didn’t work.\n"
-"Please try again."
-msgstr ""
-"Navnet ble ikke akseptert.\n"
-"Prøv igjen."
-
-#: panels/system/users/cc-add-user-dialog.c:1164
-msgid ""
-"That login password didn’t work.\n"
-"Please try again."
-msgstr ""
-"Passordet ble ikke akseptert.\n"
-"Prøv igjen."
-
-#: panels/system/users/cc-add-user-dialog.c:1172
-msgid "Failed to log into domain"
-msgstr "Innlogging mislyktes"
-
-#: panels/system/users/cc-add-user-dialog.c:1227
-msgid "Unable to find the domain. Maybe you misspelled it?"
-msgstr "Kan ikke finne domenet. Kanskje det ble skrevet feil?"
 
 #: panels/system/users/cc-add-user-dialog.ui:13
 #: panels/system/users/data/join-dialog.ui:9
 msgid "Add User"
 msgstr "Legg til bruker"
 
-#: panels/system/users/cc-add-user-dialog.ui:95
-#: panels/system/users/cc-add-user-dialog.ui:351
+#: panels/system/users/cc-add-user-dialog.ui:93
+#: panels/system/users/cc-enterprise-login-dialog.ui:107
 msgid "_Username"
 msgstr "_Brukernavn"
 
-#: panels/system/users/cc-add-user-dialog.ui:133
+#: panels/system/users/cc-add-user-dialog.ui:131
 msgid "Ad_ministrator"
 msgstr "_Administrator"
 
-#: panels/system/users/cc-add-user-dialog.ui:138
+#: panels/system/users/cc-add-user-dialog.ui:136
 #: panels/system/users/cc-user-page.ui:141
 msgid ""
 "Administrators have extra abilities, including adding and removing users, "
@@ -7618,48 +7511,129 @@ msgstr ""
 "fjerne brukere, endre innloggingsinstillinger og fjerne programvare. "
 "Foreldrestyring kan ikke brukes på administratorer."
 
-#: panels/system/users/cc-add-user-dialog.ui:156
+#: panels/system/users/cc-add-user-dialog.ui:154
 msgid "User sets password on _first login"
 msgstr "Angi ved innlogging"
 
-#: panels/system/users/cc-add-user-dialog.ui:169
+#: panels/system/users/cc-add-user-dialog.ui:167
 msgid "Set password n_ow"
 msgstr "Angi nå"
 
-#: panels/system/users/cc-add-user-dialog.ui:189
+#: panels/system/users/cc-add-user-dialog.ui:187
 msgid "Pass_word"
 msgstr "_Passord"
 
-#: panels/system/users/cc-add-user-dialog.ui:233
+#: panels/system/users/cc-add-user-dialog.ui:231
 msgid "_Confirm"
 msgstr "_Bekreft"
 
-#: panels/system/users/cc-add-user-dialog.ui:288
-msgid "_Enterprise Login"
-msgstr "_Organisasjon"
+#: panels/system/users/cc-enterprise-login-dialog.c:133
+#: panels/system/users/cc-enterprise-login-dialog.c:171
+#: panels/system/users/cc-enterprise-login-dialog.c:186
+msgid "Failed to register account"
+msgstr "Registrering mislyktes"
 
-#: panels/system/users/cc-add-user-dialog.ui:290
-msgid "User accounts which are managed by a company or organization"
-msgstr "Knytt brukeren til en organisasjon"
+#: panels/system/users/cc-enterprise-login-dialog.c:240
+#: panels/system/users/cc-enterprise-login-dialog.c:411
+msgid "Failed to join domain"
+msgstr "Registrering mislyktes"
 
-#: panels/system/users/cc-add-user-dialog.ui:307
+#: panels/system/users/cc-enterprise-login-dialog.c:275
+msgid "No supported way to authenticate with this domain"
+msgstr "Kan ikke autentisere med dette domenet"
+
+#: panels/system/users/cc-enterprise-login-dialog.c:285
+#: panels/system/users/cc-enterprise-login-dialog.c:476
+msgid "That login name didn’t work"
+msgstr "Navnet ble ikke akseptert"
+
+#: panels/system/users/cc-enterprise-login-dialog.c:292
+#: panels/system/users/cc-enterprise-login-dialog.c:483
+msgid "That login password didn’t work"
+msgstr "Passordet ble ikke akseptert"
+
+#: panels/system/users/cc-enterprise-login-dialog.c:299
+msgid "That hostname didn’t work"
+msgstr "Navnet ble ikke akseptert"
+
+#: panels/system/users/cc-enterprise-login-dialog.c:306
+#: panels/system/users/cc-enterprise-login-dialog.c:491
+msgid "Failed to log into domain"
+msgstr "Innlogging mislyktes"
+
+#. Translators: The "%s" is a domain address (e.g. "demo1.freeipa.org").
+#: panels/system/users/cc-enterprise-login-dialog.c:352
+#, c-format
+msgid ""
+"To add an enterprise login account, this device needs to be enrolled with "
+"<b>%s</b>. To enroll, have your domain administrator enter their name and "
+"password."
+msgstr ""
+"For å bruke organisasjonsinnlogging, må enheten registreres på <b>%s</b>. Få "
+"nettverksadministratoren til å logge inn her."
+
+#: panels/system/users/cc-enterprise-login-dialog.c:538
+msgid "Valid domain"
+msgstr "Gyldig domene"
+
+#: panels/system/users/cc-enterprise-login-dialog.c:542
+msgid "Domain not found"
+msgstr "Fant ikke domene"
+
+#: panels/system/users/cc-enterprise-login-dialog.c:585
+msgid "Checking domain…"
+msgstr "Sjekker domene…"
+
+#: panels/system/users/cc-enterprise-login-dialog.c:629
+msgid "Failed to contact realmd service"
+msgstr "Kobling til realmd-tjenesten mislyktes"
+
+#: panels/system/users/cc-enterprise-login-dialog.ui:28
+#: panels/system/users/cc-enterprise-login-dialog.ui:48
+msgid "Add Enterprise Login"
+msgstr "Organisasjonsinnlogging"
+
+#: panels/system/users/cc-enterprise-login-dialog.ui:37
+msgid "Offline"
+msgstr "Frakoblet"
+
+#: panels/system/users/cc-enterprise-login-dialog.ui:38
+msgid "A network connection is needed to add enterprise login accounts."
+msgstr "Du må være tilkoblet for å bruke organisasjonsinnlogging."
+
+#: panels/system/users/cc-enterprise-login-dialog.ui:84
+msgid ""
+"Enterprise login allows an existing centrally managed account to be used on "
+"this device."
+msgstr "Organisasjonsinnlogging lar en sentralt styrt konto brukes på enheten."
+
+#: panels/system/users/cc-enterprise-login-dialog.ui:89
 #: panels/system/users/data/join-dialog.ui:90
 msgid "_Domain"
 msgstr "_Domene"
 
-#: panels/system/users/cc-add-user-dialog.ui:396
-msgid "You are Offline"
-msgstr "Ikke på nett"
+#: panels/system/users/cc-enterprise-login-dialog.ui:97
+msgid "Should match the web domain of the account provider"
+msgstr "Bør samsvare med nettadressen til innloggingstjenesten din"
 
-#: panels/system/users/cc-add-user-dialog.ui:397
-msgid ""
-"Enterprise login allows an existing centrally managed user account to be "
-"used on this device. You can also use this account to access company "
-"resources on the internet."
-msgstr ""
-"Organisasjonsinnlogging lar enheten brukes med en eksisterende konto som "
-"styres sentralt av en organisasjon. Kontoen kan også brukes til å vise "
-"organisasjonsressurser på nettet."
+#: panels/system/users/cc-enterprise-login-dialog.ui:130
+msgid "Enroll Device"
+msgstr "Registrer enhet"
+
+#. Translators: This button enrolls the computer in the domain in order to use enterprise logins.
+#: panels/system/users/cc-enterprise-login-dialog.ui:140
+#: panels/system/users/data/join-dialog.ui:30
+msgid "_Enroll"
+msgstr "_Registrer"
+
+#: panels/system/users/cc-enterprise-login-dialog.ui:162
+#: panels/system/users/data/join-dialog.ui:112
+msgid "Administrator _Name"
+msgstr "Navn"
+
+#: panels/system/users/cc-enterprise-login-dialog.ui:169
+msgid "Administrator _Password"
+msgstr "Passord"
 
 #: panels/system/users/cc-avatar-chooser.c:162
 msgid "Browse for more pictures"
@@ -7938,17 +7912,17 @@ msgstr "Automatisk registrering er ikke mulig med denne typen domene"
 msgid "No such domain or realm found"
 msgstr "Fant ikke domene"
 
-#: panels/system/users/cc-realm-manager.c:712
-#: panels/system/users/cc-realm-manager.c:726
+#: panels/system/users/cc-realm-manager.c:721
+#: panels/system/users/cc-realm-manager.c:735
 #, c-format
 msgid "Cannot log in as %s at the %s domain"
 msgstr "Innlogging som %s på domenet %s mislyktes"
 
-#: panels/system/users/cc-realm-manager.c:718
+#: panels/system/users/cc-realm-manager.c:727
 msgid "Invalid password, please try again"
 msgstr "Ugyldig passord, prøv igjen"
 
-#: panels/system/users/cc-realm-manager.c:731
+#: panels/system/users/cc-realm-manager.c:740
 #, c-format
 msgid "Couldn’t connect to the %s domain: %s"
 msgstr "Tilkobling til domenet %s mislyktes: %s"
@@ -8047,10 +8021,9 @@ msgstr "Andre brukere"
 msgid "_Add User…"
 msgstr "_Legg til bruker…"
 
-#. Translators: This button enrolls the computer in the domain in order to use enterprise logins.
-#: panels/system/users/data/join-dialog.ui:30
-msgid "_Enroll"
-msgstr "_Registrer"
+#: panels/system/users/cc-users-page.ui:47
+msgid "Add Enterprise User"
+msgstr "Legg til organisasjonsbruker"
 
 #: panels/system/users/data/join-dialog.ui:59
 msgid "Domain Administrator Login"
@@ -8065,10 +8038,6 @@ msgstr ""
 "For å bruke organisasjonsinnlogging, må enheten\n"
 "registreres på riktig domene. Få nettverksadministratoren \n"
 "til å skrive inn domenepassordet her."
-
-#: panels/system/users/data/join-dialog.ui:112
-msgid "Administrator _Name"
-msgstr "Navn"
 
 #: panels/system/users/data/join-dialog.ui:135
 msgid "Administrator Password"
@@ -8739,7 +8708,7 @@ msgstr "Marker pekerens posisjon på skjermen med linjer"
 
 #: panels/universal-access/cc-ua-zoom-page.ui:123
 msgid "_Overlap Mouse Cursor"
-msgstr "_Tegn under peker"
+msgstr "_Vis under peker"
 
 #: panels/universal-access/cc-ua-zoom-page.ui:131
 msgid "_Thickness"
@@ -8893,20 +8862,20 @@ msgctxt "Wacom action-type"
 msgid "Show On-Screen Help"
 msgstr "Vis veiledning"
 
-#: panels/wacom/cc-wacom-device.c:431
+#: panels/wacom/cc-wacom-device.c:430
 msgid "Tablet mounted on laptop panel"
 msgstr "Tegnebrett festet til enheten"
 
-#: panels/wacom/cc-wacom-device.c:433
+#: panels/wacom/cc-wacom-device.c:432
 msgid "Tablet mounted on external display"
 msgstr "Tegnebrett festet til skjerm"
 
-#: panels/wacom/cc-wacom-device.c:435
+#: panels/wacom/cc-wacom-device.c:434
 msgid "External tablet device"
 msgstr "Eksternt tegnebrett"
 
 #. All displays item
-#: panels/wacom/cc-wacom-page.c:600
+#: panels/wacom/cc-wacom-page.c:598
 msgid "All Displays"
 msgstr "Alle skjermer"
 
@@ -8944,7 +8913,7 @@ msgid "Only use a portion of the tablet surface to keep monitor aspect ratio"
 msgstr ""
 "Avgrens tegnebrettets aktive område til å samsvare med skjermens størrelse"
 
-#: panels/wacom/cc-wacom-page.ui:64
+#: panels/wacom/cc-wacom-page.ui:58
 msgid "_Calibrate"
 msgstr "_Sett opp"
 
@@ -9642,7 +9611,7 @@ msgstr "[SIDE] [ARGUMENT…]"
 #. Translators should localize the following string which will be displayed in the About dialog giving credit to the translator(s).
 #: shell/cc-application.c:117
 msgid "translator-credits"
-msgstr "Brage Fuglseth"
+msgstr "Brage Fuglseth https://bragefuglseth.dev"
 
 #: shell/cc-application.c:118
 #, c-format
@@ -9657,23 +9626,23 @@ msgstr "Kategorier"
 msgid "No Results Found"
 msgstr "Ingen treff"
 
-#: shell/cc-panel-loader.c:273
+#: shell/cc-panel-loader.c:308
 msgid "Available panels:"
 msgstr "Tilgjengelige sider:"
 
-#: shell/cc-window.ui:42 shell/cc-window.ui:44
+#: shell/cc-window.ui:36
 msgid "Main Menu"
 msgstr "Hovedmeny"
 
-#: shell/cc-window.ui:59
+#: shell/cc-window.ui:47
 msgid "Search settings"
 msgstr "Søk etter innstillinger"
 
-#: shell/cc-window.ui:94
+#: shell/cc-window.ui:82
 msgid "Warning: Development Version"
 msgstr "Advarsel: Utviklingsversjon"
 
-#: shell/cc-window.ui:95
+#: shell/cc-window.ui:83
 msgid ""
 "This version of Settings should only be used for development purposes. You "
 "may experience incorrect system behavior, data loss, and other unexpected "
@@ -9682,19 +9651,19 @@ msgstr ""
 "Denne versjonen av Innstillinger bør bare brukes til utvikling. Den kan føre "
 "til ukorrekt oppførsel fra systemet, tap av data og andre uventede feil. "
 
-#: shell/cc-window.ui:99
+#: shell/cc-window.ui:87
 msgid "_OK"
 msgstr "_Ok"
 
-#: shell/cc-window.ui:107
+#: shell/cc-window.ui:95
 msgid "_Keyboard Shortcuts"
 msgstr "_Tastatursnarveier"
 
-#: shell/cc-window.ui:111
+#: shell/cc-window.ui:99
 msgid "_Help"
 msgstr "_Hjelp"
 
-#: shell/cc-window.ui:115
+#: shell/cc-window.ui:103
 msgid "_About Settings"
 msgstr "_Om Innstillinger"
 
@@ -9795,6 +9764,83 @@ msgstr[1] "%u innganger"
 #: subprojects/gvc/gvc-mixer-control.c:2882
 msgid "System Sounds"
 msgstr "Systemlyder"
+
+#~ msgid "Device name copied"
+#~ msgstr "Enhetsnavn kopiert til utklippstavlen"
+
+#~ msgid "Device address copied"
+#~ msgstr "Enhetsadresse kopiert til utklippstavlen"
+
+#~ msgid "Username copied"
+#~ msgstr "Brukernavn kopiert til utklippstavlen"
+
+#~ msgid "Password copied"
+#~ msgstr "Passord kopiert til utklippstavlen"
+
+#~ msgid "learn how to use it"
+#~ msgstr "lær mer her"
+
+#, c-format
+#~ msgid ""
+#~ "Remote desktop allows viewing and controlling your desktop from another "
+#~ "computer – %s."
+#~ msgstr "Fjernbruk lar systemet brukes fra andre enheter – %s."
+
+#~ msgid "Remote _Desktop"
+#~ msgstr "_Fjernbruk"
+
+#~ msgid "Enable or disable remote desktop connections to this computer"
+#~ msgstr "Slå av eller på tilgang til systemet for andre enheter"
+
+#~ msgid "Allows remote connections to control the screen"
+#~ msgstr "La andre enheter styre skjermen"
+
+#~ msgid "How to Connect"
+#~ msgstr "Instruksjoner for tilkobling"
+
+#~ msgid ""
+#~ "Connect to this computer using the device name or remote desktop address"
+#~ msgstr "Koble til enheten ved å bruke enhetsnavnet eller fjernbruksadressen"
+
+#~ msgid "D_evice Name"
+#~ msgstr "_Navn"
+
+#~ msgid "Re_mote Desktop Address"
+#~ msgstr "_Adresse"
+
+#~ msgid "Authentication"
+#~ msgstr "Autentisering"
+
+#~ msgid "The user name and password are required to connect to this computer"
+#~ msgstr "Brukernavn og passord kreves for å koble til enheten"
+
+#~ msgid "_User Name"
+#~ msgstr "_Brukernavn"
+
+#~ msgid "_Verify Encryption"
+#~ msgstr "_Verifiser kryptering"
+
+#~ msgid "Encryption Fingerprint"
+#~ msgstr "Krypteringsavtrykk"
+
+#~ msgid ""
+#~ "The encryption fingerprint can be seen in connecting clients and should "
+#~ "be identical"
+#~ msgstr ""
+#~ "Krypteringsavtrykket vises på tilkoblede enheter, og bør samsvare med "
+#~ "dette"
+
+#~ msgid "Unable to find the domain. Maybe you misspelled it?"
+#~ msgstr "Kan ikke finne domenet. Kanskje det ble skrevet feil?"
+
+#~ msgid "_Enterprise Login"
+#~ msgstr "_Organisasjon"
+
+#~ msgid "User accounts which are managed by a company or organization"
+#~ msgstr "Knytt brukeren til en organisasjon"
+
+#~ msgid "You are Offline"
+#~ msgstr "Ikke på nett"
 
 #~ msgid "Automatic suspend"
 #~ msgstr "Automatisk hvilemodus"
