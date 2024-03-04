@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2024-02-22 15:47+0000\n"
-"PO-Revision-Date: 2024-02-22 17:27+0100\n"
+"POT-Creation-Date: 2024-03-04 19:59+0000\n"
+"PO-Revision-Date: 2024-03-04 22:46+0100\n"
 "Last-Translator: Matej Urbančič <mateju@src.gnome.org>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "Language: sl_SI\n"
@@ -84,7 +84,7 @@ msgstr "Datotečni sistem"
 
 #: panels/applications/cc-applications-panel.c:854
 #: panels/keyboard/01-launchers.xml.in:6
-#: shell/appdata/org.gnome.Settings.appdata.xml.in:7 shell/cc-window.c:760
+#: shell/appdata/org.gnome.Settings.appdata.xml.in:7 shell/cc-window.c:775
 #: shell/cc-window.ui:20 shell/org.gnome.Settings.desktop.in:3
 msgid "Settings"
 msgstr "Nastavitve"
@@ -209,7 +209,7 @@ msgstr "Prejme sistemska iskanja in pošlji zadetke"
 #: panels/keyboard/cc-xkb-modifier-dialog.c:342
 #: panels/keyboard/keyboard-shortcuts.c:367
 #: panels/system/users/cc-user-page.c:379
-#: panels/system/users/cc-user-page.c:745 panels/wwan/cc-wwan-device-page.c:477
+#: panels/system/users/cc-user-page.c:749 panels/wwan/cc-wwan-device-page.c:477
 #: subprojects/gvc/gvc-mixer-control.c:1908
 msgid "Disabled"
 msgstr "Onemogočeno"
@@ -308,7 +308,7 @@ msgstr "Sistemska dovoljenja, ki jih zahteva program"
 #: panels/applications/cc-applications-panel.ui:409
 #: panels/mouse/cc-mouse-panel.ui:66
 #: panels/multitasking/cc-multitasking-panel.ui:15
-#: panels/power/cc-power-panel.ui:172
+#: panels/power/cc-power-panel.ui:171
 msgid "General"
 msgstr "Splošno"
 
@@ -987,6 +987,7 @@ msgstr "Umerjanje zaslona"
 #: panels/sharing/cc-sharing-panel.c:239
 #: panels/system/region/cc-format-chooser.ui:24
 #: panels/system/users/cc-add-user-dialog.ui:25
+#: panels/system/users/cc-enterprise-login-dialog.ui:58
 #: panels/system/users/cc-avatar-chooser.c:92
 #: panels/system/users/cc-fingerprint-dialog.ui:32
 #: panels/system/users/cc-password-dialog.ui:21
@@ -1297,8 +1298,9 @@ msgstr "_Uvozi datoteko …"
 #: panels/color/cc-color-panel.ui:390 panels/keyboard/cc-input-chooser.ui:28
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:33
 #: panels/network/connection-editor/net-connection-editor.c:653
-#: panels/printers/new-printer-dialog.ui:91
+#: panels/printers/new-printer-dialog.ui:85
 #: panels/system/users/cc-add-user-dialog.ui:39
+#: panels/system/users/cc-enterprise-login-dialog.ui:66
 msgid "_Add"
 msgstr "_Dodaj"
 
@@ -1753,30 +1755,46 @@ msgstr "_Nočna osvetlitev"
 msgid "Night Light"
 msgstr "Nočna osvetlitev"
 
-#: panels/display/cc-display-settings.c:107
+#: panels/display/cc-display-settings.c:111
 msgctxt "Display rotation"
 msgid "Landscape"
 msgstr "Ležeče"
 
-#: panels/display/cc-display-settings.c:110
+#: panels/display/cc-display-settings.c:114
 msgctxt "Display rotation"
 msgid "Portrait Right"
 msgstr "Pokončno desno"
 
-#: panels/display/cc-display-settings.c:113
+#: panels/display/cc-display-settings.c:117
 msgctxt "Display rotation"
 msgid "Portrait Left"
 msgstr "Pokončno levo"
 
-#: panels/display/cc-display-settings.c:116
+#: panels/display/cc-display-settings.c:120
 msgctxt "Display rotation"
 msgid "Landscape (flipped)"
 msgstr "Ležeče (obrnjeno)"
 
-#: panels/display/cc-display-settings.c:177
+#: panels/display/cc-display-settings.c:181
 #, c-format
 msgid "%.2lf Hz"
 msgstr "%.2lf Hz"
+
+#. Translators:
+#. * 1. "Variable" is an adjective that refers to the refresh rate
+#. * 2. The formatting sequence is a range separated by an en-dash
+#. *    (unicode "\u2013"). For example: "Variable (48–144.97 Hz)"
+#.
+#: panels/display/cc-display-settings.c:198
+#, c-format
+msgid "Variable (%d–%.2lf Hz)"
+msgstr "Spremenljivka (%d–%.2lf Hz)"
+
+#. Translators: "Variable" is an adjective that refers to the refresh rate
+#: panels/display/cc-display-settings.c:205
+#, c-format
+msgid "Variable (up to %.2lf Hz)"
+msgstr "Spremenljivka (do %.2lf Hz)"
 
 #: panels/display/cc-display-settings.ui:33
 msgctxt "display setting"
@@ -1789,15 +1807,24 @@ msgid "_Resolution"
 msgstr "_Ločljivost"
 
 #: panels/display/cc-display-settings.ui:49
+#: panels/display/cc-display-settings.ui:57
 msgid "R_efresh Rate"
 msgstr "_Hitrost osveževanja"
 
-#: panels/display/cc-display-settings.ui:57
+#: panels/display/cc-display-settings.ui:66
+msgid "_Variable Refresh Rate"
+msgstr "Hitrost osveževanja _spremenljivke"
+
+#: panels/display/cc-display-settings.ui:74
+msgid "Re_fresh Rate"
+msgstr "_Hitrost osveževanja"
+
+#: panels/display/cc-display-settings.ui:84
 msgid "Adjust for _TV"
 msgstr "Prilagodi za _televizijski zaslon"
 
-#: panels/display/cc-display-settings.ui:65
-#: panels/display/cc-display-settings.ui:81
+#: panels/display/cc-display-settings.ui:92
+#: panels/display/cc-display-settings.ui:108
 msgctxt "display setting"
 msgid "_Scale"
 msgstr "_Prilagodi velikost"
@@ -1990,13 +2017,12 @@ msgstr "Zagon spletnega brskalnika"
 msgid "Home folder"
 msgstr "Domača mapa"
 
+#. Translators: this is a verb.
+#. Translators: "Search" should be phrased as a verb (in both "Name" and "Keywords" fields).
+#. Translators: this is a verb.
 #: panels/keyboard/01-launchers.xml.in:16
-#: panels/keyboard/cc-input-chooser.ui:50
 #: panels/printers/cc-printers-panel.ui:21
-#: panels/printers/new-printer-dialog.ui:216
-#: panels/search/gnome-search-panel.desktop.in:3
-#: panels/system/region/cc-format-chooser.ui:82 shell/cc-window.ui:28
-#: shell/cc-window.ui:30
+#: panels/search/gnome-search-panel.desktop.in:4 shell/cc-window.ui:28
 msgid "Search"
 msgstr "Iskanje"
 
@@ -2070,7 +2096,7 @@ msgstr "Drugo"
 msgid "Add Input Source"
 msgstr "Dodaj vhodni vir"
 
-#: panels/keyboard/cc-input-chooser.ui:60
+#: panels/keyboard/cc-input-chooser.ui:57
 msgid "Input methods can’t be used on the login screen"
 msgstr "Vhodni načini na prijavnem oknu ne delujejo"
 
@@ -2719,7 +2745,7 @@ msgstr ""
 #: panels/network/connection-editor/ip6-page.ui:37
 #: panels/network/connection-editor/ip6-page.ui:197
 #: panels/network/connection-editor/ip6-page.ui:255
-#: panels/wacom/cc-wacom-page.c:613
+#: panels/wacom/cc-wacom-page.c:611
 msgid "Automatic"
 msgstr "Samodejno"
 
@@ -2855,7 +2881,7 @@ msgid "<b>Password</b>: %s"
 msgstr "<b>Geslo</b>: %s"
 
 #: panels/network/cc-qr-code-dialog.ui:9
-#: panels/network/cc-wifi-connection-row.ui:60
+#: panels/network/cc-wifi-connection-row.ui:53
 msgid "Share Network"
 msgstr "Souporaba omrežja"
 
@@ -2900,16 +2926,16 @@ msgid "Signal strength %d%%"
 msgstr "Moč signala %d%%"
 
 #. TRANSLATORS: device status
-#: panels/network/cc-wifi-connection-row.ui:41 panels/network/panel-common.c:63
+#: panels/network/cc-wifi-connection-row.ui:35 panels/network/panel-common.c:63
 msgid "Connected"
 msgstr "Povezano"
 
-#: panels/network/cc-wifi-connection-row.ui:73
+#: panels/network/cc-wifi-connection-row.ui:65
 #: panels/network/network-ethernet.ui:47
 msgid "Network Options"
 msgstr "Možnosti omrežja"
 
-#: panels/network/cc-wifi-connection-row.ui:85
+#: panels/network/cc-wifi-connection-row.ui:76
 msgid "Forget Network"
 msgstr "Pozabi omrežje"
 
@@ -2965,9 +2991,11 @@ msgstr "Ime omrežja"
 
 #. Translators: This is a password needed for printing.
 #: panels/network/cc-wifi-hotspot-dialog.ui:92
-#: panels/printers/new-printer-dialog.ui:302
+#: panels/printers/new-printer-dialog.ui:293
 #: panels/printers/pp-jobs-dialog.ui:54
-#: panels/system/users/cc-add-user-dialog.ui:152
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:110
+#: panels/system/remote-desktop/cc-remote-session-page.ui:108
+#: panels/system/users/cc-add-user-dialog.ui:150
 #: panels/wwan/cc-wwan-apn-dialog.ui:175
 msgid "Password"
 msgstr "Geslo"
@@ -3063,7 +3091,7 @@ msgstr "Varnost 802.1x"
 #: panels/network/connection-editor/bluetooth-page.ui:16
 #: panels/network/connection-editor/ethernet-page.ui:27
 #: panels/network/connection-editor/vpn-page.ui:23
-#: panels/system/users/cc-add-user-dialog.ui:68
+#: panels/system/users/cc-add-user-dialog.ui:66
 #: panels/system/users/cc-user-page.ui:84
 msgid "_Name"
 msgstr "_Ime"
@@ -4634,79 +4662,79 @@ msgstr "Priklopljene naprave"
 msgid "Power Mode"
 msgstr "Način delovanja"
 
-#: panels/power/cc-power-panel.ui:127
+#: panels/power/cc-power-panel.ui:126
 msgid "Power Saving"
 msgstr "Varčevanje z energijo"
 
-#: panels/power/cc-power-panel.ui:130
+#: panels/power/cc-power-panel.ui:129
 msgid "A_utomatic Screen Brightness"
 msgstr "_Samodejno prilagajanje svetlosti"
 
-#: panels/power/cc-power-panel.ui:131
+#: panels/power/cc-power-panel.ui:130
 msgid "Adjust screen brightness to the surrounding light"
 msgstr "Nastavitev svetlosti zaslona se prilagaja osvetljenosti okolja."
 
-#: panels/power/cc-power-panel.ui:138
+#: panels/power/cc-power-panel.ui:137
 msgid "_Dim Screen"
 msgstr "_Zamegli zaslon"
 
-#: panels/power/cc-power-panel.ui:139
+#: panels/power/cc-power-panel.ui:138
 msgid "Reduce screen brightness when the computer is inactive"
 msgstr "Zmanjša svetlost zaslona, ko ni zaznane dejavnosti naprave."
 
-#: panels/power/cc-power-panel.ui:145
+#: panels/power/cc-power-panel.ui:144
 msgid "Screen _Blank"
 msgstr "_Prazen zaslon"
 
-#: panels/power/cc-power-panel.ui:146
+#: panels/power/cc-power-panel.ui:145
 msgid "Turn the screen off after a period of inactivity"
 msgstr "Izklopi zaslon po določenem času nedejavnosti."
 
-#: panels/power/cc-power-panel.ui:154
+#: panels/power/cc-power-panel.ui:153
 msgid "Automatic Power _Saver"
 msgstr "Samodejno _ohranjevanje energije"
 
-#: panels/power/cc-power-panel.ui:155
+#: panels/power/cc-power-panel.ui:154
 msgid "Turn on power saver mode when battery power is low"
 msgstr "Omogoči varčni način delovanja, ko je baterija skoraj prazna."
 
-#: panels/power/cc-power-panel.ui:162
+#: panels/power/cc-power-panel.ui:161
 msgid "_Automatic Suspend"
 msgstr "_Samodejen prehod v pripravljenost"
 
-#: panels/power/cc-power-panel.ui:163
+#: panels/power/cc-power-panel.ui:162
 msgid "Pause the computer after a period of inactivity"
 msgstr "Preide v način pripravljenosti po določenem času nedejavnosti."
 
-#: panels/power/cc-power-panel.ui:176
+#: panels/power/cc-power-panel.ui:175
 msgid "Po_wer Button Behavior"
 msgstr "Delovanje gumba za _priklop"
 
-#: panels/power/cc-power-panel.ui:184
+#: panels/power/cc-power-panel.ui:183
 msgid "Show Battery _Percentage"
 msgstr "Pokaži _napolnjenost baterije"
 
-#: panels/power/cc-power-panel.ui:185
+#: panels/power/cc-power-panel.ui:184
 msgid "Show exact charge level in the top bar"
 msgstr "V vrhnji orodni vrstici prikaži natančno raven napolnjenosti."
 
-#: panels/power/cc-power-panel.ui:198
+#: panels/power/cc-power-panel.ui:197
 msgid "Automatic Suspend"
 msgstr "Samodejen prehod v pripravljenost"
 
-#: panels/power/cc-power-panel.ui:227
+#: panels/power/cc-power-panel.ui:226
 msgid "On _Battery Power"
 msgstr "Napajanje iz _baterije"
 
-#: panels/power/cc-power-panel.ui:234
+#: panels/power/cc-power-panel.ui:233
 msgid "_Delay"
 msgstr "_Zamik"
 
-#: panels/power/cc-power-panel.ui:252
+#: panels/power/cc-power-panel.ui:251
 msgid "_Plugged In"
 msgstr "Napajanje iz _omrežja"
 
-#: panels/power/cc-power-panel.ui:258
+#: panels/power/cc-power-panel.ui:257
 msgid "D_elay"
 msgstr "_Zamik"
 
@@ -4770,37 +4798,37 @@ msgstr "Dodajanje novega tiskalnika je spodletelo."
 msgid "Unlock to add printers and change settings"
 msgstr "Odklenite za dodajanje tiskalnikov in spreminjanje nastavitev"
 
-#: panels/printers/cc-printers-panel.ui:30
+#: panels/printers/cc-printers-panel.ui:27
 msgid "All Connected and Network Printers"
 msgstr "Povezani in omrežni tiskalniki"
 
 #. Translators: This button adds new printer.
 #. Translators: This button adds a new printer.
-#: panels/printers/cc-printers-panel.ui:34
-#: panels/printers/cc-printers-panel.ui:169
+#: panels/printers/cc-printers-panel.ui:31
+#: panels/printers/cc-printers-panel.ui:166
 msgid "_Add Printer…"
 msgstr "_Dodaj tiskalnik …"
 
-#: panels/printers/cc-printers-panel.ui:52
+#: panels/printers/cc-printers-panel.ui:49
 msgid "Search printers"
 msgstr "Poišči tiskalnike"
 
 #. Translators: This is the button which allows undoing the removal of the printer.
-#: panels/printers/cc-printers-panel.ui:81
+#: panels/printers/cc-printers-panel.ui:78
 msgid "Undo"
 msgstr "Razveljavi"
 
-#: panels/printers/cc-printers-panel.ui:166
+#: panels/printers/cc-printers-panel.ui:163
 msgid "No Printers"
 msgstr "Ni nastavljenih tiskalnikov"
 
 #. Translators: Title if the CUPS server is not running (we can not connect to it).
-#: panels/printers/cc-printers-panel.ui:191
+#: panels/printers/cc-printers-panel.ui:188
 msgid "No Print Service"
 msgstr "Storitev tiskanja ni zagnana"
 
 #. Translators: Description if the CUPS server is not running (we can not connect to it).
-#: panels/printers/cc-printers-panel.ui:192
+#: panels/printers/cc-printers-panel.ui:189
 msgid "The system printing service doesn’t seem to be available"
 msgstr "Sistemska storitev tiskanja trenutno ni na voljo."
 
@@ -4827,7 +4855,7 @@ msgstr "Tiskalnik;Vrsta;Tiskanje;Papir;Črnilo;Toner;"
 msgid "Add Printer"
 msgstr "Dodaj tiskalnik"
 
-#: panels/printers/new-printer-dialog.ui:69
+#: panels/printers/new-printer-dialog.ui:67
 #: panels/system/region/cc-format-chooser.ui:37
 #: panels/system/users/cc-fingerprint-dialog.ui:44
 #: panels/wwan/cc-wwan-apn-dialog.ui:21
@@ -4836,34 +4864,37 @@ msgstr "Nazaj"
 
 #. Translators: This button opens authentication dialog for selected server.
 #. Translators: This buttons submits the credentials for the selected server.
-#: panels/printers/new-printer-dialog.ui:108
-#: panels/printers/new-printer-dialog.ui:123
+#: panels/printers/new-printer-dialog.ui:102
+#: panels/printers/new-printer-dialog.ui:117
 #: panels/wwan/cc-wwan-device-page.ui:38
 msgid "_Unlock"
 msgstr "_Odkleni"
 
 #. Translators: No printers were detected
-#: panels/printers/new-printer-dialog.ui:174
+#: panels/printers/new-printer-dialog.ui:168
 msgid "No Printers Found"
 msgstr "Ni najdenih tiskalnikov"
 
 #. Translators: The entered text should contain network address of a printer or a text which will filter found devices (their names and locations)
-#: panels/printers/new-printer-dialog.ui:211
+#: panels/printers/new-printer-dialog.ui:205
 msgid "Enter a network address or search for a printer"
 msgstr "Vpis omrežnega naslova oziroma niz za iskanje tiskalnika"
 
-#: panels/printers/new-printer-dialog.ui:256
+#: panels/printers/new-printer-dialog.ui:247
 msgid "Authentication Required"
 msgstr "Zahtevana je overitev"
 
-#: panels/printers/new-printer-dialog.ui:272
+#: panels/printers/new-printer-dialog.ui:263
 msgid "Enter username and password to view printers on Print Server"
 msgstr ""
 "Vnesite uporabniško ime in geslo za ogled tiskalnikov na strežniku tiskanja."
 
 #. Translators: This is a username on a print server.
-#: panels/printers/new-printer-dialog.ui:281
-#: panels/printers/pp-jobs-dialog.ui:42 panels/wwan/cc-wwan-apn-dialog.ui:150
+#: panels/printers/new-printer-dialog.ui:272
+#: panels/printers/pp-jobs-dialog.ui:42
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:94
+#: panels/system/remote-desktop/cc-remote-session-page.ui:92
+#: panels/wwan/cc-wwan-apn-dialog.ui:150
 msgid "Username"
 msgstr "Uporabniško ime"
 
@@ -6037,7 +6068,7 @@ msgstr "Ni veljavno"
 #. TRANSLATORS: Status of Parental Controls setup
 #: panels/privacy/cc-firmware-security-utils.c:45
 #: panels/system/users/cc-user-page.c:377
-#: panels/system/users/cc-user-page.c:745 panels/wwan/cc-wwan-device-page.c:475
+#: panels/system/users/cc-user-page.c:749 panels/wwan/cc-wwan-device-page.c:475
 msgid "Enabled"
 msgstr "Omogočeno"
 
@@ -6647,29 +6678,29 @@ msgstr "_Iskanje programov"
 msgid "Include app-provided search results"
 msgstr "Vključi zadetke iskanja drugih programov."
 
-#: panels/search/cc-search-panel.ui:29
+#: panels/search/cc-search-panel.ui:23
 msgid "Search _Locations"
 msgstr "_Preišči mesta"
 
-#: panels/search/cc-search-panel.ui:30
+#: panels/search/cc-search-panel.ui:24
 msgid "Filesystem locations which are searched by system apps"
 msgstr "Datotečna mesta, ki so vključena v iskanje"
 
-#: panels/search/cc-search-panel.ui:39
+#: panels/search/cc-search-panel.ui:33
 msgid "Search Results"
 msgstr "Ni najdenih zadetkov"
 
-#: panels/search/cc-search-panel.ui:40
+#: panels/search/cc-search-panel.ui:34
 msgid "Results are displayed according to the list order"
 msgstr "Rezultati so prikazani glede na seznam razvrščanja."
 
-#: panels/search/gnome-search-panel.desktop.in:4
+#: panels/search/gnome-search-panel.desktop.in:5
 msgid "Control which apps show search results in the Activities Overview"
 msgstr ""
 "Upravljanje programov, ki v pregledu dejavnosti prikazujejo rezultate iskanja"
 
 #. Translators: Search terms to find the Search panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
-#: panels/search/gnome-search-panel.desktop.in:15
+#: panels/search/gnome-search-panel.desktop.in:16
 msgid "Search;Find;Index;Hide;Privacy;Results;"
 msgstr "iskanje;išči;najdi;kazalo;skrij;zasebnost;zadetki;privatno;"
 
@@ -6741,8 +6772,7 @@ msgid "_Require Password"
 msgstr "_Zahtevaj geslo"
 
 #: panels/sharing/cc-sharing-panel.ui:96
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:136
-#: panels/system/users/cc-add-user-dialog.ui:373
+#: panels/system/users/cc-enterprise-login-dialog.ui:114
 msgid "_Password"
 msgstr "_Geslo"
 
@@ -7411,23 +7441,23 @@ msgstr "Jezikovna določila"
 msgid "Search locales"
 msgstr "Proišči jezikovne nabore"
 
-#: panels/system/region/cc-format-chooser.ui:117
+#: panels/system/region/cc-format-chooser.ui:114
 msgid "Common Formats"
 msgstr "Pogoste vrste"
 
-#: panels/system/region/cc-format-chooser.ui:144
+#: panels/system/region/cc-format-chooser.ui:141
 msgid "All Formats"
 msgstr "Vse vrste"
 
-#: panels/system/region/cc-format-chooser.ui:192
+#: panels/system/region/cc-format-chooser.ui:189
 msgid "No Search Results"
 msgstr "Ni najdenih zadetkov"
 
-#: panels/system/region/cc-format-chooser.ui:204
+#: panels/system/region/cc-format-chooser.ui:201
 msgid "Searches can be for countries or languages"
 msgstr "Iskati je mogoče države ali jezike."
 
-#: panels/system/region/cc-format-chooser.ui:240
+#: panels/system/region/cc-format-chooser.ui:237
 msgid "Preview"
 msgstr "Predogled"
 
@@ -7510,115 +7540,142 @@ msgstr "_Jezik"
 msgid "Fo_rmats"
 msgstr "_Jezikovna določila"
 
-#: panels/system/remote-desktop/cc-remote-desktop-page.c:418
-msgid "Device name copied"
-msgstr "Naslov naprave je kopiran"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.c:429
+#: panels/system/remote-desktop/cc-desktop-sharing-page.c:364
+#: panels/system/remote-desktop/cc-remote-session-page.c:98
 msgid "Device address copied"
 msgstr "Naslov naprave je kopiran"
 
-#: panels/system/remote-desktop/cc-remote-desktop-page.c:440
+#: panels/system/remote-desktop/cc-desktop-sharing-page.c:373
+#: panels/system/remote-desktop/cc-remote-session-page.c:107
+msgid "Port number copied"
+msgstr "Številka vrat je kopirana"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.c:384
+#: panels/system/remote-desktop/cc-remote-session-page.c:118
 msgid "Username copied"
 msgstr "Uporabniško ime je kopirano"
 
-#: panels/system/remote-desktop/cc-remote-desktop-page.c:451
+#: panels/system/remote-desktop/cc-desktop-sharing-page.c:395
+#: panels/system/remote-desktop/cc-remote-session-page.c:129
 msgid "Password copied"
 msgstr "Geslo je kopirano"
 
-#. Translators: This will be presented as the text of a link to the documentation
-#: panels/system/remote-desktop/cc-remote-desktop-page.c:670
-msgid "learn how to use it"
-msgstr "spoznajte možnosti uporabe"
-
-#. Translators: %s is a link to the documentation with the label "learn how to use it"
-#: panels/system/remote-desktop/cc-remote-desktop-page.c:672
-#, c-format
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:13
 msgid ""
-"Remote desktop allows viewing and controlling your desktop from another "
-"computer – %s."
+"Share your existing desktop with other devices. The remote connection uses "
+"the existing screen resolution"
 msgstr ""
-"Oddaljeno namizje omogoča ogled in upravljanje namizja iz drugega "
-"računalnika – %s."
+"Souporaba obstoječega namizje z drugimi napravami. Oddaljena povezava "
+"uporablja obstoječo ločljivost zaslona."
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:28
+msgid "_Desktop Sharing"
+msgstr "Souporaba _namizja"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:34
+msgid "Remote _Control"
+msgstr "Oddaljeno upravljanje"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:36
+msgid "Allows desktop shares to control the screen"
+msgstr "Omogoča upravljanje zaslona namizja"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:43
+#: panels/system/remote-desktop/cc-remote-session-page.ui:41
+msgid "How to Connect"
+msgstr "Kako vzpostaviti povezavo"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:44
+#: panels/system/remote-desktop/cc-remote-session-page.ui:42
+msgid ""
+"Use a remote desktop app to connect using the RDP protocol. Additional "
+"information about the device’s network location may also be required."
+msgstr ""
+"S programom za povezavo z oddaljenim namizjem se povežite s protokolom RDP. "
+"Morda bo treba vpisati tudi dodatne podatke o omrežni lokaciji naprave."
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:47
+#: panels/system/remote-desktop/cc-remote-session-page.ui:45
+msgid "_Hostname"
+msgstr "Ime _gostitelja"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:55
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:76
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:97
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:113
+#: panels/system/remote-desktop/cc-remote-session-page.ui:53
+#: panels/system/remote-desktop/cc-remote-session-page.ui:74
+#: panels/system/remote-desktop/cc-remote-session-page.ui:95
+#: panels/system/remote-desktop/cc-remote-session-page.ui:111
+#: panels/system/remote-login/cc-remote-login-page.ui:65
+msgid "Copy"
+msgstr "Kopiraj"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:68
+#: panels/system/remote-desktop/cc-remote-session-page.ui:66
+msgid "_Port"
+msgstr "_Vrata"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:91
+#: panels/system/remote-desktop/cc-remote-session-page.ui:89
+msgid "Login Details"
+msgstr "Podrobnosti prijave"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:132
+#: panels/system/remote-desktop/cc-remote-session-page.ui:130
+msgid "_Generate New Password"
+msgstr "Ustvari _novo geslo"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:143
+#: panels/system/remote-desktop/cc-remote-session-page.ui:141
+msgid "_Verify Encryption"
+msgstr "_Overi šifriranje"
 
 #: panels/system/remote-desktop/cc-remote-desktop-page.ui:4
 msgid "Remote Desktop"
 msgstr "Oddaljeno namizje"
 
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:22
-msgid "Remote _Desktop"
-msgstr "_Oddaljeno namizje"
+#: panels/system/remote-desktop/cc-remote-desktop-page.ui:39
+msgid "Desktop Sharing"
+msgstr "Souporaba namizja"
 
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:24
-msgid "Enable or disable remote desktop connections to this computer"
-msgstr "Omogoči ali onemogoči napravi povezovanje z oddaljenimi namizji."
+#: panels/system/remote-desktop/cc-remote-desktop-page.ui:48
+#: panels/system/remote-desktop/cc-remote-session-page.ui:33
+msgid "Remote Login"
+msgstr "Oddaljena prijava"
 
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:30
-msgid "Remote _Control"
-msgstr "Oddaljeno upravljanje"
+#: panels/system/remote-desktop/cc-remote-session-page.c:774
+#: panels/system/users/cc-user-page.c:772
+msgid "Some settings are locked"
+msgstr "Nekatere nastavitve so z aklenjene"
 
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:32
-msgid "Allows remote connections to control the screen"
-msgstr "Omogoča upravljanje zaslona na daljavo"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:40
-msgid "How to Connect"
-msgstr "Kako vzpostaviti povezavo"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:41
+#: panels/system/remote-desktop/cc-remote-session-page.ui:18
 msgid ""
-"Connect to this computer using the device name or remote desktop address"
+"Remotely connect to your user account when it isn’t being used. The display "
+"resolution can be set from the remote."
 msgstr ""
-"Povezavo je mogoče vzpostaviti z imenom naprave ali z naslovom oddaljenega "
-"namizja."
+"Oddaljeno povezovanje z uporabniškim računom, ko ni v uporabi. Ločljivost "
+"zaslona je mogoče nastaviti tudi oddaljeno."
 
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:45
-msgid "D_evice Name"
-msgstr "_Ime naprave"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:58
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:63
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:89
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:94
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:119
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:124
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:140
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:145
-#: panels/system/remote-login/cc-remote-login-page.ui:65
-msgid "Copy"
-msgstr "Kopiraj"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:76
-msgid "Re_mote Desktop Address"
-msgstr "Naslov _oddaljenega namizja"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:110
-msgid "Authentication"
-msgstr "Overitev"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:111
-msgid "The user name and password are required to connect to this computer"
-msgstr "Za povezavo z napravo sta zahtevana uporabniško ime in geslo."
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:115
-msgid "_User Name"
-msgstr "_Uporabniško ime"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:160
-msgid "_Verify Encryption"
-msgstr "_Overi šifriranje"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:196
+#: panels/system/remote-desktop/cc-encryption-fingerprint-dialog.ui:20
 msgid "Encryption Fingerprint"
 msgstr "Prstni odtis šifriranja"
 
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:197
+#: panels/system/remote-desktop/cc-encryption-fingerprint-dialog.ui:21
 msgid ""
 "The encryption fingerprint can be seen in connecting clients and should be "
 "identical"
 msgstr ""
 "Šifrirni prstni odtis je viden v programih, ki omogočajo povezovanje, in "
 "mora biti povsod enak."
+
+#: panels/system/remote-desktop/org.gnome.controlcenter.remote-session-helper.policy.in.in:11
+msgid "Enable or disable remote sessions"
+msgstr "Omogoči ali onemogoči oddaljene seje"
+
+#: panels/system/remote-desktop/org.gnome.controlcenter.remote-session-helper.policy.in.in:12
+msgid "Authentication is required to enable or disable remote sessions"
+msgstr "Za spremembo možnosti oddaljene seje je zahtevana overitev"
 
 #: panels/system/remote-login/cc-remote-login-page.c:53
 msgid "Command copied"
@@ -7644,71 +7701,29 @@ msgstr "Omogoči ali onemogoči oddaljene prijave"
 msgid "Authentication is required to enable or disable remote login"
 msgstr "Za spremembo možnosti oddaljenega prijavljanja je zahtevana overitev"
 
-#: panels/system/users/cc-add-user-dialog.c:36
-msgid "Should match the web address of your login provider."
-msgstr "Vpis mora biti skladen s spletnim naslovom ponudnika prijave."
-
-#: panels/system/users/cc-add-user-dialog.c:217
+#: panels/system/users/cc-add-user-dialog.c:159
 msgid "Failed to add account"
 msgstr "Dodajanje računa je spodletelo"
 
-#: panels/system/users/cc-add-user-dialog.c:668
+#: panels/system/users/cc-add-user-dialog.c:610
 msgid "The passwords do not match."
 msgstr "Gesli se ne skladata."
-
-#: panels/system/users/cc-add-user-dialog.c:866
-#: panels/system/users/cc-add-user-dialog.c:905
-#: panels/system/users/cc-add-user-dialog.c:923
-msgid "Failed to register account"
-msgstr "Vpis računa je spodletel"
-
-#: panels/system/users/cc-add-user-dialog.c:1038
-msgid "No supported way to authenticate with this domain"
-msgstr "Ni podprtega načina za overitev s to domeno"
-
-#: panels/system/users/cc-add-user-dialog.c:1102
-msgid "Failed to join domain"
-msgstr "Pridružitev v domeno je spodletela"
-
-#: panels/system/users/cc-add-user-dialog.c:1157
-msgid ""
-"That login name didn’t work.\n"
-"Please try again."
-msgstr ""
-"Prijavno ime ne deluje.\n"
-"Poskusite vpisati drugo ime."
-
-#: panels/system/users/cc-add-user-dialog.c:1164
-msgid ""
-"That login password didn’t work.\n"
-"Please try again."
-msgstr ""
-"Prijavno geslo je napačno.\n"
-"Poskusite vpisati drugo geslo."
-
-#: panels/system/users/cc-add-user-dialog.c:1172
-msgid "Failed to log into domain"
-msgstr "Prijava v domeno je spodletela"
-
-#: panels/system/users/cc-add-user-dialog.c:1227
-msgid "Unable to find the domain. Maybe you misspelled it?"
-msgstr "Domene ni mogoče najti. Morda je vpisana napačno."
 
 #: panels/system/users/cc-add-user-dialog.ui:13
 #: panels/system/users/data/join-dialog.ui:9
 msgid "Add User"
 msgstr "Dodaj uporabnika"
 
-#: panels/system/users/cc-add-user-dialog.ui:95
-#: panels/system/users/cc-add-user-dialog.ui:351
+#: panels/system/users/cc-add-user-dialog.ui:93
+#: panels/system/users/cc-enterprise-login-dialog.ui:107
 msgid "_Username"
 msgstr "_Uporabniško ime"
 
-#: panels/system/users/cc-add-user-dialog.ui:133
+#: panels/system/users/cc-add-user-dialog.ui:131
 msgid "Ad_ministrator"
 msgstr "_Skrbnik"
 
-#: panels/system/users/cc-add-user-dialog.ui:138
+#: panels/system/users/cc-add-user-dialog.ui:136
 #: panels/system/users/cc-user-page.ui:141
 msgid ""
 "Administrators have extra abilities, including adding and removing users, "
@@ -7718,48 +7733,131 @@ msgstr ""
 "Skrbniki lahko dodajo in odstranijo druge uporabnike, spreminjajo nastavitve "
 "in prilagajajo programske pakete. Starševski nadzor skrbnikom ni na voljo."
 
-#: panels/system/users/cc-add-user-dialog.ui:156
+#: panels/system/users/cc-add-user-dialog.ui:154
 msgid "User sets password on _first login"
 msgstr "Uporabnik si nastavi geslo ob _prvi prijavi"
 
-#: panels/system/users/cc-add-user-dialog.ui:169
+#: panels/system/users/cc-add-user-dialog.ui:167
 msgid "Set password n_ow"
 msgstr "Nastavi geslo _takoj"
 
-#: panels/system/users/cc-add-user-dialog.ui:189
+#: panels/system/users/cc-add-user-dialog.ui:187
 msgid "Pass_word"
 msgstr "_Geslo"
 
-#: panels/system/users/cc-add-user-dialog.ui:233
+#: panels/system/users/cc-add-user-dialog.ui:231
 msgid "_Confirm"
 msgstr "_Potrdi"
 
-#: panels/system/users/cc-add-user-dialog.ui:288
-msgid "_Enterprise Login"
-msgstr "_Prijava v poslovno domeno"
+#: panels/system/users/cc-enterprise-login-dialog.c:133
+#: panels/system/users/cc-enterprise-login-dialog.c:171
+#: panels/system/users/cc-enterprise-login-dialog.c:186
+msgid "Failed to register account"
+msgstr "Vpis računa je spodletel"
 
-#: panels/system/users/cc-add-user-dialog.ui:290
-msgid "User accounts which are managed by a company or organization"
-msgstr "Uporabniški računi, ki jih upravlja podjetje ali ustanova."
+#: panels/system/users/cc-enterprise-login-dialog.c:240
+#: panels/system/users/cc-enterprise-login-dialog.c:411
+msgid "Failed to join domain"
+msgstr "Pridružitev v domeno je spodletela"
 
-#: panels/system/users/cc-add-user-dialog.ui:307
+#: panels/system/users/cc-enterprise-login-dialog.c:275
+msgid "No supported way to authenticate with this domain"
+msgstr "Ni podprtega načina za overitev s to domeno"
+
+#: panels/system/users/cc-enterprise-login-dialog.c:285
+#: panels/system/users/cc-enterprise-login-dialog.c:476
+msgid "That login name didn’t work"
+msgstr "Prijavno ime ni pravo"
+
+#: panels/system/users/cc-enterprise-login-dialog.c:292
+#: panels/system/users/cc-enterprise-login-dialog.c:483
+msgid "That login password didn’t work"
+msgstr "Prijavno geslo je napačno"
+
+#: panels/system/users/cc-enterprise-login-dialog.c:299
+msgid "That hostname didn’t work"
+msgstr "Ime gostitelja ni pravo"
+
+#: panels/system/users/cc-enterprise-login-dialog.c:306
+#: panels/system/users/cc-enterprise-login-dialog.c:491
+msgid "Failed to log into domain"
+msgstr "Prijava v domeno je spodletela"
+
+#. Translators: The "%s" is a domain address (e.g. "demo1.freeipa.org").
+#: panels/system/users/cc-enterprise-login-dialog.c:352
+#, c-format
+msgid ""
+"To add an enterprise login account, this device needs to be enrolled with "
+"<b>%s</b>. To enroll, have your domain administrator enter their name and "
+"password."
+msgstr ""
+"Če želite dodati prijavni račun podjetja, je treba biti napravo vpisati v "
+"<b>%s</b>. Za nadaljevanje mora  skrbnik domene vnesti ime in geslo."
+
+#: panels/system/users/cc-enterprise-login-dialog.c:538
+msgid "Valid domain"
+msgstr "Veljavna domena"
+
+#: panels/system/users/cc-enterprise-login-dialog.c:542
+msgid "Domain not found"
+msgstr "Domene ni mogoče najti"
+
+#: panels/system/users/cc-enterprise-login-dialog.c:585
+msgid "Checking domain…"
+msgstr "Poteka predpomnjenje domene ..."
+
+#: panels/system/users/cc-enterprise-login-dialog.c:629
+msgid "Failed to contact realmd service"
+msgstr "Povezovanje s storitvijo realmd je spodletelo"
+
+#: panels/system/users/cc-enterprise-login-dialog.ui:28
+#: panels/system/users/cc-enterprise-login-dialog.ui:48
+msgid "Add Enterprise Login"
+msgstr "Dodaj prijavo v poslovno domeno"
+
+#: panels/system/users/cc-enterprise-login-dialog.ui:37
+msgid "Offline"
+msgstr "Brez povezave"
+
+#: panels/system/users/cc-enterprise-login-dialog.ui:38
+msgid "A network connection is needed to add enterprise login accounts."
+msgstr "Za dodajanje poslovnih računov je zahtevana internetna povezava"
+
+#: panels/system/users/cc-enterprise-login-dialog.ui:84
+msgid ""
+"Enterprise login allows an existing centrally managed account to be used on "
+"this device."
+msgstr ""
+"Poslovna prijava omogoča prijavo na to napravo z obstoječim poslovnim "
+"uporabniškim računom."
+
+#: panels/system/users/cc-enterprise-login-dialog.ui:89
 #: panels/system/users/data/join-dialog.ui:90
 msgid "_Domain"
 msgstr "_Domena"
 
-#: panels/system/users/cc-add-user-dialog.ui:396
-msgid "You are Offline"
-msgstr "Povezava ni vzpostavljena"
+#: panels/system/users/cc-enterprise-login-dialog.ui:97
+msgid "Should match the web domain of the account provider"
+msgstr "Vpis mora biti skladen s spletno domeno ponudnika prijave."
 
-#: panels/system/users/cc-add-user-dialog.ui:397
-msgid ""
-"Enterprise login allows an existing centrally managed user account to be "
-"used on this device. You can also use this account to access company "
-"resources on the internet."
-msgstr ""
-"Poslovna prijava omogoča prijavo na to napravo z obstoječim poslovnim "
-"uporabniškim računom. Ta račun je mogoče uporabiti tudi za dostop do "
-"poslovnih virov na internetu."
+#: panels/system/users/cc-enterprise-login-dialog.ui:130
+msgid "Enroll Device"
+msgstr "Dodaj naprava"
+
+#. Translators: This button enrolls the computer in the domain in order to use enterprise logins.
+#: panels/system/users/cc-enterprise-login-dialog.ui:140
+#: panels/system/users/data/join-dialog.ui:30
+msgid "_Enroll"
+msgstr "_Prijava v domeno"
+
+#: panels/system/users/cc-enterprise-login-dialog.ui:162
+#: panels/system/users/data/join-dialog.ui:112
+msgid "Administrator _Name"
+msgstr "Ime _skrbnika"
+
+#: panels/system/users/cc-enterprise-login-dialog.ui:169
+msgid "Administrator _Password"
+msgstr "Skrbniško _geslo"
 
 #: panels/system/users/cc-avatar-chooser.c:162
 msgid "Browse for more pictures"
@@ -8042,17 +8140,17 @@ msgstr "Ni mogoče samodejno pridružiti tej vrsti domene"
 msgid "No such domain or realm found"
 msgstr "Ni mogoče najti take domene ali takega področja"
 
-#: panels/system/users/cc-realm-manager.c:712
-#: panels/system/users/cc-realm-manager.c:726
+#: panels/system/users/cc-realm-manager.c:721
+#: panels/system/users/cc-realm-manager.c:735
 #, c-format
 msgid "Cannot log in as %s at the %s domain"
 msgstr "Ni se mogoče prijaviti kot %s v domeno %s."
 
-#: panels/system/users/cc-realm-manager.c:718
+#: panels/system/users/cc-realm-manager.c:727
 msgid "Invalid password, please try again"
 msgstr "Napačno geslo, poskusite znova."
 
-#: panels/system/users/cc-realm-manager.c:731
+#: panels/system/users/cc-realm-manager.c:740
 #, c-format
 msgid "Couldn’t connect to the %s domain: %s"
 msgstr "Z domeno %s povezava ni mogoča: %s"
@@ -8076,10 +8174,6 @@ msgstr "Brez"
 #, c-format
 msgid "Remove %s?"
 msgstr "Ali želite odstraniti %s?"
-
-#: panels/system/users/cc-user-page.c:768
-msgid "Some settings are locked"
-msgstr "Nekatere nastavitve so z aklenjene"
 
 #: panels/system/users/cc-user-page.ui:24
 #: panels/system/users/cc-user-page.ui:81
@@ -8142,18 +8236,17 @@ msgstr "_Izbriši datoteke in nastavitve"
 msgid "Users"
 msgstr "Uporabniki"
 
-#: panels/system/users/cc-users-page.ui:17
+#: panels/system/users/cc-users-page.ui:16
 msgid "Other Users"
 msgstr "Drugi uporabniki"
 
-#: panels/system/users/cc-users-page.ui:33
+#: panels/system/users/cc-users-page.ui:32
 msgid "_Add User…"
 msgstr "Dodaj _uporabnika …"
 
-#. Translators: This button enrolls the computer in the domain in order to use enterprise logins.
-#: panels/system/users/data/join-dialog.ui:30
-msgid "_Enroll"
-msgstr "_Prijava v domeno"
+#: panels/system/users/cc-users-page.ui:46
+msgid "Add Enterprise User"
+msgstr "Dodaj podjetniški račun"
 
 #: panels/system/users/data/join-dialog.ui:59
 msgid "Domain Administrator Login"
@@ -8168,10 +8261,6 @@ msgstr ""
 "Pred uporabo prijave v poslovno okolje mora biti računalnik\n"
 "prijavljen v domeno. Za dostop do domene so zahtevana\n"
 "skrbniška strežniška dovoljenja."
-
-#: panels/system/users/data/join-dialog.ui:112
-msgid "Administrator _Name"
-msgstr "Ime _skrbnika"
 
 #: panels/system/users/data/join-dialog.ui:135
 msgid "Administrator Password"
@@ -8995,20 +9084,20 @@ msgctxt "Wacom action-type"
 msgid "Show On-Screen Help"
 msgstr "Pokaži zaslonsko pomoč"
 
-#: panels/wacom/cc-wacom-device.c:431
+#: panels/wacom/cc-wacom-device.c:430
 msgid "Tablet mounted on laptop panel"
 msgstr "Na prenosnik je priklopljena tablica"
 
-#: panels/wacom/cc-wacom-device.c:433
+#: panels/wacom/cc-wacom-device.c:432
 msgid "Tablet mounted on external display"
 msgstr "Na zunanji zaslon je priklopljena tablica"
 
-#: panels/wacom/cc-wacom-device.c:435
+#: panels/wacom/cc-wacom-device.c:434
 msgid "External tablet device"
 msgstr "Zunanja tablična naprava"
 
 #. All displays item
-#: panels/wacom/cc-wacom-page.c:600
+#: panels/wacom/cc-wacom-page.c:598
 msgid "All Displays"
 msgstr "Vsi zasloni"
 
@@ -9047,7 +9136,7 @@ msgstr ""
 "Uporabi le del površine tablice za ohranjanje skladnosti z velikostjo "
 "monitorja"
 
-#: panels/wacom/cc-wacom-page.ui:64
+#: panels/wacom/cc-wacom-page.ui:58
 msgid "_Calibrate"
 msgstr "_Umeri …"
 
@@ -9766,23 +9855,23 @@ msgstr "Kategorije nastavitev"
 msgid "No Results Found"
 msgstr "Ni najdenih zadetkov."
 
-#: shell/cc-panel-loader.c:273
+#: shell/cc-panel-loader.c:308
 msgid "Available panels:"
 msgstr "Razpoložljivi pulti:"
 
-#: shell/cc-window.ui:42 shell/cc-window.ui:44
+#: shell/cc-window.ui:36
 msgid "Main Menu"
 msgstr "Glavni meni"
 
-#: shell/cc-window.ui:59
+#: shell/cc-window.ui:47
 msgid "Search settings"
 msgstr "Iskanje nastavitev"
 
-#: shell/cc-window.ui:94
+#: shell/cc-window.ui:82
 msgid "Warning: Development Version"
 msgstr "Opozorilo: razvojna različica"
 
-#: shell/cc-window.ui:95
+#: shell/cc-window.ui:83
 msgid ""
 "This version of Settings should only be used for development purposes. You "
 "may experience incorrect system behavior, data loss, and other unexpected "
@@ -9792,19 +9881,19 @@ msgstr ""
 "možnosti. Pojavijo se lahko napake, nepravilno delovanje, izguba podatkov in "
 "druge nepričakovane nevšečnosti. "
 
-#: shell/cc-window.ui:99
+#: shell/cc-window.ui:87
 msgid "_OK"
 msgstr "_V redu"
 
-#: shell/cc-window.ui:107
+#: shell/cc-window.ui:95
 msgid "_Keyboard Shortcuts"
 msgstr "_Tipkovne bližnjice"
 
-#: shell/cc-window.ui:111
+#: shell/cc-window.ui:99
 msgid "_Help"
 msgstr "Pomo_č"
 
-#: shell/cc-window.ui:115
+#: shell/cc-window.ui:103
 msgid "_About Settings"
 msgstr "_O programu"
 
@@ -9911,6 +10000,59 @@ msgstr[3] "%u vhodi"
 #: subprojects/gvc/gvc-mixer-control.c:2882
 msgid "System Sounds"
 msgstr "Sistemski zvoki"
+
+#~ msgid "Device name copied"
+#~ msgstr "Naslov naprave je kopiran"
+
+#~ msgid "learn how to use it"
+#~ msgstr "spoznajte možnosti uporabe"
+
+#, c-format
+#~ msgid ""
+#~ "Remote desktop allows viewing and controlling your desktop from another "
+#~ "computer – %s."
+#~ msgstr ""
+#~ "Oddaljeno namizje omogoča ogled in upravljanje namizja iz drugega "
+#~ "računalnika – %s."
+
+#~ msgid "Remote _Desktop"
+#~ msgstr "_Oddaljeno namizje"
+
+#~ msgid "Enable or disable remote desktop connections to this computer"
+#~ msgstr "Omogoči ali onemogoči napravi povezovanje z oddaljenimi namizji."
+
+#~ msgid ""
+#~ "Connect to this computer using the device name or remote desktop address"
+#~ msgstr ""
+#~ "Povezavo je mogoče vzpostaviti z imenom naprave ali z naslovom "
+#~ "oddaljenega namizja."
+
+#~ msgid "D_evice Name"
+#~ msgstr "_Ime naprave"
+
+#~ msgid "Re_mote Desktop Address"
+#~ msgstr "Naslov _oddaljenega namizja"
+
+#~ msgid "Authentication"
+#~ msgstr "Overitev"
+
+#~ msgid "The user name and password are required to connect to this computer"
+#~ msgstr "Za povezavo z napravo sta zahtevana uporabniško ime in geslo."
+
+#~ msgid "_User Name"
+#~ msgstr "_Uporabniško ime"
+
+#~ msgid "Unable to find the domain. Maybe you misspelled it?"
+#~ msgstr "Domene ni mogoče najti. Morda je vpisana napačno."
+
+#~ msgid "_Enterprise Login"
+#~ msgstr "_Prijava v poslovno domeno"
+
+#~ msgid "User accounts which are managed by a company or organization"
+#~ msgstr "Uporabniški računi, ki jih upravlja podjetje ali ustanova."
+
+#~ msgid "You are Offline"
+#~ msgstr "Povezava ni vzpostavljena"
 
 #~ msgid "Automatic suspend"
 #~ msgstr "Samodejen prehod v pripravljenost"
@@ -10113,9 +10255,6 @@ msgstr "Sistemski zvoki"
 
 #~ msgid "_Remote Login"
 #~ msgstr "_Oddaljena prijava"
-
-#~ msgid "Remote Login"
-#~ msgstr "Oddaljena prijava"
 
 #~ msgid "_Accessibility Menu"
 #~ msgstr "_Meni dostopnost"
@@ -10377,11 +10516,6 @@ msgstr "Sistemski zvoki"
 #~ msgid "Connect to your data in the cloud"
 #~ msgstr "Povezovanje s podatki v oblaku"
 
-#~ msgid "No internet connection — connect to set up new online accounts"
-#~ msgstr ""
-#~ "Ni povezave z internetom – povezava je zahtevana za uporabljanje novih "
-#~ "spletnih računov"
-
 #~ msgid "Add an account"
 #~ msgstr "Dodaj račun"
 
@@ -10490,9 +10624,6 @@ msgstr "Sistemski zvoki"
 #~ msgid "Logged in"
 #~ msgstr "Trenutno dejavna prijava"
 
-#~ msgid "Failed to contact the accounts service"
-#~ msgstr "Napaka med povezovanjem s storitvijo računov"
-
 #~ msgid "Please make sure that the AccountService is installed and enabled."
 #~ msgstr "Prepričajte se, da je paket AccoutnService nameščen in omogočen."
 
@@ -10536,9 +10667,6 @@ msgstr "Sistemski zvoki"
 #~ "Program %s ima že vgrajena nekatera dovoljenja in teh ni mogoče "
 #~ "spreminjati. V kolikor vas dovoljenja skrbijo, razmislite o odstranitvi "
 #~ "oziroma zamenjavi programa."
-
-#~ msgid "View Details"
-#~ msgstr "Pogled podrobnosti"
 
 #~ msgid "Application"
 #~ msgstr "Program"
@@ -13524,9 +13652,6 @@ msgstr "Sistemski zvoki"
 #~ msgctxt "Password strength"
 #~ msgid "Strong"
 #~ msgstr "Močno"
-
-#~ msgid "_Generate a password"
-#~ msgstr "Ustvari _geslo"
 
 #~ msgid "You need to enter a new password"
 #~ msgstr "Vnesti je treba novo geslo"
