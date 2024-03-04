@@ -10,8 +10,8 @@
 msgid ""
 msgstr "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/issues\n"
-"POT-Creation-Date: 2024-02-29 07:52+0000\n"
-"PO-Revision-Date: 2024-03-01 14:00+0100\n"
+"POT-Creation-Date: 2024-03-04 15:51+0000\n"
+"PO-Revision-Date: 2024-03-04 14:00+0100\n"
 "Last-Translator: Asier Sarasua Garmendia <asiersarasua@ni.eus>\n"
 "Language-Team: Basque <librezale@librezale.eus>\n"
 "Language: eu\n"
@@ -198,7 +198,7 @@ msgstr "Jaso sistema-bilaketak eta bidali emaitzak"
 #: panels/keyboard/cc-xkb-modifier-dialog.c:342
 #: panels/keyboard/keyboard-shortcuts.c:367
 #: panels/system/users/cc-user-page.c:379
-#: panels/system/users/cc-user-page.c:745 panels/wwan/cc-wwan-device-page.c:477
+#: panels/system/users/cc-user-page.c:749 panels/wwan/cc-wwan-device-page.c:477
 #: subprojects/gvc/gvc-mixer-control.c:1908
 msgid "Disabled"
 msgstr "Desgaituta"
@@ -1697,30 +1697,46 @@ msgstr "_Gaueko argia"
 msgid "Night Light"
 msgstr "Gaueko argia"
 
-#: panels/display/cc-display-settings.c:107
+#: panels/display/cc-display-settings.c:111
 msgctxt "Display rotation"
 msgid "Landscape"
 msgstr "Horizontala"
 
-#: panels/display/cc-display-settings.c:110
+#: panels/display/cc-display-settings.c:114
 msgctxt "Display rotation"
 msgid "Portrait Right"
 msgstr "Bertikala eskuinera"
 
-#: panels/display/cc-display-settings.c:113
+#: panels/display/cc-display-settings.c:117
 msgctxt "Display rotation"
 msgid "Portrait Left"
 msgstr "Bertikala ezkerrera"
 
-#: panels/display/cc-display-settings.c:116
+#: panels/display/cc-display-settings.c:120
 msgctxt "Display rotation"
 msgid "Landscape (flipped)"
 msgstr "Horizontala (iraulita)"
 
-#: panels/display/cc-display-settings.c:177
+#: panels/display/cc-display-settings.c:181
 #, c-format
 msgid "%.2lf Hz"
 msgstr "%.2lf Hz"
+
+#. Translators:
+#. * 1. "Variable" is an adjective that refers to the refresh rate
+#. * 2. The formatting sequence is a range separated by an en-dash
+#. *    (unicode "\u2013"). For example: "Variable (48–144.97 Hz)"
+#.
+#: panels/display/cc-display-settings.c:198
+#, c-format
+msgid "Variable (%d–%.2lf Hz)"
+msgstr "Aldakorra (%d–%.2lf Hz)"
+
+#. Translators: "Variable" is an adjective that refers to the refresh rate
+#: panels/display/cc-display-settings.c:205
+#, c-format
+msgid "Variable (up to %.2lf Hz)"
+msgstr "Aldakorra (%.2lf Hz arte)"
 
 #: panels/display/cc-display-settings.ui:33
 msgctxt "display setting"
@@ -1733,15 +1749,24 @@ msgid "_Resolution"
 msgstr "_Bereizmena"
 
 #: panels/display/cc-display-settings.ui:49
-msgid "R_efresh Rate"
-msgstr "F_reskatze-maiztasuna"
-
 #: panels/display/cc-display-settings.ui:57
+msgid "R_efresh Rate"
+msgstr "F_reskatze-tasa"
+
+#: panels/display/cc-display-settings.ui:66
+msgid "_Variable Refresh Rate"
+msgstr "Freskatze-tasa _aldakorra"
+
+#: panels/display/cc-display-settings.ui:74
+msgid "Re_fresh Rate"
+msgstr "_Freskatze-tasa"
+
+#: panels/display/cc-display-settings.ui:84
 msgid "Adjust for _TV"
 msgstr "Doitu _telebistarako"
 
-#: panels/display/cc-display-settings.ui:65
-#: panels/display/cc-display-settings.ui:81
+#: panels/display/cc-display-settings.ui:92
+#: panels/display/cc-display-settings.ui:108
 msgctxt "display setting"
 msgid "_Scale"
 msgstr "_Eskalatu"
@@ -1927,13 +1952,12 @@ msgstr "Abiatu web arakatzailea"
 msgid "Home folder"
 msgstr "Karpeta nagusia"
 
+#. Translators: this is a verb.
+#. Translators: "Search" should be phrased as a verb (in both "Name" and "Keywords" fields).
+#. Translators: this is a verb.
 #: panels/keyboard/01-launchers.xml.in:16
-#: panels/keyboard/cc-input-chooser.ui:50
 #: panels/printers/cc-printers-panel.ui:21
-#: panels/printers/new-printer-dialog.ui:210
-#: panels/search/gnome-search-panel.desktop.in:3
-#: panels/system/region/cc-format-chooser.ui:82 shell/cc-window.ui:28
-#: shell/cc-window.ui:30
+#: panels/search/gnome-search-panel.desktop.in:4 shell/cc-window.ui:28
 msgid "Search"
 msgstr "Bilatu"
 
@@ -2007,7 +2031,7 @@ msgstr "Bestelakoa"
 msgid "Add Input Source"
 msgstr "Gehitu sarrerako iturburua"
 
-#: panels/keyboard/cc-input-chooser.ui:60
+#: panels/keyboard/cc-input-chooser.ui:57
 msgid "Input methods can’t be used on the login screen"
 msgstr "Ezin dira sarrerako metodoak erabili saio-hasierako pantailan"
 
@@ -2627,7 +2651,7 @@ msgstr "Aldi bereko zereginak;Produktibitatea:Pertsonalizazioa;Mahaigaina;Izkina
 #: panels/network/connection-editor/ip6-page.ui:37
 #: panels/network/connection-editor/ip6-page.ui:197
 #: panels/network/connection-editor/ip6-page.ui:255
-#: panels/wacom/cc-wacom-page.c:613
+#: panels/wacom/cc-wacom-page.c:611
 msgid "Automatic"
 msgstr "Automatikoa"
 
@@ -2862,8 +2886,10 @@ msgstr "Sarearen izena"
 
 #. Translators: This is a password needed for printing.
 #: panels/network/cc-wifi-hotspot-dialog.ui:92
-#: panels/printers/new-printer-dialog.ui:296
+#: panels/printers/new-printer-dialog.ui:293
 #: panels/printers/pp-jobs-dialog.ui:54
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:110
+#: panels/system/remote-desktop/cc-remote-session-page.ui:108
 #: panels/system/users/cc-add-user-dialog.ui:150
 #: panels/wwan/cc-wwan-apn-dialog.ui:175
 msgid "Password"
@@ -4681,17 +4707,20 @@ msgstr "Ez da inprimakirik aurkitu"
 msgid "Enter a network address or search for a printer"
 msgstr "Sartu sareko helbidea edo bilatu inprimagailu bat"
 
-#: panels/printers/new-printer-dialog.ui:250
+#: panels/printers/new-printer-dialog.ui:247
 msgid "Authentication Required"
 msgstr "Autentifikazioa behar da"
 
-#: panels/printers/new-printer-dialog.ui:266
+#: panels/printers/new-printer-dialog.ui:263
 msgid "Enter username and password to view printers on Print Server"
 msgstr "Sartu zure erabiltzaile-izena eta pasahitza inprimatze-zerbitzarian"
 
 #. Translators: This is a username on a print server.
-#: panels/printers/new-printer-dialog.ui:275
-#: panels/printers/pp-jobs-dialog.ui:42 panels/wwan/cc-wwan-apn-dialog.ui:150
+#: panels/printers/new-printer-dialog.ui:272
+#: panels/printers/pp-jobs-dialog.ui:42
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:94
+#: panels/system/remote-desktop/cc-remote-session-page.ui:92
+#: panels/wwan/cc-wwan-apn-dialog.ui:150
 msgid "Username"
 msgstr "Erabiltzaile-izena"
 
@@ -5803,7 +5832,7 @@ msgstr "Ez baliozkoa"
 #. TRANSLATORS: Status of Parental Controls setup
 #: panels/privacy/cc-firmware-security-utils.c:45
 #: panels/system/users/cc-user-page.c:377
-#: panels/system/users/cc-user-page.c:745 panels/wwan/cc-wwan-device-page.c:475
+#: panels/system/users/cc-user-page.c:749 panels/wwan/cc-wwan-device-page.c:475
 msgid "Enabled"
 msgstr "Gaituta"
 
@@ -6392,28 +6421,28 @@ msgstr "_Aplikazioen bilaketa"
 msgid "Include app-provided search results"
 msgstr "Sartu aplikazioek eskainitako bilaketa-emaitzak"
 
-#: panels/search/cc-search-panel.ui:29
+#: panels/search/cc-search-panel.ui:23
 msgid "Search _Locations"
 msgstr "Bilatu _kokalekuak"
 
-#: panels/search/cc-search-panel.ui:30
+#: panels/search/cc-search-panel.ui:24
 msgid "Filesystem locations which are searched by system apps"
 msgstr "Sistema-aplikazioek arakatutako fitxategi-sistemako kokalekuak"
 
-#: panels/search/cc-search-panel.ui:39
+#: panels/search/cc-search-panel.ui:33
 msgid "Search Results"
 msgstr "Bilaketaren emaitzak"
 
-#: panels/search/cc-search-panel.ui:40
+#: panels/search/cc-search-panel.ui:34
 msgid "Results are displayed according to the list order"
 msgstr "Emaitzak zerrenda-ordenaren arabera bistaratuko dira"
 
-#: panels/search/gnome-search-panel.desktop.in:4
+#: panels/search/gnome-search-panel.desktop.in:5
 msgid "Control which apps show search results in the Activities Overview"
 msgstr "Kontrolatu zer aplikaziok erakusten dituzten bilaketen emaitzak 'Jarduerak' ikuspegian"
 
 #. Translators: Search terms to find the Search panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
-#: panels/search/gnome-search-panel.desktop.in:15
+#: panels/search/gnome-search-panel.desktop.in:16
 msgid "Search;Find;Index;Hide;Privacy;Results;"
 msgstr "Bilaketa;Bilatu;Indizea;Ezkutatu;Pribatua;Emaitzak;"
 
@@ -6483,7 +6512,6 @@ msgid "_Require Password"
 msgstr "_Eskatu pasahitza"
 
 #: panels/sharing/cc-sharing-panel.ui:96
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:136
 #: panels/system/users/cc-enterprise-login-dialog.ui:114
 msgid "_Password"
 msgstr "_Pasahitza"
@@ -7142,23 +7170,23 @@ msgstr "Formatuak"
 msgid "Search locales"
 msgstr "Bilatu hizkuntzak"
 
-#: panels/system/region/cc-format-chooser.ui:117
+#: panels/system/region/cc-format-chooser.ui:114
 msgid "Common Formats"
 msgstr "Formatu arruntak"
 
-#: panels/system/region/cc-format-chooser.ui:144
+#: panels/system/region/cc-format-chooser.ui:141
 msgid "All Formats"
 msgstr "Formatu guztiak"
 
-#: panels/system/region/cc-format-chooser.ui:192
+#: panels/system/region/cc-format-chooser.ui:189
 msgid "No Search Results"
 msgstr "Bilaketak ez du emaitzarik"
 
-#: panels/system/region/cc-format-chooser.ui:204
+#: panels/system/region/cc-format-chooser.ui:201
 msgid "Searches can be for countries or languages"
 msgstr "Bilaketan herrialdeak edo hizkuntzak bilatu daitezke"
 
-#: panels/system/region/cc-format-chooser.ui:240
+#: panels/system/region/cc-format-chooser.ui:237
 msgid "Preview"
 msgstr "Aurrebista"
 
@@ -7239,109 +7267,134 @@ msgstr "Hi_zkuntza"
 msgid "Fo_rmats"
 msgstr "Fo_rmatuak"
 
-#: panels/system/remote-desktop/cc-remote-desktop-page.c:418
-msgid "Device name copied"
-msgstr "Gailuaren izena kopiatu da"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.c:429
+#: panels/system/remote-desktop/cc-desktop-sharing-page.c:364
+#: panels/system/remote-desktop/cc-remote-session-page.c:98
 msgid "Device address copied"
 msgstr "Gailuaren helbidea kopiatu da"
 
-#: panels/system/remote-desktop/cc-remote-desktop-page.c:440
+#: panels/system/remote-desktop/cc-desktop-sharing-page.c:373
+#: panels/system/remote-desktop/cc-remote-session-page.c:107
+msgid "Port number copied"
+msgstr "Ataka-zenbakia kopiatu da"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.c:384
+#: panels/system/remote-desktop/cc-remote-session-page.c:118
 msgid "Username copied"
 msgstr "Erabiltzaile-izena kopiatu da"
 
-#: panels/system/remote-desktop/cc-remote-desktop-page.c:451
+#: panels/system/remote-desktop/cc-desktop-sharing-page.c:395
+#: panels/system/remote-desktop/cc-remote-session-page.c:129
 msgid "Password copied"
 msgstr "Pasahitza kopiatu da"
 
-#. Translators: This will be presented as the text of a link to the documentation
-#: panels/system/remote-desktop/cc-remote-desktop-page.c:670
-msgid "learn how to use it"
-msgstr "ikasi nola erabili"
-
-#. Translators: %s is a link to the documentation with the label "learn how to use it"
-#: panels/system/remote-desktop/cc-remote-desktop-page.c:672
-#, c-format
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:13
 msgid ""
-"Remote desktop allows viewing and controlling your desktop from another "
-"computer – %s."
-msgstr "Urruneko mahaigainari esker, zure mahaigaina beste ordenagailu batetik kontrolatu dezakezu – %s."
+"Share your existing desktop with other devices. The remote connection uses "
+"the existing screen resolution"
+msgstr "Partekatu mahaigaina beste gailu batzuekin. Urruneko konexioak uneko pantaila-bereizmena erabiliko du"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:28
+msgid "_Desktop Sharing"
+msgstr "_Mahaigaina partekatzea"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:34
+msgid "Remote _Control"
+msgstr "Urruneko _kontrola"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:36
+msgid "Allows desktop shares to control the screen"
+msgstr "Mahaigain-partekatzeak pantaila kontrolatzea ahalbidetzen du"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:43
+#: panels/system/remote-desktop/cc-remote-session-page.ui:41
+msgid "How to Connect"
+msgstr "Nola konektatu"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:44
+#: panels/system/remote-desktop/cc-remote-session-page.ui:42
+msgid ""
+"Use a remote desktop app to connect using the RDP protocol. Additional "
+"information about the device’s network location may also be required."
+msgstr "Erabili urruneko mahaigainetarako aplikazio bat RDP protokoloaren bidez. Gailuaren sareko kokalekuari buruzko informazio gehigarria ere beharrezkoa izan daiteke."
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:47
+#: panels/system/remote-desktop/cc-remote-session-page.ui:45
+msgid "_Hostname"
+msgstr "_Ostalari-izena"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:55
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:76
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:97
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:113
+#: panels/system/remote-desktop/cc-remote-session-page.ui:53
+#: panels/system/remote-desktop/cc-remote-session-page.ui:74
+#: panels/system/remote-desktop/cc-remote-session-page.ui:95
+#: panels/system/remote-desktop/cc-remote-session-page.ui:111
+#: panels/system/remote-login/cc-remote-login-page.ui:65
+msgid "Copy"
+msgstr "Kopiatu"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:68
+#: panels/system/remote-desktop/cc-remote-session-page.ui:66
+msgid "_Port"
+msgstr "A_taka"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:91
+#: panels/system/remote-desktop/cc-remote-session-page.ui:89
+msgid "Login Details"
+msgstr "Saio-hasieraren xehetasunak"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:132
+#: panels/system/remote-desktop/cc-remote-session-page.ui:130
+msgid "_Generate New Password"
+msgstr "_Sortu pasahitz berria"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:143
+#: panels/system/remote-desktop/cc-remote-session-page.ui:141
+msgid "_Verify Encryption"
+msgstr "Egiaztatu zi_fratzea"
 
 #: panels/system/remote-desktop/cc-remote-desktop-page.ui:4
 msgid "Remote Desktop"
 msgstr "Urruneko mahaigaina"
 
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:22
-msgid "Remote _Desktop"
-msgstr "U_rruneko mahaigaina"
+#: panels/system/remote-desktop/cc-remote-desktop-page.ui:39
+msgid "Desktop Sharing"
+msgstr "Mahaigaina partekatzea"
 
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:24
-msgid "Enable or disable remote desktop connections to this computer"
-msgstr "Gaitu edo urruneko mahaigaineko konexioa ordenagailu honekin"
+#: panels/system/remote-desktop/cc-remote-desktop-page.ui:48
+#: panels/system/remote-desktop/cc-remote-session-page.ui:33
+msgid "Remote Login"
+msgstr "Urruneko saioa"
 
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:30
-msgid "Remote _Control"
-msgstr "Urruneko _kontrola"
+#: panels/system/remote-desktop/cc-remote-session-page.c:774
+#: panels/system/users/cc-user-page.c:772
+msgid "Some settings are locked"
+msgstr "Ezarpen batzuk blokeatuta daude"
 
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:32
-msgid "Allows remote connections to control the screen"
-msgstr "Baimendu urruneko konexioek pantaila kontrolatze"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:40
-msgid "How to Connect"
-msgstr "Nola konektatu"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:41
+#: panels/system/remote-desktop/cc-remote-session-page.ui:18
 msgid ""
-"Connect to this computer using the device name or remote desktop address"
-msgstr "Konektatu ordenagailu honekin gailuaren izena edo urruneko mahaigainaren helbidea erabilita"
+"Remotely connect to your user account when it isn’t being used. The display "
+"resolution can be set from the remote."
+msgstr "Konektatu urrunetik zure erabiltzaile-kontuarekin, hura erabilia ez bada. Pantailaren bereizmena urrunetik ezarri daiteke."
 
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:45
-msgid "D_evice Name"
-msgstr "Gai_luaren izena"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:58
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:63
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:89
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:94
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:119
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:124
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:140
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:145
-#: panels/system/remote-login/cc-remote-login-page.ui:65
-msgid "Copy"
-msgstr "Kopiatu"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:76
-msgid "Re_mote Desktop Address"
-msgstr "Urruneko mahaigainaren _helbidea"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:110
-msgid "Authentication"
-msgstr "Autentifikazioa"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:111
-msgid "The user name and password are required to connect to this computer"
-msgstr "Erabiltzaile-izena eta pasahitza behar dira ordenagailu honekin konektatzeko"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:115
-msgid "_User Name"
-msgstr "Erabiltzaile-_izena"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:160
-msgid "_Verify Encryption"
-msgstr "Egiaztatu zi_fratzea"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:196
+#: panels/system/remote-desktop/cc-encryption-fingerprint-dialog.ui:20
 msgid "Encryption Fingerprint"
 msgstr "Zifratzearen hatz-marka"
 
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:197
+#: panels/system/remote-desktop/cc-encryption-fingerprint-dialog.ui:21
 msgid ""
 "The encryption fingerprint can be seen in connecting clients and should be "
 "identical"
 msgstr "Zifratzearen hatz-marka bezeroak konektatzean ikusten da eta berdina izan behar du"
+
+#: panels/system/remote-desktop/org.gnome.controlcenter.remote-session-helper.policy.in.in:11
+msgid "Enable or disable remote sessions"
+msgstr "Gaitu edo desgaitu urruneko saioak"
+
+#: panels/system/remote-desktop/org.gnome.controlcenter.remote-session-helper.policy.in.in:12
+msgid "Authentication is required to enable or disable remote sessions"
+msgstr "Autentifikazioa behar da urruneko saioak gaitzeko edo desgaitzeko"
 
 #: panels/system/remote-login/cc-remote-login-page.c:53
 msgid "Command copied"
@@ -7828,10 +7881,6 @@ msgstr "Bat ere ez"
 msgid "Remove %s?"
 msgstr "Kendu %s?"
 
-#: panels/system/users/cc-user-page.c:768
-msgid "Some settings are locked"
-msgstr "Ezarpen batzuk blokeatuta daude"
-
 #: panels/system/users/cc-user-page.ui:24
 #: panels/system/users/cc-user-page.ui:81
 #: panels/system/users/cc-user-page.ui:93
@@ -7892,15 +7941,15 @@ msgstr "_Ezabatu fitxategiak eta ezarpenak"
 msgid "Users"
 msgstr "Erabiltzaileak"
 
-#: panels/system/users/cc-users-page.ui:17
+#: panels/system/users/cc-users-page.ui:16
 msgid "Other Users"
 msgstr "Beste erabiltzaileak"
 
-#: panels/system/users/cc-users-page.ui:33
+#: panels/system/users/cc-users-page.ui:32
 msgid "_Add User…"
 msgstr "Ge_hitu erabiltzailea…"
 
-#: panels/system/users/cc-users-page.ui:47
+#: panels/system/users/cc-users-page.ui:46
 msgid "Add Enterprise User"
 msgstr "Gehitu enpresako erabiltzailea"
 
@@ -8721,20 +8770,20 @@ msgctxt "Wacom action-type"
 msgid "Show On-Screen Help"
 msgstr "Erakutsi pantailako laguntza"
 
-#: panels/wacom/cc-wacom-device.c:431
+#: panels/wacom/cc-wacom-device.c:430
 msgid "Tablet mounted on laptop panel"
 msgstr "Eramangarriaren panelean muntatutako tableta"
 
-#: panels/wacom/cc-wacom-device.c:433
+#: panels/wacom/cc-wacom-device.c:432
 msgid "Tablet mounted on external display"
 msgstr "Kanpoko pantailan muntatutako tableta"
 
-#: panels/wacom/cc-wacom-device.c:435
+#: panels/wacom/cc-wacom-device.c:434
 msgid "External tablet device"
 msgstr "Kanpoko tableta-gailua"
 
 #. All displays item
-#: panels/wacom/cc-wacom-page.c:600
+#: panels/wacom/cc-wacom-page.c:598
 msgid "All Displays"
 msgstr "Pantaila guztiak"
 
@@ -8771,7 +8820,7 @@ msgstr "Mantendu a_spektu-erlazioa"
 msgid "Only use a portion of the tablet surface to keep monitor aspect ratio"
 msgstr "Erabili tableta-gainazalaren zati bat soilik, pantailaren aspektu-erlazioa mantentzeko"
 
-#: panels/wacom/cc-wacom-page.ui:64
+#: panels/wacom/cc-wacom-page.ui:58
 msgid "_Calibrate"
 msgstr "_Kalibratu"
 
@@ -9488,38 +9537,38 @@ msgstr "Ez da emaitzarik aurkitu"
 msgid "Available panels:"
 msgstr "Panel erabilgarriak:"
 
-#: shell/cc-window.ui:42 shell/cc-window.ui:44
+#: shell/cc-window.ui:36
 msgid "Main Menu"
 msgstr "Menu nagusia"
 
-#: shell/cc-window.ui:59
+#: shell/cc-window.ui:47
 msgid "Search settings"
 msgstr "Bilaketa-ezarpenak"
 
-#: shell/cc-window.ui:94
+#: shell/cc-window.ui:82
 msgid "Warning: Development Version"
 msgstr "Abisua: garapen-bertsioa"
 
-#: shell/cc-window.ui:95
+#: shell/cc-window.ui:83
 msgid ""
 "This version of Settings should only be used for development purposes. You "
 "may experience incorrect system behavior, data loss, and other unexpected "
 "issues. "
 msgstr "Ezarpenen bertsio hau garapenerako soilik erabili beharko litzateke. Sistemaren portaera okerra, datuen galera eta espero gabeko beste arazo batzuk gerta daitezke. "
 
-#: shell/cc-window.ui:99
+#: shell/cc-window.ui:87
 msgid "_OK"
 msgstr "_Ados"
 
-#: shell/cc-window.ui:107
+#: shell/cc-window.ui:95
 msgid "_Keyboard Shortcuts"
 msgstr "Las_ter-teklak"
 
-#: shell/cc-window.ui:111
+#: shell/cc-window.ui:99
 msgid "_Help"
 msgstr "_Laguntza"
 
-#: shell/cc-window.ui:115
+#: shell/cc-window.ui:103
 msgid "_About Settings"
 msgstr "Ezarpenak aplikazioari _buruz"
 
@@ -9618,6 +9667,49 @@ msgstr[1] "%u sarrera"
 #: subprojects/gvc/gvc-mixer-control.c:2882
 msgid "System Sounds"
 msgstr "Sistemaren soinuak"
+
+#~ msgid "Device name copied"
+#~ msgstr "Gailuaren izena kopiatu da"
+
+#~ msgid "learn how to use it"
+#~ msgstr "ikasi nola erabili"
+
+#, c-format
+#~ msgid ""
+#~ "Remote desktop allows viewing and controlling your desktop from another "
+#~ "computer – %s."
+#~ msgstr ""
+#~ "Urruneko mahaigainari esker, zure mahaigaina beste ordenagailu batetik "
+#~ "kontrolatu dezakezu – %s."
+
+#~ msgid "Remote _Desktop"
+#~ msgstr "U_rruneko mahaigaina"
+
+#~ msgid "Enable or disable remote desktop connections to this computer"
+#~ msgstr "Gaitu edo urruneko mahaigaineko konexioa ordenagailu honekin"
+
+#~ msgid ""
+#~ "Connect to this computer using the device name or remote desktop address"
+#~ msgstr ""
+#~ "Konektatu ordenagailu honekin gailuaren izena edo urruneko mahaigainaren "
+#~ "helbidea erabilita"
+
+#~ msgid "D_evice Name"
+#~ msgstr "Gai_luaren izena"
+
+#~ msgid "Re_mote Desktop Address"
+#~ msgstr "Urruneko mahaigainaren _helbidea"
+
+#~ msgid "Authentication"
+#~ msgstr "Autentifikazioa"
+
+#~ msgid "The user name and password are required to connect to this computer"
+#~ msgstr ""
+#~ "Erabiltzaile-izena eta pasahitza behar dira ordenagailu honekin "
+#~ "konektatzeko"
+
+#~ msgid "_User Name"
+#~ msgstr "Erabiltzaile-_izena"
 
 #~ msgid "Unable to find the domain. Maybe you misspelled it?"
 #~ msgstr "Ezin da domeinua aurkitu. Ongi idatzi duzu?"
@@ -9815,9 +9907,6 @@ msgstr "Sistemaren soinuak"
 
 #~ msgid "_Remote Login"
 #~ msgstr "_Urruneko saioa"
-
-#~ msgid "Remote Login"
-#~ msgstr "Urruneko saioa"
 
 #~ msgid "_Accessibility Menu"
 #~ msgstr "_Irisgarritasuneko menua"
@@ -10332,9 +10421,6 @@ msgstr "Sistemaren soinuak"
 #~ "%s aplikazioak honako baimenak ditu integratuta. Baimen horiek ezin dira "
 #~ "aldatu. Baimen horien inguruko kezkaren bat baduzu, beharbada aplikazio "
 #~ "hori kendu beharko zenuke."
-
-#~ msgid "View Details"
-#~ msgstr "Ikusi xehetasunak"
 
 #~ msgid "Application"
 #~ msgstr "Aplikazioa"
