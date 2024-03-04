@@ -21,8 +21,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2024-02-29 07:52+0000\n"
-"PO-Revision-Date: 2024-02-29 12:41+0100\n"
+"POT-Creation-Date: 2024-03-04 05:06+0000\n"
+"PO-Revision-Date: 2024-03-04 10:54+0100\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Spanish - Spain <gnome-es-list@gnome.org>\n"
 "Language: es_ES\n"
@@ -216,7 +216,7 @@ msgstr "Recibir búsquedas del sistema y enviar los resultados"
 #: panels/keyboard/cc-xkb-modifier-dialog.c:342
 #: panels/keyboard/keyboard-shortcuts.c:367
 #: panels/system/users/cc-user-page.c:379
-#: panels/system/users/cc-user-page.c:745 panels/wwan/cc-wwan-device-page.c:477
+#: panels/system/users/cc-user-page.c:749 panels/wwan/cc-wwan-device-page.c:477
 #: subprojects/gvc/gvc-mixer-control.c:1908
 msgid "Disabled"
 msgstr "Desactivado"
@@ -1757,30 +1757,46 @@ msgstr "Luz _nocturna"
 msgid "Night Light"
 msgstr "Luz nocturna"
 
-#: panels/display/cc-display-settings.c:107
+#: panels/display/cc-display-settings.c:111
 msgctxt "Display rotation"
 msgid "Landscape"
 msgstr "Horizontal"
 
-#: panels/display/cc-display-settings.c:110
+#: panels/display/cc-display-settings.c:114
 msgctxt "Display rotation"
 msgid "Portrait Right"
 msgstr "Vertical derecha"
 
-#: panels/display/cc-display-settings.c:113
+#: panels/display/cc-display-settings.c:117
 msgctxt "Display rotation"
 msgid "Portrait Left"
 msgstr "Vertical izquierda"
 
-#: panels/display/cc-display-settings.c:116
+#: panels/display/cc-display-settings.c:120
 msgctxt "Display rotation"
 msgid "Landscape (flipped)"
 msgstr "Horizontal (dada la vuelta)"
 
-#: panels/display/cc-display-settings.c:177
+#: panels/display/cc-display-settings.c:181
 #, c-format
 msgid "%.2lf Hz"
 msgstr "%.2lf Hz"
+
+#. Translators:
+#. * 1. "Variable" is an adjective that refers to the refresh rate
+#. * 2. The formatting sequence is a range separated by an en-dash
+#. *    (unicode "\u2013"). For example: "Variable (48–144.97 Hz)"
+#.
+#: panels/display/cc-display-settings.c:198
+#, c-format
+msgid "Variable (%d–%.2lf Hz)"
+msgstr "Variable (%d–%.2lf Hz)"
+
+#. Translators: "Variable" is an adjective that refers to the refresh rate
+#: panels/display/cc-display-settings.c:205
+#, c-format
+msgid "Variable (up to %.2lf Hz)"
+msgstr "Variable (hasta %.2lf Hz)"
 
 #: panels/display/cc-display-settings.ui:33
 msgctxt "display setting"
@@ -1793,15 +1809,24 @@ msgid "_Resolution"
 msgstr "_Resolución"
 
 #: panels/display/cc-display-settings.ui:49
+#: panels/display/cc-display-settings.ui:57
 msgid "R_efresh Rate"
 msgstr "Tasa de _refresco"
 
-#: panels/display/cc-display-settings.ui:57
+#: panels/display/cc-display-settings.ui:66
+msgid "_Variable Refresh Rate"
+msgstr "Tasa de _refresco variable"
+
+#: panels/display/cc-display-settings.ui:74
+msgid "Re_fresh Rate"
+msgstr "Tasa de _refresco"
+
+#: panels/display/cc-display-settings.ui:84
 msgid "Adjust for _TV"
 msgstr "Ajustes para _TV"
 
-#: panels/display/cc-display-settings.ui:65
-#: panels/display/cc-display-settings.ui:81
+#: panels/display/cc-display-settings.ui:92
+#: panels/display/cc-display-settings.ui:108
 msgctxt "display setting"
 msgid "_Scale"
 msgstr "E_scalar"
@@ -1995,13 +2020,12 @@ msgstr "Lanzar navegador web"
 msgid "Home folder"
 msgstr "Carpeta personal"
 
+#. Translators: this is a verb.
+#. Translators: "Search" should be phrased as a verb (in both "Name" and "Keywords" fields).
+#. Translators: this is a verb.
 #: panels/keyboard/01-launchers.xml.in:16
-#: panels/keyboard/cc-input-chooser.ui:50
 #: panels/printers/cc-printers-panel.ui:21
-#: panels/printers/new-printer-dialog.ui:210
-#: panels/search/gnome-search-panel.desktop.in:3
-#: panels/system/region/cc-format-chooser.ui:82 shell/cc-window.ui:28
-#: shell/cc-window.ui:30
+#: panels/search/gnome-search-panel.desktop.in:4 shell/cc-window.ui:28
 msgid "Search"
 msgstr "Buscar"
 
@@ -2075,7 +2099,7 @@ msgstr "Otra"
 msgid "Add Input Source"
 msgstr "Añadir una fuente de entrada"
 
-#: panels/keyboard/cc-input-chooser.ui:60
+#: panels/keyboard/cc-input-chooser.ui:57
 msgid "Input methods can’t be used on the login screen"
 msgstr ""
 "Los métodos de entrada no se pueden usar en la pantalla de inicio de sesión"
@@ -2720,7 +2744,7 @@ msgstr ""
 #: panels/network/connection-editor/ip6-page.ui:37
 #: panels/network/connection-editor/ip6-page.ui:197
 #: panels/network/connection-editor/ip6-page.ui:255
-#: panels/wacom/cc-wacom-page.c:613
+#: panels/wacom/cc-wacom-page.c:611
 msgid "Automatic"
 msgstr "Automático"
 
@@ -2964,8 +2988,10 @@ msgstr "Nombre de red"
 
 #. Translators: This is a password needed for printing.
 #: panels/network/cc-wifi-hotspot-dialog.ui:92
-#: panels/printers/new-printer-dialog.ui:296
+#: panels/printers/new-printer-dialog.ui:293
 #: panels/printers/pp-jobs-dialog.ui:54
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:110
+#: panels/system/remote-desktop/cc-remote-session-page.ui:108
 #: panels/system/users/cc-add-user-dialog.ui:150
 #: panels/wwan/cc-wwan-apn-dialog.ui:175
 msgid "Password"
@@ -4833,19 +4859,22 @@ msgstr "No se han encontrado impresoras"
 msgid "Enter a network address or search for a printer"
 msgstr "Introduzca una dirección de red o busque una impresora"
 
-#: panels/printers/new-printer-dialog.ui:250
+#: panels/printers/new-printer-dialog.ui:247
 msgid "Authentication Required"
 msgstr "Se requiere autenticación"
 
-#: panels/printers/new-printer-dialog.ui:266
+#: panels/printers/new-printer-dialog.ui:263
 msgid "Enter username and password to view printers on Print Server"
 msgstr ""
 "Introduzca su nombre de usuario y su contraseña para ver las impresoras "
 "disponibles en el servidor de impresión"
 
 #. Translators: This is a username on a print server.
-#: panels/printers/new-printer-dialog.ui:275
-#: panels/printers/pp-jobs-dialog.ui:42 panels/wwan/cc-wwan-apn-dialog.ui:150
+#: panels/printers/new-printer-dialog.ui:272
+#: panels/printers/pp-jobs-dialog.ui:42
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:94
+#: panels/system/remote-desktop/cc-remote-session-page.ui:92
+#: panels/wwan/cc-wwan-apn-dialog.ui:150
 msgid "Username"
 msgstr "Nombre de usuario"
 
@@ -6016,7 +6045,7 @@ msgstr "No válido"
 #. TRANSLATORS: Status of Parental Controls setup
 #: panels/privacy/cc-firmware-security-utils.c:45
 #: panels/system/users/cc-user-page.c:377
-#: panels/system/users/cc-user-page.c:745 panels/wwan/cc-wwan-device-page.c:475
+#: panels/system/users/cc-user-page.c:749 panels/wwan/cc-wwan-device-page.c:475
 msgid "Enabled"
 msgstr "Activada"
 
@@ -6630,30 +6659,30 @@ msgstr "Buscar _aplicación"
 msgid "Include app-provided search results"
 msgstr "Incluir resultados de búsqueda proporcionados por las aplicaciones"
 
-#: panels/search/cc-search-panel.ui:29
+#: panels/search/cc-search-panel.ui:23
 msgid "Search _Locations"
 msgstr "_Ubicaciones de búsqueda"
 
-#: panels/search/cc-search-panel.ui:30
+#: panels/search/cc-search-panel.ui:24
 msgid "Filesystem locations which are searched by system apps"
 msgstr "Carpetas en las que buscan las aplicaciones del sistema"
 
-#: panels/search/cc-search-panel.ui:39
+#: panels/search/cc-search-panel.ui:33
 msgid "Search Results"
 msgstr "Resultados de la búsqueda"
 
-#: panels/search/cc-search-panel.ui:40
+#: panels/search/cc-search-panel.ui:34
 msgid "Results are displayed according to the list order"
 msgstr "Los resultados se muestran siguiendo el orden de la lista"
 
-#: panels/search/gnome-search-panel.desktop.in:4
+#: panels/search/gnome-search-panel.desktop.in:5
 msgid "Control which apps show search results in the Activities Overview"
 msgstr ""
 "Controlar qué aplicaciones muestran resultados de búsqueda en la vista de "
 "actividades"
 
 #. Translators: Search terms to find the Search panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
-#: panels/search/gnome-search-panel.desktop.in:15
+#: panels/search/gnome-search-panel.desktop.in:16
 msgid "Search;Find;Index;Hide;Privacy;Results;"
 msgstr "buscar;búsqueda;índice;ocultar;privacidad;resultados;"
 
@@ -6725,7 +6754,6 @@ msgid "_Require Password"
 msgstr "_Solicitar contraseña"
 
 #: panels/sharing/cc-sharing-panel.ui:96
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:136
 #: panels/system/users/cc-enterprise-login-dialog.ui:114
 msgid "_Password"
 msgstr "_Contraseña"
@@ -7392,23 +7420,23 @@ msgstr "Formatos"
 msgid "Search locales"
 msgstr "Buscar configuraciones regionales"
 
-#: panels/system/region/cc-format-chooser.ui:117
+#: panels/system/region/cc-format-chooser.ui:114
 msgid "Common Formats"
 msgstr "Formatos comunes"
 
-#: panels/system/region/cc-format-chooser.ui:144
+#: panels/system/region/cc-format-chooser.ui:141
 msgid "All Formats"
 msgstr "Todos los formatos"
 
-#: panels/system/region/cc-format-chooser.ui:192
+#: panels/system/region/cc-format-chooser.ui:189
 msgid "No Search Results"
 msgstr "No se han encontrado resultados"
 
-#: panels/system/region/cc-format-chooser.ui:204
+#: panels/system/region/cc-format-chooser.ui:201
 msgid "Searches can be for countries or languages"
 msgstr "Las búsquedas pueden ser de países o idiomas"
 
-#: panels/system/region/cc-format-chooser.ui:240
+#: panels/system/region/cc-format-chooser.ui:237
 msgid "Preview"
 msgstr "Vista previa"
 
@@ -7491,117 +7519,152 @@ msgstr "_Idioma"
 msgid "Fo_rmats"
 msgstr "Fo_rmatos"
 
-#: panels/system/remote-desktop/cc-remote-desktop-page.c:418
-msgid "Device name copied"
-msgstr "Nombre del dispositivo copiado"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.c:429
+#: panels/system/remote-desktop/cc-desktop-sharing-page.c:364
+#: panels/system/remote-desktop/cc-remote-session-page.c:98
 msgid "Device address copied"
 msgstr "Dirección del dispositivo copiada"
 
-#: panels/system/remote-desktop/cc-remote-desktop-page.c:440
+#: panels/system/remote-desktop/cc-desktop-sharing-page.c:373
+#: panels/system/remote-desktop/cc-remote-session-page.c:107
+msgid "Port number copied"
+msgstr "Número de puerto copiado"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.c:384
+#: panels/system/remote-desktop/cc-remote-session-page.c:118
 msgid "Username copied"
 msgstr "Nombre de usuario copiado"
 
-#: panels/system/remote-desktop/cc-remote-desktop-page.c:451
+#: panels/system/remote-desktop/cc-desktop-sharing-page.c:395
+#: panels/system/remote-desktop/cc-remote-session-page.c:129
 msgid "Password copied"
 msgstr "Contraseña copiada"
 
-#. Translators: This will be presented as the text of a link to the documentation
-#: panels/system/remote-desktop/cc-remote-desktop-page.c:670
-msgid "learn how to use it"
-msgstr "aprenda cómo usarlo"
-
-#. Translators: %s is a link to the documentation with the label "learn how to use it"
-#: panels/system/remote-desktop/cc-remote-desktop-page.c:672
-#, c-format
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:13
 msgid ""
-"Remote desktop allows viewing and controlling your desktop from another "
-"computer – %s."
+"Share your existing desktop with other devices. The remote connection uses "
+"the existing screen resolution"
 msgstr ""
-"El escritorio remoto permite ver y controlar su escritorio desde otro equipo "
-"- %s"
+"Comparta su escritorio existente con otros dispositivos. La conexión remota "
+"utiliza la resolución de pantalla existente."
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:28
+msgid "_Desktop Sharing"
+msgstr "Compartición de _escritorio"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:34
+msgid "Remote _Control"
+msgstr "_Control remoto"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:36
+msgid "Allows desktop shares to control the screen"
+msgstr "Permite a los escritorios compartidos controlar la pantalla"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:43
+#: panels/system/remote-desktop/cc-remote-session-page.ui:41
+msgid "How to Connect"
+msgstr "Cómo conectarse"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:44
+msgid ""
+"Use a remote desktop app to connect using the RDP protocol. Additional "
+"information about the device’s network location may also be required."
+msgstr ""
+"Utilice una aplicación de escritorio remoto para conectarse mediante el "
+"protocolo RDP. También es posible que se requiera información adicional "
+"sobre la ubicación de red del dispositivo."
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:47
+#: panels/system/remote-desktop/cc-remote-session-page.ui:45
+msgid "_Hostname"
+msgstr "Nombre de _equipo"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:55
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:76
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:97
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:113
+#: panels/system/remote-desktop/cc-remote-session-page.ui:53
+#: panels/system/remote-desktop/cc-remote-session-page.ui:74
+#: panels/system/remote-desktop/cc-remote-session-page.ui:95
+#: panels/system/remote-desktop/cc-remote-session-page.ui:111
+#: panels/system/remote-login/cc-remote-login-page.ui:65
+msgid "Copy"
+msgstr "Copiar"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:68
+#: panels/system/remote-desktop/cc-remote-session-page.ui:66
+msgid "_Port"
+msgstr "_Puerto"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:91
+#: panels/system/remote-desktop/cc-remote-session-page.ui:89
+msgid "Login Details"
+msgstr "Detalles del inicio de sesión"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:132
+#: panels/system/remote-desktop/cc-remote-session-page.ui:130
+msgid "_Generate New Password"
+msgstr "_Generar una contraseña nueva"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:143
+#: panels/system/remote-desktop/cc-remote-session-page.ui:141
+msgid "_Verify Encryption"
+msgstr "_Verificar cifrado"
 
 #: panels/system/remote-desktop/cc-remote-desktop-page.ui:4
 msgid "Remote Desktop"
 msgstr "Escritorio remoto"
 
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:22
-msgid "Remote _Desktop"
-msgstr "Escritorio _remoto"
+#: panels/system/remote-desktop/cc-remote-desktop-page.ui:39
+msgid "Desktop Sharing"
+msgstr "Compartición de escritorio"
 
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:24
-msgid "Enable or disable remote desktop connections to this computer"
-msgstr ""
-"Activar o desactivar las conexiones de escritorio remoto para este equipo"
+#: panels/system/remote-desktop/cc-remote-desktop-page.ui:48
+#: panels/system/remote-desktop/cc-remote-session-page.ui:33
+msgid "Remote Login"
+msgstr "Inicio de sesión remoto"
 
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:30
-msgid "Remote _Control"
-msgstr "_Control remoto"
+#: panels/system/remote-desktop/cc-remote-session-page.c:774
+#: panels/system/users/cc-user-page.c:772
+msgid "Some settings are locked"
+msgstr "Algunas opciones están bloqueadas"
 
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:32
-msgid "Allows remote connections to control the screen"
-msgstr "Permite las conexiones remotas para controlar la pantalla"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:40
-msgid "How to Connect"
-msgstr "Cómo conectarse"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:41
+#: panels/system/remote-desktop/cc-remote-session-page.ui:18
 msgid ""
-"Connect to this computer using the device name or remote desktop address"
+"Remotely connect to your user account when it isn’t being used. The display "
+"resolution can be set from the remote."
 msgstr ""
-"Conectarse a este equipo usando el nombre del dispositivo o la dirección del "
-"escritorio remoto"
+"Conéctese de forma remota a su cuenta de usuario cuando no esté en uso. La "
+"resolución de la pantalla se puede configurar desde el control remoto."
 
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:45
-msgid "D_evice Name"
-msgstr "Nombr_e del dispositivo"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:58
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:63
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:89
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:94
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:119
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:124
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:140
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:145
-#: panels/system/remote-login/cc-remote-login-page.ui:65
-msgid "Copy"
-msgstr "Copiar"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:76
-msgid "Re_mote Desktop Address"
-msgstr "Dirección del escritorio remoto"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:110
-msgid "Authentication"
-msgstr "Autenticación"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:111
-msgid "The user name and password are required to connect to this computer"
+#: panels/system/remote-desktop/cc-remote-session-page.ui:42
+msgid ""
+"Use a remote desktop app to connect using the RDP protocol. Additional "
+"information about the device's network location may also be required."
 msgstr ""
-"El nombre de usuario y la contraseña requeridos para conectarse a este equipo"
+"Utilice una aplicación de escritorio remoto para conectarse mediante el "
+"protocolo RDP. También es posible que se requiera información adicional "
+"sobre la ubicación de red del dispositivo."
 
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:115
-msgid "_User Name"
-msgstr "Nombre de _usuario"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:160
-msgid "_Verify Encryption"
-msgstr "_Verificar cifrado"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:196
+#: panels/system/remote-desktop/cc-encryption-fingerprint-dialog.ui:20
 msgid "Encryption Fingerprint"
 msgstr "Cifrado de huella dactilar"
 
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:197
+#: panels/system/remote-desktop/cc-encryption-fingerprint-dialog.ui:21
 msgid ""
 "The encryption fingerprint can be seen in connecting clients and should be "
 "identical"
 msgstr ""
 "El cifrado de huella dactilar se puede ver en los clientes que se conectan y "
 "debe ser idéntica"
+
+#: panels/system/remote-desktop/org.gnome.controlcenter.remote-session-helper.policy.in.in:11
+msgid "Enable or disable remote sessions"
+msgstr "Activar o desactivar sesiones remotas"
+
+#: panels/system/remote-desktop/org.gnome.controlcenter.remote-session-helper.policy.in.in:12
+msgid "Authentication is required to enable or disable remote sessions"
+msgstr ""
+"Se requiere autenticación para activar o desactivar las sesiones remotas"
 
 #: panels/system/remote-login/cc-remote-login-page.c:53
 msgid "Command copied"
@@ -8108,10 +8171,6 @@ msgstr "Ninguno"
 msgid "Remove %s?"
 msgstr "¿Quitar %s?"
 
-#: panels/system/users/cc-user-page.c:768
-msgid "Some settings are locked"
-msgstr "Algunas opciones están bloqueadas"
-
 #: panels/system/users/cc-user-page.ui:24
 #: panels/system/users/cc-user-page.ui:81
 #: panels/system/users/cc-user-page.ui:93
@@ -8174,15 +8233,15 @@ msgstr "_Eliminar archivos y configuración"
 msgid "Users"
 msgstr "Usuarios"
 
-#: panels/system/users/cc-users-page.ui:17
+#: panels/system/users/cc-users-page.ui:16
 msgid "Other Users"
 msgstr "Otros usuarios"
 
-#: panels/system/users/cc-users-page.ui:33
+#: panels/system/users/cc-users-page.ui:32
 msgid "_Add User…"
 msgstr "_Añadir usuario…"
 
-#: panels/system/users/cc-users-page.ui:47
+#: panels/system/users/cc-users-page.ui:46
 msgid "Add Enterprise User"
 msgstr "Añadir usuario de empresa"
 
@@ -9031,20 +9090,20 @@ msgctxt "Wacom action-type"
 msgid "Show On-Screen Help"
 msgstr "Mostrar la ayuda en pantalla"
 
-#: panels/wacom/cc-wacom-device.c:431
+#: panels/wacom/cc-wacom-device.c:430
 msgid "Tablet mounted on laptop panel"
 msgstr "Tableta montada en el panel del portátil"
 
-#: panels/wacom/cc-wacom-device.c:433
+#: panels/wacom/cc-wacom-device.c:432
 msgid "Tablet mounted on external display"
 msgstr "Tableta montada en una pantalla externa"
 
-#: panels/wacom/cc-wacom-device.c:435
+#: panels/wacom/cc-wacom-device.c:434
 msgid "External tablet device"
 msgstr "Tableta externa"
 
 #. All displays item
-#: panels/wacom/cc-wacom-page.c:600
+#: panels/wacom/cc-wacom-page.c:598
 msgid "All Displays"
 msgstr "Todas las pantallas"
 
@@ -9083,7 +9142,7 @@ msgstr ""
 "Usar sólo una parte de la superficie de la tableta para mantener la relación "
 "de aspecto"
 
-#: panels/wacom/cc-wacom-page.ui:64
+#: panels/wacom/cc-wacom-page.ui:58
 msgid "_Calibrate"
 msgstr "_Calibrar"
 
@@ -9815,19 +9874,19 @@ msgstr "No se han encontrado resultados"
 msgid "Available panels:"
 msgstr "Paneles disponibles:"
 
-#: shell/cc-window.ui:42 shell/cc-window.ui:44
+#: shell/cc-window.ui:36
 msgid "Main Menu"
 msgstr "Menú principal"
 
-#: shell/cc-window.ui:59
+#: shell/cc-window.ui:47
 msgid "Search settings"
 msgstr "Buscar configuración"
 
-#: shell/cc-window.ui:94
+#: shell/cc-window.ui:82
 msgid "Warning: Development Version"
 msgstr "Advertencia: versión de desarrollo"
 
-#: shell/cc-window.ui:95
+#: shell/cc-window.ui:83
 msgid ""
 "This version of Settings should only be used for development purposes. You "
 "may experience incorrect system behavior, data loss, and other unexpected "
@@ -9837,19 +9896,19 @@ msgstr ""
 "Puede experimentar un comportamiento incorrecto del sistema, pérdida de "
 "datos y otros problemas inesperados."
 
-#: shell/cc-window.ui:99
+#: shell/cc-window.ui:87
 msgid "_OK"
 msgstr "_Aceptar"
 
-#: shell/cc-window.ui:107
+#: shell/cc-window.ui:95
 msgid "_Keyboard Shortcuts"
 msgstr "Ata_jos de teclado"
 
-#: shell/cc-window.ui:111
+#: shell/cc-window.ui:99
 msgid "_Help"
 msgstr "_Ayuda"
 
-#: shell/cc-window.ui:115
+#: shell/cc-window.ui:103
 msgid "_About Settings"
 msgstr "_Acerca de Configuración"
 
@@ -9955,6 +10014,50 @@ msgstr[1] "%u entradas"
 #: subprojects/gvc/gvc-mixer-control.c:2882
 msgid "System Sounds"
 msgstr "Sonidos del sistema"
+
+#~ msgid "Device name copied"
+#~ msgstr "Nombre del dispositivo copiado"
+
+#~ msgid "learn how to use it"
+#~ msgstr "aprenda cómo usarlo"
+
+#, c-format
+#~ msgid ""
+#~ "Remote desktop allows viewing and controlling your desktop from another "
+#~ "computer – %s."
+#~ msgstr ""
+#~ "El escritorio remoto permite ver y controlar su escritorio desde otro "
+#~ "equipo - %s"
+
+#~ msgid "Remote _Desktop"
+#~ msgstr "Escritorio _remoto"
+
+#~ msgid "Enable or disable remote desktop connections to this computer"
+#~ msgstr ""
+#~ "Activar o desactivar las conexiones de escritorio remoto para este equipo"
+
+#~ msgid ""
+#~ "Connect to this computer using the device name or remote desktop address"
+#~ msgstr ""
+#~ "Conectarse a este equipo usando el nombre del dispositivo o la dirección "
+#~ "del escritorio remoto"
+
+#~ msgid "D_evice Name"
+#~ msgstr "Nombr_e del dispositivo"
+
+#~ msgid "Re_mote Desktop Address"
+#~ msgstr "Dirección del escritorio remoto"
+
+#~ msgid "Authentication"
+#~ msgstr "Autenticación"
+
+#~ msgid "The user name and password are required to connect to this computer"
+#~ msgstr ""
+#~ "El nombre de usuario y la contraseña requeridos para conectarse a este "
+#~ "equipo"
+
+#~ msgid "_User Name"
+#~ msgstr "Nombre de _usuario"
 
 #~ msgid "Unable to find the domain. Maybe you misspelled it?"
 #~ msgstr "No se pudo encontrar el dominio. ¿Está bien escrito?"
@@ -10172,9 +10275,6 @@ msgstr "Sonidos del sistema"
 
 #~ msgid "_Remote Login"
 #~ msgstr "Inicio de sesión _remoto"
-
-#~ msgid "Remote Login"
-#~ msgstr "Inicio de sesión remoto"
 
 #~ msgid "_Accessibility Menu"
 #~ msgstr "Menú de _accesibilidad"
@@ -10701,9 +10801,6 @@ msgstr "Sonidos del sistema"
 #~ msgstr ""
 #~ "%s tiene los siguientes permisos integrados y no se pueden modificar. Si "
 #~ "esto le preocupa considere la opción de quitar esta aplicación."
-
-#~ msgid "View Details"
-#~ msgstr "Ver detalles"
 
 #~ msgid "Application"
 #~ msgstr "Aplicación"
@@ -13984,9 +14081,6 @@ msgstr "Sonidos del sistema"
 
 #~ msgid "How to choose a strong password"
 #~ msgstr "Cómo elegir una contraseña fuerte"
-
-#~ msgid "_Generate a password"
-#~ msgstr "_Generar una contraseña"
 
 #~ msgid "You need to enter a new password"
 #~ msgstr "Debe introducir una contraseña"
