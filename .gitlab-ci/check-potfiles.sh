@@ -6,8 +6,11 @@ desktopdirs=$srcdirs
 policydirs=$srcdirs
 xmldirs=$srcdirs
 
-# find source files that contain gettext keywords
-files=$(grep -lRs --include='*.c' --include='*.h' '\(gettext\|[^I_)]_\)(' $srcdirs)
+# find source files that contain gettext functions with literal or GETTEXT_PACKAGE argument
+files=$(grep -lRs --include='*.c' 'gettext *(\("\|GETTEXT_PACKAGE,\)' $srcdirs)
+
+# find source files that contain gettext macros
+files="$files "$(grep -lRs --include='*.c' --include='*.h' '[^I_)]_(' $srcdirs)
 
 # find ui files that contain translatable string
 files="$files "$(grep -lRis --include='*.ui' 'translatable="[ty1]' $uidirs)
