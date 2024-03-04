@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center.HEAD.he\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2024-03-02 18:21+0000\n"
-"PO-Revision-Date: 2024-03-03 00:12+0200\n"
+"POT-Creation-Date: 2024-03-04 05:06+0000\n"
+"PO-Revision-Date: 2024-03-04 11:49+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -206,7 +206,7 @@ msgstr "קבלת חיפושי מערכת ושליחת התוצאות"
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:123
 #: panels/keyboard/cc-xkb-modifier-dialog.c:342
 #: panels/keyboard/keyboard-shortcuts.c:367 panels/system/users/cc-user-page.c:379
-#: panels/system/users/cc-user-page.c:745 panels/wwan/cc-wwan-device-page.c:477
+#: panels/system/users/cc-user-page.c:749 panels/wwan/cc-wwan-device-page.c:477
 #: subprojects/gvc/gvc-mixer-control.c:1908
 msgid "Disabled"
 msgstr "מושבת"
@@ -2919,6 +2919,8 @@ msgstr "שם הרשת"
 #. Translators: This is a password needed for printing.
 #: panels/network/cc-wifi-hotspot-dialog.ui:92
 #: panels/printers/new-printer-dialog.ui:293 panels/printers/pp-jobs-dialog.ui:54
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:110
+#: panels/system/remote-desktop/cc-remote-session-page.ui:108
 #: panels/system/users/cc-add-user-dialog.ui:150
 #: panels/wwan/cc-wwan-apn-dialog.ui:175
 msgid "Password"
@@ -4776,6 +4778,8 @@ msgstr "יש להזין שם משתמש וססמה להצגת מדפסות זמ�
 
 #. Translators: This is a username on a print server.
 #: panels/printers/new-printer-dialog.ui:272 panels/printers/pp-jobs-dialog.ui:42
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:94
+#: panels/system/remote-desktop/cc-remote-session-page.ui:92
 #: panels/wwan/cc-wwan-apn-dialog.ui:150
 msgid "Username"
 msgstr "שם משתמש"
@@ -5923,7 +5927,7 @@ msgstr "לא תקף"
 #. TRANSLATORS: if the function is enabled through BIOS or OS settings.
 #. TRANSLATORS: Status of Parental Controls setup
 #: panels/privacy/cc-firmware-security-utils.c:45
-#: panels/system/users/cc-user-page.c:377 panels/system/users/cc-user-page.c:745
+#: panels/system/users/cc-user-page.c:377 panels/system/users/cc-user-page.c:749
 #: panels/wwan/cc-wwan-device-page.c:475
 msgid "Enabled"
 msgstr "פעיל"
@@ -7381,17 +7385,147 @@ msgstr "_שפה"
 msgid "Fo_rmats"
 msgstr "_תבניות"
 
+#: panels/system/remote-desktop/cc-desktop-sharing-page.c:364
+#: panels/system/remote-desktop/cc-remote-session-page.c:98
+msgid "Device address copied"
+msgstr "כתובת ההתקן הועתקה"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.c:373
+#: panels/system/remote-desktop/cc-remote-session-page.c:107
+msgid "Port number copied"
+msgstr "מספר הפתחה הועתק"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.c:384
+#: panels/system/remote-desktop/cc-remote-session-page.c:118
+msgid "Username copied"
+msgstr "שם המשתמש הועתק"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.c:395
+#: panels/system/remote-desktop/cc-remote-session-page.c:129
+msgid "Password copied"
+msgstr "ססמה הועתקה"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:13
+msgid ""
+"Share your existing desktop with other devices. The remote connection uses the "
+"existing screen resolution"
+msgstr ""
+"שיתוף שולחן העבודה הקיים שלך עם מכשירים אחרים. החיבור מרחוק משתמש ברזולוציית "
+"המסך הנוכחית"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:28
+msgid "_Desktop Sharing"
+msgstr "_שיתוף שולחן עבודה"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:34
+msgid "Remote _Control"
+msgstr "_שליטה מרחוק"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:36
+msgid "Allows desktop shares to control the screen"
+msgstr "לאפשר לשיתופי שולחן עבודה לשלוט במסך זה"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:43
+#: panels/system/remote-desktop/cc-remote-session-page.ui:41
+msgid "How to Connect"
+msgstr "כיצד להתחבר"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:44
+msgid ""
+"Use a remote desktop app to connect using the RDP protocol. Additional "
+"information about the device’s network location may also be required."
+msgstr ""
+"יש להשתמש ביישום שולחן עבודה מרוחק כדי להתחבר באמצעות פרוטוקול RDP. פרטים נוספים "
+"על מקום המכשיר שלך ברשת נחוצים גם כן."
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:47
+#: panels/system/remote-desktop/cc-remote-session-page.ui:45
+msgid "_Hostname"
+msgstr "_שם מארח"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:55
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:76
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:97
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:113
+#: panels/system/remote-desktop/cc-remote-session-page.ui:53
+#: panels/system/remote-desktop/cc-remote-session-page.ui:74
+#: panels/system/remote-desktop/cc-remote-session-page.ui:95
+#: panels/system/remote-desktop/cc-remote-session-page.ui:111
+#: panels/system/remote-login/cc-remote-login-page.ui:65
+msgid "Copy"
+msgstr "העתקה"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:68
+#: panels/system/remote-desktop/cc-remote-session-page.ui:66
+msgid "_Port"
+msgstr "_פתחה"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:91
+#: panels/system/remote-desktop/cc-remote-session-page.ui:89
+msgid "Login Details"
+msgstr "פרטי כניסה"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:132
+#: panels/system/remote-desktop/cc-remote-session-page.ui:130
+msgid "_Generate New Password"
+msgstr "י_צירת ססמה חדשה"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:143
+#: panels/system/remote-desktop/cc-remote-session-page.ui:141
+msgid "_Verify Encryption"
+msgstr "_אימות הצפנה"
+
 #: panels/system/remote-desktop/cc-remote-desktop-page.ui:4
 msgid "Remote Desktop"
 msgstr "שולחן עבודה מרוחק"
 
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:23
+#: panels/system/remote-desktop/cc-remote-desktop-page.ui:39
 msgid "Desktop Sharing"
 msgstr "שיתוף שולחן עבודה"
 
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:32
+#: panels/system/remote-desktop/cc-remote-desktop-page.ui:48
+#: panels/system/remote-desktop/cc-remote-session-page.ui:33
 msgid "Remote Login"
 msgstr "התחברות מרוחקת"
+
+#: panels/system/remote-desktop/cc-remote-session-page.c:774
+#: panels/system/users/cc-user-page.c:772
+msgid "Some settings are locked"
+msgstr "חלק מההגדרות נעולות"
+
+#: panels/system/remote-desktop/cc-remote-session-page.ui:18
+msgid ""
+"Remotely connect to your user account when it isn’t being used. The display "
+"resolution can be set from the remote."
+msgstr ""
+"להתחבר לחשבון המשתמש שלך מרחוק כשאינו בשימוש. אפשר להגדיר את רזולוציית התצוגה "
+"מהצד המרוחק."
+
+#: panels/system/remote-desktop/cc-remote-session-page.ui:42
+msgid ""
+"Use a remote desktop app to connect using the RDP protocol. Additional "
+"information about the device's network location may also be required."
+msgstr ""
+"יש להשתמש ביישום שולחן עבודה מרוחק כדי להתחבר באמצעות פרוטוקול RDP. פרטים נוספים "
+"על מקום המכשיר שלך ברשת נחוצים גם כן."
+
+#: panels/system/remote-desktop/cc-encryption-fingerprint-dialog.ui:20
+msgid "Encryption Fingerprint"
+msgstr "הצפנת טביעת אצבע"
+
+#: panels/system/remote-desktop/cc-encryption-fingerprint-dialog.ui:21
+msgid ""
+"The encryption fingerprint can be seen in connecting clients and should be "
+"identical"
+msgstr "הצפנת טביעת האצבע ניתנת לצפייה בצד הלקוח המתחבר וצריכה להיות זהה"
+
+#: panels/system/remote-desktop/org.gnome.controlcenter.remote-session-helper.policy.in.in:11
+msgid "Enable or disable remote sessions"
+msgstr "הפעלה או השבתה של הפעלות מרחוק"
+
+#: panels/system/remote-desktop/org.gnome.controlcenter.remote-session-helper.policy.in.in:12
+msgid "Authentication is required to enable or disable remote sessions"
+msgstr "נדרש אימות כדי להפעיל או להשבית הפעלות מרחוק"
 
 #: panels/system/remote-login/cc-remote-login-page.c:53
 msgid "Command copied"
@@ -7408,10 +7542,6 @@ msgstr "גישה למכשיר הזה דרך מעטפת מאובטחת (SSH)"
 #: panels/system/remote-login/cc-remote-login-page.ui:58
 msgid "SSH Login Command"
 msgstr "פקודת כניסה עם SSH"
-
-#: panels/system/remote-login/cc-remote-login-page.ui:65
-msgid "Copy"
-msgstr "העתקה"
 
 #: panels/system/remote-login/org.gnome.controlcenter.remote-login-helper.policy.in.in:11
 msgid "Enable or disable remote login"
@@ -7886,10 +8016,6 @@ msgstr "אין"
 msgid "Remove %s?"
 msgstr "להסיר את %s?"
 
-#: panels/system/users/cc-user-page.c:768
-msgid "Some settings are locked"
-msgstr "חלק מההגדרות נעולות"
-
 #: panels/system/users/cc-user-page.ui:24 panels/system/users/cc-user-page.ui:81
 #: panels/system/users/cc-user-page.ui:93 panels/system/users/cc-user-page.ui:105
 #: panels/system/users/cc-user-page.ui:120 panels/system/users/cc-user-page.ui:134
@@ -7946,15 +8072,15 @@ msgstr "_מחיקת קבצים והגדרות"
 msgid "Users"
 msgstr "משתמשים"
 
-#: panels/system/users/cc-users-page.ui:17
+#: panels/system/users/cc-users-page.ui:16
 msgid "Other Users"
 msgstr "משתמשים אחרים"
 
-#: panels/system/users/cc-users-page.ui:33
+#: panels/system/users/cc-users-page.ui:32
 msgid "_Add User…"
 msgstr "הו_ספת משתמש…"
 
-#: panels/system/users/cc-users-page.ui:47
+#: panels/system/users/cc-users-page.ui:46
 msgid "Add Enterprise User"
 msgstr "הוספת משתמש ארגוני"
 
@@ -9719,15 +9845,6 @@ msgstr "צלילי מערכת"
 #~ msgid "Device name copied"
 #~ msgstr "שם ההתקן הועתק"
 
-#~ msgid "Device address copied"
-#~ msgstr "כתובת ההתקן הועתקה"
-
-#~ msgid "Username copied"
-#~ msgstr "שם המשתמש הועתק"
-
-#~ msgid "Password copied"
-#~ msgstr "ססמה הועתקה"
-
 #~ msgid "learn how to use it"
 #~ msgstr "ללמוד איך להשתמש בזה"
 
@@ -9742,15 +9859,6 @@ msgstr "צלילי מערכת"
 
 #~ msgid "Enable or disable remote desktop connections to this computer"
 #~ msgstr "הפעלה או השבתה של התחברות מרוחקת לשולחן העבודה של מחשב זה"
-
-#~ msgid "Remote _Control"
-#~ msgstr "_שליטה מרחוק"
-
-#~ msgid "Allows remote connections to control the screen"
-#~ msgstr "לאפשר להתחברויות מרוחקות לשלוט במסך זה"
-
-#~ msgid "How to Connect"
-#~ msgstr "כיצד להתחבר"
 
 #~ msgid "Connect to this computer using the device name or remote desktop address"
 #~ msgstr "התחברות למחשב זה באמצעות שם ההתקן או כתובת שולחן העבודה המרוחק"
@@ -9769,17 +9877,6 @@ msgstr "צלילי מערכת"
 
 #~ msgid "_User Name"
 #~ msgstr "שם _משתמש"
-
-#~ msgid "_Verify Encryption"
-#~ msgstr "_אימות הצפנה"
-
-#~ msgid "Encryption Fingerprint"
-#~ msgstr "הצפנת טביעת אצבע"
-
-#~ msgid ""
-#~ "The encryption fingerprint can be seen in connecting clients and should be "
-#~ "identical"
-#~ msgstr "הצפנת טביעת האצבע ניתנת לצפייה בצד הלקוח המתחבר וצריכה להיות זהה"
 
 #~ msgid "Unable to find the domain. Maybe you misspelled it?"
 #~ msgstr "לא ניתן למצוא את התחום. אולי שגית באיות?"
@@ -10543,9 +10640,6 @@ msgstr "צלילי מערכת"
 #~ msgstr ""
 #~ "ליישום %s יש את ההרשאות הבאות בצורה מובנית. לא ניתן לשנות זאת. אם הדבר מדאיג "
 #~ "אותך, כדאי לשקול את הסרת היישום."
-
-#~ msgid "View Details"
-#~ msgstr "הצגת פרטים"
 
 #~ msgid "UTC%:::z"
 #~ msgstr "UTC%:::z"
@@ -13317,9 +13411,6 @@ msgstr "צלילי מערכת"
 #~ msgctxt "Password strength"
 #~ msgid "Strong"
 #~ msgstr "חזק"
-
-#~ msgid "_Generate a password"
-#~ msgstr "י_צירת ססמה"
 
 #~ msgid "You need to enter a new password"
 #~ msgstr "עליך להזין ססמה חדשה"
