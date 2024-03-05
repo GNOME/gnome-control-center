@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: amberol\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/issues\n"
-"POT-Creation-Date: 2024-03-02 18:21+0000\n"
-"PO-Revision-Date: 2024-03-02 23:26+0330\n"
+"POT-Creation-Date: 2024-03-04 15:51+0000\n"
+"PO-Revision-Date: 2024-03-05 17:07+0330\n"
 "Last-Translator: Danial Behzadi <dani.behzi@ubuntu.com>\n"
 "Language-Team: Farsi\n"
 "Language: fa\n"
@@ -199,7 +199,7 @@ msgstr "گرفتن جست‌وجوهای سامانه و فرستادن نتیج
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:123
 #: panels/keyboard/cc-xkb-modifier-dialog.c:342
 #: panels/keyboard/keyboard-shortcuts.c:367 panels/system/users/cc-user-page.c:379
-#: panels/system/users/cc-user-page.c:745 panels/wwan/cc-wwan-device-page.c:477
+#: panels/system/users/cc-user-page.c:749 panels/wwan/cc-wwan-device-page.c:477
 #: subprojects/gvc/gvc-mixer-control.c:1908
 msgid "Disabled"
 msgstr "از کار افتاده"
@@ -2891,6 +2891,8 @@ msgstr "نام شبکه"
 #. Translators: This is a password needed for printing.
 #: panels/network/cc-wifi-hotspot-dialog.ui:92
 #: panels/printers/new-printer-dialog.ui:293 panels/printers/pp-jobs-dialog.ui:54
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:110
+#: panels/system/remote-desktop/cc-remote-session-page.ui:108
 #: panels/system/users/cc-add-user-dialog.ui:150
 #: panels/wwan/cc-wwan-apn-dialog.ui:175
 msgid "Password"
@@ -4733,6 +4735,8 @@ msgstr "ورود نام‌کاربری و گذرواژه برای دیدن چا�
 
 #. Translators: This is a username on a print server.
 #: panels/printers/new-printer-dialog.ui:272 panels/printers/pp-jobs-dialog.ui:42
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:94
+#: panels/system/remote-desktop/cc-remote-session-page.ui:92
 #: panels/wwan/cc-wwan-apn-dialog.ui:150
 msgid "Username"
 msgstr "نام‌کاربری"
@@ -5876,7 +5880,7 @@ msgstr "نامعتبر"
 #. TRANSLATORS: if the function is enabled through BIOS or OS settings.
 #. TRANSLATORS: Status of Parental Controls setup
 #: panels/privacy/cc-firmware-security-utils.c:45
-#: panels/system/users/cc-user-page.c:377 panels/system/users/cc-user-page.c:745
+#: panels/system/users/cc-user-page.c:377 panels/system/users/cc-user-page.c:749
 #: panels/wwan/cc-wwan-device-page.c:475
 msgid "Enabled"
 msgstr "فعال شده"
@@ -7337,17 +7341,140 @@ msgstr "_زبان"
 msgid "Fo_rmats"
 msgstr "_قالب‌ها"
 
+#: panels/system/remote-desktop/cc-desktop-sharing-page.c:364
+#: panels/system/remote-desktop/cc-remote-session-page.c:98
+msgid "Device address copied"
+msgstr "نشانی افزاره رونوشت شد"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.c:373
+#: panels/system/remote-desktop/cc-remote-session-page.c:107
+msgid "Port number copied"
+msgstr "شمارهٔ درگاه رونوشت شد"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.c:384
+#: panels/system/remote-desktop/cc-remote-session-page.c:118
+msgid "Username copied"
+msgstr "نام کاربری رونوشت شد"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.c:395
+#: panels/system/remote-desktop/cc-remote-session-page.c:129
+msgid "Password copied"
+msgstr "گذرواژه رونوشت شد"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:13
+msgid ""
+"Share your existing desktop with other devices. The remote connection uses the "
+"existing screen resolution"
+msgstr ""
+"هم‌رسانی میزکار موجودتان با دیگر افزاره‌ها. اتّصال‌های دوردست از تفکیک‌پذیری صفحهٔ موجود "
+"استفاده می‌کنند"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:28
+msgid "_Desktop Sharing"
+msgstr "_هم‌رسانی میزکار"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:34
+msgid "Remote _Control"
+msgstr "_واپایش دوردست"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:36
+msgid "Allows desktop shares to control the screen"
+msgstr "اجازه به هم‌رسانی‌های میزکار برای واپایش صفحه"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:43
+#: panels/system/remote-desktop/cc-remote-session-page.ui:41
+msgid "How to Connect"
+msgstr "چگونگی وصل شدن"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:44
+#: panels/system/remote-desktop/cc-remote-session-page.ui:42
+msgid ""
+"Use a remote desktop app to connect using the RDP protocol. Additional information "
+"about the device’s network location may also be required."
+msgstr ""
+"استفاده از کاره‌های میزکار دوردست برای وصل شدن با شیوه‌نامهٔ RDP. ممکن است نیاز به "
+"اطّلاعات اضافی دربارهٔ مکان شبکه‌ای افزاره باشد."
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:47
+#: panels/system/remote-desktop/cc-remote-session-page.ui:45
+msgid "_Hostname"
+msgstr "نام _میزبان"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:55
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:76
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:97
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:113
+#: panels/system/remote-desktop/cc-remote-session-page.ui:53
+#: panels/system/remote-desktop/cc-remote-session-page.ui:74
+#: panels/system/remote-desktop/cc-remote-session-page.ui:95
+#: panels/system/remote-desktop/cc-remote-session-page.ui:111
+#: panels/system/remote-login/cc-remote-login-page.ui:65
+msgid "Copy"
+msgstr "رونوشت"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:68
+#: panels/system/remote-desktop/cc-remote-session-page.ui:66
+msgid "_Port"
+msgstr "_درگاه"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:91
+#: panels/system/remote-desktop/cc-remote-session-page.ui:89
+msgid "Login Details"
+msgstr "جزییات ورود"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:132
+#: panels/system/remote-desktop/cc-remote-session-page.ui:130
+msgid "_Generate New Password"
+msgstr "_تولید گذرواژهٔ جدید"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:143
+#: panels/system/remote-desktop/cc-remote-session-page.ui:141
+msgid "_Verify Encryption"
+msgstr "_تأیید رمزنگاری"
+
 #: panels/system/remote-desktop/cc-remote-desktop-page.ui:4
 msgid "Remote Desktop"
 msgstr "میزکار دوردست"
 
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:23
+#: panels/system/remote-desktop/cc-remote-desktop-page.ui:39
 msgid "Desktop Sharing"
 msgstr "هم‌رسانی میزکار"
 
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:32
+#: panels/system/remote-desktop/cc-remote-desktop-page.ui:48
+#: panels/system/remote-desktop/cc-remote-session-page.ui:33
 msgid "Remote Login"
 msgstr "ورود دوردست"
+
+#: panels/system/remote-desktop/cc-remote-session-page.c:774
+#: panels/system/users/cc-user-page.c:772
+msgid "Some settings are locked"
+msgstr "برخی تنظیمات قفلند"
+
+#: panels/system/remote-desktop/cc-remote-session-page.ui:18
+msgid ""
+"Remotely connect to your user account when it isn’t being used. The display "
+"resolution can be set from the remote."
+msgstr ""
+"وصل شدن دوردست به حساب کاربریتان هنگام استفاده نشدنش. تفکیک‌پذیری صفحه می‌تواند از "
+"دوردست تنظیم شود."
+
+#: panels/system/remote-desktop/cc-encryption-fingerprint-dialog.ui:20
+msgid "Encryption Fingerprint"
+msgstr "اثر انگشت رمزنگاری"
+
+#: panels/system/remote-desktop/cc-encryption-fingerprint-dialog.ui:21
+msgid ""
+"The encryption fingerprint can be seen in connecting clients and should be "
+"identical"
+msgstr "اثرانگشت رمزنگاری می‌تواند در کارخواه‌های وصل شده دیده شود و باید یکتا باشد"
+
+#: panels/system/remote-desktop/org.gnome.controlcenter.remote-session-helper.policy.in.in:11
+msgid "Enable or disable remote sessions"
+msgstr "به یا از کار انداختن نشست‌های دوردست"
+
+#: panels/system/remote-desktop/org.gnome.controlcenter.remote-session-helper.policy.in.in:12
+msgid "Authentication is required to enable or disable remote sessions"
+msgstr "برای به یا از کار انداختن نشست‌های دوردست نیاز به هویت‌سنجی است"
 
 #: panels/system/remote-login/cc-remote-login-page.c:53
 msgid "Command copied"
@@ -7364,10 +7491,6 @@ msgstr "دسترسی به این افزاره با استفاده از پوست�
 #: panels/system/remote-login/cc-remote-login-page.ui:58
 msgid "SSH Login Command"
 msgstr "فرمان ورود پوستهٔ امن"
-
-#: panels/system/remote-login/cc-remote-login-page.ui:65
-msgid "Copy"
-msgstr "رونوشت"
 
 #: panels/system/remote-login/org.gnome.controlcenter.remote-login-helper.policy.in.in:11
 msgid "Enable or disable remote login"
@@ -7843,10 +7966,6 @@ msgstr "هیچ‌کدام"
 msgid "Remove %s?"
 msgstr "برداشتن %s؟"
 
-#: panels/system/users/cc-user-page.c:768
-msgid "Some settings are locked"
-msgstr "برخی تنظیمات قفلند"
-
 #: panels/system/users/cc-user-page.ui:24 panels/system/users/cc-user-page.ui:81
 #: panels/system/users/cc-user-page.ui:93 panels/system/users/cc-user-page.ui:105
 #: panels/system/users/cc-user-page.ui:120 panels/system/users/cc-user-page.ui:134
@@ -7903,15 +8022,15 @@ msgstr "_حذف پرونده‌ها و تنظیمات"
 msgid "Users"
 msgstr "کاربران"
 
-#: panels/system/users/cc-users-page.ui:17
+#: panels/system/users/cc-users-page.ui:16
 msgid "Other Users"
 msgstr "دیگر کاربران"
 
-#: panels/system/users/cc-users-page.ui:33
+#: panels/system/users/cc-users-page.ui:32
 msgid "_Add User…"
 msgstr "_افزودن کاربر…"
 
-#: panels/system/users/cc-users-page.ui:47
+#: panels/system/users/cc-users-page.ui:46
 msgid "Add Enterprise User"
 msgstr "افزودن کاربر تجاری"
 
@@ -9643,15 +9762,6 @@ msgstr "صداهای سامانه"
 #~ msgid "Device name copied"
 #~ msgstr "نام افزاره رونوشت شد"
 
-#~ msgid "Device address copied"
-#~ msgstr "نشانی افزاره رونوشت شد"
-
-#~ msgid "Username copied"
-#~ msgstr "نام کاربری رونوشت شد"
-
-#~ msgid "Password copied"
-#~ msgstr "گذرواژه رونوشت شد"
-
 #~ msgid "learn how to use it"
 #~ msgstr "آموزش چگونگی استفاده"
 
@@ -9666,15 +9776,6 @@ msgstr "صداهای سامانه"
 
 #~ msgid "Enable or disable remote desktop connections to this computer"
 #~ msgstr "به یا از کار انداختن اتّصال‌های میزکار دوردست به این رایانه"
-
-#~ msgid "Remote _Control"
-#~ msgstr "_واپایش دوردست"
-
-#~ msgid "Allows remote connections to control the screen"
-#~ msgstr "اجازه به اتّصال‌ها برای واپایش صفحه"
-
-#~ msgid "How to Connect"
-#~ msgstr "چگونگی وصل شدن"
 
 #~ msgid "Connect to this computer using the device name or remote desktop address"
 #~ msgstr "وصل شدن به این رایانه با استفاده از نام افزاره یا نشانی میزکار دوردست"
@@ -9693,17 +9794,6 @@ msgstr "صداهای سامانه"
 
 #~ msgid "_User Name"
 #~ msgstr "_نام کاربری"
-
-#~ msgid "_Verify Encryption"
-#~ msgstr "_تأیید رمزنگاری"
-
-#~ msgid "Encryption Fingerprint"
-#~ msgstr "اثر انگشت رمزنگاری"
-
-#~ msgid ""
-#~ "The encryption fingerprint can be seen in connecting clients and should be "
-#~ "identical"
-#~ msgstr "اثرانگشت رمزنگاری می‌تواند در کارخواه‌های وصل شده دیده شود و باید یکتا باشد"
 
 #~ msgid "Unable to find the domain. Maybe you misspelled it?"
 #~ msgstr "ناتوان در یافتن دامنه. شاید اشتباه نوشته‌اید؟"
