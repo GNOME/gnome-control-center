@@ -21,7 +21,7 @@ with images showing the issue.
    <!-- Reproduce the issue while running with the command "G_MESSAGES_DEBUG=all gnome-control-center" -->
 
  * Backtrace (if you are experiencing a crash)
-   <!-- Check for instructions at https://wiki.gnome.org/GettingInTouch/Bugzilla/GettingTraces -->
+   <!-- Check for instructions at https://handbook.gnome.org/issues/stack-traces.html -->
 
  * Screenshots
 
