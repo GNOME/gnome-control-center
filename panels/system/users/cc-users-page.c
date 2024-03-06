@@ -155,7 +155,6 @@ on_user_changed (CcUsersPage *self,
                  ActUser     *user)
 {
   CcUserPage *page;
-  guint position;
 
   /* Refresh the users list */
   g_list_store_sort (self->model, sort_users, self);
