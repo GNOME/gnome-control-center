@@ -164,6 +164,8 @@ parse_categories (GDesktopAppInfo *app)
     retval = CC_CATEGORY_DETAILS;
   else if (g_strv_contains (const_strv (split), "X-GNOME-SystemSettings"))
     retval = CC_CATEGORY_SYSTEM;
+  else if (g_strv_contains (const_strv (split), "X-GNOME-PrivacySettings"))
+    retval = CC_CATEGORY_PRIVACY;
   else if (g_strv_contains (const_strv (split), "HardwareSettings"))
     retval = CC_CATEGORY_HARDWARE;
 

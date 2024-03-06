@@ -508,6 +508,8 @@ row_activated_cb (GtkWidget     *listbox,
   data = g_object_get_data (G_OBJECT (row), "data");
   if (data->category == CC_CATEGORY_SYSTEM)
     parent_panel = "system";
+  else if (data->category == CC_CATEGORY_PRIVACY)
+    parent_panel = "privacy";
 
   g_signal_emit (self, signals[SHOW_PANEL], 0, data->id, parent_panel);
 
