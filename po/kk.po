@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2024-02-21 14:37+0000\n"
-"PO-Revision-Date: 2024-02-25 10:34+0600\n"
+"POT-Creation-Date: 2024-03-04 15:51+0000\n"
+"PO-Revision-Date: 2024-03-06 07:58+0500\n"
 "Last-Translator: Baurzhan Muftakhidinov <baurthefirst@gmail.com>\n"
 "Language-Team: Kazakh <kk_KZ@googlegroups.com>\n"
 "Language: kk\n"
@@ -36,7 +36,7 @@ msgstr "Толық қол жеткізу рұқсаты"
 
 #: panels/applications/cc-applications-panel.c:830
 msgid "Session Bus"
-msgstr "Сессия шинасы"
+msgstr "Сеанс шинасы"
 
 #: panels/applications/cc-applications-panel.c:834
 #: panels/privacy/cc-bolt-page.ui:240 panels/privacy/cc-bolt-page.ui:284
@@ -78,7 +78,7 @@ msgstr "Файлдық жүйе"
 
 #: panels/applications/cc-applications-panel.c:854
 #: panels/keyboard/01-launchers.xml.in:6
-#: shell/appdata/org.gnome.Settings.appdata.xml.in:7 shell/cc-window.c:760
+#: shell/appdata/org.gnome.Settings.appdata.xml.in:7 shell/cc-window.c:775
 #: shell/cc-window.ui:20 shell/org.gnome.Settings.desktop.in:3
 msgid "Settings"
 msgstr "Баптаулар"
@@ -201,7 +201,7 @@ msgstr "Жүйелік іздеулерді алу және нәтижелерд
 #: panels/keyboard/cc-xkb-modifier-dialog.c:342
 #: panels/keyboard/keyboard-shortcuts.c:367
 #: panels/system/users/cc-user-page.c:379
-#: panels/system/users/cc-user-page.c:745 panels/wwan/cc-wwan-device-page.c:477
+#: panels/system/users/cc-user-page.c:749 panels/wwan/cc-wwan-device-page.c:477
 #: subprojects/gvc/gvc-mixer-control.c:1908
 msgid "Disabled"
 msgstr "Сөндірулі"
@@ -300,7 +300,7 @@ msgstr "Қолданба талап ететін жүйелік рұқсат"
 #: panels/applications/cc-applications-panel.ui:409
 #: panels/mouse/cc-mouse-panel.ui:66
 #: panels/multitasking/cc-multitasking-panel.ui:15
-#: panels/power/cc-power-panel.ui:172
+#: panels/power/cc-power-panel.ui:171
 msgid "General"
 msgstr "Жалпы"
 
@@ -972,6 +972,7 @@ msgstr "Экран калибрациясы"
 #: panels/sharing/cc-sharing-panel.c:239
 #: panels/system/region/cc-format-chooser.ui:24
 #: panels/system/users/cc-add-user-dialog.ui:25
+#: panels/system/users/cc-enterprise-login-dialog.ui:58
 #: panels/system/users/cc-avatar-chooser.c:92
 #: panels/system/users/cc-fingerprint-dialog.ui:32
 #: panels/system/users/cc-password-dialog.ui:21
@@ -1283,8 +1284,9 @@ msgstr "Файлды _импорттау…"
 #: panels/color/cc-color-panel.ui:390 panels/keyboard/cc-input-chooser.ui:28
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:33
 #: panels/network/connection-editor/net-connection-editor.c:653
-#: panels/printers/new-printer-dialog.ui:91
+#: panels/printers/new-printer-dialog.ui:85
 #: panels/system/users/cc-add-user-dialog.ui:39
+#: panels/system/users/cc-enterprise-login-dialog.ui:66
 msgid "_Add"
 msgstr "Қ_осу"
 
@@ -1665,13 +1667,13 @@ msgid "Hotspot"
 msgstr "Қатынау нүктесі"
 
 #: panels/display/cc-display-panel.c:510
-#: panels/notifications/cc-notifications-panel.c:212
+#: panels/notifications/cc-notifications-panel.c:213
 #: panels/power/cc-power-panel.c:679 panels/power/cc-power-panel.c:686
 msgid "On"
 msgstr "Іске қосулы"
 
 #: panels/display/cc-display-panel.c:512 panels/network/cc-net-proxy-page.c:182
-#: panels/notifications/cc-notifications-panel.c:212
+#: panels/notifications/cc-notifications-panel.c:213
 #: panels/power/cc-power-panel.c:673 panels/power/cc-power-panel.c:684
 msgid "Off"
 msgstr "Off"
@@ -1734,30 +1736,46 @@ msgstr "_Түнгі жарық"
 msgid "Night Light"
 msgstr "Түнгі жарық"
 
-#: panels/display/cc-display-settings.c:107
+#: panels/display/cc-display-settings.c:111
 msgctxt "Display rotation"
 msgid "Landscape"
 msgstr "Жатық"
 
-#: panels/display/cc-display-settings.c:110
+#: panels/display/cc-display-settings.c:114
 msgctxt "Display rotation"
 msgid "Portrait Right"
 msgstr "Тік, оң жақ"
 
-#: panels/display/cc-display-settings.c:113
+#: panels/display/cc-display-settings.c:117
 msgctxt "Display rotation"
 msgid "Portrait Left"
 msgstr "Тік, сол жақ"
 
-#: panels/display/cc-display-settings.c:116
+#: panels/display/cc-display-settings.c:120
 msgctxt "Display rotation"
 msgid "Landscape (flipped)"
 msgstr "Жатық (айналған)"
 
-#: panels/display/cc-display-settings.c:177
+#: panels/display/cc-display-settings.c:181
 #, c-format
 msgid "%.2lf Hz"
 msgstr "%.2lf Гц"
+
+#. Translators:
+#. * 1. "Variable" is an adjective that refers to the refresh rate
+#. * 2. The formatting sequence is a range separated by an en-dash
+#. *    (unicode "\u2013"). For example: "Variable (48–144.97 Hz)"
+#.
+#: panels/display/cc-display-settings.c:198
+#, c-format
+msgid "Variable (%d–%.2lf Hz)"
+msgstr "Айнымалы (%d–%.2lf Гц)"
+
+#. Translators: "Variable" is an adjective that refers to the refresh rate
+#: panels/display/cc-display-settings.c:205
+#, c-format
+msgid "Variable (up to %.2lf Hz)"
+msgstr "Айнымалы (%.2lf Гц дейін)"
 
 #: panels/display/cc-display-settings.ui:33
 msgctxt "display setting"
@@ -1770,15 +1788,24 @@ msgid "_Resolution"
 msgstr "Ажы_ратылымдығы"
 
 #: panels/display/cc-display-settings.ui:49
+#: panels/display/cc-display-settings.ui:57
 msgid "R_efresh Rate"
 msgstr "Ж_аңарту жиілігі"
 
-#: panels/display/cc-display-settings.ui:57
+#: panels/display/cc-display-settings.ui:66
+msgid "_Variable Refresh Rate"
+msgstr "А_йнымалы жаңарту жиілігі"
+
+#: panels/display/cc-display-settings.ui:74
+msgid "Re_fresh Rate"
+msgstr "Ж_аңарту жиілігі"
+
+#: panels/display/cc-display-settings.ui:84
 msgid "Adjust for _TV"
 msgstr "_Теледидар үшін баптау"
 
-#: panels/display/cc-display-settings.ui:65
-#: panels/display/cc-display-settings.ui:81
+#: panels/display/cc-display-settings.ui:92
+#: panels/display/cc-display-settings.ui:108
 msgctxt "display setting"
 msgid "_Scale"
 msgstr "Ма_сштабтау"
@@ -1973,13 +2000,12 @@ msgstr "Веб браузерін жөнелту"
 msgid "Home folder"
 msgstr "Үй бумасы"
 
+#. Translators: this is a verb.
+#. Translators: "Search" should be phrased as a verb (in both "Name" and "Keywords" fields).
+#. Translators: this is a verb.
 #: panels/keyboard/01-launchers.xml.in:16
-#: panels/keyboard/cc-input-chooser.ui:50
 #: panels/printers/cc-printers-panel.ui:21
-#: panels/printers/new-printer-dialog.ui:216
-#: panels/search/gnome-search-panel.desktop.in:3
-#: panels/system/region/cc-format-chooser.ui:82 shell/cc-window.ui:28
-#: shell/cc-window.ui:30
+#: panels/search/gnome-search-panel.desktop.in:4 shell/cc-window.ui:28
 msgid "Search"
 msgstr "Іздеу"
 
@@ -2053,7 +2079,7 @@ msgstr "Басқа"
 msgid "Add Input Source"
 msgstr "Кіріс қайнар көзін қосу"
 
-#: panels/keyboard/cc-input-chooser.ui:60
+#: panels/keyboard/cc-input-chooser.ui:57
 msgid "Input methods can’t be used on the login screen"
 msgstr "Енгізу тәсілдерін жүйеге кіру экранында қолдануға болмайды"
 
@@ -2699,7 +2725,7 @@ msgstr ""
 #: panels/network/connection-editor/ip6-page.ui:37
 #: panels/network/connection-editor/ip6-page.ui:197
 #: panels/network/connection-editor/ip6-page.ui:255
-#: panels/wacom/cc-wacom-page.c:613
+#: panels/wacom/cc-wacom-page.c:611
 msgid "Automatic"
 msgstr "Автоматты түрде"
 
@@ -2825,18 +2851,16 @@ msgstr "_Прокси"
 #.
 #: panels/network/cc-qr-code-dialog.c:140
 #, c-format
-#| msgid "Network Name"
 msgid "<b>Network Name</b>: %s"
 msgstr "<b>Желі атауы</b>: %s"
 
 #: panels/network/cc-qr-code-dialog.c:145
 #, c-format
-#| msgid "Password:"
 msgid "<b>Password</b>: %s"
 msgstr "<b>Пароль</b>: %s"
 
 #: panels/network/cc-qr-code-dialog.ui:9
-#: panels/network/cc-wifi-connection-row.ui:60
+#: panels/network/cc-wifi-connection-row.ui:53
 msgid "Share Network"
 msgstr "Желімен бөлісу"
 
@@ -2881,16 +2905,16 @@ msgid "Signal strength %d%%"
 msgstr "Сигнал деңгейі %d%%"
 
 #. TRANSLATORS: device status
-#: panels/network/cc-wifi-connection-row.ui:41 panels/network/panel-common.c:63
+#: panels/network/cc-wifi-connection-row.ui:35 panels/network/panel-common.c:63
 msgid "Connected"
 msgstr "Байланысқан"
 
-#: panels/network/cc-wifi-connection-row.ui:73
+#: panels/network/cc-wifi-connection-row.ui:65
 #: panels/network/network-ethernet.ui:47
 msgid "Network Options"
 msgstr "Желі баптаулары"
 
-#: panels/network/cc-wifi-connection-row.ui:85
+#: panels/network/cc-wifi-connection-row.ui:76
 msgid "Forget Network"
 msgstr "Желіні ұмыту"
 
@@ -2943,9 +2967,11 @@ msgstr "Желі атауы"
 
 #. Translators: This is a password needed for printing.
 #: panels/network/cc-wifi-hotspot-dialog.ui:92
-#: panels/printers/new-printer-dialog.ui:302
+#: panels/printers/new-printer-dialog.ui:293
 #: panels/printers/pp-jobs-dialog.ui:54
-#: panels/system/users/cc-add-user-dialog.ui:152
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:110
+#: panels/system/remote-desktop/cc-remote-session-page.ui:108
+#: panels/system/users/cc-add-user-dialog.ui:150
 #: panels/wwan/cc-wwan-apn-dialog.ui:175
 msgid "Password"
 msgstr "Пароль"
@@ -3042,7 +3068,7 @@ msgstr "802.1x қауі_псіздігі"
 #: panels/network/connection-editor/bluetooth-page.ui:16
 #: panels/network/connection-editor/ethernet-page.ui:27
 #: panels/network/connection-editor/vpn-page.ui:23
-#: panels/system/users/cc-add-user-dialog.ui:68
+#: panels/system/users/cc-add-user-dialog.ui:66
 #: panels/system/users/cc-user-page.ui:84
 msgid "_Name"
 msgstr "_Аты"
@@ -3802,7 +3828,6 @@ msgstr "Соңғы қолданылған"
 #. * thousands separator, so do not change to %d
 #: panels/network/net-device-ethernet.c:218
 #, c-format
-#| msgid "%d Mb/s"
 msgid "%'d Mb/s"
 msgstr "%'d Мб/с"
 
@@ -3831,7 +3856,6 @@ msgstr "Болд_ырмау"
 #. Translators: %d is the number of network connections deleted.
 #: panels/network/net-device-wifi.c:894
 #, c-format
-#| msgid "Read network settings"
 msgid "%d network deleted"
 msgid_plural "%d networks deleted"
 msgstr[0] "%d желі өшірілді"
@@ -4596,79 +4620,79 @@ msgstr "Байланысқан құрылғылар"
 msgid "Power Mode"
 msgstr "Эл. қуаты режимі"
 
-#: panels/power/cc-power-panel.ui:127
+#: panels/power/cc-power-panel.ui:126
 msgid "Power Saving"
 msgstr "Эл. қорегін үнемдеу"
 
-#: panels/power/cc-power-panel.ui:130
+#: panels/power/cc-power-panel.ui:129
 msgid "A_utomatic Screen Brightness"
 msgstr "А_втоматты экран жарықтылығы"
 
-#: panels/power/cc-power-panel.ui:131
+#: panels/power/cc-power-panel.ui:130
 msgid "Adjust screen brightness to the surrounding light"
 msgstr "Экран жарықтылығын айналадағы жарыққа бейімдеу"
 
-#: panels/power/cc-power-panel.ui:138
+#: panels/power/cc-power-panel.ui:137
 msgid "_Dim Screen"
 msgstr "Экранды бәсең_дету"
 
-#: panels/power/cc-power-panel.ui:139
+#: panels/power/cc-power-panel.ui:138
 msgid "Reduce screen brightness when the computer is inactive"
 msgstr "Компьютер жұмыс істемей тұрғанда экран жарықтығын төмендету"
 
-#: panels/power/cc-power-panel.ui:145
+#: panels/power/cc-power-panel.ui:144
 msgid "Screen _Blank"
 msgstr "Экранды _бос қылу"
 
-#: panels/power/cc-power-panel.ui:146
+#: panels/power/cc-power-panel.ui:145
 msgid "Turn the screen off after a period of inactivity"
 msgstr "Әрекетсіздік кезеңінен кейін экранды сөндіру"
 
-#: panels/power/cc-power-panel.ui:154
+#: panels/power/cc-power-panel.ui:153
 msgid "Automatic Power _Saver"
 msgstr "Автоматты түрде эл. қорегін үне_мдеу"
 
-#: panels/power/cc-power-panel.ui:155
+#: panels/power/cc-power-panel.ui:154
 msgid "Turn on power saver mode when battery power is low"
 msgstr "Батарея төмен болғанда эл. қорек үнемдеу режимін іске қосу"
 
-#: panels/power/cc-power-panel.ui:162
+#: panels/power/cc-power-panel.ui:161
 msgid "_Automatic Suspend"
 msgstr "_Автоматты түрде ұйықтату"
 
-#: panels/power/cc-power-panel.ui:163
+#: panels/power/cc-power-panel.ui:162
 msgid "Pause the computer after a period of inactivity"
 msgstr "Компьютерді әрекетсіздік кезеңнен кейін аялдату"
 
-#: panels/power/cc-power-panel.ui:176
+#: panels/power/cc-power-panel.ui:175
 msgid "Po_wer Button Behavior"
 msgstr "Эл. қ_орегі батырмасының мінез-құлығы"
 
-#: panels/power/cc-power-panel.ui:184
+#: panels/power/cc-power-panel.ui:183
 msgid "Show Battery _Percentage"
 msgstr "Батарея _пайызын көрсету"
 
-#: panels/power/cc-power-panel.ui:185
+#: panels/power/cc-power-panel.ui:184
 msgid "Show exact charge level in the top bar"
 msgstr "Жоғарғы панельде зарядтың нақты шамасын көрсету"
 
-#: panels/power/cc-power-panel.ui:198
+#: panels/power/cc-power-panel.ui:197
 msgid "Automatic Suspend"
 msgstr "Автоматты түрде ұйықтату"
 
-#: panels/power/cc-power-panel.ui:227
+#: panels/power/cc-power-panel.ui:226
 msgid "On _Battery Power"
 msgstr "_Батареядан жұмыс істеу кезінде"
 
-#: panels/power/cc-power-panel.ui:234
+#: panels/power/cc-power-panel.ui:233
 msgid "_Delay"
 msgstr "Кі_діріс"
 
-#: panels/power/cc-power-panel.ui:252
+#: panels/power/cc-power-panel.ui:251
 msgid "_Plugged In"
 msgstr "Эл. желісіне қосы_лған кезде"
 
-#: panels/power/cc-power-panel.ui:258
+#: panels/power/cc-power-panel.ui:257
 msgid "D_elay"
 msgstr "Кіді_ріс"
 
@@ -4732,37 +4756,37 @@ msgstr "Жаңа принтерді қосу сәтсіз аяқталды."
 msgid "Unlock to add printers and change settings"
 msgstr "Принтерлерді қосу және параметрлерді өзгерту үшін бұғаттауын шешіңіз"
 
-#: panels/printers/cc-printers-panel.ui:30
+#: panels/printers/cc-printers-panel.ui:27
 msgid "All Connected and Network Printers"
 msgstr "Барлық жалғанған және желілік принтерлер"
 
 #. Translators: This button adds new printer.
 #. Translators: This button adds a new printer.
-#: panels/printers/cc-printers-panel.ui:34
-#: panels/printers/cc-printers-panel.ui:169
+#: panels/printers/cc-printers-panel.ui:31
+#: panels/printers/cc-printers-panel.ui:166
 msgid "_Add Printer…"
 msgstr "Принтерді қ_осу…"
 
-#: panels/printers/cc-printers-panel.ui:52
+#: panels/printers/cc-printers-panel.ui:49
 msgid "Search printers"
 msgstr "Принтерлерді іздеу"
 
 #. Translators: This is the button which allows undoing the removal of the printer.
-#: panels/printers/cc-printers-panel.ui:81
+#: panels/printers/cc-printers-panel.ui:78
 msgid "Undo"
 msgstr "Болдырмау"
 
-#: panels/printers/cc-printers-panel.ui:166
+#: panels/printers/cc-printers-panel.ui:163
 msgid "No Printers"
 msgstr "Принтерлер жоқ"
 
 #. Translators: Title if the CUPS server is not running (we can not connect to it).
-#: panels/printers/cc-printers-panel.ui:191
+#: panels/printers/cc-printers-panel.ui:188
 msgid "No Print Service"
 msgstr "Баспаға шығару қызметі жоқ"
 
 #. Translators: Description if the CUPS server is not running (we can not connect to it).
-#: panels/printers/cc-printers-panel.ui:192
+#: panels/printers/cc-printers-panel.ui:189
 msgid "The system printing service doesn’t seem to be available"
 msgstr "Жүйелік баспаға шығару қызметі қолжетімді емес сияқты"
 
@@ -4791,7 +4815,7 @@ msgstr ""
 msgid "Add Printer"
 msgstr "Принтерді қосу"
 
-#: panels/printers/new-printer-dialog.ui:69
+#: panels/printers/new-printer-dialog.ui:67
 #: panels/system/region/cc-format-chooser.ui:37
 #: panels/system/users/cc-fingerprint-dialog.ui:44
 #: panels/wwan/cc-wwan-apn-dialog.ui:21
@@ -4800,35 +4824,38 @@ msgstr "Артқа"
 
 #. Translators: This button opens authentication dialog for selected server.
 #. Translators: This buttons submits the credentials for the selected server.
-#: panels/printers/new-printer-dialog.ui:108
-#: panels/printers/new-printer-dialog.ui:123
+#: panels/printers/new-printer-dialog.ui:102
+#: panels/printers/new-printer-dialog.ui:117
 #: panels/wwan/cc-wwan-device-page.ui:38
 msgid "_Unlock"
 msgstr "_Босату"
 
 #. Translators: No printers were detected
-#: panels/printers/new-printer-dialog.ui:174
+#: panels/printers/new-printer-dialog.ui:168
 msgid "No Printers Found"
 msgstr "Принтерлер табылмады"
 
 #. Translators: The entered text should contain network address of a printer or a text which will filter found devices (their names and locations)
-#: panels/printers/new-printer-dialog.ui:211
+#: panels/printers/new-printer-dialog.ui:205
 msgid "Enter a network address or search for a printer"
 msgstr "Желілік адресін енгізіңіз немесе принтерді іздеп көріңіз"
 
-#: panels/printers/new-printer-dialog.ui:256
+#: panels/printers/new-printer-dialog.ui:247
 msgid "Authentication Required"
 msgstr "Аутентификация керек"
 
-#: panels/printers/new-printer-dialog.ui:272
+#: panels/printers/new-printer-dialog.ui:263
 msgid "Enter username and password to view printers on Print Server"
 msgstr ""
 "Баспаға шығару серверіндегі принтерлерді қарау үшін пайдаланушы атын және "
 "пароліңізді енгізіңіз"
 
 #. Translators: This is a username on a print server.
-#: panels/printers/new-printer-dialog.ui:281
-#: panels/printers/pp-jobs-dialog.ui:42 panels/wwan/cc-wwan-apn-dialog.ui:150
+#: panels/printers/new-printer-dialog.ui:272
+#: panels/printers/pp-jobs-dialog.ui:42
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:94
+#: panels/system/remote-desktop/cc-remote-session-page.ui:92
+#: panels/wwan/cc-wwan-apn-dialog.ui:150
 msgid "Username"
 msgstr "Пайдаланушы аты"
 
@@ -6002,7 +6029,7 @@ msgstr "Жарамды емес"
 #. TRANSLATORS: Status of Parental Controls setup
 #: panels/privacy/cc-firmware-security-utils.c:45
 #: panels/system/users/cc-user-page.c:377
-#: panels/system/users/cc-user-page.c:745 panels/wwan/cc-wwan-device-page.c:475
+#: panels/system/users/cc-user-page.c:749 panels/wwan/cc-wwan-device-page.c:475
 msgid "Enabled"
 msgstr "Іске қосулы"
 
@@ -6617,28 +6644,28 @@ msgstr "Қолд_анба іздеу"
 msgid "Include app-provided search results"
 msgstr "Қолданбалар ұсынатын іздеу нәтижелерін есепке алу"
 
-#: panels/search/cc-search-panel.ui:29
+#: panels/search/cc-search-panel.ui:23
 msgid "Search _Locations"
 msgstr "Іздеу орна_ласулары"
 
-#: panels/search/cc-search-panel.ui:30
+#: panels/search/cc-search-panel.ui:24
 msgid "Filesystem locations which are searched by system apps"
 msgstr "Жүйелік қолданбалар іздейтін бумалар"
 
-#: panels/search/cc-search-panel.ui:39
+#: panels/search/cc-search-panel.ui:33
 msgid "Search Results"
 msgstr "Іздеу нәтижелері"
 
-#: panels/search/cc-search-panel.ui:40
+#: panels/search/cc-search-panel.ui:34
 msgid "Results are displayed according to the list order"
 msgstr "Нәтижелер тізімдік ретке сәйкес көрсетіледі"
 
-#: panels/search/gnome-search-panel.desktop.in:4
+#: panels/search/gnome-search-panel.desktop.in:5
 msgid "Control which apps show search results in the Activities Overview"
 msgstr "Көріністе қай қолданбалар іздеу нәтижелерін көрсететінінді басқару"
 
 #. Translators: Search terms to find the Search panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
-#: panels/search/gnome-search-panel.desktop.in:15
+#: panels/search/gnome-search-panel.desktop.in:16
 msgid "Search;Find;Index;Hide;Privacy;Results;"
 msgstr ""
 "Search;Find;Index;Hide;Privacy;Results;Іздеу;Табу;Индекс;Жасыру;Жекелік;"
@@ -6712,8 +6739,7 @@ msgid "_Require Password"
 msgstr "Парольді _талап ету"
 
 #: panels/sharing/cc-sharing-panel.ui:96
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:136
-#: panels/system/users/cc-add-user-dialog.ui:373
+#: panels/system/users/cc-enterprise-login-dialog.ui:114
 msgid "_Password"
 msgstr "_Пароль"
 
@@ -6872,7 +6898,7 @@ msgstr "Дыбыстар"
 msgid "Vo_lume Levels"
 msgstr "Ды_быс деңгейлері"
 
-#: panels/sound/cc-sound-panel.ui:384
+#: panels/sound/cc-sound-panel.ui:378
 msgid "_Alert Sound"
 msgstr "Х_абарлама дыбысы"
 
@@ -6880,7 +6906,6 @@ msgstr "Х_абарлама дыбысы"
 #. speaker position, like "Front Left" or "Rear Center".
 #: panels/sound/cc-speaker-test-button.c:218
 #, c-format
-#| msgid "Test Speakers"
 msgid "%s Speaker"
 msgstr "%s Динамик"
 
@@ -6953,7 +6978,7 @@ msgid "Memory"
 msgstr "Жады"
 
 #: panels/system/about/cc-about-page.ui:91
-#: panels/system/about/cc-system-details-window.ui:102
+#: panels/system/about/cc-system-details-window.ui:103
 msgid "Disk Capacity"
 msgstr "Диск сыйымдылығы"
 
@@ -7012,7 +7037,6 @@ msgid "**Date generated:**"
 msgstr "**Жасалған күні:**"
 
 #: panels/system/about/cc-system-details-window.c:696
-#| msgid "Hardware Information"
 msgid "## Hardware Information:\n"
 msgstr "## Құрылғылар ақпараты:\n"
 
@@ -7089,43 +7113,43 @@ msgstr "_Көшіру"
 msgid "Hardware Information"
 msgstr "Құрылғылар ақпараты"
 
-#: panels/system/about/cc-system-details-window.ui:122
+#: panels/system/about/cc-system-details-window.ui:123
 msgid "Software Information"
 msgstr "БҚ ақпараты"
 
-#: panels/system/about/cc-system-details-window.ui:133
+#: panels/system/about/cc-system-details-window.ui:134
 #: panels/wwan/cc-wwan-details-dialog.ui:210
 msgid "Firmware Version"
 msgstr "Бинарлы кодтар нұсқасы"
 
 #. translators: this field contains the distro name and version
-#: panels/system/about/cc-system-details-window.ui:141
+#: panels/system/about/cc-system-details-window.ui:142
 msgid "OS Name"
 msgstr "ОЖ атауы"
 
 #. translators: this field contains the distro build
-#: panels/system/about/cc-system-details-window.ui:149
+#: panels/system/about/cc-system-details-window.ui:150
 msgid "OS Build"
 msgstr "ОЖ жинағы"
 
 #. translators: this field contains the distro type
-#: panels/system/about/cc-system-details-window.ui:157
+#: panels/system/about/cc-system-details-window.ui:158
 msgid "OS Type"
 msgstr "ОЖ түрі"
 
-#: panels/system/about/cc-system-details-window.ui:164
+#: panels/system/about/cc-system-details-window.ui:165
 msgid "GNOME Version"
 msgstr "GNOME нұсқасы"
 
-#: panels/system/about/cc-system-details-window.ui:171
+#: panels/system/about/cc-system-details-window.ui:172
 msgid "Windowing System"
 msgstr "Терезе жүйесі"
 
-#: panels/system/about/cc-system-details-window.ui:178
+#: panels/system/about/cc-system-details-window.ui:179
 msgid "Virtualization"
 msgstr "Виртуализация"
 
-#: panels/system/about/cc-system-details-window.ui:185
+#: panels/system/about/cc-system-details-window.ui:186
 msgid "Kernel Version"
 msgstr "Ядро нұсқасы"
 
@@ -7167,7 +7191,6 @@ msgid "Secu_re Shell"
 msgstr "Қауі_псіз қоршам"
 
 #: panels/system/cc-system-panel.ui:70
-#| msgid "Has network access"
 msgid "SSH network access"
 msgstr "SSH желілік қол жеткізу"
 
@@ -7184,17 +7207,17 @@ msgid "Software _Updates"
 msgstr "Бағд. қамтама _жаңартулары"
 
 #. Translators: This is the full date and time format used in 12-hour mode.
-#: panels/system/datetime/cc-datetime-page.c:232
+#: panels/system/datetime/cc-datetime-page.c:230
 msgid "%e %B %Y, %l:%M %p"
 msgstr "%e %B %Y, %l:%M %p"
 
 #. Translators: This is the full date and time format used in 24-hour mode.
-#: panels/system/datetime/cc-datetime-page.c:237
+#: panels/system/datetime/cc-datetime-page.c:235
 msgid "%e %B %Y, %R"
 msgstr "%e %B %Y, %R"
 
 #. Translators: "city, country"
-#: panels/system/datetime/cc-datetime-page.c:390
+#: panels/system/datetime/cc-datetime-page.c:388
 #, c-format
 msgctxt "timezone loc"
 msgid "%s, %s"
@@ -7202,7 +7225,7 @@ msgstr "%s, %s"
 
 #. Update the timezone on the listbow row
 #. Translators: "timezone (details)"
-#: panels/system/datetime/cc-datetime-page.c:407
+#: panels/system/datetime/cc-datetime-page.c:405
 #, c-format
 msgctxt "timezone desc"
 msgid "%s (%s)"
@@ -7237,105 +7260,104 @@ msgstr "Интернетпен байланысты талап етеді"
 msgid "Date &amp; _Time"
 msgstr "Күн және уақы_т"
 
-#: panels/system/datetime/cc-datetime-page.ui:174
+#: panels/system/datetime/cc-datetime-page.ui:161
 msgid "Automatic Time _Zone"
 msgstr "Автоматты түрде _уақыт белдеуі"
 
-#: panels/system/datetime/cc-datetime-page.ui:175
+#: panels/system/datetime/cc-datetime-page.ui:162
 msgid "Requires location services enabled and internet access"
 msgstr ""
 "Орналасулар қызметінің іске қосылуын және интернетке қатынауды талап етеді"
 
-#: panels/system/datetime/cc-datetime-page.ui:181
+#: panels/system/datetime/cc-datetime-page.ui:168
 msgid "Time Z_one"
 msgstr "Уақыт бе_лдеуі"
 
-#: panels/system/datetime/cc-datetime-page.ui:206
+#: panels/system/datetime/cc-datetime-page.ui:179
 msgid "Time _Format"
 msgstr "Уақыт пі_шімі"
 
-#: panels/system/datetime/cc-datetime-page.ui:217
+#: panels/system/datetime/cc-datetime-page.ui:190
 msgid "_24-hour"
 msgstr "_24 сағат"
 
-#: panels/system/datetime/cc-datetime-page.ui:225
-#| msgid "AM / PM"
+#: panels/system/datetime/cc-datetime-page.ui:198
 msgid "AM / _PM"
 msgstr "AM / _PM"
 
-#: panels/system/datetime/cc-datetime-page.ui:238
+#: panels/system/datetime/cc-datetime-page.ui:211
 msgid "Clock &amp; Calendar"
 msgstr "Сағат және күнтізбе"
 
-#: panels/system/datetime/cc-datetime-page.ui:239
+#: panels/system/datetime/cc-datetime-page.ui:212
 msgid "Control how the time and date is shown in the top bar"
 msgstr "Уақыт пен күннің жоғарғы панельді қалай көрсетілетінін басқарыңыз"
 
-#: panels/system/datetime/cc-datetime-page.ui:242
+#: panels/system/datetime/cc-datetime-page.ui:215
 msgid "_Week Day"
 msgstr "А_пта күні"
 
-#: panels/system/datetime/cc-datetime-page.ui:248
+#: panels/system/datetime/cc-datetime-page.ui:221
 msgid "D_ate"
 msgstr "Кү_н"
 
-#: panels/system/datetime/cc-datetime-page.ui:254
+#: panels/system/datetime/cc-datetime-page.ui:227
 msgid "_Seconds"
 msgstr "_Секунд"
 
-#: panels/system/datetime/cc-datetime-page.ui:260
+#: panels/system/datetime/cc-datetime-page.ui:233
 msgid "Week _Numbers"
 msgstr "Апта _нөмірлері"
 
-#: panels/system/datetime/cc-datetime-page.ui:261
+#: panels/system/datetime/cc-datetime-page.ui:234
 msgid "Shown in the dropdown calendar"
 msgstr "Ашылмалы күнтізбеде көрсетілген"
 
-#: panels/system/datetime/cc-datetime-page.ui:298
+#: panels/system/datetime/cc-datetime-page.ui:271
 msgid "January"
 msgstr "Қаңтар"
 
-#: panels/system/datetime/cc-datetime-page.ui:299
+#: panels/system/datetime/cc-datetime-page.ui:272
 msgid "February"
 msgstr "Ақпан"
 
-#: panels/system/datetime/cc-datetime-page.ui:300
+#: panels/system/datetime/cc-datetime-page.ui:273
 msgid "March"
 msgstr "Наурыз"
 
-#: panels/system/datetime/cc-datetime-page.ui:301
+#: panels/system/datetime/cc-datetime-page.ui:274
 msgid "April"
 msgstr "Сәуір"
 
-#: panels/system/datetime/cc-datetime-page.ui:302
+#: panels/system/datetime/cc-datetime-page.ui:275
 msgid "May"
 msgstr "Мамыр"
 
-#: panels/system/datetime/cc-datetime-page.ui:303
+#: panels/system/datetime/cc-datetime-page.ui:276
 msgid "June"
 msgstr "Маусым"
 
-#: panels/system/datetime/cc-datetime-page.ui:304
+#: panels/system/datetime/cc-datetime-page.ui:277
 msgid "July"
 msgstr "Шілде"
 
-#: panels/system/datetime/cc-datetime-page.ui:305
+#: panels/system/datetime/cc-datetime-page.ui:278
 msgid "August"
 msgstr "Тамыз"
 
-#: panels/system/datetime/cc-datetime-page.ui:306
+#: panels/system/datetime/cc-datetime-page.ui:279
 msgid "September"
 msgstr "Қыркүйек"
 
-#: panels/system/datetime/cc-datetime-page.ui:307
+#: panels/system/datetime/cc-datetime-page.ui:280
 msgid "October"
 msgstr "Қазан"
 
-#: panels/system/datetime/cc-datetime-page.ui:308
+#: panels/system/datetime/cc-datetime-page.ui:281
 msgid "November"
 msgstr "Қараша"
 
-#: panels/system/datetime/cc-datetime-page.ui:309
+#: panels/system/datetime/cc-datetime-page.ui:282
 msgid "December"
 msgstr "Желтоқсан"
 
@@ -7387,23 +7409,23 @@ msgstr "Пішімдер"
 msgid "Search locales"
 msgstr "Локальдерді іздеу"
 
-#: panels/system/region/cc-format-chooser.ui:117
+#: panels/system/region/cc-format-chooser.ui:114
 msgid "Common Formats"
 msgstr "Жалпы пішімдер"
 
-#: panels/system/region/cc-format-chooser.ui:144
+#: panels/system/region/cc-format-chooser.ui:141
 msgid "All Formats"
 msgstr "Барлық пішімдер"
 
-#: panels/system/region/cc-format-chooser.ui:192
+#: panels/system/region/cc-format-chooser.ui:189
 msgid "No Search Results"
 msgstr "Іздеу нәтижелері жоқ"
 
-#: panels/system/region/cc-format-chooser.ui:204
+#: panels/system/region/cc-format-chooser.ui:201
 msgid "Searches can be for countries or languages"
 msgstr "Іздеулер елдер немесе тілдер үшін болуы мүмкін"
 
-#: panels/system/region/cc-format-chooser.ui:240
+#: panels/system/region/cc-format-chooser.ui:237
 msgid "Preview"
 msgstr "Алдын-ала қарау"
 
@@ -7486,116 +7508,144 @@ msgstr "Ті_л"
 msgid "Fo_rmats"
 msgstr "Пішімде_р"
 
-#: panels/system/remote-desktop/cc-remote-desktop-page.c:418
-msgid "Device name copied"
-msgstr "Құрылғы атауы көшірілді"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.c:429
+#: panels/system/remote-desktop/cc-desktop-sharing-page.c:364
+#: panels/system/remote-desktop/cc-remote-session-page.c:98
 msgid "Device address copied"
 msgstr "Құрылғы адресі көшірілді"
 
-#: panels/system/remote-desktop/cc-remote-desktop-page.c:440
+#: panels/system/remote-desktop/cc-desktop-sharing-page.c:373
+#: panels/system/remote-desktop/cc-remote-session-page.c:107
+msgid "Port number copied"
+msgstr "Порт нөмірі көшірілді"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.c:384
+#: panels/system/remote-desktop/cc-remote-session-page.c:118
 msgid "Username copied"
 msgstr "Пайдаланушы аты көшірілді"
 
-#: panels/system/remote-desktop/cc-remote-desktop-page.c:451
+#: panels/system/remote-desktop/cc-desktop-sharing-page.c:395
+#: panels/system/remote-desktop/cc-remote-session-page.c:129
 msgid "Password copied"
 msgstr "Пароль көшірілді"
 
-#. Translators: This will be presented as the text of a link to the documentation
-#: panels/system/remote-desktop/cc-remote-desktop-page.c:670
-msgid "learn how to use it"
-msgstr "оны пайдалануды үйрену"
-
-#. Translators: %s is a link to the documentation with the label "learn how to use it"
-#: panels/system/remote-desktop/cc-remote-desktop-page.c:672
-#, c-format
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:13
 msgid ""
-"Remote desktop allows viewing and controlling your desktop from another "
-"computer – %s."
+"Share your existing desktop with other devices. The remote connection uses "
+"the existing screen resolution"
 msgstr ""
-"Қашықтағы жұмыс үстелі жұмыс үстеліңізді басқа компьютерден көруге және "
-"басқаруға мүмкіндік береді - %s."
+"Жұмыс үстеліңізді басқа құрылғылармен бөлісіңіз. Қашықтан байланыс экранның "
+"бар болып тұрған ажыратымдылығын қолданады"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:28
+msgid "_Desktop Sharing"
+msgstr "_Жұмыс үстелін ортақ пайдалану"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:34
+msgid "Remote _Control"
+msgstr "Қашықтан ба_сқару"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:36
+msgid "Allows desktop shares to control the screen"
+msgstr "Экранмен бөлісу кезінде жұмыс үстелін басқаруды рұқсат ету"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:43
+#: panels/system/remote-desktop/cc-remote-session-page.ui:41
+msgid "How to Connect"
+msgstr "Байланысу жолы"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:44
+#: panels/system/remote-desktop/cc-remote-session-page.ui:42
+msgid ""
+"Use a remote desktop app to connect using the RDP protocol. Additional "
+"information about the device’s network location may also be required."
+msgstr ""
+"RDP хаттамасын пайдаланып қосылу үшін қашықтағы жұмыс үстелі қолданбасын "
+"пайдаланыңыз. Сондай-ақ құрылғының желiлік орналасуы туралы қосымша ақпарат "
+"талап етiлуi мүмкiн."
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:47
+#: panels/system/remote-desktop/cc-remote-session-page.ui:45
+msgid "_Hostname"
+msgstr "_Хост атауы"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:55
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:76
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:97
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:113
+#: panels/system/remote-desktop/cc-remote-session-page.ui:53
+#: panels/system/remote-desktop/cc-remote-session-page.ui:74
+#: panels/system/remote-desktop/cc-remote-session-page.ui:95
+#: panels/system/remote-desktop/cc-remote-session-page.ui:111
+#: panels/system/remote-login/cc-remote-login-page.ui:65
+msgid "Copy"
+msgstr "Көшіру"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:68
+#: panels/system/remote-desktop/cc-remote-session-page.ui:66
+msgid "_Port"
+msgstr "_Порт"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:91
+#: panels/system/remote-desktop/cc-remote-session-page.ui:89
+msgid "Login Details"
+msgstr "Кіру мәліметтері"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:132
+#: panels/system/remote-desktop/cc-remote-session-page.ui:130
+msgid "_Generate New Password"
+msgstr "Жаңа парольді _генерациялау"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:143
+#: panels/system/remote-desktop/cc-remote-session-page.ui:141
+msgid "_Verify Encryption"
+msgstr "Шифрлеуді _тексеру"
 
 #: panels/system/remote-desktop/cc-remote-desktop-page.ui:4
 msgid "Remote Desktop"
 msgstr "Қашықтағы жұмыс үстелі"
 
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:22
-msgid "Remote _Desktop"
-msgstr "Қашықтағы жұ_мыс үстелі"
+#: panels/system/remote-desktop/cc-remote-desktop-page.ui:39
+msgid "Desktop Sharing"
+msgstr "Жұмыс үстелін ортақ пайдалану"
 
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:24
-msgid "Enable or disable remote desktop connections to this computer"
-msgstr "Бұл компьютерге қашықтан кіруді іске қосу немесе сөндіру"
+#: panels/system/remote-desktop/cc-remote-desktop-page.ui:48
+#: panels/system/remote-desktop/cc-remote-session-page.ui:33
+msgid "Remote Login"
+msgstr "Қашықтан кіру"
 
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:30
-msgid "Remote _Control"
-msgstr "Қашықтан ба_сқару"
+#: panels/system/remote-desktop/cc-remote-session-page.c:774
+#: panels/system/users/cc-user-page.c:772
+msgid "Some settings are locked"
+msgstr "Кейбір баптаулар құлыпталған"
 
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:32
-msgid "Allows remote connections to control the screen"
-msgstr "Бұл экранды басқаруға қашықтан байланыстарды рұқсат ету"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:40
-msgid "How to Connect"
-msgstr "Байланысу жолы"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:41
+#: panels/system/remote-desktop/cc-remote-session-page.ui:18
 msgid ""
-"Connect to this computer using the device name or remote desktop address"
+"Remotely connect to your user account when it isn’t being used. The display "
+"resolution can be set from the remote."
 msgstr ""
-"Құрылғы атауын немесе қашықтағы жұмыс үстелі адресін пайдаланып осы "
-"компьютерге қосылу"
+"Пайдаланылмаған кезде пайдаланушы тіркелгісіне қашықтан қосылыңыз. Экран "
+"ажыратымдылығы қашықтан орнатылуы мүмкін."
 
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:45
-msgid "D_evice Name"
-msgstr "Құр_ылғы атауы"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:58
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:63
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:89
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:94
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:119
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:124
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:140
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:145
-#: panels/system/remote-login/cc-remote-login-page.ui:65
-msgid "Copy"
-msgstr "Көшіру"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:76
-msgid "Re_mote Desktop Address"
-msgstr "Қа_шықтағы жұмыс үстел адресі"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:110
-msgid "Authentication"
-msgstr "Аутентификация"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:111
-msgid "The user name and password are required to connect to this computer"
-msgstr ""
-"Осы компьютерге қосылу үшін пайдаланушы аты мен пароль міндетті түрде керек"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:115
-msgid "_User Name"
-msgstr "_Пайдаланушы аты"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:160
-msgid "_Verify Encryption"
-msgstr "Шифрлеуді _тексеру"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:196
+#: panels/system/remote-desktop/cc-encryption-fingerprint-dialog.ui:20
 msgid "Encryption Fingerprint"
 msgstr "Шифрлеу баспасы"
 
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:197
+#: panels/system/remote-desktop/cc-encryption-fingerprint-dialog.ui:21
 msgid ""
 "The encryption fingerprint can be seen in connecting clients and should be "
 "identical"
 msgstr ""
 "Шифрлеу баспасы байланысатын клиенттерде көрінеді және өзара бірдеу болуы "
 "тиіс"
+
+#: panels/system/remote-desktop/org.gnome.controlcenter.remote-session-helper.policy.in.in:11
+msgid "Enable or disable remote sessions"
+msgstr "Қашықтан сеанстарды іске қосу немесе сөндіру"
+
+#: panels/system/remote-desktop/org.gnome.controlcenter.remote-session-helper.policy.in.in:12
+msgid "Authentication is required to enable or disable remote sessions"
+msgstr ""
+"Қашықтағы сеанстарды іске қосу немесе сөндіру үшін аутентификация керек"
 
 #: panels/system/remote-login/cc-remote-login-page.c:53
 msgid "Command copied"
@@ -7621,71 +7671,29 @@ msgstr "Қашықтан кіруді іске қосу немесе сөнді�
 msgid "Authentication is required to enable or disable remote login"
 msgstr "Қашықтан кіруді іске қосу немесе сөндіру үшін аутентификация керек"
 
-#: panels/system/users/cc-add-user-dialog.c:36
-msgid "Should match the web address of your login provider."
-msgstr "Логинді ұсынушының веб адресіне сәйкес болуы тиіс."
-
-#: panels/system/users/cc-add-user-dialog.c:217
+#: panels/system/users/cc-add-user-dialog.c:159
 msgid "Failed to add account"
 msgstr "Тіркелгіні қосу сәтсіз"
 
-#: panels/system/users/cc-add-user-dialog.c:668
+#: panels/system/users/cc-add-user-dialog.c:610
 msgid "The passwords do not match."
 msgstr "Парольдер өзара сәйкес емес."
-
-#: panels/system/users/cc-add-user-dialog.c:866
-#: panels/system/users/cc-add-user-dialog.c:905
-#: panels/system/users/cc-add-user-dialog.c:923
-msgid "Failed to register account"
-msgstr "Тіркелгіні тіркеу сәтсіз аяқталды"
-
-#: panels/system/users/cc-add-user-dialog.c:1038
-msgid "No supported way to authenticate with this domain"
-msgstr "Бұл доменде аутентификациялаудың қолдауы бар тәсілдері жоқ"
-
-#: panels/system/users/cc-add-user-dialog.c:1102
-msgid "Failed to join domain"
-msgstr "Доменде тіркелу сәтсіз"
-
-#: panels/system/users/cc-add-user-dialog.c:1157
-msgid ""
-"That login name didn’t work.\n"
-"Please try again."
-msgstr ""
-"Бұл логин fns жасамады.\n"
-"Қайталап көріңіз."
-
-#: panels/system/users/cc-add-user-dialog.c:1164
-msgid ""
-"That login password didn’t work.\n"
-"Please try again."
-msgstr ""
-"Бұл логин паролі жасамады.\n"
-"Қайталап көріңіз."
-
-#: panels/system/users/cc-add-user-dialog.c:1172
-msgid "Failed to log into domain"
-msgstr "Доменге кіру сәтсіз аяқталды"
-
-#: panels/system/users/cc-add-user-dialog.c:1227
-msgid "Unable to find the domain. Maybe you misspelled it?"
-msgstr "Доменді табу мүмкін емес. Оны дұрыс көрсеттіңіз бе?"
 
 #: panels/system/users/cc-add-user-dialog.ui:13
 #: panels/system/users/data/join-dialog.ui:9
 msgid "Add User"
 msgstr "Пайдаланушыны қосу"
 
-#: panels/system/users/cc-add-user-dialog.ui:95
-#: panels/system/users/cc-add-user-dialog.ui:351
+#: panels/system/users/cc-add-user-dialog.ui:93
+#: panels/system/users/cc-enterprise-login-dialog.ui:107
 msgid "_Username"
 msgstr "Па_йдаланушы аты"
 
-#: panels/system/users/cc-add-user-dialog.ui:133
+#: panels/system/users/cc-add-user-dialog.ui:131
 msgid "Ad_ministrator"
 msgstr "Әкі_мші"
 
-#: panels/system/users/cc-add-user-dialog.ui:138
+#: panels/system/users/cc-add-user-dialog.ui:136
 #: panels/system/users/cc-user-page.ui:141
 msgid ""
 "Administrators have extra abilities, including adding and removing users, "
@@ -7696,49 +7704,131 @@ msgstr ""
 "қосу және өшіру, жүйеге кіру баптауларын өзгерту және БҚ өшіру. Ата-аналық "
 "басқару әкімшілер үшін іске асыру мүмкін емес."
 
-#: panels/system/users/cc-add-user-dialog.ui:156
+#: panels/system/users/cc-add-user-dialog.ui:154
 msgid "User sets password on _first login"
 msgstr "Пайдаланушы парольді жүйеге _бірінші рет кірген кезде орнатады"
 
-#: panels/system/users/cc-add-user-dialog.ui:169
+#: panels/system/users/cc-add-user-dialog.ui:167
 msgid "Set password n_ow"
 msgstr "Парольді қа_зір орнату"
 
-#: panels/system/users/cc-add-user-dialog.ui:189
+#: panels/system/users/cc-add-user-dialog.ui:187
 msgid "Pass_word"
 msgstr "Па_роль"
 
-#: panels/system/users/cc-add-user-dialog.ui:233
+#: panels/system/users/cc-add-user-dialog.ui:231
 msgid "_Confirm"
 msgstr "Ра_стау"
 
-#: panels/system/users/cc-add-user-dialog.ui:288
-msgid "_Enterprise Login"
-msgstr "Кә_сіпорын тіркелгісі"
+#: panels/system/users/cc-enterprise-login-dialog.c:133
+#: panels/system/users/cc-enterprise-login-dialog.c:171
+#: panels/system/users/cc-enterprise-login-dialog.c:186
+msgid "Failed to register account"
+msgstr "Тіркелгіні тіркеу сәтсіз аяқталды"
 
-#: panels/system/users/cc-add-user-dialog.ui:290
-msgid "User accounts which are managed by a company or organization"
-msgstr "Компания немесе ұйым басқаратын пайдаланушы тіркелгілері"
+#: panels/system/users/cc-enterprise-login-dialog.c:240
+#: panels/system/users/cc-enterprise-login-dialog.c:411
+msgid "Failed to join domain"
+msgstr "Доменде тіркелу сәтсіз"
 
-#: panels/system/users/cc-add-user-dialog.ui:307
+#: panels/system/users/cc-enterprise-login-dialog.c:275
+msgid "No supported way to authenticate with this domain"
+msgstr "Бұл доменде аутентификациялаудың қолдауы бар тәсілдері жоқ"
+
+#: panels/system/users/cc-enterprise-login-dialog.c:285
+#: panels/system/users/cc-enterprise-login-dialog.c:476
+msgid "That login name didn’t work"
+msgstr "Бұл логин жасамады"
+
+#: panels/system/users/cc-enterprise-login-dialog.c:292
+#: panels/system/users/cc-enterprise-login-dialog.c:483
+msgid "That login password didn’t work"
+msgstr "Бұл логин паролі жасамады"
+
+#: panels/system/users/cc-enterprise-login-dialog.c:299
+msgid "That hostname didn’t work"
+msgstr "Бұл хост атауы жасамады"
+
+#: panels/system/users/cc-enterprise-login-dialog.c:306
+#: panels/system/users/cc-enterprise-login-dialog.c:491
+msgid "Failed to log into domain"
+msgstr "Доменге кіру сәтсіз аяқталды"
+
+#. Translators: The "%s" is a domain address (e.g. "demo1.freeipa.org").
+#: panels/system/users/cc-enterprise-login-dialog.c:352
+#, c-format
+msgid ""
+"To add an enterprise login account, this device needs to be enrolled with "
+"<b>%s</b>. To enroll, have your domain administrator enter their name and "
+"password."
+msgstr ""
+"Кәсіпорындық тіркелгіні қосу үшін, бұл құрылғы <b>%s</b> доменіне тіркелген "
+"болуы керек. Тіркелу үшін, домен әкімшісі өз атын және паролін енгізуі тиіс."
+
+#: panels/system/users/cc-enterprise-login-dialog.c:538
+msgid "Valid domain"
+msgstr "Жарамды домен"
+
+#: panels/system/users/cc-enterprise-login-dialog.c:542
+msgid "Domain not found"
+msgstr "Домен табылмады"
+
+#: panels/system/users/cc-enterprise-login-dialog.c:585
+msgid "Checking domain…"
+msgstr "Доменді тексеру…"
+
+#: panels/system/users/cc-enterprise-login-dialog.c:629
+msgid "Failed to contact realmd service"
+msgstr "Realmd қызметіне хабарласу мүмкін болмады"
+
+#: panels/system/users/cc-enterprise-login-dialog.ui:28
+#: panels/system/users/cc-enterprise-login-dialog.ui:48
+msgid "Add Enterprise Login"
+msgstr "Кәсіпорындық тіркелгіні қосу"
+
+#: panels/system/users/cc-enterprise-login-dialog.ui:37
+msgid "Offline"
+msgstr "Желіде емес"
+
+#: panels/system/users/cc-enterprise-login-dialog.ui:38
+msgid "A network connection is needed to add enterprise login accounts."
+msgstr "Кәсіпорындың тіркелгілерді қосу үшін желілік байланыс керек."
+
+#: panels/system/users/cc-enterprise-login-dialog.ui:84
+msgid ""
+"Enterprise login allows an existing centrally managed account to be used on "
+"this device."
+msgstr ""
+"Кәсіпорындық кіру бар болып тұрған және орталықтан басқарылатын пайданушы "
+"тіркелгісіне бұл құрылғыда қолданылуды мүмкін етеді."
+
+#: panels/system/users/cc-enterprise-login-dialog.ui:89
 #: panels/system/users/data/join-dialog.ui:90
 msgid "_Domain"
 msgstr "До_мен"
 
-#: panels/system/users/cc-add-user-dialog.ui:396
-msgid "You are Offline"
-msgstr "Сіз желіде емессіз"
+#: panels/system/users/cc-enterprise-login-dialog.ui:97
+msgid "Should match the web domain of the account provider"
+msgstr "Логинді ұсынушының веб доменіне сәйкес болуы тиіс"
 
-#: panels/system/users/cc-add-user-dialog.ui:397
-msgid ""
-"Enterprise login allows an existing centrally managed user account to be "
-"used on this device. You can also use this account to access company "
-"resources on the internet."
-msgstr ""
-"Кәсіпорындық кіру бар болып тұрған және орталықтан басқарылатын пайданушы "
-"тіркелгісіне бұл құрылғыда қолданылуды мүмкін етеді. Сонымен қатар, сіз бұл "
-"тіркелгіні кәсіпорынның интернеттегі ресурстарына қатынау үшін қолдана "
-"аласыз."
+#: panels/system/users/cc-enterprise-login-dialog.ui:130
+msgid "Enroll Device"
+msgstr "Құрылғыны доменге тіркеу"
+
+#. Translators: This button enrolls the computer in the domain in order to use enterprise logins.
+#: panels/system/users/cc-enterprise-login-dialog.ui:140
+#: panels/system/users/data/join-dialog.ui:30
+msgid "_Enroll"
+msgstr "Тірк_еу"
+
+#: panels/system/users/cc-enterprise-login-dialog.ui:162
+#: panels/system/users/data/join-dialog.ui:112
+msgid "Administrator _Name"
+msgstr "Әкімші а_ты"
+
+#: panels/system/users/cc-enterprise-login-dialog.ui:169
+msgid "Administrator _Password"
+msgstr "Әкімші _паролі"
 
 #: panels/system/users/cc-avatar-chooser.c:162
 msgid "Browse for more pictures"
@@ -8021,17 +8111,17 @@ msgstr "Доменнің бұл түріне автоматты түрде кі�
 msgid "No such domain or realm found"
 msgstr "Ондай домен (realm) табылмады"
 
-#: panels/system/users/cc-realm-manager.c:712
-#: panels/system/users/cc-realm-manager.c:726
+#: panels/system/users/cc-realm-manager.c:721
+#: panels/system/users/cc-realm-manager.c:735
 #, c-format
 msgid "Cannot log in as %s at the %s domain"
 msgstr "%s ретінде %s доменіне кіру мүмкін емес"
 
-#: panels/system/users/cc-realm-manager.c:718
+#: panels/system/users/cc-realm-manager.c:727
 msgid "Invalid password, please try again"
 msgstr "Пароль қате, қайтадан көріңіз"
 
-#: panels/system/users/cc-realm-manager.c:731
+#: panels/system/users/cc-realm-manager.c:740
 #, c-format
 msgid "Couldn’t connect to the %s domain: %s"
 msgstr "%s доменіне байланысу мүмкін емес: %s"
@@ -8055,10 +8145,6 @@ msgstr "Ешнәрсе"
 #, c-format
 msgid "Remove %s?"
 msgstr "%s өшіру керек пе?"
-
-#: panels/system/users/cc-user-page.c:768
-msgid "Some settings are locked"
-msgstr "Кейбір баптаулар құлыпталған"
 
 #: panels/system/users/cc-user-page.ui:24
 #: panels/system/users/cc-user-page.ui:81
@@ -8121,18 +8207,17 @@ msgstr "Файлдар мен баптауларды ө_шіру"
 msgid "Users"
 msgstr "Пайдаланушылар"
 
-#: panels/system/users/cc-users-page.ui:17
+#: panels/system/users/cc-users-page.ui:16
 msgid "Other Users"
 msgstr "Басқа пайдаланушылар"
 
-#: panels/system/users/cc-users-page.ui:33
+#: panels/system/users/cc-users-page.ui:32
 msgid "_Add User…"
 msgstr "Пайдаланушыны қ_осу…"
 
-#. Translators: This button enrolls the computer in the domain in order to use enterprise logins.
-#: panels/system/users/data/join-dialog.ui:30
-msgid "_Enroll"
-msgstr "Тірк_еу"
+#: panels/system/users/cc-users-page.ui:46
+msgid "Add Enterprise User"
+msgstr "Кәсіпорындық пайдаланушыны қосу"
 
 #: panels/system/users/data/join-dialog.ui:59
 msgid "Domain Administrator Login"
@@ -8147,10 +8232,6 @@ msgstr ""
 "Кәсіпорындық тіркелгілерін қолдану үшін, бұл компьютерді\n"
 "доменге тіркеу керек. Желілік әкімші осы жерде домен паролін\n"
 "енгізуі тиіс."
-
-#: panels/system/users/data/join-dialog.ui:112
-msgid "Administrator _Name"
-msgstr "Әкімші а_ты"
 
 #: panels/system/users/data/join-dialog.ui:135
 msgid "Administrator Password"
@@ -8341,7 +8422,6 @@ msgid "Cursor Size"
 msgstr "Курсор өлшемі"
 
 #: panels/universal-access/cc-cursor-size-dialog.ui:19
-#| msgid "The size of the cursor can be increased to make it easier to see"
 msgid ""
 "Cursor size can be combined with Zoom to make it easier to see the cursor"
 msgstr ""
@@ -8824,7 +8904,6 @@ msgid "_Crosshair Lines"
 msgstr "Қ_иылысу сызықтары"
 
 #: panels/universal-access/cc-ua-zoom-page.ui:116
-#| msgid "Invert colors in the magnifier region"
 msgid "Mark the cursor location in the magnifier region using lines"
 msgstr "Үлкейткіш аймағындағы курсор орнын сызықтар арқылы белгілеу"
 
@@ -8987,20 +9066,20 @@ msgctxt "Wacom action-type"
 msgid "Show On-Screen Help"
 msgstr "Экрандағы көмекті көрсету"
 
-#: panels/wacom/cc-wacom-device.c:431
+#: panels/wacom/cc-wacom-device.c:430
 msgid "Tablet mounted on laptop panel"
 msgstr "Ноутбук панеліне орнатылған планшет"
 
-#: panels/wacom/cc-wacom-device.c:433
+#: panels/wacom/cc-wacom-device.c:432
 msgid "Tablet mounted on external display"
 msgstr "Сыртқы дисплейге орнатылған планшет"
 
-#: panels/wacom/cc-wacom-device.c:435
+#: panels/wacom/cc-wacom-device.c:434
 msgid "External tablet device"
 msgstr "Сыртқы планшет құрылғысы"
 
 #. All displays item
-#: panels/wacom/cc-wacom-page.c:600
+#: panels/wacom/cc-wacom-page.c:598
 msgid "All Displays"
 msgstr "Барлық экрандар"
 
@@ -9039,7 +9118,7 @@ msgstr ""
 "Монитор жақтары арақатынасын сақтау үшін планшет бетінің бір бөлігін ғана "
 "пайдалану"
 
-#: panels/wacom/cc-wacom-page.ui:64
+#: panels/wacom/cc-wacom-page.ui:58
 msgid "_Calibrate"
 msgstr "_Калибрациялау"
 
@@ -9738,7 +9817,7 @@ msgstr "[ПАНЕЛЬ] [АРГУМЕНТ…]"
 #. Translators should localize the following string which will be displayed in the About dialog giving credit to the translator(s).
 #: shell/cc-application.c:117
 msgid "translator-credits"
-msgstr "Baurzhan Muftakhidinov <baurthefirst@gmail.com>, 2010"
+msgstr "Baurzhan Muftakhidinov <baurthefirst@gmail.com>"
 
 #: shell/cc-application.c:118
 #, c-format
@@ -9753,23 +9832,23 @@ msgstr "Баптаулар санаттары"
 msgid "No Results Found"
 msgstr "Нәтижелер табылмады"
 
-#: shell/cc-panel-loader.c:273
+#: shell/cc-panel-loader.c:308
 msgid "Available panels:"
 msgstr "Қолжетімді панельдер:"
 
-#: shell/cc-window.ui:42 shell/cc-window.ui:44
+#: shell/cc-window.ui:36
 msgid "Main Menu"
 msgstr "Басты мәзір"
 
-#: shell/cc-window.ui:59
+#: shell/cc-window.ui:47
 msgid "Search settings"
 msgstr "Баптаулардан іздеу"
 
-#: shell/cc-window.ui:94
+#: shell/cc-window.ui:82
 msgid "Warning: Development Version"
 msgstr "Ескерту: Әзірлеушілер нұсқасы"
 
-#: shell/cc-window.ui:95
+#: shell/cc-window.ui:83
 msgid ""
 "This version of Settings should only be used for development purposes. You "
 "may experience incorrect system behavior, data loss, and other unexpected "
@@ -9779,19 +9858,19 @@ msgstr ""
 "қате мінез-құлығы, деректерді жоғалу және басқа күтілмеген жағдайларды "
 "кездестіруге болады. "
 
-#: shell/cc-window.ui:99
+#: shell/cc-window.ui:87
 msgid "_OK"
 msgstr "_ОК"
 
-#: shell/cc-window.ui:107
+#: shell/cc-window.ui:95
 msgid "_Keyboard Shortcuts"
 msgstr "_Пернетақта жарлықтары"
 
-#: shell/cc-window.ui:111
+#: shell/cc-window.ui:99
 msgid "_Help"
 msgstr "Кө_мек"
 
-#: shell/cc-window.ui:115
+#: shell/cc-window.ui:103
 msgid "_About Settings"
 msgstr "Баптаулар тур_алы"
 
@@ -9894,6 +9973,61 @@ msgstr[0] "%u кіріс"
 #: subprojects/gvc/gvc-mixer-control.c:2882
 msgid "System Sounds"
 msgstr "Жүйелік дыбыстар"
+
+#~ msgid "Device name copied"
+#~ msgstr "Құрылғы атауы көшірілді"
+
+#~ msgid "learn how to use it"
+#~ msgstr "оны пайдалануды үйрену"
+
+#, c-format
+#~ msgid ""
+#~ "Remote desktop allows viewing and controlling your desktop from another "
+#~ "computer – %s."
+#~ msgstr ""
+#~ "Қашықтағы жұмыс үстелі жұмыс үстеліңізді басқа компьютерден көруге және "
+#~ "басқаруға мүмкіндік береді - %s."
+
+#~ msgid "Remote _Desktop"
+#~ msgstr "Қашықтағы жұ_мыс үстелі"
+
+#~ msgid "Enable or disable remote desktop connections to this computer"
+#~ msgstr "Бұл компьютерге қашықтан кіруді іске қосу немесе сөндіру"
+
+#~ msgid ""
+#~ "Connect to this computer using the device name or remote desktop address"
+#~ msgstr ""
+#~ "Құрылғы атауын немесе қашықтағы жұмыс үстелі адресін пайдаланып осы "
+#~ "компьютерге қосылу"
+
+#~ msgid "D_evice Name"
+#~ msgstr "Құр_ылғы атауы"
+
+#~ msgid "Re_mote Desktop Address"
+#~ msgstr "Қа_шықтағы жұмыс үстел адресі"
+
+#~ msgid "Authentication"
+#~ msgstr "Аутентификация"
+
+#~ msgid "The user name and password are required to connect to this computer"
+#~ msgstr ""
+#~ "Осы компьютерге қосылу үшін пайдаланушы аты мен пароль міндетті түрде "
+#~ "керек"
+
+#~ msgid "_User Name"
+#~ msgstr "_Пайдаланушы аты"
+
+#~ msgid "Unable to find the domain. Maybe you misspelled it?"
+#~ msgstr "Доменді табу мүмкін емес. Оны дұрыс көрсеттіңіз бе?"
+
+#~ msgid "_Enterprise Login"
+#~ msgstr "Кә_сіпорын тіркелгісі"
+
+#~ msgid "User accounts which are managed by a company or organization"
+#~ msgstr "Компания немесе ұйым басқаратын пайдаланушы тіркелгілері"
+
+#~ msgid "You are Offline"
+#~ msgstr "Сіз желіде емессіз"
 
 #~ msgid "No Apps"
 #~ msgstr "Қолданбалар жоқ"
@@ -10102,9 +10236,6 @@ msgstr "Жүйелік дыбыстар"
 #~ msgid "_Remote Login"
 #~ msgstr "Қа_шықтан кіру"
 
-#~ msgid "Remote Login"
-#~ msgstr "Қашықтан кіру"
-
 #~ msgid "_Accessibility Menu"
 #~ msgstr "Қол_жетімділік мәзірі"
 
@@ -10215,9 +10346,6 @@ msgstr "Жүйелік дыбыстар"
 
 #~ msgid "Open"
 #~ msgstr "Ашу"
-
-#~ msgid "View Details"
-#~ msgstr "Көбірек ақпарат"
 
 #~ msgid "Application"
 #~ msgstr "Қолданба"
@@ -10810,11 +10938,6 @@ msgstr "Жүйелік дыбыстар"
 #~ msgid "Connect to your data in the cloud"
 #~ msgstr "Бұлттық қызметтердегі деректеріңізге байланысыңыз"
 
-#~ msgid "No internet connection — connect to set up new online accounts"
-#~ msgstr ""
-#~ "Интернетпен байланыс жоқ — желілік тіркелгілерді баптау үшін интернетке "
-#~ "байланысты орнатыңыз"
-
 #~ msgid "Add an account"
 #~ msgstr "Тіркелгіні қосу"
 
@@ -11085,9 +11208,6 @@ msgstr "Жүйелік дыбыстар"
 
 #~ msgid "Logged in"
 #~ msgstr "Жүйеге кіріп тұр"
-
-#~ msgid "Failed to contact the accounts service"
-#~ msgstr "Тіркелгілер қызметімен байланыс орнату қатесі"
 
 #~ msgid "Please make sure that the AccountService is installed and enabled."
 #~ msgstr "AccountService орнатылған және іске қосылғанына көз жеткізіңіз."
@@ -13242,10 +13362,6 @@ msgstr "Жүйелік дыбыстар"
 #~ msgctxt "Password strength"
 #~ msgid "Strong"
 #~ msgstr "Айналдыру"
-
-#~| msgid "Set a password now"
-#~ msgid "_Generate a password"
-#~ msgstr "Парольді қазір орнату"
 
 #~ msgid "You need to enter a new password"
 #~ msgstr "Сізге жаңа парольді енгізу керек"
