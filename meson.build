@@ -302,8 +302,6 @@ if host_is_linux_not_s390
   wacom_deps = [
     libwacom_dep,
   ]
-  config_h.set('HAVE_WACOM_3D_STYLUS', libwacom_dep.version().version_compare('>= 0.27'),
-               description: 'Define to 1 if libwacom provides definition for 3D styli')
 else
   message('Bluetooth and Wacom panels will not be built (no USB support on this platform)')
   message('Thunderbolt panel will not be built (not supported on this platform)')
