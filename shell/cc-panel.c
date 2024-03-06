@@ -44,6 +44,8 @@ typedef struct
 {
   CcShell      *shell;
   GCancellable *cancellable;
+
+  gchar *subpage;
 } CcPanelPrivate;
 
 G_DEFINE_ABSTRACT_TYPE_WITH_CODE (CcPanel, cc_panel, ADW_TYPE_NAVIGATION_PAGE,
@@ -54,6 +56,7 @@ enum
   PROP_0,
   PROP_SHELL,
   PROP_PARAMETERS,
+  PROP_SUBPAGE,
   N_PROPS
 };
 
@@ -95,7 +98,12 @@ cc_panel_set_property (GObject      *object,
 
         g_variant_get_child (parameters, 0, "v", &v);
 
-        if (!g_variant_is_of_type (v, G_VARIANT_TYPE_DICTIONARY))
+        if (g_variant_is_of_type (v, G_VARIANT_TYPE_STRING))
+          {
+            g_set_str (&priv->subpage, g_variant_get_string (v, NULL));
+            g_object_notify_by_pspec (object, properties[PROP_SUBPAGE]);
+          }
+        else if (!g_variant_is_of_type (v, G_VARIANT_TYPE_DICTIONARY))
           g_warning ("Wrong type for the first argument GVariant, expected 'a{sv}' but got '%s'",
                      (gchar *)g_variant_get_type (v));
         else if (g_variant_n_children (v) > 0)
@@ -127,6 +135,10 @@ cc_panel_get_property (GObject    *object,
       g_value_set_object (value, priv->shell);
       break;
 
+    case PROP_SUBPAGE:
+      g_value_set_string (value, priv->subpage);
+      break;
+
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
       break;
@@ -140,6 +152,7 @@ cc_panel_finalize (GObject *object)
 
   g_cancellable_cancel (priv->cancellable);
   g_clear_object (&priv->cancellable);
+  g_clear_pointer (&priv->subpage, g_free);
 
   G_OBJECT_CLASS (cc_panel_parent_class)->finalize (object);
 }
@@ -165,6 +178,12 @@ cc_panel_class_init (CcPanelClass *klass)
                                                       G_VARIANT_TYPE ("av"),
                                                       NULL,
                                                       G_PARAM_WRITABLE | G_PARAM_STATIC_STRINGS);
+
+  properties[PROP_SUBPAGE] = g_param_spec_string ("subpage",
+                                                  "Subpage parameters",
+                                                  "Additional parameter extracted from the parameters property to launch a panel subpage",
+                                                  NULL,
+                                                  G_PARAM_READABLE | G_PARAM_STATIC_STRINGS);
 
   g_object_class_install_properties (object_class, N_PROPS, properties);
 }
