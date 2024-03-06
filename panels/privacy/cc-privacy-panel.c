@@ -84,6 +84,21 @@ cc_privacy_panel_class_init (CcPrivacyPanelClass *klass)
 }
 
 static void
+on_subpage_set (CcPrivacyPanel *self)
+{
+  AdwNavigationPage *subpage;
+  g_autofree gchar *tag = NULL;
+
+  g_object_get (self, "subpage", &tag, NULL);
+  if (!tag)
+    return;
+
+  subpage = adw_navigation_view_find_page (self->navigation, tag);
+  if (subpage)
+    adw_navigation_view_push (self->navigation, subpage);
+}
+
+static void
 cc_privacy_panel_init (CcPrivacyPanel *self)
 {
   g_resources_register (cc_privacy_get_resource ());
@@ -98,4 +113,6 @@ cc_privacy_panel_init (CcPrivacyPanel *self)
   g_object_bind_property (bolt_page, "visible",
                           self->bolt_row, "visible", G_BINDING_SYNC_CREATE);
 #endif
+
+  g_signal_connect_object (self, "notify::subpage", G_CALLBACK (on_subpage_set), self, G_CONNECT_SWAPPED);
 }
