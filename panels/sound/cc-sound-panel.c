@@ -124,17 +124,8 @@ static void
 output_device_changed_cb (CcSoundPanel *self)
 {
   GvcMixerUIDevice *device;
-  GvcMixerStream *stream = NULL;
 
   device = cc_device_combo_box_get_device (self->output_device_combo_box);
-
-  gtk_widget_set_visible (GTK_WIDGET (self->output_group), device != NULL);
-  gtk_widget_set_visible (GTK_WIDGET (self->output_no_devices_group), device == NULL);
-
-  if (device != NULL)
-    stream = gvc_mixer_control_get_stream_from_device (self->mixer_control, device);
-
-  set_output_stream (self, stream);
 
   if (device != NULL)
     gvc_mixer_control_change_output (self->mixer_control, device);
@@ -152,17 +143,8 @@ static void
 input_device_changed_cb (CcSoundPanel *self)
 {
   GvcMixerUIDevice *device;
-  GvcMixerStream *stream = NULL;
 
   device = cc_device_combo_box_get_device (self->input_device_combo_box);
-
-  gtk_widget_set_visible (GTK_WIDGET (self->input_group), device != NULL);
-  gtk_widget_set_visible (GTK_WIDGET (self->input_no_devices_group), device == NULL);
-
-  if (device != NULL)
-    stream = gvc_mixer_control_get_stream_from_device (self->mixer_control, device);
-
-  set_input_stream (self, stream);
 
   if (device != NULL)
     gvc_mixer_control_change_input (self->mixer_control, device);
@@ -181,12 +163,16 @@ output_device_update_cb (CcSoundPanel *self,
   g_signal_handlers_unblock_by_func(self->output_device_combo_box, output_device_changed_cb, self);
 
   device = cc_device_combo_box_get_device (self->output_device_combo_box);
+
+  gtk_widget_set_visible (GTK_WIDGET (self->output_group), device != NULL);
+  gtk_widget_set_visible (GTK_WIDGET (self->output_no_devices_group), device == NULL);
+
   cc_profile_combo_box_set_device (self->output_profile_combo_box, self->mixer_control, device);
   has_multi_profiles = (cc_profile_combo_box_get_profile_count (self->output_profile_combo_box) > 1);
   gtk_widget_set_visible (GTK_WIDGET (self->output_profile_row),
                           has_multi_profiles);
 
-  if (cc_volume_slider_get_stream (self->output_volume_slider) == NULL)
+  if (device)
     stream = gvc_mixer_control_get_stream_from_device (self->mixer_control, device);
   if (stream != NULL)
     set_output_stream (self, stream);
@@ -205,12 +191,16 @@ input_device_update_cb (CcSoundPanel *self,
   g_signal_handlers_unblock_by_func(self->input_device_combo_box, input_device_changed_cb, self);
 
   device = cc_device_combo_box_get_device (self->input_device_combo_box);
+
+  gtk_widget_set_visible (GTK_WIDGET (self->input_group), device != NULL);
+  gtk_widget_set_visible (GTK_WIDGET (self->input_no_devices_group), device != NULL);
+
   cc_profile_combo_box_set_device (self->input_profile_combo_box, self->mixer_control, device);
   has_multi_profiles = (cc_profile_combo_box_get_profile_count (self->input_profile_combo_box) > 1);
   gtk_widget_set_visible (GTK_WIDGET (self->input_profile_row),
                           has_multi_profiles);
 
-  if (cc_volume_slider_get_stream (self->input_volume_slider) == NULL)
+  if (device)
     stream = gvc_mixer_control_get_stream_from_device (self->mixer_control, device);
   if (stream != NULL)
     set_input_stream (self, stream);
