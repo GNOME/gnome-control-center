@@ -505,10 +505,8 @@ show_input_chooser (CcInputListBox *self)
 				  NULL
 #endif
 				  );
-  gtk_window_set_transient_for (GTK_WINDOW (chooser),
-                                GTK_WINDOW (gtk_widget_get_native (GTK_WIDGET (self))));
   g_signal_connect_swapped (chooser, "source-selected", G_CALLBACK (on_chooser_response_cb), self);
-  gtk_window_present (GTK_WINDOW (chooser));
+  adw_dialog_present (ADW_DIALOG (chooser), GTK_WIDGET (self));
 }
 
 // Duplicated from cc-region-panel.c

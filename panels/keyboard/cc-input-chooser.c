@@ -55,7 +55,7 @@ typedef enum
 
 struct _CcInputChooser
 {
-  AdwWindow          parent_instance;
+  AdwDialog          parent_instance;
 
   GtkButton         *add_button;
   GtkSearchEntry    *filter_entry;
@@ -76,7 +76,7 @@ struct _CcInputChooser
   gboolean           is_login;
 };
 
-G_DEFINE_TYPE (CcInputChooser, cc_input_chooser, ADW_TYPE_WINDOW)
+G_DEFINE_TYPE (CcInputChooser, cc_input_chooser, ADW_TYPE_DIALOG)
 
 enum
 {
@@ -320,7 +320,7 @@ cc_input_chooser_emit_source_selected (CcInputChooser *self)
   g_signal_emit (self, signals[SIGNAL_SOURCE_SELECTED], 0,
                  cc_input_chooser_get_source (self));
 
-  gtk_window_close (GTK_WINDOW (self));
+  adw_dialog_close (ADW_DIALOG (self));
 }
 
 static void
@@ -710,7 +710,7 @@ on_stop_search_cb (CcInputChooser *self)
   if (search_text && g_strcmp0 (search_text, "") != 0)
     gtk_editable_set_text (GTK_EDITABLE (self->filter_entry), "");
   else
-    gtk_window_close (GTK_WINDOW (self));
+    adw_dialog_close (ADW_DIALOG (self));
 }
 
 static void
@@ -1086,8 +1086,6 @@ cc_input_chooser_class_init (CcInputChooserClass *klass)
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
   object_class->dispose = cc_input_chooser_dispose;
-
-  gtk_widget_class_add_binding_action (widget_class, GDK_KEY_Escape, 0, "window.close", NULL);
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/keyboard/cc-input-chooser.ui");
 
