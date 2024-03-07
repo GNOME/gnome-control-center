@@ -112,6 +112,8 @@ cc_device_combo_box_active_device_changed (CcDeviceComboBox *self,
 
   if (get_iter (self, id, &iter))
     gtk_combo_box_set_active_iter (GTK_COMBO_BOX (self), &iter);
+  else
+    gtk_combo_box_set_active_iter (GTK_COMBO_BOX (self), NULL);
 }
 
 static void
