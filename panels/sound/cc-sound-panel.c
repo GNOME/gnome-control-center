@@ -174,8 +174,8 @@ output_device_update_cb (CcSoundPanel *self,
 
   if (device)
     stream = gvc_mixer_control_get_stream_from_device (self->mixer_control, device);
-  if (stream != NULL)
-    set_output_stream (self, stream);
+
+  set_output_stream (self, stream);
 }
 
 static void
@@ -202,8 +202,8 @@ input_device_update_cb (CcSoundPanel *self,
 
   if (device)
     stream = gvc_mixer_control_get_stream_from_device (self->mixer_control, device);
-  if (stream != NULL)
-    set_input_stream (self, stream);
+
+  set_input_stream (self, stream);
 }
 
 static void
