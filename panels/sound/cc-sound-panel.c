@@ -176,7 +176,9 @@ output_device_update_cb (CcSoundPanel *self,
   gboolean has_multi_profiles;
   GvcMixerStream *stream = NULL;
 
+  g_signal_handlers_block_by_func(self->output_device_combo_box, output_device_changed_cb, self);
   cc_device_combo_box_active_device_changed (self->output_device_combo_box, id);
+  g_signal_handlers_unblock_by_func(self->output_device_combo_box, output_device_changed_cb, self);
 
   device = cc_device_combo_box_get_device (self->output_device_combo_box);
   cc_profile_combo_box_set_device (self->output_profile_combo_box, self->mixer_control, device);
@@ -198,7 +200,9 @@ input_device_update_cb (CcSoundPanel *self,
   gboolean has_multi_profiles;
   GvcMixerStream *stream = NULL;
 
+  g_signal_handlers_block_by_func(self->input_device_combo_box, input_device_changed_cb, self);
   cc_device_combo_box_active_device_changed (self->input_device_combo_box, id);
+  g_signal_handlers_unblock_by_func(self->input_device_combo_box, input_device_changed_cb, self);
 
   device = cc_device_combo_box_get_device (self->input_device_combo_box);
   cc_profile_combo_box_set_device (self->input_profile_combo_box, self->mixer_control, device);
