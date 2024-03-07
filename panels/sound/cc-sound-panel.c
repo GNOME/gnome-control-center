@@ -176,6 +176,8 @@ output_device_update_cb (CcSoundPanel *self,
   gboolean has_multi_profiles;
   GvcMixerStream *stream = NULL;
 
+  cc_device_combo_box_active_device_changed (self->output_device_combo_box, id);
+
   device = cc_device_combo_box_get_device (self->output_device_combo_box);
   cc_profile_combo_box_set_device (self->output_profile_combo_box, self->mixer_control, device);
   has_multi_profiles = (cc_profile_combo_box_get_profile_count (self->output_profile_combo_box) > 1);
@@ -195,6 +197,8 @@ input_device_update_cb (CcSoundPanel *self,
   GvcMixerUIDevice *device;
   gboolean has_multi_profiles;
   GvcMixerStream *stream = NULL;
+
+  cc_device_combo_box_active_device_changed (self->input_device_combo_box, id);
 
   device = cc_device_combo_box_get_device (self->input_device_combo_box);
   cc_profile_combo_box_set_device (self->input_profile_combo_box, self->mixer_control, device);
@@ -354,16 +358,40 @@ cc_sound_panel_init (CcSoundPanel *self)
   cc_subwoofer_slider_set_mixer_control (self->subwoofer_slider, self->mixer_control);
   cc_device_combo_box_set_mixer_control (self->input_device_combo_box, self->mixer_control, FALSE);
   cc_device_combo_box_set_mixer_control (self->output_device_combo_box, self->mixer_control, TRUE);
+
   g_signal_connect_object (self->mixer_control,
-                           "active-output-update",
-                           G_CALLBACK (output_device_update_cb),
-                           self,
+                           "input-added",
+                           G_CALLBACK (cc_device_combo_box_device_added),
+                           self->input_device_combo_box,
+                           G_CONNECT_SWAPPED);
+  g_signal_connect_object (self->mixer_control,
+                           "input-removed",
+                           G_CALLBACK (cc_device_combo_box_device_removed),
+                           self->input_device_combo_box,
                            G_CONNECT_SWAPPED);
   g_signal_connect_object (self->mixer_control,
                            "active-input-update",
                            G_CALLBACK (input_device_update_cb),
                            self,
                            G_CONNECT_SWAPPED);
+
+  g_signal_connect_object (self->mixer_control,
+                           "output-added",
+                           G_CALLBACK (cc_device_combo_box_device_added),
+                           self->output_device_combo_box,
+                           G_CONNECT_SWAPPED);
+  g_signal_connect_object (self->mixer_control,
+                           "output-removed",
+                           G_CALLBACK (cc_device_combo_box_device_removed),
+                           self->output_device_combo_box,
+                           G_CONNECT_SWAPPED);
+  g_signal_connect_object (self->mixer_control,
+                           "active-output-update",
+                           G_CALLBACK (output_device_update_cb),
+                           self,
+                           G_CONNECT_SWAPPED);
+
+  gvc_mixer_control_open (self->mixer_control);
 
   update_alert_sound_label (self);
 }

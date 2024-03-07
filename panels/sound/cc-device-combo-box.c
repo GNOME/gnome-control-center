@@ -25,9 +25,6 @@ struct _CcDeviceComboBox
   GtkListStore    *device_model;
 
   GvcMixerControl *mixer_control;
-  guint            added_handler_id;
-  guint            removed_handler_id;
-  guint            active_update_handler_id;
   gboolean         is_output;
 };
 
@@ -35,9 +32,9 @@ G_DEFINE_TYPE (CcDeviceComboBox, cc_device_combo_box, GTK_TYPE_COMBO_BOX)
 
 static gboolean get_iter (CcDeviceComboBox *self, guint id, GtkTreeIter *iter);
 
-static void
-device_added_cb (CcDeviceComboBox *self,
-                 guint             id)
+void
+cc_device_combo_box_device_added (CcDeviceComboBox *self,
+                                  guint             id)
 {
   GvcMixerUIDevice *device = NULL;
   g_autofree gchar *label = NULL;
@@ -97,9 +94,9 @@ get_iter (CcDeviceComboBox *self,
   return FALSE;
 }
 
-static void
-device_removed_cb (CcDeviceComboBox *self,
-                   guint             id)
+void
+cc_device_combo_box_device_removed (CcDeviceComboBox *self,
+                                    guint             id)
 {
   GtkTreeIter iter;
 
@@ -107,9 +104,9 @@ device_removed_cb (CcDeviceComboBox *self,
     gtk_list_store_remove (self->device_model, &iter);
 }
 
-static void
-active_device_update_cb (CcDeviceComboBox *self,
-                         guint             id)
+void
+cc_device_combo_box_active_device_changed (CcDeviceComboBox *self,
+                                           guint             id)
 {
   GtkTreeIter iter;
 
@@ -153,47 +150,12 @@ cc_device_combo_box_set_mixer_control (CcDeviceComboBox *self,
                                        GvcMixerControl  *mixer_control,
                                        gboolean          is_output)
 {
-  const gchar *added_signal, *removed_signal, *active_update_signal;
   g_return_if_fail (CC_IS_DEVICE_COMBO_BOX (self));
 
-  if (self->mixer_control != NULL)
-    {
-      g_signal_handler_disconnect (self->mixer_control, self->added_handler_id);
-      self->added_handler_id = 0;
-      g_signal_handler_disconnect (self->mixer_control, self->removed_handler_id);
-      self->removed_handler_id = 0;
-      g_signal_handler_disconnect (self->mixer_control, self->active_update_handler_id);
-      self->active_update_handler_id = 0;
-    }
   g_clear_object (&self->mixer_control);
 
   self->mixer_control = g_object_ref (mixer_control);
   self->is_output = is_output;
-  if (is_output)
-    {
-      added_signal = "output-added";
-      removed_signal = "output-removed";
-      active_update_signal = "active-output-update";
-    }
-  else
-    {
-      added_signal = "input-added";
-      removed_signal = "input-removed";
-      active_update_signal = "active-input-update";
-    }
-
-  self->added_handler_id = g_signal_connect_object (self->mixer_control,
-                                                    added_signal,
-                                                    G_CALLBACK (device_added_cb),
-                                                    self, G_CONNECT_SWAPPED);
-  self->removed_handler_id = g_signal_connect_object (self->mixer_control,
-                                                      removed_signal,
-                                                      G_CALLBACK (device_removed_cb),
-                                                      self, G_CONNECT_SWAPPED);
-  self->active_update_handler_id = g_signal_connect_object (self->mixer_control,
-                                                            active_update_signal,
-                                                            G_CALLBACK (active_device_update_cb),
-                                                            self, G_CONNECT_SWAPPED);
 }
 
 GvcMixerUIDevice *

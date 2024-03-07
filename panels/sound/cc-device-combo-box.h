@@ -32,4 +32,13 @@ void                   cc_device_combo_box_set_mixer_control (CcDeviceComboBox *
 
 GvcMixerUIDevice      *cc_device_combo_box_get_device        (CcDeviceComboBox *combo_box);
 
+void cc_device_combo_box_device_added (CcDeviceComboBox *self,
+                                       guint             id);
+
+void cc_device_combo_box_device_removed (CcDeviceComboBox *self,
+                                         guint             id);
+
+void cc_device_combo_box_active_device_changed (CcDeviceComboBox *self,
+                                                guint             id);
+
 G_END_DECLS
