@@ -63,7 +63,6 @@ struct _CcInputChooser
   GtkLabel          *login_label;
   GtkListBoxRow     *more_row;
   GtkWidget         *no_results;
-  GtkAdjustment     *scroll_adjustment;
 
   GnomeXkbInfo      *xkb_info;
   GHashTable        *ibus_engines;
@@ -362,8 +361,6 @@ show_input_sources_for_locale (CcInputChooser *self,
 
   add_input_source_rows_for_locale (self, info);
 
-  gtk_adjustment_set_value (self->scroll_adjustment,
-                            gtk_adjustment_get_lower (self->scroll_adjustment));
   gtk_list_box_invalidate_filter (self->input_sources_listbox);
   gtk_list_box_set_selection_mode (self->input_sources_listbox, GTK_SELECTION_SINGLE);
   gtk_list_box_set_activate_on_single_click (self->input_sources_listbox, FALSE);
@@ -415,9 +412,6 @@ show_locale_rows (CcInputChooser *self)
     }
 
   gtk_list_box_append (self->input_sources_listbox, GTK_WIDGET (self->more_row));
-
-  gtk_adjustment_set_value (self->scroll_adjustment,
-                            gtk_adjustment_get_lower (self->scroll_adjustment));
   gtk_list_box_invalidate_filter (self->input_sources_listbox);
   gtk_list_box_set_selection_mode (self->input_sources_listbox, GTK_SELECTION_NONE);
   gtk_list_box_set_activate_on_single_click (self->input_sources_listbox, TRUE);
@@ -1101,7 +1095,6 @@ cc_input_chooser_class_init (CcInputChooserClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcInputChooser, filter_entry);
   gtk_widget_class_bind_template_child (widget_class, CcInputChooser, input_sources_listbox);
   gtk_widget_class_bind_template_child (widget_class, CcInputChooser, login_label);
-  gtk_widget_class_bind_template_child (widget_class, CcInputChooser, scroll_adjustment);
 
   gtk_widget_class_bind_template_callback (widget_class, on_input_sources_listbox_row_activated_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_input_sources_listbox_selected_rows_changed_cb);
