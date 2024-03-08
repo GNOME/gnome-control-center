@@ -37,40 +37,42 @@ struct _CcOnlineAccountProviderRow
 
 G_DEFINE_TYPE (CcOnlineAccountProviderRow, cc_online_account_provider_row, ADW_TYPE_ACTION_ROW)
 
-static const char *
-_goa_provider_get_provider_title (GoaProvider *provider)
+typedef struct
+{
+  const char *provider;
+  const char *title;
+  const char *description;
+} ProviderInfo;
+
+static ProviderInfo
+_goa_provider_get_provider_info (GoaProvider *provider)
 {
   const char *provider_type = NULL;
 
   g_assert (GOA_IS_PROVIDER (provider));
 
-  /* The order here is the same used to sort accounts and providers in the UI,
-   * The title, if present, should bump the provider name to subtitle.
+  /* These override the strings that GOA returns, since they lack detail
    */
-  struct
-  {
-    const char *provider;
-    const char *title;
-  } goa_metadata[] = {
-    { "imap_smtp", N_("Email") },                     /* IMAP and SMTP */
-    { "webdav", N_("Calendar, Contacts and Files") }, /* WebDAV */
-    { "owncloud", NULL },                             /* Nextcloud */
-    { "google", NULL },                               /* Google */
-    { "ms_graph", NULL },                             /* Microsoft 365 */
-    { "exchange", NULL },                             /* Microsoft Exchange */
-    { "windows_live", NULL },                         /* Microsoft Personal */
-    { "kerberos", N_("Enterprise Login") },           /* Enterprise Login (Kerberos) */
-    { "fedora", NULL },                               /* Fedora */
+  static ProviderInfo goa_metadata[] = {
+    { "owncloud", N_("Nextcloud"), N_("Calendar, contacts, files") },
+    { "google", N_("Google"), N_("Email, calendar, contacts, files") },
+    { "windows_live", N_("Microsoft (Personal)"), N_("Email") },
+    { "ms_graph", N_("Microsoft (Your Organization)"), N_("Files") },
+    { "exchange", N_("Microsoft Exchange"), N_("Email, calendar, contacts") },
+    { "fedora", N_("Fedora"), N_("Enterprise Login") },
+    { "imap_smtp", N_("Email Server"), N_("IMAP/SMTP") },
+    { "webdav", N_("Calendar, Contacts and Files"), N_("WebDAV") },
+    { "kerberos", N_("Enterprise Authentication"), N_("Kerberos") },
   };
 
   provider_type = goa_provider_get_provider_type (provider);
   for (size_t i = 0; i < G_N_ELEMENTS (goa_metadata); i++)
     {
       if (g_str_equal (goa_metadata[i].provider, provider_type))
-        return goa_metadata[i].title;
+        return goa_metadata[i];
     }
 
-  return NULL;
+  return (ProviderInfo){ provider_type, C_("Online Account", "Other"), NULL };
 }
 
 static gboolean
@@ -125,22 +127,25 @@ cc_online_account_provider_row_new (GoaProvider *provider)
 {
   CcOnlineAccountProviderRow *self;
   g_autoptr(GIcon) icon = NULL;
-  g_autofree gchar *name = NULL;
   const char *title = NULL;
+  const char *description = NULL;
 
   self = g_object_new (CC_TYPE_ONLINE_ACCOUNT_PROVIDER_ROW, NULL);
 
   if (provider == NULL)
     {
       icon = g_themed_icon_new_with_default_fallbacks ("goa-account");
-      name = g_strdup (C_("Online Account", "Other"));
+      title = C_("Online Account", "Other");
     }
   else
     {
+      ProviderInfo info;
+
       self->provider = g_object_ref (provider);
+      info = _goa_provider_get_provider_info (provider);
       icon = goa_provider_get_provider_icon (provider, NULL);
-      name = goa_provider_get_provider_name (provider, NULL);
-      title = _goa_provider_get_provider_title (provider);
+      title = info.title;
+      description = info.description;
     }
 
   gtk_image_set_from_gicon (self->icon_image, icon);
@@ -155,15 +160,8 @@ cc_online_account_provider_row_new (GoaProvider *provider)
       gtk_widget_add_css_class (GTK_WIDGET (self->icon_image), "lowres-icon");
     }
 
-  if (title != NULL)
-    {
-      adw_preferences_row_set_title (ADW_PREFERENCES_ROW (self), title);
-      adw_action_row_set_subtitle (ADW_ACTION_ROW (self), name);
-    }
-  else
-    {
-      adw_preferences_row_set_title (ADW_PREFERENCES_ROW (self), name);
-    }
+  adw_preferences_row_set_title (ADW_PREFERENCES_ROW (self), title);
+  adw_action_row_set_subtitle (ADW_ACTION_ROW (self), description);
 
   return self;
 }
