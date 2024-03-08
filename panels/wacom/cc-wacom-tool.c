@@ -298,6 +298,8 @@ get_icon_name_from_type (const WacomStylus *wstylus)
 		return "wacom-stylus-classic";
 	case WSTYLUS_3D:
 		return "wacom-stylus-3btn-no-eraser";
+	case WSTYLUS_MOBILE:
+		return "wacom-stylus-mobile";
 	default:
 		if (!libwacom_stylus_has_eraser (wstylus)) {
 			if (libwacom_stylus_get_num_buttons (wstylus) >= 3)

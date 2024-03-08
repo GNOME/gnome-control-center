@@ -297,7 +297,7 @@ if host_is_linux_not_s390
   # gnome-bluetooth
   gnome_bluetooth_dep = dependency('gnome-bluetooth-ui-3.0')
 
-  libwacom_dep = dependency('libwacom', version: '>= 0.7')
+  libwacom_dep = dependency('libwacom', version: '>= 1.4')
 
   wacom_deps = [
     libwacom_dep,
