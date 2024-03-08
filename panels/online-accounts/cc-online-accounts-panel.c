@@ -282,13 +282,13 @@ static int
 goa_provider_priority (const char *provider_type)
 {
   static const char *goa_priority[] = {
-    "imap_smtp",    /* Email (IMAP and SMTP) */
-    "webdav",       /* Calendars, Contacts, Files (WebDAV) */
     "owncloud",     /* Nextcloud */
     "google",       /* Google */
+    "windows_live", /* Microsoft Personal */
     "ms_graph",     /* Microsoft 365 */
     "exchange",     /* Microsoft Exchange */
-    "windows_live", /* Microsoft Personal */
+    "imap_smtp",    /* Email (IMAP and SMTP) */
+    "webdav",       /* Calendars, Contacts, Files (WebDAV) */
     "kerberos",     /* Enterprise Login (Kerberos) */
     "fedora",       /* Fedora */
   };
