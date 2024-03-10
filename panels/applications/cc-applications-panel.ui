@@ -4,7 +4,7 @@
     <property name="child">
       <object class="AdwNavigationView" id="navigation_view">
 
-        <!-- App Search Page (Main Ladning Page) -->
+        <!-- App Search Page (Main Landing Page) -->
         <child>
           <object class="AdwNavigationPage">
             <property name="title" translatable="yes">Apps</property>
@@ -55,64 +55,26 @@
                         <child>
                           <object class="GtkStack" id="app_listbox_stack">
                             <property name="vhomogeneous">False</property>
+                            <!-- Empty search results placeholder -->
                             <child>
-                              <!-- Empty search results placeholder -->
-                              <object class="GtkBox" id="empty_search_placeholder">
-                                <!--AdwStatusPage can't be used here, see: https://gitlab.gnome.org/GNOME/libadwaita/-/issues/697-->
-                                <property name="orientation">vertical</property>
-                                <property name="valign">center</property>
-
-                                <!--Use AdwClamp like AdwStatusPage-->
+                              <object class="AdwStatusPage" id="no_apps_page">
+                                <property name="icon-name">computer-fail-symbolic</property>
+                                <property name="title" translatable="yes">No Apps Found</property>
                                 <child>
-                                  <object class="AdwClamp">
+                                  <object class="GtkButton" id="install_button">
+                                    <property name="label" translatable="yes">_Find in Software</property>
+                                    <property name="use_underline">True</property>
+                                    <property name="halign">center</property>
+                                    <signal name="clicked" handler="open_software_cb" object="CcApplicationsPanel" swapped="yes"/>
                                     <style>
-                                      <class name="status-page"/>
+                                      <class name="pill"/>
+                                      <class name="suggested-action"/>
                                     </style>
-                                    <property name="child">
-                                      <object class="GtkBox">
-                                        <property name="orientation">vertical</property>
-                                        <property name="valign">center</property>
-                                        <child>
-                                          <object class="GtkImage">
-                                            <property name="pixel_size">128</property>
-                                            <property name="icon_name">computer-fail-symbolic</property>
-                                            <style>
-                                              <class name="dim-label"/>
-                                              <class name="icon"/>
-                                            </style>
-                                          </object>
-                                        </child>
-                                        <child>
-                                          <object class="GtkLabel">
-                                            <property name="label" translatable="yes">No Apps Found</property>
-                                            <property name="wrap">True</property>
-                                            <property name="wrap-mode">word-char</property>
-                                            <property name="justify">center</property>
-                                            <style>
-                                              <class name="title"/>
-                                              <class name="title-1"/>
-                                            </style>
-                                          </object>
-                                        </child>
-                                        <child>
-                                          <object class="GtkButton" id="install_button">
-                                            <property name="label" translatable="yes">_Find in Software</property>
-                                            <property name="use_underline">True</property>
-                                            <property name="halign">center</property>
-                                            <signal name="clicked" handler="open_software_cb" object="CcApplicationsPanel" swapped="yes"/>
-                                            <style>
-                                              <class name="pill"/>
-                                              <class name="suggested-action"/>
-                                            </style>
-                                          </object>
-                                        </child>
-                                      </object>
-                                    </property>
                                   </object>
                                 </child>
                               </object>
-
                             </child>
+                            <!-- App List -->
                             <child>
                               <object class="GtkListBox" id="app_listbox">
                                 <property name="selection-mode">none</property>
