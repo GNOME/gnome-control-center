@@ -62,7 +62,7 @@ struct _CcApplicationsPanel
   AdwNavigationPage *app_settings_page;
   GtkListBox      *app_listbox;
   GtkEntry        *app_search_entry;
-  GtkWidget       *empty_search_placeholder;
+  GtkWidget       *no_apps_page;
   GtkStack        *app_listbox_stack;
   GAppInfoMonitor *monitor;
   gulong           monitor_id;
@@ -1240,7 +1240,7 @@ on_items_changed_cb (GListModel *list,
 
   if (g_list_model_get_n_items (list) == 0)
     gtk_stack_set_visible_child (self->app_listbox_stack,
-                                 self->empty_search_placeholder);
+                                 self->no_apps_page);
   else
     gtk_stack_set_visible_child (self->app_listbox_stack,
                                  GTK_WIDGET (self->app_listbox));
@@ -1786,7 +1786,7 @@ cc_applications_panel_class_init (CcApplicationsPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, clear_cache_button);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, data);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, default_apps_page);
-  gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, empty_search_placeholder);
+  gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, no_apps_page);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, app_listbox_stack);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, handler_dialog);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, handler_page);
