@@ -157,7 +157,8 @@ find_stylus_for_id (WacomDeviceDatabase  *wacom_db,
 	gint i;
 
 	eraser = libwacom_stylus_get_for_id (wacom_db, tool->id);
-	if (!libwacom_stylus_is_eraser (eraser))
+	if (!libwacom_stylus_is_eraser (eraser) ||
+	    libwacom_stylus_get_eraser_type (eraser) == WACOM_ERASER_BUTTON)
 		return eraser;
 
 	all_ids = cc_wacom_device_get_supported_tools (tool->device, &n_supported);
