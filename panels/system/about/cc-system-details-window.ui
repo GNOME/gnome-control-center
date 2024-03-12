@@ -11,6 +11,7 @@
         <condition>max-width: 500sp</condition>
         <setter object="box" property="orientation">vertical</setter>
         <setter object="box" property="spacing">12</setter>
+        <setter object="software_information_box" property="margin-top">12</setter>
       </object>
     </child>
     <property name="child">
@@ -105,7 +106,7 @@
 
                     <!-- Software Information -->
                     <child>
-                      <object class="GtkBox">
+                      <object class="GtkBox" id="software_information_box">
                         <property name="accessible-role">group</property>
                         <property name="orientation">vertical</property>
                         <property name="spacing">12</property>
