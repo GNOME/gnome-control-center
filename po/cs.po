@@ -26,8 +26,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2024-03-04 15:51+0000\n"
-"PO-Revision-Date: 2024-03-04 17:28+0100\n"
+"POT-Creation-Date: 2024-03-11 15:20+0000\n"
+"PO-Revision-Date: 2024-03-12 12:50+0100\n"
 "Last-Translator: Daniel Rusek <mail@asciiwolf.com>\n"
 "Language-Team: Czech <gnome-cs-list@gnome.org>\n"
 "Language: cs\n"
@@ -1146,8 +1146,7 @@ msgid "The device type is not currently supported."
 msgstr "Typ zařízení není v současnosti podporován."
 
 #. Translators: This will be presented as the text of a link to the documentation
-#. translators: Text used in link to privacy policy
-#: panels/color/cc-color-panel.c:1991 panels/privacy/cc-diagnostics-page.c:122
+#: panels/color/cc-color-panel.c:1991
 msgid "Learn more"
 msgstr "Dozvědět se více"
 
@@ -1178,9 +1177,8 @@ msgstr ""
 "mít."
 
 #: panels/color/cc-color-panel.ui:28
-msgid ""
-"You will not be able to use your computer while calibration takes place."
-msgstr "Během kalibrace nebudete moct počítač používat."
+msgid "You will not be able to use your device while calibration takes place."
+msgstr "Během kalibrace nebudete moci zařízení používat."
 
 #. This is the approximate time it takes to calibrate the display.
 #: panels/color/cc-color-panel.ui:40
@@ -1246,10 +1244,10 @@ msgstr "Název profilu"
 
 #: panels/color/cc-color-panel.ui:222
 msgid ""
-"You can use a color profile on different computers, or even create profiles "
+"You can use a color profile on different devices, or even create profiles "
 "for different lighting conditions."
 msgstr ""
-"Barevný profil můžete použít i na jiných počítačích, nebo můžete dokonce "
+"Barevný profil můžete použít i na jiných zařízeních, nebo můžete dokonce "
 "vytvořit profily pro různé světelné podmínky."
 
 #: panels/color/cc-color-panel.ui:229
@@ -1265,7 +1263,7 @@ msgid "Profile successfully created!"
 msgstr "Profil úspěšně vytvořen!"
 
 #: panels/color/cc-color-panel.ui:290
-msgid "Copy profile"
+msgid "Copy Profile"
 msgstr "Kopírovat profil"
 
 #: panels/color/cc-color-panel.ui:296
@@ -1308,20 +1306,20 @@ msgid "_Add"
 msgstr "Přid_at"
 
 #: panels/color/cc-color-panel.ui:457
-msgid "_Set for all users"
+msgid "_Set for All Users"
 msgstr "Pro _všechny uživatele"
 
 #: panels/color/cc-color-panel.ui:459 panels/color/cc-color-panel.ui:468
 #: panels/color/cc-color-panel.ui:469
-msgid "Set this profile for all users on this computer"
-msgstr "Nastavit tento profil pro všechny uživatele tohoto počítače"
+msgid "Set this profile for all users on this device"
+msgstr "Nastavit tento profil pro všechny uživatele tohoto zařízení"
 
 #: panels/color/cc-color-panel.ui:466
 msgid "_Enable"
 msgstr "Povo_lit"
 
 #: panels/color/cc-color-panel.ui:483
-msgid "_Add profile"
+msgid "_Add Profile"
 msgstr "Přid_at profil"
 
 #: panels/color/cc-color-panel.ui:490
@@ -1333,11 +1331,11 @@ msgid "Calibrate the device"
 msgstr "Kalibrovat zařízení"
 
 #: panels/color/cc-color-panel.ui:499
-msgid "_Remove profile"
+msgid "_Remove Profile"
 msgstr "Odeb_rat profil"
 
 #: panels/color/cc-color-panel.ui:506
-msgid "_View details"
+msgid "_View Details"
 msgstr "_Zobrazit detaily"
 
 #: panels/color/cc-color-panel.ui:519
@@ -3507,7 +3505,6 @@ msgid "Disable"
 msgstr "Zakázat"
 
 #: panels/network/connection-editor/ip4-page.ui:81
-#: panels/network/connection-editor/ip6-page.ui:92
 msgid "Shared to other computers"
 msgstr "Sdíleno s dalšími počítači"
 
@@ -3580,6 +3577,10 @@ msgstr "Metoda IPv_6"
 #: panels/network/connection-editor/ip6-page.ui:48
 msgid "Automatic, DHCP only"
 msgstr "Automatické, pouze DHCP"
+
+#: panels/network/connection-editor/ip6-page.ui:92
+msgid "Shared to other devices"
+msgstr "Sdíleno s dalšími zařízeními"
 
 #: panels/network/connection-editor/ip6-page.ui:142
 #: panels/network/connection-editor/ip6-page.ui:290
@@ -4669,8 +4670,8 @@ msgid "_Dim Screen"
 msgstr "_Stmívání obrazovky"
 
 #: panels/power/cc-power-panel.ui:138
-msgid "Reduce screen brightness when the computer is inactive"
-msgstr "Snížit jas obrazovky, když je počítač neaktivní"
+msgid "Reduce screen brightness when the device is inactive"
+msgstr "Snížit jas obrazovky, když je zařízení neaktivní"
 
 #: panels/power/cc-power-panel.ui:144
 msgid "Screen _Blank"
@@ -4693,8 +4694,8 @@ msgid "_Automatic Suspend"
 msgstr "_Automaticky uspat"
 
 #: panels/power/cc-power-panel.ui:162
-msgid "Pause the computer after a period of inactivity"
-msgstr "Pozastavit běh počítače po nějaké době nečinnosti"
+msgid "Pause the device after a period of inactivity"
+msgstr "Pozastavit běh zařízení po nějaké době nečinnosti"
 
 #: panels/power/cc-power-panel.ui:175
 msgid "Po_wer Button Behavior"
@@ -5700,15 +5701,30 @@ msgstr ""
 msgid "No sandboxed apps have asked for camera access"
 msgstr "Žádné aplikace v izolovaném prostředí nepožádaly o přístup ke kameře"
 
+#. translators: Text used in link to privacy policy
+#: panels/privacy/cc-diagnostics-page.c:122
+msgid "learn more"
+msgstr "dozvědět se více"
+
 #. translators: The first '%s' is the distributor's name, such as 'Fedora', the second '%s' is a link to the privacy policy
-#: panels/privacy/cc-diagnostics-page.c:124
+#: panels/privacy/cc-diagnostics-page.c:125
 #, c-format
 msgid ""
 "Sending reports of technical problems helps us improve %s. Reports are sent "
-"anonymously and are scrubbed of personal data. %s"
+"anonymously and are scrubbed of personal data – %s."
 msgstr ""
 "Díky odesílání hlášení o technických problémech se může %s vylepšovat. "
-"Hlášení jsou odesílána anonymně a jsou z nich odstraněny osobní údaje. %s"
+"Hlášení jsou odesílána anonymně a jsou z nich odstraněny osobní údaje – %s."
+
+#. translators: The '%s' is the distributor's name, such as 'Fedora'
+#: panels/privacy/cc-diagnostics-page.c:130
+#, c-format
+msgid ""
+"Sending reports of technical problems helps us improve %s. Reports are sent "
+"anonymously and are scrubbed of personal data."
+msgstr ""
+"Díky odesílání hlášení o technických problémech se může %s vylepšovat. "
+"Hlášení jsou odesílána anonymně a jsou z nich odstraněny osobní údaje."
 
 #: panels/privacy/cc-diagnostics-page.ui:4
 msgid "Diagnostics"
@@ -5755,12 +5771,12 @@ msgstr ""
 #. TRANSLATORS: this is the second section of description.
 #: panels/privacy/cc-firmware-security-boot-dialog.c:90
 msgid ""
-"Secure boot problems can often be resolved from your computer's UEFI "
-"firmware settings (BIOS) and your hardware manufacturer may provide "
-"information on how to do this."
+"Secure boot problems can often be resolved from your device's UEFI firmware "
+"settings (BIOS) and your hardware manufacturer may provide information on "
+"how to do this."
 msgstr ""
 "Problémy s bezpečným zaváděním se dají často vyřešit v nastaveních firmwaru "
-"UEFI vašeho počítače (dříve BIOS). Hledejte „Secure Boot“. Výrobce vašeho "
+"UEFI vašeho zařízení (dříve BIOS). Hledejte „Secure Boot“. Výrobce vašeho "
 "hardwaru by měl poskytovat návod, jak postupovat."
 
 #. TRANSLATORS: this is the third section of description.
@@ -5787,12 +5803,11 @@ msgstr ""
 #. TRANSLATORS: this is the second section of the description.
 #: panels/privacy/cc-firmware-security-boot-dialog.c:106
 msgid ""
-"Secure boot can often be turned on from your computer's UEFI firmware "
-"settings (BIOS). For help, contact your hardware manufacturer or IT support "
-"provider."
+"Secure boot can often be turned on from your device's UEFI firmware settings "
+"(BIOS). For help, contact your hardware manufacturer or IT support provider."
 msgstr ""
 "Bezpečné zavádění se obvykle zapíná v nastaveních firmwaru UEFI vašeho "
-"počítače (dříve BIOS). Hledejte „Secure Boot“. Ohledně pomoci kontaktujte "
+"zařízení (dříve BIOS). Hledejte „Secure Boot“. Ohledně pomoci kontaktujte "
 "výrobce vašeho hardwaru nebo poskytovatele technické podpory."
 
 #: panels/privacy/cc-firmware-security-boot-dialog.ui:55
@@ -6359,10 +6374,10 @@ msgstr "Zamykání obrazovky"
 
 #: panels/privacy/cc-screen-page.ui:13
 msgid ""
-"Automatically locking the screen prevents others from accessing the computer "
+"Automatically locking the screen prevents others from accessing the device "
 "while you're away"
 msgstr ""
-"Automatické zamykání obrazovky zabrání ostatním v přístupu k počítači, když "
+"Automatické zamykání obrazovky zabrání ostatním v přístupu k zařízení, když "
 "jste pryč"
 
 #: panels/privacy/cc-screen-page.ui:20
@@ -8065,11 +8080,11 @@ msgstr "Přihlášení otiskem prstu"
 
 #: panels/system/users/cc-fingerprint-dialog.ui:246
 msgid ""
-"Fingerprint login allows you to unlock and log into your computer with your "
+"Fingerprint login allows you to unlock and log into your device with your "
 "finger"
 msgstr ""
-"Pomocí přihlášení otiskem prstu můžete svůj počítač odemknout a přihlásit se "
-"do něj pouhým přiložením prstu."
+"Pomocí přihlášení otiskem prstu můžete své zařízení odemknout a přihlásit se "
+"do něj pouhým přiložením prstu"
 
 #: panels/system/users/cc-fingerprint-dialog.ui:273
 msgid "_Delete Fingerprints"
@@ -9215,19 +9230,19 @@ msgstr "Pocit z přítlaku _gumy"
 msgid "Eraser pressure"
 msgstr "Přítlak gumy"
 
-#: panels/wacom/cc-wacom-tool.c:361
+#: panels/wacom/cc-wacom-tool.c:359
 msgid "Airbrush stylus with pressure, tilt, and integrated slider"
 msgstr "Stylus Airbrush citlivý na přítlak, sklon a s integrovaným kolečkem"
 
-#: panels/wacom/cc-wacom-tool.c:363
+#: panels/wacom/cc-wacom-tool.c:361
 msgid "Art pen with pressure, tilt, and rotation"
 msgstr "Umělecké pero citlivé na přítlak, sklon a natočení"
 
-#: panels/wacom/cc-wacom-tool.c:365
+#: panels/wacom/cc-wacom-tool.c:363
 msgid "Stylus with pressure and tilt"
 msgstr "Stylus citlivý na přítlak a sklon"
 
-#: panels/wacom/cc-wacom-tool.c:367
+#: panels/wacom/cc-wacom-tool.c:365
 msgid "Stylus with pressure"
 msgstr "Stylus s přítlakem"
 
@@ -9802,7 +9817,7 @@ msgid "Settings is the primary interface for configuring your system."
 msgstr "Aplikace Nastavení je hlavním rozhraním pro nastavení vašeho systému."
 
 #. developer_name tag deprecated with Appstream 1.0
-#: shell/appdata/org.gnome.Settings.appdata.xml.in:38
+#: shell/appdata/org.gnome.Settings.appdata.xml.in:39
 msgid "The GNOME Project"
 msgstr "Projekt GNOME"
 
@@ -9993,6 +10008,9 @@ msgstr[2] "%u vstupů"
 #: subprojects/gvc/gvc-mixer-control.c:2882
 msgid "System Sounds"
 msgstr "Systémové zvuky"
+
+#~ msgid "_Add profile"
+#~ msgstr "Přid_at profil"
 
 #~ msgid "Device name copied"
 #~ msgstr "Byl zkopírován název zařízení"
