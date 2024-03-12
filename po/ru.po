@@ -24,8 +24,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2024-03-02 18:21+0000\n"
-"PO-Revision-Date: 2024-03-02 22:44+0300\n"
+"POT-Creation-Date: 2024-03-11 20:03+0000\n"
+"PO-Revision-Date: 2024-03-12 14:16+0300\n"
 "Last-Translator: Artur So <arturios2005@mail.ru>\n"
 "Language-Team: Русский <gnome-cyr@gnome.org>\n"
 "Language: ru\n"
@@ -220,7 +220,7 @@ msgstr "Получение результатов поиска в системе
 #: panels/keyboard/cc-xkb-modifier-dialog.c:342
 #: panels/keyboard/keyboard-shortcuts.c:367
 #: panels/system/users/cc-user-page.c:379
-#: panels/system/users/cc-user-page.c:745 panels/wwan/cc-wwan-device-page.c:477
+#: panels/system/users/cc-user-page.c:749 panels/wwan/cc-wwan-device-page.c:477
 #: subprojects/gvc/gvc-mixer-control.c:1908
 msgid "Disabled"
 msgstr "Выключено"
@@ -2992,6 +2992,8 @@ msgstr "Имя сети"
 #: panels/network/cc-wifi-hotspot-dialog.ui:92
 #: panels/printers/new-printer-dialog.ui:293
 #: panels/printers/pp-jobs-dialog.ui:54
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:110
+#: panels/system/remote-desktop/cc-remote-session-page.ui:108
 #: panels/system/users/cc-add-user-dialog.ui:150
 #: panels/wwan/cc-wwan-apn-dialog.ui:175
 msgid "Password"
@@ -4889,7 +4891,10 @@ msgstr ""
 
 #. Translators: This is a username on a print server.
 #: panels/printers/new-printer-dialog.ui:272
-#: panels/printers/pp-jobs-dialog.ui:42 panels/wwan/cc-wwan-apn-dialog.ui:150
+#: panels/printers/pp-jobs-dialog.ui:42
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:94
+#: panels/system/remote-desktop/cc-remote-session-page.ui:92
+#: panels/wwan/cc-wwan-apn-dialog.ui:150
 msgid "Username"
 msgstr "Имя пользователя"
 
@@ -6066,7 +6071,7 @@ msgstr "Недействительно"
 #. TRANSLATORS: Status of Parental Controls setup
 #: panels/privacy/cc-firmware-security-utils.c:45
 #: panels/system/users/cc-user-page.c:377
-#: panels/system/users/cc-user-page.c:745 panels/wwan/cc-wwan-device-page.c:475
+#: panels/system/users/cc-user-page.c:749 panels/wwan/cc-wwan-device-page.c:475
 msgid "Enabled"
 msgstr "Включено"
 
@@ -7567,17 +7572,145 @@ msgstr "Я_зык"
 msgid "Fo_rmats"
 msgstr "Фо_рматы"
 
+#: panels/system/remote-desktop/cc-desktop-sharing-page.c:364
+#: panels/system/remote-desktop/cc-remote-session-page.c:98
+msgid "Device address copied"
+msgstr "Адрес устройства скопирован"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.c:373
+#: panels/system/remote-desktop/cc-remote-session-page.c:107
+msgid "Port number copied"
+msgstr "Номер порта скопирован"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.c:384
+#: panels/system/remote-desktop/cc-remote-session-page.c:118
+msgid "Username copied"
+msgstr "Имя пользователя скопировано"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.c:395
+#: panels/system/remote-desktop/cc-remote-session-page.c:129
+msgid "Password copied"
+msgstr "Пароль скопирован"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:13
+msgid ""
+"Share your existing desktop with other devices. The remote connection uses "
+"the existing screen resolution"
+msgstr ""
+"Совместное использование рабочего стола с другими устройствами. При "
+"удаленном подключении используется текущее разрешение экрана"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:28
+msgid "_Desktop Sharing"
+msgstr "Общий доступ к _рабочему столу"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:34
+msgid "Remote _Control"
+msgstr "Удаленное _управление"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:36
+msgid "Allows desktop shares to control the screen"
+msgstr ""
+"Разрешает совместное использование рабочего стола для управления экраном"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:43
+#: panels/system/remote-desktop/cc-remote-session-page.ui:41
+msgid "How to Connect"
+msgstr "Как подключиться"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:44
+#: panels/system/remote-desktop/cc-remote-session-page.ui:42
+msgid ""
+"Use a remote desktop app to connect using the RDP protocol. Additional "
+"information about the device’s network location may also be required."
+msgstr ""
+"Используйте приложение для удаленного рабочего стола, чтобы подключиться по "
+"протоколу RDP. Также может потребоваться дополнительная информация о сетевом "
+"расположении устройства."
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:47
+#: panels/system/remote-desktop/cc-remote-session-page.ui:45
+msgid "_Hostname"
+msgstr "_Имя хоста"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:55
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:76
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:97
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:113
+#: panels/system/remote-desktop/cc-remote-session-page.ui:53
+#: panels/system/remote-desktop/cc-remote-session-page.ui:74
+#: panels/system/remote-desktop/cc-remote-session-page.ui:95
+#: panels/system/remote-desktop/cc-remote-session-page.ui:111
+#: panels/system/remote-login/cc-remote-login-page.ui:65
+msgid "Copy"
+msgstr "Копировать"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:68
+#: panels/system/remote-desktop/cc-remote-session-page.ui:66
+msgid "_Port"
+msgstr "П_орт"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:91
+#: panels/system/remote-desktop/cc-remote-session-page.ui:89
+msgid "Login Details"
+msgstr "Подробности входа"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:132
+#: panels/system/remote-desktop/cc-remote-session-page.ui:130
+msgid "_Generate New Password"
+msgstr "_Генерировать новый пароль"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:143
+#: panels/system/remote-desktop/cc-remote-session-page.ui:141
+msgid "_Verify Encryption"
+msgstr "_Проверить шифрование"
+
 #: panels/system/remote-desktop/cc-remote-desktop-page.ui:4
 msgid "Remote Desktop"
 msgstr "Удаленный рабочий стол"
 
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:23
+#: panels/system/remote-desktop/cc-remote-desktop-page.ui:39
 msgid "Desktop Sharing"
 msgstr "Общий доступ к рабочему столу"
 
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:32
+#: panels/system/remote-desktop/cc-remote-desktop-page.ui:48
+#: panels/system/remote-desktop/cc-remote-session-page.ui:33
 msgid "Remote Login"
-msgstr "Удалённая авторизация"
+msgstr "Удаленный вход"
+
+#: panels/system/remote-desktop/cc-remote-session-page.c:774
+#: panels/system/users/cc-user-page.c:772
+msgid "Some settings are locked"
+msgstr "Некоторые настройки заблокированы"
+
+#: panels/system/remote-desktop/cc-remote-session-page.ui:18
+msgid ""
+"Remotely connect to your user account when it isn’t being used. The display "
+"resolution can be set from the remote."
+msgstr ""
+"Удаленное подключение к учетной записи пользователя, когда она не "
+"используется. Разрешение дисплея можно настроить удаленно."
+
+#: panels/system/remote-desktop/cc-encryption-fingerprint-dialog.ui:20
+msgid "Encryption Fingerprint"
+msgstr "Отпечаток для шифрования"
+
+#: panels/system/remote-desktop/cc-encryption-fingerprint-dialog.ui:21
+msgid ""
+"The encryption fingerprint can be seen in connecting clients and should be "
+"identical"
+msgstr ""
+"Отпечаток для шифрования виден подключающимся клиентам и должен быть "
+"идентичным"
+
+#: panels/system/remote-desktop/org.gnome.controlcenter.remote-session-helper.policy.in.in:11
+msgid "Enable or disable remote sessions"
+msgstr "Включение или отключение удаленных сеансов"
+
+#: panels/system/remote-desktop/org.gnome.controlcenter.remote-session-helper.policy.in.in:12
+msgid "Authentication is required to enable or disable remote sessions"
+msgstr ""
+"Требуется аутентификация для включения или отключения удаленных сеансов"
 
 #: panels/system/remote-login/cc-remote-login-page.c:53
 msgid "Command copied"
@@ -7595,19 +7728,13 @@ msgstr "Доступ к этому устройству с помощью без
 msgid "SSH Login Command"
 msgstr "Команда входа в систему SSH"
 
-#: panels/system/remote-login/cc-remote-login-page.ui:65
-msgid "Copy"
-msgstr "Копировать"
-
 #: panels/system/remote-login/org.gnome.controlcenter.remote-login-helper.policy.in.in:11
 msgid "Enable or disable remote login"
-msgstr "Включение или отключение удалённого входа в систему"
+msgstr "Включение или отключение удаленного входа"
 
 #: panels/system/remote-login/org.gnome.controlcenter.remote-login-helper.policy.in.in:12
 msgid "Authentication is required to enable or disable remote login"
-msgstr ""
-"Для включения или выключения удалённого доступа необходимо выполнить "
-"проверку подлинности"
+msgstr "Требуется аутентификация для включения или отключения удаленного входа"
 
 #: panels/system/users/cc-add-user-dialog.c:159
 msgid "Failed to add account"
@@ -8085,10 +8212,6 @@ msgstr "Нет"
 msgid "Remove %s?"
 msgstr "Удалить %s?"
 
-#: panels/system/users/cc-user-page.c:768
-msgid "Some settings are locked"
-msgstr "Некоторые настройки заблокированы"
-
 #: panels/system/users/cc-user-page.ui:24
 #: panels/system/users/cc-user-page.ui:81
 #: panels/system/users/cc-user-page.ui:93
@@ -8151,15 +8274,15 @@ msgstr "Уда_лить файлы и настройки"
 msgid "Users"
 msgstr "Пользователи"
 
-#: panels/system/users/cc-users-page.ui:17
+#: panels/system/users/cc-users-page.ui:16
 msgid "Other Users"
 msgstr "Другие пользователи"
 
-#: panels/system/users/cc-users-page.ui:33
+#: panels/system/users/cc-users-page.ui:32
 msgid "_Add User…"
 msgstr "_Добавить пользователя…"
 
-#: panels/system/users/cc-users-page.ui:47
+#: panels/system/users/cc-users-page.ui:46
 msgid "Add Enterprise User"
 msgstr "Добавить корпоративного пользователя"
 
@@ -9148,20 +9271,20 @@ msgstr "Чувствительность нажатия _ластика"
 msgid "Eraser pressure"
 msgstr "Нажим ластика"
 
-#: panels/wacom/cc-wacom-tool.c:361
+#: panels/wacom/cc-wacom-tool.c:359
 msgid "Airbrush stylus with pressure, tilt, and integrated slider"
 msgstr ""
 "Стилус для аэрографа с функцией нажатия, наклона и встроенным слайдером"
 
-#: panels/wacom/cc-wacom-tool.c:363
+#: panels/wacom/cc-wacom-tool.c:361
 msgid "Art pen with pressure, tilt, and rotation"
 msgstr "Художественная ручка с функцией нажатия, наклона и вращения"
 
-#: panels/wacom/cc-wacom-tool.c:365
+#: panels/wacom/cc-wacom-tool.c:363
 msgid "Stylus with pressure and tilt"
 msgstr "Стилус с функцией нажатия и наклона"
 
-#: panels/wacom/cc-wacom-tool.c:367
+#: panels/wacom/cc-wacom-tool.c:365
 msgid "Stylus with pressure"
 msgstr "Стилус с функцией нажатия"
 
@@ -9738,7 +9861,7 @@ msgid "Settings is the primary interface for configuring your system."
 msgstr "Настройки — основной интерфейс для настройки вашей системы."
 
 #. developer_name tag deprecated with Appstream 1.0
-#: shell/appdata/org.gnome.Settings.appdata.xml.in:38
+#: shell/appdata/org.gnome.Settings.appdata.xml.in:39
 msgid "The GNOME Project"
 msgstr "Проект GNOME"
 
@@ -9934,17 +10057,42 @@ msgstr[2] "%u входов"
 msgid "System Sounds"
 msgstr "Системные звуки"
 
+#, fuzzy
+#~| msgid "Add Profile"
+#~ msgid "_Add Profile"
+#~ msgstr "Добавить профиль"
+
+#, fuzzy
+#~| msgid "Shared to other computers"
+#~ msgid "Shared to other devices"
+#~ msgstr "Общий доступ другим компьютерам"
+
+#, fuzzy
+#~| msgid "Learn more"
+#~ msgid "learn more"
+#~ msgstr "Узнать больше"
+
+#, fuzzy, c-format
+#~| msgid ""
+#~| "Sending reports of technical problems helps us improve %s. Reports are "
+#~| "sent anonymously and are scrubbed of personal data. %s"
+#~ msgid ""
+#~ "Sending reports of technical problems helps us improve %s. Reports are "
+#~ "sent anonymously and are scrubbed of personal data – %s."
+#~ msgstr ""
+#~ "Отправка сообщения о технических проблемах помогает нам улучшить %s. "
+#~ "Отчеты отправляются анонимно и не содержат персональных данных. %s"
+
+#~ msgid ""
+#~ "Use a remote desktop app to connect using the RDP protocol. Additional "
+#~ "information about the device's network location may also be required"
+#~ msgstr ""
+#~ "Используйте приложение для удаленного рабочего стола, чтобы подключиться "
+#~ "по протоколу RDP. Также может потребоваться дополнительная информация о "
+#~ "сетевом расположении устройства"
+
 #~ msgid "Device name copied"
 #~ msgstr "Имя устройства скопировано"
-
-#~ msgid "Device address copied"
-#~ msgstr "Адрес устройства скопирован"
-
-#~ msgid "Username copied"
-#~ msgstr "Имя пользователя скопировано"
-
-#~ msgid "Password copied"
-#~ msgstr "Пароль скопирован"
 
 #~ msgid "learn how to use it"
 #~ msgstr "узнайте, как им пользоваться"
@@ -9964,15 +10112,6 @@ msgstr "Системные звуки"
 #~ msgstr ""
 #~ "Включение или отключение подключений удаленного рабочего стола к этому "
 #~ "компьютеру"
-
-#~ msgid "Remote _Control"
-#~ msgstr "Удаленное _управление"
-
-#~ msgid "Allows remote connections to control the screen"
-#~ msgstr "Разрешить удаленное подключение для управления экраном"
-
-#~ msgid "How to Connect"
-#~ msgstr "Как подключиться"
 
 #~ msgid ""
 #~ "Connect to this computer using the device name or remote desktop address"
@@ -9995,19 +10134,6 @@ msgstr "Системные звуки"
 
 #~ msgid "_User Name"
 #~ msgstr "Имя п_ользователя"
-
-#~ msgid "_Verify Encryption"
-#~ msgstr "_Проверить шифрование"
-
-#~ msgid "Encryption Fingerprint"
-#~ msgstr "Отпечаток для шифрования"
-
-#~ msgid ""
-#~ "The encryption fingerprint can be seen in connecting clients and should "
-#~ "be identical"
-#~ msgstr ""
-#~ "Отпечаток для шифрования виден подключающимся клиентам и должен быть "
-#~ "идентичным"
 
 #~ msgid "Unable to find the domain. Maybe you misspelled it?"
 #~ msgstr "Не удалось найти домен. Может быть, он написан с ошибкой?"
@@ -10831,9 +10957,6 @@ msgstr "Системные звуки"
 #~ "%s имеет следующие встроенные разрешения. Они не могут быть изменены. "
 #~ "Если вас беспокоят эти разрешения, рассмотрите возможность удаления этого "
 #~ "приложения."
-
-#~ msgid "View Details"
-#~ msgstr "Подробности"
 
 #~ msgid "UTC%:::z"
 #~ msgstr "UTC%:::z"
