@@ -24,7 +24,7 @@
 G_BEGIN_DECLS
 
 #define CC_TYPE_SYSTEM_DETAILS_WINDOW (cc_system_details_window_get_type ())
-G_DECLARE_FINAL_TYPE (CcSystemDetailsWindow, cc_system_details_window, CC, SYSTEM_DETAILS_WINDOW, AdwWindow)
+G_DECLARE_FINAL_TYPE (CcSystemDetailsWindow, cc_system_details_window, CC, SYSTEM_DETAILS_WINDOW, AdwDialog)
 
 CcSystemDetailsWindow   *cc_system_details_window_new   (void);
 char                    *get_hardware_model_string      (void);

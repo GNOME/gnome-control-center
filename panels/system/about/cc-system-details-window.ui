@@ -1,15 +1,11 @@
 <?xml version="1.0"?>
 <interface>
-  <template class="CcSystemDetailsWindow" parent="AdwWindow">
+  <template class="CcSystemDetailsWindow" parent="AdwDialog">
     <property name="title" translatable="yes">System Details</property>
-    <property name="modal">True</property>
-    <property name="resizable">True</property>
-    <property name="hide-on-close">True</property>
-    <property name="destroy_with_parent">True</property>
     <property name="width-request">360</property>
     <property name="height-request">200</property>
-    <property name="default-width">640</property>
-    <property name="default-height">420</property>
+    <property name="content-width">640</property>
+    <property name="content-height">420</property>
     <child>
       <object class="AdwBreakpoint">
         <condition>max-width: 500sp</condition>
@@ -17,7 +13,7 @@
         <setter object="box" property="spacing">12</setter>
       </object>
     </child>
-    <property name="content">
+    <property name="child">
       <object class="AdwToastOverlay" id="toast_overlay">
         <property name="child">
           <object class="AdwToolbarView">

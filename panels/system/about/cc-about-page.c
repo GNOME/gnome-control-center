@@ -39,7 +39,7 @@ struct _CcAboutPage
   AdwActionRow    *os_name_row;
   AdwActionRow    *processor_row;
 
-  GtkWindow       *system_details_window;
+  AdwDialog       *system_details_window;
   guint            create_system_details_id;
 };
 
@@ -82,7 +82,7 @@ cc_about_page_create_system_details (CcAboutPage *self)
 {
   if (!self->system_details_window)
     {
-      self->system_details_window = GTK_WINDOW (cc_system_details_window_new ());
+      self->system_details_window = ADW_DIALOG (cc_system_details_window_new ());
       g_object_ref_sink (self->system_details_window);
     }
 
@@ -94,13 +94,9 @@ cc_about_page_create_system_details (CcAboutPage *self)
 static void
 cc_about_page_open_system_details (CcAboutPage *self)
 {
-  GtkNative *parent;
-
   cc_about_page_create_system_details (self);
 
-  parent = gtk_widget_get_native (GTK_WIDGET (self));
-  gtk_window_set_transient_for (self->system_details_window, GTK_WINDOW (parent));
-  gtk_window_present (GTK_WINDOW (self->system_details_window));
+  adw_dialog_present (self->system_details_window, GTK_WIDGET (self));
 }
 
 #if !defined(DISTRIBUTOR_LOGO) || defined(DARK_MODE_DISTRIBUTOR_LOGO)
@@ -163,7 +159,7 @@ cc_about_page_dispose (GObject *object)
   CcAboutPage *self = CC_ABOUT_PAGE (object);
 
   if (self->system_details_window)
-    gtk_window_destroy (self->system_details_window);
+    adw_dialog_close (self->system_details_window);
   g_clear_object (&self->system_details_window);
 
   g_clear_handle_id (&self->create_system_details_id, g_source_remove);

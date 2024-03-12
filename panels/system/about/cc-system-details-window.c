@@ -51,7 +51,7 @@
 
 struct _CcSystemDetailsWindow
 {
-  AdwWindow parent;
+  AdwDialog parent;
 
   AdwToastOverlay   *toast_overlay;
 
@@ -73,7 +73,7 @@ struct _CcSystemDetailsWindow
   CcInfoEntry       *kernel_row;
 };
 
-G_DEFINE_TYPE (CcSystemDetailsWindow, cc_system_details_window, ADW_TYPE_WINDOW)
+G_DEFINE_TYPE (CcSystemDetailsWindow, cc_system_details_window, ADW_TYPE_DIALOG)
 
 static char *
 get_renderer_from_session (void)
@@ -843,10 +843,10 @@ unset_focus (CcSystemDetailsWindow *self)
 {
   GtkWidget *focus;
 
-  focus = gtk_window_get_focus (GTK_WINDOW (self));
+  focus = adw_dialog_get_focus (ADW_DIALOG (self));
   if (GTK_IS_LABEL (focus))
     gtk_label_select_region (GTK_LABEL (focus), 0, 0);
-  gtk_window_set_focus (GTK_WINDOW (self), NULL);
+  adw_dialog_set_focus (ADW_DIALOG (self), NULL);
 }
 
 static void
@@ -872,8 +872,6 @@ cc_system_details_window_class_init (CcSystemDetailsWindowClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcSystemDetailsWindow, windowing_system_row);
 
   gtk_widget_class_bind_template_callback (widget_class, on_copy_button_clicked_cb);
-
-  gtk_widget_class_add_binding_action (widget_class, GDK_KEY_Escape, 0, "window.close", NULL);
 
   g_type_ensure (CC_TYPE_INFO_ENTRY);
 }
