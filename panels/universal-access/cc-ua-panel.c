@@ -106,6 +106,21 @@ cc_ua_panel_class_init (CcUaPanelClass *klass)
 }
 
 static void
+on_subpage_set (CcUaPanel *self)
+{
+  AdwNavigationPage *subpage;
+  g_autofree gchar *tag = NULL;
+
+  g_object_get (self, "subpage", &tag, NULL);
+  if (!tag)
+    return;
+
+  subpage = adw_navigation_view_find_page (self->main_nav_view, tag);
+  if (subpage)
+    adw_navigation_view_push (self->main_nav_view, subpage);
+}
+
+static void
 cc_ua_panel_init (CcUaPanel *self)
 {
   g_resources_register (cc_universal_access_get_resource ());
@@ -118,4 +133,6 @@ cc_ua_panel_init (CcUaPanel *self)
   g_settings_bind (self->a11y_settings, KEY_ALWAYS_SHOW_STATUS,
                    self->show_ua_menu_row, "active",
                    G_SETTINGS_BIND_DEFAULT);
+
+  g_signal_connect_object (self, "notify::subpage", G_CALLBACK (on_subpage_set), self, G_CONNECT_SWAPPED);
 }
