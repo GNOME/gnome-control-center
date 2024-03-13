@@ -13,10 +13,19 @@
     <property name="title" translatable="yes">Add User</property>
     <property name="default-width">500</property>
     <child>
-      <object class="GtkBox">
-        <property name="orientation">vertical</property>
-
+      <object class="GtkShortcutController">
+        <property name="scope">managed</property>
         <child>
+          <object class="GtkShortcut">
+            <property name="trigger">Escape</property>
+            <property name="action">action(window.close)</property>
+          </object>
+        </child>
+      </object>
+    </child>
+    <property name="content">
+      <object class="AdwToolbarView">
+        <child type="top">
           <object class="AdwHeaderBar">
             <property name="show-end-title-buttons">False</property>
             <property name="show-start-title-buttons">False</property>
@@ -56,7 +65,7 @@
             </child>
           </object>
         </child>
-        <child>
+        <property name="content">
           <object class="AdwPreferencesPage" id="local_page">
             <child>
               <object class="AdwPreferencesGroup">
@@ -279,9 +288,9 @@
               </object>
             </child>
           </object>
-        </child>
+        </property>
       </object>
-    </child>
+    </property>
   </template>
   <object class="GtkSizeGroup">
     <widgets>
