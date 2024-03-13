@@ -219,16 +219,10 @@
               <object class="AdwPreferencesGroup" id="output_no_devices_group">
                 <property name="title" translatable="yes">Output</property>
                 <child>
-                  <object class="AdwActionRow">
+                  <object class="CcListRow">
                     <property name="title" translatable="yes">Output Device</property>
-                    <child>
-                      <object class="GtkLabel">
-                        <property name="label" translatable="yes">No Output Devices</property>
-                        <style>
-                          <class name="dim-label"/>
-                        </style>
-                      </object>
-                    </child>
+                    <property name="secondary-label" translatable="yes">No Output Devices</property>
+                    <property name="activatable">False</property>
                   </object>
                 </child>
               </object>
@@ -349,16 +343,10 @@
               <object class="AdwPreferencesGroup" id="input_no_devices_group">
                 <property name="title" translatable="yes">Input</property>
                 <child>
-                  <object class="AdwActionRow">
+                  <object class="CcListRow">
                     <property name="title" translatable="yes">Input Device</property>
-                    <child>
-                      <object class="GtkLabel">
-                        <property name="label" translatable="yes">No Input Devices</property>
-                        <style>
-                          <class name="dim-label"/>
-                        </style>
-                      </object>
-                    </child>
+                    <property name="secondary-label" translatable="yes">No Input Devices</property>
+                    <property name="activatable">False</property>
                   </object>
                 </child>
               </object>
