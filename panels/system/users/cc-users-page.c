@@ -79,9 +79,7 @@ add_user (CcUsersPage *self)
 {
     CcAddUserDialog *dialog = cc_add_user_dialog_new (self->permission);
 
-    gtk_window_set_transient_for (GTK_WINDOW (dialog),
-                                  GTK_WINDOW (gtk_widget_get_native (GTK_WIDGET (self))));
-    gtk_window_present (GTK_WINDOW (dialog));
+    adw_dialog_present (ADW_DIALOG (dialog), GTK_WIDGET (self));
 }
 
 static void

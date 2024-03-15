@@ -8,22 +8,10 @@
       <column type="gchararray"/>
     </columns>
   </object>
-  <template class="CcAddUserDialog" parent="AdwWindow">
-    <property name="modal">True</property>
+  <template class="CcAddUserDialog" parent="AdwDialog">
     <property name="title" translatable="yes">Add User</property>
-    <property name="default-width">500</property>
-    <child>
-      <object class="GtkShortcutController">
-        <property name="scope">managed</property>
-        <child>
-          <object class="GtkShortcut">
-            <property name="trigger">Escape</property>
-            <property name="action">action(window.close)</property>
-          </object>
-        </child>
-      </object>
-    </child>
-    <property name="content">
+    <property name="content-width">500</property>
+    <property name="child">
       <object class="AdwToolbarView">
         <child type="top">
           <object class="AdwHeaderBar">
@@ -37,7 +25,7 @@
                 <property name="receives_default">True</property>
                 <property name="use_underline">True</property>
                 <property name="valign">center</property>
-                <signal name="clicked" handler="gtk_window_destroy" object="CcAddUserDialog"/>
+                <signal name="clicked" handler="adw_dialog_force_close" object="CcAddUserDialog"/>
                 <style>
                   <class name="text-button"/>
                 </style>

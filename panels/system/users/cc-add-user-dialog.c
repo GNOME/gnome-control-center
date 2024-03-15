@@ -38,7 +38,7 @@ static void   dialog_validate      (CcAddUserDialog *self);
 static void   add_button_clicked_cb (CcAddUserDialog *self);
 
 struct _CcAddUserDialog {
-        AdwWindow parent_instance;
+        AdwDialog parent_instance;
 
         GtkButton          *add_button;
         GtkSwitch          *local_account_type_switch;
@@ -74,7 +74,7 @@ struct _CcAddUserDialog {
         gboolean            local_valid_username;
 };
 
-G_DEFINE_TYPE (CcAddUserDialog, cc_add_user_dialog, ADW_TYPE_WINDOW);
+G_DEFINE_TYPE (CcAddUserDialog, cc_add_user_dialog, ADW_TYPE_DIALOG);
 
 static void
 show_error_dialog (CcAddUserDialog *self,
@@ -137,7 +137,7 @@ user_loaded_cb (CcAddUserDialog *self,
         act_user_set_password (user, password, "");
 
   self->user = g_object_ref (user);
-  gtk_window_close (GTK_WINDOW (self));
+  adw_dialog_close (ADW_DIALOG (self));
 }
 
 static void
