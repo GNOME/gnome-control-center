@@ -114,6 +114,9 @@ cc_util_get_smart_date (GDateTime *date)
         g_autoptr(GDateTime) local = NULL;
         GTimeSpan span;
 
+        if (date == NULL)
+          return NULL;
+
         /* Set today date */
         local = g_date_time_new_now_local ();
         today = g_date_time_new_local (g_date_time_get_year (local),
