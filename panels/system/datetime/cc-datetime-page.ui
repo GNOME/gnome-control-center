@@ -37,7 +37,6 @@
             <child>
               <object class="CcTimeEditor" id="time_editor">
                 <property name="halign">center</property>
-                <signal name="time-changed" handler="time_changed_cb" swapped="yes"/>
               </object>
             </child>
 
@@ -264,7 +263,6 @@
     <property name="model">
       <object class="GtkSingleSelection" id="month_model">
         <property name="autoselect">False</property>
-        <signal name="selection-changed" handler="on_month_selection_changed_cb" swapped="yes"/>
         <property name="model">
           <object class="GtkStringList">
             <items>
