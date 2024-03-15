@@ -304,6 +304,10 @@ queue_set_datetime (CcDateTimePage *self)
 {
   gint64 unixtime;
 
+  /* Don't set the time if we are using network time (NTP). */
+  if (gtk_switch_get_active (self->network_time_switch))
+    return;
+
   /* timedated expects number of microseconds since 1 Jan 1970 UTC */
   unixtime = g_date_time_to_unix (self->date);
 
@@ -831,10 +835,8 @@ cc_date_time_page_class_init (CcDateTimePageClass *klass)
 
   gtk_widget_class_bind_template_callback (widget_class, panel_tz_selection_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, list_box_row_activated);
-  gtk_widget_class_bind_template_callback (widget_class, time_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, change_clock_settings);
   gtk_widget_class_bind_template_callback (widget_class, on_date_box_row_activated_cb);
-  gtk_widget_class_bind_template_callback (widget_class, on_month_selection_changed_cb);
 
   bind_textdomain_codeset (GETTEXT_PACKAGE_TIMEZONES, "UTF-8");
 }
@@ -954,6 +956,11 @@ cc_date_time_page_init (CcDateTimePage *self)
   /* After the initial setup, so we can be sure that
    * the model is filled up */
   get_initial_timezone (self);
+
+  g_signal_connect_object (self->time_editor, "time-changed",
+                           G_CALLBACK (time_changed_cb), self, G_CONNECT_SWAPPED);
+  g_signal_connect_object (self->month_model, "selection-changed",
+                           G_CALLBACK (on_month_selection_changed_cb), self, G_CONNECT_SWAPPED);
 
   /* Watch changes of timedated remote service properties */
   g_signal_connect_object (self->dtm, "g-properties-changed",
