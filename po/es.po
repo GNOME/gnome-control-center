@@ -15,15 +15,16 @@
 # Jorge González <jorgegonz@svn.gnome.org>, 2007, 2008, 2009, 2010, 2011.
 # leo <daniel.mustieles@gmail.com>, 2022.
 # Daniel Mustieles <daniel.mustieles@gmail.com>, 2021-2024.
+# Daniel Mustieles García <daniel.mustieles@gmail.com>, 2024.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2024-03-04 05:06+0000\n"
-"PO-Revision-Date: 2024-03-04 10:54+0100\n"
-"Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
+"POT-Creation-Date: 2024-03-15 09:24+0000\n"
+"PO-Revision-Date: 2024-03-15 12:30+0100\n"
+"Last-Translator: Daniel Mustieles García <daniel.mustieles@gmail.com>\n"
 "Language-Team: Spanish - Spain <gnome-es-list@gnome.org>\n"
 "Language: es_ES\n"
 "MIME-Version: 1.0\n"
@@ -32,36 +33,36 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
 "X-Generator: Gtranslator 45.3\n"
 
-#: panels/applications/cc-applications-panel.c:783
+#: panels/applications/cc-applications-panel.c:784
 msgid "App is not sandboxed"
 msgstr "La aplicación no está aisladas"
 
-#: panels/applications/cc-applications-panel.c:828
+#: panels/applications/cc-applications-panel.c:829
 msgid "System Bus"
 msgstr "Bus del sistema"
 
-#: panels/applications/cc-applications-panel.c:828
-#: panels/applications/cc-applications-panel.c:830
-#: panels/applications/cc-applications-panel.c:843
-#: panels/applications/cc-applications-panel.c:848
+#: panels/applications/cc-applications-panel.c:829
+#: panels/applications/cc-applications-panel.c:831
+#: panels/applications/cc-applications-panel.c:844
+#: panels/applications/cc-applications-panel.c:849
 msgid "Full access"
 msgstr "Acceso completo"
 
-#: panels/applications/cc-applications-panel.c:830
+#: panels/applications/cc-applications-panel.c:831
 msgid "Session Bus"
 msgstr "Bus de sesión"
 
-#: panels/applications/cc-applications-panel.c:834
+#: panels/applications/cc-applications-panel.c:835
 #: panels/privacy/cc-bolt-page.ui:240 panels/privacy/cc-bolt-page.ui:284
 #: panels/privacy/cc-privacy-panel.ui:74
 msgid "Devices"
 msgstr "Dispositivos"
 
-#: panels/applications/cc-applications-panel.c:834
+#: panels/applications/cc-applications-panel.c:835
 msgid "Full access to /dev"
 msgstr "Acceso completo a /dev"
 
-#: panels/applications/cc-applications-panel.c:838
+#: panels/applications/cc-applications-panel.c:839
 #: panels/network/cc-network-panel.ui:8
 #: panels/network/gnome-network-panel.desktop.in:3
 #: panels/network/network-mobile.ui:235 panels/wwan/cc-wwan-device-page.ui:61
@@ -69,38 +70,38 @@ msgstr "Acceso completo a /dev"
 msgid "Network"
 msgstr "Red"
 
-#: panels/applications/cc-applications-panel.c:838
+#: panels/applications/cc-applications-panel.c:839
 msgid "Has network access"
 msgstr "Tiene acceso a la red"
 
-#: panels/applications/cc-applications-panel.c:843
-#: panels/applications/cc-applications-panel.c:845
+#: panels/applications/cc-applications-panel.c:844
+#: panels/applications/cc-applications-panel.c:846
 #: panels/search/cc-search-locations-dialog.c:412
 msgid "Home"
 msgstr "Carpeta personal"
 
-#: panels/applications/cc-applications-panel.c:845
-#: panels/applications/cc-applications-panel.c:850
+#: panels/applications/cc-applications-panel.c:846
+#: panels/applications/cc-applications-panel.c:851
 msgid "Read-only"
 msgstr "Sólo lectura"
 
-#: panels/applications/cc-applications-panel.c:848
-#: panels/applications/cc-applications-panel.c:850
+#: panels/applications/cc-applications-panel.c:849
+#: panels/applications/cc-applications-panel.c:851
 msgid "File System"
 msgstr "Sistema de achivos"
 
-#: panels/applications/cc-applications-panel.c:854
+#: panels/applications/cc-applications-panel.c:855
 #: panels/keyboard/01-launchers.xml.in:6
 #: shell/appdata/org.gnome.Settings.appdata.xml.in:7 shell/cc-window.c:775
 #: shell/cc-window.ui:20 shell/org.gnome.Settings.desktop.in:3
 msgid "Settings"
 msgstr "Configuración"
 
-#: panels/applications/cc-applications-panel.c:854
+#: panels/applications/cc-applications-panel.c:855
 msgid "Can change settings"
 msgstr "Puede cambiar la configuración"
 
-#: panels/applications/cc-applications-panel.c:856
+#: panels/applications/cc-applications-panel.c:857
 #, c-format
 msgid ""
 "<b>%s</b> requires access to the following system resources. To stop this "
@@ -109,24 +110,26 @@ msgstr ""
 "<b>%s</b> necesita acceso a los siguientes recursos del sistema. Para "
 "revocar este acceso se debe quitar la aplicación."
 
-#: panels/applications/cc-applications-panel.c:1188
-#, c-format
-msgid "%u file and link type that is opened by the app"
-msgid_plural "%u file and link types that are opened by the app"
-msgstr[0] "%u tipo de archivo y enlace abierto por esta aplicación"
-msgstr[1] "%u tipos de archivos y enlaces abiertos por esta aplicación"
+#: panels/applications/cc-applications-panel.c:1026
+msgid "Remove Link Type"
+msgstr "Quitar tipo de enlace"
 
-#: panels/applications/cc-applications-panel.c:1195
+#: panels/applications/cc-applications-panel.c:1058
+msgid "Remove File Type"
+msgstr "Quitar tipo de archivo"
+
+#: panels/applications/cc-applications-panel.c:1191
+#, c-format
+msgid "%u type"
+msgid_plural "%u types"
+msgstr[0] "tipo %u"
+msgstr[1] "tipos %u"
+
+#: panels/applications/cc-applications-panel.c:1198
 #, c-format
 msgid "<b>%s</b> is used to open the following types of files and links."
 msgstr ""
 "<b>%s</b> se usa para abrir los siguientes tipos de archivos y enlaces."
-
-#. Translators: '%s' is the formatted size, e.g. "26.2 MB"
-#: panels/applications/cc-applications-panel.c:1261
-#, c-format
-msgid "%s of disk space used"
-msgstr "%s de espacio de disco usado"
 
 #: panels/applications/cc-applications-panel.ui:10
 #: panels/applications/gnome-applications-panel.desktop.in:3
@@ -141,36 +144,36 @@ msgstr "Buscar aplicaciones"
 msgid "_Default Apps"
 msgstr "Aplicaciones pre_determinadas"
 
-#: panels/applications/cc-applications-panel.ui:87
+#: panels/applications/cc-applications-panel.ui:62
 msgid "No Apps Found"
 msgstr "No se han encontrado aplicaciones"
 
-#: panels/applications/cc-applications-panel.ui:99
+#: panels/applications/cc-applications-panel.ui:65
 msgid "_Find in Software"
 msgstr "_Buscar en Software"
 
-#: panels/applications/cc-applications-panel.ui:139
+#: panels/applications/cc-applications-panel.ui:101
 #: panels/applications/cc-default-apps-page.ui:4
 msgid "Default Apps"
 msgstr "Aplicaciones predeterminadas"
 
-#: panels/applications/cc-applications-panel.ui:157
+#: panels/applications/cc-applications-panel.ui:119
 msgid "Removable Media"
 msgstr "Soportes extraíbles"
 
-#: panels/applications/cc-applications-panel.ui:160
+#: panels/applications/cc-applications-panel.ui:122
 msgid "Automat_ically Launch Apps"
 msgstr "Lanzar apl_icaciones automáticamente"
 
-#: panels/applications/cc-applications-panel.ui:161
+#: panels/applications/cc-applications-panel.ui:123
 msgid "Start apps when media is connected or inserted"
 msgstr "Lanzar aplicaciones cuando se conecta o inserta un medio"
 
-#: panels/applications/cc-applications-panel.ui:182
+#: panels/applications/cc-applications-panel.ui:144
 msgid "App Settings"
 msgstr "Configuración de la aplicación"
 
-#: panels/applications/cc-applications-panel.ui:202
+#: panels/applications/cc-applications-panel.ui:164
 msgid ""
 "App settings cannot be fully enforced for apps which are not sandboxed. "
 "These apps may use permissions which are not shown."
@@ -179,26 +182,26 @@ msgstr ""
 "aquellas que están aisladas. estas aplicaciones pueden usar permisos que no "
 "se muestran."
 
-#: panels/applications/cc-applications-panel.ui:245
+#: panels/applications/cc-applications-panel.ui:207
 #: panels/printers/pp-details-dialog.c:267
 #: panels/sharing/cc-sharing-panel.c:240
 msgid "_Open"
 msgstr "_Abrir"
 
-#: panels/applications/cc-applications-panel.ui:257
+#: panels/applications/cc-applications-panel.ui:219
 msgid "App _Details"
 msgstr "_Detalles de la aplicación"
 
-#: panels/applications/cc-applications-panel.ui:275
+#: panels/applications/cc-applications-panel.ui:237
 msgid "Permissions"
 msgstr "Permisos"
 
 #. Translators: This row shows/sets whether the app shown in this page can add results to the GNOME Shell search results. Internally this enables/disables the app's Shell Search Provider
-#: panels/applications/cc-applications-panel.ui:278
+#: panels/applications/cc-applications-panel.ui:240
 msgid "_Search"
 msgstr "_Buscar"
 
-#: panels/applications/cc-applications-panel.ui:279
+#: panels/applications/cc-applications-panel.ui:241
 msgid "Receive system searches and send results"
 msgstr "Recibir búsquedas del sistema y enviar los resultados"
 
@@ -207,173 +210,181 @@ msgstr "Recibir búsquedas del sistema y enviar los resultados"
 #.
 #. translators:
 #. * The device has been disabled
-#: panels/applications/cc-applications-panel.ui:288
-#: panels/applications/cc-applications-panel.ui:335
-#: panels/applications/cc-applications-panel.ui:357
-#: panels/applications/cc-applications-panel.ui:372
-#: panels/applications/cc-applications-panel.ui:387
+#: panels/applications/cc-applications-panel.ui:250
+#: panels/applications/cc-applications-panel.ui:297
+#: panels/applications/cc-applications-panel.ui:319
+#: panels/applications/cc-applications-panel.ui:334
+#: panels/applications/cc-applications-panel.ui:349
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:123
 #: panels/keyboard/cc-xkb-modifier-dialog.c:342
 #: panels/keyboard/keyboard-shortcuts.c:367
 #: panels/system/users/cc-user-page.c:379
 #: panels/system/users/cc-user-page.c:749 panels/wwan/cc-wwan-device-page.c:477
-#: subprojects/gvc/gvc-mixer-control.c:1908
+#: subprojects/gvc/gvc-mixer-control.c:1872
 msgid "Disabled"
 msgstr "Desactivado"
 
-#: panels/applications/cc-applications-panel.ui:293
+#: panels/applications/cc-applications-panel.ui:255
 msgid "_Notifications"
 msgstr "_Notificaciones"
 
-#: panels/applications/cc-applications-panel.ui:294
+#: panels/applications/cc-applications-panel.ui:256
 msgid "Show system notifications"
 msgstr "Mostrar notificaciones del sistema"
 
-#: panels/applications/cc-applications-panel.ui:301
+#: panels/applications/cc-applications-panel.ui:263
 msgid "_Run in Background"
 msgstr "_Ejecutar en segundo plano"
 
-#: panels/applications/cc-applications-panel.ui:302
+#: panels/applications/cc-applications-panel.ui:264
 msgid "Allow activity when the app is closed"
 msgstr "Permitir la actividad cuando la aplicación está cerrada"
 
-#: panels/applications/cc-applications-panel.ui:309
+#: panels/applications/cc-applications-panel.ui:271
 msgid "Scr_eenshots"
 msgstr "_Capturas de pantalla"
 
-#: panels/applications/cc-applications-panel.ui:310
+#: panels/applications/cc-applications-panel.ui:272
 msgid "Take pictures of the screen at any time"
 msgstr "Hacer fotos de la pantalla en cualquier momento"
 
-#: panels/applications/cc-applications-panel.ui:317
+#: panels/applications/cc-applications-panel.ui:279
 msgid "Change _Wallpaper"
 msgstr "Cambiar el _fondo"
 
-#: panels/applications/cc-applications-panel.ui:318
+#: panels/applications/cc-applications-panel.ui:280
 msgid "Change the desktop wallpaper"
 msgstr "Cambiar el fondo del _escritorio"
 
-#: panels/applications/cc-applications-panel.ui:325
-#: panels/applications/cc-applications-panel.ui:333
+#: panels/applications/cc-applications-panel.ui:287
+#: panels/applications/cc-applications-panel.ui:295
 msgid "So_unds"
 msgstr "S_onidos"
 
-#: panels/applications/cc-applications-panel.ui:326
-#: panels/applications/cc-applications-panel.ui:334
+#: panels/applications/cc-applications-panel.ui:288
+#: panels/applications/cc-applications-panel.ui:296
 msgid "Reproduce sounds"
 msgstr "Reproducir sonidos"
 
-#: panels/applications/cc-applications-panel.ui:340
+#: panels/applications/cc-applications-panel.ui:302
 msgid "_Inhibit Shortcuts"
 msgstr "_Inhibir atajos"
 
-#: panels/applications/cc-applications-panel.ui:341
+#: panels/applications/cc-applications-panel.ui:303
 msgid "Block standard keyboard shortcuts"
 msgstr "Bloquear los atajos estándar del teclado"
 
-#: panels/applications/cc-applications-panel.ui:348
+#: panels/applications/cc-applications-panel.ui:310
 msgid "Camera"
 msgstr "Cámara"
 
-#: panels/applications/cc-applications-panel.ui:349
-#: panels/applications/cc-applications-panel.ui:356
+#: panels/applications/cc-applications-panel.ui:311
+#: panels/applications/cc-applications-panel.ui:318
 msgid "Take pictures with the camera"
 msgstr "Hacer fotos con la cámara"
 
-#: panels/applications/cc-applications-panel.ui:355
+#: panels/applications/cc-applications-panel.ui:317
 msgid "C_amera"
 msgstr "Cá_mara"
 
-#: panels/applications/cc-applications-panel.ui:362
-#: panels/applications/cc-applications-panel.ui:370
+#: panels/applications/cc-applications-panel.ui:324
+#: panels/applications/cc-applications-panel.ui:332
 msgid "_Microphone"
 msgstr "_Micró_fono"
 
-#: panels/applications/cc-applications-panel.ui:363
-#: panels/applications/cc-applications-panel.ui:371
+#: panels/applications/cc-applications-panel.ui:325
+#: panels/applications/cc-applications-panel.ui:333
 msgid "Record audio with the microphone"
 msgstr "Grabar sonido con el micrófono"
 
-#: panels/applications/cc-applications-panel.ui:377
-#: panels/applications/cc-applications-panel.ui:385
+#: panels/applications/cc-applications-panel.ui:339
+#: panels/applications/cc-applications-panel.ui:347
 msgid "_Location Services"
 msgstr "Servicios de ubicación"
 
-#: panels/applications/cc-applications-panel.ui:378
-#: panels/applications/cc-applications-panel.ui:386
+#: panels/applications/cc-applications-panel.ui:340
+#: panels/applications/cc-applications-panel.ui:348
 msgid "Access device location data"
 msgstr "Acceder a datos de la ubicación del dispositivo"
 
-#: panels/applications/cc-applications-panel.ui:397
+#: panels/applications/cc-applications-panel.ui:359
 msgid "Re_quired Access"
 msgstr "Acceso re_querido"
 
-#: panels/applications/cc-applications-panel.ui:398
+#: panels/applications/cc-applications-panel.ui:360
 msgid "System access that is required by the app"
 msgstr "Acceso al sistema requerido por esta aplicación"
 
-#: panels/applications/cc-applications-panel.ui:409
+#: panels/applications/cc-applications-panel.ui:371
 #: panels/mouse/cc-mouse-panel.ui:66
 #: panels/multitasking/cc-multitasking-panel.ui:15
 #: panels/power/cc-power-panel.ui:171
 msgid "General"
 msgstr "General"
 
-#: panels/applications/cc-applications-panel.ui:412
-msgid "_File &amp; Link Associations"
-msgstr "Asociaciones de archivos y enlaces"
+#: panels/applications/cc-applications-panel.ui:374
+msgid "_Files &amp; Links"
+msgstr "Archivos y enlaces"
 
-#: panels/applications/cc-applications-panel.ui:420
+#: panels/applications/cc-applications-panel.ui:375
+msgid "File and link types that are opened by the app"
+msgstr "Tipos de archivos y enlaces abiertos por esta aplicación"
+
+#: panels/applications/cc-applications-panel.ui:382
 msgid "S_torage"
 msgstr "Almacenamien_to"
 
-#: panels/applications/cc-applications-panel.ui:443
+#: panels/applications/cc-applications-panel.ui:383
+msgid "Disk space being used"
+msgstr "Espacio de disco usado"
+
+#: panels/applications/cc-applications-panel.ui:405
 msgid "Required Access"
 msgstr "Acceso requerido"
 
-#: panels/applications/cc-applications-panel.ui:489
+#: panels/applications/cc-applications-panel.ui:451
 msgid "File & Link Associations"
 msgstr "Asociaciones de archivos y enlaces"
 
-#: panels/applications/cc-applications-panel.ui:518
+#: panels/applications/cc-applications-panel.ui:480
 msgid "File Types"
 msgstr "Tipos de archivos"
 
-#: panels/applications/cc-applications-panel.ui:524
+#: panels/applications/cc-applications-panel.ui:486
 msgid "Link Types"
 msgstr "Tipos de enlaces"
 
-#: panels/applications/cc-applications-panel.ui:534
+#: panels/applications/cc-applications-panel.ui:496
 msgid "_Reset"
 msgstr "_Reiniciar"
 
-#: panels/applications/cc-applications-panel.ui:555
+#: panels/applications/cc-applications-panel.ui:517
 msgid "Storage"
 msgstr "Almacenamiento"
 
-#: panels/applications/cc-applications-panel.ui:580
+#: panels/applications/cc-applications-panel.ui:542
 msgid "How much disk space this app is occupying with app data and caches"
 msgstr ""
 "Cuánto espacio en disco está usando esta aplicación incluyendo los datos de "
 "la aplicación y las cachés"
 
-#: panels/applications/cc-applications-panel.ui:585
+#: panels/applications/cc-applications-panel.ui:547
 msgid "App"
 msgstr "Aplicación"
 
-#: panels/applications/cc-applications-panel.ui:591
+#: panels/applications/cc-applications-panel.ui:553
 msgid "Data"
 msgstr "Datos"
 
-#: panels/applications/cc-applications-panel.ui:597
+#: panels/applications/cc-applications-panel.ui:559
 msgid "Cache"
 msgstr "Caché"
 
-#: panels/applications/cc-applications-panel.ui:603
+#: panels/applications/cc-applications-panel.ui:565
 msgid "<b>Total</b>"
 msgstr "<b>Total</b>"
 
-#: panels/applications/cc-applications-panel.ui:613
+#: panels/applications/cc-applications-panel.ui:575
 msgid "_Clear Cache"
 msgstr "_Limpiar la caché"
 
@@ -991,7 +1002,7 @@ msgstr "Calibración de la pantalla"
 #: panels/printers/pp-details-dialog.c:266 panels/privacy/cc-usage-page.c:136
 #: panels/sharing/cc-sharing-panel.c:239
 #: panels/system/region/cc-format-chooser.ui:24
-#: panels/system/users/cc-add-user-dialog.ui:25
+#: panels/system/users/cc-add-user-dialog.ui:34
 #: panels/system/users/cc-enterprise-login-dialog.ui:58
 #: panels/system/users/cc-avatar-chooser.c:92
 #: panels/system/users/cc-fingerprint-dialog.ui:32
@@ -1148,8 +1159,7 @@ msgid "The device type is not currently supported."
 msgstr "El tipo de dispositivo actualmente no está soportado."
 
 #. Translators: This will be presented as the text of a link to the documentation
-#. translators: Text used in link to privacy policy
-#: panels/color/cc-color-panel.c:1991 panels/privacy/cc-diagnostics-page.c:122
+#: panels/color/cc-color-panel.c:1991
 msgid "Learn more"
 msgstr "Aprender más"
 
@@ -1180,9 +1190,8 @@ msgstr ""
 "perfil de color."
 
 #: panels/color/cc-color-panel.ui:28
-msgid ""
-"You will not be able to use your computer while calibration takes place."
-msgstr "No podrá usar su equipo mientras se realiza la calibración."
+msgid "You will not be able to use your device while calibration takes place."
+msgstr "No podrá usar su equipo mientras se realiza el calibrado."
 
 #. This is the approximate time it takes to calibrate the display.
 #: panels/color/cc-color-panel.ui:40
@@ -1248,7 +1257,7 @@ msgstr "Nombre del perfil"
 
 #: panels/color/cc-color-panel.ui:222
 msgid ""
-"You can use a color profile on different computers, or even create profiles "
+"You can use a color profile on different devices, or even create profiles "
 "for different lighting conditions."
 msgstr ""
 "Puede usar un perfil de color en diferentes equipos, o incluso crear "
@@ -1267,7 +1276,7 @@ msgid "Profile successfully created!"
 msgstr "Perfil creado correctamente."
 
 #: panels/color/cc-color-panel.ui:290
-msgid "Copy profile"
+msgid "Copy Profile"
 msgstr "Copiar perfil"
 
 #: panels/color/cc-color-panel.ui:296
@@ -1304,18 +1313,18 @@ msgstr "_Importar archivo…"
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:33
 #: panels/network/connection-editor/net-connection-editor.c:653
 #: panels/printers/new-printer-dialog.ui:85
-#: panels/system/users/cc-add-user-dialog.ui:39
+#: panels/system/users/cc-add-user-dialog.ui:48
 #: panels/system/users/cc-enterprise-login-dialog.ui:66
 msgid "_Add"
 msgstr "_Añadir"
 
 #: panels/color/cc-color-panel.ui:457
-msgid "_Set for all users"
+msgid "_Set for All Users"
 msgstr "_Establecer para todos los usuarios"
 
 #: panels/color/cc-color-panel.ui:459 panels/color/cc-color-panel.ui:468
 #: panels/color/cc-color-panel.ui:469
-msgid "Set this profile for all users on this computer"
+msgid "Set this profile for all users on this device"
 msgstr "Establecer este perfil para todos los usuarios de este equipo"
 
 #: panels/color/cc-color-panel.ui:466
@@ -1323,7 +1332,7 @@ msgid "_Enable"
 msgstr "_Activar"
 
 #: panels/color/cc-color-panel.ui:483
-msgid "_Add profile"
+msgid "_Add Profile"
 msgstr "_Añadir perfil"
 
 #: panels/color/cc-color-panel.ui:490
@@ -1335,11 +1344,11 @@ msgid "Calibrate the device"
 msgstr "Calibrar el dispositivo"
 
 #: panels/color/cc-color-panel.ui:499
-msgid "_Remove profile"
+msgid "_Remove Profile"
 msgstr "_Quitar perfil"
 
 #: panels/color/cc-color-panel.ui:506
-msgid "_View details"
+msgid "_View Details"
 msgstr "_Ver detalles"
 
 #: panels/color/cc-color-panel.ui:519
@@ -2391,7 +2400,6 @@ msgstr ""
 
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:131
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:233
-#: panels/keyboard/cc-keyboard-shortcut-row.ui:25
 msgid "Reset"
 msgstr "Reiniciar"
 
@@ -2432,8 +2440,8 @@ msgid "Add a Shortcut"
 msgstr "Añadir un atajo"
 
 #: panels/keyboard/cc-keyboard-shortcut-row.ui:23
-msgid "Reset the shortcut to its default value"
-msgstr "Restablecer el valor predeterminado del atajo"
+msgid "Reset Shortcut"
+msgstr "Restablecer atajo"
 
 #: panels/keyboard/gnome-keyboard-panel.desktop.in:3
 msgid "Keyboard"
@@ -2992,7 +3000,7 @@ msgstr "Nombre de red"
 #: panels/printers/pp-jobs-dialog.ui:54
 #: panels/system/remote-desktop/cc-desktop-sharing-page.ui:110
 #: panels/system/remote-desktop/cc-remote-session-page.ui:108
-#: panels/system/users/cc-add-user-dialog.ui:150
+#: panels/system/users/cc-add-user-dialog.ui:159
 #: panels/wwan/cc-wwan-apn-dialog.ui:175
 msgid "Password"
 msgstr "Contraseña"
@@ -3088,7 +3096,7 @@ msgstr "_Seguridad 802.1x"
 #: panels/network/connection-editor/bluetooth-page.ui:16
 #: panels/network/connection-editor/ethernet-page.ui:27
 #: panels/network/connection-editor/vpn-page.ui:23
-#: panels/system/users/cc-add-user-dialog.ui:66
+#: panels/system/users/cc-add-user-dialog.ui:75
 #: panels/system/users/cc-user-page.ui:84
 msgid "_Name"
 msgstr "_Nombre"
@@ -3498,7 +3506,6 @@ msgid "Disable"
 msgstr "Desactivar"
 
 #: panels/network/connection-editor/ip4-page.ui:81
-#: panels/network/connection-editor/ip6-page.ui:92
 msgid "Shared to other computers"
 msgstr "Compartida con otros equipos"
 
@@ -3571,6 +3578,10 @@ msgstr "Método IPv_6"
 #: panels/network/connection-editor/ip6-page.ui:48
 msgid "Automatic, DHCP only"
 msgstr "Automático, DHCP únicamente"
+
+#: panels/network/connection-editor/ip6-page.ui:92
+msgid "Shared to other devices"
+msgstr "Compartida con otros equipos"
 
 #: panels/network/connection-editor/ip6-page.ui:142
 #: panels/network/connection-editor/ip6-page.ui:290
@@ -3731,7 +3742,6 @@ msgstr "No hay pares configurados"
 #: panels/network/connection-editor/wireguard-peer.ui:46
 #: panels/network/net-device-ethernet.c:326
 #: panels/network/network-bluetooth.ui:19 panels/network/network-mobile.ui:329
-#: panels/network/network-vpn.ui:21
 msgid "Options…"
 msgstr "Opciones…"
 
@@ -3912,6 +3922,10 @@ msgstr "Activar"
 #: panels/network/network-vpn.ui:11
 msgid "Turn VPN connection off"
 msgstr "Cerrar la conexión VPN"
+
+#: panels/network/network-vpn.ui:17
+msgid "VPN Options"
+msgstr "Opciones de VPN"
 
 #: panels/network/network-wifi.ui:34
 msgctxt "Wi-Fi Hotspot"
@@ -4658,7 +4672,7 @@ msgid "_Dim Screen"
 msgstr "_Oscurecer la pantalla"
 
 #: panels/power/cc-power-panel.ui:138
-msgid "Reduce screen brightness when the computer is inactive"
+msgid "Reduce screen brightness when the device is inactive"
 msgstr "Reduce el brillo de la pantalla cuando el equipo no está activo"
 
 #: panels/power/cc-power-panel.ui:144
@@ -4682,7 +4696,7 @@ msgid "_Automatic Suspend"
 msgstr "Suspender _automáticamente"
 
 #: panels/power/cc-power-panel.ui:162
-msgid "Pause the computer after a period of inactivity"
+msgid "Pause the device after a period of inactivity"
 msgstr "Pausa el equipo después de un período de inactividad"
 
 #: panels/power/cc-power-panel.ui:175
@@ -5685,15 +5699,30 @@ msgstr ""
 msgid "No sandboxed apps have asked for camera access"
 msgstr "Ninguna aplicación aislada ha solicitado acceso a la cámara"
 
+#. translators: Text used in link to privacy policy
+#: panels/privacy/cc-diagnostics-page.c:122
+msgid "learn more"
+msgstr "aprender más"
+
 #. translators: The first '%s' is the distributor's name, such as 'Fedora', the second '%s' is a link to the privacy policy
-#: panels/privacy/cc-diagnostics-page.c:124
+#: panels/privacy/cc-diagnostics-page.c:125
 #, c-format
 msgid ""
 "Sending reports of technical problems helps us improve %s. Reports are sent "
-"anonymously and are scrubbed of personal data. %s"
+"anonymously and are scrubbed of personal data – %s."
 msgstr ""
 "Enviar informes de problemas técnicos ayuda a mejorar %s. Los informes se "
-"envían anónimamente y no contienen datos personales. %s"
+"envían anónimamente y no contienen datos personales - %s"
+
+#. translators: The '%s' is the distributor's name, such as 'Fedora'
+#: panels/privacy/cc-diagnostics-page.c:130
+#, c-format
+msgid ""
+"Sending reports of technical problems helps us improve %s. Reports are sent "
+"anonymously and are scrubbed of personal data."
+msgstr ""
+"Enviar informes de problemas técnicos ayuda a mejorar %s. Los informes se "
+"envían anónimamente y no contienen datos personales."
 
 #: panels/privacy/cc-diagnostics-page.ui:4
 msgid "Diagnostics"
@@ -5741,9 +5770,9 @@ msgstr ""
 #. TRANSLATORS: this is the second section of description.
 #: panels/privacy/cc-firmware-security-boot-dialog.c:90
 msgid ""
-"Secure boot problems can often be resolved from your computer's UEFI "
-"firmware settings (BIOS) and your hardware manufacturer may provide "
-"information on how to do this."
+"Secure boot problems can often be resolved from your device's UEFI firmware "
+"settings (BIOS) and your hardware manufacturer may provide information on "
+"how to do this."
 msgstr ""
 "Los problemas del arranque seguro se pueden resolver a menudo desde la "
 "configuración del firmware UEFI del equipo (BIOS) y su fabricante puede "
@@ -5773,9 +5802,8 @@ msgstr ""
 #. TRANSLATORS: this is the second section of the description.
 #: panels/privacy/cc-firmware-security-boot-dialog.c:106
 msgid ""
-"Secure boot can often be turned on from your computer's UEFI firmware "
-"settings (BIOS). For help, contact your hardware manufacturer or IT support "
-"provider."
+"Secure boot can often be turned on from your device's UEFI firmware settings "
+"(BIOS). For help, contact your hardware manufacturer or IT support provider."
 msgstr ""
 "El arranque seguro se puede activar desde la configuración del firmware UEFI "
 "del equipo (BIOS). Para obtener ayuda contacte con el fabricante del "
@@ -6347,7 +6375,7 @@ msgstr "Bloqueo de pantalla"
 
 #: panels/privacy/cc-screen-page.ui:13
 msgid ""
-"Automatically locking the screen prevents others from accessing the computer "
+"Automatically locking the screen prevents others from accessing the device "
 "while you're away"
 msgstr ""
 "Bloquear la pantalla automáticamente evita que otros puedan acceder al "
@@ -6965,6 +6993,7 @@ msgstr ""
 "sonido;entrada;salida;"
 
 #: panels/system/about/cc-about-page.ui:4
+#: panels/system/about/gnome-about-panel.desktop.in:3
 msgid "About"
 msgstr "Acerca de"
 
@@ -7167,6 +7196,27 @@ msgstr "Virtualización"
 msgid "Kernel Version"
 msgstr "Verificación del núcleo"
 
+#: panels/system/about/gnome-about-panel.desktop.in:4
+msgid "View information about your system"
+msgstr "Ver información sobre su sistema"
+
+#. Translators: Search terms to find the About panel.
+#. Do NOT translate or localize the semicolons!
+#. The list MUST also end with a semicolon!
+#. "Preferred Applications" is the old name for the preference, so make
+#. sure that you use the same "translation" for those keywords
+#: panels/system/about/gnome-about-panel.desktop.in:19
+#, fuzzy
+#| msgid ""
+#| "application;flatpak;permission;setting;default;preferred;media;autorun;cd;"
+#| "dvd;usb;audio;video;disc;removable;device;system;"
+msgid ""
+"device;system;information;hostname;memory;processor;version;default;"
+"application;preferred;cd;dvd;usb;audio;video;disc;removable;media;autorun;"
+msgstr ""
+"aplicación;flatpak;permisos;configuracion;predeterminada;favorita;media;"
+"autoejecutar;cd;dvd;usb;sonido;vídeo;disco;extraíble;dispositivo;sistema;"
+
 #: panels/system/cc-system-panel.ui:23
 msgid "_Region &amp; Language"
 msgstr "_Región e idioma"
@@ -7200,9 +7250,8 @@ msgid "Allow this device to be used remotely"
 msgstr "Permitir que este dispositivo se utilice de manera remota"
 
 #: panels/system/cc-system-panel.ui:69
-#: panels/system/remote-login/cc-remote-login-page.ui:51
-msgid "Secu_re Shell"
-msgstr "Shell segu_ra"
+msgid "Se_cure Shell"
+msgstr "Shell _segura"
 
 #: panels/system/cc-system-panel.ui:70
 msgid "SSH network access"
@@ -7217,7 +7266,7 @@ msgid "Hardware details and software versions"
 msgstr "Detalles del hardware y versiones de software"
 
 #: panels/system/cc-system-panel.ui:97
-msgid "Software _Updates"
+msgid "S_oftware Updates"
 msgstr "Act_ualizaciones de software"
 
 #. Translators: This is the full date and time format used in 12-hour mode.
@@ -7247,6 +7296,7 @@ msgstr "%s (%s)"
 
 #: panels/system/datetime/cc-datetime-page.ui:9
 #: panels/system/datetime/cc-datetime-page.ui:117
+#: panels/system/datetime/gnome-datetime-panel.desktop.in:3
 msgid "Date & Time"
 msgstr "Fecha y hora"
 
@@ -7386,6 +7436,15 @@ msgstr "Buscar ciudades"
 msgid "No Results"
 msgstr "No hay resultados"
 
+#: panels/system/datetime/gnome-datetime-panel.desktop.in:4
+msgid "Change the date and time, including time zone"
+msgstr "Cambiar la fecha y la hora, incluyendo la zona horaria"
+
+#. Translators: Search terms to find the Date and Time panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#: panels/system/datetime/gnome-datetime-panel.desktop.in:15
+msgid "Clock;Timezone;Location;"
+msgstr "Reloj;Zona horaria;Ubicación;"
+
 #: panels/system/datetime/org.gnome.controlcenter.system.policy.in:11
 msgid "Change system time and date settings"
 msgstr "Cambiar la configuración de la hora y la fecha del sistema"
@@ -7475,6 +7534,7 @@ msgid "Paper"
 msgstr "Papel"
 
 #: panels/system/region/cc-region-page.ui:4
+#: panels/system/region/gnome-region-panel.desktop.in:3
 msgid "Region & Language"
 msgstr "Región e idioma"
 
@@ -7518,6 +7578,15 @@ msgstr "_Idioma"
 #: panels/system/region/cc-region-page.ui:64
 msgid "Fo_rmats"
 msgstr "Fo_rmatos"
+
+#: panels/system/region/gnome-region-panel.desktop.in:4
+msgid "Select your display language and formats"
+msgstr "Seleccionar el idioma que mostrar y los formatos"
+
+#. Translators: Search terms to find the Region and Language panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#: panels/system/region/gnome-region-panel.desktop.in:15
+msgid "Language;Layout;Keyboard;Input;"
+msgstr "Idioma;Distribución;Teclado;Entrada;"
 
 #: panels/system/remote-desktop/cc-desktop-sharing-page.c:364
 #: panels/system/remote-desktop/cc-remote-session-page.c:98
@@ -7565,6 +7634,7 @@ msgid "How to Connect"
 msgstr "Cómo conectarse"
 
 #: panels/system/remote-desktop/cc-desktop-sharing-page.ui:44
+#: panels/system/remote-desktop/cc-remote-session-page.ui:42
 msgid ""
 "Use a remote desktop app to connect using the RDP protocol. Additional "
 "information about the device’s network location may also be required."
@@ -7586,7 +7656,7 @@ msgstr "Nombre de _equipo"
 #: panels/system/remote-desktop/cc-remote-session-page.ui:74
 #: panels/system/remote-desktop/cc-remote-session-page.ui:95
 #: panels/system/remote-desktop/cc-remote-session-page.ui:111
-#: panels/system/remote-login/cc-remote-login-page.ui:65
+#: panels/system/remote-login/cc-remote-login-page.ui:67
 msgid "Copy"
 msgstr "Copiar"
 
@@ -7636,20 +7706,11 @@ msgstr ""
 "Conéctese de forma remota a su cuenta de usuario cuando no esté en uso. La "
 "resolución de la pantalla se puede configurar desde el control remoto."
 
-#: panels/system/remote-desktop/cc-remote-session-page.ui:42
-msgid ""
-"Use a remote desktop app to connect using the RDP protocol. Additional "
-"information about the device's network location may also be required."
-msgstr ""
-"Utilice una aplicación de escritorio remoto para conectarse mediante el "
-"protocolo RDP. También es posible que se requiera información adicional "
-"sobre la ubicación de red del dispositivo."
-
-#: panels/system/remote-desktop/cc-encryption-fingerprint-dialog.ui:20
+#: panels/system/remote-desktop/cc-encryption-fingerprint-dialog.ui:28
 msgid "Encryption Fingerprint"
 msgstr "Cifrado de huella dactilar"
 
-#: panels/system/remote-desktop/cc-encryption-fingerprint-dialog.ui:21
+#: panels/system/remote-desktop/cc-encryption-fingerprint-dialog.ui:29
 msgid ""
 "The encryption fingerprint can be seen in connecting clients and should be "
 "identical"
@@ -7678,9 +7739,13 @@ msgstr "Shell segura"
 msgid "Access this device using Secure Shell (SSH)"
 msgstr "Acceso a este dispositivo usando Shell Segura (SSH)"
 
+#: panels/system/remote-login/cc-remote-login-page.ui:51
+msgid "_Secure Shell"
+msgstr "_Shell segura"
+
 #: panels/system/remote-login/cc-remote-login-page.ui:58
-msgid "SSH Login Command"
-msgstr "Comando de inicio de sesión de SSH"
+msgid "SSH Login _Command"
+msgstr "_Comando de inicio de sesión de SSH"
 
 #: panels/system/remote-login/org.gnome.controlcenter.remote-login-helper.policy.in.in:11
 msgid "Enable or disable remote login"
@@ -7705,16 +7770,16 @@ msgstr "Las contraseñas no coinciden."
 msgid "Add User"
 msgstr "Añadir usuario"
 
-#: panels/system/users/cc-add-user-dialog.ui:93
+#: panels/system/users/cc-add-user-dialog.ui:102
 #: panels/system/users/cc-enterprise-login-dialog.ui:107
 msgid "_Username"
 msgstr "Nombre de _usuario"
 
-#: panels/system/users/cc-add-user-dialog.ui:131
+#: panels/system/users/cc-add-user-dialog.ui:140
 msgid "Ad_ministrator"
 msgstr "Ad_ministrador"
 
-#: panels/system/users/cc-add-user-dialog.ui:136
+#: panels/system/users/cc-add-user-dialog.ui:145
 #: panels/system/users/cc-user-page.ui:141
 msgid ""
 "Administrators have extra abilities, including adding and removing users, "
@@ -7726,19 +7791,19 @@ msgstr ""
 "software. Los controles parentales no se pueden aplicar a los "
 "administradores."
 
-#: panels/system/users/cc-add-user-dialog.ui:154
+#: panels/system/users/cc-add-user-dialog.ui:163
 msgid "User sets password on _first login"
 msgstr "El usuario establece su contraseña en el pr_imer inicio de sesión"
 
-#: panels/system/users/cc-add-user-dialog.ui:167
+#: panels/system/users/cc-add-user-dialog.ui:176
 msgid "Set password n_ow"
 msgstr "Establecer una contraseña ah_ora"
 
-#: panels/system/users/cc-add-user-dialog.ui:187
+#: panels/system/users/cc-add-user-dialog.ui:196
 msgid "Pass_word"
 msgstr "Contra_seña"
 
-#: panels/system/users/cc-add-user-dialog.ui:231
+#: panels/system/users/cc-add-user-dialog.ui:240
 msgid "_Confirm"
 msgstr "_Confirmar"
 
@@ -8069,7 +8134,7 @@ msgstr "Inicio de sesión con huella dactilar"
 
 #: panels/system/users/cc-fingerprint-dialog.ui:246
 msgid ""
-"Fingerprint login allows you to unlock and log into your computer with your "
+"Fingerprint login allows you to unlock and log into your device with your "
 "finger"
 msgstr ""
 "El inicio con huella dactilar le permite desbloquear su equipo e iniciar "
@@ -8230,6 +8295,7 @@ msgid "_Delete Files and Settings"
 msgstr "_Eliminar archivos y configuración"
 
 #: panels/system/users/cc-users-page.ui:11
+#: panels/system/users/gnome-users-panel.desktop.in:3
 msgid "Users"
 msgstr "Usuarios"
 
@@ -8262,6 +8328,20 @@ msgstr ""
 #: panels/system/users/data/join-dialog.ui:135
 msgid "Administrator Password"
 msgstr "Contraseña de administrador"
+
+#: panels/system/users/gnome-users-panel.desktop.in:4
+msgid "Add or remove users and change your password"
+msgstr "Añadir o quitar usuarios y cambiar su contraseña"
+
+#. Translators: Search terms to find the Users panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#: panels/system/users/gnome-users-panel.desktop.in:15
+msgid ""
+"Login;Name;Fingerprint;Avatar;Logo;Face;Password;Parental Controls;Screen "
+"Time;App Restrictions;Web Restrictions;Usage;Usage Limit;Kid;Child;"
+msgstr ""
+"Inicio de sesión;Nombre;Avatar;Logo;Cara;Contraseña;Control parental;Tiempo "
+"de pantalla;Restricciones de aplicaciones; Restricciones web;Uso;Límite de "
+"uso;Niños;Hijos;"
 
 #: panels/system/users/org.gnome.controlcenter.user-accounts.policy.in:11
 msgid "Manage user accounts"
@@ -9224,19 +9304,19 @@ msgstr "Sensibilidad de pr_esión del borrador"
 msgid "Eraser pressure"
 msgstr "Presión del borrador"
 
-#: panels/wacom/cc-wacom-tool.c:361
+#: panels/wacom/cc-wacom-tool.c:362
 msgid "Airbrush stylus with pressure, tilt, and integrated slider"
 msgstr "Lápiz aerógrafo con presión, inclinación y deslizador integrado"
 
-#: panels/wacom/cc-wacom-tool.c:363
+#: panels/wacom/cc-wacom-tool.c:364
 msgid "Art pen with pressure, tilt, and rotation"
 msgstr "Lápiz aerógrafo con presión, inclinación y rotación"
 
-#: panels/wacom/cc-wacom-tool.c:365
+#: panels/wacom/cc-wacom-tool.c:366
 msgid "Stylus with pressure and tilt"
 msgstr "Tableta con presión e inclinación"
 
-#: panels/wacom/cc-wacom-tool.c:367
+#: panels/wacom/cc-wacom-tool.c:368
 msgid "Stylus with pressure"
 msgstr "Tableta con presión"
 
@@ -9812,7 +9892,7 @@ msgid "Settings is the primary interface for configuring your system."
 msgstr "Configuración es la interfaz principal para configurar su sistema."
 
 #. developer_name tag deprecated with Appstream 1.0
-#: shell/appdata/org.gnome.Settings.appdata.xml.in:38
+#: shell/appdata/org.gnome.Settings.appdata.xml.in:39
 msgid "The GNOME Project"
 msgstr "El Proyecto GNOME"
 
@@ -9870,7 +9950,7 @@ msgstr "Categorías de configuración"
 msgid "No Results Found"
 msgstr "No se han encontrado resultados"
 
-#: shell/cc-panel-loader.c:308
+#: shell/cc-panel-loader.c:310
 msgid "Available panels:"
 msgstr "Paneles disponibles:"
 
@@ -9995,7 +10075,7 @@ msgstr ""
 
 #. translators:
 #. * The number of sound outputs on a particular device
-#: subprojects/gvc/gvc-mixer-control.c:1915
+#: subprojects/gvc/gvc-mixer-control.c:1879
 #, c-format
 msgid "%u Output"
 msgid_plural "%u Outputs"
@@ -10004,16 +10084,33 @@ msgstr[1] "%u salidas"
 
 #. translators:
 #. * The number of sound inputs on a particular device
-#: subprojects/gvc/gvc-mixer-control.c:1925
+#: subprojects/gvc/gvc-mixer-control.c:1889
 #, c-format
 msgid "%u Input"
 msgid_plural "%u Inputs"
 msgstr[0] "%u entrada"
 msgstr[1] "%u entradas"
 
-#: subprojects/gvc/gvc-mixer-control.c:2882
+#: subprojects/gvc/gvc-mixer-control.c:2872
 msgid "System Sounds"
 msgstr "Sonidos del sistema"
+
+#~ msgid "_Add profile"
+#~ msgstr "_Añadir perfil"
+
+#~ msgid "Reset the shortcut to its default value"
+#~ msgstr "Restablecer el valor predeterminado del atajo"
+
+#~ msgid "Secu_re Shell"
+#~ msgstr "Shell segu_ra"
+
+#~ msgid ""
+#~ "Use a remote desktop app to connect using the RDP protocol. Additional "
+#~ "information about the device's network location may also be required."
+#~ msgstr ""
+#~ "Utilice una aplicación de escritorio remoto para conectarse mediante el "
+#~ "protocolo RDP. También es posible que se requiera información adicional "
+#~ "sobre la ubicación de red del dispositivo."
 
 #~ msgid "Device name copied"
 #~ msgstr "Nombre del dispositivo copiado"
@@ -10104,12 +10201,6 @@ msgstr "Sonidos del sistema"
 #~ msgid "Date"
 #~ msgstr "Fecha"
 
-#~ msgid "Change the date and time, including time zone"
-#~ msgstr "Cambiar la fecha y la hora, incluyendo la zona horaria"
-
-#~ msgid "Clock;Timezone;Location;"
-#~ msgstr "Reloj;Zona horaria;Ubicación;"
-
 #~ msgid "Links &amp; Files"
 #~ msgstr "Enlaces y archivos"
 
@@ -10131,12 +10222,6 @@ msgstr "Sonidos del sistema"
 
 #~ msgid "Not Available"
 #~ msgstr "No disponible"
-
-#~ msgid "View information about your system"
-#~ msgstr "Ver información sobre su sistema"
-
-#~ msgid "Options"
-#~ msgstr "Opciones"
 
 #~ msgid ""
 #~ "Resetting the shortcuts may affect your custom shortcuts. This cannot be "
@@ -10213,12 +10298,6 @@ msgstr "Sonidos del sistema"
 
 #~ msgid "Privacy"
 #~ msgstr "Privacidad"
-
-#~ msgid "Select your display language and formats"
-#~ msgstr "Seleccionar el idioma que mostrar y los formatos"
-
-#~ msgid "Language;Layout;Keyboard;Input;"
-#~ msgstr "Idioma;Distribución;Teclado;Entrada;"
 
 #~ msgid "Select how media should be handled"
 #~ msgstr "Seleccionar cómo se deben manejar los soportes"
@@ -10343,17 +10422,6 @@ msgstr "Sonidos del sistema"
 
 #~ msgid "_Delete"
 #~ msgstr "_Eliminar"
-
-#~ msgid "Add or remove users and change your password"
-#~ msgstr "Añadir o quitar usuarios y cambiar su contraseña"
-
-#~ msgid ""
-#~ "Login;Name;Fingerprint;Avatar;Logo;Face;Password;Parental Controls;Screen "
-#~ "Time;App Restrictions;Web Restrictions;Usage;Usage Limit;Kid;Child;"
-#~ msgstr ""
-#~ "Inicio de sesión;Nombre;Avatar;Logo;Cara;Contraseña;Control parental;"
-#~ "Tiempo de pantalla;Restricciones de aplicaciones; Restricciones web;Uso;"
-#~ "Límite de uso;Niños;Hijos;"
 
 #~ msgid "External pad device"
 #~ msgstr "Tableta externa"
@@ -12402,9 +12470,6 @@ msgstr "Sonidos del sistema"
 
 #~ msgid "OS name"
 #~ msgstr "Nombre del SO"
-
-#~ msgid "OS type"
-#~ msgstr "Tipo de SO"
 
 #~ msgid "Disk"
 #~ msgstr "Disco"
