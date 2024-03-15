@@ -3,7 +3,6 @@
   <template class="CcRemoteDesktopPage" parent="AdwNavigationPage">
     <property name="title" translatable="yes">Remote Desktop</property>
     <property name="tag">remote-desktop</property>
-    <property name="visible" bind-source="desktop_sharing_page" bind-property="visible" bind-flags="sync-create"/>
     <property name="child">
       <object class="AdwBreakpointBin">
         <property name="width-request">300</property>
@@ -35,18 +34,22 @@
             <property name="content">
               <object class="AdwViewStack" id="stack">
                 <child>
-                  <object class="AdwViewStackPage">
+                  <object class="AdwViewStackPage" id="desktop_sharing_stack_page">
+                    <property name="visible" bind-source="desktop_sharing_page" bind-property="visible" bind-flags="sync-create|default"/>
                     <property name="title" translatable="yes">Desktop Sharing</property>
                     <property name="icon-name">preferences-desktop-remote-desktop-symbolic</property>
+                    <signal name="notify::visible" handler="update_subpage_visibility" object="CcRemoteDesktopPage" swapped="yes"/>
                     <property name="child">
                       <object class="CcDesktopSharingPage" id="desktop_sharing_page"/>
                     </property>
                   </object>
                 </child>
                 <child>
-                  <object class="AdwViewStackPage">
+                  <object class="AdwViewStackPage" id="remote_session_stack_page">
+                    <property name="visible" bind-source="remote_session_page" bind-property="visible" bind-flags="sync-create|default"/>
                     <property name="title" translatable="yes">Remote Login</property>
                     <property name="icon-name">preferences-desktop-display-symbolic</property>
+                    <signal name="notify::visible" handler="update_subpage_visibility" object="CcRemoteDesktopPage" swapped="yes"/>
                     <property name="child">
                       <object class="CcRemoteSessionPage" id="remote_session_page"/>
                     </property>

@@ -31,12 +31,25 @@
 struct _CcRemoteDesktopPage {
   AdwNavigationPage parent_instance;
 
-  CcDesktopSharingPage *desktop_sharing_page;
+  AdwHeaderBar *header_bar;
+  GtkWidget *desktop_sharing_stack_page;
+  GtkWidget *remote_session_stack_page;
 
   GCancellable *cancellable;
 };
 
 G_DEFINE_TYPE (CcRemoteDesktopPage, cc_remote_desktop_page, ADW_TYPE_NAVIGATION_PAGE)
+
+static void
+update_subpage_visibility (CcRemoteDesktopPage *self)
+{
+  if (adw_view_stack_page_get_visible (ADW_VIEW_STACK_PAGE (self->desktop_sharing_stack_page)) &&
+      adw_view_stack_page_get_visible (ADW_VIEW_STACK_PAGE (self->remote_session_stack_page)))
+    return;
+
+  /* If at least one of the subpages is not visible, we drop the stack switcher from the header bar. */
+  adw_header_bar_set_title_widget (self->header_bar, NULL);
+}
 
 static void
 cc_remote_desktop_page_dispose (GObject *object)
@@ -62,7 +75,10 @@ cc_remote_desktop_page_class_init (CcRemoteDesktopPageClass * klass)
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/system/remote-desktop/cc-remote-desktop-page.ui");
 
-  gtk_widget_class_bind_template_child (widget_class, CcRemoteDesktopPage, desktop_sharing_page);
+  gtk_widget_class_bind_template_child (widget_class, CcRemoteDesktopPage, desktop_sharing_stack_page);
+  gtk_widget_class_bind_template_child (widget_class, CcRemoteDesktopPage, header_bar);
+  gtk_widget_class_bind_template_child (widget_class, CcRemoteDesktopPage, remote_session_stack_page);
+  gtk_widget_class_bind_template_callback (widget_class, update_subpage_visibility);
 }
 
 static void
