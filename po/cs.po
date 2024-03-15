@@ -26,8 +26,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2024-03-14 10:59+0000\n"
-"PO-Revision-Date: 2024-03-14 12:08+0100\n"
+"POT-Creation-Date: 2024-03-15 10:07+0000\n"
+"PO-Revision-Date: 2024-03-15 11:10+0100\n"
 "Last-Translator: Daniel Rusek <mail@asciiwolf.com>\n"
 "Language-Team: Czech <gnome-cs-list@gnome.org>\n"
 "Language: cs\n"
@@ -224,7 +224,7 @@ msgstr "Přijímat od systému požadavky na hledání a předávat výsledky"
 #: panels/keyboard/keyboard-shortcuts.c:367
 #: panels/system/users/cc-user-page.c:379
 #: panels/system/users/cc-user-page.c:749 panels/wwan/cc-wwan-device-page.c:477
-#: subprojects/gvc/gvc-mixer-control.c:1908
+#: subprojects/gvc/gvc-mixer-control.c:1872
 msgid "Disabled"
 msgstr "Vypnuto"
 
@@ -7004,6 +7004,7 @@ msgstr ""
 "výstup;vstup;"
 
 #: panels/system/about/cc-about-page.ui:4
+#: panels/system/about/gnome-about-panel.desktop.in:3
 msgid "About"
 msgstr "O systému"
 
@@ -7206,6 +7207,26 @@ msgstr "Virtualizace"
 msgid "Kernel Version"
 msgstr "Verze jádra"
 
+#: panels/system/about/gnome-about-panel.desktop.in:4
+msgid "View information about your system"
+msgstr "Zobrazit informace o systému"
+
+#. Translators: Search terms to find the About panel.
+#. Do NOT translate or localize the semicolons!
+#. The list MUST also end with a semicolon!
+#. "Preferred Applications" is the old name for the preference, so make
+#. sure that you use the same "translation" for those keywords
+#: panels/system/about/gnome-about-panel.desktop.in:19
+msgid ""
+"device;system;information;hostname;memory;processor;version;default;"
+"application;preferred;cd;dvd;usb;audio;video;disc;removable;media;autorun;"
+msgstr ""
+"zařízení;počítač;systém;informace;hostname;hostitel;paměť;procesor;verze;"
+"výchozí;aplikace;preferovaný;preferovaná;preferované;upřednostňovaný;"
+"upřednostňovaná;upřednostňované;cd;dvd;usb;zvuk;audio;video;disk;výměnný;"
+"výměnná;výměnné;vyměnitelný;vyměnitelná;vyměnitelné;média;médium;automatické "
+"spuštění;"
+
 #: panels/system/cc-system-panel.ui:23
 msgid "_Region &amp; Language"
 msgstr "_Region a jazyk"
@@ -7285,6 +7306,7 @@ msgstr "%s (%s)"
 
 #: panels/system/datetime/cc-datetime-page.ui:9
 #: panels/system/datetime/cc-datetime-page.ui:117
+#: panels/system/datetime/gnome-datetime-panel.desktop.in:3
 msgid "Date & Time"
 msgstr "Datum a čas"
 
@@ -7424,6 +7446,15 @@ msgstr "Prohledávat města"
 msgid "No Results"
 msgstr "Žádné výsledky"
 
+#: panels/system/datetime/gnome-datetime-panel.desktop.in:4
+msgid "Change the date and time, including time zone"
+msgstr "Změnit datum a čas, včetně časového pásma"
+
+#. Translators: Search terms to find the Date and Time panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#: panels/system/datetime/gnome-datetime-panel.desktop.in:15
+msgid "Clock;Timezone;Location;"
+msgstr "hodiny;časové pásmo;umístění;"
+
 #: panels/system/datetime/org.gnome.controlcenter.system.policy.in:11
 msgid "Change system time and date settings"
 msgstr "Změnit nastavení systémového času a data"
@@ -7443,9 +7474,9 @@ msgid ""
 "operating;os;model;language;region;country;formats;numbers;units;clock;"
 "timezone;date;location;remote;desktop;rdp;vnc;"
 msgstr ""
-"zařízení;počítač;systém;informace;detaily;hostname;název;paměť;procesor;"
-"verze;software;operační;os;model;jazyk;oblast;země;formáty;čísla;jednotky;"
-"hodiny;časové pásmo;datum;umístění;vzdálená;plocha;rdp;vnc;"
+"zařízení;počítač;systém;informace;detaily;hostname;hostitel;název;paměť;"
+"procesor;verze;software;operační;os;model;jazyk;oblast;země;formáty;čísla;"
+"jednotky;hodiny;časové pásmo;datum;umístění;vzdálená;plocha;rdp;vnc;"
 
 #: panels/system/region/cc-format-chooser.c:160
 #: panels/system/region/cc-format-chooser.c:208
@@ -7512,6 +7543,7 @@ msgid "Paper"
 msgstr "Papír"
 
 #: panels/system/region/cc-region-page.ui:4
+#: panels/system/region/gnome-region-panel.desktop.in:3
 msgid "Region & Language"
 msgstr "Region a jazyk"
 
@@ -7555,6 +7587,15 @@ msgstr "Jazy_k"
 #: panels/system/region/cc-region-page.ui:64
 msgid "Fo_rmats"
 msgstr "Fo_rmáty"
+
+#: panels/system/region/gnome-region-panel.desktop.in:4
+msgid "Select your display language and formats"
+msgstr "Vybrat jazyk a formáty pro zobrazení"
+
+#. Translators: Search terms to find the Region and Language panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#: panels/system/region/gnome-region-panel.desktop.in:15
+msgid "Language;Layout;Keyboard;Input;"
+msgstr "jazyk;rozložení;klávesnice;vstup;"
 
 #: panels/system/remote-desktop/cc-desktop-sharing-page.c:364
 #: panels/system/remote-desktop/cc-remote-session-page.c:98
@@ -8254,6 +8295,7 @@ msgid "_Delete Files and Settings"
 msgstr "O_dstranit soubory a nastavení"
 
 #: panels/system/users/cc-users-page.ui:11
+#: panels/system/users/gnome-users-panel.desktop.in:3
 msgid "Users"
 msgstr "Uživatelé"
 
@@ -8286,6 +8328,21 @@ msgstr ""
 #: panels/system/users/data/join-dialog.ui:135
 msgid "Administrator Password"
 msgstr "Heslo správce"
+
+#: panels/system/users/gnome-users-panel.desktop.in:4
+msgid "Add or remove users and change your password"
+msgstr "Přidat nebo odebrat uživatele a změnit heslo"
+
+#. Translators: Search terms to find the Users panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#: panels/system/users/gnome-users-panel.desktop.in:15
+msgid ""
+"Login;Name;Fingerprint;Avatar;Logo;Face;Password;Parental Controls;Screen "
+"Time;App Restrictions;Web Restrictions;Usage;Usage Limit;Kid;Child;"
+msgstr ""
+"přihlášení;přihlásit;otis prstu;otisky prstů;avatar;fotka;obličej;heslo;"
+"rodičovská kontrola;čas u obrazovky;omezení webů;omezení stránek;omezit weby;"
+"omezit stránky;používání;využívání;strávený čas;omezené používání;omezit "
+"používání;dítě;děti;dětská;dětské;"
 
 #: panels/system/users/org.gnome.controlcenter.user-accounts.policy.in:11
 msgid "Manage user accounts"
@@ -10002,7 +10059,7 @@ msgstr ""
 
 #. translators:
 #. * The number of sound outputs on a particular device
-#: subprojects/gvc/gvc-mixer-control.c:1915
+#: subprojects/gvc/gvc-mixer-control.c:1879
 #, c-format
 msgid "%u Output"
 msgid_plural "%u Outputs"
@@ -10012,7 +10069,7 @@ msgstr[2] "%u výstupů"
 
 #. translators:
 #. * The number of sound inputs on a particular device
-#: subprojects/gvc/gvc-mixer-control.c:1925
+#: subprojects/gvc/gvc-mixer-control.c:1889
 #, c-format
 msgid "%u Input"
 msgid_plural "%u Inputs"
@@ -10020,7 +10077,7 @@ msgstr[0] "%u vstup"
 msgstr[1] "%u vstupy"
 msgstr[2] "%u vstupů"
 
-#: subprojects/gvc/gvc-mixer-control.c:2882
+#: subprojects/gvc/gvc-mixer-control.c:2872
 msgid "System Sounds"
 msgstr "Systémové zvuky"
 
@@ -10320,35 +10377,8 @@ msgstr "Systémové zvuky"
 #~ msgid "_Delete"
 #~ msgstr "O_dstranit"
 
-#~ msgid "Add or remove users and change your password"
-#~ msgstr "Přidat nebo odebrat uživatele a změnit heslo"
-
-#~ msgid ""
-#~ "Login;Name;Fingerprint;Avatar;Logo;Face;Password;Parental Controls;Screen "
-#~ "Time;App Restrictions;Web Restrictions;Usage;Usage Limit;Kid;Child;"
-#~ msgstr ""
-#~ "přihlášení;přihlásit;otis prstu;otisky prstů;avatar;fotka;obličej;heslo;"
-#~ "rodičovská kontrola;čas u obrazovky;omezení webů;omezení stránek;omezit "
-#~ "weby;omezit stránky;používání;využívání;strávený čas;omezené používání;"
-#~ "omezit používání;dítě;děti;dětská;dětské;"
-
 #~ msgid "External pad device"
 #~ msgstr "Externí grafický tablet"
-
-#~ msgid "Change the date and time, including time zone"
-#~ msgstr "Změnit datum a čas, včetně časového pásma"
-
-#~ msgid "Clock;Timezone;Location;"
-#~ msgstr "hodiny;časové pásmo;umístění;"
-
-#~ msgid "View information about your system"
-#~ msgstr "Zobrazit informace o systému"
-
-#~ msgid "Select your display language and formats"
-#~ msgstr "Vybrat jazyk a formáty pro zobrazení"
-
-#~ msgid "Language;Layout;Keyboard;Input;"
-#~ msgstr "jazyk;rozložení;klávesnice;vstup;"
 
 #~ msgid "View and control the desktop from another device"
 #~ msgstr "Zobrazit a ovládat vaši plochu z jiného zařízení"
