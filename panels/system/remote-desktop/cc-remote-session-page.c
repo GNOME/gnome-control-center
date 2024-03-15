@@ -760,6 +760,9 @@ cc_remote_session_page_init (CcRemoteSessionPage *self)
     {
       g_warning ("Cannot create '%s' permission: %s", REMOTE_SESSION_PERMISSION, error->message);
       g_clear_error (&error);
+
+      gtk_widget_set_visible (GTK_WIDGET (self), FALSE);
+      return;
     }
 
   sync_permissions (self);
