@@ -18,6 +18,8 @@
  * SPDX-License-Identifier: GPL-2.0-or-later
  */
 
+#include <glib/gi18n.h>
+
 #include "cc-default-apps-row.h"
 
 struct _CcDefaultAppsRow
@@ -116,6 +118,14 @@ cc_default_apps_row_constructed (GObject *object)
 
     g_list_store_append (self->model, app);
   }
+
+  if (g_list_model_get_n_items (G_LIST_MODEL (self->model)) == 0)
+    {
+      GtkWidget *no_apps_label;
+
+      no_apps_label = gtk_label_new (_("No Apps Available"));
+      adw_action_row_add_suffix (ADW_ACTION_ROW (self), no_apps_label);
+    }
 
   adw_combo_row_set_model (ADW_COMBO_ROW (self), G_LIST_MODEL (self->model));
 
