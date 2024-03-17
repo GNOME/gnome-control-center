@@ -45,7 +45,6 @@ struct _CcNightLightPage {
   GtkWidget           *infobar_disabled;
   GtkWidget           *scale_color_temperature;
   AdwSwitchRow        *night_light_toggle_row;
-  AdwComboRow         *schedule_type_row;
   GtkWidget           *from_spinbuttons_box;
   GtkSpinButton       *spinbutton_from_hours;
   GtkSpinButton       *spinbutton_from_minutes;
@@ -131,7 +130,6 @@ dialog_update_state (CcNightLightPage *self)
 {
   if (cc_display_config_manager_get_night_light_supported (self->config_manager))
     {
-      gboolean automatic;
       gboolean disabled_until_tomorrow = FALSE;
       gboolean enabled;
       gdouble value = 0.f;
@@ -149,32 +147,11 @@ dialog_update_state (CcNightLightPage *self)
 
       /* make things insensitive if the switch is disabled */
       enabled = g_settings_get_boolean (self->settings_display, "night-light-enabled");
-      automatic = g_settings_get_boolean (self->settings_display, "night-light-schedule-automatic");
-
-      gtk_widget_set_sensitive (self->box_manual, enabled && !automatic);
-
-      adw_combo_row_set_selected (self->schedule_type_row, automatic ? 0 : 1);
+      gtk_widget_set_sensitive (self->box_manual, enabled);
 
       /* set from */
-      if (automatic && self->proxy_color != NULL)
-        {
-          g_autoptr(GVariant) sunset = NULL;
-          sunset = g_dbus_proxy_get_cached_property (self->proxy_color, "Sunset");
-          if (sunset != NULL)
-            {
-              value = g_variant_get_double (sunset);
-            }
-          else
-            {
-              value = 16.0f;
-              g_warning ("no sunset data, using %02.2f", value);
-            }
-        }
-      else
-        {
-          value = g_settings_get_double (self->settings_display, "night-light-schedule-from");
-          value = fmod (value, 24.f);
-        }
+      value = g_settings_get_double (self->settings_display, "night-light-schedule-from");
+      value = fmod (value, 24.f);
       dialog_adjustments_set_frac_hours (self, value,
                                          self->adjustment_from_hours,
                                          self->adjustment_from_minutes,
@@ -183,25 +160,8 @@ dialog_update_state (CcNightLightPage *self)
                                          self->button_from_pm);
 
       /* set to */
-      if (automatic && self->proxy_color != NULL)
-        {
-          g_autoptr(GVariant) sunset = NULL;
-          sunset = g_dbus_proxy_get_cached_property (self->proxy_color, "Sunrise");
-          if (sunset != NULL)
-            {
-              value = g_variant_get_double (sunset);
-            }
-          else
-            {
-              value = 8.0f;
-              g_warning ("no sunrise data, using %02.2f", value);
-            }
-        }
-      else
-        {
-          value = g_settings_get_double (self->settings_display, "night-light-schedule-to");
-          value = fmod (value, 24.f);
-        }
+      value = g_settings_get_double (self->settings_display, "night-light-schedule-to");
+      value = fmod (value, 24.f);
       dialog_adjustments_set_frac_hours (self, value,
                                          self->adjustment_to_hours,
                                          self->adjustment_to_minutes,
@@ -226,40 +186,6 @@ dialog_update_state (CcNightLightPage *self)
                               _("Night Light cannot be used from a virtual machine."));
         }
     }
-}
-
-static void
-build_schedule_combo_row (CcNightLightPage *self)
-{
-  gboolean automatic;
-  gboolean enabled;
-
-  self->ignore_value_changed = TRUE;
-
-
-  enabled = g_settings_get_boolean (self->settings_display, "night-light-enabled");
-  automatic = g_settings_get_boolean (self->settings_display, "night-light-schedule-automatic");
-
-  gtk_widget_set_sensitive (self->box_manual, enabled && !automatic);
-
-  adw_combo_row_set_selected (self->schedule_type_row, automatic ? 0 : 1);
-
-  self->ignore_value_changed = FALSE;
-}
-
-static void
-on_schedule_type_row_selected_changed_cb (CcNightLightPage *self)
-{
-  guint selected;
-  gboolean automatic;
-
-  if (self->ignore_value_changed)
-    return;
-
-  selected = adw_combo_row_get_selected (self->schedule_type_row);
-  automatic = selected == 0;;
-
-  g_settings_set_boolean (self->settings_display, "night-light-schedule-automatic", automatic);
 }
 
 static gboolean
@@ -637,7 +563,6 @@ cc_night_light_page_class_init (CcNightLightPageClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcNightLightPage, infobar_unsupported_description);
   gtk_widget_class_bind_template_child (widget_class, CcNightLightPage, infobar_disabled);
   gtk_widget_class_bind_template_child (widget_class, CcNightLightPage, night_light_toggle_row);
-  gtk_widget_class_bind_template_child (widget_class, CcNightLightPage, schedule_type_row);
   gtk_widget_class_bind_template_child (widget_class, CcNightLightPage, scale_color_temperature);
   gtk_widget_class_bind_template_child (widget_class, CcNightLightPage, from_spinbuttons_box);
   gtk_widget_class_bind_template_child (widget_class, CcNightLightPage, spinbutton_from_hours);
@@ -659,7 +584,6 @@ cc_night_light_page_class_init (CcNightLightPageClass *klass)
   gtk_widget_class_bind_template_callback (widget_class, dialog_time_to_value_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, dialog_color_temperature_value_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, dialog_undisable_clicked_cb);
-  gtk_widget_class_bind_template_callback (widget_class, on_schedule_type_row_selected_changed_cb);
 
 }
 
@@ -689,9 +613,11 @@ cc_night_light_page_init (CcNightLightPage *self)
   self->cancellable = g_cancellable_new ();
   self->settings_display = g_settings_new (DISPLAY_SCHEMA);
 
-  g_signal_connect_object (self->settings_display, "changed", G_CALLBACK (dialog_settings_changed_cb), self, G_CONNECT_SWAPPED);
+  /* forcibly disable automatic schedule due to https://gitlab.gnome.org/GNOME/gnome-control-center/-/issues/2959 */
+  g_settings_set_boolean (self->settings_display, "night-light-schedule-automatic", FALSE);
 
-  build_schedule_combo_row (self);
+
+  g_signal_connect_object (self->settings_display, "changed", G_CALLBACK (dialog_settings_changed_cb), self, G_CONNECT_SWAPPED);
 
   g_settings_bind (self->settings_display, "night-light-enabled",
                    self->night_light_toggle_row, "active",

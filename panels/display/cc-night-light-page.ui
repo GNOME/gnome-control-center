@@ -88,24 +88,6 @@
                   </object>
                 </child>
 
-                <!-- Schedule -->
-                <child>
-                  <object class="AdwComboRow" id="schedule_type_row">
-                    <property name="title" translatable="yes">_Schedule</property>
-                    <property name="use-underline">True</property>
-                    <property name="sensitive" bind-source="night_light_toggle_row" bind-property="active" bind-flags="default|sync-create" />
-                    <signal name="notify::selected" handler="on_schedule_type_row_selected_changed_cb" object="CcNightLightPage" swapped="yes" />
-                    <property name="model">
-                      <object class="GtkStringList">
-                        <items>
-                          <item translatable="yes">Sunset to Sunrise</item>
-                          <item translatable="yes">Manual Schedule</item>
-                        </items>
-                      </object>
-                    </property>
-                  </object>
-                </child>
-
                 <!-- Time -->
                 <child>
                   <object class="AdwActionRow">
