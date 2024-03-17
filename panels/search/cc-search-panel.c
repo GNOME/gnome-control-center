@@ -164,16 +164,6 @@ search_panel_propagate_sort_order (CcSearchPanel *self)
 }
 
 static void
-search_panel_set_no_providers (CcSearchPanel *self)
-{
-  /* center the list box in the scrolled window */
-  gtk_widget_set_valign (self->list_box, GTK_ALIGN_CENTER);
-
-  gtk_list_box_append (GTK_LIST_BOX (self->list_box),
-                       gtk_label_new (_("No apps found")));
-}
-
-static void
 search_panel_move_selected (CcSearchPanel *self,
                             gboolean down)
 {
@@ -537,12 +527,6 @@ search_providers_discover_ready (GObject *source,
 
   if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
     return;
-
-  if (providers == NULL)
-    {
-      search_panel_set_no_providers (self);
-      return;
-    }
 
   for (l = providers; l != NULL; l = l->next)
     {
