@@ -54,6 +54,8 @@ main (int argc, char **argv)
 {
         g_autofree char *renderer_string = NULL;
 
+        g_log_writer_default_set_use_stderr (TRUE);
+
         gtk_init ();
 
         renderer_string = get_gtk_gles_renderer ();
