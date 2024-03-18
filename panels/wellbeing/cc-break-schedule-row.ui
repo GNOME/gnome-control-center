@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  SPDX-License-Identifier: GPL-3.0-or-later
+  SPDX-FileCopyrightText: 2024 GNOME Foundation, Inc.
+-->
+<interface>
+  <template class="CcBreakScheduleRow" parent="AdwComboRow">
+    <property name="factory">
+      <object class="GtkSignalListItemFactory">
+        <signal name="setup" handler="factory_setup_cb"/>
+        <signal name="bind" handler="factory_bind_cb"/>
+        <signal name="unbind" handler="factory_unbind_cb"/>
+      </object>
+    </property>
+    <property name="header-factory">
+      <object class="GtkSignalListItemFactory">
+        <signal name="setup" handler="header_factory_setup_cb"/>
+      </object>
+    </property>
+  </template>
+
+  <object class="GtkSizeGroup" id="duration_size_group">
+    <property name="mode">horizontal</property>
+  </object>
+
+  <object class="GtkSizeGroup" id="interval_size_group">
+    <property name="mode">horizontal</property>
+  </object>
+</interface>

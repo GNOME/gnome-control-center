@@ -13,6 +13,38 @@
 
         <property name="content">
           <object class="AdwPreferencesPage">
+            <child>
+              <object class="AdwPreferencesGroup">
+                <property name="title" translatable="yes">Break Reminders</property>
+                <child>
+                  <object class="AdwSwitchRow" id="eyesight_breaks_row">
+                    <property name="title" translatable="yes">_Eyesight Reminders</property>
+                    <property name="subtitle" translatable="yes">Reminders to look away from the screen</property>
+                    <property name="use-underline">True</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="AdwSwitchRow" id="movement_breaks_row">
+                    <property name="title" translatable="yes">_Movement Reminders</property>
+                    <property name="subtitle" translatable="yes">Reminders to move around</property>
+                    <property name="use-underline">True</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="CcBreakScheduleRow" id="movement_break_schedule_row">
+                    <property name="title" translatable="yes">Movement Break S_chedule</property>
+                    <property name="use-underline">True</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="AdwSwitchRow" id="sounds_row">
+                    <property name="title" translatable="yes">S_ounds</property>
+                    <property name="subtitle" translatable="yes">Play a sound when a break ends</property>
+                    <property name="use-underline">True</property>
+                  </object>
+                </child>
+              </object>
+            </child>
           </object>
         </property>
       </object>

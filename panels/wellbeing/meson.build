@@ -14,7 +14,17 @@ i18n.merge_file(
 )
 
 sources = files(
+  'cc-break-schedule-row.c',
   'cc-wellbeing-panel.c',
+)
+
+sources += gnome.gdbus_codegen(
+  'cc-shell-wellbeing-generated',
+  'data/org.gnome.Shell.Wellbeing.xml',
+  interface_prefix: 'org.gnome.Shell.Wellbeing.',
+  namespace: 'CcShellWellbeing',
+  object_manager: true,
+  autocleanup: 'all',
 )
 
 sources += gnome.compile_resources(
