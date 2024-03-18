@@ -68,7 +68,7 @@ struct _NetDeviceWifi
         GtkStack                *stack;
         AdwPreferencesGroup     *saved_networks_box;
         CcWifiConnectionList    *saved_networks_list;
-        GtkWindow               *saved_networks_dialog;
+        AdwDialog               *saved_networks_dialog;
         AdwToastOverlay         *saved_networks_toast_overlay;
         AdwToast                *saved_networks_undo_toast;
         GPtrArray               *saved_networks_forgotten_rows;
@@ -752,7 +752,7 @@ net_device_wifi_dispose (GObject *object)
                 self->hotspot_dialog = NULL;
         }
 
-        g_clear_pointer (&self->saved_networks_dialog, gtk_window_destroy);
+        g_clear_pointer (&self->saved_networks_dialog, adw_dialog_force_close);
 
         G_OBJECT_CLASS (net_device_wifi_parent_class)->dispose (object);
 }
@@ -810,7 +810,7 @@ really_forgotten (GObject              *source_object,
                            error->message);
 
         if (cc_wifi_connection_list_is_empty (self->saved_networks_list)) {
-            gtk_window_close (self->saved_networks_dialog);
+            adw_dialog_close (self->saved_networks_dialog);
             gtk_widget_set_visible (GTK_WIDGET (self->saved_network_row), FALSE);
         }
 }
@@ -1017,9 +1017,7 @@ show_qr_code_for_row (NetDeviceWifi *self, CcWifiConnectionRow *row, CcWifiConne
 static void
 on_show_saved_network (NetDeviceWifi *self)
 {
-        gtk_window_set_transient_for (self->saved_networks_dialog,
-                                      GTK_WINDOW (gtk_widget_get_native (GTK_WIDGET (self))));
-        gtk_window_present (self->saved_networks_dialog);
+        adw_dialog_present (self->saved_networks_dialog, GTK_WIDGET (self));
 }
 
 static void
