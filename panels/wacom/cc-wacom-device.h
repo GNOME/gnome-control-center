@@ -25,9 +25,7 @@
 #include <libwacom/libwacom.h>
 
 #include "gsd-device-manager.h"
-
-#define GNOME_DESKTOP_USE_UNSTABLE_API
-#include <gnome-rr/gnome-rr.h>
+#include "panels/display/cc-display-config-manager-dbus.h"
 
 #define CC_TYPE_WACOM_DEVICE (cc_wacom_device_get_type ())
 G_DECLARE_FINAL_TYPE (CcWacomDevice, cc_wacom_device, CC, WACOM_DEVICE, GObject)
@@ -52,10 +50,10 @@ GSettings     * cc_wacom_device_get_settings    (CcWacomDevice *device);
 const gint    * cc_wacom_device_get_supported_tools (CcWacomDevice *device,
 						     gint          *n_tools);
 
-GnomeRROutput * cc_wacom_device_get_output      (CcWacomDevice *device,
-						 GnomeRRScreen *screen);
-void            cc_wacom_device_set_output      (CcWacomDevice *wacom_device,
-						 GnomeRROutput *monitor);
+CcDisplayMonitor *cc_wacom_device_get_output    (CcWacomDevice   *device,
+						 CcDisplayConfig *screen);
+void            cc_wacom_device_set_output      (CcWacomDevice    *wacom_device,
+						 CcDisplayMonitor *monitor);
 
 guint           cc_wacom_device_get_num_buttons (CcWacomDevice *wacom_device);
 
