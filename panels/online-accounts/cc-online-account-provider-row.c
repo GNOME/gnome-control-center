@@ -56,7 +56,7 @@ _goa_provider_get_provider_info (GoaProvider *provider)
   static ProviderInfo goa_metadata[] = {
     { "owncloud", N_("Nextcloud"), N_("Calendar, contacts, files") },
     { "google", N_("Google"), N_("Email, calendar, contacts, files") },
-    { "windows_live", N_("Microsoft (Personal)"), N_("Email") },
+    { "windows_live", N_("Microsoft"), N_("Email") },
     { "ms_graph", N_("Microsoft 365"), N_("Files") },
     { "exchange", N_("Microsoft Exchange"), N_("Email, calendar, contacts") },
     { "fedora", N_("Fedora"), N_("Enterprise authentication") },
