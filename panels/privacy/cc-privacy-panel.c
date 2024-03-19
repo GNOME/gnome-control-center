@@ -41,6 +41,7 @@ struct _CcPrivacyPanel
 
   AdwNavigationView *navigation;
   CcListRow         *bolt_row;
+  CcListRow         *location_row;
 };
 
 CC_PANEL_REGISTER (CcPrivacyPanel, cc_privacy_panel)
@@ -73,6 +74,7 @@ cc_privacy_panel_class_init (CcPrivacyPanelClass *klass)
 
   gtk_widget_class_bind_template_child (widget_class, CcPrivacyPanel, navigation);
   gtk_widget_class_bind_template_child (widget_class, CcPrivacyPanel, bolt_row);
+  gtk_widget_class_bind_template_child (widget_class, CcPrivacyPanel, location_row);
 
   g_type_ensure (CC_TYPE_CAMERA_PAGE);
   g_type_ensure (CC_TYPE_DIAGNOSTICS_PAGE);
@@ -112,6 +114,15 @@ cc_privacy_panel_init (CcPrivacyPanel *self)
 
   g_object_bind_property (bolt_page, "visible",
                           self->bolt_row, "visible", G_BINDING_SYNC_CREATE);
+#endif
+
+#ifdef HAVE_LOCATION_SERVICES
+  CcLocationPage *location_page = g_object_new (CC_TYPE_LOCATION_PAGE, NULL);
+
+  adw_navigation_view_add (self->navigation, ADW_NAVIGATION_PAGE (location_page));
+
+  g_object_bind_property (location_page, "visible",
+                          self->location_row, "visible", G_BINDING_SYNC_CREATE);
 #endif
 
   g_signal_connect_object (self, "notify::subpage", G_CALLBACK (on_subpage_set), self, G_CONNECT_SWAPPED);
