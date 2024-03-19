@@ -273,6 +273,11 @@ endif
 config_h.set('HAVE_MALCONTENT', enable_malcontent,
              description: 'Define to 1 if malcontent support is enabled')
 
+# location services support
+location_services = get_option('location-services')
+config_h.set('HAVE_LOCATION_SERVICES', location_services.enabled(),
+             description: 'Whether location services is enabled')
+
 if host_is_linux
   # ModemManager
   mm_dep =  dependency('mm-glib', version: '>= 0.7')
