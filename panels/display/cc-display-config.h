@@ -113,6 +113,9 @@ struct _CcDisplayMonitorClass
   guint32           (*get_id)                 (CcDisplayMonitor  *self);
   const char*       (*get_display_name)       (CcDisplayMonitor  *self);
   const char*       (*get_connector_name)     (CcDisplayMonitor  *self);
+  const char*       (*get_vendor_name)        (CcDisplayMonitor  *self);
+  const char*       (*get_product_name)       (CcDisplayMonitor  *self);
+  const char*       (*get_product_serial)     (CcDisplayMonitor  *self);
   gboolean          (*is_builtin)             (CcDisplayMonitor  *self);
   gboolean          (*is_primary)             (CcDisplayMonitor  *self);
   void              (*set_primary)            (CcDisplayMonitor  *self,
@@ -218,6 +221,9 @@ const char*       cc_display_monitor_get_display_name       (CcDisplayMonitor   
 gboolean          cc_display_monitor_is_active              (CcDisplayMonitor   *monitor);
 void              cc_display_monitor_set_active             (CcDisplayMonitor   *monitor,
                                                              gboolean            active);
+const char *      cc_display_monitor_get_vendor_name        (CcDisplayMonitor   *monitor);
+const char *      cc_display_monitor_get_product_name       (CcDisplayMonitor   *monitor);
+const char *      cc_display_monitor_get_product_serial     (CcDisplayMonitor   *monitor);
 const char*       cc_display_monitor_get_connector_name     (CcDisplayMonitor   *monitor);
 CcDisplayRotation cc_display_monitor_get_rotation           (CcDisplayMonitor   *monitor);
 void              cc_display_monitor_set_rotation           (CcDisplayMonitor   *monitor,

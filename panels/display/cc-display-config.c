@@ -236,6 +236,24 @@ cc_display_monitor_get_connector_name (CcDisplayMonitor *self)
   return CC_DISPLAY_MONITOR_GET_CLASS (self)->get_connector_name (self);
 }
 
+const char *
+cc_display_monitor_get_vendor_name (CcDisplayMonitor *self)
+{
+  return CC_DISPLAY_MONITOR_GET_CLASS (self)->get_vendor_name (self);
+}
+
+const char *
+cc_display_monitor_get_product_name (CcDisplayMonitor *self)
+{
+  return CC_DISPLAY_MONITOR_GET_CLASS (self)->get_product_name (self);
+}
+
+const char *
+cc_display_monitor_get_product_serial (CcDisplayMonitor *self)
+{
+  return CC_DISPLAY_MONITOR_GET_CLASS (self)->get_product_serial (self);
+}
+
 gboolean
 cc_display_monitor_is_builtin (CcDisplayMonitor *self)
 {

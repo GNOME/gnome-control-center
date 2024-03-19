@@ -413,6 +413,30 @@ cc_display_monitor_dbus_get_connector_name (CcDisplayMonitor *pself)
   return self->connector_name;
 }
 
+static const char *
+cc_display_monitor_dbus_get_vendor_name (CcDisplayMonitor *pself)
+{
+  CcDisplayMonitorDBus *self = CC_DISPLAY_MONITOR_DBUS (pself);
+
+  return self->vendor_name;
+}
+
+static const char *
+cc_display_monitor_dbus_get_product_name (CcDisplayMonitor *pself)
+{
+  CcDisplayMonitorDBus *self = CC_DISPLAY_MONITOR_DBUS (pself);
+
+  return self->product_name;
+}
+
+static const char *
+cc_display_monitor_dbus_get_product_serial (CcDisplayMonitor *pself)
+{
+  CcDisplayMonitorDBus *self = CC_DISPLAY_MONITOR_DBUS (pself);
+
+  return self->product_serial;
+}
+
 static gboolean
 cc_display_monitor_dbus_is_builtin (CcDisplayMonitor *pself)
 {
@@ -905,6 +929,9 @@ cc_display_monitor_dbus_class_init (CcDisplayMonitorDBusClass *klass)
 
   parent_class->get_display_name = cc_display_monitor_dbus_get_display_name;
   parent_class->get_connector_name = cc_display_monitor_dbus_get_connector_name;
+  parent_class->get_vendor_name = cc_display_monitor_dbus_get_vendor_name;
+  parent_class->get_product_name = cc_display_monitor_dbus_get_product_name;
+  parent_class->get_product_serial = cc_display_monitor_dbus_get_product_serial;
   parent_class->is_builtin = cc_display_monitor_dbus_is_builtin;
   parent_class->is_primary = cc_display_monitor_dbus_is_primary;
   parent_class->set_primary = cc_display_monitor_dbus_set_primary;
