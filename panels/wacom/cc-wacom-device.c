@@ -269,7 +269,8 @@ static GnomeRROutput *
 find_output_by_edid (GnomeRRScreen *rr_screen,
 		     const gchar   *vendor,
 		     const gchar   *product,
-		     const gchar   *serial)
+		     const gchar   *serial,
+		     const gchar   *name)
 {
 	GnomeRROutput **rr_outputs;
 	GnomeRROutput *retval = NULL;
@@ -281,19 +282,22 @@ find_output_by_edid (GnomeRRScreen *rr_screen,
 		g_autofree gchar *o_vendor = NULL;
 		g_autofree gchar *o_product = NULL;
 		g_autofree gchar *o_serial = NULL;
+		const gchar *o_name;
 		gboolean match;
 
+		o_name = gnome_rr_output_get_name (rr_outputs[i]);
 		gnome_rr_output_get_ids_from_edid (rr_outputs[i],
 						   &o_vendor,
 						   &o_product,
 						   &o_serial);
 
-		g_debug ("Checking for match between '%s','%s','%s' and '%s','%s','%s'", \
-		         vendor, product, serial, o_vendor, o_product, o_serial);
+		g_debug ("Checking for match between '%s','%s','%s', '%s' and '%s','%s','%s', '%s'", \
+		         vendor, product, serial, name, o_vendor, o_product, o_serial, o_name);
 
 		match = (g_strcmp0 (vendor,  o_vendor)  == 0) && \
 		        (g_strcmp0 (product, o_product) == 0) && \
-		        (g_strcmp0 (serial,  o_serial)  == 0);
+		        (g_strcmp0 (serial,  o_serial)  == 0) && \
+		        (g_strcmp0 (name,    o_name)    == 0);
 
 		if (match) {
 			retval = rr_outputs[i];
@@ -315,6 +319,7 @@ find_output (GnomeRRScreen *rr_screen,
 	g_autoptr(GSettings) settings = NULL;
 	g_autoptr(GVariant) variant = NULL;
 	g_autofree const gchar **edid = NULL;
+	const gchar *connector_name = NULL;
 	gsize n;
 
 	settings = cc_wacom_device_get_settings (device);
@@ -325,11 +330,13 @@ find_output (GnomeRRScreen *rr_screen,
 		g_critical ("Expected 'output' key to store at least %d values; got %"G_GSIZE_FORMAT".", 3, n);
 		return NULL;
 	}
+	if (n >= 4)
+		connector_name = edid[3];
 
 	if (strlen (edid[0]) == 0 || strlen (edid[1]) == 0 || strlen (edid[2]) == 0)
 		return NULL;
 
-	return find_output_by_edid (rr_screen, edid[0], edid[1], edid[2]);
+	return find_output_by_edid (rr_screen, edid[0], edid[1], edid[2], connector_name);
 }
 
 GnomeRROutput *
