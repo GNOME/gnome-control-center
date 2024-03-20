@@ -555,10 +555,11 @@ update_displays_model (CcWacomPage *page)
 	g_autoptr (CcDisplayConfig) config = NULL;
 	CcDisplayMonitor *cur_output;
 	GList *monitors;
-	GList *l;
+	GList *l, *k;
 	int idx = 0, cur = -1, automatic_item = -1;
 	g_autoptr (GObject) obj = NULL;
 	GVariant *variant;
+	gboolean need_connector_name = false;
 
 	config = cc_display_config_manager_get_current (page->display_config_manager);
 	if (!config)
@@ -569,9 +570,23 @@ update_displays_model (CcWacomPage *page)
 	cur_output = cc_wacom_device_get_output (page->stylus, config);
 
 	for (l = monitors; l; l = l->next) {
+		const char *l_name = cc_display_monitor_get_ui_name (l->data);
+		for (k = monitors; k; k = k->next) {
+			const char *k_name = cc_display_monitor_get_ui_name (k->data);
+			if (k != l && g_strcmp0 (l_name, k_name) == 0) {
+				need_connector_name = true;
+				break;
+			}
+		}
+		if (need_connector_name)
+			break;
+	}
+
+	for (l = monitors; l; l = l->next) {
 		CcDisplayMonitor *monitor = CC_DISPLAY_MONITOR (l->data);
 		const char *vendor, *product, *serial;
 		const gchar *disp_name, *connector;
+		g_autofree gchar *name = NULL;
 
 		if (!cc_display_monitor_is_active (monitor))
 			continue;
@@ -587,7 +602,12 @@ update_displays_model (CcWacomPage *page)
 
 		variant = g_variant_new_strv ((const gchar *[]) { vendor, product, serial, connector }, 4);
 
-		gtk_string_list_append (list, disp_name);
+		name = g_strdup_printf ("%s%s%s%s", disp_name,
+					need_connector_name ? " (" : "",
+					need_connector_name ? connector : "",
+					need_connector_name ? ")" : "");
+
+		gtk_string_list_append (list, name);
 		obj = g_list_model_get_item (G_LIST_MODEL (list), idx);
 		g_object_set_data_full (G_OBJECT (obj), "value-output",
 					variant, (GDestroyNotify) g_variant_unref);
