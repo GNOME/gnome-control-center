@@ -321,8 +321,8 @@ find_output (GnomeRRScreen *rr_screen,
 	variant = g_settings_get_value (settings, "output");
 	edid = g_variant_get_strv (variant, &n);
 
-	if (n != 3) {
-		g_critical ("Expected 'output' key to store %d values; got %"G_GSIZE_FORMAT".", 3, n);
+	if (n < 3) {
+		g_critical ("Expected 'output' key to store at least %d values; got %"G_GSIZE_FORMAT".", 3, n);
 		return NULL;
 	}
 
