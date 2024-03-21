@@ -423,14 +423,19 @@ search_panel_update_enabled_move_actions (CcSearchPanel *self)
        child;
        child = gtk_widget_get_next_sibling (child))
     {
+      GtkWidget *next_child;
       gint row_idx;
 
       if (!CC_IS_SEARCH_PANEL_ROW (child))
         continue;
 
+      next_child = gtk_widget_get_next_sibling (GTK_WIDGET (child));
+      if (!CC_IS_SEARCH_PANEL_ROW (next_child))
+        continue;
+
       row_idx = gtk_list_box_row_get_index (GTK_LIST_BOX_ROW (child));
       gtk_widget_action_set_enabled (GTK_WIDGET (child), "row.move-up", row_idx != 0);
-      gtk_widget_action_set_enabled (GTK_WIDGET (child), "row.move-down", GTK_LIST_BOX_ROW (gtk_widget_get_next_sibling (GTK_WIDGET (child))) != NULL);
+      gtk_widget_action_set_enabled (GTK_WIDGET (child), "row.move-down", GTK_LIST_BOX_ROW (next_child) != NULL);
     }
 }
 
