@@ -84,6 +84,8 @@ set_dialog_item_layer1 (CcFirmwareSecurityDialog *self,
         gtk_widget_add_css_class (self->firmware_security_dialog_icon, "error");
         break;
       case 1:
+        gtk_widget_add_css_class (self->firmware_security_dialog_icon, "warning");
+        break;
       case 2:
       case 3:
       case 4:
@@ -115,7 +117,7 @@ update_dialog (CcFirmwareSecurityDialog *self)
 
     case 1:
       set_dialog_item_layer1 (self,
-                              "emblem-default-symbolic",
+                              "channel-secure-symbolic",
                               _("Basic Security Checks Passed"),
                               /* TRANSLATORS: This description describes the device passing the
                                  minimum requirement of security check.*/

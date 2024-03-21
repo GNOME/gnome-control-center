@@ -501,8 +501,8 @@ set_hsi_button_view_contain (CcFirmwareSecurityPage *self,
         gtk_widget_add_css_class (self->hsi_icon, "error");
         break;
       case 1:
-        gtk_image_set_from_icon_name (GTK_IMAGE (self->hsi_icon), "emblem-default-symbolic");
-        gtk_widget_add_css_class (self->hsi_icon, "good");
+        gtk_image_set_from_icon_name (GTK_IMAGE (self->hsi_icon), "channel-secure-symbolic");
+        gtk_widget_add_css_class (self->hsi_icon, "warning");
         break;
       case 2:
       case 3:
