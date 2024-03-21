@@ -31,7 +31,7 @@
 #include "datetime/cc-datetime-page.h"
 #include "region/cc-region-page.h"
 #include "remote-desktop/cc-remote-desktop-page.h"
-#include "remote-login/cc-remote-login-page.h"
+#include "secure-shell/cc-secure-shell-page.h"
 #include "users/cc-users-page.h"
 
 struct _CcSystemPanel
@@ -125,7 +125,7 @@ on_secure_shell_row_clicked (CcSystemPanel *self)
   if (self->remote_login_dialog == NULL) {
     GtkWidget *parent = cc_shell_get_toplevel (cc_panel_get_shell (CC_PANEL (self)));
 
-    self->remote_login_dialog = g_object_new (CC_TYPE_REMOTE_LOGIN_PAGE, NULL);
+    self->remote_login_dialog = g_object_new (CC_TYPE_SECURE_SHELL_PAGE, NULL);
 
     gtk_window_set_transient_for (GTK_WINDOW (self->remote_login_dialog),
                                   GTK_WINDOW (parent));
@@ -211,7 +211,7 @@ cc_system_panel_class_init (CcSystemPanelClass *klass)
   g_type_ensure (CC_TYPE_DATE_TIME_PAGE);
   g_type_ensure (CC_TYPE_REGION_PAGE);
   g_type_ensure (CC_TYPE_REMOTE_DESKTOP_PAGE);
-  g_type_ensure (CC_TYPE_REMOTE_LOGIN_PAGE);
+  g_type_ensure (CC_TYPE_SECURE_SHELL_PAGE);
   g_type_ensure (CC_TYPE_USERS_PAGE);
 }
 

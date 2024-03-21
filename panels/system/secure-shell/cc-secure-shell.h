@@ -23,6 +23,6 @@
 
 #include <adwaita.h>
 
-void cc_remote_login_get_enabled (AdwSwitchRow *widget);
-void cc_remote_login_set_enabled (GCancellable *cancellable,
+void cc_secure_shell_get_enabled (AdwSwitchRow *widget);
+void cc_secure_shell_set_enabled (GCancellable *cancellable,
                                   AdwSwitchRow *row);

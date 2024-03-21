@@ -18,7 +18,7 @@
  * Author: Thomas Wood <thomas.wood@intel.com>
  *
  */
-#include "cc-remote-login.h"
+#include "cc-secure-shell.h"
 #include "cc-systemd-service.h"
 
 #include <gio/gio.h>
@@ -38,7 +38,7 @@ typedef struct
 G_DEFINE_AUTOPTR_CLEANUP_FUNC (CallbackData, g_free)
 
 void
-cc_remote_login_get_enabled (AdwSwitchRow  *widget)
+cc_secure_shell_get_enabled (AdwSwitchRow  *widget)
 {
   /* disable the switch until the current state is known */
   gtk_widget_set_sensitive (GTK_WIDGET (widget), FALSE);
@@ -96,11 +96,11 @@ on_permission_acquired (GObject      *source_object,
 
   /* If permission could not be acquired, or permission was not granted,
    * switch might be out of sync, update switch state */
-  cc_remote_login_get_enabled (callback_data->widget);
+  cc_secure_shell_get_enabled (callback_data->widget);
 }
 
 void
-cc_remote_login_set_enabled (GCancellable *cancellable,
+cc_secure_shell_set_enabled (GCancellable *cancellable,
                              AdwSwitchRow    *widget)
 {
   GPermission       *permission;

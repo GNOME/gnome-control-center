@@ -18,34 +18,34 @@
  */
 
 #undef G_LOG_DOMAIN
-#define G_LOG_DOMAIN "cc-remote-login-page"
+#define G_LOG_DOMAIN "cc-secure-shell-page"
 
 #include <glib/gi18n.h>
 
 #include "cc-hostname.h"
 #include "cc-list-row.h"
-#include "cc-remote-login.h"
-#include "cc-remote-login-page.h"
+#include "cc-secure-shell.h"
+#include "cc-secure-shell-page.h"
 #include "cc-systemd-service.h"
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
 #endif
 
-struct _CcRemoteLoginPage {
+struct _CcSecureShellPage {
   AdwWindow parent_instance;
 
   AdwActionRow    *hostname_row;
-  AdwSwitchRow    *remote_login_row;
+  AdwSwitchRow    *secure_shell_row;
   AdwToastOverlay *toast_overlay;
 
   GCancellable *cancellable;
 };
 
-G_DEFINE_TYPE (CcRemoteLoginPage, cc_remote_login_page, ADW_TYPE_WINDOW)
+G_DEFINE_TYPE (CcSecureShellPage, cc_secure_shell_page, ADW_TYPE_WINDOW)
 
 static void
-on_copy_ssh_command_button_clicked (CcRemoteLoginPage *self)
+on_copy_ssh_command_button_clicked (CcSecureShellPage *self)
 {
   gdk_clipboard_set_text (gtk_widget_get_clipboard (GTK_WIDGET (self)),
                           adw_action_row_get_subtitle (ADW_ACTION_ROW (self->hostname_row)));
@@ -54,42 +54,42 @@ on_copy_ssh_command_button_clicked (CcRemoteLoginPage *self)
 }
 
 static void
-remote_login_row_activate (CcRemoteLoginPage *self)
+secure_shell_row_activate (CcSecureShellPage *self)
 {
-  cc_remote_login_set_enabled (self->cancellable, self->remote_login_row);
+  cc_secure_shell_set_enabled (self->cancellable, self->secure_shell_row);
 }
 
 static void
-cc_remote_login_page_dispose (GObject *object)
+cc_secure_shell_page_dispose (GObject *object)
 {
-  CcRemoteLoginPage *self = (CcRemoteLoginPage *) object;
+  CcSecureShellPage *self = (CcSecureShellPage *) object;
 
   g_cancellable_cancel (self->cancellable);
   g_clear_object (&self->cancellable);
 
-  G_OBJECT_CLASS (cc_remote_login_page_parent_class)->dispose (object);
+  G_OBJECT_CLASS (cc_secure_shell_page_parent_class)->dispose (object);
 }
 
 static void
-cc_remote_login_page_class_init (CcRemoteLoginPageClass * klass)
+cc_secure_shell_page_class_init (CcSecureShellPageClass * klass)
 {
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
   GObjectClass   *object_class = G_OBJECT_CLASS (klass);
 
-  object_class->dispose = cc_remote_login_page_dispose;
+  object_class->dispose = cc_secure_shell_page_dispose;
 
-  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/system/remote-login/cc-remote-login-page.ui");
+  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/system/secure-shell/cc-secure-shell-page.ui");
 
-  gtk_widget_class_bind_template_child (widget_class, CcRemoteLoginPage, hostname_row);
-  gtk_widget_class_bind_template_child (widget_class, CcRemoteLoginPage, remote_login_row);
-  gtk_widget_class_bind_template_child (widget_class, CcRemoteLoginPage, toast_overlay);
+  gtk_widget_class_bind_template_child (widget_class, CcSecureShellPage, hostname_row);
+  gtk_widget_class_bind_template_child (widget_class, CcSecureShellPage, secure_shell_row);
+  gtk_widget_class_bind_template_child (widget_class, CcSecureShellPage, toast_overlay);
 
   gtk_widget_class_bind_template_callback (widget_class, on_copy_ssh_command_button_clicked);
-  gtk_widget_class_bind_template_callback (widget_class, remote_login_row_activate);
+  gtk_widget_class_bind_template_callback (widget_class, secure_shell_row_activate);
 }
 
 static void
-cc_remote_login_page_init (CcRemoteLoginPage *self)
+cc_secure_shell_page_init (CcSecureShellPage *self)
 {
   g_autofree gchar *hostname = NULL;
   g_autofree gchar *command = NULL;
@@ -98,10 +98,10 @@ cc_remote_login_page_init (CcRemoteLoginPage *self)
 
   self->cancellable = g_cancellable_new ();
 
-  cc_remote_login_get_enabled (self->remote_login_row);
-  g_signal_connect_object (self->remote_login_row,
+  cc_secure_shell_get_enabled (self->secure_shell_row);
+  g_signal_connect_object (self->secure_shell_row,
                            "notify::active",
-                           G_CALLBACK (remote_login_row_activate),
+                           G_CALLBACK (secure_shell_row_activate),
                            self,
                            G_CONNECT_SWAPPED);
 
