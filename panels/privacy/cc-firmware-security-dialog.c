@@ -103,25 +103,26 @@ update_dialog (CcFirmwareSecurityDialog *self)
     case 0:
       set_dialog_item_layer1 (self,
                               "dialog-warning-symbolic",
-                              _("Checks Failed"),
+                              _("Security Checks Failed"),
                               /* TRANSLATORS: This is the description to describe the failure on
                                  checking the security items. */
                               _("Hardware does not pass checks. "
                                 "This means that you are not protected against common hardware security issues."
                                 "\n\n"
                                 "It may be possible to resolve hardware security issues by updating your firmware or changing device configuration options. "
-                                "However, failures can stem from the physical hardware itself, and may not be reversible."));
+                                "However, failures can stem from the physical hardware itself and may not be fixable."));
       break;
 
     case 1:
       gtk_window_set_default_size (GTK_WINDOW (&self->parent), 380, 380);
       set_dialog_item_layer1 (self,
                               "emblem-default-symbolic",
-                              _("Checks Passed"),
+                              _("Basic Security Checks Passed"),
                               /* TRANSLATORS: This description describes the device passing the
                                  minimum requirement of security check.*/
                               _("This device meets basic security requirements. "
-                                "Its hardware has protection against some of the most common security threats."));
+                                "It has protection against some of the most common hardware security threats. "
+                                "However, it lacks stronger protections and any security failures would have critical security impact."));
       break;
 
     case 2:
@@ -135,7 +136,7 @@ update_dialog (CcFirmwareSecurityDialog *self)
                               /* TRANSLATOR: This description describes the devices passing
                                  the extended security check. */
                               _("This device passes current security tests. "
-                                "Its hardware is protected against the majority of security threats."));
+                                "It is protected against the majority of hardware security threats."));
       break;
 
     default:
@@ -145,7 +146,7 @@ update_dialog (CcFirmwareSecurityDialog *self)
                               _("Checks Unavailable"),
                               /* TRANSLATORS: When the security result is unavailable, this description is shown. */
                               _("Device security checks are not available for this device. "
-                                "It is not possible to tell whether it meets security requirements."));
+                                "It is not possible to tell whether it meets hardware security requirements."));
     }
 }
 
