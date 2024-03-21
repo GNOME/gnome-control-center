@@ -529,15 +529,15 @@ set_hsi_button_view (CcFirmwareSecurityPage *self)
         set_hsi_button_view_contain (self,
                                      self->hsi_number,
                                      /* TRANSLATORS: in reference to firmware protection: 0/4 stars */
-                                     _("Checks Failed"),
-                                     _("Hardware does not pass checks."));
+                                     _("Security Checks Failed"),
+                                     _("Hardware does not pass basic security checks."));
         break;
       case 1:
         set_hsi_button_view_contain (self,
                                      self->hsi_number,
                                      /* TRANSLATORS: in reference to firmware protection: 1/4 stars */
-                                     _("Checks Passed"),
-                                     _("Hardware meets basic security requirements."));
+                                     _("Basic Security Checks Passed"),
+                                     _("Hardware has a basic level of protection."));
         break;
       case 2:
       case 3:
@@ -546,13 +546,13 @@ set_hsi_button_view (CcFirmwareSecurityPage *self)
                                      self->hsi_number,
                                      /* TRANSLATORS: in reference to firmware protection: 2~4 stars */
                                      _("Protected"),
-                                     _("Hardware has a good level of protection."));
+                                     _("Hardware has a strong level of protection."));
         break;
       case G_MAXUINT:
         set_hsi_button_view_contain (self,
                                      self->hsi_number,
                                      /* TRANSLATORS: in reference to firmware protection: ??? stars */
-                                     _("Checks Unavailable"),
+                                     _("Security Checks Unavailable"),
                                      _("Security levels are not available for this device."));
         break;
       default:
