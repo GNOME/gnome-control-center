@@ -18,7 +18,7 @@
  */
 
 #undef G_LOG_DOMAIN
-#define G_LOG_DOMAIN "cc-remote-session-page"
+#define G_LOG_DOMAIN "cc-remote-login-page"
 
 #include <glib/gi18n.h>
 #include <glib/gstdio.h>
@@ -26,7 +26,7 @@
 #include <fcntl.h>
 #include <stdio.h>
 
-#include "cc-remote-session-page.h"
+#include "cc-remote-login-page.h"
 #include "cc-encryption-fingerprint-dialog.h"
 #include "cc-hostname.h"
 #include "cc-password-utils.h"
@@ -41,17 +41,17 @@
 #endif
 
 #define REMOTE_DESKTOP_STORE_CREDENTIALS_TIMEOUT_S 2
-#define REMOTE_SESSION_SYSTEMD_SERVICE "gnome-remote-desktop.service"
-#define REMOTE_SESSION_DBUS_SERVICE "org.gnome.RemoteDesktop"
-#define REMOTE_SESSION_OBJECT_PATH "/org/gnome/RemoteDesktop/Rdp/Server"
-#define REMOTE_SESSION_PERMISSION "org.gnome.controlcenter.remote-session-helper"
+#define REMOTE_LOGIN_SYSTEMD_SERVICE "gnome-remote-desktop.service"
+#define REMOTE_LOGIN_DBUS_SERVICE "org.gnome.RemoteDesktop"
+#define REMOTE_LOGIN_OBJECT_PATH "/org/gnome/RemoteDesktop/Rdp/Server"
+#define REMOTE_LOGIN_PERMISSION "org.gnome.controlcenter.remote-session-helper"
 
-struct _CcRemoteSessionPage {
+struct _CcRemoteLoginPage {
   AdwBin parent_instance;
 
   GsdRemoteDesktopRdpServer *rdp_server;
 
-  AdwSwitchRow *remote_session_row;
+  AdwSwitchRow *remote_login_row;
   GtkWidget    *toast_overlay;
   CcPermissionInfobar *permission_infobar;
   AdwActionRow *hostname_row;
@@ -75,14 +75,14 @@ struct _CcRemoteSessionPage {
   gboolean have_credentials;
 };
 
-G_DEFINE_TYPE (CcRemoteSessionPage, cc_remote_session_page, ADW_TYPE_BIN)
-static void on_remote_session_active_changed (CcRemoteSessionPage *self);
-static void enable_remote_session_service (CcRemoteSessionPage *self);
-static void connect_to_remote_desktop_rdp_server (CcRemoteSessionPage *self);
-static void fetch_credentials (CcRemoteSessionPage *self);
+G_DEFINE_TYPE (CcRemoteLoginPage, cc_remote_login_page, ADW_TYPE_BIN)
+static void on_remote_login_active_changed (CcRemoteLoginPage *self);
+static void enable_remote_login_service (CcRemoteLoginPage *self);
+static void connect_to_remote_desktop_rdp_server (CcRemoteLoginPage *self);
+static void fetch_credentials (CcRemoteLoginPage *self);
 
 static void
-add_toast (CcRemoteSessionPage *self,
+add_toast (CcRemoteLoginPage *self,
            const char          *message)
 {
   adw_toast_overlay_add_toast (ADW_TOAST_OVERLAY (self->toast_overlay),
@@ -90,7 +90,7 @@ add_toast (CcRemoteSessionPage *self,
 }
 
 static void
-on_address_copy_clicked (CcRemoteSessionPage *self,
+on_address_copy_clicked (CcRemoteLoginPage *self,
                          GtkButton           *button)
 {
   gdk_clipboard_set_text (gtk_widget_get_clipboard (GTK_WIDGET (button)),
@@ -99,7 +99,7 @@ on_address_copy_clicked (CcRemoteSessionPage *self,
 }
 
 static void
-on_port_copy_clicked (CcRemoteSessionPage *self,
+on_port_copy_clicked (CcRemoteLoginPage *self,
                       GtkButton           *button)
 {
   gdk_clipboard_set_text (gtk_widget_get_clipboard (GTK_WIDGET (button)),
@@ -108,7 +108,7 @@ on_port_copy_clicked (CcRemoteSessionPage *self,
 }
 
 static void
-on_username_copy_clicked (CcRemoteSessionPage *self,
+on_username_copy_clicked (CcRemoteLoginPage *self,
                           GtkButton           *button)
 {
   GtkEditable *editable = GTK_EDITABLE (self->username_entry);
@@ -119,7 +119,7 @@ on_username_copy_clicked (CcRemoteSessionPage *self,
 }
 
 static void
-on_password_copy_clicked (CcRemoteSessionPage *self,
+on_password_copy_clicked (CcRemoteLoginPage *self,
                           GtkButton           *button)
 {
   GtkEditable *editable = GTK_EDITABLE (self->password_entry);
@@ -130,7 +130,7 @@ on_password_copy_clicked (CcRemoteSessionPage *self,
 }
 
 static void
-on_generate_password_button_clicked (CcRemoteSessionPage *self)
+on_generate_password_button_clicked (CcRemoteLoginPage *self)
 {
   g_autofree char *new_password = cc_generate_password ();
 
@@ -138,32 +138,32 @@ on_generate_password_button_clicked (CcRemoteSessionPage *self)
 }
 
 static void
-on_verify_encryption_button_clicked (CcRemoteSessionPage *self)
+on_verify_encryption_button_clicked (CcRemoteLoginPage *self)
 {
   gtk_window_present (GTK_WINDOW (self->fingerprint_dialog));
 }
 
 static void
-start_remote_session_row_activation (CcRemoteSessionPage *self)
+start_remote_login_row_activation (CcRemoteLoginPage *self)
 {
-  gtk_widget_set_sensitive (GTK_WIDGET (self->remote_session_row), FALSE);
+  gtk_widget_set_sensitive (GTK_WIDGET (self->remote_login_row), FALSE);
   self->activating = TRUE;
 }
 
 static void
-finish_remote_session_row_activation (CcRemoteSessionPage *self)
+finish_remote_login_row_activation (CcRemoteLoginPage *self)
 {
   if (g_permission_get_allowed (self->permission))
-    gtk_widget_set_sensitive (GTK_WIDGET (self->remote_session_row), TRUE);
+    gtk_widget_set_sensitive (GTK_WIDGET (self->remote_login_row), TRUE);
   self->activating = FALSE;
 }
 
 static void
-on_remote_session_enabled (GsdRemoteDesktopRdpServer *rdp_server,
+on_remote_login_enabled (GsdRemoteDesktopRdpServer *rdp_server,
                            GAsyncResult              *result,
                            gpointer                   user_data)
 {
-  CcRemoteSessionPage *self = user_data;
+  CcRemoteLoginPage *self = user_data;
   g_autoptr(GError) error = NULL;
   gboolean success;
 
@@ -176,17 +176,17 @@ on_remote_session_enabled (GsdRemoteDesktopRdpServer *rdp_server,
       g_clear_error (&error);
     }
 
-  finish_remote_session_row_activation (self);
+  finish_remote_login_row_activation (self);
 }
 
 static void
-enable_remote_session_service (CcRemoteSessionPage *self)
+enable_remote_login_service (CcRemoteLoginPage *self)
 {
   g_autofree gchar *cmdline = NULL;
   g_autoptr(GError) error = NULL;
   gboolean success;
 
-  success = cc_enable_service (REMOTE_SESSION_SYSTEMD_SERVICE, G_BUS_TYPE_SYSTEM, &error);
+  success = cc_enable_service (REMOTE_LOGIN_SYSTEMD_SERVICE, G_BUS_TYPE_SYSTEM, &error);
 
   if (!success)
     {
@@ -197,7 +197,7 @@ enable_remote_session_service (CcRemoteSessionPage *self)
   gsd_remote_desktop_rdp_server_call_enable (self->rdp_server,
                                              self->cancellable,
                                              (GAsyncReadyCallback)
-                                             on_remote_session_enabled,
+                                             on_remote_login_enabled,
                                              self);
 }
 
@@ -206,7 +206,7 @@ on_certificate_imported (GsdRemoteDesktopRdpServer *rdp_server,
                          GAsyncResult              *result,
                          gpointer                   user_data)
 {
-  CcRemoteSessionPage *self = user_data;
+  CcRemoteLoginPage *self = user_data;
   g_autoptr(GError) error = NULL;
   gboolean success;
   g_autofree char *dir = g_steal_pointer (&self->temp_cert_dir);
@@ -232,7 +232,7 @@ on_certificate_imported (GsdRemoteDesktopRdpServer *rdp_server,
   if (g_remove (dir) != 0)
     g_warning ("Failed to remove temporary directory %s", dir);
 
-  enable_remote_session_service (self);
+  enable_remote_login_service (self);
 }
 
 static void
@@ -240,7 +240,7 @@ on_tls_certificate_generated (GObject      *source_object,
                               GAsyncResult *res,
                               gpointer      user_data)
 {
-  CcRemoteSessionPage *self = user_data;
+  CcRemoteLoginPage *self = user_data;
   g_autofree char *certificate_path = g_build_filename (self->temp_cert_dir, "rdp-tls.crt", NULL);
   g_autofree char *key_path = g_build_filename (self->temp_cert_dir, "rdp-tls.key", NULL);
   g_autoptr(GTlsCertificate) tls_certificate = NULL;
@@ -292,11 +292,11 @@ on_tls_certificate_generated (GObject      *source_object,
     }
 
 fail:
-  finish_remote_session_row_activation (self);
+  finish_remote_login_row_activation (self);
 }
 
 static void
-enable_remote_session (CcRemoteSessionPage *self)
+enable_remote_login (CcRemoteLoginPage *self)
 {
   g_autoptr (GKeyFile) conf_file = NULL;
   const gchar *cert_path = NULL;
@@ -305,7 +305,7 @@ enable_remote_session (CcRemoteSessionPage *self)
   if (gsd_remote_desktop_rdp_server_get_enabled (self->rdp_server))
     return;
 
-  start_remote_session_row_activation (self);
+  start_remote_login_row_activation (self);
 
   cert_path = gsd_remote_desktop_rdp_server_get_tls_cert (self->rdp_server) ?: "";
   key_path = gsd_remote_desktop_rdp_server_get_tls_key (self->rdp_server) ?: "";
@@ -319,7 +319,7 @@ enable_remote_session (CcRemoteSessionPage *self)
       if (!temp_dir)
         {
           g_warning ("Failed to create temporary directory");
-          finish_remote_session_row_activation (self);
+          finish_remote_login_row_activation (self);
           return;
         }
 
@@ -338,15 +338,15 @@ enable_remote_session (CcRemoteSessionPage *self)
       return;
     }
 
-  enable_remote_session_service (self);
+  enable_remote_login_service (self);
 }
 
 static void
-on_remote_session_disabled (GsdRemoteDesktopRdpServer *rdp_server,
+on_remote_login_disabled (GsdRemoteDesktopRdpServer *rdp_server,
                             GAsyncResult              *result,
                             gpointer                   user_data)
 {
-  CcRemoteSessionPage *self = user_data;
+  CcRemoteLoginPage *self = user_data;
   g_autoptr(GError) error = NULL;
   gboolean success;
 
@@ -359,7 +359,7 @@ on_remote_session_disabled (GsdRemoteDesktopRdpServer *rdp_server,
       g_clear_error (&error);
     }
 
-  success = cc_disable_service (REMOTE_SESSION_SYSTEMD_SERVICE, G_BUS_TYPE_SYSTEM, &error);
+  success = cc_disable_service (REMOTE_LOGIN_SYSTEMD_SERVICE, G_BUS_TYPE_SYSTEM, &error);
 
   if (!success)
     {
@@ -371,7 +371,7 @@ on_remote_session_disabled (GsdRemoteDesktopRdpServer *rdp_server,
 }
 
 static void
-disable_remote_session_service (CcRemoteSessionPage *self)
+disable_remote_login_service (CcRemoteLoginPage *self)
 {
   g_autofree gchar *cmdline = NULL;
   g_autoptr(GError) error = NULL;
@@ -382,18 +382,18 @@ disable_remote_session_service (CcRemoteSessionPage *self)
   gsd_remote_desktop_rdp_server_call_disable (self->rdp_server,
                                               self->cancellable,
                                               (GAsyncReadyCallback)
-                                              on_remote_session_disabled,
+                                              on_remote_login_disabled,
                                               self);
 
 }
 
 static void
-on_remote_session_active_changed (CcRemoteSessionPage *self)
+on_remote_login_active_changed (CcRemoteLoginPage *self)
 {
-  if (adw_switch_row_get_active (self->remote_session_row))
-    enable_remote_session (self);
+  if (adw_switch_row_get_active (self->remote_login_row))
+    enable_remote_login (self);
   else
-    disable_remote_session_service (self);
+    disable_remote_login_service (self);
 }
 
 static gboolean
@@ -430,7 +430,7 @@ on_set_rdp_credentials (GsdRemoteDesktopRdpServer *rdp_server,
                         GAsyncResult              *result,
                         gpointer                   user_data)
 {
-  CcRemoteSessionPage *self = user_data;
+  CcRemoteLoginPage *self = user_data;
   g_autoptr(GVariant) credentials = NULL;
   g_autoptr(GError) error = NULL;
 
@@ -453,7 +453,7 @@ on_set_rdp_credentials (GsdRemoteDesktopRdpServer *rdp_server,
 static gboolean
 store_credentials_timeout (gpointer user_data)
 {
-  CcRemoteSessionPage *self = (CcRemoteSessionPage *)user_data;
+  CcRemoteLoginPage *self = (CcRemoteLoginPage *)user_data;
   const char *username, *password;
 
   if (!g_permission_get_allowed (self->permission))
@@ -486,7 +486,7 @@ store_credentials_timeout (gpointer user_data)
 }
 
 static void
-on_credentials_changed (CcRemoteSessionPage *self)
+on_credentials_changed (CcRemoteLoginPage *self)
 {
   g_clear_handle_id (&self->store_credentials_id, g_source_remove);
 
@@ -497,27 +497,27 @@ on_credentials_changed (CcRemoteSessionPage *self)
 }
 
 static void
-hide_password (CcRemoteSessionPage *self)
+hide_password (CcRemoteLoginPage *self)
 {
   GtkEditable *text = gtk_editable_get_delegate (GTK_EDITABLE (self->password_entry));
   gtk_text_set_visibility (GTK_TEXT (text), FALSE);
 }
 
 static void
-sync_permissions (CcRemoteSessionPage *self)
+sync_permissions (CcRemoteLoginPage *self)
 {
   if (!g_permission_get_allowed (self->permission))
     {
       hide_password (self);
 
       g_clear_handle_id (&self->store_credentials_id, g_source_remove);
-      gtk_widget_set_sensitive (GTK_WIDGET (self->remote_session_row), FALSE);
+      gtk_widget_set_sensitive (GTK_WIDGET (self->remote_login_row), FALSE);
       gtk_widget_set_sensitive (self->credentials_group, FALSE);
     }
   else
     {
       if (!self->activating)
-        gtk_widget_set_sensitive (GTK_WIDGET (self->remote_session_row), TRUE);
+        gtk_widget_set_sensitive (GTK_WIDGET (self->remote_login_row), TRUE);
 
       if (self->have_credentials)
         gtk_widget_set_sensitive (self->credentials_group, TRUE);
@@ -525,9 +525,9 @@ sync_permissions (CcRemoteSessionPage *self)
 }
 
 static void
-cc_remote_session_page_dispose (GObject *object)
+cc_remote_login_page_dispose (GObject *object)
 {
-  CcRemoteSessionPage *self = (CcRemoteSessionPage *)object;
+  CcRemoteLoginPage *self = (CcRemoteLoginPage *)object;
 
   g_cancellable_cancel (self->cancellable);
   g_clear_object (&self->cancellable);
@@ -536,29 +536,29 @@ cc_remote_session_page_dispose (GObject *object)
   g_clear_pointer ((GtkWindow **) &self->fingerprint_dialog, gtk_window_destroy);
   g_clear_object (&self->rdp_server);
 
-  G_OBJECT_CLASS (cc_remote_session_page_parent_class)->dispose (object);
+  G_OBJECT_CLASS (cc_remote_login_page_parent_class)->dispose (object);
 }
 
 static void
-cc_remote_session_page_class_init (CcRemoteSessionPageClass * klass)
+cc_remote_login_page_class_init (CcRemoteLoginPageClass * klass)
 {
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
   GObjectClass   *object_class = G_OBJECT_CLASS (klass);
 
-  object_class->dispose = cc_remote_session_page_dispose;
+  object_class->dispose = cc_remote_login_page_dispose;
 
-  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/system/remote-desktop/cc-remote-session-page.ui");
+  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/system/remote-desktop/cc-remote-login-page.ui");
 
-  gtk_widget_class_bind_template_child (widget_class, CcRemoteSessionPage, hostname_row);
-  gtk_widget_class_bind_template_child (widget_class, CcRemoteSessionPage, port_row);
-  gtk_widget_class_bind_template_child (widget_class, CcRemoteSessionPage, toast_overlay);
-  gtk_widget_class_bind_template_child (widget_class, CcRemoteSessionPage, permission_infobar);
-  gtk_widget_class_bind_template_child (widget_class, CcRemoteSessionPage, remote_session_row);
-  gtk_widget_class_bind_template_child (widget_class, CcRemoteSessionPage, credentials_group);
-  gtk_widget_class_bind_template_child (widget_class, CcRemoteSessionPage, username_entry);
-  gtk_widget_class_bind_template_child (widget_class, CcRemoteSessionPage, password_entry);
-  gtk_widget_class_bind_template_child (widget_class, CcRemoteSessionPage, generate_password_button);
-  gtk_widget_class_bind_template_child (widget_class, CcRemoteSessionPage, verify_encryption_button);
+  gtk_widget_class_bind_template_child (widget_class, CcRemoteLoginPage, hostname_row);
+  gtk_widget_class_bind_template_child (widget_class, CcRemoteLoginPage, port_row);
+  gtk_widget_class_bind_template_child (widget_class, CcRemoteLoginPage, toast_overlay);
+  gtk_widget_class_bind_template_child (widget_class, CcRemoteLoginPage, permission_infobar);
+  gtk_widget_class_bind_template_child (widget_class, CcRemoteLoginPage, remote_login_row);
+  gtk_widget_class_bind_template_child (widget_class, CcRemoteLoginPage, credentials_group);
+  gtk_widget_class_bind_template_child (widget_class, CcRemoteLoginPage, username_entry);
+  gtk_widget_class_bind_template_child (widget_class, CcRemoteLoginPage, password_entry);
+  gtk_widget_class_bind_template_child (widget_class, CcRemoteLoginPage, generate_password_button);
+  gtk_widget_class_bind_template_child (widget_class, CcRemoteLoginPage, verify_encryption_button);
 
   gtk_widget_class_bind_template_callback (widget_class, on_address_copy_clicked);
   gtk_widget_class_bind_template_callback (widget_class, on_port_copy_clicked);
@@ -573,7 +573,7 @@ on_got_rdp_credentials (GObject      *source_object,
                         GAsyncResult *result,
                         gpointer      user_data)
 {
-  CcRemoteSessionPage *self = user_data;
+  CcRemoteLoginPage *self = user_data;
   gboolean got_credentials, has_fingerprint;
   g_autoptr(GVariant) credentials = NULL;
   g_autoptr(GError) error = NULL;
@@ -630,7 +630,7 @@ on_got_rdp_credentials (GObject      *source_object,
 }
 
 static void
-fetch_credentials (CcRemoteSessionPage *self)
+fetch_credentials (CcRemoteLoginPage *self)
 {
   g_autoptr(GError) error = NULL;
   g_autofree gchar *username = NULL;
@@ -647,7 +647,7 @@ fetch_credentials (CcRemoteSessionPage *self)
 }
 
 static void
-on_remote_desktop_rdp_server_owner_changed (CcRemoteSessionPage *self)
+on_remote_desktop_rdp_server_owner_changed (CcRemoteLoginPage *self)
 {
   const char *name_owner = g_dbus_proxy_get_name_owner (G_DBUS_PROXY (self->rdp_server));
 
@@ -659,7 +659,7 @@ on_connected_to_remote_desktop_rdp_server (GObject      *source_object,
                                            GAsyncResult *result,
                                            gpointer      user_data)
 {
-  CcRemoteSessionPage *self = user_data;
+  CcRemoteLoginPage *self = user_data;
   g_autoptr (GError) error = NULL;
 
   g_clear_object (&self->rdp_server);
@@ -677,9 +677,9 @@ on_connected_to_remote_desktop_rdp_server (GObject      *source_object,
       return;
     }
 
-  g_signal_handlers_block_by_func (self->remote_session_row, on_remote_session_active_changed, self);
-  g_object_bind_property (self->rdp_server, "enabled", self->remote_session_row, "active", G_BINDING_SYNC_CREATE);
-  g_signal_handlers_unblock_by_func (self->remote_session_row, on_remote_session_active_changed, self);
+  g_signal_handlers_block_by_func (self->remote_login_row, on_remote_login_active_changed, self);
+  g_object_bind_property (self->rdp_server, "enabled", self->remote_login_row, "active", G_BINDING_SYNC_CREATE);
+  g_signal_handlers_unblock_by_func (self->remote_login_row, on_remote_login_active_changed, self);
 
   g_object_bind_property_full (self->rdp_server, "port",
                                self->port_row, "subtitle",
@@ -705,7 +705,7 @@ on_connected_to_remote_desktop_rdp_server (GObject      *source_object,
 }
 
 static void
-connect_to_remote_desktop_rdp_server (CcRemoteSessionPage *self)
+connect_to_remote_desktop_rdp_server (CcRemoteLoginPage *self)
 {
   g_autoptr (GError) error = NULL;
   g_autoptr (GDBusConnection) connection = NULL;
@@ -720,8 +720,8 @@ connect_to_remote_desktop_rdp_server (CcRemoteSessionPage *self)
 
   gsd_remote_desktop_rdp_server_proxy_new (connection,
                                            G_DBUS_PROXY_FLAGS_DO_NOT_AUTO_START_AT_CONSTRUCTION,
-                                           REMOTE_SESSION_DBUS_SERVICE,
-                                           REMOTE_SESSION_OBJECT_PATH,
+                                           REMOTE_LOGIN_DBUS_SERVICE,
+                                           REMOTE_LOGIN_OBJECT_PATH,
                                            self->cancellable,
                                            (GAsyncReadyCallback)
                                            on_connected_to_remote_desktop_rdp_server,
@@ -729,7 +729,7 @@ connect_to_remote_desktop_rdp_server (CcRemoteSessionPage *self)
 }
 
 static void
-cc_remote_session_page_init (CcRemoteSessionPage *self)
+cc_remote_login_page_init (CcRemoteLoginPage *self)
 {
   g_autoptr(GtkCssProvider) provider = NULL;
   g_autoptr(GVariant) credentials = NULL;
@@ -750,15 +750,15 @@ cc_remote_session_page_init (CcRemoteSessionPage *self)
                             G_CALLBACK (on_credentials_changed),
                             self);
 
-  g_signal_connect_object (self->remote_session_row, "notify::active",
-                           G_CALLBACK (on_remote_session_active_changed), self,
+  g_signal_connect_object (self->remote_login_row, "notify::active",
+                           G_CALLBACK (on_remote_login_active_changed), self,
                            G_CONNECT_SWAPPED);
 
-  self->permission = (GPermission*) polkit_permission_new_sync (REMOTE_SESSION_PERMISSION, NULL, self->cancellable, &error);
+  self->permission = (GPermission*) polkit_permission_new_sync (REMOTE_LOGIN_PERMISSION, NULL, self->cancellable, &error);
 
   if (error != NULL)
     {
-      g_warning ("Cannot create '%s' permission: %s", REMOTE_SESSION_PERMISSION, error->message);
+      g_warning ("Cannot create '%s' permission: %s", REMOTE_LOGIN_PERMISSION, error->message);
       g_clear_error (&error);
     }
 

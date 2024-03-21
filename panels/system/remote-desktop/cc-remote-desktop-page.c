@@ -22,7 +22,7 @@
 
 #include "cc-remote-desktop-page.h"
 #include "cc-desktop-sharing-page.h"
-#include "cc-remote-session-page.h"
+#include "cc-remote-login-page.h"
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -58,7 +58,7 @@ cc_remote_desktop_page_class_init (CcRemoteDesktopPageClass * klass)
   object_class->dispose = cc_remote_desktop_page_dispose;
 
   g_type_ensure (CC_TYPE_DESKTOP_SHARING_PAGE);
-  g_type_ensure (CC_TYPE_REMOTE_SESSION_PAGE);
+  g_type_ensure (CC_TYPE_REMOTE_LOGIN_PAGE);
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/system/remote-desktop/cc-remote-desktop-page.ui");
 

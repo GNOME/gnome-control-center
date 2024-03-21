@@ -43,7 +43,7 @@ sources = files(
   'remote-desktop/cc-encryption-fingerprint-dialog.c',
   'remote-desktop/cc-gnome-remote-desktop.c',
   'remote-desktop/cc-remote-desktop-page.c',
-  'remote-desktop/cc-remote-session-page.c',
+  'remote-desktop/cc-remote-login-page.c',
   'remote-desktop/cc-tls-certificate.c',
   'remote-desktop/cc-systemd-service.c',
   'secure-shell/cc-secure-shell.c',
