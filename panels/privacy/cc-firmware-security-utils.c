@@ -31,7 +31,7 @@ fwupd_security_attr_result_to_string (FwupdSecurityAttrResult result)
 {
   if (result == FWUPD_SECURITY_ATTR_RESULT_VALID)
     {
-      /* TRANSLATORS: if the stauts is valid. For example security check is valid and key is valid. */
+      /* TRANSLATORS: if the status is valid. For example security check is valid and key is valid. */
       return _("Valid");
     }
   if (result == FWUPD_SECURITY_ATTR_RESULT_NOT_VALID)
