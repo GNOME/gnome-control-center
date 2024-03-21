@@ -542,6 +542,7 @@ set_hsi_button_view (CcFirmwareSecurityPage *self)
       case 2:
       case 3:
       case 4:
+      case 5:
         set_hsi_button_view_contain (self,
                                      self->hsi_number,
                                      /* TRANSLATORS: in reference to firmware protection: 2~4 stars */
