@@ -674,6 +674,8 @@ on_connected_to_remote_desktop_rdp_server (GObject      *source_object,
     {
       if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
         g_warning ("Failed to create remote desktop proxy: %s", error->message);
+
+      gtk_widget_set_visible (GTK_WIDGET (self), FALSE);
       return;
     }
 
