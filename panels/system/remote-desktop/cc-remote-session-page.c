@@ -716,7 +716,11 @@ connect_to_remote_desktop_rdp_server (CcRemoteSessionPage *self)
     g_warning ("Could not connect to system message bus: %s", error->message);
 
   if (!connection)
-    return;
+    {
+      gtk_widget_set_visible (GTK_WIDGET (self), FALSE);
+
+      return;
+    }
 
   gsd_remote_desktop_rdp_server_proxy_new (connection,
                                            G_DBUS_PROXY_FLAGS_DO_NOT_AUTO_START_AT_CONSTRUCTION,
