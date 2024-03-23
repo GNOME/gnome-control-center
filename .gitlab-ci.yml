@@ -217,6 +217,15 @@ build:
     variables:
       - $CI_PIPELINE_SOURCE == "schedule"
 
+# Same as build but with various off-by-default options enabled
+conditional builds:
+  extends:
+    - build
+  parallel:
+    matrix:
+      - BUILD_OPTS: '-Dmalcontent=true'
+      - BUILD_OPTS: '-Ddocumentation=true'
+
 ##
 # Stage: Test
 #
