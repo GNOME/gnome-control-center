@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2024-03-15 09:24+0000\n"
-"PO-Revision-Date: 2024-03-18 17:10+0100\n"
+"POT-Creation-Date: 2024-03-21 16:01+0000\n"
+"PO-Revision-Date: 2024-03-25 00:31+0100\n"
 "Last-Translator: Martin Srebotnjak <miles@filmsi.net>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "Language: sl_SI\n"
@@ -310,7 +310,7 @@ msgstr "Sistemska dovoljenja, ki jih zahteva program"
 #: panels/applications/cc-applications-panel.ui:371
 #: panels/mouse/cc-mouse-panel.ui:66
 #: panels/multitasking/cc-multitasking-panel.ui:15
-#: panels/power/cc-power-panel.ui:171
+#: panels/power/cc-power-panel.ui:199
 msgid "General"
 msgstr "Splošno"
 
@@ -412,6 +412,10 @@ msgstr "_Klici"
 #: panels/applications/cc-default-apps-page.ui:69
 msgid "_SMS"
 msgstr "_SMS"
+
+#: panels/applications/cc-default-apps-row.c:126
+msgid "No Apps Available"
+msgstr "Noben program ni na voljo"
 
 #: panels/applications/cc-removable-media-settings.c:287
 msgid "Ask what to do"
@@ -1629,7 +1633,7 @@ msgstr[2] "%d uri"
 msgstr[3] "%d ure"
 
 #. Translators: Option for "Blank Screen" in "Power" panel
-#: panels/common/cc-util.c:184 panels/power/cc-power-panel.c:790
+#: panels/common/cc-util.c:184 panels/power/cc-power-panel.c:791
 #, c-format
 msgid "%d minute"
 msgid_plural "%d minutes"
@@ -1695,13 +1699,13 @@ msgstr "Vroča točka"
 
 #: panels/display/cc-display-panel.c:510
 #: panels/notifications/cc-notifications-panel.c:213
-#: panels/power/cc-power-panel.c:679 panels/power/cc-power-panel.c:686
+#: panels/power/cc-power-panel.c:680 panels/power/cc-power-panel.c:687
 msgid "On"
 msgstr "Omogočeno"
 
 #: panels/display/cc-display-panel.c:512 panels/network/cc-net-proxy-page.c:182
 #: panels/notifications/cc-notifications-panel.c:213
-#: panels/power/cc-power-panel.c:673 panels/power/cc-power-panel.c:684
+#: panels/power/cc-power-panel.c:674 panels/power/cc-power-panel.c:685
 msgid "Off"
 msgstr "Onemogočeno"
 
@@ -3000,7 +3004,7 @@ msgstr "Ime omrežja"
 #: panels/network/cc-wifi-hotspot-dialog.ui:92
 #: panels/printers/new-printer-dialog.ui:293
 #: panels/printers/pp-jobs-dialog.ui:54
-#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:110
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:109
 #: panels/system/remote-desktop/cc-remote-session-page.ui:108
 #: panels/system/users/cc-add-user-dialog.ui:159
 #: panels/wwan/cc-wwan-apn-dialog.ui:175
@@ -4521,61 +4525,61 @@ msgstr "Dodatno"
 msgid "%d %%"
 msgstr "%d %%"
 
-#: panels/power/cc-power-panel.c:201
+#: panels/power/cc-power-panel.c:202
 msgid "Battery Levels"
 msgstr "Polnost baterije"
 
 #. Translators: UPS is an Uninterruptible Power Supply:
 #. * https://en.wikipedia.org/wiki/Uninterruptible_power_supply
-#: panels/power/cc-power-panel.c:206
+#: panels/power/cc-power-panel.c:207
 msgid "UPS"
 msgstr "UPS"
 
-#: panels/power/cc-power-panel.c:209
+#: panels/power/cc-power-panel.c:210
 msgid "Battery Level"
 msgstr "Polnost baterije"
 
-#: panels/power/cc-power-panel.c:463
+#: panels/power/cc-power-panel.c:464
 msgid "When _Idle"
 msgstr "Ob _nedejavnosti"
 
-#: panels/power/cc-power-panel.c:616
+#: panels/power/cc-power-panel.c:617
 msgid "Suspend"
 msgstr "Zaustavi"
 
-#: panels/power/cc-power-panel.c:617
+#: panels/power/cc-power-panel.c:618
 msgid "Power Off"
 msgstr "Izklop"
 
-#: panels/power/cc-power-panel.c:618
+#: panels/power/cc-power-panel.c:619
 msgid "Hibernate"
 msgstr "Preidi v mirovanje"
 
-#: panels/power/cc-power-panel.c:619
+#: panels/power/cc-power-panel.c:620
 msgid "Nothing"
 msgstr "Ničesar"
 
-#: panels/power/cc-power-panel.c:675
+#: panels/power/cc-power-panel.c:676
 msgid "When on battery power"
 msgstr "Med delovanjem na bateriji"
 
-#: panels/power/cc-power-panel.c:677
+#: panels/power/cc-power-panel.c:678
 msgid "When plugged in"
 msgstr "Ob priklopu"
 
-#: panels/power/cc-power-panel.c:797
+#: panels/power/cc-power-panel.c:798
 msgctxt "Idle time"
 msgid "Never"
 msgstr "Nikoli"
 
-#: panels/power/cc-power-panel.c:975
+#: panels/power/cc-power-panel.c:976
 msgid ""
 "Performance mode temporarily disabled due to high operating temperature."
 msgstr ""
 "Zmogljivostni način delovanja je začasno onemogočen zaradi visoke delovne "
 "temperature."
 
-#: panels/power/cc-power-panel.c:977
+#: panels/power/cc-power-panel.c:978
 msgid ""
 "Lap detected: performance mode temporarily unavailable. Move the device to a "
 "stable surface to restore."
@@ -4583,11 +4587,11 @@ msgstr ""
 "Sprememba delovanja: zmogljivostni način začasno ni na voljo. Za ponovno "
 "vzpostavitev je treba napravo premakniti na stabilno površino."
 
-#: panels/power/cc-power-panel.c:979
+#: panels/power/cc-power-panel.c:980
 msgid "Performance mode temporarily disabled."
 msgstr "Zmogljivostni način je začasno onemogočen."
 
-#: panels/power/cc-power-panel.c:1021
+#: panels/power/cc-power-panel.c:1022
 msgid ""
 "Low battery: power saver enabled. Previous mode will be restored when "
 "battery is sufficiently charged."
@@ -4596,13 +4600,13 @@ msgstr ""
 "uporabljeni način bo obnovljen, ko bo baterija dovolj napolnjena."
 
 #. translators: "%s" is an application name
-#: panels/power/cc-power-panel.c:1029
+#: panels/power/cc-power-panel.c:1030
 #, c-format
 msgid "Power Saver mode activated by “%s”."
 msgstr "Varčevalni način delovanja je sprožil program »%s«."
 
 #. translators: "%s" is an application name
-#: panels/power/cc-power-panel.c:1033
+#: panels/power/cc-power-panel.c:1034
 #, c-format
 msgid "Performance mode activated by “%s”."
 msgstr "Zmogljivostni način delovanja je sprožil program »%s«."
@@ -4667,87 +4671,111 @@ msgctxt "automatic_suspend"
 msgid "2 hours"
 msgstr "2 uri"
 
-#: panels/power/cc-power-panel.ui:80
+#. Translators: Option for "Delay" in "Automatic suspend" dialog.
+#: panels/power/cc-power-panel.ui:63
+msgctxt "automatic_suspend"
+msgid "1 minute"
+msgstr "1 minuta"
+
+#. Translators: Option for "Delay" in "Automatic suspend" dialog.
+#: panels/power/cc-power-panel.ui:67
+msgctxt "automatic_suspend"
+msgid "2 minutes"
+msgstr "2 minuti"
+
+#. Translators: Option for "Delay" in "Automatic suspend" dialog.
+#: panels/power/cc-power-panel.ui:71
+msgctxt "automatic_suspend"
+msgid "5 minutes"
+msgstr "5 minut"
+
+#. Translators: Option for "Delay" in "Automatic suspend" dialog.
+#: panels/power/cc-power-panel.ui:75
+msgctxt "automatic_suspend"
+msgid "10 minutes"
+msgstr "10 minut"
+
+#: panels/power/cc-power-panel.ui:108
 msgid "Connected Devices"
 msgstr "Priklopljene naprave"
 
-#: panels/power/cc-power-panel.ui:98
+#: panels/power/cc-power-panel.ui:126
 msgid "Power Mode"
 msgstr "Način delovanja"
 
-#: panels/power/cc-power-panel.ui:126
+#: panels/power/cc-power-panel.ui:154
 msgid "Power Saving"
 msgstr "Varčevanje z energijo"
 
-#: panels/power/cc-power-panel.ui:129
+#: panels/power/cc-power-panel.ui:157
 msgid "A_utomatic Screen Brightness"
 msgstr "_Samodejno prilagajanje svetlosti"
 
-#: panels/power/cc-power-panel.ui:130
+#: panels/power/cc-power-panel.ui:158
 msgid "Adjust screen brightness to the surrounding light"
 msgstr "Nastavitev svetlosti zaslona se prilagaja osvetljenosti okolja."
 
-#: panels/power/cc-power-panel.ui:137
+#: panels/power/cc-power-panel.ui:165
 msgid "_Dim Screen"
 msgstr "_Zamegli zaslon"
 
-#: panels/power/cc-power-panel.ui:138
+#: panels/power/cc-power-panel.ui:166
 msgid "Reduce screen brightness when the device is inactive"
 msgstr "Zmanjšaj svetlost zaslona, ko naprava ni dejavna"
 
-#: panels/power/cc-power-panel.ui:144
+#: panels/power/cc-power-panel.ui:172
 msgid "Screen _Blank"
 msgstr "_Prazen zaslon"
 
-#: panels/power/cc-power-panel.ui:145
+#: panels/power/cc-power-panel.ui:173
 msgid "Turn the screen off after a period of inactivity"
 msgstr "Izklopi zaslon po določenem času nedejavnosti."
 
-#: panels/power/cc-power-panel.ui:153
+#: panels/power/cc-power-panel.ui:181
 msgid "Automatic Power _Saver"
 msgstr "Samodejno _ohranjevanje energije"
 
-#: panels/power/cc-power-panel.ui:154
+#: panels/power/cc-power-panel.ui:182
 msgid "Turn on power saver mode when battery power is low"
 msgstr "Omogoči varčni način delovanja, ko je baterija skoraj prazna."
 
-#: panels/power/cc-power-panel.ui:161
+#: panels/power/cc-power-panel.ui:189
 msgid "_Automatic Suspend"
 msgstr "_Samodejen prehod v pripravljenost"
 
-#: panels/power/cc-power-panel.ui:162
+#: panels/power/cc-power-panel.ui:190
 msgid "Pause the device after a period of inactivity"
 msgstr "Preklopi v način pripravljenosti po določenem času nedejavnosti"
 
-#: panels/power/cc-power-panel.ui:175
+#: panels/power/cc-power-panel.ui:203
 msgid "Po_wer Button Behavior"
 msgstr "Delovanje gumba za _priklop"
 
-#: panels/power/cc-power-panel.ui:183
+#: panels/power/cc-power-panel.ui:211
 msgid "Show Battery _Percentage"
 msgstr "Pokaži _napolnjenost baterije"
 
-#: panels/power/cc-power-panel.ui:184
+#: panels/power/cc-power-panel.ui:212
 msgid "Show exact charge level in the top bar"
 msgstr "V vrhnji orodni vrstici prikaži natančno raven napolnjenosti."
 
-#: panels/power/cc-power-panel.ui:197
+#: panels/power/cc-power-panel.ui:225
 msgid "Automatic Suspend"
 msgstr "Samodejen prehod v pripravljenost"
 
-#: panels/power/cc-power-panel.ui:226
+#: panels/power/cc-power-panel.ui:254
 msgid "On _Battery Power"
 msgstr "Napajanje iz _baterije"
 
-#: panels/power/cc-power-panel.ui:233
+#: panels/power/cc-power-panel.ui:261
 msgid "_Delay"
 msgstr "_Zamik"
 
-#: panels/power/cc-power-panel.ui:251
+#: panels/power/cc-power-panel.ui:279
 msgid "_Plugged In"
 msgstr "Napajanje iz _omrežja"
 
-#: panels/power/cc-power-panel.ui:257
+#: panels/power/cc-power-panel.ui:285
 msgid "D_elay"
 msgstr "_Zamik"
 
@@ -4905,7 +4933,7 @@ msgstr ""
 #. Translators: This is a username on a print server.
 #: panels/printers/new-printer-dialog.ui:272
 #: panels/printers/pp-jobs-dialog.ui:42
-#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:94
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:93
 #: panels/system/remote-desktop/cc-remote-session-page.ui:92
 #: panels/wwan/cc-wwan-apn-dialog.ui:150
 msgid "Username"
@@ -7020,34 +7048,34 @@ msgid "System Logo"
 msgstr "Logo sistema"
 
 #. Translators: this field contains the distro name and version
-#: panels/system/about/cc-about-page.ui:57
+#: panels/system/about/cc-about-page.ui:56
 msgid "Operating System"
 msgstr "Operacijski sistem"
 
-#: panels/system/about/cc-about-page.ui:66
+#: panels/system/about/cc-about-page.ui:67
 msgid "Hardware Model"
 msgstr "Strojni model"
 
-#: panels/system/about/cc-about-page.ui:75
+#: panels/system/about/cc-about-page.ui:78
 #: panels/system/about/cc-system-details-window.ui:88
 msgid "Processor"
 msgstr "Procesor"
 
-#: panels/system/about/cc-about-page.ui:83
+#: panels/system/about/cc-about-page.ui:88
 #: panels/system/about/cc-system-details-window.ui:81
 msgid "Memory"
 msgstr "Pomnilnik"
 
-#: panels/system/about/cc-about-page.ui:91
+#: panels/system/about/cc-about-page.ui:98
 #: panels/system/about/cc-system-details-window.ui:103
 msgid "Disk Capacity"
 msgstr "Zmogljivost diska"
 
-#: panels/system/about/cc-about-page.ui:92
+#: panels/system/about/cc-about-page.ui:99
 msgid "Calculating…"
 msgstr "Poteka preračunavanje …"
 
-#: panels/system/about/cc-about-page.ui:99
+#: panels/system/about/cc-about-page.ui:109
 msgid "_System Details"
 msgstr "Podrobnosti _sistema"
 
@@ -7242,47 +7270,47 @@ msgstr "_Področje in Jezik"
 msgid "System language and localization"
 msgstr "Sistemski jezik in jezikovne nastavitve"
 
-#: panels/system/cc-system-panel.ui:34
+#: panels/system/cc-system-panel.ui:33
 msgid "_Date &amp; Time"
 msgstr "_Datum in čas"
 
-#: panels/system/cc-system-panel.ui:35
+#: panels/system/cc-system-panel.ui:34
 msgid "Time zone and clock settings"
 msgstr "Časovni pas in nastavitev ure"
 
-#: panels/system/cc-system-panel.ui:45
+#: panels/system/cc-system-panel.ui:43
 msgid "_Users"
 msgstr "_Uporabniki"
 
-#: panels/system/cc-system-panel.ui:46
+#: panels/system/cc-system-panel.ui:44
 msgid "Add and remove accounts, change password"
 msgstr "Upravljanje računov uporabnikov in spreminjanje gesel"
 
-#: panels/system/cc-system-panel.ui:58
+#: panels/system/cc-system-panel.ui:54
 msgid "R_emote Desktop"
 msgstr "_Oddaljeno namizje"
 
-#: panels/system/cc-system-panel.ui:59
+#: panels/system/cc-system-panel.ui:55
 msgid "Allow this device to be used remotely"
 msgstr "Dovoli uporabo naprave na daljavo"
 
-#: panels/system/cc-system-panel.ui:69
+#: panels/system/cc-system-panel.ui:64
 msgid "Se_cure Shell"
 msgstr "Varna _lupina"
 
-#: panels/system/cc-system-panel.ui:70
+#: panels/system/cc-system-panel.ui:65
 msgid "SSH network access"
 msgstr "Dostop SSH do omrežja"
 
-#: panels/system/cc-system-panel.ui:79
+#: panels/system/cc-system-panel.ui:74
 msgid "_About"
 msgstr "_O programu"
 
-#: panels/system/cc-system-panel.ui:80
+#: panels/system/cc-system-panel.ui:75
 msgid "Hardware details and software versions"
 msgstr "Podrobnosti strojne opreme in različice programskega okolja"
 
-#: panels/system/cc-system-panel.ui:97
+#: panels/system/cc-system-panel.ui:91
 msgid "S_oftware Updates"
 msgstr "_Programske posodobitve"
 
@@ -7627,7 +7655,7 @@ msgstr "Uporabniško ime je kopirano"
 msgid "Password copied"
 msgstr "Geslo je kopirano"
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:13
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:12
 msgid ""
 "Share your existing desktop with other devices. The remote connection uses "
 "the existing screen resolution"
@@ -7635,24 +7663,24 @@ msgstr ""
 "Souporaba obstoječega namizje z drugimi napravami. Oddaljena povezava "
 "uporablja obstoječo ločljivost zaslona."
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:28
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:27
 msgid "_Desktop Sharing"
 msgstr "Souporaba _namizja"
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:34
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:33
 msgid "Remote _Control"
 msgstr "Oddaljeno upravljanje"
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:36
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:35
 msgid "Allows desktop shares to control the screen"
 msgstr "Omogoča upravljanje zaslona namizja"
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:43
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:42
 #: panels/system/remote-desktop/cc-remote-session-page.ui:41
 msgid "How to Connect"
 msgstr "Kako vzpostaviti povezavo"
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:44
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:43
 #: panels/system/remote-desktop/cc-remote-session-page.ui:42
 msgid ""
 "Use a remote desktop app to connect using the RDP protocol. Additional "
@@ -7661,15 +7689,15 @@ msgstr ""
 "S programom za povezavo z oddaljenim namizjem se povežite s protokolom RDP. "
 "Morda bo treba vpisati tudi dodatne podatke o omrežni lokaciji naprave."
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:47
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:46
 #: panels/system/remote-desktop/cc-remote-session-page.ui:45
 msgid "_Hostname"
 msgstr "Ime _gostitelja"
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:55
-#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:76
-#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:97
-#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:113
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:54
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:75
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:96
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:112
 #: panels/system/remote-desktop/cc-remote-session-page.ui:53
 #: panels/system/remote-desktop/cc-remote-session-page.ui:74
 #: panels/system/remote-desktop/cc-remote-session-page.ui:95
@@ -7678,22 +7706,22 @@ msgstr "Ime _gostitelja"
 msgid "Copy"
 msgstr "Kopiraj"
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:68
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:67
 #: panels/system/remote-desktop/cc-remote-session-page.ui:66
 msgid "_Port"
 msgstr "_Vrata"
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:91
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:90
 #: panels/system/remote-desktop/cc-remote-session-page.ui:89
 msgid "Login Details"
 msgstr "Podrobnosti prijave"
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:132
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:131
 #: panels/system/remote-desktop/cc-remote-session-page.ui:130
 msgid "_Generate New Password"
 msgstr "Ustvari _novo geslo"
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:143
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:142
 #: panels/system/remote-desktop/cc-remote-session-page.ui:141
 msgid "_Verify Encryption"
 msgstr "_Overi šifriranje"
