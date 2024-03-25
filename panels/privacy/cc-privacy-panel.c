@@ -50,9 +50,7 @@ cc_privacy_panel_get_help_uri (CcPanel *panel)
   AdwNavigationPage *page = adw_navigation_view_get_visible_page (CC_PRIVACY_PANEL (panel)->navigation);
   const char *page_tag = adw_navigation_page_get_tag (page);
 
-  if (g_strcmp0 (page_tag, "camera-page") == 0)
-    return "help:gnome-help/camera";
-  else if (g_strcmp0 (page_tag, "location-page") == 0)
+  if (g_strcmp0 (page_tag, "location-page") == 0)
     return "help:gnome-help/location";
   else
     return "help:gnome-help/privacy";
