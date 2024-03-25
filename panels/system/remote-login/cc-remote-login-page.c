@@ -22,7 +22,7 @@
 
 #include <glib/gi18n.h>
 
-#include "cc-hostname.c"
+#include "cc-hostname.h"
 #include "cc-list-row.h"
 #include "cc-remote-login.h"
 #include "cc-remote-login-page.h"
