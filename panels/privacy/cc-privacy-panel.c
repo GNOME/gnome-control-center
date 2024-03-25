@@ -59,7 +59,7 @@ cc_privacy_panel_get_help_uri (CcPanel *panel)
   else if (g_strcmp0 (page_tag, "microphone-page") == 0)
     return "help:gnome-help/microphone";
   else
-    return NULL;
+    return "help:gnome-help/privacy";
 }
 
 static void
