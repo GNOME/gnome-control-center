@@ -28,6 +28,10 @@
 #define SSHD_SERVICE "sshd.service"
 #endif
 
+#ifndef SSHD_SOCKET
+#define SSHD_SOCKET "ssh.socket"
+#endif
+
 typedef struct
 {
   AdwSwitchRow *widget;
@@ -43,7 +47,9 @@ cc_secure_shell_get_enabled (AdwSwitchRow  *widget)
   /* disable the switch until the current state is known */
   gtk_widget_set_sensitive (GTK_WIDGET (widget), FALSE);
 
-  adw_switch_row_set_active (widget, cc_get_service_state (SSHD_SERVICE, G_BUS_TYPE_SYSTEM) == CC_SERVICE_STATE_ENABLED);
+  adw_switch_row_set_active (widget,
+                             (cc_get_service_state (SSHD_SERVICE, G_BUS_TYPE_SYSTEM) == CC_SERVICE_STATE_ENABLED ||
+                              cc_get_service_state (SSHD_SOCKET, G_BUS_TYPE_SYSTEM) == CC_SERVICE_STATE_ENABLED));
 
   gtk_widget_set_sensitive (GTK_WIDGET (widget), TRUE);
 }
@@ -51,13 +57,28 @@ cc_secure_shell_get_enabled (AdwSwitchRow  *widget)
 static void
 enable_ssh_service (GError** error)
 {
+  g_autoptr(GError) local_error = NULL;
+
+  if (cc_enable_service (SSHD_SOCKET, G_BUS_TYPE_SYSTEM, &local_error))
+    {
+      /* If the socket is available, we want to disable the service */
+      cc_disable_service (SSHD_SERVICE, G_BUS_TYPE_SYSTEM, NULL);
+      return;
+    }
+
+  g_warning ("Failed to enable '%s' socket: %s. Enabling '%s' service instead.",
+             SSHD_SOCKET, local_error->message, SSHD_SERVICE);
+
   cc_enable_service (SSHD_SERVICE, G_BUS_TYPE_SYSTEM, error);
 }
 
 static void
 disable_ssh_service (GError** error)
 {
-  cc_disable_service (SSHD_SERVICE, G_BUS_TYPE_SYSTEM, error);
+  if (!cc_disable_service (SSHD_SERVICE, G_BUS_TYPE_SYSTEM, error))
+    return;
+
+  cc_disable_service (SSHD_SOCKET, G_BUS_TYPE_SYSTEM, error);
 }
 
 static void
