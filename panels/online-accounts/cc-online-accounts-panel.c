@@ -45,8 +45,9 @@ struct _CcOnlineAccountsPanel
   AdwBanner     *offline_banner;
   GtkListBox    *providers_listbox;
 
-  GoaClient *client;
-  GVariant *parameters;
+  GoaClient     *client;
+  GVariant      *parameters;
+  GListStore    *providers;
 };
 
 CC_PANEL_REGISTER (CcOnlineAccountsPanel, cc_online_accounts_panel);
@@ -238,23 +239,24 @@ command_add (CcOnlineAccountsPanel *self,
 
   if (provider_name != NULL)
     {
-      GtkWidget *child;
-      GoaProvider *provider;
+      g_autoptr (GoaProvider) provider = NULL;
+      unsigned int n_items = 0;
 
-      for (child = gtk_widget_get_first_child (GTK_WIDGET (self->providers_listbox));
-           child;
-           child = gtk_widget_get_next_sibling (child))
+      n_items = g_list_model_get_n_items (G_LIST_MODEL (self->providers));
+      for (unsigned int i = 0; i < n_items; i++)
         {
           const char *provider_type = NULL;
 
-          provider = cc_online_account_provider_row_get_provider (CC_ONLINE_ACCOUNT_PROVIDER_ROW (child));
+          provider = g_list_model_get_item (G_LIST_MODEL (self->providers), i);
           provider_type = goa_provider_get_provider_type (provider);
 
           if (g_strcmp0 (provider_type, provider_name) == 0)
             break;
+
+          g_clear_object (&provider);
         }
 
-      if (child == NULL)
+      if (provider == NULL)
         {
           g_warning ("Unable to get a provider for type '%s'", provider_name);
           return;
@@ -303,6 +305,13 @@ goa_provider_priority (const char *provider_type)
   return G_N_ELEMENTS (goa_priority) + 1;
 }
 
+static GtkWidget *
+provider_create_row (gpointer item,
+                     gpointer user_data)
+{
+  return (GtkWidget *) cc_online_account_provider_row_new (GOA_PROVIDER (item));
+}
+
 static int
 sort_accounts_func (GtkListBoxRow *a,
                     GtkListBoxRow *b,
@@ -324,18 +333,12 @@ sort_accounts_func (GtkListBoxRow *a,
 }
 
 static int
-sort_providers_func (GtkListBoxRow *a,
-                     GtkListBoxRow *b,
-                     gpointer user_data)
+sort_providers_func (GoaProvider *a,
+                     GoaProvider *b,
+                     gpointer     user_data)
 {
-  GoaProvider *a_provider, *b_provider;
-  const char *a_name, *b_name;
-
-  a_provider = cc_online_account_provider_row_get_provider (CC_ONLINE_ACCOUNT_PROVIDER_ROW (a));
-  a_name = goa_provider_get_provider_type (a_provider);
-
-  b_provider = cc_online_account_provider_row_get_provider (CC_ONLINE_ACCOUNT_PROVIDER_ROW (b));
-  b_name = goa_provider_get_provider_type (b_provider);
+  const char *a_name = goa_provider_get_provider_type (a);
+  const char *b_name = goa_provider_get_provider_type (b);
 
   return goa_provider_priority (a_name) - goa_provider_priority (b_name);
 }
@@ -353,12 +356,12 @@ add_account (CcOnlineAccountsPanel *self,
 
 static void
 add_provider (CcOnlineAccountsPanel *self,
-              GoaProvider *provider)
+              GoaProvider           *provider)
 {
-  CcOnlineAccountProviderRow *row;
-
-  row = cc_online_account_provider_row_new (provider);
-  gtk_list_box_append (self->providers_listbox, GTK_WIDGET (row));
+  g_list_store_insert_sorted (self->providers,
+                              provider,
+                              (GCompareDataFunc) sort_providers_func,
+                              self);
 }
 
 static void
@@ -534,6 +537,7 @@ cc_online_accounts_panel_finalize (GObject *object)
 
   g_clear_object (&self->client);
   g_clear_pointer (&self->parameters, g_variant_unref);
+  g_clear_object (&self->providers);
 
   G_OBJECT_CLASS (cc_online_accounts_panel_parent_class)->finalize (object);
 }
@@ -577,10 +581,12 @@ cc_online_accounts_panel_init (CcOnlineAccountsPanel *self)
                               self,
                               NULL);
 
-  gtk_list_box_set_sort_func (self->providers_listbox,
-                              sort_providers_func,
-                              self,
-                              NULL);
+  self->providers = g_list_store_new (GOA_TYPE_PROVIDER);
+  gtk_list_box_bind_model (self->providers_listbox,
+                           G_LIST_MODEL (self->providers),
+                           provider_create_row,
+                           self,
+                           NULL);
 
   monitor = g_network_monitor_get_default();
   g_object_bind_property (monitor,
