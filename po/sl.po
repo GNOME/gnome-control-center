@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2024-03-21 16:01+0000\n"
-"PO-Revision-Date: 2024-03-25 00:31+0100\n"
+"POT-Creation-Date: 2024-03-25 15:09+0000\n"
+"PO-Revision-Date: 2024-03-26 20:55+0100\n"
 "Last-Translator: Martin Srebotnjak <miles@filmsi.net>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "Language: sl_SI\n"
@@ -45,7 +45,8 @@ msgid "Session Bus"
 msgstr "Vodilo seje"
 
 #: panels/applications/cc-applications-panel.c:835
-#: panels/privacy/cc-bolt-page.ui:240 panels/privacy/cc-bolt-page.ui:284
+#: panels/privacy/bolt/cc-bolt-page.ui:240
+#: panels/privacy/bolt/cc-bolt-page.ui:284
 #: panels/privacy/cc-privacy-panel.ui:74
 msgid "Devices"
 msgstr "Naprave"
@@ -84,7 +85,7 @@ msgstr "Datotečni sistem"
 
 #: panels/applications/cc-applications-panel.c:855
 #: panels/keyboard/01-launchers.xml.in:6
-#: shell/appdata/org.gnome.Settings.appdata.xml.in:7 shell/cc-window.c:775
+#: shell/appdata/org.gnome.Settings.appdata.xml.in.in:7 shell/cc-window.c:775
 #: shell/cc-window.ui:20 shell/org.gnome.Settings.desktop.in:3
 msgid "Settings"
 msgstr "Nastavitve"
@@ -138,6 +139,7 @@ msgid "_Default Apps"
 msgstr "_Privzeti programi"
 
 #: panels/applications/cc-applications-panel.ui:62
+#: panels/search/cc-search-panel.ui:51
 msgid "No Apps Found"
 msgstr "Ni najdenih programov"
 
@@ -997,7 +999,8 @@ msgstr "Umerjanje zaslona"
 #: panels/network/connection-editor/ce-page-details.c:100
 #: panels/network/connection-editor/connection-editor.ui:16
 #: panels/printers/new-printer-dialog.ui:54
-#: panels/printers/pp-details-dialog.c:266 panels/privacy/cc-usage-page.c:136
+#: panels/printers/pp-details-dialog.c:266
+#: panels/privacy/usage/cc-usage-page.c:136
 #: panels/sharing/cc-sharing-panel.c:239
 #: panels/system/region/cc-format-chooser.ui:24
 #: panels/system/users/cc-add-user-dialog.ui:34
@@ -3005,7 +3008,7 @@ msgstr "Ime omrežja"
 #: panels/printers/new-printer-dialog.ui:293
 #: panels/printers/pp-jobs-dialog.ui:54
 #: panels/system/remote-desktop/cc-desktop-sharing-page.ui:109
-#: panels/system/remote-desktop/cc-remote-session-page.ui:108
+#: panels/system/remote-desktop/cc-remote-login-page.ui:108
 #: panels/system/users/cc-add-user-dialog.ui:159
 #: panels/wwan/cc-wwan-apn-dialog.ui:175
 msgid "Password"
@@ -3407,7 +3410,7 @@ msgstr "WireGuard"
 
 #. Translators: Unknown endpoint host for WireGuard (invalid setting)
 #: panels/network/connection-editor/ce-page-wireguard.c:373
-#: panels/privacy/cc-firmware-security-dialog.c:168
+#: panels/privacy/firmware-security/cc-firmware-security-dialog.c:168
 #: panels/sound/cc-alert-chooser-window.c:352
 #: panels/system/about/cc-about-page.c:73
 #: panels/system/about/cc-system-details-window.c:273
@@ -4934,7 +4937,7 @@ msgstr ""
 #: panels/printers/new-printer-dialog.ui:272
 #: panels/printers/pp-jobs-dialog.ui:42
 #: panels/system/remote-desktop/cc-desktop-sharing-page.ui:93
-#: panels/system/remote-desktop/cc-remote-session-page.ui:92
+#: panels/system/remote-desktop/cc-remote-login-page.ui:92
 #: panels/wwan/cc-wwan-apn-dialog.ui:150
 msgid "Username"
 msgstr "Uporabniško ime"
@@ -4969,7 +4972,7 @@ msgstr ""
 "poševnice (/)."
 
 #: panels/printers/pp-details-dialog.ui:75 panels/printers/printer-entry.ui:97
-#: panels/privacy/cc-location-page.ui:4
+#: panels/privacy/location/cc-location-page.ui:4
 msgid "Location"
 msgstr "Mesto"
 
@@ -5498,7 +5501,7 @@ msgid "Model"
 msgstr "Model"
 
 #: panels/printers/printer-entry.ui:124
-#: panels/privacy/cc-bolt-device-dialog.ui:25
+#: panels/privacy/bolt/cc-bolt-device-dialog.ui:25
 msgid "Status"
 msgstr "Stanje"
 
@@ -5538,77 +5541,77 @@ msgstr "Počisti glave tiskalnika"
 msgid "Remove Printer"
 msgstr "Odstrani tiskalnik"
 
-#: panels/privacy/cc-bolt-device-dialog.c:79
-#: panels/privacy/cc-bolt-device-entry.c:121
+#: panels/privacy/bolt/cc-bolt-device-dialog.c:79
+#: panels/privacy/bolt/cc-bolt-device-entry.c:121
 msgctxt "Thunderbolt Device Status"
 msgid "Disconnected"
 msgstr "Prekinjena povezava"
 
-#: panels/privacy/cc-bolt-device-dialog.c:82
-#: panels/privacy/cc-bolt-device-entry.c:124
+#: panels/privacy/bolt/cc-bolt-device-dialog.c:82
+#: panels/privacy/bolt/cc-bolt-device-entry.c:124
 msgctxt "Thunderbolt Device Status"
 msgid "Connecting"
 msgstr "V povezovanju"
 
-#: panels/privacy/cc-bolt-device-dialog.c:85
-#: panels/privacy/cc-bolt-device-entry.c:128
-#: panels/privacy/cc-bolt-device-entry.c:140
+#: panels/privacy/bolt/cc-bolt-device-dialog.c:85
+#: panels/privacy/bolt/cc-bolt-device-entry.c:128
+#: panels/privacy/bolt/cc-bolt-device-entry.c:140
 msgctxt "Thunderbolt Device Status"
 msgid "Connected"
 msgstr "Povezano"
 
-#: panels/privacy/cc-bolt-device-dialog.c:88
+#: panels/privacy/bolt/cc-bolt-device-dialog.c:88
 msgctxt "Thunderbolt Device Status"
 msgid "Authorization Error"
 msgstr "Napaka overitve"
 
-#: panels/privacy/cc-bolt-device-dialog.c:91
-#: panels/privacy/cc-bolt-device-entry.c:134
+#: panels/privacy/bolt/cc-bolt-device-dialog.c:91
+#: panels/privacy/bolt/cc-bolt-device-entry.c:134
 msgctxt "Thunderbolt Device Status"
 msgid "Authorizing"
 msgstr "Poteka overjanje"
 
-#: panels/privacy/cc-bolt-device-dialog.c:98
+#: panels/privacy/bolt/cc-bolt-device-dialog.c:98
 msgctxt "Thunderbolt Device Status"
 msgid "Reduced Functionality"
 msgstr "Zmanjšana zmogljivost"
 
-#: panels/privacy/cc-bolt-device-dialog.c:100
+#: panels/privacy/bolt/cc-bolt-device-dialog.c:100
 msgctxt "Thunderbolt Device Status"
 msgid "Connected & Authorized"
 msgstr "Povezano in overjeno"
 
-#: panels/privacy/cc-bolt-device-dialog.c:106
-#: panels/privacy/cc-bolt-device-entry.c:148
+#: panels/privacy/bolt/cc-bolt-device-dialog.c:106
+#: panels/privacy/bolt/cc-bolt-device-entry.c:148
 msgctxt "Thunderbolt Device Status"
 msgid "Unknown"
 msgstr "Neznano"
 
 #. Translators: The time point the device was authorized.
-#: panels/privacy/cc-bolt-device-dialog.c:161
+#: panels/privacy/bolt/cc-bolt-device-dialog.c:161
 msgid "Authorized at"
 msgstr "Overjeno ob"
 
 #. Translators: The time point the device was connected.
-#: panels/privacy/cc-bolt-device-dialog.c:167
+#: panels/privacy/bolt/cc-bolt-device-dialog.c:167
 msgid "Connected at"
 msgstr "Povezano ob"
 
 #. Translators: The time point the device was enrolled,
 #. * i.e. authorized and stored in the device database.
-#: panels/privacy/cc-bolt-device-dialog.c:174
+#: panels/privacy/bolt/cc-bolt-device-dialog.c:174
 msgid "Enrolled at"
 msgstr "Vpisano ob"
 
-#: panels/privacy/cc-bolt-device-dialog.c:248
+#: panels/privacy/bolt/cc-bolt-device-dialog.c:248
 msgid "Failed to authorize device: "
 msgstr "Overjanje naprave je spodletelo: "
 
-#: panels/privacy/cc-bolt-device-dialog.c:315
+#: panels/privacy/bolt/cc-bolt-device-dialog.c:315
 msgid "Failed to forget device: "
 msgstr "Pozabljanje naprave je spodletelo: "
 
-#: panels/privacy/cc-bolt-device-dialog.c:455
+#: panels/privacy/bolt/cc-bolt-device-dialog.c:455
 #, c-format
 msgid "Depends on %u other device"
 msgid_plural "Depends on %u other devices"
@@ -5617,57 +5620,57 @@ msgstr[1] "Odvisnosti so povezane s %u drugo napravo"
 msgstr[2] "Odvisnosti so povezane s %u drugima napravama"
 msgstr[3] "Odvisnosti so povezane s %u drugimi napravami"
 
-#: panels/privacy/cc-bolt-device-dialog.ui:4
+#: panels/privacy/bolt/cc-bolt-device-dialog.ui:4
 msgid "Device Identifier"
 msgstr "Določino naprave"
 
-#: panels/privacy/cc-bolt-device-dialog.ui:30
+#: panels/privacy/bolt/cc-bolt-device-dialog.ui:30
 msgid "UUID"
 msgstr "UUID"
 
-#: panels/privacy/cc-bolt-device-dialog.ui:35
+#: panels/privacy/bolt/cc-bolt-device-dialog.ui:35
 msgid "Timestamp"
 msgstr "Časovni žig"
 
-#: panels/privacy/cc-bolt-device-dialog.ui:43
+#: panels/privacy/bolt/cc-bolt-device-dialog.ui:43
 msgid "Depends on other devices"
 msgstr "Odvisnosti so povezane z drugimi napravami"
 
-#: panels/privacy/cc-bolt-device-dialog.ui:73
+#: panels/privacy/bolt/cc-bolt-device-dialog.ui:73
 msgid "Authorize and Connect"
 msgstr "Overi in poveži"
 
-#: panels/privacy/cc-bolt-device-dialog.ui:88
+#: panels/privacy/bolt/cc-bolt-device-dialog.ui:88
 msgid "Forget Device"
 msgstr "Pozabi napravo"
 
-#: panels/privacy/cc-bolt-device-entry.c:131
+#: panels/privacy/bolt/cc-bolt-device-entry.c:131
 msgctxt "Thunderbolt Device Status"
 msgid "Error"
 msgstr "Napaka"
 
-#: panels/privacy/cc-bolt-device-entry.c:142
+#: panels/privacy/bolt/cc-bolt-device-entry.c:142
 msgctxt "Thunderbolt Device Status"
 msgid "Authorized"
 msgstr "Overjeno"
 
-#: panels/privacy/cc-bolt-page.c:219
+#: panels/privacy/bolt/cc-bolt-page.c:219
 msgid ""
 "The Thunderbolt subsystem (boltd) is not installed or not set up properly."
 msgstr ""
 "Podsistem Thunderbolt (boltd) ni nameščen oziroma je neustrezno nastavljen."
 
-#: panels/privacy/cc-bolt-page.c:475
+#: panels/privacy/bolt/cc-bolt-page.c:475
 msgid "Allow direct access to devices such as docks and external GPUs."
 msgstr "Dovoli neposreden dostop do naprav, kot so sidrišča in zunanje GPE."
 
-#: panels/privacy/cc-bolt-page.c:476
+#: panels/privacy/bolt/cc-bolt-page.c:476
 msgid "Only USB and Display Port devices can attach."
 msgstr ""
 "Naprave je mogoče pripeti le z uporabo priklopa USB oziroma zaslonskega "
 "priklopa."
 
-#: panels/privacy/cc-bolt-page.c:511
+#: panels/privacy/bolt/cc-bolt-page.c:511
 msgid ""
 "Thunderbolt could not be detected.\n"
 "Either the system lacks Thunderbolt support, it has been disabled in the "
@@ -5677,69 +5680,70 @@ msgstr ""
 "Podpora sistemu morda ni na voljo, sistem je v zaganjalniku BIOS onemogočen, "
 "ali pa je nastavljen na nepodprto varnostno raven."
 
-#: panels/privacy/cc-bolt-page.c:555
+#: panels/privacy/bolt/cc-bolt-page.c:555
 msgid "Thunderbolt support has been disabled in the BIOS."
 msgstr "Podpora Thunderbolt je onemogočena med nastavitvami BIOS."
 
-#: panels/privacy/cc-bolt-page.c:559
+#: panels/privacy/bolt/cc-bolt-page.c:559
 msgid "Thunderbolt security level could not be determined."
 msgstr "Varnostne ravni Thunderbolt ni mogoče določiti."
 
-#: panels/privacy/cc-bolt-page.c:679
+#: panels/privacy/bolt/cc-bolt-page.c:679
 #, c-format
 msgid "Error switching direct mode: %s"
 msgstr "Napaka preklapljanja neposrednega načina: %s"
 
-#: panels/privacy/cc-bolt-page.ui:4
+#: panels/privacy/bolt/cc-bolt-page.ui:4
 msgid "Thunderbolt"
 msgstr "Thunderbolt"
 
-#: panels/privacy/cc-bolt-page.ui:48
+#: panels/privacy/bolt/cc-bolt-page.ui:48
 msgid "Close notification"
 msgstr "Zapri obvestilo"
 
-#: panels/privacy/cc-bolt-page.ui:109
+#: panels/privacy/bolt/cc-bolt-page.ui:109
 msgid "No Thunderbolt Support"
 msgstr "Ni podpore za naprave Thunderbolt"
 
-#: panels/privacy/cc-bolt-page.ui:110
+#: panels/privacy/bolt/cc-bolt-page.ui:110
 msgid "Could not connect to the thunderbolt subsystem"
 msgstr "Povezava s podsistemom Thunderbolt ni mogoča."
 
-#: panels/privacy/cc-bolt-page.ui:127
+#: panels/privacy/bolt/cc-bolt-page.ui:127
 msgid "Direct Access"
 msgstr "Neposredni dostop"
 
-#: panels/privacy/cc-bolt-page.ui:130
+#: panels/privacy/bolt/cc-bolt-page.ui:130
 msgid "Allow direct access to devices such as docks and external GPUs"
 msgstr "Dovoli neposreden dostop do naprav, kot so sidrišča in zunanje GPE."
 
-#: panels/privacy/cc-bolt-page.ui:199
+#: panels/privacy/bolt/cc-bolt-page.ui:199
 msgid "Pending Devices"
 msgstr "Naprave na čakanju"
 
-#: panels/privacy/cc-bolt-page.ui:293
+#: panels/privacy/bolt/cc-bolt-page.ui:293
 msgid "No devices attached"
 msgstr "Ni priklopljenih naprav"
 
-#: panels/privacy/cc-camera-page.ui:4
+#: panels/privacy/camera/cc-camera-page.ui:4
 msgid "Cameras"
 msgstr "Kamere"
 
-#: panels/privacy/cc-camera-page.ui:17
+#: panels/privacy/camera/cc-camera-page.ui:17
 msgid "_Camera Access"
 msgstr "_Dostop do kamere"
 
-#: panels/privacy/cc-camera-page.ui:18
+#: panels/privacy/camera/cc-camera-page.ui:18
 msgid "Allow permitted apps to use cameras"
 msgstr "Dovoli določenim programom uporabo kamere"
 
-#: panels/privacy/cc-camera-page.ui:27 panels/privacy/cc-location-page.ui:55
-#: panels/privacy/cc-microphone-page.ui:27
+#: panels/privacy/camera/cc-camera-page.ui:27
+#: panels/privacy/location/cc-location-page.ui:55
+#: panels/privacy/microphone/cc-microphone-page.ui:27
 msgid "Permitted Apps"
 msgstr "Dovoljeni programi"
 
-#: panels/privacy/cc-camera-page.ui:28
+#: panels/privacy/camera/cc-camera-page.ui:28
 msgid ""
 "The following sandboxed apps have been given permission to use cameras. Apps "
 "that are not sandboxed can use cameras without asking for permission."
@@ -5748,17 +5752,17 @@ msgstr ""
 "Programi, ki niso vključeni v peskovnik, lahko uporabljajo kamere, ne da bi "
 "posebej zahtevale odobritev dostopa."
 
-#: panels/privacy/cc-camera-page.ui:42
+#: panels/privacy/camera/cc-camera-page.ui:42
 msgid "No sandboxed apps have asked for camera access"
 msgstr "Ni programov, ki bi zahtevali dostop do kamere"
 
 #. translators: Text used in link to privacy policy
-#: panels/privacy/cc-diagnostics-page.c:122
+#: panels/privacy/diagnostics/cc-diagnostics-page.c:122
 msgid "learn more"
 msgstr "Več podrobnosti"
 
 #. translators: The first '%s' is the distributor's name, such as 'Fedora', the second '%s' is a link to the privacy policy
-#: panels/privacy/cc-diagnostics-page.c:125
+#: panels/privacy/diagnostics/cc-diagnostics-page.c:125
 #, c-format
 msgid ""
 "Sending reports of technical problems helps us improve %s. Reports are sent "
@@ -5768,7 +5772,7 @@ msgstr ""
 "Poročila so poslana brezimno in brez vsakršnih osebnih podatkov. %s"
 
 #. translators: The '%s' is the distributor's name, such as 'Fedora'
-#: panels/privacy/cc-diagnostics-page.c:130
+#: panels/privacy/diagnostics/cc-diagnostics-page.c:130
 #, c-format
 msgid ""
 "Sending reports of technical problems helps us improve %s. Reports are sent "
@@ -5777,26 +5781,26 @@ msgstr ""
 "Pošiljanje poročil o tehničnih napakah omogoča izboljšave distribucije %s. "
 "Poročila so poslana brezimno in brez vsakršnih osebnih podatkov."
 
-#: panels/privacy/cc-diagnostics-page.ui:4
+#: panels/privacy/diagnostics/cc-diagnostics-page.ui:4
 msgid "Diagnostics"
 msgstr "Diagnostika napak"
 
-#: panels/privacy/cc-diagnostics-page.ui:15
+#: panels/privacy/diagnostics/cc-diagnostics-page.ui:15
 msgid "Problem Reporting"
 msgstr "Prijavljanje napak"
 
-#: panels/privacy/cc-diagnostics-page.ui:18
+#: panels/privacy/diagnostics/cc-diagnostics-page.ui:18
 msgid "_Automatic Problem Reporting"
 msgstr "_Samodejno prijavljanje napak"
 
 #. TRANSLATORS: secure boot refers to the system firmware security mode
-#: panels/privacy/cc-firmware-security-boot-dialog.c:72
-#: panels/privacy/cc-firmware-security-page.c:122
+#: panels/privacy/firmware-security/cc-firmware-security-boot-dialog.c:72
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:122
 msgid "Secure Boot is Active"
 msgstr "Varen zagon je omogočen"
 
 #. TRANSLATORS: this is the first section of the decription
-#: panels/privacy/cc-firmware-security-boot-dialog.c:77
+#: panels/privacy/firmware-security/cc-firmware-security-boot-dialog.c:77
 msgid ""
 "Secure boot prevents malicious software from being loaded when the device "
 "starts. It is currently turned on and is functioning correctly."
@@ -5805,12 +5809,12 @@ msgstr ""
 "naprave. Trenutno je vklopljena in deluje pravilno."
 
 #. TRANSLATORS: secure boot refers to the system firmware security mode
-#: panels/privacy/cc-firmware-security-boot-dialog.c:83
+#: panels/privacy/firmware-security/cc-firmware-security-boot-dialog.c:83
 msgid "Secure Boot Has Problems"
 msgstr "Zaznane so težave v delovanju varnega zagons"
 
 #. TRANSLATORS: this is the first section of the decription.
-#: panels/privacy/cc-firmware-security-boot-dialog.c:87
+#: panels/privacy/firmware-security/cc-firmware-security-boot-dialog.c:87
 msgid ""
 "Secure boot prevents malicious software from being loaded when the device "
 "starts. It is currently turned on, but will not work due to having an "
@@ -5820,7 +5824,7 @@ msgstr ""
 "naprave. Trenutno je vklopljen, a ne deluje zaradi neveljavnega ključa."
 
 #. TRANSLATORS: this is the second section of description.
-#: panels/privacy/cc-firmware-security-boot-dialog.c:90
+#: panels/privacy/firmware-security/cc-firmware-security-boot-dialog.c:90
 msgid ""
 "Secure boot problems can often be resolved from your device's UEFI firmware "
 "settings (BIOS) and your hardware manufacturer may provide information on "
@@ -5831,19 +5835,19 @@ msgstr ""
 "strojne opreme pa lahko zagotovi informacije o tem, kako to storiti."
 
 #. TRANSLATORS: this is the third section of description.
-#: panels/privacy/cc-firmware-security-boot-dialog.c:93
+#: panels/privacy/firmware-security/cc-firmware-security-boot-dialog.c:93
 msgid "For help, contact your hardware manufacturer or IT support provider."
 msgstr ""
 "Za pomoč stopite v stik s ponudnikom strojne programske opreme ali podporno "
 "službo."
 
 #. TRANSLATORS: secure boot refers to the system firmware security mode
-#: panels/privacy/cc-firmware-security-boot-dialog.c:99
+#: panels/privacy/firmware-security/cc-firmware-security-boot-dialog.c:99
 msgid "Secure Boot is Turned Off"
 msgstr "Varni zagon je izklopljen"
 
 #. TRANSLATORS: this is the first section of the description.
-#: panels/privacy/cc-firmware-security-boot-dialog.c:103
+#: panels/privacy/firmware-security/cc-firmware-security-boot-dialog.c:103
 msgid ""
 "Secure boot prevents malicious software from being loaded when the device "
 "starts. It is currently turned off."
@@ -5852,7 +5856,7 @@ msgstr ""
 "naprave. Trenutno je možnost izklopljena."
 
 #. TRANSLATORS: this is the second section of the description.
-#: panels/privacy/cc-firmware-security-boot-dialog.c:106
+#: panels/privacy/firmware-security/cc-firmware-security-boot-dialog.c:106
 msgid ""
 "Secure boot can often be turned on from your device's UEFI firmware settings "
 "(BIOS). For help, contact your hardware manufacturer or IT support provider."
@@ -5861,7 +5865,7 @@ msgstr ""
 "računalnika (BIOS). Za pomoč se obrnite na proizvajalca strojne opreme ali "
 "ponudnika skrbniške podpore."
 
-#: panels/privacy/cc-firmware-security-boot-dialog.ui:55
+#: panels/privacy/firmware-security/cc-firmware-security-boot-dialog.ui:55
 msgid ""
 "Secure boot prevents malicious software from being loaded when the device "
 "starts.\n"
@@ -5874,14 +5878,14 @@ msgstr ""
 "Za več podrobnosti se obrnite na proizvajalca strojne opreme ali podporo."
 
 #. TRANSLATORS: in reference to firmware protection: 0/4 stars
-#: panels/privacy/cc-firmware-security-dialog.c:106
-#: panels/privacy/cc-firmware-security-page.c:541
+#: panels/privacy/firmware-security/cc-firmware-security-dialog.c:106
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:541
 msgid "Checks Failed"
 msgstr "Preverjanje je spodletelo"
 
 #. TRANSLATORS: This is the description to describe the failure on
 #. checking the security items.
-#: panels/privacy/cc-firmware-security-dialog.c:109
+#: panels/privacy/firmware-security/cc-firmware-security-dialog.c:109
 msgid ""
 "Hardware does not pass checks. This means that you are not protected against "
 "common hardware security issues.\n"
@@ -5899,14 +5903,14 @@ msgstr ""
 "mogoče odpraviti."
 
 #. TRANSLATORS: in reference to firmware protection: 1/4 stars
-#: panels/privacy/cc-firmware-security-dialog.c:120
-#: panels/privacy/cc-firmware-security-page.c:548
+#: panels/privacy/firmware-security/cc-firmware-security-dialog.c:120
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:548
 msgid "Checks Passed"
 msgstr "Preverjanje je uspešno končano"
 
 #. TRANSLATORS: This description describes the device passing the
 #. minimum requirement of security check.
-#: panels/privacy/cc-firmware-security-dialog.c:123
+#: panels/privacy/firmware-security/cc-firmware-security-dialog.c:123
 msgid ""
 "This device meets basic security requirements. Its hardware has protection "
 "against some of the most common security threats."
@@ -5915,14 +5919,14 @@ msgstr ""
 "pred običajnimi varnostnimi grožnjami."
 
 #. TRANSLATORS: in reference to firmware protection: 2~4 stars
-#: panels/privacy/cc-firmware-security-dialog.c:134
-#: panels/privacy/cc-firmware-security-page.c:557
+#: panels/privacy/firmware-security/cc-firmware-security-dialog.c:134
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:557
 msgid "Protected"
 msgstr "Zaščiteno"
 
 #. TRANSLATOR: This description describes the devices passing
 #. the extended security check.
-#: panels/privacy/cc-firmware-security-dialog.c:137
+#: panels/privacy/firmware-security/cc-firmware-security-dialog.c:137
 msgid ""
 "This device passes current security tests. Its hardware is protected against "
 "the majority of security threats."
@@ -5931,13 +5935,13 @@ msgstr ""
 "pred običajnimi varnostnimi grožnjami."
 
 #. TRANSLATORS: in reference to firmware protection: ??? stars
-#: panels/privacy/cc-firmware-security-dialog.c:145
-#: panels/privacy/cc-firmware-security-page.c:564
+#: panels/privacy/firmware-security/cc-firmware-security-dialog.c:145
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:564
 msgid "Checks Unavailable"
 msgstr "Preizkusi niso na voljo"
 
 #. TRANSLATORS: When the security result is unavailable, this description is shown.
-#: panels/privacy/cc-firmware-security-dialog.c:147
+#: panels/privacy/firmware-security/cc-firmware-security-dialog.c:147
 msgid ""
 "Device security checks are not available for this device. It is not possible "
 "to tell whether it meets security requirements."
@@ -5945,20 +5949,20 @@ msgstr ""
 "Varnostni pregledi za to napravo niso na voljo. Ni mogoče ugotoviti, ali "
 "naprava izpolnjuje varnostne zahteve."
 
-#: panels/privacy/cc-firmware-security-dialog.c:367
+#: panels/privacy/firmware-security/cc-firmware-security-dialog.c:367
 msgid "Report copied to clipboard"
 msgstr "Poročilo je kopirano v odložišče"
 
-#: panels/privacy/cc-firmware-security-dialog.ui:65
+#: panels/privacy/firmware-security/cc-firmware-security-dialog.ui:65
 msgid "_Copy Technical Report"
 msgstr "_Kopiraj tehnično poročilo"
 
-#: panels/privacy/cc-firmware-security-help-dialog.ui:4
-#: panels/privacy/cc-firmware-security-page.ui:12
+#: panels/privacy/firmware-security/cc-firmware-security-help-dialog.ui:4
+#: panels/privacy/firmware-security/cc-firmware-security-page.ui:12
 msgid "About Device Security"
 msgstr "O varnosti naprav"
 
-#: panels/privacy/cc-firmware-security-help-dialog.ui:27
+#: panels/privacy/firmware-security/cc-firmware-security-help-dialog.ui:27
 msgid ""
 "Device security provides information about how protected your device is "
 "against security issues which target the hardware itself.\n"
@@ -5994,28 +5998,28 @@ msgstr ""
 "Varnost naprav je le en vidik varnosti in ne odraža splošnega varnostnega "
 "stanja sistema in programov."
 
-#: panels/privacy/cc-firmware-security-page.c:123
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:123
 msgid "Protected against malicious software when the device starts."
 msgstr "Zaščita pred zlonamerno programsko opremo ob zagonu naprave."
 
-#: panels/privacy/cc-firmware-security-page.c:129
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:129
 msgid "Secure Boot has Problems"
 msgstr "Zaznane so težave v delovanju varnega zagons"
 
-#: panels/privacy/cc-firmware-security-page.c:130
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:130
 msgid "Some protection when the device is started."
 msgstr "Osnovna zaščita, ko je naprava zagnana."
 
-#: panels/privacy/cc-firmware-security-page.c:135
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:135
 msgid "Secure Boot is Off"
 msgstr "Varni zagon je izklopljen"
 
-#: panels/privacy/cc-firmware-security-page.c:136
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:136
 msgid "No protection when the device is started."
 msgstr "Ni zaščite, ko je naprava zagnana."
 
 #. TRANSLATORS: this is to explain an event that has already happened
-#: panels/privacy/cc-firmware-security-page.c:155
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:155
 msgid ""
 "This issue could have been caused by a change in UEFI firmware settings, an "
 "operating system configuration change, or because of malicious software on "
@@ -6026,7 +6030,7 @@ msgstr ""
 "oprema."
 
 #. TRANSLATORS: this is to explain an event that has already happened
-#: panels/privacy/cc-firmware-security-page.c:163
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:163
 msgid ""
 "This issue could have been caused by a change in the UEFI firmware settings, "
 "or because of malicious software on this system."
@@ -6035,7 +6039,7 @@ msgstr ""
 "UEFI ali zlonamerna programska oprema."
 
 #. TRANSLATORS: this is to explain an event that has already happened
-#: panels/privacy/cc-firmware-security-page.c:170
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:170
 msgid ""
 "This issue could have been caused by an operating system configuration "
 "change, or because of malicious software on this system."
@@ -6045,55 +6049,55 @@ msgstr ""
 
 #. TRANSLATOR: this is the date in "%Y-%m-%d %H:%M:%S" format,
 #. for example: 2022-08-01 22:48:00
-#: panels/privacy/cc-firmware-security-page.c:228
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:228
 #, c-format
 msgid "%1$s"
 msgstr "%1$s"
 
 #. TRANSLATOR: This is the text event status output when the event status is "success"
-#: panels/privacy/cc-firmware-security-page.c:234
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:234
 msgid "Pass"
 msgstr "Uspešno končano"
 
 #. TRANSLATOR: This is the text event status output when the event status is not "success"
-#: panels/privacy/cc-firmware-security-page.c:237
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:237
 msgid "! Fail"
 msgstr "Spodletelo !"
 
-#: panels/privacy/cc-firmware-security-page.c:240
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:240
 #, c-format
 msgid "(%1$s → %2$s)"
 msgstr "(%1$s → %2$s)"
 
-#: panels/privacy/cc-firmware-security-page.c:542
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:542
 msgid "Hardware does not pass checks."
 msgstr "Strojna oprema ne opravi preizkusa varnosti."
 
-#: panels/privacy/cc-firmware-security-page.c:549
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:549
 msgid "Hardware meets basic security requirements."
 msgstr "Strojna oprema izpolnjuje osnovne varnostne zahteve."
 
-#: panels/privacy/cc-firmware-security-page.c:558
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:558
 msgid "Hardware has a good level of protection."
 msgstr "Strojna oprema ima dobro raven zaščite."
 
-#: panels/privacy/cc-firmware-security-page.c:565
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:565
 msgid "Security levels are not available for this device."
 msgstr "Za to napravo ravni varnosti niso na voljo."
 
-#: panels/privacy/cc-firmware-security-page.ui:4
+#: panels/privacy/firmware-security/cc-firmware-security-page.ui:4
 msgid "Device Security"
 msgstr "Varnost naprav"
 
-#: panels/privacy/cc-firmware-security-page.ui:57
+#: panels/privacy/firmware-security/cc-firmware-security-page.ui:57
 msgid "Starting Device Security…"
 msgstr "Zaganjanje varnosti naprav …"
 
-#: panels/privacy/cc-firmware-security-page.ui:83
+#: panels/privacy/firmware-security/cc-firmware-security-page.ui:83
 msgid "Device Security Unavailable"
 msgstr "Analiza varnosti naprav ni na voljo"
 
-#: panels/privacy/cc-firmware-security-page.ui:85
+#: panels/privacy/firmware-security/cc-firmware-security-page.ui:85
 msgid ""
 "Device Security is only available on physical hardware. No physical hardware "
 "has been detected."
@@ -6101,92 +6105,92 @@ msgstr ""
 "Določanje varnosti naprav je na voljo samo za fizično strojno opremo, ki pa "
 "v sistemu ni zaznana."
 
-#: panels/privacy/cc-firmware-security-page.ui:223
+#: panels/privacy/firmware-security/cc-firmware-security-page.ui:223
 msgid "Security Events"
 msgstr "Varnostni pregledi"
 
-#: panels/privacy/cc-firmware-security-page.ui:233
+#: panels/privacy/firmware-security/cc-firmware-security-page.ui:233
 msgid "No Events"
 msgstr "Ni še izvedenih pregledov"
 
 #. TRANSLATORS: if the stauts is valid. For example security check is valid and key is valid.
-#: panels/privacy/cc-firmware-security-utils.c:35
+#: panels/privacy/firmware-security/cc-firmware-security-utils.c:35
 msgid "Valid"
 msgstr "Veljavno"
 
 #. TRANSLATORS: if the status or key is not valid.
-#: panels/privacy/cc-firmware-security-utils.c:40
+#: panels/privacy/firmware-security/cc-firmware-security-utils.c:40
 msgid "Not Valid"
 msgstr "Ni veljavno"
 
 #. TRANSLATORS: if the function is enabled through BIOS or OS settings.
 #. TRANSLATORS: Status of Parental Controls setup
-#: panels/privacy/cc-firmware-security-utils.c:45
+#: panels/privacy/firmware-security/cc-firmware-security-utils.c:45
 #: panels/system/users/cc-user-page.c:377
 #: panels/system/users/cc-user-page.c:749 panels/wwan/cc-wwan-device-page.c:475
 msgid "Enabled"
 msgstr "Omogočeno"
 
 #. TRANSLATORS: if the function is not enabled through BIOS or OS settings.
-#: panels/privacy/cc-firmware-security-utils.c:50
+#: panels/privacy/firmware-security/cc-firmware-security-utils.c:50
 msgid "Not Enabled"
 msgstr "Ni omogočeno"
 
 #. TRANSLATORS: the memory space or system mode is locked to prevent from malicious modification.
-#: panels/privacy/cc-firmware-security-utils.c:55
+#: panels/privacy/firmware-security/cc-firmware-security-utils.c:55
 msgid "Locked"
 msgstr "Zaklenjeno"
 
 #. TRANSLATORS: the memory space or system mode is not locked.
-#: panels/privacy/cc-firmware-security-utils.c:60
+#: panels/privacy/firmware-security/cc-firmware-security-utils.c:60
 msgid "Not Locked"
 msgstr "Ni zaklenjeno"
 
 #. TRANSLATORS: The data is encrypted to prevent from malicious reading.
-#: panels/privacy/cc-firmware-security-utils.c:65
+#: panels/privacy/firmware-security/cc-firmware-security-utils.c:65
 msgid "Encrypted"
 msgstr "Šifrirano"
 
 #. TRANSLATORS: the data in memory is plane text.
-#: panels/privacy/cc-firmware-security-utils.c:70
+#: panels/privacy/firmware-security/cc-firmware-security-utils.c:70
 msgid "Not Encrypted"
 msgstr "Ni šifrirano"
 
 #. TRANSLATORS: Linux kernel is tainted by third party kernel module.
-#: panels/privacy/cc-firmware-security-utils.c:75
+#: panels/privacy/firmware-security/cc-firmware-security-utils.c:75
 msgid "Tainted"
 msgstr "V nevarnosti"
 
 #. TRANSLATORS: All the loaded kernel module are licensed.
-#: panels/privacy/cc-firmware-security-utils.c:80
+#: panels/privacy/firmware-security/cc-firmware-security-utils.c:80
 msgid "Not Tainted"
 msgstr "Ni v nevarnosti"
 
 #. TRANSLATORS: the feature can be detected.
-#: panels/privacy/cc-firmware-security-utils.c:85
+#: panels/privacy/firmware-security/cc-firmware-security-utils.c:85
 msgid "Found"
 msgstr "Najdeno"
 
 #. TRANSLATORS: the feature can't be detected.
-#: panels/privacy/cc-firmware-security-utils.c:90
+#: panels/privacy/firmware-security/cc-firmware-security-utils.c:90
 msgid "Not Found"
 msgstr "Ni najdeno"
 
 #. TRANSLATORS: the function is supported by hardware.
-#: panels/privacy/cc-firmware-security-utils.c:95
+#: panels/privacy/firmware-security/cc-firmware-security-utils.c:95
 msgid "Supported"
 msgstr "Podprto"
 
 #. TRANSLATORS: the function isn't supported by hardware.
-#: panels/privacy/cc-firmware-security-utils.c:100
+#: panels/privacy/firmware-security/cc-firmware-security-utils.c:100
 msgid "Not Supported"
 msgstr "Ni podprto"
 
-#: panels/privacy/cc-location-page.ui:17
+#: panels/privacy/location/cc-location-page.ui:17
 msgid "_Automatic Device Location"
 msgstr "_Samodejno določanje mesta naprave"
 
-#: panels/privacy/cc-location-page.ui:28
+#: panels/privacy/location/cc-location-page.ui:28
 msgid ""
 "Automatic device location uses sources like GPS, Wi-Fi and cellular to "
 "determine an approximate location for this device. Location data is sent to "
@@ -6196,7 +6200,7 @@ msgstr ""
 "trenutnega mesta naprave. Te podatke naprava pošilja na strežnik storitev "
 "Mozilla kot del zmožnosti programa."
 
-#: panels/privacy/cc-location-page.ui:56
+#: panels/privacy/location/cc-location-page.ui:56
 msgid ""
 "The following sandboxed apps have been given access to location data. Apps "
 "that are not sandboxed can access location data without asking for "
@@ -6206,28 +6210,28 @@ msgstr ""
 "Programi, ki niso v peskovniku, jih lahko uporabljajo, ne da bi zahtevali "
 "dovoljenje."
 
-#: panels/privacy/cc-location-page.ui:70
+#: panels/privacy/location/cc-location-page.ui:70
 msgid "No sandboxed apps have asked for location access"
 msgstr "Ni programov, ki bi zahtevali dostop do geolokacijskih podatkov"
 
 #. Translators: This will be presented as the text of a link to the privacy policy
-#: panels/privacy/cc-location-page.c:414
+#: panels/privacy/location/cc-location-page.c:414
 msgid "Learn about what data is collected, and how it is used."
 msgstr "Preverite, kateri podatki se zbirajo in kako se uporabljajo."
 
-#: panels/privacy/cc-microphone-page.ui:4
+#: panels/privacy/microphone/cc-microphone-page.ui:4
 msgid "Microphones"
 msgstr "Mikrofoni"
 
-#: panels/privacy/cc-microphone-page.ui:17
+#: panels/privacy/microphone/cc-microphone-page.ui:17
 msgid "_Microphone Access"
 msgstr "Dostop do _mikrofona"
 
-#: panels/privacy/cc-microphone-page.ui:18
+#: panels/privacy/microphone/cc-microphone-page.ui:18
 msgid "Allow permitted apps to use microphones"
 msgstr "Navedenim programom dovoli uporabo mikrofona"
 
-#: panels/privacy/cc-microphone-page.ui:28
+#: panels/privacy/microphone/cc-microphone-page.ui:28
 msgid ""
 "The following sandboxed apps have been given permission to use microphones. "
 "Apps that are not sandboxed can use microphones without asking for "
@@ -6236,7 +6240,7 @@ msgstr ""
 "Navedenim programom v peskovniku je dovoljena uporaba mikrofona. Programi, "
 "ki niso v peskovniku, jih lahko uporabljajo, ne da bi zahtevali dovoljenje."
 
-#: panels/privacy/cc-microphone-page.ui:43
+#: panels/privacy/microphone/cc-microphone-page.ui:43
 msgid "No sandboxed apps have asked for microphone access"
 msgstr "Ni programov, ki bi zahtevali dostop do mikrofona"
 
@@ -6310,118 +6314,118 @@ msgid "Hardware security status and information"
 msgstr "Stanje in podrobnosti o varnosti strojne opreme"
 
 #. Translators: Option for "Lock screen after blank" in "Screen Lock" page
-#: panels/privacy/cc-screen-page.c:66
+#: panels/privacy/screen/cc-screen-page.c:66
 msgctxt "lock_screen"
 msgid "Screen Turns Off"
 msgstr "Zaslon se izklopi"
 
 #. Translators: Option for "Lock screen after blank" in "Screen Lock" page
-#: panels/privacy/cc-screen-page.c:69
+#: panels/privacy/screen/cc-screen-page.c:69
 msgctxt "lock_screen"
 msgid "30 seconds"
 msgstr "30 sekund"
 
 #. Translators: Option for "Lock screen after blank" in "Screen Lock" page
-#: panels/privacy/cc-screen-page.c:72
+#: panels/privacy/screen/cc-screen-page.c:72
 msgctxt "lock_screen"
 msgid "1 minute"
 msgstr "1 minuta"
 
 #. Translators: Option for "Lock screen after blank" in "Screen Lock" page
-#: panels/privacy/cc-screen-page.c:75
+#: panels/privacy/screen/cc-screen-page.c:75
 msgctxt "lock_screen"
 msgid "2 minutes"
 msgstr "2 minuti"
 
 #. Translators: Option for "Lock screen after blank" in "Screen Lock" page
-#: panels/privacy/cc-screen-page.c:78
+#: panels/privacy/screen/cc-screen-page.c:78
 msgctxt "lock_screen"
 msgid "3 minutes"
 msgstr "3 minute"
 
 #. Translators: Option for "Lock screen after blank" in "Screen Lock" page
-#: panels/privacy/cc-screen-page.c:81
+#: panels/privacy/screen/cc-screen-page.c:81
 msgctxt "lock_screen"
 msgid "5 minutes"
 msgstr "5 minut"
 
 #. Translators: Option for "Lock screen after blank" in "Screen Lock" page
-#: panels/privacy/cc-screen-page.c:84
+#: panels/privacy/screen/cc-screen-page.c:84
 msgctxt "lock_screen"
 msgid "30 minutes"
 msgstr "30 minut"
 
 #. Translators: Option for "Lock screen after blank" in "Screen Lock" page
-#: panels/privacy/cc-screen-page.c:87
+#: panels/privacy/screen/cc-screen-page.c:87
 msgctxt "lock_screen"
 msgid "1 hour"
 msgstr "1 ura"
 
 #. Translators: Option for "Blank screen" in "Screen Lock" page
-#: panels/privacy/cc-screen-page.c:130
+#: panels/privacy/screen/cc-screen-page.c:130
 msgctxt "blank_screen"
 msgid "1 minute"
 msgstr "1 minuta"
 
 #. Translators: Option for "Blank screen" in "Screen Lock" page
-#: panels/privacy/cc-screen-page.c:133
+#: panels/privacy/screen/cc-screen-page.c:133
 msgctxt "blank_screen"
 msgid "2 minutes"
 msgstr "2 minuti"
 
 #. Translators: Option for "Blank screen" in "Screen Lock" page
-#: panels/privacy/cc-screen-page.c:136
+#: panels/privacy/screen/cc-screen-page.c:136
 msgctxt "blank_screen"
 msgid "3 minutes"
 msgstr "3 minute"
 
 #. Translators: Option for "Blank screen" in "Screen Lock" page
-#: panels/privacy/cc-screen-page.c:139
+#: panels/privacy/screen/cc-screen-page.c:139
 msgctxt "blank_screen"
 msgid "4 minutes"
 msgstr "4 minute"
 
 #. Translators: Option for "Blank screen" in "Screen Lock" page
-#: panels/privacy/cc-screen-page.c:142
+#: panels/privacy/screen/cc-screen-page.c:142
 msgctxt "blank_screen"
 msgid "5 minutes"
 msgstr "5 minut"
 
 #. Translators: Option for "Blank screen" in "Screen Lock" page
-#: panels/privacy/cc-screen-page.c:145
+#: panels/privacy/screen/cc-screen-page.c:145
 msgctxt "blank_screen"
 msgid "8 minutes"
 msgstr "8 minut"
 
 #. Translators: Option for "Blank screen" in "Screen Lock" page
-#: panels/privacy/cc-screen-page.c:148
+#: panels/privacy/screen/cc-screen-page.c:148
 msgctxt "blank_screen"
 msgid "10 minutes"
 msgstr "10 minut"
 
 #. Translators: Option for "Blank screen" in "Screen Lock" page
-#: panels/privacy/cc-screen-page.c:151
+#: panels/privacy/screen/cc-screen-page.c:151
 msgctxt "blank_screen"
 msgid "12 minutes"
 msgstr "12 minut"
 
 #. Translators: Option for "Blank screen" in "Screen Lock" page
-#: panels/privacy/cc-screen-page.c:154
+#: panels/privacy/screen/cc-screen-page.c:154
 msgctxt "blank_screen"
 msgid "15 minutes"
 msgstr "15 minut"
 
 #. Translators: Option for "Blank screen" in "Screen Lock" page
-#: panels/privacy/cc-screen-page.c:157
+#: panels/privacy/screen/cc-screen-page.c:157
 msgctxt "blank_screen"
 msgid "Never"
 msgstr "Nikoli"
 
-#: panels/privacy/cc-screen-page.ui:4
+#: panels/privacy/screen/cc-screen-page.ui:4
 msgid "Screen Lock"
 msgstr "Zaklep zaslona"
 
-#: panels/privacy/cc-screen-page.ui:13
+#: panels/privacy/screen/cc-screen-page.ui:13
 msgid ""
 "Automatically locking the screen prevents others from accessing the device "
 "while you're away"
@@ -6429,183 +6433,183 @@ msgstr ""
 "Samodejno zaklepanje zaslona onemogoči nepovabljenim dostop do računalnika, "
 "ko niste v bližini."
 
-#: panels/privacy/cc-screen-page.ui:20
+#: panels/privacy/screen/cc-screen-page.ui:20
 msgid "_Blank Screen Delay"
 msgstr "_Zamik zatemnitve zaslona"
 
-#: panels/privacy/cc-screen-page.ui:21
+#: panels/privacy/screen/cc-screen-page.ui:21
 msgid "Period of inactivity until screen blanks"
 msgstr "Čas nedejavnosti, po katerem se zaslon ugasne"
 
-#: panels/privacy/cc-screen-page.ui:39
+#: panels/privacy/screen/cc-screen-page.ui:39
 msgid "Automatic Screen _Lock"
 msgstr "Samodejno zakleni zaslon"
 
-#: panels/privacy/cc-screen-page.ui:40
+#: panels/privacy/screen/cc-screen-page.ui:40
 msgid "Locks the screen after it blanks"
 msgstr "Zaklene zaslon ob nedejavnosti"
 
-#: panels/privacy/cc-screen-page.ui:48
+#: panels/privacy/screen/cc-screen-page.ui:48
 msgid "Automatic _Screen Lock Delay"
 msgstr "Zamik samodejnega zaklepanja zaslona"
 
-#: panels/privacy/cc-screen-page.ui:49
+#: panels/privacy/screen/cc-screen-page.ui:49
 msgid "Time from screen blank to screen lock"
 msgstr "Čas med izklopom in zaklepom zaslona"
 
 #. Translators: Whether to show notifications on the lock screen
-#: panels/privacy/cc-screen-page.ui:67
+#: panels/privacy/screen/cc-screen-page.ui:67
 msgid "Lock Screen _Notifications"
 msgstr "Obvestila na _zaklenjenem zaslonu"
 
-#: panels/privacy/cc-screen-page.ui:76
+#: panels/privacy/screen/cc-screen-page.ui:76
 msgid "Forbid New _USB Devices"
 msgstr "Prepovej nove naprave _USB"
 
-#: panels/privacy/cc-screen-page.ui:77
+#: panels/privacy/screen/cc-screen-page.ui:77
 msgid ""
 "Prevent new USB devices from interacting with the system when the screen is "
 "locked"
 msgstr ""
 "Prepreči novim napravam USB povezovanje v sistem, ko je zaslon zaklenjen"
 
-#: panels/privacy/cc-screen-page.ui:88
+#: panels/privacy/screen/cc-screen-page.ui:88
 msgid "Screen Privacy"
 msgstr "Zasebnost zaslona"
 
-#: panels/privacy/cc-screen-page.ui:93
+#: panels/privacy/screen/cc-screen-page.ui:93
 msgid "Restrict Viewing _Angle"
 msgstr "Omeji _kot pogleda"
 
 #. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
-#: panels/privacy/cc-usage-page.c:54
+#: panels/privacy/usage/cc-usage-page.c:54
 msgctxt "purge_files"
 msgid "1 hour"
 msgstr "1 ura"
 
 #. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
-#: panels/privacy/cc-usage-page.c:57
+#: panels/privacy/usage/cc-usage-page.c:57
 msgctxt "purge_files"
 msgid "1 day"
 msgstr "1 dan"
 
 #. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
-#: panels/privacy/cc-usage-page.c:60
+#: panels/privacy/usage/cc-usage-page.c:60
 msgctxt "purge_files"
 msgid "2 days"
 msgstr "2 dni"
 
 #. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
-#: panels/privacy/cc-usage-page.c:63
+#: panels/privacy/usage/cc-usage-page.c:63
 msgctxt "purge_files"
 msgid "3 days"
 msgstr "3 dni"
 
 #. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
-#: panels/privacy/cc-usage-page.c:66
+#: panels/privacy/usage/cc-usage-page.c:66
 msgctxt "purge_files"
 msgid "4 days"
 msgstr "4 dni"
 
 #. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
-#: panels/privacy/cc-usage-page.c:69
+#: panels/privacy/usage/cc-usage-page.c:69
 msgctxt "purge_files"
 msgid "5 days"
 msgstr "5 dni"
 
 #. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
-#: panels/privacy/cc-usage-page.c:72
+#: panels/privacy/usage/cc-usage-page.c:72
 msgctxt "purge_files"
 msgid "6 days"
 msgstr "6 dni"
 
 #. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
-#: panels/privacy/cc-usage-page.c:75
+#: panels/privacy/usage/cc-usage-page.c:75
 msgctxt "purge_files"
 msgid "7 days"
 msgstr "7 dni"
 
 #. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
-#: panels/privacy/cc-usage-page.c:78
+#: panels/privacy/usage/cc-usage-page.c:78
 msgctxt "purge_files"
 msgid "14 days"
 msgstr "14 dni"
 
 #. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
-#: panels/privacy/cc-usage-page.c:81
+#: panels/privacy/usage/cc-usage-page.c:81
 msgctxt "purge_files"
 msgid "30 days"
 msgstr "30 dni"
 
-#: panels/privacy/cc-usage-page.c:177
+#: panels/privacy/usage/cc-usage-page.c:177
 msgid "Empty all items from Trash?"
 msgstr "Ali naj se izbrišejo vsi predmeti iz smeti?"
 
-#: panels/privacy/cc-usage-page.c:178
+#: panels/privacy/usage/cc-usage-page.c:178
 msgid "All items in the Trash will be permanently deleted."
 msgstr "Vsi predmeti v smeteh bodo trajno izbrisani."
 
-#: panels/privacy/cc-usage-page.c:179
+#: panels/privacy/usage/cc-usage-page.c:179
 msgid "_Empty Trash"
 msgstr "Izprazni _smeti"
 
-#: panels/privacy/cc-usage-page.c:215
+#: panels/privacy/usage/cc-usage-page.c:215
 msgid "Delete all the temporary files?"
 msgstr "Ali naj se izbrišejo vse začasne datoteke?"
 
-#: panels/privacy/cc-usage-page.c:216
+#: panels/privacy/usage/cc-usage-page.c:216
 msgid "All the temporary files will be permanently deleted."
 msgstr "Vse začasne datoteke bodo trajno izbrisane."
 
-#: panels/privacy/cc-usage-page.c:217
+#: panels/privacy/usage/cc-usage-page.c:217
 msgid "_Purge Temporary Files"
 msgstr "_Počisti začasne datoteke"
 
 #. Translators: Option for "File History Duration" in "File History" group
-#: panels/privacy/cc-usage-page.c:244
+#: panels/privacy/usage/cc-usage-page.c:244
 msgctxt "retain_history"
 msgid "1 day"
 msgstr "1 dan"
 
 #. Translators: Option for "File History Duration" in "File History" group
-#: panels/privacy/cc-usage-page.c:247
+#: panels/privacy/usage/cc-usage-page.c:247
 msgctxt "retain_history"
 msgid "7 days"
 msgstr "7 dni"
 
 #. Translators: Option for "File History Duration" in "File History" group
-#: panels/privacy/cc-usage-page.c:250
+#: panels/privacy/usage/cc-usage-page.c:250
 msgctxt "retain_history"
 msgid "30 days"
 msgstr "30 dni"
 
 #. Translators: Option for "File History Duration" in "File History" group
-#: panels/privacy/cc-usage-page.c:253
+#: panels/privacy/usage/cc-usage-page.c:253
 msgctxt "retain_history"
 msgid "Forever"
 msgstr "Trajno"
 
-#: panels/privacy/cc-usage-page.c:342
+#: panels/privacy/usage/cc-usage-page.c:342
 msgid "Clear File History?"
 msgstr "Ali želite počistiti zgodovino datoteke?"
 
-#: panels/privacy/cc-usage-page.c:343
+#: panels/privacy/usage/cc-usage-page.c:343
 msgid "After clearing, lists of recently used files will appear empty."
 msgstr "Po čiščenju bodo seznami nedavno uporabljenih datotek prazni."
 
-#: panels/privacy/cc-usage-page.c:344
+#: panels/privacy/usage/cc-usage-page.c:344
 msgid "Clear _History"
 msgstr "Počisti _zgodovino"
 
-#: panels/privacy/cc-usage-page.ui:4
+#: panels/privacy/usage/cc-usage-page.ui:4
 msgid "File History & Trash"
 msgstr "Zgodovina datoteke in smeti"
 
-#: panels/privacy/cc-usage-page.ui:16
+#: panels/privacy/usage/cc-usage-page.ui:16
 msgid "File History"
 msgstr "Zgodovina datoteke"
 
-#: panels/privacy/cc-usage-page.ui:17
+#: panels/privacy/usage/cc-usage-page.ui:17
 msgid ""
 "File history keeps a record of files that you have used. This information is "
 "shared between apps, and makes it easier to find files that you might want "
@@ -6614,23 +6618,23 @@ msgstr ""
 "Zgodovina datotek vključuje tudi zapise uporabe datotek. Te podrobnosti so "
 "lahko na voljo različnim programom, kar omogoča enostavnejše iskanje."
 
-#: panels/privacy/cc-usage-page.ui:20
+#: panels/privacy/usage/cc-usage-page.ui:20
 msgid "File H_istory"
 msgstr "Zgodovina _datoteke"
 
-#: panels/privacy/cc-usage-page.ui:26
+#: panels/privacy/usage/cc-usage-page.ui:26
 msgid "File _History Duration"
 msgstr "Trajanje zgodovine datoteke"
 
-#: panels/privacy/cc-usage-page.ui:48
+#: panels/privacy/usage/cc-usage-page.ui:48
 msgid "_Clear History…"
 msgstr "Počisti _zgodovino …"
 
-#: panels/privacy/cc-usage-page.ui:64
+#: panels/privacy/usage/cc-usage-page.ui:64
 msgid "Trash &amp; Temporary Files"
 msgstr "Smeti in začasne datoteke"
 
-#: panels/privacy/cc-usage-page.ui:65
+#: panels/privacy/usage/cc-usage-page.ui:65
 msgid ""
 "Trash and temporary files can sometimes include personal or sensitive "
 "information. Automatically deleting them can help to protect privacy."
@@ -6638,23 +6642,23 @@ msgstr ""
 "V smeteh in v začasnih datoteka so včasih lahko osebni oziroma občutljivi "
 "podatki. Samodejno brisanje lahko zagotavlja večjo zasebnost."
 
-#: panels/privacy/cc-usage-page.ui:68
+#: panels/privacy/usage/cc-usage-page.ui:68
 msgid "Automatically Delete _Trash Content"
 msgstr "Samodejno sprazni vsebino _smeti"
 
-#: panels/privacy/cc-usage-page.ui:74
+#: panels/privacy/usage/cc-usage-page.ui:74
 msgid "Automatically Delete Temporary _Files"
 msgstr "Samodejno počisti _začasne datoteke"
 
-#: panels/privacy/cc-usage-page.ui:80
+#: panels/privacy/usage/cc-usage-page.ui:80
 msgid "Automatically Delete _Period"
 msgstr "Samodejno izbriši _obdobje"
 
-#: panels/privacy/cc-usage-page.ui:103
+#: panels/privacy/usage/cc-usage-page.ui:103
 msgid "_Empty Trash…"
 msgstr "Izprazni _smeti …"
 
-#: panels/privacy/cc-usage-page.ui:115
+#: panels/privacy/usage/cc-usage-page.ui:115
 msgid "_Delete Temporary Files…"
 msgstr "_Počisti začasne datoteke …"
 
@@ -6720,10 +6724,6 @@ msgstr "Dodaj _mesto …"
 #: panels/search/cc-search-locations-dialog.ui:89
 msgid "No custom search locations"
 msgstr "Ni določenih mest po meri za iskanje"
-
-#: panels/search/cc-search-panel.c:173
-msgid "No apps found"
-msgstr "Ni najdenih programov"
 
 #: panels/search/cc-search-panel.ui:16
 msgid "_App Search"
@@ -7636,22 +7636,22 @@ msgid "Language;Layout;Keyboard;Input;"
 msgstr "jezik,razporeditev;tipkovnica;vnos;language;keyboard;input;"
 
 #: panels/system/remote-desktop/cc-desktop-sharing-page.c:364
-#: panels/system/remote-desktop/cc-remote-session-page.c:98
+#: panels/system/remote-desktop/cc-remote-login-page.c:98
 msgid "Device address copied"
 msgstr "Naslov naprave je kopiran"
 
 #: panels/system/remote-desktop/cc-desktop-sharing-page.c:373
-#: panels/system/remote-desktop/cc-remote-session-page.c:107
+#: panels/system/remote-desktop/cc-remote-login-page.c:107
 msgid "Port number copied"
 msgstr "Številka vrat je kopirana"
 
 #: panels/system/remote-desktop/cc-desktop-sharing-page.c:384
-#: panels/system/remote-desktop/cc-remote-session-page.c:118
+#: panels/system/remote-desktop/cc-remote-login-page.c:118
 msgid "Username copied"
 msgstr "Uporabniško ime je kopirano"
 
 #: panels/system/remote-desktop/cc-desktop-sharing-page.c:395
-#: panels/system/remote-desktop/cc-remote-session-page.c:129
+#: panels/system/remote-desktop/cc-remote-login-page.c:129
 msgid "Password copied"
 msgstr "Geslo je kopirano"
 
@@ -7676,12 +7676,12 @@ msgid "Allows desktop shares to control the screen"
 msgstr "Omogoča upravljanje zaslona namizja"
 
 #: panels/system/remote-desktop/cc-desktop-sharing-page.ui:42
-#: panels/system/remote-desktop/cc-remote-session-page.ui:41
+#: panels/system/remote-desktop/cc-remote-login-page.ui:41
 msgid "How to Connect"
 msgstr "Kako vzpostaviti povezavo"
 
 #: panels/system/remote-desktop/cc-desktop-sharing-page.ui:43
-#: panels/system/remote-desktop/cc-remote-session-page.ui:42
+#: panels/system/remote-desktop/cc-remote-login-page.ui:42
 msgid ""
 "Use a remote desktop app to connect using the RDP protocol. Additional "
 "information about the device’s network location may also be required."
@@ -7690,7 +7690,7 @@ msgstr ""
 "Morda bo treba vpisati tudi dodatne podatke o omrežni lokaciji naprave."
 
 #: panels/system/remote-desktop/cc-desktop-sharing-page.ui:46
-#: panels/system/remote-desktop/cc-remote-session-page.ui:45
+#: panels/system/remote-desktop/cc-remote-login-page.ui:45
 msgid "_Hostname"
 msgstr "Ime _gostitelja"
 
@@ -7698,31 +7698,31 @@ msgstr "Ime _gostitelja"
 #: panels/system/remote-desktop/cc-desktop-sharing-page.ui:75
 #: panels/system/remote-desktop/cc-desktop-sharing-page.ui:96
 #: panels/system/remote-desktop/cc-desktop-sharing-page.ui:112
-#: panels/system/remote-desktop/cc-remote-session-page.ui:53
-#: panels/system/remote-desktop/cc-remote-session-page.ui:74
-#: panels/system/remote-desktop/cc-remote-session-page.ui:95
-#: panels/system/remote-desktop/cc-remote-session-page.ui:111
-#: panels/system/remote-login/cc-remote-login-page.ui:67
+#: panels/system/remote-desktop/cc-remote-login-page.ui:53
+#: panels/system/remote-desktop/cc-remote-login-page.ui:74
+#: panels/system/remote-desktop/cc-remote-login-page.ui:95
+#: panels/system/remote-desktop/cc-remote-login-page.ui:111
+#: panels/system/secure-shell/cc-secure-shell-page.ui:67
 msgid "Copy"
 msgstr "Kopiraj"
 
 #: panels/system/remote-desktop/cc-desktop-sharing-page.ui:67
-#: panels/system/remote-desktop/cc-remote-session-page.ui:66
+#: panels/system/remote-desktop/cc-remote-login-page.ui:66
 msgid "_Port"
 msgstr "_Vrata"
 
 #: panels/system/remote-desktop/cc-desktop-sharing-page.ui:90
-#: panels/system/remote-desktop/cc-remote-session-page.ui:89
+#: panels/system/remote-desktop/cc-remote-login-page.ui:89
 msgid "Login Details"
 msgstr "Podrobnosti prijave"
 
 #: panels/system/remote-desktop/cc-desktop-sharing-page.ui:131
-#: panels/system/remote-desktop/cc-remote-session-page.ui:130
+#: panels/system/remote-desktop/cc-remote-login-page.ui:130
 msgid "_Generate New Password"
 msgstr "Ustvari _novo geslo"
 
 #: panels/system/remote-desktop/cc-desktop-sharing-page.ui:142
-#: panels/system/remote-desktop/cc-remote-session-page.ui:141
+#: panels/system/remote-desktop/cc-remote-login-page.ui:141
 msgid "_Verify Encryption"
 msgstr "_Overi šifriranje"
 
@@ -7735,16 +7735,16 @@ msgid "Desktop Sharing"
 msgstr "Souporaba namizja"
 
 #: panels/system/remote-desktop/cc-remote-desktop-page.ui:48
-#: panels/system/remote-desktop/cc-remote-session-page.ui:33
+#: panels/system/remote-desktop/cc-remote-login-page.ui:33
 msgid "Remote Login"
 msgstr "Oddaljena prijava"
 
-#: panels/system/remote-desktop/cc-remote-session-page.c:774
+#: panels/system/remote-desktop/cc-remote-login-page.c:774
 #: panels/system/users/cc-user-page.c:772
 msgid "Some settings are locked"
 msgstr "Nekatere nastavitve so z aklenjene"
 
-#: panels/system/remote-desktop/cc-remote-session-page.ui:18
+#: panels/system/remote-desktop/cc-remote-login-page.ui:18
 msgid ""
 "Remotely connect to your user account when it isn’t being used. The display "
 "resolution can be set from the remote."
@@ -7772,31 +7772,31 @@ msgstr "Omogoči ali onemogoči oddaljene seje"
 msgid "Authentication is required to enable or disable remote sessions"
 msgstr "Za spremembo možnosti oddaljene seje je zahtevana overitev"
 
-#: panels/system/remote-login/cc-remote-login-page.c:53
+#: panels/system/secure-shell/cc-secure-shell-page.c:53
 msgid "Command copied"
 msgstr "Ukaz je kopiran"
 
-#: panels/system/remote-login/cc-remote-login-page.ui:4
+#: panels/system/secure-shell/cc-secure-shell-page.ui:4
 msgid "Secure Shell"
 msgstr "Varna lupina"
 
-#: panels/system/remote-login/cc-remote-login-page.ui:39
+#: panels/system/secure-shell/cc-secure-shell-page.ui:39
 msgid "Access this device using Secure Shell (SSH)"
 msgstr "Dostop do naprave v varni lupini"
 
-#: panels/system/remote-login/cc-remote-login-page.ui:51
+#: panels/system/secure-shell/cc-secure-shell-page.ui:51
 msgid "_Secure Shell"
 msgstr "_Varna lupina"
 
-#: panels/system/remote-login/cc-remote-login-page.ui:58
+#: panels/system/secure-shell/cc-secure-shell-page.ui:58
 msgid "SSH Login _Command"
 msgstr "_Ukaz SSH za prijavo"
 
-#: panels/system/remote-login/org.gnome.controlcenter.remote-login-helper.policy.in.in:11
+#: panels/system/secure-shell/org.gnome.controlcenter.remote-login-helper.policy.in.in:11
 msgid "Enable or disable remote login"
 msgstr "Omogoči ali onemogoči oddaljene prijave"
 
-#: panels/system/remote-login/org.gnome.controlcenter.remote-login-helper.policy.in.in:12
+#: panels/system/secure-shell/org.gnome.controlcenter.remote-login-helper.policy.in.in:12
 msgid "Authentication is required to enable or disable remote login"
 msgstr "Za spremembo možnosti oddaljenega prijavljanja je zahtevana overitev"
 
@@ -8345,8 +8345,8 @@ msgid "_Add User…"
 msgstr "Dodaj _uporabnika …"
 
 #: panels/system/users/cc-users-page.ui:46
-msgid "Add Enterprise User"
-msgstr "Dodaj podjetniški račun"
+msgid "Add _Enterprise Login…"
+msgstr "Dodaj prijavo v _poslovno domeno …"
 
 #: panels/system/users/data/join-dialog.ui:59
 msgid "Domain Administrator Login"
@@ -8373,12 +8373,12 @@ msgstr "Upravljanje uporabnikov in spreminjanje gesel"
 #. Translators: Search terms to find the Users panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/system/users/gnome-users-panel.desktop.in:15
 msgid ""
-"Login;Name;Fingerprint;Avatar;Logo;Face;Password;Parental Controls;Screen "
-"Time;App Restrictions;Web Restrictions;Usage;Usage Limit;Kid;Child;"
+"Login;Name;Fingerprint;Avatar;Logo;Face;Password;Parental;Restrictions;Usage;"
+"Kid;Child;"
 msgstr ""
-"Login;Prijava;Ime;Prstni odtis;Podoba;Avatar;Logo;Obraz;Geslo;Starševski "
-"nadzor;Zaslonski čas;Omejitev;Zaklepanje programov;Uporaba;Omejitev uporabe;"
-"Otroci;Otrok;Mladostniki;"
+"Login;prijava;ime;prstni odtis;podoba;Avatar;logo;logotip;obraz;geslo;"
+"starševski nadzor;zaslonski čas;omejitev;zaklepanje programov;uporaba;"
+"omejitev uporabe;otroci;otrok;mladostniki;mladostnik;"
 
 #: panels/system/users/org.gnome.controlcenter.user-accounts.policy.in:11
 msgid "Manage user accounts"
@@ -9198,15 +9198,15 @@ msgctxt "Wacom action-type"
 msgid "Show On-Screen Help"
 msgstr "Pokaži zaslonsko pomoč"
 
-#: panels/wacom/cc-wacom-device.c:430
+#: panels/wacom/cc-wacom-device.c:437
 msgid "Tablet mounted on laptop panel"
 msgstr "Na prenosnik je priklopljena tablica"
 
-#: panels/wacom/cc-wacom-device.c:432
+#: panels/wacom/cc-wacom-device.c:439
 msgid "Tablet mounted on external display"
 msgstr "Na zunanji zaslon je priklopljena tablica"
 
-#: panels/wacom/cc-wacom-device.c:434
+#: panels/wacom/cc-wacom-device.c:441
 msgid "External tablet device"
 msgstr "Zunanja tablična naprava"
 
@@ -9914,16 +9914,16 @@ msgstr "Nastavitve telefonije in mobilnih podatkovnih povezav"
 msgid "cellular;wwan;telephony;sim;mobile;"
 msgstr "cellular;wwan;telephony;telefon;kartica;klicanje;mobilno;sim;mobile;"
 
-#: shell/appdata/org.gnome.Settings.appdata.xml.in:8
+#: shell/appdata/org.gnome.Settings.appdata.xml.in.in:8
 msgid "Utility to configure the GNOME desktop"
 msgstr "Orodje za nastavljanje namizja GNOME"
 
-#: shell/appdata/org.gnome.Settings.appdata.xml.in:10
+#: shell/appdata/org.gnome.Settings.appdata.xml.in.in:10
 msgid "Settings is the primary interface for configuring your system."
 msgstr "Program je osnovni vmesnik za prilagajanje nastavitev sistema."
 
 #. developer_name tag deprecated with Appstream 1.0
-#: shell/appdata/org.gnome.Settings.appdata.xml.in:39
+#: shell/appdata/org.gnome.Settings.appdata.xml.in.in:39
 msgid "The GNOME Project"
 msgstr "Projekt GNOME"
 
