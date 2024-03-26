@@ -289,10 +289,10 @@ goa_provider_priority (const char *provider_type)
     "windows_live", /* Microsoft Personal */
     "ms_graph",     /* Microsoft 365 */
     "exchange",     /* Microsoft Exchange */
+    "fedora",       /* Fedora */
     "imap_smtp",    /* Email (IMAP and SMTP) */
     "webdav",       /* Calendars, Contacts, Files (WebDAV) */
     "kerberos",     /* Enterprise Login (Kerberos) */
-    "fedora",       /* Fedora */
   };
 
   for (size_t i = 0; i < G_N_ELEMENTS (goa_priority); i++)
