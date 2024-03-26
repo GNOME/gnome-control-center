@@ -426,7 +426,7 @@ test_unconnected_carrier_plug (NetworkPanelFixture  *fixture,
   nmtst_set_wired_speed (fixture->sinfo, fixture->main_ether, 1234);
   nmtst_set_device_state (fixture->sinfo, fixture->main_ether, NM_DEVICE_STATE_DISCONNECTED, NM_DEVICE_STATE_REASON_CARRIER);
 
-  g_assert_nonnull (find_label (GTK_WIDGET (fixture->shell), "1234 Mb/s"));
+  g_assert_nonnull (find_label (GTK_WIDGET (fixture->shell), "1*234 Mb/s"));
 }
 
 
@@ -454,7 +454,7 @@ test_connection_add_activate (NetworkPanelFixture  *fixture,
   active_conn = nmtst_add_and_activate_connection (fixture->sinfo, fixture->client, fixture->main_ether, conn);
   g_object_unref (active_conn);
 
-  label = find_label (GTK_WIDGET (fixture->shell), "1234 Mb/s");
+  label = find_label (GTK_WIDGET (fixture->shell), "1*234 Mb/s");
   sw = find_sibling (label, GTK_TYPE_LIST_BOX_ROW, GTK_TYPE_SWITCH);
   g_assert_nonnull (sw);
   g_assert_false (gtk_switch_get_state (GTK_SWITCH (sw)));
@@ -467,7 +467,7 @@ test_connection_add_activate (NetworkPanelFixture  *fixture,
   gtk_switch_set_active (GTK_SWITCH (sw), FALSE);
 
   /* Only one connection, so a generic label. */
-  g_assert_nonnull (find_label (GTK_WIDGET (fixture->shell), "Connected - 1234 Mb/s"));
+  g_assert_nonnull (find_label (GTK_WIDGET (fixture->shell), "Connected - 1*234 Mb/s"));
 }
 
 static void
