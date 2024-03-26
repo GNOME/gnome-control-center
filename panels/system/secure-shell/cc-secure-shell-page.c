@@ -50,7 +50,7 @@ on_copy_ssh_command_button_clicked (CcSecureShellPage *self)
   gdk_clipboard_set_text (gtk_widget_get_clipboard (GTK_WIDGET (self)),
                           adw_action_row_get_subtitle (ADW_ACTION_ROW (self->hostname_row)));
 
-  adw_toast_overlay_add_toast (self->toast_overlay, adw_toast_new (_("Command copied")));
+  adw_toast_overlay_add_toast (self->toast_overlay, adw_toast_new (_("Command copied to clipboard")));
 }
 
 static void
