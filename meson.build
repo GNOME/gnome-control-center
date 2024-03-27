@@ -143,7 +143,7 @@ gtk_dep = dependency(
 
 libadwaita_dep = dependency(
   'libadwaita-1',
-  version: '>= 1.4.alpha',
+  version: '>= 1.5',
   required: false
 )
 # FIXME: this is a workaround because interactive-tests don't work with libadwaita as a subproject. See !1754
