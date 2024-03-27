@@ -107,18 +107,17 @@ about_activated (GSimpleAction *action,
 
 {
   CcApplication *self = CC_APPLICATION (user_data);
-  GtkWidget *about_window;
+  AdwDialog *about_dialog;
   const char *developer_name;
 
-  about_window = adw_about_window_new_from_appdata ("/org/gnome/Settings/appdata", NULL);
-  adw_about_window_set_version (ADW_ABOUT_WINDOW (about_window), VERSION);
-  developer_name = adw_about_window_get_developer_name (ADW_ABOUT_WINDOW (about_window));
+  about_dialog = adw_about_dialog_new_from_appdata ("/org/gnome/Settings/appdata", NULL);
+  adw_about_dialog_set_version (ADW_ABOUT_DIALOG (about_dialog), VERSION);
+  developer_name = adw_about_dialog_get_developer_name (ADW_ABOUT_DIALOG (about_dialog));
   /* Translators should localize the following string which will be displayed in the About dialog giving credit to the translator(s). */
-  adw_about_window_set_translator_credits (ADW_ABOUT_WINDOW (about_window), _("translator-credits"));
-  adw_about_window_set_copyright (ADW_ABOUT_WINDOW (about_window), g_strdup_printf (_("© 1998 %s"), developer_name));
-  gtk_window_set_transient_for (GTK_WINDOW (about_window), GTK_WINDOW (self->window));
+  adw_about_dialog_set_translator_credits (ADW_ABOUT_DIALOG (about_dialog), _("translator-credits"));
+  adw_about_dialog_set_copyright (ADW_ABOUT_DIALOG (about_dialog), g_strdup_printf (_("© 1998 %s"), developer_name));
 
-  gtk_window_present (GTK_WINDOW (about_window));
+  adw_dialog_present (about_dialog, GTK_WIDGET (self->window));
 }
 
 static gboolean
