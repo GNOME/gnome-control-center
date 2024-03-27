@@ -487,7 +487,7 @@ header_func (GtkListBoxRow *row,
     return;
 
   pid = get_panel_id_index (get_panel_id_from_row (user_data, row));
-  if (g_str_equal (panel_order[pid-1], "separator"))
+  if (pid > 0 && g_str_equal (panel_order[pid-1], "separator"))
     {
       GtkWidget *separator;
 
