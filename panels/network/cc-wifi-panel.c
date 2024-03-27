@@ -299,9 +299,11 @@ check_main_stack_page (CcWifiPanel *self)
 {
   const gchar *nm_version;
   gboolean airplane_mode_active;
+  gboolean wireless_hw_enabled;
   gboolean wireless_enabled;
 
   nm_version = nm_client_get_version (self->client);
+  wireless_hw_enabled = nm_client_wireless_hardware_get_enabled (self->client);
   wireless_enabled = nm_client_wireless_get_enabled (self->client);
   airplane_mode_active = adw_switch_row_get_active (self->rfkill_row);
 
@@ -309,8 +311,10 @@ check_main_stack_page (CcWifiPanel *self)
     gtk_stack_set_visible_child_name (self->main_stack, "nm-not-running");
   else if (!wireless_enabled && airplane_mode_active)
     gtk_stack_set_visible_child_name (self->main_stack, "airplane-mode");
-  else if (!wireless_enabled || self->devices->len == 0)
+  else if (!wireless_hw_enabled || self->devices->len == 0)
     gtk_stack_set_visible_child_name (self->main_stack, "no-wifi-devices");
+  else if (!wireless_enabled)
+    gtk_stack_set_visible_child_name (self->main_stack, "wifi-off");
   else
     gtk_stack_set_visible_child_name (self->main_stack, "wifi-connections");
 }
