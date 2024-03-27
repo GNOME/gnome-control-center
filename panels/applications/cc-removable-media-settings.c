@@ -55,7 +55,7 @@ struct _CcRemovableMediaSettings
   GtkAppChooserButton *audio_cdda_chooser;
   GtkAppChooserButton *dcf_chooser;
   GtkAppChooserButton *music_player_chooser;
-  AdwWindow           *other_type_dialog;
+  AdwDialog           *other_type_dialog;
   AdwActionRow        *other_action_row;
   GtkBox              *other_action_box;
   GtkComboBox         *other_type_combo_box;
@@ -343,7 +343,7 @@ on_other_type_combo_box_changed (CcRemovableMediaSettings *self)
 }
 
 static gboolean
-on_extra_options_dialog_close_request (CcRemovableMediaSettings *self)
+on_extra_options_dialog_close_attempt (CcRemovableMediaSettings *self)
 {
   gtk_widget_set_visible (GTK_WIDGET (self->other_type_dialog), FALSE);
 
@@ -358,14 +358,9 @@ on_extra_options_dialog_close_request (CcRemovableMediaSettings *self)
 static void
 on_extra_options_button_clicked (CcRemovableMediaSettings *self)
 {
-  GtkWidget *app_panel = gtk_widget_get_ancestor(GTK_WIDGET (self), CC_TYPE_APPLICATIONS_PANEL);
-  CcShell *shell = cc_panel_get_shell (CC_PANEL (app_panel));
-  GtkWidget *toplevel = cc_shell_get_toplevel (shell);
-
-  gtk_window_set_transient_for (GTK_WINDOW (self->other_type_dialog), GTK_WINDOW (toplevel));
   /* update other_application_chooser */
   on_other_type_combo_box_changed (self);
-  gtk_window_present (GTK_WINDOW (self->other_type_dialog));
+  adw_dialog_present (self->other_type_dialog, GTK_WIDGET (self));
 }
 
 #define OFFSET(x)             (G_STRUCT_OFFSET (CcRemovableMediaSettings, x))
@@ -522,7 +517,7 @@ cc_removable_media_settings_dispose (GObject *object)
 {
   CcRemovableMediaSettings *self = CC_REMOVABLE_MEDIA_SETTINGS (object);
 
-  g_clear_pointer ((GtkWindow **) &self->other_type_dialog, gtk_window_destroy);
+  g_clear_pointer ((AdwDialog **) &self->other_type_dialog, adw_dialog_force_close);
 
   G_OBJECT_CLASS (cc_removable_media_settings_parent_class)->dispose (object);
 }
@@ -555,7 +550,7 @@ cc_removable_media_settings_class_init (CcRemovableMediaSettingsClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcRemovableMediaSettings, software_row);
   gtk_widget_class_bind_template_child (widget_class, CcRemovableMediaSettings, other_media_row);
 
-  gtk_widget_class_bind_template_callback (widget_class, on_extra_options_dialog_close_request);
+  gtk_widget_class_bind_template_callback (widget_class, on_extra_options_dialog_close_attempt);
   gtk_widget_class_bind_template_callback (widget_class, on_extra_options_button_clicked);
   gtk_widget_class_bind_template_callback (widget_class, on_other_type_combo_box_changed);
 }
