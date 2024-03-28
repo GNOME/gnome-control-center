@@ -774,10 +774,19 @@ add_snap_permissions (CcApplicationsPanel *self,
 
 static void
 update_sandbox_banner (CcApplicationsPanel *self,
+                       const gchar         *app_id,
                        gboolean             is_sandboxed)
 {
+  gboolean is_system = FALSE;
+  const gchar *system_apps[] = {
+    "org.gnome.Settings",
+    NULL,
+  };
+  gsize i;
 
-  gtk_widget_set_visible (GTK_WIDGET (self->sandbox_banner), !is_sandboxed);
+  for (i = 0; !is_system && (is_system = g_str_equal (system_apps[i], app_id)); i++);
+  gtk_widget_set_visible (GTK_WIDGET (self->sandbox_banner),
+                                      !is_sandboxed && !is_system);
   if (is_sandboxed)
     return;
 
@@ -811,6 +820,7 @@ add_static_permissions (CcApplicationsPanel *self,
   g_auto(GStrv) shared = NULL;
   g_auto(GStrv) filesystems = NULL;
   g_autofree gchar *str = NULL;
+  g_autofree gchar *app_id = NULL;
   gint added = 0;
   g_autofree gchar *text = NULL;
   gboolean is_sandboxed, is_snap = FALSE;
@@ -820,7 +830,8 @@ add_static_permissions (CcApplicationsPanel *self,
     keyfile = get_flatpak_metadata (portal_app_id);
 
   is_sandboxed = (keyfile != NULL) || is_snap;
-  update_sandbox_banner (self, is_sandboxed);
+  app_id = get_app_id (info);
+  update_sandbox_banner (self, app_id, is_sandboxed);
   if (keyfile == NULL)
     return FALSE;
 
