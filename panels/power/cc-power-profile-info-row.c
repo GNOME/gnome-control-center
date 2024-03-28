@@ -32,12 +32,10 @@
 
 struct _CcPowerProfileInfoRow
 {
-  GtkListBoxRow parent_instance;
-
-  GtkLabel       *title_label;
+  AdwActionRow parent_instance;
 };
 
-G_DEFINE_TYPE (CcPowerProfileInfoRow, cc_power_profile_info_row, GTK_TYPE_LIST_BOX_ROW)
+G_DEFINE_TYPE (CcPowerProfileInfoRow, cc_power_profile_info_row, ADW_TYPE_ACTION_ROW)
 
 static void
 cc_power_profile_info_row_class_init (CcPowerProfileInfoRowClass *klass)
@@ -45,8 +43,6 @@ cc_power_profile_info_row_class_init (CcPowerProfileInfoRowClass *klass)
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/power/cc-power-profile-info-row.ui");
-
-  gtk_widget_class_bind_template_child (widget_class, CcPowerProfileInfoRow, title_label);
 }
 
 static void
@@ -61,7 +57,7 @@ cc_power_profile_info_row_new (const char *text)
   CcPowerProfileInfoRow *self;
 
   self = g_object_new (CC_TYPE_POWER_PROFILE_INFO_ROW, NULL);
-  gtk_label_set_markup (self->title_label, text);
+  adw_preferences_row_set_title (ADW_PREFERENCES_ROW (self), text);
 
   return self;
 }
