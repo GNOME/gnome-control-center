@@ -798,7 +798,7 @@ add_static_permission_row (CcApplicationsPanel *self,
 static gboolean
 add_static_permissions (CcApplicationsPanel *self,
                         GAppInfo            *info,
-                        const gchar         *app_id)
+                        const gchar         *portal_app_id)
 {
   g_autoptr(GKeyFile) keyfile = NULL;
   g_auto(GStrv) sockets = NULL;
@@ -811,9 +811,9 @@ add_static_permissions (CcApplicationsPanel *self,
   g_autofree gchar *static_permissions_number = NULL;
   gboolean is_sandboxed, is_snap = FALSE;
 
-  is_snap = app_id && g_str_has_prefix (app_id, PORTAL_SNAP_PREFIX);
-  if (app_id && !is_snap)
-    keyfile = get_flatpak_metadata (app_id);
+  is_snap = portal_app_id && g_str_has_prefix (portal_app_id, PORTAL_SNAP_PREFIX);
+  if (portal_app_id && !is_snap)
+    keyfile = get_flatpak_metadata (portal_app_id);
 
   is_sandboxed = (keyfile != NULL) || is_snap;
   update_sandbox_banner (self, is_sandboxed);
