@@ -1,3 +1,5 @@
+/* Battery levels */
+
 levelbar block.warning-battery-offset {
   background-color: @error_color;
   border-color: @error_color;
@@ -11,4 +13,14 @@ levelbar block.low-battery-offset {
 levelbar block.high-battery-offset {
   background-color: @success_color;
   border-color: @success_color;
+}
+
+/* Power profiles */
+
+.power-profile.low-power {
+  color: @success_color;
+}
+
+.power-profile.performance {
+  color: @error_color;
 }

@@ -97,20 +97,6 @@ cc_power_panel_get_help_uri (CcPanel *panel)
 }
 
 static void
-load_custom_css (CcPowerPanel *self,
-                 const char   *path)
-{
-  g_autoptr(GtkCssProvider) provider = NULL;
-
-  /* use custom CSS */
-  provider = gtk_css_provider_new ();
-  gtk_css_provider_load_from_resource (provider, path);
-  gtk_style_context_add_provider_for_display (gdk_display_get_default (),
-                                              GTK_STYLE_PROVIDER (provider),
-                                              GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
-}
-
-static void
 add_battery (CcPowerPanel *self, UpDevice *device, gboolean primary)
 {
   CcBatteryRow *row = cc_battery_row_new (device, primary);
@@ -1407,12 +1393,17 @@ static void
 cc_power_panel_init (CcPowerPanel *self)
 {
   guint i;
+  g_autoptr(GtkCssProvider) provider = NULL;
 
   g_resources_register (cc_power_get_resource ());
 
   gtk_widget_init_template (GTK_WIDGET (self));
-  load_custom_css (self, "/org/gnome/control-center/power/battery-levels.css");
-  load_custom_css (self, "/org/gnome/control-center/power/power-profiles.css");
+
+  provider = gtk_css_provider_new ();
+  gtk_css_provider_load_from_resource (provider, "/org/gnome/control-center/power/power.css");
+  gtk_style_context_add_provider_for_display (gdk_display_get_default (),
+                                              GTK_STYLE_PROVIDER (provider),
+                                              GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
 
   self->chassis_type = cc_hostname_get_chassis_type (cc_hostname_get_default ());
 
