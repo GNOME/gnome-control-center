@@ -959,11 +959,11 @@ power_profile_update_info_boxes (CcPowerPanel *self)
       gtk_widget_set_visible (GTK_WIDGET (self->power_profile_info_listbox), TRUE);
 
       if (g_str_equal (degraded, "high-operating-temperature"))
-        text = _("Performance mode temporarily disabled due to high operating temperature.");
+        text = _("Performance mode temporarily disabled due to high operating temperature");
       else if (g_str_equal (degraded, "lap-detected"))
         text = _("Lap detected: performance mode temporarily unavailable. Move the device to a stable surface to restore.");
       else
-        text = _("Performance mode temporarily disabled.");
+        text = _("Performance mode temporarily disabled");
 
       row = cc_power_profile_info_row_new (text);
       gtk_list_box_append (self->power_profile_info_listbox, GTK_WIDGET (row));
@@ -1005,7 +1005,7 @@ power_profile_update_info_boxes (CcPowerPanel *self)
       if (g_strcmp0 (held_profile, "power-saver") == 0 &&
           g_strcmp0 (app_id, "org.gnome.SettingsDaemon.Power") == 0)
         {
-          text = g_strdup (_("Low battery: power saver enabled. Previous mode will be restored when battery is sufficiently charged."));
+          text = g_strdup (_("Power saver enabled due to low battery. Previous mode will be restored when battery is charged."));
         }
       else
         {
@@ -1013,11 +1013,11 @@ power_profile_update_info_boxes (CcPowerPanel *self)
           {
           case CC_POWER_PROFILE_POWER_SAVER:
             /* translators: "%s" is an application name */
-            text = g_strdup_printf (_("Power Saver mode activated by “%s”."), name);
+            text = g_strdup_printf (_("Power Saver mode activated by “%s”"), name);
             break;
           case CC_POWER_PROFILE_PERFORMANCE:
             /* translators: "%s" is an application name */
-            text = g_strdup_printf (_("Performance mode activated by “%s”."), name);
+            text = g_strdup_printf (_("Performance mode activated by “%s”"), name);
             break;
           default:
             g_assert_not_reached ();
