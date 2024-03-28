@@ -30,7 +30,6 @@
 #include "firmware-security/cc-firmware-security-page.h"
 #include "cc-list-row.h"
 #include "location/cc-location-page.h"
-#include "microphone/cc-microphone-page.h"
 #include "cc-privacy-resources.h"
 #include "screen/cc-screen-page.h"
 #include "usage/cc-usage-page.h"
@@ -55,8 +54,6 @@ cc_privacy_panel_get_help_uri (CcPanel *panel)
     return "help:gnome-help/camera";
   else if (g_strcmp0 (page_tag, "location-page") == 0)
     return "help:gnome-help/location";
-  else if (g_strcmp0 (page_tag, "microphone-page") == 0)
-    return "help:gnome-help/microphone";
   else
     return NULL;
 }
@@ -78,7 +75,6 @@ cc_privacy_panel_class_init (CcPrivacyPanelClass *klass)
   g_type_ensure (CC_TYPE_DIAGNOSTICS_PAGE);
   g_type_ensure (CC_TYPE_FIRMWARE_SECURITY_PAGE);
   g_type_ensure (CC_TYPE_LOCATION_PAGE);
-  g_type_ensure (CC_TYPE_MICROPHONE_PAGE);
   g_type_ensure (CC_TYPE_SCREEN_PAGE);
   g_type_ensure (CC_TYPE_USAGE_PAGE);
 }

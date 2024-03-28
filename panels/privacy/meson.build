@@ -19,7 +19,6 @@ sources = files(
   'firmware-security/cc-firmware-security-page.c',
   'firmware-security/cc-firmware-security-utils.c',
   'location/cc-location-page.c',
-  'microphone/cc-microphone-page.c',
   'cc-privacy-panel.c',
   'screen/cc-screen-page.c',
   'usage/cc-usage-page.c',
