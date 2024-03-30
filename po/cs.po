@@ -26,8 +26,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2024-03-15 10:07+0000\n"
-"PO-Revision-Date: 2024-03-15 11:10+0100\n"
+"POT-Creation-Date: 2024-03-29 22:54+0000\n"
+"PO-Revision-Date: 2024-03-30 10:54+0100\n"
 "Last-Translator: Daniel Rusek <mail@asciiwolf.com>\n"
 "Language-Team: Czech <gnome-cs-list@gnome.org>\n"
 "Language: cs\n"
@@ -58,7 +58,8 @@ msgid "Session Bus"
 msgstr "Sběrnice sezení"
 
 #: panels/applications/cc-applications-panel.c:835
-#: panels/privacy/cc-bolt-page.ui:240 panels/privacy/cc-bolt-page.ui:284
+#: panels/privacy/bolt/cc-bolt-page.ui:240
+#: panels/privacy/bolt/cc-bolt-page.ui:284
 #: panels/privacy/cc-privacy-panel.ui:74
 msgid "Devices"
 msgstr "Zařízení"
@@ -97,7 +98,7 @@ msgstr "Souborový systém"
 
 #: panels/applications/cc-applications-panel.c:855
 #: panels/keyboard/01-launchers.xml.in:6
-#: shell/appdata/org.gnome.Settings.appdata.xml.in:7 shell/cc-window.c:775
+#: shell/appdata/org.gnome.Settings.appdata.xml.in.in:7 shell/cc-window.c:798
 #: shell/cc-window.ui:20 shell/org.gnome.Settings.desktop.in:3
 msgid "Settings"
 msgstr "Nastavení"
@@ -150,6 +151,7 @@ msgid "_Default Apps"
 msgstr "_Výchozí aplikace"
 
 #: panels/applications/cc-applications-panel.ui:62
+#: panels/search/cc-search-panel.ui:51
 msgid "No Apps Found"
 msgstr "Nenalezeny žádné aplikace"
 
@@ -322,7 +324,7 @@ msgstr "Přístup k systému, který tato aplikace požaduje."
 #: panels/applications/cc-applications-panel.ui:371
 #: panels/mouse/cc-mouse-panel.ui:66
 #: panels/multitasking/cc-multitasking-panel.ui:15
-#: panels/power/cc-power-panel.ui:171
+#: panels/power/cc-power-panel.ui:199
 msgid "General"
 msgstr "Obecné"
 
@@ -423,6 +425,12 @@ msgstr "Vo_lání"
 msgid "_SMS"
 msgstr "_SMS"
 
+#: panels/applications/cc-default-apps-row.c:126
+#, fuzzy
+#| msgid "Not Available"
+msgid "No Apps Available"
+msgstr "nelze zjistit"
+
 #: panels/applications/cc-removable-media-settings.c:287
 msgid "Ask what to do"
 msgstr "Zeptat se na další postup"
@@ -435,24 +443,24 @@ msgstr "Nic nedělat"
 msgid "Open folder"
 msgstr "Otevřít složku"
 
-#: panels/applications/cc-removable-media-settings.c:386
+#: panels/applications/cc-removable-media-settings.c:381
 msgid "Select an app for audio CDs"
 msgstr "Vyberte aplikaci pro zvuková CD"
 
-#: panels/applications/cc-removable-media-settings.c:387
+#: panels/applications/cc-removable-media-settings.c:382
 msgid "Select an app for video DVDs"
 msgstr "Vyberte aplikaci pro DVD s videem"
 
-#: panels/applications/cc-removable-media-settings.c:388
+#: panels/applications/cc-removable-media-settings.c:383
 msgid "Select an app to run when a music player is connected"
 msgstr ""
 "Vyberte aplikaci, která má být spuštěna po připojení hudebního přehrávače"
 
-#: panels/applications/cc-removable-media-settings.c:389
+#: panels/applications/cc-removable-media-settings.c:384
 msgid "Select an app to run when a camera is connected"
 msgstr "Vyberte aplikaci, která má být spuštěna po připojení fotoaparátu"
 
-#: panels/applications/cc-removable-media-settings.c:390
+#: panels/applications/cc-removable-media-settings.c:385
 msgid "Select an app for software CDs"
 msgstr "Vyberte aplikaci pro CD se softwarem"
 
@@ -461,51 +469,51 @@ msgstr "Vyberte aplikaci pro CD se softwarem"
 #. * If the shared-mime-info translation works for your language,
 #. * simply leave these untranslated.
 #.
-#: panels/applications/cc-removable-media-settings.c:402
+#: panels/applications/cc-removable-media-settings.c:397
 msgid "audio DVD"
 msgstr "zvukové DVD"
 
-#: panels/applications/cc-removable-media-settings.c:403
+#: panels/applications/cc-removable-media-settings.c:398
 msgid "blank Blu-ray disc"
 msgstr "prázdný disk Blu-ray"
 
-#: panels/applications/cc-removable-media-settings.c:404
+#: panels/applications/cc-removable-media-settings.c:399
 msgid "blank CD disc"
 msgstr "prázdný disk CD"
 
-#: panels/applications/cc-removable-media-settings.c:405
+#: panels/applications/cc-removable-media-settings.c:400
 msgid "blank DVD disc"
 msgstr "prázdný disk DVD"
 
-#: panels/applications/cc-removable-media-settings.c:406
+#: panels/applications/cc-removable-media-settings.c:401
 msgid "blank HD DVD disc"
 msgstr "prázdný disk HD DVD"
 
-#: panels/applications/cc-removable-media-settings.c:407
+#: panels/applications/cc-removable-media-settings.c:402
 msgid "Blu-ray video disc"
 msgstr "videodisk Blu-ray"
 
-#: panels/applications/cc-removable-media-settings.c:408
+#: panels/applications/cc-removable-media-settings.c:403
 msgid "e-book reader"
 msgstr "čtečka elektronických knih"
 
-#: panels/applications/cc-removable-media-settings.c:409
+#: panels/applications/cc-removable-media-settings.c:404
 msgid "HD DVD video disc"
 msgstr "videodisk HD DVD"
 
-#: panels/applications/cc-removable-media-settings.c:410
+#: panels/applications/cc-removable-media-settings.c:405
 msgid "Picture CD"
 msgstr "Picture CD"
 
-#: panels/applications/cc-removable-media-settings.c:411
+#: panels/applications/cc-removable-media-settings.c:406
 msgid "Super Video CD"
 msgstr "Super Video CD"
 
-#: panels/applications/cc-removable-media-settings.c:412
+#: panels/applications/cc-removable-media-settings.c:407
 msgid "Video CD"
 msgstr "Video CD"
 
-#: panels/applications/cc-removable-media-settings.c:413
+#: panels/applications/cc-removable-media-settings.c:408
 msgid "Windows software"
 msgstr "Software Windows"
 
@@ -541,11 +549,11 @@ msgstr "Vyberte, jak by měla být obsluhována ostatní média"
 msgid "Other Media"
 msgstr "Ostatní média"
 
-#: panels/applications/cc-removable-media-settings.ui:123
+#: panels/applications/cc-removable-media-settings.ui:106
 msgid "_Type"
 msgstr "_Typ"
 
-#: panels/applications/cc-removable-media-settings.ui:143
+#: panels/applications/cc-removable-media-settings.ui:126
 msgid "_Action"
 msgstr "Č_innost"
 
@@ -992,11 +1000,12 @@ msgstr "Kalibrace displeje"
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:15
 #: panels/network/cc-net-proxy-page.ui:14
 #: panels/network/cc-wifi-hotspot-dialog.ui:142
-#: panels/network/cc-wifi-panel.c:737
+#: panels/network/cc-wifi-panel.c:741
 #: panels/network/connection-editor/ce-page-details.c:100
 #: panels/network/connection-editor/connection-editor.ui:16
 #: panels/printers/new-printer-dialog.ui:54
-#: panels/printers/pp-details-dialog.c:266 panels/privacy/cc-usage-page.c:136
+#: panels/printers/pp-details-dialog.c:266
+#: panels/privacy/usage/cc-usage-page.c:136
 #: panels/sharing/cc-sharing-panel.c:239
 #: panels/system/region/cc-format-chooser.ui:24
 #: panels/system/users/cc-add-user-dialog.ui:34
@@ -1593,36 +1602,36 @@ msgstr "Ubrat hodinu"
 msgid "Decrement Minute"
 msgstr "Ubrat minutu"
 
-#: panels/common/cc-util.c:127
+#: panels/common/cc-util.c:130
 #: panels/network/connection-editor/ce-page-details.c:199
 msgid "Today"
 msgstr "dnes"
 
-#: panels/common/cc-util.c:131
+#: panels/common/cc-util.c:134
 #: panels/network/connection-editor/ce-page-details.c:201
 msgid "Yesterday"
 msgstr "včera"
 
 #. Translators: This is a date format string in the style of "Feb 24".
-#: panels/common/cc-util.c:139
+#: panels/common/cc-util.c:142
 #, no-c-format
 msgid "%b %e"
 msgstr "%e. %B"
 
 #. Translators: This is a date format string in the style of "Feb 24, 2013".
-#: panels/common/cc-util.c:144
+#: panels/common/cc-util.c:147
 msgid "%b %e, %Y"
 msgstr "%e. %B %Y"
 
 #. TRANSLATORS: This is the datetime format in the style of
 #. "Aug 1, 10:10:10 PM", "Feb 24, 2013, 10:10:10 PM", "Today, 10:10:10 AM",
 #. and "Yesterday, 10:10:10 AM"
-#: panels/common/cc-util.c:163
+#: panels/common/cc-util.c:166
 #, c-format
 msgid "%1$s, %2$s"
 msgstr "%1$s, %2$s"
 
-#: panels/common/cc-util.c:183
+#: panels/common/cc-util.c:186
 #, c-format
 msgid "%d hour"
 msgid_plural "%d hours"
@@ -1631,7 +1640,7 @@ msgstr[1] "%d hodin"
 msgstr[2] "%d hodin"
 
 #. Translators: Option for "Blank Screen" in "Power" panel
-#: panels/common/cc-util.c:184 panels/power/cc-power-panel.c:790
+#: panels/common/cc-util.c:187 panels/power/cc-power-panel.c:791
 #, c-format
 msgid "%d minute"
 msgid_plural "%d minutes"
@@ -1639,7 +1648,7 @@ msgstr[0] "%d minuty"
 msgstr[1] "%d minut"
 msgstr[2] "%d minut"
 
-#: panels/common/cc-util.c:185
+#: panels/common/cc-util.c:188
 #, c-format
 msgid "%d second"
 msgid_plural "%d seconds"
@@ -1648,42 +1657,42 @@ msgstr[1] "%d sekund"
 msgstr[2] "%d sekund"
 
 #. 5 hours 2 minutes 12 seconds
-#: panels/common/cc-util.c:192
+#: panels/common/cc-util.c:195
 #, c-format
 msgctxt "hours minutes seconds"
 msgid "%s %s %s"
 msgstr "%s %s %s"
 
 #. 5 hours 2 minutes
-#: panels/common/cc-util.c:197
+#: panels/common/cc-util.c:200
 #, c-format
 msgctxt "hours minutes"
 msgid "%s %s"
 msgstr "%s %s"
 
 #. 5 hours
-#: panels/common/cc-util.c:202
+#: panels/common/cc-util.c:205
 #, c-format
 msgctxt "hours"
 msgid "%s"
 msgstr "%s"
 
 #. 2 minutes 12 seconds
-#: panels/common/cc-util.c:210
+#: panels/common/cc-util.c:213
 #, c-format
 msgctxt "minutes seconds"
 msgid "%s %s"
 msgstr "%s %s"
 
 #. 2 minutes
-#: panels/common/cc-util.c:215
+#: panels/common/cc-util.c:218
 #, c-format
 msgctxt "minutes"
 msgid "%s"
 msgstr "%s"
 
 #. 0 seconds
-#: panels/common/cc-util.c:226
+#: panels/common/cc-util.c:229
 msgid "0 seconds"
 msgstr "0 sekund"
 
@@ -1695,13 +1704,13 @@ msgstr "Přístupový bod"
 
 #: panels/display/cc-display-panel.c:510
 #: panels/notifications/cc-notifications-panel.c:213
-#: panels/power/cc-power-panel.c:679 panels/power/cc-power-panel.c:686
+#: panels/power/cc-power-panel.c:680 panels/power/cc-power-panel.c:687
 msgid "On"
 msgstr "Zapnuto"
 
 #: panels/display/cc-display-panel.c:512 panels/network/cc-net-proxy-page.c:182
 #: panels/notifications/cc-notifications-panel.c:213
-#: panels/power/cc-power-panel.c:673 panels/power/cc-power-panel.c:684
+#: panels/power/cc-power-panel.c:674 panels/power/cc-power-panel.c:685
 msgid "Off"
 msgstr "Vypnuto"
 
@@ -2741,8 +2750,12 @@ msgstr "Správa předvoleb pro produktivitu a multitasking"
 
 #. Translators: Search terms to find the Search panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/multitasking/gnome-multitasking-panel.desktop.in:15
+#, fuzzy
+#| msgid ""
+#| "Multitasking;Multitask;Productivity;Customize;Desktop;Hot Corner;"
+#| "Workspaces;"
 msgid ""
-"Multitasking;Multitask;Productivity;Customize;Desktop;Hot Corner;Workspaces;"
+"Multitasking;Multitask;Productivity;Customize;Desktop;Hot;Corner;Workspaces;"
 msgstr ""
 "multitasking;multitask;více úkolů;více úloh;produktivita;přizpůsobit;"
 "přizpůsobení;desktop;citlivý roh;pracovní plochy;"
@@ -3001,8 +3014,8 @@ msgstr "Název sítě"
 #: panels/network/cc-wifi-hotspot-dialog.ui:92
 #: panels/printers/new-printer-dialog.ui:293
 #: panels/printers/pp-jobs-dialog.ui:54
-#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:110
-#: panels/system/remote-desktop/cc-remote-session-page.ui:108
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:109
+#: panels/system/remote-desktop/cc-remote-login-page.ui:108
 #: panels/system/users/cc-add-user-dialog.ui:159
 #: panels/wwan/cc-wwan-apn-dialog.ui:175
 msgid "Password"
@@ -3020,21 +3033,21 @@ msgstr "automaticky vygenerované heslo"
 msgid "_Turn On"
 msgstr "Zapnou_t"
 
-#: panels/network/cc-wifi-panel.c:403
+#: panels/network/cc-wifi-panel.c:407
 #: panels/network/gnome-wifi-panel.desktop.in:3
 #: panels/network/network-wifi.ui:61 panels/network/network-wifi.ui:70
 msgid "Wi-Fi"
 msgstr "Wi-Fi"
 
-#: panels/network/cc-wifi-panel.c:733
+#: panels/network/cc-wifi-panel.c:737
 msgid "Turning off will disconnect any devices that are using the hotspot."
 msgstr "Vypnutím se odpojí všechna zařízení, která přístupový bod používají."
 
-#: panels/network/cc-wifi-panel.c:735
+#: panels/network/cc-wifi-panel.c:739
 msgid "Turn Off Hotspot?"
 msgstr "Vypnout přístupový bod?"
 
-#: panels/network/cc-wifi-panel.c:738
+#: panels/network/cc-wifi-panel.c:742
 msgid "_Turn Off"
 msgstr "Vypnou_t"
 
@@ -3047,42 +3060,54 @@ msgid "Disables Wi-Fi, Bluetooth and mobile broadband"
 msgstr "Vypnout Wi-Fi, Bluetooth a mobilní připojení"
 
 #: panels/network/cc-wifi-panel.ui:68
+#, fuzzy
+#| msgid "Wi-Fi"
+msgid "Wi-Fi Off"
+msgstr "Wi-Fi"
+
+#: panels/network/cc-wifi-panel.ui:69
+#, fuzzy
+#| msgid "Turn off to use Wi-Fi"
+msgid "Turn on to use Wi-Fi"
+msgstr "Musíte jej vypnout, když chcete používat Wi-Fi"
+
+#: panels/network/cc-wifi-panel.ui:82
 msgid "No Wi-Fi Adapter Found"
 msgstr "Nebyl nalezen žádný adaptér Wi-Fi"
 
-#: panels/network/cc-wifi-panel.ui:69
+#: panels/network/cc-wifi-panel.ui:83
 msgid "Make sure you have a Wi-Fi adapter plugged and turned on"
 msgstr "Ujistěte se, že máte adaptér Wi-Fi připojený a zapnutý"
 
-#: panels/network/cc-wifi-panel.ui:82 panels/wwan/cc-wwan-panel.ui:64
+#: panels/network/cc-wifi-panel.ui:96 panels/wwan/cc-wwan-panel.ui:64
 msgid "Airplane Mode On"
 msgstr "Režim „Letadlo“ je zapnutý"
 
-#: panels/network/cc-wifi-panel.ui:83
+#: panels/network/cc-wifi-panel.ui:97
 msgid "Turn off to use Wi-Fi"
 msgstr "Musíte jej vypnout, když chcete používat Wi-Fi"
 
-#: panels/network/cc-wifi-panel.ui:118
+#: panels/network/cc-wifi-panel.ui:132
 msgid "Wi-Fi Hotspot Active"
 msgstr "Bezdrátový přístupový bod je aktivní"
 
-#: panels/network/cc-wifi-panel.ui:128
+#: panels/network/cc-wifi-panel.ui:142
 msgid "Mobile devices can scan the QR code to connect."
 msgstr "Mobilní zařízení mohou pro připojení načíst QR kód."
 
-#: panels/network/cc-wifi-panel.ui:136
+#: panels/network/cc-wifi-panel.ui:150
 msgid "Turn Off Hotspot…"
 msgstr "Vypnout přístupový bod…"
 
-#: panels/network/cc-wifi-panel.ui:156
+#: panels/network/cc-wifi-panel.ui:170
 msgid "Visible Networks"
 msgstr "Viditelné sítě"
 
-#: panels/network/cc-wifi-panel.ui:193
+#: panels/network/cc-wifi-panel.ui:207
 msgid "Wi-Fi Unavailable"
 msgstr "Wi-Fi nedostupné"
 
-#: panels/network/cc-wifi-panel.ui:194
+#: panels/network/cc-wifi-panel.ui:208
 msgid ""
 "An error has occurred and Wi-Fi cannot be used.\n"
 "    Error details: NetworkManager not running."
@@ -3404,7 +3429,7 @@ msgstr "WireGuard"
 
 #. Translators: Unknown endpoint host for WireGuard (invalid setting)
 #: panels/network/connection-editor/ce-page-wireguard.c:373
-#: panels/privacy/cc-firmware-security-dialog.c:168
+#: panels/privacy/firmware-security/cc-firmware-security-dialog.c:168
 #: panels/sound/cc-alert-chooser-window.c:352
 #: panels/system/about/cc-about-page.c:73
 #: panels/system/about/cc-system-details-window.c:273
@@ -4234,23 +4259,23 @@ msgid "Cable unplugged"
 msgstr "Odpojen kabel"
 
 #. This is the per app switch for message tray usage.
-#: panels/notifications/cc-app-notifications-dialog.ui:21
+#: panels/notifications/cc-app-notifications-dialog.ui:18
 msgctxt "notifications"
 msgid "_Notifications"
 msgstr "_Upozornění"
 
 #. This is the setting to configure sounds associated with notifications.
-#: panels/notifications/cc-app-notifications-dialog.ui:28
+#: panels/notifications/cc-app-notifications-dialog.ui:25
 msgctxt "notifications"
 msgid "Sound _Alerts"
 msgstr "Zvuková _upozornění"
 
-#: panels/notifications/cc-app-notifications-dialog.ui:35
+#: panels/notifications/cc-app-notifications-dialog.ui:32
 msgctxt "notifications"
 msgid "Notification _Popups"
 msgstr "Vyskakovací u_pozornění"
 
-#: panels/notifications/cc-app-notifications-dialog.ui:36
+#: panels/notifications/cc-app-notifications-dialog.ui:33
 msgid ""
 "Notifications will continue to appear in the notification list when popups "
 "are disabled"
@@ -4259,17 +4284,17 @@ msgstr ""
 "objevovat v seznamu upozornění"
 
 #. Popups here refers to message tray notifications in the middle of the screen.
-#: panels/notifications/cc-app-notifications-dialog.ui:43
+#: panels/notifications/cc-app-notifications-dialog.ui:40
 msgctxt "notifications"
 msgid "Show Message _Content in Popups"
 msgstr "Zobrazovat o_bsah zpráv ve vyskakovacích cedulích"
 
-#: panels/notifications/cc-app-notifications-dialog.ui:50
+#: panels/notifications/cc-app-notifications-dialog.ui:47
 msgctxt "notifications"
 msgid "_Lock Screen Notifications"
 msgstr "Upozornění na za_mykací obrazovce"
 
-#: panels/notifications/cc-app-notifications-dialog.ui:57
+#: panels/notifications/cc-app-notifications-dialog.ui:54
 msgctxt "notifications"
 msgid "Show Message C_ontent on Lock Screen"
 msgstr "Zobrazovat _obsah zpráv na uzamknuté obrazovce"
@@ -4512,60 +4537,60 @@ msgstr "Přídavná"
 msgid "%d %%"
 msgstr "%d %%"
 
-#: panels/power/cc-power-panel.c:201
+#: panels/power/cc-power-panel.c:202
 msgid "Battery Levels"
 msgstr "Úrovně baterie"
 
 #. Translators: UPS is an Uninterruptible Power Supply:
 #. * https://en.wikipedia.org/wiki/Uninterruptible_power_supply
-#: panels/power/cc-power-panel.c:206
+#: panels/power/cc-power-panel.c:207
 msgid "UPS"
 msgstr "Záložní zdroj"
 
-#: panels/power/cc-power-panel.c:209
+#: panels/power/cc-power-panel.c:210
 msgid "Battery Level"
 msgstr "Úroveň baterie"
 
-#: panels/power/cc-power-panel.c:463
+#: panels/power/cc-power-panel.c:464
 msgid "When _Idle"
 msgstr "Při _nečinnosti"
 
-#: panels/power/cc-power-panel.c:616
+#: panels/power/cc-power-panel.c:617
 msgid "Suspend"
 msgstr "Uspat do paměti"
 
-#: panels/power/cc-power-panel.c:617
+#: panels/power/cc-power-panel.c:618
 msgid "Power Off"
 msgstr "Vypnout"
 
-#: panels/power/cc-power-panel.c:618
+#: panels/power/cc-power-panel.c:619
 msgid "Hibernate"
 msgstr "Uspat na disk"
 
-#: panels/power/cc-power-panel.c:619
+#: panels/power/cc-power-panel.c:620
 msgid "Nothing"
 msgstr "Nic nedělat"
 
-#: panels/power/cc-power-panel.c:675
+#: panels/power/cc-power-panel.c:676
 msgid "When on battery power"
 msgstr "Při napájení z baterie"
 
-#: panels/power/cc-power-panel.c:677
+#: panels/power/cc-power-panel.c:678
 msgid "When plugged in"
 msgstr "Při napájení ze sítě"
 
-#: panels/power/cc-power-panel.c:797
+#: panels/power/cc-power-panel.c:798
 msgctxt "Idle time"
 msgid "Never"
 msgstr "Nikdy"
 
-#: panels/power/cc-power-panel.c:975
+#: panels/power/cc-power-panel.c:976
 msgid ""
 "Performance mode temporarily disabled due to high operating temperature."
 msgstr ""
 "Režim vysokého výkonu byl dočasně vypnut z důvodu zvýšené operační teploty."
 
-#: panels/power/cc-power-panel.c:977
+#: panels/power/cc-power-panel.c:978
 msgid ""
 "Lap detected: performance mode temporarily unavailable. Move the device to a "
 "stable surface to restore."
@@ -4573,11 +4598,11 @@ msgstr ""
 "Pravděpodobně máte počítač na klíně, proto není režim vysokého výkonu "
 "dočasně k dispozici. Přesuňte zařízení na stabilní povrch, aby se obnovil."
 
-#: panels/power/cc-power-panel.c:979
+#: panels/power/cc-power-panel.c:980
 msgid "Performance mode temporarily disabled."
 msgstr "Režim vysokého výkonu je dočasně zakázaný."
 
-#: panels/power/cc-power-panel.c:1021
+#: panels/power/cc-power-panel.c:1022
 msgid ""
 "Low battery: power saver enabled. Previous mode will be restored when "
 "battery is sufficiently charged."
@@ -4586,13 +4611,13 @@ msgstr ""
 "jakmile se baterie dostatečně nabije."
 
 #. translators: "%s" is an application name
-#: panels/power/cc-power-panel.c:1029
+#: panels/power/cc-power-panel.c:1030
 #, c-format
 msgid "Power Saver mode activated by “%s”."
 msgstr "Režim úspory energie byl aktivován aplikací „%s“."
 
 #. translators: "%s" is an application name
-#: panels/power/cc-power-panel.c:1033
+#: panels/power/cc-power-panel.c:1034
 #, c-format
 msgid "Performance mode activated by “%s”."
 msgstr "Režim vysokého výkonu byl aktivován aplikací „%s“."
@@ -4657,87 +4682,123 @@ msgctxt "automatic_suspend"
 msgid "2 hours"
 msgstr "2 hodin"
 
-#: panels/power/cc-power-panel.ui:80
+#. Translators: Option for "Delay" in "Automatic suspend" dialog.
+#: panels/power/cc-power-panel.ui:63
+#, fuzzy
+#| msgctxt "lock_screen"
+#| msgid "1 minute"
+msgctxt "automatic_suspend"
+msgid "1 minute"
+msgstr "po 1 minutě"
+
+#. Translators: Option for "Delay" in "Automatic suspend" dialog.
+#: panels/power/cc-power-panel.ui:67
+#, fuzzy
+#| msgctxt "lock_screen"
+#| msgid "2 minutes"
+msgctxt "automatic_suspend"
+msgid "2 minutes"
+msgstr "po 2 minutách"
+
+#. Translators: Option for "Delay" in "Automatic suspend" dialog.
+#: panels/power/cc-power-panel.ui:71
+#, fuzzy
+#| msgctxt "lock_screen"
+#| msgid "5 minutes"
+msgctxt "automatic_suspend"
+msgid "5 minutes"
+msgstr "po 5 minutách"
+
+#. Translators: Option for "Delay" in "Automatic suspend" dialog.
+#: panels/power/cc-power-panel.ui:75
+#, fuzzy
+#| msgctxt "blank_screen"
+#| msgid "10 minutes"
+msgctxt "automatic_suspend"
+msgid "10 minutes"
+msgstr "po 10 minutách"
+
+#: panels/power/cc-power-panel.ui:108
 msgid "Connected Devices"
 msgstr "Připojená zařízení"
 
-#: panels/power/cc-power-panel.ui:98
+#: panels/power/cc-power-panel.ui:126
 msgid "Power Mode"
 msgstr "Režim napájení"
 
-#: panels/power/cc-power-panel.ui:126
+#: panels/power/cc-power-panel.ui:154
 msgid "Power Saving"
 msgstr "Šetření energií"
 
-#: panels/power/cc-power-panel.ui:129
+#: panels/power/cc-power-panel.ui:157
 msgid "A_utomatic Screen Brightness"
 msgstr "A_utomatický jas obrazovky"
 
-#: panels/power/cc-power-panel.ui:130
+#: panels/power/cc-power-panel.ui:158
 msgid "Adjust screen brightness to the surrounding light"
 msgstr "Přizpůsobit jas obrazovky okolnímu světlu"
 
-#: panels/power/cc-power-panel.ui:137
+#: panels/power/cc-power-panel.ui:165
 msgid "_Dim Screen"
 msgstr "_Stmívání obrazovky"
 
-#: panels/power/cc-power-panel.ui:138
+#: panels/power/cc-power-panel.ui:166
 msgid "Reduce screen brightness when the device is inactive"
 msgstr "Snížit jas obrazovky, když je zařízení neaktivní"
 
-#: panels/power/cc-power-panel.ui:144
+#: panels/power/cc-power-panel.ui:172
 msgid "Screen _Blank"
 msgstr "Zhasínat _obrazovku"
 
-#: panels/power/cc-power-panel.ui:145
+#: panels/power/cc-power-panel.ui:173
 msgid "Turn the screen off after a period of inactivity"
 msgstr "Vypnout obrazovku po nějaké době nečinnosti"
 
-#: panels/power/cc-power-panel.ui:153
+#: panels/power/cc-power-panel.ui:181
 msgid "Automatic Power _Saver"
 msgstr "Automatický režim š_etření energií"
 
-#: panels/power/cc-power-panel.ui:154
+#: panels/power/cc-power-panel.ui:182
 msgid "Turn on power saver mode when battery power is low"
 msgstr "Zapnout režim šetření energií, když je nízký stav baterie"
 
-#: panels/power/cc-power-panel.ui:161
+#: panels/power/cc-power-panel.ui:189
 msgid "_Automatic Suspend"
 msgstr "_Automaticky uspat"
 
-#: panels/power/cc-power-panel.ui:162
+#: panels/power/cc-power-panel.ui:190
 msgid "Pause the device after a period of inactivity"
 msgstr "Pozastavit běh zařízení po nějaké době nečinnosti"
 
-#: panels/power/cc-power-panel.ui:175
+#: panels/power/cc-power-panel.ui:203
 msgid "Po_wer Button Behavior"
 msgstr "Chování tlačítka na_pájení"
 
-#: panels/power/cc-power-panel.ui:183
+#: panels/power/cc-power-panel.ui:211
 msgid "Show Battery _Percentage"
 msgstr "Zobrazovat _procenta baterie"
 
-#: panels/power/cc-power-panel.ui:184
+#: panels/power/cc-power-panel.ui:212
 msgid "Show exact charge level in the top bar"
 msgstr "Zobrazit přesnou úroveň nabití v horní liště"
 
-#: panels/power/cc-power-panel.ui:197
+#: panels/power/cc-power-panel.ui:225
 msgid "Automatic Suspend"
 msgstr "Automatické uspání"
 
-#: panels/power/cc-power-panel.ui:226
+#: panels/power/cc-power-panel.ui:254
 msgid "On _Battery Power"
 msgstr "_Při napájení z baterie"
 
-#: panels/power/cc-power-panel.ui:233
+#: panels/power/cc-power-panel.ui:261
 msgid "_Delay"
 msgstr "Po _uplynutí"
 
-#: panels/power/cc-power-panel.ui:251
+#: panels/power/cc-power-panel.ui:279
 msgid "_Plugged In"
 msgstr "Při _napájení ze sítě"
 
-#: panels/power/cc-power-panel.ui:257
+#: panels/power/cc-power-panel.ui:285
 msgid "D_elay"
 msgstr "Zpož_dění"
 
@@ -4895,8 +4956,8 @@ msgstr ""
 #. Translators: This is a username on a print server.
 #: panels/printers/new-printer-dialog.ui:272
 #: panels/printers/pp-jobs-dialog.ui:42
-#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:94
-#: panels/system/remote-desktop/cc-remote-session-page.ui:92
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:93
+#: panels/system/remote-desktop/cc-remote-login-page.ui:92
 #: panels/wwan/cc-wwan-apn-dialog.ui:150
 msgid "Username"
 msgstr "Uživatelské jméno"
@@ -4929,7 +4990,7 @@ msgid "Printer names cannot contain SPACE, TAB, #, or /"
 msgstr "Název tiskárny nesmí obsahovat mezeru, tabulátor, # nebo /"
 
 #: panels/printers/pp-details-dialog.ui:75 panels/printers/printer-entry.ui:97
-#: panels/privacy/cc-location-page.ui:4
+#: panels/privacy/location/cc-location-page.ui:4
 msgid "Location"
 msgstr "Umístění"
 
@@ -5457,7 +5518,7 @@ msgid "Model"
 msgstr "Model"
 
 #: panels/printers/printer-entry.ui:124
-#: panels/privacy/cc-bolt-device-dialog.ui:25
+#: panels/privacy/bolt/cc-bolt-device-dialog.ui:25
 msgid "Status"
 msgstr "Stav"
 
@@ -5497,77 +5558,77 @@ msgstr "Vyčistit tiskové hlavy"
 msgid "Remove Printer"
 msgstr "Odebrat tiskárnu"
 
-#: panels/privacy/cc-bolt-device-dialog.c:79
-#: panels/privacy/cc-bolt-device-entry.c:121
+#: panels/privacy/bolt/cc-bolt-device-dialog.c:79
+#: panels/privacy/bolt/cc-bolt-device-entry.c:121
 msgctxt "Thunderbolt Device Status"
 msgid "Disconnected"
 msgstr "Odpojeno"
 
-#: panels/privacy/cc-bolt-device-dialog.c:82
-#: panels/privacy/cc-bolt-device-entry.c:124
+#: panels/privacy/bolt/cc-bolt-device-dialog.c:82
+#: panels/privacy/bolt/cc-bolt-device-entry.c:124
 msgctxt "Thunderbolt Device Status"
 msgid "Connecting"
 msgstr "Připojuje se"
 
-#: panels/privacy/cc-bolt-device-dialog.c:85
-#: panels/privacy/cc-bolt-device-entry.c:128
-#: panels/privacy/cc-bolt-device-entry.c:140
+#: panels/privacy/bolt/cc-bolt-device-dialog.c:85
+#: panels/privacy/bolt/cc-bolt-device-entry.c:128
+#: panels/privacy/bolt/cc-bolt-device-entry.c:140
 msgctxt "Thunderbolt Device Status"
 msgid "Connected"
 msgstr "Připojeno"
 
-#: panels/privacy/cc-bolt-device-dialog.c:88
+#: panels/privacy/bolt/cc-bolt-device-dialog.c:88
 msgctxt "Thunderbolt Device Status"
 msgid "Authorization Error"
 msgstr "Chyba ověřování"
 
-#: panels/privacy/cc-bolt-device-dialog.c:91
-#: panels/privacy/cc-bolt-device-entry.c:134
+#: panels/privacy/bolt/cc-bolt-device-dialog.c:91
+#: panels/privacy/bolt/cc-bolt-device-entry.c:134
 msgctxt "Thunderbolt Device Status"
 msgid "Authorizing"
 msgstr "Ověřuje se"
 
-#: panels/privacy/cc-bolt-device-dialog.c:98
+#: panels/privacy/bolt/cc-bolt-device-dialog.c:98
 msgctxt "Thunderbolt Device Status"
 msgid "Reduced Functionality"
 msgstr "Omezená funkcionalita"
 
-#: panels/privacy/cc-bolt-device-dialog.c:100
+#: panels/privacy/bolt/cc-bolt-device-dialog.c:100
 msgctxt "Thunderbolt Device Status"
 msgid "Connected & Authorized"
 msgstr "Připojeno a ověřeno"
 
-#: panels/privacy/cc-bolt-device-dialog.c:106
-#: panels/privacy/cc-bolt-device-entry.c:148
+#: panels/privacy/bolt/cc-bolt-device-dialog.c:106
+#: panels/privacy/bolt/cc-bolt-device-entry.c:148
 msgctxt "Thunderbolt Device Status"
 msgid "Unknown"
 msgstr "Neznámý"
 
 #. Translators: The time point the device was authorized.
-#: panels/privacy/cc-bolt-device-dialog.c:161
+#: panels/privacy/bolt/cc-bolt-device-dialog.c:161
 msgid "Authorized at"
 msgstr "Ověřeno"
 
 #. Translators: The time point the device was connected.
-#: panels/privacy/cc-bolt-device-dialog.c:167
+#: panels/privacy/bolt/cc-bolt-device-dialog.c:167
 msgid "Connected at"
 msgstr "Připojeno"
 
 #. Translators: The time point the device was enrolled,
 #. * i.e. authorized and stored in the device database.
-#: panels/privacy/cc-bolt-device-dialog.c:174
+#: panels/privacy/bolt/cc-bolt-device-dialog.c:174
 msgid "Enrolled at"
 msgstr "Registrováno"
 
-#: panels/privacy/cc-bolt-device-dialog.c:248
+#: panels/privacy/bolt/cc-bolt-device-dialog.c:248
 msgid "Failed to authorize device: "
 msgstr "Selhalo ověření zařízení: "
 
-#: panels/privacy/cc-bolt-device-dialog.c:315
+#: panels/privacy/bolt/cc-bolt-device-dialog.c:315
 msgid "Failed to forget device: "
 msgstr "Zapomenutí zařízení selhalo: "
 
-#: panels/privacy/cc-bolt-device-dialog.c:455
+#: panels/privacy/bolt/cc-bolt-device-dialog.c:455
 #, c-format
 msgid "Depends on %u other device"
 msgid_plural "Depends on %u other devices"
@@ -5575,58 +5636,58 @@ msgstr[0] "Závisí na dalším zařízení"
 msgstr[1] "Závisí na dalších %u zařízeních"
 msgstr[2] "Závisí na dalších %u zařízeních"
 
-#: panels/privacy/cc-bolt-device-dialog.ui:4
+#: panels/privacy/bolt/cc-bolt-device-dialog.ui:4
 msgid "Device Identifier"
 msgstr "Identifikátor zařízení"
 
-#: panels/privacy/cc-bolt-device-dialog.ui:30
+#: panels/privacy/bolt/cc-bolt-device-dialog.ui:30
 msgid "UUID"
 msgstr "UUID"
 
-#: panels/privacy/cc-bolt-device-dialog.ui:35
+#: panels/privacy/bolt/cc-bolt-device-dialog.ui:35
 msgid "Timestamp"
 msgstr "Čas"
 
-#: panels/privacy/cc-bolt-device-dialog.ui:43
+#: panels/privacy/bolt/cc-bolt-device-dialog.ui:43
 msgid "Depends on other devices"
 msgstr "Závisí na dalších zařízeních"
 
-#: panels/privacy/cc-bolt-device-dialog.ui:73
+#: panels/privacy/bolt/cc-bolt-device-dialog.ui:73
 msgid "Authorize and Connect"
 msgstr "Ověřit a připojit"
 
-#: panels/privacy/cc-bolt-device-dialog.ui:88
+#: panels/privacy/bolt/cc-bolt-device-dialog.ui:88
 msgid "Forget Device"
 msgstr "Zapomenout zařízení"
 
-#: panels/privacy/cc-bolt-device-entry.c:131
+#: panels/privacy/bolt/cc-bolt-device-entry.c:131
 msgctxt "Thunderbolt Device Status"
 msgid "Error"
 msgstr "Chyba"
 
-#: panels/privacy/cc-bolt-device-entry.c:142
+#: panels/privacy/bolt/cc-bolt-device-entry.c:142
 msgctxt "Thunderbolt Device Status"
 msgid "Authorized"
 msgstr "Ověřeno"
 
-#: panels/privacy/cc-bolt-page.c:219
+#: panels/privacy/bolt/cc-bolt-page.c:219
 msgid ""
 "The Thunderbolt subsystem (boltd) is not installed or not set up properly."
 msgstr ""
 "Subsystém Thunderbolt (boltd) není nainstalovaný, nebo není správně "
 "nastavený."
 
-#: panels/privacy/cc-bolt-page.c:475
+#: panels/privacy/bolt/cc-bolt-page.c:475
 msgid "Allow direct access to devices such as docks and external GPUs."
 msgstr ""
 "Umožňuje přímý přístup k zařízením, jako jsou dokovací stanice nebo externí "
 "GPU."
 
-#: panels/privacy/cc-bolt-page.c:476
+#: panels/privacy/bolt/cc-bolt-page.c:476
 msgid "Only USB and Display Port devices can attach."
 msgstr "Připojeny mohou být jen zařízení USB a Display Port."
 
-#: panels/privacy/cc-bolt-page.c:511
+#: panels/privacy/bolt/cc-bolt-page.c:511
 msgid ""
 "Thunderbolt could not be detected.\n"
 "Either the system lacks Thunderbolt support, it has been disabled in the "
@@ -5636,71 +5697,71 @@ msgstr ""
 "Buď systém postrádá podporu pro Thunderbolt, nebo je vypnutá přes BIOS, nebo "
 "je v něm nastavená nepodporovaná úroveň zabezpečení."
 
-#: panels/privacy/cc-bolt-page.c:555
+#: panels/privacy/bolt/cc-bolt-page.c:555
 msgid "Thunderbolt support has been disabled in the BIOS."
 msgstr "Podpora pro Thunderbolt je vypnutá přes BIOS."
 
-#: panels/privacy/cc-bolt-page.c:559
+#: panels/privacy/bolt/cc-bolt-page.c:559
 msgid "Thunderbolt security level could not be determined."
 msgstr "Úroveň zabezpečení zařízení Thunderbolt nemohla být určena."
 
-#: panels/privacy/cc-bolt-page.c:679
+#: panels/privacy/bolt/cc-bolt-page.c:679
 #, c-format
 msgid "Error switching direct mode: %s"
 msgstr "Chyba při přepínání přímého režimu: %s"
 
-#: panels/privacy/cc-bolt-page.ui:4
+#: panels/privacy/bolt/cc-bolt-page.ui:4
 msgid "Thunderbolt"
 msgstr "Thunderbolt"
 
-#: panels/privacy/cc-bolt-page.ui:48
+#: panels/privacy/bolt/cc-bolt-page.ui:48
 msgid "Close notification"
 msgstr "Zavřít upozornění"
 
-#: panels/privacy/cc-bolt-page.ui:109
+#: panels/privacy/bolt/cc-bolt-page.ui:109
 msgid "No Thunderbolt Support"
 msgstr "Bez podpory pro Thunderbolt"
 
-#: panels/privacy/cc-bolt-page.ui:110
+#: panels/privacy/bolt/cc-bolt-page.ui:110
 msgid "Could not connect to the thunderbolt subsystem"
 msgstr "Nezdařilo se připojit k subsystému thunderbolt"
 
-#: panels/privacy/cc-bolt-page.ui:127
+#: panels/privacy/bolt/cc-bolt-page.ui:127
 msgid "Direct Access"
 msgstr "Přímý přístup"
 
-#: panels/privacy/cc-bolt-page.ui:130
+#: panels/privacy/bolt/cc-bolt-page.ui:130
 msgid "Allow direct access to devices such as docks and external GPUs"
 msgstr ""
 "Umožňuje přímý přístup k zařízením, jako jsou dokovací stanice nebo externí "
 "GPU"
 
-#: panels/privacy/cc-bolt-page.ui:199
+#: panels/privacy/bolt/cc-bolt-page.ui:199
 msgid "Pending Devices"
 msgstr "Čekající zařízení"
 
-#: panels/privacy/cc-bolt-page.ui:293
+#: panels/privacy/bolt/cc-bolt-page.ui:293
 msgid "No devices attached"
 msgstr "Nejsou připojena žádná zařízení"
 
-#: panels/privacy/cc-camera-page.ui:4
+#: panels/privacy/camera/cc-camera-page.ui:4
 msgid "Cameras"
 msgstr "Kamery"
 
-#: panels/privacy/cc-camera-page.ui:17
+#: panels/privacy/camera/cc-camera-page.ui:17
 msgid "_Camera Access"
 msgstr "Přístup ke _kameře"
 
-#: panels/privacy/cc-camera-page.ui:18
+#: panels/privacy/camera/cc-camera-page.ui:18
 msgid "Allow permitted apps to use cameras"
 msgstr "Povolit schváleným aplikacím používat kamery"
 
-#: panels/privacy/cc-camera-page.ui:27 panels/privacy/cc-location-page.ui:55
-#: panels/privacy/cc-microphone-page.ui:27
+#: panels/privacy/camera/cc-camera-page.ui:27
+#: panels/privacy/location/cc-location-page.ui:55
 msgid "Permitted Apps"
 msgstr "Schválené aplikace"
 
-#: panels/privacy/cc-camera-page.ui:28
+#: panels/privacy/camera/cc-camera-page.ui:28
 msgid ""
 "The following sandboxed apps have been given permission to use cameras. Apps "
 "that are not sandboxed can use cameras without asking for permission."
@@ -5709,17 +5770,17 @@ msgstr ""
 "používat kamery. Aplikace, které nejsou v izolovaném prostředí, mohou "
 "používat kamery bez žádosti o povolení."
 
-#: panels/privacy/cc-camera-page.ui:42
+#: panels/privacy/camera/cc-camera-page.ui:42
 msgid "No sandboxed apps have asked for camera access"
 msgstr "Žádné aplikace v izolovaném prostředí nepožádaly o přístup ke kameře"
 
 #. translators: Text used in link to privacy policy
-#: panels/privacy/cc-diagnostics-page.c:122
+#: panels/privacy/diagnostics/cc-diagnostics-page.c:122
 msgid "learn more"
 msgstr "dozvědět se více"
 
 #. translators: The first '%s' is the distributor's name, such as 'Fedora', the second '%s' is a link to the privacy policy
-#: panels/privacy/cc-diagnostics-page.c:125
+#: panels/privacy/diagnostics/cc-diagnostics-page.c:125
 #, c-format
 msgid ""
 "Sending reports of technical problems helps us improve %s. Reports are sent "
@@ -5729,7 +5790,7 @@ msgstr ""
 "Hlášení jsou odesílána anonymně a jsou z nich odstraněny osobní údaje – %s."
 
 #. translators: The '%s' is the distributor's name, such as 'Fedora'
-#: panels/privacy/cc-diagnostics-page.c:130
+#: panels/privacy/diagnostics/cc-diagnostics-page.c:130
 #, c-format
 msgid ""
 "Sending reports of technical problems helps us improve %s. Reports are sent "
@@ -5738,26 +5799,26 @@ msgstr ""
 "Díky odesílání hlášení o technických problémech se může %s vylepšovat. "
 "Hlášení jsou odesílána anonymně a jsou z nich odstraněny osobní údaje."
 
-#: panels/privacy/cc-diagnostics-page.ui:4
+#: panels/privacy/diagnostics/cc-diagnostics-page.ui:4
 msgid "Diagnostics"
 msgstr "Diagnostiky"
 
-#: panels/privacy/cc-diagnostics-page.ui:15
+#: panels/privacy/diagnostics/cc-diagnostics-page.ui:15
 msgid "Problem Reporting"
 msgstr "Hlášení problémů"
 
-#: panels/privacy/cc-diagnostics-page.ui:18
+#: panels/privacy/diagnostics/cc-diagnostics-page.ui:18
 msgid "_Automatic Problem Reporting"
 msgstr "_Automatické hlášení problémů"
 
 #. TRANSLATORS: secure boot refers to the system firmware security mode
-#: panels/privacy/cc-firmware-security-boot-dialog.c:72
-#: panels/privacy/cc-firmware-security-page.c:122
+#: panels/privacy/firmware-security/cc-firmware-security-boot-dialog.c:72
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:122
 msgid "Secure Boot is Active"
 msgstr "Bezpečné zavádění je aktivní"
 
 #. TRANSLATORS: this is the first section of the decription
-#: panels/privacy/cc-firmware-security-boot-dialog.c:77
+#: panels/privacy/firmware-security/cc-firmware-security-boot-dialog.c:77
 msgid ""
 "Secure boot prevents malicious software from being loaded when the device "
 "starts. It is currently turned on and is functioning correctly."
@@ -5766,12 +5827,12 @@ msgstr ""
 "tuto chvíli je zapnuté a správně funguje."
 
 #. TRANSLATORS: secure boot refers to the system firmware security mode
-#: panels/privacy/cc-firmware-security-boot-dialog.c:83
+#: panels/privacy/firmware-security/cc-firmware-security-boot-dialog.c:83
 msgid "Secure Boot Has Problems"
 msgstr "Bezpečné zavádění má problémy"
 
 #. TRANSLATORS: this is the first section of the decription.
-#: panels/privacy/cc-firmware-security-boot-dialog.c:87
+#: panels/privacy/firmware-security/cc-firmware-security-boot-dialog.c:87
 msgid ""
 "Secure boot prevents malicious software from being loaded when the device "
 "starts. It is currently turned on, but will not work due to having an "
@@ -5781,7 +5842,7 @@ msgstr ""
 "tuto chvíli je zapnuté, ale nefunguje, protože má neplatný klíč."
 
 #. TRANSLATORS: this is the second section of description.
-#: panels/privacy/cc-firmware-security-boot-dialog.c:90
+#: panels/privacy/firmware-security/cc-firmware-security-boot-dialog.c:90
 msgid ""
 "Secure boot problems can often be resolved from your device's UEFI firmware "
 "settings (BIOS) and your hardware manufacturer may provide information on "
@@ -5792,19 +5853,19 @@ msgstr ""
 "hardwaru by měl poskytovat návod, jak postupovat."
 
 #. TRANSLATORS: this is the third section of description.
-#: panels/privacy/cc-firmware-security-boot-dialog.c:93
+#: panels/privacy/firmware-security/cc-firmware-security-boot-dialog.c:93
 msgid "For help, contact your hardware manufacturer or IT support provider."
 msgstr ""
 "Ohledně pomoci kontaktujte výrobce vašeho hardwaru nebo poskytovatele "
 "technické podpory."
 
 #. TRANSLATORS: secure boot refers to the system firmware security mode
-#: panels/privacy/cc-firmware-security-boot-dialog.c:99
+#: panels/privacy/firmware-security/cc-firmware-security-boot-dialog.c:99
 msgid "Secure Boot is Turned Off"
 msgstr "Bezpečné zavádění je vypnuté"
 
 #. TRANSLATORS: this is the first section of the description.
-#: panels/privacy/cc-firmware-security-boot-dialog.c:103
+#: panels/privacy/firmware-security/cc-firmware-security-boot-dialog.c:103
 msgid ""
 "Secure boot prevents malicious software from being loaded when the device "
 "starts. It is currently turned off."
@@ -5813,7 +5874,7 @@ msgstr ""
 "tuto chvíli je vypnuté."
 
 #. TRANSLATORS: this is the second section of the description.
-#: panels/privacy/cc-firmware-security-boot-dialog.c:106
+#: panels/privacy/firmware-security/cc-firmware-security-boot-dialog.c:106
 msgid ""
 "Secure boot can often be turned on from your device's UEFI firmware settings "
 "(BIOS). For help, contact your hardware manufacturer or IT support provider."
@@ -5822,7 +5883,7 @@ msgstr ""
 "zařízení (dříve BIOS). Hledejte „Secure Boot“. Ohledně pomoci kontaktujte "
 "výrobce vašeho hardwaru nebo poskytovatele technické podpory."
 
-#: panels/privacy/cc-firmware-security-boot-dialog.ui:55
+#: panels/privacy/firmware-security/cc-firmware-security-boot-dialog.ui:55
 msgid ""
 "Secure boot prevents malicious software from being loaded when the device "
 "starts.\n"
@@ -5835,14 +5896,14 @@ msgstr ""
 "technické podpory."
 
 #. TRANSLATORS: in reference to firmware protection: 0/4 stars
-#: panels/privacy/cc-firmware-security-dialog.c:106
-#: panels/privacy/cc-firmware-security-page.c:541
+#: panels/privacy/firmware-security/cc-firmware-security-dialog.c:106
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:541
 msgid "Checks Failed"
 msgstr "Ověření selhala"
 
 #. TRANSLATORS: This is the description to describe the failure on
 #. checking the security items.
-#: panels/privacy/cc-firmware-security-dialog.c:109
+#: panels/privacy/firmware-security/cc-firmware-security-dialog.c:109
 msgid ""
 "Hardware does not pass checks. This means that you are not protected against "
 "common hardware security issues.\n"
@@ -5859,14 +5920,14 @@ msgstr ""
 "fyzického hardwaru a nemusí být vratné."
 
 #. TRANSLATORS: in reference to firmware protection: 1/4 stars
-#: panels/privacy/cc-firmware-security-dialog.c:120
-#: panels/privacy/cc-firmware-security-page.c:548
+#: panels/privacy/firmware-security/cc-firmware-security-dialog.c:120
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:548
 msgid "Checks Passed"
 msgstr "Ověření prošla"
 
 #. TRANSLATORS: This description describes the device passing the
 #. minimum requirement of security check.
-#: panels/privacy/cc-firmware-security-dialog.c:123
+#: panels/privacy/firmware-security/cc-firmware-security-dialog.c:123
 msgid ""
 "This device meets basic security requirements. Its hardware has protection "
 "against some of the most common security threats."
@@ -5875,14 +5936,14 @@ msgstr ""
 "ochranu proti některým z nejběžnějších bezpečnostních hrozeb."
 
 #. TRANSLATORS: in reference to firmware protection: 2~4 stars
-#: panels/privacy/cc-firmware-security-dialog.c:134
-#: panels/privacy/cc-firmware-security-page.c:557
+#: panels/privacy/firmware-security/cc-firmware-security-dialog.c:134
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:557
 msgid "Protected"
 msgstr "Chráněno"
 
 #. TRANSLATOR: This description describes the devices passing
 #. the extended security check.
-#: panels/privacy/cc-firmware-security-dialog.c:137
+#: panels/privacy/firmware-security/cc-firmware-security-dialog.c:137
 msgid ""
 "This device passes current security tests. Its hardware is protected against "
 "the majority of security threats."
@@ -5891,13 +5952,13 @@ msgstr ""
 "chráněn proti většině bezpečnostních hrozeb."
 
 #. TRANSLATORS: in reference to firmware protection: ??? stars
-#: panels/privacy/cc-firmware-security-dialog.c:145
-#: panels/privacy/cc-firmware-security-page.c:564
+#: panels/privacy/firmware-security/cc-firmware-security-dialog.c:145
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:564
 msgid "Checks Unavailable"
 msgstr "Ověření nedostupná"
 
 #. TRANSLATORS: When the security result is unavailable, this description is shown.
-#: panels/privacy/cc-firmware-security-dialog.c:147
+#: panels/privacy/firmware-security/cc-firmware-security-dialog.c:147
 msgid ""
 "Device security checks are not available for this device. It is not possible "
 "to tell whether it meets security requirements."
@@ -5905,20 +5966,20 @@ msgstr ""
 "Kontroly zabezpečení zařízení nejsou pro toto zařízení k dispozici. Není "
 "možné říci, zda splňuje bezpečnostní požadavky."
 
-#: panels/privacy/cc-firmware-security-dialog.c:367
+#: panels/privacy/firmware-security/cc-firmware-security-dialog.c:367
 msgid "Report copied to clipboard"
 msgstr "Hlášení zkopírováno do schránky"
 
-#: panels/privacy/cc-firmware-security-dialog.ui:65
+#: panels/privacy/firmware-security/cc-firmware-security-dialog.ui:65
 msgid "_Copy Technical Report"
 msgstr "Z_kopírovat technické hlášení"
 
-#: panels/privacy/cc-firmware-security-help-dialog.ui:4
-#: panels/privacy/cc-firmware-security-page.ui:12
+#: panels/privacy/firmware-security/cc-firmware-security-help-dialog.ui:4
+#: panels/privacy/firmware-security/cc-firmware-security-page.ui:12
 msgid "About Device Security"
 msgstr "Informace o zabezpečení zařízení"
 
-#: panels/privacy/cc-firmware-security-help-dialog.ui:27
+#: panels/privacy/firmware-security/cc-firmware-security-help-dialog.ui:27
 msgid ""
 "Device security provides information about how protected your device is "
 "against security issues which target the hardware itself.\n"
@@ -5955,28 +6016,28 @@ msgstr ""
 "Zabezpečení zařízení je pouze jedním aspektem zabezpečení a neodráží celkový "
 "stav zabezpečení systému a aplikací."
 
-#: panels/privacy/cc-firmware-security-page.c:123
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:123
 msgid "Protected against malicious software when the device starts."
 msgstr "Chráněno proti škodlivému softwaru při spouštění zařízení."
 
-#: panels/privacy/cc-firmware-security-page.c:129
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:129
 msgid "Secure Boot has Problems"
 msgstr "Bezpečné zavádění má problémy"
 
-#: panels/privacy/cc-firmware-security-page.c:130
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:130
 msgid "Some protection when the device is started."
 msgstr "Aspoň nějaká ochrana při spouštění zařízení."
 
-#: panels/privacy/cc-firmware-security-page.c:135
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:135
 msgid "Secure Boot is Off"
 msgstr "Bezpečné zavádění je vypnuté"
 
-#: panels/privacy/cc-firmware-security-page.c:136
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:136
 msgid "No protection when the device is started."
 msgstr "Bez ochrany při spouštění zařízení."
 
 #. TRANSLATORS: this is to explain an event that has already happened
-#: panels/privacy/cc-firmware-security-page.c:155
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:155
 msgid ""
 "This issue could have been caused by a change in UEFI firmware settings, an "
 "operating system configuration change, or because of malicious software on "
@@ -5986,7 +6047,7 @@ msgstr ""
 "změnou nastavení operačního systému nebo škodlivým softwarem v systému."
 
 #. TRANSLATORS: this is to explain an event that has already happened
-#: panels/privacy/cc-firmware-security-page.c:163
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:163
 msgid ""
 "This issue could have been caused by a change in the UEFI firmware settings, "
 "or because of malicious software on this system."
@@ -5995,7 +6056,7 @@ msgstr ""
 "škodlivým softwarem v systému."
 
 #. TRANSLATORS: this is to explain an event that has already happened
-#: panels/privacy/cc-firmware-security-page.c:170
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:170
 msgid ""
 "This issue could have been caused by an operating system configuration "
 "change, or because of malicious software on this system."
@@ -6005,55 +6066,55 @@ msgstr ""
 
 #. TRANSLATOR: this is the date in "%Y-%m-%d %H:%M:%S" format,
 #. for example: 2022-08-01 22:48:00
-#: panels/privacy/cc-firmware-security-page.c:228
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:228
 #, c-format
 msgid "%1$s"
 msgstr "%1$s"
 
 #. TRANSLATOR: This is the text event status output when the event status is "success"
-#: panels/privacy/cc-firmware-security-page.c:234
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:234
 msgid "Pass"
 msgstr "Prošlo"
 
 #. TRANSLATOR: This is the text event status output when the event status is not "success"
-#: panels/privacy/cc-firmware-security-page.c:237
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:237
 msgid "! Fail"
 msgstr "! Selhalo"
 
-#: panels/privacy/cc-firmware-security-page.c:240
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:240
 #, c-format
 msgid "(%1$s → %2$s)"
 msgstr "(%1$s → %2$s)"
 
-#: panels/privacy/cc-firmware-security-page.c:542
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:542
 msgid "Hardware does not pass checks."
 msgstr "Hardware neprochází kontrolami."
 
-#: panels/privacy/cc-firmware-security-page.c:549
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:549
 msgid "Hardware meets basic security requirements."
 msgstr "Hardware splňuje základní bezpečnostní požadavky."
 
-#: panels/privacy/cc-firmware-security-page.c:558
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:558
 msgid "Hardware has a good level of protection."
 msgstr "Hardware má dobrou úroveň ochrany."
 
-#: panels/privacy/cc-firmware-security-page.c:565
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:565
 msgid "Security levels are not available for this device."
 msgstr "Pro toto zařízení nejsou dostupné různé úrovně zabezpečení."
 
-#: panels/privacy/cc-firmware-security-page.ui:4
+#: panels/privacy/firmware-security/cc-firmware-security-page.ui:4
 msgid "Device Security"
 msgstr "Zabezpečení zařízení"
 
-#: panels/privacy/cc-firmware-security-page.ui:57
+#: panels/privacy/firmware-security/cc-firmware-security-page.ui:57
 msgid "Starting Device Security…"
 msgstr "Spouští se zabezpečení zařízení…"
 
-#: panels/privacy/cc-firmware-security-page.ui:83
+#: panels/privacy/firmware-security/cc-firmware-security-page.ui:83
 msgid "Device Security Unavailable"
 msgstr "Zabezpečení zařízení nedostupné"
 
-#: panels/privacy/cc-firmware-security-page.ui:85
+#: panels/privacy/firmware-security/cc-firmware-security-page.ui:85
 msgid ""
 "Device Security is only available on physical hardware. No physical hardware "
 "has been detected."
@@ -6061,92 +6122,92 @@ msgstr ""
 "Zabezpečení zařízení je dostupné pouze na fyzickém hardwaru. Nebyl zjištěn "
 "žádný fyzický hardware."
 
-#: panels/privacy/cc-firmware-security-page.ui:223
+#: panels/privacy/firmware-security/cc-firmware-security-page.ui:223
 msgid "Security Events"
 msgstr "Bezpečnostní události"
 
-#: panels/privacy/cc-firmware-security-page.ui:233
+#: panels/privacy/firmware-security/cc-firmware-security-page.ui:233
 msgid "No Events"
 msgstr "Žádné události"
 
 #. TRANSLATORS: if the stauts is valid. For example security check is valid and key is valid.
-#: panels/privacy/cc-firmware-security-utils.c:35
+#: panels/privacy/firmware-security/cc-firmware-security-utils.c:35
 msgid "Valid"
 msgstr "Platné"
 
 #. TRANSLATORS: if the status or key is not valid.
-#: panels/privacy/cc-firmware-security-utils.c:40
+#: panels/privacy/firmware-security/cc-firmware-security-utils.c:40
 msgid "Not Valid"
 msgstr "Neplatné"
 
 #. TRANSLATORS: if the function is enabled through BIOS or OS settings.
 #. TRANSLATORS: Status of Parental Controls setup
-#: panels/privacy/cc-firmware-security-utils.c:45
+#: panels/privacy/firmware-security/cc-firmware-security-utils.c:45
 #: panels/system/users/cc-user-page.c:377
 #: panels/system/users/cc-user-page.c:749 panels/wwan/cc-wwan-device-page.c:475
 msgid "Enabled"
 msgstr "Zapnuto"
 
 #. TRANSLATORS: if the function is not enabled through BIOS or OS settings.
-#: panels/privacy/cc-firmware-security-utils.c:50
+#: panels/privacy/firmware-security/cc-firmware-security-utils.c:50
 msgid "Not Enabled"
 msgstr "Není zapnuto"
 
 #. TRANSLATORS: the memory space or system mode is locked to prevent from malicious modification.
-#: panels/privacy/cc-firmware-security-utils.c:55
+#: panels/privacy/firmware-security/cc-firmware-security-utils.c:55
 msgid "Locked"
 msgstr "Uzamknuto"
 
 #. TRANSLATORS: the memory space or system mode is not locked.
-#: panels/privacy/cc-firmware-security-utils.c:60
+#: panels/privacy/firmware-security/cc-firmware-security-utils.c:60
 msgid "Not Locked"
 msgstr "Neuzamknuto"
 
 #. TRANSLATORS: The data is encrypted to prevent from malicious reading.
-#: panels/privacy/cc-firmware-security-utils.c:65
+#: panels/privacy/firmware-security/cc-firmware-security-utils.c:65
 msgid "Encrypted"
 msgstr "Šifrováno"
 
 #. TRANSLATORS: the data in memory is plane text.
-#: panels/privacy/cc-firmware-security-utils.c:70
+#: panels/privacy/firmware-security/cc-firmware-security-utils.c:70
 msgid "Not Encrypted"
 msgstr "Nešifrováno"
 
 #. TRANSLATORS: Linux kernel is tainted by third party kernel module.
-#: panels/privacy/cc-firmware-security-utils.c:75
+#: panels/privacy/firmware-security/cc-firmware-security-utils.c:75
 msgid "Tainted"
 msgstr "Pošpiněno"
 
 #. TRANSLATORS: All the loaded kernel module are licensed.
-#: panels/privacy/cc-firmware-security-utils.c:80
+#: panels/privacy/firmware-security/cc-firmware-security-utils.c:80
 msgid "Not Tainted"
 msgstr "Nepošpiněno"
 
 #. TRANSLATORS: the feature can be detected.
-#: panels/privacy/cc-firmware-security-utils.c:85
+#: panels/privacy/firmware-security/cc-firmware-security-utils.c:85
 msgid "Found"
 msgstr "Nalezeno"
 
 #. TRANSLATORS: the feature can't be detected.
-#: panels/privacy/cc-firmware-security-utils.c:90
+#: panels/privacy/firmware-security/cc-firmware-security-utils.c:90
 msgid "Not Found"
 msgstr "Nenalezeno"
 
 #. TRANSLATORS: the function is supported by hardware.
-#: panels/privacy/cc-firmware-security-utils.c:95
+#: panels/privacy/firmware-security/cc-firmware-security-utils.c:95
 msgid "Supported"
 msgstr "Podporováno"
 
 #. TRANSLATORS: the function isn't supported by hardware.
-#: panels/privacy/cc-firmware-security-utils.c:100
+#: panels/privacy/firmware-security/cc-firmware-security-utils.c:100
 msgid "Not Supported"
 msgstr "Nepodporováno"
 
-#: panels/privacy/cc-location-page.ui:17
+#: panels/privacy/location/cc-location-page.ui:17
 msgid "_Automatic Device Location"
 msgstr "_Automatická poloha zařízení"
 
-#: panels/privacy/cc-location-page.ui:28
+#: panels/privacy/location/cc-location-page.ui:28
 msgid ""
 "Automatic device location uses sources like GPS, Wi-Fi and cellular to "
 "determine an approximate location for this device. Location data is sent to "
@@ -6156,7 +6217,7 @@ msgstr ""
 "připojení k určení přibližné polohy tohoto zařízení. V rámci této funkce se "
 "odesílají údaje o poloze do služeb určování polohy Mozilla."
 
-#: panels/privacy/cc-location-page.ui:56
+#: panels/privacy/location/cc-location-page.ui:56
 msgid ""
 "The following sandboxed apps have been given access to location data. Apps "
 "that are not sandboxed can access location data without asking for "
@@ -6166,42 +6227,16 @@ msgstr ""
 "přistupovat k informacím o poloze. Aplikace, které nejsou v izolovaném "
 "prostředí mohou přistupovat k informacím o poloze bez žádosti o povolení."
 
-#: panels/privacy/cc-location-page.ui:70
+#: panels/privacy/location/cc-location-page.ui:70
 msgid "No sandboxed apps have asked for location access"
 msgstr ""
 "Žádné aplikace v izolovaném prostředí nepožádaly o přístup k informacím o "
 "poloze"
 
 #. Translators: This will be presented as the text of a link to the privacy policy
-#: panels/privacy/cc-location-page.c:414
+#: panels/privacy/location/cc-location-page.c:414
 msgid "Learn about what data is collected, and how it is used."
 msgstr "Zjistěte, jaká data jsou shromažďována a jak jsou využívána."
-
-#: panels/privacy/cc-microphone-page.ui:4
-msgid "Microphones"
-msgstr "Mikrofony"
-
-#: panels/privacy/cc-microphone-page.ui:17
-msgid "_Microphone Access"
-msgstr "Přístup k _mikrofonu"
-
-#: panels/privacy/cc-microphone-page.ui:18
-msgid "Allow permitted apps to use microphones"
-msgstr "Povolit schváleným aplikacím používat mikrofony"
-
-#: panels/privacy/cc-microphone-page.ui:28
-msgid ""
-"The following sandboxed apps have been given permission to use microphones. "
-"Apps that are not sandboxed can use microphones without asking for "
-"permission."
-msgstr ""
-"Následujícím aplikacím v izolovaném prostředí byla poskytnuta oprávnění "
-"používat mikrofony. Aplikace, které nejsou v izolovaném prostředí mohou "
-"používat mikrofony bez žádosti o povolení."
-
-#: panels/privacy/cc-microphone-page.ui:43
-msgid "No sandboxed apps have asked for microphone access"
-msgstr "Žádné aplikace v izolovaném prostředí nepožádaly o přístup k mikrofonu"
 
 #: panels/privacy/cc-privacy-panel.ui:9
 #: panels/privacy/gnome-privacy-panel.desktop.in:3
@@ -6248,143 +6283,135 @@ msgstr "_Kamery"
 msgid "Control camera access"
 msgstr "Určit přístup ke kameře"
 
-#: panels/privacy/cc-privacy-panel.ui:89
-msgid "_Microphones"
-msgstr "_Mikrofony"
-
 #: panels/privacy/cc-privacy-panel.ui:90
-msgid "Control microphone access"
-msgstr "Určit přístup k mikrofonu"
-
-#: panels/privacy/cc-privacy-panel.ui:102
 msgid "_Thunderbolt"
 msgstr "_Thunderbolt"
 
-#: panels/privacy/cc-privacy-panel.ui:103
+#: panels/privacy/cc-privacy-panel.ui:91
 msgid "Manage device access"
 msgstr "Spravovat přístup k zařízením"
 
-#: panels/privacy/cc-privacy-panel.ui:113
+#: panels/privacy/cc-privacy-panel.ui:101
 msgid "Device _Security"
 msgstr "_Zabezpečení zařízení"
 
-#: panels/privacy/cc-privacy-panel.ui:114
+#: panels/privacy/cc-privacy-panel.ui:102
 msgid "Hardware security status and information"
 msgstr "Stav a informace o zabezpečení hardwaru"
 
 #. Translators: Option for "Lock screen after blank" in "Screen Lock" page
-#: panels/privacy/cc-screen-page.c:66
+#: panels/privacy/screen/cc-screen-page.c:66
 msgctxt "lock_screen"
 msgid "Screen Turns Off"
 msgstr "ihned po zčernání"
 
 #. Translators: Option for "Lock screen after blank" in "Screen Lock" page
-#: panels/privacy/cc-screen-page.c:69
+#: panels/privacy/screen/cc-screen-page.c:69
 msgctxt "lock_screen"
 msgid "30 seconds"
 msgstr "po 30 sekundách"
 
 #. Translators: Option for "Lock screen after blank" in "Screen Lock" page
-#: panels/privacy/cc-screen-page.c:72
+#: panels/privacy/screen/cc-screen-page.c:72
 msgctxt "lock_screen"
 msgid "1 minute"
 msgstr "po 1 minutě"
 
 #. Translators: Option for "Lock screen after blank" in "Screen Lock" page
-#: panels/privacy/cc-screen-page.c:75
+#: panels/privacy/screen/cc-screen-page.c:75
 msgctxt "lock_screen"
 msgid "2 minutes"
 msgstr "po 2 minutách"
 
 #. Translators: Option for "Lock screen after blank" in "Screen Lock" page
-#: panels/privacy/cc-screen-page.c:78
+#: panels/privacy/screen/cc-screen-page.c:78
 msgctxt "lock_screen"
 msgid "3 minutes"
 msgstr "po 3 minutách"
 
 #. Translators: Option for "Lock screen after blank" in "Screen Lock" page
-#: panels/privacy/cc-screen-page.c:81
+#: panels/privacy/screen/cc-screen-page.c:81
 msgctxt "lock_screen"
 msgid "5 minutes"
 msgstr "po 5 minutách"
 
 #. Translators: Option for "Lock screen after blank" in "Screen Lock" page
-#: panels/privacy/cc-screen-page.c:84
+#: panels/privacy/screen/cc-screen-page.c:84
 msgctxt "lock_screen"
 msgid "30 minutes"
 msgstr "po 30 minutách"
 
 #. Translators: Option for "Lock screen after blank" in "Screen Lock" page
-#: panels/privacy/cc-screen-page.c:87
+#: panels/privacy/screen/cc-screen-page.c:87
 msgctxt "lock_screen"
 msgid "1 hour"
 msgstr "po 1 hodině"
 
 #. Translators: Option for "Blank screen" in "Screen Lock" page
-#: panels/privacy/cc-screen-page.c:130
+#: panels/privacy/screen/cc-screen-page.c:130
 msgctxt "blank_screen"
 msgid "1 minute"
 msgstr "po 1 minutě"
 
 #. Translators: Option for "Blank screen" in "Screen Lock" page
-#: panels/privacy/cc-screen-page.c:133
+#: panels/privacy/screen/cc-screen-page.c:133
 msgctxt "blank_screen"
 msgid "2 minutes"
 msgstr "po 2 minutách"
 
 #. Translators: Option for "Blank screen" in "Screen Lock" page
-#: panels/privacy/cc-screen-page.c:136
+#: panels/privacy/screen/cc-screen-page.c:136
 msgctxt "blank_screen"
 msgid "3 minutes"
 msgstr "po 3 minutách"
 
 #. Translators: Option for "Blank screen" in "Screen Lock" page
-#: panels/privacy/cc-screen-page.c:139
+#: panels/privacy/screen/cc-screen-page.c:139
 msgctxt "blank_screen"
 msgid "4 minutes"
 msgstr "po 4 minutách"
 
 #. Translators: Option for "Blank screen" in "Screen Lock" page
-#: panels/privacy/cc-screen-page.c:142
+#: panels/privacy/screen/cc-screen-page.c:142
 msgctxt "blank_screen"
 msgid "5 minutes"
 msgstr "po 5 minutách"
 
 #. Translators: Option for "Blank screen" in "Screen Lock" page
-#: panels/privacy/cc-screen-page.c:145
+#: panels/privacy/screen/cc-screen-page.c:145
 msgctxt "blank_screen"
 msgid "8 minutes"
 msgstr "po 8 minutách"
 
 #. Translators: Option for "Blank screen" in "Screen Lock" page
-#: panels/privacy/cc-screen-page.c:148
+#: panels/privacy/screen/cc-screen-page.c:148
 msgctxt "blank_screen"
 msgid "10 minutes"
 msgstr "po 10 minutách"
 
 #. Translators: Option for "Blank screen" in "Screen Lock" page
-#: panels/privacy/cc-screen-page.c:151
+#: panels/privacy/screen/cc-screen-page.c:151
 msgctxt "blank_screen"
 msgid "12 minutes"
 msgstr "po 12 minutách"
 
 #. Translators: Option for "Blank screen" in "Screen Lock" page
-#: panels/privacy/cc-screen-page.c:154
+#: panels/privacy/screen/cc-screen-page.c:154
 msgctxt "blank_screen"
 msgid "15 minutes"
 msgstr "po 15 minutách"
 
 #. Translators: Option for "Blank screen" in "Screen Lock" page
-#: panels/privacy/cc-screen-page.c:157
+#: panels/privacy/screen/cc-screen-page.c:157
 msgctxt "blank_screen"
 msgid "Never"
 msgstr "nikdy"
 
-#: panels/privacy/cc-screen-page.ui:4
+#: panels/privacy/screen/cc-screen-page.ui:4
 msgid "Screen Lock"
 msgstr "Zamykání obrazovky"
 
-#: panels/privacy/cc-screen-page.ui:13
+#: panels/privacy/screen/cc-screen-page.ui:13
 msgid ""
 "Automatically locking the screen prevents others from accessing the device "
 "while you're away"
@@ -6392,40 +6419,40 @@ msgstr ""
 "Automatické zamykání obrazovky zabrání ostatním v přístupu k zařízení, když "
 "jste pryč"
 
-#: panels/privacy/cc-screen-page.ui:20
+#: panels/privacy/screen/cc-screen-page.ui:20
 msgid "_Blank Screen Delay"
 msgstr "Kdy o_brazovku vypnout"
 
-#: panels/privacy/cc-screen-page.ui:21
+#: panels/privacy/screen/cc-screen-page.ui:21
 msgid "Period of inactivity until screen blanks"
 msgstr "Doba nečinnosti, než obrazovka zčerná"
 
-#: panels/privacy/cc-screen-page.ui:39
+#: panels/privacy/screen/cc-screen-page.ui:39
 msgid "Automatic Screen _Lock"
 msgstr "Automaticky uzamykat _obrazovku"
 
-#: panels/privacy/cc-screen-page.ui:40
+#: panels/privacy/screen/cc-screen-page.ui:40
 msgid "Locks the screen after it blanks"
 msgstr "Uzamkne obrazovku poté, co zčerná"
 
-#: panels/privacy/cc-screen-page.ui:48
+#: panels/privacy/screen/cc-screen-page.ui:48
 msgid "Automatic _Screen Lock Delay"
 msgstr "Kdy o_brazovku automaticky uzamknout"
 
-#: panels/privacy/cc-screen-page.ui:49
+#: panels/privacy/screen/cc-screen-page.ui:49
 msgid "Time from screen blank to screen lock"
 msgstr "Doba od zčernání obrazovky do uzamknutí obrazovky"
 
 #. Translators: Whether to show notifications on the lock screen
-#: panels/privacy/cc-screen-page.ui:67
+#: panels/privacy/screen/cc-screen-page.ui:67
 msgid "Lock Screen _Notifications"
 msgstr "Upozornění na za_mykací obrazovce"
 
-#: panels/privacy/cc-screen-page.ui:76
+#: panels/privacy/screen/cc-screen-page.ui:76
 msgid "Forbid New _USB Devices"
 msgstr "Zakázat nová zařízení _USB"
 
-#: panels/privacy/cc-screen-page.ui:77
+#: panels/privacy/screen/cc-screen-page.ui:77
 msgid ""
 "Prevent new USB devices from interacting with the system when the screen is "
 "locked"
@@ -6433,143 +6460,143 @@ msgstr ""
 "Zabránit novému zařízení USB ve spolupráci se systémem, kdež je uzamknutá "
 "obrazovka"
 
-#: panels/privacy/cc-screen-page.ui:88
+#: panels/privacy/screen/cc-screen-page.ui:88
 msgid "Screen Privacy"
 msgstr "Soukromí obrazovky"
 
-#: panels/privacy/cc-screen-page.ui:93
+#: panels/privacy/screen/cc-screen-page.ui:93
 msgid "Restrict Viewing _Angle"
 msgstr "Omezit ú_hel viditelnosti"
 
 #. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
-#: panels/privacy/cc-usage-page.c:54
+#: panels/privacy/usage/cc-usage-page.c:54
 msgctxt "purge_files"
 msgid "1 hour"
 msgstr "1 hodině"
 
 #. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
-#: panels/privacy/cc-usage-page.c:57
+#: panels/privacy/usage/cc-usage-page.c:57
 msgctxt "purge_files"
 msgid "1 day"
 msgstr "1 dni"
 
 #. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
-#: panels/privacy/cc-usage-page.c:60
+#: panels/privacy/usage/cc-usage-page.c:60
 msgctxt "purge_files"
 msgid "2 days"
 msgstr "2 dnech"
 
 #. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
-#: panels/privacy/cc-usage-page.c:63
+#: panels/privacy/usage/cc-usage-page.c:63
 msgctxt "purge_files"
 msgid "3 days"
 msgstr "3 dnech"
 
 #. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
-#: panels/privacy/cc-usage-page.c:66
+#: panels/privacy/usage/cc-usage-page.c:66
 msgctxt "purge_files"
 msgid "4 days"
 msgstr "4 dnech"
 
 #. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
-#: panels/privacy/cc-usage-page.c:69
+#: panels/privacy/usage/cc-usage-page.c:69
 msgctxt "purge_files"
 msgid "5 days"
 msgstr "5 dnech"
 
 #. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
-#: panels/privacy/cc-usage-page.c:72
+#: panels/privacy/usage/cc-usage-page.c:72
 msgctxt "purge_files"
 msgid "6 days"
 msgstr "6 dnech"
 
 #. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
-#: panels/privacy/cc-usage-page.c:75
+#: panels/privacy/usage/cc-usage-page.c:75
 msgctxt "purge_files"
 msgid "7 days"
 msgstr "7 dnech"
 
 #. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
-#: panels/privacy/cc-usage-page.c:78
+#: panels/privacy/usage/cc-usage-page.c:78
 msgctxt "purge_files"
 msgid "14 days"
 msgstr "14 dnech"
 
 #. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
-#: panels/privacy/cc-usage-page.c:81
+#: panels/privacy/usage/cc-usage-page.c:81
 msgctxt "purge_files"
 msgid "30 days"
 msgstr "30 dnech"
 
-#: panels/privacy/cc-usage-page.c:177
+#: panels/privacy/usage/cc-usage-page.c:177
 msgid "Empty all items from Trash?"
 msgstr "Vysypat všechny položky z koše?"
 
-#: panels/privacy/cc-usage-page.c:178
+#: panels/privacy/usage/cc-usage-page.c:178
 msgid "All items in the Trash will be permanently deleted."
 msgstr "Všechny položky v koši budou trvale smazány."
 
-#: panels/privacy/cc-usage-page.c:179
+#: panels/privacy/usage/cc-usage-page.c:179
 msgid "_Empty Trash"
 msgstr "_Vyprázdnit koš"
 
-#: panels/privacy/cc-usage-page.c:215
+#: panels/privacy/usage/cc-usage-page.c:215
 msgid "Delete all the temporary files?"
 msgstr "Odstranit dočasné soubory?"
 
-#: panels/privacy/cc-usage-page.c:216
+#: panels/privacy/usage/cc-usage-page.c:216
 msgid "All the temporary files will be permanently deleted."
 msgstr "Všechny dočasné soubory budou trvale smazány."
 
-#: panels/privacy/cc-usage-page.c:217
+#: panels/privacy/usage/cc-usage-page.c:217
 msgid "_Purge Temporary Files"
 msgstr "Odstranit dočasné soubor_y"
 
 #. Translators: Option for "File History Duration" in "File History" group
-#: panels/privacy/cc-usage-page.c:244
+#: panels/privacy/usage/cc-usage-page.c:244
 msgctxt "retain_history"
 msgid "1 day"
 msgstr "1 den"
 
 #. Translators: Option for "File History Duration" in "File History" group
-#: panels/privacy/cc-usage-page.c:247
+#: panels/privacy/usage/cc-usage-page.c:247
 msgctxt "retain_history"
 msgid "7 days"
 msgstr "7 dní"
 
 #. Translators: Option for "File History Duration" in "File History" group
-#: panels/privacy/cc-usage-page.c:250
+#: panels/privacy/usage/cc-usage-page.c:250
 msgctxt "retain_history"
 msgid "30 days"
 msgstr "30 dní"
 
 #. Translators: Option for "File History Duration" in "File History" group
-#: panels/privacy/cc-usage-page.c:253
+#: panels/privacy/usage/cc-usage-page.c:253
 msgctxt "retain_history"
 msgid "Forever"
 msgstr "napořád"
 
-#: panels/privacy/cc-usage-page.c:342
+#: panels/privacy/usage/cc-usage-page.c:342
 msgid "Clear File History?"
 msgstr "Vyčistit historii souborů?"
 
-#: panels/privacy/cc-usage-page.c:343
+#: panels/privacy/usage/cc-usage-page.c:343
 msgid "After clearing, lists of recently used files will appear empty."
 msgstr "Po vymazání se seznamy naposledy použitých souborů zobrazí prázdné."
 
-#: panels/privacy/cc-usage-page.c:344
+#: panels/privacy/usage/cc-usage-page.c:344
 msgid "Clear _History"
 msgstr "Vyčistit _historii"
 
-#: panels/privacy/cc-usage-page.ui:4
+#: panels/privacy/usage/cc-usage-page.ui:4
 msgid "File History & Trash"
 msgstr "Historie souborů a koš"
 
-#: panels/privacy/cc-usage-page.ui:16
+#: panels/privacy/usage/cc-usage-page.ui:16
 msgid "File History"
 msgstr "Historie souborů"
 
-#: panels/privacy/cc-usage-page.ui:17
+#: panels/privacy/usage/cc-usage-page.ui:17
 msgid ""
 "File history keeps a record of files that you have used. This information is "
 "shared between apps, and makes it easier to find files that you might want "
@@ -6579,23 +6606,23 @@ msgstr ""
 "informace jsou sdílené mezi aplikacemi a usnadňují nalezení souborů, které "
 "možná budete chtít použít."
 
-#: panels/privacy/cc-usage-page.ui:20
+#: panels/privacy/usage/cc-usage-page.ui:20
 msgid "File H_istory"
 msgstr "H_istorie souborů"
 
-#: panels/privacy/cc-usage-page.ui:26
+#: panels/privacy/usage/cc-usage-page.ui:26
 msgid "File _History Duration"
 msgstr "Trvání _historie souborů"
 
-#: panels/privacy/cc-usage-page.ui:48
+#: panels/privacy/usage/cc-usage-page.ui:48
 msgid "_Clear History…"
 msgstr "V_yčistit historii…"
 
-#: panels/privacy/cc-usage-page.ui:64
+#: panels/privacy/usage/cc-usage-page.ui:64
 msgid "Trash &amp; Temporary Files"
 msgstr "Koš a dočasné soubory"
 
-#: panels/privacy/cc-usage-page.ui:65
+#: panels/privacy/usage/cc-usage-page.ui:65
 msgid ""
 "Trash and temporary files can sometimes include personal or sensitive "
 "information. Automatically deleting them can help to protect privacy."
@@ -6603,23 +6630,23 @@ msgstr ""
 "Koš a dočasné soubory mohou někdy obsahovat osobní nebo citlivé informace. "
 "Jejich automatické mazání může pomoci s ochranou soukromí."
 
-#: panels/privacy/cc-usage-page.ui:68
+#: panels/privacy/usage/cc-usage-page.ui:68
 msgid "Automatically Delete _Trash Content"
 msgstr "Automaticky mazat obsah _koše"
 
-#: panels/privacy/cc-usage-page.ui:74
+#: panels/privacy/usage/cc-usage-page.ui:74
 msgid "Automatically Delete Temporary _Files"
 msgstr "Automaticky mazat dočasné _soubory"
 
-#: panels/privacy/cc-usage-page.ui:80
+#: panels/privacy/usage/cc-usage-page.ui:80
 msgid "Automatically Delete _Period"
 msgstr "Automaticky mazat _po"
 
-#: panels/privacy/cc-usage-page.ui:103
+#: panels/privacy/usage/cc-usage-page.ui:103
 msgid "_Empty Trash…"
 msgstr "_Vyprázdnit koš…"
 
-#: panels/privacy/cc-usage-page.ui:115
+#: panels/privacy/usage/cc-usage-page.ui:115
 msgid "_Delete Temporary Files…"
 msgstr "Smazat _dočasné soubory…"
 
@@ -6684,10 +6711,6 @@ msgstr "Přid_at umístění…"
 #: panels/search/cc-search-locations-dialog.ui:89
 msgid "No custom search locations"
 msgstr "Žádná vlastní prohledávaná umístění"
-
-#: panels/search/cc-search-panel.c:173
-msgid "No apps found"
-msgstr "Nenalezeny žádné aplikace"
 
 #: panels/search/cc-search-panel.ui:16
 msgid "_App Search"
@@ -7013,34 +7036,34 @@ msgid "System Logo"
 msgstr "Logo systému"
 
 #. Translators: this field contains the distro name and version
-#: panels/system/about/cc-about-page.ui:57
+#: panels/system/about/cc-about-page.ui:56
 msgid "Operating System"
 msgstr "Operační systém"
 
-#: panels/system/about/cc-about-page.ui:66
+#: panels/system/about/cc-about-page.ui:67
 msgid "Hardware Model"
 msgstr "Model hardwaru"
 
-#: panels/system/about/cc-about-page.ui:75
+#: panels/system/about/cc-about-page.ui:78
 #: panels/system/about/cc-system-details-window.ui:88
 msgid "Processor"
 msgstr "Procesor"
 
-#: panels/system/about/cc-about-page.ui:83
+#: panels/system/about/cc-about-page.ui:88
 #: panels/system/about/cc-system-details-window.ui:81
 msgid "Memory"
 msgstr "Paměť"
 
-#: panels/system/about/cc-about-page.ui:91
+#: panels/system/about/cc-about-page.ui:98
 #: panels/system/about/cc-system-details-window.ui:103
 msgid "Disk Capacity"
 msgstr "Kapacita disku"
 
-#: panels/system/about/cc-about-page.ui:92
+#: panels/system/about/cc-about-page.ui:99
 msgid "Calculating…"
 msgstr "Počítá se…"
 
-#: panels/system/about/cc-about-page.ui:99
+#: panels/system/about/cc-about-page.ui:109
 msgid "_System Details"
 msgstr "Podrobnosti o _systému"
 
@@ -7235,47 +7258,47 @@ msgstr "_Region a jazyk"
 msgid "System language and localization"
 msgstr "Jazyk systému a lokalizace"
 
-#: panels/system/cc-system-panel.ui:34
+#: panels/system/cc-system-panel.ui:33
 msgid "_Date &amp; Time"
 msgstr "_Datum a čas"
 
-#: panels/system/cc-system-panel.ui:35
+#: panels/system/cc-system-panel.ui:34
 msgid "Time zone and clock settings"
 msgstr "Nastavit časové pásmo a hodiny"
 
-#: panels/system/cc-system-panel.ui:45
+#: panels/system/cc-system-panel.ui:43
 msgid "_Users"
 msgstr "_Uživatelé"
 
-#: panels/system/cc-system-panel.ui:46
+#: panels/system/cc-system-panel.ui:44
 msgid "Add and remove accounts, change password"
 msgstr "Přidat a odebrat účty, změnit heslo"
 
-#: panels/system/cc-system-panel.ui:58
+#: panels/system/cc-system-panel.ui:54
 msgid "R_emote Desktop"
 msgstr "V_zdálená plocha"
 
-#: panels/system/cc-system-panel.ui:59
+#: panels/system/cc-system-panel.ui:55
 msgid "Allow this device to be used remotely"
 msgstr "Povolit vzdálené používání tohoto zařízení"
 
-#: panels/system/cc-system-panel.ui:69
+#: panels/system/cc-system-panel.ui:64
 msgid "Se_cure Shell"
 msgstr "_Zabezpečený Shell"
 
-#: panels/system/cc-system-panel.ui:70
+#: panels/system/cc-system-panel.ui:65
 msgid "SSH network access"
 msgstr "Síťový přístup SSH"
 
-#: panels/system/cc-system-panel.ui:79
+#: panels/system/cc-system-panel.ui:74
 msgid "_About"
 msgstr "_O systému"
 
-#: panels/system/cc-system-panel.ui:80
+#: panels/system/cc-system-panel.ui:75
 msgid "Hardware details and software versions"
 msgstr "Podrobnosti o hardwaru a verze softwaru"
 
-#: panels/system/cc-system-panel.ui:97
+#: panels/system/cc-system-panel.ui:91
 msgid "S_oftware Updates"
 msgstr "Aktualizace s_oftwaru"
 
@@ -7290,7 +7313,7 @@ msgid "%e %B %Y, %R"
 msgstr "%e. %B %Y, %k:%M"
 
 #. Translators: "city, country"
-#: panels/system/datetime/cc-datetime-page.c:388
+#: panels/system/datetime/cc-datetime-page.c:392
 #, c-format
 msgctxt "timezone loc"
 msgid "%s, %s"
@@ -7298,139 +7321,139 @@ msgstr "%s, %s"
 
 #. Update the timezone on the listbow row
 #. Translators: "timezone (details)"
-#: panels/system/datetime/cc-datetime-page.c:405
+#: panels/system/datetime/cc-datetime-page.c:409
 #, c-format
 msgctxt "timezone desc"
 msgid "%s (%s)"
 msgstr "%s (%s)"
 
 #: panels/system/datetime/cc-datetime-page.ui:9
-#: panels/system/datetime/cc-datetime-page.ui:117
+#: panels/system/datetime/cc-datetime-page.ui:116
 #: panels/system/datetime/gnome-datetime-panel.desktop.in:3
 msgid "Date & Time"
 msgstr "Datum a čas"
 
-#: panels/system/datetime/cc-datetime-page.ui:60
+#: panels/system/datetime/cc-datetime-page.ui:59
 msgid "_Year"
 msgstr "_Rok"
 
-#: panels/system/datetime/cc-datetime-page.ui:71
+#: panels/system/datetime/cc-datetime-page.ui:70
 msgid "_Month"
 msgstr "_Měsíc"
 
-#: panels/system/datetime/cc-datetime-page.ui:98
+#: panels/system/datetime/cc-datetime-page.ui:97
 msgid "_Day"
 msgstr "_Den"
 
-#: panels/system/datetime/cc-datetime-page.ui:137
+#: panels/system/datetime/cc-datetime-page.ui:136
 msgid "Automatic _Date &amp; Time"
 msgstr "_Datum a čas automaticky"
 
-#: panels/system/datetime/cc-datetime-page.ui:138
+#: panels/system/datetime/cc-datetime-page.ui:137
 msgid "Requires internet access"
 msgstr "Vyžaduje přístup k Internetu"
 
-#: panels/system/datetime/cc-datetime-page.ui:150
+#: panels/system/datetime/cc-datetime-page.ui:149
 msgid "Date &amp; _Time"
 msgstr "Da_tum a čas"
 
-#: panels/system/datetime/cc-datetime-page.ui:161
+#: panels/system/datetime/cc-datetime-page.ui:160
 msgid "Automatic Time _Zone"
 msgstr "Časové pás_mo automaticky"
 
-#: panels/system/datetime/cc-datetime-page.ui:162
+#: panels/system/datetime/cc-datetime-page.ui:161
 msgid "Requires location services enabled and internet access"
 msgstr "Vyžaduje zapnuté služby určování polohy a přístup k Internetu"
 
-#: panels/system/datetime/cc-datetime-page.ui:168
+#: panels/system/datetime/cc-datetime-page.ui:167
 msgid "Time Z_one"
 msgstr "Čas_ové pásmo"
 
-#: panels/system/datetime/cc-datetime-page.ui:179
+#: panels/system/datetime/cc-datetime-page.ui:178
 msgid "Time _Format"
 msgstr "_Formát času"
 
-#: panels/system/datetime/cc-datetime-page.ui:190
+#: panels/system/datetime/cc-datetime-page.ui:189
 msgid "_24-hour"
 msgstr "_24hodinový"
 
-#: panels/system/datetime/cc-datetime-page.ui:198
+#: panels/system/datetime/cc-datetime-page.ui:197
 msgid "AM / _PM"
 msgstr "dop./od_p."
 
-#: panels/system/datetime/cc-datetime-page.ui:211
+#: panels/system/datetime/cc-datetime-page.ui:210
 msgid "Clock &amp; Calendar"
 msgstr "Hodiny a kalendář"
 
-#: panels/system/datetime/cc-datetime-page.ui:212
+#: panels/system/datetime/cc-datetime-page.ui:211
 msgid "Control how the time and date is shown in the top bar"
 msgstr "Určit, jak se v horní liště zobrazuje čas a datum"
 
-#: panels/system/datetime/cc-datetime-page.ui:215
+#: panels/system/datetime/cc-datetime-page.ui:214
 msgid "_Week Day"
 msgstr "_Den týdne"
 
-#: panels/system/datetime/cc-datetime-page.ui:221
+#: panels/system/datetime/cc-datetime-page.ui:220
 msgid "D_ate"
 msgstr "D_atum"
 
-#: panels/system/datetime/cc-datetime-page.ui:227
+#: panels/system/datetime/cc-datetime-page.ui:226
 msgid "_Seconds"
 msgstr "_Sekundy"
 
-#: panels/system/datetime/cc-datetime-page.ui:233
+#: panels/system/datetime/cc-datetime-page.ui:232
 msgid "Week _Numbers"
 msgstr "Čísl_a týdnů"
 
-#: panels/system/datetime/cc-datetime-page.ui:234
+#: panels/system/datetime/cc-datetime-page.ui:233
 msgid "Shown in the dropdown calendar"
 msgstr "Zobrazeno v rozbalovacím kalendáři"
 
-#: panels/system/datetime/cc-datetime-page.ui:271
+#: panels/system/datetime/cc-datetime-page.ui:269
 msgid "January"
 msgstr "leden"
 
-#: panels/system/datetime/cc-datetime-page.ui:272
+#: panels/system/datetime/cc-datetime-page.ui:270
 msgid "February"
 msgstr "únor"
 
-#: panels/system/datetime/cc-datetime-page.ui:273
+#: panels/system/datetime/cc-datetime-page.ui:271
 msgid "March"
 msgstr "březen"
 
-#: panels/system/datetime/cc-datetime-page.ui:274
+#: panels/system/datetime/cc-datetime-page.ui:272
 msgid "April"
 msgstr "duben"
 
-#: panels/system/datetime/cc-datetime-page.ui:275
+#: panels/system/datetime/cc-datetime-page.ui:273
 msgid "May"
 msgstr "květen"
 
-#: panels/system/datetime/cc-datetime-page.ui:276
+#: panels/system/datetime/cc-datetime-page.ui:274
 msgid "June"
 msgstr "červen"
 
-#: panels/system/datetime/cc-datetime-page.ui:277
+#: panels/system/datetime/cc-datetime-page.ui:275
 msgid "July"
 msgstr "červenec"
 
-#: panels/system/datetime/cc-datetime-page.ui:278
+#: panels/system/datetime/cc-datetime-page.ui:276
 msgid "August"
 msgstr "srpen"
 
-#: panels/system/datetime/cc-datetime-page.ui:279
+#: panels/system/datetime/cc-datetime-page.ui:277
 msgid "September"
 msgstr "září"
 
-#: panels/system/datetime/cc-datetime-page.ui:280
+#: panels/system/datetime/cc-datetime-page.ui:278
 msgid "October"
 msgstr "říjen"
 
-#: panels/system/datetime/cc-datetime-page.ui:281
+#: panels/system/datetime/cc-datetime-page.ui:279
 msgid "November"
 msgstr "listopad"
 
-#: panels/system/datetime/cc-datetime-page.ui:282
+#: panels/system/datetime/cc-datetime-page.ui:280
 msgid "December"
 msgstr "prosinec"
 
@@ -7598,26 +7621,26 @@ msgid "Language;Layout;Keyboard;Input;"
 msgstr "jazyk;rozložení;klávesnice;vstup;"
 
 #: panels/system/remote-desktop/cc-desktop-sharing-page.c:364
-#: panels/system/remote-desktop/cc-remote-session-page.c:98
+#: panels/system/remote-desktop/cc-remote-login-page.c:98
 msgid "Device address copied"
 msgstr "Byla zkopírována adresa zařízení"
 
 #: panels/system/remote-desktop/cc-desktop-sharing-page.c:373
-#: panels/system/remote-desktop/cc-remote-session-page.c:107
+#: panels/system/remote-desktop/cc-remote-login-page.c:107
 msgid "Port number copied"
 msgstr "Číslo portu zkopírováno"
 
 #: panels/system/remote-desktop/cc-desktop-sharing-page.c:384
-#: panels/system/remote-desktop/cc-remote-session-page.c:118
+#: panels/system/remote-desktop/cc-remote-login-page.c:118
 msgid "Username copied"
 msgstr "Bylo zkopírováno uživatelské jméno"
 
 #: panels/system/remote-desktop/cc-desktop-sharing-page.c:395
-#: panels/system/remote-desktop/cc-remote-session-page.c:129
+#: panels/system/remote-desktop/cc-remote-login-page.c:129
 msgid "Password copied"
 msgstr "Bylo zkopírováno heslo"
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:13
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:12
 msgid ""
 "Share your existing desktop with other devices. The remote connection uses "
 "the existing screen resolution"
@@ -7625,25 +7648,25 @@ msgstr ""
 "Sdílejte svou stávající plochu s jinými zařízeními. Vzdálené připojení "
 "používá stávající rozlišení obrazovky"
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:28
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:27
 msgid "_Desktop Sharing"
 msgstr "S_dílení plochy"
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:34
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:33
 msgid "Remote _Control"
 msgstr "Vzdálené _ovládání"
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:36
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:35
 msgid "Allows desktop shares to control the screen"
 msgstr "Umožňuje sdílením plochy ovládat obrazovku"
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:43
-#: panels/system/remote-desktop/cc-remote-session-page.ui:41
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:42
+#: panels/system/remote-desktop/cc-remote-login-page.ui:41
 msgid "How to Connect"
 msgstr "Jak se připojovat"
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:44
-#: panels/system/remote-desktop/cc-remote-session-page.ui:42
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:43
+#: panels/system/remote-desktop/cc-remote-login-page.ui:42
 msgid ""
 "Use a remote desktop app to connect using the RDP protocol. Additional "
 "information about the device’s network location may also be required."
@@ -7651,40 +7674,40 @@ msgstr ""
 "Pro připojení pomocí protokolu RDP použijte aplikaci pro vzdálenou plochu. "
 "Mohou být také vyžadovány další informace o umístění zařízení v síti."
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:47
-#: panels/system/remote-desktop/cc-remote-session-page.ui:45
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:46
+#: panels/system/remote-desktop/cc-remote-login-page.ui:45
 msgid "_Hostname"
 msgstr "Název _hostitele"
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:55
-#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:76
-#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:97
-#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:113
-#: panels/system/remote-desktop/cc-remote-session-page.ui:53
-#: panels/system/remote-desktop/cc-remote-session-page.ui:74
-#: panels/system/remote-desktop/cc-remote-session-page.ui:95
-#: panels/system/remote-desktop/cc-remote-session-page.ui:111
-#: panels/system/remote-login/cc-remote-login-page.ui:67
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:54
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:75
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:96
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:112
+#: panels/system/remote-desktop/cc-remote-login-page.ui:53
+#: panels/system/remote-desktop/cc-remote-login-page.ui:74
+#: panels/system/remote-desktop/cc-remote-login-page.ui:95
+#: panels/system/remote-desktop/cc-remote-login-page.ui:111
+#: panels/system/secure-shell/cc-secure-shell-page.ui:67
 msgid "Copy"
 msgstr "Zkopírovat"
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:68
-#: panels/system/remote-desktop/cc-remote-session-page.ui:66
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:67
+#: panels/system/remote-desktop/cc-remote-login-page.ui:66
 msgid "_Port"
 msgstr "_Port"
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:91
-#: panels/system/remote-desktop/cc-remote-session-page.ui:89
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:90
+#: panels/system/remote-desktop/cc-remote-login-page.ui:89
 msgid "Login Details"
 msgstr "Podrobnosti o přihlášení"
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:132
-#: panels/system/remote-desktop/cc-remote-session-page.ui:130
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:131
+#: panels/system/remote-desktop/cc-remote-login-page.ui:130
 msgid "_Generate New Password"
 msgstr "Vy_generovat nové heslo"
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:143
-#: panels/system/remote-desktop/cc-remote-session-page.ui:141
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:142
+#: panels/system/remote-desktop/cc-remote-login-page.ui:141
 msgid "_Verify Encryption"
 msgstr "_Ověřit šifrování"
 
@@ -7697,16 +7720,16 @@ msgid "Desktop Sharing"
 msgstr "Sdílení plochy"
 
 #: panels/system/remote-desktop/cc-remote-desktop-page.ui:48
-#: panels/system/remote-desktop/cc-remote-session-page.ui:33
+#: panels/system/remote-desktop/cc-remote-login-page.ui:33
 msgid "Remote Login"
 msgstr "Vzdálené přihlášení"
 
-#: panels/system/remote-desktop/cc-remote-session-page.c:774
+#: panels/system/remote-desktop/cc-remote-login-page.c:774
 #: panels/system/users/cc-user-page.c:772
 msgid "Some settings are locked"
 msgstr "Některá nastavení jsou uzamčena"
 
-#: panels/system/remote-desktop/cc-remote-session-page.ui:18
+#: panels/system/remote-desktop/cc-remote-login-page.ui:18
 msgid ""
 "Remotely connect to your user account when it isn’t being used. The display "
 "resolution can be set from the remote."
@@ -7734,31 +7757,33 @@ msgstr "Povolit nebo zakázat vzdálená sezení"
 msgid "Authentication is required to enable or disable remote sessions"
 msgstr "Pro povolení nebo zakázání vzdálených sezení je vyžadováno ověření"
 
-#: panels/system/remote-login/cc-remote-login-page.c:53
-msgid "Command copied"
-msgstr "Příkaz zkopírován"
+#: panels/system/secure-shell/cc-secure-shell-page.c:53
+#, fuzzy
+#| msgid "Report copied to clipboard"
+msgid "Command copied to clipboard"
+msgstr "Hlášení zkopírováno do schránky"
 
-#: panels/system/remote-login/cc-remote-login-page.ui:4
+#: panels/system/secure-shell/cc-secure-shell-page.ui:4
 msgid "Secure Shell"
 msgstr "Zabezpečený Shell"
 
-#: panels/system/remote-login/cc-remote-login-page.ui:39
+#: panels/system/secure-shell/cc-secure-shell-page.ui:39
 msgid "Access this device using Secure Shell (SSH)"
 msgstr "Přistupujte k tomuto zařízení pomocí Zabezpečeného Shellu (SSH)"
 
-#: panels/system/remote-login/cc-remote-login-page.ui:51
+#: panels/system/secure-shell/cc-secure-shell-page.ui:51
 msgid "_Secure Shell"
 msgstr "Zabezpečený _Shell"
 
-#: panels/system/remote-login/cc-remote-login-page.ui:58
+#: panels/system/secure-shell/cc-secure-shell-page.ui:58
 msgid "SSH Login _Command"
 msgstr "Přihlašova_cí příkaz SSH"
 
-#: panels/system/remote-login/org.gnome.controlcenter.remote-login-helper.policy.in.in:11
+#: panels/system/secure-shell/org.gnome.controlcenter.remote-login-helper.policy.in.in:11
 msgid "Enable or disable remote login"
 msgstr "Povolit nebo zakázat vzdálené přihlášení"
 
-#: panels/system/remote-login/org.gnome.controlcenter.remote-login-helper.policy.in.in:12
+#: panels/system/secure-shell/org.gnome.controlcenter.remote-login-helper.policy.in.in:12
 msgid "Authentication is required to enable or disable remote login"
 msgstr "Pro povolení nebo zakázání vzdáleného přihlášení je vyžadováno ověření"
 
@@ -8308,8 +8333,10 @@ msgid "_Add User…"
 msgstr "Přid_at uživatele…"
 
 #: panels/system/users/cc-users-page.ui:46
-msgid "Add Enterprise User"
-msgstr "Přidat podnikového uživatele"
+#, fuzzy
+#| msgid "Add Enterprise Login"
+msgid "Add _Enterprise Login…"
+msgstr "Přidat podnikové přihlašování"
 
 #: panels/system/users/data/join-dialog.ui:59
 msgid "Domain Administrator Login"
@@ -8335,9 +8362,13 @@ msgstr "Přidat nebo odebrat uživatele a změnit heslo"
 
 #. Translators: Search terms to find the Users panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/system/users/gnome-users-panel.desktop.in:15
+#, fuzzy
+#| msgid ""
+#| "Login;Name;Fingerprint;Avatar;Logo;Face;Password;Parental Controls;Screen "
+#| "Time;App Restrictions;Web Restrictions;Usage;Usage Limit;Kid;Child;"
 msgid ""
-"Login;Name;Fingerprint;Avatar;Logo;Face;Password;Parental Controls;Screen "
-"Time;App Restrictions;Web Restrictions;Usage;Usage Limit;Kid;Child;"
+"Login;Name;Fingerprint;Avatar;Logo;Face;Password;Parental;Restrictions;Usage;"
+"Kid;Child;"
 msgstr ""
 "přihlášení;přihlásit;otis prstu;otisky prstů;avatar;fotka;obličej;heslo;"
 "rodičovská kontrola;čas u obrazovky;omezení webů;omezení stránek;omezit weby;"
@@ -9100,8 +9131,14 @@ msgstr "Usnadněte si čtení, poslech, psaní, klikání a další činnosti"
 
 #. Translators: Search terms to find the Accessibility panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/universal-access/gnome-universal-access-panel.desktop.in:15
+#, fuzzy
+#| msgid ""
+#| "Keyboard;Mouse;a11y;Accessibility;Universal Access;Contrast;Cursor;Sound;"
+#| "Zoom;Screen;Reader;big;high;large;text;font;size;AccessX;Sticky;Keys;Slow;"
+#| "Bounce;Mouse;Double;click;Delay;Speed;Assist;Repeat;Blink;Pointer;find;"
+#| "locate;visual;hearing;audio;typing;animations;"
 msgid ""
-"Keyboard;Mouse;a11y;Accessibility;Universal Access;Contrast;Cursor;Sound;"
+"Keyboard;Mouse;a11y;Accessibility;Universal;Access;Contrast;Cursor;Sound;"
 "Zoom;Screen;Reader;big;high;large;text;font;size;AccessX;Sticky;Keys;Slow;"
 "Bounce;Mouse;Double;click;Delay;Speed;Assist;Repeat;Blink;Pointer;find;"
 "locate;visual;hearing;audio;typing;animations;"
@@ -9168,15 +9205,15 @@ msgctxt "Wacom action-type"
 msgid "Show On-Screen Help"
 msgstr "Zobrazit nápovědu na obrazovce"
 
-#: panels/wacom/cc-wacom-device.c:430
+#: panels/wacom/cc-wacom-device.c:437
 msgid "Tablet mounted on laptop panel"
 msgstr "Grafický tablet osazený na displeji notebooku"
 
-#: panels/wacom/cc-wacom-device.c:432
+#: panels/wacom/cc-wacom-device.c:439
 msgid "Tablet mounted on external display"
 msgstr "Grafický tablet osazený na externím displeji"
 
-#: panels/wacom/cc-wacom-device.c:434
+#: panels/wacom/cc-wacom-device.c:441
 msgid "External tablet device"
 msgstr "Externí grafický tablet"
 
@@ -9880,16 +9917,16 @@ msgstr "Nastavte si telefonní a mobilní datová připojení"
 msgid "cellular;wwan;telephony;sim;mobile;"
 msgstr "celulární;wwan;telefon;telefonie;sim;karta;mobil;mobilní;"
 
-#: shell/appdata/org.gnome.Settings.appdata.xml.in:8
+#: shell/appdata/org.gnome.Settings.appdata.xml.in.in:8
 msgid "Utility to configure the GNOME desktop"
 msgstr "Nástroj pro nastavení uživatelského prostředí GNOME"
 
-#: shell/appdata/org.gnome.Settings.appdata.xml.in:10
+#: shell/appdata/org.gnome.Settings.appdata.xml.in.in:10
 msgid "Settings is the primary interface for configuring your system."
 msgstr "Aplikace Nastavení je hlavním rozhraním pro nastavení vašeho systému."
 
 #. developer_name tag deprecated with Appstream 1.0
-#: shell/appdata/org.gnome.Settings.appdata.xml.in:39
+#: shell/appdata/org.gnome.Settings.appdata.xml.in.in:39
 msgid "The GNOME Project"
 msgstr "Projekt GNOME"
 
@@ -9935,7 +9972,7 @@ msgstr "Kategorie nastavení"
 
 #: shell/cc-panel-list.ui:44
 msgid "No Results Found"
-msgstr "Nebyly nalezeny žádné výsledky"
+msgstr "Nenalezeny žádné výsledky"
 
 #: shell/cc-panel-loader.c:310
 msgid "Available panels:"
@@ -10080,6 +10117,43 @@ msgstr[2] "%u vstupů"
 #: subprojects/gvc/gvc-mixer-control.c:2872
 msgid "System Sounds"
 msgstr "Systémové zvuky"
+
+#~ msgid "Microphones"
+#~ msgstr "Mikrofony"
+
+#~ msgid "_Microphone Access"
+#~ msgstr "Přístup k _mikrofonu"
+
+#~ msgid "Allow permitted apps to use microphones"
+#~ msgstr "Povolit schváleným aplikacím používat mikrofony"
+
+#~ msgid ""
+#~ "The following sandboxed apps have been given permission to use "
+#~ "microphones. Apps that are not sandboxed can use microphones without "
+#~ "asking for permission."
+#~ msgstr ""
+#~ "Následujícím aplikacím v izolovaném prostředí byla poskytnuta oprávnění "
+#~ "používat mikrofony. Aplikace, které nejsou v izolovaném prostředí mohou "
+#~ "používat mikrofony bez žádosti o povolení."
+
+#~ msgid "No sandboxed apps have asked for microphone access"
+#~ msgstr ""
+#~ "Žádné aplikace v izolovaném prostředí nepožádaly o přístup k mikrofonu"
+
+#~ msgid "_Microphones"
+#~ msgstr "_Mikrofony"
+
+#~ msgid "Control microphone access"
+#~ msgstr "Určit přístup k mikrofonu"
+
+#~ msgid "No apps found"
+#~ msgstr "Nenalezeny žádné aplikace"
+
+#~ msgid "Command copied"
+#~ msgstr "Příkaz zkopírován"
+
+#~ msgid "Add Enterprise User"
+#~ msgstr "Přidat podnikového uživatele"
 
 #~ msgid "Reset the shortcut to its default value"
 #~ msgstr "Vrátit klávesovou zkratku na výchozí"
@@ -10294,9 +10368,6 @@ msgstr "Systémové zvuky"
 
 #~ msgid "Privacy"
 #~ msgstr "Soukromí"
-
-#~ msgid "Not Available"
-#~ msgstr "nelze zjistit"
 
 #, fuzzy
 #~| msgid "Remote Desktop"
