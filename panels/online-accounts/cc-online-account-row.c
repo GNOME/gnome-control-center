@@ -27,7 +27,7 @@ struct _CcOnlineAccountRow
   AdwActionRow parent;
 
   GtkImage *icon_image;
-  GtkImage *warning_image;
+  GtkBox   *warning_box;
 
   GoaObject *object;
 };
@@ -73,7 +73,7 @@ cc_online_account_row_class_init (CcOnlineAccountRowClass *klass)
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/online-accounts/cc-online-account-row.ui");
 
   gtk_widget_class_bind_template_child (widget_class, CcOnlineAccountRow, icon_image);
-  gtk_widget_class_bind_template_child (widget_class, CcOnlineAccountRow, warning_image);
+  gtk_widget_class_bind_template_child (widget_class, CcOnlineAccountRow, warning_box);
 }
 
 static void
@@ -126,7 +126,7 @@ cc_online_account_row_new (GoaObject *object)
     }
 
   g_object_bind_property (account, "attention-needed",
-                          self->warning_image, "visible",
+                          self->warning_box, "visible",
                           G_BINDING_DEFAULT | G_BINDING_SYNC_CREATE);
 
   return self;

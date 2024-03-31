@@ -9,8 +9,24 @@
       </object>
     </child>
     <child type="suffix">
-      <object class="GtkImage" id="warning_image">
-        <property name="icon-name">dialog-warning-symbolic</property>
+      <object class="GtkBox" id="warning_box">
+        <property name="orientation">horizontal</property>
+        <property name="spacing">6</property>
+        <property name="margin-end">6</property>
+        <property name="valign">center</property>
+        <child>
+          <object class="GtkImage">
+            <property name="icon-name">dialog-warning-symbolic</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkLabel">
+            <property name="label" translatable="yes">Error</property>
+          </object>
+        </child>
+        <style>
+          <class name="warning-box"/>
+        </style>
       </object>
     </child>
     <child type="suffix">
