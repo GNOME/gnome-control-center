@@ -40,11 +40,6 @@ struct _CcXkbModifierDialog
 
 G_DEFINE_TYPE (CcXkbModifierDialog, cc_xkb_modifier_dialog, ADW_TYPE_DIALOG)
 
-static const gchar *custom_css =
-".xkb-option-button {"
-"    padding: 12px;"
-"}";
-
 static const CcXkbOption*
 get_xkb_option_from_name (const CcXkbModifier *modifier, const gchar* name)
 {
@@ -277,16 +272,7 @@ add_radio_buttons (CcXkbModifierDialog *self)
 static void
 cc_xkb_modifier_dialog_init (CcXkbModifierDialog *self)
 {
-  g_autoptr(GtkCssProvider) provider = NULL;
-
   gtk_widget_init_template (GTK_WIDGET (self));
-
-  provider = gtk_css_provider_new ();
-  gtk_css_provider_load_from_data (provider, custom_css, -1);
-
-  gtk_style_context_add_provider_for_display (gdk_display_get_default (),
-                                              GTK_STYLE_PROVIDER (provider),
-                                              GTK_STYLE_PROVIDER_PRIORITY_APPLICATION + 1);
 
   self->modifier = NULL;
 
