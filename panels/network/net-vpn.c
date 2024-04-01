@@ -105,6 +105,8 @@ nm_device_refresh_vpn_ui (NetVpn *self)
                                state != NM_VPN_CONNECTION_STATE_FAILED &&
                                state != NM_VPN_CONNECTION_STATE_DISCONNECTED);
         self->updating_device = FALSE;
+
+        gtk_list_box_row_changed (GTK_LIST_BOX_ROW (self));
 }
 
 static void
