@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
-  <template class="CcXkbModifierDialog" parent="AdwWindow">
-    <property name="modal">True</property>
-    <property name="default_width">500</property>
-    <property name="default_height">600</property>
-    <property name="width_request">360</property>
-    <property name="height_request">294</property>
-    <property name="content">
+  <template class="CcXkbModifierDialog" parent="AdwDialog">
+    <property name="content-width">500</property>
+    <property name="content-height">600</property>
+    <property name="child">
       <object class="AdwToolbarView">
         <child type="top">
           <object class="AdwHeaderBar"/>

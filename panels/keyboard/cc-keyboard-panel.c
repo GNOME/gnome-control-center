@@ -99,14 +99,11 @@ static const CcXkbModifier COMPOSE_MODIFIER = {
 static void
 show_modifier_dialog (CcKeyboardPanel *self, const CcXkbModifier *modifier)
 {
-  GtkWindow *window, *dialog;
+  AdwDialog *dialog;
 
-  window = GTK_WINDOW (cc_shell_get_toplevel (cc_panel_get_shell (CC_PANEL (self))));
+  dialog = ADW_DIALOG (cc_xkb_modifier_dialog_new (self->input_source_settings, modifier));
 
-  dialog = GTK_WINDOW (cc_xkb_modifier_dialog_new (self->input_source_settings, modifier));
-
-  gtk_window_set_transient_for (dialog, window);
-  gtk_window_present (dialog);
+  adw_dialog_present (dialog, GTK_WIDGET (self));
 }
 
 static void

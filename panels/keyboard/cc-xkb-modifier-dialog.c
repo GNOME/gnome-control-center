@@ -25,7 +25,7 @@
 
 struct _CcXkbModifierDialog
 {
-  AdwWindow       parent_instance;
+  AdwDialog       parent_instance;
 
   AdwPreferencesPage *xkb_modifier_page;
   GtkSwitch      *enabled_switch;
@@ -38,7 +38,7 @@ struct _CcXkbModifierDialog
   GSList         *radio_group;
 };
 
-G_DEFINE_TYPE (CcXkbModifierDialog, cc_xkb_modifier_dialog, ADW_TYPE_WINDOW)
+G_DEFINE_TYPE (CcXkbModifierDialog, cc_xkb_modifier_dialog, ADW_TYPE_DIALOG)
 
 static const gchar *custom_css =
 ".xkb-option-button {"
@@ -307,7 +307,7 @@ cc_xkb_modifier_dialog_new (GSettings *input_settings,
   self->input_source_settings = g_object_ref (input_settings);
 
   self->modifier = modifier;
-  gtk_window_set_title (GTK_WINDOW (self), gettext (modifier->title));
+  adw_dialog_set_title (ADW_DIALOG (self), gettext (modifier->title));
   adw_preferences_row_set_title (ADW_PREFERENCES_ROW (self->switch_row), gettext (modifier->title));
   adw_preferences_page_set_description (self->xkb_modifier_page, gettext (modifier->description));
   gtk_widget_set_visible (GTK_WIDGET (self->switch_group), modifier->default_option == NULL);
