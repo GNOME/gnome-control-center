@@ -574,6 +574,18 @@ out:
         handle_argv (self);
 }
 
+static gint
+sort_vpns_func (GtkListBoxRow *a,
+                GtkListBoxRow *b,
+                gpointer user_data)
+{
+        NetVpn *vpn_a = NET_VPN (a);
+        NetVpn *vpn_b = NET_VPN (b);
+
+        return g_utf8_collate (nm_connection_get_id (net_vpn_get_connection (vpn_a)),
+                               nm_connection_get_id (net_vpn_get_connection (vpn_b)));
+}
+
 static void
 panel_add_vpn_device (CcNetworkPanel *self, NMConnection *connection)
 {
@@ -719,6 +731,8 @@ cc_network_panel_init (CcNetworkPanel *self)
         self->mobile_devices = g_ptr_array_new ();
         self->vpns = g_ptr_array_new ();
         self->nm_device_to_device = g_hash_table_new (g_direct_hash, g_direct_equal);
+
+        gtk_list_box_set_sort_func (GTK_LIST_BOX (self->box_vpn), sort_vpns_func, NULL, NULL);
 
         /* Create and store a NMClient instance if it doesn't exist yet */
         if (!cc_object_storage_has_object (CC_OBJECT_NMCLIENT)) {
