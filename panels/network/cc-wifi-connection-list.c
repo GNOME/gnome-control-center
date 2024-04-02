@@ -776,24 +776,11 @@ cc_wifi_connection_list_class_init (CcWifiConnectionListClass *klass)
 static void
 cc_wifi_connection_list_init (CcWifiConnectionList *self)
 {
-  GtkWidget *listbox_placeholder;
-
   self->listbox = GTK_LIST_BOX (gtk_list_box_new ());
   gtk_list_box_set_selection_mode (GTK_LIST_BOX (self->listbox), GTK_SELECTION_NONE);
   gtk_widget_set_valign (GTK_WIDGET (self->listbox), GTK_ALIGN_START);
   gtk_widget_add_css_class (GTK_WIDGET (self->listbox), "boxed-list");
   adw_bin_set_child (ADW_BIN (self), GTK_WIDGET (self->listbox));
-
-  listbox_placeholder = gtk_label_new (_("Searching networks…"));
-  gtk_label_set_wrap (GTK_LABEL (listbox_placeholder), TRUE);
-  gtk_label_set_max_width_chars (GTK_LABEL (listbox_placeholder), 50);
-  gtk_widget_set_margin_top (listbox_placeholder, 18);
-  gtk_widget_set_margin_bottom (listbox_placeholder, 18);
-  gtk_widget_set_margin_start (listbox_placeholder, 18);
-  gtk_widget_set_margin_end (listbox_placeholder, 18);
-  gtk_widget_add_css_class (listbox_placeholder, "dim-label");
-
-  gtk_list_box_set_placeholder (self->listbox, listbox_placeholder);
 
   self->hide_unavailable = TRUE;
   self->show_aps = TRUE;
@@ -865,4 +852,25 @@ cc_wifi_connection_list_is_empty (CcWifiConnectionList *self)
   g_return_val_if_fail (CC_IS_WIFI_CONNECTION_LIST (self), TRUE);
 
   return self->connections->len == 0;
+}
+
+void
+cc_wifi_connection_list_set_placeholder_text (CcWifiConnectionList *self,
+                                              const gchar          *placeholder_text)
+{
+  GtkWidget *listbox_placeholder;
+
+  g_return_if_fail (CC_IS_WIFI_CONNECTION_LIST (self));
+
+  listbox_placeholder = gtk_label_new (placeholder_text);
+
+  gtk_label_set_wrap (GTK_LABEL (listbox_placeholder), TRUE);
+  gtk_label_set_max_width_chars (GTK_LABEL (listbox_placeholder), 50);
+  gtk_widget_set_margin_top (listbox_placeholder, 18);
+  gtk_widget_set_margin_bottom (listbox_placeholder, 18);
+  gtk_widget_set_margin_start (listbox_placeholder, 18);
+  gtk_widget_set_margin_end (listbox_placeholder, 18);
+  gtk_widget_add_css_class (listbox_placeholder, "dim-label");
+
+  gtk_list_box_set_placeholder (self->listbox, listbox_placeholder);
 }

@@ -1166,6 +1166,7 @@ net_device_wifi_new (CcPanel *panel, NMClient *client, NMDevice *device)
 
         /* Set up the main Visible Networks list */
         list = cc_wifi_connection_list_new (client, NM_DEVICE_WIFI (device), TRUE, TRUE, FALSE, FALSE);
+        cc_wifi_connection_list_set_placeholder_text (list, _("Searching networks…"));
         gtk_box_append (self->listbox_box, GTK_WIDGET (list));
 
         listbox = cc_wifi_connection_list_get_list_box (list);
@@ -1182,6 +1183,7 @@ net_device_wifi_new (CcPanel *panel, NMClient *client, NMDevice *device)
 
         /* Set up the Saved Networks list */
         list = cc_wifi_connection_list_new (self->client, NM_DEVICE_WIFI (device), FALSE, FALSE, FALSE, TRUE);
+        cc_wifi_connection_list_set_placeholder_text (list, _("No saved networks"));
         self->saved_networks_list = g_object_ref_sink (list);
         adw_preferences_group_add (self->saved_networks_box, GTK_WIDGET (list));
 

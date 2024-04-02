@@ -41,4 +41,7 @@ GtkListBox           *cc_wifi_connection_list_get_list_box (CcWifiConnectionList
 
 gboolean              cc_wifi_connection_list_is_empty (CcWifiConnectionList *self);
 
+void                  cc_wifi_connection_list_set_placeholder_text (CcWifiConnectionList *self,
+                                                                    const gchar          *placeholder_text);
+
 G_END_DECLS
