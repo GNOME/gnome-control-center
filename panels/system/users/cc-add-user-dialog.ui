@@ -57,6 +57,29 @@
           <object class="AdwPreferencesPage" id="local_page">
             <child>
               <object class="AdwPreferencesGroup">
+                <property name="title" translatable="yes">Account Type</property>
+                <child>
+                  <object class="AdwActionRow">
+                    <property name="activatable-widget">local_account_type_switch</property>
+                    <property name="title" translatable="yes">Ad_ministrator</property>
+                    <property name="use-underline">True</property>
+                    <child type="suffix">
+                      <object class="CcListRowInfoButton">
+                        <property name="valign">center</property>
+                        <property name="text" translatable="yes">Administrators have extra abilities, including adding and removing users, changing login settings, and removing software. Parental controls cannot be applied to administrators.</property>
+                      </object>
+                    </child>
+                    <child type="suffix">
+                      <object class="GtkSwitch" id="local_account_type_switch">
+                        <property name="valign">center</property>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="AdwPreferencesGroup">
                 <child>
                   <object class="AdwActionRow" id="local_name_row">
                     <property name="activatable-widget">local_name_entry</property>
@@ -114,28 +137,6 @@
                     <child type="suffix">
                       <object class="GtkImage" id="local_username_status_icon">
                         <property name="icon-name">dialog-warning-symbolic</property>
-                      </object>
-                    </child>
-                  </object>
-                </child>
-              </object>
-            </child>
-            <child>
-              <object class="AdwPreferencesGroup">
-                <child>
-                  <object class="AdwActionRow">
-                    <property name="activatable-widget">local_account_type_switch</property>
-                    <property name="title" translatable="yes">Ad_ministrator</property>
-                    <property name="use-underline">True</property>
-                    <child type="suffix">
-                      <object class="CcListRowInfoButton">
-                        <property name="valign">center</property>
-                        <property name="text" translatable="yes">Administrators have extra abilities, including adding and removing users, changing login settings, and removing software. Parental controls cannot be applied to administrators.</property>
-                      </object>
-                    </child>
-                    <child type="suffix">
-                      <object class="GtkSwitch" id="local_account_type_switch">
-                        <property name="valign">center</property>
                       </object>
                     </child>
                   </object>
