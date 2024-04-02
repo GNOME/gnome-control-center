@@ -174,6 +174,8 @@ cc_background_xml_load_xml_internal (CcBackgroundXml *xml,
       g_autofree gchar *uri = NULL;
       g_autofree gchar *cname = NULL;
       g_autofree gchar *id = NULL;
+      g_autofree gchar *bg_uri = NULL;
+      g_autofree gchar *bg_uri_dark = NULL;
 
       item = cc_background_item_new (NULL);
 
@@ -188,7 +190,6 @@ cc_background_xml_load_xml_internal (CcBackgroundXml *xml,
 	} else if (!strcmp ((gchar *)wpa->name, "filename")) {
 	  if (wpa->last != NULL && wpa->last->content != NULL) {
 	    gchar *content = g_strstrip ((gchar *)wpa->last->content);
-	    g_autofree gchar *bg_uri = NULL;
 
 	    /* FIXME same rubbish as in other parts of the code */
 	    if (strcmp (content, NONE) == 0) {
@@ -208,20 +209,19 @@ cc_background_xml_load_xml_internal (CcBackgroundXml *xml,
 	} else if (!strcmp ((gchar *)wpa->name, "filename-dark")) {
 	  if (wpa->last != NULL && wpa->last->content != NULL) {
 	    gchar *content = g_strstrip ((gchar *)wpa->last->content);
-	    g_autofree gchar *bg_uri = NULL;
 
 	    /* FIXME same rubbish as in other parts of the code */
 	    if (strcmp (content, NONE) == 0) {
-	      bg_uri = NULL;
+	      bg_uri_dark = NULL;
 	    } else {
 	      g_autoptr(GFile) file = NULL;
 	      g_autofree gchar *dirname = NULL;
 
 	      dirname = g_path_get_dirname (filename);
 	      file = g_file_new_for_commandline_arg_and_cwd (content, dirname);
-	      bg_uri = g_file_get_uri (file);
+	      bg_uri_dark = g_file_get_uri (file);
 	    }
-	    g_object_set (G_OBJECT (item), "uri-dark", bg_uri, NULL);
+	    g_object_set (G_OBJECT (item), "uri-dark", bg_uri_dark, NULL);
 	  } else {
 	    break;
 	  }
@@ -308,7 +308,10 @@ cc_background_xml_load_xml_internal (CcBackgroundXml *xml,
       /* FIXME, this is a broken way of doing,
        * need to use proper code here */
       uri = g_filename_to_uri (filename, NULL, NULL);
-      id = g_strdup_printf ("%s#%s", uri, cname);
+      if (bg_uri || bg_uri_dark)
+        id = g_strdup_printf ("%s#%s#%s", uri, cname, bg_uri ? bg_uri : bg_uri_dark);
+      else
+        id = g_strdup_printf ("%s#%s", uri, cname);
 
       /* Make sure we don't already have this one and that filename exists */
       if (g_hash_table_lookup (xml->wp_hash, id) != NULL) {
