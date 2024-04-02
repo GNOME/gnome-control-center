@@ -126,7 +126,7 @@ struct _CcApplicationsPanel
   GList           *snap_permission_rows;
 
   GtkButton       *handler_reset;
-  GtkWindow       *handler_dialog;
+  AdwDialog       *handler_dialog;
   AdwPreferencesPage *handler_page;
   CcListRow       *handler_row;
   AdwPreferencesGroup *handler_file_group;
@@ -1215,11 +1215,7 @@ on_builtin_row_activated_cb (CcApplicationsPanel *self)
 static void
 on_handler_row_activated_cb (CcApplicationsPanel *self)
 {
-  CcShell *shell = cc_panel_get_shell (CC_PANEL (self));
-
-  gtk_window_set_transient_for (self->handler_dialog,
-                                GTK_WINDOW (cc_shell_get_toplevel (shell)));
-  gtk_window_present (self->handler_dialog);
+  adw_dialog_present (self->handler_dialog, GTK_WIDGET (self));
 }
 
 static void
@@ -1662,7 +1658,7 @@ cc_applications_panel_dispose (GObject *object)
 
   g_clear_pointer (&self->sandbox_info_button, gtk_widget_unparent);
   g_clear_pointer (&self->builtin_dialog, gtk_window_destroy);
-  g_clear_pointer (&self->handler_dialog, gtk_window_destroy);
+  g_clear_pointer (&self->handler_dialog, adw_dialog_force_close);
   g_clear_pointer (&self->storage_dialog, adw_dialog_force_close);
 
   remove_all_handler_rows (self);
