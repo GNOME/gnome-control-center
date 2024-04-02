@@ -39,7 +39,7 @@
 
 struct _CcTzDialog
 {
-  AdwWindow           parent_instance;
+  AdwDialog           parent_instance;
 
   GtkSearchEntry     *location_entry;
 
@@ -56,7 +56,7 @@ struct _CcTzDialog
   CcTzItem           *selected_item;
 };
 
-G_DEFINE_TYPE (CcTzDialog, cc_tz_dialog, ADW_TYPE_WINDOW)
+G_DEFINE_TYPE (CcTzDialog, cc_tz_dialog, ADW_TYPE_DIALOG)
 
 enum {
   TZ_SELECTED,
@@ -177,7 +177,7 @@ tz_dialog_search_stopped_cb (CcTzDialog *self)
   if (search_text && g_strcmp0 (search_text, "") != 0)
     gtk_editable_set_text (GTK_EDITABLE (self->location_entry), "");
   else
-    gtk_window_close (GTK_WINDOW (self));
+    adw_dialog_close (ADW_DIALOG (self));
 }
 
 static void
@@ -193,7 +193,7 @@ tz_dialog_row_activated_cb (CcTzDialog *self,
   model = G_LIST_MODEL (self->tz_selection_model);
   self->selected_item = g_list_model_get_item (model, position);
 
-  gtk_window_close (GTK_WINDOW (self));
+  adw_dialog_close (ADW_DIALOG (self));
   g_signal_emit (self, signals[TZ_SELECTED], 0);
 }
 
@@ -235,8 +235,6 @@ cc_tz_dialog_class_init (CcTzDialogClass *klass)
                   G_SIGNAL_RUN_LAST,
                   0, NULL, NULL, NULL,
                   G_TYPE_NONE, 0);
-
-  gtk_widget_class_add_binding_action (widget_class, GDK_KEY_Escape, 0, "window.close", NULL);
 
   gtk_widget_class_set_template_from_resource (widget_class,
                                                "/org/gnome/control-center/"

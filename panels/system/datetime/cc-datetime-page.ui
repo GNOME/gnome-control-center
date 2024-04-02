@@ -5,22 +5,9 @@
     <signal name="tz-selected" handler="panel_tz_selection_changed_cb" swapped="yes"/>
   </object>
 
-  <object class="AdwWindow" id="datetime_dialog">
+  <object class="AdwDialog" id="datetime_dialog">
     <property name="title" translatable="yes">Date &amp; Time</property>
-    <property name="modal">True</property>
-    <property name="hide-on-close">True</property>
-    <child>
-      <object class="GtkShortcutController">
-        <property name="scope">managed</property>
-        <child>
-          <object class="GtkShortcut">
-            <property name="trigger">Escape</property>
-            <property name="action">action(window.close)</property>
-          </object>
-        </child>
-      </object>
-    </child>
-    <property name="content">
+    <property name="child">
       <object class="AdwToolbarView">
         <child type="top">
           <object class="AdwHeaderBar"/>

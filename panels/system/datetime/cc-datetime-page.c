@@ -86,7 +86,7 @@ struct _CcDateTimePage
   AdwActionRow *auto_datetime_row;
   AdwSwitchRow *auto_timezone_row;
   CcListRow *datetime_row;
-  GtkWindow *datetime_dialog;
+  AdwDialog *datetime_dialog;
   AdwSpinRow *day_spin_row;
   GtkToggleButton *twentyfour_format_button;
   GtkToggleButton *ampm_format_button;
@@ -137,7 +137,7 @@ cc_date_time_page_dispose (GObject *object)
 
   if (self->toplevels)
     {
-      g_list_free_full (self->toplevels, (GDestroyNotify) gtk_window_destroy);
+      g_list_free_full (self->toplevels, (GDestroyNotify) adw_dialog_force_close);
       self->toplevels = NULL;
     }
 
@@ -597,14 +597,9 @@ on_timedated_properties_changed (CcDateTimePage  *self,
 
 static void
 present_window (CcDateTimePage *self,
-                GtkWindow      *window)
+                AdwDialog      *window)
 {
-  GtkNative *native;
-
-  native = gtk_widget_get_native (GTK_WIDGET (self));
-
-  gtk_window_set_transient_for (window, GTK_WINDOW (native));
-  gtk_window_present (window);
+  adw_dialog_present (window, GTK_WIDGET (self));
 }
 
 static gboolean
@@ -676,7 +671,7 @@ list_box_row_activated (CcDateTimePage *self,
     }
   else if (row == GTK_LIST_BOX_ROW (self->timezone_row))
     {
-      present_window (self, GTK_WINDOW (self->timezone_dialog));
+      present_window (self, ADW_DIALOG (self->timezone_dialog));
     }
 }
 
