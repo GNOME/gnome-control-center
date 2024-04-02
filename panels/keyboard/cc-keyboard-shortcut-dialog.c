@@ -300,12 +300,12 @@ shortcut_dialog_row_new (gpointer item,
 
   group = g_object_get_data (item, "search-group");
   title = g_object_get_data (item, "title");
-  row = g_object_new (CC_TYPE_LIST_ROW, NULL);
+  row = g_object_new (CC_TYPE_LIST_ROW,
+                      "title", _(title),
+                      "show-arrow", TRUE,
+                      NULL);
 
   g_object_set_data (G_OBJECT (row), "section", item);
-  cc_list_row_set_show_arrow (CC_LIST_ROW (row), TRUE);
-  gtk_list_box_row_set_activatable (GTK_LIST_BOX_ROW (row), TRUE);
-  adw_preferences_row_set_title (ADW_PREFERENCES_ROW (row), _(title));
 
   g_object_bind_property (group, "modified-text",
                           row, "secondary-label",
