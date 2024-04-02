@@ -41,7 +41,7 @@ struct _CcPowerPanel
   CcPanel            parent_instance;
 
   AdwSwitchRow      *als_row;
-  GtkWindow         *automatic_suspend_dialog;
+  AdwDialog         *automatic_suspend_dialog;
   CcListRow         *automatic_suspend_row;
   GtkListBox        *battery_listbox;
   AdwSwitchRow      *battery_percentage_row;
@@ -548,14 +548,7 @@ iio_proxy_vanished_cb (GDBusConnection *connection,
 static void
 automatic_suspend_row_activated_cb (CcPowerPanel *self)
 {
-  GtkWidget *toplevel;
-  CcShell *shell;
-
-  shell = cc_panel_get_shell (CC_PANEL (self));
-  toplevel = cc_shell_get_toplevel (shell);
-  gtk_window_set_transient_for (self->automatic_suspend_dialog, GTK_WINDOW (toplevel));
-  gtk_window_set_modal (self->automatic_suspend_dialog, TRUE);
-  gtk_window_present (self->automatic_suspend_dialog);
+  adw_dialog_present (self->automatic_suspend_dialog, GTK_WIDGET (self));
 }
 
 static gboolean
@@ -1334,7 +1327,7 @@ cc_power_panel_dispose (GObject *object)
   g_clear_object (&self->gsd_settings);
   g_clear_object (&self->session_settings);
   g_clear_object (&self->interface_settings);
-  g_clear_pointer (&self->automatic_suspend_dialog, gtk_window_destroy);
+  g_clear_pointer (&self->automatic_suspend_dialog, adw_dialog_force_close);
   g_clear_pointer (&self->devices, g_ptr_array_unref);
   g_clear_object (&self->up_client);
   g_clear_object (&self->iio_proxy);

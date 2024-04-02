@@ -221,26 +221,11 @@
     </property>
   </template>
 
-  <object class="AdwWindow" id="automatic_suspend_dialog">
+  <object class="AdwDialog" id="automatic_suspend_dialog">
     <property name="title" translatable="yes">Automatic Suspend</property>
-    <property name="hide-on-close">True</property>
-    <property name="destroy-with-parent">True</property>
-    <property name="default-width">400</property>
-    <property name="default-height">330</property>
-    <property name="width-request">360</property>
-    <property name="height-request">294</property>
-    <child>
-      <object class="GtkShortcutController">
-        <property name="scope">managed</property>
-        <child>
-          <object class="GtkShortcut">
-            <property name="trigger">Escape</property>
-            <property name="action">action(window.close)</property>
-          </object>
-        </child>
-      </object>
-    </child>
-    <property name="content">
+    <property name="content-width">400</property>
+    <property name="content-height">330</property>
+    <property name="child">
       <object class="AdwToolbarView">
         <child type="top">
           <object class="AdwHeaderBar"/>
