@@ -26,6 +26,7 @@
 
 #include "cc-color-common.h"
 #include "cc-color-profile.h"
+#include "cc-list-row-info-button.h"
 
 struct _CcColorProfile
 {
@@ -241,7 +242,7 @@ cc_color_profile_refresh (CcColorProfile *color_profile)
   /* show any information */
   warnings = cc_color_profile_get_warnings (color_profile);
   gtk_widget_set_visible (color_profile->widget_info, warnings != NULL);
-  gtk_widget_set_tooltip_text (color_profile->widget_info, warnings);
+  cc_list_row_info_button_set_text (CC_LIST_ROW_INFO_BUTTON (color_profile->widget_info), warnings);
 }
 
 CdDevice *
@@ -452,9 +453,11 @@ cc_color_profile_init (CcColorProfile *color_profile)
   gtk_box_append (GTK_BOX (box), color_profile->widget_description);
 
   /* profile warnings/info */
-  color_profile->widget_info = gtk_image_new_from_icon_name ("dialog-information-symbolic");
-  gtk_widget_set_margin_start (color_profile->widget_info, IMAGE_WIDGET_PADDING);
-  gtk_widget_set_margin_end (color_profile->widget_info, IMAGE_WIDGET_PADDING);
+  color_profile->widget_info = g_object_new (CC_TYPE_LIST_ROW_INFO_BUTTON,
+                                             "valign", GTK_ALIGN_CENTER,
+                                             "margin-start", 6,
+                                             "margin-end", 6,
+                                             NULL);
   gtk_box_append (GTK_BOX (box), color_profile->widget_info);
 
   /* refresh */
