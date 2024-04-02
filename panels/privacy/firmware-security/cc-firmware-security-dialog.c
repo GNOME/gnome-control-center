@@ -114,7 +114,6 @@ update_dialog (CcFirmwareSecurityDialog *self)
       break;
 
     case 1:
-      gtk_window_set_default_size (GTK_WINDOW (&self->parent), 380, 380);
       set_dialog_item_layer1 (self,
                               "emblem-default-symbolic",
                               _("Checks Passed"),
@@ -128,7 +127,6 @@ update_dialog (CcFirmwareSecurityDialog *self)
     case 3:
     case 4:
     case 5:
-      gtk_window_set_default_size (GTK_WINDOW (&self->parent), 400, 390);
       set_dialog_item_layer1 (self,
                               "security-high-symbolic",
                               _("Protected"),
@@ -139,7 +137,6 @@ update_dialog (CcFirmwareSecurityDialog *self)
       break;
 
     default:
-      gtk_window_set_default_size (GTK_WINDOW (&self->parent), 400, 390);
       set_dialog_item_layer1 (self,
                               "dialog-question-symbolic",
                               _("Checks Unavailable"),
