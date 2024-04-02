@@ -1258,18 +1258,9 @@ on_stack_child_changed (CcFingerprintDialog *self)
 static void
 cc_fingerprint_dialog_init (CcFingerprintDialog *self)
 {
-  g_autoptr(GtkCssProvider) provider = NULL;
-
   self->cancellable = g_cancellable_new ();
 
   gtk_widget_init_template (GTK_WIDGET (self));
-
-  provider = gtk_css_provider_new ();
-  gtk_css_provider_load_from_resource (provider,
-                                       "/org/gnome/control-center/system/users/cc-fingerprint-dialog.css");
-  gtk_style_context_add_provider_for_display (gdk_display_get_default (),
-                                              GTK_STYLE_PROVIDER (provider),
-                                              GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
 
   on_stack_child_changed (self);
   g_signal_connect_object (self->stack, "notify::visible-child",
