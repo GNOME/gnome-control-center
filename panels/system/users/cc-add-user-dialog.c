@@ -213,6 +213,7 @@ update_password_strength (CcAddUserDialog *self)
         gtk_level_bar_set_value (self->local_strength_indicator, strength_level);
         gtk_label_set_label (self->local_password_hint, hint);
 
+        gtk_widget_set_visible (GTK_WIDGET (self->local_password_status_icon), TRUE);
         if (strength_level > 1) {
                 gtk_image_set_from_icon_name (self->local_password_status_icon, "emblem-ok-symbolic");
         } else if (strlen (password) == 0) {
@@ -241,12 +242,14 @@ local_validate (CcAddUserDialog *self)
 
         if (self->local_valid_username) {
                 gtk_image_set_from_icon_name (self->local_username_status_icon, "emblem-ok-symbolic");
+                gtk_widget_set_visible (GTK_WIDGET (self->local_username_status_icon), TRUE);
         }
 
         name = gtk_editable_get_text (GTK_EDITABLE (self->local_name_row));
         valid_name = is_valid_name (name);
         if (valid_name) {
                 gtk_image_set_from_icon_name (self->local_name_status_icon, "emblem-ok-symbolic");
+                gtk_widget_set_visible (GTK_WIDGET (self->local_name_status_icon), TRUE);
         }
 
         password = gtk_editable_get_text (GTK_EDITABLE (self->local_password_entry));
@@ -324,6 +327,7 @@ local_username_combo_changed_cb (CcAddUserDialog *self)
         g_clear_handle_id (&self->local_username_timeout_id, g_source_remove);
 
         gtk_image_set_from_icon_name (self->local_username_status_icon, "dialog-warning-symbolic");
+        gtk_widget_set_visible (GTK_WIDGET (self->local_username_status_icon), TRUE);
         gtk_widget_set_sensitive (GTK_WIDGET (self->add_button), FALSE);
 
         self->local_valid_username = FALSE;
@@ -592,6 +596,7 @@ local_name_entry_changed_cb (CcAddUserDialog *self)
         g_clear_handle_id (&self->local_name_timeout_id, g_source_remove);
 
         gtk_image_set_from_icon_name (self->local_name_status_icon, "dialog-warning-symbolic");
+        gtk_widget_set_visible (GTK_WIDGET (self->local_name_status_icon), TRUE);
         gtk_widget_set_sensitive (GTK_WIDGET (self->add_button), FALSE);
 
         self->local_name_timeout_id = g_timeout_add (PASSWORD_CHECK_TIMEOUT, (GSourceFunc) local_name_timeout, self);
@@ -611,6 +616,7 @@ update_password_match (CcAddUserDialog *self)
                         message = _("The passwords do not match.");
                 } else {
                         gtk_image_set_from_icon_name (self->local_verify_status_icon, "emblem-ok-symbolic");
+                        gtk_widget_set_visible (GTK_WIDGET (self->local_verify_status_icon), TRUE);
                 }
         }
         adw_action_row_set_subtitle (ADW_ACTION_ROW (self->local_verify_password_row), message);
@@ -677,6 +683,9 @@ recheck_password_match (CcAddUserDialog *self)
 static void
 local_password_entry_changed_cb (CcAddUserDialog *self)
 {
+        gtk_widget_set_visible (GTK_WIDGET (self->local_password_status_icon), TRUE);
+        gtk_widget_set_visible (GTK_WIDGET (self->local_verify_status_icon), TRUE);
+
         gtk_image_set_from_icon_name (self->local_password_status_icon, "dialog-warning-symbolic");
         gtk_image_set_from_icon_name (self->local_verify_status_icon, "dialog-warning-symbolic");
         recheck_password_match (self);
@@ -685,6 +694,7 @@ local_password_entry_changed_cb (CcAddUserDialog *self)
 static void
 local_verify_entry_changed_cb (CcAddUserDialog *self)
 {
+        gtk_widget_set_visible (GTK_WIDGET (self->local_verify_status_icon), TRUE);
         gtk_image_set_from_icon_name (self->local_verify_status_icon, "dialog-warning-symbolic");
         recheck_password_match (self);
 }
