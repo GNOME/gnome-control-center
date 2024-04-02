@@ -42,7 +42,6 @@ struct _CcAddUserDialog {
 
         GtkButton          *add_button;
         GtkSwitch          *local_account_type_switch;
-        GtkEntry           *local_name_entry;
         GtkImage           *local_name_status_icon;
         AdwPreferencesPage *local_page;
         AdwActionRow       *local_password_row;
@@ -54,6 +53,7 @@ struct _CcAddUserDialog {
         GtkLabel           *local_password_hint;
         GtkCheckButton     *local_password_radio;
         GtkEntry           *local_username_entry;
+        AdwEntryRow        *local_name_row;
         AdwActionRow       *local_username_row;
         GtkImage           *local_username_status_icon;
         GtkPasswordEntry   *local_verify_entry;
@@ -158,7 +158,7 @@ create_user_done (ActUserManager  *manager,
                 g_debug ("Failed to create user: %s", error->message);
                 if (!g_error_matches (error, ACT_USER_MANAGER_ERROR, ACT_USER_MANAGER_ERROR_PERMISSION_DENIED))
                        show_error_dialog (self, _("Failed to add account"), error);
-                gtk_widget_grab_focus (GTK_WIDGET (self->local_name_entry));
+                gtk_widget_grab_focus (GTK_WIDGET (self->local_name_row));
         } else {
                 g_debug ("Created user: %s", act_user_get_user_name (user));
 
@@ -180,7 +180,7 @@ local_create_user (CcAddUserDialog *self)
 
         begin_action (self);
 
-        name = gtk_editable_get_text (GTK_EDITABLE (self->local_name_entry));
+        name = gtk_editable_get_text (GTK_EDITABLE (self->local_name_row));
         username = gtk_combo_box_text_get_active_text (self->local_username_combo);
         account_type = gtk_switch_get_active (self->local_account_type_switch) ? ACT_USER_ACCOUNT_TYPE_ADMINISTRATOR : ACT_USER_ACCOUNT_TYPE_STANDARD;
 
@@ -243,7 +243,7 @@ local_validate (CcAddUserDialog *self)
                 gtk_image_set_from_icon_name (self->local_username_status_icon, "emblem-ok-symbolic");
         }
 
-        name = gtk_editable_get_text (GTK_EDITABLE (self->local_name_entry));
+        name = gtk_editable_get_text (GTK_EDITABLE (self->local_name_row));
         valid_name = is_valid_name (name);
         if (valid_name) {
                 gtk_image_set_from_icon_name (self->local_name_status_icon, "emblem-ok-symbolic");
@@ -580,7 +580,7 @@ local_name_entry_changed_cb (CcAddUserDialog *self)
 
         gtk_list_store_clear (self->local_username_model);
 
-        name = gtk_editable_get_text (GTK_EDITABLE (self->local_name_entry));
+        name = gtk_editable_get_text (GTK_EDITABLE (self->local_name_row));
         if ((name == NULL || strlen (name) == 0) && !self->has_custom_username) {
                 gtk_editable_set_text (GTK_EDITABLE (self->local_username_entry), "");
         } else if (name != NULL && strlen (name) != 0) {
@@ -803,13 +803,13 @@ cc_add_user_dialog_class_init (CcAddUserDialogClass *klass)
         gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, local_password_hint);
         gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, local_password_row);
         gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, local_password_status_icon);
-        gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, local_name_entry);
         gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, local_name_status_icon);
         gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, local_username_combo);
         gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, local_username_model);
         gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, local_password_entry);
         gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, local_password_radio);
         gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, local_username_entry);
+        gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, local_name_row);
         gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, local_username_row);
         gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, local_username_status_icon);
         gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, local_strength_indicator);

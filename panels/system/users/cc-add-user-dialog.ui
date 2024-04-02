@@ -80,24 +80,16 @@
             </child>
             <child>
               <object class="AdwPreferencesGroup">
+                <property name="title" translatable="yes">User Details</property>
                 <child>
-                  <object class="AdwActionRow" id="local_name_row">
-                    <property name="activatable-widget">local_name_entry</property>
-                    <property name="title" translatable="yes">_Name</property>
+                  <object class="AdwEntryRow" id="local_name_row">
+                    <property name="title" translatable="yes">Full _Name</property>
                     <property name="use-underline">True</property>
+                    <signal name="changed" handler="local_name_entry_changed_cb" object="CcAddUserDialog" swapped="yes"/>
+                    <signal name="entry-activated" handler="dialog_validate" object="CcAddUserDialog" swapped="yes"/>
                     <child>
-                      <object class="GtkEntry" id="local_name_entry">
-                        <property name="valign">center</property>
-                        <property name="max-length">255</property>
-                        <property name="activates_default">True</property>
-                        <property name="hexpand">True</property>
-                        <signal name="changed" handler="local_name_entry_changed_cb" object="CcAddUserDialog" swapped="yes"/>
-                        <signal name="activate" handler="dialog_validate" object="CcAddUserDialog" swapped="yes"/>
-                        <child>
-                          <object class="GtkEventControllerFocus">
-                            <signal name="leave" handler="local_name_entry_focus_out_event_cb" object="CcAddUserDialog" swapped="yes"/>
-                          </object>
-                        </child>
+                      <object class="GtkEventControllerFocus">
+                        <signal name="leave" handler="local_name_entry_focus_out_event_cb" object="CcAddUserDialog" swapped="yes"/>
                       </object>
                     </child>
                     <child type="suffix">
