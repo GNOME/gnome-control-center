@@ -283,21 +283,16 @@ row_moved_cb (CcSearchPanel    *self,
 static void
 show_search_locations_dialog (CcSearchPanel *self)
 {
-  CcShell *shell;
-  GtkWidget *toplevel;
-
   if (self->locations_dialog == NULL)
     {
       self->locations_dialog = cc_search_locations_dialog_new ();
       g_object_add_weak_pointer (G_OBJECT (self->locations_dialog),
                                  (gpointer *) &self->locations_dialog);
 
-      shell = cc_panel_get_shell (CC_PANEL (self));
-      toplevel = cc_shell_get_toplevel (shell);
-      gtk_window_set_transient_for (GTK_WINDOW (self->locations_dialog), GTK_WINDOW (toplevel));
+      adw_dialog_present (ADW_DIALOG (self->locations_dialog), GTK_WIDGET (self));
     }
 
-  gtk_window_present (GTK_WINDOW (self->locations_dialog));
+  adw_dialog_present (ADW_DIALOG (self->locations_dialog), GTK_WIDGET (self));
 }
 
 static GVariant *
@@ -677,7 +672,7 @@ cc_search_panel_finalize (GObject *object)
   g_hash_table_destroy (self->sort_order);
 
   if (self->locations_dialog)
-    gtk_window_destroy (GTK_WINDOW (self->locations_dialog));
+    adw_dialog_force_close (ADW_DIALOG (self->locations_dialog));
 
   G_OBJECT_CLASS (cc_search_panel_parent_class)->finalize (object);
 }

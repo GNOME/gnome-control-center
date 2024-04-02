@@ -1,15 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
-  <!-- interface-requires gtk+ 3.0 -->
-  <template class="CcSearchLocationsDialog" parent="AdwWindow">
-    <property name="modal">True</property>
-    <property name="width-request">360</property>
-    <property name="height-request">294</property>
-    <property name="default-width">640</property>
-    <property name="default-height">576</property>
-    <property name="hide-on-close">True</property>
+  <template class="CcSearchLocationsDialog" parent="AdwDialog">
+    <property name="content-width">640</property>
+    <property name="content-height">576</property>
     <property name="title" translatable="yes">Search Locations</property>
-    <property name="content">
+    <property name="child">
       <object class="AdwToolbarView">
         <child type="top">
           <object class="AdwHeaderBar"/>
