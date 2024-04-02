@@ -136,7 +136,7 @@ struct _CcApplicationsPanel
 
   GtkWidget       *usage_section;
   CcListRow       *storage;
-  GtkWindow       *storage_dialog;
+  AdwDialog       *storage_dialog;
   CcInfoRow       *app;
   CcInfoRow       *data;
   CcInfoRow       *cache;
@@ -1225,11 +1225,7 @@ on_handler_row_activated_cb (CcApplicationsPanel *self)
 static void
 on_storage_row_activated_cb (CcApplicationsPanel *self)
 {
-  CcShell *shell = cc_panel_get_shell (CC_PANEL (self));
-
-  gtk_window_set_transient_for (self->storage_dialog,
-                                GTK_WINDOW (cc_shell_get_toplevel (shell)));
-  gtk_window_present (self->storage_dialog);
+  adw_dialog_present (self->storage_dialog, GTK_WIDGET (self));
 }
 
 static void
@@ -1667,7 +1663,7 @@ cc_applications_panel_dispose (GObject *object)
   g_clear_pointer (&self->sandbox_info_button, gtk_widget_unparent);
   g_clear_pointer (&self->builtin_dialog, gtk_window_destroy);
   g_clear_pointer (&self->handler_dialog, gtk_window_destroy);
-  g_clear_pointer (&self->storage_dialog, gtk_window_destroy);
+  g_clear_pointer (&self->storage_dialog, adw_dialog_force_close);
 
   remove_all_handler_rows (self);
 #ifdef HAVE_SNAP
