@@ -11,13 +11,10 @@
     </child>
     <child type="suffix">
       <object class="GtkButton" id="options_button">
+        <property name="tooltip-text" translatable="yes">Network Options</property>
         <property name="valign">center</property>
-        <property name="use_underline">True</property>
         <property name="icon_name">emblem-system-symbolic</property>
         <signal name="clicked" handler="options_button_clicked_cb" object="NetDeviceBluetooth" swapped="yes"/>
-        <accessibility>
-          <property name="label" translatable="yes">Options…</property>
-        </accessibility>
         <style>
           <class name="flat"/>
         </style>
