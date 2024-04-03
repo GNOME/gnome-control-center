@@ -1989,9 +1989,9 @@ cc_color_panel_init (CcColorPanel *self)
   self->settings_colord = g_settings_new (COLORD_SETTINGS_SCHEMA);
 
   /* Translators: This will be presented as the text of a link to the documentation */
-  learn_more_link = g_strdup_printf ("<a href='help:gnome-help/color-whyimportant'>%s</a>", _("Learn more"));
-  /* Translators: %s is a link to the documentation with the label "Learn more" */
-  panel_description = g_strdup_printf (_("Each device needs an up to date color profile to be color managed. %s"), learn_more_link);
+  learn_more_link = g_strdup_printf ("<a href='help:gnome-help/color-whyimportant'>%s</a>", _("learn more"));
+  /* Translators: %s is a link to the documentation with the label "learn more" */
+  panel_description = g_strdup_printf (_("Each device needs an up to date color profile to be color managed – %s."), learn_more_link);
   adw_preferences_page_set_description (self->color_page, panel_description);
 
   /* assign buttons */
