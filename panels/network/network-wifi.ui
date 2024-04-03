@@ -80,7 +80,7 @@
       <object class="CcListRow" id="saved_network_row">
         <property name="title" translatable="yes">Saved Networks</property>
         <property name="show-arrow">True</property>
-        <signal name="activated" handler="on_show_saved_network" object="NetDeviceWifi" swapped="yes"/>
+        <signal name="activated" handler="adw_dialog_present" object="saved_networks_dialog"/>
         <accessibility>
           <property name="label" translatable="yes">Show Saved Networks</property>
         </accessibility>

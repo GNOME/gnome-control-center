@@ -752,8 +752,6 @@ net_device_wifi_dispose (GObject *object)
                 self->hotspot_dialog = NULL;
         }
 
-        g_clear_pointer (&self->saved_networks_dialog, adw_dialog_force_close);
-
         G_OBJECT_CLASS (net_device_wifi_parent_class)->dispose (object);
 }
 
@@ -1015,12 +1013,6 @@ show_qr_code_for_row (NetDeviceWifi *self, CcWifiConnectionRow *row, CcWifiConne
 }
 
 static void
-on_show_saved_network (NetDeviceWifi *self)
-{
-        adw_dialog_present (self->saved_networks_dialog, GTK_WIDGET (self));
-}
-
-static void
 on_connect_hidden_network (NetDeviceWifi *self)
 {
         connect_hidden (self);
@@ -1103,7 +1095,6 @@ net_device_wifi_class_init (NetDeviceWifiClass *klass)
         gtk_widget_class_bind_template_child (widget_class, NetDeviceWifi, saved_networks_box);
 
         gtk_widget_class_bind_template_callback (widget_class, device_off_switch_changed_cb);
-        gtk_widget_class_bind_template_callback (widget_class, on_show_saved_network);
         gtk_widget_class_bind_template_callback (widget_class, on_connect_hidden_network);
         gtk_widget_class_bind_template_callback (widget_class, on_wifi_hotspot_network);
 }
