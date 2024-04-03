@@ -20,7 +20,6 @@
  */
 
 #include <config.h>
-#include <glib/gi18n.h>
 #include <stdlib.h>
 
 #include "shell/cc-object-storage.h"
@@ -66,13 +65,13 @@ struct _CcNetworkPanel
         gboolean          updating_device;
 
         /* widgets */
+        AdwViewStack     *stack;
         GtkWidget        *box_bluetooth;
         GtkWidget        *box_vpn;
         GtkWidget        *box_wired;
         GtkWidget        *container_bluetooth;
         GtkWidget        *proxy_row;
         GtkWidget        *save_button;
-        GtkWidget        *toolbar_view;
 
         /* wireless dialog stuff */
         CmdlineOperation  arg_operation;
@@ -639,19 +638,11 @@ panel_check_network_manager_version (CcNetworkPanel *self)
 
         /* parse running version */
         version = nm_client_get_version (self->client);
+
         if (version == NULL) {
-                GtkWidget *status_page;
-
-                status_page = adw_status_page_new ();
-                adw_toolbar_view_set_content (ADW_TOOLBAR_VIEW (self->toolbar_view), status_page);
-
-                adw_status_page_set_icon_name (ADW_STATUS_PAGE (status_page), "network-error-symbolic");
-                adw_status_page_set_title (ADW_STATUS_PAGE (status_page), _("Network Unavailable"));
-                adw_status_page_set_description (ADW_STATUS_PAGE (status_page),
-                                                 _("An error has occurred and network cannot be used."
-                                                   "\n Error details: NetworkManager not running."));
-
+                adw_view_stack_set_visible_child_name (ADW_VIEW_STACK (self->stack), "nm-error-page");
         } else {
+                adw_view_stack_set_visible_child_name (ADW_VIEW_STACK (self->stack), "network-page");
                 manager_running (self);
         }
 }
@@ -698,12 +689,12 @@ cc_network_panel_class_init (CcNetworkPanelClass *klass)
 
         gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/network/cc-network-panel.ui");
 
+        gtk_widget_class_bind_template_child (widget_class, CcNetworkPanel, stack);
         gtk_widget_class_bind_template_child (widget_class, CcNetworkPanel, box_bluetooth);
         gtk_widget_class_bind_template_child (widget_class, CcNetworkPanel, box_vpn);
         gtk_widget_class_bind_template_child (widget_class, CcNetworkPanel, box_wired);
         gtk_widget_class_bind_template_child (widget_class, CcNetworkPanel, container_bluetooth);
         gtk_widget_class_bind_template_child (widget_class, CcNetworkPanel, proxy_row);
-        gtk_widget_class_bind_template_child (widget_class, CcNetworkPanel, toolbar_view);
 
         gtk_widget_class_bind_template_callback (widget_class, create_connection_cb);
 
