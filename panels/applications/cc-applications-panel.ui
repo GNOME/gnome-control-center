@@ -360,7 +360,7 @@
                                 <property name="subtitle" translatable="yes">System access that is required by the app</property>
                                 <property name="has-expander">True</property>
                                 <property name="is-link">True</property>
-                                <signal name="activated" handler="on_builtin_row_activated_cb" object="CcApplicationsPanel" swapped="yes" />
+                                <signal name="activated" handler="adw_dialog_present" object="builtin_dialog" />
                               </object>
                             </child>
                           </object>
@@ -374,7 +374,7 @@
                                 <property name="title" translatable="yes">_Files &amp;amp; Links</property>
                                 <property name="subtitle" translatable="yes">File and link types that are opened by the app</property>
                                 <property name="show-arrow">True</property>
-                                <signal name="activated" handler="on_handler_row_activated_cb" object="CcApplicationsPanel" swapped="yes" />
+                                <signal name="activated" handler="adw_dialog_present" object="handler_dialog"/>
                               </object>
                             </child>
                             <child>
@@ -382,7 +382,7 @@
                                 <property name="title" translatable="yes">S_torage</property>
                                 <property name="subtitle" translatable="yes">Disk space being used</property>
                                 <property name="show-arrow">True</property>
-                                <signal name="activated" handler="on_storage_row_activated_cb" object="CcApplicationsPanel" swapped="yes" />
+                                <signal name="activated" handler="adw_dialog_present" object="storage_dialog"/>
                               </object>
                             </child>
                           </object>

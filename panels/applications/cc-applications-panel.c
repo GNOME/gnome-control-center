@@ -1203,24 +1203,6 @@ update_handler_dialog (CcApplicationsPanel *self,
 /* --- usage section --- */
 
 static void
-on_builtin_row_activated_cb (CcApplicationsPanel *self)
-{
-  adw_dialog_present (self->builtin_dialog, GTK_WIDGET (self));
-}
-
-static void
-on_handler_row_activated_cb (CcApplicationsPanel *self)
-{
-  adw_dialog_present (self->handler_dialog, GTK_WIDGET (self));
-}
-
-static void
-on_storage_row_activated_cb (CcApplicationsPanel *self)
-{
-  adw_dialog_present (self->storage_dialog, GTK_WIDGET (self));
-}
-
-static void
 on_items_changed_cb (GListModel *list,
                   guint       position,
                   guint       removed,
@@ -1653,9 +1635,6 @@ cc_applications_panel_dispose (GObject *object)
   CcApplicationsPanel *self = CC_APPLICATIONS_PANEL (object);
 
   g_clear_pointer (&self->sandbox_info_button, gtk_widget_unparent);
-  g_clear_pointer (&self->builtin_dialog, adw_dialog_force_close);
-  g_clear_pointer (&self->handler_dialog, adw_dialog_force_close);
-  g_clear_pointer (&self->storage_dialog, adw_dialog_force_close);
 
   remove_all_handler_rows (self);
 #ifdef HAVE_SNAP
@@ -1823,14 +1802,10 @@ cc_applications_panel_class_init (CcApplicationsPanelClass *klass)
   gtk_widget_class_bind_template_callback (widget_class, clear_cache_cb);
   gtk_widget_class_bind_template_callback (widget_class, open_software_cb);
   gtk_widget_class_bind_template_callback (widget_class, handler_reset_cb);
-  gtk_widget_class_bind_template_callback (widget_class, on_builtin_row_activated_cb);
-  gtk_widget_class_bind_template_callback (widget_class, on_handler_row_activated_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_launch_button_clicked_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_app_search_entry_activated_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_app_search_entry_search_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_app_search_entry_search_stopped_cb);
-
-  gtk_widget_class_bind_template_callback (widget_class, on_storage_row_activated_cb);
 }
 
 static GtkWidget *
