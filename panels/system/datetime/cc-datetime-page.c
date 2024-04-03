@@ -206,6 +206,10 @@ clock_settings_changed_cb (CcDateTimePage *self,
   g_signal_handlers_unblock_by_func (self->ampm_format_button, change_clock_settings, self);
 }
 
+static void on_month_selection_changed_cb (CcDateTimePage *self);
+
+static void time_changed_cb (CcDateTimePage *self,
+                             CcTimeEditor   *editor);
 
 /* Update the widgets based on the system time */
 static void
@@ -219,9 +223,11 @@ update_time (CcDateTimePage *self)
   else
     use_ampm = FALSE;
 
+  g_signal_handlers_block_by_func (self->time_editor, time_changed_cb, self);
   cc_time_editor_set_time (self->time_editor,
                            g_date_time_get_hour (self->date),
                            g_date_time_get_minute (self->date));
+  g_signal_handlers_unblock_by_func (self->time_editor, time_changed_cb, self);
 
   /* Update the time on the listbow row */
   if (use_ampm)
@@ -236,7 +242,9 @@ update_time (CcDateTimePage *self)
     }
 
   self->month = g_date_time_get_month (self->date);
+  g_signal_handlers_block_by_func (self->month_model, on_month_selection_changed_cb, self);
   gtk_single_selection_set_selected (self->month_model, self->month - 1);
+  g_signal_handlers_unblock_by_func (self->month_model, on_month_selection_changed_cb, self);
   cc_list_row_set_secondary_label (self->datetime_row, label);
 }
 
@@ -362,9 +370,11 @@ change_date (CcDateTimePage *self)
                                       g_date_time_get_hour (old_date),
                                       g_date_time_get_minute (old_date),
                                       g_date_time_get_second (old_date));
+  g_signal_handlers_block_by_func (self->time_editor, time_changed_cb, self);
   cc_time_editor_set_time (self->time_editor,
                            g_date_time_get_hour (self->date),
                            g_date_time_get_minute (self->date));
+  g_signal_handlers_unblock_by_func (self->time_editor, time_changed_cb, self);
 
   queue_set_datetime (self);
 }
@@ -741,7 +751,9 @@ setup_datetime_dialog (CcDateTimePage *self)
 
   /* Month */
   self->month = g_date_time_get_month (self->date);
+  g_signal_handlers_block_by_func (self->month_model, on_month_selection_changed_cb, self);
   gtk_single_selection_set_selected (self->month_model, self->month - 1);
+  g_signal_handlers_unblock_by_func (self->month_model, on_month_selection_changed_cb, self);
 }
 
 static int
