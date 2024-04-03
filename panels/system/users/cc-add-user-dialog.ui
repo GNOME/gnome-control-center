@@ -49,8 +49,9 @@
                       </object>
                     </child>
                     <child type="end">
-                      <object class="GtkSpinner" id="spinner">
+                      <object class="GtkSpinner">
                         <property name="visible">True</property>
+                        <property name="spinning" bind-source="spinner"/>
                         <property name="can_focus">False</property>
                         <property name="valign">center</property>
                       </object>
@@ -174,9 +175,49 @@
                         </child>
                       </object>
                     </child>
-                    <child>
-                      <object class="AdwPreferencesGroup" id="password_group">
+                  </object>
+                </property>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="AdwNavigationPage" id="password_page">
+            <property name="tag">password-page</property>
+            <property name="title" translatable="yes">Set Password</property>
+            <child>
+              <object class="AdwToolbarView">
+                <child type="top">
+                  <object class="AdwHeaderBar">
+                    <property name="show-end-title-buttons">False</property>
+                    <property name="show-start-title-buttons">False</property>
+                    <child type="end">
+                      <object class="GtkButton" id="password_page_add_button">
                         <property name="sensitive">False</property>
+                        <property name="label" translatable="yes">_Add</property>
+                        <property name="receives_default">True</property>
+                        <property name="use_underline">True</property>
+                        <property name="valign">center</property>
+                        <signal name="clicked" handler="local_create_user" object="CcAddUserDialog" swapped="yes"/>
+                        <style>
+                          <class name="text-button"/>
+                          <class name="suggested-action"/>
+                        </style>
+                      </object>
+                    </child>
+                    <child type="end">
+                      <object class="GtkSpinner" id="spinner">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="valign">center</property>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+                <property name="content">
+                  <object class="AdwPreferencesPage">
+                    <child>
+                      <object class="AdwPreferencesGroup">
                         <child>
                           <object class="AdwActionRow" id="local_password_row">
                             <property name="activatable-widget">local_password_entry</property>
@@ -190,7 +231,7 @@
                                 <property name="valign">center</property>
                                 <property name="show-peek-icon">True</property>
                                 <signal name="notify::text" handler="local_password_entry_changed_cb" object="CcAddUserDialog" swapped="yes"/>
-                                <signal name="activate" handler="dialog_validate" object="CcAddUserDialog" swapped="yes"/>
+                                <signal name="activate" handler="password_page_validate" object="CcAddUserDialog" swapped="yes"/>
                                 <child>
                                   <object class="GtkEventControllerKey">
                                     <signal name="key-pressed" handler="local_password_entry_key_press_event_cb" object="CcAddUserDialog" swapped="yes"/>
@@ -234,7 +275,7 @@
                                 <property name="sensitive">False</property>
                                 <property name="show-peek-icon">True</property>
                                 <signal name="notify::text" handler="local_verify_entry_changed_cb" object="CcAddUserDialog" swapped="yes"/>
-                                <signal name="activate" handler="dialog_validate" object="CcAddUserDialog" swapped="yes"/>
+                                <signal name="activate" handler="password_page_validate" object="CcAddUserDialog" swapped="yes"/>
                                 <child>
                                   <object class="GtkEventControllerFocus">
                                     <signal name="leave" handler="password_focus_out_event_cb" object="CcAddUserDialog" swapped="yes"/>
@@ -289,6 +330,7 @@
     <widgets>
       <widget name="cancel_button"/>
       <widget name="add_button"/>
+      <widget name="password_page_add_button"/>
     </widgets>
   </object>
 </interface>
