@@ -44,20 +44,19 @@ struct _CcAddUserDialog {
         GtkSwitch          *local_account_type_switch;
         GtkImage           *local_name_status_icon;
         AdwPreferencesPage *local_page;
-        AdwActionRow       *local_password_row;
+        AdwPasswordEntryRow *local_password_row;
         GtkImage           *local_password_status_icon;
         GtkLevelBar        *local_strength_indicator;
         GtkComboBoxText    *local_username_combo;
         GtkListStore       *local_username_model;
-        GtkPasswordEntry   *local_password_entry;
         GtkLabel           *local_password_hint;
         GtkCheckButton     *local_password_radio;
         GtkEntry           *local_username_entry;
         AdwEntryRow        *local_name_row;
         AdwActionRow       *local_username_row;
         GtkImage           *local_username_status_icon;
-        GtkPasswordEntry   *local_verify_entry;
-        AdwActionRow       *local_verify_password_row;
+        GtkLabel           *local_verify_password_hint;
+        AdwPasswordEntryRow *local_verify_password_row;
         GtkImage           *local_verify_status_icon;
         AdwNavigationView  *navigation;
         AdwPreferencesPage *password_page;
@@ -134,7 +133,7 @@ user_loaded_cb (CcAddUserDialog *self,
   finish_action (self);
 
   /* Set a password for the user */
-  password = gtk_editable_get_text (GTK_EDITABLE (self->local_password_entry));
+  password = gtk_editable_get_text (GTK_EDITABLE (self->local_password_row));
   act_user_set_password_mode (user, self->local_password_mode);
   if (self->local_password_mode == ACT_USER_PASSWORD_MODE_REGULAR)
         act_user_set_password (user, password, "");
@@ -207,7 +206,7 @@ update_password_strength (CcAddUserDialog *self)
         const gchar *verify;
         gint strength_level;
 
-        password = gtk_editable_get_text (GTK_EDITABLE (self->local_password_entry));
+        password = gtk_editable_get_text (GTK_EDITABLE (self->local_password_row));
         username = gtk_combo_box_text_get_active_text (self->local_username_combo);
 
         pw_strength (password, NULL, username, &hint, &strength_level);
@@ -224,9 +223,9 @@ update_password_strength (CcAddUserDialog *self)
                 gtk_image_set_from_icon_name (self->local_password_status_icon, "dialog-warning-symbolic");
         }
 
-        verify = gtk_editable_get_text (GTK_EDITABLE (self->local_verify_entry));
+        verify = gtk_editable_get_text (GTK_EDITABLE (self->local_verify_password_row));
         if (strlen (verify) == 0) {
-                gtk_widget_set_sensitive (GTK_WIDGET (self->local_verify_entry), strength_level > 1);
+                gtk_widget_set_sensitive (GTK_WIDGET (self->local_verify_password_row), strength_level > 1);
         }
 
         return strength_level;
@@ -260,8 +259,8 @@ validate_password (CcAddUserDialog *self)
         const gchar *verify;
         gint strength;
 
-        password = gtk_editable_get_text (GTK_EDITABLE (self->local_password_entry));
-        verify = gtk_editable_get_text (GTK_EDITABLE (self->local_verify_entry));
+        password = gtk_editable_get_text (GTK_EDITABLE (self->local_password_row));
+        verify = gtk_editable_get_text (GTK_EDITABLE (self->local_verify_password_row));
         strength = update_password_strength (self);
 
         return strength > 1 && strcmp (password, verify) == 0;
@@ -612,8 +611,8 @@ update_password_match (CcAddUserDialog *self)
         const gchar *verify;
         const gchar *message = "";
 
-        password = gtk_editable_get_text (GTK_EDITABLE (self->local_password_entry));
-        verify = gtk_editable_get_text (GTK_EDITABLE (self->local_verify_entry));
+        password = gtk_editable_get_text (GTK_EDITABLE (self->local_password_row));
+        verify = gtk_editable_get_text (GTK_EDITABLE (self->local_verify_password_row));
         if (strlen (verify) != 0) {
                 if (strcmp (password, verify) != 0) {
                         message = _("The passwords do not match.");
@@ -622,7 +621,7 @@ update_password_match (CcAddUserDialog *self)
                         gtk_widget_set_visible (GTK_WIDGET (self->local_verify_status_icon), TRUE);
                 }
         }
-        adw_action_row_set_subtitle (ADW_ACTION_ROW (self->local_verify_password_row), message);
+        gtk_label_set_label (self->local_verify_password_hint, message);
 }
 
 static void
@@ -634,9 +633,9 @@ generate_password (CcAddUserDialog *self)
         if (pwd == NULL)
                 return;
 
-        gtk_editable_set_text (GTK_EDITABLE (self->local_password_entry), pwd);
-        gtk_editable_set_text (GTK_EDITABLE (self->local_verify_entry), pwd);
-        gtk_widget_set_sensitive (GTK_WIDGET (self->local_verify_entry), TRUE);
+        gtk_editable_set_text (GTK_EDITABLE (self->local_password_row), pwd);
+        gtk_editable_set_text (GTK_EDITABLE (self->local_verify_password_row), pwd);
+        gtk_widget_set_sensitive (GTK_WIDGET (self->local_verify_password_row), TRUE);
 }
 
 static gboolean
@@ -834,15 +833,14 @@ cc_add_user_dialog_class_init (CcAddUserDialogClass *klass)
         gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, local_name_status_icon);
         gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, local_username_combo);
         gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, local_username_model);
-        gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, local_password_entry);
         gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, local_password_radio);
         gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, local_username_entry);
         gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, local_name_row);
         gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, local_username_row);
         gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, local_username_status_icon);
         gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, local_strength_indicator);
-        gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, local_verify_entry);
         gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, local_verify_password_row);
+        gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, local_verify_password_hint);
         gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, local_verify_status_icon);
         gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, navigation);
         gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, password_page);

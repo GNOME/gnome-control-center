@@ -219,29 +219,19 @@
                     <child>
                       <object class="AdwPreferencesGroup">
                         <child>
-                          <object class="AdwActionRow" id="local_password_row">
-                            <property name="activatable-widget">local_password_entry</property>
+                          <object class="AdwPasswordEntryRow" id="local_password_row">
                             <property name="title" translatable="yes">Pass_word</property>
                             <property name="use-underline">True</property>
-                            <property name="subtitle-lines">2</property>
+                            <signal name="notify::text" handler="local_password_entry_changed_cb" object="CcAddUserDialog" swapped="yes"/>
+                            <signal name="entry-activated" handler="password_page_validate" object="CcAddUserDialog" swapped="yes"/>
                             <child>
-                              <object class="GtkPasswordEntry" id="local_password_entry">
-                                <property name="hexpand">True</property>
-                                <property name="has_tooltip">True</property>
-                                <property name="valign">center</property>
-                                <property name="show-peek-icon">True</property>
-                                <signal name="notify::text" handler="local_password_entry_changed_cb" object="CcAddUserDialog" swapped="yes"/>
-                                <signal name="activate" handler="password_page_validate" object="CcAddUserDialog" swapped="yes"/>
-                                <child>
-                                  <object class="GtkEventControllerKey">
-                                    <signal name="key-pressed" handler="local_password_entry_key_press_event_cb" object="CcAddUserDialog" swapped="yes"/>
-                                  </object>
-                                </child>
-                                <child>
-                                  <object class="GtkEventControllerFocus">
-                                    <signal name="leave" handler="password_focus_out_event_cb" object="CcAddUserDialog" swapped="yes"/>
-                                  </object>
-                                </child>
+                              <object class="GtkEventControllerKey">
+                                <signal name="key-pressed" handler="local_password_entry_key_press_event_cb" object="CcAddUserDialog" swapped="yes"/>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkEventControllerFocus">
+                                <signal name="leave" handler="password_focus_out_event_cb" object="CcAddUserDialog" swapped="yes"/>
                               </object>
                             </child>
                             <child type="suffix">
@@ -264,34 +254,6 @@
                           </object>
                         </child>
                         <child>
-                          <object class="AdwActionRow" id="local_verify_password_row">
-                            <property name="activatable-widget">local_verify_entry</property>
-                            <property name="title" translatable="yes">_Confirm</property>
-                            <property name="use-underline">True</property>
-                            <child>
-                              <object class="GtkPasswordEntry" id="local_verify_entry">
-                                <property name="hexpand">True</property>
-                                <property name="valign">center</property>
-                                <property name="sensitive">False</property>
-                                <property name="show-peek-icon">True</property>
-                                <signal name="notify::text" handler="local_verify_entry_changed_cb" object="CcAddUserDialog" swapped="yes"/>
-                                <signal name="activate" handler="password_page_validate" object="CcAddUserDialog" swapped="yes"/>
-                                <child>
-                                  <object class="GtkEventControllerFocus">
-                                    <signal name="leave" handler="password_focus_out_event_cb" object="CcAddUserDialog" swapped="yes"/>
-                                  </object>
-                                </child>
-                              </object>
-                            </child>
-                            <child type="suffix">
-                              <object class="GtkImage" id="local_verify_status_icon">
-                                <property name="visible">False</property>
-                                <property name="icon-name">dialog-warning-symbolic</property>
-                              </object>
-                            </child>
-                          </object>
-                        </child>
-                        <child>
                           <object class="GtkLevelBar" id="local_strength_indicator">
                             <property name="mode">continuous</property>
                             <property name="max-value">5</property>
@@ -307,7 +269,38 @@
                         </child>
                         <child>
                           <object class="GtkLabel" id="local_password_hint">
-                            <property name="halign">start</property>
+                            <property name="wrap">True</property>
+                            <property name="margin-top">12</property>
+                            <style>
+                              <class name="dim-label"/>
+                            </style>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="AdwPreferencesGroup">
+                        <child>
+                          <object class="AdwPasswordEntryRow" id="local_verify_password_row">
+                            <property name="title" translatable="yes">_Confirm Password</property>
+                            <property name="use-underline">True</property>
+                            <signal name="notify::text" handler="local_verify_entry_changed_cb" object="CcAddUserDialog" swapped="yes"/>
+                            <signal name="entry-activated" handler="password_page_validate" object="CcAddUserDialog" swapped="yes"/>
+                            <child>
+                              <object class="GtkEventControllerFocus">
+                                <signal name="leave" handler="password_focus_out_event_cb" object="CcAddUserDialog" swapped="yes"/>
+                              </object>
+                            </child>
+                            <child type="suffix">
+                              <object class="GtkImage" id="local_verify_status_icon">
+                                <property name="visible">False</property>
+                                <property name="icon-name">dialog-warning-symbolic</property>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkLabel" id="local_verify_password_hint">
                             <property name="wrap">True</property>
                             <property name="margin-top">12</property>
                             <style>
