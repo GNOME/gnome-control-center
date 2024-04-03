@@ -96,7 +96,7 @@ connect_ethernet_page (CEPageEthernet *self)
 
         /* Cloned MAC address */
         cloned_mac = nm_setting_wired_get_cloned_mac_address (setting);
-        ce_page_setup_cloned_mac_combo (self->cloned_mac_combo, cloned_mac);
+        ce_page_setup_cloned_mac_combo (self->cloned_mac_combo, cloned_mac, FALSE);
         g_signal_connect_object (self->cloned_mac_combo, "changed", G_CALLBACK (ce_page_changed), self, G_CONNECT_SWAPPED);
 
         /* MTU */

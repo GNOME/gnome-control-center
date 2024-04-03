@@ -59,7 +59,8 @@ void         ce_page_setup_mac_combo (GtkComboBoxText  *combo,
                                       const gchar      *current_mac,
                                       gchar           **mac_list);
 void         ce_page_setup_cloned_mac_combo (GtkComboBoxText *combo,
-                                             const char      *current);
+                                             const char      *current,
+                                             gboolean         is_wifi);
 gint         ce_get_property_default (NMSetting        *setting,
                                       const gchar      *property_name);
 gboolean     ce_page_address_is_valid (const gchar *addr);
