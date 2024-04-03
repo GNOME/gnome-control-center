@@ -63,7 +63,7 @@ struct _CcColorPanel
   GtkTreeModel  *liststore_calib_kind;
   GtkTreeModel  *liststore_calib_sensor;
   AdwViewStack  *stack;
-  AdwPreferencesPage *colors_page;
+  AdwPreferencesPage *color_page;
   GtkWidget     *toolbar_devices;
   GtkWidget     *toolbutton_device_calibrate;
   GtkWidget     *toolbutton_device_default;
@@ -1895,7 +1895,7 @@ cc_color_panel_class_init (CcColorPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcColorPanel, liststore_calib_kind);
   gtk_widget_class_bind_template_child (widget_class, CcColorPanel, liststore_calib_sensor);
   gtk_widget_class_bind_template_child (widget_class, CcColorPanel, stack);
-  gtk_widget_class_bind_template_child (widget_class, CcColorPanel, colors_page);
+  gtk_widget_class_bind_template_child (widget_class, CcColorPanel, color_page);
   gtk_widget_class_bind_template_child (widget_class, CcColorPanel, toolbar_devices);
   gtk_widget_class_bind_template_child (widget_class, CcColorPanel, toolbutton_device_calibrate);
   gtk_widget_class_bind_template_child (widget_class, CcColorPanel, toolbutton_device_default);
@@ -1992,7 +1992,7 @@ cc_color_panel_init (CcColorPanel *self)
   learn_more_link = g_strdup_printf ("<a href='help:gnome-help/color-whyimportant'>%s</a>", _("Learn more"));
   /* Translators: %s is a link to the documentation with the label "Learn more" */
   panel_description = g_strdup_printf (_("Each device needs an up to date color profile to be color managed. %s"), learn_more_link);
-  adw_preferences_page_set_description (self->colors_page, panel_description);
+  adw_preferences_page_set_description (self->color_page, panel_description);
 
   /* assign buttons */
   g_signal_connect_object (self->toolbutton_profile_add, "clicked",
