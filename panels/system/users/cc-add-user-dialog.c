@@ -59,6 +59,7 @@ struct _CcAddUserDialog {
         GtkPasswordEntry   *local_verify_entry;
         AdwActionRow       *local_verify_password_row;
         GtkImage           *local_verify_status_icon;
+        AdwNavigationView  *navigation;
         AdwPreferencesGroup *password_group;
         GtkSpinner         *spinner;
 
@@ -826,6 +827,7 @@ cc_add_user_dialog_class_init (CcAddUserDialogClass *klass)
         gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, local_verify_entry);
         gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, local_verify_password_row);
         gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, local_verify_status_icon);
+        gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, navigation);
         gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, password_group);
         gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, spinner);
 
