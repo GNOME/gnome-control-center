@@ -228,14 +228,24 @@ ce_page_trim_address (const gchar *addr)
 }
 
 void
-ce_page_setup_cloned_mac_combo (GtkComboBoxText *combo, const char *current)
+ce_page_setup_cloned_mac_combo (GtkComboBoxText *combo, const char *current, gboolean is_wifi)
 {
        GtkWidget *entry;
-       static const char *entries[][2] = { { "preserve",  N_("Preserve") },
-                                           { "permanent", N_("Permanent") },
-                                           { "random",    N_("Random") },
-                                           { "stable",    N_("Stable") } };
+       static const char *entries_wired[][2] = { { "preserve",  N_("Preserve") },
+                                                 { "permanent", N_("Permanent") },
+                                                 { "random",    N_("Random") },
+                                                 { "stable",    N_("Stable") } };
+       static const char *entries_wifi[][2] = { { "preserve",    N_("Preserve") },
+                                                { "permanent",   N_("Permanent") },
+                                                { "random",      N_("Random") },
+                                                { "stable",      N_("Stable") },
+#if NM_CHECK_VERSION(1, 46, 0)
+                                                { "stable-ssid", N_("Stable per SSID") }
+#endif
+                                              };
        int i, active = -1;
+       const char *(*entries)[2] = is_wifi ? entries_wifi : entries_wired;
+       gsize n_entries = is_wifi ? G_N_ELEMENTS (entries_wifi) : G_N_ELEMENTS (entries_wired);
 
        gtk_widget_set_tooltip_text (GTK_WIDGET (combo),
                _("The MAC address entered here will be used as hardware address for "
@@ -244,7 +254,7 @@ ce_page_setup_cloned_mac_combo (GtkComboBoxText *combo, const char *current)
 
        gtk_combo_box_text_remove_all (combo);
 
-       for (i = 0; i < G_N_ELEMENTS (entries); i++) {
+       for (i = 0; i < n_entries; i++) {
                gtk_combo_box_text_append (combo, entries[i][0], _(entries[i][1]));
                if (g_strcmp0 (current, entries[i][0]) == 0)
                        active = i;
