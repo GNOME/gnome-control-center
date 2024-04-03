@@ -402,35 +402,20 @@
     </action-widgets>
   </object>
   <template class="CcColorPanel" parent="CcPanel">
-    <property name="child">
-      <object class="AdwToolbarView">
-        <child type="top">
-          <object class="AdwHeaderBar"/>
-        </child>
-
-        <property name="content">
-          <object class="GtkScrolledWindow" id="dialog_scroll">
-            <child>
-              <object class="AdwClamp">
-                <property name="margin_top">32</property>
-                <property name="margin_bottom">32</property>
-                <property name="margin_start">12</property>
-                <property name="margin_end">12</property>
-                <child>
-                  <object class="GtkBox">
-                    <property name="orientation">vertical</property>
-                    <property name="spacing">12</property>
-                    <property name="hexpand">True</property>
+    <child>
+      <object class="AdwViewStack" id="stack">
+        <child>
+          <object class="AdwViewStackPage">
+            <property name="name">color-page</property>
+            <property name="child">
+              <object class="AdwToolbarView">
+                <child type="top">
+                  <object class="AdwHeaderBar"/>
+                </child>
+                <property name="content">
+                  <object class="AdwPreferencesPage" id="colors_page">
                     <child>
-                      <object class="GtkBox" id="hbox3">
-                        <child>
-                          <object class="AdwPreferencesGroup" id="pref_group_devices"/>
-                        </child>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkBox" id="box_devices">
-                        <property name="orientation">vertical</property>
+                      <object class="AdwPreferencesGroup">
                         <child>
                           <object class="GtkListBox" id="list_box">
                             <property name="activate-on-single-click">False</property>
@@ -514,25 +499,33 @@
                         </child>
                       </object>
                     </child>
-                    <child>
-                      <object class="GtkLabel" id="label_no_devices">
-                        <property name="label" translatable="yes">Unable to detect any devices that can be color managed</property>
-                        <style>
-                          <class name="dim-label"/>
-                        </style>
-                        <attributes>
-                          <attribute name="weight" value="bold"/>
-                        </attributes>
-                      </object>
-                    </child>
                   </object>
-                </child>
+                </property>
               </object>
-            </child>
+            </property>
           </object>
-        </property>
+        </child>
+        <child>
+          <object class="AdwViewStackPage">
+            <property name="name">no-devices-page</property>
+            <property name="child">
+              <object class="AdwToolbarView">
+                <child type="top">
+                  <object class="AdwHeaderBar"/>
+                </child>
+                <property name="content">
+                  <object class="AdwStatusPage">
+                    <property name="icon-name">preferences-system-devices-symbolic</property>
+                    <property name="title" translatable="yes">No Devices</property>
+                    <property name="description" translatable="yes">Unable to detect any devices that can be color managed</property>
+                  </object>
+                </property>
+              </object>
+            </property>
+          </object>
+        </child>
       </object>
-    </property>
+    </child>
   </template>
   <object class="GtkListStore" id="liststore_assign">
     <columns>
