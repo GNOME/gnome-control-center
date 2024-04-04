@@ -1,5 +1,6 @@
 install_data(
   'scalable/org.gnome.Settings-about-symbolic.svg',
+  'scalable/org.gnome.Settings-desktop-sharing-symbolic.svg',
   'scalable/org.gnome.Settings-region-symbolic.svg',
   'scalable/org.gnome.Settings-remote-desktop-symbolic.svg',
   'scalable/org.gnome.Settings-secure-shell-symbolic.svg',
