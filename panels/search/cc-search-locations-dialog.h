@@ -23,7 +23,7 @@
 #include <adwaita.h>
 
 #define CC_SEARCH_LOCATIONS_DIALOG_TYPE (cc_search_locations_dialog_get_type ())
-G_DECLARE_FINAL_TYPE (CcSearchLocationsDialog, cc_search_locations_dialog, CC, SEARCH_LOCATIONS_DIALOG, AdwDialog)
+G_DECLARE_FINAL_TYPE (CcSearchLocationsDialog, cc_search_locations_dialog, CC, SEARCH_LOCATIONS_DIALOG, AdwNavigationPage)
 
 CcSearchLocationsDialog *cc_search_locations_dialog_new (void);
 

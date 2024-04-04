@@ -43,7 +43,7 @@ typedef struct {
 } Place;
 
 struct _CcSearchLocationsDialog {
-  AdwDialog            parent;
+  AdwNavigationPage    parent;
 
   GSettings           *tracker_preferences;
 
@@ -55,11 +55,7 @@ struct _CcSearchLocationsDialog {
   GtkWidget           *locations_add;
 };
 
-struct _CcSearchLocationsDialogClass {
-  AdwPreferencesWindowClass parent_class;
-};
-
-G_DEFINE_TYPE (CcSearchLocationsDialog, cc_search_locations_dialog, ADW_TYPE_DIALOG)
+G_DEFINE_TYPE (CcSearchLocationsDialog, cc_search_locations_dialog, ADW_TYPE_NAVIGATION_PAGE)
 
 static const gchar *path_from_tracker_dir (const gchar *value);
 
