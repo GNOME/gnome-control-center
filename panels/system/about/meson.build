@@ -35,5 +35,3 @@ install_data(
   [ 'gnome-logo-text.svg', 'gnome-logo-text-dark.svg' ],
   install_dir: join_paths(control_center_datadir, 'icons')
 )
-
-subdir('icons')

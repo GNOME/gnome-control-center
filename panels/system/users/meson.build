@@ -118,5 +118,3 @@ cflags += [
   '-DHAVE_LIBPWQUALITY',
   '-DUM_PIXMAP_DIR="@0@"'.format(join_paths(control_center_pkgdatadir, 'pixmaps'))
 ]
-
-subdir('icons')

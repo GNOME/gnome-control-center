@@ -8,11 +8,6 @@ i18n.merge_file(
   install_dir: control_center_desktopdir
 )
 
-install_data(
-  'org.gnome.Settings-time-symbolic.svg',
-  install_dir: join_paths(control_center_icondir, 'hicolor', 'scalable', 'apps')
-)
-
 polkit = 'org.gnome.controlcenter.@0@.policy'.format(cappletname)
 
 i18n.merge_file(
