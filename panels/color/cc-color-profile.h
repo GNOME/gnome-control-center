@@ -21,13 +21,13 @@
 
 #pragma once
 
-#include <gtk/gtk.h>
+#include <adwaita.h>
 #include <colord.h>
 
 G_BEGIN_DECLS
 
 #define CC_TYPE_COLOR_PROFILE (cc_color_profile_get_type ())
-G_DECLARE_FINAL_TYPE (CcColorProfile, cc_color_profile, CC, COLOR_PROFILE, GtkListBoxRow)
+G_DECLARE_FINAL_TYPE (CcColorProfile, cc_color_profile, CC, COLOR_PROFILE, AdwActionRow)
 
 GtkWidget   *cc_color_profile_new              (CdDevice        *device,
                                                 CdProfile       *profile,

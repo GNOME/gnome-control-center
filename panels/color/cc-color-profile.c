@@ -22,7 +22,7 @@
 #include "config.h"
 
 #include <glib/gi18n.h>
-#include <gtk/gtk.h>
+#include <adwaita.h>
 
 #include "cc-color-common.h"
 #include "cc-color-profile.h"
@@ -30,14 +30,12 @@
 
 struct _CcColorProfile
 {
-  GtkListBoxRow parent_instance;
+  AdwActionRow parent_instance;
 
-  GtkWidget   *box;
   CdDevice    *device;
   CdProfile   *profile;
   gboolean     is_default;
   gchar       *sortable;
-  GtkWidget   *widget_description;
   GtkWidget   *widget_image;
   GtkWidget   *widget_info;
   GSettings   *settings;
@@ -49,7 +47,7 @@ struct _CcColorProfile
 
 #define IMAGE_WIDGET_PADDING 12
 
-G_DEFINE_TYPE (CcColorProfile, cc_color_profile, GTK_TYPE_LIST_BOX_ROW)
+G_DEFINE_TYPE (CcColorProfile, cc_color_profile, ADW_TYPE_ACTION_ROW)
 
 enum
 {
@@ -231,13 +229,17 @@ cc_color_profile_refresh (CcColorProfile *color_profile)
   g_autofree gchar *title = NULL;
 
   /* show the image if the profile is default */
-  gtk_widget_set_visible (color_profile->widget_image, color_profile->is_default);
-  gtk_widget_set_margin_start (color_profile->widget_description,
-                              color_profile->is_default ? 0 : IMAGE_WIDGET_PADDING * 4);
+
+ if (color_profile->is_default) {
+   gtk_image_set_from_icon_name (GTK_IMAGE (color_profile->widget_image), "object-select-symbolic");
+ }
+  else {
+    gtk_image_set_from_icon_name (GTK_IMAGE (color_profile->widget_image), NULL);
+  }
 
   /* set the title */
   title = gcm_prefs_get_profile_title (color_profile->profile);
-  gtk_label_set_markup (GTK_LABEL (color_profile->widget_description), title);
+  adw_preferences_row_set_title (ADW_PREFERENCES_ROW (color_profile), title);
 
   /* show any information */
   warnings = cc_color_profile_get_warnings (color_profile);
@@ -429,39 +431,17 @@ cc_color_profile_class_init (CcColorProfileClass *klass)
 static void
 cc_color_profile_init (CcColorProfile *color_profile)
 {
-  GtkWidget *box;
-
   color_profile->settings = g_settings_new (GCM_SETTINGS_SCHEMA);
 
-  box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 9);
-
   /* default tick */
-  color_profile->widget_image = gtk_image_new_from_icon_name ("object-select-symbolic");
-  gtk_widget_set_margin_start (color_profile->widget_image, IMAGE_WIDGET_PADDING);
-  gtk_widget_set_margin_end (color_profile->widget_image, IMAGE_WIDGET_PADDING);
-  gtk_box_append (GTK_BOX (box), color_profile->widget_image);
-
-  /* description */
-  color_profile->widget_description = gtk_label_new ("");
-  gtk_widget_set_margin_top (color_profile->widget_description, 9);
-  gtk_widget_set_margin_bottom (color_profile->widget_description, 9);
-  gtk_widget_set_halign (color_profile->widget_description, GTK_ALIGN_START);
-  gtk_label_set_ellipsize (GTK_LABEL (color_profile->widget_description), PANGO_ELLIPSIZE_END);
-  gtk_label_set_xalign (GTK_LABEL (color_profile->widget_description), 0);
-  gtk_widget_set_hexpand (color_profile->widget_description, TRUE);
-  gtk_widget_set_vexpand (color_profile->widget_description, TRUE);
-  gtk_box_append (GTK_BOX (box), color_profile->widget_description);
+  color_profile->widget_image = gtk_image_new ();
+  adw_action_row_add_prefix (ADW_ACTION_ROW (color_profile), color_profile->widget_image);
 
   /* profile warnings/info */
   color_profile->widget_info = g_object_new (CC_TYPE_LIST_ROW_INFO_BUTTON,
                                              "valign", GTK_ALIGN_CENTER,
-                                             "margin-start", 6,
-                                             "margin-end", 6,
                                              NULL);
-  gtk_box_append (GTK_BOX (box), color_profile->widget_info);
-
-  /* refresh */
-  gtk_list_box_row_set_child (GTK_LIST_BOX_ROW (color_profile), box);
+  adw_action_row_add_suffix (ADW_ACTION_ROW (color_profile), color_profile->widget_info);
 }
 
 GtkWidget *
@@ -475,4 +455,3 @@ cc_color_profile_new (CdDevice *device,
                        "is-default", is_default,
                        NULL);
 }
-
