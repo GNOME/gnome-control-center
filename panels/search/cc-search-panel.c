@@ -21,7 +21,7 @@
 #include "cc-list-row.h"
 #include "cc-search-panel.h"
 #include "cc-search-panel-row.h"
-#include "cc-search-locations-dialog.h"
+#include "cc-search-locations-page.h"
 #include "cc-search-resources.h"
 
 #include <gio/gdesktopappinfo.h>
@@ -40,13 +40,13 @@ struct _CcSearchPanel
   GSettings        *search_settings;
   GHashTable       *sort_order;
 
-  CcSearchLocationsDialog  *locations_dialog;
+  CcSearchLocationsPage *locations_page;
 };
 
 CC_PANEL_REGISTER (CcSearchPanel, cc_search_panel)
 
 #define SHELL_PROVIDER_GROUP "Shell Search Provider"
-#define SEARCH_LOCATIONS_DIALOG_PARAM "locations"
+#define SEARCH_LOCATIONS_PAGE_PARAM "locations"
 
 static gboolean
 keynav_failed_cb (CcSearchPanel *self, GtkDirectionType direction, GtkWidget *list)
@@ -603,6 +603,7 @@ populate_search_providers (CcSearchPanel *self)
   g_task_run_in_thread (task, search_providers_discover_thread);
 }
 
+
 static void
 cc_search_panel_finalize (GObject *object)
 {
@@ -625,10 +626,10 @@ cc_search_panel_init (CcSearchPanel *self)
   gtk_list_box_set_sort_func (GTK_LIST_BOX (self->list_box),
                               (GtkListBoxSortFunc)list_sort_func, self, NULL);
 
-  search_locations_available = cc_search_locations_dialog_is_available ();
+  search_locations_available = cc_search_locations_page_is_available ();
   gtk_widget_set_sensitive (self->settings_row, search_locations_available);
   if (search_locations_available)
-    cc_panel_add_static_subpage (CC_PANEL (self), SEARCH_LOCATIONS_DIALOG_PARAM, CC_SEARCH_LOCATIONS_DIALOG_TYPE);
+    cc_panel_add_static_subpage (CC_PANEL (self), SEARCH_LOCATIONS_PAGE_PARAM, CC_TYPE_SEARCH_LOCATIONS_PAGE);
 
   self->search_settings = g_settings_new ("org.gnome.desktop.search-providers");
   g_settings_bind (self->search_settings,

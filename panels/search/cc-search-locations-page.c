@@ -18,7 +18,7 @@
  * Author: Cosimo Cecchi <cosimoc@gnome.org>
  */
 
-#include "cc-search-locations-dialog.h"
+#include "cc-search-locations-page.h"
 
 #include <glib/gi18n.h>
 
@@ -34,7 +34,7 @@ typedef enum {
 } PlaceType;
 
 typedef struct {
-  CcSearchLocationsDialog *dialog;
+  CcSearchLocationsPage *page;
   GFile *location;
   gchar *display_name;
   PlaceType place_type;
@@ -42,7 +42,7 @@ typedef struct {
   const gchar *settings_key;
 } Place;
 
-struct _CcSearchLocationsDialog {
+struct _CcSearchLocationsPage {
   AdwNavigationPage    parent;
 
   GSettings           *tracker_preferences;
@@ -55,12 +55,12 @@ struct _CcSearchLocationsDialog {
   GtkWidget           *locations_add;
 };
 
-G_DEFINE_TYPE (CcSearchLocationsDialog, cc_search_locations_dialog, ADW_TYPE_NAVIGATION_PAGE)
+G_DEFINE_TYPE (CcSearchLocationsPage, cc_search_locations_page, ADW_TYPE_NAVIGATION_PAGE)
 
 static const gchar *path_from_tracker_dir (const gchar *value);
 
 static gboolean
-keynav_failed_cb (CcSearchLocationsDialog *self,
+keynav_failed_cb (CcSearchLocationsPage *self,
                   GtkDirectionType         direction)
 {
   GtkWidget *toplevel = GTK_WIDGET (gtk_widget_get_root (GTK_WIDGET (self)));
@@ -76,17 +76,17 @@ keynav_failed_cb (CcSearchLocationsDialog *self,
 }
 
 static void
-cc_search_locations_dialog_finalize (GObject *object)
+cc_search_locations_page_finalize (GObject *object)
 {
-  CcSearchLocationsDialog *self = CC_SEARCH_LOCATIONS_DIALOG (object);
+  CcSearchLocationsPage *self = CC_SEARCH_LOCATIONS_PAGE (object);
 
   g_clear_object (&self->tracker_preferences);
 
-  G_OBJECT_CLASS (cc_search_locations_dialog_parent_class)->finalize (object);
+  G_OBJECT_CLASS (cc_search_locations_page_parent_class)->finalize (object);
 }
 
 static void
-cc_search_locations_dialog_init (CcSearchLocationsDialog *self)
+cc_search_locations_page_init (CcSearchLocationsPage *self)
 {
   gtk_widget_init_template (GTK_WIDGET (self));
 }
@@ -116,7 +116,7 @@ location_in_path_strv (GFile       *location,
 }
 
 static Place *
-place_new (CcSearchLocationsDialog *dialog,
+place_new (CcSearchLocationsPage *page,
            GFile *location,
            gchar *display_name,
            PlaceType place_type)
@@ -126,12 +126,12 @@ place_new (CcSearchLocationsDialog *dialog,
   g_autofree const char **single_dir_default = NULL;
   g_auto(GStrv) single_dir = NULL;
 
-  single_dir_default_var = g_settings_get_default_value (dialog->tracker_preferences,
+  single_dir_default_var = g_settings_get_default_value (page->tracker_preferences,
                                                          TRACKER_KEY_SINGLE_DIRECTORIES);
   single_dir_default = g_variant_get_strv (single_dir_default_var, NULL);
-  single_dir = g_settings_get_strv (dialog->tracker_preferences, TRACKER_KEY_SINGLE_DIRECTORIES);
+  single_dir = g_settings_get_strv (page->tracker_preferences, TRACKER_KEY_SINGLE_DIRECTORIES);
 
-  new_place->dialog = dialog;
+  new_place->page = page;
   new_place->location = location;
   if (display_name != NULL)
     new_place->display_name = display_name;
@@ -163,7 +163,7 @@ place_free (Place * p)
 G_DEFINE_AUTOPTR_CLEANUP_FUNC (Place, place_free)
 
 static GList *
-get_bookmarks (CcSearchLocationsDialog *self)
+get_bookmarks (CcSearchLocationsPage *self)
 {
   g_autoptr(GFile) file = NULL;
   g_autofree gchar *contents = NULL;
@@ -223,7 +223,7 @@ get_user_special_dir_if_not_home (GUserDirectory idx)
 }
 
 static GList *
-get_xdg_dirs (CcSearchLocationsDialog *self)
+get_xdg_dirs (CcSearchLocationsPage *self)
 {
   GList *xdg_dirs = NULL;
   gint idx;
@@ -311,7 +311,7 @@ path_from_tracker_dir (const gchar *value)
 }
 
 static GPtrArray *
-place_get_new_settings_values (CcSearchLocationsDialog *self,
+place_get_new_settings_values (CcSearchLocationsPage *self,
                                Place *place,
                                gboolean remove)
 {
@@ -352,7 +352,7 @@ place_get_new_settings_values (CcSearchLocationsDialog *self,
 
 
 static GList *
-get_tracker_locations (CcSearchLocationsDialog *self)
+get_tracker_locations (CcSearchLocationsPage *self)
 {
   g_auto(GStrv) locations_single = NULL;
   g_auto(GStrv) locations = NULL;
@@ -390,7 +390,7 @@ get_tracker_locations (CcSearchLocationsDialog *self)
 }
 
 static GList *
-get_places_list (CcSearchLocationsDialog *self)
+get_places_list (CcSearchLocationsPage *self)
 {
   g_autoptr(GList) xdg_list = NULL;
   g_autoptr(GList) tracker_list = NULL;
@@ -483,7 +483,7 @@ switch_tracker_set_mapping (const GValue *value,
   gboolean remove;
 
   remove = !g_value_get_boolean (value);
-  new_values = place_get_new_settings_values (place->dialog, place, remove);
+  new_values = place_get_new_settings_values (place->page, place, remove);
   return g_variant_new_strv ((const gchar **) new_values->pdata, -1);
 }
 
@@ -507,7 +507,7 @@ place_query_info_ready (GObject *source,
 }
 
 static void
-remove_button_clicked (CcSearchLocationsDialog *self,
+remove_button_clicked (CcSearchLocationsPage *self,
                        GtkWidget *button)
 {
   g_autoptr(GPtrArray) new_values = NULL;
@@ -546,7 +546,7 @@ place_compare_func (gconstpointer a,
 }
 
 static GtkWidget *
-create_row_for_place (CcSearchLocationsDialog *self, Place *place)
+create_row_for_place (CcSearchLocationsPage *self, Place *place)
 {
   AdwActionRow *row;
   GtkWidget *index_switch, *remove_button;
@@ -582,7 +582,7 @@ create_row_for_place (CcSearchLocationsDialog *self, Place *place)
       adw_action_row_add_suffix (row, index_switch);
       adw_action_row_set_activatable_widget (row, index_switch);
 
-      g_settings_bind_with_mapping (place->dialog->tracker_preferences, place->settings_key,
+      g_settings_bind_with_mapping (place->page->tracker_preferences, place->settings_key,
                                     index_switch, "active",
                                     G_SETTINGS_BIND_DEFAULT,
                                     switch_tracker_get_mapping,
@@ -599,7 +599,7 @@ create_row_for_place (CcSearchLocationsDialog *self, Place *place)
 }
 
 static void
-update_list_visibility (CcSearchLocationsDialog *self)
+update_list_visibility (CcSearchLocationsPage *self)
 {
   gtk_widget_set_visible (self->places_group,
                           gtk_list_box_get_row_at_index (GTK_LIST_BOX (self->places_list), 0)
@@ -610,7 +610,7 @@ update_list_visibility (CcSearchLocationsDialog *self)
 }
 
 static void
-populate_list_boxes (CcSearchLocationsDialog *self)
+populate_list_boxes (CcSearchLocationsPage *self)
 {
   g_autoptr(GList) places = NULL;
   GList *l;
@@ -647,7 +647,7 @@ add_file_chooser_response (GObject      *source,
                            GAsyncResult *res,
                            gpointer      user_data)
 {
-  CcSearchLocationsDialog *self = CC_SEARCH_LOCATIONS_DIALOG (user_data);
+  CcSearchLocationsPage *self = CC_SEARCH_LOCATIONS_PAGE (user_data);
   GtkFileDialog *file_dialog = GTK_FILE_DIALOG (source);
   g_autoptr(Place) place = NULL;
   g_autoptr(GPtrArray) new_values = NULL;
@@ -671,7 +671,7 @@ add_file_chooser_response (GObject      *source,
 }
 
 static void
-add_button_clicked (CcSearchLocationsDialog *self)
+add_button_clicked (CcSearchLocationsPage *self)
 {
   GtkFileDialog *file_dialog;
   GtkWidget *toplevel = GTK_WIDGET (gtk_widget_get_root (GTK_WIDGET (self)));
@@ -687,7 +687,7 @@ add_button_clicked (CcSearchLocationsDialog *self)
 }
 
 static void
-other_places_refresh (CcSearchLocationsDialog *self)
+other_places_refresh (CcSearchLocationsPage *self)
 {
   g_autoptr(GList) places = NULL;
   GList *l;
@@ -713,14 +713,14 @@ other_places_refresh (CcSearchLocationsDialog *self)
   update_list_visibility (self);
 }
 
-CcSearchLocationsDialog *
-cc_search_locations_dialog_new (void)
+CcSearchLocationsPage *
+cc_search_locations_page_new (void)
 {
-  CcSearchLocationsDialog *self;
+  CcSearchLocationsPage *self;
   GSettingsSchemaSource *source;
   g_autoptr(GSettingsSchema) schema = NULL;
 
-  self = g_object_new (CC_SEARCH_LOCATIONS_DIALOG_TYPE, NULL);
+  self = g_object_new (CC_TYPE_SEARCH_LOCATIONS_PAGE, NULL);
 
   source = g_settings_schema_source_get_default ();
   schema = g_settings_schema_source_lookup (source, TRACKER3_SCHEMA, TRUE);
@@ -747,7 +747,7 @@ cc_search_locations_dialog_new (void)
 }
 
 gboolean
-cc_search_locations_dialog_is_available (void)
+cc_search_locations_page_is_available (void)
 {
   GSettingsSchemaSource *source;
   g_autoptr(GSettingsSchema) schema = NULL;
@@ -768,22 +768,22 @@ cc_search_locations_dialog_is_available (void)
 }
 
 static void
-cc_search_locations_dialog_class_init (CcSearchLocationsDialogClass *klass)
+cc_search_locations_page_class_init (CcSearchLocationsPageClass *klass)
 {
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
   GObjectClass   *object_class = G_OBJECT_CLASS (klass);
 
-  object_class->finalize = cc_search_locations_dialog_finalize;
+  object_class->finalize = cc_search_locations_page_finalize;
 
   gtk_widget_class_set_template_from_resource (widget_class,
-                                               "/org/gnome/control-center/search/cc-search-locations-dialog.ui");
+                                               "/org/gnome/control-center/search/cc-search-locations-page.ui");
 
-  gtk_widget_class_bind_template_child (widget_class, CcSearchLocationsDialog, places_group);
-  gtk_widget_class_bind_template_child (widget_class, CcSearchLocationsDialog, places_list);
-  gtk_widget_class_bind_template_child (widget_class, CcSearchLocationsDialog, bookmarks_group);
-  gtk_widget_class_bind_template_child (widget_class, CcSearchLocationsDialog, bookmarks_list);
-  gtk_widget_class_bind_template_child (widget_class, CcSearchLocationsDialog, others_list);
-  gtk_widget_class_bind_template_child (widget_class, CcSearchLocationsDialog, locations_add);
+  gtk_widget_class_bind_template_child (widget_class, CcSearchLocationsPage, places_group);
+  gtk_widget_class_bind_template_child (widget_class, CcSearchLocationsPage, places_list);
+  gtk_widget_class_bind_template_child (widget_class, CcSearchLocationsPage, bookmarks_group);
+  gtk_widget_class_bind_template_child (widget_class, CcSearchLocationsPage, bookmarks_list);
+  gtk_widget_class_bind_template_child (widget_class, CcSearchLocationsPage, others_list);
+  gtk_widget_class_bind_template_child (widget_class, CcSearchLocationsPage, locations_add);
 
   gtk_widget_class_bind_template_callback (widget_class, add_button_clicked);
   gtk_widget_class_bind_template_callback (widget_class, keynav_failed_cb);

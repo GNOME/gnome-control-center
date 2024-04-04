@@ -22,9 +22,9 @@
 
 #include <adwaita.h>
 
-#define CC_SEARCH_LOCATIONS_DIALOG_TYPE (cc_search_locations_dialog_get_type ())
-G_DECLARE_FINAL_TYPE (CcSearchLocationsDialog, cc_search_locations_dialog, CC, SEARCH_LOCATIONS_DIALOG, AdwNavigationPage)
+#define CC_TYPE_SEARCH_LOCATIONS_PAGE (cc_search_locations_page_get_type ())
+G_DECLARE_FINAL_TYPE (CcSearchLocationsPage, cc_search_locations_page, CC, SEARCH_LOCATIONS_PAGE, AdwNavigationPage)
 
-CcSearchLocationsDialog *cc_search_locations_dialog_new (void);
+CcSearchLocationsPage *cc_search_locations_page_new (void);
 
-gboolean cc_search_locations_dialog_is_available        (void);
+gboolean cc_search_locations_page_is_available        (void);

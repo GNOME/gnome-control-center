@@ -12,7 +12,7 @@ i18n.merge_file(
 
 sources = files(
   'cc-search-panel.c',
-  'cc-search-locations-dialog.c',
+  'cc-search-locations-page.c',
   'cc-search-panel-row.c'
 )
 

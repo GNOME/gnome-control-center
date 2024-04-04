@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
-  <template class="CcSearchLocationsDialog" parent="AdwNavigationPage">
+  <template class="CcSearchLocationsPage" parent="AdwNavigationPage">
     <property name="title" translatable="yes">Search Locations</property>
     <property name="tag">locations</property>
     <property name="child">
@@ -17,7 +17,7 @@
                 <child>
                   <object class="GtkListBox" id="places_list">
                     <property name="selection-mode">none</property>
-                    <signal name="keynav-failed" handler="keynav_failed_cb" object="CcSearchLocationsDialog" swapped="yes"/>
+                    <signal name="keynav-failed" handler="keynav_failed_cb" object="CcSearchLocationsPage" swapped="yes"/>
                     <accessibility>
                       <relation name="labelled-by">places_group</relation>
                     </accessibility>
@@ -34,7 +34,7 @@
                 <child>
                   <object class="GtkListBox" id="bookmarks_list">
                     <property name="selection-mode">none</property>
-                    <signal name="keynav-failed" handler="keynav_failed_cb" object="CcSearchLocationsDialog" swapped="yes"/>
+                    <signal name="keynav-failed" handler="keynav_failed_cb" object="CcSearchLocationsPage" swapped="yes"/>
                     <accessibility>
                       <relation name="labelled-by">bookmarks_group</relation>
                     </accessibility>
@@ -58,7 +58,7 @@
                         <property name="use-underline">True</property>
                       </object>
                     </property>
-                    <signal name="clicked" handler="add_button_clicked" object="CcSearchLocationsDialog" swapped="yes"/>
+                    <signal name="clicked" handler="add_button_clicked" object="CcSearchLocationsPage" swapped="yes"/>
                     <style>
                       <class name="flat"/>
                     </style>
@@ -67,7 +67,7 @@
                 <child>
                   <object class="GtkListBox" id="others_list">
                     <property name="selection-mode">none</property>
-                    <signal name="keynav-failed" handler="keynav_failed_cb" object="CcSearchLocationsDialog" swapped="yes"/>
+                    <signal name="keynav-failed" handler="keynav_failed_cb" object="CcSearchLocationsPage" swapped="yes"/>
                     <accessibility>
                       <relation name="labelled-by">others_group</relation>
                     </accessibility>
