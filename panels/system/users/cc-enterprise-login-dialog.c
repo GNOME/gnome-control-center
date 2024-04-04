@@ -81,6 +81,21 @@ struct _CcEnterpriseLoginDialog
 
 G_DEFINE_TYPE (CcEnterpriseLoginDialog, cc_enterprise_login_dialog, ADW_TYPE_DIALOG)
 
+static gboolean
+add_button_is_valid (CcEnterpriseLoginDialog *self)
+{
+  return (self->selected_realm != NULL) &&
+         strlen (gtk_editable_get_text (GTK_EDITABLE (self->username_row))) > 0 &&
+         strlen (gtk_editable_get_text (GTK_EDITABLE (self->password_row))) > 0;
+}
+
+static gboolean
+enroll_button_is_valid (CcEnterpriseLoginDialog *self)
+{
+  return strlen (gtk_editable_get_text (GTK_EDITABLE (self->admin_name_row))) > 0 &&
+         strlen (gtk_editable_get_text (GTK_EDITABLE (self->admin_password_row))) > 0;
+}
+
 static void
 show_operation_progress (CcEnterpriseLoginDialog *self,
                          gboolean                 show)
@@ -89,9 +104,9 @@ show_operation_progress (CcEnterpriseLoginDialog *self,
   gtk_widget_set_visible (GTK_WIDGET (self->enroll_page_spinner), show);
 
   gtk_widget_set_sensitive (GTK_WIDGET (self->main_preferences_page), !show);
-  gtk_widget_set_sensitive (GTK_WIDGET (self->add_button), !show);
+  gtk_widget_set_sensitive (GTK_WIDGET (self->add_button), !show && add_button_is_valid (self));
   gtk_widget_set_sensitive (GTK_WIDGET (self->enroll_preferences_page), !show);
-  gtk_widget_set_sensitive (GTK_WIDGET (self->enroll_button), !show);
+  gtk_widget_set_sensitive (GTK_WIDGET (self->enroll_button), !show && enroll_button_is_valid (self));
 
   /* Hide passwords during operations. */
   if (show)
@@ -328,9 +343,7 @@ on_enroll_button_clicked_cb (CcEnterpriseLoginDialog *self)
 static void
 enroll_page_validate (CcEnterpriseLoginDialog *self)
 {
-  gtk_widget_set_sensitive (GTK_WIDGET (self->enroll_button),
-                            strlen (gtk_editable_get_text (GTK_EDITABLE (self->admin_name_row))) > 0 &&
-                            strlen (gtk_editable_get_text (GTK_EDITABLE (self->admin_password_row))) > 0);
+  gtk_widget_set_sensitive (GTK_WIDGET (self->enroll_button), enroll_button_is_valid (self));
 }
 
 static void
@@ -511,10 +524,7 @@ on_add_button_clicked_cb (CcEnterpriseLoginDialog *self)
 static void
 main_page_validate (CcEnterpriseLoginDialog *self)
 {
-  gtk_widget_set_sensitive (GTK_WIDGET (self->add_button),
-                            (self->selected_realm != NULL) &&
-                            strlen (gtk_editable_get_text (GTK_EDITABLE (self->username_row))) > 0 &&
-                            strlen (gtk_editable_get_text (GTK_EDITABLE (self->password_row))) > 0);
+  gtk_widget_set_sensitive (GTK_WIDGET (self->add_button), add_button_is_valid (self));
 }
 
 static void
