@@ -10,10 +10,10 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/iss"
 "ues\n"
-"POT-Creation-Date: 2024-03-15 09:47+0000\n"
-"PO-Revision-Date: 2024-03-15 21:49+0200\n"
+"POT-Creation-Date: 2024-04-04 16:06+0000\n"
+"PO-Revision-Date: 2024-04-04 21:57+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
-"Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
+"Language-Team: Ukrainian\n"
 "Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -44,7 +44,7 @@ msgstr "Шина сеансів"
 
 #: panels/applications/cc-applications-panel.c:834
 #: panels/privacy/cc-bolt-page.ui:240 panels/privacy/cc-bolt-page.ui:284
-#: panels/privacy/cc-privacy-panel.ui:74
+#: panels/privacy/cc-privacy-panel.ui:75
 msgid "Devices"
 msgstr "Пристрої"
 
@@ -82,7 +82,7 @@ msgstr "Файлова система"
 
 #: panels/applications/cc-applications-panel.c:854
 #: panels/keyboard/01-launchers.xml.in:6
-#: shell/appdata/org.gnome.Settings.appdata.xml.in:7 shell/cc-window.c:775
+#: shell/appdata/org.gnome.Settings.appdata.xml.in:7 shell/cc-window.c:798
 #: shell/cc-window.ui:20 shell/org.gnome.Settings.desktop.in:3
 msgid "Settings"
 msgstr "Параметри"
@@ -1581,36 +1581,36 @@ msgstr "Зменшити на годину"
 msgid "Decrement Minute"
 msgstr "Зменшити на хвилину"
 
-#: panels/common/cc-util.c:127
+#: panels/common/cc-util.c:130
 #: panels/network/connection-editor/ce-page-details.c:199
 msgid "Today"
 msgstr "Сьогодні"
 
-#: panels/common/cc-util.c:131
+#: panels/common/cc-util.c:134
 #: panels/network/connection-editor/ce-page-details.c:201
 msgid "Yesterday"
 msgstr "Учора"
 
 #. Translators: This is a date format string in the style of "Feb 24".
-#: panels/common/cc-util.c:139
+#: panels/common/cc-util.c:142
 #, no-c-format
 msgid "%b %e"
 msgstr "%e %b"
 
 #. Translators: This is a date format string in the style of "Feb 24, 2013".
-#: panels/common/cc-util.c:144
+#: panels/common/cc-util.c:147
 msgid "%b %e, %Y"
 msgstr "%e %b, %Y"
 
 #. TRANSLATORS: This is the datetime format in the style of
 #. "Aug 1, 10:10:10 PM", "Feb 24, 2013, 10:10:10 PM", "Today, 10:10:10 AM",
 #. and "Yesterday, 10:10:10 AM"
-#: panels/common/cc-util.c:163
+#: panels/common/cc-util.c:166
 #, c-format
 msgid "%1$s, %2$s"
 msgstr "%1$s, %2$s"
 
-#: panels/common/cc-util.c:183
+#: panels/common/cc-util.c:186
 #, c-format
 msgid "%d hour"
 msgid_plural "%d hours"
@@ -1620,7 +1620,7 @@ msgstr[2] "%d годин"
 msgstr[3] "%d година"
 
 #. Translators: Option for "Blank Screen" in "Power" panel
-#: panels/common/cc-util.c:184 panels/power/cc-power-panel.c:790
+#: panels/common/cc-util.c:187 panels/power/cc-power-panel.c:790
 #, c-format
 msgid "%d minute"
 msgid_plural "%d minutes"
@@ -1629,7 +1629,7 @@ msgstr[1] "%d хвилини"
 msgstr[2] "%d хвилин"
 msgstr[3] "%d хвилина"
 
-#: panels/common/cc-util.c:185
+#: panels/common/cc-util.c:188
 #, c-format
 msgid "%d second"
 msgid_plural "%d seconds"
@@ -1639,42 +1639,42 @@ msgstr[2] "%d секунд"
 msgstr[3] "%d секунда"
 
 #. 5 hours 2 minutes 12 seconds
-#: panels/common/cc-util.c:192
+#: panels/common/cc-util.c:195
 #, c-format
 msgctxt "hours minutes seconds"
 msgid "%s %s %s"
 msgstr "%s %s %s"
 
 #. 5 hours 2 minutes
-#: panels/common/cc-util.c:197
+#: panels/common/cc-util.c:200
 #, c-format
 msgctxt "hours minutes"
 msgid "%s %s"
 msgstr "%s %s"
 
 #. 5 hours
-#: panels/common/cc-util.c:202
+#: panels/common/cc-util.c:205
 #, c-format
 msgctxt "hours"
 msgid "%s"
 msgstr "%s"
 
 #. 2 minutes 12 seconds
-#: panels/common/cc-util.c:210
+#: panels/common/cc-util.c:213
 #, c-format
 msgctxt "minutes seconds"
 msgid "%s %s"
 msgstr "%s %s"
 
 #. 2 minutes
-#: panels/common/cc-util.c:215
+#: panels/common/cc-util.c:218
 #, c-format
 msgctxt "minutes"
 msgid "%s"
 msgstr "%s"
 
 #. 0 seconds
-#: panels/common/cc-util.c:226
+#: panels/common/cc-util.c:229
 msgid "0 seconds"
 msgstr "0 секунд"
 
@@ -2995,7 +2995,7 @@ msgstr "Назва мережі"
 #: panels/network/cc-wifi-hotspot-dialog.ui:92
 #: panels/printers/new-printer-dialog.ui:293
 #: panels/printers/pp-jobs-dialog.ui:54
-#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:110
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:109
 #: panels/system/remote-desktop/cc-remote-session-page.ui:108
 #: panels/system/users/cc-add-user-dialog.ui:159
 #: panels/wwan/cc-wwan-apn-dialog.ui:175
@@ -3112,22 +3112,30 @@ msgid "Identity"
 msgstr "Засвідчення"
 
 #: panels/network/connection-editor/ce-page.c:234
+#: panels/network/connection-editor/ce-page.c:238
 msgid "Preserve"
 msgstr "Зберегти"
 
 #: panels/network/connection-editor/ce-page.c:235
+#: panels/network/connection-editor/ce-page.c:239
 msgid "Permanent"
 msgstr "Постійна"
 
 #: panels/network/connection-editor/ce-page.c:236
+#: panels/network/connection-editor/ce-page.c:240
 msgid "Random"
 msgstr "Випадкова"
 
 #: panels/network/connection-editor/ce-page.c:237
-msgid "Stable"
-msgstr "Стабільна"
-
 #: panels/network/connection-editor/ce-page.c:241
+msgid "Stable"
+msgstr "Стала"
+
+#: panels/network/connection-editor/ce-page.c:243
+msgid "Stable per SSID"
+msgstr "Стала для окремого SSID"
+
+#: panels/network/connection-editor/ce-page.c:251
 msgid ""
 "The MAC address entered here will be used as hardware address for the "
 "network device this connection is activated on. This feature is known as MAC "
@@ -3137,7 +3145,7 @@ msgstr ""
 "пристрою мережі, на якому активовано це з'єднання. Ця функція відома як "
 "клонування або підробка MAC-адреси. Приклад: 00:11:22:33:44:55"
 
-#: panels/network/connection-editor/ce-page.c:399
+#: panels/network/connection-editor/ce-page.c:409
 #, c-format
 msgid "Profile %d"
 msgstr "Профіль %d"
@@ -4892,7 +4900,7 @@ msgstr ""
 #. Translators: This is a username on a print server.
 #: panels/printers/new-printer-dialog.ui:272
 #: panels/printers/pp-jobs-dialog.ui:42
-#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:94
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:93
 #: panels/system/remote-desktop/cc-remote-session-page.ui:92
 #: panels/wwan/cc-wwan-apn-dialog.ui:150
 msgid "Username"
@@ -6210,59 +6218,59 @@ msgstr "Б_локування екрана"
 msgid "Automatic screen lock"
 msgstr "Автоматично блокувати екран"
 
-#: panels/privacy/cc-privacy-panel.ui:36
+#: panels/privacy/cc-privacy-panel.ui:37
 msgid "_Location"
 msgstr "_Місце"
 
-#: panels/privacy/cc-privacy-panel.ui:37
+#: panels/privacy/cc-privacy-panel.ui:38
 msgid "Control access to your location"
 msgstr "Керування доступом до даних щодо вашого перебування"
 
-#: panels/privacy/cc-privacy-panel.ui:47
+#: panels/privacy/cc-privacy-panel.ui:48
 msgid "_File History &amp; Trash"
 msgstr "_Журнал файлів та смітник"
 
-#: panels/privacy/cc-privacy-panel.ui:48
+#: panels/privacy/cc-privacy-panel.ui:49
 msgid "Remove saved data and files"
 msgstr "Вилучити збережені дані і файли"
 
-#: panels/privacy/cc-privacy-panel.ui:58
+#: panels/privacy/cc-privacy-panel.ui:59
 msgid "_Diagnostics"
 msgstr "Ді_агностика"
 
-#: panels/privacy/cc-privacy-panel.ui:59
+#: panels/privacy/cc-privacy-panel.ui:60
 msgid "Automatic problem reporting"
 msgstr "_Автоматичне звітування про проблеми"
 
-#: panels/privacy/cc-privacy-panel.ui:78
+#: panels/privacy/cc-privacy-panel.ui:79
 msgid "_Cameras"
 msgstr "_Камери"
 
-#: panels/privacy/cc-privacy-panel.ui:79
+#: panels/privacy/cc-privacy-panel.ui:80
 msgid "Control camera access"
 msgstr "Керування доступом до камер"
 
-#: panels/privacy/cc-privacy-panel.ui:89
+#: panels/privacy/cc-privacy-panel.ui:90
 msgid "_Microphones"
 msgstr "_Мікрофони"
 
-#: panels/privacy/cc-privacy-panel.ui:90
+#: panels/privacy/cc-privacy-panel.ui:91
 msgid "Control microphone access"
 msgstr "Керування доступом до мікрофонів"
 
-#: panels/privacy/cc-privacy-panel.ui:102
+#: panels/privacy/cc-privacy-panel.ui:103
 msgid "_Thunderbolt"
 msgstr "_Thunderbolt"
 
-#: panels/privacy/cc-privacy-panel.ui:103
+#: panels/privacy/cc-privacy-panel.ui:104
 msgid "Manage device access"
 msgstr "Керування доступом до пристроїв"
 
-#: panels/privacy/cc-privacy-panel.ui:113
+#: panels/privacy/cc-privacy-panel.ui:114
 msgid "Device _Security"
 msgstr "_Безпека пристрою"
 
-#: panels/privacy/cc-privacy-panel.ui:114
+#: panels/privacy/cc-privacy-panel.ui:115
 msgid "Hardware security status and information"
 msgstr "Стан апаратного захисту та відомості щодо нього"
 
@@ -7218,9 +7226,6 @@ msgstr "Переглянути інформацію про вашу систем
 #. "Preferred Applications" is the old name for the preference, so make
 #. sure that you use the same "translation" for those keywords
 #: panels/system/about/gnome-about-panel.desktop.in:19
-#| msgid ""
-#| "application;flatpak;permission;setting;default;preferred;media;autorun;cd;"
-#| "dvd;usb;audio;video;disc;removable;device;system;"
 msgid ""
 "device;system;information;hostname;memory;processor;version;default;"
 "application;preferred;cd;dvd;usb;audio;video;disc;removable;media;autorun;"
@@ -7239,63 +7244,63 @@ msgstr "_Регіон та мова"
 msgid "System language and localization"
 msgstr "Мова і локалізація системи"
 
-#: panels/system/cc-system-panel.ui:34
+#: panels/system/cc-system-panel.ui:33
 msgid "_Date &amp; Time"
 msgstr "Дата й _час"
 
-#: panels/system/cc-system-panel.ui:35
+#: panels/system/cc-system-panel.ui:34
 msgid "Time zone and clock settings"
 msgstr "Часовий пояс і параметри годинника"
 
-#: panels/system/cc-system-panel.ui:45
+#: panels/system/cc-system-panel.ui:43
 msgid "_Users"
 msgstr "_Користувачі"
 
-#: panels/system/cc-system-panel.ui:46
+#: panels/system/cc-system-panel.ui:44
 msgid "Add and remove accounts, change password"
 msgstr "Додати або вилучити користувачів, змінити свій пароль"
 
-#: panels/system/cc-system-panel.ui:58
+#: panels/system/cc-system-panel.ui:54
 msgid "R_emote Desktop"
 msgstr "В_іддалена стільниця"
 
-#: panels/system/cc-system-panel.ui:59
+#: panels/system/cc-system-panel.ui:55
 msgid "Allow this device to be used remotely"
 msgstr "Дозволити віддалене користування цим пристроєм"
 
-#: panels/system/cc-system-panel.ui:69
+#: panels/system/cc-system-panel.ui:64
 #: panels/system/remote-login/cc-remote-login-page.ui:51
 msgid "Secu_re Shell"
 msgstr "За_хищена оболонка"
 
-#: panels/system/cc-system-panel.ui:70
+#: panels/system/cc-system-panel.ui:65
 msgid "SSH network access"
 msgstr "Доступ до мережі з SSH"
 
-#: panels/system/cc-system-panel.ui:79
+#: panels/system/cc-system-panel.ui:74
 msgid "_About"
 msgstr "_Про програму"
 
-#: panels/system/cc-system-panel.ui:80
+#: panels/system/cc-system-panel.ui:75
 msgid "Hardware details and software versions"
 msgstr "Подробиці щодо обладнання та версії програмного забезпечення"
 
-#: panels/system/cc-system-panel.ui:97
+#: panels/system/cc-system-panel.ui:91
 msgid "Software _Updates"
 msgstr "_Оновлення програм"
 
 #. Translators: This is the full date and time format used in 12-hour mode.
-#: panels/system/datetime/cc-datetime-page.c:230
+#: panels/system/datetime/cc-datetime-page.c:231
 msgid "%e %B %Y, %l:%M %p"
 msgstr "%e %B %Y, %l:%M %p"
 
 #. Translators: This is the full date and time format used in 24-hour mode.
-#: panels/system/datetime/cc-datetime-page.c:235
+#: panels/system/datetime/cc-datetime-page.c:236
 msgid "%e %B %Y, %R"
 msgstr "%e %B %Y, %R"
 
 #. Translators: "city, country"
-#: panels/system/datetime/cc-datetime-page.c:388
+#: panels/system/datetime/cc-datetime-page.c:393
 #, c-format
 msgctxt "timezone loc"
 msgid "%s, %s"
@@ -7303,39 +7308,39 @@ msgstr "%s, %s"
 
 #. Update the timezone on the listbow row
 #. Translators: "timezone (details)"
-#: panels/system/datetime/cc-datetime-page.c:405
+#: panels/system/datetime/cc-datetime-page.c:410
 #, c-format
 msgctxt "timezone desc"
 msgid "%s (%s)"
 msgstr "%s (%s)"
 
 #: panels/system/datetime/cc-datetime-page.ui:9
-#: panels/system/datetime/cc-datetime-page.ui:117
+#: panels/system/datetime/cc-datetime-page.ui:116
 #: panels/system/datetime/gnome-datetime-panel.desktop.in:3
 msgid "Date & Time"
 msgstr "Дата й час"
 
-#: panels/system/datetime/cc-datetime-page.ui:60
+#: panels/system/datetime/cc-datetime-page.ui:59
 msgid "_Year"
 msgstr "Р_ік"
 
-#: panels/system/datetime/cc-datetime-page.ui:71
+#: panels/system/datetime/cc-datetime-page.ui:70
 msgid "_Month"
 msgstr "_Місяць"
 
-#: panels/system/datetime/cc-datetime-page.ui:98
+#: panels/system/datetime/cc-datetime-page.ui:97
 msgid "_Day"
 msgstr "_День"
 
-#: panels/system/datetime/cc-datetime-page.ui:137
+#: panels/system/datetime/cc-datetime-page.ui:136
 msgid "Automatic _Date &amp; Time"
 msgstr "Автоматичні _дата та час"
 
-#: panels/system/datetime/cc-datetime-page.ui:138
+#: panels/system/datetime/cc-datetime-page.ui:137
 msgid "Requires internet access"
 msgstr "Потребує зв'язок з інтернетом"
 
-#: panels/system/datetime/cc-datetime-page.ui:150
+#: panels/system/datetime/cc-datetime-page.ui:149
 msgid "Date &amp; _Time"
 msgstr "Дата й _час"
 
@@ -7392,51 +7397,51 @@ msgstr "_Номери тижнів"
 msgid "Shown in the dropdown calendar"
 msgstr "Показано на перекидному календарі"
 
-#: panels/system/datetime/cc-datetime-page.ui:271
+#: panels/system/datetime/cc-datetime-page.ui:270
 msgid "January"
 msgstr "Січень"
 
-#: panels/system/datetime/cc-datetime-page.ui:272
+#: panels/system/datetime/cc-datetime-page.ui:271
 msgid "February"
 msgstr "Лютий"
 
-#: panels/system/datetime/cc-datetime-page.ui:273
+#: panels/system/datetime/cc-datetime-page.ui:272
 msgid "March"
 msgstr "Березень"
 
-#: panels/system/datetime/cc-datetime-page.ui:274
+#: panels/system/datetime/cc-datetime-page.ui:273
 msgid "April"
 msgstr "Квітень"
 
-#: panels/system/datetime/cc-datetime-page.ui:275
+#: panels/system/datetime/cc-datetime-page.ui:274
 msgid "May"
 msgstr "Травень"
 
-#: panels/system/datetime/cc-datetime-page.ui:276
+#: panels/system/datetime/cc-datetime-page.ui:275
 msgid "June"
 msgstr "Червень"
 
-#: panels/system/datetime/cc-datetime-page.ui:277
+#: panels/system/datetime/cc-datetime-page.ui:276
 msgid "July"
 msgstr "Липень"
 
-#: panels/system/datetime/cc-datetime-page.ui:278
+#: panels/system/datetime/cc-datetime-page.ui:277
 msgid "August"
 msgstr "Серпень"
 
-#: panels/system/datetime/cc-datetime-page.ui:279
+#: panels/system/datetime/cc-datetime-page.ui:278
 msgid "September"
 msgstr "Вересень"
 
-#: panels/system/datetime/cc-datetime-page.ui:280
+#: panels/system/datetime/cc-datetime-page.ui:279
 msgid "October"
 msgstr "Жовтень"
 
-#: panels/system/datetime/cc-datetime-page.ui:281
+#: panels/system/datetime/cc-datetime-page.ui:280
 msgid "November"
 msgstr "Листопад"
 
-#: panels/system/datetime/cc-datetime-page.ui:282
+#: panels/system/datetime/cc-datetime-page.ui:281
 msgid "December"
 msgstr "Грудень"
 
@@ -7453,7 +7458,6 @@ msgid "No Results"
 msgstr "Нічого не знайдено"
 
 #: panels/system/datetime/gnome-datetime-panel.desktop.in:4
-#| msgid "Change the date and time"
 msgid "Change the date and time, including time zone"
 msgstr "Змінити дату та час, зокрема часовий пояс"
 
@@ -7627,7 +7631,7 @@ msgstr "Ім'я користувача скопійовано"
 msgid "Password copied"
 msgstr "Пароль скопійовано"
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:13
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:12
 msgid ""
 "Share your existing desktop with other devices. The remote connection uses "
 "the existing screen resolution"
@@ -7635,24 +7639,24 @@ msgstr ""
 "Оприлюднити вашу наявну стільницю на інші пристрої. Для віддаленого "
 "з'єднання буде використано наявну роздільну здатність екрана."
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:28
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:27
 msgid "_Desktop Sharing"
 msgstr "Спі_льні стільниці"
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:34
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:33
 msgid "Remote _Control"
 msgstr "Дистан_ційне керування"
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:36
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:35
 msgid "Allows desktop shares to control the screen"
 msgstr "Дозволяє спільним сеансам стільниці керування екраном"
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:43
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:42
 #: panels/system/remote-desktop/cc-remote-session-page.ui:41
 msgid "How to Connect"
 msgstr "Як з'єднатися"
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:44
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:43
 #: panels/system/remote-desktop/cc-remote-session-page.ui:42
 msgid ""
 "Use a remote desktop app to connect using the RDP protocol. Additional "
@@ -7662,15 +7666,15 @@ msgstr ""
 "протоколу RDP. Можливо, знадобляться додаткові дані щодо розташування "
 "пристрою у мережі."
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:47
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:46
 #: panels/system/remote-desktop/cc-remote-session-page.ui:45
 msgid "_Hostname"
 msgstr "Назва _вузла"
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:55
-#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:76
-#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:97
-#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:113
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:54
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:75
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:96
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:112
 #: panels/system/remote-desktop/cc-remote-session-page.ui:53
 #: panels/system/remote-desktop/cc-remote-session-page.ui:74
 #: panels/system/remote-desktop/cc-remote-session-page.ui:95
@@ -7679,22 +7683,22 @@ msgstr "Назва _вузла"
 msgid "Copy"
 msgstr "Копіювати"
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:68
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:67
 #: panels/system/remote-desktop/cc-remote-session-page.ui:66
 msgid "_Port"
 msgstr "П_орт"
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:91
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:90
 #: panels/system/remote-desktop/cc-remote-session-page.ui:89
 msgid "Login Details"
 msgstr "Подробиці щодо реєстрації"
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:132
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:131
 #: panels/system/remote-desktop/cc-remote-session-page.ui:130
 msgid "_Generate New Password"
 msgstr "С_творити пароль"
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:143
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:142
 #: panels/system/remote-desktop/cc-remote-session-page.ui:141
 msgid "_Verify Encryption"
 msgstr "П_еревірити шифрування"
@@ -8340,7 +8344,6 @@ msgid "Administrator Password"
 msgstr "Пароль адміністратора"
 
 #: panels/system/users/gnome-users-panel.desktop.in:4
-#| msgid "Add and remove accounts, change password"
 msgid "Add or remove users and change your password"
 msgstr "Додати або вилучити користувачів і змінити свій пароль"
 
