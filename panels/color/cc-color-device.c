@@ -22,26 +22,26 @@
 #include "config.h"
 
 #include <glib/gi18n.h>
-#include <gtk/gtk.h>
+#include <adwaita.h>
 
 #include "cc-color-common.h"
 #include "cc-color-device.h"
 
 struct _CcColorDevice
 {
-  GtkListBoxRow parent_instance;
+  AdwActionRow parent_instance;
 
   CdDevice    *device;
   gboolean     expanded;
   gchar       *sortable;
+  GtkWidget   *row;
   GtkWidget   *widget_description;
   GtkWidget   *widget_button;
   GtkWidget   *widget_switch;
-  GtkWidget   *widget_arrow;
   GtkWidget   *widget_nocalib;
 };
 
-G_DEFINE_TYPE (CcColorDevice, cc_color_device, GTK_TYPE_LIST_BOX_ROW)
+G_DEFINE_TYPE (CcColorDevice, cc_color_device, ADW_TYPE_ACTION_ROW)
 
 enum
 {
@@ -72,12 +72,11 @@ cc_color_device_refresh (CcColorDevice *color_device)
     return;
 
   title = cc_color_device_get_title (color_device->device);
-  gtk_label_set_label (GTK_LABEL (color_device->widget_description), title);
-  gtk_widget_set_visible (color_device->widget_description, TRUE);
+  adw_preferences_row_set_title (ADW_PREFERENCES_ROW (color_device->row), title);
 
   gtk_widget_set_visible (color_device->widget_switch, profiles->len > 0);
   gtk_widget_set_visible (color_device->widget_button, profiles->len > 0);
-  gtk_image_set_from_icon_name (GTK_IMAGE (color_device->widget_arrow),
+  gtk_button_set_icon_name (GTK_BUTTON (color_device->widget_button),
                                 color_device->expanded ? "pan-down-symbolic" : "pan-end-symbolic");
   gtk_widget_set_visible (color_device->widget_nocalib, profiles->len == 0);
   gtk_widget_set_sensitive (color_device->widget_button, cd_device_get_enabled (color_device->device));
@@ -253,47 +252,30 @@ cc_color_device_clicked_expander_cb (CcColorDevice *color_device)
 static void
 cc_color_device_init (CcColorDevice *color_device)
 {
-  GtkWidget *box;
+  color_device->row = adw_action_row_new ();
 
-  /* description */
-  box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 9);
-  color_device->widget_description = gtk_label_new ("");
-  gtk_widget_set_margin_start (color_device->widget_description, 20);
-  gtk_widget_set_margin_top (color_device->widget_description, 12);
-  gtk_widget_set_margin_bottom (color_device->widget_description, 12);
-  gtk_widget_set_halign (color_device->widget_description, GTK_ALIGN_START);
-  gtk_widget_set_hexpand (color_device->widget_description, TRUE);
-  gtk_label_set_ellipsize (GTK_LABEL (color_device->widget_description), PANGO_ELLIPSIZE_END);
-  gtk_label_set_xalign (GTK_LABEL (color_device->widget_description), 0);
-  gtk_box_append (GTK_BOX (box), color_device->widget_description);
+  /* "not calibrated" label */
+  color_device->widget_nocalib = gtk_label_new (_("Not Calibrated"));
+  gtk_widget_add_css_class (color_device->widget_nocalib, "dim-label");
+  gtk_widget_set_margin_end (color_device->widget_nocalib, 6);
+  adw_action_row_add_suffix (ADW_ACTION_ROW (color_device->row), color_device->widget_nocalib);
 
   /* switch */
   color_device->widget_switch = gtk_switch_new ();
   gtk_widget_set_valign (color_device->widget_switch, GTK_ALIGN_CENTER);
-  gtk_box_append (GTK_BOX (box), color_device->widget_switch);
+  adw_action_row_add_suffix (ADW_ACTION_ROW (color_device->row), color_device->widget_switch);
 
   /* arrow button */
-  color_device->widget_arrow = gtk_image_new_from_icon_name ("pan-end-symbolic");
-  color_device->widget_button = gtk_button_new ();
+  color_device->widget_button = gtk_button_new_from_icon_name ("pan-end-symbolic");
   g_signal_connect_object (color_device->widget_button, "clicked",
                            G_CALLBACK (cc_color_device_clicked_expander_cb),
                            color_device, G_CONNECT_SWAPPED);
   gtk_widget_set_valign (color_device->widget_button, GTK_ALIGN_CENTER);
   gtk_widget_add_css_class (color_device->widget_button, "flat");
-  gtk_button_set_child (GTK_BUTTON (color_device->widget_button), color_device->widget_arrow);
-  gtk_widget_set_margin_top (color_device->widget_button, 9);
-  gtk_widget_set_margin_bottom (color_device->widget_button, 9);
-  gtk_widget_set_margin_end (color_device->widget_button, 12);
-  gtk_box_append (GTK_BOX (box), color_device->widget_button);
-
-  /* not calibrated */
-  color_device->widget_nocalib = gtk_label_new (_("Not calibrated"));
-  gtk_widget_add_css_class (color_device->widget_nocalib, "dim-label");
-  gtk_widget_set_margin_end (color_device->widget_nocalib, 18);
-  gtk_box_append (GTK_BOX (box), color_device->widget_nocalib);
+  adw_action_row_add_suffix (ADW_ACTION_ROW (color_device->row), color_device->widget_button);
 
   /* refresh */
-  gtk_list_box_row_set_child (GTK_LIST_BOX_ROW (color_device), box);
+  gtk_list_box_row_set_child (GTK_LIST_BOX_ROW (color_device), GTK_WIDGET (color_device->row));
 }
 
 GtkWidget *

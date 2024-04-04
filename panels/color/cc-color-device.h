@@ -21,13 +21,13 @@
 
 #pragma once
 
-#include <gtk/gtk.h>
+#include <adwaita.h>
 #include <colord.h>
 
 G_BEGIN_DECLS
 
 #define CC_TYPE_COLOR_DEVICE (cc_color_device_get_type ())
-G_DECLARE_FINAL_TYPE (CcColorDevice, cc_color_device, CC, COLOR_DEVICE, GtkListBoxRow)
+G_DECLARE_FINAL_TYPE (CcColorDevice, cc_color_device, CC, COLOR_DEVICE, AdwActionRow)
 
 GtkWidget   *cc_color_device_new           (CdDevice       *device);
 CdDevice    *cc_color_device_get_device    (CcColorDevice  *color_device);
