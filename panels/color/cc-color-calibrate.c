@@ -313,7 +313,7 @@ cc_color_calibrate_interaction_required (CcColorCalibrate *calibrate,
 
   /* the client helper does not ship an icon for this */
   if (code == CD_SESSION_INTERACTION_SHUT_LAPTOP_LID)
-    image_path = "preferences-color-symbolic";
+    image_path = "org.gnome.Settings-color-symbolic";
 
   /* set image */
   img = GTK_IMAGE (gtk_builder_get_object (calibrate->builder,
