@@ -18,12 +18,13 @@
 
 #include "cc-password-utils.h"
 
-#include <glib.h>
 #include <gio/gio.h>
+#include <glib.h>
+#include <glob.h>
 #include <stdlib.h>
 #include <string.h>
 
-#define DICEWARE_CORPUS "/usr/share/dict/linux.words"
+#define DICEWARE_CORPUS_GLOB "/usr/share/dict/*"
 #define SPECIAL_CHARACTERS "-!\"#$%&()*,./:;?@[]^_`{|}~+<=>"
 #define WORD_SEPARATORS " -_&+,;:."
 
@@ -102,12 +103,34 @@ generate_digit (void)
   return g_random_int_range (0, 10) + '0';
 }
 
+static char *
+get_random_file_from_glob (const char *pattern)
+{
+  glob_t glob_result;
+  int ret = 0;
+  int index;
+  g_autofree char *file = NULL;
+
+  ret = glob (pattern, 0, NULL, &glob_result);
+  if (ret != 0)
+    goto out;
+
+  if (glob_result.gl_pathc == 0)
+    goto out;
+
+  index = g_random_int_range (0, glob_result.gl_pathc);
+  file = g_strdup (glob_result.gl_pathv[index]);
+
+out:
+  globfree (&glob_result);
+  return g_steal_pointer (&file);
+}
+
 char *
 cc_generate_password (void)
 {
   g_autoptr(GString) password_string = NULL;
   g_autofree char *password = NULL;
-  const char *file_path = DICEWARE_CORPUS;
   static const size_t min_number_of_words = 2;
   size_t i;
   char *p = NULL;
@@ -121,8 +144,14 @@ cc_generate_password (void)
   i = 0;
   while (password_string->len < 16 || i < min_number_of_words)
     {
+      g_autofree char *file_path = NULL;
       int word_offset = g_random_int ();
       g_autofree char *word = NULL;
+
+      file_path = get_random_file_from_glob (DICEWARE_CORPUS_GLOB);
+
+      if (!file_path)
+        return NULL;
 
       word = get_word_at_line (file_path, word_offset);
 
