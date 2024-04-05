@@ -149,7 +149,7 @@ create_widget_func (gpointer model_item,
 
   if (BG_IS_RECENT_SOURCE (source))
     {
-      button = gtk_button_new_from_icon_name ("window-close-symbolic");
+      button = gtk_button_new_from_icon_name ("cross-small-symbolic");
       gtk_widget_set_halign (button, GTK_ALIGN_END);
       gtk_widget_set_valign (button, GTK_ALIGN_START);
 
