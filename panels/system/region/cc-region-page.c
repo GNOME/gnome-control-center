@@ -67,7 +67,7 @@ struct _CcRegionPage {
         CcListRow       *login_formats_row;
         GtkWidget       *login_group;
         CcListRow       *login_language_row;
-        GtkListBoxRow   *language_row;
+        CcListRow       *language_row;
 
         gboolean         login_auto_apply;
         GPermission     *permission;
@@ -511,7 +511,7 @@ update_user_region_row (CcRegionPage *self)
         if (!name)
                 name = gnome_get_country_from_locale (DEFAULT_LOCALE, DEFAULT_LOCALE);
 
-        adw_action_row_set_subtitle (ADW_ACTION_ROW (self->formats_row), name);
+        cc_list_row_set_secondary_label (self->formats_row, name);
 }
 
 static void
@@ -525,7 +525,7 @@ update_user_language_row (CcRegionPage *self)
         if (!name)
                 name = gnome_get_language_from_locale (DEFAULT_LOCALE, DEFAULT_LOCALE);
 
-        adw_action_row_set_subtitle (ADW_ACTION_ROW (self->language_row), name);
+        cc_list_row_set_secondary_label (self->language_row, name);
 
         /* Formats will change too if not explicitly set. */
         update_user_region_row (self);
@@ -585,7 +585,7 @@ update_login_region (CcRegionPage *self)
         if (!name)
                 name = gnome_get_country_from_locale (DEFAULT_LOCALE, DEFAULT_LOCALE);
 
-        adw_action_row_set_subtitle (ADW_ACTION_ROW (self->login_formats_row), name);
+        cc_list_row_set_secondary_label (self->login_formats_row, name);
 }
 
 static void
@@ -599,7 +599,7 @@ update_login_language (CcRegionPage *self)
         if (!name)
                 name = gnome_get_language_from_locale (DEFAULT_LOCALE, DEFAULT_LOCALE);
 
-        adw_action_row_set_subtitle (ADW_ACTION_ROW (self->login_language_row), name);
+        cc_list_row_set_secondary_label (self->login_language_row, name);
         update_login_region (self);
 }
 
