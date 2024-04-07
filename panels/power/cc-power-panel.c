@@ -652,9 +652,9 @@ update_automatic_suspend_label (CcPowerPanel *self)
       if (ac_timeout == NEVER && battery_timeout == NEVER)
         s = _("Off");
       else if (ac_timeout == NEVER && battery_timeout > 0)
-        s = _("When on battery power");
+        s = _("On Battery Power");
       else if (ac_timeout > 0 && battery_timeout == NEVER)
-        s = _("When plugged in");
+        s = _("When Plugged In");
       else
         s = _("On");
     }
