@@ -34,8 +34,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2024-03-21 23:38+0000\n"
-"PO-Revision-Date: 2024-03-24 22:37+0100\n"
+"POT-Creation-Date: 2024-04-06 14:20+0000\n"
+"PO-Revision-Date: 2024-04-07 12:55+0200\n"
 "Last-Translator: Jordi Mas i Hernàndez <jmas@softcatala.org>\n"
 "Language-Team: Catalan <tradgnome@softcatala.org>\n"
 "Language: ca\n"
@@ -66,7 +66,7 @@ msgstr "Sessió del bus"
 
 #: panels/applications/cc-applications-panel.c:834
 #: panels/privacy/cc-bolt-page.ui:240 panels/privacy/cc-bolt-page.ui:284
-#: panels/privacy/cc-privacy-panel.ui:74
+#: panels/privacy/cc-privacy-panel.ui:75
 msgid "Devices"
 msgstr "Dispositius"
 
@@ -104,7 +104,7 @@ msgstr "Sistema de fitxers"
 
 #: panels/applications/cc-applications-panel.c:854
 #: panels/keyboard/01-launchers.xml.in:6
-#: shell/appdata/org.gnome.Settings.appdata.xml.in:7 shell/cc-window.c:775
+#: shell/appdata/org.gnome.Settings.appdata.xml.in:7 shell/cc-window.c:798
 #: shell/cc-window.ui:20 shell/org.gnome.Settings.desktop.in:3
 msgid "Settings"
 msgstr "Paràmetres"
@@ -1602,36 +1602,36 @@ msgstr "Redueix una hora"
 msgid "Decrement Minute"
 msgstr "Redueix un minut"
 
-#: panels/common/cc-util.c:127
+#: panels/common/cc-util.c:130
 #: panels/network/connection-editor/ce-page-details.c:199
 msgid "Today"
 msgstr "Avui"
 
-#: panels/common/cc-util.c:131
+#: panels/common/cc-util.c:134
 #: panels/network/connection-editor/ce-page-details.c:201
 msgid "Yesterday"
 msgstr "Ahir"
 
 #. Translators: This is a date format string in the style of "Feb 24".
-#: panels/common/cc-util.c:139
+#: panels/common/cc-util.c:142
 #, no-c-format
 msgid "%b %e"
 msgstr "%e %b"
 
 #. Translators: This is a date format string in the style of "Feb 24, 2013".
-#: panels/common/cc-util.c:144
+#: panels/common/cc-util.c:147
 msgid "%b %e, %Y"
 msgstr "%e %b, %Y"
 
 #. TRANSLATORS: This is the datetime format in the style of
 #. "Aug 1, 10:10:10 PM", "Feb 24, 2013, 10:10:10 PM", "Today, 10:10:10 AM",
 #. and "Yesterday, 10:10:10 AM"
-#: panels/common/cc-util.c:163
+#: panels/common/cc-util.c:166
 #, c-format
 msgid "%1$s, %2$s"
 msgstr "%1$s, %2$s"
 
-#: panels/common/cc-util.c:183
+#: panels/common/cc-util.c:186
 #, c-format
 msgid "%d hour"
 msgid_plural "%d hours"
@@ -1639,14 +1639,14 @@ msgstr[0] "%d hora"
 msgstr[1] "%d hores"
 
 #. Translators: Option for "Blank Screen" in "Power" panel
-#: panels/common/cc-util.c:184 panels/power/cc-power-panel.c:790
+#: panels/common/cc-util.c:187 panels/power/cc-power-panel.c:790
 #, c-format
 msgid "%d minute"
 msgid_plural "%d minutes"
 msgstr[0] "%d minut"
 msgstr[1] "%d minuts"
 
-#: panels/common/cc-util.c:185
+#: panels/common/cc-util.c:188
 #, c-format
 msgid "%d second"
 msgid_plural "%d seconds"
@@ -1654,42 +1654,42 @@ msgstr[0] "%d segon"
 msgstr[1] "%d segons"
 
 #. 5 hours 2 minutes 12 seconds
-#: panels/common/cc-util.c:192
+#: panels/common/cc-util.c:195
 #, c-format
 msgctxt "hours minutes seconds"
 msgid "%s %s %s"
 msgstr "%s %s %s"
 
 #. 5 hours 2 minutes
-#: panels/common/cc-util.c:197
+#: panels/common/cc-util.c:200
 #, c-format
 msgctxt "hours minutes"
 msgid "%s %s"
 msgstr "%s %s"
 
 #. 5 hours
-#: panels/common/cc-util.c:202
+#: panels/common/cc-util.c:205
 #, c-format
 msgctxt "hours"
 msgid "%s"
 msgstr "%s"
 
 #. 2 minutes 12 seconds
-#: panels/common/cc-util.c:210
+#: panels/common/cc-util.c:213
 #, c-format
 msgctxt "minutes seconds"
 msgid "%s %s"
 msgstr "%s %s"
 
 #. 2 minutes
-#: panels/common/cc-util.c:215
+#: panels/common/cc-util.c:218
 #, c-format
 msgctxt "minutes"
 msgid "%s"
 msgstr "%s"
 
 #. 0 seconds
-#: panels/common/cc-util.c:226
+#: panels/common/cc-util.c:229
 msgid "0 seconds"
 msgstr "0 segons"
 
@@ -2561,16 +2561,12 @@ msgid "Test Mouse and Touchpad Settings"
 msgstr "Prova la configuració del ratolí i del ratolí tàctil"
 
 #: panels/mouse/cc-mouse-panel.ui:192
-#, fuzzy
-#| msgid "Touchpad"
 msgid "_Touchpad"
-msgstr "Ratolí tàctil"
+msgstr "Ratolí _tàctil"
 
 #: panels/mouse/cc-mouse-panel.ui:200
-#, fuzzy
-#| msgid "Touchpad"
 msgid "T_ouchpad"
-msgstr "Ratolí tàctil"
+msgstr "Rat_olí tàctil"
 
 #: panels/mouse/cc-mouse-panel.ui:206
 msgid "_Disable Touchpad While Typing"
@@ -2607,10 +2603,8 @@ msgid "Push with a single finger in the corner"
 msgstr "Picar amb un sol dit al racó"
 
 #: panels/mouse/cc-mouse-panel.ui:261
-#, fuzzy
-#| msgid "Tap to Click"
 msgid "T_ap to Click"
-msgstr "Fes un toc per a fer un clic"
+msgstr "Fes un toc per _a fer un clic"
 
 #: panels/mouse/cc-mouse-panel.ui:263
 msgid "Quickly touch the touchpad to click"
@@ -2886,10 +2880,8 @@ msgid "Not set up"
 msgstr "No s'ha configurat"
 
 #: panels/network/cc-network-panel.ui:96
-#, fuzzy
-#| msgid "Proxy"
 msgid "_Proxy"
-msgstr "Servidor intermediari"
+msgstr "Servidor _intermediari"
 
 #.
 #. * translators: Subtitle underneath the Wi-Fi QR code is constructed with two labels.
@@ -3133,22 +3125,30 @@ msgid "Identity"
 msgstr "Identitat"
 
 #: panels/network/connection-editor/ce-page.c:234
+#: panels/network/connection-editor/ce-page.c:238
 msgid "Preserve"
 msgstr "Conserva"
 
 #: panels/network/connection-editor/ce-page.c:235
+#: panels/network/connection-editor/ce-page.c:239
 msgid "Permanent"
 msgstr "Permanent"
 
 #: panels/network/connection-editor/ce-page.c:236
+#: panels/network/connection-editor/ce-page.c:240
 msgid "Random"
 msgstr "A l'atzar"
 
 #: panels/network/connection-editor/ce-page.c:237
+#: panels/network/connection-editor/ce-page.c:241
 msgid "Stable"
 msgstr "Estable"
 
-#: panels/network/connection-editor/ce-page.c:241
+#: panels/network/connection-editor/ce-page.c:243
+msgid "Stable per SSID"
+msgstr ""
+
+#: panels/network/connection-editor/ce-page.c:251
 msgid ""
 "The MAC address entered here will be used as hardware address for the "
 "network device this connection is activated on. This feature is known as MAC "
@@ -3158,7 +3158,7 @@ msgstr ""
 "connexió per la qual s'activi aquest dispositiu. Aquesta funcionalitat es "
 "coneix com a clonació o falsejament de MAC. Per exemple: 00:11:22:33:44:55"
 
-#: panels/network/connection-editor/ce-page.c:399
+#: panels/network/connection-editor/ce-page.c:409
 #, c-format
 msgid "Profile %d"
 msgstr "Perfil %d"
@@ -3748,7 +3748,6 @@ msgstr "_Parells"
 
 #: panels/network/connection-editor/wireguard-page.ui:242
 #, fuzzy
-#| msgid "WireGuard"
 msgid "Add WireGuard peer"
 msgstr "WireGuard"
 
@@ -6141,21 +6140,15 @@ msgid "_Automatic Device Location"
 msgstr "_Ubicació automàtica de dispositius"
 
 #: panels/privacy/cc-location-page.ui:28
-#, fuzzy
-#| msgid ""
-#| "Location services use GPS, Wi-Fi and cellular connections to determine "
-#| "the approximate location of this device. <a href='https://location."
-#| "services.mozilla.com/privacy'>Learn about what data is collected, and how "
-#| "it is used.</a>"
 msgid ""
 "Automatic device location uses sources like GPS, Wi-Fi and cellular to "
 "determine an approximate location for this device. Location data is sent to "
 "Mozilla Location Services as part of this feature."
 msgstr ""
-"Els serveis d'ubicació utilitzen connexions GPS, wifi i mòbils per a "
-"determinar la ubicació aproximada d'aquest dispositiu. <a href='https://"
-"location.services.mozilla.com/privacy'>Apreneu sobre quines dades es "
-"recullen i com s'utilitzen.</a>"
+"Els serveis d'ubicació automàtica utilitzen connexions GPS, wifi i mòbils "
+"per a determinar la ubicació aproximada d'aquest dispositiu. Les dades "
+"d'ubicació s'envien als Serveis d'ubicació de Mozilla com a part d'aquesta "
+"característica."
 
 #: panels/privacy/cc-location-page.ui:56
 msgid ""
@@ -6215,59 +6208,59 @@ msgstr "_Bloqueja la pantalla"
 msgid "Automatic screen lock"
 msgstr "Bloqueja la pantalla automàticament"
 
-#: panels/privacy/cc-privacy-panel.ui:36
+#: panels/privacy/cc-privacy-panel.ui:37
 msgid "_Location"
 msgstr "_Ubicació"
 
-#: panels/privacy/cc-privacy-panel.ui:37
+#: panels/privacy/cc-privacy-panel.ui:38
 msgid "Control access to your location"
 msgstr "Controla l'accés a la vostra ubicació"
 
-#: panels/privacy/cc-privacy-panel.ui:47
+#: panels/privacy/cc-privacy-panel.ui:48
 msgid "_File History &amp; Trash"
 msgstr "_Historial dels fitxers i paperera"
 
-#: panels/privacy/cc-privacy-panel.ui:48
+#: panels/privacy/cc-privacy-panel.ui:49
 msgid "Remove saved data and files"
 msgstr "Elimina les dades i els fitxers desats"
 
-#: panels/privacy/cc-privacy-panel.ui:58
+#: panels/privacy/cc-privacy-panel.ui:59
 msgid "_Diagnostics"
 msgstr "_Diagnòstics"
 
-#: panels/privacy/cc-privacy-panel.ui:59
+#: panels/privacy/cc-privacy-panel.ui:60
 msgid "Automatic problem reporting"
 msgstr "Informa de problemes automàticament"
 
-#: panels/privacy/cc-privacy-panel.ui:78
+#: panels/privacy/cc-privacy-panel.ui:79
 msgid "_Cameras"
 msgstr "_Càmeres"
 
-#: panels/privacy/cc-privacy-panel.ui:79
+#: panels/privacy/cc-privacy-panel.ui:80
 msgid "Control camera access"
 msgstr "Controla l'accés a la càmera"
 
-#: panels/privacy/cc-privacy-panel.ui:89
+#: panels/privacy/cc-privacy-panel.ui:90
 msgid "_Microphones"
 msgstr "_Micròfons"
 
-#: panels/privacy/cc-privacy-panel.ui:90
+#: panels/privacy/cc-privacy-panel.ui:91
 msgid "Control microphone access"
 msgstr "Controla l'accés al micròfon"
 
-#: panels/privacy/cc-privacy-panel.ui:102
+#: panels/privacy/cc-privacy-panel.ui:103
 msgid "_Thunderbolt"
 msgstr "_Thunderbolt"
 
-#: panels/privacy/cc-privacy-panel.ui:103
+#: panels/privacy/cc-privacy-panel.ui:104
 msgid "Manage device access"
 msgstr "Administra l'accés a dispositiu"
 
-#: panels/privacy/cc-privacy-panel.ui:113
+#: panels/privacy/cc-privacy-panel.ui:114
 msgid "Device _Security"
 msgstr "_Seguretat del dispositiu"
 
-#: panels/privacy/cc-privacy-panel.ui:114
+#: panels/privacy/cc-privacy-panel.ui:115
 msgid "Hardware security status and information"
 msgstr "Estat de seguretat i informació del maquinari"
 
@@ -6425,26 +6418,20 @@ msgid "Forbid New _USB Devices"
 msgstr "Prohibeix nous dispositius _USB"
 
 #: panels/privacy/cc-screen-page.ui:77
-#, fuzzy
-#| msgid ""
-#| "Prevent new USB devices from interacting with the system when the screen "
-#| "is locked."
 msgid ""
 "Prevent new USB devices from interacting with the system when the screen is "
 "locked"
 msgstr ""
-"Evita que els dispositius USB nous puguin interaccionar amb el sistema quan "
-"la pantalla estigui bloquejada."
+"Evita que dispositius USB nous puguin interaccionar amb el sistema quan la "
+"pantalla estigui bloquejada"
 
 #: panels/privacy/cc-screen-page.ui:88
 msgid "Screen Privacy"
 msgstr "Privacitat de la pantalla"
 
 #: panels/privacy/cc-screen-page.ui:93
-#, fuzzy
-#| msgid "Restrict Viewing Angle"
 msgid "Restrict Viewing _Angle"
-msgstr "Restringeix l'angle de visualització"
+msgstr "Restringeix l'_angle de visualització"
 
 #. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
 #: panels/privacy/cc-usage-page.c:54
@@ -6702,10 +6689,8 @@ msgid "_Add Location…"
 msgstr "_Afegeix una ubicació…"
 
 #: panels/search/cc-search-locations-dialog.ui:89
-#, fuzzy
-#| msgid "Search Locations"
 msgid "No custom search locations"
-msgstr "Ubicacions de cerca"
+msgstr "No hi ha ubicacions de cerca personalitzades"
 
 #: panels/search/cc-search-panel.c:173
 msgid "No apps found"
@@ -7262,65 +7247,63 @@ msgstr "_Regió i idioma"
 msgid "System language and localization"
 msgstr "Idioma del sistema i ubicació"
 
-#: panels/system/cc-system-panel.ui:34
+#: panels/system/cc-system-panel.ui:33
 msgid "_Date &amp; Time"
 msgstr "_Data i hora"
 
-#: panels/system/cc-system-panel.ui:35
+#: panels/system/cc-system-panel.ui:34
 msgid "Time zone and clock settings"
 msgstr "Paràmetres del fus horari i de rellotge"
 
-#: panels/system/cc-system-panel.ui:45
+#: panels/system/cc-system-panel.ui:43
 msgid "_Users"
 msgstr "_Usuaris"
 
-#: panels/system/cc-system-panel.ui:46
+#: panels/system/cc-system-panel.ui:44
 msgid "Add and remove accounts, change password"
 msgstr "Afegiu i esborreu comptes d'usuari, i canvieu contrasenyes"
 
-#: panels/system/cc-system-panel.ui:58
+#: panels/system/cc-system-panel.ui:54
 msgid "R_emote Desktop"
 msgstr "_Escriptori remot"
 
-#: panels/system/cc-system-panel.ui:59
+#: panels/system/cc-system-panel.ui:55
 msgid "Allow this device to be used remotely"
 msgstr "Permet que aquest dispositiu pugui ser usat remotament"
 
-#: panels/system/cc-system-panel.ui:69
+#: panels/system/cc-system-panel.ui:64
 #: panels/system/remote-login/cc-remote-login-page.ui:51
 msgid "Secu_re Shell"
 msgstr "Secu_re Shell"
 
-#: panels/system/cc-system-panel.ui:70
-#, fuzzy
-#| msgid "Has network access"
+#: panels/system/cc-system-panel.ui:65
 msgid "SSH network access"
-msgstr "Té accés a la xarxa"
+msgstr "Accés de xarxa SSH"
 
-#: panels/system/cc-system-panel.ui:79
+#: panels/system/cc-system-panel.ui:74
 msgid "_About"
 msgstr "Quant _a"
 
-#: panels/system/cc-system-panel.ui:80
+#: panels/system/cc-system-panel.ui:75
 msgid "Hardware details and software versions"
 msgstr "Detalls del maquinari i versions de programari"
 
-#: panels/system/cc-system-panel.ui:97
+#: panels/system/cc-system-panel.ui:91
 msgid "Software _Updates"
 msgstr "Act_ualitzacions de programari"
 
 #. Translators: This is the full date and time format used in 12-hour mode.
-#: panels/system/datetime/cc-datetime-page.c:230
+#: panels/system/datetime/cc-datetime-page.c:231
 msgid "%e %B %Y, %l:%M %p"
 msgstr "%e %B de %Y a les %l:%M %p"
 
 #. Translators: This is the full date and time format used in 24-hour mode.
-#: panels/system/datetime/cc-datetime-page.c:235
+#: panels/system/datetime/cc-datetime-page.c:236
 msgid "%e %B %Y, %R"
 msgstr "%e %B de %Y a les %R"
 
 #. Translators: "city, country"
-#: panels/system/datetime/cc-datetime-page.c:388
+#: panels/system/datetime/cc-datetime-page.c:393
 #, c-format
 msgctxt "timezone loc"
 msgid "%s, %s"
@@ -7328,39 +7311,39 @@ msgstr "%s, %s"
 
 #. Update the timezone on the listbow row
 #. Translators: "timezone (details)"
-#: panels/system/datetime/cc-datetime-page.c:405
+#: panels/system/datetime/cc-datetime-page.c:410
 #, c-format
 msgctxt "timezone desc"
 msgid "%s (%s)"
 msgstr "%s (%s)"
 
 #: panels/system/datetime/cc-datetime-page.ui:9
-#: panels/system/datetime/cc-datetime-page.ui:117
+#: panels/system/datetime/cc-datetime-page.ui:116
 #: panels/system/datetime/gnome-datetime-panel.desktop.in:3
 msgid "Date & Time"
 msgstr "Data i hora"
 
-#: panels/system/datetime/cc-datetime-page.ui:60
+#: panels/system/datetime/cc-datetime-page.ui:59
 msgid "_Year"
 msgstr "An_y"
 
-#: panels/system/datetime/cc-datetime-page.ui:71
+#: panels/system/datetime/cc-datetime-page.ui:70
 msgid "_Month"
 msgstr "_Mes"
 
-#: panels/system/datetime/cc-datetime-page.ui:98
+#: panels/system/datetime/cc-datetime-page.ui:97
 msgid "_Day"
 msgstr "_Dia"
 
-#: panels/system/datetime/cc-datetime-page.ui:137
+#: panels/system/datetime/cc-datetime-page.ui:136
 msgid "Automatic _Date &amp; Time"
 msgstr "_Data i hora automàtiques"
 
-#: panels/system/datetime/cc-datetime-page.ui:138
+#: panels/system/datetime/cc-datetime-page.ui:137
 msgid "Requires internet access"
 msgstr "Requereix accés a Internet"
 
-#: panels/system/datetime/cc-datetime-page.ui:150
+#: panels/system/datetime/cc-datetime-page.ui:149
 msgid "Date &amp; _Time"
 msgstr "Data i _hora"
 
@@ -7416,51 +7399,51 @@ msgstr "_Números de setmana"
 msgid "Shown in the dropdown calendar"
 msgstr "Mostrat al calendari desplegable"
 
-#: panels/system/datetime/cc-datetime-page.ui:271
+#: panels/system/datetime/cc-datetime-page.ui:270
 msgid "January"
 msgstr "Gener"
 
-#: panels/system/datetime/cc-datetime-page.ui:272
+#: panels/system/datetime/cc-datetime-page.ui:271
 msgid "February"
 msgstr "Febrer"
 
-#: panels/system/datetime/cc-datetime-page.ui:273
+#: panels/system/datetime/cc-datetime-page.ui:272
 msgid "March"
 msgstr "Març"
 
-#: panels/system/datetime/cc-datetime-page.ui:274
+#: panels/system/datetime/cc-datetime-page.ui:273
 msgid "April"
 msgstr "Abril"
 
-#: panels/system/datetime/cc-datetime-page.ui:275
+#: panels/system/datetime/cc-datetime-page.ui:274
 msgid "May"
 msgstr "Maig"
 
-#: panels/system/datetime/cc-datetime-page.ui:276
+#: panels/system/datetime/cc-datetime-page.ui:275
 msgid "June"
 msgstr "Juny"
 
-#: panels/system/datetime/cc-datetime-page.ui:277
+#: panels/system/datetime/cc-datetime-page.ui:276
 msgid "July"
 msgstr "Juliol"
 
-#: panels/system/datetime/cc-datetime-page.ui:278
+#: panels/system/datetime/cc-datetime-page.ui:277
 msgid "August"
 msgstr "Agost"
 
-#: panels/system/datetime/cc-datetime-page.ui:279
+#: panels/system/datetime/cc-datetime-page.ui:278
 msgid "September"
 msgstr "Setembre"
 
-#: panels/system/datetime/cc-datetime-page.ui:280
+#: panels/system/datetime/cc-datetime-page.ui:279
 msgid "October"
 msgstr "Octubre"
 
-#: panels/system/datetime/cc-datetime-page.ui:281
+#: panels/system/datetime/cc-datetime-page.ui:280
 msgid "November"
 msgstr "Novembre"
 
-#: panels/system/datetime/cc-datetime-page.ui:282
+#: panels/system/datetime/cc-datetime-page.ui:281
 msgid "December"
 msgstr "Desembre"
 
@@ -7688,10 +7671,8 @@ msgstr ""
 
 #: panels/system/remote-desktop/cc-desktop-sharing-page.ui:46
 #: panels/system/remote-desktop/cc-remote-session-page.ui:45
-#, fuzzy
-#| msgid "Username"
 msgid "_Hostname"
-msgstr "Nom d'usuari"
+msgstr "Nom de _màquina"
 
 #: panels/system/remote-desktop/cc-desktop-sharing-page.ui:54
 #: panels/system/remote-desktop/cc-desktop-sharing-page.ui:75
@@ -7712,10 +7693,8 @@ msgstr "_Port"
 
 #: panels/system/remote-desktop/cc-desktop-sharing-page.ui:90
 #: panels/system/remote-desktop/cc-remote-session-page.ui:89
-#, fuzzy
-#| msgid "Printer Details"
 msgid "Login Details"
-msgstr "Detalls de la impressora"
+msgstr "Detalls d'inici de sessió"
 
 #: panels/system/remote-desktop/cc-desktop-sharing-page.ui:131
 #: panels/system/remote-desktop/cc-remote-session-page.ui:130
@@ -7758,16 +7737,12 @@ msgid "Encryption Fingerprint"
 msgstr "Empremta digital de xifratge"
 
 #: panels/system/remote-desktop/cc-encryption-fingerprint-dialog.ui:29
-#, fuzzy
-#| msgid ""
-#| "The encryption fingerprint can be seen in connecting clients and should "
-#| "be identical."
 msgid ""
 "The encryption fingerprint can be seen in connecting clients and should be "
 "identical"
 msgstr ""
 "L'empremta digital de xifratge es pot veure quan es connecten els clients i "
-"hauria de ser idèntica."
+"hauria de ser idèntica"
 
 #: panels/system/remote-desktop/org.gnome.controlcenter.remote-session-helper.policy.in.in:11
 msgid "Enable or disable remote sessions"
@@ -7791,7 +7766,7 @@ msgstr "Accedeix a aquest dispositiu usant Secure Shell (SSH)"
 
 #: panels/system/remote-login/cc-remote-login-page.ui:58
 msgid "SSH Login Command"
-msgstr ""
+msgstr "Ordre d'inici de sessió SSH"
 
 #: panels/system/remote-login/org.gnome.controlcenter.remote-login-helper.policy.in.in:11
 msgid "Enable or disable remote login"
@@ -7948,10 +7923,8 @@ msgid "Should match the web domain of the account provider"
 msgstr "Ha de coincidir amb l'adreça web del proveïdor del compte"
 
 #: panels/system/users/cc-enterprise-login-dialog.ui:130
-#, fuzzy
-#| msgid "Input Device"
 msgid "Enroll Device"
-msgstr "Dispositiu d'entrada"
+msgstr "Inscriu el dispositiu"
 
 #. Translators: This button enrolls the computer in the domain in order to use enterprise logins.
 #: panels/system/users/cc-enterprise-login-dialog.ui:140
@@ -8574,12 +8547,9 @@ msgid "Cursor Size"
 msgstr "Mida del cursor"
 
 #: panels/universal-access/cc-cursor-size-dialog.ui:19
-#, fuzzy
-#| msgid ""
-#| "Cursor size can be combined with Zoom to make it easier to see the cursor."
 msgid ""
 "Cursor size can be combined with Zoom to make it easier to see the cursor"
-msgstr "La mida del cursor es pot ampliar perquè sigui més fàcil veure'l."
+msgstr "La mida del cursor es pot ampliar perquè sigui més fàcil veure'l"
 
 #. Translators: This will be presented as the text of a link to the Sound panel
 #: panels/universal-access/cc-ua-hearing-page.c:156
@@ -8589,11 +8559,9 @@ msgstr "So"
 
 #. Translators: %s is a link to the Sound panel with the label "Sound"
 #: panels/universal-access/cc-ua-hearing-page.c:158
-#, fuzzy, c-format
-#| msgid "System volume can be adjusted in <a href='#'>Sound</a> settings."
+#, c-format
 msgid "System volume can be adjusted in %s settings"
-msgstr ""
-"El volum del sistema es pot ajustar als paràmetres de <a href='#'>So</a>."
+msgstr "El volum del sistema es pot ajustar als paràmetres de %s."
 
 #: panels/universal-access/cc-ua-hearing-page.ui:4
 msgid "Hearing"
@@ -8604,11 +8572,8 @@ msgid "_Overamplification"
 msgstr "_Sobreamplificació"
 
 #: panels/universal-access/cc-ua-hearing-page.ui:18
-#, fuzzy
-#| msgid "Allow volume to exceed 100%. This will result in quality loss"
 msgid "Allow volume to exceed 100%, with reduced sound quality"
-msgstr ""
-"Permet que el volum superi el 100%. Això provocarà una pèrdua de qualitat"
+msgstr "Permet que el volum superi el 100%, amb una de qualitat de so minvada"
 
 #: panels/universal-access/cc-ua-hearing-page.ui:39
 msgid "Visual Alerts"
@@ -8732,16 +8697,12 @@ msgid "Large"
 msgstr "Gran"
 
 #: panels/universal-access/cc-ua-panel.ui:22
-#, fuzzy
-#| msgid "_Accessibility Menu"
 msgid "_Always Show Accessibility Menu"
-msgstr "_Menú d'accessibilitat"
+msgstr "Mostre sempre el menú d'_accessibilitat"
 
 #: panels/universal-access/cc-ua-panel.ui:23
-#, fuzzy
-#| msgid "Display menu for Accessibility settings in top bar"
 msgid "Display the accessibility menu in the top bar"
-msgstr "Mostra el menú dels paràmetres d'accessibilitat a la barra superior"
+msgstr "Mostra el menú d'accessibilitat a la barra superior"
 
 #: panels/universal-access/cc-ua-panel.ui:35
 msgid "_Seeing"
@@ -8817,13 +8778,11 @@ msgstr ""
 
 #: panels/universal-access/cc-ua-seeing-page.ui:27
 msgid "Use shapes to indicate state in addition to or instead of color"
-msgstr ""
+msgstr "Usa formes per a indicar l'estat a més a més o en lloc de color"
 
 #: panels/universal-access/cc-ua-seeing-page.ui:34
-#, fuzzy
-#| msgid "_Reduce Animation"
 msgid "Reduce _Animation"
-msgstr "_Redueix l'animació"
+msgstr "Redueix l'_animació"
 
 #: panels/universal-access/cc-ua-seeing-page.ui:35
 msgid "Reduce animations in the user interface to reduce motion"
@@ -8857,10 +8816,8 @@ msgstr ""
 "majúscules"
 
 #: panels/universal-access/cc-ua-seeing-page.ui:67
-#, fuzzy
-#| msgid "_Overlay Scrollbars"
 msgid "Always Show Scroll_bars"
-msgstr "_Superposa les barres de desplaçament"
+msgstr "Mostra sempre les _barres de desplaçament"
 
 #: panels/universal-access/cc-ua-seeing-page.ui:68
 msgid "Make scrollbars always visible"
@@ -8876,8 +8833,6 @@ msgstr ""
 "El lector de pantalla llegeix el text visualitzat mentre moveu el focus"
 
 #: panels/universal-access/cc-ua-typing-page.ui:17
-#, fuzzy
-#| msgid "_Screen Keyboard"
 msgid "Screen _Keyboard"
 msgstr "_Teclat en pantalla"
 
@@ -8914,10 +8869,8 @@ msgid "Blink Speed"
 msgstr "Velocitat de parpelleig"
 
 #: panels/universal-access/cc-ua-typing-page.ui:82
-#, fuzzy
-#| msgid "Test Entry"
 msgid "_Test Entry"
-msgstr "Entrada de prova"
+msgstr "En_trada de prova"
 
 #: panels/universal-access/cc-ua-typing-page.ui:92
 msgid "Typing Assist"
@@ -8974,8 +8927,6 @@ msgid "Beep when a key is rejected"
 msgstr "Fes un avís sonor quan es rebutgi una tecla"
 
 #: panels/universal-access/cc-ua-typing-page.ui:219
-#, fuzzy
-#| msgid "_Bounce Keys"
 msgid "B_ounce Keys"
 msgstr "_Repetició de tecles"
 
@@ -9000,16 +8951,12 @@ msgid "Magnifier"
 msgstr "Lupa"
 
 #: panels/universal-access/cc-ua-zoom-page.ui:30
-#, fuzzy
-#| msgid "Magnification Factor"
 msgid "_Magnification Factor"
-msgstr "Factor d'ampliació"
+msgstr "Factor d'a_mpliació"
 
 #: panels/universal-access/cc-ua-zoom-page.ui:47
-#, fuzzy
-#| msgid "_Magnifier View"
 msgid "M_agnifier View"
-msgstr "_Vista amb lupa"
+msgstr "Vist_a amb lupa"
 
 #. Translators: This is a behavior option of the Magnifier View
 #: panels/universal-access/cc-ua-zoom-page.ui:53
@@ -9026,10 +8973,8 @@ msgid "_Extend Outside Screen Edges"
 msgstr "_Estén les vores exteriors de la pantalla"
 
 #: panels/universal-access/cc-ua-zoom-page.ui:72
-#, fuzzy
-#| msgid "Screen Area"
 msgid "_Screen Area"
-msgstr "Àrea de la pantalla"
+msgstr "Àrea de la _pantalla"
 
 #. Translators: This is an option of the Magnifier Screen Area
 #: panels/universal-access/cc-ua-zoom-page.ui:77
@@ -9133,10 +9078,8 @@ msgid "3/4 Screen"
 msgstr "3/4 de la pantalla"
 
 #: panels/universal-access/cc-ua-zoom-page.ui:203
-#, fuzzy
-#| msgid "Color"
 msgid "Colo_r"
-msgstr "Color"
+msgstr "Colo_r"
 
 #: panels/universal-access/cc-ua-zoom-page.ui:221
 msgid "Color Filters"
@@ -9151,10 +9094,8 @@ msgid "Invert colors in the magnifier region"
 msgstr "Inverteix els colors a la regió de lupa"
 
 #: panels/universal-access/cc-ua-zoom-page.ui:233
-#, fuzzy
-#| msgid "Brightness"
 msgid "_Brightness"
-msgstr "Brillantor"
+msgstr "_Brillantor"
 
 #. Translators: This is a mark in the Brightness scale
 #. Translators: This is a mark in the Contrast scale
@@ -9171,10 +9112,8 @@ msgid "High"
 msgstr "Alta"
 
 #: panels/universal-access/cc-ua-zoom-page.ui:259
-#, fuzzy
-#| msgid "Contrast"
 msgid "Co_ntrast"
-msgstr "Contrast"
+msgstr "Co_ntrast"
 
 #: panels/universal-access/cc-ua-zoom-page.ui:284
 msgid "Co_lor"
@@ -9293,10 +9232,8 @@ msgid "Use absolute positioning for the pen"
 msgstr "Utilitza el posicionament absolut per al llapis"
 
 #: panels/wacom/cc-wacom-page.ui:23
-#, fuzzy
-#| msgid "Left Hand Orientation"
 msgid "_Left Hand Orientation"
-msgstr "Orientació d'esquerrans"
+msgstr "Orientació d'_esquerrans"
 
 #: panels/wacom/cc-wacom-page.ui:24
 msgid "Tablet and Express Keys™ are rotated for left hand use"
@@ -9314,10 +9251,8 @@ msgid "Map to _Monitor"
 msgstr "Assigna al _monitor"
 
 #: panels/wacom/cc-wacom-page.ui:51
-#, fuzzy
-#| msgid "Keep Aspect Ratio"
 msgid "_Keep Aspect Ratio"
-msgstr "Mantén la ràtio d'aspecte"
+msgstr "_Mantén la ràtio d'aspecte"
 
 #: panels/wacom/cc-wacom-page.ui:52
 msgid "Only use a portion of the tablet surface to keep monitor aspect ratio"
@@ -9326,10 +9261,8 @@ msgstr ""
 "relació d'aspecte del monitor"
 
 #: panels/wacom/cc-wacom-page.ui:58
-#, fuzzy
-#| msgid "Calibrate"
 msgid "_Calibrate"
-msgstr "Calibrar"
+msgstr "_Calibrar"
 
 #: panels/wacom/cc-wacom-panel.ui:57
 msgid "No tablet detected"
@@ -9353,36 +9286,26 @@ msgid "Button %d Mapping"
 msgstr "Botó %d"
 
 #: panels/wacom/cc-wacom-stylus-page.c:398
-#, fuzzy
-#| msgid "Right Mouse Button Click"
 msgid "_Left Mousebutton Click"
-msgstr "Clic del botó dret del ratolí"
+msgstr "C_lic del botó esquerre del ratolí"
 
 #: panels/wacom/cc-wacom-stylus-page.c:401
-#, fuzzy
-#| msgid "Middle Mouse Button Click"
 msgid "_Middle Mousebutton Click"
-msgstr "Clic del botó del mig del ratolí"
+msgstr "Clic del botó del _mig del ratolí"
 
 #: panels/wacom/cc-wacom-stylus-page.c:404
-#, fuzzy
-#| msgid "Right Mouse Button Click"
 msgid "_Right Mousebutton Click"
-msgstr "Clic del botó dret del ratolí"
+msgstr "Clic del botó d_ret del ratolí"
 
 #. Translators: this is the "go back" action of a button
 #: panels/wacom/cc-wacom-stylus-page.c:408
-#, fuzzy
-#| msgid "Back"
 msgid "_Back"
-msgstr "Enrere"
+msgstr "En_rere"
 
 #. Translators: this is the "go forward" action of a button
 #: panels/wacom/cc-wacom-stylus-page.c:412
-#, fuzzy
-#| msgid "Forward"
 msgid "_Forward"
-msgstr "Endavant"
+msgstr "_Endavant"
 
 #: panels/wacom/cc-wacom-stylus-page.ui:16
 #, fuzzy
@@ -9405,25 +9328,16 @@ msgid "Firm"
 msgstr "Ferma"
 
 #: panels/wacom/cc-wacom-stylus-page.ui:54
-#, fuzzy
-#| msgctxt "display setting"
-#| msgid "Button 1"
 msgid "Button _1"
-msgstr "Botó 1"
+msgstr "Botó _1"
 
 #: panels/wacom/cc-wacom-stylus-page.ui:73
-#, fuzzy
-#| msgctxt "display setting"
-#| msgid "Button 2"
 msgid "Button _2"
-msgstr "Botó 2"
+msgstr "Botó _2"
 
 #: panels/wacom/cc-wacom-stylus-page.ui:92
-#, fuzzy
-#| msgctxt "display setting"
-#| msgid "Button 3"
 msgid "Button _3"
-msgstr "Botó 3"
+msgstr "Botó _3"
 
 #: panels/wacom/cc-wacom-stylus-page.ui:111
 #, fuzzy
@@ -10072,8 +9986,6 @@ msgid "Settings categories"
 msgstr "Categories de configuració"
 
 #: shell/cc-panel-list.ui:44
-#, fuzzy
-#| msgid "No results found"
 msgid "No Results Found"
 msgstr "No s'ha trobat cap resultat"
 
@@ -10108,16 +10020,12 @@ msgid "_OK"
 msgstr "_D'acord"
 
 #: shell/cc-window.ui:95
-#, fuzzy
-#| msgid "Keyboard Shortcuts"
 msgid "_Keyboard Shortcuts"
-msgstr "Dreceres de teclat"
+msgstr "_Dreceres de teclat"
 
 #: shell/cc-window.ui:99
-#, fuzzy
-#| msgid "Help"
 msgid "_Help"
-msgstr "Ajuda"
+msgstr "_Ajuda"
 
 #: shell/cc-window.ui:103
 #, fuzzy
