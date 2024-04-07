@@ -49,11 +49,11 @@ struct _CcSharingPanel
 
   GtkWidget *hostname_entry;
   GtkWidget *main_list_box;
-  GtkWidget *media_sharing_dialog;
+  AdwDialog *media_sharing_dialog;
   AdwActionRow *media_sharing_enable_row;
   GtkWidget *media_sharing_row;
   GtkWidget *media_sharing_switch;
-  GtkWidget *personal_file_sharing_dialog;
+  AdwDialog *personal_file_sharing_dialog;
   GtkWidget *personal_file_sharing_vbox;
   AdwActionRow *personal_file_sharing_enable_row;
   AdwPreferencesPage *personal_file_sharing_page;
@@ -77,13 +77,13 @@ cc_sharing_panel_dispose (GObject *object)
 
   if (self->media_sharing_dialog)
     {
-      gtk_window_destroy (GTK_WINDOW (self->media_sharing_dialog));
+      adw_dialog_force_close (self->media_sharing_dialog);
       self->media_sharing_dialog = NULL;
     }
 
   if (self->personal_file_sharing_dialog)
     {
-      gtk_window_destroy (GTK_WINDOW (self->personal_file_sharing_dialog));
+      adw_dialog_force_close (self->personal_file_sharing_dialog);
       self->personal_file_sharing_dialog = NULL;
     }
 
@@ -229,12 +229,13 @@ cc_sharing_panel_add_folder (CcSharingPanel *self,
                              GtkListBoxRow  *row)
 {
   GtkWidget *dialog;
+  GtkWidget *toplevel = GTK_WIDGET (gtk_widget_get_root (GTK_WIDGET (self)));
 
   if (!GPOINTER_TO_INT (g_object_get_data (G_OBJECT (row), "is-add")))
     return;
 
   dialog = gtk_file_chooser_dialog_new (_("Choose a Folder"),
-                                        GTK_WINDOW (self->media_sharing_dialog),
+                                        GTK_WINDOW (toplevel),
                                         GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER,
                                         _("_Cancel"), GTK_RESPONSE_CANCEL,
                                         _("_Open"), GTK_RESPONSE_ACCEPT,
@@ -422,7 +423,7 @@ cc_sharing_panel_setup_media_sharing_dialog (CcSharingPanel *self)
       return;
     }
 
-  g_signal_connect_object (self->media_sharing_dialog, "close-request",
+  g_signal_connect_object (self->media_sharing_dialog, "close-attempt",
                            G_CALLBACK (cc_sharing_panel_media_sharing_dialog_close_request),
                            self, G_CONNECT_SWAPPED);
 
@@ -571,7 +572,6 @@ sharing_proxy_ready (GObject      *source,
 {
   CcSharingPanel *self;
   GDBusProxy *proxy;
-  GtkWidget *parent;
   g_autoptr(GError) error = NULL;
 
   proxy = G_DBUS_PROXY (gsd_sharing_proxy_new_for_bus_finish (res, &error));
@@ -592,12 +592,6 @@ sharing_proxy_ready (GObject      *source,
     cc_sharing_panel_setup_personal_file_sharing_dialog (self);
   else
     gtk_widget_set_visible (self->personal_file_sharing_row, FALSE);
-
-  parent = cc_shell_get_toplevel (cc_panel_get_shell (CC_PANEL (self)));
-  gtk_window_set_transient_for (GTK_WINDOW (self->media_sharing_dialog),
-                                GTK_WINDOW (parent));
-  gtk_window_set_transient_for (GTK_WINDOW (self->personal_file_sharing_dialog),
-                                GTK_WINDOW (parent));
 
   cc_sharing_panel_setup_label_with_hostname (self, self->personal_file_sharing_page);
 }
