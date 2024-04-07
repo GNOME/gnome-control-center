@@ -599,8 +599,6 @@ sharing_proxy_ready (GObject      *source,
 static void
 cc_sharing_panel_init (CcSharingPanel *self)
 {
-  g_autoptr(GtkCssProvider) provider = NULL;
-
   g_resources_register (cc_sharing_get_resource ());
 
   gtk_widget_init_template (GTK_WIDGET (self));
@@ -612,13 +610,6 @@ cc_sharing_panel_init (CcSharingPanel *self)
                                  cc_panel_get_cancellable (CC_PANEL (self)),
                                  sharing_proxy_ready,
                                  self);
-
-  provider = gtk_css_provider_new ();
-  gtk_css_provider_load_from_resource (provider,
-                                       "/org/gnome/control-center/sharing/sharing.css");
-  gtk_style_context_add_provider_for_display (gdk_display_get_default (),
-                                              GTK_STYLE_PROVIDER (provider),
-                                              GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
 }
 
 CcSharingPanel *
