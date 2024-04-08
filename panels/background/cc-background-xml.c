@@ -253,13 +253,13 @@ cc_background_xml_load_xml_internal (CcBackgroundXml *xml,
 	} else if (!strcmp ((gchar *)wpa->name, "options")) {
 	  if (wpa->last != NULL) {
 	    g_object_set (G_OBJECT (item), "placement",
-			  enum_string_to_value (G_DESKTOP_TYPE_DESKTOP_BACKGROUND_STYLE,
+			  enum_string_to_value (G_DESKTOP_TYPE_BACKGROUND_STYLE,
 						g_strstrip ((gchar *)wpa->last->content)), NULL);
 	  }
 	} else if (!strcmp ((gchar *)wpa->name, "shade_type")) {
 	  if (wpa->last != NULL) {
 	    g_object_set (G_OBJECT (item), "shading",
-			  enum_string_to_value (G_DESKTOP_TYPE_DESKTOP_BACKGROUND_SHADING,
+			  enum_string_to_value (G_DESKTOP_TYPE_BACKGROUND_SHADING,
 						g_strstrip ((gchar *)wpa->last->content)), NULL);
 	  }
 	} else if (!strcmp ((gchar *)wpa->name, "pcolor")) {
@@ -570,8 +570,8 @@ cc_background_xml_save (CcBackgroundItem *item,
 		"flags", &flags,
 		NULL);
 
-  placement_str = enum_to_str (G_DESKTOP_TYPE_DESKTOP_BACKGROUND_STYLE, placement);
-  shading_str = enum_to_str (G_DESKTOP_TYPE_DESKTOP_BACKGROUND_SHADING, shading);
+  placement_str = enum_to_str (G_DESKTOP_TYPE_BACKGROUND_STYLE, placement);
+  shading_str = enum_to_str (G_DESKTOP_TYPE_BACKGROUND_SHADING, shading);
 
   wallpaper = xmlNewChild (root, NULL, (xmlChar *)"wallpaper", NULL);
   xml_item = xmlNewTextChild (wallpaper, NULL, (xmlChar *)"name", (xmlChar *)name);

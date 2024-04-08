@@ -717,14 +717,14 @@ cc_background_item_class_init (CcBackgroundItemClass *klass)
         props[PROP_PLACEMENT] = g_param_spec_enum ("placement",
                                                    "placement",
                                                    "placement",
-                                                   G_DESKTOP_TYPE_DESKTOP_BACKGROUND_STYLE,
+                                                   G_DESKTOP_TYPE_BACKGROUND_STYLE,
                                                    G_DESKTOP_BACKGROUND_STYLE_SCALED,
                                                    G_PARAM_READWRITE);
 
         props[PROP_SHADING] = g_param_spec_enum ("shading",
                                                  "shading",
                                                  "shading",
-                                                 G_DESKTOP_TYPE_DESKTOP_BACKGROUND_SHADING,
+                                                 G_DESKTOP_TYPE_BACKGROUND_SHADING,
                                                  G_DESKTOP_BACKGROUND_SHADING_SOLID,
                                                  G_PARAM_READWRITE);
 
@@ -920,8 +920,8 @@ cc_background_item_dump (CcBackgroundItem *item)
 		g_debug ("pcolor:\t\t\t%s", item->primary_color);
 	if (item->secondary_color)
 		g_debug ("scolor:\t\t\t%s", item->secondary_color);
-	g_debug ("placement:\t\t%s", enum_to_str (G_DESKTOP_TYPE_DESKTOP_BACKGROUND_STYLE, item->placement));
-	g_debug ("shading:\t\t%s", enum_to_str (G_DESKTOP_TYPE_DESKTOP_BACKGROUND_SHADING, item->shading));
+	g_debug ("placement:\t\t%s", enum_to_str (G_DESKTOP_TYPE_BACKGROUND_STYLE, item->placement));
+	g_debug ("shading:\t\t%s", enum_to_str (G_DESKTOP_TYPE_BACKGROUND_SHADING, item->shading));
 	if (item->source_url)
 		g_debug ("source URL:\t\t%s", item->source_url);
 	if (item->source_xml)
