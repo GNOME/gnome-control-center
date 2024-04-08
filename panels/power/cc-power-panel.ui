@@ -189,7 +189,7 @@
                     <property name="title" translatable="yes">_Automatic Suspend</property>
                     <property name="subtitle" translatable="yes">Pause the device after a period of inactivity</property>
                     <property name="show-arrow">True</property>
-                    <signal name="activated" handler="automatic_suspend_row_activated_cb" swapped="yes"/>
+                    <signal name="activated" handler="adw_dialog_present" object="automatic_suspend_dialog"/>
                   </object>
                 </child>
               </object>

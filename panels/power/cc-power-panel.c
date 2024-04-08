@@ -545,12 +545,6 @@ iio_proxy_vanished_cb (GDBusConnection *connection,
   als_enabled_state_changed (self);
 }
 
-static void
-automatic_suspend_row_activated_cb (CcPowerPanel *self)
-{
-  adw_dialog_present (self->automatic_suspend_dialog, GTK_WIDGET (self));
-}
-
 static gboolean
 get_sleep_type (GValue   *value,
                 GVariant *variant,
@@ -1327,7 +1321,6 @@ cc_power_panel_dispose (GObject *object)
   g_clear_object (&self->gsd_settings);
   g_clear_object (&self->session_settings);
   g_clear_object (&self->interface_settings);
-  g_clear_pointer (&self->automatic_suspend_dialog, adw_dialog_force_close);
   g_clear_pointer (&self->devices, g_ptr_array_unref);
   g_clear_object (&self->up_client);
   g_clear_object (&self->iio_proxy);
@@ -1379,7 +1372,6 @@ cc_power_panel_class_init (CcPowerPanelClass *klass)
   gtk_widget_class_bind_template_callback (widget_class, blank_screen_row_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, keynav_failed_cb);
   gtk_widget_class_bind_template_callback (widget_class, power_button_row_changed_cb);
-  gtk_widget_class_bind_template_callback (widget_class, automatic_suspend_row_activated_cb);
 }
 
 static void
