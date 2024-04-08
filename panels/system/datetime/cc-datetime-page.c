@@ -812,7 +812,7 @@ cc_date_time_page_class_init (CcDateTimePageClass *klass)
   g_type_ensure (CC_TYPE_LIST_ROW);
   g_type_ensure (CC_TYPE_TIME_EDITOR);
   g_type_ensure (CC_TYPE_TZ_DIALOG);
-  g_type_ensure (G_DESKTOP_TYPE_DESKTOP_CLOCK_FORMAT);
+  g_type_ensure (G_DESKTOP_TYPE_CLOCK_FORMAT);
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/system/datetime/cc-datetime-page.ui");
 
