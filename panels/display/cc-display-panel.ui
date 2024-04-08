@@ -3,8 +3,8 @@
   <template class="CcDisplayPanel" parent="CcPanel">
 
     <child>
-      <object class="GtkShortcutController" id="toplevel_shortcuts">
-        <property name="scope">global</property>
+      <object class="GtkShortcutController">
+        <property name="scope">managed</property>
         <property name="name">Display Panel Globals Shortcuts</property>
         <child>
           <object class="GtkShortcut" id="escape_shortcut">

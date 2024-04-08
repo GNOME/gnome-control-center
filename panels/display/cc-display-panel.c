@@ -104,7 +104,6 @@ struct _CcDisplayPanel
   AdwComboRow    *primary_display_row;
   AdwPreferencesGroup *single_display_settings_group;
 
-  GtkShortcutController *toplevel_shortcuts;
   GtkShortcut *escape_shortcut;
 
   GSettings           *display_settings;
@@ -406,8 +405,6 @@ dialog_toplevel_is_active_changed (CcDisplayPanel *self)
 static void
 reset_titlebar (CcDisplayPanel *self)
 {
-  gtk_event_controller_set_propagation_phase (GTK_EVENT_CONTROLLER (self->toplevel_shortcuts),
-                                              GTK_PHASE_NONE);
   self->showing_apply_titlebar = FALSE;
   g_object_notify (G_OBJECT (self), "showing-apply-titlebar");
 }
@@ -618,7 +615,6 @@ cc_display_panel_class_init (CcDisplayPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, night_light_row);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, primary_display_row);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, single_display_settings_group);
-  gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, toplevel_shortcuts);
 
   gtk_widget_class_bind_template_callback (widget_class, apply_current_configuration);
   gtk_widget_class_bind_template_callback (widget_class, cancel_current_configuration);
@@ -939,9 +935,6 @@ show_apply_titlebar (CcDisplayPanel *self, gboolean is_applicable)
       adw_window_title_set_subtitle (self->apply_titlebar_title_widget,
                                   _("This could be due to hardware limitations."));
     }
-
-  gtk_event_controller_set_propagation_phase (GTK_EVENT_CONTROLLER (self->toplevel_shortcuts),
-                                              GTK_PHASE_BUBBLE);
 
   self->showing_apply_titlebar = TRUE;
   g_object_notify (G_OBJECT (self), "showing-apply-titlebar");
