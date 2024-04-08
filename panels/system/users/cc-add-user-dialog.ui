@@ -90,54 +90,22 @@
                           <object class="AdwEntryRow" id="local_name_row">
                             <property name="title" translatable="yes">Full _Name</property>
                             <property name="use-underline">True</property>
-                            <signal name="changed" handler="local_name_entry_changed_cb" object="CcAddUserDialog" swapped="yes"/>
+                            <signal name="changed" handler="dialog_validate" object="CcAddUserDialog" swapped="yes"/>
                             <signal name="entry-activated" handler="dialog_validate" object="CcAddUserDialog" swapped="yes"/>
-                            <child>
-                              <object class="GtkEventControllerFocus">
-                                <signal name="leave" handler="local_name_entry_focus_out_event_cb" object="CcAddUserDialog" swapped="yes"/>
-                              </object>
-                            </child>
-                            <child type="suffix">
-                              <object class="GtkImage" id="local_name_status_icon">
-                                <property name="visible">False</property>
-                                <property name="icon-name">dialog-warning-symbolic</property>
-                              </object>
-                            </child>
                           </object>
                         </child>
                         <child>
-                          <object class="AdwActionRow" id="local_username_row">
-                            <property name="activatable-widget">local_username_combo</property>
+                          <object class="AdwEntryRow" id="local_username_row">
                             <property name="title" translatable="yes">_Username</property>
                             <property name="use-underline">True</property>
-                            <property name="subtitle-lines">2</property>
-                            <child>
-                              <object class="GtkComboBoxText" id="local_username_combo">
-                                <property name="valign">center</property>
-                                <property name="has_entry">True</property>
-                                <property name="entry_text_column">0</property>
-                                <property name="model">local_username_model</property>
-                                <signal name="changed" handler="local_username_combo_changed_cb" object="CcAddUserDialog" swapped="yes"/>
-                                <child>
-                                  <object class="GtkEventControllerFocus">
-                                    <signal name="leave" handler="local_username_combo_focus_out_event_cb" object="CcAddUserDialog" swapped="yes"/>
-                                  </object>
-                                </child>
-                                <child internal-child="entry">
-                                  <object class="GtkEntry" id="local_username_entry">
-                                    <property name="activates_default">True</property>
-                                    <property name="hexpand">True</property>
-                                    <signal name="activate" handler="dialog_validate" object="CcAddUserDialog" swapped="yes"/>
-                                  </object>
-                                </child>
-                              </object>
-                            </child>
-                            <child type="suffix">
-                              <object class="GtkImage" id="local_username_status_icon">
-                                <property name="visible">False</property>
-                                <property name="icon-name">dialog-warning-symbolic</property>
-                              </object>
-                            </child>
+                            <signal name="changed" handler="dialog_validate" object="CcAddUserDialog" swapped="yes"/>
+                            <signal name="entry-activated" handler="dialog_validate" object="CcAddUserDialog" swapped="yes"/>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="CcEntryFeedback" id="name_feedback">
+                            <property name="default-text" translatable="yes">Usernames can only include lower case letters, numbers, hyphens and underscores.</property>
+                            <property name="default-icon-name">info-outline-symbolic</property>
                           </object>
                         </child>
                       </object>
@@ -245,12 +213,6 @@
                                 </style>
                               </object>
                             </child>
-                            <child type="suffix">
-                              <object class="GtkImage" id="local_password_status_icon">
-                                <property name="visible">False</property>
-                                <property name="icon-name">dialog-warning-symbolic</property>
-                              </object>
-                            </child>
                           </object>
                         </child>
                         <child>
@@ -268,12 +230,9 @@
                           </object>
                         </child>
                         <child>
-                          <object class="GtkLabel" id="local_password_hint">
-                            <property name="wrap">True</property>
-                            <property name="margin-top">12</property>
-                            <style>
-                              <class name="dim-label"/>
-                            </style>
+                          <object class="CcEntryFeedback" id="local_password_hint">
+                            <property name="default-text" translatable="yes">For a good password, mix upper case, lower case, numbers and punctuation.</property>
+                            <property name="default-icon-name">info-outline-symbolic</property>
                           </object>
                         </child>
                       </object>
@@ -291,22 +250,10 @@
                                 <signal name="leave" handler="password_focus_out_event_cb" object="CcAddUserDialog" swapped="yes"/>
                               </object>
                             </child>
-                            <child type="suffix">
-                              <object class="GtkImage" id="local_verify_status_icon">
-                                <property name="visible">False</property>
-                                <property name="icon-name">dialog-warning-symbolic</property>
-                              </object>
-                            </child>
                           </object>
                         </child>
                         <child>
-                          <object class="GtkLabel" id="local_verify_password_hint">
-                            <property name="wrap">True</property>
-                            <property name="margin-top">12</property>
-                            <style>
-                              <class name="dim-label"/>
-                            </style>
-                          </object>
+                          <object class="CcEntryFeedback" id="local_verify_password_hint"/>
                         </child>
                       </object>
                     </child>
