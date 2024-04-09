@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <template class="CcSearchPanel" parent="CcPanel">
+    <signal name="notify::subpage" handler="show_search_locations_dialog" object="CcSearchPanel" swapped="yes"/>
     <property name="child">
       <object class="AdwToolbarView">
         <child type="top">
