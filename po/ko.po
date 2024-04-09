@@ -34,8 +34,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2024-03-12 18:03+0000\n"
-"PO-Revision-Date: 2024-03-14 18:39+0900\n"
+"POT-Creation-Date: 2024-04-04 11:45+0000\n"
+"PO-Revision-Date: 2024-04-08 23:32+0900\n"
 "Last-Translator: Changwoo Ryu <cwryu@debian.org>\n"
 "Language-Team: GNOME Korea <gnome-kr@googlegroups.com>\n"
 "Language: ko\n"
@@ -66,7 +66,7 @@ msgstr "세션 버스"
 
 #: panels/applications/cc-applications-panel.c:834
 #: panels/privacy/cc-bolt-page.ui:240 panels/privacy/cc-bolt-page.ui:284
-#: panels/privacy/cc-privacy-panel.ui:74
+#: panels/privacy/cc-privacy-panel.ui:75
 msgid "Devices"
 msgstr "장치"
 
@@ -104,7 +104,7 @@ msgstr "파일 시스템"
 
 #: panels/applications/cc-applications-panel.c:854
 #: panels/keyboard/01-launchers.xml.in:6
-#: shell/appdata/org.gnome.Settings.appdata.xml.in:7 shell/cc-window.c:775
+#: shell/appdata/org.gnome.Settings.appdata.xml.in:7 shell/cc-window.c:798
 #: shell/cc-window.ui:20 shell/org.gnome.Settings.desktop.in:3
 msgid "Settings"
 msgstr "설정"
@@ -228,7 +228,7 @@ msgstr "시스템 검색을 받아서 결과 보내기"
 #: panels/keyboard/keyboard-shortcuts.c:367
 #: panels/system/users/cc-user-page.c:379
 #: panels/system/users/cc-user-page.c:749 panels/wwan/cc-wwan-device-page.c:477
-#: subprojects/gvc/gvc-mixer-control.c:1908
+#: subprojects/gvc/gvc-mixer-control.c:1872
 msgid "Disabled"
 msgstr "사용 않음"
 
@@ -994,7 +994,7 @@ msgstr "디스플레이 보정"
 #: panels/printers/pp-details-dialog.c:266 panels/privacy/cc-usage-page.c:136
 #: panels/sharing/cc-sharing-panel.c:239
 #: panels/system/region/cc-format-chooser.ui:24
-#: panels/system/users/cc-add-user-dialog.ui:25
+#: panels/system/users/cc-add-user-dialog.ui:34
 #: panels/system/users/cc-enterprise-login-dialog.ui:58
 #: panels/system/users/cc-avatar-chooser.c:92
 #: panels/system/users/cc-fingerprint-dialog.ui:32
@@ -1305,7 +1305,7 @@ msgstr "파일 가져오기(_I)…"
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:33
 #: panels/network/connection-editor/net-connection-editor.c:653
 #: panels/printers/new-printer-dialog.ui:85
-#: panels/system/users/cc-add-user-dialog.ui:39
+#: panels/system/users/cc-add-user-dialog.ui:48
 #: panels/system/users/cc-enterprise-login-dialog.ui:66
 msgid "_Add"
 msgstr "추가(_A)"
@@ -1590,91 +1590,91 @@ msgstr "시간 감소"
 msgid "Decrement Minute"
 msgstr "분 감소"
 
-#: panels/common/cc-util.c:127
+#: panels/common/cc-util.c:130
 #: panels/network/connection-editor/ce-page-details.c:199
 msgid "Today"
 msgstr "오늘"
 
-#: panels/common/cc-util.c:131
+#: panels/common/cc-util.c:134
 #: panels/network/connection-editor/ce-page-details.c:201
 msgid "Yesterday"
 msgstr "어제"
 
 #. Translators: This is a date format string in the style of "Feb 24".
-#: panels/common/cc-util.c:139
+#: panels/common/cc-util.c:142
 #, no-c-format
 msgid "%b %e"
 msgstr "%b %e일"
 
 #. Translators: This is a date format string in the style of "Feb 24, 2013".
-#: panels/common/cc-util.c:144
+#: panels/common/cc-util.c:147
 msgid "%b %e, %Y"
 msgstr "%Y년 %b %e일"
 
 #. TRANSLATORS: This is the datetime format in the style of
 #. "Aug 1, 10:10:10 PM", "Feb 24, 2013, 10:10:10 PM", "Today, 10:10:10 AM",
 #. and "Yesterday, 10:10:10 AM"
-#: panels/common/cc-util.c:163
+#: panels/common/cc-util.c:166
 #, c-format
 msgid "%1$s, %2$s"
 msgstr "%1$s, %2$s"
 
-#: panels/common/cc-util.c:183
+#: panels/common/cc-util.c:186
 #, c-format
 msgid "%d hour"
 msgid_plural "%d hours"
 msgstr[0] "%d시간"
 
 #. Translators: Option for "Blank Screen" in "Power" panel
-#: panels/common/cc-util.c:184 panels/power/cc-power-panel.c:790
+#: panels/common/cc-util.c:187 panels/power/cc-power-panel.c:790
 #, c-format
 msgid "%d minute"
 msgid_plural "%d minutes"
 msgstr[0] "%d분"
 
-#: panels/common/cc-util.c:185
+#: panels/common/cc-util.c:188
 #, c-format
 msgid "%d second"
 msgid_plural "%d seconds"
 msgstr[0] "%d초"
 
 #. 5 hours 2 minutes 12 seconds
-#: panels/common/cc-util.c:192
+#: panels/common/cc-util.c:195
 #, c-format
 msgctxt "hours minutes seconds"
 msgid "%s %s %s"
 msgstr "%s %s %s"
 
 #. 5 hours 2 minutes
-#: panels/common/cc-util.c:197
+#: panels/common/cc-util.c:200
 #, c-format
 msgctxt "hours minutes"
 msgid "%s %s"
 msgstr "%s %s"
 
 #. 5 hours
-#: panels/common/cc-util.c:202
+#: panels/common/cc-util.c:205
 #, c-format
 msgctxt "hours"
 msgid "%s"
 msgstr "%s"
 
 #. 2 minutes 12 seconds
-#: panels/common/cc-util.c:210
+#: panels/common/cc-util.c:213
 #, c-format
 msgctxt "minutes seconds"
 msgid "%s %s"
 msgstr "%s %s"
 
 #. 2 minutes
-#: panels/common/cc-util.c:215
+#: panels/common/cc-util.c:218
 #, c-format
 msgctxt "minutes"
 msgid "%s"
 msgstr "%s"
 
 #. 0 seconds
-#: panels/common/cc-util.c:226
+#: panels/common/cc-util.c:229
 msgid "0 seconds"
 msgstr "0초"
 
@@ -2989,9 +2989,9 @@ msgstr "네트워크 이름"
 #: panels/network/cc-wifi-hotspot-dialog.ui:92
 #: panels/printers/new-printer-dialog.ui:293
 #: panels/printers/pp-jobs-dialog.ui:54
-#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:110
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:109
 #: panels/system/remote-desktop/cc-remote-session-page.ui:108
-#: panels/system/users/cc-add-user-dialog.ui:150
+#: panels/system/users/cc-add-user-dialog.ui:159
 #: panels/wwan/cc-wwan-apn-dialog.ui:175
 msgid "Password"
 msgstr "암호"
@@ -3085,7 +3085,7 @@ msgstr "802.1x 보안(_S)"
 #: panels/network/connection-editor/bluetooth-page.ui:16
 #: panels/network/connection-editor/ethernet-page.ui:27
 #: panels/network/connection-editor/vpn-page.ui:23
-#: panels/system/users/cc-add-user-dialog.ui:66
+#: panels/system/users/cc-add-user-dialog.ui:75
 #: panels/system/users/cc-user-page.ui:84
 msgid "_Name"
 msgstr "이름(_N)"
@@ -3104,23 +3104,32 @@ msgid "Identity"
 msgstr "신원"
 
 #: panels/network/connection-editor/ce-page.c:234
+#: panels/network/connection-editor/ce-page.c:238
 msgid "Preserve"
 msgstr "보존"
 
 #: panels/network/connection-editor/ce-page.c:235
+#: panels/network/connection-editor/ce-page.c:239
 msgid "Permanent"
 msgstr "영구"
 
 #: panels/network/connection-editor/ce-page.c:236
+#: panels/network/connection-editor/ce-page.c:240
 msgid "Random"
 msgstr "임의"
 
 # 태블릿 PC
 #: panels/network/connection-editor/ce-page.c:237
+#: panels/network/connection-editor/ce-page.c:241
 msgid "Stable"
 msgstr "안정"
 
-#: panels/network/connection-editor/ce-page.c:241
+# SSID마다 같은 MAC
+#: panels/network/connection-editor/ce-page.c:243
+msgid "Stable per SSID"
+msgstr "SSID마다 고정"
+
+#: panels/network/connection-editor/ce-page.c:251
 msgid ""
 "The MAC address entered here will be used as hardware address for the "
 "network device this connection is activated on. This feature is known as MAC "
@@ -3130,7 +3139,7 @@ msgstr ""
 "주소로 사용합니다. 이 기능은 MAC 복제 또는 스푸핑이라고 부릅니다. 예를 들어: "
 "00:11:22:33:44:55"
 
-#: panels/network/connection-editor/ce-page.c:399
+#: panels/network/connection-editor/ce-page.c:409
 #, c-format
 msgid "Profile %d"
 msgstr "프로파일 %d"
@@ -4859,7 +4868,7 @@ msgstr "인쇄 서버의 프린터를 보려면 사용자 이름과 암호를 �
 #. Translators: This is a username on a print server.
 #: panels/printers/new-printer-dialog.ui:272
 #: panels/printers/pp-jobs-dialog.ui:42
-#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:94
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:93
 #: panels/system/remote-desktop/cc-remote-session-page.ui:92
 #: panels/wwan/cc-wwan-apn-dialog.ui:150
 msgid "Username"
@@ -6144,59 +6153,59 @@ msgstr "화면 잠금(_S)"
 msgid "Automatic screen lock"
 msgstr "자동 화면 잠금"
 
-#: panels/privacy/cc-privacy-panel.ui:36
+#: panels/privacy/cc-privacy-panel.ui:37
 msgid "_Location"
 msgstr "위치(_L)"
 
-#: panels/privacy/cc-privacy-panel.ui:37
+#: panels/privacy/cc-privacy-panel.ui:38
 msgid "Control access to your location"
 msgstr "위치 정보에 대한 접근을 제어합니다"
 
-#: panels/privacy/cc-privacy-panel.ui:47
+#: panels/privacy/cc-privacy-panel.ui:48
 msgid "_File History &amp; Trash"
 msgstr "파일 사용 내역 및 휴지통(_F)"
 
-#: panels/privacy/cc-privacy-panel.ui:48
+#: panels/privacy/cc-privacy-panel.ui:49
 msgid "Remove saved data and files"
 msgstr "저장한 데이터 및 파일 제거"
 
-#: panels/privacy/cc-privacy-panel.ui:58
+#: panels/privacy/cc-privacy-panel.ui:59
 msgid "_Diagnostics"
 msgstr "진단(_D)"
 
-#: panels/privacy/cc-privacy-panel.ui:59
+#: panels/privacy/cc-privacy-panel.ui:60
 msgid "Automatic problem reporting"
 msgstr "문제점 보고서 자동"
 
-#: panels/privacy/cc-privacy-panel.ui:78
+#: panels/privacy/cc-privacy-panel.ui:79
 msgid "_Cameras"
 msgstr "카메라(_C)"
 
-#: panels/privacy/cc-privacy-panel.ui:79
+#: panels/privacy/cc-privacy-panel.ui:80
 msgid "Control camera access"
 msgstr "카메라 접근 제어"
 
-#: panels/privacy/cc-privacy-panel.ui:89
+#: panels/privacy/cc-privacy-panel.ui:90
 msgid "_Microphones"
 msgstr "마이크(_M)"
 
-#: panels/privacy/cc-privacy-panel.ui:90
+#: panels/privacy/cc-privacy-panel.ui:91
 msgid "Control microphone access"
 msgstr "마이크 접근 제어"
 
-#: panels/privacy/cc-privacy-panel.ui:102
+#: panels/privacy/cc-privacy-panel.ui:103
 msgid "_Thunderbolt"
 msgstr "썬더볼트(_T)"
 
-#: panels/privacy/cc-privacy-panel.ui:103
+#: panels/privacy/cc-privacy-panel.ui:104
 msgid "Manage device access"
 msgstr "장치 접근을 관리합니다"
 
-#: panels/privacy/cc-privacy-panel.ui:113
+#: panels/privacy/cc-privacy-panel.ui:114
 msgid "Device _Security"
 msgstr "장치 보안(_S)"
 
-#: panels/privacy/cc-privacy-panel.ui:114
+#: panels/privacy/cc-privacy-panel.ui:115
 msgid "Hardware security status and information"
 msgstr "하드웨어 보안 상태 및 정보"
 
@@ -6932,6 +6941,7 @@ msgstr ""
 "Bluetooth;블루투스;Headset;헤드셋;Audio;오디오;Output;출력;Input;입력;"
 
 #: panels/system/about/cc-about-page.ui:4
+#: panels/system/about/gnome-about-panel.desktop.in:3
 msgid "About"
 msgstr "정보"
 
@@ -7134,6 +7144,25 @@ msgstr "가상화"
 msgid "Kernel Version"
 msgstr "커널 버전"
 
+#: panels/system/about/gnome-about-panel.desktop.in:4
+msgid "View information about your system"
+msgstr "시스템에 대한 정보를 봅니다"
+
+#. Translators: Search terms to find the About panel.
+#. Do NOT translate or localize the semicolons!
+#. The list MUST also end with a semicolon!
+#. "Preferred Applications" is the old name for the preference, so make
+#. sure that you use the same "translation" for those keywords
+#: panels/system/about/gnome-about-panel.desktop.in:19
+msgid ""
+"device;system;information;hostname;memory;processor;version;default;"
+"application;preferred;cd;dvd;usb;audio;video;disc;removable;media;autorun;"
+msgstr ""
+"device;장치;system;시스템;information;정보;hostname;호스트;이름;memory;메모"
+"리;processor;프로세서;version;버전;default;기본;application;앱;응용;프로그램;"
+"애플리케이션;preferred;선호;cd;dvd;usb;audio;오디오;음향;video;비디오;영상;"
+"disc;디스크;removable;이동식;media;미디어;autorun;자동;실행;"
+
 #: panels/system/cc-system-panel.ui:23
 msgid "_Region &amp; Language"
 msgstr "지역 및 언어(_R)"
@@ -7142,63 +7171,63 @@ msgstr "지역 및 언어(_R)"
 msgid "System language and localization"
 msgstr "시스템 언어 및 지역화"
 
-#: panels/system/cc-system-panel.ui:34
+#: panels/system/cc-system-panel.ui:33
 msgid "_Date &amp; Time"
 msgstr "날짜 및 시각(_D)"
 
-#: panels/system/cc-system-panel.ui:35
+#: panels/system/cc-system-panel.ui:34
 msgid "Time zone and clock settings"
 msgstr "표준시간대 및 시계 설정"
 
-#: panels/system/cc-system-panel.ui:45
+#: panels/system/cc-system-panel.ui:43
 msgid "_Users"
 msgstr "사용자(_U)"
 
-#: panels/system/cc-system-panel.ui:46
+#: panels/system/cc-system-panel.ui:44
 msgid "Add and remove accounts, change password"
 msgstr "사용자 추가/제거 및 암호 바꾸기"
 
-#: panels/system/cc-system-panel.ui:58
+#: panels/system/cc-system-panel.ui:54
 msgid "R_emote Desktop"
 msgstr "원격 데스크톱(_E)"
 
-#: panels/system/cc-system-panel.ui:59
+#: panels/system/cc-system-panel.ui:55
 msgid "Allow this device to be used remotely"
 msgstr "이 장치를 원격에서 사용하도록 허용"
 
-#: panels/system/cc-system-panel.ui:69
+#: panels/system/cc-system-panel.ui:64
 #: panels/system/remote-login/cc-remote-login-page.ui:51
 msgid "Secu_re Shell"
 msgstr "보안 쉘(_R)"
 
-#: panels/system/cc-system-panel.ui:70
+#: panels/system/cc-system-panel.ui:65
 msgid "SSH network access"
 msgstr "SSH 네트워크 접근"
 
-#: panels/system/cc-system-panel.ui:79
+#: panels/system/cc-system-panel.ui:74
 msgid "_About"
 msgstr "정보(_A)"
 
-#: panels/system/cc-system-panel.ui:80
+#: panels/system/cc-system-panel.ui:75
 msgid "Hardware details and software versions"
-msgstr "하드웨어 상세 정뽀 및 소프트웨어 버전"
+msgstr "하드웨어 상세 정보 및 소프트웨어 버전"
 
-#: panels/system/cc-system-panel.ui:97
+#: panels/system/cc-system-panel.ui:91
 msgid "Software _Updates"
 msgstr "소프트웨어 업데이트(_U)"
 
 #. Translators: This is the full date and time format used in 12-hour mode.
-#: panels/system/datetime/cc-datetime-page.c:230
+#: panels/system/datetime/cc-datetime-page.c:231
 msgid "%e %B %Y, %l:%M %p"
 msgstr "%Y년 %B %e일, %p %l:%M"
 
 #. Translators: This is the full date and time format used in 24-hour mode.
-#: panels/system/datetime/cc-datetime-page.c:235
+#: panels/system/datetime/cc-datetime-page.c:236
 msgid "%e %B %Y, %R"
 msgstr "%Y년 %B %e일, %R"
 
 #. Translators: "city, country"
-#: panels/system/datetime/cc-datetime-page.c:388
+#: panels/system/datetime/cc-datetime-page.c:393
 #, c-format
 msgctxt "timezone loc"
 msgid "%s, %s"
@@ -7206,38 +7235,39 @@ msgstr "%s, %s"
 
 #. Update the timezone on the listbow row
 #. Translators: "timezone (details)"
-#: panels/system/datetime/cc-datetime-page.c:405
+#: panels/system/datetime/cc-datetime-page.c:410
 #, c-format
 msgctxt "timezone desc"
 msgid "%s (%s)"
 msgstr "%s (%s)"
 
 #: panels/system/datetime/cc-datetime-page.ui:9
-#: panels/system/datetime/cc-datetime-page.ui:117
+#: panels/system/datetime/cc-datetime-page.ui:116
+#: panels/system/datetime/gnome-datetime-panel.desktop.in:3
 msgid "Date & Time"
 msgstr "날짜 및 시각"
 
-#: panels/system/datetime/cc-datetime-page.ui:60
+#: panels/system/datetime/cc-datetime-page.ui:59
 msgid "_Year"
 msgstr "년(_Y)"
 
-#: panels/system/datetime/cc-datetime-page.ui:71
+#: panels/system/datetime/cc-datetime-page.ui:70
 msgid "_Month"
 msgstr "월(_M)"
 
-#: panels/system/datetime/cc-datetime-page.ui:98
+#: panels/system/datetime/cc-datetime-page.ui:97
 msgid "_Day"
 msgstr "일(_D)"
 
-#: panels/system/datetime/cc-datetime-page.ui:137
+#: panels/system/datetime/cc-datetime-page.ui:136
 msgid "Automatic _Date &amp; Time"
 msgstr "날짜 및 시각 자동(_D)"
 
-#: panels/system/datetime/cc-datetime-page.ui:138
+#: panels/system/datetime/cc-datetime-page.ui:137
 msgid "Requires internet access"
 msgstr "인터넷 연결 필요"
 
-#: panels/system/datetime/cc-datetime-page.ui:150
+#: panels/system/datetime/cc-datetime-page.ui:149
 msgid "Date &amp; _Time"
 msgstr "날짜 및 시각(_T)"
 
@@ -7293,51 +7323,51 @@ msgstr "주 번호(_N)"
 msgid "Shown in the dropdown calendar"
 msgstr "드롭다운 달력에서 보이기"
 
-#: panels/system/datetime/cc-datetime-page.ui:271
+#: panels/system/datetime/cc-datetime-page.ui:270
 msgid "January"
 msgstr "1월"
 
-#: panels/system/datetime/cc-datetime-page.ui:272
+#: panels/system/datetime/cc-datetime-page.ui:271
 msgid "February"
 msgstr "2월"
 
-#: panels/system/datetime/cc-datetime-page.ui:273
+#: panels/system/datetime/cc-datetime-page.ui:272
 msgid "March"
 msgstr "3월"
 
-#: panels/system/datetime/cc-datetime-page.ui:274
+#: panels/system/datetime/cc-datetime-page.ui:273
 msgid "April"
 msgstr "4월"
 
-#: panels/system/datetime/cc-datetime-page.ui:275
+#: panels/system/datetime/cc-datetime-page.ui:274
 msgid "May"
 msgstr "5월"
 
-#: panels/system/datetime/cc-datetime-page.ui:276
+#: panels/system/datetime/cc-datetime-page.ui:275
 msgid "June"
 msgstr "6월"
 
-#: panels/system/datetime/cc-datetime-page.ui:277
+#: panels/system/datetime/cc-datetime-page.ui:276
 msgid "July"
 msgstr "7월"
 
-#: panels/system/datetime/cc-datetime-page.ui:278
+#: panels/system/datetime/cc-datetime-page.ui:277
 msgid "August"
 msgstr "8월"
 
-#: panels/system/datetime/cc-datetime-page.ui:279
+#: panels/system/datetime/cc-datetime-page.ui:278
 msgid "September"
 msgstr "9월"
 
-#: panels/system/datetime/cc-datetime-page.ui:280
+#: panels/system/datetime/cc-datetime-page.ui:279
 msgid "October"
 msgstr "10월"
 
-#: panels/system/datetime/cc-datetime-page.ui:281
+#: panels/system/datetime/cc-datetime-page.ui:280
 msgid "November"
 msgstr "11월"
 
-#: panels/system/datetime/cc-datetime-page.ui:282
+#: panels/system/datetime/cc-datetime-page.ui:281
 msgid "December"
 msgstr "12월"
 
@@ -7352,6 +7382,15 @@ msgstr "도시 검색"
 #: panels/system/datetime/cc-tz-dialog.ui:47
 msgid "No Results"
 msgstr "결과가 없습니다"
+
+#: panels/system/datetime/gnome-datetime-panel.desktop.in:4
+msgid "Change the date and time, including time zone"
+msgstr "날짜와 시각 (시간대 포함) 바꾸기"
+
+#. Translators: Search terms to find the Date and Time panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#: panels/system/datetime/gnome-datetime-panel.desktop.in:15
+msgid "Clock;Timezone;Location;"
+msgstr "Clock;시계;시각;Timezone;시간대;타임존;Location;위치;좌표;"
 
 #: panels/system/datetime/org.gnome.controlcenter.system.policy.in:11
 msgid "Change system time and date settings"
@@ -7446,6 +7485,7 @@ msgid "Paper"
 msgstr "용지"
 
 #: panels/system/region/cc-region-page.ui:4
+#: panels/system/region/gnome-region-panel.desktop.in:3
 msgid "Region & Language"
 msgstr "지역 및 언어"
 
@@ -7490,6 +7530,15 @@ msgstr "언어(_A)"
 msgid "Fo_rmats"
 msgstr "형식(_R)"
 
+#: panels/system/region/gnome-region-panel.desktop.in:4
+msgid "Select your display language and formats"
+msgstr "표시할 언어 및 형식을 정합니다"
+
+#. Translators: Search terms to find the Region and Language panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#: panels/system/region/gnome-region-panel.desktop.in:15
+msgid "Language;Layout;Keyboard;Input;"
+msgstr "Language;언어;Layout;배치;Keyboard;키보드;자판;Input;입력;"
+
 #: panels/system/remote-desktop/cc-desktop-sharing-page.c:364
 #: panels/system/remote-desktop/cc-remote-session-page.c:98
 msgid "Device address copied"
@@ -7510,7 +7559,7 @@ msgstr "사용자 이름 복사함"
 msgid "Password copied"
 msgstr "암호 복사함"
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:13
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:12
 msgid ""
 "Share your existing desktop with other devices. The remote connection uses "
 "the existing screen resolution"
@@ -7518,24 +7567,24 @@ msgstr ""
 "현재 데스크톱을 다른 장치와 공유합니다. 원격 연결은 현재 화면 해상도를 사용합"
 "니다."
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:28
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:27
 msgid "_Desktop Sharing"
 msgstr "데스크톱 공유(_D)"
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:34
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:33
 msgid "Remote _Control"
 msgstr "원격 조작(_C)"
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:36
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:35
 msgid "Allows desktop shares to control the screen"
 msgstr "데스크톱 공유에서 화면 조작을 허용합니다"
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:43
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:42
 #: panels/system/remote-desktop/cc-remote-session-page.ui:41
 msgid "How to Connect"
 msgstr "연결 방식"
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:44
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:43
 #: panels/system/remote-desktop/cc-remote-session-page.ui:42
 msgid ""
 "Use a remote desktop app to connect using the RDP protocol. Additional "
@@ -7544,15 +7593,15 @@ msgstr ""
 "원격 데스크톱 앱에서 RDP 프로토콜을 사용해 연결합니다. 장치의 네트워크 위치"
 "와 같은 추가 정보가 필요할 수도 있습니다."
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:47
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:46
 #: panels/system/remote-desktop/cc-remote-session-page.ui:45
 msgid "_Hostname"
 msgstr "호스트 이름(_H)"
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:55
-#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:76
-#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:97
-#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:113
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:54
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:75
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:96
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:112
 #: panels/system/remote-desktop/cc-remote-session-page.ui:53
 #: panels/system/remote-desktop/cc-remote-session-page.ui:74
 #: panels/system/remote-desktop/cc-remote-session-page.ui:95
@@ -7561,23 +7610,23 @@ msgstr "호스트 이름(_H)"
 msgid "Copy"
 msgstr "복사"
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:68
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:67
 #: panels/system/remote-desktop/cc-remote-session-page.ui:66
 msgid "_Port"
 msgstr "포트(_P)"
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:91
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:90
 #: panels/system/remote-desktop/cc-remote-session-page.ui:89
 msgid "Login Details"
 msgstr "로그인 상세 정보"
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:132
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:131
 #: panels/system/remote-desktop/cc-remote-session-page.ui:130
 msgid "_Generate New Password"
 msgstr "새 암호 생성(_G)"
 
 # 핑거프린트가 동일한지 확인을 말함
-#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:143
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:142
 #: panels/system/remote-desktop/cc-remote-session-page.ui:141
 msgid "_Verify Encryption"
 msgstr "암호화 확인(_V)"
@@ -7664,16 +7713,16 @@ msgstr "암호가 다릅니다."
 msgid "Add User"
 msgstr "사용자 추가"
 
-#: panels/system/users/cc-add-user-dialog.ui:93
+#: panels/system/users/cc-add-user-dialog.ui:102
 #: panels/system/users/cc-enterprise-login-dialog.ui:107
 msgid "_Username"
 msgstr "사용자 이름(_U)"
 
-#: panels/system/users/cc-add-user-dialog.ui:131
+#: panels/system/users/cc-add-user-dialog.ui:140
 msgid "Ad_ministrator"
 msgstr "관리자(_M)"
 
-#: panels/system/users/cc-add-user-dialog.ui:136
+#: panels/system/users/cc-add-user-dialog.ui:145
 #: panels/system/users/cc-user-page.ui:141
 msgid ""
 "Administrators have extra abilities, including adding and removing users, "
@@ -7684,19 +7733,19 @@ msgstr ""
 "트웨어를 제거하는 것과 같은 추가적인 권한이 있습니다. 자녀 보호 기능은 관리자"
 "에게 적용될 수 없습니다."
 
-#: panels/system/users/cc-add-user-dialog.ui:154
+#: panels/system/users/cc-add-user-dialog.ui:163
 msgid "User sets password on _first login"
 msgstr "사용자가 첫 로그인에 암호 설정(_F)"
 
-#: panels/system/users/cc-add-user-dialog.ui:167
+#: panels/system/users/cc-add-user-dialog.ui:176
 msgid "Set password n_ow"
 msgstr "지금 암호 설정(_O)"
 
-#: panels/system/users/cc-add-user-dialog.ui:187
+#: panels/system/users/cc-add-user-dialog.ui:196
 msgid "Pass_word"
 msgstr "암호(_W)"
 
-#: panels/system/users/cc-add-user-dialog.ui:231
+#: panels/system/users/cc-add-user-dialog.ui:240
 msgid "_Confirm"
 msgstr "확인(_C)"
 
@@ -8177,6 +8226,7 @@ msgid "_Delete Files and Settings"
 msgstr "파일 및 설정 삭제(_D)"
 
 #: panels/system/users/cc-users-page.ui:11
+#: panels/system/users/gnome-users-panel.desktop.in:3
 msgid "Users"
 msgstr "사용자"
 
@@ -8208,6 +8258,21 @@ msgstr ""
 #: panels/system/users/data/join-dialog.ui:135
 msgid "Administrator Password"
 msgstr "관리자 암호"
+
+#: panels/system/users/gnome-users-panel.desktop.in:4
+msgid "Add or remove users and change your password"
+msgstr "사용자 추가/제거 및 암호 바꾸기"
+
+#. Translators: Search terms to find the Users panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#: panels/system/users/gnome-users-panel.desktop.in:15
+msgid ""
+"Login;Name;Fingerprint;Avatar;Logo;Face;Password;Parental Controls;Screen "
+"Time;App Restrictions;Web Restrictions;Usage;Usage Limit;Kid;Child;"
+msgstr ""
+"Login;로그인;Name;이름;Fingerprint;지문;Avatar;아바타;Logo;로고;Face;얼굴;"
+"Password;암호;비밀번호;Parental Controls;자녀 보호;Screen Time;화면 시간;App "
+"Restrictions;앱 사용 제한;Web Restrictions;웹 사용 제한;Usage;사용량;Usage "
+"Limit;사용량 제한;Kid;어린이;Child;부모;자녀;아이;"
 
 #: panels/system/users/org.gnome.controlcenter.user-accounts.policy.in:11
 msgid "Manage user accounts"
@@ -9926,7 +9991,7 @@ msgstr "앱 창의 최초 너비, 높이, 최대화 상태가 들어 있는 튜�
 
 #. translators:
 #. * The number of sound outputs on a particular device
-#: subprojects/gvc/gvc-mixer-control.c:1915
+#: subprojects/gvc/gvc-mixer-control.c:1879
 #, c-format
 msgid "%u Output"
 msgid_plural "%u Outputs"
@@ -9934,12 +9999,12 @@ msgstr[0] "%u개 출력"
 
 #. translators:
 #. * The number of sound inputs on a particular device
-#: subprojects/gvc/gvc-mixer-control.c:1925
+#: subprojects/gvc/gvc-mixer-control.c:1889
 #, c-format
 msgid "%u Input"
 msgid_plural "%u Inputs"
 msgstr[0] "%u개 입력"
 
-#: subprojects/gvc/gvc-mixer-control.c:2882
+#: subprojects/gvc/gvc-mixer-control.c:2872
 msgid "System Sounds"
 msgstr "시스템 사운드"
