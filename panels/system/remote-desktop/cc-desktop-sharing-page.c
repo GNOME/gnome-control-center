@@ -361,7 +361,7 @@ on_address_copy_clicked (CcDesktopSharingPage *self,
 {
   gdk_clipboard_set_text (gtk_widget_get_clipboard (GTK_WIDGET (button)),
                           adw_action_row_get_subtitle (self->hostname_row));
-  add_toast (self, _("Device address copied"));
+  add_toast (self, _("Device address copied to clipboard"));
 }
 
 static void
@@ -370,7 +370,7 @@ on_port_copy_clicked (CcDesktopSharingPage *self,
 {
   gdk_clipboard_set_text (gtk_widget_get_clipboard (GTK_WIDGET (button)),
                           adw_action_row_get_subtitle (self->port_row));
-  add_toast (self, _("Port number copied"));
+  add_toast (self, _("Port number copied to clipboard"));
 }
 
 static void
@@ -381,7 +381,7 @@ on_username_copy_clicked (CcDesktopSharingPage *self,
 
   gdk_clipboard_set_text (gtk_widget_get_clipboard (GTK_WIDGET (button)),
                           gtk_editable_get_text (editable));
-  add_toast (self, _("Username copied"));
+  add_toast (self, _("Username copied to clipboard"));
 }
 
 static void
@@ -392,7 +392,7 @@ on_password_copy_clicked (CcDesktopSharingPage *self,
 
   gdk_clipboard_set_text (gtk_widget_get_clipboard (GTK_WIDGET (button)),
                           gtk_editable_get_text (editable));
-  add_toast (self, _("Password copied"));
+  add_toast (self, _("Password copied to clipboard"));
 }
 
 static void
