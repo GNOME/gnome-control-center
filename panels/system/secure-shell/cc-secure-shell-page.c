@@ -33,7 +33,7 @@
 #endif
 
 struct _CcSecureShellPage {
-  AdwWindow parent_instance;
+  AdwDialog       parent_instance;
 
   AdwActionRow    *hostname_row;
   AdwSwitchRow    *secure_shell_row;
@@ -42,7 +42,7 @@ struct _CcSecureShellPage {
   GCancellable *cancellable;
 };
 
-G_DEFINE_TYPE (CcSecureShellPage, cc_secure_shell_page, ADW_TYPE_WINDOW)
+G_DEFINE_TYPE (CcSecureShellPage, cc_secure_shell_page, ADW_TYPE_DIALOG)
 
 static void
 on_copy_ssh_command_button_clicked (CcSecureShellPage *self)

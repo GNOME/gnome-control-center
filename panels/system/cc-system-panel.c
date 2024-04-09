@@ -46,7 +46,7 @@ struct _CcSystemPanel
   AdwActionRow *remote_desktop_row;
   AdwActionRow *users_row;
 
-  GtkWidget *remote_login_dialog;
+  CcSecureShellPage *secure_shell_dialog;
   AdwNavigationPage *software_updates_group;
 };
 
@@ -122,16 +122,14 @@ cc_system_page_open_software_update (CcSystemPanel *self)
 static void
 on_secure_shell_row_clicked (CcSystemPanel *self)
 {
-  if (self->remote_login_dialog == NULL) {
-    GtkWidget *parent = cc_shell_get_toplevel (cc_panel_get_shell (CC_PANEL (self)));
+  if (self->secure_shell_dialog == NULL)
+    {
+      self->secure_shell_dialog = g_object_new (CC_TYPE_SECURE_SHELL_PAGE, NULL);
+      g_object_add_weak_pointer (G_OBJECT (self->secure_shell_dialog),
+                                 (gpointer *) &self->secure_shell_dialog);
+    }
 
-    self->remote_login_dialog = g_object_new (CC_TYPE_SECURE_SHELL_PAGE, NULL);
-
-    gtk_window_set_transient_for (GTK_WINDOW (self->remote_login_dialog),
-                                  GTK_WINDOW (parent));
-  }
-
-  gtk_window_present (GTK_WINDOW (self->remote_login_dialog));
+  adw_dialog_present (ADW_DIALOG (self->secure_shell_dialog), GTK_WIDGET (self));
 }
 
 static void

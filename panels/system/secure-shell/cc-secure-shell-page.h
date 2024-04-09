@@ -25,6 +25,6 @@ G_BEGIN_DECLS
 
 #define CC_TYPE_SECURE_SHELL_PAGE (cc_secure_shell_page_get_type ())
 
-G_DECLARE_FINAL_TYPE (CcSecureShellPage, cc_secure_shell_page, CC, CC_TYPE_SECURE_SHELL_PAGE, AdwWindow)
+G_DECLARE_FINAL_TYPE (CcSecureShellPage, cc_secure_shell_page, CC, CC_TYPE_SECURE_SHELL_PAGE, AdwDialog)
 
 G_END_DECLS
