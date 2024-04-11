@@ -24,13 +24,13 @@
 #endif
 
 struct _CcEncryptionFingerprintDialog {
-  AdwWindow parent_instance;
+  AdwDialog parent_instance;
 
   GtkLabel *fingerprint_left_label;
   GtkLabel *fingerprint_right_label;
 };
 
-G_DEFINE_TYPE (CcEncryptionFingerprintDialog, cc_encryption_fingerprint_dialog, ADW_TYPE_WINDOW)
+G_DEFINE_TYPE (CcEncryptionFingerprintDialog, cc_encryption_fingerprint_dialog, ADW_TYPE_DIALOG)
 
 static void
 cc_encryption_fingerprint_dialog_class_init (CcEncryptionFingerprintDialogClass *klass)

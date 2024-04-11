@@ -28,7 +28,7 @@ G_BEGIN_DECLS
 
 #define CC_TYPE_ENCRYPTION_FINGERPRINT_DIALOG (cc_encryption_fingerprint_dialog_get_type ())
 
-G_DECLARE_FINAL_TYPE (CcEncryptionFingerprintDialog, cc_encryption_fingerprint_dialog, CC, ENCRYPTION_FINGERPRINT_DIALOG, AdwWindow)
+G_DECLARE_FINAL_TYPE (CcEncryptionFingerprintDialog, cc_encryption_fingerprint_dialog, CC, ENCRYPTION_FINGERPRINT_DIALOG, AdwDialog)
 
 void cc_encryption_fingerprint_dialog_set_certificate (CcEncryptionFingerprintDialog *self,
                                                        GTlsCertificate                *certificate);

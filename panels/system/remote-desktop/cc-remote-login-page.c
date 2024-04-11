@@ -140,7 +140,7 @@ on_generate_password_button_clicked (CcRemoteLoginPage *self)
 static void
 on_verify_encryption_button_clicked (CcRemoteLoginPage *self)
 {
-  gtk_window_present (GTK_WINDOW (self->fingerprint_dialog));
+  adw_dialog_present (ADW_DIALOG (self->fingerprint_dialog), GTK_WIDGET (self));
 }
 
 static void
@@ -533,7 +533,7 @@ cc_remote_login_page_dispose (GObject *object)
   g_clear_object (&self->cancellable);
   g_clear_object (&self->permission);
 
-  g_clear_pointer ((GtkWindow **) &self->fingerprint_dialog, gtk_window_destroy);
+  g_clear_pointer ((AdwDialog **) &self->fingerprint_dialog, adw_dialog_force_close);
   g_clear_object (&self->rdp_server);
 
   G_OBJECT_CLASS (cc_remote_login_page_parent_class)->dispose (object);
@@ -578,7 +578,6 @@ on_got_rdp_credentials (GObject      *source_object,
   g_autoptr(GVariant) credentials = NULL;
   g_autoptr(GError) error = NULL;
   const gchar *fingerprint;
-  GtkNative *native;
 
   got_credentials = gsd_remote_desktop_rdp_server_call_get_credentials_finish (self->rdp_server,
                                                                                &credentials,
@@ -620,9 +619,9 @@ on_got_rdp_credentials (GObject      *source_object,
   if (has_fingerprint)
     {
       self->fingerprint_dialog = g_object_new (CC_TYPE_ENCRYPTION_FINGERPRINT_DIALOG, NULL);
+      g_object_add_weak_pointer (G_OBJECT (self->fingerprint_dialog),
+                                 (gpointer *) &self->fingerprint_dialog);
 
-      native = gtk_widget_get_native (GTK_WIDGET (self));
-      gtk_window_set_transient_for (GTK_WINDOW (self->fingerprint_dialog), GTK_WINDOW (native));
       cc_encryption_fingerprint_dialog_set_fingerprint (self->fingerprint_dialog, fingerprint, ":");
     }
 

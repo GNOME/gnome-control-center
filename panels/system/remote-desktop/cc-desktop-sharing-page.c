@@ -95,17 +95,17 @@ on_generate_password_button_clicked (CcDesktopSharingPage *self)
 static void
 on_verify_encryption_button_clicked (CcDesktopSharingPage *self)
 {
-  GtkNative *native;
-
   g_return_if_fail (self->certificate);
 
-  if (!self->fingerprint_dialog)
-    self->fingerprint_dialog = g_object_new (CC_TYPE_ENCRYPTION_FINGERPRINT_DIALOG, NULL);
+  if (self->fingerprint_dialog == NULL)
+    {
+      self->fingerprint_dialog = g_object_new (CC_TYPE_ENCRYPTION_FINGERPRINT_DIALOG, NULL);
+      g_object_add_weak_pointer (G_OBJECT (self->fingerprint_dialog),
+                                     (gpointer *) &self->fingerprint_dialog);
+    }
 
-  native = gtk_widget_get_native (GTK_WIDGET (self));
-  gtk_window_set_transient_for (GTK_WINDOW (self->fingerprint_dialog), GTK_WINDOW (native));
   cc_encryption_fingerprint_dialog_set_certificate (self->fingerprint_dialog, self->certificate);
-  gtk_window_present (GTK_WINDOW (self->fingerprint_dialog));
+  adw_dialog_present (ADW_DIALOG (self->fingerprint_dialog), GTK_WIDGET (self));
 }
 
 static char *
@@ -505,7 +505,7 @@ cc_desktop_sharing_page_dispose (GObject *object)
   g_cancellable_cancel (self->cancellable);
   g_clear_object (&self->cancellable);
 
-  g_clear_pointer ((GtkWindow **) &self->fingerprint_dialog, gtk_window_destroy);
+  g_clear_pointer ((AdwDialog **) &self->fingerprint_dialog, adw_dialog_force_close);
   g_clear_handle_id (&self->store_credentials_id, g_source_remove);
 
   g_clear_object (&self->rdp_server);
