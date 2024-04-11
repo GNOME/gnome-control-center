@@ -49,10 +49,8 @@ update_pause_button (PpJobRow *self, gboolean paused)
 {
   gtk_button_set_icon_name (self->pause_button,
                             paused ? "media-playback-start-symbolic" : "media-playback-pause-symbolic");
-  gtk_accessible_update_property (GTK_ACCESSIBLE (self->pause_button),
-                                  GTK_ACCESSIBLE_PROPERTY_LABEL,
-                                  paused ? _("Resume") : _("Pause"),
-                                  -1);
+  gtk_widget_set_tooltip_text (GTK_WIDGET (self->pause_button),
+                               paused ? _("Resume") : _("Pause"));
 }
 
 static void
@@ -179,9 +177,6 @@ pp_job_row_new (PpJob *job)
   gtk_widget_set_sensitive (GTK_WIDGET (self->pause_button), pp_job_get_auth_info_required (job) == NULL);
   status = pp_job_priority_get_sensitive (job);
   gtk_widget_set_sensitive (GTK_WIDGET (self->priority_button), status);
-  if (status)
-    /* Translators: Clicking this button prioritizes printing of this print job */
-    gtk_widget_set_tooltip_text (GTK_WIDGET (self->priority_button), _("Move this job to the top of the queue"));
   update_pause_button (self,
                        pp_job_get_state (self->job) == IPP_JOB_HELD);
   return self;
