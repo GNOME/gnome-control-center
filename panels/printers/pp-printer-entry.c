@@ -572,7 +572,7 @@ jobs_dialog_close_request_cb (PpPrinterEntry *self)
 {
   if (self->pp_jobs_dialog != NULL)
     {
-      gtk_window_destroy (GTK_WINDOW (self->pp_jobs_dialog));
+      adw_dialog_force_close (ADW_DIALOG (self->pp_jobs_dialog));
       self->pp_jobs_dialog = NULL;
     }
 
@@ -585,9 +585,12 @@ pp_printer_entry_show_jobs_dialog (PpPrinterEntry *self)
   if (self->pp_jobs_dialog == NULL)
     {
       self->pp_jobs_dialog = pp_jobs_dialog_new (self->printer_name);
-      g_signal_connect_object (self->pp_jobs_dialog, "close-request", G_CALLBACK (jobs_dialog_close_request_cb), self, G_CONNECT_SWAPPED);
-      gtk_window_set_transient_for (GTK_WINDOW (self->pp_jobs_dialog), GTK_WINDOW (gtk_widget_get_native (GTK_WIDGET (self))));
-      gtk_window_present (GTK_WINDOW (self->pp_jobs_dialog));
+      g_object_add_weak_pointer (G_OBJECT (self->pp_jobs_dialog),
+                                 (gpointer *) &self->pp_jobs_dialog);
+
+      g_signal_connect_object (self->pp_jobs_dialog, "close-attempt", G_CALLBACK (jobs_dialog_close_request_cb), self, G_CONNECT_SWAPPED);
+
+      adw_dialog_present (ADW_DIALOG (self->pp_jobs_dialog), GTK_WIDGET (self));
     }
 }
 

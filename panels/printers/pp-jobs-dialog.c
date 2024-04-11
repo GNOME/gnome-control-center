@@ -44,7 +44,7 @@
 #define CLOCK_FORMAT_KEY "clock-format"
 
 struct _PpJobsDialog {
-  AdwWindow          parent_instance;
+  AdwDialog          parent_instance;
 
   GtkButton         *authenticate_button;
   GtkMenuButton     *authenticate_jobs_button;
@@ -74,7 +74,7 @@ struct _PpJobsDialog {
   GCancellable *get_jobs_cancellable;
 };
 
-G_DEFINE_TYPE (PpJobsDialog, pp_jobs_dialog, ADW_TYPE_WINDOW)
+G_DEFINE_TYPE (PpJobsDialog, pp_jobs_dialog, ADW_TYPE_DIALOG)
 
 static gboolean
 is_info_required (PpJobsDialog *self,
@@ -453,7 +453,7 @@ pp_jobs_dialog_new (const gchar *printer_name)
 
   /* Translators: This is the printer name for which we are showing the active jobs */
   title = g_strdup_printf (C_("Printer jobs dialog title", "%s — Active Jobs"), printer_name);
-  gtk_window_set_title (GTK_WINDOW (self), title);
+  adw_dialog_set_title (ADW_DIALOG (self), title);
 
   /* Translators: The printer needs authentication info to print. */
   text = g_strdup_printf (_("Enter credentials to print from %s"), printer_name);
@@ -533,6 +533,4 @@ pp_jobs_dialog_class_init (PpJobsDialogClass *klass)
   gtk_widget_class_bind_template_callback (widget_class, auth_entries_changed);
 
   object_class->dispose = pp_jobs_dialog_dispose;
-
-  gtk_widget_class_add_binding_action (widget_class, GDK_KEY_Escape, 0, "window.close", NULL);
 }
