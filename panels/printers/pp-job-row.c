@@ -26,17 +26,16 @@
 
 struct _PpJobRow
 {
-  GtkListBoxRow parent;
+  AdwActionRow parent;
 
   GtkButton *pause_button;
   GtkButton *priority_button;
   GtkLabel  *state_label;
-  GtkLabel  *title_label;
 
   PpJob *job;
 };
 
-G_DEFINE_TYPE (PpJobRow, pp_job_row, GTK_TYPE_LIST_BOX_ROW)
+G_DEFINE_TYPE (PpJobRow, pp_job_row, ADW_TYPE_ACTION_ROW)
 
 enum {
   PRIORITY_CHANGED,
@@ -99,7 +98,6 @@ pp_job_row_class_init (PpJobRowClass *klass)
   gtk_widget_class_bind_template_child (widget_class, PpJobRow, pause_button);
   gtk_widget_class_bind_template_child (widget_class, PpJobRow, priority_button);
   gtk_widget_class_bind_template_child (widget_class, PpJobRow, state_label);
-  gtk_widget_class_bind_template_child (widget_class, PpJobRow, title_label);
 
   gtk_widget_class_bind_template_callback (widget_class, pause_cb);
   gtk_widget_class_bind_template_callback (widget_class, stop_cb);
@@ -176,7 +174,7 @@ pp_job_row_new (PpJob *job)
         state_string = g_strdup (C_("print job", "Completed"));
         break;
     }
-  gtk_label_set_text (self->title_label, pp_job_get_title (job));
+  adw_preferences_row_set_title (ADW_PREFERENCES_ROW (self), pp_job_get_title (job));
   gtk_label_set_markup (self->state_label, state_string);
   gtk_widget_set_sensitive (GTK_WIDGET (self->pause_button), pp_job_get_auth_info_required (job) == NULL);
   status = pp_job_priority_get_sensitive (job);

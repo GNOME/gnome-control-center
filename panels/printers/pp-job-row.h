@@ -20,14 +20,14 @@
 
 #pragma once
 
-#include <gtk/gtk.h>
+#include <adwaita.h>
 
 #include "pp-job.h"
 
 G_BEGIN_DECLS
 
 #define PP_TYPE_JOB_ROW (pp_job_row_get_type())
-G_DECLARE_FINAL_TYPE (PpJobRow, pp_job_row, PP, JOB_ROW, GtkListBoxRow)
+G_DECLARE_FINAL_TYPE (PpJobRow, pp_job_row, PP, JOB_ROW, AdwActionRow)
 
 PpJobRow* pp_job_row_new     (PpJob    *job);
 
