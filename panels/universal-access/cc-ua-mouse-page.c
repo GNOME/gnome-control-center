@@ -45,6 +45,7 @@ struct _CcUaMousePage
 
   AdwSwitchRow       *mouse_keys_row;
   AdwSwitchRow       *locate_pointer_row;
+  AdwSwitchRow       *focus_windows_on_hover_row;
   GtkScale           *double_click_delay_scale;
 
   AdwExpanderRow     *secondary_click_row;
@@ -55,12 +56,36 @@ struct _CcUaMousePage
   GtkScale           *motion_threshold_scale;
 
   GSettings          *kb_settings;
+  GSettings          *wm_settings;
   GSettings          *mouse_settings;
   GSettings          *interface_settings;
   GSettings          *gds_mouse_settings;
 };
 
 G_DEFINE_TYPE (CcUaMousePage, cc_ua_mouse_page, ADW_TYPE_NAVIGATION_PAGE)
+
+static gboolean
+focus_mode_get_mapping (GValue    *value,
+                        GVariant  *variant,
+                        gpointer   user_data)
+{
+  gboolean enabled;
+
+  enabled = g_strcmp0 (g_variant_get_string (variant, NULL), "click") != 0 &&
+  g_strcmp0 (g_variant_get_string (variant, NULL), "mouse") != 0;
+
+  g_value_set_boolean (value, enabled);
+
+  return TRUE;
+}
+
+static GVariant *
+focus_mode_set_mapping (const GValue       *value,
+                        const GVariantType *type,
+                        gpointer            user_data)
+{
+  return g_variant_new_string (g_value_get_boolean (value) ? "sloppy" : "click");
+}
 
 static void
 cc_ua_mouse_page_dispose (GObject *object)
@@ -71,6 +96,7 @@ cc_ua_mouse_page_dispose (GObject *object)
   g_clear_object (&self->interface_settings);
   g_clear_object (&self->mouse_settings);
   g_clear_object (&self->kb_settings);
+  g_clear_object (&self->wm_settings);
 
   G_OBJECT_CLASS (cc_ua_mouse_page_parent_class)->dispose (object);
 }
@@ -89,6 +115,7 @@ cc_ua_mouse_page_class_init (CcUaMousePageClass *klass)
 
   gtk_widget_class_bind_template_child (widget_class, CcUaMousePage, mouse_keys_row);
   gtk_widget_class_bind_template_child (widget_class, CcUaMousePage, locate_pointer_row);
+  gtk_widget_class_bind_template_child (widget_class, CcUaMousePage, focus_windows_on_hover_row);
   gtk_widget_class_bind_template_child (widget_class, CcUaMousePage, double_click_delay_scale);
 
   gtk_widget_class_bind_template_child (widget_class, CcUaMousePage, secondary_click_row);
@@ -108,6 +135,7 @@ cc_ua_mouse_page_init (CcUaMousePage *self)
   self->interface_settings = g_settings_new (INTERFACE_SETTINGS);
   self->mouse_settings = g_settings_new (MOUSE_SETTINGS);
   self->kb_settings = g_settings_new (KEYBOARD_SETTINGS);
+  self->wm_settings = g_settings_new (WM_SETTINGS);
 
   g_settings_bind (self->kb_settings, KEY_MOUSEKEYS_ENABLED,
                    self->mouse_keys_row, "active",
@@ -115,6 +143,12 @@ cc_ua_mouse_page_init (CcUaMousePage *self)
   g_settings_bind (self->interface_settings, KEY_LOCATE_POINTER,
                    self->locate_pointer_row, "active",
                    G_SETTINGS_BIND_DEFAULT);
+  g_settings_bind_with_mapping (self->wm_settings, "focus-mode",
+                                self->focus_windows_on_hover_row, "active",
+                                G_SETTINGS_BIND_DEFAULT,
+                                focus_mode_get_mapping,
+                                focus_mode_set_mapping,
+                                NULL, NULL);
   g_settings_bind (self->gds_mouse_settings, "double-click",
                    gtk_range_get_adjustment (GTK_RANGE (self->double_click_delay_scale)), "value",
                    G_SETTINGS_BIND_DEFAULT);

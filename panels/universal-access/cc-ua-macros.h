@@ -72,6 +72,7 @@
 #define WM_SETTINGS                  "org.gnome.desktop.wm.preferences"
 #define KEY_VISUAL_BELL              "visual-bell"
 #define KEY_VISUAL_BELL_TYPE         "visual-bell-type"
+#define KEY_FOCUS_MODE               "focus-mode"
 
 /* keyboard settings */
 #define KEYBOARD_SETTINGS            "org.gnome.desktop.a11y.keyboard"
