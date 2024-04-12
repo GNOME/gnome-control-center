@@ -14,11 +14,11 @@
             <child>
               <object class="AdwPreferencesGroup">
                 <child>
-                  <object class="GtkBox" id="cursor_box">
+                  <object class="GtkFlowBox" id="cursor_box">
                     <property name="homogeneous">True</property>
-                    <style>
-                      <class name="linked"/>
-                    </style>
+                    <property name="column-spacing">6</property>
+                    <property name="row-spacing">6</property>
+                    <property name="selection-mode">none</property>
                   </object>
                 </child>
               </object>

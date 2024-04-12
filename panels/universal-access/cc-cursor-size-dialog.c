@@ -25,7 +25,7 @@ struct _CcCursorSizeDialog
 {
   AdwDialog parent;
 
-  GtkBox *cursor_box;
+  GtkFlowBox *cursor_box;
 
   GSettings *interface_settings;
 };
@@ -97,7 +97,7 @@ cc_cursor_size_dialog_init (CcCursorSizeDialog *self)
       g_object_set_data (G_OBJECT (button), "cursor-size", GUINT_TO_POINTER (cursor_sizes[i]));
 
       gtk_button_set_child (GTK_BUTTON (button), image);
-      gtk_box_append (self->cursor_box, button);
+      gtk_flow_box_append (self->cursor_box, button);
 
       g_signal_connect_object (button, "toggled",
                                G_CALLBACK (cursor_size_toggled), self, G_CONNECT_SWAPPED);
