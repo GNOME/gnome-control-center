@@ -40,6 +40,7 @@ struct _CcWacomDevice {
 
 	GsdDevice *device;
 	WacomDevice *wdevice;
+	gboolean is_fallback;
 };
 
 static void cc_wacom_device_initable_iface_init (GInitableIface *iface);
@@ -145,6 +146,10 @@ cc_wacom_device_initable_init (GInitable     *initable,
 	node_path = gsd_device_get_device_file (device->device);
 	wacom_error = libwacom_error_new ();
 	device->wdevice = libwacom_new_from_path (wacom_db, node_path, WFALLBACK_NONE, wacom_error);
+	if (!device->wdevice) {
+		device->wdevice = libwacom_new_from_path (wacom_db, node_path, WFALLBACK_GENERIC, wacom_error);
+		device->is_fallback = TRUE;
+	}
 
 	if (!device->wdevice) {
 		g_debug ("libwacom_new_from_path() failed: %s", libwacom_error_get_message (wacom_error));
