@@ -137,16 +137,13 @@ ua_seeing_interface_cursor_size_changed_cb (CcUaSeeingPage *self)
 static void
 ua_cursor_row_activated_cb (CcUaSeeingPage *self)
 {
-  GtkWindow *dialog;
-  GtkNative *native;
+  AdwDialog *dialog;
 
   g_assert (CC_IS_UA_SEEING_PAGE (self));
 
-  dialog = GTK_WINDOW (cc_cursor_size_dialog_new ());
-  native = gtk_widget_get_native (GTK_WIDGET (self));
+  dialog = ADW_DIALOG (cc_cursor_size_dialog_new ());
 
-  gtk_window_set_transient_for (dialog, GTK_WINDOW (native));
-  gtk_window_present (dialog);
+  adw_dialog_present (dialog, GTK_WIDGET (self));
 }
 
 static void

@@ -1,19 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
-  <template class="CcCursorSizeDialog" parent="AdwWindow">
+  <template class="CcCursorSizeDialog" parent="AdwDialog">
     <property name="title" translatable="yes">Cursor Size</property>
-    <property name="resizable">False</property>
-    <property name="modal">True</property>
-    <property name="width-request">360</property>
-    <property name="height-request">294</property>
-    <property name="default-width">500</property>
-    <property name="default-height">294</property>
-    <property name="content">
+    <property name="content-width">500</property>
+    <property name="child">
       <object class="AdwToolbarView">
         <child type="top">
           <object class="AdwHeaderBar"/>
         </child>
-
         <property name="content">
           <object class="AdwPreferencesPage">
             <property name="description" translatable="yes">Cursor size can be combined with Zoom to make it easier to see the cursor</property>
