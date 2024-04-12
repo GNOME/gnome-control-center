@@ -69,9 +69,8 @@
       </child>
       <child>
         <object class="CcListRow" id="other_media_row">
-          <property name="title" translatable="yes">_Other Media</property>
+          <property name="title" translatable="yes">_Other Media Types</property>
           <property name="show-arrow">True</property>
-          <property name="subtitle" translatable="yes">Select how other media should be handled</property>
           <signal name="activated" handler="on_extra_options_button_clicked" object="CcRemovableMediaSettings"/>
         </object>
       </child>
@@ -88,7 +87,7 @@
   </object>
 
   <object class="AdwDialog" id="other_type_dialog">
-    <property name="title" translatable="yes">Other Media</property>
+    <property name="title" translatable="yes">Other Media Types</property>
     <property name="content-width">360</property>
     <property name="content-height">294</property>
     <signal name="close-attempt" handler="on_extra_options_dialog_close_attempt" object="CcRemovableMediaSettings" swapped="yes"/>
