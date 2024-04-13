@@ -109,110 +109,106 @@
             <child>
               <object class="AdwPreferencesGroup">
                 <property name="title" translatable="yes">Crosshairs</property>
-
                 <child>
-                  <object class="AdwSwitchRow" id="crosshair_row">
+                  <object class="AdwExpanderRow" id="crosshair_row">
                     <property name="title" translatable="yes">_Crosshair Lines</property>
                     <property name="subtitle" translatable="yes">Mark the cursor location in the magnifier region using lines</property>
                     <property name="use-underline">True</property>
-                  </object>
-                </child>
+                    <property name="show-enable-switch">True</property>
 
-                <child>
-                  <object class="AdwSwitchRow" id="crosshair_overlap_mouse_row">
-                    <property name="title" translatable="yes">_Overlap Mouse Cursor</property>
-                    <property name="use-underline">True</property>
-                    <property name="sensitive" bind-source="crosshair_row" bind-property="active" bind-flags="sync-create"/>
-                  </object>
-                </child>
-
-                <child>
-                  <object class="AdwActionRow">
-                    <property name="title" translatable="yes">_Thickness</property>
-                    <property name="use-underline">True</property>
-                    <property name="sensitive" bind-source="crosshair_row" bind-property="active" bind-flags="sync-create"/>
-                    <child type="suffix">
-                      <object class="GtkScale" id="crosshair_thickness_scale">
-                        <marks>
-                          <mark value="1" translatable="yes" comments="Translators: This is a mark in the Thickness scale">Thin</mark>
-                          <mark value="100" translatable="yes" comments="Translators: This is a mark in the Thickness scale">Thick</mark>
-                          <mark value="8"></mark>
-                        </marks>
-                        <property name="adjustment">
-                          <object class="GtkAdjustment">
-                            <property name="lower">1</property>
-                            <property name="upper">100</property>
-                            <property name="value">8</property>
-                            <property name="step-increment">1</property>
-                            <property name="page-increment">10</property>
-                          </object>
-                        </property>
+                    <child>
+                      <object class="AdwSwitchRow" id="crosshair_overlap_mouse_row">
+                        <property name="title" translatable="yes">_Overlap Mouse Cursor</property>
+                        <property name="use-underline">True</property>
                       </object>
                     </child>
-                  </object>
-                </child>
 
-                <child>
-                  <object class="AdwPreferencesRow">
-                    <property name="activatable">False</property>
-                    <property name="selectable">False</property>
-                    <property name="sensitive" bind-source="crosshair_row" bind-property="active" bind-flags="sync-create"/>
                     <child>
-                      <object class="GtkBox">
-                        <property name="margin-start">12</property>
-                        <property name="margin-end">12</property>
-                        <property name="margin-top">6</property>
-                        <property name="margin-bottom">6</property>
-                        <property name="orientation">vertical</property>
-                        <property name="spacing">6</property>
-                        <child>
-                          <object class="GtkLabel">
-                            <property name="xalign">0.0</property>
-                            <property name="label" translatable="yes">Len_gth</property>
-                            <property name="use-underline">True</property>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="GtkScale" id="crosshair_length_scale">
-                            <property name="hexpand">True</property>
+                      <object class="AdwActionRow">
+                        <property name="title" translatable="yes">_Thickness</property>
+                        <property name="use-underline">True</property>
+                        <child type="suffix">
+                          <object class="GtkScale" id="crosshair_thickness_scale">
                             <marks>
-                              <mark value="20" translatable="yes" comments="Translators: This is a mark in the Crosshair Length scale">Short</mark>
-                              <mark value="1024" translatable="yes" comments="Translators: This is a mark in the Crosshair Length scale">1/4 screen</mark>
-                              <mark value="2048" translatable="yes" comments="Translators: This is a mark in the Crosshair Length scale">1/2 Screen</mark>
-                              <mark value="3072" translatable="yes" comments="Translators: This is a mark in the Crosshair Length scale">3/4 Screen</mark>
-                              <mark value="4096" translatable="yes" comments="Translators: This is a mark in the Crosshair Length scale">Long</mark>
+                              <mark value="1" translatable="yes" comments="Translators: This is a mark in the Thickness scale">Thin</mark>
+                              <mark value="100" translatable="yes" comments="Translators: This is a mark in the Thickness scale">Thick</mark>
+                              <mark value="8"></mark>
                             </marks>
                             <property name="adjustment">
                               <object class="GtkAdjustment">
-                                <property name="lower">20</property>
-                                <property name="upper">4096</property>
-                                <property name="value">4096</property>
+                                <property name="lower">1</property>
+                                <property name="upper">100</property>
+                                <property name="value">8</property>
                                 <property name="step-increment">1</property>
-                                <property name="page-increment">100</property>
+                                <property name="page-increment">10</property>
                               </object>
                             </property>
                           </object>
                         </child>
                       </object>
                     </child>
-                  </object>
-                </child>
 
-                <child>
-                  <object class="AdwActionRow">
-                    <property name="title" translatable="yes">Colo_r</property>
-                    <property name="use-underline">True</property>
-                    <property name="activatable_widget">crosshair_color_button</property>
-                    <property name="sensitive" bind-source="crosshair_row" bind-property="active" bind-flags="sync-create"/>
                     <child>
-                      <object class="GtkColorButton" id="crosshair_color_button">
-                        <property name="valign">center</property>
-                        <signal name="color-set" handler="ua_zoom_crosshair_color_set_cb" swapped="yes"/>
+                      <object class="AdwPreferencesRow">
+                        <property name="activatable">False</property>
+                        <property name="selectable">False</property>
+                        <child>
+                          <object class="GtkBox">
+                            <property name="margin-start">12</property>
+                            <property name="margin-end">12</property>
+                            <property name="margin-top">6</property>
+                            <property name="margin-bottom">6</property>
+                            <property name="orientation">vertical</property>
+                            <property name="spacing">6</property>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="xalign">0.0</property>
+                                <property name="label" translatable="yes">Len_gth</property>
+                                <property name="use-underline">True</property>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkScale" id="crosshair_length_scale">
+                                <property name="hexpand">True</property>
+                                <marks>
+                                  <mark value="20" translatable="yes" comments="Translators: This is a mark in the Crosshair Length scale">Short</mark>
+                                  <mark value="1024" translatable="yes" comments="Translators: This is a mark in the Crosshair Length scale">1/4 screen</mark>
+                                  <mark value="2048" translatable="yes" comments="Translators: This is a mark in the Crosshair Length scale">1/2 Screen</mark>
+                                  <mark value="3072" translatable="yes" comments="Translators: This is a mark in the Crosshair Length scale">3/4 Screen</mark>
+                                  <mark value="4096" translatable="yes" comments="Translators: This is a mark in the Crosshair Length scale">Long</mark>
+                                </marks>
+                                <property name="adjustment">
+                                  <object class="GtkAdjustment">
+                                    <property name="lower">20</property>
+                                    <property name="upper">4096</property>
+                                    <property name="value">4096</property>
+                                    <property name="step-increment">1</property>
+                                    <property name="page-increment">100</property>
+                                  </object>
+                                </property>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
                       </object>
                     </child>
+
+                    <child>
+                      <object class="AdwActionRow">
+                        <property name="title" translatable="yes">Colo_r</property>
+                        <property name="use-underline">True</property>
+                        <property name="activatable_widget">crosshair_color_button</property>
+                        <child>
+                          <object class="GtkColorButton" id="crosshair_color_button">
+                            <property name="valign">center</property>
+                            <signal name="color-set" handler="ua_zoom_crosshair_color_set_cb" swapped="yes"/>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+
                   </object>
                 </child>
-
               </object>
             </child>
 
