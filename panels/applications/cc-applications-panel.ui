@@ -355,11 +355,10 @@
                         <child>
                           <object class="AdwPreferencesGroup" id="other_permissions_section">
                             <child>
-                              <object class="CcInfoRow" id="builtin">
+                              <object class="CcListRow" id="builtin">
                                 <property name="title" translatable="yes">Re_quired Access</property>
                                 <property name="subtitle" translatable="yes">System access that is required by the app</property>
-                                <property name="has-expander">True</property>
-                                <property name="is-link">True</property>
+                                <property name="show-arrow">True</property>
                                 <signal name="activated" handler="adw_dialog_present" object="builtin_dialog" />
                               </object>
                             </child>

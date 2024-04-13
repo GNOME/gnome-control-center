@@ -119,7 +119,7 @@ struct _CcApplicationsPanel
   AdwSwitchRow    *microphone;
   CcInfoRow       *no_microphone;
   AdwPreferencesGroup *other_permissions_section;
-  CcInfoRow       *builtin;
+  CcListRow       *builtin;
   AdwDialog       *builtin_dialog;
   AdwPreferencesPage *builtin_page;
   GtkListBox      *builtin_list;
@@ -813,6 +813,7 @@ add_static_permissions (CcApplicationsPanel *self,
   g_autofree gchar *str = NULL;
   gint added = 0;
   g_autofree gchar *text = NULL;
+  g_autofree gchar *static_permissions_number = NULL;
   gboolean is_sandboxed, is_snap = FALSE;
 
   is_snap = app_id && g_str_has_prefix (app_id, PORTAL_SNAP_PREFIX);
@@ -856,6 +857,13 @@ add_static_permissions (CcApplicationsPanel *self,
 
   text = g_strdup_printf (_("<b>%s</b> requires access to the following system resources. To stop this access, the app must be removed."), g_app_info_get_display_name (info));
   adw_preferences_page_set_description (self->builtin_page, text);
+
+  static_permissions_number = g_strdup_printf (g_dngettext (GETTEXT_PACKAGE,
+                                                            "%u permission",
+                                                            "%u permissions",
+                                                            added),
+                                               added);
+  cc_list_row_set_secondary_label (self->builtin, static_permissions_number);
 
   return added > 0;
 }
