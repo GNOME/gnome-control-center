@@ -356,8 +356,8 @@
                           <object class="AdwPreferencesGroup" id="other_permissions_section">
                             <child>
                               <object class="CcListRow" id="builtin">
-                                <property name="title" translatable="yes">Re_quired Access</property>
-                                <property name="subtitle" translatable="yes">System access that is required by the app</property>
+                                <property name="title" translatable="yes">Re_quired Permissions</property>
+                                <property name="subtitle" translatable="yes">System permissions that the app requires</property>
                                 <property name="show-arrow">True</property>
                                 <signal name="activated" handler="adw_dialog_present" object="builtin_dialog" />
                               </object>
@@ -401,7 +401,7 @@
 
   <!-- Built-in Permissions dialog -->
   <object class="AdwDialog" id="builtin_dialog">
-    <property name="title" translatable="yes">Required Access</property>
+    <property name="title" translatable="yes">Required Permissions</property>
     <property name="content-width">500</property>
     <property name="content-height">400</property>
     <property name="child">
