@@ -9,15 +9,15 @@ msgstr ""
 "Project-Id-Version: unnamed project\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2024-03-28 10:47+0000\n"
-"PO-Revision-Date: 2024-03-29 23:52+0100\n"
+"POT-Creation-Date: 2024-04-04 11:45+0000\n"
+"PO-Revision-Date: 2024-04-14 10:08+0100\n"
 "Last-Translator: ButterflyOfFire <ButterflyOfFire@protonmail.com>\n"
 "Language-Team: Kabyle <>\n"
 "Language: kab\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n>1\n"
+"Plural-Forms: nplurals=2; plural=n>1;\n"
 "X-Generator: Gtranslator 41.0\n"
 "X-DL-Team: kab\n"
 "X-DL-Module: gnome-control-center\n"
@@ -46,7 +46,7 @@ msgstr ""
 
 #: panels/applications/cc-applications-panel.c:834
 #: panels/privacy/cc-bolt-page.ui:240 panels/privacy/cc-bolt-page.ui:284
-#: panels/privacy/cc-privacy-panel.ui:74
+#: panels/privacy/cc-privacy-panel.ui:75
 msgid "Devices"
 msgstr "Ibenkan"
 
@@ -1221,7 +1221,6 @@ msgid "Profile successfully created!"
 msgstr ""
 
 #: panels/color/cc-color-panel.ui:290
-#| msgid "Copy Profile"
 msgid "Copy profile"
 msgstr "Nɣel amaɣnu"
 
@@ -1285,12 +1284,10 @@ msgid "Calibrate the device"
 msgstr ""
 
 #: panels/color/cc-color-panel.ui:499
-#| msgid "_Remove Profile"
 msgid "_Remove profile"
 msgstr "Kess amaɣnu (_R)"
 
 #: panels/color/cc-color-panel.ui:506
-#| msgid "_System Details"
 msgid "_View details"
 msgstr "Wali talqayt (_V)"
 
@@ -1433,21 +1430,21 @@ msgstr ""
 #: panels/color/cc-color-profile.c:151
 msgctxt "Colorspace fallback"
 msgid "Default RGB"
-msgstr ""
+msgstr "RGB amezwer"
 
 #. TRANSLATORS: this default CMYK space is used for printers that
 #. * do not have additional printer profiles specified in the PPD
 #: panels/color/cc-color-profile.c:158
 msgctxt "Colorspace fallback"
 msgid "Default CMYK"
-msgstr ""
+msgstr "CMYK amezwer"
 
 #. TRANSLATORS: this default gray space is used for printers that
 #. * do not have additional printer profiles specified in the PPD
 #: panels/color/cc-color-profile.c:165
 msgctxt "Colorspace fallback"
 msgid "Default Gray"
-msgstr ""
+msgstr "Amelliɣdi amezwer"
 
 #: panels/color/cc-color-profile.c:188
 msgid "Vendor supplied factory calibration data"
@@ -2253,7 +2250,7 @@ msgstr "Ɛreḍ inadi yemgaraden"
 
 #: panels/keyboard/cc-keyboard-shortcut-dialog.ui:126
 msgid "Add Custom Shortcuts"
-msgstr ""
+msgstr "Rnu inegzumen udmawanen"
 
 #: panels/keyboard/cc-keyboard-shortcut-dialog.ui:127
 msgid "Set up custom shortcuts for launching apps, running scripts, and more"
@@ -2295,7 +2292,7 @@ msgstr ""
 
 #: panels/keyboard/cc-keyboard-shortcut-editor.c:937
 msgid "Add Custom Shortcut"
-msgstr ""
+msgstr "Rnu anegzum udmawan"
 
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:22
 #: panels/system/users/cc-user-page.ui:223
@@ -3010,29 +3007,37 @@ msgid "Identity"
 msgstr "Tamagit"
 
 #: panels/network/connection-editor/ce-page.c:234
+#: panels/network/connection-editor/ce-page.c:238
 msgid "Preserve"
 msgstr ""
 
 #: panels/network/connection-editor/ce-page.c:235
+#: panels/network/connection-editor/ce-page.c:239
 msgid "Permanent"
 msgstr "Ameɣlal"
 
 #: panels/network/connection-editor/ce-page.c:236
+#: panels/network/connection-editor/ce-page.c:240
 msgid "Random"
 msgstr "Agacuran"
 
 #: panels/network/connection-editor/ce-page.c:237
+#: panels/network/connection-editor/ce-page.c:241
 msgid "Stable"
 msgstr ""
 
-#: panels/network/connection-editor/ce-page.c:241
+#: panels/network/connection-editor/ce-page.c:243
+msgid "Stable per SSID"
+msgstr ""
+
+#: panels/network/connection-editor/ce-page.c:251
 msgid ""
 "The MAC address entered here will be used as hardware address for the "
 "network device this connection is activated on. This feature is known as MAC "
 "cloning or spoofing. Example: 00:11:22:33:44:55"
 msgstr ""
 
-#: panels/network/connection-editor/ce-page.c:399
+#: panels/network/connection-editor/ce-page.c:409
 #, c-format
 msgid "Profile %d"
 msgstr "Amaɣnu %d"
@@ -3237,7 +3242,7 @@ msgstr "Kkes tansa"
 #: panels/network/connection-editor/ce-page-ip4.c:462
 #: panels/network/connection-editor/ce-page-ip6.c:434
 msgid "Delete Route"
-msgstr ""
+msgstr "Kkes abrid"
 
 #: panels/network/connection-editor/ce-page-ip4.c:799
 msgid "IPv4"
@@ -3373,7 +3378,7 @@ msgstr ""
 #: panels/network/connection-editor/ethernet-page.ui:110
 #: panels/network/connection-editor/wireguard-page.ui:194
 msgid "bytes"
-msgstr ""
+msgstr "ibiten"
 
 #: panels/network/connection-editor/ip4-page.ui:22
 msgid "IPv_4 Method"
@@ -3381,7 +3386,7 @@ msgstr ""
 
 #: panels/network/connection-editor/ip4-page.ui:37
 msgid "Automatic (DHCP)"
-msgstr ""
+msgstr "Awurman (DHCP)"
 
 #: panels/network/connection-editor/ip4-page.ui:48
 #: panels/network/connection-editor/ip6-page.ui:59
@@ -3446,7 +3451,7 @@ msgstr "Iberdan"
 #: panels/network/connection-editor/ip4-page.ui:252
 #: panels/network/connection-editor/ip6-page.ui:263
 msgid "Automatic Routes"
-msgstr ""
+msgstr "Iberdan iwurmanen"
 
 #. Translators: Please see https://en.wikipedia.org/wiki/Metrics_(networking)
 #: panels/network/connection-editor/ip4-page.ui:303
@@ -3466,7 +3471,7 @@ msgstr ""
 
 #: panels/network/connection-editor/ip6-page.ui:48
 msgid "Automatic, DHCP only"
-msgstr ""
+msgstr "Amurman, DHCP kan"
 
 #: panels/network/connection-editor/ip6-page.ui:142
 #: panels/network/connection-editor/ip6-page.ui:290
@@ -4354,7 +4359,7 @@ msgstr "%d %%"
 
 #: panels/power/cc-power-panel.c:201
 msgid "Battery Levels"
-msgstr ""
+msgstr "Iswiren n weẓru"
 
 #. Translators: UPS is an Uninterruptible Power Supply:
 #. * https://en.wikipedia.org/wiki/Uninterruptible_power_supply
@@ -5534,7 +5539,7 @@ msgstr ""
 
 #: panels/privacy/cc-diagnostics-page.ui:4
 msgid "Diagnostics"
-msgstr ""
+msgstr "Tasleḍt"
 
 #: panels/privacy/cc-diagnostics-page.ui:15
 msgid "Problem Reporting"
@@ -5945,59 +5950,59 @@ msgstr ""
 msgid "Automatic screen lock"
 msgstr ""
 
-#: panels/privacy/cc-privacy-panel.ui:36
+#: panels/privacy/cc-privacy-panel.ui:37
 msgid "_Location"
 msgstr "Adig (_L)"
 
-#: panels/privacy/cc-privacy-panel.ui:37
+#: panels/privacy/cc-privacy-panel.ui:38
 msgid "Control access to your location"
 msgstr ""
 
-#: panels/privacy/cc-privacy-panel.ui:47
+#: panels/privacy/cc-privacy-panel.ui:48
 msgid "_File History &amp; Trash"
 msgstr ""
 
-#: panels/privacy/cc-privacy-panel.ui:48
+#: panels/privacy/cc-privacy-panel.ui:49
 msgid "Remove saved data and files"
 msgstr ""
 
-#: panels/privacy/cc-privacy-panel.ui:58
+#: panels/privacy/cc-privacy-panel.ui:59
 msgid "_Diagnostics"
 msgstr ""
 
-#: panels/privacy/cc-privacy-panel.ui:59
+#: panels/privacy/cc-privacy-panel.ui:60
 msgid "Automatic problem reporting"
 msgstr ""
 
-#: panels/privacy/cc-privacy-panel.ui:78
+#: panels/privacy/cc-privacy-panel.ui:79
 msgid "_Cameras"
 msgstr "Tikamiṛatin (_C)"
 
-#: panels/privacy/cc-privacy-panel.ui:79
+#: panels/privacy/cc-privacy-panel.ui:80
 msgid "Control camera access"
 msgstr ""
 
-#: panels/privacy/cc-privacy-panel.ui:89
+#: panels/privacy/cc-privacy-panel.ui:90
 msgid "_Microphones"
 msgstr ""
 
-#: panels/privacy/cc-privacy-panel.ui:90
+#: panels/privacy/cc-privacy-panel.ui:91
 msgid "Control microphone access"
 msgstr ""
 
-#: panels/privacy/cc-privacy-panel.ui:102
+#: panels/privacy/cc-privacy-panel.ui:103
 msgid "_Thunderbolt"
 msgstr ""
 
-#: panels/privacy/cc-privacy-panel.ui:103
+#: panels/privacy/cc-privacy-panel.ui:104
 msgid "Manage device access"
 msgstr ""
 
-#: panels/privacy/cc-privacy-panel.ui:113
+#: panels/privacy/cc-privacy-panel.ui:114
 msgid "Device _Security"
 msgstr ""
 
-#: panels/privacy/cc-privacy-panel.ui:114
+#: panels/privacy/cc-privacy-panel.ui:115
 msgid "Hardware security status and information"
 msgstr ""
 
@@ -6401,7 +6406,6 @@ msgid "No custom search locations"
 msgstr ""
 
 #: panels/search/cc-search-panel.c:173
-#| msgid "Not found"
 msgid "No apps found"
 msgstr "Ulac isnasen yettwafen"
 
@@ -6979,22 +6983,21 @@ msgid "Hardware details and software versions"
 msgstr ""
 
 #: panels/system/cc-system-panel.ui:91
-#| msgid "S_oftware Updates"
 msgid "Software _Updates"
 msgstr "Ileqqman n yiseɣẓan (_U)"
 
 #. Translators: This is the full date and time format used in 12-hour mode.
-#: panels/system/datetime/cc-datetime-page.c:230
+#: panels/system/datetime/cc-datetime-page.c:231
 msgid "%e %B %Y, %l:%M %p"
 msgstr "%e %B %Y, %l:%M %p"
 
 #. Translators: This is the full date and time format used in 24-hour mode.
-#: panels/system/datetime/cc-datetime-page.c:235
+#: panels/system/datetime/cc-datetime-page.c:236
 msgid "%e %B %Y, %R"
 msgstr ""
 
 #. Translators: "city, country"
-#: panels/system/datetime/cc-datetime-page.c:392
+#: panels/system/datetime/cc-datetime-page.c:393
 #, c-format
 msgctxt "timezone loc"
 msgid "%s, %s"
@@ -7002,7 +7005,7 @@ msgstr "%s, %s"
 
 #. Update the timezone on the listbow row
 #. Translators: "timezone (details)"
-#: panels/system/datetime/cc-datetime-page.c:409
+#: panels/system/datetime/cc-datetime-page.c:410
 #, c-format
 msgctxt "timezone desc"
 msgid "%s (%s)"
@@ -7028,7 +7031,7 @@ msgstr "Ass (_D)"
 
 #: panels/system/datetime/cc-datetime-page.ui:136
 msgid "Automatic _Date &amp; Time"
-msgstr ""
+msgstr "Azemz akked wakud d iwurmanen"
 
 #: panels/system/datetime/cc-datetime-page.ui:137
 msgid "Requires internet access"
@@ -7038,103 +7041,103 @@ msgstr ""
 msgid "Date &amp; _Time"
 msgstr "Azemz &amp; wakkud (T)"
 
-#: panels/system/datetime/cc-datetime-page.ui:160
+#: panels/system/datetime/cc-datetime-page.ui:161
 msgid "Automatic Time _Zone"
 msgstr ""
 
-#: panels/system/datetime/cc-datetime-page.ui:161
+#: panels/system/datetime/cc-datetime-page.ui:162
 msgid "Requires location services enabled and internet access"
 msgstr ""
 
-#: panels/system/datetime/cc-datetime-page.ui:167
+#: panels/system/datetime/cc-datetime-page.ui:168
 msgid "Time Z_one"
 msgstr "Tamennaḍt tasragant (_O)"
 
-#: panels/system/datetime/cc-datetime-page.ui:178
+#: panels/system/datetime/cc-datetime-page.ui:179
 msgid "Time _Format"
 msgstr ""
 
-#: panels/system/datetime/cc-datetime-page.ui:189
+#: panels/system/datetime/cc-datetime-page.ui:190
 msgid "_24-hour"
 msgstr "_24 n yesragen"
 
-#: panels/system/datetime/cc-datetime-page.ui:197
+#: panels/system/datetime/cc-datetime-page.ui:198
 msgid "AM / _PM"
 msgstr ""
 
-#: panels/system/datetime/cc-datetime-page.ui:210
+#: panels/system/datetime/cc-datetime-page.ui:211
 msgid "Clock &amp; Calendar"
 msgstr ""
 
-#: panels/system/datetime/cc-datetime-page.ui:211
+#: panels/system/datetime/cc-datetime-page.ui:212
 msgid "Control how the time and date is shown in the top bar"
 msgstr ""
 
-#: panels/system/datetime/cc-datetime-page.ui:214
+#: panels/system/datetime/cc-datetime-page.ui:215
 msgid "_Week Day"
 msgstr ""
 
-#: panels/system/datetime/cc-datetime-page.ui:220
+#: panels/system/datetime/cc-datetime-page.ui:221
 msgid "D_ate"
 msgstr ""
 
-#: panels/system/datetime/cc-datetime-page.ui:226
+#: panels/system/datetime/cc-datetime-page.ui:227
 msgid "_Seconds"
 msgstr "Ta_sinin"
 
-#: panels/system/datetime/cc-datetime-page.ui:232
+#: panels/system/datetime/cc-datetime-page.ui:233
 msgid "Week _Numbers"
 msgstr ""
 
-#: panels/system/datetime/cc-datetime-page.ui:233
+#: panels/system/datetime/cc-datetime-page.ui:234
 msgid "Shown in the dropdown calendar"
 msgstr ""
 
-#: panels/system/datetime/cc-datetime-page.ui:269
+#: panels/system/datetime/cc-datetime-page.ui:270
 msgid "January"
 msgstr "yennayer"
 
-#: panels/system/datetime/cc-datetime-page.ui:270
+#: panels/system/datetime/cc-datetime-page.ui:271
 msgid "February"
 msgstr "Fuṛar"
 
-#: panels/system/datetime/cc-datetime-page.ui:271
+#: panels/system/datetime/cc-datetime-page.ui:272
 msgid "March"
 msgstr "Meɣres"
 
-#: panels/system/datetime/cc-datetime-page.ui:272
+#: panels/system/datetime/cc-datetime-page.ui:273
 msgid "April"
 msgstr "Yebrir"
 
-#: panels/system/datetime/cc-datetime-page.ui:273
+#: panels/system/datetime/cc-datetime-page.ui:274
 msgid "May"
 msgstr "Mayyu"
 
-#: panels/system/datetime/cc-datetime-page.ui:274
+#: panels/system/datetime/cc-datetime-page.ui:275
 msgid "June"
 msgstr "Yunyu"
 
-#: panels/system/datetime/cc-datetime-page.ui:275
+#: panels/system/datetime/cc-datetime-page.ui:276
 msgid "July"
 msgstr "Yulyu"
 
-#: panels/system/datetime/cc-datetime-page.ui:276
+#: panels/system/datetime/cc-datetime-page.ui:277
 msgid "August"
 msgstr "Ɣuct"
 
-#: panels/system/datetime/cc-datetime-page.ui:277
+#: panels/system/datetime/cc-datetime-page.ui:278
 msgid "September"
 msgstr "Ctamber"
 
-#: panels/system/datetime/cc-datetime-page.ui:278
+#: panels/system/datetime/cc-datetime-page.ui:279
 msgid "October"
 msgstr "Tuber"
 
-#: panels/system/datetime/cc-datetime-page.ui:279
+#: panels/system/datetime/cc-datetime-page.ui:280
 msgid "November"
 msgstr "Wamber"
 
-#: panels/system/datetime/cc-datetime-page.ui:280
+#: panels/system/datetime/cc-datetime-page.ui:281
 msgid "December"
 msgstr "Dujamber"
 
@@ -7426,7 +7429,6 @@ msgid "Authentication is required to enable or disable remote sessions"
 msgstr ""
 
 #: panels/system/remote-login/cc-remote-login-page.c:53
-#| msgid "Command"
 msgid "Command copied"
 msgstr ""
 
@@ -7596,7 +7598,7 @@ msgstr ""
 #: panels/system/users/cc-enterprise-login-dialog.ui:162
 #: panels/system/users/data/join-dialog.ui:112
 msgid "Administrator _Name"
-msgstr ""
+msgstr "Isem n u_nedbal"
 
 #: panels/system/users/cc-enterprise-login-dialog.ui:169
 msgid "Administrator _Password"
@@ -7939,7 +7941,7 @@ msgstr ""
 
 #: panels/system/users/cc-user-page.ui:116
 msgid "A_utomatic Login"
-msgstr ""
+msgstr "Tuqqna tawurmant"
 
 #: panels/system/users/cc-user-page.ui:135
 msgid "_Administrator"
@@ -7981,7 +7983,6 @@ msgid "_Add User…"
 msgstr "Rnu _aseqdac…"
 
 #: panels/system/users/cc-users-page.ui:46
-#| msgid "Enterprise"
 msgid "Add Enterprise User"
 msgstr "Rnu aseqdac n takebbanit"
 
@@ -8694,7 +8695,7 @@ msgstr ""
 #. Translators: This is a mark in the Crosshair Length scale
 #: panels/universal-access/cc-ua-zoom-page.ui:180
 msgid "1/4 screen"
-msgstr ""
+msgstr "1/4 n wegdil"
 
 #. Translators: This is a mark in the Crosshair Length scale
 #: panels/universal-access/cc-ua-zoom-page.ui:181
@@ -9074,19 +9075,19 @@ msgstr "5G kan"
 
 #: panels/wwan/cc-wwan-device.c:1007
 msgid "2G, 3G, 4G, 5G (Preferred)"
-msgstr ""
+msgstr "2G, 3G, 4G, 5G (yettwasemter-d)"
 
 #: panels/wwan/cc-wwan-device.c:1009
 msgid "2G, 3G, 4G (Preferred), 5G"
-msgstr ""
+msgstr "2G, 3G, 4G (yettwasmeter), 5G"
 
 #: panels/wwan/cc-wwan-device.c:1011
 msgid "2G, 3G (Preferred), 4G, 5G"
-msgstr ""
+msgstr "2G, 3G (yettwasemter), 4G, 5G"
 
 #: panels/wwan/cc-wwan-device.c:1013
 msgid "2G (Preferred), 3G, 4G, 5G"
-msgstr ""
+msgstr "2G (yettwasemter), 3G, 4G, 5G"
 
 #: panels/wwan/cc-wwan-device.c:1015
 msgid "2G, 3G, 4G, 5G"
@@ -9094,15 +9095,15 @@ msgstr "2G, 3G, 4G, 5G"
 
 #: panels/wwan/cc-wwan-device.c:1022
 msgid "2G, 3G, 4G (Preferred)"
-msgstr ""
+msgstr "2G, 3G, 4G (yettwasemter)"
 
 #: panels/wwan/cc-wwan-device.c:1024
 msgid "2G, 3G (Preferred), 4G"
-msgstr ""
+msgstr "2G, 3G (yettwasemter), 4G"
 
 #: panels/wwan/cc-wwan-device.c:1026
 msgid "2G (Preferred), 3G, 4G"
-msgstr ""
+msgstr "2G (yettwasemter), 3G, 4G"
 
 #: panels/wwan/cc-wwan-device.c:1028
 msgid "2G, 3G, 4G"
@@ -9110,15 +9111,15 @@ msgstr "2G, 3G, 4G"
 
 #: panels/wwan/cc-wwan-device.c:1035
 msgid "3G, 4G, 5G (Preferred)"
-msgstr ""
+msgstr "3G, 4G, 5G (yettwasemter)"
 
 #: panels/wwan/cc-wwan-device.c:1037
 msgid "3G, 4G (Preferred), 5G"
-msgstr ""
+msgstr "3G, 4G (yettwasemter), 5G"
 
 #: panels/wwan/cc-wwan-device.c:1039
 msgid "3G (Preferred), 4G, 5G"
-msgstr ""
+msgstr "3G (yettwasemter), 4G, 5G"
 
 #: panels/wwan/cc-wwan-device.c:1041
 msgid "3G, 4G, 5G"
@@ -9126,15 +9127,15 @@ msgstr "3G, 4G, 5G"
 
 #: panels/wwan/cc-wwan-device.c:1048
 msgid "2G, 4G, 5G (Preferred)"
-msgstr ""
+msgstr "2G, 4G, 5G (yettwasemter)"
 
 #: panels/wwan/cc-wwan-device.c:1050
 msgid "2G, 4G (Preferred), 5G"
-msgstr ""
+msgstr "2G, 4G (yettwasemter), 5G"
 
 #: panels/wwan/cc-wwan-device.c:1052
 msgid "2G (Preferred), 4G, 5G"
-msgstr ""
+msgstr "2G (yettwasemter), 4G, 5G"
 
 #: panels/wwan/cc-wwan-device.c:1054
 msgid "2G, 4G, 5G"
@@ -9142,15 +9143,15 @@ msgstr "2G, 4G, 5G"
 
 #: panels/wwan/cc-wwan-device.c:1061
 msgid "2G, 3G, 5G (Preferred)"
-msgstr ""
+msgstr "2G, 3G, 5G (yettwasemter)"
 
 #: panels/wwan/cc-wwan-device.c:1063
 msgid "2G, 3G (Preferred), 5G"
-msgstr ""
+msgstr "2G, 3G (yettwasemter), 5G"
 
 #: panels/wwan/cc-wwan-device.c:1065
 msgid "2G (Preferred), 3G, 5G"
-msgstr ""
+msgstr "2G (yettwasemter), 3G, 5G"
 
 #: panels/wwan/cc-wwan-device.c:1067
 msgid "2G, 3G, 5G"
@@ -9158,11 +9159,11 @@ msgstr "2G, 3G, 5G"
 
 #: panels/wwan/cc-wwan-device.c:1073
 msgid "3G, 4G (Preferred)"
-msgstr ""
+msgstr "3G, 4G (yettwasemter)"
 
 #: panels/wwan/cc-wwan-device.c:1075
 msgid "3G (Preferred), 4G"
-msgstr ""
+msgstr "3G (yettwasemter), 4G"
 
 #: panels/wwan/cc-wwan-device.c:1077
 msgid "3G, 4G"
@@ -9170,11 +9171,11 @@ msgstr "3G, 4G"
 
 #: panels/wwan/cc-wwan-device.c:1083
 msgid "2G, 4G (Preferred)"
-msgstr ""
+msgstr "2G, 4G (yettwasemter)"
 
 #: panels/wwan/cc-wwan-device.c:1085
 msgid "2G (Preferred), 4G"
-msgstr ""
+msgstr "2G (yettwasemter), 4G"
 
 #: panels/wwan/cc-wwan-device.c:1087
 msgid "2G, 4G"
@@ -9182,11 +9183,11 @@ msgstr "2G, 4G"
 
 #: panels/wwan/cc-wwan-device.c:1093
 msgid "2G, 3G (Preferred)"
-msgstr ""
+msgstr "2G, 3G (yettwasemter)"
 
 #: panels/wwan/cc-wwan-device.c:1095
 msgid "2G (Preferred), 3G"
-msgstr ""
+msgstr "2G (yettwasemter), 3G"
 
 #: panels/wwan/cc-wwan-device.c:1097
 msgid "2G, 3G"
@@ -9194,11 +9195,11 @@ msgstr "2G, 3G"
 
 #: panels/wwan/cc-wwan-device.c:1103
 msgid "2G, 5G (Preferred)"
-msgstr ""
+msgstr "2G, 5G (yettwasemter)"
 
 #: panels/wwan/cc-wwan-device.c:1105
 msgid "2G (Preferred), 5G"
-msgstr ""
+msgstr "2G (yettwasemter), 5G"
 
 #: panels/wwan/cc-wwan-device.c:1107
 msgid "2G, 5G"
@@ -9206,11 +9207,11 @@ msgstr "2G, 5G"
 
 #: panels/wwan/cc-wwan-device.c:1113
 msgid "3G, 5G (Preferred)"
-msgstr ""
+msgstr "3G, 5G (yettwasemter)"
 
 #: panels/wwan/cc-wwan-device.c:1115
 msgid "3G (Preferred), 5G"
-msgstr ""
+msgstr "3G (yettwasemter), 5G"
 
 #: panels/wwan/cc-wwan-device.c:1117
 msgid "3G, 5G"
@@ -9218,11 +9219,11 @@ msgstr "3G, 5G"
 
 #: panels/wwan/cc-wwan-device.c:1123
 msgid "4G, 5G (Preferred)"
-msgstr ""
+msgstr "4G, 5G (yettwasemter)"
 
 #: panels/wwan/cc-wwan-device.c:1125
 msgid "4G (Preferred), 5G"
-msgstr ""
+msgstr "4G (yettwasemter), 5G"
 
 #: panels/wwan/cc-wwan-device.c:1127
 msgid "4G, 5G"
