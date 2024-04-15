@@ -407,20 +407,21 @@ create_switch_with_bindings (GtkSwitch *from)
   return new_switch;
 }
 
+static gboolean
+cc_sharing_panel_check_media_sharing_available (void)
+{
+  g_autofree gchar *path = NULL;
+
+  path = g_find_program_in_path ("rygel");
+  return (path != NULL);
+}
+
 static void
 cc_sharing_panel_setup_media_sharing_dialog (CcSharingPanel *self)
 {
   g_auto(GStrv) folders = NULL;
   GStrv list;
   GtkWidget *row, *networks, *w;
-  g_autofree gchar *path = NULL;
-
-  path = g_find_program_in_path ("rygel");
-  if (path == NULL)
-    {
-      gtk_widget_set_visible (self->media_sharing_row, FALSE);
-      return;
-    }
 
   g_signal_connect_object (self->media_sharing_dialog, "close-request",
                            G_CALLBACK (cc_sharing_panel_media_sharing_dialog_close_request),
@@ -585,7 +586,10 @@ sharing_proxy_ready (GObject      *source,
   self->sharing_proxy = proxy;
 
   /* media sharing */
-  cc_sharing_panel_setup_media_sharing_dialog (self);
+  if (cc_sharing_panel_check_media_sharing_available ())
+    cc_sharing_panel_setup_media_sharing_dialog (self);
+  else
+    gtk_widget_set_visible (self->media_sharing_row, FALSE);
 
   /* personal file sharing */
   if (cc_sharing_panel_check_schema_available (self, FILE_SHARING_SCHEMA_ID))
