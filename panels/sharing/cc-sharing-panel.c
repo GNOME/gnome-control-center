@@ -22,6 +22,8 @@
 #include "cc-sharing-panel.h"
 #include "cc-hostname-entry.h"
 #include "cc-list-row.h"
+#include "shell/cc-application.h"
+#include "shell/cc-log.h"
 
 #include "cc-sharing-resources.h"
 #include "file-share-properties.h"
@@ -619,4 +621,22 @@ CcSharingPanel *
 cc_sharing_panel_new (void)
 {
   return g_object_new (CC_TYPE_SHARING_PANEL, NULL);
+}
+
+void
+cc_sharing_panel_static_init_func (void)
+{
+  CcApplication *application;
+  gboolean visible;
+
+  CC_TRACE_MSG ("Updating Sharing panel visibility");
+
+  visible = cc_sharing_panel_check_schema_available (FILE_SHARING_SCHEMA_ID) ||
+            cc_sharing_panel_check_media_sharing_available ();
+
+  application = CC_APPLICATION (g_application_get_default ());
+  cc_shell_model_set_panel_visibility (cc_application_get_model (application),
+                                       "sharing",
+                                       visible ? CC_PANEL_VISIBLE : CC_PANEL_HIDDEN);
+  g_debug ("Sharing panel visible: %s", visible ? "yes" : "no");
 }
