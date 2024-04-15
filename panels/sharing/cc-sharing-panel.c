@@ -548,8 +548,7 @@ cc_sharing_panel_setup_personal_file_sharing_dialog (CcSharingPanel *self)
 }
 
 static gboolean
-cc_sharing_panel_check_schema_available (CcSharingPanel *self,
-                                         const gchar *schema_id)
+cc_sharing_panel_check_schema_available (const gchar *schema_id)
 {
   GSettingsSchemaSource *source;
   g_autoptr(GSettingsSchema) schema = NULL;
@@ -592,7 +591,7 @@ sharing_proxy_ready (GObject      *source,
     gtk_widget_set_visible (self->media_sharing_row, FALSE);
 
   /* personal file sharing */
-  if (cc_sharing_panel_check_schema_available (self, FILE_SHARING_SCHEMA_ID))
+  if (cc_sharing_panel_check_schema_available (FILE_SHARING_SCHEMA_ID))
     cc_sharing_panel_setup_personal_file_sharing_dialog (self);
   else
     gtk_widget_set_visible (self->personal_file_sharing_row, FALSE);
