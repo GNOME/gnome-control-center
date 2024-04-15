@@ -69,9 +69,6 @@
       <object class="AdwSwitchRow" id="device_enable_row">
         <property name="title" translatable="yes">Wi-Fi</property>
         <signal name="notify::active" handler="device_off_switch_changed_cb" object="NetDeviceWifi" swapped="yes"/>
-        <accessibility>
-          <property name="label" translatable="yes">Turn Wi-Fi off</property>
-        </accessibility>
       </object>
     </child>
 
@@ -81,9 +78,6 @@
         <property name="title" translatable="yes">Saved Networks</property>
         <property name="show-arrow">True</property>
         <signal name="activated" handler="adw_dialog_present" object="saved_networks_dialog"/>
-        <accessibility>
-          <property name="label" translatable="yes">Show Saved Networks</property>
-        </accessibility>
       </object>
     </child>
 
@@ -93,9 +87,6 @@
         <property name="title" translatable="yes">_Connect to Hidden Network…</property>
         <property name="show-arrow">True</property>
         <signal name="activated" handler="on_connect_hidden_network" object="NetDeviceWifi" swapped="yes"/>
-        <accessibility>
-          <property name="label" translatable="yes">Connect to hidden network</property>
-        </accessibility>
       </object>
     </child>
 
