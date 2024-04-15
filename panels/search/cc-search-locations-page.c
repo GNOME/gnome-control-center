@@ -52,7 +52,6 @@ struct _CcSearchLocationsPage {
   GtkWidget           *bookmarks_group;
   GtkWidget           *bookmarks_list;
   GtkWidget           *others_list;
-  GtkWidget           *locations_add;
 };
 
 G_DEFINE_TYPE (CcSearchLocationsPage, cc_search_locations_page, ADW_TYPE_NAVIGATION_PAGE)
@@ -555,6 +554,13 @@ place_compare_func (GtkListBoxRow *row_a,
   g_autofree char *path_a = NULL;
   g_autofree char *path_b = NULL;
 
+  /* If an Add... AdwButtonRow is present, sort it last */
+  if (ADW_IS_BUTTON_ROW (row_a))
+    return 1;
+
+  if (ADW_IS_BUTTON_ROW (row_b))
+    return -1;
+
   place_a = g_object_get_data (G_OBJECT (row_a), "place");
   place_b = g_object_get_data (G_OBJECT (row_b), "place");
 
@@ -717,8 +723,13 @@ other_places_refresh (CcSearchLocationsPage *self)
   GList *l;
   GtkListBoxRow *widget;
 
+  /* Clear the list rows, but not if it's an Add... AdwButtonRow, which should come last */
   while ((widget = gtk_list_box_get_row_at_index (GTK_LIST_BOX (self->others_list), 0)))
-    gtk_list_box_remove (GTK_LIST_BOX (self->others_list), GTK_WIDGET (widget));
+    {
+      if (ADW_IS_BUTTON_ROW (widget))
+        break;
+      gtk_list_box_remove (GTK_LIST_BOX (self->others_list), GTK_WIDGET (widget));
+    }
 
   places = get_places_list (self);
   for (l = places; l != NULL; l = l->next)
@@ -774,7 +785,6 @@ cc_search_locations_page_class_init (CcSearchLocationsPageClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcSearchLocationsPage, bookmarks_group);
   gtk_widget_class_bind_template_child (widget_class, CcSearchLocationsPage, bookmarks_list);
   gtk_widget_class_bind_template_child (widget_class, CcSearchLocationsPage, others_list);
-  gtk_widget_class_bind_template_child (widget_class, CcSearchLocationsPage, locations_add);
 
   gtk_widget_class_bind_template_callback (widget_class, add_button_clicked);
   gtk_widget_class_bind_template_callback (widget_class, keynav_failed_cb);
