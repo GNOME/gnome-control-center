@@ -7,7 +7,7 @@ policydirs=$srcdirs
 xmldirs=$srcdirs
 
 # find source files that contain gettext functions with literal or GETTEXT_PACKAGE argument
-files=$(grep -lRs --include='*.c' 'gettext *(\("\|GETTEXT_PACKAGE,\)' $srcdirs)
+files=$(grep -ElRs --include='*.c' 'gettext2? ?\(("|GETTEXT_PACKAGE,)' $srcdirs)
 
 # find source files that contain gettext macros
 files="$files "$(grep -lRs --include='*.c' --include='*.h' '[^I_)]_(' $srcdirs)
