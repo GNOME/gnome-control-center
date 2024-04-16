@@ -866,11 +866,8 @@ cc_wifi_connection_list_set_placeholder_text (CcWifiConnectionList *self,
 
   gtk_label_set_wrap (GTK_LABEL (listbox_placeholder), TRUE);
   gtk_label_set_max_width_chars (GTK_LABEL (listbox_placeholder), 50);
-  gtk_widget_set_margin_top (listbox_placeholder, 18);
-  gtk_widget_set_margin_bottom (listbox_placeholder, 18);
-  gtk_widget_set_margin_start (listbox_placeholder, 18);
-  gtk_widget_set_margin_end (listbox_placeholder, 18);
   gtk_widget_add_css_class (listbox_placeholder, "dim-label");
+  gtk_widget_add_css_class (listbox_placeholder, "cc-placeholder-row");
 
   gtk_list_box_set_placeholder (self->listbox, listbox_placeholder);
 }
