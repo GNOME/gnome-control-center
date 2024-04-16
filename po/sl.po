@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2024-04-13 05:36+0000\n"
-"PO-Revision-Date: 2024-04-14 12:29+0200\n"
+"POT-Creation-Date: 2024-04-15 13:31+0000\n"
+"PO-Revision-Date: 2024-04-16 08:42+0200\n"
 "Last-Translator: Martin Srebotnjak <miles@filmsi.net>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "Language: sl_SI\n"
@@ -157,12 +157,12 @@ msgid "Removable Media"
 msgstr "Odstranljivi nosilci"
 
 #: panels/applications/cc-applications-panel.ui:122
-msgid "Automat_ically Launch Apps"
-msgstr "_Samodejno zaženi program"
+msgid "Med_ia Autostart"
+msgstr "Samodejn_i zagon nosilca"
 
 #: panels/applications/cc-applications-panel.ui:123
-msgid "Start apps when media is connected or inserted"
-msgstr "Zaženi programe, ko je vstavljen ali povezan nov nosilec"
+msgid "Start apps or prompt when media is connected"
+msgstr "Zaženi programe ali vprašaj za odziv, ko je povezan nov nosilec"
 
 #: panels/applications/cc-applications-panel.ui:144
 msgid "App Settings"
@@ -525,22 +525,18 @@ msgid "Sof_tware"
 msgstr "_Programska oprema"
 
 #: panels/applications/cc-removable-media-settings.ui:72
-msgid "_Other Media"
-msgstr "_Drugi nosilci"
+msgid "_Other Media Types"
+msgstr "_Drugi vrste nosilcev"
 
-#: panels/applications/cc-removable-media-settings.ui:74
-msgid "Select how other media should be handled"
-msgstr "Izberite kako upravljati z drugimi vrstami nosilcev"
+#: panels/applications/cc-removable-media-settings.ui:90
+msgid "Other Media Types"
+msgstr "Drugi vrste nosilcev"
 
-#: panels/applications/cc-removable-media-settings.ui:91
-msgid "Other Media"
-msgstr "Drugi nosilci"
-
-#: panels/applications/cc-removable-media-settings.ui:106
+#: panels/applications/cc-removable-media-settings.ui:105
 msgid "_Type"
 msgstr "_Vrsta"
 
-#: panels/applications/cc-removable-media-settings.ui:126
+#: panels/applications/cc-removable-media-settings.ui:125
 msgid "_Action"
 msgstr "_Dejanje"
 
@@ -1029,7 +1025,7 @@ msgstr "Na_daljuj"
 #. This button returns the user back to the color control panel
 #: panels/color/cc-color-calibrate.ui:40
 #: panels/system/region/cc-format-chooser.ui:49
-#: panels/system/users/cc-fingerprint-dialog.ui:57
+#: panels/system/users/cc-fingerprint-dialog.ui:51
 msgid "_Done"
 msgstr "_Končano"
 
@@ -2782,7 +2778,7 @@ msgid "Manual"
 msgstr "Ročno"
 
 #. xxx: Added to avoid confusion with the preceding VPN row
-#: panels/network/cc-net-proxy-page.ui:4 panels/network/cc-network-panel.ui:93
+#: panels/network/cc-net-proxy-page.ui:4 panels/network/cc-network-panel.ui:88
 msgid "Proxy"
 msgstr "Posredniški strežnik"
 
@@ -2816,56 +2812,40 @@ msgid "HTTP Proxy"
 msgstr "Posredniški strežnik HTTP"
 
 #: panels/network/cc-net-proxy-page.ui:113
-#: panels/network/cc-net-proxy-page.ui:142
-#: panels/network/cc-net-proxy-page.ui:171
-#: panels/network/cc-net-proxy-page.ui:200
+#: panels/network/cc-net-proxy-page.ui:139
+#: panels/network/cc-net-proxy-page.ui:165
+#: panels/network/cc-net-proxy-page.ui:191
 msgid "URL"
 msgstr "Naslov URL"
 
 #: panels/network/cc-net-proxy-page.ui:120
-#: panels/network/cc-net-proxy-page.ui:149
-#: panels/network/cc-net-proxy-page.ui:178
-#: panels/network/cc-net-proxy-page.ui:207
+#: panels/network/cc-net-proxy-page.ui:146
+#: panels/network/cc-net-proxy-page.ui:172
+#: panels/network/cc-net-proxy-page.ui:198
 msgid "Port"
 msgstr "Vrata"
 
-#: panels/network/cc-net-proxy-page.ui:128
-msgid "HTTP proxy port"
-msgstr "Vrata posredniškega strežnika HTTP"
-
-#: panels/network/cc-net-proxy-page.ui:138
+#: panels/network/cc-net-proxy-page.ui:135
 msgid "HTTPS Proxy"
 msgstr "Posredniški strežnik HTTPS"
 
-#: panels/network/cc-net-proxy-page.ui:157
-msgid "HTTPS proxy port"
-msgstr "Vrata posredniškega strežnika HTTPS"
-
-#: panels/network/cc-net-proxy-page.ui:167
+#: panels/network/cc-net-proxy-page.ui:161
 msgid "FTP Proxy"
 msgstr "Posredniški strežnik FTP"
 
-#: panels/network/cc-net-proxy-page.ui:186
-msgid "FTP proxy port"
-msgstr "Vrata posredniškega strežnika FTP"
-
-#: panels/network/cc-net-proxy-page.ui:196
+#: panels/network/cc-net-proxy-page.ui:187
 msgid "SOCKS Host"
 msgstr "Gostitelj SOCKS"
 
-#: panels/network/cc-net-proxy-page.ui:215
-msgid "SOCKS host port"
-msgstr "Vrata gostitelja SOCKS"
-
-#: panels/network/cc-net-proxy-page.ui:226
+#: panels/network/cc-net-proxy-page.ui:214
 msgid "Ignored Hosts"
 msgstr "Prezri gostitelji"
 
-#: panels/network/cc-network-panel.c:665
+#: panels/network/cc-network-panel.c:649
 msgid "Network Unavailable"
 msgstr "Omrežje ni na voljo"
 
-#: panels/network/cc-network-panel.c:667
+#: panels/network/cc-network-panel.c:651
 msgid ""
 "An error has occurred and network cannot be used.\n"
 " Error details: NetworkManager not running."
@@ -2873,7 +2853,7 @@ msgstr ""
 "Prišlo je do napake, zato omrežja ni mogoče uporabljati.\n"
 " Podrobnosti o napaki: program NetworkManager ni zagnan."
 
-#: panels/network/cc-network-panel.ui:46 panels/network/cc-network-panel.ui:78
+#: panels/network/cc-network-panel.ui:46 panels/network/cc-network-panel.ui:75
 #: panels/network/connection-editor/net-connection-editor.c:743
 msgid "VPN"
 msgstr "VPN"
@@ -2883,11 +2863,11 @@ msgstr "VPN"
 msgid "Add VPN"
 msgstr "Dodaj VPN"
 
-#: panels/network/cc-network-panel.ui:69
+#: panels/network/cc-network-panel.ui:66
 msgid "Not set up"
 msgstr "Ni nastavljeno"
 
-#: panels/network/cc-network-panel.ui:96
+#: panels/network/cc-network-panel.ui:91
 msgid "_Proxy"
 msgstr "_Posredniški strežnik"
 
@@ -3972,11 +3952,7 @@ msgstr "Brez povezave"
 msgid "Active"
 msgstr "Dejavno"
 
-#: panels/network/network-vpn.ui:11
-msgid "Turn VPN connection off"
-msgstr "Onemogoči povezavo VPN"
-
-#: panels/network/network-vpn.ui:17
+#: panels/network/network-vpn.ui:14
 msgid "VPN Options"
 msgstr "Možnosti VPN"
 
@@ -3995,31 +3971,19 @@ msgctxt "Wi-Fi Hotspot"
 msgid "Password"
 msgstr "Geslo"
 
-#: panels/network/network-wifi.ui:73
-msgid "Turn Wi-Fi off"
-msgstr "Onemogoči Wi-Fi"
-
-#: panels/network/network-wifi.ui:81
+#: panels/network/network-wifi.ui:78
 msgid "Saved Networks"
 msgstr "Shranjena omrežja"
 
-#: panels/network/network-wifi.ui:85
-msgid "Show Saved Networks"
-msgstr "Pokaži shranjena omrežja"
-
-#: panels/network/network-wifi.ui:93
+#: panels/network/network-wifi.ui:87
 msgid "_Connect to Hidden Network…"
 msgstr "_Poveži v skrito omrežje …"
 
-#: panels/network/network-wifi.ui:97
-msgid "Connect to hidden network"
-msgstr "Povezava v skrito brezžično omrežje"
-
-#: panels/network/network-wifi.ui:105
+#: panels/network/network-wifi.ui:96
 msgid "_Turn On Wi-Fi Hotspot…"
 msgstr "_Omogoči vročo točko Wi-Fi …"
 
-#: panels/network/network-wifi.ui:114
+#: panels/network/network-wifi.ui:105
 msgid "Saved Wi-Fi Networks"
 msgstr "Shranjena omrežja Wi-Fi"
 
@@ -4995,7 +4959,7 @@ msgstr "Dodaj tiskalnik"
 
 #: panels/printers/new-printer-dialog.ui:67
 #: panels/system/region/cc-format-chooser.ui:37
-#: panels/system/users/cc-fingerprint-dialog.ui:44
+#: panels/system/users/cc-fingerprint-dialog.ui:38
 #: panels/wwan/cc-wwan-apn-dialog.ui:21
 msgid "Back"
 msgstr "Nazaj"
@@ -8186,15 +8150,15 @@ msgstr "Upravljalnik prstnega odtisa"
 msgid "Fingerprint"
 msgstr "Prstni odtis"
 
-#: panels/system/users/cc-fingerprint-dialog.ui:85
+#: panels/system/users/cc-fingerprint-dialog.ui:79
 msgid "_No"
 msgstr "_Ne"
 
-#: panels/system/users/cc-fingerprint-dialog.ui:93
+#: panels/system/users/cc-fingerprint-dialog.ui:87
 msgid "_Yes"
 msgstr "_Da"
 
-#: panels/system/users/cc-fingerprint-dialog.ui:113
+#: panels/system/users/cc-fingerprint-dialog.ui:107
 msgid ""
 "Do you want to delete your registered fingerprints so fingerprint login is "
 "disabled?"
@@ -8202,43 +8166,43 @@ msgstr ""
 "Ali želite izbrisati obstoječe prstne odtise in onemogočiti tak način "
 "prijave?"
 
-#: panels/system/users/cc-fingerprint-dialog.ui:169
+#: panels/system/users/cc-fingerprint-dialog.ui:163
 msgid "No fingerprint device"
 msgstr "Ni naprave za branje prstnega odtisa"
 
 #. Translators: This is the empty state page label which states that there are no devices ready.
-#: panels/system/users/cc-fingerprint-dialog.ui:184
+#: panels/system/users/cc-fingerprint-dialog.ui:178
 msgid "No Fingerprint device"
 msgstr "Ni naprave za branje prstnega odtisa"
 
-#: panels/system/users/cc-fingerprint-dialog.ui:193
+#: panels/system/users/cc-fingerprint-dialog.ui:187
 msgid "Ensure the device is properly connected"
 msgstr "Zagotovite, da je naprava pravilno povezana."
 
-#: panels/system/users/cc-fingerprint-dialog.ui:201
+#: panels/system/users/cc-fingerprint-dialog.ui:195
 msgid "Fingerprint Device"
 msgstr "Naprava za branje prstnega odtisa"
 
-#: panels/system/users/cc-fingerprint-dialog.ui:210
+#: panels/system/users/cc-fingerprint-dialog.ui:204
 msgid "Choose the fingerprint device you want to configure"
 msgstr "Izberite napravo za branje prstnega odtisa, ki jo želite nastaviti"
 
-#: panels/system/users/cc-fingerprint-dialog.ui:240
+#: panels/system/users/cc-fingerprint-dialog.ui:234
 msgid "Fingerprint Login"
 msgstr "Prijava s prstnim odtisom"
 
-#: panels/system/users/cc-fingerprint-dialog.ui:246
+#: panels/system/users/cc-fingerprint-dialog.ui:240
 msgid ""
 "Fingerprint login allows you to unlock and log into your device with your "
 "finger"
 msgstr ""
 "Prijava s prstnim odtisom omogoča odklepanje in prijavo v napravo s prstom"
 
-#: panels/system/users/cc-fingerprint-dialog.ui:273
+#: panels/system/users/cc-fingerprint-dialog.ui:267
 msgid "_Delete Fingerprints"
 msgstr "_Izbriši prstne odtise"
 
-#: panels/system/users/cc-fingerprint-dialog.ui:287
+#: panels/system/users/cc-fingerprint-dialog.ui:281
 msgid "Fingerprint Enroll"
 msgstr "Prijava s prstnim odtisom"
 
