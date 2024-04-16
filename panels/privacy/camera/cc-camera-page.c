@@ -281,8 +281,16 @@ on_perm_store_signal (GDBusProxy *proxy,
 {
   GVariant *permissions, *permissions_data;
   g_autoptr(GVariant) boxed_permission_data = NULL;
+  g_autoptr(GVariant) table = NULL;
+  g_autoptr(GVariant) id = NULL;
 
   if (g_strcmp0 (signal_name, "Changed") != 0)
+    return;
+
+  table = g_variant_get_child_value (parameters, 0);
+  id = g_variant_get_child_value (parameters, 1);
+
+  if (g_strcmp0 (g_variant_get_string (table, NULL), "devices") != 0 || g_strcmp0 (g_variant_get_string (id, NULL), "camera") != 0)
     return;
 
   permissions = g_variant_get_child_value (parameters, 4);
