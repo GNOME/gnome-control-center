@@ -59,8 +59,8 @@ stages:
     # stable branch.
     # Could probably also switch away from rawhide,
     # to stable fedora branch as well.
-    FDO_DISTRIBUTION_TAG: '2023-06-07.0-main'
-    FDO_DISTRIBUTION_VERSION: rawhide
+    FDO_DISTRIBUTION_TAG: '2024-04-16.0-main'
+    FDO_DISTRIBUTION_VERSION: 39
 
 #############################################
 #          Create CI Docker Images          #
@@ -131,8 +131,8 @@ build.container.fedora@x86_64:
       xorg-x11-server-Xvfb
       mesa-dri-drivers
       libsecret-devel
+      libgweather4-devel
       geocode-glib2-devel
-      libgweather-devel
       lcms2-devel
       geoclue2-devel
       libnotify-devel
