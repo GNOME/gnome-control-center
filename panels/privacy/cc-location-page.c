@@ -291,12 +291,14 @@ on_perm_store_signal (GDBusProxy *proxy,
                       gpointer    user_data)
 {
   GVariant *permissions, *permissions_data;
+  g_autoptr(GVariant) boxed_permission_data = NULL;
 
   if (g_strcmp0 (signal_name, "Changed") != 0)
     return;
 
   permissions = g_variant_get_child_value (parameters, 4);
-  permissions_data = g_variant_get_child_value (parameters, 3);
+  boxed_permission_data = g_variant_get_child_value (parameters, 3);
+  permissions_data = g_variant_get_variant (boxed_permission_data);
   update_perm_store (user_data, permissions, permissions_data);
 }
 
@@ -306,6 +308,7 @@ on_perm_store_lookup_done(GObject *source_object,
                           gpointer user_data)
 {
   g_autoptr(GError) error = NULL;
+  g_autoptr(GVariant) boxed_permission_data = NULL;
   GVariant *ret, *permissions, *permissions_data;
 
   ret = g_dbus_proxy_call_finish (G_DBUS_PROXY (source_object),
@@ -320,7 +323,8 @@ on_perm_store_lookup_done(GObject *source_object,
     }
 
   permissions = g_variant_get_child_value (ret, 0);
-  permissions_data = g_variant_get_child_value (ret, 1);
+  boxed_permission_data = g_variant_get_child_value (ret, 1);
+  permissions_data = g_variant_get_variant (boxed_permission_data);
   update_perm_store (user_data, permissions, permissions_data);
 
   g_signal_connect_object (source_object,
