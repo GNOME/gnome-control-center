@@ -42,6 +42,7 @@ struct _CcLocationPage
   GVariant     *location_apps_perms;
   GVariant     *location_apps_data;
   GHashTable   *location_app_switches;
+  GHashTable   *location_app_rows;
 
   GtkSizeGroup *location_icon_size_group;
 };
@@ -230,6 +231,9 @@ add_location_app (CcLocationPage *self,
   g_hash_table_insert (self->location_app_switches,
                        g_strdup (app_id),
                        g_object_ref (w));
+  g_hash_table_insert (self->location_app_rows,
+                       g_strdup (app_id),
+                       g_object_ref (row));
 
   data = g_slice_new (LocationAppStateData);
   data->self = self;
@@ -253,12 +257,27 @@ update_perm_store (CcLocationPage *self,
   GVariantIter iter;
   const gchar *key;
   gchar **value;
+  GHashTableIter row_iter;
+  GtkWidget *row;
 
   g_clear_pointer (&self->location_apps_perms, g_variant_unref);
   self->location_apps_perms = permissions;
 
   g_clear_pointer (&self->location_apps_data, g_variant_unref);
   self->location_apps_data = permissions_data;
+
+  /* We iterate over all rows, if the permissions do not contain the app id of
+     the row, we remove it. */
+  g_hash_table_iter_init (&row_iter, self->location_app_rows);
+  while (g_hash_table_iter_next (&row_iter, (gpointer *) &key, (gpointer *) &row))
+    {
+      if (!g_variant_lookup_value (permissions, key, NULL))
+        {
+          gtk_list_box_remove (self->location_apps_list_box, row);
+          g_hash_table_remove (self->location_app_switches, key);
+          g_hash_table_iter_remove (&row_iter);
+        }
+    }
 
   g_variant_iter_init (&iter, permissions);
   while (g_variant_iter_loop (&iter, "{&s^a&s}", &key, &value))
@@ -387,6 +406,7 @@ cc_location_page_finalize (GObject *object)
   g_clear_pointer (&self->location_apps_perms, g_variant_unref);
   g_clear_pointer (&self->location_apps_data, g_variant_unref);
   g_clear_pointer (&self->location_app_switches, g_hash_table_unref);
+  g_clear_pointer (&self->location_app_rows, g_hash_table_unref);
 
   G_OBJECT_CLASS (cc_location_page_parent_class)->finalize (object);
 }
@@ -425,6 +445,10 @@ cc_location_page_init (CcLocationPage *self)
                                                        g_str_equal,
                                                        g_free,
                                                        g_object_unref);
+  self->location_app_rows = g_hash_table_new_full (g_str_hash,
+                                                   g_str_equal,
+                                                   g_free,
+                                                   g_object_unref);
 
   g_dbus_proxy_new_for_bus (G_BUS_TYPE_SESSION,
                             G_DBUS_PROXY_FLAGS_NONE,

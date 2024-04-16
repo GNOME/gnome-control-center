@@ -41,6 +41,7 @@ struct _CcCameraPage
   GVariant     *camera_apps_perms;
   GVariant     *camera_apps_data;
   GHashTable   *camera_app_switches;
+  GHashTable   *camera_app_rows;
 
   GtkSizeGroup *camera_icon_size_group;
 };
@@ -225,6 +226,10 @@ add_camera_app (CcCameraPage *self,
                        g_strdup (app_id),
                        g_object_ref (w));
 
+  g_hash_table_insert (self->camera_app_rows,
+                       g_strdup (app_id),
+                       g_object_ref (row));
+
   data = g_slice_new (CameraAppStateData);
   data->self = self;
   data->app_id = g_strdup (app_id);
@@ -247,11 +252,26 @@ update_perm_store (CcCameraPage *self,
   GVariantIter iter;
   const gchar *key;
   gchar **value;
+  GHashTableIter row_iter;
+  GtkWidget *row;
 
   g_clear_pointer (&self->camera_apps_perms, g_variant_unref);
   self->camera_apps_perms = permissions;
   g_clear_pointer (&self->camera_apps_data, g_variant_unref);
   self->camera_apps_data = permissions_data;
+
+  /* We iterate over all rows, if the permissions do not contain the app id of
+     the row, we remove it. */
+  g_hash_table_iter_init (&row_iter, self->camera_app_rows);
+  while (g_hash_table_iter_next (&row_iter, (gpointer *) &key, (gpointer *) &row))
+    {
+      if (!g_variant_lookup_value (permissions, key, NULL))
+        {
+          gtk_list_box_remove (self->camera_apps_list_box, row);
+          g_hash_table_remove (self->camera_app_switches, key);
+          g_hash_table_iter_remove (&row_iter);
+        }
+    }
 
   g_variant_iter_init (&iter, permissions);
   while (g_variant_iter_loop (&iter, "{&s^a&s}", &key, &value))
@@ -376,6 +396,7 @@ cc_camera_page_finalize (GObject *object)
   g_clear_pointer (&self->camera_apps_perms, g_variant_unref);
   g_clear_pointer (&self->camera_apps_data, g_variant_unref);
   g_clear_pointer (&self->camera_app_switches, g_hash_table_unref);
+  g_clear_pointer (&self->camera_app_rows, g_hash_table_unref);
 
   G_OBJECT_CLASS (cc_camera_page_parent_class)->finalize (object);
 }
@@ -413,6 +434,10 @@ cc_camera_page_init (CcCameraPage *self)
                                                      g_str_equal,
                                                      g_free,
                                                      g_object_unref);
+  self->camera_app_rows = g_hash_table_new_full (g_str_hash,
+                                                 g_str_equal,
+                                                 g_free,
+                                                 g_object_unref);
 
   g_dbus_proxy_new_for_bus (G_BUS_TYPE_SESSION,
                             G_DBUS_PROXY_FLAGS_NONE,
