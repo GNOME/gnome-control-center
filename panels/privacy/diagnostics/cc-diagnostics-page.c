@@ -123,7 +123,7 @@ cc_diagnostics_page_init (CcDiagnosticsPage *self)
 
     /* translators: The first '%s' is the distributor's name, such as 'Fedora', the second '%s' is a link to the privacy policy */
     msg = g_strdup_printf (_("Sending reports of technical problems helps us improve %s. Reports "
-                           "are sent anonymously and are scrubbed of personal data – %s."),
+                           "are sent anonymously and are scrubbed of personal data — %s."),
                            os_name, link);
   } else {
     /* translators: The '%s' is the distributor's name, such as 'Fedora' */
