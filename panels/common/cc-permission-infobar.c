@@ -196,7 +196,7 @@ cc_permission_infobar_set_title (CcPermissionInfobar *self,
   g_return_if_fail (CC_IS_PERMISSION_INFOBAR (self));
 
   if (self->permission == NULL)
-    title = _("Error: some settings cannot be unlocked");
+    title = _("Error — some settings cannot be unlocked");
 
   if (title == NULL)
     title = _("Unlock to Change Settings");
