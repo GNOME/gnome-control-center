@@ -109,6 +109,7 @@
                               <object class="AdwActionRow" id="mouse_row">
                                 <property name="title" translatable="yes">Po_inter Speed</property>
                                 <property name="use-underline">True</property>
+                                <property name="activatable-widget">mouse_speed_scale</property>
                                 <child type="suffix">
                                   <object class="GtkScale" id="mouse_speed_scale">
                                     <property name="hexpand">True</property>
@@ -212,6 +213,7 @@
                                 <property name="title" translatable="yes">Po_inter Speed</property>
                                 <property name="use-underline">True</property>
                                 <property name="sensitive" bind-source="touchpad_toggle_row" bind-property="active" bind-flags="default|sync-create" />
+                                <property name="activatable-widget">touchpad_speed_scale</property>
                                 <child type="suffix">
                                   <object class="GtkScale" id="touchpad_speed_scale">
                                     <property name="hexpand">True</property>
