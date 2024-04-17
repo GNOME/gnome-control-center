@@ -409,18 +409,25 @@ cc_sharing_panel_new_media_sharing_row (const char     *uri_or_path,
 static GtkWidget *
 cc_sharing_panel_new_add_media_sharing_row (CcSharingPanel *self)
 {
-  GtkWidget *row, *box, *w;
+  GtkWidget *row, *box, *label, *w;
 
   row = gtk_list_box_row_new ();
-  box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
+
+  box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
+  gtk_widget_set_margin_start (box, 12);
+  gtk_widget_set_margin_end (box, 12);
+  gtk_widget_set_margin_top (box, 16);
+  gtk_widget_set_margin_bottom (box, 16);
+  gtk_widget_set_halign (box, GTK_ALIGN_CENTER);
+
   gtk_list_box_row_set_child (GTK_LIST_BOX_ROW (row), box);
 
   w = gtk_image_new_from_icon_name ("list-add-symbolic");
-  gtk_widget_set_tooltip_text (GTK_WIDGET (w), _("Add Folder"));
-  gtk_widget_set_hexpand (w, TRUE);
-  gtk_widget_set_margin_top (w, 12);
-  gtk_widget_set_margin_bottom (w, 12);
+
+  label = gtk_label_new (_("Add Folder"));
+
   gtk_box_append (GTK_BOX (box), w);
+  gtk_box_append (GTK_BOX (box), label);
 
   g_object_set_data (G_OBJECT (w), "row", row);
 
