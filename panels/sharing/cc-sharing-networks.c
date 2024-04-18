@@ -31,12 +31,11 @@ struct _CcSharingNetworks {
   AdwPreferencesGroup parent_instance;
 
   GtkWidget *listbox;
+  GtkWidget *listbox_placeholder;
 
   GtkWidget *current_row;
   GtkWidget *current_icon;
   GtkWidget *current_switch;
-
-  GtkWidget *no_network_row;
 
   char *service_name;
   GsdSharing *proxy;
@@ -260,37 +259,20 @@ cc_sharing_networks_new_current_row (CcSharingNetworks *self)
   return row;
 }
 
-static GtkWidget *
-cc_sharing_networks_new_no_network_row (CcSharingNetworks *self)
-{
-  GtkWidget *row, *box, *w;
-
-  row = gtk_list_box_row_new ();
-  box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
-  gtk_list_box_row_set_child (GTK_LIST_BOX_ROW (row), box);
-
-  /* Label */
-  w = gtk_label_new (_("No networks selected for sharing"));
-  gtk_widget_set_hexpand (w, TRUE);
-  gtk_widget_set_halign (w, GTK_ALIGN_CENTER);
-  gtk_widget_add_css_class (w, "dim-label");
-  gtk_box_append (GTK_BOX (box), w);
-
-  return row;
-}
-
 static void
 cc_sharing_update_networks_box (CcSharingNetworks *self)
 {
   GtkWidget *child;
-  gboolean current_visible, current_network_enabled = FALSE;
+  gboolean current_network_enabled = FALSE;
+  gboolean has_listbox_placeholder;
   const char *current_network;
   GList *l;
 
   child = gtk_widget_get_first_child (self->listbox);
+  has_listbox_placeholder = gtk_widget_get_visible (self->listbox_placeholder);
   while (child) {
     GtkWidget *next = gtk_widget_get_next_sibling (child);
-    if (child != self->current_row && child != self->no_network_row)
+    if (child != self->current_row && !has_listbox_placeholder)
       gtk_list_box_remove (GTK_LIST_BOX (self->listbox), child);
     child = next;
   }
@@ -303,7 +285,6 @@ cc_sharing_update_networks_box (CcSharingNetworks *self)
     const char *carrier_type, *icon_name, *current_network_name;
 
     gtk_widget_set_visible (self->current_row, TRUE);
-    current_visible = TRUE;
 
     /* Network name */
     g_object_set_data_full (G_OBJECT (self->current_row),
@@ -329,7 +310,6 @@ cc_sharing_update_networks_box (CcSharingNetworks *self)
     //FIXME add a subtitle explaining why it's disabled
   } else {
     gtk_widget_set_visible (self->current_row, FALSE);
-    current_visible = FALSE;
   }
 
   for (l = self->networks; l != NULL; l = l->next) {
@@ -355,13 +335,6 @@ cc_sharing_update_networks_box (CcSharingNetworks *self)
   g_signal_handlers_unblock_by_func (self->current_switch,
                                      cc_sharing_networks_enable_network, self);
 
-  if (self->networks == NULL &&
-      !current_visible) {
-    gtk_widget_set_visible (self->no_network_row, TRUE);
-  } else {
-    gtk_widget_set_visible (self->no_network_row, FALSE);
-  }
-
   cc_sharing_networks_update_status (self);
 }
 
@@ -384,9 +357,6 @@ cc_sharing_networks_constructed (GObject *object)
   self->current_row = cc_sharing_networks_new_current_row (self);
   gtk_list_box_insert (GTK_LIST_BOX (self->listbox), self->current_row, -1);
   g_object_set_data (G_OBJECT (self), "switch", self->current_switch);
-
-  self->no_network_row = cc_sharing_networks_new_no_network_row (self);
-  gtk_list_box_insert (GTK_LIST_BOX (self->listbox), self->no_network_row, -1);
 
   cc_sharing_update_networks (self);
   cc_sharing_update_networks_box (self);
@@ -519,6 +489,7 @@ cc_sharing_networks_class_init (CcSharingNetworksClass *klass)
                                                "/org/gnome/control-center/sharing/cc-sharing-networks.ui");
 
   gtk_widget_class_bind_template_child (widget_class, CcSharingNetworks, listbox);
+  gtk_widget_class_bind_template_child (widget_class, CcSharingNetworks, listbox_placeholder);
 }
 
 /*
