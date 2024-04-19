@@ -219,11 +219,9 @@ cc_sharing_networks_new_row (const char        *uuid,
 
   /* Remove button */
   w = gtk_button_new_from_icon_name ("edit-delete-symbolic");
+  gtk_widget_set_tooltip_text (w, _("Remove Network"));
   gtk_widget_add_css_class (w, "flat");
   gtk_widget_set_valign (w, GTK_ALIGN_CENTER);
-  gtk_accessible_update_property (GTK_ACCESSIBLE (w),
-                                GTK_ACCESSIBLE_PROPERTY_LABEL, _("Remove"),
-                                -1);
   adw_action_row_add_suffix (ADW_ACTION_ROW (row), w);
   g_signal_connect_object (G_OBJECT (w), "clicked",
                            G_CALLBACK (cc_sharing_networks_remove_network), self, G_CONNECT_SWAPPED);
