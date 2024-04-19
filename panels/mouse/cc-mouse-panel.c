@@ -452,7 +452,7 @@ cc_mouse_panel_get_help_uri (CcPanel *panel)
 }
 
 static void
-test_button_clicked_cb (CcMousePanel *self)
+test_button_row_activated_cb (CcMousePanel *self)
 {
   CcShell *shell = cc_panel_get_shell (CC_PANEL (self));
 
@@ -530,5 +530,5 @@ cc_mouse_panel_class_init (CcMousePanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcMousePanel, two_finger_push_row);
 
   gtk_widget_class_bind_template_callback (widget_class, on_touchpad_scroll_method_changed_cb);
-  gtk_widget_class_bind_template_callback (widget_class, test_button_clicked_cb);
+  gtk_widget_class_bind_template_callback (widget_class, test_button_row_activated_cb);
 }
