@@ -71,23 +71,12 @@
 
             <child>
               <object class="GtkStackPage">
-                <property name="name">panel_unavaliable</property>
+                <property name="name">panel_unavailable</property>
                 <property name="child">
-                  <object class="AdwPreferencesPage">
-                    <child>
-                      <object class="AdwPreferencesGroup">
-                        <child>
-                          <object class="AdwStatusPage">
-                            <property name="vexpand">True</property>
-                            <property name="opacity">0.5</property>
-                            <property name="title" translatable="yes">Device Security Unavailable</property>
-                            <property name="icon-name">security-high-symbolic</property>
-                            <property name="description" translatable="yes">Device Security is only available on physical hardware. No physical hardware has been detected.</property>
-
-                          </object>
-                        </child>
-                      </object>
-                    </child>
+                  <object class="AdwStatusPage">
+                    <property name="title" translatable="yes">Device Security Unavailable</property>
+                    <property name="icon-name">security-high-symbolic</property>
+                    <property name="description" translatable="yes">Device Security is only available on physical hardware. No physical hardware has been detected.</property>
                   </object>
                 </property>
               </object>
@@ -225,24 +214,31 @@
                           <object class="AdwViewStack" id="firmware_security_log_stack">
                             <child>
                               <object class="AdwViewStackPage">
-                                <property name="name">no_event</property>
+                                <property name="name">no-events-page</property>
                                 <property name="child">
-                                  <object class="AdwStatusPage">
-                                    <property name="vexpand">True</property>
-                                    <property name="opacity">0.5</property>
-                                    <property name="title" translatable="yes">No Events</property>
-                                    <property name="icon-name">document-open-recent-symbolic</property>
-                                    <style>
+                                  <object class="GtkBox">
+                                    <property name="orientation">vertical</property>
+                                    <child>
+                                      <object class="AdwStatusPage">
+                                        <property name="vexpand">True</property>
+                                        <property name="title" translatable="yes">No Events</property>
+                                        <property name="icon-name">document-open-recent-symbolic</property>
+                                        <style>
+                                          <class name="dim-label" />
+                                          <class name="compact" />
+                                        </style>
+                                      </object>
+                                    </child>
+                                   <style>
                                       <class name="card" />
-                                      <class name="compact" />
-                                    </style>
+                                   </style>
                                   </object>
                                 </property>
                               </object>
                             </child>
                             <child>
                               <object class="AdwViewStackPage">
-                                <property name="name">page2</property>
+                                <property name="name">events-page</property>
                                 <property name="child">
                                   <object class="AdwPreferencesGroup" id="firmware_security_log_pgroup" />
                                 </property>

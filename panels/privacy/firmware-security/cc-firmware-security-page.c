@@ -245,7 +245,7 @@ parse_event_variant_iter (CcFirmwareSecurityPage *self,
   adw_expander_row_set_subtitle (ADW_EXPANDER_ROW (row), date_string);
   adw_preferences_group_add (ADW_PREFERENCES_GROUP (self->firmware_security_log_pgroup), GTK_WIDGET (row));
 
-  adw_view_stack_set_visible_child_name (ADW_VIEW_STACK (self->firmware_security_log_stack), "page2");
+  adw_view_stack_set_visible_child_name (ADW_VIEW_STACK (self->firmware_security_log_stack), "events-page");
 }
 
 static void
@@ -393,7 +393,7 @@ static int
 on_timeout_unavaliable (gpointer user_data)
 {
   CcFirmwareSecurityPage *self = CC_FIRMWARE_SECURITY_PAGE (user_data);
-  show_loading_page (self, "panel_unavaliable");
+  show_loading_page (self, "panel_unavailable");
   self->timeout_id = 0;
   return 0;
 }
