@@ -85,10 +85,38 @@ cc_search_locations_page_finalize (GObject *object)
   G_OBJECT_CLASS (cc_search_locations_page_parent_class)->finalize (object);
 }
 
+static void other_places_refresh (CcSearchLocationsPage *self);
+static void populate_list_boxes (CcSearchLocationsPage *self);
+static gint place_compare_func (gconstpointer a, gconstpointer b, gpointer user_data);
+
 static void
 cc_search_locations_page_init (CcSearchLocationsPage *self)
 {
+  GSettingsSchemaSource *source;
+  g_autoptr(GSettingsSchema) schema = NULL;
+
   gtk_widget_init_template (GTK_WIDGET (self));
+
+  source = g_settings_schema_source_get_default ();
+  schema = g_settings_schema_source_lookup (source, TRACKER3_SCHEMA, TRUE);
+  if (schema)
+    self->tracker_preferences = g_settings_new (TRACKER3_SCHEMA);
+  else
+    self->tracker_preferences = g_settings_new (TRACKER_SCHEMA);
+
+  populate_list_boxes (self);
+
+  gtk_list_box_set_sort_func (GTK_LIST_BOX (self->places_list),
+                              (GtkListBoxSortFunc) place_compare_func, NULL, NULL);
+  gtk_list_box_set_sort_func (GTK_LIST_BOX (self->bookmarks_list),
+                              (GtkListBoxSortFunc) place_compare_func, NULL, NULL);
+  gtk_list_box_set_sort_func (GTK_LIST_BOX (self->others_list),
+                              (GtkListBoxSortFunc) place_compare_func, NULL, NULL);
+
+  g_signal_connect_swapped (self->tracker_preferences, "changed::" TRACKER_KEY_RECURSIVE_DIRECTORIES,
+                            G_CALLBACK (other_places_refresh), self);
+  g_signal_connect_swapped (self->tracker_preferences, "changed::" TRACKER_KEY_SINGLE_DIRECTORIES,
+                            G_CALLBACK (other_places_refresh), self);
 }
 
 static gboolean
@@ -711,39 +739,6 @@ other_places_refresh (CcSearchLocationsPage *self)
     }
 
   update_list_visibility (self);
-}
-
-CcSearchLocationsPage *
-cc_search_locations_page_new (void)
-{
-  CcSearchLocationsPage *self;
-  GSettingsSchemaSource *source;
-  g_autoptr(GSettingsSchema) schema = NULL;
-
-  self = g_object_new (CC_TYPE_SEARCH_LOCATIONS_PAGE, NULL);
-
-  source = g_settings_schema_source_get_default ();
-  schema = g_settings_schema_source_lookup (source, TRACKER3_SCHEMA, TRUE);
-  if (schema)
-    self->tracker_preferences = g_settings_new (TRACKER3_SCHEMA);
-  else
-    self->tracker_preferences = g_settings_new (TRACKER_SCHEMA);
-
-  populate_list_boxes (self);
-
-  gtk_list_box_set_sort_func (GTK_LIST_BOX (self->places_list),
-                              (GtkListBoxSortFunc) place_compare_func, NULL, NULL);
-  gtk_list_box_set_sort_func (GTK_LIST_BOX (self->bookmarks_list),
-                              (GtkListBoxSortFunc) place_compare_func, NULL, NULL);
-  gtk_list_box_set_sort_func (GTK_LIST_BOX (self->others_list),
-                              (GtkListBoxSortFunc) place_compare_func, NULL, NULL);
-
-  g_signal_connect_swapped (self->tracker_preferences, "changed::" TRACKER_KEY_RECURSIVE_DIRECTORIES,
-                            G_CALLBACK (other_places_refresh), self);
-  g_signal_connect_swapped (self->tracker_preferences, "changed::" TRACKER_KEY_SINGLE_DIRECTORIES,
-                            G_CALLBACK (other_places_refresh), self);
-
-  return self;
 }
 
 gboolean
