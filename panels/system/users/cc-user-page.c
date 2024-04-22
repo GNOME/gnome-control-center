@@ -148,13 +148,15 @@ would_demote_only_admin (ActUser *user)
 static gboolean
 get_autologin_possible (ActUser *user)
 {
+    gboolean homed;
     gboolean locked;
     gboolean set_password_at_login;
 
+    homed = act_user_uses_homed (user);
     locked = act_user_get_locked (user);
     set_password_at_login = (act_user_get_password_mode (user) == ACT_USER_PASSWORD_MODE_SET_AT_LOGIN);
 
-    return !(locked || set_password_at_login);
+    return !(homed || locked || set_password_at_login);
 }
 
 static gchar *
