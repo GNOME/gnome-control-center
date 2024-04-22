@@ -50,7 +50,10 @@ sources = common_sources + files(
   'cc-wacom-ekr-page.c',
 )
 
-deps += libdevice_dep
+deps += [
+  keyboard_shortcuts_dep,
+  libdevice_dep
+]
 
 incs = [
   top_inc,

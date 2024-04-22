@@ -408,6 +408,12 @@ cc_wacom_panel_get_stylus_button_action_label (GDesktopStylusButtonAction action
 			/* Translators: this is the "go forward" action of a button  */
 			text = _("_Forward");
 			break;
+		case G_DESKTOP_STYLUS_BUTTON_ACTION_KEYBINDING:
+			text = _("_Assign Keystroke");
+			break;
+		case G_DESKTOP_STYLUS_BUTTON_ACTION_SWITCH_MONITOR:
+			text = _("_Switch Monitor");
+			break;
 	}
 
 	return text;
