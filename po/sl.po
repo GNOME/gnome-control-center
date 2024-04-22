@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2024-04-19 16:08+0000\n"
-"PO-Revision-Date: 2024-04-19 23:44+0200\n"
+"POT-Creation-Date: 2024-04-22 12:55+0000\n"
+"PO-Revision-Date: 2024-04-22 16:17+0200\n"
 "Last-Translator: Martin Srebotnjak <miles@filmsi.net>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "Language: sl_SI\n"
@@ -3416,7 +3416,7 @@ msgstr "WireGuard"
 
 #. Translators: Unknown endpoint host for WireGuard (invalid setting)
 #: panels/network/connection-editor/ce-page-wireguard.c:373
-#: panels/privacy/firmware-security/cc-firmware-security-dialog.c:165
+#: panels/privacy/firmware-security/cc-firmware-security-dialog.c:167
 #: panels/sound/cc-alert-chooser-window.c:350
 #: panels/system/about/cc-about-page.c:73
 #: panels/system/about/cc-system-details-window.c:273
@@ -5995,21 +5995,21 @@ msgstr ""
 "Za več podrobnosti se obrnite na proizvajalca strojne opreme ali podporo."
 
 #. TRANSLATORS: in reference to firmware protection: 0/4 stars
-#: panels/privacy/firmware-security/cc-firmware-security-dialog.c:106
+#: panels/privacy/firmware-security/cc-firmware-security-dialog.c:108
 #: panels/privacy/firmware-security/cc-firmware-security-page.c:532
-msgid "Checks Failed"
-msgstr "Preverjanje je spodletelo"
+msgid "Security Checks Failed"
+msgstr "Varnostna preverjanja so spodletela"
 
 #. TRANSLATORS: This is the description to describe the failure on
 #. checking the security items.
-#: panels/privacy/firmware-security/cc-firmware-security-dialog.c:109
+#: panels/privacy/firmware-security/cc-firmware-security-dialog.c:111
 msgid ""
 "Hardware does not pass checks. This means that you are not protected against "
 "common hardware security issues.\n"
 "\n"
 "It may be possible to resolve hardware security issues by updating your "
 "firmware or changing device configuration options. However, failures can "
-"stem from the physical hardware itself, and may not be reversible."
+"stem from the physical hardware itself and may not be fixable."
 msgstr ""
 "Strojna oprema ne opravi pregledov. To pomeni, da ni ustrezno zaščitena pred "
 "običajnimi varnostnimi tveganji strojne opreme.\n"
@@ -6020,53 +6020,52 @@ msgstr ""
 "mogoče odpraviti."
 
 #. TRANSLATORS: in reference to firmware protection: 1/4 stars
-#: panels/privacy/firmware-security/cc-firmware-security-dialog.c:119
+#: panels/privacy/firmware-security/cc-firmware-security-dialog.c:121
 #: panels/privacy/firmware-security/cc-firmware-security-page.c:539
-msgid "Checks Passed"
-msgstr "Preverjanje je uspešno končano"
+msgid "Basic Security Checks Passed"
+msgstr "Osnovna varnostna preverjanja so uspela"
 
 #. TRANSLATORS: This description describes the device passing the
 #. minimum requirement of security check.
-#: panels/privacy/firmware-security/cc-firmware-security-dialog.c:122
+#: panels/privacy/firmware-security/cc-firmware-security-dialog.c:124
 msgid ""
-"This device meets basic security requirements. Its hardware has protection "
-"against some of the most common security threats."
+"This device meets basic security requirements and has protection against "
+"some hardware security threats. However, it lacks other recommended "
+"protections."
 msgstr ""
-"Naprava je uspešno opravila varnostni pregled. Strojna oprema je zaščitena "
-"pred običajnimi varnostnimi grožnjami."
+"Naprava ustreza osnovnim varnostnim zahtevam in je zaščitena pred nekaterimi "
+"varnostnimi grožnjami za strojno opremo."
 
 #. TRANSLATORS: in reference to firmware protection: 2~4 stars
-#: panels/privacy/firmware-security/cc-firmware-security-dialog.c:132
-#: panels/privacy/firmware-security/cc-firmware-security-page.c:548
+#: panels/privacy/firmware-security/cc-firmware-security-dialog.c:134
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:549
 msgid "Protected"
 msgstr "Zaščiteno"
 
 #. TRANSLATOR: This description describes the devices passing
 #. the extended security check.
-#: panels/privacy/firmware-security/cc-firmware-security-dialog.c:135
+#: panels/privacy/firmware-security/cc-firmware-security-dialog.c:137
 msgid ""
-"This device passes current security tests. Its hardware is protected against "
-"the majority of security threats."
+"This device passes current security tests. It is protected against the "
+"majority of hardware security threats."
 msgstr ""
-"Naprava je uspešno opravila varnostni pregled. Strojna oprema je zaščitena "
-"pred običajnimi varnostnimi grožnjami."
+"Naprava je uspešno opravila trenutne varnostne preizkuse. Strojna oprema je "
+"zaščitena pred večino varnostnih groženj za strojno opremo."
 
-#. TRANSLATORS: in reference to firmware protection: ??? stars
-#: panels/privacy/firmware-security/cc-firmware-security-dialog.c:142
-#: panels/privacy/firmware-security/cc-firmware-security-page.c:555
+#: panels/privacy/firmware-security/cc-firmware-security-dialog.c:144
 msgid "Checks Unavailable"
 msgstr "Preizkusi niso na voljo"
 
 #. TRANSLATORS: When the security result is unavailable, this description is shown.
-#: panels/privacy/firmware-security/cc-firmware-security-dialog.c:144
+#: panels/privacy/firmware-security/cc-firmware-security-dialog.c:146
 msgid ""
 "Device security checks are not available for this device. It is not possible "
-"to tell whether it meets security requirements."
+"to tell whether it meets hardware security requirements."
 msgstr ""
 "Varnostni pregledi za to napravo niso na voljo. Ni mogoče ugotoviti, ali "
 "naprava izpolnjuje varnostne zahteve."
 
-#: panels/privacy/firmware-security/cc-firmware-security-dialog.c:364
+#: panels/privacy/firmware-security/cc-firmware-security-dialog.c:366
 msgid "Report copied to clipboard"
 msgstr "Poročilo je kopirano v odložišče"
 
@@ -6187,18 +6186,23 @@ msgid "(%1$s → %2$s)"
 msgstr "(%1$s → %2$s)"
 
 #: panels/privacy/firmware-security/cc-firmware-security-page.c:533
-msgid "Hardware does not pass checks."
-msgstr "Strojna oprema ne opravi preizkusa varnosti."
+msgid "Hardware does not pass basic security checks."
+msgstr "Strojna oprema ne opravi osnovnih preizkusov varnosti."
 
 #: panels/privacy/firmware-security/cc-firmware-security-page.c:540
-msgid "Hardware meets basic security requirements."
-msgstr "Strojna oprema izpolnjuje osnovne varnostne zahteve."
+msgid "Hardware has a basic level of protection."
+msgstr "Strojna oprema ima osnovno raven zaščite."
 
-#: panels/privacy/firmware-security/cc-firmware-security-page.c:549
-msgid "Hardware has a good level of protection."
-msgstr "Strojna oprema ima dobro raven zaščite."
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:550
+msgid "Hardware has a strong level of protection."
+msgstr "Strojna oprema ima visoko raven zaščite."
 
+#. TRANSLATORS: in reference to firmware protection: ??? stars
 #: panels/privacy/firmware-security/cc-firmware-security-page.c:556
+msgid "Security Checks Unavailable"
+msgstr "Varnostna preverjanja niso na voljo"
+
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:557
 msgid "Security levels are not available for this device."
 msgstr "Za to napravo ravni varnosti niso na voljo."
 
@@ -6230,7 +6234,7 @@ msgstr "Varnostni pregledi"
 msgid "No Events"
 msgstr "Ni še izvedenih pregledov"
 
-#. TRANSLATORS: if the stauts is valid. For example security check is valid and key is valid.
+#. TRANSLATORS: if the status is valid. For example security check is valid and key is valid.
 #: panels/privacy/firmware-security/cc-firmware-security-utils.c:35
 msgid "Valid"
 msgstr "Veljavno"
