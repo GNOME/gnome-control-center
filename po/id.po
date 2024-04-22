@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2024-03-06 19:16+0000\n"
-"PO-Revision-Date: 2024-03-08 17:21+0700\n"
+"POT-Creation-Date: 2024-04-22 09:31+0000\n"
+"PO-Revision-Date: 2024-04-22 18:14+0700\n"
 "Last-Translator: Andika Triwidada <andika@gmail.com>\n"
 "Language-Team: Indonesian <gnome-l10n-id@googlegroups.com>\n"
 "Language: id\n"
@@ -25,9 +25,8 @@ msgstr ""
 "X-Generator: Poedit 3.4.2\n"
 
 #: panels/applications/cc-applications-panel.c:783
-#, fuzzy
 msgid "App is not sandboxed"
-msgstr "Aplikasi sepenuhnya sandboxed"
+msgstr "Aplikasi sepenuhnya di-sandbox"
 
 #: panels/applications/cc-applications-panel.c:828
 msgid "System Bus"
@@ -46,7 +45,7 @@ msgstr "Bus Sesi"
 
 #: panels/applications/cc-applications-panel.c:834
 #: panels/privacy/cc-bolt-page.ui:240 panels/privacy/cc-bolt-page.ui:284
-#: panels/privacy/cc-privacy-panel.ui:74
+#: panels/privacy/cc-privacy-panel.ui:75
 msgid "Devices"
 msgstr "Perangkat"
 
@@ -84,7 +83,7 @@ msgstr "Sistem Berkas"
 
 #: panels/applications/cc-applications-panel.c:854
 #: panels/keyboard/01-launchers.xml.in:6
-#: shell/appdata/org.gnome.Settings.appdata.xml.in:7 shell/cc-window.c:775
+#: shell/appdata/org.gnome.Settings.appdata.xml.in:7 shell/cc-window.c:798
 #: shell/cc-window.ui:20 shell/org.gnome.Settings.desktop.in:3
 msgid "Settings"
 msgstr "Pengaturan"
@@ -132,37 +131,36 @@ msgstr "Cari aplikasi"
 msgid "_Default Apps"
 msgstr "Aplikasi _Baku"
 
-#: panels/applications/cc-applications-panel.ui:87
+#: panels/applications/cc-applications-panel.ui:62
 msgid "No Apps Found"
 msgstr "Tidak Ada Aplikasi yang Ditemukan"
 
-#: panels/applications/cc-applications-panel.ui:99
+#: panels/applications/cc-applications-panel.ui:65
 msgid "_Find in Software"
 msgstr "_Cari dalam Perangkat Lunak"
 
-#: panels/applications/cc-applications-panel.ui:139
+#: panels/applications/cc-applications-panel.ui:101
 #: panels/applications/cc-default-apps-page.ui:4
 msgid "Default Apps"
 msgstr "Aplikasi Baku"
 
-#: panels/applications/cc-applications-panel.ui:157
+#: panels/applications/cc-applications-panel.ui:119
 msgid "Removable Media"
 msgstr "Media Lepasan"
 
-#: panels/applications/cc-applications-panel.ui:160
+#: panels/applications/cc-applications-panel.ui:122
 msgid "Automat_ically Launch Apps"
 msgstr "Secara Otomat_is Luncurkan Aplikasi"
 
-#: panels/applications/cc-applications-panel.ui:161
+#: panels/applications/cc-applications-panel.ui:123
 msgid "Start apps when media is connected or inserted"
 msgstr "Memulai aplikasi saat media tersambung atau ditancapkan"
 
-#: panels/applications/cc-applications-panel.ui:182
+#: panels/applications/cc-applications-panel.ui:144
 msgid "App Settings"
 msgstr "Pengaturan Aplikasi"
 
-#: panels/applications/cc-applications-panel.ui:202
-#, fuzzy
+#: panels/applications/cc-applications-panel.ui:164
 msgid ""
 "App settings cannot be fully enforced for apps which are not sandboxed. "
 "These apps may use permissions which are not shown."
@@ -171,26 +169,26 @@ msgstr ""
 "tidak di-sandbox. Aplikasi ini mungkin menggunakan izin yang tidak "
 "ditampilkan."
 
-#: panels/applications/cc-applications-panel.ui:245
+#: panels/applications/cc-applications-panel.ui:207
 #: panels/printers/pp-details-dialog.c:267
-#: panels/sharing/cc-sharing-panel.c:240
+#: panels/sharing/cc-sharing-panel.c:242
 msgid "_Open"
 msgstr "_Buka"
 
-#: panels/applications/cc-applications-panel.ui:257
+#: panels/applications/cc-applications-panel.ui:219
 msgid "App _Details"
 msgstr "_Detail Aplikasi"
 
-#: panels/applications/cc-applications-panel.ui:275
+#: panels/applications/cc-applications-panel.ui:237
 msgid "Permissions"
 msgstr "Izin"
 
 #. Translators: This row shows/sets whether the app shown in this page can add results to the GNOME Shell search results. Internally this enables/disables the app's Shell Search Provider
-#: panels/applications/cc-applications-panel.ui:278
+#: panels/applications/cc-applications-panel.ui:240
 msgid "_Search"
 msgstr "_Cari"
 
-#: panels/applications/cc-applications-panel.ui:279
+#: panels/applications/cc-applications-panel.ui:241
 msgid "Receive system searches and send results"
 msgstr "Menerima pencarian sistem dan mengirim hasil"
 
@@ -199,174 +197,172 @@ msgstr "Menerima pencarian sistem dan mengirim hasil"
 #.
 #. translators:
 #. * The device has been disabled
-#: panels/applications/cc-applications-panel.ui:288
-#: panels/applications/cc-applications-panel.ui:335
-#: panels/applications/cc-applications-panel.ui:357
-#: panels/applications/cc-applications-panel.ui:372
-#: panels/applications/cc-applications-panel.ui:387
+#: panels/applications/cc-applications-panel.ui:250
+#: panels/applications/cc-applications-panel.ui:297
+#: panels/applications/cc-applications-panel.ui:319
+#: panels/applications/cc-applications-panel.ui:334
+#: panels/applications/cc-applications-panel.ui:349
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:123
 #: panels/keyboard/cc-xkb-modifier-dialog.c:342
 #: panels/keyboard/keyboard-shortcuts.c:367
 #: panels/system/users/cc-user-page.c:379
 #: panels/system/users/cc-user-page.c:749 panels/wwan/cc-wwan-device-page.c:477
-#: subprojects/gvc/gvc-mixer-control.c:1908
+#: subprojects/gvc/gvc-mixer-control.c:1872
 msgid "Disabled"
 msgstr "Dimatikan"
 
-#: panels/applications/cc-applications-panel.ui:293
+#: panels/applications/cc-applications-panel.ui:255
 msgid "_Notifications"
 msgstr "_Notifikasi"
 
-#: panels/applications/cc-applications-panel.ui:294
+#: panels/applications/cc-applications-panel.ui:256
 msgid "Show system notifications"
 msgstr "Tampilkan pemberitahuan sistem"
 
-#: panels/applications/cc-applications-panel.ui:301
+#: panels/applications/cc-applications-panel.ui:263
 msgid "_Run in Background"
 msgstr "Jalankan di Lata_r Belakang"
 
-#: panels/applications/cc-applications-panel.ui:302
+#: panels/applications/cc-applications-panel.ui:264
 msgid "Allow activity when the app is closed"
 msgstr "Mengizinkan aktivitas saat aplikasi ditutup"
 
-#: panels/applications/cc-applications-panel.ui:309
+#: panels/applications/cc-applications-panel.ui:271
 msgid "Scr_eenshots"
 msgstr "Cuplikan L_ayar"
 
-#: panels/applications/cc-applications-panel.ui:310
+#: panels/applications/cc-applications-panel.ui:272
 msgid "Take pictures of the screen at any time"
 msgstr "Ambil cuplikan layar kapan saja"
 
-#: panels/applications/cc-applications-panel.ui:317
+#: panels/applications/cc-applications-panel.ui:279
 msgid "Change _Wallpaper"
 msgstr "Ubah Gambar _Latar"
 
-#: panels/applications/cc-applications-panel.ui:318
+#: panels/applications/cc-applications-panel.ui:280
 msgid "Change the desktop wallpaper"
 msgstr "Ubah gambar latar desktop"
 
-#: panels/applications/cc-applications-panel.ui:325
-#: panels/applications/cc-applications-panel.ui:333
+#: panels/applications/cc-applications-panel.ui:287
+#: panels/applications/cc-applications-panel.ui:295
 msgid "So_unds"
 msgstr "S_uara"
 
-#: panels/applications/cc-applications-panel.ui:326
-#: panels/applications/cc-applications-panel.ui:334
+#: panels/applications/cc-applications-panel.ui:288
+#: panels/applications/cc-applications-panel.ui:296
 msgid "Reproduce sounds"
 msgstr "Mereproduksi suara"
 
-#: panels/applications/cc-applications-panel.ui:340
-#, fuzzy
-#| msgid "Inhibit Shortcuts"
+#: panels/applications/cc-applications-panel.ui:302
 msgid "_Inhibit Shortcuts"
-msgstr "Menghambat Pintasan"
+msgstr "Menghambat P_intasan"
 
-#: panels/applications/cc-applications-panel.ui:341
+#: panels/applications/cc-applications-panel.ui:303
 msgid "Block standard keyboard shortcuts"
 msgstr "Blokir pintasan papan tik standar"
 
-#: panels/applications/cc-applications-panel.ui:348
+#: panels/applications/cc-applications-panel.ui:310
 msgid "Camera"
 msgstr "Kamera"
 
-#: panels/applications/cc-applications-panel.ui:349
-#: panels/applications/cc-applications-panel.ui:356
+#: panels/applications/cc-applications-panel.ui:311
+#: panels/applications/cc-applications-panel.ui:318
 msgid "Take pictures with the camera"
 msgstr "Ambil gambar dengan kamera"
 
-#: panels/applications/cc-applications-panel.ui:355
+#: panels/applications/cc-applications-panel.ui:317
 msgid "C_amera"
 msgstr "K_amera"
 
-#: panels/applications/cc-applications-panel.ui:362
-#: panels/applications/cc-applications-panel.ui:370
+#: panels/applications/cc-applications-panel.ui:324
+#: panels/applications/cc-applications-panel.ui:332
 msgid "_Microphone"
 msgstr "_Mikrofon"
 
-#: panels/applications/cc-applications-panel.ui:363
-#: panels/applications/cc-applications-panel.ui:371
+#: panels/applications/cc-applications-panel.ui:325
+#: panels/applications/cc-applications-panel.ui:333
 msgid "Record audio with the microphone"
 msgstr "Rekam audio dengan mikrofon"
 
-#: panels/applications/cc-applications-panel.ui:377
-#: panels/applications/cc-applications-panel.ui:385
+#: panels/applications/cc-applications-panel.ui:339
+#: panels/applications/cc-applications-panel.ui:347
 msgid "_Location Services"
 msgstr "Layanan _Lokasi"
 
-#: panels/applications/cc-applications-panel.ui:378
-#: panels/applications/cc-applications-panel.ui:386
+#: panels/applications/cc-applications-panel.ui:340
+#: panels/applications/cc-applications-panel.ui:348
 msgid "Access device location data"
 msgstr "Akses data lokasi perangkat"
 
-#: panels/applications/cc-applications-panel.ui:397
+#: panels/applications/cc-applications-panel.ui:359
 msgid "Re_quired Access"
 msgstr "Akses Yang Di_perlukan"
 
-#: panels/applications/cc-applications-panel.ui:398
+#: panels/applications/cc-applications-panel.ui:360
 msgid "System access that is required by the app"
 msgstr "Akses sistem yang diperlukan oleh aplikasi"
 
-#: panels/applications/cc-applications-panel.ui:409
+#: panels/applications/cc-applications-panel.ui:371
 #: panels/mouse/cc-mouse-panel.ui:66
 #: panels/multitasking/cc-multitasking-panel.ui:15
 #: panels/power/cc-power-panel.ui:171
 msgid "General"
 msgstr "Umum"
 
-#: panels/applications/cc-applications-panel.ui:412
+#: panels/applications/cc-applications-panel.ui:374
 msgid "_File &amp; Link Associations"
 msgstr "Asosiasi _Berkas &amp; Tautan"
 
-#: panels/applications/cc-applications-panel.ui:420
+#: panels/applications/cc-applications-panel.ui:382
 msgid "S_torage"
 msgstr "_Penyimpanan"
 
-#: panels/applications/cc-applications-panel.ui:443
+#: panels/applications/cc-applications-panel.ui:405
 msgid "Required Access"
 msgstr "Akses Yang Diperlukan"
 
-#: panels/applications/cc-applications-panel.ui:489
+#: panels/applications/cc-applications-panel.ui:451
 msgid "File & Link Associations"
 msgstr "Asosiasi Berkas & Tautan"
 
-#: panels/applications/cc-applications-panel.ui:518
+#: panels/applications/cc-applications-panel.ui:480
 msgid "File Types"
 msgstr "Jenis Berkas"
 
-#: panels/applications/cc-applications-panel.ui:524
+#: panels/applications/cc-applications-panel.ui:486
 msgid "Link Types"
 msgstr "Jenis Tautan"
 
-#: panels/applications/cc-applications-panel.ui:534
+#: panels/applications/cc-applications-panel.ui:496
 msgid "_Reset"
 msgstr "_Reset"
 
-#: panels/applications/cc-applications-panel.ui:555
+#: panels/applications/cc-applications-panel.ui:517
 msgid "Storage"
 msgstr "Penyimpanan"
 
-#: panels/applications/cc-applications-panel.ui:580
+#: panels/applications/cc-applications-panel.ui:542
 msgid "How much disk space this app is occupying with app data and caches"
 msgstr ""
 "Berapa banyak ruang diska yang ditempati oleh data dan singgahan aplikasi"
 
-#: panels/applications/cc-applications-panel.ui:585
+#: panels/applications/cc-applications-panel.ui:547
 msgid "App"
 msgstr "Aplikasi"
 
-#: panels/applications/cc-applications-panel.ui:591
+#: panels/applications/cc-applications-panel.ui:553
 msgid "Data"
 msgstr "Data"
 
-#: panels/applications/cc-applications-panel.ui:597
+#: panels/applications/cc-applications-panel.ui:559
 msgid "Cache"
 msgstr "Singgahan"
 
-#: panels/applications/cc-applications-panel.ui:603
+#: panels/applications/cc-applications-panel.ui:565
 msgid "<b>Total</b>"
 msgstr "<b>Total</b>"
 
-#: panels/applications/cc-applications-panel.ui:613
+#: panels/applications/cc-applications-panel.ui:575
 msgid "_Clear Cache"
 msgstr "_Bersihkan Singgahan"
 
@@ -833,10 +829,8 @@ msgid "No Bluetooth Found"
 msgstr "Bluetooth Tidak Ditemukan"
 
 #: panels/bluetooth/cc-bluetooth-panel.ui:30
-#, fuzzy
-#| msgid "Plug in a dongle to use Bluetooth."
 msgid "Plug in a dongle to use Bluetooth"
-msgstr "Tancapkan sebuah dongle untuk memakai Bluetooth."
+msgstr "Tancapkan sebuah dongle untuk memakai Bluetooth"
 
 #: panels/bluetooth/cc-bluetooth-panel.ui:36
 msgid "Bluetooth Turned Off"
@@ -978,9 +972,9 @@ msgstr "Kalibrasi Tampilan"
 #: panels/network/connection-editor/connection-editor.ui:16
 #: panels/printers/new-printer-dialog.ui:54
 #: panels/printers/pp-details-dialog.c:266 panels/privacy/cc-usage-page.c:136
-#: panels/sharing/cc-sharing-panel.c:239
+#: panels/sharing/cc-sharing-panel.c:241
 #: panels/system/region/cc-format-chooser.ui:24
-#: panels/system/users/cc-add-user-dialog.ui:25
+#: panels/system/users/cc-add-user-dialog.ui:34
 #: panels/system/users/cc-enterprise-login-dialog.ui:58
 #: panels/system/users/cc-avatar-chooser.c:92
 #: panels/system/users/cc-fingerprint-dialog.ui:32
@@ -1294,7 +1288,7 @@ msgstr "_Impor Berkas…"
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:33
 #: panels/network/connection-editor/net-connection-editor.c:653
 #: panels/printers/new-printer-dialog.ui:85
-#: panels/system/users/cc-add-user-dialog.ui:39
+#: panels/system/users/cc-add-user-dialog.ui:48
 #: panels/system/users/cc-enterprise-login-dialog.ui:66
 msgid "_Add"
 msgstr "T_ambah"
@@ -1578,91 +1572,91 @@ msgstr "Turunkan Jam"
 msgid "Decrement Minute"
 msgstr "Turunkan Menit"
 
-#: panels/common/cc-util.c:127
+#: panels/common/cc-util.c:130
 #: panels/network/connection-editor/ce-page-details.c:199
 msgid "Today"
 msgstr "Hari ini"
 
-#: panels/common/cc-util.c:131
+#: panels/common/cc-util.c:134
 #: panels/network/connection-editor/ce-page-details.c:201
 msgid "Yesterday"
 msgstr "Kemarin"
 
 #. Translators: This is a date format string in the style of "Feb 24".
-#: panels/common/cc-util.c:139
+#: panels/common/cc-util.c:142
 #, no-c-format
 msgid "%b %e"
 msgstr "%e %b"
 
 #. Translators: This is a date format string in the style of "Feb 24, 2013".
-#: panels/common/cc-util.c:144
+#: panels/common/cc-util.c:147
 msgid "%b %e, %Y"
 msgstr "%e %b %Y"
 
 #. TRANSLATORS: This is the datetime format in the style of
 #. "Aug 1, 10:10:10 PM", "Feb 24, 2013, 10:10:10 PM", "Today, 10:10:10 AM",
 #. and "Yesterday, 10:10:10 AM"
-#: panels/common/cc-util.c:163
+#: panels/common/cc-util.c:166
 #, c-format
 msgid "%1$s, %2$s"
 msgstr "%1$s, %2$s"
 
-#: panels/common/cc-util.c:183
+#: panels/common/cc-util.c:186
 #, c-format
 msgid "%d hour"
 msgid_plural "%d hours"
 msgstr[0] "%d jam"
 
 #. Translators: Option for "Blank Screen" in "Power" panel
-#: panels/common/cc-util.c:184 panels/power/cc-power-panel.c:790
+#: panels/common/cc-util.c:187 panels/power/cc-power-panel.c:790
 #, c-format
 msgid "%d minute"
 msgid_plural "%d minutes"
 msgstr[0] "%d menit"
 
-#: panels/common/cc-util.c:185
+#: panels/common/cc-util.c:188
 #, c-format
 msgid "%d second"
 msgid_plural "%d seconds"
 msgstr[0] "%d detik"
 
 #. 5 hours 2 minutes 12 seconds
-#: panels/common/cc-util.c:192
+#: panels/common/cc-util.c:195
 #, c-format
 msgctxt "hours minutes seconds"
 msgid "%s %s %s"
 msgstr "%s %s %s"
 
 #. 5 hours 2 minutes
-#: panels/common/cc-util.c:197
+#: panels/common/cc-util.c:200
 #, c-format
 msgctxt "hours minutes"
 msgid "%s %s"
 msgstr "%s %s"
 
 #. 5 hours
-#: panels/common/cc-util.c:202
+#: panels/common/cc-util.c:205
 #, c-format
 msgctxt "hours"
 msgid "%s"
 msgstr "%s"
 
 #. 2 minutes 12 seconds
-#: panels/common/cc-util.c:210
+#: panels/common/cc-util.c:213
 #, c-format
 msgctxt "minutes seconds"
 msgid "%s %s"
 msgstr "%s %s"
 
 #. 2 minutes
-#: panels/common/cc-util.c:215
+#: panels/common/cc-util.c:218
 #, c-format
 msgctxt "minutes"
 msgid "%s"
 msgstr "%s"
 
 #. 0 seconds
-#: panels/common/cc-util.c:226
+#: panels/common/cc-util.c:229
 msgid "0 seconds"
 msgstr "0 detik"
 
@@ -1672,27 +1666,27 @@ msgctxt "hotspot"
 msgid "Hotspot"
 msgstr "Hotspot"
 
-#: panels/display/cc-display-panel.c:510
+#: panels/display/cc-display-panel.c:507
 #: panels/notifications/cc-notifications-panel.c:213
 #: panels/power/cc-power-panel.c:679 panels/power/cc-power-panel.c:686
 msgid "On"
 msgstr "Nyala"
 
-#: panels/display/cc-display-panel.c:512 panels/network/cc-net-proxy-page.c:182
+#: panels/display/cc-display-panel.c:509 panels/network/cc-net-proxy-page.c:182
 #: panels/notifications/cc-notifications-panel.c:213
 #: panels/power/cc-power-panel.c:673 panels/power/cc-power-panel.c:684
 msgid "Off"
 msgstr "Mati"
 
-#: panels/display/cc-display-panel.c:931
+#: panels/display/cc-display-panel.c:927
 msgid "Apply Changes?"
 msgstr "Terapkan Perubahan?"
 
-#: panels/display/cc-display-panel.c:937
+#: panels/display/cc-display-panel.c:933
 msgid "Changes Cannot be Applied"
 msgstr "Perubahan Tidak Dapat Diterapkan"
 
-#: panels/display/cc-display-panel.c:939
+#: panels/display/cc-display-panel.c:935
 msgid "This could be due to hardware limitations."
 msgstr "Ini mungkin karena keterbatasan perangkat keras."
 
@@ -2475,13 +2469,13 @@ msgstr "Laju Penunjuk"
 
 #: panels/mouse/cc-mouse-panel.ui:119 panels/mouse/cc-mouse-panel.ui:222
 #: panels/universal-access/cc-ua-typing-page.ui:58
-#: panels/universal-access/cc-ua-typing-page.ui:110
+#: panels/universal-access/cc-ua-typing-page.ui:111
 msgid "Slow"
 msgstr "Lambat"
 
 #: panels/mouse/cc-mouse-panel.ui:121 panels/mouse/cc-mouse-panel.ui:224
 #: panels/universal-access/cc-ua-typing-page.ui:55
-#: panels/universal-access/cc-ua-typing-page.ui:107
+#: panels/universal-access/cc-ua-typing-page.ui:108
 msgid "Fast"
 msgstr "Cepat"
 
@@ -2971,9 +2965,9 @@ msgstr "Nama Jaringan"
 #: panels/network/cc-wifi-hotspot-dialog.ui:92
 #: panels/printers/new-printer-dialog.ui:293
 #: panels/printers/pp-jobs-dialog.ui:54
-#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:110
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:109
 #: panels/system/remote-desktop/cc-remote-session-page.ui:108
-#: panels/system/users/cc-add-user-dialog.ui:150
+#: panels/system/users/cc-add-user-dialog.ui:159
 #: panels/wwan/cc-wwan-apn-dialog.ui:175
 msgid "Password"
 msgstr "Kata Sandi"
@@ -3069,7 +3063,7 @@ msgstr "_Keamanan 802.1x"
 #: panels/network/connection-editor/bluetooth-page.ui:16
 #: panels/network/connection-editor/ethernet-page.ui:27
 #: panels/network/connection-editor/vpn-page.ui:23
-#: panels/system/users/cc-add-user-dialog.ui:66
+#: panels/system/users/cc-add-user-dialog.ui:75
 #: panels/system/users/cc-user-page.ui:84
 msgid "_Name"
 msgstr "_Nama"
@@ -3088,22 +3082,30 @@ msgid "Identity"
 msgstr "Identitas"
 
 #: panels/network/connection-editor/ce-page.c:234
+#: panels/network/connection-editor/ce-page.c:238
 msgid "Preserve"
 msgstr "Pertahankan"
 
 #: panels/network/connection-editor/ce-page.c:235
+#: panels/network/connection-editor/ce-page.c:239
 msgid "Permanent"
 msgstr "Permanen"
 
 #: panels/network/connection-editor/ce-page.c:236
+#: panels/network/connection-editor/ce-page.c:240
 msgid "Random"
 msgstr "Acak"
 
 #: panels/network/connection-editor/ce-page.c:237
+#: panels/network/connection-editor/ce-page.c:241
 msgid "Stable"
 msgstr "Stabil"
 
-#: panels/network/connection-editor/ce-page.c:241
+#: panels/network/connection-editor/ce-page.c:243
+msgid "Stable per SSID"
+msgstr "Stabil per SSID"
+
+#: panels/network/connection-editor/ce-page.c:251
 msgid ""
 "The MAC address entered here will be used as hardware address for the "
 "network device this connection is activated on. This feature is known as MAC "
@@ -3113,7 +3115,7 @@ msgstr ""
 "keras untuk perangkat jaringan tempat koneksi ini diaktifkan. Fitur ini "
 "dikenal sebagai MAC cloning atau spoofing. Contoh: 00: 11: 22: 33: 44: 55"
 
-#: panels/network/connection-editor/ce-page.c:399
+#: panels/network/connection-editor/ce-page.c:409
 #, c-format
 msgid "Profile %d"
 msgstr "Profil %d"
@@ -4841,7 +4843,7 @@ msgstr ""
 #. Translators: This is a username on a print server.
 #: panels/printers/new-printer-dialog.ui:272
 #: panels/printers/pp-jobs-dialog.ui:42
-#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:94
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:93
 #: panels/system/remote-desktop/cc-remote-session-page.ui:92
 #: panels/wwan/cc-wwan-apn-dialog.ui:150
 msgid "Username"
@@ -6095,7 +6097,7 @@ msgid "No sandboxed apps have asked for location access"
 msgstr "Tidak ada aplikasi ter-sandbox yang meminta akses lokasi"
 
 #. Translators: This will be presented as the text of a link to the privacy policy
-#: panels/privacy/cc-location-page.c:414
+#: panels/privacy/cc-location-page.c:446
 msgid "Learn about what data is collected, and how it is used."
 msgstr ""
 "Pelajari tentang data apa yang dikumpulkan, dan bagaimana data itu digunakan."
@@ -6138,59 +6140,59 @@ msgstr "Kunci _Layar"
 msgid "Automatic screen lock"
 msgstr "Kunci Layar Otomatis"
 
-#: panels/privacy/cc-privacy-panel.ui:36
+#: panels/privacy/cc-privacy-panel.ui:37
 msgid "_Location"
 msgstr "_Lokasi"
 
-#: panels/privacy/cc-privacy-panel.ui:37
+#: panels/privacy/cc-privacy-panel.ui:38
 msgid "Control access to your location"
 msgstr "Mengontrol akses ke lokasi Anda"
 
-#: panels/privacy/cc-privacy-panel.ui:47
+#: panels/privacy/cc-privacy-panel.ui:48
 msgid "_File History &amp; Trash"
 msgstr "Riwayat _Berkas &amp; Tempat Sampah"
 
-#: panels/privacy/cc-privacy-panel.ui:48
+#: panels/privacy/cc-privacy-panel.ui:49
 msgid "Remove saved data and files"
 msgstr "Hapus data dan berkas yang disimpan"
 
-#: panels/privacy/cc-privacy-panel.ui:58
+#: panels/privacy/cc-privacy-panel.ui:59
 msgid "_Diagnostics"
 msgstr "_Diagnostik"
 
-#: panels/privacy/cc-privacy-panel.ui:59
+#: panels/privacy/cc-privacy-panel.ui:60
 msgid "Automatic problem reporting"
 msgstr "Pelaporan masalah otomatis"
 
-#: panels/privacy/cc-privacy-panel.ui:78
+#: panels/privacy/cc-privacy-panel.ui:79
 msgid "_Cameras"
 msgstr "_Kamera"
 
-#: panels/privacy/cc-privacy-panel.ui:79
+#: panels/privacy/cc-privacy-panel.ui:80
 msgid "Control camera access"
 msgstr "Kontrol akses kamera"
 
-#: panels/privacy/cc-privacy-panel.ui:89
+#: panels/privacy/cc-privacy-panel.ui:90
 msgid "_Microphones"
 msgstr "_Mikrofon"
 
-#: panels/privacy/cc-privacy-panel.ui:90
+#: panels/privacy/cc-privacy-panel.ui:91
 msgid "Control microphone access"
 msgstr "Kontrol akses mikrofon"
 
-#: panels/privacy/cc-privacy-panel.ui:102
+#: panels/privacy/cc-privacy-panel.ui:103
 msgid "_Thunderbolt"
 msgstr "_Thunderbolt"
 
-#: panels/privacy/cc-privacy-panel.ui:103
+#: panels/privacy/cc-privacy-panel.ui:104
 msgid "Manage device access"
 msgstr "Kelola akses perangkat"
 
-#: panels/privacy/cc-privacy-panel.ui:113
+#: panels/privacy/cc-privacy-panel.ui:114
 msgid "Device _Security"
 msgstr "_Keamanan Perangkat"
 
-#: panels/privacy/cc-privacy-panel.ui:114
+#: panels/privacy/cc-privacy-panel.ui:115
 msgid "Hardware security status and information"
 msgstr "Status dan informasi keamanan perangkat keras"
 
@@ -6571,7 +6573,7 @@ msgid "Subfolders must be manually added for this location"
 msgstr "Sub folder harus ditambahkan secara manual untuk lokasi ini"
 
 #: panels/search/cc-search-locations-dialog.c:572
-#: panels/sharing/cc-sharing-panel.c:361
+#: panels/sharing/cc-sharing-panel.c:363
 msgid "Remove Folder"
 msgstr "Hapus Folder"
 
@@ -6651,31 +6653,31 @@ msgstr "Cari;Temukan;Indeks;Sembunyikan;Privasi;Hasil;"
 msgid "No networks selected for sharing"
 msgstr "Tiada jaringan yang dipilih untuk berbagi"
 
-#: panels/sharing/cc-sharing-panel.c:149
+#: panels/sharing/cc-sharing-panel.c:151
 msgctxt "service is disabled"
 msgid "Off"
 msgstr "Mati"
 
-#: panels/sharing/cc-sharing-panel.c:152
+#: panels/sharing/cc-sharing-panel.c:154
 msgctxt "service is enabled"
 msgid "Enabled"
 msgstr "Diaktifkan"
 
-#: panels/sharing/cc-sharing-panel.c:155
+#: panels/sharing/cc-sharing-panel.c:157
 msgctxt "service is active"
 msgid "Active"
 msgstr "Aktif"
 
-#: panels/sharing/cc-sharing-panel.c:236
+#: panels/sharing/cc-sharing-panel.c:238
 msgid "Choose a Folder"
 msgstr "Pilih Folder"
 
-#: panels/sharing/cc-sharing-panel.c:384
+#: panels/sharing/cc-sharing-panel.c:386
 msgid "Add Folder"
 msgstr "Tambah Folder"
 
 #. TRANSLATORS: %s is replaced with a link to a dav://<hostname> URL
-#: panels/sharing/cc-sharing-panel.c:471
+#: panels/sharing/cc-sharing-panel.c:474
 #, c-format
 msgid ""
 "File Sharing allows you to share your Public folder with others on your "
@@ -6825,9 +6827,8 @@ msgid "_Balance"
 msgstr "_Balans"
 
 #: panels/sound/cc-sound-panel.ui:176
-#, fuzzy
 msgid "Fad_e"
-msgstr "Fad_e"
+msgstr "M_emudar"
 
 #: panels/sound/cc-sound-panel.ui:203
 msgid "_Subwoofer"
@@ -6925,6 +6926,7 @@ msgstr ""
 "Kartu;Mikrofon;Volume;Fade;Balans;Bluetooth;Headset;Audio;Keluaran;Masukan;"
 
 #: panels/system/about/cc-about-page.ui:4
+#: panels/system/about/gnome-about-panel.desktop.in:3
 msgid "About"
 msgstr "Ihwal"
 
@@ -7127,6 +7129,23 @@ msgstr "Virtualisasi"
 msgid "Kernel Version"
 msgstr "Versi Kernel"
 
+#: panels/system/about/gnome-about-panel.desktop.in:4
+msgid "View information about your system"
+msgstr "Tilik informasi tentang sistem Anda"
+
+#. Translators: Search terms to find the About panel.
+#. Do NOT translate or localize the semicolons!
+#. The list MUST also end with a semicolon!
+#. "Preferred Applications" is the old name for the preference, so make
+#. sure that you use the same "translation" for those keywords
+#: panels/system/about/gnome-about-panel.desktop.in:19
+msgid ""
+"device;system;information;hostname;memory;processor;version;default;"
+"application;preferred;cd;dvd;usb;audio;video;disc;removable;media;autorun;"
+msgstr ""
+"perangkat;sistem;informasi;nama host;memori;prosesor;versi;baku;aplikasi;"
+"disukai;cd;dvd;usb;audio;video;cakram;lepas pasang;media;autorun;"
+
 #: panels/system/cc-system-panel.ui:23
 msgid "_Region &amp; Language"
 msgstr "_Wilayah &amp; Bahasa"
@@ -7135,65 +7154,63 @@ msgstr "_Wilayah &amp; Bahasa"
 msgid "System language and localization"
 msgstr "Bahasa sistem dan pelokalan"
 
-#: panels/system/cc-system-panel.ui:34
+#: panels/system/cc-system-panel.ui:33
 msgid "_Date &amp; Time"
 msgstr "Tanggal &amp; _Waktu"
 
-#: panels/system/cc-system-panel.ui:35
+#: panels/system/cc-system-panel.ui:34
 msgid "Time zone and clock settings"
 msgstr "Pengaturan zona waktu dan jam"
 
-#: panels/system/cc-system-panel.ui:45
+#: panels/system/cc-system-panel.ui:43
 msgid "_Users"
 msgstr "Pengg_una"
 
-#: panels/system/cc-system-panel.ui:46
+#: panels/system/cc-system-panel.ui:44
 msgid "Add and remove accounts, change password"
 msgstr "Tambah atau hapus akun, ubah kata sandi"
 
-#: panels/system/cc-system-panel.ui:58
-#, fuzzy
-#| msgid "Remote Desktop"
+#: panels/system/cc-system-panel.ui:54
 msgid "R_emote Desktop"
-msgstr "Destop Jauh"
+msgstr "D_estop Jauh"
 
-#: panels/system/cc-system-panel.ui:59
+#: panels/system/cc-system-panel.ui:55
 msgid "Allow this device to be used remotely"
 msgstr "Izinkan perangkat ini digunakan dari jarak jauh"
 
-#: panels/system/cc-system-panel.ui:69
+#: panels/system/cc-system-panel.ui:64
 #: panels/system/remote-login/cc-remote-login-page.ui:51
 msgid "Secu_re Shell"
 msgstr "Secu_re Shell"
 
-#: panels/system/cc-system-panel.ui:70
+#: panels/system/cc-system-panel.ui:65
 msgid "SSH network access"
 msgstr "Akses jaringan SSH"
 
-#: panels/system/cc-system-panel.ui:79
+#: panels/system/cc-system-panel.ui:74
 msgid "_About"
 msgstr "Tent_ang"
 
-#: panels/system/cc-system-panel.ui:80
+#: panels/system/cc-system-panel.ui:75
 msgid "Hardware details and software versions"
 msgstr "Detail perangkat keras dan versi perangkat lunak"
 
-#: panels/system/cc-system-panel.ui:97
+#: panels/system/cc-system-panel.ui:91
 msgid "Software _Updates"
 msgstr "Pembar_uan Perangkat Lunak"
 
 #. Translators: This is the full date and time format used in 12-hour mode.
-#: panels/system/datetime/cc-datetime-page.c:230
+#: panels/system/datetime/cc-datetime-page.c:237
 msgid "%e %B %Y, %l:%M %p"
 msgstr "%e %B %Y, %l:%M %p"
 
 #. Translators: This is the full date and time format used in 24-hour mode.
-#: panels/system/datetime/cc-datetime-page.c:235
+#: panels/system/datetime/cc-datetime-page.c:242
 msgid "%e %B %Y, %R"
 msgstr "%e %B %Y, %R"
 
 #. Translators: "city, country"
-#: panels/system/datetime/cc-datetime-page.c:388
+#: panels/system/datetime/cc-datetime-page.c:403
 #, c-format
 msgctxt "timezone loc"
 msgid "%s, %s"
@@ -7201,38 +7218,39 @@ msgstr "%s, %s"
 
 #. Update the timezone on the listbow row
 #. Translators: "timezone (details)"
-#: panels/system/datetime/cc-datetime-page.c:405
+#: panels/system/datetime/cc-datetime-page.c:420
 #, c-format
 msgctxt "timezone desc"
 msgid "%s (%s)"
 msgstr "%s (%s)"
 
 #: panels/system/datetime/cc-datetime-page.ui:9
-#: panels/system/datetime/cc-datetime-page.ui:117
+#: panels/system/datetime/cc-datetime-page.ui:116
+#: panels/system/datetime/gnome-datetime-panel.desktop.in:3
 msgid "Date & Time"
 msgstr "Tanggal & Waktu"
 
-#: panels/system/datetime/cc-datetime-page.ui:60
+#: panels/system/datetime/cc-datetime-page.ui:59
 msgid "_Year"
 msgstr "_Tahun"
 
-#: panels/system/datetime/cc-datetime-page.ui:71
+#: panels/system/datetime/cc-datetime-page.ui:70
 msgid "_Month"
 msgstr "_Bulan"
 
-#: panels/system/datetime/cc-datetime-page.ui:98
+#: panels/system/datetime/cc-datetime-page.ui:97
 msgid "_Day"
 msgstr "_Tanggal"
 
-#: panels/system/datetime/cc-datetime-page.ui:137
+#: panels/system/datetime/cc-datetime-page.ui:136
 msgid "Automatic _Date &amp; Time"
 msgstr "Tanggal &amp; Waktu Otomatis"
 
-#: panels/system/datetime/cc-datetime-page.ui:138
+#: panels/system/datetime/cc-datetime-page.ui:137
 msgid "Requires internet access"
 msgstr "Memerlukan koneksi Internet"
 
-#: panels/system/datetime/cc-datetime-page.ui:150
+#: panels/system/datetime/cc-datetime-page.ui:149
 msgid "Date &amp; _Time"
 msgstr "Tanggal &amp; Waktu"
 
@@ -7269,10 +7287,8 @@ msgid "Control how the time and date is shown in the top bar"
 msgstr "Kontrol bagaimana waktu dan tanggal ditampilkan di bilah atas"
 
 #: panels/system/datetime/cc-datetime-page.ui:215
-#, fuzzy
-#| msgid "Week Day"
 msgid "_Week Day"
-msgstr "Hari minggu:"
+msgstr "Hari _Kerja"
 
 #: panels/system/datetime/cc-datetime-page.ui:221
 msgid "D_ate"
@@ -7287,55 +7303,54 @@ msgid "Week _Numbers"
 msgstr "_Nomor Minggu"
 
 #: panels/system/datetime/cc-datetime-page.ui:234
-#, fuzzy
 msgid "Shown in the dropdown calendar"
 msgstr "Ditampilkan di kalender dropdown"
 
-#: panels/system/datetime/cc-datetime-page.ui:271
+#: panels/system/datetime/cc-datetime-page.ui:270
 msgid "January"
 msgstr "Januari"
 
-#: panels/system/datetime/cc-datetime-page.ui:272
+#: panels/system/datetime/cc-datetime-page.ui:271
 msgid "February"
 msgstr "Februari"
 
-#: panels/system/datetime/cc-datetime-page.ui:273
+#: panels/system/datetime/cc-datetime-page.ui:272
 msgid "March"
 msgstr "Maret"
 
-#: panels/system/datetime/cc-datetime-page.ui:274
+#: panels/system/datetime/cc-datetime-page.ui:273
 msgid "April"
 msgstr "April"
 
-#: panels/system/datetime/cc-datetime-page.ui:275
+#: panels/system/datetime/cc-datetime-page.ui:274
 msgid "May"
 msgstr "Mei"
 
-#: panels/system/datetime/cc-datetime-page.ui:276
+#: panels/system/datetime/cc-datetime-page.ui:275
 msgid "June"
 msgstr "Juni"
 
-#: panels/system/datetime/cc-datetime-page.ui:277
+#: panels/system/datetime/cc-datetime-page.ui:276
 msgid "July"
 msgstr "Juli"
 
-#: panels/system/datetime/cc-datetime-page.ui:278
+#: panels/system/datetime/cc-datetime-page.ui:277
 msgid "August"
 msgstr "Agustus"
 
-#: panels/system/datetime/cc-datetime-page.ui:279
+#: panels/system/datetime/cc-datetime-page.ui:278
 msgid "September"
 msgstr "September"
 
-#: panels/system/datetime/cc-datetime-page.ui:280
+#: panels/system/datetime/cc-datetime-page.ui:279
 msgid "October"
 msgstr "Oktober"
 
-#: panels/system/datetime/cc-datetime-page.ui:281
+#: panels/system/datetime/cc-datetime-page.ui:280
 msgid "November"
 msgstr "November"
 
-#: panels/system/datetime/cc-datetime-page.ui:282
+#: panels/system/datetime/cc-datetime-page.ui:281
 msgid "December"
 msgstr "Desember"
 
@@ -7350,6 +7365,15 @@ msgstr "Cari kota"
 #: panels/system/datetime/cc-tz-dialog.ui:47
 msgid "No Results"
 msgstr "Tak Ada Hasil"
+
+#: panels/system/datetime/gnome-datetime-panel.desktop.in:4
+msgid "Change the date and time, including time zone"
+msgstr "Ubah tanggal dan waktu, termasuk zona waktu"
+
+#. Translators: Search terms to find the Date and Time panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#: panels/system/datetime/gnome-datetime-panel.desktop.in:15
+msgid "Clock;Timezone;Location;"
+msgstr "Jam;Zona waktu;Lokasi;"
 
 #: panels/system/datetime/org.gnome.controlcenter.system.policy.in:11
 msgid "Change system time and date settings"
@@ -7439,6 +7463,7 @@ msgid "Paper"
 msgstr "Kertas"
 
 #: panels/system/region/cc-region-page.ui:4
+#: panels/system/region/gnome-region-panel.desktop.in:3
 msgid "Region & Language"
 msgstr "Wilayah & Bahasa"
 
@@ -7483,6 +7508,15 @@ msgstr "_Bahasa"
 msgid "Fo_rmats"
 msgstr "Fo_rmat"
 
+#: panels/system/region/gnome-region-panel.desktop.in:4
+msgid "Select your display language and formats"
+msgstr "Pilih bahasa dan format tampilan Anda"
+
+#. Translators: Search terms to find the Region and Language panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#: panels/system/region/gnome-region-panel.desktop.in:15
+msgid "Language;Layout;Keyboard;Input;"
+msgstr "Bahasa;Tata Letak;Papan Tik;Masukan;"
+
 #: panels/system/remote-desktop/cc-desktop-sharing-page.c:364
 #: panels/system/remote-desktop/cc-remote-session-page.c:98
 msgid "Device address copied"
@@ -7503,7 +7537,7 @@ msgstr "Nama pengguna disalin"
 msgid "Password copied"
 msgstr "Kata sandi disalin"
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:13
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:12
 msgid ""
 "Share your existing desktop with other devices. The remote connection uses "
 "the existing screen resolution"
@@ -7511,24 +7545,24 @@ msgstr ""
 "Bagikan desktop Anda yang ada dengan perangkat lain. Koneksi jarak jauh "
 "menggunakan resolusi layar yang ada"
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:28
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:27
 msgid "_Desktop Sharing"
 msgstr "Berbagi _Desktop"
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:34
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:33
 msgid "Remote _Control"
 msgstr "_Kendali Jarak Jauh"
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:36
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:35
 msgid "Allows desktop shares to control the screen"
 msgstr "Izinkan koneksi mengendalikan layar.zz"
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:43
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:42
 #: panels/system/remote-desktop/cc-remote-session-page.ui:41
 msgid "How to Connect"
 msgstr "Cara Menghubungkan"
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:44
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:43
 #: panels/system/remote-desktop/cc-remote-session-page.ui:42
 msgid ""
 "Use a remote desktop app to connect using the RDP protocol. Additional "
@@ -7538,15 +7572,15 @@ msgstr ""
 "RDP. Informasi tambahan tentang lokasi jaringan perangkat mungkin juga "
 "diperlukan."
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:47
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:46
 #: panels/system/remote-desktop/cc-remote-session-page.ui:45
 msgid "_Hostname"
 msgstr "Nama _Host"
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:55
-#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:76
-#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:97
-#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:113
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:54
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:75
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:96
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:112
 #: panels/system/remote-desktop/cc-remote-session-page.ui:53
 #: panels/system/remote-desktop/cc-remote-session-page.ui:74
 #: panels/system/remote-desktop/cc-remote-session-page.ui:95
@@ -7555,22 +7589,22 @@ msgstr "Nama _Host"
 msgid "Copy"
 msgstr "Salin"
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:68
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:67
 #: panels/system/remote-desktop/cc-remote-session-page.ui:66
 msgid "_Port"
 msgstr "_Port"
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:91
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:90
 #: panels/system/remote-desktop/cc-remote-session-page.ui:89
 msgid "Login Details"
 msgstr "Rincian Log Masuk"
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:132
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:131
 #: panels/system/remote-desktop/cc-remote-session-page.ui:130
 msgid "_Generate New Password"
 msgstr "_Hasilkan Kata Sandi Baru"
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:143
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:142
 #: panels/system/remote-desktop/cc-remote-session-page.ui:141
 msgid "_Verify Encryption"
 msgstr "_Verifikasikan Enkripsi"
@@ -7601,11 +7635,11 @@ msgstr ""
 "Sambungkan dari jarak jauh ke akun pengguna Anda saat tidak digunakan. "
 "Resolusi layar dapat diatur dari remote."
 
-#: panels/system/remote-desktop/cc-encryption-fingerprint-dialog.ui:20
+#: panels/system/remote-desktop/cc-encryption-fingerprint-dialog.ui:28
 msgid "Encryption Fingerprint"
 msgstr "Sidik Jari Enkripsi"
 
-#: panels/system/remote-desktop/cc-encryption-fingerprint-dialog.ui:21
+#: panels/system/remote-desktop/cc-encryption-fingerprint-dialog.ui:29
 msgid ""
 "The encryption fingerprint can be seen in connecting clients and should be "
 "identical"
@@ -7659,17 +7693,16 @@ msgstr "Kata sandi tak cocok."
 msgid "Add User"
 msgstr "Tambah Pengguna"
 
-#: panels/system/users/cc-add-user-dialog.ui:93
+#: panels/system/users/cc-add-user-dialog.ui:102
 #: panels/system/users/cc-enterprise-login-dialog.ui:107
 msgid "_Username"
 msgstr "Nama pengg_una"
 
-#: panels/system/users/cc-add-user-dialog.ui:131
-#| msgid "Administrator"
+#: panels/system/users/cc-add-user-dialog.ui:140
 msgid "Ad_ministrator"
 msgstr "Ad_ministrator"
 
-#: panels/system/users/cc-add-user-dialog.ui:136
+#: panels/system/users/cc-add-user-dialog.ui:145
 #: panels/system/users/cc-user-page.ui:141
 msgid ""
 "Administrators have extra abilities, including adding and removing users, "
@@ -7680,58 +7713,58 @@ msgstr ""
 "pengguna, mengubah pengaturan log masuk, dan menghapus perangkat lunak. "
 "Kontrol orang tua tidak dapat diterapkan pada administrator."
 
-#: panels/system/users/cc-add-user-dialog.ui:154
+#: panels/system/users/cc-add-user-dialog.ui:163
 msgid "User sets password on _first login"
 msgstr "Pengguna mengatur kata sandi saat log masuk _pertama"
 
-#: panels/system/users/cc-add-user-dialog.ui:167
+#: panels/system/users/cc-add-user-dialog.ui:176
 msgid "Set password n_ow"
 msgstr "At_ur kata sandi sekarang"
 
-#: panels/system/users/cc-add-user-dialog.ui:187
+#: panels/system/users/cc-add-user-dialog.ui:196
 msgid "Pass_word"
 msgstr "Kata _Sandi"
 
-#: panels/system/users/cc-add-user-dialog.ui:231
+#: panels/system/users/cc-add-user-dialog.ui:240
 msgid "_Confirm"
 msgstr "_Konfirmasi"
 
-#: panels/system/users/cc-enterprise-login-dialog.c:133
-#: panels/system/users/cc-enterprise-login-dialog.c:171
+#: panels/system/users/cc-enterprise-login-dialog.c:148
 #: panels/system/users/cc-enterprise-login-dialog.c:186
+#: panels/system/users/cc-enterprise-login-dialog.c:201
 msgid "Failed to register account"
 msgstr "Gagal mendaftarkan akun"
 
-#: panels/system/users/cc-enterprise-login-dialog.c:240
-#: panels/system/users/cc-enterprise-login-dialog.c:411
+#: panels/system/users/cc-enterprise-login-dialog.c:255
+#: panels/system/users/cc-enterprise-login-dialog.c:424
 msgid "Failed to join domain"
 msgstr "Gagal bergabung ke domain"
 
-#: panels/system/users/cc-enterprise-login-dialog.c:275
+#: panels/system/users/cc-enterprise-login-dialog.c:290
 msgid "No supported way to authenticate with this domain"
 msgstr "Tak ada cara yang didukung untuk mengautentikasi dengan domain ini"
 
-#: panels/system/users/cc-enterprise-login-dialog.c:285
-#: panels/system/users/cc-enterprise-login-dialog.c:476
+#: panels/system/users/cc-enterprise-login-dialog.c:300
+#: panels/system/users/cc-enterprise-login-dialog.c:489
 msgid "That login name didn’t work"
 msgstr "Nama log masuk itu tak bisa"
 
-#: panels/system/users/cc-enterprise-login-dialog.c:292
-#: panels/system/users/cc-enterprise-login-dialog.c:483
+#: panels/system/users/cc-enterprise-login-dialog.c:307
+#: panels/system/users/cc-enterprise-login-dialog.c:496
 msgid "That login password didn’t work"
 msgstr "Kata sandi log masuk itu tidak bisa"
 
-#: panels/system/users/cc-enterprise-login-dialog.c:299
+#: panels/system/users/cc-enterprise-login-dialog.c:314
 msgid "That hostname didn’t work"
 msgstr "Nama host itu tak bisa"
 
-#: panels/system/users/cc-enterprise-login-dialog.c:306
-#: panels/system/users/cc-enterprise-login-dialog.c:491
+#: panels/system/users/cc-enterprise-login-dialog.c:321
+#: panels/system/users/cc-enterprise-login-dialog.c:504
 msgid "Failed to log into domain"
 msgstr "Gagal log masuk domain"
 
 #. Translators: The "%s" is a domain address (e.g. "demo1.freeipa.org").
-#: panels/system/users/cc-enterprise-login-dialog.c:352
+#: panels/system/users/cc-enterprise-login-dialog.c:365
 #, c-format
 msgid ""
 "To add an enterprise login account, this device needs to be enrolled with "
@@ -7742,19 +7775,19 @@ msgstr ""
 "dengan <b>%s</b>. Untuk mendaftar, minta administrator domain memasukkan "
 "nama dan kata sandinya."
 
-#: panels/system/users/cc-enterprise-login-dialog.c:538
+#: panels/system/users/cc-enterprise-login-dialog.c:548
 msgid "Valid domain"
 msgstr "Domain yang valid"
 
-#: panels/system/users/cc-enterprise-login-dialog.c:542
+#: panels/system/users/cc-enterprise-login-dialog.c:552
 msgid "Domain not found"
 msgstr "Domain tidak ditemukan"
 
-#: panels/system/users/cc-enterprise-login-dialog.c:585
+#: panels/system/users/cc-enterprise-login-dialog.c:595
 msgid "Checking domain…"
 msgstr "Memeriksa domain…"
 
-#: panels/system/users/cc-enterprise-login-dialog.c:629
+#: panels/system/users/cc-enterprise-login-dialog.c:639
 msgid "Failed to contact realmd service"
 msgstr "Gagal menghubungi layanan realmd"
 
@@ -8162,10 +8195,8 @@ msgid "_Parental Controls"
 msgstr "_Pengawasan Orang Tua"
 
 #: panels/system/users/cc-user-page.ui:157
-#, fuzzy
-#| msgid "Open the Parental Controls app."
 msgid "Open the Parental Controls app"
-msgstr "Buka aplikasi Kontrol Orang Tua."
+msgstr "Buka aplikasi Kontrol Orang Tua"
 
 #: panels/system/users/cc-user-page.ui:191
 msgid "_Remove User"
@@ -8183,6 +8214,7 @@ msgid "_Delete Files and Settings"
 msgstr "+Hapus Berkas dan Pengaturan"
 
 #: panels/system/users/cc-users-page.ui:11
+#: panels/system/users/gnome-users-panel.desktop.in:3
 msgid "Users"
 msgstr "Pengguna"
 
@@ -8215,6 +8247,20 @@ msgstr ""
 #: panels/system/users/data/join-dialog.ui:135
 msgid "Administrator Password"
 msgstr "Kata Sandi Administrator"
+
+#: panels/system/users/gnome-users-panel.desktop.in:4
+msgid "Add or remove users and change your password"
+msgstr "Tambah atau hapus pengguna dan ubah kata sandi Anda"
+
+#. Translators: Search terms to find the Users panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#: panels/system/users/gnome-users-panel.desktop.in:15
+msgid ""
+"Login;Name;Fingerprint;Avatar;Logo;Face;Password;Parental Controls;Screen "
+"Time;App Restrictions;Web Restrictions;Usage;Usage Limit;Kid;Child;"
+msgstr ""
+"Log Masuk;Nama;Sidik Jari;Avatar;Logo;Wajah;Kata Sandi;Kontrol Orang Tua;"
+"Waktu Layar;Pembatasan Aplikasi;Pembatasan Web;Penggunaan;Batas Penggunaan;"
+"Anak;"
 
 #: panels/system/users/org.gnome.controlcenter.user-accounts.policy.in:11
 msgid "Manage user accounts"
@@ -8489,9 +8535,9 @@ msgstr "Tun_daan Klik Ganda"
 #: panels/universal-access/cc-ua-mouse-page.ui:40
 #: panels/universal-access/cc-ua-mouse-page.ui:78
 #: panels/universal-access/cc-ua-mouse-page.ui:111
-#: panels/universal-access/cc-ua-typing-page.ui:131
-#: panels/universal-access/cc-ua-typing-page.ui:183
-#: panels/universal-access/cc-ua-typing-page.ui:230
+#: panels/universal-access/cc-ua-typing-page.ui:133
+#: panels/universal-access/cc-ua-typing-page.ui:186
+#: panels/universal-access/cc-ua-typing-page.ui:233
 #: panels/universal-access/cc-ua-zoom-page.ui:179
 msgid "Short"
 msgstr "Pendek"
@@ -8500,9 +8546,9 @@ msgstr "Pendek"
 #: panels/universal-access/cc-ua-mouse-page.ui:43
 #: panels/universal-access/cc-ua-mouse-page.ui:81
 #: panels/universal-access/cc-ua-mouse-page.ui:114
-#: panels/universal-access/cc-ua-typing-page.ui:134
-#: panels/universal-access/cc-ua-typing-page.ui:186
-#: panels/universal-access/cc-ua-typing-page.ui:233
+#: panels/universal-access/cc-ua-typing-page.ui:136
+#: panels/universal-access/cc-ua-typing-page.ui:189
+#: panels/universal-access/cc-ua-typing-page.ui:236
 #: panels/universal-access/cc-ua-zoom-page.ui:183
 msgid "Long"
 msgstr "Panjang"
@@ -8520,8 +8566,8 @@ msgid "Secondary click by holding down the primary mouse button"
 msgstr "Klik sekunder dengan menahan tombol primer tetikus"
 
 #: panels/universal-access/cc-ua-mouse-page.ui:73
-#: panels/universal-access/cc-ua-typing-page.ui:178
-#: panels/universal-access/cc-ua-typing-page.ui:225
+#: panels/universal-access/cc-ua-typing-page.ui:180
+#: panels/universal-access/cc-ua-typing-page.ui:228
 msgid "Acceptance Delay"
 msgstr "Jeda Penerimaan"
 
@@ -8534,7 +8580,7 @@ msgid "Trigger a click when the pointer hovers"
 msgstr "Picu klik ketika penunjuk mengambang"
 
 #: panels/universal-access/cc-ua-mouse-page.ui:106
-#: panels/universal-access/cc-ua-typing-page.ui:126
+#: panels/universal-access/cc-ua-typing-page.ui:127
 msgid "Delay"
 msgstr "Tunda"
 
@@ -8739,49 +8785,49 @@ msgstr "Penekanan tombol akan diulang saat ditahan"
 msgid "Speed"
 msgstr "Laju"
 
-#: panels/universal-access/cc-ua-typing-page.ui:153
+#: panels/universal-access/cc-ua-typing-page.ui:155
 msgid "_Sticky Keys"
 msgstr "Tombol _Lengket"
 
-#: panels/universal-access/cc-ua-typing-page.ui:154
+#: panels/universal-access/cc-ua-typing-page.ui:156
 msgid "Sequences of modifier keys act as a key combination"
 msgstr "Perlakukan urutan tombol pengubah sebagai suatu kombinasi tombol"
 
-#: panels/universal-access/cc-ua-typing-page.ui:159
+#: panels/universal-access/cc-ua-typing-page.ui:161
 msgid "Disable if two keys are pressed together"
 msgstr "Matikan bila dua tombol ditekan bersamaan"
 
-#: panels/universal-access/cc-ua-typing-page.ui:164
+#: panels/universal-access/cc-ua-typing-page.ui:166
 msgid "Beep when modifier key is pressed"
 msgstr "Bip ketika tombol pengubah ditekan"
 
-#: panels/universal-access/cc-ua-typing-page.ui:172
+#: panels/universal-access/cc-ua-typing-page.ui:174
 msgid "S_low Keys"
 msgstr "Tombol _Lambat"
 
-#: panels/universal-access/cc-ua-typing-page.ui:173
+#: panels/universal-access/cc-ua-typing-page.ui:175
 msgid "Delay between when a key is pressed and when it is accepted"
 msgstr ""
 "Jeda antara saat sebuah tombol ditekan dan saat tombol tersebut diterima"
 
-#: panels/universal-access/cc-ua-typing-page.ui:201
+#: panels/universal-access/cc-ua-typing-page.ui:204
 msgid "Beep when a key is pressed"
 msgstr "Bip ketika tombol ditekan"
 
-#: panels/universal-access/cc-ua-typing-page.ui:206
+#: panels/universal-access/cc-ua-typing-page.ui:209
 msgid "Beep when a key is accepted"
 msgstr "Bip ketika tombol diterima"
 
-#: panels/universal-access/cc-ua-typing-page.ui:211
-#: panels/universal-access/cc-ua-typing-page.ui:248
+#: panels/universal-access/cc-ua-typing-page.ui:214
+#: panels/universal-access/cc-ua-typing-page.ui:251
 msgid "Beep when a key is rejected"
 msgstr "Bip ketika tombol ditolak"
 
-#: panels/universal-access/cc-ua-typing-page.ui:219
+#: panels/universal-access/cc-ua-typing-page.ui:222
 msgid "B_ounce Keys"
 msgstr "T_ombol Pantul"
 
-#: panels/universal-access/cc-ua-typing-page.ui:220
+#: panels/universal-access/cc-ua-typing-page.ui:223
 msgid "Ignore fast duplicate keypresses"
 msgstr "Abaikan penekanan cepat tombol yang sama"
 
@@ -9040,15 +9086,15 @@ msgctxt "Wacom action-type"
 msgid "Show On-Screen Help"
 msgstr "Tampilkan Bantuan Pada Layar"
 
-#: panels/wacom/cc-wacom-device.c:430
+#: panels/wacom/cc-wacom-device.c:437
 msgid "Tablet mounted on laptop panel"
 msgstr "Tablet dipasang pada panel laptop"
 
-#: panels/wacom/cc-wacom-device.c:432
+#: panels/wacom/cc-wacom-device.c:439
 msgid "Tablet mounted on external display"
 msgstr "Tablet yang dipasang pada layar eksternal"
 
-#: panels/wacom/cc-wacom-device.c:434
+#: panels/wacom/cc-wacom-device.c:441
 msgid "External tablet device"
 msgstr "Perangkat tablet eksternal"
 
@@ -9174,19 +9220,19 @@ msgstr "Perasaan Tekanan P_enghapus"
 msgid "Eraser pressure"
 msgstr "Tekanan penghapus"
 
-#: panels/wacom/cc-wacom-tool.c:359
+#: panels/wacom/cc-wacom-tool.c:362
 msgid "Airbrush stylus with pressure, tilt, and integrated slider"
 msgstr "Stylus Airbrush dengan tekanan, kemiringan, dan slider terintegrasi"
 
-#: panels/wacom/cc-wacom-tool.c:361
+#: panels/wacom/cc-wacom-tool.c:364
 msgid "Art pen with pressure, tilt, and rotation"
 msgstr "Pena seni dengan tekanan, kemiringan, dan rotasi"
 
-#: panels/wacom/cc-wacom-tool.c:363
+#: panels/wacom/cc-wacom-tool.c:366
 msgid "Stylus with pressure and tilt"
 msgstr "Stylus dengan tekanan dan kemiringan"
 
-#: panels/wacom/cc-wacom-tool.c:365
+#: panels/wacom/cc-wacom-tool.c:368
 msgid "Stylus with pressure"
 msgstr "Stylus dengan tekanan"
 
@@ -9809,7 +9855,7 @@ msgstr "Kategori pengaturan"
 msgid "No Results Found"
 msgstr "Tidak Ditemukan Hasil"
 
-#: shell/cc-panel-loader.c:308
+#: shell/cc-panel-loader.c:311
 msgid "Available panels:"
 msgstr "Panel yang tersedia:"
 
@@ -9935,7 +9981,7 @@ msgstr ""
 
 #. translators:
 #. * The number of sound outputs on a particular device
-#: subprojects/gvc/gvc-mixer-control.c:1915
+#: subprojects/gvc/gvc-mixer-control.c:1879
 #, c-format
 msgid "%u Output"
 msgid_plural "%u Outputs"
@@ -9943,12 +9989,12 @@ msgstr[0] "%u Keluaran"
 
 #. translators:
 #. * The number of sound inputs on a particular device
-#: subprojects/gvc/gvc-mixer-control.c:1925
+#: subprojects/gvc/gvc-mixer-control.c:1889
 #, c-format
 msgid "%u Input"
 msgid_plural "%u Inputs"
 msgstr[0] "%u Masukan"
 
-#: subprojects/gvc/gvc-mixer-control.c:2882
+#: subprojects/gvc/gvc-mixer-control.c:2872
 msgid "System Sounds"
 msgstr "Suara Sistem"
