@@ -30,6 +30,7 @@
 #endif
 
 #include "cc-add-user-dialog.h"
+#include "cc-cannot-add-user-dialog.h"
 #include "cc-enterprise-login-dialog.h"
 #include "cc-list-row.h"
 #include "cc-user-page.h"
@@ -107,11 +108,17 @@ update_new_user_avatar_cb (CcUsersPage *self, ActUser *user)
 static void
 add_user (CcUsersPage *self)
 {
-    CcAddUserDialog *dialog = cc_add_user_dialog_new (self->permission);
+    AdwDialog *dialog;
+
+#ifdef CC_CANNOT_ADD_USERS
+    dialog = ADW_DIALOG (cc_cannot_add_user_dialog_new ());
+#else
+    dialog = ADW_DIALOG (cc_add_user_dialog_new (self->permission));
 
     g_signal_connect_swapped (dialog, "user-added", G_CALLBACK (update_new_user_avatar_cb), self);
+#endif
 
-    adw_dialog_present (ADW_DIALOG (dialog), GTK_WIDGET (self));
+    adw_dialog_present (dialog, GTK_WIDGET (self));
 }
 
 static void
@@ -329,7 +336,9 @@ cc_users_page_init (CcUsersPage *self)
         g_warning ("Cannot create '%s' permission: %s", USER_ACCOUNTS_PERMISSION, error->message);
     }
 
+#ifndef CC_CANNOT_ADD_USERS
     g_object_bind_property (self->permission, "allowed", self->add_user_button_row, "sensitive", G_BINDING_SYNC_CREATE);
+#endif
 
     self->user_manager = act_user_manager_get_default ();
     g_signal_connect_object (self->user_manager, "notify::is-loaded", G_CALLBACK (users_loaded), self,

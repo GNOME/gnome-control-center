@@ -392,6 +392,11 @@ config_h.set('BUILD_THUNDERBOLT', host_is_linux_not_s390,
              description: 'Define to 1 to build the Thunderbolt panel')
 
 fs = import('fs')
+
+cannot_add_users = get_option('cannot-add-users')
+config_h.set('CC_CANNOT_ADD_USERS', cannot_add_users,
+             description: 'Define to 1 if distro does not support creating more than one user.')
+
 gnome = import('gnome')
 i18n = import('i18n')
 pkg = import('pkgconfig')

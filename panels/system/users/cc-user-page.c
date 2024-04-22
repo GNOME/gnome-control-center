@@ -745,6 +745,13 @@ cc_user_page_set_user (CcUserPage *self, ActUser *user, GPermission *permission)
     cc_permission_infobar_set_permission (self->permission_infobar, permission);
     g_object_bind_property (permission, "allowed", self, "locked", G_BINDING_SYNC_CREATE | G_BINDING_INVERT_BOOLEAN);
     g_signal_connect_object (permission, "notify", G_CALLBACK (update_editable_state), self, G_CONNECT_SWAPPED);
+#ifdef CC_CANNOT_ADD_USERS
+    /* Usually, the current user is completely editable but still shows the "Some settings are locked" banner for
+     * the "Add User" button. But if creating users is disabled, there are no locked settings. So, let's hide the
+     * banner in this case. */
+    g_object_bind_property (self, "editable", self->permission_infobar, "visible",
+                            G_BINDING_SYNC_CREATE | G_BINDING_INVERT_BOOLEAN);
+#endif
     update_editable_state (self);
 }
 

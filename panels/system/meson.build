@@ -59,6 +59,7 @@ sources = files(
   'secure-shell/cc-secure-shell.c',
   'secure-shell/cc-secure-shell-page.c',
   'users/cc-add-user-dialog.c',
+  'users/cc-cannot-add-user-dialog.c',
   'users/cc-avatar-chooser.c',
   'users/cc-crop-area.c',
   'users/cc-entry-feedback.c',
