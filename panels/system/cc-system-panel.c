@@ -26,6 +26,7 @@
 #include "cc-list-row.h"
 #include "cc-system-panel.h"
 #include "cc-system-resources.h"
+#include "cc-hostname-entry.h"
 
 #include "about/cc-about-page.h"
 #include "datetime/cc-datetime-page.h"
@@ -207,6 +208,7 @@ cc_system_panel_class_init (CcSystemPanelClass *klass)
 
   g_type_ensure (CC_TYPE_ABOUT_PAGE);
   g_type_ensure (CC_TYPE_DATE_TIME_PAGE);
+  g_type_ensure (CC_TYPE_HOSTNAME_ENTRY);
   g_type_ensure (CC_TYPE_REGION_PAGE);
   g_type_ensure (CC_TYPE_REMOTE_DESKTOP_PAGE);
   g_type_ensure (CC_TYPE_SECURE_SHELL_PAGE);

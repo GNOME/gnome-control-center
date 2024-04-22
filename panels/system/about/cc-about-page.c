@@ -21,7 +21,6 @@
  */
 
 #include "cc-about-page.h"
-#include "cc-hostname-entry.h"
 #include "cc-list-row.h"
 #include "cc-system-details-window.h"
 
@@ -174,8 +173,6 @@ cc_about_page_class_init (CcAboutPageClass *klass)
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
   object_class->dispose = cc_about_page_dispose;
-
-  g_type_ensure (CC_TYPE_HOSTNAME_ENTRY);
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/system/about/cc-about-page.ui");
 
