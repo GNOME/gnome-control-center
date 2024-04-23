@@ -48,8 +48,8 @@ typedef struct
   gchar *subpage;
 } CcPanelPrivate;
 
-G_DEFINE_ABSTRACT_TYPE_WITH_CODE (CcPanel, cc_panel, ADW_TYPE_NAVIGATION_PAGE,
-                                  G_ADD_PRIVATE (CcPanel))
+G_DEFINE_TYPE_WITH_CODE (CcPanel, cc_panel, ADW_TYPE_NAVIGATION_PAGE,
+                         G_ADD_PRIVATE (CcPanel))
 
 enum
 {
