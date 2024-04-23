@@ -2,19 +2,19 @@
 <interface>
   <template class="CcSystemPanel" parent="CcPanel">
     <child type="child">
-      <object class="AdwNavigationView" id="navigation">
+      <object class="AdwNavigationPage">
+        <property name="title" translatable="yes">System</property>
+        <property name="child">
+          <object class="AdwToolbarView">
+            <child type="top">
+              <object class="AdwHeaderBar"/>
+            </child>
 
-        <child>
-          <object class="AdwNavigationPage">
-            <property name="title" translatable="yes">System</property>
-            <property name="child">
-              <object class="AdwToolbarView">
-                <child type="top">
-                  <object class="AdwHeaderBar"/>
-                </child>
+            <property name="content">
+              <object class="AdwPreferencesPage">
+                <child>
+                  <object class="AdwPreferencesGroup">
 
-                <property name="content">
-                  <object class="AdwPreferencesPage">
                     <child>
                       <object class="AdwPreferencesGroup">
 
@@ -78,9 +78,9 @@
                             <signal name="activated" handler="on_page_activated"/>
                           </object>
                         </child>
-
                       </object>
                     </child>
+
                     <child>
                       <!-- Software Updates -->
                       <object class="AdwPreferencesGroup" id="software_updates_group">
@@ -103,12 +103,12 @@
                       </object>
                     </child>
                   </object>
-                </property>
-
+                </child>
               </object>
             </property>
+
           </object>
-        </child>
+        </property>
       </object>
     </child>
   </template>
