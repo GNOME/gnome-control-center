@@ -110,7 +110,7 @@ password_changed_cb (PasswdHandler    *handler,
                      GError           *error,
                      CcPasswordDialog *self)
 {
-        GtkWidget *dialog;
+        AdwDialog *dialog;
         const gchar *primary_text;
         const gchar *secondary_text;
 
@@ -142,14 +142,15 @@ password_changed_cb (PasswdHandler    *handler,
                 secondary_text = error->message;
         }
 
-        dialog = gtk_message_dialog_new (GTK_WINDOW (self),
-                                         GTK_DIALOG_MODAL,
-                                         GTK_MESSAGE_ERROR,
-                                         GTK_BUTTONS_CLOSE,
-                                         "%s", primary_text);
-        gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
-                                                  "%s", secondary_text);
-        gtk_window_present (GTK_WINDOW (dialog));
+        dialog = adw_alert_dialog_new (primary_text, secondary_text);
+        adw_alert_dialog_add_responses (ADW_ALERT_DIALOG (dialog),
+                                        "ok",  _("_OK"),
+                                        NULL);
+
+        adw_alert_dialog_set_default_response (ADW_ALERT_DIALOG (dialog),
+                                               "ok");
+
+        adw_dialog_present (dialog, GTK_WIDGET (self));
 }
 
 static void
