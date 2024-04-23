@@ -69,6 +69,7 @@ struct _CcRemoteLoginPage {
   GPermission *permission;
 
   char *temp_cert_dir;
+  const char *fingerprint;
   guint store_credentials_id;
 
   gboolean activating;
@@ -140,6 +141,17 @@ on_generate_password_button_clicked (CcRemoteLoginPage *self)
 static void
 on_verify_encryption_button_clicked (CcRemoteLoginPage *self)
 {
+  g_return_if_fail (self->fingerprint);
+
+  if (self->fingerprint_dialog == NULL)
+    {
+      self->fingerprint_dialog = g_object_new (CC_TYPE_ENCRYPTION_FINGERPRINT_DIALOG, NULL);
+      g_object_add_weak_pointer (G_OBJECT (self->fingerprint_dialog),
+                                 (gpointer *) &self->fingerprint_dialog);
+
+    }
+
+  cc_encryption_fingerprint_dialog_set_fingerprint (self->fingerprint_dialog, self->fingerprint, ":");
   adw_dialog_present (ADW_DIALOG (self->fingerprint_dialog), GTK_WIDGET (self));
 }
 
@@ -577,7 +589,6 @@ on_got_rdp_credentials (GObject      *source_object,
   gboolean got_credentials, has_fingerprint;
   g_autoptr(GVariant) credentials = NULL;
   g_autoptr(GError) error = NULL;
-  const gchar *fingerprint;
 
   got_credentials = gsd_remote_desktop_rdp_server_call_get_credentials_finish (self->rdp_server,
                                                                                &credentials,
@@ -609,19 +620,9 @@ on_got_rdp_credentials (GObject      *source_object,
     }
 
   /* Fetch TLS certificate fingerprint */
-  fingerprint = gsd_remote_desktop_rdp_server_get_tls_fingerprint (self->rdp_server);
+  self->fingerprint = gsd_remote_desktop_rdp_server_get_tls_fingerprint (self->rdp_server);
 
-  has_fingerprint = fingerprint && strlen (fingerprint) > 0;
-
-  if (has_fingerprint)
-    {
-      self->fingerprint_dialog = g_object_new (CC_TYPE_ENCRYPTION_FINGERPRINT_DIALOG, NULL);
-      g_object_add_weak_pointer (G_OBJECT (self->fingerprint_dialog),
-                                 (gpointer *) &self->fingerprint_dialog);
-
-      cc_encryption_fingerprint_dialog_set_fingerprint (self->fingerprint_dialog, fingerprint, ":");
-    }
-
+  has_fingerprint = self->fingerprint && strlen (self->fingerprint) > 0;
   gtk_widget_set_sensitive (self->verify_encryption_button, has_fingerprint);
 }
 
