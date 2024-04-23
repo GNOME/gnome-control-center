@@ -63,7 +63,6 @@ struct _CcRemoteLoginPage {
   GtkWidget    *verify_encryption_button;
 
   GTlsCertificate *certificate;
-  CcEncryptionFingerprintDialog *fingerprint_dialog;
 
   GCancellable *cancellable;
   GPermission *permission;
@@ -141,18 +140,13 @@ on_generate_password_button_clicked (CcRemoteLoginPage *self)
 static void
 on_verify_encryption_button_clicked (CcRemoteLoginPage *self)
 {
+  CcEncryptionFingerprintDialog *dialog;
+
   g_return_if_fail (self->fingerprint);
 
-  if (self->fingerprint_dialog == NULL)
-    {
-      self->fingerprint_dialog = g_object_new (CC_TYPE_ENCRYPTION_FINGERPRINT_DIALOG, NULL);
-      g_object_add_weak_pointer (G_OBJECT (self->fingerprint_dialog),
-                                 (gpointer *) &self->fingerprint_dialog);
-
-    }
-
-  cc_encryption_fingerprint_dialog_set_fingerprint (self->fingerprint_dialog, self->fingerprint, ":");
-  adw_dialog_present (ADW_DIALOG (self->fingerprint_dialog), GTK_WIDGET (self));
+  dialog = g_object_new (CC_TYPE_ENCRYPTION_FINGERPRINT_DIALOG, NULL);
+  cc_encryption_fingerprint_dialog_set_fingerprint (dialog, self->fingerprint, ":");
+  adw_dialog_present (ADW_DIALOG (dialog), GTK_WIDGET (self));
 }
 
 static void
@@ -545,7 +539,6 @@ cc_remote_login_page_dispose (GObject *object)
   g_clear_object (&self->cancellable);
   g_clear_object (&self->permission);
 
-  g_clear_pointer ((AdwDialog **) &self->fingerprint_dialog, adw_dialog_force_close);
   g_clear_object (&self->rdp_server);
 
   G_OBJECT_CLASS (cc_remote_login_page_parent_class)->dispose (object);
