@@ -72,8 +72,6 @@ struct _CcDesktopSharingPage {
   GtkWidget *generate_password_button;
   GtkWidget *verify_encryption_button;
 
-  CcEncryptionFingerprintDialog *fingerprint_dialog;
-
   guint desktop_sharing_name_watch;
   guint store_credentials_id;
   GTlsCertificate *certificate;
@@ -95,17 +93,13 @@ on_generate_password_button_clicked (CcDesktopSharingPage *self)
 static void
 on_verify_encryption_button_clicked (CcDesktopSharingPage *self)
 {
+  CcEncryptionFingerprintDialog *dialog;
+
   g_return_if_fail (self->certificate);
 
-  if (self->fingerprint_dialog == NULL)
-    {
-      self->fingerprint_dialog = g_object_new (CC_TYPE_ENCRYPTION_FINGERPRINT_DIALOG, NULL);
-      g_object_add_weak_pointer (G_OBJECT (self->fingerprint_dialog),
-                                     (gpointer *) &self->fingerprint_dialog);
-    }
-
-  cc_encryption_fingerprint_dialog_set_certificate (self->fingerprint_dialog, self->certificate);
-  adw_dialog_present (ADW_DIALOG (self->fingerprint_dialog), GTK_WIDGET (self));
+  dialog = g_object_new (CC_TYPE_ENCRYPTION_FINGERPRINT_DIALOG, NULL);
+  cc_encryption_fingerprint_dialog_set_certificate (dialog, self->certificate);
+  adw_dialog_present (ADW_DIALOG (dialog), GTK_WIDGET (self));
 }
 
 static char *
@@ -505,7 +499,6 @@ cc_desktop_sharing_page_dispose (GObject *object)
   g_cancellable_cancel (self->cancellable);
   g_clear_object (&self->cancellable);
 
-  g_clear_pointer ((AdwDialog **) &self->fingerprint_dialog, adw_dialog_force_close);
   g_clear_handle_id (&self->store_credentials_id, g_source_remove);
 
   g_clear_object (&self->rdp_server);
