@@ -74,7 +74,13 @@ cc_panel_buildable_add_child (GtkBuildable *buildable,
                               GObject      *child,
                               const gchar  *type)
 {
-  adw_navigation_page_set_child (ADW_NAVIGATION_PAGE (buildable), GTK_WIDGET (child));
+  CcPanelPrivate *priv = cc_panel_get_instance_private (CC_PANEL (buildable));
+
+  /* This is a hub panel (with subpages) such as System and Privacy. */
+  if (ADW_IS_NAVIGATION_PAGE (child))
+    adw_navigation_view_add (priv->navigation, ADW_NAVIGATION_PAGE (child));
+  else
+    parent_buildable_iface->add_child (buildable, builder, child, type);
 }
 
 static void
@@ -269,4 +275,16 @@ cc_panel_deactivate (CcPanel *panel)
   CcPanelPrivate *priv = cc_panel_get_instance_private (panel);
 
   g_cancellable_cancel (priv->cancellable);
+}
+
+void
+cc_panel_push_subpage (CcPanel *panel,
+                       AdwNavigationPage *subpage)
+{
+  CcPanelPrivate *priv = cc_panel_get_instance_private (panel);
+
+  g_return_if_fail (CC_IS_PANEL (panel));
+  g_return_if_fail (ADW_IS_NAVIGATION_PAGE (subpage));
+
+  adw_navigation_view_push (priv->navigation, subpage);
 }

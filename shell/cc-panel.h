@@ -90,4 +90,6 @@ GCancellable *cc_panel_get_cancellable    (CcPanel     *panel);
 
 void          cc_panel_deactivate         (CcPanel     *panel);
 
+void          cc_panel_push_subpage       (CcPanel     *panel,
+                                           AdwNavigationPage *subpage);
 G_END_DECLS
