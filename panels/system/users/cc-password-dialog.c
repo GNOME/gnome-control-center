@@ -40,7 +40,7 @@
 
 struct _CcPasswordDialog
 {
-        AdwWindow parent_instance;
+        AdwDialog parent_instance;
 
         GtkCheckButton    *action_login_radio;
         GtkCheckButton    *action_now_radio;
@@ -66,7 +66,7 @@ struct _CcPasswordDialog
         PasswdHandler      *passwd_handler;
 };
 
-G_DEFINE_TYPE (CcPasswordDialog, cc_password_dialog, ADW_TYPE_WINDOW)
+G_DEFINE_TYPE (CcPasswordDialog, cc_password_dialog, ADW_TYPE_DIALOG)
 
 static gint
 update_password_strength (CcPasswordDialog *self)
@@ -117,7 +117,7 @@ password_changed_cb (PasswdHandler    *handler,
         gtk_widget_set_sensitive (GTK_WIDGET (self), TRUE);
 
         if (!error) {
-                gtk_window_close (GTK_WINDOW (self));
+                adw_dialog_close (ADW_DIALOG (self));
                 return;
         }
 
@@ -185,7 +185,7 @@ ok_button_clicked_cb (CcPasswordDialog *self)
                         g_assert_not_reached ();
         }
 
-        gtk_window_close (GTK_WINDOW (self));
+        adw_dialog_close (ADW_DIALOG (self));
 }
 
 static void
@@ -468,7 +468,6 @@ CcPasswordDialog *
 cc_password_dialog_new (ActUser *user)
 {
         CcPasswordDialog *self;
-        GtkWindow *window;
 
         g_return_val_if_fail (ACT_IS_USER (user), NULL);
 
@@ -502,8 +501,7 @@ cc_password_dialog_new (ActUser *user)
         else
                 gtk_widget_grab_focus (GTK_WIDGET (self->password_entry));
 
-        window = (GtkWindow *) gtk_widget_get_native (GTK_WIDGET (self));
-        gtk_window_set_default_widget (window, GTK_WIDGET (self->ok_button));
+        adw_dialog_set_default_widget (ADW_DIALOG (self), GTK_WIDGET (self->ok_button));
 
         return self;
 }

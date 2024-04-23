@@ -317,12 +317,8 @@ static void
 change_password (CcUserPage *self)
 {
     CcPasswordDialog *dialog = cc_password_dialog_new (self->user);
-    GtkWindow *parent;
 
-    parent = (GtkWindow *)gtk_widget_get_native (GTK_WIDGET (self));
-    gtk_window_set_transient_for (GTK_WINDOW (dialog), parent);
-
-    gtk_window_present (GTK_WINDOW (dialog));
+    adw_dialog_present (ADW_DIALOG (dialog), GTK_WIDGET (self));
 }
 
 static void
