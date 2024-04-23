@@ -50,8 +50,11 @@ typedef struct
   gchar *subpage;
 } CcPanelPrivate;
 
+static GtkBuildableIface *parent_buildable_iface;
+static void cc_panel_buildable_init (GtkBuildableIface *iface);
+
 G_DEFINE_TYPE_WITH_CODE (CcPanel, cc_panel, ADW_TYPE_NAVIGATION_PAGE,
-                         G_ADD_PRIVATE (CcPanel))
+                         G_ADD_PRIVATE (CcPanel) G_IMPLEMENT_INTERFACE (GTK_TYPE_BUILDABLE, cc_panel_buildable_init))
 
 enum
 {
@@ -65,6 +68,21 @@ enum
 static GParamSpec *properties [N_PROPS];
 
 /* GtkBuildable interface */
+static void
+cc_panel_buildable_add_child (GtkBuildable *buildable,
+                              GtkBuilder   *builder,
+                              GObject      *child,
+                              const gchar  *type)
+{
+  adw_navigation_page_set_child (ADW_NAVIGATION_PAGE (buildable), GTK_WIDGET (child));
+}
+
+static void
+cc_panel_buildable_init (GtkBuildableIface *iface)
+{
+  parent_buildable_iface = g_type_interface_peek_parent (iface);
+  iface->add_child = cc_panel_buildable_add_child;
+}
 
 /* GObject overrides */
 
