@@ -611,10 +611,7 @@ on_got_rdp_credentials (GObject      *source_object,
   /* Fetch TLS certificate fingerprint */
   fingerprint = gsd_remote_desktop_rdp_server_get_tls_fingerprint (self->rdp_server);
 
-  if (fingerprint && strlen (fingerprint) > 0)
-     has_fingerprint = TRUE;
-  else
-     has_fingerprint = FALSE;
+  has_fingerprint = fingerprint && strlen (fingerprint) > 0;
 
   if (has_fingerprint)
     {
