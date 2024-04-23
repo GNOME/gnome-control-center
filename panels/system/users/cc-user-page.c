@@ -679,12 +679,24 @@ cc_user_page_class_init (CcUserPageClass * klass)
 static void
 cc_user_page_init (CcUserPage *self)
 {
+    g_autofree gchar *malcontent_control_path = NULL;
+
     gtk_widget_init_template (GTK_WIDGET (self));
 
     self->avatar_chooser = cc_avatar_chooser_new ();
     gtk_menu_button_set_popover (self->avatar_edit_button, GTK_WIDGET (self->avatar_chooser));
 
 #ifdef HAVE_MALCONTENT
+    /* Parental Controls: Unavailable if user is admin or if
+     * malcontent-control is not available (which can happen if
+     * libmalcontent is installed but malcontent-control is not). */
+    malcontent_control_path = g_find_program_in_path ("malcontent-control");
+    if (malcontent_control_path)
+        g_object_bind_property (self,
+                                "is-admin",
+                                self->parental_controls_row,
+                                "visible",
+                                G_BINDING_SYNC_CREATE | G_BINDING_INVERT_BOOLEAN);
     g_signal_connect_object (self->parental_controls_row,
                              "activated",
                              G_CALLBACK (spawn_malcontent_control),
@@ -708,9 +720,6 @@ cc_user_page_set_user (CcUserPage  *self,
 {
     gboolean is_admin = FALSE; 
     g_autofree gchar *user_language = NULL;
-#ifdef HAVE_MALCONTENT
-    g_autofree gchar *malcontent_control_path = NULL;
-#endif
 
     g_assert (CC_IS_USER_PAGE (self));
     g_assert (ACT_IS_USER (user));
@@ -737,12 +746,6 @@ cc_user_page_set_user (CcUserPage  *self,
     gtk_switch_set_active (self->account_type_switch, is_admin);
 
 #ifdef HAVE_MALCONTENT
-    /* Parental Controls: Unavailable if user is admin or if
-     * malcontent-control is not available (which can happen if
-     * libmalcontent is installed but malcontent-control is not). */
-    malcontent_control_path = g_find_program_in_path ("malcontent-control");
-    gtk_widget_set_visible (GTK_WIDGET (self->parental_controls_row),
-                            !(is_admin && malcontent_control_path));
     cc_list_row_set_secondary_label (self->parental_controls_row,
                                      is_parental_controls_enabled_for_user (user) ?
                                      /* TRANSLATORS: Status of Parental Controls setup */
