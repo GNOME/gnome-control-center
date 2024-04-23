@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2024-04-22 09:31+0000\n"
-"PO-Revision-Date: 2024-04-22 18:14+0700\n"
+"POT-Creation-Date: 2024-04-22 14:18+0000\n"
+"PO-Revision-Date: 2024-04-23 14:17+0700\n"
 "Last-Translator: Andika Triwidada <andika@gmail.com>\n"
 "Language-Team: Indonesian <gnome-l10n-id@googlegroups.com>\n"
 "Language: id\n"
@@ -24,36 +24,37 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Poedit 3.4.2\n"
 
-#: panels/applications/cc-applications-panel.c:783
+#: panels/applications/cc-applications-panel.c:784
 msgid "App is not sandboxed"
-msgstr "Aplikasi sepenuhnya di-sandbox"
+msgstr "Aplikasi tidak di-sandbox"
 
-#: panels/applications/cc-applications-panel.c:828
+#: panels/applications/cc-applications-panel.c:829
 msgid "System Bus"
 msgstr "Bus Sistem"
 
-#: panels/applications/cc-applications-panel.c:828
-#: panels/applications/cc-applications-panel.c:830
-#: panels/applications/cc-applications-panel.c:843
-#: panels/applications/cc-applications-panel.c:848
+#: panels/applications/cc-applications-panel.c:829
+#: panels/applications/cc-applications-panel.c:831
+#: panels/applications/cc-applications-panel.c:844
+#: panels/applications/cc-applications-panel.c:849
 msgid "Full access"
 msgstr "Akses penuh"
 
-#: panels/applications/cc-applications-panel.c:830
+#: panels/applications/cc-applications-panel.c:831
 msgid "Session Bus"
 msgstr "Bus Sesi"
 
-#: panels/applications/cc-applications-panel.c:834
-#: panels/privacy/cc-bolt-page.ui:240 panels/privacy/cc-bolt-page.ui:284
+#: panels/applications/cc-applications-panel.c:835
+#: panels/privacy/bolt/cc-bolt-page.ui:240
+#: panels/privacy/bolt/cc-bolt-page.ui:284
 #: panels/privacy/cc-privacy-panel.ui:75
 msgid "Devices"
 msgstr "Perangkat"
 
-#: panels/applications/cc-applications-panel.c:834
+#: panels/applications/cc-applications-panel.c:835
 msgid "Full access to /dev"
 msgstr "Akses penuh ke /dev"
 
-#: panels/applications/cc-applications-panel.c:838
+#: panels/applications/cc-applications-panel.c:839
 #: panels/network/cc-network-panel.ui:8
 #: panels/network/gnome-network-panel.desktop.in:3
 #: panels/network/network-mobile.ui:235 panels/wwan/cc-wwan-device-page.ui:61
@@ -61,38 +62,38 @@ msgstr "Akses penuh ke /dev"
 msgid "Network"
 msgstr "Jaringan"
 
-#: panels/applications/cc-applications-panel.c:838
+#: panels/applications/cc-applications-panel.c:839
 msgid "Has network access"
 msgstr "Memiliki akses jaringan"
 
-#: panels/applications/cc-applications-panel.c:843
-#: panels/applications/cc-applications-panel.c:845
+#: panels/applications/cc-applications-panel.c:844
+#: panels/applications/cc-applications-panel.c:846
 #: panels/search/cc-search-locations-dialog.c:412
 msgid "Home"
 msgstr "Rumah"
 
-#: panels/applications/cc-applications-panel.c:845
-#: panels/applications/cc-applications-panel.c:850
+#: panels/applications/cc-applications-panel.c:846
+#: panels/applications/cc-applications-panel.c:851
 msgid "Read-only"
 msgstr "Hanya-baca"
 
-#: panels/applications/cc-applications-panel.c:848
-#: panels/applications/cc-applications-panel.c:850
+#: panels/applications/cc-applications-panel.c:849
+#: panels/applications/cc-applications-panel.c:851
 msgid "File System"
 msgstr "Sistem Berkas"
 
-#: panels/applications/cc-applications-panel.c:854
+#: panels/applications/cc-applications-panel.c:855
 #: panels/keyboard/01-launchers.xml.in:6
-#: shell/appdata/org.gnome.Settings.appdata.xml.in:7 shell/cc-window.c:798
+#: shell/appdata/org.gnome.Settings.appdata.xml.in.in:7 shell/cc-window.c:798
 #: shell/cc-window.ui:20 shell/org.gnome.Settings.desktop.in:3
 msgid "Settings"
 msgstr "Pengaturan"
 
-#: panels/applications/cc-applications-panel.c:854
+#: panels/applications/cc-applications-panel.c:855
 msgid "Can change settings"
 msgstr "Dapat mengubah pengaturan"
 
-#: panels/applications/cc-applications-panel.c:856
+#: panels/applications/cc-applications-panel.c:857
 #, c-format
 msgid ""
 "<b>%s</b> requires access to the following system resources. To stop this "
@@ -101,22 +102,24 @@ msgstr ""
 "<b>%s</b> memerlukan akses ke sumber daya sistem berikut. Untuk menghentikan "
 "akses ini, aplikasi harus dihapus."
 
-#: panels/applications/cc-applications-panel.c:1188
-#, c-format
-msgid "%u file and link type that is opened by the app"
-msgid_plural "%u file and link types that are opened by the app"
-msgstr[0] "%u jenis berkas dan tautan yang dibuka oleh aplikasi"
+#: panels/applications/cc-applications-panel.c:1026
+msgid "Remove Link Type"
+msgstr "Hapus Jenis Tautan"
 
-#: panels/applications/cc-applications-panel.c:1195
+#: panels/applications/cc-applications-panel.c:1058
+msgid "Remove File Type"
+msgstr "Hapus Jenis Berkas"
+
+#: panels/applications/cc-applications-panel.c:1191
+#, c-format
+msgid "%u type"
+msgid_plural "%u types"
+msgstr[0] "%u tipe"
+
+#: panels/applications/cc-applications-panel.c:1198
 #, c-format
 msgid "<b>%s</b> is used to open the following types of files and links."
 msgstr "<b>%s</b> digunakan untuk membuka jenis berkas dan tautan berikut."
-
-#. Translators: '%s' is the formatted size, e.g. "26.2 MB"
-#: panels/applications/cc-applications-panel.c:1261
-#, c-format
-msgid "%s of disk space used"
-msgstr "%s ruang diska terpakai"
 
 #: panels/applications/cc-applications-panel.ui:10
 #: panels/applications/gnome-applications-panel.desktop.in:3
@@ -132,6 +135,7 @@ msgid "_Default Apps"
 msgstr "Aplikasi _Baku"
 
 #: panels/applications/cc-applications-panel.ui:62
+#: panels/search/cc-search-panel.ui:47
 msgid "No Apps Found"
 msgstr "Tidak Ada Aplikasi yang Ditemukan"
 
@@ -149,12 +153,12 @@ msgid "Removable Media"
 msgstr "Media Lepasan"
 
 #: panels/applications/cc-applications-panel.ui:122
-msgid "Automat_ically Launch Apps"
-msgstr "Secara Otomat_is Luncurkan Aplikasi"
+msgid "Med_ia Autostart"
+msgstr "Mulai Otomatis Med_ia"
 
 #: panels/applications/cc-applications-panel.ui:123
-msgid "Start apps when media is connected or inserted"
-msgstr "Memulai aplikasi saat media tersambung atau ditancapkan"
+msgid "Start apps or prompt when media is connected"
+msgstr "Memulai aplikasi atau bertanya saat media tersambung"
 
 #: panels/applications/cc-applications-panel.ui:144
 msgid "App Settings"
@@ -171,7 +175,7 @@ msgstr ""
 
 #: panels/applications/cc-applications-panel.ui:207
 #: panels/printers/pp-details-dialog.c:267
-#: panels/sharing/cc-sharing-panel.c:242
+#: panels/sharing/cc-sharing-panel.c:243
 msgid "_Open"
 msgstr "_Buka"
 
@@ -203,7 +207,7 @@ msgstr "Menerima pencarian sistem dan mengirim hasil"
 #: panels/applications/cc-applications-panel.ui:334
 #: panels/applications/cc-applications-panel.ui:349
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:123
-#: panels/keyboard/cc-xkb-modifier-dialog.c:342
+#: panels/keyboard/cc-xkb-modifier-dialog.c:328
 #: panels/keyboard/keyboard-shortcuts.c:367
 #: panels/system/users/cc-user-page.c:379
 #: panels/system/users/cc-user-page.c:749 panels/wwan/cc-wwan-device-page.c:477
@@ -305,64 +309,72 @@ msgstr "Akses sistem yang diperlukan oleh aplikasi"
 #: panels/applications/cc-applications-panel.ui:371
 #: panels/mouse/cc-mouse-panel.ui:66
 #: panels/multitasking/cc-multitasking-panel.ui:15
-#: panels/power/cc-power-panel.ui:171
+#: panels/power/cc-power-panel.ui:199
 msgid "General"
 msgstr "Umum"
 
 #: panels/applications/cc-applications-panel.ui:374
-msgid "_File &amp; Link Associations"
-msgstr "Asosiasi _Berkas &amp; Tautan"
+msgid "_Files &amp; Links"
+msgstr "_Berkas &amp; Tautan"
+
+#: panels/applications/cc-applications-panel.ui:375
+msgid "File and link types that are opened by the app"
+msgstr "Jenis berkas dan tautan yang dibuka oleh aplikasi"
 
 #: panels/applications/cc-applications-panel.ui:382
 msgid "S_torage"
 msgstr "_Penyimpanan"
 
+#: panels/applications/cc-applications-panel.ui:383
+msgid "Disk space being used"
+msgstr "Ruang diska yang digunakan"
+
 #: panels/applications/cc-applications-panel.ui:405
 msgid "Required Access"
 msgstr "Akses Yang Diperlukan"
 
-#: panels/applications/cc-applications-panel.ui:451
+#: panels/applications/cc-applications-panel.ui:435
 msgid "File & Link Associations"
 msgstr "Asosiasi Berkas & Tautan"
 
-#: panels/applications/cc-applications-panel.ui:480
+#: panels/applications/cc-applications-panel.ui:448
 msgid "File Types"
 msgstr "Jenis Berkas"
 
-#: panels/applications/cc-applications-panel.ui:486
+#: panels/applications/cc-applications-panel.ui:454
 msgid "Link Types"
 msgstr "Jenis Tautan"
 
-#: panels/applications/cc-applications-panel.ui:496
+#: panels/applications/cc-applications-panel.ui:464
 msgid "_Reset"
 msgstr "_Reset"
 
-#: panels/applications/cc-applications-panel.ui:517
+#: panels/applications/cc-applications-panel.ui:485
 msgid "Storage"
 msgstr "Penyimpanan"
 
-#: panels/applications/cc-applications-panel.ui:542
+#: panels/applications/cc-applications-panel.ui:494
 msgid "How much disk space this app is occupying with app data and caches"
 msgstr ""
 "Berapa banyak ruang diska yang ditempati oleh data dan singgahan aplikasi"
 
-#: panels/applications/cc-applications-panel.ui:547
+#: panels/applications/cc-applications-panel.ui:499
 msgid "App"
 msgstr "Aplikasi"
 
-#: panels/applications/cc-applications-panel.ui:553
+#: panels/applications/cc-applications-panel.ui:505
 msgid "Data"
 msgstr "Data"
 
-#: panels/applications/cc-applications-panel.ui:559
+#: panels/applications/cc-applications-panel.ui:511
 msgid "Cache"
 msgstr "Singgahan"
 
-#: panels/applications/cc-applications-panel.ui:565
+#: panels/applications/cc-applications-panel.ui:517
 msgid "<b>Total</b>"
 msgstr "<b>Total</b>"
 
-#: panels/applications/cc-applications-panel.ui:575
+#: panels/applications/cc-applications-panel.ui:527
 msgid "_Clear Cache"
 msgstr "_Bersihkan Singgahan"
 
@@ -399,6 +411,10 @@ msgstr "Panggi_lan"
 msgid "_SMS"
 msgstr "_SMS"
 
+#: panels/applications/cc-default-apps-row.c:126
+msgid "No Apps Available"
+msgstr "Tidak Ada Aplikasi yang Tersedia"
+
 #: panels/applications/cc-removable-media-settings.c:287
 msgid "Ask what to do"
 msgstr "Tanya apa yang akan dilakukan"
@@ -411,23 +427,23 @@ msgstr "Jangan lakukan apa pun"
 msgid "Open folder"
 msgstr "Buka folder"
 
-#: panels/applications/cc-removable-media-settings.c:386
+#: panels/applications/cc-removable-media-settings.c:381
 msgid "Select an app for audio CDs"
 msgstr "Pilih aplikasi bagi CD musik"
 
-#: panels/applications/cc-removable-media-settings.c:387
+#: panels/applications/cc-removable-media-settings.c:382
 msgid "Select an app for video DVDs"
 msgstr "Pilih aplikasi bagi DVD video"
 
-#: panels/applications/cc-removable-media-settings.c:388
+#: panels/applications/cc-removable-media-settings.c:383
 msgid "Select an app to run when a music player is connected"
 msgstr "Pilih aplikasi yang dijalankan ketika pemutar musik disambungkan"
 
-#: panels/applications/cc-removable-media-settings.c:389
+#: panels/applications/cc-removable-media-settings.c:384
 msgid "Select an app to run when a camera is connected"
 msgstr "Pilih aplikasi yang dijalankan ketika kamera disambungkan"
 
-#: panels/applications/cc-removable-media-settings.c:390
+#: panels/applications/cc-removable-media-settings.c:385
 msgid "Select an app for software CDs"
 msgstr "Pilih aplikasi bagi CD perangkat lunak"
 
@@ -436,51 +452,51 @@ msgstr "Pilih aplikasi bagi CD perangkat lunak"
 #. * If the shared-mime-info translation works for your language,
 #. * simply leave these untranslated.
 #.
-#: panels/applications/cc-removable-media-settings.c:402
+#: panels/applications/cc-removable-media-settings.c:397
 msgid "audio DVD"
 msgstr "DVD audio"
 
-#: panels/applications/cc-removable-media-settings.c:403
+#: panels/applications/cc-removable-media-settings.c:398
 msgid "blank Blu-ray disc"
 msgstr "diska Blu-ray kosong"
 
-#: panels/applications/cc-removable-media-settings.c:404
+#: panels/applications/cc-removable-media-settings.c:399
 msgid "blank CD disc"
 msgstr "diska CD kosong"
 
-#: panels/applications/cc-removable-media-settings.c:405
+#: panels/applications/cc-removable-media-settings.c:400
 msgid "blank DVD disc"
 msgstr "diska DVD kosong"
 
-#: panels/applications/cc-removable-media-settings.c:406
+#: panels/applications/cc-removable-media-settings.c:401
 msgid "blank HD DVD disc"
 msgstr "diska HD DVD kosong"
 
-#: panels/applications/cc-removable-media-settings.c:407
+#: panels/applications/cc-removable-media-settings.c:402
 msgid "Blu-ray video disc"
 msgstr "Diska video Blu-ray"
 
-#: panels/applications/cc-removable-media-settings.c:408
+#: panels/applications/cc-removable-media-settings.c:403
 msgid "e-book reader"
 msgstr "pembaca e-book"
 
-#: panels/applications/cc-removable-media-settings.c:409
+#: panels/applications/cc-removable-media-settings.c:404
 msgid "HD DVD video disc"
 msgstr "Diska video HD DVD"
 
-#: panels/applications/cc-removable-media-settings.c:410
+#: panels/applications/cc-removable-media-settings.c:405
 msgid "Picture CD"
 msgstr "CD gambar"
 
-#: panels/applications/cc-removable-media-settings.c:411
+#: panels/applications/cc-removable-media-settings.c:406
 msgid "Super Video CD"
 msgstr "CD Super Video"
 
-#: panels/applications/cc-removable-media-settings.c:412
+#: panels/applications/cc-removable-media-settings.c:407
 msgid "Video CD"
 msgstr "CD video"
 
-#: panels/applications/cc-removable-media-settings.c:413
+#: panels/applications/cc-removable-media-settings.c:408
 msgid "Windows software"
 msgstr "Perangkat lunak Windows"
 
@@ -505,22 +521,18 @@ msgid "Sof_tware"
 msgstr "_Perangkat Lunak"
 
 #: panels/applications/cc-removable-media-settings.ui:72
-msgid "_Other Media"
-msgstr "Media _Lain"
+msgid "_Other Media Types"
+msgstr "Tipe Media _Lain"
 
-#: panels/applications/cc-removable-media-settings.ui:74
-msgid "Select how other media should be handled"
-msgstr "Pilih bagaimana media lain mesti ditangani"
+#: panels/applications/cc-removable-media-settings.ui:90
+msgid "Other Media Types"
+msgstr "Tipe Media Lain"
 
-#: panels/applications/cc-removable-media-settings.ui:91
-msgid "Other Media"
-msgstr "Media Lain"
-
-#: panels/applications/cc-removable-media-settings.ui:123
+#: panels/applications/cc-removable-media-settings.ui:105
 msgid "_Type"
 msgstr "_Tipe"
 
-#: panels/applications/cc-removable-media-settings.ui:143
+#: panels/applications/cc-removable-media-settings.ui:125
 msgid "_Action"
 msgstr "_Aksi"
 
@@ -962,21 +974,22 @@ msgstr "Kalibrasi Tampilan"
 #: panels/common/cc-language-chooser.ui:21
 #: panels/display/cc-display-panel.ui:37 panels/display/cc-display-panel.ui:191
 #: panels/display/cc-display-panel.ui:253
-#: panels/keyboard/cc-input-chooser.ui:20
+#: panels/keyboard/cc-input-chooser.ui:14
 #: panels/keyboard/cc-keyboard-shortcut-dialog.c:381
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:15
 #: panels/network/cc-net-proxy-page.ui:14
 #: panels/network/cc-wifi-hotspot-dialog.ui:142
-#: panels/network/cc-wifi-panel.c:737
+#: panels/network/cc-wifi-panel.c:741
 #: panels/network/connection-editor/ce-page-details.c:100
 #: panels/network/connection-editor/connection-editor.ui:16
 #: panels/printers/new-printer-dialog.ui:54
-#: panels/printers/pp-details-dialog.c:266 panels/privacy/cc-usage-page.c:136
-#: panels/sharing/cc-sharing-panel.c:241
+#: panels/printers/pp-details-dialog.c:266
+#: panels/privacy/usage/cc-usage-page.c:136
+#: panels/sharing/cc-sharing-panel.c:242
 #: panels/system/region/cc-format-chooser.ui:24
-#: panels/system/users/cc-add-user-dialog.ui:34
-#: panels/system/users/cc-enterprise-login-dialog.ui:58
+#: panels/system/users/cc-add-user-dialog.ui:22
 #: panels/system/users/cc-avatar-chooser.c:92
+#: panels/system/users/cc-enterprise-login-dialog.ui:44
 #: panels/system/users/cc-fingerprint-dialog.ui:32
 #: panels/system/users/cc-password-dialog.ui:21
 #: panels/system/users/cc-user-page.ui:222
@@ -1000,7 +1013,7 @@ msgstr "Lanjut_kan"
 #. This button returns the user back to the color control panel
 #: panels/color/cc-color-calibrate.ui:40
 #: panels/system/region/cc-format-chooser.ui:49
-#: panels/system/users/cc-fingerprint-dialog.ui:57
+#: panels/system/users/cc-fingerprint-dialog.ui:51
 msgid "_Done"
 msgstr "_Selesai"
 
@@ -1062,57 +1075,57 @@ msgstr "Tak dikalibrasi"
 
 #. TRANSLATORS: this is a profile prefix to signify the
 #. * profile has been auto-generated for this hardware
-#: panels/color/cc-color-panel.c:162
+#: panels/color/cc-color-panel.c:161
 msgid "Default: "
 msgstr "Baku: "
 
 #. TRANSLATORS: this is a profile prefix to signify the
 #. * profile his a standard space like AdobeRGB
-#: panels/color/cc-color-panel.c:170
+#: panels/color/cc-color-panel.c:169
 msgid "Colorspace: "
 msgstr "Ruang warna: "
 
 #. TRANSLATORS: this is a profile prefix to signify the
 #. * profile is a test profile
-#: panels/color/cc-color-panel.c:177
+#: panels/color/cc-color-panel.c:176
 msgid "Test profile: "
 msgstr "Profil uji: "
 
 #. TRANSLATORS: an ICC profile is a file containing colorspace data
-#: panels/color/cc-color-panel.c:268
+#: panels/color/cc-color-panel.c:267
 msgid "Select ICC Profile File"
 msgstr "Pilih Berkas Profil ICC"
 
-#: panels/color/cc-color-panel.c:271
+#: panels/color/cc-color-panel.c:270
 msgid "Import"
 msgstr "Impor"
 
 #. TRANSLATORS: filter name on the file->open dialog
-#: panels/color/cc-color-panel.c:283
+#: panels/color/cc-color-panel.c:282
 msgid "Supported ICC profiles"
 msgstr "Profil ICC yang didukung"
 
 #. TRANSLATORS: filter name on the file->open dialog
-#: panels/color/cc-color-panel.c:290
+#: panels/color/cc-color-panel.c:289
 msgid "All files"
 msgstr "Semua berkas"
 
-#: panels/color/cc-color-panel.c:566
+#: panels/color/cc-color-panel.c:565
 msgid "Screen"
 msgstr "Layar"
 
 #. TRANSLATORS: this is the dialog to save the ICC profile
-#: panels/color/cc-color-panel.c:852
+#: panels/color/cc-color-panel.c:851
 msgid "Save Profile"
 msgstr "Simpan profil"
 
 #. TRANSLATORS: this is when the button is sensitive
-#: panels/color/cc-color-panel.c:1142
+#: panels/color/cc-color-panel.c:1141
 msgid "Create a color profile for the selected device"
 msgstr "Buat profil warna bagi perangkat yang dipilih"
 
 #. TRANSLATORS: this is when the button is insensitive
-#: panels/color/cc-color-panel.c:1157 panels/color/cc-color-panel.c:1181
+#: panels/color/cc-color-panel.c:1156 panels/color/cc-color-panel.c:1180
 msgid ""
 "The measuring instrument is not detected. Please check it is turned on and "
 "correctly connected."
@@ -1121,28 +1134,29 @@ msgstr ""
 "dari disambung dengan benar."
 
 #. TRANSLATORS: this is when the button is insensitive
-#: panels/color/cc-color-panel.c:1191
+#: panels/color/cc-color-panel.c:1190
 msgid "The measuring instrument does not support printer profiling."
 msgstr "Instrumen pengukur tak mendukung pembuatan profil pencetak."
 
 #. TRANSLATORS: this is when the button is insensitive
-#: panels/color/cc-color-panel.c:1202
+#: panels/color/cc-color-panel.c:1201
 msgid "The device type is not currently supported."
 msgstr "Jenis perangkat belum didukung."
 
 #. Translators: This will be presented as the text of a link to the documentation
 #. translators: Text used in link to privacy policy
-#: panels/color/cc-color-panel.c:1991 panels/privacy/cc-diagnostics-page.c:122
-msgid "Learn more"
-msgstr "Pelajari lebih jauh"
+#: panels/color/cc-color-panel.c:1992
+#: panels/privacy/diagnostics/cc-diagnostics-page.c:122
+msgid "learn more"
+msgstr "pelajari lebih lanjut"
 
-#. Translators: %s is a link to the documentation with the label "Learn more"
-#: panels/color/cc-color-panel.c:1993
+#. Translators: %s is a link to the documentation with the label "learn more"
+#: panels/color/cc-color-panel.c:1994
 #, c-format
-msgid "Each device needs an up to date color profile to be color managed. %s"
+msgid "Each device needs an up to date color profile to be color managed — %s."
 msgstr ""
-"Setiap perangkat perlu profil warna terkini untuk menjadi terkelola "
-"warnanya. %s"
+"Setiap perangkat perlu profil warna terkini untuk menjadi terkelola warnanya "
+"— %s."
 
 #: panels/color/cc-color-panel.ui:4 panels/wacom/calibrator/calibrator.ui:40
 msgid "Screen Calibration"
@@ -1163,10 +1177,10 @@ msgstr ""
 "kalibrasi, kualitas dari profil warna akan lebih baik."
 
 #: panels/color/cc-color-panel.ui:28
-msgid ""
-"You will not be able to use your computer while calibration takes place."
+msgid "You will not be able to use your device while calibration takes place."
 msgstr ""
-"Anda tak akan bisa memakai komputer Anda ketika kalibrasi dilangsungkan."
+"Anda tidak akan bisa memakai komputer Anda ketika kalibrasi sedang "
+"berlangsung."
 
 #. This is the approximate time it takes to calibrate the display.
 #: panels/color/cc-color-panel.ui:40
@@ -1232,7 +1246,7 @@ msgstr "Nama Profil"
 
 #: panels/color/cc-color-panel.ui:222
 msgid ""
-"You can use a color profile on different computers, or even create profiles "
+"You can use a color profile on different devices, or even create profiles "
 "for different lighting conditions."
 msgstr ""
 "Anda dapat memakai suatu profil warna pada komputer lain, atau bahkan "
@@ -1251,8 +1265,8 @@ msgid "Profile successfully created!"
 msgstr "Profil sukses dibuat!"
 
 #: panels/color/cc-color-panel.ui:290
-msgid "Copy profile"
-msgstr "Salin profil"
+msgid "Copy Profile"
+msgstr "Salin Profil"
 
 #: panels/color/cc-color-panel.ui:296
 msgid "Requires writable media"
@@ -1284,148 +1298,152 @@ msgstr ""
 msgid "_Import File…"
 msgstr "_Impor Berkas…"
 
-#: panels/color/cc-color-panel.ui:390 panels/keyboard/cc-input-chooser.ui:28
+#: panels/color/cc-color-panel.ui:390 panels/keyboard/cc-input-chooser.ui:22
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:33
 #: panels/network/connection-editor/net-connection-editor.c:653
 #: panels/printers/new-printer-dialog.ui:85
-#: panels/system/users/cc-add-user-dialog.ui:48
-#: panels/system/users/cc-enterprise-login-dialog.ui:66
+#: panels/system/users/cc-add-user-dialog.ui:36
+#: panels/system/users/cc-enterprise-login-dialog.ui:52
 msgid "_Add"
 msgstr "T_ambah"
 
-#: panels/color/cc-color-panel.ui:457
-msgid "_Set for all users"
-msgstr "Tata bagi _semua pengguna"
+#: panels/color/cc-color-panel.ui:442
+msgid "_Set for All Users"
+msgstr "Tata bagi _Semua Pengguna"
 
-#: panels/color/cc-color-panel.ui:459 panels/color/cc-color-panel.ui:468
-#: panels/color/cc-color-panel.ui:469
-msgid "Set this profile for all users on this computer"
+#: panels/color/cc-color-panel.ui:444 panels/color/cc-color-panel.ui:453
+#: panels/color/cc-color-panel.ui:454
+msgid "Set this profile for all users on this device"
 msgstr "Tata profil ini bagi semua pengguna pada komputer ini"
 
-#: panels/color/cc-color-panel.ui:466
+#: panels/color/cc-color-panel.ui:451
 msgid "_Enable"
 msgstr "Akti_fkan"
 
-#: panels/color/cc-color-panel.ui:483
-msgid "_Add profile"
-msgstr "T_ambah profil"
+#: panels/color/cc-color-panel.ui:468
+msgid "_Add Profile"
+msgstr "T_ambah Profil"
 
-#: panels/color/cc-color-panel.ui:490
+#: panels/color/cc-color-panel.ui:475
 msgid "_Calibrate…"
 msgstr "_Kalibrasi…"
 
-#: panels/color/cc-color-panel.ui:492
+#: panels/color/cc-color-panel.ui:477
 msgid "Calibrate the device"
 msgstr "Kalibrasikan perangkat"
 
-#: panels/color/cc-color-panel.ui:499
-msgid "_Remove profile"
-msgstr "Hapus p_rofil"
+#: panels/color/cc-color-panel.ui:484
+msgid "_Remove Profile"
+msgstr "Hapus P_rofil"
 
-#: panels/color/cc-color-panel.ui:506
-msgid "_View details"
-msgstr "Lihat rin_cian"
+#: panels/color/cc-color-panel.ui:491
+msgid "_View Details"
+msgstr "Lihat Rin_cian"
 
 #: panels/color/cc-color-panel.ui:519
+msgid "No Devices"
+msgstr "Tidak Ada Perangkat"
+
+#: panels/color/cc-color-panel.ui:520
 msgid "Unable to detect any devices that can be color managed"
 msgstr "Tak bisa mendeteksi sebarang perangkat yang dapat dikelola warnanya"
 
-#: panels/color/cc-color-panel.ui:560
+#: panels/color/cc-color-panel.ui:553
 msgid "LCD"
 msgstr "LCD"
 
-#: panels/color/cc-color-panel.ui:565
+#: panels/color/cc-color-panel.ui:558
 msgid "LED"
 msgstr "LED"
 
-#: panels/color/cc-color-panel.ui:570
+#: panels/color/cc-color-panel.ui:563
 msgid "CRT"
 msgstr "CRT"
 
-#: panels/color/cc-color-panel.ui:575
+#: panels/color/cc-color-panel.ui:568
 msgid "Projector"
 msgstr "Proyektor"
 
-#: panels/color/cc-color-panel.ui:580
+#: panels/color/cc-color-panel.ui:573
 msgid "Plasma"
 msgstr "Plasma"
 
-#: panels/color/cc-color-panel.ui:585
+#: panels/color/cc-color-panel.ui:578
 msgid "LCD (CCFL backlight)"
 msgstr "LCD (cahaya latar CCFL)"
 
-#: panels/color/cc-color-panel.ui:590
+#: panels/color/cc-color-panel.ui:583
 msgid "LCD (RGB LED backlight)"
 msgstr "LCD (cahaya lagar LED RGB)"
 
-#: panels/color/cc-color-panel.ui:595
+#: panels/color/cc-color-panel.ui:588
 msgid "LCD (white LED backlight)"
 msgstr "LCD (cahaya latar LED putih)"
 
-#: panels/color/cc-color-panel.ui:600
+#: panels/color/cc-color-panel.ui:593
 msgid "Wide gamut LCD (CCFL backlight)"
 msgstr "LCD gamut lebar (cahaya latar CCFL)"
 
-#: panels/color/cc-color-panel.ui:605
+#: panels/color/cc-color-panel.ui:598
 msgid "Wide gamut LCD (RGB LED backlight)"
 msgstr "LCD gamut lebar (cahaya latar LED RGB)"
 
-#: panels/color/cc-color-panel.ui:622
+#: panels/color/cc-color-panel.ui:615
 msgctxt "Calibration quality"
 msgid "High"
 msgstr "Tinggi"
 
-#: panels/color/cc-color-panel.ui:623
+#: panels/color/cc-color-panel.ui:616
 msgid "40 minutes"
 msgstr "40 menit"
 
-#: panels/color/cc-color-panel.ui:627
+#: panels/color/cc-color-panel.ui:620
 msgctxt "Calibration quality"
 msgid "Medium"
 msgstr "Sedang"
 
-#: panels/color/cc-color-panel.ui:628
+#: panels/color/cc-color-panel.ui:621
 msgid "30 minutes"
 msgstr "30 menit"
 
-#: panels/color/cc-color-panel.ui:632
+#: panels/color/cc-color-panel.ui:625
 msgctxt "Calibration quality"
 msgid "Low"
 msgstr "Rendah"
 
-#: panels/color/cc-color-panel.ui:633
+#: panels/color/cc-color-panel.ui:626
 msgid "15 minutes"
 msgstr "15 menit"
 
-#: panels/color/cc-color-panel.ui:655
+#: panels/color/cc-color-panel.ui:648
 msgid "Native to display"
 msgstr "Asli ke tampilan"
 
-#: panels/color/cc-color-panel.ui:659
+#: panels/color/cc-color-panel.ui:652
 msgid "D50 (Printing and publishing)"
 msgstr "D50 (Pencetakan dan penerbitan)"
 
-#: panels/color/cc-color-panel.ui:663
+#: panels/color/cc-color-panel.ui:656
 msgid "D55"
 msgstr "D55"
 
-#: panels/color/cc-color-panel.ui:667
+#: panels/color/cc-color-panel.ui:660
 msgid "D65 (Photography and graphics)"
 msgstr "D65 (Fotografi and grafis)"
 
-#: panels/color/cc-color-panel.ui:671
+#: panels/color/cc-color-panel.ui:664
 msgid "D75"
 msgstr "D75"
 
 #. TRANSLATORS: standard spaces are well known colorspaces like
 #. * sRGB, AdobeRGB and ProPhotoRGB
-#: panels/color/cc-color-profile.c:98
+#: panels/color/cc-color-profile.c:99
 msgid "Standard Space"
 msgstr "Ruang Standar"
 
 #. TRANSLATORS: test profiles do things like changing the screen
 #. * a different color, or swap the red and green channels
-#: panels/color/cc-color-profile.c:104
+#: panels/color/cc-color-profile.c:105
 msgid "Test Profile"
 msgstr "Profil Uji"
 
@@ -1433,7 +1451,7 @@ msgstr "Profil Uji"
 #. * by the color management system based on manufacturing data,
 #. * for instance the default monitor profile is created from the
 #. * primaries specified in the monitor EDID
-#: panels/color/cc-color-profile.c:112
+#: panels/color/cc-color-profile.c:113
 msgctxt "Automatically generated profile"
 msgid "Automatic"
 msgstr "Otomatis"
@@ -1441,13 +1459,13 @@ msgstr "Otomatis"
 #. TRANSLATORS: the profile quality - low quality profiles take
 #. * much less time to generate but may be a poor reflection of the
 #. * device capability
-#: panels/color/cc-color-profile.c:122
+#: panels/color/cc-color-profile.c:123
 msgctxt "Profile quality"
 msgid "Low Quality"
 msgstr "Kualitas Rendah"
 
 #. TRANSLATORS: the profile quality
-#: panels/color/cc-color-profile.c:127
+#: panels/color/cc-color-profile.c:128
 msgctxt "Profile quality"
 msgid "Medium Quality"
 msgstr "Kualitas Sedang"
@@ -1455,41 +1473,41 @@ msgstr "Kualitas Sedang"
 #. TRANSLATORS: the profile quality - high quality profiles take
 #. * a *long* time, and have the best calibration and
 #. * characterisation data.
-#: panels/color/cc-color-profile.c:134
+#: panels/color/cc-color-profile.c:135
 msgctxt "Profile quality"
 msgid "High Quality"
 msgstr "Kualitas Tinggi"
 
 #. TRANSLATORS: this default RGB space is used for printers that
 #. * do not have additional printer profiles specified in the PPD
-#: panels/color/cc-color-profile.c:151
+#: panels/color/cc-color-profile.c:152
 msgctxt "Colorspace fallback"
 msgid "Default RGB"
 msgstr "RGB bawaan"
 
 #. TRANSLATORS: this default CMYK space is used for printers that
 #. * do not have additional printer profiles specified in the PPD
-#: panels/color/cc-color-profile.c:158
+#: panels/color/cc-color-profile.c:159
 msgctxt "Colorspace fallback"
 msgid "Default CMYK"
 msgstr "CMYK bawaan"
 
 #. TRANSLATORS: this default gray space is used for printers that
 #. * do not have additional printer profiles specified in the PPD
-#: panels/color/cc-color-profile.c:165
+#: panels/color/cc-color-profile.c:166
 msgctxt "Colorspace fallback"
 msgid "Default Gray"
 msgstr "Kelabu bawaan"
 
-#: panels/color/cc-color-profile.c:188
+#: panels/color/cc-color-profile.c:189
 msgid "Vendor supplied factory calibration data"
 msgstr "Data kalibrasi dari pabrik yang disediakan oleh vendor"
 
-#: panels/color/cc-color-profile.c:197
+#: panels/color/cc-color-profile.c:198
 msgid "Full-screen display correction not possible with this profile"
 msgstr "Koreksi tampilan layar penuh tak mungkin dengan profil ini"
 
-#: panels/color/cc-color-profile.c:219
+#: panels/color/cc-color-profile.c:220
 msgid "This profile may no longer be accurate"
 msgstr "Profil ini mungkin tidak akurat lagi"
 
@@ -1521,7 +1539,6 @@ msgid "_Select"
 msgstr "_Pilih"
 
 #: panels/common/cc-language-chooser.ui:35
-#: panels/keyboard/cc-input-chooser.ui:42
 msgid "Language or country"
 msgstr "Bahasa atau negara"
 
@@ -1530,7 +1547,7 @@ msgid "No languages found"
 msgstr "Tak ada bahasa yang ditemukan"
 
 #: panels/common/cc-language-chooser.ui:70
-#: panels/keyboard/cc-input-chooser.c:184
+#: panels/keyboard/cc-input-chooser.c:183
 msgid "More…"
 msgstr "Lebih banyak…"
 
@@ -1539,16 +1556,15 @@ msgid "More Information"
 msgstr "Informasi Lebih Lanjut"
 
 #: panels/common/cc-permission-infobar.c:199
-#: panels/common/cc-permission-infobar.ui:7
-msgid "Error: some settings cannot be unlocked"
-msgstr "Galat: beberapa pengaturan tidak bisa dibuka kuncinya"
+msgid "Error — some settings cannot be unlocked"
+msgstr "Galat — beberapa pengaturan tidak bisa dibuka kuncinya"
 
 #: panels/common/cc-permission-infobar.c:202
 msgid "Unlock to Change Settings"
 msgstr "Buka Kunci untuk Mengubah Pengaturan"
 
 #: panels/common/cc-permission-infobar.c:205
-#: panels/common/cc-permission-infobar.ui:8
+#: panels/common/cc-permission-infobar.ui:7
 msgid "_Unlock…"
 msgstr "B_uka Kunci…"
 
@@ -1608,7 +1624,7 @@ msgid_plural "%d hours"
 msgstr[0] "%d jam"
 
 #. Translators: Option for "Blank Screen" in "Power" panel
-#: panels/common/cc-util.c:187 panels/power/cc-power-panel.c:790
+#: panels/common/cc-util.c:187 panels/power/cc-power-panel.c:764
 #, c-format
 msgid "%d minute"
 msgid_plural "%d minutes"
@@ -1668,13 +1684,13 @@ msgstr "Hotspot"
 
 #: panels/display/cc-display-panel.c:507
 #: panels/notifications/cc-notifications-panel.c:213
-#: panels/power/cc-power-panel.c:679 panels/power/cc-power-panel.c:686
+#: panels/power/cc-power-panel.c:653 panels/power/cc-power-panel.c:660
 msgid "On"
 msgstr "Nyala"
 
 #: panels/display/cc-display-panel.c:509 panels/network/cc-net-proxy-page.c:182
 #: panels/notifications/cc-notifications-panel.c:213
-#: panels/power/cc-power-panel.c:673 panels/power/cc-power-panel.c:684
+#: panels/power/cc-power-panel.c:647 panels/power/cc-power-panel.c:658
 msgid "Off"
 msgstr "Mati"
 
@@ -2065,20 +2081,24 @@ msgstr "Perkecil ukuran teks"
 msgid "High contrast on or off"
 msgstr "Nyalakan atau matikan kontras tinggi"
 
-#: panels/keyboard/cc-input-chooser.c:197
+#: panels/keyboard/cc-input-chooser.c:196
 msgid "No input sources found"
 msgstr "Sumber masukan tak ditemukan"
 
-#: panels/keyboard/cc-input-chooser.c:1033
+#: panels/keyboard/cc-input-chooser.c:1027
 msgctxt "Input Source"
 msgid "Other"
 msgstr "Lainnya"
 
-#: panels/keyboard/cc-input-chooser.ui:5
+#: panels/keyboard/cc-input-chooser.ui:4
 msgid "Add Input Source"
 msgstr "Tambah Sumber Masukan"
 
-#: panels/keyboard/cc-input-chooser.ui:57
+#: panels/keyboard/cc-input-chooser.ui:36
+msgid "Search languages and countries"
+msgstr "Cari bahasa dan negara"
+
+#: panels/keyboard/cc-input-chooser.ui:51
 msgid "Input methods can’t be used on the login screen"
 msgstr "Metoda masukan tak dapat dipakai pada layar log masuk"
 
@@ -2211,7 +2231,7 @@ msgctxt "keyboard key"
 msgid "Insert"
 msgstr "Insert"
 
-#: panels/keyboard/cc-keyboard-panel.c:216
+#: panels/keyboard/cc-keyboard-panel.c:213
 #, c-format
 msgid ""
 "Input sources can be switched using the %s keyboard shortcut.\n"
@@ -2290,10 +2310,12 @@ msgid "_Reset All…"
 msgstr "Atur _Ulang Semua…"
 
 #: panels/keyboard/cc-keyboard-shortcut-dialog.ui:93
-msgid "No keyboard shortcut found"
-msgstr "Tak ditemukan tombol pintas"
+#: panels/system/datetime/cc-tz-dialog.ui:42 shell/cc-panel-list.ui:44
+msgid "No Results Found"
+msgstr "Tidak Ditemukan Hasil"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:94 shell/cc-panel-list.ui:45
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:94
+#: panels/system/datetime/cc-tz-dialog.ui:43 shell/cc-panel-list.ui:45
 msgid "Try a different search"
 msgstr "Cobalah pencarian lain"
 
@@ -2371,7 +2393,6 @@ msgstr ""
 
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:131
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:233
-#: panels/keyboard/cc-keyboard-shortcut-row.ui:25
 msgid "Reset"
 msgstr "Atur Ulang"
 
@@ -2390,9 +2411,9 @@ msgstr "Pintasan"
 
 #. Translators: This is a mark in the Grayscale scale
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:247
-#: panels/sound/cc-alert-chooser-window.c:342
-#: panels/sound/cc-alert-chooser-window.ui:20
-#: panels/universal-access/cc-ua-zoom-page.ui:289
+#: panels/sound/cc-alert-chooser-window.c:340
+#: panels/sound/cc-alert-chooser-window.ui:17
+#: panels/universal-access/cc-ua-zoom-page.ui:285
 msgid "None"
 msgstr "Tak Ada"
 
@@ -2411,8 +2432,8 @@ msgid "Add a Shortcut"
 msgstr "Menambahkan Pintasan"
 
 #: panels/keyboard/cc-keyboard-shortcut-row.ui:23
-msgid "Reset the shortcut to its default value"
-msgstr "Tata ulang pintasan ke nilai baku"
+msgid "Reset Shortcut"
+msgstr "Atur Ulang Pintasan"
 
 #: panels/keyboard/gnome-keyboard-panel.desktop.in:3
 msgid "Keyboard"
@@ -2709,10 +2730,10 @@ msgstr "Mengelola preferensi untuk produktivitas dan multitasking"
 #. Translators: Search terms to find the Search panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/multitasking/gnome-multitasking-panel.desktop.in:15
 msgid ""
-"Multitasking;Multitask;Productivity;Customize;Desktop;Hot Corner;Workspaces;"
+"Multitasking;Multitask;Productivity;Customize;Desktop;Hot;Corner;Workspaces;"
 msgstr ""
-"Multitasking;Multitask;Produktivitas;Sesuaikan;Destop;Sudut Panas;Ruang "
-"kerja;"
+"Multitasking;Multitask;Produktivitas;Sesuaikan;Destop;Sudut;Panas;Ruang "
+"Kerja;"
 
 #: panels/network/cc-net-proxy-page.c:184
 #: panels/network/cc-net-proxy-page.ui:63
@@ -2733,7 +2754,7 @@ msgid "Manual"
 msgstr "Manual"
 
 #. xxx: Added to avoid confusion with the preceding VPN row
-#: panels/network/cc-net-proxy-page.ui:4 panels/network/cc-network-panel.ui:93
+#: panels/network/cc-net-proxy-page.ui:4 panels/network/cc-network-panel.ui:85
 msgid "Proxy"
 msgstr "Proksi"
 
@@ -2766,56 +2787,40 @@ msgid "HTTP Proxy"
 msgstr "Proksi HTTP"
 
 #: panels/network/cc-net-proxy-page.ui:113
-#: panels/network/cc-net-proxy-page.ui:142
-#: panels/network/cc-net-proxy-page.ui:171
-#: panels/network/cc-net-proxy-page.ui:200
+#: panels/network/cc-net-proxy-page.ui:139
+#: panels/network/cc-net-proxy-page.ui:165
+#: panels/network/cc-net-proxy-page.ui:191
 msgid "URL"
 msgstr "URL"
 
 #: panels/network/cc-net-proxy-page.ui:120
-#: panels/network/cc-net-proxy-page.ui:149
-#: panels/network/cc-net-proxy-page.ui:178
-#: panels/network/cc-net-proxy-page.ui:207
+#: panels/network/cc-net-proxy-page.ui:146
+#: panels/network/cc-net-proxy-page.ui:172
+#: panels/network/cc-net-proxy-page.ui:198
 msgid "Port"
 msgstr "Porta"
 
-#: panels/network/cc-net-proxy-page.ui:128
-msgid "HTTP proxy port"
-msgstr "Port proksi HTTP"
-
-#: panels/network/cc-net-proxy-page.ui:138
+#: panels/network/cc-net-proxy-page.ui:135
 msgid "HTTPS Proxy"
 msgstr "Proksi HTTPS"
 
-#: panels/network/cc-net-proxy-page.ui:157
-msgid "HTTPS proxy port"
-msgstr "Port proksi HTTPS"
-
-#: panels/network/cc-net-proxy-page.ui:167
+#: panels/network/cc-net-proxy-page.ui:161
 msgid "FTP Proxy"
 msgstr "Proksi FTP"
 
-#: panels/network/cc-net-proxy-page.ui:186
-msgid "FTP proxy port"
-msgstr "Port proksi FTP"
-
-#: panels/network/cc-net-proxy-page.ui:196
+#: panels/network/cc-net-proxy-page.ui:187
 msgid "SOCKS Host"
 msgstr "Host Socks"
 
-#: panels/network/cc-net-proxy-page.ui:215
-msgid "SOCKS host port"
-msgstr "Port host SOCKS"
-
-#: panels/network/cc-net-proxy-page.ui:226
+#: panels/network/cc-net-proxy-page.ui:214
 msgid "Ignored Hosts"
 msgstr "Host yang Diabaikan"
 
-#: panels/network/cc-network-panel.c:665
+#: panels/network/cc-network-panel.c:649
 msgid "Network Unavailable"
 msgstr "Jaringan Tidak Tersedia"
 
-#: panels/network/cc-network-panel.c:667
+#: panels/network/cc-network-panel.c:651
 msgid ""
 "An error has occurred and network cannot be used.\n"
 " Error details: NetworkManager not running."
@@ -2823,7 +2828,7 @@ msgstr ""
 "Telah terjadi galat dan jaringan tidak dapat digunakan.\n"
 " Detail galat: NetworkManager tidak berjalan."
 
-#: panels/network/cc-network-panel.ui:46 panels/network/cc-network-panel.ui:78
+#: panels/network/cc-network-panel.ui:46 panels/network/cc-network-panel.ui:72
 #: panels/network/connection-editor/net-connection-editor.c:743
 msgid "VPN"
 msgstr "VPN"
@@ -2833,11 +2838,11 @@ msgstr "VPN"
 msgid "Add VPN"
 msgstr "Tambah VPN"
 
-#: panels/network/cc-network-panel.ui:69
+#: panels/network/cc-network-panel.ui:62
 msgid "Not set up"
 msgstr "Belum ditata"
 
-#: panels/network/cc-network-panel.ui:96
+#: panels/network/cc-network-panel.ui:88
 msgid "_Proxy"
 msgstr "_Proksi"
 
@@ -2855,16 +2860,16 @@ msgstr "<b>Nama jaringan</b>: %s"
 msgid "<b>Password</b>: %s"
 msgstr "<b>Kata sandi</b>: %s"
 
-#: panels/network/cc-qr-code-dialog.ui:9
+#: panels/network/cc-qr-code-dialog.ui:6
 #: panels/network/cc-wifi-connection-row.ui:53
 msgid "Share Network"
 msgstr "Bagikan Jaringan"
 
-#: panels/network/cc-qr-code-dialog.ui:32
+#: panels/network/cc-qr-code-dialog.ui:29
 msgid "QR Code"
 msgstr "Kode QR"
 
-#: panels/network/cc-qr-code-dialog.ui:42
+#: panels/network/cc-qr-code-dialog.ui:39
 msgid "Scan to Connect"
 msgstr "Pindai untuk Terhubung"
 
@@ -2966,8 +2971,8 @@ msgstr "Nama Jaringan"
 #: panels/printers/new-printer-dialog.ui:293
 #: panels/printers/pp-jobs-dialog.ui:54
 #: panels/system/remote-desktop/cc-desktop-sharing-page.ui:109
-#: panels/system/remote-desktop/cc-remote-session-page.ui:108
-#: panels/system/users/cc-add-user-dialog.ui:159
+#: panels/system/remote-desktop/cc-remote-login-page.ui:108
+#: panels/system/users/cc-add-user-dialog.ui:147
 #: panels/wwan/cc-wwan-apn-dialog.ui:175
 msgid "Password"
 msgstr "Kata Sandi"
@@ -2984,23 +2989,23 @@ msgstr "Hasilkan Otomatis Kata Sandi"
 msgid "_Turn On"
 msgstr "Ak_tifkan"
 
-#: panels/network/cc-wifi-panel.c:403
+#: panels/network/cc-wifi-panel.c:407
 #: panels/network/gnome-wifi-panel.desktop.in:3
 #: panels/network/network-wifi.ui:61 panels/network/network-wifi.ui:70
 msgid "Wi-Fi"
 msgstr "Wi-Fi"
 
-#: panels/network/cc-wifi-panel.c:733
+#: panels/network/cc-wifi-panel.c:737
 msgid "Turning off will disconnect any devices that are using the hotspot."
 msgstr ""
 "Mematikan akan memutuskan sambungan perangkat apa pun yang menggunakan "
 "hotspot."
 
-#: panels/network/cc-wifi-panel.c:735
+#: panels/network/cc-wifi-panel.c:739
 msgid "Turn Off Hotspot?"
 msgstr "Matikan Hotspot?"
 
-#: panels/network/cc-wifi-panel.c:738
+#: panels/network/cc-wifi-panel.c:742
 msgid "_Turn Off"
 msgstr "_Matikan"
 
@@ -3013,42 +3018,50 @@ msgid "Disables Wi-Fi, Bluetooth and mobile broadband"
 msgstr "Nonaktifkan Wi-Fi, Bluetooth, dan data seluler"
 
 #: panels/network/cc-wifi-panel.ui:68
+msgid "Wi-Fi Off"
+msgstr "Wi-Fi Mati"
+
+#: panels/network/cc-wifi-panel.ui:69
+msgid "Turn on to use Wi-Fi"
+msgstr "Hidupkan untuk menggunakan Wi-Fi"
+
+#: panels/network/cc-wifi-panel.ui:82
 msgid "No Wi-Fi Adapter Found"
 msgstr "Tidak ada Adaptor Wifi yang Ditemukan"
 
-#: panels/network/cc-wifi-panel.ui:69
+#: panels/network/cc-wifi-panel.ui:83
 msgid "Make sure you have a Wi-Fi adapter plugged and turned on"
 msgstr "Pastikan adaptor Wi-Fi terpasang dan dinyalakan"
 
-#: panels/network/cc-wifi-panel.ui:82 panels/wwan/cc-wwan-panel.ui:64
+#: panels/network/cc-wifi-panel.ui:96 panels/wwan/cc-wwan-panel.ui:64
 msgid "Airplane Mode On"
 msgstr "Mode Pesawat Terbang Aktif"
 
-#: panels/network/cc-wifi-panel.ui:83
+#: panels/network/cc-wifi-panel.ui:97
 msgid "Turn off to use Wi-Fi"
 msgstr "Matikan untuk menggunakan Wi-Fi"
 
-#: panels/network/cc-wifi-panel.ui:118
+#: panels/network/cc-wifi-panel.ui:132
 msgid "Wi-Fi Hotspot Active"
 msgstr "Hotspot Wi-Fi Aktif"
 
-#: panels/network/cc-wifi-panel.ui:128
+#: panels/network/cc-wifi-panel.ui:142
 msgid "Mobile devices can scan the QR code to connect."
 msgstr "Perangkat seluler dapat memindai kode QR untuk terhubung."
 
-#: panels/network/cc-wifi-panel.ui:136
+#: panels/network/cc-wifi-panel.ui:150
 msgid "Turn Off Hotspot…"
 msgstr "Matikan Hotspot Wi-Fi…"
 
-#: panels/network/cc-wifi-panel.ui:156
+#: panels/network/cc-wifi-panel.ui:170
 msgid "Visible Networks"
 msgstr "Jaringan Terlihat"
 
-#: panels/network/cc-wifi-panel.ui:193
+#: panels/network/cc-wifi-panel.ui:207
 msgid "Wi-Fi Unavailable"
 msgstr "Wi-Fi Tidak Tersedia"
 
-#: panels/network/cc-wifi-panel.ui:194
+#: panels/network/cc-wifi-panel.ui:208
 msgid ""
 "An error has occurred and Wi-Fi cannot be used.\n"
 "    Error details: NetworkManager not running."
@@ -3063,7 +3076,7 @@ msgstr "_Keamanan 802.1x"
 #: panels/network/connection-editor/bluetooth-page.ui:16
 #: panels/network/connection-editor/ethernet-page.ui:27
 #: panels/network/connection-editor/vpn-page.ui:23
-#: panels/system/users/cc-add-user-dialog.ui:75
+#: panels/system/users/cc-add-user-dialog.ui:63
 #: panels/system/users/cc-user-page.ui:84
 msgid "_Name"
 msgstr "_Nama"
@@ -3372,8 +3385,8 @@ msgstr "WireGuard"
 
 #. Translators: Unknown endpoint host for WireGuard (invalid setting)
 #: panels/network/connection-editor/ce-page-wireguard.c:373
-#: panels/privacy/cc-firmware-security-dialog.c:168
-#: panels/sound/cc-alert-chooser-window.c:352
+#: panels/privacy/firmware-security/cc-firmware-security-dialog.c:167
+#: panels/sound/cc-alert-chooser-window.c:350
 #: panels/system/about/cc-about-page.c:73
 #: panels/system/about/cc-system-details-window.c:273
 #: panels/system/about/cc-system-details-window.c:325
@@ -3481,7 +3494,6 @@ msgid "Disable"
 msgstr "Nonaktifkan"
 
 #: panels/network/connection-editor/ip4-page.ui:81
-#: panels/network/connection-editor/ip6-page.ui:92
 msgid "Shared to other computers"
 msgstr "Berbagi dengan komputer lain"
 
@@ -3554,6 +3566,10 @@ msgstr "Metode IPv_6"
 #: panels/network/connection-editor/ip6-page.ui:48
 msgid "Automatic, DHCP only"
 msgstr "Otomatis, hanya DHCP"
+
+#: panels/network/connection-editor/ip6-page.ui:92
+msgid "Shared to other devices"
+msgstr "Dibagikan dengan komputer lain"
 
 #: panels/network/connection-editor/ip6-page.ui:142
 #: panels/network/connection-editor/ip6-page.ui:290
@@ -3714,7 +3730,6 @@ msgstr "Tidak ada peer yang disiapkan"
 #: panels/network/connection-editor/wireguard-peer.ui:46
 #: panels/network/net-device-ethernet.c:326
 #: panels/network/network-bluetooth.ui:19 panels/network/network-mobile.ui:329
-#: panels/network/network-vpn.ui:21
 msgid "Options…"
 msgstr "Opsi…"
 
@@ -3843,28 +3858,36 @@ msgstr "Kabel"
 msgid "Add new connection"
 msgstr "Tambah sambungan baru"
 
-#: panels/network/net-device-wifi.c:879
+#: panels/network/net-device-wifi.c:877
 msgid "Network deleted"
 msgstr "Jaringan dihapus"
 
-#: panels/network/net-device-wifi.c:881
+#: panels/network/net-device-wifi.c:879
 msgid "_Undo"
 msgstr "Ta_k Jadi"
 
 #. Translators: %d is the number of network connections deleted.
-#: panels/network/net-device-wifi.c:894
+#: panels/network/net-device-wifi.c:892
 #, c-format
 msgid "%d network deleted"
 msgid_plural "%d networks deleted"
 msgstr[0] "%d jaringan dihapus"
 
-#: panels/network/net-device-wifi.c:1140
+#: panels/network/net-device-wifi.c:1126
 msgid "System policy prohibits use as a Hotspot"
 msgstr "Kebijakan sistem melarang pemakaian sebagai Hotspot"
 
-#: panels/network/net-device-wifi.c:1143
+#: panels/network/net-device-wifi.c:1129
 msgid "Wireless device does not support Hotspot mode"
 msgstr "Perangkat nirkabel tak mendukung mode Hotspot"
+
+#: panels/network/net-device-wifi.c:1155
+msgid "Searching networks…"
+msgstr "Mencari jaringan…"
+
+#: panels/network/net-device-wifi.c:1172
+msgid "No saved networks"
+msgstr "Tidak ada jaringan yang disimpan"
 
 #: panels/network/network-ethernet.ui:8
 msgid "Add Ethernet Connection"
@@ -3887,9 +3910,9 @@ msgstr "Tak tersambung"
 msgid "Active"
 msgstr "Aktif"
 
-#: panels/network/network-vpn.ui:11
-msgid "Turn VPN connection off"
-msgstr "Matikan koneksi VPN"
+#: panels/network/network-vpn.ui:14
+msgid "VPN Options"
+msgstr "Opsi VPN"
 
 #: panels/network/network-wifi.ui:34
 msgctxt "Wi-Fi Hotspot"
@@ -3906,31 +3929,19 @@ msgctxt "Wi-Fi Hotspot"
 msgid "Password"
 msgstr "Kata Sandi"
 
-#: panels/network/network-wifi.ui:73
-msgid "Turn Wi-Fi off"
-msgstr "Matikan Wi-Fi"
-
-#: panels/network/network-wifi.ui:81
+#: panels/network/network-wifi.ui:78
 msgid "Saved Networks"
 msgstr "Jaringan Tersimpan"
 
-#: panels/network/network-wifi.ui:85
-msgid "Show Saved Networks"
-msgstr "Tampilkan Jaringan Tersimpan"
-
-#: panels/network/network-wifi.ui:93
+#: panels/network/network-wifi.ui:87
 msgid "_Connect to Hidden Network…"
 msgstr "_Menyambung ke Jaringan Tersembunyi…"
 
-#: panels/network/network-wifi.ui:97
-msgid "Connect to hidden network"
-msgstr "Menyambung ke jaringan tersembunyi"
-
-#: panels/network/network-wifi.ui:105
+#: panels/network/network-wifi.ui:96
 msgid "_Turn On Wi-Fi Hotspot…"
 msgstr "Hidupkan Ho_tspot Wi-Fi…"
 
-#: panels/network/network-wifi.ui:114
+#: panels/network/network-wifi.ui:105
 msgid "Saved Wi-Fi Networks"
 msgstr "Jaringan Wi-Fi yang Disimpan"
 
@@ -4190,23 +4201,23 @@ msgid "Cable unplugged"
 msgstr "Kabel tercabut"
 
 #. This is the per app switch for message tray usage.
-#: panels/notifications/cc-app-notifications-dialog.ui:21
+#: panels/notifications/cc-app-notifications-dialog.ui:17
 msgctxt "notifications"
 msgid "_Notifications"
 msgstr "_Notifikasi"
 
 #. This is the setting to configure sounds associated with notifications.
-#: panels/notifications/cc-app-notifications-dialog.ui:28
+#: panels/notifications/cc-app-notifications-dialog.ui:24
 msgctxt "notifications"
 msgid "Sound _Alerts"
 msgstr "Pering_atan Suara"
 
-#: panels/notifications/cc-app-notifications-dialog.ui:35
+#: panels/notifications/cc-app-notifications-dialog.ui:31
 msgctxt "notifications"
 msgid "Notification _Popups"
 msgstr "_Popup Notifikasi"
 
-#: panels/notifications/cc-app-notifications-dialog.ui:36
+#: panels/notifications/cc-app-notifications-dialog.ui:32
 msgid ""
 "Notifications will continue to appear in the notification list when popups "
 "are disabled"
@@ -4214,17 +4225,17 @@ msgstr ""
 "Notifikasi akan terus muncul di daftar notifikasi ketika popup dinonaktifkan"
 
 #. Popups here refers to message tray notifications in the middle of the screen.
-#: panels/notifications/cc-app-notifications-dialog.ui:43
+#: panels/notifications/cc-app-notifications-dialog.ui:39
 msgctxt "notifications"
 msgid "Show Message _Content in Popups"
 msgstr "Tam_pilkan Isi Pesan dalam Popup"
 
-#: panels/notifications/cc-app-notifications-dialog.ui:50
+#: panels/notifications/cc-app-notifications-dialog.ui:46
 msgctxt "notifications"
 msgid "_Lock Screen Notifications"
 msgstr "Notifikasi _Layar Kunci"
 
-#: panels/notifications/cc-app-notifications-dialog.ui:57
+#: panels/notifications/cc-app-notifications-dialog.ui:53
 msgctxt "notifications"
 msgid "Show Message C_ontent on Lock Screen"
 msgstr "_Tampilkan Isi Pesan dalam Layar Kunci"
@@ -4256,29 +4267,87 @@ msgstr "Kendalikan notifikasi mana yang ditampilkan dan apa yang ditunjukkan"
 msgid "Notifications;Banner;Message;Tray;Popup;"
 msgstr "Notifikasi;Banner;Pesan;Baki;Popup;"
 
-#: panels/online-accounts/cc-online-account-provider-row.c:55
+#: panels/online-accounts/cc-online-account-provider-row.c:57
+msgid "Nextcloud"
+msgstr "Nextcloud"
+
+#: panels/online-accounts/cc-online-account-provider-row.c:57
+msgid "Calendar, contacts, files"
+msgstr "Kalender, kontak, dan berkas"
+
+#: panels/online-accounts/cc-online-account-provider-row.c:58
+msgid "Google"
+msgstr "Google"
+
+#: panels/online-accounts/cc-online-account-provider-row.c:58
+msgid "Email, calendar, contacts, files"
+msgstr "Surel, kalender, kontak, berkas"
+
+#: panels/online-accounts/cc-online-account-provider-row.c:59
+msgid "Microsoft"
+msgstr "Microsoft"
+
+#: panels/online-accounts/cc-online-account-provider-row.c:59
 msgid "Email"
 msgstr "Surel"
 
-#. IMAP and SMTP
-#: panels/online-accounts/cc-online-account-provider-row.c:56
+#: panels/online-accounts/cc-online-account-provider-row.c:60
+msgid "Microsoft 365"
+msgstr "Microsoft 365"
+
+#: panels/online-accounts/cc-online-account-provider-row.c:60
+msgid "Files"
+msgstr "Berkas"
+
+#: panels/online-accounts/cc-online-account-provider-row.c:61
+msgid "Microsoft Exchange"
+msgstr "Microsoft Exchange"
+
+#: panels/online-accounts/cc-online-account-provider-row.c:61
+msgid "Email, calendar, contacts"
+msgstr "Surel, kalender, kontak"
+
+#: panels/online-accounts/cc-online-account-provider-row.c:62
+msgid "Fedora"
+msgstr "Fedora"
+
+#: panels/online-accounts/cc-online-account-provider-row.c:62
+msgid "Enterprise authentication"
+msgstr "Autentikasi enterprise"
+
+#: panels/online-accounts/cc-online-account-provider-row.c:63
+msgid "Email Server"
+msgstr "Server Surel"
+
+#: panels/online-accounts/cc-online-account-provider-row.c:63
+msgid "IMAP/SMTP"
+msgstr "IMAP/SMTP"
+
+#: panels/online-accounts/cc-online-account-provider-row.c:64
 msgid "Calendar, Contacts and Files"
 msgstr "Kalender, Kontak, dan Berkas"
 
-#. WebDAV
-#. Nextcloud
-#. Google
-#. Microsoft 365
-#. Microsoft Exchange
-#. Microsoft Personal
-#: panels/online-accounts/cc-online-account-provider-row.c:62
-msgid "Enterprise Login"
-msgstr "Log Masuk Enterprise"
+#: panels/online-accounts/cc-online-account-provider-row.c:64
+msgid "WebDAV"
+msgstr "WebDAV"
 
-#: panels/online-accounts/cc-online-account-provider-row.c:136
+#: panels/online-accounts/cc-online-account-provider-row.c:65
+msgid "Enterprise Authentication"
+msgstr "Autentikasi Enterprise"
+
+#: panels/online-accounts/cc-online-account-provider-row.c:65
+msgid "Kerberos"
+msgstr "Kerberos"
+
+#: panels/online-accounts/cc-online-account-provider-row.c:75
+#: panels/online-accounts/cc-online-account-provider-row.c:138
 msgctxt "Online Account"
 msgid "Other"
 msgstr "Lainnya"
+
+#: panels/online-accounts/cc-online-account-row.ui:24
+msgid "Error"
+msgstr "Galat"
 
 #: panels/online-accounts/cc-online-accounts-panel.ui:16
 msgid "Offline — unable to connect accounts"
@@ -4460,60 +4529,59 @@ msgstr "Ekstra"
 msgid "%d %%"
 msgstr "%d %%"
 
-#: panels/power/cc-power-panel.c:201
+#: panels/power/cc-power-panel.c:188
 msgid "Battery Levels"
 msgstr "Tingkat Baterai"
 
 #. Translators: UPS is an Uninterruptible Power Supply:
 #. * https://en.wikipedia.org/wiki/Uninterruptible_power_supply
-#: panels/power/cc-power-panel.c:206
+#: panels/power/cc-power-panel.c:193
 msgid "UPS"
 msgstr "UPS"
 
-#: panels/power/cc-power-panel.c:209
+#: panels/power/cc-power-panel.c:196
 msgid "Battery Level"
 msgstr "Tingkat Baterai"
 
-#: panels/power/cc-power-panel.c:463
+#: panels/power/cc-power-panel.c:450
 msgid "When _Idle"
 msgstr "Ket_ika Menganggur"
 
-#: panels/power/cc-power-panel.c:616
+#: panels/power/cc-power-panel.c:590
 msgid "Suspend"
 msgstr "Suspensi"
 
-#: panels/power/cc-power-panel.c:617
+#: panels/power/cc-power-panel.c:591
 msgid "Power Off"
 msgstr "Matikan"
 
-#: panels/power/cc-power-panel.c:618
+#: panels/power/cc-power-panel.c:592
 msgid "Hibernate"
 msgstr "Hibernasi"
 
-#: panels/power/cc-power-panel.c:619
+#: panels/power/cc-power-panel.c:593
 msgid "Nothing"
 msgstr "Bukan apapun"
 
-#: panels/power/cc-power-panel.c:675
-msgid "When on battery power"
-msgstr "Ketika memakai baterai"
+#: panels/power/cc-power-panel.c:649
+msgid "On Battery Power"
+msgstr "Memakai Daya Baterai"
 
-#: panels/power/cc-power-panel.c:677
-msgid "When plugged in"
-msgstr "Ketika ditancapkan"
+#: panels/power/cc-power-panel.c:651
+msgid "When Plugged In"
+msgstr "Ketika Ditancapkan"
 
-#: panels/power/cc-power-panel.c:797
+#: panels/power/cc-power-panel.c:771
 msgctxt "Idle time"
 msgid "Never"
 msgstr "Tak pernah"
 
-#: panels/power/cc-power-panel.c:975
-msgid ""
-"Performance mode temporarily disabled due to high operating temperature."
+#: panels/power/cc-power-panel.c:949
+msgid "Performance mode temporarily disabled due to high operating temperature"
 msgstr ""
-"Mode kinerja dinonaktifkan sementara karena suhu pengoperasian yang tinggi."
+"Mode kinerja dinonaktifkan sementara karena suhu pengoperasian yang tinggi"
 
-#: panels/power/cc-power-panel.c:977
+#: panels/power/cc-power-panel.c:951
 msgid ""
 "Lap detected: performance mode temporarily unavailable. Move the device to a "
 "stable surface to restore."
@@ -4521,29 +4589,29 @@ msgstr ""
 "Putaran terdeteksi: mode kinerja untuk sementara tidak tersedia. Pindahkan "
 "perangkat ke permukaan yang stabil untuk memulihkan."
 
-#: panels/power/cc-power-panel.c:979
-msgid "Performance mode temporarily disabled."
-msgstr "Mode kinerja dinonaktifkan untuk sementara."
+#: panels/power/cc-power-panel.c:953
+msgid "Performance mode temporarily disabled"
+msgstr "Mode kinerja dinonaktifkan untuk sementara"
 
-#: panels/power/cc-power-panel.c:1021
+#: panels/power/cc-power-panel.c:995
 msgid ""
-"Low battery: power saver enabled. Previous mode will be restored when "
-"battery is sufficiently charged."
+"Power saver enabled due to low battery. Previous mode will be restored when "
+"battery is charged."
 msgstr ""
-"Baterai rendah: penghemat daya diaktifkan. Mode sebelumnya akan dipulihkan "
-"ketika baterai terisi cukup."
+"Penghemat daya diaktifkan karena baterai lemah. Mode sebelumnya akan "
+"dipulihkan ketika baterai terisi cukup."
 
 #. translators: "%s" is an application name
-#: panels/power/cc-power-panel.c:1029
+#: panels/power/cc-power-panel.c:1003
 #, c-format
-msgid "Power Saver mode activated by “%s”."
-msgstr "Mode Penghemat Daya diaktifkan oleh \"%s\"."
+msgid "Power Saver mode activated by “%s”"
+msgstr "Mode Penghemat Daya diaktifkan oleh \"%s\""
 
 #. translators: "%s" is an application name
-#: panels/power/cc-power-panel.c:1033
+#: panels/power/cc-power-panel.c:1007
 #, c-format
-msgid "Performance mode activated by “%s”."
-msgstr "Mode kinerja diaktifkan oleh \"%s\"."
+msgid "Performance mode activated by “%s”"
+msgstr "Mode kinerja diaktifkan oleh \"%s\""
 
 #. Translators: Option for "Delay" in "Automatic suspend" dialog.
 #: panels/power/cc-power-panel.ui:12
@@ -4605,87 +4673,111 @@ msgctxt "automatic_suspend"
 msgid "2 hours"
 msgstr "2 jam"
 
-#: panels/power/cc-power-panel.ui:80
+#. Translators: Option for "Delay" in "Automatic suspend" dialog.
+#: panels/power/cc-power-panel.ui:63
+msgctxt "automatic_suspend"
+msgid "1 minute"
+msgstr "1 menit"
+
+#. Translators: Option for "Delay" in "Automatic suspend" dialog.
+#: panels/power/cc-power-panel.ui:67
+msgctxt "automatic_suspend"
+msgid "2 minutes"
+msgstr "2 menit"
+
+#. Translators: Option for "Delay" in "Automatic suspend" dialog.
+#: panels/power/cc-power-panel.ui:71
+msgctxt "automatic_suspend"
+msgid "5 minutes"
+msgstr "5 menit"
+
+#. Translators: Option for "Delay" in "Automatic suspend" dialog.
+#: panels/power/cc-power-panel.ui:75
+msgctxt "automatic_suspend"
+msgid "10 minutes"
+msgstr "10 menit"
+
+#: panels/power/cc-power-panel.ui:108
 msgid "Connected Devices"
 msgstr "Perangkat Yang Tersambung"
 
-#: panels/power/cc-power-panel.ui:98
+#: panels/power/cc-power-panel.ui:126
 msgid "Power Mode"
 msgstr "Mode Daya"
 
-#: panels/power/cc-power-panel.ui:126
+#: panels/power/cc-power-panel.ui:154
 msgid "Power Saving"
 msgstr "Penghematan Daya"
 
-#: panels/power/cc-power-panel.ui:129
+#: panels/power/cc-power-panel.ui:157
 msgid "A_utomatic Screen Brightness"
 msgstr "Kecerahan Layar _Otomatis"
 
-#: panels/power/cc-power-panel.ui:130
+#: panels/power/cc-power-panel.ui:158
 msgid "Adjust screen brightness to the surrounding light"
 msgstr "Menyesuaikan kecerahan layar dengan cahaya sekitar"
 
-#: panels/power/cc-power-panel.ui:137
+#: panels/power/cc-power-panel.ui:165
 msgid "_Dim Screen"
 msgstr "Re_dupkan Layar"
 
-#: panels/power/cc-power-panel.ui:138
-msgid "Reduce screen brightness when the computer is inactive"
+#: panels/power/cc-power-panel.ui:166
+msgid "Reduce screen brightness when the device is inactive"
 msgstr "Kurangi kecerahan layar saat komputer tidak aktif"
 
-#: panels/power/cc-power-panel.ui:144
+#: panels/power/cc-power-panel.ui:172
 msgid "Screen _Blank"
 msgstr "_Pengosongan Layar"
 
-#: panels/power/cc-power-panel.ui:145
+#: panels/power/cc-power-panel.ui:173
 msgid "Turn the screen off after a period of inactivity"
 msgstr "Mematikan layar setelah suatu periode tidak aktif"
 
-#: panels/power/cc-power-panel.ui:153
+#: panels/power/cc-power-panel.ui:181
 msgid "Automatic Power _Saver"
 msgstr "Penghemat Daya Otomati_s"
 
-#: panels/power/cc-power-panel.ui:154
+#: panels/power/cc-power-panel.ui:182
 msgid "Turn on power saver mode when battery power is low"
 msgstr "Mengaktifkan mode penghemat daya saat baterai rendah"
 
-#: panels/power/cc-power-panel.ui:161
+#: panels/power/cc-power-panel.ui:189
 msgid "_Automatic Suspend"
 msgstr "Suspensi Otom_atis"
 
-#: panels/power/cc-power-panel.ui:162
-msgid "Pause the computer after a period of inactivity"
+#: panels/power/cc-power-panel.ui:190
+msgid "Pause the device after a period of inactivity"
 msgstr "Menjeda komputer setelah suatu periode tidak aktif"
 
-#: panels/power/cc-power-panel.ui:175
+#: panels/power/cc-power-panel.ui:203
 msgid "Po_wer Button Behavior"
 msgstr "Perilaku Tombol Da_ya"
 
-#: panels/power/cc-power-panel.ui:183
+#: panels/power/cc-power-panel.ui:211
 msgid "Show Battery _Percentage"
 msgstr "Tampilkan _Persentase Baterai"
 
-#: panels/power/cc-power-panel.ui:184
+#: panels/power/cc-power-panel.ui:212
 msgid "Show exact charge level in the top bar"
 msgstr "Tampilkan tingkat eksak pengisian daya di bilah atas"
 
-#: panels/power/cc-power-panel.ui:197
+#: panels/power/cc-power-panel.ui:225
 msgid "Automatic Suspend"
 msgstr "Suspensi Otomatis"
 
-#: panels/power/cc-power-panel.ui:226
+#: panels/power/cc-power-panel.ui:238
 msgid "On _Battery Power"
 msgstr "Memakai Tenaga _Baterai"
 
-#: panels/power/cc-power-panel.ui:233
+#: panels/power/cc-power-panel.ui:245
 msgid "_Delay"
 msgstr "Tun_da"
 
-#: panels/power/cc-power-panel.ui:251
-msgid "_Plugged In"
-msgstr "Ditanca_pkan"
+#: panels/power/cc-power-panel.ui:263
+msgid "When _Plugged In"
+msgstr "Ketika Ditanca_pkan"
 
-#: panels/power/cc-power-panel.ui:257
+#: panels/power/cc-power-panel.ui:269
 msgid "D_elay"
 msgstr "T_unda"
 
@@ -4807,7 +4899,7 @@ msgstr "Tambah Pencetak"
 
 #: panels/printers/new-printer-dialog.ui:67
 #: panels/system/region/cc-format-chooser.ui:37
-#: panels/system/users/cc-fingerprint-dialog.ui:44
+#: panels/system/users/cc-fingerprint-dialog.ui:38
 #: panels/wwan/cc-wwan-apn-dialog.ui:21
 msgid "Back"
 msgstr "Mundur"
@@ -4844,7 +4936,7 @@ msgstr ""
 #: panels/printers/new-printer-dialog.ui:272
 #: panels/printers/pp-jobs-dialog.ui:42
 #: panels/system/remote-desktop/cc-desktop-sharing-page.ui:93
-#: panels/system/remote-desktop/cc-remote-session-page.ui:92
+#: panels/system/remote-desktop/cc-remote-login-page.ui:92
 #: panels/wwan/cc-wwan-apn-dialog.ui:150
 msgid "Username"
 msgstr "Nama Pengguna"
@@ -4877,7 +4969,7 @@ msgid "Printer names cannot contain SPACE, TAB, #, or /"
 msgstr "Nama pencetak tidak boleh berisi SPACE, TAB, #, atau /"
 
 #: panels/printers/pp-details-dialog.ui:75 panels/printers/printer-entry.ui:97
-#: panels/privacy/cc-location-page.ui:4
+#: panels/privacy/location/cc-location-page.ui:4
 msgid "Location"
 msgstr "Lokasi"
 
@@ -5074,6 +5166,11 @@ msgstr "_Autentikasikan"
 #: panels/printers/pp-jobs-dialog.ui:221
 msgid "No Active Printer Jobs"
 msgstr "Tidak Ada Tugas Pencetak Yang Aktif"
+
+#. Translators: Name of job which makes printer to autoconfigure itself
+#: panels/printers/pp-new-printer.c:1200
+msgid "Automatic configuration"
+msgstr "Konfigurasi otomatis"
 
 #: panels/printers/pp-new-printer-dialog.c:269
 msgid "Unlock Print Server"
@@ -5395,13 +5492,13 @@ msgid "Processing"
 msgstr "Memroses"
 
 #: panels/printers/printer-entry.ui:69
-#: panels/system/about/cc-system-details-window.ui:74
+#: panels/system/about/cc-system-details-window.ui:71
 #: panels/wwan/cc-wwan-details-dialog.ui:184
 msgid "Model"
 msgstr "Model"
 
 #: panels/printers/printer-entry.ui:124
-#: panels/privacy/cc-bolt-device-dialog.ui:25
+#: panels/privacy/bolt/cc-bolt-device-dialog.ui:25
 msgid "Status"
 msgstr "Status"
 
@@ -5441,131 +5538,131 @@ msgstr "Bersihkan Kepala Cetak"
 msgid "Remove Printer"
 msgstr "Hapus Pencetak"
 
-#: panels/privacy/cc-bolt-device-dialog.c:79
-#: panels/privacy/cc-bolt-device-entry.c:121
+#: panels/privacy/bolt/cc-bolt-device-dialog.c:79
+#: panels/privacy/bolt/cc-bolt-device-entry.c:121
 msgctxt "Thunderbolt Device Status"
 msgid "Disconnected"
 msgstr "Terputus"
 
-#: panels/privacy/cc-bolt-device-dialog.c:82
-#: panels/privacy/cc-bolt-device-entry.c:124
+#: panels/privacy/bolt/cc-bolt-device-dialog.c:82
+#: panels/privacy/bolt/cc-bolt-device-entry.c:124
 msgctxt "Thunderbolt Device Status"
 msgid "Connecting"
 msgstr "Menyambung"
 
-#: panels/privacy/cc-bolt-device-dialog.c:85
-#: panels/privacy/cc-bolt-device-entry.c:128
-#: panels/privacy/cc-bolt-device-entry.c:140
+#: panels/privacy/bolt/cc-bolt-device-dialog.c:85
+#: panels/privacy/bolt/cc-bolt-device-entry.c:128
+#: panels/privacy/bolt/cc-bolt-device-entry.c:140
 msgctxt "Thunderbolt Device Status"
 msgid "Connected"
 msgstr "Tersambung"
 
-#: panels/privacy/cc-bolt-device-dialog.c:88
+#: panels/privacy/bolt/cc-bolt-device-dialog.c:88
 msgctxt "Thunderbolt Device Status"
 msgid "Authorization Error"
 msgstr "Galat Autorisasi"
 
-#: panels/privacy/cc-bolt-device-dialog.c:91
-#: panels/privacy/cc-bolt-device-entry.c:134
+#: panels/privacy/bolt/cc-bolt-device-dialog.c:91
+#: panels/privacy/bolt/cc-bolt-device-entry.c:134
 msgctxt "Thunderbolt Device Status"
 msgid "Authorizing"
 msgstr "Mengotorisasi"
 
-#: panels/privacy/cc-bolt-device-dialog.c:98
+#: panels/privacy/bolt/cc-bolt-device-dialog.c:98
 msgctxt "Thunderbolt Device Status"
 msgid "Reduced Functionality"
 msgstr "Fungsionalitas Dikurangi"
 
-#: panels/privacy/cc-bolt-device-dialog.c:100
+#: panels/privacy/bolt/cc-bolt-device-dialog.c:100
 msgctxt "Thunderbolt Device Status"
 msgid "Connected & Authorized"
 msgstr "Tersambung & Terotorisasi"
 
-#: panels/privacy/cc-bolt-device-dialog.c:106
-#: panels/privacy/cc-bolt-device-entry.c:148
+#: panels/privacy/bolt/cc-bolt-device-dialog.c:106
+#: panels/privacy/bolt/cc-bolt-device-entry.c:148
 msgctxt "Thunderbolt Device Status"
 msgid "Unknown"
 msgstr "Tidak Diketahui"
 
 #. Translators: The time point the device was authorized.
-#: panels/privacy/cc-bolt-device-dialog.c:161
+#: panels/privacy/bolt/cc-bolt-device-dialog.c:161
 msgid "Authorized at"
 msgstr "Diotorisasi di"
 
 #. Translators: The time point the device was connected.
-#: panels/privacy/cc-bolt-device-dialog.c:167
+#: panels/privacy/bolt/cc-bolt-device-dialog.c:167
 msgid "Connected at"
 msgstr "Tersambung pada"
 
 #. Translators: The time point the device was enrolled,
 #. * i.e. authorized and stored in the device database.
-#: panels/privacy/cc-bolt-device-dialog.c:174
+#: panels/privacy/bolt/cc-bolt-device-dialog.c:174
 msgid "Enrolled at"
 msgstr "Terdaftar di"
 
-#: panels/privacy/cc-bolt-device-dialog.c:248
+#: panels/privacy/bolt/cc-bolt-device-dialog.c:248
 msgid "Failed to authorize device: "
 msgstr "Gagal mengotorisasi perangkat: "
 
-#: panels/privacy/cc-bolt-device-dialog.c:315
+#: panels/privacy/bolt/cc-bolt-device-dialog.c:315
 msgid "Failed to forget device: "
 msgstr "Gagal melupakan perangkat: "
 
-#: panels/privacy/cc-bolt-device-dialog.c:455
+#: panels/privacy/bolt/cc-bolt-device-dialog.c:455
 #, c-format
 msgid "Depends on %u other device"
 msgid_plural "Depends on %u other devices"
 msgstr[0] "Tergantung pada%u perangkat lain"
 
-#: panels/privacy/cc-bolt-device-dialog.ui:4
+#: panels/privacy/bolt/cc-bolt-device-dialog.ui:4
 msgid "Device Identifier"
 msgstr "Pengenal Perangkat"
 
-#: panels/privacy/cc-bolt-device-dialog.ui:30
+#: panels/privacy/bolt/cc-bolt-device-dialog.ui:30
 msgid "UUID"
 msgstr "UUID"
 
-#: panels/privacy/cc-bolt-device-dialog.ui:35
+#: panels/privacy/bolt/cc-bolt-device-dialog.ui:35
 msgid "Timestamp"
 msgstr "Stempel Waktu"
 
-#: panels/privacy/cc-bolt-device-dialog.ui:43
+#: panels/privacy/bolt/cc-bolt-device-dialog.ui:43
 msgid "Depends on other devices"
 msgstr "Bergantung pada perangkat lain"
 
-#: panels/privacy/cc-bolt-device-dialog.ui:73
+#: panels/privacy/bolt/cc-bolt-device-dialog.ui:73
 msgid "Authorize and Connect"
 msgstr "Autorisasikan dan Sambungkan"
 
-#: panels/privacy/cc-bolt-device-dialog.ui:88
+#: panels/privacy/bolt/cc-bolt-device-dialog.ui:88
 msgid "Forget Device"
 msgstr "Lupakan Perangkat"
 
-#: panels/privacy/cc-bolt-device-entry.c:131
+#: panels/privacy/bolt/cc-bolt-device-entry.c:131
 msgctxt "Thunderbolt Device Status"
 msgid "Error"
 msgstr "Galat"
 
-#: panels/privacy/cc-bolt-device-entry.c:142
+#: panels/privacy/bolt/cc-bolt-device-entry.c:142
 msgctxt "Thunderbolt Device Status"
 msgid "Authorized"
 msgstr "Terotorisasi"
 
-#: panels/privacy/cc-bolt-page.c:219
+#: panels/privacy/bolt/cc-bolt-page.c:219
 msgid ""
 "The Thunderbolt subsystem (boltd) is not installed or not set up properly."
 msgstr ""
 "Subsistem Thunderbolt (boltd) tidak dipasang atau tidak diatur dengan benar."
 
-#: panels/privacy/cc-bolt-page.c:475
+#: panels/privacy/bolt/cc-bolt-page.c:475
 msgid "Allow direct access to devices such as docks and external GPUs."
 msgstr "Izinkan akses langsung ke perangkat seperti dok dan GPU eksternal."
 
-#: panels/privacy/cc-bolt-page.c:476
+#: panels/privacy/bolt/cc-bolt-page.c:476
 msgid "Only USB and Display Port devices can attach."
 msgstr "Hanya perangkat USB dan Display Port yang dapat dipasang."
 
-#: panels/privacy/cc-bolt-page.c:511
+#: panels/privacy/bolt/cc-bolt-page.c:511
 msgid ""
 "Thunderbolt could not be detected.\n"
 "Either the system lacks Thunderbolt support, it has been disabled in the "
@@ -5576,69 +5673,69 @@ msgstr ""
 "dinonaktifkan di BIOS atau diatur ke tingkat keamanan yang tidak didukung di "
 "BIOS."
 
-#: panels/privacy/cc-bolt-page.c:555
+#: panels/privacy/bolt/cc-bolt-page.c:555
 msgid "Thunderbolt support has been disabled in the BIOS."
 msgstr "Dukungan Thunderbolt telah dinonaktifkan di BIOS."
 
-#: panels/privacy/cc-bolt-page.c:559
+#: panels/privacy/bolt/cc-bolt-page.c:559
 msgid "Thunderbolt security level could not be determined."
 msgstr "Tingkat keamanan thunderbolt tidak dapat ditentukan."
 
-#: panels/privacy/cc-bolt-page.c:679
+#: panels/privacy/bolt/cc-bolt-page.c:679
 #, c-format
 msgid "Error switching direct mode: %s"
 msgstr "Galat saat mengalihkan mode langsung: %s"
 
-#: panels/privacy/cc-bolt-page.ui:4
+#: panels/privacy/bolt/cc-bolt-page.ui:4
 msgid "Thunderbolt"
 msgstr "Thunderbolt"
 
-#: panels/privacy/cc-bolt-page.ui:48
+#: panels/privacy/bolt/cc-bolt-page.ui:48
 msgid "Close notification"
 msgstr "Tutup notifikasi"
 
-#: panels/privacy/cc-bolt-page.ui:109
+#: panels/privacy/bolt/cc-bolt-page.ui:109
 msgid "No Thunderbolt Support"
 msgstr "Tidak Ada Dukungan Thunderbolt"
 
-#: panels/privacy/cc-bolt-page.ui:110
+#: panels/privacy/bolt/cc-bolt-page.ui:110
 msgid "Could not connect to the thunderbolt subsystem"
 msgstr "Tidak bisa menyambung ke sub sistem thunderbolt"
 
-#: panels/privacy/cc-bolt-page.ui:127
+#: panels/privacy/bolt/cc-bolt-page.ui:127
 msgid "Direct Access"
 msgstr "Akses Langsung"
 
-#: panels/privacy/cc-bolt-page.ui:130
+#: panels/privacy/bolt/cc-bolt-page.ui:130
 msgid "Allow direct access to devices such as docks and external GPUs"
 msgstr "Izinkan akses langsung ke perangkat seperti dok dan GPU eksternal"
 
-#: panels/privacy/cc-bolt-page.ui:199
+#: panels/privacy/bolt/cc-bolt-page.ui:199
 msgid "Pending Devices"
 msgstr "Perangkat Tertunda"
 
-#: panels/privacy/cc-bolt-page.ui:293
+#: panels/privacy/bolt/cc-bolt-page.ui:293
 msgid "No devices attached"
 msgstr "Tidak ada perangkat yang terpasang"
 
-#: panels/privacy/cc-camera-page.ui:4
+#: panels/privacy/camera/cc-camera-page.ui:4
 msgid "Cameras"
 msgstr "Kamera"
 
-#: panels/privacy/cc-camera-page.ui:17
+#: panels/privacy/camera/cc-camera-page.ui:17
 msgid "_Camera Access"
 msgstr "Akses _Kamera"
 
-#: panels/privacy/cc-camera-page.ui:18
+#: panels/privacy/camera/cc-camera-page.ui:18
 msgid "Allow permitted apps to use cameras"
 msgstr "Perbolehkan aplikasi yang diizinkan untuk menggunakan kamera"
 
-#: panels/privacy/cc-camera-page.ui:27 panels/privacy/cc-location-page.ui:55
-#: panels/privacy/cc-microphone-page.ui:27
+#: panels/privacy/camera/cc-camera-page.ui:27
+#: panels/privacy/location/cc-location-page.ui:55
 msgid "Permitted Apps"
 msgstr "Aplikasi yang Diizinkan"
 
-#: panels/privacy/cc-camera-page.ui:28
+#: panels/privacy/camera/cc-camera-page.ui:28
 msgid ""
 "The following sandboxed apps have been given permission to use cameras. Apps "
 "that are not sandboxed can use cameras without asking for permission."
@@ -5646,486 +5743,9 @@ msgstr ""
 "Aplikasi yang di-sandbox berikut telah diberi izin untuk menggunakan kamera. "
 "Aplikasi yang tidak di-sandbox dapat menggunakan kamera tanpa meminta izin."
 
-#: panels/privacy/cc-camera-page.ui:42
+#: panels/privacy/camera/cc-camera-page.ui:38
 msgid "No sandboxed apps have asked for camera access"
 msgstr "Tidak ada aplikasi di-sandbox yang meminta akses kamera"
-
-#. translators: The first '%s' is the distributor's name, such as 'Fedora', the second '%s' is a link to the privacy policy
-#: panels/privacy/cc-diagnostics-page.c:124
-#, c-format
-msgid ""
-"Sending reports of technical problems helps us improve %s. Reports are sent "
-"anonymously and are scrubbed of personal data. %s"
-msgstr ""
-"Mengirim laporan masalah teknis membantu kami memperbaiki %s. Laporan "
-"dikirim secara anonim dan dibersihkan dari data pribadi. %s"
-
-#: panels/privacy/cc-diagnostics-page.ui:4
-msgid "Diagnostics"
-msgstr "Diagnostik"
-
-#: panels/privacy/cc-diagnostics-page.ui:15
-msgid "Problem Reporting"
-msgstr "Pelaporan Masalah"
-
-#: panels/privacy/cc-diagnostics-page.ui:18
-msgid "_Automatic Problem Reporting"
-msgstr "Pelaporan Masalah Otom_atis"
-
-#. TRANSLATORS: secure boot refers to the system firmware security mode
-#: panels/privacy/cc-firmware-security-boot-dialog.c:72
-#: panels/privacy/cc-firmware-security-page.c:122
-msgid "Secure Boot is Active"
-msgstr "Secure Boot Aktif"
-
-#. TRANSLATORS: this is the first section of the decription
-#: panels/privacy/cc-firmware-security-boot-dialog.c:77
-msgid ""
-"Secure boot prevents malicious software from being loaded when the device "
-"starts. It is currently turned on and is functioning correctly."
-msgstr ""
-"Secure boot mencegah perangkat lunak berbahaya dimuat saat perangkat mulai. "
-"Saat ini dihidupkan dan berfungsi dengan benar."
-
-#. TRANSLATORS: secure boot refers to the system firmware security mode
-#: panels/privacy/cc-firmware-security-boot-dialog.c:83
-msgid "Secure Boot Has Problems"
-msgstr "Secure Boot Memiliki Masalah"
-
-#. TRANSLATORS: this is the first section of the decription.
-#: panels/privacy/cc-firmware-security-boot-dialog.c:87
-msgid ""
-"Secure boot prevents malicious software from being loaded when the device "
-"starts. It is currently turned on, but will not work due to having an "
-"invalid key."
-msgstr ""
-"Secure boot mencegah perangkat lunak berbahaya dimuat saat perangkat mulai. "
-"Saat ini dihidupkan, tetapi tidak akan berfungsi karena memiliki kunci yang "
-"tidak valid."
-
-#. TRANSLATORS: this is the second section of description.
-#: panels/privacy/cc-firmware-security-boot-dialog.c:90
-msgid ""
-"Secure boot problems can often be resolved from your computer's UEFI "
-"firmware settings (BIOS) and your hardware manufacturer may provide "
-"information on how to do this."
-msgstr ""
-"Masalah secure boot seringkali dapat diselesaikan dari pengaturan perangkat "
-"tegar UEFI (BIOS) komputer Anda dan produsen perangkat keras Anda dapat "
-"memberikan informasi tentang cara melakukannya."
-
-#. TRANSLATORS: this is the third section of description.
-#: panels/privacy/cc-firmware-security-boot-dialog.c:93
-msgid "For help, contact your hardware manufacturer or IT support provider."
-msgstr ""
-"Untuk bantuan, hubungi produsen perangkat keras atau penyedia dukungan TI "
-"Anda."
-
-#. TRANSLATORS: secure boot refers to the system firmware security mode
-#: panels/privacy/cc-firmware-security-boot-dialog.c:99
-msgid "Secure Boot is Turned Off"
-msgstr "Secure Boot Dimatikan"
-
-#. TRANSLATORS: this is the first section of the description.
-#: panels/privacy/cc-firmware-security-boot-dialog.c:103
-msgid ""
-"Secure boot prevents malicious software from being loaded when the device "
-"starts. It is currently turned off."
-msgstr ""
-"Secure boot mencegah perangkat lunak berbahaya dimuat saat perangkat mulai. "
-"Saat ini dihidupkan dan berfungsi dengan benar."
-
-#. TRANSLATORS: this is the second section of the description.
-#: panels/privacy/cc-firmware-security-boot-dialog.c:106
-msgid ""
-"Secure boot can often be turned on from your computer's UEFI firmware "
-"settings (BIOS). For help, contact your hardware manufacturer or IT support "
-"provider."
-msgstr ""
-"Secure boot sering kali dapat dihidupkan dari pengaturan perangkat tegar "
-"UEFI (BIOS) komputer Anda. Untuk bantuan, hubungi produsen perangkat keras "
-"atau penyedia dukungan TI Anda."
-
-#: panels/privacy/cc-firmware-security-boot-dialog.ui:55
-msgid ""
-"Secure boot prevents malicious software from being loaded when the device "
-"starts.\n"
-"\n"
-"For more information, contact the hardware manufacturer or IT support."
-msgstr ""
-"Secure boot mencegah perangkat lunak berbahaya dimuat saat perangkat mulai.\n"
-"\n"
-"Untuk informasi lebih lanjut, hubungi produsen perangkat keras atau dukungan "
-"TI."
-
-#. TRANSLATORS: in reference to firmware protection: 0/4 stars
-#: panels/privacy/cc-firmware-security-dialog.c:106
-#: panels/privacy/cc-firmware-security-page.c:541
-msgid "Checks Failed"
-msgstr "Pemeriksaan Gagal"
-
-#. TRANSLATORS: This is the description to describe the failure on
-#. checking the security items.
-#: panels/privacy/cc-firmware-security-dialog.c:109
-msgid ""
-"Hardware does not pass checks. This means that you are not protected against "
-"common hardware security issues.\n"
-"\n"
-"It may be possible to resolve hardware security issues by updating your "
-"firmware or changing device configuration options. However, failures can "
-"stem from the physical hardware itself, and may not be reversible."
-msgstr ""
-"Perangkat keras tidak lulus pemeriksaan. Ini berarti bahwa Anda tidak "
-"dilindungi terhadap masalah keamanan perangkat keras umum.\n"
-"\n"
-"Dimungkinkan untuk mengatasi masalah keamanan perangkat keras dengan "
-"memperbarui firmware Anda atau mengubah opsi konfigurasi perangkat. Namun, "
-"kegagalan dapat berasal dari perangkat keras fisik itu sendiri, dan mungkin "
-"tidak dapat dibalik."
-
-#. TRANSLATORS: in reference to firmware protection: 1/4 stars
-#: panels/privacy/cc-firmware-security-dialog.c:120
-#: panels/privacy/cc-firmware-security-page.c:548
-msgid "Checks Passed"
-msgstr "Pemeriksaan Lulus"
-
-#. TRANSLATORS: This description describes the device passing the
-#. minimum requirement of security check.
-#: panels/privacy/cc-firmware-security-dialog.c:123
-msgid ""
-"This device meets basic security requirements. Its hardware has protection "
-"against some of the most common security threats."
-msgstr ""
-"Perangkat ini memenuhi persyaratan keamanan dasar. Perangkat kerasnya "
-"memiliki perlindungan terhadap beberapa ancaman keamanan yang paling umum."
-
-#. TRANSLATORS: in reference to firmware protection: 2~4 stars
-#: panels/privacy/cc-firmware-security-dialog.c:134
-#: panels/privacy/cc-firmware-security-page.c:557
-msgid "Protected"
-msgstr "Terproteksi"
-
-#. TRANSLATOR: This description describes the devices passing
-#. the extended security check.
-#: panels/privacy/cc-firmware-security-dialog.c:137
-msgid ""
-"This device passes current security tests. Its hardware is protected against "
-"the majority of security threats."
-msgstr ""
-"Perangkat ini lulus uji keamanan saat ini. Perangkat kerasnya dilindungi "
-"dari sebagian besar ancaman keamanan."
-
-#. TRANSLATORS: in reference to firmware protection: ??? stars
-#: panels/privacy/cc-firmware-security-dialog.c:145
-#: panels/privacy/cc-firmware-security-page.c:564
-msgid "Checks Unavailable"
-msgstr "Pemeriksaan Tidak Tersedia"
-
-#. TRANSLATORS: When the security result is unavailable, this description is shown.
-#: panels/privacy/cc-firmware-security-dialog.c:147
-msgid ""
-"Device security checks are not available for this device. It is not possible "
-"to tell whether it meets security requirements."
-msgstr ""
-"Pemeriksaan keamanan perangkat tidak tersedia untuk perangkat ini. Tidak "
-"mungkin untuk mengetahui apakah itu memenuhi persyaratan keamanan."
-
-#: panels/privacy/cc-firmware-security-dialog.c:367
-msgid "Report copied to clipboard"
-msgstr "Laporan disalin ke papan klip"
-
-#: panels/privacy/cc-firmware-security-dialog.ui:65
-msgid "_Copy Technical Report"
-msgstr "_Salin Laporan Teknis"
-
-#: panels/privacy/cc-firmware-security-help-dialog.ui:4
-#: panels/privacy/cc-firmware-security-page.ui:12
-msgid "About Device Security"
-msgstr "Tentang Keamanan Perangkat"
-
-#: panels/privacy/cc-firmware-security-help-dialog.ui:27
-msgid ""
-"Device security provides information about how protected your device is "
-"against security issues which target the hardware itself.\n"
-"\n"
-"Aspects of hardware that affect security include:\n"
-"\n"
-"• security features that are built into a hardware itself;\n"
-"• how the hardware is configured to protect against security issues;\n"
-"• the security of the software runs directly on the hardware.\n"
-"\n"
-"Security threats which affect hardware include malware and viruses that "
-"target the software that runs directly on the hardware. It also includes "
-"physical tampering, such as physical connection to the hardware to read data "
-"and implant malware.\n"
-"\n"
-"Device security is just one aspect of security, and does not reflect the "
-"overall security status of the system and applications."
-msgstr ""
-"Keamanan perangkat memberikan informasi tentang seberapa terlindungi "
-"perangkat Anda dari masalah keamanan yang menargetkan perangkat keras itu "
-"sendiri.\n"
-"\n"
-"Aspek perangkat keras yang mempengaruhi keamanan meliputi:\n"
-"\n"
-"• fitur keamanan yang dibangun ke dalam perangkat keras itu sendiri;\n"
-"• bagaimana perangkat keras dikonfigurasikan untuk melindungi dari masalah "
-"keamanan;\n"
-"• keamanan perangkat lunak berjalan langsung pada perangkat keras.\n"
-"\n"
-"Ancaman keamanan yang memengaruhi perangkat keras termasuk malware dan virus "
-"yang menargetkan perangkat lunak yang berjalan langsung di perangkat keras. "
-"Ini juga mencakup gangguan fisik, seperti koneksi fisik ke perangkat keras "
-"untuk membaca data dan menanamkan malware.\n"
-"\n"
-"Keamanan perangkat hanyalah salah satu aspek keamanan, dan tidak "
-"mencerminkan status keamanan sistem dan aplikasi secara keseluruhan."
-
-#: panels/privacy/cc-firmware-security-page.c:123
-msgid "Protected against malicious software when the device starts."
-msgstr "Dilindungi dari perangkat lunak berbahaya saat perangkat dimulai."
-
-#: panels/privacy/cc-firmware-security-page.c:129
-msgid "Secure Boot has Problems"
-msgstr "Secure Boot memiliki Masalah"
-
-#: panels/privacy/cc-firmware-security-page.c:130
-msgid "Some protection when the device is started."
-msgstr "Beberapa perlindungan saat perangkat dimulai."
-
-#: panels/privacy/cc-firmware-security-page.c:135
-msgid "Secure Boot is Off"
-msgstr "Secure Boot Dimatikan"
-
-#: panels/privacy/cc-firmware-security-page.c:136
-msgid "No protection when the device is started."
-msgstr "Tidak ada perlindungan saat perangkat dimulai."
-
-#. TRANSLATORS: this is to explain an event that has already happened
-#: panels/privacy/cc-firmware-security-page.c:155
-msgid ""
-"This issue could have been caused by a change in UEFI firmware settings, an "
-"operating system configuration change, or because of malicious software on "
-"this system."
-msgstr ""
-"Masalah ini bisa disebabkan oleh perubahan pengaturan perangkat tegar UEFI, "
-"perubahan konfigurasi sistem operasi, atau karena perangkat lunak berbahaya "
-"pada sistem ini."
-
-#. TRANSLATORS: this is to explain an event that has already happened
-#: panels/privacy/cc-firmware-security-page.c:163
-msgid ""
-"This issue could have been caused by a change in the UEFI firmware settings, "
-"or because of malicious software on this system."
-msgstr ""
-"Masalah ini bisa disebabkan oleh perubahan dalam pengaturan perangkat tegar "
-"UEFI, atau karena perangkat lunak berbahaya pada sistem ini."
-
-#. TRANSLATORS: this is to explain an event that has already happened
-#: panels/privacy/cc-firmware-security-page.c:170
-msgid ""
-"This issue could have been caused by an operating system configuration "
-"change, or because of malicious software on this system."
-msgstr ""
-"Masalah ini bisa disebabkan oleh perubahan konfigurasi sistem operasi, atau "
-"karena perangkat lunak berbahaya pada sistem ini."
-
-#. TRANSLATOR: this is the date in "%Y-%m-%d %H:%M:%S" format,
-#. for example: 2022-08-01 22:48:00
-#: panels/privacy/cc-firmware-security-page.c:228
-#, c-format
-msgid "%1$s"
-msgstr "%1$s"
-
-#. TRANSLATOR: This is the text event status output when the event status is "success"
-#: panels/privacy/cc-firmware-security-page.c:234
-msgid "Pass"
-msgstr "Lulus"
-
-#. TRANSLATOR: This is the text event status output when the event status is not "success"
-#: panels/privacy/cc-firmware-security-page.c:237
-msgid "! Fail"
-msgstr "! Gagal"
-
-#: panels/privacy/cc-firmware-security-page.c:240
-#, c-format
-msgid "(%1$s → %2$s)"
-msgstr "(%1$s → %2$s)"
-
-#: panels/privacy/cc-firmware-security-page.c:542
-msgid "Hardware does not pass checks."
-msgstr "Perangkat keras tidak lulus pemeriksaan."
-
-#: panels/privacy/cc-firmware-security-page.c:549
-msgid "Hardware meets basic security requirements."
-msgstr "Perangkat keras memenuhi persyaratan keamanan dasar."
-
-#: panels/privacy/cc-firmware-security-page.c:558
-msgid "Hardware has a good level of protection."
-msgstr "Perangkat keras memiliki tingkat perlindungan yang baik."
-
-#: panels/privacy/cc-firmware-security-page.c:565
-msgid "Security levels are not available for this device."
-msgstr "Tingkat keamanan tidak tersedia untuk perangkat ini."
-
-#: panels/privacy/cc-firmware-security-page.ui:4
-msgid "Device Security"
-msgstr "Keamanan Perangkat"
-
-#: panels/privacy/cc-firmware-security-page.ui:57
-msgid "Starting Device Security…"
-msgstr "Memulai Keamanan Perangkat…"
-
-#: panels/privacy/cc-firmware-security-page.ui:83
-msgid "Device Security Unavailable"
-msgstr "Keamanan Perangkat Tidak Tersedia"
-
-#: panels/privacy/cc-firmware-security-page.ui:85
-msgid ""
-"Device Security is only available on physical hardware. No physical hardware "
-"has been detected."
-msgstr ""
-"Keamanan Perangkat hanya tersedia pada perangkat keras fisik. Tidak ada "
-"perangkat keras fisik yang terdeteksi."
-
-#: panels/privacy/cc-firmware-security-page.ui:223
-msgid "Security Events"
-msgstr "Peristiwa Keamanan"
-
-#: panels/privacy/cc-firmware-security-page.ui:233
-msgid "No Events"
-msgstr "Tak Ada Acara"
-
-#. TRANSLATORS: if the stauts is valid. For example security check is valid and key is valid.
-#: panels/privacy/cc-firmware-security-utils.c:35
-msgid "Valid"
-msgstr "Sah"
-
-#. TRANSLATORS: if the status or key is not valid.
-#: panels/privacy/cc-firmware-security-utils.c:40
-msgid "Not Valid"
-msgstr "Tidak Valid"
-
-#. TRANSLATORS: if the function is enabled through BIOS or OS settings.
-#. TRANSLATORS: Status of Parental Controls setup
-#: panels/privacy/cc-firmware-security-utils.c:45
-#: panels/system/users/cc-user-page.c:377
-#: panels/system/users/cc-user-page.c:749 panels/wwan/cc-wwan-device-page.c:475
-msgid "Enabled"
-msgstr "Diaktifkan"
-
-#. TRANSLATORS: if the function is not enabled through BIOS or OS settings.
-#: panels/privacy/cc-firmware-security-utils.c:50
-msgid "Not Enabled"
-msgstr "Tidak Diaktifkan"
-
-#. TRANSLATORS: the memory space or system mode is locked to prevent from malicious modification.
-#: panels/privacy/cc-firmware-security-utils.c:55
-msgid "Locked"
-msgstr "Terkunci"
-
-#. TRANSLATORS: the memory space or system mode is not locked.
-#: panels/privacy/cc-firmware-security-utils.c:60
-msgid "Not Locked"
-msgstr "Tidak Terkunci"
-
-#. TRANSLATORS: The data is encrypted to prevent from malicious reading.
-#: panels/privacy/cc-firmware-security-utils.c:65
-msgid "Encrypted"
-msgstr "Dienkripsi"
-
-#. TRANSLATORS: the data in memory is plane text.
-#: panels/privacy/cc-firmware-security-utils.c:70
-msgid "Not Encrypted"
-msgstr "Tidak Dienkripsi"
-
-#. TRANSLATORS: Linux kernel is tainted by third party kernel module.
-#: panels/privacy/cc-firmware-security-utils.c:75
-msgid "Tainted"
-msgstr "Tercemar"
-
-#. TRANSLATORS: All the loaded kernel module are licensed.
-#: panels/privacy/cc-firmware-security-utils.c:80
-msgid "Not Tainted"
-msgstr "Tidak Tercemar"
-
-#. TRANSLATORS: the feature can be detected.
-#: panels/privacy/cc-firmware-security-utils.c:85
-msgid "Found"
-msgstr "Ditemukan"
-
-#. TRANSLATORS: the feature can't be detected.
-#: panels/privacy/cc-firmware-security-utils.c:90
-msgid "Not Found"
-msgstr "Tidak ditemukan"
-
-#. TRANSLATORS: the function is supported by hardware.
-#: panels/privacy/cc-firmware-security-utils.c:95
-msgid "Supported"
-msgstr "Didukung"
-
-#. TRANSLATORS: the function isn't supported by hardware.
-#: panels/privacy/cc-firmware-security-utils.c:100
-msgid "Not Supported"
-msgstr "Tidak Didukung"
-
-#: panels/privacy/cc-location-page.ui:17
-msgid "_Automatic Device Location"
-msgstr "Penentuan Lokasi Perangkat Otom_atis"
-
-#: panels/privacy/cc-location-page.ui:28
-msgid ""
-"Automatic device location uses sources like GPS, Wi-Fi and cellular to "
-"determine an approximate location for this device. Location data is sent to "
-"Mozilla Location Services as part of this feature."
-msgstr ""
-"Penentuan lokasi otomatis menggunakan sumber-sumber seperti GPS, Wi-Fi, dan "
-"koneksi seluler untuk menentukan perkiraan lokasi perangkat ini. Data lokasi "
-"dikirim ke Layanan Lokasi Mozilla sebagai bagian dari fitur ini."
-
-#: panels/privacy/cc-location-page.ui:56
-msgid ""
-"The following sandboxed apps have been given access to location data. Apps "
-"that are not sandboxed can access location data without asking for "
-"permission."
-msgstr ""
-"Aplikasi ter-sandbox berikut telah diberi akses ke data lokasi. Aplikasi "
-"yang tidak di-sandbox dapat mengakses data lokasi tanpa meminta izin."
-
-#: panels/privacy/cc-location-page.ui:70
-msgid "No sandboxed apps have asked for location access"
-msgstr "Tidak ada aplikasi ter-sandbox yang meminta akses lokasi"
-
-#. Translators: This will be presented as the text of a link to the privacy policy
-#: panels/privacy/cc-location-page.c:446
-msgid "Learn about what data is collected, and how it is used."
-msgstr ""
-"Pelajari tentang data apa yang dikumpulkan, dan bagaimana data itu digunakan."
-
-#: panels/privacy/cc-microphone-page.ui:4
-msgid "Microphones"
-msgstr "Mikrofon"
-
-#: panels/privacy/cc-microphone-page.ui:17
-msgid "_Microphone Access"
-msgstr "Akses _Mikrofon"
-
-#: panels/privacy/cc-microphone-page.ui:18
-msgid "Allow permitted apps to use microphones"
-msgstr "Perbolehkan aplikasi yang diizinkan menggunakan mikrofon"
-
-#: panels/privacy/cc-microphone-page.ui:28
-msgid ""
-"The following sandboxed apps have been given permission to use microphones. "
-"Apps that are not sandboxed can use microphones without asking for "
-"permission."
-msgstr ""
-"Aplikasi ter-sandbox berikut telah diberi izin untuk menggunakan mikrofon. "
-"Aplikasi yang tidak di-sandbox dapat menggunakan mikrofon tanpa meminta izin."
-
-#: panels/privacy/cc-microphone-page.ui:43
-msgid "No sandboxed apps have asked for microphone access"
-msgstr "Tidak ada aplikasi ter-sandbox yang meminta akses mikrofon"
 
 #: panels/privacy/cc-privacy-panel.ui:9
 #: panels/privacy/gnome-privacy-panel.desktop.in:3
@@ -6172,381 +5792,455 @@ msgstr "_Kamera"
 msgid "Control camera access"
 msgstr "Kontrol akses kamera"
 
-#: panels/privacy/cc-privacy-panel.ui:90
-msgid "_Microphones"
-msgstr "_Mikrofon"
-
 #: panels/privacy/cc-privacy-panel.ui:91
-msgid "Control microphone access"
-msgstr "Kontrol akses mikrofon"
-
-#: panels/privacy/cc-privacy-panel.ui:103
 msgid "_Thunderbolt"
 msgstr "_Thunderbolt"
 
-#: panels/privacy/cc-privacy-panel.ui:104
+#: panels/privacy/cc-privacy-panel.ui:92
 msgid "Manage device access"
 msgstr "Kelola akses perangkat"
 
-#: panels/privacy/cc-privacy-panel.ui:114
+#: panels/privacy/cc-privacy-panel.ui:102
 msgid "Device _Security"
 msgstr "_Keamanan Perangkat"
 
-#: panels/privacy/cc-privacy-panel.ui:115
+#: panels/privacy/cc-privacy-panel.ui:103
 msgid "Hardware security status and information"
 msgstr "Status dan informasi keamanan perangkat keras"
 
-#. Translators: Option for "Lock screen after blank" in "Screen Lock" page
-#: panels/privacy/cc-screen-page.c:66
-msgctxt "lock_screen"
-msgid "Screen Turns Off"
-msgstr "Layar Dimatikan"
-
-#. Translators: Option for "Lock screen after blank" in "Screen Lock" page
-#: panels/privacy/cc-screen-page.c:69
-msgctxt "lock_screen"
-msgid "30 seconds"
-msgstr "30 detik"
-
-#. Translators: Option for "Lock screen after blank" in "Screen Lock" page
-#: panels/privacy/cc-screen-page.c:72
-msgctxt "lock_screen"
-msgid "1 minute"
-msgstr "1 menit"
-
-#. Translators: Option for "Lock screen after blank" in "Screen Lock" page
-#: panels/privacy/cc-screen-page.c:75
-msgctxt "lock_screen"
-msgid "2 minutes"
-msgstr "2 menit"
-
-#. Translators: Option for "Lock screen after blank" in "Screen Lock" page
-#: panels/privacy/cc-screen-page.c:78
-msgctxt "lock_screen"
-msgid "3 minutes"
-msgstr "3 menit"
-
-#. Translators: Option for "Lock screen after blank" in "Screen Lock" page
-#: panels/privacy/cc-screen-page.c:81
-msgctxt "lock_screen"
-msgid "5 minutes"
-msgstr "5 menit"
-
-#. Translators: Option for "Lock screen after blank" in "Screen Lock" page
-#: panels/privacy/cc-screen-page.c:84
-msgctxt "lock_screen"
-msgid "30 minutes"
-msgstr "30 menit"
-
-#. Translators: Option for "Lock screen after blank" in "Screen Lock" page
-#: panels/privacy/cc-screen-page.c:87
-msgctxt "lock_screen"
-msgid "1 hour"
-msgstr "1 jam"
-
-#. Translators: Option for "Blank screen" in "Screen Lock" page
-#: panels/privacy/cc-screen-page.c:130
-msgctxt "blank_screen"
-msgid "1 minute"
-msgstr "1 menit"
-
-#. Translators: Option for "Blank screen" in "Screen Lock" page
-#: panels/privacy/cc-screen-page.c:133
-msgctxt "blank_screen"
-msgid "2 minutes"
-msgstr "2 menit"
-
-#. Translators: Option for "Blank screen" in "Screen Lock" page
-#: panels/privacy/cc-screen-page.c:136
-msgctxt "blank_screen"
-msgid "3 minutes"
-msgstr "3 menit"
-
-#. Translators: Option for "Blank screen" in "Screen Lock" page
-#: panels/privacy/cc-screen-page.c:139
-msgctxt "blank_screen"
-msgid "4 minutes"
-msgstr "4 menit"
-
-#. Translators: Option for "Blank screen" in "Screen Lock" page
-#: panels/privacy/cc-screen-page.c:142
-msgctxt "blank_screen"
-msgid "5 minutes"
-msgstr "5 menit"
-
-#. Translators: Option for "Blank screen" in "Screen Lock" page
-#: panels/privacy/cc-screen-page.c:145
-msgctxt "blank_screen"
-msgid "8 minutes"
-msgstr "8 menit"
-
-#. Translators: Option for "Blank screen" in "Screen Lock" page
-#: panels/privacy/cc-screen-page.c:148
-msgctxt "blank_screen"
-msgid "10 minutes"
-msgstr "10 menit"
-
-#. Translators: Option for "Blank screen" in "Screen Lock" page
-#: panels/privacy/cc-screen-page.c:151
-msgctxt "blank_screen"
-msgid "12 minutes"
-msgstr "12 menit"
-
-#. Translators: Option for "Blank screen" in "Screen Lock" page
-#: panels/privacy/cc-screen-page.c:154
-msgctxt "blank_screen"
-msgid "15 minutes"
-msgstr "15 menit"
-
-#. Translators: Option for "Blank screen" in "Screen Lock" page
-#: panels/privacy/cc-screen-page.c:157
-msgctxt "blank_screen"
-msgid "Never"
-msgstr "Tak pernah"
-
-#: panels/privacy/cc-screen-page.ui:4
-msgid "Screen Lock"
-msgstr "Kunci Layar"
-
-#: panels/privacy/cc-screen-page.ui:13
+#. translators: The first '%s' is the distributor's name, such as 'Fedora', the second '%s' is a link to the privacy policy
+#: panels/privacy/diagnostics/cc-diagnostics-page.c:125
+#, c-format
 msgid ""
-"Automatically locking the screen prevents others from accessing the computer "
-"while you're away"
+"Sending reports of technical problems helps us improve %s. Reports are sent "
+"anonymously and are scrubbed of personal data — %s."
 msgstr ""
-"Mengunci layar secara otomatis mencegah orang lain mengakses komputer saat "
-"Anda pergi"
+"Mengirim laporan masalah teknis membantu kami meningkatkan %s. Laporan "
+"dikirim secara anonim dan dihapus dari data pribadi — %s."
 
-#: panels/privacy/cc-screen-page.ui:20
-msgid "_Blank Screen Delay"
-msgstr "Penundaan Layar _Kosong"
-
-#: panels/privacy/cc-screen-page.ui:21
-msgid "Period of inactivity until screen blanks"
-msgstr "Periode tidak aktif hingga layar dikosongkan"
-
-#: panels/privacy/cc-screen-page.ui:39
-msgid "Automatic Screen _Lock"
-msgstr "Kuncian _Layar Otomatis"
-
-#: panels/privacy/cc-screen-page.ui:40
-msgid "Locks the screen after it blanks"
-msgstr "Mengunci layar setelah kosong"
-
-#: panels/privacy/cc-screen-page.ui:48
-msgid "Automatic _Screen Lock Delay"
-msgstr "Kuncian _Layar Otomatis"
-
-#: panels/privacy/cc-screen-page.ui:49
-msgid "Time from screen blank to screen lock"
-msgstr "Waktu dari layar kosong ke kunci layar"
-
-#. Translators: Whether to show notifications on the lock screen
-#: panels/privacy/cc-screen-page.ui:67
-msgid "Lock Screen _Notifications"
-msgstr "Notifikasi _Layar Kunci"
-
-#: panels/privacy/cc-screen-page.ui:76
-msgid "Forbid New _USB Devices"
-msgstr "Larang Perangkat _USB Baru"
-
-#: panels/privacy/cc-screen-page.ui:77
+#. translators: The '%s' is the distributor's name, such as 'Fedora'
+#: panels/privacy/diagnostics/cc-diagnostics-page.c:130
+#, c-format
 msgid ""
-"Prevent new USB devices from interacting with the system when the screen is "
-"locked"
+"Sending reports of technical problems helps us improve %s. Reports are sent "
+"anonymously and are scrubbed of personal data."
 msgstr ""
-"Cegah perangkat USB baru berinteraksi dengan sistem saat layar terkunci"
+"Mengirim laporan masalah teknis membantu kami memperbaiki %s. Laporan "
+"dikirim secara anonim dan dibersihkan dari data pribadi."
 
-#: panels/privacy/cc-screen-page.ui:88
-msgid "Screen Privacy"
-msgstr "Privasi Layar"
+#: panels/privacy/diagnostics/cc-diagnostics-page.ui:4
+msgid "Diagnostics"
+msgstr "Diagnostik"
 
-#: panels/privacy/cc-screen-page.ui:93
-msgid "Restrict Viewing _Angle"
-msgstr "Batasi Sudut P_andang"
+#: panels/privacy/diagnostics/cc-diagnostics-page.ui:15
+msgid "Problem Reporting"
+msgstr "Pelaporan Masalah"
 
-#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
-#: panels/privacy/cc-usage-page.c:54
-msgctxt "purge_files"
-msgid "1 hour"
-msgstr "1 jam"
+#: panels/privacy/diagnostics/cc-diagnostics-page.ui:18
+msgid "_Automatic Problem Reporting"
+msgstr "Pelaporan Masalah Otom_atis"
 
-#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
-#: panels/privacy/cc-usage-page.c:57
-msgctxt "purge_files"
-msgid "1 day"
-msgstr "1 hari"
+#. TRANSLATORS: secure boot refers to the system firmware security mode
+#: panels/privacy/firmware-security/cc-firmware-security-boot-dialog.c:71
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:122
+msgid "Secure Boot is Active"
+msgstr "Secure Boot Aktif"
 
-#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
-#: panels/privacy/cc-usage-page.c:60
-msgctxt "purge_files"
-msgid "2 days"
-msgstr "2 hari"
-
-#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
-#: panels/privacy/cc-usage-page.c:63
-msgctxt "purge_files"
-msgid "3 days"
-msgstr "3 hari"
-
-#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
-#: panels/privacy/cc-usage-page.c:66
-msgctxt "purge_files"
-msgid "4 days"
-msgstr "4 hari"
-
-#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
-#: panels/privacy/cc-usage-page.c:69
-msgctxt "purge_files"
-msgid "5 days"
-msgstr "5 hari"
-
-#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
-#: panels/privacy/cc-usage-page.c:72
-msgctxt "purge_files"
-msgid "6 days"
-msgstr "6 hari"
-
-#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
-#: panels/privacy/cc-usage-page.c:75
-msgctxt "purge_files"
-msgid "7 days"
-msgstr "7 hari"
-
-#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
-#: panels/privacy/cc-usage-page.c:78
-msgctxt "purge_files"
-msgid "14 days"
-msgstr "14 hari"
-
-#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
-#: panels/privacy/cc-usage-page.c:81
-msgctxt "purge_files"
-msgid "30 days"
-msgstr "30 hari"
-
-#: panels/privacy/cc-usage-page.c:177
-msgid "Empty all items from Trash?"
-msgstr "Kosongkan semua butir dari Tempat Sampah?"
-
-#: panels/privacy/cc-usage-page.c:178
-msgid "All items in the Trash will be permanently deleted."
-msgstr "Semua butir dalam Tempat Sampah akan dihapus secara permanen."
-
-#: panels/privacy/cc-usage-page.c:179
-msgid "_Empty Trash"
-msgstr "_Kosongkan Tempat Sampah"
-
-#: panels/privacy/cc-usage-page.c:215
-msgid "Delete all the temporary files?"
-msgstr "Hapus semua berkas temporer?"
-
-#: panels/privacy/cc-usage-page.c:216
-msgid "All the temporary files will be permanently deleted."
-msgstr "Semua berkas temporer akan dihapus secara permanen."
-
-#: panels/privacy/cc-usage-page.c:217
-msgid "_Purge Temporary Files"
-msgstr "Bersihkan Berkas Tem_porer"
-
-#. Translators: Option for "File History Duration" in "File History" group
-#: panels/privacy/cc-usage-page.c:244
-msgctxt "retain_history"
-msgid "1 day"
-msgstr "1 hari"
-
-#. Translators: Option for "File History Duration" in "File History" group
-#: panels/privacy/cc-usage-page.c:247
-msgctxt "retain_history"
-msgid "7 days"
-msgstr "7 hari"
-
-#. Translators: Option for "File History Duration" in "File History" group
-#: panels/privacy/cc-usage-page.c:250
-msgctxt "retain_history"
-msgid "30 days"
-msgstr "30 hari"
-
-#. Translators: Option for "File History Duration" in "File History" group
-#: panels/privacy/cc-usage-page.c:253
-msgctxt "retain_history"
-msgid "Forever"
-msgstr "Selamanya"
-
-#: panels/privacy/cc-usage-page.c:342
-msgid "Clear File History?"
-msgstr "Bersihkan Riwayat Berkas?"
-
-#: panels/privacy/cc-usage-page.c:343
-msgid "After clearing, lists of recently used files will appear empty."
-msgstr ""
-"Setelah dibersihkan, daftar berkas yang baru saja digunakan akan tampak "
-"kosong."
-
-#: panels/privacy/cc-usage-page.c:344
-msgid "Clear _History"
-msgstr "_Hapus Riwayat"
-
-#: panels/privacy/cc-usage-page.ui:4
-msgid "File History & Trash"
-msgstr "Riwayat Berkas dan Tempat Sampah"
-
-#: panels/privacy/cc-usage-page.ui:16
-msgid "File History"
-msgstr "Riwayat Berkas"
-
-#: panels/privacy/cc-usage-page.ui:17
+#. TRANSLATORS: this is the first section of the decription
+#: panels/privacy/firmware-security/cc-firmware-security-boot-dialog.c:76
 msgid ""
-"File history keeps a record of files that you have used. This information is "
-"shared between apps, and makes it easier to find files that you might want "
-"to use."
+"Secure boot prevents malicious software from being loaded when the device "
+"starts. It is currently turned on and is functioning correctly."
 msgstr ""
-"Riwayat berkas mempertahankan catatan berkas yang telah Anda gunakan. "
-"Informasi ini dibagikan antar aplikasi, dan membuatnya mudah untuk menemukan "
-"berkas yang ingin Anda gunakan."
+"Secure boot mencegah perangkat lunak berbahaya dimuat saat perangkat mulai. "
+"Saat ini dihidupkan dan berfungsi dengan benar."
 
-#: panels/privacy/cc-usage-page.ui:20
-msgid "File H_istory"
-msgstr "R_iwayat Berkas"
+#. TRANSLATORS: secure boot refers to the system firmware security mode
+#: panels/privacy/firmware-security/cc-firmware-security-boot-dialog.c:82
+msgid "Secure Boot Has Problems"
+msgstr "Secure Boot Memiliki Masalah"
 
-#: panels/privacy/cc-usage-page.ui:26
-msgid "File _History Duration"
-msgstr "_Durasi Riwayat Berkas"
-
-#: panels/privacy/cc-usage-page.ui:48
-msgid "_Clear History…"
-msgstr "B_ersihkan Riwayat…"
-
-#: panels/privacy/cc-usage-page.ui:64
-msgid "Trash &amp; Temporary Files"
-msgstr "Tempat Sampah &amp; Berkas Temporer"
-
-#: panels/privacy/cc-usage-page.ui:65
+#. TRANSLATORS: this is the first section of the decription.
+#: panels/privacy/firmware-security/cc-firmware-security-boot-dialog.c:86
 msgid ""
-"Trash and temporary files can sometimes include personal or sensitive "
-"information. Automatically deleting them can help to protect privacy."
+"Secure boot prevents malicious software from being loaded when the device "
+"starts. It is currently turned on, but will not work due to having an "
+"invalid key."
 msgstr ""
-"Tempat sampah dan berkas temporer terkadang berisi informasi personal atau "
-"sensitif. Menghapusmya secara otomatis bisa membantu melindungi privasi."
+"Secure boot mencegah perangkat lunak berbahaya dimuat saat perangkat mulai. "
+"Saat ini dihidupkan, tetapi tidak akan berfungsi karena memiliki kunci yang "
+"tidak valid."
 
-#: panels/privacy/cc-usage-page.ui:68
-msgid "Automatically Delete _Trash Content"
-msgstr "Secara Otomatis Hapus Konten _Tempat Sampah"
+#. TRANSLATORS: this is the second section of description.
+#: panels/privacy/firmware-security/cc-firmware-security-boot-dialog.c:89
+msgid ""
+"Secure boot problems can often be resolved from your device's UEFI firmware "
+"settings (BIOS) and your hardware manufacturer may provide information on "
+"how to do this."
+msgstr ""
+"Masalah secure boot seringkali dapat diselesaikan dari pengaturan firmware "
+"UEFI (BIOS) komputer Anda dan produsen perangkat keras Anda mungkin "
+"memberikan informasi tentang cara melakukannya."
 
-#: panels/privacy/cc-usage-page.ui:74
-msgid "Automatically Delete Temporary _Files"
-msgstr "Secara Otomatis Hapus _Berkas Temporer"
+#. TRANSLATORS: this is the third section of description.
+#: panels/privacy/firmware-security/cc-firmware-security-boot-dialog.c:92
+msgid "For help, contact your hardware manufacturer or IT support provider."
+msgstr ""
+"Untuk bantuan, hubungi produsen perangkat keras atau penyedia dukungan TI "
+"Anda."
 
-#: panels/privacy/cc-usage-page.ui:80
-msgid "Automatically Delete _Period"
-msgstr "Jangka Waktu Ha_pus Otomatis"
+#. TRANSLATORS: secure boot refers to the system firmware security mode
+#: panels/privacy/firmware-security/cc-firmware-security-boot-dialog.c:98
+msgid "Secure Boot is Turned Off"
+msgstr "Secure Boot Dimatikan"
 
-#: panels/privacy/cc-usage-page.ui:103
-msgid "_Empty Trash…"
-msgstr "_Kosongkan Tempat Sampah…"
+#. TRANSLATORS: this is the first section of the description.
+#: panels/privacy/firmware-security/cc-firmware-security-boot-dialog.c:102
+msgid ""
+"Secure boot prevents malicious software from being loaded when the device "
+"starts. It is currently turned off."
+msgstr ""
+"Secure boot mencegah perangkat lunak berbahaya dimuat saat perangkat mulai. "
+"Saat ini dihidupkan dan berfungsi dengan benar."
 
-#: panels/privacy/cc-usage-page.ui:115
-msgid "_Delete Temporary Files…"
-msgstr "Hapus Berkas Tem_porer…"
+#. TRANSLATORS: this is the second section of the description.
+#: panels/privacy/firmware-security/cc-firmware-security-boot-dialog.c:105
+msgid ""
+"Secure boot can often be turned on from your device's UEFI firmware settings "
+"(BIOS). For help, contact your hardware manufacturer or IT support provider."
+msgstr ""
+"Secure boot sering kali dapat dihidupkan dari pengaturan firmware UEFI "
+"(BIOS) komputer Anda. Untuk bantuan, hubungi produsen perangkat keras atau "
+"penyedia dukungan TI Anda."
+
+#: panels/privacy/firmware-security/cc-firmware-security-boot-dialog.ui:51
+msgid ""
+"Secure boot prevents malicious software from being loaded when the device "
+"starts.\n"
+"\n"
+"For more information, contact the hardware manufacturer or IT support."
+msgstr ""
+"Secure boot mencegah perangkat lunak berbahaya dimuat saat perangkat mulai.\n"
+"\n"
+"Untuk informasi lebih lanjut, hubungi produsen perangkat keras atau dukungan "
+"TI."
+
+#. TRANSLATORS: in reference to firmware protection: 0/4 stars
+#: panels/privacy/firmware-security/cc-firmware-security-dialog.c:108
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:532
+msgid "Security Checks Failed"
+msgstr "Pemeriksaan Keamanan Gagal"
+
+#. TRANSLATORS: This is the description to describe the failure on
+#. checking the security items.
+#: panels/privacy/firmware-security/cc-firmware-security-dialog.c:111
+msgid ""
+"Hardware does not pass checks. This means that you are not protected against "
+"common hardware security issues.\n"
+"\n"
+"It may be possible to resolve hardware security issues by updating your "
+"firmware or changing device configuration options. However, failures can "
+"stem from the physical hardware itself and may not be fixable."
+msgstr ""
+"Perangkat keras tidak lulus pemeriksaan. Ini berarti bahwa Anda tidak "
+"dilindungi terhadap masalah keamanan perangkat keras umum.\n"
+"\n"
+"Dimungkinkan untuk mengatasi masalah keamanan perangkat keras dengan "
+"memperbarui firmware Anda atau mengubah opsi konfigurasi perangkat. Namun, "
+"kegagalan dapat berasal dari perangkat keras fisik itu sendiri, dan mungkin "
+"tidak dapat diperbaiki."
+
+#. TRANSLATORS: in reference to firmware protection: 1/4 stars
+#: panels/privacy/firmware-security/cc-firmware-security-dialog.c:121
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:539
+msgid "Basic Security Checks Passed"
+msgstr "Pemeriksaan Keamanan Dasar Lulus"
+
+#. TRANSLATORS: This description describes the device passing the
+#. minimum requirement of security check.
+#: panels/privacy/firmware-security/cc-firmware-security-dialog.c:124
+msgid ""
+"This device meets basic security requirements and has protection against "
+"some hardware security threats. However, it lacks other recommended "
+"protections."
+msgstr ""
+"Perangkat ini memenuhi persyaratan keamanan dasar dan memiliki perlindungan "
+"terhadap beberapa ancaman keamanan perangkat keras. Namun, ia tidak memiliki "
+"perlindungan lain yang direkomendasikan."
+
+#. TRANSLATORS: in reference to firmware protection: 2~4 stars
+#: panels/privacy/firmware-security/cc-firmware-security-dialog.c:134
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:549
+msgid "Protected"
+msgstr "Terproteksi"
+
+#. TRANSLATOR: This description describes the devices passing
+#. the extended security check.
+#: panels/privacy/firmware-security/cc-firmware-security-dialog.c:137
+msgid ""
+"This device passes current security tests. It is protected against the "
+"majority of hardware security threats."
+msgstr ""
+"Perangkat ini lulus uji keamanan saat ini. Ini dilindungi dari sebagian "
+"besar ancaman keamanan perangkat keras."
+
+#: panels/privacy/firmware-security/cc-firmware-security-dialog.c:144
+msgid "Checks Unavailable"
+msgstr "Pemeriksaan Tidak Tersedia"
+
+#. TRANSLATORS: When the security result is unavailable, this description is shown.
+#: panels/privacy/firmware-security/cc-firmware-security-dialog.c:146
+msgid ""
+"Device security checks are not available for this device. It is not possible "
+"to tell whether it meets hardware security requirements."
+msgstr ""
+"Pemeriksaan keamanan perangkat tidak tersedia untuk perangkat ini. Tidak "
+"mungkin untuk mengetahui apakah itu memenuhi persyaratan keamanan perangkat "
+"keras."
+
+#: panels/privacy/firmware-security/cc-firmware-security-dialog.c:366
+msgid "Report copied to clipboard"
+msgstr "Laporan disalin ke papan klip"
+
+#: panels/privacy/firmware-security/cc-firmware-security-dialog.ui:61
+msgid "_Copy Technical Report"
+msgstr "_Salin Laporan Teknis"
+
+#: panels/privacy/firmware-security/cc-firmware-security-help-dialog.ui:4
+#: panels/privacy/firmware-security/cc-firmware-security-page.ui:12
+msgid "About Device Security"
+msgstr "Tentang Keamanan Perangkat"
+
+#: panels/privacy/firmware-security/cc-firmware-security-help-dialog.ui:24
+msgid ""
+"Device security provides information about how protected your device is "
+"against security issues which target the hardware itself.\n"
+"\n"
+"Aspects of hardware that affect security include:\n"
+"\n"
+"• security features that are built into a hardware itself;\n"
+"• how the hardware is configured to protect against security issues;\n"
+"• the security of the software runs directly on the hardware.\n"
+"\n"
+"Security threats which affect hardware include malware and viruses that "
+"target the software that runs directly on the hardware. It also includes "
+"physical tampering, such as physical connection to the hardware to read data "
+"and implant malware.\n"
+"\n"
+"Device security is just one aspect of security, and does not reflect the "
+"overall security status of the system and applications."
+msgstr ""
+"Keamanan perangkat memberikan informasi tentang seberapa terlindungi "
+"perangkat Anda dari masalah keamanan yang menargetkan perangkat keras itu "
+"sendiri.\n"
+"\n"
+"Aspek perangkat keras yang mempengaruhi keamanan meliputi:\n"
+"\n"
+"• fitur keamanan yang dibangun ke dalam perangkat keras itu sendiri;\n"
+"• bagaimana perangkat keras dikonfigurasikan untuk melindungi dari masalah "
+"keamanan;\n"
+"• keamanan perangkat lunak berjalan langsung pada perangkat keras.\n"
+"\n"
+"Ancaman keamanan yang memengaruhi perangkat keras termasuk malware dan virus "
+"yang menargetkan perangkat lunak yang berjalan langsung di perangkat keras. "
+"Ini juga mencakup gangguan fisik, seperti koneksi fisik ke perangkat keras "
+"untuk membaca data dan menanamkan malware.\n"
+"\n"
+"Keamanan perangkat hanyalah salah satu aspek keamanan, dan tidak "
+"mencerminkan status keamanan sistem dan aplikasi secara keseluruhan."
+
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:123
+msgid "Protected against malicious software when the device starts."
+msgstr "Dilindungi dari perangkat lunak berbahaya saat perangkat dimulai."
+
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:129
+msgid "Secure Boot has Problems"
+msgstr "Secure Boot memiliki Masalah"
+
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:130
+msgid "Some protection when the device is started."
+msgstr "Beberapa perlindungan saat perangkat dimulai."
+
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:135
+msgid "Secure Boot is Off"
+msgstr "Secure Boot Dimatikan"
+
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:136
+msgid "No protection when the device is started."
+msgstr "Tidak ada perlindungan saat perangkat dimulai."
+
+#. TRANSLATORS: this is to explain an event that has already happened
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:155
+msgid ""
+"This issue could have been caused by a change in UEFI firmware settings, an "
+"operating system configuration change, or because of malicious software on "
+"this system."
+msgstr ""
+"Masalah ini bisa disebabkan oleh perubahan pengaturan perangkat tegar UEFI, "
+"perubahan konfigurasi sistem operasi, atau karena perangkat lunak berbahaya "
+"pada sistem ini."
+
+#. TRANSLATORS: this is to explain an event that has already happened
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:163
+msgid ""
+"This issue could have been caused by a change in the UEFI firmware settings, "
+"or because of malicious software on this system."
+msgstr ""
+"Masalah ini bisa disebabkan oleh perubahan dalam pengaturan perangkat tegar "
+"UEFI, atau karena perangkat lunak berbahaya pada sistem ini."
+
+#. TRANSLATORS: this is to explain an event that has already happened
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:170
+msgid ""
+"This issue could have been caused by an operating system configuration "
+"change, or because of malicious software on this system."
+msgstr ""
+"Masalah ini bisa disebabkan oleh perubahan konfigurasi sistem operasi, atau "
+"karena perangkat lunak berbahaya pada sistem ini."
+
+#. TRANSLATOR: this is the date in "%Y-%m-%d %H:%M:%S" format,
+#. for example: 2022-08-01 22:48:00
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:228
+#, c-format
+msgid "%1$s"
+msgstr "%1$s"
+
+#. TRANSLATOR: This is the text event status output when the event status is "success"
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:234
+msgid "Pass"
+msgstr "Lulus"
+
+#. TRANSLATOR: This is the text event status output when the event status is not "success"
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:237
+msgid "! Fail"
+msgstr "! Gagal"
+
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:240
+#, c-format
+msgid "(%1$s → %2$s)"
+msgstr "(%1$s → %2$s)"
+
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:533
+msgid "Hardware does not pass basic security checks."
+msgstr "Perangkat keras tidak lulus pemeriksaan keamanan dasar."
+
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:540
+msgid "Hardware has a basic level of protection."
+msgstr "Perangkat keras memiliki tingkat perlindungan dasar."
+
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:550
+msgid "Hardware has a strong level of protection."
+msgstr "Perangkat keras memiliki tingkat perlindungan yang kuat."
+
+#. TRANSLATORS: in reference to firmware protection: ??? stars
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:556
+msgid "Security Checks Unavailable"
+msgstr "Pemeriksaan Keamanan Tidak Tersedia"
+
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:557
+msgid "Security levels are not available for this device."
+msgstr "Tingkat keamanan tidak tersedia untuk perangkat ini."
+
+#: panels/privacy/firmware-security/cc-firmware-security-page.ui:4
+msgid "Device Security"
+msgstr "Keamanan Perangkat"
+
+#: panels/privacy/firmware-security/cc-firmware-security-page.ui:57
+msgid "Starting Device Security…"
+msgstr "Memulai Keamanan Perangkat…"
+
+#: panels/privacy/firmware-security/cc-firmware-security-page.ui:83
+msgid "Device Security Unavailable"
+msgstr "Keamanan Perangkat Tidak Tersedia"
+
+#: panels/privacy/firmware-security/cc-firmware-security-page.ui:85
+msgid ""
+"Device Security is only available on physical hardware. No physical hardware "
+"has been detected."
+msgstr ""
+"Keamanan Perangkat hanya tersedia pada perangkat keras fisik. Tidak ada "
+"perangkat keras fisik yang terdeteksi."
+
+#: panels/privacy/firmware-security/cc-firmware-security-page.ui:223
+msgid "Security Events"
+msgstr "Peristiwa Keamanan"
+
+#: panels/privacy/firmware-security/cc-firmware-security-page.ui:233
+msgid "No Events"
+msgstr "Tak Ada Acara"
+
+#. TRANSLATORS: if the status is valid. For example security check is valid and key is valid.
+#: panels/privacy/firmware-security/cc-firmware-security-utils.c:35
+msgid "Valid"
+msgstr "Sah"
+
+#. TRANSLATORS: if the status or key is not valid.
+#: panels/privacy/firmware-security/cc-firmware-security-utils.c:40
+msgid "Not Valid"
+msgstr "Tidak Valid"
+
+#. TRANSLATORS: if the function is enabled through BIOS or OS settings.
+#. TRANSLATORS: Status of Parental Controls setup
+#: panels/privacy/firmware-security/cc-firmware-security-utils.c:45
+#: panels/system/users/cc-user-page.c:377
+#: panels/system/users/cc-user-page.c:749 panels/wwan/cc-wwan-device-page.c:475
+msgid "Enabled"
+msgstr "Diaktifkan"
+
+#. TRANSLATORS: if the function is not enabled through BIOS or OS settings.
+#: panels/privacy/firmware-security/cc-firmware-security-utils.c:50
+msgid "Not Enabled"
+msgstr "Tidak Diaktifkan"
+
+#. TRANSLATORS: the memory space or system mode is locked to prevent from malicious modification.
+#: panels/privacy/firmware-security/cc-firmware-security-utils.c:55
+msgid "Locked"
+msgstr "Terkunci"
+
+#. TRANSLATORS: the memory space or system mode is not locked.
+#: panels/privacy/firmware-security/cc-firmware-security-utils.c:60
+msgid "Not Locked"
+msgstr "Tidak Terkunci"
+
+#. TRANSLATORS: The data is encrypted to prevent from malicious reading.
+#: panels/privacy/firmware-security/cc-firmware-security-utils.c:65
+msgid "Encrypted"
+msgstr "Dienkripsi"
+
+#. TRANSLATORS: the data in memory is plane text.
+#: panels/privacy/firmware-security/cc-firmware-security-utils.c:70
+msgid "Not Encrypted"
+msgstr "Tidak Dienkripsi"
+
+#. TRANSLATORS: Linux kernel is tainted by third party kernel module.
+#: panels/privacy/firmware-security/cc-firmware-security-utils.c:75
+msgid "Tainted"
+msgstr "Tercemar"
+
+#. TRANSLATORS: All the loaded kernel module are licensed.
+#: panels/privacy/firmware-security/cc-firmware-security-utils.c:80
+msgid "Not Tainted"
+msgstr "Tidak Tercemar"
+
+#. TRANSLATORS: the feature can be detected.
+#: panels/privacy/firmware-security/cc-firmware-security-utils.c:85
+msgid "Found"
+msgstr "Ditemukan"
+
+#. TRANSLATORS: the feature can't be detected.
+#: panels/privacy/firmware-security/cc-firmware-security-utils.c:90
+msgid "Not Found"
+msgstr "Tidak ditemukan"
+
+#. TRANSLATORS: the function is supported by hardware.
+#: panels/privacy/firmware-security/cc-firmware-security-utils.c:95
+msgid "Supported"
+msgstr "Didukung"
+
+#. TRANSLATORS: the function isn't supported by hardware.
+#: panels/privacy/firmware-security/cc-firmware-security-utils.c:100
+msgid "Not Supported"
+msgstr "Tidak Didukung"
 
 #: panels/privacy/gnome-privacy-panel.desktop.in:4
 msgid "Control access to your data and hardware, device security"
@@ -6564,6 +6258,391 @@ msgstr ""
 "Kamera;Foto;Video;Kamera Web;Perekaman;Keamanan;Perangkat Tegar;Firmware;"
 "Thunderbolt;"
 
+#. Translators: This will be presented as the text of a link to the privacy policy
+#: panels/privacy/location/cc-location-page.c:446
+msgid "Learn about what data is collected, and how it is used."
+msgstr ""
+"Pelajari tentang data apa yang dikumpulkan, dan bagaimana data itu digunakan."
+
+#: panels/privacy/location/cc-location-page.ui:17
+msgid "_Automatic Device Location"
+msgstr "Penentuan Lokasi Perangkat Otom_atis"
+
+#: panels/privacy/location/cc-location-page.ui:28
+msgid ""
+"Automatic device location uses sources like GPS, Wi-Fi and cellular to "
+"determine an approximate location for this device. Location data is sent to "
+"Mozilla Location Services as part of this feature."
+msgstr ""
+"Penentuan lokasi otomatis menggunakan sumber-sumber seperti GPS, Wi-Fi, dan "
+"koneksi seluler untuk menentukan perkiraan lokasi perangkat ini. Data lokasi "
+"dikirim ke Layanan Lokasi Mozilla sebagai bagian dari fitur ini."
+
+#: panels/privacy/location/cc-location-page.ui:56
+msgid ""
+"The following sandboxed apps have been given access to location data. Apps "
+"that are not sandboxed can access location data without asking for "
+"permission."
+msgstr ""
+"Aplikasi ter-sandbox berikut telah diberi akses ke data lokasi. Aplikasi "
+"yang tidak di-sandbox dapat mengakses data lokasi tanpa meminta izin."
+
+#: panels/privacy/location/cc-location-page.ui:66
+msgid "No sandboxed apps have asked for location access"
+msgstr "Tidak ada aplikasi ter-sandbox yang meminta akses lokasi"
+
+#. Translators: Option for "Lock screen after blank" in "Screen Lock" page
+#: panels/privacy/screen/cc-screen-page.c:66
+msgctxt "lock_screen"
+msgid "Screen Turns Off"
+msgstr "Layar Dimatikan"
+
+#. Translators: Option for "Lock screen after blank" in "Screen Lock" page
+#: panels/privacy/screen/cc-screen-page.c:69
+msgctxt "lock_screen"
+msgid "30 seconds"
+msgstr "30 detik"
+
+#. Translators: Option for "Lock screen after blank" in "Screen Lock" page
+#: panels/privacy/screen/cc-screen-page.c:72
+msgctxt "lock_screen"
+msgid "1 minute"
+msgstr "1 menit"
+
+#. Translators: Option for "Lock screen after blank" in "Screen Lock" page
+#: panels/privacy/screen/cc-screen-page.c:75
+msgctxt "lock_screen"
+msgid "2 minutes"
+msgstr "2 menit"
+
+#. Translators: Option for "Lock screen after blank" in "Screen Lock" page
+#: panels/privacy/screen/cc-screen-page.c:78
+msgctxt "lock_screen"
+msgid "3 minutes"
+msgstr "3 menit"
+
+#. Translators: Option for "Lock screen after blank" in "Screen Lock" page
+#: panels/privacy/screen/cc-screen-page.c:81
+msgctxt "lock_screen"
+msgid "5 minutes"
+msgstr "5 menit"
+
+#. Translators: Option for "Lock screen after blank" in "Screen Lock" page
+#: panels/privacy/screen/cc-screen-page.c:84
+msgctxt "lock_screen"
+msgid "30 minutes"
+msgstr "30 menit"
+
+#. Translators: Option for "Lock screen after blank" in "Screen Lock" page
+#: panels/privacy/screen/cc-screen-page.c:87
+msgctxt "lock_screen"
+msgid "1 hour"
+msgstr "1 jam"
+
+#. Translators: Option for "Blank screen" in "Screen Lock" page
+#: panels/privacy/screen/cc-screen-page.c:130
+msgctxt "blank_screen"
+msgid "1 minute"
+msgstr "1 menit"
+
+#. Translators: Option for "Blank screen" in "Screen Lock" page
+#: panels/privacy/screen/cc-screen-page.c:133
+msgctxt "blank_screen"
+msgid "2 minutes"
+msgstr "2 menit"
+
+#. Translators: Option for "Blank screen" in "Screen Lock" page
+#: panels/privacy/screen/cc-screen-page.c:136
+msgctxt "blank_screen"
+msgid "3 minutes"
+msgstr "3 menit"
+
+#. Translators: Option for "Blank screen" in "Screen Lock" page
+#: panels/privacy/screen/cc-screen-page.c:139
+msgctxt "blank_screen"
+msgid "4 minutes"
+msgstr "4 menit"
+
+#. Translators: Option for "Blank screen" in "Screen Lock" page
+#: panels/privacy/screen/cc-screen-page.c:142
+msgctxt "blank_screen"
+msgid "5 minutes"
+msgstr "5 menit"
+
+#. Translators: Option for "Blank screen" in "Screen Lock" page
+#: panels/privacy/screen/cc-screen-page.c:145
+msgctxt "blank_screen"
+msgid "8 minutes"
+msgstr "8 menit"
+
+#. Translators: Option for "Blank screen" in "Screen Lock" page
+#: panels/privacy/screen/cc-screen-page.c:148
+msgctxt "blank_screen"
+msgid "10 minutes"
+msgstr "10 menit"
+
+#. Translators: Option for "Blank screen" in "Screen Lock" page
+#: panels/privacy/screen/cc-screen-page.c:151
+msgctxt "blank_screen"
+msgid "12 minutes"
+msgstr "12 menit"
+
+#. Translators: Option for "Blank screen" in "Screen Lock" page
+#: panels/privacy/screen/cc-screen-page.c:154
+msgctxt "blank_screen"
+msgid "15 minutes"
+msgstr "15 menit"
+
+#. Translators: Option for "Blank screen" in "Screen Lock" page
+#: panels/privacy/screen/cc-screen-page.c:157
+msgctxt "blank_screen"
+msgid "Never"
+msgstr "Tak pernah"
+
+#: panels/privacy/screen/cc-screen-page.ui:4
+msgid "Screen Lock"
+msgstr "Kunci Layar"
+
+#: panels/privacy/screen/cc-screen-page.ui:13
+msgid ""
+"Automatically locking the screen prevents others from accessing the device "
+"while you're away"
+msgstr ""
+"Mengunci layar secara otomatis mencegah orang lain mengakses komputer saat "
+"Anda pergi"
+
+#: panels/privacy/screen/cc-screen-page.ui:20
+msgid "_Blank Screen Delay"
+msgstr "Penundaan Layar _Kosong"
+
+#: panels/privacy/screen/cc-screen-page.ui:21
+msgid "Period of inactivity until screen blanks"
+msgstr "Periode tidak aktif hingga layar dikosongkan"
+
+#: panels/privacy/screen/cc-screen-page.ui:39
+msgid "Automatic Screen _Lock"
+msgstr "Kuncian _Layar Otomatis"
+
+#: panels/privacy/screen/cc-screen-page.ui:40
+msgid "Locks the screen after it blanks"
+msgstr "Mengunci layar setelah kosong"
+
+#: panels/privacy/screen/cc-screen-page.ui:48
+msgid "Automatic _Screen Lock Delay"
+msgstr "Kuncian _Layar Otomatis"
+
+#: panels/privacy/screen/cc-screen-page.ui:49
+msgid "Time from screen blank to screen lock"
+msgstr "Waktu dari layar kosong ke kunci layar"
+
+#. Translators: Whether to show notifications on the lock screen
+#: panels/privacy/screen/cc-screen-page.ui:67
+msgid "Lock Screen _Notifications"
+msgstr "Notifikasi _Layar Kunci"
+
+#: panels/privacy/screen/cc-screen-page.ui:76
+msgid "Forbid New _USB Devices"
+msgstr "Larang Perangkat _USB Baru"
+
+#: panels/privacy/screen/cc-screen-page.ui:77
+msgid ""
+"Prevent new USB devices from interacting with the system when the screen is "
+"locked"
+msgstr ""
+"Cegah perangkat USB baru berinteraksi dengan sistem saat layar terkunci"
+
+#: panels/privacy/screen/cc-screen-page.ui:88
+msgid "Screen Privacy"
+msgstr "Privasi Layar"
+
+#: panels/privacy/screen/cc-screen-page.ui:93
+msgid "Restrict Viewing _Angle"
+msgstr "Batasi Sudut P_andang"
+
+#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
+#: panels/privacy/usage/cc-usage-page.c:54
+msgctxt "purge_files"
+msgid "1 hour"
+msgstr "1 jam"
+
+#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
+#: panels/privacy/usage/cc-usage-page.c:57
+msgctxt "purge_files"
+msgid "1 day"
+msgstr "1 hari"
+
+#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
+#: panels/privacy/usage/cc-usage-page.c:60
+msgctxt "purge_files"
+msgid "2 days"
+msgstr "2 hari"
+
+#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
+#: panels/privacy/usage/cc-usage-page.c:63
+msgctxt "purge_files"
+msgid "3 days"
+msgstr "3 hari"
+
+#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
+#: panels/privacy/usage/cc-usage-page.c:66
+msgctxt "purge_files"
+msgid "4 days"
+msgstr "4 hari"
+
+#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
+#: panels/privacy/usage/cc-usage-page.c:69
+msgctxt "purge_files"
+msgid "5 days"
+msgstr "5 hari"
+
+#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
+#: panels/privacy/usage/cc-usage-page.c:72
+msgctxt "purge_files"
+msgid "6 days"
+msgstr "6 hari"
+
+#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
+#: panels/privacy/usage/cc-usage-page.c:75
+msgctxt "purge_files"
+msgid "7 days"
+msgstr "7 hari"
+
+#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
+#: panels/privacy/usage/cc-usage-page.c:78
+msgctxt "purge_files"
+msgid "14 days"
+msgstr "14 hari"
+
+#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
+#: panels/privacy/usage/cc-usage-page.c:81
+msgctxt "purge_files"
+msgid "30 days"
+msgstr "30 hari"
+
+#: panels/privacy/usage/cc-usage-page.c:177
+msgid "Empty all items from Trash?"
+msgstr "Kosongkan semua butir dari Tempat Sampah?"
+
+#: panels/privacy/usage/cc-usage-page.c:178
+msgid "All items in the Trash will be permanently deleted."
+msgstr "Semua butir dalam Tempat Sampah akan dihapus secara permanen."
+
+#: panels/privacy/usage/cc-usage-page.c:179
+msgid "_Empty Trash"
+msgstr "_Kosongkan Tempat Sampah"
+
+#: panels/privacy/usage/cc-usage-page.c:215
+msgid "Delete all the temporary files?"
+msgstr "Hapus semua berkas temporer?"
+
+#: panels/privacy/usage/cc-usage-page.c:216
+msgid "All the temporary files will be permanently deleted."
+msgstr "Semua berkas temporer akan dihapus secara permanen."
+
+#: panels/privacy/usage/cc-usage-page.c:217
+msgid "_Purge Temporary Files"
+msgstr "Bersihkan Berkas Tem_porer"
+
+#. Translators: Option for "File History Duration" in "File History" group
+#: panels/privacy/usage/cc-usage-page.c:244
+msgctxt "retain_history"
+msgid "1 day"
+msgstr "1 hari"
+
+#. Translators: Option for "File History Duration" in "File History" group
+#: panels/privacy/usage/cc-usage-page.c:247
+msgctxt "retain_history"
+msgid "7 days"
+msgstr "7 hari"
+
+#. Translators: Option for "File History Duration" in "File History" group
+#: panels/privacy/usage/cc-usage-page.c:250
+msgctxt "retain_history"
+msgid "30 days"
+msgstr "30 hari"
+
+#. Translators: Option for "File History Duration" in "File History" group
+#: panels/privacy/usage/cc-usage-page.c:253
+msgctxt "retain_history"
+msgid "Forever"
+msgstr "Selamanya"
+
+#: panels/privacy/usage/cc-usage-page.c:342
+msgid "Clear File History?"
+msgstr "Bersihkan Riwayat Berkas?"
+
+#: panels/privacy/usage/cc-usage-page.c:343
+msgid "After clearing, lists of recently used files will appear empty."
+msgstr ""
+"Setelah dibersihkan, daftar berkas yang baru saja digunakan akan tampak "
+"kosong."
+
+#: panels/privacy/usage/cc-usage-page.c:344
+msgid "Clear _History"
+msgstr "_Hapus Riwayat"
+
+#: panels/privacy/usage/cc-usage-page.ui:4
+msgid "File History & Trash"
+msgstr "Riwayat Berkas dan Tempat Sampah"
+
+#: panels/privacy/usage/cc-usage-page.ui:16
+msgid "File History"
+msgstr "Riwayat Berkas"
+
+#: panels/privacy/usage/cc-usage-page.ui:17
+msgid ""
+"File history keeps a record of files that you have used. This information is "
+"shared between apps, and makes it easier to find files that you might want "
+"to use."
+msgstr ""
+"Riwayat berkas mempertahankan catatan berkas yang telah Anda gunakan. "
+"Informasi ini dibagikan antar aplikasi, dan membuatnya mudah untuk menemukan "
+"berkas yang ingin Anda gunakan."
+
+#: panels/privacy/usage/cc-usage-page.ui:20
+msgid "File H_istory"
+msgstr "R_iwayat Berkas"
+
+#: panels/privacy/usage/cc-usage-page.ui:26
+msgid "File _History Duration"
+msgstr "_Durasi Riwayat Berkas"
+
+#: panels/privacy/usage/cc-usage-page.ui:48
+msgid "_Clear History…"
+msgstr "B_ersihkan Riwayat…"
+
+#: panels/privacy/usage/cc-usage-page.ui:64
+msgid "Trash &amp; Temporary Files"
+msgstr "Tempat Sampah &amp; Berkas Temporer"
+
+#: panels/privacy/usage/cc-usage-page.ui:65
+msgid ""
+"Trash and temporary files can sometimes include personal or sensitive "
+"information. Automatically deleting them can help to protect privacy."
+msgstr ""
+"Tempat sampah dan berkas temporer terkadang berisi informasi personal atau "
+"sensitif. Menghapusmya secara otomatis bisa membantu melindungi privasi."
+
+#: panels/privacy/usage/cc-usage-page.ui:68
+msgid "Automatically Delete _Trash Content"
+msgstr "Secara Otomatis Hapus Konten _Tempat Sampah"
+
+#: panels/privacy/usage/cc-usage-page.ui:74
+msgid "Automatically Delete Temporary _Files"
+msgstr "Secara Otomatis Hapus _Berkas Temporer"
+
+#: panels/privacy/usage/cc-usage-page.ui:80
+msgid "Automatically Delete _Period"
+msgstr "Jangka Waktu Ha_pus Otomatis"
+
+#: panels/privacy/usage/cc-usage-page.ui:103
+msgid "_Empty Trash…"
+msgstr "_Kosongkan Tempat Sampah…"
+
+#: panels/privacy/usage/cc-usage-page.ui:115
+msgid "_Delete Temporary Files…"
+msgstr "Hapus Berkas Tem_porer…"
+
 #: panels/search/cc-search-locations-dialog.c:507
 msgid "Location not found"
 msgstr "Lokasi tak ditemukan"
@@ -6573,7 +6652,7 @@ msgid "Subfolders must be manually added for this location"
 msgstr "Sub folder harus ditambahkan secara manual untuk lokasi ini"
 
 #: panels/search/cc-search-locations-dialog.c:572
-#: panels/sharing/cc-sharing-panel.c:363
+#: panels/sharing/cc-sharing-panel.c:364
 msgid "Remove Folder"
 msgstr "Hapus Folder"
 
@@ -6605,13 +6684,9 @@ msgstr "Lokasi Ubahan"
 msgid "_Add Location…"
 msgstr "T_ambah Lokasi…"
 
-#: panels/search/cc-search-locations-dialog.ui:89
+#: panels/search/cc-search-locations-dialog.ui:85
 msgid "No custom search locations"
 msgstr "Tidak ada lokasi pencarian ubahan"
-
-#: panels/search/cc-search-panel.c:173
-msgid "No apps found"
-msgstr "Tak menemukan aplikasi"
 
 #: panels/search/cc-search-panel.ui:16
 msgid "_App Search"
@@ -6668,16 +6743,16 @@ msgctxt "service is active"
 msgid "Active"
 msgstr "Aktif"
 
-#: panels/sharing/cc-sharing-panel.c:238
+#: panels/sharing/cc-sharing-panel.c:239
 msgid "Choose a Folder"
 msgstr "Pilih Folder"
 
-#: panels/sharing/cc-sharing-panel.c:386
+#: panels/sharing/cc-sharing-panel.c:387
 msgid "Add Folder"
 msgstr "Tambah Folder"
 
 #. TRANSLATORS: %s is replaced with a link to a dav://<hostname> URL
-#: panels/sharing/cc-sharing-panel.c:474
+#: panels/sharing/cc-sharing-panel.c:475
 #, c-format
 msgid ""
 "File Sharing allows you to share your Public folder with others on your "
@@ -6695,7 +6770,7 @@ msgstr "Nama +Perangkat"
 msgid "Share files with other devices on the current network"
 msgstr "Berbagi berkas dengan perangkat lain pada jaringan saat ini"
 
-#: panels/sharing/cc-sharing-panel.ui:29 panels/sharing/cc-sharing-panel.ui:80
+#: panels/sharing/cc-sharing-panel.ui:29 panels/sharing/cc-sharing-panel.ui:64
 msgid "_File Sharing"
 msgstr "_Berbagi Berkas"
 
@@ -6703,7 +6778,7 @@ msgstr "_Berbagi Berkas"
 msgid "Stream music, photos and videos to devices on the current network"
 msgstr "Stream musik, foto, dan video ke perangkat pada jaringan saat ini"
 
-#: panels/sharing/cc-sharing-panel.ui:38 panels/sharing/cc-sharing-panel.ui:150
+#: panels/sharing/cc-sharing-panel.ui:38 panels/sharing/cc-sharing-panel.ui:118
 msgid "_Media Sharing"
 msgstr "Berbagi _Media"
 
@@ -6711,29 +6786,28 @@ msgstr "Berbagi _Media"
 msgid "File Sharing"
 msgstr "Berbagi Berkas"
 
-#: panels/sharing/cc-sharing-panel.ui:90
+#: panels/sharing/cc-sharing-panel.ui:74
 msgid "_Require Password"
 msgstr "Meme_rlukan Kata Sandi"
 
-#: panels/sharing/cc-sharing-panel.ui:96
-#: panels/system/users/cc-enterprise-login-dialog.ui:114
+#: panels/sharing/cc-sharing-panel.ui:80
+#: panels/system/users/cc-enterprise-login-dialog.ui:100
 msgid "_Password"
 msgstr "Kata _Sandi"
 
-#: panels/sharing/cc-sharing-panel.ui:104
-#: panels/sharing/cc-sharing-panel.ui:171
+#: panels/sharing/cc-sharing-panel.ui:88 panels/sharing/cc-sharing-panel.ui:139
 msgid "Networks"
 msgstr "Jaringan"
 
-#: panels/sharing/cc-sharing-panel.ui:120
+#: panels/sharing/cc-sharing-panel.ui:104
 msgid "Media Sharing"
 msgstr "Berbagi Pakai Media"
 
-#: panels/sharing/cc-sharing-panel.ui:145
+#: panels/sharing/cc-sharing-panel.ui:113
 msgid "Share music, photos and videos over the network"
 msgstr "Berbagi pakai musik, foto, dan video melalui jaringan"
 
-#: panels/sharing/cc-sharing-panel.ui:158
+#: panels/sharing/cc-sharing-panel.ui:126
 msgid "Folders"
 msgstr "Folder"
 
@@ -6758,23 +6832,23 @@ msgstr ""
 msgid "Custom"
 msgstr "Gubahan"
 
-#: panels/sound/cc-alert-chooser-window.c:344
-#: panels/sound/cc-alert-chooser-window.ui:32
+#: panels/sound/cc-alert-chooser-window.c:342
+#: panels/sound/cc-alert-chooser-window.ui:29
 msgid "Click"
 msgstr "Klik"
 
-#: panels/sound/cc-alert-chooser-window.c:346
-#: panels/sound/cc-alert-chooser-window.ui:74
+#: panels/sound/cc-alert-chooser-window.c:344
+#: panels/sound/cc-alert-chooser-window.ui:71
 msgid "Hum"
 msgstr "Hum"
 
-#: panels/sound/cc-alert-chooser-window.c:348
-#: panels/sound/cc-alert-chooser-window.ui:46
+#: panels/sound/cc-alert-chooser-window.c:346
+#: panels/sound/cc-alert-chooser-window.ui:43
 msgid "String"
 msgstr "String"
 
-#: panels/sound/cc-alert-chooser-window.c:350
-#: panels/sound/cc-alert-chooser-window.ui:60
+#: panels/sound/cc-alert-chooser-window.c:348
+#: panels/sound/cc-alert-chooser-window.ui:57
 msgid "Swing"
 msgstr "Ayun"
 
@@ -6838,43 +6912,43 @@ msgstr "_Sub Woofer"
 msgid "Output Device"
 msgstr "Perangkat Keluaran"
 
-#: panels/sound/cc-sound-panel.ui:226
+#: panels/sound/cc-sound-panel.ui:224
 msgid "No Output Devices"
 msgstr "Tidak Ada Perangkat Keluaran"
 
-#: panels/sound/cc-sound-panel.ui:238 panels/sound/cc-sound-panel.ui:350
+#: panels/sound/cc-sound-panel.ui:232 panels/sound/cc-sound-panel.ui:344
 msgid "Input"
 msgstr "Masukan"
 
-#: panels/sound/cc-sound-panel.ui:260
+#: panels/sound/cc-sound-panel.ui:254
 msgid "_Input Device"
 msgstr "Perangkat _Masukan"
 
-#: panels/sound/cc-sound-panel.ui:298
+#: panels/sound/cc-sound-panel.ui:292
 msgid "Con_figuration"
 msgstr "Kon_figurasi"
 
-#: panels/sound/cc-sound-panel.ui:333
+#: panels/sound/cc-sound-panel.ui:327
 msgid "I_nput Volume"
 msgstr "Volume Masuka_n"
 
-#: panels/sound/cc-sound-panel.ui:353
+#: panels/sound/cc-sound-panel.ui:347
 msgid "Input Device"
 msgstr "Perangkat Masukan"
 
-#: panels/sound/cc-sound-panel.ui:356
+#: panels/sound/cc-sound-panel.ui:348
 msgid "No Input Devices"
 msgstr "Tidak Ada Perangkat Masukan"
 
-#: panels/sound/cc-sound-panel.ui:368
+#: panels/sound/cc-sound-panel.ui:356
 msgid "Sounds"
 msgstr "Suara"
 
-#: panels/sound/cc-sound-panel.ui:371
+#: panels/sound/cc-sound-panel.ui:359
 msgid "Vo_lume Levels"
 msgstr "Tingkat Vo_lume"
 
-#: panels/sound/cc-sound-panel.ui:378
+#: panels/sound/cc-sound-panel.ui:366
 msgid "_Alert Sound"
 msgstr "Su_ara Waspada"
 
@@ -6935,34 +7009,34 @@ msgid "System Logo"
 msgstr "Logo Sistem"
 
 #. Translators: this field contains the distro name and version
-#: panels/system/about/cc-about-page.ui:57
+#: panels/system/about/cc-about-page.ui:56
 msgid "Operating System"
 msgstr "Sistem Operasi"
 
-#: panels/system/about/cc-about-page.ui:66
+#: panels/system/about/cc-about-page.ui:67
 msgid "Hardware Model"
 msgstr "Model Perangkat Keras"
 
-#: panels/system/about/cc-about-page.ui:75
-#: panels/system/about/cc-system-details-window.ui:88
+#: panels/system/about/cc-about-page.ui:78
+#: panels/system/about/cc-system-details-window.ui:85
 msgid "Processor"
 msgstr "Prosesor"
 
-#: panels/system/about/cc-about-page.ui:83
-#: panels/system/about/cc-system-details-window.ui:81
+#: panels/system/about/cc-about-page.ui:88
+#: panels/system/about/cc-system-details-window.ui:78
 msgid "Memory"
 msgstr "Memori"
 
-#: panels/system/about/cc-about-page.ui:91
-#: panels/system/about/cc-system-details-window.ui:103
+#: panels/system/about/cc-about-page.ui:98
+#: panels/system/about/cc-system-details-window.ui:100
 msgid "Disk Capacity"
 msgstr "Kapasitas Diska"
 
-#: panels/system/about/cc-about-page.ui:92
+#: panels/system/about/cc-about-page.ui:99
 msgid "Calculating…"
 msgstr "Menghitung…"
 
-#: panels/system/about/cc-about-page.ui:99
+#: panels/system/about/cc-about-page.ui:109
 msgid "_System Details"
 msgstr "Rincian _Sistem"
 
@@ -7081,51 +7155,51 @@ msgstr "Rincian disalin ke papan klip"
 msgid "System Details"
 msgstr "Rincian Sistem"
 
-#: panels/system/about/cc-system-details-window.ui:31
+#: panels/system/about/cc-system-details-window.ui:28
 msgid "_Copy"
 msgstr "_Salin"
 
-#: panels/system/about/cc-system-details-window.ui:63
+#: panels/system/about/cc-system-details-window.ui:60
 msgid "Hardware Information"
 msgstr "Informasi Perangkat Keras"
 
-#: panels/system/about/cc-system-details-window.ui:123
+#: panels/system/about/cc-system-details-window.ui:120
 msgid "Software Information"
 msgstr "Informasi Perangkat Lunak"
 
-#: panels/system/about/cc-system-details-window.ui:134
+#: panels/system/about/cc-system-details-window.ui:131
 #: panels/wwan/cc-wwan-details-dialog.ui:210
 msgid "Firmware Version"
 msgstr "Versi Firmware"
 
 #. translators: this field contains the distro name and version
-#: panels/system/about/cc-system-details-window.ui:142
+#: panels/system/about/cc-system-details-window.ui:139
 msgid "OS Name"
 msgstr "Nama Sistem Operasi"
 
 #. translators: this field contains the distro build
-#: panels/system/about/cc-system-details-window.ui:150
+#: panels/system/about/cc-system-details-window.ui:147
 msgid "OS Build"
 msgstr "Build OS"
 
 #. translators: this field contains the distro type
-#: panels/system/about/cc-system-details-window.ui:158
+#: panels/system/about/cc-system-details-window.ui:155
 msgid "OS Type"
 msgstr "Tipe Sistem Operasi"
 
-#: panels/system/about/cc-system-details-window.ui:165
+#: panels/system/about/cc-system-details-window.ui:162
 msgid "GNOME Version"
 msgstr "Versi GNOME"
 
-#: panels/system/about/cc-system-details-window.ui:172
+#: panels/system/about/cc-system-details-window.ui:169
 msgid "Windowing System"
 msgstr "Sistem Jendela"
 
-#: panels/system/about/cc-system-details-window.ui:179
+#: panels/system/about/cc-system-details-window.ui:176
 msgid "Virtualization"
 msgstr "Virtualisasi"
 
-#: panels/system/about/cc-system-details-window.ui:186
+#: panels/system/about/cc-system-details-window.ui:183
 msgid "Kernel Version"
 msgstr "Versi Kernel"
 
@@ -7179,9 +7253,8 @@ msgid "Allow this device to be used remotely"
 msgstr "Izinkan perangkat ini digunakan dari jarak jauh"
 
 #: panels/system/cc-system-panel.ui:64
-#: panels/system/remote-login/cc-remote-login-page.ui:51
-msgid "Secu_re Shell"
-msgstr "Secu_re Shell"
+msgid "Se_cure Shell"
+msgstr "Se_cure Shell"
 
 #: panels/system/cc-system-panel.ui:65
 msgid "SSH network access"
@@ -7196,21 +7269,21 @@ msgid "Hardware details and software versions"
 msgstr "Detail perangkat keras dan versi perangkat lunak"
 
 #: panels/system/cc-system-panel.ui:91
-msgid "Software _Updates"
+msgid "S_oftware Updates"
 msgstr "Pembar_uan Perangkat Lunak"
 
 #. Translators: This is the full date and time format used in 12-hour mode.
-#: panels/system/datetime/cc-datetime-page.c:237
+#: panels/system/datetime/cc-datetime-page.c:236
 msgid "%e %B %Y, %l:%M %p"
 msgstr "%e %B %Y, %l:%M %p"
 
 #. Translators: This is the full date and time format used in 24-hour mode.
-#: panels/system/datetime/cc-datetime-page.c:242
+#: panels/system/datetime/cc-datetime-page.c:241
 msgid "%e %B %Y, %R"
 msgstr "%e %B %Y, %R"
 
 #. Translators: "city, country"
-#: panels/system/datetime/cc-datetime-page.c:403
+#: panels/system/datetime/cc-datetime-page.c:402
 #, c-format
 msgctxt "timezone loc"
 msgid "%s, %s"
@@ -7218,153 +7291,149 @@ msgstr "%s, %s"
 
 #. Update the timezone on the listbow row
 #. Translators: "timezone (details)"
-#: panels/system/datetime/cc-datetime-page.c:420
+#: panels/system/datetime/cc-datetime-page.c:419
 #, c-format
 msgctxt "timezone desc"
 msgid "%s (%s)"
 msgstr "%s (%s)"
 
 #: panels/system/datetime/cc-datetime-page.ui:9
-#: panels/system/datetime/cc-datetime-page.ui:116
+#: panels/system/datetime/cc-datetime-page.ui:103
 #: panels/system/datetime/gnome-datetime-panel.desktop.in:3
 msgid "Date & Time"
 msgstr "Tanggal & Waktu"
 
-#: panels/system/datetime/cc-datetime-page.ui:59
+#: panels/system/datetime/cc-datetime-page.ui:46
 msgid "_Year"
 msgstr "_Tahun"
 
-#: panels/system/datetime/cc-datetime-page.ui:70
+#: panels/system/datetime/cc-datetime-page.ui:57
 msgid "_Month"
 msgstr "_Bulan"
 
-#: panels/system/datetime/cc-datetime-page.ui:97
+#: panels/system/datetime/cc-datetime-page.ui:84
 msgid "_Day"
 msgstr "_Tanggal"
 
-#: panels/system/datetime/cc-datetime-page.ui:136
+#: panels/system/datetime/cc-datetime-page.ui:123
 msgid "Automatic _Date &amp; Time"
 msgstr "Tanggal &amp; Waktu Otomatis"
 
-#: panels/system/datetime/cc-datetime-page.ui:137
+#: panels/system/datetime/cc-datetime-page.ui:124
 msgid "Requires internet access"
 msgstr "Memerlukan koneksi Internet"
 
-#: panels/system/datetime/cc-datetime-page.ui:149
+#: panels/system/datetime/cc-datetime-page.ui:136
 msgid "Date &amp; _Time"
 msgstr "Tanggal &amp; Waktu"
 
-#: panels/system/datetime/cc-datetime-page.ui:161
+#: panels/system/datetime/cc-datetime-page.ui:147
 msgid "Automatic Time _Zone"
 msgstr "_Zona Waktu Otomatis"
 
-#: panels/system/datetime/cc-datetime-page.ui:162
+#: panels/system/datetime/cc-datetime-page.ui:148
 msgid "Requires location services enabled and internet access"
 msgstr "Membutuhkan layanan lokasi diaktifkan dan akses internet"
 
-#: panels/system/datetime/cc-datetime-page.ui:168
+#: panels/system/datetime/cc-datetime-page.ui:154
 msgid "Time Z_one"
 msgstr "Z_ona Waktu"
 
-#: panels/system/datetime/cc-datetime-page.ui:179
+#: panels/system/datetime/cc-datetime-page.ui:165
 msgid "Time _Format"
 msgstr "_Format Waktu"
 
-#: panels/system/datetime/cc-datetime-page.ui:190
+#: panels/system/datetime/cc-datetime-page.ui:176
 msgid "_24-hour"
 msgstr "_24 jam"
 
-#: panels/system/datetime/cc-datetime-page.ui:198
+#: panels/system/datetime/cc-datetime-page.ui:184
 msgid "AM / _PM"
 msgstr "AM / _PM"
 
-#: panels/system/datetime/cc-datetime-page.ui:211
+#: panels/system/datetime/cc-datetime-page.ui:197
 msgid "Clock &amp; Calendar"
 msgstr "Jam &amp; Kalender"
 
-#: panels/system/datetime/cc-datetime-page.ui:212
+#: panels/system/datetime/cc-datetime-page.ui:198
 msgid "Control how the time and date is shown in the top bar"
 msgstr "Kontrol bagaimana waktu dan tanggal ditampilkan di bilah atas"
 
-#: panels/system/datetime/cc-datetime-page.ui:215
+#: panels/system/datetime/cc-datetime-page.ui:201
 msgid "_Week Day"
 msgstr "Hari _Kerja"
 
-#: panels/system/datetime/cc-datetime-page.ui:221
+#: panels/system/datetime/cc-datetime-page.ui:207
 msgid "D_ate"
 msgstr "T_anggal"
 
-#: panels/system/datetime/cc-datetime-page.ui:227
+#: panels/system/datetime/cc-datetime-page.ui:213
 msgid "_Seconds"
 msgstr "_Detik"
 
-#: panels/system/datetime/cc-datetime-page.ui:233
+#: panels/system/datetime/cc-datetime-page.ui:219
 msgid "Week _Numbers"
 msgstr "_Nomor Minggu"
 
-#: panels/system/datetime/cc-datetime-page.ui:234
+#: panels/system/datetime/cc-datetime-page.ui:220
 msgid "Shown in the dropdown calendar"
 msgstr "Ditampilkan di kalender dropdown"
 
-#: panels/system/datetime/cc-datetime-page.ui:270
+#: panels/system/datetime/cc-datetime-page.ui:256
 msgid "January"
 msgstr "Januari"
 
-#: panels/system/datetime/cc-datetime-page.ui:271
+#: panels/system/datetime/cc-datetime-page.ui:257
 msgid "February"
 msgstr "Februari"
 
-#: panels/system/datetime/cc-datetime-page.ui:272
+#: panels/system/datetime/cc-datetime-page.ui:258
 msgid "March"
 msgstr "Maret"
 
-#: panels/system/datetime/cc-datetime-page.ui:273
+#: panels/system/datetime/cc-datetime-page.ui:259
 msgid "April"
 msgstr "April"
 
-#: panels/system/datetime/cc-datetime-page.ui:274
+#: panels/system/datetime/cc-datetime-page.ui:260
 msgid "May"
 msgstr "Mei"
 
-#: panels/system/datetime/cc-datetime-page.ui:275
+#: panels/system/datetime/cc-datetime-page.ui:261
 msgid "June"
 msgstr "Juni"
 
-#: panels/system/datetime/cc-datetime-page.ui:276
+#: panels/system/datetime/cc-datetime-page.ui:262
 msgid "July"
 msgstr "Juli"
 
-#: panels/system/datetime/cc-datetime-page.ui:277
+#: panels/system/datetime/cc-datetime-page.ui:263
 msgid "August"
 msgstr "Agustus"
 
-#: panels/system/datetime/cc-datetime-page.ui:278
+#: panels/system/datetime/cc-datetime-page.ui:264
 msgid "September"
 msgstr "September"
 
-#: panels/system/datetime/cc-datetime-page.ui:279
+#: panels/system/datetime/cc-datetime-page.ui:265
 msgid "October"
 msgstr "Oktober"
 
-#: panels/system/datetime/cc-datetime-page.ui:280
+#: panels/system/datetime/cc-datetime-page.ui:266
 msgid "November"
 msgstr "November"
 
-#: panels/system/datetime/cc-datetime-page.ui:281
+#: panels/system/datetime/cc-datetime-page.ui:267
 msgid "December"
 msgstr "Desember"
 
-#: panels/system/datetime/cc-tz-dialog.ui:6
+#: panels/system/datetime/cc-tz-dialog.ui:4
 msgid "Select Time Zone"
 msgstr "Pilih Zona Waktu"
 
-#: panels/system/datetime/cc-tz-dialog.ui:31
+#: panels/system/datetime/cc-tz-dialog.ui:27
 msgid "Search cities"
 msgstr "Cari kota"
-
-#: panels/system/datetime/cc-tz-dialog.ui:47
-msgid "No Results"
-msgstr "Tak Ada Hasil"
 
 #: panels/system/datetime/gnome-datetime-panel.desktop.in:4
 msgid "Change the date and time, including time zone"
@@ -7373,7 +7442,7 @@ msgstr "Ubah tanggal dan waktu, termasuk zona waktu"
 #. Translators: Search terms to find the Date and Time panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/system/datetime/gnome-datetime-panel.desktop.in:15
 msgid "Clock;Timezone;Location;"
-msgstr "Jam;Zona waktu;Lokasi;"
+msgstr "Jam;Zona Waktu;Lokasi;"
 
 #: panels/system/datetime/org.gnome.controlcenter.system.policy.in:11
 msgid "Change system time and date settings"
@@ -7518,32 +7587,32 @@ msgid "Language;Layout;Keyboard;Input;"
 msgstr "Bahasa;Tata Letak;Papan Tik;Masukan;"
 
 #: panels/system/remote-desktop/cc-desktop-sharing-page.c:364
-#: panels/system/remote-desktop/cc-remote-session-page.c:98
-msgid "Device address copied"
-msgstr "Alamat perangkat disalin"
+#: panels/system/remote-desktop/cc-remote-login-page.c:98
+msgid "Device address copied to clipboard"
+msgstr "Alamat perangkat disalin ke papan klip"
 
 #: panels/system/remote-desktop/cc-desktop-sharing-page.c:373
-#: panels/system/remote-desktop/cc-remote-session-page.c:107
-msgid "Port number copied"
-msgstr "Nomor port disalin"
+#: panels/system/remote-desktop/cc-remote-login-page.c:107
+msgid "Port number copied to clipboard"
+msgstr "Nomor port disalin ke papan klip"
 
 #: panels/system/remote-desktop/cc-desktop-sharing-page.c:384
-#: panels/system/remote-desktop/cc-remote-session-page.c:118
-msgid "Username copied"
-msgstr "Nama pengguna disalin"
+#: panels/system/remote-desktop/cc-remote-login-page.c:118
+msgid "Username copied to clipboard"
+msgstr "Nama pengguna disalin ke papan klip"
 
 #: panels/system/remote-desktop/cc-desktop-sharing-page.c:395
-#: panels/system/remote-desktop/cc-remote-session-page.c:129
-msgid "Password copied"
-msgstr "Kata sandi disalin"
+#: panels/system/remote-desktop/cc-remote-login-page.c:129
+msgid "Password copied to clipboard"
+msgstr "Kata sandi disalin ke papan klip"
 
 #: panels/system/remote-desktop/cc-desktop-sharing-page.ui:12
 msgid ""
 "Share your existing desktop with other devices. The remote connection uses "
-"the existing screen resolution"
+"the existing screen resolution."
 msgstr ""
 "Bagikan desktop Anda yang ada dengan perangkat lain. Koneksi jarak jauh "
-"menggunakan resolusi layar yang ada"
+"menggunakan resolusi layar yang ada."
 
 #: panels/system/remote-desktop/cc-desktop-sharing-page.ui:27
 msgid "_Desktop Sharing"
@@ -7558,12 +7627,12 @@ msgid "Allows desktop shares to control the screen"
 msgstr "Izinkan koneksi mengendalikan layar.zz"
 
 #: panels/system/remote-desktop/cc-desktop-sharing-page.ui:42
-#: panels/system/remote-desktop/cc-remote-session-page.ui:41
+#: panels/system/remote-desktop/cc-remote-login-page.ui:41
 msgid "How to Connect"
 msgstr "Cara Menghubungkan"
 
 #: panels/system/remote-desktop/cc-desktop-sharing-page.ui:43
-#: panels/system/remote-desktop/cc-remote-session-page.ui:42
+#: panels/system/remote-desktop/cc-remote-login-page.ui:42
 msgid ""
 "Use a remote desktop app to connect using the RDP protocol. Additional "
 "information about the device’s network location may also be required."
@@ -7573,7 +7642,7 @@ msgstr ""
 "diperlukan."
 
 #: panels/system/remote-desktop/cc-desktop-sharing-page.ui:46
-#: panels/system/remote-desktop/cc-remote-session-page.ui:45
+#: panels/system/remote-desktop/cc-remote-login-page.ui:45
 msgid "_Hostname"
 msgstr "Nama _Host"
 
@@ -7581,59 +7650,33 @@ msgstr "Nama _Host"
 #: panels/system/remote-desktop/cc-desktop-sharing-page.ui:75
 #: panels/system/remote-desktop/cc-desktop-sharing-page.ui:96
 #: panels/system/remote-desktop/cc-desktop-sharing-page.ui:112
-#: panels/system/remote-desktop/cc-remote-session-page.ui:53
-#: panels/system/remote-desktop/cc-remote-session-page.ui:74
-#: panels/system/remote-desktop/cc-remote-session-page.ui:95
-#: panels/system/remote-desktop/cc-remote-session-page.ui:111
-#: panels/system/remote-login/cc-remote-login-page.ui:65
+#: panels/system/remote-desktop/cc-remote-login-page.ui:53
+#: panels/system/remote-desktop/cc-remote-login-page.ui:74
+#: panels/system/remote-desktop/cc-remote-login-page.ui:95
+#: panels/system/remote-desktop/cc-remote-login-page.ui:111
+#: panels/system/secure-shell/cc-secure-shell-page.ui:50
 msgid "Copy"
 msgstr "Salin"
 
 #: panels/system/remote-desktop/cc-desktop-sharing-page.ui:67
-#: panels/system/remote-desktop/cc-remote-session-page.ui:66
+#: panels/system/remote-desktop/cc-remote-login-page.ui:66
 msgid "_Port"
 msgstr "_Port"
 
 #: panels/system/remote-desktop/cc-desktop-sharing-page.ui:90
-#: panels/system/remote-desktop/cc-remote-session-page.ui:89
+#: panels/system/remote-desktop/cc-remote-login-page.ui:89
 msgid "Login Details"
 msgstr "Rincian Log Masuk"
 
 #: panels/system/remote-desktop/cc-desktop-sharing-page.ui:131
-#: panels/system/remote-desktop/cc-remote-session-page.ui:130
+#: panels/system/remote-desktop/cc-remote-login-page.ui:130
 msgid "_Generate New Password"
 msgstr "_Hasilkan Kata Sandi Baru"
 
 #: panels/system/remote-desktop/cc-desktop-sharing-page.ui:142
-#: panels/system/remote-desktop/cc-remote-session-page.ui:141
+#: panels/system/remote-desktop/cc-remote-login-page.ui:141
 msgid "_Verify Encryption"
 msgstr "_Verifikasikan Enkripsi"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:4
-msgid "Remote Desktop"
-msgstr "Destop Jauh"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:39
-msgid "Desktop Sharing"
-msgstr "Berbagi Desktop"
-
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:48
-#: panels/system/remote-desktop/cc-remote-session-page.ui:33
-msgid "Remote Login"
-msgstr "Log Masuk Jarak Jauh"
-
-#: panels/system/remote-desktop/cc-remote-session-page.c:774
-#: panels/system/users/cc-user-page.c:772
-msgid "Some settings are locked"
-msgstr "Beberapa pengaturan terkunci"
-
-#: panels/system/remote-desktop/cc-remote-session-page.ui:18
-msgid ""
-"Remotely connect to your user account when it isn’t being used. The display "
-"resolution can be set from the remote."
-msgstr ""
-"Sambungkan dari jarak jauh ke akun pengguna Anda saat tidak digunakan. "
-"Resolusi layar dapat diatur dari remote."
 
 #: panels/system/remote-desktop/cc-encryption-fingerprint-dialog.ui:28
 msgid "Encryption Fingerprint"
@@ -7646,6 +7689,32 @@ msgid ""
 msgstr ""
 "Sidik jari enkripsi dapat dilihat saat menghubungkan klien dan harus identik"
 
+#: panels/system/remote-desktop/cc-remote-desktop-page.ui:4
+msgid "Remote Desktop"
+msgstr "Destop Jauh"
+
+#: panels/system/remote-desktop/cc-remote-desktop-page.ui:39
+msgid "Desktop Sharing"
+msgstr "Berbagi Desktop"
+
+#: panels/system/remote-desktop/cc-remote-desktop-page.ui:48
+#: panels/system/remote-desktop/cc-remote-login-page.ui:33
+msgid "Remote Login"
+msgstr "Log Masuk Jarak Jauh"
+
+#: panels/system/remote-desktop/cc-remote-login-page.c:774
+#: panels/system/users/cc-user-page.c:772
+msgid "Some settings are locked"
+msgstr "Beberapa pengaturan terkunci"
+
+#: panels/system/remote-desktop/cc-remote-login-page.ui:18
+msgid ""
+"Remotely connect to your user account when it isn’t being used. The display "
+"resolution can be set from the remote."
+msgstr ""
+"Sambungkan dari jarak jauh ke akun pengguna Anda saat tidak digunakan. "
+"Resolusi layar dapat diatur dari remote."
+
 #: panels/system/remote-desktop/org.gnome.controlcenter.remote-session-helper.policy.in.in:11
 msgid "Enable or disable remote sessions"
 msgstr "Fungsikan atau matikan sesi jarak jauh"
@@ -7655,27 +7724,31 @@ msgid "Authentication is required to enable or disable remote sessions"
 msgstr ""
 "Autentikasi diperlukan untuk memfungsikan atau mematikan sesi jarak jauh"
 
-#: panels/system/remote-login/cc-remote-login-page.c:53
-msgid "Command copied"
-msgstr "Perintah disalin"
+#: panels/system/secure-shell/cc-secure-shell-page.c:53
+msgid "Command copied to clipboard"
+msgstr "Perintah disalin ke papan klip"
 
-#: panels/system/remote-login/cc-remote-login-page.ui:4
+#: panels/system/secure-shell/cc-secure-shell-page.ui:4
 msgid "Secure Shell"
 msgstr "Secure Shell"
 
-#: panels/system/remote-login/cc-remote-login-page.ui:39
+#: panels/system/secure-shell/cc-secure-shell-page.ui:22
 msgid "Access this device using Secure Shell (SSH)"
 msgstr "Akses perangkat ini menggunakan Secure Shell (SSH)"
 
-#: panels/system/remote-login/cc-remote-login-page.ui:58
-msgid "SSH Login Command"
-msgstr "Perintah Log Masuk SSH"
+#: panels/system/secure-shell/cc-secure-shell-page.ui:34
+msgid "_Secure Shell"
+msgstr "_Secure Shell"
 
-#: panels/system/remote-login/org.gnome.controlcenter.remote-login-helper.policy.in.in:11
+#: panels/system/secure-shell/cc-secure-shell-page.ui:41
+msgid "SSH Login _Command"
+msgstr "_Perintah Log Masuk SSH"
+
+#: panels/system/secure-shell/org.gnome.controlcenter.remote-login-helper.policy.in.in:11
 msgid "Enable or disable remote login"
 msgstr "Fungsikan atau matikan log masuk jarak jauh"
 
-#: panels/system/remote-login/org.gnome.controlcenter.remote-login-helper.policy.in.in:12
+#: panels/system/secure-shell/org.gnome.controlcenter.remote-login-helper.policy.in.in:12
 msgid "Authentication is required to enable or disable remote login"
 msgstr ""
 "Autentikasi diperlukan untuk memfungsikan atau mematikan log masuk jarak jauh"
@@ -7688,21 +7761,21 @@ msgstr "Gagal menambah akun"
 msgid "The passwords do not match."
 msgstr "Kata sandi tak cocok."
 
-#: panels/system/users/cc-add-user-dialog.ui:13
+#: panels/system/users/cc-add-user-dialog.ui:12
 #: panels/system/users/data/join-dialog.ui:9
 msgid "Add User"
 msgstr "Tambah Pengguna"
 
-#: panels/system/users/cc-add-user-dialog.ui:102
-#: panels/system/users/cc-enterprise-login-dialog.ui:107
+#: panels/system/users/cc-add-user-dialog.ui:90
+#: panels/system/users/cc-enterprise-login-dialog.ui:93
 msgid "_Username"
 msgstr "Nama pengg_una"
 
-#: panels/system/users/cc-add-user-dialog.ui:140
+#: panels/system/users/cc-add-user-dialog.ui:128
 msgid "Ad_ministrator"
 msgstr "Ad_ministrator"
 
-#: panels/system/users/cc-add-user-dialog.ui:145
+#: panels/system/users/cc-add-user-dialog.ui:133
 #: panels/system/users/cc-user-page.ui:141
 msgid ""
 "Administrators have extra abilities, including adding and removing users, "
@@ -7713,21 +7786,29 @@ msgstr ""
 "pengguna, mengubah pengaturan log masuk, dan menghapus perangkat lunak. "
 "Kontrol orang tua tidak dapat diterapkan pada administrator."
 
-#: panels/system/users/cc-add-user-dialog.ui:163
+#: panels/system/users/cc-add-user-dialog.ui:151
 msgid "User sets password on _first login"
 msgstr "Pengguna mengatur kata sandi saat log masuk _pertama"
 
-#: panels/system/users/cc-add-user-dialog.ui:176
+#: panels/system/users/cc-add-user-dialog.ui:164
 msgid "Set password n_ow"
 msgstr "At_ur kata sandi sekarang"
 
-#: panels/system/users/cc-add-user-dialog.ui:196
+#: panels/system/users/cc-add-user-dialog.ui:184
 msgid "Pass_word"
 msgstr "Kata _Sandi"
 
-#: panels/system/users/cc-add-user-dialog.ui:240
+#: panels/system/users/cc-add-user-dialog.ui:228
 msgid "_Confirm"
 msgstr "_Konfirmasi"
+
+#: panels/system/users/cc-avatar-chooser.c:162
+msgid "Browse for more pictures"
+msgstr "Ramban lebih banyak gambar"
+
+#: panels/system/users/cc-avatar-chooser.ui:24
+msgid "Select a File…"
+msgstr "Pilih Berkas…"
 
 #: panels/system/users/cc-enterprise-login-dialog.c:148
 #: panels/system/users/cc-enterprise-login-dialog.c:186
@@ -7791,21 +7872,21 @@ msgstr "Memeriksa domain…"
 msgid "Failed to contact realmd service"
 msgstr "Gagal menghubungi layanan realmd"
 
-#: panels/system/users/cc-enterprise-login-dialog.ui:28
-#: panels/system/users/cc-enterprise-login-dialog.ui:48
+#: panels/system/users/cc-enterprise-login-dialog.ui:14
+#: panels/system/users/cc-enterprise-login-dialog.ui:34
 msgid "Add Enterprise Login"
 msgstr "Tambahkan Log Masuk Enterprise"
 
-#: panels/system/users/cc-enterprise-login-dialog.ui:37
+#: panels/system/users/cc-enterprise-login-dialog.ui:23
 msgid "Offline"
 msgstr "Luring"
 
-#: panels/system/users/cc-enterprise-login-dialog.ui:38
+#: panels/system/users/cc-enterprise-login-dialog.ui:24
 msgid "A network connection is needed to add enterprise login accounts."
 msgstr ""
 "Koneksi jaringan diperlukan untuk menambahkan akun log masuk enterprise."
 
-#: panels/system/users/cc-enterprise-login-dialog.ui:84
+#: panels/system/users/cc-enterprise-login-dialog.ui:70
 msgid ""
 "Enterprise login allows an existing centrally managed account to be used on "
 "this device."
@@ -7813,41 +7894,33 @@ msgstr ""
 "Log masuk enterprise memungkinkan akun pengguna yang telah ada yang dikelola "
 "secara terpusat untuk dipakai pada perangkat ini."
 
-#: panels/system/users/cc-enterprise-login-dialog.ui:89
+#: panels/system/users/cc-enterprise-login-dialog.ui:75
 #: panels/system/users/data/join-dialog.ui:90
 msgid "_Domain"
 msgstr "_Domain"
 
-#: panels/system/users/cc-enterprise-login-dialog.ui:97
+#: panels/system/users/cc-enterprise-login-dialog.ui:83
 msgid "Should match the web domain of the account provider"
 msgstr "Mesti cocok dengan domain web dari penyedia akun"
 
-#: panels/system/users/cc-enterprise-login-dialog.ui:130
+#: panels/system/users/cc-enterprise-login-dialog.ui:116
 msgid "Enroll Device"
 msgstr "Daftarkan Perangkat"
 
 #. Translators: This button enrolls the computer in the domain in order to use enterprise logins.
-#: panels/system/users/cc-enterprise-login-dialog.ui:140
+#: panels/system/users/cc-enterprise-login-dialog.ui:126
 #: panels/system/users/data/join-dialog.ui:30
 msgid "_Enroll"
 msgstr "_Daftarkan"
 
-#: panels/system/users/cc-enterprise-login-dialog.ui:162
+#: panels/system/users/cc-enterprise-login-dialog.ui:148
 #: panels/system/users/data/join-dialog.ui:112
 msgid "Administrator _Name"
 msgstr "_Nama Administrator"
 
-#: panels/system/users/cc-enterprise-login-dialog.ui:169
+#: panels/system/users/cc-enterprise-login-dialog.ui:155
 msgid "Administrator _Password"
 msgstr "Kata _Sandi Administrator"
-
-#: panels/system/users/cc-avatar-chooser.c:162
-msgid "Browse for more pictures"
-msgstr "Ramban lebih banyak gambar"
-
-#: panels/system/users/cc-avatar-chooser.ui:24
-msgid "Select a File…"
-msgstr "Pilih Berkas…"
 
 #: panels/system/users/cc-fingerprint-dialog.c:235
 msgid "the device needs to be claimed to perform this action"
@@ -7999,7 +8072,7 @@ msgstr "Masalah pada Perangkat Membaca"
 msgid "Failed to claim fingerprint device %s: %s"
 msgstr "Gagal mengklaim perangkat sidik jari %s: %s"
 
-#: panels/system/users/cc-fingerprint-dialog.c:1324
+#: panels/system/users/cc-fingerprint-dialog.c:1315
 #, c-format
 msgid "Failed to get fingerprint devices: %s"
 msgstr "Gagal mendapatkan perangkat sidik jari: %s"
@@ -8012,15 +8085,15 @@ msgstr "Manajer Sidik Jari"
 msgid "Fingerprint"
 msgstr "Sidik Jari"
 
-#: panels/system/users/cc-fingerprint-dialog.ui:85
+#: panels/system/users/cc-fingerprint-dialog.ui:79
 msgid "_No"
 msgstr "_Tidak"
 
-#: panels/system/users/cc-fingerprint-dialog.ui:93
+#: panels/system/users/cc-fingerprint-dialog.ui:87
 msgid "_Yes"
 msgstr "_Ya"
 
-#: panels/system/users/cc-fingerprint-dialog.ui:113
+#: panels/system/users/cc-fingerprint-dialog.ui:107
 msgid ""
 "Do you want to delete your registered fingerprints so fingerprint login is "
 "disabled?"
@@ -8028,44 +8101,44 @@ msgstr ""
 "Apakah Anda ingin menghapus sidik jari Anda yang telah terdaftar sehingga "
 "log masuk memakai sidik jari dimatikan?"
 
-#: panels/system/users/cc-fingerprint-dialog.ui:169
+#: panels/system/users/cc-fingerprint-dialog.ui:163
 msgid "No fingerprint device"
 msgstr "Tidak ada perangkat sidik jari"
 
 #. Translators: This is the empty state page label which states that there are no devices ready.
-#: panels/system/users/cc-fingerprint-dialog.ui:184
+#: panels/system/users/cc-fingerprint-dialog.ui:178
 msgid "No Fingerprint device"
 msgstr "Tidak ada perangkat Sidik Jari"
 
-#: panels/system/users/cc-fingerprint-dialog.ui:193
+#: panels/system/users/cc-fingerprint-dialog.ui:187
 msgid "Ensure the device is properly connected"
 msgstr "Pastikan perangkat terhubung dengan benar"
 
-#: panels/system/users/cc-fingerprint-dialog.ui:201
+#: panels/system/users/cc-fingerprint-dialog.ui:195
 msgid "Fingerprint Device"
 msgstr "Perangkat Sidik Jari"
 
-#: panels/system/users/cc-fingerprint-dialog.ui:210
+#: panels/system/users/cc-fingerprint-dialog.ui:204
 msgid "Choose the fingerprint device you want to configure"
 msgstr "Pilih perangkat sidik jari yang ingin Anda konfigurasi"
 
-#: panels/system/users/cc-fingerprint-dialog.ui:240
+#: panels/system/users/cc-fingerprint-dialog.ui:234
 msgid "Fingerprint Login"
 msgstr "Log Masuk Sidik Jari"
 
-#: panels/system/users/cc-fingerprint-dialog.ui:246
+#: panels/system/users/cc-fingerprint-dialog.ui:240
 msgid ""
-"Fingerprint login allows you to unlock and log into your computer with your "
+"Fingerprint login allows you to unlock and log into your device with your "
 "finger"
 msgstr ""
 "Log masuk dengan sidik jari memungkinkan Anda untuk membuka kunci dan masuk "
 "ke komputer dengan jari Anda"
 
-#: panels/system/users/cc-fingerprint-dialog.ui:273
+#: panels/system/users/cc-fingerprint-dialog.ui:267
 msgid "_Delete Fingerprints"
 msgstr "Hapus Si_dik Jari"
 
-#: panels/system/users/cc-fingerprint-dialog.ui:287
+#: panels/system/users/cc-fingerprint-dialog.ui:281
 msgid "Fingerprint Enroll"
 msgstr "Pendaftaran Sidik Jari"
 
@@ -8227,8 +8300,8 @@ msgid "_Add User…"
 msgstr "T_ambah Pengguna…"
 
 #: panels/system/users/cc-users-page.ui:46
-msgid "Add Enterprise User"
-msgstr "Tambah Pengguna Enterprise"
+msgid "Add _Enterprise Login…"
+msgstr "Tambahkan Log Masuk _Enterprise…"
 
 #: panels/system/users/data/join-dialog.ui:59
 msgid "Domain Administrator Login"
@@ -8255,12 +8328,11 @@ msgstr "Tambah atau hapus pengguna dan ubah kata sandi Anda"
 #. Translators: Search terms to find the Users panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/system/users/gnome-users-panel.desktop.in:15
 msgid ""
-"Login;Name;Fingerprint;Avatar;Logo;Face;Password;Parental Controls;Screen "
-"Time;App Restrictions;Web Restrictions;Usage;Usage Limit;Kid;Child;"
+"Login;Name;Fingerprint;Avatar;Logo;Face;Password;Parental;Restrictions;Usage;"
+"Kid;Child;"
 msgstr ""
-"Log Masuk;Nama;Sidik Jari;Avatar;Logo;Wajah;Kata Sandi;Kontrol Orang Tua;"
-"Waktu Layar;Pembatasan Aplikasi;Pembatasan Web;Penggunaan;Batas Penggunaan;"
-"Anak;"
+"Log Masuk;Nama;Sidik Jari;Avatar;Logo;Muka;Kata Sandi;Orangtua;Restriksi;"
+"Penggunaan;Anak;"
 
 #: panels/system/users/org.gnome.controlcenter.user-accounts.policy.in:11
 msgid "Manage user accounts"
@@ -8538,7 +8610,7 @@ msgstr "Tun_daan Klik Ganda"
 #: panels/universal-access/cc-ua-typing-page.ui:133
 #: panels/universal-access/cc-ua-typing-page.ui:186
 #: panels/universal-access/cc-ua-typing-page.ui:233
-#: panels/universal-access/cc-ua-zoom-page.ui:179
+#: panels/universal-access/cc-ua-zoom-page.ui:174
 msgid "Short"
 msgstr "Pendek"
 
@@ -8549,7 +8621,7 @@ msgstr "Pendek"
 #: panels/universal-access/cc-ua-typing-page.ui:136
 #: panels/universal-access/cc-ua-typing-page.ui:189
 #: panels/universal-access/cc-ua-typing-page.ui:236
-#: panels/universal-access/cc-ua-zoom-page.ui:183
+#: panels/universal-access/cc-ua-zoom-page.ui:178
 msgid "Long"
 msgstr "Panjang"
 
@@ -8921,95 +8993,95 @@ msgstr "Tetap Terpusat"
 msgid "Crosshairs"
 msgstr "Pembidik silang"
 
-#: panels/universal-access/cc-ua-zoom-page.ui:115
+#: panels/universal-access/cc-ua-zoom-page.ui:114
 msgid "_Crosshair Lines"
 msgstr "_Garis Bidik Silang"
 
-#: panels/universal-access/cc-ua-zoom-page.ui:116
+#: panels/universal-access/cc-ua-zoom-page.ui:115
 msgid "Mark the cursor location in the magnifier region using lines"
 msgstr "Tandai lokasi kursor di wilayah kaca pembesar menggunakan garis"
 
-#: panels/universal-access/cc-ua-zoom-page.ui:123
+#: panels/universal-access/cc-ua-zoom-page.ui:121
 msgid "_Overlap Mouse Cursor"
 msgstr "Menindih Kurs_or Tetikus"
 
-#: panels/universal-access/cc-ua-zoom-page.ui:131
+#: panels/universal-access/cc-ua-zoom-page.ui:128
 msgid "_Thickness"
 msgstr "Ke_tebalan"
 
 #. Translators: This is a mark in the Thickness scale
-#: panels/universal-access/cc-ua-zoom-page.ui:137
+#: panels/universal-access/cc-ua-zoom-page.ui:133
 msgid "Thin"
 msgstr "Tipis"
 
 #. Translators: This is a mark in the Thickness scale
-#: panels/universal-access/cc-ua-zoom-page.ui:138
+#: panels/universal-access/cc-ua-zoom-page.ui:134
 msgid "Thick"
 msgstr "Tebal"
 
-#: panels/universal-access/cc-ua-zoom-page.ui:171
+#: panels/universal-access/cc-ua-zoom-page.ui:166
 msgid "Len_gth"
 msgstr "Panjan_g"
 
 #. Translators: This is a mark in the Crosshair Length scale
-#: panels/universal-access/cc-ua-zoom-page.ui:180
+#: panels/universal-access/cc-ua-zoom-page.ui:175
 msgid "1/4 screen"
 msgstr "1/4 layar"
 
 #. Translators: This is a mark in the Crosshair Length scale
-#: panels/universal-access/cc-ua-zoom-page.ui:181
+#: panels/universal-access/cc-ua-zoom-page.ui:176
 msgid "1/2 Screen"
 msgstr "1/2 Layar"
 
 #. Translators: This is a mark in the Crosshair Length scale
-#: panels/universal-access/cc-ua-zoom-page.ui:182
+#: panels/universal-access/cc-ua-zoom-page.ui:177
 msgid "3/4 Screen"
 msgstr "3/4 Layar"
 
-#: panels/universal-access/cc-ua-zoom-page.ui:203
+#: panels/universal-access/cc-ua-zoom-page.ui:198
 msgid "Colo_r"
 msgstr "Wa_rna"
 
-#: panels/universal-access/cc-ua-zoom-page.ui:221
+#: panels/universal-access/cc-ua-zoom-page.ui:217
 msgid "Color Filters"
 msgstr "Penyaring Warna"
 
-#: panels/universal-access/cc-ua-zoom-page.ui:225
+#: panels/universal-access/cc-ua-zoom-page.ui:221
 msgid "_Inverted"
 msgstr "D_ibalik"
 
-#: panels/universal-access/cc-ua-zoom-page.ui:226
+#: panels/universal-access/cc-ua-zoom-page.ui:222
 msgid "Invert colors in the magnifier region"
 msgstr "Balikkan warna di wilayah kaca pembesar"
 
-#: panels/universal-access/cc-ua-zoom-page.ui:233
+#: panels/universal-access/cc-ua-zoom-page.ui:229
 msgid "_Brightness"
 msgstr "_Kecerahan"
 
 #. Translators: This is a mark in the Brightness scale
 #. Translators: This is a mark in the Contrast scale
-#: panels/universal-access/cc-ua-zoom-page.ui:239
-#: panels/universal-access/cc-ua-zoom-page.ui:264
+#: panels/universal-access/cc-ua-zoom-page.ui:235
+#: panels/universal-access/cc-ua-zoom-page.ui:260
 msgid "Low"
 msgstr "Rendah"
 
 #. Translators: This is a mark in the Brightness scale
 #. Translators: This is a mark in the Contrast scale
-#: panels/universal-access/cc-ua-zoom-page.ui:240
-#: panels/universal-access/cc-ua-zoom-page.ui:265
+#: panels/universal-access/cc-ua-zoom-page.ui:236
+#: panels/universal-access/cc-ua-zoom-page.ui:261
 msgid "High"
 msgstr "Tinggi"
 
-#: panels/universal-access/cc-ua-zoom-page.ui:259
+#: panels/universal-access/cc-ua-zoom-page.ui:255
 msgid "Co_ntrast"
 msgstr "Ko_ntras"
 
-#: panels/universal-access/cc-ua-zoom-page.ui:284
+#: panels/universal-access/cc-ua-zoom-page.ui:280
 msgid "Co_lor"
 msgstr "_Warna"
 
 #. Translators: This is a mark in the Grayscale scale
-#: panels/universal-access/cc-ua-zoom-page.ui:290
+#: panels/universal-access/cc-ua-zoom-page.ui:286
 msgid "Full"
 msgstr "Penuh"
 
@@ -9022,15 +9094,15 @@ msgstr ""
 #. Translators: Search terms to find the Accessibility panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/universal-access/gnome-universal-access-panel.desktop.in:15
 msgid ""
-"Keyboard;Mouse;a11y;Accessibility;Universal Access;Contrast;Cursor;Sound;"
+"Keyboard;Mouse;a11y;Accessibility;Universal;Access;Contrast;Cursor;Sound;"
 "Zoom;Screen;Reader;big;high;large;text;font;size;AccessX;Sticky;Keys;Slow;"
 "Bounce;Mouse;Double;click;Delay;Speed;Assist;Repeat;Blink;Pointer;find;"
 "locate;visual;hearing;audio;typing;animations;"
 msgstr ""
-"Papan Tik;Tetikus;a11y;Aksesibilitas;Akses Universal ;Kontras;Kursor;Suara;"
-"Zum;Layar;Pembaca;besar;tinggi;besar;teks;fonta;ukuran;AccessX;Lengket;"
-"Tombol;Lambat;Pantul;Tetikus;Dobel;klik;Tunda;Kecepatan;Bantu;Ulangi; "
-"Berkedip;Penunjuk;temukan;temukan;visual;mendengar;audio;mengetik;animasi;"
+"Papan Tik;Tetikus;a11y;Aksesibilitas;Akses Universal;Kontras;Kursor;Suara;"
+"Zum;Layar;Pembaca;besar;tinggi;teks;fonta;ukuran;AccessX;Lengket;Tombol;"
+"Lambat;Pantul;Tetikus;Dobel;klik;Tunda;Kecepatan;Bantu;Ulangi;Berkedip;"
+"Penunjuk;cari;temukan;visual;pendengaran;audio;mengetik;animasi;"
 
 #: panels/wacom/button-mapping.ui:7 panels/wacom/cc-wacom-ekr-page.ui:18
 msgid "Map Buttons"
@@ -9794,16 +9866,16 @@ msgstr "Mengkonfigurasi koneksi data seluler dan telefoni"
 msgid "cellular;wwan;telephony;sim;mobile;"
 msgstr "seluler;wwan;telefoni;sim;mobile;"
 
-#: shell/appdata/org.gnome.Settings.appdata.xml.in:8
+#: shell/appdata/org.gnome.Settings.appdata.xml.in.in:8
 msgid "Utility to configure the GNOME desktop"
 msgstr "Utilitas untuk mengonfigurasi destop GNOME"
 
-#: shell/appdata/org.gnome.Settings.appdata.xml.in:10
+#: shell/appdata/org.gnome.Settings.appdata.xml.in.in:10
 msgid "Settings is the primary interface for configuring your system."
 msgstr "Pengaturan adalah antarmuka utama untuk mengkonfigurasi sistem Anda."
 
 #. developer_name tag deprecated with Appstream 1.0
-#: shell/appdata/org.gnome.Settings.appdata.xml.in:39
+#: shell/appdata/org.gnome.Settings.appdata.xml.in.in:39
 msgid "The GNOME Project"
 msgstr "Proyek GNOME"
 
@@ -9850,10 +9922,6 @@ msgstr "© 1998 %s"
 #: shell/cc-panel-list.ui:18
 msgid "Settings categories"
 msgstr "Kategori pengaturan"
-
-#: shell/cc-panel-list.ui:44
-msgid "No Results Found"
-msgstr "Tidak Ditemukan Hasil"
 
 #: shell/cc-panel-loader.c:311
 msgid "Available panels:"
