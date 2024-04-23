@@ -38,8 +38,6 @@ struct _CcSystemPanel
 {
   CcPanel    parent_instance;
 
-  AdwNavigationView *navigation;
-
   AdwActionRow *about_row;
   AdwActionRow *datetime_row;
   AdwActionRow *region_row;
@@ -159,7 +157,7 @@ on_subpage_set (CcSystemPanel *self)
 
   subpage = ADW_NAVIGATION_PAGE (g_object_new (page_type, NULL));
   if (subpage)
-    adw_navigation_view_push (self->navigation, subpage);
+    cc_panel_push_subpage (CC_PANEL (self), subpage);
 }
 
 static void
@@ -183,7 +181,7 @@ on_page_activated (AdwActionRow *row,
   if (!page_type)
     return;
 
-  adw_navigation_view_push (self->navigation, g_object_new (page_type, NULL));
+  cc_panel_push_subpage (CC_PANEL (self), g_object_new (page_type, NULL));
 }
 
 static void
@@ -198,7 +196,6 @@ cc_system_panel_class_init (CcSystemPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcSystemPanel, region_row);
   gtk_widget_class_bind_template_child (widget_class, CcSystemPanel, remote_desktop_row);
   gtk_widget_class_bind_template_child (widget_class, CcSystemPanel, users_row);
-  gtk_widget_class_bind_template_child (widget_class, CcSystemPanel, navigation);
   gtk_widget_class_bind_template_child (widget_class, CcSystemPanel, software_updates_group);
 
   gtk_widget_class_bind_template_callback (widget_class, cc_system_page_open_software_update);
