@@ -100,7 +100,6 @@ struct _CcDisplayPanel
   AdwBin         *display_settings_bin;
   GtkWidget      *display_settings_group;
   AdwNavigationPage *display_settings_page;
-  AdwNavigationView *nav_view;
   AdwComboRow    *primary_display_row;
   AdwPreferencesGroup *single_display_settings_group;
 
@@ -610,7 +609,6 @@ cc_display_panel_class_init (CcDisplayPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, display_settings_group);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, display_settings_page);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, escape_shortcut);
-  gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, nav_view);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, night_light_page);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, night_light_row);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, primary_display_row);
@@ -662,7 +660,7 @@ on_monitor_row_activated_cb (CcDisplayPanel *self,
   monitor = g_object_get_data (G_OBJECT (row), "monitor");
   set_current_output (self, monitor, FALSE);
 
-  adw_navigation_view_push (self->nav_view, self->display_settings_page);
+  cc_panel_push_subpage (CC_PANEL (self), self->display_settings_page);
 }
 
 static void
@@ -975,7 +973,7 @@ apply_current_configuration (CcDisplayPanel *self)
   if (error)
     g_warning ("Error applying configuration: %s", error->message);
 
-  adw_navigation_view_pop (self->nav_view);
+  cc_panel_pop_visible_subpage (CC_PANEL (self));
 }
 
 static void
@@ -989,7 +987,7 @@ cancel_current_configuration (CcDisplayPanel *panel)
 
   /* Closes the potentially open monitor page. */
   if (selected == CC_DISPLAY_CONFIG_JOIN && cc_display_config_is_cloning (current))
-    adw_navigation_view_pop (panel->nav_view);
+    cc_panel_pop_visible_subpage (CC_PANEL (panel));
 
   on_screen_changed (panel);
 }
