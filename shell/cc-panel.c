@@ -93,6 +93,26 @@ cc_panel_buildable_init (GtkBuildableIface *iface)
 /* GObject overrides */
 
 static void
+set_subpage (CcPanel     *panel,
+             const gchar *tag)
+{
+  CcPanelPrivate *priv = cc_panel_get_instance_private (panel);
+  AdwNavigationPage *page;
+
+  page = adw_navigation_view_find_page (priv->navigation, tag);
+  if (!page)
+    {
+      g_warning ("Invalid subpage: '%s'", tag);
+      return;
+    }
+
+  adw_navigation_view_push_by_tag (priv->navigation, tag);
+  g_set_str (&priv->subpage, tag);
+  g_object_notify_by_pspec (G_OBJECT (panel),
+                            properties[PROP_SUBPAGE]);
+}
+
+static void
 cc_panel_set_property (GObject      *object,
                        guint         prop_id,
                        const GValue *value,
@@ -126,8 +146,7 @@ cc_panel_set_property (GObject      *object,
 
         if (g_variant_is_of_type (v, G_VARIANT_TYPE_STRING))
           {
-            g_set_str (&priv->subpage, g_variant_get_string (v, NULL));
-            g_object_notify_by_pspec (object, properties[PROP_SUBPAGE]);
+            set_subpage (CC_PANEL (object), g_variant_get_string (v, NULL));
           }
         else if (!g_variant_is_of_type (v, G_VARIANT_TYPE_DICTIONARY))
           g_warning ("Wrong type for the first argument GVariant, expected 'a{sv}' but got '%s'",
