@@ -58,7 +58,6 @@ struct _CcApplicationsPanel
   AdwSwitchRow             *autorun_never_row;
   CcRemovableMediaSettings *removable_media_settings;
 
-  AdwNavigationView *navigation_view;
   AdwNavigationPage *app_settings_page;
   GtkListBox      *app_listbox;
   GtkEntry        *app_search_entry;
@@ -1413,7 +1412,7 @@ update_panel (CcApplicationsPanel *self,
 
   adw_navigation_page_set_title (self->app_settings_page,
                                  g_app_info_get_display_name (info));
-  adw_navigation_view_push (self->navigation_view, self->app_settings_page);
+  cc_panel_push_subpage (CC_PANEL (self), self->app_settings_page);
   gtk_widget_set_visible (GTK_WIDGET (self->view_details_button), gnome_software_is_installed ());
 
   g_clear_pointer (&self->current_app_id, g_free);
@@ -1778,7 +1777,6 @@ cc_applications_panel_class_init (CcApplicationsPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, launch_button);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, location);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, microphone);
-  gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, navigation_view);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, no_camera);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, no_location);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, no_microphone);
