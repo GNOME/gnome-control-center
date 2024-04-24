@@ -207,16 +207,13 @@ cc_speaker_test_button_new (GSoundContext         *context,
                             pa_channel_position_t  position)
 {
   CcSpeakerTestButton *self = g_object_new (CC_TYPE_SPEAKER_TEST_BUTTON, NULL);
-  g_autofree gchar *tooltip_text = NULL;
 
   self->context = g_object_ref (context);
   self->position = position;
   update_icon (self);
 
-  /* Translators: This is the tooltip for a speaker test button, %s is an already translated
-     speaker position, like "Front Left" or "Rear Center". */
-  tooltip_text = g_strdup_printf (_("%s Speaker"), pa_channel_position_to_pretty_string (position));
-  gtk_widget_set_tooltip_text (GTK_WIDGET (self), tooltip_text);
+  gtk_widget_set_tooltip_text (GTK_WIDGET (self),
+                               pa_channel_position_to_pretty_string (position));
 
   return GTK_WIDGET (self);
 }

@@ -20,7 +20,6 @@
 #include <gsound.h>
 #include <gtk/gtk.h>
 #include <pulse/pulseaudio.h>
-#include <glib/gi18n.h>
 
 G_BEGIN_DECLS
 
