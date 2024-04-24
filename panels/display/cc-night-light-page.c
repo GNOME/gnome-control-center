@@ -34,14 +34,14 @@
 struct _CcNightLightPage {
   AdwBin               parent;
 
+  AdwViewStack        *main_stack;
   GtkWidget           *night_light_settings;
   GtkWidget           *box_manual;
   GtkButton           *button_from_am;
   GtkButton           *button_from_pm;
   GtkButton           *button_to_am;
   GtkButton           *button_to_pm;
-  GtkWidget           *infobar_unsupported;
-  GtkWidget           *infobar_unsupported_description;
+  AdwStatusPage       *night_light_unsupported_page;
   GtkWidget           *infobar_disabled;
   GtkWidget           *scale_color_temperature;
   AdwSwitchRow        *night_light_toggle_row;
@@ -213,17 +213,19 @@ dialog_update_state (CcNightLightPage *self)
       value = (gdouble) g_settings_get_uint (self->settings_display, "night-light-temperature");
       gtk_adjustment_set_value (self->adjustment_color_temperature, value);
       self->ignore_value_changed = FALSE;
+
+      adw_view_stack_set_visible_child_name (self->main_stack, "night-light-page");
     }
   else
     {
-      gtk_widget_set_visible (self->infobar_unsupported, TRUE);
-      gtk_widget_set_visible (self->infobar_disabled, FALSE);
-      gtk_widget_set_sensitive (self->night_light_settings, FALSE);
+      adw_status_page_set_description (self->night_light_unsupported_page,
+                                            _("This could be the result of the graphics driver being used, or the desktop being used remotely"));
+      adw_view_stack_set_visible_child_name (self->main_stack, "night-light-unsupported-page");
 
       if (cc_hostname_is_vm_chassis (cc_hostname_get_default ()))
         {
-          gtk_label_set_text (GTK_LABEL (self->infobar_unsupported_description),
-                              _("Night Light cannot be used from a virtual machine."));
+          adw_status_page_set_description (self->night_light_unsupported_page,
+                                            _("Night Light cannot be used from a virtual machine"));
         }
     }
 }
@@ -622,6 +624,7 @@ cc_night_light_page_class_init (CcNightLightPageClass *klass)
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/display/cc-night-light-page.ui");
 
+  gtk_widget_class_bind_template_child (widget_class, CcNightLightPage, main_stack);
   gtk_widget_class_bind_template_child (widget_class, CcNightLightPage, adjustment_from_hours);
   gtk_widget_class_bind_template_child (widget_class, CcNightLightPage, adjustment_from_minutes);
   gtk_widget_class_bind_template_child (widget_class, CcNightLightPage, adjustment_to_hours);
@@ -633,8 +636,7 @@ cc_night_light_page_class_init (CcNightLightPageClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcNightLightPage, button_from_pm);
   gtk_widget_class_bind_template_child (widget_class, CcNightLightPage, button_to_am);
   gtk_widget_class_bind_template_child (widget_class, CcNightLightPage, button_to_pm);
-  gtk_widget_class_bind_template_child (widget_class, CcNightLightPage, infobar_unsupported);
-  gtk_widget_class_bind_template_child (widget_class, CcNightLightPage, infobar_unsupported_description);
+  gtk_widget_class_bind_template_child (widget_class, CcNightLightPage, night_light_unsupported_page);
   gtk_widget_class_bind_template_child (widget_class, CcNightLightPage, infobar_disabled);
   gtk_widget_class_bind_template_child (widget_class, CcNightLightPage, night_light_toggle_row);
   gtk_widget_class_bind_template_child (widget_class, CcNightLightPage, schedule_type_row);
