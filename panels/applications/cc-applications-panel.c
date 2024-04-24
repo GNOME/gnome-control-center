@@ -1413,7 +1413,7 @@ update_panel (CcApplicationsPanel *self,
 
   adw_navigation_page_set_title (self->app_settings_page,
                                  g_app_info_get_display_name (info));
-  adw_navigation_view_push_by_tag(self->navigation_view, "settings-box");
+  adw_navigation_view_push (self->navigation_view, self->app_settings_page);
   gtk_widget_set_visible (GTK_WIDGET (self->view_details_button), gnome_software_is_installed ());
 
   g_clear_pointer (&self->current_app_id, g_free);
