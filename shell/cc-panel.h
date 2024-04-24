@@ -93,6 +93,8 @@ void          cc_panel_deactivate         (CcPanel     *panel);
 void          cc_panel_push_subpage       (CcPanel     *panel,
                                            AdwNavigationPage *subpage);
 
+void          cc_panel_pop_visible_subpage (CcPanel    *panel);
+
 AdwNavigationPage *cc_panel_get_visible_subpage (CcPanel *panel);
 
 G_END_DECLS
