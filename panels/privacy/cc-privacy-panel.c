@@ -38,7 +38,6 @@ struct _CcPrivacyPanel
 {
   CcPanel            parent_instance;
 
-  AdwNavigationView *navigation;
   CcListRow         *bolt_row;
   CcListRow         *location_row;
 };
@@ -48,7 +47,7 @@ CC_PANEL_REGISTER (CcPrivacyPanel, cc_privacy_panel)
 static const char *
 cc_privacy_panel_get_help_uri (CcPanel *panel)
 {
-  AdwNavigationPage *page = adw_navigation_view_get_visible_page (CC_PRIVACY_PANEL (panel)->navigation);
+  AdwNavigationPage *page = cc_panel_get_visible_subpage (panel);
   const char *page_tag = adw_navigation_page_get_tag (page);
 
   if (g_strcmp0 (page_tag, "location") == 0)
@@ -69,7 +68,6 @@ cc_privacy_panel_class_init (CcPrivacyPanelClass *klass)
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/privacy/cc-privacy-panel.ui");
 
-  gtk_widget_class_bind_template_child (widget_class, CcPrivacyPanel, navigation);
   gtk_widget_class_bind_template_child (widget_class, CcPrivacyPanel, bolt_row);
   gtk_widget_class_bind_template_child (widget_class, CcPrivacyPanel, location_row);
 
@@ -82,21 +80,6 @@ cc_privacy_panel_class_init (CcPrivacyPanelClass *klass)
 }
 
 static void
-on_subpage_set (CcPrivacyPanel *self)
-{
-  AdwNavigationPage *subpage;
-  g_autofree gchar *tag = NULL;
-
-  g_object_get (self, "subpage", &tag, NULL);
-  if (!tag)
-    return;
-
-  subpage = adw_navigation_view_find_page (self->navigation, tag);
-  if (subpage)
-    adw_navigation_view_push (self->navigation, subpage);
-}
-
-static void
 cc_privacy_panel_init (CcPrivacyPanel *self)
 {
   g_resources_register (cc_privacy_get_resource ());
@@ -106,7 +89,7 @@ cc_privacy_panel_init (CcPrivacyPanel *self)
 #ifdef BUILD_THUNDERBOLT
   CcBoltPage* bolt_page = cc_bolt_page_new ();
 
-  adw_navigation_view_add (self->navigation, ADW_NAVIGATION_PAGE (bolt_page));
+  cc_panel_add_static_subpage (CC_PANEL (self), "thunderbolt", CC_TYPE_BOLT_PAGE);
 
   g_object_bind_property (bolt_page, "visible",
                           self->bolt_row, "visible", G_BINDING_SYNC_CREATE);
@@ -115,11 +98,9 @@ cc_privacy_panel_init (CcPrivacyPanel *self)
 #ifdef HAVE_LOCATION_SERVICES
   CcLocationPage *location_page = g_object_new (CC_TYPE_LOCATION_PAGE, NULL);
 
-  adw_navigation_view_add (self->navigation, ADW_NAVIGATION_PAGE (location_page));
+  cc_panel_add_static_subpage (CC_PANEL (self), "location", CC_TYPE_LOCATION_PAGE);
 
   g_object_bind_property (location_page, "visible",
                           self->location_row, "visible", G_BINDING_SYNC_CREATE);
 #endif
-
-  g_signal_connect_object (self, "notify::subpage", G_CALLBACK (on_subpage_set), self, G_CONNECT_SWAPPED);
 }
