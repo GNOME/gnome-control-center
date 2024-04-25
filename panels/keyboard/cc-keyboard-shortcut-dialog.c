@@ -565,7 +565,6 @@ cc_keyboard_shortcut_dialog_init (CcKeyboardShortcutDialog *self)
   GtkWindow *toplevel;
 
   gtk_widget_init_template (GTK_WIDGET (self));
-  gtk_search_entry_set_key_capture_widget (self->search_entry, GTK_WIDGET (self));
   shortcut_dialog_visible_page_changed_cb (self);
 
   self->manager = cc_keyboard_manager_new ();
