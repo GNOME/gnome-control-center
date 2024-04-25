@@ -1,23 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
-  <!-- interface-requires gtk+ 3.0 -->
   <template class="CcInputListBox" parent="AdwBin">
 
     <child>
       <object class="GtkListBox" id="listbox">
-        <property name="hexpand">True</property>
-        <property name="vexpand">True</property>
         <property name="selection-mode">none</property>
         <signal name="row_activated" handler="input_row_activated_cb" object="CcInputListBox" swapped="yes"/>
         <signal name="keynav_failed" handler="keynav_failed_cb" object="CcInputListBox" swapped="yes"/>
+        <child type="placeholder">
+          <object class="GtkLabel">
+            <property name="label" translatable="yes">No input source selected</property>
+            <property name="wrap">true</property>
+            <property name="max-width-chars">50</property>
+            <style>
+              <class name="dim-label" />
+              <class name="cc-placeholder-row" />
+            </style>
+          </object>
+        </child>
         <style>
           <class name="boxed-list"/>
         </style>
-        <child>
-          <object class="AdwActionRow" id="no_inputs_row">
-            <property name="title" translatable="yes">No input source selected</property>
-          </object>
-        </child>
         <child>
           <object class="GtkListBoxRow" id="add_input_row">
             <property name="selectable">False</property>

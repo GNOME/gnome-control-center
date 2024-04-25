@@ -44,7 +44,6 @@ struct _CcInputListBox {
 
   GtkListBoxRow   *add_input_row;
   GtkListBox      *listbox;
-  AdwActionRow    *no_inputs_row;
 
   GCancellable    *cancellable;
 
@@ -305,8 +304,6 @@ add_input_row (CcInputListBox *self, CcInputSource *source)
 {
   CcInputRow *row;
 
-  gtk_widget_set_visible (GTK_WIDGET (self->no_inputs_row), FALSE);
-
   row = cc_input_row_new (source);
   g_signal_connect_object (row, "show-settings", G_CALLBACK (row_settings_cb), self, G_CONNECT_SWAPPED);
   g_signal_connect_object (row, "show-layout", G_CALLBACK (row_layout_cb), self, G_CONNECT_SWAPPED);
@@ -322,11 +319,6 @@ add_input_sources (CcInputListBox *self,
 {
   GVariantIter iter;
   const gchar *type, *id;
-
-  if (g_variant_n_children (sources) < 1) {
-    gtk_widget_set_visible (GTK_WIDGET (self->no_inputs_row), TRUE);
-    return;
-  }
 
   g_variant_iter_init (&iter, sources);
   while (g_variant_iter_next (&iter, "(&s&s)", &type, &id)) {
@@ -691,7 +683,6 @@ add_input_sources_from_localed (CcInputListBox *self)
     g_autoptr(CcInputSourceXkb) source = cc_input_source_xkb_new (self->xkb_info, layouts[i], variant);
     add_input_row (self, CC_INPUT_SOURCE (source));
   }
-  gtk_widget_set_visible (GTK_WIDGET (self->no_inputs_row), n == 0);
 }
 
 static void
@@ -767,7 +758,6 @@ cc_input_list_box_class_init (CcInputListBoxClass *klass)
 
   gtk_widget_class_bind_template_child (widget_class, CcInputListBox, add_input_row);
   gtk_widget_class_bind_template_child (widget_class, CcInputListBox, listbox);
-  gtk_widget_class_bind_template_child (widget_class, CcInputListBox, no_inputs_row);
 
   gtk_widget_class_bind_template_callback (widget_class, input_row_activated_cb);
   gtk_widget_class_bind_template_callback (widget_class, keynav_failed_cb);
