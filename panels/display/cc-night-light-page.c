@@ -219,14 +219,10 @@ dialog_update_state (CcNightLightPage *self)
   else
     {
       adw_status_page_set_description (self->night_light_unsupported_page,
-                                            _("This could be the result of the graphics driver being used, or the desktop being used remotely"));
+                                       cc_hostname_is_vm_chassis (cc_hostname_get_default ()) ?
+                                       _("Night Light cannot be used from a virtual machine") :
+                                       _("This could be the result of the graphics driver being used, or the desktop being used remotely"));
       adw_view_stack_set_visible_child_name (self->main_stack, "night-light-unsupported-page");
-
-      if (cc_hostname_is_vm_chassis (cc_hostname_get_default ()))
-        {
-          adw_status_page_set_description (self->night_light_unsupported_page,
-                                            _("Night Light cannot be used from a virtual machine"));
-        }
     }
 }
 
