@@ -42,7 +42,7 @@ struct _CcNightLightPage {
     GtkButton *button_to_am;
     GtkButton *button_to_pm;
     AdwStatusPage *night_light_unsupported_page;
-    GtkWidget *infobar_disabled;
+    AdwBanner *temporarily_disabled_banner;
     AdwSwitchRow *night_light_toggle_row;
     AdwComboRow *schedule_type_row;
     GtkWidget *from_spinbuttons_box;
@@ -125,14 +125,14 @@ dialog_update_state (CcNightLightPage *self)
         gboolean enabled, location_enabled;
         gdouble value = 0.f;
 
-        /* only show the infobar if we are disabled */
+        /* only show the banner if we are disabled */
         if (self->proxy_color != NULL) {
             g_autoptr(GVariant) disabled = NULL;
             disabled = g_dbus_proxy_get_cached_property (self->proxy_color, "DisabledUntilTomorrow");
             if (disabled != NULL)
                 disabled_until_tomorrow = g_variant_get_boolean (disabled);
         }
-        gtk_widget_set_visible (self->infobar_disabled, disabled_until_tomorrow);
+        adw_banner_set_revealed (self->temporarily_disabled_banner, disabled_until_tomorrow);
 
         /* make things insensitive if the switch is disabled */
         enabled = g_settings_get_boolean (self->settings_display, "night-light-enabled");
@@ -549,7 +549,7 @@ cc_night_light_page_class_init (CcNightLightPageClass *klass)
     gtk_widget_class_bind_template_child (widget_class, CcNightLightPage, button_to_am);
     gtk_widget_class_bind_template_child (widget_class, CcNightLightPage, button_to_pm);
     gtk_widget_class_bind_template_child (widget_class, CcNightLightPage, night_light_unsupported_page);
-    gtk_widget_class_bind_template_child (widget_class, CcNightLightPage, infobar_disabled);
+    gtk_widget_class_bind_template_child (widget_class, CcNightLightPage, temporarily_disabled_banner);
     gtk_widget_class_bind_template_child (widget_class, CcNightLightPage, night_light_toggle_row);
     gtk_widget_class_bind_template_child (widget_class, CcNightLightPage, schedule_type_row);
     gtk_widget_class_bind_template_child (widget_class, CcNightLightPage, from_spinbuttons_box);

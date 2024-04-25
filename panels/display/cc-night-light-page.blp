@@ -18,41 +18,12 @@ template $CcNightLightPage: Adw.Bin {
       child: Box {
         orientation: vertical;
 
-        InfoBar infobar_disabled {
-          name: "infobar_disabled";
-
-          Box {
-            hexpand: true;
-            spacing: 16;
-
-            Label {
-              halign: start;
-              margin-start: 12;
-              hexpand: false;
-
-              /* Translators: Inhibit the redshift functionality until the next day starts */
-              label: _("Temporarily Disabled Until Tomorrow");
-
-              styles [
-                "heading",
-              ]
-            }
-          }
-
-          Button button_undisable {
-            margin-top: 12;
-            margin-bottom: 12;
-            margin-start: 12;
-            margin-end: 12;
-
-            /* Translators: This cancels the redshift inhibit. */
-            label: _("Restart Filter");
-            name: "button_undisable";
-            can-focus: true;
-            receives-default: true;
-            valign: center;
-            clicked => $dialog_undisable_clicked_cb(template);
-          }
+        Adw.Banner temporarily_disabled_banner {
+          /* Translators: Inhibit the redshift functionality until the next day starts */
+          title: _("Temporarily Disabled Until Tomorrow");
+          /* Translators: This cancels the redshift inhibit. */
+          button-label: _("Restart Filter");
+          button-clicked => $dialog_undisable_clicked_cb(template);
         }
 
         Adw.PreferencesPage night_light_settings {
