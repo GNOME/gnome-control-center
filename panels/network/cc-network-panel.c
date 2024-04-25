@@ -469,7 +469,10 @@ panel_remove_device (CcNetworkPanel *self, NMDevice *device)
         g_ptr_array_remove (self->mobile_devices, net_device);
         g_hash_table_remove (self->nm_device_to_device, device);
 
-        gtk_box_remove (GTK_BOX (gtk_widget_get_parent (net_device)), net_device);
+        if (nm_device_get_device_type (device) == NM_DEVICE_TYPE_BT)
+                gtk_list_box_remove (GTK_LIST_BOX (self->box_bluetooth), net_device);
+        else
+                gtk_box_remove (GTK_BOX (gtk_widget_get_parent (net_device)), net_device);
 
         /* update device_bluetooth widgets */
         update_bluetooth_section (self);
