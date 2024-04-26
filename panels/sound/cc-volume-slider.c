@@ -148,7 +148,8 @@ update_ranges (CcVolumeSlider *self)
     {
       gtk_adjustment_set_upper (self->volume_adjustment, vol_max_norm);
     }
-  gtk_adjustment_set_page_increment (self->volume_adjustment, vol_max_norm / 100.0);
+  gtk_adjustment_set_page_increment (self->volume_adjustment, vol_max_norm / 10.0);
+  gtk_adjustment_set_step_increment (self->volume_adjustment, vol_max_norm / 100.0);
 
   if (self->stream)
     {
