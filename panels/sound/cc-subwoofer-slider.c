@@ -111,7 +111,8 @@ cc_subwoofer_slider_set_mixer_control (CcSubwooferSlider *self,
 
   vol_max_norm = gvc_mixer_control_get_vol_max_norm (mixer_control);
   gtk_adjustment_set_upper (self->adjustment, vol_max_norm);
-  gtk_adjustment_set_page_increment (self->adjustment, vol_max_norm / 100.0);
+  gtk_adjustment_set_page_increment (self->adjustment, vol_max_norm / 10.0);
+  gtk_adjustment_set_step_increment (self->adjustment, vol_max_norm / 100.0);
 }
 
 void

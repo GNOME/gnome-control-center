@@ -56,7 +56,13 @@ volume_changed_cb (CcBalanceSlider *self)
 
   volumes = gvc_channel_map_get_volume (self->channel_map);
   g_signal_handlers_block_by_func (self->adjustment, volume_changed_cb, self);
-  gtk_adjustment_set_value (self->adjustment, volumes[BALANCE]);
+
+  /* If close to 0, set to 0 to also snap while moving with arrow keys */
+  if (fabs (volumes[BALANCE]) < 0.01)
+    gtk_adjustment_set_value (self->adjustment, 0);
+  else
+    gtk_adjustment_set_value (self->adjustment, volumes[BALANCE]);
+
   g_signal_handlers_unblock_by_func (self->adjustment, volume_changed_cb, self);
 }
 
