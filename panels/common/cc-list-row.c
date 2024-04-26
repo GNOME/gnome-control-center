@@ -134,11 +134,35 @@ cc_list_row_class_init (CcListRowClass *klass)
 }
 
 static void
+add_secondary_label_to_a11y_description (CcListRow *self)
+{
+  // We're using the widget tree traversal because gtk_accessible_update_relation
+  // does not allow appending to the existing relation.
+  // FIXME: Use the new append to relation API when available.
+  GtkWidget *suffix_box;
+  GtkWidget *subtitle_label;
+
+  // In current Libadwaita, the subtitle label is in the previous box of the
+  // suffixes box (e. g. our secondary_label's parent)
+  // as the last child.
+  suffix_box = gtk_widget_get_parent (GTK_WIDGET (self->secondary_label));
+  subtitle_label = gtk_widget_get_last_child (gtk_widget_get_prev_sibling (suffix_box));
+  gtk_accessible_update_relation (GTK_ACCESSIBLE (self),
+                                  GTK_ACCESSIBLE_RELATION_DESCRIBED_BY,
+                                  subtitle_label,
+                                  self->secondary_label,
+                                  NULL,
+                                  -1);
+}
+
+static void
 cc_list_row_init (CcListRow *self)
 {
   g_resources_register (cc_common_get_resource ());
 
   gtk_widget_init_template (GTK_WIDGET (self));
+
+  add_secondary_label_to_a11y_description (self);
 }
 
 void
