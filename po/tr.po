@@ -20,8 +20,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2024-04-09 09:43+0000\n"
-"PO-Revision-Date: 2024-04-09 13:34+0300\n"
+"POT-Creation-Date: 2024-04-25 09:14+0000\n"
+"PO-Revision-Date: 2024-04-26 01:07+0300\n"
 "Last-Translator: Sabri Ünal <yakushabb@gmail.com>\n"
 "Language-Team: Turkish <takim@gnome.org.tr>\n"
 "Language: tr\n"
@@ -142,7 +142,7 @@ msgid "_Default Apps"
 msgstr "_Öntanımlı Uygulamalar"
 
 #: panels/applications/cc-applications-panel.ui:62
-#: panels/search/cc-search-panel.ui:51
+#: panels/search/cc-search-panel.ui:47
 msgid "No Apps Found"
 msgstr "Uygulama Bulunamadı"
 
@@ -160,12 +160,12 @@ msgid "Removable Media"
 msgstr "Çıkarılabilir Ortam"
 
 #: panels/applications/cc-applications-panel.ui:122
-msgid "Automat_ically Launch Apps"
-msgstr "Uygulamaları _Kendiliğinden Başlat"
+msgid "Med_ia Autostart"
+msgstr "_Ortamı Kendiliğinden Başlat"
 
 #: panels/applications/cc-applications-panel.ui:123
-msgid "Start apps when media is connected or inserted"
-msgstr "Ortam bağlanınca ya da yerleştirilince uygulamaları başlat"
+msgid "Start apps or prompt when media is connected"
+msgstr "Ortam bağlanınca uygulamaları ya da istemi başlat"
 
 #: panels/applications/cc-applications-panel.ui:144
 msgid "App Settings"
@@ -181,7 +181,7 @@ msgstr ""
 
 #: panels/applications/cc-applications-panel.ui:207
 #: panels/printers/pp-details-dialog.c:267
-#: panels/sharing/cc-sharing-panel.c:241
+#: panels/sharing/cc-sharing-panel.c:243
 msgid "_Open"
 msgstr "_Aç"
 
@@ -215,8 +215,8 @@ msgstr "Sistem aramaları al ve sonuçları gönder"
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:123
 #: panels/keyboard/cc-xkb-modifier-dialog.c:328
 #: panels/keyboard/keyboard-shortcuts.c:367
-#: panels/system/users/cc-user-page.c:379
-#: panels/system/users/cc-user-page.c:749 panels/wwan/cc-wwan-device-page.c:477
+#: panels/system/users/cc-user-page.c:375
+#: panels/system/users/cc-user-page.c:748 panels/wwan/cc-wwan-device-page.c:477
 #: subprojects/gvc/gvc-mixer-control.c:1872
 msgid "Disabled"
 msgstr "Devre dışı"
@@ -528,22 +528,18 @@ msgid "Sof_tware"
 msgstr "_Yazılım"
 
 #: panels/applications/cc-removable-media-settings.ui:72
-msgid "_Other Media"
-msgstr "_Diğer Ortamlar"
+msgid "_Other Media Types"
+msgstr "_Diğer Ortam Türleri"
 
-#: panels/applications/cc-removable-media-settings.ui:74
-msgid "Select how other media should be handled"
-msgstr "Diğer ortamların nasıl kullanılacağını seç"
+#: panels/applications/cc-removable-media-settings.ui:90
+msgid "Other Media Types"
+msgstr "Diğer Ortam Türleri"
 
-#: panels/applications/cc-removable-media-settings.ui:91
-msgid "Other Media"
-msgstr "Diğer Ortamlar"
-
-#: panels/applications/cc-removable-media-settings.ui:106
+#: panels/applications/cc-removable-media-settings.ui:105
 msgid "_Type"
 msgstr "_Tür"
 
-#: panels/applications/cc-removable-media-settings.ui:126
+#: panels/applications/cc-removable-media-settings.ui:125
 msgid "_Action"
 msgstr "_Eylem"
 
@@ -998,13 +994,13 @@ msgstr "Ekran Kalibrasyonu"
 #: panels/printers/new-printer-dialog.ui:54
 #: panels/printers/pp-details-dialog.c:266
 #: panels/privacy/usage/cc-usage-page.c:136
-#: panels/sharing/cc-sharing-panel.c:240
+#: panels/sharing/cc-sharing-panel.c:242
 #: panels/system/region/cc-format-chooser.ui:24
 #: panels/system/users/cc-add-user-dialog.ui:22
 #: panels/system/users/cc-avatar-chooser.c:92
 #: panels/system/users/cc-enterprise-login-dialog.ui:44
 #: panels/system/users/cc-fingerprint-dialog.ui:32
-#: panels/system/users/cc-password-dialog.ui:21
+#: panels/system/users/cc-password-dialog.ui:15
 #: panels/system/users/cc-user-page.ui:222
 #: panels/system/users/data/join-dialog.ui:17
 #: panels/wwan/cc-wwan-mode-dialog.ui:32
@@ -1026,7 +1022,7 @@ msgstr "_Sürdür"
 #. This button returns the user back to the color control panel
 #: panels/color/cc-color-calibrate.ui:40
 #: panels/system/region/cc-format-chooser.ui:49
-#: panels/system/users/cc-fingerprint-dialog.ui:57
+#: panels/system/users/cc-fingerprint-dialog.ui:51
 msgid "_Done"
 msgstr "_Bitti"
 
@@ -1166,8 +1162,8 @@ msgstr "daha çoğunu öğren"
 #. Translators: %s is a link to the documentation with the label "learn more"
 #: panels/color/cc-color-panel.c:1994
 #, c-format
-msgid "Each device needs an up to date color profile to be color managed – %s."
-msgstr "Her aygıt, renk yönetimi için güncel renk profiline gereksinir – %s"
+msgid "Each device needs an up to date color profile to be color managed — %s."
+msgstr "Her aygıt, renk yönetimi için güncel renk profiline gereksinir — %s."
 
 #: panels/color/cc-color-panel.ui:4 panels/wacom/calibrator/calibrator.ui:40
 msgid "Screen Calibration"
@@ -1282,9 +1278,9 @@ msgstr "Yazılabilir ortam gerektirir"
 
 #: panels/color/cc-color-panel.ui:313
 msgid ""
-"You may find these instructions on how to use the profile on <a "
-"href=\"linux\">GNU/Linux</a>, <a href=\"osx\">Apple OS X</a> and <a "
-"href=\"windows\">Microsoft Windows</a> systems useful."
+"You may find these instructions on how to use the profile on <a href=\"linux"
+"\">GNU/Linux</a>, <a href=\"osx\">Apple OS X</a> and <a href=\"windows"
+"\">Microsoft Windows</a> systems useful."
 msgstr ""
 "Profili <a href=\"linux\">GNU/Linux</a>, <a href=\"osx\">Apple OS X</a> ve "
 "<a href=\"windows\">Microsoft Windows</a> sistemleri üzerinde nasıl "
@@ -1299,8 +1295,8 @@ msgid ""
 "Problems detected. The profile may not work correctly. <a href=\"\">Show "
 "details.</a>"
 msgstr ""
-"Bazı sorunlar saptandı. Bu profil düzgün çalışmayabilir. <a "
-"href=\"\">Ayrıntıları göster.</a>"
+"Bazı sorunlar saptandı. Bu profil düzgün çalışmayabilir. <a href="
+"\"\">Ayrıntıları göster.</a>"
 
 #: panels/color/cc-color-panel.ui:384
 msgid "_Import File…"
@@ -1564,16 +1560,15 @@ msgid "More Information"
 msgstr "Daha Çok Bilgi"
 
 #: panels/common/cc-permission-infobar.c:199
-#: panels/common/cc-permission-infobar.ui:7
-msgid "Error: some settings cannot be unlocked"
-msgstr "Hata: kimi ayarların kilidi açılamadı"
+msgid "Error — some settings cannot be unlocked"
+msgstr "Hata — kimi ayarların kilidi açılamadı"
 
 #: panels/common/cc-permission-infobar.c:202
 msgid "Unlock to Change Settings"
 msgstr "Ayarları Değiştirmek İçin Kilidi Aç"
 
 #: panels/common/cc-permission-infobar.c:205
-#: panels/common/cc-permission-infobar.ui:8
+#: panels/common/cc-permission-infobar.ui:7
 msgid "_Unlock…"
 msgstr "Kilidi _Aç…"
 
@@ -1691,27 +1686,27 @@ msgctxt "hotspot"
 msgid "Hotspot"
 msgstr "Erişim Noktası"
 
-#: panels/display/cc-display-panel.c:510
+#: panels/display/cc-display-panel.c:507
 #: panels/notifications/cc-notifications-panel.c:213
 #: panels/power/cc-power-panel.c:653 panels/power/cc-power-panel.c:660
 msgid "On"
 msgstr "Açık"
 
-#: panels/display/cc-display-panel.c:512 panels/network/cc-net-proxy-page.c:182
+#: panels/display/cc-display-panel.c:509 panels/network/cc-net-proxy-page.c:182
 #: panels/notifications/cc-notifications-panel.c:213
 #: panels/power/cc-power-panel.c:647 panels/power/cc-power-panel.c:658
 msgid "Off"
 msgstr "Kapalı"
 
-#: panels/display/cc-display-panel.c:931
+#: panels/display/cc-display-panel.c:927
 msgid "Apply Changes?"
 msgstr "Değişiklikler Uygulansın Mı?"
 
-#: panels/display/cc-display-panel.c:937
+#: panels/display/cc-display-panel.c:933
 msgid "Changes Cannot be Applied"
 msgstr "Değişiklikler Uygulanamadı"
 
-#: panels/display/cc-display-panel.c:939
+#: panels/display/cc-display-panel.c:935
 msgid "This could be due to hardware limitations."
 msgstr "Bu donanım kısıtlamalarından kaynaklanabilir."
 
@@ -1753,7 +1748,7 @@ msgstr "_Birincil Ekran"
 
 #. This is the redshift functionality where we suppress blue light when the sun has gone down
 #: panels/display/cc-display-panel.ui:158
-#: panels/display/cc-night-light-page.ui:86
+#: panels/display/cc-night-light-page.ui:102
 msgid "_Night Light"
 msgstr "_Gece Işığı"
 
@@ -1835,32 +1830,34 @@ msgctxt "display setting"
 msgid "_Scale"
 msgstr "_Ölçekle"
 
-#: panels/display/cc-night-light-page.c:226
-msgid "Night Light cannot be used from a virtual machine."
-msgstr "Gece Işığı, sanal makineden kullanılamaz."
+#: panels/display/cc-night-light-page.c:223
+msgid "Night Light cannot be used from a virtual machine"
+msgstr "Gece Işığı, sanal makineden kullanılamaz"
 
-#: panels/display/cc-night-light-page.ui:25
-msgid "Night Light Unavailable"
-msgstr "Gece Işığı Kullanılamıyor"
-
-#: panels/display/cc-night-light-page.ui:33
+#: panels/display/cc-night-light-page.c:224
+#: panels/display/cc-night-light-page.ui:49
 msgid ""
 "This could be the result of the graphics driver being used, or the desktop "
 "being used remotely"
 msgstr ""
 "Bu, grafik sürücüsü veya masaüstünün uzaktan kullanılmasından kaynaklanabilir"
 
+#: panels/display/cc-night-light-page.ui:12
+#: panels/display/cc-night-light-page.ui:41
+msgid "Night Light Unavailable"
+msgstr "Gece Işığı Kullanılamıyor"
+
 #. Inhibit the redshift functionality until the next day starts
-#: panels/display/cc-night-light-page.ui:54
+#: panels/display/cc-night-light-page.ui:70
 msgid "Temporarily Disabled Until Tomorrow"
 msgstr "Yarına Dek Geçici Olarak Devre Dışı Bırakıldı"
 
 #. This cancels the redshift inhibit.
-#: panels/display/cc-night-light-page.ui:68
+#: panels/display/cc-night-light-page.ui:84
 msgid "Restart Filter"
 msgstr "Süzgeci Yeniden Başlat"
 
-#: panels/display/cc-night-light-page.ui:80
+#: panels/display/cc-night-light-page.ui:96
 msgid ""
 "Night light makes the screen color warmer. This can help to prevent eye "
 "strain and sleeplessness."
@@ -1868,58 +1865,58 @@ msgstr ""
 "Gece ışığı, ekran rengini daha sıcak yapar. Bu, göz yorgunluğunu ve "
 "uykusuzluğu önlemeye yardımcı olur."
 
-#: panels/display/cc-night-light-page.ui:94
+#: panels/display/cc-night-light-page.ui:110
 msgid "_Schedule"
 msgstr "_Zamanlama"
 
-#: panels/display/cc-night-light-page.ui:101
+#: panels/display/cc-night-light-page.ui:117
 msgid "Sunset to Sunrise"
 msgstr "Gün Batımından Gün Doğumuna"
 
-#: panels/display/cc-night-light-page.ui:102
+#: panels/display/cc-night-light-page.ui:118
 msgid "Manual Schedule"
 msgstr "Elle Zamanlama"
 
-#: panels/display/cc-night-light-page.ui:112
+#: panels/display/cc-night-light-page.ui:128
 msgid "_Times"
 msgstr "_Saatler"
 
-#: panels/display/cc-night-light-page.ui:126
+#: panels/display/cc-night-light-page.ui:142
 msgid "From"
 msgstr "Şu Zamandan"
 
-#: panels/display/cc-night-light-page.ui:151
-#: panels/display/cc-night-light-page.ui:238
+#: panels/display/cc-night-light-page.ui:167
+#: panels/display/cc-night-light-page.ui:254
 msgid "Hour"
 msgstr "Saat"
 
-#: panels/display/cc-night-light-page.ui:157
-#: panels/display/cc-night-light-page.ui:244
+#: panels/display/cc-night-light-page.ui:173
+#: panels/display/cc-night-light-page.ui:260
 msgid ":"
 msgstr ":"
 
-#: panels/display/cc-night-light-page.ui:174
-#: panels/display/cc-night-light-page.ui:261
+#: panels/display/cc-night-light-page.ui:190
+#: panels/display/cc-night-light-page.ui:277
 msgid "Minute"
 msgstr "Dakika"
 
 #. This is the short form for the time period in the morning
-#: panels/display/cc-night-light-page.ui:184
-#: panels/display/cc-night-light-page.ui:271
+#: panels/display/cc-night-light-page.ui:200
+#: panels/display/cc-night-light-page.ui:287
 msgid "AM"
 msgstr "ÖÖ"
 
 #. This is the short form for the time period in the afternoon
-#: panels/display/cc-night-light-page.ui:196
-#: panels/display/cc-night-light-page.ui:283
+#: panels/display/cc-night-light-page.ui:212
+#: panels/display/cc-night-light-page.ui:299
 msgid "PM"
 msgstr "ÖS"
 
-#: panels/display/cc-night-light-page.ui:213
+#: panels/display/cc-night-light-page.ui:229
 msgid "To"
 msgstr "Şu Zamana"
 
-#: panels/display/cc-night-light-page.ui:319
+#: panels/display/cc-night-light-page.ui:335
 msgid "_Color Temperature"
 msgstr "_Renk Sıcaklığı"
 
@@ -2421,7 +2418,7 @@ msgstr "Kısayol"
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:247
 #: panels/sound/cc-alert-chooser-window.c:340
 #: panels/sound/cc-alert-chooser-window.ui:17
-#: panels/universal-access/cc-ua-zoom-page.ui:289
+#: panels/universal-access/cc-ua-zoom-page.ui:285
 msgid "None"
 msgstr "Hiçbiri"
 
@@ -2489,35 +2486,31 @@ msgstr "_Sağ"
 msgid "Mouse"
 msgstr "Fare"
 
-#: panels/mouse/cc-mouse-panel.ui:110 panels/mouse/cc-mouse-panel.ui:212
+#: panels/mouse/cc-mouse-panel.ui:110 panels/mouse/cc-mouse-panel.ui:210
 msgid "Po_inter Speed"
 msgstr "İ_mleç Hızı"
 
-#: panels/mouse/cc-mouse-panel.ui:116
-msgid "Pointer Speed"
-msgstr "İmleç Hızı"
-
-#: panels/mouse/cc-mouse-panel.ui:119 panels/mouse/cc-mouse-panel.ui:222
+#: panels/mouse/cc-mouse-panel.ui:117 panels/mouse/cc-mouse-panel.ui:218
 #: panels/universal-access/cc-ua-typing-page.ui:58
-#: panels/universal-access/cc-ua-typing-page.ui:110
+#: panels/universal-access/cc-ua-typing-page.ui:111
 msgid "Slow"
 msgstr "Yavaş"
 
-#: panels/mouse/cc-mouse-panel.ui:121 panels/mouse/cc-mouse-panel.ui:224
+#: panels/mouse/cc-mouse-panel.ui:119 panels/mouse/cc-mouse-panel.ui:220
 #: panels/universal-access/cc-ua-typing-page.ui:55
-#: panels/universal-access/cc-ua-typing-page.ui:107
+#: panels/universal-access/cc-ua-typing-page.ui:108
 msgid "Fast"
 msgstr "Hızlı"
 
-#: panels/mouse/cc-mouse-panel.ui:137
+#: panels/mouse/cc-mouse-panel.ui:135
 msgid "Mouse _Acceleration"
 msgstr "Fare _Hızlandırması"
 
-#: panels/mouse/cc-mouse-panel.ui:138
+#: panels/mouse/cc-mouse-panel.ui:136
 msgid "Recommended for most users and applications"
 msgstr "Çoğu kullanıcı ve uygulama için önerilir"
 
-#: panels/mouse/cc-mouse-panel.ui:144
+#: panels/mouse/cc-mouse-panel.ui:142
 msgid ""
 "Turning mouse acceleration off can allow faster and more precise movements, "
 "but can also make the mouse more difficult to use."
@@ -2525,108 +2518,104 @@ msgstr ""
 "Fare hızlandırmasını kapatmak daha hızlı ve kusursuz hareketler sağlar ancak "
 "aynı zamanda farenin kullanımını zorlaştırır."
 
-#: panels/mouse/cc-mouse-panel.ui:156 panels/mouse/cc-mouse-panel.ui:296
+#: panels/mouse/cc-mouse-panel.ui:154 panels/mouse/cc-mouse-panel.ui:292
 msgid "Scroll Direction"
 msgstr "Kaydırma Yönü"
 
-#: panels/mouse/cc-mouse-panel.ui:157
+#: panels/mouse/cc-mouse-panel.ui:155
 msgid "Tra_ditional"
 msgstr "_Geleneksel"
 
-#: panels/mouse/cc-mouse-panel.ui:158 panels/mouse/cc-mouse-panel.ui:298
+#: panels/mouse/cc-mouse-panel.ui:156 panels/mouse/cc-mouse-panel.ui:294
 msgid "Scrolling moves the view"
 msgstr "Kaydırma, görünümü oynatır"
 
-#: panels/mouse/cc-mouse-panel.ui:159 panels/mouse/cc-mouse-panel.ui:299
+#: panels/mouse/cc-mouse-panel.ui:157 panels/mouse/cc-mouse-panel.ui:295
 msgid "_Natural"
 msgstr "_Doğal"
 
-#: panels/mouse/cc-mouse-panel.ui:160 panels/mouse/cc-mouse-panel.ui:301
+#: panels/mouse/cc-mouse-panel.ui:158 panels/mouse/cc-mouse-panel.ui:297
 msgid "Scrolling moves the content"
 msgstr "Kaydırma, içeriği oynatır"
 
-#: panels/mouse/cc-mouse-panel.ui:173 panels/mouse/cc-mouse-panel.ui:314
+#: panels/mouse/cc-mouse-panel.ui:171 panels/mouse/cc-mouse-panel.ui:310
 #: panels/wacom/cc-wacom-panel.ui:11
 msgid "Test _Settings"
 msgstr "_Ayarları Sına"
 
-#: panels/mouse/cc-mouse-panel.ui:174 panels/mouse/cc-mouse-panel.ui:315
+#: panels/mouse/cc-mouse-panel.ui:172 panels/mouse/cc-mouse-panel.ui:311
 msgid "Test Mouse and Touchpad Settings"
 msgstr "Fare ve Dokunmatik Yüzey Ayarlarını Sına"
 
-#: panels/mouse/cc-mouse-panel.ui:192
+#: panels/mouse/cc-mouse-panel.ui:190
 msgid "_Touchpad"
 msgstr "_Dokunmatik Yüzey"
 
-#: panels/mouse/cc-mouse-panel.ui:200
+#: panels/mouse/cc-mouse-panel.ui:198
 msgid "T_ouchpad"
 msgstr "D_okunmatik Yüzey"
 
-#: panels/mouse/cc-mouse-panel.ui:206
+#: panels/mouse/cc-mouse-panel.ui:204
 msgid "_Disable Touchpad While Typing"
 msgstr "Yazarken Dokunmatik Yüzeyi _Devre Dışı Bırak"
 
-#: panels/mouse/cc-mouse-panel.ui:219
-msgid "Pointer speed"
-msgstr "İmleç hızı"
-
-#: panels/mouse/cc-mouse-panel.ui:243 panels/mouse/cc-mouse-test.ui:32
+#: panels/mouse/cc-mouse-panel.ui:239 panels/mouse/cc-mouse-test.ui:32
 msgid "Clicking"
 msgstr "Tıklama"
 
-#: panels/mouse/cc-mouse-panel.ui:246 panels/mouse/cc-mouse-test.ui:111
+#: panels/mouse/cc-mouse-panel.ui:242 panels/mouse/cc-mouse-test.ui:111
 msgid "Secondary Click"
 msgstr "İkincil Tıklama"
 
-#: panels/mouse/cc-mouse-panel.ui:247
-msgid "Two Finger Push"
-msgstr "Çift Parmak İtme"
+#: panels/mouse/cc-mouse-panel.ui:243
+msgid "Two _Finger Push"
+msgstr "Çift _Parmak İtme"
 
-#: panels/mouse/cc-mouse-panel.ui:248
+#: panels/mouse/cc-mouse-panel.ui:244
 msgid "Push anywhere with 2 fingers"
 msgstr "Herhangi bir yeri iki parmakla it"
 
-#: panels/mouse/cc-mouse-panel.ui:249
-msgid "Corner Push"
-msgstr "Köşe İtme"
+#: panels/mouse/cc-mouse-panel.ui:245
+msgid "_Corner Push"
+msgstr "_Köşe İtme"
 
-#: panels/mouse/cc-mouse-panel.ui:250
+#: panels/mouse/cc-mouse-panel.ui:246
 msgid "Push with a single finger in the corner"
 msgstr "Köşede tek parmakla il"
 
-#: panels/mouse/cc-mouse-panel.ui:261
+#: panels/mouse/cc-mouse-panel.ui:257
 msgid "T_ap to Click"
 msgstr "Tıklamak İçin _Dokun"
 
-#: panels/mouse/cc-mouse-panel.ui:263
+#: panels/mouse/cc-mouse-panel.ui:259
 msgid "Quickly touch the touchpad to click"
 msgstr "Tıklamak için dokunmatik yüzeye hızlıca dokun"
 
-#: panels/mouse/cc-mouse-panel.ui:278 panels/mouse/cc-mouse-test.ui:153
+#: panels/mouse/cc-mouse-panel.ui:274 panels/mouse/cc-mouse-test.ui:153
 msgid "Scrolling"
 msgstr "Kaydırma"
 
-#: panels/mouse/cc-mouse-panel.ui:281
+#: panels/mouse/cc-mouse-panel.ui:277
 msgid "Scroll Method"
 msgstr "Kaydırma Yöntemi"
 
-#: panels/mouse/cc-mouse-panel.ui:282
+#: panels/mouse/cc-mouse-panel.ui:278
 msgid "T_wo Finger"
 msgstr "Çift _Parmak"
 
-#: panels/mouse/cc-mouse-panel.ui:283
+#: panels/mouse/cc-mouse-panel.ui:279
 msgid "Drag two fingers on the touchpad"
 msgstr "Dokunmatik yüzeyde çift parmak kaydır"
 
-#: panels/mouse/cc-mouse-panel.ui:284
+#: panels/mouse/cc-mouse-panel.ui:280
 msgid "_Edge"
 msgstr "_Kenar"
 
-#: panels/mouse/cc-mouse-panel.ui:285
+#: panels/mouse/cc-mouse-panel.ui:281
 msgid "Drag one finger on the edge"
 msgstr "Kenarda tek parmak kaydır"
 
-#: panels/mouse/cc-mouse-panel.ui:297
+#: panels/mouse/cc-mouse-panel.ui:293
 msgid "T_raditional"
 msgstr "G_eleneksel"
 
@@ -2763,7 +2752,7 @@ msgid "Manual"
 msgstr "Elle"
 
 #. xxx: Added to avoid confusion with the preceding VPN row
-#: panels/network/cc-net-proxy-page.ui:4 panels/network/cc-network-panel.ui:93
+#: panels/network/cc-net-proxy-page.ui:4 panels/network/cc-network-panel.ui:85
 msgid "Proxy"
 msgstr "Vekil Sunucu"
 
@@ -2796,56 +2785,40 @@ msgid "HTTP Proxy"
 msgstr "HTTP Vekili"
 
 #: panels/network/cc-net-proxy-page.ui:113
-#: panels/network/cc-net-proxy-page.ui:142
-#: panels/network/cc-net-proxy-page.ui:171
-#: panels/network/cc-net-proxy-page.ui:200
+#: panels/network/cc-net-proxy-page.ui:139
+#: panels/network/cc-net-proxy-page.ui:165
+#: panels/network/cc-net-proxy-page.ui:191
 msgid "URL"
 msgstr "URL"
 
 #: panels/network/cc-net-proxy-page.ui:120
-#: panels/network/cc-net-proxy-page.ui:149
-#: panels/network/cc-net-proxy-page.ui:178
-#: panels/network/cc-net-proxy-page.ui:207
+#: panels/network/cc-net-proxy-page.ui:146
+#: panels/network/cc-net-proxy-page.ui:172
+#: panels/network/cc-net-proxy-page.ui:198
 msgid "Port"
 msgstr "Bağlantı Noktası"
 
-#: panels/network/cc-net-proxy-page.ui:128
-msgid "HTTP proxy port"
-msgstr "HTTP vekil bağlantı noktası"
-
-#: panels/network/cc-net-proxy-page.ui:138
+#: panels/network/cc-net-proxy-page.ui:135
 msgid "HTTPS Proxy"
 msgstr "HTTPS Vekili"
 
-#: panels/network/cc-net-proxy-page.ui:157
-msgid "HTTPS proxy port"
-msgstr "HTTPS vekil bağlantı noktası"
-
-#: panels/network/cc-net-proxy-page.ui:167
+#: panels/network/cc-net-proxy-page.ui:161
 msgid "FTP Proxy"
 msgstr "FTP Vekili"
 
-#: panels/network/cc-net-proxy-page.ui:186
-msgid "FTP proxy port"
-msgstr "FTP vekil bağlantı noktası"
-
-#: panels/network/cc-net-proxy-page.ui:196
+#: panels/network/cc-net-proxy-page.ui:187
 msgid "SOCKS Host"
 msgstr "SOCKS Ana Makinesi"
 
-#: panels/network/cc-net-proxy-page.ui:215
-msgid "SOCKS host port"
-msgstr "SOCKS ana makine bağlantı noktası"
-
-#: panels/network/cc-net-proxy-page.ui:226
+#: panels/network/cc-net-proxy-page.ui:214
 msgid "Ignored Hosts"
 msgstr "Yok Sayılan Ana Makineler"
 
-#: panels/network/cc-network-panel.c:665
+#: panels/network/cc-network-panel.c:649
 msgid "Network Unavailable"
 msgstr "Ağ Kullanılamıyor"
 
-#: panels/network/cc-network-panel.c:667
+#: panels/network/cc-network-panel.c:651
 msgid ""
 "An error has occurred and network cannot be used.\n"
 " Error details: NetworkManager not running."
@@ -2853,7 +2826,7 @@ msgstr ""
 "Hata oluştu ve ağ kullanılamıyor.\n"
 " Hata ayrıntıları: NetworkManager çalışmıyor."
 
-#: panels/network/cc-network-panel.ui:46 panels/network/cc-network-panel.ui:78
+#: panels/network/cc-network-panel.ui:46 panels/network/cc-network-panel.ui:72
 #: panels/network/connection-editor/net-connection-editor.c:743
 msgid "VPN"
 msgstr "VPN"
@@ -2863,11 +2836,11 @@ msgstr "VPN"
 msgid "Add VPN"
 msgstr "VPN Ekle"
 
-#: panels/network/cc-network-panel.ui:69
+#: panels/network/cc-network-panel.ui:62
 msgid "Not set up"
 msgstr "Ayarlanmamış"
 
-#: panels/network/cc-network-panel.ui:96
+#: panels/network/cc-network-panel.ui:88
 msgid "_Proxy"
 msgstr "_Vekil Sunucu"
 
@@ -3411,7 +3384,7 @@ msgstr "WireGuard"
 
 #. Translators: Unknown endpoint host for WireGuard (invalid setting)
 #: panels/network/connection-editor/ce-page-wireguard.c:373
-#: panels/privacy/firmware-security/cc-firmware-security-dialog.c:165
+#: panels/privacy/firmware-security/cc-firmware-security-dialog.c:167
 #: panels/sound/cc-alert-chooser-window.c:350
 #: panels/system/about/cc-about-page.c:73
 #: panels/system/about/cc-system-details-window.c:273
@@ -3940,11 +3913,7 @@ msgstr "Bağlanmadı"
 msgid "Active"
 msgstr "Etkin"
 
-#: panels/network/network-vpn.ui:11
-msgid "Turn VPN connection off"
-msgstr "VPN bağlantısını kapat"
-
-#: panels/network/network-vpn.ui:17
+#: panels/network/network-vpn.ui:14
 msgid "VPN Options"
 msgstr "VPN Seçenekleri"
 
@@ -3963,31 +3932,19 @@ msgctxt "Wi-Fi Hotspot"
 msgid "Password"
 msgstr "Parola"
 
-#: panels/network/network-wifi.ui:73
-msgid "Turn Wi-Fi off"
-msgstr "Kablosuzu Kapat"
-
-#: panels/network/network-wifi.ui:81
+#: panels/network/network-wifi.ui:78
 msgid "Saved Networks"
 msgstr "Kayıtlı Ağlar"
 
-#: panels/network/network-wifi.ui:85
-msgid "Show Saved Networks"
-msgstr "Kayıtlı Ağları Göster"
-
-#: panels/network/network-wifi.ui:93
+#: panels/network/network-wifi.ui:87
 msgid "_Connect to Hidden Network…"
 msgstr "Gizli Ağa _Bağlan…"
 
-#: panels/network/network-wifi.ui:97
-msgid "Connect to hidden network"
-msgstr "Gizli ağa bağlan"
-
-#: panels/network/network-wifi.ui:105
+#: panels/network/network-wifi.ui:96
 msgid "_Turn On Wi-Fi Hotspot…"
 msgstr "Kablosuz Erişim Nok_tasını Aç…"
 
-#: panels/network/network-wifi.ui:114
+#: panels/network/network-wifi.ui:105
 msgid "Saved Wi-Fi Networks"
 msgstr "Kayıtlı Kablosuz Ağlar"
 
@@ -4247,23 +4204,23 @@ msgid "Cable unplugged"
 msgstr "Kablo takılı değil"
 
 #. This is the per app switch for message tray usage.
-#: panels/notifications/cc-app-notifications-dialog.ui:18
+#: panels/notifications/cc-app-notifications-dialog.ui:17
 msgctxt "notifications"
 msgid "_Notifications"
 msgstr "_Bildirimler"
 
 #. This is the setting to configure sounds associated with notifications.
-#: panels/notifications/cc-app-notifications-dialog.ui:25
+#: panels/notifications/cc-app-notifications-dialog.ui:24
 msgctxt "notifications"
 msgid "Sound _Alerts"
 msgstr "Sesli Uy_arılar"
 
-#: panels/notifications/cc-app-notifications-dialog.ui:32
+#: panels/notifications/cc-app-notifications-dialog.ui:31
 msgctxt "notifications"
 msgid "Notification _Popups"
 msgstr "Bildirim _Pencerecikleri"
 
-#: panels/notifications/cc-app-notifications-dialog.ui:33
+#: panels/notifications/cc-app-notifications-dialog.ui:32
 msgid ""
 "Notifications will continue to appear in the notification list when popups "
 "are disabled"
@@ -4272,17 +4229,17 @@ msgstr ""
 "gözükmeyi sürdürecek"
 
 #. Popups here refers to message tray notifications in the middle of the screen.
-#: panels/notifications/cc-app-notifications-dialog.ui:40
+#: panels/notifications/cc-app-notifications-dialog.ui:39
 msgctxt "notifications"
 msgid "Show Message _Content in Popups"
 msgstr "İleti İ_çeriğini Pencereciklerde Göster"
 
-#: panels/notifications/cc-app-notifications-dialog.ui:47
+#: panels/notifications/cc-app-notifications-dialog.ui:46
 msgctxt "notifications"
 msgid "_Lock Screen Notifications"
 msgstr "Ki_lit Ekranı Bildirimleri"
 
-#: panels/notifications/cc-app-notifications-dialog.ui:54
+#: panels/notifications/cc-app-notifications-dialog.ui:53
 msgctxt "notifications"
 msgid "Show Message C_ontent on Lock Screen"
 msgstr "İleti İ_çeriğini Kilit Ekranında Göster"
@@ -4949,7 +4906,7 @@ msgstr "Yazıcı Ekle"
 
 #: panels/printers/new-printer-dialog.ui:67
 #: panels/system/region/cc-format-chooser.ui:37
-#: panels/system/users/cc-fingerprint-dialog.ui:44
+#: panels/system/users/cc-fingerprint-dialog.ui:38
 #: panels/wwan/cc-wwan-apn-dialog.ui:21
 msgid "Back"
 msgstr "Geri"
@@ -5793,7 +5750,7 @@ msgstr ""
 "Aşağıdaki yalıtılmış uygulamalara kameraları kullanma izni verildi. "
 "Yalıtılmamış uygulamalar, izin istemeden kameraları kullanabilir."
 
-#: panels/privacy/camera/cc-camera-page.ui:42
+#: panels/privacy/camera/cc-camera-page.ui:38
 msgid "No sandboxed apps have asked for camera access"
 msgstr "Hiçbir yalıtılmış uygulama kamera erişimi isteği yapmadı"
 
@@ -5863,10 +5820,10 @@ msgstr "Donanım güvenlik durumu ve bilgileri"
 #, c-format
 msgid ""
 "Sending reports of technical problems helps us improve %s. Reports are sent "
-"anonymously and are scrubbed of personal data – %s."
+"anonymously and are scrubbed of personal data — %s."
 msgstr ""
 "Teknik sorunları bildirmeniz %s gelişimine yaramaktadır. Bu bildirimler, "
-"anonim olarak gönderilir ve kişisel veriden arındırılmıştır – %s."
+"anonim olarak gönderilir ve kişisel veriden arındırılmıştır — %s."
 
 #. translators: The '%s' is the distributor's name, such as 'Fedora'
 #: panels/privacy/diagnostics/cc-diagnostics-page.c:130
@@ -5973,77 +5930,77 @@ msgstr ""
 "Daha ayrıntılı bilgi için donanım üreticisine veya BT desteğine başvurun."
 
 #. TRANSLATORS: in reference to firmware protection: 0/4 stars
-#: panels/privacy/firmware-security/cc-firmware-security-dialog.c:106
+#: panels/privacy/firmware-security/cc-firmware-security-dialog.c:108
 #: panels/privacy/firmware-security/cc-firmware-security-page.c:532
-msgid "Checks Failed"
-msgstr "Denetimler Başarısız"
+msgid "Security Checks Failed"
+msgstr "Güvenlik Denetimleri Başarısız"
 
 #. TRANSLATORS: This is the description to describe the failure on
 #. checking the security items.
-#: panels/privacy/firmware-security/cc-firmware-security-dialog.c:109
+#: panels/privacy/firmware-security/cc-firmware-security-dialog.c:111
 msgid ""
 "Hardware does not pass checks. This means that you are not protected against "
 "common hardware security issues.\n"
 "\n"
 "It may be possible to resolve hardware security issues by updating your "
 "firmware or changing device configuration options. However, failures can "
-"stem from the physical hardware itself, and may not be reversible."
+"stem from the physical hardware itself and may not be fixable."
 msgstr ""
 "Donanım, denetimleri geçemedi. Bu, genel donanım güvenliği sorunlarına karşı "
 "korunmadığınız anlamına gelir.\n"
 "\n"
-"Donanım yazılımını güncelleyerek ya da aygıt yapılandırma seçeneklerini "
+"Donanım yazılımı güncellenerek ya da aygıt yapılandırma seçeneklerini "
 "değiştirerek donanım güvenliği sorunları çözülebilir. Ancak, arızalar "
-"fiziksel donanımın kendisinden kaynaklanabilir ve geri döndürülemeyebilir."
+"fiziksel donanımın kendisinden kaynaklanabilir ve düzeltilemeyebilir."
 
 #. TRANSLATORS: in reference to firmware protection: 1/4 stars
-#: panels/privacy/firmware-security/cc-firmware-security-dialog.c:119
+#: panels/privacy/firmware-security/cc-firmware-security-dialog.c:121
 #: panels/privacy/firmware-security/cc-firmware-security-page.c:539
-msgid "Checks Passed"
-msgstr "Denetimler Başarılı"
+msgid "Basic Security Checks Passed"
+msgstr "Temel Güvenlik Denetimleri Başarılı"
 
 #. TRANSLATORS: This description describes the device passing the
 #. minimum requirement of security check.
-#: panels/privacy/firmware-security/cc-firmware-security-dialog.c:122
+#: panels/privacy/firmware-security/cc-firmware-security-dialog.c:124
 msgid ""
-"This device meets basic security requirements. Its hardware has protection "
-"against some of the most common security threats."
+"This device meets basic security requirements and has protection against "
+"some hardware security threats. However, it lacks other recommended "
+"protections."
 msgstr ""
-"Bu aygıt, temel güvenlik gereksinimlerini karşılıyor. Donanımı, bazı yaygın "
-"güvenlik tehditlerine karşı korunmaktadır."
+"Bu aygıt, temel güvenlik gereksinimlerini karşılıyor ve donanımı, bazı "
+"yaygın güvenlik tehditlerine karşı korunmaktadır. Ancak önerilen diğer "
+"korumalardan yoksun."
 
 #. TRANSLATORS: in reference to firmware protection: 2~4 stars
-#: panels/privacy/firmware-security/cc-firmware-security-dialog.c:132
-#: panels/privacy/firmware-security/cc-firmware-security-page.c:548
+#: panels/privacy/firmware-security/cc-firmware-security-dialog.c:134
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:549
 msgid "Protected"
 msgstr "Korunmuş"
 
 #. TRANSLATOR: This description describes the devices passing
 #. the extended security check.
-#: panels/privacy/firmware-security/cc-firmware-security-dialog.c:135
+#: panels/privacy/firmware-security/cc-firmware-security-dialog.c:137
 msgid ""
-"This device passes current security tests. Its hardware is protected against "
-"the majority of security threats."
+"This device passes current security tests. It is protected against the "
+"majority of hardware security threats."
 msgstr ""
 "Bu aygıt şu anki güvenlik sınamalarını geçiyor. Donanımı, çoğu güvenlik "
 "tehditlerine karşı korunmaktadır."
 
-#. TRANSLATORS: in reference to firmware protection: ??? stars
-#: panels/privacy/firmware-security/cc-firmware-security-dialog.c:142
-#: panels/privacy/firmware-security/cc-firmware-security-page.c:555
+#: panels/privacy/firmware-security/cc-firmware-security-dialog.c:144
 msgid "Checks Unavailable"
 msgstr "Denetimler Kullanılamıyor"
 
 #. TRANSLATORS: When the security result is unavailable, this description is shown.
-#: panels/privacy/firmware-security/cc-firmware-security-dialog.c:144
+#: panels/privacy/firmware-security/cc-firmware-security-dialog.c:146
 msgid ""
 "Device security checks are not available for this device. It is not possible "
-"to tell whether it meets security requirements."
+"to tell whether it meets hardware security requirements."
 msgstr ""
-"Bu aygıt için aygıt güvenlik denetimleri yapılamıyor. Güvenlik "
+"Bu aygıt için aygıt güvenlik denetimleri yapılamıyor. Donanım güvenlik "
 "gereksinimlerini karşılayıp karşılamadığı söylenemiyor."
 
-#: panels/privacy/firmware-security/cc-firmware-security-dialog.c:364
+#: panels/privacy/firmware-security/cc-firmware-security-dialog.c:366
 msgid "Report copied to clipboard"
 msgstr "Rapor panoya kopyalandı"
 
@@ -6165,18 +6122,23 @@ msgid "(%1$s → %2$s)"
 msgstr "(%1$s → %2$s)"
 
 #: panels/privacy/firmware-security/cc-firmware-security-page.c:533
-msgid "Hardware does not pass checks."
-msgstr "Donanım, denetimleri geçemedi."
+msgid "Hardware does not pass basic security checks."
+msgstr "Donanım, temel güvenlik denetimlerini geçemedi."
 
 #: panels/privacy/firmware-security/cc-firmware-security-page.c:540
-msgid "Hardware meets basic security requirements."
-msgstr "Donanım, temel güvenlik gereksinimlerini karşılıyor."
+msgid "Hardware has a basic level of protection."
+msgstr "Donanımın temel koruma düzeyi var."
 
-#: panels/privacy/firmware-security/cc-firmware-security-page.c:549
-msgid "Hardware has a good level of protection."
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:550
+msgid "Hardware has a strong level of protection."
 msgstr "Donanımın iyi koruma düzeyi var."
 
+#. TRANSLATORS: in reference to firmware protection: ??? stars
 #: panels/privacy/firmware-security/cc-firmware-security-page.c:556
+msgid "Security Checks Unavailable"
+msgstr "Güvenlik Denetimleri Kullanılamıyor"
+
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:557
 msgid "Security levels are not available for this device."
 msgstr "Bu aygıtta güvenlik düzeyleri kullanılamıyor."
 
@@ -6188,11 +6150,11 @@ msgstr "Aygıt Güvenliği"
 msgid "Starting Device Security…"
 msgstr "Aygıt Güvenliği Başlatılıyor…"
 
-#: panels/privacy/firmware-security/cc-firmware-security-page.ui:83
+#: panels/privacy/firmware-security/cc-firmware-security-page.ui:77
 msgid "Device Security Unavailable"
 msgstr "Aygıt Güvenliği Kullanılamıyor"
 
-#: panels/privacy/firmware-security/cc-firmware-security-page.ui:85
+#: panels/privacy/firmware-security/cc-firmware-security-page.ui:79
 msgid ""
 "Device Security is only available on physical hardware. No physical hardware "
 "has been detected."
@@ -6200,15 +6162,15 @@ msgstr ""
 "Aygıt Güvenliği yalnızca fiziksel donanımda kullanılabilir. Fiziksel aygıt "
 "saptanamadı."
 
-#: panels/privacy/firmware-security/cc-firmware-security-page.ui:223
+#: panels/privacy/firmware-security/cc-firmware-security-page.ui:212
 msgid "Security Events"
 msgstr "Güvenlik Olayları"
 
-#: panels/privacy/firmware-security/cc-firmware-security-page.ui:233
+#: panels/privacy/firmware-security/cc-firmware-security-page.ui:224
 msgid "No Events"
 msgstr "Olay Yok"
 
-#. TRANSLATORS: if the stauts is valid. For example security check is valid and key is valid.
+#. TRANSLATORS: if the status is valid. For example security check is valid and key is valid.
 #: panels/privacy/firmware-security/cc-firmware-security-utils.c:35
 msgid "Valid"
 msgstr "Geçerli"
@@ -6221,8 +6183,8 @@ msgstr "Geçersiz"
 #. TRANSLATORS: if the function is enabled through BIOS or OS settings.
 #. TRANSLATORS: Status of Parental Controls setup
 #: panels/privacy/firmware-security/cc-firmware-security-utils.c:45
-#: panels/system/users/cc-user-page.c:377
-#: panels/system/users/cc-user-page.c:749 panels/wwan/cc-wwan-device-page.c:475
+#: panels/system/users/cc-user-page.c:373
+#: panels/system/users/cc-user-page.c:748 panels/wwan/cc-wwan-device-page.c:475
 msgid "Enabled"
 msgstr "Etkin"
 
@@ -6299,7 +6261,7 @@ msgstr ""
 "Kamera;Fotoğraflar;Video;Kayıt;Güvenlik;Donanım Yazılımı;"
 
 #. Translators: This will be presented as the text of a link to the privacy policy
-#: panels/privacy/location/cc-location-page.c:414
+#: panels/privacy/location/cc-location-page.c:446
 msgid "Learn about what data is collected, and how it is used."
 msgstr "Hangi verilerin toplandığı ve nasıl kullanıldığıyla ilgili bilgi al."
 
@@ -6326,7 +6288,7 @@ msgstr ""
 "Aşağıdaki yalıtılmış uygulamalara konum verisine erişim izni verildi. "
 "Yalıtılmamış uygulamalar, izin istemeden konum verisini kullanabilir."
 
-#: panels/privacy/location/cc-location-page.ui:70
+#: panels/privacy/location/cc-location-page.ui:66
 msgid "No sandboxed apps have asked for location access"
 msgstr "Hiçbir yalıtılmış uygulama konum erişimi isteği yapmadı"
 
@@ -6688,7 +6650,7 @@ msgid "Subfolders must be manually added for this location"
 msgstr "Bu konum için alt klasörler elle eklenmelidir"
 
 #: panels/search/cc-search-locations-dialog.c:572
-#: panels/sharing/cc-sharing-panel.c:362
+#: panels/sharing/cc-sharing-panel.c:364
 msgid "Remove Folder"
 msgstr "Klasörü Kaldır"
 
@@ -6720,7 +6682,7 @@ msgstr "Özel Konumlar"
 msgid "_Add Location…"
 msgstr "Konum _Ekle…"
 
-#: panels/search/cc-search-locations-dialog.ui:89
+#: panels/search/cc-search-locations-dialog.ui:85
 msgid "No custom search locations"
 msgstr "Özel arama konumu yok"
 
@@ -6764,31 +6726,31 @@ msgstr "Ara;Bul;Endeks;Gizle;Gizlilik;Sonuçlar;"
 msgid "No networks selected for sharing"
 msgstr "Paylaşımı için ağ seçilmedi"
 
-#: panels/sharing/cc-sharing-panel.c:149
+#: panels/sharing/cc-sharing-panel.c:151
 msgctxt "service is disabled"
 msgid "Off"
 msgstr "Kapalı"
 
-#: panels/sharing/cc-sharing-panel.c:152
+#: panels/sharing/cc-sharing-panel.c:154
 msgctxt "service is enabled"
 msgid "Enabled"
 msgstr "Etkin"
 
-#: panels/sharing/cc-sharing-panel.c:155
+#: panels/sharing/cc-sharing-panel.c:157
 msgctxt "service is active"
 msgid "Active"
 msgstr "Etkin"
 
-#: panels/sharing/cc-sharing-panel.c:237
+#: panels/sharing/cc-sharing-panel.c:239
 msgid "Choose a Folder"
 msgstr "Klasör Seç"
 
-#: panels/sharing/cc-sharing-panel.c:385
+#: panels/sharing/cc-sharing-panel.c:387
 msgid "Add Folder"
 msgstr "Klasör Ekle"
 
 #. TRANSLATORS: %s is replaced with a link to a dav://<hostname> URL
-#: panels/sharing/cc-sharing-panel.c:472
+#: panels/sharing/cc-sharing-panel.c:475
 #, c-format
 msgid ""
 "File Sharing allows you to share your Public folder with others on your "
@@ -6987,13 +6949,6 @@ msgstr "_Ses Düzeyleri"
 #: panels/sound/cc-sound-panel.ui:366
 msgid "_Alert Sound"
 msgstr "_Uyarı Sesi"
-
-#. Translators: This is the tooltip for a speaker test button, %s is an already translated
-#. speaker position, like "Front Left" or "Rear Center".
-#: panels/sound/cc-speaker-test-button.c:218
-#, c-format
-msgid "%s Speaker"
-msgstr "%s Hoparlör"
 
 #: panels/sound/cc-subwoofer-slider.ui:8
 msgid "Subwoofer"
@@ -7627,22 +7582,22 @@ msgstr "Ekran dilinizi ve biçimlerinizi seçin"
 msgid "Language;Layout;Keyboard;Input;"
 msgstr "Dil;Düzen;Yerleşim;Klavye;Girdi;Giriş;"
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.c:364
+#: panels/system/remote-desktop/cc-desktop-sharing-page.c:358
 #: panels/system/remote-desktop/cc-remote-login-page.c:98
 msgid "Device address copied to clipboard"
 msgstr "Aygıt adresi panoya kopyalandı"
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.c:373
+#: panels/system/remote-desktop/cc-desktop-sharing-page.c:367
 #: panels/system/remote-desktop/cc-remote-login-page.c:107
 msgid "Port number copied to clipboard"
 msgstr "Bağlantı noktası numarası panoya kopyalandı"
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.c:384
+#: panels/system/remote-desktop/cc-desktop-sharing-page.c:378
 #: panels/system/remote-desktop/cc-remote-login-page.c:118
 msgid "Username copied to clipboard"
 msgstr "Kullanıcı adı panoya kopyalandı"
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.c:395
+#: panels/system/remote-desktop/cc-desktop-sharing-page.c:389
 #: panels/system/remote-desktop/cc-remote-login-page.c:129
 msgid "Password copied to clipboard"
 msgstr "Parola panoya kopyalandı"
@@ -7650,10 +7605,10 @@ msgstr "Parola panoya kopyalandı"
 #: panels/system/remote-desktop/cc-desktop-sharing-page.ui:12
 msgid ""
 "Share your existing desktop with other devices. The remote connection uses "
-"the existing screen resolution"
+"the existing screen resolution."
 msgstr ""
 "Geçerli masaüstünüzü diğer aygıtlarla paylaşın. Uzak bağlantı, var olan "
-"ekran çözünürlüğünü kullanır"
+"ekran çözünürlüğünü kullanır."
 
 #: panels/system/remote-desktop/cc-desktop-sharing-page.ui:27
 msgid "_Desktop Sharing"
@@ -7718,11 +7673,11 @@ msgstr "Yeni Parola _Oluştur"
 msgid "_Verify Encryption"
 msgstr "Şifrelemeyi _Doğrula"
 
-#: panels/system/remote-desktop/cc-encryption-fingerprint-dialog.ui:28
+#: panels/system/remote-desktop/cc-encryption-fingerprint-dialog.ui:14
 msgid "Encryption Fingerprint"
 msgstr "Şifreleme Parmak İzi"
 
-#: panels/system/remote-desktop/cc-encryption-fingerprint-dialog.ui:29
+#: panels/system/remote-desktop/cc-encryption-fingerprint-dialog.ui:15
 msgid ""
 "The encryption fingerprint can be seen in connecting clients and should be "
 "identical"
@@ -7743,8 +7698,8 @@ msgstr "Masaüstü Paylaşımı"
 msgid "Remote Login"
 msgstr "Uzaktan Giriş"
 
-#: panels/system/remote-desktop/cc-remote-login-page.c:774
-#: panels/system/users/cc-user-page.c:772
+#: panels/system/remote-desktop/cc-remote-login-page.c:764
+#: panels/system/users/cc-user-page.c:771
 msgid "Some settings are locked"
 msgstr "Kimi ayarlar kilitli"
 
@@ -7891,8 +7846,8 @@ msgstr "Etki alanına girilemedi"
 #: panels/system/users/cc-enterprise-login-dialog.c:365
 #, c-format
 msgid ""
-"To add an enterprise login account, this device needs to be enrolled with "
-"<b>%s</b>. To enroll, have your domain administrator enter their name and "
+"To add an enterprise login account, this device needs to be enrolled with <b>"
+"%s</b>. To enroll, have your domain administrator enter their name and "
 "password."
 msgstr ""
 "Kurumsal giriş hesabı eklemek için, bu aygıt <b>%s</b> etki alanına kayıtlı "
@@ -8127,47 +8082,47 @@ msgstr "Parmak İzi Yönetici"
 msgid "Fingerprint"
 msgstr "Parmak İzi"
 
-#: panels/system/users/cc-fingerprint-dialog.ui:85
+#: panels/system/users/cc-fingerprint-dialog.ui:79
 msgid "_No"
 msgstr "_Hayır"
 
-#: panels/system/users/cc-fingerprint-dialog.ui:93
+#: panels/system/users/cc-fingerprint-dialog.ui:87
 msgid "_Yes"
 msgstr "_Evet"
 
-#: panels/system/users/cc-fingerprint-dialog.ui:113
+#: panels/system/users/cc-fingerprint-dialog.ui:107
 msgid ""
 "Do you want to delete your registered fingerprints so fingerprint login is "
 "disabled?"
 msgstr ""
 "Kayıtlı parmak izlerini silerek parmak izi girişini kapatmak ister misiniz?"
 
-#: panels/system/users/cc-fingerprint-dialog.ui:169
+#: panels/system/users/cc-fingerprint-dialog.ui:163
 msgid "No fingerprint device"
 msgstr "Parmak izi aygıtı yok"
 
 #. Translators: This is the empty state page label which states that there are no devices ready.
-#: panels/system/users/cc-fingerprint-dialog.ui:184
+#: panels/system/users/cc-fingerprint-dialog.ui:178
 msgid "No Fingerprint device"
 msgstr "Parmak İzi Aygıtı Yok"
 
-#: panels/system/users/cc-fingerprint-dialog.ui:193
+#: panels/system/users/cc-fingerprint-dialog.ui:187
 msgid "Ensure the device is properly connected"
 msgstr "Aygıtın düzgünce bağlandığına emin olun"
 
-#: panels/system/users/cc-fingerprint-dialog.ui:201
+#: panels/system/users/cc-fingerprint-dialog.ui:195
 msgid "Fingerprint Device"
 msgstr "Parmak İzi Aygıtı"
 
-#: panels/system/users/cc-fingerprint-dialog.ui:210
+#: panels/system/users/cc-fingerprint-dialog.ui:204
 msgid "Choose the fingerprint device you want to configure"
 msgstr "Yapılandırmak istediğiniz parmak izi aygıtını seçin"
 
-#: panels/system/users/cc-fingerprint-dialog.ui:240
+#: panels/system/users/cc-fingerprint-dialog.ui:234
 msgid "Fingerprint Login"
 msgstr "Parmak İzi Girişi"
 
-#: panels/system/users/cc-fingerprint-dialog.ui:246
+#: panels/system/users/cc-fingerprint-dialog.ui:240
 msgid ""
 "Fingerprint login allows you to unlock and log into your device with your "
 "finger"
@@ -8175,11 +8130,11 @@ msgstr ""
 "Parmak izi girişi, aygıtınızın kilidini parmağınızla açmayı ve giriş "
 "yapmanızı sağlar"
 
-#: panels/system/users/cc-fingerprint-dialog.ui:273
+#: panels/system/users/cc-fingerprint-dialog.ui:267
 msgid "_Delete Fingerprints"
 msgstr "Parmak İzlerini _Sil"
 
-#: panels/system/users/cc-fingerprint-dialog.ui:287
+#: panels/system/users/cc-fingerprint-dialog.ui:281
 msgid "Fingerprint Enroll"
 msgstr "Parmak İzi Kaydı"
 
@@ -8195,35 +8150,39 @@ msgstr "Lütfen parolanızı yeniden girin."
 msgid "Password could not be changed"
 msgstr "Parolanız değiştirilemedi"
 
+#: panels/system/users/cc-password-dialog.c:147 shell/cc-window.ui:87
+msgid "_OK"
+msgstr "_Tamam"
+
 #: panels/system/users/cc-password-dialog.ui:4
 msgid "Change Password"
 msgstr "Parola Değiştir"
 
-#: panels/system/users/cc-password-dialog.ui:30
+#: panels/system/users/cc-password-dialog.ui:24
 msgid "Ch_ange"
 msgstr "D_eğiştir"
 
-#: panels/system/users/cc-password-dialog.ui:48
+#: panels/system/users/cc-password-dialog.ui:42
 msgid "Current Password"
 msgstr "Geçerli Parola"
 
-#: panels/system/users/cc-password-dialog.ui:60
+#: panels/system/users/cc-password-dialog.ui:54
 msgid "New Password"
 msgstr "Yeni Parola"
 
-#: panels/system/users/cc-password-dialog.ui:88
+#: panels/system/users/cc-password-dialog.ui:82
 msgid "Confirm Password"
 msgstr "Yeni Parolayı Doğrula"
 
-#: panels/system/users/cc-password-dialog.ui:100
+#: panels/system/users/cc-password-dialog.ui:94
 msgid "The passwords do not match"
 msgstr "Parolalar eşleşmiyor"
 
-#: panels/system/users/cc-password-dialog.ui:136
+#: panels/system/users/cc-password-dialog.ui:130
 msgid "Allow user to change their password on next login"
 msgstr "Sonraki girişte kullanıcının parolasını değiştirmesine olanak tanı"
 
-#: panels/system/users/cc-password-dialog.ui:148
+#: panels/system/users/cc-password-dialog.ui:142
 msgid "Set a password now"
 msgstr "Şimdi parola belirle"
 
@@ -8265,7 +8224,7 @@ msgctxt "Password mode"
 msgid "None"
 msgstr "Hiçbiri"
 
-#: panels/system/users/cc-user-page.c:444
+#: panels/system/users/cc-user-page.c:440
 #, c-format
 msgid "Remove %s?"
 msgstr "%s kaldırılsın mı?"
@@ -8304,11 +8263,11 @@ msgstr "K_endiliğinden Giriş"
 msgid "_Administrator"
 msgstr "_Yönetici"
 
-#: panels/system/users/cc-user-page.ui:156
+#: panels/system/users/cc-user-page.ui:155
 msgid "_Parental Controls"
 msgstr "_Ebeveyn Denetimleri"
 
-#: panels/system/users/cc-user-page.ui:157
+#: panels/system/users/cc-user-page.ui:156
 msgid "Open the Parental Controls app"
 msgstr "Ebeveyn Denetimleri uygulamasını aç"
 
@@ -8647,10 +8606,10 @@ msgstr "_Çift Tıklama Gecikmesi"
 #: panels/universal-access/cc-ua-mouse-page.ui:40
 #: panels/universal-access/cc-ua-mouse-page.ui:78
 #: panels/universal-access/cc-ua-mouse-page.ui:111
-#: panels/universal-access/cc-ua-typing-page.ui:131
-#: panels/universal-access/cc-ua-typing-page.ui:183
-#: panels/universal-access/cc-ua-typing-page.ui:230
-#: panels/universal-access/cc-ua-zoom-page.ui:179
+#: panels/universal-access/cc-ua-typing-page.ui:133
+#: panels/universal-access/cc-ua-typing-page.ui:186
+#: panels/universal-access/cc-ua-typing-page.ui:233
+#: panels/universal-access/cc-ua-zoom-page.ui:174
 msgid "Short"
 msgstr "Kısa"
 
@@ -8658,10 +8617,10 @@ msgstr "Kısa"
 #: panels/universal-access/cc-ua-mouse-page.ui:43
 #: panels/universal-access/cc-ua-mouse-page.ui:81
 #: panels/universal-access/cc-ua-mouse-page.ui:114
-#: panels/universal-access/cc-ua-typing-page.ui:134
-#: panels/universal-access/cc-ua-typing-page.ui:186
-#: panels/universal-access/cc-ua-typing-page.ui:233
-#: panels/universal-access/cc-ua-zoom-page.ui:183
+#: panels/universal-access/cc-ua-typing-page.ui:136
+#: panels/universal-access/cc-ua-typing-page.ui:189
+#: panels/universal-access/cc-ua-typing-page.ui:236
+#: panels/universal-access/cc-ua-zoom-page.ui:178
 msgid "Long"
 msgstr "Uzun"
 
@@ -8678,8 +8637,8 @@ msgid "Secondary click by holding down the primary mouse button"
 msgstr "İlk fare düğmesi basılı tutarak ikincil tıklama"
 
 #: panels/universal-access/cc-ua-mouse-page.ui:73
-#: panels/universal-access/cc-ua-typing-page.ui:178
-#: panels/universal-access/cc-ua-typing-page.ui:225
+#: panels/universal-access/cc-ua-typing-page.ui:180
+#: panels/universal-access/cc-ua-typing-page.ui:228
 msgid "Acceptance Delay"
 msgstr "Kabul Gecikmesi"
 
@@ -8692,7 +8651,7 @@ msgid "Trigger a click when the pointer hovers"
 msgstr "Belirteç nesne üstüne geldiğinde tıkla"
 
 #: panels/universal-access/cc-ua-mouse-page.ui:106
-#: panels/universal-access/cc-ua-typing-page.ui:126
+#: panels/universal-access/cc-ua-typing-page.ui:127
 msgid "Delay"
 msgstr "Gecikme"
 
@@ -8894,48 +8853,48 @@ msgstr "Tuş basılı tutulduğunda tuş basımları yinelenir"
 msgid "Speed"
 msgstr "Hız"
 
-#: panels/universal-access/cc-ua-typing-page.ui:153
+#: panels/universal-access/cc-ua-typing-page.ui:155
 msgid "_Sticky Keys"
 msgstr "_Yapışkan Tuşlar"
 
-#: panels/universal-access/cc-ua-typing-page.ui:154
+#: panels/universal-access/cc-ua-typing-page.ui:156
 msgid "Sequences of modifier keys act as a key combination"
 msgstr "Değiştirici tuş dizisi, tuş birleşimi olarak davranır"
 
-#: panels/universal-access/cc-ua-typing-page.ui:159
+#: panels/universal-access/cc-ua-typing-page.ui:161
 msgid "Disable if two keys are pressed together"
 msgstr "İki tuşa birden basıldığında devre dışı bırak"
 
-#: panels/universal-access/cc-ua-typing-page.ui:164
+#: panels/universal-access/cc-ua-typing-page.ui:166
 msgid "Beep when modifier key is pressed"
 msgstr "Değiştirici tuşa basıldığında sesle uyar"
 
-#: panels/universal-access/cc-ua-typing-page.ui:172
+#: panels/universal-access/cc-ua-typing-page.ui:174
 msgid "S_low Keys"
 msgstr "Yavaş Tuş_lar"
 
-#: panels/universal-access/cc-ua-typing-page.ui:173
+#: panels/universal-access/cc-ua-typing-page.ui:175
 msgid "Delay between when a key is pressed and when it is accepted"
 msgstr "Bir tuşa basılmasıyla kabulü arasındaki gecikme"
 
-#: panels/universal-access/cc-ua-typing-page.ui:201
+#: panels/universal-access/cc-ua-typing-page.ui:204
 msgid "Beep when a key is pressed"
 msgstr "Bir tuşa basıldığında sesle uyar"
 
-#: panels/universal-access/cc-ua-typing-page.ui:206
+#: panels/universal-access/cc-ua-typing-page.ui:209
 msgid "Beep when a key is accepted"
 msgstr "Bir tuş kabul edildiğinde sesle uyar"
 
-#: panels/universal-access/cc-ua-typing-page.ui:211
-#: panels/universal-access/cc-ua-typing-page.ui:248
+#: panels/universal-access/cc-ua-typing-page.ui:214
+#: panels/universal-access/cc-ua-typing-page.ui:251
 msgid "Beep when a key is rejected"
 msgstr "Bir tuş reddedildiğinde sesle uyar"
 
-#: panels/universal-access/cc-ua-typing-page.ui:219
+#: panels/universal-access/cc-ua-typing-page.ui:222
 msgid "B_ounce Keys"
 msgstr "_Zıplayan Tuşlar"
 
-#: panels/universal-access/cc-ua-typing-page.ui:220
+#: panels/universal-access/cc-ua-typing-page.ui:223
 msgid "Ignore fast duplicate keypresses"
 msgstr "Kısa aralıklı tuş yinelemelerini yok sayar"
 
@@ -9029,95 +8988,95 @@ msgstr "Merkezi Kalır"
 msgid "Crosshairs"
 msgstr "Artı"
 
-#: panels/universal-access/cc-ua-zoom-page.ui:115
+#: panels/universal-access/cc-ua-zoom-page.ui:114
 msgid "_Crosshair Lines"
 msgstr "_Artı Çizgileri"
 
-#: panels/universal-access/cc-ua-zoom-page.ui:116
+#: panels/universal-access/cc-ua-zoom-page.ui:115
 msgid "Mark the cursor location in the magnifier region using lines"
 msgstr "İmleç konumunu büyüteç bölgesinde çizgiler kullanarak imle"
 
-#: panels/universal-access/cc-ua-zoom-page.ui:123
+#: panels/universal-access/cc-ua-zoom-page.ui:121
 msgid "_Overlap Mouse Cursor"
 msgstr "_Fare İmleciyle Örtüş"
 
-#: panels/universal-access/cc-ua-zoom-page.ui:131
+#: panels/universal-access/cc-ua-zoom-page.ui:128
 msgid "_Thickness"
 msgstr "_Kalınlık"
 
 #. Translators: This is a mark in the Thickness scale
-#: panels/universal-access/cc-ua-zoom-page.ui:137
+#: panels/universal-access/cc-ua-zoom-page.ui:133
 msgid "Thin"
 msgstr "İnce"
 
 #. Translators: This is a mark in the Thickness scale
-#: panels/universal-access/cc-ua-zoom-page.ui:138
+#: panels/universal-access/cc-ua-zoom-page.ui:134
 msgid "Thick"
 msgstr "Kalın"
 
-#: panels/universal-access/cc-ua-zoom-page.ui:171
+#: panels/universal-access/cc-ua-zoom-page.ui:166
 msgid "Len_gth"
 msgstr "_Uzunluk"
 
 #. Translators: This is a mark in the Crosshair Length scale
-#: panels/universal-access/cc-ua-zoom-page.ui:180
+#: panels/universal-access/cc-ua-zoom-page.ui:175
 msgid "1/4 screen"
 msgstr "1/4 Ekran"
 
 #. Translators: This is a mark in the Crosshair Length scale
-#: panels/universal-access/cc-ua-zoom-page.ui:181
+#: panels/universal-access/cc-ua-zoom-page.ui:176
 msgid "1/2 Screen"
 msgstr "1/2 Ekran"
 
 #. Translators: This is a mark in the Crosshair Length scale
-#: panels/universal-access/cc-ua-zoom-page.ui:182
+#: panels/universal-access/cc-ua-zoom-page.ui:177
 msgid "3/4 Screen"
 msgstr "3/4 Ekran"
 
-#: panels/universal-access/cc-ua-zoom-page.ui:203
+#: panels/universal-access/cc-ua-zoom-page.ui:198
 msgid "Colo_r"
 msgstr "_Renk"
 
-#: panels/universal-access/cc-ua-zoom-page.ui:221
+#: panels/universal-access/cc-ua-zoom-page.ui:217
 msgid "Color Filters"
 msgstr "Renk Süzgeçleri"
 
-#: panels/universal-access/cc-ua-zoom-page.ui:225
+#: panels/universal-access/cc-ua-zoom-page.ui:221
 msgid "_Inverted"
 msgstr "_Evirtik"
 
-#: panels/universal-access/cc-ua-zoom-page.ui:226
+#: panels/universal-access/cc-ua-zoom-page.ui:222
 msgid "Invert colors in the magnifier region"
 msgstr "Büyüteç bölgesindeki renkleri evirt"
 
-#: panels/universal-access/cc-ua-zoom-page.ui:233
+#: panels/universal-access/cc-ua-zoom-page.ui:229
 msgid "_Brightness"
 msgstr "_Parlaklık"
 
 #. Translators: This is a mark in the Brightness scale
 #. Translators: This is a mark in the Contrast scale
-#: panels/universal-access/cc-ua-zoom-page.ui:239
-#: panels/universal-access/cc-ua-zoom-page.ui:264
+#: panels/universal-access/cc-ua-zoom-page.ui:235
+#: panels/universal-access/cc-ua-zoom-page.ui:260
 msgid "Low"
 msgstr "Düşük"
 
 #. Translators: This is a mark in the Brightness scale
 #. Translators: This is a mark in the Contrast scale
-#: panels/universal-access/cc-ua-zoom-page.ui:240
-#: panels/universal-access/cc-ua-zoom-page.ui:265
+#: panels/universal-access/cc-ua-zoom-page.ui:236
+#: panels/universal-access/cc-ua-zoom-page.ui:261
 msgid "High"
 msgstr "Yüksek"
 
-#: panels/universal-access/cc-ua-zoom-page.ui:259
+#: panels/universal-access/cc-ua-zoom-page.ui:255
 msgid "Co_ntrast"
 msgstr "_Karşıtlık"
 
-#: panels/universal-access/cc-ua-zoom-page.ui:284
+#: panels/universal-access/cc-ua-zoom-page.ui:280
 msgid "Co_lor"
 msgstr "R_enk"
 
 #. Translators: This is a mark in the Grayscale scale
-#: panels/universal-access/cc-ua-zoom-page.ui:290
+#: panels/universal-access/cc-ua-zoom-page.ui:286
 msgid "Full"
 msgstr "Tam"
 
@@ -9957,7 +9916,7 @@ msgstr "© 1998 %s"
 msgid "Settings categories"
 msgstr "Ayar kategorileri"
 
-#: shell/cc-panel-loader.c:310
+#: shell/cc-panel-loader.c:311
 msgid "Available panels:"
 msgstr "Kullanılabilir paneller:"
 
@@ -9982,10 +9941,6 @@ msgstr ""
 "Ayarlarʼın bu sürümü yalnızca geliştirme amaçları için kullanılmalıdır. "
 "Doğru olmayan sistem davranışları, veri kaybı ve diğer beklenmeyen "
 "sorunlarla karşılaşabilirsiniz. "
-
-#: shell/cc-window.ui:87
-msgid "_OK"
-msgstr "_Tamam"
 
 #: shell/cc-window.ui:95
 msgid "_Keyboard Shortcuts"
@@ -10096,6 +10051,48 @@ msgstr[0] "%u Girdi"
 #: subprojects/gvc/gvc-mixer-control.c:2872
 msgid "System Sounds"
 msgstr "Sistem Sesleri"
+
+#~ msgid "%s Speaker"
+#~ msgstr "%s Hoparlör"
+
+#~ msgid "Automat_ically Launch Apps"
+#~ msgstr "Uygulamaları _Kendiliğinden Başlat"
+
+#~ msgid "Select how other media should be handled"
+#~ msgstr "Diğer ortamların nasıl kullanılacağını seç"
+
+#~ msgid "Pointer Speed"
+#~ msgstr "İmleç Hızı"
+
+#~ msgid "Pointer speed"
+#~ msgstr "İmleç hızı"
+
+#~ msgid "HTTP proxy port"
+#~ msgstr "HTTP vekil bağlantı noktası"
+
+#~ msgid "HTTPS proxy port"
+#~ msgstr "HTTPS vekil bağlantı noktası"
+
+#~ msgid "FTP proxy port"
+#~ msgstr "FTP vekil bağlantı noktası"
+
+#~ msgid "SOCKS host port"
+#~ msgstr "SOCKS ana makine bağlantı noktası"
+
+#~ msgid "Turn VPN connection off"
+#~ msgstr "VPN bağlantısını kapat"
+
+#~ msgid "Turn Wi-Fi off"
+#~ msgstr "Kablosuzu Kapat"
+
+#~ msgid "Show Saved Networks"
+#~ msgstr "Kayıtlı Ağları Göster"
+
+#~ msgid "Connect to hidden network"
+#~ msgstr "Gizli ağa bağlan"
+
+#~ msgid "Hardware meets basic security requirements."
+#~ msgstr "Donanım, temel güvenlik gereksinimlerini karşılıyor."
 
 #~ msgid "Learn more"
 #~ msgstr "Daha çoğunu öğren"
