@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2024-04-23 09:45+0000\n"
-"PO-Revision-Date: 2024-04-24 00:01+0200\n"
+"POT-Creation-Date: 2024-04-26 18:55+0000\n"
+"PO-Revision-Date: 2024-04-27 18:53+0200\n"
 "Last-Translator: Martin Srebotnjak <miles@filmsi.net>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "Language: sl_SI\n"
@@ -56,7 +56,7 @@ msgid "Full access to /dev"
 msgstr "Poln dostop do mape /dev"
 
 #: panels/applications/cc-applications-panel.c:839
-#: panels/network/cc-network-panel.ui:8
+#: panels/network/cc-network-panel.ui:33
 #: panels/network/gnome-network-panel.desktop.in:3
 #: panels/network/network-mobile.ui:235 panels/wwan/cc-wwan-device-page.ui:61
 #: panels/wwan/cc-wwan-network-dialog.ui:5
@@ -212,8 +212,8 @@ msgstr "Prejme sistemska iskanja in pošlji zadetke"
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:123
 #: panels/keyboard/cc-xkb-modifier-dialog.c:328
 #: panels/keyboard/keyboard-shortcuts.c:367
-#: panels/system/users/cc-user-page.c:379
-#: panels/system/users/cc-user-page.c:752 panels/wwan/cc-wwan-device-page.c:477
+#: panels/system/users/cc-user-page.c:375
+#: panels/system/users/cc-user-page.c:748 panels/wwan/cc-wwan-device-page.c:477
 #: subprojects/gvc/gvc-mixer-control.c:1872
 msgid "Disabled"
 msgstr "Onemogočeno"
@@ -882,7 +882,7 @@ msgstr "Za uporabo vmesnika Bluetooth je treba izklopiti letalski način."
 
 #. Translators: The found device is a printer connected via Bluetooth
 #: panels/bluetooth/gnome-bluetooth-panel.desktop.in:3
-#: panels/network/cc-network-panel.ui:30
+#: panels/network/cc-network-panel.ui:55
 #: panels/network/net-device-bluetooth.c:138
 #: panels/printers/pp-new-printer-dialog.c:1378
 msgid "Bluetooth"
@@ -1003,7 +1003,7 @@ msgstr "Umerjanje zaslona"
 #: panels/system/users/cc-avatar-chooser.c:92
 #: panels/system/users/cc-enterprise-login-dialog.ui:44
 #: panels/system/users/cc-fingerprint-dialog.ui:32
-#: panels/system/users/cc-password-dialog.ui:21
+#: panels/system/users/cc-password-dialog.ui:15
 #: panels/system/users/cc-user-page.ui:222
 #: panels/system/users/data/join-dialog.ui:17
 #: panels/wwan/cc-wwan-mode-dialog.ui:32
@@ -1762,7 +1762,7 @@ msgstr "_Prvi zaslon"
 
 #. This is the redshift functionality where we suppress blue light when the sun has gone down
 #: panels/display/cc-display-panel.ui:158
-#: panels/display/cc-night-light-page.ui:86
+#: panels/display/cc-night-light-page.ui:102
 msgid "_Night Light"
 msgstr "_Nočna osvetlitev"
 
@@ -1844,15 +1844,24 @@ msgctxt "display setting"
 msgid "_Scale"
 msgstr "_Prilagodi velikost"
 
-#: panels/display/cc-night-light-page.c:226
-msgid "Night Light cannot be used from a virtual machine."
-msgstr "Nočne osvetlitve ni mogoče uporabiti z navidezne naprave."
+#: panels/display/cc-night-light-page.c:223
+msgid "Night Light cannot be used from a virtual machine"
+msgstr "Nočne osvetlitve ni mogoče uporabiti z navidezne naprave"
 
-#: panels/display/cc-night-light-page.ui:25
+#: panels/display/cc-night-light-page.c:224
+msgid ""
+"This could be the result of the graphics driver being used, or the desktop "
+"being used remotely."
+msgstr ""
+"To je lahko posledica uporabljenega grafičnega gonilnika ali namizja, ki se "
+"uporablja na daljavo."
+
+#: panels/display/cc-night-light-page.ui:12
+#: panels/display/cc-night-light-page.ui:41
 msgid "Night Light Unavailable"
 msgstr "Nočna osvetlitev ni na voljo"
 
-#: panels/display/cc-night-light-page.ui:33
+#: panels/display/cc-night-light-page.ui:49
 msgid ""
 "This could be the result of the graphics driver being used, or the desktop "
 "being used remotely"
@@ -1861,16 +1870,16 @@ msgstr ""
 "uporablja na daljavo."
 
 #. Inhibit the redshift functionality until the next day starts
-#: panels/display/cc-night-light-page.ui:54
+#: panels/display/cc-night-light-page.ui:70
 msgid "Temporarily Disabled Until Tomorrow"
 msgstr "Začasno onemogoči do jutri"
 
 #. This cancels the redshift inhibit.
-#: panels/display/cc-night-light-page.ui:68
+#: panels/display/cc-night-light-page.ui:84
 msgid "Restart Filter"
 msgstr "Filter ponovnega zagona"
 
-#: panels/display/cc-night-light-page.ui:80
+#: panels/display/cc-night-light-page.ui:96
 msgid ""
 "Night light makes the screen color warmer. This can help to prevent eye "
 "strain and sleeplessness."
@@ -1878,58 +1887,58 @@ msgstr ""
 "Nočna osvetlitev se kaže v toplejših barvah. S tem preprečujemo naprezanje "
 "oči in zaspanost."
 
-#: panels/display/cc-night-light-page.ui:94
+#: panels/display/cc-night-light-page.ui:110
 msgid "_Schedule"
 msgstr "_Urnik"
 
-#: panels/display/cc-night-light-page.ui:101
+#: panels/display/cc-night-light-page.ui:117
 msgid "Sunset to Sunrise"
 msgstr "od mraka do zore"
 
-#: panels/display/cc-night-light-page.ui:102
+#: panels/display/cc-night-light-page.ui:118
 msgid "Manual Schedule"
 msgstr "Ročno načrtovanje"
 
-#: panels/display/cc-night-light-page.ui:112
+#: panels/display/cc-night-light-page.ui:128
 msgid "_Times"
 msgstr "_Časi"
 
-#: panels/display/cc-night-light-page.ui:126
+#: panels/display/cc-night-light-page.ui:142
 msgid "From"
 msgstr "Od"
 
-#: panels/display/cc-night-light-page.ui:151
-#: panels/display/cc-night-light-page.ui:238
+#: panels/display/cc-night-light-page.ui:167
+#: panels/display/cc-night-light-page.ui:254
 msgid "Hour"
 msgstr "Ure"
 
-#: panels/display/cc-night-light-page.ui:157
-#: panels/display/cc-night-light-page.ui:244
+#: panels/display/cc-night-light-page.ui:173
+#: panels/display/cc-night-light-page.ui:260
 msgid ":"
 msgstr ":"
 
-#: panels/display/cc-night-light-page.ui:174
-#: panels/display/cc-night-light-page.ui:261
+#: panels/display/cc-night-light-page.ui:190
+#: panels/display/cc-night-light-page.ui:277
 msgid "Minute"
 msgstr "Minute"
 
 #. This is the short form for the time period in the morning
-#: panels/display/cc-night-light-page.ui:184
-#: panels/display/cc-night-light-page.ui:271
+#: panels/display/cc-night-light-page.ui:200
+#: panels/display/cc-night-light-page.ui:287
 msgid "AM"
 msgstr "AM"
 
 #. This is the short form for the time period in the afternoon
-#: panels/display/cc-night-light-page.ui:196
-#: panels/display/cc-night-light-page.ui:283
+#: panels/display/cc-night-light-page.ui:212
+#: panels/display/cc-night-light-page.ui:299
 msgid "PM"
 msgstr "PM"
 
-#: panels/display/cc-night-light-page.ui:213
+#: panels/display/cc-night-light-page.ui:229
 msgid "To"
 msgstr "Za"
 
-#: panels/display/cc-night-light-page.ui:319
+#: panels/display/cc-night-light-page.ui:335
 msgid "_Color Temperature"
 msgstr "_Temperatura barve"
 
@@ -2119,11 +2128,11 @@ msgstr "Iskanje jezikov in držav"
 msgid "Input methods can’t be used on the login screen"
 msgstr "Vhodni načini na prijavnem oknu ne delujejo"
 
-#: panels/keyboard/cc-input-list-box.ui:18
+#: panels/keyboard/cc-input-list-box.ui:12
 msgid "No input source selected"
 msgstr "Vhodni vir ni izbran"
 
-#: panels/keyboard/cc-input-list-box.ui:42
+#: panels/keyboard/cc-input-list-box.ui:45
 msgid "_Add Input Source…"
 msgstr "_Dodaj vhodni vir …"
 
@@ -2315,39 +2324,39 @@ msgstr "Vse spremembe tipkovnih bližnjic bodo izgubljene."
 msgid "_Reset All"
 msgstr "Ponastavi _vse"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:34
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:35
 msgid "Search shortcuts"
 msgstr "Poišči tipkovno bližnjico"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:38
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:39
 msgid "Search Shortcuts"
 msgstr "Poišči tipkovno bližnjico"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:71
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:72
 msgid "_Reset All…"
 msgstr "_Ponastavi vse …"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:93
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:94
 #: panels/system/datetime/cc-tz-dialog.ui:42 shell/cc-panel-list.ui:44
 msgid "No Results Found"
 msgstr "Ni najdenih zadetkov."
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:94
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:95
 #: panels/system/datetime/cc-tz-dialog.ui:43 shell/cc-panel-list.ui:45
 msgid "Try a different search"
 msgstr "Poskusite z drugačnim iskalnim nizom"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:126
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:127
 msgid "Add Custom Shortcuts"
 msgstr "Dodaj bližnjice po meri"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:127
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:128
 msgid "Set up custom shortcuts for launching apps, running scripts, and more"
 msgstr ""
 "Nastavi tipkovne bližnjice po meri za zaganjanje programov, izvajanje "
 "skriptov in drugih opravil."
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:132
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:133
 msgid "_Add Shortcut…"
 msgstr "_Dodaj tipkovno bližnjico …"
 
@@ -2500,35 +2509,31 @@ msgstr "_Desno"
 msgid "Mouse"
 msgstr "Miška"
 
-#: panels/mouse/cc-mouse-panel.ui:110 panels/mouse/cc-mouse-panel.ui:213
+#: panels/mouse/cc-mouse-panel.ui:110 panels/mouse/cc-mouse-panel.ui:210
 msgid "Po_inter Speed"
 msgstr "_Hitrost kazalnika"
 
-#: panels/mouse/cc-mouse-panel.ui:117
-msgid "Pointer Speed"
-msgstr "Hitrost kazalnika"
-
-#: panels/mouse/cc-mouse-panel.ui:120 panels/mouse/cc-mouse-panel.ui:224
+#: panels/mouse/cc-mouse-panel.ui:117 panels/mouse/cc-mouse-panel.ui:218
 #: panels/universal-access/cc-ua-typing-page.ui:58
 #: panels/universal-access/cc-ua-typing-page.ui:111
 msgid "Slow"
 msgstr "Počasna"
 
-#: panels/mouse/cc-mouse-panel.ui:122 panels/mouse/cc-mouse-panel.ui:226
+#: panels/mouse/cc-mouse-panel.ui:119 panels/mouse/cc-mouse-panel.ui:220
 #: panels/universal-access/cc-ua-typing-page.ui:55
 #: panels/universal-access/cc-ua-typing-page.ui:108
 msgid "Fast"
 msgstr "Hitra"
 
-#: panels/mouse/cc-mouse-panel.ui:138
+#: panels/mouse/cc-mouse-panel.ui:135
 msgid "Mouse _Acceleration"
 msgstr "_Pospeševanje miške"
 
-#: panels/mouse/cc-mouse-panel.ui:139
+#: panels/mouse/cc-mouse-panel.ui:136
 msgid "Recommended for most users and applications"
 msgstr "Priporočljivo za večino uporabnikov in programov"
 
-#: panels/mouse/cc-mouse-panel.ui:145
+#: panels/mouse/cc-mouse-panel.ui:142
 msgid ""
 "Turning mouse acceleration off can allow faster and more precise movements, "
 "but can also make the mouse more difficult to use."
@@ -2536,108 +2541,104 @@ msgstr ""
 "Če pospeševanje miške izklopite, omogočite hitrejše in natančnejše premike, "
 "hkrati pa lahko uporabo tudi otežite."
 
-#: panels/mouse/cc-mouse-panel.ui:157 panels/mouse/cc-mouse-panel.ui:298
+#: panels/mouse/cc-mouse-panel.ui:154 panels/mouse/cc-mouse-panel.ui:292
 msgid "Scroll Direction"
 msgstr "Zaznavanje drsenja"
 
-#: panels/mouse/cc-mouse-panel.ui:158
+#: panels/mouse/cc-mouse-panel.ui:155
 msgid "Tra_ditional"
 msgstr "_Tradicionalno"
 
-#: panels/mouse/cc-mouse-panel.ui:159 panels/mouse/cc-mouse-panel.ui:300
+#: panels/mouse/cc-mouse-panel.ui:156 panels/mouse/cc-mouse-panel.ui:294
 msgid "Scrolling moves the view"
 msgstr "Drsenje premika pogled"
 
-#: panels/mouse/cc-mouse-panel.ui:160 panels/mouse/cc-mouse-panel.ui:301
+#: panels/mouse/cc-mouse-panel.ui:157 panels/mouse/cc-mouse-panel.ui:295
 msgid "_Natural"
 msgstr "_Naravno"
 
-#: panels/mouse/cc-mouse-panel.ui:161 panels/mouse/cc-mouse-panel.ui:303
+#: panels/mouse/cc-mouse-panel.ui:158 panels/mouse/cc-mouse-panel.ui:297
 msgid "Scrolling moves the content"
 msgstr "Drsenje premika vsebino"
 
-#: panels/mouse/cc-mouse-panel.ui:174 panels/mouse/cc-mouse-panel.ui:316
+#: panels/mouse/cc-mouse-panel.ui:171 panels/mouse/cc-mouse-panel.ui:310
 #: panels/wacom/cc-wacom-panel.ui:11
 msgid "Test _Settings"
 msgstr "Preizkus uporabljenih _nastavitev"
 
-#: panels/mouse/cc-mouse-panel.ui:175 panels/mouse/cc-mouse-panel.ui:317
+#: panels/mouse/cc-mouse-panel.ui:172 panels/mouse/cc-mouse-panel.ui:311
 msgid "Test Mouse and Touchpad Settings"
 msgstr "Preizkus nastavitev miške in sledilne ploščice"
 
-#: panels/mouse/cc-mouse-panel.ui:193
+#: panels/mouse/cc-mouse-panel.ui:190
 msgid "_Touchpad"
 msgstr "_Sledilna ploščica"
 
-#: panels/mouse/cc-mouse-panel.ui:201
+#: panels/mouse/cc-mouse-panel.ui:198
 msgid "T_ouchpad"
 msgstr "Sledilna _ploščica"
 
-#: panels/mouse/cc-mouse-panel.ui:207
+#: panels/mouse/cc-mouse-panel.ui:204
 msgid "_Disable Touchpad While Typing"
 msgstr "Ploščico onemogoči med _tipkanjem"
 
-#: panels/mouse/cc-mouse-panel.ui:221
-msgid "Pointer speed"
-msgstr "Hitrost kazalnika"
-
-#: panels/mouse/cc-mouse-panel.ui:245 panels/mouse/cc-mouse-test.ui:32
+#: panels/mouse/cc-mouse-panel.ui:239 panels/mouse/cc-mouse-test.ui:32
 msgid "Clicking"
 msgstr "Klikanje"
 
-#: panels/mouse/cc-mouse-panel.ui:248 panels/mouse/cc-mouse-test.ui:111
+#: panels/mouse/cc-mouse-panel.ui:242 panels/mouse/cc-mouse-test.ui:111
 msgid "Secondary Click"
 msgstr "Drugotnega klika"
 
-#: panels/mouse/cc-mouse-panel.ui:249
+#: panels/mouse/cc-mouse-panel.ui:243
 msgid "Two _Finger Push"
 msgstr "_Dvoprstno potiskanje"
 
-#: panels/mouse/cc-mouse-panel.ui:250
+#: panels/mouse/cc-mouse-panel.ui:244
 msgid "Push anywhere with 2 fingers"
 msgstr "Dvoprstni potisk kjerkoli"
 
-#: panels/mouse/cc-mouse-panel.ui:251
+#: panels/mouse/cc-mouse-panel.ui:245
 msgid "_Corner Push"
 msgstr "_Robni potisk"
 
-#: panels/mouse/cc-mouse-panel.ui:252
+#: panels/mouse/cc-mouse-panel.ui:246
 msgid "Push with a single finger in the corner"
 msgstr "Potisk z enim prstom ob rob zaslona"
 
-#: panels/mouse/cc-mouse-panel.ui:263
+#: panels/mouse/cc-mouse-panel.ui:257
 msgid "T_ap to Click"
 msgstr "_Udarjanje za klik"
 
-#: panels/mouse/cc-mouse-panel.ui:265
+#: panels/mouse/cc-mouse-panel.ui:259
 msgid "Quickly touch the touchpad to click"
 msgstr "Ob hitrem dotiku sledilne ploščice se izvede klik"
 
-#: panels/mouse/cc-mouse-panel.ui:280 panels/mouse/cc-mouse-test.ui:153
+#: panels/mouse/cc-mouse-panel.ui:274 panels/mouse/cc-mouse-test.ui:153
 msgid "Scrolling"
 msgstr "Drsenje"
 
-#: panels/mouse/cc-mouse-panel.ui:283
+#: panels/mouse/cc-mouse-panel.ui:277
 msgid "Scroll Method"
 msgstr "Način drsanja"
 
-#: panels/mouse/cc-mouse-panel.ui:284
+#: panels/mouse/cc-mouse-panel.ui:278
 msgid "T_wo Finger"
 msgstr "_Dvoprstno"
 
-#: panels/mouse/cc-mouse-panel.ui:285
+#: panels/mouse/cc-mouse-panel.ui:279
 msgid "Drag two fingers on the touchpad"
 msgstr "Potegnite z dvema prstoma po sledilni ploščici"
 
-#: panels/mouse/cc-mouse-panel.ui:286
+#: panels/mouse/cc-mouse-panel.ui:280
 msgid "_Edge"
 msgstr "_Rob"
 
-#: panels/mouse/cc-mouse-panel.ui:287
+#: panels/mouse/cc-mouse-panel.ui:281
 msgid "Drag one finger on the edge"
 msgstr "Potegni s prstom po robu"
 
-#: panels/mouse/cc-mouse-panel.ui:299
+#: panels/mouse/cc-mouse-panel.ui:293
 msgid "T_raditional"
 msgstr "_Tradicionalno"
 
@@ -2777,7 +2778,7 @@ msgid "Manual"
 msgstr "Ročno"
 
 #. xxx: Added to avoid confusion with the preceding VPN row
-#: panels/network/cc-net-proxy-page.ui:4 panels/network/cc-network-panel.ui:85
+#: panels/network/cc-net-proxy-page.ui:4 panels/network/cc-network-panel.ui:110
 msgid "Proxy"
 msgstr "Posredniški strežnik"
 
@@ -2840,33 +2841,33 @@ msgstr "Gostitelj SOCKS"
 msgid "Ignored Hosts"
 msgstr "Prezri gostitelji"
 
-#: panels/network/cc-network-panel.c:649
+#: panels/network/cc-network-panel.ui:17
 msgid "Network Unavailable"
 msgstr "Omrežje ni na voljo"
 
-#: panels/network/cc-network-panel.c:651
+#: panels/network/cc-network-panel.ui:18
 msgid ""
 "An error has occurred and network cannot be used.\n"
-" Error details: NetworkManager not running."
+"Error details: NetworkManager not running."
 msgstr ""
 "Prišlo je do napake, zato omrežja ni mogoče uporabljati.\n"
-" Podrobnosti o napaki: program NetworkManager ni zagnan."
+"Podrobnosti o napaki: program NetworkManager ni zagnan."
 
-#: panels/network/cc-network-panel.ui:46 panels/network/cc-network-panel.ui:72
+#: panels/network/cc-network-panel.ui:71 panels/network/cc-network-panel.ui:97
 #: panels/network/connection-editor/net-connection-editor.c:743
 msgid "VPN"
 msgstr "VPN"
 
-#: panels/network/cc-network-panel.ui:49
+#: panels/network/cc-network-panel.ui:74
 #: panels/network/connection-editor/net-connection-editor.c:914
 msgid "Add VPN"
 msgstr "Dodaj VPN"
 
-#: panels/network/cc-network-panel.ui:62
+#: panels/network/cc-network-panel.ui:87
 msgid "Not set up"
 msgstr "Ni nastavljeno"
 
-#: panels/network/cc-network-panel.ui:88
+#: panels/network/cc-network-panel.ui:113
 msgid "_Proxy"
 msgstr "_Posredniški strežnik"
 
@@ -4354,7 +4355,6 @@ msgid "Fedora"
 msgstr "Fedora"
 
 #: panels/online-accounts/cc-online-account-provider-row.c:62
-#, fuzzy
 msgid "Enterprise authentication"
 msgstr "Poslovno overjanje pristnosti"
 
@@ -4375,7 +4375,6 @@ msgid "WebDAV"
 msgstr "WebDAV"
 
 #: panels/online-accounts/cc-online-account-provider-row.c:65
-#, fuzzy
 msgid "Enterprise Authentication"
 msgstr "Poslovno overjanje pristnosti"
 
@@ -6247,8 +6246,8 @@ msgstr "Ni veljavno"
 #. TRANSLATORS: if the function is enabled through BIOS or OS settings.
 #. TRANSLATORS: Status of Parental Controls setup
 #: panels/privacy/firmware-security/cc-firmware-security-utils.c:45
-#: panels/system/users/cc-user-page.c:377
-#: panels/system/users/cc-user-page.c:752 panels/wwan/cc-wwan-device-page.c:475
+#: panels/system/users/cc-user-page.c:373
+#: panels/system/users/cc-user-page.c:748 panels/wwan/cc-wwan-device-page.c:475
 msgid "Enabled"
 msgstr "Omogočeno"
 
@@ -6885,11 +6884,11 @@ msgstr "Upravljanje souporabe podatkov in datotek z drugimi uporabniki"
 #. Translators: Search terms to find the Sharing panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/sharing/gnome-sharing-panel.desktop.in:15
 msgid ""
-"share;sharing;ssh;host;name;remote;desktop;media;audio;video;pictures;photos;"
-"movies;server;renderer;"
+"share;sharing;host;name;media;audio;video;pictures;photos;movies;server;"
+"renderer;"
 msgstr ""
-"souporaba;izmenjava;ssh;gostitelj;ime;oddaljeno;namizje;bluetooth;obex;"
-"predstavnost;zvok;audio;slika;video;fotografije;filmi;strežnik;izrisovanje;"
+"souporaba;izmenjava;gostitelj;ime;predstavnost;zvok;avdio;audio;slika;video;"
+"fotografije;fotografija;film;filmi;strežnik;izrisovanje;izrisovalnik;"
 
 #: panels/sound/cc-alert-chooser-window.c:169
 msgid "Custom"
@@ -7014,13 +7013,6 @@ msgstr "Ravni _glasnosti"
 #: panels/sound/cc-sound-panel.ui:366
 msgid "_Alert Sound"
 msgstr "_Opozorilni zvok"
-
-#. Translators: This is the tooltip for a speaker test button, %s is an already translated
-#. speaker position, like "Front Left" or "Rear Center".
-#: panels/sound/cc-speaker-test-button.c:218
-#, c-format
-msgid "%s Speaker"
-msgstr "Zvočnik %s"
 
 #: panels/sound/cc-subwoofer-slider.ui:8
 msgid "Subwoofer"
@@ -7530,13 +7522,12 @@ msgstr "Jezik, nastavitve časa in podrobnosti sistema"
 msgid ""
 "device;system;information;details;hostname;memory;processor;version;software;"
 "operating;os;model;language;region;country;formats;numbers;units;clock;"
-"timezone;date;location;remote;desktop;rdp;vnc;"
+"timezone;date;location;remote;desktop;rdp;vnc;ssh;"
 msgstr ""
-"naprava;sistem;podrobnosti;pomnilnik;procesor;različica;privzeto;program;"
-"povrnjeno:prednostno;cd;dvd;usb;zvok;slika;video;disk;odstrani;predstavnost;"
-"samodejni zagon;nastavitve;device;system;information;details;hostname;memory;"
-"processor;version;software;operating;os;model;language;region;country;"
-"formats;numbers;units;clock;timezone;date;location;remote;desktop;rdp;vnc;"
+"naprava;sistem;podrobnosti;gostitelj;ime;pomnilnik;procesor;različica;"
+"privzeto;program;programje;operacijski;sistem;jezik;območje;področje;država;"
+"oblike;števila;eote;ura;časovni;pas;datum;lokacija;oddaljeno;namizje;rdp;vnc;"
+"ssh;"
 
 #: panels/system/region/cc-format-chooser.c:160
 #: panels/system/region/cc-format-chooser.c:208
@@ -7657,22 +7648,22 @@ msgstr "Izbor jezika za zapisov"
 msgid "Language;Layout;Keyboard;Input;"
 msgstr "jezik,razporeditev;tipkovnica;vnos;language;keyboard;input;"
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.c:364
+#: panels/system/remote-desktop/cc-desktop-sharing-page.c:358
 #: panels/system/remote-desktop/cc-remote-login-page.c:98
 msgid "Device address copied to clipboard"
 msgstr "Naslov naprave je kopiran v odložišče"
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.c:373
+#: panels/system/remote-desktop/cc-desktop-sharing-page.c:367
 #: panels/system/remote-desktop/cc-remote-login-page.c:107
 msgid "Port number copied to clipboard"
 msgstr "Številka vrat je kopirana v odložišče"
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.c:384
+#: panels/system/remote-desktop/cc-desktop-sharing-page.c:378
 #: panels/system/remote-desktop/cc-remote-login-page.c:118
 msgid "Username copied to clipboard"
 msgstr "Uporabniško ime je kopirano v odložišče"
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.c:395
+#: panels/system/remote-desktop/cc-desktop-sharing-page.c:389
 #: panels/system/remote-desktop/cc-remote-login-page.c:129
 msgid "Password copied to clipboard"
 msgstr "Geslo je kopirano v odložišče"
@@ -7748,11 +7739,11 @@ msgstr "Ustvari _novo geslo"
 msgid "_Verify Encryption"
 msgstr "_Overi šifriranje"
 
-#: panels/system/remote-desktop/cc-encryption-fingerprint-dialog.ui:28
+#: panels/system/remote-desktop/cc-encryption-fingerprint-dialog.ui:14
 msgid "Encryption Fingerprint"
 msgstr "Prstni odtis šifriranja"
 
-#: panels/system/remote-desktop/cc-encryption-fingerprint-dialog.ui:29
+#: panels/system/remote-desktop/cc-encryption-fingerprint-dialog.ui:15
 msgid ""
 "The encryption fingerprint can be seen in connecting clients and should be "
 "identical"
@@ -7773,8 +7764,8 @@ msgstr "Souporaba namizja"
 msgid "Remote Login"
 msgstr "Oddaljena prijava"
 
-#: panels/system/remote-desktop/cc-remote-login-page.c:774
-#: panels/system/users/cc-user-page.c:775
+#: panels/system/remote-desktop/cc-remote-login-page.c:764
+#: panels/system/users/cc-user-page.c:771
 msgid "Some settings are locked"
 msgstr "Nekatere nastavitve so z aklenjene"
 
@@ -8221,35 +8212,39 @@ msgstr "Znova vnesite trenutno geslo."
 msgid "Password could not be changed"
 msgstr "Gesla ni mogoče spremeniti."
 
+#: panels/system/users/cc-password-dialog.c:147 shell/cc-window.ui:87
+msgid "_OK"
+msgstr "_V redu"
+
 #: panels/system/users/cc-password-dialog.ui:4
 msgid "Change Password"
 msgstr "Spremeni geslo"
 
-#: panels/system/users/cc-password-dialog.ui:30
+#: panels/system/users/cc-password-dialog.ui:24
 msgid "Ch_ange"
 msgstr "_Spremeni"
 
-#: panels/system/users/cc-password-dialog.ui:48
+#: panels/system/users/cc-password-dialog.ui:42
 msgid "Current Password"
 msgstr "Trenutno geslo"
 
-#: panels/system/users/cc-password-dialog.ui:60
+#: panels/system/users/cc-password-dialog.ui:54
 msgid "New Password"
 msgstr "Novo geslo"
 
-#: panels/system/users/cc-password-dialog.ui:88
+#: panels/system/users/cc-password-dialog.ui:82
 msgid "Confirm Password"
 msgstr "Potrdi geslo"
 
-#: panels/system/users/cc-password-dialog.ui:100
+#: panels/system/users/cc-password-dialog.ui:94
 msgid "The passwords do not match"
 msgstr "Gesli se ne skladata."
 
-#: panels/system/users/cc-password-dialog.ui:136
+#: panels/system/users/cc-password-dialog.ui:130
 msgid "Allow user to change their password on next login"
 msgstr "Dovoli uporabniku nastavljanje gesla ob naslednji prijavi."
 
-#: panels/system/users/cc-password-dialog.ui:148
+#: panels/system/users/cc-password-dialog.ui:142
 msgid "Set a password now"
 msgstr "Nastavi geslo"
 
@@ -8291,7 +8286,7 @@ msgctxt "Password mode"
 msgid "None"
 msgstr "Brez"
 
-#: panels/system/users/cc-user-page.c:444
+#: panels/system/users/cc-user-page.c:440
 #, c-format
 msgid "Remove %s?"
 msgstr "Ali želite odstraniti %s?"
@@ -10012,10 +10007,6 @@ msgstr ""
 "Trenutna različica programa je namenjena izključno preizkušanju razvojnih "
 "možnosti. Pojavijo se lahko napake, nepravilno delovanje, izguba podatkov in "
 "druge nepričakovane nevšečnosti. "
-
-#: shell/cc-window.ui:87
-msgid "_OK"
-msgstr "_V redu"
 
 #: shell/cc-window.ui:95
 msgid "_Keyboard Shortcuts"
