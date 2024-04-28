@@ -68,14 +68,12 @@
                         <child>
                           <object class="AdwPreferencesGroup">
                             <child>
-                              <object class="GtkButton" id="reset_all_button">
-                                <property name="label" translatable="yes">_Reset All…</property>
+                              <object class="AdwButtonRow" id="reset_all_button_row">
+                                <property name="title" translatable="yes">_Reset All…</property>
                                 <property name="use-underline">True</property>
-                                <property name="halign">center</property>
-                                <signal name="clicked" handler="adw_dialog_present" object="reset_all_dialog"/>
+                                <signal name="activated" handler="adw_dialog_present" object="reset_all_dialog"/>
                                 <style>
                                   <class name="destructive-action"/>
-                                  <class name="pill"/>
                                 </style>
                               </object>
                             </child>
@@ -154,7 +152,7 @@
   </template>
   <object class="AdwAlertDialog" id="reset_all_dialog">
     <property name="heading" translatable="yes">Reset All Shortcuts?</property>
-    <property name="body" translatable="yes">All changes to keyboard shortcuts will be lost.</property>
+    <property name="body" translatable="yes">All changes to keyboard shortcuts will be lost</property>
     <property name="default-response">cancel</property>
     <property name="close-response">cancel</property>
     <signal name="response::reset-all" handler="on_reset_all_dialog_response_cb" object="CcKeyboardShortcutDialog" swapped="yes"/>

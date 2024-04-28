@@ -46,7 +46,7 @@ struct _CcKeyboardShortcutDialog
 
   AdwNavigationView    *navigation_view;
   AdwNavigationPage    *main_page;
-  GtkButton            *reset_all_button;
+  AdwButtonRow         *reset_all_button_row;
   AdwDialog            *reset_all_dialog;
   GtkSearchEntry       *search_entry;
   GtkStack             *section_stack;
@@ -405,8 +405,8 @@ shortcut_search_entry_changed_cb (CcKeyboardShortcutDialog *self)
   if (search && *search && *search != ' ')
     self->search_terms = g_strsplit (search, " ", -1);
 
-  /* "Reset all..." button should be sensitive only if the search is not active */
-  gtk_widget_set_sensitive (GTK_WIDGET (self->reset_all_button), !self->search_terms);
+  /* "Reset all..." button row should be sensitive only if the search is not active */
+  gtk_widget_set_sensitive (GTK_WIDGET (self->reset_all_button_row), !self->search_terms);
 
   for (guint i = 0; i < n_items; i++)
     {
@@ -500,7 +500,7 @@ cc_keyboard_shortcut_dialog_class_init (CcKeyboardShortcutDialogClass *klass)
 
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutDialog, navigation_view);
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutDialog, main_page);
-  gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutDialog, reset_all_button);
+  gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutDialog, reset_all_button_row);
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutDialog, reset_all_dialog);
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutDialog, search_entry);
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutDialog, section_stack);
