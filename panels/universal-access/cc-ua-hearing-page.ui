@@ -63,23 +63,22 @@
                   </object>
                 </child>
 
+              </object>
+            </child>
+
+            <child>
+              <object class="AdwPreferencesGroup">
                 <child>
-                  <object class="AdwActionRow">
+                  <object class="AdwButtonRow">
                     <property name="sensitive" bind-source="visual_alerts_row" bind-property="active" bind-flags="sync-create"/>
                     <property name="title" translatable="yes">_Test Flash</property>
                     <property name="use-underline">True</property>
-                    <property name="activatable-widget">test_flash_button</property>
-                    <child type="suffix">
-                      <object class="GtkButton" id="test_flash_button">
-                        <property name="valign">center</property>
-                        <property name="label" translatable="yes">Test</property>
-                        <signal name="clicked" handler="ua_hearing_test_flash_clicked_cb" swapped="yes"/>
-                      </object>
-                    </child>
+                    <signal name="activated" handler="ua_hearing_test_flash_activated_cb" swapped="yes"/>
                   </object>
                 </child>
               </object>
             </child>
+
           </object>
         </property>
       </object>

@@ -97,7 +97,7 @@ ua_hearing_flash_type_row_changed_cb (CcUaHearingPage *self)
 }
 
 static void
-ua_hearing_test_flash_clicked_cb (CcUaHearingPage *self)
+ua_hearing_test_flash_activated_cb (CcUaHearingPage *self)
 {
   GdkSurface *surface;
   GtkNative *native;
@@ -141,7 +141,7 @@ cc_ua_hearing_page_class_init (CcUaHearingPageClass *klass)
 
   gtk_widget_class_bind_template_callback (widget_class, ua_hearing_sound_settings_clicked_cb);
   gtk_widget_class_bind_template_callback (widget_class, ua_hearing_flash_type_row_changed_cb);
-  gtk_widget_class_bind_template_callback (widget_class, ua_hearing_test_flash_clicked_cb);
+  gtk_widget_class_bind_template_callback (widget_class, ua_hearing_test_flash_activated_cb);
 }
 
 static void
