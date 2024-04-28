@@ -171,4 +171,5 @@ cc_ua_hearing_page_init (CcUaHearingPage *self)
 
   g_signal_connect_object (self->wm_settings, "changed::" KEY_VISUAL_BELL_TYPE,
                            G_CALLBACK (ua_hearing_flash_type_changed_cb), self, G_CONNECT_SWAPPED);
+  ua_hearing_flash_type_changed_cb (self);
 }
