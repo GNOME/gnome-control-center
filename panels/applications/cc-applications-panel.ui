@@ -468,16 +468,12 @@
             <child>
               <object class="AdwPreferencesGroup">
                 <child>
-                  <object class="GtkButton" id="handler_reset">
-                    <property name="valign">center</property>
-                    <property name="margin-top">12</property>
-                    <property name="label" translatable="yes">_Reset</property>
+                  <object class="AdwButtonRow" id="handler_reset">
+                    <property name="title" translatable="yes">_Reset</property>
                     <property name="use-underline">True</property>
-                    <property name="halign">center</property>
-                    <signal name="clicked" handler="handler_reset_cb" object="CcApplicationsPanel" swapped="yes"/>
+                    <signal name="activated" handler="handler_reset_cb" object="CcApplicationsPanel" swapped="yes"/>
                     <style>
-                      <class name="destructive-action" />
-                      <class name="pill" />
+                      <class name="destructive-action"/>
                     </style>
                   </object>
                 </child>
@@ -541,14 +537,10 @@
             <child>
               <object class="AdwPreferencesGroup">
                 <child>
-                  <object class="GtkButton" id="clear_cache_button">
-                    <property name="label" translatable="yes">_Clear Cache</property>
+                  <object class="AdwButtonRow" id="clear_cache_button_row">
+                    <property name="title" translatable="yes">_Clear Cache</property>
                     <property name="use-underline">True</property>
-                    <property name="halign">center</property>
-                    <signal name="clicked" handler="clear_cache_cb" object="CcApplicationsPanel" swapped="yes"/>
-                    <style>
-                      <class name="pill" />
-                    </style>
+                    <signal name="activated" handler="clear_cache_cb" object="CcApplicationsPanel" swapped="yes"/>
                   </object>
                 </child>
               </object>

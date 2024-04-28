@@ -122,7 +122,7 @@ struct _CcApplicationsPanel
   GtkListBox      *builtin_list;
   GList           *snap_permission_rows;
 
-  GtkButton       *handler_reset;
+  AdwButtonRow    *handler_reset;
   AdwDialog       *handler_dialog;
   AdwPreferencesPage *handler_page;
   CcListRow       *handler_row;
@@ -138,7 +138,7 @@ struct _CcApplicationsPanel
   AdwActionRow    *storage_dialog_data_row;
   AdwActionRow    *storage_dialog_cache_row;
   AdwActionRow    *storage_dialog_total_row;
-  GtkButton       *clear_cache_button;
+  AdwButtonRow    *clear_cache_button_row;
 
   guint64          app_size;
   guint64          cache_size;
@@ -1256,7 +1256,7 @@ set_cache_size (GObject      *source,
   formatted_size = g_format_size (self->cache_size);
   adw_action_row_set_subtitle (self->storage_dialog_cache_row, formatted_size);
 
-  gtk_widget_set_sensitive (GTK_WIDGET (self->clear_cache_button), self->cache_size > 0);
+  gtk_widget_set_sensitive (GTK_WIDGET (self->clear_cache_button_row), self->cache_size > 0);
 
   update_total_size (self);
 }
@@ -1358,7 +1358,7 @@ static void
 update_app_sizes (CcApplicationsPanel *self,
                   const gchar         *app_id)
 {
-  gtk_widget_set_sensitive (GTK_WIDGET (self->clear_cache_button), FALSE);
+  gtk_widget_set_sensitive (GTK_WIDGET (self->clear_cache_button_row), FALSE);
 
   self->app_size = self->data_size = self->cache_size = 0;
 
@@ -1758,7 +1758,7 @@ cc_applications_panel_class_init (CcApplicationsPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, builtin_list);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, storage_dialog_cache_row);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, camera);
-  gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, clear_cache_button);
+  gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, clear_cache_button_row);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, storage_dialog_data_row);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, default_apps_page);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, handler_dialog);
