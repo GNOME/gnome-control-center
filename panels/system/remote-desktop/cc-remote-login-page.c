@@ -59,8 +59,8 @@ struct _CcRemoteLoginPage {
   GtkWidget    *credentials_group;
   GtkWidget    *username_entry;
   GtkWidget    *password_entry;
-  GtkWidget    *generate_password_button;
-  GtkWidget    *verify_encryption_button;
+  AdwButtonRow *generate_password_button_row;
+  AdwButtonRow *verify_encryption_button_row;
 
   GTlsCertificate *certificate;
 
@@ -130,7 +130,7 @@ on_password_copy_clicked (CcRemoteLoginPage *self,
 }
 
 static void
-on_generate_password_button_clicked (CcRemoteLoginPage *self)
+on_generate_password_button_row_activated (CcRemoteLoginPage *self)
 {
   g_autofree char *new_password = cc_generate_password ();
 
@@ -138,7 +138,7 @@ on_generate_password_button_clicked (CcRemoteLoginPage *self)
 }
 
 static void
-on_verify_encryption_button_clicked (CcRemoteLoginPage *self)
+on_verify_encryption_button_row_activated (CcRemoteLoginPage *self)
 {
   CcEncryptionFingerprintDialog *dialog;
 
@@ -562,15 +562,15 @@ cc_remote_login_page_class_init (CcRemoteLoginPageClass * klass)
   gtk_widget_class_bind_template_child (widget_class, CcRemoteLoginPage, credentials_group);
   gtk_widget_class_bind_template_child (widget_class, CcRemoteLoginPage, username_entry);
   gtk_widget_class_bind_template_child (widget_class, CcRemoteLoginPage, password_entry);
-  gtk_widget_class_bind_template_child (widget_class, CcRemoteLoginPage, generate_password_button);
-  gtk_widget_class_bind_template_child (widget_class, CcRemoteLoginPage, verify_encryption_button);
+  gtk_widget_class_bind_template_child (widget_class, CcRemoteLoginPage, generate_password_button_row);
+  gtk_widget_class_bind_template_child (widget_class, CcRemoteLoginPage, verify_encryption_button_row);
 
   gtk_widget_class_bind_template_callback (widget_class, on_address_copy_clicked);
   gtk_widget_class_bind_template_callback (widget_class, on_port_copy_clicked);
   gtk_widget_class_bind_template_callback (widget_class, on_username_copy_clicked);
   gtk_widget_class_bind_template_callback (widget_class, on_password_copy_clicked);
-  gtk_widget_class_bind_template_callback (widget_class, on_generate_password_button_clicked);
-  gtk_widget_class_bind_template_callback (widget_class, on_verify_encryption_button_clicked);
+  gtk_widget_class_bind_template_callback (widget_class, on_generate_password_button_row_activated);
+  gtk_widget_class_bind_template_callback (widget_class, on_verify_encryption_button_row_activated);
 }
 
 static void
@@ -616,7 +616,7 @@ on_got_rdp_credentials (GObject      *source_object,
   self->fingerprint = gsd_remote_desktop_rdp_server_get_tls_fingerprint (self->rdp_server);
 
   has_fingerprint = self->fingerprint && strlen (self->fingerprint) > 0;
-  gtk_widget_set_sensitive (self->verify_encryption_button, has_fingerprint);
+  gtk_widget_set_sensitive (GTK_WIDGET (self->verify_encryption_button_row), has_fingerprint);
 }
 
 static void
@@ -758,7 +758,7 @@ cc_remote_login_page_init (CcRemoteLoginPage *self)
                             self);
 
   g_object_bind_property (self->password_entry, "sensitive",
-                          self->generate_password_button, "sensitive",
+                          self->generate_password_button_row, "sensitive",
                           G_BINDING_SYNC_CREATE);
   cc_permission_infobar_set_permission (self->permission_infobar, self->permission);
   cc_permission_infobar_set_title (self->permission_infobar, _("Some settings are locked"));

@@ -67,10 +67,10 @@ struct _CcDesktopSharingPage {
   AdwSwitchRow *remote_control_row;
   AdwActionRow *hostname_row;
   AdwActionRow *port_row;
-  GtkWidget *username_entry;
-  GtkWidget *password_entry;
-  GtkWidget *generate_password_button;
-  GtkWidget *verify_encryption_button;
+  GtkWidget    *username_entry;
+  GtkWidget    *password_entry;
+  AdwButtonRow *generate_password_button_row;
+  AdwButtonRow *verify_encryption_button_row;
 
   guint desktop_sharing_name_watch;
   guint store_credentials_id;
@@ -83,7 +83,7 @@ struct _CcDesktopSharingPage {
 G_DEFINE_TYPE (CcDesktopSharingPage, cc_desktop_sharing_page, ADW_TYPE_BIN)
 
 static void
-on_generate_password_button_clicked (CcDesktopSharingPage *self)
+on_generate_password_button_row_activated (CcDesktopSharingPage *self)
 {
   g_autofree char *new_password = cc_generate_password ();
 
@@ -91,7 +91,7 @@ on_generate_password_button_clicked (CcDesktopSharingPage *self)
 }
 
 static void
-on_verify_encryption_button_clicked (CcDesktopSharingPage *self)
+on_verify_encryption_button_row_activated (CcDesktopSharingPage *self)
 {
   CcEncryptionFingerprintDialog *dialog;
 
@@ -217,7 +217,7 @@ set_tls_certificate (CcDesktopSharingPage  *self,
                      GTlsCertificate *tls_certificate)
 {
   g_set_object (&self->certificate, tls_certificate);
-  gtk_widget_set_sensitive (self->verify_encryption_button, TRUE);
+  gtk_widget_set_sensitive (GTK_WIDGET (self->verify_encryption_button_row), TRUE);
 }
 
 static void
@@ -453,7 +453,7 @@ setup_desktop_sharing_page (CcDesktopSharingPage *self)
                           self->remote_control_row, "sensitive",
                           G_BINDING_SYNC_CREATE);
   g_object_bind_property (self->password_entry, "sensitive",
-		          self->generate_password_button, "sensitive",
+		          self->generate_password_button_row, "sensitive",
 			  G_BINDING_SYNC_CREATE);
 }
 
@@ -525,15 +525,15 @@ cc_desktop_sharing_page_class_init (CcDesktopSharingPageClass * klass)
   gtk_widget_class_bind_template_child (widget_class, CcDesktopSharingPage, port_row);
   gtk_widget_class_bind_template_child (widget_class, CcDesktopSharingPage, username_entry);
   gtk_widget_class_bind_template_child (widget_class, CcDesktopSharingPage, password_entry);
-  gtk_widget_class_bind_template_child (widget_class, CcDesktopSharingPage, generate_password_button);
-  gtk_widget_class_bind_template_child (widget_class, CcDesktopSharingPage, verify_encryption_button);
+  gtk_widget_class_bind_template_child (widget_class, CcDesktopSharingPage, generate_password_button_row);
+  gtk_widget_class_bind_template_child (widget_class, CcDesktopSharingPage, verify_encryption_button_row);
 
   gtk_widget_class_bind_template_callback (widget_class, on_address_copy_clicked);
   gtk_widget_class_bind_template_callback (widget_class, on_port_copy_clicked);
   gtk_widget_class_bind_template_callback (widget_class, on_username_copy_clicked);
   gtk_widget_class_bind_template_callback (widget_class, on_password_copy_clicked);
-  gtk_widget_class_bind_template_callback (widget_class, on_generate_password_button_clicked);
-  gtk_widget_class_bind_template_callback (widget_class, on_verify_encryption_button_clicked);
+  gtk_widget_class_bind_template_callback (widget_class, on_generate_password_button_row_activated);
+  gtk_widget_class_bind_template_callback (widget_class, on_verify_encryption_button_row_activated);
 }
 
 static gboolean
