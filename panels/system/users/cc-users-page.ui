@@ -27,29 +27,25 @@
             </child>
 
             <child>
-              <object class="GtkButton" id="add_user_button">
-                <property name="sensitive">False</property>
-                <property name="label" translatable="yes">_Add User…</property>
-                <property name="use_underline">True</property>
-                <property name="halign">center</property>
-                <signal name="clicked" handler="add_user" object="CcUsersPage" swapped="yes"/>
-                <style>
-                  <class name="suggested-action"/>
-                  <class name="pill"/>
-                </style>
-              </object>
-            </child>
-
-            <child>
-              <object class="GtkButton" id="add_enterprise_user_button">
-                <property name="visible">False</property>
-                <property name="label" translatable="yes">Add _Enterprise Login…</property>
-                <property name="use_underline">True</property>
-                <property name="halign">center</property>
-                <signal name="clicked" handler="add_enterprise_user" object="CcUsersPage" swapped="yes"/>
-                <style>
-                  <class name="pill"/>
-                </style>
+              <object class="AdwPreferencesGroup">
+                <property name="separate-rows">True</property>
+                <child>
+                  <object class="AdwButtonRow" id="add_user_button_row">
+                    <property name="title" translatable="yes">_Add User</property>
+                    <property name="end-icon-name">go-next-symbolic</property>
+                    <property name="use_underline">True</property>
+                    <signal name="activated" handler="add_user" object="CcUsersPage" swapped="yes"/>
+                  </object>
+                </child>
+                <child>
+                  <object class="AdwButtonRow" id="add_enterprise_user_button_row">
+                    <property name="visible">False</property>
+                    <property name="title" translatable="yes">Add _Enterprise Login</property>
+                    <property name="use_underline">True</property>
+                    <property name="end-icon-name">go-next-symbolic</property>
+                    <signal name="activated" handler="add_enterprise_user" object="CcUsersPage" swapped="yes"/>
+                  </object>
+                </child>
               </object>
             </child>
 
@@ -58,11 +54,4 @@
       </object>
     </property>
   </template>
-
-  <object class="GtkSizeGroup">
-    <widgets>
-      <widget name="add_user_button"/>
-      <widget name="add_enterprise_user_button"/>
-    </widgets>
-  </object>
 </interface>

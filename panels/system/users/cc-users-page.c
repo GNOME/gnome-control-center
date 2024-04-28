@@ -50,8 +50,8 @@
 struct _CcUsersPage {
     AdwNavigationPage  parent_instance;
 
-    GtkButton         *add_user_button;
-    GtkButton         *add_enterprise_user_button;
+    AdwButtonRow      *add_user_button_row;
+    AdwButtonRow      *add_enterprise_user_button_row;
     CcUserPage        *current_user_page;
     AdwNavigationView *navigation;
     GtkWidget         *other_users_group;
@@ -248,7 +248,7 @@ check_realmd_list_names_cb (GObject      *object,
     g_variant_iter_init (&iter, names);
     while (g_variant_iter_loop (&iter, "&s", &name)) {
         if (g_str_equal (name, "org.freedesktop.realmd"))
-            gtk_widget_set_visible (GTK_WIDGET (self->add_enterprise_user_button), TRUE);
+            gtk_widget_set_visible (GTK_WIDGET (self->add_enterprise_user_button_row), TRUE);
     }
 }
 
@@ -320,7 +320,7 @@ cc_users_page_init (CcUsersPage *self)
         g_warning ("Cannot create '%s' permission: %s", USER_ACCOUNTS_PERMISSION, error->message);
     }
 
-    g_object_bind_property (self->permission, "allowed", self->add_user_button, "sensitive", G_BINDING_SYNC_CREATE);
+    g_object_bind_property (self->permission, "allowed", self->add_user_button_row, "sensitive", G_BINDING_SYNC_CREATE);
 
     self->user_manager = act_user_manager_get_default ();
     g_signal_connect_object (self->user_manager,
@@ -365,8 +365,8 @@ cc_users_page_class_init (CcUsersPageClass * klass)
 
     gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/system/users/cc-users-page.ui");
 
-    gtk_widget_class_bind_template_child (widget_class, CcUsersPage, add_enterprise_user_button);
-    gtk_widget_class_bind_template_child (widget_class, CcUsersPage, add_user_button);
+    gtk_widget_class_bind_template_child (widget_class, CcUsersPage, add_enterprise_user_button_row);
+    gtk_widget_class_bind_template_child (widget_class, CcUsersPage, add_user_button_row);
     gtk_widget_class_bind_template_child (widget_class, CcUsersPage, current_user_page);
     gtk_widget_class_bind_template_child (widget_class, CcUsersPage, navigation);
     gtk_widget_class_bind_template_child (widget_class, CcUsersPage, other_users_group);
