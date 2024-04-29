@@ -44,7 +44,7 @@ struct _CcFormatChooser {
   GtkWidget *cancel_button;
   GtkWidget *back_button;
   GtkWidget *done_button;
-  GtkWidget *empty_results_view;
+  GtkWidget *empty_results_page;
   GtkWidget *main_leaflet;
   GtkWidget *region_filter_entry;
   GtkWidget *region_list;
@@ -412,7 +412,7 @@ filter_changed (CcFormatChooser *chooser)
 
         if (chooser->no_results)
           gtk_stack_set_visible_child (GTK_STACK (chooser->region_list_stack),
-                                       GTK_WIDGET (chooser->empty_results_view));
+                                       GTK_WIDGET (chooser->empty_results_page));
         else
           gtk_stack_set_visible_child (GTK_STACK (chooser->region_list_stack),
                                        GTK_WIDGET (chooser->region_list));
@@ -495,7 +495,7 @@ cc_format_chooser_class_init (CcFormatChooserClass *klass)
         gtk_widget_class_bind_template_child (widget_class, CcFormatChooser, region_list);
         gtk_widget_class_bind_template_child (widget_class, CcFormatChooser, region_list_stack);
         gtk_widget_class_bind_template_child (widget_class, CcFormatChooser, preview_box);
-        gtk_widget_class_bind_template_child (widget_class, CcFormatChooser, empty_results_view);
+        gtk_widget_class_bind_template_child (widget_class, CcFormatChooser, empty_results_page);
         gtk_widget_class_bind_template_child (widget_class, CcFormatChooser, format_preview);
 
         gtk_widget_class_bind_template_callback (widget_class, format_chooser_back_button_clicked_cb);

@@ -171,39 +171,10 @@
 
                     <!-- Empty search results view -->
                     <child>
-                      <object class="GtkBox" id="empty_results_view">
-                        <property name="valign">center</property>
-                        <property name="halign">center</property>
-                        <property name="hexpand">False</property>
-                        <property name="margin-bottom">18</property>
-                        <property name="orientation">vertical</property>
-                        <property name="spacing">6</property>
-                        <child>
-                          <object class="GtkImage">
-                            <property name="icon-name">system-search-symbolic</property>
-                            <property name="pixel-size">64</property>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="GtkLabel">
-                            <property name="label" translatable="yes">No Search Results</property>
-                            <attributes>
-                              <attribute name="weight" value="bold"/>
-                              <attribute name="scale" value="1.2"/>
-                            </attributes>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="GtkLabel">
-                            <property name="wrap">True</property>
-                            <property name="max-width-chars">24</property>
-                            <property name="justify">center</property>
-                            <property name="label" translatable="yes">Searches can be for countries or languages</property>
-                            <style>
-                              <class name="dim-label"/>
-                            </style>
-                          </object>
-                        </child>
+                      <object class="AdwStatusPage" id="empty_results_page">
+                        <property name="icon_name">edit-find-symbolic</property>
+                        <property name="title" translatable="yes">No Results Found</property>
+                        <property name="description" translatable="yes">Try a different search</property>
                       </object>
                     </child>
 
