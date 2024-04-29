@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2024-04-26 18:55+0000\n"
-"PO-Revision-Date: 2024-04-27 18:53+0200\n"
+"POT-Creation-Date: 2024-04-29 12:20+0000\n"
+"PO-Revision-Date: 2024-04-29 15:19+0200\n"
 "Last-Translator: Martin Srebotnjak <miles@filmsi.net>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "Language: sl_SI\n"
@@ -29,33 +29,33 @@ msgstr ""
 msgid "App is not sandboxed"
 msgstr "Program ni zagnan v izoliranem in varovanem okolju"
 
-#: panels/applications/cc-applications-panel.c:829
+#: panels/applications/cc-applications-panel.c:830
 msgid "System Bus"
 msgstr "Sistemsko vodilo"
 
-#: panels/applications/cc-applications-panel.c:829
-#: panels/applications/cc-applications-panel.c:831
-#: panels/applications/cc-applications-panel.c:844
-#: panels/applications/cc-applications-panel.c:849
+#: panels/applications/cc-applications-panel.c:830
+#: panels/applications/cc-applications-panel.c:832
+#: panels/applications/cc-applications-panel.c:845
+#: panels/applications/cc-applications-panel.c:850
 msgid "Full access"
 msgstr "Poln dostop"
 
-#: panels/applications/cc-applications-panel.c:831
+#: panels/applications/cc-applications-panel.c:832
 msgid "Session Bus"
 msgstr "Vodilo seje"
 
-#: panels/applications/cc-applications-panel.c:835
+#: panels/applications/cc-applications-panel.c:836
 #: panels/privacy/bolt/cc-bolt-page.ui:240
 #: panels/privacy/bolt/cc-bolt-page.ui:284
 #: panels/privacy/cc-privacy-panel.ui:75
 msgid "Devices"
 msgstr "Naprave"
 
-#: panels/applications/cc-applications-panel.c:835
+#: panels/applications/cc-applications-panel.c:836
 msgid "Full access to /dev"
 msgstr "Poln dostop do mape /dev"
 
-#: panels/applications/cc-applications-panel.c:839
+#: panels/applications/cc-applications-panel.c:840
 #: panels/network/cc-network-panel.ui:33
 #: panels/network/gnome-network-panel.desktop.in:3
 #: panels/network/network-mobile.ui:235 panels/wwan/cc-wwan-device-page.ui:61
@@ -63,38 +63,38 @@ msgstr "Poln dostop do mape /dev"
 msgid "Network"
 msgstr "Omrežje"
 
-#: panels/applications/cc-applications-panel.c:839
+#: panels/applications/cc-applications-panel.c:840
 msgid "Has network access"
 msgstr "Ima dostop do omrežja"
 
-#: panels/applications/cc-applications-panel.c:844
-#: panels/applications/cc-applications-panel.c:846
+#: panels/applications/cc-applications-panel.c:845
+#: panels/applications/cc-applications-panel.c:847
 #: panels/search/cc-search-locations-dialog.c:412
 msgid "Home"
 msgstr "Domača mapa"
 
-#: panels/applications/cc-applications-panel.c:846
-#: panels/applications/cc-applications-panel.c:851
+#: panels/applications/cc-applications-panel.c:847
+#: panels/applications/cc-applications-panel.c:852
 msgid "Read-only"
 msgstr "Le za branje"
 
-#: panels/applications/cc-applications-panel.c:849
-#: panels/applications/cc-applications-panel.c:851
+#: panels/applications/cc-applications-panel.c:850
+#: panels/applications/cc-applications-panel.c:852
 msgid "File System"
 msgstr "Datotečni sistem"
 
-#: panels/applications/cc-applications-panel.c:855
+#: panels/applications/cc-applications-panel.c:856
 #: panels/keyboard/01-launchers.xml.in:6
 #: shell/appdata/org.gnome.Settings.appdata.xml.in.in:7 shell/cc-window.c:798
 #: shell/cc-window.ui:20 shell/org.gnome.Settings.desktop.in:3
 msgid "Settings"
 msgstr "Nastavitve"
 
-#: panels/applications/cc-applications-panel.c:855
+#: panels/applications/cc-applications-panel.c:856
 msgid "Can change settings"
 msgstr "Dovoljeno spreminjati nastavitve"
 
-#: panels/applications/cc-applications-panel.c:857
+#: panels/applications/cc-applications-panel.c:858
 #, c-format
 msgid ""
 "<b>%s</b> requires access to the following system resources. To stop this "
@@ -103,15 +103,24 @@ msgstr ""
 "<b>%s</b> zahteva dostop do navedenih sistemskih virov. Za zaustavitev "
 "dostopa je treba program odstraniti."
 
-#: panels/applications/cc-applications-panel.c:1026
+#: panels/applications/cc-applications-panel.c:862
+#, c-format
+msgid "%u permission"
+msgid_plural "%u permissions"
+msgstr[0] "%u dovoljenj"
+msgstr[1] "%u dovoljenje"
+msgstr[2] "%u dovoljenji"
+msgstr[3] "%u dovoljenja"
+
+#: panels/applications/cc-applications-panel.c:1034
 msgid "Remove Link Type"
 msgstr "Odstrani vrsto povezav"
 
-#: panels/applications/cc-applications-panel.c:1058
+#: panels/applications/cc-applications-panel.c:1066
 msgid "Remove File Type"
 msgstr "Odstrani vrsto datotek"
 
-#: panels/applications/cc-applications-panel.c:1191
+#: panels/applications/cc-applications-panel.c:1199
 #, c-format
 msgid "%u type"
 msgid_plural "%u types"
@@ -120,7 +129,7 @@ msgstr[1] "%u vrsta"
 msgstr[2] "%u vrsti"
 msgstr[3] "%u vrste"
 
-#: panels/applications/cc-applications-panel.c:1198
+#: panels/applications/cc-applications-panel.c:1206
 #, c-format
 msgid "<b>%s</b> is used to open the following types of files and links."
 msgstr "Program <b>%s</b> omogoča odpiranje navedenih datotek in povezav."
@@ -302,83 +311,83 @@ msgid "Access device location data"
 msgstr "Omogoči dostop do geolokacijskih podatkov naprave."
 
 #: panels/applications/cc-applications-panel.ui:359
-msgid "Re_quired Access"
-msgstr "_Zahtevan dostop"
+msgid "Re_quired Permissions"
+msgstr "_Zahtevana dovoljenja"
 
 #: panels/applications/cc-applications-panel.ui:360
-msgid "System access that is required by the app"
+msgid "System permissions that the app requires"
 msgstr "Sistemska dovoljenja, ki jih zahteva program"
 
-#: panels/applications/cc-applications-panel.ui:371
+#: panels/applications/cc-applications-panel.ui:370
 #: panels/mouse/cc-mouse-panel.ui:66
 #: panels/multitasking/cc-multitasking-panel.ui:15
 #: panels/power/cc-power-panel.ui:199
 msgid "General"
 msgstr "Splošno"
 
-#: panels/applications/cc-applications-panel.ui:374
+#: panels/applications/cc-applications-panel.ui:373
 msgid "_Files &amp; Links"
 msgstr "_Datoteke in povezave"
 
-#: panels/applications/cc-applications-panel.ui:375
+#: panels/applications/cc-applications-panel.ui:374
 msgid "File and link types that are opened by the app"
 msgstr "Datoteka in vrste povezav, ki jih odpira program."
 
-#: panels/applications/cc-applications-panel.ui:382
+#: panels/applications/cc-applications-panel.ui:381
 msgid "S_torage"
 msgstr "_Shramba"
 
-#: panels/applications/cc-applications-panel.ui:383
+#: panels/applications/cc-applications-panel.ui:382
 msgid "Disk space being used"
 msgstr "Uporabljen prostor na disku"
 
-#: panels/applications/cc-applications-panel.ui:405
-msgid "Required Access"
-msgstr "Zahtevan dostop"
+#: panels/applications/cc-applications-panel.ui:404
+msgid "Required Permissions"
+msgstr "Zahtevana dovoljenja"
 
-#: panels/applications/cc-applications-panel.ui:435
+#: panels/applications/cc-applications-panel.ui:434
 msgid "File & Link Associations"
 msgstr "Datotečne vezi in povezave"
 
-#: panels/applications/cc-applications-panel.ui:448
+#: panels/applications/cc-applications-panel.ui:447
 msgid "File Types"
 msgstr "Vrste datotek"
 
-#: panels/applications/cc-applications-panel.ui:454
+#: panels/applications/cc-applications-panel.ui:453
 msgid "Link Types"
 msgstr "Vrste povezav"
 
-#: panels/applications/cc-applications-panel.ui:464
+#: panels/applications/cc-applications-panel.ui:463
 msgid "_Reset"
 msgstr "_Ponastavi"
 
-#: panels/applications/cc-applications-panel.ui:485
+#: panels/applications/cc-applications-panel.ui:484
 msgid "Storage"
 msgstr "Shramba"
 
-#: panels/applications/cc-applications-panel.ui:494
+#: panels/applications/cc-applications-panel.ui:493
 msgid "How much disk space this app is occupying with app data and caches"
 msgstr ""
 "Podatki o velikosti prostora, ki ga program uporablja s podatki in "
 "predpomnilnikom."
 
-#: panels/applications/cc-applications-panel.ui:499
+#: panels/applications/cc-applications-panel.ui:498
 msgid "App"
 msgstr "Program"
 
-#: panels/applications/cc-applications-panel.ui:505
+#: panels/applications/cc-applications-panel.ui:504
 msgid "Data"
 msgstr "Podatki"
 
-#: panels/applications/cc-applications-panel.ui:511
+#: panels/applications/cc-applications-panel.ui:510
 msgid "Cache"
 msgstr "Predpomnilnik"
 
-#: panels/applications/cc-applications-panel.ui:517
+#: panels/applications/cc-applications-panel.ui:516
 msgid "<b>Total</b>"
 msgstr "<b>Skupaj</b>"
 
-#: panels/applications/cc-applications-panel.ui:527
+#: panels/applications/cc-applications-panel.ui:526
 msgid "_Clear Cache"
 msgstr "__Počisti predpomnilnik"
 
@@ -1762,7 +1771,7 @@ msgstr "_Prvi zaslon"
 
 #. This is the redshift functionality where we suppress blue light when the sun has gone down
 #: panels/display/cc-display-panel.ui:158
-#: panels/display/cc-night-light-page.ui:102
+#: panels/display/cc-night-light-page.ui:67
 msgid "_Night Light"
 msgstr "_Nočna osvetlitev"
 
@@ -1857,29 +1866,20 @@ msgstr ""
 "uporablja na daljavo."
 
 #: panels/display/cc-night-light-page.ui:12
-#: panels/display/cc-night-light-page.ui:41
 msgid "Night Light Unavailable"
 msgstr "Nočna osvetlitev ni na voljo"
 
-#: panels/display/cc-night-light-page.ui:49
-msgid ""
-"This could be the result of the graphics driver being used, or the desktop "
-"being used remotely"
-msgstr ""
-"To je lahko posledica uporabljenega grafičnega gonilnika ali namizja, ki se "
-"uporablja na daljavo."
-
 #. Inhibit the redshift functionality until the next day starts
-#: panels/display/cc-night-light-page.ui:70
+#: panels/display/cc-night-light-page.ui:35
 msgid "Temporarily Disabled Until Tomorrow"
 msgstr "Začasno onemogoči do jutri"
 
 #. This cancels the redshift inhibit.
-#: panels/display/cc-night-light-page.ui:84
+#: panels/display/cc-night-light-page.ui:49
 msgid "Restart Filter"
 msgstr "Filter ponovnega zagona"
 
-#: panels/display/cc-night-light-page.ui:96
+#: panels/display/cc-night-light-page.ui:61
 msgid ""
 "Night light makes the screen color warmer. This can help to prevent eye "
 "strain and sleeplessness."
@@ -1887,58 +1887,58 @@ msgstr ""
 "Nočna osvetlitev se kaže v toplejših barvah. S tem preprečujemo naprezanje "
 "oči in zaspanost."
 
-#: panels/display/cc-night-light-page.ui:110
+#: panels/display/cc-night-light-page.ui:75
 msgid "_Schedule"
 msgstr "_Urnik"
 
-#: panels/display/cc-night-light-page.ui:117
+#: panels/display/cc-night-light-page.ui:82
 msgid "Sunset to Sunrise"
 msgstr "od mraka do zore"
 
-#: panels/display/cc-night-light-page.ui:118
+#: panels/display/cc-night-light-page.ui:83
 msgid "Manual Schedule"
 msgstr "Ročno načrtovanje"
 
-#: panels/display/cc-night-light-page.ui:128
+#: panels/display/cc-night-light-page.ui:93
 msgid "_Times"
 msgstr "_Časi"
 
-#: panels/display/cc-night-light-page.ui:142
+#: panels/display/cc-night-light-page.ui:107
 msgid "From"
 msgstr "Od"
 
-#: panels/display/cc-night-light-page.ui:167
-#: panels/display/cc-night-light-page.ui:254
+#: panels/display/cc-night-light-page.ui:132
+#: panels/display/cc-night-light-page.ui:219
 msgid "Hour"
 msgstr "Ure"
 
-#: panels/display/cc-night-light-page.ui:173
-#: panels/display/cc-night-light-page.ui:260
+#: panels/display/cc-night-light-page.ui:138
+#: panels/display/cc-night-light-page.ui:225
 msgid ":"
 msgstr ":"
 
-#: panels/display/cc-night-light-page.ui:190
-#: panels/display/cc-night-light-page.ui:277
+#: panels/display/cc-night-light-page.ui:155
+#: panels/display/cc-night-light-page.ui:242
 msgid "Minute"
 msgstr "Minute"
 
 #. This is the short form for the time period in the morning
-#: panels/display/cc-night-light-page.ui:200
-#: panels/display/cc-night-light-page.ui:287
+#: panels/display/cc-night-light-page.ui:165
+#: panels/display/cc-night-light-page.ui:252
 msgid "AM"
 msgstr "AM"
 
 #. This is the short form for the time period in the afternoon
-#: panels/display/cc-night-light-page.ui:212
-#: panels/display/cc-night-light-page.ui:299
+#: panels/display/cc-night-light-page.ui:177
+#: panels/display/cc-night-light-page.ui:264
 msgid "PM"
 msgstr "PM"
 
-#: panels/display/cc-night-light-page.ui:229
+#: panels/display/cc-night-light-page.ui:194
 msgid "To"
 msgstr "Za"
 
-#: panels/display/cc-night-light-page.ui:335
+#: panels/display/cc-night-light-page.ui:300
 msgid "_Color Temperature"
 msgstr "_Temperatura barve"
 
@@ -2337,12 +2337,14 @@ msgid "_Reset All…"
 msgstr "_Ponastavi vse …"
 
 #: panels/keyboard/cc-keyboard-shortcut-dialog.ui:94
-#: panels/system/datetime/cc-tz-dialog.ui:42 shell/cc-panel-list.ui:44
+#: panels/system/datetime/cc-tz-dialog.ui:42
+#: panels/system/region/cc-format-chooser.ui:176 shell/cc-panel-list.ui:44
 msgid "No Results Found"
 msgstr "Ni najdenih zadetkov."
 
 #: panels/keyboard/cc-keyboard-shortcut-dialog.ui:95
-#: panels/system/datetime/cc-tz-dialog.ui:43 shell/cc-panel-list.ui:45
+#: panels/system/datetime/cc-tz-dialog.ui:43
+#: panels/system/region/cc-format-chooser.ui:177 shell/cc-panel-list.ui:45
 msgid "Try a different search"
 msgstr "Poskusite z drugačnim iskalnim nizom"
 
@@ -7547,15 +7549,7 @@ msgstr "Pogoste vrste"
 msgid "All Formats"
 msgstr "Vse vrste"
 
-#: panels/system/region/cc-format-chooser.ui:189
-msgid "No Search Results"
-msgstr "Ni najdenih zadetkov"
-
-#: panels/system/region/cc-format-chooser.ui:201
-msgid "Searches can be for countries or languages"
-msgstr "Iskati je mogoče države ali jezike."
-
-#: panels/system/region/cc-format-chooser.ui:237
+#: panels/system/region/cc-format-chooser.ui:208
 msgid "Preview"
 msgstr "Predogled"
 
