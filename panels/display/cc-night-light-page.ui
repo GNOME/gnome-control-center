@@ -21,41 +21,6 @@
               <object class="GtkBox">
                 <property name="orientation">vertical</property>
                 <child>
-                  <object class="GtkInfoBar" id="infobar_unsupported">
-                    <property name="visible">False</property>
-                    <property name="name">infobar_unsupported</property>
-                    <property name="message-type">warning</property>
-                    <child>
-                      <object class="GtkBox">
-                        <property name="orientation">vertical</property>
-                        <property name="hexpand">True</property>
-                        <property name="margin-top">10</property>
-                        <property name="margin-bottom">10</property>
-                        <property name="margin-start">10</property>
-                        <property name="margin-end">10</property>
-                        <property name="spacing">10</property>
-                        <child>
-                          <object class="GtkLabel">
-                            <property name="halign">start</property>
-                            <property name="hexpand">False</property>
-                            <property name="label" translatable="yes">Night Light Unavailable</property>
-                            <attributes>
-                              <attribute name="weight" value="bold"/>
-                            </attributes>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="GtkLabel" id="infobar_unsupported_description">
-                            <property name="label" translatable="yes">This could be the result of the graphics driver being used, or the desktop being used remotely</property>
-                            <property name="wrap">True</property>
-                            <property name="xalign">0.0</property>
-                          </object>
-                        </child>
-                      </object>
-                    </child>
-                  </object>
-                </child>
-                <child>
                   <object class="GtkInfoBar" id="infobar_disabled">
                     <property name="name">infobar_disabled</property>
                     <child>
