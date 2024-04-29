@@ -14,23 +14,18 @@
         </child>
 
         <property name="content">
-          <object class="GtkBox">
-            <property name="orientation">vertical</property>
-            <property name="margin_top">28</property>
-            <property name="margin_bottom">28</property>
-            <property name="margin_start">12</property>
-            <property name="margin_end">12</property>
-            <property name="spacing">18</property>
+          <object class="AdwPreferencesPage">
             <child>
-              <object class="CcTimeEditor" id="time_editor">
-                <property name="halign">center</property>
+              <object class="AdwPreferencesGroup">
+                <child>
+                  <object class="CcTimeEditor" id="time_editor">
+                    <property name="halign">center</property>
+                  </object>
+                </child>
               </object>
             </child>
-
             <child>
-              <object class="AdwClamp">
-                <property name="maximum-size">600</property>
-
+              <object class="AdwPreferencesGroup">
                 <child>
                   <object class="GtkListBox" id="date_box">
                     <property name="width-request">320</property>
@@ -91,7 +86,6 @@
 
                   </object>
                 </child>
-
               </object>
             </child>
           </object>
