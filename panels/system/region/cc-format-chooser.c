@@ -264,7 +264,7 @@ region_widget_new (CcFormatChooser *self,
         gtk_widget_set_opacity (check, 0.0);
         gtk_box_append (GTK_BOX (box), check);
 
-        button = gtk_button_new_from_icon_name ("view-layout-symbolic");
+        button = gtk_button_new_from_icon_name ("view-reveal-symbolic");
         gtk_widget_add_css_class (button, "flat");
         g_signal_connect_object (button, "clicked", G_CALLBACK (preview_button_clicked_cb),
                                  self, G_CONNECT_SWAPPED);
