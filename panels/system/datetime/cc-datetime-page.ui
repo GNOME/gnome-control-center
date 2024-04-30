@@ -7,6 +7,7 @@
 
   <object class="AdwDialog" id="datetime_dialog">
     <property name="title" translatable="yes">Date &amp; Time</property>
+    <property name="content-width">430</property>
     <property name="child">
       <object class="AdwToolbarView">
         <child type="top">
@@ -28,7 +29,6 @@
               <object class="AdwPreferencesGroup">
                 <child>
                   <object class="GtkListBox" id="date_box">
-                    <property name="width-request">320</property>
                     <property name="selection-mode">none</property>
                     <signal name="row-activated" handler="on_date_box_row_activated_cb" swapped="yes"/>
                     <style>
