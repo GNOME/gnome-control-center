@@ -491,30 +491,38 @@
         <property name="content">
           <object class="AdwPreferencesPage">
             <property name="description" translatable="yes">How much disk space this app is occupying with app data and caches</property>
-            <child>
+             <child>
               <object class="AdwPreferencesGroup">
                 <child>
-                  <object class="CcInfoRow" id="app">
+                  <object class="AdwActionRow" id="storage_dialog_app_row">
                     <property name="title" translatable="yes">App</property>
-                    <property name="info">Unknown</property>
+                    <style>
+                      <class name="property"/>
+                    </style>
                   </object>
                 </child>
                 <child>
-                  <object class="CcInfoRow" id="data">
+                  <object class="AdwActionRow" id="storage_dialog_data_row">
                     <property name="title" translatable="yes">Data</property>
-                    <property name="info">Unknown</property>
+                    <style>
+                      <class name="property"/>
+                    </style>
                   </object>
                 </child>
                 <child>
-                  <object class="CcInfoRow" id="cache">
+                  <object class="AdwActionRow" id="storage_dialog_cache_row">
                     <property name="title" translatable="yes">Cache</property>
-                    <property name="info">Unknown</property>
+                    <style>
+                      <class name="property"/>
+                    </style>
                   </object>
                 </child>
                 <child>
-                  <object class="CcInfoRow" id="total">
-                    <property name="title" translatable="yes">&lt;b&gt;Total&lt;/b&gt;</property>
-                    <property name="info">Unknown</property>
+                  <object class="AdwActionRow" id="storage_dialog_total_row">
+                    <property name="title" translatable="yes">Total</property>
+                    <style>
+                      <class name="property"/>
+                    </style>
                   </object>
                 </child>
               </object>
