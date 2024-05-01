@@ -24,6 +24,8 @@ common_sources += gnome.mkenums(
   vtail: '      { 0, NULL, NULL }\n    };\n    etype = g_@type@_register_static ("@EnumName@", values);\n  }\n  return etype;\n}\n'
 )
 
+common_sources += gnome.mkenums_simple('cc-number-list-enums', sources: files('cc-number-list.h'))
+
 common_sources += gnome.compile_resources(
   'cc-common-resources',
   'common.gresource.xml',
@@ -37,8 +39,10 @@ generates_sources_dep = declare_dependency(
 
 sources = files(
   'cc-hostname-entry.c',
+  'cc-number-list.c',
   'cc-time-entry.c',
-  'hostname-helper.c',
+  'cc-util.c',
+  'hostname-helper.c'
 )
 
 libwidgets = static_library(
