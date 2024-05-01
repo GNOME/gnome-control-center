@@ -65,7 +65,7 @@
                 <property name="description" translatable="yes">Trash and temporary files can sometimes include personal or sensitive information. Automatically deleting them can help to protect privacy.</property>
                 <child>
                   <object class="AdwSwitchRow" id="purge_trash_row">
-                    <property name="title" translatable="yes">Automatically Delete _Trash Content</property>
+                    <property name="title" translatable="yes">Automatically Empty _Trash</property>
                     <property name="use-underline">true</property>
                   </object>
                 </child>
@@ -77,7 +77,7 @@
                 </child>
                 <child>
                   <object class="AdwComboRow" id="purge_after_combo">
-                    <property name="title" translatable="yes">Automatically Delete _Period</property>
+                    <property name="title" translatable="yes">Automatic Deletion _Period</property>
                     <property name="use-underline">true</property>
                     <signal name="notify::selected-item" handler="purge_after_combo_changed_cb"/>
                     <property name="model">
