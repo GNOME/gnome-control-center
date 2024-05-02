@@ -1152,7 +1152,7 @@ net_device_wifi_new (CcPanel *panel, NMClient *client, NMDevice *device)
 
         /* Set up the main Visible Networks list */
         list = cc_wifi_connection_list_new (client, NM_DEVICE_WIFI (device), TRUE, TRUE, FALSE, FALSE);
-        cc_wifi_connection_list_set_placeholder_text (list, _("Searching networks…"));
+        cc_wifi_connection_list_set_placeholder_text (list, _("Searching for networks…"));
         gtk_box_append (self->listbox_box, GTK_WIDGET (list));
 
         listbox = cc_wifi_connection_list_get_list_box (list);
