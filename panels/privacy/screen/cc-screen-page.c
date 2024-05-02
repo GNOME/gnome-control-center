@@ -101,20 +101,18 @@ on_lock_combo_changed_cb (AdwComboRow   *combo_row,
   item = ADW_ENUM_LIST_ITEM (adw_combo_row_get_selected_item (combo_row));
   delay = adw_enum_list_item_get_value (item);
 
-  g_settings_set (self->lock_settings, "lock-delay", "u", delay);
+  g_settings_set_uint (self->lock_settings, "lock-delay", delay);
 }
 
 static void
-set_lock_value_for_combo (AdwComboRow   *combo_row,
-                          CcScreenPage *self)
+set_lock_delay_value (CcScreenPage *self,
+                      gint          value)
 {
   AdwEnumListModel *model;
-  guint value;
 
-  model = ADW_ENUM_LIST_MODEL (adw_combo_row_get_model (combo_row));
+  model = ADW_ENUM_LIST_MODEL (adw_combo_row_get_model (self->lock_after_row));
 
-  g_settings_get (self->lock_settings, "lock-delay", "u", &value);
-  adw_combo_row_set_selected (combo_row,
+  adw_combo_row_set_selected (self->lock_after_row,
                               adw_enum_list_model_find_position (model, value));
 }
 
@@ -339,7 +337,8 @@ cc_screen_page_init (CcScreenPage *self)
                    "sensitive",
                    G_SETTINGS_BIND_GET);
 
-  set_lock_value_for_combo (self->lock_after_row, self);
+  value = g_settings_get_uint (self->lock_settings, "lock-delay");
+  set_lock_delay_value (self, value);
 
   g_settings_bind (self->notification_settings,
                    "show-in-lock-screen",
