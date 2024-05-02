@@ -50,12 +50,6 @@ if host_is_linux_not_s390
   )
 endif
 
-
-sources += gnome.mkenums_simple(
-  'cc-screen-page-enums',
-  sources: ['screen/cc-screen-page.h'],
-)
-
 sources += gnome.mkenums_simple(
   'cc-usage-page-enums',
   sources: ['usage/cc-usage-page.h'],
