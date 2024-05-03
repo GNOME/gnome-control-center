@@ -60,7 +60,7 @@ struct _CcSharingPanel
   AdwActionRow *personal_file_sharing_enable_row;
   AdwPreferencesPage *personal_file_sharing_page;
   GtkWidget *personal_file_sharing_password_entry_row;
-  GtkWidget *personal_file_sharing_require_password_switch_row;
+  GtkWidget *personal_file_sharing_require_password_switch;
   GtkWidget *personal_file_sharing_row;
   GtkWidget *personal_file_sharing_switch;
 
@@ -121,7 +121,7 @@ cc_sharing_panel_class_init (CcSharingPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, personal_file_sharing_enable_row);
   gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, personal_file_sharing_page);
   gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, personal_file_sharing_password_entry_row);
-  gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, personal_file_sharing_require_password_switch_row);
+  gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, personal_file_sharing_require_password_switch);
   gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, personal_file_sharing_vbox);
   gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, personal_file_sharing_row);
   gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, shared_folders_listbox);
@@ -516,7 +516,7 @@ cc_sharing_panel_setup_personal_file_sharing_dialog (CcSharingPanel *self)
   GSettings *settings;
   GtkWidget *networks, *w;
 
-  g_object_bind_property (self->personal_file_sharing_require_password_switch_row, "active",
+  g_object_bind_property (self->personal_file_sharing_require_password_switch, "active",
                           self->personal_file_sharing_password_entry_row, "sensitive",
                           G_BINDING_SYNC_CREATE);
 
@@ -526,7 +526,7 @@ cc_sharing_panel_setup_personal_file_sharing_dialog (CcSharingPanel *self)
 
   settings = g_settings_new (FILE_SHARING_SCHEMA_ID);
   g_settings_bind_with_mapping (settings, "require-password",
-                                self->personal_file_sharing_require_password_switch_row,
+                                self->personal_file_sharing_require_password_switch,
                                 "active",
                                 G_SETTINGS_BIND_DEFAULT,
                                 file_sharing_get_require_password,
