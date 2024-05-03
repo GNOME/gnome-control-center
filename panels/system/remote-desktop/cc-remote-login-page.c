@@ -605,11 +605,19 @@ on_got_rdp_credentials (GObject      *source_object,
 
       g_variant_lookup (credentials, "username", "&s", &username);
       if (username && g_strcmp0 (username, gtk_editable_get_text (GTK_EDITABLE (self->username_entry))))
-        gtk_editable_set_text (GTK_EDITABLE (self->username_entry), username);
+        {
+          g_signal_handlers_block_by_func (self->username_entry, on_credentials_changed, self);
+          gtk_editable_set_text (GTK_EDITABLE (self->username_entry), username);
+          g_signal_handlers_unblock_by_func (self->username_entry, on_credentials_changed, self);
+        }
 
       g_variant_lookup (credentials, "password", "&s", &password);
       if (password && g_strcmp0 (password, gtk_editable_get_text (GTK_EDITABLE (self->password_entry))))
-        gtk_editable_set_text (GTK_EDITABLE (self->password_entry), password);
+        {
+          g_signal_handlers_block_by_func (self->password_entry, on_credentials_changed, self);
+          gtk_editable_set_text (GTK_EDITABLE (self->password_entry), password);
+          g_signal_handlers_unblock_by_func (self->password_entry, on_credentials_changed, self);
+        }
     }
 
   /* Fetch TLS certificate fingerprint */
