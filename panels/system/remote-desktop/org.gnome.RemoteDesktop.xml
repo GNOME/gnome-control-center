@@ -34,6 +34,33 @@
     <property name="TlsKey" type="s" access="read" />
     <property name="ViewOnly" type="b" access="read" />
 
+    <!--
+        Binding:
+
+        Signal to inform that the RDP server is currently attempting to bind
+        the port passed as an argument.
+    -->
+    <signal name="Binding">
+      <arg name="port" type="i" />
+    </signal>
+
+  </interface>
+
+  <!--
+      org.gnome.RemoteDesktop.Configuration.Rdp.Server:
+      @short_description: Configure RDP server interface
+
+      This API is intended to report status and configure the system server.
+      No compatibility between versions is promised.
+  -->
+  <interface name="org.gnome.RemoteDesktop.Configuration.Rdp.Server">
+
+    <property name="Enabled" type="b" access="read" />
+    <property name="Port" type="i" access="read" />
+    <property name="TlsCert" type="s" access="read" />
+    <property name="TlsFingerprint" type="s" access="read" />
+    <property name="TlsKey" type="s" access="read" />
+
     <method name="Enable" />
 
     <method name="Disable" />
@@ -46,27 +73,11 @@
       <arg name="credentials" direction="in" type="a{sv}" />
     </method>
 
-    <method name="ExportCertificate">
-      <annotation name="org.gtk.GDBus.C.UnixFD" value="true" />
-      <arg name="Certificate" type="(sh)" direction="out" />
-      <arg name="PrivateKey" type="(sh)" direction="out" />
-    </method>
-
     <method name="ImportCertificate">
       <annotation name="org.gtk.GDBus.C.UnixFD" value="true" />
       <arg name="Certificate" type="(sh)" direction="in" />
       <arg name="PrivateKey" type="(sh)" direction="in" />
     </method>
-
-    <!--
-        Binding:
-
-        Signal to inform that the RDP server is currently attempting to bind
-        the port passed as an argument.
-    -->
-    <signal name="Binding">
-      <arg name="port" type="i" />
-    </signal>
 
   </interface>
 
