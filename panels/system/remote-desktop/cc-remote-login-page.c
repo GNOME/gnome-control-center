@@ -71,7 +71,7 @@ struct _CcRemoteLoginPage {
   const char *fingerprint;
   guint store_credentials_id;
 
-  gboolean activating;
+  gboolean activating_blocked;
   gboolean have_credentials;
 };
 
@@ -148,18 +148,18 @@ on_verify_encryption_button_row_activated (CcRemoteLoginPage *self)
 }
 
 static void
-start_remote_login_row_activation (CcRemoteLoginPage *self)
+block_remote_login_row_activation (CcRemoteLoginPage *self)
 {
   gtk_widget_set_sensitive (GTK_WIDGET (self->remote_login_row), FALSE);
-  self->activating = TRUE;
+  self->activating_blocked = TRUE;
 }
 
 static void
-finish_remote_login_row_activation (CcRemoteLoginPage *self)
+unblock_remote_login_row_activation (CcRemoteLoginPage *self)
 {
   if (g_permission_get_allowed (self->permission))
     gtk_widget_set_sensitive (GTK_WIDGET (self->remote_login_row), TRUE);
-  self->activating = FALSE;
+  self->activating_blocked = FALSE;
 }
 
 static void
@@ -180,7 +180,7 @@ on_remote_login_enabled (GsdRemoteDesktopRdpServer *rdp_server,
       g_clear_error (&error);
     }
 
-  finish_remote_login_row_activation (self);
+  unblock_remote_login_row_activation (self);
 }
 
 static void
@@ -296,7 +296,7 @@ on_tls_certificate_generated (GObject      *source_object,
     }
 
 fail:
-  finish_remote_login_row_activation (self);
+  unblock_remote_login_row_activation (self);
 }
 
 static void
@@ -309,7 +309,7 @@ enable_remote_login (CcRemoteLoginPage *self)
   if (gsd_remote_desktop_rdp_server_get_enabled (self->rdp_server))
     return;
 
-  start_remote_login_row_activation (self);
+  block_remote_login_row_activation (self);
 
   cert_path = gsd_remote_desktop_rdp_server_get_tls_cert (self->rdp_server) ?: "";
   key_path = gsd_remote_desktop_rdp_server_get_tls_key (self->rdp_server) ?: "";
@@ -323,7 +323,7 @@ enable_remote_login (CcRemoteLoginPage *self)
       if (!temp_dir)
         {
           g_warning ("Failed to create temporary directory");
-          finish_remote_login_row_activation (self);
+          unblock_remote_login_row_activation (self);
           return;
         }
 
@@ -371,6 +371,8 @@ on_remote_login_disabled (GsdRemoteDesktopRdpServer *rdp_server,
       g_clear_error (&error);
     }
 
+  unblock_remote_login_row_activation (self);
+
   connect_to_remote_desktop_rdp_server (self);
 }
 
@@ -382,6 +384,8 @@ disable_remote_login_service (CcRemoteLoginPage *self)
 
   if (!gsd_remote_desktop_rdp_server_get_enabled (self->rdp_server))
     return;
+
+  block_remote_login_row_activation (self);
 
   gsd_remote_desktop_rdp_server_call_disable (self->rdp_server,
                                               self->cancellable,
@@ -520,7 +524,7 @@ sync_permissions (CcRemoteLoginPage *self)
     }
   else
     {
-      if (!self->activating)
+      if (!self->activating_blocked)
         gtk_widget_set_sensitive (GTK_WIDGET (self->remote_login_row), TRUE);
 
       if (self->have_credentials)
