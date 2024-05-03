@@ -458,9 +458,6 @@ cc_net_proxy_page_set_enabled (CcNetProxyPage *self,
 
   g_return_if_fail (CC_IS_NET_PROXY_PAGE (self));
 
-  /* Proxy should not have changed when enabling/disabling */
-  g_return_if_fail (!cc_net_proxy_page_has_modified (self));
-
   mode = g_settings_get_enum (self->settings, "mode");
 
   /*
