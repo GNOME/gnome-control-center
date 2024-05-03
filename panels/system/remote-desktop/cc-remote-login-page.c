@@ -76,8 +76,6 @@ struct _CcRemoteLoginPage {
 };
 
 G_DEFINE_TYPE (CcRemoteLoginPage, cc_remote_login_page, ADW_TYPE_BIN)
-static void on_remote_login_active_changed (CcRemoteLoginPage *self);
-static void enable_remote_login_service (CcRemoteLoginPage *self);
 static void connect_to_remote_desktop_rdp_server (CcRemoteLoginPage *self);
 static void fetch_credentials (CcRemoteLoginPage *self);
 
