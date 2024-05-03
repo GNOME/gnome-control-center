@@ -26,7 +26,7 @@ G_BEGIN_DECLS
 
 #define CC_TYPE_WACOM_STYLUS_ACTION_DIALOG (cc_wacom_stylus_action_dialog_get_type ())
 
-G_DECLARE_FINAL_TYPE (CcWacomStylusActionDialog, cc_wacom_stylus_action_dialog, CC, WACOM_STYLUS_ACTION_DIALOG, AdwWindow)
+G_DECLARE_FINAL_TYPE (CcWacomStylusActionDialog, cc_wacom_stylus_action_dialog, CC, WACOM_STYLUS_ACTION_DIALOG, AdwDialog)
 
 GtkWidget* cc_wacom_stylus_action_dialog_new (GSettings  *settings,
 					      const char *stylus_name,

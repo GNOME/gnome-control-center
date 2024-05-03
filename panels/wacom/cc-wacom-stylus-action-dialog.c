@@ -29,7 +29,7 @@
 
 struct _CcWacomStylusActionDialog
 {
-	AdwWindow             parent_instance;
+	AdwDialog             parent_instance;
 
 	AdwPreferencesGroup  *preferences_group;
 
@@ -43,7 +43,7 @@ struct _CcWacomStylusActionDialog
 	char                 *key;
 };
 
-G_DEFINE_TYPE (CcWacomStylusActionDialog, cc_wacom_stylus_action_dialog, ADW_TYPE_WINDOW)
+G_DEFINE_TYPE (CcWacomStylusActionDialog, cc_wacom_stylus_action_dialog, ADW_TYPE_DIALOG)
 
 static void
 cc_wacom_stylus_action_dialog_finalize (GObject *object)
@@ -92,8 +92,6 @@ cc_wacom_stylus_action_dialog_class_init (CcWacomStylusActionDialogClass *klass)
 	GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
 	object_class->finalize = cc_wacom_stylus_action_dialog_finalize;
-
-	gtk_widget_class_add_binding_action (widget_class, GDK_KEY_Escape, 0, "window.close", NULL);
 
 	gtk_widget_class_set_template_from_resource (widget_class,
 						     "/org/gnome/control-center/"
@@ -150,7 +148,7 @@ cc_wacom_stylus_action_dialog_new (GSettings   *settings,
 	dialog->settings = settings;
 	dialog->key = g_strdup (key);
 
-	gtk_window_set_title (GTK_WINDOW (dialog), stylus_name);
+	adw_dialog_set_title (ADW_DIALOG (dialog), stylus_name);
 
 	text = g_strdup_printf (_("Choose an action when button %d on the stylus is pressed"), button);
 	adw_preferences_group_set_description (dialog->preferences_group, text);
