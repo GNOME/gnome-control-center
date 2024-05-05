@@ -75,20 +75,20 @@ static gboolean
 should_show_log_for_level (GLogLevelFlags log_level,
                            int            verbosity_level)
 {
-  if (verbosity_level >= 5)
+  if (verbosity_level >= 3)
     return TRUE;
 
   if (log_level & CC_LOG_LEVEL_TRACE)
-    return verbosity_level >= 4;
-
-  if (log_level & G_LOG_LEVEL_DEBUG)
-    return verbosity_level >= 3;
-
-  if (log_level & G_LOG_LEVEL_INFO)
     return verbosity_level >= 2;
 
-  if (log_level & G_LOG_LEVEL_MESSAGE)
+  if (log_level & G_LOG_LEVEL_DEBUG)
     return verbosity_level >= 1;
+
+  if (log_level & G_LOG_LEVEL_INFO)
+    return TRUE;
+
+  if (log_level & G_LOG_LEVEL_MESSAGE)
+    return TRUE;
 
   return FALSE;
 }
@@ -132,8 +132,8 @@ should_log (const char     *log_domain,
     if (log_level & ~CC_LOG_LEVEL_TRACE)
       return TRUE;
 
-    /* If the log is trace level, log if verbosity >= 4 */
-    return verbosity >= 4;
+    /* If the log is trace level, log if verbosity >= 2 */
+    return verbosity >= 2;
   }
 
   if (!domains &&
@@ -150,13 +150,13 @@ should_log (const char     *log_domain,
     return FALSE;
 
   /* GdkPixbuf and Gvc logs are too much verbose, skip unless asked not to. */
-  if (verbosity < 8 &&
+  if (verbosity < 4 &&
       (g_strcmp0 (log_domain, "GdkPixbuf") == 0 ||
        g_strcmp0 (log_domain, "Gvc") == 0) &&
       (!domains || !strstr (domains, log_domain)))
     return FALSE;
 
-  if (verbosity >= 6)
+  if (verbosity >= 3)
     return TRUE;
 
   return FALSE;
