@@ -63,7 +63,6 @@ enum
   PROP_0,
   PROP_SHELL,
   PROP_PARAMETERS,
-  PROP_SUBPAGE,
   N_PROPS
 };
 
@@ -140,8 +139,6 @@ set_subpage (CcPanel     *panel,
 
   adw_navigation_view_push_by_tag (priv->navigation, tag);
   g_set_str (&priv->subpage, tag);
-  g_object_notify_by_pspec (G_OBJECT (panel),
-                            properties[PROP_SUBPAGE]);
 }
 
 static void
@@ -212,10 +209,6 @@ cc_panel_get_property (GObject    *object,
       g_value_set_object (value, priv->shell);
       break;
 
-    case PROP_SUBPAGE:
-      g_value_set_string (value, priv->subpage);
-      break;
-
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
       break;
@@ -257,12 +250,6 @@ cc_panel_class_init (CcPanelClass *klass)
                                                       G_VARIANT_TYPE ("av"),
                                                       NULL,
                                                       G_PARAM_WRITABLE | G_PARAM_STATIC_STRINGS);
-
-  properties[PROP_SUBPAGE] = g_param_spec_string ("subpage",
-                                                  "Subpage parameters",
-                                                  "Additional parameter extracted from the parameters property to launch a panel subpage",
-                                                  NULL,
-                                                  G_PARAM_READABLE | G_PARAM_STATIC_STRINGS);
 
   g_object_class_install_properties (object_class, N_PROPS, properties);
 
