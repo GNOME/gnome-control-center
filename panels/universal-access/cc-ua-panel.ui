@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <template class="CcUaPanel" parent="CcPanel">
-    <child>
+    <child type="subpage">
       <object class="AdwNavigationPage" id="main_page">
         <property name="title" translatable="yes">Accessibility</property>
         <property name="child">
@@ -90,23 +90,23 @@
       </object>
     </child>
 
-    <child>
+    <child type="subpage">
       <object class="CcUaSeeingPage" id="seeing_page"/>
     </child>
 
-    <child>
+    <child type="subpage">
       <object class="CcUaHearingPage" id="hearing_page"/>
     </child>
 
-    <child>
+    <child type="subpage">
       <object class="CcUaTypingPage" id="typing_page"/>
     </child>
 
-    <child>
+    <child type="subpage">
       <object class="CcUaMousePage" id="mouse_page"/>
     </child>
 
-    <child>
+    <child type="subpage">
       <object class="CcUaZoomPage" id="zoom_page"/>
     </child>
   </template>

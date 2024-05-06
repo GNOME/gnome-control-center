@@ -2,7 +2,7 @@
 <interface>
   <template class="CcApplicationsPanel" parent="CcPanel">
     <!-- App Search Page (Main Landing Page) -->
-    <child>
+    <child type="subpage">
       <object class="AdwNavigationPage">
         <property name="title" translatable="yes">Apps</property>
         <property name="child">
@@ -94,7 +94,7 @@
     </child>
 
     <!-- Default Apps Page -->
-    <child>
+    <child type="subpage">
       <object class="AdwNavigationPage">
         <property name="title" translatable="yes">Default Apps</property>
         <property name="tag">default-apps</property>
@@ -137,7 +137,7 @@
     </child>
 
     <!-- App Settings Page -->
-    <child>
+    <child type="subpage">
       <object class="AdwNavigationPage" id="app_settings_page">
         <property name="title" translatable="yes">App Settings</property>
         <property name="child">
