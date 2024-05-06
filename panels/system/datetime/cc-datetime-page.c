@@ -274,7 +274,6 @@ set_timezone_cb (GObject      *source,
                  GAsyncResult *res,
                  gpointer      user_data)
 {
-  CcDateTimePage *self = user_data;
   g_autoptr(GError) error = NULL;
 
   if (!timedate1_call_set_timezone_finish (TIMEDATE1 (source),
@@ -352,7 +351,7 @@ queue_set_timezone (CcDateTimePage *self)
                                    TRUE,
                                    self->cancellable,
                                    set_timezone_cb,
-                                   self);
+                                   NULL);
     }
 }
 
