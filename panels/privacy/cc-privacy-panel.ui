@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <template class="CcPrivacyPanel" parent="CcPanel">
-    <child>
+    <child type="subpage">
       <object class="AdwNavigationPage">
         <property name="title" translatable="yes">Privacy &amp; Security</property>
         <property name="child">
@@ -118,23 +118,23 @@
       </object>
     </child>
 
-    <child>
+    <child type="subpage">
       <object class="CcScreenPage"/>
     </child>
 
-    <child>
+    <child type="subpage">
       <object class="CcCameraPage"/>
     </child>
 
-    <child>
+    <child type="subpage">
       <object class="CcUsagePage"/>
     </child>
 
-    <child>
+    <child type="subpage">
       <object class="CcDiagnosticsPage" id="diagnostics_page"/>
     </child>
 
-    <child>
+    <child type="subpage">
       <object class="CcFirmwareSecurityPage" id="security_page"/>
     </child>
   </template>
