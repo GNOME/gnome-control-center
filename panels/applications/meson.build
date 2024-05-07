@@ -13,7 +13,6 @@ i18n.merge_file(
 sources = files(
   'cc-applications-panel.c',
   'cc-applications-row.c',
-  'cc-info-row.c',
   'cc-default-apps-page.c',
   'cc-default-apps-row.c',
   'cc-removable-media-settings.c',

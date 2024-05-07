@@ -31,7 +31,6 @@
 
 #include "cc-applications-panel.h"
 #include "cc-applications-row.h"
-#include "cc-info-row.h"
 #include "cc-list-row.h"
 #include "cc-default-apps-page.h"
 #include "cc-removable-media-settings.h"
@@ -108,16 +107,16 @@ struct _CcApplicationsPanel
   AdwSwitchRow    *wallpaper;
   AdwSwitchRow    *screenshot;
   AdwSwitchRow    *sound;
-  CcInfoRow       *no_sound;
+  CcListRow       *no_sound;
   AdwSwitchRow    *search;
-  CcInfoRow       *no_search;
+  CcListRow       *no_search;
   AdwSwitchRow    *camera;
-  CcInfoRow       *no_camera;
+  CcListRow       *no_camera;
   AdwSwitchRow    *location;
-  CcInfoRow       *no_location;
+  CcListRow       *no_location;
   AdwSwitchRow    *shortcuts;
   AdwSwitchRow    *microphone;
-  CcInfoRow       *no_microphone;
+  CcListRow       *no_microphone;
   AdwPreferencesGroup *other_permissions_section;
   CcListRow       *builtin;
   AdwDialog       *builtin_dialog;
@@ -1840,7 +1839,6 @@ cc_applications_panel_init (CcApplicationsPanel *self)
 
   g_resources_register (cc_applications_get_resource ());
 
-  g_type_ensure (CC_TYPE_INFO_ROW);
   g_type_ensure (CC_TYPE_LIST_ROW);
 
   gtk_widget_init_template (GTK_WIDGET (self));
