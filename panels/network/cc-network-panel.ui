@@ -1,42 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <template class="CcNetworkPanel" parent="CcPanel">
-    <child>
-      <object class="AdwViewStack" id="stack">
+    <property name="child">
+      <object class="AdwNavigationView" id="main_nav">
         <child>
-          <object class="AdwViewStackPage">
-            <property name="name">nm-error-page</property>
-            <property name="child">
+          <object class="AdwNavigationPage">
+            <property name="title" translatable="yes">Network</property>
+            <child>
               <object class="AdwToolbarView">
                 <child type="top">
                   <object class="AdwHeaderBar"/>
                 </child>
                 <property name="content">
-                  <object class="AdwStatusPage">
-                    <property name="icon-name">network-error-symbolic</property>
-                    <property name="title" translatable="yes">Network Unavailable</property>
-                    <property name="description" translatable="yes">An error has occurred and network cannot be used.
-Error details: NetworkManager not running.</property>
-                  </object>
-                </property>
-              </object>
-            </property>
-          </object>
-        </child>
-        <child>
-          <object class="AdwViewStackPage">
-            <property name="name">network-page</property>
-            <property name="child">
-              <object class="AdwNavigationView" id="main_nav">
-                <child>
-                  <object class="AdwNavigationPage">
-                    <property name="title" translatable="yes">Network</property>
+                  <object class="AdwViewStack" id="stack">
                     <child>
-                      <object class="AdwToolbarView">
-                        <child type="top">
-                          <object class="AdwHeaderBar"/>
-                        </child>
-                        <property name="content">
+                      <object class="AdwViewStackPage">
+                        <property name="name">nm-error-page</property>
+                        <property name="child">
+                          <object class="AdwStatusPage">
+                            <property name="icon-name">network-error-symbolic</property>
+                            <property name="title" translatable="yes">Network Unavailable</property>
+                            <property name="description" translatable="yes">An error has occurred and network cannot be used.
+Error details: NetworkManager not running.</property>
+                          </object>
+                        </property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="AdwViewStackPage">
+                        <property name="name">network-page</property>
+                        <property name="child">
                           <object class="AdwPreferencesPage">
                             <!-- Each group below will contain GtkStacks from the NetDevices -->
                             <child>
@@ -103,7 +96,6 @@ Error details: NetworkManager not running.</property>
                                 </child>
                               </object>
                             </child>
-
                             <child>
                               <object class="AdwPreferencesGroup">
                                 <!-- xxx: Added to avoid confusion with the preceding VPN row -->
@@ -120,21 +112,20 @@ Error details: NetworkManager not running.</property>
                                 </child>
                               </object>
                             </child>
-
                           </object>
                         </property>
                       </object>
                     </child>
                   </object>
-                </child>
-                <child>
-                  <object class="CcNetProxyPage" id="proxy_page"/>
-                </child>
+                </property>
               </object>
-            </property>
+            </child>
           </object>
         </child>
+        <child>
+          <object class="CcNetProxyPage" id="proxy_page"/>
+        </child>
       </object>
-    </child>
+    </property>
   </template>
 </interface>
