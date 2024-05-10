@@ -25,6 +25,11 @@
                     <signal name="notify::active" handler="sound_alerts_row_state_set_cb" object="CcAppNotificationsDialog" swapped="yes"/>
                   </object>
                 </child>
+              </object>
+            </child>
+            <child>
+              <object class="AdwPreferencesGroup">
+                <property name="title" translatable="yes">Banners</property>
                 <child>
                   <object class="AdwSwitchRow" id="notification_banners_row">
                     <property name="use-underline">True</property>
@@ -40,6 +45,11 @@
                     <signal name="notify::active" handler="notification_banners_content_row_state_set_cb" object="CcAppNotificationsDialog" swapped="yes"/>
                   </object>
                 </child>
+              </object>
+            </child>
+            <child>
+              <object class="AdwPreferencesGroup">
+                <property name="title" translatable="yes">Lock Screen</property>
                 <child>
                   <object class="AdwSwitchRow" id="lock_screen_notifications_row">
                     <property name="use-underline">True</property>
