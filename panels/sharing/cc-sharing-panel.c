@@ -58,9 +58,11 @@ struct _CcSharingPanel
   GtkWidget *media_sharing_row;
   GtkWidget *media_sharing_switch;
   AdwDialog *personal_file_sharing_dialog;
+  AdwToastOverlay *personal_file_sharing_toast_overlay;
   GtkWidget *personal_file_sharing_vbox;
   AdwActionRow *personal_file_sharing_enable_row;
   CcListRowInfoButton *personal_file_sharing_info_button;
+  AdwActionRow *personal_file_sharing_address_row;
   AdwPreferencesPage *personal_file_sharing_page;
   GtkWidget *personal_file_sharing_password_entry_row;
   GtkWidget *personal_file_sharing_require_password_switch;
@@ -102,6 +104,15 @@ cc_sharing_panel_get_help_uri (CcPanel *panel)
 }
 
 static void
+on_copy_personal_file_sharing_address_clicked (CcSharingPanel *self)
+{
+  gdk_clipboard_set_text (gtk_widget_get_clipboard (GTK_WIDGET (self)),
+                          adw_action_row_get_subtitle (ADW_ACTION_ROW (self->personal_file_sharing_address_row)));
+
+  adw_toast_overlay_add_toast (self->personal_file_sharing_toast_overlay, adw_toast_new (_("Address copied to clipboard")));
+}
+
+static void
 cc_sharing_panel_class_init (CcSharingPanelClass *klass)
 {
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
@@ -121,14 +132,18 @@ cc_sharing_panel_class_init (CcSharingPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, media_sharing_enable_row);
   gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, media_sharing_row);
   gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, personal_file_sharing_dialog);
+  gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, personal_file_sharing_toast_overlay);
   gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, personal_file_sharing_enable_row);
   gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, personal_file_sharing_info_button);
+  gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, personal_file_sharing_address_row);
   gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, personal_file_sharing_page);
   gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, personal_file_sharing_password_entry_row);
   gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, personal_file_sharing_require_password_switch);
   gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, personal_file_sharing_vbox);
   gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, personal_file_sharing_row);
   gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, shared_folders_listbox);
+
+  gtk_widget_class_bind_template_callback (widget_class, on_copy_personal_file_sharing_address_clicked);
 
   g_type_ensure (CC_TYPE_LIST_ROW);
   g_type_ensure (CC_TYPE_HOSTNAME_ENTRY);
@@ -467,21 +482,17 @@ static void
 cc_sharing_panel_setup_label_with_hostname (CcSharingPanel *self,
                                             AdwPreferencesPage *page)
 {
-  g_autofree gchar *text = NULL;
-  const gchar *hostname;
+  g_autofree gchar *hostname;
 
-  hostname = gtk_editable_get_text (GTK_EDITABLE (self->hostname_entry));
+  hostname = cc_hostname_get_display_hostname (cc_hostname_get_default ());
 
   if (page == self->personal_file_sharing_page)
     {
-      g_autofree gchar *url = g_strdup_printf ("<a href=\"dav://%s\">dav://%s</a>", hostname, hostname);
-      /* TRANSLATORS: %s is replaced with a link to a dav://<hostname> URL */
-      text = g_strdup_printf (_("File Sharing allows you to share your Public folder with others on your current network using: %s"), url);
+      g_autofree gchar *dav_address = g_strdup_printf ("dav://%s", hostname);
+      adw_action_row_set_subtitle (self->personal_file_sharing_address_row, dav_address);
     }
   else
     g_assert_not_reached ();
-
-  adw_preferences_page_set_description (ADW_PREFERENCES_PAGE (page), text);
 }
 
 static gboolean

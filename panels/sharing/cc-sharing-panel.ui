@@ -56,61 +56,87 @@
           <object class="AdwHeaderBar"/>
         </child>
         <property name="content">
-          <object class="AdwPreferencesPage" id="personal_file_sharing_page">
-            <child>
-              <object class="AdwPreferencesGroup">
+          <object class="AdwToastOverlay" id="personal_file_sharing_toast_overlay">
+            <property name="child">
+              <object class="AdwPreferencesPage" id="personal_file_sharing_page">
                 <child>
-                  <object class="AdwActionRow" id="personal_file_sharing_enable_row">
-                    <property name="title" translatable="yes">_File Sharing</property>
-                    <property name="use-underline">True</property>
-                    <child type="suffix">
-                      <object class="CcListRowInfoButton" id="personal_file_sharing_info_button">
-                        <property name="valign">center</property>
-                      </object>
-                    </child>
-                  </object>
-                </child>
-              </object>
-            </child>
-            <child>
-              <object class="AdwPreferencesGroup">
-                <child>
-                  <object class="AdwActionRow">
-                    <property name="title" translatable="yes">_Require Password</property>
-                    <property name="use_underline">True</property>
-                    <property name="activatable-widget">personal_file_sharing_require_password_switch</property>
-                    <child type="suffix">
-                      <object class="CcListRowInfoButton">
-                        <property name="valign">center</property>
-                        <property name="text" translatable="yes">Password is required on devices that want to access shared content.
-It may still be possible for devices on this network to see what content is being shared.</property>
+                  <object class="AdwPreferencesGroup">
+                    <child>
+                      <object class="AdwActionRow" id="personal_file_sharing_enable_row">
+                        <property name="title" translatable="yes">_File Sharing</property>
+                        <property name="use-underline">True</property>
+                        <child type="suffix">
+                          <object class="CcListRowInfoButton" id="personal_file_sharing_info_button">
+                            <property name="valign">center</property>
+                          </object>
+                        </child>
                       </object>
                     </child>
                     <child>
-                      <object class="GtkSwitch" id="personal_file_sharing_require_password_switch">
-                        <property name="valign">center</property>
+                      <object class="AdwActionRow" id="personal_file_sharing_address_row">
+                        <property name="title" translatable="yes">File Sharing _Address</property>
+                        <property name="activatable-widget">copy_file_sharing_address_button</property>
+                        <property name="use-underline">True</property>
+                        <property name="use-markup">False</property>
+                        <style>
+                          <class name="property"/>
+                        </style>
+                        <child type="suffix">
+                          <object class="GtkButton" id="copy_file_sharing_address_button">
+                            <property name="valign">center</property>
+                            <property name="tooltip-text" translatable="yes">Copy</property>
+                            <property name="icon-name">edit-copy-symbolic</property>
+                            <signal name="clicked" handler="on_copy_personal_file_sharing_address_clicked" object="CcSharingPanel" swapped="yes"/>
+                            <style>
+                              <class name="flat"/>
+                            </style>
+                          </object>
+                        </child>
                       </object>
                     </child>
                   </object>
                 </child>
                 <child>
-                  <object class="AdwPasswordEntryRow" id="personal_file_sharing_password_entry_row">
-                    <property name="title" translatable="yes">_Password</property>
-                    <property name="use_underline">True</property>
+                  <object class="AdwPreferencesGroup">
+                    <child>
+                      <object class="AdwActionRow">
+                        <property name="title" translatable="yes">_Require Password</property>
+                        <property name="use_underline">True</property>
+                        <property name="activatable-widget">personal_file_sharing_require_password_switch</property>
+                        <child type="suffix">
+                          <object class="CcListRowInfoButton">
+                            <property name="valign">center</property>
+                            <property name="text" translatable="yes">Password is required on devices that want to access shared content.
+It may still be possible for devices on this network to see what content is being shared.</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkSwitch" id="personal_file_sharing_require_password_switch">
+                            <property name="valign">center</property>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="AdwPasswordEntryRow" id="personal_file_sharing_password_entry_row">
+                        <property name="title" translatable="yes">_Password</property>
+                        <property name="use_underline">True</property>
+                      </object>
+                    </child>
                   </object>
                 </child>
-              </object>
-            </child>
-            <child>
-              <object class="AdwPreferencesGroup">
-                <property name="title" translatable="yes">Networks</property>
                 <child>
-                  <object class="GtkBox" id="personal_file_sharing_vbox">
-                    <property name="orientation">vertical</property>
+                  <object class="AdwPreferencesGroup">
+                    <property name="title" translatable="yes">Networks</property>
+                    <child>
+                      <object class="GtkBox" id="personal_file_sharing_vbox">
+                        <property name="orientation">vertical</property>
+                      </object>
+                    </child>
                   </object>
                 </child>
               </object>
-            </child>
+            </property>
           </object>
         </property>
       </object>
