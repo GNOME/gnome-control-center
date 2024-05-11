@@ -24,6 +24,8 @@
 #include "cc-list-row.h"
 #include "shell/cc-application.h"
 #include "shell/cc-log.h"
+#include "cc-list-row-info-button.h"
+#include "cc-hostname.h"
 
 #include "cc-sharing-resources.h"
 #include "file-share-properties.h"
@@ -58,6 +60,7 @@ struct _CcSharingPanel
   AdwDialog *personal_file_sharing_dialog;
   GtkWidget *personal_file_sharing_vbox;
   AdwActionRow *personal_file_sharing_enable_row;
+  CcListRowInfoButton *personal_file_sharing_info_button;
   AdwPreferencesPage *personal_file_sharing_page;
   GtkWidget *personal_file_sharing_password_entry_row;
   GtkWidget *personal_file_sharing_require_password_switch;
@@ -119,6 +122,7 @@ cc_sharing_panel_class_init (CcSharingPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, media_sharing_row);
   gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, personal_file_sharing_dialog);
   gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, personal_file_sharing_enable_row);
+  gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, personal_file_sharing_info_button);
   gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, personal_file_sharing_page);
   gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, personal_file_sharing_password_entry_row);
   gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, personal_file_sharing_require_password_switch);
@@ -516,6 +520,9 @@ cc_sharing_panel_setup_personal_file_sharing_dialog (CcSharingPanel *self)
   GSettings *settings;
   GtkWidget *networks, *w;
 
+  g_autofree gchar *hostname = NULL;
+  g_autofree gchar *personal_file_sharing_info_text = NULL;
+
   g_object_bind_property (self->personal_file_sharing_require_password_switch, "active",
                           self->personal_file_sharing_password_entry_row, "sensitive",
                           G_BINDING_SYNC_CREATE);
@@ -544,6 +551,13 @@ cc_sharing_panel_setup_personal_file_sharing_dialog (CcSharingPanel *self)
   adw_action_row_add_suffix (self->personal_file_sharing_enable_row, w);
   adw_action_row_set_activatable_widget (self->personal_file_sharing_enable_row, w);
   self->personal_file_sharing_switch = w;
+
+  hostname = cc_hostname_get_display_hostname (cc_hostname_get_default ());
+  /* Translators: %s is the hostname of the user's device */
+  personal_file_sharing_info_text = g_strdup_printf (_("File sharing allows sharing the Public folder with other devices "
+                                                       "on the current network. This device will be visible as “%s”."),
+                                                     hostname);
+  cc_list_row_info_button_set_text (self->personal_file_sharing_info_button, personal_file_sharing_info_text);
 
   cc_sharing_panel_bind_networks_to_label (self,
                                            networks,

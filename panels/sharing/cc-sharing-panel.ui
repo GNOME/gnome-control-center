@@ -63,6 +63,11 @@
                   <object class="AdwActionRow" id="personal_file_sharing_enable_row">
                     <property name="title" translatable="yes">_File Sharing</property>
                     <property name="use-underline">True</property>
+                    <child type="suffix">
+                      <object class="CcListRowInfoButton" id="personal_file_sharing_info_button">
+                        <property name="valign">center</property>
+                      </object>
+                    </child>
                   </object>
                 </child>
               </object>
@@ -123,13 +128,18 @@ It may still be possible for devices on this network to see what content is bein
         </child>
         <property name="content">
           <object class="AdwPreferencesPage">
-            <property name="description" translatable="yes">Share music, photos and videos over the network</property>
             <child>
               <object class="AdwPreferencesGroup">
                 <child>
                   <object class="AdwActionRow" id="media_sharing_enable_row">
                     <property name="title" translatable="yes">_Media Sharing</property>
                     <property name="use-underline">True</property>
+                    <child type="suffix">
+                      <object class="CcListRowInfoButton">
+                        <property name="valign">center</property>
+                        <property name="text" translatable="yes">Media sharing allows streaming pictures, music and video to DLNA enabled devices on the current network.</property>
+                      </object>
+                    </child>
                   </object>
                 </child>
               </object>
