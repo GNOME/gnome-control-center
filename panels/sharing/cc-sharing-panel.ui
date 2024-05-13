@@ -75,14 +75,13 @@
                     <child>
                       <object class="AdwActionRow" id="personal_file_sharing_address_row">
                         <property name="title" translatable="yes">File Sharing _Address</property>
-                        <property name="activatable-widget">copy_file_sharing_address_button</property>
                         <property name="use-underline">True</property>
                         <property name="use-markup">False</property>
                         <style>
                           <class name="property"/>
                         </style>
                         <child type="suffix">
-                          <object class="GtkButton" id="copy_file_sharing_address_button">
+                          <object class="GtkButton">
                             <property name="valign">center</property>
                             <property name="tooltip-text" translatable="yes">Copy</property>
                             <property name="icon-name">edit-copy-symbolic</property>
