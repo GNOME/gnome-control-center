@@ -118,16 +118,31 @@ cc_number_object_class_init (CcNumberObjectClass *klass)
     object_class->get_property = cc_number_object_get_property;
     object_class->set_property = cc_number_object_set_property;
 
+    /**
+    * CcNumberObject:value: (attributes org.gtk.Property.get=cc_number_object_get_value)
+    *
+    * The numeric value.
+    */
     obj_props[OBJ_PROP_VALUE] =
         g_param_spec_int ("value", NULL, NULL,
                           INT_MIN, INT_MAX, 0,
                           G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
 
+    /**
+    * CcNumberObject:string: (attributes org.gtk.Property.get=cc_number_object_get_string)
+    *
+    * The (optional) fixed string representation of the stored value.
+    */
     obj_props[OBJ_PROP_STRING] =
         g_param_spec_string ("string", NULL, NULL,
                              NULL,
                              G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
 
+    /**
+    * CcNumberObject:order: (attributes org.gtk.Property.get=cc_number_object_get_order)
+    *
+    * The (optional) fixed ordering of the `CcNumberObject` inside a `CcNumberList`.
+    */
     obj_props[OBJ_PROP_ORDER] =
         g_param_spec_enum ("order", NULL, NULL,
                            CC_TYPE_NUMBER_ORDER, CC_NUMBER_ORDER_DEFAULT,
@@ -141,12 +156,32 @@ cc_number_object_init (CcNumberObject *self)
 {
 }
 
+
+/**
+ * cc_number_object_new:
+ * @value: the value to store in the `CcNumberObject`
+ *
+ * Creates a new `CcNumberObject` holding @value.
+ *
+ * Returns: the newly created `CcNumberObject`
+ */
 CcNumberObject *
 cc_number_object_new (int value)
 {
     return g_object_new (CC_TYPE_NUMBER_OBJECT, "value", value, NULL);
 }
 
+/**
+ * cc_number_object_new_full:
+ * @value: the value to store in the `CcNumberObject`
+ * @string: (nullable): the fixed string representation of @value
+ * @order: the fixed ordering of @value
+ *
+ * Creates a new `CcNumberObject` holding @value, with special @string
+ * representation and @order ordering.
+ *
+ * Returns: the newly created `CcNumberObject`
+ */
 CcNumberObject *
 cc_number_object_new_full (int            value,
                            const char    *string,
@@ -156,6 +191,14 @@ cc_number_object_new_full (int            value,
                          "order", order, NULL);
 }
 
+/**
+ * cc_number_object_get_value:
+ * @self: a `CcNumberObject`
+ *
+ * Gets the stored value.
+ *
+ * Returns: the stored value
+ */
 int
 cc_number_object_get_value (CcNumberObject *self)
 {
@@ -164,6 +207,14 @@ cc_number_object_get_value (CcNumberObject *self)
     return self->value;
 }
 
+/**
+ * cc_number_object_get_string:
+ * @self: a `CcNumberObject`
+ *
+ * Gets the fixed string representation of the stored value.
+ *
+ * Returns: (nullable): the fixed string representation
+ */
 const char*
 cc_number_object_get_string (CcNumberObject *self)
 {
@@ -172,6 +223,14 @@ cc_number_object_get_string (CcNumberObject *self)
     return self->string;
 }
 
+/**
+ * cc_number_object_get_order:
+ * @self: a `CcNumberObject`
+ *
+ * Gets the fixed orderering of @self inside a `CcNumberList`.
+ *
+ * Returns: (nullable): the fixed orderering
+ */
 CcNumberOrder
 cc_number_object_get_order (CcNumberObject *self)
 {
@@ -180,6 +239,18 @@ cc_number_object_get_order (CcNumberObject *self)
     return self->order;
 }
 
+/**
+ * cc_number_object_to_string_for_seconds:
+ * @self: a `CcNumberObject`
+ *
+ * Gets the string representation of @self, assuming the stored value is
+ * a number of seconds. If @self has the special `string` set, that is
+ * returned instead.
+ *
+ * This function is useful in expressions.
+ *
+ * Returns: (transfer full): the resulting string
+ */
 char *
 cc_number_object_to_string_for_seconds (CcNumberObject *self)
 {
@@ -189,6 +260,18 @@ cc_number_object_to_string_for_seconds (CcNumberObject *self)
     return cc_util_time_to_string_text ((gint64) 1000 * self->value);
 }
 
+/**
+ * cc_number_object_to_string_for_minutes:
+ * @self: a `CcNumberObject`
+ *
+ * Gets the string representation of @self, assuming the stored value is
+ * a number of minutes. If @self has the special `string` set, that is
+ * returned instead.
+ *
+ * This function is useful in expressions.
+ *
+ * Returns: (transfer full): the resulting string
+ */
 char *
 cc_number_object_to_string_for_minutes (CcNumberObject *self)
 {
@@ -199,10 +282,10 @@ cc_number_object_to_string_for_minutes (CcNumberObject *self)
 }
 
 /**
- * CcNumberList
+ * CcNumberList:
  *
  * `CcNumberList` is a simple list model that wraps a GListStore of
- * `CcStringObject`. Has convenient methods to add values directly.
+ * `CcStringObject`. It has convenient methods to add values directly.
  */
 
 struct _CcNumberList {
@@ -356,17 +439,34 @@ cc_number_list_class_init (CcNumberListClass *klass)
     object_class->dispose = cc_number_list_dispose;
     object_class->set_property = cc_number_list_set_property;
 
+    /**
+    * CcNumberList:sort-type:
+    *
+    * The sorting of the numbers in the list.
+    */
     lst_props[LST_PROP_SORT_TYPE] =
         g_param_spec_enum ("sort-type", NULL, NULL,
                            GTK_TYPE_SORT_TYPE, GTK_SORT_ASCENDING,
                            G_PARAM_WRITABLE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
 
+    /**
+    * CcNumberList:values:
+    *
+    * A variant array of integer values. Mainly useful in .ui files, where it
+    * allows for convenient array notation like [num1, num2, num3, ...].
+    */
     values_type = g_variant_type_new_array (G_VARIANT_TYPE_INT32);
     lst_props[LST_PROP_VALUES] =
         g_param_spec_variant ("values", NULL, NULL,
                               values_type, NULL,
                               G_PARAM_WRITABLE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
 
+    /**
+    * CcNumberList:special-value:
+    *
+    * One special value to add to the list. Mainly useful in .ui files.
+    * If more special values are needed, use `cc_number_list_add_value_full()`.
+    */
     lst_props[LST_PROP_SPECIAL_VALUE] =
         g_param_spec_object ("special-value", NULL, NULL,
                              CC_TYPE_NUMBER_OBJECT,
@@ -385,6 +485,14 @@ cc_number_list_init (CcNumberList *self)
                               G_CALLBACK (g_list_model_items_changed), self);
 }
 
+/**
+ * cc_number_list_new:
+ * @sort_type: the sorting of the numbers in the list
+ *
+ * Creates a new `CcNumberList`, with sorting based on @sort_type.
+ *
+ * Returns: the newly created `CcNumberList`
+ */
 CcNumberList *
 cc_number_list_new (GtkSortType sort_type)
 {
@@ -404,6 +512,18 @@ cc_number_list_add_number (CcNumberList   *self,
                                        (GCompareDataFunc) compare_numbers, self);
 }
 
+/**
+ * cc_number_list_add_value:
+ * @self: a `CcNumberList`
+ * @value: the value to store in the list
+ *
+ * Adds a new `CcNumberObject` based on @value to the list.
+ * The value will be inserted with the correct sorting.
+ *
+ * Also see `cc_number_object_new()`.
+ *
+ * Returns: the position in the list where the value got stored
+ */
 guint
 cc_number_list_add_value (CcNumberList *self,
                           int           value)
@@ -413,6 +533,23 @@ cc_number_list_add_value (CcNumberList *self,
     return cc_number_list_add_number (self, number);
 }
 
+/**
+ * cc_number_list_add_value_full:
+ * @self: a `CcNumberList`
+ * @value: the value to store in the list
+ * @string: (nullable): the fixed string representation of @value
+ * @order: the fixed ordering of @value
+ *
+ * Adds a new `CcNumberObject` based on @value, @string, and @order to the
+ * list.
+ * The value will be inserted with the correct sorting, which takes @order
+ * into account. If two `CcNumberObject`s have the same special @order, their
+ * ordering is based on the order in which they were added to the list.
+ *
+ * Also see `cc_number_object_new_full()`.
+ *
+ * Returns: the position in the list where the value got stored
+ */
 guint
 cc_number_list_add_value_full (CcNumberList  *self,
                                int            value,
@@ -424,6 +561,15 @@ cc_number_list_add_value_full (CcNumberList  *self,
     return cc_number_list_add_number (self, number);
 }
 
+/**
+ * cc_number_list_get_value:
+ * @self: a `CcNumberList`
+ * @position: the position of the value to fetch
+ *
+ * Get the value at @position.
+ *
+ * Returns: the value at @position
+ */
 int
 cc_number_list_get_value (CcNumberList *self,
                           guint         position)
@@ -450,6 +596,17 @@ equal_numbers (CcNumberObject *number,
     return number->value == *value;
 }
 
+/**
+ * cc_number_list_has_value:
+ * @self: a `CcNumberList`
+ * @value: a value
+ * @position: (out) (optional): the first position of @value, if it was found
+ *
+ * Looks up the given @value in the list. If the value is not found, @position
+ * will not be set and the return value will be false.
+ *
+ * Returns: true if the list contains @value, false otherwise
+ */
 gboolean
 cc_number_list_has_value (CcNumberList *self,
                           int           value,

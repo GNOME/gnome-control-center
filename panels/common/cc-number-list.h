@@ -24,6 +24,16 @@
 
 G_BEGIN_DECLS
 
+
+/**
+ * CcNumberOrder:
+ * @CC_NUMBER_ORDER_FIRST: place number first in the list
+ * @CC_NUMBER_ORDER_DEFAULT: use the `sort-type` of the list
+ * @CC_NUMBER_ORDER_LAST: place number last in the list
+ *
+ * Defines a special, fixed ordering of a `CcNumberObject` inside a
+ * `CcNumberList`.
+ */
 typedef enum
 {
   CC_NUMBER_ORDER_FIRST,
