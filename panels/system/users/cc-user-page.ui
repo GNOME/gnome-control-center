@@ -210,10 +210,7 @@
     </property>
   </template>
 
-  <object class="AdwMessageDialog" id="remove_local_user_dialog">
-    <property name="modal">True</property>
-    <property name="hide-on-close">True</property>
-    <property name="destroy_with_parent">True</property>
+  <object class="AdwAlertDialog" id="remove_local_user_dialog">
     <property name="body" translatable="yes">The user will not be able to use this device once their account has been removed</property>
     <property name="default-response">cancel</property>
     <property name="close-response">cancel</property>

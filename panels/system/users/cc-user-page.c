@@ -74,7 +74,7 @@ struct _CcUserPage {
     CcPermissionInfobar *permission_infobar;
     AdwSwitchRow        *remove_local_files_choice;
     GtkWidget           *remove_user_button;
-    AdwMessageDialog    *remove_local_user_dialog;
+    AdwAlertDialog      *remove_local_user_dialog;
 
     ActUser              *user;
     GSettings            *login_screen_settings;
@@ -401,8 +401,7 @@ delete_user_done (ActUserManager *manager,
 
 static void
 remove_local_user_response (CcUserPage       *self,
-                            gchar            *response,
-                            AdwMessageDialog *dialog)
+                            gchar            *response)
 {
     gboolean remove_files;
 
@@ -432,13 +431,9 @@ remove_local_user_response (CcUserPage       *self,
 static void
 remove_user (CcUserPage *self)
 {
-    GtkWindow *parent;
-
     // TODO: Handle enterprise accounts
-    parent = GTK_WINDOW (gtk_widget_get_native (GTK_WIDGET (self)));
-    gtk_window_set_transient_for (GTK_WINDOW (self->remove_local_user_dialog), parent);
-    adw_message_dialog_format_heading (self->remove_local_user_dialog, _("Remove %s?"), get_real_or_user_name (self->user));
-    gtk_window_present (GTK_WINDOW (self->remove_local_user_dialog));
+    adw_alert_dialog_format_heading (self->remove_local_user_dialog, _("Remove %s?"), get_real_or_user_name (self->user));
+    adw_dialog_present (ADW_DIALOG (self->remove_local_user_dialog), GTK_WIDGET (self));
 }
 
 static void
