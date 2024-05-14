@@ -515,7 +515,11 @@ cc_keyboard_shortcut_dialog_finalize (GObject *object)
   g_clear_pointer (&self->search_terms, g_strfreev);
   g_clear_object (&self->sections);
   g_clear_object (&self->filtered_shortcuts);
-  g_clear_pointer ((GtkWindow**)&self->shortcut_editor, gtk_window_destroy);
+
+  if (self->shortcut_editor != NULL) {
+    gtk_window_destroy (GTK_WINDOW (self->shortcut_editor));
+    self->shortcut_editor = NULL;
+  }
 
   G_OBJECT_CLASS (cc_keyboard_shortcut_dialog_parent_class)->finalize (object);
 }

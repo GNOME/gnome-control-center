@@ -204,8 +204,14 @@ cc_volume_slider_dispose (GObject *object)
 {
   CcVolumeSlider *self = CC_VOLUME_SLIDER (object);
 
-  g_clear_pointer ((GtkWidget **) &self->volume_scale, gtk_widget_unparent);
-  g_clear_pointer ((GtkWidget **) &self->mute_button, gtk_widget_unparent);
+  if (self->volume_scale != NULL) {
+    gtk_widget_unparent (GTK_WIDGET (self->volume_scale));
+    self->volume_scale = NULL;
+  }
+  if (self->mute_button != NULL) {
+    gtk_widget_unparent (GTK_WIDGET (self->mute_button));
+    self->mute_button = NULL;
+  }
 
   g_clear_object (&self->mixer_control);
   g_clear_object (&self->stream);

@@ -1848,7 +1848,11 @@ cc_color_panel_dispose (GObject *object)
   g_clear_object (&self->list_box_size);
   g_clear_pointer (&self->sensors, g_ptr_array_unref);
   g_clear_pointer (&self->list_box_filter, g_free);
-  g_clear_pointer ((GtkWindow **)&self->dialog_assign, gtk_window_destroy);
+
+  if (self->dialog_assign != NULL) {
+    gtk_window_destroy (GTK_WINDOW (self->dialog_assign));
+    self->dialog_assign = NULL;
+  }
 
   G_OBJECT_CLASS (cc_color_panel_parent_class)->dispose (object);
 }

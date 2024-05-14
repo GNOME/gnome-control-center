@@ -936,7 +936,11 @@ cc_bolt_page_dispose (GObject *object)
 
   /* Must be destroyed in dispose, not finalize. */
   cc_bolt_device_dialog_set_device (self->device_dialog, NULL, NULL);
-  g_clear_pointer ((GtkWindow **) &self->device_dialog, gtk_window_destroy);
+
+  if (self->device_dialog != NULL) {
+    gtk_window_destroy (GTK_WINDOW (self->device_dialog));
+    self->device_dialog = NULL;
+  }
 
   G_OBJECT_CLASS (cc_bolt_page_parent_class)->dispose (object);
 }
