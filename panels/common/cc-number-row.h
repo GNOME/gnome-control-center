@@ -47,6 +47,7 @@ typedef enum
  * @CC_NUMBER_VALUE_SECONDS: interpret the value as a number of seconds
  * @CC_NUMBER_VALUE_MINUTES: interpret the value as a number of minutes
  * @CC_NUMBER_VALUE_HOURS: interpret the value as a number of hours
+ * @CC_NUMBER_VALUE_DAYS: interpret the value as a number of days
  *
  * Defines how a `CcNumberRow` interprets a value in order to map it to
  * a string in the list.
@@ -57,7 +58,8 @@ typedef enum
   CC_NUMBER_VALUE_STRING,
   CC_NUMBER_VALUE_SECONDS,
   CC_NUMBER_VALUE_MINUTES,
-  CC_NUMBER_VALUE_HOURS
+  CC_NUMBER_VALUE_HOURS,
+  CC_NUMBER_VALUE_DAYS
 } CcNumberValueType;
 
 /**

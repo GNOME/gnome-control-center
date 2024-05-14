@@ -24,6 +24,7 @@
 #include "cc-number-row.h"
 #include "cc-number-row-enums.h"
 #include "cc-util.h"
+#include "config.h"
 
 /**
  * CcNumberObject:
@@ -270,6 +271,16 @@ cc_number_object_to_string_for_hours (CcNumberObject *self)
     return cc_util_time_to_string_text ((gint64) MILLIS_PER_HOUR * self->value);
 }
 
+static char *
+cc_number_object_to_string_for_days (CcNumberObject *self)
+{
+    if (self->string)
+        return g_strdup (self->string);
+
+    return g_strdup_printf (g_dngettext (GETTEXT_PACKAGE, "%d day", "%d days", self->value),
+                            self->value);
+}
+
 /**
  * CcNumberRow:
  *
@@ -397,6 +408,9 @@ cc_number_row_constructed (GObject *obj)
             break;
         case CC_NUMBER_VALUE_HOURS:
             number_to_string_func = cc_number_object_to_string_for_hours;
+            break;
+        case CC_NUMBER_VALUE_DAYS:
+            number_to_string_func = cc_number_object_to_string_for_days;
             break;
         default:
             g_assert_not_reached ();
