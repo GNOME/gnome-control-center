@@ -22,17 +22,17 @@
                   </object>
                 </child>
                 <child>
-                  <object class="AdwComboRow" id="retain_history_combo">
+                  <object class="CcNumberRow" id="retain_history_row">
                     <property name="title" translatable="yes">File _History Duration</property>
                     <property name="use-underline">true</property>
-                    <signal name="notify::selected-item" handler="retain_history_combo_changed_cb"/>
-                    <property name="model">
-                      <object class="AdwEnumListModel">
-                        <property name="enum-type">CcUsagePageRetainHistory</property>
+                    <property name="values">[1, 7, 30]</property>
+                    <property name="value-type">days</property>
+                    <property name="special-value">
+                      <object class="CcNumberObject">
+                        <property name="value">-1</property>
+                        <property name="string" translatable="yes" comments="Translators: Option for File History Duration in File History group">Forever</property>
+                        <property name="order">last</property>
                       </object>
-                    </property>
-                    <property name="expression">
-                      <closure type="gchararray" function="retain_history_name_cb"/>
                     </property>
                   </object>
                 </child>
@@ -70,17 +70,16 @@
                   </object>
                 </child>
                 <child>
-                  <object class="AdwComboRow" id="purge_after_combo">
+                  <object class="CcNumberRow" id="purge_after_row">
                     <property name="title" translatable="yes">Automatic Deletion _Period</property>
                     <property name="use-underline">true</property>
-                    <signal name="notify::selected-item" handler="purge_after_combo_changed_cb"/>
-                    <property name="model">
-                      <object class="AdwEnumListModel">
-                        <property name="enum-type">CcUsagePagePurgeAfter</property>
+                    <property name="values">[1, 2, 3, 4, 5, 6, 7, 14, 30]</property>
+                    <property name="value-type">days</property>
+                    <property name="special-value">
+                      <object class="CcNumberObject">
+                        <property name="value">0</property>
+                        <property name="string" translatable="yes" comments="Translators: Option for Automatically Delete Period in Trash and Temporary Files group">1 hour</property>
                       </object>
-                    </property>
-                    <property name="expression">
-                      <closure type="gchararray" function="purge_after_name_cb"/>
                     </property>
                   </object>
                 </child>

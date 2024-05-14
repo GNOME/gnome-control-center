@@ -50,11 +50,6 @@ if host_is_linux_not_s390
   )
 endif
 
-sources += gnome.mkenums_simple(
-  'cc-usage-page-enums',
-  sources: ['usage/cc-usage-page.h'],
-)
-
 sources += gnome.compile_resources(
   'cc-' + cappletname + '-resources',
   cappletname + '.gresource.xml',
