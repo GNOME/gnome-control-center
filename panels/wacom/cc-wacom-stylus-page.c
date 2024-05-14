@@ -139,7 +139,7 @@ set_feel_from_gsettings (GtkAdjustment *adjustment, GSettings *settings, const g
 	 * what points that value would produce and if they match - hooray!
 	 */
 	for (i = 0; i < 4; i++) {
-		double val;
+		double val = -1;
 
 		switch (i) {
 		case 0:
