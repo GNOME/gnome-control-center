@@ -1298,12 +1298,12 @@ cc_wwan_device_dup_network_type_string (CcWwanDevice *self)
 gchar *
 cc_wwan_device_dup_signal_string (CcWwanDevice *self)
 {
-  MMModemSignal *modem_signal;
+  MMModemSignal *modem_signal = NULL;
   MMSignal *signal;
   GString *str;
   gdouble value;
   gboolean recent;
-  guint refresh_rate;
+  guint refresh_rate = 0;
 
   g_return_val_if_fail (CC_IS_WWAN_DEVICE (self), NULL);
 
