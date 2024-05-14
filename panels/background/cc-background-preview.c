@@ -275,7 +275,7 @@ void
 cc_background_preview_set_item (CcBackgroundPreview *self,
                                 CcBackgroundItem    *item)
 {
-  g_autoptr(CcBackgroundPaintable) paintable;
+  g_autoptr(CcBackgroundPaintable) paintable = NULL;
   CcBackgroundPaintFlags paint_flags;
 
   g_return_if_fail (CC_IS_BACKGROUND_PREVIEW (self));
