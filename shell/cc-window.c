@@ -50,7 +50,7 @@ struct _CcWindow
 {
   AdwApplicationWindow parent;
 
-  AdwMessageDialog  *development_warning_dialog;
+  AdwDialog         *development_warning_dialog;
   AdwNavigationSplitView *split_view;
   CcPanelList       *panel_list;
   GtkSearchBar      *search_bar;
@@ -506,7 +506,7 @@ on_development_warning_dialog_responded_cb (CcWindow *self)
   g_debug ("Disabling development build warning dialog");
   g_settings_set_boolean (self->settings, "show-development-warning", FALSE);
 
-  gtk_window_close (GTK_WINDOW (self->development_warning_dialog));
+  adw_dialog_close (self->development_warning_dialog);
 }
 
 /* CcShell implementation */
@@ -547,7 +547,7 @@ cc_window_map (GtkWidget *widget)
 
   /* Show a warning for Flatpak builds */
   if (in_flatpak_sandbox () && g_settings_get_boolean (self->settings, "show-development-warning"))
-    gtk_window_present (GTK_WINDOW (self->development_warning_dialog));
+    adw_dialog_present (self->development_warning_dialog, GTK_WIDGET (self));
 }
 
 static void
