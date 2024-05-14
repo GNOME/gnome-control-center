@@ -112,6 +112,22 @@ on_copy_personal_file_sharing_address_clicked (CcSharingPanel *self)
 }
 
 static void
+on_public_folder_row_clicked (CcSharingPanel *self)
+{
+  GtkWidget *toplevel;
+  g_autoptr(GFile) file = NULL;
+  g_autoptr(GtkFileLauncher) launcher = NULL;
+  const char *public_folder_uri;
+
+  public_folder_uri = g_get_user_special_dir (G_USER_DIRECTORY_PUBLIC_SHARE);
+  file = g_file_new_for_path (public_folder_uri);
+  launcher = gtk_file_launcher_new (file);
+  toplevel = GTK_WIDGET (gtk_widget_get_root (GTK_WIDGET (self)));
+
+  gtk_file_launcher_launch (launcher, GTK_WINDOW (toplevel), NULL, NULL, NULL);
+}
+
+static void
 cc_sharing_panel_class_init (CcSharingPanelClass *klass)
 {
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
@@ -142,6 +158,7 @@ cc_sharing_panel_class_init (CcSharingPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, shared_folders_listbox);
 
   gtk_widget_class_bind_template_callback (widget_class, on_copy_personal_file_sharing_address_clicked);
+  gtk_widget_class_bind_template_callback (widget_class, on_public_folder_row_clicked);
 
   g_type_ensure (CC_TYPE_LIST_ROW);
   g_type_ensure (CC_TYPE_HOSTNAME_ENTRY);

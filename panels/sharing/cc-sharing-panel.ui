@@ -98,6 +98,18 @@
                 <child>
                   <object class="AdwPreferencesGroup">
                     <child>
+                      <object class="AdwButtonRow">
+                        <property name="title" translatable="yes">_Open Public Folder</property>
+                        <property name="end-icon-name">adw-external-link-symbolic</property>
+                        <property name="use-underline">True</property>
+                        <signal name="activated" handler="on_public_folder_row_clicked" object="CcSharingPanel" swapped="yes"/>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+                <child>
+                  <object class="AdwPreferencesGroup">
+                    <child>
                       <object class="AdwActionRow">
                         <property name="title" translatable="yes">_Require Password</property>
                         <property name="use_underline">True</property>
