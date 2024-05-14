@@ -28,7 +28,7 @@
 #include "gsd-sharing-enums.h"
 
 struct _CcSharingNetworks {
-  GtkBox parent_instance;
+  AdwPreferencesGroup parent_instance;
 
   GtkWidget *listbox;
 
@@ -46,7 +46,7 @@ struct _CcSharingNetworks {
 };
 
 
-G_DEFINE_TYPE (CcSharingNetworks, cc_sharing_networks, GTK_TYPE_BOX)
+G_DEFINE_TYPE (CcSharingNetworks, cc_sharing_networks, ADW_TYPE_PREFERENCES_GROUP)
 
 enum {
   PROP_0,

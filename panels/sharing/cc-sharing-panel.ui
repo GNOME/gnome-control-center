@@ -124,16 +124,6 @@ It may still be possible for devices on this network to see what content is bein
                     </child>
                   </object>
                 </child>
-                <child>
-                  <object class="AdwPreferencesGroup">
-                    <property name="title" translatable="yes">Networks</property>
-                    <child>
-                      <object class="GtkBox" id="personal_file_sharing_vbox">
-                        <property name="orientation">vertical</property>
-                      </object>
-                    </child>
-                  </object>
-                </child>
               </object>
             </property>
           </object>
@@ -152,7 +142,7 @@ It may still be possible for devices on this network to see what content is bein
           <object class="AdwHeaderBar"/>
         </child>
         <property name="content">
-          <object class="AdwPreferencesPage">
+          <object class="AdwPreferencesPage" id="media_sharing_page">
             <child>
               <object class="AdwPreferencesGroup">
                 <child>
@@ -178,16 +168,6 @@ It may still be possible for devices on this network to see what content is bein
                     <style>
                       <class name="boxed-list" />
                     </style>
-                  </object>
-                </child>
-              </object>
-            </child>
-            <child>
-              <object class="AdwPreferencesGroup">
-                <property name="title" translatable="yes">Networks</property>
-                <child>
-                  <object class="GtkBox" id="media_sharing_vbox">
-                    <property name="orientation">vertical</property>
                   </object>
                 </child>
               </object>

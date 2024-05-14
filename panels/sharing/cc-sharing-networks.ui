@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
-  <template class="CcSharingNetworks" parent="GtkBox">
-    <property name="orientation">vertical</property>
+  <template class="CcSharingNetworks" parent="AdwPreferencesGroup">
+    <property name="title" translatable="yes">Networks</property>
     <child>
       <object class="GtkListBox" id="listbox">
-        <property name="hexpand">True</property>
         <property name="selection-mode">none</property>
+        <accessibility>
+          <relation name="labelled-by">CcSharingNetworks</relation>
+        </accessibility>
         <style>
           <class name="boxed-list"/>
         </style>
