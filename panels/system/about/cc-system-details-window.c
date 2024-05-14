@@ -44,6 +44,7 @@
 #ifdef GDK_WINDOWING_X11
 #include <gdk/x11/gdkx.h>
 #endif
+#include <locale.h>
 
 #include "cc-system-details-window.h"
 #include "cc-hostname.h"
@@ -676,8 +677,12 @@ on_copy_button_clicked_cb (GtkWidget              *widget,
   g_autofree char *kernel_version_text = NULL;
   g_autofree GSList *graphics_hardware_list, *l;
   g_autofree gchar *disk_capacity_string = NULL;
-  
   g_autoptr (GString) result_str;
+  locale_t untranslated_locale;
+
+  /* Don't use translations for the copied content */
+  untranslated_locale = newlocale (LC_ALL_MASK, "C", (locale_t) 0);
+  uselocale (untranslated_locale);
 
   result_str = g_string_new (NULL);
 
@@ -776,6 +781,11 @@ on_copy_button_clicked_cb (GtkWidget              *widget,
   display = gdk_display_get_default ();
   clip_board = gdk_display_get_clipboard (display);
   gdk_clipboard_set_text (clip_board, result_str->str);
+
+  /* Reset to the user's original locale. */
+  uselocale (LC_GLOBAL_LOCALE);
+  freelocale (untranslated_locale);
+
   adw_toast_overlay_add_toast (self->toast_overlay, adw_toast_new (_("Details copied to clipboard")));
 }
 
