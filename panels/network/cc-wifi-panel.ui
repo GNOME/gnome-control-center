@@ -148,7 +148,7 @@
                                     <property name="halign">center</property>
                                     <property name="margin-top">12</property>
                                     <property name="label" translatable="yes">Turn Off Hotspot…</property>
-                                    <signal name="clicked" handler="hotspot_stop_clicked_cb" swapped="yes"/>
+                                    <signal name="clicked" handler="adw_dialog_present" object="stop_hotspot_dialog"/>
                                     <style>
                                       <class name="destructive-action"/>
                                     </style>
@@ -220,4 +220,15 @@
       </object>
     </property>
   </template>
+  <object class="AdwAlertDialog" id="stop_hotspot_dialog">
+    <property name="heading" translatable="yes">Turn Off Hotspot?</property>
+    <property name="body" translatable="yes">Turning off will disconnect any devices that are using the hotspot.</property>
+    <property name="default-response">cancel</property>
+    <property name="close-response">cancel</property>
+    <signal name="response::turn-off" handler="on_stop_hotspot_dialog_response_cb" object="CcWifiPanel" swapped="yes"/>
+    <responses>
+      <response id="cancel" translatable="yes">_Cancel</response>
+      <response id="turn-off" translatable="yes" appearance="destructive">_Turn Off</response>
+    </responses>
+  </object>
 </interface>
