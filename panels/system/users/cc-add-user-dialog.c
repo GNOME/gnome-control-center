@@ -81,22 +81,23 @@ show_error_dialog (CcAddUserDialog *self,
                    const gchar     *message,
                    GError          *error)
 {
-        GtkWidget *dialog;
+        AdwDialog *dialog;
 
-        dialog = gtk_message_dialog_new (GTK_WINDOW (self),
-                                         GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT | GTK_DIALOG_USE_HEADER_BAR,
-                                         GTK_MESSAGE_ERROR,
-                                         GTK_BUTTONS_CLOSE,
-                                         "%s", message);
+        dialog = adw_alert_dialog_new (message, NULL);
 
         if (error != NULL) {
                 g_dbus_error_strip_remote_error (error);
-                gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
-                                                          "%s", error->message);
+                adw_alert_dialog_format_body (ADW_ALERT_DIALOG (dialog), error->message);
         }
 
-        g_signal_connect (dialog, "response", G_CALLBACK (gtk_window_destroy), NULL);
-        gtk_window_present (GTK_WINDOW (dialog));
+        adw_alert_dialog_add_responses (ADW_ALERT_DIALOG (dialog),
+                                        "ok",  _("_OK"),
+                                        NULL);
+
+        adw_alert_dialog_set_default_response (ADW_ALERT_DIALOG (dialog),
+                                               "ok");
+
+        adw_dialog_present (dialog, GTK_WIDGET (self));
 }
 
 static void
