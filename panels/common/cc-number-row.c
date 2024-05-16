@@ -623,3 +623,91 @@ cc_number_row_has_value (CcNumberRow *self,
                                                    (GEqualFuncFull) equal_numbers, &value,
                                                    position);
 }
+
+static gboolean
+number_row_settings_get_mapping (GValue   *position_value,
+                                 GVariant *key_variant,
+                                 gpointer  user_data)
+{
+    CcNumberRow *self = CC_NUMBER_ROW (user_data);
+    int value;
+    guint position = 0;
+
+    if (g_variant_is_of_type (key_variant, G_VARIANT_TYPE_UINT32))
+        if (g_variant_get_uint32 (key_variant) <= INT_MAX) {
+            value = g_variant_get_uint32 (key_variant);
+        } else {
+            g_warning ("Unsigned GSettings value out of range for CcNumberRow");
+            position = GTK_INVALID_LIST_POSITION;
+        }
+    else
+        value = g_variant_get_int32 (key_variant);
+
+    if (position != GTK_INVALID_LIST_POSITION)
+        if (!cc_number_row_has_value (self, value, &position))
+            position = cc_number_row_add_value (self, value);
+
+    /* Always set position succesfully, even if invalid, otherwise GSettings will try to map
+       default values */
+    g_value_set_uint (position_value, position);
+
+    return TRUE;
+}
+
+static GVariant *
+number_row_settings_set_mapping (const GValue       *position_value,
+                                 const GVariantType *key_variant_type,
+                                 gpointer            user_data)
+{
+    CcNumberRow *self = CC_NUMBER_ROW (user_data);
+    guint position;
+    int value;
+    GVariant *key_variant = NULL;
+
+    position = g_value_get_uint (position_value);
+    g_return_val_if_fail (position != GTK_INVALID_LIST_POSITION, NULL);
+
+    value = cc_number_row_get_value (self, position);
+    if (g_variant_type_equal (key_variant_type, G_VARIANT_TYPE_UINT32))
+        if (value >= 0)
+            key_variant = g_variant_new_uint32 (value);
+        else
+            g_warning ("Negative CcNumberRow value out of range for unsigned GSettings value");
+    else
+        key_variant = g_variant_new_int32 (value);
+
+    return key_variant;
+}
+
+/**
+ * cc_number_row_bind_settings:
+ * @self: a `CcNumberRow`
+ * @settings: a `GSettings` object
+ * @key: the key to bind
+ *
+ * Creates a binding between the @key in the @settings object, and the
+ * selected value of @self. The value type of @key must be an (unsigned)
+ * integer.
+ *
+ * If the value of @key does not exist yet in the the list of @self, it
+ * will be added.
+ */
+void
+cc_number_row_bind_settings (CcNumberRow *self,
+                             GSettings   *settings,
+                             const gchar *key)
+{
+    g_autoptr(GVariant) key_variant = NULL;
+
+    g_return_if_fail (CC_IS_NUMBER_ROW (self));
+    g_return_if_fail (G_IS_SETTINGS (settings));
+
+    /* Make sure the key has uint or int value type, otherwise it can't map to a CcNumberRow */
+    key_variant = g_settings_get_value (settings, key);
+    g_return_if_fail (g_variant_is_of_type (key_variant, G_VARIANT_TYPE_UINT32) ||
+                      g_variant_is_of_type (key_variant, G_VARIANT_TYPE_INT32));
+
+    g_settings_bind_with_mapping (settings, key, self, "selected", G_SETTINGS_BIND_DEFAULT,
+                                  number_row_settings_get_mapping, number_row_settings_set_mapping,
+                                  self, NULL);
+}
