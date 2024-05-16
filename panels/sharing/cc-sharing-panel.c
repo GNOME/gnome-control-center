@@ -51,6 +51,7 @@ struct _CcSharingPanel
 {
   CcPanel parent_instance;
 
+  GtkWindow *toplevel;
   GtkWidget *hostname_entry;
   GtkWidget *main_list_box;
   AdwDialog *media_sharing_dialog;
@@ -114,7 +115,6 @@ on_copy_personal_file_sharing_address_clicked (CcSharingPanel *self)
 static void
 on_public_folder_row_clicked (CcSharingPanel *self)
 {
-  GtkWidget *toplevel;
   g_autoptr(GFile) file = NULL;
   g_autoptr(GtkFileLauncher) launcher = NULL;
   const char *public_folder_uri;
@@ -122,9 +122,8 @@ on_public_folder_row_clicked (CcSharingPanel *self)
   public_folder_uri = g_get_user_special_dir (G_USER_DIRECTORY_PUBLIC_SHARE);
   file = g_file_new_for_path (public_folder_uri);
   launcher = gtk_file_launcher_new (file);
-  toplevel = GTK_WIDGET (gtk_widget_get_root (GTK_WIDGET (self)));
 
-  gtk_file_launcher_launch (launcher, GTK_WINDOW (toplevel), NULL, NULL, NULL);
+  gtk_file_launcher_launch (launcher, self->toplevel, NULL, NULL, NULL);
 }
 
 static void
@@ -265,13 +264,12 @@ cc_sharing_panel_add_folder (CcSharingPanel *self,
                              GtkListBoxRow  *row)
 {
   GtkWidget *dialog;
-  GtkWidget *toplevel = GTK_WIDGET (gtk_widget_get_root (GTK_WIDGET (self)));
 
   if (!GPOINTER_TO_INT (g_object_get_data (G_OBJECT (row), "is-add")))
     return;
 
   dialog = gtk_file_chooser_dialog_new (_("Choose a Folder"),
-                                        GTK_WINDOW (toplevel),
+                                        self->toplevel,
                                         GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER,
                                         _("_Cancel"), GTK_RESPONSE_CANCEL,
                                         _("_Open"), GTK_RESPONSE_ACCEPT,
@@ -649,6 +647,8 @@ cc_sharing_panel_init (CcSharingPanel *self)
   g_resources_register (cc_sharing_get_resource ());
 
   gtk_widget_init_template (GTK_WIDGET (self));
+
+  self->toplevel = GTK_WINDOW (gtk_widget_get_root (GTK_WIDGET (self)));
 
   gsd_sharing_proxy_new_for_bus (G_BUS_TYPE_SESSION,
                                  G_DBUS_PROXY_FLAGS_NONE,
