@@ -112,13 +112,25 @@
                       </object>
                     </child>
                     <child>
-                      <object class="AdwSwitchRow" id="auto_login_row">
+                      <object class="AdwActionRow" id="auto_login_row">
                         <property name="title" translatable="yes">A_utomatic Login</property>
                         <property name="use-underline">True</property>
+                        <property name="activatable-widget">auto_login_switch</property>
                         <property name="sensitive" bind-source="CcUserPage" bind-property="locked" bind-flags="invert-boolean"/>
                         <property name="has-tooltip" bind-source="CcUserPage" bind-property="locked" bind-flags="sync-create"/>
                         <property name="tooltip-text" translatable="yes">Unlock to Change This Setting</property>
-                        <signal name="notify::active" handler="autologin_changed" object="CcUserPage" swapped="yes"/>
+                        <child type="suffix">
+                          <object class="CcListRowInfoButton">
+                            <property name="valign">center</property>
+                            <property name="text" translatable="yes">Automatic login opens the user account when the device starts, without requiring authentication. Authentication is still required at other times, such as when unlocking the screen.</property>
+                          </object>
+                        </child>
+                        <child type="suffix">
+                          <object class="GtkSwitch" id="auto_login_switch">
+                            <property name="valign">center</property>
+                            <signal name="notify::active" handler="autologin_changed" object="CcUserPage" swapped="yes"/>
+                          </object>
+                        </child>
                       </object>
                     </child>
 
