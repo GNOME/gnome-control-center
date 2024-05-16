@@ -214,7 +214,7 @@
     <property name="body" translatable="yes">The user will not be able to use this device once their account has been removed</property>
     <property name="default-response">cancel</property>
     <property name="close-response">cancel</property>
-    <signal name="response" handler="remove_local_user_response" object="CcUserPage" swapped="yes"/>
+    <signal name="response::remove" handler="remove_local_user_response" object="CcUserPage" swapped="yes"/>
     <responses>
       <response id="cancel" translatable="yes">_Cancel</response>
       <response id="remove" translatable="yes" appearance="destructive">_Remove</response>

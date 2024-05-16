@@ -400,16 +400,11 @@ delete_user_done (ActUserManager *manager,
 }
 
 static void
-remove_local_user_response (CcUserPage       *self,
-                            gchar            *response)
+remove_local_user_response (CcUserPage *self)
 {
     gboolean remove_files;
 
     g_assert (ADW_IS_SWITCH_ROW (self->remove_local_files_choice));
-
-    if (g_strcmp0 (response, "cancel") == 0) {
-        return;
-    }
 
     /* remove autologin */
     if (act_user_get_automatic_login (self->user)) {
