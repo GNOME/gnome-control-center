@@ -97,12 +97,13 @@
                     <property name="margin-top">12</property>
                     <property name="spacing">12</property>
                     <child>
-                      <object class="GtkButton" id="purge_trash_button">
+                      <object class="GtkButton">
                         <property name="halign">end</property>
                         <property name="valign">center</property>
                         <property name="label" translatable="yes">_Empty Trash…</property>
                         <property name="can-shrink">True</property>
                         <property name="use-underline">true</property>
+                        <signal name="clicked" handler="adw_dialog_present" object="empty_trash_dialog"/>
                         <style>
                           <class name="destructive-action"/>
                         </style>
@@ -138,6 +139,17 @@
     <responses>
       <response id="cancel" translatable="yes">_Cancel</response>
       <response id="clear-history" translatable="yes" appearance="destructive">Clear _History</response>
+    </responses>
+  </object>
+  <object class="AdwAlertDialog" id="empty_trash_dialog">
+    <property name="heading" translatable="yes">Empty all items from Trash?</property>
+    <property name="body" translatable="yes">All items in the Trash will be permanently deleted.</property>
+    <property name="default-response">cancel</property>
+    <property name="close-response">cancel</property>
+    <signal name="response::empty-trash" handler="on_empty_trash_response_cb"/>
+    <responses>
+      <response id="cancel" translatable="yes">_Cancel</response>
+      <response id="empty-trash" translatable="yes" appearance="destructive">_Empty Trash</response>
     </responses>
   </object>
 </interface>
