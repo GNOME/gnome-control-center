@@ -38,8 +38,8 @@ struct _CcUsagePage
   AdwSwitchRow   *purge_trash_row;
   AdwDialog      *empty_trash_dialog;
   AdwSwitchRow   *purge_temp_row;
+  AdwDialog   *delete_temp_files_dialog;
   AdwComboRow *purge_after_combo;
-  GtkButton   *purge_temp_button;
 };
 
 G_DEFINE_TYPE (CcUsagePage, cc_usage_page, ADW_TYPE_NAVIGATION_PAGE)
@@ -162,14 +162,9 @@ on_empty_trash_response_cb (void)
 }
 
 static void
-on_purge_temp_warning_response_cb (GtkDialog   *dialog,
-                                   gint         response,
-                                   CcUsagePage *self)
+on_purge_temp_response_cb (void)
 {
   g_autoptr(GDBusConnection) bus = NULL;
-
-  if (response != GTK_RESPONSE_OK)
-    goto out;
 
   bus = g_bus_get_sync (G_BUS_TYPE_SESSION, NULL, NULL);
   g_dbus_connection_call (bus,
@@ -178,25 +173,6 @@ on_purge_temp_warning_response_cb (GtkDialog   *dialog,
                           "org.gnome.SettingsDaemon.Housekeeping",
                           "RemoveTempFiles",
                           NULL, NULL, 0, -1, NULL, NULL, NULL);
-
-out:
-  gtk_window_destroy (GTK_WINDOW (dialog));
-}
-static void
-purge_temp (CcUsagePage *self)
-{
-  GtkDialog *dialog;
-
-  dialog = run_warning (self,
-                        _("Delete all the temporary files?"),
-                        _("All the temporary files will be permanently deleted."),
-                        _("_Purge Temporary Files"));
-
-  g_signal_connect_object (dialog,
-                           "response",
-                           G_CALLBACK (on_purge_temp_warning_response_cb),
-                           self,
-                           0);
 }
 
 static void
@@ -293,8 +269,6 @@ cc_usage_page_init (CcUsagePage *self)
                    G_SETTINGS_BIND_DEFAULT);
 
   set_purge_after_value_for_combo (self->purge_after_combo, self);
-
-  g_signal_connect_object (self->purge_temp_button, "clicked", G_CALLBACK (purge_temp), self, G_CONNECT_SWAPPED);
 }
 
 static void
@@ -315,15 +289,17 @@ cc_usage_page_class_init (CcUsagePageClass *klass)
 
   gtk_widget_class_bind_template_child (widget_class, CcUsagePage, purge_after_combo);
   gtk_widget_class_bind_template_child (widget_class, CcUsagePage, clear_file_history_dialog);
+  gtk_widget_class_bind_template_child (widget_class, CcUsagePage, delete_temp_files_dialog);
   gtk_widget_class_bind_template_child (widget_class, CcUsagePage, purge_temp_row);
   gtk_widget_class_bind_template_child (widget_class, CcUsagePage, empty_trash_dialog);
   gtk_widget_class_bind_template_child (widget_class, CcUsagePage, purge_trash_row);
-  gtk_widget_class_bind_template_child (widget_class, CcUsagePage, purge_temp_button);
   gtk_widget_class_bind_template_child (widget_class, CcUsagePage, recently_used_row);
   gtk_widget_class_bind_template_child (widget_class, CcUsagePage, retain_history_combo);
 
+
   gtk_widget_class_bind_template_callback (widget_class, on_clear_history_response_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_empty_trash_response_cb);
+  gtk_widget_class_bind_template_callback (widget_class, on_purge_temp_response_cb);
   gtk_widget_class_bind_template_callback (widget_class, retain_history_name_cb);
   gtk_widget_class_bind_template_callback (widget_class, retain_history_combo_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, purge_after_name_cb);

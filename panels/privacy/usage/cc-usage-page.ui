@@ -110,12 +110,13 @@
                       </object>
                     </child>
                     <child>
-                      <object class="GtkButton" id="purge_temp_button">
+                      <object class="GtkButton">
                         <property name="halign">end</property>
                         <property name="valign">center</property>
                         <property name="label" translatable="yes">_Delete Temporary Files…</property>
                         <property name="can-shrink">True</property>
                         <property name="use-underline">true</property>
+                        <signal name="clicked" handler="adw_dialog_present" object="delete_temp_files_dialog"/>
                           <style>
                             <class name="destructive-action"/>
                           </style>
@@ -150,6 +151,17 @@
     <responses>
       <response id="cancel" translatable="yes">_Cancel</response>
       <response id="empty-trash" translatable="yes" appearance="destructive">_Empty Trash</response>
+    </responses>
+  </object>
+  <object class="AdwAlertDialog" id="delete_temp_files_dialog">
+    <property name="heading" translatable="yes">Delete all the temporary files?</property>
+    <property name="body" translatable="yes">All the temporary files will be permanently deleted.</property>
+    <property name="default-response">cancel</property>
+    <property name="close-response">cancel</property>
+    <signal name="response::purge-temp" handler="on_purge_temp_response_cb"/>
+    <responses>
+      <response id="cancel" translatable="yes">_Cancel</response>
+      <response id="purge-temp" translatable="yes" appearance="destructive">_Purge Temporary Files</response>
     </responses>
   </object>
 </interface>
