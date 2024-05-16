@@ -113,40 +113,6 @@ set_purge_after_value_for_combo (AdwComboRow *combo_row,
                               adw_enum_list_model_find_position (model, value));
 }
 
-static GtkDialog *
-run_warning (CcUsagePage *self,
-             const gchar *prompt,
-             const gchar *text,
-             const gchar *button_title)
-{
-  GtkWindow *parent = NULL;
-  GtkWidget *dialog;
-  GtkWidget *button;
-
-  parent = GTK_WINDOW (gtk_widget_get_root (GTK_WIDGET (self)));
-
-  dialog = gtk_message_dialog_new (parent,
-                                   GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
-                                   GTK_MESSAGE_WARNING,
-                                   GTK_BUTTONS_NONE,
-                                   NULL);
-  g_object_set (dialog,
-                "text", prompt,
-                "secondary-text", text,
-                NULL);
-  gtk_dialog_add_button (GTK_DIALOG (dialog), _("_Cancel"), GTK_RESPONSE_CANCEL);
-  gtk_dialog_add_button (GTK_DIALOG (dialog), button_title, GTK_RESPONSE_OK);
-
-  gtk_dialog_set_default_response (GTK_DIALOG (dialog), FALSE);
-
-  button = gtk_dialog_get_widget_for_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
-  gtk_widget_add_css_class (button, "destructive-action");
-
-  gtk_window_present (GTK_WINDOW (dialog));
-
-  return GTK_DIALOG (dialog);
-}
-
 static void
 on_empty_trash_response_cb (void)
 {
