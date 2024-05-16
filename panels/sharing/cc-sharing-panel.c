@@ -682,3 +682,4 @@ cc_sharing_panel_static_init_func (void)
                                        visible ? CC_PANEL_VISIBLE : CC_PANEL_HIDDEN);
   g_debug ("Sharing panel visible: %s", visible ? "yes" : "no");
 }
+
