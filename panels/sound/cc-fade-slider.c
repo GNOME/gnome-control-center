@@ -71,7 +71,7 @@ cc_fade_slider_dispose (GObject *object)
 {
   CcFadeSlider *self = CC_FADE_SLIDER (object);
 
-  g_clear_pointer (&self->scale, gtk_widget_unparent);
+  gtk_widget_dispose_template (GTK_WIDGET (self), CC_TYPE_FADE_SLIDER);
 
   g_clear_object (&self->channel_map);
 

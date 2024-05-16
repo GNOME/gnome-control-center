@@ -94,7 +94,7 @@ cc_list_row_info_button_dispose (GObject *object)
 {
   CcListRowInfoButton *self = CC_LIST_ROW_INFO_BUTTON (object);
 
-  g_clear_pointer (&self->button, gtk_widget_unparent);
+  gtk_widget_dispose_template (GTK_WIDGET (self), CC_TYPE_LIST_ROW_INFO_BUTTON);
 
   G_OBJECT_CLASS (cc_list_row_info_button_parent_class)->dispose (object);
 }

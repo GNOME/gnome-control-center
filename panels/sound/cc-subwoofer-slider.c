@@ -68,7 +68,7 @@ cc_subwoofer_slider_dispose (GObject *object)
 {
   CcSubwooferSlider *self = CC_SUBWOOFER_SLIDER (object);
 
-  g_clear_pointer (&self->scale, gtk_widget_unparent);
+  gtk_widget_dispose_template (GTK_WIDGET (self), CC_TYPE_SUBWOOFER_SLIDER);
 
   g_clear_object (&self->channel_map);
 

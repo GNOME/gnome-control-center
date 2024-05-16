@@ -59,9 +59,7 @@ cc_background_preview_dispose (GObject *object)
 {
   CcBackgroundPreview *self = (CcBackgroundPreview *)object;
 
-  g_clear_pointer (&self->picture, gtk_widget_unparent);
-  g_clear_pointer (&self->light_dark_window, gtk_widget_unparent);
-  g_clear_pointer (&self->dark_window, gtk_widget_unparent);
+  gtk_widget_dispose_template (GTK_WIDGET (self), CC_TYPE_BACKGROUND_PREVIEW);
 
   G_OBJECT_CLASS (cc_background_preview_parent_class)->dispose (object);
 }
