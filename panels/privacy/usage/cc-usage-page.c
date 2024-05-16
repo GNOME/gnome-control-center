@@ -29,17 +29,16 @@ struct _CcUsagePage
 {
   AdwNavigationPage parent_instance;
 
-  GSettings  *privacy_settings;
+  GSettings    *privacy_settings;
 
+  AdwDialog    *clear_file_history_dialog;
+  AdwDialog    *delete_temp_files_dialog;
+  AdwDialog    *empty_trash_dialog;
+  AdwComboRow  *purge_after_combo;
+  AdwSwitchRow *purge_temp_row;
+  AdwSwitchRow *purge_trash_row;
   AdwSwitchRow *recently_used_row;
-  AdwComboRow *retain_history_combo;
-  AdwDialog   *clear_file_history_dialog;
-
-  AdwSwitchRow   *purge_trash_row;
-  AdwDialog      *empty_trash_dialog;
-  AdwSwitchRow   *purge_temp_row;
-  AdwDialog   *delete_temp_files_dialog;
-  AdwComboRow *purge_after_combo;
+  AdwComboRow  *retain_history_combo;
 };
 
 G_DEFINE_TYPE (CcUsagePage, cc_usage_page, ADW_TYPE_NAVIGATION_PAGE)
@@ -253,11 +252,11 @@ cc_usage_page_class_init (CcUsagePageClass *klass)
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/privacy/usage/cc-usage-page.ui");
 
-  gtk_widget_class_bind_template_child (widget_class, CcUsagePage, purge_after_combo);
   gtk_widget_class_bind_template_child (widget_class, CcUsagePage, clear_file_history_dialog);
   gtk_widget_class_bind_template_child (widget_class, CcUsagePage, delete_temp_files_dialog);
-  gtk_widget_class_bind_template_child (widget_class, CcUsagePage, purge_temp_row);
   gtk_widget_class_bind_template_child (widget_class, CcUsagePage, empty_trash_dialog);
+  gtk_widget_class_bind_template_child (widget_class, CcUsagePage, purge_after_combo);
+  gtk_widget_class_bind_template_child (widget_class, CcUsagePage, purge_temp_row);
   gtk_widget_class_bind_template_child (widget_class, CcUsagePage, purge_trash_row);
   gtk_widget_class_bind_template_child (widget_class, CcUsagePage, recently_used_row);
   gtk_widget_class_bind_template_child (widget_class, CcUsagePage, retain_history_combo);
@@ -266,8 +265,8 @@ cc_usage_page_class_init (CcUsagePageClass *klass)
   gtk_widget_class_bind_template_callback (widget_class, on_clear_history_response_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_empty_trash_response_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_purge_temp_response_cb);
-  gtk_widget_class_bind_template_callback (widget_class, retain_history_name_cb);
   gtk_widget_class_bind_template_callback (widget_class, retain_history_combo_changed_cb);
-  gtk_widget_class_bind_template_callback (widget_class, purge_after_name_cb);
+  gtk_widget_class_bind_template_callback (widget_class, retain_history_name_cb);
   gtk_widget_class_bind_template_callback (widget_class, purge_after_combo_changed_cb);
+  gtk_widget_class_bind_template_callback (widget_class, purge_after_name_cb);
 }
