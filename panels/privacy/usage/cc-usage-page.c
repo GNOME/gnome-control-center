@@ -33,6 +33,7 @@ struct _CcUsagePage
 
   AdwSwitchRow *recently_used_row;
   AdwComboRow *retain_history_combo;
+  AdwDialog   *clear_file_history_dialog;
 
   AdwSwitchRow   *purge_trash_row;
   AdwSwitchRow   *purge_temp_row;
@@ -323,31 +324,9 @@ cc_usage_page_init (CcUsagePage *self)
 }
 
 static void
-on_clear_recent_warning_response_cb (GtkDialog   *dialog,
-                                     gint         response,
-                                     CcUsagePage *self)
+on_clear_history_response_cb (void)
 {
-  if (response == GTK_RESPONSE_OK)
-    gtk_recent_manager_purge_items (gtk_recent_manager_get_default (), NULL);
-
-  gtk_window_destroy (GTK_WINDOW (dialog));
-}
-
-static void
-clear_recent (CcUsagePage *self)
-{
-  GtkDialog *dialog;
-
-  dialog = run_warning (self,
-                        _("Clear File History?"),
-                        _("After clearing, lists of recently used files will appear empty."),
-                        _("Clear _History"));
-
-  g_signal_connect_object (dialog,
-                           "response",
-                           G_CALLBACK (on_clear_recent_warning_response_cb),
-                           self,
-                           0);
+  gtk_recent_manager_purge_items (gtk_recent_manager_get_default (), NULL);
 }
 
 static void
@@ -361,6 +340,7 @@ cc_usage_page_class_init (CcUsagePageClass *klass)
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/privacy/usage/cc-usage-page.ui");
 
   gtk_widget_class_bind_template_child (widget_class, CcUsagePage, purge_after_combo);
+  gtk_widget_class_bind_template_child (widget_class, CcUsagePage, clear_file_history_dialog);
   gtk_widget_class_bind_template_child (widget_class, CcUsagePage, purge_temp_row);
   gtk_widget_class_bind_template_child (widget_class, CcUsagePage, purge_trash_button);
   gtk_widget_class_bind_template_child (widget_class, CcUsagePage, purge_trash_row);
@@ -368,7 +348,7 @@ cc_usage_page_class_init (CcUsagePageClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcUsagePage, recently_used_row);
   gtk_widget_class_bind_template_child (widget_class, CcUsagePage, retain_history_combo);
 
-  gtk_widget_class_bind_template_callback (widget_class, clear_recent);
+  gtk_widget_class_bind_template_callback (widget_class, on_clear_history_response_cb);
   gtk_widget_class_bind_template_callback (widget_class, retain_history_name_cb);
   gtk_widget_class_bind_template_callback (widget_class, retain_history_combo_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, purge_after_name_cb);

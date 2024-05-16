@@ -48,7 +48,7 @@
                         <property name="label" translatable="yes">_Clear History…</property>
                         <property name="can-shrink">True</property>
                         <property name="use_underline">1</property>
-                        <signal name="clicked" handler="clear_recent" swapped="yes"/>
+                        <signal name="clicked" handler="adw_dialog_present" object="clear_file_history_dialog"/>
                         <style>
                           <class name="destructive-action"/>
                         </style>
@@ -129,4 +129,15 @@
       </object>
     </property>
   </template>
+  <object class="AdwAlertDialog" id="clear_file_history_dialog">
+    <property name="heading" translatable="yes">Clear File History?</property>
+    <property name="body" translatable="yes">After clearing, lists of recently used files will appear empty.</property>
+    <property name="default-response">cancel</property>
+    <property name="close-response">cancel</property>
+    <signal name="response::clear-history" handler="on_clear_history_response_cb"/>
+    <responses>
+      <response id="cancel" translatable="yes">_Cancel</response>
+      <response id="clear-history" translatable="yes" appearance="destructive">Clear _History</response>
+    </responses>
+  </object>
 </interface>
