@@ -134,7 +134,7 @@ gtk_dep = dependency(
   fallback: ['gtk', 'gtk_dep'],
   default_options: [
     'introspection=disabled',
-    'demos=false',
+    'build-demos=false',
     'build-testsuite=false',
     'build-tests=false',
     'build-examples=false',
