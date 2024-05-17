@@ -96,19 +96,18 @@ cc_panel_buildable_add_child (GtkBuildable *buildable,
                               const gchar  *type)
 {
   CcPanelPrivate *priv = cc_panel_get_instance_private (CC_PANEL (buildable));
-  gboolean is_subpage_child;
+  gboolean is_subpage_child = g_strcmp0 (type, "subpage");
 
   /* This is a hub panel (with subpages) such as System and Privacy. */
   if (ADW_IS_NAVIGATION_PAGE (child)) {
-    if (type)
-      is_subpage_child = g_str_equal (type, "subpage");
-
     if (!is_subpage_child) {
-      g_warning ("<child type=\"subpage\" expects an AdwNavigationPage child widget");
+      g_warning ("<child type=\"subpage\" is expected for an AdwNavigationPage child widget");
       return;
     }
-
     adw_navigation_view_add (priv->navigation, ADW_NAVIGATION_PAGE (child));
+  } else if (subpage_child) {
+    g_warning ("<child type=\"subpage\" expects an AdwNavigationPage child widget");
+    return;
   } else
     parent_buildable_iface->add_child (buildable, builder, child, type);
 }
