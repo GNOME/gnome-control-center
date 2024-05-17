@@ -134,21 +134,19 @@ import_vpn_from_file_cb (GObject *source_object, GAsyncResult *result, gpointer 
 	}
 
 	if (!connection) {
-		GtkWidget *err_dialog;
+		AdwDialog *err_dialog;
 		g_autofree gchar *bname;
 
 		bname = g_path_get_basename (filename);
-		err_dialog = adw_message_dialog_new (info->parent,
-											 _("Cannot Import VPN Connection"),
-											 NULL);
+		err_dialog = adw_alert_dialog_new (_("Cannot Import VPN Connection"),
+										   NULL);
 
-		adw_message_dialog_format_body (ADW_MESSAGE_DIALOG (err_dialog),
-										_("The file “%s” could not be read or does not contain recognized VPN connection information\n\nError: %s."),
-										bname, error ? error->message : "unknown error");
-		adw_message_dialog_add_response (ADW_MESSAGE_DIALOG (err_dialog),
-										 "close", _("_Close"));
-
-		gtk_window_present (GTK_WINDOW (err_dialog));
+		adw_alert_dialog_format_body (ADW_ALERT_DIALOG (err_dialog),
+									  _("The file “%s” could not be read or does not contain recognized VPN connection information\n\nError: %s."),
+									  bname, error ? error->message : "unknown error");
+		adw_alert_dialog_add_response (ADW_ALERT_DIALOG (err_dialog),
+										 "ok", _("_OK"));
+		adw_dialog_present (err_dialog, GTK_WIDGET (info->parent));
 	}
 
 	info->callback (connection, info->user_data);
