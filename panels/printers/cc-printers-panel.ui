@@ -55,46 +55,8 @@
             </child>
 
             <property name="content">
-              <object class="GtkOverlay">
-                <child type="overlay">
-                  <object class="GtkRevealer" id="notification">
-                    <property name="halign">GTK_ALIGN_CENTER</property>
-                    <property name="valign">GTK_ALIGN_START</property>
-                    <child>
-                      <object class="GtkBox">
-                        <property name="spacing">6</property>
-                        <style>
-                          <class name="app-notification"/>
-                        </style>
-                        <child>
-                          <object class="GtkLabel" id="notification_label">
-                            <property name="wrap">True</property>
-                            <property name="max_width_chars">50</property>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="GtkButton">
-                            <property name="valign">GTK_ALIGN_CENTER</property>
-                            <property name="label" translatable="yes" comments="Translators: This is the button which allows undoing the removal of the printer.">Undo</property>
-                            <signal name="clicked" handler="on_printer_deletion_undone" swapped="yes"/>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="GtkButton">
-                            <property name="valign">GTK_ALIGN_CENTER</property>
-                            <property name="icon_name">cross-small-symbolic</property>
-                            <signal name="clicked" handler="on_notification_dismissed" swapped="yes"/>
-                            <style>
-                              <class name="flat"/>
-                            </style>
-                          </object>
-                        </child>
-                      </object>
-                    </child>
-                  </object>
-                </child>
-                <child>
-
+              <object class="AdwToastOverlay" id="toast_overlay">
+                <property name="child">
                   <object class="GtkBox">
                     <property name="orientation">GTK_ORIENTATION_VERTICAL</property>
                     <child>
@@ -195,7 +157,7 @@
                       </object>
                     </child>
                   </object>
-                </child>
+                </property>
               </object>
             </property>
           </object>
