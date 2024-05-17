@@ -87,7 +87,7 @@ forget_cb (CEPageDetails *self)
 
         adw_alert_dialog_add_responses (ADW_ALERT_DIALOG (dialog),
                                         "cancel",  _("_Cancel"),
-                                        "forget", _("Forget"),
+                                        "forget", _("_Forget"),
                                         NULL);
         adw_alert_dialog_set_response_appearance (ADW_ALERT_DIALOG (dialog),
                                                   "forget",
