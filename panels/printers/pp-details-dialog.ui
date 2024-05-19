@@ -9,7 +9,6 @@
     <property name="width-request">360</property>
     <property name="height-request">294</property>
     <property name="default-width">360</property>
-    <property name="default-height">500</property>
     <property name="content">
       <object class="AdwToolbarView">
         <child type="top">
@@ -115,40 +114,32 @@
             </child>
 
             <child>
-              <object class="AdwPreferencesGroup">
+              <object class="AdwPreferencesGroup" id="driver_button_rows_group">
+                <property name="separate-rows">True</property>
                 <child>
-                  <object class="GtkBox" id="driver_buttons">
-                    <property name="orientation">vertical</property>
-                    <property name="spacing">6</property>
-                    <child>
-                      <object class="GtkButton" id="search_for_drivers_button">
-                        <property name="label" translatable="yes">_Search for Drivers</property>
-                        <property name="use-underline">True</property>
-                        <property name="halign">fill</property>
-                        <signal name="clicked" handler="search_for_drivers" object="PpDetailsDialog" swapped="yes"/>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkButton" id="select_from_database_button">
-                        <property name="label" translatable="yes">S_elect from Database…</property>
-                        <property name="use-underline">True</property>
-                        <property name="halign">fill</property>
-                        <signal name="clicked" handler="select_ppd_in_dialog" object="PpDetailsDialog" swapped="yes"/>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkButton" id="install_ppd_button">
-                        <property name="label" translatable="yes">_Install PPD File…</property>
-                        <property name="use-underline">True</property>
-                        <property name="halign">fill</property>
-                        <signal name="clicked" handler="select_ppd_manually" object="PpDetailsDialog" swapped="yes"/>
-                      </object>
-                    </child>
+                  <object class="AdwButtonRow" id="search_for_drivers_button_row">
+                    <property name="title" translatable="yes">_Search for Drivers</property>
+                    <property name="use-underline">True</property>
+                    <signal name="activated" handler="search_for_drivers" object="PpDetailsDialog" swapped="yes"/>
                   </object>
                 </child>
-
+                <child>
+                  <object class="AdwButtonRow">
+                    <property name="title" translatable="yes">S_elect from Database…</property>
+                    <property name="use-underline">True</property>
+                    <signal name="activated" handler="select_ppd_in_dialog" object="PpDetailsDialog" swapped="yes"/>
+                  </object>
+                </child>
+                <child>
+                  <object class="AdwButtonRow">
+                    <property name="title" translatable="yes">_Install PPD File…</property>
+                    <property name="use-underline">True</property>
+                    <signal name="activated" handler="select_ppd_manually" object="PpDetailsDialog" swapped="yes"/>
+                  </object>
+                </child>
               </object>
             </child>
+
           </object>
         </property>
       </object>
