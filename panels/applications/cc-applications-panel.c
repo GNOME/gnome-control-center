@@ -59,10 +59,9 @@ struct _CcApplicationsPanel
   CcRemovableMediaSettings *removable_media_settings;
 
   AdwNavigationPage *app_settings_page;
+  GtkStack        *main_page_stack;
   GtkListBox      *app_listbox;
   GtkEntry        *app_search_entry;
-  GtkWidget       *no_apps_page;
-  GtkStack        *app_listbox_stack;
   GAppInfoMonitor *monitor;
   gulong           monitor_id;
   GListModel      *app_model;
@@ -1218,11 +1217,9 @@ on_items_changed_cb (GListModel *list,
   CcApplicationsPanel *self = data;
 
   if (g_list_model_get_n_items (list) == 0)
-    gtk_stack_set_visible_child (self->app_listbox_stack,
-                                 self->no_apps_page);
+    gtk_stack_set_visible_child_name (self->main_page_stack, "no-apps-found-page");
   else
-    gtk_stack_set_visible_child (self->app_listbox_stack,
-                                 GTK_WIDGET (self->app_listbox));
+    gtk_stack_set_visible_child_name (self->main_page_stack, "apps-page");
 }
 
 static void
@@ -1764,8 +1761,6 @@ cc_applications_panel_class_init (CcApplicationsPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, clear_cache_button);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, storage_dialog_data_row);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, default_apps_page);
-  gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, no_apps_page);
-  gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, app_listbox_stack);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, handler_dialog);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, handler_page);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, handler_file_group);
@@ -1776,6 +1771,7 @@ cc_applications_panel_class_init (CcApplicationsPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, integration_section);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, launch_button);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, location);
+  gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, main_page_stack);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, microphone);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, no_camera);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, no_location);
