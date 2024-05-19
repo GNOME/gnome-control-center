@@ -77,7 +77,7 @@ build.container.fedora@x86_64:
       cheese-libs-devel
       chrpath
       clang-tools-extra
-      colord-devel colord-gtk-devel
+      colord-devel colord-gtk4-devel
       cups-devel
       desktop-file-utils
       docbook-style-xsl
@@ -89,6 +89,7 @@ build.container.fedora@x86_64:
       gobject-introspection-devel
       gnome-bluetooth-libs-devel
       gnome-desktop3-devel
+      gnome-desktop4-devel
       grilo-devel
       gsettings-desktop-schemas-devel
       gsound-devel
@@ -102,7 +103,7 @@ build.container.fedora@x86_64:
       libcanberra-devel
       libgtop2-devel
       libgudev-devel
-      libnma-devel
+      libnma-gtk4-devel
       libnotify-devel
       libpwquality-devel
       libsmbclient-devel
@@ -136,36 +137,6 @@ build.container.fedora@x86_64:
       git clone https://gitlab.gnome.org/GNOME/gsettings-desktop-schemas.git && \
         cd gsettings-desktop-schemas && \
         meson . _build --prefix=/usr && \
-        ninja -C _build && \
-        ninja -C _build install && \
-        cd .. && \
-      git clone https://gitlab.gnome.org/GNOME/gnome-desktop.git && \
-        cd gnome-desktop && \
-        meson . _build --prefix=/usr -Ddesktop_docs=false && \
-        ninja -C _build && \
-        ninja -C _build install && \
-        cd .. && \
-      git clone https://gitlab.gnome.org/GNOME/gnome-bluetooth.git && \
-        cd gnome-bluetooth && \
-        meson . _build --prefix=/usr -Dsendto=false && \
-        ninja -C _build && \
-        ninja -C _build install && \
-        cd .. && \
-      git clone https://gitlab.gnome.org/GNOME/libnma.git && \
-        cd libnma && \
-        meson . _build --prefix=/usr -Dlibnma_gtk4=true -Dmobile_broadband_provider_info=false -Dgcr=false -Dgtk_doc=false && \
-        ninja -C _build && \
-        ninja -C _build install && \
-        cd .. && \
-      git clone https://github.com/hughsie/colord-gtk.git && \
-        cd colord-gtk && \
-        meson . _build --prefix=/usr -Dgtk4=true -Ddocs=false -Dtests=false -Dman=false && \
-        ninja -C _build && \
-        ninja -C _build install && \
-        cd .. && \
-      git clone https://gitlab.gnome.org/GNOME/libgweather.git && \
-        cd libgweather && \
-        meson . _build --prefix=/usr -Denable_vala=false -Dgtk_doc=false -Dintrospection=false && \
         ninja -C _build && \
         ninja -C _build install && \
         cd .. && \
