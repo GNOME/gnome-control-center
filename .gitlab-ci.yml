@@ -30,8 +30,8 @@ stages:
 
 .Build procedure: &build_procedure
   echo "== Building ==" &&
-  meson . _build ${BUILD_OPTS} -Dprofile=development &&
-  ninja -C _build 2>&1 | tee compilation.log
+  meson setup _build ${BUILD_OPTS} -Dprofile=development &&
+  meson compile -C _build 2>&1 | tee compilation.log
 
 .Run Tests: &run_tests
   export GSK_RENDERER=ngl &&
@@ -88,16 +88,16 @@ build.container.fedora@x86_64:
       dnf builddep -y gsettings-desktop-schemas && \
       git clone https://gitlab.gnome.org/GNOME/gsettings-desktop-schemas.git && \
         cd gsettings-desktop-schemas && \
-        meson . _build --prefix=/usr && \
-        ninja -C _build && \
-        ninja -C _build install && \
+        meson setup _build --prefix=/usr && \
+        meson compile -C _build && \
+        meson install -C _build && \
         cd .. && \
       dnf builddep -y gnome-settings-daemon && \
       git clone https://gitlab.gnome.org/GNOME/gnome-settings-daemon.git && \
         cd gnome-settings-daemon && \
-        meson . _build --prefix=/usr && \
-        ninja -C _build && \
-        ninja -C _build install && \
+        meson setup _build --prefix=/usr && \
+        meson compile -C _build && \
+        meson install -C _build && \
         cd .. && \
       dnf remove -y systemtap-runtime
 
@@ -121,7 +121,7 @@ build:
     - *build_procedure
 
     - echo "== Installing =="
-    - ninja -C _build install
+    - meson install -C _build
 
     - echo "== Report =="
     - build-aux/ci/ci-helper.sh "WARNINGS"
@@ -190,7 +190,7 @@ test:
     - |
       if [[ -n "${CI_COMMIT_TAG}" ]]; then
         echo "== Distro Test =="
-        ninja dist -C _build
+        meson dist -C _build
       fi
 
   artifacts:
@@ -220,7 +220,7 @@ coverage:
     - *build_procedure
     - *run_tests
 
-    - ninja -C _build coverage-html
+    - meson compile -C _build coverage-html
 
     # Parse the report to get the coverage result
     - |
