@@ -18,17 +18,20 @@ stages:
     - ./*.log
     - _build/meson-logs/
 
-.Git Untracked files: &save_untracked_files
+.Build Output: &build_output
   artifacts:
-    name: untracked
-    paths: [$(pwd)]
+    name: build_output
+    when: always
+    paths:
+      - ./*.log
+      - _build/
     expire_in: 3h30min
 
 .Show Info: &environment_information
   build-aux/ci/ci-helper.sh "INFO" &&
   build-aux/ci/ci-helper.sh "GIT_INFO"
 
-.Build procedure: &build_procedure
+.Build Procedure: &build_procedure
   echo "== Building ==" &&
   meson setup _build ${BUILD_OPTS} -Dprofile=development &&
   meson compile -C _build 2>&1 | tee compilation.log
@@ -36,7 +39,7 @@ stages:
 .Run Tests: &run_tests
   export GSK_RENDERER=ngl &&
   echo "== Testing ==" &&
-  meson test -C _build --verbose --no-stdsplit
+  meson test -C _build --verbose --no-stdsplit --no-rebuild
 
 .fedora.container.common:
   variables:
@@ -112,8 +115,6 @@ build:
   extends:
     - '.fdo.suffixed-image@fedora'
     - '.fedora.container.common'
-
-  <<: *save_untracked_files
   stage: build
 
   script:
@@ -126,8 +127,7 @@ build:
     - echo "== Report =="
     - build-aux/ci/ci-helper.sh "WARNINGS"
 
-    # Save all but git-related files
-    - rm -rf .git .gitignore .gitmodules
+  <<: *build_output
 
   except:
     variables:
@@ -137,6 +137,9 @@ build:
 conditional builds:
   extends:
     - build
+  artifacts:
+    # Only save build logs for these
+    <<: *build_logs
   parallel:
     matrix:
       - BUILD_OPTS: '-Dmalcontent=true'
@@ -179,12 +182,11 @@ test:
     - '.fedora.container.common'
   stage: test
 
-  dependencies:
+  needs:
     - build
 
   script:
     - *environment_information
-    - *build_procedure
     - *run_tests
 
     - |
@@ -320,6 +322,8 @@ flatpak:
   extends:
     - '.fdo.suffixed-image@fedora'
     - '.fedora.container.common'
+  dependencies:
+    - build.container.fedora@x86_64
   stage: manual
   when: manual
   script:
