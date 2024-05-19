@@ -11,13 +11,12 @@ stages:
   - manual
   - deploy
 
-.Log files: &log_files  [./*.log, _build/meson-logs/]
-
-.Build logs: &save_build_logs
-  artifacts:
-    name: log
-    when: always
-    paths: *log_files
+.Build Logs: &build_logs
+  name: build_logs
+  when: always
+  paths:
+    - ./*.log
+    - _build/meson-logs/
 
 .Git Untracked files: &save_untracked_files
   artifacts:
@@ -230,7 +229,6 @@ test:
   extends:
     - '.fdo.suffixed-image@fedora'
     - '.fedora.container.common'
-  <<: *save_build_logs
   stage: test
 
   dependencies:
@@ -248,8 +246,9 @@ test:
       fi
 
   artifacts:
+    <<: *build_logs
     reports:
-        junit: "_build/meson-logs/testlog.junit.xml"
+        junit: '_build/meson-logs/testlog.junit.xml'
 
   except:
     variables:
@@ -261,7 +260,6 @@ coverage:
   extends:
     - '.fdo.suffixed-image@fedora'
     - '.fedora.container.common'
-  <<: *save_build_logs
   stage: test
   variables:
     BUILD_OPTS: "-Db_coverage=true"
@@ -280,6 +278,9 @@ coverage:
     - |
       echo == Coverage ==
       sed -e 's/<[^>]*>//g' _build/meson-logs/coveragereport/index.html | tr -d ' \t' | grep -A3 -P '^Lines:$'  | tr '\n' ' '; echo
+
+  artifacts:
+    <<: *build_logs
 
   except:
     variables:
@@ -375,13 +376,15 @@ flatpak:
   extends:
     - '.fdo.suffixed-image@fedora'
     - '.fedora.container.common'
-  <<: *save_build_logs
   stage: manual
   when: manual
   script:
     - *environment_information
     - *build_procedure
     - *run_tests
+
+  artifacts:
+    <<: *build_logs
 
   except:
     variables:
