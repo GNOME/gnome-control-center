@@ -90,6 +90,7 @@ build.container.fedora@x86_64:
       gnome-bluetooth-libs-devel
       gnome-desktop3-devel
       gnome-desktop4-devel
+      gnome-online-accounts-devel
       grilo-devel
       gsettings-desktop-schemas-devel
       gsound-devel
@@ -143,12 +144,6 @@ build.container.fedora@x86_64:
       git clone https://gitlab.gnome.org/GNOME/gnome-settings-daemon.git && \
         cd gnome-settings-daemon && \
         meson . _build --prefix=/usr && \
-        ninja -C _build && \
-        ninja -C _build install && \
-        cd .. && \
-      git clone https://gitlab.gnome.org/GNOME/gnome-online-accounts.git && \
-        cd gnome-online-accounts && \
-        meson . _build --prefix=/usr -Dfedora=true  && \
         ninja -C _build && \
         ninja -C _build install && \
         cd .. && \
