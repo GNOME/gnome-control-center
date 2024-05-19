@@ -76,7 +76,7 @@ build.container.fedora@x86_64:
       @c-development @development-tools
       dnf5-plugins
       git
-      llvm clang libasan libtsan libubsan gcovr
+      llvm clang libasan libtsan libubsan compiler-rt gcovr
       meson
       clang-tools-extra
       glibc-langpack-en
@@ -235,9 +235,6 @@ coverage:
       - $CI_PIPELINE_SOURCE == "schedule"
       - $CI_COMMIT_TITLE =~ /^Update.*translation$/
 
-# Runs the address sanitizer.
-# - below, at the "sanitizers section"
-
 ##
 # Stage: Deploy
 #
@@ -318,7 +315,6 @@ flatpak:
     - gnome-3-.*
     - main@GNOME/gnome-control-center
 
-
 # Runs the sanitizers [address, thread, undefined, and memory].
 .sanitizer: &sanitizer
   extends:
@@ -340,38 +336,24 @@ flatpak:
       - $CI_COMMIT_TITLE =~ /^Update.*translation$/
 
 asan:
- extends:
-   - '.fdo.suffixed-image@fedora'
-   - '.fedora.container.common'
  <<: *sanitizer
  # ASAN requires debugging capabilities
  tags: [ asan ]
- stage: manual
- when: manual
  variables:
    BUILD_OPTS: "-Db_sanitize=address"
    LSAN_OPTIONS: "suppressions=${CI_PROJECT_DIR}/build-aux/ci/lsan.supp"
 
 tsan:
-  extends:
-    - '.fdo.suffixed-image@fedora'
-    - '.fedora.container.common'
   <<: *sanitizer
   variables:
     BUILD_OPTS: "-Db_sanitize=thread"
 
 ubsan:
-  extends:
-    - '.fdo.suffixed-image@fedora'
-    - '.fedora.container.common'
   <<: *sanitizer
   variables:
     BUILD_OPTS: "-Db_sanitize=undefined"
 
 msan:
-  extends:
-    - '.fdo.suffixed-image@fedora'
-    - '.fedora.container.common'
   <<: *sanitizer
   variables:
     BUILD_OPTS: "-Db_sanitize=memory"
