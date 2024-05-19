@@ -30,7 +30,6 @@ stages:
 
 .Build procedure: &build_procedure
   echo "== Building ==" &&
-  dnf install -y dnf5-plugins &&
   meson . _build ${BUILD_OPTS} -Dprofile=development &&
   ninja -C _build 2>&1 | tee compilation.log
 
@@ -74,77 +73,25 @@ build.container.fedora@x86_64:
     # - glibc-langpack-en is needed for sorting in run-style-check-diff.sh
     FDO_DISTRIBUTION_PACKAGES: >-
       @c-development @development-tools
+      dnf5-plugins
       git
       llvm clang libasan libtsan libubsan gcovr
       meson
-      accountsservice-devel
-      cheese-libs-devel
-      chrpath
       clang-tools-extra
-      colord-devel colord-gtk4-devel
-      cups-devel
-      desktop-file-utils
-      docbook-style-xsl
-      flatpak-devel
-      gdk-pixbuf2-devel
-      gettext
-      glib2-devel
       glibc-langpack-en
-      gobject-introspection-devel
-      gnome-bluetooth-libs-devel
-      gnome-desktop3-devel
-      gnome-desktop4-devel
-      gnome-online-accounts-devel
-      grilo-devel
-      gsettings-desktop-schemas-devel
-      gsound-devel
-      gtk3-devel ibus-devel
-      gtk4-devel
-      gtk-doc
-      intltool
-      appstream-devel
-      sassc
-      libadwaita-devel
-      libcanberra-devel
-      libgtop2-devel
-      libgudev-devel
-      libnma-gtk4-devel
-      libnotify-devel
-      libpwquality-devel
-      libsmbclient-devel
-      libsoup3-devel
-      libudisks2-devel
-      libwacom-devel
-      libX11-devel
-      libXi-devel
-      libxml2-devel
-      libxslt
-      ModemManager-glib-devel
-      NetworkManager-libnm-devel
-      polkit-devel
-      pulseaudio-libs-devel
-      upower-devel
       python3-dbusmock
       xorg-x11-server-Xvfb
       mesa-dri-drivers
-      libsecret-devel
-      geocode-glib2-devel
-      libgweather4-devel
-      lcms2-devel
-      geoclue2-devel
-      libnotify-devel
-      alsa-lib-devel
-      nss-devel
-      gcr-devel
-      setxkbmap
-      appstream-devel
     FDO_DISTRIBUTION_EXEC: |-
+      dnf builddep -y gnome-control-center && \
+      dnf builddep -y gsettings-desktop-schemas && \
       git clone https://gitlab.gnome.org/GNOME/gsettings-desktop-schemas.git && \
         cd gsettings-desktop-schemas && \
         meson . _build --prefix=/usr && \
         ninja -C _build && \
         ninja -C _build install && \
         cd .. && \
+      dnf builddep -y gnome-settings-daemon && \
       git clone https://gitlab.gnome.org/GNOME/gnome-settings-daemon.git && \
         cd gnome-settings-daemon && \
         meson . _build --prefix=/usr && \
