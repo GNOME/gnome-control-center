@@ -46,14 +46,19 @@ stages:
   # https://gitlab.gnome.org/Infrastructure/GitLab/-/issues/545
   tags: [ crun ]
   variables:
-    # When branching a stable release, change 'main'
-    # to the release number/branch to ensure that
-    # a new image will be created, tailored for the
-    # stable branch.
-    # Could probably also switch away from rawhide,
+    # When branching a stable release, change 'main' to the
+    # release branch name to ensure that a new image will
+    # be created, tailored for the stable branch.
+    # Should probably also switch away from 'rawhide',
     # to stable fedora branch as well.
-    FDO_DISTRIBUTION_TAG: '2024-04-16.0-40'
-    FDO_DISTRIBUTION_VERSION: 40
+    BRANCH_NAME: 'gnome-46'
+    CONTAINER_TAG: '2024-05-21.0'
+    FEDORA_VERSION: 40
+    # Derive FDO variables from this automatically.
+    # DO NOT edit, instead change the variables above
+    FDO_REPO_SUFFIX: '${BRANCH_NAME}'
+    FDO_DISTRIBUTION_TAG: '${CONTAINER_TAG}-fedora-${FEDORA_VERSION}'
+    FDO_DISTRIBUTION_VERSION: '${FEDORA_VERSION}'
 
 #############################################
 #          Create CI Docker Images          #
@@ -190,7 +195,7 @@ build.container.fedora@x86_64:
 ##
 build:
   extends:
-    - '.fdo.distribution-image@fedora'
+    - '.fdo.suffixed-image@fedora'
     - '.fedora.container.common'
 
   <<: *save_untracked_files
@@ -221,7 +226,7 @@ build:
 ##
 style-check-diff:
   extends:
-  - '.fdo.distribution-image@fedora'
+  - '.fdo.suffixed-image@fedora'
   - '.fedora.container.common'
   needs:
   - build.container.fedora@x86_64
@@ -233,7 +238,7 @@ style-check-diff:
 
 test:
   extends:
-    - '.fdo.distribution-image@fedora'
+    - '.fdo.suffixed-image@fedora'
     - '.fedora.container.common'
   <<: *save_build_logs
   stage: test
@@ -264,7 +269,7 @@ test:
 # Runs the coverage test.
 coverage:
   extends:
-    - '.fdo.distribution-image@fedora'
+    - '.fdo.suffixed-image@fedora'
     - '.fedora.container.common'
   <<: *save_build_logs
   stage: test
@@ -301,7 +306,7 @@ coverage:
 ##
 pages:
   extends:
-    - '.fdo.distribution-image@fedora'
+    - '.fdo.suffixed-image@fedora'
     - '.fedora.container.common'
   stage: deploy
   dependencies:
@@ -378,7 +383,7 @@ flatpak:
 # Runs the sanitizers [address, thread, undefined, and memory].
 .sanitizer: &sanitizer
   extends:
-    - '.fdo.distribution-image@fedora'
+    - '.fdo.suffixed-image@fedora'
     - '.fedora.container.common'
   <<: *save_build_logs
   stage: manual
@@ -409,7 +414,7 @@ flatpak:
 
 tsan:
   extends:
-    - '.fdo.distribution-image@fedora'
+    - '.fdo.suffixed-image@fedora'
     - '.fedora.container.common'
   <<: *sanitizer
   variables:
@@ -417,7 +422,7 @@ tsan:
 
 ubsan:
   extends:
-    - '.fdo.distribution-image@fedora'
+    - '.fdo.suffixed-image@fedora'
     - '.fedora.container.common'
   <<: *sanitizer
   variables:
@@ -425,7 +430,7 @@ ubsan:
 
 msan:
   extends:
-    - '.fdo.distribution-image@fedora'
+    - '.fdo.suffixed-image@fedora'
     - '.fedora.container.common'
   <<: *sanitizer
   variables:
