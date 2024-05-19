@@ -13,17 +13,22 @@
 
             <!-- Searchbar -->
             <child type="top">
-              <object class="AdwClamp">
-                <property name="maximum-size">400</property>
-                <property name="tightening-threshold">330</property>
-                <child>
-                  <object class="GtkSearchEntry" id="app_search_entry">
-                    <property name="placeholder_text" translatable="yes">Search apps</property>
-                    <signal name="activate" handler="on_app_search_entry_activated_cb" object="CcApplicationsPanel" swapped="yes" />
-                    <signal name="search-changed" handler="on_app_search_entry_search_changed_cb" object="CcApplicationsPanel" swapped="yes" />
-                    <signal name="stop-search" handler="on_app_search_entry_search_stopped_cb" object="CcApplicationsPanel" swapped="yes" />
+              <object class="GtkSearchBar">
+                <property name="search-mode-enabled">True</property>
+                <property name="child">
+                  <object class="AdwClamp">
+                    <property name="maximum-size">400</property>
+                    <property name="tightening-threshold">330</property>
+                    <child>
+                      <object class="GtkSearchEntry" id="app_search_entry">
+                        <property name="placeholder_text" translatable="yes">Search apps</property>
+                        <signal name="activate" handler="on_app_search_entry_activated_cb" object="CcApplicationsPanel" swapped="yes" />
+                        <signal name="search-changed" handler="on_app_search_entry_search_changed_cb" object="CcApplicationsPanel" swapped="yes" />
+                        <signal name="stop-search" handler="on_app_search_entry_search_stopped_cb" object="CcApplicationsPanel" swapped="yes" />
+                      </object>
+                    </child>
                   </object>
-                </child>
+                </property>
               </object>
             </child>
 
