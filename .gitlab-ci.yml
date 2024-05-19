@@ -34,6 +34,7 @@ stages:
   ninja -C _build 2>&1 | tee compilation.log
 
 .Run Tests: &run_tests
+  export GSK_RENDERER=ngl &&
   echo "== Testing ==" &&
   meson test -C _build --verbose --no-stdsplit
 
