@@ -60,6 +60,21 @@ typedef enum
   CC_NUMBER_VALUE_HOURS
 } CcNumberValueType;
 
+/**
+ * CcNumberSortType:
+ * @CC_NUMBER_SORT_ASCENDING: sort the list in ascending order
+ * @CC_NUMBER_SORT_DESCENDING: sort the list in descending order
+ * @CC_NUMBER_SORT_NONE: do not sort the list
+ *
+ * Defines how the list of a `CcNumberRow` is sorted.
+ */
+typedef enum
+{
+  CC_NUMBER_SORT_ASCENDING,
+  CC_NUMBER_SORT_DESCENDING,
+  CC_NUMBER_SORT_NONE
+} CcNumberSortType;
+
 #define CC_TYPE_NUMBER_OBJECT (cc_number_object_get_type())
 G_DECLARE_FINAL_TYPE (CcNumberObject, cc_number_object, CC, NUMBER_OBJECT, GObject)
 
@@ -73,7 +88,7 @@ CcNumberOrder cc_number_object_get_order  (CcNumberObject *self);
 #define CC_TYPE_NUMBER_ROW (cc_number_row_get_type())
 G_DECLARE_FINAL_TYPE (CcNumberRow, cc_number_row, CC, NUMBER_ROW, AdwComboRow)
 
-CcNumberRow *cc_number_row_new (CcNumberValueType value_type, GtkSortType sort_type);
+CcNumberRow *cc_number_row_new (CcNumberValueType value_type, CcNumberSortType sort_type);
 
 guint    cc_number_row_add_value      (CcNumberRow *self, int value);
 guint    cc_number_row_add_value_full (CcNumberRow *self, int value, const char *string, CcNumberOrder order);

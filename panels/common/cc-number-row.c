@@ -282,7 +282,7 @@ struct _CcNumberRow {
 
     GListStore        *store;
     CcNumberValueType  value_type;
-    GtkSortType        sort_type;
+    CcNumberSortType   sort_type;
 };
 
 G_DEFINE_TYPE(CcNumberRow, cc_number_row, ADW_TYPE_COMBO_ROW)
@@ -361,10 +361,12 @@ compare_numbers (CcNumberObject *number_a,
         return number_a->order - number_b->order;
 
     /* Otherwise normal value comparison */
-    if (self->sort_type == GTK_SORT_ASCENDING)
+    if (self->sort_type == CC_NUMBER_SORT_ASCENDING)
         return number_a->value - number_b->value;
-    else
+    else if (self->sort_type == CC_NUMBER_SORT_DESCENDING)
         return number_b->value - number_a->value;
+    else
+        return 0;
 }
 
 static void
@@ -451,7 +453,7 @@ cc_number_row_class_init (CcNumberRowClass *klass)
     */
     row_props[ROW_PROP_SORT_TYPE] =
         g_param_spec_enum ("sort-type", NULL, NULL,
-                           GTK_TYPE_SORT_TYPE, GTK_SORT_ASCENDING,
+                           CC_TYPE_NUMBER_SORT_TYPE, CC_NUMBER_SORT_ASCENDING,
                            G_PARAM_WRITABLE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
 
     /**
@@ -496,7 +498,7 @@ cc_number_row_init (CcNumberRow *self)
  */
 CcNumberRow *
 cc_number_row_new (CcNumberValueType value_type,
-                   GtkSortType       sort_type)
+                   CcNumberSortType  sort_type)
 {
     return g_object_new (CC_TYPE_NUMBER_ROW,
                          "value-type", value_type,
