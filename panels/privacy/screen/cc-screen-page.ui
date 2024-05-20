@@ -21,7 +21,6 @@
                     <property name="subtitle" translatable="yes">Period of inactivity until screen blanks</property>
                     <property name="subtitle-lines">2</property>
                     <property name="use-underline">true</property>
-                    <signal name="notify::selected-item" handler="on_blank_screen_delay_changed_cb"/>
                     <property name="values">[60, 120, 180, 240, 300, 480, 600, 720, 900]</property>
                     <property name="special-value">
                       <object class="CcNumberObject">
@@ -50,7 +49,6 @@
                     <property name="subtitle" translatable="yes">Time from screen blank to screen lock</property>
                     <property name="subtitle-lines">2</property>
                     <property name="use-underline">true</property>
-                    <signal name="notify::selected-item" handler="on_lock_combo_changed_cb"/>
                     <property name="values">[30, 60, 120, 180, 300, 1800, 3600]</property>
                     <property name="special-value">
                       <object class="CcNumberObject">

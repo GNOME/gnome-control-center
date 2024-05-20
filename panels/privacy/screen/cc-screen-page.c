@@ -53,52 +53,6 @@ struct _CcScreenPage
 G_DEFINE_TYPE (CcScreenPage, cc_screen_page, ADW_TYPE_NAVIGATION_PAGE)
 
 static void
-on_lock_combo_changed_cb (CcNumberRow   *number_row,
-                          GParamSpec    *pspec,
-                          CcScreenPage  *self)
-{
-  int delay = cc_number_row_get_value (number_row,
-                                       adw_combo_row_get_selected (ADW_COMBO_ROW (number_row)));
-
-  g_settings_set_uint (self->lock_settings, "lock-delay", delay);
-}
-
-static void
-set_lock_delay_value (CcScreenPage *self,
-                      gint          value)
-{
-  guint position;
-
-  if (!cc_number_row_has_value (self->lock_after_row, value, &position))
-    position = cc_number_row_add_value (self->lock_after_row, value);
-
-  adw_combo_row_set_selected (ADW_COMBO_ROW (self->lock_after_row), position);
-}
-
-static void
-set_blank_screen_delay_value (CcScreenPage *self,
-                              gint          value)
-{
-  guint position;
-
-  if (!cc_number_row_has_value (self->blank_screen_row, value, &position))
-    position = cc_number_row_add_value (self->blank_screen_row, value);
-
-  adw_combo_row_set_selected (ADW_COMBO_ROW (self->blank_screen_row), position);
-}
-
-static void
-on_blank_screen_delay_changed_cb (CcNumberRow   *number_row,
-                                  GParamSpec    *pspec,
-                                  CcScreenPage  *self)
-{
-  int delay = cc_number_row_get_value (number_row,
-                                       adw_combo_row_get_selected (ADW_COMBO_ROW (number_row)));
-
-  g_settings_set_uint (self->session_settings, "idle-delay", delay);
-}
-
-static void
 on_usb_protection_properties_changed_cb (GDBusProxy   *usb_proxy,
                                          GVariant     *changed_properties,
                                          GStrv         invalidated_properties,
@@ -186,9 +140,6 @@ cc_screen_page_class_init (CcScreenPageClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcScreenPage, screen_privacy_group);
   gtk_widget_class_bind_template_child (widget_class, CcScreenPage, show_notifications_row);
   gtk_widget_class_bind_template_child (widget_class, CcScreenPage, usb_protection_row);
-
-  gtk_widget_class_bind_template_callback (widget_class, on_blank_screen_delay_changed_cb);
-  gtk_widget_class_bind_template_callback (widget_class, on_lock_combo_changed_cb);
 }
 
 static void
@@ -226,8 +177,6 @@ update_display_config (CcScreenPage *self)
 static void
 cc_screen_page_init (CcScreenPage *self)
 {
-  guint value;
-
   gtk_widget_init_template (GTK_WIDGET (self));
 
   self->cancellable = g_cancellable_new ();
@@ -249,8 +198,9 @@ cc_screen_page_init (CcScreenPage *self)
                    "sensitive",
                    G_SETTINGS_BIND_GET);
 
-  value = g_settings_get_uint (self->lock_settings, "lock-delay");
-  set_lock_delay_value (self, value);
+  cc_number_row_bind_settings (self->lock_after_row,
+                               self->lock_settings,
+                               "lock-delay");
 
   g_settings_bind (self->notification_settings,
                    "show-in-lock-screen",
@@ -258,8 +208,9 @@ cc_screen_page_init (CcScreenPage *self)
                    "active",
                    G_SETTINGS_BIND_DEFAULT);
 
-  value = g_settings_get_uint (self->session_settings, "idle-delay");
-  set_blank_screen_delay_value (self, value);
+  cc_number_row_bind_settings (self->blank_screen_row,
+                               self->session_settings,
+                               "idle-delay");
 
   g_settings_bind (self->privacy_settings,
                    "usb-protection",
