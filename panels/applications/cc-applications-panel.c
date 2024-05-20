@@ -1216,10 +1216,16 @@ on_items_changed_cb (GListModel *list,
 {
   CcApplicationsPanel *self = data;
 
-  if (g_list_model_get_n_items (list) == 0)
+  if (g_list_model_get_n_items (list) == 0) {
+    gtk_stack_set_visible_child_name (self->main_page_stack, "no-search-results-page");
+  }
+  else if (g_list_model_get_n_items (self->app_model) == 0) {
     gtk_stack_set_visible_child_name (self->main_page_stack, "no-apps-found-page");
-  else
+    gtk_widget_set_visible (GTK_WIDGET (self->app_search_entry), FALSE);
+  }
+  else {
     gtk_stack_set_visible_child_name (self->main_page_stack, "apps-page");
+  }
 }
 
 static void
@@ -1462,11 +1468,6 @@ populate_applications (CcApplicationsPanel *self)
 #endif
 
   infos = g_app_info_get_all ();
-
-  if (!infos)
-    gtk_widget_set_visible (GTK_WIDGET (self->app_search_entry), 0);
-  else
-    gtk_widget_set_visible (GTK_WIDGET (self->app_search_entry), 1);
 
   for (l = infos; l; l = l->next)
     {
