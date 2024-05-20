@@ -40,6 +40,24 @@ typedef enum
   CC_NUMBER_ORDER_LAST
 } CcNumberOrder;
 
+/**
+ * CcNumberValueType:
+ * @CC_NUMBER_VALUE_CUSTOM: no expression is set on the row, use a custom one
+ * @CC_NUMBER_VALUE_STRING: always use the `string` property of the number
+ * @CC_NUMBER_VALUE_SECONDS: interpret the value as a number of seconds
+ * @CC_NUMBER_VALUE_MINUTES: interpret the value as a number of minutes
+ *
+ * Defines how a `CcNumberRow` interprets a value in order to map it to
+ * a string in the list.
+ */
+typedef enum
+{
+  CC_NUMBER_VALUE_CUSTOM,
+  CC_NUMBER_VALUE_STRING,
+  CC_NUMBER_VALUE_SECONDS,
+  CC_NUMBER_VALUE_MINUTES
+} CcNumberValueType;
+
 #define CC_TYPE_NUMBER_OBJECT (cc_number_object_get_type())
 G_DECLARE_FINAL_TYPE (CcNumberObject, cc_number_object, CC, NUMBER_OBJECT, GObject)
 
@@ -47,16 +65,13 @@ CcNumberObject *cc_number_object_new             (int value);
 CcNumberObject *cc_number_object_new_full        (int value, const char *string, CcNumberOrder order);
 
 int           cc_number_object_get_value  (CcNumberObject *self);
-const char*   cc_number_object_get_string (CcNumberObject *self);
+char*         cc_number_object_get_string (CcNumberObject *self);
 CcNumberOrder cc_number_object_get_order  (CcNumberObject *self);
-
-char *cc_number_object_to_string_for_seconds (CcNumberObject *self);
-char *cc_number_object_to_string_for_minutes (CcNumberObject *self);
 
 #define CC_TYPE_NUMBER_ROW (cc_number_row_get_type())
 G_DECLARE_FINAL_TYPE (CcNumberRow, cc_number_row, CC, NUMBER_ROW, AdwComboRow)
 
-CcNumberRow *cc_number_row_new (GtkSortType sort_type);
+CcNumberRow *cc_number_row_new (CcNumberValueType value_type, GtkSortType sort_type);
 
 guint    cc_number_row_add_value      (CcNumberRow *self, int value);
 guint    cc_number_row_add_value_full (CcNumberRow *self, int value, const char *string, CcNumberOrder order);

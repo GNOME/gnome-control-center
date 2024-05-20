@@ -213,14 +213,14 @@ cc_number_object_get_value (CcNumberObject *self)
  *
  * Gets the fixed string representation of the stored value.
  *
- * Returns: (nullable): the fixed string representation
+ * Returns: (transfer full) (nullable): the fixed string representation
  */
-const char*
+char*
 cc_number_object_get_string (CcNumberObject *self)
 {
     g_return_val_if_fail (CC_IS_NUMBER_OBJECT (self), NULL);
 
-    return self->string;
+    return g_strdup (self->string);
 }
 
 /**
@@ -239,19 +239,7 @@ cc_number_object_get_order (CcNumberObject *self)
     return self->order;
 }
 
-/**
- * cc_number_object_to_string_for_seconds:
- * @self: a `CcNumberObject`
- *
- * Gets the string representation of @self, assuming the stored value is
- * a number of seconds. If @self has the special `string` set, that is
- * returned instead.
- *
- * This function is useful in expressions.
- *
- * Returns: (transfer full): the resulting string
- */
-char *
+static char *
 cc_number_object_to_string_for_seconds (CcNumberObject *self)
 {
     if (self->string)
@@ -260,19 +248,7 @@ cc_number_object_to_string_for_seconds (CcNumberObject *self)
     return cc_util_time_to_string_text ((gint64) 1000 * self->value);
 }
 
-/**
- * cc_number_object_to_string_for_minutes:
- * @self: a `CcNumberObject`
- *
- * Gets the string representation of @self, assuming the stored value is
- * a number of minutes. If @self has the special `string` set, that is
- * returned instead.
- *
- * This function is useful in expressions.
- *
- * Returns: (transfer full): the resulting string
- */
-char *
+static char *
 cc_number_object_to_string_for_minutes (CcNumberObject *self)
 {
     if (self->string)
@@ -291,14 +267,16 @@ cc_number_object_to_string_for_minutes (CcNumberObject *self)
 struct _CcNumberRow {
     AdwComboRow  parent_instance;
 
-    GListStore  *store;
-    GtkSortType  sort_type;
+    GListStore        *store;
+    CcNumberValueType  value_type;
+    GtkSortType        sort_type;
 };
 
 G_DEFINE_TYPE(CcNumberRow, cc_number_row, ADW_TYPE_COMBO_ROW)
 
 enum {
     ROW_PROP_0,
+    ROW_PROP_VALUE_TYPE,
     ROW_PROP_SORT_TYPE,
     ROW_PROP_VALUES,
     ROW_PROP_SPECIAL_VALUE,
@@ -339,6 +317,9 @@ cc_number_row_set_property (GObject      *object,
     CcNumberObject *number;
 
     switch (prop_id) {
+    case ROW_PROP_VALUE_TYPE:
+        self->value_type = g_value_get_enum (value);
+        break;
     case ROW_PROP_SORT_TYPE:
         self->sort_type = g_value_get_enum (value);
         break;
@@ -384,6 +365,32 @@ cc_number_row_constructed (GObject *obj)
     /* Only now add it as a model */
     adw_combo_row_set_model (ADW_COMBO_ROW (self), G_LIST_MODEL (self->store));
 
+    /* And set the expression based on the value-type */
+    if (self->value_type != CC_NUMBER_VALUE_CUSTOM) {
+        char * (*number_to_string_func)(CcNumberObject *);
+        g_autoptr(GtkExpression) expression = NULL;
+
+        switch (self->value_type) {
+        case CC_NUMBER_VALUE_STRING:
+            number_to_string_func = cc_number_object_get_string;
+            break;
+        case CC_NUMBER_VALUE_SECONDS:
+            number_to_string_func = cc_number_object_to_string_for_seconds;
+            break;
+        case CC_NUMBER_VALUE_MINUTES:
+            number_to_string_func = cc_number_object_to_string_for_minutes;
+            break;
+        default:
+            g_assert_not_reached ();
+        }
+
+        expression = gtk_cclosure_expression_new (G_TYPE_STRING, NULL,
+                                                0, NULL,
+                                                G_CALLBACK (number_to_string_func),
+                                                NULL, NULL);
+        adw_combo_row_set_expression (ADW_COMBO_ROW (self), expression);
+    }
+
     G_OBJECT_CLASS (cc_number_row_parent_class)->constructed (obj);
 }
 
@@ -406,6 +413,20 @@ cc_number_row_class_init (CcNumberRowClass *klass)
     object_class->constructed = cc_number_row_constructed;
     object_class->dispose = cc_number_row_dispose;
     object_class->set_property = cc_number_row_set_property;
+
+    /**
+    * CcNumberRow:value-type:
+    *
+    * The interpretation of the values in the list of the row. Determines what
+    * strings will be generated to represent the value in the list. The
+    * `string` property of a number will always take priority if it is set.
+    * Sets the `expression` property of the underlying AdwComboRow, unless the
+    * value type is `CC_NUMBER_VALUE_CUSTOM`.
+    */
+    row_props[ROW_PROP_VALUE_TYPE] =
+        g_param_spec_enum ("value-type", NULL, NULL,
+                           CC_TYPE_NUMBER_VALUE_TYPE, CC_NUMBER_VALUE_CUSTOM,
+                           G_PARAM_WRITABLE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
 
     /**
     * CcNumberRow:sort-type:
@@ -458,9 +479,11 @@ cc_number_row_init (CcNumberRow *self)
  * Returns: the newly created `CcNumberRow`
  */
 CcNumberRow *
-cc_number_row_new (GtkSortType sort_type)
+cc_number_row_new (CcNumberValueType value_type,
+                   GtkSortType       sort_type)
 {
     return g_object_new (CC_TYPE_NUMBER_ROW,
+                         "value-type", value_type,
                          "sort-type", sort_type,
                          NULL);
 }

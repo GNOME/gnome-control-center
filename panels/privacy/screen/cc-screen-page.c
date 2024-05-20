@@ -189,7 +189,6 @@ cc_screen_page_class_init (CcScreenPageClass *klass)
 
   gtk_widget_class_bind_template_callback (widget_class, on_blank_screen_delay_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_lock_combo_changed_cb);
-  gtk_widget_class_bind_template_callback (widget_class, cc_number_object_to_string_for_seconds);
 }
 
 static void
