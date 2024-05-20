@@ -46,6 +46,7 @@ typedef enum
  * @CC_NUMBER_VALUE_STRING: always use the `string` property of the number
  * @CC_NUMBER_VALUE_SECONDS: interpret the value as a number of seconds
  * @CC_NUMBER_VALUE_MINUTES: interpret the value as a number of minutes
+ * @CC_NUMBER_VALUE_HOURS: interpret the value as a number of hours
  *
  * Defines how a `CcNumberRow` interprets a value in order to map it to
  * a string in the list.
@@ -55,7 +56,8 @@ typedef enum
   CC_NUMBER_VALUE_CUSTOM,
   CC_NUMBER_VALUE_STRING,
   CC_NUMBER_VALUE_SECONDS,
-  CC_NUMBER_VALUE_MINUTES
+  CC_NUMBER_VALUE_MINUTES,
+  CC_NUMBER_VALUE_HOURS
 } CcNumberValueType;
 
 #define CC_TYPE_NUMBER_OBJECT (cc_number_object_get_type())

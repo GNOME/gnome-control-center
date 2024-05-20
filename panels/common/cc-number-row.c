@@ -239,13 +239,17 @@ cc_number_object_get_order (CcNumberObject *self)
     return self->order;
 }
 
+#define MILLIS_PER_SEC (1000)
+#define MILLIS_PER_MIN (60 * MILLIS_PER_SEC)
+#define MILLIS_PER_HOUR (60 * MILLIS_PER_MIN)
+
 static char *
 cc_number_object_to_string_for_seconds (CcNumberObject *self)
 {
     if (self->string)
         return g_strdup (self->string);
 
-    return cc_util_time_to_string_text ((gint64) 1000 * self->value);
+    return cc_util_time_to_string_text ((gint64) MILLIS_PER_SEC * self->value);
 }
 
 static char *
@@ -254,7 +258,16 @@ cc_number_object_to_string_for_minutes (CcNumberObject *self)
     if (self->string)
         return g_strdup (self->string);
 
-    return cc_util_time_to_string_text ((gint64) 1000 * 60 * self->value);
+    return cc_util_time_to_string_text ((gint64) MILLIS_PER_MIN * self->value);
+}
+
+static char *
+cc_number_object_to_string_for_hours (CcNumberObject *self)
+{
+    if (self->string)
+        return g_strdup (self->string);
+
+    return cc_util_time_to_string_text ((gint64) MILLIS_PER_HOUR * self->value);
 }
 
 /**
@@ -379,6 +392,9 @@ cc_number_row_constructed (GObject *obj)
             break;
         case CC_NUMBER_VALUE_MINUTES:
             number_to_string_func = cc_number_object_to_string_for_minutes;
+            break;
+        case CC_NUMBER_VALUE_HOURS:
+            number_to_string_func = cc_number_object_to_string_for_hours;
             break;
         default:
             g_assert_not_reached ();
