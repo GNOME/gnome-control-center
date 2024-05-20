@@ -1,4 +1,4 @@
-/* cc-number-list.h
+/* cc-number-row.h
  *
  * Copyright 2024 Matthijs Velsink <mvelsink@gnome.org>
  *
@@ -23,7 +23,6 @@
 #include <gtk/gtk.h>
 
 G_BEGIN_DECLS
-
 
 /**
  * CcNumberOrder:

@@ -1,4 +1,4 @@
-/* cc-number-list.c
+/* cc-number-row.c
  *
  * Copyright 2024 Matthijs Velsink <mvelsink@gnome.org>
  *
@@ -19,10 +19,10 @@
  */
 
 #undef G_LOG_DOMAIN
-#define G_LOG_DOMAIN "cc-number-list"
+#define G_LOG_DOMAIN "cc-number-row"
 
-#include "cc-number-list.h"
-#include "cc-number-list-enums.h"
+#include "cc-number-row.h"
+#include "cc-number-row-enums.h"
 #include "cc-util.h"
 
 /**
@@ -615,6 +615,6 @@ cc_number_list_has_value (CcNumberList *self,
     g_return_val_if_fail (CC_IS_NUMBER_LIST (self), FALSE);
 
     return g_list_store_find_with_equal_func_full (self->store, NULL,
-                                                   (GEqualFuncFull) equal_numbers, &value, 
+                                                   (GEqualFuncFull) equal_numbers, &value,
                                                    position);
 }

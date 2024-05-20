@@ -21,7 +21,7 @@
  */
 
 #include "cc-screen-page.h"
-#include "cc-number-list.h"
+#include "cc-number-row.h"
 
 #include "panels/display/cc-display-config-manager-dbus.h"
 
