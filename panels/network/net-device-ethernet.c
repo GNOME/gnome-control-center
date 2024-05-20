@@ -42,6 +42,7 @@ struct _NetDeviceEthernet
         GtkListBox         *details_listbox;
         AdwActionRow       *details_row;
         GtkSwitch          *device_off_switch;
+        GtkWidget          *empty_connection_list;
 
         NMClient           *client;
         NMDevice           *device;
@@ -377,6 +378,7 @@ populate_ui (NetDeviceEthernet *self)
         }
 
         gtk_widget_set_visible (GTK_WIDGET (self->connection_stack), n_connections >= 1);
+        gtk_widget_set_visible (self->empty_connection_list, n_connections == 0);
 
         g_slist_free (connections);
 }
@@ -495,6 +497,7 @@ net_device_ethernet_class_init (NetDeviceEthernetClass *klass)
         gtk_widget_class_bind_template_child (widget_class, NetDeviceEthernet, details_listbox);
         gtk_widget_class_bind_template_child (widget_class, NetDeviceEthernet, details_row);
         gtk_widget_class_bind_template_child (widget_class, NetDeviceEthernet, device_off_switch);
+        gtk_widget_class_bind_template_child (widget_class, NetDeviceEthernet, empty_connection_list);
 
         gtk_widget_class_bind_template_callback (widget_class, connection_list_row_activated_cb);
         gtk_widget_class_bind_template_callback (widget_class, device_off_switch_changed_cb);
