@@ -20,18 +20,18 @@
 
 #pragma once
 
-#include <gtk/gtk.h>
+#include <adwaita.h>
 
 G_BEGIN_DECLS
 
 /**
  * CcNumberOrder:
- * @CC_NUMBER_ORDER_FIRST: place number first in the list
- * @CC_NUMBER_ORDER_DEFAULT: use the `sort-type` of the list
- * @CC_NUMBER_ORDER_LAST: place number last in the list
+ * @CC_NUMBER_ORDER_FIRST: place number first in the list of the row
+ * @CC_NUMBER_ORDER_DEFAULT: use the `sort-type` of the row
+ * @CC_NUMBER_ORDER_LAST: place number last in the list of the row
  *
  * Defines a special, fixed ordering of a `CcNumberObject` inside a
- * `CcNumberList`.
+ * `CcNumberRow`.
  */
 typedef enum
 {
@@ -53,14 +53,14 @@ CcNumberOrder cc_number_object_get_order  (CcNumberObject *self);
 char *cc_number_object_to_string_for_seconds (CcNumberObject *self);
 char *cc_number_object_to_string_for_minutes (CcNumberObject *self);
 
-#define CC_TYPE_NUMBER_LIST (cc_number_list_get_type())
-G_DECLARE_FINAL_TYPE (CcNumberList, cc_number_list, CC, NUMBER_LIST, GObject)
+#define CC_TYPE_NUMBER_ROW (cc_number_row_get_type())
+G_DECLARE_FINAL_TYPE (CcNumberRow, cc_number_row, CC, NUMBER_ROW, AdwComboRow)
 
-CcNumberList *cc_number_list_new (GtkSortType sort_type);
+CcNumberRow *cc_number_row_new (GtkSortType sort_type);
 
-guint    cc_number_list_add_value      (CcNumberList *self, int value);
-guint    cc_number_list_add_value_full (CcNumberList *self, int value, const char *string, CcNumberOrder order);
-int      cc_number_list_get_value      (CcNumberList *self, guint position);
-gboolean cc_number_list_has_value      (CcNumberList *self, int value, guint *position);
+guint    cc_number_row_add_value      (CcNumberRow *self, int value);
+guint    cc_number_row_add_value_full (CcNumberRow *self, int value, const char *string, CcNumberOrder order);
+int      cc_number_row_get_value      (CcNumberRow *self, guint position);
+gboolean cc_number_row_has_value      (CcNumberRow *self, int value, guint *position);
 
 G_END_DECLS

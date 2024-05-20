@@ -141,7 +141,7 @@ cc_number_object_class_init (CcNumberObjectClass *klass)
     /**
     * CcNumberObject:order: (attributes org.gtk.Property.get=cc_number_object_get_order)
     *
-    * The (optional) fixed ordering of the `CcNumberObject` inside a `CcNumberList`.
+    * The (optional) fixed ordering of the `CcNumberObject` inside a `CcNumberRow` list.
     */
     obj_props[OBJ_PROP_ORDER] =
         g_param_spec_enum ("order", NULL, NULL,
@@ -227,7 +227,7 @@ cc_number_object_get_string (CcNumberObject *self)
  * cc_number_object_get_order:
  * @self: a `CcNumberObject`
  *
- * Gets the fixed orderering of @self inside a `CcNumberList`.
+ * Gets the fixed orderering of @self inside a `CcNumberRow` list.
  *
  * Returns: (nullable): the fixed orderering
  */
@@ -282,69 +282,34 @@ cc_number_object_to_string_for_minutes (CcNumberObject *self)
 }
 
 /**
- * CcNumberList:
+ * CcNumberRow:
  *
- * `CcNumberList` is a simple list model that wraps a GListStore of
+ * `CcNumberRow` is an `AdwComboRow` with a model that wraps a GListStore of
  * `CcStringObject`. It has convenient methods to add values directly.
  */
 
-struct _CcNumberList {
-    GObject      parent_instance;
+struct _CcNumberRow {
+    AdwComboRow  parent_instance;
 
     GListStore  *store;
     GtkSortType  sort_type;
 };
 
-static GType
-cc_number_list_get_item_type (GListModel *list)
-{
-    CcNumberList *self = CC_NUMBER_LIST (list);
-
-    return g_list_model_get_item_type (G_LIST_MODEL (self->store));
-}
-
-static guint
-cc_number_list_get_n_items (GListModel *list)
-{
-    CcNumberList *self = CC_NUMBER_LIST (list);
-
-    return g_list_model_get_n_items (G_LIST_MODEL (self->store));
-}
-
-static gpointer
-cc_number_list_get_item (GListModel *list,
-                         guint       position)
-{
-    CcNumberList *self = CC_NUMBER_LIST (list);
-
-    return g_list_model_get_item (G_LIST_MODEL (self->store), position);
-}
-
-static void
-cc_number_list_model_init (GListModelInterface *iface)
-{
-    iface->get_item_type = cc_number_list_get_item_type;
-    iface->get_n_items = cc_number_list_get_n_items;
-    iface->get_item = cc_number_list_get_item;
-}
-
-G_DEFINE_TYPE_WITH_CODE (CcNumberList, cc_number_list, G_TYPE_OBJECT,
-                         G_IMPLEMENT_INTERFACE (G_TYPE_LIST_MODEL,
-                                                cc_number_list_model_init))
+G_DEFINE_TYPE(CcNumberRow, cc_number_row, ADW_TYPE_COMBO_ROW)
 
 enum {
-    LST_PROP_0,
-    LST_PROP_SORT_TYPE,
-    LST_PROP_VALUES,
-    LST_PROP_SPECIAL_VALUE,
-    LST_N_PROPS
+    ROW_PROP_0,
+    ROW_PROP_SORT_TYPE,
+    ROW_PROP_VALUES,
+    ROW_PROP_SPECIAL_VALUE,
+    ROW_N_PROPS
 };
 
-static GParamSpec *lst_props[LST_N_PROPS];
+static GParamSpec *row_props[ROW_N_PROPS];
 
 static void
-cc_number_list_add_values_from_variant (CcNumberList *self,
-                                        GVariant     *variant)
+cc_number_row_add_values_from_variant (CcNumberRow *self,
+                                       GVariant    *variant)
 {
     const int *values;
     gsize n_elements, i;
@@ -365,22 +330,22 @@ cc_number_list_add_values_from_variant (CcNumberList *self,
 }
 
 static void
-cc_number_list_set_property (GObject      *object,
-                             guint         prop_id,
-                             const GValue *value,
-                             GParamSpec   *pspec)
+cc_number_row_set_property (GObject      *object,
+                            guint         prop_id,
+                            const GValue *value,
+                            GParamSpec   *pspec)
 {
-    CcNumberList *self = CC_NUMBER_LIST (object);
+    CcNumberRow *self = CC_NUMBER_ROW (object);
     CcNumberObject *number;
 
     switch (prop_id) {
-    case LST_PROP_SORT_TYPE:
+    case ROW_PROP_SORT_TYPE:
         self->sort_type = g_value_get_enum (value);
         break;
-    case LST_PROP_VALUES:
-        cc_number_list_add_values_from_variant (self, g_value_get_variant (value));
+    case ROW_PROP_VALUES:
+        cc_number_row_add_values_from_variant (self, g_value_get_variant (value));
         break;
-    case LST_PROP_SPECIAL_VALUE:
+    case ROW_PROP_SPECIAL_VALUE:
         /* Construct-only property, so check for NULL, as NULL is passed if not provided */
         number = g_value_get_object (value);
         if (number)
@@ -394,7 +359,7 @@ cc_number_list_set_property (GObject      *object,
 static int
 compare_numbers (CcNumberObject *number_a,
                  CcNumberObject *number_b,
-                 CcNumberList   *self)
+                 CcNumberRow    *self)
 {
     /* Handle special order first (works because of the ordering of CcNumberOrder) */
     if (number_a->order != CC_NUMBER_ORDER_DEFAULT ||
@@ -409,103 +374,102 @@ compare_numbers (CcNumberObject *number_a,
 }
 
 static void
-cc_number_list_constructed (GObject *obj)
+cc_number_row_constructed (GObject *obj)
 {
-    CcNumberList *self = CC_NUMBER_LIST (obj);
+    CcNumberRow *self = CC_NUMBER_ROW (obj);
 
     /* Sort now, as construct-only values could be added before sort-type was changed */
     g_list_store_sort (self->store, (GCompareDataFunc) compare_numbers, self);
 
-    G_OBJECT_CLASS (cc_number_list_parent_class)->constructed (obj);
+    /* Only now add it as a model */
+    adw_combo_row_set_model (ADW_COMBO_ROW (self), G_LIST_MODEL (self->store));
+
+    G_OBJECT_CLASS (cc_number_row_parent_class)->constructed (obj);
 }
 
 static void
-cc_number_list_dispose (GObject *object)
+cc_number_row_dispose (GObject *object)
 {
-    CcNumberList *self = CC_NUMBER_LIST (object);
+    CcNumberRow *self = CC_NUMBER_ROW (object);
 
     g_clear_object (&self->store);
 
-    G_OBJECT_CLASS (cc_number_list_parent_class)->dispose (object);
+    G_OBJECT_CLASS (cc_number_row_parent_class)->dispose (object);
 }
 
 static void
-cc_number_list_class_init (CcNumberListClass *klass)
+cc_number_row_class_init (CcNumberRowClass *klass)
 {
     GObjectClass *object_class = G_OBJECT_CLASS (klass);
     g_autoptr(GVariantType) values_type = NULL;
 
-    object_class->constructed = cc_number_list_constructed;
-    object_class->dispose = cc_number_list_dispose;
-    object_class->set_property = cc_number_list_set_property;
+    object_class->constructed = cc_number_row_constructed;
+    object_class->dispose = cc_number_row_dispose;
+    object_class->set_property = cc_number_row_set_property;
 
     /**
-    * CcNumberList:sort-type:
+    * CcNumberRow:sort-type:
     *
-    * The sorting of the numbers in the list.
+    * The sorting of the numbers in the list of the row.
     */
-    lst_props[LST_PROP_SORT_TYPE] =
+    row_props[ROW_PROP_SORT_TYPE] =
         g_param_spec_enum ("sort-type", NULL, NULL,
                            GTK_TYPE_SORT_TYPE, GTK_SORT_ASCENDING,
                            G_PARAM_WRITABLE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
 
     /**
-    * CcNumberList:values:
+    * CcNumberRow:values:
     *
     * A variant array of integer values. Mainly useful in .ui files, where it
     * allows for convenient array notation like [num1, num2, num3, ...].
     */
     values_type = g_variant_type_new_array (G_VARIANT_TYPE_INT32);
-    lst_props[LST_PROP_VALUES] =
+    row_props[ROW_PROP_VALUES] =
         g_param_spec_variant ("values", NULL, NULL,
                               values_type, NULL,
                               G_PARAM_WRITABLE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
 
     /**
-    * CcNumberList:special-value:
+    * CcNumberRow:special-value:
     *
-    * One special value to add to the list. Mainly useful in .ui files.
-    * If more special values are needed, use `cc_number_list_add_value_full()`.
+    * One special value to add to the list of the row. Mainly useful in .ui files.
+    * If more special values are needed, use `cc_number_row_add_value_full()`.
     */
-    lst_props[LST_PROP_SPECIAL_VALUE] =
+    row_props[ROW_PROP_SPECIAL_VALUE] =
         g_param_spec_object ("special-value", NULL, NULL,
                              CC_TYPE_NUMBER_OBJECT,
                              G_PARAM_WRITABLE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
 
-    g_object_class_install_properties (object_class, LST_N_PROPS, lst_props);
+    g_object_class_install_properties (object_class, ROW_N_PROPS, row_props);
 }
 
 static void
-cc_number_list_init (CcNumberList *self)
+cc_number_row_init (CcNumberRow *self)
 {
     self->store = g_list_store_new (CC_TYPE_NUMBER_OBJECT);
-
-    /* Simply loop the GListModel signal back around to self */
-    g_signal_connect_swapped (self->store, "items-changed",
-                              G_CALLBACK (g_list_model_items_changed), self);
 }
 
 /**
- * cc_number_list_new:
- * @sort_type: the sorting of the numbers in the list
+ * cc_number_row_new:
+ * @sort_type: the sorting of the numbers in the list of the row
  *
- * Creates a new `CcNumberList`, with sorting based on @sort_type.
+ * Creates a new `CcNumberRow`, with sorting based on @sort_type.
  *
- * Returns: the newly created `CcNumberList`
+ * Returns: the newly created `CcNumberRow`
  */
-CcNumberList *
-cc_number_list_new (GtkSortType sort_type)
+CcNumberRow *
+cc_number_row_new (GtkSortType sort_type)
 {
-    return g_object_new (CC_TYPE_NUMBER_LIST,
+    return g_object_new (CC_TYPE_NUMBER_ROW,
                          "sort-type", sort_type,
                          NULL);
 }
 
 static guint
-cc_number_list_add_number (CcNumberList   *self,
-                           CcNumberObject *number)
+cc_number_row_add_number (CcNumberRow    *self,
+                          CcNumberObject *number)
 {
-    g_return_val_if_fail (CC_IS_NUMBER_LIST (self), 0);
+    g_return_val_if_fail (CC_IS_NUMBER_ROW (self), 0);
     g_return_val_if_fail (CC_IS_NUMBER_OBJECT (number), 0);
 
     return g_list_store_insert_sorted (self->store, number,
@@ -513,11 +477,11 @@ cc_number_list_add_number (CcNumberList   *self,
 }
 
 /**
- * cc_number_list_add_value:
- * @self: a `CcNumberList`
- * @value: the value to store in the list
+ * cc_number_row_add_value:
+ * @self: a `CcNumberRow`
+ * @value: the value to store in the list of @self
  *
- * Adds a new `CcNumberObject` based on @value to the list.
+ * Adds a new `CcNumberObject` based on @value to the list of @self.
  * The value will be inserted with the correct sorting.
  *
  * Also see `cc_number_object_new()`.
@@ -525,23 +489,23 @@ cc_number_list_add_number (CcNumberList   *self,
  * Returns: the position in the list where the value got stored
  */
 guint
-cc_number_list_add_value (CcNumberList *self,
-                          int           value)
+cc_number_row_add_value (CcNumberRow *self,
+                         int          value)
 {
     g_autoptr(CcNumberObject) number = cc_number_object_new (value);
 
-    return cc_number_list_add_number (self, number);
+    return cc_number_row_add_number (self, number);
 }
 
 /**
- * cc_number_list_add_value_full:
- * @self: a `CcNumberList`
- * @value: the value to store in the list
+ * cc_number_row_add_value_full:
+ * @self: a `CcNumberRow`
+ * @value: the value to store in the list of @self
  * @string: (nullable): the fixed string representation of @value
  * @order: the fixed ordering of @value
  *
  * Adds a new `CcNumberObject` based on @value, @string, and @order to the
- * list.
+ * list of @self.
  * The value will be inserted with the correct sorting, which takes @order
  * into account. If two `CcNumberObject`s have the same special @order, their
  * ordering is based on the order in which they were added to the list.
@@ -551,32 +515,32 @@ cc_number_list_add_value (CcNumberList *self,
  * Returns: the position in the list where the value got stored
  */
 guint
-cc_number_list_add_value_full (CcNumberList  *self,
-                               int            value,
-                               const char    *string,
-                               CcNumberOrder  order)
+cc_number_row_add_value_full (CcNumberRow   *self,
+                              int            value,
+                              const char    *string,
+                              CcNumberOrder  order)
 {
     g_autoptr(CcNumberObject) number = cc_number_object_new_full (value, string, order);
 
-    return cc_number_list_add_number (self, number);
+    return cc_number_row_add_number (self, number);
 }
 
 /**
- * cc_number_list_get_value:
- * @self: a `CcNumberList`
+ * cc_number_row_get_value:
+ * @self: a `CcNumberRow`
  * @position: the position of the value to fetch
  *
- * Get the value at @position.
+ * Get the value at @position in the list of @self.
  *
  * Returns: the value at @position
  */
 int
-cc_number_list_get_value (CcNumberList *self,
-                          guint         position)
+cc_number_row_get_value (CcNumberRow *self,
+                         guint        position)
 {
     g_autoptr(CcNumberObject) number = NULL;
 
-    g_return_val_if_fail (CC_IS_NUMBER_LIST (self), -1);
+    g_return_val_if_fail (CC_IS_NUMBER_ROW (self), -1);
 
     number = g_list_model_get_item (G_LIST_MODEL (self->store), position);
 
@@ -597,22 +561,22 @@ equal_numbers (CcNumberObject *number,
 }
 
 /**
- * cc_number_list_has_value:
- * @self: a `CcNumberList`
+ * cc_number_row_has_value:
+ * @self: a `CcNumberRow`
  * @value: a value
  * @position: (out) (optional): the first position of @value, if it was found
  *
- * Looks up the given @value in the list. If the value is not found, @position
- * will not be set and the return value will be false.
+ * Looks up the given @value in the list of @self. If the value is not found,
+ * @position will not be set and the return value will be false.
  *
  * Returns: true if the list contains @value, false otherwise
  */
 gboolean
-cc_number_list_has_value (CcNumberList *self,
-                          int           value,
-                          guint        *position)
+cc_number_row_has_value (CcNumberRow *self,
+                         int          value,
+                         guint       *position)
 {
-    g_return_val_if_fail (CC_IS_NUMBER_LIST (self), FALSE);
+    g_return_val_if_fail (CC_IS_NUMBER_ROW (self), FALSE);
 
     return g_list_store_find_with_equal_func_full (self->store, NULL,
                                                    (GEqualFuncFull) equal_numbers, &value,

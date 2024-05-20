@@ -40,10 +40,8 @@ struct _CcScreenPage
 
   GCancellable  *cancellable;
 
-  AdwComboRow         *blank_screen_row;
-  CcNumberList        *blank_screen_list;
-  AdwComboRow         *lock_after_row;
-  CcNumberList        *lock_after_list;
+  CcNumberRow         *blank_screen_row;
+  CcNumberRow         *lock_after_row;
   AdwPreferencesGroup *screen_privacy_group;
   GDBusProxy          *usb_proxy;
   AdwSwitchRow        *automatic_screen_lock_row;
@@ -55,12 +53,12 @@ struct _CcScreenPage
 G_DEFINE_TYPE (CcScreenPage, cc_screen_page, ADW_TYPE_NAVIGATION_PAGE)
 
 static void
-on_lock_combo_changed_cb (AdwComboRow   *combo_row,
+on_lock_combo_changed_cb (CcNumberRow   *number_row,
                           GParamSpec    *pspec,
                           CcScreenPage  *self)
 {
-  int delay = cc_number_list_get_value (self->lock_after_list,
-                                        adw_combo_row_get_selected (combo_row));
+  int delay = cc_number_row_get_value (number_row,
+                                       adw_combo_row_get_selected (ADW_COMBO_ROW (number_row)));
 
   g_settings_set_uint (self->lock_settings, "lock-delay", delay);
 }
@@ -71,10 +69,10 @@ set_lock_delay_value (CcScreenPage *self,
 {
   guint position;
 
-  if (!cc_number_list_has_value (self->lock_after_list, value, &position))
-    position = cc_number_list_add_value (self->lock_after_list, value);
+  if (!cc_number_row_has_value (self->lock_after_row, value, &position))
+    position = cc_number_row_add_value (self->lock_after_row, value);
 
-  adw_combo_row_set_selected (self->lock_after_row, position);
+  adw_combo_row_set_selected (ADW_COMBO_ROW (self->lock_after_row), position);
 }
 
 static void
@@ -83,19 +81,19 @@ set_blank_screen_delay_value (CcScreenPage *self,
 {
   guint position;
 
-  if (!cc_number_list_has_value (self->blank_screen_list, value, &position))
-    position = cc_number_list_add_value (self->blank_screen_list, value);
+  if (!cc_number_row_has_value (self->blank_screen_row, value, &position))
+    position = cc_number_row_add_value (self->blank_screen_row, value);
 
-  adw_combo_row_set_selected (self->blank_screen_row, position);
+  adw_combo_row_set_selected (ADW_COMBO_ROW (self->blank_screen_row), position);
 }
 
 static void
-on_blank_screen_delay_changed_cb (AdwComboRow   *combo_row,
+on_blank_screen_delay_changed_cb (CcNumberRow   *number_row,
                                   GParamSpec    *pspec,
                                   CcScreenPage  *self)
 {
-  int delay = cc_number_list_get_value (self->blank_screen_list,
-                                        adw_combo_row_get_selected (combo_row));
+  int delay = cc_number_row_get_value (number_row,
+                                       adw_combo_row_get_selected (ADW_COMBO_ROW (number_row)));
 
   g_settings_set_uint (self->session_settings, "idle-delay", delay);
 }
@@ -177,15 +175,13 @@ cc_screen_page_class_init (CcScreenPageClass *klass)
 
   oclass->finalize = cc_screen_page_finalize;
 
-  g_type_ensure (CC_TYPE_NUMBER_LIST);
+  g_type_ensure (CC_TYPE_NUMBER_ROW);
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/privacy/screen/cc-screen-page.ui");
 
   gtk_widget_class_bind_template_child (widget_class, CcScreenPage, automatic_screen_lock_row);
   gtk_widget_class_bind_template_child (widget_class, CcScreenPage, blank_screen_row);
-  gtk_widget_class_bind_template_child (widget_class, CcScreenPage, blank_screen_list);
   gtk_widget_class_bind_template_child (widget_class, CcScreenPage, lock_after_row);
-  gtk_widget_class_bind_template_child (widget_class, CcScreenPage, lock_after_list);
   gtk_widget_class_bind_template_child (widget_class, CcScreenPage, privacy_screen_row);
   gtk_widget_class_bind_template_child (widget_class, CcScreenPage, screen_privacy_group);
   gtk_widget_class_bind_template_child (widget_class, CcScreenPage, show_notifications_row);
