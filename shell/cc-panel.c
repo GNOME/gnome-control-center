@@ -68,26 +68,6 @@ enum
 
 static GParamSpec *properties [N_PROPS];
 
-static void
-navigation_push_cb (CcPanel     *panel,
-                    const gchar *action_name,
-                    GVariant    *params)
-{
-  CcPanelPrivate *priv = cc_panel_get_instance_private (panel);
-  AdwNavigationPage *page;
-  const gchar *page_name;
-  GType page_type = G_TYPE_INVALID;
-
-  page_name = g_variant_get_string (params, NULL);
-
-  page_type = GPOINTER_TO_INT (g_hash_table_lookup (priv->subpages, page_name));
-  if (page_type == G_TYPE_INVALID)
-    return;
-
-  page = ADW_NAVIGATION_PAGE (g_object_new (page_type, NULL));
-  adw_navigation_view_push (priv->navigation, page);
-}
-
 /* GtkBuildable interface */
 static void
 cc_panel_buildable_add_child (GtkBuildable *buildable,
@@ -147,6 +127,14 @@ set_subpage (CcPanel     *panel,
 
   adw_navigation_view_push_by_tag (priv->navigation, tag);
   g_set_str (&priv->subpage, tag);
+}
+
+static void
+navigation_push_cb (CcPanel     *panel,
+                    const gchar *action_name,
+                    GVariant    *params)
+{
+  set_subpage (panel, g_variant_get_string (params, NULL));
 }
 
 static void
