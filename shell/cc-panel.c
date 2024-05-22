@@ -113,7 +113,7 @@ set_subpage (CcPanel     *panel,
     {
       if (g_hash_table_contains (priv->subpages, tag))
         {
-          GType page_type = GPOINTER_TO_INT (g_hash_table_lookup (priv->subpages, tag));
+          GType page_type = GPOINTER_TO_TYPE (g_hash_table_lookup (priv->subpages, tag));
 
           page = ADW_NAVIGATION_PAGE (g_object_new (page_type, NULL));
           adw_navigation_view_add (priv->navigation, page);
@@ -328,7 +328,7 @@ cc_panel_add_static_subpage (CcPanel     *panel,
 
   g_return_if_fail (CC_IS_PANEL (panel));
 
-  g_hash_table_insert (priv->subpages, g_strdup (page_tag), GINT_TO_POINTER (page_type));
+  g_hash_table_insert (priv->subpages, g_strdup (page_tag), GTYPE_TO_POINTER (page_type));
 }
 
 void
