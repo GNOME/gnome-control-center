@@ -47,8 +47,6 @@ typedef struct
 
   AdwNavigationView *navigation;
 
-  gchar *subpage;
-
   GHashTable *subpages;
 } CcPanelPrivate;
 
@@ -126,7 +124,6 @@ set_subpage (CcPanel     *panel,
      }
 
   adw_navigation_view_push_by_tag (priv->navigation, tag);
-  g_set_str (&priv->subpage, tag);
 }
 
 static void
@@ -218,7 +215,6 @@ cc_panel_finalize (GObject *object)
 
   g_cancellable_cancel (priv->cancellable);
   g_clear_object (&priv->cancellable);
-  g_clear_pointer (&priv->subpage, g_free);
   g_clear_pointer (&priv->subpages, g_hash_table_unref);
 
   G_OBJECT_CLASS (cc_panel_parent_class)->finalize (object);
