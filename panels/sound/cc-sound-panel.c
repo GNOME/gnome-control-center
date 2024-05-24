@@ -193,7 +193,7 @@ input_device_update_cb (CcSoundPanel *self,
   device = cc_device_combo_box_get_device (self->input_device_combo_box);
 
   gtk_widget_set_visible (GTK_WIDGET (self->input_group), device != NULL);
-  gtk_widget_set_visible (GTK_WIDGET (self->input_no_devices_group), device != NULL);
+  gtk_widget_set_visible (GTK_WIDGET (self->input_no_devices_group), device == NULL);
 
   cc_profile_combo_box_set_device (self->input_profile_combo_box, self->mixer_control, device);
   has_multi_profiles = (cc_profile_combo_box_get_profile_count (self->input_profile_combo_box) > 1);
