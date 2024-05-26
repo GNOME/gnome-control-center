@@ -61,9 +61,9 @@ struct _NetDeviceWifi
         GtkBox                  *header_box;
         GtkPopover              *header_button_popover;
         GtkBox                  *hotspot_box;
-        CcListRow               *hotspot_name_row;
-        CcListRow               *hotspot_security_row;
-        CcListRow               *hotspot_password_row;
+        AdwActionRow            *hotspot_name_row;
+        AdwActionRow            *hotspot_security_row;
+        AdwActionRow            *hotspot_password_row;
         GtkBox                  *listbox_box;
         GtkStack                *stack;
         AdwPreferencesGroup     *saved_networks_box;
@@ -281,13 +281,13 @@ nm_device_wifi_refresh_hotspot (NetDeviceWifi *self)
         g_debug ("Refreshing hotspot labels to name: '%s', security key: '%s', security: '%s'",
                  hotspot_ssid, hotspot_secret, hotspot_security);
 
-        cc_list_row_set_secondary_label (self->hotspot_name_row, hotspot_ssid);
+        adw_action_row_set_subtitle (self->hotspot_name_row, hotspot_ssid);
         gtk_widget_set_visible (GTK_WIDGET (self->hotspot_name_row), hotspot_ssid != NULL);
 
-        cc_list_row_set_secondary_label (self->hotspot_password_row, hotspot_secret);
+        adw_action_row_set_subtitle (self->hotspot_password_row, hotspot_secret);
         gtk_widget_set_visible (GTK_WIDGET (self->hotspot_password_row), hotspot_secret != NULL);
 
-        cc_list_row_set_secondary_label (self->hotspot_security_row, hotspot_security);
+        adw_action_row_set_subtitle (self->hotspot_security_row, hotspot_security);
         gtk_widget_set_visible (GTK_WIDGET (self->hotspot_security_row), hotspot_security != NULL);
 }
 
