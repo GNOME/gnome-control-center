@@ -11,19 +11,14 @@
           <object class="AdwHeaderBar"/>
         </child>
         <property name="content">
-          <object class="GtkScrolledWindow">
-            <child>
-              <object class="AdwClamp">
+          <object class="AdwPreferencesPage">
 
+            <child>
+              <object class="AdwPreferencesGroup">
                 <child>
                   <object class="GtkBox">
-                    <property name="spacing">24</property>
                     <property name="orientation">vertical</property>
-                    <property name="margin-top">32</property>
-                    <property name="margin-bottom">32</property>
-                    <property name="margin-start">32</property>
-                    <property name="margin-end">32</property>
-
+                    <property name="spacing">24</property>
                     <child>
                       <object class="GtkPicture" id="qr_image">
                         <property name="halign">center</property>
@@ -38,49 +33,45 @@
                         </style>
                       </object>
                     </child>
-
                     <child>
                       <object class="GtkLabel" id="qr_title">
                         <property name="label" translatable="yes">Scan to Connect</property>
                         <property name="css-classes">title-1</property>
-                        <!-- Add a workaround to prevent all labels in this
-                        dialog from showing entirely selected without any user
-                        interaction. See https://gitlab.gnome.org/GNOME/gtk/-/issues/4377 -->
+                        <!-- Add a workaround to prevent this label from showing
+                        entirely selected without any user interaction.
+                        See https://gitlab.gnome.org/GNOME/gtk/-/issues/4377 -->
                         <property name="selectable" bind-source="CcQrCodeDialog" bind-property="visible" bind-flags="invert-boolean">True</property>
                       </object>
                     </child>
-
-                    <child>
-                      <object class="GtkBox">
-                        <property name="orientation">vertical</property>
-                        <child>
-                          <object class="GtkLabel" id="qr_subtitle_ssid">
-                            <property name="wrap">True</property>
-                            <property name="halign">center</property>
-                            <property name="justify">center</property>
-                            <property name="natural-wrap-mode">none</property>
-                            <property name="selectable" bind-source="CcQrCodeDialog" bind-property="visible" bind-flags="invert-boolean">True</property>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="GtkLabel" id="qr_subtitle_password">
-                            <property name="wrap">True</property>
-                            <property name="halign">center</property>
-                            <property name="justify">center</property>
-                            <property name="natural-wrap-mode">none</property>
-                            <property name="selectable" bind-source="CcQrCodeDialog" bind-property="visible" bind-flags="invert-boolean">True</property>
-                          </object>
-                        </child>
-                      </object>
-                    </child>
-
                   </object>
                 </child>
-
               </object>
             </child>
-          </object>
 
+            <child>
+              <object class="AdwPreferencesGroup">
+                <child>
+                  <object class="AdwActionRow" id="network_name_row">
+                    <property name="title" translatable="yes">Network Name</property>
+                    <property name="use-markup">False</property>
+                    <style>
+                      <class name="property"/>
+                    </style>
+                  </object>
+                </child>
+                <child>
+                  <object class="AdwActionRow" id="network_password_row">
+                    <property name="title" translatable="yes">Password</property>
+                    <property name="use-markup">False</property>
+                    <style>
+                      <class name="property"/>
+                    </style>
+                  </object>
+                </child>
+              </object>
+            </child>
+
+          </object>
         </property>
       </object>
     </property>
