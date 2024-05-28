@@ -166,6 +166,11 @@ on_user_added (CcUsersPage *self,
                ActUser     *user)
 {
   CcUserPage *page;
+
+  if (act_user_is_system_account (user)) {
+    return;
+  }
+
   g_list_store_insert_sorted (self->model, user, sort_users, self);
 
   page = CC_USER_PAGE (adw_navigation_view_get_visible_page (self->navigation));
