@@ -75,7 +75,7 @@ build.container.fedora@x86_64:
     # NOTES:
     # - most packages are needed for testing
     # - glibc-langpack-en is needed for sorting in run-style-check-diff.sh
-    # - libsass-devel, sassc are needed for building libadwaita
+    # - libsass-devel, sassc are often needed for building libadwaita, gtk, etc.
     FDO_DISTRIBUTION_PACKAGES: >-
       @c-development @development-tools
       dnf5-plugins
@@ -100,6 +100,13 @@ build.container.fedora@x86_64:
       dnf builddep -y gnome-settings-daemon && \
       git clone --depth 1 https://gitlab.gnome.org/GNOME/gnome-settings-daemon.git && \
         cd gnome-settings-daemon && \
+        meson setup _build --prefix=/usr && \
+        meson compile -C _build && \
+        meson install -C _build && \
+        cd .. && \
+      dnf builddep -y gtk4 && \
+      git clone --depth 1 https://gitlab.gnome.org/GNOME/gtk.git && \
+        cd gtk && \
         meson setup _build --prefix=/usr && \
         meson compile -C _build && \
         meson install -C _build && \
