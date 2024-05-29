@@ -604,11 +604,11 @@ on_got_rdp_credentials (GObject      *source_object,
       sync_permissions (self);
 
       g_variant_lookup (credentials, "username", "&s", &username);
-      if (username)
+      if (username && g_strcmp0 (username, gtk_editable_get_text (GTK_EDITABLE (self->username_entry))))
         gtk_editable_set_text (GTK_EDITABLE (self->username_entry), username);
 
       g_variant_lookup (credentials, "password", "&s", &password);
-      if (password)
+      if (password && g_strcmp0 (password, gtk_editable_get_text (GTK_EDITABLE (self->password_entry))))
         gtk_editable_set_text (GTK_EDITABLE (self->password_entry), password);
     }
 
