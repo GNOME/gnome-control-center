@@ -167,7 +167,8 @@ create_account_cb (GoaProvider *provider,
       return;
     }
 
-  show_account (self, object);
+  g_debug ("Created account for \"%s\"",
+           goa_account_get_identity (goa_object_peek_account (object)));
 }
 
 static void
