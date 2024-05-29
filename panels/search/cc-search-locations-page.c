@@ -87,7 +87,7 @@ cc_search_locations_page_finalize (GObject *object)
 
 static void other_places_refresh (CcSearchLocationsPage *self);
 static void populate_list_boxes (CcSearchLocationsPage *self);
-static gint place_compare_func (gconstpointer a, gconstpointer b, gpointer user_data);
+static gint place_compare_func (GtkListBoxRow *row_a, GtkListBoxRow *row_b, gpointer user_data);
 
 static void
 cc_search_locations_page_init (CcSearchLocationsPage *self)
@@ -107,11 +107,11 @@ cc_search_locations_page_init (CcSearchLocationsPage *self)
   populate_list_boxes (self);
 
   gtk_list_box_set_sort_func (GTK_LIST_BOX (self->places_list),
-                              (GtkListBoxSortFunc) place_compare_func, NULL, NULL);
+                              place_compare_func, NULL, NULL);
   gtk_list_box_set_sort_func (GTK_LIST_BOX (self->bookmarks_list),
-                              (GtkListBoxSortFunc) place_compare_func, NULL, NULL);
+                              place_compare_func, NULL, NULL);
   gtk_list_box_set_sort_func (GTK_LIST_BOX (self->others_list),
-                              (GtkListBoxSortFunc) place_compare_func, NULL, NULL);
+                              place_compare_func, NULL, NULL);
 
   g_signal_connect_swapped (self->tracker_preferences, "changed::" TRACKER_KEY_RECURSIVE_DIRECTORIES,
                             G_CALLBACK (other_places_refresh), self);
@@ -547,20 +547,16 @@ remove_button_clicked (CcSearchLocationsPage *self,
 }
 
 static gint
-place_compare_func (gconstpointer a,
-                    gconstpointer b,
-                    gpointer user_data)
+place_compare_func (GtkListBoxRow *row_a,
+                    GtkListBoxRow *row_b,
+                    gpointer       user_data)
 {
-  GtkWidget *child_a, *child_b;
   Place *place_a, *place_b;
   g_autofree char *path_a = NULL;
   g_autofree char *path_b = NULL;
 
-  child_a = GTK_WIDGET (a);
-  child_b = GTK_WIDGET (b);
-
-  place_a = g_object_get_data (G_OBJECT (child_a), "place");
-  place_b = g_object_get_data (G_OBJECT (child_b), "place");
+  place_a = g_object_get_data (G_OBJECT (row_a), "place");
+  place_b = g_object_get_data (G_OBJECT (row_b), "place");
 
   path_a = g_file_get_path (place_a->location);
   path_b = g_file_get_path (place_b->location);
