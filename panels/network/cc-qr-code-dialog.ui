@@ -28,6 +28,7 @@
                       <object class="GtkPicture" id="qr_image">
                         <property name="halign">center</property>
                         <property name="alternative-text" translatable="yes">QR Code</property>
+                        <property name="focusable">True</property>
                         <style>
                           <class name="card"/>
                           <class name="qr-image"/>
@@ -39,6 +40,10 @@
                       <object class="GtkLabel" id="qr_title">
                         <property name="label" translatable="yes">Scan to Connect</property>
                         <property name="css-classes">title-1</property>
+                        <!-- Add a workaround to prevent all labels in this
+                        dialog from showing entirely selected without any user
+                        interaction. See https://gitlab.gnome.org/GNOME/gtk/-/issues/4377 -->
+                        <property name="selectable" bind-source="CcQrCodeDialog" bind-property="visible" bind-flags="invert-boolean">True</property>
                       </object>
                     </child>
 
@@ -51,6 +56,7 @@
                             <property name="halign">center</property>
                             <property name="justify">center</property>
                             <property name="natural-wrap-mode">none</property>
+                            <property name="selectable" bind-source="CcQrCodeDialog" bind-property="visible" bind-flags="invert-boolean">True</property>
                           </object>
                         </child>
                         <child>
@@ -59,6 +65,7 @@
                             <property name="halign">center</property>
                             <property name="justify">center</property>
                             <property name="natural-wrap-mode">none</property>
+                            <property name="selectable" bind-source="CcQrCodeDialog" bind-property="visible" bind-flags="invert-boolean">True</property>
                           </object>
                         </child>
                       </object>
