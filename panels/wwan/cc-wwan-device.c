@@ -90,6 +90,31 @@ enum {
 
 static GParamSpec *properties[N_PROPS];
 
+void
+cc_wwan_device_set_primary_sim_slot (CcWwanDevice *self, guint sim_slot, GCancellable *cancellable)
+{
+  GError *error = NULL;
+
+  mm_modem_set_primary_sim_slot_sync (self->modem, sim_slot, cancellable, &error);
+
+  if (error)
+    g_warning ("Error:%s", error->message);
+}
+
+GPtrArray *
+cc_wwan_device_get_sim_slots (CcWwanDevice *self, GCancellable *cancellable)
+{
+  GError *error = NULL;
+  GPtrArray *sim_slots;
+
+  sim_slots = mm_modem_list_sim_slots_sync (self->modem, cancellable, &error);
+
+  if (error)
+    g_warning ("Error:%s", error->message);
+
+  return sim_slots;
+} 
+
 static void
 cc_wwan_device_state_changed_cb (CcWwanDevice *self)
 {
@@ -972,6 +997,41 @@ cc_wwan_device_get_supported_modes (CcWwanDevice *self,
     }
 
   return TRUE;
+}
+
+gchar *
+cc_wwan_device_get_string_from_slots (CcWwanDevice *self,
+                                      MMSim *sim,
+                                      guint slot_num)
+{
+  g_return_val_if_fail (CC_IS_WWAN_DEVICE (self), NULL);
+
+  MMSimType simType;
+  gchar *slot_number;
+  GString *str, *mmSimType;
+
+  str = g_string_sized_new (5);
+  simType = mm_sim_get_sim_type (sim);
+  slot_number = g_strdup_printf ("Slot %d", slot_num);
+  g_string_append (str, slot_number);
+
+  switch(simType)
+  {
+    case MM_SIM_TYPE_UNKNOWN:
+      mmSimType = g_string_append (str, _(" [Unknown]"));
+      break;
+    case MM_SIM_TYPE_PHYSICAL:
+      mmSimType = g_string_append (str, _(" [Physical]"));
+      break;
+    case MM_SIM_TYPE_ESIM:
+      mmSimType = g_string_append (str, _(" [ESIM]"));
+      break;
+    default:
+      mmSimType = g_string_append (str, _(" [Unknown]"));
+      break;
+  }
+
+  return g_string_free (str, FALSE);
 }
 
 gchar *

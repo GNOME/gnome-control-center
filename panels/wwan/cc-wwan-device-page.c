@@ -37,6 +37,7 @@
 #include "cc-wwan-network-dialog.h"
 #include "cc-wwan-details-dialog.h"
 #include "cc-wwan-sim-lock-dialog.h"
+#include "cc-wwan-sim-slot-dialog.h"
 #include "cc-wwan-apn-dialog.h"
 #include "cc-wwan-device-page.h"
 #include "cc-wwan-resources.h"
@@ -70,6 +71,7 @@ struct _CcWwanDevicePage
   CcListRow     *network_name_row;
   GtkListBox    *network_settings_list;
   CcListRow     *sim_lock_row;
+  CcListRow     *sim_slot_row;
   GtkButton     *unlock_button;
 
   AdwToastOverlay *toast_overlay;
@@ -82,6 +84,7 @@ struct _CcWwanDevicePage
   GtkWindow     *network_mode_dialog;
   GtkWindow     *network_dialog;
   GtkWindow     *sim_lock_dialog;
+  GtkWindow     *sim_slot_dialog;
 
   gint                 sim_index;
   /* Set if a change is triggered in a signal’s callback,
@@ -390,6 +393,7 @@ wwan_advanced_settings_activated_cb (CcWwanDevicePage *self,
                                      CcListRow        *row)
 {
   GtkWindow *top_level;
+  GtkWidget *sim_slot_dialog;
 
   top_level = GTK_WINDOW (gtk_widget_get_root (GTK_WIDGET (self)));
 
@@ -403,6 +407,11 @@ wwan_advanced_settings_activated_cb (CcWwanDevicePage *self,
     {
       AdwDialog *dialog = cc_wwan_details_dialog_new (self->device);
       adw_dialog_present (dialog, GTK_WIDGET (top_level));
+    }
+  else if (row == self->sim_slot_row)
+    {
+      sim_slot_dialog = cc_wwan_sim_slot_dialog_new (GTK_BOX (self), self->device);
+      adw_dialog_present (ADW_DIALOG (sim_slot_dialog), GTK_WIDGET (self));
     }
   else if (row == self->apn_settings_row)
     {
@@ -535,6 +544,7 @@ cc_wwan_device_page_dispose (GObject *object)
   g_clear_pointer (&self->network_mode_dialog, gtk_window_destroy);
   g_clear_pointer (&self->network_dialog, gtk_window_destroy);
   g_clear_pointer (&self->sim_lock_dialog, gtk_window_destroy);
+  g_clear_pointer (&self->sim_slot_dialog, gtk_window_destroy);
 
   g_clear_object (&self->wwan_proxy);
   g_clear_object (&self->device);
@@ -577,6 +587,7 @@ cc_wwan_device_page_class_init (CcWwanDevicePageClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcWwanDevicePage, network_name_row);
   gtk_widget_class_bind_template_child (widget_class, CcWwanDevicePage, network_settings_list);
   gtk_widget_class_bind_template_child (widget_class, CcWwanDevicePage, sim_lock_row);
+  gtk_widget_class_bind_template_child (widget_class, CcWwanDevicePage, sim_slot_row);
   gtk_widget_class_bind_template_child (widget_class, CcWwanDevicePage, unlock_button);
 
   gtk_widget_class_bind_template_callback (widget_class, wwan_device_unlock_clicked_cb);

@@ -43,6 +43,12 @@ typedef enum
   CC_WWAN_REGISTRATION_STATE_DENIED
 } CcWwanState;
 
+typedef enum
+{
+  CC_WWAN_SIM_SLOT_1,
+  CC_WWAN_SIM_SLOT_2
+} CcWwanSimSlot;
+
 typedef struct _CcWwanData CcWwanData;
 
 #define CC_TYPE_WWAN_DEVICE (cc_wwan_device_get_type())
@@ -125,6 +131,9 @@ gboolean       cc_wwan_device_set_current_mode_finish (CcWwanDevice        *self
 gchar         *cc_wwan_device_get_string_from_mode    (CcWwanDevice        *self,
                                                        MMModemMode          allowed,
                                                        MMModemMode          preferred);
+gchar         *cc_wwan_device_get_string_from_slots   (CcWwanDevice        *self,
+                                                       MMSim               *sim,
+                                                       guint                slot_num);
 void           cc_wwan_device_scan_networks           (CcWwanDevice        *self,
                                                        GCancellable        *cancellable,
                                                        GAsyncReadyCallback  callback,
@@ -148,5 +157,10 @@ const gchar   *cc_wwan_device_get_path                (CcWwanDevice        *self
 CcWwanData    *cc_wwan_device_get_data                (CcWwanDevice        *self);
 gboolean       cc_wwan_device_pin_valid               (const gchar         *password,
                                                        MMModemLock          lock);
+GPtrArray     *cc_wwan_device_get_sim_slots           (CcWwanDevice        *self, 
+                                                       GCancellable        *cancellable);
+void           cc_wwan_device_set_primary_sim_slot    (CcWwanDevice        *self, 
+                                                       guint                sim_slot, 
+                                                       GCancellable        *cancellable);
 
 G_END_DECLS
