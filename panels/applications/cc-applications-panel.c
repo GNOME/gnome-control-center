@@ -1267,7 +1267,7 @@ update_cache_row (CcApplicationsPanel *self,
 {
   g_autoptr(GFile) dir = get_flatpak_app_dir (app_id, "cache");
 
-  adw_action_row_set_subtitle (self->storage_dialog_cache_row, "...");
+  adw_action_row_set_subtitle (self->storage_dialog_cache_row, "…");
 
   file_size_async (dir, cc_panel_get_cancellable (CC_PANEL (self)), set_cache_size, self);
 }
@@ -1302,7 +1302,7 @@ update_data_row (CcApplicationsPanel *self,
 {
   g_autoptr(GFile) dir = get_flatpak_app_dir (app_id, "data");
 
-  adw_action_row_set_subtitle (self->storage_dialog_data_row, "...");
+  adw_action_row_set_subtitle (self->storage_dialog_data_row, "…");
 
   file_size_async (dir, cc_panel_get_cancellable (CC_PANEL (self)), set_data_size, self);
 }
