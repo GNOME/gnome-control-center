@@ -403,12 +403,9 @@ printer_details_cb (PpPrinterEntry *self)
                                                    self->printer_make_and_model,
                                                    self->is_authorized);
 
-  gtk_window_set_transient_for (GTK_WINDOW (dialog),
-                                GTK_WINDOW (gtk_widget_get_native (GTK_WIDGET (self))));
+  g_signal_connect_swapped (dialog, "close-attempt", G_CALLBACK (show_printer_details_response_cb), self);
 
-  g_signal_connect_swapped (dialog, "close-request", G_CALLBACK (show_printer_details_response_cb), self);
-
-  gtk_window_present (GTK_WINDOW (dialog));
+  adw_dialog_present (ADW_DIALOG (dialog), GTK_WIDGET (self));
 }
 
 static void

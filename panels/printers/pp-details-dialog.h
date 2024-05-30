@@ -26,7 +26,7 @@
 G_BEGIN_DECLS
 
 #define PP_DETAILS_DIALOG_TYPE (pp_details_dialog_get_type ())
-G_DECLARE_FINAL_TYPE (PpDetailsDialog, pp_details_dialog, PP, DETAILS_DIALOG, AdwWindow)
+G_DECLARE_FINAL_TYPE (PpDetailsDialog, pp_details_dialog, PP, DETAILS_DIALOG, AdwDialog)
 
 PpDetailsDialog *pp_details_dialog_new                  (gchar   *printer_name,
                                                          gchar   *printer_location,
