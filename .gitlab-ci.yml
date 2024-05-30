@@ -240,7 +240,7 @@ coverage:
     - *build_procedure
     - *run_tests
 
-    - meson compile -C _build coverage-html
+    - ninja -C _build coverage-html
 
     # Parse the report to get the coverage result
     - |
