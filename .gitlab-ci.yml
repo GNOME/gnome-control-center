@@ -226,6 +226,8 @@ coverage:
   extends:
     - '.fdo.suffixed-image@fedora'
     - '.fedora.container.common'
+  dependencies:
+    - build.container.fedora@x86_64
   stage: test
   variables:
     BUILD_OPTS: "-Db_coverage=true"
