@@ -40,7 +40,6 @@ struct _CcMouseTest
 
     gint double_click_delay;
     guint reset_timeout_id;
-    guint primary_timeout_id;
 };
 
 G_DEFINE_TYPE (CcMouseTest, cc_mouse_test, ADW_TYPE_WINDOW);
@@ -73,16 +72,6 @@ reset_indicators (CcMouseTest *self)
     return FALSE;
 }
 
-static gboolean
-primary_click_timeout (CcMouseTest *self)
-{
-    g_clear_handle_id (&self->primary_timeout_id, g_source_remove);
-
-    gtk_widget_add_css_class (self->primary_click_image, "success");
-
-    return FALSE;
-}
-
 static void
 on_test_button_clicked_cb (GtkGestureClick *gesture,
                            gint             n_press,
@@ -92,10 +81,8 @@ on_test_button_clicked_cb (GtkGestureClick *gesture,
 {
     CcMouseTest *self = CC_MOUSE_TEST (user_data);
     guint button;
-    guint reset_indicators_delay = self->double_click_delay * 2;
 
     g_clear_handle_id (&self->reset_timeout_id, g_source_remove);
-    g_clear_handle_id (&self->primary_timeout_id, g_source_remove);
 
     reset_indicators (self);
 
@@ -105,15 +92,12 @@ on_test_button_clicked_cb (GtkGestureClick *gesture,
     } else if (button == GDK_BUTTON_PRIMARY && n_press == 2) {
         gtk_widget_add_css_class (self->double_click_image, "success");
     } else if (button == GDK_BUTTON_PRIMARY && n_press == 1) {
-        self->primary_timeout_id =
-            g_timeout_add (self->double_click_delay, (GSourceFunc) primary_click_timeout, self);
-        reset_indicators_delay = self->double_click_delay * 3;
+        gtk_widget_add_css_class (self->primary_click_image, "success");
     }
 
-    /* Reset the buttons to default state after double_click_delay * 2 for double or secondary
-       click, or double_click_delay * 3 for primary click to always indicate equally long. */
+    /* Reset the buttons to default state after double_click_delay * 2 */
     self->reset_timeout_id =
-        g_timeout_add (reset_indicators_delay, (GSourceFunc) reset_indicators, self);
+        g_timeout_add (self->double_click_delay * 2, (GSourceFunc) reset_indicators, self);
 }
 
 static void
@@ -141,7 +125,6 @@ cc_mouse_test_finalize (GObject *object)
     CcMouseTest *self = CC_MOUSE_TEST (object);
 
     g_clear_handle_id (&self->reset_timeout_id, g_source_remove);
-    g_clear_handle_id (&self->primary_timeout_id, g_source_remove);
 
     G_OBJECT_CLASS (cc_mouse_test_parent_class)->finalize (object);
 }
