@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2024-05-29 15:04+0000\n"
-"PO-Revision-Date: 2024-05-30 09:39+0200\n"
+"POT-Creation-Date: 2024-05-31 09:47+0000\n"
+"PO-Revision-Date: 2024-05-31 15:37+0200\n"
 "Last-Translator: Martin Srebotnjak <miles@filmsi.net>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "Language: sl_SI\n"
@@ -1005,9 +1005,9 @@ msgstr "Umerjanje zaslona"
 #: panels/network/connection-editor/connection-editor.ui:16
 #: panels/printers/new-printer-dialog.ui:54
 #: panels/printers/pp-details-dialog.c:267
-#: panels/privacy/usage/cc-usage-page.ui:126
-#: panels/privacy/usage/cc-usage-page.ui:137
-#: panels/privacy/usage/cc-usage-page.ui:148
+#: panels/privacy/usage/cc-usage-page.ui:125
+#: panels/privacy/usage/cc-usage-page.ui:136
+#: panels/privacy/usage/cc-usage-page.ui:147
 #: panels/sharing/cc-sharing-panel.c:274
 #: panels/system/region/cc-format-chooser.ui:24
 #: panels/system/users/cc-add-user-dialog.ui:22
@@ -1574,6 +1574,15 @@ msgstr "Več …"
 #: panels/common/cc-list-row-info-button.ui:6
 msgid "More Information"
 msgstr "Več podrobnosti"
+
+#: panels/common/cc-number-row.c:280
+#, c-format
+msgid "%d day"
+msgid_plural "%d days"
+msgstr[0] "%d dni"
+msgstr[1] "%d dan"
+msgstr[2] "%d dneva"
+msgstr[3] "%d dnevi"
 
 #: panels/common/cc-permission-infobar.c:199
 msgid "Error — some settings cannot be unlocked"
@@ -3226,7 +3235,7 @@ msgstr "Brez"
 
 #. Translators: Option for Blank Screen in Screen Lock page
 #: panels/network/connection-editor/ce-page-details.c:177
-#: panels/privacy/screen/cc-screen-page.ui:103
+#: panels/privacy/screen/cc-screen-page.ui:28
 msgid "Never"
 msgstr "Nikoli"
 
@@ -6394,134 +6403,50 @@ msgstr "_Zamik zatemnitve zaslona"
 msgid "Period of inactivity until screen blanks"
 msgstr "Čas nedejavnosti, po katerem se zaslon ugasne"
 
-#: panels/privacy/screen/cc-screen-page.ui:35
+#: panels/privacy/screen/cc-screen-page.ui:39
 msgid "Automatic Screen _Lock"
 msgstr "Samodejno zakleni zaslon"
 
-#: panels/privacy/screen/cc-screen-page.ui:36
+#: panels/privacy/screen/cc-screen-page.ui:40
 msgid "Locks the screen after it blanks"
 msgstr "Zaklene zaslon ob nedejavnosti"
 
-#: panels/privacy/screen/cc-screen-page.ui:44
+#: panels/privacy/screen/cc-screen-page.ui:48
 msgid "Automatic _Screen Lock Delay"
 msgstr "Zamik samodejnega zaklepanja zaslona"
 
-#: panels/privacy/screen/cc-screen-page.ui:45
+#: panels/privacy/screen/cc-screen-page.ui:49
 msgid "Time from screen blank to screen lock"
 msgstr "Čas med izklopom in zaklepom zaslona"
 
+#. Translators: Option for Automatic Screen Lock in Screen Lock page
+#: panels/privacy/screen/cc-screen-page.ui:56
+msgid "Screen Turns Off"
+msgstr "Zaslon se izklopi"
+
 #. Translators: Whether to show notifications on the lock screen
-#: panels/privacy/screen/cc-screen-page.ui:59
+#: panels/privacy/screen/cc-screen-page.ui:66
 msgid "Lock Screen _Notifications"
 msgstr "Obvestila na _zaklenjenem zaslonu"
 
-#: panels/privacy/screen/cc-screen-page.ui:68
+#: panels/privacy/screen/cc-screen-page.ui:75
 msgid "Forbid New _USB Devices"
 msgstr "Prepovej nove naprave _USB"
 
-#: panels/privacy/screen/cc-screen-page.ui:69
+#: panels/privacy/screen/cc-screen-page.ui:76
 msgid ""
 "Prevent new USB devices from interacting with the system when the screen is "
 "locked"
 msgstr ""
 "Prepreči novim napravam USB povezovanje v sistem, ko je zaslon zaklenjen"
 
-#: panels/privacy/screen/cc-screen-page.ui:80
+#: panels/privacy/screen/cc-screen-page.ui:87
 msgid "Screen Privacy"
 msgstr "Zasebnost zaslona"
 
-#: panels/privacy/screen/cc-screen-page.ui:85
+#: panels/privacy/screen/cc-screen-page.ui:92
 msgid "Restrict Viewing _Angle"
 msgstr "Omeji _kot pogleda"
-
-#. Translators: Option for Automatic Screen Lock in Screen Lock page
-#: panels/privacy/screen/cc-screen-page.ui:114
-msgid "Screen Turns Off"
-msgstr "Zaslon se izklopi"
-
-#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
-#: panels/privacy/usage/cc-usage-page.c:54
-msgctxt "purge_files"
-msgid "1 hour"
-msgstr "1 ura"
-
-#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
-#: panels/privacy/usage/cc-usage-page.c:57
-msgctxt "purge_files"
-msgid "1 day"
-msgstr "1 dan"
-
-#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
-#: panels/privacy/usage/cc-usage-page.c:60
-msgctxt "purge_files"
-msgid "2 days"
-msgstr "2 dni"
-
-#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
-#: panels/privacy/usage/cc-usage-page.c:63
-msgctxt "purge_files"
-msgid "3 days"
-msgstr "3 dni"
-
-#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
-#: panels/privacy/usage/cc-usage-page.c:66
-msgctxt "purge_files"
-msgid "4 days"
-msgstr "4 dni"
-
-#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
-#: panels/privacy/usage/cc-usage-page.c:69
-msgctxt "purge_files"
-msgid "5 days"
-msgstr "5 dni"
-
-#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
-#: panels/privacy/usage/cc-usage-page.c:72
-msgctxt "purge_files"
-msgid "6 days"
-msgstr "6 dni"
-
-#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
-#: panels/privacy/usage/cc-usage-page.c:75
-msgctxt "purge_files"
-msgid "7 days"
-msgstr "7 dni"
-
-#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
-#: panels/privacy/usage/cc-usage-page.c:78
-msgctxt "purge_files"
-msgid "14 days"
-msgstr "14 dni"
-
-#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
-#: panels/privacy/usage/cc-usage-page.c:81
-msgctxt "purge_files"
-msgid "30 days"
-msgstr "30 dni"
-
-#. Translators: Option for "File History Duration" in "File History" group
-#: panels/privacy/usage/cc-usage-page.c:161
-msgctxt "retain_history"
-msgid "1 day"
-msgstr "1 dan"
-
-#. Translators: Option for "File History Duration" in "File History" group
-#: panels/privacy/usage/cc-usage-page.c:164
-msgctxt "retain_history"
-msgid "7 days"
-msgstr "7 dni"
-
-#. Translators: Option for "File History Duration" in "File History" group
-#: panels/privacy/usage/cc-usage-page.c:167
-msgctxt "retain_history"
-msgid "30 days"
-msgstr "30 dni"
-
-#. Translators: Option for "File History Duration" in "File History" group
-#: panels/privacy/usage/cc-usage-page.c:170
-msgctxt "retain_history"
-msgid "Forever"
-msgstr "Trajno"
 
 #: panels/privacy/usage/cc-usage-page.ui:4
 msgid "File History & Trash"
@@ -6547,6 +6472,11 @@ msgstr "Zgodovina _datoteke"
 #: panels/privacy/usage/cc-usage-page.ui:26
 msgid "File _History Duration"
 msgstr "Trajanje zgodovine datoteke"
+
+#. Translators: Option for File History Duration in File History group
+#: panels/privacy/usage/cc-usage-page.ui:33
+msgid "Forever"
+msgstr "Na veke vekomaj"
 
 #: panels/privacy/usage/cc-usage-page.ui:45
 msgid "_Clear History…"
@@ -6576,47 +6506,52 @@ msgstr "Samodejno počisti _začasne datoteke"
 msgid "Automatic Deletion _Period"
 msgstr "_Perioda samodejnega brisanja"
 
-#: panels/privacy/usage/cc-usage-page.ui:94
+#. Translators: Option for Automatically Delete Period in Trash and Temporary Files group
+#: panels/privacy/usage/cc-usage-page.ui:81
+msgid "1 hour"
+msgstr "1 ura"
+
+#: panels/privacy/usage/cc-usage-page.ui:93
 msgid "_Empty Trash…"
 msgstr "Izprazni _smeti …"
 
-#: panels/privacy/usage/cc-usage-page.ui:104
+#: panels/privacy/usage/cc-usage-page.ui:103
 msgid "_Delete Temporary Files…"
 msgstr "_Počisti začasne datoteke …"
 
-#: panels/privacy/usage/cc-usage-page.ui:120
+#: panels/privacy/usage/cc-usage-page.ui:119
 msgid "Clear File History?"
 msgstr "Ali želite počistiti zgodovino datoteke?"
 
-#: panels/privacy/usage/cc-usage-page.ui:121
+#: panels/privacy/usage/cc-usage-page.ui:120
 msgid "After clearing, lists of recently used files will appear empty."
 msgstr "Po čiščenju bodo seznami nedavno uporabljenih datotek prazni."
 
-#: panels/privacy/usage/cc-usage-page.ui:127
+#: panels/privacy/usage/cc-usage-page.ui:126
 msgid "Clear _History"
 msgstr "Počisti _zgodovino"
 
-#: panels/privacy/usage/cc-usage-page.ui:131
+#: panels/privacy/usage/cc-usage-page.ui:130
 msgid "Empty all items from Trash?"
 msgstr "Ali naj se izbrišejo vsi predmeti iz smeti?"
 
-#: panels/privacy/usage/cc-usage-page.ui:132
+#: panels/privacy/usage/cc-usage-page.ui:131
 msgid "All items in the Trash will be permanently deleted."
 msgstr "Vsi predmeti v smeteh bodo trajno izbrisani."
 
-#: panels/privacy/usage/cc-usage-page.ui:138
+#: panels/privacy/usage/cc-usage-page.ui:137
 msgid "_Empty Trash"
 msgstr "Izprazni _smeti"
 
-#: panels/privacy/usage/cc-usage-page.ui:142
+#: panels/privacy/usage/cc-usage-page.ui:141
 msgid "Delete all the temporary files?"
 msgstr "Ali naj se izbrišejo vse začasne datoteke?"
 
-#: panels/privacy/usage/cc-usage-page.ui:143
+#: panels/privacy/usage/cc-usage-page.ui:142
 msgid "All the temporary files will be permanently deleted."
 msgstr "Vse začasne datoteke bodo trajno izbrisane."
 
-#: panels/privacy/usage/cc-usage-page.ui:149
+#: panels/privacy/usage/cc-usage-page.ui:148
 msgid "_Purge Temporary Files"
 msgstr "_Počisti začasne datoteke"
 
