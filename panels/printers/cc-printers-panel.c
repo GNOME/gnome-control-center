@@ -615,8 +615,6 @@ on_printer_deletion_undone (CcPrintersPanel *self)
 
   if (self->num_dests > 0)
     gtk_stack_set_visible_child_name (self->main_stack, "printers-list");
-
-  adw_toast_dismiss (self->toast);
 }
 
 static void
@@ -647,7 +645,10 @@ on_notification_dismissed (CcPrintersPanel *self)
       self->deleted_printer_name = NULL;
     }
 
-  adw_toast_dismiss (self->toast);
+  if (self->toast)
+    adw_toast_dismiss (self->toast);
+
+  self->toast = NULL;
 }
 
 static gboolean
@@ -668,24 +669,25 @@ on_printer_deleted (CcPrintersPanel *self,
 
   on_notification_dismissed (self);
 
+  if (!self->toast)
+    {
+      self->toast = adw_toast_new ("");
+
+      adw_toast_overlay_add_toast (self->toast_overlay, self->toast);
+      adw_toast_set_button_label (self->toast, _("Undo"));
+      adw_toast_set_timeout (self->toast, 10);
+
+      g_signal_connect_swapped (self->toast, "button-clicked",
+                                G_CALLBACK (on_printer_deletion_undone), self);
+      g_signal_connect_swapped (self->toast, "dismissed",
+                                G_CALLBACK (on_notification_dismissed), self);
+    }
+
   /* Translators: %s is the printer name */
   notification_message = g_strdup_printf (_("Printer “%s” has been deleted"),
                                           pp_printer_entry_get_name (printer_entry));
 
-  adw_toast_overlay_add_toast (self->toast_overlay, self->toast);
-
   adw_toast_set_title (self->toast, notification_message);
-
-  adw_toast_set_button_label (self->toast, _("Undo"));
-
-  adw_toast_set_timeout (self->toast, 10);
-
-  g_signal_connect_swapped (self->toast, "button-clicked",
-                            G_CALLBACK (on_printer_deletion_undone), self);
-
-  g_signal_connect_swapped (self->toast, "dismissed",
-                            G_CALLBACK (on_notification_dismissed), self);
-
   self->deleted_printer_name = g_strdup (pp_printer_entry_get_name (printer_entry));
 
   gtk_list_box_invalidate_filter (self->content);
@@ -918,6 +920,9 @@ printer_add_async_cb (GObject      *source_object,
       if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
         {
           g_warning ("%s", error->message);
+
+          if (!self->toast)
+            self->toast = adw_toast_new ("");
 
           adw_toast_overlay_add_toast (self->toast_overlay, self->toast);
           adw_toast_set_title (self->toast, _("Failed to add new printer."));
@@ -1231,8 +1236,6 @@ cc_printers_panel_init (CcPrintersPanel *self)
   gtk_widget_init_template (GTK_WIDGET (self));
 
   g_resources_register (cc_printers_get_resource ());
-
-  self->toast = adw_toast_new ("");
 
   provider = gtk_css_provider_new ();
   gtk_css_provider_load_from_resource (provider,
