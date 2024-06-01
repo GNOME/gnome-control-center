@@ -100,11 +100,11 @@ on_test_button_clicked_cb (GtkGestureClick *gesture,
     reset_indicators (self);
 
     button = gtk_gesture_single_get_current_button (GTK_GESTURE_SINGLE (gesture));
-    if (button == 3) {
+    if (button == GDK_BUTTON_SECONDARY) {
         gtk_widget_add_css_class (self->secondary_click_image, "success");
-    } else if (n_press == 2) {
+    } else if (button == GDK_BUTTON_PRIMARY && n_press == 2) {
         gtk_widget_add_css_class (self->double_click_image, "success");
-    } else if (n_press == 1) {
+    } else if (button == GDK_BUTTON_PRIMARY && n_press == 1) {
         self->primary_timeout_id =
             g_timeout_add (self->double_click_delay, (GSourceFunc) primary_click_timeout, self);
         reset_indicators_delay = self->double_click_delay * 3;
