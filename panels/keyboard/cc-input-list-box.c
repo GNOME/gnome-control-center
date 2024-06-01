@@ -226,6 +226,7 @@ row_settings_cb (CcInputListBox *self,
 }
 
 static void move_input (CcInputListBox *self, CcInputRow *source, CcInputRow *dest);
+static void update_input_rows (CcInputListBox *self);
 
 static void
 row_moved_cb (CcInputListBox *self,
@@ -233,6 +234,7 @@ row_moved_cb (CcInputListBox *self,
               CcInputRow    *row)
 {
   move_input (self, row, dest_row);
+  update_input_rows (self);
 }
 
 static void remove_input (CcInputListBox *self, CcInputRow *row);
@@ -269,9 +271,8 @@ update_input_rows (CcInputListBox *self)
     cc_input_row_set_removable (row, n_input_rows > 1);
     cc_input_row_set_draggable (row, n_input_rows > 1);
 
-    gtk_widget_action_set_enabled (GTK_WIDGET (row), "row.move-up", row_idx != 1);
-    gtk_widget_action_set_enabled (GTK_WIDGET (row), "row.move-down", GTK_LIST_BOX_ROW (gtk_widget_get_next_sibling (child)) != self->add_input_row);
-
+    gtk_widget_action_set_enabled (GTK_WIDGET (row), "row.move-up", row_idx > 0);
+    gtk_widget_action_set_enabled (GTK_WIDGET (row), "row.move-down", row_idx < (n_input_rows - 1));
   }
 }
 
