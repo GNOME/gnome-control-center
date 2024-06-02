@@ -6,17 +6,6 @@
         <property name="selection-mode">none</property>
         <signal name="row_activated" handler="input_row_activated_cb" object="CcInputListBox" swapped="yes"/>
         <signal name="keynav_failed" handler="keynav_failed_cb" object="CcInputListBox" swapped="yes"/>
-        <child type="placeholder">
-          <object class="GtkLabel">
-            <property name="label" translatable="yes">No input source selected</property>
-            <property name="wrap">true</property>
-            <property name="max-width-chars">50</property>
-            <style>
-              <class name="dim-label" />
-              <class name="cc-placeholder-row" />
-            </style>
-          </object>
-        </child>
         <style>
           <class name="boxed-list"/>
         </style>
