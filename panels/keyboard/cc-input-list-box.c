@@ -249,30 +249,26 @@ row_removed_cb (CcInputListBox *self,
 static void
 update_input_rows (CcInputListBox *self)
 {
-  GtkWidget *child;
+  GtkListBoxRow *row;
   guint n_input_rows = 0;
+  gint i = 0;
 
-  child = gtk_widget_get_first_child (GTK_WIDGET (self->listbox));
-  while ((child = gtk_widget_get_next_sibling (child)) != NULL)
-    if (CC_IS_INPUT_ROW (child))
+  while ((row = gtk_list_box_get_row_at_index (self->listbox, i++)))
+    if (CC_IS_INPUT_ROW (row))
       n_input_rows++;
 
-  for (child = gtk_widget_get_first_child (GTK_WIDGET (self->listbox));
-       child;
-       child = gtk_widget_get_next_sibling (child)) {
-    CcInputRow *row;
-    gint row_idx;
+  for (i = 0; (row = gtk_list_box_get_row_at_index (self->listbox, i)); i++) {
+    CcInputRow *input_row;
 
-    if (!CC_IS_INPUT_ROW (child))
+    if (!CC_IS_INPUT_ROW (row))
       continue;
-    row = CC_INPUT_ROW (child);
-    row_idx = gtk_list_box_row_get_index (GTK_LIST_BOX_ROW (row));
+    input_row = CC_INPUT_ROW (row);
 
-    cc_input_row_set_removable (row, n_input_rows > 1);
-    cc_input_row_set_draggable (row, n_input_rows > 1);
+    cc_input_row_set_removable (input_row, n_input_rows > 1);
+    cc_input_row_set_draggable (input_row, n_input_rows > 1);
 
-    gtk_widget_action_set_enabled (GTK_WIDGET (row), "row.move-up", row_idx > 0);
-    gtk_widget_action_set_enabled (GTK_WIDGET (row), "row.move-down", row_idx < (n_input_rows - 1));
+    gtk_widget_action_set_enabled (GTK_WIDGET (row), "row.move-up", i > 0);
+    gtk_widget_action_set_enabled (GTK_WIDGET (row), "row.move-down", i < (n_input_rows - 1));
   }
 }
 
