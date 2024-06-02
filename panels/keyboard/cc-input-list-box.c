@@ -507,39 +507,13 @@ add_input (CcInputListBox *self)
   }
 }
 
-static GtkWidget *
-find_sibling (GtkWidget *child)
-{
-  GtkWidget *sibling;
-
-  for (sibling = gtk_widget_get_next_sibling (child);
-       sibling;
-       sibling = gtk_widget_get_next_sibling (child)) {
-    if (gtk_widget_get_visible (sibling) && gtk_widget_get_child_visible (sibling))
-      return sibling;
-  }
-
-  for (sibling = gtk_widget_get_prev_sibling (child);
-       sibling;
-       sibling = gtk_widget_get_prev_sibling (child)) {
-    if (gtk_widget_get_visible (sibling) && gtk_widget_get_child_visible (sibling))
-      return sibling;
-  }
-
-  return NULL;
-}
-
 static void
 do_remove_input (CcInputListBox *self, CcInputRow *row)
 {
-        GtkWidget *sibling;
+  gtk_list_box_remove (self->listbox, GTK_WIDGET (row));
 
-        sibling = find_sibling (GTK_WIDGET (row));
-        gtk_list_box_remove (self->listbox, GTK_WIDGET (row));
-        gtk_list_box_select_row (self->listbox, GTK_LIST_BOX_ROW (sibling));
-
-        update_input (self);
-        update_input_rows (self);
+  update_input (self);
+  update_input_rows (self);
 }
 
 static void
