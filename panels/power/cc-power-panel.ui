@@ -168,11 +168,19 @@
                   </object>
                 </child>
                 <child>
-                  <object class="AdwComboRow" id="blank_screen_row">
+                  <object class="CcNumberRow" id="blank_screen_row">
                     <property name="title" translatable="yes">Screen _Blank</property>
                     <property name="subtitle" translatable="yes">Turn the screen off after a period of inactivity</property>
-                    <property name="use_underline">True</property>
-                    <signal name="notify::selected-item" handler="blank_screen_row_changed_cb" object="CcPowerPanel" swapped="yes"/>
+                    <property name="use-underline">True</property>
+                    <property name="values">[60, 120, 180, 240, 300, 480, 600, 720, 900]</property>
+                    <property name="special-value">
+                      <object class="CcNumberObject">
+                        <property name="value">0</property>
+                        <property name="string" translatable="yes" comments="Translators: Idle time">Never</property>
+                        <property name="order">last</property>
+                      </object>
+                    </property>
+                    <property name="value-type">seconds</property>
                   </object>
                 </child>
                 <child>

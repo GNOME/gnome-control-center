@@ -30,6 +30,7 @@
 #include "cc-list-row.h"
 #include "cc-battery-row.h"
 #include "cc-hostname.h"
+#include "cc-number-row.h"
 #include "cc-power-profile-row.h"
 #include "cc-power-profile-info-row.h"
 #include "cc-power-panel.h"
@@ -46,7 +47,7 @@ struct _CcPowerPanel
   GtkListBox        *battery_listbox;
   AdwSwitchRow      *battery_percentage_row;
   AdwPreferencesGroup *battery_section;
-  AdwComboRow       *blank_screen_row;
+  CcNumberRow       *blank_screen_row;
   GtkListBox        *device_listbox;
   AdwPreferencesGroup *device_section;
   AdwSwitchRow      *dim_screen_row;
@@ -463,25 +464,6 @@ keynav_failed_cb (CcPowerPanel *self, GtkDirectionType direction, GtkWidget *lis
 }
 
 static void
-blank_screen_row_changed_cb (CcPowerPanel *self)
-{
-  g_autoptr (GObject) item = NULL;
-  GListModel *model;
-  gint selected_index;
-  gint value;
-
-  model = adw_combo_row_get_model (self->blank_screen_row);
-  selected_index = adw_combo_row_get_selected (self->blank_screen_row);
-  if (selected_index == -1)
-    return;
-
-  item = g_list_model_get_item (model, selected_index);
-  value = GPOINTER_TO_UINT (g_object_get_data (item, "value"));
-
-  g_settings_set_uint (self->session_settings, "idle-delay", value);
-}
-
-static void
 power_button_row_changed_cb (CcPowerPanel *self)
 {
   g_autoptr (GObject) item = NULL;
@@ -747,35 +729,6 @@ got_brightness_cb (GObject      *source_object,
 }
 
 static void
-populate_blank_screen_row (AdwComboRow *combo_row)
-{
-  g_autoptr (GtkStringList) string_list = NULL;
-  g_autoptr (GObject) never_object = NULL;
-  gint minutes[] = { 1, 2, 3, 4, 5, 8, 10, 12, 15 };
-  guint i;
-
-  string_list = gtk_string_list_new (NULL);
-  for (i = 0; i < G_N_ELEMENTS (minutes); i++)
-    {
-      g_autoptr (GObject) item = NULL;
-      g_autofree gchar *text = NULL;
-
-      /* Translators: Option for "Blank Screen" in "Power" panel */
-      text = g_strdup_printf (g_dngettext (GETTEXT_PACKAGE, "%d minute", "%d minutes", minutes[i]), minutes[i]);
-      gtk_string_list_append (string_list, text);
-
-      item = g_list_model_get_item (G_LIST_MODEL (string_list), i);
-      g_object_set_data (item, "value", GUINT_TO_POINTER (minutes[i] * 60));
-    }
-
-  gtk_string_list_append (string_list, C_("Idle time", "Never"));
-  never_object = g_list_model_get_item (G_LIST_MODEL (string_list), i);
-  g_object_set_data (never_object, "value", GUINT_TO_POINTER (0));
-
-  adw_combo_row_set_model (combo_row, G_LIST_MODEL (string_list));
-}
-
-static void
 setup_power_saving (CcPowerPanel *self)
 {
   g_autoptr(GDBusConnection) connection = NULL;
@@ -824,11 +777,7 @@ setup_power_saving (CcPowerPanel *self)
                    self->dim_screen_row, "active",
                    G_SETTINGS_BIND_DEFAULT);
 
-  g_signal_handlers_block_by_func (self->blank_screen_row, blank_screen_row_changed_cb, self);
-  populate_blank_screen_row (self->blank_screen_row);
-  value = g_settings_get_uint (self->session_settings, "idle-delay");
-  set_value_for_combo_row (self->blank_screen_row, value);
-  g_signal_handlers_unblock_by_func (self->blank_screen_row, blank_screen_row_changed_cb, self);
+  cc_number_row_bind_settings (self->blank_screen_row, self->session_settings, "idle-delay");
 
   /* The default values for these settings are unfortunate for us;
    * timeout == 0, action == suspend means 'do nothing' - just
@@ -1314,7 +1263,6 @@ cc_power_panel_dispose (GObject *object)
 {
   CcPowerPanel *self = CC_POWER_PANEL (object);
 
-  g_signal_handlers_disconnect_by_func (self->blank_screen_row, blank_screen_row_changed_cb, self);
   g_signal_handlers_disconnect_by_func (self->power_button_row, power_button_row_changed_cb, self);
 
   g_clear_pointer (&self->chassis_type, g_free);
@@ -1345,6 +1293,8 @@ cc_power_panel_class_init (CcPowerPanelClass *klass)
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/power/cc-power-panel.ui");
 
+  g_type_ensure (CC_TYPE_NUMBER_ROW);
+
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, als_row);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, automatic_suspend_dialog);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, automatic_suspend_row);
@@ -1369,7 +1319,6 @@ cc_power_panel_class_init (CcPowerPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, suspend_on_ac_switch_row);
 
   gtk_widget_class_bind_template_callback (widget_class, als_row_changed_cb);
-  gtk_widget_class_bind_template_callback (widget_class, blank_screen_row_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, keynav_failed_cb);
   gtk_widget_class_bind_template_callback (widget_class, power_button_row_changed_cb);
 }
