@@ -350,7 +350,7 @@ pp_ppd_selection_dialog_class_init (PpPPDSelectionDialogClass *klass)
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
   GObjectClass   *object_class = G_OBJECT_CLASS (klass);
 
-  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/printers/ppd-selection-dialog.ui");
+  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/printers/pp-ppd-selection-dialog.ui");
   gtk_widget_class_bind_template_child (widget_class, PpPPDSelectionDialog, ppd_selection_select_button);
   gtk_widget_class_bind_template_child (widget_class, PpPPDSelectionDialog, ppd_spinner);
   gtk_widget_class_bind_template_child (widget_class, PpPPDSelectionDialog, progress_label);

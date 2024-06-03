@@ -1020,7 +1020,7 @@ pp_printer_entry_class_init (PpPrinterEntryClass *klass)
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
   GObjectClass   *object_class = G_OBJECT_CLASS (klass);
 
-  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/printers/printer-entry.ui");
+  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/printers/pp-printer-entry.ui");
 
   gtk_widget_class_bind_template_child (widget_class, PpPrinterEntry, header_box);
   gtk_widget_class_bind_template_child (widget_class, PpPrinterEntry, printer_name_label);

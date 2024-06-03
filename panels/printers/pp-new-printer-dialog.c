@@ -1847,7 +1847,7 @@ pp_new_printer_dialog_class_init (PpNewPrinterDialogClass *klass)
 
   g_type_ensure (PP_TYPE_PRINT_DEVICE);
 
-  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/printers/new-printer-dialog.ui");
+  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/printers/pp-new-printer-dialog.ui");
 
   gtk_widget_class_bind_template_child (widget_class, PpNewPrinterDialog, devices_liststore);
   gtk_widget_class_bind_template_child (widget_class, PpNewPrinterDialog, devices_model_filter);
