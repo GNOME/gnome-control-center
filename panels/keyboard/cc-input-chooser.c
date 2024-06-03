@@ -28,6 +28,7 @@
 #include "cc-input-chooser.h"
 #include "cc-input-source-ibus.h"
 #include "cc-input-source-xkb.h"
+#include "shell/cc-panel.h"
 
 #ifdef HAVE_IBUS
 #include <ibus.h>
@@ -60,6 +61,8 @@ struct _CcInputChooser
   GtkButton         *add_button;
   GtkSearchEntry    *filter_entry;
   GtkListBox        *input_sources_listbox;
+  GtkWidget         *input_sources_page;
+  GtkStack          *input_sources_stack;
   GtkLabel          *login_label;
   GtkListBoxRow     *more_row;
   GtkWidget         *no_results;
@@ -1074,6 +1077,45 @@ on_filter_entry_key_release_event_cb (CcInputChooser *self, GdkEventKey *event)
  */
 
 static void
+on_locale_infos_loaded_cb (GObject      *source_object,
+                           GAsyncResult *result,
+                           gpointer      user_data)
+{
+  CcInputChooser *self = CC_INPUT_CHOOSER (source_object);
+
+  gtk_stack_set_visible_child (self->input_sources_stack, self->input_sources_page);
+}
+
+static void
+cc_input_chooser_load_locale_infos_thread (GTask        *task,
+                                           gpointer      source_object,
+                                           gpointer      task_data,
+                                           GCancellable *cancellable)
+{
+  CcInputChooser *self = CC_INPUT_CHOOSER (source_object);
+
+  get_locale_infos (self);
+#ifdef HAVE_IBUS
+  get_ibus_locale_infos (self);
+#endif  /* HAVE_IBUS */
+  show_locale_rows (self);
+
+  g_task_return_pointer (task, NULL, NULL);
+}
+
+static void
+cc_input_chooser_load_locale_infos_async (CcInputChooser      *self,
+                                          GCancellable        *cancellable,
+                                          GAsyncReadyCallback  callback,
+                                          gpointer             user_data)
+{
+  g_autoptr(GTask) task = g_task_new (self, cancellable, callback, user_data);
+
+  g_task_run_in_thread (task, cc_input_chooser_load_locale_infos_thread);
+}
+
+
+static void
 cc_input_chooser_dispose (GObject *object)
 {
   CcInputChooser *self = CC_INPUT_CHOOSER (object);
@@ -1111,6 +1153,8 @@ cc_input_chooser_class_init (CcInputChooserClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcInputChooser, add_button);
   gtk_widget_class_bind_template_child (widget_class, CcInputChooser, filter_entry);
   gtk_widget_class_bind_template_child (widget_class, CcInputChooser, input_sources_listbox);
+  gtk_widget_class_bind_template_child (widget_class, CcInputChooser, input_sources_page);
+  gtk_widget_class_bind_template_child (widget_class, CcInputChooser, input_sources_stack);
   gtk_widget_class_bind_template_child (widget_class, CcInputChooser, login_label);
 
   gtk_widget_class_bind_template_callback (widget_class, on_input_sources_listbox_row_activated_cb);
@@ -1149,11 +1193,10 @@ cc_input_chooser_new (gboolean      is_login,
 
   gtk_widget_set_visible (GTK_WIDGET (self->login_label), self->is_login);
 
-  get_locale_infos (self);
-#ifdef HAVE_IBUS
-  get_ibus_locale_infos (self);
-#endif  /* HAVE_IBUS */
-  show_locale_rows (self);
+  cc_input_chooser_load_locale_infos_async (self,
+                                            NULL,
+                                            on_locale_infos_loaded_cb,
+                                            NULL);
 
   return self;
 }

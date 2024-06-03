@@ -59,16 +59,28 @@
           </object>
         </child>
         <child>
-          <object class="AdwPreferencesPage">
+          <object class="GtkStack" id="input_sources_stack">
+            <property name="visible-child">input_sources_spinner</property>
             <child>
-              <object class="AdwPreferencesGroup">
+              <object class="GtkSpinner" id="input_sources_spinner">
+                <property name="spinning">True</property>
+                <property name="halign">center</property>
+                <property name="valign">center</property>
+              </object>
+            </child>
+            <child>
+              <object class="AdwPreferencesPage" id="input_sources_page">
                 <child>
-                  <object class="GtkListBox" id="input_sources_listbox">
-                    <signal name="row-activated" handler="on_input_sources_listbox_row_activated_cb" object="CcInputChooser" swapped="yes" />
-                    <signal name="selected-rows-changed" handler="on_input_sources_listbox_selected_rows_changed_cb" object="CcInputChooser" swapped="yes" />
-                    <style>
-                      <class name="boxed-list" />
-                    </style>
+                  <object class="AdwPreferencesGroup">
+                    <child>
+                      <object class="GtkListBox" id="input_sources_listbox">
+                        <signal name="row-activated" handler="on_input_sources_listbox_row_activated_cb" object="CcInputChooser" swapped="yes" />
+                        <signal name="selected-rows-changed" handler="on_input_sources_listbox_selected_rows_changed_cb" object="CcInputChooser" swapped="yes" />
+                        <style>
+                          <class name="boxed-list" />
+                        </style>
+                      </object>
+                    </child>
                   </object>
                 </child>
               </object>
