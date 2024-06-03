@@ -28,6 +28,9 @@
                       <object class="GtkPicture" id="qr_image">
                         <property name="halign">center</property>
                         <property name="alternative-text" translatable="yes">QR Code</property>
+                        <!-- Set the QR code as focusable so the alternative
+                        text can be read.
+                        See https://gitlab.gnome.org/GNOME/gtk/-/issues/6749 -->
                         <property name="focusable">True</property>
                         <style>
                           <class name="card"/>
