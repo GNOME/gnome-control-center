@@ -358,7 +358,7 @@ local_password_radio_changed_cb (CcAddUserDialog *self)
 
         active = gtk_check_button_get_active (GTK_CHECK_BUTTON (self->local_password_radio));
         self->local_password_mode = active ? ACT_USER_PASSWORD_MODE_REGULAR : ACT_USER_PASSWORD_MODE_SET_AT_LOGIN;
-        gtk_button_set_label (self->add_button, active ? _("Next") : _("Add"));
+        gtk_button_set_label (self->add_button, active ? _("_Next") : _("_Add"));
 
         dialog_validate (self);
 }
