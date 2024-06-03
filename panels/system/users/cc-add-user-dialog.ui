@@ -29,9 +29,6 @@
                         <property name="use_underline">True</property>
                         <property name="valign">center</property>
                         <signal name="clicked" handler="adw_dialog_force_close" object="CcAddUserDialog"/>
-                        <style>
-                          <class name="text-button"/>
-                        </style>
                       </object>
                     </child>
                     <child type="end">
@@ -42,7 +39,6 @@
                         <property name="valign">center</property>
                         <signal name="clicked" handler="add_button_clicked_cb" object="CcAddUserDialog" swapped="yes"/>
                         <style>
-                          <class name="text-button"/>
                           <class name="suggested-action"/>
                         </style>
                       </object>
@@ -167,7 +163,6 @@
                         <property name="valign">center</property>
                         <signal name="clicked" handler="local_create_user" object="CcAddUserDialog" swapped="yes"/>
                         <style>
-                          <class name="text-button"/>
                           <class name="suggested-action"/>
                         </style>
                       </object>
