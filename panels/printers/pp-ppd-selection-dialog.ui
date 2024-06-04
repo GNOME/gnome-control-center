@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Generated with glade 3.18.3 -->
 <interface>
-  <requires lib="gtk+" version="3.12"/>
   <template class="PpPPDSelectionDialog" parent="AdwWindow">
     <property name="width_request">600</property>
     <property name="height_request">400</property>
@@ -12,9 +10,29 @@
       <object class="AdwToolbarView">
         <child type="top">
           <object class="AdwHeaderBar">
-            <style>
-              <class name="default-decoration"/>
-            </style>
+            <property name="show-start-title-buttons">False</property>
+            <property name="show-end-title-buttons">False</property>
+            <child type="start">
+              <object class="GtkButton" id="ppd_selection_cancel_button">
+                <property name="label" translatable="yes">Cancel</property>
+                <property name="receives_default">True</property>
+                <property name="receives_default">True</property>
+                <property name="use-underline">True</property>
+                <signal name="clicked" handler="cancel_cb" swapped="yes"/>
+              </object>
+            </child>
+            <child type="end">
+              <object class="GtkButton" id="ppd_selection_select_button">
+                <property name="label" translatable="yes">_Select</property>
+                <property name="use-underline">True</property>
+                <property name="sensitive">False</property>
+                <property name="receives_default">True</property>
+                <signal name="clicked" handler="select_cb" swapped="yes"/>
+                <style>
+                  <class name="suggested-action"/>
+                </style>
+              </object>
+            </child>
           </object>
         </child>
         <property name="content">
@@ -85,24 +103,6 @@
                         <property name="halign">fill</property>
                       </object>
                     </child>
-                  </object>
-                </child>
-                <child>
-                  <object class="GtkButton" id="ppd_selection_cancel_button">
-                    <property name="label" translatable="yes">Cancel</property>
-                    <property name="receives_default">True</property>
-                    <property name="receives_default">True</property>
-                    <property name="halign">end</property>
-                    <signal name="clicked" handler="cancel_cb" swapped="yes"/>
-                  </object>
-                </child>
-                <child>
-                  <object class="GtkButton" id="ppd_selection_select_button">
-                    <property name="label" translatable="yes">Select</property>
-                    <property name="sensitive">False</property>
-                    <property name="receives_default">True</property>
-                    <property name="halign">end</property>
-                    <signal name="clicked" handler="select_cb" swapped="yes"/>
                   </object>
                 </child>
               </object>
