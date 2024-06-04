@@ -35,7 +35,6 @@
 #include "cc-power-profile-info-row.h"
 #include "cc-power-panel.h"
 #include "cc-power-resources.h"
-#include "cc-util.h"
 
 struct _CcPowerPanel
 {
@@ -52,16 +51,15 @@ struct _CcPowerPanel
   AdwPreferencesGroup *device_section;
   AdwSwitchRow      *dim_screen_row;
   AdwPreferencesGroup *general_section;
-  GtkListStore      *mobile_time_liststore;
   CcNumberRow       *power_button_row;
   GtkListBox        *power_profile_listbox;
   GtkListBox        *power_profile_info_listbox;
   AdwPreferencesGroup *power_profile_section;
   AdwSwitchRow      *power_saver_low_battery_row;
-  GtkComboBox       *suspend_on_battery_delay_combo;
+  CcNumberRow       *suspend_on_battery_delay_row;
   AdwSwitchRow      *suspend_on_battery_switch_row;
   GtkWidget         *suspend_on_battery_group;
-  GtkComboBox       *suspend_on_ac_delay_combo;
+  CcNumberRow       *suspend_on_ac_delay_row;
   AdwSwitchRow      *suspend_on_ac_switch_row;
 
   GSettings     *gsd_settings;
@@ -296,79 +294,6 @@ als_enabled_state_changed (CcPowerPanel *self)
   adw_switch_row_set_active (self->als_row, enabled);
   gtk_widget_set_visible (GTK_WIDGET (self->als_row), visible && self->has_brightness);
   g_signal_handlers_unblock_by_func (self->als_row, als_row_changed_cb, self);
-}
-
-static void
-combo_time_changed_cb (CcPowerPanel *self, GtkWidget *widget)
-{
-  GtkTreeIter iter;
-  GtkTreeModel *model;
-  gint value;
-  gboolean ret;
-  const gchar *key = (const gchar *)g_object_get_data (G_OBJECT(widget), "_gsettings_key");
-
-  /* no selection */
-  ret = gtk_combo_box_get_active_iter (GTK_COMBO_BOX(widget), &iter);
-  if (!ret)
-    return;
-
-  /* get entry */
-  model = gtk_combo_box_get_model (GTK_COMBO_BOX(widget));
-  gtk_tree_model_get (model, &iter,
-                      1, &value,
-                      -1);
-
-  /* set both keys */
-  g_settings_set_int (self->gsd_settings, key, value);
-}
-
-static void
-set_value_for_combo (GtkComboBox *combo_box, gint value)
-{
-  GtkTreeIter iter;
-  g_autoptr(GtkTreeIter) insert = NULL;
-  GtkTreeIter new;
-  GtkTreeModel *model;
-  gint value_tmp;
-  gint value_last = 0;
-  g_autofree gchar *text = NULL;
-  gboolean ret;
-
-  /* get entry */
-  model = gtk_combo_box_get_model (combo_box);
-  ret = gtk_tree_model_get_iter_first (model, &iter);
-  if (!ret)
-    return;
-
-  /* try to make the UI match the setting */
-  do
-    {
-      gtk_tree_model_get (model, &iter,
-                          ACTION_MODEL_VALUE, &value_tmp,
-                          -1);
-      if (value_tmp == value)
-        {
-          gtk_combo_box_set_active_iter (combo_box, &iter);
-          return;
-        }
-
-      /* Insert before if the next value is larger or the value is lower
-       * again (i.e. "Never" is zero and last). */
-      if (!insert && (value_tmp > value || value_last > value_tmp))
-        insert = gtk_tree_iter_copy (&iter);
-
-      value_last = value_tmp;
-    } while (gtk_tree_model_iter_next (model, &iter));
-
-  /* The value is not listed, so add it at the best point (or the end). */
-  gtk_list_store_insert_before (GTK_LIST_STORE (model), &new, insert);
-
-  text = cc_util_time_to_string_text (value * 1000);
-  gtk_list_store_set (GTK_LIST_STORE (model), &new,
-                      ACTION_MODEL_TEXT, text,
-                      ACTION_MODEL_VALUE, value,
-                      -1);
-  gtk_combo_box_set_active_iter (combo_box, &new);
 }
 
 static void
@@ -659,11 +584,43 @@ got_brightness_cb (GObject      *source_object,
 }
 
 static void
+setup_suspend_delay_rows (CcPowerPanel *self)
+{
+  static const int normal_times[] = {900, 1200, 1500, 1800, 2700, 3600, 4800, 5400, 6000, 7200};
+  static const int mobile_times[] = {60, 120, 300, 600};
+  int i;
+
+  /* Use a different list of suspend times based on the chassis type */
+  if (g_strcmp0 (self->chassis_type, "tablet") == 0 ||
+      g_strcmp0 (self->chassis_type, "watch") == 0 ||
+      g_strcmp0 (self->chassis_type, "handset") == 0)
+    {
+      for (i = 0; i < G_N_ELEMENTS (mobile_times); i++)
+        {
+          cc_number_row_add_value (self->suspend_on_battery_delay_row, mobile_times[i]);
+          cc_number_row_add_value (self->suspend_on_ac_delay_row, mobile_times[i]);
+        }
+    }
+  else
+    {
+      for (i = 0; i < G_N_ELEMENTS (normal_times); i++)
+        {
+          cc_number_row_add_value (self->suspend_on_battery_delay_row, normal_times[i]);
+          cc_number_row_add_value (self->suspend_on_ac_delay_row, normal_times[i]);
+        }
+    }
+
+  cc_number_row_bind_settings (self->suspend_on_battery_delay_row, self->gsd_settings,
+                               "sleep-inactive-battery-timeout");
+  cc_number_row_bind_settings (self->suspend_on_ac_delay_row, self->gsd_settings,
+                               "sleep-inactive-ac-timeout");
+}
+
+static void
 setup_power_saving (CcPowerPanel *self)
 {
   g_autoptr(GDBusConnection) connection = NULL;
   g_autoptr(GError) error = NULL;
-  int value;
 
   /* ambient light sensor */
   self->iio_proxy_watch_id =
@@ -739,26 +696,12 @@ setup_power_saving (CcPowerPanel *self)
                                     G_SETTINGS_BIND_DEFAULT,
                                     get_sleep_type, set_sleep_type, NULL, NULL);
 
-      g_object_set_data (G_OBJECT (self->suspend_on_battery_delay_combo), "_gsettings_key", "sleep-inactive-battery-timeout");
-      value = g_settings_get_int (self->gsd_settings, "sleep-inactive-battery-timeout");
-      set_value_for_combo (self->suspend_on_battery_delay_combo, value);
-      g_signal_connect_object (self->suspend_on_battery_delay_combo, "changed",
-                               G_CALLBACK (combo_time_changed_cb), self, G_CONNECT_SWAPPED);
-      g_object_bind_property (self->suspend_on_battery_switch_row, "active", self->suspend_on_battery_delay_combo, "sensitive",
-                              G_BINDING_DEFAULT | G_BINDING_SYNC_CREATE);
-
       g_settings_bind_with_mapping (self->gsd_settings, "sleep-inactive-ac-type",
                                     self->suspend_on_ac_switch_row, "active",
                                     G_SETTINGS_BIND_DEFAULT,
                                     get_sleep_type, set_sleep_type, NULL, NULL);
 
-      g_object_set_data (G_OBJECT (self->suspend_on_ac_delay_combo), "_gsettings_key", "sleep-inactive-ac-timeout");
-      value = g_settings_get_int (self->gsd_settings, "sleep-inactive-ac-timeout");
-      set_value_for_combo (self->suspend_on_ac_delay_combo, value);
-      g_signal_connect_object (self->suspend_on_ac_delay_combo, "changed",
-                               G_CALLBACK (combo_time_changed_cb), self, G_CONNECT_SWAPPED);
-      g_object_bind_property (self->suspend_on_ac_switch_row, "active", self->suspend_on_ac_delay_combo, "sensitive",
-                              G_BINDING_DEFAULT | G_BINDING_SYNC_CREATE);
+      setup_suspend_delay_rows (self);
 
       set_ac_battery_ui_mode (self);
       update_automatic_suspend_label (self);
@@ -1228,16 +1171,15 @@ cc_power_panel_class_init (CcPowerPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, device_section);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, dim_screen_row);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, general_section);
-  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, mobile_time_liststore);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, power_button_row);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, power_profile_listbox);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, power_profile_info_listbox);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, power_profile_section);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, power_saver_low_battery_row);
-  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, suspend_on_battery_delay_combo);
+  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, suspend_on_battery_delay_row);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, suspend_on_battery_switch_row);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, suspend_on_battery_group);
-  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, suspend_on_ac_delay_combo);
+  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, suspend_on_ac_delay_row);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, suspend_on_ac_switch_row);
 
   gtk_widget_class_bind_template_callback (widget_class, als_row_changed_cb);
@@ -1261,17 +1203,6 @@ cc_power_panel_init (CcPowerPanel *self)
                                               GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
 
   self->chassis_type = cc_hostname_get_chassis_type (cc_hostname_get_default ());
-
-  /* Use a different list of suspend times based on the chassis type */
-  if (g_strcmp0 (self->chassis_type, "tablet") == 0 ||
-      g_strcmp0 (self->chassis_type, "watch") == 0 ||
-      g_strcmp0 (self->chassis_type, "handset") == 0)
-    {
-      gtk_combo_box_set_model (GTK_COMBO_BOX (self->suspend_on_battery_delay_combo),
-                               GTK_TREE_MODEL (self->mobile_time_liststore));
-      gtk_combo_box_set_model (GTK_COMBO_BOX (self->suspend_on_ac_delay_combo),
-                               GTK_TREE_MODEL (self->mobile_time_liststore));
-    }
 
   self->up_client = up_client_new ();
 
