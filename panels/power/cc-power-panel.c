@@ -53,7 +53,7 @@ struct _CcPowerPanel
   AdwSwitchRow      *dim_screen_row;
   AdwPreferencesGroup *general_section;
   GtkListStore      *mobile_time_liststore;
-  AdwComboRow       *power_button_row;
+  CcNumberRow       *power_button_row;
   GtkListBox        *power_profile_listbox;
   GtkListBox        *power_profile_info_listbox;
   AdwPreferencesGroup *power_profile_section;
@@ -372,50 +372,6 @@ set_value_for_combo (GtkComboBox *combo_box, gint value)
 }
 
 static void
-set_value_for_combo_row (AdwComboRow *combo_row, gint value)
-{
-  g_autoptr (GObject) new_item = NULL;
-  gboolean insert = FALSE;
-  guint insert_before = 0;
-  guint i;
-  GListModel *model;
-  gint value_last = 0;
-  g_autofree gchar *text = NULL;
-
-  /* try to make the UI match the setting */
-  model = adw_combo_row_get_model (combo_row);
-  for (i = 0; i < g_list_model_get_n_items (model); i++)
-    {
-      g_autoptr (GObject) item = g_list_model_get_item (model, i);
-      gint value_tmp = GPOINTER_TO_UINT (g_object_get_data (item, "value"));
-      if (value_tmp == value)
-        {
-          adw_combo_row_set_selected (combo_row, i);
-          return;
-        }
-
-      /* Insert before if the next value is larger or the value is lower
-       * again (i.e. "Never" is zero and last). */
-      if (!insert && (value_tmp > value || value_last > value_tmp))
-        {
-          insert = TRUE;
-          insert_before = i;
-        }
-
-      value_last = value_tmp;
-    }
-
-  /* The value is not listed, so add it at the best point (or the end). */
-  text = cc_util_time_to_string_text (value * 1000);
-  gtk_string_list_append (GTK_STRING_LIST (model), text);
-
-  new_item = g_list_model_get_item (model, i);
-  g_object_set_data (G_OBJECT (new_item), "value", GUINT_TO_POINTER (value));
-
-  adw_combo_row_set_selected (combo_row, insert_before);
-}
-
-static void
 set_ac_battery_ui_mode (CcPowerPanel *self)
 {
   GPtrArray *devices;
@@ -461,25 +417,6 @@ keynav_failed_cb (CcPowerPanel *self, GtkDirectionType direction, GtkWidget *lis
   direction = GTK_DIR_UP ? GTK_DIR_TAB_BACKWARD : GTK_DIR_TAB_FORWARD;
 
   return gtk_widget_child_focus (GTK_WIDGET (self), direction);
-}
-
-static void
-power_button_row_changed_cb (CcPowerPanel *self)
-{
-  g_autoptr (GObject) item = NULL;
-  GListModel *model;
-  gint selected_index;
-  gint value;
-
-  model = adw_combo_row_get_model (self->power_button_row);
-  selected_index = adw_combo_row_get_selected (self->power_button_row);
-  if (selected_index == -1)
-    return;
-
-  item = g_list_model_get_item (model, selected_index);
-  value = GPOINTER_TO_UINT (g_object_get_data (G_OBJECT (item), "value"));
-
-  g_settings_set_enum (self->gsd_settings, "power-button-action", value);
 }
 
 static void
@@ -560,12 +497,11 @@ set_sleep_type (const GValue       *value,
 }
 
 static void
-populate_power_button_row (AdwComboRow *combo_row,
+populate_power_button_row (CcNumberRow *row,
                            gboolean     can_suspend,
                            gboolean     can_hibernate)
 {
-  g_autoptr (GtkStringList) string_list = NULL;
-  struct {
+  static const struct {
     char *name;
     GsdPowerButtonActionType value;
   } actions[] = {
@@ -574,27 +510,21 @@ populate_power_button_row (AdwComboRow *combo_row,
     { N_("Hibernate"), GSD_POWER_BUTTON_ACTION_HIBERNATE },
     { N_("Nothing"), GSD_POWER_BUTTON_ACTION_NOTHING }
   };
-  guint item_index = 0;
   guint i;
 
-  string_list = gtk_string_list_new (NULL);
   for (i = 0; i < G_N_ELEMENTS (actions); i++)
     {
-      g_autoptr (GObject) item = NULL;
+      const char *name = actions[i].name;
+      const int value = actions[i].value;
 
-      if (!can_suspend && actions[i].value == GSD_POWER_BUTTON_ACTION_SUSPEND)
+      if (!can_suspend && value == GSD_POWER_BUTTON_ACTION_SUSPEND)
         continue;
 
-      if (!can_hibernate && actions[i].value == GSD_POWER_BUTTON_ACTION_HIBERNATE)
+      if (!can_hibernate && value == GSD_POWER_BUTTON_ACTION_HIBERNATE)
         continue;
 
-      gtk_string_list_append (string_list, _(actions[i].name));
-
-      item = g_list_model_get_item (G_LIST_MODEL (string_list), item_index++);
-      g_object_set_data (item, "value", GUINT_TO_POINTER (actions[i].value));
+      cc_number_row_add_value_full (row, value, _(name), CC_NUMBER_ORDER_DEFAULT);
     }
-
-  adw_combo_row_set_model (combo_row, G_LIST_MODEL (string_list));
 }
 
 #define NEVER 0
@@ -1205,17 +1135,11 @@ setup_general_section (CcPowerPanel *self)
     {
       gtk_widget_set_visible (GTK_WIDGET (self->power_button_row), TRUE);
 
-      g_signal_handlers_block_by_func (self->power_button_row,
-                                       power_button_row_changed_cb,
-                                       self);
       populate_power_button_row (self->power_button_row,
                                  can_suspend,
                                  can_hibernate);
-      set_value_for_combo_row (self->power_button_row,
-                               g_settings_get_enum (self->gsd_settings, "power-button-action"));
-      g_signal_handlers_unblock_by_func (self->power_button_row,
-                                         power_button_row_changed_cb,
-                                         self);
+
+      cc_number_row_bind_settings (self->power_button_row, self->gsd_settings, "power-button-action");
 
       show_section = TRUE;
     }
@@ -1262,8 +1186,6 @@ static void
 cc_power_panel_dispose (GObject *object)
 {
   CcPowerPanel *self = CC_POWER_PANEL (object);
-
-  g_signal_handlers_disconnect_by_func (self->power_button_row, power_button_row_changed_cb, self);
 
   g_clear_pointer (&self->chassis_type, g_free);
   g_clear_object (&self->gsd_settings);
@@ -1320,7 +1242,6 @@ cc_power_panel_class_init (CcPowerPanelClass *klass)
 
   gtk_widget_class_bind_template_callback (widget_class, als_row_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, keynav_failed_cb);
-  gtk_widget_class_bind_template_callback (widget_class, power_button_row_changed_cb);
 }
 
 static void

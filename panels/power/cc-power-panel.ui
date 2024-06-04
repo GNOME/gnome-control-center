@@ -206,11 +206,12 @@
               <object class="AdwPreferencesGroup" id="general_section">
                 <property name="title" translatable="yes">General</property>
                 <child>
-                  <object class="AdwComboRow" id="power_button_row">
+                  <object class="CcNumberRow" id="power_button_row">
                     <property name="visible">False</property>
                     <property name="title" translatable="yes">Po_wer Button Behavior</property>
-                    <property name="use_underline">True</property>
-                    <signal name="notify::selected-item" handler="power_button_row_changed_cb" object="CcPowerPanel" swapped="yes"/>
+                    <property name="use-underline">True</property>
+                    <property name="value-type">string</property>
+                    <property name="sort-type">none</property>
                   </object>
                 </child>
                 <child>
