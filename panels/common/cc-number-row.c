@@ -668,6 +668,9 @@ number_row_settings_changed_cb (CcNumberRow *self)
     case G_TYPE_INT:
         value = g_settings_get_int (self->bind_settings, self->bind_key);
         break;
+    case G_TYPE_ENUM:
+        value = g_settings_get_enum (self->bind_settings, self->bind_key);
+        break;
     default:
         g_assert_not_reached ();
     }
@@ -703,6 +706,9 @@ number_row_selected_changed_cb (CcNumberRow *self)
     case G_TYPE_INT:
         g_settings_set_int (self->bind_settings, self->bind_key, value);
         break;
+    case G_TYPE_ENUM:
+        g_settings_set_enum (self->bind_settings, self->bind_key, value);
+        break;
     default:
         g_assert_not_reached ();
     }
@@ -717,7 +723,7 @@ number_row_selected_changed_cb (CcNumberRow *self)
  *
  * Creates a binding between the @key in the @settings object, and the
  * selected value of @self. The value type of @key must be an (unsigned)
- * integer.
+ * integer or an enum.
  *
  * If the value of @key does not exist yet in the the list of @self, it
  * will be added.
@@ -727,21 +733,36 @@ cc_number_row_bind_settings (CcNumberRow *self,
                              GSettings   *settings,
                              const char  *key)
 {
-    g_autoptr(GVariant) key_variant = NULL;
+    g_autoptr(GSettingsSchema) schema = NULL;
+    g_autoptr(GSettingsSchemaKey) schema_key = NULL;
+    const GVariantType *value_type;
+    g_autoptr(GVariant) schema_range = NULL;
+    const char *key_type;
     g_autofree char *detailed_changed_key = NULL;
 
     g_return_if_fail (CC_IS_NUMBER_ROW (self));
     g_return_if_fail (G_IS_SETTINGS (settings));
     g_return_if_fail (self->bind_settings == NULL);
 
-    /* Make sure the key has uint or int value type, otherwise it can't map to a CcNumberRow */
-    key_variant = g_settings_get_value (settings, key);
-    if (g_variant_is_of_type (key_variant, G_VARIANT_TYPE_UINT32)) {
+    /* Extract the detailed key type, which includes "enum". Convoluted api... */
+    g_object_get (settings, "settings-schema", &schema, NULL);
+
+    g_return_if_fail (g_settings_schema_has_key (schema, key));
+
+    schema_key = g_settings_schema_get_key (schema, key);
+    value_type = g_settings_schema_key_get_value_type (schema_key);
+    schema_range = g_settings_schema_key_get_range (schema_key);
+    g_variant_get (schema_range, "(&sv)", &key_type, NULL);
+
+    /* Make sure the key has (u)int or enum value type, otherwise it can't map to a CcNumberRow */
+    if (g_variant_type_equal (value_type, G_VARIANT_TYPE_UINT32)) {
         self->bind_type = G_TYPE_UINT;
-    } else if (g_variant_is_of_type (key_variant, G_VARIANT_TYPE_INT32)) {
+    } else if (g_variant_type_equal (value_type, G_VARIANT_TYPE_INT32)) {
         self->bind_type = G_TYPE_INT;
+    } else if (g_strcmp0 (key_type, "enum") == 0) {
+        self->bind_type = G_TYPE_ENUM;
     } else {
-        g_critical ("GSettings key type must be uint or int");
+        g_critical ("GSettings key type must be uint, int or enum");
         return;
     }
 
