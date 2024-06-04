@@ -294,6 +294,13 @@ struct _CcNumberRow {
     GListStore        *store;
     CcNumberValueType  value_type;
     CcNumberSortType   sort_type;
+
+    /* For binding GSettings to the row */
+    GSettings *bind_settings;
+    char      *bind_key;
+    GType      bind_type;
+    gulong     number_row_settings_changed_id;
+    gulong     number_row_selected_changed_id;
 };
 
 G_DEFINE_TYPE(CcNumberRow, cc_number_row, ADW_TYPE_COMBO_ROW)
@@ -431,7 +438,12 @@ cc_number_row_dispose (GObject *object)
 {
     CcNumberRow *self = CC_NUMBER_ROW (object);
 
+    g_clear_signal_handler (&self->number_row_settings_changed_id, self->bind_settings);
+    g_clear_signal_handler (&self->number_row_selected_changed_id, self);
+
     g_clear_object (&self->store);
+    g_clear_object (&self->bind_settings);
+    g_clear_pointer (&self->bind_key, g_free);
 
     G_OBJECT_CLASS (cc_number_row_parent_class)->dispose (object);
 }
@@ -638,59 +650,63 @@ cc_number_row_has_value (CcNumberRow *self,
                                                    position);
 }
 
-static gboolean
-number_row_settings_get_mapping (GValue   *position_value,
-                                 GVariant *key_variant,
-                                 gpointer  user_data)
+static void
+number_row_settings_changed_cb (CcNumberRow *self)
 {
-    CcNumberRow *self = CC_NUMBER_ROW (user_data);
     int value;
     guint position = 0;
 
-    if (g_variant_is_of_type (key_variant, G_VARIANT_TYPE_UINT32))
-        if (g_variant_get_uint32 (key_variant) <= INT_MAX) {
-            value = g_variant_get_uint32 (key_variant);
+    switch (self->bind_type) {
+    case G_TYPE_UINT:
+        if (g_settings_get_uint (self->bind_settings, self->bind_key) <= INT_MAX) {
+            value = g_settings_get_uint (self->bind_settings, self->bind_key);
         } else {
             g_warning ("Unsigned GSettings value out of range for CcNumberRow");
             position = GTK_INVALID_LIST_POSITION;
         }
-    else
-        value = g_variant_get_int32 (key_variant);
+        break;
+    case G_TYPE_INT:
+        value = g_settings_get_int (self->bind_settings, self->bind_key);
+        break;
+    default:
+        g_assert_not_reached ();
+    }
 
+    g_signal_handler_block (self, self->number_row_selected_changed_id);
     if (position != GTK_INVALID_LIST_POSITION)
         if (!cc_number_row_has_value (self, value, &position))
             position = cc_number_row_add_value (self, value);
 
-    /* Always set position succesfully, even if invalid, otherwise GSettings will try to map
-       default values */
-    g_value_set_uint (position_value, position);
-
-    return TRUE;
+    adw_combo_row_set_selected (ADW_COMBO_ROW (self), position);
+    g_signal_handler_unblock (self, self->number_row_selected_changed_id);
 }
 
-static GVariant *
-number_row_settings_set_mapping (const GValue       *position_value,
-                                 const GVariantType *key_variant_type,
-                                 gpointer            user_data)
+static void
+number_row_selected_changed_cb (CcNumberRow *self)
 {
-    CcNumberRow *self = CC_NUMBER_ROW (user_data);
     guint position;
     int value;
-    GVariant *key_variant = NULL;
 
-    position = g_value_get_uint (position_value);
-    g_return_val_if_fail (position != GTK_INVALID_LIST_POSITION, NULL);
+    position = adw_combo_row_get_selected (ADW_COMBO_ROW (self));
+    g_return_if_fail (position != GTK_INVALID_LIST_POSITION);
 
     value = cc_number_row_get_value (self, position);
-    if (g_variant_type_equal (key_variant_type, G_VARIANT_TYPE_UINT32))
+
+    g_signal_handler_block (self->bind_settings, self->number_row_settings_changed_id);
+    switch (self->bind_type) {
+    case G_TYPE_UINT:
         if (value >= 0)
-            key_variant = g_variant_new_uint32 (value);
+            g_settings_set_uint (self->bind_settings, self->bind_key, value);
         else
             g_warning ("Negative CcNumberRow value out of range for unsigned GSettings value");
-    else
-        key_variant = g_variant_new_int32 (value);
-
-    return key_variant;
+        break;
+    case G_TYPE_INT:
+        g_settings_set_int (self->bind_settings, self->bind_key, value);
+        break;
+    default:
+        g_assert_not_reached ();
+    }
+    g_signal_handler_unblock (self->bind_settings, self->number_row_settings_changed_id);
 }
 
 /**
@@ -709,19 +725,36 @@ number_row_settings_set_mapping (const GValue       *position_value,
 void
 cc_number_row_bind_settings (CcNumberRow *self,
                              GSettings   *settings,
-                             const gchar *key)
+                             const char  *key)
 {
     g_autoptr(GVariant) key_variant = NULL;
+    g_autofree char *detailed_changed_key = NULL;
 
     g_return_if_fail (CC_IS_NUMBER_ROW (self));
     g_return_if_fail (G_IS_SETTINGS (settings));
+    g_return_if_fail (self->bind_settings == NULL);
 
     /* Make sure the key has uint or int value type, otherwise it can't map to a CcNumberRow */
     key_variant = g_settings_get_value (settings, key);
-    g_return_if_fail (g_variant_is_of_type (key_variant, G_VARIANT_TYPE_UINT32) ||
-                      g_variant_is_of_type (key_variant, G_VARIANT_TYPE_INT32));
+    if (g_variant_is_of_type (key_variant, G_VARIANT_TYPE_UINT32)) {
+        self->bind_type = G_TYPE_UINT;
+    } else if (g_variant_is_of_type (key_variant, G_VARIANT_TYPE_INT32)) {
+        self->bind_type = G_TYPE_INT;
+    } else {
+        g_critical ("GSettings key type must be uint or int");
+        return;
+    }
 
-    g_settings_bind_with_mapping (settings, key, self, "selected", G_SETTINGS_BIND_DEFAULT,
-                                  number_row_settings_get_mapping, number_row_settings_set_mapping,
-                                  self, NULL);
+    self->bind_settings = g_object_ref (settings);
+    self->bind_key = g_strdup (key);
+    detailed_changed_key = g_strdup_printf ("changed::%s", key);
+
+    self->number_row_settings_changed_id =
+        g_signal_connect_swapped (settings, detailed_changed_key,
+                                  G_CALLBACK (number_row_settings_changed_cb), self);
+
+    self->number_row_selected_changed_id =
+        g_signal_connect (self, "notify::selected", G_CALLBACK (number_row_selected_changed_cb), NULL);
+
+    number_row_settings_changed_cb (self);
 }
