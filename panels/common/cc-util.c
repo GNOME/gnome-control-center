@@ -19,9 +19,9 @@
 
 #include "config.h"
 
-#include <string.h>
+#include <gio/gdesktopappinfo.h>
 #include <glib/gi18n.h>
-
+#include <string.h>
 
 #include "cc-util.h"
 
@@ -228,4 +228,19 @@ cc_util_time_to_string_text (gint64 msecs)
       /* 0 seconds */
       return g_strdup (_("0 seconds"));
     }
+}
+
+char *
+cc_util_app_id_to_display_name (const char *app_id)
+{
+  g_autofree char *id = NULL;
+  g_autoptr(GAppInfo) info = NULL;
+
+  id = g_strconcat (app_id, ".desktop", NULL);
+  info = G_APP_INFO (g_desktop_app_info_new (id));
+
+  if (info)
+    return g_strdup (g_app_info_get_display_name (info));
+
+  return g_strdup (app_id);
 }
