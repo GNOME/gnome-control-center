@@ -31,6 +31,9 @@
 #include "cc-keyboard-item.h"
 
 #define CUSTOM_KEYS_SCHEMA "org.gnome.settings-daemon.plugins.media-keys.custom-keybinding"
+#define GLOBAL_SHORTCUTS_APP_SCHEMA "org.gnome.settings.global-shortcuts.application"
+#define GLOBAL_SHORTCUTS_BINDINGS_SCHEMA "org.gnome.settings.global-shortcuts.application.binding"
+#define GLOBAL_SHORTCUTS_PATH "/org/gnome/global-shortcuts/"
 #define SHORTCUT_DELIMITERS "+ "
 
 struct _CcKeyboardItem
@@ -146,6 +149,15 @@ binding_from_string (const char *str,
     return FALSE;
   else
     return TRUE;
+}
+
+const char *
+cc_keyboard_item_get_global_shortcut_name (CcKeyboardItem *item)
+{
+  if (item->type == CC_KEYBOARD_ITEM_TYPE_GLOBAL_SHORTCUT)
+    return item->key;
+
+  return NULL;
 }
 
 static void
@@ -292,7 +304,7 @@ cc_keyboard_item_class_init (CcKeyboardItemClass *klass)
                                                      NULL,
                                                      NULL,
                                                      CC_KEYBOARD_ITEM_TYPE_NONE,
-                                                     CC_KEYBOARD_ITEM_TYPE_GSETTINGS,
+                                                     CC_KEYBOARD_ITEM_TYPE_GLOBAL_SHORTCUT,
                                                      CC_KEYBOARD_ITEM_TYPE_NONE,
                                                      G_PARAM_CONSTRUCT_ONLY | G_PARAM_WRITABLE));
 
@@ -631,6 +643,15 @@ settings_get_key_combos (GSettings  *settings,
 }
 
 static void
+binding_changed_notify (CcKeyboardItem *item)
+{
+  g_object_notify (G_OBJECT (item), "key-combos");
+  g_object_notify (G_OBJECT (item), "is-value-default");
+  if (item->reverse_item)
+    g_object_notify (G_OBJECT (item->reverse_item), "is-value-default");
+}
+
+static void
 binding_changed (CcKeyboardItem *item,
 		 const char *key)
 {
@@ -639,10 +660,83 @@ binding_changed (CcKeyboardItem *item,
 
   item->editable = g_settings_is_writable (item->settings, item->key);
 
-  g_object_notify (G_OBJECT (item), "key-combos");
-  g_object_notify (G_OBJECT (item), "is-value-default");
-  if (item->reverse_item)
-    g_object_notify (G_OBJECT (item->reverse_item), "is-value-default");
+  binding_changed_notify (item);
+}
+
+static gchar *
+combo_get_accelerator (CcKeyCombo *combo)
+{
+  return gtk_accelerator_name_with_keycode (NULL,
+                                            combo->keyval,
+                                            combo->keycode,
+                                            combo->mask);
+}
+
+GVariant *
+cc_keyboard_item_store_to_global_shortcuts_variant (CcKeyboardItem *item)
+{
+  g_auto(GVariantBuilder) builder =
+    G_VARIANT_BUILDER_INIT (G_VARIANT_TYPE ("a{sv}"));
+
+  if (item->type != CC_KEYBOARD_ITEM_TYPE_GLOBAL_SHORTCUT)
+    return NULL;
+
+  if (item->key_combos)
+    {
+      g_auto(GVariantBuilder) shortcuts =
+        G_VARIANT_BUILDER_INIT (G_VARIANT_TYPE ("as"));
+      GList *l;
+
+      for (l = item->key_combos; l; l = l->next)
+        {
+          g_autofree char *accel = NULL;
+
+          accel = combo_get_accelerator (l->data);
+          g_variant_builder_add (&shortcuts, "s", accel);
+        }
+
+      g_variant_builder_add (&builder, "{sv}",
+                             "shortcuts", g_variant_builder_end (&shortcuts));
+    }
+
+  if (item->description)
+    {
+      g_variant_builder_add (&builder, "{sv}",
+                             "description",
+                             g_variant_new_string (item->description));
+    }
+
+  return g_variant_builder_end (&builder);
+}
+
+/* Fills in a preliminary (?) `item` with data from a permanent source.
+ * Uses an existing gsettings preference if available.
+ */
+gboolean
+cc_keyboard_item_load_from_global_shortcuts (CcKeyboardItem *item,
+                                             const char     *shortcut_id,
+                                             GVariant       *properties)
+{
+  GVariantDict dict;
+  GVariant *shortcuts;
+  g_autoptr (GSettings) settings = NULL;
+
+  g_variant_dict_init (&dict, properties);
+
+  item->type = CC_KEYBOARD_ITEM_TYPE_GLOBAL_SHORTCUT;
+  item->key = g_strdup (shortcut_id);
+  item->editable = TRUE;
+  g_variant_dict_lookup (&dict, "description", "s", &item->description);
+  item->desc_editable = FALSE;
+  item->can_set_multiple = TRUE;
+
+  shortcuts = g_variant_dict_lookup_value (&dict,
+                                           "shortcuts",
+                                           NULL);
+  if (shortcuts)
+    item->key_combos = variant_get_key_combos (shortcuts);
+
+  return TRUE;
 }
 
 gboolean
@@ -724,13 +818,15 @@ cc_keyboard_item_equal (CcKeyboardItem *a,
     return FALSE;
   switch (a->type)
     {
-      case CC_KEYBOARD_ITEM_TYPE_GSETTINGS_PATH:
-	return g_str_equal (a->gsettings_path, b->gsettings_path);
-      case CC_KEYBOARD_ITEM_TYPE_GSETTINGS:
-	return (g_str_equal (a->schema, b->schema) &&
-		g_str_equal (a->key, b->key));
-      default:
-	g_assert_not_reached ();
+    case CC_KEYBOARD_ITEM_TYPE_GLOBAL_SHORTCUT:
+      return g_str_equal (a->key, b->key);
+    case CC_KEYBOARD_ITEM_TYPE_GSETTINGS_PATH:
+      return g_str_equal (a->gsettings_path, b->gsettings_path);
+    case CC_KEYBOARD_ITEM_TYPE_GSETTINGS:
+      return (g_str_equal (a->schema, b->schema) &&
+              g_str_equal (a->key, b->key));
+    default:
+      g_assert_not_reached ();
     }
 
 }
@@ -812,7 +908,17 @@ cc_keyboard_item_reset (CcKeyboardItem *self)
 
   reverse = self->reverse_item;
 
-  g_settings_reset (self->settings, self->key);
+  if (self->settings)
+    {
+      g_settings_reset (self->settings, self->key);
+    }
+  else
+    {
+      g_list_free_full (self->key_combos, g_free);
+      self->key_combos = NULL;
+      binding_changed_notify (self);
+    }
+
   g_object_notify (G_OBJECT (self), "is-value-default");
 
   /* Also reset the reverse item */
@@ -878,14 +984,6 @@ cc_keyboard_item_can_set_multiple (CcKeyboardItem *item)
   return item->can_set_multiple;
 }
 
-static gchar*
-combo_get_accelerator (CcKeyCombo *combo)
-{
-  return gtk_accelerator_name_with_keycode (NULL,
-                                            combo->keyval,
-                                            combo->keycode,
-                                            combo->mask);
-}
 
 static void
 cc_keyboard_item_add_key_combo_inner (CcKeyboardItem *self,
@@ -896,6 +994,10 @@ cc_keyboard_item_add_key_combo_inner (CcKeyboardItem *self,
 
   if (!self->can_set_multiple)
     {
+      /* In-memory keyboard items currently always support multiple,
+       * so we don't bother special-casing when they don't.
+       */
+      g_assert (self->settings);
       g_settings_set_string (self->settings, self->key, combo_get_accelerator (combo));
     }
   else
@@ -905,17 +1007,30 @@ cc_keyboard_item_add_key_combo_inner (CcKeyboardItem *self,
       i = 0;
       for (GList *l = self->key_combos; l != NULL; l = l->next, i++)
         {
+          /* This combo is already in the list */
           if (combo_equal (l->data, combo))
-            // This combo is already in the list
             return;
           strv[i] = combo_get_accelerator (l->data);
         }
       strv[i] = combo_get_accelerator (combo);
 
-      g_settings_set_strv (self->settings, self->key, (const gchar **)strv);
+      if (self->settings)
+        {
+          g_settings_set_strv (self->settings, self->key, (const gchar **) strv);
+        }
+      else /* In-memory keyboard item */
+        {
+          CcKeyCombo *new_combo;
+          new_combo = g_new0 (CcKeyCombo, 1);
+          *new_combo = *combo;
+          self->key_combos = g_list_append (self->key_combos, new_combo);
+        }
     }
 
-  binding_changed (self, self->key);
+  if (self->settings)
+    binding_changed (self, self->key);
+  else
+    binding_changed_notify (self);
 }
 
 void
@@ -990,6 +1105,14 @@ cc_keyboard_item_remove_key_combo (CcKeyboardItem *self,
 
 void cc_keyboard_item_disable (CcKeyboardItem *self)
 {
+  if (!self->settings)
+    {
+      g_list_free_full (self->key_combos, g_free);
+      self->key_combos = NULL;
+      binding_changed_notify (self);
+      return;
+    }
+
   if (!self->can_set_multiple)
     {
       g_settings_set_string (self->settings, self->key, "");

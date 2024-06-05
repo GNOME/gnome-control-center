@@ -39,7 +39,8 @@ typedef enum
 {
   CC_KEYBOARD_ITEM_TYPE_NONE = 0,
   CC_KEYBOARD_ITEM_TYPE_GSETTINGS_PATH,
-  CC_KEYBOARD_ITEM_TYPE_GSETTINGS
+  CC_KEYBOARD_ITEM_TYPE_GSETTINGS,
+  CC_KEYBOARD_ITEM_TYPE_GLOBAL_SHORTCUT,
 } CcKeyboardItemType;
 
 typedef struct
@@ -54,6 +55,10 @@ CcKeyboardItem*    cc_keyboard_item_new                      (CcKeyboardItemType
 gboolean           cc_keyboard_item_matches_string           (CcKeyboardItem *self,
                                                               GStrv           search_terms);
 
+gboolean           cc_keyboard_item_load_from_global_shortcuts (CcKeyboardItem *item,
+                                                                const char     *name,
+                                                                GVariant       *properties);
+
 gboolean           cc_keyboard_item_load_from_gsettings_path (CcKeyboardItem     *item,
                                                               const char         *path,
                                                               gboolean            reset);
@@ -62,6 +67,10 @@ gboolean           cc_keyboard_item_load_from_gsettings      (CcKeyboardItem    
                                                               const char         *description,
                                                               const char         *schema,
                                                               const char         *key);
+
+const char *       cc_keyboard_item_get_global_shortcut_name (CcKeyboardItem     *item);
+
+GVariant *         cc_keyboard_item_store_to_global_shortcuts_variant (CcKeyboardItem *item);
 
 const char*        cc_keyboard_item_get_description          (CcKeyboardItem     *item);
 

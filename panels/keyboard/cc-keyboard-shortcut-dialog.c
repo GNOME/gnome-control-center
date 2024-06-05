@@ -131,6 +131,13 @@ shortcut_added_cb (CcKeyboardShortcutDialog *self,
 {
   GListStore *section;
 
+  /* Global shortcuts sections are already presented in the apps panel.
+   * _GVARIANT should never appear in this dialog, so filter it only out of
+   * caution.
+   */
+  if (cc_keyboard_item_get_item_type (item) == CC_KEYBOARD_ITEM_TYPE_GLOBAL_SHORTCUT)
+    return;
+
   section = keyboard_shortcut_get_section_store (self, section_id, section_title);
   g_object_set_data (G_OBJECT (item), "section", section);
   g_list_store_append (section, item);
