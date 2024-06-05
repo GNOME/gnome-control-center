@@ -799,7 +799,7 @@ cc_keyboard_manager_class_init (CcKeyboardManagerClass *klass)
   /**
    * CcKeyboardManager:shortcut-changed:
    *
-   * Emitted when a shortcut is added.
+   * Emitted when a shortcut is changed.
    */
   signals[SHORTCUT_CHANGED] = g_signal_new ("shortcut-changed",
                                             CC_TYPE_KEYBOARD_MANAGER,
