@@ -43,8 +43,9 @@ typedef struct
   CcKeyboardItemType type;
   char *schema; /* GSettings schema name, if any */
   char *description; /* description for GSettings types */
-  char *name; /* GSettings schema path, or GSettings key name depending on type */
+  char *name; /* GSettings schema path, or GSettings key name, or globalshortcut id, depending on type */
   char *reverse_entry;
+  GVariant *properties; /* Initialization data used in GlobalShortcuts */
   gboolean is_reversed;
   gboolean hidden;
 } KeyListEntry;

@@ -33,6 +33,9 @@
 
 #define BINDINGS_SCHEMA       "org.gnome.settings-daemon.plugins.media-keys"
 #define CUSTOM_SHORTCUTS_ID   "custom"
+#define GLOBAL_SHORTCUTS_SCHEMA "org.gnome.settings-daemon.global-shortcuts"
+#define GLOBAL_SHORTCUTS_APP_SCHEMA "org.gnome.settings-daemon.global-shortcuts.application"
+#define GLOBAL_SHORTCUTS_PATH "/org/gnome/settings-daemon/global-shortcuts/"
 
 struct _CcKeyboardManager
 {
@@ -45,6 +48,7 @@ struct _CcKeyboardManager
   GHashTable         *kb_user_sections;
 
   GSettings          *binding_settings;
+  GSettings          *global_shortcuts_settings;
 };
 
 G_DEFINE_TYPE (CcKeyboardManager, cc_keyboard_manager, G_TYPE_OBJECT)
@@ -201,9 +205,17 @@ have_key_for_group (CcKeyboardManager *self,
       for (i = 0; i < keys->len; i++)
         {
           CcKeyboardItem *item = g_ptr_array_index (keys, i);
+          CcKeyboardItemType type;
+          type = cc_keyboard_item_get_item_type (item);
 
-          if (cc_keyboard_item_get_item_type (item) == CC_KEYBOARD_ITEM_TYPE_GSETTINGS &&
-              g_strcmp0 (name, cc_keyboard_item_get_key (item)) == 0)
+          if (type == CC_KEYBOARD_ITEM_TYPE_GSETTINGS)
+            {
+              if (g_strcmp0 (name, cc_keyboard_item_get_key (item)) == 0)
+                {
+                  return TRUE;
+                }
+            }
+          else if (g_strcmp0 (name, cc_keyboard_item_get_gsettings_path (item)) == 0)
             {
               return TRUE;
             }
@@ -309,6 +321,12 @@ append_section (CcKeyboardManager  *self,
 
       switch (keys_list[i].type)
         {
+        case CC_KEYBOARD_ITEM_TYPE_GLOBAL_SHORTCUT:
+          ret = cc_keyboard_item_load_from_global_shortcuts (item,
+                                                             keys_list[i].name,
+                                                             keys_list[i].properties);
+          break;
+
         case CC_KEYBOARD_ITEM_TYPE_GSETTINGS_PATH:
           ret = cc_keyboard_item_load_from_gsettings_path (item, keys_list[i].name, FALSE);
           break;
@@ -380,7 +398,7 @@ append_sections_from_file (CcKeyboardManager  *self,
 {
   KeyList *keylist;
   KeyListEntry *keys;
-  KeyListEntry key = { 0, 0, 0, 0, 0, 0, 0 };
+  KeyListEntry key = { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
   const char *title;
   int group;
   guint i;
@@ -456,7 +474,7 @@ append_sections_from_gsettings (CcKeyboardManager *self)
 {
   g_auto(GStrv) custom_paths = NULL;
   GArray *entries;
-  KeyListEntry key = { 0, 0, 0, 0, 0, 0, 0 };
+  KeyListEntry key = { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
   int i;
 
   /* load custom shortcuts from GSettings */
@@ -749,6 +767,7 @@ cc_keyboard_manager_finalize (GObject *object)
   g_clear_pointer (&self->kb_apps_sections, g_hash_table_destroy);
   g_clear_pointer (&self->kb_user_sections, g_hash_table_destroy);
   g_clear_object (&self->binding_settings);
+  g_clear_object (&self->global_shortcuts_settings);
   g_clear_object (&self->sections_store);
 
   G_OBJECT_CLASS (cc_keyboard_manager_parent_class)->finalize (object);
@@ -840,6 +859,9 @@ cc_keyboard_manager_init (CcKeyboardManager *self)
 {
   /* Bindings */
   self->binding_settings = g_settings_new (BINDINGS_SCHEMA);
+
+  /* Global shortcuts portal */
+  self->global_shortcuts_settings = g_settings_new (GLOBAL_SHORTCUTS_SCHEMA);
 
   /* Setup the section models */
   self->sections_store = gtk_list_store_new (SECTION_N_COLUMNS,
@@ -1048,7 +1070,13 @@ cc_keyboard_manager_reset_shortcut (CcKeyboardManager *self,
   g_return_if_fail (CC_IS_KEYBOARD_MANAGER (self));
   g_return_if_fail (CC_IS_KEYBOARD_ITEM (item));
 
-  /* Disables any shortcut that conflicts with the new shortcut's value */
+  /* Disables any shortcut that conflicts with the new shortcut's value.
+   * Changes take effect immediately.
+   * But it's ok even when changes must be approved together
+   * like in global shortcuts dialog:
+   * no other binding will get altered as long as the global shortcut default
+   * is "disabled", because resetting to "disabled" never causes conflicts.
+   */
   for (l = cc_keyboard_item_get_default_combos (item); l; l = l->next)
     {
       CcKeyCombo *combo = l->data;
