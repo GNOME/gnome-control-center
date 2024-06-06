@@ -44,7 +44,7 @@ struct _PpDetailsDialog {
   GtkWindow    *toplevel;
   AdwPreferencesGroup *driver_button_rows_group;
   GtkSpinner   *spinner_driver_search;
-  GtkLabel     *printer_address_label;
+  AdwActionRow *printer_address_row;
   GtkRevealer  *printer_name_hint_revealer;
   AdwEntryRow  *printer_location_entry;
   AdwActionRow *printer_model_label;
@@ -295,6 +295,22 @@ update_sensitivity (PpDetailsDialog *self,
 }
 
 static void
+on_open_address_button_clicked (PpDetailsDialog *self)
+{
+  GtkWindow *toplevel;
+  g_autoptr(GFile) file = NULL;
+  g_autoptr(GtkFileLauncher) launcher = NULL;
+  g_autofree gchar *printer_url;
+
+  printer_url = g_strdup_printf ("http://%s", adw_action_row_get_subtitle (self->printer_address_row));
+  file = g_file_new_for_uri (printer_url);
+  launcher = gtk_file_launcher_new (file);
+
+  toplevel = GTK_WINDOW (gtk_widget_get_root (GTK_WIDGET (self)));
+  gtk_file_launcher_launch (launcher, toplevel, NULL, NULL, NULL);
+}
+
+static void
 pp_details_dialog_init (PpDetailsDialog *self)
 {
   gtk_widget_init_template (GTK_WIDGET (self));
@@ -337,12 +353,13 @@ pp_details_dialog_class_init (PpDetailsDialogClass *klass)
   gtk_widget_class_bind_template_child (widget_class, PpDetailsDialog, printer_name_hint_revealer);
   gtk_widget_class_bind_template_child (widget_class, PpDetailsDialog, driver_button_rows_group);
   gtk_widget_class_bind_template_child (widget_class, PpDetailsDialog, spinner_driver_search);
-  gtk_widget_class_bind_template_child (widget_class, PpDetailsDialog, printer_address_label);
+  gtk_widget_class_bind_template_child (widget_class, PpDetailsDialog, printer_address_row);
   gtk_widget_class_bind_template_child (widget_class, PpDetailsDialog, printer_location_entry);
   gtk_widget_class_bind_template_child (widget_class, PpDetailsDialog, printer_model_label);
   gtk_widget_class_bind_template_child (widget_class, PpDetailsDialog, printer_name_entry);
   gtk_widget_class_bind_template_child (widget_class, PpDetailsDialog, search_for_drivers_button_row);
 
+  gtk_widget_class_bind_template_callback (widget_class, on_open_address_button_clicked);
   gtk_widget_class_bind_template_callback (widget_class, printer_name_changed);
   gtk_widget_class_bind_template_callback (widget_class, search_for_drivers);
   gtk_widget_class_bind_template_callback (widget_class, select_ppd_in_dialog);
@@ -369,8 +386,8 @@ pp_details_dialog_new (gchar   *printer_name,
   title = g_strdup_printf (_("%s Details"), printer_name);
   adw_dialog_set_title (ADW_DIALOG (self), title);
 
-  printer_url = g_strdup_printf ("<a href=\"http://%s:%d\">%s</a>", printer_address, ippPort (), printer_address);
-  gtk_label_set_markup (GTK_LABEL (self->printer_address_label), printer_url);
+  printer_url = g_strdup_printf ("%s:%d", printer_address, ippPort ());
+  adw_action_row_set_subtitle (self->printer_address_row, printer_url);
 
   gtk_editable_set_text (GTK_EDITABLE (self->printer_name_entry), printer_name);
   gtk_editable_set_text (GTK_EDITABLE (self->printer_location_entry), printer_location);

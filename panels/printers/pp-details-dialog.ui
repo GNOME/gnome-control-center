@@ -24,33 +24,22 @@
                   </object>
                 </child>
                 <child>
-                  <object class="AdwActionRow">
-                    <child type="prefix">
-                      <object class="GtkBox">
-                        <property name="orientation">vertical</property>
-                        <property name="spacing">3</property>
-                        <property name="halign">start</property>
+                  <object class="AdwActionRow" id="printer_address_row">
+                    <property name="title" translatable="yes">Address</property>
+                    <child type="suffix">
+                      <object class="GtkButton">
+                        <style>
+                          <class name="flat"/>
+                        </style>
+                        <property name="icon-name">adw-external-link-symbolic</property>
+                        <property name="tooltip-text" translatable="yes">Open Address</property>
                         <property name="valign">center</property>
-                        <child>
-                          <object class="GtkLabel">
-                            <property name="label" translatable="yes">Address</property>
-                            <property name="hexpand">True</property>
-                            <property name="ellipsize">end</property>
-                            <property name="halign">start</property>
-                            <style>
-                              <class name="subtitle"/>
-                            </style>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="GtkLabel" id="printer_address_label">
-                            <property name="xalign">1</property>
-                            <property name="ellipsize">start</property>
-                            <property name="use-markup">true</property>
-                          </object>
-                        </child>
+                        <signal name="clicked" handler="on_open_address_button_clicked" object="PpDetailsDialog" swapped="yes"/>
                       </object>
                     </child>
+                    <style>
+                      <class name="property"/>
+                    </style>
                   </object>
                 </child>
                 <child>
