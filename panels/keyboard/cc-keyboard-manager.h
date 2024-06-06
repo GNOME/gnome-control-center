@@ -35,6 +35,16 @@ CcKeyboardManager*   cc_keyboard_manager_new                     (void);
 
 void                 cc_keyboard_manager_load_shortcuts          (CcKeyboardManager  *self);
 
+void                 cc_keyboard_manager_load_global_shortcuts   (CcKeyboardManager *self,
+                                                                  const char        *app_id,
+                                                                  GVariant          *shortcuts);
+
+void                 cc_keyboard_manager_store_global_shortcuts  (CcKeyboardManager  *self,
+                                                                  const char         *app_id);
+
+GVariant *           cc_keyboard_manager_get_global_shortcuts    (CcKeyboardManager  *self,
+                                                                  const char         *section_id);
+
 CcKeyboardItem*      cc_keyboard_manager_create_custom_shortcut  (CcKeyboardManager  *self);
 
 void                 cc_keyboard_manager_add_custom_shortcut     (CcKeyboardManager  *self,

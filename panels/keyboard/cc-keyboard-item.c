@@ -984,7 +984,6 @@ cc_keyboard_item_can_set_multiple (CcKeyboardItem *item)
   return item->can_set_multiple;
 }
 
-
 static void
 cc_keyboard_item_add_key_combo_inner (CcKeyboardItem *self,
                                       CcKeyCombo *combo)

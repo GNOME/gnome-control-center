@@ -23,6 +23,7 @@
 #include <glib/gi18n.h>
 
 #include "cc-keyboard-manager.h"
+#include "cc-util.h"
 #include "keyboard-shortcuts.h"
 
 #include <gdk/gdk.h>
@@ -517,6 +518,86 @@ append_sections_from_gsettings (CcKeyboardManager *self)
   g_array_free (entries, TRUE);
 }
 
+static void
+append_section_for_app_global_shortcuts (CcKeyboardManager *self,
+                                         const char        *app_id,
+                                         GVariant          *shortcuts)
+{
+  g_autoptr(GArray) entries = NULL;
+  g_autoptr(GVariant) value = NULL;
+  g_autofree char *section_name = NULL;
+  g_autofree char *shortcut = NULL;
+  KeyListEntry key = { 0, };
+  GVariantIter iter;
+  KeyListEntry *keys;
+
+  entries = g_array_new (FALSE, TRUE, sizeof (KeyListEntry));
+  g_variant_iter_init (&iter, shortcuts);
+
+  while (g_variant_iter_next (&iter, "(s@a{sv})", &shortcut, &value))
+    {
+      g_autofree char *shortcut_id = g_steal_pointer (&shortcut);
+      g_autoptr(GVariant) config = g_steal_pointer (&value);
+
+      key.name = g_strdup (shortcut_id);
+      key.type = CC_KEYBOARD_ITEM_TYPE_GLOBAL_SHORTCUT;
+      key.properties = g_steal_pointer (&config);
+      g_array_append_val (entries, key);
+    }
+
+  /* Empty KeyListEntry to end the array */
+  key.name = NULL;
+  g_array_append_val (entries, key);
+  keys = (KeyListEntry *) entries->data;
+
+  section_name = cc_util_app_id_to_display_name (app_id);
+  append_section (self, section_name, app_id, BINDING_GROUP_USER, keys);
+}
+
+static void
+append_sections_from_global_shortcuts_settings (CcKeyboardManager *self,
+                                                const gchar       *overlay_app_id,
+                                                GVariant          *overlay_app_shortcuts)
+{
+  g_auto (GStrv) children = NULL;
+  gboolean overlay_added = FALSE;
+  int i;
+
+  children = g_settings_get_strv (self->global_shortcuts_settings, "applications");
+
+  for (i = 0; children[i]; i++)
+    {
+      g_autoptr (GVariant) shortcuts = NULL;
+
+      if (overlay_app_id && g_strcmp0 (overlay_app_id, children[i]) == 0)
+        {
+          shortcuts = g_variant_ref (overlay_app_shortcuts);
+          overlay_added = TRUE;
+        }
+      else
+        {
+          g_autoptr(GSettings) app_settings = NULL;
+          g_autofree char *app_path = NULL;
+
+          app_path = g_strdup_printf (GLOBAL_SHORTCUTS_PATH "%s/", children[i]);
+          app_settings = g_settings_new_with_path (GLOBAL_SHORTCUTS_APP_SCHEMA,
+                                                   app_path);
+          shortcuts = g_settings_get_value (app_settings, "shortcuts");
+        }
+
+      append_section_for_app_global_shortcuts (self,
+                                               children[i],
+                                               shortcuts);
+    }
+
+  if (!overlay_added && overlay_app_id && overlay_app_shortcuts)
+    {
+      append_section_for_app_global_shortcuts (self,
+                                               overlay_app_id,
+                                               overlay_app_shortcuts);
+    }
+}
+
 #ifdef GDK_WINDOWING_X11
 static char *
 get_window_manager_property (GdkDisplay *display,
@@ -877,13 +958,48 @@ cc_keyboard_manager_new (void)
   return g_object_new (CC_TYPE_KEYBOARD_MANAGER, NULL);
 }
 
+static void
+cc_keyboard_manager_load_shortcuts_internal (CcKeyboardManager *self,
+                                             const gchar       *overlay_app_id,
+                                             GVariant          *overlay_app_shortcuts)
+{
+  g_return_if_fail (CC_IS_KEYBOARD_MANAGER (self));
+
+  reload_sections (self);
+
+  append_sections_from_global_shortcuts_settings (self,
+                                                  overlay_app_id,
+                                                  overlay_app_shortcuts);
+  add_shortcuts (self);
+}
+
+/* Adds a bunch of shortcuts to section_id.
+ * If the shortcut name matches an existing one, it takes the existing combos.
+ * If an overlaid shortcut's combo conflicts with an existing one, the overlaid is dropped.
+ * Changes to the entire section_id will only take effect after a call to TODO.
+ *
+ *  `shortcuts` is "a(sa{sv})" and has the structure:
+ * [
+ *   shortcut_id: "s",
+ *   { "preferred_trigger": "s", maybe "description": "s" }
+ * ]
+ */
+void
+cc_keyboard_manager_load_global_shortcuts (CcKeyboardManager *self,
+                                           const char        *app_id,
+                                           GVariant          *shortcuts)
+{
+  g_return_if_fail (CC_IS_KEYBOARD_MANAGER (self));
+
+  cc_keyboard_manager_load_shortcuts_internal (self, app_id, shortcuts);
+}
+
 void
 cc_keyboard_manager_load_shortcuts (CcKeyboardManager *self)
 {
   g_return_if_fail (CC_IS_KEYBOARD_MANAGER (self));
 
-  reload_sections (self);
-  add_shortcuts (self);
+  cc_keyboard_manager_load_shortcuts_internal (self, NULL, NULL);
 }
 
 /**
@@ -1007,6 +1123,74 @@ cc_keyboard_manager_remove_custom_shortcut  (CcKeyboardManager *self,
   g_signal_emit (self, signals[SHORTCUT_REMOVED], 0, item);
 }
 
+void
+cc_keyboard_manager_store_global_shortcuts (CcKeyboardManager *self,
+                                            const char        *app_id)
+{
+  GPtrArray *keys_array;
+  GHashTable *hash;
+  g_autoptr(GSettings) app_settings = NULL;
+  g_autofree char *app_settings_path = NULL;
+  g_auto(GVariantBuilder) builder =
+    G_VARIANT_BUILDER_INIT (G_VARIANT_TYPE ("a(sa{sv})"));
+  g_auto(GStrv) applications = NULL;
+  int i;
+
+  g_return_if_fail (CC_IS_KEYBOARD_MANAGER (self));
+
+  hash = get_hash_for_group (self, BINDING_GROUP_USER);
+  keys_array = g_hash_table_lookup (hash, app_id);
+
+  if (keys_array == NULL)
+    return;
+
+  for (i = 0; i < keys_array->len; i++)
+    {
+      const char *name;
+      g_autoptr(GVariant) key_variant = NULL;
+      CcKeyboardItem *item;
+
+      item = g_ptr_array_index (keys_array, i);
+
+      name = cc_keyboard_item_get_global_shortcut_name (item);
+      key_variant = cc_keyboard_item_store_to_global_shortcuts_variant (item);
+      g_variant_builder_add (&builder, "(s@a{sv})",
+                             name, g_variant_ref_sink (key_variant));
+    }
+
+  app_settings_path = g_strdup_printf (GLOBAL_SHORTCUTS_PATH "%s/", app_id);
+  app_settings = g_settings_new_with_path (GLOBAL_SHORTCUTS_APP_SCHEMA, app_settings_path);
+  g_settings_set_value (app_settings, "shortcuts", g_variant_builder_end (&builder));
+
+  applications = g_settings_get_strv (self->global_shortcuts_settings, "applications");
+
+  if (!g_strv_contains ((const char * const*) applications, app_id))
+    {
+      g_auto(GVariantBuilder) apps_builder =
+        G_VARIANT_BUILDER_INIT (G_VARIANT_TYPE ("as"));
+
+      for (i = 0; applications[i]; i++)
+        g_variant_builder_add (&apps_builder, "s", applications[i]);
+
+      g_variant_builder_add (&apps_builder, "s", app_id);
+      g_settings_set_value (self->global_shortcuts_settings, "applications",
+                            g_variant_builder_end (&apps_builder));
+    }
+}
+
+GVariant *
+cc_keyboard_manager_get_global_shortcuts (CcKeyboardManager *self,
+                                          const char        *app_id)
+{
+  g_autoptr(GSettings) app_settings = NULL;
+  g_autofree char *path = NULL;
+
+  path = g_strdup_printf (GLOBAL_SHORTCUTS_PATH "%s/", app_id);
+  app_settings = g_settings_new_with_path (GLOBAL_SHORTCUTS_APP_SCHEMA, path);
+
+  return g_settings_get_value (app_settings, "shortcuts");
+}
+
 /**
  * cc_keyboard_manager_get_collision:
  * @self: a #CcKeyboardManager
@@ -1096,8 +1280,9 @@ cc_keyboard_manager_reset_global_shortcuts (CcKeyboardManager  *self,
                                             const char         *app_id)
 {
   g_autoptr (GSettings) settings = NULL;
+  g_autofree char *path = NULL;
 
-  settings = g_settings_get_child (self->global_shortcuts_settings,
-                                   app_id);
-  g_settings_reset (settings, "keybindings");
+  path = g_strdup_printf (GLOBAL_SHORTCUTS_PATH "%s/", app_id);
+  settings = g_settings_new_with_path (GLOBAL_SHORTCUTS_APP_SCHEMA, path);
+  g_settings_reset (settings, "shortcuts");
 }
