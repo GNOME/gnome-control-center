@@ -178,6 +178,10 @@ if tecla_is_subproject
   )
 endif
 
+subproject('libgxdp',
+  default_options: 'tests=false',
+)
+
 accounts_dep = dependency('accountsservice', version: '>= 23.11.69')
 colord_dep = dependency('colord', version: '>= 0.1.34')
 gdk_pixbuf_dep = dependency('gdk-pixbuf-2.0', version: '>= 2.23.0')
@@ -352,6 +356,7 @@ subdir('data/icons')
 subdir('po')
 subdir('panels')
 subdir('shell')
+subdir('global-shortcuts-provider')
 subdir('search-provider')
 
 if get_option('tests')

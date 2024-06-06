@@ -111,4 +111,9 @@ keyboard_panel_lib = static_library(
 )
 panels_libs += keyboard_panel_lib
 
+keyboard_panel_dep = declare_dependency(
+  include_directories: [top_inc, keyboard_inc],
+  link_with: keyboard_panel_lib,
+)
+
 subdir('icons')

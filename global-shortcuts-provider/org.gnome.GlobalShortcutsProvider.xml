@@ -1,0 +1,54 @@
+<!DOCTYPE node PUBLIC
+'-//freedesktop//DTD D-BUS Object Introspection 1.0//EN'
+'http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd'>
+<node>
+
+  <!--
+      org.gnome.Settings.GlobalShortcutsProvider:
+      @short_description: Global shortcuts portal permissions UI
+
+      Provides a UI for the GlobalShortcuts portal, stores preferences, and
+      notifies the compositor of changes.
+  -->
+  <interface name="org.gnome.Settings.GlobalShortcutsProvider">
+    <!--
+        BindShortcuts:
+        @app_id: Application ID
+        @parent_window: Parent window handle
+        @shortcuts: Shortcuts to bind
+
+        Presents a shortcuts dialog to the user, stores the preference,
+        and notifies about changes.
+
+        The @shortcuts array is made of tuples composed of a shortcut id, and
+        a vardict with the following keys:
+
+        * ``description`` (``s``)
+
+          User-readable text describing what the shortcut does. Optional.
+
+        * ``preferred_trigger``` (``s`` or ``as``)
+
+          An optional preferred shortcut, or a list of strings specifying the
+          shortcuts, for example: ``['<alt>C', '<ctrl>Q']``
+
+        The @results array is made of tuples composed of a shortcut id, and
+	a vardict with the following keys:
+
+        * ``description`` (``s``)
+
+          User-readable text describing what the shortcut does. Optional.
+
+        * ``shortcut`` (``as``)
+
+	  A list of shortcuts to bind to the associated shortcut id, for
+          example: ``['<alt>C', '<ctrl>Q']``
+    -->
+    <method name="BindShortcuts">
+      <arg type="s" name="app_id" direction="in"/>
+      <arg type="s" name="parent_window" direction="in"/>
+      <arg type="a(sa{sv})" name="shortcuts" direction="in"/>
+      <arg type="a(sa{sv})" name="results" direction="out"/>
+    </method>
+  </interface>
+</node>

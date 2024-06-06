@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <template class="CcGlobalShortcutDialog" parent="AdwWindow">
+    <property name="modal">True</property>
+    <property name="default-width">480</property>
+    <property name="title" translatable="yes">Add Keyboard Shortcuts</property>
+    <child>
+      <object class="AdwToolbarView">
+        <child type="top">
+          <object class="AdwHeaderBar">
+            <property name="show-start-title-buttons">False</property>
+            <property name="show-end-title-buttons">False</property>
+            <child type="start">
+              <object class="GtkButton" id="cancel_button">
+                <property name="label" translatable="yes">_Cancel</property>
+                <property name="use-underline">True</property>
+                <property name="valign">center</property>
+                <property name="action-name">window.close</property>
+              </object>
+            </child>
+            <child type="end">
+              <object class="GtkButton" id="add_button">
+                <property name="label" translatable="yes">_Add</property>
+                <property name="use-underline">True</property>
+                <property name="valign">center</property>
+                <signal name="clicked" handler="on_add_button_clicked_cb" object="CcGlobalShortcutDialog" swapped="yes" />
+                <style>
+                  <class name="suggested-action"/>
+                </style>
+              </object>
+            </child>
+          </object>
+        </child>
+        <property name="content">
+          <object class="AdwPreferencesPage" id="shortcut_list">
+	    <property name="description" translatable="yes">Added keyboard shortcuts will be available globally, and can be changed in the application’s panel in Settings</property>
+	    <property name="description-centered">True</property>
+          </object>
+        </property>
+      </object>
+    </child>
+  </template>
+  <object class="GtkSizeGroup" id="accelerator_size_group"/>
+</interface>

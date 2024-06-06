@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-srcdirs="panels shell subprojects/gvc"
+srcdirs="global-shortcuts-provider panels shell subprojects/gvc"
 uidirs=$srcdirs
 desktopdirs=$srcdirs
 policydirs=$srcdirs
