@@ -50,5 +50,8 @@ CcKeyboardItem*      cc_keyboard_manager_get_collision           (CcKeyboardMana
 void                 cc_keyboard_manager_reset_shortcut          (CcKeyboardManager  *self,
                                                                   CcKeyboardItem     *item);
 
+void                 cc_keyboard_manager_reset_global_shortcuts  (CcKeyboardManager  *self,
+                                                                  const char         *app_id);
+
 G_END_DECLS
 

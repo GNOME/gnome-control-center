@@ -1090,3 +1090,14 @@ cc_keyboard_manager_reset_shortcut (CcKeyboardManager *self,
   /* Resets the current item */
   cc_keyboard_item_reset (item);
 }
+
+void
+cc_keyboard_manager_reset_global_shortcuts (CcKeyboardManager  *self,
+                                            const char         *app_id)
+{
+  g_autoptr (GSettings) settings = NULL;
+
+  settings = g_settings_get_child (self->global_shortcuts_settings,
+                                   app_id);
+  g_settings_reset (settings, "keybindings");
+}
