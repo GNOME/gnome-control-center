@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <template class="CcApplicationShortcutDialog" parent="AdwDialog">
+    <property name="content-width">480</property>
+    <property name="title" translatable="yes">Global Shortcuts</property>
+    <property name="child">
+      <object class="AdwToolbarView">
+        <child type="top">
+          <object class="AdwHeaderBar" />
+        </child>
+        <property name="content">
+          <object class="AdwPreferencesPage" id="shortcut_list">
+            <property name="description-centered">True</property>
+          </object>
+        </property>
+      </object>
+    </property>
+  </template>
+  <object class="GtkSizeGroup" id="accelerator_size_group"/>
+</interface>

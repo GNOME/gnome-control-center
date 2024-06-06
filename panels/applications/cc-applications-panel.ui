@@ -407,6 +407,14 @@ Error details: Parental Controls are not installed.</property>
                             <property name="action-target">'builtin-page'</property>
                           </object>
                         </child>
+                        <child>
+                          <object class="CcListRow" id="global_shortcuts_row">
+                            <property name="title" translatable="yes">Global S_hortcuts</property>
+                            <property name="subtitle" translatable="yes">Global actions that have been registered for use</property>
+                            <property name="show-arrow">True</property>
+                            <signal name="activated" handler="global_shortcuts_cb" object="CcApplicationsPanel" swapped="yes" />
+                          </object>
+                        </child>
                       </object>
                     </child>
 

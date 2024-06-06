@@ -399,7 +399,7 @@ append_sections_from_file (CcKeyboardManager  *self,
 {
   KeyList *keylist;
   KeyListEntry *keys;
-  KeyListEntry key = { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+  KeyListEntry key = { 0 };
   const char *title;
   int group;
   guint i;
@@ -475,7 +475,7 @@ append_sections_from_gsettings (CcKeyboardManager *self)
 {
   g_auto(GStrv) custom_paths = NULL;
   GArray *entries;
-  KeyListEntry key = { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+  KeyListEntry key = { 0 };
   int i;
 
   /* load custom shortcuts from GSettings */

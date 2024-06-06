@@ -13,6 +13,7 @@ i18n.merge_file(
 sources = files(
   'cc-applications-panel.c',
   'cc-applications-row.c',
+  'cc-application-shortcut-dialog.c',
   'cc-default-apps-page.c',
   'cc-default-apps-row.c',
   'cc-removable-media-settings.c',
@@ -35,7 +36,7 @@ sources += gnome.compile_resources(
   export : true
 )
 
-deps = common_deps
+deps = common_deps + keyboard_shortcuts_dep
 
 if host_is_linux
   deps += mm_dep
