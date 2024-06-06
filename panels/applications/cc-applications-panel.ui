@@ -300,7 +300,7 @@
                         </child>
                         <child>
                           <object class="CcListRow" id="no_sound">
-                            <property name="title" translatable="yes">So_unds</property>
+                            <property name="title" translatable="yes">Sounds</property>
                             <property name="subtitle" translatable="yes">Reproduce sounds</property>
                             <property name="secondary-label" translatable="yes">Disabled</property>
                             <property name="activatable">False</property>
@@ -316,14 +316,15 @@
                         </child>
                         <child>
                           <object class="AdwSwitchRow" id="camera">
-                            <property name="title" translatable="yes">Camera</property>
+                            <property name="title" translatable="yes">C_amera</property>
                             <property name="subtitle" translatable="yes">Take pictures with the camera</property>
+                            <property name="use-underline">True</property>
                             <signal name="notify::active" handler="camera_cb" object="CcApplicationsPanel" swapped="yes"/>
                           </object>
                         </child>
                         <child>
                           <object class="CcListRow" id="no_camera">
-                            <property name="title" translatable="yes">C_amera</property>
+                            <property name="title" translatable="yes">Camera</property>
                             <property name="subtitle" translatable="yes">Take pictures with the camera</property>
                             <property name="secondary-label" translatable="yes">Disabled</property>
                             <property name="activatable">False</property>
@@ -339,7 +340,7 @@
                         </child>
                         <child>
                           <object class="CcListRow" id="no_microphone">
-                            <property name="title" translatable="yes">_Microphone</property>
+                            <property name="title" translatable="yes">Microphone</property>
                             <property name="subtitle" translatable="yes">Record audio with the microphone</property>
                             <property name="secondary-label" translatable="yes">Disabled</property>
                             <property name="activatable">False</property>
@@ -355,7 +356,7 @@
                         </child>
                         <child>
                           <object class="CcListRow" id="no_location">
-                            <property name="title" translatable="yes">_Location Services</property>
+                            <property name="title" translatable="yes">Location Services</property>
                             <property name="subtitle" translatable="yes">Access device location data</property>
                             <property name="secondary-label" translatable="yes">Disabled</property>
                             <property name="activatable">False</property>
