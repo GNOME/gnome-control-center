@@ -33,12 +33,12 @@ cc_color_device_get_title (CdDevice *device)
 
   string = g_string_new ("");
 
-  /* is laptop panel */
+  /* is internal panel */
   if (cd_device_get_kind (device) == CD_DEVICE_KIND_DISPLAY &&
       cd_device_get_embedded (device))
     {
-      /* TRANSLATORS: This refers to the TFT display on a laptop */
-      g_string_append (string, _("Laptop Screen"));
+      /* TRANSLATORS: This refers to the embedded display on e.g. a smartphone, a laptop, an all-in-one desktop… */
+      g_string_append (string, _("Built-In Screen"));
       goto out;
     }
 
@@ -46,7 +46,7 @@ cc_color_device_get_title (CdDevice *device)
   if (cd_device_get_kind (device) == CD_DEVICE_KIND_WEBCAM &&
       cd_device_get_embedded (device))
     {
-      /* TRANSLATORS: This refers to the embedded webcam on a laptop */
+      /* TRANSLATORS: This refers to the embedded webcam on e.g. a smartphone, a laptop, an all-in-one desktop… */
       g_string_append (string, _("Built-in Webcam"));
       goto out;
     }
