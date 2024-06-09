@@ -87,7 +87,7 @@ show_error_dialog (CcAddUserDialog *self,
 
         if (error != NULL) {
                 g_dbus_error_strip_remote_error (error);
-                adw_alert_dialog_format_body (ADW_ALERT_DIALOG (dialog), error->message);
+                adw_alert_dialog_set_body (ADW_ALERT_DIALOG (dialog), error->message);
         }
 
         adw_alert_dialog_add_responses (ADW_ALERT_DIALOG (dialog),
