@@ -165,7 +165,7 @@ cc_wacom_device_initable_init (GInitable     *initable,
 		g_autofree gchar *learn_more_link = NULL;
 
 		/* Translators: This will be presented as the text of a link to the documentation */
-		learn_more_link = g_strdup_printf ("<a href='help:gnome-help/tablet-unknown'>%s</a>", _("learn more"));
+		learn_more_link = g_strdup_printf ("<a href='help:gnome-help/wacom-tablet-unknown'>%s</a>", _("learn more"));
 		/* Translators: %s is a link to the documentation with the label "learn more" */
 		device->description = g_strdup_printf (_("This device is unknown and may present wrong capabilities — %s."), learn_more_link);
 	}
