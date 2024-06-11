@@ -47,7 +47,7 @@ cc_color_device_get_title (CdDevice *device)
       cd_device_get_embedded (device))
     {
       /* TRANSLATORS: This refers to the embedded webcam on e.g. a smartphone, a laptop, an all-in-one desktop… */
-      g_string_append (string, _("Built-in Webcam"));
+      g_string_append (string, _("Built-In Webcam"));
       goto out;
     }
 
