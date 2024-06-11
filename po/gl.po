@@ -20,8 +20,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center-master-po-gl-72290.merged\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2024-03-15 09:47+0000\n"
-"PO-Revision-Date: 2024-03-19 16:32+0100\n"
+"POT-Creation-Date: 2024-05-27 09:02+0000\n"
+"PO-Revision-Date: 2024-06-11 23:01+0200\n"
 "Last-Translator: Fran Dieguez <fran.dieguez@gnome.org>\n"
 "Language-Team: Galician <proxecto@trasno.gal>\n"
 "Language: gl\n"
@@ -34,7 +34,7 @@ msgstr ""
 "X-DL-Module: gnome-control-center\n"
 "X-DL-State: None\n"
 "X-DL-Team: gl\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.4.4\n"
 "X-Launchpad-Export-Date: 2014-05-09 14:44+0000\n"
 "X-Project-Style: gnome\n"
 
@@ -59,7 +59,7 @@ msgstr "Bus de sesión"
 
 #: panels/applications/cc-applications-panel.c:834
 #: panels/privacy/cc-bolt-page.ui:240 panels/privacy/cc-bolt-page.ui:284
-#: panels/privacy/cc-privacy-panel.ui:74
+#: panels/privacy/cc-privacy-panel.ui:75
 msgid "Devices"
 msgstr "Dispositivos"
 
@@ -97,7 +97,7 @@ msgstr "Sistema de ficheiros"
 
 #: panels/applications/cc-applications-panel.c:854
 #: panels/keyboard/01-launchers.xml.in:6
-#: shell/appdata/org.gnome.Settings.appdata.xml.in:7 shell/cc-window.c:775
+#: shell/appdata/org.gnome.Settings.appdata.xml.in:7 shell/cc-window.c:798
 #: shell/cc-window.ui:20 shell/org.gnome.Settings.desktop.in:3
 msgid "Settings"
 msgstr "Preferencias"
@@ -186,7 +186,7 @@ msgstr ""
 
 #: panels/applications/cc-applications-panel.ui:207
 #: panels/printers/pp-details-dialog.c:267
-#: panels/sharing/cc-sharing-panel.c:240
+#: panels/sharing/cc-sharing-panel.c:242
 msgid "_Open"
 msgstr "_Abrir"
 
@@ -221,7 +221,7 @@ msgstr "Recibir as buscas do sistema e enviar resultados"
 #: panels/keyboard/cc-xkb-modifier-dialog.c:342
 #: panels/keyboard/keyboard-shortcuts.c:367
 #: panels/system/users/cc-user-page.c:379
-#: panels/system/users/cc-user-page.c:749 panels/wwan/cc-wwan-device-page.c:477
+#: panels/system/users/cc-user-page.c:752 panels/wwan/cc-wwan-device-page.c:477
 #: subprojects/gvc/gvc-mixer-control.c:1872
 msgid "Disabled"
 msgstr "Desactivado"
@@ -976,8 +976,8 @@ msgstr "Calibración de pantalla"
 
 #: panels/color/cc-color-calibrate.ui:22
 #: panels/common/cc-language-chooser.ui:21
-#: panels/display/cc-display-panel.ui:37 panels/display/cc-display-panel.ui:191
-#: panels/display/cc-display-panel.ui:253
+#: panels/display/cc-display-panel.ui:36 panels/display/cc-display-panel.ui:190
+#: panels/display/cc-display-panel.ui:252
 #: panels/keyboard/cc-input-chooser.ui:20
 #: panels/keyboard/cc-keyboard-shortcut-dialog.c:381
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:15
@@ -988,7 +988,7 @@ msgstr "Calibración de pantalla"
 #: panels/network/connection-editor/connection-editor.ui:16
 #: panels/printers/new-printer-dialog.ui:54
 #: panels/printers/pp-details-dialog.c:266 panels/privacy/cc-usage-page.c:136
-#: panels/sharing/cc-sharing-panel.c:239
+#: panels/sharing/cc-sharing-panel.c:241
 #: panels/system/region/cc-format-chooser.ui:24
 #: panels/system/users/cc-add-user-dialog.ui:34
 #: panels/system/users/cc-enterprise-login-dialog.ui:58
@@ -1588,36 +1588,36 @@ msgstr "Decrementar hora"
 msgid "Decrement Minute"
 msgstr "Decrementar minuto"
 
-#: panels/common/cc-util.c:127
+#: panels/common/cc-util.c:130
 #: panels/network/connection-editor/ce-page-details.c:199
 msgid "Today"
 msgstr "Hoxe"
 
-#: panels/common/cc-util.c:131
+#: panels/common/cc-util.c:134
 #: panels/network/connection-editor/ce-page-details.c:201
 msgid "Yesterday"
 msgstr "Onte"
 
 #. Translators: This is a date format string in the style of "Feb 24".
-#: panels/common/cc-util.c:139
+#: panels/common/cc-util.c:142
 #, no-c-format
 msgid "%b %e"
 msgstr "%e de %b"
 
 #. Translators: This is a date format string in the style of "Feb 24, 2013".
-#: panels/common/cc-util.c:144
+#: panels/common/cc-util.c:147
 msgid "%b %e, %Y"
 msgstr "%e de %b de %Y"
 
 #. TRANSLATORS: This is the datetime format in the style of
 #. "Aug 1, 10:10:10 PM", "Feb 24, 2013, 10:10:10 PM", "Today, 10:10:10 AM",
 #. and "Yesterday, 10:10:10 AM"
-#: panels/common/cc-util.c:163
+#: panels/common/cc-util.c:166
 #, c-format
 msgid "%1$s, %2$s"
 msgstr "%1$s, %2$s"
 
-#: panels/common/cc-util.c:183
+#: panels/common/cc-util.c:186
 #, c-format
 msgid "%d hour"
 msgid_plural "%d hours"
@@ -1625,14 +1625,14 @@ msgstr[0] "%d hora"
 msgstr[1] "%d horas"
 
 #. Translators: Option for "Blank Screen" in "Power" panel
-#: panels/common/cc-util.c:184 panels/power/cc-power-panel.c:790
+#: panels/common/cc-util.c:187 panels/power/cc-power-panel.c:790
 #, c-format
 msgid "%d minute"
 msgid_plural "%d minutes"
 msgstr[0] "%d minuto"
 msgstr[1] "%d minutos"
 
-#: panels/common/cc-util.c:185
+#: panels/common/cc-util.c:188
 #, c-format
 msgid "%d second"
 msgid_plural "%d seconds"
@@ -1640,42 +1640,42 @@ msgstr[0] "%d segundos"
 msgstr[1] "%d segundos"
 
 #. 5 hours 2 minutes 12 seconds
-#: panels/common/cc-util.c:192
+#: panels/common/cc-util.c:195
 #, c-format
 msgctxt "hours minutes seconds"
 msgid "%s %s %s"
 msgstr "%s %s %s"
 
 #. 5 hours 2 minutes
-#: panels/common/cc-util.c:197
+#: panels/common/cc-util.c:200
 #, c-format
 msgctxt "hours minutes"
 msgid "%s %s"
 msgstr "%s %s"
 
 #. 5 hours
-#: panels/common/cc-util.c:202
+#: panels/common/cc-util.c:205
 #, c-format
 msgctxt "hours"
 msgid "%s"
 msgstr "%s"
 
 #. 2 minutes 12 seconds
-#: panels/common/cc-util.c:210
+#: panels/common/cc-util.c:213
 #, c-format
 msgctxt "minutes seconds"
 msgid "%s %s"
 msgstr "%s %s"
 
 #. 2 minutes
-#: panels/common/cc-util.c:215
+#: panels/common/cc-util.c:218
 #, c-format
 msgctxt "minutes"
 msgid "%s"
 msgstr "%s"
 
 #. 0 seconds
-#: panels/common/cc-util.c:226
+#: panels/common/cc-util.c:229
 msgid "0 seconds"
 msgstr "0 segundos"
 
@@ -1685,73 +1685,73 @@ msgctxt "hotspot"
 msgid "Hotspot"
 msgstr "Hotspot"
 
-#: panels/display/cc-display-panel.c:510
+#: panels/display/cc-display-panel.c:507
 #: panels/notifications/cc-notifications-panel.c:213
 #: panels/power/cc-power-panel.c:679 panels/power/cc-power-panel.c:686
 msgid "On"
 msgstr "Activado"
 
-#: panels/display/cc-display-panel.c:512 panels/network/cc-net-proxy-page.c:182
+#: panels/display/cc-display-panel.c:509 panels/network/cc-net-proxy-page.c:182
 #: panels/notifications/cc-notifications-panel.c:213
 #: panels/power/cc-power-panel.c:673 panels/power/cc-power-panel.c:684
 msgid "Off"
 msgstr "Desactivado"
 
-#: panels/display/cc-display-panel.c:931
+#: panels/display/cc-display-panel.c:927
 msgid "Apply Changes?"
 msgstr "Desexa aplicar os cambios?"
 
-#: panels/display/cc-display-panel.c:937
+#: panels/display/cc-display-panel.c:933
 msgid "Changes Cannot be Applied"
 msgstr "Os cambios non se poden aplicar"
 
-#: panels/display/cc-display-panel.c:939
+#: panels/display/cc-display-panel.c:935
 msgid "This could be due to hardware limitations."
 msgstr "Isto pode ser por limitacións do hardware."
 
-#: panels/display/cc-display-panel.ui:24
+#: panels/display/cc-display-panel.ui:23
 #: panels/display/gnome-display-panel.desktop.in:3
 msgid "Displays"
 msgstr "Pantallas"
 
-#: panels/display/cc-display-panel.ui:50 panels/display/cc-display-panel.ui:207
-#: panels/display/cc-display-panel.ui:269
+#: panels/display/cc-display-panel.ui:49 panels/display/cc-display-panel.ui:206
+#: panels/display/cc-display-panel.ui:268
 #: panels/network/connection-editor/connection-editor.ui:23
 msgid "_Apply"
 msgstr "_Aplicar"
 
-#: panels/display/cc-display-panel.ui:79
+#: panels/display/cc-display-panel.ui:78
 msgid "Display Settings Disabled"
 msgstr "Preferencias da pantalla desactivadas"
 
-#: panels/display/cc-display-panel.ui:90
+#: panels/display/cc-display-panel.ui:89
 msgid "Multiple Displays"
 msgstr "Varias pantallas"
 
 #. 'Join' as in 'Join displays'
-#: panels/display/cc-display-panel.ui:99
+#: panels/display/cc-display-panel.ui:98
 msgid "_Join"
 msgstr "_Unir"
 
-#: panels/display/cc-display-panel.ui:107
+#: panels/display/cc-display-panel.ui:106
 msgid "_Mirror"
 msgstr "_Espello"
 
-#: panels/display/cc-display-panel.ui:136
+#: panels/display/cc-display-panel.ui:135
 msgid "Contains top bar and Activities"
 msgstr "Contén a barra superior e Actividades"
 
-#: panels/display/cc-display-panel.ui:137
+#: panels/display/cc-display-panel.ui:136
 msgid "_Primary Display"
 msgstr "_Pantalla principal"
 
 #. This is the redshift functionality where we suppress blue light when the sun has gone down
-#: panels/display/cc-display-panel.ui:158
+#: panels/display/cc-display-panel.ui:157
 #: panels/display/cc-night-light-page.ui:86
 msgid "_Night Light"
 msgstr "_Luz nocturna"
 
-#: panels/display/cc-display-panel.ui:178
+#: panels/display/cc-display-panel.ui:177
 msgid "Night Light"
 msgstr "Luz nocturna"
 
@@ -2296,37 +2296,37 @@ msgstr "Perderanse todos os cambios nos atallos de teclado."
 msgid "_Reset All"
 msgstr "_Restabelecer todo"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:34
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:35
 msgid "Search shortcuts"
 msgstr "Atallos de teclado"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:38
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:39
 msgid "Search Shortcuts"
 msgstr "Mostrar atallos de teclado"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:71
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:72
 msgid "_Reset All…"
 msgstr "_Restabelecer todo…"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:93
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:94
 msgid "No keyboard shortcut found"
 msgstr "Non se atopou ningún atallo de teclado"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:94 shell/cc-panel-list.ui:45
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:95 shell/cc-panel-list.ui:45
 msgid "Try a different search"
 msgstr "Probe unha busca diferente"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:126
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:127
 msgid "Add Custom Shortcuts"
 msgstr "Engadir atallos personalizados"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:127
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:128
 msgid "Set up custom shortcuts for launching apps, running scripts, and more"
 msgstr ""
 "Configure un atallo personalizado para iniciar aplicacións, executar scripts "
 "e máis"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:132
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:133
 msgid "_Add Shortcut…"
 msgstr "_Engadir atallo…"
 
@@ -2477,35 +2477,31 @@ msgstr "_Dereita"
 msgid "Mouse"
 msgstr "Rato"
 
-#: panels/mouse/cc-mouse-panel.ui:110 panels/mouse/cc-mouse-panel.ui:212
+#: panels/mouse/cc-mouse-panel.ui:110 panels/mouse/cc-mouse-panel.ui:209
 msgid "Po_inter Speed"
 msgstr "Velocidade do _punteiro"
 
-#: panels/mouse/cc-mouse-panel.ui:116
-msgid "Pointer Speed"
-msgstr "Velocidade do punteiro"
-
-#: panels/mouse/cc-mouse-panel.ui:119 panels/mouse/cc-mouse-panel.ui:222
+#: panels/mouse/cc-mouse-panel.ui:117 panels/mouse/cc-mouse-panel.ui:217
 #: panels/universal-access/cc-ua-typing-page.ui:58
-#: panels/universal-access/cc-ua-typing-page.ui:110
+#: panels/universal-access/cc-ua-typing-page.ui:111
 msgid "Slow"
 msgstr "Lento"
 
-#: panels/mouse/cc-mouse-panel.ui:121 panels/mouse/cc-mouse-panel.ui:224
+#: panels/mouse/cc-mouse-panel.ui:119 panels/mouse/cc-mouse-panel.ui:219
 #: panels/universal-access/cc-ua-typing-page.ui:55
-#: panels/universal-access/cc-ua-typing-page.ui:107
+#: panels/universal-access/cc-ua-typing-page.ui:108
 msgid "Fast"
 msgstr "Rápido"
 
-#: panels/mouse/cc-mouse-panel.ui:137
+#: panels/mouse/cc-mouse-panel.ui:135
 msgid "Mouse _Acceleration"
 msgstr "_Aceleración do rato"
 
-#: panels/mouse/cc-mouse-panel.ui:138
+#: panels/mouse/cc-mouse-panel.ui:136
 msgid "Recommended for most users and applications"
 msgstr "Recomendado para a maioría dos usuarios e aplicacións"
 
-#: panels/mouse/cc-mouse-panel.ui:144
+#: panels/mouse/cc-mouse-panel.ui:142
 msgid ""
 "Turning mouse acceleration off can allow faster and more precise movements, "
 "but can also make the mouse more difficult to use."
@@ -2513,108 +2509,100 @@ msgstr ""
 "Se desactiva a aceleración do punteiro permítelle moverse máis rapidamente e "
 "ser máis preciso, pero tamén pode facer o seu rato máis difícil de usar."
 
-#: panels/mouse/cc-mouse-panel.ui:156 panels/mouse/cc-mouse-panel.ui:296
+#: panels/mouse/cc-mouse-panel.ui:154 panels/mouse/cc-mouse-panel.ui:291
 msgid "Scroll Direction"
 msgstr "Dirección de desprazamento"
 
-#: panels/mouse/cc-mouse-panel.ui:157
+#: panels/mouse/cc-mouse-panel.ui:155
 msgid "Tra_ditional"
 msgstr "_Tradicional"
 
-#: panels/mouse/cc-mouse-panel.ui:158 panels/mouse/cc-mouse-panel.ui:298
+#: panels/mouse/cc-mouse-panel.ui:156 panels/mouse/cc-mouse-panel.ui:293
 msgid "Scrolling moves the view"
 msgstr "O desprazamento move a vista"
 
-#: panels/mouse/cc-mouse-panel.ui:159 panels/mouse/cc-mouse-panel.ui:299
+#: panels/mouse/cc-mouse-panel.ui:157 panels/mouse/cc-mouse-panel.ui:294
 msgid "_Natural"
 msgstr "_Natural"
 
-#: panels/mouse/cc-mouse-panel.ui:160 panels/mouse/cc-mouse-panel.ui:301
+#: panels/mouse/cc-mouse-panel.ui:158 panels/mouse/cc-mouse-panel.ui:296
 msgid "Scrolling moves the content"
 msgstr "O desprazamento move o contido"
 
-#: panels/mouse/cc-mouse-panel.ui:173 panels/mouse/cc-mouse-panel.ui:314
+#: panels/mouse/cc-mouse-panel.ui:171 panels/mouse/cc-mouse-panel.ui:309
 #: panels/wacom/cc-wacom-panel.ui:11
 msgid "Test _Settings"
 msgstr "Probar _preferencias"
 
-#: panels/mouse/cc-mouse-panel.ui:174 panels/mouse/cc-mouse-panel.ui:315
-msgid "Test Mouse and Touchpad Settings"
-msgstr "Probar as preferencias do rato e área táctil"
-
-#: panels/mouse/cc-mouse-panel.ui:192
+#: panels/mouse/cc-mouse-panel.ui:189
 msgid "_Touchpad"
 msgstr "Área _táctil"
 
-#: panels/mouse/cc-mouse-panel.ui:200
+#: panels/mouse/cc-mouse-panel.ui:197
 msgid "T_ouchpad"
 msgstr "Á_rea táctil"
 
-#: panels/mouse/cc-mouse-panel.ui:206
+#: panels/mouse/cc-mouse-panel.ui:203
 msgid "_Disable Touchpad While Typing"
 msgstr "Descativar _área táctil mentres se escriba"
 
-#: panels/mouse/cc-mouse-panel.ui:219
-msgid "Pointer speed"
-msgstr "Velocidade do punteiro"
-
-#: panels/mouse/cc-mouse-panel.ui:243 panels/mouse/cc-mouse-test.ui:32
+#: panels/mouse/cc-mouse-panel.ui:238 panels/mouse/cc-mouse-test.ui:32
 msgid "Clicking"
 msgstr "Clic"
 
-#: panels/mouse/cc-mouse-panel.ui:246 panels/mouse/cc-mouse-test.ui:111
+#: panels/mouse/cc-mouse-panel.ui:241 panels/mouse/cc-mouse-test.ui:111
 msgid "Secondary Click"
 msgstr "Clic secundario"
 
-#: panels/mouse/cc-mouse-panel.ui:247
+#: panels/mouse/cc-mouse-panel.ui:242
 msgid "Two Finger Push"
 msgstr "Empurrar con dous dedos"
 
-#: panels/mouse/cc-mouse-panel.ui:248
+#: panels/mouse/cc-mouse-panel.ui:243
 msgid "Push anywhere with 2 fingers"
 msgstr "Empurrar en calquera lugar con 2 dedos"
 
-#: panels/mouse/cc-mouse-panel.ui:249
+#: panels/mouse/cc-mouse-panel.ui:244
 msgid "Corner Push"
 msgstr "Empurrar esquina"
 
-#: panels/mouse/cc-mouse-panel.ui:250
+#: panels/mouse/cc-mouse-panel.ui:245
 msgid "Push with a single finger in the corner"
 msgstr "Empurrar cun só dedo na esquina"
 
-#: panels/mouse/cc-mouse-panel.ui:261
+#: panels/mouse/cc-mouse-panel.ui:256
 msgid "T_ap to Click"
 msgstr "T_ocar para facer clic"
 
-#: panels/mouse/cc-mouse-panel.ui:263
+#: panels/mouse/cc-mouse-panel.ui:258
 msgid "Quickly touch the touchpad to click"
 msgstr "Toque rapidamente a área táctil para facer clic"
 
-#: panels/mouse/cc-mouse-panel.ui:278 panels/mouse/cc-mouse-test.ui:153
+#: panels/mouse/cc-mouse-panel.ui:273 panels/mouse/cc-mouse-test.ui:153
 msgid "Scrolling"
 msgstr "Desprazamento"
 
-#: panels/mouse/cc-mouse-panel.ui:281
+#: panels/mouse/cc-mouse-panel.ui:276
 msgid "Scroll Method"
 msgstr "Método de desprazamento"
 
-#: panels/mouse/cc-mouse-panel.ui:282
+#: panels/mouse/cc-mouse-panel.ui:277
 msgid "T_wo Finger"
 msgstr "_Con dous dedos"
 
-#: panels/mouse/cc-mouse-panel.ui:283
+#: panels/mouse/cc-mouse-panel.ui:278
 msgid "Drag two fingers on the touchpad"
 msgstr "Arrastre dous dedos pola área táctil"
 
-#: panels/mouse/cc-mouse-panel.ui:284
+#: panels/mouse/cc-mouse-panel.ui:279
 msgid "_Edge"
 msgstr "_No bordo"
 
-#: panels/mouse/cc-mouse-panel.ui:285
+#: panels/mouse/cc-mouse-panel.ui:280
 msgid "Drag one finger on the edge"
 msgstr "Arrastre un dedo polo bordo"
 
-#: panels/mouse/cc-mouse-panel.ui:297
+#: panels/mouse/cc-mouse-panel.ui:292
 msgid "T_raditional"
 msgstr "T_radicional"
 
@@ -2831,11 +2819,11 @@ msgstr "Porto do equipo de SOCKS"
 msgid "Ignored Hosts"
 msgstr "Equipos ignorados"
 
-#: panels/network/cc-network-panel.c:665
+#: panels/network/cc-network-panel.c:680
 msgid "Network Unavailable"
 msgstr "Rede non dispoñíbel"
 
-#: panels/network/cc-network-panel.c:667
+#: panels/network/cc-network-panel.c:682
 msgid ""
 "An error has occurred and network cannot be used.\n"
 " Error details: NetworkManager not running."
@@ -2986,8 +2974,8 @@ msgstr "Nobre de rede"
 #: panels/network/cc-wifi-hotspot-dialog.ui:92
 #: panels/printers/new-printer-dialog.ui:293
 #: panels/printers/pp-jobs-dialog.ui:54
-#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:110
-#: panels/system/remote-desktop/cc-remote-session-page.ui:108
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:107
+#: panels/system/remote-desktop/cc-remote-session-page.ui:106
 #: panels/system/users/cc-add-user-dialog.ui:159
 #: panels/wwan/cc-wwan-apn-dialog.ui:175
 msgid "Password"
@@ -3103,22 +3091,30 @@ msgid "Identity"
 msgstr "Identidade"
 
 #: panels/network/connection-editor/ce-page.c:234
+#: panels/network/connection-editor/ce-page.c:238
 msgid "Preserve"
 msgstr "Preservar"
 
 #: panels/network/connection-editor/ce-page.c:235
+#: panels/network/connection-editor/ce-page.c:239
 msgid "Permanent"
 msgstr "Permanente"
 
 #: panels/network/connection-editor/ce-page.c:236
+#: panels/network/connection-editor/ce-page.c:240
 msgid "Random"
 msgstr "Aleatorio"
 
 #: panels/network/connection-editor/ce-page.c:237
+#: panels/network/connection-editor/ce-page.c:241
 msgid "Stable"
 msgstr "Estábel"
 
-#: panels/network/connection-editor/ce-page.c:241
+#: panels/network/connection-editor/ce-page.c:243
+msgid "Stable per SSID"
+msgstr "Estábel por SSID"
+
+#: panels/network/connection-editor/ce-page.c:251
 msgid ""
 "The MAC address entered here will be used as hardware address for the "
 "network device this connection is activated on. This feature is known as MAC "
@@ -3128,7 +3124,7 @@ msgstr ""
 "dispositivo de rede para esta conexión. Esta característica é coñecida como "
 "clonado ou spoofing de MAC. Exemplo: 00:11:22:33:44:55"
 
-#: panels/network/connection-editor/ce-page.c:399
+#: panels/network/connection-editor/ce-page.c:409
 #, c-format
 msgid "Profile %d"
 msgstr "Perfil %d"
@@ -4868,8 +4864,8 @@ msgstr ""
 #. Translators: This is a username on a print server.
 #: panels/printers/new-printer-dialog.ui:272
 #: panels/printers/pp-jobs-dialog.ui:42
-#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:94
-#: panels/system/remote-desktop/cc-remote-session-page.ui:92
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:91
+#: panels/system/remote-desktop/cc-remote-session-page.ui:90
 #: panels/wwan/cc-wwan-apn-dialog.ui:150
 msgid "Username"
 msgstr "Nome de usuario"
@@ -6038,7 +6034,7 @@ msgstr "Non válido"
 #. TRANSLATORS: Status of Parental Controls setup
 #: panels/privacy/cc-firmware-security-utils.c:45
 #: panels/system/users/cc-user-page.c:377
-#: panels/system/users/cc-user-page.c:749 panels/wwan/cc-wwan-device-page.c:475
+#: panels/system/users/cc-user-page.c:752 panels/wwan/cc-wwan-device-page.c:475
 msgid "Enabled"
 msgstr "Activado"
 
@@ -6129,7 +6125,7 @@ msgstr ""
 "anteriormente"
 
 #. Translators: This will be presented as the text of a link to the privacy policy
-#: panels/privacy/cc-location-page.c:414
+#: panels/privacy/cc-location-page.c:446
 msgid "Learn about what data is collected, and how it is used."
 msgstr "Aprende sobre que datos se recollen e como se usa."
 
@@ -6172,59 +6168,59 @@ msgstr "_Bloqueo de pantalla"
 msgid "Automatic screen lock"
 msgstr "Bloqueo de pantalla automático"
 
-#: panels/privacy/cc-privacy-panel.ui:36
+#: panels/privacy/cc-privacy-panel.ui:37
 msgid "_Location"
 msgstr "_Localización"
 
-#: panels/privacy/cc-privacy-panel.ui:37
+#: panels/privacy/cc-privacy-panel.ui:38
 msgid "Control access to your location"
 msgstr "Control de acceso á súa localización"
 
-#: panels/privacy/cc-privacy-panel.ui:47
+#: panels/privacy/cc-privacy-panel.ui:48
 msgid "_File History &amp; Trash"
 msgstr "_Historial de ficheiros e lixo"
 
-#: panels/privacy/cc-privacy-panel.ui:48
+#: panels/privacy/cc-privacy-panel.ui:49
 msgid "Remove saved data and files"
 msgstr "Limpar os datos e ficheiros gardados"
 
-#: panels/privacy/cc-privacy-panel.ui:58
+#: panels/privacy/cc-privacy-panel.ui:59
 msgid "_Diagnostics"
 msgstr "_Diagnóstico"
 
-#: panels/privacy/cc-privacy-panel.ui:59
+#: panels/privacy/cc-privacy-panel.ui:60
 msgid "Automatic problem reporting"
 msgstr "Informar de problemas _automaticamente"
 
-#: panels/privacy/cc-privacy-panel.ui:78
+#: panels/privacy/cc-privacy-panel.ui:79
 msgid "_Cameras"
 msgstr "_Cámaras"
 
-#: panels/privacy/cc-privacy-panel.ui:79
+#: panels/privacy/cc-privacy-panel.ui:80
 msgid "Control camera access"
 msgstr "Controla o acceso á cámara"
 
-#: panels/privacy/cc-privacy-panel.ui:89
+#: panels/privacy/cc-privacy-panel.ui:90
 msgid "_Microphones"
 msgstr "_Micrófonos"
 
-#: panels/privacy/cc-privacy-panel.ui:90
+#: panels/privacy/cc-privacy-panel.ui:91
 msgid "Control microphone access"
 msgstr "Controla o acceso ao micrófono"
 
-#: panels/privacy/cc-privacy-panel.ui:102
+#: panels/privacy/cc-privacy-panel.ui:103
 msgid "_Thunderbolt"
 msgstr "_Thunderbolt"
 
-#: panels/privacy/cc-privacy-panel.ui:103
+#: panels/privacy/cc-privacy-panel.ui:104
 msgid "Manage device access"
 msgstr "Xestionar o acceso ao dispositivo"
 
-#: panels/privacy/cc-privacy-panel.ui:113
+#: panels/privacy/cc-privacy-panel.ui:114
 msgid "Device _Security"
 msgstr "_Seguranza do dispositivo"
 
-#: panels/privacy/cc-privacy-panel.ui:114
+#: panels/privacy/cc-privacy-panel.ui:115
 msgid "Hardware security status and information"
 msgstr "Estado e información da seguranza do hardware"
 
@@ -6606,7 +6602,7 @@ msgid "Subfolders must be manually added for this location"
 msgstr "Os subcartafoles deben engadirse manualmente a esta localización"
 
 #: panels/search/cc-search-locations-dialog.c:572
-#: panels/sharing/cc-sharing-panel.c:361
+#: panels/sharing/cc-sharing-panel.c:363
 msgid "Remove Folder"
 msgstr "Eliminar cartafol"
 
@@ -6685,31 +6681,31 @@ msgstr "Buscar;Atopar;Índice;Oculto;Privacidade;Resultados;"
 msgid "No networks selected for sharing"
 msgstr "Non hai ningunha rede seleccionada para compartir"
 
-#: panels/sharing/cc-sharing-panel.c:149
+#: panels/sharing/cc-sharing-panel.c:151
 msgctxt "service is disabled"
 msgid "Off"
 msgstr "Desactivado"
 
-#: panels/sharing/cc-sharing-panel.c:152
+#: panels/sharing/cc-sharing-panel.c:154
 msgctxt "service is enabled"
 msgid "Enabled"
 msgstr "Activado"
 
-#: panels/sharing/cc-sharing-panel.c:155
+#: panels/sharing/cc-sharing-panel.c:157
 msgctxt "service is active"
 msgid "Active"
 msgstr "Activo"
 
-#: panels/sharing/cc-sharing-panel.c:236
+#: panels/sharing/cc-sharing-panel.c:238
 msgid "Choose a Folder"
 msgstr "Seleccione un cartafol"
 
-#: panels/sharing/cc-sharing-panel.c:384
+#: panels/sharing/cc-sharing-panel.c:386
 msgid "Add Folder"
 msgstr "Engadir cartafoles"
 
 #. TRANSLATORS: %s is replaced with a link to a dav://<hostname> URL
-#: panels/sharing/cc-sharing-panel.c:471
+#: panels/sharing/cc-sharing-panel.c:474
 #, c-format
 msgid ""
 "File Sharing allows you to share your Public folder with others on your "
@@ -6919,13 +6915,6 @@ msgstr "Niveis do _volume"
 #: panels/sound/cc-sound-panel.ui:378
 msgid "_Alert Sound"
 msgstr "Son de _alerta"
-
-#. Translators: This is the tooltip for a speaker test button, %s is an already translated
-#. speaker position, like "Front Left" or "Rear Center".
-#: panels/sound/cc-speaker-test-button.c:218
-#, c-format
-msgid "%s Speaker"
-msgstr "Altofalantes %s"
 
 #: panels/sound/cc-subwoofer-slider.ui:8
 msgid "Subwoofer"
@@ -7196,63 +7185,63 @@ msgstr "_Rexión e idioma"
 msgid "System language and localization"
 msgstr "Linguaxe do sistema e localización"
 
-#: panels/system/cc-system-panel.ui:34
+#: panels/system/cc-system-panel.ui:33
 msgid "_Date &amp; Time"
 msgstr "_Data e hora"
 
-#: panels/system/cc-system-panel.ui:35
+#: panels/system/cc-system-panel.ui:34
 msgid "Time zone and clock settings"
 msgstr "Preferencias de fuso horario e hora"
 
-#: panels/system/cc-system-panel.ui:45
+#: panels/system/cc-system-panel.ui:43
 msgid "_Users"
 msgstr "_Usuarios"
 
-#: panels/system/cc-system-panel.ui:46
+#: panels/system/cc-system-panel.ui:44
 msgid "Add and remove accounts, change password"
 msgstr "Engadir ou quitar contas, cambiar contrasinais"
 
-#: panels/system/cc-system-panel.ui:58
+#: panels/system/cc-system-panel.ui:54
 msgid "R_emote Desktop"
 msgstr "Escritorio _remoto"
 
-#: panels/system/cc-system-panel.ui:59
+#: panels/system/cc-system-panel.ui:55
 msgid "Allow this device to be used remotely"
 msgstr "Permitir que este dispositivo se use de forma remota"
 
-#: panels/system/cc-system-panel.ui:69
+#: panels/system/cc-system-panel.ui:64
 #: panels/system/remote-login/cc-remote-login-page.ui:51
 msgid "Secu_re Shell"
 msgstr "Shell segu_ra"
 
-#: panels/system/cc-system-panel.ui:70
+#: panels/system/cc-system-panel.ui:65
 msgid "SSH network access"
 msgstr "Acceso a rede SSH"
 
-#: panels/system/cc-system-panel.ui:79
+#: panels/system/cc-system-panel.ui:74
 msgid "_About"
 msgstr "_Sobre"
 
-#: panels/system/cc-system-panel.ui:80
+#: panels/system/cc-system-panel.ui:75
 msgid "Hardware details and software versions"
 msgstr "Detalles de hardware e versións de software"
 
-#: panels/system/cc-system-panel.ui:97
+#: panels/system/cc-system-panel.ui:91
 msgid "Software _Updates"
 msgstr "_Actualizacións do sistema"
 
 #. Translators: This is the full date and time format used in 12-hour mode.
-#: panels/system/datetime/cc-datetime-page.c:230
+#: panels/system/datetime/cc-datetime-page.c:237
 msgid "%e %B %Y, %l:%M %p"
 msgstr "%e %B %Y, %l:%M %p"
 
 #. Translators: This is the full date and time format used in 24-hour mode.
-#: panels/system/datetime/cc-datetime-page.c:235
+#: panels/system/datetime/cc-datetime-page.c:242
 msgid "%e %B %Y, %R"
 msgstr "%e %B %Y, %R"
 
 #. Translators: "city, country"
-#: panels/system/datetime/cc-datetime-page.c:388
+#: panels/system/datetime/cc-datetime-page.c:402
 #, c-format
 msgctxt "timezone loc"
 msgid "%s, %s"
@@ -7260,39 +7249,39 @@ msgstr "%s, %s"
 
 #. Update the timezone on the listbow row
 #. Translators: "timezone (details)"
-#: panels/system/datetime/cc-datetime-page.c:405
+#: panels/system/datetime/cc-datetime-page.c:419
 #, c-format
 msgctxt "timezone desc"
 msgid "%s (%s)"
 msgstr "%s (%s)"
 
 #: panels/system/datetime/cc-datetime-page.ui:9
-#: panels/system/datetime/cc-datetime-page.ui:117
+#: panels/system/datetime/cc-datetime-page.ui:116
 #: panels/system/datetime/gnome-datetime-panel.desktop.in:3
 msgid "Date & Time"
 msgstr "Data e hora"
 
-#: panels/system/datetime/cc-datetime-page.ui:60
+#: panels/system/datetime/cc-datetime-page.ui:59
 msgid "_Year"
 msgstr "_Ano"
 
-#: panels/system/datetime/cc-datetime-page.ui:71
+#: panels/system/datetime/cc-datetime-page.ui:70
 msgid "_Month"
 msgstr "_Mes"
 
-#: panels/system/datetime/cc-datetime-page.ui:98
+#: panels/system/datetime/cc-datetime-page.ui:97
 msgid "_Day"
 msgstr "_Day"
 
-#: panels/system/datetime/cc-datetime-page.ui:137
+#: panels/system/datetime/cc-datetime-page.ui:136
 msgid "Automatic _Date &amp; Time"
 msgstr "_Data e hora automática"
 
-#: panels/system/datetime/cc-datetime-page.ui:138
+#: panels/system/datetime/cc-datetime-page.ui:137
 msgid "Requires internet access"
 msgstr "Require conexión a Internet"
 
-#: panels/system/datetime/cc-datetime-page.ui:150
+#: panels/system/datetime/cc-datetime-page.ui:149
 msgid "Date &amp; _Time"
 msgstr "Data e _hora"
 
@@ -7348,51 +7337,51 @@ msgstr "_Números de semana"
 msgid "Shown in the dropdown calendar"
 msgstr "Mostrado no calendario despregable"
 
-#: panels/system/datetime/cc-datetime-page.ui:271
+#: panels/system/datetime/cc-datetime-page.ui:270
 msgid "January"
 msgstr "Xaneiro"
 
-#: panels/system/datetime/cc-datetime-page.ui:272
+#: panels/system/datetime/cc-datetime-page.ui:271
 msgid "February"
 msgstr "Febreiro"
 
-#: panels/system/datetime/cc-datetime-page.ui:273
+#: panels/system/datetime/cc-datetime-page.ui:272
 msgid "March"
 msgstr "Marzo"
 
-#: panels/system/datetime/cc-datetime-page.ui:274
+#: panels/system/datetime/cc-datetime-page.ui:273
 msgid "April"
 msgstr "Abril"
 
-#: panels/system/datetime/cc-datetime-page.ui:275
+#: panels/system/datetime/cc-datetime-page.ui:274
 msgid "May"
 msgstr "Maio"
 
-#: panels/system/datetime/cc-datetime-page.ui:276
+#: panels/system/datetime/cc-datetime-page.ui:275
 msgid "June"
 msgstr "Xuño"
 
-#: panels/system/datetime/cc-datetime-page.ui:277
+#: panels/system/datetime/cc-datetime-page.ui:276
 msgid "July"
 msgstr "Xullo"
 
-#: panels/system/datetime/cc-datetime-page.ui:278
+#: panels/system/datetime/cc-datetime-page.ui:277
 msgid "August"
 msgstr "Agosto"
 
-#: panels/system/datetime/cc-datetime-page.ui:279
+#: panels/system/datetime/cc-datetime-page.ui:278
 msgid "September"
 msgstr "Setembro"
 
-#: panels/system/datetime/cc-datetime-page.ui:280
+#: panels/system/datetime/cc-datetime-page.ui:279
 msgid "October"
 msgstr "Outubro"
 
-#: panels/system/datetime/cc-datetime-page.ui:281
+#: panels/system/datetime/cc-datetime-page.ui:280
 msgid "November"
 msgstr "Novembro"
 
-#: panels/system/datetime/cc-datetime-page.ui:282
+#: panels/system/datetime/cc-datetime-page.ui:281
 msgid "December"
 msgstr "Decembro"
 
@@ -7559,27 +7548,27 @@ msgstr "Seleccione o idioma en pantalla e formatos"
 msgid "Language;Layout;Keyboard;Input;"
 msgstr "Idioma:Distribución;Teclado;Entrada;"
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.c:364
+#: panels/system/remote-desktop/cc-desktop-sharing-page.c:362
 #: panels/system/remote-desktop/cc-remote-session-page.c:98
 msgid "Device address copied"
 msgstr "Enderezo do dispositivo copiado"
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.c:373
+#: panels/system/remote-desktop/cc-desktop-sharing-page.c:371
 #: panels/system/remote-desktop/cc-remote-session-page.c:107
 msgid "Port number copied"
 msgstr "Nome de usuario copiado"
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.c:384
+#: panels/system/remote-desktop/cc-desktop-sharing-page.c:382
 #: panels/system/remote-desktop/cc-remote-session-page.c:118
 msgid "Username copied"
 msgstr "Nome de usuario copiado"
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.c:395
+#: panels/system/remote-desktop/cc-desktop-sharing-page.c:393
 #: panels/system/remote-desktop/cc-remote-session-page.c:129
 msgid "Password copied"
 msgstr "Contrasinal copiado"
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:13
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:12
 msgid ""
 "Share your existing desktop with other devices. The remote connection uses "
 "the existing screen resolution"
@@ -7587,24 +7576,24 @@ msgstr ""
 "Compartir o seu escritorio existente con outros dispositivos. A conexión "
 "remota usa a resolución de pantalla existente"
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:28
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:27
 msgid "_Desktop Sharing"
 msgstr "Compartir _escritorio"
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:34
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:33
 msgid "Remote _Control"
 msgstr "Control _remoto"
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:36
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:35
 msgid "Allows desktop shares to control the screen"
 msgstr "Permite compartir o escritorio para controlar a pantalla"
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:43
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:42
 #: panels/system/remote-desktop/cc-remote-session-page.ui:41
 msgid "How to Connect"
 msgstr "Como conectarse"
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:44
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:43
 #: panels/system/remote-desktop/cc-remote-session-page.ui:42
 msgid ""
 "Use a remote desktop app to connect using the RDP protocol. Additional "
@@ -7614,40 +7603,40 @@ msgstr ""
 "RDP. Podería requirirse tamén outra información sobre a localización da rede "
 "do dispositivo."
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:47
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:46
 #: panels/system/remote-desktop/cc-remote-session-page.ui:45
 msgid "_Hostname"
 msgstr "_Nome de equipo"
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:55
-#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:76
-#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:97
-#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:113
-#: panels/system/remote-desktop/cc-remote-session-page.ui:53
-#: panels/system/remote-desktop/cc-remote-session-page.ui:74
-#: panels/system/remote-desktop/cc-remote-session-page.ui:95
-#: panels/system/remote-desktop/cc-remote-session-page.ui:111
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:53
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:73
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:94
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:110
+#: panels/system/remote-desktop/cc-remote-session-page.ui:52
+#: panels/system/remote-desktop/cc-remote-session-page.ui:72
+#: panels/system/remote-desktop/cc-remote-session-page.ui:93
+#: panels/system/remote-desktop/cc-remote-session-page.ui:109
 #: panels/system/remote-login/cc-remote-login-page.ui:65
 msgid "Copy"
 msgstr "Copiar"
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:68
-#: panels/system/remote-desktop/cc-remote-session-page.ui:66
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:66
+#: panels/system/remote-desktop/cc-remote-session-page.ui:65
 msgid "_Port"
 msgstr "_Porto"
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:91
-#: panels/system/remote-desktop/cc-remote-session-page.ui:89
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:88
+#: panels/system/remote-desktop/cc-remote-session-page.ui:87
 msgid "Login Details"
 msgstr "Detalles de inicio de sesión"
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:132
-#: panels/system/remote-desktop/cc-remote-session-page.ui:130
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:129
+#: panels/system/remote-desktop/cc-remote-session-page.ui:128
 msgid "_Generate New Password"
 msgstr "_Xerar un contrasinal novo"
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:143
-#: panels/system/remote-desktop/cc-remote-session-page.ui:141
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:140
+#: panels/system/remote-desktop/cc-remote-session-page.ui:139
 msgid "_Verify Encryption"
 msgstr "Comprobar _cifrado"
 
@@ -7664,8 +7653,8 @@ msgstr "Compartir escritorio"
 msgid "Remote Login"
 msgstr "Inicio de sesión remoto"
 
-#: panels/system/remote-desktop/cc-remote-session-page.c:774
-#: panels/system/users/cc-user-page.c:772
+#: panels/system/remote-desktop/cc-remote-session-page.c:768
+#: panels/system/users/cc-user-page.c:775
 msgid "Some settings are locked"
 msgstr "Algunhas preferencias están bloqueadas"
 
@@ -7772,42 +7761,42 @@ msgstr "C_ontrasinal"
 msgid "_Confirm"
 msgstr "_Confirmar"
 
-#: panels/system/users/cc-enterprise-login-dialog.c:133
-#: panels/system/users/cc-enterprise-login-dialog.c:171
+#: panels/system/users/cc-enterprise-login-dialog.c:148
 #: panels/system/users/cc-enterprise-login-dialog.c:186
+#: panels/system/users/cc-enterprise-login-dialog.c:201
 msgid "Failed to register account"
 msgstr "Produciuse un erro ao rexistrar a conta"
 
-#: panels/system/users/cc-enterprise-login-dialog.c:240
-#: panels/system/users/cc-enterprise-login-dialog.c:411
+#: panels/system/users/cc-enterprise-login-dialog.c:255
+#: panels/system/users/cc-enterprise-login-dialog.c:424
 msgid "Failed to join domain"
 msgstr "Produciuse un erro ao unirse ao dominio"
 
-#: panels/system/users/cc-enterprise-login-dialog.c:275
+#: panels/system/users/cc-enterprise-login-dialog.c:290
 msgid "No supported way to authenticate with this domain"
 msgstr "Non hai unha maneira admitida de autenticar con este dominio"
 
-#: panels/system/users/cc-enterprise-login-dialog.c:285
-#: panels/system/users/cc-enterprise-login-dialog.c:476
+#: panels/system/users/cc-enterprise-login-dialog.c:300
+#: panels/system/users/cc-enterprise-login-dialog.c:489
 msgid "That login name didn’t work"
 msgstr "Ese nome de inicio de sesión non funcionou"
 
-#: panels/system/users/cc-enterprise-login-dialog.c:292
-#: panels/system/users/cc-enterprise-login-dialog.c:483
+#: panels/system/users/cc-enterprise-login-dialog.c:307
+#: panels/system/users/cc-enterprise-login-dialog.c:496
 msgid "That login password didn’t work"
 msgstr "Ese contrasinal de inicio de sesión non funcionou"
 
-#: panels/system/users/cc-enterprise-login-dialog.c:299
+#: panels/system/users/cc-enterprise-login-dialog.c:314
 msgid "That hostname didn’t work"
 msgstr "Ese nome de equipo non funcionou"
 
-#: panels/system/users/cc-enterprise-login-dialog.c:306
-#: panels/system/users/cc-enterprise-login-dialog.c:491
+#: panels/system/users/cc-enterprise-login-dialog.c:321
+#: panels/system/users/cc-enterprise-login-dialog.c:504
 msgid "Failed to log into domain"
 msgstr "Produciuse un erro ao iniciar sesión no dominio"
 
 #. Translators: The "%s" is a domain address (e.g. "demo1.freeipa.org").
-#: panels/system/users/cc-enterprise-login-dialog.c:352
+#: panels/system/users/cc-enterprise-login-dialog.c:365
 #, c-format
 msgid ""
 "To add an enterprise login account, this device needs to be enrolled with "
@@ -7818,19 +7807,19 @@ msgstr ""
 "de <b>%s</b>. Pida ao administrador do seu sistema que escriba aquí seu "
 "usuario e contrasinal."
 
-#: panels/system/users/cc-enterprise-login-dialog.c:538
+#: panels/system/users/cc-enterprise-login-dialog.c:548
 msgid "Valid domain"
 msgstr "Dominio válido"
 
-#: panels/system/users/cc-enterprise-login-dialog.c:542
+#: panels/system/users/cc-enterprise-login-dialog.c:552
 msgid "Domain not found"
 msgstr "Dominio non atopado"
 
-#: panels/system/users/cc-enterprise-login-dialog.c:585
+#: panels/system/users/cc-enterprise-login-dialog.c:595
 msgid "Checking domain…"
 msgstr "Comprobando dominio…"
 
-#: panels/system/users/cc-enterprise-login-dialog.c:629
+#: panels/system/users/cc-enterprise-login-dialog.c:639
 msgid "Failed to contact realmd service"
 msgstr "Produciuse un erro ao contactar co servizo realmd"
 
@@ -8235,11 +8224,11 @@ msgstr "_Inicio de sesión automático"
 msgid "_Administrator"
 msgstr "_Administrador"
 
-#: panels/system/users/cc-user-page.ui:156
+#: panels/system/users/cc-user-page.ui:155
 msgid "_Parental Controls"
 msgstr "Controis _parentais"
 
-#: panels/system/users/cc-user-page.ui:157
+#: panels/system/users/cc-user-page.ui:156
 msgid "Open the Parental Controls app"
 msgstr "Abrir a aplicación de Control Parental"
 
@@ -8582,9 +8571,9 @@ msgstr "Atraso da _dupla pulsación"
 #: panels/universal-access/cc-ua-mouse-page.ui:40
 #: panels/universal-access/cc-ua-mouse-page.ui:78
 #: panels/universal-access/cc-ua-mouse-page.ui:111
-#: panels/universal-access/cc-ua-typing-page.ui:131
-#: panels/universal-access/cc-ua-typing-page.ui:183
-#: panels/universal-access/cc-ua-typing-page.ui:230
+#: panels/universal-access/cc-ua-typing-page.ui:133
+#: panels/universal-access/cc-ua-typing-page.ui:186
+#: panels/universal-access/cc-ua-typing-page.ui:233
 #: panels/universal-access/cc-ua-zoom-page.ui:179
 msgid "Short"
 msgstr "Curto"
@@ -8593,9 +8582,9 @@ msgstr "Curto"
 #: panels/universal-access/cc-ua-mouse-page.ui:43
 #: panels/universal-access/cc-ua-mouse-page.ui:81
 #: panels/universal-access/cc-ua-mouse-page.ui:114
-#: panels/universal-access/cc-ua-typing-page.ui:134
-#: panels/universal-access/cc-ua-typing-page.ui:186
-#: panels/universal-access/cc-ua-typing-page.ui:233
+#: panels/universal-access/cc-ua-typing-page.ui:136
+#: panels/universal-access/cc-ua-typing-page.ui:189
+#: panels/universal-access/cc-ua-typing-page.ui:236
 #: panels/universal-access/cc-ua-zoom-page.ui:183
 msgid "Long"
 msgstr "Longo"
@@ -8613,8 +8602,8 @@ msgid "Secondary click by holding down the primary mouse button"
 msgstr "Iniciar un clic secundario mantendo o botón primario do rato"
 
 #: panels/universal-access/cc-ua-mouse-page.ui:73
-#: panels/universal-access/cc-ua-typing-page.ui:178
-#: panels/universal-access/cc-ua-typing-page.ui:225
+#: panels/universal-access/cc-ua-typing-page.ui:180
+#: panels/universal-access/cc-ua-typing-page.ui:228
 msgid "Acceptance Delay"
 msgstr "Atraso na aceptación"
 
@@ -8627,7 +8616,7 @@ msgid "Trigger a click when the pointer hovers"
 msgstr "Iniciar un clic cando se pasa por enriba o punteiro"
 
 #: panels/universal-access/cc-ua-mouse-page.ui:106
-#: panels/universal-access/cc-ua-typing-page.ui:126
+#: panels/universal-access/cc-ua-typing-page.ui:127
 msgid "Delay"
 msgstr "Atraso"
 
@@ -8832,48 +8821,48 @@ msgstr "As pulsacións de teclas repítense cando a tecla se mantén premida"
 msgid "Speed"
 msgstr "Velocidade"
 
-#: panels/universal-access/cc-ua-typing-page.ui:153
+#: panels/universal-access/cc-ua-typing-page.ui:155
 msgid "_Sticky Keys"
 msgstr "Teclas per_sistentes"
 
-#: panels/universal-access/cc-ua-typing-page.ui:154
+#: panels/universal-access/cc-ua-typing-page.ui:156
 msgid "Sequences of modifier keys act as a key combination"
 msgstr "Secuencia de teclas modificadoras como unha combinación de teclas"
 
-#: panels/universal-access/cc-ua-typing-page.ui:159
+#: panels/universal-access/cc-ua-typing-page.ui:161
 msgid "Disable if two keys are pressed together"
 msgstr "Desactivar se se premen dúas teclas á vez"
 
-#: panels/universal-access/cc-ua-typing-page.ui:164
+#: panels/universal-access/cc-ua-typing-page.ui:166
 msgid "Beep when modifier key is pressed"
 msgstr "Pitar cando se prema unha tecla modificadora"
 
-#: panels/universal-access/cc-ua-typing-page.ui:172
+#: panels/universal-access/cc-ua-typing-page.ui:174
 msgid "S_low Keys"
 msgstr "Teclas _lentas"
 
-#: panels/universal-access/cc-ua-typing-page.ui:173
+#: panels/universal-access/cc-ua-typing-page.ui:175
 msgid "Delay between when a key is pressed and when it is accepted"
 msgstr "Atraso entre cando se preme unha tecla e cando se acepta"
 
-#: panels/universal-access/cc-ua-typing-page.ui:201
+#: panels/universal-access/cc-ua-typing-page.ui:204
 msgid "Beep when a key is pressed"
 msgstr "Pitar ao premer unha tecla"
 
-#: panels/universal-access/cc-ua-typing-page.ui:206
+#: panels/universal-access/cc-ua-typing-page.ui:209
 msgid "Beep when a key is accepted"
 msgstr "Pitar ao aceptar unha tecla"
 
-#: panels/universal-access/cc-ua-typing-page.ui:211
-#: panels/universal-access/cc-ua-typing-page.ui:248
+#: panels/universal-access/cc-ua-typing-page.ui:214
+#: panels/universal-access/cc-ua-typing-page.ui:251
 msgid "Beep when a key is rejected"
 msgstr "Pitar cando se rexeita unha tecla"
 
-#: panels/universal-access/cc-ua-typing-page.ui:219
+#: panels/universal-access/cc-ua-typing-page.ui:222
 msgid "B_ounce Keys"
 msgstr "_Rexeite de teclas"
 
-#: panels/universal-access/cc-ua-typing-page.ui:220
+#: panels/universal-access/cc-ua-typing-page.ui:223
 msgid "Ignore fast duplicate keypresses"
 msgstr "Ignorar as pulsacións rápidas duplicadas"
 
@@ -9130,15 +9119,15 @@ msgctxt "Wacom action-type"
 msgid "Show On-Screen Help"
 msgstr "Mostrar axuda en pantalla"
 
-#: panels/wacom/cc-wacom-device.c:430
+#: panels/wacom/cc-wacom-device.c:437
 msgid "Tablet mounted on laptop panel"
 msgstr "Tableta montada no panel do portátil"
 
-#: panels/wacom/cc-wacom-device.c:432
+#: panels/wacom/cc-wacom-device.c:439
 msgid "Tablet mounted on external display"
 msgstr "Tableta montada na pantalla externa"
 
-#: panels/wacom/cc-wacom-device.c:434
+#: panels/wacom/cc-wacom-device.c:441
 msgid "External tablet device"
 msgstr "Dispositivo de tableta externa"
 
@@ -9898,7 +9887,7 @@ msgstr "Categorías do sistema"
 msgid "No Results Found"
 msgstr "Non se atoparon resultados"
 
-#: shell/cc-panel-loader.c:310
+#: shell/cc-panel-loader.c:311
 msgid "Available panels:"
 msgstr "Paneis dispoñíbeis:"
 
@@ -10043,6 +10032,19 @@ msgstr[1] "%u entradas"
 #: subprojects/gvc/gvc-mixer-control.c:2872
 msgid "System Sounds"
 msgstr "Sons do sistema"
+
+#~ msgid "Pointer Speed"
+#~ msgstr "Velocidade do punteiro"
+
+#~ msgid "Test Mouse and Touchpad Settings"
+#~ msgstr "Probar as preferencias do rato e área táctil"
+
+#~ msgid "Pointer speed"
+#~ msgstr "Velocidade do punteiro"
+
+#, c-format
+#~ msgid "%s Speaker"
+#~ msgstr "Altofalantes %s"
 
 #~ msgid "Device name copied"
 #~ msgstr "Nome do dispositivo copiado"
