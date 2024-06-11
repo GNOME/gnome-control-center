@@ -1338,6 +1338,24 @@ search_entry_activated_cb (PpNewPrinterDialog *self)
                   FALSE);
 }
 
+static gboolean
+on_key_press_event (GtkEventControllerKey *controller,
+                   guint                  keyval,
+                   guint                  keycode,
+                   GdkModifierType        state,
+                   PpNewPrinterDialog    *self)
+{
+  /* Capture Escape key press before it propagates down to the Search Entry,
+   * so the dialog can close on Escape. */
+  if (keyval == GDK_KEY_Escape) {
+    gtk_window_close (GTK_WINDOW (self));
+
+    return GDK_EVENT_STOP;
+  }
+
+  return GDK_EVENT_PROPAGATE;
+}
+
 static void
 search_entry_changed_cb (PpNewPrinterDialog *self)
 {
@@ -1883,6 +1901,7 @@ pp_new_printer_dialog_class_init (PpNewPrinterDialogClass *klass)
 
   gtk_widget_class_bind_template_callback (widget_class, add_cb);
   gtk_widget_class_bind_template_callback (widget_class, cancel_cb);
+  gtk_widget_class_bind_template_callback (widget_class, on_key_press_event);
 
   object_class->dispose = pp_new_printer_dialog_dispose;
   window_class->close_request = pp_new_printer_dialog_close_request;

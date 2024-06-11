@@ -32,6 +32,12 @@
     <style>
       <class name="view"/>
     </style>
+    <child>
+      <object class="GtkEventControllerKey">
+        <property name="propagation-phase">capture</property>
+        <signal name="key-pressed" handler="on_key_press_event"/>
+      </object>
+    </child>
     <property name="content">
       <object class="AdwToolbarView">
         <child type="top">
