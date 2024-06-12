@@ -46,6 +46,7 @@
 struct _PpJobsDialog {
   AdwDialog          parent_instance;
 
+  AdwWindowTitle    *title_widget;
   GtkButton         *authenticate_button;
   GtkMenuButton     *authenticate_jobs_button;
   GtkLabel          *authenticate_jobs_label;
@@ -440,7 +441,6 @@ pp_jobs_dialog_new (const gchar *printer_name)
 {
   PpJobsDialog *self;
   g_autofree gchar *text = NULL;
-  g_autofree gchar *title = NULL;
 
   self = g_object_new (PP_TYPE_JOBS_DIALOG, NULL);
 
@@ -449,9 +449,7 @@ pp_jobs_dialog_new (const gchar *printer_name)
   self->jobs_filled = FALSE;
   self->pop_up_authentication_popup = FALSE;
 
-  /* Translators: This is the printer name for which we are showing the active jobs */
-  title = g_strdup_printf (C_("Printer jobs dialog title", "%s — Active Jobs"), printer_name);
-  adw_dialog_set_title (ADW_DIALOG (self), title);
+  adw_window_title_set_subtitle (self->title_widget, printer_name);
 
   /* Translators: The printer needs authentication info to print. */
   text = g_strdup_printf (_("Enter credentials to print from %s"), printer_name);
@@ -508,6 +506,7 @@ pp_jobs_dialog_class_init (PpJobsDialogClass *klass)
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/printers/pp-jobs-dialog.ui");
 
+  gtk_widget_class_bind_template_child (widget_class, PpJobsDialog, title_widget);
   gtk_widget_class_bind_template_child (widget_class, PpJobsDialog, authenticate_button);
   gtk_widget_class_bind_template_child (widget_class, PpJobsDialog, authenticate_jobs_button);
   gtk_widget_class_bind_template_child (widget_class, PpJobsDialog, authenticate_jobs_label);
