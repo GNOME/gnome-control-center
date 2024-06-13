@@ -252,6 +252,21 @@
                     "type" : "git",
                     "url" : "https://gitlab.gnome.org/GNOME/gnome-online-accounts.git"
                 }
+            ],
+            "modules" : [
+                {
+                    "name" : "keyutils",
+                    "buildsystem" : "simple",
+                    "build-commands" : [
+                        "make NO_ARLIB=1 BINDIR=/app/bin SBINDIR=/app/sbin LIBDIR=/app/lib INCLUDEDIR=/app/include MANDIR=/app/share/man SHAREDIR=/app install"
+                    ],
+                    "sources" : [
+                        {
+                            "type" : "git",
+                            "url" : "https://git.kernel.org/pub/scm/linux/kernel/git/dhowells/keyutils.git"
+                        }
+                    ]
+                }
             ]
         },
         {
