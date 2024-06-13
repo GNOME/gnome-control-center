@@ -85,7 +85,8 @@ get_app_info_icon_from_stream_name (const gchar *stream_name)
     {
       GAppInfo *info = l->data;
 
-      if (g_str_equal (g_app_info_get_display_name (info), stream_name))
+      if (g_str_equal (g_app_info_get_display_name (info), stream_name) ||
+          g_str_equal (g_app_info_get_name (info), stream_name))
         {
           GIcon *icon = g_app_info_get_icon (info);
           if (icon)
