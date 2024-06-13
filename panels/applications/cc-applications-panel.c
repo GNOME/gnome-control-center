@@ -1423,6 +1423,10 @@ update_panel (CcApplicationsPanel *self,
   g_set_object (&self->current_app_info, info);
   self->current_app_id = get_app_id (info);
   self->current_portal_app_id = get_portal_app_id (info);
+
+  /* Don't show the "Open" button for Settings itself. */
+  gtk_widget_set_visible (GTK_WIDGET (self->launch_button),
+                          g_strcmp0 (self->current_app_id, "org.gnome.Settings") != 0);
 }
 
 
