@@ -33,9 +33,14 @@
       <class name="view"/>
     </style>
     <child>
-      <object class="GtkEventControllerKey">
+      <object class="GtkShortcutController">
         <property name="propagation-phase">capture</property>
-        <signal name="key-pressed" handler="on_key_press_event"/>
+        <child>
+          <object class="GtkShortcut">
+            <property name="trigger">Escape</property>
+            <property name="action">action(window.close)</property>
+          </object>
+        </child>
       </object>
     </child>
     <property name="content">
