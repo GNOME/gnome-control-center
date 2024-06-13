@@ -99,6 +99,29 @@ get_app_info_icon_from_stream_name (const gchar *stream_name)
   return NULL;
 }
 
+static GIcon *
+get_icon_for_stream (GvcMixerStream *stream)
+{
+  GIcon* icon;
+  const gchar *icon_name;
+  const gchar *stream_name;
+
+  icon_name = gvc_mixer_stream_get_icon_name (stream);
+  stream_name = gvc_mixer_stream_get_name (stream);
+
+  if (g_str_has_prefix (stream_name, SPEECH_DISPATCHER_PREFIX))
+    return g_themed_icon_new_with_default_fallbacks ("org.gnome.Settings-accessibility");
+
+  /* First prefer app info icon, then the icon name, as the icon name is usually very generic */
+  if ((icon = get_app_info_icon_from_stream_name (stream_name)))
+    return icon;
+
+  if (gtk_icon_theme_has_icon (gtk_icon_theme_get_for_display (gdk_display_get_default ()), icon_name))
+    return g_themed_icon_new_with_default_fallbacks (icon_name);
+
+  return g_themed_icon_new_with_default_fallbacks ("application-x-executable");
+}
+
 CcStreamRow *
 cc_stream_row_new (GtkSizeGroup    *size_group,
                    GvcMixerStream  *stream,
@@ -108,26 +131,12 @@ cc_stream_row_new (GtkSizeGroup    *size_group,
 {
   CcStreamRow *self;
   g_autoptr(GIcon) gicon = NULL;
-  const gchar *stream_name;
-  const gchar *icon_name;
 
   self = g_object_new (CC_TYPE_STREAM_ROW, NULL);
   self->stream = g_object_ref (stream);
   self->id = id;
 
-  icon_name = gvc_mixer_stream_get_icon_name (stream);
-  stream_name = gvc_mixer_stream_get_name (stream);
-
-  if (g_str_has_prefix (stream_name, SPEECH_DISPATCHER_PREFIX))
-    gicon = g_themed_icon_new_with_default_fallbacks ("org.gnome.Settings-accessibility");
-  else if (gtk_icon_theme_has_icon (gtk_icon_theme_get_for_display (gdk_display_get_default ()), icon_name))
-    gicon = g_themed_icon_new_with_default_fallbacks (icon_name);
-  else
-    {
-      gicon = get_app_info_icon_from_stream_name (stream_name);
-      if (!gicon)
-        gicon = g_themed_icon_new_with_default_fallbacks ("application-x-executable");
-    }
+  gicon = get_icon_for_stream (stream);
 
   gtk_image_set_from_gicon (self->icon_image, gicon);
 
