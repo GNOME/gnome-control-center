@@ -8,15 +8,6 @@ cflags = [
   '-DTEST_NM_SERVICE="@0@"'.format(join_paths(meson.project_source_root(), 'tests', 'network', 'nm-utils', 'test-networkmanager-service.py')),
 ]
 
-exe = executable(
-  'test-network-panel',
-  ['test-network-panel.c', 'cc-test-window.c', 'nm-utils/nm-test-utils-impl.c'],
-  include_directories : includes + [common_inc],
-         dependencies : common_deps + network_manager_deps + [libtestshell_dep],
-            link_with : [network_panel_lib],
-               c_args : cflags
-)
-
 envs = [
   'G_MESSAGES_DEBUG=all',
           'BUILDDIR=' + meson.current_build_dir(),
@@ -26,12 +17,23 @@ envs = [
       'GTK_A11Y=none',
 ]
 
-test(
-  'test-network-panel',
-  find_program('test-network-panel.py'),
-      env : envs,
-  timeout : 60
-)
+if Xvfb.found()
+  exe = executable(
+    'test-network-panel',
+    ['test-network-panel.c', 'cc-test-window.c', 'nm-utils/nm-test-utils-impl.c'],
+    include_directories : includes + [common_inc],
+           dependencies : common_deps + network_manager_deps + [libtestshell_dep],
+              link_with : [network_panel_lib],
+                 c_args : cflags
+  )
+
+  test(
+    'test-network-panel',
+    find_program('test-network-panel.py'),
+        env : envs,
+    timeout : 60
+  )
+endif
 
 exe = executable(
   'test-wifi-panel-text',
