@@ -12,7 +12,7 @@ i18n.merge_file(
 
 sources = files(
   'cc-notifications-panel.c',
-  'cc-app-notifications-dialog.c'
+  'cc-app-notifications-page.c'
 )
 
 sources += gnome.compile_resources(

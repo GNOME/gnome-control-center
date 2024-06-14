@@ -29,7 +29,7 @@
 #include "cc-list-row.h"
 #include "cc-notifications-panel.h"
 #include "cc-notifications-resources.h"
-#include "cc-app-notifications-dialog.h"
+#include "cc-app-notifications-page.h"
 
 #define MASTER_SCHEMA "org.gnome.desktop.notifications"
 #define APP_SCHEMA MASTER_SCHEMA ".application"
@@ -465,7 +465,7 @@ select_app (CcNotificationsPanel *self,
 {
   Application *app;
   g_autofree gchar *app_id = NULL;
-  CcAppNotificationsDialog *dialog;
+  CcAppNotificationsPage *page;
 
   app = g_object_get_qdata (G_OBJECT (row), application_quark ());
 
@@ -473,8 +473,8 @@ select_app (CcNotificationsPanel *self,
   if (g_str_has_suffix (app_id, ".desktop"))
     app_id[strlen (app_id) - strlen (".desktop")] = '\0';
 
-  dialog = cc_app_notifications_dialog_new (app_id, g_app_info_get_name (app->app_info), app->settings, self->master_settings, self->perm_store);
-  adw_dialog_present (ADW_DIALOG (dialog), GTK_WIDGET (self));
+  page = cc_app_notifications_page_new (app_id, g_app_info_get_name (app->app_info), app->settings, self->master_settings, self->perm_store);
+  cc_panel_push_subpage (CC_PANEL (self), ADW_NAVIGATION_PAGE (page));
 }
 
 static int

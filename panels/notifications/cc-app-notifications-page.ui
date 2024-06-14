@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
-  <template class="CcAppNotificationsDialog" parent="AdwDialog">
-    <property name="content-width">550</property>
+  <template class="CcAppNotificationsPage" parent="AdwNavigationPage">
     <property name="child">
       <object class="AdwToolbarView">
         <child type="top">
@@ -16,7 +15,7 @@
                     <property name="use-underline">True</property>
                     <property name="title" translatable="yes" context="notifications" comments="This is the per app switch for message tray usage.">_Notifications</property>
                     <property name="subtitle" translatable="yes">Show in notifications list</property>
-                    <signal name="notify::active" handler="notifications_row_state_set_cb" object="CcAppNotificationsDialog" swapped="yes"/>
+                    <signal name="notify::active" handler="notifications_row_state_set_cb" object="CcAppNotificationsPage" swapped="yes"/>
                   </object>
                 </child>
                 <child>
@@ -24,7 +23,7 @@
                     <property name="use-underline">True</property>
                     <property name="title" translatable="yes" context="notifications" comments="This is the setting to configure sounds associated with notifications.">_Sound</property>
                     <property name="subtitle" translatable="yes">Allow notification sounds from app</property>
-                    <signal name="notify::active" handler="sound_alerts_row_state_set_cb" object="CcAppNotificationsDialog" swapped="yes"/>
+                    <signal name="notify::active" handler="sound_alerts_row_state_set_cb" object="CcAppNotificationsPage" swapped="yes"/>
                   </object>
                 </child>
               </object>
@@ -37,7 +36,7 @@
                     <property name="use-underline">True</property>
                     <property name="title" translatable="yes" context="notifications">Show _Banners</property>
                     <property name="subtitle" translatable="yes">Show notifications above apps</property>
-                    <signal name="notify::active" handler="notification_banners_row_state_set_cb" object="CcAppNotificationsDialog" swapped="yes"/>
+                    <signal name="notify::active" handler="notification_banners_row_state_set_cb" object="CcAppNotificationsPage" swapped="yes"/>
                   </object>
                 </child>
                 <child>
@@ -45,7 +44,7 @@
                     <property name="use-underline">True</property>
                     <property name="title" translatable="yes" context="notifications" comments="Popups here refers to message tray notifications in the middle of the screen.">Show _Content</property>
                     <property name="subtitle" translatable="yes">Include message details in notification banners</property>
-                    <signal name="notify::active" handler="notification_banners_content_row_state_set_cb" object="CcAppNotificationsDialog" swapped="yes"/>
+                    <signal name="notify::active" handler="notification_banners_content_row_state_set_cb" object="CcAppNotificationsPage" swapped="yes"/>
                   </object>
                 </child>
               </object>
@@ -58,7 +57,7 @@
                     <property name="use-underline">True</property>
                     <property name="title" translatable="yes" context="notifications">Show B_anners</property>
                     <property name="subtitle" translatable="yes">Show notifications on lock screen</property>
-                    <signal name="notify::active" handler="lock_screen_notifications_row_state_set_cb" object="CcAppNotificationsDialog" swapped="yes"/>
+                    <signal name="notify::active" handler="lock_screen_notifications_row_state_set_cb" object="CcAppNotificationsPage" swapped="yes"/>
                   </object>
                 </child>
                 <child>
@@ -66,7 +65,7 @@
                     <property name="use-underline">True</property>
                     <property name="title" translatable="yes" context="notifications">Show C_ontent</property>
                     <property name="subtitle" translatable="yes">Include message details on lock screen</property>
-                    <signal name="notify::active" handler="lock_screen_content_row_state_set_cb" object="CcAppNotificationsDialog" swapped="yes"/>
+                    <signal name="notify::active" handler="lock_screen_content_row_state_set_cb" object="CcAppNotificationsPage" swapped="yes"/>
                   </object>
                 </child>
               </object>
