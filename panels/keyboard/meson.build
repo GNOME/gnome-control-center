@@ -60,7 +60,7 @@ keyboard_shortcuts_dep = declare_dependency(
 )
 
 sources = files(
-  'cc-xkb-modifier-dialog.c',
+  'cc-xkb-modifier-page.c',
   'cc-keyboard-shortcut-row.c',
   'cc-keyboard-shortcut-group.c',
   'cc-keyboard-shortcut-dialog.c',

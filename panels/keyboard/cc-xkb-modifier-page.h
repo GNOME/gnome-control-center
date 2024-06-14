@@ -1,4 +1,4 @@
-/* cc-xkb-modifier-dialog.h
+/* cc-xkb-modifier-page.h
  *
  * Copyright 2019 Bastien Nocera <hadess@hadess.net>
  *
@@ -40,10 +40,10 @@ typedef struct
   gchar *default_option;
 } CcXkbModifier;
 
-#define CC_TYPE_XKB_MODIFIER_DIALOG (cc_xkb_modifier_dialog_get_type())
-G_DECLARE_FINAL_TYPE (CcXkbModifierDialog, cc_xkb_modifier_dialog, CC, XKB_MODIFIER_DIALOG, AdwWindow)
+#define CC_TYPE_XKB_MODIFIER_PAGE (cc_xkb_modifier_page_get_type())
+G_DECLARE_FINAL_TYPE (CcXkbModifierPage, cc_xkb_modifier_page, CC, XKB_MODIFIER_PAGE, AdwNavigationPage)
 
-CcXkbModifierDialog *cc_xkb_modifier_dialog_new (GSettings *input_settings, const CcXkbModifier*);
+CcXkbModifierPage *cc_xkb_modifier_page_new (GSettings *input_settings, const CcXkbModifier*);
 
 gboolean xcb_modifier_transform_binding_to_label (GValue*, GVariant*, gpointer);
 

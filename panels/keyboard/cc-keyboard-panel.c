@@ -30,7 +30,7 @@
 #include "cc-keyboard-resources.h"
 #include "cc-keyboard-shortcut-dialog.h"
 #include "cc-input-list-box.h"
-#include "cc-xkb-modifier-dialog.h"
+#include "cc-xkb-modifier-page.h"
 #include "cc-list-row.h"
 
 #include "keyboard-shortcuts.h"
@@ -97,25 +97,25 @@ static const CcXkbModifier COMPOSE_MODIFIER = {
 };
 
 static void
-show_modifier_dialog (CcKeyboardPanel *self, const CcXkbModifier *modifier)
+show_modifier_page (CcKeyboardPanel *self, const CcXkbModifier *modifier)
 {
-  AdwDialog *dialog;
+  AdwNavigationPage *page;
 
-  dialog = ADW_DIALOG (cc_xkb_modifier_dialog_new (self->input_source_settings, modifier));
+  page = ADW_NAVIGATION_PAGE (cc_xkb_modifier_page_new (self->input_source_settings, modifier));
 
-  adw_dialog_present (dialog, GTK_WIDGET (self));
+  cc_panel_push_subpage (CC_PANEL (self), page);
 }
 
 static void
 alt_chars_row_activated (CcKeyboardPanel *self)
 {
-  show_modifier_dialog (self, &LV3_MODIFIER);
+  show_modifier_page (self, &LV3_MODIFIER);
 }
 
 static void
 compose_row_activated (CcKeyboardPanel *self)
 {
-  show_modifier_dialog (self, &COMPOSE_MODIFIER);
+  show_modifier_page (self, &COMPOSE_MODIFIER);
 }
 
 static void

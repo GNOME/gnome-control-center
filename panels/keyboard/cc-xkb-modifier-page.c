@@ -1,4 +1,4 @@
-/* cc-xkb-modifier-dialog.c
+/* cc-xkb-modifier-page.c
  *
  * Copyright 2019 Bastien Nocera <hadess@hadess.net>
  *
@@ -21,11 +21,11 @@
 #include <glib/gi18n.h>
 #include <adwaita.h>
 
-#include "cc-xkb-modifier-dialog.h"
+#include "cc-xkb-modifier-page.h"
 
-struct _CcXkbModifierDialog
+struct _CcXkbModifierPage
 {
-  AdwDialog       parent_instance;
+  AdwNavigationPage   parent_instance;
 
   AdwPreferencesPage *xkb_modifier_page;
   GtkSwitch      *enabled_switch;
@@ -38,7 +38,7 @@ struct _CcXkbModifierDialog
   GSList         *radio_group;
 };
 
-G_DEFINE_TYPE (CcXkbModifierDialog, cc_xkb_modifier_dialog, ADW_TYPE_DIALOG)
+G_DEFINE_TYPE (CcXkbModifierPage, cc_xkb_modifier_page, ADW_TYPE_NAVIGATION_PAGE)
 
 static const CcXkbOption*
 get_xkb_option_from_name (const CcXkbModifier *modifier, const gchar* name)
@@ -56,8 +56,8 @@ get_xkb_option_from_name (const CcXkbModifier *modifier, const gchar* name)
 }
 
 static GtkCheckButton *
-get_radio_button_from_xkb_option_name (CcXkbModifierDialog *self,
-                                       const gchar         *name)
+get_radio_button_from_xkb_option_name (CcXkbModifierPage *self,
+                                       const gchar       *name)
 {
   gchar *xkb_option;
   GSList *l;
@@ -73,7 +73,7 @@ get_radio_button_from_xkb_option_name (CcXkbModifierDialog *self,
 }
 
 static void
-update_active_radio (CcXkbModifierDialog *self)
+update_active_radio (CcXkbModifierPage *self)
 {
   g_auto(GStrv) options = NULL;
   GtkCheckButton *rightalt_radio;
@@ -113,8 +113,8 @@ update_active_radio (CcXkbModifierDialog *self)
 }
 
 static void
-set_xkb_option (CcXkbModifierDialog *self,
-                gchar               *xkb_option)
+set_xkb_option (CcXkbModifierPage *self,
+                gchar             *xkb_option)
 {
   g_autoptr(GPtrArray) array = NULL;
   g_auto(GStrv) options = NULL;
@@ -153,8 +153,8 @@ set_xkb_option (CcXkbModifierDialog *self,
 }
 
 static void
-on_active_radio_changed_cb (CcXkbModifierDialog *self,
-                            GtkCheckButton      *radio)
+on_active_radio_changed_cb (CcXkbModifierPage *self,
+                            GtkCheckButton    *radio)
 {
   gchar *xkb_option;
 
@@ -169,15 +169,15 @@ on_active_radio_changed_cb (CcXkbModifierDialog *self,
 }
 
 static void
-on_xkb_options_changed_cb (CcXkbModifierDialog *self)
+on_xkb_options_changed_cb (CcXkbModifierPage *self)
 {
   if (self->modifier == NULL)
     update_active_radio (self);
 }
 
 static gboolean
-enable_switch_changed_cb (CcXkbModifierDialog *self,
-                          gboolean             state)
+enable_switch_changed_cb (CcXkbModifierPage *self,
+                          gboolean           state)
 {
   gchar *xkb_option;
   GSList *l;
@@ -205,38 +205,36 @@ enable_switch_changed_cb (CcXkbModifierDialog *self,
 }
 
 static void
-cc_xkb_modifier_dialog_finalize (GObject *object)
+cc_xkb_modifier_page_finalize (GObject *object)
 {
-  CcXkbModifierDialog *self = (CcXkbModifierDialog *)object;
+  CcXkbModifierPage *self = (CcXkbModifierPage *)object;
 
   g_clear_object (&self->input_source_settings);
 
-  G_OBJECT_CLASS (cc_xkb_modifier_dialog_parent_class)->finalize (object);
+  G_OBJECT_CLASS (cc_xkb_modifier_page_parent_class)->finalize (object);
 }
 
 static void
-cc_xkb_modifier_dialog_class_init (CcXkbModifierDialogClass *klass)
+cc_xkb_modifier_page_class_init (CcXkbModifierPageClass *klass)
 {
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
-  object_class->finalize = cc_xkb_modifier_dialog_finalize;
+  object_class->finalize = cc_xkb_modifier_page_finalize;
 
-  gtk_widget_class_add_binding_action (widget_class, GDK_KEY_Escape, 0, "window.close", NULL);
+  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/keyboard/cc-xkb-modifier-page.ui");
 
-  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/keyboard/cc-xkb-modifier-dialog.ui");
-
-  gtk_widget_class_bind_template_child (widget_class, CcXkbModifierDialog, xkb_modifier_page);
-  gtk_widget_class_bind_template_child (widget_class, CcXkbModifierDialog, enabled_switch);
-  gtk_widget_class_bind_template_child (widget_class, CcXkbModifierDialog, options_group);
-  gtk_widget_class_bind_template_child (widget_class, CcXkbModifierDialog, switch_group);
-  gtk_widget_class_bind_template_child (widget_class, CcXkbModifierDialog, switch_row);
+  gtk_widget_class_bind_template_child (widget_class, CcXkbModifierPage, xkb_modifier_page);
+  gtk_widget_class_bind_template_child (widget_class, CcXkbModifierPage, enabled_switch);
+  gtk_widget_class_bind_template_child (widget_class, CcXkbModifierPage, options_group);
+  gtk_widget_class_bind_template_child (widget_class, CcXkbModifierPage, switch_group);
+  gtk_widget_class_bind_template_child (widget_class, CcXkbModifierPage, switch_row);
 
   gtk_widget_class_bind_template_callback (widget_class, enable_switch_changed_cb);
 }
 
 static void
-add_radio_buttons (CcXkbModifierDialog *self)
+add_radio_buttons (CcXkbModifierPage *self)
 {
   g_autoptr (GSList) group = NULL;
   GtkWidget *row, *radio_button, *last_button = NULL;
@@ -270,7 +268,7 @@ add_radio_buttons (CcXkbModifierDialog *self)
 }
 
 static void
-cc_xkb_modifier_dialog_init (CcXkbModifierDialog *self)
+cc_xkb_modifier_page_init (CcXkbModifierPage *self)
 {
   gtk_widget_init_template (GTK_WIDGET (self));
 
@@ -283,17 +281,17 @@ cc_xkb_modifier_dialog_init (CcXkbModifierDialog *self)
                            self, G_CONNECT_SWAPPED);
 }
 
-CcXkbModifierDialog *
-cc_xkb_modifier_dialog_new (GSettings *input_settings,
-                            const CcXkbModifier *modifier)
+CcXkbModifierPage *
+cc_xkb_modifier_page_new (GSettings *input_settings,
+                          const CcXkbModifier *modifier)
 {
-  CcXkbModifierDialog *self;
+  CcXkbModifierPage *self;
 
-  self = g_object_new (CC_TYPE_XKB_MODIFIER_DIALOG, NULL);
+  self = g_object_new (CC_TYPE_XKB_MODIFIER_PAGE, NULL);
   self->input_source_settings = g_object_ref (input_settings);
 
   self->modifier = modifier;
-  adw_dialog_set_title (ADW_DIALOG (self), gettext (modifier->title));
+  adw_navigation_page_set_title (ADW_NAVIGATION_PAGE (self), gettext (modifier->title));
   adw_preferences_row_set_title (ADW_PREFERENCES_ROW (self->switch_row), gettext (modifier->title));
   adw_preferences_page_set_description (self->xkb_modifier_page, gettext (modifier->description));
   gtk_widget_set_visible (GTK_WIDGET (self->switch_group), modifier->default_option == NULL);

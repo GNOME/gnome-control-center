@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
-  <template class="CcXkbModifierDialog" parent="AdwDialog">
-    <property name="content-width">500</property>
-    <property name="content-height">600</property>
+  <template class="CcXkbModifierPage" parent="AdwNavigationPage">
     <property name="child">
       <object class="AdwToolbarView">
         <child type="top">
@@ -19,7 +17,7 @@
                     <child>
                       <object class="GtkSwitch" id="enabled_switch">
                         <property name="valign">center</property>
-                        <signal name="state-set" handler="enable_switch_changed_cb" object="CcXkbModifierDialog" swapped="yes"/>
+                        <signal name="state-set" handler="enable_switch_changed_cb" object="CcXkbModifierPage" swapped="yes"/>
                       </object>
                     </child>
                   </object>
