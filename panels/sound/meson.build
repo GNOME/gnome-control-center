@@ -36,7 +36,7 @@ sources = files(
   'cc-speaker-test-button.c',
   'cc-stream-row.c',
   'cc-subwoofer-slider.c',
-  'cc-volume-levels-window.c',
+  'cc-volume-levels-page.c',
   'cc-volume-slider.c',
 )
 

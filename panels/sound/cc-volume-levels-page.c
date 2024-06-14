@@ -21,11 +21,11 @@
 #include <gvc-mixer-source.h>
 
 #include "cc-stream-row.h"
-#include "cc-volume-levels-window.h"
+#include "cc-volume-levels-page.h"
 
-struct _CcVolumeLevelsWindow
+struct _CcVolumeLevelsPage
 {
-  AdwDialog        parent_instance;
+  AdwNavigationPage parent_instance;
 
   GtkListBox      *listbox;
   GtkSizeGroup    *label_size_group;
@@ -34,14 +34,14 @@ struct _CcVolumeLevelsWindow
   GListStore      *stream_list;
 };
 
-G_DEFINE_TYPE (CcVolumeLevelsWindow, cc_volume_levels_window, ADW_TYPE_DIALOG)
+G_DEFINE_TYPE (CcVolumeLevelsPage, cc_volume_levels_page, ADW_TYPE_NAVIGATION_PAGE)
 
 static gint
 sort_stream (gconstpointer a,
              gconstpointer b,
              gpointer      user_data)
 {
-  CcVolumeLevelsWindow *self = user_data;
+  CcVolumeLevelsPage *self = user_data;
   GvcMixerStream *stream_a, *stream_b, *event_sink;
   g_autofree gchar *name_a = NULL;
   g_autofree gchar *name_b = NULL;
@@ -92,7 +92,7 @@ static GtkWidget *
 create_stream_row (gpointer item,
                    gpointer user_data)
 {
-  CcVolumeLevelsWindow *self = user_data;
+  CcVolumeLevelsPage *self = user_data;
   GvcMixerStream *stream = item;
   guint id;
   CcStreamRow *row;
@@ -104,7 +104,7 @@ create_stream_row (gpointer item,
 }
 
 static void
-stream_added_cb (CcVolumeLevelsWindow *self,
+stream_added_cb (CcVolumeLevelsPage *self,
                  guint                 id)
 {
   GvcMixerStream *stream = gvc_mixer_control_lookup_stream_id (self->mixer_control, id);
@@ -116,7 +116,7 @@ stream_added_cb (CcVolumeLevelsWindow *self,
 }
 
 static void
-stream_removed_cb (CcVolumeLevelsWindow *self,
+stream_removed_cb (CcVolumeLevelsPage *self,
                    guint                 id)
 {
   guint n_items = g_list_model_get_n_items (G_LIST_MODEL (self->stream_list));
@@ -141,38 +141,38 @@ static void
 add_stream (gpointer data,
             gpointer user_data)
 {
-  CcVolumeLevelsWindow *self = user_data;
+  CcVolumeLevelsPage *self = user_data;
   GvcMixerStream *stream = data;
 
   g_list_store_append (self->stream_list, G_OBJECT (stream));
 }
 
 static void
-cc_volume_levels_window_dispose (GObject *object)
+cc_volume_levels_page_dispose (GObject *object)
 {
-  CcVolumeLevelsWindow *self = CC_VOLUME_LEVELS_WINDOW (object);
+  CcVolumeLevelsPage *self = CC_VOLUME_LEVELS_PAGE (object);
 
   g_clear_object (&self->mixer_control);
 
-  G_OBJECT_CLASS (cc_volume_levels_window_parent_class)->dispose (object);
+  G_OBJECT_CLASS (cc_volume_levels_page_parent_class)->dispose (object);
 }
 
 void
-cc_volume_levels_window_class_init (CcVolumeLevelsWindowClass *klass)
+cc_volume_levels_page_class_init (CcVolumeLevelsPageClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
-  object_class->dispose = cc_volume_levels_window_dispose;
+  object_class->dispose = cc_volume_levels_page_dispose;
 
-  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/sound/cc-volume-levels-window.ui");
+  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/sound/cc-volume-levels-page.ui");
 
-  gtk_widget_class_bind_template_child (widget_class, CcVolumeLevelsWindow, listbox);
-  gtk_widget_class_bind_template_child (widget_class, CcVolumeLevelsWindow, label_size_group);
+  gtk_widget_class_bind_template_child (widget_class, CcVolumeLevelsPage, listbox);
+  gtk_widget_class_bind_template_child (widget_class, CcVolumeLevelsPage, label_size_group);
 }
 
 void
-cc_volume_levels_window_init (CcVolumeLevelsWindow *self)
+cc_volume_levels_page_init (CcVolumeLevelsPage *self)
 {
   GtkFilter *filter;
   GtkFilterListModel *filter_model;
@@ -195,13 +195,13 @@ cc_volume_levels_window_init (CcVolumeLevelsWindow *self)
                            self, NULL);
 }
 
-CcVolumeLevelsWindow *
-cc_volume_levels_window_new (GvcMixerControl *mixer_control)
+CcVolumeLevelsPage *
+cc_volume_levels_page_new (GvcMixerControl *mixer_control)
 {
-  CcVolumeLevelsWindow *self;
+  CcVolumeLevelsPage *self;
   g_autoptr(GSList) streams = NULL;
 
-  self = g_object_new (CC_TYPE_VOLUME_LEVELS_WINDOW, NULL);
+  self = g_object_new (CC_TYPE_VOLUME_LEVELS_PAGE, NULL);
 
   self->mixer_control = g_object_ref (mixer_control);
 

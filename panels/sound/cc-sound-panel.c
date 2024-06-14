@@ -40,7 +40,7 @@
 #include "cc-sound-panel.h"
 #include "cc-sound-resources.h"
 #include "cc-subwoofer-slider.h"
-#include "cc-volume-levels-window.h"
+#include "cc-volume-levels-page.h"
 #include "cc-volume-slider.h"
 
 struct _CcSoundPanel
@@ -224,10 +224,11 @@ test_output_configuration_button_clicked_cb (CcSoundPanel *self)
 static void
 volume_levels_activated_cb (CcSoundPanel *self)
 {
-  CcVolumeLevelsWindow *volume_levels;
+  CcVolumeLevelsPage *volume_levels;
 
-  volume_levels = cc_volume_levels_window_new (self->mixer_control);
-  adw_dialog_present (ADW_DIALOG (volume_levels), GTK_WIDGET (self));
+  volume_levels = cc_volume_levels_page_new (self->mixer_control);
+
+  cc_panel_push_subpage (CC_PANEL (self), ADW_NAVIGATION_PAGE (volume_levels));
 }
 
 static void
