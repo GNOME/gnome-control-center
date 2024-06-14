@@ -388,7 +388,8 @@
                             <property name="title" translatable="yes">Re_quired Permissions</property>
                             <property name="subtitle" translatable="yes">System permissions that the app requires</property>
                             <property name="show-arrow">True</property>
-                            <signal name="activated" handler="adw_dialog_present" object="builtin_dialog" />
+                            <property name="action-name">navigation.push</property>
+                            <property name="action-target">'builtin-page'</property>
                           </object>
                         </child>
                       </object>
@@ -402,7 +403,8 @@
                             <property name="title" translatable="yes">_Files &amp;amp; Links</property>
                             <property name="subtitle" translatable="yes">File and link types that are opened by the app</property>
                             <property name="show-arrow">True</property>
-                            <signal name="activated" handler="adw_dialog_present" object="handler_dialog"/>
+                            <property name="action-name">navigation.push</property>
+                            <property name="action-target">'handler-page'</property>
                           </object>
                         </child>
                         <child>
@@ -410,7 +412,8 @@
                             <property name="title" translatable="yes">S_torage</property>
                             <property name="subtitle" translatable="yes">Disk space being used</property>
                             <property name="show-arrow">True</property>
-                            <signal name="activated" handler="adw_dialog_present" object="storage_dialog"/>
+                            <property name="action-name">navigation.push</property>
+                            <property name="action-target">'storage-page'</property>
                           </object>
                         </child>
                       </object>
@@ -423,148 +426,149 @@
         </property>
       </object>
     </child>
+
+    <!-- Required Permissions page -->
+    <child type="subpage">
+      <object class="AdwNavigationPage">
+        <property name="title" translatable="yes">Required Permissions</property>
+        <property name="tag">builtin-page</property>
+        <property name="child">
+          <object class="AdwToolbarView">
+            <child type="top">
+              <object class="AdwHeaderBar"/>
+            </child>
+            <property name="content">
+              <object class="AdwPreferencesPage" id="builtin_page">
+                <child>
+                  <object class="AdwPreferencesGroup">
+                    <child>
+                      <object class="GtkListBox" id="builtin_list">
+                        <property name="selection-mode">none</property>
+                        <style>
+                          <class name="boxed-list"/>
+                        </style>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </property>
+          </object>
+        </property>
+      </object>
+    </child>
+
+    <!-- File & Link Associations page -->
+    <child type="subpage">
+      <object class="AdwNavigationPage">
+        <property name="title" translatable="yes">File &amp; Link Associations</property>
+        <property name="tag">handler-page</property>
+        <property name="child">
+          <object class="AdwToolbarView">
+            <child type="top">
+              <object class="AdwHeaderBar"/>
+            </child>
+            <property name="content">
+              <object class="AdwPreferencesPage" id="handler_page">
+                <child>
+                  <object class="AdwPreferencesGroup" id="handler_file_group">
+                    <property name="title" translatable="yes">File Types</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="AdwPreferencesGroup" id="handler_link_group">
+                    <property name="title" translatable="yes">Link Types</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="AdwPreferencesGroup">
+                    <child>
+                      <object class="AdwButtonRow" id="handler_reset">
+                        <property name="title" translatable="yes">_Reset</property>
+                        <property name="use-underline">True</property>
+                        <signal name="activated" handler="handler_reset_cb" object="CcApplicationsPanel" swapped="yes"/>
+                        <style>
+                          <class name="destructive-action"/>
+                        </style>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </property>
+          </object>
+        </property>
+      </object>
+    </child>
+
+    <!-- Storage page -->
+    <child type="subpage">
+      <object class="AdwNavigationPage">
+        <property name="title" translatable="yes">Storage</property>
+        <property name="tag">storage-page</property>
+        <property name="child">
+          <object class="AdwToolbarView">
+            <child type="top">
+              <object class="AdwHeaderBar"/>
+            </child>
+            <property name="content">
+              <object class="AdwPreferencesPage">
+                <property name="description" translatable="yes">How much disk space this app is occupying with app data and caches</property>
+                 <child>
+                  <object class="AdwPreferencesGroup">
+                    <child>
+                      <object class="AdwActionRow" id="storage_page_app_row">
+                        <property name="title" translatable="yes">App</property>
+                        <style>
+                          <class name="property"/>
+                        </style>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="AdwActionRow" id="storage_page_data_row">
+                        <property name="title" translatable="yes">Data</property>
+                        <style>
+                          <class name="property"/>
+                        </style>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="AdwActionRow" id="storage_page_cache_row">
+                        <property name="title" translatable="yes">Cache</property>
+                        <style>
+                          <class name="property"/>
+                        </style>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="AdwActionRow" id="storage_page_total_row">
+                        <property name="title" translatable="yes">Total</property>
+                        <style>
+                          <class name="property"/>
+                        </style>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+                <child>
+                  <object class="AdwPreferencesGroup">
+                    <child>
+                      <object class="AdwButtonRow" id="clear_cache_button_row">
+                        <property name="title" translatable="yes">_Clear Cache</property>
+                        <property name="use-underline">True</property>
+                        <signal name="activated" handler="clear_cache_cb" object="CcApplicationsPanel" swapped="yes"/>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </property>
+          </object>
+        </property>
+      </object>
+    </child>
+
   </template>
-
-  <!-- Built-in Permissions dialog -->
-  <object class="AdwDialog" id="builtin_dialog">
-    <property name="title" translatable="yes">Required Permissions</property>
-    <property name="content-width">500</property>
-    <property name="content-height">400</property>
-    <property name="child">
-      <object class="AdwToolbarView">
-        <child type="top">
-          <object class="AdwHeaderBar"/>
-        </child>
-        <property name="content">
-          <object class="AdwPreferencesPage" id="builtin_page">
-            <child>
-              <object class="AdwPreferencesGroup">
-                <child>
-                  <object class="GtkListBox" id="builtin_list">
-                    <property name="selection-mode">none</property>
-                    <style>
-                      <class name="boxed-list"/>
-                    </style>
-                  </object>
-                </child>
-              </object>
-            </child>
-          </object>
-        </property>
-      </object>
-    </property>
-  </object>
-
-  <!-- File & Link handlers dialog -->
-  <object class="AdwDialog" id="handler_dialog">
-    <property name="title" translatable="yes">File &amp; Link Associations</property>
-    <property name="content-width">500</property>
-    <property name="content-height">400</property>
-    <property name="child">
-      <object class="AdwToolbarView">
-        <child type="top">
-          <object class="AdwHeaderBar"/>
-        </child>
-        <property name="content">
-          <object class="AdwPreferencesPage" id="handler_page">
-
-            <child>
-              <object class="AdwPreferencesGroup" id="handler_file_group">
-                <property name="title" translatable="yes">File Types</property>
-              </object>
-            </child>
-
-            <child>
-              <object class="AdwPreferencesGroup" id="handler_link_group">
-                <property name="title" translatable="yes">Link Types</property>
-              </object>
-            </child>
-
-            <child>
-              <object class="AdwPreferencesGroup">
-                <child>
-                  <object class="AdwButtonRow" id="handler_reset">
-                    <property name="title" translatable="yes">_Reset</property>
-                    <property name="use-underline">True</property>
-                    <signal name="activated" handler="handler_reset_cb" object="CcApplicationsPanel" swapped="yes"/>
-                    <style>
-                      <class name="destructive-action"/>
-                    </style>
-                  </object>
-                </child>
-              </object>
-            </child>
-
-          </object>
-        </property>
-      </object>
-    </property>
-  </object>
-
-  <!-- Storage dialog -->
-  <object class="AdwDialog" id="storage_dialog">
-    <property name="title" translatable="yes">Storage</property>
-    <property name="content-width">420</property>
-    <property name="child">
-      <object class="AdwToolbarView">
-        <child type="top">
-          <object class="AdwHeaderBar"/>
-        </child>
-        <property name="content">
-          <object class="AdwPreferencesPage">
-            <property name="description" translatable="yes">How much disk space this app is occupying with app data and caches</property>
-             <child>
-              <object class="AdwPreferencesGroup">
-                <child>
-                  <object class="AdwActionRow" id="storage_dialog_app_row">
-                    <property name="title" translatable="yes">App</property>
-                    <style>
-                      <class name="property"/>
-                    </style>
-                  </object>
-                </child>
-                <child>
-                  <object class="AdwActionRow" id="storage_dialog_data_row">
-                    <property name="title" translatable="yes">Data</property>
-                    <style>
-                      <class name="property"/>
-                    </style>
-                  </object>
-                </child>
-                <child>
-                  <object class="AdwActionRow" id="storage_dialog_cache_row">
-                    <property name="title" translatable="yes">Cache</property>
-                    <style>
-                      <class name="property"/>
-                    </style>
-                  </object>
-                </child>
-                <child>
-                  <object class="AdwActionRow" id="storage_dialog_total_row">
-                    <property name="title" translatable="yes">Total</property>
-                    <style>
-                      <class name="property"/>
-                    </style>
-                  </object>
-                </child>
-              </object>
-            </child>
-            <child>
-              <object class="AdwPreferencesGroup">
-                <child>
-                  <object class="AdwButtonRow" id="clear_cache_button_row">
-                    <property name="title" translatable="yes">_Clear Cache</property>
-                    <property name="use-underline">True</property>
-                    <signal name="activated" handler="clear_cache_cb" object="CcApplicationsPanel" swapped="yes"/>
-                  </object>
-                </child>
-              </object>
-            </child>
-          </object>
-        </property>
-      </object>
-    </property>
-  </object>
 
   <object class="GtkSizeGroup">
     <property name="mode">horizontal</property>
