@@ -88,6 +88,7 @@ static const struct {
   { "OutputBin", NULL, N_("Output Tray") },
   { "Resolution", "printing option", NC_("printing option", "Resolution") },
   { "PreFilter", NULL, N_("GhostScript pre-filtering") },
+  { "StpiShrinkOutput", NULL, N_("Shrink Page") },
 };
 
 /* keep sorted when changing */
