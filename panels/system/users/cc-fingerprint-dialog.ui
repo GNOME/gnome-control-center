@@ -67,53 +67,6 @@
         <property name="orientation">vertical</property>
 
         <child>
-          <object class="GtkInfoBar" id="delete_confirmation_infobar">
-            <property name="visible">False</property>
-            <child>
-              <object class="GtkBox">
-                <child>
-                  <object class="GtkButton">
-                    <signal name="clicked" handler="cancel_deletion_button_clicked_cb" object="CcFingerprintDialog" swapped="yes"/>
-                    <property name="label" translatable="yes">_No</property>
-                    <property name="use-underline">True</property>
-                  </object>
-                </child>
-                <child>
-                  <object class="GtkButton">
-                    <signal name="clicked" handler="confirm_deletion_button_clicked_cb" object="CcFingerprintDialog" swapped="yes"/>
-                    <property name="receives_default">True</property>
-                    <property name="label" translatable="yes">_Yes</property>
-                    <property name="use-underline">True</property>
-                    <style>
-                      <class name="destructive-action"/>
-                    </style>
-                  </object>
-                </child>
-              </object>
-            </child>
-            <child>
-              <object class="GtkBox">
-                <property name="can_focus">False</property>
-                <property name="spacing">16</property>
-                <property name="margin-start">12</property>
-                <child>
-                  <object class="GtkLabel">
-                    <property name="can_focus">False</property>
-                    <property name="halign">start</property>
-                    <property name="hexpand">False</property>
-                    <property name="wrap">True</property>
-                    <property name="label" translatable="yes">Do you want to delete your registered fingerprints so fingerprint login is disabled?</property>
-                    <attributes>
-                      <attribute name="weight" value="bold"/>
-                    </attributes>
-                  </object>
-                </child>
-              </object>
-            </child>
-          </object>
-        </child>
-
-        <child>
           <object class="GtkInfoBar" id="error_infobar">
             <property name="name">error_infobar</property>
             <property name="visible">False</property>
