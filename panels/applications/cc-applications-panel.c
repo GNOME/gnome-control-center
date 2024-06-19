@@ -1221,6 +1221,12 @@ on_items_changed_cb (GListModel *list,
     gtk_stack_set_visible_child_name (self->main_page_stack, "no-apps-found-page");
     gtk_widget_set_visible (GTK_WIDGET (self->app_search_entry), FALSE);
   }
+#ifdef HAVE_MALCONTENT
+  else if (!self->app_filter) {
+    gtk_stack_set_visible_child_name (self->main_page_stack, "malcontent-not-found-page");
+    gtk_widget_set_visible (GTK_WIDGET (self->app_search_entry), FALSE);
+  }
+#endif
   else {
     gtk_stack_set_visible_child_name (self->main_page_stack, "apps-page");
   }
