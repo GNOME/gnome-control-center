@@ -1,6 +1,6 @@
 /* Main page */
 .cutout-button {
-  background-color: @window_bg_color;
+  background-color: var(--window-bg-color);
   border-radius: 9999px;
   padding: 2px;
 }
@@ -8,11 +8,11 @@
 
 /* "Add User" and "Add Enterprise Login" dialogs */
 image.emblem-default-symbolic {
-  color: @success_color;
+  color: var(--success-color);
 }
 
 image.dialog-error-symbolic {
-  color: @error_color;
+  color: var(--error-color);
 }
 
 
@@ -46,24 +46,24 @@ levelbar .strength-high {
   min-width: 32px;
   min-height: 32px;
   border-radius: 64px;
-  border: 1px solid @borders;
-  background-color: @theme_base_color;
-  color: @insensitive_fg_color;
+  border: 1px solid color-mix(in srgb, currentColor 15%, transparent);
+  background-color: var(--view-bg-color);
+  color: color-mix(in srgb, var(--window-fg-color) 50%, transparent);
 }
 
 .fingerprint-print-add image:not(:disabled):not(:backdrop),
 .fingerprint-print-add button:not(:disabled):not(:backdrop) {
-  color: @theme_fg_color;
+  color: var(--window-fg-color);
 }
 
 .fingerprint-icon.enroll-status image {
-  outline-color: @theme_selected_bg_color;
+  outline-color: var(--accent-bg-color);
   outline-offset: 0px;
   outline-width: 4px;
 }
 
 .fingerprint-icon.enroll-status image:backdrop {
-  outline-color: @theme_unfocused_selected_bg_color;
+  outline-color: var(--accent-bg-color);
 }
 
 .fingerprint-icon.enroll-status {
@@ -71,31 +71,31 @@ levelbar .strength-high {
 }
 
 .fingerprint-icon.enroll-status.completed image {
-  outline-color: @success_color;
+  outline-color: var(--success-color);
 }
 
 .fingerprint-icon.enroll-status.warning image {
-  outline-color: @warning_color;
+  outline-color: var(--warning-color);
 }
 
 .fingerprint-icon.enroll-status.error image {
-  outline-color: @error_color;
+  outline-color: var(--error-color);
   /* Given we don't have an error image, we can just recolorize the warning one */
-  -gtk-icon-palette: warning @error_color;
+  -gtk-icon-palette: warning var(--error-color);
 }
 
 .fingerprint-icon.enroll-status.success image:not(:backdrop) {
-  color: @theme_selected_bg_color;
+  color: var(--accent-bg-color);
 }
 
 .fingerprint-icon.enroll-status.warning image:not(:backdrop),
 .fingerprint-icon.enroll-status.warning label:not(:backdrop) {
-  color: @warning_color;
+  color: var(--warning-color);
 }
 
 .fingerprint-icon.enroll-status.error image:not(:backdrop),
 .fingerprint-icon.enroll-status.error label:not(:backdrop) {
-  color: @error_color;
+  color: var(--error-color);
 }
 
 @keyframes wiggle {

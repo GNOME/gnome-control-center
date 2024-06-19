@@ -4,10 +4,10 @@ background-preview {
 
 background-preview .window {
   border-radius: 6px;
-  box-shadow: 0 1px 4px 1px alpha(black, 0.13),
-              0 1px 10px 5px alpha(black, 0.09),
-              0 3px 16px 8px alpha(black, 0.04),
-              0 0 0 1px alpha(black, .05);
+  box-shadow: 0 1px 4px 1px color-mix(in srgb, black 13%, transparent),
+              0 1px 10px 5px color-mix(in srgb, black 9%, transparent),
+              0 3px 16px 8px color-mix(in srgb, black 4%, transparent),
+              0 0 0 1px color-mix(in srgb, black 5%, transparent);
 
   --window-bg-color: #fafafa;
   --headerbar-bg-color: white;
@@ -64,15 +64,15 @@ background-preview .window .sidebar:dir(rtl) {
 }
 
 .background-preview-button:checked {
-  box-shadow: 0 0 0 3px @accent_bg_color;
+  box-shadow: 0 0 0 3px var(--accent-bg-color);
 }
 
 .background-preview-button:focus:focus-visible {
-  box-shadow: 0 0 0 3px @accent_bg_color, 0 0 0 6px alpha(@accent_color, .3);
+  box-shadow: 0 0 0 3px var(--accent-bg-color), 0 0 0 6px color-mix(in srgb, var(--accent-color) 30%, transparent);
 }
 
 .background-preview-button:checked:focus:focus-visible {
-  box-shadow: 0 0 0 3px @accent_color, 0 0 0 6px alpha(@accent_color, .3);
+  box-shadow: 0 0 0 3px var(--accent-color), 0 0 0 6px color-mix(in srgb, var(--accent-color) 30%, transparent);
 }
 
 .background-flowbox > flowboxchild {
@@ -91,8 +91,8 @@ background-preview .window .sidebar:dir(rtl) {
 }
 
 .selected-check {
-  color: @accent_fg_color;
-  background: @accent_bg_color;
+  color: var(--accent-fg-color);
+  background: var(--accent-bg-color);
   border-radius: 100px;
   padding: 2px;
   opacity: 0;

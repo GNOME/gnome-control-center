@@ -1,5 +1,5 @@
 wheel {
-  background: alpha(currentColor, .08);
+  background: color-mix(in srgb, currentColor 8%, transparent);
   border-radius: 100%;
   margin: 40px;
   min-width: 280px;
@@ -7,12 +7,12 @@ wheel {
 }
 
 wheel > button {
-  background-color: @window_bg_color;
-  border: 1px solid @borders;
+  background-color: var(--window-bg-color);
+  border: 1px solid color-mix(in srgb, currentColor 15%, transparent);
   padding: 3px;
 }
 
 wheel > button.playing {
-  background-color: @accent_bg_color;
-  color: @accent_fg_color;
+  background-color: var(--accent-bg-color)
+  color: var(--accent-fg-color);
 }

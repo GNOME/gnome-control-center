@@ -5,23 +5,23 @@
 }
 
 .panel-unavaliable-color {
-  color:  @light_4;
+  color: var(--light-4);
 }
 
 .hsi-level-box.level0 {
-  background-color: alpha(@error_color, .25);
+  background-color: color-mix(in srgb, var(--error-color) 25%, transparent);
 }
 
 .hsi-level-box.level1 {
-  background-color: alpha(@light_4, .25);
+  background-color: color-mix(in srgb, var(--light-4) 25%, transparent);
 }
 
 .hsi-level-box.level2 {
-  background-color: alpha(@warning_color, .25);
+  background-color: color-mix(in srgb, var(--warning-color) 25%, transparent);
 }
 
 .hsi-level-box.level3 {
-  background-color: alpha(@success_color, .25);
+  background-color: color-mix(in srgb, var(--sucess-color) 25%, transparent);
 }
 
 .hsi-level-font {
@@ -30,19 +30,19 @@
 }
 
 .hsi-level-font.hsi0 {
-  color: @error_color;
+  color: var(--error-color);
 }
 
 .hsi-level-font.hsi1 {
-  color: @light_4;
+  color: var(--light-4);
 }
 
 .hsi-level-font.hsi2 {
-  color: @warning_color;
+  color: var(--warning-color);
 }
 
 .hsi-level-font.hsi3 {
-  color: @success_color;
+  color: var(--success-color);
 }
 
 .security-level-icon {
@@ -52,23 +52,23 @@
 }
 
 .security-level-icon.good {
-  color: @success_color;
-  background-color: alpha(@success_color, .25);
+  color: var(--success-color);
+  background-color: color-mix(in srgb, var(--success-color) 25%, transparent);
 }
 
 .security-level-icon.error {
-  color: @error_color;
-  background-color: alpha(@error_color, .25);
+  color: var(--error-color);
+  background-color: color-mix(in srgb, var(--error-color) 25%, transparent);
 }
 
 .security-level-icon.warning {
-  color: @warning_color;
-  background-color: alpha(@warning_color, .25);
+  color: var(--warning-color);
+  background-color: color-mix(in srgb, var(--warning-color) 25%, transparent);
 }
 
 .security-level-icon.neutral {
-  color: @light_4;
-  background-color: alpha(@light_4, .25);
+  color: color-mix(in srgb, currentColor 40%, transparent);
+  background-color: color-mix(in srgb, currentColor 40%, transparent);
 }
 
 #color_green {
@@ -80,33 +80,33 @@
 }
 
 image.success-icon {
-  color: @success_color;
+  color: var(--success-color);
 }
 
 image.error-icon {
-  color: @error_color;
+  color: var(--error-color);
 }
 
 row.gray-icon image {
-  color: @light_4;
+  color: var(--light-4);
 }
 
 row.success-hsi-icon image.hsi_icon {
-  color: @success_color;
+  color: var(--success-color);
 }
 
 row.error-hsi-icon image.hsi_icon {
-  color: @error_color;
+  color: var(--error-color);
 }
 
 row.success-title label.hsi_label {
   font-weight: bold;
-  color: @success_color;
+  color: var(--success-color);
 }
 
 row.error-title label.hsi_label {
   font-weight: bold;
-  color: @error_color;
+  color: var(--error-color);
 }
 
 row.security-description-row label.subtitle {

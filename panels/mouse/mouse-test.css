@@ -17,12 +17,12 @@
 
 .click-status-emblem {
     border-radius: 9999px;
-    background-color: alpha(currentColor, .2);
-    color: alpha(currentColor, .5);
+    background-color: color-mix(in srgb, currentColor 20%, transparent);
+    color: color-mix(in srgb, currentColor 50%, transparent);
     padding: 10px;
 }
 
 .click-status-emblem.success {
-    background-color: @success_bg_color;
-    color: @success_fg_color;
+    background-color: var(--success-bg-color);
+    color: var(--success-fg-color);
 }
