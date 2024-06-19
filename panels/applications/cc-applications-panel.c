@@ -131,6 +131,7 @@ struct _CcApplicationsPanel
 
   GtkWidget       *usage_section;
   CcListRow       *storage;
+  AdwPreferencesPage *storage_page;
   AdwActionRow    *storage_page_app_row;
   AdwActionRow    *storage_page_data_row;
   AdwActionRow    *storage_page_cache_row;
@@ -1226,6 +1227,18 @@ on_items_changed_cb (GListModel *list,
 }
 
 static void
+update_storage_page (CcApplicationsPanel *self,
+                     GAppInfo            *info)
+{
+  g_autofree gchar *storage_page_description = NULL;
+
+  /* TRANSLATORS: %s is an app name. */
+  storage_page_description = g_strdup_printf (_("How much disk space <b>%s</b> is occupying with app data and caches"),
+                                              g_app_info_get_display_name (info));
+  adw_preferences_page_set_description (self->storage_page, storage_page_description);
+}
+
+static void
 update_total_size (CcApplicationsPanel *self)
 {
   g_autofree gchar *formatted_size = NULL;
@@ -1385,6 +1398,8 @@ update_usage_section (CcApplicationsPanel *self,
   gtk_widget_set_visible (GTK_WIDGET (self->other_permissions_section), has_builtin);
 
   gtk_widget_set_visible (GTK_WIDGET (self->usage_section), portal_app_id || has_builtin);
+
+  update_storage_page (self, info);
 }
 
 /* --- panel setup --- */
@@ -1789,6 +1804,7 @@ cc_applications_panel_class_init (CcApplicationsPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, search);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, sound);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, storage);
+  gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, storage_page);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, storage_page_total_row);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, usage_section);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, view_details_button);
