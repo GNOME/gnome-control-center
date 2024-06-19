@@ -160,8 +160,8 @@ pp_job_row_new (PpJob *job)
         state_string = g_strdup (C_("print job", "Stopped"));
         break;
       case IPP_JOB_CANCELED:
-        /* Translators: Job's state (job has been canceled) */
-        state_string = g_strdup (C_("print job", "Canceled"));
+        /* Translators: Job's state (job has been cancelled) */
+        state_string = g_strdup (C_("print job", "Cancelled"));
         break;
       case IPP_JOB_ABORTED:
         /* Translators: Job's state (job has aborted due to error) */
