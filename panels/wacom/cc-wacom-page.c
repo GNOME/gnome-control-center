@@ -446,6 +446,17 @@ set_osd_visibility (CcWacomPage *page)
 			   page);
 }
 
+static gboolean
+has_monitor (CcWacomPage *page)
+{
+	WacomIntegrationFlags integration_flags;
+
+	integration_flags = cc_wacom_device_get_integration_flags (page->stylus);
+
+	return ((integration_flags &
+		 (WACOM_DEVICE_INTEGRATED_DISPLAY | WACOM_DEVICE_INTEGRATED_SYSTEM)) != 0);
+}
+
 static void
 on_map_buttons_activated (CcWacomPage *self)
 {
@@ -471,7 +482,7 @@ on_display_selected (CcWacomPage *page)
 	else
 		g_settings_reset (page->wacom_settings, "output");
 
-	gtk_widget_set_sensitive (page->tablet_calibrate, variant == NULL);
+	gtk_widget_set_sensitive (page->tablet_calibrate, has_monitor (page));
 }
 
 /* Boilerplate code goes below */
@@ -556,7 +567,7 @@ update_displays_model (CcWacomPage *page)
 	CcDisplayMonitor *cur_output;
 	GList *monitors;
 	GList *l, *k;
-	int idx = 0, cur = -1, automatic_item = -1;
+	int idx = 0, cur = -1;
 	g_autoptr (GObject) obj = NULL;
 	GVariant *variant;
 	gboolean need_connector_name = false;
@@ -629,7 +640,6 @@ update_displays_model (CcWacomPage *page)
 
 		idx++;
 		gtk_string_list_append (list, _("Automatic"));
-		automatic_item = idx;
 
 		user_value = g_settings_get_user_value (page->wacom_settings, "output");
 		if (!user_value)
@@ -641,7 +651,7 @@ update_displays_model (CcWacomPage *page)
 	adw_combo_row_set_selected (ADW_COMBO_ROW (page->tablet_display), cur);
 	g_signal_handlers_unblock_by_func (page->tablet_display, on_display_selected, page);
 
-	gtk_widget_set_sensitive (page->tablet_calibrate, cur == automatic_item);
+	gtk_widget_set_sensitive (page->tablet_calibrate, has_monitor (page));
 }
 
 static void
@@ -665,17 +675,6 @@ set_icon_name (CcWacomPage *page,
 
 	resource = g_strdup_printf ("/org/gnome/control-center/wacom/%s.svg", icon_name);
 	gtk_picture_set_resource (GTK_PICTURE (widget), resource);
-}
-
-static gboolean
-has_monitor (CcWacomPage *page)
-{
-	WacomIntegrationFlags integration_flags;
-
-	integration_flags = cc_wacom_device_get_integration_flags (page->stylus);
-
-	return ((integration_flags &
-		 (WACOM_DEVICE_INTEGRATED_DISPLAY | WACOM_DEVICE_INTEGRATED_SYSTEM)) != 0);
 }
 
 static void
