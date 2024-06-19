@@ -115,7 +115,6 @@
                     <child>
                       <object class="AdwPreferencesRow">
                         <property name="activatable">False</property>
-                        <property name="focusable">False</property>
                         <child>
                           <object class="GtkBox" id="accent_box">
                             <property name="spacing">12</property>
@@ -124,6 +123,9 @@
                             <property name="halign">center</property>
                           </object>
                         </child>
+                        <accessibility>
+                          <property name="label" translatable="yes">Accent color</property>
+                        </accessibility>
                       </object>
                     </child>
 
