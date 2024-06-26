@@ -46,4 +46,6 @@ const gchar     *cc_input_source_get_layout         (CcInputSource *source);
 
 const gchar     *cc_input_source_get_layout_variant (CcInputSource *source);
 
+void             cc_input_source_launch_previewer   (CcInputSource *source);
+
 G_END_DECLS

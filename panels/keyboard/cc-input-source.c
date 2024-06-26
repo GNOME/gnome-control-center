@@ -82,3 +82,25 @@ cc_input_source_get_layout_variant (CcInputSource *source)
   g_return_val_if_fail (CC_IS_INPUT_SOURCE (source), NULL);
   return CC_INPUT_SOURCE_GET_CLASS (source)->get_layout_variant (source);
 }
+
+void
+cc_input_source_launch_previewer (CcInputSource *source)
+{
+  const gchar *layout, *layout_variant;
+  g_autofree gchar *commandline = NULL;
+
+  g_return_if_fail (CC_IS_INPUT_SOURCE (source));
+
+  layout = cc_input_source_get_layout (source);
+  layout_variant = cc_input_source_get_layout_variant (source);
+
+  if (layout_variant && layout_variant[0])
+    commandline = g_strdup_printf (KEYBOARD_PREVIEWER_EXEC " \"%s+%s\"",
+                                   layout, layout_variant);
+  else
+    commandline = g_strdup_printf (KEYBOARD_PREVIEWER_EXEC " %s",
+                                   layout);
+
+  g_debug ("Launching keyboard previewer with command line: '%s'\n", commandline);
+  g_spawn_command_line_async (commandline, NULL);
+}

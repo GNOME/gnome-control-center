@@ -225,30 +225,6 @@ row_settings_cb (CcInputListBox *self,
     g_warning ("Failed to launch input source setup: %s", error->message);
 }
 
-static void
-row_layout_cb (CcInputListBox *self,
-               CcInputRow    *row)
-{
-  CcInputSource *source;
-  const gchar *layout, *layout_variant;
-  g_autofree gchar *commandline = NULL;
-
-  source = cc_input_row_get_source (row);
-
-  layout = cc_input_source_get_layout (source);
-  layout_variant = cc_input_source_get_layout_variant (source);
-
-  if (layout_variant && layout_variant[0])
-    commandline = g_strdup_printf (KEYBOARD_PREVIEWER_EXEC " \"%s+%s\"",
-				   layout, layout_variant);
-  else
-    commandline = g_strdup_printf (KEYBOARD_PREVIEWER_EXEC " %s",
-				   layout);
-
-  g_debug ("Launching keyboard previewer with command line: '%s'\n", commandline);
-  g_spawn_command_line_async (commandline, NULL);
-}
-
 static void move_input (CcInputListBox *self, CcInputRow *source, CcInputRow *dest);
 
 static void
@@ -306,7 +282,7 @@ add_input_row (CcInputListBox *self, CcInputSource *source)
 
   row = cc_input_row_new (source);
   g_signal_connect_object (row, "show-settings", G_CALLBACK (row_settings_cb), self, G_CONNECT_SWAPPED);
-  g_signal_connect_object (row, "show-layout", G_CALLBACK (row_layout_cb), self, G_CONNECT_SWAPPED);
+  g_signal_connect_swapped (row, "show-layout", G_CALLBACK (cc_input_source_launch_previewer), source);
   g_signal_connect_object (row, "move-row", G_CALLBACK (row_moved_cb), self, G_CONNECT_SWAPPED);
   g_signal_connect_object (row, "remove-row", G_CALLBACK (row_removed_cb), self, G_CONNECT_SWAPPED);
   gtk_list_box_insert (self->listbox, GTK_WIDGET (row), gtk_list_box_row_get_index (self->add_input_row));
