@@ -233,15 +233,32 @@ input_source_row_new (CcInputChooser *self,
   if (g_str_equal (type, INPUT_SOURCE_TYPE_XKB))
     {
       const gchar *display_name;
+      CcInputSource *source;
+      GtkWidget *box;
+      GtkWidget *preview_button;
 
       gnome_xkb_info_get_layout_info (self->xkb_info, id, &display_name, NULL, NULL, NULL);
 
       row = gtk_list_box_row_new ();
+      box = gtk_box_new (0, GTK_ORIENTATION_HORIZONTAL);
       widget = padded_label_new (display_name,
                                  ROW_LABEL_POSITION_START,
                                  ROW_TRAVEL_DIRECTION_NONE,
                                  FALSE);
-      gtk_list_box_row_set_child (GTK_LIST_BOX_ROW (row), widget);
+      gtk_box_append (GTK_BOX (box), widget);
+
+      preview_button = gtk_button_new_from_icon_name ("view-reveal-symbolic");
+      gtk_widget_set_tooltip_text (preview_button, _("View Keyboard Layout"));
+      gtk_widget_add_css_class (preview_button, "flat");
+      gtk_box_append (GTK_BOX (box), preview_button);
+
+      source = CC_INPUT_SOURCE (cc_input_source_xkb_new_from_id (self->xkb_info, id));
+      g_signal_connect_swapped (preview_button,
+                                "clicked",
+                                (GCallback) cc_input_source_launch_previewer,
+                                source);
+
+      gtk_list_box_row_set_child (GTK_LIST_BOX_ROW (row), box);
       g_object_set_data (G_OBJECT (row), "name", (gpointer) display_name);
       g_object_set_data_full (G_OBJECT (row), "unaccented-name",
                               cc_util_normalize_casefold_and_unaccent (display_name), g_free);
