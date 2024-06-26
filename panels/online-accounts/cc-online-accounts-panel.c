@@ -144,7 +144,7 @@ show_account (CcOnlineAccountsPanel *self,
   goa_provider_show_account (provider,
                              self->client,
                              object,
-                             GTK_WINDOW (root),
+                             GTK_WIDGET (root),
                              cc_panel_get_cancellable (CC_PANEL (self)),
                              (GAsyncReadyCallback) show_account_cb,
                              self);
@@ -182,7 +182,7 @@ create_account (CcOnlineAccountsPanel *self,
   parent = gtk_widget_get_root (GTK_WIDGET (self));
   goa_provider_add_account (provider,
                             self->client,
-                            GTK_WINDOW (parent),
+                            GTK_WIDGET (parent),
                             cc_panel_get_cancellable (CC_PANEL (self)),
                             (GAsyncReadyCallback) create_account_cb,
                             self);
