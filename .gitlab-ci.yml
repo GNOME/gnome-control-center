@@ -49,7 +49,7 @@ stages:
     # Should probably also switch away from 'rawhide',
     # to stable fedora branch as well.
     BRANCH_NAME: 'main'
-    CONTAINER_TAG: '2024-06-19.0'
+    CONTAINER_TAG: '2024-06-27.0'
     FEDORA_VERSION: rawhide
     # Derive FDO variables from this automatically.
     # DO NOT edit, instead change the variables above
@@ -114,6 +114,12 @@ build.container.fedora@x86_64:
       git clone --depth 1 https://gitlab.gnome.org/GNOME/libadwaita.git && \
         cd libadwaita && \
         meson setup _build --prefix=/usr -Dtests=false -Dexamples=false && \
+        meson compile -C _build && \
+        meson install -C _build && \
+        cd .. && \
+      git clone --depth 1 https://gitlab.gnome.org/GNOME/gnome-online-accounts.git && \
+        cd gnome-online-accounts && \
+        meson setup _build --prefix=/usr -Dfedora=true  && \
         meson compile -C _build && \
         meson install -C _build && \
         cd .. && \
