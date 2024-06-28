@@ -1,3 +1,118 @@
+================
+Version 47.alpha
+================
+
+- Various translation updates
+- Various CI fixes
+- Various dialogs have been ported to subpages
+- Add CcNumberRow to ease the mapping of settings to combo rows
+- Skip tests if we don't have Xvfb or setxkbmap
+- Various ports of rows to AdwButtonRow
+- Various ports of dialogs to AdwDialog
+- Various ports to AdwAlertDialog
+- Various row changes to use the "property" style
+- Improve padding of some search entries
+- Fix Flatpak Development build manifest
+- Reorganize various icon assets
+
+Accessibility
+- Add "Activate Windows on Hover" setting
+- Move "Screen Reader" settings to the top
+- Use same size for cursors settings interface
+- Port Cursor Size dialog to AdwDialog
+- Various icon artwork updates
+
+Apps
+- Improve description of "Default Apps" settings
+- Turn app settings dialogs into subpages
+- Fix "No Search Results" page
+- Don't show "Open" button for Settings itself
+- Show the number of static permissions in the "Required Access" row
+- Indicate when no apps are available for a mime type in "Default Apps"
+
+Background
+- Implement accent colors
+- Improve window preview style
+- Improve a11y of the accent color toggles
+
+Color
+- Modernize looks of the Color settings
+- Capitalize "Built-In Webcam"
+- Rename "Laptop Screen" to "Built-In Screen"
+
+Displays
+- Fix panel crash when closing laptop lid
+- Add icon to the Night Light settings
+
+Keyboard
+- Allow previewing keyboard layouts in Input Sources dialog
+- Turn CcXkbModifierDialog into a subpage
+
+Mouse
+- Remove primary indicator delay for Mouse Test dialog
+- Make Mouse Test not respond to middle click
+
+Network
+- Make the QR Code dialog contents readable by screen readers
+- Use property rows to show Wi-Fi hotspot information
+- Add 6GHz to "Supported Frequencies"
+- Sort VPNs list
+- Fix row removal when Bluetooth wifi is removed
+- Add stable-ssid support for cloned-mac
+
+Online Accounts
+- Rename Windows Live provider to "Microsoft"
+- Rename MS365 provider
+- Close new account dialog when account creation is complete
+
+Printers
+- Modernize Printer Jobs dialog
+- Modernize Printer Details dialog
+- Fix spelling inconsistency for the word "Cancelled"
+- Close "Add Printer" dialog when pressing "Escape" key
+- Port "Undo" feature to AdwToast
+
+Power
+- Add suspend time options for mobile devices
+
+Privacy
+- Port to CcNumberRow
+
+Search
+- Port "Search Locations" page to a subpage
+
+Sharing
+- Improve text description of the Sharing features
+- Add DAV address in the File Sharing dialog
+- Add notice about shared files not being encrypted
+- Hide panel when none of the Sharing features are available in the system
+
+Sound
+- Use AppInfo to get app icons and fallback to icon-theme
+- Try to use AppInfo icon for stream icons
+- Turn volume levels dialog into a subpage
+- Adjust sound of the "Click" effect closer to the freedesktop.org bell sound
+- Make sound setting sliders more accessible with keyboard
+
+System
+- Load subpages on demand to speed up panel load
+- Avoid re-setting Remote Desktop credentials when they haven't changed
+
+Users
+- Don't show unwanted system accounts
+- Fix parental controls settings visibility
+- Rename "Add Enterprise User" to "Add Enterprise Login"
+
+Wacom
+- Always allow calibration for display tablets
+- Enforce a Z-shape sequence of calibration points
+- Fix wrong alignment detection in the calibrator
+- Reset the clock after any click on the calibrator
+- Up the calibrator threshold to 50 pixels
+- Simplify the calibrator code
+- Fall back to the generic tablet provided by libwacom
+- If we have two identical monitors, suffix the connector name
+
 =============
 Version 46.rc
 =============

@@ -50,35 +50,71 @@
   </kudos>
 
   <releases>
-    <release version="45.0" date="2023-09-15">
+    <release version="47.alpha" date="2024-06-28">
     <description>
       <ul>
-        <li>Fix sidebar navigation issues</li>
-        <li>Fix showing of QR Code button for non-supported Wi-Fi network security</li>
-        <li>Various other fixes, improvements, and translation updates</li>
-      </ul>
-    </description>
-    </release>
-    <release version="45~rc" date="2023-08-25">
-    <description>
-      <ul>
-        <li>Settings panels have been ported to modern libadwaita navigation widgets</li>
-        <li>The Printers settings have been redesigned</li>
-        <li>Various other fixes and improvements</li>
-      </ul>
-    </description>
-    </release>
-    <release version="45~beta" date="2023-08-07">
-    <description>
-      <ul>
-        <li>Performance improvements when loading a panel at startup</li>
-        <li>Multiple settings are now using modern Libadwaita widgets</li>
-        <li>New Privacy settings panel</li>
-        <li>New About panel</li>
-        <li>Various new accessibility labels added for screen readers</li>
-        <li>Visual and text improvements to the Online Accounts panel</li>
-        <li>New "card" style for the list of printers</li>
-        <li>Various other fixes and improvements</li>
+        <li>Various translation updates</li>
+        <li>Various CI fixes</li>
+        <li>Various dialogs have been ported to subpages</li>
+        <li>Implement accent colors</li>
+        <li>Add suspend time options for mobile devices</li>
+        <li>Add CcNumberRow to ease the mapping of settings to combo rows</li>
+        <li>Skip tests if we don't have Xvfb or setxkbmap</li>
+        <li>Various ports of rows to AdwButtonRow</li>
+        <li>Various ports of dialogs to AdwDialog</li>
+        <li>Various ports to AdwAlertDialog</li>
+        <li>Various row changes to use the "property" style</li>
+        <li>Improve padding of some search entries</li>
+        <li>Fix Flatpak Development build manifest</li>
+        <li>Reorganize various icon assets</li>
+        <li>Add "Activate Windows on Hover" setting to Accessibility settings</li>
+        <li>Move "Screen Reader" settings to the top of the Accessibility settings</li>
+        <li>Various icon artwork updates in the Accessibility settings</li>
+        <li>Improve description of "Default Apps" settings</li>
+        <li>Turn app settings dialogs into subpages</li>
+        <li>Fix "No Search Results" page in Apps settings</li>
+        <li>Don't show "Open" button for Settings itself in App settings</li>
+        <li>Show the number of static permissions in the "Required Access" row in App settings</li>
+        <li>Indicate when no apps are available for a mime type in "Default Apps"</li>
+        <li>Improve window preview style in Appearance settings</li>
+        <li>Modernize looks of the Color settings</li>
+        <li>Capitalize "Built-In Webcam"</li>
+        <li>Rename "Laptop Screen" to "Built-In Screen"</li>
+        <li>Fix Displays panel crash when closing laptop lid</li>
+        <li>Add icon to the Night Light settings in Display settings</li>
+        <li>Allow previewing keyboard layouts in Input Sources dialog</li>
+        <li>Remove primary indicator delay for Mouse Test dialog</li>
+        <li>Make Mouse Test not respond to middle click</li>
+        <li>Make the WiFi QR Code dialog contents readable by screen readers</li>
+        <li>Add 6GHz to the "Supported Frequencies" in WiFi settings</li>
+        <li>Sort VPNs list in Network settings</li>
+        <li>Fix row removal when a Bluetooth Wifi device is removed</li>
+        <li>Add stable-ssid support for cloned-mac</li>
+        <li>Rename Windows Live provider to "Microsoft" in Online Accounts</li>
+        <li>Rename MS365 provider in Online Accounts</li>
+        <li>Close new online account dialog when account creation is complete</li>
+        <li>Modernize Printer Jobs dialog</li>
+        <li>Modernize Printer Details dialog</li>
+        <li>Fix spelling inconsistency for the word "Cancelled"</li>
+        <li>Close "Add Printer" dialog when pressing "Escape" key</li>
+        <li>Improve text description of the Sharing features</li>
+        <li>Add DAV address in the File Sharing dialog</li>
+        <li>Add notice about shared files not being encrypted</li>
+        <li>Hide Sharing settings panel when none of the Sharing features are available in the system</li>
+        <li>Use AppInfo to get app icons and fallback to icon-theme in the Sound settings</li>
+        <li>Adjust sound of the "Click" sound effect closer to the freedesktop.org bell sound</li>
+        <li>Make sound setting sliders more accessible with keyboard</li>
+        <li>Load subpages on demand to speed up System settings panel startup</li>
+        <li>Don't show unwanted system accounts in User settings</li>
+        <li>Fix parental controls settings visibility in User settings</li>
+        <li>Rename "Add Enterprise User" to "Add Enterprise Login" in User settings</li>
+        <li>Always allow calibration for display tablets in Wacom settings</li>
+        <li>Enforce a Z-shape sequence of calibration points in Wacom settings</li>
+        <li>Fix wrong alignment detection in the calibrator in Wacom settings</li>
+        <li>Reset the clock after any click on the calibrator in Wacom settings</li>
+        <li>Up the calibrator threshold to 50 pixels in Wacom settings</li>
+        <li>Fall back to the generic tablet provided by libwacom in Wacom settings</li>
+        <li>If we have two identical monitors, suffix the connector name in Wacom settings</li>
       </ul>
     </description>
     </release>
