@@ -20,10 +20,9 @@
                 <property name="max-width-chars">50</property>
                 <property name="valign">center</property>
                 <property name="wrap">True</property>
-                <!-- This is a hack to make the screen reader read the text of the label. See issue #2508 -->
-                <property name="selectable" bind-source="popover" bind-property="visible" bind-flags="invert-boolean">True</property>
               </object>
             </child>
+            <signal name="show" handler="popover_show_cb" object="CcListRowInfoButton" swapped="yes"/>
           </object>
         </property>
       </object>

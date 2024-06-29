@@ -90,6 +90,16 @@ cc_list_row_info_button_set_property (GObject      *object,
 }
 
 static void
+popover_show_cb (CcListRowInfoButton *self)
+{
+  const char* label = gtk_label_get_label (self->label);
+
+  gtk_accessible_announce (GTK_ACCESSIBLE (self),
+                           label,
+                           GTK_ACCESSIBLE_ANNOUNCEMENT_PRIORITY_MEDIUM);
+}
+
+static void
 cc_list_row_info_button_dispose (GObject *object)
 {
   CcListRowInfoButton *self = CC_LIST_ROW_INFO_BUTTON (object);
@@ -124,6 +134,8 @@ cc_list_row_info_button_class_init (CcListRowInfoButtonClass *klass)
 
   gtk_widget_class_bind_template_child (widget_class, CcListRowInfoButton, button);
   gtk_widget_class_bind_template_child (widget_class, CcListRowInfoButton, label);
+
+  gtk_widget_class_bind_template_callback (widget_class, popover_show_cb);
 
   gtk_widget_class_set_layout_manager_type (widget_class, GTK_TYPE_BIN_LAYOUT);
 }
