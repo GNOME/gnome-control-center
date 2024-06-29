@@ -132,7 +132,7 @@ pulse_req_version = '>= 2.0'
 
 gtk_dep = dependency(
   'gtk4',
-  version: '>= 4.11.2',
+  version: '>= 4.15.2',
   fallback: 'gtk',
   default_options: [
     'introspection=disabled',
