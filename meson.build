@@ -126,6 +126,7 @@ libgvc = subproject(
 )
 libgvc_dep = libgvc.get_variable('libgvc_dep')
 
+libadwaita_version = '>= 1.6.alpha'
 goa_req_version = '>= 3.49.1'
 pulse_req_version = '>= 2.0'
 
@@ -144,14 +145,16 @@ gtk_dep = dependency(
 
 libadwaita_dep = dependency(
   'libadwaita-1',
-  version: '>= 1.6.alpha',
+  version: libadwaita_version,
   required: false
 )
 # FIXME: this is a workaround because interactive-tests don't work with libadwaita as a subproject. See !1754
 libadwaita_is_subproject = not libadwaita_dep.found()
 if libadwaita_is_subproject
-  libadwaita = subproject(
-    'libadwaita',
+  libadwaita_dep = dependency(
+    'libadwaita-1',
+    version: libadwaita_version,
+    fallback: 'libadwaita',
     default_options: [
       'examples=false',
       'introspection=disabled',
@@ -159,7 +162,6 @@ if libadwaita_is_subproject
       'vapi=false',
     ],
   )
-  libadwaita_dep = libadwaita.get_variable('libadwaita_dep')
 endif
 
 tecla_dep = dependency(
