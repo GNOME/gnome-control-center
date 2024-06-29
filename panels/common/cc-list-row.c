@@ -101,6 +101,16 @@ cc_list_row_set_property (GObject      *object,
 }
 
 static void
+cc_list_row_sensitivity_changed_cb (CcListRow *self)
+{
+  if (!gtk_widget_get_sensitive (GTK_WIDGET (self)))
+    gtk_widget_add_css_class (GTK_WIDGET (self->arrow), "dim-label");
+
+  else
+    gtk_widget_remove_css_class (GTK_WIDGET (self->arrow), "dim-label");
+}
+
+static void
 cc_list_row_class_init (CcListRowClass *klass)
 {
   GObjectClass   *object_class = G_OBJECT_CLASS (klass);
@@ -131,6 +141,8 @@ cc_list_row_class_init (CcListRowClass *klass)
 
   gtk_widget_class_bind_template_child (widget_class, CcListRow, secondary_label);
   gtk_widget_class_bind_template_child (widget_class, CcListRow, arrow);
+
+  gtk_widget_class_bind_template_callback (widget_class, cc_list_row_sensitivity_changed_cb);
 }
 
 static void
