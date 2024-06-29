@@ -302,6 +302,8 @@ cc_application_startup (GApplication *application)
 
   G_APPLICATION_CLASS (cc_application_parent_class)->startup (application);
 
+  gtk_window_set_default_icon_name (APPLICATION_ID);
+
   gtk_application_set_accels_for_action (GTK_APPLICATION (application),
                                          "app.help", help_accels);
 
@@ -369,7 +371,7 @@ GtkApplication *
 cc_application_new (void)
 {
   return g_object_new (CC_TYPE_APPLICATION,
-                       "application-id", "org.gnome.Settings",
+                       "application-id", APPLICATION_ID,
                        "flags", G_APPLICATION_HANDLES_COMMAND_LINE,
                        NULL);
 }

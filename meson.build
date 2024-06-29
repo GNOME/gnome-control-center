@@ -43,6 +43,7 @@ version_split = meson.project_version().split('.')
 # defines
 set_defines = [
   # package
+  ['APPLICATION_ID', application_id],
   ['PACKAGE', meson.project_name()],
   ['PACKAGE_VERSION', meson.project_version()],
   ['VERSION', meson.project_version()],
