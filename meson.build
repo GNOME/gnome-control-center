@@ -127,7 +127,7 @@ libgvc = subproject(
 libgvc_dep = libgvc.get_variable('libgvc_dep')
 
 libadwaita_version = '>= 1.6.alpha'
-goa_req_version = '>= 3.49.1'
+goa_req_version = '>= 3.51.0'
 pulse_req_version = '>= 2.0'
 
 gtk_dep = dependency(
@@ -186,7 +186,7 @@ gnome_desktop_dep = dependency('gnome-desktop-4')
 gnome_bg_dep = dependency('gnome-bg-4')
 gnome_rr_dep = dependency('gnome-rr-4')
 gnome_settings_dep = dependency('gnome-settings-daemon', version: '>= 41.0')
-goa_dep = dependency('goa-1.0', version: goa_req_version)
+goa_dep = dependency('goa-1.0', version: goa_req_version, fallback: 'goa')
 gsettings_desktop_dep = dependency('gsettings-desktop-schemas', version: '>= 47.alpha')
 libxml_dep = dependency('libxml-2.0')
 pulse_dep = dependency('libpulse', version: pulse_req_version)
