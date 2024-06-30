@@ -22,12 +22,14 @@
 
 #include "cc-illustrated-row.h"
 
+#include "cc-mask-paintable.h"
+
 struct _CcIllustratedRow
 {
   CcVerticalRow      parent;
 
   GtkBox            *picture_box;
-  GtkPicture        *picture;
+  CcMaskPaintable   *picture_mask;
   gchar             *resource_path;
 
   GtkMediaStream    *media_stream;
@@ -47,19 +49,28 @@ static GParamSpec *props[N_PROPS] = { NULL, };
 static void
 on_picture_leave_cb (CcIllustratedRow *self)
 {
-  GtkMediaStream *stream = GTK_MEDIA_STREAM (gtk_picture_get_paintable (self->picture));
-
-  gtk_media_stream_set_loop (stream, FALSE);
-  gtk_media_stream_pause (stream);
+  gtk_media_stream_set_loop (self->media_stream, FALSE);
+  gtk_media_stream_pause (self->media_stream);
 }
 
 static void
 on_picture_hover_cb (CcIllustratedRow *self)
 {
-  GtkMediaStream *stream = GTK_MEDIA_STREAM (gtk_picture_get_paintable (self->picture));
+  gtk_media_stream_set_loop (self->media_stream, TRUE);
+  gtk_media_stream_play (self->media_stream);
+}
 
-  gtk_media_stream_set_loop (stream, TRUE);
-  gtk_media_stream_play (stream);
+static void
+update_mask_color (CcIllustratedRow *self)
+{
+  AdwStyleManager *style_manager = adw_style_manager_get_default ();
+  AdwAccentColor color;
+  GdkRGBA rgba;
+
+  color = adw_style_manager_get_accent_color (style_manager);
+  adw_accent_color_to_rgba (color, &rgba);
+
+  cc_mask_paintable_set_rgba (self->picture_mask, &rgba);
 }
 
 static void
@@ -128,8 +139,8 @@ cc_illustrated_row_class_init (CcIllustratedRowClass *klass)
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/common/cc-illustrated-row.ui");
 
-  gtk_widget_class_bind_template_child (widget_class, CcIllustratedRow, picture);
   gtk_widget_class_bind_template_child (widget_class, CcIllustratedRow, picture_box);
+  gtk_widget_class_bind_template_child (widget_class, CcIllustratedRow, picture_mask);
 
   gtk_widget_class_bind_template_callback (widget_class, on_picture_hover_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_picture_leave_cb);
@@ -138,9 +149,20 @@ cc_illustrated_row_class_init (CcIllustratedRowClass *klass)
 static void
 cc_illustrated_row_init (CcIllustratedRow *self)
 {
+  AdwStyleManager *style_manager = adw_style_manager_get_default ();
+
   gtk_widget_init_template (GTK_WIDGET (self));
   gtk_widget_set_name (GTK_WIDGET (self), "illustrated-row");
   gtk_widget_add_css_class (GTK_WIDGET (self), "illustrated-row");
+
+  update_mask_color (self);
+
+  g_signal_connect_object (style_manager, "notify::dark",
+                           G_CALLBACK (update_mask_color), self,
+                           G_CONNECT_SWAPPED);
+  g_signal_connect_object (style_manager, "notify::accent-color",
+                           G_CALLBACK (update_mask_color), self,
+                           G_CONNECT_SWAPPED);
 }
 
 void
@@ -155,7 +177,7 @@ cc_illustrated_row_set_resource (CcIllustratedRow *self,
   g_set_str (&self->resource_path, resource_path);
   self->media_stream = gtk_media_file_new_for_resource (self->resource_path);
 
-  gtk_picture_set_paintable (self->picture, GDK_PAINTABLE (self->media_stream));
+  cc_mask_paintable_set_paintable (self->picture_mask, GDK_PAINTABLE (self->media_stream));
   gtk_widget_set_visible (GTK_WIDGET (self->picture_box),
                           self->resource_path != NULL &&
                           g_strcmp0 (self->resource_path, "") != 0);
