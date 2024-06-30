@@ -11,15 +11,9 @@
             <child>
               <object class="AdwPreferencesGroup" id="switch_group">
                 <child>
-                  <object class="AdwActionRow" id="switch_row">
+                  <object class="AdwSwitchRow" id="switch_row">
                     <property name="selectable">False</property>
-                    <property name="activatable-widget">enabled_switch</property>
-                    <child>
-                      <object class="GtkSwitch" id="enabled_switch">
-                        <property name="valign">center</property>
-                        <signal name="state-set" handler="enable_switch_changed_cb" object="CcXkbModifierPage" swapped="yes"/>
-                      </object>
-                    </child>
+                    <signal name="notify::active" handler="switch_row_changed_cb" object="CcXkbModifierPage" swapped="yes"/>
                   </object>
                 </child>
               </object>

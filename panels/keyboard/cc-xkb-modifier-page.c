@@ -28,10 +28,9 @@ struct _CcXkbModifierPage
   AdwNavigationPage   parent_instance;
 
   AdwPreferencesPage *xkb_modifier_page;
-  GtkSwitch      *enabled_switch;
   AdwPreferencesGroup *options_group;
   AdwPreferencesGroup *switch_group;
-  AdwActionRow   *switch_row;
+  AdwSwitchRow        *switch_row;
 
   GSettings      *input_source_settings;
   const CcXkbModifier *modifier;
@@ -95,7 +94,7 @@ update_active_radio (CcXkbModifierPage *self)
         continue;
 
       gtk_check_button_set_active (GTK_CHECK_BUTTON (radio), TRUE);
-      gtk_switch_set_active (self->enabled_switch, TRUE);
+      adw_switch_row_set_active (self->switch_row, TRUE);
       return;
     }
 
@@ -104,11 +103,11 @@ update_active_radio (CcXkbModifierPage *self)
       default_option = get_xkb_option_from_name(self->modifier, self->modifier->default_option);
       rightalt_radio = get_radio_button_from_xkb_option_name (self, default_option->xkb_option);
       gtk_check_button_set_active (GTK_CHECK_BUTTON (rightalt_radio), TRUE);
-      gtk_switch_set_active (self->enabled_switch, TRUE);
+      adw_switch_row_set_active (self->switch_row, TRUE);
     }
   else
     {
-      gtk_switch_set_active (self->enabled_switch, FALSE);
+      adw_switch_row_set_active (self->switch_row, FALSE);
     }
 }
 
@@ -161,7 +160,7 @@ on_active_radio_changed_cb (CcXkbModifierPage *self,
   if (!gtk_check_button_get_active (GTK_CHECK_BUTTON (radio)))
     return;
 
-  if (!gtk_switch_get_state (self->enabled_switch))
+  if (!adw_switch_row_get_active (self->switch_row))
     return;
 
   xkb_option = (gchar *)g_object_get_data (G_OBJECT (radio), "xkb-option");
@@ -176,15 +175,14 @@ on_xkb_options_changed_cb (CcXkbModifierPage *self)
 }
 
 static gboolean
-enable_switch_changed_cb (CcXkbModifierPage *self,
-                          gboolean           state)
+switch_row_changed_cb (CcXkbModifierPage *self)
 {
   gchar *xkb_option;
   GSList *l;
 
-  gtk_widget_set_sensitive (GTK_WIDGET (self->options_group), state);
+  gtk_widget_set_sensitive (GTK_WIDGET (self->options_group), adw_switch_row_get_active (self->switch_row));
 
-  if (state)
+  if (adw_switch_row_get_active (self->switch_row))
     {
       for (l = self->radio_group; l != NULL; l = l->next)
         {
@@ -225,12 +223,11 @@ cc_xkb_modifier_page_class_init (CcXkbModifierPageClass *klass)
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/keyboard/cc-xkb-modifier-page.ui");
 
   gtk_widget_class_bind_template_child (widget_class, CcXkbModifierPage, xkb_modifier_page);
-  gtk_widget_class_bind_template_child (widget_class, CcXkbModifierPage, enabled_switch);
   gtk_widget_class_bind_template_child (widget_class, CcXkbModifierPage, options_group);
   gtk_widget_class_bind_template_child (widget_class, CcXkbModifierPage, switch_group);
   gtk_widget_class_bind_template_child (widget_class, CcXkbModifierPage, switch_row);
 
-  gtk_widget_class_bind_template_callback (widget_class, enable_switch_changed_cb);
+  gtk_widget_class_bind_template_callback (widget_class, switch_row_changed_cb);
 }
 
 static void
@@ -297,7 +294,7 @@ cc_xkb_modifier_page_new (GSettings *input_settings,
   gtk_widget_set_visible (GTK_WIDGET (self->switch_group), modifier->default_option == NULL);
   add_radio_buttons (self);
   update_active_radio (self);
-  gtk_widget_set_sensitive (GTK_WIDGET (self->options_group), gtk_switch_get_state (self->enabled_switch));
+  gtk_widget_set_sensitive (GTK_WIDGET (self->options_group), adw_switch_row_get_active (self->switch_row));
 
   return self;
 }
