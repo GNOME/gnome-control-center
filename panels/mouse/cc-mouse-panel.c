@@ -76,54 +76,6 @@ struct _CcMousePanel
 
 CC_PANEL_REGISTER (CcMousePanel, cc_mouse_panel)
 
-#define ASSET_RESOURCES_PREFIX "/org/gnome/control-center/mouse/assets/"
-
-static void
-setup_illustrations (CcMousePanel *self)
-{
-  AdwStyleManager *style_manager = adw_style_manager_get_default ();
-  gboolean use_dark = adw_style_manager_get_dark (style_manager);
-  struct {
-    CcSplitRow *row;
-    const gchar *default_resource;
-    const gchar *alternative_resource;
-  } row_resources[] = {
-    { self->mouse_scroll_direction_row, "scroll-traditional", "scroll-natural" },
-    { self->two_finger_push_row, "push-to-click-anywhere", "push-areas" },
-    { self->touchpad_scroll_method_row, "scroll-2finger", "edge-scroll" },
-    { self->touchpad_scroll_direction_row, "touch-scroll-traditional", "touch-scroll-natural" },
-  };
-
-  for (gsize i = 0; i < G_N_ELEMENTS (row_resources); i++)
-    {
-      g_autofree gchar *alternative_resource = NULL;
-      g_autofree gchar *default_resource = NULL;
-      const gchar *style_suffix;
-
-      style_suffix = use_dark ? "d" : "l";
-      default_resource = g_strdup_printf (ASSET_RESOURCES_PREFIX "%s-%s.webm",
-                                          row_resources[i].default_resource,
-                                          style_suffix);
-      alternative_resource = g_strdup_printf (ASSET_RESOURCES_PREFIX "%s-%s.webm",
-                                              row_resources[i].alternative_resource,
-                                              style_suffix);
-
-      cc_split_row_set_default_illustration_resource (row_resources[i].row, default_resource);
-      cc_split_row_set_alternative_illustration_resource (row_resources[i].row, alternative_resource);
-    }
-
-  /* Tap to click */
-  {
-    g_autofree gchar *resource = NULL;
-
-    resource = g_strdup_printf (ASSET_RESOURCES_PREFIX "%s-%s.webm",
-                                "tap-to-click",
-                                use_dark ? "d" : "l");
-
-    cc_illustrated_row_set_resource (self->tap_to_click_row, resource);
-  }
-}
-
 static void
 setup_touchpad_options (CcMousePanel *self)
 {
@@ -400,13 +352,6 @@ setup_dialog (CcMousePanel *self)
                    G_SETTINGS_BIND_DEFAULT);
 
   setup_touchpad_options (self);
-
-  g_signal_connect_object (adw_style_manager_get_default (),
-                           "notify::dark",
-                           G_CALLBACK (setup_illustrations),
-                           self,
-                           G_CONNECT_SWAPPED);
-  setup_illustrations (self);
 }
 
 /* Callback issued when a button is clicked on the dialog */
