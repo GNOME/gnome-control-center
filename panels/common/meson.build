@@ -47,6 +47,7 @@ sources = common_sources + files(
   'cc-language-row.c',
   'cc-list-row.c',
   'cc-list-row-info-button.c',
+  'cc-mask-paintable.c',
   'cc-time-editor.c',
   'cc-permission-infobar.c',
   'cc-split-row.c',
