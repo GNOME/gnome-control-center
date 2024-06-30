@@ -22,6 +22,8 @@
 
 #include "cc-split-row.h"
 
+#include "cc-mask-paintable.h"
+
 struct _CcSplitRow
 {
   CcVerticalRow      parent;
@@ -31,6 +33,9 @@ struct _CcSplitRow
 
   GtkPicture        *default_option_picture;
   GtkPicture        *alternative_option_picture;
+
+  CcMaskPaintable   *default_option_mask;
+  CcMaskPaintable   *alternative_option_mask;
 
   GtkCheckButton    *alternative_option_checkbutton;
   GtkCheckButton    *default_option_checkbutton;
@@ -78,12 +83,12 @@ on_alternative_option_click_released_cb (CcSplitRow *self)
 }
 
 static void
-focus_leave (GtkPicture *picture)
+focus_leave (CcMaskPaintable *mask)
 {
   GtkMediaStream *stream;
   GdkPaintable *paintable;
 
-  paintable = gtk_picture_get_paintable (picture);
+  paintable = cc_mask_paintable_get_paintable (mask);
 
   if (!GTK_IS_MEDIA_STREAM (paintable))
     return;
@@ -96,22 +101,22 @@ focus_leave (GtkPicture *picture)
 static void
 on_default_option_focus_leave_cb (CcSplitRow *self)
 {
-  focus_leave (self->default_option_picture);
+  focus_leave (self->default_option_mask);
 }
 
 static void
 on_alternative_option_focus_leave_cb (CcSplitRow *self)
 {
-  focus_leave (self->alternative_option_picture);
+  focus_leave (self->alternative_option_mask);
 }
 
 static void
-focus_enter (GtkPicture *picture)
+focus_enter (CcMaskPaintable *mask)
 {
   GtkMediaStream *stream;
   GdkPaintable *paintable;
 
-  paintable = gtk_picture_get_paintable (picture);
+  paintable = cc_mask_paintable_get_paintable (mask);
 
   if (!GTK_IS_MEDIA_STREAM (paintable))
     return;
@@ -124,19 +129,33 @@ focus_enter (GtkPicture *picture)
 static void
 on_default_option_focus_enter_cb (CcSplitRow *self)
 {
-  focus_enter (self->default_option_picture);
+  focus_enter (self->default_option_mask);
 }
 
 static void
 on_alternative_option_focus_enter_cb (CcSplitRow *self)
 {
-  focus_enter (self->alternative_option_picture);
+  focus_enter (self->alternative_option_mask);
 }
 
 static void
 on_checkbutton_toggled_cb (CcSplitRow *self)
 {
   g_object_notify_by_pspec (G_OBJECT (self), props[PROP_USE_DEFAULT]);
+}
+
+static void
+update_mask_color (CcSplitRow *self)
+{
+  AdwStyleManager *style_manager = adw_style_manager_get_default ();
+  AdwAccentColor color;
+  GdkRGBA rgba;
+
+  color = adw_style_manager_get_accent_color (style_manager);
+  adw_accent_color_to_rgba (color, &rgba);
+
+  cc_mask_paintable_set_rgba (self->default_option_mask, &rgba);
+  cc_mask_paintable_set_rgba (self->alternative_option_mask, &rgba);
 }
 
 static void
@@ -301,8 +320,10 @@ cc_split_row_class_init (CcSplitRowClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcSplitRow, size_group);
   gtk_widget_class_bind_template_child (widget_class, CcSplitRow, alternative_option_checkbutton);
   gtk_widget_class_bind_template_child (widget_class, CcSplitRow, alternative_option_picture);
+  gtk_widget_class_bind_template_child (widget_class, CcSplitRow, alternative_option_mask);
   gtk_widget_class_bind_template_child (widget_class, CcSplitRow, default_option_checkbutton);
   gtk_widget_class_bind_template_child (widget_class, CcSplitRow, default_option_picture);
+  gtk_widget_class_bind_template_child (widget_class, CcSplitRow, default_option_mask);
 
   gtk_widget_class_bind_template_callback (widget_class, on_checkbutton_toggled_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_default_option_click_released_cb);
@@ -316,9 +337,20 @@ cc_split_row_class_init (CcSplitRowClass *klass)
 static void
 cc_split_row_init (CcSplitRow *self)
 {
+  AdwStyleManager *style_manager = adw_style_manager_get_default ();
+
   gtk_widget_init_template (GTK_WIDGET (self));
   gtk_widget_set_name (GTK_WIDGET (self), "split-row");
   gtk_widget_add_css_class (GTK_WIDGET (self), "split-row");
+
+  update_mask_color (self);
+
+  g_signal_connect_object (style_manager, "notify::dark",
+                           G_CALLBACK (update_mask_color), self,
+                           G_CONNECT_SWAPPED);
+  g_signal_connect_object (style_manager, "notify::accent-color",
+                           G_CALLBACK (update_mask_color), self,
+                           G_CONNECT_SWAPPED);
 }
 
 const gchar *
@@ -338,7 +370,7 @@ cc_split_row_set_default_illustration_resource (CcSplitRow  *self,
   g_set_str (&self->default_resource_path, resource_path);
   media_file = gtk_media_file_new_for_resource (resource_path);
 
-  gtk_picture_set_paintable (self->default_option_picture, GDK_PAINTABLE (media_file));
+  cc_mask_paintable_set_paintable (self->default_option_mask, GDK_PAINTABLE (media_file));
   gtk_widget_set_visible (GTK_WIDGET (self->default_option_picture),
                           resource_path != NULL && g_strcmp0 (resource_path, "") != 0);
 
@@ -363,7 +395,7 @@ cc_split_row_set_alternative_illustration_resource (CcSplitRow  *self,
   media_file = gtk_media_file_new_for_resource (resource_path);
   gtk_media_stream_set_loop (media_file, TRUE);
 
-  gtk_picture_set_paintable (self->alternative_option_picture, GDK_PAINTABLE (media_file));
+  cc_mask_paintable_set_paintable (self->alternative_option_mask, GDK_PAINTABLE (media_file));
   gtk_widget_set_visible (GTK_WIDGET (self->alternative_option_picture),
                           resource_path != NULL && g_strcmp0 (resource_path, "") != 0);
 
