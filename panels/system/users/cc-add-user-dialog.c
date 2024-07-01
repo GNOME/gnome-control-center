@@ -42,16 +42,16 @@ struct _CcAddUserDialog {
         AdwDialog parent_instance;
 
         GtkButton          *add_button;
-        GtkSwitch          *local_account_type_switch;
-        AdwPreferencesPage *local_page;
-        AdwPasswordEntryRow *local_password_row;
-        GtkLevelBar        *local_strength_indicator;
-        CcEntryFeedback    *local_password_hint;
-        GtkCheckButton     *local_password_radio;
-        AdwEntryRow        *local_name_row;
-        AdwActionRow       *local_username_row;
-        CcEntryFeedback    *local_verify_password_hint;
-        AdwPasswordEntryRow *local_verify_password_row;
+        GtkSwitch          *account_type_switch;
+        AdwPreferencesPage *page;
+        AdwPasswordEntryRow *password_row;
+        GtkLevelBar        *strength_indicator;
+        CcEntryFeedback    *password_hint;
+        GtkCheckButton     *password_radio;
+        AdwEntryRow        *name_row;
+        AdwActionRow       *username_row;
+        CcEntryFeedback    *verify_password_hint;
+        AdwPasswordEntryRow *verify_password_row;
         CcEntryFeedback    *name_feedback;
         AdwNavigationView  *navigation;
         AdwPreferencesPage *password_page;
@@ -63,8 +63,8 @@ struct _CcAddUserDialog {
         ActUser            *user;
 
         gboolean            has_custom_username;
-        ActUserPasswordMode local_password_mode;
-        gint                local_password_timeout_id;
+        ActUserPasswordMode password_mode;
+        gint                password_timeout_id;
 };
 
 G_DEFINE_TYPE (CcAddUserDialog, cc_add_user_dialog, ADW_TYPE_DIALOG);
@@ -125,9 +125,9 @@ user_loaded_cb (CcAddUserDialog *self,
   finish_action (self);
 
   /* Set a password for the user */
-  password = gtk_editable_get_text (GTK_EDITABLE (self->local_password_row));
-  act_user_set_password_mode (user, self->local_password_mode);
-  if (self->local_password_mode == ACT_USER_PASSWORD_MODE_REGULAR)
+  password = gtk_editable_get_text (GTK_EDITABLE (self->password_row));
+  act_user_set_password_mode (user, self->password_mode);
+  if (self->password_mode == ACT_USER_PASSWORD_MODE_REGULAR)
         act_user_set_password (user, password, "");
 
   self->user = g_object_ref (user);
@@ -151,7 +151,7 @@ create_user_done (ActUserManager  *manager,
                 g_debug ("Failed to create user: %s", error->message);
                 if (!g_error_matches (error, ACT_USER_MANAGER_ERROR, ACT_USER_MANAGER_ERROR_PERMISSION_DENIED))
                        show_error_dialog (self, _("Failed to add account"), error);
-                gtk_widget_grab_focus (GTK_WIDGET (self->local_name_row));
+                gtk_widget_grab_focus (GTK_WIDGET (self->name_row));
         } else {
                 g_debug ("Created user: %s", act_user_get_user_name (user));
 
@@ -164,7 +164,7 @@ create_user_done (ActUserManager  *manager,
 }
 
 static void
-local_create_user (CcAddUserDialog *self)
+create_user (CcAddUserDialog *self)
 {
         ActUserManager *manager;
         const gchar *username;
@@ -173,9 +173,9 @@ local_create_user (CcAddUserDialog *self)
 
         begin_action (self);
 
-        name = gtk_editable_get_text (GTK_EDITABLE (self->local_name_row));
-        username = gtk_editable_get_text (GTK_EDITABLE (self->local_username_row));
-        account_type = gtk_switch_get_active (self->local_account_type_switch) ? ACT_USER_ACCOUNT_TYPE_ADMINISTRATOR : ACT_USER_ACCOUNT_TYPE_STANDARD;
+        name = gtk_editable_get_text (GTK_EDITABLE (self->name_row));
+        username = gtk_editable_get_text (GTK_EDITABLE (self->username_row));
+        account_type = gtk_switch_get_active (self->account_type_switch) ? ACT_USER_ACCOUNT_TYPE_ADMINISTRATOR : ACT_USER_ACCOUNT_TYPE_STANDARD;
 
         g_debug ("Creating local user: %s", username);
 
@@ -199,11 +199,11 @@ update_password_strength (CcAddUserDialog *self)
         gint strength_level;
         gboolean valid;
 
-        password = gtk_editable_get_text (GTK_EDITABLE (self->local_password_row));
-        username = gtk_editable_get_text (GTK_EDITABLE (self->local_username_row));
+        password = gtk_editable_get_text (GTK_EDITABLE (self->password_row));
+        username = gtk_editable_get_text (GTK_EDITABLE (self->username_row));
 
         if (strlen (password) == 0) {
-                cc_entry_feedback_reset (self->local_password_hint);
+                cc_entry_feedback_reset (self->password_hint);
 
                 return 0;
         }
@@ -211,12 +211,12 @@ update_password_strength (CcAddUserDialog *self)
         pw_strength (password, NULL, username, &hint, &strength_level);
         valid = strength_level > 1;
 
-        gtk_level_bar_set_value (self->local_strength_indicator, strength_level);
-        cc_entry_feedback_update (self->local_password_hint, valid ? "emblem-ok" : "dialog-warning", hint);
+        gtk_level_bar_set_value (self->strength_indicator, strength_level);
+        cc_entry_feedback_update (self->password_hint, valid ? "emblem-ok" : "dialog-warning", hint);
 
-        verify = gtk_editable_get_text (GTK_EDITABLE (self->local_verify_password_row));
+        verify = gtk_editable_get_text (GTK_EDITABLE (self->verify_password_row));
         if (strlen (verify) == 0) {
-                gtk_widget_set_sensitive (GTK_WIDGET (self->local_verify_password_row), valid);
+                gtk_widget_set_sensitive (GTK_WIDGET (self->verify_password_row), valid);
         }
 
         return strength_level;
@@ -229,8 +229,8 @@ validate_password (CcAddUserDialog *self)
         const gchar *verify;
         gint strength;
 
-        password = gtk_editable_get_text (GTK_EDITABLE (self->local_password_row));
-        verify = gtk_editable_get_text (GTK_EDITABLE (self->local_verify_password_row));
+        password = gtk_editable_get_text (GTK_EDITABLE (self->password_row));
+        verify = gtk_editable_get_text (GTK_EDITABLE (self->verify_password_row));
         strength = update_password_strength (self);
 
         return strength > 1 && strcmp (password, verify) == 0;
@@ -253,7 +253,7 @@ static void dialog_validate_cb (GObject *source_object,
                 username_valid = TRUE;
         }
 
-        name = gtk_editable_get_text (GTK_EDITABLE (self->local_name_row));
+        name = gtk_editable_get_text (GTK_EDITABLE (self->name_row));
         gtk_widget_set_sensitive (GTK_WIDGET (self->add_button), username_valid && is_valid_name (name));
 
         if (tip && strlen (tip) > 0) {
@@ -270,13 +270,13 @@ update_password_match (CcAddUserDialog *self)
         const gchar *verify;
         gboolean match;
 
-        password = gtk_editable_get_text (GTK_EDITABLE (self->local_password_row));
-        verify = gtk_editable_get_text (GTK_EDITABLE (self->local_verify_password_row));
+        password = gtk_editable_get_text (GTK_EDITABLE (self->password_row));
+        verify = gtk_editable_get_text (GTK_EDITABLE (self->verify_password_row));
         match = g_str_equal (password, verify);
 
-        gtk_widget_set_visible (GTK_WIDGET (self->local_verify_password_hint),
+        gtk_widget_set_visible (GTK_WIDGET (self->verify_password_hint),
                                 strlen (verify) != 0);
-        cc_entry_feedback_update (self->local_verify_password_hint,
+        cc_entry_feedback_update (self->verify_password_hint,
                                   match ? "emblem-ok" : "dialog-error",
                                   match ? _("Passwords match") : _("Passwords do not match"));
 }
@@ -290,15 +290,15 @@ generate_password (CcAddUserDialog *self)
         if (pwd == NULL)
                 return;
 
-        gtk_editable_set_text (GTK_EDITABLE (self->local_password_row), pwd);
-        gtk_editable_set_text (GTK_EDITABLE (self->local_verify_password_row), pwd);
-        gtk_widget_set_sensitive (GTK_WIDGET (self->local_verify_password_row), TRUE);
+        gtk_editable_set_text (GTK_EDITABLE (self->password_row), pwd);
+        gtk_editable_set_text (GTK_EDITABLE (self->verify_password_row), pwd);
+        gtk_widget_set_sensitive (GTK_WIDGET (self->verify_password_row), TRUE);
 }
 
 static gboolean
-local_password_timeout (CcAddUserDialog *self)
+password_timeout (CcAddUserDialog *self)
 {
-        self->local_password_timeout_id = 0;
+        self->password_timeout_id = 0;
 
         gtk_widget_set_sensitive (self->password_page_add_button, validate_password (self));
         update_password_match (self);
@@ -309,22 +309,22 @@ local_password_timeout (CcAddUserDialog *self)
 static gboolean
 password_focus_out_event_cb (CcAddUserDialog *self)
 {
-        g_clear_handle_id (&self->local_password_timeout_id, g_source_remove);
+        g_clear_handle_id (&self->password_timeout_id, g_source_remove);
 
-        local_password_timeout (self);
+        password_timeout (self);
 
         return FALSE;
 }
 
 static gboolean
-local_password_entry_key_press_event_cb (CcAddUserDialog       *self,
+password_entry_key_press_event_cb (CcAddUserDialog       *self,
                                          guint                  keyval,
                                          guint                  keycode,
                                          GdkModifierType        state,
                                          GtkEventControllerKey *controller)
 {
         if (keyval == GDK_KEY_Tab)
-               local_password_timeout (self);
+               password_timeout (self);
 
         return FALSE;
 }
@@ -332,32 +332,32 @@ local_password_entry_key_press_event_cb (CcAddUserDialog       *self,
 static void
 recheck_password_match (CcAddUserDialog *self)
 {
-        g_clear_handle_id (&self->local_password_timeout_id, g_source_remove);
+        g_clear_handle_id (&self->password_timeout_id, g_source_remove);
 
         gtk_widget_set_sensitive (GTK_WIDGET (self->password_page_add_button), FALSE);
 
-        self->local_password_timeout_id = g_timeout_add (PASSWORD_CHECK_TIMEOUT, (GSourceFunc) local_password_timeout, self);
+        self->password_timeout_id = g_timeout_add (PASSWORD_CHECK_TIMEOUT, (GSourceFunc) password_timeout, self);
 }
 
 static void
-local_password_entry_changed_cb (CcAddUserDialog *self)
+password_entry_changed_cb (CcAddUserDialog *self)
 {
         recheck_password_match (self);
 }
 
 static void
-local_verify_entry_changed_cb (CcAddUserDialog *self)
+verify_entry_changed_cb (CcAddUserDialog *self)
 {
         recheck_password_match (self);
 }
 
 static void
-local_password_radio_changed_cb (CcAddUserDialog *self)
+password_radio_changed_cb (CcAddUserDialog *self)
 {
         gboolean active;
 
-        active = gtk_check_button_get_active (GTK_CHECK_BUTTON (self->local_password_radio));
-        self->local_password_mode = active ? ACT_USER_PASSWORD_MODE_REGULAR : ACT_USER_PASSWORD_MODE_SET_AT_LOGIN;
+        active = gtk_check_button_get_active (GTK_CHECK_BUTTON (self->password_radio));
+        self->password_mode = active ? ACT_USER_PASSWORD_MODE_REGULAR : ACT_USER_PASSWORD_MODE_SET_AT_LOGIN;
         gtk_button_set_label (self->add_button, active ? _("_Next") : _("_Add"));
 
         dialog_validate (self);
@@ -368,7 +368,7 @@ dialog_validate (CcAddUserDialog *self)
 {
         const gchar *username;
 
-        username = gtk_editable_get_text (GTK_EDITABLE (self->local_username_row));
+        username = gtk_editable_get_text (GTK_EDITABLE (self->username_row));
         is_valid_username_async (username, NULL, dialog_validate_cb, g_object_ref (self));
 }
 
@@ -389,7 +389,7 @@ cc_add_user_dialog_init (CcAddUserDialog *self)
 
         self->cancellable = g_cancellable_new ();
 
-        self->local_password_mode = ACT_USER_PASSWORD_MODE_SET_AT_LOGIN;
+        self->password_mode = ACT_USER_PASSWORD_MODE_SET_AT_LOGIN;
         dialog_validate (self);
         update_password_strength (self);
 }
@@ -424,13 +424,13 @@ add_button_clicked_cb (CcAddUserDialog *self)
                 return;
         }
 
-        if (self->local_password_mode == ACT_USER_PASSWORD_MODE_REGULAR) {
+        if (self->password_mode == ACT_USER_PASSWORD_MODE_REGULAR) {
                 adw_navigation_view_push_by_tag (self->navigation, "password-page");
 
                 return;
         }
 
-        local_create_user (self);
+        create_user (self);
 }
 
 static void
@@ -443,7 +443,7 @@ cc_add_user_dialog_dispose (GObject *obj)
 
         g_clear_object (&self->user);
 
-        g_clear_handle_id (&self->local_password_timeout_id, g_source_remove);
+        g_clear_handle_id (&self->password_timeout_id, g_source_remove);
 
         G_OBJECT_CLASS (cc_add_user_dialog_parent_class)->dispose (obj);
 }
@@ -471,16 +471,16 @@ cc_add_user_dialog_class_init (CcAddUserDialogClass *klass)
         gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/system/users/cc-add-user-dialog.ui");
 
         gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, add_button);
-        gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, local_account_type_switch);
-        gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, local_page);
-        gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, local_password_hint);
-        gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, local_password_row);
-        gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, local_password_radio);
-        gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, local_name_row);
-        gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, local_username_row);
-        gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, local_strength_indicator);
-        gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, local_verify_password_row);
-        gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, local_verify_password_hint);
+        gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, account_type_switch);
+        gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, page);
+        gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, password_hint);
+        gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, password_row);
+        gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, password_radio);
+        gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, name_row);
+        gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, username_row);
+        gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, strength_indicator);
+        gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, verify_password_row);
+        gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, verify_password_hint);
         gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, name_feedback);
         gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, navigation);
         gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, password_page);
@@ -490,11 +490,11 @@ cc_add_user_dialog_class_init (CcAddUserDialogClass *klass)
         gtk_widget_class_bind_template_callback (widget_class, add_button_clicked_cb);
         gtk_widget_class_bind_template_callback (widget_class, dialog_validate);
         gtk_widget_class_bind_template_callback (widget_class, generate_password);
-        gtk_widget_class_bind_template_callback (widget_class, local_create_user);
-        gtk_widget_class_bind_template_callback (widget_class, local_password_entry_changed_cb);
-        gtk_widget_class_bind_template_callback (widget_class, local_password_entry_key_press_event_cb);
-        gtk_widget_class_bind_template_callback (widget_class, local_password_radio_changed_cb);
-        gtk_widget_class_bind_template_callback (widget_class, local_verify_entry_changed_cb);
+        gtk_widget_class_bind_template_callback (widget_class, create_user);
+        gtk_widget_class_bind_template_callback (widget_class, password_entry_changed_cb);
+        gtk_widget_class_bind_template_callback (widget_class, password_entry_key_press_event_cb);
+        gtk_widget_class_bind_template_callback (widget_class, password_radio_changed_cb);
+        gtk_widget_class_bind_template_callback (widget_class, verify_entry_changed_cb);
         gtk_widget_class_bind_template_callback (widget_class, password_focus_out_event_cb);
         gtk_widget_class_bind_template_callback (widget_class, password_page_validate);
 }

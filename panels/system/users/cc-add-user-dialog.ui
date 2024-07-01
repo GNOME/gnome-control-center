@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <interface>
-  <object class="GtkListStore" id="local_username_model">
+  <object class="GtkListStore" id="username_model">
     <columns>
       <!-- column-name gchararray -->
       <column type="gchararray"/>
@@ -50,13 +50,13 @@
                   </object>
                 </child>
                 <property name="content">
-                  <object class="AdwPreferencesPage" id="local_page">
+                  <object class="AdwPreferencesPage" id="page">
                     <child>
                       <object class="AdwPreferencesGroup">
                         <property name="title" translatable="yes">Account Type</property>
                         <child>
                           <object class="AdwActionRow">
-                            <property name="activatable-widget">local_account_type_switch</property>
+                            <property name="activatable-widget">account_type_switch</property>
                             <property name="title" translatable="yes">Ad_ministrator</property>
                             <property name="use-underline">True</property>
                             <child type="suffix">
@@ -66,7 +66,7 @@
                               </object>
                             </child>
                             <child type="suffix">
-                              <object class="GtkSwitch" id="local_account_type_switch">
+                              <object class="GtkSwitch" id="account_type_switch">
                                 <property name="valign">center</property>
                               </object>
                             </child>
@@ -78,7 +78,7 @@
                       <object class="AdwPreferencesGroup">
                         <property name="title" translatable="yes">User Details</property>
                         <child>
-                          <object class="AdwEntryRow" id="local_name_row">
+                          <object class="AdwEntryRow" id="name_row">
                             <property name="title" translatable="yes">Full _Name</property>
                             <property name="use-underline">True</property>
                             <signal name="changed" handler="dialog_validate" object="CcAddUserDialog" swapped="yes"/>
@@ -86,7 +86,7 @@
                           </object>
                         </child>
                         <child>
-                          <object class="AdwEntryRow" id="local_username_row">
+                          <object class="AdwEntryRow" id="username_row">
                             <property name="title" translatable="yes">_Username</property>
                             <property name="use-underline">True</property>
                             <signal name="changed" handler="dialog_validate" object="CcAddUserDialog" swapped="yes"/>
@@ -106,11 +106,11 @@
                         <property name="title" translatable="yes">Password</property>
                         <child>
                           <object class="AdwActionRow">
-                            <property name="activatable-widget">local_password_login_radio</property>
+                            <property name="activatable-widget">password_login_radio</property>
                             <property name="title" translatable="yes">User sets password on _first login</property>
                             <property name="use-underline">True</property>
                             <child type="prefix">
-                              <object class="GtkCheckButton" id="local_password_login_radio">
+                              <object class="GtkCheckButton" id="password_login_radio">
                                 <property name="valign">center</property>
                                 <property name="active">True</property>
                               </object>
@@ -119,15 +119,15 @@
                         </child>
                         <child>
                           <object class="AdwActionRow">
-                            <property name="activatable-widget">local_password_radio</property>
+                            <property name="activatable-widget">password_radio</property>
                             <property name="title" translatable="yes">Set password n_ow</property>
                             <property name="use-underline">True</property>
                             <child type="prefix">
-                              <object class="GtkCheckButton" id="local_password_radio">
+                              <object class="GtkCheckButton" id="password_radio">
                                 <property name="valign">center</property>
                                 <property name="use_underline">True</property>
-                                <property name="group">local_password_login_radio</property>
-                                <signal name="toggled" handler="local_password_radio_changed_cb" object="CcAddUserDialog" swapped="yes"/>
+                                <property name="group">password_login_radio</property>
+                                <signal name="toggled" handler="password_radio_changed_cb" object="CcAddUserDialog" swapped="yes"/>
                               </object>
                             </child>
                           </object>
@@ -157,7 +157,7 @@
                         <property name="receives_default">True</property>
                         <property name="use_underline">True</property>
                         <property name="valign">center</property>
-                        <signal name="clicked" handler="local_create_user" object="CcAddUserDialog" swapped="yes"/>
+                        <signal name="clicked" handler="create_user" object="CcAddUserDialog" swapped="yes"/>
                         <style>
                           <class name="suggested-action"/>
                         </style>
@@ -177,14 +177,14 @@
                     <child>
                       <object class="AdwPreferencesGroup">
                         <child>
-                          <object class="AdwPasswordEntryRow" id="local_password_row">
+                          <object class="AdwPasswordEntryRow" id="password_row">
                             <property name="title" translatable="yes">_Password</property>
                             <property name="use-underline">True</property>
-                            <signal name="notify::text" handler="local_password_entry_changed_cb" object="CcAddUserDialog" swapped="yes"/>
+                            <signal name="notify::text" handler="password_entry_changed_cb" object="CcAddUserDialog" swapped="yes"/>
                             <signal name="entry-activated" handler="password_page_validate" object="CcAddUserDialog" swapped="yes"/>
                             <child>
                               <object class="GtkEventControllerKey">
-                                <signal name="key-pressed" handler="local_password_entry_key_press_event_cb" object="CcAddUserDialog" swapped="yes"/>
+                                <signal name="key-pressed" handler="password_entry_key_press_event_cb" object="CcAddUserDialog" swapped="yes"/>
                               </object>
                             </child>
                             <child>
@@ -206,7 +206,7 @@
                           </object>
                         </child>
                         <child>
-                          <object class="GtkLevelBar" id="local_strength_indicator">
+                          <object class="GtkLevelBar" id="strength_indicator">
                             <property name="mode">continuous</property>
                             <property name="max-value">5</property>
                             <property name="margin-top">12</property>
@@ -220,7 +220,7 @@
                           </object>
                         </child>
                         <child>
-                          <object class="CcEntryFeedback" id="local_password_hint">
+                          <object class="CcEntryFeedback" id="password_hint">
                             <property name="default-text" translatable="yes">For a good password, mix upper case, lower case, numbers and punctuation.</property>
                             <property name="default-icon-name">info-outline-symbolic</property>
                           </object>
@@ -230,10 +230,10 @@
                     <child>
                       <object class="AdwPreferencesGroup">
                         <child>
-                          <object class="AdwPasswordEntryRow" id="local_verify_password_row">
+                          <object class="AdwPasswordEntryRow" id="verify_password_row">
                             <property name="title" translatable="yes">_Confirm Password</property>
                             <property name="use-underline">True</property>
-                            <signal name="notify::text" handler="local_verify_entry_changed_cb" object="CcAddUserDialog" swapped="yes"/>
+                            <signal name="notify::text" handler="verify_entry_changed_cb" object="CcAddUserDialog" swapped="yes"/>
                             <signal name="entry-activated" handler="password_page_validate" object="CcAddUserDialog" swapped="yes"/>
                             <child>
                               <object class="GtkEventControllerFocus">
@@ -243,7 +243,7 @@
                           </object>
                         </child>
                         <child>
-                          <object class="CcEntryFeedback" id="local_verify_password_hint"/>
+                          <object class="CcEntryFeedback" id="verify_password_hint"/>
                         </child>
                       </object>
                     </child>
