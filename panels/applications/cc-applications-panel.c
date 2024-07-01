@@ -1450,7 +1450,7 @@ update_panel (CcApplicationsPanel *self,
 
   /* Don't show the "Open" button for Settings itself. */
   gtk_widget_set_visible (GTK_WIDGET (self->launch_button),
-                          g_strcmp0 (self->current_app_id, "org.gnome.Settings") != 0);
+                          g_strcmp0 (self->current_app_id, APPLICATION_ID) != 0);
 }
 
 
