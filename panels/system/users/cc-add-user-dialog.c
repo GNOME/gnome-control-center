@@ -29,6 +29,7 @@
 #include "cc-add-user-dialog.h"
 #include "cc-entry-feedback.h"
 #include "cc-list-row.h"
+#include "cc-password-utils.h"
 #include "user-utils.h"
 #include "pw-utils.h"
 
@@ -295,7 +296,7 @@ generate_password (CcAddUserDialog *self)
 {
         g_autofree gchar *pwd = NULL;
 
-        pwd = pw_generate ();
+        pwd = cc_generate_password ();
         if (pwd == NULL)
                 return;
 

@@ -33,6 +33,7 @@
 
 #include "cc-entry-feedback.h"
 #include "cc-password-dialog.h"
+#include "cc-password-utils.h"
 #include "pw-utils.h"
 #include "run-passwd.h"
 #include "user-utils.h"
@@ -418,7 +419,7 @@ generate_password (CcPasswordDialog *self)
 {
         g_autofree gchar *pwd = NULL;
 
-        pwd = pw_generate ();
+        pwd = cc_generate_password ();
         if (pwd == NULL)
                 return;
 
