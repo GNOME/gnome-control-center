@@ -424,7 +424,6 @@ generate_password (CcPasswordDialog *self)
                 return;
 
         gtk_editable_set_text (GTK_EDITABLE (self->password_entry), pwd);
-        gtk_editable_set_text (GTK_EDITABLE (self->verify_entry), pwd);
         gtk_widget_set_sensitive (GTK_WIDGET (self->verify_entry), TRUE);
 
         gtk_widget_set_visible (GTK_WIDGET (self->generate_password_button), FALSE);

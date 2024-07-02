@@ -301,7 +301,6 @@ generate_password (CcAddUserDialog *self)
                 return;
 
         gtk_editable_set_text (GTK_EDITABLE (self->password_row), pwd);
-        gtk_editable_set_text (GTK_EDITABLE (self->verify_password_row), pwd);
         gtk_widget_set_sensitive (GTK_WIDGET (self->verify_password_row), TRUE);
 }
 
