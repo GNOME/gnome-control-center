@@ -713,9 +713,9 @@ cc_wwan_panel_init (CcWwanPanel *self)
                               G_BINDING_BIDIRECTIONAL | G_BINDING_SYNC_CREATE);
     }
 
-  if (cc_object_storage_has_object ("CcObjectStorage::mm-manager"))
+  if (cc_object_storage_has_object (CC_OBJECT_MMMANAGER))
     {
-      self->mm_manager = cc_object_storage_get_object ("CcObjectStorage::mm-manager");
+      self->mm_manager = cc_object_storage_get_object (CC_OBJECT_MMMANAGER);
 
       g_signal_connect_object (self->mm_manager, "object-added",
                                G_CALLBACK (wwan_panel_device_added_cb),
@@ -824,7 +824,7 @@ cc_wwan_panel_static_init_func (void)
     }
   else
     {
-      cc_object_storage_add_object ("CcObjectStorage::mm-manager", mm_manager);
+      cc_object_storage_add_object (CC_OBJECT_MMMANAGER, mm_manager);
     }
 
   g_debug ("Monitoring ModemManager for WWAN devices");

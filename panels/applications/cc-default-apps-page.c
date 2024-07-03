@@ -108,9 +108,9 @@ cc_default_apps_page_init (CcDefaultAppsPage *self)
   gtk_widget_init_template (GTK_WIDGET (self));
 
 #ifdef BUILD_WWAN
-  if (cc_object_storage_has_object ("CcObjectStorage::mm-manager"))
+  if (cc_object_storage_has_object (CC_OBJECT_MMMANAGER))
     {
-      self->mm_manager = cc_object_storage_get_object ("CcObjectStorage::mm-manager");
+      self->mm_manager = cc_object_storage_get_object (CC_OBJECT_MMMANAGER);
 
       g_signal_connect_swapped (self->mm_manager, "object-added",
                                 G_CALLBACK (update_modem_apps_visibility), self);

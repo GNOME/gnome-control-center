@@ -25,7 +25,8 @@ G_BEGIN_DECLS
 
 /* Default storage keys */
 #define CC_OBJECT_NMCLIENT  "CcObjectStorage::nm-client"
-#define CC_OBJECT_HOSTNAME "CcObjectStorage::hostname"
+#define CC_OBJECT_HOSTNAME  "CcObjectStorage::hostname"
+#define CC_OBJECT_MMMANAGER "CcObjectStorage::mm-manager"
 
 #define CC_TYPE_OBJECT_STORAGE (cc_object_storage_get_type())
 
