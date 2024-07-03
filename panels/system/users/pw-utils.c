@@ -141,7 +141,7 @@ pw_strength (const gchar  *password,
              gint         *strength_level,
              gboolean     *enforcing)
 {
-        gint rv, level, length = 0, enforcing_val;
+        gint rv, level, length = 0;
         gdouble strength = 0.0;
 
         rv = pwquality_check (get_pwq (),
@@ -165,18 +165,24 @@ pw_strength (const gchar  *password,
                 level = 5;
         }
 
-        if (length && length < pw_min_length())
-                *hint = pw_error_hint (PWQ_ERROR_MIN_LENGTH);
-        else if (level == 5)
-                *hint = _("Great password!");
-        else
-                *hint = pw_error_hint (rv);
+        if (hint) {
+                if (length && length < pw_min_length())
+                        *hint = pw_error_hint (PWQ_ERROR_MIN_LENGTH);
+                else if (level == 5)
+                        *hint = _("Great password!");
+                else
+                        *hint = pw_error_hint (rv);
+        }
 
         if (strength_level)
                 *strength_level = level;
 
-        pwquality_get_int_value (get_pwq(), PWQ_SETTING_ENFORCING, &enforcing_val);
-        *enforcing = enforcing_val != 0;
+        if (enforcing) {
+                gint enforcing_val;
+
+                pwquality_get_int_value (get_pwq(), PWQ_SETTING_ENFORCING, &enforcing_val);
+                *enforcing = enforcing_val != 0;
+        }
 
         return strength;
 }
