@@ -998,6 +998,10 @@ cc_bolt_page_init (CcBoltPage *self)
 {
   gtk_widget_init_template (GTK_WIDGET (self));
 
+  /* Startup invisible as the visibility will be set as a result of BoltClient
+   * succeeding its connection to boltd. */
+  gtk_widget_set_visible (GTK_WIDGET (self), FALSE);
+
   self->cancellable = g_cancellable_new ();
   bolt_client_new_async (self->cancellable, on_visibility_client_ready, self);
 
