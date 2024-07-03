@@ -89,7 +89,7 @@ cc_privacy_panel_init (CcPrivacyPanel *self)
 #ifdef BUILD_THUNDERBOLT
   CcBoltPage* bolt_page = cc_bolt_page_new ();
 
-  cc_panel_add_static_subpage (CC_PANEL (self), "thunderbolt", CC_TYPE_BOLT_PAGE);
+  cc_panel_add_subpage (CC_PANEL (self), "thunderbolt", ADW_NAVIGATION_PAGE (bolt_page));
 
   g_object_bind_property (bolt_page, "visible",
                           self->bolt_row, "visible", G_BINDING_SYNC_CREATE);
@@ -98,7 +98,7 @@ cc_privacy_panel_init (CcPrivacyPanel *self)
 #ifdef HAVE_LOCATION_SERVICES
   CcLocationPage *location_page = g_object_new (CC_TYPE_LOCATION_PAGE, NULL);
 
-  cc_panel_add_static_subpage (CC_PANEL (self), "location", CC_TYPE_LOCATION_PAGE);
+  cc_panel_add_subpage (CC_PANEL (self), "thunderbolt", ADW_NAVIGATION_PAGE (location_page));
 
   g_object_bind_property (location_page, "visible",
                           self->location_row, "visible", G_BINDING_SYNC_CREATE);
