@@ -23,7 +23,7 @@ generates_sources_dep = declare_dependency(
 sources = files(
   'cc-hostname-entry.c',
   'cc-number-row.c',
-  'cc-time-entry.c',
+  'cc-timelike-entry.c',
   'cc-util.c',
   'hostname-helper.c'
 )
@@ -49,6 +49,7 @@ sources = common_sources + files(
   'cc-list-row-info-button.c',
   'cc-mask-paintable.c',
   'cc-time-editor.c',
+  'cc-timelike-editor.c',
   'cc-permission-infobar.c',
   'cc-split-row.c',
   'cc-texture-utils.c',

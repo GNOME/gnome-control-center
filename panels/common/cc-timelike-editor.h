@@ -1,5 +1,5 @@
 /* -*- mode: c; c-basic-offset: 2; indent-tabs-mode: nil; -*- */
-/* cc-time-entry.h
+/* cc-timelike-editor.h
  *
  * Copyright 2020 Purism SPC
  *
@@ -24,24 +24,22 @@
 
 #pragma once
 
-#include <gtk/gtk.h>
+#include <adwaita.h>
 
 G_BEGIN_DECLS
 
-#define CC_TYPE_TIME_ENTRY (cc_time_entry_get_type ())
-G_DECLARE_FINAL_TYPE (CcTimeEntry, cc_time_entry, CC, TIME_ENTRY, GtkWidget)
+#define CC_TYPE_TIMELIKE_EDITOR (cc_timelike_editor_get_type ())
 
-GtkWidget *cc_time_entry_new        (void);
-void       cc_time_entry_set_time   (CcTimeEntry *self,
-                                     guint        hour,
-                                     guint        minute);
-guint      cc_time_entry_get_minute (CcTimeEntry *self);
-guint      cc_time_entry_get_hour   (CcTimeEntry *self);
-gboolean   cc_time_entry_get_is_am  (CcTimeEntry *self);
-void       cc_time_entry_set_is_am  (CcTimeEntry *self,
-                                     gboolean     is_am);
-gboolean   cc_time_entry_get_am_pm  (CcTimeEntry *self);
-void       cc_time_entry_set_am_pm  (CcTimeEntry *self,
-                                     gboolean     is_am_pm);
+G_DECLARE_FINAL_TYPE (CcTimelikeEditor, cc_timelike_editor, CC, TIMELIKE_EDITOR, AdwBin)
+
+CcTimelikeEditor *cc_timelike_editor_new    (void);
+void          cc_timelike_editor_set_time   (CcTimelikeEditor *self,
+                                             guint             hour,
+                                             guint             minute);
+guint         cc_timelike_editor_get_hour   (CcTimelikeEditor *self);
+guint         cc_timelike_editor_get_minute (CcTimelikeEditor *self);
+gboolean      cc_timelike_editor_get_am_pm  (CcTimelikeEditor *self);
+void          cc_timelike_editor_set_am_pm  (CcTimelikeEditor *self,
+                                             gboolean          is_am_pm);
 
 G_END_DECLS

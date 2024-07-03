@@ -1,5 +1,5 @@
 /* -*- mode: c; c-basic-offset: 2; indent-tabs-mode: nil; -*- */
-/* cc-time-entry.c
+/* cc-timelike-entry.c
  *
  * Copyright 2020 Purism SPC
  *
@@ -23,7 +23,7 @@
  */
 
 #undef G_LOG_DOMAIN
-#define G_LOG_DOMAIN "cc-time-entry"
+#define G_LOG_DOMAIN "cc-timelike-entry"
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
@@ -32,14 +32,14 @@
 #include <gtk/gtk.h>
 #include <glib/gi18n.h>
 
-#include "cc-time-entry.h"
+#include "cc-timelike-entry.h"
 
 #define SEPARATOR_INDEX      2
 #define END_INDEX            4
 #define EMIT_CHANGED_TIMEOUT 100
 
 
-struct _CcTimeEntry
+struct _CcTimelikeEntry
 {
   GtkWidget  parent_instance;
 
@@ -54,15 +54,15 @@ struct _CcTimeEntry
 };
 
 
-static void editable_insert_text_cb (GtkText     *text,
-                                     char        *new_text,
-                                     gint         new_text_length,
-                                     gint        *position,
-                                     CcTimeEntry *self);
+static void editable_insert_text_cb (GtkText         *text,
+                                     char            *new_text,
+                                     gint             new_text_length,
+                                     gint            *position,
+                                     CcTimelikeEntry *self);
 
 static void gtk_editable_interface_init (GtkEditableInterface *iface);
 
-G_DEFINE_TYPE_WITH_CODE (CcTimeEntry, cc_time_entry, GTK_TYPE_WIDGET,
+G_DEFINE_TYPE_WITH_CODE (CcTimelikeEntry, cc_timelike_entry, GTK_TYPE_WIDGET,
                          G_IMPLEMENT_INTERFACE (GTK_TYPE_EDITABLE, gtk_editable_interface_init));
 
 enum {
@@ -74,7 +74,7 @@ enum {
 static guint signals[N_SIGNALS];
 
 static gboolean
-emit_time_changed (CcTimeEntry *self)
+emit_time_changed (CcTimelikeEntry *self)
 {
   self->time_changed_id = 0;
 
@@ -84,11 +84,11 @@ emit_time_changed (CcTimeEntry *self)
 }
 
 static void
-time_entry_fill_time (CcTimeEntry *self)
+timelike_entry_fill_time (CcTimelikeEntry *self)
 {
   g_autofree gchar *str = NULL;
 
-  g_assert (CC_IS_TIME_ENTRY (self));
+  g_assert (CC_IS_TIMELIKE_ENTRY (self));
 
   str = g_strdup_printf ("%02d∶%02d", self->hour, self->minute);
 
@@ -98,11 +98,11 @@ time_entry_fill_time (CcTimeEntry *self)
 }
 
 static void
-cursor_position_changed_cb (CcTimeEntry *self)
+cursor_position_changed_cb (CcTimelikeEntry *self)
 {
   int current_pos;
 
-  g_assert (CC_IS_TIME_ENTRY (self));
+  g_assert (CC_IS_TIMELIKE_ENTRY (self));
 
   current_pos = gtk_editable_get_position (GTK_EDITABLE (self));
 
@@ -121,11 +121,11 @@ cursor_position_changed_cb (CcTimeEntry *self)
 }
 
 static void
-entry_selection_changed_cb (CcTimeEntry *self)
+entry_selection_changed_cb (CcTimelikeEntry *self)
 {
   GtkEditable *editable;
 
-  g_assert (CC_IS_TIME_ENTRY (self));
+  g_assert (CC_IS_TIMELIKE_ENTRY (self));
 
   editable = GTK_EDITABLE (self->text);
 
@@ -140,13 +140,13 @@ entry_selection_changed_cb (CcTimeEntry *self)
 }
 
 static void
-editable_insert_text_cb (GtkText     *text,
-                         char        *new_text,
-                         gint         new_text_length,
-                         gint        *position,
-                         CcTimeEntry *self)
+editable_insert_text_cb (GtkText         *text,
+                         char            *new_text,
+                         gint             new_text_length,
+                         gint            *position,
+                         CcTimelikeEntry *self)
 {
-  g_assert (CC_IS_TIME_ENTRY (self));
+  g_assert (CC_IS_TIMELIKE_ENTRY (self));
 
   if (new_text_length == -1)
     new_text_length = strlen (new_text);
@@ -191,7 +191,7 @@ editable_insert_text_cb (GtkText     *text,
       self->minute = CLAMP (self->minute, 0, 59);
 
       g_signal_stop_emission_by_name (text, "insert-text");
-      time_entry_fill_time (self);
+      timelike_entry_fill_time (self);
       *position = pos + 1;
 
       g_clear_handle_id (&self->time_changed_id, g_source_remove);
@@ -211,11 +211,11 @@ change_value_cb (GtkWidget *widget,
                  GVariant  *arguments,
                  gpointer   user_data)
 {
-  CcTimeEntry *self = CC_TIME_ENTRY (widget);
+  CcTimelikeEntry *self = CC_TIMELIKE_ENTRY (widget);
   GtkScrollType type;
   int position;
 
-  g_assert (CC_IS_TIME_ENTRY (self));
+  g_assert (CC_IS_TIMELIKE_ENTRY (self));
 
   type = g_variant_get_int32 (arguments);
   position = gtk_editable_get_position (GTK_EDITABLE (self));
@@ -255,7 +255,7 @@ change_value_cb (GtkWidget *widget,
         }
     }
 
-  time_entry_fill_time (self);
+  timelike_entry_fill_time (self);
   gtk_editable_set_position (GTK_EDITABLE (self), position);
 
   g_clear_handle_id (&self->time_changed_id, g_source_remove);
@@ -266,12 +266,12 @@ change_value_cb (GtkWidget *widget,
 }
 
 static void
-value_changed_cb (CcTimeEntry   *self,
-                  GtkScrollType  type)
+value_changed_cb (CcTimelikeEntry *self,
+                  GtkScrollType    type)
 {
   g_autoptr(GVariant) value;
 
-  g_assert (CC_IS_TIME_ENTRY (self));
+  g_assert (CC_IS_TIMELIKE_ENTRY (self));
 
   value = g_variant_new_int32 (type);
 
@@ -279,18 +279,18 @@ value_changed_cb (CcTimeEntry   *self,
 }
 
 static void
-on_text_cut_clipboard_cb (GtkText     *text,
-                          CcTimeEntry *self)
+on_text_cut_clipboard_cb (GtkText         *text,
+                          CcTimelikeEntry *self)
 {
   gtk_widget_error_bell (GTK_WIDGET (self));
   g_signal_stop_emission_by_name (text, "cut-clipboard");
 }
 
 static void
-on_text_delete_from_cursor_cb (GtkText       *text,
-                               GtkDeleteType *type,
-                               gint           count,
-                               CcTimeEntry   *self)
+on_text_delete_from_cursor_cb (GtkText         *text,
+                               GtkDeleteType   *type,
+                               gint             count,
+                               CcTimelikeEntry *self)
 {
   gtk_widget_error_bell (GTK_WIDGET (self));
   g_signal_stop_emission_by_name (text, "delete-from-cursor");
@@ -301,7 +301,7 @@ on_text_move_cursor_cb (GtkText         *text,
                         GtkMovementStep  step,
                         gint             count,
                         gboolean         extend,
-                        CcTimeEntry     *self)
+                        CcTimelikeEntry *self)
 {
   int current_pos;
 
@@ -321,26 +321,26 @@ on_text_move_cursor_cb (GtkText         *text,
 }
 
 static void
-on_text_paste_clipboard_cb (GtkText     *text,
-                            CcTimeEntry *self)
+on_text_paste_clipboard_cb (GtkText         *text,
+                            CcTimelikeEntry *self)
 {
   gtk_widget_error_bell (GTK_WIDGET (self));
   g_signal_stop_emission_by_name (text, "paste-clipboard");
 }
 
 static void
-on_text_toggle_overwrite_cb (GtkText     *text,
-                             CcTimeEntry *self)
+on_text_toggle_overwrite_cb (GtkText         *text,
+                             CcTimelikeEntry *self)
 {
   gtk_widget_error_bell (GTK_WIDGET (self));
   g_signal_stop_emission_by_name (text, "toggle-overwrite");
 }
 
 static gboolean
-on_key_pressed_cb (CcTimeEntry           *self,
-                   guint                  keyval,
-                   guint                  keycode,
-                   GdkModifierType        state)
+on_key_pressed_cb (CcTimelikeEntry *self,
+                   guint            keyval,
+                   guint            keycode,
+                   GdkModifierType  state)
 {
   /* Allow entering numbers */
   if (!(state & GDK_SHIFT_MASK) &&
@@ -390,29 +390,29 @@ on_key_pressed_cb (CcTimeEntry           *self,
 }
 
 static GtkEditable *
-cc_time_entry_get_delegate (GtkEditable *editable)
+cc_timelike_entry_get_delegate (GtkEditable *editable)
 {
-  CcTimeEntry *self = CC_TIME_ENTRY (editable);
+  CcTimelikeEntry *self = CC_TIMELIKE_ENTRY (editable);
   return GTK_EDITABLE (self->text);
 }
 
 static void
 gtk_editable_interface_init (GtkEditableInterface *iface)
 {
-  iface->get_delegate = cc_time_entry_get_delegate;
+  iface->get_delegate = cc_timelike_entry_get_delegate;
 }
 
 static void
-cc_time_entry_constructed (GObject *object)
+cc_timelike_entry_constructed (GObject *object)
 {
-  CcTimeEntry *self = CC_TIME_ENTRY (object);
+  CcTimelikeEntry *self = CC_TIMELIKE_ENTRY (object);
   PangoAttrList *list;
   PangoAttribute *attribute;
 
-  G_OBJECT_CLASS (cc_time_entry_parent_class)->constructed (object);
+  G_OBJECT_CLASS (cc_timelike_entry_parent_class)->constructed (object);
 
   gtk_widget_set_direction (GTK_WIDGET (self->text), GTK_TEXT_DIR_LTR);
-  time_entry_fill_time (CC_TIME_ENTRY (object));
+  timelike_entry_fill_time (CC_TIMELIKE_ENTRY (object));
 
   list = pango_attr_list_new ();
 
@@ -432,21 +432,21 @@ cc_time_entry_constructed (GObject *object)
 }
 
 static void
-cc_time_entry_dispose (GObject *object)
+cc_timelike_entry_dispose (GObject *object)
 {
-  CcTimeEntry *self = CC_TIME_ENTRY (object);
+  CcTimelikeEntry *self = CC_TIMELIKE_ENTRY (object);
 
   gtk_editable_finish_delegate (GTK_EDITABLE (self));
   g_clear_pointer (&self->text, gtk_widget_unparent);
 
-  G_OBJECT_CLASS (cc_time_entry_parent_class)->dispose (object);
+  G_OBJECT_CLASS (cc_timelike_entry_parent_class)->dispose (object);
 }
 
 static void
-cc_time_entry_get_property (GObject    *object,
-                            guint       property_id,
-                            GValue     *value,
-                            GParamSpec *pspec)
+cc_timelike_entry_get_property (GObject    *object,
+                                guint       property_id,
+                                GValue     *value,
+                                GParamSpec *pspec)
 {
   if (gtk_editable_delegate_get_property (object, property_id, value, pspec))
     return;
@@ -455,10 +455,10 @@ cc_time_entry_get_property (GObject    *object,
 }
 
 static void
-cc_time_entry_set_property (GObject      *object,
-                            guint         property_id,
-                            const GValue *value,
-                            GParamSpec   *pspec)
+cc_timelike_entry_set_property (GObject      *object,
+                                guint         property_id,
+                                const GValue *value,
+                                GParamSpec   *pspec)
 {
   if (gtk_editable_delegate_set_property (object, property_id, value, pspec))
     return;
@@ -467,15 +467,15 @@ cc_time_entry_set_property (GObject      *object,
 }
 
 static void
-cc_time_entry_class_init (CcTimeEntryClass *klass)
+cc_timelike_entry_class_init (CcTimelikeEntryClass *klass)
 {
   GObjectClass   *object_class = G_OBJECT_CLASS (klass);
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
-  object_class->constructed = cc_time_entry_constructed;
-  object_class->dispose = cc_time_entry_dispose;
-  object_class->get_property = cc_time_entry_get_property;
-  object_class->set_property = cc_time_entry_set_property;
+  object_class->constructed = cc_timelike_entry_constructed;
+  object_class->dispose = cc_timelike_entry_dispose;
+  object_class->get_property = cc_timelike_entry_get_property;
+  object_class->set_property = cc_timelike_entry_set_property;
 
   signals[CHANGE_VALUE] =
     g_signal_new ("change-value",
@@ -510,7 +510,7 @@ cc_time_entry_class_init (CcTimeEntryClass *klass)
 }
 
 static void
-cc_time_entry_init (CcTimeEntry *self)
+cc_timelike_entry_init (CcTimelikeEntry *self)
 {
   GtkEventController *key_controller;
 
@@ -543,40 +543,40 @@ cc_time_entry_init (CcTimeEntry *self)
 }
 
 GtkWidget *
-cc_time_entry_new (void)
+cc_timelike_entry_new (void)
 {
-  return g_object_new (CC_TYPE_TIME_ENTRY, NULL);
+  return g_object_new (CC_TYPE_TIMELIKE_ENTRY, NULL);
 }
 
 void
-cc_time_entry_set_time (CcTimeEntry *self,
-                        guint        hour,
-                        guint        minute)
+cc_timelike_entry_set_time (CcTimelikeEntry *self,
+                            guint            hour,
+                            guint            minute)
 {
   gboolean is_am_pm;
 
-  g_return_if_fail (CC_IS_TIME_ENTRY (self));
+  g_return_if_fail (CC_IS_TIMELIKE_ENTRY (self));
 
-  if (cc_time_entry_get_hour (self) == hour &&
-      cc_time_entry_get_minute (self) == minute)
+  if (cc_timelike_entry_get_hour (self) == hour &&
+      cc_timelike_entry_get_minute (self) == minute)
     return;
 
-  is_am_pm = cc_time_entry_get_am_pm (self);
-  cc_time_entry_set_am_pm (self, FALSE);
+  is_am_pm = cc_timelike_entry_get_am_pm (self);
+  cc_timelike_entry_set_am_pm (self, FALSE);
 
   self->hour = CLAMP (hour, 0, 23);
   self->minute = CLAMP (minute, 0, 59);
 
-  cc_time_entry_set_am_pm (self, is_am_pm);
+  cc_timelike_entry_set_am_pm (self, is_am_pm);
 
   g_signal_emit (self, signals[TIME_CHANGED], 0);
-  time_entry_fill_time (self);
+  timelike_entry_fill_time (self);
 }
 
 guint
-cc_time_entry_get_hour (CcTimeEntry *self)
+cc_timelike_entry_get_hour (CcTimelikeEntry *self)
 {
-  g_return_val_if_fail (CC_IS_TIME_ENTRY (self), 0);
+  g_return_val_if_fail (CC_IS_TIMELIKE_ENTRY (self), 0);
 
   if (!self->is_am_pm)
     return self->hour;
@@ -590,17 +590,17 @@ cc_time_entry_get_hour (CcTimeEntry *self)
 }
 
 guint
-cc_time_entry_get_minute (CcTimeEntry *self)
+cc_timelike_entry_get_minute (CcTimelikeEntry *self)
 {
-  g_return_val_if_fail (CC_IS_TIME_ENTRY (self), 0);
+  g_return_val_if_fail (CC_IS_TIMELIKE_ENTRY (self), 0);
 
   return self->minute;
 }
 
 gboolean
-cc_time_entry_get_is_am (CcTimeEntry *self)
+cc_timelike_entry_get_is_am (CcTimelikeEntry *self)
 {
-  g_return_val_if_fail (CC_IS_TIME_ENTRY (self), FALSE);
+  g_return_val_if_fail (CC_IS_TIMELIKE_ENTRY (self), FALSE);
 
   if (self->is_am_pm)
     return self->is_am;
@@ -609,28 +609,28 @@ cc_time_entry_get_is_am (CcTimeEntry *self)
 }
 
 void
-cc_time_entry_set_is_am (CcTimeEntry *self,
-                         gboolean     is_am)
+cc_timelike_entry_set_is_am (CcTimelikeEntry *self,
+                             gboolean         is_am)
 {
-  g_return_if_fail (CC_IS_TIME_ENTRY (self));
+  g_return_if_fail (CC_IS_TIMELIKE_ENTRY (self));
 
   self->is_am = !!is_am;
   g_signal_emit (self, signals[TIME_CHANGED], 0);
 }
 
 gboolean
-cc_time_entry_get_am_pm (CcTimeEntry *self)
+cc_timelike_entry_get_am_pm (CcTimelikeEntry *self)
 {
-  g_return_val_if_fail (CC_IS_TIME_ENTRY (self), FALSE);
+  g_return_val_if_fail (CC_IS_TIMELIKE_ENTRY (self), FALSE);
 
   return self->is_am_pm;
 }
 
 void
-cc_time_entry_set_am_pm (CcTimeEntry *self,
-                         gboolean     is_am_pm)
+cc_timelike_entry_set_am_pm (CcTimelikeEntry *self,
+                             gboolean         is_am_pm)
 {
-  g_return_if_fail (CC_IS_TIME_ENTRY (self));
+  g_return_if_fail (CC_IS_TIMELIKE_ENTRY (self));
 
   if (self->is_am_pm == !!is_am_pm)
     return;
@@ -656,5 +656,5 @@ cc_time_entry_set_am_pm (CcTimeEntry *self,
     }
 
   self->is_am_pm = !!is_am_pm;
-  time_entry_fill_time (self);
+  timelike_entry_fill_time (self);
 }
