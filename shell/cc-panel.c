@@ -316,6 +316,19 @@ cc_panel_deactivate (CcPanel *panel)
 }
 
 void
+cc_panel_add_subpage (CcPanel     *panel,
+                      const gchar *page_tag,
+                      AdwNavigationPage *subpage)
+{
+  CcPanelPrivate *priv = cc_panel_get_instance_private (panel);
+
+  g_return_if_fail (CC_IS_PANEL (panel));
+  g_return_if_fail (ADW_IS_NAVIGATION_PAGE (subpage));
+
+  adw_navigation_view_add (priv->navigation, subpage);
+}
+
+void
 cc_panel_add_static_subpage (CcPanel     *panel,
                              const gchar *page_tag,
                              GType        page_type)

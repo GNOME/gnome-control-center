@@ -90,6 +90,10 @@ GCancellable *cc_panel_get_cancellable    (CcPanel     *panel);
 
 void          cc_panel_deactivate         (CcPanel     *panel);
 
+void          cc_panel_add_subpage        (CcPanel     *panel,
+                                           const gchar *page_tag,
+                                           AdwNavigationPage *subpage);
+
 void          cc_panel_add_static_subpage (CcPanel     *panel,
                                            const gchar *page_name,
                                            GType        page_type);
