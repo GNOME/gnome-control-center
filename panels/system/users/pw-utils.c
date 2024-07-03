@@ -27,12 +27,18 @@
 
 #include <pwquality.h>
 
+#include "shell/cc-object-storage.h"
+
 static pwquality_settings_t *
 get_pwq (void)
 {
-        static pwquality_settings_t *settings;
+        g_autoptr(GObject) wrapper = NULL;
+        pwquality_settings_t *settings = NULL;
 
-        if (settings == NULL) {
+        if (cc_object_storage_has_object (CC_OBJECT_PWQ_SETTINGS)) {
+                wrapper = cc_object_storage_get_object (CC_OBJECT_PWQ_SETTINGS);
+                settings = g_object_get_data (wrapper, CC_OBJECT_PWQ_SETTINGS);
+        } else {
                 gchar *err = NULL;
                 gint rv = 0;
 
@@ -49,6 +55,11 @@ get_pwq (void)
                         settings = pwquality_default_settings ();
                         pwquality_set_int_value (settings, PWQ_SETTING_MAX_SEQUENCE, 4);
                 }
+
+                wrapper = g_object_new (G_TYPE_OBJECT, NULL);
+                g_object_set_data_full (wrapper, CC_OBJECT_PWQ_SETTINGS, settings,
+                                        (GDestroyNotify) pwquality_free_settings);
+                cc_object_storage_add_object (CC_OBJECT_PWQ_SETTINGS, wrapper);
         }
 
         return settings;
