@@ -142,11 +142,10 @@ pw_strength (const gchar  *password,
 {
         gint rv, level, length = 0;
         gdouble strength = 0.0;
-        void *auxerror;
 
         rv = pwquality_check (get_pwq (),
                               password, old_password, username,
-                              &auxerror);
+                              NULL);
 
         if (password != NULL)
                 length = strlen (password);
