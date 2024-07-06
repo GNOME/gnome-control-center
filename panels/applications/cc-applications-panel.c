@@ -1198,7 +1198,7 @@ update_handler_dialog (CcApplicationsPanel *self,
       cc_list_row_set_secondary_label (self->handler_row, types_number);
     }
 
-  header_title = g_strdup_printf (_("<b>%s</b> is used to open the following types of files and links."),
+  header_title = g_strdup_printf (_("<b>%s</b> is used to open the following types of files and links"),
                                   g_app_info_get_display_name (info));
   adw_preferences_page_set_description (self->handler_page, header_title);
 }
