@@ -30,8 +30,7 @@ G_BEGIN_DECLS
 #define CC_TYPE_INPUT_CHOOSER (cc_input_chooser_get_type ())
 G_DECLARE_FINAL_TYPE (CcInputChooser, cc_input_chooser, CC, INPUT_CHOOSER, AdwDialog)
 
-CcInputChooser *cc_input_chooser_new              (gboolean       is_login,
-                                                   GnomeXkbInfo  *xkb_info,
+CcInputChooser *cc_input_chooser_new              (GnomeXkbInfo   *xkb_info,
                                                    GHashTable     *ibus_engines);
 
 void            cc_input_chooser_set_ibus_engines (CcInputChooser *chooser,

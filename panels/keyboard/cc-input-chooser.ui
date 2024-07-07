@@ -45,19 +45,6 @@
             <signal name="stop-search" handler="on_stop_search_cb" object="CcInputChooser" swapped="yes" />
           </object>
         </child>
-        <child type="top">
-          <object class="GtkLabel" id="login_label">
-            <property name="visible">False</property>
-            <property name="wrap">True</property>
-            <property name="label" translatable="yes">Input methods can’t be used on the login screen</property>
-            <property name="margin-start">6</property>
-            <property name="margin-end">6</property>
-            <property name="margin-bottom">6</property>
-            <style>
-              <class name="dim-label"/>
-            </style>
-          </object>
-        </child>
         <child>
           <object class="GtkStack" id="input_sources_stack">
             <child>

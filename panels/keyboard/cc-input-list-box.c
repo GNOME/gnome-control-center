@@ -47,7 +47,6 @@ struct _CcInputListBox {
 
   GCancellable    *cancellable;
 
-  gboolean     login;
   gboolean     login_auto_apply;
   GPermission *permission;
   GDBusProxy  *localed;
@@ -431,13 +430,9 @@ static void set_localed_input (CcInputListBox *self);
 static void
 update_input (CcInputListBox *self)
 {
-  if (self->login) {
+  set_input_settings (self);
+  if (self->login_auto_apply)
     set_localed_input (self);
-  } else {
-    set_input_settings (self);
-    if (self->login_auto_apply)
-      set_localed_input (self);
-  }
 }
 
 static void
@@ -457,8 +452,7 @@ show_input_chooser (CcInputListBox *self)
 {
   CcInputChooser *chooser;
 
-  chooser = cc_input_chooser_new (self->login,
-				  self->xkb_info,
+  chooser = cc_input_chooser_new (self->xkb_info,
 #ifdef HAVE_IBUS
 				  self->ibus_engines
 #else
@@ -495,7 +489,7 @@ add_input_permission_cb (GObject *source, GAsyncResult *res, gpointer user_data)
 static void
 add_input (CcInputListBox *self)
 {
-  if (!self->login) {
+  if (!self->login_auto_apply) {
     show_input_chooser (self);
   } else if (g_permission_get_allowed (self->permission)) {
     show_input_chooser (self);
@@ -527,7 +521,7 @@ remove_input_permission_cb (GObject *source, GAsyncResult *res, gpointer user_da
 static void
 remove_input (CcInputListBox *self, CcInputRow *row)
 {
-  if (!self->login) {
+  if (!self->login_auto_apply) {
     do_remove_input (self, row);
   } else if (g_permission_get_allowed (self->permission)) {
     do_remove_input (self, row);
@@ -567,7 +561,7 @@ move_input (CcInputListBox *self,
             CcInputRow    *source,
             CcInputRow    *dest)
 {
-  if (!self->login) {
+  if (!self->login_auto_apply) {
     do_move_input (self, source, dest);
   } else if (g_permission_get_allowed (self->permission)) {
     do_move_input (self, source, dest);
@@ -709,7 +703,6 @@ cc_input_list_box_init (CcInputListBox *self)
 {
   gtk_widget_init_template (GTK_WIDGET (self));
 
-  self->login = FALSE;
   self->login_auto_apply = FALSE;
   self->localed = NULL;
   self->permission = NULL;
@@ -738,17 +731,6 @@ cc_input_list_box_init (CcInputListBox *self)
                            G_CALLBACK (input_sources_changed), self, G_CONNECT_SWAPPED);
 
   add_input_sources_from_settings (self);
-}
-
-void
-cc_input_list_box_set_login (CcInputListBox *self, gboolean login)
-{
-  self->login = login;
-  clear_input_sources (self);
-  if (login)
-    add_input_sources_from_localed (self);
-  else
-    add_input_sources_from_settings (self);
 }
 
 void

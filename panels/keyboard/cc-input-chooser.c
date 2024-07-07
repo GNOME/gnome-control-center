@@ -62,7 +62,6 @@ struct _CcInputChooser
   GtkSearchEntry    *filter_entry;
   GtkListBox        *input_sources_listbox;
   GtkStack          *input_sources_stack;
-  GtkLabel          *login_label;
   GtkListBoxRow     *more_row;
   GtkWidget         *no_results;
 
@@ -73,8 +72,6 @@ struct _CcInputChooser
   gboolean           showing_extra;
   guint              filter_timeout_id;
   gchar            **filter_words;
-
-  gboolean           is_login;
 };
 
 G_DEFINE_TYPE (CcInputChooser, cc_input_chooser, ADW_TYPE_DIALOG)
@@ -827,7 +824,7 @@ get_ibus_locale_infos (CcInputChooser *self)
   const gchar *engine_id;
   IBusEngineDesc *engine;
 
-  if (!self->ibus_engines || self->is_login)
+  if (!self->ibus_engines)
     return;
 
   g_hash_table_iter_init (&iter, self->ibus_engines);
@@ -1153,7 +1150,6 @@ cc_input_chooser_class_init (CcInputChooserClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcInputChooser, filter_entry);
   gtk_widget_class_bind_template_child (widget_class, CcInputChooser, input_sources_listbox);
   gtk_widget_class_bind_template_child (widget_class, CcInputChooser, input_sources_stack);
-  gtk_widget_class_bind_template_child (widget_class, CcInputChooser, login_label);
 
   gtk_widget_class_bind_template_callback (widget_class, on_input_sources_listbox_row_activated_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_input_sources_listbox_selected_rows_changed_cb);
@@ -1170,15 +1166,13 @@ cc_input_chooser_init (CcInputChooser *self)
 }
 
 CcInputChooser *
-cc_input_chooser_new (gboolean      is_login,
-                      GnomeXkbInfo *xkb_info,
+cc_input_chooser_new (GnomeXkbInfo *xkb_info,
                       GHashTable   *ibus_engines)
 {
   CcInputChooser *self;
 
   self = g_object_new (CC_TYPE_INPUT_CHOOSER, NULL);
 
-  self->is_login = is_login;
   self->xkb_info = g_object_ref (xkb_info);
   if (ibus_engines)
     self->ibus_engines = g_hash_table_ref (ibus_engines);
@@ -1188,8 +1182,6 @@ cc_input_chooser_new (gboolean      is_login,
 
   gtk_list_box_set_filter_func (self->input_sources_listbox, list_filter, self, NULL);
   gtk_list_box_set_sort_func (self->input_sources_listbox, list_sort, self, NULL);
-
-  gtk_widget_set_visible (GTK_WIDGET (self->login_label), self->is_login);
 
   cc_input_chooser_load_locale_infos_async (self,
                                             NULL,
