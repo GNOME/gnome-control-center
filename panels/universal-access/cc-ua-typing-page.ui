@@ -3,6 +3,7 @@
   <template class="CcUaTypingPage" parent="AdwNavigationPage">
     <property name="title" translatable="yes">Typing</property>
     <property name="tag">typing</property>
+    <signal name="hidden" handler="page_hidden_cb" object="CcUaTypingPage" swapped="yes"/>
     <property name="child">
       <object class="AdwToolbarView">
         <child type="top">

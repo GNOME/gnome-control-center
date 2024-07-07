@@ -51,6 +51,7 @@ struct _CcUaTypingPage
   AdwSwitchRow       *cursor_blink_row;
   GtkScale           *blink_time_scale;
   AdwComboRow        *flash_type_row;
+  AdwEntryRow        *test_blink_row;
 
   AdwExpanderRow     *repeat_keys_row;
   GtkScale           *repeat_speed_scale;
@@ -146,6 +147,12 @@ bind_scale_with_mapping (CcUaTypingPage *self,
 }
 
 static void
+page_hidden_cb (CcUaTypingPage *self)
+{
+  gtk_editable_set_text (GTK_EDITABLE (self->test_blink_row), "");
+}
+
+static void
 cc_ua_typing_page_dispose (GObject *object)
 {
   CcUaTypingPage *self = (CcUaTypingPage *)object;
@@ -175,6 +182,7 @@ cc_ua_typing_page_class_init (CcUaTypingPageClass *klass)
 
   gtk_widget_class_bind_template_child (widget_class, CcUaTypingPage, cursor_blink_row);
   gtk_widget_class_bind_template_child (widget_class, CcUaTypingPage, blink_time_scale);
+  gtk_widget_class_bind_template_child (widget_class, CcUaTypingPage, test_blink_row);
 
   gtk_widget_class_bind_template_child (widget_class, CcUaTypingPage, repeat_keys_row);
   gtk_widget_class_bind_template_child (widget_class, CcUaTypingPage, repeat_speed_scale);
@@ -193,6 +201,8 @@ cc_ua_typing_page_class_init (CcUaTypingPageClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcUaTypingPage, bounce_keys_row);
   gtk_widget_class_bind_template_child (widget_class, CcUaTypingPage, bounce_keys_delay_scale);
   gtk_widget_class_bind_template_child (widget_class, CcUaTypingPage, bounce_keys_beep_reject_row);
+
+  gtk_widget_class_bind_template_callback (widget_class, page_hidden_cb);
 }
 
 static void
