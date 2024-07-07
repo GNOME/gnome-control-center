@@ -796,7 +796,6 @@ static void
 cc_region_page_finalize (GObject *object)
 {
         CcRegionPage *self = CC_REGION_PAGE (object);
-        GtkWidget *chooser;
 
         if (self->user_manager) {
                 g_signal_handlers_disconnect_by_data (self->user_manager, self);
@@ -816,10 +815,6 @@ cc_region_page_finalize (GObject *object)
         g_free (self->region);
         g_free (self->system_language);
         g_free (self->system_region);
-
-        chooser = g_object_get_data (G_OBJECT (self), "input-chooser");
-        if (chooser)
-                gtk_window_destroy (GTK_WINDOW (chooser));
 
         g_cancellable_cancel (self->cancellable);
         g_clear_object (&self->cancellable);
