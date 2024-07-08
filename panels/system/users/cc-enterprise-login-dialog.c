@@ -60,7 +60,7 @@ struct _CcEnterpriseLoginDialog
   AdwToastOverlay     *toast_overlay;
 
   GtkButton           *add_button;
-  GtkSpinner          *main_page_spinner;
+  AdwSpinner          *main_page_spinner;
   AdwEntryRow         *domain_row;
   CcEntryFeedback     *domain_feedback;
   gint                 domain_timeout_id;
@@ -68,7 +68,7 @@ struct _CcEnterpriseLoginDialog
   AdwPasswordEntryRow *password_row;
 
   GtkButton           *enroll_button;
-  GtkSpinner          *enroll_page_spinner;
+  AdwSpinner          *enroll_page_spinner;
   AdwEntryRow         *admin_name_row;
   AdwPasswordEntryRow *admin_password_row;
 
