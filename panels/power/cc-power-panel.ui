@@ -2,187 +2,232 @@
 <interface>
   <template class="CcPowerPanel" parent="CcPanel">
     <property name="child">
-      <object class="AdwToolbarView">
-        <child type="top">
-          <object class="AdwHeaderBar"/>
+      <object class="AdwBreakpointBin">
+        <property name="width-request">300</property>
+        <property name="height-request">200</property>
+        <child>
+          <object class="AdwBreakpoint">
+            <condition>max-width: 450sp</condition>
+            <setter object="header_bar" property="title-widget"/>
+            <setter object="view_switcher_bar" property="reveal">True</setter>
+          </object>
         </child>
-
-        <property name="content">
-          <object class="AdwPreferencesPage">
-            <child>
-              <object class="AdwPreferencesGroup" id="battery_section">
-                <child>
-                  <object class="GtkListBox" id="battery_listbox">
-                    <property name="selection-mode">none</property>
-                    <signal name="keynav-failed" handler="keynav_failed_cb" object="CcPowerPanel" swapped="yes"/>
-                    <accessibility>
-                      <relation name="labelled-by">battery_section</relation>
-                    </accessibility>
-                    <style>
-                      <class name="boxed-list"/>
-                    </style>
+        <property name="child">
+          <object class="AdwToolbarView">
+            <child type="top">
+              <object class="AdwHeaderBar" id="header_bar">
+                <property name="title-widget">
+                  <object class="AdwViewSwitcher">
+                    <property name="stack">stack</property>
+                    <property name="policy">wide</property>
                   </object>
-                </child>
+                </property>
               </object>
             </child>
-            <child>
-              <object class="AdwPreferencesGroup" id="battery_charging_section">
-                <property name="title" translatable="yes">Battery Charging</property>
-
-                <!-- Maximize Charge -->
-                <child>
-                  <object class="AdwActionRow">
-                    <property name="activatable-widget">maximize_charge_radio</property>
-                    <property name="title" translatable="yes">_Maximize Charge</property>
-                    <property name="subtitle" translatable="yes">Uses all battery capacity. Degrades batteries more quickly.</property>
-                    <property name="use_underline">True</property>
-                    <child type="prefix">
-                      <object class="GtkCheckButton" id="maximize_charge_radio">
-                        <property name="valign">center</property>
-                      </object>
-                    </child>
-                  </object>
-                </child>
-
-                <!-- Preserve Battery Health -->
-                <child>
-                  <object class="AdwActionRow">
-                    <property name="activatable-widget">preserve_battery_radio</property>
-                    <property name="title" translatable="yes">Preserve Battery _Health</property>
-                    <property name="subtitle" translatable="yes">Increases battery longevity by maintaining lower charge levels</property>
-                    <property name="use_underline">True</property>
-                    <child type="prefix">
-                      <object class="GtkCheckButton" id="preserve_battery_radio">
-                        <property name="valign">center</property>
-                        <property name="group">maximize_charge_radio</property>
-                        <signal name="notify::active" handler="battery_health_radio_changed_cb" object="CcPowerPanel" swapped="yes"/>
-                      </object>
-                    </child>
-                  </object>
-                </child>
+            <child type="bottom">
+              <object class="AdwViewSwitcherBar" id="view_switcher_bar">
+                <property name="stack">stack</property>
               </object>
             </child>
-            <child>
-              <object class="AdwPreferencesGroup" id="device_section">
-                <property name="title" translatable="yes">Connected Devices</property>
+            <property name="content">
+              <object class="AdwViewStack" id="stack">
                 <child>
-                  <object class="GtkListBox" id="device_listbox">
-                    <property name="selection-mode">none</property>
-                    <signal name="keynav-failed" handler="keynav_failed_cb" object="CcPowerPanel" swapped="yes"/>
-                    <accessibility>
-                      <relation name="labelled-by">device_section</relation>
-                    </accessibility>
-                    <style>
-                      <class name="boxed-list"/>
-                    </style>
-                  </object>
-                </child>
-              </object>
-            </child>
-            <child>
-              <object class="AdwPreferencesGroup" id="power_profile_section">
-                <property name="visible">False</property>
-                <property name="title" translatable="yes">Power Mode</property>
-                <child>
-                  <object class="GtkListBox" id="power_profile_listbox">
-                    <property name="selection-mode">none</property>
-                    <signal name="keynav-failed" handler="keynav_failed_cb" object="CcPowerPanel" swapped="yes"/>
-                    <accessibility>
-                      <relation name="labelled-by">power_profile_section</relation>
-                    </accessibility>
-                    <style>
-                      <class name="boxed-list"/>
-                    </style>
-                  </object>
-                </child>
-                <child>
-                  <object class="GtkListBox" id="power_profile_info_listbox">
-                    <property name="visible">False</property>
-                    <property name="selection-mode">none</property>
-                    <property name="margin_top">12</property>
-                    <signal name="keynav-failed" handler="keynav_failed_cb" object="CcPowerPanel" swapped="yes"/>
-                    <style>
-                      <class name="boxed-list"/>
-                    </style>
-                  </object>
-                </child>
-              </object>
-            </child>
-            <child>
-              <object class="AdwPreferencesGroup" id="power_saving_section">
-                <property name="title" translatable="yes">Power Saving</property>
-                <child>
-                  <object class="AdwSwitchRow" id="als_row">
-                    <property name="title" translatable="yes">A_utomatic Screen Brightness</property>
-                    <property name="subtitle" translatable="yes">Adjust screen brightness to the surrounding light</property>
-                    <property name="use_underline">True</property>
-                    <signal name="notify::active" handler="als_row_changed_cb" object="CcPowerPanel" swapped="yes"/>
-                  </object>
-                </child>
-                <child>
-                  <object class="AdwSwitchRow" id="dim_screen_row">
-                    <property name="title" translatable="yes">_Dim Screen</property>
-                    <property name="subtitle" translatable="yes">Reduce screen brightness when the device is inactive</property>
-                    <property name="use_underline">True</property>
-                  </object>
-                </child>
-                <child>
-                  <object class="CcNumberRow" id="blank_screen_row">
-                    <property name="title" translatable="yes">Screen _Blank</property>
-                    <property name="subtitle" translatable="yes">Turn the screen off after a period of inactivity</property>
+                  <object class="AdwViewStackPage">
+                    <property name="title" translatable="yes">_General</property>
                     <property name="use-underline">True</property>
-                    <property name="values">[60, 120, 180, 240, 300, 480, 600, 720, 900]</property>
-                    <property name="special-value">
-                      <object class="CcNumberObject">
-                        <property name="value">0</property>
-                        <property name="string" translatable="yes" comments="Translators: Idle time">Never</property>
-                        <property name="order">last</property>
+                    <property name="icon-name">org.gnome.Settings-power-symbolic</property>
+                    <property name="child">
+                      <object class="AdwPreferencesPage">
+                        <child>
+                          <object class="AdwPreferencesGroup" id="battery_section">
+                            <child>
+                              <object class="GtkListBox" id="battery_listbox">
+                                <property name="selection-mode">none</property>
+                                <signal name="keynav-failed" handler="keynav_failed_cb" object="CcPowerPanel" swapped="yes"/>
+                                <accessibility>
+                                  <relation name="labelled-by">battery_section</relation>
+                                </accessibility>
+                                <style>
+                                  <class name="boxed-list"/>
+                                </style>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="AdwPreferencesGroup" id="battery_charging_section">
+                            <property name="title" translatable="yes">Battery Charging</property>
+
+                            <!-- Maximize Charge -->
+                            <child>
+                              <object class="AdwActionRow">
+                                <property name="activatable-widget">maximize_charge_radio</property>
+                                <property name="title" translatable="yes">_Maximize Charge</property>
+                                <property name="subtitle" translatable="yes">Uses all battery capacity. Degrades batteries more quickly.</property>
+                                <property name="use_underline">True</property>
+                                <child type="prefix">
+                                  <object class="GtkCheckButton" id="maximize_charge_radio">
+                                    <property name="valign">center</property>
+                                  </object>
+                                </child>
+                              </object>
+                            </child>
+
+                            <!-- Preserve Battery Health -->
+                            <child>
+                              <object class="AdwActionRow">
+                                <property name="activatable-widget">preserve_battery_radio</property>
+                                <property name="title" translatable="yes">Preserve Battery _Health</property>
+                                <property name="subtitle" translatable="yes">Increases battery longevity by maintaining lower charge levels</property>
+                                <property name="use_underline">True</property>
+                                <child type="prefix">
+                                  <object class="GtkCheckButton" id="preserve_battery_radio">
+                                    <property name="valign">center</property>
+                                    <property name="group">maximize_charge_radio</property>
+                                    <signal name="notify::active" handler="battery_health_radio_changed_cb" object="CcPowerPanel" swapped="yes"/>
+                                  </object>
+                                </child>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="AdwPreferencesGroup" id="device_section">
+                            <property name="title" translatable="yes">Connected Devices</property>
+                            <child>
+                              <object class="GtkListBox" id="device_listbox">
+                                <property name="selection-mode">none</property>
+                                <signal name="keynav-failed" handler="keynav_failed_cb" object="CcPowerPanel" swapped="yes"/>
+                                <accessibility>
+                                  <relation name="labelled-by">device_section</relation>
+                                </accessibility>
+                                <style>
+                                  <class name="boxed-list"/>
+                                </style>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="AdwPreferencesGroup" id="power_profile_section">
+                            <property name="visible">False</property>
+                            <property name="title" translatable="yes">Power Mode</property>
+                            <child>
+                              <object class="GtkListBox" id="power_profile_listbox">
+                                <property name="selection-mode">none</property>
+                                <signal name="keynav-failed" handler="keynav_failed_cb" object="CcPowerPanel" swapped="yes"/>
+                                <accessibility>
+                                  <relation name="labelled-by">power_profile_section</relation>
+                                </accessibility>
+                                <style>
+                                  <class name="boxed-list"/>
+                                </style>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkListBox" id="power_profile_info_listbox">
+                                <property name="visible">False</property>
+                                <property name="selection-mode">none</property>
+                                <property name="margin_top">12</property>
+                                <signal name="keynav-failed" handler="keynav_failed_cb" object="CcPowerPanel" swapped="yes"/>
+                                <style>
+                                  <class name="boxed-list"/>
+                                </style>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="AdwPreferencesGroup" id="general_section">
+                            <property name="title" translatable="yes">General</property>
+                            <child>
+                              <object class="CcNumberRow" id="power_button_row">
+                                <property name="visible">False</property>
+                                <property name="title" translatable="yes">Po_wer Button Behavior</property>
+                                <property name="use-underline">True</property>
+                                <property name="value-type">string</property>
+                                <property name="sort-type">none</property>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="AdwSwitchRow" id="battery_percentage_row">
+                                <property name="visible">False</property>
+                                <property name="title" translatable="yes">_Show Battery Percentage</property>
+                                <property name="subtitle" translatable="yes">Show exact charge level in the top bar</property>
+                                <property name="use_underline">True</property>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
                       </object>
                     </property>
-                    <property name="value-type">seconds</property>
                   </object>
                 </child>
                 <child>
-                  <object class="AdwSwitchRow" id="power_saver_low_battery_row">
-                    <property name="visible">False</property>
-                    <property name="title" translatable="yes">Automatic Power _Saver</property>
-                    <property name="subtitle" translatable="yes">Turn on power saver mode when battery power is low</property>
-                    <property name="use_underline">True</property>
-                  </object>
-                </child>
-                <child>
-                  <object class="CcListRow" id="automatic_suspend_row">
-                    <property name="visible">False</property>
-                    <property name="title" translatable="yes">_Automatic Suspend</property>
-                    <property name="subtitle" translatable="yes">Pause the device after a period of inactivity</property>
-                    <property name="show-arrow">True</property>
-                    <signal name="activated" handler="adw_dialog_present" object="automatic_suspend_dialog"/>
-                  </object>
-                </child>
-              </object>
-            </child>
-            <child>
-              <object class="AdwPreferencesGroup" id="general_section">
-                <property name="title" translatable="yes">General</property>
-                <child>
-                  <object class="CcNumberRow" id="power_button_row">
-                    <property name="visible">False</property>
-                    <property name="title" translatable="yes">Po_wer Button Behavior</property>
+                  <object class="AdwViewStackPage">
+                    <property name="title" translatable="yes">_Power Saving</property>
                     <property name="use-underline">True</property>
-                    <property name="value-type">string</property>
-                    <property name="sort-type">none</property>
-                  </object>
-                </child>
-                <child>
-                  <object class="AdwSwitchRow" id="battery_percentage_row">
-                    <property name="visible">False</property>
-                    <property name="title" translatable="yes">Show Battery _Percentage</property>
-                    <property name="subtitle" translatable="yes">Show exact charge level in the top bar</property>
-                    <property name="use_underline">True</property>
+                    <property name="icon-name">power-saving-symbolic</property>
+                    <property name="child">
+                      <object class="AdwPreferencesPage">
+                        <child>
+                          <object class="AdwPreferencesGroup">
+                            <child>
+                              <object class="AdwSwitchRow" id="als_row">
+                                <property name="title" translatable="yes">A_utomatic Screen Brightness</property>
+                                <property name="subtitle" translatable="yes">Adjust screen brightness to the surrounding light</property>
+                                <property name="use_underline">True</property>
+                                <signal name="notify::active" handler="als_row_changed_cb" object="CcPowerPanel" swapped="yes"/>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="AdwSwitchRow" id="dim_screen_row">
+                                <property name="title" translatable="yes">_Dim Screen</property>
+                                <property name="subtitle" translatable="yes">Reduce screen brightness when the device is inactive</property>
+                                <property name="use_underline">True</property>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="CcNumberRow" id="blank_screen_row">
+                                <property name="title" translatable="yes">Screen _Blank</property>
+                                <property name="subtitle" translatable="yes">Turn the screen off after a period of inactivity</property>
+                                <property name="use-underline">True</property>
+                                <property name="values">[60, 120, 180, 240, 300, 480, 600, 720, 900]</property>
+                                <property name="special-value">
+                                  <object class="CcNumberObject">
+                                    <property name="value">0</property>
+                                    <property name="string" translatable="yes" comments="Translators: Idle time">Never</property>
+                                    <property name="order">last</property>
+                                  </object>
+                                </property>
+                                <property name="value-type">seconds</property>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="AdwSwitchRow" id="power_saver_low_battery_row">
+                                <property name="visible">False</property>
+                                <property name="title" translatable="yes">Automatic Power _Saver</property>
+                                <property name="subtitle" translatable="yes">Turn on power saver mode when battery power is low</property>
+                                <property name="use_underline">True</property>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="CcListRow" id="automatic_suspend_row">
+                                <property name="visible">False</property>
+                                <property name="title" translatable="yes">_Automatic Suspend</property>
+                                <property name="subtitle" translatable="yes">Pause the device after a period of inactivity</property>
+                                <property name="show-arrow">True</property>
+                                <signal name="activated" handler="adw_dialog_present" object="automatic_suspend_dialog"/>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                      </object>
+                    </property>
                   </object>
                 </child>
               </object>
-            </child>
+            </property>
           </object>
         </property>
       </object>
