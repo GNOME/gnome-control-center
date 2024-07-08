@@ -188,6 +188,18 @@
                               </object>
                             </child>
                             <child>
+                              <object class="AdwSwitchRow" id="power_saver_low_battery_row">
+                                <property name="visible">False</property>
+                                <property name="title" translatable="yes">Automatic Power _Saver</property>
+                                <property name="subtitle" translatable="yes">Turn on power saver mode when battery power is low</property>
+                                <property name="use_underline">True</property>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="AdwPreferencesGroup">
+                            <child>
                               <object class="CcNumberRow" id="blank_screen_row">
                                 <property name="title" translatable="yes">Screen _Blank</property>
                                 <property name="subtitle" translatable="yes">Turn the screen off after a period of inactivity</property>
@@ -203,17 +215,14 @@
                                 <property name="value-type">seconds</property>
                               </object>
                             </child>
-                            <child>
-                              <object class="AdwSwitchRow" id="power_saver_low_battery_row">
-                                <property name="visible">False</property>
-                                <property name="title" translatable="yes">Automatic Power _Saver</property>
-                                <property name="subtitle" translatable="yes">Turn on power saver mode when battery power is low</property>
-                                <property name="use_underline">True</property>
-                              </object>
-                            </child>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="AdwPreferencesGroup" id="automatic_suspend_section">
+                            <property name="title" translatable="yes">Automatic Suspend</property>
+                            <property name="visible">False</property>
                             <child>
                               <object class="CcListRow" id="automatic_suspend_row">
-                                <property name="visible">False</property>
                                 <property name="title" translatable="yes">_Automatic Suspend</property>
                                 <property name="subtitle" translatable="yes">Pause the device after a period of inactivity</property>
                                 <property name="show-arrow">True</property>

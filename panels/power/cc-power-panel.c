@@ -42,6 +42,7 @@ struct _CcPowerPanel
 
   AdwSwitchRow      *als_row;
   AdwDialog         *automatic_suspend_dialog;
+  AdwPreferencesGroup *automatic_suspend_section;
   CcListRow         *automatic_suspend_row;
   AdwPreferencesGroup *battery_charging_section;
   GtkListBox        *battery_listbox;
@@ -781,7 +782,7 @@ setup_power_saving (CcPowerPanel *self)
   if (can_suspend_or_hibernate (self, "CanSuspend") && 
       g_strcmp0 (self->chassis_type, "vm") != 0)
     {
-      gtk_widget_set_visible (GTK_WIDGET (self->automatic_suspend_row), TRUE);
+      gtk_widget_set_visible (GTK_WIDGET (self->automatic_suspend_section), TRUE);
 
       g_signal_connect_object (self->gsd_settings, "changed", G_CALLBACK (on_suspend_settings_changed), self, G_CONNECT_SWAPPED);
 
@@ -1256,6 +1257,7 @@ cc_power_panel_class_init (CcPowerPanelClass *klass)
 
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, als_row);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, automatic_suspend_dialog);
+  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, automatic_suspend_section);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, automatic_suspend_row);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, battery_charging_section);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, battery_listbox);
