@@ -434,16 +434,24 @@ cc_number_row_constructed (GObject *obj)
 }
 
 static void
+cc_number_row_clear_settings_binding (CcNumberRow *self)
+{
+    g_clear_signal_handler (&self->number_row_settings_changed_id, self->bind_settings);
+    g_clear_signal_handler (&self->number_row_selected_changed_id, self);
+
+    g_clear_object (&self->bind_settings);
+    g_clear_pointer (&self->bind_key, g_free);
+
+}
+
+static void
 cc_number_row_dispose (GObject *object)
 {
     CcNumberRow *self = CC_NUMBER_ROW (object);
 
-    g_clear_signal_handler (&self->number_row_settings_changed_id, self->bind_settings);
-    g_clear_signal_handler (&self->number_row_selected_changed_id, self);
+    cc_number_row_clear_settings_binding (self);
 
     g_clear_object (&self->store);
-    g_clear_object (&self->bind_settings);
-    g_clear_pointer (&self->bind_key, g_free);
 
     G_OBJECT_CLASS (cc_number_row_parent_class)->dispose (object);
 }
@@ -727,6 +735,9 @@ number_row_selected_changed_cb (CcNumberRow *self)
  *
  * If the value of @key does not exist yet in the the list of @self, it
  * will be added.
+ *
+ * If a binding already existed, it will be removed and replaced by the
+ * new binding.
  */
 void
 cc_number_row_bind_settings (CcNumberRow *self,
@@ -742,7 +753,8 @@ cc_number_row_bind_settings (CcNumberRow *self,
 
     g_return_if_fail (CC_IS_NUMBER_ROW (self));
     g_return_if_fail (G_IS_SETTINGS (settings));
-    g_return_if_fail (self->bind_settings == NULL);
+
+    cc_number_row_clear_settings_binding (self);
 
     /* Extract the detailed key type, which includes "enum". Convoluted api... */
     g_object_get (settings, "settings-schema", &schema, NULL);
@@ -778,4 +790,22 @@ cc_number_row_bind_settings (CcNumberRow *self,
         g_signal_connect (self, "notify::selected", G_CALLBACK (number_row_selected_changed_cb), NULL);
 
     number_row_settings_changed_cb (self);
+}
+
+/**
+ * cc_number_row_unbind_settings:
+ * @self: a `CcNumberRow`
+ *
+ * Removes the `GSettings` binding that was created using
+ * `cc_number_row_bind_settings()`.
+ *
+ * This function is always safe to call, nothing happens if there was no
+ * binding.
+ */
+void
+cc_number_row_unbind_settings (CcNumberRow *self)
+{
+    g_return_if_fail (CC_IS_NUMBER_ROW (self));
+
+    cc_number_row_clear_settings_binding (self);
 }

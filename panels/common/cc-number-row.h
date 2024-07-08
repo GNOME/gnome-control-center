@@ -97,6 +97,7 @@ guint    cc_number_row_add_value_full (CcNumberRow *self, int value, const char 
 int      cc_number_row_get_value      (CcNumberRow *self, guint position);
 gboolean cc_number_row_has_value      (CcNumberRow *self, int value, guint *position);
 
-void cc_number_row_bind_settings (CcNumberRow *self, GSettings *settings, const char *key);
+void cc_number_row_bind_settings   (CcNumberRow *self, GSettings *settings, const char *key);
+void cc_number_row_unbind_settings (CcNumberRow *self);
 
 G_END_DECLS
