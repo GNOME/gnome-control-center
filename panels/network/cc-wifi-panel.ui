@@ -36,20 +36,7 @@
               </object>
             </child>
 
-            <!-- Airplane Mode -->
-            <child>
-              <object class="AdwPreferencesGroup" id="rfkill_widget">
-                <child>
-                  <object class="AdwSwitchRow" id="rfkill_row">
-                    <property name="title" translatable="yes">Airplane Mode</property>
-                    <property name="subtitle" translatable="yes">Disables Wi-Fi, Bluetooth and mobile broadband</property>
-                    <signal name="notify::active" handler="rfkill_switch_notify_activate_cb" object="CcWifiPanel" swapped="yes" />
-                  </object>
-                </child>
-              </object>
-            </child>
-
-            <!-- Wi-Fi List / No Wi-Fi Adapter / Airplane Mode Enabled -->
+            <!-- Wi-Fi List / No Wi-Fi Adapter -->
             <child>
               <object class="AdwPreferencesGroup">
                 <child>
@@ -82,20 +69,6 @@
                             <property name="title" translatable="yes">No Wi-Fi Adapter Found</property>
                             <property name="description" translatable="yes">Make sure you have a Wi-Fi adapter plugged and turned on</property>
                          </object>
-                        </property>
-                      </object>
-                    </child>
-
-                    <!-- "Airplane Mode" page -->
-                    <child>
-                      <object class="GtkStackPage">
-                        <property name="name">airplane-mode</property>
-                        <property name="child">
-                          <object class="AdwStatusPage">
-                            <property name="icon-name">airplane-mode-symbolic</property>
-                            <property name="title" translatable="yes">Airplane Mode On</property>
-                            <property name="description" translatable="yes">Turn off to use Wi-Fi</property>
-                          </object>
                         </property>
                       </object>
                     </child>

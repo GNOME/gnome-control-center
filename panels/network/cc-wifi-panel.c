@@ -46,11 +46,6 @@ struct _CcWifiPanel
 {
   CcPanel             parent;
 
-  /* RFKill (Airplane Mode) */
-  GDBusProxy         *rfkill_proxy;
-  AdwSwitchRow       *rfkill_row;
-  GtkWidget          *rfkill_widget;
-
   /* Main widgets */
   GtkStack           *center_stack;
   GtkStack           *device_stack;
@@ -74,8 +69,6 @@ struct _CcWifiPanel
   gchar              *arg_device;
   gchar              *arg_access_point;
 };
-
-static void          rfkill_switch_notify_activate_cb            (CcWifiPanel        *self);
 
 static void          update_devices_names                        (CcWifiPanel        *self);
 
@@ -310,19 +303,15 @@ static void
 check_main_stack_page (CcWifiPanel *self)
 {
   const gchar *nm_version;
-  gboolean airplane_mode_active;
   gboolean wireless_hw_enabled;
   gboolean wireless_enabled;
 
   nm_version = nm_client_get_version (self->client);
   wireless_hw_enabled = nm_client_wireless_hardware_get_enabled (self->client);
   wireless_enabled = nm_client_wireless_get_enabled (self->client);
-  airplane_mode_active = adw_switch_row_get_active (self->rfkill_row);
 
   if (!nm_version)
     gtk_stack_set_visible_child_name (self->main_stack, "nm-not-running");
-  else if (!wireless_enabled && airplane_mode_active)
-    gtk_stack_set_visible_child_name (self->main_stack, "airplane-mode");
   else if (!wireless_hw_enabled || self->devices->len == 0)
     gtk_stack_set_visible_child_name (self->main_stack, "no-wifi-devices");
   else if (!wireless_enabled)
@@ -352,50 +341,6 @@ load_wifi_devices (CcWifiPanel *self)
           add_wifi_device (self, device);
         }
     }
-
-  check_main_stack_page (self);
-}
-
-static inline gboolean
-get_cached_rfkill_property (CcWifiPanel *self,
-                            const gchar *property)
-{
-  g_autoptr(GVariant) result = NULL;
-
-  result = g_dbus_proxy_get_cached_property (self->rfkill_proxy, property);
-  return result ? g_variant_get_boolean (result) : FALSE;
-}
-
-static void
-sync_airplane_mode_switch (CcWifiPanel *self)
-{
-  gboolean enabled, should_show, hw_enabled;
-
-  enabled = get_cached_rfkill_property (self, "HasAirplaneMode");
-  should_show = get_cached_rfkill_property (self, "ShouldShowAirplaneMode");
-
-  gtk_widget_set_visible (GTK_WIDGET (self->rfkill_widget), enabled && should_show);
-  if (!enabled || !should_show)
-    return;
-
-  enabled = get_cached_rfkill_property (self, "AirplaneMode");
-  hw_enabled = get_cached_rfkill_property (self, "HardwareAirplaneMode");
-
-  enabled |= hw_enabled;
-
-  if (enabled != adw_switch_row_get_active (self->rfkill_row))
-    {
-      g_signal_handlers_block_by_func (self->rfkill_row,
-                                       rfkill_switch_notify_activate_cb,
-                                       self);
-      g_object_set (self->rfkill_row, "active", enabled, NULL);
-      check_main_stack_page (self);
-      g_signal_handlers_unblock_by_func (self->rfkill_row,
-                                         rfkill_switch_notify_activate_cb,
-                                         self);
-  }
-
-  gtk_widget_set_sensitive (GTK_WIDGET (self->rfkill_row), !hw_enabled);
 
   check_main_stack_page (self);
 }
@@ -633,65 +578,6 @@ wireless_enabled_cb (CcWifiPanel *self)
 }
 
 static void
-on_rfkill_proxy_properties_changed_cb (CcWifiPanel *self)
-{
-  g_debug ("Rfkill properties changed");
-
-  sync_airplane_mode_switch (self);
-}
-
-static void
-rfkill_proxy_acquired_cb (GObject      *source_object,
-                          GAsyncResult *res,
-                          gpointer      user_data)
-{
-  CcWifiPanel *self;
-  GDBusProxy *proxy;
-  g_autoptr(GError) error = NULL;
-
-  proxy = cc_object_storage_create_dbus_proxy_finish (res, &error);
-
-  if (error)
-    {
-      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
-        g_printerr ("Error creating rfkill proxy: %s\n", error->message);
-
-      return;
-    }
-
-  self = CC_WIFI_PANEL (user_data);
-
-  self->rfkill_proxy = proxy;
-
-  g_signal_connect_object (proxy,
-                           "g-properties-changed",
-                           G_CALLBACK (on_rfkill_proxy_properties_changed_cb),
-                           self,
-                           G_CONNECT_SWAPPED);
-
-  sync_airplane_mode_switch (self);
-}
-
-static void
-rfkill_switch_notify_activate_cb (CcWifiPanel *self)
-{
-  gboolean enable;
-
-  enable = adw_switch_row_get_active (self->rfkill_row);
-
-  g_dbus_proxy_call (self->rfkill_proxy,
-                     "org.freedesktop.DBus.Properties.Set",
-                     g_variant_new_parsed ("('org.gnome.SettingsDaemon.Rfkill',"
-                                           "'AirplaneMode', %v)",
-                                           g_variant_new_boolean (enable)),
-                     G_DBUS_CALL_FLAGS_NONE,
-                     -1,
-                     cc_panel_get_cancellable (CC_PANEL (self)),
-                     NULL,
-                     NULL);
-}
-
-static void
 on_stack_visible_child_changed_cb (CcWifiPanel *self)
 {
   const gchar *visible_device_id = NULL;
@@ -743,7 +629,6 @@ cc_wifi_panel_finalize (GObject *object)
   CcWifiPanel *self = (CcWifiPanel *)object;
 
   g_clear_object (&self->client);
-  g_clear_object (&self->rfkill_proxy);
 
   g_clear_pointer (&self->devices, g_ptr_array_unref);
 
@@ -839,14 +724,11 @@ cc_wifi_panel_class_init (CcWifiPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcWifiPanel, hotspot_box);
   gtk_widget_class_bind_template_child (widget_class, CcWifiPanel, list_label);
   gtk_widget_class_bind_template_child (widget_class, CcWifiPanel, main_stack);
-  gtk_widget_class_bind_template_child (widget_class, CcWifiPanel, rfkill_row);
-  gtk_widget_class_bind_template_child (widget_class, CcWifiPanel, rfkill_widget);
   gtk_widget_class_bind_template_child (widget_class, CcWifiPanel, spinner);
   gtk_widget_class_bind_template_child (widget_class, CcWifiPanel, stack);
   gtk_widget_class_bind_template_child (widget_class, CcWifiPanel, stop_hotspot_dialog);
   gtk_widget_class_bind_template_child (widget_class, CcWifiPanel, wifi_qr_image);
 
-  gtk_widget_class_bind_template_callback (widget_class, rfkill_switch_notify_activate_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_stack_visible_child_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_stop_hotspot_dialog_response_cb);
 
@@ -894,16 +776,6 @@ cc_wifi_panel_init (CcWifiPanel *self)
 
   /* Load Wi-Fi devices */
   load_wifi_devices (self);
-
-  /* Acquire Airplane Mode proxy */
-  cc_object_storage_create_dbus_proxy (G_BUS_TYPE_SESSION,
-                                       G_DBUS_PROXY_FLAGS_NONE,
-                                       "org.gnome.SettingsDaemon.Rfkill",
-                                       "/org/gnome/SettingsDaemon/Rfkill",
-                                       "org.gnome.SettingsDaemon.Rfkill",
-                                       cc_panel_get_cancellable (CC_PANEL (self)),
-                                       rfkill_proxy_acquired_cb,
-                                       self);
 
   /* Handle comment-line arguments after loading devices */
   handle_argv (self);
