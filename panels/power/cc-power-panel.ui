@@ -209,7 +209,8 @@
                             </child>
                             <child>
                               <object class="CcNumberRow" id="blank_screen_delay_row">
-                                <property name="title" translatable="yes">Delay</property>
+                                <property name="title" translatable="yes">D_elay</property>
+                                <property name="use_underline">True</property>
                                 <property name="sensitive" bind-source="blank_screen_switch_row" bind-property="active" bind-flags="sync-create"/>
                                 <property name="values">[60, 120, 180, 240, 300, 480, 600, 720, 900]</property>
                                 <property name="value-type">seconds</property>
@@ -218,15 +219,40 @@
                           </object>
                         </child>
                         <child>
-                          <object class="AdwPreferencesGroup" id="automatic_suspend_section">
+                          <object class="AdwPreferencesGroup" id="suspend_on_battery_group">
                             <property name="title" translatable="yes">Automatic Suspend</property>
                             <property name="visible">False</property>
                             <child>
-                              <object class="CcListRow" id="automatic_suspend_row">
-                                <property name="title" translatable="yes">_Automatic Suspend</property>
-                                <property name="subtitle" translatable="yes">Pause the device after a period of inactivity</property>
-                                <property name="show-arrow">True</property>
-                                <signal name="activated" handler="adw_dialog_present" object="automatic_suspend_dialog"/>
+                              <object class="AdwSwitchRow" id="suspend_on_battery_switch_row">
+                                <property name="title" translatable="yes">On Ba_ttery Power</property>
+                                <property name="use_underline">True</property>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="CcNumberRow" id="suspend_on_battery_delay_row">
+                                <property name="sensitive" bind-source="suspend_on_battery_switch_row" bind-property="active" bind-flags="sync-create"/>
+                                <property name="title" translatable="yes">De_lay</property>
+                                <property name="use-underline">True</property>
+                                <property name="value-type">seconds</property>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="AdwPreferencesGroup" id="suspend_on_ac_group">
+                            <property name="visible">False</property>
+                            <child>
+                              <object class="AdwSwitchRow" id="suspend_on_ac_switch_row">
+                                <property name="title" translatable="yes">When Plu_gged In</property>
+                                <property name="use_underline">True</property>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="CcNumberRow" id="suspend_on_ac_delay_row">
+                                <property name="sensitive" bind-source="suspend_on_ac_switch_row" bind-property="active" bind-flags="sync-create"/>
+                                <property name="title" translatable="yes">Del_ay</property>
+                                <property name="use-underline">True</property>
+                                <property name="value-type">seconds</property>
                               </object>
                             </child>
                           </object>
@@ -242,56 +268,4 @@
       </object>
     </property>
   </template>
-
-  <object class="AdwDialog" id="automatic_suspend_dialog">
-    <property name="title" translatable="yes">Automatic Suspend</property>
-    <property name="content-width">400</property>
-    <property name="child">
-      <object class="AdwToolbarView">
-        <child type="top">
-          <object class="AdwHeaderBar"/>
-        </child>
-        <property name="content">
-          <object class="AdwPreferencesPage">
-            <child>
-              <object class="AdwPreferencesGroup" id="suspend_on_battery_group">
-                <child>
-                  <object class="AdwSwitchRow" id="suspend_on_battery_switch_row">
-                    <property name="title" translatable="yes">On _Battery Power</property>
-                    <property name="use_underline">True</property>
-                  </object>
-                </child>
-                <child>
-                  <object class="CcNumberRow" id="suspend_on_battery_delay_row">
-                    <property name="sensitive" bind-source="suspend_on_battery_switch_row" bind-property="active" bind-flags="sync-create"/>
-                    <property name="title" translatable="yes">_Delay</property>
-                    <property name="use-underline">True</property>
-                    <property name="value-type">seconds</property>
-                  </object>
-                </child>
-              </object>
-            </child> 
-            <child>
-              <object class="AdwPreferencesGroup">
-                <child>
-                  <object class="AdwSwitchRow" id="suspend_on_ac_switch_row">
-                    <property name="title" translatable="yes">When _Plugged In</property>
-                    <property name="use_underline">True</property>
-                  </object>
-                </child>
-                <child>
-                  <object class="CcNumberRow" id="suspend_on_ac_delay_row">
-                    <property name="sensitive" bind-source="suspend_on_ac_switch_row" bind-property="active" bind-flags="sync-create"/>
-                    <property name="title" translatable="yes">D_elay</property>
-                    <property name="use-underline">True</property>
-                    <property name="value-type">seconds</property>
-                  </object>
-                </child>
-              </object>
-            </child>
-          </object>
-        </property>
-      </object>
-    </property>
-  </object>
 </interface>

@@ -27,7 +27,6 @@
 #include <gio/gdesktopappinfo.h>
 
 #include "shell/cc-object-storage.h"
-#include "cc-list-row.h"
 #include "cc-battery-row.h"
 #include "cc-hostname.h"
 #include "cc-number-row.h"
@@ -41,9 +40,6 @@ struct _CcPowerPanel
   CcPanel            parent_instance;
 
   AdwSwitchRow      *als_row;
-  AdwDialog         *automatic_suspend_dialog;
-  AdwPreferencesGroup *automatic_suspend_section;
-  CcListRow         *automatic_suspend_row;
   AdwPreferencesGroup *battery_charging_section;
   GtkListBox        *battery_listbox;
   AdwSwitchRow      *battery_percentage_row;
@@ -63,9 +59,10 @@ struct _CcPowerPanel
   AdwSwitchRow      *power_saver_low_battery_row;
   CcNumberRow       *suspend_on_battery_delay_row;
   AdwSwitchRow      *suspend_on_battery_switch_row;
-  GtkWidget         *suspend_on_battery_group;
+  AdwPreferencesGroup *suspend_on_battery_group;
   CcNumberRow       *suspend_on_ac_delay_row;
   AdwSwitchRow      *suspend_on_ac_switch_row;
+  AdwPreferencesGroup *suspend_on_ac_group;
 
   GSettings     *gsd_settings;
   GSettings     *session_settings;
@@ -422,11 +419,11 @@ set_ac_battery_ui_mode (CcPowerPanel *self)
     }
   g_clear_pointer (&devices, g_ptr_array_unref);
 
-  if (!self->has_batteries)
-    {
-      gtk_widget_set_visible (GTK_WIDGET (self->suspend_on_battery_group), FALSE);
-      adw_preferences_row_set_title (ADW_PREFERENCES_ROW (self->suspend_on_ac_switch_row), _("When _Idle"));
-    }
+  if (self->has_batteries)
+    gtk_widget_set_visible (GTK_WIDGET (self->suspend_on_battery_group), TRUE);
+  else
+    adw_preferences_row_set_title (ADW_PREFERENCES_ROW (self->suspend_on_ac_switch_row),
+                                   adw_preferences_group_get_title (self->suspend_on_battery_group));
 }
 
 static gboolean
@@ -535,64 +532,6 @@ populate_power_button_row (CcNumberRow *row,
         continue;
 
       cc_number_row_add_value_full (row, value, _(name), CC_NUMBER_ORDER_DEFAULT);
-    }
-}
-
-#define NEVER 0
-
-static void
-update_automatic_suspend_label (CcPowerPanel *self)
-{
-  GsdPowerActionType ac_action;
-  GsdPowerActionType battery_action;
-  gint ac_timeout;
-  gint battery_timeout;
-  const gchar *s;
-
-  ac_action = g_settings_get_enum (self->gsd_settings, "sleep-inactive-ac-type");
-  battery_action = g_settings_get_enum (self->gsd_settings, "sleep-inactive-battery-type");
-  ac_timeout = g_settings_get_int (self->gsd_settings, "sleep-inactive-ac-timeout");
-  battery_timeout = g_settings_get_int (self->gsd_settings, "sleep-inactive-battery-timeout");
-
-  if (ac_timeout < 0)
-    g_warning ("Invalid negative timeout for 'sleep-inactive-ac-timeout': %d", ac_timeout);
-  if (battery_timeout < 0)
-    g_warning ("Invalid negative timeout for 'sleep-inactive-battery-timeout': %d", battery_timeout);
-
-  if (ac_action == GSD_POWER_ACTION_NOTHING || ac_timeout < 0)
-    ac_timeout = NEVER;
-  if (battery_action == GSD_POWER_ACTION_NOTHING || battery_timeout < 0)
-    battery_timeout = NEVER;
-
-  if (self->has_batteries)
-    {
-      if (ac_timeout == NEVER && battery_timeout == NEVER)
-        s = _("Off");
-      else if (ac_timeout == NEVER && battery_timeout > 0)
-        s = _("On Battery Power");
-      else if (ac_timeout > 0 && battery_timeout == NEVER)
-        s = _("When Plugged In");
-      else
-        s = _("On");
-    }
-  else
-    {
-      if (ac_timeout == NEVER)
-        s = _("Off");
-      else
-        s = _("On");
-    }
-
-  cc_list_row_set_secondary_label (self->automatic_suspend_row, s);
-}
-
-static void
-on_suspend_settings_changed (CcPowerPanel *self,
-                             const char   *key)
-{
-  if (g_str_has_prefix (key, "sleep-inactive-"))
-    {
-      update_automatic_suspend_label (self);
     }
 }
 
@@ -814,13 +753,11 @@ setup_power_saving (CcPowerPanel *self)
       g_settings_set_int (self->gsd_settings, "sleep-inactive-battery-timeout", 1800);
     }
 
-  /* Automatic suspend row */
+  /* Automatic suspend rows */
   if (can_suspend_or_hibernate (self, "CanSuspend") && 
       g_strcmp0 (self->chassis_type, "vm") != 0)
     {
-      gtk_widget_set_visible (GTK_WIDGET (self->automatic_suspend_section), TRUE);
-
-      g_signal_connect_object (self->gsd_settings, "changed", G_CALLBACK (on_suspend_settings_changed), self, G_CONNECT_SWAPPED);
+      gtk_widget_set_visible (GTK_WIDGET (self->suspend_on_ac_group), TRUE);
 
       g_settings_bind_with_mapping (self->gsd_settings, "sleep-inactive-battery-type",
                                     self->suspend_on_battery_switch_row, "active",
@@ -835,7 +772,6 @@ setup_power_saving (CcPowerPanel *self)
       setup_suspend_delay_rows (self);
 
       set_ac_battery_ui_mode (self);
-      update_automatic_suspend_label (self);
     }
 }
 
@@ -1292,9 +1228,6 @@ cc_power_panel_class_init (CcPowerPanelClass *klass)
   g_type_ensure (CC_TYPE_NUMBER_ROW);
 
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, als_row);
-  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, automatic_suspend_dialog);
-  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, automatic_suspend_section);
-  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, automatic_suspend_row);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, battery_charging_section);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, battery_listbox);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, battery_percentage_row);
@@ -1317,6 +1250,7 @@ cc_power_panel_class_init (CcPowerPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, suspend_on_battery_group);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, suspend_on_ac_delay_row);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, suspend_on_ac_switch_row);
+  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, suspend_on_ac_group);
 
   gtk_widget_class_bind_template_callback (widget_class, als_row_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, blank_screen_switch_cb);
