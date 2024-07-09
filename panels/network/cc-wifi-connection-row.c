@@ -37,7 +37,7 @@ struct _CcWifiConnectionRow
 
   GtkLabel        *active_label;
   GtkCheckButton  *checkbutton;
-  GtkSpinner      *connecting_spinner;
+  AdwSpinner      *connecting_spinner;
   GtkImage        *encrypted_icon;
   GtkButton       *options_button;
   GtkButton       *forget_button;
@@ -259,15 +259,6 @@ update_ui (CcWifiConnectionRow *self)
     }
 
   gtk_widget_set_visible (GTK_WIDGET (self->connecting_spinner), connecting);
-  if (connecting)
-    {
-      gtk_spinner_start (self->connecting_spinner);
-    }
-  else
-    {
-      gtk_spinner_stop (self->connecting_spinner);
-    }
-
   gtk_widget_set_visible (GTK_WIDGET (self->active_label), active);
   gtk_widget_set_visible (GTK_WIDGET (self->options_button), active || connecting || self->known_connection);
   gtk_widget_set_visible (GTK_WIDGET (self->qr_code_button), (active || self->known_connection) && is_qr_code_supported (self->connection));
