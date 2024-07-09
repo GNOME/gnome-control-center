@@ -490,12 +490,7 @@ get_sleep_type (GValue   *value,
                 GVariant *variant,
                 gpointer  data)
 {
-  gboolean enabled;
-
-  if (g_strcmp0 (g_variant_get_string (variant, NULL), "nothing") == 0)
-    enabled = FALSE;
-  else
-    enabled = TRUE;
+  gboolean enabled = !g_str_equal (g_variant_get_string (variant, NULL), "nothing");
 
   g_value_set_boolean (value, enabled);
 
@@ -507,14 +502,9 @@ set_sleep_type (const GValue       *value,
                 const GVariantType *expected_type,
                 gpointer            data)
 {
-  GVariant *res;
+  const char *sleep_str = g_value_get_boolean (value) ? "suspend" : "nothing";
 
-  if (g_value_get_boolean (value))
-    res = g_variant_new_string ("suspend");
-  else
-    res = g_variant_new_string ("nothing");
-
-  return res;
+  return g_variant_new_string (sleep_str);
 }
 
 static void
