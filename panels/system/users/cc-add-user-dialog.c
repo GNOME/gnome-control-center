@@ -204,6 +204,7 @@ update_password_strength (CcAddUserDialog *self)
 
         if (strlen (password) == 0) {
                 cc_entry_feedback_reset (self->password_hint);
+                gtk_level_bar_set_value (self->strength_indicator, 0);
 
                 return FALSE;
         }
@@ -213,7 +214,8 @@ update_password_strength (CcAddUserDialog *self)
         accept = valid || !enforcing;
 
         gtk_level_bar_set_value (self->strength_indicator, strength_level);
-        cc_entry_feedback_update (self->password_hint, valid ? "emblem-ok" : "dialog-warning", hint);
+        if (enforcing)
+                cc_entry_feedback_update (self->password_hint, valid ? "emblem-ok" : "dialog-warning", hint);
 
         verify = gtk_editable_get_text (GTK_EDITABLE (self->verify_password_row));
         if (strlen (verify) == 0) {
