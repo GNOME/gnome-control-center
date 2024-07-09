@@ -222,7 +222,7 @@ wifi_panel_update_qr_image_cb (CcWifiPanel *self)
 
   gtk_widget_set_visible (GTK_WIDGET (self->hotspot_box), hotspot != NULL);
   gtk_widget_set_opacity (GTK_WIDGET (self->list_label), hotspot == NULL);
-  gtk_widget_set_opacity (GTK_WIDGET (self->spinner), hotspot == NULL);
+  gtk_widget_set_visible (GTK_WIDGET (self->spinner), hotspot == NULL);
 }
 
 static void
@@ -700,7 +700,7 @@ on_stack_visible_child_changed_cb (CcWifiPanel *self)
           self->spinner_binding = g_object_bind_property (net_device,
                                                           "scanning",
                                                           self->spinner,
-                                                          "spinning",
+                                                          "visible",
                                                           G_BINDING_DEFAULT | G_BINDING_SYNC_CREATE);
           break;
         }
