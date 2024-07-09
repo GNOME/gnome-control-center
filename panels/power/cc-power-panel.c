@@ -48,7 +48,8 @@ struct _CcPowerPanel
   GtkListBox        *battery_listbox;
   AdwSwitchRow      *battery_percentage_row;
   AdwPreferencesGroup *battery_section;
-  CcNumberRow       *blank_screen_row;
+  AdwSwitchRow      *blank_screen_switch_row;
+  CcNumberRow       *blank_screen_delay_row;
   GtkListBox        *device_listbox;
   AdwPreferencesGroup *device_section;
   AdwSwitchRow      *dim_screen_row;
@@ -679,6 +680,51 @@ got_brightness_cb (GObject      *source_object,
 }
 
 static void
+blank_screen_switch_cb (CcPowerPanel *self)
+{
+  if (adw_switch_row_get_active (self->blank_screen_switch_row))
+    {
+      /* "Reset" to the delay value if coming from a disabled state */
+      if (g_settings_get_uint (self->session_settings, "idle-delay") == 0)
+        {
+          guint position = adw_combo_row_get_selected (ADW_COMBO_ROW (self->blank_screen_delay_row));
+
+          g_settings_set_uint (self->session_settings, "idle-delay",
+                               cc_number_row_get_value (self->blank_screen_delay_row, position));
+        }
+
+      cc_number_row_bind_settings (self->blank_screen_delay_row, self->session_settings, "idle-delay");
+    }
+  else
+    {
+      cc_number_row_unbind_settings (self->blank_screen_delay_row);
+      g_settings_set_uint (self->session_settings, "idle-delay", 0);
+    }
+}
+
+#define BLANK_SCREEN_DEFAULT 300
+
+static void
+setup_blank_screen_rows (CcPowerPanel *self)
+{
+  if (g_settings_get_uint (self->session_settings, "idle-delay") != 0)
+    {
+      /* The handler sets up a GSettings binding */
+      adw_switch_row_set_active (self->blank_screen_switch_row, TRUE);
+    }
+  else
+    {
+      guint position;
+
+      /* Set the default value on the delay row to show what we'll get if enabled */
+      if (!cc_number_row_has_value (self->blank_screen_delay_row, BLANK_SCREEN_DEFAULT, &position))
+        position = cc_number_row_add_value (self->blank_screen_delay_row, BLANK_SCREEN_DEFAULT);
+
+      adw_combo_row_set_selected (ADW_COMBO_ROW (self->blank_screen_delay_row), position);
+    }
+}
+
+static void
 setup_suspend_delay_rows (CcPowerPanel *self)
 {
   static const int normal_times[] = {900, 1200, 1500, 1800, 2700, 3600, 4800, 5400, 6000, 7200};
@@ -759,7 +805,7 @@ setup_power_saving (CcPowerPanel *self)
                    self->dim_screen_row, "active",
                    G_SETTINGS_BIND_DEFAULT);
 
-  cc_number_row_bind_settings (self->blank_screen_row, self->session_settings, "idle-delay");
+  setup_blank_screen_rows (self);
 
   /* The default values for these settings are unfortunate for us;
    * timeout == 0, action == suspend means 'do nothing' - just
@@ -1263,7 +1309,8 @@ cc_power_panel_class_init (CcPowerPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, battery_listbox);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, battery_percentage_row);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, battery_section);
-  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, blank_screen_row);
+  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, blank_screen_delay_row);
+  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, blank_screen_switch_row);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, device_listbox);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, device_section);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, dim_screen_row);
@@ -1282,6 +1329,7 @@ cc_power_panel_class_init (CcPowerPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, suspend_on_ac_switch_row);
 
   gtk_widget_class_bind_template_callback (widget_class, als_row_changed_cb);
+  gtk_widget_class_bind_template_callback (widget_class, blank_screen_switch_cb);
   gtk_widget_class_bind_template_callback (widget_class, keynav_failed_cb);
   gtk_widget_class_bind_template_callback (widget_class, battery_health_radio_changed_cb);
 }

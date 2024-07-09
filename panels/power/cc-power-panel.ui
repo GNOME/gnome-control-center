@@ -200,18 +200,18 @@
                         <child>
                           <object class="AdwPreferencesGroup">
                             <child>
-                              <object class="CcNumberRow" id="blank_screen_row">
-                                <property name="title" translatable="yes">Screen _Blank</property>
+                              <object class="AdwSwitchRow" id="blank_screen_switch_row">
+                                <property name="title" translatable="yes">Automatic Screen _Blank</property>
                                 <property name="subtitle" translatable="yes">Turn the screen off after a period of inactivity</property>
                                 <property name="use-underline">True</property>
+                                <signal name="notify::active" handler="blank_screen_switch_cb" object="CcPowerPanel" swapped="yes"/>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="CcNumberRow" id="blank_screen_delay_row">
+                                <property name="title" translatable="yes">Delay</property>
+                                <property name="sensitive" bind-source="blank_screen_switch_row" bind-property="active" bind-flags="sync-create"/>
                                 <property name="values">[60, 120, 180, 240, 300, 480, 600, 720, 900]</property>
-                                <property name="special-value">
-                                  <object class="CcNumberObject">
-                                    <property name="value">0</property>
-                                    <property name="string" translatable="yes" comments="Translators: Idle time">Never</property>
-                                    <property name="order">last</property>
-                                  </object>
-                                </property>
                                 <property name="value-type">seconds</property>
                               </object>
                             </child>
