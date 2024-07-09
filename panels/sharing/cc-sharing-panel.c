@@ -284,6 +284,23 @@ cc_sharing_panel_add_folder (CcSharingPanel *self,
 }
 
 static void
+cc_sharing_panel_open_folder (CcSharingPanel *self,
+                              GtkButton      *button)
+{
+  GtkWidget *row;
+  const gchar *path;
+  g_autoptr(GFile) file = NULL;
+  g_autoptr(GtkFileLauncher) launcher = NULL;
+
+  row = g_object_get_data (G_OBJECT (button), "row");
+  path = g_object_get_data (G_OBJECT (row), "path");
+  file = g_file_new_for_path (path);
+  launcher = gtk_file_launcher_new (file);
+
+  gtk_file_launcher_launch (launcher, self->toplevel, NULL, NULL, NULL);
+}
+
+static void
 cc_sharing_panel_remove_folder (CcSharingPanel *self,
                                 GtkButton      *button)
 {
@@ -390,6 +407,16 @@ cc_sharing_panel_new_media_sharing_row (const char     *uri_or_path,
   /* Label */
   basename = g_filename_display_basename (path);
   adw_preferences_row_set_title (ADW_PREFERENCES_ROW (row), basename);
+
+  /* Open folder button */
+  w = gtk_button_new_from_icon_name ("folder-open-symbolic");
+  gtk_widget_set_tooltip_text (w, _("Open Folder"));
+  gtk_widget_add_css_class (w, "flat");
+  gtk_widget_set_valign (w, GTK_ALIGN_CENTER);
+  adw_action_row_add_suffix (ADW_ACTION_ROW (row), w);
+  g_signal_connect_object (G_OBJECT (w), "clicked",
+                           G_CALLBACK (cc_sharing_panel_open_folder), self, G_CONNECT_SWAPPED);
+  g_object_set_data (G_OBJECT (w), "row", row);
 
   /* Remove button */
   w = gtk_button_new_from_icon_name ("edit-delete-symbolic");
