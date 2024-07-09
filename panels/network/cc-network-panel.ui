@@ -58,6 +58,17 @@ Error details: NetworkManager not running.</property>
                           </object>
                         </child>
                         <child>
+                          <object class="AdwPreferencesGroup" id="rfkill_widget">
+                            <child>
+                              <object class="AdwSwitchRow" id="rfkill_row">
+                                <property name="title" translatable="yes">Airplane Mode</property>
+                                <property name="subtitle" translatable="yes">Disables Wi-Fi, Bluetooth and mobile broadband</property>
+                                <signal name="notify::active" handler="rfkill_switch_notify_activate_cb" object="CcNetworkPanel" swapped="yes" />
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                        <child>
                           <object class="AdwPreferencesGroup">
                             <property name="title" translatable="yes">VPN</property>
                             <property name="header-suffix">
