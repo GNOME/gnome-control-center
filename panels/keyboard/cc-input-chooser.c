@@ -61,7 +61,6 @@ struct _CcInputChooser
   GtkButton         *add_button;
   GtkSearchEntry    *filter_entry;
   GtkListBox        *input_sources_listbox;
-  GtkWidget         *input_sources_page;
   GtkStack          *input_sources_stack;
   GtkLabel          *login_label;
   GtkListBoxRow     *more_row;
@@ -1083,7 +1082,7 @@ on_locale_infos_loaded_cb (GObject      *source_object,
 {
   CcInputChooser *self = CC_INPUT_CHOOSER (source_object);
 
-  gtk_stack_set_visible_child (self->input_sources_stack, self->input_sources_page);
+  gtk_stack_set_visible_child_name (self->input_sources_stack, "input-sources-page");
 }
 
 static void
@@ -1153,7 +1152,6 @@ cc_input_chooser_class_init (CcInputChooserClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcInputChooser, add_button);
   gtk_widget_class_bind_template_child (widget_class, CcInputChooser, filter_entry);
   gtk_widget_class_bind_template_child (widget_class, CcInputChooser, input_sources_listbox);
-  gtk_widget_class_bind_template_child (widget_class, CcInputChooser, input_sources_page);
   gtk_widget_class_bind_template_child (widget_class, CcInputChooser, input_sources_stack);
   gtk_widget_class_bind_template_child (widget_class, CcInputChooser, login_label);
 

@@ -60,29 +60,34 @@
         </child>
         <child>
           <object class="GtkStack" id="input_sources_stack">
-            <property name="visible-child">input_sources_spinner</property>
             <child>
-              <object class="GtkSpinner" id="input_sources_spinner">
-                <property name="spinning">True</property>
-                <property name="halign">center</property>
-                <property name="valign">center</property>
+              <object class="GtkStackPage">
+                <property name="name">spinner-page</property>
+                <property name="child">
+                  <object class="AdwSpinner"/>
+                </property>
               </object>
             </child>
             <child>
-              <object class="AdwPreferencesPage" id="input_sources_page">
-                <child>
-                  <object class="AdwPreferencesGroup">
+              <object class="GtkStackPage">
+                <property name="name">input-sources-page</property>
+                <property name="child">
+                  <object class="AdwPreferencesPage">
                     <child>
-                      <object class="GtkListBox" id="input_sources_listbox">
-                        <signal name="row-activated" handler="on_input_sources_listbox_row_activated_cb" object="CcInputChooser" swapped="yes" />
-                        <signal name="selected-rows-changed" handler="on_input_sources_listbox_selected_rows_changed_cb" object="CcInputChooser" swapped="yes" />
-                        <style>
-                          <class name="boxed-list" />
-                        </style>
+                      <object class="AdwPreferencesGroup">
+                        <child>
+                          <object class="GtkListBox" id="input_sources_listbox">
+                            <signal name="row-activated" handler="on_input_sources_listbox_row_activated_cb" object="CcInputChooser" swapped="yes" />
+                            <signal name="selected-rows-changed" handler="on_input_sources_listbox_selected_rows_changed_cb" object="CcInputChooser" swapped="yes" />
+                            <style>
+                              <class name="boxed-list" />
+                            </style>
+                          </object>
+                        </child>
                       </object>
                     </child>
                   </object>
-                </child>
+                </property>
               </object>
             </child>
           </object>
