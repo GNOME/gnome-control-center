@@ -202,8 +202,6 @@ clock_settings_changed_cb (CcDateTimePage *self,
   if (value == G_DESKTOP_CLOCK_FORMAT_12H)
     adw_toggle_group_set_active_name (self->time_format_toggle_group, "am-pm");
 
-  cc_time_editor_set_am_pm (self->time_editor,
-                            value == G_DESKTOP_CLOCK_FORMAT_12H);
   update_time (self);
 
   g_signal_handlers_unblock_by_func (self->time_format_toggle_group, change_clock_settings_cb, self);

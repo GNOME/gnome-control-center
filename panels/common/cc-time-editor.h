@@ -38,8 +38,5 @@ void          cc_time_editor_set_time   (CcTimeEditor *self,
                                          guint         minute);
 guint         cc_time_editor_get_hour   (CcTimeEditor *self);
 guint         cc_time_editor_get_minute (CcTimeEditor *self);
-gboolean      cc_time_editor_get_am_pm  (CcTimeEditor *self);
-void          cc_time_editor_set_am_pm  (CcTimeEditor *self,
-                                         gboolean      is_am_pm);
 
 G_END_DECLS

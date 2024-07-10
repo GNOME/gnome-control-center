@@ -183,34 +183,3 @@ cc_time_editor_get_minute (CcTimeEditor *self)
   return cc_timelike_editor_get_minute (self->editor);
 }
 
-/**
- * cc_time_editor_get_am_pm:
- * @self: a #CcTimeEditor
- *
- * Get whether the editor is in 12-hour mode.
- *
- * Returns %TRUE if in 12-hour mode, %FALSE if in 24-hour mode
- */
-gboolean
-cc_time_editor_get_am_pm (CcTimeEditor *self)
-{
-  g_return_val_if_fail (CC_IS_TIME_EDITOR (self), FALSE);
-
-  return cc_timelike_editor_get_am_pm (self->editor);
-}
-
-/**
- * cc_time_editor_set_am_pm:
- * @self: a #CcTimeEditor
- * @is_am_pm: %TRUE to use 12-hour mode, %FALSE to use 24-hour mode
- *
- * Set whether the editor is in 12-hour mode.
- */
-void
-cc_time_editor_set_am_pm (CcTimeEditor *self,
-                          gboolean      is_am_pm)
-{
-  g_return_if_fail (CC_IS_TIME_EDITOR (self));
-
-  cc_timelike_editor_set_am_pm (self->editor, is_am_pm);
-}
