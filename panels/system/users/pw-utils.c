@@ -140,7 +140,7 @@ pw_error_hint (gint error)
         case PWQ_ERROR_EMPTY_PASSWORD:
                 return C_("Password hint", "Mix uppercase and lowercase and try to use a number or two");
         default:
-                return C_("Password hint", "Valid passsword. Try adding more letters, numbers and punctuation");
+                return C_("Password hint", "Valid password. Try adding more letters, numbers and punctuation");
         }
 }
 
