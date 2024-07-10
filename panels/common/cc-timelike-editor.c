@@ -368,19 +368,3 @@ cc_timelike_editor_get_minute (CcTimelikeEditor *self)
   return cc_timelike_entry_get_minute (self->timelike_entry);
 }
 
-gboolean
-cc_timelike_editor_get_am_pm (CcTimelikeEditor *self)
-{
-  g_return_val_if_fail (CC_IS_TIMELIKE_EDITOR (self), TRUE);
-
-  return TRUE;
-}
-
-void
-cc_timelike_editor_set_am_pm (CcTimelikeEditor *self,
-                              gboolean          is_am_pm)
-{
-  g_return_if_fail (CC_IS_TIMELIKE_EDITOR (self));
-
-  cc_timelike_entry_set_am_pm (self->timelike_entry, is_am_pm);
-}
