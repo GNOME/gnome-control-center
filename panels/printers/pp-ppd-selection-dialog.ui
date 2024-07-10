@@ -70,6 +70,7 @@
                     <property name="has_frame">True</property>
                     <child>
                       <object class="GtkTreeView" id="ppd_selection_models_treeview">
+                        <signal name="row-activated" handler="select_cb" swapped="yes"/>
                         <child internal-child="selection">
                           <object class="GtkTreeSelection" id="treeview-selection1"/>
                         </child>
