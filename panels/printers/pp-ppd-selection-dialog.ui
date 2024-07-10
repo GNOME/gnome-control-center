@@ -15,8 +15,6 @@
             <child type="start">
               <object class="GtkButton" id="ppd_selection_cancel_button">
                 <property name="label" translatable="yes">Cancel</property>
-                <property name="receives_default">True</property>
-                <property name="receives_default">True</property>
                 <property name="use-underline">True</property>
                 <signal name="clicked" handler="cancel_cb" swapped="yes"/>
               </object>
@@ -26,7 +24,6 @@
                 <property name="label" translatable="yes">_Select</property>
                 <property name="use-underline">True</property>
                 <property name="sensitive">False</property>
-                <property name="receives_default">True</property>
                 <signal name="clicked" handler="select_cb" swapped="yes"/>
                 <style>
                   <class name="suggested-action"/>
