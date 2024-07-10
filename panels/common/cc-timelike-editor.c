@@ -261,6 +261,14 @@ cc_timelike_editor_constructed (GObject *object)
 }
 
 static void
+cc_timelike_editor_dispose (GObject *object)
+{
+  gtk_widget_dispose_template (GTK_WIDGET (object), CC_TYPE_TIMELIKE_EDITOR);
+
+  G_OBJECT_CLASS (cc_timelike_editor_parent_class)->dispose (object);
+}
+
+static void
 cc_timelike_editor_finalize (GObject *object)
 {
   CcTimelikeEditor *self = (CcTimelikeEditor *)object;
@@ -279,6 +287,7 @@ cc_timelike_editor_class_init (CcTimelikeEditorClass *klass)
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
   object_class->constructed = cc_timelike_editor_constructed;
+  object_class->dispose = cc_timelike_editor_dispose;
   object_class->finalize = cc_timelike_editor_finalize;
 
   signals[TIME_CHANGED] =
