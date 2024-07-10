@@ -49,10 +49,9 @@ struct _PpPPDSelectionDialog {
   AdwWindow parent_instance;
 
   GtkButton   *ppd_selection_select_button;
-  GtkSpinner  *ppd_spinner;
-  GtkLabel    *progress_label;
   GtkTreeView *ppd_selection_manufacturers_treeview;
   GtkTreeView *ppd_selection_models_treeview;
+  GtkStack *stack;
 
   UserResponseCallback user_callback;
   gpointer             user_data;
@@ -162,10 +161,7 @@ fill_ppds_list (PpPPDSelectionDialog *self)
   GtkTreeIter      *preselect_iter = NULL;
   gint              i;
 
-  gtk_widget_set_visible (GTK_WIDGET (self->ppd_spinner), FALSE);
-  gtk_spinner_stop (self->ppd_spinner);
-
-  gtk_widget_set_visible (GTK_WIDGET (self->progress_label), FALSE);
+  gtk_stack_set_visible_child_name (self->stack, "ppd-selection-page");
 
   treeview = self->ppd_selection_manufacturers_treeview;
 
@@ -249,14 +245,7 @@ populate_dialog (PpPPDSelectionDialog *self)
   g_signal_connect_object (gtk_tree_view_get_selection (manufacturers_treeview),
                            "changed", G_CALLBACK (manufacturer_selection_changed_cb), self, G_CONNECT_SWAPPED);
 
-  if (!self->list)
-    {
-      gtk_widget_set_visible (GTK_WIDGET (self->ppd_spinner), TRUE);
-      gtk_spinner_start (self->ppd_spinner);
-
-      gtk_widget_set_visible (GTK_WIDGET (self->progress_label), TRUE);
-    }
-  else
+  if (self->list)
     {
       fill_ppds_list (self);
     }
@@ -314,8 +303,6 @@ pp_ppd_selection_dialog_new (PPDList              *ppd_list,
 
   self->manufacturer = get_standard_manufacturers_name (manufacturer);
 
-  gtk_spinner_start (self->ppd_spinner);
-
   populate_dialog (self);
 
   return self;
@@ -352,10 +339,9 @@ pp_ppd_selection_dialog_class_init (PpPPDSelectionDialogClass *klass)
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/printers/pp-ppd-selection-dialog.ui");
   gtk_widget_class_bind_template_child (widget_class, PpPPDSelectionDialog, ppd_selection_select_button);
-  gtk_widget_class_bind_template_child (widget_class, PpPPDSelectionDialog, ppd_spinner);
-  gtk_widget_class_bind_template_child (widget_class, PpPPDSelectionDialog, progress_label);
   gtk_widget_class_bind_template_child (widget_class, PpPPDSelectionDialog, ppd_selection_manufacturers_treeview);
   gtk_widget_class_bind_template_child (widget_class, PpPPDSelectionDialog, ppd_selection_models_treeview);
+  gtk_widget_class_bind_template_child (widget_class, PpPPDSelectionDialog, stack);
 
   gtk_widget_class_bind_template_callback (widget_class, select_cb);
   gtk_widget_class_bind_template_callback (widget_class, cancel_cb);
