@@ -152,25 +152,6 @@ device_off_toggled (NetVpn *self)
 }
 
 static void
-editor_done (NetVpn *self)
-{
-        nm_device_refresh_vpn_ui (self);
-}
-
-static void
-edit_connection (NetVpn *self)
-{
-        NetConnectionEditor *editor;
-
-        editor = net_connection_editor_new (self->connection, NULL, NULL, self->client);
-        gtk_window_set_transient_for (GTK_WINDOW (editor), GTK_WINDOW (gtk_widget_get_native (GTK_WIDGET (self))));
-        net_connection_editor_set_title (editor, nm_connection_get_id (self->connection));
-
-        g_signal_connect_object (editor, "done", G_CALLBACK (editor_done), self, G_CONNECT_SWAPPED);
-        gtk_window_present (GTK_WINDOW (editor));
-}
-
-static void
 net_vpn_finalize (GObject *object)
 {
         NetVpn *self = NET_VPN (object);
@@ -200,7 +181,7 @@ net_vpn_class_init (NetVpnClass *klass)
         gtk_widget_class_bind_template_child (widget_class, NetVpn, device_off_switch);
 
         gtk_widget_class_bind_template_callback (widget_class, device_off_toggled);
-        gtk_widget_class_bind_template_callback (widget_class, edit_connection);
+        gtk_widget_class_bind_template_callback (widget_class, net_vpn_edit_connection);
 }
 
 static void
@@ -250,4 +231,10 @@ nm_is_wireguard_connection (NMActiveConnection *c) {
                         return TRUE;
         }
         return FALSE;
+}
+
+void
+net_vpn_edit_connection (NetVpn *self)
+{
+        g_signal_emit_by_name (G_OBJECT (self), "activated");
 }

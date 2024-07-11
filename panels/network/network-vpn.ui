@@ -2,7 +2,6 @@
 <interface>
   <!-- interface-requires gtk+ 3.0 -->
   <template class="NetVpn" parent="AdwActionRow">
-    <property name="activatable-widget">device_off_switch</property>
     <child type="suffix">
       <object class="GtkSwitch" id="device_off_switch">
         <property name="valign">center</property>
@@ -14,7 +13,7 @@
         <property name="tooltip-text" translatable="yes">VPN Options</property>
         <property name="valign">center</property>
         <property name="icon_name">emblem-system-symbolic</property>
-        <signal name="clicked" handler="edit_connection" object="NetVpn" swapped="yes"/>
+        <signal name="clicked" handler="net_vpn_edit_connection" object="NetVpn" swapped="yes"/>
         <style>
           <class name="flat"/>
         </style>

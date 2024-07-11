@@ -69,45 +69,16 @@ Error details: NetworkManager not running.</property>
                         </child>
                         <child>
                           <object class="AdwPreferencesGroup">
-                            <property name="title" translatable="yes">VPN</property>
-                            <property name="header-suffix">
-                              <object class="GtkButton">
-                                <property name="tooltip-text" translatable="yes">Add VPN</property>
-                                <property name="icon_name">list-add-symbolic</property>
-                                <style>
-                                  <class name="flat" />
-                                </style>
-                                <signal name="clicked" handler="create_connection_cb" object="CcNetworkPanel" swapped="yes" />
-                              </object>
-                            </property>
                             <child>
-                              <object class="GtkListBox" id="box_vpn">
-                                <property name="selection_mode">none</property>
-                                <child type="placeholder">
-                                  <object class="GtkLabel">
-                                    <property name="label" translatable="yes">Not set up</property>
-                                    <property name="wrap">true</property>
-                                    <property name="max-width-chars">50</property>
-                                    <style>
-                                      <class name="dim-label" />
-                                      <class name="cc-placeholder-row" />
-                                    </style>
-                                  </object>
-                                </child>
-                                <accessibility>
-                                  <property name="label" translatable="yes">VPN</property>
-                                </accessibility>
-                                <style>
-                                  <class name="boxed-list" />
-                                </style>
+                              <object class="CcListRow" id="vpn_row">
+                                <property name="title" translatable="yes">_VPN</property>
+                                <property name="show-arrow">True</property>
+                                <property name="icon-name">network-vpn-symbolic</property>
+                                <property name="action-name">navigation.push</property>
+                                <property name="action-target">'vpn'</property>
                               </object>
                             </child>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="AdwPreferencesGroup">
-                            <!-- xxx: Added to avoid confusion with the preceding VPN row -->
-                            <property name="title" translatable="yes">Proxy</property>
+
                             <child>
                               <object class="CcListRow" id="proxy_row">
                                 <property name="title" translatable="yes">_Proxy</property>
@@ -132,6 +103,9 @@ Error details: NetworkManager not running.</property>
     </child>
     <child type="subpage">
       <object class="CcNetProxyPage" id="proxy_page"/>
+    </child>
+    <child type="subpage">
+      <object class="CcVpnPage" id="vpn_page"/>
     </child>
   </template>
 </interface>

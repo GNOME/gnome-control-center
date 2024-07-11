@@ -1,6 +1,6 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*-
+/* -*- mode: c; tab-width: 2; indent-tabs-mode: nil; c-basic-offset: 2 -*-
  *
- * Copyright (C) 2011 Richard Hughes <richard@hughsie.com>
+ * Copyright 2024 Red Hat Inc
  *
  * Licensed under the GNU General Public License Version 2
  *
@@ -17,25 +17,21 @@
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
+ * Author(s):
+ *      Felipe Borges <felipeborges@gnome.org>
  */
 
 #pragma once
 
-#include <adwaita.h>
-#include <gtk/gtk.h>
-#include <NetworkManager.h>
+#include "shell/cc-panel.h"
 
 G_BEGIN_DECLS
 
-G_DECLARE_FINAL_TYPE (NetVpn, net_vpn, NET, VPN, AdwActionRow)
+#define CC_TYPE_VPN_PAGE (cc_vpn_page_get_type ())
 
-NetVpn       *net_vpn_new                (NMClient     *client,
-                                          NMConnection *connection);
-
-NMConnection *net_vpn_get_connection     (NetVpn       *vpn);
-
-gboolean nm_is_wireguard_connection (NMActiveConnection *c);
-
-void     net_vpn_edit_connection    (NetVpn *self);
+G_DECLARE_FINAL_TYPE (CcVpnPage, cc_vpn_page, CC, VPN_PAGE, CcPanel)
 
 G_END_DECLS

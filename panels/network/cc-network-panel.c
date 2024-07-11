@@ -31,6 +31,7 @@
 
 #include "cc-list-row.h"
 #include "cc-net-proxy-page.h"
+#include "cc-vpn-page.h"
 #include "net-device-bluetooth.h"
 #include "net-device-ethernet.h"
 #include "net-device-mobile.h"
@@ -57,7 +58,6 @@ struct _CcNetworkPanel
         GPtrArray        *bluetooth_devices;
         GPtrArray        *ethernet_devices;
         GPtrArray        *mobile_devices;
-        GPtrArray        *vpns;
         GHashTable       *nm_device_to_device;
 
         NMClient         *client;
@@ -67,11 +67,11 @@ struct _CcNetworkPanel
         /* widgets */
         AdwViewStack     *stack;
         GtkWidget        *box_bluetooth;
-        GtkWidget        *box_vpn;
         GtkWidget        *box_wired;
         GtkWidget        *container_bluetooth;
         GtkWidget        *proxy_row;
         GtkWidget        *save_button;
+        CcVpnPage        *vpn_page;
 
         /* RFKill (Airplane Mode) */
         GDBusProxy         *rfkill_proxy;
@@ -216,7 +216,6 @@ cc_network_panel_dispose (GObject *object)
         g_clear_pointer (&self->bluetooth_devices, g_ptr_array_unref);
         g_clear_pointer (&self->ethernet_devices, g_ptr_array_unref);
         g_clear_pointer (&self->mobile_devices, g_ptr_array_unref);
-        g_clear_pointer (&self->vpns, g_ptr_array_unref);
         g_clear_pointer (&self->nm_device_to_device, g_hash_table_destroy);
         g_clear_object (&self->rfkill_proxy);
 
@@ -309,24 +308,6 @@ handle_argv_for_device (CcNetworkPanel *self,
         return FALSE;
 }
 
-static gboolean
-handle_argv_for_connection (CcNetworkPanel *self,
-                            NMConnection   *connection)
-{
-        if (self->arg_operation == OPERATION_NULL)
-                return TRUE;
-        if (self->arg_operation != OPERATION_SHOW_DEVICE)
-                return FALSE;
-
-        if (g_strcmp0 (nm_connection_get_path (connection), self->arg_device) == 0) {
-                reset_command_line_args (self);
-                return TRUE;
-        }
-
-        return FALSE;
-}
-
-
 static void
 handle_argv (CcNetworkPanel *self)
 {
@@ -350,12 +331,6 @@ handle_argv (CcNetworkPanel *self)
                 if (handle_argv_for_device (self, net_device_mobile_get_device (device)))
                         return;
         }
-        for (i = 0; i < self->vpns->len; i++) {
-                NetVpn *vpn = g_ptr_array_index (self->vpns, i);
-                if (handle_argv_for_connection (self, net_vpn_get_connection (vpn)))
-                        return;
-        }
-
         g_debug ("Could not handle argv operation, no matching device yet?");
 }
 
@@ -584,75 +559,6 @@ out:
         handle_argv (self);
 }
 
-static gint
-sort_vpns_func (GtkListBoxRow *a,
-                GtkListBoxRow *b,
-                gpointer user_data)
-{
-        NetVpn *vpn_a = NET_VPN (a);
-        NetVpn *vpn_b = NET_VPN (b);
-
-        return g_utf8_collate (nm_connection_get_id (net_vpn_get_connection (vpn_a)),
-                               nm_connection_get_id (net_vpn_get_connection (vpn_b)));
-}
-
-static void
-panel_add_vpn_device (CcNetworkPanel *self, NMConnection *connection)
-{
-        NetVpn *net_vpn;
-        guint i;
-
-        /* does already exist */
-        for (i = 0; i < self->vpns->len; i++) {
-                net_vpn = g_ptr_array_index (self->vpns, i);
-                if (net_vpn_get_connection (net_vpn) == connection)
-                        return;
-        }
-
-        net_vpn = net_vpn_new (self->client, connection);
-        gtk_list_box_append (GTK_LIST_BOX (self->box_vpn), GTK_WIDGET (net_vpn));
-
-        /* store in the devices array */
-        g_ptr_array_add (self->vpns, net_vpn);
-}
-
-static void
-add_connection (CcNetworkPanel *self, NMConnection *connection)
-{
-        NMSettingConnection *s_con;
-        const gchar *type;
-
-        s_con = NM_SETTING_CONNECTION (nm_connection_get_setting (connection,
-                                                                  NM_TYPE_SETTING_CONNECTION));
-        type = nm_setting_connection_get_connection_type (s_con);
-        if (g_strcmp0 (type, "vpn") != 0 && g_strcmp0 (type, "wireguard") != 0)
-                return;
-
-        /* Don't add the libvirtd bridge to the UI */
-        if (g_strcmp0 (nm_setting_connection_get_interface_name (s_con), "virbr0") == 0)
-                return;
-
-        g_debug ("add %s/%s remote connection: %s",
-                 type, g_type_name_from_instance ((GTypeInstance*)connection),
-                 nm_connection_get_path (connection));
-        panel_add_vpn_device (self, connection);
-}
-
-static void
-client_connection_removed_cb (CcNetworkPanel *self, NMConnection *connection)
-{
-        guint i;
-
-        for (i = 0; i < self->vpns->len; i++) {
-                NetVpn *vpn = g_ptr_array_index (self->vpns, i);
-                if (net_vpn_get_connection (vpn) == connection) {
-                        g_ptr_array_remove (self->vpns, vpn);
-                        gtk_list_box_remove (GTK_LIST_BOX (self->box_vpn), GTK_WIDGET (vpn));
-                        return;
-                }
-        }
-}
-
 static void
 panel_check_network_manager_version (CcNetworkPanel *self)
 {
@@ -667,17 +573,6 @@ panel_check_network_manager_version (CcNetworkPanel *self)
                 adw_view_stack_set_visible_child_name (ADW_VIEW_STACK (self->stack), "network-page");
                 manager_running (self);
         }
-}
-
-static void
-create_connection_cb (CcNetworkPanel *self)
-{
-        NetConnectionEditor *editor;
-
-        editor = net_connection_editor_new (NULL, NULL, NULL, self->client);
-        gtk_window_set_transient_for (GTK_WINDOW (editor),
-                                      GTK_WINDOW (gtk_widget_get_native (GTK_WIDGET (self))));
-        gtk_window_present (GTK_WINDOW (editor));
 }
 
 /* Airplane Mode */
@@ -816,18 +711,18 @@ cc_network_panel_class_init (CcNetworkPanelClass *klass)
 
         gtk_widget_class_bind_template_child (widget_class, CcNetworkPanel, stack);
         gtk_widget_class_bind_template_child (widget_class, CcNetworkPanel, box_bluetooth);
-        gtk_widget_class_bind_template_child (widget_class, CcNetworkPanel, box_vpn);
         gtk_widget_class_bind_template_child (widget_class, CcNetworkPanel, box_wired);
         gtk_widget_class_bind_template_child (widget_class, CcNetworkPanel, container_bluetooth);
         gtk_widget_class_bind_template_child (widget_class, CcNetworkPanel, proxy_row);
         gtk_widget_class_bind_template_child (widget_class, CcNetworkPanel, rfkill_row);
         gtk_widget_class_bind_template_child (widget_class, CcNetworkPanel, rfkill_widget);
+        gtk_widget_class_bind_template_child (widget_class, CcNetworkPanel, vpn_page);
 
-        gtk_widget_class_bind_template_callback (widget_class, create_connection_cb);
         gtk_widget_class_bind_template_callback (widget_class, rfkill_switch_notify_activate_cb);
 
         g_type_ensure (CC_TYPE_LIST_ROW);
         g_type_ensure (CC_TYPE_NET_PROXY_PAGE);
+        g_type_ensure (CC_TYPE_VPN_PAGE);
 }
 
 static void
@@ -835,8 +730,6 @@ cc_network_panel_init (CcNetworkPanel *self)
 {
         g_autoptr(GDBusConnection) system_bus = NULL;
         g_autoptr(GError) error = NULL;
-        const GPtrArray *connections;
-        guint i;
 
         g_resources_register (cc_network_get_resource ());
 
@@ -845,10 +738,7 @@ cc_network_panel_init (CcNetworkPanel *self)
         self->bluetooth_devices = g_ptr_array_new ();
         self->ethernet_devices = g_ptr_array_new ();
         self->mobile_devices = g_ptr_array_new ();
-        self->vpns = g_ptr_array_new ();
         self->nm_device_to_device = g_hash_table_new (g_direct_hash, g_direct_equal);
-
-        gtk_list_box_set_sort_func (GTK_LIST_BOX (self->box_vpn), sort_vpns_func, NULL, NULL);
 
         /* Create and store a NMClient instance if it doesn't exist yet */
         if (!cc_object_storage_has_object (CC_OBJECT_NMCLIENT)) {
@@ -892,19 +782,6 @@ cc_network_panel_init (CcNetworkPanel *self)
                                              cc_panel_get_cancellable (CC_PANEL (self)),
                                              rfkill_proxy_acquired_cb,
                                              self);
-
-        /* add remote settings such as VPN settings as virtual devices */
-        g_signal_connect_object (self->client, NM_CLIENT_CONNECTION_ADDED,
-                                 G_CALLBACK (add_connection), self, G_CONNECT_SWAPPED);
-        g_signal_connect_object (self->client, NM_CLIENT_CONNECTION_REMOVED,
-                                 G_CALLBACK (client_connection_removed_cb), self, G_CONNECT_SWAPPED);
-
-        /* Cold-plug existing connections */
-        connections = nm_client_get_connections (self->client);
-        if (connections) {
-                for (i = 0; i < connections->len; i++)
-                        add_connection (self, connections->pdata[i]);
-        }
 
         g_debug ("Calling handle_argv() after cold-plugging connections");
         handle_argv (self);
