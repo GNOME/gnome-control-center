@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <template class="CcVpnPage" parent="CcPanel">
+    <property name="tag">vpn</property>
+    <child type="subpage">
+      <object class="AdwNavigationPage">
+        <property name="title" translatable="yes">VPN</property>
+        <property name="child">
+          <object class="AdwToolbarView">
+            <child type="top">
+              <object class="AdwHeaderBar"/>
+            </child>
+            <property name="content">
+              <object class="AdwPreferencesPage">
+                <child>
+                  <object class="AdwPreferencesGroup">
+                    <child>
+                      <object class="GtkListBox" id="box_vpn">
+                        <property name="selection_mode">none</property>
+                        <child type="placeholder">
+                          <object class="GtkLabel">
+                            <property name="label" translatable="yes">Not set up</property>
+                            <property name="wrap">true</property>
+                            <property name="max-width-chars">50</property>
+                            <style>
+                              <class name="dim-label" />
+                              <class name="cc-placeholder-row" />
+                            </style>
+                          </object>
+                        </child>
+                        <accessibility>
+                          <property name="label" translatable="yes">VPN</property>
+                        </accessibility>
+                        <style>
+                          <class name="boxed-list" />
+                        </style>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+                <child>
+                  <object class="AdwPreferencesGroup">
+                    <child>
+                      <object class="AdwButtonRow">
+                        <property name="title" translatable="yes">Add VPN</property>
+                        <style>
+                          <class name="flat" />
+                        </style>
+                        <signal name="activated" handler="create_connection_cb" object="CcVpnPage" swapped="yes" />
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </property>
+          </object>
+        </property>
+      </object>
+    </child>
+  </template>
+
+</interface>

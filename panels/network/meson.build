@@ -33,6 +33,7 @@ sources = files(
   'cc-qr-code-dialog.c',
   'cc-network-panel.c',
   'cc-net-proxy-page.c',
+  'cc-vpn-page.c',
   'cc-wifi-connection-row.c',
   'cc-wifi-connection-list.c',
   'cc-wifi-panel.c',
