@@ -66,9 +66,9 @@ struct _CcNetworkPanel
 
         /* widgets */
         AdwViewStack     *stack;
+        AdwPreferencesGroup *device_list;
         GtkWidget        *box_bluetooth;
         GtkWidget        *box_wired;
-        GtkWidget        *container_bluetooth;
         GtkWidget        *proxy_row;
         GtkWidget        *save_button;
         CcVpnPage        *vpn_page;
@@ -334,12 +334,6 @@ handle_argv (CcNetworkPanel *self)
         g_debug ("Could not handle argv operation, no matching device yet?");
 }
 
-static void
-update_bluetooth_section (CcNetworkPanel *self)
-{
-        gtk_widget_set_visible (self->container_bluetooth, self->bluetooth_devices->len > 0);
-}
-
 static gboolean
 wwan_panel_supports_modem (GDBusObject *object)
 {
@@ -408,7 +402,6 @@ panel_add_device (CcNetworkPanel *self, NMDevice *device)
                         if (wwan_panel_supports_modem (modem_object))
                                 return;
                 }
-
                 device_mobile = net_device_mobile_new (self->client, device, modem_object);
                 gtk_box_append (GTK_BOX (self->box_wired), GTK_WIDGET (device_mobile));
                 g_ptr_array_add (self->mobile_devices, device_mobile);
@@ -416,19 +409,19 @@ panel_add_device (CcNetworkPanel *self, NMDevice *device)
                 break;
         case NM_DEVICE_TYPE_BT:
                 device_bluetooth = net_device_bluetooth_new (self->client, device);
-                gtk_list_box_append (GTK_LIST_BOX (self->box_bluetooth), GTK_WIDGET (device_bluetooth));
+
+                g_object_set_data (G_OBJECT (device_bluetooth), "device", device);
+                g_signal_connect_swapped (G_OBJECT (device_bluetooth), "activated",
+                                          G_CALLBACK (open_connection_editor), self);
+
                 g_ptr_array_add (self->bluetooth_devices, device_bluetooth);
                 g_hash_table_insert (self->nm_device_to_device, device, device_bluetooth);
+                adw_preferences_group_add (ADW_PREFERENCES_GROUP (self->device_list), GTK_WIDGET (device_bluetooth));
 
-                /* Update the device_bluetooth section if we're adding a bluetooth
-                 * device. This is a temporary solution though, for these will
-                 * be handled by the future Mobile Broadband panel */
-                update_bluetooth_section (self);
                 break;
-
-        /* For Wi-Fi and VPN we handle connections separately; we correctly manage
-         * them, but not here.
-         */
+         /* For Wi-Fi and VPN we handle connections separately; we correctly manage
+          * them, but not here.
+          */
         case NM_DEVICE_TYPE_WIFI:
         case NM_DEVICE_TYPE_TUN:
         /* And the rest we simply cannot deal with currently. */
@@ -452,12 +445,9 @@ panel_remove_device (CcNetworkPanel *self, NMDevice *device)
         g_hash_table_remove (self->nm_device_to_device, device);
 
         if (nm_device_get_device_type (device) == NM_DEVICE_TYPE_BT)
-                gtk_list_box_remove (GTK_LIST_BOX (self->box_bluetooth), net_device);
+                adw_preferences_group_remove (self->device_list, net_device);
         else
                 gtk_box_remove (GTK_BOX (gtk_widget_get_parent (net_device)), net_device);
-
-        /* update device_bluetooth widgets */
-        update_bluetooth_section (self);
 }
 
 static void
@@ -710,9 +700,8 @@ cc_network_panel_class_init (CcNetworkPanelClass *klass)
         gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/network/cc-network-panel.ui");
 
         gtk_widget_class_bind_template_child (widget_class, CcNetworkPanel, stack);
-        gtk_widget_class_bind_template_child (widget_class, CcNetworkPanel, box_bluetooth);
+        gtk_widget_class_bind_template_child (widget_class, CcNetworkPanel, device_list);
         gtk_widget_class_bind_template_child (widget_class, CcNetworkPanel, box_wired);
-        gtk_widget_class_bind_template_child (widget_class, CcNetworkPanel, container_bluetooth);
         gtk_widget_class_bind_template_child (widget_class, CcNetworkPanel, proxy_row);
         gtk_widget_class_bind_template_child (widget_class, CcNetworkPanel, rfkill_row);
         gtk_widget_class_bind_template_child (widget_class, CcNetworkPanel, rfkill_widget);

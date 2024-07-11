@@ -29,6 +29,10 @@ Error details: NetworkManager not running.</property>
                     <property name="name">network-page</property>
                     <property name="child">
                       <object class="AdwPreferencesPage">
+                        <child>
+                          <object class="AdwPreferencesGroup" id="device_list"/>
+                        </child>
+
                         <!-- Each group below will contain GtkStacks from the NetDevices -->
                         <child>
                           <object class="AdwPreferencesGroup">
@@ -36,23 +40,6 @@ Error details: NetworkManager not running.</property>
                               <object class="GtkBox" id="box_wired">
                                 <property name="orientation">vertical</property>
                                 <property name="spacing">24</property>
-                              </object>
-                            </child>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="AdwPreferencesGroup" id="container_bluetooth">
-                            <property name="visible">False</property>
-                            <property name="title" translatable="yes">Bluetooth</property>
-                            <child>
-                              <object class="GtkListBox" id="box_bluetooth">
-                                <property name="selection_mode">none</property>
-                                <accessibility>
-                                  <relation name="labelled-by">container_bluetooth</relation>
-                                </accessibility>
-                                <style>
-                                  <class name="boxed-list" />
-                                </style>
                               </object>
                             </child>
                           </object>
