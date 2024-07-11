@@ -28,9 +28,6 @@
 #include <NetworkManager.h>
 
 #include "panel-common.h"
-
-#include "connection-editor/net-connection-editor.h"
-
 #include "net-device-bluetooth.h"
 
 struct _NetDeviceBluetooth
@@ -65,6 +62,9 @@ update_off_switch_from_device_state (GtkSwitch *sw,
                         gtk_switch_set_active (sw, TRUE);
                         break;
         }
+
+        adw_action_row_set_icon_name (ADW_ACTION_ROW (self),
+                                      state == NM_DEVICE_STATE_ACTIVATED ? "bluetooth-active-symbolic" : "bluetooth-disabled-symbolic");
         self->updating_device = FALSE;
 }
 
@@ -73,13 +73,19 @@ nm_device_bluetooth_refresh_ui (NetDeviceBluetooth *self)
 {
         NMDeviceState state;
         g_autofree gchar *path = NULL;
+        g_autofree gchar *status = NULL;
 
+        adw_preferences_row_set_title (ADW_PREFERENCES_ROW (self),
+                                       nm_device_bt_get_name (NM_DEVICE_BT (self->device)));
         /* set up the device on/off switch */
         state = nm_device_get_state (self->device);
         gtk_widget_set_visible (GTK_WIDGET (self->device_off_switch),
                                 state != NM_DEVICE_STATE_UNAVAILABLE
                                 && state != NM_DEVICE_STATE_UNMANAGED);
         update_off_switch_from_device_state (self->device_off_switch, state, self);
+
+        status = panel_device_status_to_localized_string (self->device, NULL);
+        gtk_widget_set_tooltip_text (GTK_WIDGET (self), status);
 }
 
 static void
@@ -120,24 +126,9 @@ device_off_switch_changed_cb (NetDeviceBluetooth *self)
 }
 
 static void
-editor_done (NetDeviceBluetooth *self)
-{
-        nm_device_bluetooth_refresh_ui (self);
-}
-
-static void
 options_button_clicked_cb (NetDeviceBluetooth *self)
 {
-        NMConnection *connection;
-        NetConnectionEditor *editor;
-
-        connection = net_device_get_find_connection (self->client, self->device);
-
-        editor = net_connection_editor_new (connection, self->device, NULL, self->client);
-        gtk_window_set_transient_for (GTK_WINDOW (editor), GTK_WINDOW (gtk_widget_get_native (GTK_WIDGET (self))));
-        net_connection_editor_set_title (editor, _("Bluetooth"));
-        g_signal_connect_object (editor, "done", G_CALLBACK (editor_done), self, G_CONNECT_SWAPPED);
-        gtk_window_present (GTK_WINDOW (editor));
+        g_signal_emit_by_name (G_OBJECT (self), "activated");
 }
 
 static void
