@@ -47,7 +47,7 @@ struct _CcWwanNetworkDialog
   AdwToastOverlay *toast_overlay;
   AdwSwitchRow *automatic_row;
   GtkButton    *button_apply;
-  GtkSpinner   *loading_spinner;
+  AdwSpinner   *loading_spinner;
   GtkBox       *network_search_title;
   GtkListBox   *operator_list_box;
   GtkButton    *refresh_button;
@@ -233,7 +233,7 @@ cc_wwan_network_scan_complete_cb (GObject      *object,
     g_list_free_full (self->operator_list, (GDestroyNotify)mm_modem_3gpp_network_free);
 
   gtk_widget_set_sensitive (GTK_WIDGET (self->refresh_button), TRUE);
-  gtk_spinner_stop (self->loading_spinner);
+  gtk_widget_set_visible (GTK_WIDGET (self->loading_spinner), FALSE);
   self->operator_list = cc_wwan_device_scan_networks_finish (self->device, result, &error);
   gtk_widget_set_sensitive (GTK_WIDGET (self->operator_list_box), !error);
 
@@ -262,7 +262,7 @@ static void
 cc_wwan_network_dialog_refresh_networks (CcWwanNetworkDialog *self)
 {
   gtk_widget_set_sensitive (GTK_WIDGET (self->refresh_button), FALSE);
-  gtk_spinner_start (self->loading_spinner);
+  gtk_widget_set_visible (GTK_WIDGET (self->loading_spinner), TRUE);
   cc_wwan_device_scan_networks (self->device, self->search_cancellable,
                                 (GAsyncReadyCallback)cc_wwan_network_scan_complete_cb,
                                 g_object_ref (self));
