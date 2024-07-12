@@ -82,6 +82,8 @@ nm_device_bluetooth_refresh_ui (NetDeviceBluetooth *self)
         gtk_widget_set_visible (GTK_WIDGET (self->device_off_switch),
                                 state != NM_DEVICE_STATE_UNAVAILABLE
                                 && state != NM_DEVICE_STATE_UNMANAGED);
+        adw_action_row_set_icon_name (ADW_ACTION_ROW (self),
+                                      state == NM_DEVICE_STATE_DISCONNECTED ? "bluetooth-disabled-symbolic" : "bluetooth-active-symbolic");
         update_off_switch_from_device_state (self->device_off_switch, state, self);
 
         status = panel_device_status_to_localized_string (self->device, NULL);
