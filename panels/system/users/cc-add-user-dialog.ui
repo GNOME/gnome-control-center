@@ -40,11 +40,8 @@
                       </object>
                     </child>
                     <child type="end">
-                      <object class="GtkSpinner">
-                        <property name="visible">True</property>
-                        <property name="spinning" bind-source="spinner"/>
-                        <property name="can_focus">False</property>
-                        <property name="valign">center</property>
+                      <object class="AdwSpinner">
+                        <property name="visible" bind-source="spinner" bind-flags="sync-create"/>
                       </object>
                     </child>
                   </object>
@@ -164,10 +161,8 @@
                       </object>
                     </child>
                     <child type="end">
-                      <object class="GtkSpinner" id="spinner">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="valign">center</property>
+                      <object class="AdwSpinner" id="spinner">
+                        <property name="visible">False</property>
                       </object>
                     </child>
                   </object>

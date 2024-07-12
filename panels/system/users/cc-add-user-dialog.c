@@ -56,7 +56,7 @@ struct _CcAddUserDialog {
         AdwNavigationView  *navigation;
         AdwPreferencesPage *password_page;
         GtkWidget          *password_page_add_button;
-        GtkSpinner         *spinner;
+        AdwSpinner         *spinner;
 
         GCancellable       *cancellable;
         GPermission        *permission;
@@ -101,7 +101,6 @@ begin_action (CcAddUserDialog *self)
         gtk_widget_set_sensitive (GTK_WIDGET (self->add_button), FALSE);
 
         gtk_widget_set_visible (GTK_WIDGET (self->spinner), TRUE);
-        gtk_spinner_start (self->spinner);
 }
 
 static void
@@ -112,7 +111,6 @@ finish_action (CcAddUserDialog *self)
         gtk_widget_set_sensitive (GTK_WIDGET (self->add_button), TRUE);
 
         gtk_widget_set_visible (GTK_WIDGET (self->spinner), FALSE);
-        gtk_spinner_stop (self->spinner);
 }
 
 static void
