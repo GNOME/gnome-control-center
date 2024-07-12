@@ -20,6 +20,7 @@
  */
 
 #include <config.h>
+#include <glib/gi18n.h>
 #include <stdlib.h>
 
 #include "shell/cc-object-storage.h"
@@ -32,6 +33,7 @@
 #include "cc-list-row.h"
 #include "cc-net-proxy-page.h"
 #include "cc-vpn-page.h"
+#include "connection-editor/ce-page.h"
 #include "net-device-bluetooth.h"
 #include "net-device-ethernet.h"
 #include "net-device-mobile.h"
@@ -68,7 +70,6 @@ struct _CcNetworkPanel
         AdwViewStack     *stack;
         AdwPreferencesGroup *device_list;
         GtkWidget        *box_bluetooth;
-        GtkWidget        *box_wired;
         GtkWidget        *proxy_row;
         GtkWidget        *save_button;
         CcVpnPage        *vpn_page;
@@ -277,9 +278,17 @@ panel_refresh_device_titles (CcNetworkPanel *self)
         for (i = 0; i < num_devices; i++) {
                 if (NM_IS_DEVICE_BT (nm_devices[i]))
                         adw_preferences_row_set_title (ADW_PREFERENCES_ROW (devices[i]), nm_device_bt_get_name (NM_DEVICE_BT (nm_devices[i])));
-                else if (NET_IS_DEVICE_ETHERNET (devices[i]))
-                        adw_preferences_group_set_title (ADW_PREFERENCES_GROUP (devices[i]), titles[i]);
-                else if (NET_IS_DEVICE_MOBILE (devices[i]))
+                else if (NET_IS_DEVICE_ETHERNET (devices[i])) {
+                        GSList *connections;
+                        gint n_connections;
+
+                        connections = net_device_get_valid_connections (self->client, nm_devices[i]);
+                        n_connections = g_slist_length (connections);
+
+                        /* Only renamed when there are multiple ethernet entries */
+                        if (n_connections <= 1)
+                                adw_preferences_row_set_title (ADW_PREFERENCES_ROW (devices[i]), titles[i]);
+                } else if (NET_IS_DEVICE_MOBILE (devices[i]))
                         net_device_mobile_set_title (NET_DEVICE_MOBILE (devices[i]), titles[i]);
         }
 }
@@ -356,10 +365,29 @@ wwan_panel_supports_modem (GDBusObject *object)
 }
 
 static void
+open_connection_editor (CcNetworkPanel *self,
+                        AdwActionRow   *row)
+{
+        NMDevice *device;
+        NMConnection *connection;
+        NetConnectionEditor *editor;
+
+        device = g_object_get_data (G_OBJECT (row), "device");
+        connection = net_device_get_find_connection (self->client, device);
+        if (!connection)
+                connection = g_object_get_data (G_OBJECT (row), "connection");
+
+        editor = net_connection_editor_new (connection, device, NULL, self->client);
+        g_signal_connect_swapped (G_OBJECT (editor), "done",
+                                  G_CALLBACK (cc_panel_pop_visible_subpage), CC_PANEL (self));
+
+        cc_panel_push_subpage (CC_PANEL (self), ADW_NAVIGATION_PAGE (editor));
+}
+
+static void
 panel_add_device (CcNetworkPanel *self, NMDevice *device)
 {
         NMDeviceType type;
-        NetDeviceEthernet *device_ethernet;
         NetDeviceMobile *device_mobile;
         NetDeviceBluetooth *device_bluetooth;
         g_autoptr(GDBusObject) modem_object = NULL;
@@ -377,10 +405,43 @@ panel_add_device (CcNetworkPanel *self, NMDevice *device)
         switch (type) {
         case NM_DEVICE_TYPE_ETHERNET:
         case NM_DEVICE_TYPE_INFINIBAND:
-                device_ethernet = net_device_ethernet_new (self->client, device);
-                gtk_box_append (GTK_BOX (self->box_wired), GTK_WIDGET (device_ethernet));
-                g_ptr_array_add (self->ethernet_devices, device_ethernet);
-                g_hash_table_insert (self->nm_device_to_device, device, device_ethernet);
+                GSList *connections, *l;
+                gint n_connections;
+                GtkWidget *device_ethernet;
+
+                connections = net_device_get_valid_connections (self->client, device);
+                n_connections = g_slist_length (connections);
+
+                /* Ethernet devices with multiple existing profiles */
+                for (l = connections; l; l = l->next) {
+                        NMConnection *connection = NM_CONNECTION (l->data);
+
+                        device_ethernet = net_device_ethernet_new (self->client, device, connection);
+                        g_object_set_data (G_OBJECT (device_ethernet), "device", device);
+                        g_object_set_data (G_OBJECT (device_ethernet), "connection", connection);
+                        g_signal_connect_swapped (G_OBJECT (device_ethernet), "activated",
+                                                  G_CALLBACK (open_connection_editor), self);
+
+                        if (n_connections > 1)
+                                adw_preferences_row_set_title (ADW_PREFERENCES_ROW (device_ethernet), nm_connection_get_id (connection));
+
+                        g_ptr_array_add (self->ethernet_devices, device_ethernet);
+                        g_hash_table_insert (self->nm_device_to_device, device, device_ethernet);
+                        adw_preferences_group_add (self->device_list, device_ethernet);
+                        g_debug ("Adding wired connection %s for device %s", nm_connection_get_id (connection), nm_device_get_udi (device));
+                }
+
+                /* Single profile device */
+                if (!connections) {
+                        device_ethernet = net_device_ethernet_new (self->client, device, NULL);
+
+                        g_ptr_array_add (self->ethernet_devices, device_ethernet);
+                        g_hash_table_insert (self->nm_device_to_device, device, device_ethernet);
+                        adw_preferences_group_add (self->device_list, device_ethernet);
+
+                        panel_refresh_device_titles (self);
+                }
+
                 break;
         case NM_DEVICE_TYPE_MODEM:
                 if (g_str_has_prefix (nm_device_get_udi (device), "/org/freedesktop/ModemManager1/Modem/")) {
@@ -403,7 +464,7 @@ panel_add_device (CcNetworkPanel *self, NMDevice *device)
                                 return;
                 }
                 device_mobile = net_device_mobile_new (self->client, device, modem_object);
-                gtk_box_append (GTK_BOX (self->box_wired), GTK_WIDGET (device_mobile));
+                //gtk_box_append (GTK_BOX (self->box_wired), GTK_WIDGET (device_mobile));
                 g_ptr_array_add (self->mobile_devices, device_mobile);
                 g_hash_table_insert (self->nm_device_to_device, device, device_mobile);
                 break;
@@ -701,7 +762,6 @@ cc_network_panel_class_init (CcNetworkPanelClass *klass)
 
         gtk_widget_class_bind_template_child (widget_class, CcNetworkPanel, stack);
         gtk_widget_class_bind_template_child (widget_class, CcNetworkPanel, device_list);
-        gtk_widget_class_bind_template_child (widget_class, CcNetworkPanel, box_wired);
         gtk_widget_class_bind_template_child (widget_class, CcNetworkPanel, proxy_row);
         gtk_widget_class_bind_template_child (widget_class, CcNetworkPanel, rfkill_row);
         gtk_widget_class_bind_template_child (widget_class, CcNetworkPanel, rfkill_widget);

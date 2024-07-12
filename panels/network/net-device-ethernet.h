@@ -27,10 +27,11 @@
 
 G_BEGIN_DECLS
 
-G_DECLARE_FINAL_TYPE (NetDeviceEthernet, net_device_ethernet, NET, DEVICE_ETHERNET, AdwPreferencesGroup)
+G_DECLARE_FINAL_TYPE (NetDeviceEthernet, net_device_ethernet, NET, DEVICE_ETHERNET, AdwActionRow)
 
-NetDeviceEthernet *net_device_ethernet_new        (NMClient          *client,
-                                                   NMDevice          *device);
+GtkWidget         *net_device_ethernet_new        (NMClient          *client,
+                                                   NMDevice          *device,
+                                                   NMConnection      *connection);
 
 NMDevice          *net_device_ethernet_get_device (NetDeviceEthernet *device);
 
