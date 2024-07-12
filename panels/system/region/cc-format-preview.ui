@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
-  <!-- interface-requires gtk+ 3.0 -->
   <template class="CcFormatPreview" parent="GtkBox">
     <property name="margin-top">24</property>
     <property name="margin-bottom">24</property>
@@ -9,111 +8,69 @@
     <property name="hexpand">True</property>
     <property name="spacing">4</property>
     <property name="orientation">vertical</property>
+    <child>
+      <object class="AdwPreferencesGroup">
 
-    <!-- Dates -->
-    <child>
-      <object class="GtkLabel">
-        <property name="xalign">0</property>
-        <property name="label" translatable="yes">Dates</property>
-        <style>
-          <class name="dim-label"/>
-        </style>
-      </object>
-    </child>
-    <child>
-      <object class="GtkLabel" id="date_format_label">
-        <property name="xalign">0</property>
-        <property name="label">23 January 2013</property>
-      </object>
-    </child>
+       <!-- Dates -->
+        <child>
+          <object class="AdwActionRow" id="date_format_row">
+            <property name="title" translatable="yes">Dates</property>
+            <style>
+              <class name="property"/>
+            </style>
+          </object>
+        </child>
 
-    <!-- Times -->
-    <child>
-      <object class="GtkLabel">
-        <property name="xalign">0</property>
-        <property name="margin-top">18</property>
-        <property name="label" translatable="yes">Times</property>
-        <style>
-          <class name="dim-label"/>
-        </style>
-      </object>
-    </child>
-    <child>
-      <object class="GtkLabel" id="time_format_label">
-        <property name="xalign">0</property>
-        <property name="label">11:31 AM</property>
-      </object>
-    </child>
+        <!-- Times -->
+        <child>
+          <object class="AdwActionRow" id="time_format_row">
+            <property name="title" translatable="yes">Times</property>
+            <style>
+              <class name="property"/>
+            </style>
+          </object>
+        </child>
 
-    <!-- Date & Times -->
-    <child>
-      <object class="GtkLabel">
-        <property name="xalign">0</property>
-        <property name="margin-top">18</property>
-        <property name="label" translatable="yes">Dates &amp; Times</property>
-        <style>
-          <class name="dim-label"/>
-        </style>
-      </object>
-    </child>
-    <child>
-      <object class="GtkLabel" id="date_time_format_label">
-        <property name="xalign">0</property>
-        <property name="label">Sun Wed  2 11:31:00 KST 2013</property>
-      </object>
-    </child>
+        <!-- Date & Times -->
+        <child>
+          <object class="AdwActionRow" id="date_time_format_row">
+            <property name="title" translatable="yes">Dates &amp;amp; Times</property>
+            <style>
+              <class name="property"/>
+            </style>
+          </object>
+        </child>
 
-    <!-- Numbers -->
-    <child>
-      <object class="GtkLabel">
-        <property name="xalign">0</property>
-        <property name="margin-top">18</property>
-        <property name="label" translatable="yes">Numbers</property>
-        <style>
-          <class name="dim-label"/>
-        </style>
-      </object>
-    </child>
-    <child>
-      <object class="GtkLabel" id="number_format_label">
-        <property name="xalign">0</property>
-        <property name="label">123,456,789.00</property>
-      </object>
-    </child>
+        <!-- Numbers -->
+        <child>
+          <object class="AdwActionRow" id="number_format_row">
+            <property name="title" translatable="yes">Numbers</property>
+            <style>
+              <class name="property"/>
+            </style>
+          </object>
+        </child>
 
-    <!-- Measurement -->
-    <child>
-      <object class="GtkLabel">
-        <property name="xalign">0</property>
-        <property name="margin-top">18</property>
-        <property name="label" translatable="yes">Measurement</property>
-        <style>
-          <class name="dim-label"/>
-        </style>
-      </object>
-    </child>
-    <child>
-      <object class="GtkLabel" id="measurement_format_label">
-        <property name="xalign">0</property>
-        <property name="label" translatable="yes">Metric</property>
-      </object>
-    </child>
+        <!-- Measurement -->
+        <child>
+          <object class="AdwActionRow" id="measurement_format_row">
+            <property name="title" translatable="yes">Measurement</property>
+            <style>
+              <class name="property"/>
+            </style>
+          </object>
+        </child>
 
-    <!-- Paper -->
-    <child>
-      <object class="GtkLabel">
-        <property name="xalign">0</property>
-        <property name="margin-top">18</property>
-        <property name="label" translatable="yes">Paper</property>
-        <style>
-          <class name="dim-label"/>
-        </style>
-      </object>
-    </child>
-    <child>
-      <object class="GtkLabel" id="paper_format_label">
-        <property name="xalign">0</property>
-        <property name="label">A4</property>
+        <!-- Paper -->
+        <child>
+          <object class="AdwActionRow" id="paper_format_row">
+            <property name="title" translatable="yes">Paper</property>
+            <style>
+              <class name="property"/>
+            </style>
+          </object>
+        </child>
+
       </object>
     </child>
   </template>

@@ -34,12 +34,12 @@
 struct _CcFormatPreview {
   GtkBox     parent_instance;
 
-  GtkWidget *date_format_label;
-  GtkWidget *date_time_format_label;
-  GtkWidget *measurement_format_label;
-  GtkWidget *number_format_label;
-  GtkWidget *paper_format_label;
-  GtkWidget *time_format_label;
+  AdwActionRow *date_format_row;
+  AdwActionRow *date_time_format_row;
+  AdwActionRow *measurement_format_row;
+  AdwActionRow *number_format_row;
+  AdwActionRow *paper_format_row;
+  AdwActionRow *time_format_row;
 
   gchar     *region;
 };
@@ -53,10 +53,10 @@ enum
 G_DEFINE_TYPE (CcFormatPreview, cc_format_preview, GTK_TYPE_BOX)
 
 static void
-display_date (GtkWidget *label, GDateTime *dt, const gchar *format)
+display_date (AdwActionRow *row, GDateTime *dt, const gchar *format)
 {
   g_autofree gchar *s = g_date_time_format (dt, format);
-  gtk_label_set_text (GTK_LABEL (label), g_strstrip (s));
+  adw_action_row_set_subtitle (row, g_strstrip (s));
 }
 
 static void
@@ -83,9 +83,9 @@ update_format_examples (CcFormatPreview *self)
     old_locale = uselocale (locale);
 
   dt = g_date_time_new_now_local ();
-  display_date (self->date_format_label, dt, "%x");
-  display_date (self->time_format_label, dt, "%X");
-  display_date (self->date_time_format_label, dt, "%c");
+  display_date (self->date_format_row, dt, "%x");
+  display_date (self->time_format_row, dt, "%X");
+  display_date (self->date_time_format_row, dt, "%c");
 
   if (locale != (locale_t) 0)
     {
@@ -100,7 +100,7 @@ update_format_examples (CcFormatPreview *self)
     old_locale = uselocale (locale);
 
   s = g_strdup_printf ("%'.2f", 123456789.00);
-  gtk_label_set_text (GTK_LABEL (self->number_format_label), s);
+  adw_action_row_set_subtitle (self->number_format_row, s);
 
   if (locale != (locale_t) 0)
     {
@@ -117,7 +117,7 @@ update_format_examples (CcFormatPreview *self)
 
   num_info = localeconv ();
   if (num_info != NULL)
-    gtk_label_set_text (GTK_LABEL (self->currency_format_label), num_info->currency_symbol);
+    adw_action_row_set_subtitle (self->currency_format_row, num_info->currency_symbol);
 
   if (locale != (locale_t) 0)
     {
@@ -145,9 +145,9 @@ update_format_examples (CcFormatPreview *self)
     }
 
   if (is_imperial)
-    gtk_label_set_text (GTK_LABEL (self->measurement_format_label), C_("measurement format", "Imperial"));
+    adw_action_row_set_subtitle (self->measurement_format_row, C_("measurement format", "Imperial"));
   else
-    gtk_label_set_text (GTK_LABEL (self->measurement_format_label), C_("measurement format", "Metric"));
+    adw_action_row_set_subtitle (self->measurement_format_row, C_("measurement format", "Metric"));
 
 #endif
 
@@ -159,7 +159,7 @@ update_format_examples (CcFormatPreview *self)
     old_locale = uselocale (locale);
 
   paper = gtk_paper_size_new (gtk_paper_size_get_default ());
-  gtk_label_set_text (GTK_LABEL (self->paper_format_label), gtk_paper_size_get_display_name (paper));
+  adw_action_row_set_subtitle (self->paper_format_row, gtk_paper_size_get_display_name (paper));
 
   if (locale != (locale_t) 0)
     {
@@ -239,12 +239,12 @@ cc_format_preview_class_init (CcFormatPreviewClass *klass)
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/system/region/cc-format-preview.ui");
 
-  gtk_widget_class_bind_template_child (widget_class, CcFormatPreview, date_format_label);
-  gtk_widget_class_bind_template_child (widget_class, CcFormatPreview, date_time_format_label);
-  gtk_widget_class_bind_template_child (widget_class, CcFormatPreview, measurement_format_label);
-  gtk_widget_class_bind_template_child (widget_class, CcFormatPreview, number_format_label);
-  gtk_widget_class_bind_template_child (widget_class, CcFormatPreview, paper_format_label);
-  gtk_widget_class_bind_template_child (widget_class, CcFormatPreview, time_format_label);
+  gtk_widget_class_bind_template_child (widget_class, CcFormatPreview, date_format_row);
+  gtk_widget_class_bind_template_child (widget_class, CcFormatPreview, date_time_format_row);
+  gtk_widget_class_bind_template_child (widget_class, CcFormatPreview, measurement_format_row);
+  gtk_widget_class_bind_template_child (widget_class, CcFormatPreview, number_format_row);
+  gtk_widget_class_bind_template_child (widget_class, CcFormatPreview, paper_format_row);
+  gtk_widget_class_bind_template_child (widget_class, CcFormatPreview, time_format_row);
 }
 
 void
