@@ -50,7 +50,7 @@ struct _CcBoltDeviceDialog
 
   /* actions */
   GtkWidget  *button_box;
-  GtkSpinner *spinner;
+  AdwSpinner *spinner;
   GtkButton  *connect_button;
   GtkButton  *forget_button;
 };
@@ -195,7 +195,7 @@ dialog_operation_start (CcBoltDeviceDialog *dialog)
 {
   gtk_widget_set_sensitive (GTK_WIDGET (dialog->connect_button), FALSE);
   gtk_widget_set_sensitive (GTK_WIDGET (dialog->forget_button), FALSE);
-  gtk_spinner_start (dialog->spinner);
+  gtk_widget_set_visible (GTK_WIDGET (dialog->spinner), TRUE);
 }
 
 static void
@@ -214,7 +214,7 @@ dialog_operation_done (CcBoltDeviceDialog *dialog,
   if (error != NULL && bolt_err_cancelled (error))
     return;
 
-  gtk_spinner_stop (dialog->spinner);
+  gtk_widget_set_visible (GTK_WIDGET (dialog->spinner), FALSE);
 
   if (error != NULL)
     {
