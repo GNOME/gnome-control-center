@@ -43,7 +43,7 @@ struct _PpDetailsDialog {
 
   GtkWindow    *toplevel;
   AdwPreferencesGroup *driver_button_rows_group;
-  GtkSpinner   *spinner_driver_search;
+  AdwSpinner   *spinner_driver_search;
   AdwActionRow *printer_address_row;
   GtkRevealer  *printer_name_hint_revealer;
   AdwEntryRow  *printer_location_entry;
