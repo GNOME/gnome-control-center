@@ -494,8 +494,6 @@ populate_options_real (PpOptionsDialog *self)
   GtkWidget    *advanced_tab_grid = tab_grid_new ();
   gint          i, j;
 
-  gtk_spinner_stop (self->spinner);
-
   gtk_stack_set_visible_child_name (self->stack, "pp-options-page");
 
   if (self->ipp_attributes)
@@ -737,16 +735,12 @@ populate_options (PpOptionsDialog *self)
       "orientation-requested-default",
       NULL};
 
-  gtk_stack_set_visible_child_name (self->stack, "spinner-page");
-
   renderer = gtk_cell_renderer_text_new ();
 
   column = gtk_tree_view_column_new_with_attributes ("Categories", renderer,
                                                      "text", CATEGORY_NAMES_COLUMN, NULL);
   gtk_tree_view_column_set_expand (column, TRUE);
   gtk_tree_view_append_column (self->categories_treeview, column);
-
-  gtk_spinner_start (self->spinner);
 
   printer_get_ppd_async (self->printer_name,
                          NULL,
@@ -916,7 +910,6 @@ pp_options_dialog_class_init (PpOptionsDialogClass *klass)
   gtk_widget_class_bind_template_child (widget_class, PpOptionsDialog, categories_selection);
   gtk_widget_class_bind_template_child (widget_class, PpOptionsDialog, categories_treeview);
   gtk_widget_class_bind_template_child (widget_class, PpOptionsDialog, notebook);
-  gtk_widget_class_bind_template_child (widget_class, PpOptionsDialog, spinner);
   gtk_widget_class_bind_template_child (widget_class, PpOptionsDialog, stack);
 
   gtk_widget_class_bind_template_callback (widget_class, category_selection_changed_cb);
