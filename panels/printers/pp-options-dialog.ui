@@ -29,44 +29,54 @@
             <property name="hhomogeneous">True</property>
             <property name="vhomogeneous">True</property>
             <child>
-              <object class="AdwOverlaySplitView" id="main_box">
-                <property name="sidebar">
-                  <object class="GtkScrolledWindow">
-                    <property name="width_request">120</property>
-                    <property name="hscrollbar_policy">never</property>
-                    <child>
-                      <object class="GtkTreeView" id="categories_treeview">
-                        <property name="headers_visible">False</property>
-                        <style>
-                          <class name="navigation-sidebar"/>
-                          <class name="printer-options-sidebar"/>
-                        </style>
-                        <child internal-child="selection">
-                          <object class="GtkTreeSelection" id="categories_selection">
-                            <signal name="changed" handler="category_selection_changed_cb" object="PpOptionsDialog" swapped="yes"/>
+              <object class="GtkStackPage">
+                <property name="name">pp-options-page</property>
+                <property name="child">
+                  <object class="AdwOverlaySplitView">
+                    <property name="sidebar">
+                      <object class="GtkScrolledWindow">
+                        <property name="width_request">120</property>
+                        <property name="hscrollbar_policy">never</property>
+                        <child>
+                          <object class="GtkTreeView" id="categories_treeview">
+                            <property name="headers_visible">False</property>
+                            <style>
+                              <class name="navigation-sidebar"/>
+                              <class name="printer-options-sidebar"/>
+                            </style>
+                            <child internal-child="selection">
+                              <object class="GtkTreeSelection" id="categories_selection">
+                                <signal name="changed" handler="category_selection_changed_cb" object="PpOptionsDialog" swapped="yes"/>
+                              </object>
+                            </child>
                           </object>
                         </child>
                       </object>
-                    </child>
-                  </object>
-                </property>
-                <property name="content">
-                  <object class="GtkNotebook" id="notebook">
-                    <property name="tab_pos">left</property>
-                    <property name="show_tabs">False</property>
-                    <property name="show_border">False</property>
-                    <property name="hexpand">True</property>
-                    <property name="vexpand">True</property>
+                    </property>
+                    <property name="content">
+                      <object class="GtkNotebook" id="notebook">
+                        <property name="tab_pos">left</property>
+                        <property name="show_tabs">False</property>
+                        <property name="show_border">False</property>
+                        <property name="hexpand">True</property>
+                        <property name="vexpand">True</property>
+                      </object>
+                    </property>
                   </object>
                 </property>
               </object>
             </child>
             <child>
-              <object class="GtkSpinner" id="spinner">
-                <property name="halign">center</property>
-                <property name="valign">center</property>
-                <property name="width_request">24</property>
-                <property name="height_request">24</property>
+              <object class="GtkStackPage">
+                <property name="name">spinner-page</property>
+                <property name="child">
+                  <object class="GtkSpinner" id="spinner">
+                    <property name="halign">center</property>
+                    <property name="valign">center</property>
+                    <property name="width_request">24</property>
+                    <property name="height_request">24</property>
+                  </object>
+                </property>
               </object>
             </child>
           </object>
