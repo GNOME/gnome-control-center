@@ -71,7 +71,7 @@ struct _CcFingerprintDialog
   GtkLabel       *title;
   GtkListBox     *devices_list;
   GtkPopover     *add_print_popover;
-  GtkSpinner     *spinner;
+  AdwSpinner     *spinner;
   GtkStack       *stack;
   GtkWidget      *add_print_icon;
   GtkWidget      *delete_confirmation_infobar;
@@ -170,11 +170,11 @@ update_dialog_state (CcFingerprintDialog *self,
   if (self->dialog_state == DIALOG_STATE_NONE ||
       self->dialog_state == (self->dialog_state & DIALOG_STATE_IDLE))
     {
-      gtk_spinner_stop (self->spinner);
+      gtk_widget_set_visible (GTK_WIDGET (self->spinner), FALSE);
     }
   else
     {
-      gtk_spinner_start (self->spinner);
+      gtk_widget_set_visible (GTK_WIDGET (self->spinner), TRUE);
     }
 
   return TRUE;
