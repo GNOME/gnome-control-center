@@ -53,7 +53,7 @@ struct _CcBoltPage
   GtkRevealer        *notification_revealer;
 
   /* authmode */
-  GtkSpinner         *authmode_spinner;
+  AdwSpinner         *authmode_spinner;
   AdwSwitchRow       *direct_access_row;
 
   /* device list */
@@ -681,7 +681,7 @@ on_authmode_ready (GObject      *source_object,
       cc_bolt_page_authmode_sync (self);
     }
 
-  gtk_spinner_stop (self->authmode_spinner);
+  gtk_widget_set_visible (GTK_WIDGET (self->authmode_spinner), FALSE);
   gtk_widget_set_sensitive (GTK_WIDGET (self->direct_access_row), TRUE);
 }
 
@@ -691,7 +691,7 @@ on_authmode_state_set_cb (CcBoltPage *self)
   BoltAuthMode mode;
 
   gtk_widget_set_sensitive (GTK_WIDGET (self->direct_access_row), FALSE);
-  gtk_spinner_start (self->authmode_spinner);
+  gtk_widget_set_visible (GTK_WIDGET (self->authmode_spinner), TRUE);
 
   mode = bolt_client_get_authmode (self->client);
 
