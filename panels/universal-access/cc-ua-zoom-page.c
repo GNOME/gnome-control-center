@@ -108,7 +108,7 @@ ua_zoom_magnifier_settings_changed_cb (CcUaZoomPage *self,
       else if (g_strcmp0 (tracking, "push") == 0)
         selected_index = 1;
       else
-        selected_index = 3;
+        selected_index = 2;
 
       adw_combo_row_set_selected (self->zoom_follow_behaviour_row, selected_index);
     }
