@@ -57,6 +57,7 @@ struct _CcPowerPanel
   GtkListBox        *power_profile_info_listbox;
   AdwPreferencesGroup *power_profile_section;
   AdwSwitchRow      *power_saver_low_battery_row;
+  AdwPreferencesGroup *power_saving_group;
   CcNumberRow       *suspend_on_battery_delay_row;
   AdwSwitchRow      *suspend_on_battery_switch_row;
   AdwPreferencesGroup *suspend_on_battery_group;
@@ -192,6 +193,18 @@ battery_health_radio_changed_cb (CcPowerPanel *self)
             }
         }
     }
+}
+
+static void
+power_saving_group_visibility_cb (CcPowerPanel *self)
+{
+  gboolean visible;
+
+  visible = gtk_widget_get_visible (GTK_WIDGET (self->als_row)) ||
+            gtk_widget_get_visible (GTK_WIDGET (self->dim_screen_row)) ||
+            gtk_widget_get_visible (GTK_WIDGET (self->power_saver_low_battery_row));
+
+  gtk_widget_set_visible (GTK_WIDGET (self->power_saving_group), visible);
 }
 
 static void
@@ -1245,6 +1258,7 @@ cc_power_panel_class_init (CcPowerPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, power_profile_info_listbox);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, power_profile_section);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, power_saver_low_battery_row);
+  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, power_saving_group);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, suspend_on_battery_delay_row);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, suspend_on_battery_switch_row);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, suspend_on_battery_group);
@@ -1256,6 +1270,7 @@ cc_power_panel_class_init (CcPowerPanelClass *klass)
   gtk_widget_class_bind_template_callback (widget_class, blank_screen_switch_cb);
   gtk_widget_class_bind_template_callback (widget_class, keynav_failed_cb);
   gtk_widget_class_bind_template_callback (widget_class, battery_health_radio_changed_cb);
+  gtk_widget_class_bind_template_callback (widget_class, power_saving_group_visibility_cb);
 }
 
 static void

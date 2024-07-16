@@ -171,13 +171,14 @@
                     <property name="child">
                       <object class="AdwPreferencesPage">
                         <child>
-                          <object class="AdwPreferencesGroup">
+                          <object class="AdwPreferencesGroup" id="power_saving_group">
                             <child>
                               <object class="AdwSwitchRow" id="als_row">
                                 <property name="title" translatable="yes">A_utomatic Screen Brightness</property>
                                 <property name="subtitle" translatable="yes">Adjust screen brightness to the surrounding light</property>
                                 <property name="use_underline">True</property>
                                 <signal name="notify::active" handler="als_row_changed_cb" object="CcPowerPanel" swapped="yes"/>
+                                <signal name="notify::visible" handler="power_saving_group_visibility_cb" object="CcPowerPanel" swapped="yes"/>
                               </object>
                             </child>
                             <child>
@@ -185,6 +186,7 @@
                                 <property name="title" translatable="yes">_Dim Screen</property>
                                 <property name="subtitle" translatable="yes">Reduce screen brightness when the device is inactive</property>
                                 <property name="use_underline">True</property>
+                                <signal name="notify::visible" handler="power_saving_group_visibility_cb" object="CcPowerPanel" swapped="yes"/>
                               </object>
                             </child>
                             <child>
@@ -193,6 +195,7 @@
                                 <property name="title" translatable="yes">Automatic Power _Saver</property>
                                 <property name="subtitle" translatable="yes">Turn on power saver mode when battery power is low</property>
                                 <property name="use_underline">True</property>
+                                <signal name="notify::visible" handler="power_saving_group_visibility_cb" object="CcPowerPanel" swapped="yes"/>
                               </object>
                             </child>
                           </object>
