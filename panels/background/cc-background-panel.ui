@@ -114,6 +114,45 @@
                           </object>
                         </child>
 
+                        <child>
+                          <object class="AdwComboRow" id="schedule_row">
+                            <property name="title" translatable="yes">_Schedule</property>
+                            <property name="use-underline">True</property>
+                            <signal name="notify::selected" handler="on_schedule_row_selected_cb" object="CcBackgroundPanel" />
+                            <property name="model">
+                              <object class="GtkStringList">
+                                <items>
+                                  <item translatable="yes">None</item>
+                                  <item translatable="yes">Sunset to Sunrise</item>
+                                  <item translatable="yes">Custom</item>
+                                </items>
+                              </object>
+                            </property>
+                            <property name="factory">
+                              <object class="GtkSignalListItemFactory">
+                                <signal name="setup" handler="schedule_factory_setup_cb" swapped="yes" />
+                                <signal name="bind" handler="schedule_factory_bind_cb" swapped="yes" />
+                                <signal name="unbind" handler="schedule_factory_unbind_cb" swapped="yes" />
+                              </object>
+                            </property>
+                          </object>
+                        </child>
+
+                        <child>
+                          <object class="CcTimeRow" id="beginning_row">
+                            <property name="title">_Beginning</property>
+                            <property name="use-underline">True</property>
+                            <signal name="notify::time" handler="on_beginning_time_updated_cb" object="CcBackgroundPanel" swapped="yes" />
+                          </object>
+                        </child>
+
+                        <child>
+                          <object class="CcTimeRow" id="end_row">
+                            <property name="title">_End</property>
+                            <property name="use-underline">True</property>
+                            <signal name="notify::time" handler="on_end_time_updated_cb" object="CcBackgroundPanel" swapped="yes" />
+                          </object>
+                        </child>
                       </object>
                     </child>
 

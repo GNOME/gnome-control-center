@@ -50,6 +50,7 @@ sources = common_sources + files(
   'cc-background-panel.c',
   'cc-background-preview.c',
   'cc-background-xml.c',
+  'cc-time-row.c',
 )
 
 deps = common_deps + [
@@ -67,7 +68,7 @@ cflags += [
 panels_libs += static_library(
   cappletname,
   sources: sources,
-  include_directories: top_inc,
+  include_directories: [ top_inc, common_inc ],
   dependencies: deps,
   c_args: cflags,
 )
