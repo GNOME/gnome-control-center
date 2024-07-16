@@ -149,6 +149,7 @@ cc_system_panel_class_init (CcSystemPanelClass *klass)
 
   g_type_ensure (CC_TYPE_ABOUT_PAGE);
   g_type_ensure (CC_TYPE_DATE_TIME_PAGE);
+  g_type_ensure (CC_TYPE_LIST_ROW);
   g_type_ensure (CC_TYPE_REGION_PAGE);
   g_type_ensure (CC_TYPE_REMOTE_DESKTOP_PAGE);
   g_type_ensure (CC_TYPE_SECURE_SHELL_PAGE);
