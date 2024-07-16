@@ -31,6 +31,7 @@
 
 #include "cc-applications-panel.h"
 #include "cc-applications-row.h"
+#include "cc-list-row-info-button.h"
 #include "cc-list-row.h"
 #include "cc-default-apps-page.h"
 #include "cc-removable-media-settings.h"
@@ -1775,6 +1776,7 @@ cc_applications_panel_class_init (CcApplicationsPanelClass *klass)
 
   g_type_ensure (CC_TYPE_DEFAULT_APPS_PAGE);
   g_type_ensure (CC_TYPE_REMOVABLE_MEDIA_SETTINGS);
+  g_type_ensure (CC_TYPE_LIST_ROW_INFO_BUTTON);
 
   object_class->dispose = cc_applications_panel_dispose;
   object_class->finalize = cc_applications_panel_finalize;
