@@ -1,0 +1,37 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CcTimeRow: Adw.ActionRow {
+  activatable: true;
+
+  styles [
+    "combo",
+  ]
+
+  Label current {
+    valign: center;
+
+    styles [
+      "numeric",
+    ]
+  }
+
+  Box popover_box {
+    valign: center;
+
+    Image {
+      icon-name: "clock-alt-symbolic";
+      accessible-role: presentation;
+
+      styles [
+        "dropdown-arrow",
+      ]
+    }
+
+    Popover popover {
+      child: $CcTimeEditor time_editor {};
+
+      notify::visible => $notify_popover_visible_cb(template);
+    }
+  }
+}

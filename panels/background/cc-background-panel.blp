@@ -117,6 +117,41 @@ template $CcBackgroundPanel: $CcPanel {
           }
 
           Adw.PreferencesGroup {
+            Adw.ComboRow schedule_row {
+              title: _("_Schedule");
+              subtitle: _("Automatically switch between default and dark styles");
+              use-underline: true;
+              notify::selected => $on_schedule_row_selected_cb(template);
+
+              model: StringList {
+                strings [
+                  _("None"),
+                  _("Sunset to Sunrise"),
+                  _("Custom"),
+                ]
+              };
+
+              factory: SignalListItemFactory {
+                setup => $schedule_factory_setup_cb(template);
+                bind => $schedule_factory_bind_cb(template);
+                unbind => $schedule_factory_unbind_cb(template);
+              };
+            }
+
+            $CcTimeRow beginning_row {
+              title: _("Dar_k Style");
+              use-underline: true;
+              notify::time => $on_beginning_time_updated_cb(template);
+            }
+
+            $CcTimeRow end_row {
+              title: _("Defaul_t Style");
+              use-underline: true;
+              notify::time => $on_end_time_updated_cb(template);
+            }
+          }
+
+          Adw.PreferencesGroup {
             title: _("Accent Color");
 
             Adw.PreferencesRow {

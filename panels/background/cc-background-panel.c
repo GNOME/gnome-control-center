@@ -33,6 +33,8 @@
 #include "cc-background-item.h"
 #include "cc-background-preview.h"
 #include "cc-background-resources.h"
+#include "cc-time-row.h"
+#include "shell/cc-object-storage.h"
 
 #define WP_PATH_ID "org.gnome.desktop.background"
 #define WP_LOCK_PATH_ID "org.gnome.desktop.screensaver"
@@ -44,6 +46,8 @@
 #define WP_SCOLOR_KEY "secondary-color"
 
 #define INTERFACE_PATH_ID "org.gnome.desktop.interface"
+#define LOCATION_PATH_ID "org.gnome.system.location"
+#define COLOR_PATH_ID "org.gnome.settings-daemon.plugins.color"
 #define INTERFACE_COLOR_SCHEME_KEY "color-scheme"
 #define INTERFACE_ACCENT_COLOR_KEY "accent-color"
 
@@ -56,17 +60,25 @@ struct _CcBackgroundPanel
   GSettings *settings;
   GSettings *lock_settings;
   GSettings *interface_settings;
+  GSettings *location_settings;
+  GSettings *color_settings;
 
   GDBusProxy *proxy;
+  GDBusProxy *color_proxy;
 
   CcBackgroundItem *current_background;
 
+  GtkWidget *schedule_row;
+  GtkWidget *beginning_row;
+  GtkWidget *end_row;
   GtkWidget *accent_box;
   CcBackgroundChooser *background_chooser;
   CcBackgroundPreview *default_preview;
   CcBackgroundPreview *dark_preview;
   GtkToggleButton *default_toggle;
   GtkToggleButton *dark_toggle;
+
+  GCancellable *proxy_cancellable;
 };
 
 CC_PANEL_REGISTER (CcBackgroundPanel, cc_background_panel)
@@ -303,6 +315,248 @@ got_transition_proxy_cb (GObject      *source_object,
     }
 }
 
+static void
+schedule_update_state (CcBackgroundPanel *self)
+{
+  gboolean enabled, automatic;
+
+  enabled = g_settings_get_boolean (self->color_settings, "color-scheme-enabled");
+  automatic = g_settings_get_boolean (self->color_settings, "color-scheme-schedule-automatic");
+
+  adw_combo_row_set_selected (ADW_COMBO_ROW (self->schedule_row), enabled ? automatic ? 1 : 2 : 0);
+
+  if (automatic && self->color_proxy != NULL)
+    {
+      gdouble sunset_value, sunrise_value;
+
+      g_autoptr (GVariant) sunset = NULL;
+      g_autoptr (GVariant) sunrise = NULL;
+      sunset = g_dbus_proxy_get_cached_property (self->color_proxy, "Sunset");
+      sunrise = g_dbus_proxy_get_cached_property (self->color_proxy, "Sunrise");
+
+      if (sunset != NULL)
+        sunset_value = g_variant_get_double (sunset);
+      else
+        sunset_value = 16.0f;
+
+      if (sunrise != NULL)
+        sunrise_value = g_variant_get_double (sunrise);
+      else
+        sunrise_value = 8.0f;
+
+      cc_time_row_set_time (CC_TIME_ROW (self->beginning_row), sunset_value);
+      cc_time_row_set_time (CC_TIME_ROW (self->end_row), sunrise_value);
+    }
+
+  g_settings_bind (self->color_settings, "color-scheme-schedule-automatic",
+                   self->beginning_row, "sensitive", G_SETTINGS_BIND_INVERT_BOOLEAN);
+
+  g_settings_bind (self->color_settings, "color-scheme-schedule-automatic",
+                   self->end_row, "sensitive", G_SETTINGS_BIND_INVERT_BOOLEAN);
+}
+
+static void
+schedule_factory_setup_cb (CcBackgroundPanel *self,
+                           GtkListItem       *list_item,
+                           gpointer           user_data)
+{
+  GtkWidget *box, *label_box, *title, *subtitle, *checkmark;
+
+  box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
+  label_box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
+
+  title = gtk_label_new (NULL);
+  gtk_label_set_xalign (GTK_LABEL (title), 0.0);
+  gtk_label_set_ellipsize (GTK_LABEL (title), PANGO_ELLIPSIZE_END);
+  gtk_label_set_max_width_chars (GTK_LABEL (title), 20);
+  gtk_widget_set_valign (title, GTK_ALIGN_CENTER);
+  gtk_box_append (GTK_BOX (label_box), title);
+
+  subtitle = gtk_label_new (NULL);
+  gtk_label_set_xalign (GTK_LABEL (subtitle), 0.0);
+  gtk_label_set_ellipsize (GTK_LABEL (subtitle), PANGO_ELLIPSIZE_END);
+  gtk_widget_set_valign (subtitle, GTK_ALIGN_CENTER);
+  gtk_widget_set_visible (subtitle, FALSE);
+  gtk_widget_add_css_class (subtitle, "caption");
+  gtk_box_append (GTK_BOX (label_box), subtitle);
+
+  gtk_box_append (GTK_BOX (box), label_box);
+
+  checkmark = g_object_new (GTK_TYPE_IMAGE,
+                            "accessible-role", GTK_ACCESSIBLE_ROLE_PRESENTATION,
+                            "icon-name", "object-select-symbolic",
+                            NULL);
+  gtk_box_append (GTK_BOX (box), checkmark);
+
+  g_object_set_data (G_OBJECT (list_item), "box", box);
+  g_object_set_data (G_OBJECT (list_item), "title", title);
+  g_object_set_data (G_OBJECT (list_item), "subtitle", subtitle);
+  g_object_set_data (G_OBJECT (list_item), "checkmark", checkmark);
+
+  gtk_list_item_set_child (list_item, box);
+}
+
+static void
+schedule_factory_notify_selected_item_cb (AdwComboRow *self,
+                                          GParamSpec  *pspec,
+                                          GtkListItem *list_item)
+{
+  GtkWidget *checkmark = g_object_get_data (G_OBJECT (list_item), "checkmark");
+  gboolean selected;
+
+  selected = (adw_combo_row_get_selected_item (self) == gtk_list_item_get_item (list_item));
+  gtk_widget_set_opacity (checkmark, selected ? 1.0 : 0.0);
+}
+
+static void
+schedule_factory_location_changed_cb (GSettings   *self,
+                                      GParamSpec  *pspec,
+                                      GtkListItem *list_item)
+{
+  gboolean location_enabled;
+  GtkWidget *box, *subtitle;
+
+  box = g_object_get_data (G_OBJECT (list_item), "box");
+  subtitle = g_object_get_data (G_OBJECT (list_item), "subtitle");
+
+  location_enabled = g_settings_get_boolean (self, "enabled");
+
+  gtk_widget_set_visible (subtitle, !location_enabled);
+
+  gtk_list_item_set_selectable (list_item, location_enabled);
+  gtk_list_item_set_activatable (list_item, location_enabled);
+  gtk_widget_set_sensitive (box, location_enabled);
+}
+
+static void
+schedule_factory_bind_cb (CcBackgroundPanel        *self,
+                          GtkListItem              *list_item,
+                          GtkSignalListItemFactory *factory)
+{
+  AdwComboRow *row = ADW_COMBO_ROW (self->schedule_row);
+  GtkWidget *box, *title, *subtitle, *checkmark, *popup;
+  GtkStringObject *string_item;
+
+  string_item = GTK_STRING_OBJECT (gtk_list_item_get_item (list_item));
+
+  box = g_object_get_data (G_OBJECT (list_item), "box");
+  title = g_object_get_data (G_OBJECT (list_item), "title");
+  subtitle = g_object_get_data (G_OBJECT (list_item), "subtitle");
+  checkmark = g_object_get_data (G_OBJECT (list_item), "checkmark");
+
+  gtk_label_set_label (GTK_LABEL (title), gtk_string_object_get_string (string_item));
+
+  if (gtk_list_item_get_position (list_item) == 1)
+    {
+      gtk_label_set_label (GTK_LABEL (subtitle),
+                           _("Unavailable: location services disabled"));
+
+      g_signal_connect (self->location_settings, "changed::enabled",
+                        G_CALLBACK (schedule_factory_location_changed_cb), list_item);
+      schedule_factory_location_changed_cb (self->location_settings, NULL, list_item);
+    }
+
+  popup = gtk_widget_get_ancestor (title, GTK_TYPE_POPOVER);
+  if (popup && gtk_widget_is_ancestor (popup, GTK_WIDGET (row)))
+    {
+      gtk_box_set_spacing (GTK_BOX (box), 0);
+      gtk_widget_set_visible (checkmark, TRUE);
+      g_signal_connect (row, "notify::selected",
+                        G_CALLBACK (schedule_factory_notify_selected_item_cb), list_item);
+      schedule_factory_notify_selected_item_cb (row, NULL, list_item);
+    }
+  else
+    {
+      gtk_box_set_spacing (GTK_BOX (box), 6);
+      gtk_widget_set_visible (checkmark, FALSE);
+    }
+}
+
+static void
+schedule_factory_unbind_cb (CcBackgroundPanel        *self,
+                            GtkListItem              *list_item,
+                            GtkSignalListItemFactory *factory)
+{
+  g_signal_handlers_disconnect_by_func (ADW_COMBO_ROW (self->schedule_row), schedule_factory_notify_selected_item_cb, list_item);
+  g_signal_handlers_disconnect_by_func (self->location_settings, schedule_factory_location_changed_cb, list_item);
+}
+
+static void
+schedule_location_changed (CcBackgroundPanel *self)
+{
+  gboolean automatic, location_enabled;
+
+  automatic = g_settings_get_boolean (self->color_settings, "color-scheme-schedule-automatic");
+  location_enabled = g_settings_get_boolean (self->location_settings, "enabled");
+
+  if (automatic && !location_enabled)
+    g_settings_set_boolean (self->color_settings, "color-scheme-schedule-automatic", FALSE);
+}
+
+static void
+on_schedule_row_selected_cb (CcBackgroundPanel *self)
+{
+  guint selected;
+  gboolean enabled, automatic;
+
+  selected = adw_combo_row_get_selected (ADW_COMBO_ROW (self->schedule_row));
+  enabled = selected != 0;
+  automatic = selected == 1;
+
+  g_settings_set_boolean (self->color_settings, "color-scheme-enabled", enabled);
+  g_settings_set_boolean (self->color_settings, "color-scheme-schedule-automatic", automatic);
+
+  schedule_update_state (self);
+}
+
+static void
+on_beginning_time_updated_cb (CcBackgroundPanel *self)
+{
+  gdouble value = cc_time_row_get_time (CC_TIME_ROW (self->beginning_row));
+
+  g_settings_set_double (self->color_settings, "color-scheme-schedule-from", value);
+}
+
+static void
+on_end_time_updated_cb (CcBackgroundPanel *self)
+{
+  gdouble value = cc_time_row_get_time (CC_TIME_ROW (self->end_row));
+
+  g_settings_set_double (self->color_settings, "color-scheme-schedule-to", value);
+}
+
+static void
+color_changed_cb (CcBackgroundPanel *self)
+{
+  schedule_update_state (self);
+}
+
+static void
+color_got_proxy_cb (GObject      *source_object,
+                    GAsyncResult *res,
+                    gpointer      user_data)
+{
+  CcBackgroundPanel *self = CC_BACKGROUND_PANEL (user_data);
+  GDBusProxy *proxy;
+  g_autoptr (GError) error = NULL;
+
+  proxy = cc_object_storage_create_dbus_proxy_finish (res, &error);
+  if (proxy == NULL)
+    {
+      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+        g_warning ("Failed to connect to g-s-d: %s", error->message);
+      return;
+    }
+
+  self->color_proxy = proxy;
+
+  g_signal_connect_object (G_OBJECT (self->color_proxy), "g-properties-changed",
+                           G_CALLBACK (color_changed_cb),
+                           self, G_CONNECT_SWAPPED);
+
+  schedule_update_state (self);
+}
+
 /* Background */
 
 static void
@@ -491,6 +745,8 @@ cc_background_panel_dispose (GObject *object)
   g_clear_object (&self->settings);
   g_clear_object (&self->lock_settings);
   g_clear_object (&self->interface_settings);
+  g_clear_object (&self->location_settings);
+  g_clear_object (&self->color_settings);
   g_clear_object (&self->proxy);
 
   G_OBJECT_CLASS (cc_background_panel_parent_class)->dispose (object);
@@ -515,6 +771,7 @@ cc_background_panel_class_init (CcBackgroundPanelClass *klass)
 
   g_type_ensure (CC_TYPE_BACKGROUND_CHOOSER);
   g_type_ensure (CC_TYPE_BACKGROUND_PREVIEW);
+  g_type_ensure (CC_TYPE_TIME_ROW);
 
   panel_class->get_help_uri = cc_background_panel_get_help_uri;
 
@@ -523,6 +780,9 @@ cc_background_panel_class_init (CcBackgroundPanelClass *klass)
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/background/cc-background-panel.ui");
 
+  gtk_widget_class_bind_template_child (widget_class, CcBackgroundPanel, schedule_row);
+  gtk_widget_class_bind_template_child (widget_class, CcBackgroundPanel, beginning_row);
+  gtk_widget_class_bind_template_child (widget_class, CcBackgroundPanel, end_row);
   gtk_widget_class_bind_template_child (widget_class, CcBackgroundPanel, accent_box);
   gtk_widget_class_bind_template_child (widget_class, CcBackgroundPanel, background_chooser);
   gtk_widget_class_bind_template_child (widget_class, CcBackgroundPanel, default_preview);
@@ -530,6 +790,12 @@ cc_background_panel_class_init (CcBackgroundPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcBackgroundPanel, default_toggle);
   gtk_widget_class_bind_template_child (widget_class, CcBackgroundPanel, dark_toggle);
 
+  gtk_widget_class_bind_template_callback (widget_class, schedule_factory_setup_cb);
+  gtk_widget_class_bind_template_callback (widget_class, schedule_factory_bind_cb);
+  gtk_widget_class_bind_template_callback (widget_class, schedule_factory_unbind_cb);
+  gtk_widget_class_bind_template_callback (widget_class, on_beginning_time_updated_cb);
+  gtk_widget_class_bind_template_callback (widget_class, on_end_time_updated_cb);
+  gtk_widget_class_bind_template_callback (widget_class, on_schedule_row_selected_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_color_scheme_toggle_active_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_chooser_background_chosen_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_add_picture_button_clicked_cb);
@@ -558,6 +824,8 @@ cc_background_panel_init (CcBackgroundPanel *self)
   g_settings_delay (self->lock_settings);
 
   self->interface_settings = g_settings_new (INTERFACE_PATH_ID);
+  self->location_settings = g_settings_new (LOCATION_PATH_ID);
+  self->color_settings = g_settings_new (COLOR_PATH_ID);
 
   /* Load the background */
   reload_current_bg (self);
@@ -581,6 +849,37 @@ cc_background_panel_init (CcBackgroundPanel *self)
                            G_CALLBACK (reload_accent_color_toggles),
                            self,
                            G_CONNECT_SWAPPED);
+
+  /* Colour Scheme Settings */
+  g_signal_connect_object (self->location_settings, "changed::enabled",
+                           G_CALLBACK (schedule_location_changed),
+                           self,
+                           G_CONNECT_SWAPPED);
+  schedule_location_changed (self);
+
+  g_signal_connect_object (self->color_settings, "changed",
+                           G_CALLBACK (color_changed_cb),
+                           self, G_CONNECT_SWAPPED);
+
+  g_settings_bind (self->color_settings, "color-scheme-enabled",
+                   self->beginning_row, "visible", G_SETTINGS_BIND_GET);
+
+  g_settings_bind (self->color_settings, "color-scheme-enabled",
+                   self->end_row, "visible", G_SETTINGS_BIND_GET);
+
+  g_settings_bind (self->color_settings, "color-scheme-schedule-from",
+                   self->beginning_row, "time", G_SETTINGS_BIND_DEFAULT);
+  g_settings_bind (self->color_settings, "color-scheme-schedule-to",
+                   self->end_row, "time", G_SETTINGS_BIND_DEFAULT);
+
+  cc_object_storage_create_dbus_proxy (G_BUS_TYPE_SESSION,
+                                       G_DBUS_PROXY_FLAGS_NONE,
+                                       "org.gnome.SettingsDaemon.Color",
+                                       "/org/gnome/SettingsDaemon/Color",
+                                       "org.gnome.SettingsDaemon.Color",
+                                       self->proxy_cancellable,
+                                       color_got_proxy_cb,
+                                       self);
 
   g_dbus_proxy_new_for_bus (G_BUS_TYPE_SESSION,
                             G_DBUS_PROXY_FLAGS_NONE,
