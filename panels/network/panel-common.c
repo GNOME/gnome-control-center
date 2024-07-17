@@ -451,3 +451,24 @@ net_device_get_ip6_addresses (NMIPConfig *ipv6_config)
         g_ptr_array_add (ipv6, NULL);
         return g_strjoinv ("\n", (char **) ipv6->pdata);
 }
+
+gchar *
+net_access_point_get_signal_icon (NMAccessPoint *access_point)
+{
+        gchar *icon_name;
+        guint strength = 0;
+
+        strength = nm_access_point_get_strength (access_point);
+        if (strength < 20)
+                icon_name = "network-wireless-signal-none-symbolic";
+        else if (strength < 40)
+                icon_name = "network-wireless-signal-weak-symbolic";
+        else if (strength < 50)
+                icon_name = "network-wireless-signal-ok-symbolic";
+        else if (strength < 80)
+                icon_name = "network-wireless-signal-good-symbolic";
+        else
+                icon_name = "network-wireless-signal-excellent-symbolic";
+
+        return icon_name;
+}
