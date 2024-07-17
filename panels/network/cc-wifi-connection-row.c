@@ -19,6 +19,7 @@
 #include <config.h>
 #include "cc-wifi-connection-row.h"
 #include "cc-qr-code.h"
+#include "panel-common.h"
 
 struct _CcWifiConnectionRow
 {
@@ -302,17 +303,7 @@ update_ui (CcWifiConnectionRow *self)
       g_autofree char *description = NULL;
       gchar *icon_name;
 
-      if (strength < 20)
-        icon_name = "network-wireless-signal-none-symbolic";
-      else if (strength < 40)
-        icon_name = "network-wireless-signal-weak-symbolic";
-      else if (strength < 50)
-        icon_name = "network-wireless-signal-ok-symbolic";
-      else if (strength < 80)
-        icon_name = "network-wireless-signal-good-symbolic";
-      else
-        icon_name = "network-wireless-signal-excellent-symbolic";
-
+      icon_name = net_access_point_get_signal_icon (best_ap);
       g_object_set (self->strength_icon, "icon-name", icon_name, NULL);
       gtk_widget_set_child_visible (GTK_WIDGET (self->strength_icon), TRUE);
 

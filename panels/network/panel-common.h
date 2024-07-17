@@ -36,4 +36,6 @@ GSList       *net_device_get_valid_connections (NMClient *client,
 
 gchar   *net_device_get_ip6_addresses (NMIPConfig *ipv6_config);
 
+gchar   *net_access_point_get_signal_icon (NMAccessPoint *access_point);
+
 G_END_DECLS
