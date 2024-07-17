@@ -8,6 +8,7 @@ common_sources += gnome.mkenums_simple(
 )
 
 common_sources += gnome.mkenums_simple('cc-number-row-enums', sources: files('cc-number-row.h'))
+common_sources += gnome.mkenums_simple('cc-timelike-editor-enums', sources: files('cc-timelike-editor.h'))
 
 common_sources += gnome.compile_resources(
   'cc-common-resources',

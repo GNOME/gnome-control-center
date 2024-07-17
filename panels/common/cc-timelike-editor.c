@@ -36,6 +36,7 @@
 
 #include "cc-timelike-entry.h"
 #include "cc-timelike-editor.h"
+#include "cc-timelike-editor-enums.h"
 
 
 #define TIMEOUT_INITIAL  500
@@ -68,10 +69,17 @@ struct _CcTimelikeEditor
   GSettings *filechooser_settings;
 
   guint      timer_id;
+
+  CcTimelikeEditorMode mode;
 };
 
 G_DEFINE_TYPE (CcTimelikeEditor, cc_timelike_editor, ADW_TYPE_BIN)
 
+typedef enum {
+  PROP_MODE = 1,
+} CcTimelikeEditorProperty;
+
+static GParamSpec *props[PROP_MODE + 1];
 
 enum {
   TIME_CHANGED,
@@ -81,20 +89,22 @@ enum {
 static guint signals[N_SIGNALS];
 
 static void
-timelike_editor_clock_changed_cb (CcTimelikeEditor *self)
+update_am_pm_widgets (CcTimelikeEditor *self)
 {
   GDesktopClockFormat value;
-  gboolean is_am_pm;
+  gboolean is_am_pm, is_time;
 
   g_assert (CC_IS_TIMELIKE_EDITOR (self));
 
   value = g_settings_get_enum (self->clock_settings, CLOCK_FORMAT_KEY);
-
   is_am_pm = value == G_DESKTOP_CLOCK_FORMAT_12H;
-  cc_timelike_entry_set_am_pm (self->timelike_entry, is_am_pm);
-  gtk_widget_set_visible (GTK_WIDGET (self->am_pm_button), is_am_pm);
+  is_time = (self->mode == CC_TIMELIKE_EDITOR_MODE_TIME);
 
-  if (is_am_pm)
+  cc_timelike_entry_set_am_pm (self->timelike_entry, is_am_pm);
+
+  gtk_widget_set_visible (GTK_WIDGET (self->am_pm_button), is_am_pm && is_time);
+
+  if (is_am_pm && is_time)
     {
       if (cc_timelike_entry_get_is_am (self->timelike_entry))
         gtk_stack_set_visible_child (self->am_pm_stack, GTK_WIDGET (self->am_label));
@@ -104,11 +114,17 @@ timelike_editor_clock_changed_cb (CcTimelikeEditor *self)
 }
 
 static void
+timelike_editor_clock_changed_cb (CcTimelikeEditor *self)
+{
+  update_am_pm_widgets (self);
+}
+
+static void
 timelike_editor_time_changed_cb (CcTimelikeEditor *self)
 {
   g_assert (CC_IS_TIMELIKE_EDITOR (self));
 
-  timelike_editor_clock_changed_cb (self);
+  update_am_pm_widgets (self);
   g_signal_emit (self, signals[TIME_CHANGED], 0);
 }
 
@@ -213,7 +229,7 @@ editor_am_pm_button_clicked_cb (CcTimelikeEditor *self)
   is_am = cc_timelike_entry_get_is_am (self->timelike_entry);
   /* Toggle AM PM */
   cc_timelike_entry_set_is_am (self->timelike_entry, !is_am);
-  timelike_editor_clock_changed_cb (self);
+  update_am_pm_widgets (self);
 }
 
 static void
@@ -261,6 +277,44 @@ cc_timelike_editor_constructed (GObject *object)
 }
 
 static void
+cc_timelike_editor_get_property (GObject    *object,
+                                 guint       property_id,
+                                 GValue     *value,
+                                 GParamSpec *pspec)
+{
+  CcTimelikeEditor *self = CC_TIMELIKE_EDITOR (object);
+
+  switch ((CcTimelikeEditorProperty) property_id)
+    {
+    case PROP_MODE:
+      g_value_set_enum (value, cc_timelike_editor_get_mode (self));
+      break;
+    default:
+      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
+      break;
+    }
+}
+
+static void
+cc_timelike_editor_set_property (GObject      *object,
+                                 guint         property_id,
+                                 const GValue *value,
+                                 GParamSpec   *pspec)
+{
+  CcTimelikeEditor *self = CC_TIMELIKE_EDITOR (object);
+
+  switch ((CcTimelikeEditorProperty) property_id)
+    {
+    case PROP_MODE:
+      cc_timelike_editor_set_mode (self, g_value_get_enum (value));
+      break;
+    default:
+      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
+      break;
+    }
+}
+
+static void
 cc_timelike_editor_dispose (GObject *object)
 {
   gtk_widget_dispose_template (GTK_WIDGET (object), CC_TYPE_TIMELIKE_EDITOR);
@@ -287,8 +341,27 @@ cc_timelike_editor_class_init (CcTimelikeEditorClass *klass)
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
   object_class->constructed = cc_timelike_editor_constructed;
+  object_class->get_property = cc_timelike_editor_get_property;
+  object_class->set_property = cc_timelike_editor_set_property;
   object_class->dispose = cc_timelike_editor_dispose;
   object_class->finalize = cc_timelike_editor_finalize;
+
+  /**
+   * CcTimelikeEditor:mode:
+   *
+   * What kind of time the editor is meant to represent — a wall clock time,
+   * or a duration.
+   *
+   * This affects whether the AM/PM buttons are potentially shown.
+   */
+  props[PROP_MODE] =
+    g_param_spec_enum ("mode",
+                       NULL, NULL,
+                       CC_TYPE_TIMELIKE_EDITOR_MODE,
+                       CC_TIMELIKE_EDITOR_MODE_TIME,
+                       G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS | G_PARAM_EXPLICIT_NOTIFY);
+
+  g_object_class_install_properties (object_class, G_N_ELEMENTS (props), props);
 
   signals[TIME_CHANGED] =
     g_signal_new ("time-changed",
@@ -325,6 +398,7 @@ cc_timelike_editor_init (CcTimelikeEditor *self)
 {
   gtk_widget_init_template (GTK_WIDGET (self));
 
+  self->mode = CC_TIMELIKE_EDITOR_MODE_TIME;
   self->clock_settings = g_settings_new (CLOCK_SCHEMA);
   self->filechooser_settings = g_settings_new (FILECHOOSER_SCHEMA);
 
@@ -333,7 +407,7 @@ cc_timelike_editor_init (CcTimelikeEditor *self)
                            G_CONNECT_SWAPPED);
   g_signal_connect_swapped (self->timelike_entry, "time-changed",
                             G_CALLBACK (timelike_editor_time_changed_cb), self);
-  timelike_editor_clock_changed_cb (self);
+  update_am_pm_widgets (self);
 }
 
 CcTimelikeEditor *
@@ -368,3 +442,43 @@ cc_timelike_editor_get_minute (CcTimelikeEditor *self)
   return cc_timelike_entry_get_minute (self->timelike_entry);
 }
 
+/**
+ * cc_timelike_editor_get_mode:
+ * @self: a #CcTimelikeEditor
+ *
+ * Get the value of #CcTimelikeEditor:mode.
+ *
+ * Returns: the current editor mode
+ */
+CcTimelikeEditorMode
+cc_timelike_editor_get_mode (CcTimelikeEditor *self)
+{
+  g_return_val_if_fail (CC_IS_TIMELIKE_EDITOR (self), CC_TIMELIKE_EDITOR_MODE_TIME);
+
+  return self->mode;
+}
+
+/**
+ * cc_timelike_editor_set_mode:
+ * @self: a #CcTimelikeEditor
+ * @mode: new editor mode
+ *
+ * Set the value of #CcTimelikeEditor:mode.
+ */
+void
+cc_timelike_editor_set_mode (CcTimelikeEditor     *self,
+                             CcTimelikeEditorMode  mode)
+{
+  g_return_if_fail (CC_IS_TIMELIKE_EDITOR (self));
+
+  if (self->mode == mode)
+    return;
+
+  g_object_freeze_notify (G_OBJECT (self));
+
+  self->mode = mode;
+  update_am_pm_widgets (self);
+  g_object_notify_by_pspec (G_OBJECT (self), props[PROP_MODE]);
+
+  g_object_thaw_notify (G_OBJECT (self));
+}

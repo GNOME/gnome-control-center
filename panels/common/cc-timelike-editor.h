@@ -28,6 +28,20 @@
 
 G_BEGIN_DECLS
 
+/**
+ * CcTimelikeEditorMode:
+ * @CC_TIMELIKE_EDITOR_MODE_TIME: a wall clock time [00:00, 23:59]
+ * @CC_TIMELIKE_EDITOR_MODE_DURATION: a duration in hours and minutes, may have
+ *   an arbitrary range
+ *
+ * What kind of time the editor is meant to represent — a wall clock time,
+ * or a duration.
+ */
+typedef enum {
+  CC_TIMELIKE_EDITOR_MODE_TIME,
+  CC_TIMELIKE_EDITOR_MODE_DURATION,
+} CcTimelikeEditorMode;
+
 #define CC_TYPE_TIMELIKE_EDITOR (cc_timelike_editor_get_type ())
 
 G_DECLARE_FINAL_TYPE (CcTimelikeEditor, cc_timelike_editor, CC, TIMELIKE_EDITOR, AdwBin)
@@ -38,5 +52,9 @@ void          cc_timelike_editor_set_time   (CcTimelikeEditor *self,
                                              guint             minute);
 guint         cc_timelike_editor_get_hour   (CcTimelikeEditor *self);
 guint         cc_timelike_editor_get_minute (CcTimelikeEditor *self);
+
+CcTimelikeEditorMode cc_timelike_editor_get_mode (CcTimelikeEditor     *self);
+void                 cc_timelike_editor_set_mode (CcTimelikeEditor     *self,
+                                                  CcTimelikeEditorMode  mode);
 
 G_END_DECLS
