@@ -33,6 +33,7 @@
 #include "cc-list-row.h"
 #include "cc-net-proxy-page.h"
 #include "cc-vpn-page.h"
+#include "cc-wifi-page.h"
 #include "connection-editor/ce-page.h"
 #include "net-device-bluetooth.h"
 #include "net-device-ethernet.h"
@@ -60,6 +61,7 @@ struct _CcNetworkPanel
         GPtrArray        *bluetooth_devices;
         GPtrArray        *ethernet_devices;
         GPtrArray        *mobile_devices;
+        GPtrArray        *wifi_devices;
         GHashTable       *nm_device_to_device;
 
         NMClient         *client;
@@ -217,6 +219,7 @@ cc_network_panel_dispose (GObject *object)
         g_clear_pointer (&self->bluetooth_devices, g_ptr_array_unref);
         g_clear_pointer (&self->ethernet_devices, g_ptr_array_unref);
         g_clear_pointer (&self->mobile_devices, g_ptr_array_unref);
+        g_clear_pointer (&self->wifi_devices, g_ptr_array_unref);
         g_clear_pointer (&self->nm_device_to_device, g_hash_table_destroy);
         g_clear_object (&self->rfkill_proxy);
 
@@ -266,6 +269,11 @@ panel_refresh_device_titles (CcNetworkPanel *self)
                 g_ptr_array_add (ndarray, device);
                 g_ptr_array_add (nmdarray, net_device_mobile_get_device (device));
         }
+        for (i = 0; i < self->wifi_devices->len; i++) {
+                NetDeviceWifi *device = g_ptr_array_index (self->wifi_devices, i);
+                g_ptr_array_add (ndarray, device);
+                g_ptr_array_add (nmdarray, net_device_wifi_get_device (device));
+        }
 
         if (ndarray->len == 0)
                 return;
@@ -290,6 +298,8 @@ panel_refresh_device_titles (CcNetworkPanel *self)
                                 adw_preferences_row_set_title (ADW_PREFERENCES_ROW (devices[i]), titles[i]);
                 } else if (NET_IS_DEVICE_MOBILE (devices[i]))
                         net_device_mobile_set_title (NET_DEVICE_MOBILE (devices[i]), titles[i]);
+                else if (NET_IS_DEVICE_WIFI (devices[i]))
+                        adw_preferences_row_set_title (ADW_PREFERENCES_ROW (devices[i]), titles[i]);
         }
 }
 
@@ -340,6 +350,11 @@ handle_argv (CcNetworkPanel *self)
                 if (handle_argv_for_device (self, net_device_mobile_get_device (device)))
                         return;
         }
+        for (i = 0; i < self->wifi_devices->len; i++) {
+                NetDeviceWifi *device = g_ptr_array_index (self->wifi_devices, i);
+                if (handle_argv_for_device (self, net_device_wifi_get_device (device)))
+                        return;
+        }
         g_debug ("Could not handle argv operation, no matching device yet?");
 }
 
@@ -362,6 +377,16 @@ wwan_panel_supports_modem (GDBusObject *object)
         capability = mm_modem_get_current_capabilities (modem);
 
         return capability & supported_capabilities;
+}
+
+static void
+on_wifi_device_row_activated (CcNetworkPanel *self,
+                              GObject        *row)
+{
+        NMDevice *device = g_object_get_data (row, "device");
+        CcWifiPage *wifi_page = cc_wifi_page_new (CC_PANEL (self), self->client, device);
+
+        cc_panel_push_subpage (CC_PANEL (self), ADW_NAVIGATION_PAGE (wifi_page));
 }
 
 static void
@@ -390,6 +415,7 @@ panel_add_device (CcNetworkPanel *self, NMDevice *device)
         NMDeviceType type;
         NetDeviceMobile *device_mobile;
         NetDeviceBluetooth *device_bluetooth;
+        NetDeviceWifi *device_wifi;
         g_autoptr(GDBusObject) modem_object = NULL;
 
         /* does already exist */
@@ -484,6 +510,16 @@ panel_add_device (CcNetworkPanel *self, NMDevice *device)
           * them, but not here.
           */
         case NM_DEVICE_TYPE_WIFI:
+                device_wifi = net_device_wifi_new (device);
+
+                g_object_set_data (G_OBJECT (device_wifi), "device", device);
+                g_signal_connect_swapped (G_OBJECT (device_wifi), "activated",
+                                          G_CALLBACK (on_wifi_device_row_activated), self);
+
+                g_ptr_array_add (self->wifi_devices, device_wifi);
+                g_hash_table_insert (self->nm_device_to_device, device, device_wifi);
+                adw_preferences_group_add (ADW_PREFERENCES_GROUP (self->device_list), GTK_WIDGET (device_wifi));
+                break;
         case NM_DEVICE_TYPE_TUN:
         /* And the rest we simply cannot deal with currently. */
         default:
@@ -503,12 +539,10 @@ panel_remove_device (CcNetworkPanel *self, NMDevice *device)
         g_ptr_array_remove (self->bluetooth_devices, net_device);
         g_ptr_array_remove (self->ethernet_devices, net_device);
         g_ptr_array_remove (self->mobile_devices, net_device);
+        g_ptr_array_remove (self->wifi_devices, net_device);
         g_hash_table_remove (self->nm_device_to_device, device);
 
-        if (nm_device_get_device_type (device) == NM_DEVICE_TYPE_BT)
-                adw_preferences_group_remove (self->device_list, net_device);
-        else
-                gtk_box_remove (GTK_BOX (gtk_widget_get_parent (net_device)), net_device);
+        adw_preferences_group_remove (self->device_list, net_device);
 }
 
 static void
@@ -787,6 +821,7 @@ cc_network_panel_init (CcNetworkPanel *self)
         self->bluetooth_devices = g_ptr_array_new ();
         self->ethernet_devices = g_ptr_array_new ();
         self->mobile_devices = g_ptr_array_new ();
+        self->wifi_devices = g_ptr_array_new ();
         self->nm_device_to_device = g_hash_table_new (g_direct_hash, g_direct_equal);
 
         /* Create and store a NMClient instance if it doesn't exist yet */

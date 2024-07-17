@@ -8,25 +8,17 @@ network_inc = include_directories('.')
 subdir('connection-editor')
 subdir('icons')
 
-panel_names = [
-  cappletname,
-  'wifi'
-]
+panels_list += cappletname
 
-panels_list += panel_names
-
-foreach name: panel_names
-  desktop = 'gnome-' + name + '-panel.desktop'
-
-  i18n.merge_file(
-    type: 'desktop',
-    input: desktop + '.in',
-    output: desktop,
-    po_dir: po_dir,
-    install: true,
-    install_dir: control_center_desktopdir
-  )
-endforeach
+desktop = 'gnome-' + cappletname + '-panel.desktop'
+i18n.merge_file(
+  type: 'desktop',
+  input: desktop + '.in',
+  output: desktop,
+  po_dir: po_dir,
+  install: true,
+  install_dir: control_center_desktopdir
+)
 
 sources = files(
   'cc-qr-code.c',
@@ -36,8 +28,8 @@ sources = files(
   'cc-vpn-page.c',
   'cc-wifi-connection-row.c',
   'cc-wifi-connection-list.c',
-  'cc-wifi-panel.c',
   'cc-wifi-hotspot-dialog.c',
+  'cc-wifi-page.c',
   'net-device-bluetooth.c',
   'net-device-ethernet.c',
   'net-device-mobile.c',

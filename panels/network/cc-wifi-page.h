@@ -21,16 +21,17 @@
 
 #pragma once
 
-#include <adwaita.h>
+#include <shell/cc-panel.h>
 #include <NetworkManager.h>
+#include <polkit/polkit.h>
 
 G_BEGIN_DECLS
 
-G_DECLARE_FINAL_TYPE (NetDeviceWifi, net_device_wifi, NET, DEVICE_WIFI, AdwActionRow)
+G_DECLARE_FINAL_TYPE (CcWifiPage, cc_wifi_page, CC, WIFI_PAGE, CcPanel)
 
-NetDeviceWifi *net_device_wifi_new               (NMDevice      *device);
-
-NMDevice      *net_device_wifi_get_device        (NetDeviceWifi *device);
+CcWifiPage *cc_wifi_page_new               (CcPanel       *panel,
+                                            NMClient      *client,
+                                            NMDevice      *device);
 
 G_END_DECLS
 

@@ -31,7 +31,7 @@
 #include <glib.h>
 
 /* Including ‘.c’ file to test static functions */
-#include "cc-wifi-panel.c"
+#include "cc-wifi-page.c"
 #include "cc-qr-code.c"
 
 static void

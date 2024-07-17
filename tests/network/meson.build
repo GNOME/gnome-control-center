@@ -39,7 +39,7 @@ exe = executable(
   'test-wifi-panel-text',
   ['test-wifi-text.c'],
   include_directories : includes + [common_inc],
-  dependencies : common_deps + network_manager_deps + [libtestshell_dep],
+  dependencies : common_deps + network_manager_deps + polkit_gobject_dep + [libtestshell_dep],
   link_with : [network_panel_lib],
   c_args : cflags,
 )
