@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  SPDX-License-Identifier: GPL-3.0-or-later
+  SPDX-FileCopyrightText: 2024 GNOME Foundation, Inc.
+-->
+<interface>
+  <template class="CcDurationEditor" parent="GtkWidget">
+    <child>
+      <object class="CcTimelikeEditor" id="editor">
+        <property name="mode">duration</property>
+        <property name="minute-increment">15</property>
+      </object>
+    </child>
+  </template>
+</interface>
