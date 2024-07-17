@@ -44,4 +44,8 @@ gboolean   cc_timelike_entry_get_am_pm  (CcTimelikeEntry *self);
 void       cc_timelike_entry_set_am_pm  (CcTimelikeEntry *self,
                                          gboolean         is_am_pm);
 
+guint      cc_timelike_entry_get_minute_increment (CcTimelikeEntry *self);
+void       cc_timelike_entry_set_minute_increment (CcTimelikeEntry *self,
+                                                   guint            minutes);
+
 G_END_DECLS

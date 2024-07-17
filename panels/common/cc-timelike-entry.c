@@ -51,6 +51,7 @@ struct _CcTimelikeEntry
   int        minute;
   gboolean   is_am_pm;
   gboolean   is_am; /* AM if TRUE. PM if FALSE. valid iff is_am_pm set */
+  guint      minute_increment;
 };
 
 
@@ -64,6 +65,12 @@ static void gtk_editable_interface_init (GtkEditableInterface *iface);
 
 G_DEFINE_TYPE_WITH_CODE (CcTimelikeEntry, cc_timelike_entry, GTK_TYPE_WIDGET,
                          G_IMPLEMENT_INTERFACE (GTK_TYPE_EDITABLE, gtk_editable_interface_init));
+
+typedef enum {
+  PROP_MINUTE_INCREMENT = 1,
+} CcTimelikeEntryProperty;
+
+static GParamSpec *props[PROP_MINUTE_INCREMENT + 1];
 
 enum {
   CHANGE_VALUE,
@@ -223,14 +230,14 @@ change_value_cb (GtkWidget *widget,
   if (position > SEPARATOR_INDEX)
     {
       if (type == GTK_SCROLL_STEP_UP)
-        self->minute++;
+        self->minute += self->minute_increment;
       else
-        self->minute--;
+        self->minute -= self->minute_increment;
 
       if (self->minute >= 60)
         self->minute = 0;
       else if (self->minute <= -1)
-        self->minute = 59;
+        self->minute = 60 - self->minute_increment;
     }
   else
     {
@@ -448,10 +455,17 @@ cc_timelike_entry_get_property (GObject    *object,
                                 GValue     *value,
                                 GParamSpec *pspec)
 {
-  if (gtk_editable_delegate_get_property (object, property_id, value, pspec))
-    return;
+  CcTimelikeEntry *self = CC_TIMELIKE_ENTRY (object);
 
-  G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
+  switch ((CcTimelikeEntryProperty) property_id)
+    {
+    case PROP_MINUTE_INCREMENT:
+      g_value_set_uint (value, cc_timelike_entry_get_minute_increment (self));
+      break;
+    default:
+      if (!gtk_editable_delegate_get_property (object, property_id, value, pspec))
+        G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
+    }
 }
 
 static void
@@ -460,10 +474,17 @@ cc_timelike_entry_set_property (GObject      *object,
                                 const GValue *value,
                                 GParamSpec   *pspec)
 {
-  if (gtk_editable_delegate_set_property (object, property_id, value, pspec))
-    return;
+  CcTimelikeEntry *self = CC_TIMELIKE_ENTRY (object);
 
-  G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
+  switch ((CcTimelikeEntryProperty) property_id)
+    {
+    case PROP_MINUTE_INCREMENT:
+      cc_timelike_entry_set_minute_increment (self, g_value_get_uint (value));
+      break;
+    default:
+      if (!gtk_editable_delegate_set_property (object, property_id, value, pspec))
+        G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
+    }
 }
 
 static void
@@ -476,6 +497,20 @@ cc_timelike_entry_class_init (CcTimelikeEntryClass *klass)
   object_class->dispose = cc_timelike_entry_dispose;
   object_class->get_property = cc_timelike_entry_get_property;
   object_class->set_property = cc_timelike_entry_set_property;
+
+  /**
+   * CcTimelikeEntry:minute-increment:
+   *
+   * Number of minutes the up/down keys change the time by, which will
+ *   always be in the range [1, 59].
+   */
+  props[PROP_MINUTE_INCREMENT] =
+    g_param_spec_uint ("minute-increment",
+                       NULL, NULL,
+                       1, 59, 1,
+                       G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS | G_PARAM_EXPLICIT_NOTIFY);
+
+  g_object_class_install_properties (object_class, G_N_ELEMENTS (props), props);
 
   signals[CHANGE_VALUE] =
     g_signal_new ("change-value",
@@ -658,4 +693,43 @@ cc_timelike_entry_set_am_pm (CcTimelikeEntry *self,
 
   self->is_am_pm = !!is_am_pm;
   timelike_entry_fill_time (self);
+}
+
+/**
+ * cc_timelike_entry_get_minute_increment:
+ * @self: a #CcTimelikeEntry
+ *
+ * Get the value of #CcTimelikeEntry:minute-increment.
+ *
+ * Returns: number of minutes the up/down keys change the time by, which will
+ *   always be in the range [1, 59]
+ */
+guint
+cc_timelike_entry_get_minute_increment (CcTimelikeEntry *self)
+{
+  g_return_val_if_fail (CC_IS_TIMELIKE_ENTRY (self), 1);
+
+  return self->minute_increment;
+}
+
+/**
+ * cc_timelike_entry_set_minute_increment:
+ * @self: a #CcTimelikeEntry
+ * @minutes: number of minutes the up/down keys change the time by; must be
+ *   in the range [1, 59]
+ *
+ * Set the value of #CcTimelikeEntry:minute-increment.
+ */
+void
+cc_timelike_entry_set_minute_increment (CcTimelikeEntry *self,
+                                        guint            minutes)
+{
+  g_return_if_fail (CC_IS_TIMELIKE_ENTRY (self));
+  g_return_if_fail (minutes > 0 && minutes < 60);
+
+  if (self->minute_increment == minutes)
+    return;
+
+  self->minute_increment = minutes;
+  g_object_notify_by_pspec (G_OBJECT (self), props[PROP_MINUTE_INCREMENT]);
 }
