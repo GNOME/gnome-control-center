@@ -77,9 +77,10 @@ G_DEFINE_TYPE (CcTimelikeEditor, cc_timelike_editor, ADW_TYPE_BIN)
 
 typedef enum {
   PROP_MODE = 1,
+  PROP_MINUTE_INCREMENT,
 } CcTimelikeEditorProperty;
 
-static GParamSpec *props[PROP_MODE + 1];
+static GParamSpec *props[PROP_MINUTE_INCREMENT + 1];
 
 enum {
   TIME_CHANGED,
@@ -289,6 +290,9 @@ cc_timelike_editor_get_property (GObject    *object,
     case PROP_MODE:
       g_value_set_enum (value, cc_timelike_editor_get_mode (self));
       break;
+    case PROP_MINUTE_INCREMENT:
+      g_value_set_uint (value, cc_timelike_editor_get_minute_increment (self));
+      break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
       break;
@@ -307,6 +311,9 @@ cc_timelike_editor_set_property (GObject      *object,
     {
     case PROP_MODE:
       cc_timelike_editor_set_mode (self, g_value_get_enum (value));
+      break;
+    case PROP_MINUTE_INCREMENT:
+      cc_timelike_editor_set_minute_increment (self, g_value_get_uint (value));
       break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
@@ -359,6 +366,18 @@ cc_timelike_editor_class_init (CcTimelikeEditorClass *klass)
                        NULL, NULL,
                        CC_TYPE_TIMELIKE_EDITOR_MODE,
                        CC_TIMELIKE_EDITOR_MODE_TIME,
+                       G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS | G_PARAM_EXPLICIT_NOTIFY);
+
+  /**
+   * CcTimelikeEditor:minute-increment:
+   *
+   * Number of minutes the up/down buttons change the time by, which will
+ *   always be in the range [1, 59].
+   */
+  props[PROP_MINUTE_INCREMENT] =
+    g_param_spec_uint ("minute-increment",
+                       NULL, NULL,
+                       1, 59, 1,
                        G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS | G_PARAM_EXPLICIT_NOTIFY);
 
   g_object_class_install_properties (object_class, G_N_ELEMENTS (props), props);
@@ -481,4 +500,45 @@ cc_timelike_editor_set_mode (CcTimelikeEditor     *self,
   g_object_notify_by_pspec (G_OBJECT (self), props[PROP_MODE]);
 
   g_object_thaw_notify (G_OBJECT (self));
+}
+
+/**
+ * cc_timelike_editor_get_minute_increment:
+ * @self: a #CcTimelikeEditor
+ *
+ * Get the value of #CcTimelikeEditor:minute-increment.
+ *
+ * Returns: number of minutes the up/down buttons change the time by, which will
+ *   always be in the range [1, 59]
+ */
+guint
+cc_timelike_editor_get_minute_increment (CcTimelikeEditor *self)
+{
+  guint minutes;
+
+  g_return_val_if_fail (CC_IS_TIMELIKE_EDITOR (self), 1);
+
+  minutes = cc_timelike_entry_get_minute_increment (self->timelike_entry);
+
+  g_assert (minutes > 0 && minutes < 60);
+
+  return minutes;
+}
+
+/**
+ * cc_timelike_editor_set_minute_increment:
+ * @self: a #CcTimelikeEditor
+ * @minutes: number of minutes the up/down buttons change the time by; must be
+ *   in the range [1, 59]
+ *
+ * Set the value of #CcTimelikeEditor:minute-increment.
+ */
+void
+cc_timelike_editor_set_minute_increment (CcTimelikeEditor *self,
+                                         guint             minutes)
+{
+  g_return_if_fail (CC_IS_TIMELIKE_EDITOR (self));
+  g_return_if_fail (minutes > 0 && minutes < 60);
+
+  cc_timelike_entry_set_minute_increment (self->timelike_entry, minutes);
 }

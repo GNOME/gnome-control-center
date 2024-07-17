@@ -57,4 +57,8 @@ CcTimelikeEditorMode cc_timelike_editor_get_mode (CcTimelikeEditor     *self);
 void                 cc_timelike_editor_set_mode (CcTimelikeEditor     *self,
                                                   CcTimelikeEditorMode  mode);
 
+guint cc_timelike_editor_get_minute_increment (CcTimelikeEditor *self);
+void  cc_timelike_editor_set_minute_increment (CcTimelikeEditor *self,
+                                               guint             minutes);
+
 G_END_DECLS
