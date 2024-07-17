@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <template class="CcWifiPage" parent="CcPanel">
+    <child type="subpage">
+      <object class="AdwNavigationPage">
+        <property name="title" translatable="yes">Wi-Fi</property>
+        <property name="child">
+          <object class="AdwToolbarView">
+            <child type="top">
+              <object class="AdwHeaderBar">
+                <child type="title">
+                  <object class="AdwWindowTitle" id="wifi_headerbar_title">
+                    <property name="title" translatable="yes">Wi-Fi</property>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <property name="content">
+              <object class="GtkStack" id="stack">
+                <child>
+                  <object class="AdwPreferencesPage" id="wifi_page">
+                    <child>
+                      <object class="AdwPreferencesGroup">
+                        <child>
+                          <object class="AdwSwitchRow" id="device_enable_row">
+                            <property name="title" translatable="yes">Wi-Fi</property>
+                            <signal name="notify::active" handler="device_off_switch_changed_cb" object="CcWifiPage" swapped="yes"/>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                    <child>
+                        <object class="AdwPreferencesGroup" id="visible_networks_group">
+                        <child>
+                          <object class="GtkBox" id="listbox_box">
+                            <property name="orientation">vertical</property>
+                            <property name="height-request">140</property>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="AdwPreferencesGroup" id="details_box">
+                        <!-- Saved Networks -->
+                        <child>
+                          <object class="CcListRow" id="saved_network_row">
+                            <property name="title" translatable="yes">Saved Networks</property>
+                            <property name="show-arrow">True</property>
+                            <signal name="activated" handler="adw_dialog_present" object="saved_networks_dialog"/>
+                          </object>
+                        </child>
+
+                        <!-- Connect To Hidden -->
+                        <child>
+                          <object class="CcListRow" id="connect_hidden_row">
+                            <property name="title" translatable="yes">_Connect to Hidden Network…</property>
+                            <property name="show-arrow">True</property>
+                            <signal name="activated" handler="on_connect_hidden_network" object="CcWifiPage" swapped="yes"/>
+                          </object>
+                        </child>
+
+                        <!-- Enable Wi-Fi Hotspot -->
+                        <child>
+                          <object class="CcListRow" id="hotspot_row">
+                            <property name="title" translatable="yes">Wi-Fi Hotspot</property>
+                            <property name="show-arrow">True</property>
+                            <signal name="activated" handler="on_wifi_hotspot_network" object="CcWifiPage" swapped="yes"/>
+                          </object>
+                        </child>
+
+                      </object>
+                    </child>
+
+                  </object>
+                </child>
+                <child>
+                  <object class="AdwPreferencesPage" id="hotspot_page">
+                    <child>
+                      <object class="AdwPreferencesGroup">
+                        <child>
+                          <object class="GtkBox" id="hotspot_box">
+                            <property name="orientation">vertical</property>
+                            <property name="margin_start">12</property>
+                            <property name="margin_end">12</property>
+                            <property name="margin_top">36</property>
+                            <property name="margin_bottom">24</property>
+
+                            <!-- Hotspot QR code -->
+                            <child>
+                              <object class="GtkPicture" id="wifi_qr_image">
+                                <property name="halign">center</property>
+                                <property name="width-request">180</property>
+                                <property name="height-request">180</property>
+                                <property name="margin-bottom">36</property>
+                                <style>
+                                  <class name="card"/>
+                                  <class name="qr-image"/>
+                                </style>
+                              </object>
+                            </child>
+
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="label" translatable="yes">Wi-Fi Hotspot Active</property>
+                                <property name="margin-bottom">12</property>
+                                <style>
+                                  <class name="title"/>
+                                  <class name="title-1"/>
+                                </style>
+                              </object>
+                            </child>
+
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="label" translatable="yes">Scan with another device to connect to the hotspot.
+    Turn off the hotspot to use Wi-Fi with this device.</property>
+                                <property name="justify">center</property>
+                                <property name="margin-bottom">36</property>
+                              </object>
+                            </child>
+
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="AdwPreferencesGroup">
+                        <child>
+                          <object class="AdwActionRow" id="hotspot_name_row">
+                            <property name="title" context="Wi-Fi Hotspot" translatable="yes">Network Name</property>
+                            <style>
+                              <class name="property"/>
+                            </style>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="AdwActionRow" id="hotspot_security_row">
+                            <property name="title" context="Wi-Fi Hotspot" translatable="yes">Security Type</property>
+                            <style>
+                              <class name="property"/>
+                            </style>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="AdwActionRow" id="hotspot_password_row">
+                            <property name="title" context="Wi-Fi Hotspot" translatable="yes">Password</property>
+                            <style>
+                              <class name="property"/>
+                            </style>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="AdwPreferencesGroup">
+                        <child>
+                          <object class="GtkButton">
+                            <property name="halign">center</property>
+                            <property name="label" translatable="yes">T_urn Off Hotspot…</property>
+                            <property name="use-underline">True</property>
+                            <signal name="clicked" handler="stop_shared_connection" object="CcWifiPage" swapped="yes"/>
+                            <style>
+                              <class name="destructive-action"/>
+                              <class name="pill"/>
+                            </style>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </property>
+          </object>
+        </property>
+      </object>
+    </child>
+  </template>
+
+<object class="AdwDialog" id="saved_networks_dialog">
+<property name="title" translatable="yes">Saved Wi-Fi Networks</property>
+<property name="content-width">500</property>
+<property name="content-height">600</property>
+<property name="child">
+  <object class="AdwToolbarView">
+    <child type="top">
+      <object class="AdwHeaderBar"/>
+    </child>
+    <property name="content">
+      <object class="AdwToastOverlay" id="saved_networks_toast_overlay">
+        <child>
+          <object class="AdwPreferencesPage">
+            <child>
+              <object class="AdwPreferencesGroup" id="saved_networks_box"/>
+            </child>
+          </object>
+        </child>
+      </object>
+    </property>
+  </object>
+</property>
+</object>
+</interface>
