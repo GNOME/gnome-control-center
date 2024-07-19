@@ -24,50 +24,75 @@
         <property name="content">
           <object class="GtkStack" id="stack">
             <child>
-              <object class="AdwStatusPage" id="no_devices_page">
-                <property name="icon-name">bluetooth-active-symbolic</property>
-                <property name="title" translatable="yes">No Bluetooth Found</property>
-                <property name="description" translatable="yes">Plug in a dongle to use Bluetooth</property>
-              </object>
-            </child>
-            <child>
-              <object class="AdwStatusPage" id="disabled_page">
-                <property name="icon-name">bluetooth-active-symbolic</property>
-                <property name="title" translatable="yes">Bluetooth Turned Off</property>
-                <property name="description" translatable="yes">Turn on to connect devices and receive file transfers</property>
-              </object>
-            </child>
-            <child>
-              <object class="AdwStatusPage" id="airplane_page">
-                <property name="icon-name">airplane-mode-symbolic</property>
-                <property name="title" translatable="yes">Airplane Mode is On</property>
-                <property name="description" translatable="yes">Bluetooth is disabled when airplane mode is on</property>
+              <object class="GtkStackPage">
+                <property name="name">no-devices-page</property>
                 <property name="child">
-                  <object class="GtkButton">
-                    <property name="label" translatable="yes">_Turn Off Airplane Mode</property>
-                    <property name="use-underline">True</property>
-                    <property name="halign">center</property>
-                    <property name="valign">center</property>
-                    <signal name="clicked" handler="airplane_mode_off_button_clicked_cb" object="CcBluetoothPanel" swapped="yes"/>
-                    <style>
-                      <class name="pill"/>
-                      <class name="suggested-action"/>
-                    </style>
+                  <object class="AdwStatusPage">
+                    <property name="icon-name">bluetooth-active-symbolic</property>
+                    <property name="title" translatable="yes">No Bluetooth Found</property>
+                    <property name="description" translatable="yes">Plug in a dongle to use Bluetooth</property>
                   </object>
                 </property>
               </object>
             </child>
             <child>
-              <object class="AdwStatusPage" id="hw_airplane_page">
-                <property name="icon-name">airplane-mode-symbolic</property>
-                <property name="title" translatable="yes">Hardware Airplane Mode is On</property>
-                <property name="description" translatable="yes">Turn off the Airplane mode switch to enable Bluetooth</property>
+              <object class="GtkStackPage">
+                <property name="name">disabled-page</property>
+                <property name="child">
+                  <object class="AdwStatusPage">
+                    <property name="icon-name">bluetooth-active-symbolic</property>
+                    <property name="title" translatable="yes">Bluetooth Turned Off</property>
+                    <property name="description" translatable="yes">Turn on to connect devices and receive file transfers</property>
+                  </object>
+                </property>
               </object>
             </child>
             <child>
-              <object class="BluetoothSettingsWidget" id="settings_widget">
-                <signal name="panel-changed" handler="panel_changed_cb" object="CcBluetoothPanel" swapped="yes"/>
-                <signal name="adapter-status-changed" handler="adapter_status_changed_cb" object="CcBluetoothPanel" swapped="yes"/>
+              <object class="GtkStackPage">
+                <property name="name">airplane-page</property>
+                <property name="child">
+                  <object class="AdwStatusPage">
+                    <property name="icon-name">airplane-mode-symbolic</property>
+                    <property name="title" translatable="yes">Airplane Mode is On</property>
+                    <property name="description" translatable="yes">Bluetooth is disabled when airplane mode is on</property>
+                    <property name="child">
+                      <object class="GtkButton">
+                        <property name="label" translatable="yes">_Turn Off Airplane Mode</property>
+                        <property name="use-underline">True</property>
+                        <property name="halign">center</property>
+                        <property name="valign">center</property>
+                        <signal name="clicked" handler="airplane_mode_off_button_clicked_cb" object="CcBluetoothPanel" swapped="yes"/>
+                        <style>
+                          <class name="pill"/>
+                          <class name="suggested-action"/>
+                        </style>
+                      </object>
+                    </property>
+                  </object>
+                </property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkStackPage">
+                <property name="name">hw-airplane-page</property>
+                <property name="child">
+                  <object class="AdwStatusPage">
+                    <property name="icon-name">airplane-mode-symbolic</property>
+                    <property name="title" translatable="yes">Hardware Airplane Mode is On</property>
+                    <property name="description" translatable="yes">Turn off the Airplane mode switch to enable Bluetooth</property>
+                  </object>
+                </property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkStackPage">
+                <property name="name">bluetooth-page</property>
+                <property name="child">
+                  <object class="BluetoothSettingsWidget" id="settings_widget">
+                    <signal name="panel-changed" handler="panel_changed_cb" object="CcBluetoothPanel" swapped="yes"/>
+                    <signal name="adapter-status-changed" handler="adapter_status_changed_cb" object="CcBluetoothPanel" swapped="yes"/>
+                  </object>
+                </property>
               </object>
             </child>
           </object>
