@@ -644,7 +644,6 @@ panel_check_network_manager_version (CcNetworkPanel *self)
                 adw_view_stack_set_visible_child_name (ADW_VIEW_STACK (self->stack), "nm-error-page");
         } else {
                 adw_view_stack_set_visible_child_name (ADW_VIEW_STACK (self->stack), "network-page");
-                manager_running (self);
         }
 }
 
@@ -857,6 +856,7 @@ cc_network_panel_init (CcNetworkPanel *self)
                                  G_CALLBACK (device_added_cb), self, G_CONNECT_SWAPPED);
         g_signal_connect_object (self->client, "device-removed",
                                  G_CALLBACK (device_removed_cb), self, G_CONNECT_SWAPPED);
+        manager_running (self);
 
         /* Acquire Airplane Mode proxy */
         cc_object_storage_create_dbus_proxy (G_BUS_TYPE_SESSION,
