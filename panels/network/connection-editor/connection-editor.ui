@@ -1,23 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
-  <template class="NetConnectionEditor" parent="AdwWindow">
-    <property name="destroy-with-parent">True</property>
-    <property name="modal">True</property>
-    <property name="width_request">360</property>
-    <property name="height_request">294</property>
+  <template class="NetConnectionEditor" parent="AdwNavigationPage">
     <child>
       <object class="AdwToolbarView">
         <child type="top">
           <object class="AdwHeaderBar">
             <property name="show-end-title-buttons">False</property>
             <property name="show-start-title-buttons">False</property>
-            <child>
-              <object class="GtkButton" id="cancel_button">
-                <property name="label" translatable="yes">_Cancel</property>
-                <property name="use_underline">True</property>
-                <signal name="clicked" handler="cancel_clicked_cb" object="NetConnectionEditor" swapped="yes"/>
-              </object>
-            </child>
             <child type="end">
               <object class="GtkButton" id="apply_button">
                 <property name="label" translatable="yes">_Apply</property>

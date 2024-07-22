@@ -27,7 +27,7 @@
 
 G_BEGIN_DECLS
 
-G_DECLARE_FINAL_TYPE (NetConnectionEditor, net_connection_editor, NET, CONNECTION_EDITOR, AdwWindow)
+G_DECLARE_FINAL_TYPE (NetConnectionEditor, net_connection_editor, NET, CONNECTION_EDITOR, AdwNavigationPage)
 
 NetConnectionEditor *net_connection_editor_new      (NMConnection     *connection,
                                                      NMDevice         *device,

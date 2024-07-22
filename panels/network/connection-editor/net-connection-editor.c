@@ -50,12 +50,11 @@ static guint signals[LAST_SIGNAL] = { 0 };
 
 struct _NetConnectionEditor
 {
-        AdwWindow parent;
+        AdwNavigationPage parent;
 
         GtkBox           *add_connection_box;
         AdwBin           *add_connection_frame;
         GtkButton        *apply_button;
-        GtkButton        *cancel_button;
         GtkNotebook      *notebook;
         AdwToastOverlay  *toast_overlay;
         GtkStack         *toplevel_stack;
@@ -77,7 +76,7 @@ struct _NetConnectionEditor
         gboolean          title_set;
 };
 
-G_DEFINE_TYPE (NetConnectionEditor, net_connection_editor, ADW_TYPE_WINDOW)
+G_DEFINE_TYPE (NetConnectionEditor, net_connection_editor, ADW_TYPE_NAVIGATION_PAGE)
 
 /* Used as both GSettings keys and GObject data tags */
 #define IGNORE_CA_CERT_TAG "ignore-ca-cert"
@@ -172,21 +171,6 @@ static void
 cancel_editing (NetConnectionEditor *self)
 {
         g_signal_emit (self, signals[DONE], 0, FALSE);
-        gtk_window_destroy (GTK_WINDOW (self));
-}
-
-static gboolean
-net_connection_editor_close_request (GtkWindow *window)
-{
-        cancel_editing (NET_CONNECTION_EDITOR (window));
-
-        return GTK_WINDOW_CLASS (net_connection_editor_parent_class)->close_request (window);
-}
-
-static void
-cancel_clicked_cb (NetConnectionEditor *self)
-{
-        cancel_editing (self);
 }
 
 static void
@@ -203,7 +187,6 @@ update_complete (NetConnectionEditor *self,
                  gboolean             success)
 {
         g_signal_emit (self, signals[DONE], 0, success);
-        gtk_window_destroy (GTK_WINDOW (self));
 }
 
 static void
@@ -299,8 +282,6 @@ apply_clicked_cb (NetConnectionEditor *self)
                                                            updated_connection_cb,
                                                            g_object_ref (self));
         }
-
-        gtk_widget_set_visible (GTK_WIDGET (self), FALSE);
 }
 
 static void
@@ -330,13 +311,10 @@ net_connection_editor_class_init (NetConnectionEditorClass *class)
 {
         GObjectClass *object_class = G_OBJECT_CLASS (class);
         GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (class);
-        GtkWindowClass *window_class = GTK_WINDOW_CLASS (class);
 
         g_resources_register (net_connection_editor_get_resource ());
 
         object_class->finalize = net_connection_editor_finalize;
-
-        window_class->close_request = net_connection_editor_close_request;
 
         signals[DONE] = g_signal_new ("done",
                                       G_OBJECT_CLASS_TYPE (object_class),
@@ -353,12 +331,10 @@ net_connection_editor_class_init (NetConnectionEditorClass *class)
         gtk_widget_class_bind_template_child (widget_class, NetConnectionEditor, add_connection_box);
         gtk_widget_class_bind_template_child (widget_class, NetConnectionEditor, add_connection_frame);
         gtk_widget_class_bind_template_child (widget_class, NetConnectionEditor, apply_button);
-        gtk_widget_class_bind_template_child (widget_class, NetConnectionEditor, cancel_button);
         gtk_widget_class_bind_template_child (widget_class, NetConnectionEditor, notebook);
         gtk_widget_class_bind_template_child (widget_class, NetConnectionEditor, toast_overlay);
         gtk_widget_class_bind_template_child (widget_class, NetConnectionEditor, toplevel_stack);
 
-        gtk_widget_class_bind_template_callback (widget_class, cancel_clicked_cb);
         gtk_widget_class_bind_template_callback (widget_class, apply_clicked_cb);
 }
 
@@ -372,7 +348,7 @@ nm_connection_editor_watch_cb (GPid pid,
 
         g_spawn_close_pid (pid);
         /* Close the dialog when nm-connection-editor exits. */
-        gtk_window_destroy (GTK_WINDOW (user_data));
+        g_signal_emit (G_OBJECT (user_data), signals[DONE], 0, FALSE);
 }
 
 static void
@@ -446,7 +422,7 @@ net_connection_editor_update_title (NetConnectionEditor *self)
                         id = g_strdup (nm_connection_get_id (self->connection));
                 }
         }
-        gtk_window_set_title (GTK_WINDOW (self), id);
+        adw_navigation_page_set_title (ADW_NAVIGATION_PAGE (self), id);
 }
 
 static gboolean
@@ -911,7 +887,7 @@ net_connection_editor_add_connection (NetConnectionEditor *self)
 
         gtk_stack_set_visible_child (self->toplevel_stack, GTK_WIDGET (self->add_connection_box));
         gtk_widget_set_visible (GTK_WIDGET (self->apply_button), FALSE);
-        gtk_window_set_title (GTK_WINDOW (self), _("Add VPN"));
+        adw_navigation_page_set_title (ADW_NAVIGATION_PAGE (self), _("Add VPN"));
 }
 
 static void
@@ -991,6 +967,6 @@ void
 net_connection_editor_set_title (NetConnectionEditor *self,
                                  const gchar         *title)
 {
-        gtk_window_set_title (GTK_WINDOW (self), title);
+        adw_navigation_page_set_title (ADW_NAVIGATION_PAGE (self), title);
         self->title_set = TRUE;
 }
