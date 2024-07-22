@@ -75,6 +75,13 @@ G_DEFINE_TYPE (CcDisplaySettings, cc_display_settings, GTK_TYPE_BOX)
 
 static GParamSpec *props[PROP_LAST];
 
+typedef enum
+{
+  CC_DISPLAY_RATIO_LANDSCAPE,
+  CC_DISPLAY_RATIO_SQUARE,
+  CC_DISPLAY_RATIO_PORTRAIT
+} CcDisplayRatio;
+
 static void on_scale_btn_active_changed_cb (CcDisplaySettings *self,
                                             GParamSpec        *pspec,
                                             GtkWidget         *widget);
@@ -102,24 +109,74 @@ should_show_rotation (CcDisplaySettings *self)
 }
 
 static const gchar *
-string_for_rotation (CcDisplayRotation rotation)
+string_for_rotation (CcDisplayRotation rotation,
+                     CcDisplayRatio ratio)
 {
-  switch (rotation)
+  switch (ratio)
     {
-    case CC_DISPLAY_ROTATION_NONE:
-    case CC_DISPLAY_ROTATION_180_FLIPPED:
-      return C_("Display rotation", "Landscape");
-    case CC_DISPLAY_ROTATION_90:
-    case CC_DISPLAY_ROTATION_270_FLIPPED:
-      return C_("Display rotation", "Portrait Right");
-    case CC_DISPLAY_ROTATION_270:
-    case CC_DISPLAY_ROTATION_90_FLIPPED:
-      return C_("Display rotation", "Portrait Left");
-    case CC_DISPLAY_ROTATION_180:
-    case CC_DISPLAY_ROTATION_FLIPPED:
-      return C_("Display rotation", "Landscape (flipped)");
+    case CC_DISPLAY_RATIO_LANDSCAPE:
+      {
+        switch (rotation)
+          {
+          case CC_DISPLAY_ROTATION_NONE:
+          case CC_DISPLAY_ROTATION_180_FLIPPED:
+            return C_("Display rotation", "Landscape");
+          case CC_DISPLAY_ROTATION_90:
+          case CC_DISPLAY_ROTATION_270_FLIPPED:
+            return C_("Display rotation", "Portrait Right");
+          case CC_DISPLAY_ROTATION_270:
+          case CC_DISPLAY_ROTATION_90_FLIPPED:
+            return C_("Display rotation", "Portrait Left");
+          case CC_DISPLAY_ROTATION_180:
+          case CC_DISPLAY_ROTATION_FLIPPED:
+            return C_("Display rotation", "Landscape (flipped)");
+          default:
+            return "";
+          }
+      }
+    case CC_DISPLAY_RATIO_PORTRAIT:
+      {
+        switch (rotation)
+          {
+          case CC_DISPLAY_ROTATION_NONE:
+          case CC_DISPLAY_ROTATION_180_FLIPPED:
+            return C_("Display rotation", "Portrait");
+          case CC_DISPLAY_ROTATION_90:
+          case CC_DISPLAY_ROTATION_270_FLIPPED:
+            return C_("Display rotation", "Landscape Right");
+          case CC_DISPLAY_ROTATION_270:
+          case CC_DISPLAY_ROTATION_90_FLIPPED:
+            return C_("Display rotation", "Landscape Left");
+          case CC_DISPLAY_ROTATION_180:
+          case CC_DISPLAY_ROTATION_FLIPPED:
+            return C_("Display rotation", "Portrait (flipped)");
+          default:
+            return "";
+          }
+      }
+    case CC_DISPLAY_RATIO_SQUARE:
+      {
+        switch (rotation)
+          {
+          case CC_DISPLAY_ROTATION_NONE:
+          case CC_DISPLAY_ROTATION_180_FLIPPED:
+            return C_("Display rotation", "Upright");
+          case CC_DISPLAY_ROTATION_90:
+          case CC_DISPLAY_ROTATION_270_FLIPPED:
+            return C_("Display rotation", "Right");
+          case CC_DISPLAY_ROTATION_270:
+          case CC_DISPLAY_ROTATION_90_FLIPPED:
+            return C_("Display rotation", "Left");
+          case CC_DISPLAY_ROTATION_180:
+          case CC_DISPLAY_ROTATION_FLIPPED:
+            return C_("Display rotation", "Flipped");
+          default:
+            return "";
+          }
+      }
+    default:
+      return "";
     }
-  return "";
 }
 
 static const gchar *
@@ -378,6 +435,24 @@ cc_display_settings_rebuild_ui (CcDisplaySettings *self)
                                         CC_DISPLAY_ROTATION_90,
                                         CC_DISPLAY_ROTATION_270,
                                         CC_DISPLAY_ROTATION_180 };
+      CcDisplayMode *current_mode;
+      int width, height;
+      CcDisplayRatio ratio;
+
+      current_mode = cc_display_monitor_get_mode (self->selected_output);
+      cc_display_mode_get_resolution (current_mode, &width, &height);
+      if (width > height)
+        {
+          ratio = CC_DISPLAY_RATIO_LANDSCAPE;
+        }
+      else if (width < height)
+        {
+          ratio = CC_DISPLAY_RATIO_PORTRAIT;
+        }
+      else
+        {
+          ratio = CC_DISPLAY_RATIO_SQUARE;
+        }
 
       gtk_widget_set_visible (self->orientation_row, TRUE);
 
@@ -393,7 +468,7 @@ cc_display_settings_rebuild_ui (CcDisplaySettings *self)
             continue;
 
           gtk_string_list_append (GTK_STRING_LIST (self->orientation_list),
-                                  string_for_rotation (rotations[i]));
+                                  string_for_rotation (rotations[i], ratio));
           obj = g_list_model_get_item (self->orientation_list, i);
           g_object_set_data (G_OBJECT (obj), "rotation-value", GINT_TO_POINTER (rotations[i]));
 
