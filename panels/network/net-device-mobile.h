@@ -21,20 +21,17 @@
 
 #pragma once
 
-#include <gtk/gtk.h>
+#include <adwaita.h>
 #include <NetworkManager.h>
 
 G_BEGIN_DECLS
 
-G_DECLARE_FINAL_TYPE (NetDeviceMobile, net_device_mobile, NET, DEVICE_MOBILE, GtkBox)
+G_DECLARE_FINAL_TYPE (NetDeviceMobile, net_device_mobile, NET, DEVICE_MOBILE, AdwActionRow)
 
 NetDeviceMobile *net_device_mobile_new          (NMClient        *client,
                                                  NMDevice        *device,
                                                  GDBusObject     *modem);
 
 NMDevice          *net_device_mobile_get_device (NetDeviceMobile *device);
-
-void               net_device_mobile_set_title  (NetDeviceMobile *device,
-                                                 const gchar     *title);
 
 G_END_DECLS

@@ -31,7 +31,6 @@
 
 #include "cc-wwan-errors-private.h"
 #include "cc-wwan-network-dialog.h"
-#include "cc-wwan-resources.h"
 
 /**
  * @short_description: WWAN network operator selection dialog
@@ -391,7 +390,7 @@ cc_wwan_network_dialog_class_init (CcWwanNetworkDialogClass *klass)
   g_object_class_install_properties (object_class, N_PROPS, properties);
 
   gtk_widget_class_set_template_from_resource (widget_class,
-                                               "/org/gnome/control-center/wwan/cc-wwan-network-dialog.ui");
+                                               "/org/gnome/control-center/network/wwan/cc-wwan-network-dialog.ui");
 
   gtk_widget_class_bind_template_child (widget_class, CcWwanNetworkDialog, toast_overlay);
   gtk_widget_class_bind_template_child (widget_class, CcWwanNetworkDialog, automatic_row);

@@ -19,7 +19,6 @@ panels = [
   'system',
   'universal-access',
   'wellbeing',
-  'wwan',
 ]
 
 if host_is_linux

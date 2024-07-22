@@ -30,7 +30,6 @@
 #include <libmm-glib.h>
 
 #include "cc-wwan-details-dialog.h"
-#include "cc-wwan-resources.h"
 
 /**
  * @short_description: Dialog to Show Device Details
@@ -221,7 +220,7 @@ cc_wwan_details_dialog_class_init (CcWwanDetailsDialogClass *klass)
   g_object_class_install_properties (object_class, N_PROPS, properties);
 
   gtk_widget_class_set_template_from_resource (widget_class,
-                                               "/org/gnome/control-center/wwan/cc-wwan-details-dialog.ui");
+                                               "/org/gnome/control-center/network/wwan/cc-wwan-details-dialog.ui");
 
   gtk_widget_class_bind_template_child (widget_class, CcWwanDetailsDialog, device_identifier);
   gtk_widget_class_bind_template_child (widget_class, CcWwanDetailsDialog, device_model);

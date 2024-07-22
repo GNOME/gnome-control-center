@@ -40,6 +40,7 @@
 #include "net-device-mobile.h"
 #include "net-device-wifi.h"
 #include "net-vpn.h"
+#include "wwan/cc-wwan-panel.h"
 
 #include "panel-common.h"
 
@@ -296,9 +297,7 @@ panel_refresh_device_titles (CcNetworkPanel *self)
                         /* Only renamed when there are multiple ethernet entries */
                         if (n_connections <= 1)
                                 adw_preferences_row_set_title (ADW_PREFERENCES_ROW (devices[i]), titles[i]);
-                } else if (NET_IS_DEVICE_MOBILE (devices[i]))
-                        net_device_mobile_set_title (NET_DEVICE_MOBILE (devices[i]), titles[i]);
-                else if (NET_IS_DEVICE_WIFI (devices[i]))
+                } else
                         adw_preferences_row_set_title (ADW_PREFERENCES_ROW (devices[i]), titles[i]);
         }
 }
@@ -358,25 +357,15 @@ handle_argv (CcNetworkPanel *self)
         g_debug ("Could not handle argv operation, no matching device yet?");
 }
 
-static gboolean
-wwan_panel_supports_modem (GDBusObject *object)
+static void
+on_wwan_row_activated (CcNetworkPanel *self,
+                       AdwActionRow   *row)
 {
-        MMObject *mm_object;
-        MMModem *modem;
-        MMModemCapability capability, supported_capabilities;
+        CcWwanPanel *wwan_page = g_object_new (CC_TYPE_WWAN_PANEL, NULL);
 
-        g_assert (G_IS_DBUS_OBJECT (object));
-
-        supported_capabilities = MM_MODEM_CAPABILITY_GSM_UMTS | MM_MODEM_CAPABILITY_LTE;
-#if MM_CHECK_VERSION (1,14,0)
-        supported_capabilities |= MM_MODEM_CAPABILITY_5GNR;
-#endif
-
-        mm_object = MM_OBJECT (object);
-        modem = mm_object_get_modem (mm_object);
-        capability = mm_modem_get_current_capabilities (modem);
-
-        return capability & supported_capabilities;
+        adw_navigation_page_set_title (ADW_NAVIGATION_PAGE (wwan_page),
+                                       adw_preferences_row_get_title (ADW_PREFERENCES_ROW (row)));
+        cc_panel_push_subpage (CC_PANEL (self), ADW_NAVIGATION_PAGE (wwan_page));
 }
 
 static void
@@ -413,8 +402,8 @@ static void
 panel_add_device (CcNetworkPanel *self, NMDevice *device)
 {
         NMDeviceType type;
-        NetDeviceMobile *device_mobile;
         NetDeviceBluetooth *device_bluetooth;
+        NetDeviceMobile *device_mobile;
         NetDeviceWifi *device_wifi;
         g_autoptr(GDBusObject) modem_object = NULL;
 
@@ -484,13 +473,12 @@ panel_add_device (CcNetworkPanel *self, NMDevice *device)
                                            nm_device_get_udi (device));
                                 return;
                         }
-
-                        /* This will be handled by cellular panel */
-                        if (wwan_panel_supports_modem (modem_object))
-                                return;
                 }
                 device_mobile = net_device_mobile_new (self->client, device, modem_object);
-                //gtk_box_append (GTK_BOX (self->box_wired), GTK_WIDGET (device_mobile));
+
+                g_signal_connect_swapped (G_OBJECT (device_mobile), "activated",
+                                          G_CALLBACK (on_wwan_row_activated), self);
+                adw_preferences_group_add (self->device_list, GTK_WIDGET (device_mobile));
                 g_ptr_array_add (self->mobile_devices, device_mobile);
                 g_hash_table_insert (self->nm_device_to_device, device, device_mobile);
                 break;
@@ -764,6 +752,34 @@ rfkill_switch_notify_activate_cb (CcNetworkPanel *self)
 }
 
 static void
+setup_modem_manager_client (CcNetworkPanel *self)
+{
+        g_autoptr(GError) error = NULL;
+
+        if (!cc_object_storage_has_object ("CcObjectStorage::mm-manager")) {
+                g_autoptr(GDBusConnection) system_bus = g_bus_get_sync (G_BUS_TYPE_SYSTEM, NULL, &error);
+                g_autoptr(MMManager) modem_manager = NULL;
+
+                if (system_bus == NULL) {
+                        g_warning ("Error connecting to system D-Bus: %s", error->message);
+
+                        return;
+                }
+
+                modem_manager = mm_manager_new_sync (system_bus, G_DBUS_OBJECT_MANAGER_CLIENT_FLAGS_NONE, NULL, &error);
+                if (modem_manager == NULL) {
+                        g_warning ("Error connecting to ModemManager: %s", error->message);
+
+                        return;
+                }
+
+                cc_object_storage_add_object ("CcObjectStorage::mm-manager", modem_manager);
+        }
+
+        self->modem_manager = cc_object_storage_get_object ("CcObjectStorage::mm-manager");
+}
+
+static void
 cc_network_panel_map (GtkWidget *widget)
 {
         GTK_WIDGET_CLASS (cc_network_panel_parent_class)->map (widget);
@@ -811,9 +827,6 @@ cc_network_panel_class_init (CcNetworkPanelClass *klass)
 static void
 cc_network_panel_init (CcNetworkPanel *self)
 {
-        g_autoptr(GDBusConnection) system_bus = NULL;
-        g_autoptr(GError) error = NULL;
-
         g_resources_register (cc_network_get_resource ());
 
         gtk_widget_init_template (GTK_WIDGET (self));
@@ -830,6 +843,9 @@ cc_network_panel_init (CcNetworkPanel *self)
                 cc_object_storage_add_object (CC_OBJECT_NMCLIENT, client);
         }
 
+        /* Setup ModemManager client */
+        setup_modem_manager_client (self);
+
         /* use NetworkManager client */
         self->client = cc_object_storage_get_object (CC_OBJECT_NMCLIENT);
 
@@ -841,21 +857,6 @@ cc_network_panel_init (CcNetworkPanel *self)
                                  G_CALLBACK (device_added_cb), self, G_CONNECT_SWAPPED);
         g_signal_connect_object (self->client, "device-removed",
                                  G_CALLBACK (device_removed_cb), self, G_CONNECT_SWAPPED);
-
-        /* Setup ModemManager client */
-        system_bus = g_bus_get_sync (G_BUS_TYPE_SYSTEM, NULL, &error);
-        if (system_bus == NULL) {
-                g_warning ("Error connecting to system D-Bus: %s",
-                           error->message);
-        } else {
-                self->modem_manager = mm_manager_new_sync (system_bus,
-                                                            G_DBUS_OBJECT_MANAGER_CLIENT_FLAGS_NONE,
-                                                            NULL,
-                                                            &error);
-                if (self->modem_manager == NULL)
-                        g_warning ("Error connecting to ModemManager: %s",
-                                   error->message);
-        }
 
         /* Acquire Airplane Mode proxy */
         cc_object_storage_create_dbus_proxy (G_BUS_TYPE_SESSION,

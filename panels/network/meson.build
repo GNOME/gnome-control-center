@@ -5,6 +5,7 @@ deps = common_deps + network_manager_deps + [
 
 network_inc = include_directories('.')
 
+subdir('wwan')
 subdir('connection-editor')
 subdir('icons')
 
