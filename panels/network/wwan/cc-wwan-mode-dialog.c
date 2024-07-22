@@ -30,7 +30,6 @@
 #include <libmm-glib.h>
 
 #include "cc-wwan-mode-dialog.h"
-#include "cc-wwan-resources.h"
 
 /**
  * @short_description: WWAN network type selection dialog
@@ -305,7 +304,7 @@ cc_wwan_mode_dialog_class_init (CcWwanModeDialogClass *klass)
   g_object_class_install_properties (object_class, N_PROPS, properties);
 
   gtk_widget_class_set_template_from_resource (widget_class,
-                                               "/org/gnome/control-center/wwan/cc-wwan-mode-dialog.ui");
+                                               "/org/gnome/control-center/network/wwan/cc-wwan-mode-dialog.ui");
 
   gtk_widget_class_bind_template_child (widget_class, CcWwanModeDialog, network_mode_list);
 

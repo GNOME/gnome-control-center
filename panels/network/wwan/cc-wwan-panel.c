@@ -33,7 +33,6 @@
 #include "cc-wwan-data.h"
 #include "cc-wwan-device-page.h"
 #include "cc-wwan-panel.h"
-#include "cc-wwan-resources.h"
 
 #include "shell/cc-application.h"
 #include "shell/cc-log.h"
@@ -661,7 +660,7 @@ cc_wwan_panel_class_init (CcWwanPanelClass *klass)
   g_object_class_override_property (object_class, PROP_PARAMETERS, "parameters");
 
   gtk_widget_class_set_template_from_resource (widget_class,
-                                               "/org/gnome/control-center/wwan/cc-wwan-panel.ui");
+                                               "/org/gnome/control-center/network/wwan/cc-wwan-panel.ui");
 
   gtk_widget_class_bind_template_child (widget_class, CcWwanPanel, toast_overlay);
   gtk_widget_class_bind_template_child (widget_class, CcWwanPanel, data_list_row);
@@ -681,8 +680,6 @@ static void
 cc_wwan_panel_init (CcWwanPanel *self)
 {
   g_autoptr(GError) error = NULL;
-
-  g_resources_register (cc_wwan_get_resource ());
 
   gtk_widget_init_template (GTK_WIDGET (self));
 

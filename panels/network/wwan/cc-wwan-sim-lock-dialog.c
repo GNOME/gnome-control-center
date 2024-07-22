@@ -30,7 +30,6 @@
 #include <libmm-glib.h>
 
 #include "cc-wwan-sim-lock-dialog.h"
-#include "cc-wwan-resources.h"
 
 /**
  * @short_description: Dialog to manage SIM Locks like PIN
@@ -267,7 +266,7 @@ cc_wwan_sim_lock_dialog_class_init (CcWwanSimLockDialogClass *klass)
   g_object_class_install_properties (object_class, N_PROPS, properties);
 
   gtk_widget_class_set_template_from_resource (widget_class,
-                                               "/org/gnome/control-center/wwan/cc-wwan-sim-lock-dialog.ui");
+                                               "/org/gnome/control-center/network/wwan/cc-wwan-sim-lock-dialog.ui");
 
   gtk_widget_class_bind_template_child (widget_class, CcWwanSimLockDialog, apply_button);
   gtk_widget_class_bind_template_child (widget_class, CcWwanSimLockDialog, button_stack);
