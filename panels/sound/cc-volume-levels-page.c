@@ -28,6 +28,7 @@ struct _CcVolumeLevelsPage
   AdwNavigationPage parent_instance;
 
   GtkListBox      *listbox;
+  GtkStack        *stack;
   GtkSizeGroup    *label_size_group;
 
   GvcMixerControl *mixer_control;
@@ -104,6 +105,19 @@ create_stream_row (gpointer item,
 }
 
 static void
+items_changed_cb (CcVolumeLevelsPage *self,
+                  guint               position,
+                  guint               removed,
+                  guint               added,
+                  GListModel         *model)
+{
+  gboolean has_streams = g_list_model_get_n_items (model) != 0;
+  gtk_stack_set_visible_child_name (self->stack,
+                                    has_streams ? "streams-page"
+                                                : "no-streams-found-page");
+}
+
+static void
 stream_added_cb (CcVolumeLevelsPage *self,
                  guint                 id)
 {
@@ -169,6 +183,7 @@ cc_volume_levels_page_class_init (CcVolumeLevelsPageClass *klass)
 
   gtk_widget_class_bind_template_child (widget_class, CcVolumeLevelsPage, listbox);
   gtk_widget_class_bind_template_child (widget_class, CcVolumeLevelsPage, label_size_group);
+  gtk_widget_class_bind_template_child (widget_class, CcVolumeLevelsPage, stack);
 }
 
 void
@@ -188,6 +203,10 @@ cc_volume_levels_page_init (CcVolumeLevelsPage *self)
 
   sorter = GTK_SORTER (gtk_custom_sorter_new (sort_stream, self, NULL));
   sort_model = gtk_sort_list_model_new (G_LIST_MODEL (filter_model), sorter);
+  g_signal_connect_object (sort_model,
+                           "items-changed",
+                           G_CALLBACK (items_changed_cb),
+                           self, G_CONNECT_SWAPPED);
 
   gtk_list_box_bind_model (self->listbox,
                            G_LIST_MODEL (sort_model),
