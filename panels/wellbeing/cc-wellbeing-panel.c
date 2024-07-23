@@ -30,6 +30,7 @@
 #include <gio/gio.h>
 
 #include "cc-break-schedule-row.h"
+#include "cc-duration-row.h"
 #include "cc-wellbeing-panel.h"
 #include "cc-wellbeing-resources.h"
 
@@ -51,16 +52,25 @@ movement_break_schedule_values[] =
 struct _CcWellbeingPanel {
   CcPanel parent_instance;
 
+  GSettings *screen_time_limits_settings;  /* (owned) */
   GSettings *break_reminders_settings;  /* (owned) */
   GSettings *eyesight_break_settings;  /* (owned) */
   GSettings *movement_break_settings;  /* (owned) */
 
   GListStore *movement_break_schedule_list;  /* (owned) */
 
+  AdwSwitchRow *screen_time_limit_row;
+  AdwComboRow *daily_time_limit_row;
+  AdwSwitchRow *grayscale_row;
+
   AdwSwitchRow *eyesight_breaks_row;
   AdwSwitchRow *movement_breaks_row;
   AdwComboRow *movement_break_schedule_row;
   AdwSwitchRow *sounds_row;
+
+  gulong screen_time_limits_settings_writable_changed_daily_limit_seconds_id;
+  gulong screen_time_limits_settings_writable_changed_grayscale_id;
+  gulong screen_time_limits_settings_changed_enabled_id;
 
   gulong movement_break_schedule_notify_selected_item_id;
   gulong movement_break_settings_changed_duration_id;
@@ -81,6 +91,13 @@ struct _CcWellbeingPanelClass {
 };
 
 CC_PANEL_REGISTER (CcWellbeingPanel, cc_wellbeing_panel);
+
+static void screen_time_limits_settings_writable_changed_daily_limit_seconds_or_grayscale_cb (GSettings  *settings,
+                                                                                              const char *key,
+                                                                                              gpointer    user_data);
+static void screen_time_limits_settings_changed_enabled_cb (GSettings  *settings,
+                                                            const char *key,
+                                                            gpointer    user_data);
 
 static void movement_break_schedule_notify_selected_item_cb (GObject    *object,
                                                              GParamSpec *pspec,
@@ -104,6 +121,12 @@ static void break_settings_writable_changed_play_sound_cb (GSettings  *settings,
 static void break_settings_changed_selected_breaks_cb (GSettings  *settings,
                                                        const char *key,
                                                        gpointer    user_data);
+static gboolean seconds_to_minutes (GValue   *value,
+                                    GVariant *variant,
+                                    gpointer  user_data);
+static GVariant *minutes_to_seconds (const GValue       *value,
+                                     const GVariantType *expected_type,
+                                     gpointer            user_data);
 
 /* A set of functions to use with g_settings_bind_with_mapping() which bind a
  * boolean to the existence of a given `expected_member` in a strv-typed setting.
@@ -205,7 +228,44 @@ cc_wellbeing_panel_init (CcWellbeingPanel *self)
 
   adw_combo_row_set_model (self->movement_break_schedule_row, G_LIST_MODEL (self->movement_break_schedule_list));
 
-  /* Set up settings bindings. */
+  /* Set up settings bindings for screen time limits. */
+  self->screen_time_limits_settings = g_settings_new ("org.gnome.desktop.screen-time-limits");
+
+  g_settings_bind (self->screen_time_limits_settings,
+                   "enabled",
+                   self->screen_time_limit_row,
+                   "active",
+                   G_SETTINGS_BIND_DEFAULT);
+  g_settings_bind_with_mapping (self->screen_time_limits_settings,
+                                "daily-limit-seconds",
+                                self->daily_time_limit_row,
+                                "duration",
+                                G_SETTINGS_BIND_DEFAULT | G_SETTINGS_BIND_NO_SENSITIVITY,
+                                seconds_to_minutes,
+                                minutes_to_seconds,
+                                NULL,
+                                NULL);
+  g_settings_bind (self->screen_time_limits_settings,
+                   "grayscale",
+                   self->grayscale_row,
+                   "active",
+                   G_SETTINGS_BIND_DEFAULT | G_SETTINGS_BIND_NO_SENSITIVITY);
+
+  /* Sensitivity has to be handled separately for grayscale_row and
+   * daily_time_limit_row because it’s the combination of two inputs. */
+  self->screen_time_limits_settings_writable_changed_daily_limit_seconds_id =
+      g_signal_connect (self->screen_time_limits_settings, "writable-changed::daily-limit-seconds",
+                        G_CALLBACK (screen_time_limits_settings_writable_changed_daily_limit_seconds_or_grayscale_cb), self);
+  self->screen_time_limits_settings_writable_changed_grayscale_id =
+      g_signal_connect (self->screen_time_limits_settings, "writable-changed::grayscale",
+                        G_CALLBACK (screen_time_limits_settings_writable_changed_daily_limit_seconds_or_grayscale_cb), self);
+  self->screen_time_limits_settings_changed_enabled_id =
+      g_signal_connect (self->screen_time_limits_settings, "changed::enabled",
+                        G_CALLBACK (screen_time_limits_settings_changed_enabled_cb), self);
+
+  screen_time_limits_settings_writable_changed_daily_limit_seconds_or_grayscale_cb (NULL, NULL, self);
+
+  /* Set up settings bindings for break reminders. */
   self->break_reminders_settings = g_settings_new ("org.gnome.desktop.break-reminders");
   self->eyesight_break_settings = g_settings_new ("org.gnome.desktop.break-reminders.eyesight");
   self->movement_break_settings = g_settings_new ("org.gnome.desktop.break-reminders.movement");
@@ -275,6 +335,35 @@ cc_wellbeing_panel_init (CcWellbeingPanel *self)
   break_settings_changed_play_sound_cb (NULL, NULL, self);
   break_settings_writable_changed_play_sound_cb (NULL, NULL, self);
   break_settings_changed_selected_breaks_cb (NULL, NULL, self);
+}
+
+static void
+update_daily_time_limit_and_grayscale_row_sensitivity (CcWellbeingPanel *self)
+{
+  gboolean enabled = g_settings_get_boolean (self->screen_time_limits_settings, "enabled");
+  gboolean daily_limit_seconds_writable = g_settings_is_writable (self->screen_time_limits_settings, "daily-limit-seconds");
+  gboolean grayscale_writable = g_settings_is_writable (self->screen_time_limits_settings, "grayscale");
+
+  gtk_widget_set_sensitive (GTK_WIDGET (self->daily_time_limit_row), enabled && daily_limit_seconds_writable);
+  gtk_widget_set_sensitive (GTK_WIDGET (self->grayscale_row), enabled && grayscale_writable);
+}
+
+static void
+screen_time_limits_settings_writable_changed_daily_limit_seconds_or_grayscale_cb (GSettings  *settings,
+                                                                                  const char *key,
+                                                                                  gpointer    user_data)
+{
+  CcWellbeingPanel *self = CC_WELLBEING_PANEL (user_data);
+  update_daily_time_limit_and_grayscale_row_sensitivity (self);
+}
+
+static void
+screen_time_limits_settings_changed_enabled_cb (GSettings  *settings,
+                                                const char *key,
+                                                gpointer    user_data)
+{
+  CcWellbeingPanel *self = CC_WELLBEING_PANEL (user_data);
+  update_daily_time_limit_and_grayscale_row_sensitivity (self);
 }
 
 static void
@@ -407,11 +496,35 @@ break_settings_changed_selected_breaks_cb (GSettings  *settings,
   update_movement_break_schedule_row_sensitivity (self);
 }
 
+static gboolean
+seconds_to_minutes (GValue   *value,
+                    GVariant *variant,
+                    gpointer  user_data)
+{
+  /* Round it up rather than truncating; this is probably more natural for the user */
+  g_value_set_uint (value, (g_variant_get_uint32 (variant) + (60 - 1)) / 60);
+
+  return TRUE;
+}
+
+static GVariant *
+minutes_to_seconds (const GValue       *value,
+                    const GVariantType *expected_type,
+                    gpointer            user_data)
+{
+  g_assert (g_variant_type_equal (expected_type, G_VARIANT_TYPE_UINT32));
+
+  return g_variant_new_uint32 (g_value_get_uint (value) * 60);
+}
+
 static void
 cc_wellbeing_panel_dispose (GObject *object)
 {
   CcWellbeingPanel *self = CC_WELLBEING_PANEL (object);
 
+  g_clear_signal_handler (&self->screen_time_limits_settings_writable_changed_daily_limit_seconds_id, self->screen_time_limits_settings);
+  g_clear_signal_handler (&self->screen_time_limits_settings_writable_changed_grayscale_id, self->screen_time_limits_settings);
+  g_clear_signal_handler (&self->screen_time_limits_settings_changed_enabled_id, self->screen_time_limits_settings);
   g_clear_signal_handler (&self->movement_break_schedule_notify_selected_item_id, self->movement_break_schedule_row);
   g_clear_signal_handler (&self->movement_break_settings_changed_duration_id, self->movement_break_settings);
   g_clear_signal_handler (&self->movement_break_settings_changed_interval_id, self->movement_break_settings);
@@ -429,6 +542,7 @@ cc_wellbeing_panel_dispose (GObject *object)
   g_clear_object (&self->eyesight_break_settings);
   g_clear_object (&self->movement_break_settings);
   g_clear_object (&self->break_reminders_settings);
+  g_clear_object (&self->screen_time_limits_settings);
 
   gtk_widget_dispose_template (GTK_WIDGET (object), CC_TYPE_WELLBEING_PANEL);
 
@@ -454,9 +568,14 @@ cc_wellbeing_panel_class_init (CcWellbeingPanelClass *klass)
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/wellbeing/cc-wellbeing-panel.ui");
 
+  gtk_widget_class_bind_template_child (widget_class, CcWellbeingPanel, screen_time_limit_row);
+  gtk_widget_class_bind_template_child (widget_class, CcWellbeingPanel, daily_time_limit_row);
+  gtk_widget_class_bind_template_child (widget_class, CcWellbeingPanel, grayscale_row);
   gtk_widget_class_bind_template_child (widget_class, CcWellbeingPanel, eyesight_breaks_row);
   gtk_widget_class_bind_template_child (widget_class, CcWellbeingPanel, movement_breaks_row);
   gtk_widget_class_bind_template_child (widget_class, CcWellbeingPanel, movement_break_schedule_row);
   gtk_widget_class_bind_template_child (widget_class, CcWellbeingPanel, sounds_row);
+
+  g_type_ensure (CC_TYPE_DURATION_ROW);
 }
 

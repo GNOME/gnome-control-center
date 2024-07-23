@@ -15,6 +15,32 @@
           <object class="AdwPreferencesPage">
             <child>
               <object class="AdwPreferencesGroup">
+                <property name="title" translatable="yes">Screen Limits</property>
+                <child>
+                  <object class="AdwSwitchRow" id="screen_time_limit_row">
+                    <property name="title" translatable="yes">Daily Screen Usage Limi_t</property>
+                    <property name="use-underline">True</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="CcDurationRow" id="daily_time_limit_row">
+                    <property name="minimum">1</property>
+                    <property name="title" translatable="yes">Daily _Limit Amount</property>
+                    <property name="use-underline">True</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="AdwSwitchRow" id="grayscale_row">
+                    <property name="title" translatable="yes">_Grayscale</property>
+                    <property name="subtitle" translatable="yes">Makes the screen monochrome when the daily limit is reached</property>
+                    <property name="use-underline">True</property>
+                  </object>
+                </child>
+              </object>
+            </child>
+
+            <child>
+              <object class="AdwPreferencesGroup">
                 <property name="title" translatable="yes">Break Reminders</property>
                 <child>
                   <object class="AdwSwitchRow" id="eyesight_breaks_row">
