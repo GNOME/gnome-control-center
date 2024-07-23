@@ -50,9 +50,11 @@ G_DEFINE_TYPE (CcDurationRow, cc_duration_row, ADW_TYPE_ACTION_ROW)
 
 typedef enum {
   PROP_DURATION = 1,
+  PROP_MINIMUM,
+  PROP_MAXIMUM,
 } CcDurationRowProperty;
 
-static GParamSpec *props[PROP_DURATION + 1];
+static GParamSpec *props[PROP_MAXIMUM + 1];
 
 static void cc_duration_row_get_property (GObject    *object,
                                           guint       property_id,
@@ -77,6 +79,12 @@ static void update_current_label (CcDurationRow *self);
 static void editor_notify_duration_cb (GObject    *object,
                                        GParamSpec *pspec,
                                        gpointer    user_data);
+static void editor_notify_minimum_cb (GObject    *object,
+                                      GParamSpec *pspec,
+                                      gpointer    user_data);
+static void editor_notify_maximum_cb (GObject    *object,
+                                      GParamSpec *pspec,
+                                      gpointer    user_data);
 
 static void
 cc_duration_row_class_init (CcDurationRowClass *klass)
@@ -105,6 +113,38 @@ cc_duration_row_class_init (CcDurationRowClass *klass)
                        0, G_MAXUINT, 0,
                        G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS | G_PARAM_EXPLICIT_NOTIFY);
 
+  /**
+   * CcDurationRow:minimum:
+   *
+   * Minimum allowed value (inclusive) for #CcDurationRow:duration, in
+   * minutes.
+   *
+   * If this is changed and the current value of #CcDurationRow:duration is
+   * lower than it, the value of #CcDurationRow:duration will automatically
+   * be clamped to the new minimum.
+   */
+  props[PROP_MINIMUM] =
+    g_param_spec_uint ("minimum",
+                       NULL, NULL,
+                       0, G_MAXUINT, 0,
+                       G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS | G_PARAM_EXPLICIT_NOTIFY);
+
+  /**
+   * CcDurationRow:maximum:
+   *
+   * Maximum allowed value (inclusive) for #CcDurationRow:duration, in
+   * minutes.
+   *
+   * If this is changed and the current value of #CcDurationRow:duration is
+   * higher than it, the value of #CcDurationRow:duration will automatically
+   * be clamped to the new maximum.
+   */
+  props[PROP_MAXIMUM] =
+    g_param_spec_uint ("maximum",
+                       NULL, NULL,
+                       0, G_MAXUINT, G_MAXUINT,
+                       G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS | G_PARAM_EXPLICIT_NOTIFY);
+
   g_object_class_install_properties (object_class, G_N_ELEMENTS (props), props);
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/common/cc-duration-row.ui");
@@ -115,6 +155,8 @@ cc_duration_row_class_init (CcDurationRowClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcDurationRow, popover);
   gtk_widget_class_bind_template_callback (widget_class, popover_notify_visible_cb);
   gtk_widget_class_bind_template_callback (widget_class, editor_notify_duration_cb);
+  gtk_widget_class_bind_template_callback (widget_class, editor_notify_minimum_cb);
+  gtk_widget_class_bind_template_callback (widget_class, editor_notify_maximum_cb);
 
   gtk_widget_class_set_accessible_role (widget_class, GTK_ACCESSIBLE_ROLE_COMBO_BOX);
 }
@@ -140,6 +182,12 @@ cc_duration_row_get_property (GObject    *object,
     case PROP_DURATION:
       g_value_set_uint (value, cc_duration_row_get_duration (self));
       break;
+    case PROP_MINIMUM:
+      g_value_set_uint (value, cc_duration_row_get_minimum (self));
+      break;
+    case PROP_MAXIMUM:
+      g_value_set_uint (value, cc_duration_row_get_maximum (self));
+      break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
       break;
@@ -158,6 +206,12 @@ cc_duration_row_set_property (GObject      *object,
     {
     case PROP_DURATION:
       cc_duration_row_set_duration (self, g_value_get_uint (value));
+      break;
+    case PROP_MINIMUM:
+      cc_duration_row_set_minimum (self, g_value_get_uint (value));
+      break;
+    case PROP_MAXIMUM:
+      cc_duration_row_set_maximum (self, g_value_get_uint (value));
       break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
@@ -240,6 +294,26 @@ editor_notify_duration_cb (GObject    *object,
   g_object_notify_by_pspec (G_OBJECT (self), props[PROP_DURATION]);
 }
 
+static void
+editor_notify_minimum_cb (GObject    *object,
+                          GParamSpec *pspec,
+                          gpointer    user_data)
+{
+  CcDurationRow *self = CC_DURATION_ROW (user_data);
+
+  g_object_notify_by_pspec (G_OBJECT (self), props[PROP_MINIMUM]);
+}
+
+static void
+editor_notify_maximum_cb (GObject    *object,
+                          GParamSpec *pspec,
+                          gpointer    user_data)
+{
+  CcDurationRow *self = CC_DURATION_ROW (user_data);
+
+  g_object_notify_by_pspec (G_OBJECT (self), props[PROP_MAXIMUM]);
+}
+
 /**
  * cc_duration_row_new:
  *
@@ -284,4 +358,74 @@ cc_duration_row_set_duration (CcDurationRow *self,
 
   cc_duration_editor_set_duration (self->editor, duration);
   g_object_notify_by_pspec (G_OBJECT (self), props[PROP_DURATION]);
+}
+
+/**
+ * cc_duration_row_get_minimum:
+ * @self: a #CcDurationRow
+ *
+ * Get the value of #CcDurationRow:minimum.
+ *
+ * Returns: minimum value allowed for the duration, in minutes
+ */
+guint
+cc_duration_row_get_minimum (CcDurationRow *self)
+{
+  g_return_val_if_fail (CC_IS_DURATION_ROW (self), 0);
+
+  return cc_duration_editor_get_minimum (self->editor);
+}
+
+/**
+ * cc_duration_row_set_minimum:
+ * @self: a #CcDurationRow
+ * @minimum: minimum value allowed for the duration, in minutes
+ *
+ * Set the value of #CcDurationRow:minimum to @minimum.
+ *
+ * If the current value of #CcDurationRow:duration is lower than @minimum, it
+ * will automatically be clamped to @minimum.
+ */
+void
+cc_duration_row_set_minimum (CcDurationRow *self,
+                             guint          minimum)
+{
+  g_return_if_fail (CC_IS_DURATION_ROW (self));
+
+  cc_duration_editor_set_minimum (self->editor, minimum);
+}
+
+/**
+ * cc_duration_row_get_maximum:
+ * @self: a #CcDurationRow
+ *
+ * Get the value of #CcDurationRow:maximum.
+ *
+ * Returns: maximum value allowed for the duration, in minutes
+ */
+guint
+cc_duration_row_get_maximum (CcDurationRow *self)
+{
+  g_return_val_if_fail (CC_IS_DURATION_ROW (self), 0);
+
+  return cc_duration_editor_get_maximum (self->editor);
+}
+
+/**
+ * cc_duration_row_set_maximum:
+ * @self: a #CcDurationRow
+ * @maximum: maximum value allowed for the duration, in minutes
+ *
+ * Set the value of #CcDurationRow:maximum to @maximum.
+ *
+ * If the current value of #CcDurationRow:duration is higher than @maximum,
+ * it will automatically be clamped to @maximum.
+ */
+void
+cc_duration_row_set_maximum (CcDurationRow *self,
+                             guint          maximum)
+{
+  g_return_if_fail (CC_IS_DURATION_ROW (self));
+
+  cc_duration_editor_set_maximum (self->editor, maximum);
 }

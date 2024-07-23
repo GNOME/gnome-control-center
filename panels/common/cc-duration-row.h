@@ -37,4 +37,12 @@ guint cc_duration_row_get_duration (CcDurationRow *self);
 void cc_duration_row_set_duration (CcDurationRow *self,
                                    guint          duration);
 
+guint cc_duration_row_get_minimum (CcDurationRow *self);
+void cc_duration_row_set_minimum (CcDurationRow *self,
+                                  guint          minimum);
+
+guint cc_duration_row_get_maximum (CcDurationRow *self);
+void cc_duration_row_set_maximum (CcDurationRow *self,
+                                  guint          maximum);
+
 G_END_DECLS
