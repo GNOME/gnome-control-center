@@ -39,4 +39,12 @@ guint cc_duration_editor_get_duration (CcDurationEditor *self);
 void cc_duration_editor_set_duration (CcDurationEditor *self,
                                       guint             duration);
 
+guint cc_duration_editor_get_minimum (CcDurationEditor *self);
+void cc_duration_editor_set_minimum (CcDurationEditor *self,
+                                     guint             minimum);
+
+guint cc_duration_editor_get_maximum (CcDurationEditor *self);
+void cc_duration_editor_set_maximum (CcDurationEditor *self,
+                                     guint             maximum);
+
 G_END_DECLS
