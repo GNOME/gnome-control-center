@@ -35,4 +35,8 @@ G_DECLARE_FINAL_TYPE (CcDurationEditor, cc_duration_editor, CC, DURATION_EDITOR,
 
 CcDurationEditor *cc_duration_editor_new (void);
 
+guint cc_duration_editor_get_duration (CcDurationEditor *self);
+void cc_duration_editor_set_duration (CcDurationEditor *self,
+                                      guint             duration);
+
 G_END_DECLS
