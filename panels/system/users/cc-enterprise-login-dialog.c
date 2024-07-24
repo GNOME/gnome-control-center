@@ -592,7 +592,7 @@ on_domain_entry_changed_cb (CcEnterpriseLoginDialog *self)
       return;
     }
 
-  cc_entry_feedback_update (self->domain_feedback, "process-working-symbolic", _("Checking domain…"));
+  cc_entry_feedback_update (self->domain_feedback, CC_ENTRY_LOADING, _("Checking domain…"));
   self->domain_timeout_id = g_timeout_add (DOMAIN_CHECK_TIMEOUT, (GSourceFunc)domain_validate, self);
 }
 

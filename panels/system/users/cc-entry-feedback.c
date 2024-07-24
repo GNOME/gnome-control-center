@@ -23,6 +23,8 @@
  *   Ondrej Holy <oholy@redhat.com>
  */
 
+#include <adwaita.h>
+
 #undef G_LOG_DOMAIN
 #define G_LOG_DOMAIN "cc-entry-feedback"
 
@@ -41,6 +43,8 @@ struct _CcEntryFeedback
 
   gchar       *default_icon_name;
   gchar       *default_text;
+
+  gboolean spinner_showing;
 };
 
 G_DEFINE_TYPE (CcEntryFeedback, cc_entry_feedback, GTK_TYPE_BOX)
@@ -91,8 +95,23 @@ set_icon (CcEntryFeedback *self,
   if (class != NULL)
     gtk_widget_remove_css_class (GTK_WIDGET (self->image), class);
 
-  gtk_image_set_from_icon_name (self->image, icon_name);
-  gtk_widget_add_css_class (GTK_WIDGET (self->image), icon_name);
+  if (g_str_equal (icon_name, CC_ENTRY_LOADING))
+    {
+      if (!self->spinner_showing)
+        {
+          AdwSpinnerPaintable *paintable = adw_spinner_paintable_new (GTK_WIDGET (self->image));
+
+          gtk_image_set_from_paintable (self->image, GDK_PAINTABLE (paintable));
+          self->spinner_showing = true;
+        }
+    }
+  else
+    {
+      gtk_image_set_from_icon_name (self->image, icon_name);
+      gtk_widget_add_css_class (GTK_WIDGET (self->image), icon_name);
+
+      self->spinner_showing = false;
+    }
 }
 
 static void
