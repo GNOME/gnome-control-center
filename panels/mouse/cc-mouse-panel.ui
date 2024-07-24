@@ -197,6 +197,7 @@
                               <object class="AdwSwitchRow" id="touchpad_typing_row">
                                 <property name="title" translatable="yes">_Disable Touchpad While Typing</property>
                                 <property name="use-underline">True</property>
+                                <property name="sensitive" bind-source="touchpad_toggle_row" bind-property="active" bind-flags="default|sync-create" />
                               </object>
                             </child>
                             <child>
@@ -231,6 +232,7 @@
                         <child>
                           <object class="AdwPreferencesGroup">
                             <property name="title" translatable="yes">Clicking</property>
+                            <property name="sensitive" bind-source="touchpad_toggle_row" bind-property="active" bind-flags="default|sync-create" />
                             <child>
                               <object class="CcSplitRow" id="two_finger_push_row">
                                 <property name="title" translatable="yes">Secondary Click</property>
@@ -247,6 +249,7 @@
 
                         <child>
                           <object class="AdwPreferencesGroup">
+                            <property name="sensitive" bind-source="touchpad_toggle_row" bind-property="active" bind-flags="default|sync-create" />
                             <child>
                               <object class="CcIllustratedRow" id="tap_to_click_row">
                                 <property name="visible">False</property>
@@ -255,7 +258,6 @@
                                 <property name="subtitle" translatable="yes">Quickly touch the touchpad to click</property>
                                 <property name="resource">/org/gnome/control-center/mouse/assets/tap-to-click.webm</property>
                                 <property name="activatable-widget">tap_to_click_switch</property>
-                                <property name="sensitive" bind-source="touchpad_toggle_row" bind-property="active" bind-flags="default|sync-create" />
                                 <child>
                                   <object class="GtkSwitch" id="tap_to_click_switch">
                                     <property name="valign">center</property>
@@ -269,6 +271,7 @@
                         <child>
                           <object class="AdwPreferencesGroup">
                             <property name="title" translatable="yes">Scrolling</property>
+                            <property name="sensitive" bind-source="touchpad_toggle_row" bind-property="active" bind-flags="default|sync-create" />
                             <child>
                               <object class="CcSplitRow" id="touchpad_scroll_method_row">
                                 <property name="title" translatable="yes">Scroll Method</property>
@@ -278,7 +281,6 @@
                                 <property name="alternative-option-title" translatable="yes">_Edge</property>
                                 <property name="alternative-option-subtitle" translatable="yes">Drag one finger on the edge</property>
                                 <property name="alternative-illustration-resource">/org/gnome/control-center/mouse/assets/edge-scroll.webm</property>
-                                <property name="sensitive" bind-source="touchpad_toggle_row" bind-property="active" bind-flags="default|sync-create" />
                                 <signal name="notify::use-default" handler="on_touchpad_scroll_method_changed_cb" object="CcMousePanel" swapped="yes"/>
                               </object>
                             </child>
@@ -286,6 +288,7 @@
                         </child>
                         <child>
                           <object class="AdwPreferencesGroup">
+                            <property name="sensitive" bind-source="touchpad_toggle_row" bind-property="active" bind-flags="default|sync-create" />
                             <child>
                               <object class="CcSplitRow" id="touchpad_scroll_direction_row">
                                 <property name="title" translatable="yes">Scroll Direction</property>
@@ -295,7 +298,6 @@
                                 <property name="alternative-option-title" translatable="yes">_Natural</property>
                                 <property name="alternative-option-subtitle" translatable="yes">Scrolling moves the content</property>
                                 <property name="alternative-illustration-resource">/org/gnome/control-center/mouse/assets/touch-scroll-natural.webm</property>
-                                <property name="sensitive" bind-source="touchpad_toggle_row" bind-property="active" bind-flags="default|sync-create" />
                               </object>
                             </child>
                           </object>
@@ -307,6 +309,7 @@
                                   <property name="title" translatable="yes">Test _Settings</property>
                                   <property name="end-icon-name">go-next-symbolic</property>
                                   <property name="use-underline">True</property>
+                                  <property name="sensitive" bind-source="touchpad_toggle_row" bind-property="active" bind-flags="default|sync-create" />
                                   <signal name="activated" handler="test_button_row_activated_cb" object="CcMousePanel" swapped="yes"/>
                                 </object>
                               </child>
