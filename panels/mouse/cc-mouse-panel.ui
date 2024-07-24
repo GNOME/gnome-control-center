@@ -304,15 +304,15 @@
                         </child>
                         <child>
                           <object class="AdwPreferencesGroup">
-                              <child>
-                                <object class="AdwButtonRow">
-                                  <property name="title" translatable="yes">Test _Settings</property>
-                                  <property name="end-icon-name">go-next-symbolic</property>
-                                  <property name="use-underline">True</property>
-                                  <property name="sensitive" bind-source="touchpad_toggle_row" bind-property="active" bind-flags="default|sync-create" />
-                                  <signal name="activated" handler="test_button_row_activated_cb" object="CcMousePanel" swapped="yes"/>
-                                </object>
-                              </child>
+                            <child>
+                              <object class="AdwButtonRow">
+                                <property name="title" translatable="yes">Test _Settings</property>
+                                <property name="end-icon-name">go-next-symbolic</property>
+                                <property name="use-underline">True</property>
+                                <property name="sensitive" bind-source="touchpad_toggle_row" bind-property="active" bind-flags="default|sync-create"/>
+                                <signal name="activated" handler="test_button_row_activated_cb" object="CcMousePanel" swapped="yes"/>
+                              </object>
+                            </child>
                           </object>
                         </child>
                       </object>
