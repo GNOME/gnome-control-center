@@ -61,7 +61,7 @@
                     <property name="icon-name">input-mouse-symbolic</property>
                     <property name="child">
 
-                      <object class="AdwPreferencesPage" id="preferences">
+                      <object class="AdwPreferencesPage">
                         <child>
                           <object class="AdwPreferencesGroup">
                             <property name="title" translatable="yes">General</property>
@@ -196,7 +196,7 @@
                           </object>
                         </child>
                         <child>
-                          <object class="AdwPreferencesGroup" id="touchpad_group">
+                          <object class="AdwPreferencesGroup">
                             <property name="sensitive" bind-source="touchpad_toggle_row" bind-property="active" bind-flags="default|sync-create" />
                             <property name="title" translatable="yes">General</property>
                             <child>
@@ -206,7 +206,7 @@
                               </object>
                             </child>
                             <child>
-                              <object class="AdwActionRow" id="touchpad_speed_row">
+                              <object class="AdwActionRow">
                                 <property name="title" translatable="yes">Po_inter Speed</property>
                                 <property name="use-underline">True</property>
                                 <property name="activatable-widget">touchpad_speed_scale</property>
