@@ -50,6 +50,7 @@ struct _PpDetailsDialog {
   AdwActionRow *printer_model_label;
   AdwEntryRow  *printer_name_entry;
   AdwButtonRow *search_for_drivers_button_row;
+  AdwWindowTitle *title_widget;
 
   gchar        *printer_name;
   gchar        *ppd_file_name;
@@ -71,9 +72,7 @@ printer_name_changed (PpDetailsDialog *self)
   name = pp_details_dialog_get_printer_name (self);
 
   if (printer_name_is_valid (name)){
-    /* Translators: This is the title of the dialog. %s is the printer name. */
-    title = g_strdup_printf (_("%s Details"), name);
-    adw_dialog_set_title (ADW_DIALOG (self), title);
+    adw_window_title_set_subtitle (self->title_widget, name);
     gtk_revealer_set_reveal_child (self->printer_name_hint_revealer, FALSE);
     gtk_widget_remove_css_class (GTK_WIDGET (self->printer_name_entry), "error");
   } else {
@@ -356,6 +355,7 @@ pp_details_dialog_class_init (PpDetailsDialogClass *klass)
   gtk_widget_class_bind_template_child (widget_class, PpDetailsDialog, printer_model_label);
   gtk_widget_class_bind_template_child (widget_class, PpDetailsDialog, printer_name_entry);
   gtk_widget_class_bind_template_child (widget_class, PpDetailsDialog, search_for_drivers_button_row);
+  gtk_widget_class_bind_template_child (widget_class, PpDetailsDialog, title_widget);
 
   gtk_widget_class_bind_template_callback (widget_class, on_open_address_button_clicked);
   gtk_widget_class_bind_template_callback (widget_class, printer_name_changed);
@@ -372,7 +372,6 @@ pp_details_dialog_new (gchar   *printer_name,
                        gboolean sensitive)
 {
   PpDetailsDialog *self;
-  g_autofree gchar *title = NULL;
   g_autofree gchar *printer_url = NULL;
 
   self = g_object_new (PP_DETAILS_DIALOG_TYPE, NULL);
@@ -380,9 +379,7 @@ pp_details_dialog_new (gchar   *printer_name,
   self->printer_name = g_strdup (printer_name);
   self->ppd_file_name = NULL;
 
-  /* Translators: This is the title of the dialog. %s is the printer name. */
-  title = g_strdup_printf (_("%s Details"), printer_name);
-  adw_dialog_set_title (ADW_DIALOG (self), title);
+  adw_window_title_set_subtitle (self->title_widget, printer_name);
 
   printer_url = g_strdup_printf ("%s:%d", printer_address, ippPort ());
   adw_action_row_set_subtitle (self->printer_address_row, printer_url);

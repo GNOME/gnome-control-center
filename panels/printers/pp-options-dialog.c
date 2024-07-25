@@ -47,6 +47,7 @@ struct _PpOptionsDialog {
   GtkTreeView      *categories_treeview;
   GtkNotebook      *notebook;
   GtkStack         *stack;
+  AdwWindowTitle   *title_widget;
 
   gchar       *printer_name;
 
@@ -861,7 +862,7 @@ pp_options_dialog_new (gchar   *printer_name,
 
   self->sensitive = sensitive;
 
-  gtk_window_set_title (GTK_WINDOW (self), printer_name);
+  adw_window_title_set_subtitle (self->title_widget, printer_name);
 
   populate_options (self);
 
@@ -912,6 +913,7 @@ pp_options_dialog_class_init (PpOptionsDialogClass *klass)
   gtk_widget_class_bind_template_child (widget_class, PpOptionsDialog, categories_treeview);
   gtk_widget_class_bind_template_child (widget_class, PpOptionsDialog, notebook);
   gtk_widget_class_bind_template_child (widget_class, PpOptionsDialog, stack);
+  gtk_widget_class_bind_template_child (widget_class, PpOptionsDialog, title_widget);
 
   gtk_widget_class_bind_template_callback (widget_class, category_selection_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, test_page_cb);
