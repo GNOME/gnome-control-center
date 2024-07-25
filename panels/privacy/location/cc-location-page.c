@@ -22,7 +22,6 @@
 #include "cc-util.h"
 
 #include <gio/gdesktopappinfo.h>
-#include <glib/gi18n.h>
 
 #define LOCATION_ENABLED "enabled"
 #define APP_PERMISSIONS_TABLE "location"
