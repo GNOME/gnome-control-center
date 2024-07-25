@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
+  <object class="AdwAlertDialog" id="clear_all_jobs_dialog">
+    <property name="heading" translatable="yes">Clear All Active Jobs?</property>
+    <property name="body" translatable="yes">Clearing jobs cannot be undone</property>
+    <property name="default-response">cancel</property>
+    <property name="close-response">cancel</property>
+    <signal name="response::clear-all" handler="on_clear_all_response_cb" swapped="yes"/>
+    <responses>
+      <response id="cancel" translatable="yes">_Cancel</response>
+      <response id="clear-all" translatable="yes" appearance="destructive">Clear _All</response>
+    </responses>
+  </object>
   <object class="GtkPopover" id="authentication_popover">
     <property name="halign">start</property>
     <property name="valign">start</property>
@@ -128,7 +139,7 @@
                 <property name="label" translatable="yes" comments="Translators: this action removes (purges) all the listed jobs from the list.">_Clear All</property>
                 <property name="receives_default">True</property>
                 <property name="use_underline">True</property>
-                <signal name="clicked" handler="on_clear_all_button_clicked" swapped="yes"/>
+                <signal name="clicked" handler="adw_dialog_present" object="clear_all_jobs_dialog"/>
                 <style>
                   <class name="destructive-action"/>
                 </style>

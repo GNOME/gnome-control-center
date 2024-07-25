@@ -52,6 +52,7 @@ struct _PpJobsDialog {
   GtkLabel          *authenticate_jobs_label;
   GtkInfoBar        *authentication_infobar;
   GtkLabel          *authentication_label;
+  AdwDialog         *clear_all_jobs_dialog;
   GtkEntry          *domain_entry;
   GtkLabel          *domain_label;
   GtkButton         *jobs_clear_all_button;
@@ -364,7 +365,7 @@ update_jobs_list (PpJobsDialog *self)
 }
 
 static void
-on_clear_all_button_clicked (PpJobsDialog *self)
+on_clear_all_response_cb (PpJobsDialog *self)
 {
   guint num_items;
   guint i;
@@ -512,6 +513,7 @@ pp_jobs_dialog_class_init (PpJobsDialogClass *klass)
   gtk_widget_class_bind_template_child (widget_class, PpJobsDialog, authenticate_jobs_label);
   gtk_widget_class_bind_template_child (widget_class, PpJobsDialog, authentication_infobar);
   gtk_widget_class_bind_template_child (widget_class, PpJobsDialog, authentication_label);
+  gtk_widget_class_bind_template_child (widget_class, PpJobsDialog, clear_all_jobs_dialog);
   gtk_widget_class_bind_template_child (widget_class, PpJobsDialog, domain_entry);
   gtk_widget_class_bind_template_child (widget_class, PpJobsDialog, domain_label);
   gtk_widget_class_bind_template_child (widget_class, PpJobsDialog, jobs_clear_all_button);
@@ -523,9 +525,9 @@ pp_jobs_dialog_class_init (PpJobsDialogClass *klass)
   gtk_widget_class_bind_template_child (widget_class, PpJobsDialog, username_label);
 
   gtk_widget_class_bind_template_callback (widget_class, authenticate_button_clicked);
-  gtk_widget_class_bind_template_callback (widget_class, on_clear_all_button_clicked);
   gtk_widget_class_bind_template_callback (widget_class, auth_entries_activated);
   gtk_widget_class_bind_template_callback (widget_class, auth_entries_changed);
+  gtk_widget_class_bind_template_callback (widget_class, on_clear_all_response_cb);
 
   object_class->dispose = pp_jobs_dialog_dispose;
 }
