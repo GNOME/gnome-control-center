@@ -42,11 +42,15 @@ struct _CcWacomStylusPage {
     GtkWidget *stylus_button1_action_row;
     GtkWidget *stylus_button2_action_row;
     GtkWidget *stylus_button3_action_row;
-    GtkWidget *stylus_eraser_pressure;
+    GtkWidget *eraser_section_pressure;
     GtkWidget *stylus_tip_pressure_scale;
     GtkWidget *stylus_eraser_pressure_scale;
     GtkAdjustment *stylus_tip_pressure_adjustment;
     GtkAdjustment *stylus_eraser_pressure_adjustment;
+    GtkAdjustment *stylus_tip_pressure_minimum_adjustment;
+    GtkAdjustment *stylus_tip_pressure_maximum_adjustment;
+    GtkAdjustment *stylus_eraser_pressure_minimum_adjustment;
+    GtkAdjustment *stylus_eraser_pressure_maximum_adjustment;
     CcWacomTool *stylus;
     GSettings *stylus_settings;
 
@@ -111,6 +115,51 @@ on_eraser_pressure_value_changed (CcWacomStylusPage *page)
 }
 
 static void
+set_pressure_range (GtkAdjustment *adj_minimum, GtkAdjustment *adj_maximum, GSettings *settings, const char *key)
+{
+    GVariantBuilder builder;
+    double min, max;
+
+    min = gtk_adjustment_get_value (adj_minimum);
+    max = gtk_adjustment_get_value (adj_maximum);
+
+    g_return_if_fail (min >= 0.0 && min <= 30.0);
+    g_return_if_fail (max >= 50.0 && max <= 100.0);
+
+    g_variant_builder_init (&builder, G_VARIANT_TYPE ("ai"));
+    g_variant_builder_add (&builder, "i", (int) min);
+    g_variant_builder_add (&builder, "i", (int) max);
+
+    g_settings_set_value (settings, key, g_variant_builder_end (&builder));
+}
+
+static void
+on_tip_pressure_range_changed (CcWacomStylusPage *page)
+{
+    set_pressure_range (page->stylus_tip_pressure_minimum_adjustment, page->stylus_tip_pressure_maximum_adjustment,
+                        page->stylus_settings, "pressure-range");
+}
+
+static void
+on_eraser_pressure_range_changed (CcWacomStylusPage *page)
+{
+    set_pressure_range (page->stylus_eraser_pressure_minimum_adjustment,
+                        page->stylus_eraser_pressure_maximum_adjustment, page->stylus_settings,
+                        "eraser-pressure-range");
+}
+
+static gboolean
+on_pressure_percentage_changed (CcWacomStylusPage *page, AdwSpinRow *row)
+{
+    g_autofree char *text = NULL;
+
+    text = g_strdup_printf ("%d%%", (int) adw_spin_row_get_value (row));
+    gtk_editable_set_text (GTK_EDITABLE (row), text);
+
+    return TRUE;
+}
+
+static void
 set_feel_from_gsettings (GtkAdjustment *adjustment, GSettings *settings, const gchar *key)
 {
     GVariant *variant;
@@ -162,6 +211,26 @@ set_feel_from_gsettings (GtkAdjustment *adjustment, GSettings *settings, const g
             }
         }
     }
+}
+
+static void
+set_pressure_range_from_gsettings (GtkAdjustment *adjustment_min, GtkAdjustment *adjustment_max, GSettings *settings,
+                                   const gchar *key)
+{
+    GVariant *variant;
+    const gint32 *values;
+    gsize nvalues;
+
+    variant = g_settings_get_value (settings, key);
+    values = g_variant_get_fixed_array (variant, &nvalues, sizeof (gint32));
+
+    if (nvalues != 2) {
+        g_warning ("Invalid pressure range format, expected 2 values (got %" G_GSIZE_FORMAT ")", nvalues);
+        return;
+    }
+
+    gtk_adjustment_set_value (adjustment_min, values[0]);
+    gtk_adjustment_set_value (adjustment_max, values[1]);
 }
 
 static void
@@ -265,17 +334,22 @@ cc_wacom_stylus_page_class_init (CcWacomStylusPageClass *klass)
     gtk_widget_class_bind_template_child (widget_class, CcWacomStylusPage, stylus_button1_action_row);
     gtk_widget_class_bind_template_child (widget_class, CcWacomStylusPage, stylus_button2_action_row);
     gtk_widget_class_bind_template_child (widget_class, CcWacomStylusPage, stylus_button3_action_row);
-    gtk_widget_class_bind_template_child (widget_class, CcWacomStylusPage, stylus_eraser_pressure);
+    gtk_widget_class_bind_template_child (widget_class, CcWacomStylusPage, eraser_section_pressure);
     gtk_widget_class_bind_template_child (widget_class, CcWacomStylusPage, stylus_tip_pressure_scale);
     gtk_widget_class_bind_template_child (widget_class, CcWacomStylusPage, stylus_eraser_pressure_scale);
     gtk_widget_class_bind_template_child (widget_class, CcWacomStylusPage, stylus_tip_pressure_adjustment);
+    gtk_widget_class_bind_template_child (widget_class, CcWacomStylusPage, stylus_tip_pressure_minimum_adjustment);
+    gtk_widget_class_bind_template_child (widget_class, CcWacomStylusPage, stylus_tip_pressure_maximum_adjustment);
     gtk_widget_class_bind_template_child (widget_class, CcWacomStylusPage, stylus_eraser_pressure_adjustment);
+    gtk_widget_class_bind_template_child (widget_class, CcWacomStylusPage, stylus_eraser_pressure_minimum_adjustment);
+    gtk_widget_class_bind_template_child (widget_class, CcWacomStylusPage, stylus_eraser_pressure_maximum_adjustment);
 
     gtk_widget_class_bind_template_callback (widget_class, on_stylus_button1_action_activated);
     gtk_widget_class_bind_template_callback (widget_class, on_stylus_button2_action_activated);
     gtk_widget_class_bind_template_callback (widget_class, on_stylus_button3_action_activated);
     gtk_widget_class_bind_template_callback (widget_class, on_tip_pressure_value_changed);
     gtk_widget_class_bind_template_callback (widget_class, on_eraser_pressure_value_changed);
+    gtk_widget_class_bind_template_callback (widget_class, on_pressure_percentage_changed);
 }
 
 static void
@@ -335,10 +409,25 @@ cc_wacom_stylus_page_new (CcWacomPanel *panel, CcWacomTool *stylus)
     gtk_widget_set_visible (page->stylus_button3_action_row, num_buttons >= 3);
     gtk_widget_set_visible (page->stylus_button2_action_row, num_buttons >= 2);
     gtk_widget_set_visible (page->stylus_button1_action_row, num_buttons >= 1);
-    gtk_widget_set_visible (page->stylus_eraser_pressure, has_paired_eraser);
+    gtk_widget_set_visible (page->eraser_section_pressure, has_paired_eraser);
 
     set_feel_from_gsettings (page->stylus_tip_pressure_adjustment, page->stylus_settings, "pressure-curve");
     set_feel_from_gsettings (page->stylus_eraser_pressure_adjustment, page->stylus_settings, "eraser-pressure-curve");
+    set_pressure_range_from_gsettings (page->stylus_tip_pressure_minimum_adjustment,
+                                       page->stylus_tip_pressure_maximum_adjustment, page->stylus_settings,
+                                       "pressure-range");
+    set_pressure_range_from_gsettings (page->stylus_eraser_pressure_minimum_adjustment,
+                                       page->stylus_eraser_pressure_maximum_adjustment, page->stylus_settings,
+                                       "eraser-pressure-range");
+
+    g_signal_connect_swapped (G_OBJECT (page->stylus_tip_pressure_minimum_adjustment), "value-changed",
+                              G_CALLBACK (on_tip_pressure_range_changed), page);
+    g_signal_connect_swapped (G_OBJECT (page->stylus_tip_pressure_maximum_adjustment), "value-changed",
+                              G_CALLBACK (on_tip_pressure_range_changed), page);
+    g_signal_connect_swapped (G_OBJECT (page->stylus_eraser_pressure_minimum_adjustment), "value-changed",
+                              G_CALLBACK (on_eraser_pressure_range_changed), page);
+    g_signal_connect_swapped (G_OBJECT (page->stylus_eraser_pressure_maximum_adjustment), "value-changed",
+                              G_CALLBACK (on_eraser_pressure_range_changed), page);
 
     g_signal_connect (G_OBJECT (page->stylus_settings), "changed::button-action", G_CALLBACK (on_button_action_changed),
                       page->stylus_button1_action_row);

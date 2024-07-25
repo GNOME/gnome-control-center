@@ -13,69 +13,133 @@ template $CcWacomStylusPage: Box {
       paintable: $CcMaskPaintable stylus_paintable {};
     };
 
-    Adw.ActionRow stylus_tip_pressure {
-      title: _("Tip _Pressure Feel");
-      use-underline: true;
-      activatable-widget: stylus_tip_pressure_scale;
+    Adw.PreferencesGroup stylus_section_pressure {
+      title: _("Tip Pressure");
 
-      Scale stylus_tip_pressure_scale {
-        value-changed => $on_tip_pressure_value_changed(template);
+      Adw.ActionRow stylus_tip_pressure {
+        title: _("Tip _Pressure Feel");
+        use-underline: true;
+        activatable-widget: stylus_tip_pressure_scale;
 
-        marks [
-          /* Translators: This is a mark in the 'Tip Pressure Feel' scale */
-          mark (0, bottom, _("Soft")),
-          mark (100),
-          /* Translators: This is a mark in the 'Tip Pressure Feel' scale */
-          mark (200, bottom, _("Firm")),
-        ]
+        Scale stylus_tip_pressure_scale {
+          value-changed => $on_tip_pressure_value_changed(template);
 
-        adjustment: Adjustment stylus_tip_pressure_adjustment {
-          upper: 200;
-          step-increment: 20;
-          page-increment: 60;
+          marks [
+            /* Translators: This is a mark in the 'Tip Pressure Feel' scale */
+            mark (0, bottom, _("Soft")),
+            mark (100),
+            /* Translators: This is a mark in the 'Tip Pressure Feel' scale */
+            mark (200, bottom, _("Firm")),
+          ]
+
+          adjustment: Adjustment stylus_tip_pressure_adjustment {
+            upper: 200;
+            step-increment: 20;
+            page-increment: 60;
+          };
+        }
+      }
+
+      Adw.SpinRow stylus_pressure_minimum {
+        title: _("Tip Pressure _Floor");
+        use-underline: true;
+        output => $on_pressure_percentage_changed(template);
+
+        adjustment: Adjustment stylus_tip_pressure_minimum_adjustment {
+          lower: 0;
+          upper: 30;
+          step-increment: 1;
+          page-increment: 5;
+        };
+      }
+
+      Adw.SpinRow stylus_pressure_maximum {
+        title: _("Tip Pressure _Ceiling");
+        use-underline: true;
+        output => $on_pressure_percentage_changed(template);
+
+        adjustment: Adjustment stylus_tip_pressure_maximum_adjustment {
+          lower: 50;
+          upper: 100;
+          step-increment: 1;
+          page-increment: 5;
         };
       }
     }
 
-    $CcListRow stylus_button1_action_row {
-      title: _("Button _1");
-      show-arrow: true;
-      activated => $on_stylus_button1_action_activated(template);
-    }
+    Adw.PreferencesGroup eraser_section_pressure {
+      title: _("Eraser Pressure");
 
-    $CcListRow stylus_button2_action_row {
-      title: _("Button _2");
-      show-arrow: true;
-      activated => $on_stylus_button2_action_activated(template);
-    }
+      Adw.ActionRow stylus_eraser_pressure {
+        title: _("_Eraser Pressure Feel");
+        use-underline: true;
+        activatable-widget: stylus_eraser_pressure_scale;
 
-    $CcListRow stylus_button3_action_row {
-      title: _("Button _3");
-      show-arrow: true;
-      activated => $on_stylus_button3_action_activated(template);
-    }
+        Scale stylus_eraser_pressure_scale {
+          value-changed => $on_eraser_pressure_value_changed(template);
 
-    Adw.ActionRow stylus_eraser_pressure {
-      title: _("_Eraser Pressure Feel");
-      use-underline: true;
-      activatable-widget: stylus_eraser_pressure_scale;
+          marks [
+            /* Translators: This is a mark in the 'Erase Pressure Feel' scale */
+            mark (0, bottom, _("Soft")),
+            mark (100),
+            /* Translators: This is a mark in the 'Erase Pressure Feel' scale */
+            mark (200, bottom, _("Firm")),
+          ]
 
-      Scale stylus_eraser_pressure_scale {
-        value-changed => $on_eraser_pressure_value_changed(template);
+          adjustment: Adjustment stylus_eraser_pressure_adjustment {
+            upper: 200;
+            step-increment: 20;
+            page-increment: 60;
+          };
+        }
+      }
 
-        marks [
-          /* Translators: This is a mark in the 'Erase Pressure Feel' scale */
-          mark (0, bottom, _("Soft")),
-          mark (100),
-          /* Translators: This is a mark in the 'Erase Pressure Feel' scale */
-          mark (200, bottom, _("Firm")),
-        ]
+      Adw.SpinRow eraser_pressure_minimum {
+        title: _("Eraser Pressure _Floor");
+        use-underline: true;
+        output => $on_pressure_percentage_changed(template);
 
-        adjustment: Adjustment stylus_eraser_pressure_adjustment {
-          upper: 200;
-          step-increment: 20;
-          page-increment: 60;
+        adjustment: Adjustment stylus_eraser_pressure_minimum_adjustment {
+          lower: 0;
+          upper: 30;
+          step-increment: 1;
+          page-increment: 5;
         };
+      }
+
+      Adw.SpinRow eraser_pressure_maximum {
+        title: _("Eraser Pressure _Ceiling");
+        use-underline: true;
+        output => $on_pressure_percentage_changed(template);
+
+        adjustment: Adjustment stylus_eraser_pressure_maximum_adjustment {
+          lower: 50;
+          upper: 100;
+          step-increment: 1;
+          page-increment: 5;
+        };
+      }
+    }
+
+    Adw.PreferencesGroup stylus_section_buttons {
+      title: _("Pen Buttons");
+
+      $CcListRow stylus_button1_action_row {
+        title: _("Button _1");
+        show-arrow: true;
+        activated => $on_stylus_button1_action_activated(template);
+      }
+
+      $CcListRow stylus_button2_action_row {
+        title: _("Button _2");
+        show-arrow: true;
+        activated => $on_stylus_button2_action_activated(template);
+      }
+
+      $CcListRow stylus_button3_action_row {
+        title: _("Button _3");
+        show-arrow: true;
+        activated => $on_stylus_button3_action_activated(template);
       }
     }
   }
