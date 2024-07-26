@@ -44,6 +44,7 @@ struct _CcOnlineAccountsPanel
   GtkListBox    *accounts_listbox;
   AdwBanner     *offline_banner;
   GtkListBox    *providers_listbox;
+  GtkWidget     *toast_overlay;
 
   GoaClient     *client;
   GVariant      *parameters;
@@ -563,6 +564,7 @@ cc_online_accounts_panel_class_init (CcOnlineAccountsPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcOnlineAccountsPanel, accounts_listbox);
   gtk_widget_class_bind_template_child (widget_class, CcOnlineAccountsPanel, offline_banner);
   gtk_widget_class_bind_template_child (widget_class, CcOnlineAccountsPanel, providers_listbox);
+  gtk_widget_class_bind_template_child (widget_class, CcOnlineAccountsPanel, toast_overlay);
 
   gtk_widget_class_bind_template_callback (widget_class, on_accounts_listbox_row_activated);
   gtk_widget_class_bind_template_callback (widget_class, on_provider_row_activated_cb);
