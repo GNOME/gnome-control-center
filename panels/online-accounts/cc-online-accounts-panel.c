@@ -162,8 +162,12 @@ create_account_cb (GoaProvider *provider,
   object = goa_provider_add_account_finish (provider, result, &error);
   if (error != NULL)
     {
-      if (!g_error_matches (error, GOA_ERROR, GOA_ERROR_DIALOG_DISMISSED) && !g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
-        g_warning ("Error creating account: %s", error->message);
+      if (!g_error_matches (error, GOA_ERROR, GOA_ERROR_DIALOG_DISMISSED) &&
+          !g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+        {
+          adw_toast_overlay_add_toast (ADW_TOAST_OVERLAY (self->toast_overlay),
+                                       adw_toast_new (error->message));
+        }
 
       return;
     }
