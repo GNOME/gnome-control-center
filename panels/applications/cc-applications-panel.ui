@@ -271,10 +271,10 @@ Error details: Malcontent is not installed.</property>
                     </child>
 
                     <child>
-                      <object class="AdwPreferencesGroup" id="integration_section">
+                      <object class="AdwPreferencesGroup" id="permissions_group">
                         <property name="title" translatable="yes">Permissions</property>
                         <child>
-                          <object class="AdwSwitchRow" id="search">
+                          <object class="AdwSwitchRow" id="search_row">
                             <property name="title" translatable="yes" comments="Translators: This row shows/sets whether the app shown in this page can add results to the GNOME Shell search results. Internally this enables/disables the app's Shell Search Provider">_Search</property>
                             <property name="subtitle" translatable="yes">Receive system searches and send results</property>
                             <property name="use-underline">True</property>
@@ -282,15 +282,15 @@ Error details: Malcontent is not installed.</property>
                           </object>
                         </child>
                         <child>
-                          <object class="CcListRow" id="no_search">
-                            <property name="title" bind-source="search" bind-property="title" bind-flags="sync-create"/>
-                            <property name="subtitle" bind-source="search" bind-property="subtitle" bind-flags="sync-create"/>
+                          <object class="CcListRow" id="no_search_row">
+                            <property name="title" bind-source="search_row" bind-property="title" bind-flags="sync-create"/>
+                            <property name="subtitle" bind-source="search_row" bind-property="subtitle" bind-flags="sync-create"/>
                             <property name="secondary-label" translatable="yes">Disabled</property>
                             <property name="activatable">False</property>
                           </object>
                         </child>
                         <child>
-                          <object class="AdwSwitchRow" id="notification">
+                          <object class="AdwSwitchRow" id="notifications_row">
                             <property name="title" translatable="yes">_Notifications</property>
                             <property name="subtitle" translatable="yes">Show system notifications</property>
                             <property name="use-underline">True</property>
@@ -298,7 +298,7 @@ Error details: Malcontent is not installed.</property>
                           </object>
                         </child>
                         <child>
-                          <object class="AdwSwitchRow" id="background">
+                          <object class="AdwSwitchRow" id="background_row">
                             <property name="title" translatable="yes">_Run in Background</property>
                             <property name="subtitle" translatable="yes">Allow activity when the app is closed</property>
                             <property name="use-underline">True</property>
@@ -306,7 +306,7 @@ Error details: Malcontent is not installed.</property>
                           </object>
                         </child>
                         <child>
-                          <object class="AdwSwitchRow" id="screenshot">
+                          <object class="AdwSwitchRow" id="screenshot_row">
                             <property name="title" translatable="yes">Scr_eenshots</property>
                             <property name="subtitle" translatable="yes">Take pictures of the screen at any time</property>
                             <property name="use-underline">True</property>
@@ -314,7 +314,7 @@ Error details: Malcontent is not installed.</property>
                           </object>
                         </child>
                         <child>
-                          <object class="AdwSwitchRow" id="wallpaper">
+                          <object class="AdwSwitchRow" id="wallpaper_row">
                             <property name="title" translatable="yes">Change _Wallpaper</property>
                             <property name="subtitle" translatable="yes">Change the desktop wallpaper</property>
                             <property name="use-underline">True</property>
@@ -322,7 +322,7 @@ Error details: Malcontent is not installed.</property>
                           </object>
                         </child>
                         <child>
-                          <object class="AdwSwitchRow" id="sound">
+                          <object class="AdwSwitchRow" id="sound_row">
                             <property name="title" translatable="yes">So_unds</property>
                             <property name="subtitle" translatable="yes">Reproduce sounds</property>
                             <property name="use-underline">True</property>
@@ -330,7 +330,7 @@ Error details: Malcontent is not installed.</property>
                           </object>
                         </child>
                         <child>
-                          <object class="CcListRow" id="no_sound">
+                          <object class="CcListRow" id="no_sound_row">
                             <property name="title" translatable="yes">Sounds</property>
                             <property name="subtitle" translatable="yes">Reproduce sounds</property>
                             <property name="secondary-label" translatable="yes">Disabled</property>
@@ -338,7 +338,7 @@ Error details: Malcontent is not installed.</property>
                           </object>
                         </child>
                         <child>
-                          <object class="AdwSwitchRow" id="shortcuts">
+                          <object class="AdwSwitchRow" id="shortcuts_row">
                             <property name="title" translatable="yes">_Inhibit Shortcuts</property>
                             <property name="subtitle" translatable="yes">Block standard keyboard shortcuts</property>
                             <property name="use-underline">True</property>
@@ -346,7 +346,7 @@ Error details: Malcontent is not installed.</property>
                           </object>
                         </child>
                         <child>
-                          <object class="AdwSwitchRow" id="camera">
+                          <object class="AdwSwitchRow" id="camera_row">
                             <property name="title" translatable="yes">C_amera</property>
                             <property name="subtitle" translatable="yes">Take pictures with the camera</property>
                             <property name="use-underline">True</property>
@@ -354,7 +354,7 @@ Error details: Malcontent is not installed.</property>
                           </object>
                         </child>
                         <child>
-                          <object class="CcListRow" id="no_camera">
+                          <object class="CcListRow" id="no_camera_row">
                             <property name="title" translatable="yes">Camera</property>
                             <property name="subtitle" translatable="yes">Take pictures with the camera</property>
                             <property name="secondary-label" translatable="yes">Disabled</property>
@@ -362,7 +362,7 @@ Error details: Malcontent is not installed.</property>
                           </object>
                         </child>
                         <child>
-                          <object class="AdwSwitchRow" id="microphone">
+                          <object class="AdwSwitchRow" id="microphone_row">
                             <property name="title" translatable="yes">_Microphone</property>
                             <property name="subtitle" translatable="yes">Record audio with the microphone</property>
                             <property name="use-underline">True</property>
@@ -370,7 +370,7 @@ Error details: Malcontent is not installed.</property>
                           </object>
                         </child>
                         <child>
-                          <object class="CcListRow" id="no_microphone">
+                          <object class="CcListRow" id="no_microphone_row">
                             <property name="title" translatable="yes">Microphone</property>
                             <property name="subtitle" translatable="yes">Record audio with the microphone</property>
                             <property name="secondary-label" translatable="yes">Disabled</property>
@@ -378,7 +378,7 @@ Error details: Malcontent is not installed.</property>
                           </object>
                         </child>
                         <child>
-                          <object class="AdwSwitchRow" id="location">
+                          <object class="AdwSwitchRow" id="location_row">
                             <property name="title" translatable="yes">_Location Services</property>
                             <property name="subtitle" translatable="yes">Access device location data</property>
                             <property name="use-underline">True</property>
@@ -386,7 +386,7 @@ Error details: Malcontent is not installed.</property>
                           </object>
                         </child>
                         <child>
-                          <object class="CcListRow" id="no_location">
+                          <object class="CcListRow" id="no_location_row">
                             <property name="title" translatable="yes">Location Services</property>
                             <property name="subtitle" translatable="yes">Access device location data</property>
                             <property name="secondary-label" translatable="yes">Disabled</property>
@@ -397,7 +397,7 @@ Error details: Malcontent is not installed.</property>
                     </child>
 
                     <child>
-                      <object class="AdwPreferencesGroup" id="other_permissions_section">
+                      <object class="AdwPreferencesGroup" id="required_permissions_group">
                         <child>
                           <object class="CcListRow" id="builtin">
                             <property name="title" translatable="yes">Re_quired Permissions</property>
@@ -411,7 +411,7 @@ Error details: Malcontent is not installed.</property>
                     </child>
 
                     <child>
-                      <object class="AdwPreferencesGroup" id="usage_section">
+                      <object class="AdwPreferencesGroup" id="general_group">
                         <property name="title" translatable="yes">General</property>
                         <child>
                           <object class="CcListRow" id="handler_row">
@@ -423,7 +423,7 @@ Error details: Malcontent is not installed.</property>
                           </object>
                         </child>
                         <child>
-                          <object class="CcListRow" id="storage">
+                          <object class="CcListRow" id="storage_row">
                             <property name="title" translatable="yes">S_torage</property>
                             <property name="subtitle" translatable="yes">Disk space being used</property>
                             <property name="show-arrow">True</property>
@@ -498,7 +498,7 @@ Error details: Malcontent is not installed.</property>
                 <child>
                   <object class="AdwPreferencesGroup">
                     <child>
-                      <object class="AdwButtonRow" id="handler_reset">
+                      <object class="AdwButtonRow" id="handler_reset_button_row">
                         <property name="title" translatable="yes">_Reset</property>
                         <property name="use-underline">True</property>
                         <signal name="activated" handler="handler_reset_cb" object="CcApplicationsPanel" swapped="yes"/>
