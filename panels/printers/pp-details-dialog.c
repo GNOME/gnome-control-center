@@ -297,7 +297,6 @@ update_sensitivity (PpDetailsDialog *self,
 static void
 on_open_address_button_clicked (PpDetailsDialog *self)
 {
-  GtkWindow *toplevel;
   g_autoptr(GFile) file = NULL;
   g_autoptr(GtkFileLauncher) launcher = NULL;
   g_autofree gchar *printer_url;
@@ -306,8 +305,7 @@ on_open_address_button_clicked (PpDetailsDialog *self)
   file = g_file_new_for_uri (printer_url);
   launcher = gtk_file_launcher_new (file);
 
-  toplevel = GTK_WINDOW (gtk_widget_get_root (GTK_WIDGET (self)));
-  gtk_file_launcher_launch (launcher, toplevel, NULL, NULL, NULL);
+  gtk_file_launcher_launch (launcher, self->toplevel, NULL, NULL, NULL);
 }
 
 static void
