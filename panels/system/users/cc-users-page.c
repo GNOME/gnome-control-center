@@ -111,6 +111,7 @@ create_user_row (gpointer item, gpointer user_data)
 
     row = g_object_new (CC_TYPE_LIST_ROW, "show-arrow", TRUE, NULL);
     gtk_list_box_row_set_activatable (GTK_LIST_BOX_ROW (row), TRUE);
+    adw_preferences_row_set_use_underline (ADW_PREFERENCES_ROW (row), FALSE);
 
     user = item;
     g_object_set_data (G_OBJECT (row), "uid", GINT_TO_POINTER (act_user_get_uid (user)));
