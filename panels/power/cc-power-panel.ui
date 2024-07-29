@@ -35,7 +35,7 @@
                     <property name="use_underline">True</property>
                     <property name="activatable">True</property>
                     <property name="show-arrow">True</property>
-                    <signal name="activated" handler="battery_health_row_activated_cb" swapped="yes"/>
+                    <signal name="activated" handler="adw_dialog_present" object="battery_health_dialog" swapped="yes"/>
                   </object>
                 </child>
                 <accessibility>
@@ -222,18 +222,11 @@
     </property>
   </object>
 
-  <object class="AdwWindow" id="battery_health_dialog">
-    <property name="modal">True</property>
-    <property name="width-request">360</property>
-    <property name="height-request">294</property>
-    <property name="default-width">600</property>
-    <property name="default-height">540</property>
+  <object class="AdwDialog" id="battery_health_dialog">
     <property name="title" translatable="yes">Battery Health</property>
-    <property name="resizable">True</property>
-    <property name="hide-on-close">True</property>
-    <property name="content">
+    <property name="content-width">500</property>
+    <child>
       <object class="AdwToolbarView">
-        <property name="top-bar-style">raised</property>
         <child type="top">
           <object class="AdwHeaderBar"/>
         </child>
@@ -241,12 +234,9 @@
           <object class="AdwPreferencesPage" id="battery_health_page">
             <property name="description" translatable="yes">Current capacity indicates how much charge the battery can currently store, compared to when it was new.</property>
             <signal name="keynav-failed" handler="keynav_failed_cb" object="CcPowerPanel" swapped="yes"/>
-            <style>
-              <class name="boxed-list"/>
-            </style>
           </object>
         </property>
       </object>
-    </property>
+    </child>
   </object>
 </interface>

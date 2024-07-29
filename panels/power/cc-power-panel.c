@@ -44,7 +44,7 @@ struct _CcPowerPanel
   AdwSwitchRow      *als_row;
   AdwDialog         *automatic_suspend_dialog;
   CcListRow         *automatic_suspend_row;
-  AdwPreferencesWindow *battery_health_dialog;
+  AdwDialog         *battery_health_dialog;
   AdwPreferencesPage *battery_health_page;
   AdwPreferencesGroup *battery_health_section;
   CcListRow          *battery_health_row;
@@ -482,19 +482,6 @@ build_battery_health_dialog (CcPowerPanel *self)
 
       adw_preferences_page_add (self->battery_health_page, create_battery_group (device));
     }
-}
-
-static void
-battery_health_row_activated_cb (CcPowerPanel *self)
-{
-  CcShell *shell;
-  GtkWidget *toplevel;
-
-  shell = cc_panel_get_shell (CC_PANEL (self));
-  toplevel = cc_shell_get_toplevel (shell);
-
-  gtk_window_set_transient_for (GTK_WINDOW (self->battery_health_dialog), GTK_WINDOW (toplevel));
-  gtk_window_present (GTK_WINDOW (self->battery_health_dialog));
 }
 
 static gboolean
@@ -1263,7 +1250,6 @@ cc_power_panel_dispose (GObject *object)
   g_clear_object (&self->gsd_settings);
   g_clear_object (&self->session_settings);
   g_clear_object (&self->interface_settings);
-  g_clear_pointer ((GtkWindow **) &self->battery_health_dialog, gtk_window_destroy);
   g_clear_pointer (&self->devices, g_ptr_array_unref);
   g_clear_object (&self->up_client);
   g_clear_object (&self->iio_proxy);
@@ -1319,7 +1305,6 @@ cc_power_panel_class_init (CcPowerPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, suspend_on_ac_switch_row);
 
   gtk_widget_class_bind_template_callback (widget_class, als_row_changed_cb);
-  gtk_widget_class_bind_template_callback (widget_class, battery_health_row_activated_cb);
   gtk_widget_class_bind_template_callback (widget_class, keynav_failed_cb);
 }
 
