@@ -74,10 +74,10 @@ printer_name_changed (PpDetailsDialog *self)
   if (printer_name_is_valid (name)){
     adw_window_title_set_subtitle (self->title_widget, name);
     gtk_revealer_set_reveal_child (self->printer_name_hint_revealer, FALSE);
-    gtk_widget_remove_css_class (GTK_WIDGET (self->printer_name_entry), "error");
+    gtk_widget_remove_css_class (GTK_WIDGET (self->printer_name_entry), "warning");
   } else {
     gtk_revealer_set_reveal_child (self->printer_name_hint_revealer, TRUE);
-    gtk_widget_add_css_class (GTK_WIDGET (self->printer_name_entry), "error");
+    gtk_widget_add_css_class (GTK_WIDGET (self->printer_name_entry), "warning");
   }
 }
 

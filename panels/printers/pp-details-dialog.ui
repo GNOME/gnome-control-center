@@ -27,6 +27,29 @@
                   </object>
                 </child>
                 <child>
+                  <object class="GtkRevealer" id="printer_name_hint_revealer">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="child">
+                      <object class="GtkLabel">
+                        <property name="label" translatable="yes">Printer names cannot contain SPACE, TAB, #, or /</property>
+                        <property name="margin-top">6</property>
+                        <property name="wrap">True</property>
+                        <property name="xalign">0.0</property>
+                        <style>
+                          <class name="warning"/>
+                          <class name="caption"/>
+                        </style>
+                      </object>
+                    </property>
+                  </object>
+                </child>
+              </object>
+            </child>
+
+            <child>
+              <object class="AdwPreferencesGroup">
+                <child>
                   <object class="AdwEntryRow" id="printer_location_entry">
                     <property name="title" translatable="yes">_Location</property>
                     <property name="use-underline">True</property>
@@ -68,41 +91,6 @@
                   </object>
                 </child>
 
-                <child>
-                  <object class="GtkRevealer" id="printer_name_hint_revealer">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <child>
-                      <object class="GtkBox">
-                        <property name="visible">True</property>
-                        <property name="orientation">horizontal</property>
-                        <property name="spacing">6</property>
-                        <property name="margin-top">12</property>
-                        <property name="margin-bottom">12</property>
-                        <child>
-                          <object class="GtkImage">
-                            <property name="icon-name">dialog-warning-symbolic</property>
-                            <style>
-                              <class name="error"/>
-                            </style>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="GtkLabel">
-                            <property name="visible">True</property>
-                            <property name="label" translatable="yes">Printer names cannot contain SPACE, TAB, #, or /</property>
-                            <property name="yalign">0</property>
-                            <property name="xalign">0</property>
-                            <style>
-                              <class name="caption"/>
-                              <class name="error"/>
-                            </style>
-                          </object>
-                        </child>
-                      </object>
-                     </child>
-                  </object>
-                </child>
               </object>
             </child>
 
