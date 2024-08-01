@@ -448,18 +448,18 @@ update_prints_to_add_visibility (CcFingerprintDialog *self)
 {
   g_autoptr(GList) print_buttons = NULL;
   GList *l;
-  guint i;
 
   print_buttons = get_container_children (GTK_WIDGET (self->add_print_popover_box));
 
-  for (i = 0, l = print_buttons; i < N_VALID_FINGERS && l; ++i, l = l->next)
+  for (l = print_buttons; l != NULL; l = l->next)
     {
       GtkWidget *button = l->data;
       gboolean enrolled;
+      const char *finger_id = g_object_get_data (G_OBJECT (button), "finger-id");
 
       enrolled = self->enrolled_fingers &&
                  g_strv_contains ((const gchar **) self->enrolled_fingers,
-                                  FINGER_IDS[i]);
+                                  finger_id);
 
       gtk_widget_set_visible (button, !enrolled);
     }
