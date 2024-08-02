@@ -981,7 +981,7 @@ populate_add_print_popover (CcFingerprintDialog *self)
       gtk_button_set_label (GTK_BUTTON (finger_item), get_finger_name (FINGER_IDS[i]));
       gtk_button_set_use_underline (GTK_BUTTON (finger_item), TRUE);
       g_object_set_data (G_OBJECT (finger_item), "finger-id", (gpointer) FINGER_IDS[i]);
-      gtk_box_prepend (GTK_BOX (self->add_print_popover_box), finger_item);
+      gtk_box_append (GTK_BOX (self->add_print_popover_box), finger_item);
 
       g_signal_connect_object (finger_item, "clicked", G_CALLBACK (on_enroll_cb),
                                self, G_CONNECT_SWAPPED);
