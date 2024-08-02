@@ -140,7 +140,7 @@ typedef enum {
 } EnrollState;
 
 const char * ENROLL_STATE_CLASSES[N_ENROLL_STATES] = {
-  "",
+  "normal", /* undefined */
   "retry",
   "success",
   "warning",
