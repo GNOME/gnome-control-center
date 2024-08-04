@@ -541,6 +541,7 @@ verify_argv (CcWifiPanel  *self,
           g_warning ("Operation %s requires an object path", args[0]);
           return FALSE;
         }
+      G_GNUC_FALLTHROUGH;
     default:
       return TRUE;
     }

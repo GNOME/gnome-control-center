@@ -132,7 +132,8 @@ verify_argv (CcNetworkPanel *self,
 		if (self->arg_device == NULL) {
 			g_warning ("Operation %s requires an object path", args[0]);
 		        return FALSE;
-                }
+		}
+		G_GNUC_FALLTHROUGH;
 	default:
 		return TRUE;
 	}
