@@ -227,6 +227,7 @@ run_operation_from_params (CcWacomPanel *self, GVariant *parameters)
 			} else {
 				g_warning ("Ignoring unrecognized operation '%s'", operation);
 			}
+			G_GNUC_FALLTHROUGH;
 		case 2:
 			update_highlighted_device (self, device_name);
 			break;
