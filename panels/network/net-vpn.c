@@ -53,7 +53,7 @@ nm_device_refresh_vpn_ui (NetVpn *self)
         const GPtrArray *acs;
         NMActiveConnection *a;
         gint i;
-        NMVpnConnectionState state;
+        gboolean disconnected = TRUE;
 
         /* update title */
         title_escaped = g_markup_escape_text (nm_connection_get_id (self->connection),
@@ -70,7 +70,6 @@ nm_device_refresh_vpn_ui (NetVpn *self)
 
 
         /* Default to disconnected if there is no active connection */
-        state = NM_VPN_CONNECTION_STATE_DISCONNECTED;
         acs = nm_client_get_active_connections (self->client);
         if (acs != NULL) {
                 const gchar *uuid;
@@ -83,11 +82,19 @@ nm_device_refresh_vpn_ui (NetVpn *self)
 
                         auuid = nm_active_connection_get_uuid (a);
                         if (strcmp (auuid, uuid) == 0) {
-                                if (NM_IS_VPN_CONNECTION (a))
+                                if (NM_IS_VPN_CONNECTION (a)) {
+                                        NMVpnConnectionState state;
+
                                         state = nm_vpn_connection_get_vpn_state (NM_VPN_CONNECTION (a));
-                                else if (nm_is_wireguard_connection (a))
+                                        disconnected = (state == NM_VPN_CONNECTION_STATE_FAILED ||
+                                                        state == NM_VPN_CONNECTION_STATE_DISCONNECTED);
+                                } else if (nm_is_wireguard_connection (a)) {
+                                        NMActiveConnectionState state;
+
                                         state = nm_active_connection_get_state (a);
-                                else {
+                                        disconnected = (state == NM_ACTIVE_CONNECTION_STATE_DEACTIVATING ||
+                                                        state == NM_ACTIVE_CONNECTION_STATE_DEACTIVATED);
+                                } else {
                                         /* Unknown/Unhandled type */
                                         break;
                                 }
@@ -101,9 +108,7 @@ nm_device_refresh_vpn_ui (NetVpn *self)
         }
 
         self->updating_device = TRUE;
-        gtk_switch_set_active (self->device_off_switch,
-                               state != NM_VPN_CONNECTION_STATE_FAILED &&
-                               state != NM_VPN_CONNECTION_STATE_DISCONNECTED);
+        gtk_switch_set_active (self->device_off_switch, !disconnected);
         self->updating_device = FALSE;
 
         gtk_list_box_row_changed (GTK_LIST_BOX_ROW (self));
