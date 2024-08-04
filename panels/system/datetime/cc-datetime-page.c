@@ -775,27 +775,28 @@ sort_date_box (GtkListBoxRow  *a,
       return -1;
     if (a == day_row || b == year_row)
       return 1;
-
+    break;
   case DATE_ENDIANESS_LITTLE:
     /* day, month, year */
     if (a == day_row || b == year_row)
       return -1;
     if (a == year_row || b == day_row)
       return 1;
-
+    break;
   case DATE_ENDIANESS_MIDDLE:
     /* month, day, year */
     if (a == month_row || b == year_row)
       return -1;
     if (a == year_row || b == month_row)
       return 1;
-
+    break;
   case DATE_ENDIANESS_YDM:
     /* year, day, month */
     if (a == year_row || b == month_row)
       return -1;
     if (a == month_row || b == year_row)
       return 1;
+    break;
   }
 
   return 0;
