@@ -171,7 +171,7 @@ static void usage(char* cmd, unsigned thr_misclick)
     fprintf(stderr, "\t--fake: emulate a fake device (for testing purposes)\n");
 }
 
-static CcCalibrator * CalibratorXorgPrint(const char* const device_name0, const XYinfo *axis0, const gboolean verbose0, const int thr_misclick, const int thr_doubleclick)
+static CcCalibrator * CalibratorXorgPrint(const char* const device_name0, const XYinfo *axis0, const int thr_misclick, const int thr_doubleclick)
 {
     CcCalibrator* c = cc_calibrator_new (thr_doubleclick, thr_misclick);
 
@@ -328,8 +328,7 @@ static CcCalibrator * main_common(int argc, char** argv)
     }
 
     /* lastly, presume a standard Xorg driver (evtouch, mutouch, ...) */
-    return CalibratorXorgPrint(device_name, &device_axis,
-            verbose, thr_misclick, thr_doubleclick);
+    return CalibratorXorgPrint(device_name, &device_axis, thr_misclick, thr_doubleclick);
 }
 
 static gboolean output_xorgconfd(const XYinfo new_axis, int swap_xy, int new_swap_xy)
