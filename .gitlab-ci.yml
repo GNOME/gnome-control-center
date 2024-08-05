@@ -33,7 +33,7 @@ stages:
 
 .Build Procedure: &build_procedure
   echo "== Building ==" &&
-  meson setup _build ${BUILD_OPTS} -Dprofile=development &&
+  meson setup _build ${BUILD_OPTS} -Dprofile=development -Dwarning_level=2 &&
   meson compile -C _build 2>&1 | tee compilation.log
 
 .Run Tests: &run_tests
