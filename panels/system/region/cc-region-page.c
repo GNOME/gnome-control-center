@@ -61,29 +61,30 @@ typedef enum {
 struct _CcRegionPage {
         AdwNavigationPage parent_instance;
 
-        CcListRow       *formats_row;
-        AdwBanner       *banner;
-        GtkSizeGroup    *input_size_group;
-        CcListRow       *login_formats_row;
-        GtkWidget       *login_group;
-        CcListRow       *login_language_row;
-        CcListRow       *language_row;
+        CcListRow         *formats_row;
+        AdwBanner         *banner;
+        GtkSizeGroup      *input_size_group;
+        CcListRow         *login_formats_row;
+        GtkWidget         *login_group;
+        CcListRow         *login_language_row;
+        CcListRow         *language_row;
+        CcLanguageChooser *language_chooser;
 
-        gboolean         login_auto_apply;
-        GPermission     *permission;
-        GDBusProxy      *localed;
-        GDBusProxy      *session;
+        gboolean           login_auto_apply;
+        GPermission       *permission;
+        GDBusProxy        *localed;
+        GDBusProxy        *session;
 
-        ActUserManager  *user_manager;
-        ActUser         *user;
-        GSettings       *locale_settings;
+        ActUserManager    *user_manager;
+        ActUser           *user;
+        GSettings         *locale_settings;
 
-        gchar           *language;
-        gchar           *region;
-        gchar           *system_language;
-        gchar           *system_region;
+        gchar             *language;
+        gchar             *region;
+        gchar             *system_language;
+        gchar             *system_region;
 
-        GCancellable    *cancellable;
+        GCancellable      *cancellable;
 };
 
 G_DEFINE_TYPE (CcRegionPage, cc_region_page, ADW_TYPE_NAVIGATION_PAGE)
@@ -353,24 +354,19 @@ update_region (CcRegionPage   *self,
 }
 
 static void
-language_response (CcRegionPage      *self,
-                   gint               response_id,
-                   CcLanguageChooser *chooser)
+language_response (CcRegionPage *self)
 {
         const gchar *language;
+        CcLocaleTarget target;
 
-        if (response_id == GTK_RESPONSE_OK) {
-                CcLocaleTarget target;
+        language = cc_language_chooser_get_language (self->language_chooser);
+        target = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (self->language_chooser), "target"));
+        update_language (self, target, language);
 
-                language = cc_language_chooser_get_language (chooser);
-                target = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (chooser), "target"));
-                update_language (self, target, language);
+        /* Keep format strings consistent with the user's language */
+        update_region (self, target, NULL);
 
-                /* Keep format strings consistent with the user's language */
-                update_region (self, target, NULL);
-        }
-
-        gtk_window_destroy (GTK_WINDOW (chooser));
+        adw_dialog_close (ADW_DIALOG (self->language_chooser));
 }
 
 static const gchar *
@@ -391,19 +387,13 @@ static void
 show_language_chooser (CcRegionPage   *self,
                        CcLocaleTarget  target)
 {
-        CcLanguageChooser *chooser;
-        GtkNative *native;
-
-        chooser = cc_language_chooser_new ();
-        cc_language_chooser_set_language (chooser, get_effective_language (self, target));
-        g_object_set_data (G_OBJECT (chooser), "target", GINT_TO_POINTER (target));
-        g_signal_connect_object (chooser, "response",
+        self->language_chooser = cc_language_chooser_new ();
+        cc_language_chooser_set_language (self->language_chooser, get_effective_language (self, target));
+        g_object_set_data (G_OBJECT (self->language_chooser), "target", GINT_TO_POINTER (target));
+        g_signal_connect_object (G_OBJECT (self->language_chooser), "language-selected",
                                  G_CALLBACK (language_response), self, G_CONNECT_SWAPPED);
 
-        native = gtk_widget_get_native (GTK_WIDGET (self));
-        gtk_window_set_transient_for (GTK_WINDOW (chooser),
-                                      GTK_WINDOW (native));
-        gtk_window_present (GTK_WINDOW (chooser));
+        adw_dialog_present (ADW_DIALOG (self->language_chooser), GTK_WIDGET (self));
 }
 
 static const gchar *

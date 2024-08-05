@@ -37,7 +37,7 @@
 #include <libgnome-desktop/gnome-languages.h>
 
 struct _CcLanguageChooser {
-        GtkDialog parent_instance;
+        AdwDialog parent_instance;
 
         GtkSearchEntry *language_filter_entry;
         GtkListBox     *language_listbox;
@@ -50,7 +50,14 @@ struct _CcLanguageChooser {
         gchar **filter_words;
 };
 
-G_DEFINE_TYPE (CcLanguageChooser, cc_language_chooser, GTK_TYPE_DIALOG)
+enum {
+        LANGUAGE_SELECTED,
+        LAST_SIGNAL
+};
+
+static guint signals[LAST_SIGNAL] = { 0, };
+
+G_DEFINE_TYPE (CcLanguageChooser, cc_language_chooser, ADW_TYPE_DIALOG)
 
 static void
 add_all_languages (CcLanguageChooser *self)
@@ -175,11 +182,6 @@ language_filter_entry_search_changed_cb (CcLanguageChooser *self)
 static void
 show_more (CcLanguageChooser *self, gboolean visible)
 {
-        gint width, height;
-
-        gtk_window_get_default_size (GTK_WINDOW (self), &width, &height);
-        gtk_widget_set_size_request (GTK_WIDGET (self), width, height);
-
         gtk_search_bar_set_search_mode (self->search_bar, visible);
         gtk_widget_grab_focus (visible ? GTK_WIDGET (self->language_filter_entry) : GTK_WIDGET (self->language_listbox));
 
@@ -238,28 +240,16 @@ language_listbox_row_activated_cb (CcLanguageChooser *self, GtkListBoxRow *row)
 
         new_locale_id = cc_language_row_get_locale_id (CC_LANGUAGE_ROW (row));
         if (g_strcmp0 (new_locale_id, self->language) == 0) {
-                gtk_dialog_response (GTK_DIALOG (self),
-                                     gtk_dialog_get_response_for_widget (GTK_DIALOG (self),
-                                                                         GTK_WIDGET (self->select_button)));
+                g_signal_emit (self, signals[LANGUAGE_SELECTED], 0);
         } else {
                 set_locale_id (self, new_locale_id);
         }
 }
 
 static void
-activate_default_cb (CcLanguageChooser *self)
+select_button_clicked_cb (CcLanguageChooser *self)
 {
-        GtkWidget *focus;
-
-        focus = gtk_window_get_focus (GTK_WINDOW (self));
-        if (!focus || !CC_IS_LANGUAGE_ROW (focus))
-                return;
-
-        if (g_strcmp0 (cc_language_row_get_locale_id (CC_LANGUAGE_ROW (focus)), self->language) == 0)
-                return;
-
-        g_signal_stop_emission_by_name (GTK_WINDOW (self), "activate-default");
-        gtk_widget_activate (focus);
+        g_signal_emit (self, signals[LANGUAGE_SELECTED], 0);
 }
 
 void
@@ -297,6 +287,15 @@ cc_language_chooser_class_init (CcLanguageChooserClass *klass)
 
         object_class->dispose = cc_language_chooser_dispose;
 
+        signals[LANGUAGE_SELECTED] =
+                g_signal_new ("language-selected",
+                              G_TYPE_FROM_CLASS (klass),
+                              G_SIGNAL_RUN_LAST,
+                              0,
+                              NULL, NULL, NULL,
+                              G_TYPE_NONE,
+                              0);
+
         gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/common/cc-language-chooser.ui");
 
         gtk_widget_class_bind_template_child (widget_class, CcLanguageChooser, language_filter_entry);
@@ -305,17 +304,15 @@ cc_language_chooser_class_init (CcLanguageChooserClass *klass)
         gtk_widget_class_bind_template_child (widget_class, CcLanguageChooser, search_bar);
         gtk_widget_class_bind_template_child (widget_class, CcLanguageChooser, select_button);
 
-        gtk_widget_class_bind_template_callback (widget_class, activate_default_cb);
         gtk_widget_class_bind_template_callback (widget_class, language_filter_entry_search_changed_cb);
         gtk_widget_class_bind_template_callback (widget_class, language_listbox_row_activated_cb);
+        gtk_widget_class_bind_template_callback (widget_class, select_button_clicked_cb);
 }
 
 CcLanguageChooser *
 cc_language_chooser_new (void)
 {
-        return CC_LANGUAGE_CHOOSER (g_object_new (CC_TYPE_LANGUAGE_CHOOSER,
-                                                  "use-header-bar", 1,
-                                                  NULL));
+        return CC_LANGUAGE_CHOOSER (g_object_new (CC_TYPE_LANGUAGE_CHOOSER, NULL));
 }
 
 void
