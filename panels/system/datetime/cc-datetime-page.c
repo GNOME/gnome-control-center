@@ -769,21 +769,21 @@ sort_date_box (GtkListBoxRow  *a,
   year_row = GTK_LIST_BOX_ROW (self->year_spin_row);
 
   switch (date_endian_get_default (FALSE)) {
-  case DATE_ENDIANESS_BIG:
+  case DATE_ENDIANESS_YMD:
     /* year, month, day */
     if (a == year_row || b == day_row)
       return -1;
     if (a == day_row || b == year_row)
       return 1;
     break;
-  case DATE_ENDIANESS_LITTLE:
+  case DATE_ENDIANESS_DMY:
     /* day, month, year */
     if (a == day_row || b == year_row)
       return -1;
     if (a == year_row || b == day_row)
       return 1;
     break;
-  case DATE_ENDIANESS_MIDDLE:
+  case DATE_ENDIANESS_MDY:
     /* month, day, year */
     if (a == month_row || b == year_row)
       return -1;

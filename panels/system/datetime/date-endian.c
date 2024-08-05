@@ -26,9 +26,9 @@
 
 #include "date-endian.h"
 
-/* We default to returning DATE_ENDIANESS_LITTLE because that's
+/* We default to returning DATE_ENDIANESS_DMY because that's
  * what 3.4 billion people use */
-#define DEFAULT_ENDIANESS DATE_ENDIANESS_LITTLE
+#define DEFAULT_ENDIANESS DATE_ENDIANESS_DMY
 
 typedef enum {
 	ITEM_NONE = 0,
@@ -67,7 +67,7 @@ date_endian_get_default (gboolean verbose)
 		g_print ("%s", fmt);
 
 	if (g_str_equal (fmt, "%F"))
-		return DATE_ENDIANESS_BIG;
+		return DATE_ENDIANESS_YMD;
 
 	i = 0;
 	memset (&items, 0, sizeof(items));
@@ -127,15 +127,15 @@ date_endian_get_default (gboolean verbose)
 	if (items[0] == ITEM_DAY &&
 	    items[1] == ITEM_MONTH &&
 	    items[2] == ITEM_YEAR)
-		return DATE_ENDIANESS_LITTLE;
+		return DATE_ENDIANESS_DMY;
 	if (items[0] == ITEM_YEAR &&
 	    items[1] == ITEM_MONTH &&
 	    items[2] == ITEM_DAY)
-		return DATE_ENDIANESS_BIG;
+		return DATE_ENDIANESS_YMD;
 	if (items[0] == ITEM_MONTH &&
 	    items[1] == ITEM_DAY &&
 	    items[2] == ITEM_YEAR)
-		return DATE_ENDIANESS_MIDDLE;
+		return DATE_ENDIANESS_MDY;
 	if (items[0] == ITEM_YEAR &&
 	    items[1] == ITEM_DAY &&
 	    items[2] == ITEM_MONTH)
@@ -174,11 +174,11 @@ const char *
 date_endian_to_string (DateEndianess endianess)
 {
 	switch (endianess) {
-	case DATE_ENDIANESS_LITTLE:
+	case DATE_ENDIANESS_DMY:
 		return "Little (DD-MM-YYYY)";
-	case DATE_ENDIANESS_BIG:
+	case DATE_ENDIANESS_YMD:
 		return "Big (YYYY-MM-DD)";
-	case DATE_ENDIANESS_MIDDLE:
+	case DATE_ENDIANESS_MDY:
 		return "Middle (MM-DD-YYYY)";
         case DATE_ENDIANESS_YDM:
 		return "YDM (YYYY-DD-MM)";
