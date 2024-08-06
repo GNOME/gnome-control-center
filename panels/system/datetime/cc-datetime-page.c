@@ -716,15 +716,8 @@ setup_datetime_dialog (CcDateTimePage *self)
   /* Big time buttons */
   provider = gtk_css_provider_new ();
   gtk_css_provider_load_from_data (GTK_CSS_PROVIDER (provider),
-                                   ".gnome-control-center-datetime-setup-time>spinbutton,\n"
-                                   ".gnome-control-center-datetime-setup-time>label {\n"
-                                   "    font-size: 250%;\n"
-                                   "}\n"
                                    "gridview.month-grid > child {\n"
                                    "  background: transparent;\n"
-                                   "}\n"
-                                   ".gnome-control-center-datetime-setup-time>spinbutton>entry {\n"
-                                   "    padding: 8px 13px;\n"
                                    "}", -1);
   display = gdk_display_get_default ();
   gtk_style_context_add_provider_for_display (display,
