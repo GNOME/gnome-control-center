@@ -715,10 +715,10 @@ setup_datetime_dialog (CcDateTimePage *self)
 
   /* Big time buttons */
   provider = gtk_css_provider_new ();
-  gtk_css_provider_load_from_data (GTK_CSS_PROVIDER (provider),
+  gtk_css_provider_load_from_string (GTK_CSS_PROVIDER (provider),
                                    "gridview.month-grid > child {\n"
                                    "  background: transparent;\n"
-                                   "}", -1);
+                                   "}");
   display = gdk_display_get_default ();
   gtk_style_context_add_provider_for_display (display,
                                               GTK_STYLE_PROVIDER (provider),
