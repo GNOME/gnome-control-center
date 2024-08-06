@@ -181,7 +181,7 @@ parse_event_variant_iter (CcFirmwareSecurityPage *self,
   g_autofree gchar *date_string = NULL;
   g_autoptr (GDateTime) date = NULL;
   g_autoptr (FwupdSecurityAttr) attr = fu_security_attr_new_from_variant(iter);
-  GtkWidget *row;
+  GtkWidget *row, *icon;
 
   /* unknown to us */
   if (attr->appstream_id == NULL || attr->title == NULL)
@@ -196,14 +196,15 @@ parse_event_variant_iter (CcFirmwareSecurityPage *self,
   row = adw_expander_row_new ();
   if (attr->flags & FWUPD_SECURITY_ATTR_FLAG_SUCCESS)
     {
-      adw_expander_row_set_icon_name (ADW_EXPANDER_ROW (row), "emblem-ok");
-      gtk_widget_add_css_class (row, "success-icon");
+      icon = gtk_image_new_from_icon_name ("emblem-ok");
+      gtk_widget_add_css_class (icon, "success-icon");
     }
   else
     {
-      adw_expander_row_set_icon_name (ADW_EXPANDER_ROW (row), "process-stop");
-      gtk_widget_add_css_class (row, "error-icon");
+      icon = gtk_image_new_from_icon_name ("process-stop");
+      gtk_widget_add_css_class (icon, "error-icon");
     }
+  adw_expander_row_add_prefix (ADW_EXPANDER_ROW (row), icon);
 
   if (attr->description != NULL)
     {
