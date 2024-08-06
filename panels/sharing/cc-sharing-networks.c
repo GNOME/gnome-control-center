@@ -212,7 +212,7 @@ cc_sharing_networks_new_row (const char        *uuid,
     icon_name = "network-wired-symbolic";
   }
 
-  adw_action_row_set_icon_name (ADW_ACTION_ROW (row), icon_name);
+  adw_action_row_add_prefix (ADW_ACTION_ROW (row), gtk_image_new_from_icon_name (icon_name));
   adw_preferences_row_set_title (ADW_PREFERENCES_ROW (row), network_name);
 
   /* Remove button */
