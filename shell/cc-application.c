@@ -88,6 +88,7 @@ help_activated (GSimpleAction *action,
   CcApplication *self = CC_APPLICATION (user_data);
   CcPanel *panel;
   GtkWidget *window;
+  g_autoptr(GtkUriLauncher) launcher = NULL;
   const char *uri = NULL;
 
   panel = cc_shell_get_active_panel (CC_SHELL (self->window));
@@ -95,9 +96,9 @@ help_activated (GSimpleAction *action,
     uri = cc_panel_get_help_uri (panel);
 
   window = cc_shell_get_toplevel (CC_SHELL (self->window));
-  gtk_show_uri (GTK_WINDOW (window),
-                uri ? uri : "help:gnome-help/prefs",
-                GDK_CURRENT_TIME);
+
+  launcher = gtk_uri_launcher_new (uri ? uri : "help:gnome-help/prefs");
+  gtk_uri_launcher_launch (launcher, GTK_WINDOW (window), NULL, NULL, NULL);
 }
 
 static void
