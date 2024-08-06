@@ -865,9 +865,12 @@ static void
 gcm_prefs_calib_export_link_cb (CcColorPanel *self,
                                 const gchar *url)
 {
-  gtk_show_uri (GTK_WINDOW (gtk_widget_get_native (GTK_WIDGET (self))),
-                "help:gnome-help/color-howtoimport",
-                GDK_CURRENT_TIME);
+  g_autoptr(GtkUriLauncher) launcher = NULL;
+
+  launcher = gtk_uri_launcher_new ("help:gnome-help/color-howtoimport");
+  gtk_uri_launcher_launch (launcher,
+                           GTK_WINDOW (gtk_widget_get_native (GTK_WIDGET (self))),
+                           NULL, NULL, NULL);
 }
 
 static void
