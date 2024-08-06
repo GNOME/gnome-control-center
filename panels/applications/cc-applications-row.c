@@ -81,7 +81,7 @@ cc_applications_row_new (GAppInfo *info)
   else
     icon = g_themed_icon_new ("application-x-executable");
   w = gtk_image_new_from_gicon (icon);
-  gtk_style_context_add_class (gtk_widget_get_style_context (w), "lowres-icon");
+  gtk_widget_add_css_class (w, "lowres-icon");
   gtk_image_set_icon_size (GTK_IMAGE (w), GTK_ICON_SIZE_LARGE);
   adw_action_row_add_prefix (ADW_ACTION_ROW (self), w);
 
