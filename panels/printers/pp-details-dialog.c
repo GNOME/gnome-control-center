@@ -230,43 +230,42 @@ select_ppd_in_dialog (PpDetailsDialog *self)
 }
 
 static void
-ppd_file_select_response_cb (PpDetailsDialog *self,
-                             gint             response_id,
-                             GtkDialog       *dialog)
+ppd_file_select_response_cb (GObject      *source,
+                             GAsyncResult *result,
+                             gpointer      user_data)
 {
-  if (response_id == GTK_RESPONSE_ACCEPT)
+  PpDetailsDialog *self = PP_DETAILS_DIALOG (user_data);
+  GtkFileDialog *dialog = GTK_FILE_DIALOG (source);
+  g_autoptr(GFile) file = NULL;
+  g_autoptr(GError) error = NULL;
+  g_autofree gchar *ppd_filename = NULL;
+
+  file = gtk_file_dialog_open_finish (dialog, result, NULL);
+  if (error != NULL)
     {
-      g_autoptr(GFile) file = NULL;
-      g_autofree gchar *ppd_filename = NULL;
-
-      file = gtk_file_chooser_get_file (GTK_FILE_CHOOSER (dialog));
-      ppd_filename = g_file_get_path (file);
-
-      if (self->printer_name && ppd_filename)
-        {
-          printer_set_ppd_file_async (self->printer_name,
-                                      ppd_filename,
-                                      self->cancellable,
-                                      set_ppd_cb,
-                                      self);
-        }
+      g_warning ("Failed to select ppd file: %s", error->message);
+      return;
     }
 
-  gtk_window_destroy (GTK_WINDOW (dialog));
+  ppd_filename = g_file_get_path (file);
+  if (self->printer_name && ppd_filename)
+    {
+      printer_set_ppd_file_async (self->printer_name,
+                                  ppd_filename,
+                                  self->cancellable,
+                                  set_ppd_cb,
+                                  self);
+    }
 }
 
 static void
 select_ppd_manually (PpDetailsDialog *self)
 {
   GtkFileFilter *filter;
-  GtkWidget     *dialog;
+  GListStore    *filters;
+  GtkFileDialog *dialog;
 
-  dialog = gtk_file_chooser_dialog_new (_("Select PPD File"),
-                                        self->toplevel,
-                                        GTK_FILE_CHOOSER_ACTION_OPEN,
-                                        _("_Cancel"), GTK_RESPONSE_CANCEL,
-                                        _("_Open"), GTK_RESPONSE_ACCEPT,
-                                        NULL);
+  dialog = gtk_file_dialog_new ();
 
   filter = gtk_file_filter_new ();
   gtk_file_filter_set_name (filter,
@@ -277,11 +276,11 @@ select_ppd_manually (PpDetailsDialog *self)
   gtk_file_filter_add_pattern (filter, "*.PPD.gz");
   gtk_file_filter_add_pattern (filter, "*.PPD.GZ");
 
-  gtk_file_chooser_set_filter (GTK_FILE_CHOOSER (dialog), filter);
+  filters = g_list_store_new (GTK_TYPE_FILE_FILTER);
+  g_list_store_append (filters, filter);
+  gtk_file_dialog_set_filters (dialog, G_LIST_MODEL (filters));
 
-  gtk_widget_set_visible (dialog, TRUE);
-
-  g_signal_connect_swapped (dialog, "response", G_CALLBACK (ppd_file_select_response_cb), self);
+  gtk_file_dialog_open (dialog, self->toplevel, self->cancellable, ppd_file_select_response_cb, self);
 }
 
 static void
