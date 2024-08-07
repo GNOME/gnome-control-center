@@ -30,7 +30,7 @@
 G_BEGIN_DECLS
 
 #define CC_TYPE_FORMAT_PREVIEW (cc_format_preview_get_type())
-G_DECLARE_FINAL_TYPE (CcFormatPreview, cc_format_preview, CC, FORMAT_PREVIEW, GtkBox)
+G_DECLARE_FINAL_TYPE (CcFormatPreview, cc_format_preview, CC, FORMAT_PREVIEW, AdwPreferencesGroup)
 
 void cc_format_preview_set_region (CcFormatPreview *preview,
                                    const gchar     *region);

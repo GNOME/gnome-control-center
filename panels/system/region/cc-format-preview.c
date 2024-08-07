@@ -32,7 +32,7 @@
 #include <glib/gi18n.h>
 
 struct _CcFormatPreview {
-  GtkBox     parent_instance;
+  AdwPreferencesGroup     parent_instance;
 
   AdwActionRow *date_format_row;
   AdwActionRow *date_time_format_row;
@@ -50,7 +50,7 @@ enum
   PROP_REGION
 };
 
-G_DEFINE_TYPE (CcFormatPreview, cc_format_preview, GTK_TYPE_BOX)
+G_DEFINE_TYPE (CcFormatPreview, cc_format_preview, ADW_TYPE_PREFERENCES_GROUP)
 
 static void
 display_date (AdwActionRow *row, GDateTime *dt, const gchar *format)
@@ -250,7 +250,16 @@ cc_format_preview_class_init (CcFormatPreviewClass *klass)
 void
 cc_format_preview_init (CcFormatPreview *self)
 {
+  g_autoptr(GtkCssProvider) provider = NULL;
+
   gtk_widget_init_template (GTK_WIDGET (self));
+
+  provider = gtk_css_provider_new ();
+  gtk_css_provider_load_from_resource (provider,
+                                       "/org/gnome/control-center/system/region/region.css");
+  gtk_style_context_add_provider_for_display (gdk_display_get_default (),
+                                              GTK_STYLE_PROVIDER (provider),
+                                              GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
 }
 
 void

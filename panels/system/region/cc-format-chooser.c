@@ -49,7 +49,6 @@ struct _CcFormatChooser {
   GtkWidget *region_box;
   GtkWidget *region_title;
   GtkWidget *region_listbox;
-  GtkWidget *preview_box;
   GtkWidget *close_sidebar_button;
   CcFormatPreview *format_preview;
   gboolean adding;
@@ -462,7 +461,6 @@ cc_format_chooser_class_init (CcFormatChooserClass *klass)
         gtk_widget_class_bind_template_child (widget_class, CcFormatChooser, region_listbox);
         gtk_widget_class_bind_template_child (widget_class, CcFormatChooser, region_list);
         gtk_widget_class_bind_template_child (widget_class, CcFormatChooser, region_list_stack);
-        gtk_widget_class_bind_template_child (widget_class, CcFormatChooser, preview_box);
         gtk_widget_class_bind_template_child (widget_class, CcFormatChooser, empty_results_page);
         gtk_widget_class_bind_template_child (widget_class, CcFormatChooser, format_preview);
 
