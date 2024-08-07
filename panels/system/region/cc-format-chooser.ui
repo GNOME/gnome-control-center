@@ -1,81 +1,69 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
-  <template class="CcFormatChooser" parent="GtkDialog">
+  <template class="CcFormatChooser" parent="AdwDialog">
     <property name="title" translatable="yes">Formats</property>
-    <property name="modal">True</property>
-    <property name="default-width">700</property>
-    <property name="default-height">500</property>
+    <property name="content-width">768</property>
+    <property name="content-height">600</property>
+    <property name="width-request">360</property>
+    <property name="height-request">200</property>
+    <property name="focus-widget">region_filter_entry</property>
 
-    <!-- Titlebar -->
-    <child type="titlebar">
-      <object class="GtkHeaderBar" id="title_bar">
-        <property name="show-title-buttons">False</property>
+    <child>
+      <object class="AdwBreakpoint">
+        <condition>max-width: 550sp</condition>
+        <setter object="split_view" property="collapsed">True</setter>
+      </object>
+    </child>
 
-        <child>
-          <object class="GtkStack" id="title_buttons">
-            <property name="hhomogeneous">False</property>
-            <property name="vhomogeneous">False</property>
+    <property name="child">
+      <object class="AdwToolbarView">
+        <property name="top-bar-style">raised</property>
+
+        <child type="top">
+          <object class="AdwHeaderBar">
+            <property name="show-end-title-buttons">False</property>
+            <property name="show-start-title-buttons">False</property>
 
             <!-- Cancel button -->
-            <child>
-              <object class="GtkButton" id="cancel_button">
+            <child type="start">
+              <object class="GtkButton">
                 <property name="valign">center</property>
                 <property name="use-underline">1</property>
                 <property name="label" translatable="yes">_Cancel</property>
+                <signal name="clicked" handler="adw_dialog_close" object="CcFormatChooser" swapped="yes"/>
               </object>
             </child>
 
-            <!-- Back button -->
-            <child>
-              <object class="GtkButton" id="back_button">
-                <property name="icon_name">go-previous-symbolic</property>
-                <signal name="clicked" handler="format_chooser_back_button_clicked_cb" object="CcFormatChooser" swapped="yes" />
+            <!-- Select button -->
+            <child type="end">
+              <object class="GtkButton">
+                <property name="valign">center</property>
+                <property name="use-underline">True</property>
+                <property name="label" translatable="yes">_Select</property>
+                <signal name="clicked" handler="select_button_clicked_cb" object="CcFormatChooser" swapped="yes"/>
                 <style>
-                  <class name="image-button" />
+                  <class name="suggested-action" />
                 </style>
-                <accessibility>
-                  <property name="label" translatable="yes">Back</property>
-                </accessibility>
               </object>
             </child>
 
           </object>
         </child>
 
-        <child type="end">
-          <object class="GtkButton" id="done_button">
-            <property name="valign">center</property>
-            <property name="use-underline">1</property>
-            <property name="label" translatable="yes">_Done</property>
-            <style>
-             <class name="suggested-action" />
-            </style>
-          </object>
-        </child>
+        <property name="content">
+          <object class="AdwOverlaySplitView" id="split_view">
+            <property name="sidebar-position">end</property>
+            <signal name="notify::collapsed" handler="format_chooser_split_view_collapsed_cb" object="CcFormatChooser" swapped="yes"/>
 
-      </object>
-    </child>
-    <child>
-      <object class="GtkBox" id="dialog-vbox1">
-        <property name="orientation">vertical</property>
-        <child>
-          <object class="AdwLeaflet" id="main_leaflet">
-            <property name="hexpand">True</property>
-            <property name="vexpand">True</property>
-            <signal name="notify::folded" handler="format_chooser_leaflet_fold_changed_cb" object="CcFormatChooser" swapped="yes"/>
-            <child>
-              <object class="GtkBox" id="region_box">
-                <property name="vexpand">True</property>
-                <property name="hexpand">True</property>
-                <property name="orientation">vertical</property>
-
+            <property name="content">
+              <object class="AdwToolbarView">
                 <!-- Language search -->
-                <child>
+                <child type="top">
                   <object class="GtkSearchEntry" id="region_filter_entry">
                     <property name="hexpand">True</property>
                     <property name="placeholder-text" translatable="yes">Search locales</property>
-                    <property name="margin-top">18</property>
-                    <property name="margin-bottom">18</property>
+                    <property name="margin-top">12</property>
+                    <property name="margin-bottom">12</property>
                     <property name="margin-start">18</property>
                     <property name="margin-end">18</property>
                     <signal name="search-changed" handler="filter_changed" object="CcFormatChooser" swapped="yes" />
@@ -83,132 +71,144 @@
                   </object>
                 </child>
 
-                <child>
-                  <object class="GtkSeparator">
-                    <style>
-                      <class name="sidebar" />
-                    </style>
-                  </object>
-                </child>
-
                 <!-- Language format list -->
-                <child>
+                <property name="content">
                   <object class="GtkStack" id="region_list_stack">
                     <child>
-                      <object class="GtkScrolledWindow" id="region_list">
-                        <property name="vexpand">True</property>
-                        <property name="hscrollbar_policy">never</property>
-                        <property name="vscrollbar_policy">automatic</property>
-                        <property name="propagate-natural-height">True</property>
-                        <child>
-                          <object class="GtkBox">
-                            <property name="margin-top">18</property>
-                            <property name="margin-bottom">18</property>
-                            <property name="margin-start">18</property>
-                            <property name="margin-end">18</property>
-                            <property name="orientation">vertical</property>
+                      <object class="GtkStackPage">
+                        <property name="name">region_list_page</property>
+                        <property name="child">
+                          <object class="GtkScrolledWindow">
+                            <property name="child">
+                              <object class="AdwClamp">
+                                <property name="child">
+                                  <object class="AdwPreferencesGroup">
+                                    <property name="margin-top">6</property>
+                                    <property name="margin-bottom">12</property>
+                                    <property name="margin-start">12</property>
+                                    <property name="margin-end">12</property>
+                                    <!-- Common formats title -->
+                                    <child>
+                                      <object class="GtkLabel" id="common_region_title">
+                                        <property name="label" translatable="yes">Common Formats</property>
+                                        <property name="halign">start</property>
+                                        <property name="margin-bottom">6</property>
+                                        <attributes>
+                                          <attribute name="weight" value="bold"/>
+                                        </attributes>
+                                        <style>
+                                          <class name="dim-label" />
+                                        </style>
+                                      </object>
+                                    </child>
 
-                            <!-- Common formats title -->
-                            <child>
-                              <object class="GtkLabel" id="common_region_title">
-                                <property name="label" translatable="yes">Common Formats</property>
-                                <property name="halign">start</property>
-                                <property name="margin-bottom">6</property>
-                                <attributes>
-                                  <attribute name="weight" value="bold"/>
-                                </attributes>
-                                <style>
-                                 <class name="dim-label" />
-                                </style>
+                                    <!-- Common formats list -->
+                                    <child>
+                                      <object class="GtkListBox" id="common_region_listbox">
+                                        <property name="margin-bottom">24</property>
+                                        <property name="selection-mode">none</property>
+                                        <signal name="row-activated" handler="row_activated" object="CcFormatChooser" swapped="yes" />
+                                        <style>
+                                          <class name="boxed-list" />
+                                        </style>
+                                      </object>
+                                    </child>
+
+                                    <!-- Complete formats title -->
+                                    <child>
+                                      <object class="GtkLabel" id="region_title">
+                                        <property name="label" translatable="yes">All Formats</property>
+                                        <property name="halign">start</property>
+                                        <property name="margin-bottom">6</property>
+                                        <attributes>
+                                          <attribute name="weight" value="bold"/>
+                                        </attributes>
+                                        <style>
+                                         <class name="dim-label" />
+                                        </style>
+                                      </object>
+                                    </child>
+
+                                    <!-- Complete formats list -->
+                                    <child>
+                                      <object class="GtkListBox" id="region_listbox">
+                                        <property name="vexpand">True</property>
+                                        <property name="halign">fill</property>
+                                        <property name="valign">start</property>
+                                        <property name="selection-mode">none</property>
+                                        <signal name="row-activated" handler="row_activated" object="CcFormatChooser" swapped="yes" />
+                                        <style>
+                                         <class name="boxed-list" />
+                                        </style>
+                                      </object>
+                                    </child>
+
+                                  </object>
+                                </property>
                               </object>
-                            </child>
 
-                            <!-- Common formats list -->
-                            <child>
-                              <object class="GtkListBox" id="common_region_listbox">
-                                <property name="margin-bottom">24</property>
-                                <property name="selection-mode">none</property>
-                                <signal name="row-activated" handler="row_activated" object="CcFormatChooser" swapped="yes" />
-                                <style>
-                                 <class name="boxed-list" />
-                                </style>
-                              </object>
-                            </child>
-
-                            <!-- Complete formats title -->
-                            <child>
-                              <object class="GtkLabel" id="region_title">
-                                <property name="label" translatable="yes">All Formats</property>
-                                <property name="halign">start</property>
-                                <property name="margin-bottom">6</property>
-                                <attributes>
-                                  <attribute name="weight" value="bold"/>
-                                </attributes>
-                                <style>
-                                 <class name="dim-label" />
-                                </style>
-                              </object>
-                            </child>
-
-                            <!-- Complete formats list -->
-                            <child>
-                              <object class="GtkListBox" id="region_listbox">
-                                <property name="vexpand">True</property>
-                                <property name="halign">fill</property>
-                                <property name="valign">start</property>
-                                <property name="selection-mode">none</property>
-                                <signal name="row-activated" handler="row_activated" object="CcFormatChooser" swapped="yes" />
-                                <style>
-                                 <class name="boxed-list" />
-                                </style>
-                              </object>
-                            </child>
-
+                            </property>
                           </object>
-                        </child>
+                        </property>
                       </object>
                     </child>
 
                     <!-- Empty search results view -->
                     <child>
-                      <object class="AdwStatusPage" id="empty_results_page">
-                        <property name="icon_name">edit-find-symbolic</property>
-                        <property name="title" translatable="yes">No Results Found</property>
-                        <property name="description" translatable="yes">Try a different search</property>
+                      <object class="GtkStackPage">
+                        <property name="name">empty_results_page</property>
+                        <property name="child">
+                          <object class="AdwStatusPage" id="empty_results_page">
+                            <property name="icon_name">edit-find-symbolic</property>
+                            <property name="title" translatable="yes">No Results Found</property>
+                            <property name="description" translatable="yes">Try a different search</property>
+                          </object>
+                        </property>
                       </object>
                     </child>
 
                   </object>
-                </child>
+                </property>
 
               </object>
-            </child>
-
-            <child>
-              <object class="GtkSeparator" id="panel_separator">
-                <property name="orientation">vertical</property>
-                <style>
-                 <class name="sidebar" />
-                </style>
-              </object>
-            </child>
+            </property>
 
             <!-- Format preview -->
-            <child>
-              <object class="GtkBox" id="preview_box">
+            <property name="sidebar">
+              <object class="GtkBox">
                 <property name="hexpand">False</property>
                 <property name="orientation">vertical</property>
                 <child>
-                  <object class="GtkLabel">
-                    <property name="margin_top">24</property>
-                    <property name="margin_bottom">6</property>
-                    <property name="halign">center</property>
-                    <property name="hexpand">True</property>
-                    <property name="xalign">0</property>
-                    <property name="label" translatable="yes">Preview</property>
-                    <style>
-                      <class name="title-3" />
-                    </style>
+                  <object class="GtkCenterBox">
+                    <child type="center">
+                      <object class="GtkLabel">
+                        <property name="margin_top">24</property>
+                        <property name="margin_bottom">6</property>
+                        <property name="halign">center</property>
+                        <property name="hexpand">True</property>
+                        <property name="xalign">0</property>
+                        <property name="label" translatable="yes">Preview</property>
+                        <style>
+                          <class name="title-3" />
+                        </style>
+                      </object>
+                    </child>
+                    <child type="end">
+                      <object class="GtkButton" id="close_sidebar_button">
+                        <property name="icon-name">window-close-symbolic</property>
+                        <property name="tooltip-text" translatable="yes">Close Preview</property>
+                        <property name="visible" bind-source="split_view" bind-property="collapsed" bind-flags="sync-create" />
+                        <property name="valign">center</property>
+                        <property name="margin-start">12</property>
+                        <property name="margin-end">12</property>
+                        <signal name="clicked" handler="format_chooser_close_sidebar_button_pressed_cb" object="CcFormatChooser" swapped="yes"/>
+
+                        <style>
+                          <class name="flat"/>
+                          <class name="circular"/>
+                        </style>
+                      </object>
+                    </child>
                   </object>
                 </child>
                 <child>
@@ -217,15 +217,13 @@
                   </object>
                 </child>
               </object>
-            </child>
+            </property>
 
           </object>
-        </child>
+        </property>
+
       </object>
-    </child>
-    <action-widgets>
-      <action-widget response="-5" default="true">done_button</action-widget>
-      <action-widget response="-6">cancel_button</action-widget>
-    </action-widgets>
+    </property>
+
   </template>
 </interface>
