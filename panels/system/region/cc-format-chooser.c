@@ -37,15 +37,10 @@
 #include <libgnome-desktop/gnome-languages.h>
 
 struct _CcFormatChooser {
-  GtkDialog parent_instance;
+  AdwDialog parent_instance;
 
-  GtkWidget *title_bar;
-  GtkWidget *title_buttons;
-  GtkWidget *cancel_button;
-  GtkWidget *back_button;
-  GtkWidget *done_button;
   GtkWidget *empty_results_page;
-  GtkWidget *main_leaflet;
+  GtkWidget *split_view;
   GtkWidget *region_filter_entry;
   GtkWidget *region_list;
   GtkWidget *region_list_stack;
@@ -55,6 +50,7 @@ struct _CcFormatChooser {
   GtkWidget *region_title;
   GtkWidget *region_listbox;
   GtkWidget *preview_box;
+  GtkWidget *close_sidebar_button;
   CcFormatPreview *format_preview;
   gboolean adding;
   gboolean showing_extra;
@@ -64,7 +60,14 @@ struct _CcFormatChooser {
   gchar **filter_words;
 };
 
-G_DEFINE_TYPE (CcFormatChooser, cc_format_chooser, GTK_TYPE_DIALOG)
+enum {
+        LANGUAGE_SELECTED,
+        LAST_SIGNAL
+};
+
+static guint signals[LAST_SIGNAL] = { 0, };
+
+G_DEFINE_TYPE (CcFormatChooser, cc_format_chooser, ADW_TYPE_DIALOG)
 
 static void
 update_check_button_for_list (GtkWidget   *list_box,
@@ -149,18 +152,7 @@ on_stop_search (CcFormatChooser *self)
   if (search_text && g_strcmp0 (search_text, "") != 0)
     gtk_editable_set_text (GTK_EDITABLE (self->region_filter_entry), "");
   else
-    gtk_window_close (GTK_WINDOW (self));
-}
-
-static void
-format_chooser_back_button_clicked_cb (CcFormatChooser *self)
-{
-  g_assert (CC_IS_FORMAT_CHOOSER (self));
-
-  gtk_window_set_title (GTK_WINDOW (self), _("Formats"));
-  adw_leaflet_set_visible_child (ADW_LEAFLET (self->main_leaflet), self->region_box);
-  gtk_stack_set_visible_child (GTK_STACK (self->title_buttons), self->cancel_button);
-  gtk_widget_set_visible (self->done_button, TRUE);
+    adw_dialog_close (ADW_DIALOG (self));
 }
 
 static void
@@ -177,39 +169,33 @@ set_preview_button_visible (GtkWidget *row,
 }
 
 static void
-format_chooser_leaflet_fold_changed_cb (CcFormatChooser *self)
+format_chooser_split_view_collapsed_cb (CcFormatChooser *self)
 {
-  GtkWidget *child;
-  gboolean folded;
+  gboolean is_collapsed;
 
-  g_assert (CC_IS_FORMAT_CHOOSER (self));
+  is_collapsed = adw_overlay_split_view_get_collapsed (ADW_OVERLAY_SPLIT_VIEW (self->split_view));
 
-  folded = adw_leaflet_get_folded (ADW_LEAFLET (self->main_leaflet));
-
-  for (child = gtk_widget_get_first_child (self->common_region_listbox);
+  for (GtkWidget *child = gtk_widget_get_first_child (self->common_region_listbox);
        child;
        child = gtk_widget_get_next_sibling (child))
     {
       if (GTK_IS_LIST_BOX_ROW (child))
-        set_preview_button_visible (child, folded);
+        set_preview_button_visible (child, is_collapsed);
     }
 
-  for (child = gtk_widget_get_first_child (self->region_listbox);
+  for (GtkWidget *child = gtk_widget_get_first_child (self->region_listbox);
        child;
        child = gtk_widget_get_next_sibling (child))
     {
       if (GTK_IS_LIST_BOX_ROW (child))
-        set_preview_button_visible (child, folded);
+        set_preview_button_visible (child, is_collapsed);
     }
+}
 
-  if (!folded)
-    {
-      cc_format_preview_set_region (self->format_preview, self->region);
-      gtk_window_set_title (GTK_WINDOW (self), _("Formats"));
-      adw_leaflet_set_visible_child (ADW_LEAFLET (self->main_leaflet), self->region_box);
-      gtk_stack_set_visible_child (GTK_STACK (self->title_buttons), self->cancel_button);
-      gtk_widget_set_visible (self->done_button, TRUE);
-    }
+static void
+format_chooser_close_sidebar_button_pressed_cb (CcFormatChooser *self)
+{
+  adw_overlay_split_view_set_show_sidebar (ADW_OVERLAY_SPLIT_VIEW (self->split_view), FALSE);
 }
 
 static void
@@ -217,7 +203,7 @@ preview_button_clicked_cb (CcFormatChooser *self,
                            GtkWidget       *button)
 {
   GtkWidget *row;
-  const gchar *region, *locale_name;
+  const gchar *region;
 
   g_assert (CC_IS_FORMAT_CHOOSER (self));
   g_assert (GTK_IS_WIDGET (button));
@@ -226,15 +212,9 @@ preview_button_clicked_cb (CcFormatChooser *self,
   g_assert (row);
 
   region = g_object_get_data (G_OBJECT (row), "locale-id");
-  locale_name = g_object_get_data (G_OBJECT (row), "locale-name");
   cc_format_preview_set_region (self->format_preview, region);
 
-  adw_leaflet_set_visible_child (ADW_LEAFLET (self->main_leaflet), self->preview_box);
-  gtk_stack_set_visible_child (GTK_STACK (self->title_buttons), self->back_button);
-  gtk_widget_set_visible (self->done_button, FALSE);
-
-  if (locale_name)
-    gtk_window_set_title (GTK_WINDOW (self), locale_name);
+  adw_overlay_split_view_set_show_sidebar (ADW_OVERLAY_SPLIT_VIEW (self->split_view), TRUE);
 }
 
 static GtkWidget *
@@ -429,31 +409,16 @@ row_activated (CcFormatChooser *chooser,
                 return;
 
         new_locale_id = g_object_get_data (G_OBJECT (row), "locale-id");
-        if (g_strcmp0 (new_locale_id, chooser->region) == 0) {
-                gtk_dialog_response (GTK_DIALOG (chooser),
-                                     gtk_dialog_get_response_for_widget (GTK_DIALOG (chooser),
-                                                                         chooser->done_button));
-        } else {
+        if (g_strcmp0 (new_locale_id, chooser->region) == 0)
+                g_signal_emit (chooser, signals[LANGUAGE_SELECTED], 0);
+        else
                 set_locale_id (chooser, new_locale_id);
-        }
 }
 
 static void
-activate_default (CcFormatChooser *chooser)
+select_button_clicked_cb (CcFormatChooser *self)
 {
-        GtkWidget *focus;
-        const gchar *locale_id;
-
-        focus = gtk_window_get_focus (GTK_WINDOW (chooser));
-        if (!focus)
-                return;
-
-        locale_id = g_object_get_data (G_OBJECT (focus), "locale-id");
-        if (g_strcmp0 (locale_id, chooser->region) == 0)
-                return;
-
-        g_signal_stop_emission_by_name (chooser, "activate-default");
-        gtk_widget_activate (focus);
+        g_signal_emit (self, signals[LANGUAGE_SELECTED], 0);
 }
 
 static void
@@ -477,16 +442,18 @@ cc_format_chooser_class_init (CcFormatChooserClass *klass)
 
         g_type_ensure (CC_TYPE_FORMAT_PREVIEW);
 
-        gtk_widget_class_add_binding_action (widget_class, GDK_KEY_Escape, 0, "window.close", NULL);
+        signals[LANGUAGE_SELECTED] =
+                g_signal_new ("language-selected",
+                              G_TYPE_FROM_CLASS (klass),
+                              G_SIGNAL_RUN_LAST,
+                              0,
+                              NULL, NULL, NULL,
+                              G_TYPE_NONE,
+                              0);
 
         gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/system/region/cc-format-chooser.ui");
 
-        gtk_widget_class_bind_template_child (widget_class, CcFormatChooser, title_bar);
-        gtk_widget_class_bind_template_child (widget_class, CcFormatChooser, title_buttons);
-        gtk_widget_class_bind_template_child (widget_class, CcFormatChooser, cancel_button);
-        gtk_widget_class_bind_template_child (widget_class, CcFormatChooser, back_button);
-        gtk_widget_class_bind_template_child (widget_class, CcFormatChooser, done_button);
-        gtk_widget_class_bind_template_child (widget_class, CcFormatChooser, main_leaflet);
+        gtk_widget_class_bind_template_child (widget_class, CcFormatChooser, split_view);
         gtk_widget_class_bind_template_child (widget_class, CcFormatChooser, region_filter_entry);
         gtk_widget_class_bind_template_child (widget_class, CcFormatChooser, common_region_title);
         gtk_widget_class_bind_template_child (widget_class, CcFormatChooser, common_region_listbox);
@@ -499,8 +466,9 @@ cc_format_chooser_class_init (CcFormatChooserClass *klass)
         gtk_widget_class_bind_template_child (widget_class, CcFormatChooser, empty_results_page);
         gtk_widget_class_bind_template_child (widget_class, CcFormatChooser, format_preview);
 
-        gtk_widget_class_bind_template_callback (widget_class, format_chooser_back_button_clicked_cb);
-        gtk_widget_class_bind_template_callback (widget_class, format_chooser_leaflet_fold_changed_cb);
+        gtk_widget_class_bind_template_callback (widget_class, format_chooser_split_view_collapsed_cb);
+        gtk_widget_class_bind_template_callback (widget_class, format_chooser_close_sidebar_button_pressed_cb);
+        gtk_widget_class_bind_template_callback (widget_class, select_button_clicked_cb);
         gtk_widget_class_bind_template_callback (widget_class, filter_changed);
         gtk_widget_class_bind_template_callback (widget_class, row_activated);
         gtk_widget_class_bind_template_callback (widget_class, on_stop_search);
@@ -520,18 +488,25 @@ cc_format_chooser_init (CcFormatChooser *chooser)
 
         add_all_regions (chooser);
         gtk_list_box_invalidate_filter (GTK_LIST_BOX (chooser->region_listbox));
-        format_chooser_leaflet_fold_changed_cb (chooser);
+        format_chooser_split_view_collapsed_cb (chooser);
 
-        g_signal_connect_object (chooser, "activate-default",
-                                 G_CALLBACK (activate_default), chooser, G_CONNECT_SWAPPED);
+        /* HACK: Removing the "top-bar" class adds a border at the bottom of the
+         * headerbar to better distinguish the headerbar from the split view. */
+        for (GtkWidget *sibling = GTK_WIDGET (chooser->split_view);
+             sibling;
+             sibling = gtk_widget_get_next_sibling (sibling))
+          {
+             if (GTK_IS_REVEALER (sibling)) {
+               gtk_widget_remove_css_class (sibling, "top-bar");
+               break;
+             }
+          }
 }
 
 CcFormatChooser *
 cc_format_chooser_new (void)
 {
-        return CC_FORMAT_CHOOSER (g_object_new (CC_TYPE_FORMAT_CHOOSER,
-                                                "use-header-bar", 1,
-                                                NULL));
+        return CC_FORMAT_CHOOSER (g_object_new (CC_TYPE_FORMAT_CHOOSER, NULL));
 }
 
 void
