@@ -1,77 +1,65 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
-  <template class="CcFormatPreview" parent="GtkBox">
-    <property name="margin-top">18</property>
-    <property name="margin-bottom">18</property>
-    <property name="margin-start">18</property>
-    <property name="margin-end">18</property>
-    <property name="hexpand">True</property>
-    <property name="spacing">4</property>
-    <property name="orientation">vertical</property>
+  <template class="CcFormatPreview" parent="AdwPreferencesGroup">
+     <!-- Dates -->
     <child>
-      <object class="AdwPreferencesGroup">
-
-       <!-- Dates -->
-        <child>
-          <object class="AdwActionRow" id="date_format_row">
-            <property name="title" translatable="yes">Dates</property>
-            <style>
-              <class name="property"/>
-            </style>
-          </object>
-        </child>
-
-        <!-- Times -->
-        <child>
-          <object class="AdwActionRow" id="time_format_row">
-            <property name="title" translatable="yes">Times</property>
-            <style>
-              <class name="property"/>
-            </style>
-          </object>
-        </child>
-
-        <!-- Date & Times -->
-        <child>
-          <object class="AdwActionRow" id="date_time_format_row">
-            <property name="title" translatable="yes">Dates &amp;amp; Times</property>
-            <style>
-              <class name="property"/>
-            </style>
-          </object>
-        </child>
-
-        <!-- Numbers -->
-        <child>
-          <object class="AdwActionRow" id="number_format_row">
-            <property name="title" translatable="yes">Numbers</property>
-            <style>
-              <class name="property"/>
-            </style>
-          </object>
-        </child>
-
-        <!-- Measurement -->
-        <child>
-          <object class="AdwActionRow" id="measurement_format_row">
-            <property name="title" translatable="yes">Measurement</property>
-            <style>
-              <class name="property"/>
-            </style>
-          </object>
-        </child>
-
-        <!-- Paper -->
-        <child>
-          <object class="AdwActionRow" id="paper_format_row">
-            <property name="title" translatable="yes">Paper</property>
-            <style>
-              <class name="property"/>
-            </style>
-          </object>
-        </child>
-
+      <object class="AdwActionRow" id="date_format_row">
+        <property name="title" translatable="yes">Dates</property>
+        <style>
+          <class name="property"/>
+        </style>
       </object>
     </child>
+
+    <!-- Times -->
+    <child>
+      <object class="AdwActionRow" id="time_format_row">
+        <property name="title" translatable="yes">Times</property>
+        <style>
+          <class name="property"/>
+        </style>
+      </object>
+    </child>
+
+    <!-- Date & Times -->
+    <child>
+      <object class="AdwActionRow" id="date_time_format_row">
+        <property name="title" translatable="yes">Dates &amp;amp; Times</property>
+        <style>
+          <class name="property"/>
+        </style>
+      </object>
+    </child>
+
+    <!-- Numbers -->
+    <child>
+      <object class="AdwActionRow" id="number_format_row">
+        <property name="title" translatable="yes">Numbers</property>
+        <style>
+          <class name="property"/>
+        </style>
+      </object>
+    </child>
+
+    <!-- Measurement -->
+    <child>
+      <object class="AdwActionRow" id="measurement_format_row">
+        <property name="title" translatable="yes">Measurement</property>
+        <style>
+          <class name="property"/>
+        </style>
+      </object>
+    </child>
+
+    <!-- Paper -->
+    <child>
+      <object class="AdwActionRow" id="paper_format_row">
+        <property name="title" translatable="yes">Paper</property>
+        <style>
+          <class name="property"/>
+        </style>
+      </object>
+    </child>
+
   </template>
 </interface>

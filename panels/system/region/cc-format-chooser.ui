@@ -59,15 +59,21 @@
               <object class="AdwToolbarView">
                 <!-- Language search -->
                 <child type="top">
-                  <object class="GtkSearchEntry" id="region_filter_entry">
-                    <property name="hexpand">True</property>
-                    <property name="placeholder-text" translatable="yes">Search locales</property>
-                    <property name="margin-top">12</property>
-                    <property name="margin-bottom">12</property>
-                    <property name="margin-start">18</property>
-                    <property name="margin-end">18</property>
-                    <signal name="search-changed" handler="filter_changed" object="CcFormatChooser" swapped="yes" />
-                    <signal name="stop-search" handler="on_stop_search" object="CcFormatChooser" swapped="yes" />
+                  <object class="AdwClamp">
+                    <property name="tightening-threshold">240</property>
+                    <property name="maximum-size">480</property>
+                    <property name="child">
+                      <object class="GtkSearchEntry" id="region_filter_entry">
+                        <property name="hexpand">True</property>
+                        <property name="placeholder-text" translatable="yes">Search locales</property>
+                        <property name="margin-top">18</property>
+                        <property name="margin-bottom">18</property>
+                        <property name="margin-start">18</property>
+                        <property name="margin-end">18</property>
+                        <signal name="search-changed" handler="filter_changed" object="CcFormatChooser" swapped="yes" />
+                        <signal name="stop-search" handler="on_stop_search" object="CcFormatChooser" swapped="yes" />
+                      </object>
+                    </property>
                   </object>
                 </child>
 
@@ -175,38 +181,38 @@
 
             <!-- Format preview -->
             <property name="sidebar">
-              <object class="GtkBox">
-                <property name="hexpand">False</property>
-                <property name="orientation">vertical</property>
+              <object class="AdwPreferencesPage">
                 <child>
-                  <object class="GtkCenterBox">
-                    <child type="center">
-                      <object class="GtkLabel">
-                        <property name="margin_top">24</property>
-                        <property name="margin_bottom">6</property>
-                        <property name="halign">center</property>
-                        <property name="hexpand">True</property>
-                        <property name="xalign">0</property>
-                        <property name="label" translatable="yes">Preview</property>
-                        <style>
-                          <class name="title-3" />
-                        </style>
-                      </object>
-                    </child>
-                    <child type="end">
-                      <object class="GtkButton" id="close_sidebar_button">
-                        <property name="icon-name">window-close-symbolic</property>
-                        <property name="tooltip-text" translatable="yes">Close Preview</property>
-                        <property name="visible" bind-source="split_view" bind-property="collapsed" bind-flags="sync-create" />
-                        <property name="valign">center</property>
-                        <property name="margin-start">12</property>
-                        <property name="margin-end">12</property>
-                        <signal name="clicked" handler="format_chooser_close_sidebar_button_pressed_cb" object="CcFormatChooser" swapped="yes"/>
+                  <object class="AdwPreferencesGroup">
+                    <child>
+                      <object class="GtkCenterBox">
+                        <child type="center">
+                          <object class="GtkLabel">
+                            <property name="halign">center</property>
+                            <property name="hexpand">True</property>
+                            <property name="xalign">0</property>
+                            <property name="label" translatable="yes">Preview</property>
+                            <style>
+                              <class name="title-3" />
+                            </style>
+                          </object>
+                        </child>
+                        <child type="end">
+                          <object class="GtkButton" id="close_sidebar_button">
+                            <property name="icon-name">window-close-symbolic</property>
+                            <property name="tooltip-text" translatable="yes">Close Preview</property>
+                            <property name="visible" bind-source="split_view" bind-property="collapsed" bind-flags="sync-create" />
+                            <property name="valign">center</property>
+                            <property name="margin-start">12</property>
+                            <property name="margin-end">12</property>
+                            <signal name="clicked" handler="format_chooser_close_sidebar_button_pressed_cb" object="CcFormatChooser" swapped="yes"/>
 
-                        <style>
-                          <class name="flat"/>
-                          <class name="circular"/>
-                        </style>
+                            <style>
+                              <class name="flat"/>
+                              <class name="circular"/>
+                            </style>
+                          </object>
+                        </child>
                       </object>
                     </child>
                   </object>
