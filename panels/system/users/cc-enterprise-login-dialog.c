@@ -549,7 +549,7 @@ realm_manager_discover_cb (GObject       *source,
     }
   else
     {
-      cc_entry_feedback_update (self->domain_feedback, "dialog-warning-symbolic", _("Domain not found"));
+      cc_entry_feedback_update (self->domain_feedback, "dialog-error-symbolic", _("Domain not found"));
     }
 
   main_page_validate (self);
