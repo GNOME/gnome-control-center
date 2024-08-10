@@ -22,8 +22,8 @@
 
 G_BEGIN_DECLS
 
-G_DECLARE_FINAL_TYPE (CcCursorSizeDialog, cc_cursor_size_dialog, CC, CURSOR_SIZE_DIALOG, AdwDialog)
+G_DECLARE_FINAL_TYPE (CcCursorSizePage, cc_cursor_size_page, CC, CURSOR_SIZE_PAGE, AdwNavigationPage)
 
-CcCursorSizeDialog *cc_cursor_size_dialog_new (void);
+CcCursorSizePage *cc_cursor_size_page_new (void);
 
 G_END_DECLS

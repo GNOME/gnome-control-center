@@ -11,7 +11,7 @@ i18n.merge_file(
 )
 
 sources = files(
-  'cc-cursor-size-dialog.c',
+  'cc-cursor-size-page.c',
   'cc-ua-panel.c',
   'cc-ua-hearing-page.c',
   'cc-ua-mouse-page.c',

@@ -16,24 +16,24 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  */
 
-#include "cc-cursor-size-dialog.h"
+#include "cc-cursor-size-page.h"
 
 #define INTERFACE_SETTINGS           "org.gnome.desktop.interface"
 #define KEY_MOUSE_CURSOR_SIZE        "cursor-size"
 
-struct _CcCursorSizeDialog
+struct _CcCursorSizePage
 {
-  AdwDialog parent;
+  AdwNavigationPage parent;
 
   GtkFlowBox *cursor_box;
 
   GSettings *interface_settings;
 };
 
-G_DEFINE_TYPE (CcCursorSizeDialog, cc_cursor_size_dialog, ADW_TYPE_DIALOG);
+G_DEFINE_TYPE (CcCursorSizePage, cc_cursor_size_page, ADW_TYPE_NAVIGATION_PAGE);
 
 static void
-cursor_size_toggled (CcCursorSizeDialog *self, GtkWidget *button)
+cursor_size_toggled (CcCursorSizePage *self, GtkWidget *button)
 {
   guint cursor_size;
 
@@ -46,30 +46,30 @@ cursor_size_toggled (CcCursorSizeDialog *self, GtkWidget *button)
 }
 
 static void
-cc_cursor_size_dialog_dispose (GObject *object)
+cc_cursor_size_page_dispose (GObject *object)
 {
-  CcCursorSizeDialog *self = CC_CURSOR_SIZE_DIALOG (object);
+  CcCursorSizePage *self = CC_CURSOR_SIZE_PAGE (object);
 
   g_clear_object (&self->interface_settings);
 
-  G_OBJECT_CLASS (cc_cursor_size_dialog_parent_class)->dispose (object);
+  G_OBJECT_CLASS (cc_cursor_size_page_parent_class)->dispose (object);
 }
 
 static void
-cc_cursor_size_dialog_class_init (CcCursorSizeDialogClass *klass)
+cc_cursor_size_page_class_init (CcCursorSizePageClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
-  object_class->dispose = cc_cursor_size_dialog_dispose;
+  object_class->dispose = cc_cursor_size_page_dispose;
 
-  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/universal-access/cc-cursor-size-dialog.ui");
+  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/universal-access/cc-cursor-size-page.ui");
 
-  gtk_widget_class_bind_template_child (widget_class, CcCursorSizeDialog, cursor_box);
+  gtk_widget_class_bind_template_child (widget_class, CcCursorSizePage, cursor_box);
 }
 
 static void
-cc_cursor_size_dialog_init (CcCursorSizeDialog *self)
+cc_cursor_size_page_init (CcCursorSizePage *self)
 {
   guint cursor_sizes[] = { 24, 32, 48, 64, 96 };
   guint current_cursor_size, i;
@@ -107,8 +107,8 @@ cc_cursor_size_dialog_init (CcCursorSizeDialog *self)
     }
 }
 
-CcCursorSizeDialog *
-cc_cursor_size_dialog_new (void)
+CcCursorSizePage *
+cc_cursor_size_page_new (void)
 {
-  return g_object_new (cc_cursor_size_dialog_get_type (), NULL);
+  return g_object_new (cc_cursor_size_page_get_type (), NULL);
 }

@@ -39,7 +39,7 @@
 #include <glib/gi18n-lib.h>
 
 #include "cc-list-row.h"
-#include "cc-cursor-size-dialog.h"
+#include "cc-cursor-size-page.h"
 #include "cc-ua-macros.h"
 #include "cc-ua-seeing-page.h"
 
@@ -137,13 +137,15 @@ ua_seeing_interface_cursor_size_changed_cb (CcUaSeeingPage *self)
 static void
 ua_cursor_row_activated_cb (CcUaSeeingPage *self)
 {
-  AdwDialog *dialog;
+  AdwNavigationPage *page;
+  GtkWidget *parent;
 
   g_assert (CC_IS_UA_SEEING_PAGE (self));
 
-  dialog = ADW_DIALOG (cc_cursor_size_dialog_new ());
+  page = ADW_NAVIGATION_PAGE (cc_cursor_size_page_new ());
+  parent = gtk_widget_get_parent (GTK_WIDGET (self));
 
-  adw_dialog_present (dialog, GTK_WIDGET (self));
+  adw_navigation_view_push (ADW_NAVIGATION_VIEW (parent), page);
 }
 
 static void
