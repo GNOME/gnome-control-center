@@ -213,7 +213,7 @@ update_password_strength (CcAddUserDialog *self)
 
         gtk_level_bar_set_value (self->strength_indicator, strength_level);
         if (enforcing)
-                cc_entry_feedback_update (self->password_hint, valid ? "emblem-ok" : "dialog-warning", hint);
+                cc_entry_feedback_update (self->password_hint, valid ? "emblem-default-symbolic" : "dialog-error-symbolic", hint);
 
         verify = gtk_editable_get_text (GTK_EDITABLE (self->verify_password_row));
         if (strlen (verify) == 0) {
@@ -258,7 +258,7 @@ static void dialog_validate_cb (GObject *source_object,
         gtk_widget_set_sensitive (GTK_WIDGET (self->add_button), username_valid && is_valid_name (name));
 
         if (tip && strlen (tip) > 0) {
-                cc_entry_feedback_update (self->name_feedback, "dialog-error", tip);
+                cc_entry_feedback_update (self->name_feedback, "dialog-error-symbolic", tip);
         } else {
                 cc_entry_feedback_reset (self->name_feedback);
         }
@@ -278,7 +278,7 @@ update_password_match (CcAddUserDialog *self)
         gtk_widget_set_visible (GTK_WIDGET (self->verify_password_hint),
                                 strlen (verify) != 0);
         cc_entry_feedback_update (self->verify_password_hint,
-                                  match ? "emblem-ok" : "dialog-error",
+                                  match ? "emblem-default-symbolic" : "dialog-error-symbolic",
                                   match ? _("Passwords match") : _("Passwords do not match"));
 }
 
