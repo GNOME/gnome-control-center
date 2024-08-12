@@ -32,6 +32,7 @@
 #include <act/act.h>
 
 #include "cc-password-dialog.h"
+#include "cc-entry-feedback.h"
 #include "pw-utils.h"
 #include "run-passwd.h"
 #include "user-utils.h"
@@ -46,6 +47,7 @@ struct _CcPasswordDialog
         GtkCheckButton    *action_now_radio;
         GtkButton         *generate_password_button;
         GtkButton          *ok_button;
+        CcEntryFeedback     *current_password_feedback;
         AdwPasswordEntryRow *old_password_entry;
         AdwPreferencesGroup *password_group;
         AdwPreferencesGroup *password_on_next_login_group;
@@ -345,6 +347,10 @@ auth_cb (PasswdHandler    *handler,
                 gtk_widget_remove_css_class (GTK_WIDGET (self->old_password_entry), "error");
         }
 
+        cc_entry_feedback_update (self->current_password_feedback,
+                                  !error ? "emblem-default-symbolic" : "dialog-error-symbolic",
+                                  !error ? _("Passwords match") : _("Passwords do not match"));
+
         update_sensitivity (self);
 }
 
@@ -438,6 +444,7 @@ cc_password_dialog_class_init (CcPasswordDialogClass *klass)
 
         gtk_widget_class_bind_template_child (widget_class, CcPasswordDialog, action_login_radio);
         gtk_widget_class_bind_template_child (widget_class, CcPasswordDialog, action_now_radio);
+        gtk_widget_class_bind_template_child (widget_class, CcPasswordDialog, current_password_feedback);
         gtk_widget_class_bind_template_child (widget_class, CcPasswordDialog, generate_password_button);
         gtk_widget_class_bind_template_child (widget_class, CcPasswordDialog, ok_button);
         gtk_widget_class_bind_template_child (widget_class, CcPasswordDialog, old_password_entry);
