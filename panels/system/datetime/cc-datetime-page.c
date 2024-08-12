@@ -926,8 +926,6 @@ cc_date_time_page_init (CcDateTimePage *self)
   self->auto_timezone_supported = FALSE;
 
   self->datetime_settings = g_settings_new (DATETIME_SCHEMA);
-  // Let's disable location services for gnome-46
-  g_settings_set_boolean (self->datetime_settings, AUTO_TIMEZONE_KEY, FALSE);
 #ifdef HAVE_LOCATION_SERVICES
   self->auto_timezone_supported = TRUE;
   gtk_widget_set_visible (GTK_WIDGET (self->auto_timezone_row), TRUE);
@@ -941,6 +939,9 @@ cc_date_time_page_init (CcDateTimePage *self)
   g_settings_bind (self->datetime_settings, AUTO_TIMEZONE_KEY,
                    self->auto_timezone_row, "active",
                    G_SETTINGS_BIND_DEFAULT);
+#else
+  // Let's disable location services
+  g_settings_set_boolean (self->datetime_settings, AUTO_TIMEZONE_KEY, FALSE);
 #endif
 
   /* Clock settings */
