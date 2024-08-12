@@ -52,7 +52,7 @@ struct _CcPasswordDialog
         AdwPreferencesGroup *password_group;
         AdwPreferencesGroup *password_on_next_login_group;
         AdwPasswordEntryRow *password_entry;
-        GtkLabel           *password_hint_label;
+        CcEntryFeedback     *password_hint_label;
         GtkLevelBar        *strength_indicator;
         AdwPasswordEntryRow *verify_entry;
         CcEntryFeedback     *verify_label;
@@ -89,7 +89,6 @@ update_password_strength (CcPasswordDialog *self)
                      &hint, &strength_level, &enforcing);
 
         gtk_level_bar_set_value (self->strength_indicator, strength_level);
-        gtk_label_set_label (self->password_hint_label, hint);
 
         if (strength_level > 1) {
                 gtk_widget_remove_css_class (GTK_WIDGET (self->password_entry), "error");
@@ -107,6 +106,10 @@ update_password_strength (CcPasswordDialog *self)
                 gtk_widget_set_sensitive (GTK_WIDGET (self->verify_entry), accept);
         }
 
+        cc_entry_feedback_update (self->password_hint_label,
+                                  strlen (password) == 0 ? "info-outline-symbolic" :
+                                  accept ? "emblem-default-symbolic" : "dialog-error-symbolic",
+                                  hint);
         return accept;
 }
 
