@@ -55,7 +55,7 @@ struct _CcPasswordDialog
         GtkLabel           *password_hint_label;
         GtkLevelBar        *strength_indicator;
         AdwPasswordEntryRow *verify_entry;
-        GtkLabel            *verify_label;
+        CcEntryFeedback     *verify_label;
 
         gint                password_entry_timeout_id;
 
@@ -251,21 +251,19 @@ update_password_match (CcPasswordDialog *self)
 {
         const gchar *password;
         const gchar *verify;
+        gboolean match;
 
         password = gtk_editable_get_text (GTK_EDITABLE (self->password_entry));
         verify = gtk_editable_get_text (GTK_EDITABLE (self->verify_entry));
 
         if (strlen (verify) > 0) {
-                if (strcmp (password, verify) != 0) {
-                        gtk_widget_set_visible (GTK_WIDGET (self->verify_label), TRUE);
-                        gtk_widget_add_css_class (GTK_WIDGET (self->verify_entry), "error");
-                }
-                else {
-                        gtk_widget_set_visible (GTK_WIDGET (self->verify_label), FALSE);
+                match = g_strcmp0 (password, verify) == 0;
+                cc_entry_feedback_update (self->verify_label,
+                                          match ? "emblem-default-symbolic" : "dialog-error-symbolic",
+                                          match ? _("Passwords match") : _("Passwords do not match"));
+                if (match)
                         gtk_widget_remove_css_class (GTK_WIDGET (self->verify_entry), "error");
-
-                }
-        }
+          }
 }
 
 static gboolean
