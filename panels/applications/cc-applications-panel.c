@@ -117,7 +117,7 @@ struct _CcApplicationsPanel
   AdwSwitchRow    *microphone_row;
   CcListRow       *no_microphone_row;
   AdwPreferencesGroup *required_permissions_group;
-  CcListRow       *builtin;
+  CcListRow       *builtin_row;
   AdwPreferencesPage *builtin_page;
   GtkListBox      *builtin_list;
   GList           *snap_permission_rows;
@@ -877,7 +877,7 @@ add_static_permissions (CcApplicationsPanel *self,
                                                             "%u permissions",
                                                             added),
                                                added);
-  cc_list_row_set_secondary_label (self->builtin, static_permissions_number);
+  cc_list_row_set_secondary_label (self->builtin_row, static_permissions_number);
 
   return added > 0;
 }
@@ -1795,7 +1795,7 @@ cc_applications_panel_class_init (CcApplicationsPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, app_settings_page);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, required_permissions_group);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, autorun_never_row);
-  gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, builtin);
+  gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, builtin_row);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, builtin_page);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, builtin_list);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, storage_page_cache_row);
