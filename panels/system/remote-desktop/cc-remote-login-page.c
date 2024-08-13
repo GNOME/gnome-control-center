@@ -607,13 +607,13 @@ fetch_remote_desktop_rdp_server_configuration (CcRemoteLoginPage *self)
   port = gsd_remote_desktop_configuration_rdp_server_get_port (self->configuration_rdp_server);
   if (enabled)
     {
-      g_autofree char *str_port = (port <= 0) ? g_strdup (" ") : g_strdup_printf ("%u", port);
+      g_autofree char *str_port = (port <= 0) ? g_strdup ("—") : g_strdup_printf ("%u", port);
       adw_action_row_set_subtitle (self->port_row, str_port);
       gtk_widget_set_sensitive (GTK_WIDGET (self->port_row), port > 0);
     }
   else
     {
-      adw_action_row_set_subtitle (self->port_row, " ");
+      adw_action_row_set_subtitle (self->port_row, "—");
       gtk_widget_set_sensitive (GTK_WIDGET (self->port_row), FALSE);
     }
 
