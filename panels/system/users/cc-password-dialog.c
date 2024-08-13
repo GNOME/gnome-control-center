@@ -51,8 +51,11 @@ struct _CcPasswordDialog
         AdwPasswordEntryRow *old_password_entry;
         AdwPreferencesGroup *password_group;
         AdwPreferencesGroup *password_on_next_login_group;
+        GtkWidget           *password_on_next_login_page;
+        GtkWidget           *password_page;
         AdwPasswordEntryRow *password_entry;
         CcEntryFeedback     *password_hint_label;
+        GtkStack            *stack;
         GtkLevelBar        *strength_indicator;
         AdwPasswordEntryRow *verify_entry;
         CcEntryFeedback     *verify_label;
@@ -181,13 +184,25 @@ ok_button_clicked_cb (CcPasswordDialog *self)
                                 return;
                         }
 
+                        /* If the visible stack page was password_on_next_login_page, it means the user started
+                         * with ACT_USER_PASSWORD_MODE_SET_AT_LOGIN but decided to change to ACT_USER_PASSWORD_MODE_REGULAR.
+                         * So now is time to switch to password_page and let the user set a new password. */
+                        if (gtk_stack_get_visible_child (self->stack) == self->password_on_next_login_page) {
+                                gtk_stack_set_visible_child (self->stack, self->password_page);
+                                gtk_button_set_label (self->ok_button, _("Confirm"));
+
+                                return;
+                        }
+
                         act_user_set_password_mode (self->user, ACT_USER_PASSWORD_MODE_REGULAR);
                         act_user_set_password (self->user, password, "");
+
                         break;
 
                 case ACT_USER_PASSWORD_MODE_SET_AT_LOGIN:
                         act_user_set_password_mode (self->user, self->password_mode);
                         act_user_set_automatic_login (self->user, FALSE);
+
                         break;
 
                 default:
@@ -247,6 +262,9 @@ action_now_radio_toggled_cb (CcPasswordDialog *self)
         active = gtk_check_button_get_active (GTK_CHECK_BUTTON (self->action_now_radio));
         mode = active ? ACT_USER_PASSWORD_MODE_REGULAR : ACT_USER_PASSWORD_MODE_SET_AT_LOGIN;
         mode_change (self, mode);
+
+        gtk_button_set_label (self->ok_button, active ? _("Next") : _("Confirm"));
+        gtk_widget_set_sensitive (GTK_WIDGET (self->ok_button), TRUE);
 }
 
 static void
@@ -451,8 +469,11 @@ cc_password_dialog_class_init (CcPasswordDialogClass *klass)
         gtk_widget_class_bind_template_child (widget_class, CcPasswordDialog, old_password_entry);
         gtk_widget_class_bind_template_child (widget_class, CcPasswordDialog, password_group);
         gtk_widget_class_bind_template_child (widget_class, CcPasswordDialog, password_on_next_login_group);
+        gtk_widget_class_bind_template_child (widget_class, CcPasswordDialog, password_page);
+        gtk_widget_class_bind_template_child (widget_class, CcPasswordDialog, password_on_next_login_page);
         gtk_widget_class_bind_template_child (widget_class, CcPasswordDialog, password_entry);
         gtk_widget_class_bind_template_child (widget_class, CcPasswordDialog, password_hint_label);
+        gtk_widget_class_bind_template_child (widget_class, CcPasswordDialog, stack);
         gtk_widget_class_bind_template_child (widget_class, CcPasswordDialog, strength_indicator);
         gtk_widget_class_bind_template_child (widget_class, CcPasswordDialog, verify_entry);
         gtk_widget_class_bind_template_child (widget_class, CcPasswordDialog, verify_label);
@@ -490,19 +511,19 @@ cc_password_dialog_new (ActUser *user)
                 gboolean visible;
 
                 mode_change (self, ACT_USER_PASSWORD_MODE_REGULAR);
-                gtk_widget_set_visible (GTK_WIDGET (self->password_on_next_login_group), FALSE);
+                gtk_stack_set_visible_child (self->stack, self->password_page);
 
                 visible = (act_user_get_password_mode (user) != ACT_USER_PASSWORD_MODE_NONE);
-                gtk_widget_set_visible (GTK_WIDGET (self->old_password_entry), visible);
+                gtk_widget_set_visible (GTK_WIDGET (self->password_group), visible);
                 self->old_password_ok = !visible;
 
                 self->passwd_handler = passwd_init ();
         }
         else {
                 mode_change (self, ACT_USER_PASSWORD_MODE_SET_AT_LOGIN);
-                gtk_widget_set_visible (GTK_WIDGET (self->password_on_next_login_group), TRUE);
+                gtk_stack_set_visible_child (self->stack, self->password_on_next_login_page);
 
-                gtk_widget_set_visible (GTK_WIDGET (self->old_password_entry), FALSE);
+                gtk_widget_set_visible (GTK_WIDGET (self->password_group), FALSE);
                 self->old_password_ok = TRUE;
         }
 
