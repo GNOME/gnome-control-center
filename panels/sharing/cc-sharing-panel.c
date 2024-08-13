@@ -310,7 +310,7 @@ cc_sharing_panel_remove_folder (CcSharingPanel *self,
   gtk_list_box_remove (GTK_LIST_BOX (self->shared_folders_listbox), row);
 }
 
-static gboolean
+static void
 cc_sharing_panel_media_sharing_dialog_close_request (CcSharingPanel *self)
 {
   g_autoptr(GPtrArray) folders = NULL;
@@ -334,7 +334,8 @@ cc_sharing_panel_media_sharing_dialog_close_request (CcSharingPanel *self)
 
   cc_media_sharing_set_preferences ((gchar **) folders->pdata);
 
-  return GDK_EVENT_PROPAGATE;
+  adw_dialog_set_can_close (self->media_sharing_dialog, TRUE);
+  adw_dialog_close (self->media_sharing_dialog);
 }
 
 #define ICON_NAME_FOLDER                "folder-symbolic"
