@@ -50,7 +50,6 @@ struct _CcPasswordDialog
         CcEntryFeedback     *current_password_feedback;
         AdwPasswordEntryRow *old_password_entry;
         AdwPreferencesGroup *password_group;
-        AdwPreferencesGroup *password_on_next_login_group;
         GtkWidget           *password_on_next_login_page;
         GtkWidget           *password_page;
         AdwPasswordEntryRow *password_entry;
@@ -468,7 +467,6 @@ cc_password_dialog_class_init (CcPasswordDialogClass *klass)
         gtk_widget_class_bind_template_child (widget_class, CcPasswordDialog, ok_button);
         gtk_widget_class_bind_template_child (widget_class, CcPasswordDialog, old_password_entry);
         gtk_widget_class_bind_template_child (widget_class, CcPasswordDialog, password_group);
-        gtk_widget_class_bind_template_child (widget_class, CcPasswordDialog, password_on_next_login_group);
         gtk_widget_class_bind_template_child (widget_class, CcPasswordDialog, password_page);
         gtk_widget_class_bind_template_child (widget_class, CcPasswordDialog, password_on_next_login_page);
         gtk_widget_class_bind_template_child (widget_class, CcPasswordDialog, password_entry);
