@@ -250,6 +250,9 @@ ppd_file_select_response_cb (GObject      *source,
   ppd_filename = g_file_get_path (file);
   if (self->printer_name && ppd_filename)
     {
+      g_clear_pointer (&self->ppd_file_name, g_free);
+      self->ppd_file_name = g_strdup (ppd_filename);
+
       printer_set_ppd_file_async (self->printer_name,
                                   ppd_filename,
                                   self->cancellable,
