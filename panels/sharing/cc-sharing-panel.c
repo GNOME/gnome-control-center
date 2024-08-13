@@ -208,23 +208,29 @@ cc_sharing_panel_bind_networks_to_label (CcSharingPanel *self,
 }
 
 static void
-on_add_folder_dialog_response_cb (CcSharingPanel *self,
-                                  gint            response,
-                                  GtkDialog      *dialog)
+on_folder_selected_cb (GObject      *source_object,
+                       GAsyncResult *result,
+                       gpointer      user_data)
 {
+  CcSharingPanel *self = CC_SHARING_PANEL (user_data);
+  GtkFileDialog *dialog = GTK_FILE_DIALOG (source_object);
   g_autofree gchar *folder = NULL;
   g_autoptr(GFile) file = NULL;
   GtkWidget *child;
   gboolean matching = FALSE;
+  g_autoptr(GError) error = NULL;
   gint n_rows = 0;
 
-  if (response != GTK_RESPONSE_ACCEPT)
-    goto bail;
+  file = gtk_file_dialog_select_folder_finish (dialog, result, &error);
+  if (!file)
+    {
+      g_warning ("Failed to select folder: %s", error->message);
+      return;
+    }
 
-  file = gtk_file_chooser_get_file (GTK_FILE_CHOOSER (dialog));
   folder = g_file_get_uri (file);
   if (!folder || g_str_equal (folder, ""))
-    goto bail;
+    return;
 
   g_debug ("Trying to add %s", folder);
 
@@ -254,33 +260,26 @@ on_add_folder_dialog_response_cb (CcSharingPanel *self,
                            row,
                            n_rows - 1);
     }
-
-bail:
-  gtk_window_destroy (GTK_WINDOW (dialog));
 }
 
 static void
 cc_sharing_panel_add_folder (CcSharingPanel *self,
                              GtkListBoxRow  *row)
 {
-  GtkWidget *dialog;
+  GtkFileDialog *dialog;
 
   if (!GPOINTER_TO_INT (g_object_get_data (G_OBJECT (row), "is-add")))
     return;
 
-  dialog = gtk_file_chooser_dialog_new (_("Choose a Folder"),
-                                        self->toplevel,
-                                        GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER,
-                                        _("_Cancel"), GTK_RESPONSE_CANCEL,
-                                        _("_Open"), GTK_RESPONSE_ACCEPT,
-                                        NULL);
+  dialog = gtk_file_dialog_new ();
+  gtk_file_dialog_set_title (dialog, _("Choose a Folder"));
+  gtk_file_dialog_set_modal (dialog, TRUE);
 
-  g_signal_connect_object (dialog,
-                           "response",
-                           G_CALLBACK (on_add_folder_dialog_response_cb),
-                           self,
-                           G_CONNECT_SWAPPED);
-  gtk_window_present (GTK_WINDOW (dialog));
+  gtk_file_dialog_select_folder (dialog,
+                                 self->toplevel,
+                                 cc_panel_get_cancellable (CC_PANEL (self)),
+                                 on_folder_selected_cb,
+                                 self);
 }
 
 static void
