@@ -212,8 +212,13 @@ update_password_strength (CcAddUserDialog *self)
         accept = valid || !enforcing;
 
         gtk_level_bar_set_value (self->strength_indicator, strength_level);
-        if (enforcing)
+        if (enforcing) {
                 cc_entry_feedback_update (self->password_hint, valid ? "emblem-default-symbolic" : "dialog-error-symbolic", hint);
+                if (valid)
+                        gtk_widget_remove_css_class (GTK_WIDGET (self->password_row), "error");
+                else
+                        gtk_widget_add_css_class (GTK_WIDGET (self->password_row), "error");
+        }
 
         verify = gtk_editable_get_text (GTK_EDITABLE (self->verify_password_row));
         if (strlen (verify) == 0) {
@@ -259,8 +264,10 @@ static void dialog_validate_cb (GObject *source_object,
 
         if (tip && strlen (tip) > 0) {
                 cc_entry_feedback_update (self->name_feedback, "dialog-error-symbolic", tip);
+                gtk_widget_add_css_class (GTK_WIDGET (self->username_row), "error");
         } else {
                 cc_entry_feedback_reset (self->name_feedback);
+                gtk_widget_remove_css_class (GTK_WIDGET (self->username_row), "error");
         }
 }
 
