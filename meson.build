@@ -281,6 +281,14 @@ location_services = get_option('location-services')
 config_h.set('HAVE_LOCATION_SERVICES', location_services.enabled(),
              description: 'Whether location services is enabled')
 
+# Disable the wellbeing panel for now, until it’s fully implemented.
+# Developers can enable this for working on it/testing it, but distributions
+# are encouraged *not* to enable it. The feature is not ready yet.
+# See https://gitlab.gnome.org/GNOME/gnome-control-center/-/merge_requests/2389#note_2183178
+wellbeing = get_option('wellbeing')
+config_h.set('BUILD_WELLBEING', wellbeing.enabled(),
+             description: 'Whether the wellbeing panel developer preview is enabled')
+
 if host_is_linux
   # ModemManager
   mm_dep =  dependency('mm-glib', version: '>= 0.7')
