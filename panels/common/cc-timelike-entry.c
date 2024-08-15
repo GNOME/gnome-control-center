@@ -498,6 +498,7 @@ cc_timelike_entry_class_init (CcTimelikeEntryClass *klass)
 
   gtk_widget_class_set_css_name (widget_class, "entry");
   gtk_widget_class_set_layout_manager_type (widget_class, GTK_TYPE_BIN_LAYOUT);
+  gtk_widget_class_set_accessible_role (widget_class, GTK_ACCESSIBLE_ROLE_TEXT_BOX);
 
   gtk_widget_class_add_binding (widget_class, GDK_KEY_Up, 0,
                                 change_value_cb, "i", GTK_SCROLL_STEP_UP);
