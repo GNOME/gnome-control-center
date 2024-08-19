@@ -24,8 +24,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2024-07-16 09:47+0000\n"
-"PO-Revision-Date: 2024-07-16 18:16+0300\n"
+"POT-Creation-Date: 2024-08-13 08:15+0000\n"
+"PO-Revision-Date: 2024-08-13 12:11+0300\n"
 "Last-Translator: Artur So <arturios2005@mail.ru>\n"
 "Language-Team: Русский <gnome-cyr@gnome.org>\n"
 "Language: ru\n"
@@ -52,8 +52,8 @@ msgid "Session Bus"
 msgstr "Шина сеанса"
 
 #: panels/applications/cc-applications-panel.c:850
-#: panels/privacy/bolt/cc-bolt-page.ui:204
-#: panels/privacy/bolt/cc-bolt-page.ui:248
+#: panels/privacy/bolt/cc-bolt-page.ui:199
+#: panels/privacy/bolt/cc-bolt-page.ui:237
 #: panels/privacy/cc-privacy-panel.ui:72
 msgid "Devices"
 msgstr "Устройства"
@@ -236,7 +236,7 @@ msgstr ""
 "разрешения, которые не отображаются."
 
 #: panels/applications/cc-applications-panel.ui:245
-#: panels/printers/pp-details-dialog.c:269
+#: panels/printers/pp-details-dialog.c:268
 #: panels/sharing/cc-sharing-panel.c:275
 msgid "_Open"
 msgstr "_Открыть"
@@ -380,7 +380,7 @@ msgid "System permissions that the app requires"
 msgstr "Системные разрешения, которые требует приложение"
 
 #: panels/applications/cc-applications-panel.ui:415
-#: panels/mouse/cc-mouse-panel.ui:67
+#: panels/mouse/cc-mouse-panel.ui:67 panels/mouse/cc-mouse-panel.ui:201
 #: panels/multitasking/cc-multitasking-panel.ui:15
 #: panels/power/cc-power-panel.ui:129
 msgid "General"
@@ -946,39 +946,39 @@ msgstr "Фон;Обои;Экран;Рабочий;Стиль;Светлый;Те
 msgid "Enable"
 msgstr "Включить"
 
-#: panels/bluetooth/cc-bluetooth-panel.ui:29
+#: panels/bluetooth/cc-bluetooth-panel.ui:32
 msgid "No Bluetooth Found"
 msgstr "Адаптеры Bluetooth не найдены"
 
-#: panels/bluetooth/cc-bluetooth-panel.ui:30
+#: panels/bluetooth/cc-bluetooth-panel.ui:33
 msgid "Plug in a dongle to use Bluetooth"
 msgstr "Для использования Bluetooth подключите адаптер"
 
-#: panels/bluetooth/cc-bluetooth-panel.ui:36
+#: panels/bluetooth/cc-bluetooth-panel.ui:44
 msgid "Bluetooth Turned Off"
 msgstr "Адаптер Bluetooth выключен"
 
-#: panels/bluetooth/cc-bluetooth-panel.ui:37
+#: panels/bluetooth/cc-bluetooth-panel.ui:45
 msgid "Turn on to connect devices and receive file transfers"
 msgstr "Включите для подключения устройств и приема передачи файлов"
 
-#: panels/bluetooth/cc-bluetooth-panel.ui:43
+#: panels/bluetooth/cc-bluetooth-panel.ui:56
 msgid "Airplane Mode is On"
 msgstr "Авиарежим включен"
 
-#: panels/bluetooth/cc-bluetooth-panel.ui:44
+#: panels/bluetooth/cc-bluetooth-panel.ui:57
 msgid "Bluetooth is disabled when airplane mode is on"
 msgstr "Bluetooth отключается, когда включен авиарежим"
 
-#: panels/bluetooth/cc-bluetooth-panel.ui:47
+#: panels/bluetooth/cc-bluetooth-panel.ui:60
 msgid "_Turn Off Airplane Mode"
 msgstr "_Выключить авиарежим"
 
-#: panels/bluetooth/cc-bluetooth-panel.ui:63
+#: panels/bluetooth/cc-bluetooth-panel.ui:81
 msgid "Hardware Airplane Mode is On"
 msgstr "Аппаратный авиарежим включен"
 
-#: panels/bluetooth/cc-bluetooth-panel.ui:64
+#: panels/bluetooth/cc-bluetooth-panel.ui:82
 msgid "Turn off the Airplane mode switch to enable Bluetooth"
 msgstr "Для включения Bluetooth выключите авиарежим"
 
@@ -1092,8 +1092,9 @@ msgstr "Калибровка экрана"
 #: panels/network/cc-wifi-panel.ui:236
 #: panels/network/connection-editor/ce-page-details.c:89
 #: panels/network/connection-editor/connection-editor.ui:16
-#: panels/printers/pp-details-dialog.c:268
+#: panels/printers/pp-details-dialog.c:267
 #: panels/printers/pp-new-printer-dialog.ui:65
+#: panels/printers/pp-ppd-selection-dialog.ui:17
 #: panels/privacy/usage/cc-usage-page.ui:125
 #: panels/privacy/usage/cc-usage-page.ui:136
 #: panels/privacy/usage/cc-usage-page.ui:147
@@ -1887,27 +1888,67 @@ msgstr "Но_чной свет"
 msgid "Night Light"
 msgstr "Ночной свет"
 
-#: panels/display/cc-display-settings.c:111
+#: panels/display/cc-display-settings.c:123
 msgctxt "Display rotation"
 msgid "Landscape"
 msgstr "Ландшафтная"
 
-#: panels/display/cc-display-settings.c:114
+#: panels/display/cc-display-settings.c:126
 msgctxt "Display rotation"
 msgid "Portrait Right"
 msgstr "Портретная справа"
 
-#: panels/display/cc-display-settings.c:117
+#: panels/display/cc-display-settings.c:129
 msgctxt "Display rotation"
 msgid "Portrait Left"
 msgstr "Портретная слева"
 
-#: panels/display/cc-display-settings.c:120
+#: panels/display/cc-display-settings.c:132
 msgctxt "Display rotation"
 msgid "Landscape (flipped)"
 msgstr "Ландшафтная (перевернутая)"
 
-#: panels/display/cc-display-settings.c:181
+#: panels/display/cc-display-settings.c:143
+msgctxt "Display rotation"
+msgid "Portrait"
+msgstr "Портретная"
+
+#: panels/display/cc-display-settings.c:146
+msgctxt "Display rotation"
+msgid "Landscape Right"
+msgstr "Ландшафтная справа"
+
+#: panels/display/cc-display-settings.c:149
+msgctxt "Display rotation"
+msgid "Landscape Left"
+msgstr "Ландшафтная слева"
+
+#: panels/display/cc-display-settings.c:152
+msgctxt "Display rotation"
+msgid "Portrait (flipped)"
+msgstr "Портретная (перевернутая)"
+
+#: panels/display/cc-display-settings.c:163
+msgctxt "Display rotation"
+msgid "Upright"
+msgstr "Вертикальная"
+
+#: panels/display/cc-display-settings.c:166
+msgctxt "Display rotation"
+msgid "Right"
+msgstr "Справа"
+
+#: panels/display/cc-display-settings.c:169
+msgctxt "Display rotation"
+msgid "Left"
+msgstr "Слева"
+
+#: panels/display/cc-display-settings.c:172
+msgctxt "Display rotation"
+msgid "Flipped"
+msgstr "Перевернутая"
+
+#: panels/display/cc-display-settings.c:238
 msgid "%.2lf Hz"
 msgstr "%.2lf Гц"
 
@@ -1916,12 +1957,12 @@ msgstr "%.2lf Гц"
 #. * 2. The formatting sequence is a range separated by an en-dash
 #. *    (unicode "\u2013"). For example: "Variable (48–144.97 Hz)"
 #.
-#: panels/display/cc-display-settings.c:198
+#: panels/display/cc-display-settings.c:255
 msgid "Variable (%d–%.2lf Hz)"
 msgstr "Переменная (%d–%.2lf Гц)"
 
 #. Translators: "Variable" is an adjective that refers to the refresh rate
-#: panels/display/cc-display-settings.c:205
+#: panels/display/cc-display-settings.c:262
 msgid "Variable (up to %.2lf Hz)"
 msgstr "Переменная (до %.2lf Гц)"
 
@@ -1958,11 +1999,11 @@ msgctxt "display setting"
 msgid "_Scale"
 msgstr "Мас_штаб"
 
-#: panels/display/cc-night-light-page.c:223
+#: panels/display/cc-night-light-page.c:230
 msgid "Night Light cannot be used from a virtual machine"
 msgstr "Ночной свет нельзя использовать с виртуальной машины"
 
-#: panels/display/cc-night-light-page.c:224
+#: panels/display/cc-night-light-page.c:231
 msgid ""
 "This could be the result of the graphics driver being used, or the desktop "
 "being used remotely."
@@ -2519,7 +2560,7 @@ msgid "Reset"
 msgstr "Сбросить"
 
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:161
-#: panels/printers/pp-details-dialog.ui:17 panels/wwan/cc-wwan-apn-dialog.ui:96
+#: panels/wwan/cc-wwan-apn-dialog.ui:96
 msgid "Name"
 msgstr "Имя"
 
@@ -2588,43 +2629,43 @@ msgstr "Основная кнопка"
 msgid "Order of physical buttons on mice and touchpads"
 msgstr "Порядок расположения физических кнопок на мышах и сенсорных панелях"
 
-#: panels/mouse/cc-mouse-panel.ui:85
+#: panels/mouse/cc-mouse-panel.ui:82
 msgid "_Left"
 msgstr "_Левая"
 
-#: panels/mouse/cc-mouse-panel.ui:93
+#: panels/mouse/cc-mouse-panel.ui:90
 msgid "_Right"
 msgstr "_Правая"
 
-#: panels/mouse/cc-mouse-panel.ui:108
+#: panels/mouse/cc-mouse-panel.ui:105
 msgid "Mouse"
 msgstr "Мышь"
 
-#: panels/mouse/cc-mouse-panel.ui:111 panels/mouse/cc-mouse-panel.ui:207
+#: panels/mouse/cc-mouse-panel.ui:108 panels/mouse/cc-mouse-panel.ui:210
 msgid "Po_inter Speed"
 msgstr "Ск_орость курсора"
 
-#: panels/mouse/cc-mouse-panel.ui:118 panels/mouse/cc-mouse-panel.ui:215
+#: panels/mouse/cc-mouse-panel.ui:115 panels/mouse/cc-mouse-panel.ui:217
 #: panels/universal-access/cc-ua-typing-page.ui:59
 #: panels/universal-access/cc-ua-typing-page.ui:112
 msgid "Slow"
 msgstr "Медленная"
 
-#: panels/mouse/cc-mouse-panel.ui:120 panels/mouse/cc-mouse-panel.ui:217
+#: panels/mouse/cc-mouse-panel.ui:117 panels/mouse/cc-mouse-panel.ui:219
 #: panels/universal-access/cc-ua-typing-page.ui:56
 #: panels/universal-access/cc-ua-typing-page.ui:109
 msgid "Fast"
 msgstr "Быстрая"
 
-#: panels/mouse/cc-mouse-panel.ui:136
+#: panels/mouse/cc-mouse-panel.ui:133
 msgid "Mouse _Acceleration"
 msgstr "_Ускорение мыши"
 
-#: panels/mouse/cc-mouse-panel.ui:137
+#: panels/mouse/cc-mouse-panel.ui:134
 msgid "Recommended for most users and applications"
 msgstr "Рекомендуется для большинства пользователей и приложений"
 
-#: panels/mouse/cc-mouse-panel.ui:143
+#: panels/mouse/cc-mouse-panel.ui:140
 msgid ""
 "Turning mouse acceleration off can allow faster and more precise movements, "
 "but can also make the mouse more difficult to use."
@@ -2632,100 +2673,100 @@ msgstr ""
 "Отключение ускорения мыши может обеспечить более быстрые и точные движения, "
 "но также может усложнить использование мыши."
 
-#: panels/mouse/cc-mouse-panel.ui:155 panels/mouse/cc-mouse-panel.ui:294
+#: panels/mouse/cc-mouse-panel.ui:152 panels/mouse/cc-mouse-panel.ui:298
 msgid "Scroll Direction"
 msgstr "Направление прокрутки"
 
-#: panels/mouse/cc-mouse-panel.ui:156
+#: panels/mouse/cc-mouse-panel.ui:153
 msgid "Tra_ditional"
 msgstr "Тра_диционное"
 
-#: panels/mouse/cc-mouse-panel.ui:157 panels/mouse/cc-mouse-panel.ui:296
+#: panels/mouse/cc-mouse-panel.ui:154 panels/mouse/cc-mouse-panel.ui:300
 msgid "Scrolling moves the view"
 msgstr "Прокрутка перемещает вид"
 
-#: panels/mouse/cc-mouse-panel.ui:159 panels/mouse/cc-mouse-panel.ui:298
+#: panels/mouse/cc-mouse-panel.ui:156 panels/mouse/cc-mouse-panel.ui:302
 msgid "_Natural"
 msgstr "_Естественное"
 
-#: panels/mouse/cc-mouse-panel.ui:160 panels/mouse/cc-mouse-panel.ui:299
+#: panels/mouse/cc-mouse-panel.ui:157 panels/mouse/cc-mouse-panel.ui:303
 msgid "Scrolling moves the content"
 msgstr "Прокрутка перемещает содержимое"
 
-#: panels/mouse/cc-mouse-panel.ui:170 panels/mouse/cc-mouse-panel.ui:310
+#: panels/mouse/cc-mouse-panel.ui:167 panels/mouse/cc-mouse-panel.ui:313
 #: panels/wacom/cc-wacom-panel.ui:11
 msgid "Test _Settings"
 msgstr "_Проверить настройки"
 
-#: panels/mouse/cc-mouse-panel.ui:187
+#: panels/mouse/cc-mouse-panel.ui:184
 msgid "_Touchpad"
 msgstr "_Сенсорная панель"
 
-#: panels/mouse/cc-mouse-panel.ui:195
+#: panels/mouse/cc-mouse-panel.ui:192
 msgid "T_ouchpad"
 msgstr "Се_нсорная панель"
 
-#: panels/mouse/cc-mouse-panel.ui:201
+#: panels/mouse/cc-mouse-panel.ui:204
 msgid "_Disable Touchpad While Typing"
 msgstr "_Отключить сенсорную панель при вводе текста"
 
-#: panels/mouse/cc-mouse-panel.ui:236 panels/mouse/cc-mouse-test.ui:32
+#: panels/mouse/cc-mouse-panel.ui:238
 msgid "Clicking"
 msgstr "Нажатие"
 
-#: panels/mouse/cc-mouse-panel.ui:239 panels/mouse/cc-mouse-test.ui:111
+#: panels/mouse/cc-mouse-panel.ui:242 panels/mouse/cc-mouse-test.ui:112
 msgid "Secondary Click"
 msgstr "Нажатие вторичной кнопки"
 
-#: panels/mouse/cc-mouse-panel.ui:240
+#: panels/mouse/cc-mouse-panel.ui:243
 msgid "Two _Finger Push"
 msgstr "Нажатие двумя паль_цами"
 
-#: panels/mouse/cc-mouse-panel.ui:241
+#: panels/mouse/cc-mouse-panel.ui:244
 msgid "Push anywhere with 2 fingers"
 msgstr "Нажмите на любое место двумя пальцами"
 
-#: panels/mouse/cc-mouse-panel.ui:243
+#: panels/mouse/cc-mouse-panel.ui:246
 msgid "_Corner Push"
 msgstr "Нажатие в у_глу"
 
-#: panels/mouse/cc-mouse-panel.ui:244
+#: panels/mouse/cc-mouse-panel.ui:247
 msgid "Push with a single finger in the corner"
 msgstr "Нажмите одним пальцем в углу"
 
-#: panels/mouse/cc-mouse-panel.ui:256
+#: panels/mouse/cc-mouse-panel.ui:260
 msgid "T_ap to Click"
 msgstr "Н_ажатие касанием"
 
-#: panels/mouse/cc-mouse-panel.ui:258
+#: panels/mouse/cc-mouse-panel.ui:262
 msgid "Quickly touch the touchpad to click"
 msgstr "Быстро коснитесь сенсорной панели для нажатия"
 
-#: panels/mouse/cc-mouse-panel.ui:274 panels/mouse/cc-mouse-test.ui:153
+#: panels/mouse/cc-mouse-panel.ui:277
 msgid "Scrolling"
 msgstr "Прокрутка"
 
-#: panels/mouse/cc-mouse-panel.ui:277
+#: panels/mouse/cc-mouse-panel.ui:281
 msgid "Scroll Method"
 msgstr "Способ прокрутки"
 
-#: panels/mouse/cc-mouse-panel.ui:278
+#: panels/mouse/cc-mouse-panel.ui:282
 msgid "T_wo Finger"
 msgstr "Д_ва пальца"
 
-#: panels/mouse/cc-mouse-panel.ui:279
+#: panels/mouse/cc-mouse-panel.ui:283
 msgid "Drag two fingers on the touchpad"
 msgstr "Проведите двумя пальцами по сенсорной панели"
 
-#: panels/mouse/cc-mouse-panel.ui:281
+#: panels/mouse/cc-mouse-panel.ui:285
 msgid "_Edge"
 msgstr "_Край"
 
-#: panels/mouse/cc-mouse-panel.ui:282
+#: panels/mouse/cc-mouse-panel.ui:286
 msgid "Drag one finger on the edge"
 msgstr "Проведите одним пальцем по краю"
 
-#: panels/mouse/cc-mouse-panel.ui:295
+#: panels/mouse/cc-mouse-panel.ui:299
 msgid "T_raditional"
 msgstr "Т_радиционное"
 
@@ -2733,17 +2774,25 @@ msgstr "Т_радиционное"
 msgid "Test Mouse & Touchpad"
 msgstr "Тест мыши и сенсорной панели"
 
-#: panels/mouse/cc-mouse-test.ui:43
+#: panels/mouse/cc-mouse-test.ui:32
+msgid "_Clicking"
+msgstr "_Нажатие"
+
+#: panels/mouse/cc-mouse-test.ui:44
 msgid "Click Here"
 msgstr "Нажмите здесь"
 
-#: panels/mouse/cc-mouse-test.ui:87
+#: panels/mouse/cc-mouse-test.ui:88
 msgid "Primary Click"
 msgstr "Нажатие основной кнопки"
 
-#: panels/mouse/cc-mouse-test.ui:135
+#: panels/mouse/cc-mouse-test.ui:136
 msgid "Double Click"
 msgstr "Двойное нажатие"
+
+#: panels/mouse/cc-mouse-test.ui:154
+msgid "_Scrolling"
+msgstr "_Прокрутка"
 
 #: panels/mouse/gnome-mouse-panel.desktop.in:3
 msgid "Mouse & Touchpad"
@@ -2883,7 +2932,7 @@ msgstr "К_онфигурация"
 msgid "Con_figuration URL"
 msgstr "URL _конфигурации"
 
-#: panels/network/cc-net-proxy-page.ui:92
+#: panels/network/cc-net-proxy-page.ui:93
 msgid ""
 "Web Proxy Autodiscovery is used when a Configuration URL is not provided. "
 "This is not recommended for untrusted public networks."
@@ -2891,37 +2940,37 @@ msgstr ""
 "Web Proxy Autodiscovery используется, когда URL конфигурации не "
 "предоставлен. Это не рекомендуется для ненадежных публичных сетей."
 
-#: panels/network/cc-net-proxy-page.ui:109
+#: panels/network/cc-net-proxy-page.ui:110
 msgid "HTTP Proxy"
 msgstr "HTTP-прокси"
 
-#: panels/network/cc-net-proxy-page.ui:113
-#: panels/network/cc-net-proxy-page.ui:139
-#: panels/network/cc-net-proxy-page.ui:165
-#: panels/network/cc-net-proxy-page.ui:191
+#: panels/network/cc-net-proxy-page.ui:114
+#: panels/network/cc-net-proxy-page.ui:140
+#: panels/network/cc-net-proxy-page.ui:166
+#: panels/network/cc-net-proxy-page.ui:192
 msgid "URL"
 msgstr "URL"
 
-#: panels/network/cc-net-proxy-page.ui:120
-#: panels/network/cc-net-proxy-page.ui:146
-#: panels/network/cc-net-proxy-page.ui:172
-#: panels/network/cc-net-proxy-page.ui:198
+#: panels/network/cc-net-proxy-page.ui:121
+#: panels/network/cc-net-proxy-page.ui:147
+#: panels/network/cc-net-proxy-page.ui:173
+#: panels/network/cc-net-proxy-page.ui:199
 msgid "Port"
 msgstr "Порт"
 
-#: panels/network/cc-net-proxy-page.ui:135
+#: panels/network/cc-net-proxy-page.ui:136
 msgid "HTTPS Proxy"
 msgstr "HTTPS-прокси"
 
-#: panels/network/cc-net-proxy-page.ui:161
+#: panels/network/cc-net-proxy-page.ui:162
 msgid "FTP Proxy"
 msgstr "FTP-прокси"
 
-#: panels/network/cc-net-proxy-page.ui:187
+#: panels/network/cc-net-proxy-page.ui:188
 msgid "SOCKS Host"
 msgstr "Хост SOCKS"
 
-#: panels/network/cc-net-proxy-page.ui:214
+#: panels/network/cc-net-proxy-page.ui:215
 msgid "Ignored Hosts"
 msgstr "Игнорируемые хосты"
 
@@ -3021,7 +3070,7 @@ msgid "Connected"
 msgstr "Подключено"
 
 #: panels/network/cc-wifi-connection-row.ui:63
-#: panels/network/network-ethernet.ui:47
+#: panels/network/network-bluetooth.ui:14 panels/network/network-ethernet.ui:47
 msgid "Network Options"
 msgstr "Параметры сети"
 
@@ -3087,7 +3136,7 @@ msgstr "Автоматически сгенерировать пароль"
 msgid "_Turn On"
 msgstr "_Включить"
 
-#: panels/network/cc-wifi-panel.c:408
+#: panels/network/cc-wifi-panel.c:419
 #: panels/network/gnome-wifi-panel.desktop.in:3
 #: panels/network/network-wifi.ui:67 panels/network/network-wifi.ui:76
 msgid "Wi-Fi"
@@ -3099,7 +3148,7 @@ msgstr "Авиарежим"
 
 #: panels/network/cc-wifi-panel.ui:45
 msgid "Disables Wi-Fi, Bluetooth and mobile broadband"
-msgstr "Отключает Wi-Fi, Bluetooth и мобильную связь"
+msgstr "Отключает Wi-Fi, Bluetooth и мобильную передачу"
 
 #: panels/network/cc-wifi-panel.ui:68
 msgid "Wi-Fi Off"
@@ -3117,7 +3166,7 @@ msgstr "Адаптеры Wi-Fi не найдены"
 msgid "Make sure you have a Wi-Fi adapter plugged and turned on"
 msgstr "Убедитесь, что адаптер Wi-Fi вставлен в разъём и включён"
 
-#: panels/network/cc-wifi-panel.ui:96 panels/wwan/cc-wwan-panel.ui:64
+#: panels/network/cc-wifi-panel.ui:96 panels/wwan/cc-wwan-panel.ui:63
 msgid "Airplane Mode On"
 msgstr "Включён авиарежим"
 
@@ -3177,6 +3226,7 @@ msgstr "_Безопасность 802.1x"
 #: panels/network/connection-editor/bluetooth-page.ui:16
 #: panels/network/connection-editor/ethernet-page.ui:27
 #: panels/network/connection-editor/vpn-page.ui:23
+#: panels/printers/pp-details-dialog.ui:24
 #: panels/system/users/cc-user-page.ui:84
 msgid "_Name"
 msgstr "_Название"
@@ -3623,7 +3673,6 @@ msgstr "Адреса"
 #: panels/network/connection-editor/ip4-page.ui:267
 #: panels/network/connection-editor/ip6-page.ui:130
 #: panels/network/connection-editor/ip6-page.ui:278
-#: panels/printers/pp-details-dialog.ui:36
 msgid "Address"
 msgstr "Адрес"
 
@@ -3846,7 +3895,7 @@ msgstr "Узлы не настроены"
 
 #: panels/network/connection-editor/wireguard-peer.ui:46
 #: panels/network/net-device-ethernet.c:326
-#: panels/network/network-bluetooth.ui:19 panels/network/network-mobile.ui:329
+#: panels/network/network-mobile.ui:329
 msgid "Options…"
 msgstr "Параметры…"
 
@@ -3931,7 +3980,7 @@ msgstr "Управление подключением к Интернету"
 #. Translators: Search terms to find the Network panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/network/gnome-network-panel.desktop.in:15
 msgid "Network;IP;LAN;Proxy;WAN;Broadband;Modem;Bluetooth;vpn;DNS;"
-msgstr "Сеть;IP;LAN;Прокси;WAN;Мобильная;Модем;Bluetooth;vpn;DNS;"
+msgstr "Сеть;IP;LAN;Прокси;WAN;Мобильная;Передача;Модем;Bluetooth;vpn;DNS;"
 
 #: panels/network/gnome-wifi-panel.desktop.in:4
 msgid "Control how you connect to Wi-Fi networks"
@@ -3940,7 +3989,8 @@ msgstr "Контролируйте, как вы подключаетесь к с
 #. Translators: Search terms to find the Wi-Fi panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/network/gnome-wifi-panel.desktop.in:15
 msgid "Network;Wireless;Wi-Fi;Wifi;IP;LAN;Broadband;DNS;Hotspot;"
-msgstr "Сеть;Беспроводная;Wi-Fi;Wifi;IP;LAN;Мобильная;DNS;Точка;доступа;"
+msgstr ""
+"Сеть;Беспроводная;Wi-Fi;Wifi;IP;LAN;Мобильная;Передача;DNS;Точка;доступа;"
 
 #: panels/network/net-device-ethernet.c:93
 msgid "never"
@@ -4024,6 +4074,10 @@ msgstr "IMEI"
 #: panels/network/network-mobile.ui:41
 msgid "Provider"
 msgstr "Провайдер"
+
+#: panels/network/network-mobile.ui:289
+msgid "Mobile Broadband"
+msgstr "Мобильная передача"
 
 #: panels/network/network-mobile.ui:300
 msgid "Not connected"
@@ -4498,21 +4552,21 @@ msgstr "Другое"
 msgid "Error"
 msgstr "Ошибка"
 
-#: panels/online-accounts/cc-online-accounts-panel.ui:16
+#: panels/online-accounts/cc-online-accounts-panel.ui:18
 msgid "Offline — unable to connect accounts"
 msgstr "Не в сети - невозможно подключить учётные записи"
 
-#: panels/online-accounts/cc-online-accounts-panel.ui:22
+#: panels/online-accounts/cc-online-accounts-panel.ui:24
 msgid "Allow apps to access online services by connecting your cloud accounts"
 msgstr ""
 "Разрешить приложениям доступ к онлайн-службам путем подключения облачных "
 "учётных записей"
 
-#: panels/online-accounts/cc-online-accounts-panel.ui:26
+#: panels/online-accounts/cc-online-accounts-panel.ui:28
 msgid "Your Accounts"
 msgstr "Ваши учётные записи"
 
-#: panels/online-accounts/cc-online-accounts-panel.ui:46
+#: panels/online-accounts/cc-online-accounts-panel.ui:48
 msgid "Connect an Account"
 msgstr "Подключить учётную запись"
 
@@ -4959,26 +5013,19 @@ msgstr ""
 "Printer;Queue;Print;Paper;Ink;Toner;Принтер;Очередь;Печать;Бумага;Чернила;"
 "Тонер;"
 
-#. Translators: This is the title of the dialog. %s is the printer name.
-#: panels/printers/pp-details-dialog.c:75
-#: panels/printers/pp-details-dialog.c:369
-#, c-format
-msgid "%s Details"
-msgstr "Подробности %s"
-
-#: panels/printers/pp-details-dialog.c:108
+#: panels/printers/pp-details-dialog.c:107
 msgid "No suitable driver found"
 msgstr "Подходящий драйвер не найден"
 
-#: panels/printers/pp-details-dialog.c:119
+#: panels/printers/pp-details-dialog.c:118
 msgid "Searching for preferred drivers…"
 msgstr "Поиск предпочтительных драйверов…"
 
-#: panels/printers/pp-details-dialog.c:265
+#: panels/printers/pp-details-dialog.c:264
 msgid "Select PPD File"
 msgstr "Выберите файл PPD"
 
-#: panels/printers/pp-details-dialog.c:274
+#: panels/printers/pp-details-dialog.c:273
 msgid ""
 "PostScript Printer Description files (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, *."
 "PPD.GZ)"
@@ -4986,31 +5033,44 @@ msgstr ""
 "Файлы PostScript Printer Description (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, *."
 "PPD.GZ)"
 
-#: panels/printers/pp-details-dialog.ui:23
-#: panels/printers/pp-printer-entry.ui:97
-#: panels/privacy/location/cc-location-page.ui:4
-msgid "Location"
-msgstr "Местоположение"
+#: panels/printers/pp-details-dialog.ui:4
+#: panels/printers/pp-details-dialog.ui:12
+#: panels/printers/pp-printer-entry.ui:246
+msgid "Printer Details"
+msgstr "Сведения о принтере"
 
-#. Translators: Name of column showing printer drivers
-#: panels/printers/pp-details-dialog.ui:58
-#: panels/printers/pp-ppd-selection-dialog.c:236
-msgid "Driver"
-msgstr "Драйвер"
-
-#: panels/printers/pp-details-dialog.ui:93
+#: panels/printers/pp-details-dialog.ui:35
 msgid "Printer names cannot contain SPACE, TAB, #, or /"
 msgstr "Имена принтеров не могут содержать пробел, TAB, # или /"
 
-#: panels/printers/pp-details-dialog.ui:114
+#: panels/printers/pp-details-dialog.ui:54
+#: panels/privacy/cc-privacy-panel.ui:34
+msgid "_Location"
+msgstr "М_естоположение"
+
+#: panels/printers/pp-details-dialog.ui:60
+msgid "_Address"
+msgstr "_Адрес"
+
+#: panels/printers/pp-details-dialog.ui:69
+msgid "Open Address"
+msgstr "Открыть адрес"
+
+#. Translators: Name of column showing printer drivers
+#: panels/printers/pp-details-dialog.ui:81
+#: panels/printers/pp-ppd-selection-dialog.c:232
+msgid "Driver"
+msgstr "Драйвер"
+
+#: panels/printers/pp-details-dialog.ui:102
 msgid "_Search for Drivers"
 msgstr "_Поиск драйверов"
 
-#: panels/printers/pp-details-dialog.ui:121
+#: panels/printers/pp-details-dialog.ui:109
 msgid "S_elect from Database…"
 msgstr "В_ыбрать из базы данных…"
 
-#: panels/printers/pp-details-dialog.ui:128
+#: panels/printers/pp-details-dialog.ui:116
 msgid "_Install PPD File…"
 msgstr "_Установить файл PPD…"
 
@@ -5155,22 +5215,26 @@ msgstr "Имя пользователя"
 msgid "A_uthenticate"
 msgstr "А_утентификация"
 
+#: panels/printers/pp-jobs-dialog.ui:119
+msgid "Printer Jobs"
+msgstr "Задания принтера"
+
 #. Translators: this action removes (purges) all the listed jobs from the list.
-#: panels/printers/pp-jobs-dialog.ui:127
+#: panels/printers/pp-jobs-dialog.ui:128
 msgid "_Clear All"
 msgstr "О_чистить все"
 
-#: panels/printers/pp-jobs-dialog.ui:138
+#: panels/printers/pp-jobs-dialog.ui:139
 msgid "Active Jobs"
 msgstr "Активные задания"
 
 #. Translators: this label describes the dialog empty state, with no jobs listed.
-#: panels/printers/pp-jobs-dialog.ui:151
+#: panels/printers/pp-jobs-dialog.ui:152
 msgid "No Active Printer Jobs"
 msgstr "Нет активных заданий печати"
 
 #. Translators: This button pop up authentication dialog for print jobs which need credentials.
-#: panels/printers/pp-jobs-dialog.ui:195
+#: panels/printers/pp-jobs-dialog.ui:196
 msgid "_Authenticate"
 msgstr "_Авторизоваться"
 
@@ -5273,106 +5337,115 @@ msgid "Enter username and password to view printers on Print Server"
 msgstr ""
 "Введите имя пользователя и пароль для просмотра принтеров на сервере печати"
 
-#: panels/printers/pp-options-dialog.c:85
+#: panels/printers/pp-options-dialog.c:86
 msgid "Two Sided"
 msgstr "Двусторонняя печать"
 
-#: panels/printers/pp-options-dialog.c:86
+#: panels/printers/pp-options-dialog.c:87
 msgid "Paper Type"
 msgstr "Тип бумаги"
 
-#: panels/printers/pp-options-dialog.c:87
+#: panels/printers/pp-options-dialog.c:88
 msgid "Paper Source"
 msgstr "Источники бумаги"
 
-#: panels/printers/pp-options-dialog.c:88
+#: panels/printers/pp-options-dialog.c:89
 msgid "Output Tray"
 msgstr "Приёмный лоток"
 
-#: panels/printers/pp-options-dialog.c:89
+#: panels/printers/pp-options-dialog.c:90
 msgctxt "printing option"
 msgid "Resolution"
 msgstr "Разрешение"
 
-#: panels/printers/pp-options-dialog.c:90
+#: panels/printers/pp-options-dialog.c:91
 msgid "GhostScript pre-filtering"
 msgstr "Предварительная фильтрация GhostScript"
 
+#: panels/printers/pp-options-dialog.c:92
+msgid "Shrink Page"
+msgstr "Сократить страницу"
+
 #. Translators: This option sets number of pages printed on one sheet
-#: panels/printers/pp-options-dialog.c:508
+#: panels/printers/pp-options-dialog.c:510
 msgid "Pages per side"
 msgstr "Страниц на сторону"
 
 #. Translators: This option sets whether to print on both sides of paper
-#: panels/printers/pp-options-dialog.c:520
+#: panels/printers/pp-options-dialog.c:522
 msgid "Two-sided"
 msgstr "Двусторонняя печать"
 
 #. Translators: This option sets orientation of print (portrait, landscape...)
-#: panels/printers/pp-options-dialog.c:532
+#: panels/printers/pp-options-dialog.c:534
 msgid "Orientation"
 msgstr "Ориентация"
 
 #. Translators: "General" tab contains general printer options
-#: panels/printers/pp-options-dialog.c:629
+#: panels/printers/pp-options-dialog.c:631
 msgctxt "Printer Option Group"
 msgid "General"
 msgstr "Общие"
 
 #. Translators: "Page Setup" tab contains settings related to pages (page size, paper source, etc.)
-#: panels/printers/pp-options-dialog.c:632
+#: panels/printers/pp-options-dialog.c:634
 msgctxt "Printer Option Group"
 msgid "Page Setup"
 msgstr "Настройка страницы"
 
 #. Translators: "Installable Options" tab contains settings of presence of installed options (amount of RAM, duplex unit, etc.)
-#: panels/printers/pp-options-dialog.c:635
+#: panels/printers/pp-options-dialog.c:637
 msgctxt "Printer Option Group"
 msgid "Installable Options"
 msgstr "Устанавливаемые параметры"
 
 #. Translators: "Job" tab contains settings for jobs
-#: panels/printers/pp-options-dialog.c:638
+#: panels/printers/pp-options-dialog.c:640
 msgctxt "Printer Option Group"
 msgid "Job"
 msgstr "Задание"
 
 #. Translators: "Image Quality" tab contains settings for quality of output print (e.g. resolution)
-#: panels/printers/pp-options-dialog.c:641
+#: panels/printers/pp-options-dialog.c:643
 msgctxt "Printer Option Group"
 msgid "Image Quality"
 msgstr "Качество изображения"
 
 #. Translators: "Color" tab contains color settings (e.g. color printing)
-#: panels/printers/pp-options-dialog.c:644
+#: panels/printers/pp-options-dialog.c:646
 msgctxt "Printer Option Group"
 msgid "Color"
 msgstr "Цвет"
 
 #. Translators: "Finishing" tab contains finishing settings (e.g. booklet printing)
-#: panels/printers/pp-options-dialog.c:647
+#: panels/printers/pp-options-dialog.c:649
 msgctxt "Printer Option Group"
 msgid "Finishing"
 msgstr "Отделка"
 
 #. Translators: "Advanced" tab contains all others settings
-#: panels/printers/pp-options-dialog.c:650
+#: panels/printers/pp-options-dialog.c:652
 msgctxt "Printer Option Group"
 msgid "Advanced"
 msgstr "Дополнительно"
 
 #. Translators: Name of job which makes printer to print test page
-#: panels/printers/pp-options-dialog.c:831
+#: panels/printers/pp-options-dialog.c:833
 msgid "Test Page"
 msgstr "Пробная страница"
 
 #. Translators: Name of job which makes printer to print test page
-#: panels/printers/pp-options-dialog.c:844
+#: panels/printers/pp-options-dialog.c:846
 msgid "Test page"
 msgstr "Пробная страница"
 
+#: panels/printers/pp-options-dialog.ui:6
+#: panels/printers/pp-options-dialog.ui:28
+msgid "Printer Options"
+msgstr "Параметры принтера"
+
 #. Translators: This button triggers the printing of a test page.
-#: panels/printers/pp-options-dialog.ui:17
+#: panels/printers/pp-options-dialog.ui:18
 msgid "_Test Page"
 msgstr "_Пробная страница"
 
@@ -5413,7 +5486,7 @@ msgid "No pre-filtering"
 msgstr "Без предварительной фильтрации"
 
 #. Translators: Name of column showing printer manufacturers
-#: panels/printers/pp-ppd-selection-dialog.c:220
+#: panels/printers/pp-ppd-selection-dialog.c:216
 #: panels/wwan/cc-wwan-details-dialog.ui:160
 msgid "Manufacturer"
 msgstr "Производитель"
@@ -5422,14 +5495,9 @@ msgstr "Производитель"
 msgid "Select Printer Driver"
 msgstr "Выберите драйвер принтера"
 
-#: panels/printers/pp-ppd-selection-dialog.ui:17
-#: panels/wwan/cc-wwan-device-page.c:188
-msgid "Cancel"
-msgstr "Отменить"
-
-#: panels/printers/pp-ppd-selection-dialog.ui:100
-msgid "Loading drivers database…"
-msgstr "Загрузка базы данных драйверов…"
+#: panels/printers/pp-ppd-selection-dialog.ui:47
+msgid "Loading Drivers"
+msgstr "Загрузка драйверов"
 
 #. Translators: This is the label of the button that opens the Jobs Dialog.
 #: panels/printers/pp-printer-entry.c:532
@@ -5561,6 +5629,11 @@ msgstr "Обработка"
 msgid "Model"
 msgstr "Модель"
 
+#: panels/printers/pp-printer-entry.ui:97
+#: panels/privacy/location/cc-location-page.ui:4
+msgid "Location"
+msgstr "Местоположение"
+
 #: panels/printers/pp-printer-entry.ui:124
 #: panels/privacy/bolt/cc-bolt-device-dialog.ui:25
 msgid "Status"
@@ -5583,10 +5656,6 @@ msgstr "Перезапустить"
 #: panels/printers/pp-printer-entry.ui:242
 msgid "Printing Options"
 msgstr "Параметры печати"
-
-#: panels/printers/pp-printer-entry.ui:246
-msgid "Printer Details"
-msgstr "Сведения о принтере"
 
 #. Set this printer as default
 #: panels/printers/pp-printer-entry.ui:250
@@ -5783,7 +5852,7 @@ msgstr ""
 msgid "Pending Devices"
 msgstr "Ожидающие устройства"
 
-#: panels/privacy/bolt/cc-bolt-page.ui:257
+#: panels/privacy/bolt/cc-bolt-page.ui:246
 msgid "No devices attached"
 msgstr "Нет подключённых устройств"
 
@@ -5800,7 +5869,7 @@ msgid "Allow permitted apps to use cameras"
 msgstr "Позволить разрешенным приложениям использовать камеры"
 
 #: panels/privacy/camera/cc-camera-page.ui:27
-#: panels/privacy/location/cc-location-page.ui:55
+#: panels/privacy/location/cc-location-page.ui:27
 msgid "Permitted Apps"
 msgstr "Разрешенные приложения"
 
@@ -5830,10 +5899,6 @@ msgstr "Блокировка _экрана"
 #: panels/privacy/cc-privacy-panel.ui:23
 msgid "Automatic screen lock"
 msgstr "Автоматическая блокировка экрана"
-
-#: panels/privacy/cc-privacy-panel.ui:34
-msgid "_Location"
-msgstr "М_естоположение"
 
 #: panels/privacy/cc-privacy-panel.ui:35
 msgid "Control access to your location"
@@ -6330,27 +6395,17 @@ msgstr ""
 "История;Файлы;Корзина;Диагностика;Местоположение;Камера;Фото;Видео;Веб-"
 "камера;Запись;Безопастность;Прошивка;"
 
-#. Translators: This will be presented as the text of a link to the privacy policy
-#: panels/privacy/location/cc-location-page.c:446
-msgid "Learn about what data is collected, and how it is used."
-msgstr "Узнайте, какие данные собираются и как они используются."
-
 #: panels/privacy/location/cc-location-page.ui:17
 msgid "_Automatic Device Location"
 msgstr "_Автоматическое определение местоположения устройства"
 
-#: panels/privacy/location/cc-location-page.ui:28
-msgid ""
-"Automatic device location uses sources like GPS, Wi-Fi and cellular to "
-"determine an approximate location for this device. Location data is sent to "
-"Mozilla Location Services as part of this feature."
+#: panels/privacy/location/cc-location-page.ui:18
+msgid "Use sources like GPS and cellular to determine device location"
 msgstr ""
-"Автоматическое определение местоположения устройства использует такие "
-"источники, как GPS, Wi-Fi и сотовая связь, чтобы определить приблизительное "
-"местоположение устройства. В рамках этой функции данные о местоположении "
-"отправляются в службу определения местоположения Mozilla."
+"Использовать такие источники, как GPS и сотовая связь, для определения "
+"местоположения устройства"
 
-#: panels/privacy/location/cc-location-page.ui:56
+#: panels/privacy/location/cc-location-page.ui:28
 msgid ""
 "The following sandboxed apps have been given access to location data. Apps "
 "that are not sandboxed can access location data without asking for "
@@ -6360,7 +6415,7 @@ msgstr ""
 "о местоположении. Приложения, не находящиеся в \"песочнице\", могут получать "
 "доступ к данным о местоположении, не запрашивая разрешения."
 
-#: panels/privacy/location/cc-location-page.ui:66
+#: panels/privacy/location/cc-location-page.ui:38
 msgid "No sandboxed apps have asked for location access"
 msgstr ""
 "Нет приложений, находящихся в \"песочнице\", запросивших доступ к "
@@ -6902,6 +6957,10 @@ msgstr "Сабвуфер"
 #: panels/sound/cc-volume-levels-page.ui:4
 msgid "Volume Levels"
 msgstr "Уровни громкости"
+
+#: panels/sound/cc-volume-levels-page.ui:19
+msgid "No Sound Playing"
+msgstr "Нет воспроизведения звука"
 
 #: panels/sound/cc-volume-slider.c:52
 msgid "Unmute"
@@ -7448,22 +7507,22 @@ msgid "Language;Layout;Keyboard;Input;"
 msgstr "Language;Layout;Keyboard;Input;Язык;Раскладка;Клавиатура;Ввод;"
 
 #: panels/system/remote-desktop/cc-desktop-sharing-page.c:358
-#: panels/system/remote-desktop/cc-remote-login-page.c:98
+#: panels/system/remote-desktop/cc-remote-login-page.c:97
 msgid "Device address copied to clipboard"
 msgstr "Адрес устройства скопирован в буфер обмена"
 
 #: panels/system/remote-desktop/cc-desktop-sharing-page.c:367
-#: panels/system/remote-desktop/cc-remote-login-page.c:107
+#: panels/system/remote-desktop/cc-remote-login-page.c:106
 msgid "Port number copied to clipboard"
 msgstr "Номер порта скопирован в буфер обмена"
 
 #: panels/system/remote-desktop/cc-desktop-sharing-page.c:378
-#: panels/system/remote-desktop/cc-remote-login-page.c:118
+#: panels/system/remote-desktop/cc-remote-login-page.c:117
 msgid "Username copied to clipboard"
 msgstr "Имя пользователя скопировано в буфер обмена"
 
 #: panels/system/remote-desktop/cc-desktop-sharing-page.c:389
-#: panels/system/remote-desktop/cc-remote-login-page.c:129
+#: panels/system/remote-desktop/cc-remote-login-page.c:128
 msgid "Password copied to clipboard"
 msgstr "Пароль скопирован в буфер обмена"
 
@@ -7564,7 +7623,7 @@ msgstr "Об_щий доступ к рабочему столу"
 msgid "Remote _Login"
 msgstr "Удаленный в_ход"
 
-#: panels/system/remote-desktop/cc-remote-login-page.c:764
+#: panels/system/remote-desktop/cc-remote-login-page.c:725
 #: panels/system/users/cc-user-page.c:763
 msgid "Some settings are locked"
 msgstr "Некоторые настройки заблокированы"
@@ -7986,47 +8045,47 @@ msgstr "Управление отпечатками"
 msgid "Fingerprint"
 msgstr "Отпечаток пальца"
 
-#: panels/system/users/cc-fingerprint-dialog.ui:79
+#: panels/system/users/cc-fingerprint-dialog.ui:77
 msgid "_No"
 msgstr "_Нет"
 
-#: panels/system/users/cc-fingerprint-dialog.ui:87
+#: panels/system/users/cc-fingerprint-dialog.ui:85
 msgid "_Yes"
 msgstr "_Да"
 
-#: panels/system/users/cc-fingerprint-dialog.ui:107
+#: panels/system/users/cc-fingerprint-dialog.ui:105
 msgid ""
 "Do you want to delete your registered fingerprints so fingerprint login is "
 "disabled?"
 msgstr ""
 "Удалить зарегистрированные отпечатки пальцев и запретить доступ по отпечатку?"
 
-#: panels/system/users/cc-fingerprint-dialog.ui:163
+#: panels/system/users/cc-fingerprint-dialog.ui:161
 msgid "No fingerprint device"
 msgstr "Нет устройства чтения отпечатков"
 
 #. Translators: This is the empty state page label which states that there are no devices ready.
-#: panels/system/users/cc-fingerprint-dialog.ui:178
+#: panels/system/users/cc-fingerprint-dialog.ui:176
 msgid "No Fingerprint device"
 msgstr "Нет устройства чтения отпечатков"
 
-#: panels/system/users/cc-fingerprint-dialog.ui:187
+#: panels/system/users/cc-fingerprint-dialog.ui:185
 msgid "Ensure the device is properly connected"
 msgstr "Убедитесь, что устройство правильно подключено"
 
-#: panels/system/users/cc-fingerprint-dialog.ui:195
+#: panels/system/users/cc-fingerprint-dialog.ui:193
 msgid "Fingerprint Device"
 msgstr "Устройство чтения отпечатков"
 
-#: panels/system/users/cc-fingerprint-dialog.ui:204
+#: panels/system/users/cc-fingerprint-dialog.ui:202
 msgid "Choose the fingerprint device you want to configure"
 msgstr "Выберите устройство чтения отпечатков для настройки"
 
-#: panels/system/users/cc-fingerprint-dialog.ui:234
+#: panels/system/users/cc-fingerprint-dialog.ui:232
 msgid "Fingerprint Login"
 msgstr "Вход по отпечатку"
 
-#: panels/system/users/cc-fingerprint-dialog.ui:240
+#: panels/system/users/cc-fingerprint-dialog.ui:238
 msgid ""
 "Fingerprint login allows you to unlock and log into your device with your "
 "finger"
@@ -8034,11 +8093,11 @@ msgstr ""
 "Вход по отпечатку пальца позволяет разблокировать устройство и войти в него "
 "с помощью пальца"
 
-#: panels/system/users/cc-fingerprint-dialog.ui:267
+#: panels/system/users/cc-fingerprint-dialog.ui:265
 msgid "_Delete Fingerprints"
 msgstr "_Удалить отпечатки"
 
-#: panels/system/users/cc-fingerprint-dialog.ui:281
+#: panels/system/users/cc-fingerprint-dialog.ui:279
 msgid "Fingerprint Enroll"
 msgstr "Ввод по отпечатка"
 
@@ -8413,8 +8472,8 @@ msgstr "Неизвестная ошибка"
 #. Translators: '%c' is an invalid character, such as @, #, etc...
 #: panels/system/users/user-utils.c:148
 #, c-format
-msgid "Usernames cannot include %c"
-msgstr "Имена пользователей не могут содержать %c"
+msgid "Usernames cannot include “%c”"
+msgstr "Имена пользователей не могут содержать “%c”"
 
 #: panels/system/users/user-utils.c:152
 msgid "Username is already in use — please choose another"
@@ -9165,15 +9224,24 @@ msgstr "Планшет не обнаружен"
 msgid "Please plug in or turn on your Wacom tablet"
 msgstr "Пожалуйста, подключите или включите планшет Wacom"
 
-#: panels/wacom/cc-wacom-stylus-action-dialog.c:153
+#: panels/wacom/cc-wacom-stylus-action-dialog.c:253
 #, c-format
 msgid "Choose an action when button %d on the stylus is pressed"
 msgstr "Выберите действие при нажатии кнопки \"%d\" на стилусе"
 
-#: panels/wacom/cc-wacom-stylus-action-dialog.c:156
+#: panels/wacom/cc-wacom-stylus-action-dialog.c:256
 #, c-format
 msgid "Button %d Mapping"
 msgstr "Сопоставление кнопки \"%d\""
+
+#: panels/wacom/cc-wacom-stylus-action-dialog.ui:113
+#: panels/wacom/cc-wacom-stylus-action-dialog.ui:152
+msgid "Assign Keystroke"
+msgstr "Назначение нажатия клавиши"
+
+#: panels/wacom/cc-wacom-stylus-action-dialog.ui:179
+msgid "Press Esc to cancel"
+msgstr "Нажмите Esc для отмены"
 
 #: panels/wacom/cc-wacom-stylus-page.c:395
 msgid "_Left Mousebutton Click"
@@ -9196,6 +9264,14 @@ msgstr "_Назад"
 #: panels/wacom/cc-wacom-stylus-page.c:409
 msgid "_Forward"
 msgstr "_Вперед"
+
+#: panels/wacom/cc-wacom-stylus-page.c:412
+msgid "_Assign Keystroke"
+msgstr "На_значение нажатия клавиши"
+
+#: panels/wacom/cc-wacom-stylus-page.c:415
+msgid "_Switch Monitor"
+msgstr "П_ереключение монитора"
 
 #: panels/wacom/cc-wacom-stylus-page.ui:16
 msgid "Tip _Pressure Feel"
@@ -9532,6 +9608,10 @@ msgstr "Разблокирование SIM-карты"
 msgid "Unlock"
 msgstr "Разблокировать"
 
+#: panels/wwan/cc-wwan-device-page.c:188
+msgid "Cancel"
+msgstr "Отменить"
+
 #: panels/wwan/cc-wwan-device-page.c:192
 #, c-format
 msgid "Please provide PIN code for SIM %d"
@@ -9746,7 +9826,7 @@ msgstr "Выберите сеть"
 msgid "Refresh Network Providers"
 msgstr "Обновить список провайдеров"
 
-#: panels/wwan/cc-wwan-panel.c:365 panels/wwan/cc-wwan-panel.c:396
+#: panels/wwan/cc-wwan-panel.c:366 panels/wwan/cc-wwan-panel.c:397
 #, c-format
 msgid "SIM %d"
 msgstr "SIM-карта %d"
@@ -9755,27 +9835,27 @@ msgstr "SIM-карта %d"
 msgid "Enable Mobile Network"
 msgstr "Включить мобильную сеть"
 
-#: panels/wwan/cc-wwan-panel.ui:50
+#: panels/wwan/cc-wwan-panel.ui:49
 msgid "No WWAN Adapter Found"
 msgstr "Адаптеры WWAN не найдены"
 
-#: panels/wwan/cc-wwan-panel.ui:51
+#: panels/wwan/cc-wwan-panel.ui:50
 msgid "Make sure you have a Wireless Wan/Cellular device"
 msgstr "Убедитесь, что у вас есть устройство доступа к беспроводным сетям"
 
-#: panels/wwan/cc-wwan-panel.ui:65
+#: panels/wwan/cc-wwan-panel.ui:64
 msgid "Wireless Wan is disabled when airplane mode is on"
 msgstr "Беспроводные сети отключаются при включённом авиарежиме"
 
-#: panels/wwan/cc-wwan-panel.ui:71
+#: panels/wwan/cc-wwan-panel.ui:70
 msgid "_Turn off Airplane Mode"
 msgstr "_Выключить авиарежим"
 
-#: panels/wwan/cc-wwan-panel.ui:106
+#: panels/wwan/cc-wwan-panel.ui:105
 msgid "Data Connection"
 msgstr "Соединение данных"
 
-#: panels/wwan/cc-wwan-panel.ui:107
+#: panels/wwan/cc-wwan-panel.ui:106
 msgid "SIM card used for internet"
 msgstr "SIM-карта, используемая для доступа в Интернет"
 
@@ -9794,6 +9874,10 @@ msgstr "Изменить PIN-код"
 #: panels/wwan/cc-wwan-sim-lock-dialog.ui:123
 msgid "New PIN"
 msgstr "Новый PIN-код"
+
+#: panels/wwan/cc-wwan-sim-lock-dialog.ui:149
+msgid "Confirm"
+msgstr "Подтвердить"
 
 #: panels/wwan/cc-wwan-sim-lock-dialog.ui:201
 msgid "Enter current PIN to change SIM lock settings"
@@ -10011,6 +10095,23 @@ msgstr[2] "%u входов"
 msgid "System Sounds"
 msgstr "Системные звуки"
 
+#, c-format
+#~ msgid "%s Details"
+#~ msgstr "Подробности %s"
+
+#~ msgid "Learn about what data is collected, and how it is used."
+#~ msgstr "Узнайте, какие данные собираются и как они используются."
+
+#~ msgid ""
+#~ "Automatic device location uses sources like GPS, Wi-Fi and cellular to "
+#~ "determine an approximate location for this device. Location data is sent "
+#~ "to Mozilla Location Services as part of this feature."
+#~ msgstr ""
+#~ "Автоматическое определение местоположения устройства использует такие "
+#~ "источники, как GPS, Wi-Fi и сотовая связь, чтобы определить "
+#~ "приблизительное местоположение устройства. В рамках этой функции данные о "
+#~ "местоположении отправляются в службу определения местоположения Mozilla."
+
 #~ msgid "Dates & Times"
 #~ msgstr "Дата и время"
 
@@ -10130,9 +10231,6 @@ msgstr "Системные звуки"
 
 #~ msgid "Pass_word"
 #~ msgstr "Па_роль"
-
-#~ msgid "_Confirm"
-#~ msgstr "Под_твердить"
 
 #~ msgctxt "Password hint"
 #~ msgid ""
@@ -12117,9 +12215,6 @@ msgstr "Системные звуки"
 
 #~ msgid "Secure Boot is Inactive"
 #~ msgstr "Безопасная загрузка неактивна"
-
-#~ msgid "Light"
-#~ msgstr "Светлый"
 
 #~ msgid "Set"
 #~ msgstr "Установить"
