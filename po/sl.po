@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2024-08-13 12:03+0000\n"
-"PO-Revision-Date: 2024-08-14 01:56+0200\n"
+"POT-Creation-Date: 2024-08-20 09:57+0000\n"
+"PO-Revision-Date: 2024-08-20 16:53+0200\n"
 "Last-Translator: Martin Srebotnjak <miles@filmsi.net>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "Language: sl_SI\n"
@@ -184,13 +184,15 @@ msgstr "_Odpri v iskalniku programov"
 msgid "Unable to List Apps"
 msgstr "Programov ni mogoče izpisati na seznam"
 
+#. Translators: Parental Controls here refers to the features provided by 'malcontent'
 #: panels/applications/cc-applications-panel.ui:122
 msgid ""
 "An error has occurred and apps cannot be listed.\n"
-"Error details: Malcontent is not installed."
+"Error details: Parental Controls are not installed."
 msgstr ""
 "Prišlo je do napake, zato programov ni mogoče izpisati.\n"
-"Podrobnosti o napaki: program Malcontent (Zlonamerna vsebina) ni nameščen."
+"Podrobnosti o napaki: program Starševski nadzor (Parental Controls) ni "
+"nameščen."
 
 #: panels/applications/cc-applications-panel.ui:139
 #: panels/applications/cc-default-apps-page.ui:4
@@ -1105,6 +1107,7 @@ msgstr "Umerjanje zaslona"
 #: panels/system/users/cc-add-user-dialog.ui:24
 #: panels/system/users/cc-avatar-chooser.c:92
 #: panels/system/users/cc-enterprise-login-dialog.ui:44
+#: panels/system/users/cc-fingerprint-dialog.c:1396
 #: panels/system/users/cc-fingerprint-dialog.ui:32
 #: panels/system/users/cc-password-dialog.ui:15
 #: panels/system/users/cc-user-page.ui:231
@@ -1235,12 +1238,12 @@ msgid "Save Profile"
 msgstr "Shrani profil"
 
 #. TRANSLATORS: this is when the button is sensitive
-#: panels/color/cc-color-panel.c:1141
+#: panels/color/cc-color-panel.c:1144
 msgid "Create a color profile for the selected device"
 msgstr "Ustvari barvni profil za izbrane naprave"
 
 #. TRANSLATORS: this is when the button is insensitive
-#: panels/color/cc-color-panel.c:1156 panels/color/cc-color-panel.c:1180
+#: panels/color/cc-color-panel.c:1159 panels/color/cc-color-panel.c:1183
 msgid ""
 "The measuring instrument is not detected. Please check it is turned on and "
 "correctly connected."
@@ -1249,26 +1252,26 @@ msgstr ""
 "na ustrezen način."
 
 #. TRANSLATORS: this is when the button is insensitive
-#: panels/color/cc-color-panel.c:1190
+#: panels/color/cc-color-panel.c:1193
 msgid "The measuring instrument does not support printer profiling."
 msgstr "Merilna naprava ne podpira profiliranja tiskalnika."
 
 #. TRANSLATORS: this is when the button is insensitive
-#: panels/color/cc-color-panel.c:1201
+#: panels/color/cc-color-panel.c:1204
 msgid "The device type is not currently supported."
 msgstr "Vrsta naprave trenutno ni podprta."
 
 #. Translators: This will be presented as the text of a link to the documentation
 #. translators: Text used in link to privacy policy
 #. Translators: This will be presented as the text of a link to the documentation
-#: panels/color/cc-color-panel.c:1996
+#: panels/color/cc-color-panel.c:1999
 #: panels/privacy/diagnostics/cc-diagnostics-page.c:122
 #: panels/wacom/cc-wacom-device.c:168
 msgid "learn more"
 msgstr "Več podrobnosti"
 
 #. Translators: %s is a link to the documentation with the label "learn more"
-#: panels/color/cc-color-panel.c:1998
+#: panels/color/cc-color-panel.c:2001
 #, c-format
 msgid "Each device needs an up to date color profile to be color managed — %s."
 msgstr ""
@@ -4490,6 +4493,7 @@ msgid "Google"
 msgstr "Google"
 
 #: panels/online-accounts/cc-online-account-provider-row.c:58
+#: panels/online-accounts/cc-online-account-provider-row.c:60
 msgid "Email, calendar, contacts, files"
 msgstr "E-pošta, koledar, stiki, datoteke"
 
@@ -4504,10 +4508,6 @@ msgstr "Elektronski naslov"
 #: panels/online-accounts/cc-online-account-provider-row.c:60
 msgid "Microsoft 365"
 msgstr "Microsoft 365"
-
-#: panels/online-accounts/cc-online-account-provider-row.c:60
-msgid "Files"
-msgstr "Datoteke"
 
 #: panels/online-accounts/cc-online-account-provider-row.c:61
 msgid "Microsoft Exchange"
@@ -6607,7 +6607,7 @@ msgid "Subfolders must be manually added for this location"
 msgstr "Za to mesto je treba podmape dodati ročno"
 
 #: panels/search/cc-search-locations-page.c:598
-#: panels/sharing/cc-sharing-panel.c:423
+#: panels/sharing/cc-sharing-panel.c:424
 msgid "Remove Folder"
 msgstr "Odstrani mapo"
 
@@ -6705,16 +6705,16 @@ msgstr "Dejavno"
 msgid "Choose a Folder"
 msgstr "Izbor mape"
 
-#: panels/sharing/cc-sharing-panel.c:413
+#: panels/sharing/cc-sharing-panel.c:414
 msgid "Open Folder"
 msgstr "Odpri mapo"
 
-#: panels/sharing/cc-sharing-panel.c:443
+#: panels/sharing/cc-sharing-panel.c:444
 msgid "_Add Folder"
 msgstr "_Dodaj mapo"
 
 #. Translators: %s is the hostname of the user's device
-#: panels/sharing/cc-sharing-panel.c:602
+#: panels/sharing/cc-sharing-panel.c:603
 #, c-format
 msgid ""
 "File sharing allows sharing the Public folder with other devices on the "
@@ -6740,7 +6740,7 @@ msgstr "Souporaba _datotek"
 msgid "Stream music, photos and videos to devices on the current network"
 msgstr "Pretoči glasbo, fotografije in video na naprave v trenutnem omrežju"
 
-#: panels/sharing/cc-sharing-panel.ui:38 panels/sharing/cc-sharing-panel.ui:163
+#: panels/sharing/cc-sharing-panel.ui:38 panels/sharing/cc-sharing-panel.ui:164
 msgid "_Media Sharing"
 msgstr "_Souporaba predstavnih datotek"
 
@@ -6758,9 +6758,9 @@ msgstr "N_aslov souporabe datotek"
 #: panels/system/remote-desktop/cc-desktop-sharing-page.ui:95
 #: panels/system/remote-desktop/cc-desktop-sharing-page.ui:112
 #: panels/system/remote-desktop/cc-remote-login-page.ui:52
-#: panels/system/remote-desktop/cc-remote-login-page.ui:72
-#: panels/system/remote-desktop/cc-remote-login-page.ui:94
-#: panels/system/remote-desktop/cc-remote-login-page.ui:111
+#: panels/system/remote-desktop/cc-remote-login-page.ui:73
+#: panels/system/remote-desktop/cc-remote-login-page.ui:95
+#: panels/system/remote-desktop/cc-remote-login-page.ui:112
 #: panels/system/secure-shell/cc-secure-shell-page.ui:49
 msgid "Copy"
 msgstr "Kopiraj"
@@ -6789,11 +6789,11 @@ msgstr ""
 msgid "_Password"
 msgstr "_Geslo"
 
-#: panels/sharing/cc-sharing-panel.ui:150
+#: panels/sharing/cc-sharing-panel.ui:151
 msgid "Media Sharing"
 msgstr "Souporaba predstavnih datotek"
 
-#: panels/sharing/cc-sharing-panel.ui:168
+#: panels/sharing/cc-sharing-panel.ui:169
 msgid ""
 "Media sharing allows streaming pictures, music and video to DLNA enabled "
 "devices on the current network."
@@ -6801,7 +6801,7 @@ msgstr ""
 "Skupna raba predstavnosti omogoča pretakanje slik, glasbe in videoposnetkov "
 "v naprave v trenutnem omrežju, v katerih je omogočen DLNA."
 
-#: panels/sharing/cc-sharing-panel.ui:177
+#: panels/sharing/cc-sharing-panel.ui:178
 msgid "Folders"
 msgstr "Mape"
 
@@ -7196,17 +7196,17 @@ msgid "S_oftware Updates"
 msgstr "_Programske posodobitve"
 
 #. Translators: This is the full date and time format used in 12-hour mode.
-#: panels/system/datetime/cc-datetime-page.c:236
+#: panels/system/datetime/cc-datetime-page.c:237
 msgid "%e %B %Y, %l:%M %p"
 msgstr "%e %B %Y, %l:%M %p"
 
 #. Translators: This is the full date and time format used in 24-hour mode.
-#: panels/system/datetime/cc-datetime-page.c:241
+#: panels/system/datetime/cc-datetime-page.c:242
 msgid "%e %B %Y, %R"
 msgstr "%e %B %Y, %R"
 
 #. Translators: "city, country"
-#: panels/system/datetime/cc-datetime-page.c:401
+#: panels/system/datetime/cc-datetime-page.c:402
 #, c-format
 msgctxt "timezone loc"
 msgid "%s, %s"
@@ -7214,7 +7214,7 @@ msgstr "%s, %s"
 
 #. Update the timezone on the listbow row
 #. Translators: "timezone (details)"
-#: panels/system/datetime/cc-datetime-page.c:418
+#: panels/system/datetime/cc-datetime-page.c:419
 #, c-format
 msgctxt "timezone desc"
 msgid "%s (%s)"
@@ -7250,103 +7250,103 @@ msgstr "Zahteva dostop do omrežja"
 msgid "Date &amp; _Time"
 msgstr "Datum in _čas"
 
-#: panels/system/datetime/cc-datetime-page.ui:147
+#: panels/system/datetime/cc-datetime-page.ui:148
 msgid "Automatic Time _Zone"
 msgstr "Samodejni izbor _časovnega pasu"
 
-#: panels/system/datetime/cc-datetime-page.ui:148
+#: panels/system/datetime/cc-datetime-page.ui:149
 msgid "Requires location services enabled and internet access"
 msgstr "Zahteva dostop do omrežja in omogočene geolokacijske storitve"
 
-#: panels/system/datetime/cc-datetime-page.ui:154
+#: panels/system/datetime/cc-datetime-page.ui:155
 msgid "Time Z_one"
 msgstr "_Časovni pas"
 
-#: panels/system/datetime/cc-datetime-page.ui:165
+#: panels/system/datetime/cc-datetime-page.ui:166
 msgid "Time _Format"
 msgstr "Oblika _izpisa časa"
 
-#: panels/system/datetime/cc-datetime-page.ui:176
+#: panels/system/datetime/cc-datetime-page.ui:177
 msgid "_24-hour"
 msgstr "_24-urni"
 
-#: panels/system/datetime/cc-datetime-page.ui:184
+#: panels/system/datetime/cc-datetime-page.ui:185
 msgid "AM / _PM"
 msgstr "_12-urni"
 
-#: panels/system/datetime/cc-datetime-page.ui:197
+#: panels/system/datetime/cc-datetime-page.ui:198
 msgid "Clock &amp; Calendar"
 msgstr "Čas in koledar"
 
-#: panels/system/datetime/cc-datetime-page.ui:198
+#: panels/system/datetime/cc-datetime-page.ui:199
 msgid "Control how the time and date is shown in the top bar"
 msgstr "Upravljanje prikaza datuma in časa v vrhnji orodni vrstici"
 
-#: panels/system/datetime/cc-datetime-page.ui:201
+#: panels/system/datetime/cc-datetime-page.ui:202
 msgid "_Week Day"
 msgstr "_Dan v tednu"
 
-#: panels/system/datetime/cc-datetime-page.ui:207
+#: panels/system/datetime/cc-datetime-page.ui:208
 msgid "D_ate"
 msgstr "_Datum"
 
-#: panels/system/datetime/cc-datetime-page.ui:213
+#: panels/system/datetime/cc-datetime-page.ui:214
 msgid "_Seconds"
 msgstr "_Sekunde"
 
-#: panels/system/datetime/cc-datetime-page.ui:219
+#: panels/system/datetime/cc-datetime-page.ui:220
 msgid "Week _Numbers"
 msgstr "Številke _tednov"
 
-#: panels/system/datetime/cc-datetime-page.ui:220
+#: panels/system/datetime/cc-datetime-page.ui:221
 msgid "Shown in the dropdown calendar"
 msgstr "Prikazano v spustnem koledarju"
 
-#: panels/system/datetime/cc-datetime-page.ui:256
+#: panels/system/datetime/cc-datetime-page.ui:257
 msgid "January"
 msgstr "januar"
 
-#: panels/system/datetime/cc-datetime-page.ui:257
+#: panels/system/datetime/cc-datetime-page.ui:258
 msgid "February"
 msgstr "februar"
 
-#: panels/system/datetime/cc-datetime-page.ui:258
+#: panels/system/datetime/cc-datetime-page.ui:259
 msgid "March"
 msgstr "marec"
 
-#: panels/system/datetime/cc-datetime-page.ui:259
+#: panels/system/datetime/cc-datetime-page.ui:260
 msgid "April"
 msgstr "april"
 
-#: panels/system/datetime/cc-datetime-page.ui:260
+#: panels/system/datetime/cc-datetime-page.ui:261
 msgid "May"
 msgstr "maj"
 
-#: panels/system/datetime/cc-datetime-page.ui:261
+#: panels/system/datetime/cc-datetime-page.ui:262
 msgid "June"
 msgstr "junij"
 
-#: panels/system/datetime/cc-datetime-page.ui:262
+#: panels/system/datetime/cc-datetime-page.ui:263
 msgid "July"
 msgstr "julij"
 
-#: panels/system/datetime/cc-datetime-page.ui:263
+#: panels/system/datetime/cc-datetime-page.ui:264
 msgid "August"
 msgstr "avgust"
 
-#: panels/system/datetime/cc-datetime-page.ui:264
+#: panels/system/datetime/cc-datetime-page.ui:265
 msgid "September"
 msgstr "september"
 
-#: panels/system/datetime/cc-datetime-page.ui:265
+#: panels/system/datetime/cc-datetime-page.ui:266
 msgid "October"
 msgstr "oktober"
 
-#: panels/system/datetime/cc-datetime-page.ui:266
+#: panels/system/datetime/cc-datetime-page.ui:267
 msgid "November"
 msgstr "november"
 
-#: panels/system/datetime/cc-datetime-page.ui:267
+#: panels/system/datetime/cc-datetime-page.ui:268
 msgid "December"
 msgstr "december"
 
@@ -7569,29 +7569,29 @@ msgid "_Port"
 msgstr "_Vrata"
 
 #: panels/system/remote-desktop/cc-desktop-sharing-page.ui:88
-#: panels/system/remote-desktop/cc-remote-login-page.ui:87
+#: panels/system/remote-desktop/cc-remote-login-page.ui:88
 msgid "Login Details"
 msgstr "Podrobnosti prijave"
 
 #: panels/system/remote-desktop/cc-desktop-sharing-page.ui:91
-#: panels/system/remote-desktop/cc-remote-login-page.ui:90
+#: panels/system/remote-desktop/cc-remote-login-page.ui:91
 #: panels/system/users/cc-add-user-dialog.ui:87
 #: panels/system/users/cc-enterprise-login-dialog.ui:92
 msgid "_Username"
 msgstr "_Uporabniško ime"
 
 #: panels/system/remote-desktop/cc-desktop-sharing-page.ui:108
-#: panels/system/remote-desktop/cc-remote-login-page.ui:107
+#: panels/system/remote-desktop/cc-remote-login-page.ui:108
 msgid "P_assword"
 msgstr "G_eslo"
 
 #: panels/system/remote-desktop/cc-desktop-sharing-page.ui:131
-#: panels/system/remote-desktop/cc-remote-login-page.ui:131
+#: panels/system/remote-desktop/cc-remote-login-page.ui:132
 msgid "_Generate New Password"
 msgstr "Ustvari _novo geslo"
 
 #: panels/system/remote-desktop/cc-desktop-sharing-page.ui:139
-#: panels/system/remote-desktop/cc-remote-login-page.ui:139
+#: panels/system/remote-desktop/cc-remote-login-page.ui:140
 msgid "_Verify Encryption"
 msgstr "_Overi šifriranje"
 
@@ -7810,15 +7810,15 @@ msgstr ""
 msgid "Valid domain"
 msgstr "Veljavna domena"
 
-#: panels/system/users/cc-enterprise-login-dialog.c:552
+#: panels/system/users/cc-enterprise-login-dialog.c:553
 msgid "Domain not found"
 msgstr "Domene ni mogoče najti"
 
-#: panels/system/users/cc-enterprise-login-dialog.c:595
+#: panels/system/users/cc-enterprise-login-dialog.c:597
 msgid "Checking domain…"
 msgstr "Poteka predpomnjenje domene ..."
 
-#: panels/system/users/cc-enterprise-login-dialog.c:639
+#: panels/system/users/cc-enterprise-login-dialog.c:641
 msgid "Failed to contact realmd service"
 msgstr "Povezovanje s storitvijo realmd je spodletelo"
 
@@ -7911,87 +7911,87 @@ msgstr "Prikaz prstnih odtisov je spodletel: %s"
 msgid "Failed to delete saved fingerprints: %s"
 msgstr "Brisanje prstnih odtisov je spodletelo: %s"
 
-#: panels/system/users/cc-fingerprint-dialog.c:608
+#: panels/system/users/cc-fingerprint-dialog.c:609
 msgid "Left thumb"
 msgstr "Levi palec"
 
-#: panels/system/users/cc-fingerprint-dialog.c:610
+#: panels/system/users/cc-fingerprint-dialog.c:611
 msgid "Left middle finger"
 msgstr "Levi sredinec"
 
-#: panels/system/users/cc-fingerprint-dialog.c:612
+#: panels/system/users/cc-fingerprint-dialog.c:613
 msgid "_Left index finger"
 msgstr "_Levi kazalec"
 
-#: panels/system/users/cc-fingerprint-dialog.c:614
+#: panels/system/users/cc-fingerprint-dialog.c:615
 msgid "Left ring finger"
 msgstr "Levi prstanec"
 
-#: panels/system/users/cc-fingerprint-dialog.c:616
+#: panels/system/users/cc-fingerprint-dialog.c:617
 msgid "Left little finger"
 msgstr "Levi mezinec"
 
-#: panels/system/users/cc-fingerprint-dialog.c:618
+#: panels/system/users/cc-fingerprint-dialog.c:619
 msgid "Right thumb"
 msgstr "Desni palec"
 
-#: panels/system/users/cc-fingerprint-dialog.c:620
+#: panels/system/users/cc-fingerprint-dialog.c:621
 msgid "Right middle finger"
 msgstr "Desni sredinec"
 
-#: panels/system/users/cc-fingerprint-dialog.c:622
+#: panels/system/users/cc-fingerprint-dialog.c:623
 msgid "_Right index finger"
 msgstr "_Desni kazalec"
 
-#: panels/system/users/cc-fingerprint-dialog.c:624
+#: panels/system/users/cc-fingerprint-dialog.c:625
 msgid "Right ring finger"
 msgstr "Desni prstanec"
 
-#: panels/system/users/cc-fingerprint-dialog.c:626
+#: panels/system/users/cc-fingerprint-dialog.c:627
 msgid "Right little finger"
 msgstr "Desni mezinec"
 
-#: panels/system/users/cc-fingerprint-dialog.c:628
+#: panels/system/users/cc-fingerprint-dialog.c:629
 msgid "Unknown Finger"
 msgstr "Neznan prst"
 
-#: panels/system/users/cc-fingerprint-dialog.c:759
+#: panels/system/users/cc-fingerprint-dialog.c:760
 msgctxt "Fingerprint enroll state"
 msgid "Complete"
 msgstr "Končano"
 
-#: panels/system/users/cc-fingerprint-dialog.c:770
+#: panels/system/users/cc-fingerprint-dialog.c:771
 msgid "Fingerprint device disconnected"
 msgstr "Naprava za prijavo s prstnim odtisom ni priklopljena"
 
-#: panels/system/users/cc-fingerprint-dialog.c:776
+#: panels/system/users/cc-fingerprint-dialog.c:777
 msgid "Fingerprint device storage is full"
 msgstr "Shramba naprave za branje prstnega odtisa je polna"
 
-#: panels/system/users/cc-fingerprint-dialog.c:780
+#: panels/system/users/cc-fingerprint-dialog.c:781
 msgid "Fingerprint is duplicate"
 msgstr "Prstni odtis je podvojen"
 
-#: panels/system/users/cc-fingerprint-dialog.c:784
+#: panels/system/users/cc-fingerprint-dialog.c:785
 msgid "Failed to enroll new fingerprint"
 msgstr "Odčitavanje novega prstnega odtisa je spodletelo."
 
-#: panels/system/users/cc-fingerprint-dialog.c:815
+#: panels/system/users/cc-fingerprint-dialog.c:816
 #, c-format
 msgid "Failed to start enrollment: %s"
 msgstr "Začenjanje odčitavanja je spodletelo: %s"
 
-#: panels/system/users/cc-fingerprint-dialog.c:823
+#: panels/system/users/cc-fingerprint-dialog.c:824
 msgctxt "Fingerprint enroll state"
 msgid "Failed to enroll new fingerprint"
 msgstr "Odčitavanje novega prstnega odtisa je spodletelo."
 
-#: panels/system/users/cc-fingerprint-dialog.c:854
+#: panels/system/users/cc-fingerprint-dialog.c:855
 #, c-format
 msgid "Failed to stop enrollment: %s"
 msgstr "Zaustavljanje odčitavanja je spodletelo: %s"
 
-#: panels/system/users/cc-fingerprint-dialog.c:900
+#: panels/system/users/cc-fingerprint-dialog.c:901
 msgid ""
 "Repeatedly lift and place your finger on the reader to enroll your "
 "fingerprint"
@@ -7999,34 +7999,51 @@ msgstr ""
 "Ponavljajoče dvignite in položite prst na bralnik za odčitavanje prstnega "
 "odtisa"
 
-#: panels/system/users/cc-fingerprint-dialog.c:1014
+#: panels/system/users/cc-fingerprint-dialog.c:1015
 msgid "_Re-enroll this finger…"
 msgstr "_Ponovno odčitaj ta prst …"
 
 #. TRANSLATORS: This is the label for the button to enroll a new finger
-#: panels/system/users/cc-fingerprint-dialog.c:1029
+#: panels/system/users/cc-fingerprint-dialog.c:1030
 msgid "Scan new fingerprint"
 msgstr "Odčitaj nov prstni odtis"
 
-#: panels/system/users/cc-fingerprint-dialog.c:1066
+#: panels/system/users/cc-fingerprint-dialog.c:1067
 #, c-format
 msgid "Failed to release fingerprint device %s: %s"
 msgstr "Sproščanje naprave za branje prstnega odtisa %s je spodletelo: %s"
 
-#: panels/system/users/cc-fingerprint-dialog.c:1138
+#: panels/system/users/cc-fingerprint-dialog.c:1139
 msgctxt "Fingerprint enroll state"
 msgid "Problem Reading Device"
 msgstr "Napaka branja naprave"
 
-#: panels/system/users/cc-fingerprint-dialog.c:1173
+#: panels/system/users/cc-fingerprint-dialog.c:1174
 #, c-format
 msgid "Failed to claim fingerprint device %s: %s"
 msgstr "Povezovanje naprave za branje prstnega odtisa %s je spodletelo: %s"
 
-#: panels/system/users/cc-fingerprint-dialog.c:1315
+#: panels/system/users/cc-fingerprint-dialog.c:1316
 #, c-format
 msgid "Failed to get fingerprint devices: %s"
 msgstr "Pridobivanje naprav za prstni odtis je spodletelo: %s"
+
+#: panels/system/users/cc-fingerprint-dialog.c:1391
+msgid "Delete All Fingerprints?"
+msgstr "Želite izbrisati vse prstne odtise?"
+
+#: panels/system/users/cc-fingerprint-dialog.c:1392
+msgid ""
+"Deleting all enrolled fingerprints will disable Fingerprint Login. To re-"
+"enable Fingerprint Login at least one fingerprint will have to be enrolled."
+msgstr ""
+"Če izbrišete vse vpisane prstne odtise, onemogočite prijavo s prstnim "
+"odtisom. Če želite znova omogočiti prijavo s prstnim odtisom, boste morali "
+"vnesti vsaj en prstni odtis."
+
+#: panels/system/users/cc-fingerprint-dialog.c:1397
+msgid "_Delete All"
+msgstr "_Izbriši vse"
 
 #: panels/system/users/cc-fingerprint-dialog.ui:8
 msgid "Fingerprint Manager"
@@ -8036,59 +8053,43 @@ msgstr "Upravljalnik prstnega odtisa"
 msgid "Fingerprint"
 msgstr "Prstni odtis"
 
-#: panels/system/users/cc-fingerprint-dialog.ui:77
-msgid "_No"
-msgstr "_Ne"
-
-#: panels/system/users/cc-fingerprint-dialog.ui:85
-msgid "_Yes"
-msgstr "_Da"
-
-#: panels/system/users/cc-fingerprint-dialog.ui:105
-msgid ""
-"Do you want to delete your registered fingerprints so fingerprint login is "
-"disabled?"
-msgstr ""
-"Ali želite izbrisati obstoječe prstne odtise in onemogočiti tak način "
-"prijave?"
-
-#: panels/system/users/cc-fingerprint-dialog.ui:161
+#: panels/system/users/cc-fingerprint-dialog.ui:114
 msgid "No fingerprint device"
 msgstr "Ni naprave za branje prstnega odtisa"
 
 #. Translators: This is the empty state page label which states that there are no devices ready.
-#: panels/system/users/cc-fingerprint-dialog.ui:176
+#: panels/system/users/cc-fingerprint-dialog.ui:129
 msgid "No Fingerprint device"
 msgstr "Ni naprave za branje prstnega odtisa"
 
-#: panels/system/users/cc-fingerprint-dialog.ui:185
+#: panels/system/users/cc-fingerprint-dialog.ui:138
 msgid "Ensure the device is properly connected"
 msgstr "Zagotovite, da je naprava pravilno povezana."
 
-#: panels/system/users/cc-fingerprint-dialog.ui:193
+#: panels/system/users/cc-fingerprint-dialog.ui:146
 msgid "Fingerprint Device"
 msgstr "Naprava za branje prstnega odtisa"
 
-#: panels/system/users/cc-fingerprint-dialog.ui:202
+#: panels/system/users/cc-fingerprint-dialog.ui:155
 msgid "Choose the fingerprint device you want to configure"
 msgstr "Izberite napravo za branje prstnega odtisa, ki jo želite nastaviti"
 
-#: panels/system/users/cc-fingerprint-dialog.ui:232
+#: panels/system/users/cc-fingerprint-dialog.ui:185
 msgid "Fingerprint Login"
 msgstr "Prijava s prstnim odtisom"
 
-#: panels/system/users/cc-fingerprint-dialog.ui:238
+#: panels/system/users/cc-fingerprint-dialog.ui:191
 msgid ""
 "Fingerprint login allows you to unlock and log into your device with your "
 "finger"
 msgstr ""
 "Prijava s prstnim odtisom omogoča odklepanje in prijavo v napravo s prstom"
 
-#: panels/system/users/cc-fingerprint-dialog.ui:265
+#: panels/system/users/cc-fingerprint-dialog.ui:218
 msgid "_Delete Fingerprints"
 msgstr "_Izbriši prstne odtise"
 
-#: panels/system/users/cc-fingerprint-dialog.ui:279
+#: panels/system/users/cc-fingerprint-dialog.ui:232
 msgid "Fingerprint Enroll"
 msgstr "Prijava s prstnim odtisom"
 
@@ -9323,6 +9324,70 @@ msgstr "Tablica;Wacom;Stylus;Radirka;Eraser;Miška;"
 msgid "New shortcut…"
 msgstr "Nova bližnjica …"
 
+#. Translators: This separates the duration and interval times when displaying
+#. * the selected break schedule on the wellbeing panel. For example,
+#. * “1 minute / 20 minutes” to indicate a 1 minute break every 20 minutes.
+#: panels/wellbeing/cc-break-schedule-row.c:289
+msgid " / "
+msgstr " / "
+
+#: panels/wellbeing/cc-break-schedule-row.c:369
+msgid "Duration"
+msgstr "Trajanje"
+
+#: panels/wellbeing/cc-break-schedule-row.c:369
+msgid "Interval"
+msgstr "Interval"
+
+#: panels/wellbeing/cc-wellbeing-panel.ui:18
+msgid "Break Reminders"
+msgstr "Opomniki za prekinitve"
+
+#: panels/wellbeing/cc-wellbeing-panel.ui:21
+msgid "_Eyesight Reminders"
+msgstr "Opomniki za _vid"
+
+#: panels/wellbeing/cc-wellbeing-panel.ui:22
+msgid "Reminders to look away from the screen"
+msgstr "Opomniki, da odvrnete pogled od zaslona"
+
+#: panels/wellbeing/cc-wellbeing-panel.ui:28
+msgid "_Movement Reminders"
+msgstr "Opomniki za _gibanje"
+
+#: panels/wellbeing/cc-wellbeing-panel.ui:29
+msgid "Reminders to move around"
+msgstr "Opomniki za gibanje po prostoru"
+
+#: panels/wellbeing/cc-wellbeing-panel.ui:35
+msgid "Movement Break S_chedule"
+msgstr "Razpored premorov z gibanjem"
+
+#: panels/wellbeing/cc-wellbeing-panel.ui:41
+msgid "S_ounds"
+msgstr "Zvo_ki"
+
+#: panels/wellbeing/cc-wellbeing-panel.ui:42
+msgid "Play a sound when a break ends"
+msgstr "Predvajaj zvok, ko se odmor konča"
+
+#: panels/wellbeing/gnome-wellbeing-panel.desktop.in:6
+msgid "Wellbeing"
+msgstr "Dobro počutje"
+
+#: panels/wellbeing/gnome-wellbeing-panel.desktop.in:7
+msgid "Review and limit the amount of time you spend at the computer screen"
+msgstr "Preglejte in omejite čas, ki ga preživite za računalniškim zaslonom"
+
+#. Translators: Search terms to find the Wellbeing panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#: panels/wellbeing/gnome-wellbeing-panel.desktop.in:18
+msgid ""
+"Wellbeing;Screen Time;Breaks;Break Reminders;Health Breaks;Daily Usage;"
+"Screen Limits;Usage Limit;"
+msgstr ""
+"Dobro počutje;čas pred zaslonom;odmori;opomniki za prekinitev;zdravstveni "
+"odmori;zdravje;vsakodnevna uporaba;omejitve zaslona;omejitev uporabe;"
+
 #: panels/wwan/cc-wwan-apn-dialog.c:293
 msgid "Edit"
 msgstr "Uredi"
@@ -9913,11 +9978,11 @@ msgid "[PANEL] [ARGUMENT…]"
 msgstr "[PULT][ARGUMENT …]"
 
 #. Translators should localize the following string which will be displayed in the About dialog giving credit to the translator(s).
-#: shell/cc-application.c:117
+#: shell/cc-application.c:118
 msgid "translator-credits"
 msgstr "Matej Urbančič <mateju@src.gnome.org>"
 
-#: shell/cc-application.c:118
+#: shell/cc-application.c:119
 #, c-format
 msgid "© 1998 %s"
 msgstr "© 1998 %s"
@@ -9926,7 +9991,7 @@ msgstr "© 1998 %s"
 msgid "Settings categories"
 msgstr "Kategorije nastavitev"
 
-#: shell/cc-panel-loader.c:311
+#: shell/cc-panel-loader.c:317
 msgid "Available panels:"
 msgstr "Razpoložljivi pulti:"
 
