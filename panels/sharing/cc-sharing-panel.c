@@ -311,7 +311,7 @@ cc_sharing_panel_remove_folder (CcSharingPanel *self,
 }
 
 static void
-cc_sharing_panel_media_sharing_dialog_close_request (CcSharingPanel *self)
+cc_sharing_panel_media_sharing_dialog_close_attempt (CcSharingPanel *self)
 {
   g_autoptr(GPtrArray) folders = NULL;
   GtkWidget *child;
@@ -479,7 +479,7 @@ cc_sharing_panel_setup_media_sharing_dialog (CcSharingPanel *self)
   GtkWidget *row, *networks, *w;
 
   g_signal_connect_object (self->media_sharing_dialog, "close-attempt",
-                           G_CALLBACK (cc_sharing_panel_media_sharing_dialog_close_request),
+                           G_CALLBACK (cc_sharing_panel_media_sharing_dialog_close_attempt),
                            self, G_CONNECT_SWAPPED);
 
   cc_media_sharing_get_preferences (&folders);
