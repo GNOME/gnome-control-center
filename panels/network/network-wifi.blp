@@ -87,25 +87,25 @@ Adw.Dialog saved_networks_dialog {
     [top]
     Adw.HeaderBar {}
 
-    content: Stack saved_networks_stack {
-      StackPage {
-        name: "saved-networks-page";
+    content: Adw.ToastOverlay saved_networks_toast_overlay {
+      Stack saved_networks_stack {
+        StackPage {
+          name: "saved-networks-page";
 
-        child: Adw.ToastOverlay saved_networks_toast_overlay {
-          Adw.PreferencesPage {
+          child: Adw.PreferencesPage {
             Adw.PreferencesGroup saved_networks_box {}
-          }
-        };
-      }
+          };
+        }
 
-      StackPage {
-        name: "no-saved-networks-page";
+        StackPage {
+          name: "no-saved-networks-page";
 
-        child: Adw.StatusPage {
-          icon-name: "network-wireless-symbolic";
-          title: _("No Networks");
-          description: _("Saved Wi-Fi Networks will appear here");
-        };
+          child: Adw.StatusPage {
+            icon-name: "network-wireless-symbolic";
+            title: _("No Networks");
+            description: _("Saved Wi-Fi Networks will appear here");
+          };
+        }
       }
     };
   };
