@@ -281,9 +281,7 @@ update_password_match (CcPasswordDialog *self)
                 cc_entry_feedback_update (self->verify_label,
                                           match ? "emblem-default-symbolic" : "dialog-error-symbolic",
                                           match ? _("Passwords match") : _("Passwords do not match"));
-                if (match)
-                        gtk_widget_remove_css_class (GTK_WIDGET (self->verify_entry), "error");
-          }
+        }
 }
 
 static gboolean
@@ -314,14 +312,12 @@ static void
 password_entry_changed (CcPasswordDialog *self)
 {
         gtk_widget_add_css_class (GTK_WIDGET (self->password_entry), "error");
-        gtk_widget_add_css_class (GTK_WIDGET (self->verify_entry), "error");
         recheck_password_match (self);
 }
 
 static void
 verify_entry_changed (CcPasswordDialog *self)
 {
-        gtk_widget_add_css_class (GTK_WIDGET (self->verify_entry), "error");
         recheck_password_match (self);
 }
 
