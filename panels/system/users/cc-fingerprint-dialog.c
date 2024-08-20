@@ -583,6 +583,7 @@ delete_prints_cb (GObject      *object,
 
   update_prints_store (self);
   cc_fingerprint_manager_update_state (self->manager, NULL, NULL);
+  remove_dialog_state (self, DIALOG_STATE_DEVICE_DELETING);
 }
 
 static void
