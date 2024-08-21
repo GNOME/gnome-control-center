@@ -57,6 +57,7 @@ struct _CcMousePanel
   GtkScale          *touchpad_speed_scale;
   AdwSwitchRow      *touchpad_toggle_row;
   AdwSwitchRow      *touchpad_typing_row;
+  AdwSwitchRow      *touchpad_tap_drag_row;
 
   GSettings         *mouse_settings;
   GSettings         *touchpad_settings;
@@ -348,6 +349,10 @@ setup_dialog (CcMousePanel *self)
                    self->touchpad_typing_row, "active",
                    G_SETTINGS_BIND_DEFAULT);
 
+  g_settings_bind (self->touchpad_settings, "tap-and-drag-lock",
+                   self->touchpad_tap_drag_row, "active",
+                   G_SETTINGS_BIND_DEFAULT);
+
   setup_touchpad_options (self);
 }
 
@@ -466,6 +471,7 @@ cc_mouse_panel_class_init (CcMousePanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcMousePanel, touchpad_speed_scale);
   gtk_widget_class_bind_template_child (widget_class, CcMousePanel, touchpad_toggle_row);
   gtk_widget_class_bind_template_child (widget_class, CcMousePanel, touchpad_typing_row);
+  gtk_widget_class_bind_template_child (widget_class, CcMousePanel, touchpad_tap_drag_row);
   gtk_widget_class_bind_template_child (widget_class, CcMousePanel, two_finger_push_row);
 
   gtk_widget_class_bind_template_callback (widget_class, on_touchpad_scroll_method_changed_cb);
