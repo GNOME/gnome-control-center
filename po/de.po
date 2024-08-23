@@ -30,7 +30,7 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2024-04-25 08:20+0000\n"
+"POT-Creation-Date: 2024-07-10 11:00+0000\n"
 "PO-Revision-Date: 2024-04-30 20:14+0200\n"
 "Last-Translator: Christian Kirbach <christian.kirbach@gmail.com>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
@@ -1194,8 +1194,9 @@ msgstr "Gestern"
 
 #. Translators: This is a date format string in the style of "Feb 24".
 #: panels/common/cc-util.c:141
+#| msgid "%b %e"
 msgid "%b %e"
-msgstr "%e. %b"
+msgstr "%b. %e"
 
 #. Translators: This is a date format string in the style of "Feb 24, 2013".
 #: panels/common/cc-util.c:146
@@ -1526,7 +1527,7 @@ msgstr "Vorgabe;Voreinstellung;Anwendung;bevorzugt;Medien;Medium;"
 msgid "On"
 msgstr "An"
 
-#: panels/display/cc-display-panel.c:509 panels/network/cc-net-proxy-page.c:182
+#: panels/display/cc-display-panel.c:509 panels/network/cc-net-proxy-page.c:193
 #: panels/notifications/cc-notifications-panel.c:212
 #: panels/power/cc-power-panel.c:737 panels/power/cc-power-panel.c:748
 msgid "Off"
@@ -1608,7 +1609,6 @@ msgid "Landscape (flipped)"
 msgstr "Kopfstehendes Querformat"
 
 #: panels/display/cc-display-settings.c:179
-#, c-format
 msgid "%.2lf Hz"
 msgstr "%.2lf Hz"
 
@@ -2774,7 +2774,7 @@ msgstr "Nicht eingerichtet"
 msgid "Proxy"
 msgstr "Proxy"
 
-#: panels/network/cc-net-proxy-page.c:184
+#: panels/network/cc-net-proxy-page.c:195
 #: panels/network/cc-net-proxy-page.ui:59
 #: panels/network/connection-editor/ip4-page.ui:181
 #: panels/network/connection-editor/ip4-page.ui:233
@@ -2785,7 +2785,7 @@ msgstr "Proxy"
 msgid "Automatic"
 msgstr "Automatisch"
 
-#: panels/network/cc-net-proxy-page.c:186
+#: panels/network/cc-net-proxy-page.c:197
 #: panels/network/cc-net-proxy-page.ui:60
 #: panels/network/connection-editor/ip4-page.ui:58
 #: panels/network/connection-editor/ip6-page.ui:69
@@ -8401,77 +8401,77 @@ msgstr "Benutzerkonten verwalten"
 msgid "Authentication is required to change user data"
 msgstr "Legitimierung erforderlich"
 
-#: panels/user-accounts/pw-utils.c:94
+#: panels/user-accounts/pw-utils.c:105
 msgctxt "Password hint"
 msgid "The new password needs to be different from the old one."
 msgstr "Das neue Passwort muss sich vom vorherigen unterscheiden."
 
-#: panels/user-accounts/pw-utils.c:96
+#: panels/user-accounts/pw-utils.c:107
 msgctxt "Password hint"
 msgid "Try changing some letters and numbers."
 msgstr "Versuchen Sie einige Buchstaben und Ziffern zu ändern."
 
-#: panels/user-accounts/pw-utils.c:98 panels/user-accounts/pw-utils.c:106
+#: panels/user-accounts/pw-utils.c:109 panels/user-accounts/pw-utils.c:117
 msgctxt "Password hint"
 msgid "Try changing the password a bit more."
 msgstr "Versuchen Sie das Passwort noch mehr zu ändern."
 
-#: panels/user-accounts/pw-utils.c:100
+#: panels/user-accounts/pw-utils.c:111
 msgctxt "Password hint"
 msgid "A password without your user name would be stronger."
 msgstr "Ein Passwort ohne Ihren Benutzernamen wäre stärker."
 
-#: panels/user-accounts/pw-utils.c:102
+#: panels/user-accounts/pw-utils.c:113
 msgctxt "Password hint"
 msgid "Try to avoid using your name in the password."
 msgstr "Versuchen Sie Ihren Namen im Passwort nicht zu verwenden."
 
-#: panels/user-accounts/pw-utils.c:104
+#: panels/user-accounts/pw-utils.c:115
 msgctxt "Password hint"
 msgid "Try to avoid some of the words included in the password."
 msgstr "Versuchen Sie einige der Wörter im Passwort zu vermeiden."
 
-#: panels/user-accounts/pw-utils.c:108
+#: panels/user-accounts/pw-utils.c:119
 msgctxt "Password hint"
 msgid "Try to avoid common words."
 msgstr "Versuchen Sie gewöhnliche Wörter zu vermeiden."
 
-#: panels/user-accounts/pw-utils.c:110
+#: panels/user-accounts/pw-utils.c:121
 msgctxt "Password hint"
 msgid "Try to avoid reordering existing words."
 msgstr "Versuchen Sie das Anordnen existierender Wörter zu vermeiden."
 
-#: panels/user-accounts/pw-utils.c:112
+#: panels/user-accounts/pw-utils.c:123
 msgctxt "Password hint"
 msgid "Try to use more numbers."
 msgstr "Versuchen Sie mehr Ziffern zu verwenden."
 
-#: panels/user-accounts/pw-utils.c:114
+#: panels/user-accounts/pw-utils.c:125
 msgctxt "Password hint"
 msgid "Try to use more uppercase letters."
 msgstr "Versuchen Sie mehr Großbuchstaben zu verwenden."
 
-#: panels/user-accounts/pw-utils.c:116
+#: panels/user-accounts/pw-utils.c:127
 msgctxt "Password hint"
 msgid "Try to use more lowercase letters."
 msgstr "Versuchen Sie mehr Kleinbuchstaben zu verwenden."
 
-#: panels/user-accounts/pw-utils.c:118
+#: panels/user-accounts/pw-utils.c:129
 msgctxt "Password hint"
 msgid "Try to use more special characters, like punctuation."
 msgstr "Versuchen Sie mehr Sonderzeichen (z.B. Satzzeichen) zu verwenden."
 
-#: panels/user-accounts/pw-utils.c:120
+#: panels/user-accounts/pw-utils.c:131
 msgctxt "Password hint"
 msgid "Try to use a mixture of letters, numbers and punctuation."
 msgstr "Versuchen Sie eine Mischung aus Buchstaben, Ziffern und Satzzeichen."
 
-#: panels/user-accounts/pw-utils.c:122
+#: panels/user-accounts/pw-utils.c:133
 msgctxt "Password hint"
 msgid "Try to avoid repeating the same character."
 msgstr "Versuchen Sie die Wiederholung desselben Zeichens zu vermeiden."
 
-#: panels/user-accounts/pw-utils.c:124
+#: panels/user-accounts/pw-utils.c:135
 msgctxt "Password hint"
 msgid ""
 "Try to avoid repeating the same type of character: you need to mix up "
@@ -8480,12 +8480,12 @@ msgstr ""
 "Versuchen Sie Wiederholungen von Zeichen derselben Gruppe zu vermeiden. Sie "
 "sollten Buchstaben, Ziffern und Satzzeichen mischen."
 
-#: panels/user-accounts/pw-utils.c:126
+#: panels/user-accounts/pw-utils.c:137
 msgctxt "Password hint"
 msgid "Try to avoid sequences like 1234 or abcd."
 msgstr "Versuchen Sie Sequenzen wie z.B. »1234« oder »abcd« zu vermeiden."
 
-#: panels/user-accounts/pw-utils.c:128
+#: panels/user-accounts/pw-utils.c:139
 msgctxt "Password hint"
 msgid ""
 "Password needs to be longer. Try to add more letters, numbers and "
@@ -8494,14 +8494,14 @@ msgstr ""
 "Passwörter müssen länger sein. Fügen Sie weitere Buchstaben, Ziffern und "
 "Satzzeichen hinzu."
 
-#: panels/user-accounts/pw-utils.c:130
+#: panels/user-accounts/pw-utils.c:141
 msgctxt "Password hint"
 msgid "Mix uppercase and lowercase and try to use a number or two."
 msgstr ""
 "Mischen Sie Großbuchstaben und Kleinbuchstaben und verwenden Sie eine Ziffer "
 "oder zwei."
 
-#: panels/user-accounts/pw-utils.c:132
+#: panels/user-accounts/pw-utils.c:143
 msgctxt "Password hint"
 msgid ""
 "Adding more letters, numbers and punctuation will make the password stronger."
