@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2024-08-16 23:22+0000\n"
-"PO-Revision-Date: 2024-08-17 06:38+0200\n"
+"POT-Creation-Date: 2024-08-20 09:57+0000\n"
+"PO-Revision-Date: 2024-08-23 11:45+0200\n"
 "Last-Translator: Ekaterine Papava <papava.e@gtu.ge>\n"
 "Language-Team: Georgian <(nothing)>\n"
 "Language: ka\n"
@@ -173,13 +173,14 @@ msgstr "_პროგრამებში ძებნა"
 msgid "Unable to List Apps"
 msgstr "აპების ჩამონათვლის შექმნა შეუძლებელია"
 
+#. Translators: Parental Controls here refers to the features provided by 'malcontent'
 #: panels/applications/cc-applications-panel.ui:122
 msgid ""
 "An error has occurred and apps cannot be listed.\n"
-"Error details: Malcontent is not installed."
+"Error details: Parental Controls are not installed."
 msgstr ""
 "აღმოჩენილია შეცდომა და აპების ჩამონათვალი ხელმიუწვდომელია.\n"
-" შეცდომის დეტალები: Malcontent დაყენებული არაა."
+" შეცდომის დეტალები: მშობლის კონტროლი დაყენებული არაა."
 
 #: panels/applications/cc-applications-panel.ui:139
 #: panels/applications/cc-default-apps-page.ui:4
@@ -1087,6 +1088,7 @@ msgstr "ეკრანის კალიბრაცია"
 #: panels/system/users/cc-add-user-dialog.ui:24
 #: panels/system/users/cc-avatar-chooser.c:92
 #: panels/system/users/cc-enterprise-login-dialog.ui:44
+#: panels/system/users/cc-fingerprint-dialog.c:1396
 #: panels/system/users/cc-fingerprint-dialog.ui:32
 #: panels/system/users/cc-password-dialog.ui:15
 #: panels/system/users/cc-user-page.ui:231
@@ -4443,6 +4445,7 @@ msgid "Google"
 msgstr "Google"
 
 #: panels/online-accounts/cc-online-account-provider-row.c:58
+#: panels/online-accounts/cc-online-account-provider-row.c:60
 msgid "Email, calendar, contacts, files"
 msgstr "ელფოსტა, კალენდარი, კონტაქტები, ფაილები"
 
@@ -4457,10 +4460,6 @@ msgstr "ელფოსტა"
 #: panels/online-accounts/cc-online-account-provider-row.c:60
 msgid "Microsoft 365"
 msgstr "Microsoft 365"
-
-#: panels/online-accounts/cc-online-account-provider-row.c:60
-msgid "Files"
-msgstr "ფაილები"
 
 #: panels/online-accounts/cc-online-account-provider-row.c:61
 msgid "Microsoft Exchange"
@@ -7130,17 +7129,17 @@ msgid "S_oftware Updates"
 msgstr "პროგრამ_ული განახლებები"
 
 #. Translators: This is the full date and time format used in 12-hour mode.
-#: panels/system/datetime/cc-datetime-page.c:236
+#: panels/system/datetime/cc-datetime-page.c:237
 msgid "%e %B %Y, %l:%M %p"
 msgstr "%e %B %Y, %l:%M %p"
 
 #. Translators: This is the full date and time format used in 24-hour mode.
-#: panels/system/datetime/cc-datetime-page.c:241
+#: panels/system/datetime/cc-datetime-page.c:242
 msgid "%e %B %Y, %R"
 msgstr "%e %B %Y, %R"
 
 #. Translators: "city, country"
-#: panels/system/datetime/cc-datetime-page.c:401
+#: panels/system/datetime/cc-datetime-page.c:402
 #, c-format
 msgctxt "timezone loc"
 msgid "%s, %s"
@@ -7148,7 +7147,7 @@ msgstr "%s, %s"
 
 #. Update the timezone on the listbow row
 #. Translators: "timezone (details)"
-#: panels/system/datetime/cc-datetime-page.c:418
+#: panels/system/datetime/cc-datetime-page.c:419
 #, c-format
 msgctxt "timezone desc"
 msgid "%s (%s)"
@@ -7184,103 +7183,103 @@ msgstr "ინტერნეტთან წვდომა აუცილე�
 msgid "Date &amp; _Time"
 msgstr "თარიღი და დრო"
 
-#: panels/system/datetime/cc-datetime-page.ui:147
+#: panels/system/datetime/cc-datetime-page.ui:148
 msgid "Automatic Time _Zone"
 msgstr "დროის სარტყლის ავტომატურად დაყენება"
 
-#: panels/system/datetime/cc-datetime-page.ui:148
+#: panels/system/datetime/cc-datetime-page.ui:149
 msgid "Requires location services enabled and internet access"
 msgstr "მოითხოვს მდებარეობის სერვისებს ჩართვას და ინტერნეტთან წვდომას"
 
-#: panels/system/datetime/cc-datetime-page.ui:154
+#: panels/system/datetime/cc-datetime-page.ui:155
 msgid "Time Z_one"
 msgstr "დროის სარტყელი"
 
-#: panels/system/datetime/cc-datetime-page.ui:165
+#: panels/system/datetime/cc-datetime-page.ui:166
 msgid "Time _Format"
 msgstr "დროის ფორმატი"
 
-#: panels/system/datetime/cc-datetime-page.ui:176
+#: panels/system/datetime/cc-datetime-page.ui:177
 msgid "_24-hour"
 msgstr "_24-სთ"
 
-#: panels/system/datetime/cc-datetime-page.ui:184
+#: panels/system/datetime/cc-datetime-page.ui:185
 msgid "AM / _PM"
 msgstr "AM / _PM"
 
-#: panels/system/datetime/cc-datetime-page.ui:197
+#: panels/system/datetime/cc-datetime-page.ui:198
 msgid "Clock &amp; Calendar"
 msgstr "საათი &amp; კალენდარი"
 
-#: panels/system/datetime/cc-datetime-page.ui:198
+#: panels/system/datetime/cc-datetime-page.ui:199
 msgid "Control how the time and date is shown in the top bar"
 msgstr "აკონტროლეთ, როგორ გამოჩნდება ზედა ზოლში თარიღი და დრო"
 
-#: panels/system/datetime/cc-datetime-page.ui:201
+#: panels/system/datetime/cc-datetime-page.ui:202
 msgid "_Week Day"
 msgstr "კ_ვირის დღე"
 
-#: panels/system/datetime/cc-datetime-page.ui:207
+#: panels/system/datetime/cc-datetime-page.ui:208
 msgid "D_ate"
 msgstr "თ_არიღი"
 
-#: panels/system/datetime/cc-datetime-page.ui:213
+#: panels/system/datetime/cc-datetime-page.ui:214
 msgid "_Seconds"
 msgstr "_წამი"
 
-#: panels/system/datetime/cc-datetime-page.ui:219
+#: panels/system/datetime/cc-datetime-page.ui:220
 msgid "Week _Numbers"
 msgstr "კვირის _რიცხვები"
 
-#: panels/system/datetime/cc-datetime-page.ui:220
+#: panels/system/datetime/cc-datetime-page.ui:221
 msgid "Shown in the dropdown calendar"
 msgstr "ნაჩვენებია ჩამოსაშლელ კალენდარში"
 
-#: panels/system/datetime/cc-datetime-page.ui:256
+#: panels/system/datetime/cc-datetime-page.ui:257
 msgid "January"
 msgstr "იანვარი"
 
-#: panels/system/datetime/cc-datetime-page.ui:257
+#: panels/system/datetime/cc-datetime-page.ui:258
 msgid "February"
 msgstr "თებერვალი"
 
-#: panels/system/datetime/cc-datetime-page.ui:258
+#: panels/system/datetime/cc-datetime-page.ui:259
 msgid "March"
 msgstr "მარტი"
 
-#: panels/system/datetime/cc-datetime-page.ui:259
+#: panels/system/datetime/cc-datetime-page.ui:260
 msgid "April"
 msgstr "აპრილი"
 
-#: panels/system/datetime/cc-datetime-page.ui:260
+#: panels/system/datetime/cc-datetime-page.ui:261
 msgid "May"
 msgstr "მაისი"
 
-#: panels/system/datetime/cc-datetime-page.ui:261
+#: panels/system/datetime/cc-datetime-page.ui:262
 msgid "June"
 msgstr "ივნისი"
 
-#: panels/system/datetime/cc-datetime-page.ui:262
+#: panels/system/datetime/cc-datetime-page.ui:263
 msgid "July"
 msgstr "ივლისი"
 
-#: panels/system/datetime/cc-datetime-page.ui:263
+#: panels/system/datetime/cc-datetime-page.ui:264
 msgid "August"
 msgstr "აგვისტო"
 
-#: panels/system/datetime/cc-datetime-page.ui:264
+#: panels/system/datetime/cc-datetime-page.ui:265
 msgid "September"
 msgstr "სექტემბერი"
 
-#: panels/system/datetime/cc-datetime-page.ui:265
+#: panels/system/datetime/cc-datetime-page.ui:266
 msgid "October"
 msgstr "ოქტომბერი"
 
-#: panels/system/datetime/cc-datetime-page.ui:266
+#: panels/system/datetime/cc-datetime-page.ui:267
 msgid "November"
 msgstr "ნოემბერი"
 
-#: panels/system/datetime/cc-datetime-page.ui:267
+#: panels/system/datetime/cc-datetime-page.ui:268
 msgid "December"
 msgstr "დეკემბერი"
 
@@ -7845,121 +7844,138 @@ msgstr "ანაბეჭდების ჩამოთვლის შეც�
 msgid "Failed to delete saved fingerprints: %s"
 msgstr "შენახული ანაბეჭდის წაშლის შეცდომა: %s"
 
-#: panels/system/users/cc-fingerprint-dialog.c:608
+#: panels/system/users/cc-fingerprint-dialog.c:609
 msgid "Left thumb"
 msgstr "მარცხენა ცერა"
 
-#: panels/system/users/cc-fingerprint-dialog.c:610
+#: panels/system/users/cc-fingerprint-dialog.c:611
 msgid "Left middle finger"
 msgstr "მარცხენა შუა თითი"
 
-#: panels/system/users/cc-fingerprint-dialog.c:612
+#: panels/system/users/cc-fingerprint-dialog.c:613
 msgid "_Left index finger"
 msgstr "_მარცხენა საჩვენებელი თითი"
 
-#: panels/system/users/cc-fingerprint-dialog.c:614
+#: panels/system/users/cc-fingerprint-dialog.c:615
 msgid "Left ring finger"
 msgstr "მარცხენა ბეჭედი თითი"
 
-#: panels/system/users/cc-fingerprint-dialog.c:616
+#: panels/system/users/cc-fingerprint-dialog.c:617
 msgid "Left little finger"
 msgstr "მარცხენა პატარა თითი"
 
-#: panels/system/users/cc-fingerprint-dialog.c:618
+#: panels/system/users/cc-fingerprint-dialog.c:619
 msgid "Right thumb"
 msgstr "მარჯვენა ცერა"
 
-#: panels/system/users/cc-fingerprint-dialog.c:620
+#: panels/system/users/cc-fingerprint-dialog.c:621
 msgid "Right middle finger"
 msgstr "მარჯვენა შუა თითი"
 
-#: panels/system/users/cc-fingerprint-dialog.c:622
+#: panels/system/users/cc-fingerprint-dialog.c:623
 msgid "_Right index finger"
 msgstr "_მარჯვენა საჩვენებელი თითი"
 
-#: panels/system/users/cc-fingerprint-dialog.c:624
+#: panels/system/users/cc-fingerprint-dialog.c:625
 msgid "Right ring finger"
 msgstr "მარჯვენა ბეჭედი თითი"
 
-#: panels/system/users/cc-fingerprint-dialog.c:626
+#: panels/system/users/cc-fingerprint-dialog.c:627
 msgid "Right little finger"
 msgstr "მარჯვენა პატარა თითი"
 
-#: panels/system/users/cc-fingerprint-dialog.c:628
+#: panels/system/users/cc-fingerprint-dialog.c:629
 msgid "Unknown Finger"
 msgstr "უცნობი თითი"
 
-#: panels/system/users/cc-fingerprint-dialog.c:759
+#: panels/system/users/cc-fingerprint-dialog.c:760
 msgctxt "Fingerprint enroll state"
 msgid "Complete"
 msgstr "დასრულებულია"
 
-#: panels/system/users/cc-fingerprint-dialog.c:770
+#: panels/system/users/cc-fingerprint-dialog.c:771
 msgid "Fingerprint device disconnected"
 msgstr "ანაბეჭდების წამკითხველი მოწყობილობა გამოერთებულია"
 
-#: panels/system/users/cc-fingerprint-dialog.c:776
+#: panels/system/users/cc-fingerprint-dialog.c:777
 msgid "Fingerprint device storage is full"
 msgstr "ანაბეჭდების წამკითხველი მოწყობილობის საცავი სავსეა"
 
-#: panels/system/users/cc-fingerprint-dialog.c:780
+#: panels/system/users/cc-fingerprint-dialog.c:781
 msgid "Fingerprint is duplicate"
 msgstr "დუბლირებული ანაბეჭდი"
 
-#: panels/system/users/cc-fingerprint-dialog.c:784
+#: panels/system/users/cc-fingerprint-dialog.c:785
 msgid "Failed to enroll new fingerprint"
 msgstr "ახალი ანაბეჭდის დამატება ჩავარდა"
 
-#: panels/system/users/cc-fingerprint-dialog.c:815
+#: panels/system/users/cc-fingerprint-dialog.c:816
 #, c-format
 msgid "Failed to start enrollment: %s"
 msgstr "სკანირების დაწყება ჩავარდა: %s"
 
-#: panels/system/users/cc-fingerprint-dialog.c:823
+#: panels/system/users/cc-fingerprint-dialog.c:824
 msgctxt "Fingerprint enroll state"
 msgid "Failed to enroll new fingerprint"
 msgstr "ახალი ანაბეჭდის დამატება ჩავარდა"
 
-#: panels/system/users/cc-fingerprint-dialog.c:854
+#: panels/system/users/cc-fingerprint-dialog.c:855
 #, c-format
 msgid "Failed to stop enrollment: %s"
 msgstr "სკანირების გაჩერება ჩავარდა: %s"
 
-#: panels/system/users/cc-fingerprint-dialog.c:900
+#: panels/system/users/cc-fingerprint-dialog.c:901
 msgid ""
 "Repeatedly lift and place your finger on the reader to enroll your "
 "fingerprint"
 msgstr ""
 "მრავალჯერ აიღეთ და დაადეთ თითი წამკითხავს, რომ თქვენი ანაბეჭდი შევიყვანო"
 
-#: panels/system/users/cc-fingerprint-dialog.c:1014
+#: panels/system/users/cc-fingerprint-dialog.c:1015
 msgid "_Re-enroll this finger…"
 msgstr "_ამ თითის თავიდან სკანირება…"
 
 #. TRANSLATORS: This is the label for the button to enroll a new finger
-#: panels/system/users/cc-fingerprint-dialog.c:1029
+#: panels/system/users/cc-fingerprint-dialog.c:1030
 msgid "Scan new fingerprint"
 msgstr "ახალი ანაბეჭდის სკანირება"
 
-#: panels/system/users/cc-fingerprint-dialog.c:1066
+#: panels/system/users/cc-fingerprint-dialog.c:1067
 #, c-format
 msgid "Failed to release fingerprint device %s: %s"
 msgstr "ანაბეჭდის მოწყობილობის '%s' გათავისუფლება ჩავარდა: %s"
 
-#: panels/system/users/cc-fingerprint-dialog.c:1138
+#: panels/system/users/cc-fingerprint-dialog.c:1139
 msgctxt "Fingerprint enroll state"
 msgid "Problem Reading Device"
 msgstr "მოწყობილობის წაკითხვის შეცდოა"
 
-#: panels/system/users/cc-fingerprint-dialog.c:1173
+#: panels/system/users/cc-fingerprint-dialog.c:1174
 #, c-format
 msgid "Failed to claim fingerprint device %s: %s"
 msgstr "ანაბეჭდის მოწყობილობის '%s' გამოყოფა ჩავარდა: %s"
 
-#: panels/system/users/cc-fingerprint-dialog.c:1315
+#: panels/system/users/cc-fingerprint-dialog.c:1316
 #, c-format
 msgid "Failed to get fingerprint devices: %s"
 msgstr "ანაბეჭდის მოწყობილობის მიღება ჩავარდა: %s"
+
+#: panels/system/users/cc-fingerprint-dialog.c:1391
+msgid "Delete All Fingerprints?"
+msgstr "წავშალო ყველა ანაბეჭდი?"
+
+#: panels/system/users/cc-fingerprint-dialog.c:1392
+msgid ""
+"Deleting all enrolled fingerprints will disable Fingerprint Login. To re-"
+"enable Fingerprint Login at least one fingerprint will have to be enrolled."
+msgstr ""
+"ყველა ჩაწერილი ანაბეჭდის წაშლა ანაბეჭდით შესვლას გამორთავს. იმისათვის, რომ "
+"ანაბეჭდით შესვლა თავიდან ჩართოთ, საჭიროა, სულ ცოტა, ერთი ანაბეჭდის "
+"რეგისტრაცია."
+
+#: panels/system/users/cc-fingerprint-dialog.c:1397
+msgid "_Delete All"
+msgstr "_ყველას წაშლა"
 
 #: panels/system/users/cc-fingerprint-dialog.ui:8
 msgid "Fingerprint Manager"
@@ -7969,48 +7985,32 @@ msgstr "ანაბეჭდების მმართველი"
 msgid "Fingerprint"
 msgstr "თითის ანაბეჭდი"
 
-#: panels/system/users/cc-fingerprint-dialog.ui:77
-msgid "_No"
-msgstr "_არა"
-
-#: panels/system/users/cc-fingerprint-dialog.ui:85
-msgid "_Yes"
-msgstr "დიახ"
-
-#: panels/system/users/cc-fingerprint-dialog.ui:105
-msgid ""
-"Do you want to delete your registered fingerprints so fingerprint login is "
-"disabled?"
-msgstr ""
-"გნებავთ წაშალოთ თქვენი დარეგისტრირებული ანაბჭედები, რაც ანაბეჭდით შესვლას "
-"გათიშავს?"
-
-#: panels/system/users/cc-fingerprint-dialog.ui:161
+#: panels/system/users/cc-fingerprint-dialog.ui:114
 msgid "No fingerprint device"
 msgstr "ანაბეჭდების წამკითხველი მოწყობილობა ნაპოვნი არაა"
 
 #. Translators: This is the empty state page label which states that there are no devices ready.
-#: panels/system/users/cc-fingerprint-dialog.ui:176
+#: panels/system/users/cc-fingerprint-dialog.ui:129
 msgid "No Fingerprint device"
 msgstr "ანაბეჭდების წამკითხველი მოწყობილობა ნაპოვნი არაა"
 
-#: panels/system/users/cc-fingerprint-dialog.ui:185
+#: panels/system/users/cc-fingerprint-dialog.ui:138
 msgid "Ensure the device is properly connected"
 msgstr "დარწმუნდით, რომ მოწყობილობა სწორადაა მითითებული"
 
-#: panels/system/users/cc-fingerprint-dialog.ui:193
+#: panels/system/users/cc-fingerprint-dialog.ui:146
 msgid "Fingerprint Device"
 msgstr "ანაბეჭდების წამკითხველი მოწყობილობა"
 
-#: panels/system/users/cc-fingerprint-dialog.ui:202
+#: panels/system/users/cc-fingerprint-dialog.ui:155
 msgid "Choose the fingerprint device you want to configure"
 msgstr "აირჩიეთ ანაბეჭდის მოწყობილობა, რომელიც გსურთ, მოირგოთ"
 
-#: panels/system/users/cc-fingerprint-dialog.ui:232
+#: panels/system/users/cc-fingerprint-dialog.ui:185
 msgid "Fingerprint Login"
 msgstr "ანაბეჭდით შესვლა"
 
-#: panels/system/users/cc-fingerprint-dialog.ui:238
+#: panels/system/users/cc-fingerprint-dialog.ui:191
 msgid ""
 "Fingerprint login allows you to unlock and log into your device with your "
 "finger"
@@ -8018,11 +8018,11 @@ msgstr ""
 "ანაბეჭდით შესვლა საშუალებას მოგცემთ, თითით განბლოკოთ და შეხვიდეთ თქვენს "
 "კომპიუტერში"
 
-#: panels/system/users/cc-fingerprint-dialog.ui:265
+#: panels/system/users/cc-fingerprint-dialog.ui:218
 msgid "_Delete Fingerprints"
 msgstr "ანაბეჭდების _წაშლა"
 
-#: panels/system/users/cc-fingerprint-dialog.ui:279
+#: panels/system/users/cc-fingerprint-dialog.ui:232
 msgid "Fingerprint Enroll"
 msgstr "ანაბეჭდის დამატება"
 
@@ -9267,6 +9267,70 @@ msgstr "Tablet;Wacom;Stylus;Eraser;Mouse;თაგუნა;ტაბლეტ�
 msgid "New shortcut…"
 msgstr "ახალი მალსახმობი…"
 
+#. Translators: This separates the duration and interval times when displaying
+#. * the selected break schedule on the wellbeing panel. For example,
+#. * “1 minute / 20 minutes” to indicate a 1 minute break every 20 minutes.
+#: panels/wellbeing/cc-break-schedule-row.c:289
+msgid " / "
+msgstr " / "
+
+#: panels/wellbeing/cc-break-schedule-row.c:369
+msgid "Duration"
+msgstr "ხანგრძლივობა"
+
+#: panels/wellbeing/cc-break-schedule-row.c:369
+msgid "Interval"
+msgstr "ინტერვალი"
+
+#: panels/wellbeing/cc-wellbeing-panel.ui:18
+msgid "Break Reminders"
+msgstr "შესვენების შემხსენებლები"
+
+#: panels/wellbeing/cc-wellbeing-panel.ui:21
+msgid "_Eyesight Reminders"
+msgstr "_თვალის დასვენების შემხსნებლები"
+
+#: panels/wellbeing/cc-wellbeing-panel.ui:22
+msgid "Reminders to look away from the screen"
+msgstr "შემხსენებლები, რომ ეკრანს თვალი მოაცილოთ"
+
+#: panels/wellbeing/cc-wellbeing-panel.ui:28
+msgid "_Movement Reminders"
+msgstr "_განძრევის შემხსენებლები"
+
+#: panels/wellbeing/cc-wellbeing-panel.ui:29
+msgid "Reminders to move around"
+msgstr "შეხსენება, რომ გაინძრეთ"
+
+#: panels/wellbeing/cc-wellbeing-panel.ui:35
+msgid "Movement Break S_chedule"
+msgstr "განძრევისთვის დასვენების _გეგმა"
+
+#: panels/wellbeing/cc-wellbeing-panel.ui:41
+msgid "S_ounds"
+msgstr "_ხმები"
+
+#: panels/wellbeing/cc-wellbeing-panel.ui:42
+msgid "Play a sound when a break ends"
+msgstr "ხმის დაკვრა, როცა შესვენება დასრულდება"
+
+#: panels/wellbeing/gnome-wellbeing-panel.desktop.in:6
+msgid "Wellbeing"
+msgstr "კარგადყოფნა"
+
+#: panels/wellbeing/gnome-wellbeing-panel.desktop.in:7
+msgid "Review and limit the amount of time you spend at the computer screen"
+msgstr "შეზღუდეთ დრო, რომელსაც კომპიუტერის ეკრანთან ატარებთ"
+
+#. Translators: Search terms to find the Wellbeing panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#: panels/wellbeing/gnome-wellbeing-panel.desktop.in:18
+msgid ""
+"Wellbeing;Screen Time;Breaks;Break Reminders;Health Breaks;Daily Usage;"
+"Screen Limits;Usage Limit;"
+msgstr ""
+"Wellbeing;Screen Time;Breaks;Break Reminders;Health Breaks;Daily Usage;"
+"Screen Limits;Usage Limit;კარგადყოფნა;დასვენება;ეკრანთანნაკლებიჯდომა;"
+
 #: panels/wwan/cc-wwan-apn-dialog.c:293
 msgid "Edit"
 msgstr "რედაქტირება"
@@ -9866,7 +9930,7 @@ msgstr "© 1998 %s"
 msgid "Settings categories"
 msgstr "პარამეტრების კატეგორიები"
 
-#: shell/cc-panel-loader.c:311
+#: shell/cc-panel-loader.c:317
 msgid "Available panels:"
 msgstr "ხელმისაწვდომი პანელები:"
 
@@ -10001,6 +10065,22 @@ msgstr[0] "%u შეტანა"
 #: subprojects/gvc/gvc-mixer-control.c:2872
 msgid "System Sounds"
 msgstr "სისტემური ხმები"
+
+#~ msgid "Files"
+#~ msgstr "ფაილები"
+
+#~ msgid "_No"
+#~ msgstr "_არა"
+
+#~ msgid "_Yes"
+#~ msgstr "დიახ"
+
+#~ msgid ""
+#~ "Do you want to delete your registered fingerprints so fingerprint login "
+#~ "is disabled?"
+#~ msgstr ""
+#~ "გნებავთ წაშალოთ თქვენი დარეგისტრირებული ანაბჭედები, რაც ანაბეჭდით შესვლას "
+#~ "გათიშავს?"
 
 #~ msgid "Automat_ically Launch Apps"
 #~ msgstr "აპების ავტომატურ_ი გაშვება"
@@ -10681,9 +10761,6 @@ msgstr "სისტემური ხმები"
 
 #~ msgid "The system component `AccountsService` cannot be found"
 #~ msgstr "სისტემური კომპონენტი 'AccountService' ვერ ვიპოვე"
-
-#~ msgid "_Delete"
-#~ msgstr "_წაშლა"
 
 #~ msgid "External pad device"
 #~ msgstr "გარე პადის მოწყობლობა"
@@ -12376,9 +12453,6 @@ msgstr "სისტემური ხმები"
 
 #~ msgid "E_xecute flag:"
 #~ msgstr "გაშვების ალამი:"
-
-#~ msgid "Internet"
-#~ msgstr "ინტერნეტი"
 
 #~ msgid "Multimedia"
 #~ msgstr "მულტიმედია"
