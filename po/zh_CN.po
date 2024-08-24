@@ -35,8 +35,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2024-08-23 21:16+0000\n"
-"PO-Revision-Date: 2024-08-24 19:05+0800\n"
+"POT-Creation-Date: 2024-08-24 11:15+0000\n"
+"PO-Revision-Date: 2024-08-24 20:02+0800\n"
 "Last-Translator: lumingzh <lumingzh@qq.com>\n"
 "Language-Team: Chinese (China) <i18n-zh@googlegroups.com>\n"
 "Language: zh_CN\n"
@@ -5886,18 +5886,13 @@ msgstr ""
 
 #. TRANSLATORS: this is the second section of description.
 #: panels/privacy/firmware-security/cc-firmware-security-boot-dialog.c:89
-#, fuzzy
-#| msgid ""
-#| "Secure boot problems can often be resolved from your computer's UEFI "
-#| "firmware settings (BIOS) and your hardware manufacturer may provide "
-#| "information on how to do this."
 msgid ""
 "Secure boot problems can often be resolved from your device's UEFI firmware "
 "settings (BIOS) and your hardware manufacturer may provide information on "
 "how to do this."
 msgstr ""
-"安全启动的问题通常可以从您计算机的 UEFI 固件设置（BIOS）解决且您的硬件厂商可"
-"能会提供如何操作的信息。"
+"安全启动的问题通常可以从您设备的 UEFI 固件设置（BIOS）解决且您的硬件厂商可能"
+"会提供如何操作的信息。"
 
 #. TRANSLATORS: this is the third section of description.
 #: panels/privacy/firmware-security/cc-firmware-security-boot-dialog.c:92
@@ -5918,17 +5913,12 @@ msgstr "安全启动会在设备启动时阻止恶意软件加载。安全启动
 
 #. TRANSLATORS: this is the second section of the description.
 #: panels/privacy/firmware-security/cc-firmware-security-boot-dialog.c:105
-#, fuzzy
-#| msgid ""
-#| "Secure boot can often be turned on from your computer's UEFI firmware "
-#| "settings (BIOS). For help, contact your hardware manufacturer or IT "
-#| "support provider."
 msgid ""
 "Secure boot can often be turned on from your device's UEFI firmware settings "
 "(BIOS). For help, contact your hardware manufacturer or IT support provider."
 msgstr ""
-"安全启动通常可以从您计算机的 UEFI 固件设置（BIOS）开启。要寻求帮助，请联系您"
-"的硬件厂商或 IT 支持提供者。"
+"安全启动通常可以从您设备的 UEFI 固件设置（BIOS）开启。要寻求帮助，请联系您的"
+"硬件厂商或 IT 支持提供者。"
 
 #: panels/privacy/firmware-security/cc-firmware-security-boot-dialog.ui:51
 msgid ""
@@ -5944,22 +5934,12 @@ msgstr ""
 #. TRANSLATORS: in reference to firmware protection: 0/4 stars
 #: panels/privacy/firmware-security/cc-firmware-security-dialog.c:108
 #: panels/privacy/firmware-security/cc-firmware-security-page.c:533
-#, fuzzy
-#| msgid "Checks Failed"
 msgid "Security Checks Failed"
-msgstr "检查失败"
+msgstr "安全检查失败"
 
 #. TRANSLATORS: This is the description to describe the failure on
 #. checking the security items.
 #: panels/privacy/firmware-security/cc-firmware-security-dialog.c:111
-#, fuzzy
-#| msgid ""
-#| "Hardware does not pass checks. This means that you are not protected "
-#| "against common hardware security issues.\n"
-#| "\n"
-#| "It may be possible to resolve hardware security issues by updating your "
-#| "firmware or changing device configuration options. However, failures can "
-#| "stem from the physical hardware itself, and may not be reversible."
 msgid ""
 "Hardware does not pass checks. This means that you are not protected against "
 "common hardware security issues.\n"
@@ -5971,28 +5951,24 @@ msgstr ""
 "硬件未通过检查。这意味着您无法防范常见的硬件安全问题。\n"
 "\n"
 "硬件安全问题或许可以通过更新固件或更改设备配置选项来解决。但是，故障可能源于"
-"物理硬件本身，并且可能是不可逆的。"
+"物理硬件本身且可能无法修复。"
 
 #. TRANSLATORS: in reference to firmware protection: 1/4 stars
 #: panels/privacy/firmware-security/cc-firmware-security-dialog.c:121
 #: panels/privacy/firmware-security/cc-firmware-security-page.c:540
-#, fuzzy
-#| msgid "Basic Security Protections"
 msgid "Basic Security Checks Passed"
-msgstr "基本安全保护"
+msgstr "已通过基本安全检查"
 
 #. TRANSLATORS: This description describes the device passing the
 #. minimum requirement of security check.
 #: panels/privacy/firmware-security/cc-firmware-security-dialog.c:124
-#, fuzzy
-#| msgid ""
-#| "This device meets basic security requirements. Its hardware has "
-#| "protection against some of the most common security threats."
 msgid ""
 "This device meets basic security requirements and has protection against "
 "some hardware security threats. However, it lacks other recommended "
 "protections."
-msgstr "此设备符合基本安全需求。其硬件可以抵御一些最常见的安全威胁。"
+msgstr ""
+"此设备符合基本安全需求且可以抵御一些硬件安全威胁。然而，其缺乏其它推荐的保"
+"护。"
 
 #. TRANSLATORS: in reference to firmware protection: 2~4 stars
 #: panels/privacy/firmware-security/cc-firmware-security-dialog.c:134
@@ -6003,14 +5979,10 @@ msgstr "已保护"
 #. TRANSLATOR: This description describes the devices passing
 #. the extended security check.
 #: panels/privacy/firmware-security/cc-firmware-security-dialog.c:137
-#, fuzzy
-#| msgid ""
-#| "This device passes current security tests. Its hardware is protected "
-#| "against the majority of security threats."
 msgid ""
 "This device passes current security tests. It is protected against the "
 "majority of hardware security threats."
-msgstr "此设备通过了安全测试。其硬件可以抵御大多数安全威胁。"
+msgstr "此设备通过了当前安全测试。可以抵御大多数硬件安全威胁。"
 
 #: panels/privacy/firmware-security/cc-firmware-security-dialog.c:144
 msgid "Checks Unavailable"
@@ -6018,14 +5990,10 @@ msgstr "检查不可用"
 
 #. TRANSLATORS: When the security result is unavailable, this description is shown.
 #: panels/privacy/firmware-security/cc-firmware-security-dialog.c:146
-#, fuzzy
-#| msgid ""
-#| "Device security checks are not available for this device. It is not "
-#| "possible to tell whether it meets security requirements."
 msgid ""
 "Device security checks are not available for this device. It is not possible "
 "to tell whether it meets hardware security requirements."
-msgstr "设备安全检查不适用于此设备。无法判断其是否符合安全要求。"
+msgstr "设备安全检查不适用于此设备。无法判断其是否符合硬件安全要求。"
 
 #: panels/privacy/firmware-security/cc-firmware-security-dialog.c:366
 msgid "Report copied to clipboard"
@@ -6139,29 +6107,21 @@ msgid "(%1$s → %2$s)"
 msgstr "(%1$s → %2$s)"
 
 #: panels/privacy/firmware-security/cc-firmware-security-page.c:534
-#, fuzzy
-#| msgid "Hardware does not pass checks."
 msgid "Hardware does not pass basic security checks."
-msgstr "硬件未通过检查。"
+msgstr "硬件未通过基本安全检查。"
 
 #: panels/privacy/firmware-security/cc-firmware-security-page.c:541
-#, fuzzy
-#| msgid "Hardware has a good level of protection."
 msgid "Hardware has a basic level of protection."
-msgstr "硬件具备良好的保护等级。"
+msgstr "硬件具备基础级别的保护。"
 
 #: panels/privacy/firmware-security/cc-firmware-security-page.c:551
-#, fuzzy
-#| msgid "Hardware has a good level of protection."
 msgid "Hardware has a strong level of protection."
-msgstr "硬件具备良好的保护等级。"
+msgstr "硬件具备优良级别的保护。"
 
 #. TRANSLATORS: in reference to firmware protection: ??? stars
 #: panels/privacy/firmware-security/cc-firmware-security-page.c:557
-#, fuzzy
-#| msgid "Checks Unavailable"
 msgid "Security Checks Unavailable"
-msgstr "检查不可用"
+msgstr "安全检查不可用"
 
 #: panels/privacy/firmware-security/cc-firmware-security-page.c:558
 msgid "Security levels are not available for this device."
@@ -6289,7 +6249,7 @@ msgstr "自动设备定位(_A)"
 
 #: panels/privacy/location/cc-location-page.ui:18
 msgid "Use sources like GPS and cellular to determine device location"
-msgstr ""
+msgstr "使用如 GPS 和蜂窝网络等数据源来确定设备位置"
 
 #: panels/privacy/location/cc-location-page.ui:28
 msgid ""
@@ -6309,14 +6269,10 @@ msgid "Screen Lock"
 msgstr "锁屏"
 
 #: panels/privacy/screen/cc-screen-page.ui:13
-#, fuzzy
-#| msgid ""
-#| "Automatically locking the screen prevents others from accessing the "
-#| "computer while you're away"
 msgid ""
 "Automatically locking the screen prevents others from accessing the device "
 "while you're away"
-msgstr "自动锁定屏幕可防止其他人在您不在时访问计算机"
+msgstr "自动锁定屏幕可防止其他人在您不在时访问该设备"
 
 #: panels/privacy/screen/cc-screen-page.ui:20
 msgid "_Blank Screen Delay"
@@ -6344,9 +6300,6 @@ msgstr "息屏到锁屏的时间"
 
 #. Translators: Option for Automatic Screen Lock in Screen Lock page
 #: panels/privacy/screen/cc-screen-page.ui:56
-#, fuzzy
-#| msgctxt "lock_screen"
-#| msgid "Screen Turns Off"
 msgid "Screen Turns Off"
 msgstr "屏幕关闭"
 
@@ -6400,9 +6353,6 @@ msgstr "文件历史持续时间(_H)"
 
 #. Translators: Option for File History Duration in File History group
 #: panels/privacy/usage/cc-usage-page.ui:33
-#, fuzzy
-#| msgctxt "retain_history"
-#| msgid "Forever"
 msgid "Forever"
 msgstr "永久"
 
@@ -6423,26 +6373,19 @@ msgstr ""
 "私。"
 
 #: panels/privacy/usage/cc-usage-page.ui:62
-#, fuzzy
-#| msgid "Automatically Delete _Trash Content"
 msgid "Automatically Empty _Trash"
 msgstr "自动清空回收站(_T)"
 
 #: panels/privacy/usage/cc-usage-page.ui:68
 msgid "Automatically Delete Temporary _Files"
-msgstr "自动清理临时文件(_F)"
+msgstr "自动删除临时文件(_F)"
 
 #: panels/privacy/usage/cc-usage-page.ui:74
-#, fuzzy
-#| msgid "Automatically Delete _Period"
 msgid "Automatic Deletion _Period"
-msgstr "自动清空周期(_P)"
+msgstr "自动删除周期(_P)"
 
 #. Translators: Option for Automatically Delete Period in Trash and Temporary Files group
 #: panels/privacy/usage/cc-usage-page.ui:81
-#, fuzzy
-#| msgctxt "automatic_suspend"
-#| msgid "1 hour"
 msgid "1 hour"
 msgstr "1 小时"
 
@@ -6452,7 +6395,7 @@ msgstr "清空回收站(_E)…"
 
 #: panels/privacy/usage/cc-usage-page.ui:103
 msgid "_Delete Temporary Files…"
-msgstr "清除临时文件(_D)…"
+msgstr "删除临时文件(_D)…"
 
 #: panels/privacy/usage/cc-usage-page.ui:119
 msgid "Clear File History?"
@@ -6528,10 +6471,8 @@ msgid "Custom Locations"
 msgstr "自定义位置"
 
 #: panels/search/cc-search-locations-page.ui:57
-#, fuzzy
-#| msgid "_Add Location…"
 msgid "_Add Location"
-msgstr "添加位置(_A)…"
+msgstr "添加位置(_A)"
 
 #: panels/search/cc-search-panel.ui:19
 msgid "_App Search"
@@ -6577,10 +6518,8 @@ msgid "Networks"
 msgstr "网络"
 
 #: panels/sharing/cc-sharing-panel.c:112
-#, fuzzy
-#| msgid "Details copied to clipboard"
 msgid "Address copied to clipboard"
-msgstr "详情已复制到剪贴板"
+msgstr "地址已复制到剪贴板"
 
 #: panels/sharing/cc-sharing-panel.c:184
 msgctxt "service is disabled"
@@ -6602,27 +6541,20 @@ msgid "Choose a Folder"
 msgstr "选择文件夹"
 
 #: panels/sharing/cc-sharing-panel.c:414
-#, fuzzy
-#| msgid "Open folder"
 msgid "Open Folder"
 msgstr "打开文件夹"
 
 #: panels/sharing/cc-sharing-panel.c:444
-#, fuzzy
-#| msgid "Add Folder"
 msgid "_Add Folder"
-msgstr "添加文件夹"
+msgstr "添加文件夹(_A)"
 
 #. Translators: %s is the hostname of the user's device
 #: panels/sharing/cc-sharing-panel.c:603
-#, fuzzy, c-format
-#| msgid ""
-#| "File Sharing allows you to share your Public folder with others on your "
-#| "current network using: %s"
+#, c-format
 msgid ""
 "File sharing allows sharing the Public folder with other devices on the "
 "current network. This device will be visible as “%s”."
-msgstr "文件共享可以共享“公共”文件夹，使用地址：%s"
+msgstr "文件共享可与当前网络上的其它设备共享“公共”文件夹。该设备将显示为“%s”。"
 
 #: panels/sharing/cc-sharing-panel.ui:16
 #: panels/system/about/cc-about-page.ui:41
@@ -6650,10 +6582,8 @@ msgid "File Sharing"
 msgstr "文件共享"
 
 #: panels/sharing/cc-sharing-panel.ui:77
-#, fuzzy
-#| msgid "File Sharing"
 msgid "File Sharing _Address"
-msgstr "文件共享"
+msgstr "文件共享地址(_A)"
 
 #: panels/sharing/cc-sharing-panel.ui:86
 #: panels/system/remote-desktop/cc-desktop-sharing-page.ui:53
@@ -6669,10 +6599,8 @@ msgid "Copy"
 msgstr "复制"
 
 #: panels/sharing/cc-sharing-panel.ui:102
-#, fuzzy
-#| msgid "Open folder"
 msgid "_Open Public Folder"
-msgstr "打开文件夹"
+msgstr "打开公共文件夹(_O)"
 
 #: panels/sharing/cc-sharing-panel.ui:115
 msgid "_Require Password"
@@ -6684,6 +6612,8 @@ msgid ""
 "It may still be possible for devices on this network to see what content is "
 "being shared."
 msgstr ""
+"其它设备需要密码来访问共享的内容。\n"
+"但该网络上的设备仍可能看到共享的内容。"
 
 #: panels/sharing/cc-sharing-panel.ui:134
 #: panels/system/users/cc-add-user-dialog.ui:176
@@ -6696,12 +6626,10 @@ msgid "Media Sharing"
 msgstr "媒体共享"
 
 #: panels/sharing/cc-sharing-panel.ui:169
-#, fuzzy
-#| msgid "Stream music, photos and videos to devices on the current network"
 msgid ""
 "Media sharing allows streaming pictures, music and video to DLNA enabled "
 "devices on the current network."
-msgstr "将音乐、照片和视频流式传输到当前网络上的设备"
+msgstr "媒体共享可将照片、音乐和视频流式传输至当前网络上启用 DLNA 的设备。"
 
 #: panels/sharing/cc-sharing-panel.ui:178
 msgid "Folders"
@@ -6717,17 +6645,12 @@ msgstr "控制想要与其他用户共享的内容"
 
 #. Translators: Search terms to find the Sharing panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/sharing/gnome-sharing-panel.desktop.in:15
-#, fuzzy
-#| msgid ""
-#| "share;sharing;ssh;host;name;remote;desktop;media;audio;video;pictures;"
-#| "photos;movies;server;renderer;"
 msgid ""
 "share;sharing;host;name;media;audio;video;pictures;photos;movies;server;"
 "renderer;"
 msgstr ""
-"share;sharing;ssh;host;name;remote;desktop;media;audio;video;pictures;photos;"
-"movies;server;renderer;共享;主机;名称;远程;桌面;介质;媒体;音频;视频;图片;照"
-"片;电影;服务器;渲染;"
+"share;sharing;host;name;media;audio;video;pictures;photos;movies;server;"
+"renderer;分享;共享;主机;名称;媒体;音频;视频;图片;照片;电影;服务器;渲染;"
 
 #: panels/sound/cc-alert-chooser-window.c:169
 msgid "Custom"
@@ -6863,7 +6786,7 @@ msgstr "音量级别"
 
 #: panels/sound/cc-volume-levels-page.ui:19
 msgid "No Sound Playing"
-msgstr ""
+msgstr "未播放声音"
 
 #: panels/sound/cc-volume-slider.c:52
 msgid "Unmute"
@@ -7039,17 +6962,14 @@ msgstr "查看系统信息"
 #. "Preferred Applications" is the old name for the preference, so make
 #. sure that you use the same "translation" for those keywords
 #: panels/system/about/gnome-about-panel.desktop.in:19
-#, fuzzy
-#| msgid ""
-#| "application;flatpak;permission;setting;default;preferred;media;autorun;cd;"
-#| "dvd;usb;audio;video;disc;removable;device;system;"
 msgid ""
 "device;system;information;hostname;memory;processor;version;default;"
 "application;preferred;cd;dvd;usb;audio;video;disc;removable;media;autorun;"
 msgstr ""
-"application;flatpak;permission;setting;default;preferred;media;autorun;cd;"
-"dvd;usb;audio;video;disc;removable;device;system;应用程序;权限;设置;默认;首选"
-"项;媒体;自动运行;音频;视频;光盘;光碟;盘片;可移除;设备;系统;"
+"device;system;information;hostname;memory;processor;version;default;"
+"application;preferred;cd;dvd;usb;audio;video;disc;removable;media;autorun;设"
+"备;系统;信息;主机名;内存;处理器;版本;默认应用;首选;光盘;光碟;盘片;碟片;可移"
+"除;音频;视频;介质;自动运行;"
 
 #: panels/system/cc-system-panel.ui:20
 msgid "_Region &amp; Language"
@@ -7084,10 +7004,8 @@ msgid "Allow this device to be used remotely"
 msgstr "允许远程使用此设备"
 
 #: panels/system/cc-system-panel.ui:65
-#, fuzzy
-#| msgid "Secure Shell"
 msgid "Se_cure Shell"
-msgstr "SSH"
+msgstr "安全外壳(_C)"
 
 #: panels/system/cc-system-panel.ui:66
 msgid "SSH network access"
@@ -7102,10 +7020,8 @@ msgid "Hardware details and software versions"
 msgstr "硬件详情和软件版本"
 
 #: panels/system/cc-system-panel.ui:93
-#, fuzzy
-#| msgid "Software _Updates"
 msgid "S_oftware Updates"
-msgstr "软件更新(_U)"
+msgstr "软件更新(_O)"
 
 #. Translators: This is the full date and time format used in 12-hour mode.
 #: panels/system/datetime/cc-datetime-page.c:237
@@ -7293,11 +7209,6 @@ msgstr "语言和时间设置、系统信息"
 
 #. Translators: Search terms to find the System panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/system/gnome-system-panel.desktop.in:15
-#, fuzzy
-#| msgid ""
-#| "device;system;information;details;hostname;memory;processor;version;"
-#| "software;operating;os;model;language;region;country;formats;numbers;units;"
-#| "clock;timezone;date;location;remote;desktop;rdp;vnc;"
 msgid ""
 "device;system;information;details;hostname;memory;processor;version;software;"
 "operating;os;model;language;region;country;formats;numbers;units;clock;"
@@ -7305,9 +7216,9 @@ msgid ""
 msgstr ""
 "device;system;information;details;hostname;memory;processor;version;software;"
 "operating;os;model;language;region;country;formats;numbers;units;clock;"
-"timezone;date;location;remote;desktop;rdp;vnc;设备;系统;信息;详情;主机名;内"
-"存;处理器;版本;软件;操作;系统;类型;语言;地区;国家;格式;数字;单位;时钟;时区;日"
-"期;位置;远程;桌面;"
+"timezone;date;location;remote;desktop;rdp;vnc;ssh;设备;系统;信息;详情;主机名;"
+"内存;处理器;版本;软件;操作;系统;类型;语言;地区;国家;格式;数字;单位;时钟;时区;"
+"日期;位置;远程;桌面;"
 
 #: panels/system/region/cc-format-chooser.c:160
 #: panels/system/region/cc-format-chooser.c:208
@@ -7351,10 +7262,8 @@ msgid "Times"
 msgstr "时间"
 
 #: panels/system/region/cc-format-preview.ui:37
-#, fuzzy
-#| msgid "_Date &amp; Time"
 msgid "Dates &amp; Times"
-msgstr "日期与时间(_D)"
+msgstr "日期和时间"
 
 #: panels/system/region/cc-format-preview.ui:47
 msgid "Numbers"
@@ -7423,41 +7332,29 @@ msgstr "Language;Layout;Keyboard;Input;语言;布局;键盘;输入;"
 
 #: panels/system/remote-desktop/cc-desktop-sharing-page.c:358
 #: panels/system/remote-desktop/cc-remote-login-page.c:97
-#, fuzzy
-#| msgid "Details copied to clipboard"
 msgid "Device address copied to clipboard"
-msgstr "详情已复制到剪贴板"
+msgstr "设备地址已复制到剪贴板"
 
 #: panels/system/remote-desktop/cc-desktop-sharing-page.c:367
 #: panels/system/remote-desktop/cc-remote-login-page.c:106
-#, fuzzy
-#| msgid "Report copied to clipboard"
 msgid "Port number copied to clipboard"
-msgstr "报告已复制到剪贴板"
+msgstr "端口号码已复制到剪贴板"
 
 #: panels/system/remote-desktop/cc-desktop-sharing-page.c:378
 #: panels/system/remote-desktop/cc-remote-login-page.c:117
-#, fuzzy
-#| msgid "Report copied to clipboard"
 msgid "Username copied to clipboard"
-msgstr "报告已复制到剪贴板"
+msgstr "用户名已复制到剪贴板"
 
 #: panels/system/remote-desktop/cc-desktop-sharing-page.c:389
 #: panels/system/remote-desktop/cc-remote-login-page.c:128
-#, fuzzy
-#| msgid "Report copied to clipboard"
 msgid "Password copied to clipboard"
-msgstr "报告已复制到剪贴板"
+msgstr "密码已复制到剪贴板"
 
 #: panels/system/remote-desktop/cc-desktop-sharing-page.ui:12
-#, fuzzy
-#| msgid ""
-#| "Share your existing desktop with other devices. The remote connection "
-#| "uses the existing screen resolution"
 msgid ""
 "Share your existing desktop with other devices. The remote connection uses "
 "the existing screen resolution."
-msgstr "与其它设备共享您的现有桌面。远程连接使用现有的屏幕分辨率"
+msgstr "与其它设备共享您的现有桌面。远程连接使用现有的屏幕分辨率。"
 
 #: panels/system/remote-desktop/cc-desktop-sharing-page.ui:27
 msgid "_Desktop Sharing"
@@ -7508,10 +7405,8 @@ msgstr "用户名(_U)"
 
 #: panels/system/remote-desktop/cc-desktop-sharing-page.ui:108
 #: panels/system/remote-desktop/cc-remote-login-page.ui:108
-#, fuzzy
-#| msgid "Password"
 msgid "P_assword"
-msgstr "密码"
+msgstr "密码(_A)"
 
 #: panels/system/remote-desktop/cc-desktop-sharing-page.ui:131
 #: panels/system/remote-desktop/cc-remote-login-page.ui:132
@@ -7538,16 +7433,12 @@ msgid "Remote Desktop"
 msgstr "远程桌面"
 
 #: panels/system/remote-desktop/cc-remote-desktop-page.ui:39
-#, fuzzy
-#| msgid "Desktop Sharing"
 msgid "Desktop _Sharing"
-msgstr "桌面共享"
+msgstr "桌面共享(_S)"
 
 #: panels/system/remote-desktop/cc-remote-desktop-page.ui:49
-#, fuzzy
-#| msgid "Remote Login"
 msgid "Remote _Login"
-msgstr "远程登录"
+msgstr "远程登录(_L)"
 
 #: panels/system/remote-desktop/cc-remote-login-page.c:725
 #: panels/system/users/cc-user-page.c:763
@@ -7573,30 +7464,24 @@ msgid "Authentication is required to enable or disable remote sessions"
 msgstr "启用或禁用远程会话需要认证"
 
 #: panels/system/secure-shell/cc-secure-shell-page.c:53
-#, fuzzy
-#| msgid "Report copied to clipboard"
 msgid "Command copied to clipboard"
-msgstr "报告已复制到剪贴板"
+msgstr "命令已复制到剪贴板"
 
 #: panels/system/secure-shell/cc-secure-shell-page.ui:4
 msgid "Secure Shell"
-msgstr "SSH"
+msgstr "安全外壳"
 
 #: panels/system/secure-shell/cc-secure-shell-page.ui:22
 msgid "Access this device using Secure Shell (SSH)"
 msgstr "使用安全外壳（SSH）访问此设备"
 
 #: panels/system/secure-shell/cc-secure-shell-page.ui:34
-#, fuzzy
-#| msgid "Secure Shell"
 msgid "_Secure Shell"
-msgstr "SSH"
+msgstr "安全外壳(_S)"
 
 #: panels/system/secure-shell/cc-secure-shell-page.ui:41
-#, fuzzy
-#| msgid "SSH Login Command"
 msgid "SSH Login _Command"
-msgstr "SSH 登录命令"
+msgstr "SSH 登录命令(_C)"
 
 #: panels/system/secure-shell/org.gnome.controlcenter.remote-login-helper.policy.in.in:11
 msgid "Enable or disable remote login"
@@ -7611,16 +7496,12 @@ msgid "Failed to add account"
 msgstr "添加账号失败"
 
 #: panels/system/users/cc-add-user-dialog.c:282
-#, fuzzy
-#| msgid "Passwords do not match."
 msgid "Passwords match"
-msgstr "密码不匹配。"
+msgstr "密码匹配"
 
 #: panels/system/users/cc-add-user-dialog.c:282
-#, fuzzy
-#| msgid "Passwords do not match."
 msgid "Passwords do not match"
-msgstr "密码不匹配。"
+msgstr "密码不匹配"
 
 #: panels/system/users/cc-add-user-dialog.c:362
 #: panels/wwan/cc-wwan-sim-lock-dialog.ui:24
@@ -7633,10 +7514,8 @@ msgid "Add User"
 msgstr "添加用户"
 
 #: panels/system/users/cc-add-user-dialog.ui:53
-#, fuzzy
-#| msgid "Account _Type"
 msgid "Account Type"
-msgstr "帐号类型(_T)"
+msgstr "账号类型"
 
 #: panels/system/users/cc-add-user-dialog.ui:57
 msgid "Ad_ministrator"
@@ -7653,22 +7532,18 @@ msgstr ""
 "不能应用于管理员。"
 
 #: panels/system/users/cc-add-user-dialog.ui:76
-#, fuzzy
-#| msgid "%s Details"
 msgid "User Details"
-msgstr "%s 详细信息"
+msgstr "用户详情"
 
 #: panels/system/users/cc-add-user-dialog.ui:79
-#, fuzzy
-#| msgid "Full name"
 msgid "Full _Name"
-msgstr "全名"
+msgstr "全名(_N)"
 
 #: panels/system/users/cc-add-user-dialog.ui:95
 msgid ""
 "Usernames can only include lower case letters, numbers, hyphens and "
 "underscores."
-msgstr ""
+msgstr "用户名仅能包含小写字母、数字、连字符和下划线。"
 
 #: panels/system/users/cc-add-user-dialog.ui:107
 msgid "User sets password on _first login"
@@ -7679,24 +7554,17 @@ msgid "Set password n_ow"
 msgstr "现在设置密码(_O)"
 
 #: panels/system/users/cc-add-user-dialog.ui:143
-#, fuzzy
-#| msgid "New Password"
 msgid "Set Password"
-msgstr "新建密码"
+msgstr "设置密码"
 
 #: panels/system/users/cc-add-user-dialog.ui:219
-#, fuzzy
-#| msgctxt "Password hint"
-#| msgid "Try to use a mixture of letters, numbers and punctuation."
 msgid ""
 "For a good password, mix upper case, lower case, numbers and punctuation."
-msgstr "请混用字母、数字和标点符号。"
+msgstr "良好的密码应混合大写字母、小写字母、数字和标点符号。"
 
 #: panels/system/users/cc-add-user-dialog.ui:229
-#, fuzzy
-#| msgid "Confirm Password"
 msgid "_Confirm Password"
-msgstr "确认密码"
+msgstr "确认密码(_C)"
 
 #: panels/system/users/cc-avatar-chooser.c:94
 msgid "Select"
@@ -7972,22 +7840,19 @@ msgid "Failed to get fingerprint devices: %s"
 msgstr "获取指纹设备失败：%s"
 
 #: panels/system/users/cc-fingerprint-dialog.c:1391
-#, fuzzy
-#| msgid "_Delete Fingerprints"
 msgid "Delete All Fingerprints?"
-msgstr "删除指纹(_D)"
+msgstr "删除所有指纹吗？"
 
 #: panels/system/users/cc-fingerprint-dialog.c:1392
 msgid ""
 "Deleting all enrolled fingerprints will disable Fingerprint Login. To re-"
 "enable Fingerprint Login at least one fingerprint will have to be enrolled."
 msgstr ""
+"删除所有登记的指纹将禁用指纹登录。要重新启用指纹登录必须至少登记一个指纹。"
 
 #: panels/system/users/cc-fingerprint-dialog.c:1397
-#, fuzzy
-#| msgid "_Delete"
 msgid "_Delete All"
-msgstr "删除(_D)"
+msgstr "全部删除(_D)"
 
 #: panels/system/users/cc-fingerprint-dialog.ui:8
 msgid "Fingerprint Manager"
@@ -8023,14 +7888,10 @@ msgid "Fingerprint Login"
 msgstr "指纹登录"
 
 #: panels/system/users/cc-fingerprint-dialog.ui:191
-#, fuzzy
-#| msgid ""
-#| "Fingerprint login allows you to unlock and log into your computer with "
-#| "your finger"
 msgid ""
 "Fingerprint login allows you to unlock and log into your device with your "
 "finger"
-msgstr "指纹登录可以帮助您使用手指解锁并登录您的计算机"
+msgstr "指纹登录可让您使用手指解锁和登录您的设备"
 
 #: panels/system/users/cc-fingerprint-dialog.ui:218
 msgid "_Delete Fingerprints"
@@ -8180,10 +8041,8 @@ msgid "Open the Parental Controls app"
 msgstr "打开家长控制应用"
 
 #: panels/system/users/cc-user-page.ui:203
-#, fuzzy
-#| msgid "_Remove User"
 msgid "_Remove User…"
-msgstr "移除用户(_R)"
+msgstr "移除用户(_R)…"
 
 #: panels/system/users/cc-user-page.ui:226
 msgid ""
@@ -8202,19 +8061,15 @@ msgstr "用户"
 
 #: panels/system/users/cc-users-page.ui:16
 msgid "Other Users"
-msgstr "其它用户"
+msgstr "其他用户"
 
 #: panels/system/users/cc-users-page.ui:34
-#, fuzzy
-#| msgid "Add User"
 msgid "_Add User"
-msgstr "添加用户"
+msgstr "添加用户(_A)"
 
 #: panels/system/users/cc-users-page.ui:43
-#, fuzzy
-#| msgid "Add Enterprise Login"
 msgid "Add _Enterprise Login"
-msgstr "添加企业登录"
+msgstr "添加企业登录(_E)"
 
 #: panels/system/users/data/join-dialog.ui:59
 msgid "Domain Administrator Login"
@@ -8239,18 +8094,13 @@ msgstr "添加或删除用户及更改密码"
 
 #. Translators: Search terms to find the Users panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/system/users/gnome-users-panel.desktop.in:15
-#, fuzzy
-#| msgid ""
-#| "Login;Name;Fingerprint;Avatar;Logo;Face;Password;Parental Controls;Screen "
-#| "Time;App Restrictions;Web Restrictions;Usage;Usage Limit;Kid;Child;"
 msgid ""
 "Login;Name;Fingerprint;Avatar;Logo;Face;Password;Parental;Restrictions;Usage;"
 "Kid;Child;"
 msgstr ""
-"Login;Name;Fingerprint;Avatar;Logo;Face;Password;Parental Controls;Screen "
-"Time;App Restrictions;Web Restrictions;Usage;Usage Limit;Kid;Child;登录;名字;"
-"名称;指纹;头像;标志;脸部;密码;家长控制;亮屏时间;应用限制;网络限制;占用;占用限"
-"制;孩子;儿童;"
+"Login;Name;Fingerprint;Avatar;Logo;Face;Password;Parental;Restrictions;Usage;"
+"Kid;Child;登录;名字;名称;姓名;指纹;头像;标志;脸部;人脸;密码;家长;限制;占用;孩"
+"子;儿童;"
 
 #: panels/system/users/org.gnome.controlcenter.user-accounts.policy.in:11
 msgid "Manage user accounts"
