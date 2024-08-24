@@ -20,8 +20,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2024-08-14 07:50+0000\n"
-"PO-Revision-Date: 2024-08-14 08:00+0300\n"
+"POT-Creation-Date: 2024-08-23 21:35+0000\n"
+"PO-Revision-Date: 2024-08-24 08:00+0300\n"
 "Last-Translator: Emin Tufan Çetin <etcetin@gmail.com>\n"
 "Language-Team: Turkish <takim@gnome.org.tr>\n"
 "Language: tr\n"
@@ -181,13 +181,14 @@ msgstr "_Yazılımlarʼda Ara"
 msgid "Unable to List Apps"
 msgstr "Uygulamalar Listelenemedi"
 
+#. Translators: Parental Controls here refers to the features provided by 'malcontent'
 #: panels/applications/cc-applications-panel.ui:122
 msgid ""
 "An error has occurred and apps cannot be listed.\n"
-"Error details: Malcontent is not installed."
+"Error details: Parental Controls are not installed."
 msgstr ""
 "Hata oluştu ve uygulamalar listelenemedi.\n"
-"Hata ayrıntıları: Malcontent kurulu değil."
+"Hata ayrıntıları: Ebeveyn Denetimi kurulu değil."
 
 #: panels/applications/cc-applications-panel.ui:139
 #: panels/applications/cc-default-apps-page.ui:4
@@ -1097,6 +1098,7 @@ msgstr "Ekran Kalibrasyonu"
 #: panels/system/users/cc-add-user-dialog.ui:24
 #: panels/system/users/cc-avatar-chooser.c:92
 #: panels/system/users/cc-enterprise-login-dialog.ui:44
+#: panels/system/users/cc-fingerprint-dialog.c:1396
 #: panels/system/users/cc-fingerprint-dialog.ui:32
 #: panels/system/users/cc-password-dialog.ui:15
 #: panels/system/users/cc-user-page.ui:231
@@ -3161,7 +3163,7 @@ msgid ""
 "Turn off the hotspot to use Wi-Fi with this device."
 msgstr ""
 "Erişim noktasına bağlanmak için başka aygıtla tarayın.\n"
-"Bu aygıtla Wi-Fi kullanmak için erişim noktasını kapatın."
+"Bu aygıtla kablosuz bağlantı kullanmak için erişim noktasını kapatın."
 
 #: panels/network/cc-wifi-panel.ui:156
 msgid "T_urn Off Hotspot…"
@@ -4458,6 +4460,7 @@ msgid "Google"
 msgstr "Google"
 
 #: panels/online-accounts/cc-online-account-provider-row.c:58
+#: panels/online-accounts/cc-online-account-provider-row.c:60
 msgid "Email, calendar, contacts, files"
 msgstr "E-posta, takvim, kişiler, dosyalar"
 
@@ -4472,10 +4475,6 @@ msgstr "E-posta"
 #: panels/online-accounts/cc-online-account-provider-row.c:60
 msgid "Microsoft 365"
 msgstr "Microsoft 365"
-
-#: panels/online-accounts/cc-online-account-provider-row.c:60
-msgid "Files"
-msgstr "Dosyalar"
 
 #: panels/online-accounts/cc-online-account-provider-row.c:61
 msgid "Microsoft Exchange"
@@ -4979,7 +4978,8 @@ msgstr ""
 #: panels/printers/gnome-printers-panel.desktop.in:16
 msgid "Printer;Queue;Print;Paper;Ink;Toner;"
 msgstr ""
-"Printer;Queue;Print;Paper;Ink;Toner;Yazıcı;Kuyruk;Sıra;Yazdır;Kâğıt;Kağıt;Mürekkep;"
+"Printer;Queue;Print;Paper;Ink;Toner;Yazıcı;Kuyruk;Sıra;Yazdır;Kâğıt;Kağıt;"
+"Mürekkep;"
 
 #: panels/printers/pp-details-dialog.c:107
 msgid "No suitable driver found"
@@ -6019,7 +6019,7 @@ msgstr ""
 
 #. TRANSLATORS: in reference to firmware protection: 0/4 stars
 #: panels/privacy/firmware-security/cc-firmware-security-dialog.c:108
-#: panels/privacy/firmware-security/cc-firmware-security-page.c:532
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:533
 msgid "Security Checks Failed"
 msgstr "Güvenlik Denetimleri Başarısız"
 
@@ -6043,7 +6043,7 @@ msgstr ""
 
 #. TRANSLATORS: in reference to firmware protection: 1/4 stars
 #: panels/privacy/firmware-security/cc-firmware-security-dialog.c:121
-#: panels/privacy/firmware-security/cc-firmware-security-page.c:539
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:540
 msgid "Basic Security Checks Passed"
 msgstr "Temel Güvenlik Denetimleri Başarılı"
 
@@ -6061,7 +6061,7 @@ msgstr ""
 
 #. TRANSLATORS: in reference to firmware protection: 2~4 stars
 #: panels/privacy/firmware-security/cc-firmware-security-dialog.c:134
-#: panels/privacy/firmware-security/cc-firmware-security-page.c:549
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:550
 msgid "Protected"
 msgstr "Korunmuş"
 
@@ -6189,44 +6189,44 @@ msgstr ""
 
 #. TRANSLATOR: this is the date in "%Y-%m-%d %H:%M:%S" format,
 #. for example: 2022-08-01 22:48:00
-#: panels/privacy/firmware-security/cc-firmware-security-page.c:228
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:229
 #, c-format
 msgid "%1$s"
 msgstr "%1$s"
 
 #. TRANSLATOR: This is the text event status output when the event status is "success"
-#: panels/privacy/firmware-security/cc-firmware-security-page.c:234
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:235
 msgid "Pass"
 msgstr "Geçti"
 
 #. TRANSLATOR: This is the text event status output when the event status is not "success"
-#: panels/privacy/firmware-security/cc-firmware-security-page.c:237
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:238
 msgid "! Fail"
 msgstr "! Başarısız"
 
-#: panels/privacy/firmware-security/cc-firmware-security-page.c:240
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:241
 #, c-format
 msgid "(%1$s → %2$s)"
 msgstr "(%1$s → %2$s)"
 
-#: panels/privacy/firmware-security/cc-firmware-security-page.c:533
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:534
 msgid "Hardware does not pass basic security checks."
 msgstr "Donanım, temel güvenlik denetimlerini geçemedi."
 
-#: panels/privacy/firmware-security/cc-firmware-security-page.c:540
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:541
 msgid "Hardware has a basic level of protection."
 msgstr "Donanımın temel koruma düzeyi var."
 
-#: panels/privacy/firmware-security/cc-firmware-security-page.c:550
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:551
 msgid "Hardware has a strong level of protection."
 msgstr "Donanımın iyi koruma düzeyi var."
 
 #. TRANSLATORS: in reference to firmware protection: ??? stars
-#: panels/privacy/firmware-security/cc-firmware-security-page.c:556
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:557
 msgid "Security Checks Unavailable"
 msgstr "Güvenlik Denetimleri Kullanılamıyor"
 
-#: panels/privacy/firmware-security/cc-firmware-security-page.c:557
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:558
 msgid "Security levels are not available for this device."
 msgstr "Bu aygıtta güvenlik düzeyleri kullanılamıyor."
 
@@ -6550,7 +6550,7 @@ msgid "Subfolders must be manually added for this location"
 msgstr "Bu konum için alt klasörler elle eklenmelidir"
 
 #: panels/search/cc-search-locations-page.c:598
-#: panels/sharing/cc-sharing-panel.c:423
+#: panels/sharing/cc-sharing-panel.c:424
 msgid "Remove Folder"
 msgstr "Klasörü Kaldır"
 
@@ -6616,8 +6616,8 @@ msgstr ""
 #: panels/search/gnome-search-panel.desktop.in:16
 msgid "Search;Find;Index;Hide;Privacy;Results;"
 msgstr ""
-"Search;Find;Index;Hide;Privacy;Results;Ara;Bul;Endeks;Gizle;Gizlilik;Mahremiyet;"
-"Sonuçlar;"
+"Search;Find;Index;Hide;Privacy;Results;Ara;Bul;Endeks;Gizle;Gizlilik;"
+"Mahremiyet;Sonuçlar;"
 
 #. Label
 #: panels/sharing/cc-sharing-networks.c:270
@@ -6651,16 +6651,16 @@ msgstr "Etkin"
 msgid "Choose a Folder"
 msgstr "Klasör Seç"
 
-#: panels/sharing/cc-sharing-panel.c:413
+#: panels/sharing/cc-sharing-panel.c:414
 msgid "Open Folder"
 msgstr "Klasör Aç"
 
-#: panels/sharing/cc-sharing-panel.c:443
+#: panels/sharing/cc-sharing-panel.c:444
 msgid "_Add Folder"
 msgstr "Klasör _Ekle"
 
 #. Translators: %s is the hostname of the user's device
-#: panels/sharing/cc-sharing-panel.c:602
+#: panels/sharing/cc-sharing-panel.c:603
 #, c-format
 msgid ""
 "File sharing allows sharing the Public folder with other devices on the "
@@ -6686,7 +6686,7 @@ msgstr "Dosya _Paylaşımı"
 msgid "Stream music, photos and videos to devices on the current network"
 msgstr "Müzikleri, fotoğrafları ve videoları ağdaki diğer aygıtlara akıt"
 
-#: panels/sharing/cc-sharing-panel.ui:38 panels/sharing/cc-sharing-panel.ui:163
+#: panels/sharing/cc-sharing-panel.ui:38 panels/sharing/cc-sharing-panel.ui:164
 msgid "_Media Sharing"
 msgstr "_Ortam Paylaşımı"
 
@@ -6704,9 +6704,9 @@ msgstr "Dosya Paylaşım _Adresi"
 #: panels/system/remote-desktop/cc-desktop-sharing-page.ui:95
 #: panels/system/remote-desktop/cc-desktop-sharing-page.ui:112
 #: panels/system/remote-desktop/cc-remote-login-page.ui:52
-#: panels/system/remote-desktop/cc-remote-login-page.ui:72
-#: panels/system/remote-desktop/cc-remote-login-page.ui:94
-#: panels/system/remote-desktop/cc-remote-login-page.ui:111
+#: panels/system/remote-desktop/cc-remote-login-page.ui:73
+#: panels/system/remote-desktop/cc-remote-login-page.ui:95
+#: panels/system/remote-desktop/cc-remote-login-page.ui:112
 #: panels/system/secure-shell/cc-secure-shell-page.ui:49
 msgid "Copy"
 msgstr "Kopyala"
@@ -6735,11 +6735,11 @@ msgstr ""
 msgid "_Password"
 msgstr "_Parola"
 
-#: panels/sharing/cc-sharing-panel.ui:150
+#: panels/sharing/cc-sharing-panel.ui:151
 msgid "Media Sharing"
 msgstr "Ortam Paylaşımı"
 
-#: panels/sharing/cc-sharing-panel.ui:168
+#: panels/sharing/cc-sharing-panel.ui:169
 msgid ""
 "Media sharing allows streaming pictures, music and video to DLNA enabled "
 "devices on the current network."
@@ -6747,7 +6747,7 @@ msgstr ""
 "Ortam paylaşımı, geçerli ağdaki DLNA etkin aygıtlara resim, müzik ve video "
 "akıtmayı sağlar."
 
-#: panels/sharing/cc-sharing-panel.ui:177
+#: panels/sharing/cc-sharing-panel.ui:178
 msgid "Folders"
 msgstr "Klasörler"
 
@@ -7142,17 +7142,17 @@ msgid "S_oftware Updates"
 msgstr "Yazılım _Güncellemeleri"
 
 #. Translators: This is the full date and time format used in 12-hour mode.
-#: panels/system/datetime/cc-datetime-page.c:236
+#: panels/system/datetime/cc-datetime-page.c:237
 msgid "%e %B %Y, %l:%M %p"
 msgstr "%e %B %Y, %l:%M %p"
 
 #. Translators: This is the full date and time format used in 24-hour mode.
-#: panels/system/datetime/cc-datetime-page.c:241
+#: panels/system/datetime/cc-datetime-page.c:242
 msgid "%e %B %Y, %R"
 msgstr "%e %B %Y, %R"
 
 #. Translators: "city, country"
-#: panels/system/datetime/cc-datetime-page.c:401
+#: panels/system/datetime/cc-datetime-page.c:402
 #, c-format
 msgctxt "timezone loc"
 msgid "%s, %s"
@@ -7160,7 +7160,7 @@ msgstr "%s, %s"
 
 #. Update the timezone on the listbow row
 #. Translators: "timezone (details)"
-#: panels/system/datetime/cc-datetime-page.c:418
+#: panels/system/datetime/cc-datetime-page.c:419
 #, c-format
 msgctxt "timezone desc"
 msgid "%s (%s)"
@@ -7196,103 +7196,103 @@ msgstr "İnternet erişimi gerektirir"
 msgid "Date &amp; _Time"
 msgstr "Tarih ve _Saat"
 
-#: panels/system/datetime/cc-datetime-page.ui:147
+#: panels/system/datetime/cc-datetime-page.ui:148
 msgid "Automatic Time _Zone"
 msgstr "Kendiliğinden Saat _Dilimi"
 
-#: panels/system/datetime/cc-datetime-page.ui:148
+#: panels/system/datetime/cc-datetime-page.ui:149
 msgid "Requires location services enabled and internet access"
 msgstr "Konum hizmetlerinin etkin olmasını ve İnternet erişimi gerektirir"
 
-#: panels/system/datetime/cc-datetime-page.ui:154
+#: panels/system/datetime/cc-datetime-page.ui:155
 msgid "Time Z_one"
 msgstr "Saat _Dilimi"
 
-#: panels/system/datetime/cc-datetime-page.ui:165
+#: panels/system/datetime/cc-datetime-page.ui:166
 msgid "Time _Format"
 msgstr "Saat _Biçimi"
 
-#: panels/system/datetime/cc-datetime-page.ui:176
+#: panels/system/datetime/cc-datetime-page.ui:177
 msgid "_24-hour"
 msgstr "_24 saat"
 
-#: panels/system/datetime/cc-datetime-page.ui:184
+#: panels/system/datetime/cc-datetime-page.ui:185
 msgid "AM / _PM"
 msgstr "ÖÖ / Ö_S"
 
-#: panels/system/datetime/cc-datetime-page.ui:197
+#: panels/system/datetime/cc-datetime-page.ui:198
 msgid "Clock &amp; Calendar"
 msgstr "Saat ve Takvim"
 
-#: panels/system/datetime/cc-datetime-page.ui:198
+#: panels/system/datetime/cc-datetime-page.ui:199
 msgid "Control how the time and date is shown in the top bar"
 msgstr "Saat ve tarihin üst çubukta nasıl gösterildiğini denetle"
 
-#: panels/system/datetime/cc-datetime-page.ui:201
+#: panels/system/datetime/cc-datetime-page.ui:202
 msgid "_Week Day"
 msgstr "_Haftanın Günü"
 
-#: panels/system/datetime/cc-datetime-page.ui:207
+#: panels/system/datetime/cc-datetime-page.ui:208
 msgid "D_ate"
 msgstr "T_arih"
 
-#: panels/system/datetime/cc-datetime-page.ui:213
+#: panels/system/datetime/cc-datetime-page.ui:214
 msgid "_Seconds"
 msgstr "_Saniye"
 
-#: panels/system/datetime/cc-datetime-page.ui:219
+#: panels/system/datetime/cc-datetime-page.ui:220
 msgid "Week _Numbers"
 msgstr "Hafta _Numaraları"
 
-#: panels/system/datetime/cc-datetime-page.ui:220
+#: panels/system/datetime/cc-datetime-page.ui:221
 msgid "Shown in the dropdown calendar"
 msgstr "Açılır takvimde gösterilir"
 
-#: panels/system/datetime/cc-datetime-page.ui:256
+#: panels/system/datetime/cc-datetime-page.ui:257
 msgid "January"
 msgstr "Ocak"
 
-#: panels/system/datetime/cc-datetime-page.ui:257
+#: panels/system/datetime/cc-datetime-page.ui:258
 msgid "February"
 msgstr "Şubat"
 
-#: panels/system/datetime/cc-datetime-page.ui:258
+#: panels/system/datetime/cc-datetime-page.ui:259
 msgid "March"
 msgstr "Mart"
 
-#: panels/system/datetime/cc-datetime-page.ui:259
+#: panels/system/datetime/cc-datetime-page.ui:260
 msgid "April"
 msgstr "Nisan"
 
-#: panels/system/datetime/cc-datetime-page.ui:260
+#: panels/system/datetime/cc-datetime-page.ui:261
 msgid "May"
 msgstr "Mayıs"
 
-#: panels/system/datetime/cc-datetime-page.ui:261
+#: panels/system/datetime/cc-datetime-page.ui:262
 msgid "June"
 msgstr "Haziran"
 
-#: panels/system/datetime/cc-datetime-page.ui:262
+#: panels/system/datetime/cc-datetime-page.ui:263
 msgid "July"
 msgstr "Temmuz"
 
-#: panels/system/datetime/cc-datetime-page.ui:263
+#: panels/system/datetime/cc-datetime-page.ui:264
 msgid "August"
 msgstr "Ağustos"
 
-#: panels/system/datetime/cc-datetime-page.ui:264
+#: panels/system/datetime/cc-datetime-page.ui:265
 msgid "September"
 msgstr "Eylül"
 
-#: panels/system/datetime/cc-datetime-page.ui:265
+#: panels/system/datetime/cc-datetime-page.ui:266
 msgid "October"
 msgstr "Ekim"
 
-#: panels/system/datetime/cc-datetime-page.ui:266
+#: panels/system/datetime/cc-datetime-page.ui:267
 msgid "November"
 msgstr "Kasım"
 
-#: panels/system/datetime/cc-datetime-page.ui:267
+#: panels/system/datetime/cc-datetime-page.ui:268
 msgid "December"
 msgstr "Aralık"
 
@@ -7518,29 +7518,29 @@ msgid "_Port"
 msgstr "_Bağlantı Noktası"
 
 #: panels/system/remote-desktop/cc-desktop-sharing-page.ui:88
-#: panels/system/remote-desktop/cc-remote-login-page.ui:87
+#: panels/system/remote-desktop/cc-remote-login-page.ui:88
 msgid "Login Details"
 msgstr "Oturum Açma Ayrıntıları"
 
 #: panels/system/remote-desktop/cc-desktop-sharing-page.ui:91
-#: panels/system/remote-desktop/cc-remote-login-page.ui:90
+#: panels/system/remote-desktop/cc-remote-login-page.ui:91
 #: panels/system/users/cc-add-user-dialog.ui:87
 #: panels/system/users/cc-enterprise-login-dialog.ui:92
 msgid "_Username"
 msgstr "_Kullanıcı Adı"
 
 #: panels/system/remote-desktop/cc-desktop-sharing-page.ui:108
-#: panels/system/remote-desktop/cc-remote-login-page.ui:107
+#: panels/system/remote-desktop/cc-remote-login-page.ui:108
 msgid "P_assword"
 msgstr "P_arola"
 
 #: panels/system/remote-desktop/cc-desktop-sharing-page.ui:131
-#: panels/system/remote-desktop/cc-remote-login-page.ui:131
+#: panels/system/remote-desktop/cc-remote-login-page.ui:132
 msgid "_Generate New Password"
 msgstr "Yeni Parola _Oluştur"
 
 #: panels/system/remote-desktop/cc-desktop-sharing-page.ui:139
-#: panels/system/remote-desktop/cc-remote-login-page.ui:139
+#: panels/system/remote-desktop/cc-remote-login-page.ui:140
 msgid "_Verify Encryption"
 msgstr "Şifrelemeyi _Doğrula"
 
@@ -7866,87 +7866,87 @@ msgstr "Parmak izleri listelenemedi: %s"
 msgid "Failed to delete saved fingerprints: %s"
 msgstr "Kayıtlı parmak izleri silinemedi: %s"
 
-#: panels/system/users/cc-fingerprint-dialog.c:608
+#: panels/system/users/cc-fingerprint-dialog.c:609
 msgid "Left thumb"
 msgstr "Sol başparmak"
 
-#: panels/system/users/cc-fingerprint-dialog.c:610
+#: panels/system/users/cc-fingerprint-dialog.c:611
 msgid "Left middle finger"
 msgstr "Sol orta parmak"
 
-#: panels/system/users/cc-fingerprint-dialog.c:612
+#: panels/system/users/cc-fingerprint-dialog.c:613
 msgid "_Left index finger"
 msgstr "So_l işaret parmağı"
 
-#: panels/system/users/cc-fingerprint-dialog.c:614
+#: panels/system/users/cc-fingerprint-dialog.c:615
 msgid "Left ring finger"
 msgstr "Sol yüzük parmağı"
 
-#: panels/system/users/cc-fingerprint-dialog.c:616
+#: panels/system/users/cc-fingerprint-dialog.c:617
 msgid "Left little finger"
 msgstr "Sol serçe parmağı"
 
-#: panels/system/users/cc-fingerprint-dialog.c:618
+#: panels/system/users/cc-fingerprint-dialog.c:619
 msgid "Right thumb"
 msgstr "Sağ başparmak"
 
-#: panels/system/users/cc-fingerprint-dialog.c:620
+#: panels/system/users/cc-fingerprint-dialog.c:621
 msgid "Right middle finger"
 msgstr "Sağ orta parmağı"
 
-#: panels/system/users/cc-fingerprint-dialog.c:622
+#: panels/system/users/cc-fingerprint-dialog.c:623
 msgid "_Right index finger"
 msgstr "Sağ işaret pa_rmağı"
 
-#: panels/system/users/cc-fingerprint-dialog.c:624
+#: panels/system/users/cc-fingerprint-dialog.c:625
 msgid "Right ring finger"
 msgstr "Sağ yüzük parmağı"
 
-#: panels/system/users/cc-fingerprint-dialog.c:626
+#: panels/system/users/cc-fingerprint-dialog.c:627
 msgid "Right little finger"
 msgstr "Sağ serçe parmağı"
 
-#: panels/system/users/cc-fingerprint-dialog.c:628
+#: panels/system/users/cc-fingerprint-dialog.c:629
 msgid "Unknown Finger"
 msgstr "Bilinmeyen Parmak İzi"
 
-#: panels/system/users/cc-fingerprint-dialog.c:759
+#: panels/system/users/cc-fingerprint-dialog.c:760
 msgctxt "Fingerprint enroll state"
 msgid "Complete"
 msgstr "Tamamlandı"
 
-#: panels/system/users/cc-fingerprint-dialog.c:770
+#: panels/system/users/cc-fingerprint-dialog.c:771
 msgid "Fingerprint device disconnected"
 msgstr "Parmak izi aygıtının bağlantısı kesildi"
 
-#: panels/system/users/cc-fingerprint-dialog.c:776
+#: panels/system/users/cc-fingerprint-dialog.c:777
 msgid "Fingerprint device storage is full"
 msgstr "Parmak izi aygıtının deposu dolu"
 
-#: panels/system/users/cc-fingerprint-dialog.c:780
+#: panels/system/users/cc-fingerprint-dialog.c:781
 msgid "Fingerprint is duplicate"
 msgstr "Parmak izi yinelenmiş"
 
-#: panels/system/users/cc-fingerprint-dialog.c:784
+#: panels/system/users/cc-fingerprint-dialog.c:785
 msgid "Failed to enroll new fingerprint"
 msgstr "Yeni parmak izi kaydedilemedi"
 
-#: panels/system/users/cc-fingerprint-dialog.c:815
+#: panels/system/users/cc-fingerprint-dialog.c:816
 #, c-format
 msgid "Failed to start enrollment: %s"
 msgstr "Kayıt başlatılamadı: %s"
 
-#: panels/system/users/cc-fingerprint-dialog.c:823
+#: panels/system/users/cc-fingerprint-dialog.c:824
 msgctxt "Fingerprint enroll state"
 msgid "Failed to enroll new fingerprint"
 msgstr "Yeni parmak izi kaydedilemedi"
 
-#: panels/system/users/cc-fingerprint-dialog.c:854
+#: panels/system/users/cc-fingerprint-dialog.c:855
 #, c-format
 msgid "Failed to stop enrollment: %s"
 msgstr "Kayıt durdurulamadı: %s"
 
-#: panels/system/users/cc-fingerprint-dialog.c:900
+#: panels/system/users/cc-fingerprint-dialog.c:901
 msgid ""
 "Repeatedly lift and place your finger on the reader to enroll your "
 "fingerprint"
@@ -7954,34 +7954,50 @@ msgstr ""
 "Parmak izinizi kaydetmek için parmağınızı okuyucuya ardı ardına koyun ve "
 "kaldırın"
 
-#: panels/system/users/cc-fingerprint-dialog.c:1014
+#: panels/system/users/cc-fingerprint-dialog.c:1015
 msgid "_Re-enroll this finger…"
 msgstr "Bu parmağı _yeniden kaydet…"
 
 #. TRANSLATORS: This is the label for the button to enroll a new finger
-#: panels/system/users/cc-fingerprint-dialog.c:1029
+#: panels/system/users/cc-fingerprint-dialog.c:1030
 msgid "Scan new fingerprint"
 msgstr "Yeni parmak izi tara"
 
-#: panels/system/users/cc-fingerprint-dialog.c:1066
+#: panels/system/users/cc-fingerprint-dialog.c:1067
 #, c-format
 msgid "Failed to release fingerprint device %s: %s"
 msgstr "%s parmak izi aygıtı salınamadı: %s"
 
-#: panels/system/users/cc-fingerprint-dialog.c:1138
+#: panels/system/users/cc-fingerprint-dialog.c:1139
 msgctxt "Fingerprint enroll state"
 msgid "Problem Reading Device"
 msgstr "Aygıt Okumada Sorun"
 
-#: panels/system/users/cc-fingerprint-dialog.c:1173
+#: panels/system/users/cc-fingerprint-dialog.c:1174
 #, c-format
 msgid "Failed to claim fingerprint device %s: %s"
 msgstr "%s parmak izi aygıtı elde edilemedi: %s"
 
-#: panels/system/users/cc-fingerprint-dialog.c:1315
+#: panels/system/users/cc-fingerprint-dialog.c:1316
 #, c-format
 msgid "Failed to get fingerprint devices: %s"
 msgstr "Parmak izi aygıtları alınamadı: %s"
+
+#: panels/system/users/cc-fingerprint-dialog.c:1391
+msgid "Delete All Fingerprints?"
+msgstr "Tüm Parmak İzlerini Silinsin Mi?"
+
+#: panels/system/users/cc-fingerprint-dialog.c:1392
+msgid ""
+"Deleting all enrolled fingerprints will disable Fingerprint Login. To re-"
+"enable Fingerprint Login at least one fingerprint will have to be enrolled."
+msgstr ""
+"Kayıtlı tüm parmak izlerini silmek Parmak İziyle Girişi devre dışı bırakacaktır."
+"Parmak İziyle Girişi yeniden etkinleştirmek için en az bir parmak izi kaydedilmelidir."
+
+#: panels/system/users/cc-fingerprint-dialog.c:1397
+msgid "_Delete All"
+msgstr "Tümünü _Sil"
 
 #: panels/system/users/cc-fingerprint-dialog.ui:8
 msgid "Fingerprint Manager"
@@ -7991,47 +8007,32 @@ msgstr "Parmak İzi Yönetici"
 msgid "Fingerprint"
 msgstr "Parmak İzi"
 
-#: panels/system/users/cc-fingerprint-dialog.ui:77
-msgid "_No"
-msgstr "_Hayır"
-
-#: panels/system/users/cc-fingerprint-dialog.ui:85
-msgid "_Yes"
-msgstr "_Evet"
-
-#: panels/system/users/cc-fingerprint-dialog.ui:105
-msgid ""
-"Do you want to delete your registered fingerprints so fingerprint login is "
-"disabled?"
-msgstr ""
-"Kayıtlı parmak izlerini silerek parmak izi girişini kapatmak ister misiniz?"
-
-#: panels/system/users/cc-fingerprint-dialog.ui:161
+#: panels/system/users/cc-fingerprint-dialog.ui:114
 msgid "No fingerprint device"
 msgstr "Parmak izi aygıtı yok"
 
 #. Translators: This is the empty state page label which states that there are no devices ready.
-#: panels/system/users/cc-fingerprint-dialog.ui:176
+#: panels/system/users/cc-fingerprint-dialog.ui:129
 msgid "No Fingerprint device"
 msgstr "Parmak İzi Aygıtı Yok"
 
-#: panels/system/users/cc-fingerprint-dialog.ui:185
+#: panels/system/users/cc-fingerprint-dialog.ui:138
 msgid "Ensure the device is properly connected"
 msgstr "Aygıtın düzgünce bağlandığına emin olun"
 
-#: panels/system/users/cc-fingerprint-dialog.ui:193
+#: panels/system/users/cc-fingerprint-dialog.ui:146
 msgid "Fingerprint Device"
 msgstr "Parmak İzi Aygıtı"
 
-#: panels/system/users/cc-fingerprint-dialog.ui:202
+#: panels/system/users/cc-fingerprint-dialog.ui:155
 msgid "Choose the fingerprint device you want to configure"
 msgstr "Yapılandırmak istediğiniz parmak izi aygıtını seçin"
 
-#: panels/system/users/cc-fingerprint-dialog.ui:232
+#: panels/system/users/cc-fingerprint-dialog.ui:185
 msgid "Fingerprint Login"
 msgstr "Parmak İzi Girişi"
 
-#: panels/system/users/cc-fingerprint-dialog.ui:238
+#: panels/system/users/cc-fingerprint-dialog.ui:191
 msgid ""
 "Fingerprint login allows you to unlock and log into your device with your "
 "finger"
@@ -8039,11 +8040,11 @@ msgstr ""
 "Parmak izi girişi, aygıtınızın kilidini parmağınızla açmayı ve giriş "
 "yapmanızı sağlar"
 
-#: panels/system/users/cc-fingerprint-dialog.ui:265
+#: panels/system/users/cc-fingerprint-dialog.ui:218
 msgid "_Delete Fingerprints"
 msgstr "Parmak İzlerini _Sil"
 
-#: panels/system/users/cc-fingerprint-dialog.ui:279
+#: panels/system/users/cc-fingerprint-dialog.ui:232
 msgid "Fingerprint Enroll"
 msgstr "Parmak İzi Kaydı"
 
@@ -8690,8 +8691,9 @@ msgid ""
 "that may have a negative impact on some visual sensitivities."
 msgstr ""
 "Canlandırma etkilerini kapatmak daha çok ansız geçişler ve genel olarak "
-"kullanıcı arayüzünde hareketsizlikle sonuçlanır. Bu, kimi görsel duyarlılıklar "
-"üstünde olumsuz etkilere neden olan beklenmedik sonuçlar üretebilir." 
+"kullanıcı arayüzünde hareketsizlikle sonuçlanır. Bu, kimi görsel "
+"duyarlılıklar üstünde olumsuz etkilere neden olan beklenmedik sonuçlar "
+"üretebilir."
 
 #: panels/universal-access/cc-ua-seeing-page.ui:65
 msgid "_Large Text"
@@ -9277,6 +9279,72 @@ msgstr "Tablet;Wacom;Stylus;Eraser;Mouse;Kalem;Silgi;Fare;"
 #: panels/wacom/gsd-wacom-key-shortcut-button.c:190
 msgid "New shortcut…"
 msgstr "Yeni kısayol…"
+
+#. Translators: This separates the duration and interval times when displaying
+#. * the selected break schedule on the wellbeing panel. For example,
+#. * “1 minute / 20 minutes” to indicate a 1 minute break every 20 minutes.
+#: panels/wellbeing/cc-break-schedule-row.c:289
+msgid " / "
+msgstr " / "
+
+#: panels/wellbeing/cc-break-schedule-row.c:369
+msgid "Duration"
+msgstr "Süre"
+
+#: panels/wellbeing/cc-break-schedule-row.c:369
+msgid "Interval"
+msgstr "Sıklık"
+
+#: panels/wellbeing/cc-wellbeing-panel.ui:18
+msgid "Break Reminders"
+msgstr "Mola Anımsatıcıları"
+
+#: panels/wellbeing/cc-wellbeing-panel.ui:21
+msgid "_Eyesight Reminders"
+msgstr "_Göz Sağlığı Anımsatıcıları"
+
+#: panels/wellbeing/cc-wellbeing-panel.ui:22
+msgid "Reminders to look away from the screen"
+msgstr "Ekrandan uzağa bakmak için anımsatıcılar"
+
+#: panels/wellbeing/cc-wellbeing-panel.ui:28
+msgid "_Movement Reminders"
+msgstr "_Hareket Anımsatıcıları"
+
+#: panels/wellbeing/cc-wellbeing-panel.ui:29
+msgid "Reminders to move around"
+msgstr "Hareket etmek için anımsatıcılar"
+
+#: panels/wellbeing/cc-wellbeing-panel.ui:35
+msgid "Movement Break S_chedule"
+msgstr "Hareket Molası _Zamanı"
+
+#: panels/wellbeing/cc-wellbeing-panel.ui:41
+msgid "S_ounds"
+msgstr "S_esler"
+
+#: panels/wellbeing/cc-wellbeing-panel.ui:42
+msgid "Play a sound when a break ends"
+msgstr "Mola bittiğinde ses çal"
+
+#: panels/wellbeing/gnome-wellbeing-panel.desktop.in:6
+msgid "Wellbeing"
+msgstr "Sağlık"
+
+#: panels/wellbeing/gnome-wellbeing-panel.desktop.in:7
+msgid "Review and limit the amount of time you spend at the computer screen"
+msgstr "Ekran başında geçirdiğiniz süreyi inceleyin ve sınırlayın"
+
+#. Translators: Search terms to find the Wellbeing panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#: panels/wellbeing/gnome-wellbeing-panel.desktop.in:18
+msgid ""
+"Wellbeing;Screen Time;Breaks;Break Reminders;Health Breaks;Daily Usage;"
+"Screen Limits;Usage Limit;"
+msgstr ""
+"Wellbeing;Screen Time;Breaks;Break Reminders;Health Breaks;Daily Usage;"
+"Screen Limits;Usage Limit;Sağlık;Ekran Süresi;Ekran Zamanı;Mola;Ara;Sağlık "
+"Molası;Günlük Kullanım;Ekran Sınırlama;Ekran Kısıtlama;Kullanım Sınırlama;"
+"Kullanım Kısıtlama;"
 
 #: panels/wwan/cc-wwan-apn-dialog.c:293
 msgid "Edit"
@@ -9881,7 +9949,7 @@ msgstr "© 1998 %s"
 msgid "Settings categories"
 msgstr "Ayar kategorileri"
 
-#: shell/cc-panel-loader.c:311
+#: shell/cc-panel-loader.c:317
 msgid "Available panels:"
 msgstr "Kullanılabilir paneller:"
 
