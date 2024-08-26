@@ -14,8 +14,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2024-08-14 16:47+0000\n"
-"PO-Revision-Date: 2024-08-15 13:54+0530\n"
+"POT-Creation-Date: 2024-08-23 21:16+0000\n"
+"PO-Revision-Date: 2024-08-24 11:15+0800\n"
 "Last-Translator: Scrambled777 <weblate.scrambled777@simplelogin.com>\n"
 "Language-Team: Hindi <indlinux-hindi@lists.sourceforge.net>\n"
 "Language: hi\n"
@@ -177,13 +177,14 @@ msgstr "सॉफ्टवेयर में खोजें (_F)"
 msgid "Unable to List Apps"
 msgstr "ऐप्स सूचीबद्ध करने में असमर्थ"
 
+#. Translators: Parental Controls here refers to the features provided by 'malcontent'
 #: panels/applications/cc-applications-panel.ui:122
 msgid ""
 "An error has occurred and apps cannot be listed.\n"
-"Error details: Malcontent is not installed."
+"Error details: Parental Controls are not installed."
 msgstr ""
 "कोई त्रुटि हुई है और ऐप्स सूचीबद्ध नहीं किए जा सकते।\n"
-"त्रुटि विवरण: Malcontent स्थापित नहीं है।"
+"त्रुटि विवरण: अभिभावकीय नियंत्रण स्थापित नहीं है।"
 
 #: panels/applications/cc-applications-panel.ui:139
 #: panels/applications/cc-default-apps-page.ui:4
@@ -1083,6 +1084,7 @@ msgstr "अंशांकन प्रदर्शित करें"
 #: panels/system/users/cc-add-user-dialog.ui:24
 #: panels/system/users/cc-avatar-chooser.c:92
 #: panels/system/users/cc-enterprise-login-dialog.ui:44
+#: panels/system/users/cc-fingerprint-dialog.c:1396
 #: panels/system/users/cc-fingerprint-dialog.ui:32
 #: panels/system/users/cc-password-dialog.ui:15
 #: panels/system/users/cc-user-page.ui:231
@@ -4435,6 +4437,7 @@ msgid "Google"
 msgstr "गूगल"
 
 #: panels/online-accounts/cc-online-account-provider-row.c:58
+#: panels/online-accounts/cc-online-account-provider-row.c:60
 msgid "Email, calendar, contacts, files"
 msgstr "ईमेल, कैलेंडर, संपर्क, फाइलें"
 
@@ -4449,10 +4452,6 @@ msgstr "ईमेल"
 #: panels/online-accounts/cc-online-account-provider-row.c:60
 msgid "Microsoft 365"
 msgstr "माइक्रोसॉफ्ट 365"
-
-#: panels/online-accounts/cc-online-account-provider-row.c:60
-msgid "Files"
-msgstr "फाइलें"
 
 #: panels/online-accounts/cc-online-account-provider-row.c:61
 msgid "Microsoft Exchange"
@@ -5989,7 +5988,7 @@ msgstr ""
 
 #. TRANSLATORS: in reference to firmware protection: 0/4 stars
 #: panels/privacy/firmware-security/cc-firmware-security-dialog.c:108
-#: panels/privacy/firmware-security/cc-firmware-security-page.c:532
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:533
 msgid "Security Checks Failed"
 msgstr "सुरक्षा जांच विफल"
 
@@ -6013,7 +6012,7 @@ msgstr ""
 
 #. TRANSLATORS: in reference to firmware protection: 1/4 stars
 #: panels/privacy/firmware-security/cc-firmware-security-dialog.c:121
-#: panels/privacy/firmware-security/cc-firmware-security-page.c:539
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:540
 msgid "Basic Security Checks Passed"
 msgstr "बुनियादी सुरक्षा जांच पारित"
 
@@ -6030,7 +6029,7 @@ msgstr ""
 
 #. TRANSLATORS: in reference to firmware protection: 2~4 stars
 #: panels/privacy/firmware-security/cc-firmware-security-dialog.c:134
-#: panels/privacy/firmware-security/cc-firmware-security-page.c:549
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:550
 msgid "Protected"
 msgstr "सुरक्षित"
 
@@ -6155,44 +6154,44 @@ msgstr ""
 
 #. TRANSLATOR: this is the date in "%Y-%m-%d %H:%M:%S" format,
 #. for example: 2022-08-01 22:48:00
-#: panels/privacy/firmware-security/cc-firmware-security-page.c:228
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:229
 #, c-format
 msgid "%1$s"
 msgstr "%1$s"
 
 #. TRANSLATOR: This is the text event status output when the event status is "success"
-#: panels/privacy/firmware-security/cc-firmware-security-page.c:234
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:235
 msgid "Pass"
 msgstr "सफल"
 
 #. TRANSLATOR: This is the text event status output when the event status is not "success"
-#: panels/privacy/firmware-security/cc-firmware-security-page.c:237
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:238
 msgid "! Fail"
 msgstr "! विफल"
 
-#: panels/privacy/firmware-security/cc-firmware-security-page.c:240
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:241
 #, c-format
 msgid "(%1$s → %2$s)"
 msgstr "(%1$s → %2$s)"
 
-#: panels/privacy/firmware-security/cc-firmware-security-page.c:533
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:534
 msgid "Hardware does not pass basic security checks."
 msgstr "हार्डवेयर बुनियादी सुरक्षा जांच में पारित नहीं होता।"
 
-#: panels/privacy/firmware-security/cc-firmware-security-page.c:540
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:541
 msgid "Hardware has a basic level of protection."
 msgstr "हार्डवेयर में सुरक्षा का एक बुनियादी स्तर होता है।"
 
-#: panels/privacy/firmware-security/cc-firmware-security-page.c:550
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:551
 msgid "Hardware has a strong level of protection."
 msgstr "हार्डवेयर में सुरक्षा का स्तर बहुत मजबूत है।"
 
 #. TRANSLATORS: in reference to firmware protection: ??? stars
-#: panels/privacy/firmware-security/cc-firmware-security-page.c:556
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:557
 msgid "Security Checks Unavailable"
 msgstr "सुरक्षा जांच अनुपलब्ध"
 
-#: panels/privacy/firmware-security/cc-firmware-security-page.c:557
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:558
 msgid "Security levels are not available for this device."
 msgstr "इस उपकरण के लिए सुरक्षा स्तर उपलब्ध नहीं हैं।"
 
@@ -6516,7 +6515,7 @@ msgid "Subfolders must be manually added for this location"
 msgstr "इस स्थान के लिए उप-फोल्डर हस्तचालित रूप से जोड़े जाने चाहिए"
 
 #: panels/search/cc-search-locations-page.c:598
-#: panels/sharing/cc-sharing-panel.c:423
+#: panels/sharing/cc-sharing-panel.c:424
 msgid "Remove Folder"
 msgstr "फोल्डर हटाएं"
 
@@ -6615,16 +6614,16 @@ msgstr "सक्रिय"
 msgid "Choose a Folder"
 msgstr "फोल्डर चुनें"
 
-#: panels/sharing/cc-sharing-panel.c:413
+#: panels/sharing/cc-sharing-panel.c:414
 msgid "Open Folder"
 msgstr "फोल्डर खोलें"
 
-#: panels/sharing/cc-sharing-panel.c:443
+#: panels/sharing/cc-sharing-panel.c:444
 msgid "_Add Folder"
 msgstr "फोल्डर जोड़ें (_A)"
 
 #. Translators: %s is the hostname of the user's device
-#: panels/sharing/cc-sharing-panel.c:602
+#: panels/sharing/cc-sharing-panel.c:603
 #, c-format
 msgid ""
 "File sharing allows sharing the Public folder with other devices on the "
@@ -6650,7 +6649,7 @@ msgstr "फाइल साझाकरण (_F)"
 msgid "Stream music, photos and videos to devices on the current network"
 msgstr "मौजूदा नेटवर्क पर मौजूद उपकरणों पर संगीत, फोटो और वीडियो स्ट्रीम करें"
 
-#: panels/sharing/cc-sharing-panel.ui:38 panels/sharing/cc-sharing-panel.ui:163
+#: panels/sharing/cc-sharing-panel.ui:38 panels/sharing/cc-sharing-panel.ui:164
 msgid "_Media Sharing"
 msgstr "मीडिया साझाकरण (_M)"
 
@@ -6668,9 +6667,9 @@ msgstr "फाइल साझाकरण पता (_A)"
 #: panels/system/remote-desktop/cc-desktop-sharing-page.ui:95
 #: panels/system/remote-desktop/cc-desktop-sharing-page.ui:112
 #: panels/system/remote-desktop/cc-remote-login-page.ui:52
-#: panels/system/remote-desktop/cc-remote-login-page.ui:72
-#: panels/system/remote-desktop/cc-remote-login-page.ui:94
-#: panels/system/remote-desktop/cc-remote-login-page.ui:111
+#: panels/system/remote-desktop/cc-remote-login-page.ui:73
+#: panels/system/remote-desktop/cc-remote-login-page.ui:95
+#: panels/system/remote-desktop/cc-remote-login-page.ui:112
 #: panels/system/secure-shell/cc-secure-shell-page.ui:49
 msgid "Copy"
 msgstr "कॉपी करें"
@@ -6699,11 +6698,11 @@ msgstr ""
 msgid "_Password"
 msgstr "पासवर्ड (_P)"
 
-#: panels/sharing/cc-sharing-panel.ui:150
+#: panels/sharing/cc-sharing-panel.ui:151
 msgid "Media Sharing"
 msgstr "मीडिया साझाकरण"
 
-#: panels/sharing/cc-sharing-panel.ui:168
+#: panels/sharing/cc-sharing-panel.ui:169
 msgid ""
 "Media sharing allows streaming pictures, music and video to DLNA enabled "
 "devices on the current network."
@@ -6711,7 +6710,7 @@ msgstr ""
 "मीडिया साझाकरण वर्तमान नेटवर्क पर DLNA सक्षम उपकरणों पर चित्र, संगीत और वीडियो "
 "स्ट्रीमिंग की अनुमति देता है।"
 
-#: panels/sharing/cc-sharing-panel.ui:177
+#: panels/sharing/cc-sharing-panel.ui:178
 msgid "Folders"
 msgstr "फोल्डर"
 
@@ -7105,17 +7104,17 @@ msgid "S_oftware Updates"
 msgstr "सॉफ्टवेयर अद्यतन (_o)"
 
 #. Translators: This is the full date and time format used in 12-hour mode.
-#: panels/system/datetime/cc-datetime-page.c:236
+#: panels/system/datetime/cc-datetime-page.c:237
 msgid "%e %B %Y, %l:%M %p"
 msgstr "%e %B %Y, %l:%M %p"
 
 #. Translators: This is the full date and time format used in 24-hour mode.
-#: panels/system/datetime/cc-datetime-page.c:241
+#: panels/system/datetime/cc-datetime-page.c:242
 msgid "%e %B %Y, %R"
 msgstr "%e %B %Y, %R"
 
 #. Translators: "city, country"
-#: panels/system/datetime/cc-datetime-page.c:401
+#: panels/system/datetime/cc-datetime-page.c:402
 #, c-format
 msgctxt "timezone loc"
 msgid "%s, %s"
@@ -7123,7 +7122,7 @@ msgstr "%s, %s"
 
 #. Update the timezone on the listbow row
 #. Translators: "timezone (details)"
-#: panels/system/datetime/cc-datetime-page.c:418
+#: panels/system/datetime/cc-datetime-page.c:419
 #, c-format
 msgctxt "timezone desc"
 msgid "%s (%s)"
@@ -7159,103 +7158,103 @@ msgstr "इंटरनेट पहुंच आवश्यक"
 msgid "Date &amp; _Time"
 msgstr "तिथि &amp; समय (_T)"
 
-#: panels/system/datetime/cc-datetime-page.ui:147
+#: panels/system/datetime/cc-datetime-page.ui:148
 msgid "Automatic Time _Zone"
 msgstr "स्वचालित समय क्षेत्र (_Z)"
 
-#: panels/system/datetime/cc-datetime-page.ui:148
+#: panels/system/datetime/cc-datetime-page.ui:149
 msgid "Requires location services enabled and internet access"
 msgstr "स्थान सेवाओं को सक्षम करने और इंटरनेट पहुंच की आवश्यकता है"
 
-#: panels/system/datetime/cc-datetime-page.ui:154
+#: panels/system/datetime/cc-datetime-page.ui:155
 msgid "Time Z_one"
 msgstr "समय क्षेत्र (_o)"
 
-#: panels/system/datetime/cc-datetime-page.ui:165
+#: panels/system/datetime/cc-datetime-page.ui:166
 msgid "Time _Format"
 msgstr "समय प्रारूप (_F)"
 
-#: panels/system/datetime/cc-datetime-page.ui:176
+#: panels/system/datetime/cc-datetime-page.ui:177
 msgid "_24-hour"
 msgstr "_24-घंटे"
 
-#: panels/system/datetime/cc-datetime-page.ui:184
+#: panels/system/datetime/cc-datetime-page.ui:185
 msgid "AM / _PM"
 msgstr "AM / _PM"
 
-#: panels/system/datetime/cc-datetime-page.ui:197
+#: panels/system/datetime/cc-datetime-page.ui:198
 msgid "Clock &amp; Calendar"
 msgstr "घड़ी &amp; कैलेंडर"
 
-#: panels/system/datetime/cc-datetime-page.ui:198
+#: panels/system/datetime/cc-datetime-page.ui:199
 msgid "Control how the time and date is shown in the top bar"
 msgstr "नियंत्रित करें कि शीर्ष पट्टी में समय और तिथि कैसे दिखाया जाता है"
 
-#: panels/system/datetime/cc-datetime-page.ui:201
+#: panels/system/datetime/cc-datetime-page.ui:202
 msgid "_Week Day"
 msgstr "सप्ताह दिवस (_W)"
 
-#: panels/system/datetime/cc-datetime-page.ui:207
+#: panels/system/datetime/cc-datetime-page.ui:208
 msgid "D_ate"
 msgstr "तिथि (_a)"
 
-#: panels/system/datetime/cc-datetime-page.ui:213
+#: panels/system/datetime/cc-datetime-page.ui:214
 msgid "_Seconds"
 msgstr "सेकेंड (_S)"
 
-#: panels/system/datetime/cc-datetime-page.ui:219
+#: panels/system/datetime/cc-datetime-page.ui:220
 msgid "Week _Numbers"
 msgstr "सप्ताह संख्याएं (_N)"
 
-#: panels/system/datetime/cc-datetime-page.ui:220
+#: panels/system/datetime/cc-datetime-page.ui:221
 msgid "Shown in the dropdown calendar"
 msgstr "ड्रॉपडाउन कैलेंडर में दिखाया गया"
 
-#: panels/system/datetime/cc-datetime-page.ui:256
+#: panels/system/datetime/cc-datetime-page.ui:257
 msgid "January"
 msgstr "जनवरी"
 
-#: panels/system/datetime/cc-datetime-page.ui:257
+#: panels/system/datetime/cc-datetime-page.ui:258
 msgid "February"
 msgstr "फरवरी"
 
-#: panels/system/datetime/cc-datetime-page.ui:258
+#: panels/system/datetime/cc-datetime-page.ui:259
 msgid "March"
 msgstr "मार्च"
 
-#: panels/system/datetime/cc-datetime-page.ui:259
+#: panels/system/datetime/cc-datetime-page.ui:260
 msgid "April"
 msgstr "अप्रैल"
 
-#: panels/system/datetime/cc-datetime-page.ui:260
+#: panels/system/datetime/cc-datetime-page.ui:261
 msgid "May"
 msgstr "मई"
 
-#: panels/system/datetime/cc-datetime-page.ui:261
+#: panels/system/datetime/cc-datetime-page.ui:262
 msgid "June"
 msgstr "जून"
 
-#: panels/system/datetime/cc-datetime-page.ui:262
+#: panels/system/datetime/cc-datetime-page.ui:263
 msgid "July"
 msgstr "जुलाई"
 
-#: panels/system/datetime/cc-datetime-page.ui:263
+#: panels/system/datetime/cc-datetime-page.ui:264
 msgid "August"
 msgstr "अगस्त"
 
-#: panels/system/datetime/cc-datetime-page.ui:264
+#: panels/system/datetime/cc-datetime-page.ui:265
 msgid "September"
 msgstr "सितम्बर"
 
-#: panels/system/datetime/cc-datetime-page.ui:265
+#: panels/system/datetime/cc-datetime-page.ui:266
 msgid "October"
 msgstr "अक्टूबर"
 
-#: panels/system/datetime/cc-datetime-page.ui:266
+#: panels/system/datetime/cc-datetime-page.ui:267
 msgid "November"
 msgstr "नवम्बर"
 
-#: panels/system/datetime/cc-datetime-page.ui:267
+#: panels/system/datetime/cc-datetime-page.ui:268
 msgid "December"
 msgstr "दिसम्बर"
 
@@ -7476,29 +7475,29 @@ msgid "_Port"
 msgstr "पोर्ट (_P)"
 
 #: panels/system/remote-desktop/cc-desktop-sharing-page.ui:88
-#: panels/system/remote-desktop/cc-remote-login-page.ui:87
+#: panels/system/remote-desktop/cc-remote-login-page.ui:88
 msgid "Login Details"
 msgstr "लॉगिन विवरण"
 
 #: panels/system/remote-desktop/cc-desktop-sharing-page.ui:91
-#: panels/system/remote-desktop/cc-remote-login-page.ui:90
+#: panels/system/remote-desktop/cc-remote-login-page.ui:91
 #: panels/system/users/cc-add-user-dialog.ui:87
 #: panels/system/users/cc-enterprise-login-dialog.ui:92
 msgid "_Username"
 msgstr "उपयोक्तानाम (_U)"
 
 #: panels/system/remote-desktop/cc-desktop-sharing-page.ui:108
-#: panels/system/remote-desktop/cc-remote-login-page.ui:107
+#: panels/system/remote-desktop/cc-remote-login-page.ui:108
 msgid "P_assword"
 msgstr "पासवर्ड (_a)"
 
 #: panels/system/remote-desktop/cc-desktop-sharing-page.ui:131
-#: panels/system/remote-desktop/cc-remote-login-page.ui:131
+#: panels/system/remote-desktop/cc-remote-login-page.ui:132
 msgid "_Generate New Password"
 msgstr "नया पासवर्ड उत्पन्न करें (_G)"
 
 #: panels/system/remote-desktop/cc-desktop-sharing-page.ui:139
-#: panels/system/remote-desktop/cc-remote-login-page.ui:139
+#: panels/system/remote-desktop/cc-remote-login-page.ui:140
 msgid "_Verify Encryption"
 msgstr "कूटलेखन की पुष्टि करें (_V)"
 
@@ -7815,120 +7814,136 @@ msgstr "फिंगरप्रिंट सूचीबद्ध करने 
 msgid "Failed to delete saved fingerprints: %s"
 msgstr "सहेजे गए फिंगरप्रिंट हटाने में विफल: %s"
 
-#: panels/system/users/cc-fingerprint-dialog.c:608
+#: panels/system/users/cc-fingerprint-dialog.c:609
 msgid "Left thumb"
 msgstr "बायां अंगूठा"
 
-#: panels/system/users/cc-fingerprint-dialog.c:610
+#: panels/system/users/cc-fingerprint-dialog.c:611
 msgid "Left middle finger"
 msgstr "बाईं मध्यमा"
 
-#: panels/system/users/cc-fingerprint-dialog.c:612
+#: panels/system/users/cc-fingerprint-dialog.c:613
 msgid "_Left index finger"
 msgstr "बाईं तर्जनी (_L)"
 
-#: panels/system/users/cc-fingerprint-dialog.c:614
+#: panels/system/users/cc-fingerprint-dialog.c:615
 msgid "Left ring finger"
 msgstr "बाईं अनामिका"
 
-#: panels/system/users/cc-fingerprint-dialog.c:616
+#: panels/system/users/cc-fingerprint-dialog.c:617
 msgid "Left little finger"
 msgstr "बाईं कनिष्ठा"
 
-#: panels/system/users/cc-fingerprint-dialog.c:618
+#: panels/system/users/cc-fingerprint-dialog.c:619
 msgid "Right thumb"
 msgstr "दायां अंगूठा"
 
-#: panels/system/users/cc-fingerprint-dialog.c:620
+#: panels/system/users/cc-fingerprint-dialog.c:621
 msgid "Right middle finger"
 msgstr "दाईं मध्यमा"
 
-#: panels/system/users/cc-fingerprint-dialog.c:622
+#: panels/system/users/cc-fingerprint-dialog.c:623
 msgid "_Right index finger"
 msgstr "दाईं तर्जनी (_R)"
 
-#: panels/system/users/cc-fingerprint-dialog.c:624
+#: panels/system/users/cc-fingerprint-dialog.c:625
 msgid "Right ring finger"
 msgstr "दाईं अनामिका"
 
-#: panels/system/users/cc-fingerprint-dialog.c:626
+#: panels/system/users/cc-fingerprint-dialog.c:627
 msgid "Right little finger"
 msgstr "दाईं कनिष्ठा"
 
-#: panels/system/users/cc-fingerprint-dialog.c:628
+#: panels/system/users/cc-fingerprint-dialog.c:629
 msgid "Unknown Finger"
 msgstr "अज्ञात उंगली"
 
-#: panels/system/users/cc-fingerprint-dialog.c:759
+#: panels/system/users/cc-fingerprint-dialog.c:760
 msgctxt "Fingerprint enroll state"
 msgid "Complete"
 msgstr "पूर्ण"
 
-#: panels/system/users/cc-fingerprint-dialog.c:770
+#: panels/system/users/cc-fingerprint-dialog.c:771
 msgid "Fingerprint device disconnected"
 msgstr "फिंगरप्रिंट उपकरण डिस्कनेक्ट हो गया"
 
-#: panels/system/users/cc-fingerprint-dialog.c:776
+#: panels/system/users/cc-fingerprint-dialog.c:777
 msgid "Fingerprint device storage is full"
 msgstr "फिंगरप्रिंट उपकरण का स्टोरेज भर गया"
 
-#: panels/system/users/cc-fingerprint-dialog.c:780
+#: panels/system/users/cc-fingerprint-dialog.c:781
 msgid "Fingerprint is duplicate"
 msgstr "फिंगरप्रिंट डुप्लिकेट है"
 
-#: panels/system/users/cc-fingerprint-dialog.c:784
+#: panels/system/users/cc-fingerprint-dialog.c:785
 msgid "Failed to enroll new fingerprint"
 msgstr "नया फिंगरप्रिंट नामांकित करने में विफल"
 
-#: panels/system/users/cc-fingerprint-dialog.c:815
+#: panels/system/users/cc-fingerprint-dialog.c:816
 #, c-format
 msgid "Failed to start enrollment: %s"
 msgstr "नामांकन प्रारंभ करने में विफल: %s"
 
-#: panels/system/users/cc-fingerprint-dialog.c:823
+#: panels/system/users/cc-fingerprint-dialog.c:824
 msgctxt "Fingerprint enroll state"
 msgid "Failed to enroll new fingerprint"
 msgstr "नया फिंगरप्रिंट नामांकित करने में विफल"
 
-#: panels/system/users/cc-fingerprint-dialog.c:854
+#: panels/system/users/cc-fingerprint-dialog.c:855
 #, c-format
 msgid "Failed to stop enrollment: %s"
 msgstr "नामांकन रोकने में विफल: %s"
 
-#: panels/system/users/cc-fingerprint-dialog.c:900
+#: panels/system/users/cc-fingerprint-dialog.c:901
 msgid ""
 "Repeatedly lift and place your finger on the reader to enroll your "
 "fingerprint"
 msgstr "अपने फिंगरप्रिंट को दर्ज करने के लिए रीडर पर अपनी उंगली को बार-बार उठाएं और रखें"
 
-#: panels/system/users/cc-fingerprint-dialog.c:1014
+#: panels/system/users/cc-fingerprint-dialog.c:1015
 msgid "_Re-enroll this finger…"
 msgstr "इस उंगली को फिर से नामांकित करें (_R)…"
 
 #. TRANSLATORS: This is the label for the button to enroll a new finger
-#: panels/system/users/cc-fingerprint-dialog.c:1029
+#: panels/system/users/cc-fingerprint-dialog.c:1030
 msgid "Scan new fingerprint"
 msgstr "नया फिंगरप्रिंट स्कैन करें"
 
-#: panels/system/users/cc-fingerprint-dialog.c:1066
+#: panels/system/users/cc-fingerprint-dialog.c:1067
 #, c-format
 msgid "Failed to release fingerprint device %s: %s"
 msgstr "फिंगरप्रिंट उपकरण %s मुक्त करने में विफल: %s"
 
-#: panels/system/users/cc-fingerprint-dialog.c:1138
+#: panels/system/users/cc-fingerprint-dialog.c:1139
 msgctxt "Fingerprint enroll state"
 msgid "Problem Reading Device"
 msgstr "उपकरण पढ़ने में समस्या"
 
-#: panels/system/users/cc-fingerprint-dialog.c:1173
+#: panels/system/users/cc-fingerprint-dialog.c:1174
 #, c-format
 msgid "Failed to claim fingerprint device %s: %s"
 msgstr "फिंगरप्रिंट उपकरण %s पर दावा करने में विफल: %s"
 
-#: panels/system/users/cc-fingerprint-dialog.c:1315
+#: panels/system/users/cc-fingerprint-dialog.c:1316
 #, c-format
 msgid "Failed to get fingerprint devices: %s"
 msgstr "फिंगरप्रिंट उपकरण प्राप्त करने में विफल: %s"
+
+#: panels/system/users/cc-fingerprint-dialog.c:1391
+msgid "Delete All Fingerprints?"
+msgstr "सभी फिंगरप्रिंट मिटाएं?"
+
+#: panels/system/users/cc-fingerprint-dialog.c:1392
+msgid ""
+"Deleting all enrolled fingerprints will disable Fingerprint Login. To re-"
+"enable Fingerprint Login at least one fingerprint will have to be enrolled."
+msgstr ""
+"सभी नामांकित फिंगरप्रिंट मिटाने से फिंगरप्रिंट लॉगिन अक्षम हो जाएगा। फिंगरप्रिंट लॉगिन को "
+"पुनः सक्षम करने के लिए कम से कम एक फिंगरप्रिंट नामांकित होना चाहिए।"
+
+#: panels/system/users/cc-fingerprint-dialog.c:1397
+msgid "_Delete All"
+msgstr "सभी मिटाएं (_D)"
 
 #: panels/system/users/cc-fingerprint-dialog.ui:8
 msgid "Fingerprint Manager"
@@ -7938,48 +7953,32 @@ msgstr "फिंगरप्रिंट प्रबंधक"
 msgid "Fingerprint"
 msgstr "फिंगरप्रिंट"
 
-#: panels/system/users/cc-fingerprint-dialog.ui:77
-msgid "_No"
-msgstr "नहीं (_N)"
-
-#: panels/system/users/cc-fingerprint-dialog.ui:85
-msgid "_Yes"
-msgstr "हाँ (_Y)"
-
-#: panels/system/users/cc-fingerprint-dialog.ui:105
-msgid ""
-"Do you want to delete your registered fingerprints so fingerprint login is "
-"disabled?"
-msgstr ""
-"क्या आफ अपना पंजीकृत फिंगरप्रिंट को मिटाना चाहते हैं ताकि फिंगरप्रिंट लॉगिन निष्क्रिय हो "
-"जाए?"
-
-#: panels/system/users/cc-fingerprint-dialog.ui:161
+#: panels/system/users/cc-fingerprint-dialog.ui:114
 msgid "No fingerprint device"
 msgstr "कोई फिंगरप्रिंट उपकरण नहीं"
 
 #. Translators: This is the empty state page label which states that there are no devices ready.
-#: panels/system/users/cc-fingerprint-dialog.ui:176
+#: panels/system/users/cc-fingerprint-dialog.ui:129
 msgid "No Fingerprint device"
 msgstr "कोई फिंगरप्रिंट उपकरण नहीं"
 
-#: panels/system/users/cc-fingerprint-dialog.ui:185
+#: panels/system/users/cc-fingerprint-dialog.ui:138
 msgid "Ensure the device is properly connected"
 msgstr "सुनिश्चित करें कि उपकरण ठीक से जुड़ा है"
 
-#: panels/system/users/cc-fingerprint-dialog.ui:193
+#: panels/system/users/cc-fingerprint-dialog.ui:146
 msgid "Fingerprint Device"
 msgstr "फिंगरप्रिंट उपकरण"
 
-#: panels/system/users/cc-fingerprint-dialog.ui:202
+#: panels/system/users/cc-fingerprint-dialog.ui:155
 msgid "Choose the fingerprint device you want to configure"
 msgstr "वह फिंगरप्रिंट उपकरण चुनें जिसे आप विन्यस्त करना चाहते हैं"
 
-#: panels/system/users/cc-fingerprint-dialog.ui:232
+#: panels/system/users/cc-fingerprint-dialog.ui:185
 msgid "Fingerprint Login"
 msgstr "फिंगरप्रिंट लॉगिन"
 
-#: panels/system/users/cc-fingerprint-dialog.ui:238
+#: panels/system/users/cc-fingerprint-dialog.ui:191
 msgid ""
 "Fingerprint login allows you to unlock and log into your device with your "
 "finger"
@@ -7987,11 +7986,11 @@ msgstr ""
 "फिंगरप्रिंट लॉगिन आपको अपनी उंगली से अपने उपकरण को अनलॉक करने और लॉग इन करने की "
 "अनुमति देता है"
 
-#: panels/system/users/cc-fingerprint-dialog.ui:265
+#: panels/system/users/cc-fingerprint-dialog.ui:218
 msgid "_Delete Fingerprints"
 msgstr "फिंगरप्रिंट मिटाएं (_D)"
 
-#: panels/system/users/cc-fingerprint-dialog.ui:279
+#: panels/system/users/cc-fingerprint-dialog.ui:232
 msgid "Fingerprint Enroll"
 msgstr "फिंगरप्रिंट नामांकन"
 
@@ -9175,7 +9174,7 @@ msgstr "बटन _3"
 
 #: panels/wacom/cc-wacom-stylus-page.ui:111
 msgid "_Eraser Pressure Feel"
-msgstr "इरेज़र दबाव महसूस (_E)"
+msgstr "इरेज़र दबाव अनुभूति (_E)"
 
 #: panels/wacom/cc-wacom-stylus-page.ui:131
 msgid "Eraser pressure"
@@ -9213,6 +9212,70 @@ msgstr "टैब्लेट;Wacom;स्टाइलस;इरेज़र;म
 #: panels/wacom/gsd-wacom-key-shortcut-button.c:190
 msgid "New shortcut…"
 msgstr "नया शार्टकट…"
+
+#. Translators: This separates the duration and interval times when displaying
+#. * the selected break schedule on the wellbeing panel. For example,
+#. * “1 minute / 20 minutes” to indicate a 1 minute break every 20 minutes.
+#: panels/wellbeing/cc-break-schedule-row.c:289
+msgid " / "
+msgstr " / "
+
+#: panels/wellbeing/cc-break-schedule-row.c:369
+msgid "Duration"
+msgstr "अवधि"
+
+#: panels/wellbeing/cc-break-schedule-row.c:369
+msgid "Interval"
+msgstr "अंतराल"
+
+#: panels/wellbeing/cc-wellbeing-panel.ui:18
+msgid "Break Reminders"
+msgstr "विश्राम अनुस्मारक"
+
+#: panels/wellbeing/cc-wellbeing-panel.ui:21
+msgid "_Eyesight Reminders"
+msgstr "दृष्टि अनुस्मारक (_E)"
+
+#: panels/wellbeing/cc-wellbeing-panel.ui:22
+msgid "Reminders to look away from the screen"
+msgstr "स्क्रीन से नज़र हटाने हेतु अनुस्मारक"
+
+#: panels/wellbeing/cc-wellbeing-panel.ui:28
+msgid "_Movement Reminders"
+msgstr "शारीरिक हरकत अनुस्मारक (_M)"
+
+#: panels/wellbeing/cc-wellbeing-panel.ui:29
+msgid "Reminders to move around"
+msgstr "शारीरिक हरकत हेतु अनुस्मारक"
+
+#: panels/wellbeing/cc-wellbeing-panel.ui:35
+msgid "Movement Break S_chedule"
+msgstr "शारीरिक हरकत हेतु विश्राम अनुसूची (_c)"
+
+#: panels/wellbeing/cc-wellbeing-panel.ui:41
+msgid "S_ounds"
+msgstr "ध्वनियां (_o)"
+
+#: panels/wellbeing/cc-wellbeing-panel.ui:42
+msgid "Play a sound when a break ends"
+msgstr "विश्राम समाप्ति पर ध्वनि बजाएं"
+
+#: panels/wellbeing/gnome-wellbeing-panel.desktop.in:6
+msgid "Wellbeing"
+msgstr "स्वास्थ्य"
+
+#: panels/wellbeing/gnome-wellbeing-panel.desktop.in:7
+msgid "Review and limit the amount of time you spend at the computer screen"
+msgstr "कंप्यूटर स्क्रीन पर बिताए जाने वाले समय की समीक्षा करें और उसे सीमित करें"
+
+#. Translators: Search terms to find the Wellbeing panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#: panels/wellbeing/gnome-wellbeing-panel.desktop.in:18
+msgid ""
+"Wellbeing;Screen Time;Breaks;Break Reminders;Health Breaks;Daily Usage;"
+"Screen Limits;Usage Limit;"
+msgstr ""
+"स्वास्थ्य;स्क्रीन समय;विश्राम;विश्राम अनुस्मारक;स्वास्थ्य विश्राम;दैनिक उपयोग;स्क्रीन सीमाएं;"
+"उपयोग सीमा;"
 
 # #-#-#-#-#  gnome-session.gnome-2-2.hi.po (gnome-session VERSION)  #-#-#-#-#
 # gnome-session/session-properties-capplet.c:303
@@ -9817,7 +9880,7 @@ msgstr "© 1998 %s"
 msgid "Settings categories"
 msgstr "सेटिंग श्रेणियां"
 
-#: shell/cc-panel-loader.c:311
+#: shell/cc-panel-loader.c:317
 msgid "Available panels:"
 msgstr "उपलब्ध फलक:"
 
