@@ -249,15 +249,10 @@ static void
 cc_printers_panel_constructed (GObject *object)
 {
   CcPrintersPanel *self = CC_PRINTERS_PANEL (object);
-  CcShell *shell;
 
   G_OBJECT_CLASS (cc_printers_panel_parent_class)->constructed (object);
 
-  shell = cc_panel_get_shell (CC_PANEL (self));
-
   gtk_search_bar_connect_entry (self->search_bar, self->search_entry);
-  gtk_search_bar_set_key_capture_widget (self->search_bar,
-                                         GTK_WIDGET (shell));
 }
 
 static void
