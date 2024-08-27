@@ -35,8 +35,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2024-08-26 21:37+0000\n"
-"PO-Revision-Date: 2024-08-24 20:44+0800\n"
+"POT-Creation-Date: 2024-08-27 00:55+0000\n"
+"PO-Revision-Date: 2024-08-27 09:04+0800\n"
 "Last-Translator: lumingzh <lumingzh@qq.com>\n"
 "Language-Team: Chinese (China) <i18n-zh@googlegroups.com>\n"
 "Language: zh_CN\n"
@@ -193,14 +193,13 @@ msgstr "在“软件”中查找(_F)"
 msgid "Unable to List Apps"
 msgstr "无法列出应用"
 
-#. Translators: Parental Controls here refers to the features provided by 'malcontent'
 #: panels/applications/cc-applications-panel.ui:122
 msgid ""
 "An error has occurred and apps cannot be listed.\n"
-"Error details: Parental Controls are not installed."
+"Error details: Malcontent is not installed."
 msgstr ""
 "发生了错误且无法列出应用。\n"
-"错误详情：未安装家长控制。"
+"错误详情：未安装 Malcontent。"
 
 #: panels/applications/cc-applications-panel.ui:139
 #: panels/applications/cc-default-apps-page.ui:4
@@ -1100,7 +1099,6 @@ msgstr "显示校准"
 #: panels/system/users/cc-add-user-dialog.ui:24
 #: panels/system/users/cc-avatar-chooser.c:92
 #: panels/system/users/cc-enterprise-login-dialog.ui:44
-#: panels/system/users/cc-fingerprint-dialog.c:1396
 #: panels/system/users/cc-fingerprint-dialog.ui:32
 #: panels/system/users/cc-password-dialog.ui:15
 #: panels/system/users/cc-user-page.ui:231
@@ -2373,53 +2371,53 @@ msgstr ""
 "使用键盘快捷键 %s 可以切换输入源。\n"
 "这可以在键盘快捷键设置中更改。"
 
-#: panels/keyboard/cc-keyboard-panel.ui:6
+#: panels/keyboard/cc-keyboard-panel.ui:13
 #: panels/keyboard/gnome-keyboard-panel.desktop.in:3
 msgid "Keyboard"
 msgstr "键盘"
 
-#: panels/keyboard/cc-keyboard-panel.ui:16
+#: panels/keyboard/cc-keyboard-panel.ui:23
 msgid "Input Sources"
 msgstr "输入源"
 
-#: panels/keyboard/cc-keyboard-panel.ui:17
+#: panels/keyboard/cc-keyboard-panel.ui:24
 msgid "Includes keyboard layouts and input methods"
 msgstr "包括键盘布局与输入法"
 
-#: panels/keyboard/cc-keyboard-panel.ui:27
+#: panels/keyboard/cc-keyboard-panel.ui:34
 msgid "Input Source Switching"
 msgstr "输入源切换"
 
-#: panels/keyboard/cc-keyboard-panel.ui:30
+#: panels/keyboard/cc-keyboard-panel.ui:37
 msgid "Use the _same source for all windows"
 msgstr "所有窗口使用相同的输入源(_S)"
 
-#: panels/keyboard/cc-keyboard-panel.ui:42
+#: panels/keyboard/cc-keyboard-panel.ui:49
 msgid "Switch input sources _individually for each window"
 msgstr "每个窗口使用不同的输入源(_I)"
 
-#: panels/keyboard/cc-keyboard-panel.ui:58
+#: panels/keyboard/cc-keyboard-panel.ui:65
 msgid "Special Character Entry"
 msgstr "特殊字符输入"
 
-#: panels/keyboard/cc-keyboard-panel.ui:59
+#: panels/keyboard/cc-keyboard-panel.ui:66
 msgid "Methods for entering symbols and letter variants using the keyboard"
 msgstr "使用键盘输入符号和字母变体的方法"
 
-#: panels/keyboard/cc-keyboard-panel.ui:62
+#: panels/keyboard/cc-keyboard-panel.ui:69
 msgid "A_lternate Characters Key"
 msgstr "备用字符键(_L)"
 
-#: panels/keyboard/cc-keyboard-panel.ui:70
+#: panels/keyboard/cc-keyboard-panel.ui:77
 msgid "_Compose Key"
 msgstr "_Compose 键"
 
-#: panels/keyboard/cc-keyboard-panel.ui:79
+#: panels/keyboard/cc-keyboard-panel.ui:86
 #: panels/keyboard/cc-keyboard-shortcut-dialog.ui:9
 msgid "Keyboard Shortcuts"
 msgstr "键盘快捷键"
 
-#: panels/keyboard/cc-keyboard-panel.ui:82
+#: panels/keyboard/cc-keyboard-panel.ui:89
 msgid "_View and Customize Shortcuts"
 msgstr "查看及自定义快捷键(_V)"
 
@@ -5933,7 +5931,7 @@ msgstr ""
 
 #. TRANSLATORS: in reference to firmware protection: 0/4 stars
 #: panels/privacy/firmware-security/cc-firmware-security-dialog.c:108
-#: panels/privacy/firmware-security/cc-firmware-security-page.c:533
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:532
 msgid "Security Checks Failed"
 msgstr "安全检查失败"
 
@@ -5955,7 +5953,7 @@ msgstr ""
 
 #. TRANSLATORS: in reference to firmware protection: 1/4 stars
 #: panels/privacy/firmware-security/cc-firmware-security-dialog.c:121
-#: panels/privacy/firmware-security/cc-firmware-security-page.c:540
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:539
 msgid "Basic Security Checks Passed"
 msgstr "已通过基本安全检查"
 
@@ -5972,7 +5970,7 @@ msgstr ""
 
 #. TRANSLATORS: in reference to firmware protection: 2~4 stars
 #: panels/privacy/firmware-security/cc-firmware-security-dialog.c:134
-#: panels/privacy/firmware-security/cc-firmware-security-page.c:550
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:549
 msgid "Protected"
 msgstr "已保护"
 
@@ -6086,44 +6084,44 @@ msgstr "该问题可能由操作系统配置的更改，或系统上的恶意软
 
 #. TRANSLATOR: this is the date in "%Y-%m-%d %H:%M:%S" format,
 #. for example: 2022-08-01 22:48:00
-#: panels/privacy/firmware-security/cc-firmware-security-page.c:229
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:228
 #, c-format
 msgid "%1$s"
 msgstr "%1$s"
 
 #. TRANSLATOR: This is the text event status output when the event status is "success"
-#: panels/privacy/firmware-security/cc-firmware-security-page.c:235
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:234
 msgid "Pass"
 msgstr "通过"
 
 #. TRANSLATOR: This is the text event status output when the event status is not "success"
-#: panels/privacy/firmware-security/cc-firmware-security-page.c:238
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:237
 msgid "! Fail"
 msgstr "失败"
 
-#: panels/privacy/firmware-security/cc-firmware-security-page.c:241
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:240
 #, c-format
 msgid "(%1$s → %2$s)"
 msgstr "(%1$s → %2$s)"
 
-#: panels/privacy/firmware-security/cc-firmware-security-page.c:534
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:533
 msgid "Hardware does not pass basic security checks."
 msgstr "硬件未通过基本安全检查。"
 
-#: panels/privacy/firmware-security/cc-firmware-security-page.c:541
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:540
 msgid "Hardware has a basic level of protection."
 msgstr "硬件具备基础级别的保护。"
 
-#: panels/privacy/firmware-security/cc-firmware-security-page.c:551
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:550
 msgid "Hardware has a strong level of protection."
 msgstr "硬件具备优良级别的保护。"
 
 #. TRANSLATORS: in reference to firmware protection: ??? stars
-#: panels/privacy/firmware-security/cc-firmware-security-page.c:557
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:556
 msgid "Security Checks Unavailable"
 msgstr "安全检查不可用"
 
-#: panels/privacy/firmware-security/cc-firmware-security-page.c:558
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:557
 msgid "Security levels are not available for this device."
 msgstr "安全级别对该设备不可用。"
 
@@ -7724,135 +7722,120 @@ msgstr "列出指纹失败：%s"
 msgid "Failed to delete saved fingerprints: %s"
 msgstr "删除已保存的指纹失败：%s"
 
-#: panels/system/users/cc-fingerprint-dialog.c:609
+#: panels/system/users/cc-fingerprint-dialog.c:608
 msgid "Left thumb"
 msgstr "左手拇指"
 
-#: panels/system/users/cc-fingerprint-dialog.c:611
+#: panels/system/users/cc-fingerprint-dialog.c:610
 msgid "Left middle finger"
 msgstr "左手中指"
 
-#: panels/system/users/cc-fingerprint-dialog.c:613
+#: panels/system/users/cc-fingerprint-dialog.c:612
 msgid "_Left index finger"
 msgstr "左手食指(_L)"
 
-#: panels/system/users/cc-fingerprint-dialog.c:615
+#: panels/system/users/cc-fingerprint-dialog.c:614
 msgid "Left ring finger"
 msgstr "左手无名指"
 
-#: panels/system/users/cc-fingerprint-dialog.c:617
+#: panels/system/users/cc-fingerprint-dialog.c:616
 msgid "Left little finger"
 msgstr "左手小指"
 
-#: panels/system/users/cc-fingerprint-dialog.c:619
+#: panels/system/users/cc-fingerprint-dialog.c:618
 msgid "Right thumb"
 msgstr "右手拇指"
 
-#: panels/system/users/cc-fingerprint-dialog.c:621
+#: panels/system/users/cc-fingerprint-dialog.c:620
 msgid "Right middle finger"
 msgstr "右手中指"
 
-#: panels/system/users/cc-fingerprint-dialog.c:623
+#: panels/system/users/cc-fingerprint-dialog.c:622
 msgid "_Right index finger"
 msgstr "右手食指(_R)"
 
-#: panels/system/users/cc-fingerprint-dialog.c:625
+#: panels/system/users/cc-fingerprint-dialog.c:624
 msgid "Right ring finger"
 msgstr "右手无名指"
 
-#: panels/system/users/cc-fingerprint-dialog.c:627
+#: panels/system/users/cc-fingerprint-dialog.c:626
 msgid "Right little finger"
 msgstr "右手小指"
 
-#: panels/system/users/cc-fingerprint-dialog.c:629
+#: panels/system/users/cc-fingerprint-dialog.c:628
 msgid "Unknown Finger"
 msgstr "未知手指"
 
-#: panels/system/users/cc-fingerprint-dialog.c:760
+#: panels/system/users/cc-fingerprint-dialog.c:759
 msgctxt "Fingerprint enroll state"
 msgid "Complete"
 msgstr "完成"
 
-#: panels/system/users/cc-fingerprint-dialog.c:771
+#: panels/system/users/cc-fingerprint-dialog.c:770
 msgid "Fingerprint device disconnected"
 msgstr "指纹设备已断开连接"
 
-#: panels/system/users/cc-fingerprint-dialog.c:777
+#: panels/system/users/cc-fingerprint-dialog.c:776
 msgid "Fingerprint device storage is full"
 msgstr "指纹设备存储已满"
 
-#: panels/system/users/cc-fingerprint-dialog.c:781
+#: panels/system/users/cc-fingerprint-dialog.c:780
 msgid "Fingerprint is duplicate"
 msgstr "指纹是重复的"
 
-#: panels/system/users/cc-fingerprint-dialog.c:785
+#: panels/system/users/cc-fingerprint-dialog.c:784
 msgid "Failed to enroll new fingerprint"
 msgstr "登记新指纹失败"
 
-#: panels/system/users/cc-fingerprint-dialog.c:816
+#: panels/system/users/cc-fingerprint-dialog.c:815
 #, c-format
 msgid "Failed to start enrollment: %s"
 msgstr "登记过程初始化失败：%s"
 
-#: panels/system/users/cc-fingerprint-dialog.c:824
+#: panels/system/users/cc-fingerprint-dialog.c:823
 msgctxt "Fingerprint enroll state"
 msgid "Failed to enroll new fingerprint"
 msgstr "登记新指纹失败"
 
-#: panels/system/users/cc-fingerprint-dialog.c:855
+#: panels/system/users/cc-fingerprint-dialog.c:854
 #, c-format
 msgid "Failed to stop enrollment: %s"
 msgstr "停止登记过程失败：%s"
 
-#: panels/system/users/cc-fingerprint-dialog.c:901
+#: panels/system/users/cc-fingerprint-dialog.c:900
 msgid ""
 "Repeatedly lift and place your finger on the reader to enroll your "
 "fingerprint"
 msgstr "要登记指纹，请重复将手指举起然后放置在读取设备上的动作"
 
-#: panels/system/users/cc-fingerprint-dialog.c:1015
+#: panels/system/users/cc-fingerprint-dialog.c:1014
 msgid "_Re-enroll this finger…"
 msgstr "重新登记该手指(_R)…"
 
 #. TRANSLATORS: This is the label for the button to enroll a new finger
-#: panels/system/users/cc-fingerprint-dialog.c:1030
+#: panels/system/users/cc-fingerprint-dialog.c:1029
 msgid "Scan new fingerprint"
 msgstr "扫描新指纹"
 
-#: panels/system/users/cc-fingerprint-dialog.c:1067
+#: panels/system/users/cc-fingerprint-dialog.c:1066
 #, c-format
 msgid "Failed to release fingerprint device %s: %s"
 msgstr "释放指纹设备 %s 失败：%s"
 
-#: panels/system/users/cc-fingerprint-dialog.c:1139
+#: panels/system/users/cc-fingerprint-dialog.c:1138
 msgctxt "Fingerprint enroll state"
 msgid "Problem Reading Device"
 msgstr "读取设备时出现问题"
 
-#: panels/system/users/cc-fingerprint-dialog.c:1174
+#: panels/system/users/cc-fingerprint-dialog.c:1173
 #, c-format
 msgid "Failed to claim fingerprint device %s: %s"
 msgstr "无法请求指纹设备 %s：%s"
 
-#: panels/system/users/cc-fingerprint-dialog.c:1316
+#: panels/system/users/cc-fingerprint-dialog.c:1315
 #, c-format
 msgid "Failed to get fingerprint devices: %s"
 msgstr "获取指纹设备失败：%s"
-
-#: panels/system/users/cc-fingerprint-dialog.c:1391
-msgid "Delete All Fingerprints?"
-msgstr "删除所有指纹吗？"
-
-#: panels/system/users/cc-fingerprint-dialog.c:1392
-msgid ""
-"Deleting all enrolled fingerprints will disable Fingerprint Login. To re-"
-"enable Fingerprint Login at least one fingerprint will have to be enrolled."
-msgstr ""
-"删除所有登记的指纹将禁用指纹登录。要重新启用指纹登录必须至少登记一个指纹。"
-
-#: panels/system/users/cc-fingerprint-dialog.c:1397
-msgid "_Delete All"
-msgstr "全部删除(_D)"
 
 #: panels/system/users/cc-fingerprint-dialog.ui:8
 msgid "Fingerprint Manager"
@@ -7862,42 +7845,56 @@ msgstr "指纹管理器"
 msgid "Fingerprint"
 msgstr "指纹"
 
-#: panels/system/users/cc-fingerprint-dialog.ui:114
+#: panels/system/users/cc-fingerprint-dialog.ui:77
+msgid "_No"
+msgstr "否(_N)"
+
+#: panels/system/users/cc-fingerprint-dialog.ui:85
+msgid "_Yes"
+msgstr "是(_Y)"
+
+#: panels/system/users/cc-fingerprint-dialog.ui:105
+msgid ""
+"Do you want to delete your registered fingerprints so fingerprint login is "
+"disabled?"
+msgstr "您想要删除登记的指纹使指纹登录被禁用吗？"
+
+#: panels/system/users/cc-fingerprint-dialog.ui:161
 msgid "No fingerprint device"
 msgstr "无指纹设备"
 
 #. Translators: This is the empty state page label which states that there are no devices ready.
-#: panels/system/users/cc-fingerprint-dialog.ui:129
+#: panels/system/users/cc-fingerprint-dialog.ui:176
 msgid "No Fingerprint device"
 msgstr "无指纹设备"
 
-#: panels/system/users/cc-fingerprint-dialog.ui:138
+#: panels/system/users/cc-fingerprint-dialog.ui:185
 msgid "Ensure the device is properly connected"
 msgstr "请确保设备已正常连接"
 
-#: panels/system/users/cc-fingerprint-dialog.ui:146
+#: panels/system/users/cc-fingerprint-dialog.ui:193
 msgid "Fingerprint Device"
 msgstr "指纹设备"
 
-#: panels/system/users/cc-fingerprint-dialog.ui:155
+#: panels/system/users/cc-fingerprint-dialog.ui:202
 msgid "Choose the fingerprint device you want to configure"
 msgstr "选择您想要配置的指纹设备"
 
-#: panels/system/users/cc-fingerprint-dialog.ui:185
+#: panels/system/users/cc-fingerprint-dialog.ui:232
 msgid "Fingerprint Login"
 msgstr "指纹登录"
 
-#: panels/system/users/cc-fingerprint-dialog.ui:191
+#: panels/system/users/cc-fingerprint-dialog.ui:238
 msgid ""
 "Fingerprint login allows you to unlock and log into your device with your "
 "finger"
 msgstr "指纹登录可让您使用手指解锁和登录您的设备"
 
-#: panels/system/users/cc-fingerprint-dialog.ui:218
+#: panels/system/users/cc-fingerprint-dialog.ui:265
 msgid "_Delete Fingerprints"
 msgstr "删除指纹(_D)"
 
-#: panels/system/users/cc-fingerprint-dialog.ui:232
+#: panels/system/users/cc-fingerprint-dialog.ui:279
 msgid "Fingerprint Enroll"
 msgstr "指纹登记"
 
@@ -9120,72 +9117,6 @@ msgstr ""
 msgid "New shortcut…"
 msgstr "新建快捷键…"
 
-#. Translators: This separates the duration and interval times when displaying
-#. * the selected break schedule on the wellbeing panel. For example,
-#. * “1 minute / 20 minutes” to indicate a 1 minute break every 20 minutes.
-#: panels/wellbeing/cc-break-schedule-row.c:289
-msgid " / "
-msgstr " / "
-
-#: panels/wellbeing/cc-break-schedule-row.c:369
-msgid "Duration"
-msgstr "时长"
-
-# 左撇子有歧视色彩。
-#: panels/wellbeing/cc-break-schedule-row.c:369
-msgid "Interval"
-msgstr "间隔"
-
-#: panels/wellbeing/cc-wellbeing-panel.ui:18
-msgid "Break Reminders"
-msgstr "休息提醒器"
-
-#: panels/wellbeing/cc-wellbeing-panel.ui:21
-msgid "_Eyesight Reminders"
-msgstr "视力提醒器(_E)"
-
-#: panels/wellbeing/cc-wellbeing-panel.ui:22
-msgid "Reminders to look away from the screen"
-msgstr "提醒离开屏幕看向别处"
-
-#: panels/wellbeing/cc-wellbeing-panel.ui:28
-msgid "_Movement Reminders"
-msgstr "运动提醒器(_M)"
-
-#: panels/wellbeing/cc-wellbeing-panel.ui:29
-msgid "Reminders to move around"
-msgstr "提醒起来运动一下"
-
-#: panels/wellbeing/cc-wellbeing-panel.ui:35
-msgid "Movement Break S_chedule"
-msgstr "运动休息计划(_C)"
-
-#: panels/wellbeing/cc-wellbeing-panel.ui:41
-msgid "S_ounds"
-msgstr "声音(_O)"
-
-#: panels/wellbeing/cc-wellbeing-panel.ui:42
-msgid "Play a sound when a break ends"
-msgstr "休息结束时播放声音"
-
-#: panels/wellbeing/gnome-wellbeing-panel.desktop.in:6
-msgid "Wellbeing"
-msgstr "健康"
-
-#: panels/wellbeing/gnome-wellbeing-panel.desktop.in:7
-msgid "Review and limit the amount of time you spend at the computer screen"
-msgstr "审阅并限制您花费在计算机屏幕上的时间"
-
-#. Translators: Search terms to find the Wellbeing panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
-#: panels/wellbeing/gnome-wellbeing-panel.desktop.in:18
-msgid ""
-"Wellbeing;Screen Time;Breaks;Break Reminders;Health Breaks;Daily Usage;"
-"Screen Limits;Usage Limit;"
-msgstr ""
-"Wellbeing;Screen Time;Breaks;Break Reminders;Health Breaks;Daily Usage;"
-"Screen Limits;Usage Limit;健康;屏幕时间;休息;提醒器;每日使用;屏幕限制;使用限"
-"制;"
-
 #: panels/wwan/cc-wwan-apn-dialog.c:293
 msgid "Edit"
 msgstr "编辑"
@@ -9811,7 +9742,7 @@ msgstr "© 1998 %s"
 msgid "Settings categories"
 msgstr "设置分类"
 
-#: shell/cc-panel-loader.c:317
+#: shell/cc-panel-loader.c:311
 msgid "Available panels:"
 msgstr "可用面板："
 
@@ -9941,6 +9872,67 @@ msgstr[0] "%u 路输入"
 #: subprojects/gvc/gvc-mixer-control.c:2872
 msgid "System Sounds"
 msgstr "系统声音"
+
+#~ msgid "Delete All Fingerprints?"
+#~ msgstr "删除所有指纹吗？"
+
+#~ msgid ""
+#~ "Deleting all enrolled fingerprints will disable Fingerprint Login. To re-"
+#~ "enable Fingerprint Login at least one fingerprint will have to be "
+#~ "enrolled."
+#~ msgstr ""
+#~ "删除所有登记的指纹将禁用指纹登录。要重新启用指纹登录必须至少登记一个指纹。"
+
+#~ msgid "_Delete All"
+#~ msgstr "全部删除(_D)"
+
+#~ msgid " / "
+#~ msgstr " / "
+
+#~ msgid "Duration"
+#~ msgstr "时长"
+
+# 左撇子有歧视色彩。
+#~ msgid "Interval"
+#~ msgstr "间隔"
+
+#~ msgid "Break Reminders"
+#~ msgstr "休息提醒器"
+
+#~ msgid "_Eyesight Reminders"
+#~ msgstr "视力提醒器(_E)"
+
+#~ msgid "Reminders to look away from the screen"
+#~ msgstr "提醒离开屏幕看向别处"
+
+#~ msgid "_Movement Reminders"
+#~ msgstr "运动提醒器(_M)"
+
+#~ msgid "Reminders to move around"
+#~ msgstr "提醒起来运动一下"
+
+#~ msgid "Movement Break S_chedule"
+#~ msgstr "运动休息计划(_C)"
+
+#~ msgid "S_ounds"
+#~ msgstr "声音(_O)"
+
+#~ msgid "Play a sound when a break ends"
+#~ msgstr "休息结束时播放声音"
+
+#~ msgid "Wellbeing"
+#~ msgstr "健康"
+
+#~ msgid "Review and limit the amount of time you spend at the computer screen"
+#~ msgstr "审阅并限制您花费在计算机屏幕上的时间"
+
+#~ msgid ""
+#~ "Wellbeing;Screen Time;Breaks;Break Reminders;Health Breaks;Daily Usage;"
+#~ "Screen Limits;Usage Limit;"
+#~ msgstr ""
+#~ "Wellbeing;Screen Time;Breaks;Break Reminders;Health Breaks;Daily Usage;"
+#~ "Screen Limits;Usage Limit;健康;屏幕时间;休息;提醒器;每日使用;屏幕限制;使用"
+#~ "限制;"
 
 #~ msgid "Automat_ically Launch Apps"
 #~ msgstr "自动启动应用(_I)"
@@ -10362,17 +10354,6 @@ msgstr "系统声音"
 
 #~ msgid "Pass_word"
 #~ msgstr "密码(_W)"
-
-#~ msgid "_No"
-#~ msgstr "否(_N)"
-
-#~ msgid "_Yes"
-#~ msgstr "是(_Y)"
-
-#~ msgid ""
-#~ "Do you want to delete your registered fingerprints so fingerprint login "
-#~ "is disabled?"
-#~ msgstr "您想要删除登记的指纹使指纹登录被禁用吗？"
 
 #~ msgid "_Add User…"
 #~ msgstr "添加用户(_A)…"
