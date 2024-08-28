@@ -195,7 +195,9 @@ cc_background_paintable_set_property (GObject      *object,
       if (self->scale_factor != scale_factor)
         {
           self->scale_factor = scale_factor;
-          update_cache (self);
+          /* Update cache, but only if it's already constructed */
+          if (self->texture || self->dark_texture)
+            update_cache (self);
         }
       break;
 
@@ -380,7 +382,8 @@ cc_background_paintable_new (GnomeDesktopThumbnailFactory *thumbnail_factory,
                              CcBackgroundItem             *item,
                              CcBackgroundPaintFlags        paint_flags,
                              int                           width,
-                             int                           height)
+                             int                           height,
+                             int                           scale_factor)
 {
   g_return_val_if_fail (GNOME_DESKTOP_IS_THUMBNAIL_FACTORY (thumbnail_factory), NULL);
   g_return_val_if_fail (CC_IS_BACKGROUND_ITEM (item), NULL);
@@ -391,5 +394,6 @@ cc_background_paintable_new (GnomeDesktopThumbnailFactory *thumbnail_factory,
                        "paint-flags", paint_flags,
                        "width", width,
                        "height", height,
+                       "scale-factor", scale_factor,
                        NULL);
 }

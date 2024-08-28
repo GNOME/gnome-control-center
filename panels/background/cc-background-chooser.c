@@ -126,7 +126,8 @@ create_widget_func (gpointer model_item,
                                            item,
                                            CC_BACKGROUND_PAINT_LIGHT_DARK,
                                            THUMBNAIL_WIDTH,
-                                           THUMBNAIL_HEIGHT);
+                                           THUMBNAIL_HEIGHT,
+                                           gtk_widget_get_scale_factor (GTK_WIDGET (self)));
 
   picture = gtk_picture_new_for_paintable (GDK_PAINTABLE (paintable));
   gtk_picture_set_can_shrink (GTK_PICTURE (picture), FALSE);
