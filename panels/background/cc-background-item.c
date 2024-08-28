@@ -237,8 +237,6 @@ cc_background_item_get_frame_thumbnail (CcBackgroundItem             *item,
                                                     scale_factor * height);
         }
 
-        update_size (item);
-
         /* Cache the new thumbnail */
         g_set_object (&thumbnail->thumbnail, pixbuf);
         thumbnail->width = width;
@@ -332,7 +330,6 @@ cc_background_item_load (CcBackgroundItem *item,
 		gdk_pixbuf_get_file_info (filename,
 					  &item->width,
 					  &item->height);
-		update_size (item);
 	}
 
         return TRUE;
@@ -527,6 +524,8 @@ cc_background_item_get_size (CcBackgroundItem *item)
 {
 	g_return_val_if_fail (CC_IS_BACKGROUND_ITEM (item), NULL);
 
+	update_size (item);
+
 	return item->size;
 }
 
@@ -658,6 +657,7 @@ cc_background_item_get_property (GObject    *object,
 		g_value_set_flags (value, self->flags);
 		break;
 	case PROP_SIZE:
+		update_size (self);
 		g_value_set_string (value, self->size);
 		break;
 	case PROP_NEEDS_DOWNLOAD:
@@ -901,6 +901,8 @@ cc_background_item_dump (CcBackgroundItem *item)
 	int i;
 
 	g_return_if_fail (CC_IS_BACKGROUND_ITEM (item));
+
+	update_size (item);
 
 	g_debug ("name:\t\t\t%s", item->name);
 	g_debug ("URI:\t\t\t%s", item->uri ? item->uri : "NULL");
