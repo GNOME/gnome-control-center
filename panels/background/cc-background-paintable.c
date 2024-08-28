@@ -170,6 +170,7 @@ cc_background_paintable_set_property (GObject      *object,
                                       GParamSpec   *pspec)
 {
   CcBackgroundPaintable *self = CC_BACKGROUND_PAINTABLE (object);
+  int scale_factor;
 
   switch (prop_id)
     {
@@ -190,8 +191,12 @@ cc_background_paintable_set_property (GObject      *object,
       break;
 
     case PROP_SCALE_FACTOR:
-      self->scale_factor = g_value_get_int (value);
-      update_cache (self);
+      scale_factor = g_value_get_int (value);
+      if (self->scale_factor != scale_factor)
+        {
+          self->scale_factor = scale_factor;
+          update_cache (self);
+        }
       break;
 
     case PROP_TEXT_DIRECTION:
