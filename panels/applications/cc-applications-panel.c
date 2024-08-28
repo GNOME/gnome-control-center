@@ -411,7 +411,7 @@ get_notification_allowed (CcApplicationsPanel *self,
       *set = perms != NULL;
       /* FIXME: needs unreleased xdg-desktop-portals to write permissions on use */
       *set = TRUE;
-      *allowed = perms == NULL || strcmp (perms[0], "no") != 0;
+      *allowed = perms == NULL || g_strcmp0 (perms[0], "no") != 0;
     }
 }
 
@@ -476,7 +476,7 @@ get_background_allowed (CcApplicationsPanel *self,
 {
   g_auto(GStrv) perms = get_portal_permissions (self, "background", "background", app_id);
   *set = TRUE;
-  *allowed = perms == NULL || strcmp (perms[0], "no") != 0;
+  *allowed = perms == NULL || g_strcmp0 (perms[0], "no") != 0;
 }
 
 static void
@@ -507,7 +507,7 @@ get_wallpaper_allowed (CcApplicationsPanel *self,
   g_auto(GStrv) perms = get_portal_permissions (self, "wallpaper", "wallpaper", app_id);
 
   *set = perms != NULL;
-  *allowed = perms == NULL || strcmp (perms[0], "no") != 0;
+  *allowed = perms == NULL || g_strcmp0 (perms[0], "no") != 0;
 }
 
 static void
@@ -538,7 +538,7 @@ get_screenshot_allowed (CcApplicationsPanel *self,
   g_auto(GStrv) perms = get_portal_permissions (self, "screenshot", "screenshot", app_id);
 
   *set = perms != NULL;
-  *allowed = perms == NULL || strcmp (perms[0], "no") != 0;
+  *allowed = perms == NULL || g_strcmp0 (perms[0], "no") != 0;
 }
 
 static void
@@ -575,7 +575,7 @@ get_shortcuts_allowed (CcApplicationsPanel *self,
    * string value here.
    */
   *set = perms != NULL;
-  *granted = (perms != NULL) && g_ascii_strcasecmp (perms[0], "GRANTED") == 0;
+  *granted = (perms != NULL) && (perms[0] != NULL) && g_ascii_strcasecmp (perms[0], "GRANTED") == 0;
 }
 
 static void
@@ -616,7 +616,7 @@ get_device_allowed (CcApplicationsPanel *self,
   perms = get_portal_permissions (self, "devices", device, app_id);
 
   *set = perms != NULL;
-  *allowed = perms == NULL || strcmp (perms[0], "no") != 0;
+  *allowed = perms == NULL || g_strcmp0 (perms[0], "no") != 0;
 }
 
 static void
@@ -666,7 +666,7 @@ get_location_allowed (CcApplicationsPanel *self,
   perms = get_portal_permissions (self, "location", "location", app_id);
 
   *set = perms != NULL;
-  *allowed = perms == NULL || strcmp (perms[0], "NONE") != 0;
+  *allowed = perms == NULL || g_strcmp0 (perms[0], "NONE") != 0;
 }
 
 static void
