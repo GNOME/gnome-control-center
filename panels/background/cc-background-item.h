@@ -58,13 +58,6 @@ GdkPixbuf *        cc_background_item_get_thumbnail       (CcBackgroundItem     
                                                            int                           height,
                                                            int                           scale_factor,
                                                            gboolean                      dark);
-GdkPixbuf *        cc_background_item_get_frame_thumbnail (CcBackgroundItem             *item,
-                                                           GnomeDesktopThumbnailFactory *thumbs,
-                                                           int                           width,
-                                                           int                           height,
-                                                           int                           scale_factor,
-                                                           int                           frame,
-                                                           gboolean                      dark);
 
 GDesktopBackgroundStyle   cc_background_item_get_placement  (CcBackgroundItem *item);
 GDesktopBackgroundShading cc_background_item_get_shading    (CcBackgroundItem *item);

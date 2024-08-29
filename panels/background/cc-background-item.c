@@ -184,7 +184,7 @@ update_size (CcBackgroundItem *item)
 	}
 }
 
-GdkPixbuf *
+static GdkPixbuf *
 cc_background_item_get_frame_thumbnail (CcBackgroundItem             *item,
                                         GnomeDesktopThumbnailFactory *thumbs,
                                         int                           width,
