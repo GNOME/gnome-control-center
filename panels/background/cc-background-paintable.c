@@ -267,6 +267,7 @@ cc_background_paintable_class_init (CcBackgroundPaintableClass *klass)
                       "Scale Factor",
                       1, G_MAXINT, 1,
                       G_PARAM_READWRITE |
+                      G_PARAM_CONSTRUCT |
                       G_PARAM_STATIC_STRINGS);
 
   properties[PROP_TEXT_DIRECTION] =
@@ -276,6 +277,7 @@ cc_background_paintable_class_init (CcBackgroundPaintableClass *klass)
                        GTK_TYPE_TEXT_DIRECTION,
                        GTK_TEXT_DIR_LTR,
                        G_PARAM_READWRITE |
+                       G_PARAM_CONSTRUCT |
                        G_PARAM_STATIC_STRINGS);
 
   properties[PROP_PAINT_FLAGS] =
@@ -294,8 +296,6 @@ cc_background_paintable_class_init (CcBackgroundPaintableClass *klass)
 static void
 cc_background_paintable_init (CcBackgroundPaintable *self)
 {
-  self->scale_factor = 1;
-  self->text_direction = GTK_TEXT_DIR_LTR;
 }
 
 static void
