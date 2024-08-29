@@ -37,6 +37,9 @@ struct _CcBackgroundPaintable
   GdkPaintable     *dark_texture;
 
   CcBackgroundPaintFlags  paint_flags;
+
+  GList             link;
+  guint             is_queued : 1;
 };
 
 enum
@@ -59,6 +62,9 @@ static void cc_background_paintable_paintable_init (GdkPaintableInterface *iface
 G_DEFINE_TYPE_WITH_CODE (CcBackgroundPaintable, cc_background_paintable, G_TYPE_OBJECT,
                          G_IMPLEMENT_INTERFACE (GDK_TYPE_PAINTABLE,
                                                 cc_background_paintable_paintable_init))
+
+static GQueue queued_updates;
+static guint queued_updates_source;
 
 static void
 update_cache (CcBackgroundPaintable *self)
@@ -97,10 +103,52 @@ update_cache (CcBackgroundPaintable *self)
   gdk_paintable_invalidate_size (GDK_PAINTABLE (self));
 }
 
+static gboolean
+update_cache_one (gpointer user_data)
+{
+  CcBackgroundPaintable *head = g_queue_peek_head (&queued_updates);
+
+  if (head != NULL)
+    {
+      g_queue_unlink (&queued_updates, &head->link);
+      head->is_queued = FALSE;
+      update_cache (head);
+    }
+
+  if (queued_updates.length == 0)
+    {
+      queued_updates_source = 0;
+      return G_SOURCE_REMOVE;
+    }
+
+  return G_SOURCE_CONTINUE;
+}
+
+static void
+queue_update_cache (CcBackgroundPaintable *self)
+{
+  if (self->is_queued)
+    return;
+
+  self->is_queued = TRUE;
+  g_queue_push_tail_link (&queued_updates, &self->link);
+
+  if (queued_updates_source == 0)
+    queued_updates_source = g_idle_add_full (GDK_PRIORITY_REDRAW + 1,
+                                             update_cache_one,
+                                             NULL, NULL);
+}
+
 static void
 cc_background_paintable_dispose (GObject *object)
 {
   CcBackgroundPaintable *self = CC_BACKGROUND_PAINTABLE (object);
+
+  if (self->is_queued)
+    {
+      self->is_queued = FALSE;
+      g_queue_unlink (&queued_updates, &self->link);
+    }
 
   g_clear_object (&self->item);
   g_clear_object (&self->thumbnail_factory);
@@ -117,7 +165,7 @@ cc_background_paintable_constructed (GObject *object)
 
   G_OBJECT_CLASS (cc_background_paintable_parent_class)->constructed (object);
 
-  update_cache (self);
+  queue_update_cache (self);
 }
 
 static void
@@ -197,7 +245,7 @@ cc_background_paintable_set_property (GObject      *object,
           self->scale_factor = scale_factor;
           /* Update cache, but only if it's already constructed */
           if (self->texture || self->dark_texture)
-            update_cache (self);
+            queue_update_cache (self);
         }
       break;
 
@@ -296,6 +344,7 @@ cc_background_paintable_class_init (CcBackgroundPaintableClass *klass)
 static void
 cc_background_paintable_init (CcBackgroundPaintable *self)
 {
+  self->link.data = self;
 }
 
 static void
@@ -306,6 +355,10 @@ cc_background_paintable_snapshot (GdkPaintable *paintable,
 {
   CcBackgroundPaintable *self = CC_BACKGROUND_PAINTABLE (paintable);
   gboolean is_rtl;
+
+  /* If we haven't loaded our textures yet, render nothing */
+  if (self->dark_texture == NULL && self->texture == NULL)
+    return;
 
   if (!self->dark_texture)
     {
@@ -344,7 +397,10 @@ cc_background_paintable_get_intrinsic_width (GdkPaintable *paintable)
   CcBackgroundPaintable *self = CC_BACKGROUND_PAINTABLE (paintable);
   GdkPaintable *valid_texture = self->texture ? self->texture : self->dark_texture;
 
-  return gdk_paintable_get_intrinsic_width (valid_texture) / self->scale_factor;
+  if (valid_texture != NULL)
+    return gdk_paintable_get_intrinsic_width (valid_texture) / self->scale_factor;
+
+  return self->width;
 }
 
 static int
@@ -353,7 +409,10 @@ cc_background_paintable_get_intrinsic_height (GdkPaintable *paintable)
   CcBackgroundPaintable *self = CC_BACKGROUND_PAINTABLE (paintable);
   GdkPaintable *valid_texture = self->texture ? self->texture : self->dark_texture;
 
-  return gdk_paintable_get_intrinsic_height (valid_texture) / self->scale_factor;
+  if (valid_texture != NULL)
+    return gdk_paintable_get_intrinsic_height (valid_texture) / self->scale_factor;
+
+  return self->height;
 }
 
 static double
@@ -362,7 +421,10 @@ cc_background_paintable_get_intrinsic_aspect_ratio (GdkPaintable *paintable)
   CcBackgroundPaintable *self = CC_BACKGROUND_PAINTABLE (paintable);
   GdkPaintable *valid_texture = self->texture ? self->texture : self->dark_texture;
 
-  return gdk_paintable_get_intrinsic_aspect_ratio (valid_texture);
+  if (valid_texture != NULL)
+    return gdk_paintable_get_intrinsic_aspect_ratio (valid_texture);
+
+  return (double) self->width / self->height;
 }
 
 static void
