@@ -21,6 +21,7 @@
 #undef G_LOG_DOMAIN
 #define G_LOG_DOMAIN "cc-background-chooser"
 
+#include <adwaita.h>
 #include <glib/gi18n.h>
 #include <libgnome-desktop/gnome-desktop-thumbnail.h>
 
@@ -49,9 +50,20 @@ struct _CcBackgroundChooser
   CcBackgroundItem   *active_item;
 
   GnomeDesktopThumbnailFactory *thumbnail_factory;
+
+  AdwToastOverlay    *toast_overlay;
 };
 
 G_DEFINE_TYPE (CcBackgroundChooser, cc_background_chooser, GTK_TYPE_BOX)
+
+enum
+{
+  PROP_0,
+  PROP_TOAST_OVERLAY,
+  N_PROPS
+};
+
+static GParamSpec *properties [N_PROPS];
 
 enum
 {
@@ -271,6 +283,25 @@ file_dialog_open_cb (GObject      *source_object,
 /* GObject overrides */
 
 static void
+cc_background_chooser_set_property (GObject      *object,
+                                    guint         prop_id,
+                                    const GValue *value,
+                                    GParamSpec   *pspec)
+{
+  CcBackgroundChooser *self = CC_BACKGROUND_CHOOSER (object);
+
+  switch (prop_id)
+    {
+      case PROP_TOAST_OVERLAY:
+        self->toast_overlay = g_value_get_object (value);
+        break;
+      default:
+        G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+        break;
+    }
+}
+
+static void
 cc_background_chooser_finalize (GObject *object)
 {
   CcBackgroundChooser *self = (CcBackgroundChooser *)object;
@@ -288,7 +319,13 @@ cc_background_chooser_class_init (CcBackgroundChooserClass *klass)
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
+  object_class->set_property = cc_background_chooser_set_property;
   object_class->finalize = cc_background_chooser_finalize;
+
+  properties[PROP_TOAST_OVERLAY] = g_param_spec_object ("toast-overlay", NULL, NULL,
+                                                        ADW_TYPE_TOAST_OVERLAY,
+                                                        G_PARAM_WRITABLE |
+                                                        G_PARAM_STATIC_STRINGS);
 
   signals[BACKGROUND_CHOSEN] = g_signal_new ("background-chosen",
                                              CC_TYPE_BACKGROUND_CHOOSER,
@@ -305,6 +342,8 @@ cc_background_chooser_class_init (CcBackgroundChooserClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcBackgroundChooser, recent_flowbox);
 
   gtk_widget_class_bind_template_callback (widget_class, on_item_activated_cb);
+
+  g_object_class_install_properties (object_class, N_PROPS, properties);
 }
 
 static void
