@@ -45,19 +45,25 @@ typedef enum {
 				    CC_BACKGROUND_ITEM_HAS_SCOLOR &	\
 				    CC_BACKGROUND_ITEM_HAS_FNAME)
 
-CcBackgroundItem * cc_background_item_new                 (const char                   *uri);
-CcBackgroundItem * cc_background_item_copy                (CcBackgroundItem             *item);
-gboolean           cc_background_item_load                (CcBackgroundItem *item,
-                                                           GFileInfo        *info);
-gboolean           cc_background_item_changes_with_time   (CcBackgroundItem             *item);
-gboolean           cc_background_item_has_dark_version    (CcBackgroundItem             *item);
+CcBackgroundItem * cc_background_item_new               (const char                   *uri);
+CcBackgroundItem * cc_background_item_copy              (CcBackgroundItem             *item);
+gboolean           cc_background_item_load              (CcBackgroundItem *item,
+                                                         GFileInfo        *info);
+gboolean           cc_background_item_changes_with_time (CcBackgroundItem             *item);
+gboolean           cc_background_item_has_dark_version  (CcBackgroundItem             *item);
 
-GdkPixbuf *        cc_background_item_get_thumbnail       (CcBackgroundItem             *item,
-                                                           GnomeDesktopThumbnailFactory *thumbs,
-                                                           int                           width,
-                                                           int                           height,
-                                                           int                           scale_factor,
-                                                           gboolean                      dark);
+void               cc_background_item_get_thumbnail_async  (CcBackgroundItem             *item,
+                                                            GnomeDesktopThumbnailFactory *thumbs,
+                                                            int                           width,
+                                                            int                           height,
+                                                            int                           scale_factor,
+                                                            gboolean                      dark,
+                                                            GCancellable                 *cancellable,
+                                                            GAsyncReadyCallback           callback,
+                                                            gpointer                      user_data);
+GdkPixbuf        * cc_background_item_get_thumbnail_finish (CcBackgroundItem             *item,
+                                                            GAsyncResult                 *result,
+                                                            GError                      **error);
 
 GDesktopBackgroundStyle   cc_background_item_get_placement  (CcBackgroundItem *item);
 GDesktopBackgroundShading cc_background_item_get_shading    (CcBackgroundItem *item);
