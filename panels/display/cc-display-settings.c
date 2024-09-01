@@ -435,12 +435,8 @@ cc_display_settings_rebuild_ui (CcDisplaySettings *self)
                                         CC_DISPLAY_ROTATION_90,
                                         CC_DISPLAY_ROTATION_270,
                                         CC_DISPLAY_ROTATION_180 };
-      CcDisplayMode *current_mode;
-      int width, height;
       CcDisplayRatio ratio;
 
-      current_mode = cc_display_monitor_get_mode (self->selected_output);
-      cc_display_mode_get_resolution (current_mode, &width, &height);
       if (width > height)
         {
           ratio = CC_DISPLAY_RATIO_LANDSCAPE;
