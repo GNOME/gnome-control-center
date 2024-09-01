@@ -36,7 +36,6 @@
 typedef struct {
         int        width;
         int        height;
-        int        frame;
         int        scale_factor;
         GdkPixbuf *thumbnail;
 } CachedThumbnail;
@@ -184,76 +183,145 @@ update_size (CcBackgroundItem *item)
 	}
 }
 
-static GdkPixbuf *
-cc_background_item_get_frame_thumbnail (CcBackgroundItem             *item,
+typedef struct
+{
+        GnomeDesktopThumbnailFactory *thumbs;
+        GnomeBG                      *bg;
+        GdkRectangle                  monitor_layout;
+        int                           width;
+        int                           height;
+        int                           scale_factor;
+        guint                         dark : 1;
+        guint                         cached_result : 1;
+} GetThumbnailAsync;
+
+static void
+get_thumbnail_async_free (gpointer data)
+{
+        GetThumbnailAsync *state = data;
+
+        g_clear_object (&state->thumbs);
+        g_clear_object (&state->bg);
+        g_free (state);
+}
+
+static void
+cc_background_item_get_thumbnail_worker (GTask        *task,
+                                         gpointer      source_object,
+                                         gpointer      task_data,
+                                         GCancellable *cancellable)
+{
+        GetThumbnailAsync *state = task_data;
+        CcBackgroundItem *item = source_object;
+        GdkPixbuf *pixbuf;
+
+        g_assert (G_IS_TASK (task));
+        g_assert (CC_IS_BACKGROUND_ITEM (item));
+        g_assert (!cancellable || G_IS_CANCELLABLE (cancellable));
+        g_assert (state != NULL);
+        g_assert (state->thumbs != NULL);
+
+        pixbuf = gnome_bg_create_thumbnail (state->bg,
+                                            state->thumbs,
+                                            &state->monitor_layout,
+                                            state->scale_factor * state->width,
+                                            state->scale_factor * state->height);
+
+        if (pixbuf != NULL)
+                g_task_return_pointer (task, pixbuf, g_object_unref);
+        else
+                g_task_return_new_error (task,
+                                         G_IO_ERROR,
+                                         G_IO_ERROR_FAILED,
+                                         "Failed to load pixbuf");
+}
+
+void
+cc_background_item_get_thumbnail_async (CcBackgroundItem             *item,
                                         GnomeDesktopThumbnailFactory *thumbs,
                                         int                           width,
                                         int                           height,
                                         int                           scale_factor,
-                                        int                           frame,
-                                        gboolean                      dark)
+                                        gboolean                      dark,
+                                        GCancellable                 *cancellable,
+                                        GAsyncReadyCallback           callback,
+                                        gpointer                      user_data)
 {
-        GdkPixbuf *pixbuf;
-        CachedThumbnail *thumbnail;
-        GnomeBG *bg;
         g_autoptr(GdkMonitor) monitor = NULL;
-        GdkDisplay *display;
+        g_autoptr(GTask) task = NULL;
+        GetThumbnailAsync *state;
+        CachedThumbnail *thumbnail;
         GListModel *monitors;
-        GdkRectangle monitor_layout;
+        GdkDisplay *display;
 
-	g_return_val_if_fail (CC_IS_BACKGROUND_ITEM (item), NULL);
-	g_return_val_if_fail (width > 0 && height > 0, NULL);
+        g_return_if_fail (CC_IS_BACKGROUND_ITEM (item));
+        g_return_if_fail (width > 0 && height > 0);
+        g_return_if_fail (thumbs != NULL);
+        g_return_if_fail (!cancellable || G_IS_CANCELLABLE (cancellable));
+
+        task = g_task_new (item, cancellable, callback, user_data);
+        g_task_set_source_tag (task, cc_background_item_get_thumbnail_async);
+
+        state = g_new0 (GetThumbnailAsync, 1);
+        g_task_set_task_data (task, state, get_thumbnail_async_free);
 
         thumbnail = dark ? &item->cached_thumbnail_dark : &item->cached_thumbnail;
-        bg = item_to_gnome_bg (item, dark);
 
         /* Use the cached thumbnail if the sizes match */
         if (thumbnail->thumbnail &&
             thumbnail->width == width &&
             thumbnail->height == height &&
-            thumbnail->scale_factor == scale_factor &&
-            thumbnail->frame == frame)
-                    return g_object_ref (thumbnail->thumbnail);
+            thumbnail->scale_factor == scale_factor) {
+                state->cached_result = TRUE;
+                g_task_return_pointer (task, g_object_ref (thumbnail->thumbnail), g_object_unref);
+                return;
+        }
 
         display = gdk_display_get_default ();
         monitors = gdk_display_get_monitors (display);
         monitor = g_list_model_get_item (monitors, 0);
-        gdk_monitor_get_geometry (monitor, &monitor_layout);
 
-        if (frame >= 0) {
-                pixbuf = gnome_bg_create_frame_thumbnail (bg,
-                                                          thumbs,
-                                                          &monitor_layout,
-                                                          scale_factor * width,
-                                                          scale_factor * height,
-                                                          frame);
-        } else {
-                pixbuf = gnome_bg_create_thumbnail (bg,
-                                                    thumbs,
-                                                    &monitor_layout,
-                                                    scale_factor * width,
-                                                    scale_factor * height);
-        }
+        state->thumbs = g_object_ref (thumbs);
+        gdk_monitor_get_geometry (monitor, &state->monitor_layout);
+        state->width = width;
+        state->height = height;
+        state->scale_factor = scale_factor;
+        state->dark = !!dark;
+        state->bg = item_to_gnome_bg (item, dark);
 
-        /* Cache the new thumbnail */
-        g_set_object (&thumbnail->thumbnail, pixbuf);
-        thumbnail->width = width;
-        thumbnail->height = height;
-        thumbnail->scale_factor = scale_factor;
-        thumbnail->frame = frame;
-
-        return pixbuf;
+        g_task_run_in_thread (task, cc_background_item_get_thumbnail_worker);
 }
 
 GdkPixbuf *
-cc_background_item_get_thumbnail (CcBackgroundItem             *item,
-                                  GnomeDesktopThumbnailFactory *thumbs,
-                                  int                           width,
-                                  int                           height,
-                                  int                           scale_factor,
-                                  gboolean                      dark)
+cc_background_item_get_thumbnail_finish (CcBackgroundItem  *item,
+                                         GAsyncResult      *result,
+                                         GError           **error)
 {
-        return cc_background_item_get_frame_thumbnail (item, thumbs, width, height, scale_factor, -1, dark);
+        GdkPixbuf *pixbuf;
+        GetThumbnailAsync *state;
+        CachedThumbnail *thumbnail;
+
+        g_return_val_if_fail (CC_IS_BACKGROUND_ITEM (item), NULL);
+        g_return_val_if_fail (G_IS_TASK (result), NULL);
+
+        if (!(pixbuf = g_task_propagate_pointer (G_TASK (result), error)))
+                return NULL;
+
+        state = g_task_get_task_data (G_TASK (result));
+
+        if (state->cached_result)
+                return pixbuf;
+
+        thumbnail = state->dark ? &item->cached_thumbnail_dark : &item->cached_thumbnail;
+
+        /* Cache the new thumbnail */
+        if (g_set_object (&thumbnail->thumbnail, pixbuf)) {
+                thumbnail->width = state->width;
+                thumbnail->height = state->height;
+                thumbnail->scale_factor = state->scale_factor;
+        }
+
+        return pixbuf;
 }
 
 static void
