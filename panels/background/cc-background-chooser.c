@@ -92,16 +92,6 @@ on_delete_background_clicked_cb (GtkButton *button,
   bg_recent_source_remove_item (source, item);
 }
 
-static void
-direction_changed_cb (GtkWidget        *widget,
-                      GtkTextDirection *previous_direction,
-                      GdkPaintable     *paintable)
-{
-  g_object_set (paintable,
-                "text-direction", gtk_widget_get_direction (widget),
-                NULL);
-}
-
 static GtkWidget*
 create_widget_func (gpointer model_item,
                     gpointer user_data)
@@ -127,15 +117,10 @@ create_widget_func (gpointer model_item,
                                            CC_BACKGROUND_PAINT_LIGHT_DARK,
                                            THUMBNAIL_WIDTH,
                                            THUMBNAIL_HEIGHT,
-                                           gtk_widget_get_scale_factor (GTK_WIDGET (self)));
+                                           GTK_WIDGET (self));
 
   picture = gtk_picture_new_for_paintable (GDK_PAINTABLE (paintable));
   gtk_picture_set_can_shrink (GTK_PICTURE (picture), FALSE);
-
-  g_object_bind_property (picture, "scale-factor",
-                          paintable, "scale-factor", G_BINDING_SYNC_CREATE);
-  g_signal_connect_object (picture, "direction-changed",
-                           G_CALLBACK (direction_changed_cb), paintable, 0);
 
   icon = gtk_image_new_from_icon_name ("slideshow-symbolic");
   gtk_widget_set_halign (icon, GTK_ALIGN_START);
