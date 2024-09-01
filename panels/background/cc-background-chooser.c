@@ -52,7 +52,15 @@ struct _CcBackgroundChooser
   GnomeDesktopThumbnailFactory *thumbnail_factory;
 
   AdwToastOverlay    *toast_overlay;
+  AdwToast           *toast;
+  GPtrArray          *removed_backgrounds;
 };
+
+typedef struct {
+  BgRecentSource     *recent_source;
+  CcBackgroundItem   *item;
+  GtkWidget          *parent;
+} UndoData;
 
 G_DEFINE_TYPE (CcBackgroundChooser, cc_background_chooser, GTK_TYPE_BOX)
 
@@ -90,18 +98,94 @@ emit_background_chosen (CcBackgroundChooser *self)
 }
 
 static void
+really_delete_background (gpointer data)
+{
+  UndoData *undo_data = data;
+
+  bg_recent_source_remove_item (undo_data->recent_source, undo_data->item);
+  g_free (undo_data);
+}
+
+static void
+undo_remove (gpointer data)
+{
+  UndoData *undo_data = data;
+
+  gtk_widget_set_visible (undo_data->parent, TRUE);
+  g_free (undo_data);
+}
+
+static void
+on_removed_backgrounds_undo (CcBackgroundChooser *self)
+{
+  g_ptr_array_set_free_func (self->removed_backgrounds, undo_remove);
+}
+
+static void
+on_removed_backgrounds_dismissed (CcBackgroundChooser *self)
+{
+  self->toast = NULL;
+  g_clear_pointer (&self->removed_backgrounds, g_ptr_array_unref);
+}
+
+static void
 on_delete_background_clicked_cb (GtkButton *button,
                                  BgRecentSource  *source)
 {
   GtkWidget *parent;
+  CcBackgroundChooser *self;
   CcBackgroundItem *item;
+  UndoData *undo_data;
 
   parent = gtk_widget_get_parent (gtk_widget_get_parent (GTK_WIDGET (button)));
   g_assert (GTK_IS_FLOW_BOX_CHILD (parent));
 
   item = g_object_get_data (G_OBJECT (parent), "item");
+  self = g_object_get_data (G_OBJECT (source), "background-chooser");
 
-  bg_recent_source_remove_item (source, item);
+  gtk_widget_set_visible (parent, FALSE);
+
+  /* Add background to the array of rows to be handled by the undo toast */
+  if (!self->removed_backgrounds)
+    self->removed_backgrounds = g_ptr_array_new_with_free_func (really_delete_background);
+
+  undo_data = g_new (UndoData, 1);
+  undo_data->recent_source = source;
+  undo_data->item = item;
+  undo_data->parent = parent;
+
+  g_ptr_array_add (self->removed_backgrounds, undo_data);
+
+  if (!self->toast)
+    {
+      self->toast = adw_toast_new (_("Background removed"));
+      adw_toast_set_button_label (self->toast, _("_Undo"));
+
+      g_signal_connect_swapped (self->toast,
+                                "button-clicked",
+                                G_CALLBACK (on_removed_backgrounds_undo),
+                                self);
+      g_signal_connect_swapped (self->toast,
+                                "dismissed",
+                                G_CALLBACK (on_removed_backgrounds_dismissed),
+                                self);
+    }
+  else
+    {
+      g_autofree gchar *message = NULL;
+
+      /* Translators: %d is the number of backgrounds deleted. */
+      message = g_strdup_printf (ngettext ("%d background removed",
+                                           "%d backgrounds removed",
+                                           self->removed_backgrounds->len),
+                                 self->removed_backgrounds->len);
+
+      adw_toast_set_title (self->toast, message);
+
+      g_object_ref (self->toast);
+    }
+
+  adw_toast_overlay_add_toast (self->toast_overlay, self->toast);
 }
 
 static GtkWidget*
