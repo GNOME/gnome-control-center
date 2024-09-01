@@ -136,16 +136,6 @@ cc_background_paintable_dispose (GObject *object)
 }
 
 static void
-cc_background_paintable_constructed (GObject *object)
-{
-  CcBackgroundPaintable *self = CC_BACKGROUND_PAINTABLE (object);
-
-  G_OBJECT_CLASS (cc_background_paintable_parent_class)->constructed (object);
-
-  update_cache (self);
-}
-
-static void
 cc_background_paintable_get_property (GObject    *object,
                                       guint       prop_id,
                                       GValue     *value,
@@ -246,7 +236,6 @@ cc_background_paintable_class_init (CcBackgroundPaintableClass *klass)
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
   object_class->dispose = cc_background_paintable_dispose;
-  object_class->constructed = cc_background_paintable_constructed;
   object_class->get_property = cc_background_paintable_get_property;
   object_class->set_property = cc_background_paintable_set_property;
 
@@ -413,6 +402,37 @@ cc_background_paintable_paintable_init (GdkPaintableInterface *iface)
   iface->get_intrinsic_aspect_ratio = cc_background_paintable_get_intrinsic_aspect_ratio;
 }
 
+static void
+on_root_direction_changed_cb (GtkWidget        *root,
+                              GtkTextDirection *previous_direction,
+                              GdkPaintable     *paintable)
+{
+  g_object_set (paintable,
+                "text-direction", gtk_widget_get_direction (root),
+                NULL);
+}
+
+static void
+on_container_root_cb (GtkWidget             *container,
+                      GParamSpec            *pspec,
+                      CcBackgroundPaintable *self)
+{
+  GtkWidget *root;
+
+  g_signal_handlers_disconnect_by_func (container, on_container_root_cb, self);
+
+  root = GTK_WIDGET (gtk_widget_get_root (container));
+
+  g_object_bind_property (root, "scale-factor",
+                          self, "scale-factor",
+                          G_BINDING_SYNC_CREATE);
+  g_signal_connect_object (root, "direction-changed",
+                           G_CALLBACK (on_root_direction_changed_cb), self,
+                           G_CONNECT_DEFAULT);
+
+  update_cache (self);
+}
+
 /* Workaround for a typo in libgnome-desktop, see gnome-desktop!160 */
 #define G_TYPE_INSTANCE_CHECK_TYPE G_TYPE_CHECK_INSTANCE_TYPE
 
@@ -422,17 +442,30 @@ cc_background_paintable_new (GnomeDesktopThumbnailFactory *thumbnail_factory,
                              CcBackgroundPaintFlags        paint_flags,
                              int                           width,
                              int                           height,
-                             int                           scale_factor)
+                             GtkWidget                    *container)
 {
+  CcBackgroundPaintable *self;
   g_return_val_if_fail (GNOME_DESKTOP_IS_THUMBNAIL_FACTORY (thumbnail_factory), NULL);
   g_return_val_if_fail (CC_IS_BACKGROUND_ITEM (item), NULL);
+  g_return_val_if_fail (GTK_IS_WIDGET (container), NULL);
 
-  return g_object_new (CC_TYPE_BACKGROUND_PAINTABLE,
+  self = g_object_new (CC_TYPE_BACKGROUND_PAINTABLE,
                        "thumbnail-factory", thumbnail_factory,
                        "item", item,
                        "paint-flags", paint_flags,
                        "width", width,
                        "height", height,
-                       "scale-factor", scale_factor,
                        NULL);
+
+  /* We will wait until the container is rooted, as otherwise the scale-factor can't
+     be retrieved reliably. Doing a cache update with the wrong scale-factor can be
+     costly, so it's worth the wait */
+  if (gtk_widget_get_root (container))
+    on_container_root_cb (container, NULL, self);
+  else
+    g_signal_connect_object (container, "notify::root",
+                             G_CALLBACK (on_container_root_cb), self,
+                             G_CONNECT_DEFAULT);
+
+  return self;
 }

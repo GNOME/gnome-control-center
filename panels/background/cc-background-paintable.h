@@ -43,6 +43,6 @@ CcBackgroundPaintable * cc_background_paintable_new (GnomeDesktopThumbnailFactor
                                                      CcBackgroundPaintFlags        paint_flags,
                                                      int                           width,
                                                      int                           height,
-                                                     int                           scale_factor);
+                                                     GtkWidget                    *container);
 
 G_END_DECLS
