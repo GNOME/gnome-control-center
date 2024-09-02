@@ -36,6 +36,8 @@ struct _CcBackgroundPaintable
   GdkPaintable     *texture;
   GdkPaintable     *dark_texture;
 
+  GCancellable     *cancellable;
+
   CcBackgroundPaintFlags  paint_flags;
 };
 
@@ -99,6 +101,10 @@ update_cache (CcBackgroundPaintable *self)
 {
   gboolean has_dark = cc_background_item_has_dark_version (self->item);
 
+  g_cancellable_cancel (self->cancellable);
+  g_clear_object (&self->cancellable);
+  self->cancellable = g_cancellable_new ();
+
   if ((self->paint_flags & CC_BACKGROUND_PAINT_LIGHT) || !has_dark)
     cc_background_item_get_thumbnail_async (self->item,
                                             self->thumbnail_factory,
@@ -106,7 +112,7 @@ update_cache (CcBackgroundPaintable *self)
                                             self->height,
                                             self->scale_factor,
                                             FALSE,
-                                            NULL,
+                                            self->cancellable,
                                             light_cb,
                                             g_object_ref (self));
 
@@ -117,7 +123,7 @@ update_cache (CcBackgroundPaintable *self)
                                             self->height,
                                             self->scale_factor,
                                             TRUE,
-                                            NULL,
+                                            self->cancellable,
                                             dark_cb,
                                             g_object_ref (self));
 }
@@ -126,6 +132,9 @@ static void
 cc_background_paintable_dispose (GObject *object)
 {
   CcBackgroundPaintable *self = CC_BACKGROUND_PAINTABLE (object);
+
+  g_cancellable_cancel (self->cancellable);
+  g_clear_object (&self->cancellable);
 
   g_clear_object (&self->item);
   g_clear_object (&self->thumbnail_factory);
@@ -210,8 +219,8 @@ cc_background_paintable_set_property (GObject      *object,
       if (self->scale_factor != scale_factor)
         {
           self->scale_factor = scale_factor;
-          /* Update cache, but only if it's already constructed */
-          if (self->texture || self->dark_texture)
+          /* Update cache, but only if the async call has ran or is still running */
+          if (self->cancellable)
             update_cache (self);
         }
       break;
