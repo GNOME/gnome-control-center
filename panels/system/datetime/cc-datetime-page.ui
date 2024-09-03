@@ -119,6 +119,7 @@
             <child>
               <object class="AdwPreferencesGroup">
                 <child>
+                  <!-- This should stay AdwActionRow and not become AdwSwitchRow, we use the delayed state change of GtkSwitch -->
                   <object class="AdwActionRow" id="auto_datetime_row">
                     <property name="title" translatable="yes">Automatic _Date &amp;amp; Time</property>
                     <property name="subtitle" translatable="yes">Requires internet access</property>
