@@ -1,14 +1,12 @@
 using Gtk 4.0;
 using Adw 1;
 
-template $CcBoltDeviceDialog: Adw.Window {
+template $CcBoltDeviceDialog: Adw.Dialog {
   title: _("Device Identifier");
-  modal: true;
-  hide-on-close: true;
-  width-request: 480;
-  height-request: 360;
+  content-width: 480;
+  content-height: 360;
 
-  Box {
+  child: Box {
     orientation: vertical;
 
     Adw.HeaderBar {
@@ -89,7 +87,7 @@ template $CcBoltDeviceDialog: Adw.Window {
 
       Box spinner_box {}
     }
-  }
+  };
 }
 
 SizeGroup actions_sizegroup {
