@@ -65,9 +65,6 @@ struct _CcBoltPage
   GtkListBox         *devices_list;
   GtkListBox         *pending_list;
 
-  /* device details dialog */
-  CcBoltDeviceDialog *device_dialog;
-
   /* polkit integration */
   GPermission        *permission;
 
@@ -253,8 +250,6 @@ bolt_client_ready (GObject      *source,
 
   self->client = client;
 
-  cc_bolt_device_dialog_set_client (self->device_dialog, client);
-
   cc_bolt_page_authmode_sync (self);
 
   g_object_bind_property (self->authmode_switch,
@@ -422,17 +417,9 @@ static void
 cc_bolt_page_del_device_entry (CcBoltPage        *self,
                                 CcBoltDeviceEntry *entry)
 {
-  BoltDevice *dev;
   GtkWidget *box;
   GtkWidget *p;
   gboolean show;
-
-  dev = cc_bolt_device_entry_get_device (entry);
-  if (cc_bolt_device_dialog_device_equal (self->device_dialog, dev))
-    {
-      gtk_window_close (GTK_WINDOW (self->device_dialog));
-      cc_bolt_device_dialog_set_device (self->device_dialog, NULL, NULL);
-    }
 
   p = gtk_widget_get_parent (GTK_WIDGET (entry));
   gtk_list_box_remove (GTK_LIST_BOX (p), GTK_WIDGET (entry));
@@ -711,6 +698,7 @@ on_device_entry_row_activated_cb (CcBoltPage    *self,
   BoltDevice *device;
   BoltDevice *iter;
   const char *parent;
+  CcBoltDeviceDialog *dialog;
 
   if (!CC_IS_BOLT_DEVICE_ENTRY (row))
     return;
@@ -745,10 +733,12 @@ on_device_entry_row_activated_cb (CcBoltPage    *self,
       parent = bolt_device_get_parent (iter);
     }
 
-  cc_bolt_device_dialog_set_device (self->device_dialog, device, parents);
 
-  gtk_window_set_default_size (GTK_WINDOW (self->device_dialog), 1, 1);
-  gtk_window_present (GTK_WINDOW (self->device_dialog));
+  dialog = cc_bolt_device_dialog_new ();
+  cc_bolt_device_dialog_set_client (dialog, self->client);
+  cc_bolt_device_dialog_set_device (dialog, device, parents);
+
+  adw_dialog_present (ADW_DIALOG (dialog), GTK_WIDGET (self));
 }
 
 static void
@@ -922,41 +912,11 @@ cc_bolt_page_finalize (GObject *object)
 }
 
 static void
-cc_bolt_page_dispose (GObject *object)
-{
-  CcBoltPage *self = CC_BOLT_PAGE (object);
-
-  /* Must be destroyed in dispose, not finalize. */
-  cc_bolt_device_dialog_set_device (self->device_dialog, NULL, NULL);
-
-  if (self->device_dialog != NULL) {
-    gtk_window_destroy (GTK_WINDOW (self->device_dialog));
-    self->device_dialog = NULL;
-  }
-
-  G_OBJECT_CLASS (cc_bolt_page_parent_class)->dispose (object);
-}
-
-static void
-cc_bolt_page_constructed (GObject *object)
-{
-  CcBoltPage *self = CC_BOLT_PAGE (object);
-  GtkWindow *parent;
-
-  G_OBJECT_CLASS (cc_bolt_page_parent_class)->constructed (object);
-
-  parent = GTK_WINDOW (gtk_widget_get_root (GTK_WIDGET (self)));
-  gtk_window_set_transient_for (GTK_WINDOW (self->device_dialog), parent);
-}
-
-static void
 cc_bolt_page_class_init (CcBoltPageClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
-  object_class->constructed = cc_bolt_page_constructed;
-  object_class->dispose = cc_bolt_page_dispose;
   object_class->finalize = cc_bolt_page_finalize;
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/privacy/bolt/cc-bolt-page.ui");
@@ -1003,8 +963,6 @@ cc_bolt_page_init (CcBoltPage *self)
                               NULL);
 
   self->devices = g_hash_table_new_full (g_str_hash, g_str_equal, NULL, NULL);
-
-  self->device_dialog = cc_bolt_device_dialog_new ();
 
   bolt_client_new_async (self->cancellable, bolt_client_ready, g_object_ref (self));
 }
