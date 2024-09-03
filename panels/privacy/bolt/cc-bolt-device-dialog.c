@@ -30,7 +30,7 @@
 
 struct _CcBoltDeviceDialog
 {
-  AdwWindow     parent;
+  AdwDialog     parent;
 
   BoltClient   *client;
   BoltDevice   *device;
@@ -57,7 +57,7 @@ struct _CcBoltDeviceDialog
 static void     on_forget_button_clicked_cb (CcBoltDeviceDialog *dialog);
 static void     on_connect_button_clicked_cb (CcBoltDeviceDialog *dialog);
 
-G_DEFINE_TYPE (CcBoltDeviceDialog, cc_bolt_device_dialog, ADW_TYPE_WINDOW);
+G_DEFINE_TYPE (CcBoltDeviceDialog, cc_bolt_device_dialog, ADW_TYPE_DIALOG);
 
 #define RESOURCE_UI "/org/gnome/control-center/privacy/bolt/cc-bolt-device-dialog.ui"
 
@@ -138,7 +138,7 @@ dialog_update_from_device (CcBoltDeviceDialog *dialog)
       label = generated;
     }
 
-  gtk_window_set_title (GTK_WINDOW (dialog), label);
+  adw_dialog_set_title (ADW_DIALOG (dialog), label);
 
   status_brief = status_to_string_for_ui (dev);
   adw_action_row_set_subtitle (dialog->status_row, status_brief);
