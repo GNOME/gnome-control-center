@@ -23,50 +23,9 @@
         </child>
 
         <property name="content">
-          <object class="GtkOverlay">
-            <child type="overlay">
-              <object class="GtkRevealer" id="notification_revealer">
-                <property name="halign">center</property>
-                <property name="valign">start</property>
-                <property name="transition_type">slide-down</property>
-                <child>
-                  <object class="GtkFrame">
-                    <child>
-                      <object class="GtkBox">
-                        <property name="spacing">12</property>
-                        <child>
-                          <object class="GtkLabel" id="notification_label">
-                            <property name="use_markup">True</property>
-                            <property name="wrap">True</property>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="GtkButton">
-                            <property name="can_focus">True</property>
-                            <property name="icon-name">cross-small-symbolic</property>
-                            <accessibility>
-                              <property name="label" translatable="yes">Close notification</property>
-                            </accessibility>
-                            <style>
-                              <class name="flat" />
-                            </style>
-                            <signal name="clicked"
-                                    handler="on_notification_button_clicked_cb"
-                                    object="CcBoltPage"
-                                    swapped="yes" />
-                          </object>
-                        </child>
-                      </object>
-                    </child>
-                    <style>
-                      <class name="app-notification" />
-                    </style>
-                  </object>
-                </child>
-              </object>
-            </child>
+          <object class="AdwToastOverlay" id="toast_overlay">
 
-            <child>
+            <property name="child">
               <object class="GtkStack" id="container">
                 <property name="hhomogeneous">False</property>
                 <property name="vhomogeneous">False</property>
@@ -264,7 +223,7 @@
 
                 <!-- End of 'container' -->
               </object>
-            </child>
+            </property>
 
             <!-- End of overlay -->
           </object>

@@ -49,8 +49,7 @@ struct _CcBoltPage
   AdwStatusPage      *notb_page;
 
   /* notifications */
-  GtkLabel           *notification_label;
-  GtkRevealer        *notification_revealer;
+  AdwToastOverlay    *toast_overlay;
 
   /* authmode */
   AdwSpinner         *authmode_spinner;
@@ -125,10 +124,6 @@ static void     on_device_entry_row_activated_cb (CcBoltPage    *self,
 static void     on_device_entry_status_changed_cb (CcBoltDeviceEntry *entry,
                                                    BoltStatus         new_status,
                                                    CcBoltPage        *self);
-
-static void     on_notification_button_clicked_cb (CcBoltPage *self);
-
-
 /* polkit */
 static void      on_permission_ready (GObject      *source_object,
                                       GAsyncResult *res,
@@ -665,7 +660,7 @@ on_authmode_ready (GObject      *source_object,
     }
   else
     {
-      g_autofree char *text = NULL;
+      AdwToast *toast;
 
       g_warning ("Could not set authmode: %s", error->message);
 
@@ -673,9 +668,8 @@ on_authmode_ready (GObject      *source_object,
         return;
 
       self = CC_BOLT_PAGE (user_data);
-      text = g_strdup_printf (_("Error switching direct mode: %s"), error->message);
-      gtk_label_set_markup (self->notification_label, text);
-      gtk_revealer_set_reveal_child (self->notification_revealer, TRUE);
+      toast = adw_toast_new_format (_("Error switching direct mode: %s"), error->message);
+      adw_toast_overlay_add_toast (self->toast_overlay, toast);
 
       /* make sure we are reflecting the correct state */
       cc_bolt_page_authmode_sync (self);
@@ -789,13 +783,6 @@ on_device_entry_status_changed_cb (CcBoltDeviceEntry *entry,
 
   if (from && to)
     cc_panel_list_box_migrate (self, from, to, entry);
-}
-
-
-static void
-on_notification_button_clicked_cb (CcBoltPage *self)
-{
-  gtk_revealer_set_reveal_child (self->notification_revealer, FALSE);
 }
 
 /* polkit */
@@ -978,12 +965,10 @@ cc_bolt_page_class_init (CcBoltPageClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcBoltPage, headerbar_box);
   gtk_widget_class_bind_template_child (widget_class, CcBoltPage, lock_button);
   gtk_widget_class_bind_template_child (widget_class, CcBoltPage, notb_page);
-  gtk_widget_class_bind_template_child (widget_class, CcBoltPage, notification_label);
-  gtk_widget_class_bind_template_child (widget_class, CcBoltPage, notification_revealer);
   gtk_widget_class_bind_template_child (widget_class, CcBoltPage, pending_box);
   gtk_widget_class_bind_template_child (widget_class, CcBoltPage, pending_list);
+  gtk_widget_class_bind_template_child (widget_class, CcBoltPage, toast_overlay);
 
-  gtk_widget_class_bind_template_callback (widget_class, on_notification_button_clicked_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_authmode_state_set_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_device_entry_row_activated_cb);
 }
