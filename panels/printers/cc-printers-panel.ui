@@ -89,7 +89,6 @@
                                     <child>
                                       <object class="GtkListBox" id="content">
                                         <property name="selection-mode">none</property>
-                                        <property name="valign">start</property>
                                         <property name="margin-top">24</property>
                                         <property name="margin-bottom">24</property>
                                         <property name="margin-start">12</property>
@@ -97,6 +96,13 @@
                                         <style>
                                           <class name="boxed-list-separate"/>
                                         </style>
+                                        <child type="placeholder">
+                                          <object class="AdwStatusPage">
+                                            <property name="icon-name">edit-find-symbolic</property>
+                                            <property name="title" translatable="yes">No Results Found</property>
+                                            <property name="description" translatable="yes">Try a different search</property>
+                                          </object>
+                                        </child>
                                       </object>
                                     </child>
                                   </object>
