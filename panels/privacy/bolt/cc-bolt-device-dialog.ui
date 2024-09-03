@@ -5,9 +5,8 @@
     <property name="content-width">480</property>
     <property name="content-height">360</property>
     <child>
-      <object class="GtkBox">
-        <property name="orientation">vertical</property>
-        <child>
+      <object class="AdwToolbarView">
+        <child type="top">
           <object class="AdwHeaderBar"/>
         </child>
         <child>
@@ -51,56 +50,42 @@
                     </child>
                   </object>
                 </child>
-              </object>
-            </child>
-          </object>
-        </child>
-        <child>
-          <object class="GtkBox" id="button_box">
-            <property name="orientation">horizontal</property>
-            <property name="spacing">12</property>
-            <property name="margin-start">72</property>
-            <property name="margin-end">72</property>
-            <property name="margin-top">36</property>
-            <property name="margin-bottom">0</property>
-            <property name="hexpand">True</property>
-            <child>
-              <object class="AdwSpinner" id="spinner">
-                <property name="visible">False</property>
-              </object>
-            </child>
+                <child>
+                  <object class="AdwPreferencesGroup">
+                    <child>
+                      <object class="AdwSpinner" id="spinner">
+                        <property name="visible">False</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="AdwButtonRow" id="connect_button">
+                        <property name="title" translatable="yes">Authorize and Connect</property>
+                        <property name="receives_default">True</property>
 
-            <child>
-              <object class="GtkButton" id="connect_button">
-                <property name="hexpand">True</property>
-                <property name="label" translatable="yes">Authorize and Connect</property>
-                <property name="receives_default">True</property>
-
-                <signal name="clicked"
-                        handler="on_connect_button_clicked_cb"
-                        object="CcBoltDeviceDialog"
-                        swapped="yes" />
-                <style>
-                  <class name="suggested-action"/>
-                </style>
-              </object>
-            </child>
-            <child>
-              <object class="GtkButton" id="forget_button">
-                <property name="hexpand">True</property>
-                <property name="label" translatable="yes">Forget Device</property>
-                <property name="receives_default">False</property>
-                <signal name="clicked"
-                        handler="on_forget_button_clicked_cb"
-                        object="CcBoltDeviceDialog"
-                        swapped="yes" />
-                <style>
-                  <class name="destructive-action"/>
-                </style>
-              </object>
-            </child>
-            <child>
-              <object class="GtkBox" id="spinner_box">
+                        <signal name="activated"
+                                handler="on_connect_button_clicked_cb"
+                                object="CcBoltDeviceDialog"
+                                swapped="yes" />
+                        <style>
+                          <class name="suggested-action"/>
+                        </style>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="AdwButtonRow" id="forget_button">
+                        <property name="title" translatable="yes">Forget Device</property>
+                        <property name="receives_default">False</property>
+                        <signal name="activated"
+                                handler="on_forget_button_clicked_cb"
+                                object="CcBoltDeviceDialog"
+                                swapped="yes" />
+                        <style>
+                          <class name="destructive-action"/>
+                        </style>
+                      </object>
+                    </child>
+                  </object>
+                </child>
               </object>
             </child>
           </object>
@@ -108,19 +93,4 @@
       </object>
     </child>
   </template>
-
-  <object class="GtkSizeGroup" id="actions_sizegroup">
-    <widgets>
-      <widget name="forget_button"/>
-      <widget name="connect_button"/>
-    </widgets>
-  </object>
-
-  <object class="GtkSizeGroup" id="spinner_sizegroup">
-    <widgets>
-      <widget name="spinner"/>
-      <widget name="spinner_box"/>
-    </widgets>
-  </object>
-
 </interface>
