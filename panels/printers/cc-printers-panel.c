@@ -829,8 +829,9 @@ actualize_printers_list_cb (GObject      *source_object,
     {
       GtkWidget *next = gtk_widget_get_next_sibling (child);
 
-      if (remove_nonexisting_entry (self, PP_PRINTER_ENTRY (child)))
-        gtk_list_box_remove (self->content, child);
+      if (PP_IS_PRINTER_ENTRY (child))
+        if (remove_nonexisting_entry (self, PP_PRINTER_ENTRY (child)))
+          gtk_list_box_remove (self->content, child);
 
       child = next;
     }
