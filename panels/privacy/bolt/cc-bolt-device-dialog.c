@@ -48,7 +48,6 @@ struct _CcBoltDeviceDialog
   GtkListBox *parents_devices;
 
   /* actions */
-  GtkWidget  *button_box;
   AdwSpinner *spinner;
   GtkButton  *connect_button;
   GtkButton  *forget_button;
@@ -366,7 +365,6 @@ cc_bolt_device_dialog_class_init (CcBoltDeviceDialogClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcBoltDeviceDialog, parents_devices);
   gtk_widget_class_bind_template_child (widget_class, CcBoltDeviceDialog, parents_group);
 
-  gtk_widget_class_bind_template_child (widget_class, CcBoltDeviceDialog, button_box);
   gtk_widget_class_bind_template_child (widget_class, CcBoltDeviceDialog, spinner);
   gtk_widget_class_bind_template_child (widget_class, CcBoltDeviceDialog, connect_button);
   gtk_widget_class_bind_template_child (widget_class, CcBoltDeviceDialog, forget_button);
