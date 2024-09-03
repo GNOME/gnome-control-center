@@ -6,15 +6,12 @@ template $CcBoltDeviceDialog: Adw.Dialog {
   content-width: 480;
   content-height: 360;
 
-  child: Box {
-    orientation: vertical;
+  Adw.ToolbarView {
+    [top]
+    Adw.HeaderBar {}
 
-    Adw.HeaderBar {
-      show-end-title-buttons: true;
-    }
-
-    Adw.ToastOverlay toast_overlay {
-      Adw.PreferencesPage {
+    content: Adw.ToastOverlay toast_overlay {
+      child: Adw.PreferencesPage {
         Adw.PreferencesGroup {
           Adw.ActionRow status_row {
             title: _("Status");
@@ -47,59 +44,33 @@ template $CcBoltDeviceDialog: Adw.Dialog {
 
           ListBox parents_devices {}
         }
-      }
-    }
 
-    Box button_box {
-      orientation: horizontal;
-      spacing: 12;
-      margin-start: 72;
-      margin-end: 72;
-      margin-top: 36;
-      margin-bottom: 0;
-      hexpand: true;
+        Adw.PreferencesGroup {
+          Adw.Spinner spinner {
+            visible: false;
+          }
 
-      Adw.Spinner spinner {
-        visible: false;
-      }
+          Adw.ButtonRow connect_button {
+            title: _("Authorize and Connect");
+            receives-default: true;
+            activated => $on_connect_button_clicked_cb(template);
 
-      Button connect_button {
-        hexpand: true;
-        label: _("Authorize and Connect");
-        receives-default: true;
-        clicked => $on_connect_button_clicked_cb(template);
+            styles [
+              "suggested-action",
+            ]
+          }
 
-        styles [
-          "suggested-action",
-        ]
-      }
+          Adw.ButtonRow forget_button {
+            title: _("Forget Device");
+            receives-default: false;
+            activated => $on_forget_button_clicked_cb(template);
 
-      Button forget_button {
-        hexpand: true;
-        label: _("Forget Device");
-        receives-default: false;
-        clicked => $on_forget_button_clicked_cb(template);
-
-        styles [
-          "destructive-action",
-        ]
-      }
-
-      Box spinner_box {}
-    }
-  };
-}
-
-SizeGroup actions_sizegroup {
-  widgets [
-    forget_button,
-    connect_button,
-  ]
-}
-
-SizeGroup spinner_sizegroup {
-  widgets [
-    spinner,
-    spinner_box,
-  ]
+            styles [
+              "destructive-action",
+            ]
+          }
+        }
+      };
+    };
+  }
 }
