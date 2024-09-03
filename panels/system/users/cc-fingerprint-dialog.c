@@ -55,7 +55,7 @@ typedef enum {
 
 struct _CcFingerprintDialog
 {
-  GtkWindow parent_instance;
+  AdwDialog       parent_instance;
 
   GtkButton      *back_button;
   GtkButton      *cancel_button;
@@ -105,7 +105,7 @@ struct _CcFingerprintDialog
   - Devices hotplug (object manager)
  */
 
-G_DEFINE_TYPE (CcFingerprintDialog, cc_fingerprint_dialog, GTK_TYPE_WINDOW)
+G_DEFINE_TYPE (CcFingerprintDialog, cc_fingerprint_dialog, ADW_TYPE_DIALOG)
 
 enum {
   PROP_0,
@@ -1432,10 +1432,10 @@ done_button_clicked_cb (CcFingerprintDialog *self)
   enroll_stop (self);
 }
 
-static gboolean
-cc_fingerprint_dialog_close_request (GtkWindow *window)
+static void
+cc_fingerprint_dialog_close_attempt (AdwDialog *dialog)
 {
-  CcFingerprintDialog *self = CC_FINGERPRINT_DIALOG (window);
+  CcFingerprintDialog *self = CC_FINGERPRINT_DIALOG (dialog);
 
   cc_fingerprint_manager_update_state (self->manager, NULL, NULL);
 
@@ -1457,7 +1457,8 @@ cc_fingerprint_dialog_close_request (GtkWindow *window)
   g_cancellable_cancel (self->cancellable);
   g_clear_object (&self->cancellable);
 
-  return GTK_WINDOW_CLASS (cc_fingerprint_dialog_parent_class)->close_request (window);
+  adw_dialog_set_can_close (ADW_DIALOG (dialog), TRUE);
+  adw_dialog_close (ADW_DIALOG (dialog));
 }
 
 static void
@@ -1465,7 +1466,7 @@ cc_fingerprint_dialog_class_init (CcFingerprintDialogClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
-  GtkWindowClass *window_class = GTK_WINDOW_CLASS (klass);
+  AdwDialogClass *dialog_class = ADW_DIALOG_CLASS (klass);
 
   gtk_widget_class_add_binding_action (widget_class, GDK_KEY_Escape, 0, "window.close", NULL);
 
@@ -1476,7 +1477,7 @@ cc_fingerprint_dialog_class_init (CcFingerprintDialogClass *klass)
   object_class->get_property = cc_fingerprint_dialog_get_property;
   object_class->set_property = cc_fingerprint_dialog_set_property;
 
-  window_class->close_request = cc_fingerprint_dialog_close_request;
+  dialog_class->close_attempt = cc_fingerprint_dialog_close_attempt;
 
   properties[PROP_MANAGER] =
     g_param_spec_object ("fingerprint-manager",
