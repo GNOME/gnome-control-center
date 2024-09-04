@@ -1538,10 +1538,14 @@ gcm_prefs_device_expanded_changed_cb (CcColorPanel *self,
             cc_color_device_set_expanded (CC_COLOR_DEVICE (child), FALSE);
         }
       self->model_is_changing = FALSE;
+
+      gtk_list_box_select_row (self->list_box, GTK_LIST_BOX_ROW (widget));
     }
   else
     {
       self->list_box_filter = NULL;
+
+      gtk_list_box_unselect_row (self->list_box, GTK_LIST_BOX_ROW (widget));
     }
   gtk_list_box_invalidate_filter (self->list_box);
 }
