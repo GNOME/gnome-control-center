@@ -59,7 +59,8 @@
                     </child>
                     <child>
                       <object class="AdwButtonRow" id="connect_button">
-                        <property name="title" translatable="yes">Authorize and Connect</property>
+                        <property name="title" translatable="yes">_Authorize and Connect</property>
+                        <property name="use-underline">True</property>
                         <property name="receives_default">True</property>
 
                         <signal name="activated"
@@ -73,7 +74,8 @@
                     </child>
                     <child>
                       <object class="AdwButtonRow" id="forget_button">
-                        <property name="title" translatable="yes">Forget Device</property>
+                        <property name="title" translatable="yes">_Forget Device</property>
+                        <property name="use-underline">True</property>
                         <property name="receives_default">False</property>
                         <signal name="activated"
                                 handler="on_forget_button_clicked_cb"
