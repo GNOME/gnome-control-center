@@ -51,7 +51,8 @@ template $CcBoltDeviceDialog: Adw.Dialog {
           }
 
           Adw.ButtonRow connect_button {
-            title: _("Authorize and Connect");
+            title: _("_Authorize and Connect");
+            use-underline: true;
             receives-default: true;
             activated => $on_connect_button_clicked_cb(template);
 
@@ -61,7 +62,8 @@ template $CcBoltDeviceDialog: Adw.Dialog {
           }
 
           Adw.ButtonRow forget_button {
-            title: _("Forget Device");
+            title: _("_Forget Device");
+            use-underline: true;
             receives-default: false;
             activated => $on_forget_button_clicked_cb(template);
 
