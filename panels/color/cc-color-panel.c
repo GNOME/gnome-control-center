@@ -1003,26 +1003,31 @@ gcm_prefs_profile_view (CcColorPanel *self, CdProfile *profile)
     g_warning ("failed to run calibrate: %s", error->message);
 }
 
-static void
-gcm_prefs_profile_assign_link_activate_cb (CcColorPanel *self,
-                                           const gchar *uri)
+static gboolean
+gcm_prefs_profile_assign_link_activate_cb (CcColorPanel *self)
 {
-  CdProfile *profile;
-  GtkListBoxRow *row;
+  GtkTreeIter iter;
+  GtkTreeModel *model;
+  g_autoptr(CdProfile) profile = NULL;
+  GtkTreeSelection *selection;
 
   /* get the selected profile */
-  row = gtk_list_box_get_selected_row (self->list_box);
-  if (row == NULL)
-    return;
-  profile = cc_color_profile_get_profile (CC_COLOR_PROFILE (row));
+  selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (self->treeview_assign));
+  if (gtk_tree_selection_get_selected (selection, &model, &iter))
+    gtk_tree_model_get (model, &iter,
+                        GCM_PREFS_COMBO_COLUMN_PROFILE, &profile,
+                        -1);
+
   if (profile == NULL)
     {
-        g_warning ("failed to get the active profile");
-        return;
+      g_warning ("failed to get the selected profile");
+      return TRUE;
     }
 
   /* show it in the viewer */
   gcm_prefs_profile_view (self, profile);
+
+  return TRUE;
 }
 
 static void
