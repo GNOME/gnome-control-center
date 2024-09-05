@@ -629,23 +629,24 @@ do_filter (CcInputChooser *self)
 }
 
 static void
-on_filter_entry_search_changed_cb (CcInputChooser *self)
-{
-  if (self->filter_timeout_id == 0)
-    self->filter_timeout_id = g_timeout_add (FILTER_TIMEOUT, (GSourceFunc) do_filter, self);
-}
-
-static void
 show_more (CcInputChooser *self)
 {
   gtk_widget_set_visible (GTK_WIDGET (self->filter_entry), TRUE);
 
-  gtk_search_entry_set_key_capture_widget (self->filter_entry, GTK_WIDGET (self));
   gtk_widget_grab_focus (GTK_WIDGET (self->filter_entry));
 
   self->showing_extra = TRUE;
 
   gtk_list_box_invalidate_filter (self->input_sources_listbox);
+}
+
+static void
+on_filter_entry_search_changed_cb (CcInputChooser *self)
+{
+  if (self->filter_timeout_id == 0)
+    self->filter_timeout_id = g_timeout_add (FILTER_TIMEOUT, (GSourceFunc) do_filter, self);
+
+  show_more (self);
 }
 
 static void
@@ -1163,6 +1164,8 @@ void
 cc_input_chooser_init (CcInputChooser *self)
 {
   gtk_widget_init_template (GTK_WIDGET (self));
+
+  gtk_search_entry_set_key_capture_widget (self->filter_entry, GTK_WIDGET (self));
 }
 
 CcInputChooser *
