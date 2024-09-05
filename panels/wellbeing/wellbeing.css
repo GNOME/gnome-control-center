@@ -29,9 +29,25 @@ bar-chart bar-group {
   padding: 0 5px;
 }
 
+bar-chart bar-group:hover {
+  background-color: grey; /* TODO */
+}
+
 bar-chart bar {
   border-radius: 5px 5px 0 0;
   background-color: #62a0ea;
+}
+
+bar-chart bar-group:focus-within {
+  transition-property: outline, outline-width, outline-offset, outline-color;
+  transition-duration: 300ms;
+  animation-timing-function: ease-in-out;
+
+  outline-color: red; /* TODO, and dark/HC variants */
+  outline-width: 2px;
+  outline-offset: -2px;
+
+  background-color: red; /* TODO */
 }
 
 label.continuous-axis-label {

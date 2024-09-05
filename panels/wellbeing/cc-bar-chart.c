@@ -158,7 +158,14 @@ static void cc_bar_chart_measure (GtkWidget      *widget,
                                   int            *natural_baseline);
 static void cc_bar_chart_snapshot (GtkWidget   *widget,
                                    GtkSnapshot *snapshot);
+static gboolean cc_bar_chart_focus (GtkWidget        *widget,
+                                    GtkDirectionType  direction);
 
+static CcBarChartGroup *get_adjacent_focusable_group (CcBarChart      *self,
+                                                      CcBarChartGroup *group,
+                                                      int              direction);
+static CcBarChartGroup *get_first_focusable_group (CcBarChart *self);
+static CcBarChartGroup *get_last_focusable_group (CcBarChart *self);
 static void ensure_cached_grid_lines_and_labels (CcBarChart *self);
 static inline void calculate_axis_area_widths (CcBarChart *self,
                                                int        *out_left_axis_area_width,
@@ -192,6 +199,7 @@ cc_bar_chart_class_init (CcBarChartClass *klass)
   widget_class->size_allocate = cc_bar_chart_size_allocate;
   widget_class->measure = cc_bar_chart_measure;
   widget_class->snapshot = cc_bar_chart_snapshot;
+  widget_class->focus = cc_bar_chart_focus;
 
   /**
    * CcBarChart:selected-index:
@@ -756,6 +764,146 @@ cc_bar_chart_snapshot (GtkWidget   *widget,
 
       gsk_stroke_free (g_steal_pointer (&overlay_stroke));
     }
+}
+
+static gboolean
+cc_bar_chart_focus (GtkWidget        *widget,
+                    GtkDirectionType  direction)
+{
+  CcBarChart *self = CC_BAR_CHART (widget);
+  GtkWidget *focus_child;
+  CcBarChartGroup *next_focus_group = NULL;
+
+  focus_child = gtk_widget_get_focus_child (widget);
+
+  if (focus_child != NULL)
+    {
+      /* Can the focus move around inside the currently focused child widget? */
+      if (gtk_widget_child_focus (focus_child, direction))
+        return TRUE;
+
+      if (CC_IS_BAR_CHART_GROUP (focus_child) &&
+          (direction == GTK_DIR_LEFT || direction == GTK_DIR_TAB_BACKWARD))
+        next_focus_group = get_adjacent_focusable_group (self, CC_BAR_CHART_GROUP (focus_child), -1);
+      else if (CC_IS_BAR_CHART_GROUP (focus_child) &&
+               (direction == GTK_DIR_RIGHT || direction == GTK_DIR_TAB_FORWARD))
+        next_focus_group = get_adjacent_focusable_group (self, CC_BAR_CHART_GROUP (focus_child), 1);
+    }
+  else
+    {
+      /* No current focus group. If a group is selected, focus on that. Otherwise,
+       * focus on the first/last focusable group, depending on which direction
+       * we’re coming in from. */
+      if (self->selected_index_set)
+        next_focus_group = self->cached_groups->pdata[self->selected_index];
+
+      if (next_focus_group == NULL &&
+          (direction == GTK_DIR_UP || direction == GTK_DIR_LEFT || direction == GTK_DIR_TAB_BACKWARD))
+        next_focus_group = get_last_focusable_group (self);
+      else if (next_focus_group == NULL &&
+               (direction == GTK_DIR_DOWN || direction == GTK_DIR_RIGHT || direction == GTK_DIR_TAB_FORWARD))
+        next_focus_group = get_first_focusable_group (self);
+    }
+
+  if (next_focus_group == NULL)
+    {
+      if (direction == GTK_DIR_LEFT || direction == GTK_DIR_RIGHT)
+        {
+          if (gtk_widget_keynav_failed (widget, direction))
+            return TRUE;
+        }
+
+      return FALSE;
+    }
+
+  return gtk_widget_child_focus (GTK_WIDGET (next_focus_group), direction);
+}
+
+static gboolean
+find_index_for_group (CcBarChart      *self,
+                      CcBarChartGroup *group,
+                      unsigned int    *out_idx)
+{
+  g_assert (gtk_widget_is_ancestor (GTK_WIDGET (group), GTK_WIDGET (self)));
+  g_assert (self->cached_groups != NULL);
+
+  return g_ptr_array_find (self->cached_groups, group, out_idx);
+}
+
+static gboolean
+group_is_focusable (CcBarChartGroup *group)
+{
+  GtkWidget *widget = GTK_WIDGET (group);
+
+  return (gtk_widget_is_visible (widget) &&
+          gtk_widget_is_sensitive (widget) &&
+          gtk_widget_get_focusable (widget) &&
+          gtk_widget_get_can_focus (widget));
+}
+
+/* direction == -1 means get previous sensitive and visible group;
+ * direction == 1 means get next one. */
+static CcBarChartGroup *
+get_adjacent_focusable_group (CcBarChart      *self,
+                              CcBarChartGroup *group,
+                              int              direction)
+{
+  unsigned int group_idx, i;
+
+  g_assert (gtk_widget_is_ancestor (GTK_WIDGET (group), GTK_WIDGET (self)));
+  g_assert (self->cached_groups != NULL);
+  g_assert (direction == -1 || direction == 1);
+
+  if (!find_index_for_group (self, group, &group_idx))
+    return NULL;
+
+  i = group_idx;
+
+  while (!((direction == -1 && i == 0) ||
+           (direction == 1 && i >= self->cached_groups->len - 1)))
+    {
+      CcBarChartGroup *adjacent_group;
+
+      i += direction;
+      adjacent_group = self->cached_groups->pdata[i];
+
+      if (group_is_focusable (adjacent_group))
+        return adjacent_group;
+    }
+
+  return NULL;
+}
+
+static CcBarChartGroup *
+get_first_focusable_group (CcBarChart *self)
+{
+  g_assert (self->cached_groups != NULL);
+
+  for (unsigned int i = 0; i < self->cached_groups->len; i++)
+    {
+      CcBarChartGroup *group = self->cached_groups->pdata[i];
+
+      if (group_is_focusable (group))
+        return group;
+    }
+
+  return NULL;
+}
+
+static CcBarChartGroup *
+get_last_focusable_group (CcBarChart *self)
+{
+  g_assert (self->cached_groups != NULL);
+
+  for (unsigned int i = 0; i < self->cached_groups->len; i++)
+    {
+      CcBarChartGroup *group = self->cached_groups->pdata[self->cached_groups->len - 1 - i];
+
+      if (group_is_focusable (group))
+        return group;
+    }
+
+  return NULL;
 }
 
 static void

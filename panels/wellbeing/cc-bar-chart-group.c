@@ -99,6 +99,14 @@ static void cc_bar_chart_group_measure (GtkWidget      *widget,
                                         int            *natural,
                                         int            *minimum_baseline,
                                         int            *natural_baseline);
+static gboolean cc_bar_chart_group_focus (GtkWidget        *widget,
+                                          GtkDirectionType  direction);
+
+static CcBarChartBar *get_adjacent_focusable_bar (CcBarChartGroup *self,
+                                                  CcBarChartBar   *bar,
+                                                  int              direction);
+static CcBarChartBar *get_first_focusable_bar (CcBarChartGroup *self);
+static CcBarChartBar *get_last_focusable_bar (CcBarChartGroup *self);
 
 static void
 cc_bar_chart_group_class_init (CcBarChartGroupClass *klass)
@@ -112,6 +120,7 @@ cc_bar_chart_group_class_init (CcBarChartGroupClass *klass)
 
   widget_class->size_allocate = cc_bar_chart_group_size_allocate;
   widget_class->measure = cc_bar_chart_group_measure;
+  widget_class->focus = cc_bar_chart_group_focus;
 
   /**
    * CcBarChartGroup:is-selected:
@@ -341,6 +350,139 @@ cc_bar_chart_group_measure (GtkWidget      *widget,
     {
       g_assert_not_reached ();
     }
+}
+
+static gboolean
+cc_bar_chart_group_focus (GtkWidget        *widget,
+                          GtkDirectionType  direction)
+{
+  CcBarChartGroup *self = CC_BAR_CHART_GROUP (widget);
+  GtkWidget *focus_child;
+  CcBarChartBar *next_focus_bar = NULL;
+
+  focus_child = gtk_widget_get_focus_child (widget);
+
+  if (focus_child != NULL)
+    {
+      /* Can the focus move around inside the currently focused child widget? */
+      if (gtk_widget_child_focus (focus_child, direction))
+        return TRUE;
+
+      /* TODO Does this need reversing in RTL? */
+      if (CC_IS_BAR_CHART_BAR (focus_child) &&
+          (direction == GTK_DIR_LEFT || direction == GTK_DIR_TAB_BACKWARD))
+        next_focus_bar = get_adjacent_focusable_bar (self, CC_BAR_CHART_BAR (focus_child), -1);
+      else if (CC_IS_BAR_CHART_BAR (focus_child) &&
+               (direction == GTK_DIR_RIGHT || direction == GTK_DIR_TAB_FORWARD))
+        next_focus_bar = get_adjacent_focusable_bar (self, CC_BAR_CHART_BAR (focus_child), 1);
+    }
+  else
+    {
+      /* No current focus bar. If a bar is selected, focus on that. Otherwise,
+       * focus on the first/last focusable bar, depending on which direction
+       * we’re coming in from. */
+      if (self->selection_state == SELECTION_STATE_BAR)
+        next_focus_bar = self->bars->pdata[self->selected_bar_index];
+
+      if (next_focus_bar == NULL &&
+          (direction == GTK_DIR_UP || direction == GTK_DIR_LEFT || direction == GTK_DIR_TAB_BACKWARD))
+        next_focus_bar = get_last_focusable_bar (self);
+      else if (next_focus_bar == NULL &&
+               (direction == GTK_DIR_DOWN || direction == GTK_DIR_RIGHT || direction == GTK_DIR_TAB_FORWARD))
+        next_focus_bar = get_first_focusable_bar (self);
+    }
+
+  if (next_focus_bar == NULL)
+    return FALSE;
+
+  return gtk_widget_child_focus (GTK_WIDGET (next_focus_bar), direction);
+}
+
+static gboolean
+find_index_for_bar (CcBarChartGroup *self,
+                    CcBarChartBar   *bar,
+                    unsigned int    *out_idx)
+{
+  g_assert (gtk_widget_is_ancestor (GTK_WIDGET (bar), GTK_WIDGET (self)));
+  g_assert (self->bars != NULL);
+
+  return g_ptr_array_find (self->bars, bar, out_idx);
+}
+
+static gboolean
+bar_is_focusable (CcBarChartBar *bar)
+{
+  GtkWidget *widget = GTK_WIDGET (bar);
+
+  return (gtk_widget_is_visible (widget) &&
+          gtk_widget_is_sensitive (widget) &&
+          gtk_widget_get_focusable (widget) &&
+          gtk_widget_get_can_focus (widget));
+}
+
+/* direction == -1 means get previous sensitive and visible bar;
+ * direction == 1 means get next one. */
+static CcBarChartBar *
+get_adjacent_focusable_bar (CcBarChartGroup *self,
+                            CcBarChartBar   *bar,
+                            int              direction)
+{
+  unsigned int bar_idx, i;
+
+  g_assert (gtk_widget_is_ancestor (GTK_WIDGET (bar), GTK_WIDGET (self)));
+  g_assert (self->bars != NULL);
+  g_assert (direction == -1 || direction == 1);
+
+  if (!find_index_for_bar (self, bar, &bar_idx))
+    return NULL;
+
+  i = bar_idx;
+
+  while (!((direction == -1 && i == 0) ||
+           (direction == 1 && i >= self->bars->len - 1)))
+    {
+      CcBarChartBar *adjacent_bar;
+
+      i += direction;
+      adjacent_bar = self->bars->pdata[i];
+
+      if (bar_is_focusable (adjacent_bar))
+        return adjacent_bar;
+    }
+
+  return NULL;
+}
+
+static CcBarChartBar *
+get_first_focusable_bar (CcBarChartGroup *self)
+{
+  g_assert (self->bars != NULL);
+
+  for (unsigned int i = 0; i < self->bars->len; i++)
+    {
+      CcBarChartBar *bar = self->bars->pdata[i];
+
+      if (bar_is_focusable (bar))
+        return bar;
+    }
+
+  return NULL;
+}
+
+static CcBarChartBar *
+get_last_focusable_bar (CcBarChartGroup *self)
+{
+  g_assert (self->bars != NULL);
+
+  for (unsigned int i = 0; i < self->bars->len; i++)
+    {
+      CcBarChartBar *bar = self->bars->pdata[self->bars->len - 1 - i];
+
+      if (bar_is_focusable (bar))
+        return bar;
+    }
+
+  return NULL;
 }
 
 /**
