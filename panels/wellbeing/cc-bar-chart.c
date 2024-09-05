@@ -71,14 +71,16 @@
  * bar-chart
  * ├── label.discrete-axis-label
  * ├── label.continuous-axis-label
- * ╰── bar-group
- *     ╰── bar
+ * ╰── bar-group[:hover][:selected]
+ *     ╰── bar[:hover][:selected]
  * ]|
  *
  * #CcBarChart uses a single CSS node named `bar-chart`. Each bar group is a
- * sub-node named `bar-group`, with `bar` sub-nodes beneath it. Axis labels are
- * `label` sub-nodes, with either a `.discrete-axis-label` or
- * `.continuous-axis-label` class.
+ * sub-node named `bar-group`, with `bar` sub-nodes beneath it. Bars and groups
+ * may have `:hover` or `:selected` pseudo-selectors to indicate whether they
+ * are selected or being hovered over with the mouse. Axis labels are `label`
+ * sub-nodes, with either a `.discrete-axis-label` or `.continuous-axis-label`
+ * class.
  */
 struct _CcBarChart {
   GtkWidget parent_instance;

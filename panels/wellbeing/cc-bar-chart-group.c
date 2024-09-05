@@ -44,12 +44,14 @@
  * # CSS nodes
  *
  * |[<!-- language="plain" -->
- * bar-group
- * ╰── bar
+ * bar-group[:hover][:selected]
+ * ╰── bar[:hover][:selected]
  * ]|
  *
  * #CcBarChartGroup uses a single CSS node named `bar-group`. Each bar is a
- * sub-node named `bar`.
+ * sub-node named `bar`. Bars and groups may have `:hover` or `:selected`
+ * pseudo-selectors to indicate whether they are selected or being hovered over
+ * with the mouse.
  */
 struct _CcBarChartGroup {
   GtkWidget parent_instance;
@@ -594,6 +596,35 @@ cc_bar_chart_group_remove_bar (CcBarChartGroup *self,
   gtk_widget_queue_resize (GTK_WIDGET (self));
 }
 
+static void
+set_or_unset_selection_state_flags (CcBarChartGroup *self,
+                                    gboolean         set)
+{
+  GtkWidget *selected_widget;
+
+  switch (self->selection_state)
+    {
+    case SELECTION_STATE_BAR:
+      selected_widget = GTK_WIDGET (self->bars->pdata[self->selected_bar_index]);
+      break;
+    case SELECTION_STATE_GROUP:
+      selected_widget = GTK_WIDGET (self);
+      break;
+    case SELECTION_STATE_NONE:
+    default:
+      selected_widget = NULL;
+      break;
+    }
+
+  if (selected_widget != NULL)
+    {
+      if (set)
+        gtk_widget_set_state_flags (selected_widget, GTK_STATE_FLAG_SELECTED, FALSE);
+      else
+        gtk_widget_unset_state_flags (selected_widget, GTK_STATE_FLAG_SELECTED);
+    }
+}
+
 /**
  * cc_bar_chart_group_get_is_selected:
  * @self: a #CcBarChartGroup
@@ -626,7 +657,10 @@ cc_bar_chart_group_set_is_selected (CcBarChartGroup *self,
   if ((self->selection_state == SELECTION_STATE_GROUP) == is_selected)
     return;
 
+  /* Update state and flags. */
+  set_or_unset_selection_state_flags (self, FALSE);
   self->selection_state = is_selected ? SELECTION_STATE_GROUP : SELECTION_STATE_NONE;
+  set_or_unset_selection_state_flags (self, TRUE);
 
   /* Re-render */
   gtk_widget_queue_draw (GTK_WIDGET (self));
@@ -689,8 +723,13 @@ cc_bar_chart_group_set_selected_index (CcBarChartGroup *self,
       (!is_selected && self->selection_state == SELECTION_STATE_NONE))
     return;
 
+  /* Update state and flags. */
+  set_or_unset_selection_state_flags (self, FALSE);
+
   self->selection_state = is_selected ? SELECTION_STATE_BAR : SELECTION_STATE_NONE;
   self->selected_bar_index = is_selected ? idx : 0;
+
+  set_or_unset_selection_state_flags (self, TRUE);
 
   /* Re-render */
   gtk_widget_queue_draw (GTK_WIDGET (self));

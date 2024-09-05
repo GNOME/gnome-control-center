@@ -40,10 +40,12 @@
  * # CSS nodes
  *
  * |[<!-- language="plain" -->
- * bar
+ * bar[:hover][:selected]
  * ]|
  *
- * #CcBarChartBar uses a single CSS node named `bar`.
+ * #CcBarChartBar uses a single CSS node named `bar`. A bar may have a `:hover`
+ * or `:selected` pseudo-selector to indicate whether it’s selected or being
+ * hovered over with the mouse.
  */
 struct _CcBarChartBar {
   GtkWidget parent_instance;
