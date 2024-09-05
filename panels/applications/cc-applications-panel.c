@@ -1434,6 +1434,7 @@ update_panel (CcApplicationsPanel *self,
               GtkListBoxRow       *row)
 {
   GAppInfo *info;
+  gboolean is_epiphany_webapp;
 
   if (self->perm_store == NULL)
     {
@@ -1453,7 +1454,6 @@ update_panel (CcApplicationsPanel *self,
   adw_navigation_page_set_title (self->app_settings_page,
                                  g_app_info_get_display_name (info));
   cc_panel_push_subpage (CC_PANEL (self), self->app_settings_page);
-  gtk_widget_set_visible (GTK_WIDGET (self->view_details_button), gnome_software_is_installed ());
 
   g_clear_pointer (&self->current_app_id, g_free);
   g_clear_pointer (&self->current_portal_app_id, g_free);
@@ -1470,6 +1470,11 @@ update_panel (CcApplicationsPanel *self,
   /* Don't show the "Open" button for Settings itself. */
   gtk_widget_set_visible (GTK_WIDGET (self->launch_button),
                           g_strcmp0 (self->current_app_id, APPLICATION_ID) != 0);
+
+  /* Don't show "View Details" button when GNOME Software can't handle app type. */
+  is_epiphany_webapp = g_str_has_prefix (self->current_app_id, "org.gnome.Epiphany.WebApp_");
+  gtk_widget_set_visible (GTK_WIDGET (self->view_details_button),
+                          gnome_software_is_installed () && !is_epiphany_webapp);
 }
 
 
