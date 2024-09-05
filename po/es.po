@@ -22,8 +22,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2024-09-01 06:20+0000\n"
-"PO-Revision-Date: 2024-09-02 10:01+0200\n"
+"POT-Creation-Date: 2024-09-02 08:23+0000\n"
+"PO-Revision-Date: 2024-09-05 13:24+0200\n"
 "Last-Translator: Daniel Mustieles García <daniel.mustieles@gmail.com>\n"
 "Language-Team: Spanish - Spain <gnome-es-list@gnome.org>\n"
 "Language: es_ES\n"
@@ -158,7 +158,7 @@ msgstr "Aplicaciones pre_determinadas"
 
 #: panels/applications/cc-applications-panel.ui:50
 msgid "Set which apps open links, files, and media"
-msgstr ""
+msgstr "Establecer qué aplicaciones abren enlaces, archivos y medios"
 
 #: panels/applications/cc-applications-panel.ui:84
 #: panels/keyboard/cc-keyboard-shortcut-dialog.ui:94
@@ -371,7 +371,7 @@ msgstr "Permisos re_queridos"
 
 #: panels/applications/cc-applications-panel.ui:404
 msgid "System permissions that the app requires"
-msgstr ""
+msgstr "Permisos del sistema requeridos por la aplicación"
 
 #: panels/applications/cc-applications-panel.ui:415
 #: panels/mouse/cc-mouse-panel.ui:67 panels/mouse/cc-mouse-panel.ui:201
@@ -870,7 +870,7 @@ msgstr "Azul"
 
 #: panels/background/cc-background-panel.c:138
 msgid "Teal"
-msgstr ""
+msgstr "Verde azulado"
 
 #: panels/background/cc-background-panel.c:140
 msgid "Green"
@@ -898,7 +898,7 @@ msgstr "Morado"
 
 #: panels/background/cc-background-panel.c:152
 msgid "Slate"
-msgstr ""
+msgstr "Color pizarra"
 
 #: panels/background/cc-background-panel.c:338
 msgid "Current background"
@@ -918,7 +918,7 @@ msgstr "O_scuro"
 
 #: panels/background/cc-background-panel.ui:127
 msgid "Accent color"
-msgstr ""
+msgstr "Color de resaltado"
 
 #: panels/background/cc-background-panel.ui:137
 msgid "Background"
@@ -1271,13 +1271,11 @@ msgstr "aprender más"
 
 #. Translators: %s is a link to the documentation with the label "learn more"
 #: panels/color/cc-color-panel.c:2001
-#, fuzzy, c-format
-#| msgid ""
-#| "Each device needs an up to date color profile to be color managed. %s"
+#, c-format
 msgid "Each device needs an up to date color profile to be color managed — %s."
 msgstr ""
 "Cada dispositivo necesita un perfil de color actualizado para poder "
-"gestionar el color. %s"
+"gestionar el color — %s"
 
 #: panels/color/cc-color-panel.ui:4 panels/wacom/calibrator/calibrator.ui:40
 msgid "Screen Calibration"
@@ -1943,7 +1941,7 @@ msgstr "Izquierda"
 #: panels/display/cc-display-settings.c:172
 msgctxt "Display rotation"
 msgid "Flipped"
-msgstr ""
+msgstr "Volteada"
 
 #: panels/display/cc-display-settings.c:238
 msgid "%.2lf Hz"
@@ -3179,6 +3177,8 @@ msgid ""
 "Scan with another device to connect to the hotspot.\n"
 "Turn off the hotspot to use Wi-Fi with this device."
 msgstr ""
+"Escanear con otro dispositivo para conectar al punto de acceso.\n"
+"Apague el punto de acceso para usar la red inalámbrica con este dispositivo."
 
 #: panels/network/cc-wifi-panel.ui:156
 msgid "T_urn Off Hotspot…"
@@ -3262,7 +3262,7 @@ msgstr "Estable"
 
 #: panels/network/connection-editor/ce-page.c:243
 msgid "Stable per SSID"
-msgstr ""
+msgstr "Estable por SSID"
 
 #: panels/network/connection-editor/ce-page.c:251
 msgid ""
@@ -4384,11 +4384,11 @@ msgstr "_Sonido"
 
 #: panels/notifications/cc-app-notifications-page.ui:25
 msgid "Allow notification sounds from app"
-msgstr ""
+msgstr "Permitir sonidos de notificaciones de aplicaciones"
 
 #: panels/notifications/cc-app-notifications-page.ui:33
 msgid "Banners"
-msgstr ""
+msgstr "Banners"
 
 #: panels/notifications/cc-app-notifications-page.ui:37
 msgctxt "notifications"
@@ -4407,7 +4407,7 @@ msgstr "Mostrar c_ontenido"
 
 #: panels/notifications/cc-app-notifications-page.ui:46
 msgid "Include message details in notification banners"
-msgstr ""
+msgstr "Incluir detalles de mensajes en los banners de notificación"
 
 #: panels/notifications/cc-app-notifications-page.ui:54
 msgid "Lock Screen"
@@ -5923,16 +5923,13 @@ msgstr "Estado de la seguridad del hardware e información"
 
 #. translators: The first '%s' is the distributor's name, such as 'Fedora', the second '%s' is a link to the privacy policy
 #: panels/privacy/diagnostics/cc-diagnostics-page.c:125
-#, fuzzy, c-format
-#| msgid ""
-#| "Sending reports of technical problems helps us improve %s. Reports are "
-#| "sent anonymously and are scrubbed of personal data – %s."
+#, c-format
 msgid ""
 "Sending reports of technical problems helps us improve %s. Reports are sent "
 "anonymously and are scrubbed of personal data — %s."
 msgstr ""
 "Enviar informes de problemas técnicos ayuda a mejorar %s. Los informes se "
-"envían anónimamente y no contienen datos personales - %s"
+"envían anónimamente y no contienen datos personales — %s"
 
 #. translators: The '%s' is the distributor's name, such as 'Fedora'
 #: panels/privacy/diagnostics/cc-diagnostics-page.c:130
@@ -6051,14 +6048,6 @@ msgstr "Fallaron las comprobaciones de seguridad"
 #. TRANSLATORS: This is the description to describe the failure on
 #. checking the security items.
 #: panels/privacy/firmware-security/cc-firmware-security-dialog.c:111
-#, fuzzy
-#| msgid ""
-#| "Hardware does not pass checks. This means that you are not protected "
-#| "against common hardware security issues.\n"
-#| "\n"
-#| "It may be possible to resolve hardware security issues by updating your "
-#| "firmware or changing device configuration options. However, failures can "
-#| "stem from the physical hardware itself, and may not be reversible."
 msgid ""
 "Hardware does not pass checks. This means that you are not protected against "
 "common hardware security issues.\n"
@@ -6077,10 +6066,8 @@ msgstr ""
 #. TRANSLATORS: in reference to firmware protection: 1/4 stars
 #: panels/privacy/firmware-security/cc-firmware-security-dialog.c:121
 #: panels/privacy/firmware-security/cc-firmware-security-page.c:539
-#, fuzzy
-#| msgid "Basic Security Protections"
 msgid "Basic Security Checks Passed"
-msgstr "Protección de seguridad básica"
+msgstr "Comprobaciones de seguridad básica superadas"
 
 #. TRANSLATORS: This description describes the device passing the
 #. minimum requirement of security check.
@@ -6116,16 +6103,12 @@ msgstr "Comprobaciones no disponibles"
 
 #. TRANSLATORS: When the security result is unavailable, this description is shown.
 #: panels/privacy/firmware-security/cc-firmware-security-dialog.c:146
-#, fuzzy
-#| msgid ""
-#| "Device security checks are not available for this device. It is not "
-#| "possible to tell whether it meets security requirements."
 msgid ""
 "Device security checks are not available for this device. It is not possible "
 "to tell whether it meets hardware security requirements."
 msgstr ""
 "Las comprobaciones de seguridad no están disponibles para este dispositivo. "
-"No es posible decir si cumple los requisitos de seguridad."
+"No es posible decir si cumple los requisitos de seguridad hardware."
 
 #: panels/privacy/firmware-security/cc-firmware-security-dialog.c:366
 msgid "Report copied to clipboard"
@@ -6393,6 +6376,7 @@ msgstr "Ubicación _automática del dispositivo"
 #: panels/privacy/location/cc-location-page.ui:18
 msgid "Use sources like GPS and cellular to determine device location"
 msgstr ""
+"Usar fuentes como GPS y móvil para determinar la ubicación del dispositivo"
 
 #: panels/privacy/location/cc-location-page.ui:28
 msgid ""
@@ -6703,16 +6687,13 @@ msgstr "_Añadir carpeta"
 
 #. Translators: %s is the hostname of the user's device
 #: panels/sharing/cc-sharing-panel.c:603
-#, fuzzy, c-format
-#| msgid ""
-#| "File Sharing allows you to share your Public folder with others on your "
-#| "current network using: %s"
+#, c-format
 msgid ""
 "File sharing allows sharing the Public folder with other devices on the "
 "current network. This device will be visible as “%s”."
 msgstr ""
 "Compartir archivos personales le permite compartir su carpeta «Público» con "
-"otros en su red actual usando: %s"
+"otros en su red actual usando. Este dispositivo será visible como «%s»"
 
 #: panels/sharing/cc-sharing-panel.ui:16
 #: panels/system/about/cc-about-page.ui:41
@@ -7716,6 +7697,8 @@ msgid ""
 "Usernames can only include lower case letters, numbers, hyphens and "
 "underscores."
 msgstr ""
+"Los nombres de usuario sólo pueden contener minúsculas, número, guiones y "
+"guiones bajos"
 
 #: panels/system/users/cc-add-user-dialog.ui:107
 msgid "User sets password on _first login"
@@ -8459,7 +8442,7 @@ msgstr "El nombre de usuario no puede incluir «%c»"
 
 #: panels/system/users/user-utils.c:152
 msgid "Username is already in use — please choose another"
-msgstr ""
+msgstr "El nombre de usuario ya está en uso — elija otro"
 
 #: panels/system/users/user-utils.c:195
 #, c-format
@@ -8725,7 +8708,7 @@ msgstr "Efectos de _animación"
 
 #: panels/universal-access/cc-ua-seeing-page.ui:46
 msgid "Toggle animation effects throughout the user interface"
-msgstr ""
+msgstr "Conmutar los efectos de animación mediante la interfaz del usuario"
 
 #: panels/universal-access/cc-ua-seeing-page.ui:51
 msgid ""
