@@ -52,6 +52,11 @@
  * sub-node named `bar`. Bars and groups may have `:hover` or `:selected`
  * pseudo-selectors to indicate whether they are selected or being hovered over
  * with the mouse.
+ *
+ * # Accessibility
+ *
+ * #CcBarChartGroup uses the %GTK_ACCESSIBLE_ROLE_GROUP role and #CcBarChartBar
+ * uses the %GTK_ACCESSIBLE_ROLE_LIST_ITEM role.
  */
 struct _CcBarChartGroup {
   GtkWidget parent_instance;
@@ -184,6 +189,7 @@ cc_bar_chart_group_class_init (CcBarChartGroupClass *klass)
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/wellbeing/cc-bar-chart-group.ui");
 
   gtk_widget_class_set_css_name (widget_class, "bar-group");
+  gtk_widget_class_set_accessible_role (widget_class, GTK_ACCESSIBLE_ROLE_GROUP);
 }
 
 static void
@@ -622,6 +628,10 @@ set_or_unset_selection_state_flags (CcBarChartGroup *self,
         gtk_widget_set_state_flags (selected_widget, GTK_STATE_FLAG_SELECTED, FALSE);
       else
         gtk_widget_unset_state_flags (selected_widget, GTK_STATE_FLAG_SELECTED);
+
+      gtk_accessible_update_state (GTK_ACCESSIBLE (selected_widget),
+                                   GTK_ACCESSIBLE_STATE_SELECTED, set,
+                                   -1);
     }
 }
 

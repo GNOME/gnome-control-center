@@ -31,10 +31,15 @@ G_BEGIN_DECLS
 #define CC_TYPE_BAR_CHART_BAR (cc_bar_chart_bar_get_type())
 G_DECLARE_FINAL_TYPE (CcBarChartBar, cc_bar_chart_bar, CC, BAR_CHART_BAR, GtkWidget)
 
-CcBarChartBar *cc_bar_chart_bar_new (double value);
+CcBarChartBar *cc_bar_chart_bar_new (double      value,
+                                     const char *accessible_description);
 
 double cc_bar_chart_bar_get_value (CcBarChartBar *self);
 void cc_bar_chart_bar_set_value (CcBarChartBar *self,
                                  double         value);
+
+const char *cc_bar_chart_bar_get_accessible_description (CcBarChartBar *self);
+void cc_bar_chart_bar_set_accessible_description (CcBarChartBar *self,
+                                                  const char    *accessible_description);
 
 G_END_DECLS

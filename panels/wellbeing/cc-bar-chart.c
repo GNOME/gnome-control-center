@@ -81,6 +81,29 @@
  * are selected or being hovered over with the mouse. Axis labels are `label`
  * sub-nodes, with either a `.discrete-axis-label` or `.continuous-axis-label`
  * class.
+ *
+ * # Accessibility
+ *
+ * #CcBarChart uses the %GTK_ACCESSIBLE_ROLE_LIST role, with its groups using
+ * the %GTK_ACCESSIBLE_ROLE_GROUP role and bars using the
+ * %GTK_ACCESSIBLE_ROLE_LIST_ITEM role.
+ *
+ * This allows access technologies to interpret the chart as if it were a table
+ * of data. You should, however, specify a description for the chart as a whole,
+ * which also includes the semantics and value of
+ * #CcBarChart:overlay-line-value (if set).
+ *
+ * For example:
+ * |[
+ *   gtk_accessible_update_property (GTK_ACCESSIBLE (bar_chart),
+ *                                   GTK_ACCESSIBLE_PROPERTY_DESCRIPTION,
+ *                                   _("Bar chart of screen time usage over "
+ *                                     "the week starting 2nd February 2024. A "
+ *                                     "line is overlayed at the 10 hour mark "
+ *                                     "to indicate the configured screen time "
+ *                                     "limit."),
+ *                                   -1);
+ * ]|
  */
 struct _CcBarChart {
   GtkWidget parent_instance;
@@ -280,6 +303,7 @@ cc_bar_chart_class_init (CcBarChartClass *klass)
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/wellbeing/cc-bar-chart.ui");
 
   gtk_widget_class_set_css_name (widget_class, "bar-chart");
+  gtk_widget_class_set_accessible_role (widget_class, GTK_ACCESSIBLE_ROLE_LIST);
 }
 
 static void
@@ -1092,6 +1116,52 @@ get_maximum_data_value (CcBarChart *self,
   return value;
 }
 
+static void
+update_group_accessible_relations (CcBarChart *self)
+{
+  gtk_accessible_update_relation (GTK_ACCESSIBLE (self),
+                                  GTK_ACCESSIBLE_RELATION_ROW_COUNT, self->n_data,
+                                  -1);
+
+  if (self->cached_groups != NULL)
+    {
+      for (unsigned int i = 0; i < self->cached_groups->len; i++)
+        {
+          CcBarChartGroup *group = self->cached_groups->pdata[i];
+
+          gtk_accessible_update_relation (GTK_ACCESSIBLE (group),
+                                          GTK_ACCESSIBLE_RELATION_ROW_INDEX, i,
+                                          -1);
+        }
+    }
+
+  if (self->cached_groups != NULL &&
+      self->cached_discrete_axis_labels != NULL)
+    {
+      g_assert (self->cached_groups->len == self->cached_discrete_axis_labels->len);
+
+      for (unsigned int i = 0; i < self->cached_groups->len; i++)
+        {
+          CcBarChartGroup *group = self->cached_groups->pdata[i];
+          GtkLabel *label = self->cached_discrete_axis_labels->pdata[i];
+          CcBarChartBar * const *bars = NULL;
+          size_t n_bars = 0;
+
+          gtk_accessible_update_relation (GTK_ACCESSIBLE (group),
+                                          GTK_ACCESSIBLE_RELATION_LABELLED_BY, label, NULL,
+                                          -1);
+
+          bars = cc_bar_chart_group_get_bars (group, &n_bars);
+          for (unsigned int j = 0; j < n_bars; j++)
+            {
+              gtk_accessible_update_relation (GTK_ACCESSIBLE (bars[j]),
+                                              GTK_ACCESSIBLE_RELATION_LABELLED_BY, label, NULL,
+                                              -1);
+            }
+        }
+    }
+}
+
 /**
  * cc_bar_chart_new:
  *
@@ -1173,6 +1243,8 @@ cc_bar_chart_set_discrete_axis_labels (CcBarChart         *self,
        * gtk_widget_insert_after(), as it shouldn’t be focusable */
       g_ptr_array_add (self->cached_discrete_axis_labels, g_steal_pointer (&label));
     }
+
+  update_group_accessible_relations (self);
 
   /* Re-render */
   gtk_widget_queue_resize (GTK_WIDGET (self));
@@ -1340,15 +1412,18 @@ cc_bar_chart_set_data (CcBarChart   *self,
     {
       g_autoptr(CcBarChartGroup) group = NULL;
       CcBarChartGroup *previous_group = (i > 0) ? self->cached_groups->pdata[i - 1] : NULL;
+      g_autofree char *accessible_label = format_continuous_axis_label (self, self->data[i]);
 
       group = CC_BAR_CHART_GROUP (g_object_ref_sink (cc_bar_chart_group_new ()));
       cc_bar_chart_group_set_scale (group, self->cached_pixels_per_data);
       if (!isnan (self->data[i]))
-        cc_bar_chart_group_insert_bar (group, -1, cc_bar_chart_bar_new (self->data[i]));
+        cc_bar_chart_group_insert_bar (group, -1, cc_bar_chart_bar_new (self->data[i], accessible_label));
       gtk_widget_set_parent (GTK_WIDGET (group), GTK_WIDGET (self));
       gtk_widget_insert_after (GTK_WIDGET (group), GTK_WIDGET (self), GTK_WIDGET (previous_group));
       g_ptr_array_add (self->cached_groups, g_steal_pointer (&group));
     }
+
+  update_group_accessible_relations (self);
 
   /* Re-render */
   gtk_widget_queue_resize (GTK_WIDGET (self));
