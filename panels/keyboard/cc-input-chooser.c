@@ -70,7 +70,6 @@ struct _CcInputChooser
   GHashTable        *locales;
   GHashTable        *locales_by_language;
   gboolean           showing_extra;
-  guint              filter_timeout_id;
   gchar            **filter_words;
 };
 
@@ -592,13 +591,23 @@ strvs_differ (gchar **av,
   return TRUE;
 }
 
-static gboolean
-do_filter (CcInputChooser *self)
+static void
+show_more (CcInputChooser *self)
+{
+  gtk_widget_set_visible (GTK_WIDGET (self->filter_entry), TRUE);
+
+  gtk_widget_grab_focus (GTK_WIDGET (self->filter_entry));
+
+  self->showing_extra = TRUE;
+
+  gtk_list_box_invalidate_filter (self->input_sources_listbox);
+}
+
+static void
+on_filter_entry_search_changed_cb (CcInputChooser *self)
 {
   g_auto(GStrv) previous_words = NULL;
   g_autofree gchar *filter_contents = NULL;
-
-  self->filter_timeout_id = 0;
 
   filter_contents =
     cc_util_normalize_casefold_and_unaccent (gtk_editable_get_text (GTK_EDITABLE (self->filter_entry)));
@@ -606,38 +615,16 @@ do_filter (CcInputChooser *self)
   previous_words = self->filter_words;
   self->filter_words = g_strsplit_set (g_strstrip (filter_contents), " ", 0);
 
+  show_more (self);
+
   if (!self->filter_words[0])
     {
-      gtk_list_box_invalidate_filter (self->input_sources_listbox);
       gtk_list_box_set_placeholder (self->input_sources_listbox, NULL);
     }
   else if (previous_words == NULL || strvs_differ (self->filter_words, previous_words))
     {
-      gtk_list_box_invalidate_filter (self->input_sources_listbox);
       gtk_list_box_set_placeholder (self->input_sources_listbox, self->no_results);
     }
-
-  return G_SOURCE_REMOVE;
-}
-
-static void
-on_filter_entry_search_changed_cb (CcInputChooser *self)
-{
-  if (self->filter_timeout_id == 0)
-    self->filter_timeout_id = g_timeout_add (FILTER_TIMEOUT, (GSourceFunc) do_filter, self);
-}
-
-static void
-show_more (CcInputChooser *self)
-{
-  gtk_widget_set_visible (GTK_WIDGET (self->filter_entry), TRUE);
-
-  gtk_search_entry_set_key_capture_widget (self->filter_entry, GTK_WIDGET (self));
-  gtk_widget_grab_focus (GTK_WIDGET (self->filter_entry));
-
-  self->showing_extra = TRUE;
-
-  gtk_list_box_invalidate_filter (self->input_sources_listbox);
 }
 
 static void
@@ -1115,7 +1102,6 @@ cc_input_chooser_dispose (GObject *object)
   g_clear_pointer (&self->locales, g_hash_table_unref);
   g_clear_pointer (&self->locales_by_language, g_hash_table_unref);
   g_clear_pointer (&self->filter_words, g_strfreev);
-  g_clear_handle_id (&self->filter_timeout_id, g_source_remove);
 
   G_OBJECT_CLASS (cc_input_chooser_parent_class)->dispose (object);
 }
@@ -1155,6 +1141,8 @@ void
 cc_input_chooser_init (CcInputChooser *self)
 {
   gtk_widget_init_template (GTK_WIDGET (self));
+
+  gtk_search_entry_set_key_capture_widget (self->filter_entry, GTK_WIDGET (self));
 }
 
 CcInputChooser *
