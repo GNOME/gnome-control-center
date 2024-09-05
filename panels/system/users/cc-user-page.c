@@ -58,13 +58,13 @@ struct _CcUserPage {
 
     CcListRow           *account_type_row;
     GtkSwitch           *account_type_switch;
-    GtkBox              *action_area;
     AdwAvatar           *avatar;
     CcAvatarChooser     *avatar_chooser;
     GtkMenuButton       *avatar_edit_button;
     GtkButton           *avatar_remove_button;
     AdwActionRow        *auto_login_row;
     GtkSwitch           *auto_login_switch;
+    AdwPreferencesGroup *button_group;
     CcListRow           *fingerprint_row;
     CcListRow           *language_row;
     AdwEntryRow         *fullname_row;
@@ -73,6 +73,7 @@ struct _CcUserPage {
 #endif
     CcListRow           *password_row;
     CcPermissionInfobar *permission_infobar;
+    AdwPreferencesPage  *preferences_page;
     AdwSwitchRow        *remove_local_files_choice;
     GtkWidget           *remove_user_button;
     AdwAlertDialog      *remove_local_user_dialog;
@@ -447,7 +448,14 @@ cc_user_page_buildable_add_child (GtkBuildable *buildable,
 {
     CcUserPage *self = CC_USER_PAGE (buildable);
 
-    gtk_box_append (self->action_area, GTK_WIDGET (child));
+    /* Let's keep the button group last */
+    if (ADW_IS_PREFERENCES_GROUP (child)) {
+        adw_preferences_page_remove (self->preferences_page, self->button_group);
+        adw_preferences_page_add (self->preferences_page, ADW_PREFERENCES_GROUP (child));
+        adw_preferences_page_add (self->preferences_page, self->button_group);
+    } else {
+        adw_preferences_group_add (self->button_group, GTK_WIDGET (child));
+    }
 }
 
 static void
@@ -633,7 +641,6 @@ cc_user_page_class_init (CcUserPageClass * klass)
 
     gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/system/users/cc-user-page.ui");
 
-    gtk_widget_class_bind_template_child (widget_class, CcUserPage, action_area);
     gtk_widget_class_bind_template_child (widget_class, CcUserPage, avatar);
     gtk_widget_class_bind_template_child (widget_class, CcUserPage, avatar_edit_button);
     gtk_widget_class_bind_template_child (widget_class, CcUserPage, avatar_remove_button);
@@ -641,6 +648,7 @@ cc_user_page_class_init (CcUserPageClass * klass)
     gtk_widget_class_bind_template_child (widget_class, CcUserPage, account_type_switch);
     gtk_widget_class_bind_template_child (widget_class, CcUserPage, auto_login_row);
     gtk_widget_class_bind_template_child (widget_class, CcUserPage, auto_login_switch);
+    gtk_widget_class_bind_template_child (widget_class, CcUserPage, button_group);
     gtk_widget_class_bind_template_child (widget_class, CcUserPage, fingerprint_row);
     gtk_widget_class_bind_template_child (widget_class, CcUserPage, fullname_row);
     gtk_widget_class_bind_template_child (widget_class, CcUserPage, language_row);
@@ -649,6 +657,7 @@ cc_user_page_class_init (CcUserPageClass * klass)
 #endif
     gtk_widget_class_bind_template_child (widget_class, CcUserPage, password_row);
     gtk_widget_class_bind_template_child (widget_class, CcUserPage, permission_infobar);
+    gtk_widget_class_bind_template_child (widget_class, CcUserPage, preferences_page);
     gtk_widget_class_bind_template_child (widget_class, CcUserPage, remove_local_files_choice);
     gtk_widget_class_bind_template_child (widget_class, CcUserPage, remove_local_user_dialog);
     gtk_widget_class_bind_template_child (widget_class, CcUserPage, remove_user_button);

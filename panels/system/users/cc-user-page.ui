@@ -13,7 +13,7 @@
               <object class="CcPermissionInfobar" id="permission_infobar"/>
             </child>
             <child>
-              <object class="AdwPreferencesPage">
+              <object class="AdwPreferencesPage" id="preferences_page">
                 <child>
                   <object class="AdwPreferencesGroup">
                     <child>
@@ -190,13 +190,8 @@
                 </child>
 
                 <child>
-                  <object class="AdwPreferencesGroup">
-                    <child>
-                      <object class="GtkBox" id="action_area">
-                        <property name="orientation">vertical</property>
-                        <property name="spacing">12</property>
-                      </object>
-                    </child>
+                  <object class="AdwPreferencesGroup" id="button_group">
+                    <property name="separate-rows">True</property>
                     <child>
                       <object class="AdwButtonRow" id="remove_user_button">
                         <property name="visible" bind-source="CcUserPage" bind-property="is-current-user" bind-flags="invert-boolean"/>

@@ -27,28 +27,22 @@
             </child>
 
             <child>
-              <object class="AdwPreferencesGroup">
-                <property name="separate-rows">True</property>
-                <child>
-                  <object class="AdwButtonRow" id="add_user_button_row">
-                    <property name="title" translatable="yes">_Add User</property>
-                    <property name="end-icon-name">go-next-symbolic</property>
-                    <property name="use_underline">True</property>
-                    <signal name="activated" handler="add_user" object="CcUsersPage" swapped="yes"/>
-                  </object>
-                </child>
-                <child>
-                  <object class="AdwButtonRow" id="add_enterprise_user_button_row">
-                    <property name="visible">False</property>
-                    <property name="title" translatable="yes">Add _Enterprise Login</property>
-                    <property name="use_underline">True</property>
-                    <property name="end-icon-name">go-next-symbolic</property>
-                    <signal name="activated" handler="add_enterprise_user" object="CcUsersPage" swapped="yes"/>
-                  </object>
-                </child>
+              <object class="AdwButtonRow" id="add_user_button_row">
+                <property name="title" translatable="yes">_Add User</property>
+                <property name="end-icon-name">go-next-symbolic</property>
+                <property name="use_underline">True</property>
+                <signal name="activated" handler="add_user" object="CcUsersPage" swapped="yes"/>
               </object>
             </child>
-
+            <child>
+              <object class="AdwButtonRow" id="add_enterprise_user_button_row">
+                <property name="visible">False</property>
+                <property name="title" translatable="yes">Add _Enterprise Login</property>
+                <property name="use_underline">True</property>
+                <property name="end-icon-name">go-next-symbolic</property>
+                <signal name="activated" handler="add_enterprise_user" object="CcUsersPage" swapped="yes"/>
+              </object>
+            </child>
           </object>
         </child>
       </object>
