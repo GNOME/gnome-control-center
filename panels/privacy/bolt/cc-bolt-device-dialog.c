@@ -20,7 +20,6 @@
 #include <config.h>
 
 #include <glib/gi18n.h>
-#include "cc-list-row.h"
 
 #include "bolt-device.h"
 #include "bolt-error.h"
@@ -40,9 +39,9 @@ struct _CcBoltDeviceDialog
   AdwToastOverlay *toast_overlay;
 
   /* device details */
-  CcListRow *status_row;
-  CcListRow *uuid_row;
-  CcListRow *time_row;
+  AdwActionRow *status_row;
+  AdwActionRow *uuid_row;
+  AdwActionRow *time_row;
 
   /* parents */
   AdwPreferencesGroup *parents_group;
@@ -142,7 +141,7 @@ dialog_update_from_device (CcBoltDeviceDialog *dialog)
   gtk_window_set_title (GTK_WINDOW (dialog), label);
 
   status_brief = status_to_string_for_ui (dev);
-  cc_list_row_set_secondary_label (dialog->status_row, status_brief);
+  adw_action_row_set_subtitle (dialog->status_row, status_brief);
   gtk_widget_set_visible (GTK_WIDGET (dialog->forget_button), stored);
 
   /* while we are having an ongoing operation we are setting the buttons
@@ -153,7 +152,7 @@ dialog_update_from_device (CcBoltDeviceDialog *dialog)
     gtk_widget_set_visible (GTK_WIDGET (dialog->connect_button),
                             status == BOLT_STATUS_CONNECTED);
 
-  cc_list_row_set_secondary_label (dialog->uuid_row, uuid);
+  adw_action_row_set_subtitle (dialog->uuid_row, uuid);
 
   if (bolt_status_is_authorized (status))
     {
@@ -176,7 +175,7 @@ dialog_update_from_device (CcBoltDeviceDialog *dialog)
     }
 
   timestr = bolt_epoch_format (timestamp, "%c");
-  cc_list_row_set_secondary_label (dialog->time_row, timestr);
+  adw_action_row_set_subtitle (dialog->time_row, timestr);
 
 }
 
