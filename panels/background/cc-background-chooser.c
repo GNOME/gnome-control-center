@@ -159,21 +159,29 @@ create_widget_func (gpointer model_item,
   gtk_overlay_add_overlay (GTK_OVERLAY (overlay), check);
   if (button)
     gtk_overlay_add_overlay (GTK_OVERLAY (overlay), button);
-  gtk_accessible_update_property (GTK_ACCESSIBLE (overlay),
-                                  GTK_ACCESSIBLE_PROPERTY_LABEL,
-                                  cc_background_item_get_name (item),
-                                  -1);
-
 
   child = gtk_flow_box_child_new ();
   gtk_widget_set_halign (child, GTK_ALIGN_CENTER);
   gtk_widget_set_valign (child, GTK_ALIGN_CENTER);
   gtk_flow_box_child_set_child (GTK_FLOW_BOX_CHILD (child), overlay);
+  gtk_accessible_update_property (GTK_ACCESSIBLE (child),
+                                  GTK_ACCESSIBLE_PROPERTY_LABEL,
+                                  cc_background_item_get_name (item),
+                                  -1);
 
   g_object_set_data_full (G_OBJECT (child), "item", g_object_ref (item), g_object_unref);
 
   if (self->active_item && cc_background_item_compare (item, self->active_item))
-    gtk_widget_add_css_class (GTK_WIDGET (child), "active-item");
+    {
+      gtk_widget_add_css_class (GTK_WIDGET (child), "active-item");
+      gtk_accessible_update_state (GTK_ACCESSIBLE (child),
+                                   GTK_ACCESSIBLE_STATE_CHECKED, TRUE,
+                                   -1);
+    }
+  else
+    gtk_accessible_update_state (GTK_ACCESSIBLE (child),
+                                    GTK_ACCESSIBLE_STATE_CHECKED, FALSE,
+                                    -1);
 
   return child;
 }
@@ -359,9 +367,19 @@ static void flow_box_set_active_item (GtkFlowBox *flowbox, CcBackgroundItem *act
       item = g_object_get_data (G_OBJECT (child), "item");
 
       if (cc_background_item_compare (item, active_item))
-        gtk_widget_add_css_class (GTK_WIDGET (child), "active-item");
+        {
+          gtk_widget_add_css_class (GTK_WIDGET (child), "active-item");
+          gtk_accessible_update_state (GTK_ACCESSIBLE (child),
+                                       GTK_ACCESSIBLE_STATE_CHECKED, TRUE,
+                                       -1);
+        }
       else
-        gtk_widget_remove_css_class (GTK_WIDGET (child), "active-item");
+        {
+          gtk_widget_remove_css_class (GTK_WIDGET (child), "active-item");
+          gtk_accessible_update_state (GTK_ACCESSIBLE (child),
+                                       GTK_ACCESSIBLE_STATE_CHECKED, FALSE,
+                                       -1);
+        }
     }
 }
 
