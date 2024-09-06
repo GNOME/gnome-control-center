@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center HEAD\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2024-09-01 14:27+0000\n"
-"PO-Revision-Date: 2024-09-03 21:25+0200\n"
+"POT-Creation-Date: 2024-09-05 19:01+0000\n"
+"PO-Revision-Date: 2024-09-06 15:24+0200\n"
 "Last-Translator: Quentin PAGÈS\n"
 "Language-Team: Tot en òc\n"
 "Language: oc\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 3.4.3\n"
+"X-Generator: Poedit 3.5\n"
 "X-DamnedLies-Scope: partial\n"
 "X-Project-Style: gnome\n"
 
@@ -225,7 +225,6 @@ msgstr ""
 
 #: panels/applications/cc-applications-panel.ui:245
 #: panels/printers/pp-details-dialog.c:268
-#: panels/sharing/cc-sharing-panel.c:275
 msgid "_Open"
 msgstr "_Dobrir"
 
@@ -795,10 +794,8 @@ msgid "Install, remove and configure software"
 msgstr "Installar, surprimir e configurar los logicials"
 
 #: panels/applications/cc-snap-row.c:343
-#, fuzzy
-#| msgid "No network service"
 msgid "Access Storage Framework service"
-msgstr "Cap de servici telefonic"
+msgstr "Accès al serveci d'emmagazinatge"
 
 #: panels/applications/cc-snap-row.c:345
 msgid "Read process and system information"
@@ -850,26 +847,26 @@ msgstr ""
 "periferic;sistèma;per defaut;aplicacion;preferida;cd;dvd;usb;àudio;vidèo;"
 "disc;amovible;mèdia;execucion automatica;"
 
-#: panels/background/cc-background-chooser.c:161
+#: panels/background/cc-background-chooser.c:146
 msgid "Remove Background"
 msgstr "Levar lo rèireplan"
 
-#: panels/background/cc-background-chooser.c:346
+#: panels/background/cc-background-chooser.c:331
 msgid "Select a picture"
 msgstr "Seleccionar un imatge"
 
-#: panels/background/cc-background-item.c:173
+#: panels/background/cc-background-item.c:172
 msgid "multiple sizes"
 msgstr "mantuna talha"
 
 #. translators: 100 × 100px
 #. * Note that this is not an "x", but U+00D7 MULTIPLICATION SIGN
-#: panels/background/cc-background-item.c:180
+#: panels/background/cc-background-item.c:179
 #, c-format
 msgid "%d × %d"
 msgstr "%d × %d"
 
-#: panels/background/cc-background-item.c:293
+#: panels/background/cc-background-item.c:358
 msgid "No Desktop Background"
 msgstr "Pas cap de rèireplan de burèu"
 
@@ -1111,7 +1108,6 @@ msgstr "Escandalhatge de l'ecran"
 #: panels/privacy/usage/cc-usage-page.ui:125
 #: panels/privacy/usage/cc-usage-page.ui:136
 #: panels/privacy/usage/cc-usage-page.ui:147
-#: panels/sharing/cc-sharing-panel.c:274
 #: panels/system/region/cc-format-chooser.ui:24
 #: panels/system/users/cc-add-user-dialog.ui:24
 #: panels/system/users/cc-avatar-chooser.c:92
@@ -1246,12 +1242,12 @@ msgid "Save Profile"
 msgstr "Enregistrar lo perfil"
 
 #. TRANSLATORS: this is when the button is sensitive
-#: panels/color/cc-color-panel.c:1144
+#: panels/color/cc-color-panel.c:1149
 msgid "Create a color profile for the selected device"
 msgstr "Crear un perfil de color pel periferic seleccionat"
 
 #. TRANSLATORS: this is when the button is insensitive
-#: panels/color/cc-color-panel.c:1159 panels/color/cc-color-panel.c:1183
+#: panels/color/cc-color-panel.c:1164 panels/color/cc-color-panel.c:1188
 msgid ""
 "The measuring instrument is not detected. Please check it is turned on and "
 "correctly connected."
@@ -1260,33 +1256,31 @@ msgstr ""
 "corrèctament."
 
 #. TRANSLATORS: this is when the button is insensitive
-#: panels/color/cc-color-panel.c:1193
+#: panels/color/cc-color-panel.c:1198
 msgid "The measuring instrument does not support printer profiling."
 msgstr "L'instrument de mesura pren pas en carga los perfils d'imprimenta."
 
 #. TRANSLATORS: this is when the button is insensitive
-#: panels/color/cc-color-panel.c:1204
+#: panels/color/cc-color-panel.c:1209
 msgid "The device type is not currently supported."
 msgstr "Lo tipe de periferic es pas actualament pres en carga."
 
 #. Translators: This will be presented as the text of a link to the documentation
 #. translators: Text used in link to privacy policy
 #. Translators: This will be presented as the text of a link to the documentation
-#: panels/color/cc-color-panel.c:1999
+#: panels/color/cc-color-panel.c:2008
 #: panels/privacy/diagnostics/cc-diagnostics-page.c:122
 #: panels/wacom/cc-wacom-device.c:168
 msgid "learn more"
 msgstr "ne saber mai"
 
 #. Translators: %s is a link to the documentation with the label "learn more"
-#: panels/color/cc-color-panel.c:2001
-#, fuzzy, c-format
-#| msgid ""
-#| "Each device needs an up to date color profile to be color managed. %s"
+#: panels/color/cc-color-panel.c:2010
+#, c-format
 msgid "Each device needs an up to date color profile to be color managed — %s."
 msgstr ""
 "Cada periferic a besonh d'un perfil de color a jorn per la presa en carga de "
-"las colors. %s"
+"las colors — %s."
 
 #: panels/color/cc-color-panel.ui:4 panels/wacom/calibrator/calibrator.ui:40
 msgid "Screen Calibration"
@@ -2017,15 +2011,11 @@ msgid "Night Light cannot be used from a virtual machine"
 msgstr "Se pòt pas utilizar lo mòde nuèit a partir d’una maquina virtuala"
 
 #: panels/display/cc-night-light-page.c:231
-#, fuzzy
-#| msgid ""
-#| "This could be the result of the graphics driver being used, or the "
-#| "desktop being used remotely"
 msgid ""
 "This could be the result of the graphics driver being used, or the desktop "
 "being used remotely."
 msgstr ""
-"Aquò poiriá venir del pilòt en usança o que'l burèu es utilizat a distància"
+"Aquò poiriá venir del pilòt en usança o que'l burèu es utilizat a distància."
 
 #: panels/display/cc-night-light-page.ui:12
 msgid "Night Light Unavailable"
@@ -5884,12 +5874,10 @@ msgid "Direct Access"
 msgstr "Accès dirècte"
 
 #: panels/privacy/bolt/cc-bolt-page.ui:113
-#, fuzzy
-#| msgid "Allow direct access to devices such as docks and external GPUs."
 msgid "Allow direct access to devices such as docks and external GPUs"
 msgstr ""
 "Autorizar l’accès dirècte als periferics tals coma las estacions d’acuèlh e "
-"processors grafics extèrnes."
+"processors grafics extèrnes"
 
 #: panels/privacy/bolt/cc-bolt-page.ui:163
 msgid "Pending Devices"
@@ -6638,7 +6626,7 @@ msgid "Subfolders must be manually added for this location"
 msgstr ""
 
 #: panels/search/cc-search-locations-page.c:598
-#: panels/sharing/cc-sharing-panel.c:424
+#: panels/sharing/cc-sharing-panel.c:423
 msgid "Remove Folder"
 msgstr "Suprimir un dorsièr"
 
@@ -6733,20 +6721,20 @@ msgctxt "service is active"
 msgid "Active"
 msgstr "Actiu"
 
-#: panels/sharing/cc-sharing-panel.c:271
+#: panels/sharing/cc-sharing-panel.c:275
 msgid "Choose a Folder"
 msgstr "Causir un dorsièr"
 
-#: panels/sharing/cc-sharing-panel.c:414
+#: panels/sharing/cc-sharing-panel.c:413
 msgid "Open Folder"
 msgstr "Dobrir lo dorsièr"
 
-#: panels/sharing/cc-sharing-panel.c:444
+#: panels/sharing/cc-sharing-panel.c:443
 msgid "_Add Folder"
 msgstr "_Apondre un dorsièr"
 
 #. Translators: %s is the hostname of the user's device
-#: panels/sharing/cc-sharing-panel.c:603
+#: panels/sharing/cc-sharing-panel.c:602
 #, c-format
 msgid ""
 "File sharing allows sharing the Public folder with other devices on the "
@@ -7912,10 +7900,8 @@ msgid "_Domain"
 msgstr "_Domeni"
 
 #: panels/system/users/cc-enterprise-login-dialog.ui:82
-#, fuzzy
-#| msgid "Should match the web address of your login provider."
 msgid "Should match the web domain of the account provider"
-msgstr "Deu correspondre a l’adreça Web de vòstre provesidor d’accès."
+msgstr "Deu correspondre al domeni web del provesidor de compte"
 
 #: panels/system/users/cc-enterprise-login-dialog.ui:115
 msgid "Enroll Device"
@@ -8544,11 +8530,9 @@ msgid "Username is already in use — please choose another"
 msgstr ""
 
 #: panels/system/users/user-utils.c:195
-#, fuzzy, c-format
-#| msgid "Must have a maximum of %d character"
-#| msgid_plural "Must have a maximum of %d characters"
+#, c-format
 msgid "Usernames must have fewer than %ld characters"
-msgstr "Deu conténer al maximum %d caractèrs"
+msgstr "Lo nom d’utilizaire deu aver mens de %ld caractèrs"
 
 #: panels/universal-access/cc-cursor-size-dialog.ui:4
 msgid "Cursor Size"
@@ -8894,10 +8878,8 @@ msgid "_Cursor Blinking"
 msgstr "_Cluquejament del cursor"
 
 #: panels/universal-access/cc-ua-typing-page.ui:40
-#, fuzzy
-#| msgid "Cursor blinks in text fields."
 msgid "Change if the cursor blinks in text fields"
-msgstr "Lo cursor cluqueja dins los camps tèxte."
+msgstr "Cambiar se lo cursor cluqueja dins los camps tèxte"
 
 #: panels/universal-access/cc-ua-typing-page.ui:47
 msgid "_Blink Speed"
@@ -9015,10 +8997,8 @@ msgid "Screen Area"
 msgstr "Zòna de l'ecran"
 
 #: panels/universal-access/cc-ua-zoom-page.ui:63
-#, fuzzy
-#| msgid "_Active Screen Edges"
 msgid "_Extend Outside Screen Edges"
-msgstr "_Bordaduras d’ecran actiu"
+msgstr "_Espandir las bordaduras exterioras d’ecran"
 
 #: panels/universal-access/cc-ua-zoom-page.ui:72
 msgid "_Screen Area"
@@ -9081,10 +9061,10 @@ msgid "_Crosshair Lines"
 msgstr "Puntadors en _crotz :"
 
 #: panels/universal-access/cc-ua-zoom-page.ui:115
-#, fuzzy
-#| msgid "Invert colors in the magnifier region"
 msgid "Mark the cursor location in the magnifier region using lines"
-msgstr "Inversar las colors de la zòna de la lópia"
+msgstr ""
+"Marcar l'emplaçament del cursor dins la region de la lupa en utilizant de "
+"linhas"
 
 #: panels/universal-access/cc-ua-zoom-page.ui:121
 #, fuzzy
@@ -9338,10 +9318,9 @@ msgid "Choose an action when button %d on the stylus is pressed"
 msgstr "Causir una accion quand lo boton %d es quichat de l’estilet"
 
 #: panels/wacom/cc-wacom-stylus-action-dialog.c:256
-#, fuzzy, c-format
-#| msgid "Button %d"
+#, c-format
 msgid "Button %d Mapping"
-msgstr "Boton %d"
+msgstr "Assignacion del boton %d"
 
 #: panels/wacom/cc-wacom-stylus-action-dialog.ui:113
 #: panels/wacom/cc-wacom-stylus-action-dialog.ui:152
