@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center HEAD\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2024-09-07 14:24+0000\n"
-"PO-Revision-Date: 2024-09-07 20:24+0200\n"
+"POT-Creation-Date: 2024-09-08 07:59+0000\n"
+"PO-Revision-Date: 2024-09-08 12:44+0200\n"
 "Last-Translator: Quentin PAGÈS\n"
 "Language-Team: Tot en òc\n"
 "Language: oc\n"
@@ -3906,10 +3906,8 @@ msgid "Add WireGuard peer"
 msgstr "Apondre un par WireGuard"
 
 #: panels/network/connection-editor/wireguard-page.ui:264
-#, fuzzy
-#| msgid "Not set up"
 msgid "No peers set up"
-msgstr "Pas configurat"
+msgstr "Cap de par pas configurat"
 
 #: panels/network/connection-editor/wireguard-peer.ui:46
 #: panels/network/net-device-ethernet.c:326
@@ -5897,6 +5895,9 @@ msgid ""
 "The following sandboxed apps have been given permission to use cameras. Apps "
 "that are not sandboxed can use cameras without asking for permission."
 msgstr ""
+"Las aplicacions isoladas seguentas an recebut l'autorizacion d'utilizar de "
+"camèras. Las aplicacions que son pas isoladas pòdon utilizar de camèras sens "
+"demandar l'autorizacion."
 
 #: panels/privacy/camera/cc-camera-page.ui:38
 msgid "No sandboxed apps have asked for camera access"
@@ -6054,11 +6055,16 @@ msgid ""
 "settings (BIOS) and your hardware manufacturer may provide information on "
 "how to do this."
 msgstr ""
+"Los problèmas d’aviada segura pòdon sovent èsser resolguts a partir dels "
+"paramètres del micrologicial UEFI (BIOS) de vòstre aparelh e vòstre "
+"fabricant de material pòt provesir d'informacions sus cossí o far."
 
 #. TRANSLATORS: this is the third section of description.
 #: panels/privacy/firmware-security/cc-firmware-security-boot-dialog.c:92
 msgid "For help, contact your hardware manufacturer or IT support provider."
 msgstr ""
+"Per d’ajuda, contactatz vòstre fabricant de material o provesidor "
+"d’assisténcia informatica."
 
 #. TRANSLATORS: secure boot refers to the system firmware security mode
 #: panels/privacy/firmware-security/cc-firmware-security-boot-dialog.c:98
@@ -6131,6 +6137,13 @@ msgid ""
 "firmware or changing device configuration options. However, failures can "
 "stem from the physical hardware itself and may not be fixable."
 msgstr ""
+"Lo material passa pas los contraròtles. Aquò significa que sètz pas protegit "
+"contra de problèmas de seguretat materials comuns.\n"
+"\n"
+"Es benlèu possible de resòlvre de problèmas de seguretat material en metent "
+"a jorn lo micrologicial o en cambiant las opcions de configuracion del "
+"periferic. Pasmens, las avarias pòdon venir del quite material fisic e pòdon "
+"pas èsser corregiblas."
 
 #. TRANSLATORS: in reference to firmware protection: 1/4 stars
 #: panels/privacy/firmware-security/cc-firmware-security-dialog.c:121
@@ -6146,6 +6159,9 @@ msgid ""
 "some hardware security threats. However, it lacks other recommended "
 "protections."
 msgstr ""
+"Aqueste periferic respond pas a las exigéncias de seguretat de basa e a una "
+"proteccion contra qualques menaças de seguretat del material. Pasmens, manca "
+"d'autras proteccions recomandadas."
 
 #. TRANSLATORS: in reference to firmware protection: 2~4 stars
 #: panels/privacy/firmware-security/cc-firmware-security-dialog.c:134
@@ -6160,6 +6176,8 @@ msgid ""
 "This device passes current security tests. It is protected against the "
 "majority of hardware security threats."
 msgstr ""
+"Aqueste periferic passa las pròvas de seguretat actualas. Es protegit contra "
+"la majoritat de las menaças de seguretat material."
 
 #: panels/privacy/firmware-security/cc-firmware-security-dialog.c:144
 msgid "Checks Unavailable"
@@ -6171,6 +6189,9 @@ msgid ""
 "Device security checks are not available for this device. It is not possible "
 "to tell whether it meets hardware security requirements."
 msgstr ""
+"Los contraròtles de seguretat del periferic son pas disponibles per aqueste "
+"periferic. Es pas possible de dire se respond a las exigéncias de seguretat "
+"material."
 
 #: panels/privacy/firmware-security/cc-firmware-security-dialog.c:366
 msgid "Report copied to clipboard"
@@ -6204,10 +6225,27 @@ msgid ""
 "Device security is just one aspect of security, and does not reflect the "
 "overall security status of the system and applications."
 msgstr ""
+"Seguretat del periferic provesís d'informacions sus la proteccion de vòstre "
+"periferic contra de problèmas de seguretat que ciblan lo quite material.\n"
+"\n"
+"Los aspèctes del material qu'afèctan la seguretat incluson :\n"
+"\n"
+"• foncionalitats de seguretat que son incorporadas dins un quite material ;\n"
+"• cossí lo material es configurat per se protegir contra de problèmas de "
+"seguretat ;\n"
+"• la seguretat del logicial s'executa dirèctament sul material.\n"
+"\n"
+"Las menaças de seguretat qu'afèctan lo material incluson de logicials "
+"malvolents e de virus que ciblan lo logicial que s’executa dirèctament sul "
+"material. Inclutz tanben de manipulacions fisicas, coma la connexion fisica "
+"al material per legir de donadas e implantar de logicials malvolents.\n"
+"\n"
+"La seguretat del periferic es pas qu'un aspècte de la seguretat, e dòna pas "
+"l'estatut de seguretat global del sistèma e de las aplicacions."
 
 #: panels/privacy/firmware-security/cc-firmware-security-page.c:123
 msgid "Protected against malicious software when the device starts."
-msgstr ""
+msgstr "Protegit contra de logicials malvolents quand lo periferic s'avia."
 
 #: panels/privacy/firmware-security/cc-firmware-security-page.c:129
 msgid "Secure Boot has Problems"
@@ -6232,6 +6270,9 @@ msgid ""
 "operating system configuration change, or because of malicious software on "
 "this system."
 msgstr ""
+"Aqueste problèma poiriá èsser estat causat per un cambiament dels paramètres "
+"del micrologicial UEFI, un cambiament de configuracion del sistèma operatiu "
+"o a causa d'un logicial malvolent sus aqueste sistèma."
 
 #. TRANSLATORS: this is to explain an event that has already happened
 #: panels/privacy/firmware-security/cc-firmware-security-page.c:163
@@ -6239,6 +6280,9 @@ msgid ""
 "This issue could have been caused by a change in the UEFI firmware settings, "
 "or because of malicious software on this system."
 msgstr ""
+"Aqueste problèma poiriá èsser estat causat per un cambiament dins los "
+"paramètres del micrologicial UEFI, o a causa d'un logicial malvolent sus "
+"aqueste sistèma."
 
 #. TRANSLATORS: this is to explain an event that has already happened
 #: panels/privacy/firmware-security/cc-firmware-security-page.c:170
@@ -6246,6 +6290,9 @@ msgid ""
 "This issue could have been caused by an operating system configuration "
 "change, or because of malicious software on this system."
 msgstr ""
+"Aqueste problèma poiriá èsser estat causat per un cambiament de "
+"configuracion del sistèma operatiu, o a causa d'un logicial malvolent sus "
+"aqueste sistèma."
 
 #. TRANSLATOR: this is the date in "%Y-%m-%d %H:%M:%S" format,
 #. for example: 2022-08-01 22:48:00
@@ -6307,6 +6354,8 @@ msgid ""
 "Device Security is only available on physical hardware. No physical hardware "
 "has been detected."
 msgstr ""
+"La seguretat del periferic es pas disponibla que sul material fisic. Cap de "
+"material fisic es pas estat detectat."
 
 #: panels/privacy/firmware-security/cc-firmware-security-page.ui:183
 msgid "Security Events"
@@ -6362,14 +6411,12 @@ msgstr "Pas chifrat"
 #. TRANSLATORS: Linux kernel is tainted by third party kernel module.
 #: panels/privacy/firmware-security/cc-firmware-security-utils.c:75
 msgid "Tainted"
-msgstr ""
+msgstr "Contaminat"
 
 #. TRANSLATORS: All the loaded kernel module are licensed.
 #: panels/privacy/firmware-security/cc-firmware-security-utils.c:80
-#, fuzzy
-#| msgid "Not calibrated"
 msgid "Not Tainted"
-msgstr "Pas escandalhat"
+msgstr "Non contaminat"
 
 #. TRANSLATORS: the feature can be detected.
 #: panels/privacy/firmware-security/cc-firmware-security-utils.c:85
@@ -6403,6 +6450,9 @@ msgid ""
 "Purge;Retain;Diagnostics;Crash;Location;Gps;Camera;Photos;Video;Webcam;"
 "Recording;Security;Firmware;Thunderbolt;"
 msgstr ""
+"Vida privada;ecran;verrolhar;privat;usatge;recent;istoric;fichièrs;temporari;"
+"tmp;escobilhièr;purgar;gardar;diagnostic;localizacion;gps;camèra;fòto;vidèo;"
+"webcam;enregistrament;seguretat;micrologicial;firmware;thunderbolt;"
 
 #: panels/privacy/location/cc-location-page.ui:17
 msgid "_Automatic Device Location"
@@ -6420,6 +6470,9 @@ msgid ""
 "that are not sandboxed can access location data without asking for "
 "permission."
 msgstr ""
+"Las aplicacions isoladas seguentas an recebut accès a las donadas "
+"d'emplaçament. Las aplicacions que son pas isoladas pòdon accedir a las "
+"donadas d'emplaçament sens demandar l'autorizacion."
 
 #: panels/privacy/location/cc-location-page.ui:38
 msgid "No sandboxed apps have asked for location access"
@@ -6489,7 +6542,7 @@ msgstr "Ecran de confidencialitat"
 
 #: panels/privacy/screen/cc-screen-page.ui:92
 msgid "Restrict Viewing _Angle"
-msgstr ""
+msgstr "Restrénher l’_angle de visualizacion"
 
 #: panels/privacy/usage/cc-usage-page.ui:4
 msgid "File History & Trash"
@@ -6576,6 +6629,8 @@ msgstr "Escafar l’istoric ?"
 #: panels/privacy/usage/cc-usage-page.ui:120
 msgid "After clearing, lists of recently used files will appear empty."
 msgstr ""
+"Aprèp l’escafament, seràn voidas las listas de fichièrs recentament "
+"utilizats."
 
 #: panels/privacy/usage/cc-usage-page.ui:126
 msgid "Clear _History"
@@ -6789,6 +6844,10 @@ msgid ""
 "It may still be possible for devices on this network to see what content is "
 "being shared."
 msgstr ""
+"Lo senhal es obligatòri suls periferics que vòlon accedir al contengut "
+"partejat.\n"
+"Es benlèu encara possible pels periferics d'aquesta ret de veire quin "
+"contengut es partejat."
 
 #: panels/sharing/cc-sharing-panel.ui:134
 #: panels/system/users/cc-add-user-dialog.ui:176
@@ -6845,7 +6904,7 @@ msgstr "Clic"
 #: panels/sound/cc-alert-chooser-window.c:344
 #: panels/sound/cc-alert-chooser-window.ui:71
 msgid "Hum"
-msgstr ""
+msgstr "Hum"
 
 #: panels/sound/cc-alert-chooser-window.c:346
 #: panels/sound/cc-alert-chooser-window.ui:43
@@ -6911,7 +6970,7 @@ msgstr "_Balança"
 
 #: panels/sound/cc-sound-panel.ui:178
 msgid "Fad_e"
-msgstr ""
+msgstr "Est_ompar"
 
 #: panels/sound/cc-sound-panel.ui:205
 msgid "_Subwoofer"
@@ -7571,6 +7630,9 @@ msgid ""
 "Use a remote desktop app to connect using the RDP protocol. Additional "
 "information about the device’s network location may also be required."
 msgstr ""
+"Utilizatz una aplicacion de burèu a distància per vos connectar en utilizant "
+"lo protocòl RDP. D'informacions suplementàrias sus l'emplaçament de la ret "
+"del periferic se pòdon tanben demandar."
 
 #: panels/system/remote-desktop/cc-desktop-sharing-page.ui:46
 #: panels/system/remote-desktop/cc-remote-login-page.ui:45
@@ -8509,7 +8571,7 @@ msgstr "Lo nom d’utilizaire pòt pas inclure « %c »"
 
 #: panels/system/users/user-utils.c:152
 msgid "Username is already in use — please choose another"
-msgstr ""
+msgstr "Lo nom d'utilizaire es ja utilizat — causissètz-ne un autre"
 
 #: panels/system/users/user-utils.c:195
 #, c-format
@@ -8569,7 +8631,7 @@ msgstr "Alèrtas _visualas"
 
 #: panels/universal-access/cc-ua-hearing-page.ui:52
 msgid "_Flash Area"
-msgstr ""
+msgstr "Airal del _flash"
 
 #: panels/universal-access/cc-ua-hearing-page.ui:58
 msgid "Entire Screen"
