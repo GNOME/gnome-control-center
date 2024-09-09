@@ -22,8 +22,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2024-09-02 08:23+0000\n"
-"PO-Revision-Date: 2024-09-05 13:24+0200\n"
+"POT-Creation-Date: 2024-09-09 00:57+0000\n"
+"PO-Revision-Date: 2024-09-09 12:24+0200\n"
 "Last-Translator: Daniel Mustieles García <daniel.mustieles@gmail.com>\n"
 "Language-Team: Spanish - Spain <gnome-es-list@gnome.org>\n"
 "Language: es_ES\n"
@@ -231,7 +231,6 @@ msgstr ""
 
 #: panels/applications/cc-applications-panel.ui:245
 #: panels/printers/pp-details-dialog.c:268
-#: panels/sharing/cc-sharing-panel.c:275
 msgid "_Open"
 msgstr "_Abrir"
 
@@ -841,26 +840,26 @@ msgstr ""
 "aplicación;flatpak;permisos;configuracion;predeterminada;favorita;media;"
 "autoejecutar;cd;dvd;usb;sonido;vídeo;disco;extraíble;dispositivo;sistema;"
 
-#: panels/background/cc-background-chooser.c:161
+#: panels/background/cc-background-chooser.c:146
 msgid "Remove Background"
 msgstr "Quitar fondo"
 
-#: panels/background/cc-background-chooser.c:346
+#: panels/background/cc-background-chooser.c:331
 msgid "Select a picture"
 msgstr "Seleccionar una imagen"
 
-#: panels/background/cc-background-item.c:173
+#: panels/background/cc-background-item.c:172
 msgid "multiple sizes"
 msgstr "tamaños múltiples"
 
 #. translators: 100 × 100px
 #. * Note that this is not an "x", but U+00D7 MULTIPLICATION SIGN
-#: panels/background/cc-background-item.c:180
+#: panels/background/cc-background-item.c:179
 #, c-format
 msgid "%d × %d"
 msgstr "%d × %d"
 
-#: panels/background/cc-background-item.c:293
+#: panels/background/cc-background-item.c:358
 msgid "No Desktop Background"
 msgstr "Sin fondo de escritorio"
 
@@ -1102,7 +1101,6 @@ msgstr "Calibración de la pantalla"
 #: panels/privacy/usage/cc-usage-page.ui:125
 #: panels/privacy/usage/cc-usage-page.ui:136
 #: panels/privacy/usage/cc-usage-page.ui:147
-#: panels/sharing/cc-sharing-panel.c:274
 #: panels/system/region/cc-format-chooser.ui:24
 #: panels/system/users/cc-add-user-dialog.ui:24
 #: panels/system/users/cc-avatar-chooser.c:92
@@ -1237,12 +1235,12 @@ msgid "Save Profile"
 msgstr "Guardar perfil"
 
 #. TRANSLATORS: this is when the button is sensitive
-#: panels/color/cc-color-panel.c:1144
+#: panels/color/cc-color-panel.c:1149
 msgid "Create a color profile for the selected device"
 msgstr "Crear un perfil de color para el dispositivo seleccionado"
 
 #. TRANSLATORS: this is when the button is insensitive
-#: panels/color/cc-color-panel.c:1159 panels/color/cc-color-panel.c:1183
+#: panels/color/cc-color-panel.c:1164 panels/color/cc-color-panel.c:1188
 msgid ""
 "The measuring instrument is not detected. Please check it is turned on and "
 "correctly connected."
@@ -1251,26 +1249,26 @@ msgstr ""
 "correctamente conectado."
 
 #. TRANSLATORS: this is when the button is insensitive
-#: panels/color/cc-color-panel.c:1193
+#: panels/color/cc-color-panel.c:1198
 msgid "The measuring instrument does not support printer profiling."
 msgstr "El instrumento de medida no soporta perfilado de impresoras."
 
 #. TRANSLATORS: this is when the button is insensitive
-#: panels/color/cc-color-panel.c:1204
+#: panels/color/cc-color-panel.c:1209
 msgid "The device type is not currently supported."
 msgstr "El tipo de dispositivo actualmente no está soportado."
 
 #. Translators: This will be presented as the text of a link to the documentation
 #. translators: Text used in link to privacy policy
 #. Translators: This will be presented as the text of a link to the documentation
-#: panels/color/cc-color-panel.c:1999
+#: panels/color/cc-color-panel.c:2008
 #: panels/privacy/diagnostics/cc-diagnostics-page.c:122
 #: panels/wacom/cc-wacom-device.c:168
 msgid "learn more"
 msgstr "aprender más"
 
 #. Translators: %s is a link to the documentation with the label "learn more"
-#: panels/color/cc-color-panel.c:2001
+#: panels/color/cc-color-panel.c:2010
 #, c-format
 msgid "Each device needs an up to date color profile to be color managed — %s."
 msgstr ""
@@ -6578,7 +6576,7 @@ msgid "Subfolders must be manually added for this location"
 msgstr "Las subcarpetas se deben añadir manualmente a esta ubicación"
 
 #: panels/search/cc-search-locations-page.c:598
-#: panels/sharing/cc-sharing-panel.c:424
+#: panels/sharing/cc-sharing-panel.c:423
 msgid "Remove Folder"
 msgstr "Quitar carpeta"
 
@@ -6673,20 +6671,20 @@ msgctxt "service is active"
 msgid "Active"
 msgstr "Activo"
 
-#: panels/sharing/cc-sharing-panel.c:271
+#: panels/sharing/cc-sharing-panel.c:275
 msgid "Choose a Folder"
 msgstr "Elija una carpeta"
 
-#: panels/sharing/cc-sharing-panel.c:414
+#: panels/sharing/cc-sharing-panel.c:413
 msgid "Open Folder"
 msgstr "Abrir carpeta"
 
-#: panels/sharing/cc-sharing-panel.c:444
+#: panels/sharing/cc-sharing-panel.c:443
 msgid "_Add Folder"
 msgstr "_Añadir carpeta"
 
 #. Translators: %s is the hostname of the user's device
-#: panels/sharing/cc-sharing-panel.c:603
+#: panels/sharing/cc-sharing-panel.c:602
 #, c-format
 msgid ""
 "File sharing allows sharing the Public folder with other devices on the "
@@ -6751,6 +6749,10 @@ msgid ""
 "It may still be possible for devices on this network to see what content is "
 "being shared."
 msgstr ""
+"Se requiere una contraseña en los dispositivos que quieran acceder a "
+"contenido compartido.\n"
+"Es posible que los dispositivos de esta red aún puedan ver qué contenido se "
+"está compartiendo."
 
 #: panels/sharing/cc-sharing-panel.ui:134
 #: panels/system/users/cc-add-user-dialog.ui:176
@@ -8716,6 +8718,10 @@ msgid ""
 "motion in the user interface at all. This may introduce unwanted effects "
 "that may have a negative impact on some visual sensitivities."
 msgstr ""
+"Desactivar los efectos de animación dará como resultado transiciones más "
+"repentinas y ningún movimiento en la interfaz de usuario. Esto puede generar "
+"efectos no deseados que pueden tener un impacto negativo en algunas "
+"sensibilidades visuales."
 
 #: panels/universal-access/cc-ua-seeing-page.ui:65
 msgid "_Large Text"
@@ -9117,6 +9123,7 @@ msgstr "Mostrar la ayuda en pantalla"
 #, c-format
 msgid "This device is unknown and may present wrong capabilities — %s."
 msgstr ""
+"Este dispositivo es desconocido y puede presentar capacidades erróneas — %s."
 
 #: panels/wacom/cc-wacom-device.c:444
 msgid "Tablet mounted on laptop panel"
@@ -9871,7 +9878,7 @@ msgstr "Mostrar el número de versión"
 
 #: shell/cc-application.c:69
 msgid "Enable verbose mode. Specify multiple times to increase verbosity"
-msgstr ""
+msgstr "Activar el modo detallado. Poner varias veces para aumentar el detalle"
 
 #: shell/cc-application.c:70
 msgid "Search for the string"
