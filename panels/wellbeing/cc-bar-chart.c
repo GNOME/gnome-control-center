@@ -104,6 +104,21 @@
  *                                     "limit."),
  *                                   -1);
  * ]|
+ *
+ * # Text direction
+ *
+ * If the widget text direction is changed (see gtk_widget_set_direction()),
+ * the discrete axis will be reversed and the continuous axis will be drawn on
+ * the opposite side of the graph from normal.
+ *
+ * For discrete axes which represent the passage of time, this is correct. For
+ * discrete axes which represent unordered categories, reversing the axis is
+ * not necessary and can be disabled by explicitly setting the text direction
+ * of the widget using gtk_widget_set_direction().
+ *
+ * See the [Material design guidelines](https://m2.material.io/design/usability/bidirectionality.html#mirroring-elements)
+ * or the [GNOME HIG](https://gitlab.gnome.org/Teams/Websites/developer.gnome.org-hig/-/issues/61)
+ * for guidance about when charts should be mirrored.
  */
 struct _CcBarChart {
   GtkWidget parent_instance;
@@ -489,7 +504,10 @@ cc_bar_chart_size_allocate (GtkWidget *widget,
                               NULL, &label_natural_height,
                               NULL, &label_natural_baseline);
 
-          child_alloc.x = width - self->cached_continuous_axis_area_width;
+          if (gtk_widget_get_direction (GTK_WIDGET (self)) == GTK_TEXT_DIR_RTL)
+            child_alloc.x = 0;
+          else
+            child_alloc.x = width - self->cached_continuous_axis_area_width;
           /* centre the label vertically on the grid line position, and let the valign code
            * in GtkLabel align the text baseline correctly with that */
           child_alloc.y = value_to_widget_y (self, grid_line_value) - label_natural_height / 2;
@@ -800,6 +818,32 @@ cc_bar_chart_focus (GtkWidget        *widget,
   GtkWidget *focus_child;
   CcBarChartGroup *next_focus_group = NULL;
 
+  /* Reverse the direction if in RTL mode, as the chart presents things on a
+   * left–right axis. */
+  if (gtk_widget_get_direction (widget) == GTK_TEXT_DIR_RTL)
+    {
+      switch (direction)
+        {
+        case GTK_DIR_TAB_BACKWARD:
+          direction = GTK_DIR_TAB_FORWARD;
+          break;
+        case GTK_DIR_TAB_FORWARD:
+          direction = GTK_DIR_TAB_BACKWARD;
+          break;
+        case GTK_DIR_LEFT:
+          direction = GTK_DIR_RIGHT;
+          break;
+        case GTK_DIR_RIGHT:
+          direction = GTK_DIR_LEFT;
+          break;
+        case GTK_DIR_UP:
+        case GTK_DIR_DOWN:
+        default:
+          /* No change. */
+          break;
+        }
+    }
+
   focus_child = gtk_widget_get_focus_child (widget);
 
   if (focus_child != NULL)
@@ -989,8 +1033,18 @@ calculate_axis_area_widths (CcBarChart *self,
 {
   int left_axis_area_width, right_axis_area_width;
 
-  left_axis_area_width = 0;
-  right_axis_area_width = self->cached_continuous_axis_area_width;
+  /* The continuous axis is on the right of the plot area in LTR directions,
+   * and on the left in RTL. */
+  if (gtk_widget_get_direction (GTK_WIDGET (self)) == GTK_TEXT_DIR_RTL)
+    {
+      left_axis_area_width = self->cached_continuous_axis_area_width;
+      right_axis_area_width = 0;
+    }
+  else
+    {
+      left_axis_area_width = 0;
+      right_axis_area_width = self->cached_continuous_axis_area_width;
+    }
 
   if (out_left_axis_area_width != NULL)
     *out_left_axis_area_width = left_axis_area_width;
@@ -1018,6 +1072,10 @@ calculate_group_x_bounds (CcBarChart   *self,
   g_assert (self->n_data > 0);
 
   calculate_axis_area_widths (self, &left_axis_area_width, &right_axis_area_width);
+
+  /* If drawing RTL, reverse the bar positions. */
+  if (gtk_widget_get_direction (GTK_WIDGET (self)) == GTK_TEXT_DIR_RTL)
+    idx = self->n_data - idx - 1;
 
   widget_width = gtk_widget_get_width (GTK_WIDGET (self));
   plot_width = widget_width - left_axis_area_width - right_axis_area_width;

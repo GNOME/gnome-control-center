@@ -284,6 +284,10 @@ cc_bar_chart_group_size_allocate (GtkWidget *widget,
       int bar_top_y, bar_bottom_y, bar_left_x, bar_right_x;
       GtkAllocation child_alloc;
 
+      /* If drawing RTL, reverse the bar positions. */
+      if (gtk_widget_get_direction (GTK_WIDGET (self)) == GTK_TEXT_DIR_RTL)
+        bar = self->bars->pdata[self->bars->len - i - 1];
+
       bar_left_x = width * i / self->bars->len;
       bar_right_x = width * (i + 1) / self->bars->len;
 
@@ -368,6 +372,32 @@ cc_bar_chart_group_focus (GtkWidget        *widget,
   GtkWidget *focus_child;
   CcBarChartBar *next_focus_bar = NULL;
 
+  /* Reverse the direction if in RTL mode, as the chart presents things on a
+   * left–right axis. */
+  if (gtk_widget_get_direction (widget) == GTK_TEXT_DIR_RTL)
+    {
+      switch (direction)
+        {
+        case GTK_DIR_TAB_BACKWARD:
+          direction = GTK_DIR_TAB_FORWARD;
+          break;
+        case GTK_DIR_TAB_FORWARD:
+          direction = GTK_DIR_TAB_BACKWARD;
+          break;
+        case GTK_DIR_LEFT:
+          direction = GTK_DIR_RIGHT;
+          break;
+        case GTK_DIR_RIGHT:
+          direction = GTK_DIR_LEFT;
+          break;
+        case GTK_DIR_UP:
+        case GTK_DIR_DOWN:
+        default:
+          /* No change. */
+          break;
+        }
+    }
+
   focus_child = gtk_widget_get_focus_child (widget);
 
   if (focus_child != NULL)
@@ -376,7 +406,6 @@ cc_bar_chart_group_focus (GtkWidget        *widget,
       if (gtk_widget_child_focus (focus_child, direction))
         return TRUE;
 
-      /* TODO Does this need reversing in RTL? */
       if (CC_IS_BAR_CHART_BAR (focus_child) &&
           (direction == GTK_DIR_LEFT || direction == GTK_DIR_TAB_BACKWARD))
         next_focus_bar = get_adjacent_focusable_bar (self, CC_BAR_CHART_BAR (focus_child), -1);
