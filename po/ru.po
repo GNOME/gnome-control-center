@@ -24,8 +24,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2024-08-13 08:15+0000\n"
-"PO-Revision-Date: 2024-08-13 12:11+0300\n"
+"POT-Creation-Date: 2024-09-05 10:35+0000\n"
+"PO-Revision-Date: 2024-09-03 14:15+0300\n"
 "Last-Translator: Artur So <arturios2005@mail.ru>\n"
 "Language-Team: Русский <gnome-cyr@gnome.org>\n"
 "Language: ru\n"
@@ -52,8 +52,8 @@ msgid "Session Bus"
 msgstr "Шина сеанса"
 
 #: panels/applications/cc-applications-panel.c:850
-#: panels/privacy/bolt/cc-bolt-page.ui:199
-#: panels/privacy/bolt/cc-bolt-page.ui:237
+#: panels/privacy/bolt/cc-bolt-page.ui:158
+#: panels/privacy/bolt/cc-bolt-page.ui:196
 #: panels/privacy/cc-privacy-panel.ui:72
 msgid "Devices"
 msgstr "Устройства"
@@ -168,6 +168,7 @@ msgstr "Выберите приложения, открывающие ссылк
 
 #: panels/applications/cc-applications-panel.ui:84
 #: panels/keyboard/cc-keyboard-shortcut-dialog.ui:94
+#: panels/printers/cc-printers-panel.ui:102
 #: panels/system/datetime/cc-tz-dialog.ui:42
 #: panels/system/region/cc-format-chooser.ui:176 shell/cc-panel-list.ui:44
 msgid "No Results Found"
@@ -175,6 +176,7 @@ msgstr "Результатов не найдено"
 
 #: panels/applications/cc-applications-panel.ui:85
 #: panels/keyboard/cc-keyboard-shortcut-dialog.ui:95
+#: panels/printers/cc-printers-panel.ui:103
 #: panels/system/datetime/cc-tz-dialog.ui:43
 #: panels/system/region/cc-format-chooser.ui:177 shell/cc-panel-list.ui:45
 msgid "Try a different search"
@@ -193,13 +195,14 @@ msgstr "_Найти в Центре приложений"
 msgid "Unable to List Apps"
 msgstr "Список приложений недоступен"
 
+#. Translators: Parental Controls here refers to the features provided by 'malcontent'
 #: panels/applications/cc-applications-panel.ui:122
 msgid ""
 "An error has occurred and apps cannot be listed.\n"
-"Error details: Malcontent is not installed."
+"Error details: Parental Controls are not installed."
 msgstr ""
 "Произошла ошибка, и приложения не могут быть перечислены.\n"
-"Подробности ошибки: Malcontent не установлен."
+"Подробности ошибки: Родительский контроль не установлен."
 
 #: panels/applications/cc-applications-panel.ui:139
 #: panels/applications/cc-default-apps-page.ui:4
@@ -237,7 +240,6 @@ msgstr ""
 
 #: panels/applications/cc-applications-panel.ui:245
 #: panels/printers/pp-details-dialog.c:268
-#: panels/sharing/cc-sharing-panel.c:275
 msgid "_Open"
 msgstr "_Открыть"
 
@@ -842,26 +844,26 @@ msgstr ""
 "устройство;система;по умолчанию;приложение;предпочтительный;cd;dvd;usb;аудио;"
 "видео;диск;съёмный;съемный;носитель;автозапуск;flatpak;разрешения;настройка;"
 
-#: panels/background/cc-background-chooser.c:160
+#: panels/background/cc-background-chooser.c:146
 msgid "Remove Background"
 msgstr "Удалить фон"
 
-#: panels/background/cc-background-chooser.c:345
+#: panels/background/cc-background-chooser.c:331
 msgid "Select a picture"
 msgstr "Выберите изображение"
 
-#: panels/background/cc-background-item.c:173
+#: panels/background/cc-background-item.c:172
 msgid "multiple sizes"
 msgstr "множество размеров"
 
 #. translators: 100 × 100px
 #. * Note that this is not an "x", but U+00D7 MULTIPLICATION SIGN
-#: panels/background/cc-background-item.c:180
+#: panels/background/cc-background-item.c:179
 #, c-format
 msgid "%d × %d"
 msgstr "%d × %d"
 
-#: panels/background/cc-background-item.c:295
+#: panels/background/cc-background-item.c:358
 msgid "No Desktop Background"
 msgstr "Без фона рабочего стола"
 
@@ -1093,16 +1095,17 @@ msgstr "Калибровка экрана"
 #: panels/network/connection-editor/ce-page-details.c:89
 #: panels/network/connection-editor/connection-editor.ui:16
 #: panels/printers/pp-details-dialog.c:267
+#: panels/printers/pp-jobs-dialog.ui:125
 #: panels/printers/pp-new-printer-dialog.ui:65
 #: panels/printers/pp-ppd-selection-dialog.ui:17
 #: panels/privacy/usage/cc-usage-page.ui:125
 #: panels/privacy/usage/cc-usage-page.ui:136
 #: panels/privacy/usage/cc-usage-page.ui:147
-#: panels/sharing/cc-sharing-panel.c:274
 #: panels/system/region/cc-format-chooser.ui:24
 #: panels/system/users/cc-add-user-dialog.ui:24
 #: panels/system/users/cc-avatar-chooser.c:92
 #: panels/system/users/cc-enterprise-login-dialog.ui:44
+#: panels/system/users/cc-fingerprint-dialog.c:1396
 #: panels/system/users/cc-fingerprint-dialog.ui:32
 #: panels/system/users/cc-password-dialog.ui:15
 #: panels/system/users/cc-user-page.ui:231
@@ -1233,12 +1236,12 @@ msgid "Save Profile"
 msgstr "Сохранить профиль"
 
 #. TRANSLATORS: this is when the button is sensitive
-#: panels/color/cc-color-panel.c:1141
+#: panels/color/cc-color-panel.c:1149
 msgid "Create a color profile for the selected device"
 msgstr "Создать цветовой профиль для выбранного устройства"
 
 #. TRANSLATORS: this is when the button is insensitive
-#: panels/color/cc-color-panel.c:1156 panels/color/cc-color-panel.c:1180
+#: panels/color/cc-color-panel.c:1164 panels/color/cc-color-panel.c:1188
 msgid ""
 "The measuring instrument is not detected. Please check it is turned on and "
 "correctly connected."
@@ -1247,26 +1250,26 @@ msgstr ""
 "подключён."
 
 #. TRANSLATORS: this is when the button is insensitive
-#: panels/color/cc-color-panel.c:1190
+#: panels/color/cc-color-panel.c:1198
 msgid "The measuring instrument does not support printer profiling."
 msgstr "Измерительный инструмент не поддерживает профилирование принтеров."
 
 #. TRANSLATORS: this is when the button is insensitive
-#: panels/color/cc-color-panel.c:1201
+#: panels/color/cc-color-panel.c:1209
 msgid "The device type is not currently supported."
 msgstr "Этот тип устройств ещё не поддерживается."
 
 #. Translators: This will be presented as the text of a link to the documentation
 #. translators: Text used in link to privacy policy
 #. Translators: This will be presented as the text of a link to the documentation
-#: panels/color/cc-color-panel.c:1996
+#: panels/color/cc-color-panel.c:2008
 #: panels/privacy/diagnostics/cc-diagnostics-page.c:122
 #: panels/wacom/cc-wacom-device.c:168
 msgid "learn more"
 msgstr "узнать больше"
 
 #. Translators: %s is a link to the documentation with the label "learn more"
-#: panels/color/cc-color-panel.c:1998
+#: panels/color/cc-color-panel.c:2010
 #, c-format
 msgid "Each device needs an up to date color profile to be color managed — %s."
 msgstr ""
@@ -1667,7 +1670,7 @@ msgid "No languages found"
 msgstr "Ни один язык не найден"
 
 #: panels/common/cc-language-chooser.ui:70
-#: panels/keyboard/cc-input-chooser.c:185
+#: panels/keyboard/cc-input-chooser.c:182
 msgid "More…"
 msgstr "Ещё…"
 
@@ -2254,15 +2257,15 @@ msgstr "Уменьшить размер текста"
 msgid "High contrast on or off"
 msgstr "Включить или выключить высокую контрастность"
 
-#: panels/keyboard/cc-input-chooser.c:198
+#: panels/keyboard/cc-input-chooser.c:195
 msgid "No input sources found"
 msgstr "Источники ввода не найдены"
 
-#: panels/keyboard/cc-input-chooser.c:253 panels/keyboard/cc-input-row.ui:46
+#: panels/keyboard/cc-input-chooser.c:250 panels/keyboard/cc-input-row.ui:46
 msgid "View Keyboard Layout"
 msgstr "Показать раскладку клавиатуры"
 
-#: panels/keyboard/cc-input-chooser.c:1046
+#: panels/keyboard/cc-input-chooser.c:1043
 msgctxt "Input Source"
 msgid "Other"
 msgstr "Другой"
@@ -2274,10 +2277,6 @@ msgstr "Добавить источник ввода"
 #: panels/keyboard/cc-input-chooser.ui:37
 msgid "Search languages and countries"
 msgstr "Поиск языков и стран"
-
-#: panels/keyboard/cc-input-chooser.ui:52
-msgid "Input methods can’t be used on the login screen"
-msgstr "Методы ввода нельзя использовать на экране входа в систему"
 
 #: panels/keyboard/cc-input-list-box.ui:14
 msgid "_Add Input Source"
@@ -2412,53 +2411,53 @@ msgstr ""
 "Эту комбинацию можно изменить в настройках комбинаций клавиш."
 
 # спецсимвол-невидимый перенос тут между стрелок <­>, копировать через vim или nano
-#: panels/keyboard/cc-keyboard-panel.ui:13
+#: panels/keyboard/cc-keyboard-panel.ui:6
 #: panels/keyboard/gnome-keyboard-panel.desktop.in:3
 msgid "Keyboard"
 msgstr "Клавиатура"
 
-#: panels/keyboard/cc-keyboard-panel.ui:23
+#: panels/keyboard/cc-keyboard-panel.ui:16
 msgid "Input Sources"
 msgstr "Источники ввода"
 
-#: panels/keyboard/cc-keyboard-panel.ui:24
+#: panels/keyboard/cc-keyboard-panel.ui:17
 msgid "Includes keyboard layouts and input methods"
 msgstr "Включает раскладки клавиатуры и методы ввода"
 
-#: panels/keyboard/cc-keyboard-panel.ui:34
+#: panels/keyboard/cc-keyboard-panel.ui:27
 msgid "Input Source Switching"
 msgstr "Переключение источников ввода"
 
-#: panels/keyboard/cc-keyboard-panel.ui:37
+#: panels/keyboard/cc-keyboard-panel.ui:30
 msgid "Use the _same source for all windows"
 msgstr "Использовать _один источник для всех окон"
 
-#: panels/keyboard/cc-keyboard-panel.ui:49
+#: panels/keyboard/cc-keyboard-panel.ui:42
 msgid "Switch input sources _individually for each window"
 msgstr "Использовать _свой источник для каждого окна"
 
-#: panels/keyboard/cc-keyboard-panel.ui:65
+#: panels/keyboard/cc-keyboard-panel.ui:58
 msgid "Special Character Entry"
 msgstr "Ввод специальных знаков"
 
-#: panels/keyboard/cc-keyboard-panel.ui:66
+#: panels/keyboard/cc-keyboard-panel.ui:59
 msgid "Methods for entering symbols and letter variants using the keyboard"
 msgstr "Методы ввода символов и вариантов букв, используя клавиатуру"
 
-#: panels/keyboard/cc-keyboard-panel.ui:69
+#: panels/keyboard/cc-keyboard-panel.ui:62
 msgid "A_lternate Characters Key"
 msgstr "Клавиша а_льтернативных символов"
 
-#: panels/keyboard/cc-keyboard-panel.ui:77
+#: panels/keyboard/cc-keyboard-panel.ui:70
 msgid "_Compose Key"
 msgstr "Клавиша _Compose"
 
-#: panels/keyboard/cc-keyboard-panel.ui:86
+#: panels/keyboard/cc-keyboard-panel.ui:79
 #: panels/keyboard/cc-keyboard-shortcut-dialog.ui:9
 msgid "Keyboard Shortcuts"
 msgstr "Комбинации клавиш"
 
-#: panels/keyboard/cc-keyboard-panel.ui:89
+#: panels/keyboard/cc-keyboard-panel.ui:82
 msgid "_View and Customize Shortcuts"
 msgstr "_Просмотр и изменение комбинаций клавиш"
 
@@ -3025,7 +3024,7 @@ msgstr "Имя сети"
 #. Translators: This is a password needed for printing.
 #: panels/network/cc-qr-code-dialog.ui:66
 #: panels/network/cc-wifi-hotspot-dialog.ui:92
-#: panels/printers/pp-jobs-dialog.ui:52
+#: panels/printers/pp-jobs-dialog.ui:178
 #: panels/printers/pp-new-printer-dialog.ui:292
 #: panels/system/users/cc-add-user-dialog.ui:103
 #: panels/wwan/cc-wwan-apn-dialog.ui:175
@@ -3229,7 +3228,7 @@ msgstr "_Безопасность 802.1x"
 #: panels/printers/pp-details-dialog.ui:24
 #: panels/system/users/cc-user-page.ui:84
 msgid "_Name"
-msgstr "_Название"
+msgstr "_Имя"
 
 #: panels/network/connection-editor/ce-page-8021x-security.c:106
 #: panels/network/connection-editor/ce-page-security.c:415
@@ -4483,6 +4482,7 @@ msgid "Google"
 msgstr "Google"
 
 #: panels/online-accounts/cc-online-account-provider-row.c:58
+#: panels/online-accounts/cc-online-account-provider-row.c:60
 msgid "Email, calendar, contacts, files"
 msgstr "Эл. почта, календарь, контакты, файлы"
 
@@ -4497,10 +4497,6 @@ msgstr "Эл. почта"
 #: panels/online-accounts/cc-online-account-provider-row.c:60
 msgid "Microsoft 365"
 msgstr "Microsoft 365"
-
-#: panels/online-accounts/cc-online-account-provider-row.c:60
-msgid "Files"
-msgstr "Файлы"
 
 #: panels/online-accounts/cc-online-account-provider-row.c:61
 msgid "Microsoft Exchange"
@@ -4951,21 +4947,21 @@ msgstr ""
 "Energy;Питание;Спящий;Ждущий;Батарея;Яркость;Затемнение;Экран;DPMS;"
 "Бездействующий;Энергия;"
 
-#: panels/printers/cc-printers-panel.c:677
+#: panels/printers/cc-printers-panel.c:672
 msgid "Undo"
 msgstr "Отменить"
 
 #. Translators: %s is the printer name
-#: panels/printers/cc-printers-panel.c:687
+#: panels/printers/cc-printers-panel.c:682
 #, c-format
 msgid "Printer “%s” has been deleted"
 msgstr "Принтер «%s» удалён"
 
-#: panels/printers/cc-printers-panel.c:928
+#: panels/printers/cc-printers-panel.c:924
 msgid "Failed to add new printer."
 msgstr "Не удалось добавить новый принтер."
 
-#: panels/printers/cc-printers-panel.c:1297
+#: panels/printers/cc-printers-panel.c:1293
 msgid "Unlock to add printers and change settings"
 msgstr "Разблокировать для добавления принтеров и изменения настроек"
 
@@ -4976,7 +4972,7 @@ msgstr "Все подключённые и сетевые принтеры"
 #. Translators: This button adds new printer.
 #. Translators: This button adds a new printer.
 #: panels/printers/cc-printers-panel.ui:31
-#: panels/printers/cc-printers-panel.ui:118
+#: panels/printers/cc-printers-panel.ui:124
 msgid "_Add Printer…"
 msgstr "_Добавить принтер…"
 
@@ -4984,17 +4980,17 @@ msgstr "_Добавить принтер…"
 msgid "Search printers"
 msgstr "Поиск принтеров"
 
-#: panels/printers/cc-printers-panel.ui:115
+#: panels/printers/cc-printers-panel.ui:121
 msgid "No Printers"
 msgstr "Принтеров нет"
 
 #. Translators: Title if the CUPS server is not running (we can not connect to it).
-#: panels/printers/cc-printers-panel.ui:140
+#: panels/printers/cc-printers-panel.ui:146
 msgid "No Print Service"
 msgstr "Нет службы печати"
 
 #. Translators: Description if the CUPS server is not running (we can not connect to it).
-#: panels/printers/cc-printers-panel.ui:141
+#: panels/printers/cc-printers-panel.ui:147
 msgid "The system printing service doesn’t seem to be available"
 msgstr "Системная служба печати, похоже, недоступна"
 
@@ -5184,7 +5180,7 @@ msgid "Move Print Job to Top of Queue"
 msgstr "Переместить задание печати в начало очереди"
 
 #. Translators: This label shows how many jobs of this printer needs to be authenticated to be printed.
-#: panels/printers/pp-jobs-dialog.c:318
+#: panels/printers/pp-jobs-dialog.c:319
 #, c-format
 msgid "%u Job Requires Authentication"
 msgid_plural "%u Jobs Require Authentication"
@@ -5193,50 +5189,58 @@ msgstr[1] "%u задания требуют аутентификацию"
 msgstr[2] "%u заданий требуют аутентификацию"
 
 #. Translators: The printer needs authentication info to print.
-#: panels/printers/pp-jobs-dialog.c:455
+#: panels/printers/pp-jobs-dialog.c:456
 #, c-format
 msgid "Enter credentials to print from %s"
 msgstr "Введите учётные данные для печати из %s"
 
+#. Translators: this action removes (purges) all the listed jobs from the list.
+#: panels/printers/pp-jobs-dialog.ui:12
+msgid "_Clear All"
+msgstr "О_чистить все"
+
+#: panels/printers/pp-jobs-dialog.ui:23
+msgid "Active Jobs"
+msgstr "Активные задания"
+
+#. Translators: this label describes the dialog empty state, with no jobs listed.
+#: panels/printers/pp-jobs-dialog.ui:36
+msgid "No Active Printer Jobs"
+msgstr "Нет активных заданий печати"
+
+#. Translators: This button pop up authentication dialog for print jobs which need credentials.
+#: panels/printers/pp-jobs-dialog.ui:80
+msgid "_Authenticate"
+msgstr "_Авторизоваться"
+
+#: panels/printers/pp-jobs-dialog.ui:119
+msgid "Clear All Active Jobs?"
+msgstr "Очистить все активные задания?"
+
+#: panels/printers/pp-jobs-dialog.ui:120
+msgid "Clearing jobs cannot be undone"
+msgstr "Очистка заданий не может быть отменена"
+
+#: panels/printers/pp-jobs-dialog.ui:126
+msgid "Clear _All"
+msgstr "Очистить _все"
+
 #. Translators: This is a windows domain used with SMB protocol.
-#: panels/printers/pp-jobs-dialog.ui:28
+#: panels/printers/pp-jobs-dialog.ui:154
 msgid "Domain"
 msgstr "Домен"
 
 #. Translators: This is a username on a print server.
-#: panels/printers/pp-jobs-dialog.ui:40
+#: panels/printers/pp-jobs-dialog.ui:166
 #: panels/printers/pp-new-printer-dialog.ui:271
 #: panels/wwan/cc-wwan-apn-dialog.ui:150
 msgid "Username"
 msgstr "Имя пользователя"
 
 #. Translators: This button authenticates all print jobs and send them for printing.
-#: panels/printers/pp-jobs-dialog.ui:101
+#: panels/printers/pp-jobs-dialog.ui:227
 msgid "A_uthenticate"
 msgstr "А_утентификация"
-
-#: panels/printers/pp-jobs-dialog.ui:119
-msgid "Printer Jobs"
-msgstr "Задания принтера"
-
-#. Translators: this action removes (purges) all the listed jobs from the list.
-#: panels/printers/pp-jobs-dialog.ui:128
-msgid "_Clear All"
-msgstr "О_чистить все"
-
-#: panels/printers/pp-jobs-dialog.ui:139
-msgid "Active Jobs"
-msgstr "Активные задания"
-
-#. Translators: this label describes the dialog empty state, with no jobs listed.
-#: panels/printers/pp-jobs-dialog.ui:152
-msgid "No Active Printer Jobs"
-msgstr "Нет активных заданий печати"
-
-#. Translators: This button pop up authentication dialog for print jobs which need credentials.
-#: panels/printers/pp-jobs-dialog.ui:196
-msgid "_Authenticate"
-msgstr "_Авторизоваться"
 
 #. Translators: Name of job which makes printer to autoconfigure itself
 #: panels/printers/pp-new-printer.c:1200
@@ -5783,23 +5787,23 @@ msgctxt "Thunderbolt Device Status"
 msgid "Authorized"
 msgstr "Авторизовано"
 
-#: panels/privacy/bolt/cc-bolt-page.c:216
+#: panels/privacy/bolt/cc-bolt-page.c:211
 msgid ""
 "The Thunderbolt subsystem (boltd) is not installed or not set up properly."
 msgstr ""
 "Подсистема Thunderbolt (boltd) не установлена или настроена неправильно."
 
-#: panels/privacy/bolt/cc-bolt-page.c:472
+#: panels/privacy/bolt/cc-bolt-page.c:467
 msgid "Allow direct access to devices such as docks and external GPUs."
 msgstr ""
 "Разрешить прямой доступ к таким устройствам, как док-станции и внешние "
 "графические процессоры."
 
-#: panels/privacy/bolt/cc-bolt-page.c:473
+#: panels/privacy/bolt/cc-bolt-page.c:468
 msgid "Only USB and Display Port devices can attach."
 msgstr "Возможно подключение только устройств USB и Display Port."
 
-#: panels/privacy/bolt/cc-bolt-page.c:508
+#: panels/privacy/bolt/cc-bolt-page.c:503
 msgid ""
 "Thunderbolt could not be detected.\n"
 "Either the system lacks Thunderbolt support, it has been disabled in the "
@@ -5809,15 +5813,15 @@ msgstr ""
 "Либо в системе отсутствует поддержка Thunderbolt, отключено в BIOS, либо "
 "установлено на неподдерживаемый уровень безопасности в BIOS."
 
-#: panels/privacy/bolt/cc-bolt-page.c:552
+#: panels/privacy/bolt/cc-bolt-page.c:547
 msgid "Thunderbolt support has been disabled in the BIOS."
 msgstr "Поддержка Thunderbolt отключена в BIOS."
 
-#: panels/privacy/bolt/cc-bolt-page.c:556
+#: panels/privacy/bolt/cc-bolt-page.c:551
 msgid "Thunderbolt security level could not be determined."
 msgstr "Уровень безопасности Thunderbolt не может быть определен."
 
-#: panels/privacy/bolt/cc-bolt-page.c:676
+#: panels/privacy/bolt/cc-bolt-page.c:671
 #, c-format
 msgid "Error switching direct mode: %s"
 msgstr "Ошибка переключения в режим прямого доступа: %s"
@@ -5826,33 +5830,29 @@ msgstr "Ошибка переключения в режим прямого до�
 msgid "Thunderbolt"
 msgstr "Thunderbolt"
 
-#: panels/privacy/bolt/cc-bolt-page.ui:48
-msgid "Close notification"
-msgstr "Уведомление о закрытии"
-
-#: panels/privacy/bolt/cc-bolt-page.ui:92
+#: panels/privacy/bolt/cc-bolt-page.ui:51
 msgid "No Thunderbolt Support"
 msgstr "Нет поддержки Thunderbolt"
 
-#: panels/privacy/bolt/cc-bolt-page.ui:93
+#: panels/privacy/bolt/cc-bolt-page.ui:52
 msgid "Could not connect to the thunderbolt subsystem"
 msgstr "Не удалось подключиться к подсистеме thunderbolt"
 
-#: panels/privacy/bolt/cc-bolt-page.ui:110
+#: panels/privacy/bolt/cc-bolt-page.ui:69
 msgid "Direct Access"
 msgstr "Прямой доступ"
 
-#: panels/privacy/bolt/cc-bolt-page.ui:113
+#: panels/privacy/bolt/cc-bolt-page.ui:72
 msgid "Allow direct access to devices such as docks and external GPUs"
 msgstr ""
 "Разрешить прямой доступ к таким устройствам, как док-станции и внешние "
 "графические процессоры"
 
-#: panels/privacy/bolt/cc-bolt-page.ui:163
+#: panels/privacy/bolt/cc-bolt-page.ui:122
 msgid "Pending Devices"
 msgstr "Ожидающие устройства"
 
-#: panels/privacy/bolt/cc-bolt-page.ui:246
+#: panels/privacy/bolt/cc-bolt-page.ui:205
 msgid "No devices attached"
 msgstr "Нет подключённых устройств"
 
@@ -6065,7 +6065,7 @@ msgstr ""
 
 #. TRANSLATORS: in reference to firmware protection: 0/4 stars
 #: panels/privacy/firmware-security/cc-firmware-security-dialog.c:108
-#: panels/privacy/firmware-security/cc-firmware-security-page.c:532
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:533
 msgid "Security Checks Failed"
 msgstr "Проверка безопасности не удалась"
 
@@ -6089,7 +6089,7 @@ msgstr ""
 
 #. TRANSLATORS: in reference to firmware protection: 1/4 stars
 #: panels/privacy/firmware-security/cc-firmware-security-dialog.c:121
-#: panels/privacy/firmware-security/cc-firmware-security-page.c:539
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:540
 msgid "Basic Security Checks Passed"
 msgstr "Базовая проверка безопасности пройдена"
 
@@ -6107,7 +6107,7 @@ msgstr ""
 
 #. TRANSLATORS: in reference to firmware protection: 2~4 stars
 #: panels/privacy/firmware-security/cc-firmware-security-dialog.c:134
-#: panels/privacy/firmware-security/cc-firmware-security-page.c:549
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:550
 msgid "Protected"
 msgstr "Защищено"
 
@@ -6236,44 +6236,44 @@ msgstr ""
 
 #. TRANSLATOR: this is the date in "%Y-%m-%d %H:%M:%S" format,
 #. for example: 2022-08-01 22:48:00
-#: panels/privacy/firmware-security/cc-firmware-security-page.c:228
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:229
 #, c-format
 msgid "%1$s"
 msgstr "%1$s"
 
 #. TRANSLATOR: This is the text event status output when the event status is "success"
-#: panels/privacy/firmware-security/cc-firmware-security-page.c:234
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:235
 msgid "Pass"
 msgstr "Пройдено"
 
 #. TRANSLATOR: This is the text event status output when the event status is not "success"
-#: panels/privacy/firmware-security/cc-firmware-security-page.c:237
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:238
 msgid "! Fail"
 msgstr "! Неудачно"
 
-#: panels/privacy/firmware-security/cc-firmware-security-page.c:240
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:241
 #, c-format
 msgid "(%1$s → %2$s)"
 msgstr "(%1$s → %2$s)"
 
-#: panels/privacy/firmware-security/cc-firmware-security-page.c:533
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:534
 msgid "Hardware does not pass basic security checks."
 msgstr "Оборудование не проходит базовую проверку безопасности."
 
-#: panels/privacy/firmware-security/cc-firmware-security-page.c:540
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:541
 msgid "Hardware has a basic level of protection."
 msgstr "Оборудование имеет базовый уровень защиты."
 
-#: panels/privacy/firmware-security/cc-firmware-security-page.c:550
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:551
 msgid "Hardware has a strong level of protection."
 msgstr "Оборудование имеет надежный уровень защиты."
 
 #. TRANSLATORS: in reference to firmware protection: ??? stars
-#: panels/privacy/firmware-security/cc-firmware-security-page.c:556
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:557
 msgid "Security Checks Unavailable"
 msgstr "Проверка безопасности недоступна"
 
-#: panels/privacy/firmware-security/cc-firmware-security-page.c:557
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:558
 msgid "Security levels are not available for this device."
 msgstr "Уровни безопасности для этого устройства недоступны."
 
@@ -6704,7 +6704,7 @@ msgctxt "service is active"
 msgid "Active"
 msgstr "Запущено"
 
-#: panels/sharing/cc-sharing-panel.c:271
+#: panels/sharing/cc-sharing-panel.c:275
 msgid "Choose a Folder"
 msgstr "Выберите папку"
 
@@ -6743,7 +6743,7 @@ msgstr "Общий доступ к _файлам"
 msgid "Stream music, photos and videos to devices on the current network"
 msgstr "Передача музыки, фотографий и видео на устройства в текущей сети"
 
-#: panels/sharing/cc-sharing-panel.ui:38 panels/sharing/cc-sharing-panel.ui:163
+#: panels/sharing/cc-sharing-panel.ui:38 panels/sharing/cc-sharing-panel.ui:164
 msgid "_Media Sharing"
 msgstr "Общий доступ к _медиа"
 
@@ -6761,9 +6761,9 @@ msgstr "_Адрес общего доступа к файлам"
 #: panels/system/remote-desktop/cc-desktop-sharing-page.ui:95
 #: panels/system/remote-desktop/cc-desktop-sharing-page.ui:112
 #: panels/system/remote-desktop/cc-remote-login-page.ui:52
-#: panels/system/remote-desktop/cc-remote-login-page.ui:72
-#: panels/system/remote-desktop/cc-remote-login-page.ui:94
-#: panels/system/remote-desktop/cc-remote-login-page.ui:111
+#: panels/system/remote-desktop/cc-remote-login-page.ui:73
+#: panels/system/remote-desktop/cc-remote-login-page.ui:95
+#: panels/system/remote-desktop/cc-remote-login-page.ui:112
 #: panels/system/secure-shell/cc-secure-shell-page.ui:49
 msgid "Copy"
 msgstr "Копировать"
@@ -6793,11 +6793,11 @@ msgstr ""
 msgid "_Password"
 msgstr "_Пароль"
 
-#: panels/sharing/cc-sharing-panel.ui:150
+#: panels/sharing/cc-sharing-panel.ui:151
 msgid "Media Sharing"
 msgstr "Общий доступ к медиа"
 
-#: panels/sharing/cc-sharing-panel.ui:168
+#: panels/sharing/cc-sharing-panel.ui:169
 msgid ""
 "Media sharing allows streaming pictures, music and video to DLNA enabled "
 "devices on the current network."
@@ -6805,7 +6805,7 @@ msgstr ""
 "Общий доступ к медиа позволяет передавать изображения, музыку и видео на "
 "устройства с поддержкой DLNA в текущей сети."
 
-#: panels/sharing/cc-sharing-panel.ui:177
+#: panels/sharing/cc-sharing-panel.ui:178
 msgid "Folders"
 msgstr "Папки"
 
@@ -7199,17 +7199,17 @@ msgid "S_oftware Updates"
 msgstr "Обновления П_О"
 
 #. Translators: This is the full date and time format used in 12-hour mode.
-#: panels/system/datetime/cc-datetime-page.c:236
+#: panels/system/datetime/cc-datetime-page.c:237
 msgid "%e %B %Y, %l:%M %p"
 msgstr "%-d %B %Y, %l∶%M %p"
 
 #. Translators: This is the full date and time format used in 24-hour mode.
-#: panels/system/datetime/cc-datetime-page.c:241
+#: panels/system/datetime/cc-datetime-page.c:242
 msgid "%e %B %Y, %R"
 msgstr "%-d %B %Y, %R"
 
 #. Translators: "city, country"
-#: panels/system/datetime/cc-datetime-page.c:401
+#: panels/system/datetime/cc-datetime-page.c:402
 #, c-format
 msgctxt "timezone loc"
 msgid "%s, %s"
@@ -7217,7 +7217,7 @@ msgstr "%s, %s"
 
 #. Update the timezone on the listbow row
 #. Translators: "timezone (details)"
-#: panels/system/datetime/cc-datetime-page.c:418
+#: panels/system/datetime/cc-datetime-page.c:419
 #, c-format
 msgctxt "timezone desc"
 msgid "%s (%s)"
@@ -7241,115 +7241,115 @@ msgstr "_Месяц"
 msgid "_Day"
 msgstr "Д_ень"
 
-#: panels/system/datetime/cc-datetime-page.ui:123
+#: panels/system/datetime/cc-datetime-page.ui:124
 msgid "Automatic _Date &amp; Time"
 msgstr "Автоматическое определение _даты и времени"
 
-#: panels/system/datetime/cc-datetime-page.ui:124
+#: panels/system/datetime/cc-datetime-page.ui:125
 msgid "Requires internet access"
 msgstr "Требуется подключение к интернету"
 
-#: panels/system/datetime/cc-datetime-page.ui:136
+#: panels/system/datetime/cc-datetime-page.ui:137
 msgid "Date &amp; _Time"
 msgstr "Дата и _время"
 
-#: panels/system/datetime/cc-datetime-page.ui:147
+#: panels/system/datetime/cc-datetime-page.ui:149
 msgid "Automatic Time _Zone"
 msgstr "Автоматическое определение _часового пояса"
 
-#: panels/system/datetime/cc-datetime-page.ui:148
+#: panels/system/datetime/cc-datetime-page.ui:150
 msgid "Requires location services enabled and internet access"
 msgstr "Требуются службы определения местоположения и доступ в интернет"
 
-#: panels/system/datetime/cc-datetime-page.ui:154
+#: panels/system/datetime/cc-datetime-page.ui:156
 msgid "Time Z_one"
 msgstr "_Часовой пояс"
 
-#: panels/system/datetime/cc-datetime-page.ui:165
+#: panels/system/datetime/cc-datetime-page.ui:167
 msgid "Time _Format"
 msgstr "_Формат времени"
 
-#: panels/system/datetime/cc-datetime-page.ui:176
+#: panels/system/datetime/cc-datetime-page.ui:178
 msgid "_24-hour"
 msgstr "_24-часовой"
 
-#: panels/system/datetime/cc-datetime-page.ui:184
+#: panels/system/datetime/cc-datetime-page.ui:186
 msgid "AM / _PM"
 msgstr "_12-часовой"
 
-#: panels/system/datetime/cc-datetime-page.ui:197
+#: panels/system/datetime/cc-datetime-page.ui:199
 msgid "Clock &amp; Calendar"
 msgstr "Часы и календарь"
 
-#: panels/system/datetime/cc-datetime-page.ui:198
+#: panels/system/datetime/cc-datetime-page.ui:200
 msgid "Control how the time and date is shown in the top bar"
 msgstr "Управление отображением времени и даты в верхней панели"
 
-#: panels/system/datetime/cc-datetime-page.ui:201
+#: panels/system/datetime/cc-datetime-page.ui:203
 msgid "_Week Day"
 msgstr "_День недели"
 
-#: panels/system/datetime/cc-datetime-page.ui:207
+#: panels/system/datetime/cc-datetime-page.ui:209
 msgid "D_ate"
 msgstr "Д_ата"
 
-#: panels/system/datetime/cc-datetime-page.ui:213
+#: panels/system/datetime/cc-datetime-page.ui:215
 msgid "_Seconds"
 msgstr "_Секунды"
 
-#: panels/system/datetime/cc-datetime-page.ui:219
+#: panels/system/datetime/cc-datetime-page.ui:221
 msgid "Week _Numbers"
 msgstr "_Номера недель"
 
-#: panels/system/datetime/cc-datetime-page.ui:220
+#: panels/system/datetime/cc-datetime-page.ui:222
 msgid "Shown in the dropdown calendar"
 msgstr "Отображается в выпадающем календаре"
 
-#: panels/system/datetime/cc-datetime-page.ui:256
+#: panels/system/datetime/cc-datetime-page.ui:258
 msgid "January"
 msgstr "Январь"
 
-#: panels/system/datetime/cc-datetime-page.ui:257
+#: panels/system/datetime/cc-datetime-page.ui:259
 msgid "February"
 msgstr "Февраль"
 
-#: panels/system/datetime/cc-datetime-page.ui:258
+#: panels/system/datetime/cc-datetime-page.ui:260
 msgid "March"
 msgstr "Март"
 
-#: panels/system/datetime/cc-datetime-page.ui:259
+#: panels/system/datetime/cc-datetime-page.ui:261
 msgid "April"
 msgstr "Апрель"
 
-#: panels/system/datetime/cc-datetime-page.ui:260
+#: panels/system/datetime/cc-datetime-page.ui:262
 msgid "May"
 msgstr "Май"
 
-#: panels/system/datetime/cc-datetime-page.ui:261
+#: panels/system/datetime/cc-datetime-page.ui:263
 msgid "June"
 msgstr "Июнь"
 
-#: panels/system/datetime/cc-datetime-page.ui:262
+#: panels/system/datetime/cc-datetime-page.ui:264
 msgid "July"
 msgstr "Июль"
 
-#: panels/system/datetime/cc-datetime-page.ui:263
+#: panels/system/datetime/cc-datetime-page.ui:265
 msgid "August"
 msgstr "Август"
 
-#: panels/system/datetime/cc-datetime-page.ui:264
+#: panels/system/datetime/cc-datetime-page.ui:266
 msgid "September"
 msgstr "Сентябрь"
 
-#: panels/system/datetime/cc-datetime-page.ui:265
+#: panels/system/datetime/cc-datetime-page.ui:267
 msgid "October"
 msgstr "Октябрь"
 
-#: panels/system/datetime/cc-datetime-page.ui:266
+#: panels/system/datetime/cc-datetime-page.ui:268
 msgid "November"
 msgstr "Ноябрь"
 
-#: panels/system/datetime/cc-datetime-page.ui:267
+#: panels/system/datetime/cc-datetime-page.ui:269
 msgid "December"
 msgstr "Декабрь"
 
@@ -7573,29 +7573,29 @@ msgid "_Port"
 msgstr "П_орт"
 
 #: panels/system/remote-desktop/cc-desktop-sharing-page.ui:88
-#: panels/system/remote-desktop/cc-remote-login-page.ui:87
+#: panels/system/remote-desktop/cc-remote-login-page.ui:88
 msgid "Login Details"
 msgstr "Данные для входа"
 
 #: panels/system/remote-desktop/cc-desktop-sharing-page.ui:91
-#: panels/system/remote-desktop/cc-remote-login-page.ui:90
+#: panels/system/remote-desktop/cc-remote-login-page.ui:91
 #: panels/system/users/cc-add-user-dialog.ui:87
 #: panels/system/users/cc-enterprise-login-dialog.ui:92
 msgid "_Username"
 msgstr "_Имя пользователя"
 
 #: panels/system/remote-desktop/cc-desktop-sharing-page.ui:108
-#: panels/system/remote-desktop/cc-remote-login-page.ui:107
+#: panels/system/remote-desktop/cc-remote-login-page.ui:108
 msgid "P_assword"
 msgstr "П_ароль"
 
 #: panels/system/remote-desktop/cc-desktop-sharing-page.ui:131
-#: panels/system/remote-desktop/cc-remote-login-page.ui:131
+#: panels/system/remote-desktop/cc-remote-login-page.ui:132
 msgid "_Generate New Password"
 msgstr "_Генерировать новый пароль"
 
 #: panels/system/remote-desktop/cc-desktop-sharing-page.ui:139
-#: panels/system/remote-desktop/cc-remote-login-page.ui:139
+#: panels/system/remote-desktop/cc-remote-login-page.ui:140
 msgid "_Verify Encryption"
 msgstr "_Проверить шифрование"
 
@@ -7820,15 +7820,15 @@ msgstr ""
 msgid "Valid domain"
 msgstr "Действующий домен"
 
-#: panels/system/users/cc-enterprise-login-dialog.c:552
+#: panels/system/users/cc-enterprise-login-dialog.c:553
 msgid "Domain not found"
 msgstr "Домен не найден"
 
-#: panels/system/users/cc-enterprise-login-dialog.c:595
+#: panels/system/users/cc-enterprise-login-dialog.c:597
 msgid "Checking domain…"
 msgstr "Проверка домена…"
 
-#: panels/system/users/cc-enterprise-login-dialog.c:639
+#: panels/system/users/cc-enterprise-login-dialog.c:641
 msgid "Failed to contact realmd service"
 msgstr "Не удалось связаться со службой realmd"
 
@@ -7920,87 +7920,87 @@ msgstr "Не удалось перечислить отпечатки: %s"
 msgid "Failed to delete saved fingerprints: %s"
 msgstr "Не удалось удалить сохранённые отпечатки: %s"
 
-#: panels/system/users/cc-fingerprint-dialog.c:608
+#: panels/system/users/cc-fingerprint-dialog.c:609
 msgid "Left thumb"
 msgstr "Левый большой палец"
 
-#: panels/system/users/cc-fingerprint-dialog.c:610
+#: panels/system/users/cc-fingerprint-dialog.c:611
 msgid "Left middle finger"
 msgstr "Левый средний палец"
 
-#: panels/system/users/cc-fingerprint-dialog.c:612
+#: panels/system/users/cc-fingerprint-dialog.c:613
 msgid "_Left index finger"
 msgstr "_Левый указательный палец"
 
-#: panels/system/users/cc-fingerprint-dialog.c:614
+#: panels/system/users/cc-fingerprint-dialog.c:615
 msgid "Left ring finger"
 msgstr "Левый безымянный палец"
 
-#: panels/system/users/cc-fingerprint-dialog.c:616
+#: panels/system/users/cc-fingerprint-dialog.c:617
 msgid "Left little finger"
 msgstr "Левый мизинец"
 
-#: panels/system/users/cc-fingerprint-dialog.c:618
+#: panels/system/users/cc-fingerprint-dialog.c:619
 msgid "Right thumb"
 msgstr "Правый большой палец"
 
-#: panels/system/users/cc-fingerprint-dialog.c:620
+#: panels/system/users/cc-fingerprint-dialog.c:621
 msgid "Right middle finger"
 msgstr "Правый средний палец"
 
-#: panels/system/users/cc-fingerprint-dialog.c:622
+#: panels/system/users/cc-fingerprint-dialog.c:623
 msgid "_Right index finger"
 msgstr "_Правый указательный палец"
 
-#: panels/system/users/cc-fingerprint-dialog.c:624
+#: panels/system/users/cc-fingerprint-dialog.c:625
 msgid "Right ring finger"
 msgstr "Правый безымянный палец"
 
-#: panels/system/users/cc-fingerprint-dialog.c:626
+#: panels/system/users/cc-fingerprint-dialog.c:627
 msgid "Right little finger"
 msgstr "Правый мизинец"
 
-#: panels/system/users/cc-fingerprint-dialog.c:628
+#: panels/system/users/cc-fingerprint-dialog.c:629
 msgid "Unknown Finger"
 msgstr "Неизвестный палец"
 
-#: panels/system/users/cc-fingerprint-dialog.c:759
+#: panels/system/users/cc-fingerprint-dialog.c:760
 msgctxt "Fingerprint enroll state"
 msgid "Complete"
 msgstr "Выполнено"
 
-#: panels/system/users/cc-fingerprint-dialog.c:770
+#: panels/system/users/cc-fingerprint-dialog.c:771
 msgid "Fingerprint device disconnected"
 msgstr "Устройство чтения отпечатков отключено"
 
-#: panels/system/users/cc-fingerprint-dialog.c:776
+#: panels/system/users/cc-fingerprint-dialog.c:777
 msgid "Fingerprint device storage is full"
 msgstr "Память устройства чтения отпечатков заполнена"
 
-#: panels/system/users/cc-fingerprint-dialog.c:780
+#: panels/system/users/cc-fingerprint-dialog.c:781
 msgid "Fingerprint is duplicate"
 msgstr "Отпечаток пальца дублируется"
 
-#: panels/system/users/cc-fingerprint-dialog.c:784
+#: panels/system/users/cc-fingerprint-dialog.c:785
 msgid "Failed to enroll new fingerprint"
 msgstr "Не удалось добавить новый отпечаток"
 
-#: panels/system/users/cc-fingerprint-dialog.c:815
+#: panels/system/users/cc-fingerprint-dialog.c:816
 #, c-format
 msgid "Failed to start enrollment: %s"
 msgstr "Не удалось начать сканирование: %s"
 
-#: panels/system/users/cc-fingerprint-dialog.c:823
+#: panels/system/users/cc-fingerprint-dialog.c:824
 msgctxt "Fingerprint enroll state"
 msgid "Failed to enroll new fingerprint"
 msgstr "Не удалось добавить новый отпечаток"
 
-#: panels/system/users/cc-fingerprint-dialog.c:854
+#: panels/system/users/cc-fingerprint-dialog.c:855
 #, c-format
 msgid "Failed to stop enrollment: %s"
 msgstr "Не удалось прекратить сканирование: %s"
 
-#: panels/system/users/cc-fingerprint-dialog.c:900
+#: panels/system/users/cc-fingerprint-dialog.c:901
 msgid ""
 "Repeatedly lift and place your finger on the reader to enroll your "
 "fingerprint"
@@ -8008,34 +8008,51 @@ msgstr ""
 "Поднимайте и прикладывайте ваш палец к устройству чтения несколько раз для "
 "добавления"
 
-#: panels/system/users/cc-fingerprint-dialog.c:1014
+#: panels/system/users/cc-fingerprint-dialog.c:1015
 msgid "_Re-enroll this finger…"
 msgstr "_Сканируйте этот палец ещё раз…"
 
 #. TRANSLATORS: This is the label for the button to enroll a new finger
-#: panels/system/users/cc-fingerprint-dialog.c:1029
+#: panels/system/users/cc-fingerprint-dialog.c:1030
 msgid "Scan new fingerprint"
 msgstr "Отсканировать новый отпечаток"
 
-#: panels/system/users/cc-fingerprint-dialog.c:1066
+#: panels/system/users/cc-fingerprint-dialog.c:1067
 #, c-format
 msgid "Failed to release fingerprint device %s: %s"
 msgstr "Не удалось освободить устройство чтения %s: %s"
 
-#: panels/system/users/cc-fingerprint-dialog.c:1138
+#: panels/system/users/cc-fingerprint-dialog.c:1139
 msgctxt "Fingerprint enroll state"
 msgid "Problem Reading Device"
 msgstr "Проблема с чтением с устройства"
 
-#: panels/system/users/cc-fingerprint-dialog.c:1173
+#: panels/system/users/cc-fingerprint-dialog.c:1174
 #, c-format
 msgid "Failed to claim fingerprint device %s: %s"
 msgstr "Не удалось зарезервировать устройство чтения %s: %s"
 
-#: panels/system/users/cc-fingerprint-dialog.c:1315
+#: panels/system/users/cc-fingerprint-dialog.c:1316
 #, c-format
 msgid "Failed to get fingerprint devices: %s"
 msgstr "Не удалось получить устройство чтения: %s"
+
+#: panels/system/users/cc-fingerprint-dialog.c:1391
+msgid "Delete All Fingerprints?"
+msgstr "Удалить все отпечатки?"
+
+#: panels/system/users/cc-fingerprint-dialog.c:1392
+msgid ""
+"Deleting all enrolled fingerprints will disable Fingerprint Login. To re-"
+"enable Fingerprint Login at least one fingerprint will have to be enrolled."
+msgstr ""
+"Удаление всех зарегистрированных отпечатков приведет к отключению функции "
+"входа в систему по отпечатку пальца. Чтобы снова включить функцию входа по "
+"отпечатку пальца, необходимо зарегистрировать хотя бы один отпечаток."
+
+#: panels/system/users/cc-fingerprint-dialog.c:1397
+msgid "_Delete All"
+msgstr "_Удалить все"
 
 #: panels/system/users/cc-fingerprint-dialog.ui:8
 msgid "Fingerprint Manager"
@@ -8045,47 +8062,32 @@ msgstr "Управление отпечатками"
 msgid "Fingerprint"
 msgstr "Отпечаток пальца"
 
-#: panels/system/users/cc-fingerprint-dialog.ui:77
-msgid "_No"
-msgstr "_Нет"
-
-#: panels/system/users/cc-fingerprint-dialog.ui:85
-msgid "_Yes"
-msgstr "_Да"
-
-#: panels/system/users/cc-fingerprint-dialog.ui:105
-msgid ""
-"Do you want to delete your registered fingerprints so fingerprint login is "
-"disabled?"
-msgstr ""
-"Удалить зарегистрированные отпечатки пальцев и запретить доступ по отпечатку?"
-
-#: panels/system/users/cc-fingerprint-dialog.ui:161
+#: panels/system/users/cc-fingerprint-dialog.ui:114
 msgid "No fingerprint device"
 msgstr "Нет устройства чтения отпечатков"
 
 #. Translators: This is the empty state page label which states that there are no devices ready.
-#: panels/system/users/cc-fingerprint-dialog.ui:176
+#: panels/system/users/cc-fingerprint-dialog.ui:129
 msgid "No Fingerprint device"
 msgstr "Нет устройства чтения отпечатков"
 
-#: panels/system/users/cc-fingerprint-dialog.ui:185
+#: panels/system/users/cc-fingerprint-dialog.ui:138
 msgid "Ensure the device is properly connected"
 msgstr "Убедитесь, что устройство правильно подключено"
 
-#: panels/system/users/cc-fingerprint-dialog.ui:193
+#: panels/system/users/cc-fingerprint-dialog.ui:146
 msgid "Fingerprint Device"
 msgstr "Устройство чтения отпечатков"
 
-#: panels/system/users/cc-fingerprint-dialog.ui:202
+#: panels/system/users/cc-fingerprint-dialog.ui:155
 msgid "Choose the fingerprint device you want to configure"
 msgstr "Выберите устройство чтения отпечатков для настройки"
 
-#: panels/system/users/cc-fingerprint-dialog.ui:232
+#: panels/system/users/cc-fingerprint-dialog.ui:185
 msgid "Fingerprint Login"
 msgstr "Вход по отпечатку"
 
-#: panels/system/users/cc-fingerprint-dialog.ui:238
+#: panels/system/users/cc-fingerprint-dialog.ui:191
 msgid ""
 "Fingerprint login allows you to unlock and log into your device with your "
 "finger"
@@ -8093,11 +8095,11 @@ msgstr ""
 "Вход по отпечатку пальца позволяет разблокировать устройство и войти в него "
 "с помощью пальца"
 
-#: panels/system/users/cc-fingerprint-dialog.ui:265
+#: panels/system/users/cc-fingerprint-dialog.ui:218
 msgid "_Delete Fingerprints"
 msgstr "_Удалить отпечатки"
 
-#: panels/system/users/cc-fingerprint-dialog.ui:279
+#: panels/system/users/cc-fingerprint-dialog.ui:232
 msgid "Fingerprint Enroll"
 msgstr "Ввод по отпечатка"
 
@@ -9347,6 +9349,73 @@ msgstr "Планшет;Wacom;Перо;Ластик;Мышь;"
 msgid "New shortcut…"
 msgstr "Новая комбинация…"
 
+#. Translators: This separates the duration and interval times when displaying
+#. * the selected break schedule on the wellbeing panel. For example,
+#. * “1 minute / 20 minutes” to indicate a 1 minute break every 20 minutes.
+#: panels/wellbeing/cc-break-schedule-row.c:289
+msgid " / "
+msgstr " / "
+
+#: panels/wellbeing/cc-break-schedule-row.c:369
+msgid "Duration"
+msgstr "Длительность"
+
+#: panels/wellbeing/cc-break-schedule-row.c:369
+msgid "Interval"
+msgstr "Интервал"
+
+#: panels/wellbeing/cc-wellbeing-panel.ui:18
+msgid "Break Reminders"
+msgstr "Напоминания о перерывах"
+
+#: panels/wellbeing/cc-wellbeing-panel.ui:21
+msgid "_Eyesight Reminders"
+msgstr "Напоминания для _зрения"
+
+#: panels/wellbeing/cc-wellbeing-panel.ui:22
+msgid "Reminders to look away from the screen"
+msgstr "Напоминания о необходимости отвлечься от экрана"
+
+#: panels/wellbeing/cc-wellbeing-panel.ui:28
+msgid "_Movement Reminders"
+msgstr "Напоминания о _подвижности"
+
+#: panels/wellbeing/cc-wellbeing-panel.ui:29
+msgid "Reminders to move around"
+msgstr "Напоминания о необходимости двигаться"
+
+#: panels/wellbeing/cc-wellbeing-panel.ui:35
+msgid "Movement Break S_chedule"
+msgstr "Р_асписание перерывов для подвижности"
+
+#: panels/wellbeing/cc-wellbeing-panel.ui:41
+msgid "S_ounds"
+msgstr "З_вуки"
+
+#: panels/wellbeing/cc-wellbeing-panel.ui:42
+msgid "Play a sound when a break ends"
+msgstr "Воспроизведение звука при завершении перерыва"
+
+#: panels/wellbeing/gnome-wellbeing-panel.desktop.in:6
+msgid "Wellbeing"
+msgstr "Благополучие"
+
+#: panels/wellbeing/gnome-wellbeing-panel.desktop.in:7
+msgid "Review and limit the amount of time you spend at the computer screen"
+msgstr ""
+"Оцените и ограничьте количество времени, которое вы проводите за экраном "
+"компьютера"
+
+#. Translators: Search terms to find the Wellbeing panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#: panels/wellbeing/gnome-wellbeing-panel.desktop.in:18
+msgid ""
+"Wellbeing;Screen Time;Breaks;Break Reminders;Health Breaks;Daily Usage;"
+"Screen Limits;Usage Limit;"
+msgstr ""
+"Благополучие;Экранное время;Перерывы;Напоминания о перерывах;Перерывы для "
+"здоровья;Ежедневное использование;Ограничения экрана;Ограничение "
+"использования;"
+
 #: panels/wwan/cc-wwan-apn-dialog.c:293
 msgid "Edit"
 msgstr "Редактировать"
@@ -9936,14 +10005,14 @@ msgid "[PANEL] [ARGUMENT…]"
 msgstr "[ПАНЕЛЬ] [АРГУМЕНТ…]"
 
 #. Translators should localize the following string which will be displayed in the About dialog giving credit to the translator(s).
-#: shell/cc-application.c:117
+#: shell/cc-application.c:118
 msgid "translator-credits"
 msgstr ""
 "Stas Solovey <whats_up@tut.by>\n"
 "Alexey Rubtsov <rushills@gmail.com>\n"
 "Aleksandr Melman <alexmelman88@gmail.com>"
 
-#: shell/cc-application.c:118
+#: shell/cc-application.c:119
 #, c-format
 msgid "© 1998 %s"
 msgstr "© 1998 %s"
@@ -9952,7 +10021,7 @@ msgstr "© 1998 %s"
 msgid "Settings categories"
 msgstr "Категории настроек"
 
-#: shell/cc-panel-loader.c:311
+#: shell/cc-panel-loader.c:317
 msgid "Available panels:"
 msgstr "Доступные панели:"
 
@@ -10094,6 +10163,31 @@ msgstr[2] "%u входов"
 #: subprojects/gvc/gvc-mixer-control.c:2872
 msgid "System Sounds"
 msgstr "Системные звуки"
+
+#~ msgid "Close notification"
+#~ msgstr "Уведомление о закрытии"
+
+#~ msgid "Input methods can’t be used on the login screen"
+#~ msgstr "Методы ввода нельзя использовать на экране входа в систему"
+
+#~ msgid "Printer Jobs"
+#~ msgstr "Задания принтера"
+
+#~ msgid "Files"
+#~ msgstr "Файлы"
+
+#~ msgid "_No"
+#~ msgstr "_Нет"
+
+#~ msgid "_Yes"
+#~ msgstr "_Да"
+
+#~ msgid ""
+#~ "Do you want to delete your registered fingerprints so fingerprint login "
+#~ "is disabled?"
+#~ msgstr ""
+#~ "Удалить зарегистрированные отпечатки пальцев и запретить доступ по "
+#~ "отпечатку?"
 
 #, c-format
 #~ msgid "%s Details"
@@ -10852,9 +10946,6 @@ msgstr "Системные звуки"
 
 #~ msgid "The system component `AccountsService` cannot be found"
 #~ msgstr "Системный компонент `AccountsService` не может быть найден"
-
-#~ msgid "_Delete"
-#~ msgstr "_Удалить"
 
 #~ msgid "Automatic date and time"
 #~ msgstr "Автоматическое определение даты и времени"
