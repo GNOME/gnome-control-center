@@ -183,11 +183,17 @@ static void
 open_software_cb (CcApplicationsPanel *self)
 {
   const gchar *argv[] = { "gnome-software", "--details", "appid", NULL };
+  g_autofree gchar *argv_app_id = NULL;
 
   if (self->current_app_id == NULL)
     argv[1] = NULL;
+  else if (g_str_has_prefix (self->current_app_id, "org.gnome.Epiphany.WebApp_"))
+    /* GNOME Software only shows info on the webapp desktop file itself */
+    argv_app_id = g_strdup_printf ("%s.desktop", self->current_app_id);
   else
-    argv[2] = self->current_app_id;
+    argv_app_id = g_strdup (self->current_app_id);
+
+  argv[2] = argv_app_id;
 
   g_spawn_async (NULL, (char **)argv, NULL, G_SPAWN_SEARCH_PATH, NULL, NULL, NULL, NULL);
 }
