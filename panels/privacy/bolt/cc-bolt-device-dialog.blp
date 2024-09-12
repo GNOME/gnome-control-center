@@ -46,9 +46,9 @@ template $CcBoltDeviceDialog: Adw.Dialog {
         }
 
         Adw.PreferencesGroup {
-          Adw.Spinner spinner {
+          header-suffix: Adw.Spinner spinner {
             visible: false;
-          }
+          };
 
           Adw.ButtonRow connect_button {
             title: _("_Authorize and Connect");
