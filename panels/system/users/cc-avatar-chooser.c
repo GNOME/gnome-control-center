@@ -210,26 +210,32 @@ create_face_widget (gpointer item,
                     gpointer user_data)
 {
         g_autofree gchar *image_path = NULL;
-        g_autoptr(GtkWidget) avatar = NULL;
         g_autoptr(GdkTexture) source_image = NULL;
+        GtkWidget *child = NULL;
+        GtkWidget *avatar = NULL;
 
         image_path = g_file_get_path (G_FILE (item));
 
         avatar = adw_avatar_new (AVATAR_CHOOSER_PIXEL_SIZE, NULL, false);
+        child = gtk_flow_box_child_new ();
+        gtk_flow_box_child_set_child (GTK_FLOW_BOX_CHILD (child), avatar);
 
         if (image_path) {
                 source_image = gdk_texture_new_from_filename (image_path, NULL);
                 g_object_set_data_full (G_OBJECT (avatar),
                                         "filename", g_steal_pointer (&image_path), g_free);
         }
-
         if (source_image == NULL) {
                 adw_avatar_set_icon_name (ADW_AVATAR (avatar), "image-missing");
         } else {
                 adw_avatar_set_custom_image (ADW_AVATAR (avatar), GDK_PAINTABLE (source_image));
         }
 
-        return g_steal_pointer (&avatar);
+        gtk_accessible_update_property (GTK_ACCESSIBLE (child),
+                                        GTK_ACCESSIBLE_PROPERTY_LABEL, g_object_get_data (item, "a11y_label"),
+                                        -1);
+
+        return child;
 }
 
 static GStrv
@@ -285,7 +291,8 @@ add_faces_from_dirs (GListStore *faces, GStrv facesdirs, gboolean add_all)
                                                         G_FILE_ATTRIBUTE_STANDARD_NAME ","
                                                         G_FILE_ATTRIBUTE_STANDARD_TYPE ","
                                                         G_FILE_ATTRIBUTE_STANDARD_IS_SYMLINK ","
-                                                        G_FILE_ATTRIBUTE_STANDARD_SYMLINK_TARGET,
+                                                        G_FILE_ATTRIBUTE_STANDARD_SYMLINK_TARGET ","
+                                                        G_FILE_ATTRIBUTE_STANDARD_DISPLAY_NAME,
                                                         G_FILE_QUERY_INFO_NONE,
                                                         NULL, NULL);
                 if (enumerator == NULL) {
@@ -296,6 +303,8 @@ add_faces_from_dirs (GListStore *faces, GStrv facesdirs, gboolean add_all)
                         GFile *file;
                         GFileType type;
                         const gchar *target;
+                        const gchar *display_name;
+                        const gchar *last_dot;
                         g_autoptr(GFileInfo) info = g_file_enumerator_next_file (enumerator, NULL, NULL);
                         if (info == NULL) {
                                 break;
@@ -314,6 +323,17 @@ add_faces_from_dirs (GListStore *faces, GStrv facesdirs, gboolean add_all)
                         }
 
                         file = g_file_get_child (dir, g_file_info_get_name (info));
+
+                        display_name = g_file_info_get_display_name (info);
+                        last_dot = g_strrstr (display_name, ".");
+                        if (last_dot) {
+                                g_object_set_data_full (G_OBJECT (file), "a11y_label",
+                                                        g_strndup (display_name, last_dot - display_name), g_free);
+                        } else {
+                                g_object_set_data_full (G_OBJECT (file), "a11y_label",
+                                                        g_strdup (display_name), g_free);
+                        }
+
                         g_list_store_append (faces, file);
 
                         added_faces = TRUE;
