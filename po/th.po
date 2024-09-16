@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/issues\n"
-"POT-Creation-Date: 2024-09-14 11:48+0000\n"
-"PO-Revision-Date: 2024-09-15 00:47+0700\n"
+"POT-Creation-Date: 2024-09-14 17:49+0000\n"
+"PO-Revision-Date: 2024-09-16 23:42+0700\n"
 "Last-Translator: Atirut Wattanamongkol <atirut.wattanamongkol@gmail.com>\n"
 "Language-Team: Thai <thai-l10n@googlegroups.com>\n"
 "Language: th\n"
@@ -42,8 +42,8 @@ msgstr "การเข้าถึงแบบเต็มที่"
 msgid "Session Bus"
 msgstr "บัสของวาระ"
 
-#: panels/applications/cc-applications-panel.c:840 panels/privacy/cc-bolt-page.ui:240 panels/privacy/cc-bolt-page.ui:284
-#: panels/privacy/cc-privacy-panel.ui:75
+#: panels/applications/cc-applications-panel.c:840 panels/privacy/cc-bolt-page.ui:240
+#: panels/privacy/cc-bolt-page.ui:284 panels/privacy/cc-privacy-panel.ui:75
 msgid "Devices"
 msgstr "อุปกรณ์"
 
@@ -52,8 +52,8 @@ msgid "Full access to /dev"
 msgstr "การเข้าถึง /dev แบบเต็มที่"
 
 #: panels/applications/cc-applications-panel.c:844 panels/network/cc-network-panel.ui:8
-#: panels/network/gnome-network-panel.desktop.in:3 panels/network/network-mobile.ui:235 panels/wwan/cc-wwan-device-page.ui:61
-#: panels/wwan/cc-wwan-network-dialog.ui:5
+#: panels/network/gnome-network-panel.desktop.in:3 panels/network/network-mobile.ui:235
+#: panels/wwan/cc-wwan-device-page.ui:61 panels/wwan/cc-wwan-network-dialog.ui:5
 msgid "Network"
 msgstr "เครือข่าย"
 
@@ -86,7 +86,9 @@ msgstr "สามารถเปลี่ยนการตั้งค่าไ
 
 #: panels/applications/cc-applications-panel.c:862
 #, c-format
-msgid "<b>%s</b> requires access to the following system resources. To stop this access, the app must be removed."
+msgid ""
+"<b>%s</b> requires access to the following system resources. To stop this access, the app must be "
+"removed."
 msgstr "<b>%s</b> จำเป็นต้องเข้าถึงทรัพยากรระบบต่อไปนี้ ถ้าต้องการหยุดการเข้าถึง จะต้องถอดถอนแอปออก"
 
 #: panels/applications/cc-applications-panel.c:1194
@@ -106,7 +108,8 @@ msgstr "<b>%s</b> ถูกใช้สำหรับเปิดไฟล์�
 msgid "%s of disk space used"
 msgstr "ใช้เนื้อที่ดิสก์ไป %s"
 
-#: panels/applications/cc-applications-panel.ui:10 panels/applications/gnome-applications-panel.desktop.in:3
+#: panels/applications/cc-applications-panel.ui:10
+#: panels/applications/gnome-applications-panel.desktop.in:3
 msgid "Apps"
 msgstr "แอป"
 
@@ -147,10 +150,13 @@ msgid "App Settings"
 msgstr "การตั้งค่าแอป"
 
 #: panels/applications/cc-applications-panel.ui:164
-msgid "App settings cannot be fully enforced for apps which are not sandboxed. These apps may use permissions which are not shown."
+msgid ""
+"App settings cannot be fully enforced for apps which are not sandboxed. These apps may use permissions "
+"which are not shown."
 msgstr "การตั้งค่าแอปไม่สามารถใช้กับแอปที่ไม่ได้ทำงานในแซนด์บ็อกซ์ได้ แอปเหล่านี้อาจใช้การกำหนดสิทธิ์ซึ่งไม่ได้แสดงไว้ที่นี่"
 
-#: panels/applications/cc-applications-panel.ui:207 panels/printers/pp-details-dialog.c:267 panels/sharing/cc-sharing-panel.c:242
+#: panels/applications/cc-applications-panel.ui:207 panels/printers/pp-details-dialog.c:267
+#: panels/sharing/cc-sharing-panel.c:242
 msgid "_Open"
 msgstr "_เปิด"
 
@@ -179,14 +185,15 @@ msgstr "อ่านข้อมูลการค้นหาจากระบ
 #: panels/applications/cc-applications-panel.ui:250 panels/applications/cc-applications-panel.ui:297
 #: panels/applications/cc-applications-panel.ui:319 panels/applications/cc-applications-panel.ui:334
 #: panels/applications/cc-applications-panel.ui:349 panels/keyboard/cc-keyboard-shortcut-editor.ui:123
-#: panels/keyboard/cc-xkb-modifier-dialog.c:342 panels/keyboard/keyboard-shortcuts.c:367 panels/system/users/cc-user-page.c:379
-#: panels/system/users/cc-user-page.c:752 panels/wwan/cc-wwan-device-page.c:477 subprojects/gvc/gvc-mixer-control.c:1872
+#: panels/keyboard/cc-xkb-modifier-dialog.c:342 panels/keyboard/keyboard-shortcuts.c:367
+#: panels/system/users/cc-user-page.c:379 panels/system/users/cc-user-page.c:752
+#: panels/wwan/cc-wwan-device-page.c:477 subprojects/gvc/gvc-mixer-control.c:1872
 msgid "Disabled"
 msgstr "ไม่ใช้"
 
 #: panels/applications/cc-applications-panel.ui:255
 msgid "_Notifications"
-msgstr "_การแจ้งเตือน"
+msgstr "การแ_จ้งเตือน"
 
 #: panels/applications/cc-applications-panel.ui:256
 msgid "Show system notifications"
@@ -268,8 +275,8 @@ msgstr "การเข้าถึงที่_ต้องการ"
 msgid "System access that is required by the app"
 msgstr "การเข้าถึงระบบที่ต้องการโดยแอป"
 
-#: panels/applications/cc-applications-panel.ui:371 panels/mouse/cc-mouse-panel.ui:66 panels/multitasking/cc-multitasking-panel.ui:15
-#: panels/power/cc-power-panel.ui:171
+#: panels/applications/cc-applications-panel.ui:371 panels/mouse/cc-mouse-panel.ui:66
+#: panels/multitasking/cc-multitasking-panel.ui:15 panels/power/cc-power-panel.ui:171
 msgid "General"
 msgstr "ทั่วไป"
 
@@ -716,8 +723,11 @@ msgstr "ควบคุมการอนุญาตสิทธิ์และ
 
 #. Translators: Search terms to find the Apps panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/applications/gnome-applications-panel.desktop.in:16
-msgid "application;flatpak;permission;setting;default;preferred;media;autorun;cd;dvd;usb;audio;video;disc;removable;device;system;"
-msgstr "แอปพลิเคชัน;flatpak;การกำหนดสิทธิ์;ตั้งค่า;เริ่มต้น;ปรับแต่ง;สื่อ;ออโต้รัน;ซีดี;ดีวีดี;usb;เสียง;วิดีโอ;ดิสก์;ถอดเสียบ;อุปกรณ์;ระบบ;"
+msgid ""
+"application;flatpak;permission;setting;default;preferred;media;autorun;cd;dvd;usb;audio;video;disc;"
+"removable;device;system;"
+msgstr ""
+"แอปพลิเคชัน;flatpak;การกำหนดสิทธิ์;ตั้งค่า;เริ่มต้น;ปรับแต่ง;สื่อ;ออโต้รัน;ซีดี;ดีวีดี;usb;เสียง;วิดีโอ;ดิสก์;ถอดเสียบ;อุปกรณ์;ระบบ;"
 
 #: panels/background/cc-background-chooser.c:161
 msgid "Remove Background"
@@ -911,16 +921,19 @@ msgstr "ห้ามรบกวนอุปกรณ์เทียบมาต
 msgid "Display Calibration"
 msgstr "การเทียบมาตรฐานจอแสดงผล"
 
-#: panels/color/cc-color-calibrate.ui:22 panels/common/cc-language-chooser.ui:21 panels/display/cc-display-panel.ui:36
-#: panels/display/cc-display-panel.ui:190 panels/display/cc-display-panel.ui:252 panels/keyboard/cc-input-chooser.ui:20
+#: panels/color/cc-color-calibrate.ui:22 panels/common/cc-language-chooser.ui:21
+#: panels/display/cc-display-panel.ui:36 panels/display/cc-display-panel.ui:190
+#: panels/display/cc-display-panel.ui:252 panels/keyboard/cc-input-chooser.ui:20
 #: panels/keyboard/cc-keyboard-shortcut-dialog.c:381 panels/keyboard/cc-keyboard-shortcut-editor.ui:15
-#: panels/network/cc-net-proxy-page.ui:14 panels/network/cc-wifi-hotspot-dialog.ui:142 panels/network/cc-wifi-panel.c:737
-#: panels/network/connection-editor/ce-page-details.c:100 panels/network/connection-editor/connection-editor.ui:16
-#: panels/printers/new-printer-dialog.ui:54 panels/printers/pp-details-dialog.c:266 panels/privacy/cc-usage-page.c:136
-#: panels/sharing/cc-sharing-panel.c:241 panels/system/region/cc-format-chooser.ui:24 panels/system/users/cc-add-user-dialog.ui:34
-#: panels/system/users/cc-enterprise-login-dialog.ui:58 panels/system/users/cc-avatar-chooser.c:92
-#: panels/system/users/cc-fingerprint-dialog.ui:32 panels/system/users/cc-password-dialog.ui:21
-#: panels/system/users/cc-user-page.ui:222 panels/system/users/data/join-dialog.ui:17 panels/wwan/cc-wwan-mode-dialog.ui:32
+#: panels/network/cc-net-proxy-page.ui:14 panels/network/cc-wifi-hotspot-dialog.ui:142
+#: panels/network/cc-wifi-panel.c:737 panels/network/connection-editor/ce-page-details.c:100
+#: panels/network/connection-editor/connection-editor.ui:16 panels/printers/new-printer-dialog.ui:54
+#: panels/printers/pp-details-dialog.c:266 panels/privacy/cc-usage-page.c:136
+#: panels/sharing/cc-sharing-panel.c:241 panels/system/region/cc-format-chooser.ui:24
+#: panels/system/users/cc-add-user-dialog.ui:34 panels/system/users/cc-enterprise-login-dialog.ui:58
+#: panels/system/users/cc-avatar-chooser.c:92 panels/system/users/cc-fingerprint-dialog.ui:32
+#: panels/system/users/cc-password-dialog.ui:21 panels/system/users/cc-user-page.ui:222
+#: panels/system/users/data/join-dialog.ui:17 panels/wwan/cc-wwan-mode-dialog.ui:32
 #: panels/wwan/cc-wwan-network-dialog.ui:107 panels/wwan/cc-wwan-sim-lock-dialog.ui:239
 msgid "_Cancel"
 msgstr "_ยกเลิก"
@@ -936,7 +949,8 @@ msgid "_Resume"
 msgstr "_ทำงานต่อ"
 
 #. This button returns the user back to the color control panel
-#: panels/color/cc-color-calibrate.ui:40 panels/system/region/cc-format-chooser.ui:49 panels/system/users/cc-fingerprint-dialog.ui:57
+#: panels/color/cc-color-calibrate.ui:40 panels/system/region/cc-format-chooser.ui:49
+#: panels/system/users/cc-fingerprint-dialog.ui:57
 msgid "_Done"
 msgstr "เ_สร็จสิ้น"
 
@@ -1000,7 +1014,7 @@ msgstr "ยังไม่เทียบมาตรฐาน"
 #. * profile has been auto-generated for this hardware
 #: panels/color/cc-color-panel.c:162
 msgid "Default: "
-msgstr "ปริยาย: "
+msgstr "เริ่มต้น: "
 
 #. TRANSLATORS: this is a profile prefix to signify the
 #. * profile his a standard space like AdobeRGB
@@ -1084,9 +1098,11 @@ msgstr "คุณภาพการเทียบมาตรฐาน"
 
 #: panels/color/cc-color-panel.ui:21
 msgid ""
-"Calibration will produce a profile that you can use to color manage your screen. The longer you spend on calibration, the better "
-"the quality of the color profile."
-msgstr "การเทียบมาตรฐานจะสร้างโปรไฟล์ที่คุณสามารถใช้จัดการการใช้สีบนหน้าจอของคุณ ยิ่งคุณใช้เวลาเทียบมาตรฐานนาน ก็จะยิ่งได้โปรไฟล์สีที่มีคุณภาพสูง"
+"Calibration will produce a profile that you can use to color manage your screen. The longer you spend "
+"on calibration, the better the quality of the color profile."
+msgstr ""
+"การเทียบมาตรฐานจะสร้างโปรไฟล์ที่คุณสามารถใช้จัดการการใช้สีบนหน้าจอของคุณ ยิ่งคุณใช้เวลาเทียบมาตรฐานนาน "
+"ก็จะยิ่งได้โปรไฟล์สีที่มีคุณภาพสูง"
 
 #: panels/color/cc-color-panel.ui:28
 msgid "You will not be able to use your computer while calibration takes place."
@@ -1132,11 +1148,13 @@ msgstr "ความสว่างจอแสดงผล"
 
 #: panels/color/cc-color-panel.ui:195
 msgid ""
-"Please set the display to a brightness that is typical for you. Color management will be most accurate at this brightness level."
+"Please set the display to a brightness that is typical for you. Color management will be most accurate "
+"at this brightness level."
 msgstr "กรุณาปรับจอแสดงผลให้มีความสว่างเป็นปกติสำหรับคุณ การจัดการสีจะแม่นยำที่สุดที่ระดับความสว่างนี้"
 
 #: panels/color/cc-color-panel.ui:202
-msgid "Alternatively, you can use the brightness level used with one of the other profiles for this device."
+msgid ""
+"Alternatively, you can use the brightness level used with one of the other profiles for this device."
 msgstr "หรือมิฉะนั้น คุณก็อาจใช้ระดับความสว่างที่ใช้กับโปรไฟล์อื่นๆ โปรไฟล์ใดโปรไฟล์หนึ่งสำหรับอุปกรณ์นี้"
 
 #: panels/color/cc-color-panel.ui:214
@@ -1144,7 +1162,9 @@ msgid "Profile Name"
 msgstr "ชื่อโปรไฟล์"
 
 #: panels/color/cc-color-panel.ui:222
-msgid "You can use a color profile on different computers, or even create profiles for different lighting conditions."
+msgid ""
+"You can use a color profile on different computers, or even create profiles for different lighting "
+"conditions."
 msgstr "คุณสามารถใช้โปรไฟล์สีกับคอมพิวเตอร์อื่นได้ หรือแม้แต่สร้างโปรไฟล์ต่างๆ สำหรับสภาพแสงที่ต่างกันก็ได้"
 
 #: panels/color/cc-color-panel.ui:229
@@ -1169,11 +1189,11 @@ msgstr "ต้องการสื่อที่สามารถเขีย
 
 #: panels/color/cc-color-panel.ui:313
 msgid ""
-"You may find these instructions on how to use the profile on <a href=\"linux\">GNU/Linux</a>, <a href=\"osx\">Apple OS X</a> and "
-"<a href=\"windows\">Microsoft Windows</a> systems useful."
+"You may find these instructions on how to use the profile on <a href=\"linux\">GNU/Linux</a>, <a "
+"href=\"osx\">Apple OS X</a> and <a href=\"windows\">Microsoft Windows</a> systems useful."
 msgstr ""
-"คำแนะนำเกี่ยวกับวิธีใช้โปรไฟล์สีบนระบบ <a href=\"linux\">GNU/Linux</a>, <a href=\"osx\">Apple OS X</a> และ <a href=\"windows\">Microsoft "
-"Windows</a> เหล่านี้อาจเป็นประโยชน์สำหรับคุณ"
+"คำแนะนำเกี่ยวกับวิธีใช้โปรไฟล์สีบนระบบ <a href=\"linux\">GNU/Linux</a>, <a href=\"osx\">Apple OS X</a> และ <a "
+"href=\"windows\">Microsoft Windows</a> เหล่านี้อาจเป็นประโยชน์สำหรับคุณ"
 
 #: panels/color/cc-color-panel.ui:335
 msgid "Add Profile"
@@ -1187,7 +1207,8 @@ msgstr "พบปัญหา โปรไฟล์นี้อาจทำง�
 msgid "_Import File…"
 msgstr "_นำเข้าไฟล์…"
 
-#: panels/color/cc-color-panel.ui:390 panels/keyboard/cc-input-chooser.ui:28 panels/keyboard/cc-keyboard-shortcut-editor.ui:33
+#: panels/color/cc-color-panel.ui:390 panels/keyboard/cc-input-chooser.ui:28
+#: panels/keyboard/cc-keyboard-shortcut-editor.ui:33
 #: panels/network/connection-editor/net-connection-editor.c:653 panels/printers/new-printer-dialog.ui:85
 #: panels/system/users/cc-add-user-dialog.ui:48 panels/system/users/cc-enterprise-login-dialog.ui:66
 msgid "_Add"
@@ -1197,7 +1218,8 @@ msgstr "เ_พิ่ม"
 msgid "_Set for all users"
 msgstr "_กำหนดสำหรับผู้ใช้ทุกคน"
 
-#: panels/color/cc-color-panel.ui:459 panels/color/cc-color-panel.ui:468 panels/color/cc-color-panel.ui:469
+#: panels/color/cc-color-panel.ui:459 panels/color/cc-color-panel.ui:468
+#: panels/color/cc-color-panel.ui:469
 msgid "Set this profile for all users on this computer"
 msgstr "กำหนดโปรไฟล์นี้ให้ผู้ใช้ทุกคนในเครื่องนี้ใช้"
 
@@ -1364,21 +1386,21 @@ msgstr "คุณภาพสูง"
 #: panels/color/cc-color-profile.c:151
 msgctxt "Colorspace fallback"
 msgid "Default RGB"
-msgstr "RGB ปริยาย"
+msgstr "RGB เริ่มต้น"
 
 #. TRANSLATORS: this default CMYK space is used for printers that
 #. * do not have additional printer profiles specified in the PPD
 #: panels/color/cc-color-profile.c:158
 msgctxt "Colorspace fallback"
 msgid "Default CMYK"
-msgstr "CMYK ปริยาย"
+msgstr "CMYK เริ่มต้น"
 
 #. TRANSLATORS: this default gray space is used for printers that
 #. * do not have additional printer profiles specified in the PPD
 #: panels/color/cc-color-profile.c:165
 msgctxt "Colorspace fallback"
 msgid "Default Gray"
-msgstr "โทนสีเทาปริยาย"
+msgstr "โทนสีเทาเริ่มต้น"
 
 #: panels/color/cc-color-profile.c:188
 msgid "Vendor supplied factory calibration data"
@@ -1555,15 +1577,16 @@ msgstr "0 วินาที"
 #: panels/common/hostname-helper.c:177
 msgctxt "hotspot"
 msgid "Hotspot"
-msgstr "จุดแพร่สัญญาณ"
+msgstr "ฮอตสปอต"
 
-#: panels/display/cc-display-panel.c:507 panels/notifications/cc-notifications-panel.c:213 panels/power/cc-power-panel.c:679
-#: panels/power/cc-power-panel.c:686
+#: panels/display/cc-display-panel.c:507 panels/notifications/cc-notifications-panel.c:213
+#: panels/power/cc-power-panel.c:679 panels/power/cc-power-panel.c:686
 msgid "On"
 msgstr "เปิด"
 
-#: panels/display/cc-display-panel.c:509 panels/network/cc-net-proxy-page.c:193 panels/notifications/cc-notifications-panel.c:213
-#: panels/power/cc-power-panel.c:673 panels/power/cc-power-panel.c:684
+#: panels/display/cc-display-panel.c:509 panels/network/cc-net-proxy-page.c:193
+#: panels/notifications/cc-notifications-panel.c:213 panels/power/cc-power-panel.c:673
+#: panels/power/cc-power-panel.c:684
 msgid "Off"
 msgstr "ปิด"
 
@@ -1583,8 +1606,8 @@ msgstr "ปัญหานี้อาจเกิดจากข้อจำก
 msgid "Displays"
 msgstr "จอแสดงผล"
 
-#: panels/display/cc-display-panel.ui:49 panels/display/cc-display-panel.ui:206 panels/display/cc-display-panel.ui:268
-#: panels/network/connection-editor/connection-editor.ui:23
+#: panels/display/cc-display-panel.ui:49 panels/display/cc-display-panel.ui:206
+#: panels/display/cc-display-panel.ui:268 panels/network/connection-editor/connection-editor.ui:23
 msgid "_Apply"
 msgstr "เริ่มใ_ช้"
 
@@ -1676,7 +1699,7 @@ msgstr "อัตราการ_รีเฟรช"
 
 #: panels/display/cc-display-settings.ui:66
 msgid "_Variable Refresh Rate"
-msgstr "อัตราการรีเฟรช_ผันแปร"
+msgstr "อัตราการรีเฟรชแบบ_ผันแปร"
 
 #: panels/display/cc-display-settings.ui:74
 msgid "Re_fresh Rate"
@@ -1687,6 +1710,7 @@ msgid "Adjust for _TV"
 msgstr "ปรับสำหรับโ_ทรทัศน์"
 
 #: panels/display/cc-display-settings.ui:92 panels/display/cc-display-settings.ui:108
+#, fuzzy
 msgctxt "display setting"
 msgid "_Scale"
 msgstr "_ขยายพอดีหน้าจอ"
@@ -1773,8 +1797,10 @@ msgstr "ใช้แสงกลางคืนและเลือกวิธ
 
 #. Translators: Search terms to find the Displays panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/display/gnome-display-panel.desktop.in:15
-msgid "Panel;Projector;xrandr;Screen;Resolution;Refresh;Monitor;Night;Light;Blue;redshift;color;sunset;sunrise;"
-msgstr "แผงควบคุม;เครื่องฉาย;xrandr;หน้าจอ;ความละเอียด;รีเฟรช;จอภาพ;แสง;กลางคืน;สีฟ้า;redshift;สี;พระอาทิตย์ตก;พระอาทิตย์ขึ้น;"
+msgid ""
+"Panel;Projector;xrandr;Screen;Resolution;Refresh;Monitor;Night;Light;Blue;redshift;color;sunset;sunrise;"
+msgstr ""
+"แผงควบคุม;เครื่องฉาย;xrandr;หน้าจอ;ความละเอียด;รีเฟรช;จอภาพ;แสง;กลางคืน;สีฟ้า;redshift;สี;พระอาทิตย์ตก;พระอาทิตย์ขึ้น;"
 
 #: panels/keyboard/00-multimedia.xml.in:2
 msgid "Sound and Media"
@@ -1863,8 +1889,8 @@ msgstr "โฟลเดอร์บ้าน"
 #. Translators: this is a verb.
 #. Translators: "Search" should be phrased as a verb (in both "Name" and "Keywords" fields).
 #. Translators: this is a verb.
-#: panels/keyboard/01-launchers.xml.in:16 panels/printers/cc-printers-panel.ui:21 panels/search/gnome-search-panel.desktop.in:4
-#: shell/cc-window.ui:28
+#: panels/keyboard/01-launchers.xml.in:16 panels/printers/cc-printers-panel.ui:21
+#: panels/search/gnome-search-panel.desktop.in:4 shell/cc-window.ui:28
 msgid "Search"
 msgstr "ค้นหา"
 
@@ -1873,8 +1899,8 @@ msgctxt "keybinding"
 msgid "Search"
 msgstr "ค้นหา"
 
-#: panels/keyboard/01-system.xml.in:2 panels/privacy/cc-privacy-panel.ui:21 panels/system/cc-system-panel.ui:9
-#: panels/system/gnome-system-panel.desktop.in:3
+#: panels/keyboard/01-system.xml.in:2 panels/privacy/cc-privacy-panel.ui:21
+#: panels/system/cc-system-panel.ui:9 panels/system/gnome-system-panel.desktop.in:3
 msgid "System"
 msgstr "ระบบ"
 
@@ -1948,7 +1974,8 @@ msgstr "ไม่ได้เลือกช่องทางป้อนข้
 msgid "_Add Input Source…"
 msgstr "เ_พิ่มช่องทางป้อนข้อความ…"
 
-#: panels/keyboard/cc-input-row.ui:16 panels/printers/printer-entry.ui:49 panels/search/cc-search-panel-row.ui:35
+#: panels/keyboard/cc-input-row.ui:16 panels/printers/printer-entry.ui:49
+#: panels/search/cc-search-panel-row.ui:35
 msgid "View More"
 msgstr "ดูเพิ่ม"
 
@@ -1968,11 +1995,13 @@ msgstr "ปรับแต่ง"
 msgid "View Keyboard Layout"
 msgstr "ดูผังแป้นพิมพ์"
 
-#: panels/keyboard/cc-input-row.ui:52 panels/network/connection-editor/wireguard-peer.ui:59 panels/sharing/cc-sharing-networks.c:223
+#: panels/keyboard/cc-input-row.ui:52 panels/network/connection-editor/wireguard-peer.ui:59
+#: panels/sharing/cc-sharing-networks.c:223
 msgid "Remove"
 msgstr "ลบออก"
 
-#: panels/keyboard/cc-keyboard-manager.c:488 panels/keyboard/cc-keyboard-manager.c:496 panels/keyboard/cc-keyboard-manager.c:936
+#: panels/keyboard/cc-keyboard-manager.c:488 panels/keyboard/cc-keyboard-manager.c:496
+#: panels/keyboard/cc-keyboard-manager.c:936
 msgid "Custom Shortcuts"
 msgstr "ปุ่มลัดกำหนดเอง"
 
@@ -1982,8 +2011,8 @@ msgstr "ปุ่มยกแคร่ระดับสาม"
 
 #: panels/keyboard/cc-keyboard-panel.c:64
 msgid ""
-"The alternate characters key can be used to enter additional characters. These are sometimes printed as a third-option on your "
-"keyboard."
+"The alternate characters key can be used to enter additional characters. These are sometimes printed as "
+"a third-option on your keyboard."
 msgstr "คุณสามารถใช้ปุ่มยกแคร่ระดับสามในการใส่อักขระเพิ่มเติมได้ ซึ่งในบางครั้งอาจแสดงเป็นตัวเลือกที่สามบนแป้นพิมพ์ของคุณ"
 
 #: panels/keyboard/cc-keyboard-panel.c:66
@@ -2022,11 +2051,12 @@ msgstr "ปุ่ม Compose"
 
 #: panels/keyboard/cc-keyboard-panel.c:80
 msgid ""
-"The compose key allows a wide variety of characters to be entered. To use it, press compose then a sequence of characters.  For "
-"example, compose key followed by <b>C</b> and <b>o</b> will enter <b>©</b>, <b>a</b> followed by <b>'</b> will enter <b>á</b>."
+"The compose key allows a wide variety of characters to be entered. To use it, press compose then a "
+"sequence of characters.  For example, compose key followed by <b>C</b> and <b>o</b> will enter <b>©</"
+"b>, <b>a</b> followed by <b>'</b> will enter <b>á</b>."
 msgstr ""
-"ปุ่ม Compose ช่วยให้สามารถป้อนอักขระต่างๆ ได้หลากหลาย ถ้าต้องการใช้ ให้กด Compose ตามด้วยลำดับอักขระ ตัวอย่างเช่น การกด Compose ตามด้วย <b>C</b> และ "
-"<b>o</b> จะเป็นการป้อน <b>©</b>, <b>a</b> ตามด้วย <b>'</b> จะเป็นการป้อน <b>á</b>"
+"ปุ่ม Compose ช่วยให้สามารถป้อนอักขระต่างๆ ได้หลากหลาย ถ้าต้องการใช้ ให้กด Compose ตามด้วยลำดับอักขระ ตัวอย่างเช่น การกด "
+"Compose ตามด้วย <b>C</b> และ <b>o</b> จะเป็นการป้อน <b>©</b>, <b>a</b> ตามด้วย <b>'</b> จะเป็นการป้อน <b>á</b>"
 
 #: panels/keyboard/cc-keyboard-panel.c:88
 msgctxt "keyboard key"
@@ -2190,8 +2220,8 @@ msgstr "_ลบออก"
 msgid "Re_place"
 msgstr "กำหนด_ทับ"
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.ui:54 panels/wwan/cc-wwan-mode-dialog.ui:39 panels/wwan/cc-wwan-network-dialog.ui:114
-#: panels/wwan/cc-wwan-sim-lock-dialog.c:228
+#: panels/keyboard/cc-keyboard-shortcut-editor.ui:54 panels/wwan/cc-wwan-mode-dialog.ui:39
+#: panels/wwan/cc-wwan-network-dialog.ui:114 panels/wwan/cc-wwan-sim-lock-dialog.c:228
 msgid "_Set"
 msgstr "_ตั้ง"
 
@@ -2204,7 +2234,8 @@ msgstr "กด Esc เพื่อยกเลิก หรือกด Backspac
 msgid "Reset"
 msgstr "ล้างค่า"
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.ui:161 panels/printers/pp-details-dialog.ui:25 panels/wwan/cc-wwan-apn-dialog.ui:96
+#: panels/keyboard/cc-keyboard-shortcut-editor.ui:161 panels/printers/pp-details-dialog.ui:25
+#: panels/wwan/cc-wwan-apn-dialog.ui:96
 msgid "Name"
 msgstr "ชื่อ"
 
@@ -2238,7 +2269,7 @@ msgstr "เพิ่มปุ่มลัด"
 
 #: panels/keyboard/cc-keyboard-shortcut-row.ui:23
 msgid "Reset the shortcut to its default value"
-msgstr "คืนค่าปุ่มลัดกลับเป็นค่าปริยาย"
+msgstr "คืนค่าปุ่มลัดกลับเป็นค่าเริ่มต้น"
 
 #: panels/keyboard/gnome-keyboard-panel.desktop.in:3
 msgid "Keyboard"
@@ -2281,13 +2312,13 @@ msgstr "เมาส์"
 msgid "Po_inter Speed"
 msgstr "_ความเร็วตัวชี้"
 
-#: panels/mouse/cc-mouse-panel.ui:117 panels/mouse/cc-mouse-panel.ui:217 panels/universal-access/cc-ua-typing-page.ui:58
-#: panels/universal-access/cc-ua-typing-page.ui:111
+#: panels/mouse/cc-mouse-panel.ui:117 panels/mouse/cc-mouse-panel.ui:217
+#: panels/universal-access/cc-ua-typing-page.ui:58 panels/universal-access/cc-ua-typing-page.ui:111
 msgid "Slow"
 msgstr "ช้า"
 
-#: panels/mouse/cc-mouse-panel.ui:119 panels/mouse/cc-mouse-panel.ui:219 panels/universal-access/cc-ua-typing-page.ui:55
-#: panels/universal-access/cc-ua-typing-page.ui:108
+#: panels/mouse/cc-mouse-panel.ui:119 panels/mouse/cc-mouse-panel.ui:219
+#: panels/universal-access/cc-ua-typing-page.ui:55 panels/universal-access/cc-ua-typing-page.ui:108
 msgid "Fast"
 msgstr "เร็ว"
 
@@ -2301,7 +2332,8 @@ msgstr "แนะนำสำหรับผู้ใช้และแอปพ
 
 #: panels/mouse/cc-mouse-panel.ui:142
 msgid ""
-"Turning mouse acceleration off can allow faster and more precise movements, but can also make the mouse more difficult to use."
+"Turning mouse acceleration off can allow faster and more precise movements, but can also make the mouse "
+"more difficult to use."
 msgstr "การปิดใช้การเร่งความเร็วเมาส์จะช่วยให้ขยับเมาส์ได้เร็วขึ้นและแม่นยำขึ้น แต่อาจทำให้เมาส์ใช้ยากขึ้นไปด้วย"
 
 #: panels/mouse/cc-mouse-panel.ui:154 panels/mouse/cc-mouse-panel.ui:291
@@ -2506,14 +2538,15 @@ msgstr "จัดการค่าปรับแต่งสำหรับป
 msgid "Multitasking;Multitask;Productivity;Customize;Desktop;Hot Corner;Workspaces;"
 msgstr "มัลติทาสกิง;มัลติทาสก์;การทำงาน;ปรับแต่ง;เดสก์ท็อป;มุมด่วน;พื้นที่ทำงาน;"
 
-#: panels/network/cc-net-proxy-page.c:195 panels/network/cc-net-proxy-page.ui:63 panels/network/connection-editor/ip4-page.ui:186
-#: panels/network/connection-editor/ip4-page.ui:244 panels/network/connection-editor/ip6-page.ui:37
-#: panels/network/connection-editor/ip6-page.ui:197 panels/network/connection-editor/ip6-page.ui:255 panels/wacom/cc-wacom-page.c:611
+#: panels/network/cc-net-proxy-page.c:195 panels/network/cc-net-proxy-page.ui:63
+#: panels/network/connection-editor/ip4-page.ui:186 panels/network/connection-editor/ip4-page.ui:244
+#: panels/network/connection-editor/ip6-page.ui:37 panels/network/connection-editor/ip6-page.ui:197
+#: panels/network/connection-editor/ip6-page.ui:255 panels/wacom/cc-wacom-page.c:611
 msgid "Automatic"
 msgstr "อัตโนมัติ"
 
-#: panels/network/cc-net-proxy-page.c:197 panels/network/cc-net-proxy-page.ui:64 panels/network/connection-editor/ip4-page.ui:59
-#: panels/network/connection-editor/ip6-page.ui:70
+#: panels/network/cc-net-proxy-page.c:197 panels/network/cc-net-proxy-page.ui:64
+#: panels/network/connection-editor/ip4-page.ui:59 panels/network/connection-editor/ip6-page.ui:70
 msgid "Manual"
 msgstr "กำหนดเอง"
 
@@ -2540,20 +2573,22 @@ msgstr "URL สำหรับ_กำหนดค่า"
 
 #: panels/network/cc-net-proxy-page.ui:92
 msgid ""
-"Web Proxy Autodiscovery is used when a Configuration URL is not provided. This is not recommended for untrusted public networks."
-msgstr "การตรวจหาเว็บพร็อกซีอัตโนมัติจะใช้เมื่อไม่มีการกำหนด URL สำหรับตั้งค่าไว้ ซึ่งไม่แนะนำสำหรับเครือข่ายสาธารณะที่ไม่น่าไว้วางใจ"
+"Web Proxy Autodiscovery is used when a Configuration URL is not provided. This is not recommended for "
+"untrusted public networks."
+msgstr ""
+"การตรวจหาเว็บพร็อกซีอัตโนมัติจะใช้เมื่อไม่มีการกำหนด URL สำหรับตั้งค่าไว้ ซึ่งไม่แนะนำสำหรับเครือข่ายสาธารณะที่ไม่น่าไว้วางใจ"
 
 #: panels/network/cc-net-proxy-page.ui:109
 msgid "HTTP Proxy"
 msgstr "พร็อกซี HTTP"
 
-#: panels/network/cc-net-proxy-page.ui:113 panels/network/cc-net-proxy-page.ui:142 panels/network/cc-net-proxy-page.ui:171
-#: panels/network/cc-net-proxy-page.ui:200
+#: panels/network/cc-net-proxy-page.ui:113 panels/network/cc-net-proxy-page.ui:142
+#: panels/network/cc-net-proxy-page.ui:171 panels/network/cc-net-proxy-page.ui:200
 msgid "URL"
 msgstr "URL"
 
-#: panels/network/cc-net-proxy-page.ui:120 panels/network/cc-net-proxy-page.ui:149 panels/network/cc-net-proxy-page.ui:178
-#: panels/network/cc-net-proxy-page.ui:207
+#: panels/network/cc-net-proxy-page.ui:120 panels/network/cc-net-proxy-page.ui:149
+#: panels/network/cc-net-proxy-page.ui:178 panels/network/cc-net-proxy-page.ui:207
 msgid "Port"
 msgstr "พอร์ต"
 
@@ -2692,7 +2727,9 @@ msgstr "ลืมเครือข่าย"
 #. TRANSLATORS: ‘%s’ is a Wi-Fi Network(SSID) name
 #: panels/network/cc-wifi-hotspot-dialog.c:134
 #, c-format
-msgid "Turning on the hotspot will disconnect from %s, and it will not be possible to access the internet through Wi-Fi."
+msgid ""
+"Turning on the hotspot will disconnect from %s, and it will not be possible to access the internet "
+"through Wi-Fi."
 msgstr "การเปิดฮอตสปอตจะตัดการเชื่อมต่อจาก %s และจะไม่สามารถเข้าถึงอินเทอร์เน็ตผ่าน Wi-Fi ได้"
 
 #: panels/network/cc-wifi-hotspot-dialog.c:250
@@ -2720,19 +2757,20 @@ msgstr "เปิดใช้งานฮอตสปอต Wi-Fi หรือ�
 
 #: panels/network/cc-wifi-hotspot-dialog.ui:28
 msgid ""
-"Wi-Fi hotspot allows others to share your internet connection, by creating a Wi-Fi network that they can connect to. To do this, "
-"you must have an internet connection through a source other than Wi-Fi."
+"Wi-Fi hotspot allows others to share your internet connection, by creating a Wi-Fi network that they "
+"can connect to. To do this, you must have an internet connection through a source other than Wi-Fi."
 msgstr ""
-"ฮอตสปอต Wi-Fi ช่วยให้ผู้อื่นสามารถแบ่งปันการเชื่อมต่ออินเทอร์เน็ตของคุณได้โดยการสร้างเครือข่าย Wi-Fi เพื่อใช้ในการเชื่อมต่อ หากต้องการทำสิ่งนี้ "
-"คุณจะต้องมีการเชื่อมต่ออินเทอร์เน็ตผ่านแหล่งอื่นที่ไม่ใช่ Wi-Fi"
+"ฮอตสปอต Wi-Fi ช่วยให้ผู้อื่นสามารถแบ่งปันการเชื่อมต่ออินเทอร์เน็ตของคุณได้โดยการสร้างเครือข่าย Wi-Fi เพื่อใช้ในการเชื่อมต่อ "
+"หากต้องการทำสิ่งนี้ คุณจะต้องมีการเชื่อมต่ออินเทอร์เน็ตผ่านแหล่งอื่นที่ไม่ใช่ Wi-Fi"
 
 #: panels/network/cc-wifi-hotspot-dialog.ui:51
 msgid "Network Name"
 msgstr "ชื่อเครือข่าย"
 
 #. Translators: This is a password needed for printing.
-#: panels/network/cc-wifi-hotspot-dialog.ui:92 panels/printers/new-printer-dialog.ui:293 panels/printers/pp-jobs-dialog.ui:54
-#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:107 panels/system/remote-desktop/cc-remote-session-page.ui:106
+#: panels/network/cc-wifi-hotspot-dialog.ui:92 panels/printers/new-printer-dialog.ui:293
+#: panels/printers/pp-jobs-dialog.ui:54 panels/system/remote-desktop/cc-desktop-sharing-page.ui:107
+#: panels/system/remote-desktop/cc-remote-session-page.ui:106
 #: panels/system/users/cc-add-user-dialog.ui:159 panels/wwan/cc-wwan-apn-dialog.ui:175
 msgid "Password"
 msgstr "รหัสผ่าน"
@@ -2749,8 +2787,8 @@ msgstr "สุ่มรหัสผ่านอัตโนมัติ"
 msgid "_Turn On"
 msgstr "_เปิด"
 
-#: panels/network/cc-wifi-panel.c:403 panels/network/gnome-wifi-panel.desktop.in:3 panels/network/network-wifi.ui:61
-#: panels/network/network-wifi.ui:70
+#: panels/network/cc-wifi-panel.c:403 panels/network/gnome-wifi-panel.desktop.in:3
+#: panels/network/network-wifi.ui:61 panels/network/network-wifi.ui:70
 msgid "Wi-Fi"
 msgstr "Wi-Fi"
 
@@ -2792,7 +2830,7 @@ msgstr "ปิดเพื่อใช้ Wi-Fi"
 
 #: panels/network/cc-wifi-panel.ui:118
 msgid "Wi-Fi Hotspot Active"
-msgstr "จุดแพร่สัญญาณ Wi-Fi ทำงาน"
+msgstr "ฮอตสปอต Wi-Fi ทำงาน"
 
 #: panels/network/cc-wifi-panel.ui:128
 msgid "Mobile devices can scan the QR code to connect."
@@ -2800,7 +2838,7 @@ msgstr "อุปกรณ์มือถือสามารถสแกนค
 
 #: panels/network/cc-wifi-panel.ui:136
 msgid "Turn Off Hotspot…"
-msgstr "ปิดจุดแพร่สัญญาณ…"
+msgstr "ปิดฮอตสปอต…"
 
 #: panels/network/cc-wifi-panel.ui:156
 msgid "Visible Networks"
@@ -2822,18 +2860,20 @@ msgstr ""
 msgid "802.1x _Security"
 msgstr "การรักษาความปลอดภัยของ 802.1x"
 
-#: panels/network/connection-editor/bluetooth-page.ui:16 panels/network/connection-editor/ethernet-page.ui:27
-#: panels/network/connection-editor/vpn-page.ui:23 panels/system/users/cc-add-user-dialog.ui:75
-#: panels/system/users/cc-user-page.ui:84
+#: panels/network/connection-editor/bluetooth-page.ui:16
+#: panels/network/connection-editor/ethernet-page.ui:27 panels/network/connection-editor/vpn-page.ui:23
+#: panels/system/users/cc-add-user-dialog.ui:75 panels/system/users/cc-user-page.ui:84
 msgid "_Name"
 msgstr "_ชื่อ"
 
-#: panels/network/connection-editor/ce-page-8021x-security.c:108 panels/network/connection-editor/ce-page-security.c:415
+#: panels/network/connection-editor/ce-page-8021x-security.c:108
+#: panels/network/connection-editor/ce-page-security.c:415
 #: panels/network/connection-editor/details-page.ui:84
 msgid "Security"
 msgstr "การรักษาความปลอดภัย"
 
-#: panels/network/connection-editor/ce-page-bluetooth.c:59 panels/network/connection-editor/ce-page-ethernet.c:142
+#: panels/network/connection-editor/ce-page-bluetooth.c:59
+#: panels/network/connection-editor/ce-page-ethernet.c:142
 #: panels/network/connection-editor/ce-page-vpn.c:149 panels/network/connection-editor/ce-page-wifi.c:129
 msgid "Identity"
 msgstr "ชื่อ"
@@ -2863,11 +2903,11 @@ msgstr ""
 
 #: panels/network/connection-editor/ce-page.c:251
 msgid ""
-"The MAC address entered here will be used as hardware address for the network device this connection is activated on. This feature "
-"is known as MAC cloning or spoofing. Example: 00:11:22:33:44:55"
+"The MAC address entered here will be used as hardware address for the network device this connection is "
+"activated on. This feature is known as MAC cloning or spoofing. Example: 00:11:22:33:44:55"
 msgstr ""
-"MAC address ที่ใส่ไว้ที่นี่จะถูกใช้เป็นแอดเดรสของฮาร์ดแวร์สำหรับอุปกรณ์เครือข่ายที่ใช้การเชื่อมต่อนี้ ซึ่งการทำเช่นนี้เรียกว่า MAC cloning หรือ MAC spoofing ตัวอย่าง: "
-"00:11:22:33:44:55"
+"MAC address ที่ใส่ไว้ที่นี่จะถูกใช้เป็นแอดเดรสของฮาร์ดแวร์สำหรับอุปกรณ์เครือข่ายที่ใช้การเชื่อมต่อนี้ ซึ่งการทำเช่นนี้เรียกว่า MAC "
+"cloning หรือ MAC spoofing ตัวอย่าง: 00:11:22:33:44:55"
 
 #: panels/network/connection-editor/ce-page.c:409
 #, c-format
@@ -2904,7 +2944,8 @@ msgid "WPA3"
 msgstr "WPA3"
 
 #. TRANSLATORS: this Enhanced Open WiFi security
-#: panels/network/connection-editor/ce-page-details.c:144 panels/network/connection-editor/ce-page-security.c:270
+#: panels/network/connection-editor/ce-page-details.c:144
+#: panels/network/connection-editor/ce-page-security.c:270
 msgid "Enhanced Open"
 msgstr "Enhanced Open"
 
@@ -2980,18 +3021,21 @@ msgctxt "Signal strength"
 msgid "Excellent"
 msgstr "ดีมาก"
 
-#: panels/network/connection-editor/ce-page-details.c:446 panels/network/connection-editor/details-page.ui:100
-#: panels/network/net-device-ethernet.c:144 panels/network/net-device-mobile.c:441
+#: panels/network/connection-editor/ce-page-details.c:446
+#: panels/network/connection-editor/details-page.ui:100 panels/network/net-device-ethernet.c:144
+#: panels/network/net-device-mobile.c:441
 msgid "IPv4 Address"
 msgstr "ที่อยู่ IPv4"
 
-#: panels/network/connection-editor/ce-page-details.c:447 panels/network/connection-editor/details-page.ui:116
-#: panels/network/net-device-ethernet.c:146 panels/network/net-device-mobile.c:442 panels/network/network-mobile.ui:177
+#: panels/network/connection-editor/ce-page-details.c:447
+#: panels/network/connection-editor/details-page.ui:116 panels/network/net-device-ethernet.c:146
+#: panels/network/net-device-mobile.c:442 panels/network/network-mobile.ui:177
 msgid "IPv6 Address"
 msgstr "ที่อยู่ IPv6"
 
-#: panels/network/connection-editor/ce-page-details.c:449 panels/network/connection-editor/ce-page-details.c:450
-#: panels/network/net-device-ethernet.c:149 panels/network/net-device-ethernet.c:151 panels/network/net-device-mobile.c:445
+#: panels/network/connection-editor/ce-page-details.c:449
+#: panels/network/connection-editor/ce-page-details.c:450 panels/network/net-device-ethernet.c:149
+#: panels/network/net-device-ethernet.c:151 panels/network/net-device-mobile.c:445
 #: panels/network/net-device-mobile.c:446 panels/network/network-mobile.ui:163
 msgid "IP Address"
 msgstr "ที่อยู่ไอพี"
@@ -3006,11 +3050,14 @@ msgstr "DNS4"
 msgid "DNS6"
 msgstr "DNS6"
 
-#: panels/network/connection-editor/ce-page-details.c:457 panels/network/connection-editor/ce-page-details.c:458
-#: panels/network/connection-editor/details-page.ui:181 panels/network/connection-editor/details-page.ui:198
-#: panels/network/connection-editor/ip4-page.ui:176 panels/network/connection-editor/ip6-page.ui:187
-#: panels/network/net-device-ethernet.c:169 panels/network/net-device-ethernet.c:171 panels/network/net-device-mobile.c:453
-#: panels/network/net-device-mobile.c:454 panels/network/network-mobile.ui:206 panels/network/network-mobile.ui:221
+#: panels/network/connection-editor/ce-page-details.c:457
+#: panels/network/connection-editor/ce-page-details.c:458
+#: panels/network/connection-editor/details-page.ui:181
+#: panels/network/connection-editor/details-page.ui:198 panels/network/connection-editor/ip4-page.ui:176
+#: panels/network/connection-editor/ip6-page.ui:187 panels/network/net-device-ethernet.c:169
+#: panels/network/net-device-ethernet.c:171 panels/network/net-device-mobile.c:453
+#: panels/network/net-device-mobile.c:454 panels/network/network-mobile.ui:206
+#: panels/network/network-mobile.ui:221
 msgid "DNS"
 msgstr "DNS"
 
@@ -3091,15 +3138,17 @@ msgstr "WPA และ WPA2 Enterprise"
 msgid "WPA3 Personal"
 msgstr "WPA3 Personal"
 
-#: panels/network/connection-editor/ce-page-wireguard.c:106 panels/network/connection-editor/net-connection-editor.c:881
+#: panels/network/connection-editor/ce-page-wireguard.c:106
+#: panels/network/connection-editor/net-connection-editor.c:881
 msgid "WireGuard"
 msgstr "WireGuard"
 
 #. Translators: Unknown endpoint host for WireGuard (invalid setting)
-#: panels/network/connection-editor/ce-page-wireguard.c:373 panels/privacy/cc-firmware-security-dialog.c:168
-#: panels/sound/cc-alert-chooser-window.c:352 panels/system/about/cc-about-page.c:73
-#: panels/system/about/cc-system-details-window.c:273 panels/system/about/cc-system-details-window.c:325
-#: panels/system/about/cc-system-details-window.c:819 panels/wwan/cc-wwan-details-dialog.c:100
+#: panels/network/connection-editor/ce-page-wireguard.c:373
+#: panels/privacy/cc-firmware-security-dialog.c:168 panels/sound/cc-alert-chooser-window.c:352
+#: panels/system/about/cc-about-page.c:73 panels/system/about/cc-system-details-window.c:273
+#: panels/system/about/cc-system-details-window.c:325 panels/system/about/cc-system-details-window.c:819
+#: panels/wwan/cc-wwan-details-dialog.c:100
 msgid "Unknown"
 msgstr "ไม่ทราบ"
 
@@ -3132,9 +3181,10 @@ msgid "Supported Frequencies"
 msgstr "ความถี่ที่รองรับ"
 
 #: panels/network/connection-editor/details-page.ui:164 panels/network/net-device-ethernet.c:158
-#: panels/network/net-device-ethernet.c:160 panels/network/net-device-ethernet.c:162 panels/network/network-mobile.ui:191
+#: panels/network/net-device-ethernet.c:160 panels/network/net-device-ethernet.c:162
+#: panels/network/network-mobile.ui:191
 msgid "Default Route"
-msgstr "เส้นทางปริยาย"
+msgstr "เส้นทางเริ่มต้น"
 
 #: panels/network/connection-editor/details-page.ui:214
 msgid "Last Used"
@@ -3168,7 +3218,8 @@ msgstr "M_TU"
 msgid "_Cloned Address"
 msgstr "ที่อยู่ที่_ถอดแบบมา"
 
-#: panels/network/connection-editor/ethernet-page.ui:110 panels/network/connection-editor/wireguard-page.ui:194
+#: panels/network/connection-editor/ethernet-page.ui:110
+#: panels/network/connection-editor/wireguard-page.ui:194
 msgid "bytes"
 msgstr "ไบต์"
 
@@ -3279,7 +3330,9 @@ msgstr "ไฟล์ตั้งค่า VPN ไม่ถูกต้อง"
 
 #. Translators: VPN add dialog Wireguard description
 #: panels/network/connection-editor/net-connection-editor.c:875
-msgid "Free and open-source VPN solution designed for ease of use, high speed performance and low attack surface."
+msgid ""
+"Free and open-source VPN solution designed for ease of use, high speed performance and low attack "
+"surface."
 msgstr ""
 
 #: panels/network/connection-editor/net-connection-editor.c:890
@@ -3358,10 +3411,13 @@ msgid "_Listen Port"
 msgstr ""
 
 #: panels/network/connection-editor/wireguard-page.ui:109
-msgid "A port to listen on. If set to 'automatic', the port will be chosen randomly when the interface comes up."
+msgid ""
+"A port to listen on. If set to 'automatic', the port will be chosen randomly when the interface comes "
+"up."
 msgstr ""
 
-#: panels/network/connection-editor/wireguard-page.ui:110 panels/network/connection-editor/wireguard-page.ui:144
+#: panels/network/connection-editor/wireguard-page.ui:110
+#: panels/network/connection-editor/wireguard-page.ui:144
 msgid "0"
 msgstr ""
 
@@ -3395,7 +3451,8 @@ msgid "No peers set up"
 msgstr ""
 
 #: panels/network/connection-editor/wireguard-peer.ui:46 panels/network/net-device-ethernet.c:326
-#: panels/network/network-bluetooth.ui:19 panels/network/network-mobile.ui:329 panels/network/network-vpn.ui:21
+#: panels/network/network-bluetooth.ui:19 panels/network/network-mobile.ui:329
+#: panels/network/network-vpn.ui:21
 msgid "Options…"
 msgstr "ตัวเลือก…"
 
@@ -3422,8 +3479,9 @@ msgstr "ใช้กุญแจร่วมกัน"
 
 #: panels/network/connection-editor/wireguard-peer.ui:154
 msgid ""
-"A base64 preshared key generated by 'wg genpsk'. Optional, and may be omitted. Adds an additional layer of symmetric-key "
-"cryptography to be mixed into the already existing public-key cryptography, for post-quantum resistance."
+"A base64 preshared key generated by 'wg genpsk'. Optional, and may be omitted. Adds an additional layer "
+"of symmetric-key cryptography to be mixed into the already existing public-key cryptography, for post-"
+"quantum resistance."
 msgstr ""
 
 #: panels/network/connection-editor/wireguard-peer.ui:171
@@ -3433,8 +3491,8 @@ msgstr "ที่อยู่ที่_ถอดแบบมา"
 
 #: panels/network/connection-editor/wireguard-peer.ui:182
 msgid ""
-"Comma-separated list of IP (v4 or v6) addresses with CIDR masks from which incoming traffic for this peer is allowed and to which "
-"outgoing traffic for this peer is directed."
+"Comma-separated list of IP (v4 or v6) addresses with CIDR masks from which incoming traffic for this "
+"peer is allowed and to which outgoing traffic for this peer is directed."
 msgstr ""
 
 #: panels/network/connection-editor/wireguard-peer.ui:194
@@ -3443,8 +3501,8 @@ msgstr ""
 
 #: panels/network/connection-editor/wireguard-peer.ui:208
 msgid ""
-"How often to send an authenticated empty packet to the peer for the purpose of keeping a stateful firewall or NAT mapping valid. "
-"This is optional and not recommended outside of specific setups."
+"How often to send an authenticated empty packet to the peer for the purpose of keeping a stateful "
+"firewall or NAT mapping valid. This is optional and not recommended outside of specific setups."
 msgstr ""
 
 #: panels/network/connection-editor/wireguard-peer.ui:217
@@ -3472,7 +3530,7 @@ msgstr "ควบคุมวิธีการเชื่อมต่อกั
 #. Translators: Search terms to find the Wi-Fi panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/network/gnome-wifi-panel.desktop.in:15
 msgid "Network;Wireless;Wi-Fi;Wifi;IP;LAN;Broadband;DNS;Hotspot;"
-msgstr "เครือข่าย;ไร้สาย;Wi-Fi;Wifi;ไอพี;แลน;บรอดแบนด์;DNS;จุดแพร่สัญญาณ;"
+msgstr "เครือข่าย;ไร้สาย;Wi-Fi;Wifi;ไอพี;แลน;บรอดแบนด์;DNS;ฮอตสปอต;"
 
 #: panels/network/net-device-ethernet.c:93
 msgid "never"
@@ -3502,7 +3560,8 @@ msgstr "%'d Mb/s"
 #. * profile. It is also used to display ethernet in the
 #. * device list.
 #.
-#: panels/network/net-device-ethernet.c:265 panels/network/network-bluetooth.ui:5 panels/network/network-ethernet.ui:5
+#: panels/network/net-device-ethernet.c:265 panels/network/network-bluetooth.ui:5
+#: panels/network/network-ethernet.ui:5
 msgid "Wired"
 msgstr "ใช้สาย"
 
@@ -3527,11 +3586,11 @@ msgstr[0] "ลบเครือข่ายแล้ว %d รายการ"
 
 #: panels/network/net-device-wifi.c:1140
 msgid "System policy prohibits use as a Hotspot"
-msgstr "นโยบายของระบบห้ามใช้เป็นจุดแพร่สัญญาณ"
+msgstr "นโยบายของระบบห้ามใช้เป็นฮอตสปอต"
 
 #: panels/network/net-device-wifi.c:1143
 msgid "Wireless device does not support Hotspot mode"
-msgstr "อุปกรณ์ไร้สายไม่รองรับโหมดจุดแพร่สัญญาณ"
+msgstr "อุปกรณ์ไร้สายไม่รองรับโหมดฮอตสปอต"
 
 #: panels/network/network-ethernet.ui:8
 msgid "Add Ethernet Connection"
@@ -3594,7 +3653,7 @@ msgstr "เชื่อมต่อไปยังเครือข่ายท
 
 #: panels/network/network-wifi.ui:105
 msgid "_Turn On Wi-Fi Hotspot…"
-msgstr "เ_ปิดจุดแพร่สัญญาณ Wi-Fi…"
+msgstr "เ_ปิดฮอตสปอต Wi-Fi…"
 
 #: panels/network/network-wifi.ui:114
 msgid "Saved Wi-Fi Networks"
@@ -3972,10 +4031,12 @@ msgstr "เชื่อมต่อไปยังบัญชีออนไล
 #. The list MUST also end with a semicolon!
 #. For ReadItLater and Pocket, see http://en.wikipedia.org/wiki/Pocket_(application)
 #: panels/online-accounts/gnome-online-accounts-panel.desktop.in:18
-msgid "Google;Facebook;Twitter;Yahoo;Web;Online;Chat;Calendar;Mail;Contact;ownCloud;Kerberos;IMAP;SMTP;Pocket;ReadItLater;"
-msgstr ""
-"กูเกิล;Google;เฟซบุ๊ก;Facebook;ทวิตเตอร์;Twitter;ยาฮู;Yahoo;เว็บ;ออนไลน์;แช็ต;ปฏิทิน;เมล;ผู้ติดต่อ;ownCloud;Kerberos;IMAP;SMTP;พ็อกเก็ต;Pocket;"
+msgid ""
+"Google;Facebook;Twitter;Yahoo;Web;Online;Chat;Calendar;Mail;Contact;ownCloud;Kerberos;IMAP;SMTP;Pocket;"
 "ReadItLater;"
+msgstr ""
+"กูเกิล;Google;เฟซบุ๊ก;Facebook;ทวิตเตอร์;Twitter;ยาฮู;Yahoo;เว็บ;ออนไลน์;แช็ต;ปฏิทิน;เมล;ผู้ติดต่อ;ownCloud;Kerberos;"
+"IMAP;SMTP;พ็อกเก็ต;Pocket;ReadItLater;"
 
 #: panels/power/cc-battery-row.c:80
 msgid "Unknown time"
@@ -4172,7 +4233,8 @@ msgid "Performance mode temporarily disabled due to high operating temperature."
 msgstr "โหมดประสิทธิภาพถูกปิดใช้เป็นการชั่วคราวเนื่องจากมีอุณหภูมิสูงเกินไป"
 
 #: panels/power/cc-power-panel.c:977
-msgid "Lap detected: performance mode temporarily unavailable. Move the device to a stable surface to restore."
+msgid ""
+"Lap detected: performance mode temporarily unavailable. Move the device to a stable surface to restore."
 msgstr "ตรวจพบหน้าตัก: โหมดประสิทธิภาพไม่สามารถใช้ได้ชั่วคราว โปรดนำอุปกรณ์ไปไว้บนพื้นผิวที่มั่นคงเพื่อเรียกคืนการทำงาน"
 
 #: panels/power/cc-power-panel.c:979
@@ -4180,8 +4242,10 @@ msgid "Performance mode temporarily disabled."
 msgstr "โหมดประสิทธิภาพถูกปิดใช้เป็นการชั่วคราว"
 
 #: panels/power/cc-power-panel.c:1021
-msgid "Low battery: power saver enabled. Previous mode will be restored when battery is sufficiently charged."
-msgstr "แบตเตอรี่เหลือน้อย: โหมดประหยัดพลังงานถูกเปิดใช้แล้ว โหมดก่อนหน้านี้จะถูกเรียกคืนการทำงานเมื่อได้ชาร์จแบตเตอรี่จนเพียงพอแล้ว"
+msgid ""
+"Low battery: power saver enabled. Previous mode will be restored when battery is sufficiently charged."
+msgstr ""
+"แบตเตอรี่เหลือน้อย: โหมดประหยัดพลังงานถูกเปิดใช้แล้ว โหมดก่อนหน้านี้จะถูกเรียกคืนการทำงานเมื่อได้ชาร์จแบตเตอรี่จนเพียงพอแล้ว"
 
 #. translators: "%s" is an application name
 #: panels/power/cc-power-panel.c:1029
@@ -4441,8 +4505,8 @@ msgid "Printer;Queue;Print;Paper;Ink;Toner;"
 msgstr "เครื่องพิมพ์;คิว;พิมพ์;กระดาษ;หมึก;ผงหมึก;"
 
 #. Translators: This is the title presented at top of the dialog.
-#: panels/printers/new-printer-dialog.ui:28 panels/printers/new-printer-dialog.ui:43 panels/printers/pp-new-printer-dialog.c:254
-#: panels/printers/pp-new-printer-dialog.c:311
+#: panels/printers/new-printer-dialog.ui:28 panels/printers/new-printer-dialog.ui:43
+#: panels/printers/pp-new-printer-dialog.c:254 panels/printers/pp-new-printer-dialog.c:311
 msgid "Add Printer"
 msgstr "เพิ่มเครื่องพิมพ์"
 
@@ -4453,7 +4517,8 @@ msgstr "ย้อนกลับ"
 
 #. Translators: This button opens authentication dialog for selected server.
 #. Translators: This buttons submits the credentials for the selected server.
-#: panels/printers/new-printer-dialog.ui:102 panels/printers/new-printer-dialog.ui:117 panels/wwan/cc-wwan-device-page.ui:38
+#: panels/printers/new-printer-dialog.ui:102 panels/printers/new-printer-dialog.ui:117
+#: panels/wwan/cc-wwan-device-page.ui:38
 msgid "_Unlock"
 msgstr "_ปลดล็อก"
 
@@ -4477,8 +4542,8 @@ msgstr "ป้อนชื่อผู้ใช้และรหัสผ่า
 
 #. Translators: This is a username on a print server.
 #: panels/printers/new-printer-dialog.ui:272 panels/printers/pp-jobs-dialog.ui:42
-#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:91 panels/system/remote-desktop/cc-remote-session-page.ui:90
-#: panels/wwan/cc-wwan-apn-dialog.ui:150
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:91
+#: panels/system/remote-desktop/cc-remote-session-page.ui:90 panels/wwan/cc-wwan-apn-dialog.ui:150
 msgid "Username"
 msgstr "ชื่อผู้ใช้"
 
@@ -4504,7 +4569,8 @@ msgstr "ไฟล์บรรยายเครื่องพิมพ์โพ
 msgid "Printer names cannot contain SPACE, TAB, #, or /"
 msgstr "ชื่อเครื่องพิมพ์ต้องไม่มีช่องว่าง แท็บ # หรือ /"
 
-#: panels/printers/pp-details-dialog.ui:75 panels/printers/printer-entry.ui:97 panels/privacy/cc-location-page.ui:4
+#: panels/printers/pp-details-dialog.ui:75 panels/printers/printer-entry.ui:97
+#: panels/privacy/cc-location-page.ui:4
 msgid "Location"
 msgstr "ตำแหน่งที่ตั้ง"
 
@@ -4852,16 +4918,17 @@ msgid "_Test Page"
 msgstr "หน้า_ทดสอบ"
 
 #. Translators: this is an option of "Paper Source"
-#: panels/printers/pp-ppd-option-widget.c:75 panels/printers/pp-ppd-option-widget.c:77 panels/printers/pp-ppd-option-widget.c:85
+#: panels/printers/pp-ppd-option-widget.c:75 panels/printers/pp-ppd-option-widget.c:77
+#: panels/printers/pp-ppd-option-widget.c:85
 msgid "Auto Select"
 msgstr "เลือกโดยอัตโนมัติ"
 
 #. Translators: this is an option of "Paper Source"
 #. Translators: this is an option of "Resolution"
-#: panels/printers/pp-ppd-option-widget.c:79 panels/printers/pp-ppd-option-widget.c:81 panels/printers/pp-ppd-option-widget.c:83
-#: panels/printers/pp-ppd-option-widget.c:87
+#: panels/printers/pp-ppd-option-widget.c:79 panels/printers/pp-ppd-option-widget.c:81
+#: panels/printers/pp-ppd-option-widget.c:83 panels/printers/pp-ppd-option-widget.c:87
 msgid "Printer Default"
-msgstr "ค่าปริยายเครื่องพิมพ์"
+msgstr "ค่าเริ่มต้นเครื่องพิมพ์"
 
 #. Translators: this is an option of "GhostScript"
 #: panels/printers/pp-ppd-option-widget.c:89
@@ -5008,7 +5075,8 @@ msgctxt "printer state"
 msgid "Processing"
 msgstr "กำลังดำเนินการ"
 
-#: panels/printers/printer-entry.ui:69 panels/system/about/cc-system-details-window.ui:74 panels/wwan/cc-wwan-details-dialog.ui:184
+#: panels/printers/printer-entry.ui:69 panels/system/about/cc-system-details-window.ui:74
+#: panels/wwan/cc-wwan-details-dialog.ui:184
 msgid "Model"
 msgstr "รุ่น"
 
@@ -5043,7 +5111,7 @@ msgstr "รายละเอียดเครื่องพิมพ์"
 #. Set this printer as default
 #: panels/printers/printer-entry.ui:250
 msgid "Use Printer by Default"
-msgstr "ใช้เครื่องพิมพ์นี้เป็นค่าปริยาย"
+msgstr "ใช้เครื่องพิมพ์นี้เป็นค่าเริ่มต้น"
 
 #. Translators: This button executes command which cleans print heads of the printer.
 #: panels/printers/printer-entry.ui:254
@@ -5064,7 +5132,8 @@ msgctxt "Thunderbolt Device Status"
 msgid "Connecting"
 msgstr "กำลังเชื่อมต่อ"
 
-#: panels/privacy/cc-bolt-device-dialog.c:85 panels/privacy/cc-bolt-device-entry.c:128 panels/privacy/cc-bolt-device-entry.c:140
+#: panels/privacy/cc-bolt-device-dialog.c:85 panels/privacy/cc-bolt-device-entry.c:128
+#: panels/privacy/cc-bolt-device-entry.c:140
 msgctxt "Thunderbolt Device Status"
 msgid "Connected"
 msgstr "เชื่อมต่อแล้ว"
@@ -5177,8 +5246,8 @@ msgstr "สามารถต่อได้เฉพาะอุปกรณ์
 #: panels/privacy/cc-bolt-page.c:511
 msgid ""
 "Thunderbolt could not be detected.\n"
-"Either the system lacks Thunderbolt support, it has been disabled in the BIOS or is set to an unsupported security level in the "
-"BIOS."
+"Either the system lacks Thunderbolt support, it has been disabled in the BIOS or is set to an "
+"unsupported security level in the BIOS."
 msgstr ""
 "ไม่พบ Thunderbolt\n"
 "ระบบอาจไม่รองรับ Thunderbolt, อาจถูกปิดใช้ใน BIOS หรือถูกกำหนดเป็นระดับที่ไม่รองรับใน BIOS"
@@ -5243,15 +5312,16 @@ msgstr "การเข้าถึงกล้อง"
 msgid "Allow permitted apps to use cameras"
 msgstr "อนุญาตให้แอปที่ได้รับอนุญาตใช้กล้องได้"
 
-#: panels/privacy/cc-camera-page.ui:27 panels/privacy/cc-location-page.ui:55 panels/privacy/cc-microphone-page.ui:27
+#: panels/privacy/cc-camera-page.ui:27 panels/privacy/cc-location-page.ui:55
+#: panels/privacy/cc-microphone-page.ui:27
 msgid "Permitted Apps"
 msgstr "แอปที่ได้รับอนุญาต"
 
 #: panels/privacy/cc-camera-page.ui:28
 #, fuzzy
 msgid ""
-"The following sandboxed apps have been given permission to use cameras. Apps that are not sandboxed can use cameras without asking "
-"for permission."
+"The following sandboxed apps have been given permission to use cameras. Apps that are not sandboxed can "
+"use cameras without asking for permission."
 msgstr "แอปที่อยู่ในแซนด์บ็อกซ์ต่อไปนี้ได้รับอนุญาตให้ใช้กล้องได้ แอปที่ไม่ได้อยู่ในแซนด์บ็อกซ์สามารถใช้กล้องได้โดยไม่ต้องขออนุญาต"
 
 #: panels/privacy/cc-camera-page.ui:42
@@ -5261,8 +5331,11 @@ msgstr "ไม่มีแอปในแซนด์บ็อกซ์ที่
 #. translators: The first '%s' is the distributor's name, such as 'Fedora', the second '%s' is a link to the privacy policy
 #: panels/privacy/cc-diagnostics-page.c:124
 #, c-format
-msgid "Sending reports of technical problems helps us improve %s. Reports are sent anonymously and are scrubbed of personal data. %s"
-msgstr "การส่งรายงานปัญหาทางเทคนิคเป็นการช่วยเราปรับปรุง %s ให้ดีขึ้น รายงานจะถูกส่งโดยไม่ระบุชื่อ และปราศจากข้อมูลส่วนบุคคล %s"
+msgid ""
+"Sending reports of technical problems helps us improve %s. Reports are sent anonymously and are "
+"scrubbed of personal data. %s"
+msgstr ""
+"การส่งรายงานปัญหาทางเทคนิคเป็นการช่วยเราปรับปรุง %s ให้ดีขึ้น รายงานจะถูกส่งโดยไม่ระบุชื่อ และปราศจากข้อมูลส่วนบุคคล %s"
 
 #: panels/privacy/cc-diagnostics-page.ui:4
 msgid "Diagnostics"
@@ -5284,9 +5357,10 @@ msgstr "การบูตแบบปลอดภัยเปิดใช้อ
 #. TRANSLATORS: this is the first section of the decription
 #: panels/privacy/cc-firmware-security-boot-dialog.c:77
 msgid ""
-"Secure boot prevents malicious software from being loaded when the device starts. It is currently turned on and is functioning "
-"correctly."
-msgstr "การบูตแบบปลอดภัยช่วยป้องกันไม่ให้มีการโหลดซอฟต์แวร์ที่เป็นอันตรายเมื่ออุปกรณ์เริ่มทำงาน โดยขณะนี้เปิดอยู่และทำงานได้อย่างถูกต้อง"
+"Secure boot prevents malicious software from being loaded when the device starts. It is currently "
+"turned on and is functioning correctly."
+msgstr ""
+"การบูตแบบปลอดภัยช่วยป้องกันไม่ให้มีการโหลดซอฟต์แวร์ที่เป็นอันตรายเมื่ออุปกรณ์เริ่มทำงาน โดยขณะนี้เปิดอยู่และทำงานได้อย่างถูกต้อง"
 
 #. TRANSLATORS: secure boot refers to the system firmware security mode
 #: panels/privacy/cc-firmware-security-boot-dialog.c:83
@@ -5296,15 +5370,17 @@ msgstr "การบูตแบบปลอดภัยมีปัญหา"
 #. TRANSLATORS: this is the first section of the decription.
 #: panels/privacy/cc-firmware-security-boot-dialog.c:87
 msgid ""
-"Secure boot prevents malicious software from being loaded when the device starts. It is currently turned on, but will not work due "
-"to having an invalid key."
-msgstr "การบูตแบบปลอดภัยช่วยป้องกันไม่ให้มีการโหลดซอฟต์แวร์ที่เป็นอันตรายเมื่ออุปกรณ์เริ่มทำงาน โดยขณะนี้เปิดอยู่ แต่จะทำงานไม่ได้เนื่องจากมีคีย์ไม่ถูกต้อง"
+"Secure boot prevents malicious software from being loaded when the device starts. It is currently "
+"turned on, but will not work due to having an invalid key."
+msgstr ""
+"การบูตแบบปลอดภัยช่วยป้องกันไม่ให้มีการโหลดซอฟต์แวร์ที่เป็นอันตรายเมื่ออุปกรณ์เริ่มทำงาน โดยขณะนี้เปิดอยู่ "
+"แต่จะทำงานไม่ได้เนื่องจากมีคีย์ไม่ถูกต้อง"
 
 #. TRANSLATORS: this is the second section of description.
 #: panels/privacy/cc-firmware-security-boot-dialog.c:90
 msgid ""
-"Secure boot problems can often be resolved from your computer's UEFI firmware settings (BIOS) and your hardware manufacturer may "
-"provide information on how to do this."
+"Secure boot problems can often be resolved from your computer's UEFI firmware settings (BIOS) and your "
+"hardware manufacturer may provide information on how to do this."
 msgstr ""
 "ปัญหาต่างๆ เกี่ยวกับการบูตแบบปลอดภัยส่วนมากจะสามารถแก้ไขได้จากการตั้งค่าเฟิร์มแวร์ UEFI (ใน BIOS) ของคอมพิวเตอร์ของคุณ "
 "และผู้ผลิตฮาร์ดแวร์ของคุณอาจได้ให้ข้อมูลเกี่ยวกับวิธีการเหล่านี้ไว้"
@@ -5321,17 +5397,19 @@ msgstr "การบูตแบบปลอดภัยปิดอยู่"
 
 #. TRANSLATORS: this is the first section of the description.
 #: panels/privacy/cc-firmware-security-boot-dialog.c:103
-msgid "Secure boot prevents malicious software from being loaded when the device starts. It is currently turned off."
+msgid ""
+"Secure boot prevents malicious software from being loaded when the device starts. It is currently "
+"turned off."
 msgstr "การบูตแบบปลอดภัยปิดอยู่ช่วยป้องกันไม่ให้มีการโหลดซอฟต์แวร์ที่เป็นอันตรายเมื่ออุปกรณ์เริ่มทำงาน โดยขณะนี้ปิดอยู่"
 
 #. TRANSLATORS: this is the second section of the description.
 #: panels/privacy/cc-firmware-security-boot-dialog.c:106
 msgid ""
-"Secure boot can often be turned on from your computer's UEFI firmware settings (BIOS). For help, contact your hardware "
-"manufacturer or IT support provider."
+"Secure boot can often be turned on from your computer's UEFI firmware settings (BIOS). For help, "
+"contact your hardware manufacturer or IT support provider."
 msgstr ""
-"โดยปกติแล้ว การบูตแบบปลอดภัยสามารถเปิดใช้ได้จากการตั้งค่าเฟิร์มแวร์ UEFI (ใน BIOS) ของคอมพิวเตอร์ของคุณ ถ้าต้องการความช่วยเหลือ "
-"ให้ติดต่อผู้ผลิตฮาร์ดแวร์หรือผู้ให้บริการช่วยเหลือด้านไอทีของคุณ"
+"โดยปกติแล้ว การบูตแบบปลอดภัยสามารถเปิดใช้ได้จากการตั้งค่าเฟิร์มแวร์ UEFI (ใน BIOS) ของคอมพิวเตอร์ของคุณ "
+"ถ้าต้องการความช่วยเหลือ ให้ติดต่อผู้ผลิตฮาร์ดแวร์หรือผู้ให้บริการช่วยเหลือด้านไอทีของคุณ"
 
 #: panels/privacy/cc-firmware-security-boot-dialog.ui:55
 msgid ""
@@ -5353,10 +5431,12 @@ msgstr "การตรวจสอบ PIN ล้มเหลว"
 #. checking the security items.
 #: panels/privacy/cc-firmware-security-dialog.c:109
 msgid ""
-"Hardware does not pass checks. This means that you are not protected against common hardware security issues.\n"
+"Hardware does not pass checks. This means that you are not protected against common hardware security "
+"issues.\n"
 "\n"
-"It may be possible to resolve hardware security issues by updating your firmware or changing device configuration options. "
-"However, failures can stem from the physical hardware itself, and may not be reversible."
+"It may be possible to resolve hardware security issues by updating your firmware or changing device "
+"configuration options. However, failures can stem from the physical hardware itself, and may not be "
+"reversible."
 msgstr ""
 
 #. TRANSLATORS: in reference to firmware protection: 1/4 stars
@@ -5368,7 +5448,9 @@ msgstr "เปลี่ยนรหัสผ่าน"
 #. TRANSLATORS: This description describes the device passing the
 #. minimum requirement of security check.
 #: panels/privacy/cc-firmware-security-dialog.c:123
-msgid "This device meets basic security requirements. Its hardware has protection against some of the most common security threats."
+msgid ""
+"This device meets basic security requirements. Its hardware has protection against some of the most "
+"common security threats."
 msgstr ""
 
 #. TRANSLATORS: in reference to firmware protection: 2~4 stars
@@ -5380,7 +5462,9 @@ msgstr "ถูกปฏิเสธ"
 #. TRANSLATOR: This description describes the devices passing
 #. the extended security check.
 #: panels/privacy/cc-firmware-security-dialog.c:137
-msgid "This device passes current security tests. Its hardware is protected against the majority of security threats."
+msgid ""
+"This device passes current security tests. Its hardware is protected against the majority of security "
+"threats."
 msgstr ""
 
 #. TRANSLATORS: in reference to firmware protection: ??? stars
@@ -5391,7 +5475,9 @@ msgstr "ใช้งานไม่ได้"
 
 #. TRANSLATORS: When the security result is unavailable, this description is shown.
 #: panels/privacy/cc-firmware-security-dialog.c:147
-msgid "Device security checks are not available for this device. It is not possible to tell whether it meets security requirements."
+msgid ""
+"Device security checks are not available for this device. It is not possible to tell whether it meets "
+"security requirements."
 msgstr ""
 
 #: panels/privacy/cc-firmware-security-dialog.c:367
@@ -5409,7 +5495,8 @@ msgstr ""
 
 #: panels/privacy/cc-firmware-security-help-dialog.ui:27
 msgid ""
-"Device security provides information about how protected your device is against security issues which target the hardware itself.\n"
+"Device security provides information about how protected your device is against security issues which "
+"target the hardware itself.\n"
 "\n"
 "Aspects of hardware that affect security include:\n"
 "\n"
@@ -5417,10 +5504,12 @@ msgid ""
 "• how the hardware is configured to protect against security issues;\n"
 "• the security of the software runs directly on the hardware.\n"
 "\n"
-"Security threats which affect hardware include malware and viruses that target the software that runs directly on the hardware. It "
-"also includes physical tampering, such as physical connection to the hardware to read data and implant malware.\n"
+"Security threats which affect hardware include malware and viruses that target the software that runs "
+"directly on the hardware. It also includes physical tampering, such as physical connection to the "
+"hardware to read data and implant malware.\n"
 "\n"
-"Device security is just one aspect of security, and does not reflect the overall security status of the system and applications."
+"Device security is just one aspect of security, and does not reflect the overall security status of the "
+"system and applications."
 msgstr ""
 
 #: panels/privacy/cc-firmware-security-page.c:123
@@ -5446,19 +5535,22 @@ msgstr ""
 #. TRANSLATORS: this is to explain an event that has already happened
 #: panels/privacy/cc-firmware-security-page.c:155
 msgid ""
-"This issue could have been caused by a change in UEFI firmware settings, an operating system configuration change, or because of "
-"malicious software on this system."
+"This issue could have been caused by a change in UEFI firmware settings, an operating system "
+"configuration change, or because of malicious software on this system."
 msgstr ""
 
 #. TRANSLATORS: this is to explain an event that has already happened
 #: panels/privacy/cc-firmware-security-page.c:163
-msgid "This issue could have been caused by a change in the UEFI firmware settings, or because of malicious software on this system."
+msgid ""
+"This issue could have been caused by a change in the UEFI firmware settings, or because of malicious "
+"software on this system."
 msgstr ""
 
 #. TRANSLATORS: this is to explain an event that has already happened
 #: panels/privacy/cc-firmware-security-page.c:170
 msgid ""
-"This issue could have been caused by an operating system configuration change, or because of malicious software on this system."
+"This issue could have been caused by an operating system configuration change, or because of malicious "
+"software on this system."
 msgstr ""
 
 #. TRANSLATOR: this is the date in "%Y-%m-%d %H:%M:%S" format,
@@ -5538,8 +5630,8 @@ msgstr "ยังไม่เทียบมาตรฐาน"
 
 #. TRANSLATORS: if the function is enabled through BIOS or OS settings.
 #. TRANSLATORS: Status of Parental Controls setup
-#: panels/privacy/cc-firmware-security-utils.c:45 panels/system/users/cc-user-page.c:377 panels/system/users/cc-user-page.c:752
-#: panels/wwan/cc-wwan-device-page.c:475
+#: panels/privacy/cc-firmware-security-utils.c:45 panels/system/users/cc-user-page.c:377
+#: panels/system/users/cc-user-page.c:752 panels/wwan/cc-wwan-device-page.c:475
 msgid "Enabled"
 msgstr "เปิดใช้"
 
@@ -5613,14 +5705,14 @@ msgstr "_ล็อกหน้าจออัตโนมัติ"
 
 #: panels/privacy/cc-location-page.ui:28
 msgid ""
-"Automatic device location uses sources like GPS, Wi-Fi and cellular to determine an approximate location for this device. Location "
-"data is sent to Mozilla Location Services as part of this feature."
+"Automatic device location uses sources like GPS, Wi-Fi and cellular to determine an approximate "
+"location for this device. Location data is sent to Mozilla Location Services as part of this feature."
 msgstr ""
 
 #: panels/privacy/cc-location-page.ui:56
 msgid ""
-"The following sandboxed apps have been given access to location data. Apps that are not sandboxed can access location data without "
-"asking for permission."
+"The following sandboxed apps have been given access to location data. Apps that are not sandboxed can "
+"access location data without asking for permission."
 msgstr ""
 
 #: panels/privacy/cc-location-page.ui:70
@@ -5648,8 +5740,8 @@ msgstr ""
 
 #: panels/privacy/cc-microphone-page.ui:28
 msgid ""
-"The following sandboxed apps have been given permission to use microphones. Apps that are not sandboxed can use microphones "
-"without asking for permission."
+"The following sandboxed apps have been given permission to use microphones. Apps that are not sandboxed "
+"can use microphones without asking for permission."
 msgstr ""
 
 #: panels/privacy/cc-microphone-page.ui:43
@@ -6015,8 +6107,8 @@ msgstr "ประวัติไฟล์"
 
 #: panels/privacy/cc-usage-page.ui:17
 msgid ""
-"File history keeps a record of files that you have used. This information is shared between apps, and makes it easier to find "
-"files that you might want to use."
+"File history keeps a record of files that you have used. This information is shared between apps, and "
+"makes it easier to find files that you might want to use."
 msgstr "ประวัติไฟล์จะบันทึกไฟล์ที่คุณเคยใช้ ข้อมูลนี้จะถูกแชร์ระหว่างแอปต่างๆ และทำให้ค้นหาไฟล์ที่ต้องการใช้ได้ง่ายขึ้น"
 
 #: panels/privacy/cc-usage-page.ui:20
@@ -6037,8 +6129,8 @@ msgstr "ถังขยะและไฟล์ชั่วคราว"
 
 #: panels/privacy/cc-usage-page.ui:65
 msgid ""
-"Trash and temporary files can sometimes include personal or sensitive information. Automatically deleting them can help to protect "
-"privacy."
+"Trash and temporary files can sometimes include personal or sensitive information. Automatically "
+"deleting them can help to protect privacy."
 msgstr "บางครั้งไฟล์ขยะและไฟล์ชั่วคราวอาจมีข้อมูลส่วนตัวหรือข้อมูลละเอียดอ่อน การลบข้อมูลโดยอัตโนมัติอาจช่วยปกป้องความเป็นส่วนตัวได้"
 
 #: panels/privacy/cc-usage-page.ui:68
@@ -6068,8 +6160,8 @@ msgstr "ควบคุมการเข้าถึงข้อมูลแล
 #. Translators: Search terms to find the Privacy panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/privacy/gnome-privacy-panel.desktop.in:15
 msgid ""
-"Privacy;Screen;Lock;Private;Usage;Recent;History;Files;Temporary;Tmp;Trash;Purge;Retain;Diagnostics;Crash;Location;Gps;Camera;"
-"Photos;Video;Webcam;Recording;Security;Firmware;Thunderbolt;"
+"Privacy;Screen;Lock;Private;Usage;Recent;History;Files;Temporary;Tmp;Trash;Purge;Retain;Diagnostics;"
+"Crash;Location;Gps;Camera;Photos;Video;Webcam;Recording;Security;Firmware;Thunderbolt;"
 msgstr ""
 
 #: panels/search/cc-search-locations-dialog.c:507
@@ -6122,12 +6214,11 @@ msgstr "ไม่พบแอป"
 
 #: panels/search/cc-search-panel.ui:16
 msgid "_App Search"
-msgstr "การ_ค้นหาแอป"
+msgstr "การ_ค้นหาจากแอป"
 
 #: panels/search/cc-search-panel.ui:17
-#, fuzzy
 msgid "Include app-provided search results"
-msgstr "รวมผลการค้นหาที่แอปจัดเตรียมไว้"
+msgstr "รวมผลการค้นหาจากแอป"
 
 #: panels/search/cc-search-panel.ui:23
 msgid "Search _Locations"
@@ -6139,7 +6230,7 @@ msgstr "ตำแหน่งระบบไฟล์ที่ถูกค้น
 
 #: panels/search/cc-search-panel.ui:33
 msgid "Search Results"
-msgstr "_ผลการค้นหา"
+msgstr "ผลการค้นหา"
 
 #: panels/search/cc-search-panel.ui:34
 msgid "Results are displayed according to the list order"
@@ -6246,7 +6337,8 @@ msgstr "ควบคุมสิ่งที่คุณต้องการแ
 
 #. Translators: Search terms to find the Sharing panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/sharing/gnome-sharing-panel.desktop.in:15
-msgid "share;sharing;ssh;host;name;remote;desktop;media;audio;video;pictures;photos;movies;server;renderer;"
+msgid ""
+"share;sharing;ssh;host;name;remote;desktop;media;audio;video;pictures;photos;movies;server;renderer;"
 msgstr "แบ่งปัน;ใช้ร่วม;ssh;โฮสต์;ชื่อ;แม่ข่าย;เดสก์ท็อป;สื่อ;เสียง;วีดิทัศน์;ภาพ;ภาพถ่าย;ภาพยนตร์;เซิร์ฟเวอร์;โปรแกรมวาดแสดง;"
 
 #: panels/sound/cc-alert-chooser-window.c:169
@@ -6630,11 +6722,12 @@ msgstr "ดูข้อมูลเกี่ยวกับระบบของ
 #. "Preferred Applications" is the old name for the preference, so make
 #. sure that you use the same "translation" for those keywords
 #: panels/system/about/gnome-about-panel.desktop.in:19
-#, fuzzy
 msgid ""
-"device;system;information;hostname;memory;processor;version;default;application;preferred;cd;dvd;usb;audio;video;disc;removable;"
-"media;autorun;"
-msgstr "อุปกรณ์;ระบบ;ข้อมูล;หน่วยความจำ;ตัวประมวลผล;รุ่น;ปริยาย;โปรแกรม;โปรแกรมหลักๆ;ซีดี;ดีวีดี;usb;เสียง;วีดิทัศน์;ดิสก์;ถอดเสียบ;สื่อ;autorun;"
+"device;system;information;hostname;memory;processor;version;default;application;preferred;cd;dvd;usb;"
+"audio;video;disc;removable;media;autorun;"
+msgstr ""
+"อุปกรณ์;ระบบ;ข้อมูล;ชื่อโฮสต์;หน่วยความจำ;ตัวประมวลผล;รุ่น;เริ่มต้น;แอปพลิเคชัน;ปรับแต่ง;ซีดี;ดีวีดี;usb;เสียง;วิดีโอ;ดิสก์;ถอดเสียบ;"
+"สื่อ;autorun;"
 
 #: panels/system/cc-system-panel.ui:23
 msgid "_Region &amp; Language"
@@ -6878,8 +6971,8 @@ msgstr "ตั้งค่าภาษาและเวลา และข้�
 #. Translators: Search terms to find the System panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/system/gnome-system-panel.desktop.in:15
 msgid ""
-"device;system;information;details;hostname;memory;processor;version;software;operating;os;model;language;region;country;formats;"
-"numbers;units;clock;timezone;date;location;remote;desktop;rdp;vnc;"
+"device;system;information;details;hostname;memory;processor;version;software;operating;os;model;"
+"language;region;country;formats;numbers;units;clock;timezone;date;location;remote;desktop;rdp;vnc;"
 msgstr ""
 
 #: panels/system/region/cc-format-chooser.c:160 panels/system/region/cc-format-chooser.c:208
@@ -6958,7 +7051,9 @@ msgid "Log _Out…"
 msgstr "_ออกจากระบบ"
 
 #: panels/system/region/cc-region-page.ui:27
-msgid "The language setting is used for interface text and web pages. Formats are used for numbers, dates, and currencies."
+msgid ""
+"The language setting is used for interface text and web pages. Formats are used for numbers, dates, and "
+"currencies."
 msgstr "ค่าตั้งภาษาจะใช้กับการแสดงข้อความในส่วนติดต่อและข้อความในหน้าเว็บ ส่วนรูปแบบจะใช้กับการแสดงตัวเลข วันที่ และสกุลเงิน"
 
 #: panels/system/region/cc-region-page.ui:30
@@ -6994,25 +7089,31 @@ msgstr "เลือกภาษาที่แสดงและรูปแบ
 msgid "Language;Layout;Keyboard;Input;"
 msgstr "ภาษา;ผังแป้นพิมพ์;แป้นพิมพ์;ป้อนข้อความ;"
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.c:362 panels/system/remote-desktop/cc-remote-session-page.c:98
+#: panels/system/remote-desktop/cc-desktop-sharing-page.c:362
+#: panels/system/remote-desktop/cc-remote-session-page.c:98
 msgid "Device address copied"
 msgstr "คัดลอกที่อยู่อุปกรณ์แล้ว"
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.c:371 panels/system/remote-desktop/cc-remote-session-page.c:107
+#: panels/system/remote-desktop/cc-desktop-sharing-page.c:371
+#: panels/system/remote-desktop/cc-remote-session-page.c:107
 msgid "Port number copied"
 msgstr "คัดลอกหมายเลขพอร์ตแล้ว"
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.c:382 panels/system/remote-desktop/cc-remote-session-page.c:118
+#: panels/system/remote-desktop/cc-desktop-sharing-page.c:382
+#: panels/system/remote-desktop/cc-remote-session-page.c:118
 msgid "Username copied"
 msgstr "คัดลอกชื่อผู้ใช้แล้ว"
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.c:393 panels/system/remote-desktop/cc-remote-session-page.c:129
+#: panels/system/remote-desktop/cc-desktop-sharing-page.c:393
+#: panels/system/remote-desktop/cc-remote-session-page.c:129
 msgid "Password copied"
 msgstr "คัดลอกรหัสผ่านแล้ว"
 
 #: panels/system/remote-desktop/cc-desktop-sharing-page.ui:12
 #, fuzzy
-msgid "Share your existing desktop with other devices. The remote connection uses the existing screen resolution"
+msgid ""
+"Share your existing desktop with other devices. The remote connection uses the existing screen "
+"resolution"
 msgstr "แชร์หน้าจอที่มีอยู่ของคุณกับอุปกรณ์อื่น การเชื่อมต่อระยะไกลใช้ความละเอียดหน้าจอที่มีอยู่แล้ว"
 
 #: panels/system/remote-desktop/cc-desktop-sharing-page.ui:27
@@ -7027,41 +7128,52 @@ msgstr "การควบคุมระยะไกล"
 msgid "Allows desktop shares to control the screen"
 msgstr "อนุญาตให้ควบคุมหน้าจอได้ผ่านการแชร์หน้าจอ"
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:42 panels/system/remote-desktop/cc-remote-session-page.ui:41
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:42
+#: panels/system/remote-desktop/cc-remote-session-page.ui:41
 msgid "How to Connect"
 msgstr "วิธีการเชื่อมต่อ"
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:43 panels/system/remote-desktop/cc-remote-session-page.ui:42
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:43
+#: panels/system/remote-desktop/cc-remote-session-page.ui:42
 msgid ""
-"Use a remote desktop app to connect using the RDP protocol. Additional information about the device’s network location may also be "
-"required."
+"Use a remote desktop app to connect using the RDP protocol. Additional information about the device’s "
+"network location may also be required."
 msgstr "ใช้แอปเดสก์ท็อประยะไกลเพื่อเชื่อมต่อโดยใช้โปรโตคอล RDP อาจต้องใช้ข้อมูลเพิ่มเติมเกี่ยวกับตำแหน่งเครือข่ายของอุปกรณ์ด้วย"
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:46 panels/system/remote-desktop/cc-remote-session-page.ui:45
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:46
+#: panels/system/remote-desktop/cc-remote-session-page.ui:45
 msgid "_Hostname"
 msgstr "ชื่อโ๘ฮสต์"
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:53 panels/system/remote-desktop/cc-desktop-sharing-page.ui:73
-#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:94 panels/system/remote-desktop/cc-desktop-sharing-page.ui:110
-#: panels/system/remote-desktop/cc-remote-session-page.ui:52 panels/system/remote-desktop/cc-remote-session-page.ui:72
-#: panels/system/remote-desktop/cc-remote-session-page.ui:93 panels/system/remote-desktop/cc-remote-session-page.ui:109
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:53
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:73
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:94
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:110
+#: panels/system/remote-desktop/cc-remote-session-page.ui:52
+#: panels/system/remote-desktop/cc-remote-session-page.ui:72
+#: panels/system/remote-desktop/cc-remote-session-page.ui:93
+#: panels/system/remote-desktop/cc-remote-session-page.ui:109
 #: panels/system/remote-login/cc-remote-login-page.ui:65
 msgid "Copy"
 msgstr "คัดลอก"
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:66 panels/system/remote-desktop/cc-remote-session-page.ui:65
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:66
+#: panels/system/remote-desktop/cc-remote-session-page.ui:65
 msgid "_Port"
 msgstr "_พอร์ต"
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:88 panels/system/remote-desktop/cc-remote-session-page.ui:87
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:88
+#: panels/system/remote-desktop/cc-remote-session-page.ui:87
 msgid "Login Details"
 msgstr "รายละเอียดการเข้าสู่ระบบ"
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:129 panels/system/remote-desktop/cc-remote-session-page.ui:128
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:129
+#: panels/system/remote-desktop/cc-remote-session-page.ui:128
 msgid "_Generate New Password"
 msgstr "_สุ่มรหัสผ่านใหม่"
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:140 panels/system/remote-desktop/cc-remote-session-page.ui:139
+#: panels/system/remote-desktop/cc-desktop-sharing-page.ui:140
+#: panels/system/remote-desktop/cc-remote-session-page.ui:139
 msgid "_Verify Encryption"
 msgstr "ตรวจสอบการเข้ารหัส"
 
@@ -7073,7 +7185,8 @@ msgstr "เดสก์ท็อปทางไกล"
 msgid "Desktop Sharing"
 msgstr "การแชร์หน้าจอ"
 
-#: panels/system/remote-desktop/cc-remote-desktop-page.ui:48 panels/system/remote-desktop/cc-remote-session-page.ui:33
+#: panels/system/remote-desktop/cc-remote-desktop-page.ui:48
+#: panels/system/remote-desktop/cc-remote-session-page.ui:33
 msgid "Remote Login"
 msgstr "การเข้าสู่ระบบระยะไกล"
 
@@ -7083,7 +7196,9 @@ msgstr "การตั้งค่าบางอย่างถูกล็อ
 
 #: panels/system/remote-desktop/cc-remote-session-page.ui:18
 #, fuzzy
-msgid "Remotely connect to your user account when it isn’t being used. The display resolution can be set from the remote."
+msgid ""
+"Remotely connect to your user account when it isn’t being used. The display resolution can be set from "
+"the remote."
 msgstr "เชื่อมต่อกับบัญชีผู้ใช้ของคุณจากระยะไกลเมื่อไม่ได้ใช้งานอยู่ สามารถตั้งค่าความละเอียดการแสดงผลได้จากรีโมต"
 
 #: panels/system/remote-desktop/cc-encryption-fingerprint-dialog.ui:28
@@ -7148,8 +7263,8 @@ msgstr "ผู้_ดูแลระบบ"
 
 #: panels/system/users/cc-add-user-dialog.ui:145 panels/system/users/cc-user-page.ui:141
 msgid ""
-"Administrators have extra abilities, including adding and removing users, changing login settings, and removing software. Parental "
-"controls cannot be applied to administrators."
+"Administrators have extra abilities, including adding and removing users, changing login settings, and "
+"removing software. Parental controls cannot be applied to administrators."
 msgstr ""
 "ผู้ดูแลระบบมีความสามารถเพิ่มเติม รวมถึงการเพิ่มและลบผู้ใช้ การเปลี่ยนแปลงการตั้งค่าการเข้าสู่ระบบ และการลบซอฟต์แวร์ "
 "การควบคุมโดยผู้ปกครองไม่สามารถใช้กับผู้ดูแลระบบได้"
@@ -7160,7 +7275,7 @@ msgstr "ผู้ใช้ตั้งรหัสผ่านเมื่อเ
 
 #: panels/system/users/cc-add-user-dialog.ui:176
 msgid "Set password n_ow"
-msgstr "ตั้งรหัสผ่าน๘ตอนนี้"
+msgstr "ตั้งรหัสผ่าน_ตอนนี้"
 
 #: panels/system/users/cc-add-user-dialog.ui:196
 msgid "Pass_word"
@@ -7170,12 +7285,14 @@ msgstr "_รหัสผ่าน"
 msgid "_Confirm"
 msgstr "_ยืนยันรหัสผ่าน"
 
-#: panels/system/users/cc-enterprise-login-dialog.c:148 panels/system/users/cc-enterprise-login-dialog.c:186
+#: panels/system/users/cc-enterprise-login-dialog.c:148
+#: panels/system/users/cc-enterprise-login-dialog.c:186
 #: panels/system/users/cc-enterprise-login-dialog.c:201
 msgid "Failed to register account"
 msgstr "ลงทะเบียนบัญชีไม่สำเร็จ"
 
-#: panels/system/users/cc-enterprise-login-dialog.c:255 panels/system/users/cc-enterprise-login-dialog.c:424
+#: panels/system/users/cc-enterprise-login-dialog.c:255
+#: panels/system/users/cc-enterprise-login-dialog.c:424
 msgid "Failed to join domain"
 msgstr "เข้าร่วมในโดเมนไม่สำเร็จ"
 
@@ -7183,12 +7300,14 @@ msgstr "เข้าร่วมในโดเมนไม่สำเร็จ
 msgid "No supported way to authenticate with this domain"
 msgstr "ไม่มีวิธีการยืนยันตัวบุคคลที่รองรับสำหรับโดเมนนี้"
 
-#: panels/system/users/cc-enterprise-login-dialog.c:300 panels/system/users/cc-enterprise-login-dialog.c:489
+#: panels/system/users/cc-enterprise-login-dialog.c:300
+#: panels/system/users/cc-enterprise-login-dialog.c:489
 #, fuzzy
 msgid "That login name didn’t work"
 msgstr "ชื่อล็อกอินนั้นใช้ไม่ได้"
 
-#: panels/system/users/cc-enterprise-login-dialog.c:307 panels/system/users/cc-enterprise-login-dialog.c:496
+#: panels/system/users/cc-enterprise-login-dialog.c:307
+#: panels/system/users/cc-enterprise-login-dialog.c:496
 #, fuzzy
 msgid "That login password didn’t work"
 msgstr "รหัสผ่านใช้ไม่ได้"
@@ -7198,7 +7317,8 @@ msgstr "รหัสผ่านใช้ไม่ได้"
 msgid "That hostname didn’t work"
 msgstr "ชื่อโฮสต์ใช้ไม่ได้"
 
-#: panels/system/users/cc-enterprise-login-dialog.c:321 panels/system/users/cc-enterprise-login-dialog.c:504
+#: panels/system/users/cc-enterprise-login-dialog.c:321
+#: panels/system/users/cc-enterprise-login-dialog.c:504
 msgid "Failed to log into domain"
 msgstr "เข้าระบบในโดเมนไม่สำเร็จ"
 
@@ -7206,8 +7326,8 @@ msgstr "เข้าระบบในโดเมนไม่สำเร็จ
 #: panels/system/users/cc-enterprise-login-dialog.c:365
 #, c-format
 msgid ""
-"To add an enterprise login account, this device needs to be enrolled with <b>%s</b>. To enroll, have your domain administrator "
-"enter their name and password."
+"To add an enterprise login account, this device needs to be enrolled with <b>%s</b>. To enroll, have "
+"your domain administrator enter their name and password."
 msgstr ""
 
 #: panels/system/users/cc-enterprise-login-dialog.c:548
@@ -7227,7 +7347,8 @@ msgstr ""
 msgid "Failed to contact realmd service"
 msgstr "ติดต่อบริการบัญชีผู้ใช้ไม่สำเร็จ"
 
-#: panels/system/users/cc-enterprise-login-dialog.ui:28 panels/system/users/cc-enterprise-login-dialog.ui:48
+#: panels/system/users/cc-enterprise-login-dialog.ui:28
+#: panels/system/users/cc-enterprise-login-dialog.ui:48
 #, fuzzy
 msgid "Add Enterprise Login"
 msgstr "บัญชีเข้าระบบ_องค์กร"
@@ -7244,7 +7365,9 @@ msgstr ""
 #: panels/system/users/cc-enterprise-login-dialog.ui:84
 #, fuzzy
 msgid "Enterprise login allows an existing centrally managed account to be used on this device."
-msgstr "บัญชีเข้าระบบองค์กร อนุญาตให้ใช้บัญชีผู้ใช้ที่มีการจัดการแบบรวมศูนย์ที่มีอยู่กับอุปกรณ์นี้ คุณสามารถใช้บัญชีนี้ในการเข้าถึงทรัพยากรของบริษัทในอินเทอร์เน็ตด้วย"
+msgstr ""
+"บัญชีเข้าระบบองค์กร อนุญาตให้ใช้บัญชีผู้ใช้ที่มีการจัดการแบบรวมศูนย์ที่มีอยู่กับอุปกรณ์นี้ "
+"คุณสามารถใช้บัญชีนี้ในการเข้าถึงทรัพยากรของบริษัทในอินเทอร์เน็ตด้วย"
 
 #: panels/system/users/cc-enterprise-login-dialog.ui:89 panels/system/users/data/join-dialog.ui:90
 msgid "_Domain"
@@ -7532,15 +7655,15 @@ msgstr "เป_ลี่ยน"
 
 #: panels/system/users/cc-password-dialog.ui:48
 msgid "Current Password"
-msgstr "รหัสผ่าน_ปัจจุบัน"
+msgstr "รหัสผ่านปัจจุบัน"
 
 #: panels/system/users/cc-password-dialog.ui:60
 msgid "New Password"
-msgstr "รหัสผ่านให_ม่"
+msgstr "รหัสผ่านใหม่"
 
 #: panels/system/users/cc-password-dialog.ui:88
 msgid "Confirm Password"
-msgstr "ยื_นยันรหัสผ่าน"
+msgstr "ยืนยันรหัสผ่าน"
 
 #: panels/system/users/cc-password-dialog.ui:100
 msgid "The passwords do not match"
@@ -7596,8 +7719,9 @@ msgstr "ไม่มีรหัสผ่าน"
 msgid "Remove %s?"
 msgstr "ลบ %s?"
 
-#: panels/system/users/cc-user-page.ui:24 panels/system/users/cc-user-page.ui:81 panels/system/users/cc-user-page.ui:93
-#: panels/system/users/cc-user-page.ui:105 panels/system/users/cc-user-page.ui:120 panels/system/users/cc-user-page.ui:134
+#: panels/system/users/cc-user-page.ui:24 panels/system/users/cc-user-page.ui:81
+#: panels/system/users/cc-user-page.ui:93 panels/system/users/cc-user-page.ui:105
+#: panels/system/users/cc-user-page.ui:120 panels/system/users/cc-user-page.ui:134
 #: panels/system/users/cc-user-page.ui:169
 msgid "Unlock to Change This Setting"
 msgstr "ปลดล็อคเพื่อเปลี่ยนการตั้งค่านี้"
@@ -7620,7 +7744,7 @@ msgstr "การเข้าระบบด้วย_ลายนิ้วม�
 
 #: panels/system/users/cc-user-page.ui:116
 msgid "A_utomatic Login"
-msgstr "การเข้าระบบโดย_อัตโนมัติ"
+msgstr "เข้าสู่ระบบโดย_อัตโนมัติ"
 
 #: panels/system/users/cc-user-page.ui:135
 msgid "_Administrator"
@@ -7686,8 +7810,8 @@ msgstr "เพิ่มหรือลบผู้ใช้และเปลี
 #. Translators: Search terms to find the Users panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/system/users/gnome-users-panel.desktop.in:15
 msgid ""
-"Login;Name;Fingerprint;Avatar;Logo;Face;Password;Parental Controls;Screen Time;App Restrictions;Web Restrictions;Usage;Usage Limit;"
-"Kid;Child;"
+"Login;Name;Fingerprint;Avatar;Logo;Face;Password;Parental Controls;Screen Time;App Restrictions;Web "
+"Restrictions;Usage;Usage Limit;Kid;Child;"
 msgstr ""
 
 #: panels/system/users/org.gnome.controlcenter.user-accounts.policy.in:11
@@ -7770,7 +7894,8 @@ msgstr "พยายามหลีกเลี่ยงการซ้ำอั
 
 #: panels/system/users/pw-utils.c:135
 msgctxt "Password hint"
-msgid "Try to avoid repeating the same type of character: you need to mix up letters, numbers and punctuation."
+msgid ""
+"Try to avoid repeating the same type of character: you need to mix up letters, numbers and punctuation."
 msgstr "พยายามหลีกเลี่ยงการใช้อักขระชนิดเดิมซ้ำ คุณต้องผสมตัวอักษร ตัวเลข และเครื่องหมายวรรคตอน"
 
 #: panels/system/users/pw-utils.c:137
@@ -7843,7 +7968,9 @@ msgid "Unknown error"
 msgstr "ข้อผิดพลาดไม่ทราบสาเหตุ"
 
 #: panels/system/users/user-utils.c:147
-msgid "The username should usually only consist of lower case letters from a-z, digits and the following characters: - _"
+msgid ""
+"The username should usually only consist of lower case letters from a-z, digits and the following "
+"characters: - _"
 msgstr "โดยปกติแล้ว ชื่อผู้ใช้ควรประกอบด้วยตัวพิมพ์เล็กตั้งแต่ a-z, ตัวเลข และอักขระต่อไปนี้เท่านั้น: - _"
 
 #: panels/system/users/user-utils.c:151
@@ -8037,7 +8164,7 @@ msgstr "_ขยาย"
 #: panels/universal-access/cc-ua-seeing-page.c:111
 msgctxt "cursor size"
 msgid "Default"
-msgstr "ปริยาย"
+msgstr "เริ่มต้น"
 
 #: panels/universal-access/cc-ua-seeing-page.c:114
 msgctxt "cursor size"
@@ -8460,12 +8587,12 @@ msgstr "ทำให้ง่ายต่อการเห็น, ได้ย�
 #: panels/universal-access/gnome-universal-access-panel.desktop.in:15
 #, fuzzy
 msgid ""
-"Keyboard;Mouse;a11y;Accessibility;Universal Access;Contrast;Cursor;Sound;Zoom;Screen;Reader;big;high;large;text;font;size;AccessX;"
-"Sticky;Keys;Slow;Bounce;Mouse;Double;click;Delay;Speed;Assist;Repeat;Blink;Pointer;find;locate;visual;hearing;audio;typing;"
-"animations;"
+"Keyboard;Mouse;a11y;Accessibility;Universal Access;Contrast;Cursor;Sound;Zoom;Screen;Reader;big;high;"
+"large;text;font;size;AccessX;Sticky;Keys;Slow;Bounce;Mouse;Double;click;Delay;Speed;Assist;Repeat;Blink;"
+"Pointer;find;locate;visual;hearing;audio;typing;animations;"
 msgstr ""
-"แป้นพิมพ์;เมาส์;a11y;สิ่งอำนวยความสะดวก;ความต่างระดับสี;ซูม;อ่านหน้าจอ;ข้อความ;แบบอักษร;ขนาด;AccessX;ค้างปุ่มกด;พิมพ์แบบช้า;ป้องกันการกดแป้นรัว;"
-"บังคับเมาส์ด้วยแป้น;"
+"แป้นพิมพ์;เมาส์;a11y;สิ่งอำนวยความสะดวก;ความต่างระดับสี;ซูม;อ่านหน้าจอ;ข้อความ;แบบอักษร;ขนาด;AccessX;ค้างปุ่มกด;พิมพ์แบบช้า;"
+"ป้องกันการกดแป้นรัว;บังคับเมาส์ด้วยแป้น;"
 
 #: panels/wacom/button-mapping.ui:7 panels/wacom/cc-wacom-ekr-page.ui:18
 msgid "Map Buttons"
@@ -8478,9 +8605,11 @@ msgstr "กำหนดการใช้งานปุ่มต่างๆ"
 #: panels/wacom/button-mapping.ui:51
 #, fuzzy
 msgid ""
-"To edit a shortcut, choose the “Send Keystroke” action, press the keyboard shortcut button and hold down the new keys or press "
-"Backspace to clear"
-msgstr "ถ้าต้องการแก้ไขปุ่มลัด ให้เลือกการกระทำ \"ส่งการกดแป้นพิมพ์\" จากนั้น กดปุ่มลัดแป้นพิมพ์ แล้วกดปุ่มลัดใหม่ หรือกด Backspace ถ้าต้องการล้างปุ่มลัด"
+"To edit a shortcut, choose the “Send Keystroke” action, press the keyboard shortcut button and hold "
+"down the new keys or press Backspace to clear"
+msgstr ""
+"ถ้าต้องการแก้ไขปุ่มลัด ให้เลือกการกระทำ \"ส่งการกดแป้นพิมพ์\" จากนั้น กดปุ่มลัดแป้นพิมพ์ แล้วกดปุ่มลัดใหม่ หรือกด Backspace "
+"ถ้าต้องการล้างปุ่มลัด"
 
 #: panels/wacom/calibrator/calibrator.ui:51
 #, fuzzy
@@ -9373,8 +9502,8 @@ msgstr ""
 
 #: shell/cc-window.ui:83
 msgid ""
-"This version of Settings should only be used for development purposes. You may experience incorrect system behavior, data loss, "
-"and other unexpected issues. "
+"This version of Settings should only be used for development purposes. You may experience incorrect "
+"system behavior, data loss, and other unexpected issues. "
 msgstr ""
 
 #: shell/cc-window.ui:87
@@ -9444,8 +9573,8 @@ msgstr ""
 
 #: shell/org.gnome.Settings.gschema.xml:6
 msgid ""
-"The identifier for the last Settings panel to be opened. Unrecognised values will be ignored and the first panel in the list "
-"selected."
+"The identifier for the last Settings panel to be opened. Unrecognised values will be ignored and the "
+"first panel in the list selected."
 msgstr ""
 
 #: shell/org.gnome.Settings.gschema.xml:13
@@ -9999,7 +10128,8 @@ msgstr "เสียงของระบบ"
 #~ msgid "IPv_6"
 #~ msgstr "IPv_6"
 
-#~ msgid "Reset the settings for this network, including passwords, but remember it as a preferred network"
+#~ msgid ""
+#~ "Reset the settings for this network, including passwords, but remember it as a preferred network"
 #~ msgstr "ล้างการตั้งค่าสำหรับเครือข่ายนี้ รวมถึงรหัสผ่าน แต่จำเครือข่ายไว้"
 
 #~ msgid "Remove all details relating to this network and do not try to automatically connect"
@@ -10036,9 +10166,11 @@ msgstr "เสียงของระบบ"
 #~ msgstr "เครือ­ข่าย"
 
 #~ msgid ""
-#~ "If you have a connection to the Internet other than wireless, you can set up a wireless hotspot to share the connection with "
-#~ "others."
-#~ msgstr "ถ้าคุณมีการเชื่อมต่อไปยังอินเทอร์เน็ตทางอื่นนอกเหนือจากเครือข่ายไร้สาย คุณก็สามารถตั้งค่าจุดแพร่สัญญาณไร้สายเพื่อแบ่งปันการเชื่อมต่ออินเทอร์เน็ตให้ผู้อื่นใช้ได้"
+#~ "If you have a connection to the Internet other than wireless, you can set up a wireless hotspot to "
+#~ "share the connection with others."
+#~ msgstr ""
+#~ "ถ้าคุณมีการเชื่อมต่อไปยังอินเทอร์เน็ตทางอื่นนอกเหนือจากเครือข่ายไร้สาย "
+#~ "คุณก็สามารถตั้งค่าจุดแพร่สัญญาณไร้สายเพื่อแบ่งปันการเชื่อมต่ออินเทอร์เน็ตให้ผู้อื่นใช้ได้"
 
 #, c-format
 #~ msgid "Switching on the wireless hotspot will disconnect you from <b>%s</b>."
@@ -10053,7 +10185,9 @@ msgstr "เสียงของระบบ"
 #~ msgid "_Stop Hotspot"
 #~ msgstr "ปิ_ดจุดแพร่สัญญาณ"
 
-#~ msgid "Network details for the selected networks, including passwords and any custom configuration will be lost."
+#~ msgid ""
+#~ "Network details for the selected networks, including passwords and any custom configuration will be "
+#~ "lost."
 #~ msgstr "รายละเอียดของเครือข่ายที่เลือก รวมถึงรหัสผ่านและค่าปรับแต่งใดๆ จะถูกลบทิ้ง"
 
 #~ msgctxt "Wi-Fi Network"
@@ -10126,7 +10260,8 @@ msgstr "เสียงของระบบ"
 #~ msgid "hardware"
 #~ msgstr "ฮาร์ดแวร์"
 
-#~ msgid "Reset the settings for this connection to their defaults, but remember as a preferred connection."
+#~ msgid ""
+#~ "Reset the settings for this connection to their defaults, but remember as a preferred connection."
 #~ msgstr "ล้างการตั้งค่าสำหรับการเชื่อมต่อนี้ให้เป็นค่าปริยาย แต่จำการเชื่อมต่อไว้"
 
 #~ msgid "Remove all details relating to this network and do not try to automatically connect to it."
@@ -10257,12 +10392,13 @@ msgstr "เสียงของระบบ"
 #~ msgstr "กุญแจส่วนตัวที่ไม่เข้ารหัสลับนั้นไม่มีความปลอดภัย"
 
 #~ msgid ""
-#~ "The selected private key does not appear to be protected by a password.  This could allow your security credentials to be "
-#~ "compromised.  Please select a password-protected private key.\n"
+#~ "The selected private key does not appear to be protected by a password.  This could allow your "
+#~ "security credentials to be compromised.  Please select a password-protected private key.\n"
 #~ "\n"
 #~ "(You can password-protect your private key with openssl)"
 #~ msgstr ""
-#~ "กุญแจส่วนตัวที่เลือกไม่มีการปกป้องด้วยรหัสผ่าน ซึ่งอาจทำให้ข้อมูลลับของระบบรักษาความปลอดภัยของคุณถูกขโมยใช้ได้ กรุณาเลือกกุญแจส่วนตัวที่มีการปกป้องด้วยรหัสผ่าน\n"
+#~ "กุญแจส่วนตัวที่เลือกไม่มีการปกป้องด้วยรหัสผ่าน ซึ่งอาจทำให้ข้อมูลลับของระบบรักษาความปลอดภัยของคุณถูกขโมยใช้ได้ "
+#~ "กรุณาเลือกกุญแจส่วนตัวที่มีการปกป้องด้วยรหัสผ่าน\n"
 #~ "\n"
 #~ "(คุณสามารถปกป้องกุญแจส่วนตัวของคุณด้วยรหัสผ่านได้ โดยใช้ openssl)"
 
@@ -10330,7 +10466,8 @@ msgstr "เสียงของระบบ"
 #~ msgstr "wep-key ไม่ถูกต้อง: คีย์ความยาว %zu ต้องมีเฉพาะอักขระแอสกี้เท่านั้น"
 
 #, c-format
-#~ msgid "invalid wep-key: wrong key length %zu. A key must be either of length 5/13 (ascii) or 10/26 (hex)"
+#~ msgid ""
+#~ "invalid wep-key: wrong key length %zu. A key must be either of length 5/13 (ascii) or 10/26 (hex)"
 #~ msgstr "wep-key ไม่ถูกต้อง: ความยาวคีย์ %zu ไม่ถูกต้อง คีย์ต้องยาว 5/13 (แอสกี) หรือ 10/26 (ฐานสิบหก) อย่างใดอย่างหนึ่ง"
 
 #~ msgid "invalid wep-key: passphrase must be non-empty"
@@ -10410,7 +10547,9 @@ msgstr "เสียงของระบบ"
 #~ msgid "Add an online account"
 #~ msgstr "เพิ่มบัญชีออนไลน์"
 
-#~ msgid "Adding an account allows your applications to access it for documents, mail, contacts, calendar, chat and more."
+#~ msgid ""
+#~ "Adding an account allows your applications to access it for documents, mail, contacts, calendar, "
+#~ "chat and more."
 #~ msgstr "การเพิ่มบัญชีจะช่วยให้โปรแกรมต่างๆ ของคุณสามารถเข้าถึงเอกสาร เมล ผู้ติดต่อ ปฏิทิน การสนทนา และอื่นๆ จากบัญชีนั้นๆ"
 
 #~ msgctxt "Battery power"
@@ -10537,7 +10676,9 @@ msgstr "เสียงของระบบ"
 #~ msgid "screen;lock;diagnostics;crash;private;recent;temporary;tmp;index;name;network;identity;"
 #~ msgstr "หน้าจอ;ล็อค;วินิจฉัย;พัง;ส่วนตัว;ล่าสุด;ชั่วคราว;tmp;ดัชนี;ชื่อ;เครือข่าย;เอกลักษณ์;"
 
-#~ msgid "Remembering your history makes things easier to find again. These items are never shared over the network."
+#~ msgid ""
+#~ "Remembering your history makes things easier to find again. These items are never shared over the "
+#~ "network."
 #~ msgstr "การจำประวัติของคุณทำให้หาสิ่งต่างๆ อีกครั้งได้ง่าย รายการเหล่านี้จะไม่มีการแบ่งปันในเครือข่าย"
 
 #~ msgid "_Recently Used"
@@ -10549,27 +10690,34 @@ msgstr "เสียงของระบบ"
 #~ msgid "The Screen Lock protects your privacy when you are away."
 #~ msgstr "การล็อคหน้าจอจะปกป้องความเป็นส่วนตัวของคุณเมื่อคุณลุกไปจากเครื่อง"
 
-#~ msgid "Automatically purge the Trash and temporary files to help keep your computer free of unnecessary sensitive information."
+#~ msgid ""
+#~ "Automatically purge the Trash and temporary files to help keep your computer free of unnecessary "
+#~ "sensitive information."
 #~ msgstr "ล้างถังขยะและแฟ้มชั่วคราวโดยอัตโนมัติ เพื่อช่วยให้คอมพิวเตอร์ของคุณปลอดจากข้อมูลที่ล่อแหลมโดยไม่จำเป็น"
 
 #~ msgid "Purge _After"
 #~ msgstr "ล้าง_หลังจาก"
 
 #~ msgid ""
-#~ "Sending us information about which software you use helps us provide you with more accurate recommendations. It also helps us "
-#~ "to improve our software.\n"
+#~ "Sending us information about which software you use helps us provide you with more accurate "
+#~ "recommendations. It also helps us to improve our software.\n"
 #~ "\n"
-#~ "All the information we collect is made anonymous, and we will never share your data with third parties."
+#~ "All the information we collect is made anonymous, and we will never share your data with third "
+#~ "parties."
 #~ msgstr ""
-#~ "การส่งข้อมูลเกี่ยวกับซอฟต์แวร์ที่คุณใช้ ช่วยให้เราเตรียมคำแนะนำได้ถูกต้องยิ่งขึ้นสำหรับคุณ และยังเป็นการช่วยเราปรับปรุงซอฟต์แวร์ของเราอีกด้วย\n"
+#~ "การส่งข้อมูลเกี่ยวกับซอฟต์แวร์ที่คุณใช้ ช่วยให้เราเตรียมคำแนะนำได้ถูกต้องยิ่งขึ้นสำหรับคุณ "
+#~ "และยังเป็นการช่วยเราปรับปรุงซอฟต์แวร์ของเราอีกด้วย\n"
 #~ "\n"
 #~ "ข้อมูลทั้งหมดที่เรารวบรวมจะไม่มีการระบุชื่อผู้ใช้ และเราจะไม่แบ่งปันข้อมูลของคุณกับบุคคลที่สาม"
 
 #~ msgid "_Send software usage statistics"
 #~ msgstr "_ส่งสถิติการใช้ซอฟต์แวร์"
 
-#~ msgid "Location services allow applications to know your location. Using Wi-Fi and mobile broadband increases accuracy."
-#~ msgstr "บริการตำแหน่งที่ตั้งจะทำให้โปรแกรมต่างๆ รู้ตำแหน่งภูมิศาสตร์ที่คุณอยู่ การใช้ Wi-Fi และบรอดแบนด์มือถือจะช่วยเพิ่มความแม่นยำได้"
+#~ msgid ""
+#~ "Location services allow applications to know your location. Using Wi-Fi and mobile broadband "
+#~ "increases accuracy."
+#~ msgstr ""
+#~ "บริการตำแหน่งที่ตั้งจะทำให้โปรแกรมต่างๆ รู้ตำแหน่งภูมิศาสตร์ที่คุณอยู่ การใช้ Wi-Fi และบรอดแบนด์มือถือจะช่วยเพิ่มความแม่นยำได้"
 
 #~ msgid "No regions found"
 #~ msgstr "ไม่พบภูมิภาค"
@@ -10617,8 +10765,12 @@ msgstr "เสียงของระบบ"
 #~ msgstr "การตั้งค่าการเข้าระบบใช้จะใช้กับผู้ใช้ทั้งหมดขณะเข้าสู่ระบบ"
 
 #, c-format
-#~ msgid "Screen sharing allows remote users to view or control your screen by connecting to <a href=\"vnc://%s\">vnc://%s</a>"
-#~ msgstr "การแบ่งปันหน้าจอจะเปิดให้ผู้ใช้จากเครื่องอื่นดูหรือควบคุมหน้าจอของคุณ ด้วยการเชื่อมต่อไปยัง: <a href=\"vnc://%s\">vnc://%s</a>"
+#~ msgid ""
+#~ "Screen sharing allows remote users to view or control your screen by connecting to <a href=\"vnc://"
+#~ "%s\">vnc://%s</a>"
+#~ msgstr ""
+#~ "การแบ่งปันหน้าจอจะเปิดให้ผู้ใช้จากเครื่องอื่นดูหรือควบคุมหน้าจอของคุณ ด้วยการเชื่อมต่อไปยัง: <a href=\"vnc://%s\">vnc://"
+#~ "%s</a>"
 
 #~ msgid "Sha­ring"
 #~ msgstr "การ­แบ่ง­ปัน"
@@ -10887,7 +11039,9 @@ msgstr "เสียงของระบบ"
 #~ msgid "Enable Fingerprint Login"
 #~ msgstr "เปิดใช้การเข้าระบบด้วยลายนิ้วมือ"
 
-#~ msgid "Your fingerprint was successfully saved. You should now be able to log in using your fingerprint reader."
+#~ msgid ""
+#~ "Your fingerprint was successfully saved. You should now be able to log in using your fingerprint "
+#~ "reader."
 #~ msgstr "บันทึกลายนิ้วมือของคุณสำเร็จแล้ว คุณควรสามารถเข้าระบบโดยใช้เครื่องอ่านลายนิ้วมือได้แล้ว"
 
 #~ msgid "Login;Name;Fingerprint;Avatar;Logo;Face;Password;"
@@ -11032,7 +11186,9 @@ msgstr "เสียงของระบบ"
 #~ msgid "Do you want to keep %s's files?"
 #~ msgstr "คุณต้องการเก็บรักษาแฟ้มต่างๆ ของ %s ไว้หรือไม่?"
 
-#~ msgid "It is possible to keep the home directory, mail spool and temporary files around when deleting a user account."
+#~ msgid ""
+#~ "It is possible to keep the home directory, mail spool and temporary files around when deleting a "
+#~ "user account."
 #~ msgstr "ในการลบบัญชีผู้ใช้ คุณสามารถเก็บรักษาไดเรกทอรีบ้าน, ถุงเมล และแฟ้มชั่วคราวของผู้ใช้ไว้ได้"
 
 #~ msgid "_Keep Files"
@@ -11195,7 +11351,8 @@ msgstr "เสียงของระบบ"
 #~ msgid "GNOME Control Center"
 #~ msgstr "ศูนย์ควบคุมของ GNOME"
 
-#~ msgid "The control center is GNOME's main interface for configuration of various aspects of your desktop."
+#~ msgid ""
+#~ "The control center is GNOME's main interface for configuration of various aspects of your desktop."
 #~ msgstr "ศูนย์ควบคุมเป็นส่วนติดต่อหลักของ GNOME สำหรับตั้งค่าส่วนต่างๆ ของเดสก์ท็อปของคุณ"
 
 #~ msgid "Show the overview"
@@ -11256,7 +11413,8 @@ msgstr "เสียงของระบบ"
 #~ msgid "_Reassign"
 #~ msgstr "_กำหนดซ้ำ"
 
-#~ msgid "The \"%s\" shortcut has an associated \"%s\" shortcut. Do you want to automatically set it to \"%s\"?"
+#~ msgid ""
+#~ "The \"%s\" shortcut has an associated \"%s\" shortcut. Do you want to automatically set it to \"%s\"?"
 #~ msgstr "ปุ่มลัด \"%s\" มีปุ่มลัด \"%s\" ที่เชื่อมโยงกันอยู่ คุณต้องการกำหนดปุ่มลัดดังกล่าวเป็น \"%s\" โดยอัตโนมัติหรือไม่?"
 
 #~ msgid "\"%s\" is currently associated with \"%s\", this shortcut will be disabled if you move forward."
@@ -11299,8 +11457,8 @@ msgstr "เสียงของระบบ"
 #~ msgstr "ไม่ได้เลือกใบรับรองจากองค์กรออกใบรับรอง"
 
 #~ msgid ""
-#~ "Not using a Certificate Authority (CA) certificate can result in connections to insecure, rogue Wi-Fi networks.  Would you like "
-#~ "to choose a Certificate Authority certificate?"
+#~ "Not using a Certificate Authority (CA) certificate can result in connections to insecure, rogue Wi-"
+#~ "Fi networks.  Would you like to choose a Certificate Authority certificate?"
 #~ msgstr ""
 #~ "การไม่ใช้ใบรับรองจากองค์กรออกใบรับรอง (CA) อาจทำให้การเชื่อมต่อไม่นิรภัย หรือได้พบกับเครือข่าย Wi-Fi ที่ไม่ประสงค์ดี "
 #~ "คุณต้องการเลือกใบรับรองจากองค์กรออกใบรับรองหรือไม่?"
@@ -12050,13 +12208,17 @@ msgstr "เสียงของระบบ"
 #~ msgid "Select an input source to add"
 #~ msgstr "เลือกช่องทางป้อนข้อความที่จะเพิ่ม"
 
-#~ msgid "The login screen, system accounts and new user accounts use the system-wide Region and Language settings."
+#~ msgid ""
+#~ "The login screen, system accounts and new user accounts use the system-wide Region and Language "
+#~ "settings."
 #~ msgstr "หน้าจอเข้าระบบ บัญชีระบบ และบัญชีผู้ใช้ใหม่ จะใช้ค่าตั้งภูมิภาคและภาษาโดยรวมของระบบ"
 
 #~ msgid ""
-#~ "The login screen, system accounts and new user accounts use the system-wide Region and Language settings. You may change the "
-#~ "system settings to match yours."
-#~ msgstr "หน้าจอเข้าระบบ บัญชีระบบ และบัญชีผู้ใช้ใหม่ จะใช้ค่าตั้งภูมิภาคและภาษาโดยรวมของระบบ คุณอาจเปลี่ยนค่าตั้งของระบบให้ตรงกับที่คุณใช้ก็ได้"
+#~ "The login screen, system accounts and new user accounts use the system-wide Region and Language "
+#~ "settings. You may change the system settings to match yours."
+#~ msgstr ""
+#~ "หน้าจอเข้าระบบ บัญชีระบบ และบัญชีผู้ใช้ใหม่ จะใช้ค่าตั้งภูมิภาคและภาษาโดยรวมของระบบ "
+#~ "คุณอาจเปลี่ยนค่าตั้งของระบบให้ตรงกับที่คุณใช้ก็ได้"
 
 #~ msgid "Copy Settings"
 #~ msgstr "คัดลอกค่าตั้ง"
@@ -12163,8 +12325,8 @@ msgstr "เสียงของระบบ"
 #~ msgstr "คำใ_บ้"
 
 #~ msgid ""
-#~ "This hint may be displayed at the login screen.  It will be visible to all users of this system.  Do <b>not</b> include the "
-#~ "password here."
+#~ "This hint may be displayed at the login screen.  It will be visible to all users of this system.  Do "
+#~ "<b>not</b> include the password here."
 #~ msgstr "คำใบ้นี้อาจแสดงในหน้าจอเข้าระบบ และจะปรากฏต่อผู้ใช้ทั้งหมดในระบบนี้ <b>อย่า</b>ใส่รหัสผ่านไว้ในนี้"
 
 #~ msgid "Fair"
@@ -12298,8 +12460,11 @@ msgstr "เสียงของระบบ"
 #~ msgstr "ประจุไฟ %.0lf%%"
 
 #~ msgid ""
-#~ "FirewallD is not running. Network printer detection needs services mdns, ipp, ipp-client and samba-client enabled on firewall."
-#~ msgstr "FirewallD ไม่ได้ทำงานอยู่ การตรวจหาเครื่องพิมพ์ในเครือข่ายต้องเปิดทางให้กับบริการ mdns, ipp, ipp-client และ samba-client ที่ไฟร์วอลล์ด้วย"
+#~ "FirewallD is not running. Network printer detection needs services mdns, ipp, ipp-client and samba-"
+#~ "client enabled on firewall."
+#~ msgstr ""
+#~ "FirewallD ไม่ได้ทำงานอยู่ การตรวจหาเครื่องพิมพ์ในเครือข่ายต้องเปิดทางให้กับบริการ mdns, ipp, ipp-client และ samba-"
+#~ "client ที่ไฟร์วอลล์ด้วย"
 
 #~ msgctxt "printer type"
 #~ msgid "Local"
@@ -12547,10 +12712,13 @@ msgstr "เสียงของระบบ"
 #~ msgid "More themes URL"
 #~ msgstr "URL สำหรับชุดตกแต่งเพิ่มเติม"
 
-#~ msgid "Set this to your current location name. This is used to determine the appropriate network proxy configuration."
+#~ msgid ""
+#~ "Set this to your current location name. This is used to determine the appropriate network proxy "
+#~ "configuration."
 #~ msgstr "กำหนดค่านี้เป็นชื่อสถานที่ปัจจุบันของคุณ ค่านี้จะใช้พิจารณาค่าที่เหมาะสมสำหรับพร็อกซีเครือข่าย"
 
-#~ msgid "URL for where to get more desktop backgrounds. If set to an empty string the link will not appear."
+#~ msgid ""
+#~ "URL for where to get more desktop backgrounds. If set to an empty string the link will not appear."
 #~ msgstr "URL สำหรับหาภาพพื้นหลังพื้นโต๊ะเพิ่มเติม ถ้ากำหนดเป็นข้อความว่าง ก็จะไม่แสดงลิงก์"
 
 #~ msgid "URL for where to get more desktop themes. If set to an empty string the link will not appear."
@@ -12726,8 +12894,8 @@ msgstr "เสียงของระบบ"
 #~ msgstr "มีการกำกับดูแล"
 
 #~ msgid ""
-#~ "A guest account will allow anyone to temporarily log in to this computer without a password.  For security, remote logins to "
-#~ "this account are not allowed.\n"
+#~ "A guest account will allow anyone to temporarily log in to this computer without a password.  For "
+#~ "security, remote logins to this account are not allowed.\n"
 #~ "\n"
 #~ "<b>When the guest user logs out, all files and data associated with the account will be deleted.</b>"
 #~ msgstr ""
