@@ -67,7 +67,7 @@ _goa_provider_get_provider_title (GoaProvider *provider)
   for (size_t i = 0; i < G_N_ELEMENTS (goa_metadata); i++)
     {
       if (g_str_equal (goa_metadata[i].provider, provider_type))
-        return goa_metadata[i].title;
+        return goa_metadata[i].title ? _(goa_metadata[i].title) : NULL;
     }
 
   return NULL;
