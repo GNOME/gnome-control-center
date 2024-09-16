@@ -144,8 +144,8 @@ cc_online_account_provider_row_new (GoaProvider *provider)
       self->provider = g_object_ref (provider);
       info = _goa_provider_get_provider_info (provider);
       icon = goa_provider_get_provider_icon (provider, NULL);
-      title = info.title;
-      description = info.description;
+      title = _(info.title);
+      description = _(info.description);
     }
 
   gtk_image_set_from_gicon (self->icon_image, icon);
