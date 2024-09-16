@@ -9848,6 +9848,7 @@ msgstr "กำลังตั้งค่าไดรเวอร์ตัวใ
 
 #: panels/applications/cc-applications-panel.ui:84
 #: panels/keyboard/cc-keyboard-shortcut-dialog.ui:94
+#: panels/printers/cc-printers-panel.ui:101
 #: panels/system/datetime/cc-tz-dialog.ui:42
 #: panels/system/region/cc-format-chooser.ui:176 shell/cc-panel-list.ui:44
 msgid "No Results Found"
@@ -10027,6 +10028,7 @@ msgstr "ตั้งค่าแอปที่จะใช้สำหรับ
 msgid "Unable to List Apps"
 msgstr "ไม่สามารถเรียกรายชื่อแอป"
 
+#. Translators: Parental Controls here refers to the features provided by 'malcontent'
 #: panels/applications/cc-applications-panel.ui:122
 #, fuzzy
 #| msgid ""
@@ -10034,7 +10036,7 @@ msgstr "ไม่สามารถเรียกรายชื่อแอป
 #| "Error details: Parental Controls are not installed."
 msgid ""
 "An error has occurred and apps cannot be listed.\n"
-"Error details: Malcontent is not installed."
+"Error details: Parental Controls are not installed."
 msgstr ""
 "เกิดข้อผิดพลาดและรายชื่อแอปไม่สามารถเรียกได้\n"
 "รายละเอียดข้อผิดพลาด: ไม่ได้ติดตั้งการควบคุมโดยผู้ปกครอง"
@@ -10578,19 +10580,26 @@ msgstr "ยกเลิก"
 msgid "Move Print Job to Top of Queue"
 msgstr "ย้ายงานนี้ไปไว้รายการแรกสุดของคิว"
 
-#: panels/printers/pp-jobs-dialog.ui:119
-#, fuzzy
-msgid "Printer Jobs"
-msgstr "เครื่องพิมพ์"
-
 #. Translators: this action removes (purges) all the listed jobs from the list.
-#: panels/printers/pp-jobs-dialog.ui:128
+#: panels/printers/pp-jobs-dialog.ui:12
 msgid "_Clear All"
 msgstr "_ล้างทั้งหมด"
 
-#: panels/printers/pp-jobs-dialog.ui:139
+#: panels/printers/pp-jobs-dialog.ui:23
 msgid "Active Jobs"
 msgstr "ไม่มีงานพิมพ์ที่ทำอยู่"
+
+#: panels/printers/pp-jobs-dialog.ui:119
+msgid "Clear All Active Jobs?"
+msgstr "ล้างงานพิมพ์ทั้งหมดที่ทำอยู่หรือไม่?"
+
+#: panels/printers/pp-jobs-dialog.ui:120
+msgid "Clearing jobs cannot be undone"
+msgstr "การล้างงานพิมพ์ไม่สามารถเรียกกลับคืนได้"
+
+#: panels/printers/pp-jobs-dialog.ui:126
+msgid "Clear _All"
+msgstr "_ล้างทั้งหมด"
 
 #. Translators: Name of job which makes printer to autoconfigure itself
 #: panels/printers/pp-new-printer.c:1200
@@ -10652,7 +10661,7 @@ msgstr ""
 
 #. TRANSLATORS: in reference to firmware protection: 0/4 stars
 #: panels/privacy/firmware-security/cc-firmware-security-dialog.c:108
-#: panels/privacy/firmware-security/cc-firmware-security-page.c:532
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:533
 msgid "Security Checks Failed"
 msgstr "การตรวจสอบความปลอดภัยล้มเหลว"
 
@@ -10670,7 +10679,7 @@ msgstr ""
 
 #. TRANSLATORS: in reference to firmware protection: 1/4 stars
 #: panels/privacy/firmware-security/cc-firmware-security-dialog.c:121
-#: panels/privacy/firmware-security/cc-firmware-security-page.c:539
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:540
 #, fuzzy
 msgid "Basic Security Checks Passed"
 msgstr "เปลี่ยนรหัสผ่าน"
@@ -10699,21 +10708,21 @@ msgid ""
 "to tell whether it meets hardware security requirements."
 msgstr ""
 
-#: panels/privacy/firmware-security/cc-firmware-security-page.c:533
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:534
 msgid "Hardware does not pass basic security checks."
 msgstr ""
 
-#: panels/privacy/firmware-security/cc-firmware-security-page.c:540
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:541
 msgid "Hardware has a basic level of protection."
 msgstr ""
 
-#: panels/privacy/firmware-security/cc-firmware-security-page.c:550
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:551
 #, fuzzy
 msgid "Hardware has a strong level of protection."
 msgstr "โหมดเครื่องบินแบบฮาร์ดแวร์เปิดอยู่"
 
 #. TRANSLATORS: in reference to firmware protection: ??? stars
-#: panels/privacy/firmware-security/cc-firmware-security-page.c:556
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:557
 #, fuzzy
 msgid "Security Checks Unavailable"
 msgstr "ใช้งานไม่ได้"
@@ -10934,7 +10943,23 @@ msgstr "พยายามใช้ตัวอักษร ตัวเลข �
 msgid "_Confirm Password"
 msgstr "ยื_นยันรหัสผ่าน"
 
-#: panels/system/users/cc-fingerprint-dialog.ui:238
+#: panels/system/users/cc-fingerprint-dialog.c:1391
+#, fuzzy
+msgid "Delete All Fingerprints?"
+msgstr "_ลบลายนิ้วมือ"
+
+#: panels/system/users/cc-fingerprint-dialog.c:1392
+msgid ""
+"Deleting all enrolled fingerprints will disable Fingerprint Login. To re-"
+"enable Fingerprint Login at least one fingerprint will have to be enrolled."
+msgstr ""
+
+#: panels/system/users/cc-fingerprint-dialog.c:1397
+#, fuzzy
+msgid "_Delete All"
+msgstr "_ลบ"
+
+#: panels/system/users/cc-fingerprint-dialog.ui:191
 msgid ""
 "Fingerprint login allows you to unlock and log into your device with your "
 "finger"
@@ -11148,6 +11173,74 @@ msgstr "ส่งการกดแป้นพิมพ์"
 #, fuzzy
 msgid "_Switch Monitor"
 msgstr "สลับจอภาพ"
+
+#. Translators: This separates the duration and interval times when displaying
+#. * the selected break schedule on the wellbeing panel. For example,
+#. * “1 minute / 20 minutes” to indicate a 1 minute break every 20 minutes.
+#: panels/wellbeing/cc-break-schedule-row.c:289
+msgid " / "
+msgstr ""
+
+#: panels/wellbeing/cc-break-schedule-row.c:369
+#, fuzzy
+msgid "Duration"
+msgstr "ระวัง"
+
+#: panels/wellbeing/cc-break-schedule-row.c:369
+msgid "Interval"
+msgstr ""
+
+#: panels/wellbeing/cc-wellbeing-panel.ui:18
+msgid "Break Reminders"
+msgstr ""
+
+#: panels/wellbeing/cc-wellbeing-panel.ui:21
+msgid "_Eyesight Reminders"
+msgstr ""
+
+#: panels/wellbeing/cc-wellbeing-panel.ui:22
+#, fuzzy
+msgid "Reminders to look away from the screen"
+msgstr "ลบพื้นหลังออก"
+
+#: panels/wellbeing/cc-wellbeing-panel.ui:28
+msgid "_Movement Reminders"
+msgstr ""
+
+#: panels/wellbeing/cc-wellbeing-panel.ui:29
+#, fuzzy
+msgid "Reminders to move around"
+msgstr "ลบพื้นหลังออก"
+
+#: panels/wellbeing/cc-wellbeing-panel.ui:35
+#, fuzzy
+msgid "Movement Break S_chedule"
+msgstr "กำหนดเอง"
+
+#: panels/wellbeing/cc-wellbeing-panel.ui:41
+#, fuzzy
+msgid "S_ounds"
+msgstr "เสียง"
+
+#: panels/wellbeing/cc-wellbeing-panel.ui:42
+msgid "Play a sound when a break ends"
+msgstr ""
+
+#: panels/wellbeing/gnome-wellbeing-panel.desktop.in:6
+#, fuzzy
+msgid "Wellbeing"
+msgstr "การมองเห็น"
+
+#: panels/wellbeing/gnome-wellbeing-panel.desktop.in:7
+msgid "Review and limit the amount of time you spend at the computer screen"
+msgstr ""
+
+#. Translators: Search terms to find the Wellbeing panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#: panels/wellbeing/gnome-wellbeing-panel.desktop.in:18
+msgid ""
+"Wellbeing;Screen Time;Breaks;Break Reminders;Health Breaks;Daily Usage;"
+"Screen Limits;Usage Limit;"
+msgstr ""
 
 #: shell/cc-application.c:69
 msgid "Enable verbose mode. Specify multiple times to increase verbosity"
@@ -14752,42 +14845,9 @@ msgstr ""
 #~ msgid "Disable _Fingerprint Login..."
 #~ msgstr "ปิดการเข้าระบบด้วยลาย_นิ้วมือ..."
 
-#~ msgid "Clear All Active Jobs?"
-#~ msgstr "ล้างงานพิมพ์ทั้งหมดที่ทำอยู่หรือไม่?"
-
-#~ msgid "Clearing jobs cannot be undone"
-#~ msgstr "การล้างงานพิมพ์ไม่สามารถเรียกกลับคืนได้"
-
-#~ msgid "Clear _All"
-#~ msgstr "_ล้างทั้งหมด"
-
 #, fuzzy
-#~ msgid "Delete All Fingerprints?"
-#~ msgstr "_ลบลายนิ้วมือ"
-
-#, fuzzy
-#~ msgid "_Delete All"
-#~ msgstr "_ลบ"
-
-#, fuzzy
-#~ msgid "Duration"
-#~ msgstr "ระวัง"
-
-#, fuzzy
-#~ msgid "Reminders to move around"
-#~ msgstr "ลบพื้นหลังออก"
-
-#, fuzzy
-#~ msgid "Movement Break S_chedule"
-#~ msgstr "กำหนดเอง"
-
-#, fuzzy
-#~ msgid "S_ounds"
-#~ msgstr "เสียง"
-
-#, fuzzy
-#~ msgid "Wellbeing"
-#~ msgstr "การมองเห็น"
+#~ msgid "Printer Jobs"
+#~ msgstr "เครื่องพิมพ์"
 
 #~ msgid ""
 #~ "Notifications will continue to appear in the notification list when "
