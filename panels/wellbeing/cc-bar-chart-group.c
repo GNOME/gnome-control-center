@@ -62,6 +62,7 @@ struct _CcBarChartGroup {
   GtkWidget parent_instance;
 
   /* Configured state: */
+  gboolean selectable;
   enum
     {
       SELECTION_STATE_NONE,
@@ -78,7 +79,8 @@ struct _CcBarChartGroup {
 G_DEFINE_TYPE (CcBarChartGroup, cc_bar_chart_group, GTK_TYPE_WIDGET)
 
 typedef enum {
-  PROP_IS_SELECTED = 1,
+  PROP_SELECTABLE = 1,
+  PROP_IS_SELECTED,
   PROP_SELECTED_INDEX,
   PROP_SELECTED_INDEX_SET,
   PROP_SCALE,
@@ -108,7 +110,16 @@ static void cc_bar_chart_group_measure (GtkWidget      *widget,
                                         int            *natural_baseline);
 static gboolean cc_bar_chart_group_focus (GtkWidget        *widget,
                                           GtkDirectionType  direction);
+static void gesture_click_pressed_cb (GtkGestureClick *gesture,
+                                      guint            n_press,
+                                      double           x,
+                                      double           y,
+                                      gpointer         user_data);
 
+static gboolean find_index_for_bar (CcBarChartGroup *self,
+                                    CcBarChartBar   *bar,
+                                    unsigned int    *out_idx);
+static gboolean bar_is_focusable (CcBarChartBar *bar);
 static CcBarChartBar *get_adjacent_focusable_bar (CcBarChartGroup *self,
                                                   CcBarChartBar   *bar,
                                                   int              direction);
@@ -128,6 +139,20 @@ cc_bar_chart_group_class_init (CcBarChartGroupClass *klass)
   widget_class->size_allocate = cc_bar_chart_group_size_allocate;
   widget_class->measure = cc_bar_chart_group_measure;
   widget_class->focus = cc_bar_chart_group_focus;
+
+  /**
+   * CcBarChartGroup:selectable:
+   *
+   * Whether the group itself can be selected.
+   *
+   * If `FALSE`, any attempt to select the group will select its first bar
+   * instead.
+   */
+  props[PROP_SELECTABLE] =
+    g_param_spec_boolean ("selectable",
+                          NULL, NULL,
+                          TRUE,
+                          G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS | G_PARAM_EXPLICIT_NOTIFY);
 
   /**
    * CcBarChartGroup:is-selected:
@@ -195,9 +220,17 @@ cc_bar_chart_group_class_init (CcBarChartGroupClass *klass)
 static void
 cc_bar_chart_group_init (CcBarChartGroup *self)
 {
+  g_autoptr(GtkGestureClick) gesture = NULL;
+
   gtk_widget_init_template (GTK_WIDGET (self));
 
+  self->selectable = TRUE;
   self->bars = g_ptr_array_new_null_terminated (1, (GDestroyNotify) gtk_widget_unparent, TRUE);
+
+  /* Handle clicks */
+  gesture = GTK_GESTURE_CLICK (gtk_gesture_click_new ());
+  g_signal_connect (gesture, "pressed", G_CALLBACK (gesture_click_pressed_cb), self);
+  gtk_widget_add_controller (GTK_WIDGET (self), GTK_EVENT_CONTROLLER (g_steal_pointer (&gesture)));
 }
 
 static void
@@ -210,6 +243,9 @@ cc_bar_chart_group_get_property (GObject    *object,
 
   switch ((CcBarChartGroupProperty) property_id)
     {
+    case PROP_SELECTABLE:
+      g_value_set_boolean (value, cc_bar_chart_group_get_selectable (self));
+      break;
     case PROP_IS_SELECTED:
       g_value_set_boolean (value, cc_bar_chart_group_get_is_selected (self));
       break;
@@ -241,6 +277,9 @@ cc_bar_chart_group_set_property (GObject      *object,
 
   switch ((CcBarChartGroupProperty) property_id)
     {
+    case PROP_SELECTABLE:
+      cc_bar_chart_group_set_selectable (self, g_value_get_boolean (value));
+      break;
     case PROP_IS_SELECTED:
       cc_bar_chart_group_set_is_selected (self, g_value_get_boolean (value));
       break;
@@ -433,6 +472,40 @@ cc_bar_chart_group_focus (GtkWidget        *widget,
     return FALSE;
 
   return gtk_widget_child_focus (GTK_WIDGET (next_focus_bar), direction);
+}
+
+static void
+gesture_click_pressed_cb (GtkGestureClick *gesture,
+                          guint            n_press,
+                          double           x,
+                          double           y,
+                          gpointer         user_data)
+{
+  CcBarChartGroup *self = CC_BAR_CHART_GROUP (user_data);
+  GtkWidget *bar;
+  unsigned int bar_idx = 0;
+
+  if (gtk_widget_get_focus_on_click (GTK_WIDGET (self)) && !gtk_widget_has_focus (GTK_WIDGET (self)))
+    gtk_widget_grab_focus (GTK_WIDGET (self));
+
+  bar = gtk_widget_pick (GTK_WIDGET (self), x, y, GTK_PICK_DEFAULT);
+
+  if (!CC_IS_BAR_CHART_BAR (bar) ||
+      !find_index_for_bar (self, CC_BAR_CHART_BAR (bar), &bar_idx))
+    bar = NULL;
+
+  /* Select and focus the bar or group. */
+  if (bar != NULL)
+    {
+      if (bar_is_focusable (CC_BAR_CHART_BAR (bar)))
+        gtk_widget_set_focus_child (GTK_WIDGET (self), bar);
+      cc_bar_chart_group_set_selected_index (self, TRUE, bar_idx);
+    }
+  else
+    {
+      /* already grabbed focus above */
+      cc_bar_chart_group_set_is_selected (self, TRUE);
+    }
 }
 
 static gboolean
@@ -631,6 +704,51 @@ cc_bar_chart_group_remove_bar (CcBarChartGroup *self,
   gtk_widget_queue_resize (GTK_WIDGET (self));
 }
 
+/**
+ * cc_bar_chart_group_get_selectable:
+ * @self: a #CcBarChartGroup
+ *
+ * Get the value of #CcBarChartGroup:selectable.
+ *
+ * Returns: `TRUE` if the group itself is selectable, `FALSE` otherwise
+ */
+gboolean
+cc_bar_chart_group_get_selectable (CcBarChartGroup *self)
+{
+  g_return_val_if_fail (CC_IS_BAR_CHART_GROUP (self), FALSE);
+
+  return self->selectable;
+}
+
+/**
+ * cc_bar_chart_group_set_selectable:
+ * @self: a #CcBarChartGroup
+ * @selectable: `TRUE` if the group itself is selectable, `FALSE` otherwise
+ *
+ * Set the value of #CcBarChartGroup:selectable.
+ */
+void
+cc_bar_chart_group_set_selectable (CcBarChartGroup *self,
+                                   gboolean         selectable)
+{
+  g_return_if_fail (CC_IS_BAR_CHART_GROUP (self));
+
+  if (self->selectable == selectable)
+    return;
+
+  self->selectable = selectable;
+
+  g_object_freeze_notify (G_OBJECT (self));
+  g_object_notify_by_pspec (G_OBJECT (self), props[PROP_SELECTABLE]);
+
+  /* If the group is currently selected but shouldn’t be any more, run through
+   * the default fall-through selection logic again. */
+  if (!self->selectable && self->selection_state == SELECTION_STATE_GROUP)
+    cc_bar_chart_group_set_is_selected (self, TRUE);
+
+  g_object_thaw_notify (G_OBJECT (self));
+}
+
 static void
 set_or_unset_selection_state_flags (CcBarChartGroup *self,
                                     gboolean         set)
@@ -692,6 +810,14 @@ cc_bar_chart_group_set_is_selected (CcBarChartGroup *self,
                                     gboolean         is_selected)
 {
   g_return_if_fail (CC_IS_BAR_CHART_GROUP (self));
+
+  /* If the group is not selectable, pass this through to the first bar. */
+  if (!self->selectable)
+    {
+      if (self->bars->len > 0)
+        cc_bar_chart_group_set_selected_index (self, is_selected, 0);
+      return;
+    }
 
   if ((self->selection_state == SELECTION_STATE_GROUP) == is_selected)
     return;

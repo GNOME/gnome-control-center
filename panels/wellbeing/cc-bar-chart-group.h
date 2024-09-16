@@ -43,6 +43,10 @@ void cc_bar_chart_group_insert_bar (CcBarChartGroup *self,
 void cc_bar_chart_group_remove_bar (CcBarChartGroup *self,
                                     CcBarChartBar   *bar);
 
+gboolean cc_bar_chart_group_get_selectable (CcBarChartGroup *self);
+void cc_bar_chart_group_set_selectable (CcBarChartGroup *self,
+                                        gboolean         selectable);
+
 gboolean cc_bar_chart_group_get_is_selected (CcBarChartGroup *self);
 void cc_bar_chart_group_set_is_selected (CcBarChartGroup *self,
                                          gboolean         is_selected);

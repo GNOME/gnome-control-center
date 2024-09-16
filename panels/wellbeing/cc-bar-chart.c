@@ -201,6 +201,9 @@ static void cc_bar_chart_snapshot (GtkWidget   *widget,
 static gboolean cc_bar_chart_focus (GtkWidget        *widget,
                                     GtkDirectionType  direction);
 
+static gboolean find_index_for_group (CcBarChart      *self,
+                                      CcBarChartGroup *group,
+                                      unsigned int    *out_idx);
 static CcBarChartGroup *get_adjacent_focusable_group (CcBarChart      *self,
                                                       CcBarChartGroup *group,
                                                       int              direction);
@@ -889,6 +892,36 @@ cc_bar_chart_focus (GtkWidget        *widget,
   return gtk_widget_child_focus (GTK_WIDGET (next_focus_group), direction);
 }
 
+static void
+group_notify_selected_index_cb (GObject    *object,
+                                GParamSpec *pspec,
+                                gpointer    user_data)
+{
+  CcBarChart *self = CC_BAR_CHART (user_data);
+  CcBarChartGroup *group = CC_BAR_CHART_GROUP (object);
+  gboolean success;
+  unsigned int group_idx = 0;
+  size_t selected_idx = 0;
+
+  /* Which group is this? */
+  success = find_index_for_group (self, group, &group_idx);
+  g_assert (success);
+
+  if (cc_bar_chart_group_get_is_selected (group) ||
+      cc_bar_chart_group_get_selected_index (group, NULL))
+    {
+      /* If the group is now selected, update our selection. */
+      cc_bar_chart_set_selected_index (self, TRUE, group_idx);
+    }
+  else if (cc_bar_chart_get_selected_index (self, &selected_idx) &&
+           selected_idx == group_idx)
+    {
+      /* Otherwise, if the group is no longer selected, but was the selected
+       * group in our selection, clear that. */
+      cc_bar_chart_set_selected_index (self, FALSE, 0);
+    }
+}
+
 static gboolean
 find_index_for_group (CcBarChart      *self,
                       CcBarChartGroup *group,
@@ -1473,6 +1506,9 @@ cc_bar_chart_set_data (CcBarChart   *self,
       g_autofree char *accessible_label = format_continuous_axis_label (self, self->data[i]);
 
       group = CC_BAR_CHART_GROUP (g_object_ref_sink (cc_bar_chart_group_new ()));
+      g_signal_connect (group, "notify::selected-index", G_CALLBACK (group_notify_selected_index_cb), self);
+      g_signal_connect (group, "notify::is-selected", G_CALLBACK (group_notify_selected_index_cb), self);
+      cc_bar_chart_group_set_selectable (group, isnan (self->data[i]));
       cc_bar_chart_group_set_scale (group, self->cached_pixels_per_data);
       if (!isnan (self->data[i]))
         cc_bar_chart_group_insert_bar (group, -1, cc_bar_chart_bar_new (self->data[i], accessible_label));
@@ -1584,13 +1620,35 @@ cc_bar_chart_set_selected_index (CcBarChart *self,
       (!self->selected_index_set || self->selected_index == idx))
     return;
 
+  /* Clear the old selection. */
+  if (self->selected_index_set)
+    {
+      g_assert (self->cached_groups != NULL);
+      g_signal_handlers_block_by_func (self->cached_groups->pdata[self->selected_index],
+                                       group_notify_selected_index_cb, self);
+      cc_bar_chart_group_set_is_selected (self->cached_groups->pdata[self->selected_index], FALSE);
+      g_signal_handlers_unblock_by_func (self->cached_groups->pdata[self->selected_index],
+                                         group_notify_selected_index_cb, self);
+    }
+
   self->selected_index_set = is_selected;
   self->selected_index = is_selected ? idx : 0;
 
+  /* Set the new selection. */
   if (is_selected)
     {
+      size_t n_bars = 0;
+
       g_assert (self->cached_groups != NULL);
-      cc_bar_chart_group_set_selected_index (self->cached_groups->pdata[idx], TRUE, 0);
+      g_signal_handlers_block_by_func (self->cached_groups->pdata[idx],
+                                       group_notify_selected_index_cb, self);
+      cc_bar_chart_group_get_bars (self->cached_groups->pdata[idx], &n_bars);
+      if (n_bars > 0)
+        cc_bar_chart_group_set_selected_index (self->cached_groups->pdata[idx], TRUE, 0);
+      else
+        cc_bar_chart_group_set_is_selected (self->cached_groups->pdata[idx], TRUE);
+      g_signal_handlers_unblock_by_func (self->cached_groups->pdata[idx],
+                                         group_notify_selected_index_cb, self);
     }
 
   /* Re-render */
