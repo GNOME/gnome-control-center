@@ -67,6 +67,12 @@
  * resulting in #CcBarChart:bar-activated being emitted. By default, activating
  * a bar will also focus and select it.
  *
+ * # Shortcuts and Gestures
+ *
+ * The following signals have default keybindings:
+ *
+ * - #CcBarChart::move-cursor
+ *
  * # CSS nodes
  *
  * |[<!-- language="plain" -->
@@ -175,9 +181,10 @@ typedef enum {
   SIGNAL_DATA_CHANGED,
   SIGNAL_BAR_ACTIVATED,
   SIGNAL_ACTIVATE_CURSOR_BAR,
+  SIGNAL_MOVE_CURSOR,
 } CcBarChartSignal;
 
-static guint signals[SIGNAL_ACTIVATE_CURSOR_BAR + 1];
+static guint signals[SIGNAL_MOVE_CURSOR + 1];
 
 static void cc_bar_chart_get_property (GObject    *object,
                                        guint       property_id,
@@ -207,6 +214,9 @@ static gboolean cc_bar_chart_focus (GtkWidget        *widget,
 
 static void activate_cursor_bar_cb (CcBarChart *self,
                                     gpointer    user_data);
+static void move_cursor_cb (CcBarChart      *self,
+                            GtkMovementStep  step,
+                            int              count);
 
 static gboolean find_index_for_group (CcBarChart      *self,
                                       CcBarChartGroup *group,
@@ -355,11 +365,83 @@ cc_bar_chart_class_init (CcBarChartClass *klass)
                   NULL,
                   G_TYPE_NONE, 0);
 
+  /**
+   * CcBarChart::move-cursor:
+   * @chart: the chart on which the signal is emitted
+   * @step: the granularity of the move, as a #GtkMovementStep
+   * @count: the number of @step units to move
+   *
+   * Emitted when the user initiates a cursor movement.
+   *
+   * The default bindings for this signal are:
+   *
+   *  - ←, →, ↑, ↓: move by individual bars
+   *  - Home, End: move to the ends of the chart
+   */
+  signals[SIGNAL_MOVE_CURSOR] =
+    g_signal_new ("move-cursor",
+                  G_TYPE_FROM_CLASS (klass),
+                  G_SIGNAL_RUN_LAST | G_SIGNAL_ACTION,
+                  0, NULL, NULL,
+                  NULL,
+                  G_TYPE_NONE, 2,
+                  GTK_TYPE_MOVEMENT_STEP, G_TYPE_INT);
+
   gtk_widget_class_set_activate_signal (widget_class, signals[SIGNAL_ACTIVATE_CURSOR_BAR]);
+
+  gtk_widget_class_add_binding_signal (widget_class,
+                                       GDK_KEY_Home, 0,
+                                       "move-cursor",
+                                       "(ii)", GTK_MOVEMENT_BUFFER_ENDS, -1);
+  gtk_widget_class_add_binding_signal (widget_class,
+                                       GDK_KEY_KP_Home, 0,
+                                       "move-cursor",
+                                       "(ii)", GTK_MOVEMENT_BUFFER_ENDS, -1);
+  gtk_widget_class_add_binding_signal (widget_class,
+                                       GDK_KEY_End, 0,
+                                       "move-cursor",
+                                       "(ii)", GTK_MOVEMENT_BUFFER_ENDS, 1);
+  gtk_widget_class_add_binding_signal (widget_class,
+                                       GDK_KEY_KP_End, 0,
+                                       "move-cursor",
+                                       "(ii)", GTK_MOVEMENT_BUFFER_ENDS, 1);
+  gtk_widget_class_add_binding_signal (widget_class,
+                                       GDK_KEY_Up, 0,
+                                       "move-cursor",
+                                       "(ii)", GTK_MOVEMENT_LOGICAL_POSITIONS, -1);
+  gtk_widget_class_add_binding_signal (widget_class,
+                                       GDK_KEY_KP_Up, 0,
+                                       "move-cursor",
+                                       "(ii)", GTK_MOVEMENT_LOGICAL_POSITIONS, -1);
+  gtk_widget_class_add_binding_signal (widget_class,
+                                       GDK_KEY_Down, 0,
+                                       "move-cursor",
+                                       "(ii)", GTK_MOVEMENT_LOGICAL_POSITIONS, 1);
+  gtk_widget_class_add_binding_signal (widget_class,
+                                       GDK_KEY_KP_Down, 0,
+                                       "move-cursor",
+                                       "(ii)", GTK_MOVEMENT_LOGICAL_POSITIONS, 1);
+  gtk_widget_class_add_binding_signal (widget_class,
+                                       GDK_KEY_Left, 0,
+                                       "move-cursor",
+                                       "(ii)", GTK_MOVEMENT_VISUAL_POSITIONS, -1);
+  gtk_widget_class_add_binding_signal (widget_class,
+                                       GDK_KEY_KP_Left, 0,
+                                       "move-cursor",
+                                       "(ii)", GTK_MOVEMENT_VISUAL_POSITIONS, -1);
+  gtk_widget_class_add_binding_signal (widget_class,
+                                       GDK_KEY_Right, 0,
+                                       "move-cursor",
+                                       "(ii)", GTK_MOVEMENT_VISUAL_POSITIONS, 1);
+  gtk_widget_class_add_binding_signal (widget_class,
+                                       GDK_KEY_KP_Right, 0,
+                                       "move-cursor",
+                                       "(ii)", GTK_MOVEMENT_VISUAL_POSITIONS, 1);
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/wellbeing/cc-bar-chart.ui");
 
   gtk_widget_class_bind_template_callback (widget_class, activate_cursor_bar_cb);
+  gtk_widget_class_bind_template_callback (widget_class, move_cursor_cb);
 
   gtk_widget_class_set_css_name (widget_class, "bar-chart");
   gtk_widget_class_set_accessible_role (widget_class, GTK_ACCESSIBLE_ROLE_LIST);
@@ -986,6 +1068,69 @@ activate_cursor_bar_cb (CcBarChart *self,
 {
   if (self->selected_index_set)
     gtk_widget_activate (GTK_WIDGET (self->cached_groups->pdata[self->selected_index]));
+}
+
+static void
+move_cursor_cb (CcBarChart      *self,
+                GtkMovementStep  step,
+                int              count)
+{
+  CcBarChartGroup *group = NULL, *selected_group = NULL;
+  unsigned int idx = 0;
+  int visual_count;
+
+  g_assert (self->cached_groups != NULL);
+
+  if (self->selected_index_set)
+    selected_group = self->cached_groups->pdata[self->selected_index];
+
+  if (gtk_widget_get_direction (GTK_WIDGET (self)) == GTK_TEXT_DIR_RTL)
+    visual_count = -count;
+  else
+    visual_count = count;
+
+  switch (step)
+    {
+    case GTK_MOVEMENT_BUFFER_ENDS:
+      if (count < 0)
+        group = get_first_focusable_group (self);
+      else
+        group = get_last_focusable_group (self);
+      break;
+    case GTK_MOVEMENT_LOGICAL_POSITIONS:
+      if (selected_group != NULL)
+        group = get_adjacent_focusable_group (self, selected_group, (count < 0) ? -1 : 1);
+      break;
+    case GTK_MOVEMENT_VISUAL_POSITIONS:
+      if (selected_group != NULL)
+        group = get_adjacent_focusable_group (self, selected_group, (visual_count < 0) ? -1 : 1);
+      break;
+    default:
+      /* Not currently supported */
+      return;
+    }
+
+  /* Did we fail to move anywhere? */
+  if (group == NULL || group == selected_group)
+    {
+      GtkDirectionType direction = (count < 0) ? GTK_DIR_TAB_BACKWARD : GTK_DIR_TAB_FORWARD;
+
+      if (!gtk_widget_keynav_failed (GTK_WIDGET (self), direction))
+        {
+          GtkWidget *toplevel = GTK_WIDGET (gtk_widget_get_root (GTK_WIDGET (self)));
+
+          if (toplevel != NULL)
+            gtk_widget_child_focus (toplevel, direction);
+        }
+
+      return;
+    }
+
+  if (find_index_for_group (self, group, &idx))
+    {
+      gtk_widget_grab_focus (GTK_WIDGET (group));
+      cc_bar_chart_set_selected_index (self, TRUE, idx);
+    }
 }
 
 static gboolean
