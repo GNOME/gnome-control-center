@@ -35,7 +35,9 @@
  *
  * Bars may only be placed into a #CcBarChart as children of #CcBarChartGroup.
  *
- * A bar may be selected, indicated by #CcBarChartBar:is-selected.
+ * A bar may be selected, indicated by #CcBarChartBar:is-selected. They may also
+ * be activated by gtk_widget_activate(), which will result in
+ * #CcBarChartBar::activate being emitted. By default this selects the bar.
  *
  * # CSS nodes
  *
@@ -69,6 +71,12 @@ typedef enum {
 } CcBarChartBarProperty;
 
 static GParamSpec *props[PROP_ACCESSIBLE_DESCRIPTION + 1];
+
+typedef enum {
+  SIGNAL_ACTIVATE,
+} CcBarChartSignal;
+
+static guint signals[SIGNAL_ACTIVATE + 1];
 
 static void cc_bar_chart_bar_get_property (GObject    *object,
                                            guint       property_id,
@@ -127,6 +135,24 @@ cc_bar_chart_bar_class_init (CcBarChartBarClass *klass)
                          G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS | G_PARAM_EXPLICIT_NOTIFY);
 
   g_object_class_install_properties (object_class, G_N_ELEMENTS (props), props);
+
+  /**
+   * CcBarChartBar::activate:
+   *
+   * This is a keybinding signal, which will cause this bar to be activated.
+   *
+   * If you want to be notified when the user activates a bar (by key or not),
+   * use the #CcBarChart::bar-activated signal on the bar’s parent #CcBarChart.
+   */
+  signals[SIGNAL_ACTIVATE] =
+    g_signal_new ("activate",
+                  G_TYPE_FROM_CLASS (klass),
+                  G_SIGNAL_RUN_FIRST | G_SIGNAL_ACTION,
+                  0, NULL, NULL,
+                  NULL,
+                  G_TYPE_NONE, 0);
+
+  gtk_widget_class_set_activate_signal (widget_class, signals[SIGNAL_ACTIVATE]);
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/wellbeing/cc-bar-chart-bar.ui");
 

@@ -63,7 +63,9 @@
  * value using cc_bar_chart_set_overlay_line_value();
  *
  * Bars in the chart may be selected, and the currently selected bar is
- * available as #CcBarChart:selected-index.
+ * available as #CcBarChart:selected-index. Bars may also be activated,
+ * resulting in #CcBarChart:bar-activated being emitted. By default, activating
+ * a bar will also focus and select it.
  *
  * # CSS nodes
  *
@@ -171,9 +173,11 @@ static GParamSpec *props[PROP_DISCRETE_AXIS_LABELS + 1];
 
 typedef enum {
   SIGNAL_DATA_CHANGED,
+  SIGNAL_BAR_ACTIVATED,
+  SIGNAL_ACTIVATE_CURSOR_BAR,
 } CcBarChartSignal;
 
-static guint signals[SIGNAL_DATA_CHANGED + 1];
+static guint signals[SIGNAL_ACTIVATE_CURSOR_BAR + 1];
 
 static void cc_bar_chart_get_property (GObject    *object,
                                        guint       property_id,
@@ -201,9 +205,15 @@ static void cc_bar_chart_snapshot (GtkWidget   *widget,
 static gboolean cc_bar_chart_focus (GtkWidget        *widget,
                                     GtkDirectionType  direction);
 
+static void activate_cursor_bar_cb (CcBarChart *self,
+                                    gpointer    user_data);
+
 static gboolean find_index_for_group (CcBarChart      *self,
                                       CcBarChartGroup *group,
                                       unsigned int    *out_idx);
+static gboolean find_index_for_bar (CcBarChart    *self,
+                                    CcBarChartBar *bar,
+                                    unsigned int  *out_idx);
 static CcBarChartGroup *get_adjacent_focusable_group (CcBarChart      *self,
                                                       CcBarChartGroup *group,
                                                       int              direction);
@@ -318,7 +328,38 @@ cc_bar_chart_class_init (CcBarChartClass *klass)
                   NULL,
                   G_TYPE_NONE, 0);
 
+  /**
+   * CcBarChart::bar-activated:
+   * @idx: index of the activated bar’s data entry
+   *
+   * Emitted when one of the bars in the chart is activated.
+   */
+  signals[SIGNAL_BAR_ACTIVATED] =
+    g_signal_new ("bar-activated",
+                  G_TYPE_FROM_CLASS (klass),
+                  G_SIGNAL_RUN_FIRST,
+                  0, NULL, NULL,
+                  NULL,
+                  G_TYPE_NONE, 1, G_TYPE_UINT);
+
+  /**
+   * CcBarChart::activate-cursor-bar:
+   *
+   * Emitted when the bar under the cursor (the focused bar) is activated.
+   */
+  signals[SIGNAL_ACTIVATE_CURSOR_BAR] =
+    g_signal_new ("activate-cursor-bar",
+                  G_TYPE_FROM_CLASS (klass),
+                  G_SIGNAL_RUN_LAST | G_SIGNAL_ACTION,
+                  0, NULL, NULL,
+                  NULL,
+                  G_TYPE_NONE, 0);
+
+  gtk_widget_class_set_activate_signal (widget_class, signals[SIGNAL_ACTIVATE_CURSOR_BAR]);
+
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/wellbeing/cc-bar-chart.ui");
+
+  gtk_widget_class_bind_template_callback (widget_class, activate_cursor_bar_cb);
 
   gtk_widget_class_set_css_name (widget_class, "bar-chart");
   gtk_widget_class_set_accessible_role (widget_class, GTK_ACCESSIBLE_ROLE_LIST);
@@ -922,6 +963,31 @@ group_notify_selected_index_cb (GObject    *object,
     }
 }
 
+static void
+bar_activate_cb (CcBarChartBar *bar,
+                 gpointer       user_data)
+{
+  CcBarChart *self = CC_BAR_CHART (user_data);
+  unsigned int idx = 0;
+
+  /* Select and activate the bar */
+  if (!find_index_for_bar (self, bar, &idx))
+    return;
+
+  gtk_widget_grab_focus (GTK_WIDGET (bar));
+  cc_bar_chart_set_selected_index (self, TRUE, idx);
+
+  g_signal_emit (self, signals[SIGNAL_BAR_ACTIVATED], 0, bar);
+}
+
+static void
+activate_cursor_bar_cb (CcBarChart *self,
+                        gpointer    user_data)
+{
+  if (self->selected_index_set)
+    gtk_widget_activate (GTK_WIDGET (self->cached_groups->pdata[self->selected_index]));
+}
+
 static gboolean
 find_index_for_group (CcBarChart      *self,
                       CcBarChartGroup *group,
@@ -931,6 +997,43 @@ find_index_for_group (CcBarChart      *self,
   g_assert (self->cached_groups != NULL);
 
   return g_ptr_array_find (self->cached_groups, group, out_idx);
+}
+
+static gboolean
+find_index_for_bar (CcBarChart    *self,
+                    CcBarChartBar *bar,
+                    unsigned int  *out_idx)
+{
+  unsigned int bar_idx = 0;
+
+  g_assert (gtk_widget_is_ancestor (GTK_WIDGET (bar), GTK_WIDGET (self)));
+  g_assert (self->cached_groups != NULL);
+
+  for (unsigned int i = 0; i < self->cached_groups->len; i++)
+    {
+      CcBarChartGroup *group = self->cached_groups->pdata[i];
+      size_t n_bars = 0;
+      CcBarChartBar * const *bars = cc_bar_chart_group_get_bars (group, &n_bars);
+
+      for (size_t j = 0; j < n_bars; j++)
+        {
+          if (bars[j] == bar)
+            {
+              if (out_idx != NULL)
+                *out_idx = bar_idx;
+              return TRUE;
+            }
+          else
+            {
+              bar_idx++;
+            }
+        }
+    }
+
+  if (out_idx != NULL)
+    *out_idx = 0;
+
+  return FALSE;
 }
 
 static gboolean
@@ -1502,6 +1605,7 @@ cc_bar_chart_set_data (CcBarChart   *self,
   for (size_t i = 0; i < self->n_data; i++)
     {
       g_autoptr(CcBarChartGroup) group = NULL;
+      g_autoptr(CcBarChartBar) bar = NULL;
       CcBarChartGroup *previous_group = (i > 0) ? self->cached_groups->pdata[i - 1] : NULL;
       g_autofree char *accessible_label = format_continuous_axis_label (self, self->data[i]);
 
@@ -1510,8 +1614,14 @@ cc_bar_chart_set_data (CcBarChart   *self,
       g_signal_connect (group, "notify::is-selected", G_CALLBACK (group_notify_selected_index_cb), self);
       cc_bar_chart_group_set_selectable (group, isnan (self->data[i]));
       cc_bar_chart_group_set_scale (group, self->cached_pixels_per_data);
+
       if (!isnan (self->data[i]))
-        cc_bar_chart_group_insert_bar (group, -1, cc_bar_chart_bar_new (self->data[i], accessible_label));
+        {
+          bar = CC_BAR_CHART_BAR (g_object_ref_sink (cc_bar_chart_bar_new (self->data[i], accessible_label)));
+          cc_bar_chart_group_insert_bar (group, -1, bar);
+          g_signal_connect (bar, "activate", G_CALLBACK (bar_activate_cb), self);
+        }
+
       gtk_widget_set_parent (GTK_WIDGET (group), GTK_WIDGET (self));
       gtk_widget_insert_after (GTK_WIDGET (group), GTK_WIDGET (self), GTK_WIDGET (previous_group));
       g_ptr_array_add (self->cached_groups, g_steal_pointer (&group));
