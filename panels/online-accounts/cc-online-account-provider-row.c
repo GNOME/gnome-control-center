@@ -69,7 +69,9 @@ _goa_provider_get_provider_info (GoaProvider *provider)
   for (size_t i = 0; i < G_N_ELEMENTS (goa_metadata); i++)
     {
       if (g_str_equal (goa_metadata[i].provider, provider_type))
-        return goa_metadata[i];
+        return (ProviderInfo){ goa_metadata[i].provider,
+                               _(goa_metadata[i].title),
+                               _(goa_metadata[i].description) };
     }
 
   return (ProviderInfo){ provider_type, C_("Online Account", "Other"), NULL };
@@ -144,8 +146,8 @@ cc_online_account_provider_row_new (GoaProvider *provider)
       self->provider = g_object_ref (provider);
       info = _goa_provider_get_provider_info (provider);
       icon = goa_provider_get_provider_icon (provider, NULL);
-      title = _(info.title);
-      description = _(info.description);
+      title = info.title;
+      description = info.description;
     }
 
   gtk_image_set_from_gicon (self->icon_image, icon);
