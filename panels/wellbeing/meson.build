@@ -10,7 +10,7 @@ i18n.merge_file(
   output: desktop,
   po_dir: po_dir,
   install: true,
-  install_dir: control_center_desktopdir
+  install_dir: control_center_desktopdir,
 )
 
 sources = files(
@@ -31,7 +31,7 @@ sources += gnome.compile_resources(
   'cc-' + cappletname + '-resources',
   cappletname + '.gresource.xml',
   c_name: 'cc_' + cappletname.underscorify(),
-  export: true
+  export: true,
 )
 
 panels_libs += static_library(
@@ -39,7 +39,7 @@ panels_libs += static_library(
   sources: sources,
   include_directories: [ top_inc, common_inc ],
   dependencies: common_deps,
-  c_args: cflags
+  c_args: cflags,
 )
 
 subdir('icons')
