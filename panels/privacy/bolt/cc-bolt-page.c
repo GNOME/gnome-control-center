@@ -53,7 +53,8 @@ struct _CcBoltPage
 
   /* authmode */
   AdwSpinner         *authmode_spinner;
-  AdwSwitchRow       *direct_access_row;
+  GtkSwitch          *authmode_switch;
+  AdwActionRow       *direct_access_row;
 
   /* device list */
   GHashTable         *devices;
@@ -116,7 +117,9 @@ static void     on_bolt_notify_authmode_cb (GObject    *gobject,
                                             gpointer    user_data);
 
 /* panel signals */
-static void     on_authmode_state_set_cb (CcBoltPage *self);
+static gboolean on_authmode_state_set_cb (CcBoltPage *self,
+                                          gboolean    state,
+                                          GtkSwitch  *toggle);
 
 static void     on_device_entry_row_activated_cb (CcBoltPage    *self,
                                                   GtkListBoxRow *row);
@@ -255,13 +258,13 @@ bolt_client_ready (GObject      *source,
 
   cc_bolt_page_authmode_sync (self);
 
-  g_object_bind_property (self->direct_access_row,
+  g_object_bind_property (self->authmode_switch,
                           "active",
                           self->devices_box,
                           "sensitive",
                           G_BINDING_DEFAULT | G_BINDING_SYNC_CREATE);
 
-  g_object_bind_property (self->direct_access_row,
+  g_object_bind_property (self->authmode_switch,
                           "active",
                           self->pending_box,
                           "sensitive",
@@ -456,11 +459,11 @@ cc_bolt_page_authmode_sync (CcBoltPage *self)
   mode = bolt_client_get_authmode (client);
   enabled = (mode & BOLT_AUTH_ENABLED) != 0;
 
-  g_signal_handlers_block_by_func (self->direct_access_row, on_authmode_state_set_cb, self);
+  g_signal_handlers_block_by_func (self->authmode_switch, on_authmode_state_set_cb, self);
 
-  adw_switch_row_set_active (self->direct_access_row, enabled);
+  gtk_switch_set_active (self->authmode_switch, enabled);
 
-  g_signal_handlers_unblock_by_func (self->direct_access_row, on_authmode_state_set_cb, self);
+  g_signal_handlers_unblock_by_func (self->authmode_switch, on_authmode_state_set_cb, self);
 
   adw_preferences_row_set_title (ADW_PREFERENCES_ROW (self->direct_access_row),
                                  enabled ?
@@ -656,7 +659,7 @@ on_authmode_ready (GObject      *source_object,
       self = CC_BOLT_PAGE (user_data);
       mode = bolt_client_get_authmode (client);
       enabled = (mode & BOLT_AUTH_ENABLED) != 0;
-      adw_switch_row_set_active (self->direct_access_row, enabled);
+      gtk_switch_set_state (self->authmode_switch, enabled);
     }
   else
     {
@@ -676,25 +679,30 @@ on_authmode_ready (GObject      *source_object,
     }
 
   gtk_widget_set_visible (GTK_WIDGET (self->authmode_spinner), FALSE);
-  gtk_widget_set_sensitive (GTK_WIDGET (self->direct_access_row), TRUE);
+  gtk_widget_set_sensitive (GTK_WIDGET (self->authmode_switch), TRUE);
 }
 
-static void
-on_authmode_state_set_cb (CcBoltPage *self)
+static gboolean
+on_authmode_state_set_cb (CcBoltPage *self,
+                          gboolean    enable,
+                          GtkSwitch  *toggle)
 {
+  BoltClient *client = self->client;
   BoltAuthMode mode;
 
-  gtk_widget_set_sensitive (GTK_WIDGET (self->direct_access_row), FALSE);
   gtk_widget_set_visible (GTK_WIDGET (self->authmode_spinner), TRUE);
+  gtk_widget_set_sensitive (GTK_WIDGET (self->authmode_switch), FALSE);
 
-  mode = bolt_client_get_authmode (self->client);
+  mode = bolt_client_get_authmode (client);
 
-  if (adw_switch_row_get_active (self->direct_access_row))
+  if (enable)
     mode = mode | BOLT_AUTH_ENABLED;
   else
     mode = mode & ~BOLT_AUTH_ENABLED;
 
-  bolt_client_set_authmode_async (self->client, mode, NULL, on_authmode_ready, self);
+  bolt_client_set_authmode_async (client, mode, NULL, on_authmode_ready, self);
+
+  return TRUE;
 }
 
 static void
@@ -814,7 +822,7 @@ on_permission_ready (GObject      *source_object,
                            G_CONNECT_AFTER);
 
   is_allowed = g_permission_get_allowed (permission);
-  gtk_widget_set_sensitive (GTK_WIDGET (self->direct_access_row), is_allowed);
+  gtk_widget_set_sensitive (GTK_WIDGET (self->authmode_switch), is_allowed);
   gtk_lock_button_set_permission (self->lock_button, permission);
 
   name = gtk_stack_get_visible_child_name (self->container);
@@ -830,7 +838,7 @@ on_permission_notify_cb (GPermission *permission,
 {
   gboolean is_allowed = g_permission_get_allowed (permission);
 
-  gtk_widget_set_sensitive (GTK_WIDGET (self->direct_access_row), is_allowed);
+  gtk_widget_set_sensitive (GTK_WIDGET (self->authmode_switch), is_allowed);
 }
 
 static gint
@@ -957,6 +965,7 @@ cc_bolt_page_class_init (CcBoltPageClass *klass)
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/privacy/bolt/cc-bolt-page.ui");
 
   gtk_widget_class_bind_template_child (widget_class, CcBoltPage, authmode_spinner);
+  gtk_widget_class_bind_template_child (widget_class, CcBoltPage, authmode_switch);
   gtk_widget_class_bind_template_child (widget_class, CcBoltPage, container);
   gtk_widget_class_bind_template_child (widget_class, CcBoltPage, devices_list);
   gtk_widget_class_bind_template_child (widget_class, CcBoltPage, devices_box);

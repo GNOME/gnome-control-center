@@ -68,13 +68,33 @@
                           <object class="AdwPreferencesGroup">
                             <property name="title" translatable="yes">Direct Access</property>
                             <child>
-                              <object class="AdwSwitchRow" id="direct_access_row">
+                               <!-- This should stay AdwActionRow and not become AdwSwitchRow, we use the delayed state change of GtkSwitch -->
+                              <object class="AdwActionRow" id="direct_access_row">
                                 <property name="title" translatable="yes" >Allow direct access to devices such as docks and external GPUs</property>
-                                <property name="active">True</property>
-                                <signal name="notify::active" handler="on_authmode_state_set_cb" object="CcBoltPage" swapped="yes" />
+                                <property name="activatable-widget">authmode_switch</property>
                                 <child type="suffix">
-                                  <object class="AdwSpinner" id="authmode_spinner">
-                                    <property name="visible">False</property>
+                                  <object class="GtkBox">
+                                    <property name="orientation">horizontal</property>
+                                    <property name="spacing">6</property>
+                                    <property name="halign">end</property>
+                                    <property name="valign">center</property>
+
+                                    <child>
+                                      <object class="AdwSpinner" id="authmode_spinner">
+                                        <property name="visible">False</property>
+                                      </object>
+                                    </child>
+
+                                    <child>
+                                      <object class="GtkSwitch" id="authmode_switch">
+                                        <property name="halign">end</property>
+                                        <property name="active">True</property>
+                                        <signal name="state-set"
+                                                handler="on_authmode_state_set_cb"
+                                                object="CcBoltPage"
+                                                swapped="yes" />
+                                      </object>
+                                    </child>
                                   </object>
                                 </child>
                               </object>
