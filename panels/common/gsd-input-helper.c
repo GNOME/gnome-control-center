@@ -22,11 +22,14 @@
 #include <string.h>
 
 #include <gdk/gdk.h>
+
+#ifdef GDK_WINDOWING_X11
 #include <gdk/x11/gdkx.h>
 
 #include <sys/types.h>
 #include <X11/Xatom.h>
 #include <X11/extensions/XInput2.h>
+#endif
 
 #include "gsd-input-helper.h"
 #include "gsd-device-manager.h"
@@ -57,6 +60,7 @@ mouse_is_present (void)
         return device_type_is_present (GSD_DEVICE_TYPE_MOUSE);
 }
 
+#ifdef GDK_WINDOWING_X11
 char *
 xdevice_get_device_node (int deviceid)
 {
@@ -106,3 +110,4 @@ out:
         XFree (data);
         return NULL;
 }
+#endif

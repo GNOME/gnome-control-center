@@ -26,7 +26,6 @@
 
 #include "gsd-device-manager.h"
 #include "gsd-common-enums.h"
-#include "gnome-settings-bus.h"
 #include "gsd-input-helper.h"
 
 #ifdef GDK_WINDOWING_X11
