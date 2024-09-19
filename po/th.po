@@ -16,7 +16,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
 "POT-Creation-Date: 2024-09-17 18:27+0000\n"
-"PO-Revision-Date: 2024-09-18 01:26+0700\n"
+"PO-Revision-Date: 2024-09-18 23:34+0700\n"
 "Last-Translator: Atirut Wattanamongkol <atirut.wattanamongkol@gmail.com>\n"
 "Language-Team: Thai <thai-l10n@googlegroups.com>\n"
 "Language: th\n"
@@ -3388,7 +3388,7 @@ msgstr "การเชื่อมต่อแบบ_คิดปริมา�
 #: panels/network/connection-editor/details-page.ui:425
 msgid ""
 "Software updates and other large downloads will not be started automatically."
-msgstr "การปรับรุ่นซอฟต์แวร์และการดาวน์โหลดขนาดใหญ่อื่นๆ จะไม่เริ่มต้นโดยอัตโนมัติ"
+msgstr "การอัปเดตซอฟต์แวร์และการดาวน์โหลดขนาดใหญ่อื่นๆ จะไม่เริ่มต้นโดยอัตโนมัติ"
 
 #: panels/network/connection-editor/ethernet-page.ui:48
 #: panels/network/connection-editor/wifi-page.ui:57
@@ -5661,7 +5661,7 @@ msgid ""
 "Secure boot prevents malicious software from being loaded when the device "
 "starts. It is currently turned off."
 msgstr ""
-"การบูตแบบปลอดภัยปิดอยู่ช่วยป้องกันไม่ให้มีการโหลดซอฟต์แวร์ที่เป็นอันตรายเมื่ออุปกรณ์เริ่มทำงาน "
+"การบูตแบบปลอดภัยช่วยป้องกันไม่ให้มีการโหลดซอฟต์แวร์ที่เป็นอันตรายเมื่ออุปกรณ์เริ่มทำงาน "
 "โดยขณะนี้ปิดอยู่"
 
 #. TRANSLATORS: this is the second section of the description.
@@ -5682,16 +5682,15 @@ msgid ""
 "\n"
 "For more information, contact the hardware manufacturer or IT support."
 msgstr ""
-"การบูตแบบปลอดภัยปิดอยู่ช่วยป้องกันไม่ให้มีการโหลดซอฟต์แวร์ที่เป็นอันตรายเมื่ออุปกรณ์เริ่มทำงาน\n"
+"การบูตแบบปลอดภัยช่วยป้องกันไม่ให้มีการโหลดซอฟต์แวร์ที่เป็นอันตรายเมื่ออุปกรณ์เริ่มทำงาน\n"
 "\n"
 "ถ้าต้องการความช่วยเหลือ ให้ติดต่อผู้ผลิตฮาร์ดแวร์หรือผู้ให้บริการช่วยเหลือด้านไอทีของคุณ"
 
 #. TRANSLATORS: in reference to firmware protection: 0/4 stars
 #: panels/privacy/cc-firmware-security-dialog.c:106
 #: panels/privacy/cc-firmware-security-page.c:541
-#, fuzzy
 msgid "Checks Failed"
-msgstr "การตรวจสอบ PIN ล้มเหลว"
+msgstr "การตรวจสอบล้มเหลว"
 
 #. TRANSLATORS: This is the description to describe the failure on
 #. checking the security items.
@@ -5704,13 +5703,17 @@ msgid ""
 "firmware or changing device configuration options. However, failures can "
 "stem from the physical hardware itself, and may not be reversible."
 msgstr ""
+"ฮาร์ดแวร์ไม่ผ่านการตรวจสอบ "
+"ซึ่งหมายความว่าคุณไม่ได้รับการปกป้องจากปัญหาความปลอดภัยของฮาร์ดแวร์ทั่วไป\n"
+"\n"
+"คุณอาจแก้ไขปัญหาความปลอดภัยของฮาร์ดแวร์ได้โดยการอัปเดตเฟิร์มแวร์หรือเปลี่ยนตัวเลือกการกำหนดค่าอุปกรณ์ "
+"อย่างไรก็ตาม ความล้มเหลวอาจเกิดจากฮาร์ดแวร์จริงและอาจไม่สามารถแก้ได้"
 
 #. TRANSLATORS: in reference to firmware protection: 1/4 stars
 #: panels/privacy/cc-firmware-security-dialog.c:120
 #: panels/privacy/cc-firmware-security-page.c:548
-#, fuzzy
 msgid "Checks Passed"
-msgstr "เปลี่ยนรหัสผ่าน"
+msgstr "ผ่านการตรวจสอบ"
 
 #. TRANSLATORS: This description describes the device passing the
 #. minimum requirement of security check.
@@ -5719,13 +5722,14 @@ msgid ""
 "This device meets basic security requirements. Its hardware has protection "
 "against some of the most common security threats."
 msgstr ""
+"อุปกรณ์นี้เป็นไปตามข้อกำหนดด้านความปลอดภัยขั้นพื้นฐาน "
+"ฮาร์ดแวร์มีการป้องกันภัยคุกคามความปลอดภัยที่พบบ่อยที่สุดบางรายการ"
 
 #. TRANSLATORS: in reference to firmware protection: 2~4 stars
 #: panels/privacy/cc-firmware-security-dialog.c:134
 #: panels/privacy/cc-firmware-security-page.c:557
-#, fuzzy
 msgid "Protected"
-msgstr "ถูกปฏิเสธ"
+msgstr "ได้รับการป้องกัน"
 
 #. TRANSLATOR: This description describes the devices passing
 #. the extended security check.
@@ -5734,13 +5738,14 @@ msgid ""
 "This device passes current security tests. Its hardware is protected against "
 "the majority of security threats."
 msgstr ""
+"อุปกรณ์นี้ผ่านการทดสอบความปลอดภัยในปัจจุบัน "
+"ฮาร์ดแวร์ได้รับการปกป้องจากภัยคุกคามความปลอดภัยส่วนใหญ่"
 
 #. TRANSLATORS: in reference to firmware protection: ??? stars
 #: panels/privacy/cc-firmware-security-dialog.c:145
 #: panels/privacy/cc-firmware-security-page.c:564
-#, fuzzy
 msgid "Checks Unavailable"
-msgstr "ใช้งานไม่ได้"
+msgstr "ตรวจสอบไม่ได้"
 
 #. TRANSLATORS: When the security result is unavailable, this description is shown.
 #: panels/privacy/cc-firmware-security-dialog.c:147
@@ -5748,20 +5753,21 @@ msgid ""
 "Device security checks are not available for this device. It is not possible "
 "to tell whether it meets security requirements."
 msgstr ""
+"การตรวจสอบความปลอดภัยของอุปกรณ์ไม่พร้อมใช้งานสำหรับอุปกรณ์นี้ "
+"ไม่สามารถระบุได้ว่าอุปกรณ์นี้ตรงตามข้อกำหนดด้านความปลอดภัยหรือไม่"
 
 #: panels/privacy/cc-firmware-security-dialog.c:367
-#, fuzzy
 msgid "Report copied to clipboard"
-msgstr "จับภาพหน้าจอเข้าไปไว้ในคลิปบอร์ด"
+msgstr "คัดลอกรายงานไปยังคลิปบอร์ดแล้ว"
 
 #: panels/privacy/cc-firmware-security-dialog.ui:65
 msgid "_Copy Technical Report"
-msgstr ""
+msgstr "_คัดลอกรายงานทางเทคนิค"
 
 #: panels/privacy/cc-firmware-security-help-dialog.ui:4
 #: panels/privacy/cc-firmware-security-page.ui:12
 msgid "About Device Security"
-msgstr ""
+msgstr "เกี่ยวกับความปลอดภัยของอุปกรณ์"
 
 #: panels/privacy/cc-firmware-security-help-dialog.ui:27
 msgid ""
@@ -5782,26 +5788,41 @@ msgid ""
 "Device security is just one aspect of security, and does not reflect the "
 "overall security status of the system and applications."
 msgstr ""
+"ความปลอดภัยของอุปกรณ์จะให้ข้อมูลเกี่ยวกับการป้องกันอุปกรณ์ของคุณจากปัญหาความปลอดภัยที่มุ่งเป้าไปที่ฮาร์ดแวร์โดยตรง\n"
+"\n"
+"ด้านต่างๆ ของฮาร์ดแวร์ที่ส่งผลต่อความปลอดภัย ได้แก่:\n"
+"\n"
+"• คุณสมบัติความปลอดภัยที่สร้างไว้ในฮาร์ดแวร์โดยตรง\n"
+"• การกำหนดค่าฮาร์ดแวร์เพื่อป้องกันปัญหาความปลอดภัย\n"
+"• ความปลอดภัยของซอฟต์แวร์ทำงานโดยตรงบนฮาร์ดแวร์\n"
+"\n"
+"ภัยคุกคามความปลอดภัยที่ส่งผลต่อฮาร์ดแวร์ ได้แก่ "
+"มัลแวร์และไวรัสที่เล่งเป้าซอฟต์แวร์ที่ทำงานโดยตรงบนฮาร์ดแวร์ "
+"นอกจากนี้ยังรวมถึงการดัดแปลงทางกายภาพ เช่น "
+"การเชื่อมต่อทางกายภาพกับฮาร์ดแวร์เพื่ออ่านข้อมูลและฝังมัลแวร์\n"
+"\n"
+"ความปลอดภัยของอุปกรณ์เป็นเพียงด้านหนึ่งของความปลอดภัยเท่านั้น "
+"และไม่ได้สะท้อนถึงสถานะความปลอดภัยโดยรวมของระบบและแอปพลิเคชัน"
 
 #: panels/privacy/cc-firmware-security-page.c:123
 msgid "Protected against malicious software when the device starts."
-msgstr ""
+msgstr "ได้รับการปกป้องจากซอฟต์แวร์ที่เป็นอันตรายเมื่ออุปกรณ์เริ่มทำงาน"
 
 #: panels/privacy/cc-firmware-security-page.c:129
 msgid "Secure Boot has Problems"
-msgstr ""
+msgstr "การบูตแบบปลอดภัยมีปัญหา"
 
 #: panels/privacy/cc-firmware-security-page.c:130
 msgid "Some protection when the device is started."
-msgstr ""
+msgstr "มีการป้องกันบางอย่างเมื่อเริ่มอุปกรณ์เริ่มทำงาน"
 
 #: panels/privacy/cc-firmware-security-page.c:135
 msgid "Secure Boot is Off"
-msgstr ""
+msgstr "การบูตแบบปลอดภัยปิดอยู่"
 
 #: panels/privacy/cc-firmware-security-page.c:136
 msgid "No protection when the device is started."
-msgstr ""
+msgstr "ไม่มีการป้องกันเมื่อเริ่มอุปกรณ์เริ่มทำงาน"
 
 #. TRANSLATORS: this is to explain an event that has already happened
 #: panels/privacy/cc-firmware-security-page.c:155
@@ -5810,6 +5831,8 @@ msgid ""
 "operating system configuration change, or because of malicious software on "
 "this system."
 msgstr ""
+"ปัญหานี้อาจเกิดจากการเปลี่ยนแปลงการตั้งค่าเฟิร์มแวร์ UEFI "
+"การเปลี่ยนแปลงการกำหนดค่าระบบปฏิบัติการ หรือเนื่องมาจากซอฟต์แวร์ที่เป็นอันตรายในระบบนี้"
 
 #. TRANSLATORS: this is to explain an event that has already happened
 #: panels/privacy/cc-firmware-security-page.c:163
@@ -5817,31 +5840,32 @@ msgid ""
 "This issue could have been caused by a change in the UEFI firmware settings, "
 "or because of malicious software on this system."
 msgstr ""
+"ปัญหานี้อาจเกิดจากการเปลี่ยนแปลงการตั้งค่าเฟิร์มแวร์ UEFI หรือจากซอฟต์แวร์ที่เป็นอันตรายบนระบบนี้"
 
 #. TRANSLATORS: this is to explain an event that has already happened
 #: panels/privacy/cc-firmware-security-page.c:170
 msgid ""
 "This issue could have been caused by an operating system configuration "
 "change, or because of malicious software on this system."
-msgstr ""
+msgstr "ปัญหานี้อาจเกิดจากการเปลี่ยนแปลงการกำหนดค่าระบบปฏิบัติการหรือเนื่องมาจากซอฟต์แวร์ที่เป็นอันตรายในระบบนี้"
 
 #. TRANSLATOR: this is the date in "%Y-%m-%d %H:%M:%S" format,
 #. for example: 2022-08-01 22:48:00
 #: panels/privacy/cc-firmware-security-page.c:228
-#, c-format
+#, fuzzy, c-format
 msgid "%1$s"
-msgstr ""
+msgstr "%1$s"
 
 #. TRANSLATOR: This is the text event status output when the event status is "success"
 #: panels/privacy/cc-firmware-security-page.c:234
-#, fuzzy
 msgid "Pass"
-msgstr "รหัสผ่าน"
+msgstr "ผ่าน"
 
 #. TRANSLATOR: This is the text event status output when the event status is not "success"
 #: panels/privacy/cc-firmware-security-page.c:237
+#, fuzzy
 msgid "! Fail"
-msgstr ""
+msgstr "! ไม่ผ่าน"
 
 #: panels/privacy/cc-firmware-security-page.c:240
 #, c-format
@@ -5850,19 +5874,19 @@ msgstr ""
 
 #: panels/privacy/cc-firmware-security-page.c:542
 msgid "Hardware does not pass checks."
-msgstr ""
+msgstr "ฮาร์ดแวร์ไม่ผ่านการตรวจสอบ"
 
 #: panels/privacy/cc-firmware-security-page.c:549
 msgid "Hardware meets basic security requirements."
-msgstr ""
+msgstr "ฮาร์ดแวร์เป็นไปตามข้อกำหนดด้านความปลอดภัยขั้นพื้นฐาน"
 
 #: panels/privacy/cc-firmware-security-page.c:558
 msgid "Hardware has a good level of protection."
-msgstr ""
+msgstr "ฮาร์ดแวร์มีระดับการป้องกันที่ดี"
 
 #: panels/privacy/cc-firmware-security-page.c:565
 msgid "Security levels are not available for this device."
-msgstr ""
+msgstr "ระดับความปลอดภัยไม่สามารถใช้งานได้กับอุปกรณ์นี้"
 
 #: panels/privacy/cc-firmware-security-page.ui:4
 msgid "Device Security"
@@ -5874,39 +5898,41 @@ msgstr "กำลังเริ่มต้น \"ความปลอดภั
 
 #: panels/privacy/cc-firmware-security-page.ui:83
 msgid "Device Security Unavailable"
-msgstr ""
+msgstr "ความปลอดภัยของอุปกรณ์ไม่พร้อมใช้งาน"
 
 #: panels/privacy/cc-firmware-security-page.ui:85
 msgid ""
 "Device Security is only available on physical hardware. No physical hardware "
 "has been detected."
 msgstr ""
+"การรักษาความปลอดภัยอุปกรณ์มีให้ใช้งานได้เฉพาะกับฮาร์ดแวร์ทางกายภาพเท่านั้น "
+"แต่ไม่พบฮาร์ดแวร์ทางกายภาพใดๆ"
 
 #: panels/privacy/cc-firmware-security-page.ui:223
-#, fuzzy
 msgid "Security Events"
-msgstr "กุญแจระบบรักษาความปลอดภัย"
+msgstr "เหตุการณ์ด้านความปลอดภัย"
 
 #: panels/privacy/cc-firmware-security-page.ui:233
 msgid "No Events"
-msgstr ""
+msgstr "ไม่มีเหตุการณ์"
 
 #. TRANSLATORS: if the stauts is valid. For example security check is valid and key is valid.
 #: panels/privacy/cc-firmware-security-utils.c:35
+#, fuzzy
 msgid "Valid"
-msgstr ""
+msgstr "ถูกต้อง"
 
 #. TRANSLATORS: if the status or key is not valid.
 #: panels/privacy/cc-firmware-security-utils.c:40
 #, fuzzy
 msgid "Not Valid"
-msgstr "ยังไม่เทียบมาตรฐาน"
+msgstr "ไม่ถูกต้อง"
 
 #. TRANSLATORS: if the function is enabled through BIOS or OS settings.
 #. TRANSLATORS: Status of Parental Controls setup
-#: panels/privacy/cc-firmware-security-utils.c:45
-#: panels/system/users/cc-user-page.c:377
-#: panels/system/users/cc-user-page.c:752 panels/wwan/cc-wwan-device-page.c:475
+#: panels/privacy/firmware-security/cc-firmware-security-utils.c:45
+#: panels/system/users/cc-user-page.c:374
+#: panels/system/users/cc-user-page.c:740 panels/wwan/cc-wwan-device-page.c:475
 msgid "Enabled"
 msgstr "เปิดใช้"
 
@@ -5914,64 +5940,57 @@ msgstr "เปิดใช้"
 #: panels/privacy/cc-firmware-security-utils.c:50
 #, fuzzy
 msgid "Not Enabled"
-msgstr "เปิดใช้"
+msgstr "ไม่ได้เปิดใช้งาน"
 
 #. TRANSLATORS: the memory space or system mode is locked to prevent from malicious modification.
 #: panels/privacy/cc-firmware-security-utils.c:55
 msgid "Locked"
-msgstr "ล็อกอยู่"
+msgstr "ล็อกแล้ว"
 
 #. TRANSLATORS: the memory space or system mode is not locked.
 #: panels/privacy/cc-firmware-security-utils.c:60
-#, fuzzy
 msgid "Not Locked"
-msgstr "ล็อกอยู่"
+msgstr "ไม่ได้ล็อก"
 
 #. TRANSLATORS: The data is encrypted to prevent from malicious reading.
 #: panels/privacy/cc-firmware-security-utils.c:65
 msgid "Encrypted"
-msgstr ""
+msgstr "เข้ารหัสแล้ว"
 
 #. TRANSLATORS: the data in memory is plane text.
 #: panels/privacy/cc-firmware-security-utils.c:70
-#, fuzzy
 msgid "Not Encrypted"
-msgstr "ไม่ได้เชื่อมต่อ"
+msgstr "ไม่ได้เข้ารหัส"
 
 #. TRANSLATORS: Linux kernel is tainted by third party kernel module.
 #: panels/privacy/cc-firmware-security-utils.c:75
 msgid "Tainted"
-msgstr ""
+msgstr "ถูกปนเปื้อน"
 
 #. TRANSLATORS: All the loaded kernel module are licensed.
 #: panels/privacy/cc-firmware-security-utils.c:80
-#, fuzzy
 msgid "Not Tainted"
-msgstr "ยังไม่เทียบมาตรฐาน"
+msgstr "ไม่ถูกปนเปื้อน"
 
 #. TRANSLATORS: the feature can be detected.
 #: panels/privacy/cc-firmware-security-utils.c:85
-#, fuzzy
 msgid "Found"
-msgstr "เสียง"
+msgstr "พบ"
 
 #. TRANSLATORS: the feature can't be detected.
 #: panels/privacy/cc-firmware-security-utils.c:90
-#, fuzzy
 msgid "Not Found"
-msgstr "ไม่พบรูปภาพ"
+msgstr "ไม่พบ"
 
 #. TRANSLATORS: the function is supported by hardware.
 #: panels/privacy/cc-firmware-security-utils.c:95
-#, fuzzy
 msgid "Supported"
-msgstr "เลิกพิมพ์"
+msgstr "ร้องรับ"
 
 #. TRANSLATORS: the function isn't supported by hardware.
 #: panels/privacy/cc-firmware-security-utils.c:100
-#, fuzzy
 msgid "Not Supported"
-msgstr "ไม่ได้เชื่อมต่อ"
+msgstr "ไม่รองรับ"
 
 #: panels/privacy/cc-location-page.ui:17
 msgid "_Automatic Device Location"
@@ -6537,7 +6556,7 @@ msgstr "ควบคุมว่าแอปใดจะแสดงผลกา
 #. Translators: Search terms to find the Search panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/search/gnome-search-panel.desktop.in:16
 msgid "Search;Find;Index;Hide;Privacy;Results;"
-msgstr "ค้นหา;หา;ดัชนี;ซ่อน;ความเป็นส่วนตัว;ผล;"
+msgstr "การค้นหา;หา;ดัชนี;ซ่อน;ความเป็นส่วนตัว;ผล;"
 
 #. Label
 #: panels/sharing/cc-sharing-networks.c:270
