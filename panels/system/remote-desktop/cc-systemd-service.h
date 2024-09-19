@@ -21,6 +21,8 @@
 
 #include <gio/gio.h>
 
+#define REMOTE_DESKTOP_SERVICE "gnome-remote-desktop.service"
+
 typedef enum {
   CC_SERVICE_STATE_ENABLED,
   CC_SERVICE_STATE_DISABLED,

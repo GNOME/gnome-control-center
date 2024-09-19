@@ -41,7 +41,6 @@
 #endif
 
 #define REMOTE_DESKTOP_STORE_CREDENTIALS_TIMEOUT_S 2
-#define REMOTE_LOGIN_SYSTEMD_SERVICE "gnome-remote-desktop.service"
 #define REMOTE_LOGIN_DBUS_SERVICE "org.gnome.RemoteDesktop.Configuration"
 #define REMOTE_LOGIN_OBJECT_PATH "/org/gnome/RemoteDesktop/Configuration"
 #define REMOTE_LOGIN_PERMISSION "org.gnome.controlcenter.remote-session-helper"

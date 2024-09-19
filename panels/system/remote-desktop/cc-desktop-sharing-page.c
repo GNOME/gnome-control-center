@@ -52,7 +52,6 @@
 #define GNOME_REMOTE_DESKTOP_SCHEMA_ID "org.gnome.desktop.remote-desktop"
 #define GNOME_REMOTE_DESKTOP_RDP_SCHEMA_ID "org.gnome.desktop.remote-desktop.rdp"
 #define REMOTE_DESKTOP_STORE_CREDENTIALS_TIMEOUT_S 1
-#define REMOTE_DESKTOP_SERVICE "gnome-remote-desktop.service"
 #define RDP_SERVER_DBUS_SERVICE "org.gnome.RemoteDesktop.User"
 #define RDP_SERVER_OBJECT_PATH "/org/gnome/RemoteDesktop/Rdp/Server"
 
