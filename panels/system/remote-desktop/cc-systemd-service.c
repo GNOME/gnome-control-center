@@ -22,6 +22,54 @@
 
 #include "cc-systemd-service.h"
 
+CcServiceState
+cc_get_service_state (const char *service,
+                      GBusType    bus_type)
+{
+  g_autoptr(GError) error = NULL;
+  g_autoptr(GDBusConnection) connection = NULL;
+  g_autoptr(GVariant) unit_path_variant = NULL;
+  const gchar *state = NULL;
+
+  connection = g_bus_get_sync (bus_type, NULL, &error);
+  if (!connection)
+    {
+      g_warning ("Failed connecting to D-Bus system bus: %s", error->message);
+      return CC_SERVICE_STATE_NOT_FOUND;
+    }
+
+  unit_path_variant =
+    g_dbus_connection_call_sync (connection,
+                                 "org.freedesktop.systemd1",
+                                 "/org/freedesktop/systemd1",
+                                 "org.freedesktop.systemd1.Manager",
+                                 "GetUnitFileState",
+                                 g_variant_new ("(s)",
+                                                service),
+                                 (GVariantType *) "(s)",
+                                 G_DBUS_CALL_FLAGS_NONE,
+                                 -1,
+                                 NULL,
+                                 &error);
+  if (error) {
+    g_warning ("Failed to get service state %s", error->message);
+
+    return CC_SERVICE_STATE_NOT_FOUND;
+  }
+
+  g_variant_get_child (unit_path_variant, 0, "s", &state);
+  if (g_strcmp0 (state, "enabled") == 0)
+    return CC_SERVICE_STATE_ENABLED;
+  if (g_strcmp0 (state, "disabled") == 0)
+    return CC_SERVICE_STATE_DISABLED;
+  if (g_strcmp0 (state, "static") == 0)
+    return CC_SERVICE_STATE_STATIC;
+  if (g_strcmp0 (state, "masked") == 0)
+    return CC_SERVICE_STATE_MASKED;
+
+  return CC_SERVICE_STATE_NOT_FOUND;
+}
+
 gboolean
 cc_is_service_active (const char  *service,
                       GBusType     bus_type)

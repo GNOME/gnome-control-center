@@ -21,6 +21,17 @@
 
 #include <gio/gio.h>
 
+typedef enum {
+  CC_SERVICE_STATE_ENABLED,
+  CC_SERVICE_STATE_DISABLED,
+  CC_SERVICE_STATE_STATIC,
+  CC_SERVICE_STATE_MASKED,
+  CC_SERVICE_STATE_NOT_FOUND
+} CcServiceState;
+
+CcServiceState cc_get_service_state (const char  *service,
+                                     GBusType     bus_type);
+
 gboolean cc_is_service_active (const char  *service,
                                GBusType     bus_type);
 
