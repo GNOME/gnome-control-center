@@ -72,11 +72,6 @@
                                 <property name="title" translatable="yes" >Allow direct access to devices such as docks and external GPUs</property>
                                 <property name="active">True</property>
                                 <signal name="notify::active" handler="on_authmode_state_set_cb" object="CcBoltPage" swapped="yes" />
-                                <child type="suffix">
-                                  <object class="AdwSpinner" id="authmode_spinner">
-                                    <property name="visible">False</property>
-                                  </object>
-                                </child>
                               </object>
                             </child>
                           </object>

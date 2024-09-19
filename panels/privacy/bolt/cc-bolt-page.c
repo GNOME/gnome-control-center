@@ -52,7 +52,6 @@ struct _CcBoltPage
   AdwToastOverlay    *toast_overlay;
 
   /* authmode */
-  AdwSpinner         *authmode_spinner;
   AdwSwitchRow       *direct_access_row;
 
   /* device list */
@@ -675,7 +674,6 @@ on_authmode_ready (GObject      *source_object,
       cc_bolt_page_authmode_sync (self);
     }
 
-  gtk_widget_set_visible (GTK_WIDGET (self->authmode_spinner), FALSE);
   gtk_widget_set_sensitive (GTK_WIDGET (self->direct_access_row), TRUE);
 }
 
@@ -685,7 +683,6 @@ on_authmode_state_set_cb (CcBoltPage *self)
   BoltAuthMode mode;
 
   gtk_widget_set_sensitive (GTK_WIDGET (self->direct_access_row), FALSE);
-  gtk_widget_set_visible (GTK_WIDGET (self->authmode_spinner), TRUE);
 
   mode = bolt_client_get_authmode (self->client);
 
@@ -956,7 +953,6 @@ cc_bolt_page_class_init (CcBoltPageClass *klass)
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/privacy/bolt/cc-bolt-page.ui");
 
-  gtk_widget_class_bind_template_child (widget_class, CcBoltPage, authmode_spinner);
   gtk_widget_class_bind_template_child (widget_class, CcBoltPage, container);
   gtk_widget_class_bind_template_child (widget_class, CcBoltPage, devices_list);
   gtk_widget_class_bind_template_child (widget_class, CcBoltPage, devices_box);
