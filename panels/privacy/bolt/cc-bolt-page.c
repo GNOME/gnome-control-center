@@ -269,7 +269,6 @@ bolt_client_ready (GObject      *source,
                           "sensitive",
                           G_BINDING_DEFAULT | G_BINDING_SYNC_CREATE);
 
-  gtk_stack_set_visible_child_name (self->devices_stack, "no-devices");
   cc_bolt_page_name_owner_changed (self);
 }
 
@@ -402,8 +401,6 @@ cc_bolt_page_add_device (CcBoltPage *self,
   else
     {
       gtk_list_box_append (self->devices_list, GTK_WIDGET (entry));
-      gtk_widget_set_visible (GTK_WIDGET (self->devices_list), TRUE);
-      gtk_widget_set_visible (GTK_WIDGET (self->devices_box), TRUE);
     }
 
   g_signal_connect_object (entry,
@@ -440,12 +437,6 @@ cc_bolt_page_del_device_entry (CcBoltPage        *self,
   box = cc_bolt_page_box_for_listbox (self, GTK_LIST_BOX (p));
   show = list_box_sync_visible (GTK_LIST_BOX (p));
   gtk_widget_set_visible (box, show);
-
-  if (!gtk_widget_is_visible (GTK_WIDGET (self->pending_list)) &&
-      !gtk_widget_is_visible (GTK_WIDGET (self->devices_list)))
-    {
-      gtk_stack_set_visible_child_name (self->devices_stack, "no-devices");
-    }
 }
 
 static void
