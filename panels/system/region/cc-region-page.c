@@ -287,6 +287,8 @@ set_system_language (CcRegionPage *self,
         set_localed_locale (self);
 }
 
+static void update_user_language_row (CcRegionPage *self);
+
 static void
 update_language (CcRegionPage   *self,
                  CcLocaleTarget  target,
@@ -300,6 +302,10 @@ update_language (CcRegionPage   *self,
                 if (self->login_auto_apply)
                         set_system_language (self, language);
                 maybe_notify (self, LC_MESSAGES, language);
+
+                g_set_str (&self->language, language);
+                update_user_language_row (self);
+
                 break;
 
         case SYSTEM:
