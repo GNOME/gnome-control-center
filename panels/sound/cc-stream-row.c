@@ -109,6 +109,10 @@ get_icon_for_stream (GvcMixerStream *stream)
   icon_name = gvc_mixer_stream_get_icon_name (stream);
   stream_name = gvc_mixer_stream_get_name (stream);
 
+  icon = g_themed_icon_new_with_default_fallbacks ("application-x-executable");
+  if (!stream_name)
+    return icon;
+
   if (g_str_has_prefix (stream_name, SPEECH_DISPATCHER_PREFIX))
     return g_themed_icon_new_with_default_fallbacks ("org.gnome.Settings-accessibility");
 
@@ -119,7 +123,7 @@ get_icon_for_stream (GvcMixerStream *stream)
   if (gtk_icon_theme_has_icon (gtk_icon_theme_get_for_display (gdk_display_get_default ()), icon_name))
     return g_themed_icon_new_with_default_fallbacks (icon_name);
 
-  return g_themed_icon_new_with_default_fallbacks ("application-x-executable");
+  return icon;
 }
 
 CcStreamRow *
