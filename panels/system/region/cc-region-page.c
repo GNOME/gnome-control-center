@@ -878,6 +878,6 @@ cc_region_page_init (CcRegionPage *self)
         setup_language_section (self);
 
         needs_restart_file = get_needs_restart_file ();
-        if (g_file_query_exists (needs_restart_file, NULL))
+        if (g_file_query_exists (needs_restart_file, self->cancellable))
                 set_restart_notification_visible (self, NULL, TRUE);
 }
