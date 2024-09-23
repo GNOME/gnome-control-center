@@ -43,7 +43,7 @@ cc_secure_shell_get_enabled (AdwSwitchRow  *widget)
   /* disable the switch until the current state is known */
   gtk_widget_set_sensitive (GTK_WIDGET (widget), FALSE);
 
-  adw_switch_row_set_active (widget, cc_is_service_active (SSHD_SERVICE, G_BUS_TYPE_SYSTEM));
+  adw_switch_row_set_active (widget, cc_get_service_state (SSHD_SERVICE, G_BUS_TYPE_SYSTEM) == CC_SERVICE_STATE_ENABLED);
 
   gtk_widget_set_sensitive (GTK_WIDGET (widget), TRUE);
 }
