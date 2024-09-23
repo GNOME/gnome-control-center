@@ -23,6 +23,7 @@
 #include "cc-illustrated-row.h"
 
 #include "cc-mask-paintable.h"
+#include "cc-texture-utils.h"
 
 struct _CcIllustratedRow
 {
@@ -49,15 +50,21 @@ static GParamSpec *props[N_PROPS] = { NULL, };
 static void
 on_picture_leave_cb (CcIllustratedRow *self)
 {
-  gtk_media_stream_set_loop (self->media_stream, FALSE);
-  gtk_media_stream_pause (self->media_stream);
+  if (self->media_stream != NULL)
+    {
+      gtk_media_stream_set_loop (self->media_stream, FALSE);
+      gtk_media_stream_pause (self->media_stream);
+    }
 }
 
 static void
 on_picture_hover_cb (CcIllustratedRow *self)
 {
-  gtk_media_stream_set_loop (self->media_stream, TRUE);
-  gtk_media_stream_play (self->media_stream);
+  if (self->media_stream != NULL)
+    {
+      gtk_media_stream_set_loop (self->media_stream, TRUE);
+      gtk_media_stream_play (self->media_stream);
+    }
 }
 
 static void
@@ -147,6 +154,21 @@ cc_illustrated_row_class_init (CcIllustratedRowClass *klass)
 }
 
 static void
+reload_illustration (CcIllustratedRow *self)
+{
+  g_autoptr (GdkPaintable) paintable = NULL;
+  int scale;
+
+  if (self->media_stream != NULL)
+    return;
+
+  scale = gtk_widget_get_scale_factor (GTK_WIDGET (self));
+  paintable = cc_texture_new_from_resource_scaled (self->resource_path, scale);
+
+  cc_mask_paintable_set_paintable (self->picture_mask, paintable);
+}
+
+static void
 cc_illustrated_row_init (CcIllustratedRow *self)
 {
   AdwStyleManager *style_manager = adw_style_manager_get_default ();
@@ -163,6 +185,11 @@ cc_illustrated_row_init (CcIllustratedRow *self)
   g_signal_connect_object (style_manager, "notify::accent-color",
                            G_CALLBACK (update_mask_color), self,
                            G_CONNECT_SWAPPED);
+
+  g_signal_connect_swapped (self, "map",
+                            G_CALLBACK (reload_illustration), self);
+  g_signal_connect_swapped (self, "notify::scale-factor",
+                            G_CALLBACK (reload_illustration), self);
 }
 
 void
@@ -175,9 +202,15 @@ cc_illustrated_row_set_resource (CcIllustratedRow *self,
     g_clear_object (&self->media_stream);
 
   g_set_str (&self->resource_path, resource_path);
-  self->media_stream = gtk_media_file_new_for_resource (self->resource_path);
 
-  cc_mask_paintable_set_paintable (self->picture_mask, GDK_PAINTABLE (self->media_stream));
+  if (g_str_has_suffix (resource_path, ".svg"))
+    reload_illustration (self);
+  else
+    {
+      self->media_stream = gtk_media_file_new_for_resource (self->resource_path);
+      cc_mask_paintable_set_paintable (self->picture_mask, GDK_PAINTABLE (self->media_stream));
+    }
+
   gtk_widget_set_visible (GTK_WIDGET (self->picture_box),
                           self->resource_path != NULL &&
                           g_strcmp0 (self->resource_path, "") != 0);
