@@ -37,6 +37,7 @@
 
 #include "cc-list-row.h"
 #include "cc-mask-paintable.h"
+#include "cc-texture-utils.h"
 #include "cc-wacom-device.h"
 #include "cc-wacom-button-row.h"
 #include "cc-wacom-page.h"
@@ -698,14 +699,15 @@ cc_wacom_page_init (CcWacomPage *page)
 }
 
 static void
-set_icon_name (CcWacomPage *page,
-	       const char  *icon_name)
+update_icon (CcWacomPage *page)
 {
+	const char *icon_name = cc_wacom_device_get_icon_name (page->stylus);
 	g_autofree gchar *resource = NULL;
-	g_autoptr (GdkTexture) texture = NULL;
+	g_autoptr (GdkPaintable) texture = NULL;
+	int scale = gtk_widget_get_scale_factor (GTK_WIDGET (page));
 
 	resource = g_strdup_printf ("/org/gnome/control-center/wacom/%s.svg", icon_name);
-	texture = gdk_texture_new_from_resource (resource);
+	texture = cc_texture_new_from_resource_scaled (resource, scale);
 
 	cc_mask_paintable_set_paintable (page->tablet_paintable, GDK_PAINTABLE (texture));
 }
@@ -829,7 +831,10 @@ cc_wacom_page_new (CcWacomPanel  *panel,
 			 G_SETTINGS_BIND_DEFAULT);
 
 	/* Tablet icon */
-	set_icon_name (page, cc_wacom_device_get_icon_name (stylus));
+	g_signal_connect_swapped (page, "map",
+				  G_CALLBACK (update_icon), page);
+	g_signal_connect_swapped (page, "notify::scale-factor",
+				  G_CALLBACK (update_icon), page);
 
 	/* Listen to changes in related/paired pads */
 	page->manager = gsd_device_manager_get ();
