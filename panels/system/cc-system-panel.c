@@ -26,11 +26,11 @@
 #include "cc-list-row.h"
 #include "cc-system-panel.h"
 #include "cc-system-resources.h"
+#include "cc-systemd-service.h"
 
 #include "about/cc-about-page.h"
 #include "datetime/cc-datetime-page.h"
 #include "region/cc-region-page.h"
-#include "remote-desktop/cc-systemd-service.h"
 #include "remote-desktop/cc-remote-desktop-page.h"
 #include "secure-shell/cc-secure-shell-page.h"
 #include "users/cc-users-page.h"

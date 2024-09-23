@@ -22,6 +22,7 @@ i18n.merge_file(
 sources = files(
   'cc-password-utils.c',
   'cc-system-panel.c',
+  'cc-systemd-service.c',
   'about/cc-about-page.c',
   'about/cc-system-details-window.c',
   'about/cc-info-entry.c',
@@ -40,10 +41,8 @@ sources = files(
   'remote-desktop/cc-remote-desktop-page.c',
   'remote-desktop/cc-remote-login-page.c',
   'remote-desktop/cc-tls-certificate.c',
-  'remote-desktop/cc-systemd-service.c',
   'secure-shell/cc-secure-shell.c',
   'secure-shell/cc-secure-shell-page.c',
-  'secure-shell/cc-systemd-service.c',
   'users/cc-add-user-dialog.c',
   'users/cc-avatar-chooser.c',
   'users/cc-crop-area.c',
