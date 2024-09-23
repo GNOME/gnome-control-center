@@ -28,6 +28,7 @@
 #include "cc-wacom-stylus-page.h"
 #include "cc-wacom-stylus-action-dialog.h"
 #include "panels/common/cc-list-row.h"
+#include "panels/common/cc-mask-paintable.h"
 #include <gtk/gtk.h>
 
 #include <string.h>
@@ -38,7 +39,7 @@ struct _CcWacomStylusPage
 
 	CcWacomPanel   *panel;
 	GtkWidget      *stylus_section;
-	GtkWidget      *stylus_icon;
+	CcMaskPaintable *stylus_paintable;
 	GtkWidget      *stylus_button1_action_row;
 	GtkWidget      *stylus_button2_action_row;
 	GtkWidget      *stylus_button3_action_row;
@@ -227,6 +228,39 @@ on_stylus_button3_action_activated (CcWacomStylusPage *page)
 }
 
 static void
+update_mask_color (CcWacomStylusPage *page)
+{
+	AdwStyleManager *style_manager = adw_style_manager_get_default ();
+	GdkRGBA rgba;
+
+	if (page->highlighted) {
+		AdwAccentColor color = adw_style_manager_get_accent_color (style_manager);
+
+		adw_accent_color_to_rgba (color, &rgba);
+	} else {
+		gtk_widget_get_color (GTK_WIDGET (page), &rgba);
+
+		if (adw_style_manager_get_high_contrast (style_manager))
+			rgba.alpha *= 0.5;
+		else
+			rgba.alpha *= 0.2;
+	}
+
+	cc_mask_paintable_set_rgba (page->stylus_paintable, &rgba);
+}
+
+static void
+cc_wacom_stylus_page_css_changed (GtkWidget         *widget,
+                                  GtkCssStyleChange *change)
+{
+	CcWacomStylusPage *page = CC_WACOM_STYLUS_PAGE (widget);
+
+	GTK_WIDGET_CLASS (cc_wacom_stylus_page_parent_class)->css_changed (widget, change);
+
+	update_mask_color (page);
+}
+
+static void
 cc_wacom_stylus_page_class_init (CcWacomStylusPageClass *klass)
 {
 	GObjectClass *object_class = G_OBJECT_CLASS (klass);
@@ -235,12 +269,15 @@ cc_wacom_stylus_page_class_init (CcWacomStylusPageClass *klass)
 	object_class->get_property = cc_wacom_stylus_page_get_property;
 	object_class->set_property = cc_wacom_stylus_page_set_property;
 
+	widget_class->css_changed = cc_wacom_stylus_page_css_changed;
+
 	g_type_ensure (CC_TYPE_LIST_ROW);
+	g_type_ensure (CC_TYPE_MASK_PAINTABLE);
 
 	gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/wacom/cc-wacom-stylus-page.ui");
 
 	gtk_widget_class_bind_template_child (widget_class, CcWacomStylusPage, stylus_section);
-	gtk_widget_class_bind_template_child (widget_class, CcWacomStylusPage, stylus_icon);
+	gtk_widget_class_bind_template_child (widget_class, CcWacomStylusPage, stylus_paintable);
 	gtk_widget_class_bind_template_child (widget_class, CcWacomStylusPage, stylus_button1_action_row);
 	gtk_widget_class_bind_template_child (widget_class, CcWacomStylusPage, stylus_button2_action_row);
 	gtk_widget_class_bind_template_child (widget_class, CcWacomStylusPage, stylus_button3_action_row);
@@ -277,14 +314,15 @@ cc_wacom_stylus_page_init (CcWacomStylusPage *page)
 
 static void
 set_icon_name (CcWacomStylusPage *page,
-	       const char        *icon_name,
-	       gboolean           use_highlight)
+	       const char        *icon_name)
 {
 	g_autofree gchar *resource = NULL;
+	g_autoptr (GdkTexture) texture = NULL;
 
-	resource = g_strdup_printf ("/org/gnome/control-center/wacom/%s%s.svg",
-				    icon_name, use_highlight ? "-highlighted" : "");
-	gtk_picture_set_resource (GTK_PICTURE (page->stylus_icon), resource);
+	resource = g_strdup_printf ("/org/gnome/control-center/wacom/%s.svg", icon_name);
+	texture = gdk_texture_new_from_resource (resource);
+
+	cc_mask_paintable_set_paintable (page->stylus_paintable, GDK_PAINTABLE (texture));
 }
 
 static void
@@ -322,7 +360,7 @@ cc_wacom_stylus_page_new (CcWacomPanel *panel,
 					       cc_wacom_tool_get_description (stylus));
 
 	/* Icon */
-	set_icon_name (page, cc_wacom_tool_get_icon_name (stylus), FALSE);
+	set_icon_name (page, cc_wacom_tool_get_icon_name (stylus));
 
 	/* Settings */
 	page->stylus_settings = cc_wacom_tool_get_settings (stylus);
@@ -380,8 +418,8 @@ cc_wacom_stylus_page_set_highlight (CcWacomStylusPage *page,
 				    gboolean           highlight)
 {
 	if (page->highlighted != highlight) {
-		set_icon_name (page, cc_wacom_tool_get_icon_name (page->stylus), highlight);
 		page->highlighted = highlight;
+		update_mask_color (page);
 	}
 }
 
