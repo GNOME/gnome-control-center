@@ -51,8 +51,10 @@ sources = common_sources + files(
   'cc-time-editor.c',
   'cc-permission-infobar.c',
   'cc-split-row.c',
+  'cc-texture-utils.c',
   'cc-vertical-row.c',
-  'cc-util.c'
+  'cc-util.c',
+  'gtk-scaler.c'
 )
 
 deps = common_deps + [
