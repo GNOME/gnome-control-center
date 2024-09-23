@@ -6,9 +6,12 @@
     <child>
       <object class="AdwPreferencesGroup" id="stylus_section">
         <property name="header-suffix">
-          <object class="GtkPicture" id="stylus_icon">
+          <object class="GtkPicture">
             <property name="halign">end</property>
             <property name="valign">start</property>
+            <property name="paintable">
+              <object class="CcMaskPaintable" id="stylus_paintable"/>
+            </property>
           </object>
         </property>
         <child>

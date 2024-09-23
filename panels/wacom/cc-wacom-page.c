@@ -36,6 +36,7 @@
 #endif
 
 #include "cc-list-row.h"
+#include "cc-mask-paintable.h"
 #include "cc-wacom-device.h"
 #include "cc-wacom-button-row.h"
 #include "cc-wacom-page.h"
@@ -63,7 +64,7 @@ struct _CcWacomPage
 	GSettings      *wacom_settings;
 
 	GtkWidget      *tablet_section;
-	GtkWidget      *tablet_icon;
+	CcMaskPaintable *tablet_paintable;
 	GtkWidget      *tablet_display;
 	GtkWidget      *tablet_calibrate;
 	GtkWidget      *tablet_map_buttons;
@@ -485,6 +486,22 @@ on_display_selected (CcWacomPage *page)
 	gtk_widget_set_sensitive (page->tablet_calibrate, has_monitor (page));
 }
 
+static void
+update_mask_color (CcWacomPage *page)
+{
+	AdwStyleManager *style_manager = adw_style_manager_get_default ();
+	GdkRGBA rgba;
+
+	gtk_widget_get_color (GTK_WIDGET (page), &rgba);
+
+	if (adw_style_manager_get_high_contrast (style_manager))
+		rgba.alpha *= 0.5;
+	else
+		rgba.alpha *= 0.2;
+
+	cc_mask_paintable_set_rgba (page->tablet_paintable, &rgba);
+}
+
 /* Boilerplate code goes below */
 
 static void
@@ -531,6 +548,17 @@ cc_wacom_page_dispose (GObject *object)
 }
 
 static void
+cc_wacom_page_css_changed (GtkWidget         *widget,
+                           GtkCssStyleChange *change)
+{
+	CcWacomPage *page = CC_WACOM_PAGE (widget);
+
+	GTK_WIDGET_CLASS (cc_wacom_page_parent_class)->css_changed (widget, change);
+
+	update_mask_color (page);
+}
+
+static void
 cc_wacom_page_class_init (CcWacomPageClass *klass)
 {
 	GObjectClass *object_class = G_OBJECT_CLASS (klass);
@@ -540,12 +568,15 @@ cc_wacom_page_class_init (CcWacomPageClass *klass)
 	object_class->set_property = cc_wacom_page_set_property;
 	object_class->dispose = cc_wacom_page_dispose;
 
+	widget_class->css_changed = cc_wacom_page_css_changed;
+
 	g_type_ensure (CC_TYPE_LIST_ROW);
+	g_type_ensure (CC_TYPE_MASK_PAINTABLE);
 
 	gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/wacom/cc-wacom-page.ui");
 
 	gtk_widget_class_bind_template_child (widget_class, CcWacomPage, tablet_section);
-	gtk_widget_class_bind_template_child (widget_class, CcWacomPage, tablet_icon);
+	gtk_widget_class_bind_template_child (widget_class, CcWacomPage, tablet_paintable);
 	gtk_widget_class_bind_template_child (widget_class, CcWacomPage, tablet_display);
 	gtk_widget_class_bind_template_child (widget_class, CcWacomPage, tablet_calibrate);
 	gtk_widget_class_bind_template_child (widget_class, CcWacomPage, tablet_map_buttons);
@@ -668,13 +699,15 @@ cc_wacom_page_init (CcWacomPage *page)
 
 static void
 set_icon_name (CcWacomPage *page,
-	       GtkWidget   *widget,
 	       const char  *icon_name)
 {
 	g_autofree gchar *resource = NULL;
+	g_autoptr (GdkTexture) texture = NULL;
 
 	resource = g_strdup_printf ("/org/gnome/control-center/wacom/%s.svg", icon_name);
-	gtk_picture_set_resource (GTK_PICTURE (widget), resource);
+	texture = gdk_texture_new_from_resource (resource);
+
+	cc_mask_paintable_set_paintable (page->tablet_paintable, GDK_PAINTABLE (texture));
 }
 
 static void
@@ -796,7 +829,7 @@ cc_wacom_page_new (CcWacomPanel  *panel,
 			 G_SETTINGS_BIND_DEFAULT);
 
 	/* Tablet icon */
-	set_icon_name (page, page->tablet_icon, cc_wacom_device_get_icon_name (stylus));
+	set_icon_name (page, cc_wacom_device_get_icon_name (stylus));
 
 	/* Listen to changes in related/paired pads */
 	page->manager = gsd_device_manager_get ();
