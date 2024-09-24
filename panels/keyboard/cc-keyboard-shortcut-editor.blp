@@ -98,7 +98,9 @@ template $CcKeyboardShortcutEditor: Adw.Dialog {
 
           Label {
             wrap: true;
-            label: _("Press Esc to cancel or Backspace to disable the keyboard shortcut");
+            use-markup: true;
+            /* Translators: Do not break or remove the <b> and </b> tags around Esc and Backspace. */
+            label: _("Press <b>Esc</b> to cancel or <b>Backspace</b> to disable the keyboard shortcut");
 
             styles [
               "dim-label",
