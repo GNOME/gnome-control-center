@@ -23,6 +23,7 @@
 #include <glib/gi18n.h>
 
 #include "cc-hostname.h"
+#include "cc-nm-helper.h"
 #include "cc-list-row.h"
 #include "cc-secure-shell.h"
 #include "cc-secure-shell-page.h"
@@ -91,7 +92,7 @@ cc_secure_shell_page_class_init (CcSecureShellPageClass * klass)
 static void
 cc_secure_shell_page_init (CcSecureShellPage *self)
 {
-  g_autofree gchar *hostname = NULL;
+  g_autofree gchar *address = NULL;
   g_autofree gchar *command = NULL;
 
   gtk_widget_init_template (GTK_WIDGET (self));
@@ -105,7 +106,10 @@ cc_secure_shell_page_init (CcSecureShellPage *self)
                            self,
                            G_CONNECT_SWAPPED);
 
-  hostname = cc_hostname_get_display_hostname (cc_hostname_get_default ());
-  command = g_strdup_printf ("ssh %s", hostname);
+  address = cc_get_ipv4_address ();
+  if (!address)
+    address = cc_hostname_get_display_hostname (cc_hostname_get_default ());
+
+  command = g_strdup_printf ("ssh %s", address);
   adw_action_row_set_subtitle (self->hostname_row, command);
 }
