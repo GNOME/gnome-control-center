@@ -26,6 +26,7 @@
 #include "shell/cc-log.h"
 #include "cc-list-row-info-button.h"
 #include "cc-hostname.h"
+#include "cc-nm-helper.h"
 
 #include "cc-sharing-resources.h"
 #include "file-share-properties.h"
@@ -529,6 +530,22 @@ cc_sharing_panel_setup_label_with_hostname (CcSharingPanel *self,
 }
 
 static gboolean
+setup_address_with_ip (CcSharingPanel *self)
+{
+  g_autofree gchar *dav_address = NULL;
+  const gchar *ip_address;
+
+  ip_address = cc_get_ipv4_address ();
+  if (!ip_address)
+    return FALSE;
+
+  dav_address = g_strdup_printf ("dav://%s", ip_address);
+  adw_action_row_set_subtitle (self->personal_file_sharing_address_row, dav_address);
+
+  return TRUE;
+}
+
+static gboolean
 file_sharing_get_require_password (GValue   *value,
                                    GVariant *variant,
                                    gpointer  user_data)
@@ -657,7 +674,8 @@ sharing_proxy_ready (GObject      *source,
   else
     gtk_widget_set_visible (self->personal_file_sharing_row, FALSE);
 
-  cc_sharing_panel_setup_label_with_hostname (self, self->personal_file_sharing_page);
+  if (!setup_address_with_ip (self))
+    cc_sharing_panel_setup_label_with_hostname (self, self->personal_file_sharing_page);
 }
 
 static void
