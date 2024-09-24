@@ -24,6 +24,7 @@
 #include "cc-encryption-fingerprint-dialog.h"
 #include "cc-gnome-remote-desktop.h"
 #include "cc-hostname.h"
+#include "cc-nm-helper.h"
 #include "cc-password-utils.h"
 #include "cc-list-row.h"
 #include "cc-tls-certificate.h"
@@ -394,12 +395,15 @@ setup_desktop_sharing_page (CcDesktopSharingPage *self)
 {
   const gchar *username = NULL;
   const gchar *password = NULL;
-  g_autofree char *hostname = NULL;
+  g_autofree char *address = NULL;
 
   self->rdp_settings = g_settings_new (GNOME_REMOTE_DESKTOP_RDP_SCHEMA_ID);
 
-  hostname = get_hostname ();
-  adw_action_row_set_subtitle (self->hostname_row, hostname);
+  address = cc_get_ipv4_address ();
+  if (!address)
+    address = get_hostname ();
+
+  adw_action_row_set_subtitle (self->hostname_row, address);
 
   username = cc_grd_lookup_rdp_username (self->cancellable);
   password = cc_grd_lookup_rdp_password (self->cancellable);

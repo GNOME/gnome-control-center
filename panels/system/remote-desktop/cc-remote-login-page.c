@@ -29,6 +29,7 @@
 #include "cc-remote-login-page.h"
 #include "cc-encryption-fingerprint-dialog.h"
 #include "cc-hostname.h"
+#include "cc-nm-helper.h"
 #include "cc-password-utils.h"
 #include "cc-permission-infobar.h"
 #include "cc-tls-certificate.h"
@@ -685,14 +686,17 @@ cc_remote_login_page_init (CcRemoteLoginPage *self)
   g_autoptr(GtkCssProvider) provider = NULL;
   g_autoptr(GVariant) credentials = NULL;
   g_autoptr(GError) error = NULL;
-  g_autofree gchar *hostname = NULL;
+  g_autofree gchar *address = NULL;
 
   gtk_widget_init_template (GTK_WIDGET (self));
 
   self->cancellable = g_cancellable_new ();
 
-  hostname = cc_hostname_get_display_hostname (cc_hostname_get_default ());
-  adw_action_row_set_subtitle (self->hostname_row, hostname);
+  address = cc_get_ipv4_address ();
+  if (!address)
+    address = cc_hostname_get_display_hostname (cc_hostname_get_default ());
+
+  adw_action_row_set_subtitle (self->hostname_row, address);
 
   g_signal_connect_swapped (self->username_entry, "notify::text",
                             G_CALLBACK (on_credentials_changed),
