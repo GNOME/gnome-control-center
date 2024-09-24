@@ -71,7 +71,7 @@ struct _CcNetworkPanel
 
         /* widgets */
         AdwViewStack     *stack;
-        AdwPreferencesGroup *device_list;
+        GtkListBox       *device_list;
         GtkWidget        *box_bluetooth;
         GtkWidget        *proxy_row;
         GtkWidget        *save_button;
@@ -442,7 +442,7 @@ panel_add_device (CcNetworkPanel *self, NMDevice *device)
 
                         g_ptr_array_add (self->ethernet_devices, device_ethernet);
                         g_hash_table_insert (self->nm_device_to_device, device, device_ethernet);
-                        adw_preferences_group_add (self->device_list, device_ethernet);
+                        gtk_list_box_append (self->device_list, device_ethernet);
                         g_debug ("Adding wired connection %s for device %s", nm_connection_get_id (connection), nm_device_get_udi (device));
                 }
 
@@ -452,7 +452,7 @@ panel_add_device (CcNetworkPanel *self, NMDevice *device)
 
                         g_ptr_array_add (self->ethernet_devices, device_ethernet);
                         g_hash_table_insert (self->nm_device_to_device, device, device_ethernet);
-                        adw_preferences_group_add (self->device_list, device_ethernet);
+                        gtk_list_box_append (self->device_list, device_ethernet);
 
                         panel_refresh_device_titles (self);
                 }
@@ -478,9 +478,9 @@ panel_add_device (CcNetworkPanel *self, NMDevice *device)
 
                 g_signal_connect_swapped (G_OBJECT (device_mobile), "activated",
                                           G_CALLBACK (on_wwan_row_activated), self);
-                adw_preferences_group_add (self->device_list, GTK_WIDGET (device_mobile));
                 g_ptr_array_add (self->mobile_devices, device_mobile);
                 g_hash_table_insert (self->nm_device_to_device, device, device_mobile);
+                gtk_list_box_append (self->device_list, GTK_WIDGET (device_mobile));
                 break;
         case NM_DEVICE_TYPE_BT:
                 device_bluetooth = net_device_bluetooth_new (self->client, device);
@@ -491,7 +491,7 @@ panel_add_device (CcNetworkPanel *self, NMDevice *device)
 
                 g_ptr_array_add (self->bluetooth_devices, device_bluetooth);
                 g_hash_table_insert (self->nm_device_to_device, device, device_bluetooth);
-                adw_preferences_group_add (ADW_PREFERENCES_GROUP (self->device_list), GTK_WIDGET (device_bluetooth));
+                gtk_list_box_append (self->device_list, GTK_WIDGET (device_bluetooth));
 
                 break;
          /* For Wi-Fi and VPN we handle connections separately; we correctly manage
@@ -506,7 +506,7 @@ panel_add_device (CcNetworkPanel *self, NMDevice *device)
 
                 g_ptr_array_add (self->wifi_devices, device_wifi);
                 g_hash_table_insert (self->nm_device_to_device, device, device_wifi);
-                adw_preferences_group_add (ADW_PREFERENCES_GROUP (self->device_list), GTK_WIDGET (device_wifi));
+                gtk_list_box_append (self->device_list, GTK_WIDGET (device_wifi));
                 break;
         case NM_DEVICE_TYPE_TUN:
         /* And the rest we simply cannot deal with currently. */
@@ -530,7 +530,7 @@ panel_remove_device (CcNetworkPanel *self, NMDevice *device)
         g_ptr_array_remove (self->wifi_devices, net_device);
         g_hash_table_remove (self->nm_device_to_device, device);
 
-        adw_preferences_group_remove (self->device_list, net_device);
+        gtk_list_box_remove (self->device_list, net_device);
 }
 
 static void
@@ -778,6 +778,31 @@ setup_modem_manager_client (CcNetworkPanel *self)
         self->modem_manager = cc_object_storage_get_object ("CcObjectStorage::mm-manager");
 }
 
+static gint
+sort_device_rows (GtkListBoxRow *a,
+                  GtkListBoxRow *b,
+                  gpointer       user_data)
+{
+        /* We want the order to be wifi, mobile (modem), ethernet, and finally bluetooth adapters. */
+        if (NET_IS_DEVICE_BLUETOOTH (a))
+                return 1;
+        if (NET_IS_DEVICE_BLUETOOTH (b))
+                return -1;
+
+        if (NET_IS_DEVICE_ETHERNET (a))
+                return 1;
+        if (NET_IS_DEVICE_ETHERNET (b))
+                return -1;
+
+        if (NET_IS_DEVICE_MOBILE (a))
+                return 1;
+        if (NET_IS_DEVICE_MOBILE (b))
+                return -1;
+
+
+        return 0;
+}
+
 static void
 cc_network_panel_map (GtkWidget *widget)
 {
@@ -835,6 +860,8 @@ cc_network_panel_init (CcNetworkPanel *self)
         self->mobile_devices = g_ptr_array_new ();
         self->wifi_devices = g_ptr_array_new ();
         self->nm_device_to_device = g_hash_table_new (g_direct_hash, g_direct_equal);
+
+        gtk_list_box_set_sort_func (self->device_list, sort_device_rows, self, NULL);
 
         /* Create and store a NMClient instance if it doesn't exist yet */
         if (!cc_object_storage_has_object (CC_OBJECT_NMCLIENT)) {
