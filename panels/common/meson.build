@@ -48,6 +48,7 @@ sources = common_sources + files(
   'cc-list-row.c',
   'cc-list-row-info-button.c',
   'cc-mask-paintable.c',
+  'cc-nm-helper.c',
   'cc-time-editor.c',
   'cc-permission-infobar.c',
   'cc-split-row.c',
@@ -58,7 +59,8 @@ sources = common_sources + files(
 deps = common_deps + [
   generates_sources_dep,
   gnome_desktop_dep,
-  dependency('fontconfig')
+  dependency('fontconfig'),
+  network_manager_deps,
 ]
 
 liblanguage = static_library(
