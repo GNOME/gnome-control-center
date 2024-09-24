@@ -89,10 +89,72 @@ enum {
 };
 
 static GParamSpec *props [N_PROPS];
+static GMutex thread_mutex;
+static GQueue thread_queue;
+static GThread *thread;
 
 static void     cc_background_item_finalize       (GObject               *object);
 
 G_DEFINE_TYPE (CcBackgroundItem, cc_background_item, G_TYPE_OBJECT)
+
+typedef struct
+{
+  GList link;
+  GTask *task;
+  GTaskThreadFunc func;
+} RunInThread;
+
+static gpointer
+run_in_thread_worker (gpointer data)
+{
+        gboolean exiting = FALSE;
+
+        while (!exiting) {
+                RunInThread *state;
+
+                g_mutex_lock (&thread_mutex);
+                if ((state = g_queue_peek_head (&thread_queue))) {
+                        g_queue_unlink (&thread_queue, &state->link);
+                } else {
+                        exiting = TRUE;
+                        thread = NULL;
+                }
+
+                g_mutex_unlock (&thread_mutex);
+
+                if (state != NULL) {
+                        state->func (state->task,
+                                     g_task_get_source_object (state->task),
+                                     g_task_get_task_data (state->task),
+                                     g_task_get_cancellable (state->task));
+                        g_clear_object (&state->task);
+                        g_free (state);
+                }
+        }
+
+        return NULL;
+}
+
+static void
+run_in_thread (GTask           *task,
+               GTaskThreadFunc  func)
+{
+        RunInThread *state;
+
+        g_assert (G_IS_TASK (task));
+        g_assert (func != NULL);
+
+        state = g_new0 (RunInThread, 1);
+        state->link.data = state;
+        state->task = g_object_ref (task);
+        state->func = func;
+
+        g_mutex_lock (&thread_mutex);
+        g_queue_push_head_link (&thread_queue, &state->link);
+        if (thread == NULL)
+                thread = g_thread_new ("[cc-background-item]", run_in_thread_worker, NULL);
+        g_mutex_unlock (&thread_mutex);
+}
 
 static GnomeBG *
 item_to_gnome_bg (CcBackgroundItem *item,
@@ -289,7 +351,14 @@ cc_background_item_get_thumbnail_async (CcBackgroundItem             *item,
         state->dark = !!dark;
         state->bg = item_to_gnome_bg (item, dark);
 
-        g_task_run_in_thread (task, cc_background_item_get_thumbnail_worker);
+        /* g_task_run_in_thread() will use a threadpool which may jump the
+         * number of parallel workers to around 10. On low-memory systems, that
+         * could cause excessive memory use to the point of paging.
+         *
+         * What we really want is non-blocking more than massive concurrency,
+         * so use a single worker thread but retain GTask usage.
+         */
+        run_in_thread (task, cc_background_item_get_thumbnail_worker);
 }
 
 GdkPixbuf *
