@@ -88,8 +88,7 @@ struct _CcDateTimePage
   CcListRow *datetime_row;
   AdwDialog *datetime_dialog;
   AdwSpinRow *day_spin_row;
-  GtkToggleButton *twentyfour_format_button;
-  GtkToggleButton *ampm_format_button;
+  AdwToggleGroup *time_format_toggle_group;
   GtkSpinButton *h_spinbutton;
   AdwSwitchRow *weekday_row;
   AdwSwitchRow *date_row;
@@ -161,17 +160,17 @@ static void clock_settings_changed_cb (CcDateTimePage *self,
                                        gchar          *key);
 
 static void
-change_clock_settings (CcDateTimePage *self)
+change_clock_settings_cb (CcDateTimePage *self)
 {
   GDesktopClockFormat value;
 
   g_signal_handlers_block_by_func (self->clock_settings, clock_settings_changed_cb,
                                    self);
 
-  if (gtk_toggle_button_get_active (self->twentyfour_format_button))
-    value = G_DESKTOP_CLOCK_FORMAT_24H;
-  else
+  if (adw_toggle_group_get_active (self->time_format_toggle_group))
     value = G_DESKTOP_CLOCK_FORMAT_12H;
+  else
+    value = G_DESKTOP_CLOCK_FORMAT_24H;
 
   g_settings_set_enum (self->clock_settings, CLOCK_FORMAT_KEY, value);
   g_settings_set_enum (self->filechooser_settings, CLOCK_FORMAT_KEY, value);
@@ -192,19 +191,18 @@ clock_settings_changed_cb (CcDateTimePage *self,
   value = g_settings_get_enum (self->clock_settings, CLOCK_FORMAT_KEY);
   self->clock_format = value;
 
-  g_signal_handlers_block_by_func (self->ampm_format_button, change_clock_settings, self);
-  g_signal_handlers_block_by_func (self->twentyfour_format_button, change_clock_settings, self);
+  g_signal_handlers_block_by_func (self->time_format_toggle_group, change_clock_settings_cb, self);
 
-  gtk_toggle_button_set_active (self->twentyfour_format_button,
-                                value == G_DESKTOP_CLOCK_FORMAT_24H);
-  gtk_toggle_button_set_active (self->ampm_format_button,
-                                value == G_DESKTOP_CLOCK_FORMAT_12H);
+  if (value == G_DESKTOP_CLOCK_FORMAT_24H)
+    adw_toggle_group_set_active (self->time_format_toggle_group, 0);
+  if (value == G_DESKTOP_CLOCK_FORMAT_12H)
+    adw_toggle_group_set_active (self->time_format_toggle_group, 1);
+
   cc_time_editor_set_am_pm (self->time_editor,
                             value == G_DESKTOP_CLOCK_FORMAT_12H);
   update_time (self);
 
-  g_signal_handlers_unblock_by_func (self->twentyfour_format_button, change_clock_settings, self);
-  g_signal_handlers_unblock_by_func (self->ampm_format_button, change_clock_settings, self);
+  g_signal_handlers_unblock_by_func (self->time_format_toggle_group, change_clock_settings_cb, self);
 }
 
 static void on_month_selection_changed_cb (CcDateTimePage *self);
@@ -820,8 +818,7 @@ cc_date_time_page_class_init (CcDateTimePageClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePage, datetime_row);
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePage, datetime_dialog);
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePage, day_spin_row);
-  gtk_widget_class_bind_template_child (widget_class, CcDateTimePage, twentyfour_format_button);
-  gtk_widget_class_bind_template_child (widget_class, CcDateTimePage, ampm_format_button);
+  gtk_widget_class_bind_template_child (widget_class, CcDateTimePage, time_format_toggle_group);
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePage, weekday_row);
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePage, date_row);
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePage, seconds_row);
@@ -838,7 +835,7 @@ cc_date_time_page_class_init (CcDateTimePageClass *klass)
 
   gtk_widget_class_bind_template_callback (widget_class, panel_tz_selection_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, list_box_row_activated);
-  gtk_widget_class_bind_template_callback (widget_class, change_clock_settings);
+  gtk_widget_class_bind_template_callback (widget_class, change_clock_settings_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_date_box_row_activated_cb);
 
   bind_textdomain_codeset (GETTEXT_PACKAGE_TIMEZONES, "UTF-8");

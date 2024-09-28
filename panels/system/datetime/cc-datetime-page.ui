@@ -167,25 +167,20 @@
                     <property name="title" translatable="yes">Time _Format</property>
                     <property name="use_underline">True</property>
                     <child type="suffix">
-                      <object class="GtkBox">
+                      <object class="AdwToggleGroup" id="time_format_toggle_group">
                         <property name="valign">center</property>
                         <property name="homogeneous">True</property>
-                        <style>
-                          <class name="linked"/>
-                        </style>
+                        <signal name="notify::active" handler="change_clock_settings_cb" object="CcDateTimePage" swapped="yes"/>
                         <child>
-                          <object class="GtkToggleButton" id="twentyfour_format_button">
+                          <object class="AdwToggle">
                             <property name="label" translatable="yes">_24-hour</property>
                             <property name="use-underline">True</property>
-                            <property name="group">ampm_format_button</property>
-                            <signal name="toggled" handler="change_clock_settings" object="CcDateTimePage" swapped="yes"/>
                           </object>
                         </child>
                         <child>
-                          <object class="GtkToggleButton" id="ampm_format_button">
+                          <object class="AdwToggle">
                             <property name="label" translatable="yes">AM / _PM</property>
                             <property name="use-underline">True</property>
-                            <signal name="toggled" handler="change_clock_settings" object="CcDateTimePage" swapped="yes"/>
                           </object>
                         </child>
                       </object>
