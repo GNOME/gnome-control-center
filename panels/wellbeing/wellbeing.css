@@ -5,61 +5,74 @@
 
 /* Screen time statistics */
 row.screen-time-statistics-row box.main-box {
-  margin: 6px 12px 6px 12px;
+  margin: 12px 16px 12px 16px;
+}
+
+row.screen-time-statistics-row .primary-label,
+row.screen-time-statistics-row .primary-value {
+  color: var(--view-fg-color);
 }
 
 row.screen-time-statistics-row .primary-label {
-  font-weight: bold;
+  font-size: 100%;
 }
 
 row.screen-time-statistics-row .primary-value {
-  font-size: 2em;
+  font-weight: 800;
+  font-size: 181%;
+  margin-top: 6px;
+  margin-left: -2px; /* offset the label to account for misalignment illusion with large font */
 }
 
 row.screen-time-statistics-row .secondary-label {
-  color: grey; /* TODO */
+  margin-top: 6px;
+  margin-bottom: 2px;
+  font-size: 82%;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--view-fg-color) var(--dim-opacity), transparent);
 }
 
 row.screen-time-statistics-row .secondary-value {
-  font-weight: bold;
+  color: var(--view-fg-color);
 }
 
 /* Bar chart */
 bar-chart bar-group {
-  padding: 0 5px;
+  padding: 0 6px;
 }
 
 bar-chart bar-group:hover {
-  background-color: grey; /* TODO */
+  background-color: color-mix(in srgb, currentColor 7%, transparent);  /* equivalent to $hover_color from libadwaita */
 }
 
 bar-chart bar {
   border-radius: 5px 5px 0 0;
-  background-color: #62a0ea;
+  background-color: color-mix(in srgb, var(--accent-bg-color) 27%, transparent);
 }
 
 bar-chart bar:selected {
-  background-color: #1a5fb4;
+  background-color: var(--accent-bg-color);
 }
 
 bar-chart bar-group:focus-within {
-  transition-property: outline, outline-width, outline-offset, outline-color;
+  transition-property: outline-style, outline-width, outline-offset, outline-color;
   transition-duration: 300ms;
   animation-timing-function: ease-in-out;
 
-  outline-color: red; /* TODO, and dark/HC variants */
+  outline-style: solid;
+  outline-color: color-mix(in srgb, var(--accent-color) 50%, transparent);  /* equivalent to $focus_border_color from libadwaita */
   outline-width: 2px;
   outline-offset: -2px;
-
-  background-color: red; /* TODO */
 }
 
+/* Chart labels */
 label.continuous-axis-label {
-  color: grey; /* TODO */
-  margin: 0 10px;
+  color: color-mix(in srgb, var(--view-fg-color) var(--dim-opacity), transparent);
+  margin: 0 6px;
+  font-size: 82%;
 }
 
 label.discrete-axis-label {
-  margin-top: 10px;
+  margin-top: 6px;
 }
 

@@ -21,6 +21,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+#include <adwaita.h>
 #include <glib.h>
 #include <glib-object.h>
 #include <gsk/gsk.h>
@@ -552,12 +553,18 @@ cc_bar_chart_finalize (GObject *object)
 /* Various constants defining the widget appearance. These can’t be moved into
  * CSS yet as GTK doesn’t expose enough of the CSS parsing machinery. */
 static const unsigned int GRID_LINE_WIDTH = 1;
-static const GdkRGBA GRID_LINE_COLOR = { .red = 0.957, .green = 0.961, .blue = 0.969, .alpha = 1.0 };
+static const GdkRGBA GRID_LINE_COLOR = { .red = 0, .green = 0, .blue = 0, .alpha = 0.15 };
+static const GdkRGBA GRID_LINE_COLOR_DARK = { .red = 1, .green = 1, .blue = 1, .alpha = 0.15 };
+static const GdkRGBA GRID_LINE_COLOR_HC = { .red = 0, .green = 0, .blue = 0, .alpha = 0.5 };
+static const GdkRGBA GRID_LINE_COLOR_HC_DARK = { .red = 1, .green = 1, .blue = 1, .alpha = 0.5 };
 static const unsigned int MINIMUM_CHART_HEIGHT = 120;
 static const unsigned int NATURAL_CHART_HEIGHT = 300;
 static const unsigned int OVERLAY_LINE_WIDTH = 2;
-static const float OVERLAY_LINE_DASH[] = { 6, 5 };
-static const GdkRGBA OVERLAY_LINE_COLOR = { .red = 0.110, .green = 0.443, .blue = 0.847, .alpha = 1.0 };
+static const float OVERLAY_LINE_DASH[] = { 8, 6 };
+static const GdkRGBA OVERLAY_LINE_COLOR = { .red = 0, .green = 0, .blue = 0, .alpha = 0.5 };
+static const GdkRGBA OVERLAY_LINE_COLOR_DARK = { .red = 1, .green = 1, .blue = 1, .alpha = 0.5 };
+static const GdkRGBA OVERLAY_LINE_COLOR_HC = { .red = 0, .green = 0, .blue = 0, .alpha = 0.8 };
+static const GdkRGBA OVERLAY_LINE_COLOR_HC_DARK = { .red = 1, .green = 1, .blue = 1, .alpha = 0.8 };
 static const double GROUP_TO_SPACE_WIDTH_FILL_RATIO = 0.8;  /* proportion of additional width which gets allocated to bar groups, rather than the space between them */
 
 static void
@@ -863,10 +870,13 @@ cc_bar_chart_snapshot (GtkWidget   *widget,
   CcBarChart *self = CC_BAR_CHART (widget);
   const int width = gtk_widget_get_width (widget);
   int left_axis_area_width, right_axis_area_width;
+  AdwStyleManager *style_manager;
 
   /* Empty state. */
   if (self->n_data == 0)
     return;
+
+  style_manager = adw_style_manager_get_for_display (gtk_widget_get_display (widget));
 
   calculate_axis_area_widths (self, &left_axis_area_width, &right_axis_area_width);
 
@@ -877,6 +887,7 @@ cc_bar_chart_snapshot (GtkWidget   *widget,
       g_autoptr(GskPathBuilder) grid_line_builder = gsk_path_builder_new ();
       g_autoptr(GskPath) grid_line_path = NULL;
       GskStroke *grid_line_stroke = NULL;
+      const GdkRGBA *grid_line_color;
 
       grid_line_stroke = gsk_stroke_new (GRID_LINE_WIDTH);
 
@@ -892,7 +903,17 @@ cc_bar_chart_snapshot (GtkWidget   *widget,
         }
 
       grid_line_path = gsk_path_builder_free_to_path (g_steal_pointer (&grid_line_builder));
-      gtk_snapshot_append_stroke (snapshot, grid_line_path, grid_line_stroke, &GRID_LINE_COLOR);
+
+      if (adw_style_manager_get_dark (style_manager) && adw_style_manager_get_high_contrast (style_manager))
+        grid_line_color = &GRID_LINE_COLOR_HC_DARK;
+      else if (adw_style_manager_get_dark (style_manager))
+        grid_line_color = &GRID_LINE_COLOR_DARK;
+      else if (adw_style_manager_get_high_contrast (style_manager))
+        grid_line_color = &GRID_LINE_COLOR_HC;
+      else
+        grid_line_color = &GRID_LINE_COLOR;
+
+      gtk_snapshot_append_stroke (snapshot, grid_line_path, grid_line_stroke, grid_line_color);
 
       gsk_stroke_free (g_steal_pointer (&grid_line_stroke));
     }
@@ -918,6 +939,7 @@ cc_bar_chart_snapshot (GtkWidget   *widget,
       g_autoptr(GskPath) overlay_path = NULL;
       GskStroke *overlay_stroke = NULL;
       int overlay_y;
+      const GdkRGBA *overlay_line_color;
 
       overlay_stroke = gsk_stroke_new (OVERLAY_LINE_WIDTH);
       gsk_stroke_set_line_cap (overlay_stroke, GSK_LINE_CAP_SQUARE);
@@ -930,7 +952,17 @@ cc_bar_chart_snapshot (GtkWidget   *widget,
                                 overlay_y);
 
       overlay_path = gsk_path_builder_free_to_path (g_steal_pointer (&overlay_builder));
-      gtk_snapshot_append_stroke (snapshot, overlay_path, overlay_stroke, &OVERLAY_LINE_COLOR);
+
+      if (adw_style_manager_get_dark (style_manager) && adw_style_manager_get_high_contrast (style_manager))
+        overlay_line_color = &OVERLAY_LINE_COLOR_HC_DARK;
+      else if (adw_style_manager_get_dark (style_manager))
+        overlay_line_color = &OVERLAY_LINE_COLOR_DARK;
+      else if (adw_style_manager_get_high_contrast (style_manager))
+        overlay_line_color = &OVERLAY_LINE_COLOR_HC;
+      else
+        overlay_line_color = &OVERLAY_LINE_COLOR;
+
+      gtk_snapshot_append_stroke (snapshot, overlay_path, overlay_stroke, overlay_line_color);
 
       gsk_stroke_free (g_steal_pointer (&overlay_stroke));
     }

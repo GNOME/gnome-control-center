@@ -1,0 +1,16 @@
+/*
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ * SPDX-FileCopyrightText: 2024 GNOME Foundation, Inc.
+ */
+
+bar-chart bar-group:hover {
+  background-color: color-mix(in srgb, currentColor 7%, transparent);  /* equivalent to $hover_color from libadwaita */
+}
+
+bar-chart bar {
+  background-color: color-mix(in srgb, var(--accent-color) 38%, transparent);
+}
+
+bar-chart bar:selected {
+  background-color: var(--accent-bg-color);
+}
