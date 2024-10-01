@@ -231,7 +231,7 @@ icc_prefs_imported_cb (GObject      *source,
   if (file == NULL)
     {
       g_warning ("Failed to get ICC file: %s", error->message);
-      gtk_widget_set_visible (GTK_WIDGET (self->dialog_assign), FALSE);
+      adw_dialog_close (ADW_DIALOG (self->dialog_assign));
       return;
     }
 
@@ -255,13 +255,13 @@ static void
 gcm_prefs_file_chooser_get_icc_profile (CcColorPanel *self)
 {
   g_autoptr(GFile) current_folder = NULL;
-  GtkWindow *window;
+  GtkWindow *toplevel;
   GtkFileDialog *dialog;
   GtkFileFilter *filter;
   GListStore *filters;
 
   /* create new dialog */
-  window = GTK_WINDOW (self->dialog_assign);
+  toplevel = GTK_WINDOW (gtk_widget_get_root (GTK_WIDGET (self)));
   dialog = gtk_file_dialog_new ();
   /* TRANSLATORS: an ICC profile is a file containing colorspace data */
   gtk_file_dialog_set_title (dialog, _("Select ICC Profile File"));
@@ -289,7 +289,7 @@ gcm_prefs_file_chooser_get_icc_profile (CcColorPanel *self)
   gtk_file_filter_set_name (filter, _("All files"));
   g_list_store_append (filters, filter);
 
-  gtk_file_dialog_open (dialog, window, NULL,
+  gtk_file_dialog_open (dialog, toplevel, NULL,
                         icc_prefs_imported_cb, self);
 }
 
@@ -886,10 +886,7 @@ gcm_prefs_profile_add_cb (CcColorPanel *self)
   gtk_widget_set_sensitive (self->button_assign_ok, FALSE);
 
   /* show the dialog */
-  gtk_window_set_transient_for (GTK_WINDOW (self->dialog_assign),
-                                GTK_WINDOW (gtk_widget_get_native (GTK_WIDGET (self))));
-
-  gtk_window_present (GTK_WINDOW (self->dialog_assign));
+  adw_dialog_present (ADW_DIALOG (self->dialog_assign), GTK_WIDGET (self));
 }
 
 static void
@@ -1062,7 +1059,7 @@ gcm_prefs_button_assign_ok_cb (CcColorPanel *self)
   GtkTreeSelection *selection;
 
   /* hide window */
-  gtk_window_close (GTK_WINDOW (self->dialog_assign));
+  adw_dialog_close (ADW_DIALOG (self->dialog_assign));
 
   /* get the selected profile */
   selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (self->treeview_assign));
@@ -1862,7 +1859,7 @@ cc_color_panel_dispose (GObject *object)
   g_clear_pointer (&self->list_box_filter, g_free);
 
   if (self->dialog_assign != NULL) {
-    gtk_window_destroy (GTK_WINDOW (self->dialog_assign));
+    adw_dialog_close (ADW_DIALOG (self->dialog_assign));
     self->dialog_assign = NULL;
   }
 
