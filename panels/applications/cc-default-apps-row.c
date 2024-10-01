@@ -124,6 +124,7 @@ cc_default_apps_row_constructed (GObject *object)
       GtkWidget *no_apps_label;
 
       no_apps_label = gtk_label_new (_("No Apps Available"));
+      gtk_widget_add_css_class (no_apps_label, "dim-label");
       adw_action_row_add_suffix (ADW_ACTION_ROW (self), no_apps_label);
     }
 
