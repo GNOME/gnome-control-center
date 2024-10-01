@@ -1356,6 +1356,8 @@ cc_fingerprint_dialog_constructed (GObject *object)
 {
   CcFingerprintDialog *self = CC_FINGERPRINT_DIALOG (object);
 
+  G_OBJECT_CLASS (cc_fingerprint_dialog_parent_class)->constructed (object);
+
   bindtextdomain ("fprintd", GNOMELOCALEDIR);
   bind_textdomain_codeset ("fprintd", "UTF-8");
 
@@ -1515,4 +1517,4 @@ cc_fingerprint_dialog_class_init (CcFingerprintDialogClass *klass)
   gtk_widget_class_bind_template_callback (widget_class, done_button_clicked_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_print_activated_cb);
   gtk_widget_class_bind_template_callback (widget_class, select_device_row);
-}
+  }
