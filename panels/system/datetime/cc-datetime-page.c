@@ -163,14 +163,17 @@ static void
 change_clock_settings_cb (CcDateTimePage *self)
 {
   GDesktopClockFormat value;
+  const char *active_name;
 
   g_signal_handlers_block_by_func (self->clock_settings, clock_settings_changed_cb,
                                    self);
 
-  if (adw_toggle_group_get_active (self->time_format_toggle_group))
-    value = G_DESKTOP_CLOCK_FORMAT_12H;
-  else
+  active_name = adw_toggle_group_get_active_name (self->time_format_toggle_group);
+
+  if (g_str_equal (active_name, "twenty-four"))
     value = G_DESKTOP_CLOCK_FORMAT_24H;
+  if (g_str_equal (active_name, "am-pm"))
+    value = G_DESKTOP_CLOCK_FORMAT_12H;
 
   g_settings_set_enum (self->clock_settings, CLOCK_FORMAT_KEY, value);
   g_settings_set_enum (self->filechooser_settings, CLOCK_FORMAT_KEY, value);
@@ -194,9 +197,9 @@ clock_settings_changed_cb (CcDateTimePage *self,
   g_signal_handlers_block_by_func (self->time_format_toggle_group, change_clock_settings_cb, self);
 
   if (value == G_DESKTOP_CLOCK_FORMAT_24H)
-    adw_toggle_group_set_active (self->time_format_toggle_group, 0);
+    adw_toggle_group_set_active_name (self->time_format_toggle_group, "twenty-four");
   if (value == G_DESKTOP_CLOCK_FORMAT_12H)
-    adw_toggle_group_set_active (self->time_format_toggle_group, 1);
+    adw_toggle_group_set_active_name (self->time_format_toggle_group, "am-pm");
 
   cc_time_editor_set_am_pm (self->time_editor,
                             value == G_DESKTOP_CLOCK_FORMAT_12H);
