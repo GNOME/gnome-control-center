@@ -967,7 +967,7 @@ printer_add_cb (CcPrintersPanel *self)
   gtk_window_set_transient_for (GTK_WINDOW (self->pp_new_printer_dialog),
                                             GTK_WINDOW (native));
 
-  gtk_widget_set_visible (GTK_WIDGET (self->pp_new_printer_dialog), TRUE);
+  gtk_window_present (GTK_WINDOW (self->pp_new_printer_dialog));
 }
 
 static void
