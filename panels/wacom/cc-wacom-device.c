@@ -246,6 +246,14 @@ cc_wacom_device_is_reversible (CcWacomDevice *device)
 	return libwacom_is_reversible (device->wdevice);
 }
 
+gboolean
+cc_wacom_device_is_fallback (CcWacomDevice *device)
+{
+	g_return_val_if_fail (CC_IS_WACOM_DEVICE (device), FALSE);
+
+	return device->is_fallback;
+}
+
 WacomIntegrationFlags
 cc_wacom_device_get_integration_flags (CcWacomDevice *device)
 {
