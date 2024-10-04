@@ -672,7 +672,6 @@ static void
 check_add_pad (CcWacomPage *page,
 	       GsdDevice   *gsd_device)
 {
-	g_autoptr(CcWacomDevice) wacom_device = NULL;
 	const gchar *stylus_vendor, *stylus_product;
 	const gchar *pad_vendor, *pad_product;
 	GsdDevice *stylus_device;
