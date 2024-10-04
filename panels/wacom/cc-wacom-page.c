@@ -665,7 +665,9 @@ has_monitor (CcWacomPage *page)
 static void
 update_pad_availability (CcWacomPage *page)
 {
-	gtk_widget_set_visible (page->tablet_map_buttons, page->pad != NULL);
+	gboolean is_fallback = cc_wacom_device_is_fallback (page->stylus);
+
+	gtk_widget_set_visible (page->tablet_map_buttons, !is_fallback && page->pad != NULL);
 }
 
 static void
