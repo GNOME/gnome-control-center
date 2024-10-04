@@ -41,6 +41,8 @@ const gchar   * cc_wacom_device_get_icon_name   (CcWacomDevice *device);
 
 gboolean        cc_wacom_device_is_reversible   (CcWacomDevice *device);
 
+gboolean        cc_wacom_device_is_fallback     (CcWacomDevice *device);
+
 WacomIntegrationFlags
 		cc_wacom_device_get_integration_flags (CcWacomDevice *device);
 
