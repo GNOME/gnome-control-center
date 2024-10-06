@@ -252,7 +252,7 @@ nmtst_set_device_state (NMTstcServiceInfo *sinfo, NMDevice *device, NMDeviceStat
 	                        &error);
 	g_assert_no_error (error);
 
-	WAIT_DEVICE(device, 2, "state-reason", "state")
+	WAIT_DEVICE(device, 3, "state-reason", "state", "state-changed")
 	WAIT_FINISHED(5)
 }
 
@@ -348,7 +348,7 @@ nmtst_add_and_activate_connection (NMTstcServiceInfo *sinfo, NMClient *client, N
 	                                             NULL, add_and_activate_cb, &info);
 
 	info.other_remaining = 1;
-	WAIT_CLIENT(client, 1, NM_CLIENT_ACTIVE_CONNECTIONS);
+	WAIT_CLIENT(client, 3, NM_CLIENT_CONNECTIONS, NM_CLIENT_ACTIVE_CONNECTIONS, NM_CLIENT_CONNECTION_ADDED);
 	WAIT_DEVICE(device, 1, NM_DEVICE_ACTIVE_CONNECTION);
 
 	g_object_unref (conn);
