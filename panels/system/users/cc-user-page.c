@@ -85,6 +85,7 @@ struct _CcUserPage {
 
     gboolean              locked;
     gboolean              editable;
+    gboolean              avatar_editable;
     gboolean              can_be_demoted;
 };
 
@@ -98,6 +99,7 @@ enum {
     PROP_0,
     PROP_LOCKED,
     PROP_EDITABLE,
+    PROP_AVATAR_EDITABLE,
     PROP_IS_ADMIN,
     PROP_IS_CURRENT_USER
 };
@@ -477,7 +479,10 @@ is_current_user (ActUser *user)
 static void
 update_editable_state (CcUserPage *self)
 {
-    self->editable = (is_current_user (self->user) || !self->locked) && act_user_is_local_account (self->user);
+    self->avatar_editable = (is_current_user (self->user) || !self->locked);
+    g_object_notify (G_OBJECT (self), "avatar-editable");
+
+    self->editable = self->avatar_editable && act_user_is_local_account (self->user);
     g_object_notify (G_OBJECT (self), "editable");
 }
 
@@ -561,6 +566,9 @@ cc_user_page_get_property (GObject    *object,
     case PROP_EDITABLE:
         g_value_set_boolean (value, self->editable);
         break;
+    case PROP_AVATAR_EDITABLE:
+        g_value_set_boolean (value, self->avatar_editable);
+        break;
     case PROP_LOCKED:
         g_value_set_boolean (value, self->locked);
         break;
@@ -589,6 +597,7 @@ cc_user_page_set_property (GObject      *object,
 
     switch (prop_id) {
     case PROP_EDITABLE:
+    case PROP_AVATAR_EDITABLE:
         update_editable_state (self);
         break;
     case PROP_LOCKED:
@@ -614,6 +623,13 @@ cc_user_page_class_init (CcUserPageClass * klass)
                                      g_param_spec_boolean ("editable",
                                                            "Editable",
                                                            "Whether the panel is editable",
+                                                           FALSE,
+                                                           G_PARAM_READWRITE));
+    g_object_class_install_property (object_class,
+                                     PROP_AVATAR_EDITABLE,
+                                     g_param_spec_boolean ("avatar-editable",
+                                                           "Editable avatar",
+                                                           "Whether the avatar is editable",
                                                            FALSE,
                                                            G_PARAM_READWRITE));
     g_object_class_install_property (object_class,
