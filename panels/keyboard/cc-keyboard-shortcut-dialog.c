@@ -67,7 +67,6 @@ struct _CcKeyboardShortcutDialog
   GtkFlattenListModel  *filtered_shortcuts;
 
   CcKeyboardManager    *manager;
-  GtkWidget            *shortcut_editor;
   GStrv                 search_terms;
  };
 
@@ -80,6 +79,7 @@ keyboard_shortcut_get_section_store (CcKeyboardShortcutDialog *self,
                                      const char               *section_title)
 {
   g_autoptr(GListStore) section = NULL;
+  CcKeyboardShortcutEditor *shortcut_editor;
   GtkWidget *group;
   guint n_items;
 
@@ -105,11 +105,13 @@ keyboard_shortcut_get_section_store (CcKeyboardShortcutDialog *self,
   g_object_set_data_full (G_OBJECT (section), "id", g_strdup (section_id), g_free);
   g_object_set_data_full (G_OBJECT (section), "title", g_strdup (section_title), g_free);
 
+  shortcut_editor = cc_keyboard_shortcut_editor_new (self->manager);
+
   /* This group shall be shown in the search results page */
   group = cc_keyboard_shortcut_group_new (G_LIST_MODEL (section),
                                           section_id, section_title,
                                           self->manager,
-                                          CC_KEYBOARD_SHORTCUT_EDITOR (self->shortcut_editor),
+                                          shortcut_editor,
                                           self->accelerator_size_group);
   g_object_set_data (G_OBJECT (section), "search-group", group);
 
@@ -117,7 +119,7 @@ keyboard_shortcut_get_section_store (CcKeyboardShortcutDialog *self,
   group = cc_keyboard_shortcut_group_new (G_LIST_MODEL (section),
                                           section_id, NULL,
                                           self->manager,
-                                          CC_KEYBOARD_SHORTCUT_EDITOR (self->shortcut_editor),
+                                          shortcut_editor,
                                           self->accelerator_size_group);
   g_object_set_data (G_OBJECT (section), "group", group);
 
@@ -318,14 +320,14 @@ shortcut_dialog_row_new (gpointer item,
 static void
 add_custom_shortcut_clicked_cb (CcKeyboardShortcutDialog *self)
 {
-  CcKeyboardShortcutEditor *editor;
+  CcKeyboardShortcutEditor *shortcut_editor;
 
-  editor = CC_KEYBOARD_SHORTCUT_EDITOR (self->shortcut_editor);
+  shortcut_editor = cc_keyboard_shortcut_editor_new (self->manager);
 
-  cc_keyboard_shortcut_editor_set_mode (editor, CC_SHORTCUT_EDITOR_CREATE);
-  cc_keyboard_shortcut_editor_set_item (editor, NULL);
+  cc_keyboard_shortcut_editor_set_mode (shortcut_editor, CC_SHORTCUT_EDITOR_CREATE);
+  cc_keyboard_shortcut_editor_set_item (shortcut_editor, NULL);
 
-  gtk_widget_set_visible (self->shortcut_editor, TRUE);
+  adw_dialog_present (ADW_DIALOG (shortcut_editor), GTK_WIDGET (self));
 }
 
 static void
@@ -454,17 +456,6 @@ shortcut_section_row_activated_cb (CcKeyboardShortcutDialog *self,
 }
 
 static void
-cc_keyboard_shortcut_dialog_constructed (GObject *object)
-{
-  CcKeyboardShortcutDialog *self = CC_KEYBOARD_SHORTCUT_DIALOG (object);
-
-  G_OBJECT_CLASS (cc_keyboard_shortcut_dialog_parent_class)->constructed (object);
-
-  /* Setup the dialog's transient parent */
-  gtk_window_set_transient_for (GTK_WINDOW (self->shortcut_editor), GTK_WINDOW (self));
-}
-
-static void
 cc_keyboard_shortcut_dialog_finalize (GObject *object)
 {
   CcKeyboardShortcutDialog *self = CC_KEYBOARD_SHORTCUT_DIALOG (object);
@@ -475,11 +466,6 @@ cc_keyboard_shortcut_dialog_finalize (GObject *object)
   g_clear_object (&self->sections);
   g_clear_object (&self->filtered_shortcuts);
 
-  if (self->shortcut_editor != NULL) {
-    gtk_window_destroy (GTK_WINDOW (self->shortcut_editor));
-    self->shortcut_editor = NULL;
-  }
-
   G_OBJECT_CLASS (cc_keyboard_shortcut_dialog_parent_class)->finalize (object);
 }
 
@@ -489,7 +475,6 @@ cc_keyboard_shortcut_dialog_class_init (CcKeyboardShortcutDialogClass *klass)
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
-  object_class->constructed = cc_keyboard_shortcut_dialog_constructed;
   object_class->finalize = cc_keyboard_shortcut_dialog_finalize;
 
   gtk_widget_class_add_binding_action (widget_class, GDK_KEY_Escape, 0, "window.close", NULL);
@@ -526,15 +511,11 @@ cc_keyboard_shortcut_dialog_class_init (CcKeyboardShortcutDialogClass *klass)
 static void
 cc_keyboard_shortcut_dialog_init (CcKeyboardShortcutDialog *self)
 {
-  GtkWindow *toplevel;
-
   gtk_widget_init_template (GTK_WIDGET (self));
   shortcut_dialog_visible_page_changed_cb (self);
 
   self->manager = cc_keyboard_manager_new ();
 
-  toplevel = GTK_WINDOW (gtk_widget_get_native (GTK_WIDGET (self)));
-  self->shortcut_editor = cc_keyboard_shortcut_editor_new (toplevel, self->manager);
   shortcut_dialog_visible_page_changed_cb (self);
 
   self->sections = g_list_store_new (G_TYPE_LIST_STORE);

@@ -28,7 +28,7 @@
 G_BEGIN_DECLS
 
 #define CC_TYPE_KEYBOARD_SHORTCUT_EDITOR (cc_keyboard_shortcut_editor_get_type ())
-G_DECLARE_FINAL_TYPE (CcKeyboardShortcutEditor, cc_keyboard_shortcut_editor, CC, KEYBOARD_SHORTCUT_EDITOR, AdwWindow)
+G_DECLARE_FINAL_TYPE (CcKeyboardShortcutEditor, cc_keyboard_shortcut_editor, CC, KEYBOARD_SHORTCUT_EDITOR, AdwDialog)
 
 typedef enum
 {
@@ -36,8 +36,7 @@ typedef enum
   CC_SHORTCUT_EDITOR_EDIT
 } CcShortcutEditorMode;
 
-GtkWidget*           cc_keyboard_shortcut_editor_new             (GtkWindow                *parent_window,
-                                                                  CcKeyboardManager        *manager);
+CcKeyboardShortcutEditor* cc_keyboard_shortcut_editor_new        (CcKeyboardManager        *manager);
 
 CcKeyboardItem*      cc_keyboard_shortcut_editor_get_item        (CcKeyboardShortcutEditor *self);
 
