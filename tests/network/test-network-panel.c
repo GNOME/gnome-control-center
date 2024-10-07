@@ -470,6 +470,7 @@ test_connection_add_activate (NetworkPanelFixture  *fixture,
   g_assert_nonnull (find_label (GTK_WIDGET (fixture->shell), "Connected - 1*234 Mb/s"));
 }
 
+#if 0  /* See note below, where this test is added */
 static void
 test_connection_multi_add_activate (NetworkPanelFixture  *fixture,
                                     gconstpointer         user_data)
@@ -511,6 +512,7 @@ test_connection_multi_add_activate (NetworkPanelFixture  *fixture,
   bt_header = find_label (GTK_WIDGET (fixture->shell), "Bluetooth");
   g_assert_false (bt_header && gtk_widget_is_visible(bt_header));
 }
+#endif
 
 /*****************************************************************************/
 
@@ -829,12 +831,21 @@ main (int argc, char **argv)
               test_connection_add_activate,
               fixture_tear_down);
 
+#if 0
+  /*
+   * FIXME: Currently broken on some CI runners, so test is disabled.
+   *        Test is likely running into some race condition, but it's unknown
+   *        if this can be solved by waiting on different signals or not.
+   *
+   *        See https://gitlab.gnome.org/GNOME/gnome-control-center/-/issues/1768
+   */
   g_test_add ("/network-panel-wired/connection-multi-add-activate",
               NetworkPanelFixture,
               NULL,
               fixture_set_up_wired,
               test_connection_multi_add_activate,
               fixture_tear_down);
+#endif
 
   g_test_add ("/network-panel-wired/vpn-add",
               NetworkPanelFixture,
