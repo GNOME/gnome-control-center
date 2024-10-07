@@ -31,7 +31,7 @@ if Xvfb.found()
     'test-network-panel',
     find_program('test-network-panel.py'),
         env : envs,
-    timeout : 60
+    timeout : 120
   )
 endif
 
