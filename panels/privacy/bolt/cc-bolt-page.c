@@ -58,7 +58,6 @@ struct _CcBoltPage
   /* device list */
   GHashTable         *devices;
 
-  GtkStack           *devices_stack;
   GtkBox             *devices_box;
   GtkBox             *pending_box;
 
@@ -409,7 +408,6 @@ cc_bolt_page_add_device (CcBoltPage *self,
                            self,
                            0);
 
-  gtk_stack_set_visible_child_name (self->devices_stack, "have-devices");
   g_hash_table_insert (self->devices, (gpointer) path, entry);
 
   return entry;
@@ -946,7 +944,6 @@ cc_bolt_page_class_init (CcBoltPageClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcBoltPage, container);
   gtk_widget_class_bind_template_child (widget_class, CcBoltPage, devices_list);
   gtk_widget_class_bind_template_child (widget_class, CcBoltPage, devices_box);
-  gtk_widget_class_bind_template_child (widget_class, CcBoltPage, devices_stack);
   gtk_widget_class_bind_template_child (widget_class, CcBoltPage, direct_access_row);
   gtk_widget_class_bind_template_child (widget_class, CcBoltPage, headerbar_box);
   gtk_widget_class_bind_template_child (widget_class, CcBoltPage, lock_button);
