@@ -91,110 +91,90 @@
                         <!-- Devices Group-->
                         <child>
                           <object class="AdwPreferencesGroup">
-                            <!-- Stack: devices/no-devices -->
+                            <!-- Pending Device List -->
                             <child>
-                              <object class="GtkStack" id="devices_stack">
-                                <property name="transition-type">crossfade</property>
+                              <object class="GtkBox" id="pending_box">
+                                <property name="visible">False</property>
+                                <property name="orientation">vertical</property>
+                                <property name="spacing">12</property>
 
+                                <!-- Pending Device List: Header  -->
                                 <child>
-                                  <object class="GtkStackPage">
-                                    <property name="name">have-devices</property>
-                                    <property name="child">
-                                      <object class="GtkBox">
-                                        <property name="orientation">vertical</property>
-                                        <property name="spacing">32</property>
-
-                                        <!-- Pending Device List -->
-                                        <child>
-                                          <object class="GtkBox" id="pending_box">
-                                            <property name="visible">False</property>
-                                            <property name="orientation">vertical</property>
-                                            <property name="spacing">12</property>
-
-                                            <!-- Pending Device List: Header  -->
-                                            <child>
-                                              <object class="GtkBox" id="pending_header">
-                                                <property name="hexpand">True</property>
-                                                <property name="halign">start</property>
-                                                <property name="spacing">6</property>
-                                                <child>
-                                                  <object class="GtkImage">
-                                                    <property name="icon_name">dialog-warning-symbolic</property>
-                                                    <property name="icon_size">1</property>
-                                                  </object>
-                                                </child>
-                                                <child>
-                                                  <object class="GtkLabel">
-                                                    <property name="label" translatable="yes">Pending Devices</property>
-                                                    <property name="xalign">0.0</property>
-                                                    <attributes>
-                                                      <attribute name="weight" value="bold"/>
-                                                    </attributes>
-                                                  </object>
-                                                </child>
-                                              </object>
-                                            </child>
-
-                                            <!-- Pending List: Devices  -->
-                                            <child>
-                                              <object class="GtkFrame">
-                                                <property name="valign">start</property>
-                                                <property name="vexpand">False</property>
-                                                <style>
-                                                  <class name="view" />
-                                                </style>
-                                                <child>
-                                                  <object class="GtkListBox" id="pending_list">
-                                                    <property name="selection-mode">none</property>
-                                                    <property name="can_focus">True</property>
-                                                    <signal name="row-activated"
-                                                            handler="on_device_entry_row_activated_cb"
-                                                            object="CcBoltPage"
-                                                            swapped="yes" />
-                                                  </object>
-                                                </child>
-                                              </object>
-                                            </child>
-                                          </object>
-                                        </child>
-
-                                        <!-- Device List  -->
-                                        <child>
-                                          <object class="AdwPreferencesGroup" id="devices_box">
-                                            <property name="title" translatable="yes">Devices</property>
-
-                                            <!-- Device List: Devices  -->
-                                            <child>
-                                              <object class="GtkListBox" id="devices_list">
-                                                <property name="selection-mode">none</property>
-                                                <signal name="row-activated"
-                                                        handler="on_device_entry_row_activated_cb"
-                                                        object="CcBoltPage"
-                                                        swapped="yes" />
-                                                    <style>
-                                                      <class name="boxed-list"/>
-                                                    </style>
-                                                <child type="placeholder">
-                                                  <object class="GtkLabel">
-                                                    <property name="label" translatable="yes">No Devices Attached</property>
-                                                    <style>
-                                                      <class name="dim-label"/>
-                                                      <class name="cc-placeholder-row"/>
-                                                    </style>
-                                                  </object>
-                                                </child>
-                                              </object>
-                                            </child>
-
-                                          </object>
-                                        </child>
-
+                                  <object class="GtkBox" id="pending_header">
+                                    <property name="hexpand">True</property>
+                                    <property name="halign">start</property>
+                                    <property name="spacing">6</property>
+                                    <child>
+                                      <object class="GtkImage">
+                                        <property name="icon_name">dialog-warning-symbolic</property>
+                                        <property name="icon_size">1</property>
                                       </object>
-                                    </property>
+                                    </child>
+                                    <child>
+                                      <object class="GtkLabel">
+                                        <property name="label" translatable="yes">Pending Devices</property>
+                                        <property name="xalign">0.0</property>
+                                        <attributes>
+                                          <attribute name="weight" value="bold"/>
+                                        </attributes>
+                                      </object>
+                                    </child>
+                                  </object>
+                                </child>
+
+                                <!-- Pending List: Devices  -->
+                                <child>
+                                  <object class="GtkFrame">
+                                    <property name="valign">start</property>
+                                    <property name="vexpand">False</property>
+                                    <style>
+                                      <class name="view" />
+                                    </style>
+                                    <child>
+                                      <object class="GtkListBox" id="pending_list">
+                                        <property name="selection-mode">none</property>
+                                        <property name="can_focus">True</property>
+                                        <signal name="row-activated"
+                                                handler="on_device_entry_row_activated_cb"
+                                                object="CcBoltPage"
+                                                swapped="yes" />
+                                      </object>
+                                    </child>
                                   </object>
                                 </child>
                               </object>
-                            </child> <!-- End of Stack: devices/no-devices -->
+                            </child>
+
+                            <!-- Device List  -->
+                            <child>
+                              <object class="AdwPreferencesGroup" id="devices_box">
+                                <property name="title" translatable="yes">Devices</property>
+
+                                <!-- Device List: Devices  -->
+                                <child>
+                                  <object class="GtkListBox" id="devices_list">
+                                    <property name="selection-mode">none</property>
+                                    <signal name="row-activated"
+                                            handler="on_device_entry_row_activated_cb"
+                                            object="CcBoltPage"
+                                            swapped="yes" />
+                                        <style>
+                                          <class name="boxed-list"/>
+                                        </style>
+                                    <child type="placeholder">
+                                      <object class="GtkLabel">
+                                        <property name="label" translatable="yes">No Devices Attached</property>
+                                        <style>
+                                          <class name="dim-label"/>
+                                          <class name="cc-placeholder-row"/>
+                                        </style>
+                                      </object>
+                                    </child>
+                                  </object>
+                                </child>
+                              </object>
+                            </child>
+
                           </object>
                         </child>
                       </object>
