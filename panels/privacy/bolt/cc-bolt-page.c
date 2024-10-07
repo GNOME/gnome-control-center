@@ -59,10 +59,7 @@ struct _CcBoltPage
   GHashTable         *devices;
 
   GtkBox             *devices_box;
-  GtkBox             *pending_box;
-
   GtkListBox         *devices_list;
-  GtkListBox         *pending_list;
 
   /* device details dialog */
   CcBoltDeviceDialog *device_dialog;
@@ -92,10 +89,6 @@ static void                cc_bolt_page_del_device_entry (CcBoltPage        *sel
 
 static void                cc_bolt_page_authmode_sync (CcBoltPage *self);
 
-static void                cc_panel_list_box_migrate (CcBoltPage        *self,
-                                                      GtkListBox        *from,
-                                                      GtkListBox        *to,
-                                                      CcBoltDeviceEntry *entry);
 
 /* bolt client signals */
 static void     on_bolt_name_owner_changed_cb (GObject    *object,
@@ -122,9 +115,6 @@ static gboolean on_authmode_state_set_cb (CcBoltPage *self,
 static void     on_device_entry_row_activated_cb (CcBoltPage    *self,
                                                   GtkListBoxRow *row);
 
-static void     on_device_entry_status_changed_cb (CcBoltDeviceEntry *entry,
-                                                   BoltStatus         new_status,
-                                                   CcBoltPage        *self);
 /* polkit */
 static void      on_permission_ready (GObject      *source_object,
                                       GAsyncResult *res,
@@ -262,12 +252,6 @@ bolt_client_ready (GObject      *source,
                           "sensitive",
                           G_BINDING_DEFAULT | G_BINDING_SYNC_CREATE);
 
-  g_object_bind_property (self->authmode_switch,
-                          "active",
-                          self->pending_box,
-                          "sensitive",
-                          G_BINDING_DEFAULT | G_BINDING_SYNC_CREATE);
-
   cc_bolt_page_name_owner_changed (self);
 }
 
@@ -345,32 +329,6 @@ devices_table_synchronize (CcBoltPage *self)
   gtk_stack_set_visible_child_name (self->container, "devices-listing");
 }
 
-static gboolean
-list_box_sync_visible (GtkListBox *listbox)
-{
-  GtkWidget *child;
-  gboolean show;
-
-  child = gtk_widget_get_first_child (GTK_WIDGET (listbox));
-  show = child != NULL;
-
-  gtk_widget_set_visible (GTK_WIDGET (listbox), show);
-
-  return show;
-}
-
-static GtkWidget *
-cc_bolt_page_box_for_listbox (CcBoltPage *self,
-                               GtkListBox *lstbox)
-{
-  if ((gpointer) lstbox == self->devices_list)
-    return GTK_WIDGET (self->devices_box);
-  else if ((gpointer) lstbox == self->pending_list)
-    return GTK_WIDGET (self->pending_box);
-
-  g_return_val_if_reached (NULL);
-}
-
 static CcBoltDeviceEntry *
 cc_bolt_page_add_device (CcBoltPage *self,
                           BoltDevice *dev)
@@ -385,29 +343,11 @@ cc_bolt_page_add_device (CcBoltPage *self,
   if (type != BOLT_DEVICE_PERIPHERAL)
     return FALSE;
 
-  entry = cc_bolt_device_entry_new (dev, FALSE);
+  status = bolt_device_get_status (dev);
+  entry = cc_bolt_device_entry_new (dev, bolt_status_is_pending (status));
   path = g_dbus_proxy_get_object_path (G_DBUS_PROXY (dev));
 
-  /* add to the list box */
-  status = bolt_device_get_status (dev);
-
-  if (bolt_status_is_pending (status))
-    {
-      gtk_list_box_append (self->pending_list, GTK_WIDGET (entry));
-      gtk_widget_set_visible (GTK_WIDGET (self->pending_list), TRUE);
-      gtk_widget_set_visible (GTK_WIDGET (self->pending_box), TRUE);
-    }
-  else
-    {
-      gtk_list_box_append (self->devices_list, GTK_WIDGET (entry));
-    }
-
-  g_signal_connect_object (entry,
-                           "status-changed",
-                           G_CALLBACK (on_device_entry_status_changed_cb),
-                           self,
-                           0);
-
+  gtk_list_box_append (self->devices_list, GTK_WIDGET (entry));
   g_hash_table_insert (self->devices, (gpointer) path, entry);
 
   return entry;
@@ -418,9 +358,6 @@ cc_bolt_page_del_device_entry (CcBoltPage        *self,
                                 CcBoltDeviceEntry *entry)
 {
   BoltDevice *dev;
-  GtkWidget *box;
-  GtkWidget *p;
-  gboolean show;
 
   dev = cc_bolt_device_entry_get_device (entry);
   if (cc_bolt_device_dialog_device_equal (self->device_dialog, dev))
@@ -429,12 +366,7 @@ cc_bolt_page_del_device_entry (CcBoltPage        *self,
       cc_bolt_device_dialog_set_device (self->device_dialog, NULL, NULL);
     }
 
-  p = gtk_widget_get_parent (GTK_WIDGET (entry));
-  gtk_list_box_remove (GTK_LIST_BOX (p), GTK_WIDGET (entry));
-
-  box = cc_bolt_page_box_for_listbox (self, GTK_LIST_BOX (p));
-  show = list_box_sync_visible (GTK_LIST_BOX (p));
-  gtk_widget_set_visible (box, show);
+  gtk_list_box_remove (self->devices_list, GTK_WIDGET (entry));
 }
 
 static void
@@ -457,31 +389,6 @@ cc_bolt_page_authmode_sync (CcBoltPage *self)
                                  enabled ?
                                  _("Allow direct access to devices such as docks and external GPUs.") :
                                  _("Only USB and Display Port devices can attach."));
-}
-
-static void
-cc_panel_list_box_migrate (CcBoltPage        *self,
-                           GtkListBox        *from,
-                           GtkListBox        *to,
-                           CcBoltDeviceEntry *entry)
-{
-  GtkWidget *from_box;
-  GtkWidget *to_box;
-  gboolean show;
-  GtkWidget *target;
-
-  target = GTK_WIDGET (entry);
-
-  gtk_list_box_remove (from, target);
-  gtk_list_box_append (to, target);
-  gtk_widget_set_visible (GTK_WIDGET (to), TRUE);
-
-  from_box = cc_bolt_page_box_for_listbox (self, from);
-  to_box = cc_bolt_page_box_for_listbox (self, to);
-
-  show = list_box_sync_visible (from);
-  gtk_widget_set_visible (from_box, show);
-  gtk_widget_set_visible (to_box, TRUE);
 }
 
 /* bolt client signals */
@@ -743,45 +650,6 @@ on_device_entry_row_activated_cb (CcBoltPage    *self,
   gtk_window_present (GTK_WINDOW (self->device_dialog));
 }
 
-static void
-on_device_entry_status_changed_cb (CcBoltDeviceEntry *entry,
-                                   BoltStatus         new_status,
-                                   CcBoltPage        *self)
-{
-  GtkListBox *from = NULL;
-  GtkListBox *to = NULL;
-  GtkWidget *p;
-  gboolean is_pending;
-  gboolean parent_pending;
-
-  /* if we are doing some active work, then lets not change
-   * the list the entry is in; otherwise we might just hop
-   * from one box to the other and back again.
-   */
-  if (new_status == BOLT_STATUS_CONNECTING || new_status == BOLT_STATUS_AUTHORIZING)
-    return;
-
-  is_pending = bolt_status_is_pending (new_status);
-
-  p = gtk_widget_get_parent (GTK_WIDGET (entry));
-  parent_pending = (gpointer) p == self->pending_list;
-
-  /*  */
-  if (is_pending && !parent_pending)
-    {
-      from = self->devices_list;
-      to = self->pending_list;
-    }
-  else if (!is_pending && parent_pending)
-    {
-      from = self->pending_list;
-      to = self->devices_list;
-    }
-
-  if (from && to)
-    cc_panel_list_box_migrate (self, from, to, entry);
-}
-
 /* polkit */
 
 static void
@@ -853,7 +721,12 @@ device_entries_sort_by_recency_cb (GtkListBoxRow *a_row,
 
   status = bolt_device_get_status (a);
 
-  if (bolt_status_is_connected (status))
+  /* Sort pending devices first */
+  if (bolt_status_is_pending (status))
+    {
+      return -1;
+    }
+  else if (bolt_status_is_connected (status))
     {
       const char *a_path;
       const char *b_path;
@@ -875,25 +748,6 @@ device_entries_sort_by_recency_cb (GtkListBoxRow *a_row,
     }
 
   return 0;
-}
-
-static gint
-device_entries_sort_by_syspath_cb (GtkListBoxRow *a_row,
-                                   GtkListBoxRow *b_row,
-                                   gpointer       user_data)
-{
-  CcBoltDeviceEntry *a_entry = CC_BOLT_DEVICE_ENTRY (a_row);
-  CcBoltDeviceEntry *b_entry = CC_BOLT_DEVICE_ENTRY (b_row);
-  BoltDevice *a = cc_bolt_device_entry_get_device (a_entry);
-  BoltDevice *b = cc_bolt_device_entry_get_device (b_entry);
-
-  const char *a_path;
-  const char *b_path;
-
-  a_path = bolt_device_get_syspath (a);
-  b_path = bolt_device_get_syspath (b);
-
-  return g_strcmp0 (a_path, b_path);
 }
 
 /* GObject overrides */
@@ -948,8 +802,6 @@ cc_bolt_page_class_init (CcBoltPageClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcBoltPage, headerbar_box);
   gtk_widget_class_bind_template_child (widget_class, CcBoltPage, lock_button);
   gtk_widget_class_bind_template_child (widget_class, CcBoltPage, notb_page);
-  gtk_widget_class_bind_template_child (widget_class, CcBoltPage, pending_box);
-  gtk_widget_class_bind_template_child (widget_class, CcBoltPage, pending_list);
   gtk_widget_class_bind_template_child (widget_class, CcBoltPage, toast_overlay);
 
   gtk_widget_class_bind_template_callback (widget_class, on_authmode_state_set_cb);
@@ -972,11 +824,6 @@ cc_bolt_page_init (CcBoltPage *self)
 
   gtk_list_box_set_sort_func (self->devices_list,
                               device_entries_sort_by_recency_cb,
-                              self,
-                              NULL);
-
-  gtk_list_box_set_sort_func (self->pending_list,
-                              device_entries_sort_by_syspath_cb,
                               self,
                               NULL);
 
