@@ -84,8 +84,10 @@ sources += gnome.compile_resources(
 deps = common_deps + [
   keyboard_shortcuts_dep,
   gnome_desktop_dep,
-  x11_dep
 ]
+if have_x11_support
+  deps += [x11_dep]
+endif
 
 if enable_ibus
   deps += ibus_dep

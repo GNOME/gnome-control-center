@@ -7,7 +7,6 @@ dependent_panels = [
 panels = [
   'applications',
   'background',
-  'color',
   'display',
   'mouse',
   'multitasking',
@@ -34,6 +33,10 @@ if host_is_linux_not_s390
     'bluetooth',
     'wacom'
   ]
+endif
+
+if have_x11_support
+  panels += ['color']
 endif
 
 panels_list = []
