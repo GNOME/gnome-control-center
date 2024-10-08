@@ -6,6 +6,7 @@ option('privileged_group', type: 'string', value: 'wheel', description: 'name of
 option('snap', type: 'boolean', value: true, description: 'build with Snap support')
 option('tests', type: 'boolean', value: true, description: 'build tests')
 option('wayland', type: 'boolean', value: true, description: 'build with Wayland support')
+option('x11-support', type: 'boolean', value: true, description: 'build with X11 support')
 option('profile', type: 'combo', choices: ['default','development'], value: 'default')
 option('malcontent', type: 'boolean', value: false, description: 'build with malcontent support')
 option('distributor_logo', type: 'string', description: 'absolute path to distributor logo for the About panel')

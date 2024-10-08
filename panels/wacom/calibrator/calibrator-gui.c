@@ -24,7 +24,9 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <glib/gi18n.h>
+#ifdef GDK_WINDOWING_X11
 #include <gdk/x11/gdkx.h>
+#endif
 #include <gtk/gtk.h>
 
 #include "calibrator.h"
