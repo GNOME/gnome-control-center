@@ -29,8 +29,10 @@
 #include "gsd-input-helper.h"
 
 #ifdef GDK_WINDOWING_X11
+#ifdef ENABLE_X11_SUPPORT
 #include <gdk/x11/gdkx.h>
 #include <X11/extensions/XInput2.h>
+#endif
 #endif
 #ifdef GDK_WINDOWING_WAYLAND
 #include <gdk/wayland/gdkwayland.h>
@@ -312,6 +314,7 @@ gsd_device_manager_real_lookup_device (GsdDeviceManager *manager,
 	GsdDevice *device;
 
 #ifdef GDK_WINDOWING_X11
+#ifdef ENABLE_X11_SUPPORT
 	if (GDK_IS_X11_DISPLAY (display)) {
                 XIDeviceInfo *info;
                 int n_infos, i, source_id = 0;
@@ -333,6 +336,7 @@ gsd_device_manager_real_lookup_device (GsdDeviceManager *manager,
                 if (source_id != 0)
                         node_path = xdevice_get_device_node (source_id);
         }
+#endif
 #endif
 #ifdef GDK_WINDOWING_WAYLAND
 	if (GDK_IS_WAYLAND_DISPLAY (display))

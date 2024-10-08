@@ -25,11 +25,13 @@
 
 #ifdef GDK_WINDOWING_X11
 #include <gdk/x11/gdkx.h>
+#endif /* GDK_WINDOWING_X11 */
 
 #include <sys/types.h>
+#ifdef GDK_WINDOWING_X11
 #include <X11/Xatom.h>
 #include <X11/extensions/XInput2.h>
-#endif
+#endif /* GDK_WINDOWING_X11 */
 
 #include "gsd-input-helper.h"
 #include "gsd-device-manager.h"
@@ -61,6 +63,7 @@ mouse_is_present (void)
 }
 
 #ifdef GDK_WINDOWING_X11
+#ifdef ENABLE_X11_SUPPORT
 char *
 xdevice_get_device_node (int deviceid)
 {
@@ -110,4 +113,5 @@ out:
         XFree (data);
         return NULL;
 }
-#endif
+#endif /* ENABLE_X11_SUPPORT */
+#endif /* GDK_WINDOWING_X11 */
