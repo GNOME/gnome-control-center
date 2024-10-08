@@ -23,13 +23,15 @@
 
 #include <gdk/gdk.h>
 
-#ifdef GDK_WINDOWING_X11
+#ifdef HAVE_X11
 #include <gdk/x11/gdkx.h>
+#endif /* HAVE_X11 */
 
 #include <sys/types.h>
+#ifdef HAVE_X11
 #include <X11/Xatom.h>
 #include <X11/extensions/XInput2.h>
-#endif
+#endif /* HAVE_X11 */
 
 #include "gsd-input-helper.h"
 #include "gsd-device-manager.h"
@@ -66,7 +68,7 @@ pointingstick_is_present (void)
         return device_type_is_present (GSD_DEVICE_TYPE_POINTINGSTICK);
 }
 
-#ifdef GDK_WINDOWING_X11
+#ifdef HAVE_X11
 char *
 xdevice_get_device_node (int deviceid)
 {
@@ -116,4 +118,4 @@ out:
         XFree (data);
         return NULL;
 }
-#endif
+#endif /* HAVE_X11 */

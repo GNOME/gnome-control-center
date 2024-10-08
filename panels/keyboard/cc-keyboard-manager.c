@@ -27,7 +27,7 @@
 #include "keyboard-shortcuts.h"
 
 #include <gdk/gdk.h>
-#ifdef GDK_WINDOWING_X11
+#ifdef HAVE_X11
 #include <gdk/x11/gdkx.h>
 #include <X11/Xatom.h>
 #endif
@@ -598,7 +598,7 @@ append_sections_from_global_shortcuts_settings (CcKeyboardManager *self,
     }
 }
 
-#ifdef GDK_WINDOWING_X11
+#ifdef HAVE_X11
 static char *
 get_window_manager_property (GdkDisplay *display,
                              Atom        atom,
@@ -704,12 +704,12 @@ get_wm_window (GdkDisplay *display)
 
   return wm_window;
 }
-#endif
+#endif /* HAVE_X11 */
 
 static GStrv
 get_current_keybindings (void)
 {
-#ifdef GDK_WINDOWING_X11
+#ifdef HAVE_X11
   GdkDisplay *display;
   Display *xdisplay;
   Atom keybindings_atom;
@@ -753,7 +753,7 @@ get_current_keybindings (void)
     }
 
   return results;
-#else
+#else /* !HAVE_X11 */
   return NULL;
 #endif
 }

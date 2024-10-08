@@ -43,9 +43,10 @@ sources = common_sources + files(
 deps = common_deps + [
   gnome_settings_dep,
   libdevice_dep,
-  x11_dep,
-  xi_dep
 ]
+if have_x11_support
+  deps += [x11_dep, xi_dep]
+endif
 
 panels_libs += static_library(
   cappletname + '-properties',

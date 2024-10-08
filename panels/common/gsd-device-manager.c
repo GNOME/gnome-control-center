@@ -28,7 +28,7 @@
 #include "gsd-common-enums.h"
 #include "gsd-input-helper.h"
 
-#ifdef GDK_WINDOWING_X11
+#ifdef HAVE_X11
 #include <gdk/x11/gdkx.h>
 #include <X11/extensions/XInput2.h>
 #endif
@@ -312,7 +312,7 @@ gsd_device_manager_real_lookup_device (GsdDeviceManager *manager,
 	GHashTableIter iter;
 	GsdDevice *device;
 
-#ifdef GDK_WINDOWING_X11
+#ifdef HAVE_X11
 	if (GDK_IS_X11_DISPLAY (display)) {
                 XIDeviceInfo *info;
                 int n_infos, i, source_id = 0;
