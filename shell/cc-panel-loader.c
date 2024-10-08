@@ -36,7 +36,9 @@ extern GType cc_background_panel_get_type (void);
 #ifdef BUILD_BLUETOOTH
 extern GType cc_bluetooth_panel_get_type (void);
 #endif /* BUILD_BLUETOOTH */
+#ifdef HAVE_X11
 extern GType cc_color_panel_get_type (void);
+#endif /* HAVE_X11 */
 extern GType cc_date_time_panel_get_type (void);
 extern GType cc_display_panel_get_type (void);
 extern GType cc_keyboard_panel_get_type (void);
@@ -91,7 +93,9 @@ static CcPanelLoaderVtable default_panels[] =
 #ifdef BUILD_BLUETOOTH
   PANEL_TYPE("bluetooth",        cc_bluetooth_panel_get_type,            NULL),
 #endif
+#ifdef HAVE_X11
   PANEL_TYPE("color",            cc_color_panel_get_type,                NULL),
+#endif
   PANEL_TYPE("display",          cc_display_panel_get_type,              NULL),
   PANEL_TYPE("keyboard",         cc_keyboard_panel_get_type,             NULL),
   PANEL_TYPE("mouse",            cc_mouse_panel_get_type,                NULL),

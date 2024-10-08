@@ -29,11 +29,14 @@
 #include <dirent.h>
 #include <glib/gi18n.h>
 
+#ifdef HAVE_X11
 #include <X11/extensions/XInput.h>
+#endif
 
 #include "calibrator-gui.h"
 #include "calibrator.h"
 
+#ifdef HAVE_X11
 static GMainLoop *mainloop = NULL;
 
 /**
@@ -384,9 +387,11 @@ calibration_finished_cb (CcCalibArea *area,
 
 	g_main_loop_quit (mainloop);
 }
+#endif /* HAVE_X11 */
 
 int main(int argc, char** argv)
 {
+#ifdef HAVE_X11
     CcCalibrator *calibrator = main_common(argc, argv);
     CcCalibArea *calib_area;
     int threshold_doubleclick, threshold_misclick;
@@ -417,4 +422,8 @@ int main(int argc, char** argv)
     free(calibrator);
 
     return 0;
+#else
+    fprintf(stderr, "wacom calibrator compiled without X support\n");
+    exit(1);
+#endif /* HAVE_X11 */
 }
