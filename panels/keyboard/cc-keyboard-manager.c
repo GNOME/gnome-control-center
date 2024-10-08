@@ -28,8 +28,10 @@
 
 #include <gdk/gdk.h>
 #ifdef GDK_WINDOWING_X11
+#ifdef ENABLE_X11_SUPPORT
 #include <gdk/x11/gdkx.h>
 #include <X11/Xatom.h>
+#endif
 #endif
 
 #define BINDINGS_SCHEMA       "org.gnome.settings-daemon.plugins.media-keys"
@@ -599,6 +601,7 @@ append_sections_from_global_shortcuts_settings (CcKeyboardManager *self,
 }
 
 #ifdef GDK_WINDOWING_X11
+#ifdef ENABLE_X11_SUPPORT
 static char *
 get_window_manager_property (GdkDisplay *display,
                              Atom        atom,
@@ -704,12 +707,14 @@ get_wm_window (GdkDisplay *display)
 
   return wm_window;
 }
+#endif /* ENABLE_X11_SUPPORT */
 #endif
 
 static GStrv
 get_current_keybindings (void)
 {
 #ifdef GDK_WINDOWING_X11
+#ifdef ENABLE_X11_SUPPORT
   GdkDisplay *display;
   Display *xdisplay;
   Atom keybindings_atom;
@@ -753,7 +758,10 @@ get_current_keybindings (void)
     }
 
   return results;
-#else
+#else /* !ENABLE_X11_SUPPORT */
+  return NULL;
+#endif
+#else /* !GDK_WINDOWING_X11 */
   return NULL;
 #endif
 }

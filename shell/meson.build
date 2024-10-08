@@ -101,9 +101,11 @@ shell_deps = common_deps + [
   libdevice_dep,
   liblanguage_dep,
   libwidgets_dep,
-  x11_dep,
   libshell_dep,
 ]
+if have_x11_support
+  deps += [x11_dep]
+endif
 
 if host_is_linux_not_s390
   shell_deps += wacom_deps

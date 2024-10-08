@@ -18,12 +18,18 @@
  * Author: Felipe Borges <feborges@redhat.com>
  */
 
+#ifdef GDK_WINDOWING_X11
+#ifdef ENABLE_X11_SUPPORT
 #include <gdk/x11/gdkx.h>
 #include <X11/Xatom.h>
 #include <X11/extensions/XInput2.h>
+#endif
+#endif
 
 #include "cc-mouse-caps-helper.h"
 
+#ifdef GDK_WINDOWING_X11
+#ifdef ENABLE_X11_SUPPORT
 static gboolean
 touchpad_check_capabilities_x11 (gboolean *have_two_finger_scrolling,
                                  gboolean *have_edge_scrolling,
@@ -87,16 +93,22 @@ touchpad_check_capabilities_x11 (gboolean *have_two_finger_scrolling,
 
 	return TRUE;
 }
+#endif
+#endif
 
 gboolean
 cc_touchpad_check_capabilities (gboolean *have_two_finger_scrolling,
                                 gboolean *have_edge_scrolling,
                                 gboolean *have_tap_to_click)
 {
+#ifdef GDK_WINDOWING_X11
+#ifdef ENABLE_X11_SUPPORT
 	if (GDK_IS_X11_DISPLAY (gdk_display_get_default ()))
 		return touchpad_check_capabilities_x11 (have_two_finger_scrolling,
                                                         have_edge_scrolling,
                                                         have_tap_to_click);
+#endif
+#endif
 	/* else we unconditionally show all touchpad knobs */
         *have_two_finger_scrolling = TRUE;
         *have_edge_scrolling = TRUE;
@@ -107,6 +119,8 @@ cc_touchpad_check_capabilities (gboolean *have_two_finger_scrolling,
 gboolean
 cc_synaptics_check (void)
 {
+#ifdef GDK_WINDOWING_X11
+#ifdef ENABLE_X11_SUPPORT
         GdkDisplay *gdisplay;
         Display *display;
         g_autoptr(GList) devicelist = NULL;
@@ -145,4 +159,10 @@ cc_synaptics_check (void)
         gdk_x11_display_error_trap_pop_ignored (gdisplay);
 
         return have_synaptics;
+#else /* ENABLE_X11_SUPPORT */
+                return FALSE;
+#endif
+#else /* GDK_WINDOWING_X11 */
+                return FALSE;
+#endif
 }
