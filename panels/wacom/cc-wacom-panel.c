@@ -40,8 +40,6 @@
 #include <gdk/wayland/gdkwayland.h>
 #endif
 
-#define EKR_VENDOR "056a"
-#define EKR_PRODUCT "0331"
 #define POLL_MS 300
 
 struct _CcWacomPanel
@@ -585,11 +583,11 @@ static void
 add_known_device (CcWacomPanel *self,
 		  GsdDevice    *gsd_device)
 {
-	CcWacomDevice *device;
+	g_autoptr(CcWacomDevice) device = NULL;
 	GsdDeviceType device_type;
 	g_autoptr(GList) tools = NULL;
 	GtkWidget *page;
-	gboolean is_ekr = FALSE;
+	gboolean is_remote = FALSE;
 	GList *l;
 
 	device_type = gsd_device_get_device_type (gsd_device);
@@ -603,25 +601,20 @@ add_known_device (CcWacomPanel *self,
 		return;
 	}
 
-	if ((device_type & GSD_DEVICE_TYPE_PAD) != 0) {
-		const char *vendor, *product;
-
-		gsd_device_get_device_ids (gsd_device, &vendor, &product);
-		is_ekr = (g_strcmp0 (vendor, EKR_VENDOR) == 0 &&
-			  g_strcmp0 (product, EKR_PRODUCT) == 0);
-
-		/* Express key remote is an special case, as it is an
-		 * external pad device, we want to distinctly show it
-		 * in the list. Other pads are mounted on a tablet, which
-		 * get their own entries.
-		 */
-		if (!is_ekr)
-			return;
-	}
-
 	device = cc_wacom_device_new (gsd_device);
 	if (!device)
 		return;
+
+	if ((device_type & GSD_DEVICE_TYPE_PAD) != 0) {
+		/* Remotes like the Wacom ExpressKey Remote are a special case.
+		 * They are external pad devices, we want to distinctly show them
+		 * in the list. Other pads are mounted on a tablet, which
+		 * get their own entries.
+		 */
+		is_remote = cc_wacom_device_is_remote (device);
+		if (!is_remote)
+			return;
+	}
 
 	g_hash_table_insert (self->devices, gsd_device, device);
 
@@ -631,13 +624,13 @@ add_known_device (CcWacomPanel *self,
 		add_stylus (self, l->data);
 	}
 
-	if (is_ekr)
+	if (is_remote)
 		page = cc_wacom_ekr_page_new (self, device);
 	else
 		page = cc_wacom_page_new (self, device);
 
 	gtk_box_append (GTK_BOX (self->tablets), page);
-	g_hash_table_insert (self->pages, device, page);
+	g_hash_table_insert (self->pages, g_steal_pointer (&device), page);
 }
 
 static void
