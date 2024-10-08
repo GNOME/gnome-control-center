@@ -28,7 +28,9 @@ gboolean  touchscreen_is_present  (void);
 gboolean  mouse_is_present        (void);
 
 #ifdef GDK_WINDOWING_X11
+#ifdef ENABLE_X11_SUPPORT
 char     *xdevice_get_device_node (int deviceid);
+#endif
 #endif
 
 G_END_DECLS
