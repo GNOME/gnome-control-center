@@ -212,8 +212,6 @@ pulse_dep = dependency('libpulse', version: pulse_req_version)
 pulse_mainloop_dep = dependency('libpulse-mainloop-glib', version: pulse_req_version)
 upower_glib_dep = dependency('upower-glib', version: '>= 1.90.6')
 gudev_dep = dependency('gudev-1.0', version: '>= 232')
-x11_dep = dependency('x11', version: '>= 1.8')
-xi_dep = dependency('xi', version: '>= 1.2')
 epoxy_dep = dependency('epoxy')
 gcr_dep = dependency('gcr-4', version: '>= 4.1.0')
 pwquality_dep = dependency('pwquality', version: '>= 1.2.2')
@@ -268,6 +266,14 @@ endforeach
 config_h.set10('HAVE_CUPS_HTTPCONNECT2',
                cc.has_function('httpConnect2', dependencies: cups_dep),
                description: 'Define if httpConnect2() is available in CUPS')
+
+# X11
+have_x11_support = get_option('x11')
+if have_x11_support
+  x11_dep = dependency('x11', version: '>= 1.8')
+  xi_dep = dependency('xi', version: '>= 1.2')
+endif
+config_h.set('HAVE_X11', have_x11_support, description: 'Defined if X11 support is enabled')
 
 # IBus support
 enable_ibus = get_option('ibus')
