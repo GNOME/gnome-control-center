@@ -238,6 +238,14 @@ cc_wacom_device_is_fallback (CcWacomDevice *device)
 	return device->is_fallback;
 }
 
+gboolean
+cc_wacom_device_is_remote (CcWacomDevice *device)
+{
+	g_return_val_if_fail (CC_IS_WACOM_DEVICE (device), FALSE);
+
+	return libwacom_get_class (device->wdevice) == WCLASS_REMOTE;
+}
+
 WacomIntegrationFlags
 cc_wacom_device_get_integration_flags (CcWacomDevice *device)
 {
