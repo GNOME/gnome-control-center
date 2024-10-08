@@ -43,6 +43,8 @@ gboolean        cc_wacom_device_is_reversible   (CcWacomDevice *device);
 
 gboolean        cc_wacom_device_is_fallback     (CcWacomDevice *device);
 
+gboolean        cc_wacom_device_is_remote       (CcWacomDevice *device);
+
 WacomIntegrationFlags
 		cc_wacom_device_get_integration_flags (CcWacomDevice *device);
 
