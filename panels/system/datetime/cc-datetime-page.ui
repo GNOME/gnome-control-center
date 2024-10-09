@@ -190,6 +190,7 @@
                             <property name="label" translatable="yes">_24-hour</property>
                             <property name="use-underline">True</property>
                             <property name="group">ampm_format_button</property>
+                            <property name="can-shrink">True</property>
                             <signal name="toggled" handler="change_clock_settings" object="CcDateTimePage" swapped="yes"/>
                           </object>
                         </child>
@@ -197,6 +198,7 @@
                           <object class="GtkToggleButton" id="ampm_format_button">
                             <property name="label" translatable="yes">AM / _PM</property>
                             <property name="use-underline">True</property>
+                            <property name="can-shrink">True</property>
                             <signal name="toggled" handler="change_clock_settings" object="CcDateTimePage" swapped="yes"/>
                           </object>
                         </child>
