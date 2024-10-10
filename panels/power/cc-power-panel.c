@@ -419,7 +419,7 @@ set_value_for_combo_row (AdwComboRow *combo_row, gint value)
 
   /* The value is not listed, so add it at the best point (or the end). */
   text = cc_util_time_to_string_text (value * 1000);
-  gtk_string_list_append (GTK_STRING_LIST (model), text);
+  gtk_string_list_splice (GTK_STRING_LIST (model), insert_before, 0, (const char *[]) { text, NULL });
 
   new_item = g_list_model_get_item (model, i);
   g_object_set_data (G_OBJECT (new_item), "value", GUINT_TO_POINTER (value));
