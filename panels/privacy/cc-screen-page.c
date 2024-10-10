@@ -98,6 +98,9 @@ on_lock_combo_changed_cb (AdwComboRow   *combo_row,
   AdwEnumListItem *item;
   CcScreenPageLockAfter delay;
 
+  if (adw_combo_row_get_selected (combo_row) == GTK_INVALID_LIST_POSITION)
+    return;
+
   item = ADW_ENUM_LIST_ITEM (adw_combo_row_get_selected_item (combo_row));
   delay = adw_enum_list_item_get_value (item);
 
@@ -179,6 +182,9 @@ on_blank_screen_delay_changed_cb (AdwComboRow   *combo_row,
 {
   AdwEnumListItem *item;
   CcScreenPageBlankScreenDelay delay;
+
+  if (adw_combo_row_get_selected (combo_row) == GTK_INVALID_LIST_POSITION)
+    return;
 
   item = ADW_ENUM_LIST_ITEM (adw_combo_row_get_selected_item (combo_row));
   delay = adw_enum_list_item_get_value (item);
