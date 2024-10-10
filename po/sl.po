@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2024-10-06 12:50+0000\n"
-"PO-Revision-Date: 2024-10-06 16:58+0200\n"
+"POT-Creation-Date: 2024-10-09 11:59+0000\n"
+"PO-Revision-Date: 2024-10-10 18:03+0200\n"
 "Last-Translator: Martin Srebotnjak <miles@filmsi.net>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "Language: sl_SI\n"
@@ -41,8 +41,8 @@ msgid "Session Bus"
 msgstr "Vodilo seje"
 
 #: panels/applications/cc-applications-panel.c:856
-#: panels/privacy/bolt/cc-bolt-page.ui:158
-#: panels/privacy/bolt/cc-bolt-page.ui:196
+#: panels/privacy/bolt/cc-bolt-page.ui:164
+#: panels/privacy/bolt/cc-bolt-page.ui:202
 #: panels/privacy/cc-privacy-panel.ui:72
 msgid "Devices"
 msgstr "Naprave"
@@ -1631,15 +1631,15 @@ msgid "This profile may no longer be accurate"
 msgstr "Ta profil morda ni več natančen."
 
 #: panels/color/gnome-color-panel.desktop.in:3
-msgid "Color"
-msgstr "Barva"
+msgid "Color Management"
+msgstr "Upravljanje z barvami"
 
 #: panels/color/gnome-color-panel.desktop.in:4
 msgid ""
 "Calibrate the color of your devices, such as displays, cameras or printers"
 msgstr "Umerite barvo svojih naprav kot so zasloni, fotoaparati ali tiskalniki"
 
-#. Translators: Search terms to find the Color panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#. Translators: Search terms to find the Color Management panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/color/gnome-color-panel.desktop.in:15
 msgid "Color;ICC;Profile;Calibrate;Printer;Display;"
 msgstr "Barva;ICC;Profil;Umerjanje;Tiskalnik;Zaslon;"
@@ -1813,7 +1813,7 @@ msgid "0 seconds"
 msgstr "0 sekund"
 
 #. translators: This is the default hotspot name, need to be less than 32-bytes
-#: panels/common/hostname-helper.c:177
+#: panels/common/hostname-helper.c:178
 msgctxt "hotspot"
 msgid "Hotspot"
 msgstr "Vroča točka"
@@ -2549,33 +2549,37 @@ msgstr ""
 "Pritisnite tipko Esc za preklic oziroma povratno tipko za ponastavitev "
 "tipkovne bližnjice."
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.ui:131
-#: panels/keyboard/cc-keyboard-shortcut-editor.ui:233
-msgid "Reset"
-msgstr "↓Ponastavi"
+#: panels/keyboard/cc-keyboard-shortcut-editor.ui:128
+#: panels/keyboard/cc-keyboard-shortcut-row.ui:23
+msgid "Reset Shortcut"
+msgstr "Ponastavi tipkovno bližnjico"
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.ui:161
+#: panels/keyboard/cc-keyboard-shortcut-editor.ui:159
 #: panels/wwan/cc-wwan-apn-dialog.ui:96
 msgid "Name"
 msgstr "Ime"
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.ui:172
+#: panels/keyboard/cc-keyboard-shortcut-editor.ui:170
 msgid "Command"
 msgstr "Ukaz"
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.ui:183
+#: panels/keyboard/cc-keyboard-shortcut-editor.ui:181
 msgid "Shortcut"
 msgstr "Bližnjica"
 
+#: panels/keyboard/cc-keyboard-shortcut-editor.ui:231
+msgid "Reset"
+msgstr "↓Ponastavi"
+
 #. Translators: This is a mark in the Grayscale scale
-#: panels/keyboard/cc-keyboard-shortcut-editor.ui:247
+#: panels/keyboard/cc-keyboard-shortcut-editor.ui:245
 #: panels/sound/cc-alert-chooser-window.c:340
 #: panels/sound/cc-alert-chooser-window.ui:17
 #: panels/universal-access/cc-ua-zoom-page.ui:285
 msgid "None"
 msgstr "Brez"
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.ui:256
+#: panels/keyboard/cc-keyboard-shortcut-editor.ui:254
 msgid "_Set Shortcut…"
 msgstr "Nastavi _tipkovno bližnjico …"
 
@@ -2591,10 +2595,6 @@ msgstr[3] "%d spremenjene"
 #: panels/keyboard/cc-keyboard-shortcut-group.c:154
 msgid "Add a Shortcut"
 msgstr "Dodaj tipkovno bližnjico"
-
-#: panels/keyboard/cc-keyboard-shortcut-row.ui:23
-msgid "Reset Shortcut"
-msgstr "Ponastavi tipkovno bližnjico"
 
 #: panels/keyboard/gnome-keyboard-panel.desktop.in:4
 msgid ""
@@ -5797,23 +5797,23 @@ msgctxt "Thunderbolt Device Status"
 msgid "Authorized"
 msgstr "Overjeno"
 
-#: panels/privacy/bolt/cc-bolt-page.c:211
+#: panels/privacy/bolt/cc-bolt-page.c:213
 msgid ""
 "The Thunderbolt subsystem (boltd) is not installed or not set up properly."
 msgstr ""
 "Podsistem Thunderbolt (boltd) ni nameščen oziroma je neustrezno nastavljen."
 
-#: panels/privacy/bolt/cc-bolt-page.c:467
+#: panels/privacy/bolt/cc-bolt-page.c:469
 msgid "Allow direct access to devices such as docks and external GPUs."
 msgstr "Dovoli neposreden dostop do naprav, kot so sidrišča in zunanje GPE."
 
-#: panels/privacy/bolt/cc-bolt-page.c:468
+#: panels/privacy/bolt/cc-bolt-page.c:470
 msgid "Only USB and Display Port devices can attach."
 msgstr ""
 "Naprave je mogoče pripeti le z uporabo priklopa USB oziroma zaslonskega "
 "priklopa."
 
-#: panels/privacy/bolt/cc-bolt-page.c:503
+#: panels/privacy/bolt/cc-bolt-page.c:505
 msgid ""
 "Thunderbolt could not be detected.\n"
 "Either the system lacks Thunderbolt support, it has been disabled in the "
@@ -5823,15 +5823,15 @@ msgstr ""
 "Podpora sistemu morda ni na voljo, sistem je v zaganjalniku BIOS onemogočen, "
 "ali pa je nastavljen na nepodprto varnostno raven."
 
-#: panels/privacy/bolt/cc-bolt-page.c:547
+#: panels/privacy/bolt/cc-bolt-page.c:549
 msgid "Thunderbolt support has been disabled in the BIOS."
 msgstr "Podpora Thunderbolt je onemogočena med nastavitvami BIOS."
 
-#: panels/privacy/bolt/cc-bolt-page.c:551
+#: panels/privacy/bolt/cc-bolt-page.c:553
 msgid "Thunderbolt security level could not be determined."
 msgstr "Varnostne ravni Thunderbolt ni mogoče določiti."
 
-#: panels/privacy/bolt/cc-bolt-page.c:671
+#: panels/privacy/bolt/cc-bolt-page.c:673
 #, c-format
 msgid "Error switching direct mode: %s"
 msgstr "Napaka preklapljanja neposrednega načina: %s"
@@ -5852,15 +5852,15 @@ msgstr "Povezava s podsistemom Thunderbolt ni mogoča."
 msgid "Direct Access"
 msgstr "Neposredni dostop"
 
-#: panels/privacy/bolt/cc-bolt-page.ui:72
+#: panels/privacy/bolt/cc-bolt-page.ui:73
 msgid "Allow direct access to devices such as docks and external GPUs"
 msgstr "Dovoli neposreden dostop do naprav, kot so sidrišča in zunanje GPE."
 
-#: panels/privacy/bolt/cc-bolt-page.ui:122
+#: panels/privacy/bolt/cc-bolt-page.ui:128
 msgid "Pending Devices"
 msgstr "Naprave na čakanju"
 
-#: panels/privacy/bolt/cc-bolt-page.ui:205
+#: panels/privacy/bolt/cc-bolt-page.ui:211
 msgid "No devices attached"
 msgstr "Ni priklopljenih naprav"
 
@@ -9133,15 +9133,15 @@ msgstr "Pokaži zaslonsko pomoč"
 msgid "This device is unknown and may present wrong capabilities — %s."
 msgstr "Ta naprava ni znana in ima lahko napačne zmogljivosti – %s."
 
-#: panels/wacom/cc-wacom-device.c:444
+#: panels/wacom/cc-wacom-device.c:452
 msgid "Tablet mounted on laptop panel"
 msgstr "Na prenosnik je priklopljena tablica"
 
-#: panels/wacom/cc-wacom-device.c:446
+#: panels/wacom/cc-wacom-device.c:454
 msgid "Tablet mounted on external display"
 msgstr "Na zunanji zaslon je priklopljena tablica"
 
-#: panels/wacom/cc-wacom-device.c:448
+#: panels/wacom/cc-wacom-device.c:456
 msgid "External tablet device"
 msgstr "Zunanja tablična naprava"
 
