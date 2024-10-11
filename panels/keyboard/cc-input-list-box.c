@@ -581,6 +581,8 @@ input_row_activated_cb (CcInputListBox *self, GtkListBoxRow *row)
   }
 }
 
+/* FIXME: We need to properly handle localed sources, see e.g.
+          https://gitlab.gnome.org/GNOME/gnome-shell/-/issues/7761#note_2159232
 static void
 add_input_sources_from_localed (CcInputListBox *self)
 {
@@ -620,6 +622,7 @@ add_input_sources_from_localed (CcInputListBox *self)
     add_input_row (self, CC_INPUT_SOURCE (source));
   }
 }
+*/
 
 static void
 set_localed_input (CcInputListBox *self)
