@@ -97,6 +97,45 @@ remove_duplicate_dashes (char *input)
 	return input;
 }
 
+static gboolean
+is_valid_fqdn_label (const char *label)
+{
+	int label_len, i;
+
+	/* Each label must be at least 1 alphanum/hyphen chars long,
+	   and can't start/end with a hyphen */
+	label_len = strlen (label);
+	if (label_len == 0)
+		return FALSE;
+
+	if (label[0] == '-' || label[label_len - 1] == '-')
+		return FALSE;
+
+	for (i = 0; i < label_len; i++)
+		if (!g_ascii_isalnum (label[i]) && label[i] != '-')
+			return FALSE;
+
+	return TRUE;
+}
+
+static gboolean
+is_valid_fqdn (const char *input)
+{
+	g_auto(GStrv) split_input = NULL;
+	int i;
+
+	split_input = g_strsplit (input, ".", -1);
+
+	if (split_input[0] == NULL)
+		return FALSE;
+
+	for (i = 0; split_input[i] != NULL; i++)
+		if (!is_valid_fqdn_label (split_input[i]))
+			return FALSE;
+
+	return TRUE;
+}
+
 #define CHECK	if (is_empty (result)) return g_strdup ("localhost")
 
 char *
@@ -111,6 +150,11 @@ pretty_hostname_to_static (const char *pretty,
 	g_return_val_if_fail (g_utf8_validate (pretty, -1, NULL), NULL);
 
 	g_debug ("Input: '%s'", pretty);
+
+	/* We allow setting static fqdn which have periods in them. Upper case is kept, as
+	   resolving is case-insensitive */
+	if (is_valid_fqdn (pretty))
+		return g_strdup (pretty);
 
 	composed = g_utf8_normalize (pretty, -1, G_NORMALIZE_ALL_COMPOSE);
 	g_debug ("\tcomposed: '%s'", composed);
