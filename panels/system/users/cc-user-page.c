@@ -265,25 +265,14 @@ fullname_entry_apply_cb (CcUserPage *self)
 }
 
 static void
-language_chooser_response (CcUserPage        *self,
-                           guint              response_id,
-                           CcLanguageChooser *chooser)
+language_response (CcUserPage        *self,
+                   CcLanguageChooser *chooser)
 {
     g_autofree gchar *language_name = NULL;
     const gchar *selected_language;
 
-    if (response_id != GTK_RESPONSE_OK) {
-        gtk_window_destroy (GTK_WINDOW (chooser));
-
-        return;
-    }
-
     selected_language = cc_language_chooser_get_language (chooser);
     if (!selected_language) {
-        return;
-    }
-
-    if (g_strcmp0 (selected_language, act_user_get_language (self->user)) == 0) {
         return;
     }
 
@@ -292,29 +281,28 @@ language_chooser_response (CcUserPage        *self,
     language_name = gnome_get_language_from_locale (selected_language, NULL);
     cc_list_row_set_secondary_label (self->language_row, language_name);
 
-    gtk_window_close (GTK_WINDOW (chooser));
+    adw_dialog_close (ADW_DIALOG (chooser));
 }
 
 static void
-change_language (CcUserPage *self)
+show_language_chooser (CcUserPage *self)
 {
     CcLanguageChooser *language_chooser;
     const gchar *current_language;
 
     current_language = act_user_get_language (self->user);
+
     language_chooser = cc_language_chooser_new ();
 
-    g_signal_connect_object (language_chooser, "response",
-                             G_CALLBACK (language_chooser_response), self,
+    g_signal_connect_object (language_chooser, "language-selected",
+                             G_CALLBACK (language_response), self,
                              G_CONNECT_SWAPPED);
 
     if (current_language && *current_language != '\0') {
         cc_language_chooser_set_language (language_chooser, current_language);
     }
 
-    gtk_window_set_transient_for (GTK_WINDOW (language_chooser),
-                                  GTK_WINDOW (gtk_widget_get_native (GTK_WIDGET (self))));
-    gtk_window_present (GTK_WINDOW (language_chooser));
+    adw_dialog_present (ADW_DIALOG (language_chooser), GTK_WIDGET (self));
 }
 
 static void
@@ -681,7 +669,7 @@ cc_user_page_class_init (CcUserPageClass * klass)
     gtk_widget_class_bind_template_callback (widget_class, account_type_changed);
     gtk_widget_class_bind_template_callback (widget_class, autologin_changed);
     gtk_widget_class_bind_template_callback (widget_class, change_fingerprint);
-    gtk_widget_class_bind_template_callback (widget_class, change_language);
+    gtk_widget_class_bind_template_callback (widget_class, show_language_chooser);
     gtk_widget_class_bind_template_callback (widget_class, change_password);
     gtk_widget_class_bind_template_callback (widget_class, fullname_entry_apply_cb);
     gtk_widget_class_bind_template_callback (widget_class, remove_local_user_response);
