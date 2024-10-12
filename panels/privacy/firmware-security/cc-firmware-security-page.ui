@@ -170,49 +170,30 @@
                         </child>
                       </object>
                     </child>
-
                     <child>
-                      <object class="AdwPreferencesGroup">
+                      <object class="AdwPreferencesGroup" id="firmware_security_log_pgroup">
                         <property name="title" translatable="yes">Security Events</property>
                         <child>
-                          <object class="AdwViewStack" id="firmware_security_log_stack">
+                          <object class="GtkBox" id="no_events_box">
+                            <property name="orientation">vertical</property>
                             <child>
-                              <object class="AdwViewStackPage">
-                                <property name="name">no-events-page</property>
-                                <property name="child">
-                                  <object class="GtkBox">
-                                    <property name="orientation">vertical</property>
-                                    <child>
-                                      <object class="AdwStatusPage">
-                                        <property name="vexpand">True</property>
-                                        <property name="title" translatable="yes">No Events</property>
-                                        <property name="icon-name">document-open-recent-symbolic</property>
-                                        <style>
-                                          <class name="dim-label" />
-                                          <class name="compact" />
-                                        </style>
-                                      </object>
-                                    </child>
-                                   <style>
-                                      <class name="card" />
-                                   </style>
-                                  </object>
-                                </property>
+                              <object class="AdwStatusPage">
+                                <property name="vexpand">True</property>
+                                <property name="title" translatable="yes">No Events</property>
+                                <property name="icon-name">document-open-recent-symbolic</property>
+                                <style>
+                                  <class name="dim-label" />
+                                  <class name="compact" />
+                                </style>
                               </object>
                             </child>
-                            <child>
-                              <object class="AdwViewStackPage">
-                                <property name="name">events-page</property>
-                                <property name="child">
-                                  <object class="AdwPreferencesGroup" id="firmware_security_log_pgroup" />
-                                </property>
-                              </object>
-                            </child>
+                            <style>
+                              <class name="card" />
+                            </style>
                           </object>
                         </child>
                       </object>
                     </child>
-
                   </object>
                 </property>
               </object>

@@ -61,8 +61,8 @@ struct _CcFirmwareSecurityPage
 
   /* event listbox */
   GtkWidget        *firmware_security_log_listbox;
-  GtkWidget        *firmware_security_log_stack;
   GtkWidget        *firmware_security_log_pgroup;
+  GtkWidget        *no_events_box;
 
   GCancellable     *cancellable;
   guint             timeout_id;
@@ -244,9 +244,8 @@ parse_event_variant_iter (CcFirmwareSecurityPage *self,
   g_string_append (self->event_log_output, "\n");
 
   adw_expander_row_set_subtitle (ADW_EXPANDER_ROW (row), date_string);
+  gtk_widget_set_visible (self->no_events_box, FALSE);
   adw_preferences_group_add (ADW_PREFERENCES_GROUP (self->firmware_security_log_pgroup), GTK_WIDGET (row));
-
-  adw_view_stack_set_visible_child_name (ADW_VIEW_STACK (self->firmware_security_log_stack), "events-page");
 }
 
 static void
@@ -675,7 +674,7 @@ cc_firmware_security_page_class_init (CcFirmwareSecurityPageClass *klass)
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/privacy/firmware-security/cc-firmware-security-page.ui");
 
   gtk_widget_class_bind_template_child (widget_class, CcFirmwareSecurityPage, firmware_security_log_pgroup);
-  gtk_widget_class_bind_template_child (widget_class, CcFirmwareSecurityPage, firmware_security_log_stack);
+  gtk_widget_class_bind_template_child (widget_class, CcFirmwareSecurityPage, no_events_box);
   gtk_widget_class_bind_template_child (widget_class, CcFirmwareSecurityPage, hsi_button);
   gtk_widget_class_bind_template_child (widget_class, CcFirmwareSecurityPage, hsi_description);
   gtk_widget_class_bind_template_child (widget_class, CcFirmwareSecurityPage, hsi_icon);
