@@ -32,10 +32,8 @@ test_hostname (void)
 		g_autofree gchar *result1 = NULL;
 		g_autofree gchar *result2 = NULL;
 
-		if (*lines[i] == '#')
+		if (*lines[i] == '#' || *lines[i] == '\0')
 			continue;
-		if (*lines[i] == '\0')
-			break;
 
 		items = g_strsplit (lines[i], "\t", -1);
 		utf8 = g_locale_from_utf8 (items[0], -1, NULL, NULL, NULL);
