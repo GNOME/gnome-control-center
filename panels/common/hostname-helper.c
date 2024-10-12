@@ -36,7 +36,6 @@ allowed_chars (void)
 	for (i = '0'; i <= '9'; i++)
 		g_string_append_c (s, i);
 	g_string_append_c (s, '-');
-	g_string_append_c (s, '.');
 
 	return g_string_free (s, FALSE);
 }
