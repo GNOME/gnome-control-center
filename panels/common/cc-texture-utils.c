@@ -55,7 +55,7 @@ cc_texture_new_from_bytes_scaled (GBytes *bytes,
                                   double  scale)
 {
   LoaderData loader_data;
-  GdkTexture *texture;
+  g_autoptr (GdkTexture) texture = NULL;
   g_autoptr (GdkPaintable) paintable = NULL;
   g_autoptr (GdkPixbufLoader) loader = NULL;
   gboolean success;
@@ -78,9 +78,7 @@ cc_texture_new_from_bytes_scaled (GBytes *bytes,
   if (loader_data.scale != 1.0)
     return gtk_scaler_new (GDK_PAINTABLE (texture), loader_data.scale);
   else
-    return g_object_ref (GDK_PAINTABLE (texture));
-
-  return paintable;
+    return GDK_PAINTABLE (g_steal_pointer (&texture));
 }
 
 GdkPaintable *
