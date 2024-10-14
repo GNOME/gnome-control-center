@@ -384,7 +384,7 @@ static int
 on_timeout_cb (gpointer user_data)
 {
   CcFirmwareSecurityPage *self = CC_FIRMWARE_SECURITY_PAGE (user_data);
-  show_loading_page (self, "panel_show");
+  show_loading_page (self, "firmware-security-page");
   self->timeout_id = 0;
   return 0;
 }
@@ -393,7 +393,7 @@ static int
 on_timeout_unavaliable (gpointer user_data)
 {
   CcFirmwareSecurityPage *self = CC_FIRMWARE_SECURITY_PAGE (user_data);
-  show_loading_page (self, "panel_unavailable");
+  show_loading_page (self, "unavailable-page");
   self->timeout_id = 0;
   return 0;
 }
