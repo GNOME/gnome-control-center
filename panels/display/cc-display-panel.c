@@ -253,6 +253,7 @@ config_ensure_of_type (CcDisplayPanel *self, CcDisplayConfigType type)
           cc_display_monitor_set_mode (output, mode);
           cc_display_monitor_set_scale (output, scale);
         }
+      cc_display_config_snap_outputs (self->current_config);
       break;
 
     case CC_DISPLAY_CONFIG_CLONE:
