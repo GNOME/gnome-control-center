@@ -703,6 +703,7 @@ on_stack_visible_child_changed_cb (CcWifiPanel *self)
   g_clear_pointer (&self->spinner_binding, g_binding_unbind);
 
   visible_device_id = gtk_stack_get_visible_child_name (self->stack);
+  gtk_stack_set_visible_child_name (self->device_stack, visible_device_id);
   for (i = 0; i < self->devices->len; i++)
     {
       NetDeviceWifi *net_device = g_ptr_array_index (self->devices, i);
