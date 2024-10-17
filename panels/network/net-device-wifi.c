@@ -57,7 +57,6 @@ struct _NetDeviceWifi
 
         AdwWindowTitle          *wifi_headerbar_title;
         AdwPreferencesGroup     *details_box;
-        GtkSwitch               *device_off_switch;
         GtkBox                  *header_box;
         GtkPopover              *header_button_popover;
         GtkBox                  *hotspot_box;
