@@ -57,11 +57,6 @@ template $CcSharingPanel: $CcPanel {
             Adw.ActionRow personal_file_sharing_enable_row {
               title: _("_File Sharing");
               use-underline: true;
-
-              [suffix]
-              $CcListRowInfoButton personal_file_sharing_info_button {
-                valign: center;
-              }
             }
 
             Adw.ActionRow personal_file_sharing_address_row {
@@ -136,16 +131,12 @@ Adw.Dialog media_sharing_dialog {
     Adw.HeaderBar {}
 
     content: Adw.PreferencesPage media_sharing_page {
+      description: _("Media sharing allows streaming pictures, music and video to DLNA enabled devices on the current network.");
+
       Adw.PreferencesGroup {
         Adw.ActionRow media_sharing_enable_row {
           title: _("_Media Sharing");
           use-underline: true;
-
-          [suffix]
-          $CcListRowInfoButton {
-            valign: center;
-            text: _("Media sharing allows streaming pictures, music and video to DLNA enabled devices on the current network.");
-          }
         }
       }
 

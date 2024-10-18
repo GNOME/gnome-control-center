@@ -24,7 +24,6 @@
 #include "cc-list-row.h"
 #include "shell/cc-application.h"
 #include "shell/cc-log.h"
-#include "cc-list-row-info-button.h"
 #include "cc-hostname.h"
 
 #include "cc-sharing-resources.h"
@@ -57,7 +56,6 @@ struct _CcSharingPanel
   GtkWidget *media_sharing_switch;
   AdwToastOverlay *personal_file_sharing_toast_overlay;
   AdwActionRow *personal_file_sharing_enable_row;
-  CcListRowInfoButton *personal_file_sharing_info_button;
   AdwActionRow *personal_file_sharing_address_row;
   AdwPreferencesPage *personal_file_sharing_prefs_page;
   GtkWidget *personal_file_sharing_password_entry_row;
@@ -137,7 +135,6 @@ cc_sharing_panel_class_init (CcSharingPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, media_sharing_row);
   gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, personal_file_sharing_toast_overlay);
   gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, personal_file_sharing_enable_row);
-  gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, personal_file_sharing_info_button);
   gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, personal_file_sharing_address_row);
   gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, personal_file_sharing_prefs_page);
   gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, personal_file_sharing_password_entry_row);
@@ -595,7 +592,7 @@ cc_sharing_panel_setup_personal_file_sharing_page (CcSharingPanel *self)
   personal_file_sharing_info_text = g_strdup_printf (_("File sharing allows sharing the Public folder with other devices "
                                                        "on the current network. This device will be visible as “%s”."),
                                                      hostname);
-  cc_list_row_info_button_set_text (self->personal_file_sharing_info_button, personal_file_sharing_info_text);
+  adw_preferences_page_set_description (self->personal_file_sharing_prefs_page, personal_file_sharing_info_text);
 
   cc_sharing_panel_bind_networks_to_label (self,
                                            networks,
