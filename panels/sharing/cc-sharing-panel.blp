@@ -6,7 +6,7 @@ template $CcSharingPanel: $CcPanel {
     [top]
     Adw.HeaderBar {}
 
-    content: Adw.PreferencesPage sharing_panel {
+    content: Adw.PreferencesPage {
       Adw.PreferencesGroup {
         margin-bottom: 12;
 
@@ -16,7 +16,7 @@ template $CcSharingPanel: $CcPanel {
         }
       }
 
-      Adw.PreferencesGroup main_list_box {
+      Adw.PreferencesGroup {
         $CcListRow personal_file_sharing_row {
           icon-name: "folder-remote-symbolic";
           show-arrow: true;

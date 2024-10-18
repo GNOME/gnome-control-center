@@ -50,7 +50,6 @@ struct _CcSharingPanel
   CcPanel parent_instance;
 
   GtkWidget *hostname_entry;
-  GtkWidget *main_list_box;
   AdwDialog *media_sharing_dialog;
   AdwPreferencesPage *media_sharing_page;
   AdwActionRow *media_sharing_enable_row;
@@ -139,7 +138,6 @@ cc_sharing_panel_class_init (CcSharingPanelClass *klass)
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/sharing/cc-sharing-panel.ui");
 
   gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, hostname_entry);
-  gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, main_list_box);
   gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, media_sharing_dialog);
   gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, media_sharing_page);
   gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, media_sharing_enable_row);
