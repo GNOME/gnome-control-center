@@ -54,7 +54,7 @@ sources = common_sources + files(
   'cc-texture-utils.c',
   'cc-vertical-row.c',
   'cc-util.c',
-  'gtk-scaler.c'
+  'cc-scaler.c'
 )
 
 deps = common_deps + [

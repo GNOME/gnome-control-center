@@ -17,7 +17,7 @@
  * Authors: Benjamin Otte <otte@gnome.org>
  */
 
-/* Copied from gtkscalerprivate.h
+/* Copied from gtkscalerprivate.h, renamed to CcScaler
  * https://gitlab.gnome.org/GNOME/gtk/-/blob/90c9e88ee91fb8a61563f14df0b59588f9068ee9/gtk/gtkscalerprivate.h */
 
 #pragma once
@@ -26,12 +26,12 @@
 
 G_BEGIN_DECLS
 
-#define GTK_TYPE_SCALER (gtk_scaler_get_type ())
+#define CC_TYPE_SCALER (cc_scaler_get_type ())
 
-G_DECLARE_FINAL_TYPE (GtkScaler, gtk_scaler, GTK, SCALER, GObject)
+G_DECLARE_FINAL_TYPE (CcScaler, cc_scaler, CC, SCALER, GObject)
 
-GdkPaintable *  gtk_scaler_new                  (GdkPaintable   *paintable,
-                                                 double          scale);
+GdkPaintable *cc_scaler_new (GdkPaintable   *paintable,
+                             double          scale);
 
 G_END_DECLS
 
