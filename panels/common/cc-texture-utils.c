@@ -22,7 +22,7 @@
 
 #include "cc-texture-utils.h"
 
-#include "gtk-scaler.h"
+#include "cc-scaler.h"
 
 typedef struct {
   double scale;
@@ -76,7 +76,7 @@ cc_texture_new_from_bytes_scaled (GBytes *bytes,
   texture = gdk_texture_new_for_pixbuf (gdk_pixbuf_loader_get_pixbuf (loader));
 
   if (loader_data.scale != 1.0)
-    return gtk_scaler_new (GDK_PAINTABLE (texture), loader_data.scale);
+    return cc_scaler_new (GDK_PAINTABLE (texture), loader_data.scale);
   else
     return GDK_PAINTABLE (g_steal_pointer (&texture));
 }
