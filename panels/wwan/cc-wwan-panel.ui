@@ -49,6 +49,7 @@
                                     <property name="icon-name">network-cellular-offline-symbolic</property>
                                     <property name="title" translatable="yes">No WWAN Adapter Found</property>
                                     <property name="description" translatable="yes">Make sure you have a Wireless Wan/Cellular device</property>
+                                    <property name="vexpand">True</property>
                                   </object>
                                 </property>
                               </object>
@@ -63,11 +64,11 @@
                                     <property name="icon-name">airplane-mode-symbolic</property>
                                     <property name="title" translatable="yes">Airplane Mode On</property>
                                     <property name="description" translatable="yes">Wireless Wan is disabled when airplane mode is on</property>
+                                    <property name="vexpand">True</property>
                                     <property name="child">
                                       <object class="GtkButton">
                                         <property name="halign">center</property>
                                         <property name="use-underline">True</property>
-                                        <property name="margin-top">24</property>
                                         <property name="label" translatable="yes">_Turn off Airplane Mode</property>
                                         <signal name="clicked" handler="wwan_on_airplane_off_clicked_cb" swapped="yes"/>
                                         <style>
