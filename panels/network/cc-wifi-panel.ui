@@ -134,6 +134,9 @@
                                   <object class="GtkLabel">
                                     <property name="label" translatable="yes">Wi-Fi Hotspot Active</property>
                                     <property name="margin-bottom">12</property>
+                                    <property name="justify">center</property>
+                                    <property name="wrap">True</property>
+                                    <property name="wrap-mode">word-char</property>
                                     <style>
                                       <class name="title"/>
                                       <class name="title-1"/>
@@ -146,12 +149,14 @@
                                     <property name="label" translatable="yes">Scan with another device to connect to the hotspot.
 Turn off the hotspot to use Wi-Fi with this device.</property>
                                     <property name="justify">center</property>
+                                    <property name="wrap">True</property>
+                                    <property name="wrap-mode">word-char</property>
                                     <property name="margin-bottom">36</property>
                                   </object>
                                 </child>
 
                                 <child>
-                                  <object class="GtkButton">
+                                  <object class="GtkButton" id="hotspot_off_button">
                                     <property name="halign">center</property>
                                     <property name="label" translatable="yes">T_urn Off Hotspot…</property>
                                     <property name="use-underline">True</property>
