@@ -55,6 +55,7 @@ struct _CcWifiPanel
   GtkStack           *center_stack;
   GtkStack           *device_stack;
   GtkBox             *hotspot_box;
+  GtkButton          *hotspot_off_button;
   GtkLabel           *list_label;
   GtkStack           *main_stack;
   GtkWidget          *spinner;
@@ -837,6 +838,7 @@ cc_wifi_panel_class_init (CcWifiPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcWifiPanel, center_stack);
   gtk_widget_class_bind_template_child (widget_class, CcWifiPanel, device_stack);
   gtk_widget_class_bind_template_child (widget_class, CcWifiPanel, hotspot_box);
+  gtk_widget_class_bind_template_child (widget_class, CcWifiPanel, hotspot_off_button);
   gtk_widget_class_bind_template_child (widget_class, CcWifiPanel, list_label);
   gtk_widget_class_bind_template_child (widget_class, CcWifiPanel, main_stack);
   gtk_widget_class_bind_template_child (widget_class, CcWifiPanel, rfkill_row);
@@ -857,6 +859,7 @@ static void
 cc_wifi_panel_init (CcWifiPanel *self)
 {
   g_autoptr(GtkCssProvider) provider = NULL;
+  GtkLabel *hotspot_off_label;
 
   g_resources_register (cc_network_get_resource ());
 
@@ -914,4 +917,9 @@ cc_wifi_panel_init (CcWifiPanel *self)
   gtk_style_context_add_provider_for_display (gdk_display_get_default (),
                                               GTK_STYLE_PROVIDER (provider),
                                               GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
+
+  /* Customize some properties that would lose styling if done in UI */
+  hotspot_off_label = GTK_LABEL (gtk_button_get_child (self->hotspot_off_button));
+  gtk_label_set_wrap (hotspot_off_label, TRUE);
+  gtk_label_set_justify (hotspot_off_label, GTK_JUSTIFY_CENTER);
 }
