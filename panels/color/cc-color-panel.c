@@ -334,24 +334,6 @@ gcm_prefs_calib_delayed_complete_cb (gpointer user_data)
 }
 
 static void
-gcm_prefs_calib_prepare_cb (CcColorPanel *self,
-                            GtkWidget    *page)
-{
-  /* give the user the indication they should actually manually set the
-   * desired brightness rather than clicking blindly by delaying the
-   * "Next" button deliberately for a second or so */
-  if (page == self->box_calib_brightness)
-  {
-    g_timeout_add_seconds (1, gcm_prefs_calib_delayed_complete_cb, self);
-    return;
-  }
-
-  /* disable the brightness page as we don't want to show a 'Finished'
-   * button if the user goes back at any point */
-  gtk_assistant_set_page_complete (GTK_ASSISTANT (self->assistant_calib), self->box_calib_brightness, FALSE);
-}
-
-static void
 gcm_prefs_calib_apply_cb (CcColorPanel *self)
 {
   gboolean ret;
@@ -550,6 +532,7 @@ gcm_prefs_calib_sensor_treeview_clicked_cb (CcColorPanel *self,
 static void
 gcm_prefs_calibrate_display (CcColorPanel *self)
 {
+  GtkAssistant *assistant;
   CdSensor *sensor_tmp;
   const gchar *tmp;
   GtkTreeIter iter;
@@ -557,6 +540,12 @@ gcm_prefs_calibrate_display (CcColorPanel *self)
 
   /* set target device */
   cc_color_calibrate_set_device (self->calibrate, self->current_device);
+
+  assistant = GTK_ASSISTANT (self->assistant_calib);
+  gtk_assistant_set_page_complete (assistant, self->box_calib_brightness, FALSE);
+  gtk_assistant_set_page_complete (assistant, self->box_calib_temp, FALSE);
+  gtk_assistant_set_page_complete (assistant, self->box_calib_kind, FALSE);
+  gtk_assistant_set_page_complete (assistant, self->box_calib_sensor, FALSE);
 
   /* add sensors to list */
   gtk_list_store_clear (GTK_LIST_STORE (self->liststore_calib_sensor));
@@ -2002,6 +1991,46 @@ cc_color_panel_treeview_quality_default_cb (GtkTreeModel *model,
   if (quality == CD_PROFILE_QUALITY_MEDIUM)
     gtk_tree_selection_select_iter (selection, iter);
   return FALSE;
+}
+
+static void
+gcm_prefs_calib_prepare_cb (CcColorPanel *self,
+                            GtkWidget    *page)
+{
+  GtkTreeSelection *selection;
+
+  /* give the user the indication they should actually manually set the
+   * desired brightness rather than clicking blindly by delaying the
+   * "Next" button deliberately for a second or so */
+  if (page == self->box_calib_brightness)
+    {
+      g_timeout_add_seconds (1, gcm_prefs_calib_delayed_complete_cb, self);
+      return;
+    }
+  else if (page == self->box_calib_temp)
+    {
+      selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (self->treeview_calib_temp));
+      gcm_prefs_calib_temp_treeview_clicked_cb (self, selection);
+    }
+  else if (page == self->box_calib_kind)
+    {
+      selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (self->treeview_calib_kind));
+      gcm_prefs_calib_kind_treeview_clicked_cb (self, selection);
+    }
+  else if (page == self->box_calib_quality)
+    {
+      selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (self->treeview_calib_quality));
+      gcm_prefs_calib_quality_treeview_clicked_cb (self, selection);
+    }
+  else if (page == self->box_calib_sensor)
+    {
+      selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (self->treeview_calib_sensor));
+      gcm_prefs_calib_sensor_treeview_clicked_cb (self, selection);
+    }
+
+  /* disable the brightness page as we don't want to show a 'Finished'
+   * button if the user goes back at any point */
+  gtk_assistant_set_page_complete (GTK_ASSISTANT (self->assistant_calib), self->box_calib_brightness, FALSE);
 }
 
 static void
