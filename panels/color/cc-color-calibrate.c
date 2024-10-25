@@ -442,6 +442,7 @@ cc_color_calibrate_finished (CcColorCalibrate *calibrate,
   gtk_widget_set_visible (widget, FALSE);
   widget = GTK_WIDGET (gtk_builder_get_object (calibrate->builder,
                                                "button_done"));
+  gtk_widget_set_visible (widget, TRUE);
 
   str = g_string_new ("");
   if (code == CD_SESSION_ERROR_NONE)
