@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
-  <!-- interface-requires gtk+ 3.0 -->
-  <object class="GtkDialog" id="dialog_calibrate">
+  <object class="GtkWindow" id="dialog_calibrate">
     <property name="margin_top">32</property>
     <property name="margin_bottom">32</property>
     <property name="margin_start">12</property>
@@ -9,7 +8,7 @@
     <property name="title" translatable="yes">Display Calibration</property>
     <property name="deletable">False</property>
     <style>
-      <class name="osd"/>
+      <class name="cc-color-calibrate-window"/>
     </style>
     <child>
       <object class="GtkBox" id="dialog-vbox4">
@@ -64,10 +63,6 @@
                 <property name="label" translatable="yes">Do not disturb the calibration device while in progress</property>
                 <property name="justify">center</property>
                 <property name="wrap">True</property>
-                <attributes>
-                  <attribute name="weight" value="bold"/>
-                  <attribute name="foreground" value="#ffffffffffff"/>
-                </attributes>
               </object>
             </child>
             <child>
@@ -78,12 +73,6 @@
         </child>
       </object>
     </child>
-    <action-widgets>
-      <action-widget response="0">button_cancel</action-widget>
-      <action-widget response="0">button_start</action-widget>
-      <action-widget response="0">button_resume</action-widget>
-      <action-widget response="0">button_done</action-widget>
-    </action-widgets>
   </object>
   <object class="GtkSizeGroup" id="sizegroup_sample"/>
 </interface>
