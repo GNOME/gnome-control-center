@@ -405,11 +405,17 @@ cc_color_profile_constructed (GObject *object)
 static void
 cc_color_profile_class_init (CcColorProfileClass *klass)
 {
+  GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
   object_class->get_property = cc_color_profile_get_property;
   object_class->set_property = cc_color_profile_set_property;
   object_class->constructed = cc_color_profile_constructed;
   object_class->finalize = cc_color_profile_finalize;
+
+  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/color/cc-color-profile.ui");
+
+  gtk_widget_class_bind_template_child (widget_class, CcColorProfile, widget_image);
+  gtk_widget_class_bind_template_child (widget_class, CcColorProfile, widget_info);
 
   g_object_class_install_property (object_class, PROP_DEVICE,
                                    g_param_spec_object ("device", NULL,
@@ -433,15 +439,7 @@ cc_color_profile_init (CcColorProfile *color_profile)
 {
   color_profile->settings = g_settings_new (GCM_SETTINGS_SCHEMA);
 
-  /* default tick */
-  color_profile->widget_image = gtk_image_new ();
-  adw_action_row_add_prefix (ADW_ACTION_ROW (color_profile), color_profile->widget_image);
-
-  /* profile warnings/info */
-  color_profile->widget_info = g_object_new (CC_TYPE_LIST_ROW_INFO_BUTTON,
-                                             "valign", GTK_ALIGN_CENTER,
-                                             NULL);
-  adw_action_row_add_suffix (ADW_ACTION_ROW (color_profile), color_profile->widget_info);
+  gtk_widget_init_template (GTK_WIDGET (color_profile));
 }
 
 GtkWidget *
