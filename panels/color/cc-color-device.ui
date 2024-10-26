@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <template class="CcColorDevice" parent="AdwActionRow">
+    <child type="suffix">
+      <object class="GtkLabel" id="widget_nocalib">
+        <property name="label" translatable="yes">Not Calibrated</property>
+        <property name="margin-end">6</property>
+        <style>
+          <class name="dim-label"/>
+        </style>
+      </object>
+    </child>
+    <child type="suffix">
+      <object class="GtkSwitch" id="widget_switch">
+        <property name="valign">center</property>
+      </object>
+    </child>
+    <child type="suffix">
+      <object class="GtkButton" id="widget_button">
+        <property name="icon-name">pan-end-symbolic</property>
+        <property name="valign">center</property>
+        <signal name="clicked" handler="cc_color_device_clicked_expander_cb" object="CcColorDevice" swapped="yes"/>
+        <style>
+          <class name="flat"/>
+        </style>
+      </object>
+    </child>
+  </template>
+</interface>

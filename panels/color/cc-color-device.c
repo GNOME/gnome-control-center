@@ -34,7 +34,6 @@ struct _CcColorDevice
   CdDevice    *device;
   gboolean     expanded;
   gchar       *sortable;
-  GtkWidget   *row;
   GtkWidget   *widget_description;
   GtkWidget   *widget_button;
   GtkWidget   *widget_switch;
@@ -72,7 +71,7 @@ cc_color_device_refresh (CcColorDevice *color_device)
     return;
 
   title = cc_color_device_get_title (color_device->device);
-  adw_preferences_row_set_title (ADW_PREFERENCES_ROW (color_device->row), title);
+  adw_preferences_row_set_title (ADW_PREFERENCES_ROW (color_device), title);
 
   gtk_widget_set_visible (color_device->widget_switch, profiles->len > 0);
   gtk_widget_set_visible (color_device->widget_button, profiles->len > 0);
@@ -194,6 +193,15 @@ cc_color_device_changed_cb (CcColorDevice *color_device)
 }
 
 static void
+cc_color_device_clicked_expander_cb (CcColorDevice *color_device)
+{
+  color_device->expanded = !color_device->expanded;
+  cc_color_device_refresh (color_device);
+  g_signal_emit (color_device, signals[SIGNAL_EXPANDED_CHANGED], 0,
+                 color_device->expanded);
+}
+
+static void
 cc_color_device_constructed (GObject *object)
 {
   CcColorDevice *color_device = CC_COLOR_DEVICE (object);
@@ -220,11 +228,20 @@ cc_color_device_constructed (GObject *object)
 static void
 cc_color_device_class_init (CcColorDeviceClass *klass)
 {
+  GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
   object_class->get_property = cc_color_device_get_property;
   object_class->set_property = cc_color_device_set_property;
   object_class->constructed = cc_color_device_constructed;
   object_class->finalize = cc_color_device_finalize;
+
+  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/color/cc-color-device.ui");
+
+  gtk_widget_class_bind_template_child (widget_class, CcColorDevice, widget_nocalib);
+  gtk_widget_class_bind_template_child (widget_class, CcColorDevice, widget_switch);
+  gtk_widget_class_bind_template_child (widget_class, CcColorDevice, widget_button);
+
+  gtk_widget_class_bind_template_callback (widget_class, cc_color_device_clicked_expander_cb);
 
   g_object_class_install_property (object_class, PROP_DEVICE,
                                    g_param_spec_object ("device", NULL,
@@ -241,41 +258,9 @@ cc_color_device_class_init (CcColorDeviceClass *klass)
 }
 
 static void
-cc_color_device_clicked_expander_cb (CcColorDevice *color_device)
-{
-  color_device->expanded = !color_device->expanded;
-  cc_color_device_refresh (color_device);
-  g_signal_emit (color_device, signals[SIGNAL_EXPANDED_CHANGED], 0,
-                 color_device->expanded);
-}
-
-static void
 cc_color_device_init (CcColorDevice *color_device)
 {
-  color_device->row = adw_action_row_new ();
-
-  /* "not calibrated" label */
-  color_device->widget_nocalib = gtk_label_new (_("Not Calibrated"));
-  gtk_widget_add_css_class (color_device->widget_nocalib, "dim-label");
-  gtk_widget_set_margin_end (color_device->widget_nocalib, 6);
-  adw_action_row_add_suffix (ADW_ACTION_ROW (color_device->row), color_device->widget_nocalib);
-
-  /* switch */
-  color_device->widget_switch = gtk_switch_new ();
-  gtk_widget_set_valign (color_device->widget_switch, GTK_ALIGN_CENTER);
-  adw_action_row_add_suffix (ADW_ACTION_ROW (color_device->row), color_device->widget_switch);
-
-  /* arrow button */
-  color_device->widget_button = gtk_button_new_from_icon_name ("pan-end-symbolic");
-  g_signal_connect_object (color_device->widget_button, "clicked",
-                           G_CALLBACK (cc_color_device_clicked_expander_cb),
-                           color_device, G_CONNECT_SWAPPED);
-  gtk_widget_set_valign (color_device->widget_button, GTK_ALIGN_CENTER);
-  gtk_widget_add_css_class (color_device->widget_button, "flat");
-  adw_action_row_add_suffix (ADW_ACTION_ROW (color_device->row), color_device->widget_button);
-
-  /* refresh */
-  gtk_list_box_row_set_child (GTK_LIST_BOX_ROW (color_device), GTK_WIDGET (color_device->row));
+  gtk_widget_init_template (GTK_WIDGET (color_device));
 }
 
 GtkWidget *
