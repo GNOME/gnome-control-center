@@ -81,14 +81,25 @@ cc_default_apps_row_set_property (GObject      *object,
   switch (prop_id)
     {
     case PROP_CONTENT_TYPE:
-      self->content_type = g_strdup (g_value_get_string (value));
+      self->content_type = g_value_dup_string (value);
       break;
     case PROP_FILTERS:
-      self->filters = g_strdup (g_value_get_string (value));
+      self->filters = g_value_dup_string (value);
       break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
     }
+}
+
+static void
+cc_default_apps_row_finalize (GObject *object)
+{
+  CcDefaultAppsRow *self = CC_DEFAULT_APPS_ROW (object);
+
+  g_clear_pointer (&self->content_type, g_free);
+  g_clear_pointer (&self->filters, g_free);
+
+  G_OBJECT_CLASS (cc_default_apps_row_parent_class)->finalize (object);
 }
 
 static void
@@ -146,6 +157,7 @@ cc_default_apps_row_class_init (CcDefaultAppsRowClass *klass)
   object_class->get_property = cc_default_apps_row_get_property;
   object_class->set_property = cc_default_apps_row_set_property;
   object_class->constructed = cc_default_apps_row_constructed;
+  object_class->finalize = cc_default_apps_row_finalize;
 
   properties[PROP_CONTENT_TYPE] =
     g_param_spec_string ("content-type",
