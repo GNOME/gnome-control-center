@@ -72,8 +72,7 @@ cc_applications_row_new (GAppInfo *info)
   self->info = g_object_ref (info);
 
   gtk_list_box_row_set_activatable (GTK_LIST_BOX_ROW (self), TRUE);
-  adw_preferences_row_set_title (ADW_PREFERENCES_ROW (self),
-                                 g_markup_escape_text (g_app_info_get_display_name (info), -1));
+  adw_preferences_row_set_title (ADW_PREFERENCES_ROW (self), g_app_info_get_display_name (info));
 
   icon = g_app_info_get_icon (info);
   if (icon != NULL)
