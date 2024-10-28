@@ -1493,10 +1493,7 @@ compare_rows (gconstpointer  a,
   key1 = g_utf8_casefold (g_app_info_get_display_name (item1), -1);
   key2 = g_utf8_casefold (g_app_info_get_display_name (item2), -1);
 
-  const gchar *sort_key1 = g_utf8_collate_key (key1, -1);
-  const gchar *sort_key2 = g_utf8_collate_key (key2, -1);
-
-  return strcmp (sort_key1, sort_key2);
+  return g_utf8_collate (key1, key2);
 }
 
 static void
