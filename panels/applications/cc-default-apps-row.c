@@ -166,7 +166,7 @@ cc_default_apps_row_init (CcDefaultAppsRow *self)
 void
 cc_default_apps_row_update_default_app (CcDefaultAppsRow *self)
 {
-  g_autoptr(GAppInfo) info = NULL;
+  GAppInfo *info;
   g_autoptr(GError) error = NULL;
   int i;
 
