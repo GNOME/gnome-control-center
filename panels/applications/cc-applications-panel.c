@@ -1499,7 +1499,7 @@ compare_rows (gconstpointer  a,
 static void
 populate_applications (CcApplicationsPanel *self)
 {
-  g_autolist(GObject) infos = NULL;
+  g_autolist(GAppInfo) infos = NULL;
   GList *l;
 
   g_list_store_remove_all (G_LIST_STORE (self->app_model));
@@ -1512,8 +1512,6 @@ populate_applications (CcApplicationsPanel *self)
   for (l = infos; l; l = l->next)
     {
       GAppInfo *info = l->data;
-      GtkWidget *row;
-      g_autofree gchar *id = NULL;
 
       if (!g_app_info_should_show (info))
         continue;
@@ -1523,12 +1521,7 @@ populate_applications (CcApplicationsPanel *self)
         continue;
 #endif
 
-      row = GTK_WIDGET (cc_applications_row_new (info));
       g_list_store_insert_sorted (G_LIST_STORE (self->app_model), info, compare_rows, NULL);
-
-      id = get_app_id (info);
-      if (g_strcmp0 (id, self->current_app_id) == 0)
-        gtk_list_box_select_row (self->app_listbox, GTK_LIST_BOX_ROW (row));
     }
 #ifdef HAVE_MALCONTENT
   g_signal_handler_unblock (self->manager, self->app_filter_id);
