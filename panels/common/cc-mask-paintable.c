@@ -203,25 +203,6 @@ cc_mask_paintable_snapshot (GdkPaintable *paintable,
   gtk_snapshot_pop (snapshot);
 }
 
-static GdkPaintable *
-cc_mask_paintable_get_current_image (GdkPaintable *paintable)
-{
-  CcMaskPaintable *self = CC_MASK_PAINTABLE (paintable);
-  g_autoptr (GdkPaintable) current = NULL;
-  GdkPaintable *ret;
-
-  if (!self->paintable)
-    return gdk_paintable_new_empty (0, 0);
-
-  current = gdk_paintable_get_current_image (self->paintable);
-
-  ret = cc_mask_paintable_new ();
-  cc_mask_paintable_set_paintable (CC_MASK_PAINTABLE (ret), current);
-  cc_mask_paintable_set_rgba (CC_MASK_PAINTABLE (ret), &self->rgba);
-
-  return ret;
-}
-
 static int
 cc_mask_paintable_get_intrinsic_width (GdkPaintable *paintable)
 {
@@ -259,7 +240,6 @@ static void
 cc_mask_paintable_iface_init (GdkPaintableInterface *iface)
 {
   iface->snapshot = cc_mask_paintable_snapshot;
-  iface->get_current_image = cc_mask_paintable_get_current_image;
   iface->get_intrinsic_width = cc_mask_paintable_get_intrinsic_width;
   iface->get_intrinsic_height = cc_mask_paintable_get_intrinsic_height;
   iface->get_intrinsic_aspect_ratio = cc_mask_paintable_get_intrinsic_aspect_ratio;
