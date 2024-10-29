@@ -42,11 +42,24 @@ struct _CcMultitaskingPanel
   CcIllustratedRow *hot_corner_row;
   GtkSwitch       *hot_corner_switch;
   AdwSpinRow      *number_of_workspaces_spin_row;
+  AdwPreferencesGroup *workspaces_display_group;
   GtkCheckButton  *workspaces_primary_display_radio;
   GtkCheckButton  *workspaces_span_displays_radio;
 };
 
 CC_PANEL_REGISTER (CcMultitaskingPanel, cc_multitasking_panel)
+
+static void
+fixed_workspaces_changed_cb (CcMultitaskingPanel *self)
+{
+  gboolean multi_workspaces, fixed_workspaces;
+
+  multi_workspaces = (adw_spin_row_get_value (self->number_of_workspaces_spin_row) > 1);
+  fixed_workspaces = gtk_check_button_get_active (self->fixed_workspaces_radio);
+
+  gtk_widget_set_sensitive (GTK_WIDGET (self->workspaces_display_group),
+                            multi_workspaces || !fixed_workspaces);
+}
 
 /* GObject overrides */
 
@@ -84,8 +97,11 @@ cc_multitasking_panel_class_init (CcMultitaskingPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcMultitaskingPanel, hot_corner_row);
   gtk_widget_class_bind_template_child (widget_class, CcMultitaskingPanel, hot_corner_switch);
   gtk_widget_class_bind_template_child (widget_class, CcMultitaskingPanel, number_of_workspaces_spin_row);
+  gtk_widget_class_bind_template_child (widget_class, CcMultitaskingPanel, workspaces_display_group);
   gtk_widget_class_bind_template_child (widget_class, CcMultitaskingPanel, workspaces_primary_display_radio);
   gtk_widget_class_bind_template_child (widget_class, CcMultitaskingPanel, workspaces_span_displays_radio);
+
+  gtk_widget_class_bind_template_callback (widget_class, fixed_workspaces_changed_cb);
 }
 
 static void

@@ -79,6 +79,7 @@
                       <object class="GtkCheckButton" id="fixed_workspaces_radio">
                         <property name="valign">center</property>
                         <property name="group">dynamic_workspaces_radio</property>
+                        <signal name="toggled" handler="fixed_workspaces_changed_cb" object="CcMultitaskingPanel" swapped="yes"/>
                       </object>
                     </child>
                   </object>
@@ -91,6 +92,7 @@
                     <property name="title" translatable="yes">_Number of Workspaces</property>
                     <property name="use_underline">True</property>
                     <property name="adjustment">workspaces_adjustment</property>
+                    <signal name="notify::value" handler="fixed_workspaces_changed_cb" object="CcMultitaskingPanel" swapped="yes"/>
                   </object>
                 </child>
 
@@ -98,7 +100,7 @@
             </child>
 
             <child>
-              <object class="AdwPreferencesGroup">
+              <object class="AdwPreferencesGroup" id="workspaces_display_group">
                 <property name="title" translatable="yes">Multi-Monitor</property>
 
                 <!-- Primary Display -->
@@ -136,8 +138,9 @@
             </child>
 
             <child>
-              <object class="AdwPreferencesGroup">
+              <object class="AdwPreferencesGroup" >
                 <property name="title" translatable="yes">App Switching</property>
+                <property name="sensitive" bind-source="workspaces_display_group" bind-flags="sync-create"/>
 
                 <!-- All Workspaces -->
                 <child>
