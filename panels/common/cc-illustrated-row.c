@@ -68,19 +68,6 @@ on_picture_hover_cb (CcIllustratedRow *self)
 }
 
 static void
-update_mask_color (CcIllustratedRow *self)
-{
-  AdwStyleManager *style_manager = adw_style_manager_get_default ();
-  AdwAccentColor color;
-  GdkRGBA rgba;
-
-  color = adw_style_manager_get_accent_color (style_manager);
-  adw_accent_color_to_rgba (color, &rgba);
-
-  cc_mask_paintable_set_rgba (self->picture_mask, &rgba);
-}
-
-static void
 cc_illustrated_row_get_property (GObject      *object,
                                  guint         prop_id,
                                  GValue       *value,
@@ -171,20 +158,9 @@ reload_illustration (CcIllustratedRow *self)
 static void
 cc_illustrated_row_init (CcIllustratedRow *self)
 {
-  AdwStyleManager *style_manager = adw_style_manager_get_default ();
-
   gtk_widget_init_template (GTK_WIDGET (self));
   gtk_widget_set_name (GTK_WIDGET (self), "illustrated-row");
   gtk_widget_add_css_class (GTK_WIDGET (self), "illustrated-row");
-
-  update_mask_color (self);
-
-  g_signal_connect_object (style_manager, "notify::dark",
-                           G_CALLBACK (update_mask_color), self,
-                           G_CONNECT_SWAPPED);
-  g_signal_connect_object (style_manager, "notify::accent-color",
-                           G_CALLBACK (update_mask_color), self,
-                           G_CONNECT_SWAPPED);
 
   g_signal_connect_swapped (self, "map",
                             G_CALLBACK (reload_illustration), self);

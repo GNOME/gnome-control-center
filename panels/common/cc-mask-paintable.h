@@ -38,4 +38,8 @@ GdkRGBA      *cc_mask_paintable_get_rgba      (CcMaskPaintable *self);
 void          cc_mask_paintable_set_rgba      (CcMaskPaintable *self,
                                                GdkRGBA         *rgba);
 
+gboolean      cc_mask_paintable_get_follow_accent (CcMaskPaintable *self);
+void          cc_mask_paintable_set_follow_accent (CcMaskPaintable *self,
+                                                   gboolean         follow_accent);
+
 G_END_DECLS

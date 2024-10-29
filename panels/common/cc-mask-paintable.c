@@ -26,6 +26,8 @@
 # include <config.h>
 #endif
 
+#include <adwaita.h>
+
 #include "cc-mask-paintable.h"
 
 struct _CcMaskPaintable
@@ -34,6 +36,9 @@ struct _CcMaskPaintable
 
   GdkPaintable *paintable;
   GdkRGBA       rgba;
+
+  gboolean      follow_accent;
+  gboolean      updating_accent;
 };
 
 static void cc_mask_paintable_iface_init (GdkPaintableInterface *iface);
@@ -46,10 +51,26 @@ enum
   PROP_0,
   PROP_PAINTABLE,
   PROP_RGBA,
+  PROP_FOLLOW_ACCENT,
   N_PROPS,
 };
 
 static GParamSpec *props[N_PROPS];
+
+static void
+update_mask_color (CcMaskPaintable *self)
+{
+  AdwStyleManager *style_manager = adw_style_manager_get_default ();
+  AdwAccentColor color;
+  GdkRGBA rgba;
+
+  color = adw_style_manager_get_accent_color (style_manager);
+  adw_accent_color_to_rgba (color, &rgba);
+
+  self->updating_accent = TRUE;
+  cc_mask_paintable_set_rgba (self, &rgba);
+  self->updating_accent = FALSE;
+}
 
 static void
 cc_mask_paintable_dispose (GObject *object)
@@ -87,6 +108,9 @@ cc_mask_paintable_get_property (GObject    *object,
     case PROP_RGBA:
       g_value_take_boxed (value, cc_mask_paintable_get_rgba (self));
       break;
+    case PROP_FOLLOW_ACCENT:
+      g_value_set_boolean (value, self->follow_accent);
+      break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
     }
@@ -107,6 +131,9 @@ cc_mask_paintable_set_property (GObject      *object,
       break;
     case PROP_RGBA:
       cc_mask_paintable_set_rgba (self, g_value_get_boxed (value));
+      break;
+    case PROP_FOLLOW_ACCENT:
+      cc_mask_paintable_set_follow_accent (self, g_value_get_boolean (value));
       break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
@@ -131,6 +158,11 @@ cc_mask_paintable_class_init (CcMaskPaintableClass *klass)
     g_param_spec_boxed ("rgba", NULL, NULL,
                         GDK_TYPE_RGBA,
                         G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS | G_PARAM_EXPLICIT_NOTIFY);
+
+  props[PROP_FOLLOW_ACCENT] =
+    g_param_spec_boolean ("follow-accent", NULL, NULL,
+                          FALSE,
+                          G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS | G_PARAM_EXPLICIT_NOTIFY);
 
   g_object_class_install_properties (object_class, N_PROPS, props);
 }
@@ -295,9 +327,51 @@ cc_mask_paintable_set_rgba (CcMaskPaintable *self,
   g_return_if_fail (CC_IS_MASK_PAINTABLE (self));
   g_return_if_fail (rgba != NULL);
 
+  if (self->follow_accent && !self->updating_accent)
+    cc_mask_paintable_set_follow_accent (self, FALSE);
+
   self->rgba = *rgba;
 
   gdk_paintable_invalidate_contents (GDK_PAINTABLE (self));
 
   g_object_notify_by_pspec (G_OBJECT (self), props[PROP_RGBA]);
+}
+
+gboolean
+cc_mask_paintable_get_follow_accent (CcMaskPaintable *self)
+{
+  g_return_val_if_fail (CC_IS_MASK_PAINTABLE (self), FALSE);
+
+  return self->follow_accent;
+}
+
+void
+cc_mask_paintable_set_follow_accent (CcMaskPaintable *self,
+                                     gboolean         follow_accent)
+{
+  AdwStyleManager *style_manager;
+
+  g_return_if_fail (CC_IS_MASK_PAINTABLE (self));
+
+  follow_accent = !!follow_accent;
+
+  if (self->follow_accent == follow_accent)
+    return;
+  self->follow_accent = follow_accent;
+
+  style_manager = adw_style_manager_get_default ();
+
+  if (self->follow_accent)
+    {
+      g_signal_connect_object (style_manager, "notify::accent-color",
+                               G_CALLBACK (update_mask_color), self,
+                               G_CONNECT_SWAPPED);
+      update_mask_color (self);
+    }
+  else
+    {
+      g_signal_handlers_disconnect_by_func (style_manager, update_mask_color, self);
+    }
+
+  g_object_notify_by_pspec (G_OBJECT (self), props[PROP_FOLLOW_ACCENT]);
 }

@@ -145,20 +145,6 @@ on_checkbutton_toggled_cb (CcSplitRow *self)
 }
 
 static void
-update_mask_color (CcSplitRow *self)
-{
-  AdwStyleManager *style_manager = adw_style_manager_get_default ();
-  AdwAccentColor color;
-  GdkRGBA rgba;
-
-  color = adw_style_manager_get_accent_color (style_manager);
-  adw_accent_color_to_rgba (color, &rgba);
-
-  cc_mask_paintable_set_rgba (self->default_option_mask, &rgba);
-  cc_mask_paintable_set_rgba (self->alternative_option_mask, &rgba);
-}
-
-static void
 cc_split_row_dispose (GObject *object)
 {
   CcSplitRow *self = CC_SPLIT_ROW (object);
@@ -337,20 +323,9 @@ cc_split_row_class_init (CcSplitRowClass *klass)
 static void
 cc_split_row_init (CcSplitRow *self)
 {
-  AdwStyleManager *style_manager = adw_style_manager_get_default ();
-
   gtk_widget_init_template (GTK_WIDGET (self));
   gtk_widget_set_name (GTK_WIDGET (self), "split-row");
   gtk_widget_add_css_class (GTK_WIDGET (self), "split-row");
-
-  update_mask_color (self);
-
-  g_signal_connect_object (style_manager, "notify::dark",
-                           G_CALLBACK (update_mask_color), self,
-                           G_CONNECT_SWAPPED);
-  g_signal_connect_object (style_manager, "notify::accent-color",
-                           G_CALLBACK (update_mask_color), self,
-                           G_CONNECT_SWAPPED);
 }
 
 const gchar *
