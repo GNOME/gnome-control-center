@@ -43,6 +43,12 @@ struct _CcUsagePage
 G_DEFINE_TYPE (CcUsagePage, cc_usage_page, ADW_TYPE_NAVIGATION_PAGE)
 
 static void
+on_clear_history_response_cb (void)
+{
+  gtk_recent_manager_purge_items (gtk_recent_manager_get_default (), NULL);
+}
+
+static void
 on_empty_trash_response_cb (void)
 {
   g_autoptr(GDBusConnection) bus = NULL;
@@ -116,12 +122,6 @@ cc_usage_page_init (CcUsagePage *self)
   cc_number_row_bind_settings (self->purge_after_row,
                                self->privacy_settings,
                                "old-files-age");
-}
-
-static void
-on_clear_history_response_cb (void)
-{
-  gtk_recent_manager_purge_items (gtk_recent_manager_get_default (), NULL);
 }
 
 static void
