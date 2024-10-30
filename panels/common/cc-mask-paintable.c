@@ -29,6 +29,7 @@
 #include <adwaita.h>
 
 #include "cc-mask-paintable.h"
+#include "cc-texture-utils.h"
 
 struct _CcMaskPaintable
 {
@@ -39,6 +40,10 @@ struct _CcMaskPaintable
 
   gboolean      follow_accent;
   gboolean      updating_accent;
+
+  gboolean      reloading_resource;
+  char         *resource_path;
+  GtkWidget    *parent_widget;
 };
 
 static void cc_mask_paintable_iface_init (GdkPaintableInterface *iface);
@@ -73,9 +78,36 @@ update_mask_color (CcMaskPaintable *self)
 }
 
 static void
+reload_scalable_resource (CcMaskPaintable *self)
+{
+  g_autoptr (GdkPaintable) paintable = NULL;
+  int scale;
+
+  g_return_if_fail (self->parent_widget != NULL);
+
+  scale = gtk_widget_get_scale_factor (GTK_WIDGET (self->parent_widget));
+  paintable = cc_texture_new_from_resource_scaled (self->resource_path, scale);
+
+  self->reloading_resource = TRUE;
+  cc_mask_paintable_set_paintable (self, paintable);
+  self->reloading_resource = FALSE;
+}
+
+static void
+clear_parent_widget (CcMaskPaintable *self)
+{
+  if (self->parent_widget)
+      g_signal_handlers_disconnect_by_func (self->parent_widget, reload_scalable_resource, self);
+
+  g_clear_weak_pointer (&self->parent_widget);
+}
+
+static void
 cc_mask_paintable_dispose (GObject *object)
 {
   CcMaskPaintable *self = CC_MASK_PAINTABLE (object);
+
+  clear_parent_widget (self);
 
   if (self->paintable)
     {
@@ -266,6 +298,9 @@ cc_mask_paintable_set_paintable (CcMaskPaintable *self,
   g_return_if_fail (CC_IS_MASK_PAINTABLE (self));
   g_return_if_fail (GDK_IS_PAINTABLE (paintable));
 
+  if (!self->reloading_resource)
+    clear_parent_widget (self);
+
   if (self->paintable)
     {
       g_signal_handlers_disconnect_by_func (self->paintable,
@@ -354,4 +389,40 @@ cc_mask_paintable_set_follow_accent (CcMaskPaintable *self,
     }
 
   g_object_notify_by_pspec (G_OBJECT (self), props[PROP_FOLLOW_ACCENT]);
+}
+
+void
+cc_mask_paintable_set_resource_scaled (CcMaskPaintable *self,
+                                       const char      *resource_path,
+                                       GtkWidget       *parent_widget)
+{
+  gboolean resource_is_scalable;
+
+  g_return_if_fail (CC_IS_MASK_PAINTABLE (self));
+  g_return_if_fail (resource_path != NULL);
+  g_return_if_fail (GTK_IS_WIDGET (parent_widget));
+
+  clear_parent_widget (self);
+
+  g_set_str (&self->resource_path, resource_path);
+
+  resource_is_scalable = g_str_has_suffix (self->resource_path, ".svg");
+
+  if (!resource_is_scalable)
+    {
+      g_autoptr (GtkMediaStream) media_stream = NULL;
+
+      media_stream = gtk_media_file_new_for_resource (self->resource_path);
+      cc_mask_paintable_set_paintable (self, GDK_PAINTABLE (media_stream));
+
+      return;
+    }
+
+  self->parent_widget = parent_widget;
+  g_object_add_weak_pointer (G_OBJECT (self->parent_widget), (gpointer *) &self->parent_widget);
+
+  g_signal_connect_swapped (self->parent_widget, "map",
+                            G_CALLBACK (reload_scalable_resource), self);
+  g_signal_connect_swapped (self->parent_widget, "notify::scale-factor",
+                            G_CALLBACK (reload_scalable_resource), self);
 }
