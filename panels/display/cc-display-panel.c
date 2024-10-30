@@ -50,6 +50,9 @@
 
 #define DISPLAY_SCHEMA   "org.gnome.settings-daemon.plugins.color"
 
+#define DISPLAY_CONFIG_JOIN_NAME "join"
+#define DISPLAY_CONFIG_CLONE_NAME "clone"
+
 typedef enum {
   CC_DISPLAY_CONFIG_JOIN,
   CC_DISPLAY_CONFIG_CLONE,
@@ -94,8 +97,7 @@ struct _CcDisplayPanel
 
   GtkWidget      *arrangement_row;
   AdwBin         *arrangement_bin;
-  GtkToggleButton *config_type_join;
-  GtkToggleButton *config_type_mirror;
+  AdwToggleGroup *display_config_type;
   GtkWidget      *display_multiple_displays;
   AdwBin         *display_settings_bin;
   GtkWidget      *display_settings_group;
@@ -161,9 +163,9 @@ config_get_current_type (CcDisplayPanel *self)
 static CcDisplayConfigType
 cc_panel_get_selected_type (CcDisplayPanel *self)
 {
-  if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (self->config_type_join)))
+  if (g_str_equal (adw_toggle_group_get_active_name (self->display_config_type), DISPLAY_CONFIG_JOIN_NAME))
     return CC_DISPLAY_CONFIG_JOIN;
-  else if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (self->config_type_mirror)))
+  else if (g_str_equal (adw_toggle_group_get_active_name (self->display_config_type), DISPLAY_CONFIG_CLONE_NAME))
     return CC_DISPLAY_CONFIG_CLONE;
   else
     g_assert_not_reached ();
@@ -303,10 +305,10 @@ cc_panel_set_selected_type (CcDisplayPanel *self, CcDisplayConfigType type)
   switch (type)
     {
     case CC_DISPLAY_CONFIG_JOIN:
-      gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (self->config_type_join), TRUE);
+      adw_toggle_group_set_active_name (self->display_config_type, DISPLAY_CONFIG_JOIN_NAME);
       break;
     case CC_DISPLAY_CONFIG_CLONE:
-      gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (self->config_type_mirror), TRUE);
+      adw_toggle_group_set_active_name (self->display_config_type, DISPLAY_CONFIG_CLONE_NAME);
       break;
     default:
       g_assert_not_reached ();
@@ -482,8 +484,7 @@ on_monitor_settings_updated_cb (CcDisplayPanel    *self,
 }
 
 static void
-on_config_type_toggled_cb (CcDisplayPanel *self,
-                           GtkCheckButton *btn)
+on_config_type_toggled_cb (CcDisplayPanel *self)
 {
   CcDisplayConfigType type;
 
@@ -491,9 +492,6 @@ on_config_type_toggled_cb (CcDisplayPanel *self,
     return;
 
   if (!self->current_config)
-    return;
-
-  if (!gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (btn)))
     return;
 
   type = cc_panel_get_selected_type (self);
@@ -604,8 +602,7 @@ cc_display_panel_class_init (CcDisplayPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, arrangement_row);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, cancel_button);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, display_multiple_displays);
-  gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, config_type_join);
-  gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, config_type_mirror);
+  gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, display_config_type);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, display_settings_bin);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, display_settings_group);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, display_settings_page);
