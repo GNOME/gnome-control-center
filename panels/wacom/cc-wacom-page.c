@@ -702,12 +702,10 @@ set_icon_name (CcWacomPage *page,
 	       const char  *icon_name)
 {
 	g_autofree gchar *resource = NULL;
-	g_autoptr (GdkTexture) texture = NULL;
 
 	resource = g_strdup_printf ("/org/gnome/control-center/wacom/%s.svg", icon_name);
-	texture = gdk_texture_new_from_resource (resource);
 
-	cc_mask_paintable_set_paintable (page->tablet_paintable, GDK_PAINTABLE (texture));
+	cc_mask_paintable_set_resource_scaled (page->tablet_paintable, resource, GTK_WIDGET (page));
 }
 
 static void
