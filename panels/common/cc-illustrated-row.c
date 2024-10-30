@@ -32,8 +32,6 @@ struct _CcIllustratedRow
   GtkBox            *picture_box;
   CcMaskPaintable   *picture_mask;
   gchar             *resource_path;
-
-  GtkMediaStream    *media_stream;
 };
 
 G_DEFINE_FINAL_TYPE (CcIllustratedRow, cc_illustrated_row, CC_TYPE_VERTICAL_ROW);
@@ -50,21 +48,33 @@ static GParamSpec *props[N_PROPS] = { NULL, };
 static void
 on_picture_leave_cb (CcIllustratedRow *self)
 {
-  if (self->media_stream != NULL)
-    {
-      gtk_media_stream_set_loop (self->media_stream, FALSE);
-      gtk_media_stream_pause (self->media_stream);
-    }
+  GtkMediaStream *stream;
+  GdkPaintable *paintable;
+
+  paintable = cc_mask_paintable_get_paintable (self->picture_mask);
+
+  if (!GTK_IS_MEDIA_STREAM (paintable))
+    return;
+
+  stream = GTK_MEDIA_STREAM (paintable);
+  gtk_media_stream_set_loop (stream, FALSE);
+  gtk_media_stream_pause (stream);
 }
 
 static void
 on_picture_hover_cb (CcIllustratedRow *self)
 {
-  if (self->media_stream != NULL)
-    {
-      gtk_media_stream_set_loop (self->media_stream, TRUE);
-      gtk_media_stream_play (self->media_stream);
-    }
+  GtkMediaStream *stream;
+  GdkPaintable *paintable;
+
+  paintable = cc_mask_paintable_get_paintable (self->picture_mask);
+
+  if (!GTK_IS_MEDIA_STREAM (paintable))
+    return;
+
+  stream = GTK_MEDIA_STREAM (paintable);
+  gtk_media_stream_set_loop (stream, TRUE);
+  gtk_media_stream_play (stream);
 }
 
 static void
@@ -141,31 +151,11 @@ cc_illustrated_row_class_init (CcIllustratedRowClass *klass)
 }
 
 static void
-reload_illustration (CcIllustratedRow *self)
-{
-  g_autoptr (GdkPaintable) paintable = NULL;
-  int scale;
-
-  if (self->media_stream != NULL)
-    return;
-
-  scale = gtk_widget_get_scale_factor (GTK_WIDGET (self));
-  paintable = cc_texture_new_from_resource_scaled (self->resource_path, scale);
-
-  cc_mask_paintable_set_paintable (self->picture_mask, paintable);
-}
-
-static void
 cc_illustrated_row_init (CcIllustratedRow *self)
 {
   gtk_widget_init_template (GTK_WIDGET (self));
   gtk_widget_set_name (GTK_WIDGET (self), "illustrated-row");
   gtk_widget_add_css_class (GTK_WIDGET (self), "illustrated-row");
-
-  g_signal_connect_swapped (self, "map",
-                            G_CALLBACK (reload_illustration), self);
-  g_signal_connect_swapped (self, "notify::scale-factor",
-                            G_CALLBACK (reload_illustration), self);
 }
 
 void
@@ -174,18 +164,9 @@ cc_illustrated_row_set_resource (CcIllustratedRow *self,
 {
   g_return_if_fail (CC_IS_ILLUSTRATED_ROW (self));
 
-  if (self->media_stream != NULL)
-    g_clear_object (&self->media_stream);
-
   g_set_str (&self->resource_path, resource_path);
 
-  if (g_str_has_suffix (resource_path, ".svg"))
-    reload_illustration (self);
-  else
-    {
-      self->media_stream = gtk_media_file_new_for_resource (self->resource_path);
-      cc_mask_paintable_set_paintable (self->picture_mask, GDK_PAINTABLE (self->media_stream));
-    }
+  cc_mask_paintable_set_resource_scaled (self->picture_mask, resource_path, GTK_WIDGET (self));
 
   gtk_widget_set_visible (GTK_WIDGET (self->picture_box),
                           self->resource_path != NULL &&
