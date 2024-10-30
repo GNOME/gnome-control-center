@@ -656,45 +656,37 @@ overwrite_ssid_cb (GObject      *source_object,
 }
 
 static void
-on_wifi_hotspot_dialog_response_cb (GtkDialog     *dialog,
-                                   gint           response,
-                                   NetDeviceWifi *self)
+on_wifi_hotspot_dialog_response_cb (AdwDialog *dialog,
+                                    NetDeviceWifi *self)
 {
-        if (response == GTK_RESPONSE_APPLY) {
-                NMConnection *connection;
+        NMConnection *connection;
 
-                connection = cc_wifi_hotspot_dialog_get_connection (self->hotspot_dialog);
-                if (NM_IS_REMOTE_CONNECTION (connection))
-                        nm_remote_connection_commit_changes_async (NM_REMOTE_CONNECTION (connection),
-                                                                   TRUE,
-                                                                   self->cancellable,
-                                                                   overwrite_ssid_cb,
-                                                                   self);
-                else
-                        nm_client_add_and_activate_connection_async (self->client,
-                                                                     connection,
-                                                                     self->device,
-                                                                     NULL,
-                                                                     self->cancellable,
-                                                                     activate_new_cb,
-                                                                     self);
-        }
-
-        gtk_widget_set_visible (GTK_WIDGET (self->hotspot_dialog), FALSE);
+        connection = cc_wifi_hotspot_dialog_get_connection (CC_WIFI_HOTSPOT_DIALOG (dialog));
+        if (NM_IS_REMOTE_CONNECTION (connection))
+                nm_remote_connection_commit_changes_async (NM_REMOTE_CONNECTION (connection),
+                                                           TRUE,
+                                                           self->cancellable,
+                                                           overwrite_ssid_cb,
+                                                           self);
+        else
+                nm_client_add_and_activate_connection_async (self->client,
+                                                             connection,
+                                                             self->device,
+                                                             NULL,
+                                                             self->cancellable,
+                                                             activate_new_cb,
+                                                             self);
 }
 
 static void
 start_hotspot (NetDeviceWifi *self)
 {
-        GtkNative *native;
         NMConnection *c;
         g_autofree gchar *hostname = NULL;
         g_autofree gchar *ssid = NULL;
 
-        native = gtk_widget_get_native (GTK_WIDGET (self));
-
         if (!self->hotspot_dialog) {
-                self->hotspot_dialog = cc_wifi_hotspot_dialog_new (GTK_WINDOW (native));
+                self->hotspot_dialog = cc_wifi_hotspot_dialog_new ();
                 g_object_ref_sink (self->hotspot_dialog);
         }
         cc_wifi_hotspot_dialog_set_device (self->hotspot_dialog, NM_DEVICE_WIFI (self->device));
@@ -705,8 +697,9 @@ start_hotspot (NetDeviceWifi *self)
         if (c)
                 cc_wifi_hotspot_dialog_set_connection (self->hotspot_dialog, c);
 
-        g_signal_connect_after (self->hotspot_dialog, "response", G_CALLBACK (on_wifi_hotspot_dialog_response_cb), self);
-        gtk_window_present (GTK_WINDOW (self->hotspot_dialog));
+        g_signal_connect_after (self->hotspot_dialog, "hotspot-enabled", G_CALLBACK (on_wifi_hotspot_dialog_response_cb), self);
+
+        adw_dialog_present (ADW_DIALOG (self->hotspot_dialog), GTK_WIDGET (self));
 }
 
 static void
@@ -750,7 +743,7 @@ net_device_wifi_dispose (GObject *object)
         NetDeviceWifi *self = NET_DEVICE_WIFI (object);
 
         if (self->hotspot_dialog) {
-                gtk_window_destroy (GTK_WINDOW (self->hotspot_dialog));
+                adw_dialog_close (ADW_DIALOG (self->hotspot_dialog));
                 g_object_unref (self->hotspot_dialog);
                 self->hotspot_dialog = NULL;
         }

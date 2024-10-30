@@ -24,14 +24,15 @@
 
 #pragma once
 
-#include <gtk/gtk.h>
+#include <adwaita.h>
 #include <NetworkManager.h>
 
 G_BEGIN_DECLS
 
 #define CC_TYPE_WIFI_HOTSPOT_DIALOG (cc_wifi_hotspot_dialog_get_type())
-G_DECLARE_FINAL_TYPE (CcWifiHotspotDialog, cc_wifi_hotspot_dialog, CC, WIFI_HOTSPOT_DIALOG, GtkDialog);
-CcWifiHotspotDialog *cc_wifi_hotspot_dialog_new            (GtkWindow           *parent_window);
+G_DECLARE_FINAL_TYPE (CcWifiHotspotDialog, cc_wifi_hotspot_dialog, CC, WIFI_HOTSPOT_DIALOG, AdwDialog)
+
+CcWifiHotspotDialog *cc_wifi_hotspot_dialog_new            (void);
 void                 cc_wifi_hotspot_dialog_set_hostname   (CcWifiHotspotDialog *self,
                                                             const gchar         *host_name);
 void                 cc_wifi_hotspot_dialog_set_device     (CcWifiHotspotDialog *self,

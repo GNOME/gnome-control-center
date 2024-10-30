@@ -1,137 +1,146 @@
 using Gtk 4.0;
+using Adw 1;
 
-template $CcWifiHotspotDialog: Dialog {
+template $CcWifiHotspotDialog: Adw.Dialog {
   title: _("Turn On Wi-Fi Hotspot?");
-  modal: true;
-  destroy-with-parent: true;
-  hide-on-close: true;
 
-  [internal-child headerbar]
-  HeaderBar {
-    show-title-buttons: false;
-  }
+  child: Adw.ToolbarView {
+    [top]
+    Adw.HeaderBar {
+      show-start-title-buttons: false;
+      show-end-title-buttons: false;
 
-  [internal-child content_area]
-  Box {
-    orientation: vertical;
-    margin-top: 30;
-    margin-bottom: 30;
-    margin-start: 30;
-    margin-end: 30;
-    spacing: 20;
-
-    Label label {
-      wrap: true;
-      max-width-chars: 50;
-      label: _("Wi-Fi hotspot allows others to share your internet connection, by creating a Wi-Fi network that they can connect to. To do this, you must have an internet connection through a source other than Wi-Fi.");
-      xalign: 0.0;
-    }
-
-    Label connection_label {
-      margin-bottom: 18;
-      wrap: true;
-      max-width-chars: 40;
-      use-markup: true;
-      xalign: 0.0;
-    }
-
-    Grid {
-      row-spacing: 6;
-      column-spacing: 12;
-
-      Label {
-        label: _("Network Name");
-        halign: end;
-        mnemonic-widget: name_entry;
-
-        layout {
-          column: 0;
-          row: 0;
-        }
+      [start]
+      Button cancel_button {
+        use-underline: true;
+        label: _("_Cancel");
+        clicked => $adw_dialog_close(template);
       }
 
-      Entry name_entry {
-        hexpand: true;
-        max-length: 64;
-        accessibility {
-          error-message: name_error_label;
-          required: true;
-        }
-        changed => $hotspot_entry_changed_cb(template);
-
-        layout {
-          column: 1;
-          row: 0;
-        }
-      }
-
-      Label name_error_label {
-        halign: start;
-
-        layout {
-          column: 1;
-          row: 1;
-        }
+      [end]
+      Button ok_button {
+        use-underline: true;
+        label: _("_Turn On");
+        receives-default: true;
+        clicked => $on_turn_on_button_clicked_cb(template);
 
         styles [
-          "dim-label",
-          "caption",
-        ]
-      }
-
-      Label {
-        label: _("Password");
-        halign: end;
-        mnemonic-widget: password_entry;
-
-        layout {
-          column: 0;
-          row: 2;
-        }
-      }
-
-      Entry password_entry {
-        max-length: 64;
-        secondary-icon-name: "view-refresh-symbolic";
-        secondary-icon-tooltip-text: _("Generate Random Password");
-        placeholder-text: _("Autogenerate Password");
-        icon-press => $generate_password_clicked_cb(template);
-        accessibility {
-          error-message: password_error_label;
-        }
-        changed => $hotspot_entry_changed_cb(template);
-
-        layout {
-          column: 1;
-          row: 2;
-        }
-      }
-
-      Label password_error_label {
-        halign: start;
-
-        layout {
-          column: 1;
-          row: 3;
-        }
-
-        styles [
-          "dim-label",
-          "caption",
+          "suggested-action",
         ]
       }
     }
-  }
 
-  [action response=cancel]
-  Button cancel_button {
-    use-underline: true;
-    label: _("_Cancel");
-  }
+    content: Box {
+      orientation: vertical;
+      margin-top: 30;
+      margin-bottom: 30;
+      margin-start: 30;
+      margin-end: 30;
+      spacing: 20;
 
-  [action response=apply default]
-  Button ok_button {
-    use-underline: true;
-    label: _("_Turn On");
-  }
+      Label label {
+        wrap: true;
+        max-width-chars: 50;
+        label: _("Wi-Fi hotspot allows others to share your internet connection, by creating a Wi-Fi network that they can connect to. To do this, you must have an internet connection through a source other than Wi-Fi.");
+        xalign: 0.0;
+      }
+
+      Label connection_label {
+        margin-bottom: 18;
+        wrap: true;
+        max-width-chars: 40;
+        use-markup: true;
+        xalign: 0.0;
+      }
+
+      Grid {
+        row-spacing: 6;
+        column-spacing: 12;
+
+        Label {
+          label: _("Network Name");
+          halign: end;
+          mnemonic-widget: name_entry;
+
+          layout {
+            column: 0;
+            row: 0;
+          }
+        }
+
+        Entry name_entry {
+          hexpand: true;
+          max-length: 64;
+          changed => $hotspot_entry_changed_cb(template);
+
+          accessibility {
+            error-message: name_error_label;
+            required: true;
+          }
+
+          layout {
+            column: 1;
+            row: 0;
+          }
+        }
+
+        Label name_error_label {
+          halign: start;
+
+          layout {
+            column: 1;
+            row: 1;
+          }
+
+          styles [
+            "dim-label",
+            "caption",
+          ]
+        }
+
+        Label {
+          label: _("Password");
+          halign: end;
+          mnemonic-widget: password_entry;
+
+          layout {
+            column: 0;
+            row: 2;
+          }
+        }
+
+        Entry password_entry {
+          max-length: 64;
+          secondary-icon-name: "view-refresh-symbolic";
+          secondary-icon-tooltip-text: _("Generate Random Password");
+          placeholder-text: _("Autogenerate Password");
+          icon-press => $generate_password_clicked_cb(template);
+          changed => $hotspot_entry_changed_cb(template);
+
+          accessibility {
+            error-message: password_error_label;
+          }
+
+          layout {
+            column: 1;
+            row: 2;
+          }
+        }
+
+        Label password_error_label {
+          halign: start;
+
+          layout {
+            column: 1;
+            row: 3;
+          }
+
+          styles [
+            "dim-label",
+            "caption",
+          ]
+        }
+      }
+    };
+  };
 }

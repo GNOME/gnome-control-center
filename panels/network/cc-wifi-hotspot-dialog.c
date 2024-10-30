@@ -39,7 +39,7 @@
 
 struct _CcWifiHotspotDialog
 {
-  GtkDialog        parent_instance;
+  AdwDialog        parent_instance;
 
   GtkLabel        *connection_label;
   GtkEntry        *name_entry;
@@ -55,7 +55,15 @@ struct _CcWifiHotspotDialog
   gchar           *host_name;
 };
 
-G_DEFINE_TYPE (CcWifiHotspotDialog, cc_wifi_hotspot_dialog, GTK_TYPE_DIALOG)
+G_DEFINE_TYPE (CcWifiHotspotDialog, cc_wifi_hotspot_dialog, ADW_TYPE_DIALOG)
+
+enum
+{
+    SIGNAL_HOTSPOT_ENABLED,
+    SIGNAL_LAST
+};
+
+static guint signals[SIGNAL_LAST] = { 0, };
 
 static gchar *
 get_random_wpa_key (void)
@@ -364,7 +372,7 @@ cc_wifi_hotspot_dialog_finalize (GObject *object)
 }
 
 static void
-cc_wifi_hotspot_dialog_show (GtkWidget *widget)
+cc_wifi_hotspot_dialog_realize (GtkWidget *widget)
 {
   CcWifiHotspotDialog *self = (CcWifiHotspotDialog *)widget;
   g_warn_if_fail (self->device != NULL);
@@ -376,18 +384,13 @@ cc_wifi_hotspot_dialog_show (GtkWidget *widget)
     if (self->host_name)
       gtk_editable_set_text (GTK_EDITABLE (self->name_entry), self->host_name);
 
-  GTK_WIDGET_CLASS (cc_wifi_hotspot_dialog_parent_class)->show (widget);
+  GTK_WIDGET_CLASS (cc_wifi_hotspot_dialog_parent_class)->realize (widget);
 }
 
 static void
-cc_wifi_hotspot_dialog_response (GtkDialog *dialog,
-                                 gint       response_id)
+on_turn_on_button_clicked_cb (CcWifiHotspotDialog *self)
 {
-  CcWifiHotspotDialog *self = CC_WIFI_HOTSPOT_DIALOG (dialog);
   NMSetting *setting;
-
-  if (response_id != GTK_RESPONSE_APPLY)
-    return;
 
   if (!self->connection)
     self->connection = NM_CONNECTION (nm_simple_connection_new ());
@@ -412,22 +415,32 @@ cc_wifi_hotspot_dialog_response (GtkDialog *dialog,
 
   hotspot_update_wireless_settings (self);
   hotspot_update_wireless_security_settings (self);
+
+  g_signal_emit (self, signals[SIGNAL_HOTSPOT_ENABLED], 0);
+
+  adw_dialog_close (ADW_DIALOG (self));
 }
 
 static void
 cc_wifi_hotspot_dialog_class_init (CcWifiHotspotDialogClass *klass)
 {
-  GtkDialogClass *dialog_class = GTK_DIALOG_CLASS (klass);
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
   GObjectClass   *object_class = G_OBJECT_CLASS (klass);
 
   object_class->finalize = cc_wifi_hotspot_dialog_finalize;
 
-  widget_class->show = cc_wifi_hotspot_dialog_show;
-  dialog_class->response = cc_wifi_hotspot_dialog_response;
+  widget_class->realize = cc_wifi_hotspot_dialog_realize;
 
   gtk_widget_class_set_template_from_resource (widget_class,
                                                "/org/gnome/control-center/network/cc-wifi-hotspot-dialog.ui");
+
+  signals[SIGNAL_HOTSPOT_ENABLED] = g_signal_new ("hotspot-enabled",
+                                             CC_TYPE_WIFI_HOTSPOT_DIALOG,
+                                             G_SIGNAL_RUN_LAST,
+                                             0, NULL, NULL, NULL,
+                                             G_TYPE_NONE,
+                                             0,
+                                             NULL);
 
   gtk_widget_class_bind_template_child (widget_class, CcWifiHotspotDialog, connection_label);
   gtk_widget_class_bind_template_child (widget_class, CcWifiHotspotDialog, name_entry);
@@ -438,6 +451,7 @@ cc_wifi_hotspot_dialog_class_init (CcWifiHotspotDialogClass *klass)
 
   gtk_widget_class_bind_template_callback (widget_class, hotspot_entry_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, generate_password_clicked_cb);
+  gtk_widget_class_bind_template_callback (widget_class, on_turn_on_button_clicked_cb);
 }
 
 static void
@@ -449,13 +463,9 @@ cc_wifi_hotspot_dialog_init (CcWifiHotspotDialog *self)
 }
 
 CcWifiHotspotDialog *
-cc_wifi_hotspot_dialog_new (GtkWindow *parent_window)
+cc_wifi_hotspot_dialog_new (void)
 {
-  g_return_val_if_fail (GTK_IS_WINDOW (parent_window), NULL);
-
   return g_object_new (CC_TYPE_WIFI_HOTSPOT_DIALOG,
-                       "use-header-bar", TRUE,
-                       "transient-for", parent_window,
                        NULL);
 }
 
