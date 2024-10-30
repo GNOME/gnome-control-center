@@ -27,7 +27,6 @@
 #include "cc-wacom-panel.h"
 #include "cc-wacom-stylus-page.h"
 #include "cc-wacom-stylus-action-dialog.h"
-#include "panels/common/cc-texture-utils.h"
 #include "panels/common/cc-list-row.h"
 #include "panels/common/cc-mask-paintable.h"
 #include <gtk/gtk.h>
@@ -314,17 +313,16 @@ cc_wacom_stylus_page_init (CcWacomStylusPage *page)
 }
 
 static void
-update_icon (CcWacomStylusPage *page)
+set_icon_name (CcWacomStylusPage *page,
+	       const char        *icon_name)
 {
-	const char *icon_name = cc_wacom_tool_get_icon_name (page->stylus);
 	g_autofree gchar *resource = NULL;
-	g_autoptr (GdkPaintable) texture = NULL;
-	int scale = gtk_widget_get_scale_factor (GTK_WIDGET (page));
+	g_autoptr (GdkTexture) texture = NULL;
 
 	resource = g_strdup_printf ("/org/gnome/control-center/wacom/%s.svg", icon_name);
-	texture = cc_texture_new_from_resource_scaled (resource, scale);
+	texture = gdk_texture_new_from_resource (resource);
 
-	cc_mask_paintable_set_paintable (page->stylus_paintable, texture);
+	cc_mask_paintable_set_paintable (page->stylus_paintable, GDK_PAINTABLE (texture));
 }
 
 static void
@@ -362,10 +360,7 @@ cc_wacom_stylus_page_new (CcWacomPanel *panel,
 					       cc_wacom_tool_get_description (stylus));
 
 	/* Icon */
-	g_signal_connect_swapped (page, "map",
-				  G_CALLBACK (update_icon), page);
-	g_signal_connect_swapped (page, "notify::scale-factor",
-				  G_CALLBACK (update_icon), page);
+	set_icon_name (page, cc_wacom_tool_get_icon_name (stylus));
 
 	/* Settings */
 	page->stylus_settings = cc_wacom_tool_get_settings (stylus);
