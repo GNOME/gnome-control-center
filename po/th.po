@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/issues\n"
-"POT-Creation-Date: 2024-10-18 20:38+0000\n"
-"PO-Revision-Date: 2024-10-19 13:12+0700\n"
+"POT-Creation-Date: 2024-10-29 10:22+0000\n"
+"PO-Revision-Date: 2024-11-01 00:02+0700\n"
 "Last-Translator: Atirut Wattanamongkol <atirut.wattanamongkol@gmail.com>\n"
 "Language-Team: Thai <thai-l10n@googlegroups.com>\n"
 "Language: th\n"
@@ -38,8 +38,8 @@ msgstr "การเข้าถึงแบบเต็มที่"
 msgid "Session Bus"
 msgstr "บัสของวาระ"
 
-#: panels/applications/cc-applications-panel.c:856 panels/privacy/bolt/cc-bolt-page.ui:164
-#: panels/privacy/bolt/cc-bolt-page.ui:202 panels/privacy/cc-privacy-panel.ui:72
+#: panels/applications/cc-applications-panel.c:856 panels/privacy/bolt/cc-bolt-page.ui:199
+#: panels/privacy/bolt/cc-bolt-page.ui:237 panels/privacy/cc-privacy-panel.ui:72
 msgid "Devices"
 msgstr "อุปกรณ์"
 
@@ -134,14 +134,14 @@ msgid "Set which apps open links, files, and media"
 msgstr "ตั้งค่าว่าจะให้แอปใดเปิดลิงก์ ไฟล์ และสื่อ"
 
 #: panels/applications/cc-applications-panel.ui:84 panels/keyboard/cc-keyboard-shortcut-dialog.ui:94
-#: panels/printers/cc-printers-panel.ui:101 panels/system/datetime/cc-tz-dialog.ui:42
-#: panels/system/region/cc-format-chooser.ui:176 shell/cc-panel-list.ui:44
+#: panels/system/datetime/cc-tz-dialog.ui:42 panels/system/region/cc-format-chooser.ui:176
+#: shell/cc-panel-list.ui:44
 msgid "No Results Found"
 msgstr "ไม่พบผลลัพธ์"
 
 #: panels/applications/cc-applications-panel.ui:85 panels/keyboard/cc-keyboard-shortcut-dialog.ui:95
-#: panels/printers/cc-printers-panel.ui:102 panels/system/datetime/cc-tz-dialog.ui:43
-#: panels/system/region/cc-format-chooser.ui:177 shell/cc-panel-list.ui:45
+#: panels/system/datetime/cc-tz-dialog.ui:43 panels/system/region/cc-format-chooser.ui:177
+#: shell/cc-panel-list.ui:45
 msgid "Try a different search"
 msgstr "ลองค้นหาด้วยคำอื่น"
 
@@ -157,14 +157,13 @@ msgstr "_หาใน \"ซอฟต์แวร์\""
 msgid "Unable to List Apps"
 msgstr "ไม่สามารถเรียกรายชื่อแอป"
 
-#. Translators: Parental Controls here refers to the features provided by 'malcontent'
 #: panels/applications/cc-applications-panel.ui:122
 msgid ""
 "An error has occurred and apps cannot be listed.\n"
-"Error details: Parental Controls are not installed."
+"Error details: Malcontent is not installed."
 msgstr ""
 "เกิดข้อผิดพลาดและไม่สามารถแสดงรายการแอปได้\n"
-"รายละเอียดข้อผิดพลาด: ไม่ได้ติดตั้งการควบคุมโดยผู้ปกครอง"
+"รายละเอียดข้อผิดพลาด: ไม่ได้ติดตั้ง Malcontent"
 
 #: panels/applications/cc-applications-panel.ui:139 panels/applications/cc-default-apps-page.ui:4
 msgid "Default Apps"
@@ -196,7 +195,7 @@ msgid ""
 "are not shown."
 msgstr "การตั้งค่าแอปไม่สามารถใช้กับแอปที่ไม่ได้ทำงานในแซนด์บ็อกซ์ได้ แอปเหล่านี้อาจใช้การกำหนดสิทธิ์ซึ่งไม่ได้แสดงไว้ที่นี่"
 
-#: panels/applications/cc-applications-panel.ui:245
+#: panels/applications/cc-applications-panel.ui:245 panels/printers/pp-details-dialog.c:268
 msgid "_Open"
 msgstr "_เปิด"
 
@@ -227,8 +226,8 @@ msgstr "อ่านข้อมูลการค้นหาจากระบ
 #: panels/applications/cc-applications-panel.ui:360 panels/applications/cc-applications-panel.ui:376
 #: panels/applications/cc-applications-panel.ui:392 panels/keyboard/cc-keyboard-shortcut-editor.ui:123
 #: panels/keyboard/cc-xkb-modifier-page.c:323 panels/keyboard/keyboard-shortcuts.c:367
-#: panels/network/panel-common.c:336 panels/system/users/cc-user-page.c:379
-#: panels/system/users/cc-user-page.c:765 panels/wwan/cc-wwan-device-page.c:477
+#: panels/network/panel-common.c:336 panels/system/users/cc-user-page.c:376
+#: panels/system/users/cc-user-page.c:740 panels/wwan/cc-wwan-device-page.c:477
 #: subprojects/gvc/gvc-mixer-control.c:1872
 msgid "Disabled"
 msgstr "ไม่ใช้"
@@ -432,9 +431,9 @@ msgstr "_การโทร"
 msgid "_SMS"
 msgstr "_SMS"
 
-#: panels/applications/cc-default-apps-row.c:126
+#: panels/applications/cc-default-apps-row.c:127
 msgid "No Apps Available"
-msgstr "ไม่มีแอพที่ใช้งานได้"
+msgstr "ไม่มีแอปที่ใช้งานได้"
 
 #: panels/applications/cc-removable-media-settings.c:287
 msgid "Ask what to do"
@@ -620,31 +619,33 @@ msgstr "เข้าถึงข้อมูลฮาร์ดแวร์"
 
 #: panels/applications/cc-snap-row.c:283
 msgid "Provide entropy to hardware random number generator"
-msgstr "จัดเตรียมเอนโทรปีให้กับตัวสร้างหมายเลขสุ่มแบบฮาร์ดแวร์"
+msgstr ""
 
 #: panels/applications/cc-snap-row.c:285
 msgid "Use hardware-generated random numbers"
-msgstr "ใช้หมายเลขสุ่มที่สร้างขึ้นด้วยฮาร์ดแวร์"
+msgstr ""
 
 #: panels/applications/cc-snap-row.c:287
 msgid "Access files in your home folder"
-msgstr "เข้าถึงไฟล์ในโฟลเดอร์บ้านของคุณ"
+msgstr ""
 
 #: panels/applications/cc-snap-row.c:289
 msgid "Access libvirt service"
-msgstr "เข้าถึงบริการ libvirt"
+msgstr ""
 
 #: panels/applications/cc-snap-row.c:291
+#, fuzzy
 msgid "Change system language and region settings"
-msgstr "เปลี่ยนภาษาระบบและการตั้งค่าภูมิภาค"
+msgstr "ตั้งเวลาระบบและตั้งค่าเกี่ยวกับวันที่"
 
 #: panels/applications/cc-snap-row.c:293
 msgid "Change location settings and providers"
-msgstr "เปลี่ยนการตั้งค่าและผู้ให้บริการตำแหน่งที่ตั้ง"
+msgstr ""
 
 #: panels/applications/cc-snap-row.c:295
+#, fuzzy
 msgid "Access your location"
-msgstr "เข้าถึงตำแหน่งที่ตั้งของคุณ"
+msgstr "ตัวเลือกของการเข้าถึง"
 
 #: panels/applications/cc-snap-row.c:297
 msgid "Read system and application logs"
@@ -864,15 +865,15 @@ msgstr "ค่าเ_ริ่มต้น"
 msgid "Da_rk"
 msgstr "_มืด"
 
-#: panels/background/cc-background-panel.ui:120
-msgid "Accent Color"
+#: panels/background/cc-background-panel.ui:127
+msgid "Accent color"
 msgstr "สีเน้น"
 
-#: panels/background/cc-background-panel.ui:140
+#: panels/background/cc-background-panel.ui:137
 msgid "Background"
 msgstr "ภาพพื้นหลัง"
 
-#: panels/background/cc-background-panel.ui:146
+#: panels/background/cc-background-panel.ui:143
 msgid "_Add Picture…"
 msgstr "เ_พิ่มรูปภาพ…"
 
@@ -1021,22 +1022,21 @@ msgstr "ห้ามรบกวนอุปกรณ์เทียบมาต
 msgid "Display Calibration"
 msgstr "การเทียบมาตรฐานจอแสดงผล"
 
-#: panels/color/cc-color-calibrate.ui:22 panels/common/cc-language-chooser.ui:15
+#: panels/color/cc-color-calibrate.ui:22 panels/common/cc-language-chooser.ui:21
 #: panels/display/cc-display-panel.ui:32 panels/display/cc-display-panel.ui:187
 #: panels/display/cc-display-panel.ui:249 panels/keyboard/cc-input-chooser.ui:15
 #: panels/keyboard/cc-keyboard-shortcut-dialog.ui:162 panels/keyboard/cc-keyboard-shortcut-editor.ui:15
 #: panels/network/cc-net-proxy-page.ui:14 panels/network/cc-wifi-hotspot-dialog.ui:142
 #: panels/network/cc-wifi-panel.ui:236 panels/network/connection-editor/ce-page-details.c:89
-#: panels/network/connection-editor/connection-editor.ui:16 panels/printers/pp-jobs-dialog.ui:125
+#: panels/network/connection-editor/connection-editor.ui:16 panels/printers/pp-details-dialog.c:267
 #: panels/printers/pp-new-printer-dialog.ui:65 panels/printers/pp-ppd-selection-dialog.ui:17
 #: panels/privacy/usage/cc-usage-page.ui:125 panels/privacy/usage/cc-usage-page.ui:136
 #: panels/privacy/usage/cc-usage-page.ui:147 panels/system/region/cc-format-chooser.ui:24
 #: panels/system/users/cc-add-user-dialog.ui:24 panels/system/users/cc-avatar-chooser.c:92
-#: panels/system/users/cc-enterprise-login-dialog.ui:44 panels/system/users/cc-fingerprint-dialog.c:1398
-#: panels/system/users/cc-fingerprint-dialog.ui:32 panels/system/users/cc-password-dialog.ui:15
-#: panels/system/users/cc-user-page.ui:223 panels/system/users/data/join-dialog.ui:17
-#: panels/wwan/cc-wwan-mode-dialog.ui:32 panels/wwan/cc-wwan-network-dialog.ui:109
-#: panels/wwan/cc-wwan-sim-lock-dialog.ui:239
+#: panels/system/users/cc-enterprise-login-dialog.ui:44 panels/system/users/cc-fingerprint-dialog.ui:32
+#: panels/system/users/cc-password-dialog.ui:15 panels/system/users/cc-user-page.ui:231
+#: panels/system/users/data/join-dialog.ui:17 panels/wwan/cc-wwan-mode-dialog.ui:32
+#: panels/wwan/cc-wwan-network-dialog.ui:109 panels/wwan/cc-wwan-sim-lock-dialog.ui:239
 msgid "_Cancel"
 msgstr "_ยกเลิก"
 
@@ -1159,35 +1159,35 @@ msgid "Save Profile"
 msgstr "บันทึกโปรไฟล์"
 
 #. TRANSLATORS: this is when the button is sensitive
-#: panels/color/cc-color-panel.c:1146
+#: panels/color/cc-color-panel.c:1149
 msgid "Create a color profile for the selected device"
 msgstr "สร้างโปรไฟล์สีสำหรับอุปกรณ์ที่เลือก"
 
 #. TRANSLATORS: this is when the button is insensitive
-#: panels/color/cc-color-panel.c:1161 panels/color/cc-color-panel.c:1185
+#: panels/color/cc-color-panel.c:1164 panels/color/cc-color-panel.c:1188
 msgid "The measuring instrument is not detected. Please check it is turned on and correctly connected."
 msgstr "ตรวจไม่พบอุปกรณ์ตรวจวัด กรุณาตรวจสอบว่าได้เปิดอุปกรณ์หรือยัง และได้เชื่อมต่อถูกต้องหรือไม่"
 
 #. TRANSLATORS: this is when the button is insensitive
-#: panels/color/cc-color-panel.c:1195
+#: panels/color/cc-color-panel.c:1198
 msgid "The measuring instrument does not support printer profiling."
 msgstr "อุปกรณ์ตรวจวัดไม่รองรับการทำโปรไฟล์เครื่องพิมพ์"
 
 #. TRANSLATORS: this is when the button is insensitive
-#: panels/color/cc-color-panel.c:1206
+#: panels/color/cc-color-panel.c:1209
 msgid "The device type is not currently supported."
 msgstr "ยังไม่รองรับอุปกรณ์ตรวจวัดชนิดนี้"
 
 #. Translators: This will be presented as the text of a link to the documentation
 #. translators: Text used in link to privacy policy
 #. Translators: This will be presented as the text of a link to the documentation
-#: panels/color/cc-color-panel.c:2005 panels/privacy/diagnostics/cc-diagnostics-page.c:122
+#: panels/color/cc-color-panel.c:2008 panels/privacy/diagnostics/cc-diagnostics-page.c:122
 #: panels/wacom/cc-wacom-device.c:168
 msgid "learn more"
 msgstr "เรียนรู้เพิ่มเติม"
 
 #. Translators: %s is a link to the documentation with the label "learn more"
-#: panels/color/cc-color-panel.c:2007
+#: panels/color/cc-color-panel.c:2010
 #, c-format
 msgid "Each device needs an up to date color profile to be color managed — %s."
 msgstr "อุปกรณ์แต่ละชิ้นต้องมีโปรไฟล์สีที่เป็นค่าล่าสุดเพื่อที่จะจัดการสี — %s"
@@ -1300,11 +1300,15 @@ msgstr ""
 msgid "Add Profile"
 msgstr "เพิ่มโปรไฟล์"
 
-#: panels/color/cc-color-panel.ui:343
+#: panels/color/cc-color-panel.ui:373
+msgid "Problems detected. The profile may not work correctly. <a href=\"\">Show details.</a>"
+msgstr "พบปัญหา โปรไฟล์นี้อาจทำงานไม่ถูกต้อง <a href=\"\">แสดงรายละเอียด</a>"
+
+#: panels/color/cc-color-panel.ui:384
 msgid "_Import File…"
 msgstr "_นำเข้าไฟล์…"
 
-#: panels/color/cc-color-panel.ui:349 panels/keyboard/cc-input-chooser.ui:23
+#: panels/color/cc-color-panel.ui:390 panels/keyboard/cc-input-chooser.ui:23
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:33 panels/network/connection-editor/net-connection-editor.c:653
 #: panels/printers/pp-new-printer-dialog.ui:96 panels/system/users/cc-add-user-dialog.c:362
 #: panels/system/users/cc-add-user-dialog.ui:32 panels/system/users/cc-add-user-dialog.ui:153
@@ -1312,134 +1316,130 @@ msgstr "_นำเข้าไฟล์…"
 msgid "_Add"
 msgstr "เ_พิ่ม"
 
-#: panels/color/cc-color-panel.ui:389
-msgid "Problems detected. The profile may not work correctly. <a href=\"\">Show details.</a>"
-msgstr "พบปัญหา โปรไฟล์นี้อาจทำงานไม่ถูกต้อง <a href=\"\">แสดงรายละเอียด</a>"
-
-#: panels/color/cc-color-panel.ui:437
+#: panels/color/cc-color-panel.ui:442
 msgid "_Set for All Users"
 msgstr "_กำหนดสำหรับผู้ใช้ทุกคน"
 
-#: panels/color/cc-color-panel.ui:439 panels/color/cc-color-panel.ui:448 panels/color/cc-color-panel.ui:449
+#: panels/color/cc-color-panel.ui:444 panels/color/cc-color-panel.ui:453 panels/color/cc-color-panel.ui:454
 msgid "Set this profile for all users on this device"
 msgstr "กำหนดโปรไฟล์นี้ให้ผู้ใช้ทุกคนในเครื่องนี้ใช้"
 
-#: panels/color/cc-color-panel.ui:446
+#: panels/color/cc-color-panel.ui:451
 msgid "_Enable"
 msgstr "_เปิดใช้"
 
-#: panels/color/cc-color-panel.ui:463
+#: panels/color/cc-color-panel.ui:468
 msgid "_Add Profile"
 msgstr "เพิ่มโปรไฟล์"
 
-#: panels/color/cc-color-panel.ui:470
+#: panels/color/cc-color-panel.ui:475
 msgid "_Calibrate…"
 msgstr "เ_ทียบมาตรฐาน…"
 
-#: panels/color/cc-color-panel.ui:472
+#: panels/color/cc-color-panel.ui:477
 msgid "Calibrate the device"
 msgstr "เทียบมาตรฐานค่าอุปกรณ์"
 
-#: panels/color/cc-color-panel.ui:479
+#: panels/color/cc-color-panel.ui:484
 msgid "_Remove Profile"
 msgstr "_ลบโปรไฟล์"
 
-#: panels/color/cc-color-panel.ui:486
+#: panels/color/cc-color-panel.ui:491
 msgid "_View Details"
 msgstr "_ดูรายละเอียด"
 
-#: panels/color/cc-color-panel.ui:514
+#: panels/color/cc-color-panel.ui:519
 msgid "No Devices"
 msgstr "ไม่มีอุปกรณ์"
 
-#: panels/color/cc-color-panel.ui:515
+#: panels/color/cc-color-panel.ui:520
 msgid "Unable to detect any devices that can be color managed"
 msgstr "ตรวจไม่พบอุปกรณ์ใดที่สามารถจัดการสีได้"
 
-#: panels/color/cc-color-panel.ui:548
+#: panels/color/cc-color-panel.ui:553
 msgid "LCD"
 msgstr "LCD"
 
-#: panels/color/cc-color-panel.ui:553
+#: panels/color/cc-color-panel.ui:558
 msgid "LED"
 msgstr "LED"
 
-#: panels/color/cc-color-panel.ui:558
+#: panels/color/cc-color-panel.ui:563
 msgid "CRT"
 msgstr "CRT"
 
-#: panels/color/cc-color-panel.ui:563
+#: panels/color/cc-color-panel.ui:568
 msgid "Projector"
 msgstr "เครื่องฉาย"
 
-#: panels/color/cc-color-panel.ui:568
+#: panels/color/cc-color-panel.ui:573
 msgid "Plasma"
 msgstr "พลาสมา"
 
-#: panels/color/cc-color-panel.ui:573
+#: panels/color/cc-color-panel.ui:578
 msgid "LCD (CCFL backlight)"
 msgstr "LCD (แสงหลังแบบ CCFL)"
 
-#: panels/color/cc-color-panel.ui:578
+#: panels/color/cc-color-panel.ui:583
 msgid "LCD (RGB LED backlight)"
 msgstr "LCD (แสงหลังแบบ LED ชนิด RGB)"
 
-#: panels/color/cc-color-panel.ui:583
+#: panels/color/cc-color-panel.ui:588
 msgid "LCD (white LED backlight)"
 msgstr "LCD (แสงหลังแบบ LED ขาว)"
 
-#: panels/color/cc-color-panel.ui:588
+#: panels/color/cc-color-panel.ui:593
 msgid "Wide gamut LCD (CCFL backlight)"
 msgstr "LCD ย่านสีกว้าง (แสงหลังแบบ CCFL)"
 
-#: panels/color/cc-color-panel.ui:593
+#: panels/color/cc-color-panel.ui:598
 msgid "Wide gamut LCD (RGB LED backlight)"
 msgstr "LCD ย่านสีกว้าง (แสงหลังแบบ LED ชนิด RGB)"
 
-#: panels/color/cc-color-panel.ui:610
+#: panels/color/cc-color-panel.ui:615
 msgctxt "Calibration quality"
 msgid "High"
 msgstr "สูง"
 
-#: panels/color/cc-color-panel.ui:611
+#: panels/color/cc-color-panel.ui:616
 msgid "40 minutes"
 msgstr "40 นาที"
 
-#: panels/color/cc-color-panel.ui:615
+#: panels/color/cc-color-panel.ui:620
 msgctxt "Calibration quality"
 msgid "Medium"
 msgstr "ปานกลาง"
 
-#: panels/color/cc-color-panel.ui:616
+#: panels/color/cc-color-panel.ui:621
 msgid "30 minutes"
 msgstr "30 นาที"
 
-#: panels/color/cc-color-panel.ui:620
+#: panels/color/cc-color-panel.ui:625
 msgctxt "Calibration quality"
 msgid "Low"
 msgstr "ต่ำ"
 
-#: panels/color/cc-color-panel.ui:621
+#: panels/color/cc-color-panel.ui:626
 msgid "15 minutes"
 msgstr "15 นาที"
 
-#: panels/color/cc-color-panel.ui:643
+#: panels/color/cc-color-panel.ui:648
 msgid "Native to display"
 msgstr "ตามธรรมชาติจอแสดงผล"
 
-#: panels/color/cc-color-panel.ui:647
+#: panels/color/cc-color-panel.ui:652
 msgid "D50 (Printing and publishing)"
 msgstr "D50 (การพิมพ์และการจัดพิมพ์)"
 
-#: panels/color/cc-color-panel.ui:651
+#: panels/color/cc-color-panel.ui:656
 msgid "D55"
 msgstr "D55"
 
-#: panels/color/cc-color-panel.ui:655
+#: panels/color/cc-color-panel.ui:660
 msgid "D65 (Photography and graphics)"
 msgstr "D65 (การถ่ายภาพและกราฟิกส์)"
 
-#: panels/color/cc-color-panel.ui:659
+#: panels/color/cc-color-panel.ui:664
 msgid "D75"
 msgstr "D75"
 
@@ -1520,14 +1520,14 @@ msgid "This profile may no longer be accurate"
 msgstr "โปรไฟล์นี้อาจไม่ถูกต้องแม่นยำอีกต่อไป"
 
 #: panels/color/gnome-color-panel.desktop.in:3
-msgid "Color Management"
-msgstr "การจัดการสี"
+msgid "Color"
+msgstr "สี"
 
 #: panels/color/gnome-color-panel.desktop.in:4
 msgid "Calibrate the color of your devices, such as displays, cameras or printers"
 msgstr "เทียบมาตรฐานสีอุปกรณ์ของคุณ เช่น จอภาพ กล้องถ่ายรูป หรือเครื่องพิมพ์"
 
-#. Translators: Search terms to find the Color Management panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#. Translators: Search terms to find the Color panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/color/gnome-color-panel.desktop.in:15
 msgid "Color;ICC;Profile;Calibrate;Printer;Display;"
 msgstr "สี;ICC;โปรไฟล์;เทียบมาตรฐาน;เครื่องพิมพ์;จอภาพ;"
@@ -1536,23 +1536,23 @@ msgstr "สี;ICC;โปรไฟล์;เทียบมาตรฐาน;�
 msgid "Other…"
 msgstr "อื่นๆ…"
 
-#: panels/common/cc-language-chooser.ui:4
+#: panels/common/cc-language-chooser.ui:5
 msgid "Select Language"
 msgstr "เลือกภาษา"
 
-#: panels/common/cc-language-chooser.ui:23 panels/printers/pp-ppd-selection-dialog.ui:24
+#: panels/common/cc-language-chooser.ui:13 panels/printers/pp-ppd-selection-dialog.ui:24
 msgid "_Select"
 msgstr "เ_ลือก"
 
-#: panels/common/cc-language-chooser.ui:44
+#: panels/common/cc-language-chooser.ui:35
 msgid "Language or country"
 msgstr "ภาษาหรือประเทศ"
 
-#: panels/common/cc-language-chooser.ui:68
+#: panels/common/cc-language-chooser.ui:59
 msgid "No languages found"
 msgstr "ไม่พบภาษา"
 
-#: panels/common/cc-language-chooser.ui:79 panels/keyboard/cc-input-chooser.c:182
+#: panels/common/cc-language-chooser.ui:70 panels/keyboard/cc-input-chooser.c:185
 msgid "More…"
 msgstr "เพิ่มเติม…"
 
@@ -2096,15 +2096,15 @@ msgstr "ลดขนาดตัวอักษร"
 msgid "High contrast on or off"
 msgstr "เปิดหรือปิดการแสดงสีตัดกัน"
 
-#: panels/keyboard/cc-input-chooser.c:195
+#: panels/keyboard/cc-input-chooser.c:198
 msgid "No input sources found"
 msgstr "ไม่พบช่องทางป้อนข้อความ"
 
-#: panels/keyboard/cc-input-chooser.c:250 panels/keyboard/cc-input-row.ui:46
+#: panels/keyboard/cc-input-chooser.c:253 panels/keyboard/cc-input-row.ui:46
 msgid "View Keyboard Layout"
 msgstr "ดูผังแป้นพิมพ์"
 
-#: panels/keyboard/cc-input-chooser.c:1043
+#: panels/keyboard/cc-input-chooser.c:1046
 msgctxt "Input Source"
 msgid "Other"
 msgstr "อื่นๆ"
@@ -2116,6 +2116,10 @@ msgstr "เพิ่มช่องทางป้อนข้อความ"
 #: panels/keyboard/cc-input-chooser.ui:37
 msgid "Search languages and countries"
 msgstr "ค้นหาภาษาและประเทศ"
+
+#: panels/keyboard/cc-input-chooser.ui:52
+msgid "Input methods can’t be used on the login screen"
+msgstr "ไม่สามารถใช้วิธีป้อนข้อความในหน้าจอเข้าระบบได้"
 
 #: panels/keyboard/cc-input-list-box.ui:14
 msgid "_Add Input Source"
@@ -2235,51 +2239,51 @@ msgstr ""
 "คุณสามารถสลับช่องทางป้อนข้อความได้โดยใช้ปุ่มลัด %s\n"
 "คุณสามารถเปลี่ยนปุ่มลัดนี้ได้ในการตั้งค่าปุ่มลัด"
 
-#: panels/keyboard/cc-keyboard-panel.ui:6 panels/keyboard/gnome-keyboard-panel.desktop.in:3
+#: panels/keyboard/cc-keyboard-panel.ui:13 panels/keyboard/gnome-keyboard-panel.desktop.in:3
 msgid "Keyboard"
 msgstr "แป้นพิมพ์"
 
-#: panels/keyboard/cc-keyboard-panel.ui:16
+#: panels/keyboard/cc-keyboard-panel.ui:23
 msgid "Input Sources"
 msgstr "ช่องทางป้อนข้อความ"
 
-#: panels/keyboard/cc-keyboard-panel.ui:17
+#: panels/keyboard/cc-keyboard-panel.ui:24
 msgid "Includes keyboard layouts and input methods"
 msgstr "รวมถึงเค้าโครงแป้นพิมพ์และวิธีการป้อนข้อความ"
 
-#: panels/keyboard/cc-keyboard-panel.ui:27
+#: panels/keyboard/cc-keyboard-panel.ui:34
 msgid "Input Source Switching"
 msgstr "การสลับช่องทางป้อนข้อความ"
 
-#: panels/keyboard/cc-keyboard-panel.ui:30
+#: panels/keyboard/cc-keyboard-panel.ui:37
 msgid "Use the _same source for all windows"
 msgstr "ใช้ช่องทางป้อนข้อความเ_ดียวกันหมดทุกหน้าต่าง"
 
-#: panels/keyboard/cc-keyboard-panel.ui:42
+#: panels/keyboard/cc-keyboard-panel.ui:49
 msgid "Switch input sources _individually for each window"
 msgstr "สลับช่องทางป้อนข้อความแ_ยกกันสำหรับแต่ละหน้าต่าง"
 
-#: panels/keyboard/cc-keyboard-panel.ui:58
+#: panels/keyboard/cc-keyboard-panel.ui:65
 msgid "Special Character Entry"
 msgstr "การป้อนอักขระพิเศษ"
 
-#: panels/keyboard/cc-keyboard-panel.ui:59
+#: panels/keyboard/cc-keyboard-panel.ui:66
 msgid "Methods for entering symbols and letter variants using the keyboard"
 msgstr "วิธีสำหรับป้อนสัญลักษณ์และรูปแบบอื่นๆ ของตัวอักษรโดยใช้แป้นพิมพ์"
 
-#: panels/keyboard/cc-keyboard-panel.ui:62
+#: panels/keyboard/cc-keyboard-panel.ui:69
 msgid "A_lternate Characters Key"
 msgstr "ปุ่มยกแคร่_ระดับสาม"
 
-#: panels/keyboard/cc-keyboard-panel.ui:70
+#: panels/keyboard/cc-keyboard-panel.ui:77
 msgid "_Compose Key"
 msgstr "ปุ่ม _Compose"
 
-#: panels/keyboard/cc-keyboard-panel.ui:79 panels/keyboard/cc-keyboard-shortcut-dialog.ui:9
+#: panels/keyboard/cc-keyboard-panel.ui:86 panels/keyboard/cc-keyboard-shortcut-dialog.ui:9
 msgid "Keyboard Shortcuts"
 msgstr "ปุ่มลัด"
 
-#: panels/keyboard/cc-keyboard-panel.ui:82
+#: panels/keyboard/cc-keyboard-panel.ui:89
 msgid "_View and Customize Shortcuts"
 msgstr "_ดูและกำหนดปุ่มลัดเอง"
 
@@ -2351,7 +2355,7 @@ msgstr "กดปุ่มลัดใหม่เพื่อเปลี่ย
 msgid "Add Custom Shortcut"
 msgstr "เพิ่มปุ่มลัดกำหนดเอง"
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.ui:22 panels/system/users/cc-user-page.ui:224
+#: panels/keyboard/cc-keyboard-shortcut-editor.ui:22 panels/system/users/cc-user-page.ui:232
 msgid "_Remove"
 msgstr "_ลบออก"
 
@@ -2368,33 +2372,29 @@ msgstr "_ตั้ง"
 msgid "Press Esc to cancel or Backspace to disable the keyboard shortcut"
 msgstr "กด Esc เพื่อยกเลิก หรือกด Backspace เพื่อปิดใช้ปุ่มลัด"
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.ui:128 panels/keyboard/cc-keyboard-shortcut-row.ui:23
-msgid "Reset Shortcut"
-msgstr "คืนค่าปุ่มลัด"
-
-#: panels/keyboard/cc-keyboard-shortcut-editor.ui:159 panels/wwan/cc-wwan-apn-dialog.ui:96
-msgid "Name"
-msgstr "ชื่อ"
-
-#: panels/keyboard/cc-keyboard-shortcut-editor.ui:170
-msgid "Command"
-msgstr "คำสั่ง"
-
-#: panels/keyboard/cc-keyboard-shortcut-editor.ui:181
-msgid "Shortcut"
-msgstr "ปุ่มลัด"
-
-#: panels/keyboard/cc-keyboard-shortcut-editor.ui:231
+#: panels/keyboard/cc-keyboard-shortcut-editor.ui:131 panels/keyboard/cc-keyboard-shortcut-editor.ui:233
 msgid "Reset"
 msgstr "ล้างค่า"
 
+#: panels/keyboard/cc-keyboard-shortcut-editor.ui:161 panels/wwan/cc-wwan-apn-dialog.ui:96
+msgid "Name"
+msgstr "ชื่อ"
+
+#: panels/keyboard/cc-keyboard-shortcut-editor.ui:172
+msgid "Command"
+msgstr "คำสั่ง"
+
+#: panels/keyboard/cc-keyboard-shortcut-editor.ui:183
+msgid "Shortcut"
+msgstr "ปุ่มลัด"
+
 #. Translators: This is a mark in the Grayscale scale
-#: panels/keyboard/cc-keyboard-shortcut-editor.ui:245 panels/sound/cc-alert-chooser-window.c:340
+#: panels/keyboard/cc-keyboard-shortcut-editor.ui:247 panels/sound/cc-alert-chooser-window.c:340
 #: panels/sound/cc-alert-chooser-window.ui:17 panels/universal-access/cc-ua-zoom-page.ui:285
 msgid "None"
 msgstr "ไม่ใช้"
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.ui:254
+#: panels/keyboard/cc-keyboard-shortcut-editor.ui:256
 msgid "_Set Shortcut…"
 msgstr "_ตั้งค่าปุ่มลัด…"
 
@@ -2407,6 +2407,10 @@ msgstr[0] "แก้ไขแล้ว %d"
 #: panels/keyboard/cc-keyboard-shortcut-group.c:154
 msgid "Add a Shortcut"
 msgstr "เพิ่มปุ่มลัด"
+
+#: panels/keyboard/cc-keyboard-shortcut-row.ui:23
+msgid "Reset Shortcut"
+msgstr "คืนค่าปุ่มลัด"
 
 #: panels/keyboard/gnome-keyboard-panel.desktop.in:4
 msgid "Change keyboard shortcuts and set your typing preferences, keyboard layouts and input sources"
@@ -2797,7 +2801,7 @@ msgstr "ชื่อเครือข่าย"
 
 #. Translators: This is a password needed for printing.
 #: panels/network/cc-qr-code-dialog.ui:66 panels/network/cc-wifi-hotspot-dialog.ui:92
-#: panels/printers/pp-jobs-dialog.ui:178 panels/printers/pp-new-printer-dialog.ui:292
+#: panels/printers/pp-jobs-dialog.ui:52 panels/printers/pp-new-printer-dialog.ui:292
 #: panels/system/users/cc-add-user-dialog.ui:103 panels/wwan/cc-wwan-apn-dialog.ui:175
 msgid "Password"
 msgstr "รหัสผ่าน"
@@ -2928,7 +2932,7 @@ msgstr "ไม่พบตัวรับสัญญาณ Wi-Fi"
 msgid "Make sure you have a Wi-Fi adapter plugged and turned on"
 msgstr "ตรวจสอบให้แน่ใจว่าคุณได้เสียบปลั๊กและเปิดตัวรับสัญญาณ Wi-Fi แล้ว"
 
-#: panels/network/cc-wifi-panel.ui:96 panels/wwan/cc-wwan-panel.ui:63
+#: panels/network/cc-wifi-panel.ui:96 panels/wwan/cc-wwan-panel.ui:64
 msgid "Airplane Mode On"
 msgstr "โหมดเครื่องบินเปิดอยู่"
 
@@ -4589,21 +4593,21 @@ msgstr "ดูสถานะแบตเตอรี่และตั้งค
 msgid "Power;Sleep;Suspend;Hibernate;Battery;Brightness;Dim;Blank;Monitor;DPMS;Idle;Energy;"
 msgstr "พลังงาน;หลับ;พักเครื่อง;จำศีลเครื่อง;แบตเตอรี่;ความสว่าง;หรี่;ว่าง;จอภาพ;DPMS;ไม่ใช้งาน;พลังงาน;"
 
-#: panels/printers/cc-printers-panel.c:672
+#: panels/printers/cc-printers-panel.c:677
 msgid "Undo"
 msgstr "เลิกทำ"
 
 #. Translators: %s is the printer name
-#: panels/printers/cc-printers-panel.c:682
+#: panels/printers/cc-printers-panel.c:687
 #, c-format
 msgid "Printer “%s” has been deleted"
 msgstr "ลบเครื่องพิมพ์ “%s” ออกแล้ว"
 
-#: panels/printers/cc-printers-panel.c:924
+#: panels/printers/cc-printers-panel.c:928
 msgid "Failed to add new printer."
 msgstr "เพิ่มเครื่องพิมพ์เครื่องใหม่ไม่สำเร็จ"
 
-#: panels/printers/cc-printers-panel.c:1293
+#: panels/printers/cc-printers-panel.c:1297
 msgid "Unlock to add printers and change settings"
 msgstr "ปลดล็อกเพื่อเพิ่มเครื่องพิมพ์และเปลี่ยนการตั้งค่า"
 
@@ -4613,7 +4617,7 @@ msgstr "เครื่องพิมพ์ที่เชื่อมต่อ
 
 #. Translators: This button adds new printer.
 #. Translators: This button adds a new printer.
-#: panels/printers/cc-printers-panel.ui:31 panels/printers/cc-printers-panel.ui:123
+#: panels/printers/cc-printers-panel.ui:31 panels/printers/cc-printers-panel.ui:118
 msgid "_Add Printer…"
 msgstr "เ_พิ่มเครื่องพิมพ์…"
 
@@ -4621,17 +4625,17 @@ msgstr "เ_พิ่มเครื่องพิมพ์…"
 msgid "Search printers"
 msgstr "ค้นหาเครื่องพิมพ์"
 
-#: panels/printers/cc-printers-panel.ui:120
+#: panels/printers/cc-printers-panel.ui:115
 msgid "No Printers"
 msgstr "ไม่มีเครื่องพิมพ์"
 
 #. Translators: Title if the CUPS server is not running (we can not connect to it).
-#: panels/printers/cc-printers-panel.ui:145
+#: panels/printers/cc-printers-panel.ui:140
 msgid "No Print Service"
 msgstr "ไม่มีบริการจัดพิมพ์"
 
 #. Translators: Description if the CUPS server is not running (we can not connect to it).
-#: panels/printers/cc-printers-panel.ui:146
+#: panels/printers/cc-printers-panel.ui:141
 msgid "The system printing service doesn’t seem to be available"
 msgstr "ดูเหมือนว่าบริการจัดพิมพ์ของระบบจะไม่พร้อมใช้งาน"
 
@@ -4656,7 +4660,11 @@ msgstr "ไม่พบไดรเวอร์ที่เหมาะสม"
 msgid "Searching for preferred drivers…"
 msgstr "กำลังค้นหาไดรเวอร์สำหรับเครื่องพิมพ์…"
 
-#: panels/printers/pp-details-dialog.c:275
+#: panels/printers/pp-details-dialog.c:264
+msgid "Select PPD File"
+msgstr "เลือกไฟล์ PPD"
+
+#: panels/printers/pp-details-dialog.c:273
 msgid "PostScript Printer Description files (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, *.PPD.GZ)"
 msgstr "ไฟล์บรรยายเครื่องพิมพ์โพสต์สคริปต์ (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, *.PPD.GZ)"
 
@@ -4805,64 +4813,57 @@ msgid "Move Print Job to Top of Queue"
 msgstr "ย้ายงานนี้ไปไว้รายการแรกสุดของคิว"
 
 #. Translators: This label shows how many jobs of this printer needs to be authenticated to be printed.
-#: panels/printers/pp-jobs-dialog.c:319
+#: panels/printers/pp-jobs-dialog.c:318
 #, c-format
 msgid "%u Job Requires Authentication"
 msgid_plural "%u Jobs Require Authentication"
 msgstr[0] "งานพิมพ์ %u งานต้องการยืนยันตัวบุคคล"
 
 #. Translators: The printer needs authentication info to print.
-#: panels/printers/pp-jobs-dialog.c:456
+#: panels/printers/pp-jobs-dialog.c:455
 #, c-format
 msgid "Enter credentials to print from %s"
 msgstr "ป้อนข้อมูลประจำตัวเพื่อพิมพ์จาก %s"
 
-#. Translators: this action removes (purges) all the listed jobs from the list.
-#: panels/printers/pp-jobs-dialog.ui:12
-msgid "_Clear All"
-msgstr "_ล้างทั้งหมด"
-
-#: panels/printers/pp-jobs-dialog.ui:23
-msgid "Active Jobs"
-msgstr "ไม่มีงานพิมพ์ที่ทำอยู่"
-
-#. Translators: this label describes the dialog empty state, with no jobs listed.
-#: panels/printers/pp-jobs-dialog.ui:36
-msgid "No Active Printer Jobs"
-msgstr "ไม่มีงานพิมพ์ที่ดำเนินการอยู่"
-
-#. Translators: This button pop up authentication dialog for print jobs which need credentials.
-#: panels/printers/pp-jobs-dialog.ui:80
-msgid "_Authenticate"
-msgstr "_ยืนยันตัวบุคคล"
-
-#: panels/printers/pp-jobs-dialog.ui:119
-msgid "Clear All Active Jobs?"
-msgstr "ล้างงานพิมพ์ทั้งหมดที่ทำอยู่หรือไม่?"
-
-#: panels/printers/pp-jobs-dialog.ui:120
-msgid "Clearing jobs cannot be undone"
-msgstr "การล้างงานพิมพ์ไม่สามารถเรียกกลับคืนได้"
-
-#: panels/printers/pp-jobs-dialog.ui:126
-msgid "Clear _All"
-msgstr "_ล้างทั้งหมด"
-
 #. Translators: This is a windows domain used with SMB protocol.
-#: panels/printers/pp-jobs-dialog.ui:154
+#: panels/printers/pp-jobs-dialog.ui:28
 msgid "Domain"
 msgstr "โดเมน"
 
 #. Translators: This is a username on a print server.
-#: panels/printers/pp-jobs-dialog.ui:166 panels/printers/pp-new-printer-dialog.ui:271
+#: panels/printers/pp-jobs-dialog.ui:40 panels/printers/pp-new-printer-dialog.ui:271
 #: panels/wwan/cc-wwan-apn-dialog.ui:150
 msgid "Username"
 msgstr "ชื่อผู้ใช้"
 
 #. Translators: This button authenticates all print jobs and send them for printing.
-#: panels/printers/pp-jobs-dialog.ui:227
+#: panels/printers/pp-jobs-dialog.ui:101
 msgid "A_uthenticate"
 msgstr "ยื_นยันตัวบุคคล"
+
+#: panels/printers/pp-jobs-dialog.ui:119
+#, fuzzy
+msgid "Printer Jobs"
+msgstr "เครื่องพิมพ์"
+
+#. Translators: this action removes (purges) all the listed jobs from the list.
+#: panels/printers/pp-jobs-dialog.ui:128
+msgid "_Clear All"
+msgstr "_ล้างทั้งหมด"
+
+#: panels/printers/pp-jobs-dialog.ui:139
+msgid "Active Jobs"
+msgstr "ไม่มีงานพิมพ์ที่ทำอยู่"
+
+#. Translators: this label describes the dialog empty state, with no jobs listed.
+#: panels/printers/pp-jobs-dialog.ui:152
+msgid "No Active Printer Jobs"
+msgstr "ไม่มีงานพิมพ์ที่ดำเนินการอยู่"
+
+#. Translators: This button pop up authentication dialog for print jobs which need credentials.
+#: panels/printers/pp-jobs-dialog.ui:196
+msgid "_Authenticate"
+msgstr "_ยืนยันตัวบุคคล"
 
 #. Translators: Name of job which makes printer to autoconfigure itself
 #: panels/printers/pp-new-printer.c:1200
@@ -5279,74 +5280,74 @@ msgstr "ล้างหัวพิมพ์"
 msgid "Remove Printer"
 msgstr "ลบเครื่องพิมพ์"
 
-#: panels/privacy/bolt/cc-bolt-device-dialog.c:78 panels/privacy/bolt/cc-bolt-device-entry.c:121
+#: panels/privacy/bolt/cc-bolt-device-dialog.c:79 panels/privacy/bolt/cc-bolt-device-entry.c:121
 msgctxt "Thunderbolt Device Status"
 msgid "Disconnected"
 msgstr "ตัดการเชื่อมต่อแล้ว"
 
-#: panels/privacy/bolt/cc-bolt-device-dialog.c:81 panels/privacy/bolt/cc-bolt-device-entry.c:124
+#: panels/privacy/bolt/cc-bolt-device-dialog.c:82 panels/privacy/bolt/cc-bolt-device-entry.c:124
 msgctxt "Thunderbolt Device Status"
 msgid "Connecting"
 msgstr "กำลังเชื่อมต่อ"
 
-#: panels/privacy/bolt/cc-bolt-device-dialog.c:84 panels/privacy/bolt/cc-bolt-device-entry.c:128
+#: panels/privacy/bolt/cc-bolt-device-dialog.c:85 panels/privacy/bolt/cc-bolt-device-entry.c:128
 #: panels/privacy/bolt/cc-bolt-device-entry.c:140
 msgctxt "Thunderbolt Device Status"
 msgid "Connected"
 msgstr "เชื่อมต่อแล้ว"
 
-#: panels/privacy/bolt/cc-bolt-device-dialog.c:87
+#: panels/privacy/bolt/cc-bolt-device-dialog.c:88
 msgctxt "Thunderbolt Device Status"
 msgid "Authorization Error"
 msgstr "การให้สิทธิ์ล้มเหลว"
 
-#: panels/privacy/bolt/cc-bolt-device-dialog.c:90 panels/privacy/bolt/cc-bolt-device-entry.c:134
+#: panels/privacy/bolt/cc-bolt-device-dialog.c:91 panels/privacy/bolt/cc-bolt-device-entry.c:134
 msgctxt "Thunderbolt Device Status"
 msgid "Authorizing"
 msgstr "กำลังให้สิทธิ์"
 
-#: panels/privacy/bolt/cc-bolt-device-dialog.c:97
+#: panels/privacy/bolt/cc-bolt-device-dialog.c:98
 msgctxt "Thunderbolt Device Status"
 msgid "Reduced Functionality"
 msgstr "การทำงานน้อยลง"
 
-#: panels/privacy/bolt/cc-bolt-device-dialog.c:99
+#: panels/privacy/bolt/cc-bolt-device-dialog.c:100
 msgctxt "Thunderbolt Device Status"
 msgid "Connected & Authorized"
 msgstr "เชื่อมต่อและให้สิทธิ์แล้ว"
 
-#: panels/privacy/bolt/cc-bolt-device-dialog.c:105 panels/privacy/bolt/cc-bolt-device-entry.c:148
+#: panels/privacy/bolt/cc-bolt-device-dialog.c:106 panels/privacy/bolt/cc-bolt-device-entry.c:148
 msgctxt "Thunderbolt Device Status"
 msgid "Unknown"
 msgstr "ไม่ทราบ"
 
 #. Translators: The time point the device was authorized.
-#: panels/privacy/bolt/cc-bolt-device-dialog.c:160
+#: panels/privacy/bolt/cc-bolt-device-dialog.c:161
 msgid "Authorized at"
 msgstr ""
 
 #. Translators: The time point the device was connected.
-#: panels/privacy/bolt/cc-bolt-device-dialog.c:166
+#: panels/privacy/bolt/cc-bolt-device-dialog.c:167
 #, fuzzy
 msgid "Connected at"
 msgstr "เชื่อมต่อแล้ว"
 
 #. Translators: The time point the device was enrolled,
 #. * i.e. authorized and stored in the device database.
-#: panels/privacy/bolt/cc-bolt-device-dialog.c:173
+#: panels/privacy/bolt/cc-bolt-device-dialog.c:174
 #, fuzzy
 msgid "Enrolled at"
 msgstr "_ลงทะเบียน"
 
-#: panels/privacy/bolt/cc-bolt-device-dialog.c:247
+#: panels/privacy/bolt/cc-bolt-device-dialog.c:248
 msgid "Failed to authorize device: "
 msgstr "ให้สิทธิ์อุปกรณ์ไม่สำเร็จ: "
 
-#: panels/privacy/bolt/cc-bolt-device-dialog.c:314
+#: panels/privacy/bolt/cc-bolt-device-dialog.c:315
 msgid "Failed to forget device: "
 msgstr "ลบอุปกรณ์ทิ้งไม่สำเร็จ: "
 
-#: panels/privacy/bolt/cc-bolt-device-dialog.c:454
+#: panels/privacy/bolt/cc-bolt-device-dialog.c:455
 #, c-format
 msgid "Depends on %u other device"
 msgid_plural "Depends on %u other devices"
@@ -5357,24 +5358,24 @@ msgstr[0] ""
 msgid "Device Identifier"
 msgstr "ชื่ออุปกรณ์"
 
-#: panels/privacy/bolt/cc-bolt-device-dialog.ui:33
+#: panels/privacy/bolt/cc-bolt-device-dialog.ui:30
 msgid "UUID"
 msgstr ""
 
-#: panels/privacy/bolt/cc-bolt-device-dialog.ui:41
+#: panels/privacy/bolt/cc-bolt-device-dialog.ui:35
 #, fuzzy
 msgid "Timestamp"
 msgstr "เวลา"
 
-#: panels/privacy/bolt/cc-bolt-device-dialog.ui:52
+#: panels/privacy/bolt/cc-bolt-device-dialog.ui:43
 msgid "Depends on other devices"
 msgstr ""
 
-#: panels/privacy/bolt/cc-bolt-device-dialog.ui:80
+#: panels/privacy/bolt/cc-bolt-device-dialog.ui:71
 msgid "Authorize and Connect"
 msgstr "ให้สิทธิ์และเชื่อมต่อ"
 
-#: panels/privacy/bolt/cc-bolt-device-dialog.ui:95
+#: panels/privacy/bolt/cc-bolt-device-dialog.ui:86
 msgid "Forget Device"
 msgstr "ลบอุปกรณ์ทิ้ง"
 
@@ -5388,19 +5389,19 @@ msgctxt "Thunderbolt Device Status"
 msgid "Authorized"
 msgstr "ให้สิทธิ์แล้ว"
 
-#: panels/privacy/bolt/cc-bolt-page.c:213
+#: panels/privacy/bolt/cc-bolt-page.c:216
 msgid "The Thunderbolt subsystem (boltd) is not installed or not set up properly."
 msgstr "ไม่ได้ติดตั้งหรือตั้งค่า Thunderbolt subsystem (boltd) อย่างเหมาะสม"
 
-#: panels/privacy/bolt/cc-bolt-page.c:469
+#: panels/privacy/bolt/cc-bolt-page.c:472
 msgid "Allow direct access to devices such as docks and external GPUs."
 msgstr "อนุญาตให้เข้าถึงอุปกรณ์ต่างๆ เช่น แท่นวาง และ GPU แบบต่อภายนอก ได้โดยตรง"
 
-#: panels/privacy/bolt/cc-bolt-page.c:470
+#: panels/privacy/bolt/cc-bolt-page.c:473
 msgid "Only USB and Display Port devices can attach."
 msgstr "สามารถต่อได้เฉพาะอุปกรณ์ USB และ Display Port เท่านั้น"
 
-#: panels/privacy/bolt/cc-bolt-page.c:505
+#: panels/privacy/bolt/cc-bolt-page.c:508
 msgid ""
 "Thunderbolt could not be detected.\n"
 "Either the system lacks Thunderbolt support, it has been disabled in the BIOS or is set to an unsupported "
@@ -5409,15 +5410,15 @@ msgstr ""
 "ไม่พบ Thunderbolt\n"
 "ระบบอาจไม่รองรับ Thunderbolt, อาจถูกปิดใช้ใน BIOS หรือถูกกำหนดเป็นระดับที่ไม่รองรับใน BIOS"
 
-#: panels/privacy/bolt/cc-bolt-page.c:549
+#: panels/privacy/bolt/cc-bolt-page.c:552
 msgid "Thunderbolt support has been disabled in the BIOS."
 msgstr "การรองรับ Thunderbolt ถูกปิดใช้ใน BIOS"
 
-#: panels/privacy/bolt/cc-bolt-page.c:553
+#: panels/privacy/bolt/cc-bolt-page.c:556
 msgid "Thunderbolt security level could not be determined."
 msgstr "ไม่สามารถบอกระดับความปลอดภัยของ Thunderbolt ได้"
 
-#: panels/privacy/bolt/cc-bolt-page.c:673
+#: panels/privacy/bolt/cc-bolt-page.c:676
 #, c-format
 msgid "Error switching direct mode: %s"
 msgstr "เกิดข้อผิดพลาดขณะทำการสลับโหมดโดยตรง: %s"
@@ -5426,27 +5427,34 @@ msgstr "เกิดข้อผิดพลาดขณะทำการสล
 msgid "Thunderbolt"
 msgstr "Thunderbolt"
 
-#: panels/privacy/bolt/cc-bolt-page.ui:51
+#: panels/privacy/bolt/cc-bolt-page.ui:48
+#, fuzzy
+msgid "Close notification"
+msgstr "แสดงการแ_จ้งเหตุ"
+
+#: panels/privacy/bolt/cc-bolt-page.ui:92
 msgid "No Thunderbolt Support"
 msgstr "ไม่มีการรองรับ Thunderbolt"
 
-#: panels/privacy/bolt/cc-bolt-page.ui:52
+#: panels/privacy/bolt/cc-bolt-page.ui:93
+#, fuzzy
 msgid "Could not connect to the thunderbolt subsystem"
 msgstr "ไม่สามารถเชื่อมต่อกับระบบย่อยของ Thunderbolt ได้"
 
-#: panels/privacy/bolt/cc-bolt-page.ui:69
+#: panels/privacy/bolt/cc-bolt-page.ui:110
 msgid "Direct Access"
 msgstr "การเข้าถึงแบบโดยตรง"
 
-#: panels/privacy/bolt/cc-bolt-page.ui:73
+#: panels/privacy/bolt/cc-bolt-page.ui:113
+#, fuzzy
 msgid "Allow direct access to devices such as docks and external GPUs"
 msgstr "อนุญาตให้เข้าถึงอุปกรณ์ต่างๆ เช่น แท่นวาง และ GPU แบบต่อภายนอก ได้โดยตรง"
 
-#: panels/privacy/bolt/cc-bolt-page.ui:128
+#: panels/privacy/bolt/cc-bolt-page.ui:163
 msgid "Pending Devices"
 msgstr "อุปกรณ์ที่รออยู่"
 
-#: panels/privacy/bolt/cc-bolt-page.ui:211
+#: panels/privacy/bolt/cc-bolt-page.ui:246
 msgid "No devices attached"
 msgstr "ไม่มีอุปกรณ์ต่ออยู่"
 
@@ -5632,7 +5640,7 @@ msgstr ""
 
 #. TRANSLATORS: in reference to firmware protection: 0/4 stars
 #: panels/privacy/firmware-security/cc-firmware-security-dialog.c:108
-#: panels/privacy/firmware-security/cc-firmware-security-page.c:533
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:532
 msgid "Security Checks Failed"
 msgstr "การตรวจสอบความปลอดภัยล้มเหลว"
 
@@ -5652,9 +5660,9 @@ msgstr ""
 
 #. TRANSLATORS: in reference to firmware protection: 1/4 stars
 #: panels/privacy/firmware-security/cc-firmware-security-dialog.c:121
-#: panels/privacy/firmware-security/cc-firmware-security-page.c:540
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:539
 msgid "Basic Security Checks Passed"
-msgstr "ผ่านการตรวจสอบความปลอดภัยขั้นพื้นฐานแล้ว"
+msgstr "ผ่านการตรวจสอบความปลอดภัยขั้นพื้นฐาน"
 
 #. TRANSLATORS: This description describes the device passing the
 #. minimum requirement of security check.
@@ -5663,12 +5671,12 @@ msgid ""
 "This device meets basic security requirements and has protection against some hardware security threats. "
 "However, it lacks other recommended protections."
 msgstr ""
-"อุปกรณ์นี้เป็นไปตามข้อกำหนดด้านความปลอดภัยขั้นพื้นฐาน ฮาร์ดแวร์มีการป้องกันภัยคุกคามความปลอดภัยที่พบบ่อยที่สุดบางรายการ "
-"แต่ยังขาดการป้องกันอื่นๆ ที่แนะนำ"
+"อุปกรณ์นี้เป็นไปตามข้อกำหนดด้านความปลอดภัยพื้นฐานและมีการป้องกันภัยคุกคามต่อความปลอดภัยของฮาร์ดแวร์บางประการ อย่างไรก็ตาม "
+"ยังขาดการป้องกันอื่นๆ ที่แนะนำ"
 
 #. TRANSLATORS: in reference to firmware protection: 2~4 stars
 #: panels/privacy/firmware-security/cc-firmware-security-dialog.c:134
-#: panels/privacy/firmware-security/cc-firmware-security-page.c:550
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:549
 msgid "Protected"
 msgstr "ได้รับการป้องกัน"
 
@@ -5677,7 +5685,7 @@ msgstr "ได้รับการป้องกัน"
 #: panels/privacy/firmware-security/cc-firmware-security-dialog.c:137
 msgid ""
 "This device passes current security tests. It is protected against the majority of hardware security threats."
-msgstr "อุปกรณ์นี้ผ่านการทดสอบความปลอดภัยในปัจจุบัน ฮาร์ดแวร์ได้รับการปกป้องจากภัยคุกคามด้านความปลอดภัยส่วนใหญ่"
+msgstr "อุปกรณ์นี้ผ่านการทดสอบความปลอดภัยในปัจจุบัน และได้รับการปกป้องจากภัยคุกคามด้านความปลอดภัยของฮาร์ดแวร์ส่วนใหญ่"
 
 #: panels/privacy/firmware-security/cc-firmware-security-dialog.c:144
 msgid "Checks Unavailable"
@@ -5688,7 +5696,9 @@ msgstr "ตรวจสอบไม่ได้"
 msgid ""
 "Device security checks are not available for this device. It is not possible to tell whether it meets hardware "
 "security requirements."
-msgstr "ไม่สามารถตรวจสอบความปลอดภัยของอุปกรณ์สำหรับอุปกรณ์นี้ได้ จึงไม่สามารถระบุได้ว่าอุปกรณ์นี้ตรงตามข้อกำหนดด้านความปลอดภัยหรือไม่"
+msgstr ""
+"การตรวจสอบความปลอดภัยของอุปกรณ์ไม่พร้อมใช้งานสำหรับอุปกรณ์นี้ "
+"จึงไม่สามารถระบุได้ว่าอุปกรณ์นี้ตรงตามข้อกำหนดด้านความปลอดภัยของฮาร์ดแวร์หรือไม่"
 
 #: panels/privacy/firmware-security/cc-firmware-security-dialog.c:366
 msgid "Report copied to clipboard"
@@ -5779,88 +5789,92 @@ msgstr "ปัญหานี้อาจเกิดจากการเปล
 
 #. TRANSLATOR: this is the date in "%Y-%m-%d %H:%M:%S" format,
 #. for example: 2022-08-01 22:48:00
-#: panels/privacy/firmware-security/cc-firmware-security-page.c:229
-#, c-format
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:228
+#, fuzzy, c-format
 msgid "%1$s"
 msgstr "%1$s"
 
 #. TRANSLATOR: This is the text event status output when the event status is "success"
-#: panels/privacy/firmware-security/cc-firmware-security-page.c:235
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:234
 msgid "Pass"
 msgstr "ผ่าน"
 
 #. TRANSLATOR: This is the text event status output when the event status is not "success"
-#: panels/privacy/firmware-security/cc-firmware-security-page.c:238
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:237
 msgid "! Fail"
-msgstr "! ไม่ผ่าน"
+msgstr "! ล้มเหลว"
 
-#: panels/privacy/firmware-security/cc-firmware-security-page.c:241
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:240
 #, c-format
 msgid "(%1$s → %2$s)"
-msgstr "(%1$s → %2$s)"
+msgstr ""
 
-#: panels/privacy/firmware-security/cc-firmware-security-page.c:534
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:533
 msgid "Hardware does not pass basic security checks."
 msgstr "ฮาร์ดแวร์ไม่ผ่านการตรวจสอบความปลอดภัยขั้นพื้นฐาน"
 
-#: panels/privacy/firmware-security/cc-firmware-security-page.c:541
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:540
 msgid "Hardware has a basic level of protection."
-msgstr "ฮาร์ดแวร์มีระดับการป้องกันที่ดี"
+msgstr "ฮาร์ดแวร์มีการป้องกันระดับพื้นฐาน"
 
-#: panels/privacy/firmware-security/cc-firmware-security-page.c:551
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:550
 msgid "Hardware has a strong level of protection."
 msgstr "ฮาร์ดแวร์มีระดับการป้องกันที่แข็งแกร่ง"
 
 #. TRANSLATORS: in reference to firmware protection: ??? stars
-#: panels/privacy/firmware-security/cc-firmware-security-page.c:557
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:556
 msgid "Security Checks Unavailable"
-msgstr "ตรวจสอบความปลอดภัยไม่ได้"
+msgstr "การตรวจสอบความปลอดภัยไม่พร้อมใช้งาน"
 
-#: panels/privacy/firmware-security/cc-firmware-security-page.c:558
+#: panels/privacy/firmware-security/cc-firmware-security-page.c:557
 msgid "Security levels are not available for this device."
 msgstr "ระดับความปลอดภัยไม่สามารถใช้งานได้กับอุปกรณ์นี้"
 
 #: panels/privacy/firmware-security/cc-firmware-security-page.ui:4
 msgid "Device Security"
-msgstr "ความปลอดภัยอุปกรณ์"
+msgstr "ความปลอดภัยของอุปกรณ์"
 
-#: panels/privacy/firmware-security/cc-firmware-security-page.ui:41
+#: panels/privacy/firmware-security/cc-firmware-security-page.ui:37
+msgid "Starting Device Security…"
+msgstr "กำลังเริ่ม \"ความปลอดภัยของอุปกรณ์\"…"
+
+#: panels/privacy/firmware-security/cc-firmware-security-page.ui:48
 msgid "Device Security Unavailable"
 msgstr "ความปลอดภัยของอุปกรณ์ไม่พร้อมใช้งาน"
 
-#: panels/privacy/firmware-security/cc-firmware-security-page.ui:43
+#: panels/privacy/firmware-security/cc-firmware-security-page.ui:50
 msgid "Device Security is only available on physical hardware. No physical hardware has been detected."
-msgstr "การรักษาความปลอดภัยอุปกรณ์มีให้ใช้งานได้เฉพาะกับฮาร์ดแวร์ทางกายภาพเท่านั้น แต่ไม่พบฮาร์ดแวร์ทางกายภาพใดๆ"
+msgstr "การรักษาความปลอดภัยของอุปกรณ์มีให้ใช้งานได้เฉพาะกับฮาร์ดแวร์ทางกายภาพเท่านั้น แต่ไม่พบฮาร์ดแวร์ทางกายภาพใดๆ"
 
-#: panels/privacy/firmware-security/cc-firmware-security-page.ui:176
+#: panels/privacy/firmware-security/cc-firmware-security-page.ui:183
 msgid "Security Events"
 msgstr "เหตุการณ์ด้านความปลอดภัย"
 
-#: panels/privacy/firmware-security/cc-firmware-security-page.ui:188
+#: panels/privacy/firmware-security/cc-firmware-security-page.ui:195
 msgid "No Events"
 msgstr "ไม่มีเหตุการณ์"
 
 #. TRANSLATORS: if the status is valid. For example security check is valid and key is valid.
 #: panels/privacy/firmware-security/cc-firmware-security-utils.c:35
 msgid "Valid"
-msgstr "ถูกต้อง"
+msgstr "ผ่าน"
 
 #. TRANSLATORS: if the status or key is not valid.
 #: panels/privacy/firmware-security/cc-firmware-security-utils.c:40
 msgid "Not Valid"
-msgstr "ไม่ถูกต้อง"
+msgstr "ไม่ผ่าน"
 
 #. TRANSLATORS: if the function is enabled through BIOS or OS settings.
 #. TRANSLATORS: Status of Parental Controls setup
-#: panels/privacy/firmware-security/cc-firmware-security-utils.c:45 panels/system/users/cc-user-page.c:377
-#: panels/system/users/cc-user-page.c:765 panels/wwan/cc-wwan-device-page.c:475
+#: panels/privacy/firmware-security/cc-firmware-security-utils.c:45 panels/system/users/cc-user-page.c:374
+#: panels/system/users/cc-user-page.c:740 panels/wwan/cc-wwan-device-page.c:475
 msgid "Enabled"
-msgstr "เปิดใช้"
+msgstr "เปิดใช้งานแล้ว"
 
 #. TRANSLATORS: if the function is not enabled through BIOS or OS settings.
 #: panels/privacy/firmware-security/cc-firmware-security-utils.c:50
 msgid "Not Enabled"
-msgstr "ไม่ได้เปิดใช้"
+msgstr "ไม่ได้เปิดใช้งาน"
 
 #. TRANSLATORS: the memory space or system mode is locked to prevent from malicious modification.
 #: panels/privacy/firmware-security/cc-firmware-security-utils.c:55
@@ -6486,7 +6500,7 @@ msgstr "รุ่นฮาร์ดแวร์"
 
 #: panels/system/about/cc-about-page.ui:80 panels/system/about/cc-system-details-window.ui:85
 msgid "Processor"
-msgstr "ตัวประมวลผล"
+msgstr "หน่วยประมวลผล"
 
 #: panels/system/about/cc-about-page.ui:91 panels/system/about/cc-system-details-window.ui:78
 msgid "Memory"
@@ -6611,7 +6625,7 @@ msgid ""
 "device;system;information;hostname;memory;processor;version;default;application;preferred;cd;dvd;usb;audio;"
 "video;disc;removable;media;autorun;"
 msgstr ""
-"อุปกรณ์;ระบบ;ข้อมูล;ชื่อโฮสต์;หน่วยความจำ;ตัวประมวลผล;รุ่น;เริ่มต้น;แอปพลิเคชัน;ปรับแต่ง;ซีดี;ดีวีดี;usb;เสียง;วิดีโอ;ดิสก์;ถอดเสียบ;สื่อ;"
+"อุปกรณ์;ระบบ;ข้อมูล;ชื่อโฮสต์;หน่วยความจำ;หน่วยประมวลผล;รุ่น;เริ่มต้น;แอปพลิเคชัน;ปรับแต่ง;ซีดี;ดีวีดี;usb;เสียง;วิดีโอ;ดิสก์;ถอดเสียบ;สื่อ;"
 "autorun;"
 
 #: panels/system/cc-system-panel.ui:20
@@ -6667,17 +6681,17 @@ msgid "S_oftware Updates"
 msgstr "การอัปเดตซอฟต์แวร์"
 
 #. Translators: This is the full date and time format used in 12-hour mode.
-#: panels/system/datetime/cc-datetime-page.c:238
+#: panels/system/datetime/cc-datetime-page.c:237
 msgid "%e %B %Y, %l:%M %p"
 msgstr "%e %B %EY, %l:%M %p"
 
 #. Translators: This is the full date and time format used in 24-hour mode.
-#: panels/system/datetime/cc-datetime-page.c:243
+#: panels/system/datetime/cc-datetime-page.c:242
 msgid "%e %B %Y, %R"
 msgstr "%e %B %EY, %R"
 
 #. Translators: "city, country"
-#: panels/system/datetime/cc-datetime-page.c:403
+#: panels/system/datetime/cc-datetime-page.c:402
 #, c-format
 msgctxt "timezone loc"
 msgid "%s, %s"
@@ -6685,7 +6699,7 @@ msgstr "%s, %s"
 
 #. Update the timezone on the listbow row
 #. Translators: "timezone (details)"
-#: panels/system/datetime/cc-datetime-page.c:420
+#: panels/system/datetime/cc-datetime-page.c:419
 #, c-format
 msgctxt "timezone desc"
 msgid "%s (%s)"
@@ -6708,115 +6722,115 @@ msgstr "เ_ดือน"
 msgid "_Day"
 msgstr "_วันที่"
 
-#: panels/system/datetime/cc-datetime-page.ui:124
+#: panels/system/datetime/cc-datetime-page.ui:123
 msgid "Automatic _Date &amp; Time"
 msgstr "_วันที่และเวลาอัตโนมัติ"
 
-#: panels/system/datetime/cc-datetime-page.ui:125
+#: panels/system/datetime/cc-datetime-page.ui:124
 msgid "Requires internet access"
 msgstr "ต้องการการเข้าถึงอินเทอร์เน็ต"
 
-#: panels/system/datetime/cc-datetime-page.ui:137
+#: panels/system/datetime/cc-datetime-page.ui:136
 msgid "Date &amp; _Time"
 msgstr "วันที่และเ_วลา"
 
-#: panels/system/datetime/cc-datetime-page.ui:149
+#: panels/system/datetime/cc-datetime-page.ui:148
 msgid "Automatic Time _Zone"
 msgstr "เ_ขตเวลาอัตโนมัติ"
 
-#: panels/system/datetime/cc-datetime-page.ui:150
+#: panels/system/datetime/cc-datetime-page.ui:149
 msgid "Requires location services enabled and internet access"
 msgstr "ต้องเปิดใช้บริการตำแหน่งที่ตั้งและต้องมีการเข้าถึงอินเทอร์เน็ต"
 
-#: panels/system/datetime/cc-datetime-page.ui:156
+#: panels/system/datetime/cc-datetime-page.ui:155
 msgid "Time Z_one"
 msgstr "เ_ขตเวลา"
 
-#: panels/system/datetime/cc-datetime-page.ui:167
+#: panels/system/datetime/cc-datetime-page.ui:166
 msgid "Time _Format"
 msgstr "รู_ปแบบเวลา"
 
-#: panels/system/datetime/cc-datetime-page.ui:176
+#: panels/system/datetime/cc-datetime-page.ui:177
 msgid "_24-hour"
 msgstr "_24 ชั่วโมง"
 
-#: panels/system/datetime/cc-datetime-page.ui:183
+#: panels/system/datetime/cc-datetime-page.ui:186
 msgid "AM / _PM"
 msgstr "AM / _PM"
 
-#: panels/system/datetime/cc-datetime-page.ui:196
+#: panels/system/datetime/cc-datetime-page.ui:200
 msgid "Clock &amp; Calendar"
 msgstr "นาฬิกาและปฏิทิน"
 
-#: panels/system/datetime/cc-datetime-page.ui:197
+#: panels/system/datetime/cc-datetime-page.ui:201
 msgid "Control how the time and date is shown in the top bar"
 msgstr "ควบคุมวิธีการแสดงเวลาและวันที่ในแถบด้านบน"
 
-#: panels/system/datetime/cc-datetime-page.ui:200
+#: panels/system/datetime/cc-datetime-page.ui:204
 msgid "_Week Day"
 msgstr "_ชื่อวัน"
 
-#: panels/system/datetime/cc-datetime-page.ui:206
+#: panels/system/datetime/cc-datetime-page.ui:210
 msgid "D_ate"
 msgstr "_วันที่"
 
-#: panels/system/datetime/cc-datetime-page.ui:212
+#: panels/system/datetime/cc-datetime-page.ui:216
 msgid "_Seconds"
 msgstr "วิ_นาที"
 
-#: panels/system/datetime/cc-datetime-page.ui:218
+#: panels/system/datetime/cc-datetime-page.ui:222
 msgid "Week _Numbers"
 msgstr "_เลขสัปดาห์"
 
-#: panels/system/datetime/cc-datetime-page.ui:219
+#: panels/system/datetime/cc-datetime-page.ui:223
 msgid "Shown in the dropdown calendar"
 msgstr "แสดงในปฏิทินดรอปดาวน์"
 
-#: panels/system/datetime/cc-datetime-page.ui:255
+#: panels/system/datetime/cc-datetime-page.ui:259
 msgid "January"
 msgstr "มกราคม"
 
-#: panels/system/datetime/cc-datetime-page.ui:256
+#: panels/system/datetime/cc-datetime-page.ui:260
 msgid "February"
 msgstr "กุมภาพันธ์"
 
-#: panels/system/datetime/cc-datetime-page.ui:257
+#: panels/system/datetime/cc-datetime-page.ui:261
 msgid "March"
 msgstr "มีนาคม"
 
-#: panels/system/datetime/cc-datetime-page.ui:258
+#: panels/system/datetime/cc-datetime-page.ui:262
 msgid "April"
 msgstr "เมษายน"
 
-#: panels/system/datetime/cc-datetime-page.ui:259
+#: panels/system/datetime/cc-datetime-page.ui:263
 msgid "May"
 msgstr "พฤษภาคม"
 
-#: panels/system/datetime/cc-datetime-page.ui:260
+#: panels/system/datetime/cc-datetime-page.ui:264
 msgid "June"
 msgstr "มิถุนายน"
 
-#: panels/system/datetime/cc-datetime-page.ui:261
+#: panels/system/datetime/cc-datetime-page.ui:265
 msgid "July"
 msgstr "กรกฎาคม"
 
-#: panels/system/datetime/cc-datetime-page.ui:262
+#: panels/system/datetime/cc-datetime-page.ui:266
 msgid "August"
 msgstr "สิงหาคม"
 
-#: panels/system/datetime/cc-datetime-page.ui:263
+#: panels/system/datetime/cc-datetime-page.ui:267
 msgid "September"
 msgstr "กันยายน"
 
-#: panels/system/datetime/cc-datetime-page.ui:264
+#: panels/system/datetime/cc-datetime-page.ui:268
 msgid "October"
 msgstr "ตุลาคม"
 
-#: panels/system/datetime/cc-datetime-page.ui:265
+#: panels/system/datetime/cc-datetime-page.ui:269
 msgid "November"
 msgstr "พฤศจิกายน"
 
-#: panels/system/datetime/cc-datetime-page.ui:266
+#: panels/system/datetime/cc-datetime-page.ui:270
 msgid "December"
 msgstr "ธันวาคม"
 
@@ -6855,7 +6869,7 @@ msgid ""
 "device;system;information;details;hostname;memory;processor;version;software;operating;os;model;language;"
 "region;country;formats;numbers;units;clock;timezone;date;location;remote;desktop;rdp;vnc;ssh;"
 msgstr ""
-"อุปกรณ์;ระบบ;ข้อมูล;รายละเอียด;ชื่อโฮสต์;หน่วยความจำ;ตัวประมวลผล;รุ่น;ซอฟต์แวร์;ปฏิบัติการ;os;โมเดล;ภาษา;ภูมิภาค;ประเทศ;รูปแบบ;"
+"อุปกรณ์;ระบบ;ข้อมูล;รายละเอียด;ชื่อโฮสต์;หน่วยความจำ;หน่วยประมวลผล;รุ่น;ซอฟต์แวร์;ปฏิบัติการ;os;โมเดล;ภาษา;ภูมิภาค;ประเทศ;รูปแบบ;"
 "ตัวเลข;หน่วย;นาฬิกา;เขตเวลา;วันที่;ตำแหน่งที่ตั้ง;ระยะไกล;เดสก์ท็อป;rdp;vnc;ssh;"
 
 #: panels/system/region/cc-format-chooser.c:160 panels/system/region/cc-format-chooser.c:208
@@ -6964,23 +6978,23 @@ msgstr "เลือกภาษาและรูปแบบการแสด
 msgid "Language;Layout;Keyboard;Input;"
 msgstr "ภาษา;ผังแป้นพิมพ์;แป้นพิมพ์;ป้อนข้อความ;"
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.c:357
-#: panels/system/remote-desktop/cc-remote-login-page.c:96
+#: panels/system/remote-desktop/cc-desktop-sharing-page.c:358
+#: panels/system/remote-desktop/cc-remote-login-page.c:97
 msgid "Device address copied to clipboard"
 msgstr "คัดลอกที่อยู่อุปกรณ์ลงในคลิบบอร์ดแล้ว"
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.c:366
-#: panels/system/remote-desktop/cc-remote-login-page.c:105
+#: panels/system/remote-desktop/cc-desktop-sharing-page.c:367
+#: panels/system/remote-desktop/cc-remote-login-page.c:106
 msgid "Port number copied to clipboard"
 msgstr "คัดลอกหมายเลขพอร์ตลงในคลิบบอร์ดแล้ว"
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.c:377
-#: panels/system/remote-desktop/cc-remote-login-page.c:116
+#: panels/system/remote-desktop/cc-desktop-sharing-page.c:378
+#: panels/system/remote-desktop/cc-remote-login-page.c:117
 msgid "Username copied to clipboard"
 msgstr "คัดลอกชื่อผู้ใช้ลงในคลิบบอร์ดแล้ว"
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.c:388
-#: panels/system/remote-desktop/cc-remote-login-page.c:127
+#: panels/system/remote-desktop/cc-desktop-sharing-page.c:389
+#: panels/system/remote-desktop/cc-remote-login-page.c:128
 msgid "Password copied to clipboard"
 msgstr "คัดลอกรหัสผ่านลงในคลิบบอร์ดแล้ว"
 
@@ -7069,7 +7083,7 @@ msgstr "การแบ่งปันหน้าจอ"
 msgid "Remote _Login"
 msgstr "การเข้าสู่ระบบระยะไกล"
 
-#: panels/system/remote-desktop/cc-remote-login-page.c:724 panels/system/users/cc-user-page.c:788
+#: panels/system/remote-desktop/cc-remote-login-page.c:725 panels/system/users/cc-user-page.c:763
 msgid "Some settings are locked"
 msgstr "การตั้งค่าบางอย่างถูกล็อกไว้"
 
@@ -7160,7 +7174,7 @@ msgid "User Details"
 msgstr "รายละเอียดผู้ใช้"
 
 #: panels/system/users/cc-add-user-dialog.ui:79
-msgid "Fu_ll Name"
+msgid "Full _Name"
 msgstr "_ชื่อเต็ม"
 
 #: panels/system/users/cc-add-user-dialog.ui:95
@@ -7249,36 +7263,44 @@ msgid "Checking domain…"
 msgstr ""
 
 #: panels/system/users/cc-enterprise-login-dialog.c:641
+#, fuzzy
 msgid "Failed to contact realmd service"
-msgstr "ติดต่อบริการ realmd ไม่สำเร็จ"
+msgstr "ติดต่อบริการบัญชีผู้ใช้ไม่สำเร็จ"
 
 #: panels/system/users/cc-enterprise-login-dialog.ui:14 panels/system/users/cc-enterprise-login-dialog.ui:34
+#, fuzzy
 msgid "Add Enterprise Login"
-msgstr "เพิ่มบัญชีเข้าระบบองค์กร"
+msgstr "บัญชีเข้าระบบ_องค์กร"
 
 #: panels/system/users/cc-enterprise-login-dialog.ui:23
+#, fuzzy
 msgid "Offline"
 msgstr "ออฟไลน์"
 
 #: panels/system/users/cc-enterprise-login-dialog.ui:24
 msgid "A network connection is needed to add enterprise login accounts."
-msgstr "จำเป็นต้องมีการเชื่อมต่อเครือข่ายจึงจะเพิ่มบัญชีเข้าระบบองค์กรได้"
+msgstr ""
 
 #: panels/system/users/cc-enterprise-login-dialog.ui:69
+#, fuzzy
 msgid "Enterprise login allows an existing centrally managed account to be used on this device."
-msgstr "บัญชีเข้าระบบองค์กร ช่วยให้สามารถใช้บัญชีผู้ใช้ที่มีการจัดการแบบรวมศูนย์ที่มีอยู่กับอุปกรณ์นี้ได้"
+msgstr ""
+"บัญชีเข้าระบบองค์กร อนุญาตให้ใช้บัญชีผู้ใช้ที่มีการจัดการแบบรวมศูนย์ที่มีอยู่กับอุปกรณ์นี้ "
+"คุณสามารถใช้บัญชีนี้ในการเข้าถึงทรัพยากรของบริษัทในอินเทอร์เน็ตด้วย"
 
 #: panels/system/users/cc-enterprise-login-dialog.ui:74 panels/system/users/data/join-dialog.ui:90
 msgid "_Domain"
 msgstr "โ_ดเมน"
 
 #: panels/system/users/cc-enterprise-login-dialog.ui:82
+#, fuzzy
 msgid "Should match the web domain of the account provider"
-msgstr "ควรจะตรงกับโดเมนเว็บของผู้ให้บริการบัญชีเข้าระบบของคุณ"
+msgstr "ควรจะตรงกับที่อยู่เว็บของผู้ให้บริการบัญชีเข้าระบบของคุณ"
 
 #: panels/system/users/cc-enterprise-login-dialog.ui:115
+#, fuzzy
 msgid "Enroll Device"
-msgstr "ลงทะเบียนอุปกรณ์"
+msgstr "อุปกรณ์เสียงเข้า"
 
 #. Translators: This button enrolls the computer in the domain in order to use enterprise logins.
 #: panels/system/users/cc-enterprise-login-dialog.ui:125 panels/system/users/data/join-dialog.ui:30
@@ -7290,8 +7312,9 @@ msgid "Administrator _Name"
 msgstr "_ชื่อผู้ดูแลระบบ"
 
 #: panels/system/users/cc-enterprise-login-dialog.ui:153
+#, fuzzy
 msgid "Administrator _Password"
-msgstr "_รหัสผ่านผู้ดูแลระบบ"
+msgstr "รหัสผ่านผู้ดูแลระบบ"
 
 #: panels/system/users/cc-fingerprint-dialog.c:235
 msgid "the device needs to be claimed to perform this action"
@@ -7334,142 +7357,126 @@ msgstr "อัปโหลดแฟ้มไม่สำเร็จ: %s"
 msgid "Failed to delete saved fingerprints: %s"
 msgstr "ลบผู้ใช้ไม่สำเร็จ"
 
-#: panels/system/users/cc-fingerprint-dialog.c:609
+#: panels/system/users/cc-fingerprint-dialog.c:608
 msgid "Left thumb"
 msgstr "นิ้วหัวแม่มือซ้าย"
 
-#: panels/system/users/cc-fingerprint-dialog.c:611
+#: panels/system/users/cc-fingerprint-dialog.c:610
 msgid "Left middle finger"
 msgstr "นิ้วกลางซ้าย"
 
-#: panels/system/users/cc-fingerprint-dialog.c:613
+#: panels/system/users/cc-fingerprint-dialog.c:612
 msgid "_Left index finger"
 msgstr "นิ้วชี้ซ้า_ย"
 
-#: panels/system/users/cc-fingerprint-dialog.c:615
+#: panels/system/users/cc-fingerprint-dialog.c:614
 msgid "Left ring finger"
 msgstr "นิ้วนางซ้าย"
 
-#: panels/system/users/cc-fingerprint-dialog.c:617
+#: panels/system/users/cc-fingerprint-dialog.c:616
 msgid "Left little finger"
 msgstr "นิ้วก้อยซ้าย"
 
-#: panels/system/users/cc-fingerprint-dialog.c:619
+#: panels/system/users/cc-fingerprint-dialog.c:618
 msgid "Right thumb"
 msgstr "นิ้วหัวแม่มือขวา"
 
-#: panels/system/users/cc-fingerprint-dialog.c:621
+#: panels/system/users/cc-fingerprint-dialog.c:620
 msgid "Right middle finger"
 msgstr "นิ้วกลางขวา"
 
-#: panels/system/users/cc-fingerprint-dialog.c:623
+#: panels/system/users/cc-fingerprint-dialog.c:622
 msgid "_Right index finger"
 msgstr "นิ้วชี้_ขวา"
 
-#: panels/system/users/cc-fingerprint-dialog.c:625
+#: panels/system/users/cc-fingerprint-dialog.c:624
 msgid "Right ring finger"
 msgstr "นิ้วนางขวา"
 
-#: panels/system/users/cc-fingerprint-dialog.c:627
+#: panels/system/users/cc-fingerprint-dialog.c:626
 msgid "Right little finger"
 msgstr "นิ้วก้อยขวา"
 
-#: panels/system/users/cc-fingerprint-dialog.c:629
+#: panels/system/users/cc-fingerprint-dialog.c:628
 #, fuzzy
 msgid "Unknown Finger"
 msgstr "ไม่ทราบเวลา"
 
-#: panels/system/users/cc-fingerprint-dialog.c:760
+#: panels/system/users/cc-fingerprint-dialog.c:759
 #, fuzzy
 msgctxt "Fingerprint enroll state"
 msgid "Complete"
 msgstr "เสร็จสมบูรณ์!"
 
-#: panels/system/users/cc-fingerprint-dialog.c:771
+#: panels/system/users/cc-fingerprint-dialog.c:770
 #, fuzzy
 msgid "Fingerprint device disconnected"
 msgstr "บริการ PPP ถูกตัดการเชื่อมต่อ"
 
-#: panels/system/users/cc-fingerprint-dialog.c:777
+#: panels/system/users/cc-fingerprint-dialog.c:776
 msgid "Fingerprint device storage is full"
 msgstr ""
 
-#: panels/system/users/cc-fingerprint-dialog.c:781
+#: panels/system/users/cc-fingerprint-dialog.c:780
 #, fuzzy
 msgid "Fingerprint is duplicate"
 msgstr "การเข้าระบบด้วย_ลายนิ้วมือ"
 
-#: panels/system/users/cc-fingerprint-dialog.c:785
+#: panels/system/users/cc-fingerprint-dialog.c:784
 #, fuzzy
 msgid "Failed to enroll new fingerprint"
 msgstr "เพิ่มเครื่องพิมพ์เครื่องใหม่ไม่สำเร็จ"
 
-#: panels/system/users/cc-fingerprint-dialog.c:816
+#: panels/system/users/cc-fingerprint-dialog.c:815
 #, fuzzy, c-format
 msgid "Failed to start enrollment: %s"
 msgstr "ไม่สามารถเปิดเครื่องมือปรับแต่งเกี่ยวกับเสียง: %s"
 
-#: panels/system/users/cc-fingerprint-dialog.c:824
+#: panels/system/users/cc-fingerprint-dialog.c:823
 #, fuzzy
 msgctxt "Fingerprint enroll state"
 msgid "Failed to enroll new fingerprint"
 msgstr "เพิ่มเครื่องพิมพ์เครื่องใหม่ไม่สำเร็จ"
 
-#: panels/system/users/cc-fingerprint-dialog.c:855
+#: panels/system/users/cc-fingerprint-dialog.c:854
 #, fuzzy, c-format
 msgid "Failed to stop enrollment: %s"
 msgstr "ไม่สามารถเปิดเครื่องมือปรับแต่งเกี่ยวกับเสียง: %s"
 
-#: panels/system/users/cc-fingerprint-dialog.c:901
+#: panels/system/users/cc-fingerprint-dialog.c:900
 msgid "Repeatedly lift and place your finger on the reader to enroll your fingerprint"
 msgstr ""
 
-#: panels/system/users/cc-fingerprint-dialog.c:1015
+#: panels/system/users/cc-fingerprint-dialog.c:1014
 msgid "_Re-enroll this finger…"
 msgstr ""
 
 #. TRANSLATORS: This is the label for the button to enroll a new finger
-#: panels/system/users/cc-fingerprint-dialog.c:1030
+#: panels/system/users/cc-fingerprint-dialog.c:1029
 #, fuzzy
 msgid "Scan new fingerprint"
 msgstr "เก็บลายนิ้วมือ"
 
-#: panels/system/users/cc-fingerprint-dialog.c:1067
+#: panels/system/users/cc-fingerprint-dialog.c:1066
 #, c-format
 msgid "Failed to release fingerprint device %s: %s"
 msgstr ""
 
-#: panels/system/users/cc-fingerprint-dialog.c:1139
+#: panels/system/users/cc-fingerprint-dialog.c:1138
 #, fuzzy
 msgctxt "Fingerprint enroll state"
 msgid "Problem Reading Device"
 msgstr "การรายงานปัญหา"
 
-#: panels/system/users/cc-fingerprint-dialog.c:1174
+#: panels/system/users/cc-fingerprint-dialog.c:1173
 #, fuzzy, c-format
 msgid "Failed to claim fingerprint device %s: %s"
 msgstr "อัปโหลดแฟ้มไม่สำเร็จ: %s"
 
-#: panels/system/users/cc-fingerprint-dialog.c:1316
+#: panels/system/users/cc-fingerprint-dialog.c:1315
 #, fuzzy, c-format
 msgid "Failed to get fingerprint devices: %s"
 msgstr "ไม่สามารถเปิดเครื่องมือปรับแต่งเกี่ยวกับเสียง: %s"
-
-#: panels/system/users/cc-fingerprint-dialog.c:1393
-#, fuzzy
-msgid "Delete All Fingerprints?"
-msgstr "_ลบลายนิ้วมือ"
-
-#: panels/system/users/cc-fingerprint-dialog.c:1394
-msgid ""
-"Deleting all enrolled fingerprints will disable Fingerprint Login. To re-enable Fingerprint Login at least one "
-"fingerprint will have to be enrolled."
-msgstr ""
-
-#: panels/system/users/cc-fingerprint-dialog.c:1399
-#, fuzzy
-msgid "_Delete All"
-msgstr "_ลบ"
 
 #: panels/system/users/cc-fingerprint-dialog.ui:8
 #, fuzzy
@@ -7481,46 +7488,58 @@ msgstr "การเข้าระบบด้วย_ลายนิ้วม�
 msgid "Fingerprint"
 msgstr "การเข้าระบบด้วย_ลายนิ้วมือ"
 
-#: panels/system/users/cc-fingerprint-dialog.ui:114
+#: panels/system/users/cc-fingerprint-dialog.ui:77
+msgid "_No"
+msgstr "ไ_ม่"
+
+#: panels/system/users/cc-fingerprint-dialog.ui:85
+msgid "_Yes"
+msgstr "ใ_ช่"
+
+#: panels/system/users/cc-fingerprint-dialog.ui:105
+msgid "Do you want to delete your registered fingerprints so fingerprint login is disabled?"
+msgstr "คุณต้องการลบลายนิ้วมือของคุณเองที่ได้ลงทะเบียนไว้ เพื่อปิดการเข้าระบบด้วยลายนิ้วมือหรือไม่?"
+
+#: panels/system/users/cc-fingerprint-dialog.ui:161
 #, fuzzy
 msgid "No fingerprint device"
 msgstr "ไม่พบเครื่องพิมพ์"
 
 #. Translators: This is the empty state page label which states that there are no devices ready.
-#: panels/system/users/cc-fingerprint-dialog.ui:129
+#: panels/system/users/cc-fingerprint-dialog.ui:176
 #, fuzzy
 msgid "No Fingerprint device"
 msgstr "การเข้าระบบด้วย_ลายนิ้วมือ"
 
-#: panels/system/users/cc-fingerprint-dialog.ui:138
+#: panels/system/users/cc-fingerprint-dialog.ui:185
 #, fuzzy
 msgid "Ensure the device is properly connected"
 msgstr "บริการ PPP ถูกตัดการเชื่อมต่อ"
 
-#: panels/system/users/cc-fingerprint-dialog.ui:146
+#: panels/system/users/cc-fingerprint-dialog.ui:193
 #, fuzzy
 msgid "Fingerprint Device"
 msgstr "การเข้าระบบด้วย_ลายนิ้วมือ"
 
-#: panels/system/users/cc-fingerprint-dialog.ui:155
+#: panels/system/users/cc-fingerprint-dialog.ui:202
 #, fuzzy
 msgid "Choose the fingerprint device you want to configure"
 msgstr "เ_ลือกอุปกรณ์ที่จะตั้งค่า:"
 
-#: panels/system/users/cc-fingerprint-dialog.ui:185
+#: panels/system/users/cc-fingerprint-dialog.ui:232
 #, fuzzy
 msgid "Fingerprint Login"
 msgstr "การเข้าระบบด้วย_ลายนิ้วมือ"
 
-#: panels/system/users/cc-fingerprint-dialog.ui:191
+#: panels/system/users/cc-fingerprint-dialog.ui:238
 msgid "Fingerprint login allows you to unlock and log into your device with your finger"
 msgstr ""
 
-#: panels/system/users/cc-fingerprint-dialog.ui:218
+#: panels/system/users/cc-fingerprint-dialog.ui:265
 msgid "_Delete Fingerprints"
 msgstr "_ลบลายนิ้วมือ"
 
-#: panels/system/users/cc-fingerprint-dialog.ui:232
+#: panels/system/users/cc-fingerprint-dialog.ui:279
 #, fuzzy
 msgid "Fingerprint Enroll"
 msgstr "การเข้าระบบด้วย_ลายนิ้วมือ"
@@ -7591,23 +7610,23 @@ msgstr "รหัสผ่านไม่ถูกต้อง กรุณา�
 msgid "Couldn’t connect to the %s domain: %s"
 msgstr "ไม่สามารถเชื่อมต่อกับโดเมน %s: %s"
 
-#: panels/system/users/cc-user-page.c:203
+#: panels/system/users/cc-user-page.c:200
 msgctxt "Password mode"
 msgid "Account disabled"
 msgstr "บัญชีถูกระงับ"
 
-#: panels/system/users/cc-user-page.c:210
+#: panels/system/users/cc-user-page.c:207
 msgctxt "Password mode"
 msgid "To be set at next login"
 msgstr "รอตั้งรหัสผ่านในครั้งต่อไปที่เข้าระบบ"
 
-#: panels/system/users/cc-user-page.c:213
+#: panels/system/users/cc-user-page.c:210
 msgctxt "Password mode"
 msgid "None"
 msgstr "ไม่มีรหัสผ่าน"
 
 #. TODO: Handle enterprise accounts
-#: panels/system/users/cc-user-page.c:434
+#: panels/system/users/cc-user-page.c:431
 #, c-format
 msgid "Remove %s?"
 msgstr "ลบ %s?"
@@ -7644,6 +7663,8 @@ msgid ""
 "Automatic login opens the user account when the device starts, without requiring authentication. "
 "Authentication is still required at other times, such as when unlocking the screen."
 msgstr ""
+"การเข้าสู่ระบบอัตโนมัติจะเปิดบัญชีผู้ใช้เมื่ออุปกรณ์เริ่มทำงาน โดยไม่ต้องมีการยืนยันตัวบุคคล แต่ยังคงต้องมีการยืนยันตัวบุคคลในกรณีอื่นๆ เช่น "
+"เมื่อปลดล็อกหน้าจอ"
 
 #: panels/system/users/cc-user-page.ui:147
 msgid "_Administrator"
@@ -7657,15 +7678,15 @@ msgstr "การควบคุมโดยผู้ปกครอง"
 msgid "Open the Parental Controls app"
 msgstr "เปิดแอปการควบคุมโดยผู้ปกครอง"
 
-#: panels/system/users/cc-user-page.ui:199
+#: panels/system/users/cc-user-page.ui:203
 msgid "_Remove User…"
-msgstr "_ลบผู้ใช้…"
+msgstr "_ลบผู้ใช้"
 
-#: panels/system/users/cc-user-page.ui:218
+#: panels/system/users/cc-user-page.ui:226
 msgid "The user will not be able to use this device once their account has been removed"
 msgstr "ผู้ใช้จะไม่สามารถใช้อุปกรณ์นี้ได้เมื่อบัญชีของตนถูกลบออก"
 
-#: panels/system/users/cc-user-page.ui:230
+#: panels/system/users/cc-user-page.ui:238
 msgid "_Delete Files and Settings"
 msgstr "_ลบไฟล์และการตั้งค่า"
 
@@ -7677,13 +7698,13 @@ msgstr "ผู้ใช้"
 msgid "Other Users"
 msgstr "ผู้ใช้อื่นๆ"
 
-#: panels/system/users/cc-users-page.ui:31
+#: panels/system/users/cc-users-page.ui:34
 msgid "_Add User"
 msgstr "เ_พิ่มผู้ใช้"
 
-#: panels/system/users/cc-users-page.ui:40
+#: panels/system/users/cc-users-page.ui:43
 msgid "Add _Enterprise Login"
-msgstr "เพิ่มบัญชีเข้าระบบ_องค์กร"
+msgstr "เพิ่มบัญชีเข้าระบบระดับ_องค์กร"
 
 #: panels/system/users/data/join-dialog.ui:59
 msgid "Domain Administrator Login"
@@ -7708,8 +7729,11 @@ msgstr "เพิ่มหรือลบผู้ใช้และเปลี
 
 #. Translators: Search terms to find the Users panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/system/users/gnome-users-panel.desktop.in:15
+#, fuzzy
 msgid "Login;Name;Fingerprint;Avatar;Logo;Face;Password;Parental;Restrictions;Usage;Kid;Child;"
-msgstr "เข้าสู่ระบบ;ชื่อ;ลายนิ้วมือ;รูปประจำตัว;โลโก้;ใบหน้า;รหัสผ่าน;ผู้ปกครอง;การจำกัด;การใช้งาน;เด็ก;"
+msgstr ""
+"เข้าสู่ระบบ;ชื่อ;ลายนิ้วมือ;รูปประจำตัว;โลโก;ใบหน้า;รหัส;การควบคุมโดยผู้ปกครอง;เวลาหน้าจอ;การจำกัดแอป;การจำกัดเว็บ;การใช้งาน;"
+"จำกัดการใช้งาน;เด็ก"
 
 #: panels/system/users/org.gnome.controlcenter.user-accounts.policy.in:11
 msgid "Manage user accounts"
@@ -7882,11 +7906,11 @@ msgstr ""
 msgid "Usernames must have fewer than %ld characters"
 msgstr "ต้องมีตัวอักษรสูงสุด %d ตัว"
 
-#: panels/universal-access/cc-cursor-size-page.ui:4
+#: panels/universal-access/cc-cursor-size-dialog.ui:4
 msgid "Cursor Size"
 msgstr "ขนาดเคอร์เซอร์"
 
-#: panels/universal-access/cc-cursor-size-page.ui:12
+#: panels/universal-access/cc-cursor-size-dialog.ui:13
 msgid "Cursor size can be combined with Zoom to make it easier to see the cursor"
 msgstr "สามารถรวมขนาดเคอร์เซอร์เข้ากับการขยายเพื่อให้มองเห็นเคอร์เซอร์ได้ง่ายขึ้น"
 
@@ -8453,14 +8477,14 @@ msgstr "ทำให้ง่ายต่อการเห็น, ได้ย�
 
 #. Translators: Search terms to find the Accessibility panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/universal-access/gnome-universal-access-panel.desktop.in:15
+#, fuzzy
 msgid ""
 "Keyboard;Mouse;a11y;Accessibility;Universal;Access;Contrast;Cursor;Sound;Zoom;Screen;Reader;big;high;large;"
 "text;font;size;AccessX;Sticky;Keys;Slow;Bounce;Mouse;Double;click;Delay;Speed;Assist;Repeat;Blink;Pointer;find;"
 "locate;visual;hearing;audio;typing;animations;"
 msgstr ""
-"แป้นพิมพ์;เมาส์;a11y;สิ่งอำนวยความสะดวก;ความต่างระดับสี;เคอร์เซอร์;เสียง;ซูม;อ่านหน้าจอ;ใหญ่;สูง;ข้อความ;แบบอักษร;ขนาด;AccessX;"
-"ค้างปุ่มกด;พิมพ์แบบช้า;ป้องกันการกดแป้นรัว;บังคับเมาส์ด้วยแป้น;คลิกสองครั้ง;หน่วงเวลา;ความเร็ว;ตัวช่วย;กดซ้ำ;กะพริบ;ตัวชี้;หา;ตำแหน่ง;ภาพ;"
-"การได้ยิน;เสียง;การพิมพ์;ภาพเคลื่อนไหว;"
+"แป้นพิมพ์;เมาส์;a11y;สิ่งอำนวยความสะดวก;ความต่างระดับสี;ซูม;อ่านหน้าจอ;ข้อความ;แบบอักษร;ขนาด;AccessX;ค้างปุ่มกด;พิมพ์แบบช้า;"
+"ป้องกันการกดแป้นรัว;บังคับเมาส์ด้วยแป้น;"
 
 #: panels/wacom/button-mapping.ui:7 panels/wacom/cc-wacom-ekr-page.ui:18
 msgid "Map Buttons"
@@ -8471,11 +8495,12 @@ msgid "Map buttons to functions"
 msgstr "กำหนดการใช้งานปุ่มต่างๆ"
 
 #: panels/wacom/button-mapping.ui:51
+#, fuzzy
 msgid ""
 "To edit a shortcut, choose the “Send Keystroke” action, press the keyboard shortcut button and hold down the "
 "new keys or press Backspace to clear"
 msgstr ""
-"ถ้าต้องการแก้ไขปุ่มลัด ให้เลือกการกระทำ “ส่งลำดับการกดแป้นพิมพ์” จากนั้น กดปุ่มลัดแป้นพิมพ์ แล้วกดปุ่มลัดใหม่ หรือกด Backspace "
+"ถ้าต้องการแก้ไขปุ่มลัด ให้เลือกการกระทำ \"ส่งการกดแป้นพิมพ์\" จากนั้น กดปุ่มลัดแป้นพิมพ์ แล้วกดปุ่มลัดใหม่ หรือกด Backspace "
 "ถ้าต้องการล้างปุ่มลัด"
 
 #: panels/wacom/button-mapping.ui:66
@@ -8483,27 +8508,30 @@ msgid "_Close"
 msgstr "ปิ_ด"
 
 #: panels/wacom/calibrator/calibrator.ui:51
+#, fuzzy
 msgid "Please tap the target markers as they appear on screen to calibrate the tablet"
 msgstr "กรุณาแตะที่เครื่องหมายเป้าที่ปรากฏบนหน้าจอเพื่อปรับเทียบมาตรฐานแท็บเล็ต"
 
 #: panels/wacom/calibrator/calibrator.ui:63
+#, fuzzy
 msgid "Mis-click detected, restarting…"
-msgstr "ตรวจพบการคลิกที่ผิดพลาด กำลังเริ่มทำงานใหม่…"
+msgstr "ตรวจพบการคลิกที่ผิดพลาด จะเริ่มทำงานใหม่..."
 
 #: panels/wacom/cc-wacom-button-row.c:243
-#, c-format
+#, fuzzy, c-format
 msgid "Button %d"
-msgstr "ปุ่มที่ %d"
+msgstr "ปุ่ม"
 
 #: panels/wacom/cc-wacom-button-row.h:34
+#, fuzzy
 msgctxt "Wacom action-type"
 msgid "Application defined"
-msgstr "โปรแกรมที่กำหนด"
+msgstr "โปรแกรม"
 
 #: panels/wacom/cc-wacom-button-row.h:35
 msgctxt "Wacom action-type"
 msgid "Send Keystroke"
-msgstr "ส่งลำดับการกดแป้นพิมพ์"
+msgstr "ส่งการกดแป้นพิมพ์"
 
 #: panels/wacom/cc-wacom-button-row.h:36
 msgctxt "Wacom action-type"
@@ -8579,14 +8607,16 @@ msgid "Only use a portion of the tablet surface to keep monitor aspect ratio"
 msgstr ""
 
 #: panels/wacom/cc-wacom-page.ui:61
+#, fuzzy
 msgid "_Calibrate"
-msgstr "เ_ทียบมาตรฐาน"
+msgstr "เทียบมาตรฐาน…"
 
 #: panels/wacom/cc-wacom-panel.ui:57
 msgid "No tablet detected"
 msgstr "ไม่พบแท็บเล็ต"
 
 #: panels/wacom/cc-wacom-panel.ui:58
+#, fuzzy
 msgid "Please plug in or turn on your Wacom tablet"
 msgstr "กรุณาต่อหรือเปิดแท็บเล็ต Wacom ของคุณ"
 
@@ -8601,24 +8631,29 @@ msgid "Button %d Mapping"
 msgstr "ปุ่ม"
 
 #: panels/wacom/cc-wacom-stylus-action-dialog.ui:113 panels/wacom/cc-wacom-stylus-action-dialog.ui:152
+#, fuzzy
 msgid "Assign Keystroke"
-msgstr "กำหนดลำดับแป้นพิมพ์"
+msgstr "ส่งการกดแป้นพิมพ์"
 
 #: panels/wacom/cc-wacom-stylus-action-dialog.ui:179
+#, fuzzy
 msgid "Press Esc to cancel"
 msgstr "กด Esc เพื่อยกเลิก"
 
 #: panels/wacom/cc-wacom-stylus-page.c:438
+#, fuzzy
 msgid "_Left Mousebutton Click"
-msgstr "คลิกเมาส์ปุ่ม_ซ้าย"
+msgstr "คลิกเมาส์ปุ่มซ้าย"
 
 #: panels/wacom/cc-wacom-stylus-page.c:441
+#, fuzzy
 msgid "_Middle Mousebutton Click"
-msgstr "คลิกเมาส์ปุ่ม_กลาง"
+msgstr "คลิกเมาส์ปุ่มกลาง"
 
 #: panels/wacom/cc-wacom-stylus-page.c:444
+#, fuzzy
 msgid "_Right Mousebutton Click"
-msgstr "คลิกเมาส์ปุ่ม_ขวา"
+msgstr "คลิกเมาส์ปุ่มขวา"
 
 #. Translators: this is the "go back" action of a button
 #: panels/wacom/cc-wacom-stylus-page.c:448
@@ -8627,20 +8662,24 @@ msgstr "_ย้อนกลับ"
 
 #. Translators: this is the "go forward" action of a button
 #: panels/wacom/cc-wacom-stylus-page.c:452
+#, fuzzy
 msgid "_Forward"
-msgstr "เ_ดินหน้า"
+msgstr "เดินหน้า"
 
 #: panels/wacom/cc-wacom-stylus-page.c:455
+#, fuzzy
 msgid "_Assign Keystroke"
-msgstr "กำหนด_ลำดับแป้นพิมพ์"
+msgstr "ส่งการกดแป้นพิมพ์"
 
 #: panels/wacom/cc-wacom-stylus-page.c:458
+#, fuzzy
 msgid "_Switch Monitor"
-msgstr "_สลับจอภาพ"
+msgstr "สลับจอภาพ"
 
 #: panels/wacom/cc-wacom-stylus-page.ui:19
+#, fuzzy
 msgid "Tip _Pressure Feel"
-msgstr "การรับแ_รงกดของปลายปากกา"
+msgstr "การรับแรงกดของปลายปากกา"
 
 #: panels/wacom/cc-wacom-stylus-page.ui:25 panels/wacom/cc-wacom-stylus-page.ui:120
 msgid "Soft"
@@ -8648,31 +8687,36 @@ msgstr "นุ่ม"
 
 #: panels/wacom/cc-wacom-stylus-page.ui:39
 msgid "Stylus tip pressure"
-msgstr "แรงกดปลายปากกาของสไตลัส"
+msgstr ""
 
 #: panels/wacom/cc-wacom-stylus-page.ui:45 panels/wacom/cc-wacom-stylus-page.ui:140
 msgid "Firm"
 msgstr "แข็ง"
 
 #: panels/wacom/cc-wacom-stylus-page.ui:57
+#, fuzzy
 msgid "Button _1"
-msgstr "ปุ่มที่ _1"
+msgstr "ปุ่ม"
 
 #: panels/wacom/cc-wacom-stylus-page.ui:76
+#, fuzzy
 msgid "Button _2"
-msgstr "ปุ่มที่ _2"
+msgstr "ปุ่ม"
 
 #: panels/wacom/cc-wacom-stylus-page.ui:95
+#, fuzzy
 msgid "Button _3"
-msgstr "ปุ่มที่ _3"
+msgstr "ปุ่ม"
 
 #: panels/wacom/cc-wacom-stylus-page.ui:114
+#, fuzzy
 msgid "_Eraser Pressure Feel"
-msgstr "การรับแรงกดของ_ยางลบ"
+msgstr "การรับแรงกดของยางลบ"
 
 #: panels/wacom/cc-wacom-stylus-page.ui:134
+#, fuzzy
 msgid "Eraser pressure"
-msgstr "แรงกดของยางลบ"
+msgstr "การรับแรงกดของยางลบ"
 
 #: panels/wacom/cc-wacom-tool.c:365
 msgid "Airbrush stylus with pressure, tilt, and integrated slider"
@@ -8707,72 +8751,6 @@ msgstr "แท็บเล็ต;Wacom;ปากกา;สไตลัส;ยา
 #: panels/wacom/gsd-wacom-key-shortcut-button.c:190
 msgid "New shortcut…"
 msgstr "ปุ่มลัดใหม่…"
-
-#. Translators: This separates the duration and interval times when displaying
-#. * the selected break schedule on the wellbeing panel. For example,
-#. * “1 minute / 20 minutes” to indicate a 1 minute break every 20 minutes.
-#: panels/wellbeing/cc-break-schedule-row.c:289
-msgid " / "
-msgstr ""
-
-#: panels/wellbeing/cc-break-schedule-row.c:369
-#, fuzzy
-msgid "Duration"
-msgstr "ระวัง"
-
-#: panels/wellbeing/cc-break-schedule-row.c:369
-msgid "Interval"
-msgstr ""
-
-#: panels/wellbeing/cc-wellbeing-panel.ui:18
-msgid "Break Reminders"
-msgstr ""
-
-#: panels/wellbeing/cc-wellbeing-panel.ui:21
-msgid "_Eyesight Reminders"
-msgstr ""
-
-#: panels/wellbeing/cc-wellbeing-panel.ui:22
-#, fuzzy
-msgid "Reminders to look away from the screen"
-msgstr "ลบพื้นหลังออก"
-
-#: panels/wellbeing/cc-wellbeing-panel.ui:28
-msgid "_Movement Reminders"
-msgstr ""
-
-#: panels/wellbeing/cc-wellbeing-panel.ui:29
-#, fuzzy
-msgid "Reminders to move around"
-msgstr "ลบพื้นหลังออก"
-
-#: panels/wellbeing/cc-wellbeing-panel.ui:35
-#, fuzzy
-msgid "Movement Break S_chedule"
-msgstr "กำหนดเอง"
-
-#: panels/wellbeing/cc-wellbeing-panel.ui:41
-#, fuzzy
-msgid "S_ounds"
-msgstr "เสียง"
-
-#: panels/wellbeing/cc-wellbeing-panel.ui:42
-msgid "Play a sound when a break ends"
-msgstr ""
-
-#: panels/wellbeing/gnome-wellbeing-panel.desktop.in:6
-#, fuzzy
-msgid "Wellbeing"
-msgstr "การมองเห็น"
-
-#: panels/wellbeing/gnome-wellbeing-panel.desktop.in:7
-msgid "Review and limit the amount of time you spend at the computer screen"
-msgstr ""
-
-#. Translators: Search terms to find the Wellbeing panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
-#: panels/wellbeing/gnome-wellbeing-panel.desktop.in:18
-msgid "Wellbeing;Screen Time;Breaks;Break Reminders;Health Breaks;Daily Usage;Screen Limits;Usage Limit;"
-msgstr ""
 
 #: panels/wwan/cc-wwan-apn-dialog.c:293
 msgid "Edit"
@@ -9032,6 +9010,7 @@ msgid "4G, 5G"
 msgstr ""
 
 #: panels/wwan/cc-wwan-device.c:1131
+#, fuzzy
 msgctxt "Network mode"
 msgid "Unknown"
 msgstr "ไม่ทราบ"
@@ -9305,22 +9284,22 @@ msgstr ""
 msgid "Make sure you have a Wireless Wan/Cellular device"
 msgstr ""
 
-#: panels/wwan/cc-wwan-panel.ui:64
+#: panels/wwan/cc-wwan-panel.ui:65
 #, fuzzy
 msgid "Wireless Wan is disabled when airplane mode is on"
 msgstr "บลูทูทจะถูกปิดใช้งานเมื่อเปิดใช้โหมดเครื่องบิน"
 
-#: panels/wwan/cc-wwan-panel.ui:70
+#: panels/wwan/cc-wwan-panel.ui:71
 #, fuzzy
 msgid "_Turn off Airplane Mode"
 msgstr "ปิดโหมดเครื่องบิน"
 
-#: panels/wwan/cc-wwan-panel.ui:105
+#: panels/wwan/cc-wwan-panel.ui:106
 #, fuzzy
 msgid "Data Connection"
 msgstr "การเชื่อมต่อ"
 
-#: panels/wwan/cc-wwan-panel.ui:106
+#: panels/wwan/cc-wwan-panel.ui:107
 #, fuzzy
 msgid "SIM card used for internet"
 msgstr "ไม่ได้ใส่ SIM card"
@@ -9419,7 +9398,7 @@ msgstr "© 1998 %s"
 msgid "Settings categories"
 msgstr "หมวดหมู่การตั้งค่า"
 
-#: shell/cc-panel-loader.c:317
+#: shell/cc-panel-loader.c:311
 msgid "Available panels:"
 msgstr "แผงควบคุมที่มี"
 
@@ -9544,35 +9523,6 @@ msgstr[0] "เสียงเข้า %u ช่อง"
 #: subprojects/gvc/gvc-mixer-control.c:2872
 msgid "System Sounds"
 msgstr "เสียงของระบบ"
-
-#~ msgid "Color"
-#~ msgstr "สี"
-
-#~ msgid "Input methods can’t be used on the login screen"
-#~ msgstr "ไม่สามารถใช้วิธีป้อนข้อความในหน้าจอเข้าระบบได้"
-
-#~ msgid "Select PPD File"
-#~ msgstr "เลือกไฟล์ PPD"
-
-#, fuzzy
-#~ msgid "Printer Jobs"
-#~ msgstr "เครื่องพิมพ์"
-
-#, fuzzy
-#~ msgid "Close notification"
-#~ msgstr "แสดงการแ_จ้งเหตุ"
-
-#~ msgid "Starting Device Security…"
-#~ msgstr "กำลังเริ่มต้น \"ความปลอดภัยอุปกรณ์\"…"
-
-#~ msgid "_No"
-#~ msgstr "ไ_ม่"
-
-#~ msgid "_Yes"
-#~ msgstr "ใ_ช่"
-
-#~ msgid "Do you want to delete your registered fingerprints so fingerprint login is disabled?"
-#~ msgstr "คุณต้องการลบลายนิ้วมือของคุณเองที่ได้ลงทะเบียนไว้ เพื่อปิดการเข้าระบบด้วยลายนิ้วมือหรือไม่?"
 
 #~ msgid "Automat_ically Launch Apps"
 #~ msgstr "เรียกแอปโดย_อัตโนมัติ"
@@ -12367,6 +12317,9 @@ msgstr "เสียงของระบบ"
 #~ msgid "Remove a device"
 #~ msgstr "ลบอุปกรณ์ออก"
 
+#~ msgid "Color management settings"
+#~ msgstr "ตั้งค่าการจัดการสี"
+
 #~ msgid "English"
 #~ msgstr "อังกฤษ"
 
@@ -13820,6 +13773,43 @@ msgstr "เสียงของระบบ"
 
 #~ msgid "Autoconfiguration _URL:"
 #~ msgstr "_URL สำหรับตั้งค่าอัตโนมัติ:"
+
+#~ msgid "Clear All Active Jobs?"
+#~ msgstr "ล้างงานพิมพ์ทั้งหมดที่ทำอยู่หรือไม่?"
+
+#~ msgid "Clearing jobs cannot be undone"
+#~ msgstr "การล้างงานพิมพ์ไม่สามารถเรียกกลับคืนได้"
+
+#~ msgid "Clear _All"
+#~ msgstr "_ล้างทั้งหมด"
+
+#, fuzzy
+#~ msgid "Delete All Fingerprints?"
+#~ msgstr "_ลบลายนิ้วมือ"
+
+#, fuzzy
+#~ msgid "_Delete All"
+#~ msgstr "_ลบ"
+
+#, fuzzy
+#~ msgid "Duration"
+#~ msgstr "ระวัง"
+
+#, fuzzy
+#~ msgid "Reminders to move around"
+#~ msgstr "ลบพื้นหลังออก"
+
+#, fuzzy
+#~ msgid "Movement Break S_chedule"
+#~ msgstr "กำหนดเอง"
+
+#, fuzzy
+#~ msgid "S_ounds"
+#~ msgstr "เสียง"
+
+#, fuzzy
+#~ msgid "Wellbeing"
+#~ msgstr "การมองเห็น"
 
 #~ msgid "Notifications will continue to appear in the notification list when popups are disabled."
 #~ msgstr "การแจ้งเหตุจะแสดงในรายการแจ้งเหตุต่อไปเมื่อปิดใช้ป๊อปอัปแล้ว"
