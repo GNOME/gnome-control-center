@@ -92,12 +92,11 @@
             <property name="title" translatable="yes" context="display setting">_Scale</property>
             <property name="use-underline">True</property>
             <child>
-              <object class="GtkBox" id="scale_bbox">
+              <object class="AdwToggleGroup" id="scale_toggle_group">
                 <property name="halign">end</property>
                 <property name="valign">center</property>
-                <style>
-                  <class name="linked" />
-                </style>
+                <property name="homogeneous">True</property>
+                <signal name="notify::active" handler="on_scale_btn_active_changed_cb" object="CcDisplaySettings" swapped="yes"/>
               </object>
             </child>
           </object>
