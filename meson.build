@@ -372,19 +372,27 @@ configure_file(
 )
 
 summary({
-  'Documentation': get_option('documentation'),
-  'Tests': get_option('tests'),
-  'Optimized': control_center_optimized,
-})
+    'Documentation': get_option('documentation'),
+    'Tests': get_option('tests'),
+    'Optimized': control_center_optimized,
+  },
+  bool_yn: true,
+)
 
 summary({
-  'GNOME Bluetooth': host_is_linux_not_s390,
-  'NetworkManager': host_is_linux,
-  'Wacom': host_is_linux_not_s390,
-}, section: 'Dependencies')
+    'GNOME Bluetooth': host_is_linux_not_s390,
+    'NetworkManager': host_is_linux,
+    'Wacom': host_is_linux_not_s390,
+  },
+  section: 'Dependencies',
+  bool_yn: true,
+)
 
 summary({
-  'IBus': enable_ibus,
-  'Snap': enable_snap,
-  'Malcontent': enable_malcontent,
-}, section: 'Optional Dependencies')
+    'IBus': enable_ibus,
+    'Snap': enable_snap,
+    'Malcontent': enable_malcontent,
+  },
+  section: 'Optional Dependencies',
+  bool_yn: true,
+)
