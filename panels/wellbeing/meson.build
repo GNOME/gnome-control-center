@@ -18,6 +18,7 @@ sources = files(
   'cc-bar-chart-bar.c',
   'cc-bar-chart-group.c',
   'cc-break-schedule-row.c',
+  'cc-screen-time-statistics-row.c',
   'cc-wellbeing-panel.c',
 )
 
@@ -41,7 +42,7 @@ panels_libs += static_library(
   cappletname,
   sources: sources,
   include_directories: [ top_inc, common_inc ],
-  dependencies: common_deps,
+  dependencies: common_deps + [json_glib_dep],
   c_args: cflags,
 )
 
