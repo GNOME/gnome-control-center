@@ -14,6 +14,9 @@ i18n.merge_file(
 )
 
 sources = files(
+  'cc-bar-chart.c',
+  'cc-bar-chart-bar.c',
+  'cc-bar-chart-group.c',
   'cc-break-schedule-row.c',
   'cc-wellbeing-panel.c',
 )
