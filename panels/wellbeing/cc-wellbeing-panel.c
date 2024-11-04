@@ -60,6 +60,8 @@ struct _CcWellbeingPanel {
 
   GListStore *movement_break_schedule_list;  /* (owned) */
 
+  CcScreenTimeStatisticsRow *screen_time_statistics_row;
+
   AdwSwitchRow *screen_time_limit_row;
   AdwComboRow *daily_time_limit_row;
   AdwSwitchRow *grayscale_row;
@@ -213,6 +215,7 @@ static void
 cc_wellbeing_panel_init (CcWellbeingPanel *self)
 {
   g_autoptr(GtkCssProvider) provider = NULL;
+  g_autoptr(GFile) history_file = NULL;
 
   g_resources_register (cc_wellbeing_get_resource ());
 
@@ -344,6 +347,10 @@ cc_wellbeing_panel_init (CcWellbeingPanel *self)
   break_settings_changed_play_sound_cb (NULL, NULL, self);
   break_settings_writable_changed_play_sound_cb (NULL, NULL, self);
   break_settings_changed_selected_breaks_cb (NULL, NULL, self);
+
+  /* Load the screen time history from gnome-shell. */
+  history_file = g_file_new_build_filename (g_get_user_data_dir (), "gnome-shell", "session-active-history.json", NULL);
+  cc_screen_time_statistics_row_set_history_file (self->screen_time_statistics_row, history_file);
 }
 
 static void
@@ -577,6 +584,7 @@ cc_wellbeing_panel_class_init (CcWellbeingPanelClass *klass)
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/wellbeing/cc-wellbeing-panel.ui");
 
+  gtk_widget_class_bind_template_child (widget_class, CcWellbeingPanel, screen_time_statistics_row);
   gtk_widget_class_bind_template_child (widget_class, CcWellbeingPanel, screen_time_limit_row);
   gtk_widget_class_bind_template_child (widget_class, CcWellbeingPanel, daily_time_limit_row);
   gtk_widget_class_bind_template_child (widget_class, CcWellbeingPanel, grayscale_row);
