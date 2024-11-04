@@ -12,10 +12,13 @@
 
         <property name="content">
           <object class="GtkScrolledWindow">
+            <accessibility>
+              <relation name="described-by">label</relation>
+            </accessibility>
             <property name="hscrollbar-policy">never</property>
             <property name="propagate-natural-height">True</property>
             <property name="child">
-              <object class="GtkLabel">
+              <object class="GtkLabel" id="label">
                 <property name="margin-top">12</property>
                 <property name="margin-start">24</property>
                 <property name="margin-end">24</property>
