@@ -94,10 +94,26 @@ reload_scalable_resource (CcMaskPaintable *self)
 }
 
 static void
+on_parent_widget_root_cb (CcMaskPaintable *self)
+{
+  g_return_if_fail (self->parent_widget != NULL);
+
+  g_signal_handlers_disconnect_by_func (self->parent_widget, on_parent_widget_root_cb, self);
+
+  g_signal_connect_swapped (self->parent_widget, "notify::scale-factor",
+                            G_CALLBACK (reload_scalable_resource), self);
+
+  reload_scalable_resource (self);
+}
+
+static void
 clear_parent_widget (CcMaskPaintable *self)
 {
   if (self->parent_widget)
+    {
+      g_signal_handlers_disconnect_by_func (self->parent_widget, on_parent_widget_root_cb, self);
       g_signal_handlers_disconnect_by_func (self->parent_widget, reload_scalable_resource, self);
+    }
 
   g_clear_weak_pointer (&self->parent_widget);
 }
@@ -421,8 +437,12 @@ cc_mask_paintable_set_resource_scaled (CcMaskPaintable *self,
   self->parent_widget = parent_widget;
   g_object_add_weak_pointer (G_OBJECT (self->parent_widget), (gpointer *) &self->parent_widget);
 
-  g_signal_connect_swapped (self->parent_widget, "map",
-                            G_CALLBACK (reload_scalable_resource), self);
-  g_signal_connect_swapped (self->parent_widget, "notify::scale-factor",
-                            G_CALLBACK (reload_scalable_resource), self);
+  /* We will wait until the parent widget is rooted, as otherwise the scale-factor can't
+     be retrieved reliably. Doing a resource update with the wrong scale-factor can be
+     costly, so it's worth the wait */
+  if (gtk_widget_get_root (self->parent_widget))
+    on_parent_widget_root_cb (self);
+  else
+    g_signal_connect_swapped (self->parent_widget, "notify::root",
+                              G_CALLBACK (on_parent_widget_root_cb), self);
 }
