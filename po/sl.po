@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2024-10-09 11:59+0000\n"
-"PO-Revision-Date: 2024-10-10 18:03+0200\n"
+"POT-Creation-Date: 2024-11-04 23:27+0000\n"
+"PO-Revision-Date: 2024-11-05 14:56+0100\n"
 "Last-Translator: Martin Srebotnjak <miles@filmsi.net>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "Language: sl_SI\n"
@@ -264,8 +264,8 @@ msgstr "Prejme sistemska iskanja in pošlji zadetke"
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:123
 #: panels/keyboard/cc-xkb-modifier-page.c:323
 #: panels/keyboard/keyboard-shortcuts.c:367 panels/network/panel-common.c:336
-#: panels/system/users/cc-user-page.c:376
-#: panels/system/users/cc-user-page.c:740 panels/wwan/cc-wwan-device-page.c:477
+#: panels/system/users/cc-user-page.c:367
+#: panels/system/users/cc-user-page.c:753 panels/wwan/cc-wwan-device-page.c:477
 #: subprojects/gvc/gvc-mixer-control.c:1872
 msgid "Disabled"
 msgstr "Onemogočeno"
@@ -477,7 +477,7 @@ msgstr "_Klici"
 msgid "_SMS"
 msgstr "_SMS"
 
-#: panels/applications/cc-default-apps-row.c:126
+#: panels/applications/cc-default-apps-row.c:138
 msgid "No Apps Available"
 msgstr "Noben program ni na voljo"
 
@@ -848,18 +848,18 @@ msgstr "Odstrani ozadje"
 msgid "Select a picture"
 msgstr "Izbor slike"
 
-#: panels/background/cc-background-item.c:172
+#: panels/background/cc-background-item.c:234
 msgid "multiple sizes"
 msgstr "različne velikosti"
 
 #. translators: 100 × 100px
 #. * Note that this is not an "x", but U+00D7 MULTIPLICATION SIGN
-#: panels/background/cc-background-item.c:179
+#: panels/background/cc-background-item.c:241
 #, c-format
 msgid "%d × %d"
 msgstr "%d × %d"
 
-#: panels/background/cc-background-item.c:358
+#: panels/background/cc-background-item.c:427
 msgid "No Desktop Background"
 msgstr "Ni ozadja namizja"
 
@@ -970,7 +970,7 @@ msgstr "Omogočen je letalski način"
 msgid "Bluetooth is disabled when airplane mode is on"
 msgstr "Ko je omogočen letalski način, je naprava Bluetooth izklopljena"
 
-#: panels/bluetooth/cc-bluetooth-panel.ui:60
+#: panels/bluetooth/cc-bluetooth-panel.ui:60 panels/wwan/cc-wwan-panel.ui:71
 msgid "_Turn Off Airplane Mode"
 msgstr "_Onemogoči letalski način"
 
@@ -1109,7 +1109,7 @@ msgstr "Umerjanje zaslona"
 #: panels/system/users/cc-fingerprint-dialog.c:1398
 #: panels/system/users/cc-fingerprint-dialog.ui:32
 #: panels/system/users/cc-password-dialog.ui:15
-#: panels/system/users/cc-user-page.ui:231
+#: panels/system/users/cc-user-page.ui:223
 #: panels/system/users/data/join-dialog.ui:17
 #: panels/wwan/cc-wwan-mode-dialog.ui:32
 #: panels/wwan/cc-wwan-network-dialog.ui:109
@@ -1813,32 +1813,32 @@ msgid "0 seconds"
 msgstr "0 sekund"
 
 #. translators: This is the default hotspot name, need to be less than 32-bytes
-#: panels/common/hostname-helper.c:178
+#: panels/common/hostname-helper.c:221
 msgctxt "hotspot"
 msgid "Hotspot"
 msgstr "Vroča točka"
 
-#: panels/display/cc-display-panel.c:506
+#: panels/display/cc-display-panel.c:507
 #: panels/notifications/cc-notifications-panel.c:213
 #: panels/power/cc-power-panel.c:490 panels/power/cc-power-panel.c:497
 msgid "On"
 msgstr "Omogočeno"
 
-#: panels/display/cc-display-panel.c:508 panels/network/cc-net-proxy-page.c:193
+#: panels/display/cc-display-panel.c:509 panels/network/cc-net-proxy-page.c:193
 #: panels/notifications/cc-notifications-panel.c:213
 #: panels/power/cc-power-panel.c:484 panels/power/cc-power-panel.c:495
 msgid "Off"
 msgstr "Onemogočeno"
 
-#: panels/display/cc-display-panel.c:925
+#: panels/display/cc-display-panel.c:926
 msgid "Apply Changes?"
 msgstr "Ali naj se spremembe uveljavijo?"
 
-#: panels/display/cc-display-panel.c:931
+#: panels/display/cc-display-panel.c:932
 msgid "Changes Cannot be Applied"
 msgstr "Sprememb ni mogoče uveljaviti"
 
-#: panels/display/cc-display-panel.c:933
+#: panels/display/cc-display-panel.c:934
 msgid "This could be due to hardware limitations."
 msgstr "To je lahko zaradi strojnih omejitev."
 
@@ -2528,7 +2528,7 @@ msgid "Add Custom Shortcut"
 msgstr "Dodaj bližnjico po meri"
 
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:22
-#: panels/system/users/cc-user-page.ui:232
+#: panels/system/users/cc-user-page.ui:224
 msgid "_Remove"
 msgstr "_Odstrani"
 
@@ -2848,31 +2848,31 @@ msgstr "_Določeno število delovnih površin"
 msgid "Specify a number of permanent workspaces"
 msgstr "Določi število prikazanih delovnih površin"
 
-#: panels/multitasking/cc-multitasking-panel.ui:91
+#: panels/multitasking/cc-multitasking-panel.ui:92
 msgid "_Number of Workspaces"
 msgstr "_Število delovnih površin"
 
-#: panels/multitasking/cc-multitasking-panel.ui:102
+#: panels/multitasking/cc-multitasking-panel.ui:104
 msgid "Multi-Monitor"
 msgstr "Podpora več monitorjem"
 
-#: panels/multitasking/cc-multitasking-panel.ui:108
+#: panels/multitasking/cc-multitasking-panel.ui:110
 msgid "Workspaces on _primary display only"
 msgstr "Delovne površine le na _osnovnem zaslonu"
 
-#: panels/multitasking/cc-multitasking-panel.ui:123
+#: panels/multitasking/cc-multitasking-panel.ui:125
 msgid "Workspaces on all d_isplays"
 msgstr "_Delovne površine naj bodo na vseh zaslonih"
 
-#: panels/multitasking/cc-multitasking-panel.ui:140
+#: panels/multitasking/cc-multitasking-panel.ui:142
 msgid "App Switching"
 msgstr "Preklapljanje programov"
 
-#: panels/multitasking/cc-multitasking-panel.ui:146
+#: panels/multitasking/cc-multitasking-panel.ui:149
 msgid "Include apps from all _workspaces"
 msgstr "Vključi programe _vseh delovnih površin"
 
-#: panels/multitasking/cc-multitasking-panel.ui:160
+#: panels/multitasking/cc-multitasking-panel.ui:163
 msgid "Include apps from the _current workspace only"
 msgstr "Vključi le programe s _trenutne delovne površine"
 
@@ -2899,7 +2899,7 @@ msgstr ""
 #: panels/network/connection-editor/ip6-page.ui:37
 #: panels/network/connection-editor/ip6-page.ui:197
 #: panels/network/connection-editor/ip6-page.ui:255
-#: panels/wacom/cc-wacom-page.c:642
+#: panels/wacom/cc-wacom-page.c:674
 msgid "Automatic"
 msgstr "Samodejno"
 
@@ -3166,7 +3166,7 @@ msgstr "Ni najdenega vmesnika Wi-Fi"
 msgid "Make sure you have a Wi-Fi adapter plugged and turned on"
 msgstr "Prepričajte se, da je vmesnik Wi-Fi priklopljen in omogočen."
 
-#: panels/network/cc-wifi-panel.ui:96 panels/wwan/cc-wwan-panel.ui:63
+#: panels/network/cc-wifi-panel.ui:96 panels/wwan/cc-wwan-panel.ui:64
 msgid "Airplane Mode On"
 msgstr "Letalski način je omogočen"
 
@@ -6151,7 +6151,7 @@ msgstr "_Kopiraj tehnično poročilo"
 msgid "About Device Security"
 msgstr "O varnosti naprav"
 
-#: panels/privacy/firmware-security/cc-firmware-security-help-dialog.ui:24
+#: panels/privacy/firmware-security/cc-firmware-security-help-dialog.ui:27
 msgid ""
 "Device security provides information about how protected your device is "
 "against security issues which target the hardware itself.\n"
@@ -6283,15 +6283,11 @@ msgstr "Za to napravo ravni varnosti niso na voljo."
 msgid "Device Security"
 msgstr "Varnost naprav"
 
-#: panels/privacy/firmware-security/cc-firmware-security-page.ui:37
-msgid "Starting Device Security…"
-msgstr "Zaganjanje varnosti naprav …"
-
-#: panels/privacy/firmware-security/cc-firmware-security-page.ui:48
+#: panels/privacy/firmware-security/cc-firmware-security-page.ui:41
 msgid "Device Security Unavailable"
 msgstr "Analiza varnosti naprav ni na voljo"
 
-#: panels/privacy/firmware-security/cc-firmware-security-page.ui:50
+#: panels/privacy/firmware-security/cc-firmware-security-page.ui:43
 msgid ""
 "Device Security is only available on physical hardware. No physical hardware "
 "has been detected."
@@ -6299,11 +6295,11 @@ msgstr ""
 "Določanje varnosti naprav je na voljo samo za fizično strojno opremo, ki pa "
 "v sistemu ni zaznana."
 
-#: panels/privacy/firmware-security/cc-firmware-security-page.ui:183
+#: panels/privacy/firmware-security/cc-firmware-security-page.ui:176
 msgid "Security Events"
 msgstr "Varnostni pregledi"
 
-#: panels/privacy/firmware-security/cc-firmware-security-page.ui:195
+#: panels/privacy/firmware-security/cc-firmware-security-page.ui:188
 msgid "No Events"
 msgstr "Ni še izvedenih pregledov"
 
@@ -6320,8 +6316,8 @@ msgstr "Ni veljavno"
 #. TRANSLATORS: if the function is enabled through BIOS or OS settings.
 #. TRANSLATORS: Status of Parental Controls setup
 #: panels/privacy/firmware-security/cc-firmware-security-utils.c:45
-#: panels/system/users/cc-user-page.c:374
-#: panels/system/users/cc-user-page.c:740 panels/wwan/cc-wwan-device-page.c:475
+#: panels/system/users/cc-user-page.c:365
+#: panels/system/users/cc-user-page.c:753 panels/wwan/cc-wwan-device-page.c:475
 msgid "Enabled"
 msgstr "Omogočeno"
 
@@ -7615,7 +7611,7 @@ msgid "Remote _Login"
 msgstr "Odda_ljena prijava"
 
 #: panels/system/remote-desktop/cc-remote-login-page.c:724
-#: panels/system/users/cc-user-page.c:763
+#: panels/system/users/cc-user-page.c:776
 msgid "Some settings are locked"
 msgstr "Nekatere nastavitve so z aklenjene"
 
@@ -8155,23 +8151,23 @@ msgstr "Napačno geslo, poskusite znova."
 msgid "Couldn’t connect to the %s domain: %s"
 msgstr "Z domeno %s povezava ni mogoča: %s"
 
-#: panels/system/users/cc-user-page.c:200
+#: panels/system/users/cc-user-page.c:203
 msgctxt "Password mode"
 msgid "Account disabled"
 msgstr "Račun je onemogočen"
 
-#: panels/system/users/cc-user-page.c:207
+#: panels/system/users/cc-user-page.c:210
 msgctxt "Password mode"
 msgid "To be set at next login"
 msgstr "Nastavljeno bo ob naslednji prijavi"
 
-#: panels/system/users/cc-user-page.c:210
+#: panels/system/users/cc-user-page.c:213
 msgctxt "Password mode"
 msgid "None"
 msgstr "Brez"
 
 #. TODO: Handle enterprise accounts
-#: panels/system/users/cc-user-page.c:431
+#: panels/system/users/cc-user-page.c:422
 #, c-format
 msgid "Remove %s?"
 msgstr "Ali želite odstraniti %s?"
@@ -8228,18 +8224,18 @@ msgstr "_Starševski nadzor"
 msgid "Open the Parental Controls app"
 msgstr "Odpri program za starševski nadzor."
 
-#: panels/system/users/cc-user-page.ui:203
+#: panels/system/users/cc-user-page.ui:199
 msgid "_Remove User…"
 msgstr "_Odstrani uporabnika …"
 
-#: panels/system/users/cc-user-page.ui:226
+#: panels/system/users/cc-user-page.ui:218
 msgid ""
 "The user will not be able to use this device once their account has been "
 "removed"
 msgstr ""
 "Po odstranitvi računa uporabniki do te naprave ne bo imeli več dostopa."
 
-#: panels/system/users/cc-user-page.ui:238
+#: panels/system/users/cc-user-page.ui:230
 msgid "_Delete Files and Settings"
 msgstr "_Izbriši datoteke in nastavitve"
 
@@ -8252,11 +8248,11 @@ msgstr "Uporabniki"
 msgid "Other Users"
 msgstr "Drugi uporabniki"
 
-#: panels/system/users/cc-users-page.ui:34
+#: panels/system/users/cc-users-page.ui:31
 msgid "_Add User"
 msgstr "_Dodaj uporabnika"
 
-#: panels/system/users/cc-users-page.ui:43
+#: panels/system/users/cc-users-page.ui:40
 msgid "Add _Enterprise Login"
 msgstr "Dodaj p_rijavo v poslovno domeno"
 
@@ -9133,59 +9129,59 @@ msgstr "Pokaži zaslonsko pomoč"
 msgid "This device is unknown and may present wrong capabilities — %s."
 msgstr "Ta naprava ni znana in ima lahko napačne zmogljivosti – %s."
 
-#: panels/wacom/cc-wacom-device.c:452
+#: panels/wacom/cc-wacom-device.c:460
 msgid "Tablet mounted on laptop panel"
 msgstr "Na prenosnik je priklopljena tablica"
 
-#: panels/wacom/cc-wacom-device.c:454
+#: panels/wacom/cc-wacom-device.c:462
 msgid "Tablet mounted on external display"
 msgstr "Na zunanji zaslon je priklopljena tablica"
 
-#: panels/wacom/cc-wacom-device.c:456
+#: panels/wacom/cc-wacom-device.c:464
 msgid "External tablet device"
 msgstr "Zunanja tablična naprava"
 
 #. All displays item
-#: panels/wacom/cc-wacom-page.c:629
+#: panels/wacom/cc-wacom-page.c:661
 msgid "All Displays"
 msgstr "Vsi zasloni"
 
-#: panels/wacom/cc-wacom-page.ui:16
+#: panels/wacom/cc-wacom-page.ui:19
 msgid "_Tablet Mode"
 msgstr "_Tablični način"
 
-#: panels/wacom/cc-wacom-page.ui:17
+#: panels/wacom/cc-wacom-page.ui:20
 msgid "Use absolute positioning for the pen"
 msgstr "Uporabi absolutno prilagajanje za pisalo"
 
-#: panels/wacom/cc-wacom-page.ui:23
+#: panels/wacom/cc-wacom-page.ui:26
 msgid "_Left Hand Orientation"
 msgstr "_Levoročna usmerjenost"
 
-#: panels/wacom/cc-wacom-page.ui:24
+#: panels/wacom/cc-wacom-page.ui:27
 msgid "Tablet and Express Keys™ are rotated for left hand use"
 msgstr "Tablične in Hitre tipke so obrnjene za levoročno uporabo"
 
-#: panels/wacom/cc-wacom-page.ui:30
+#: panels/wacom/cc-wacom-page.ui:33
 msgid "Map _Buttons"
 msgstr "_Preslikava gumbov"
 
-#: panels/wacom/cc-wacom-page.ui:44
+#: panels/wacom/cc-wacom-page.ui:47
 msgctxt "display setting"
 msgid "Map to _Monitor"
 msgstr "Preslikaj na _zaslon"
 
-#: panels/wacom/cc-wacom-page.ui:51
+#: panels/wacom/cc-wacom-page.ui:54
 msgid "_Keep Aspect Ratio"
 msgstr "_Ohrani razmerje velikosti"
 
-#: panels/wacom/cc-wacom-page.ui:52
+#: panels/wacom/cc-wacom-page.ui:55
 msgid "Only use a portion of the tablet surface to keep monitor aspect ratio"
 msgstr ""
 "Uporabi le del površine tablice za ohranjanje skladnosti z velikostjo "
 "monitorja"
 
-#: panels/wacom/cc-wacom-page.ui:58
+#: panels/wacom/cc-wacom-page.ui:61
 msgid "_Calibrate"
 msgstr "_Umeri …"
 
@@ -9216,71 +9212,71 @@ msgstr "Dodeli tipkovno bližnjico"
 msgid "Press Esc to cancel"
 msgstr "Pritisnite ubežnico (Esc) za preklic"
 
-#: panels/wacom/cc-wacom-stylus-page.c:395
+#: panels/wacom/cc-wacom-stylus-page.c:438
 msgid "_Left Mousebutton Click"
 msgstr "Klik _levega gumba miške"
 
-#: panels/wacom/cc-wacom-stylus-page.c:398
+#: panels/wacom/cc-wacom-stylus-page.c:441
 msgid "_Middle Mousebutton Click"
 msgstr "Klik _srednjega gumba miške"
 
-#: panels/wacom/cc-wacom-stylus-page.c:401
+#: panels/wacom/cc-wacom-stylus-page.c:444
 msgid "_Right Mousebutton Click"
 msgstr "Klik _desnega gumba miške"
 
 #. Translators: this is the "go back" action of a button
-#: panels/wacom/cc-wacom-stylus-page.c:405
+#: panels/wacom/cc-wacom-stylus-page.c:448
 msgid "_Back"
 msgstr "_Nazaj"
 
 #. Translators: this is the "go forward" action of a button
-#: panels/wacom/cc-wacom-stylus-page.c:409
+#: panels/wacom/cc-wacom-stylus-page.c:452
 msgid "_Forward"
 msgstr "_Naprej"
 
-#: panels/wacom/cc-wacom-stylus-page.c:412
+#: panels/wacom/cc-wacom-stylus-page.c:455
 msgid "_Assign Keystroke"
 msgstr "_Dodeli tipkovno bližnjico"
 
-#: panels/wacom/cc-wacom-stylus-page.c:415
+#: panels/wacom/cc-wacom-stylus-page.c:458
 msgid "_Switch Monitor"
 msgstr "Pre_klopi zaslon"
 
-#: panels/wacom/cc-wacom-stylus-page.ui:16
+#: panels/wacom/cc-wacom-stylus-page.ui:19
 msgid "Tip _Pressure Feel"
 msgstr "Občutek _pritiska konice"
 
-#: panels/wacom/cc-wacom-stylus-page.ui:22
-#: panels/wacom/cc-wacom-stylus-page.ui:117
+#: panels/wacom/cc-wacom-stylus-page.ui:25
+#: panels/wacom/cc-wacom-stylus-page.ui:120
 msgid "Soft"
 msgstr "Mehko"
 
-#: panels/wacom/cc-wacom-stylus-page.ui:36
+#: panels/wacom/cc-wacom-stylus-page.ui:39
 msgid "Stylus tip pressure"
 msgstr "Pritisk konice pisala"
 
-#: panels/wacom/cc-wacom-stylus-page.ui:42
-#: panels/wacom/cc-wacom-stylus-page.ui:137
+#: panels/wacom/cc-wacom-stylus-page.ui:45
+#: panels/wacom/cc-wacom-stylus-page.ui:140
 msgid "Firm"
 msgstr "Čvrsto"
 
-#: panels/wacom/cc-wacom-stylus-page.ui:54
+#: panels/wacom/cc-wacom-stylus-page.ui:57
 msgid "Button _1"
 msgstr "Gumb _1"
 
-#: panels/wacom/cc-wacom-stylus-page.ui:73
+#: panels/wacom/cc-wacom-stylus-page.ui:76
 msgid "Button _2"
 msgstr "Gumb _2"
 
-#: panels/wacom/cc-wacom-stylus-page.ui:92
+#: panels/wacom/cc-wacom-stylus-page.ui:95
 msgid "Button _3"
 msgstr "Gumb _3"
 
-#: panels/wacom/cc-wacom-stylus-page.ui:111
+#: panels/wacom/cc-wacom-stylus-page.ui:114
 msgid "_Eraser Pressure Feel"
 msgstr "Občutek pritiska _radirke"
 
-#: panels/wacom/cc-wacom-stylus-page.ui:131
+#: panels/wacom/cc-wacom-stylus-page.ui:134
 msgid "Eraser pressure"
 msgstr "Pritisk radirke"
 
@@ -9301,8 +9297,8 @@ msgid "Stylus with pressure"
 msgstr "Pisalo, občutljivo na moč pritiska"
 
 #: panels/wacom/gnome-wacom-panel.desktop.in:3
-msgid "Wacom Tablet"
-msgstr "Tablica Wacom"
+msgid "Graphics Tablets"
+msgstr "Grafične tablice"
 
 #: panels/wacom/gnome-wacom-panel.desktop.in:4
 msgid "Set button mappings and adjust stylus sensitivity for graphics tablets"
@@ -9310,7 +9306,7 @@ msgstr ""
 "Nastavitev preslikave gumbov in prilagoditev občutljivosti paličice grafične "
 "tablice"
 
-#. Translators: Search terms to find the Wacom Tablet panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#. Translators: Search terms to find the Graphics Tablets panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/wacom/gnome-wacom-panel.desktop.in:15
 msgid "Tablet;Wacom;Stylus;Eraser;Mouse;"
 msgstr "Tablica;Wacom;Stylus;Radirka;Eraser;Miška;"
@@ -9881,19 +9877,15 @@ msgstr "Ni najdenega vmesnika WWAN"
 msgid "Make sure you have a Wireless Wan/Cellular device"
 msgstr "Prepričajte se, da naprava podpira brezžični protokol WAN/Cellular"
 
-#: panels/wwan/cc-wwan-panel.ui:64
+#: panels/wwan/cc-wwan-panel.ui:65
 msgid "Wireless Wan is disabled when airplane mode is on"
 msgstr "Brezžično omrežje Wan je onemogočeno, kadar je omogočen letalski način"
 
-#: panels/wwan/cc-wwan-panel.ui:70
-msgid "_Turn off Airplane Mode"
-msgstr "_Onemogoči letalski način"
-
-#: panels/wwan/cc-wwan-panel.ui:105
+#: panels/wwan/cc-wwan-panel.ui:106
 msgid "Data Connection"
 msgstr "Podatkovna povezava"
 
-#: panels/wwan/cc-wwan-panel.ui:106
+#: panels/wwan/cc-wwan-panel.ui:107
 msgid "SIM card used for internet"
 msgstr "Kartica SIM za dostop do interneta"
 
