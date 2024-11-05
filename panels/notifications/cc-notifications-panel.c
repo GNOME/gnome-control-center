@@ -323,6 +323,10 @@ maybe_add_app_id (CcNotificationsPanel *self,
     return;
   }
 
+  if (!g_app_info_should_show (app_info)) {
+    return;
+  }
+
   if (app_is_system_service (G_DESKTOP_APP_INFO (app_info))) {
     /* We don't want to show system services in the notification list */
     return;
