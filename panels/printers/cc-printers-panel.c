@@ -1289,9 +1289,6 @@ cc_printers_panel_init (CcPrintersPanel *self)
 
       cc_permission_infobar_set_permission (self->permission_infobar,
                                             self->permission);
-      cc_permission_infobar_set_title (self->permission_infobar,
-				       _("Unlock to add printers and change settings"));
-
       on_permission_changed (self);
     }
   else
