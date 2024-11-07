@@ -721,7 +721,6 @@ cc_remote_login_page_init (CcRemoteLoginPage *self)
                           self->generate_password_button_row, "sensitive",
                           G_BINDING_SYNC_CREATE);
   cc_permission_infobar_set_permission (self->permission_infobar, self->permission);
-  cc_permission_infobar_set_title (self->permission_infobar, _("Some settings are locked"));
 
   connect_to_remote_desktop_configuration_rdp_server (self);
 }
