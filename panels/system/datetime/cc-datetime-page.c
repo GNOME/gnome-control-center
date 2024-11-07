@@ -24,6 +24,7 @@
 #include "cc-list-row.h"
 #include "cc-time-editor.h"
 #include "cc-datetime-page.h"
+#include "cc-permission-infobar.h"
 
 #include <langinfo.h>
 #include <sys/time.h>
@@ -94,12 +95,12 @@ struct _CcDateTimePage
   AdwSwitchRow *date_row;
   AdwSwitchRow *seconds_row;
   AdwSwitchRow *week_numbers_row;
-  GtkLockButton *lock_button;
   GtkListBox *date_box;
   GtkSingleSelection *month_model;
   GtkPopover  *month_popover;
   CcListRow *month_row;
   GtkSwitch *network_time_switch;
+  CcPermissionInfobar *permission_infobar;
   CcTimeEditor *time_editor;
   CcListRow *timezone_row;
   CcTzDialog *timezone_dialog;
@@ -826,11 +827,11 @@ cc_date_time_page_class_init (CcDateTimePageClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePage, date_row);
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePage, seconds_row);
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePage, week_numbers_row);
-  gtk_widget_class_bind_template_child (widget_class, CcDateTimePage, lock_button);
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePage, month_model);
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePage, month_popover);
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePage, month_row);
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePage, network_time_switch);
+  gtk_widget_class_bind_template_child (widget_class, CcDateTimePage, permission_infobar);
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePage, time_editor);
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePage, timezone_row);
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePage, timezone_dialog);
@@ -882,7 +883,7 @@ cc_date_time_page_init (CcDateTimePage *self)
       g_warning ("Your system does not have the '%s' PolicyKit files installed. Please check your installation",
                  DATETIME_PERMISSION);
     }
-  gtk_lock_button_set_permission (GTK_LOCK_BUTTON (self->lock_button), self->permission);
+  cc_permission_infobar_set_permission (self->permission_infobar, self->permission);
 
   self->location_settings = g_settings_new (LOCATION_SETTINGS);
   g_signal_connect_object (self->location_settings, "changed",
