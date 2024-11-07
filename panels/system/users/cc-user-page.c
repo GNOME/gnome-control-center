@@ -773,7 +773,6 @@ cc_user_page_set_user (CcUserPage  *self,
     }
 
     cc_permission_infobar_set_permission (self->permission_infobar, permission);
-    cc_permission_infobar_set_title (self->permission_infobar, _("Some settings are locked"));
     g_object_bind_property (permission, "allowed", self, "locked", G_BINDING_SYNC_CREATE | G_BINDING_INVERT_BOOLEAN);
     g_signal_connect_object (permission, "notify", G_CALLBACK (update_editable_state), self, G_CONNECT_SWAPPED);
     update_editable_state (self);
