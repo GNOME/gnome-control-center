@@ -48,7 +48,7 @@
  *
  * The data is loaded from a file specified using
  * #CcScreenTimeStatisticsRow:history-file. The data is automatically reloaded
- * if the file changes.
+ * if the file changes, and as time passes.
  */
 struct _CcScreenTimeStatisticsRow {
   AdwPreferencesRow parent_instance;
@@ -80,6 +80,7 @@ struct _CcScreenTimeStatisticsRow {
   GFile *history_file;  /* (nullable) (owned) */
   GFileMonitor *history_file_monitor;  /* (nullable) (owned) */
   gulong history_file_monitor_changed_id;
+  GSource *update_timeout_source;  /* (nullable) (owned) */
 
   GDate selected_date;  /* invalid when unset */
   unsigned int daily_limit_minutes;
@@ -105,6 +106,8 @@ static void cc_screen_time_statistics_row_set_property (GObject      *object,
                                                         GParamSpec   *pspec);
 static void cc_screen_time_statistics_row_dispose (GObject *object);
 static void cc_screen_time_statistics_row_finalize (GObject *object);
+static void cc_screen_time_statistics_row_map (GtkWidget *widget);
+static void cc_screen_time_statistics_row_unmap (GtkWidget *widget);
 
 static void get_today (GDate *today);
 static unsigned int get_week_start (void);
@@ -123,6 +126,7 @@ static void previous_week_button_clicked_cb (GtkButton *button,
                                              gpointer   user_data);
 static void next_week_button_clicked_cb (GtkButton *button,
                                          gpointer   user_data);
+static void maybe_enable_update_timeout (CcScreenTimeStatisticsRow *self);
 
 static void
 cc_screen_time_statistics_row_class_init (CcScreenTimeStatisticsRowClass *klass)
@@ -134,6 +138,9 @@ cc_screen_time_statistics_row_class_init (CcScreenTimeStatisticsRowClass *klass)
   object_class->set_property = cc_screen_time_statistics_row_set_property;
   object_class->dispose = cc_screen_time_statistics_row_dispose;
   object_class->finalize = cc_screen_time_statistics_row_finalize;
+
+  widget_class->map = cc_screen_time_statistics_row_map;
+  widget_class->unmap = cc_screen_time_statistics_row_unmap;
 
   /**
    * CcScreenTimeStatisticsRow:history-file: (nullable)
@@ -311,8 +318,32 @@ cc_screen_time_statistics_row_finalize (GObject *object)
 
   g_clear_pointer (&self->model.screen_time_per_day, g_free);
 
+  /* Should have been freed on unmap */
+  g_assert (self->update_timeout_source == NULL);
+
   G_OBJECT_CLASS (cc_screen_time_statistics_row_parent_class)->finalize (object);
 }
+
+static void
+cc_screen_time_statistics_row_map (GtkWidget *widget)
+{
+  CcScreenTimeStatisticsRow *self = CC_SCREEN_TIME_STATISTICS_ROW (widget);
+
+  GTK_WIDGET_CLASS (cc_screen_time_statistics_row_parent_class)->map (widget);
+
+  maybe_enable_update_timeout (self);
+}
+
+static void
+cc_screen_time_statistics_row_unmap (GtkWidget *widget)
+{
+  CcScreenTimeStatisticsRow *self = CC_SCREEN_TIME_STATISTICS_ROW (widget);
+
+  GTK_WIDGET_CLASS (cc_screen_time_statistics_row_parent_class)->unmap (widget);
+
+  maybe_enable_update_timeout (self);
+}
+
 
 static gboolean
 is_day_in_model (CcScreenTimeStatisticsRow *self,
@@ -1116,6 +1147,38 @@ history_file_monitor_changed_cb (GFileMonitor      *monitor,
   update_ui_for_model_or_selected_date (self);
 }
 
+static gboolean
+history_file_update_timeout_cb (gpointer user_data)
+{
+  CcScreenTimeStatisticsRow *self = CC_SCREEN_TIME_STATISTICS_ROW (user_data);
+
+  g_debug ("%s: Reloading history data due to the passage of time", G_STRFUNC);
+
+  update_model (self);
+  update_ui_for_model_or_selected_date (self);
+
+  return G_SOURCE_CONTINUE;
+}
+
+static void
+maybe_enable_update_timeout (CcScreenTimeStatisticsRow *self)
+{
+  gboolean should_be_enabled = (self->history_file != NULL && gtk_widget_get_mapped (GTK_WIDGET (self)));
+  gboolean is_enabled = (self->update_timeout_source != NULL);
+
+  if (should_be_enabled && !is_enabled)
+    {
+      self->update_timeout_source = g_timeout_source_new_seconds (60 * 60);
+      g_source_set_callback (self->update_timeout_source, G_SOURCE_FUNC (history_file_update_timeout_cb), self, NULL);
+      g_source_attach (self->update_timeout_source, NULL);
+    }
+  else if (is_enabled && !should_be_enabled)
+    {
+      g_source_destroy (self->update_timeout_source);
+      g_clear_pointer (&self->update_timeout_source, g_source_unref);
+    }
+}
+
 /**
  * cc_screen_time_statistics_row_new:
  *
@@ -1192,6 +1255,10 @@ cc_screen_time_statistics_row_set_history_file (CcScreenTimeStatisticsRow *self,
 
           g_set_object (&self->history_file_monitor, monitor);
         }
+
+      /* Periodically reload the data so the graph is updated with the passage
+       * of time. */
+      maybe_enable_update_timeout (self);
 
       g_object_notify_by_pspec (G_OBJECT (self), props[PROP_HISTORY_FILE]);
     }
