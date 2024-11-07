@@ -37,6 +37,7 @@ struct _CcMaskPaintable
 
   GdkPaintable *paintable;
   GdkRGBA       rgba;
+  GskMaskMode   mask_mode;
 
   gboolean      follow_accent;
   gboolean      updating_accent;
@@ -218,6 +219,7 @@ cc_mask_paintable_class_init (CcMaskPaintableClass *klass)
 static void
 cc_mask_paintable_init (CcMaskPaintable *self)
 {
+  self->mask_mode = GSK_MASK_MODE_ALPHA;
 }
 
 static void
@@ -240,7 +242,7 @@ cc_mask_paintable_snapshot (GdkPaintable *paintable,
   if (!node)
     return;
 
-  gtk_snapshot_push_mask (snapshot, GSK_MASK_MODE_ALPHA);
+  gtk_snapshot_push_mask (snapshot, self->mask_mode);
 
   gtk_snapshot_append_node (snapshot, node);
   gtk_snapshot_pop (snapshot);
@@ -412,7 +414,7 @@ cc_mask_paintable_set_resource_scaled (CcMaskPaintable *self,
                                        const char      *resource_path,
                                        GtkWidget       *parent_widget)
 {
-  gboolean resource_is_scalable;
+  gboolean resource_is_webm, resource_is_scalable;
 
   g_return_if_fail (CC_IS_MASK_PAINTABLE (self));
   g_return_if_fail (resource_path != NULL);
@@ -421,6 +423,16 @@ cc_mask_paintable_set_resource_scaled (CcMaskPaintable *self,
   clear_parent_widget (self);
 
   g_set_str (&self->resource_path, resource_path);
+
+  /* FIXME: As long as VP9 alpha decoding is in gstreamer-plugins-bad,
+   * we should probably use B&W assets and luminance masking
+   * https://gitlab.gnome.org/GNOME/gnome-control-center/-/issues/3173 
+   * https://gitlab.freedesktop.org/gstreamer/gstreamer/-/issues/3978 */
+  resource_is_webm = g_str_has_suffix (self->resource_path, ".webm");
+  if (resource_is_webm)
+    self->mask_mode = GSK_MASK_MODE_LUMINANCE;
+  else
+    self->mask_mode = GSK_MASK_MODE_ALPHA;
 
   resource_is_scalable = g_str_has_suffix (self->resource_path, ".svg");
 
