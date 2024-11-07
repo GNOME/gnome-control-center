@@ -534,6 +534,21 @@ place_query_info_ready (GObject *source,
 }
 
 static void
+open_folder_button_clicked (CcSearchLocationsPage *self,
+                            GtkWidget *button)
+{
+  Place *place;
+  g_autoptr(GtkFileLauncher) launcher = NULL;
+  GtkWindow *toplevel;
+
+  place = g_object_get_data (G_OBJECT (button), "place");
+  launcher = gtk_file_launcher_new (place->location);
+  toplevel = GTK_WINDOW (gtk_widget_get_root (GTK_WIDGET (self)));
+
+  gtk_file_launcher_launch (launcher, toplevel, NULL, NULL, NULL);
+}
+
+static void
 remove_button_clicked (CcSearchLocationsPage *self,
                        GtkWidget *button)
 {
@@ -591,6 +606,16 @@ create_row_for_place (CcSearchLocationsPage *self, Place *place)
 
   if (place->place_type == PLACE_OTHER)
     {
+      GtkWidget *open_location_button;
+
+      open_location_button = gtk_button_new_from_icon_name ("folder-open-symbolic");
+
+      g_object_set_data (G_OBJECT (open_location_button), "place", place);
+      gtk_widget_set_tooltip_text (open_location_button, _("Open Folder"));
+      gtk_widget_add_css_class (open_location_button, "flat");
+      gtk_widget_set_valign (open_location_button, GTK_ALIGN_CENTER);
+      adw_action_row_add_suffix (ADW_ACTION_ROW (row), open_location_button);
+
       /* Other locations can only be removed */
       remove_button = gtk_button_new_from_icon_name ("edit-delete-symbolic");
 
@@ -599,6 +624,9 @@ create_row_for_place (CcSearchLocationsPage *self, Place *place)
       gtk_widget_set_valign (remove_button, GTK_ALIGN_CENTER);
       gtk_widget_add_css_class (remove_button, "flat");
       adw_action_row_add_suffix (ADW_ACTION_ROW (row), remove_button);
+
+      g_signal_connect_swapped (open_location_button, "clicked",
+                                G_CALLBACK (open_folder_button_clicked), self);
 
       g_signal_connect_swapped (remove_button, "clicked",
                                 G_CALLBACK (remove_button_clicked), self);
