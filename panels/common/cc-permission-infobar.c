@@ -183,19 +183,3 @@ cc_permission_infobar_set_permission (CcPermissionInfobar *self,
                            G_CONNECT_SWAPPED);
   on_permission_changed (self);
 }
-
-/**
- * cc_permission_infobar_set_title:
- * @self: a #CcPermissionInfobar
- * @title: (nullable): title to display in the infobar, or %NULL for the default
- *
- * Set the title text to display in the infobar.
- */
-void
-cc_permission_infobar_set_title (CcPermissionInfobar *self,
-                                 const gchar         *title)
-{
-  g_return_if_fail (CC_IS_PERMISSION_INFOBAR (self));
-
-  adw_banner_set_title (self->banner, title);
-}
