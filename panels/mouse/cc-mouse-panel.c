@@ -66,7 +66,6 @@ struct _CcMousePanel
   gboolean           have_touchscreen;
   gboolean           have_synaptics;
 
-  gboolean           left_handed;
   GtkGesture        *left_gesture;
   GtkGesture        *right_gesture;
 };
@@ -254,12 +253,13 @@ static void
 setup_dialog (CcMousePanel *self)
 {
   GtkToggleButton *button;
+  gboolean left_handed;
 
   update_primary_mouse_button_order (self);
   self->mouse_test = GTK_WINDOW (cc_mouse_test_new ());
 
-  self->left_handed = g_settings_get_boolean (self->mouse_settings, "left-handed");
-  button = self->left_handed ? self->primary_button_right : self->primary_button_left;
+  left_handed = g_settings_get_boolean (self->mouse_settings, "left-handed");
+  button = left_handed ? self->primary_button_right : self->primary_button_left;
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button), TRUE);
 
   g_settings_bind (self->mouse_settings, "left-handed",
