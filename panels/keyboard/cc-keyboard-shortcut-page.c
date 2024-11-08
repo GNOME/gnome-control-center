@@ -381,7 +381,6 @@ shortcut_page_visible_page_changed_cb (CcKeyboardShortcutPage *self)
   if (is_main_view)
     {
       gtk_editable_set_text (GTK_EDITABLE (self->search_entry), "");
-      gtk_widget_grab_focus (GTK_WIDGET (self->search_entry));
 
       self->visible_section = NULL;
     }
