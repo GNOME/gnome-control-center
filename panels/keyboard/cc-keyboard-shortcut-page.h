@@ -1,4 +1,4 @@
-/* cc-keyboard-shortcut-dialog.h
+/* cc-keyboard-shortcut-page.h
  *
  * Copyright (C) 2020 System76, Inc.
  *
@@ -26,9 +26,9 @@
 
 G_BEGIN_DECLS
 
-#define CC_TYPE_KEYBOARD_SHORTCUT_DIALOG (cc_keyboard_shortcut_dialog_get_type ())
-G_DECLARE_FINAL_TYPE (CcKeyboardShortcutDialog, cc_keyboard_shortcut_dialog, CC, KEYBOARD_SHORTCUT_DIALOG, AdwDialog)
+#define CC_TYPE_KEYBOARD_SHORTCUT_PAGE (cc_keyboard_shortcut_page_get_type ())
+G_DECLARE_FINAL_TYPE (CcKeyboardShortcutPage, cc_keyboard_shortcut_page, CC, KEYBOARD_SHORTCUT_PAGE, AdwNavigationPage)
 
-CcKeyboardShortcutDialog* cc_keyboard_shortcut_dialog_new (void);
+GtkWidget* cc_keyboard_shortcut_page_new (void);
 
 G_END_DECLS

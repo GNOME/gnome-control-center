@@ -1,14 +1,11 @@
 using Gtk 4.0;
 using Adw 1;
 
-template $CcKeyboardShortcutDialog: Adw.Dialog {
-  content-width: 600;
-  content-height: 540;
+template $CcKeyboardShortcutPage: Adw.NavigationPage {
   title: _("Keyboard Shortcuts");
-  focus-widget: search_entry;
 
   child: Adw.NavigationView navigation_view {
-    notify::visible-page => $shortcut_dialog_visible_page_changed_cb(template);
+    notify::visible-page => $shortcut_page_visible_page_changed_cb(template);
 
     Adw.NavigationPage main_page {
       title: bind template.title;
