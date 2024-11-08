@@ -28,7 +28,7 @@
 
 #include "cc-keyboard-panel.h"
 #include "cc-keyboard-resources.h"
-#include "cc-keyboard-shortcut-dialog.h"
+#include "cc-keyboard-shortcut-page.h"
 #include "cc-input-list-box.h"
 #include "cc-xkb-modifier-page.h"
 #include "cc-list-row.h"
@@ -126,10 +126,10 @@ compose_row_activated (CcKeyboardPanel *self)
 static void
 keyboard_shortcuts_activated (CcKeyboardPanel *self)
 {
-  AdwDialog *dialog;
+  AdwNavigationPage *page;
 
-  dialog = ADW_DIALOG (cc_keyboard_shortcut_dialog_new ());
-  adw_dialog_present (dialog, GTK_WIDGET (self));
+  page = ADW_NAVIGATION_PAGE (cc_keyboard_shortcut_page_new ());
+  cc_panel_push_subpage (CC_PANEL (self), page);
 }
 
 static void
