@@ -112,6 +112,9 @@ on_accent_color_toggled_cb (CcBackgroundPanel *self,
   GDesktopAccentColor accent_color_from_key;
   GDesktopAccentColor accent_color = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (toggle), "accent-color"));
 
+  if (!gtk_toggle_button_get_active (toggle))
+    return;
+
   accent_color_from_key = g_settings_get_enum (self->interface_settings,
                                                INTERFACE_ACCENT_COLOR_KEY);
 
