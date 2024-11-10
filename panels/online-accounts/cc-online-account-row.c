@@ -98,8 +98,9 @@ cc_online_account_row_new (GoaObject *object)
 
   adw_preferences_row_set_title (ADW_PREFERENCES_ROW (self),
                                  goa_account_get_provider_name (account));
-  adw_action_row_set_subtitle (ADW_ACTION_ROW (self),
-                               goa_account_get_presentation_identity (account));
+  g_object_bind_property (account, "presentation-identity",
+                          self, "subtitle",
+                          G_BINDING_SYNC_CREATE);
 
   gicon = g_icon_new_for_string (goa_account_get_provider_icon (account), &error);
   if (error != NULL)
