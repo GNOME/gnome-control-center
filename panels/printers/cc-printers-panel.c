@@ -1206,6 +1206,8 @@ cc_printers_panel_class_init (CcPrintersPanelClass *klass)
                                                          FALSE,
                                                          G_PARAM_READWRITE));
 
+  g_type_ensure (CC_TYPE_PERMISSION_INFOBAR);
+
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/printers/cc-printers-panel.ui");
 
   gtk_widget_class_bind_template_child (widget_class, CcPrintersPanel, content);
@@ -1249,8 +1251,6 @@ cc_printers_panel_init (CcPrintersPanel *self)
                                                  g_str_equal,
                                                  g_free,
                                                  NULL);
-
-  g_type_ensure (CC_TYPE_PERMISSION_INFOBAR);
 
   g_object_set_data_full (self->reference, "self", self, NULL);
 

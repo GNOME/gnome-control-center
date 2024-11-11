@@ -809,6 +809,7 @@ cc_date_time_page_class_init (CcDateTimePageClass *klass)
   object_class->dispose = cc_date_time_page_dispose;
 
   g_type_ensure (CC_TYPE_LIST_ROW);
+  g_type_ensure (CC_TYPE_PERMISSION_INFOBAR);
   g_type_ensure (CC_TYPE_TIME_EDITOR);
   g_type_ensure (CC_TYPE_TZ_DIALOG);
   g_type_ensure (G_DESKTOP_TYPE_CLOCK_FORMAT);

@@ -642,6 +642,7 @@ cc_user_page_class_init (CcUserPageClass * klass)
                                                            FALSE,
                                                            G_PARAM_READABLE));
     g_type_ensure (CC_TYPE_LIST_ROW);
+    g_type_ensure (CC_TYPE_PERMISSION_INFOBAR);
 
     gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/system/users/cc-user-page.ui");
 

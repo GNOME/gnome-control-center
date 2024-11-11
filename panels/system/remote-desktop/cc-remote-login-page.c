@@ -496,6 +496,8 @@ cc_remote_login_page_class_init (CcRemoteLoginPageClass * klass)
 
   object_class->dispose = cc_remote_login_page_dispose;
 
+  g_type_ensure (CC_TYPE_PERMISSION_INFOBAR);
+
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/system/remote-desktop/cc-remote-login-page.ui");
 
   gtk_widget_class_bind_template_child (widget_class, CcRemoteLoginPage, hostname_row);
