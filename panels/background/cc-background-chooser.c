@@ -336,7 +336,7 @@ cc_background_chooser_select_file (CcBackgroundChooser *self)
   toplevel = (GtkWindow*) gtk_widget_get_native (GTK_WIDGET (self));
 
   file_dialog = gtk_file_dialog_new ();
-  gtk_file_dialog_set_title (file_dialog, _("Select a picture"));
+  gtk_file_dialog_set_title (file_dialog, _("Select Picture"));
   gtk_file_dialog_set_modal (file_dialog, TRUE);
 
   filter = gtk_file_filter_new ();
