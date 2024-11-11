@@ -1771,8 +1771,9 @@ cc_applications_panel_class_init (CcApplicationsPanelClass *klass)
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
   g_type_ensure (CC_TYPE_DEFAULT_APPS_PAGE);
-  g_type_ensure (CC_TYPE_REMOVABLE_MEDIA_SETTINGS);
+  g_type_ensure (CC_TYPE_LIST_ROW);
   g_type_ensure (CC_TYPE_LIST_ROW_INFO_BUTTON);
+  g_type_ensure (CC_TYPE_REMOVABLE_MEDIA_SETTINGS);
 
   object_class->dispose = cc_applications_panel_dispose;
   object_class->finalize = cc_applications_panel_finalize;
@@ -1869,8 +1870,6 @@ cc_applications_panel_init (CcApplicationsPanel *self)
 #endif
 
   g_resources_register (cc_applications_get_resource ());
-
-  g_type_ensure (CC_TYPE_LIST_ROW);
 
   gtk_widget_init_template (GTK_WIDGET (self));
 
