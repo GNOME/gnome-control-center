@@ -7,10 +7,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center HEAD\n"
-"Report-Msgid-Bugs-To: http://gitlab.gnome.org/GNOME/gnome-control-center/"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2024-09-09 13:07+0000\n"
-"PO-Revision-Date: 2024-09-10 11:07+0200\n"
+"POT-Creation-Date: 2024-11-11 00:41+0000\n"
+"PO-Revision-Date: 2024-11-12 20:27+0100\n"
 "Last-Translator: Quentin PAGÈS\n"
 "Language-Team: Tot en òc\n"
 "Language: oc\n"
@@ -22,36 +22,36 @@ msgstr ""
 "X-DamnedLies-Scope: partial\n"
 "X-Project-Style: gnome\n"
 
-#: panels/applications/cc-applications-panel.c:783
+#: panels/applications/cc-applications-panel.c:789
 msgid "App is not sandboxed"
 msgstr "L’app es pas isolada"
 
-#: panels/applications/cc-applications-panel.c:828
+#: panels/applications/cc-applications-panel.c:834
 msgid "System Bus"
 msgstr "Bus sistèma"
 
-#: panels/applications/cc-applications-panel.c:828
-#: panels/applications/cc-applications-panel.c:830
-#: panels/applications/cc-applications-panel.c:843
-#: panels/applications/cc-applications-panel.c:848
+#: panels/applications/cc-applications-panel.c:834
+#: panels/applications/cc-applications-panel.c:836
+#: panels/applications/cc-applications-panel.c:849
+#: panels/applications/cc-applications-panel.c:854
 msgid "Full access"
 msgstr "Accès complèt"
 
-#: panels/applications/cc-applications-panel.c:830
+#: panels/applications/cc-applications-panel.c:836
 msgid "Session Bus"
 msgstr "Bus de session"
 
-#: panels/applications/cc-applications-panel.c:834
+#: panels/applications/cc-applications-panel.c:840
 #: panels/privacy/cc-bolt-page.ui:240 panels/privacy/cc-bolt-page.ui:284
 #: panels/privacy/cc-privacy-panel.ui:75
 msgid "Devices"
 msgstr "Periferics"
 
-#: panels/applications/cc-applications-panel.c:834
+#: panels/applications/cc-applications-panel.c:840
 msgid "Full access to /dev"
 msgstr "Accès complèt a /dev"
 
-#: panels/applications/cc-applications-panel.c:838
+#: panels/applications/cc-applications-panel.c:844
 #: panels/network/cc-network-panel.ui:8
 #: panels/network/gnome-network-panel.desktop.in:3
 #: panels/network/network-mobile.ui:235 panels/wwan/cc-wwan-device-page.ui:61
@@ -59,38 +59,38 @@ msgstr "Accès complèt a /dev"
 msgid "Network"
 msgstr "Ret"
 
-#: panels/applications/cc-applications-panel.c:838
+#: panels/applications/cc-applications-panel.c:844
 msgid "Has network access"
 msgstr "A accès a la ret"
 
-#: panels/applications/cc-applications-panel.c:843
-#: panels/applications/cc-applications-panel.c:845
+#: panels/applications/cc-applications-panel.c:849
+#: panels/applications/cc-applications-panel.c:851
 #: panels/search/cc-search-locations-dialog.c:412
 msgid "Home"
 msgstr "Dorsièr personal"
 
-#: panels/applications/cc-applications-panel.c:845
-#: panels/applications/cc-applications-panel.c:850
+#: panels/applications/cc-applications-panel.c:851
+#: panels/applications/cc-applications-panel.c:856
 msgid "Read-only"
 msgstr "Lectura sola"
 
-#: panels/applications/cc-applications-panel.c:848
-#: panels/applications/cc-applications-panel.c:850
+#: panels/applications/cc-applications-panel.c:854
+#: panels/applications/cc-applications-panel.c:856
 msgid "File System"
 msgstr "Sistèma de fichièrs"
 
-#: panels/applications/cc-applications-panel.c:854
+#: panels/applications/cc-applications-panel.c:860
 #: panels/keyboard/01-launchers.xml.in:6
 #: shell/appdata/org.gnome.Settings.appdata.xml.in:7 shell/cc-window.c:798
 #: shell/cc-window.ui:20 shell/org.gnome.Settings.desktop.in:3
 msgid "Settings"
 msgstr "Paramètres"
 
-#: panels/applications/cc-applications-panel.c:854
+#: panels/applications/cc-applications-panel.c:860
 msgid "Can change settings"
 msgstr "Pòt modificar los reglatges"
 
-#: panels/applications/cc-applications-panel.c:856
+#: panels/applications/cc-applications-panel.c:862
 #, c-format
 msgid ""
 "<b>%s</b> requires access to the following system resources. To stop this "
@@ -99,20 +99,20 @@ msgstr ""
 "<b>%s</b> requerís l’accès a las ressorsas sistèma seguentas. Per arrestar "
 "aqueste accès, l’aplicacion deu èsser suprimida."
 
-#: panels/applications/cc-applications-panel.c:1188
+#: panels/applications/cc-applications-panel.c:1194
 #, c-format
 msgid "%u file and link type that is opened by the app"
 msgid_plural "%u file and link types that are opened by the app"
 msgstr[0] "%u tipe de fichièr e ligam dubèrt per l’aplicacion"
 msgstr[1] "%u tipes de fichièr e ligam dubèrts per l’aplicacion"
 
-#: panels/applications/cc-applications-panel.c:1195
+#: panels/applications/cc-applications-panel.c:1201
 #, c-format
 msgid "<b>%s</b> is used to open the following types of files and links."
 msgstr "<b>%s</b> dubrís aquestes tipes de fichièrs e ligams."
 
 #. Translators: '%s' is the formatted size, e.g. "26.2 MB"
-#: panels/applications/cc-applications-panel.c:1261
+#: panels/applications/cc-applications-panel.c:1267
 #, c-format
 msgid "%s of disk space used"
 msgstr "%s de l’espaci disc utilizat"
@@ -152,11 +152,9 @@ msgid "Automat_ically Launch Apps"
 msgstr "Aviar automat_icament las aplicacions"
 
 #: panels/applications/cc-applications-panel.ui:123
-#, fuzzy
-#| msgid "Select an app to run when a camera is connected"
 msgid "Start apps when media is connected or inserted"
 msgstr ""
-"Seleccionar una aplicacion d'aviar quand se connècta un aparelh de fòto"
+"Seleccionar una aplicacion d'aviar quand un mèdia es connectat o inserit"
 
 #: panels/applications/cc-applications-panel.ui:144
 msgid "App Settings"
@@ -1675,7 +1673,7 @@ msgid "0 seconds"
 msgstr "0 segondas"
 
 #. translators: This is the default hotspot name, need to be less than 32-bytes
-#: panels/common/hostname-helper.c:177
+#: panels/common/hostname-helper.c:221
 msgctxt "hotspot"
 msgid "Hotspot"
 msgstr "Punt d’accès"
@@ -3024,7 +3022,7 @@ msgstr "Cap d'adaptator Wi-Fi pas trobat"
 msgid "Make sure you have a Wi-Fi adapter plugged and turned on"
 msgstr "Asseguratz-vos qu'avètz un adaptator Wi-Fi brancat e operacional"
 
-#: panels/network/cc-wifi-panel.ui:82 panels/wwan/cc-wwan-panel.ui:64
+#: panels/network/cc-wifi-panel.ui:82 panels/wwan/cc-wwan-panel.ui:65
 msgid "Airplane Mode On"
 msgstr "Mòde avion activat"
 
@@ -6256,61 +6254,61 @@ msgid "1 hour"
 msgstr "1 ora"
 
 #. Translators: Option for "Blank screen" in "Screen Lock" page
-#: panels/privacy/cc-screen-page.c:130
+#: panels/privacy/cc-screen-page.c:133
 msgctxt "blank_screen"
 msgid "1 minute"
 msgstr "1 minuta"
 
 #. Translators: Option for "Blank screen" in "Screen Lock" page
-#: panels/privacy/cc-screen-page.c:133
+#: panels/privacy/cc-screen-page.c:136
 msgctxt "blank_screen"
 msgid "2 minutes"
 msgstr "2 minutas"
 
 #. Translators: Option for "Blank screen" in "Screen Lock" page
-#: panels/privacy/cc-screen-page.c:136
+#: panels/privacy/cc-screen-page.c:139
 msgctxt "blank_screen"
 msgid "3 minutes"
 msgstr "3 minutas"
 
 #. Translators: Option for "Blank screen" in "Screen Lock" page
-#: panels/privacy/cc-screen-page.c:139
+#: panels/privacy/cc-screen-page.c:142
 msgctxt "blank_screen"
 msgid "4 minutes"
 msgstr "4 minutas"
 
 #. Translators: Option for "Blank screen" in "Screen Lock" page
-#: panels/privacy/cc-screen-page.c:142
+#: panels/privacy/cc-screen-page.c:145
 msgctxt "blank_screen"
 msgid "5 minutes"
 msgstr "5 minutas"
 
 #. Translators: Option for "Blank screen" in "Screen Lock" page
-#: panels/privacy/cc-screen-page.c:145
+#: panels/privacy/cc-screen-page.c:148
 msgctxt "blank_screen"
 msgid "8 minutes"
 msgstr "8 minutas"
 
 #. Translators: Option for "Blank screen" in "Screen Lock" page
-#: panels/privacy/cc-screen-page.c:148
+#: panels/privacy/cc-screen-page.c:151
 msgctxt "blank_screen"
 msgid "10 minutes"
 msgstr "10 minutas"
 
 #. Translators: Option for "Blank screen" in "Screen Lock" page
-#: panels/privacy/cc-screen-page.c:151
+#: panels/privacy/cc-screen-page.c:154
 msgctxt "blank_screen"
 msgid "12 minutes"
 msgstr "12 minutas"
 
 #. Translators: Option for "Blank screen" in "Screen Lock" page
-#: panels/privacy/cc-screen-page.c:154
+#: panels/privacy/cc-screen-page.c:157
 msgctxt "blank_screen"
 msgid "15 minutes"
 msgstr "15 minutas"
 
 #. Translators: Option for "Blank screen" in "Screen Lock" page
-#: panels/privacy/cc-screen-page.c:157
+#: panels/privacy/cc-screen-page.c:160
 msgctxt "blank_screen"
 msgid "Never"
 msgstr "Jamai"
@@ -7286,83 +7284,83 @@ msgstr "_Format de l'ora"
 msgid "_24-hour"
 msgstr "_24 oras"
 
-#: panels/system/datetime/cc-datetime-page.ui:198
+#: panels/system/datetime/cc-datetime-page.ui:199
 msgid "AM / _PM"
 msgstr "AM / _PM"
 
-#: panels/system/datetime/cc-datetime-page.ui:211
+#: panels/system/datetime/cc-datetime-page.ui:213
 msgid "Clock &amp; Calendar"
 msgstr "Relòtge e calandièr"
 
-#: panels/system/datetime/cc-datetime-page.ui:212
+#: panels/system/datetime/cc-datetime-page.ui:214
 msgid "Control how the time and date is shown in the top bar"
 msgstr "Contrarotlar coma la data e l’ora s‘afichan a la barra superior"
 
-#: panels/system/datetime/cc-datetime-page.ui:215
+#: panels/system/datetime/cc-datetime-page.ui:217
 msgid "_Week Day"
 msgstr "_Jorn de la setmana"
 
-#: panels/system/datetime/cc-datetime-page.ui:221
+#: panels/system/datetime/cc-datetime-page.ui:223
 msgid "D_ate"
 msgstr "D_ata"
 
-#: panels/system/datetime/cc-datetime-page.ui:227
+#: panels/system/datetime/cc-datetime-page.ui:229
 msgid "_Seconds"
 msgstr "_Segondas"
 
-#: panels/system/datetime/cc-datetime-page.ui:233
+#: panels/system/datetime/cc-datetime-page.ui:235
 msgid "Week _Numbers"
 msgstr "_Numèro de las setmanas"
 
-#: panels/system/datetime/cc-datetime-page.ui:234
+#: panels/system/datetime/cc-datetime-page.ui:236
 msgid "Shown in the dropdown calendar"
 msgstr "Afichar al menú desplegable de l’agenda"
 
-#: panels/system/datetime/cc-datetime-page.ui:270
+#: panels/system/datetime/cc-datetime-page.ui:272
 msgid "January"
 msgstr "genièr"
 
-#: panels/system/datetime/cc-datetime-page.ui:271
+#: panels/system/datetime/cc-datetime-page.ui:273
 msgid "February"
 msgstr "febrièr"
 
-#: panels/system/datetime/cc-datetime-page.ui:272
+#: panels/system/datetime/cc-datetime-page.ui:274
 msgid "March"
 msgstr "març"
 
-#: panels/system/datetime/cc-datetime-page.ui:273
+#: panels/system/datetime/cc-datetime-page.ui:275
 msgid "April"
 msgstr "abril"
 
-#: panels/system/datetime/cc-datetime-page.ui:274
+#: panels/system/datetime/cc-datetime-page.ui:276
 msgid "May"
 msgstr "mai"
 
-#: panels/system/datetime/cc-datetime-page.ui:275
+#: panels/system/datetime/cc-datetime-page.ui:277
 msgid "June"
 msgstr "junh"
 
-#: panels/system/datetime/cc-datetime-page.ui:276
+#: panels/system/datetime/cc-datetime-page.ui:278
 msgid "July"
 msgstr "julhet"
 
-#: panels/system/datetime/cc-datetime-page.ui:277
+#: panels/system/datetime/cc-datetime-page.ui:279
 msgid "August"
 msgstr "agost"
 
-#: panels/system/datetime/cc-datetime-page.ui:278
+#: panels/system/datetime/cc-datetime-page.ui:280
 msgid "September"
 msgstr "setembre"
 
-#: panels/system/datetime/cc-datetime-page.ui:279
+#: panels/system/datetime/cc-datetime-page.ui:281
 msgid "October"
 msgstr "octobre"
 
-#: panels/system/datetime/cc-datetime-page.ui:280
+#: panels/system/datetime/cc-datetime-page.ui:282
 msgid "November"
 msgstr "novembre"
 
-#: panels/system/datetime/cc-datetime-page.ui:281
+#: panels/system/datetime/cc-datetime-page.ui:283
 msgid "December"
 msgstr "decembre"
 
@@ -7556,7 +7554,7 @@ msgid ""
 "the existing screen resolution"
 msgstr ""
 "Partejatz vòstre burèu existent amb d'autres periferics. La connexion a "
-"distància utiliza la resolucion de l'ecran existenta."
+"distància utiliza la resolucion de l'ecran existenta"
 
 #: panels/system/remote-desktop/cc-desktop-sharing-page.ui:27
 msgid "_Desktop Sharing"
@@ -9067,7 +9065,7 @@ msgid ""
 msgstr ""
 "Per modificar un acorchi, causissètz l’accion « Mandar las quichadas sus las "
 "tòcas », quichatz sul boton de l'acorchi de clavièr e tenètz quichadas las "
-"novèlas tòcas. o quichatz sus la tòca Retorn arrièr per anullar."
+"novèlas tòcas. o quichatz sus la tòca Retorn arrièr per anullar"
 
 #: panels/wacom/calibrator/calibrator.ui:51
 msgid ""
@@ -9105,15 +9103,15 @@ msgctxt "Wacom action-type"
 msgid "Show On-Screen Help"
 msgstr "Afichar l'ajuda a l'ecran"
 
-#: panels/wacom/cc-wacom-device.c:437
+#: panels/wacom/cc-wacom-device.c:458
 msgid "Tablet mounted on laptop panel"
 msgstr "Tauleta montada sul portatil"
 
-#: panels/wacom/cc-wacom-device.c:439
+#: panels/wacom/cc-wacom-device.c:460
 msgid "Tablet mounted on external display"
 msgstr "Tauleta montada per un monitor extèrn"
 
-#: panels/wacom/cc-wacom-device.c:441
+#: panels/wacom/cc-wacom-device.c:462
 msgid "External tablet device"
 msgstr "Aparelh tauleta extèrna"
 
@@ -9239,19 +9237,19 @@ msgstr "Pression ressentida sus la _goma"
 msgid "Eraser pressure"
 msgstr "Pression de la goma"
 
-#: panels/wacom/cc-wacom-tool.c:362
+#: panels/wacom/cc-wacom-tool.c:365
 msgid "Airbrush stylus with pressure, tilt, and integrated slider"
 msgstr "Estilò aerograf amb pression, enclinason, e barra de defilament"
 
-#: panels/wacom/cc-wacom-tool.c:364
+#: panels/wacom/cc-wacom-tool.c:367
 msgid "Art pen with pressure, tilt, and rotation"
 msgstr "Estilo aerograf amb pression, enclinason, e rotacion"
 
-#: panels/wacom/cc-wacom-tool.c:366
+#: panels/wacom/cc-wacom-tool.c:369
 msgid "Stylus with pressure and tilt"
 msgstr "Estilo amb pression e enclinason"
 
-#: panels/wacom/cc-wacom-tool.c:368
+#: panels/wacom/cc-wacom-tool.c:371
 msgid "Stylus with pressure"
 msgstr "Pression de la punta de l’estilet"
 
@@ -9764,19 +9762,19 @@ msgstr "Cap d'adaptatorWWAN pas trobat"
 msgid "Make sure you have a Wireless Wan/Cellular device"
 msgstr "Asseguratz-vos qu'avètz un aparelh sens fial/mobil"
 
-#: panels/wwan/cc-wwan-panel.ui:65
+#: panels/wwan/cc-wwan-panel.ui:66
 msgid "Wireless Wan is disabled when airplane mode is on"
 msgstr "Lo ret sens fial es desactivat en mòde avion"
 
-#: panels/wwan/cc-wwan-panel.ui:71
+#: panels/wwan/cc-wwan-panel.ui:72
 msgid "_Turn off Airplane Mode"
 msgstr "_Desactivar lo mòde avion"
 
-#: panels/wwan/cc-wwan-panel.ui:106
+#: panels/wwan/cc-wwan-panel.ui:107
 msgid "Data Connection"
 msgstr "Connexion de donadas"
 
-#: panels/wwan/cc-wwan-panel.ui:107
+#: panels/wwan/cc-wwan-panel.ui:108
 msgid "SIM card used for internet"
 msgstr "Carta SIM utilizada per internet"
 
