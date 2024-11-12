@@ -11,6 +11,10 @@ template $CcInputListBox: Adw.Bin {
       "boxed-list",
     ]
 
+    accessibility {
+      label: _("Input sources");
+    }
+
     Adw.ButtonRow add_input_row {
       title: _("_Add Input Source");
       start-icon-name: "list-add-symbolic";

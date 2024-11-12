@@ -140,7 +140,7 @@ template $CcSharingPanel: $CcPanel {
           }
         }
 
-        Adw.PreferencesGroup {
+        Adw.PreferencesGroup media_sharing_folders_group {
           title: _("Folders");
 
           ListBox shared_folders_listbox {
@@ -149,6 +149,12 @@ template $CcSharingPanel: $CcPanel {
             styles [
               "boxed-list",
             ]
+
+            accessibility {
+              labelled-by: [
+                media_sharing_folders_group,
+              ];
+            }
           }
         }
       };

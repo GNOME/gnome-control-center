@@ -32,6 +32,10 @@ template $NetDeviceEthernet: Adw.PreferencesGroup {
     styles [
       "boxed-list",
     ]
+
+    accessibility {
+      label: _("Wired");
+    }
   }
 
   Stack connection_stack {
@@ -42,6 +46,10 @@ template $NetDeviceEthernet: Adw.PreferencesGroup {
       styles [
         "boxed-list",
       ]
+
+      accessibility {
+        label: _("Wired");
+      }
     }
 
     ListBox details_listbox {
