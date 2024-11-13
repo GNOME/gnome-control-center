@@ -594,7 +594,7 @@ static GtkWidget *
 create_row_for_place (CcSearchLocationsPage *self, Place *place)
 {
   AdwActionRow *row;
-  GtkWidget *index_switch, *remove_button;
+  GtkWidget *index_switch;
 
   row = ADW_ACTION_ROW (adw_action_row_new ());
   adw_preferences_row_set_title (ADW_PREFERENCES_ROW (row), place->display_name);
@@ -606,7 +606,7 @@ create_row_for_place (CcSearchLocationsPage *self, Place *place)
 
   if (place->place_type == PLACE_OTHER)
     {
-      GtkWidget *open_location_button;
+      GtkWidget *open_location_button, *remove_button;
 
       open_location_button = gtk_button_new_from_icon_name ("folder-open-symbolic");
 
