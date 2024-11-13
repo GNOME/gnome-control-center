@@ -84,10 +84,7 @@ update_check_button_for_list (GtkWidget   *list_box,
       if (check == NULL || region == NULL)
         continue;
 
-      if (g_strcmp0 (locale_id, region) == 0)
-        gtk_widget_set_opacity (check, 1.0);
-      else
-        gtk_widget_set_opacity (check, 0.0);
+      gtk_widget_set_visible (check, g_strcmp0 (locale_id, region) == 0);
     }
 }
 
@@ -127,13 +124,13 @@ padded_label_new (const char *text)
 {
         GtkWidget *widget, *label;
 
-        widget = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 10);
-        g_object_set (widget, "margin-top", 4, NULL);
-        g_object_set (widget, "margin-bottom", 4, NULL);
-        g_object_set (widget, "margin-start", 10, NULL);
-        g_object_set (widget, "margin-end", 10, NULL);
+        widget = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
+        g_object_set (widget, "margin-start", 9, NULL);
+        g_object_set (widget, "margin-end", 9, NULL);
 
         label = gtk_label_new (text);
+        g_object_set (label, "margin-top", 12, NULL);
+        g_object_set (label, "margin-bottom", 12, NULL);
         gtk_label_set_ellipsize (GTK_LABEL (label), PANGO_ELLIPSIZE_END);
         gtk_box_append (GTK_BOX (widget), label);
 
@@ -150,44 +147,6 @@ on_stop_search (CcFormatChooser *self)
     gtk_editable_set_text (GTK_EDITABLE (self->region_filter_entry), "");
   else
     adw_dialog_close (ADW_DIALOG (self));
-}
-
-static void
-set_preview_button_visible (GtkWidget *row,
-                            gboolean   visible)
-{
-  GtkWidget *button;
-
-  button = g_object_get_data (G_OBJECT (row), "preview-button");
-  g_assert (button);
-
-  gtk_widget_set_opacity (button, visible);
-  gtk_widget_set_sensitive (button, visible);
-}
-
-static void
-format_chooser_split_view_collapsed_cb (CcFormatChooser *self)
-{
-  GtkWidget *child;
-  gboolean is_collapsed;
-
-  is_collapsed = adw_overlay_split_view_get_collapsed (ADW_OVERLAY_SPLIT_VIEW (self->split_view));
-
-  for (child = gtk_widget_get_first_child (self->common_region_listbox);
-       child;
-       child = gtk_widget_get_next_sibling (child))
-    {
-      if (GTK_IS_LIST_BOX_ROW (child))
-        set_preview_button_visible (child, is_collapsed);
-    }
-
-  for (child = gtk_widget_get_first_child (self->region_listbox);
-       child;
-       child = gtk_widget_get_next_sibling (child))
-    {
-      if (GTK_IS_LIST_BOX_ROW (child))
-        set_preview_button_visible (child, is_collapsed);
-    }
 }
 
 static void
@@ -222,8 +181,7 @@ region_widget_new (CcFormatChooser *self,
         gchar *locale_name;
         gchar *locale_current_name;
         gchar *locale_untranslated_name;
-        GtkWidget *row, *box, *button;
-        GtkWidget *check;
+        GtkWidget *row, *check, *box, *button;
 
         locale_name = gnome_get_country_from_locale (locale_id, locale_id);
         if (!locale_name)
@@ -239,18 +197,23 @@ region_widget_new (CcFormatChooser *self,
         check = gtk_image_new_from_icon_name ("object-select-symbolic");
         gtk_widget_set_halign (check, GTK_ALIGN_START);
         gtk_widget_set_hexpand (check, TRUE);
-        gtk_widget_set_opacity (check, 0.0);
+        gtk_widget_set_visible (check, FALSE);
         gtk_box_append (GTK_BOX (box), check);
 
         button = gtk_button_new_from_icon_name ("view-reveal-symbolic");
         gtk_widget_set_tooltip_text (button, _("Preview"));
+        gtk_widget_set_hexpand (button, TRUE);
         gtk_widget_add_css_class (button, "flat");
+        gtk_widget_set_valign (button, GTK_ALIGN_CENTER);
+        gtk_widget_set_halign (button, GTK_ALIGN_END);
         g_signal_connect_object (button, "clicked", G_CALLBACK (preview_button_clicked_cb),
                                  self, G_CONNECT_SWAPPED);
+        g_object_bind_property (self->split_view, "collapsed",
+                                button, "visible",
+                                G_BINDING_SYNC_CREATE);
         gtk_box_append (GTK_BOX (box), button);
 
         g_object_set_data (G_OBJECT (row), "check", check);
-        g_object_set_data (G_OBJECT (row), "preview-button", button);
         g_object_set_data_full (G_OBJECT (row), "locale-id", g_strdup (locale_id), g_free);
         g_object_set_data_full (G_OBJECT (row), "locale-name", locale_name, g_free);
         g_object_set_data_full (G_OBJECT (row), "locale-current-name", locale_current_name, g_free);
@@ -460,7 +423,6 @@ cc_format_chooser_class_init (CcFormatChooserClass *klass)
         gtk_widget_class_bind_template_child (widget_class, CcFormatChooser, region_list_stack);
         gtk_widget_class_bind_template_child (widget_class, CcFormatChooser, format_preview);
 
-        gtk_widget_class_bind_template_callback (widget_class, format_chooser_split_view_collapsed_cb);
         gtk_widget_class_bind_template_callback (widget_class, format_chooser_close_sidebar_button_pressed_cb);
         gtk_widget_class_bind_template_callback (widget_class, select_button_clicked_cb);
         gtk_widget_class_bind_template_callback (widget_class, filter_changed);
@@ -482,7 +444,6 @@ cc_format_chooser_init (CcFormatChooser *chooser)
 
         add_all_regions (chooser);
         gtk_list_box_invalidate_filter (GTK_LIST_BOX (chooser->region_listbox));
-        format_chooser_split_view_collapsed_cb (chooser);
 }
 
 CcFormatChooser *
