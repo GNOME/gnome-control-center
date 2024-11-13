@@ -855,13 +855,31 @@ cc_keyboard_manager_new (void)
   return g_object_new (CC_TYPE_KEYBOARD_MANAGER, NULL);
 }
 
-void
-cc_keyboard_manager_load_shortcuts (CcKeyboardManager *self)
+static void
+load_shortcuts_thread (GTask        *task,
+                       gpointer      source_object,
+                       gpointer      task_data,
+                       GCancellable *cancellable)
 {
-  g_return_if_fail (CC_IS_KEYBOARD_MANAGER (self));
+  CcKeyboardManager *self = CC_KEYBOARD_MANAGER (source_object);
 
   reload_sections (self);
   add_shortcuts (self);
+
+  g_task_return_pointer (task, source_object, g_object_unref);
+}
+
+void
+cc_keyboard_manager_load_shortcuts (CcKeyboardManager *self,
+                                    GCancellable      *cancellable)
+{
+  g_autoptr(GTask) task = NULL;
+
+  g_return_if_fail (CC_IS_KEYBOARD_MANAGER (self));
+
+  task = g_task_new (self, cancellable, NULL, NULL);
+  g_task_set_return_on_cancel (task, TRUE);
+  g_task_run_in_thread (task, load_shortcuts_thread);
 }
 
 /**

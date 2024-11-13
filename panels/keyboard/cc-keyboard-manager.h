@@ -33,7 +33,8 @@ G_DECLARE_FINAL_TYPE (CcKeyboardManager, cc_keyboard_manager, CC, KEYBOARD_MANAG
 
 CcKeyboardManager*   cc_keyboard_manager_new                     (void);
 
-void                 cc_keyboard_manager_load_shortcuts          (CcKeyboardManager  *self);
+void                 cc_keyboard_manager_load_shortcuts          (CcKeyboardManager  *self,
+                                                                  GCancellable       *cancellable);
 
 CcKeyboardItem*      cc_keyboard_manager_create_custom_shortcut  (CcKeyboardManager  *self);
 

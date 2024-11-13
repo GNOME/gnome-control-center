@@ -66,6 +66,7 @@ struct _CcKeyboardShortcutDialog
   GListStore           *visible_section;
   GtkFlattenListModel  *filtered_shortcuts;
 
+  GCancellable         *cancellable;
   CcKeyboardManager    *manager;
   GStrv                 search_terms;
  };
@@ -460,6 +461,9 @@ cc_keyboard_shortcut_dialog_finalize (GObject *object)
 {
   CcKeyboardShortcutDialog *self = CC_KEYBOARD_SHORTCUT_DIALOG (object);
 
+  g_cancellable_cancel (self->cancellable);
+  g_clear_object (&self->cancellable);
+
   g_clear_object (&self->manager);
   g_clear_object (&self->sections);
   g_clear_pointer (&self->search_terms, g_strfreev);
@@ -514,6 +518,7 @@ cc_keyboard_shortcut_dialog_init (CcKeyboardShortcutDialog *self)
   gtk_widget_init_template (GTK_WIDGET (self));
   shortcut_dialog_visible_page_changed_cb (self);
 
+  self->cancellable = g_cancellable_new ();
   self->manager = cc_keyboard_manager_new ();
 
   shortcut_dialog_visible_page_changed_cb (self);
@@ -533,7 +538,7 @@ cc_keyboard_shortcut_dialog_init (CcKeyboardShortcutDialog *self)
                            G_CALLBACK (shortcuts_loaded_cb),
                            self, G_CONNECT_SWAPPED);
 
-  cc_keyboard_manager_load_shortcuts (self->manager);
+  cc_keyboard_manager_load_shortcuts (self->manager, self->cancellable);
 
   gtk_list_box_bind_model (self->section_list_box,
                            G_LIST_MODEL (self->sections),
