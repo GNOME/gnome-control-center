@@ -191,7 +191,7 @@ gsettings_desktop_dep = dependency('gsettings-desktop-schemas', version: '>= 47.
 libxml_dep = dependency('libxml-2.0')
 pulse_dep = dependency('libpulse', version: pulse_req_version)
 pulse_mainloop_dep = dependency('libpulse-mainloop-glib', version: pulse_req_version)
-upower_glib_dep = dependency('upower-glib', version: '>= 0.99.8')
+upower_glib_dep = dependency('upower-glib', version: '>= 1.90.6')
 gudev_dep = dependency('gudev-1.0', version: '>= 232')
 x11_dep = dependency('x11', version: '>= 1.8')
 xi_dep = dependency('xi', version: '>= 1.2')
