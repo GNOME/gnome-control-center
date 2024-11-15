@@ -3,6 +3,14 @@
  * SPDX-FileCopyrightText: 2024 GNOME Foundation, Inc.
  */
 
+/* Break scheduling */
+.break-schedule-row popover listview header {
+  /* Override the default GTK theming for the header row of a listview because
+   * that much top padding looks weird when the listview is the only child of a
+   * popover. The original padding was 18px. */
+  padding-top: 6px;
+}
+
 /* Screen time statistics */
 row.screen-time-statistics-row box.main-box {
   margin: 12px 16px 12px 16px;
