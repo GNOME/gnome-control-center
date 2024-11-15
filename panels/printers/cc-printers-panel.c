@@ -669,7 +669,7 @@ on_printer_deleted (CcPrintersPanel *self,
       self->toast = adw_toast_new ("");
 
       adw_toast_overlay_add_toast (self->toast_overlay, self->toast);
-      adw_toast_set_button_label (self->toast, _("Undo"));
+      adw_toast_set_button_label (self->toast, _("_Undo"));
       adw_toast_set_timeout (self->toast, 10);
 
       g_signal_connect_swapped (self->toast, "button-clicked",
