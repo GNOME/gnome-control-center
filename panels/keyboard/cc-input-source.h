@@ -18,6 +18,7 @@
 #pragma once
 
 #include <glib-object.h>
+#include <gtk/gtk.h>
 
 G_BEGIN_DECLS
 
@@ -46,6 +47,7 @@ const gchar     *cc_input_source_get_layout         (CcInputSource *source);
 
 const gchar     *cc_input_source_get_layout_variant (CcInputSource *source);
 
-void             cc_input_source_launch_previewer   (CcInputSource *source);
+void             cc_input_source_launch_previewer   (CcInputSource *source,
+                                                     GtkWidget     *requester);
 
 G_END_DECLS

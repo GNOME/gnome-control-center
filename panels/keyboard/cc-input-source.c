@@ -18,6 +18,10 @@
 #include <config.h>
 #include "cc-input-source.h"
 
+#ifdef GDK_WINDOWING_WAYLAND
+#include <gdk/wayland/gdkwayland.h>
+#endif
+
 enum
 {
   SIGNAL_LABEL_CHANGED,
@@ -83,24 +87,75 @@ cc_input_source_get_layout_variant (CcInputSource *source)
   return CC_INPUT_SOURCE_GET_CLASS (source)->get_layout_variant (source);
 }
 
-void
-cc_input_source_launch_previewer (CcInputSource *source)
+static void
+launch_viewer (CcInputSource *source,
+               const gchar   *handle)
 {
   const gchar *layout, *layout_variant;
-  g_autofree gchar *commandline = NULL;
+  g_autoptr(GPtrArray) argv = NULL;
+  g_autofree gchar *layout_desc = NULL;
 
-  g_return_if_fail (CC_IS_INPUT_SOURCE (source));
+  argv = g_ptr_array_new ();
+  g_ptr_array_add (argv, KEYBOARD_PREVIEWER_EXEC);
+
+  if (handle)
+    {
+      g_ptr_array_add (argv, "--parent-handle");
+      g_ptr_array_add (argv, (gpointer) handle);
+    }
 
   layout = cc_input_source_get_layout (source);
   layout_variant = cc_input_source_get_layout_variant (source);
 
   if (layout_variant && layout_variant[0])
-    commandline = g_strdup_printf (KEYBOARD_PREVIEWER_EXEC " \"%s+%s\"",
-                                   layout, layout_variant);
+    layout_desc = g_strdup_printf ("%s+%s", layout, layout_variant);
   else
-    commandline = g_strdup_printf (KEYBOARD_PREVIEWER_EXEC " %s",
-                                   layout);
+    layout_desc = g_strdup_printf ("%s", layout);
 
-  g_debug ("Launching keyboard previewer with command line: '%s'\n", commandline);
-  g_spawn_command_line_async (commandline, NULL);
+  g_ptr_array_add (argv, layout_desc);
+  g_ptr_array_add (argv, NULL);
+
+  g_debug ("Launching keyboard previewer with layout: '%s'\n", layout_desc);
+  g_spawn_async (NULL, (gchar **) argv->pdata, NULL,
+                 G_SPAWN_DEFAULT, NULL, NULL, NULL, NULL);
+}
+
+#ifdef GDK_WINDOWING_WAYLAND
+static void
+toplevel_handle_exported (GdkToplevel *toplevel,
+                          const gchar *handle,
+                          gpointer     user_data)
+{
+  CcInputSource *source = user_data;
+
+  launch_viewer (source, handle);
+}
+#endif
+
+void
+cc_input_source_launch_previewer (CcInputSource *source,
+                                  GtkWidget     *requester)
+{
+  GdkDisplay *display G_GNUC_UNUSED;
+
+  g_return_if_fail (CC_IS_INPUT_SOURCE (source));
+
+#ifdef GDK_WINDOWING_WAYLAND
+  display = gtk_widget_get_display (GTK_WIDGET (requester));
+
+  if (GDK_IS_WAYLAND_DISPLAY (display))
+    {
+      GtkRoot *root = gtk_widget_get_root (GTK_WIDGET (requester));
+      GdkSurface *surface = gtk_native_get_surface (GTK_NATIVE (root));
+
+      gdk_wayland_toplevel_export_handle (GDK_TOPLEVEL (surface),
+                                          toplevel_handle_exported,
+                                          source,
+                                          NULL);
+    }
+  else
+#endif
+    {
+      launch_viewer (source, NULL);
+    }
 }

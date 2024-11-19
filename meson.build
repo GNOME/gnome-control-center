@@ -166,6 +166,7 @@ endif
 
 tecla_dep = dependency(
   'tecla',
+  version: '>=47.0',
   required: false
 )
 
