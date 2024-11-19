@@ -47,6 +47,7 @@ struct _CcFormatChooser {
   GtkWidget *region_title;
   GtkWidget *region_listbox;
   GtkWidget *close_sidebar_button;
+  GtkLabel *preview_title_label;
   CcFormatPreview *format_preview;
   gboolean adding;
   gboolean showing_extra;
@@ -92,12 +93,17 @@ static void
 set_locale_id (CcFormatChooser *chooser,
                const gchar     *locale_id)
 {
+        g_autofree gchar *locale_name = NULL;
+
         g_free (chooser->region);
         chooser->region = g_strdup (locale_id);
 
         update_check_button_for_list (chooser->region_listbox, locale_id);
         update_check_button_for_list (chooser->common_region_listbox, locale_id);
         cc_format_preview_set_region (chooser->format_preview, locale_id);
+
+        locale_name = gnome_get_country_from_locale (locale_id, locale_id);
+        gtk_label_set_label (chooser->preview_title_label, locale_name);
 }
 
 static gint
@@ -161,6 +167,7 @@ preview_button_clicked_cb (CcFormatChooser *self,
 {
   GtkWidget *row;
   const gchar *region;
+  const gchar *locale_name;
 
   g_assert (CC_IS_FORMAT_CHOOSER (self));
   g_assert (GTK_IS_WIDGET (button));
@@ -170,6 +177,8 @@ preview_button_clicked_cb (CcFormatChooser *self,
 
   region = g_object_get_data (G_OBJECT (row), "locale-id");
   cc_format_preview_set_region (self->format_preview, region);
+  locale_name = g_object_get_data (G_OBJECT (row), "locale-name");
+  gtk_label_set_label (self->preview_title_label, locale_name);
 
   adw_overlay_split_view_set_show_sidebar (ADW_OVERLAY_SPLIT_VIEW (self->split_view), TRUE);
 }
@@ -422,6 +431,7 @@ cc_format_chooser_class_init (CcFormatChooserClass *klass)
         gtk_widget_class_bind_template_child (widget_class, CcFormatChooser, region_listbox);
         gtk_widget_class_bind_template_child (widget_class, CcFormatChooser, region_list_stack);
         gtk_widget_class_bind_template_child (widget_class, CcFormatChooser, format_preview);
+        gtk_widget_class_bind_template_child (widget_class, CcFormatChooser, preview_title_label);
 
         gtk_widget_class_bind_template_callback (widget_class, format_chooser_close_sidebar_button_pressed_cb);
         gtk_widget_class_bind_template_callback (widget_class, select_button_clicked_cb);
