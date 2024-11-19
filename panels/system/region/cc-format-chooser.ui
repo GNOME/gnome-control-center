@@ -53,6 +53,7 @@
         <property name="content">
           <object class="AdwOverlaySplitView" id="split_view">
             <property name="sidebar-position">end</property>
+            <signal name="notify::collapsed" handler="collapsed_cb" object="CcFormatChooser" swapped="yes" />
 
             <property name="content">
               <object class="AdwToolbarView">

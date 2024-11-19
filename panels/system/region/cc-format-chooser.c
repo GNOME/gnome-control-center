@@ -156,6 +156,21 @@ on_stop_search (CcFormatChooser *self)
 }
 
 static void
+collapsed_cb (CcFormatChooser *self)
+{
+    if (!self->region)
+        return;
+
+    if (!adw_overlay_split_view_get_collapsed (ADW_OVERLAY_SPLIT_VIEW (self->split_view))) {
+        g_autofree gchar *locale_name = NULL;
+
+        cc_format_preview_set_region (self->format_preview, self->region);
+        locale_name = gnome_get_country_from_locale (self->region, self->region);
+        gtk_label_set_label (self->preview_title_label, locale_name);
+    }
+}
+
+static void
 format_chooser_close_sidebar_button_pressed_cb (CcFormatChooser *self)
 {
   adw_overlay_split_view_set_show_sidebar (ADW_OVERLAY_SPLIT_VIEW (self->split_view), FALSE);
@@ -438,6 +453,7 @@ cc_format_chooser_class_init (CcFormatChooserClass *klass)
         gtk_widget_class_bind_template_callback (widget_class, filter_changed);
         gtk_widget_class_bind_template_callback (widget_class, row_activated);
         gtk_widget_class_bind_template_callback (widget_class, on_stop_search);
+        gtk_widget_class_bind_template_callback (widget_class, collapsed_cb);
 }
 
 void
