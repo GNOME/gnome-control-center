@@ -17,9 +17,28 @@
             <child type="top">
               <object class="AdwHeaderBar" id="header_bar">
                 <property name="title-widget">
-                  <object class="AdwViewSwitcher">
-                    <property name="stack">stack</property>
-                    <property name="policy">wide</property>
+                  <object class="GtkStack" id="title_stack">
+                    <child>
+                      <object class="GtkStackPage">
+                        <property name="name">switcher</property>
+                        <property name="child">
+                          <object class="AdwViewSwitcher">
+                            <property name="stack">stack</property>
+                            <property name="policy">wide</property>
+                          </object>
+                        </property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkStackPage">
+                        <property name="name">title</property>
+                        <property name="child">
+                          <object class="AdwWindowTitle">
+                            <property name="title" bind-source="CcPowerPanel" bind-property="title" bind-flags="sync-create"/>
+                          </object>
+                        </property>
+                      </object>
+                    </child>
                   </object>
                 </property>
               </object>
@@ -37,7 +56,7 @@
                     <property name="use-underline">True</property>
                     <property name="icon-name">org.gnome.Settings-power-symbolic</property>
                     <property name="child">
-                      <object class="AdwPreferencesPage">
+                      <object class="AdwPreferencesPage" id="general_page">
                         <child>
                           <object class="AdwPreferencesGroup" id="battery_section">
                             <child>
@@ -164,12 +183,12 @@
                   </object>
                 </child>
                 <child>
-                  <object class="AdwViewStackPage">
+                  <object class="AdwViewStackPage" id="power_saving_stack_page">
                     <property name="title" translatable="yes">_Power Saving</property>
                     <property name="use-underline">True</property>
                     <property name="icon-name">power-saving-symbolic</property>
                     <property name="child">
-                      <object class="AdwPreferencesPage">
+                      <object class="AdwPreferencesPage" id="power_saving_page">
                         <child>
                           <object class="AdwPreferencesGroup" id="power_saving_group">
                             <child>
@@ -201,7 +220,7 @@
                           </object>
                         </child>
                         <child>
-                          <object class="AdwPreferencesGroup">
+                          <object class="AdwPreferencesGroup" id="blank_screen_group">
                             <child>
                               <object class="AdwSwitchRow" id="blank_screen_switch_row">
                                 <property name="title" translatable="yes">Automatic Screen _Blank</property>

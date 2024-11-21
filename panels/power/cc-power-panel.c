@@ -39,6 +39,11 @@ struct _CcPowerPanel
 {
   CcPanel            parent_instance;
 
+  GtkStack           *title_stack;
+  AdwPreferencesPage *general_page;
+  AdwPreferencesPage *power_saving_page;
+  AdwViewStackPage   *power_saving_stack_page;
+
   AdwSwitchRow      *als_row;
   AdwPreferencesGroup *battery_charging_section;
   GtkListBox        *battery_listbox;
@@ -46,6 +51,7 @@ struct _CcPowerPanel
   AdwPreferencesGroup *battery_section;
   AdwSwitchRow      *blank_screen_switch_row;
   CcNumberRow       *blank_screen_delay_row;
+  AdwPreferencesGroup *blank_screen_group;
   GtkListBox        *device_listbox;
   AdwPreferencesGroup *device_section;
   AdwSwitchRow      *dim_screen_row;
@@ -196,6 +202,28 @@ battery_health_radio_changed_cb (CcPowerPanel *self)
 }
 
 static void
+ensure_power_saving_title (CcPowerPanel *self)
+{
+  const char *power_saving_title;
+
+  /* If we have batteries, we are in split-page mode, so we don't have to set a title */
+  if (self->has_batteries)
+    return;
+
+  /* TRANSLATORS: This is the same title as the title from the .ui file, but without mnemonic */
+  power_saving_title = _("Power Saving");
+  if (gtk_widget_is_visible (GTK_WIDGET (self->power_saving_group)))
+    {
+      adw_preferences_group_set_title (self->power_saving_group, power_saving_title);
+      adw_preferences_group_set_title (self->blank_screen_group, "");
+    }
+  else
+    {
+      adw_preferences_group_set_title (self->blank_screen_group, power_saving_title);
+    }
+}
+
+static void
 power_saving_group_visibility_cb (CcPowerPanel *self)
 {
   gboolean visible;
@@ -205,6 +233,8 @@ power_saving_group_visibility_cb (CcPowerPanel *self)
             gtk_widget_get_visible (GTK_WIDGET (self->power_saver_low_battery_row));
 
   gtk_widget_set_visible (GTK_WIDGET (self->power_saving_group), visible);
+
+  ensure_power_saving_title (self);
 }
 
 static void
@@ -1141,6 +1171,29 @@ setup_power_profiles (CcPowerPanel *self)
 }
 
 static void
+switch_to_single_page_layout (CcPowerPanel *self)
+{
+  /* Move all power saving sections before the general one */
+  adw_preferences_page_remove (self->power_saving_page, self->power_saving_group);
+  adw_preferences_page_remove (self->power_saving_page, self->blank_screen_group);
+  adw_preferences_page_remove (self->power_saving_page, self->suspend_on_battery_group);
+  adw_preferences_page_remove (self->power_saving_page, self->suspend_on_ac_group);
+
+  adw_preferences_page_remove (self->general_page, self->general_section);
+  adw_preferences_page_add (self->general_page, self->power_saving_group);
+  adw_preferences_page_add (self->general_page, self->blank_screen_group);
+  adw_preferences_page_add (self->general_page, self->suspend_on_battery_group);
+  adw_preferences_page_add (self->general_page, self->suspend_on_ac_group);
+  adw_preferences_page_add (self->general_page, self->general_section);
+
+  /* Reset title and hide view switcher by hiding stack page */
+  gtk_stack_set_visible_child_name (self->title_stack, "title");
+  adw_view_stack_page_set_visible (self->power_saving_stack_page, FALSE);
+
+  ensure_power_saving_title (self);
+}
+
+static void
 setup_general_section (CcPowerPanel *self)
 {
   gboolean can_suspend, can_hibernate, show_section = FALSE;
@@ -1176,6 +1229,9 @@ setup_general_section (CcPowerPanel *self)
     }
 
   gtk_widget_set_visible (GTK_WIDGET (self->general_section), show_section);
+
+  if (!self->has_batteries)
+    switch_to_single_page_layout (self);
 }
 
 static gint
@@ -1243,11 +1299,14 @@ cc_power_panel_class_init (CcPowerPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, battery_percentage_row);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, battery_section);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, blank_screen_delay_row);
+  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, blank_screen_group);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, blank_screen_switch_row);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, device_listbox);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, device_section);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, dim_screen_row);
+  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, general_page);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, general_section);
+  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, title_stack);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, maximize_charge_radio);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, preserve_battery_radio);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, power_button_row);
@@ -1256,6 +1315,8 @@ cc_power_panel_class_init (CcPowerPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, power_profile_section);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, power_saver_low_battery_row);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, power_saving_group);
+  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, power_saving_page);
+  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, power_saving_stack_page);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, suspend_on_battery_delay_row);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, suspend_on_battery_switch_row);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, suspend_on_battery_group);
