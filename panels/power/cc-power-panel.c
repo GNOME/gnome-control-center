@@ -402,15 +402,10 @@ als_enabled_state_changed (CcPowerPanel *self)
   g_signal_handlers_unblock_by_func (self->als_row, als_row_changed_cb, self);
 }
 
-static void
-set_ac_battery_ui_mode (CcPowerPanel *self)
+static gboolean
+devices_have_batteries (GPtrArray *devices)
 {
-  GPtrArray *devices;
   guint i;
-
-  self->has_batteries = FALSE;
-  devices = up_client_get_devices2 (self->up_client);
-  g_debug ("got %d devices from upower\n", devices ? devices->len : 0);
 
   for (i = 0; devices != NULL && i < devices->len; i++)
     {
@@ -425,13 +420,15 @@ set_ac_battery_ui_mode (CcPowerPanel *self)
                     NULL);
       if (kind == UP_DEVICE_KIND_UPS ||
           (kind == UP_DEVICE_KIND_BATTERY && is_power_supply))
-        {
-          self->has_batteries = TRUE;
-          break;
-        }
+        return TRUE;
     }
-  g_clear_pointer (&devices, g_ptr_array_unref);
+  
+  return FALSE;
+}
 
+static void
+set_ac_battery_ui_mode (CcPowerPanel *self)
+{
   if (self->has_batteries)
     gtk_widget_set_visible (GTK_WIDGET (self->suspend_on_battery_group), TRUE);
   else
@@ -1292,6 +1289,8 @@ cc_power_panel_init (CcPowerPanel *self)
   self->chassis_type = cc_hostname_get_chassis_type (cc_hostname_get_default ());
 
   self->up_client = up_client_new ();
+  self->devices = up_client_get_devices2 (self->up_client);
+  self->has_batteries = devices_have_batteries (self->devices);
 
   self->gsd_settings = g_settings_new ("org.gnome.settings-daemon.plugins.power");
   self->session_settings = g_settings_new ("org.gnome.desktop.session");
@@ -1319,7 +1318,6 @@ cc_power_panel_init (CcPowerPanel *self)
   g_signal_connect_object (self->up_client, "device-added", G_CALLBACK (up_client_device_added), self, G_CONNECT_SWAPPED);
   g_signal_connect_object (self->up_client, "device-removed", G_CALLBACK (up_client_device_removed), self, G_CONNECT_SWAPPED);
 
-  self->devices = up_client_get_devices2 (self->up_client);
   for (i = 0; self->devices != NULL && i < self->devices->len; i++) {
     UpDevice *device = g_ptr_array_index (self->devices, i);
     g_signal_connect_object (G_OBJECT (device), "notify",
