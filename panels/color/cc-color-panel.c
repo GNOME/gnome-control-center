@@ -195,6 +195,25 @@ gcm_prefs_combobox_add_profile (CcColorPanel *self,
                       -1);
 }
 
+static gboolean
+gcm_prefs_ensure_connected_profile (CcColorPanel *self,
+                                    CdProfile *profile)
+{
+  gboolean ret;
+  g_autoptr(GError) error = NULL;
+
+  if (cd_profile_get_connected (profile))
+    return TRUE;
+
+  ret = cd_profile_connect_sync (profile,
+                                 cc_panel_get_cancellable (CC_PANEL (self)),
+                                 &error);
+  if (!ret)
+    g_warning ("failed to get profile: %s", error->message);
+
+  return ret;
+}
+
 static void
 gcm_prefs_default_cb (CcColorPanel *self)
 {
@@ -205,6 +224,9 @@ gcm_prefs_default_cb (CcColorPanel *self)
   /* TODO: check if the profile is already systemwide */
   profile = cd_device_get_default_profile (self->current_device);
   if (profile == NULL)
+    return;
+
+  if (!gcm_prefs_ensure_connected_profile (self, profile))
     return;
 
   /* install somewhere out of $HOME */
