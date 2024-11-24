@@ -149,45 +149,24 @@
                     </child>
 
                     <child>
-                      <object class="AdwPreferencesRow">
-                        <property name="activatable">False</property>
-                        <property name="selectable">False</property>
-                        <child>
-                          <object class="GtkBox">
-                            <property name="margin-start">12</property>
-                            <property name="margin-end">12</property>
-                            <property name="margin-top">6</property>
-                            <property name="margin-bottom">6</property>
-                            <property name="orientation">vertical</property>
-                            <property name="spacing">6</property>
-                            <child>
-                              <object class="GtkLabel">
-                                <property name="xalign">0.0</property>
-                                <property name="label" translatable="yes">Len_gth</property>
-                                <property name="use-underline">True</property>
+                      <object class="AdwActionRow">
+                        <property name="title" translatable="yes">Len_gth</property>
+                        <property name="use-underline">True</property>
+                        <child type="suffix">
+                          <object class="GtkScale" id="crosshair_length_scale">
+                            <marks>
+                              <mark value="20" translatable="yes" comments="Translators: This is a mark in the Crosshair Length scale">Short</mark>
+                              <mark value="4096" translatable="yes" comments="Translators: This is a mark in the Crosshair Length scale">Long</mark>
+                            </marks>
+                            <property name="adjustment">
+                              <object class="GtkAdjustment">
+                                <property name="lower">20</property>
+                                <property name="upper">4096</property>
+                                <property name="value">4096</property>
+                                <property name="step-increment">1</property>
+                                <property name="page-increment">100</property>
                               </object>
-                            </child>
-                            <child>
-                              <object class="GtkScale" id="crosshair_length_scale">
-                                <property name="hexpand">True</property>
-                                <marks>
-                                  <mark value="20" translatable="yes" comments="Translators: This is a mark in the Crosshair Length scale">Short</mark>
-                                  <mark value="1024" translatable="yes" comments="Translators: This is a mark in the Crosshair Length scale">1/4 screen</mark>
-                                  <mark value="2048" translatable="yes" comments="Translators: This is a mark in the Crosshair Length scale">1/2 Screen</mark>
-                                  <mark value="3072" translatable="yes" comments="Translators: This is a mark in the Crosshair Length scale">3/4 Screen</mark>
-                                  <mark value="4096" translatable="yes" comments="Translators: This is a mark in the Crosshair Length scale">Long</mark>
-                                </marks>
-                                <property name="adjustment">
-                                  <object class="GtkAdjustment">
-                                    <property name="lower">20</property>
-                                    <property name="upper">4096</property>
-                                    <property name="value">4096</property>
-                                    <property name="step-increment">1</property>
-                                    <property name="page-increment">100</property>
-                                  </object>
-                                </property>
-                              </object>
-                            </child>
+                            </property>
                           </object>
                         </child>
                       </object>
@@ -308,6 +287,7 @@
     <property name="mode">horizontal</property>
     <widgets>
       <widget name="crosshair_thickness_scale"/>
+      <widget name="crosshair_length_scale"/>
       <widget name="brightness_scale"/>
       <widget name="contrast_scale"/>
       <widget name="grayscale_scale"/>
