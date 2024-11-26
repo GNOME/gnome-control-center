@@ -121,14 +121,22 @@ get_renderer_from_helper (const char **env)
   g_auto(GStrv) envp = NULL;
   g_autofree char *renderer = NULL;
   g_autoptr(GError) error = NULL;
+  /* Environment variables that are needed to run the helper on X11 and Wayland */
+  static const char *env_vars[] = { "DISPLAY", "WAYLAND_DISPLAY", "XDG_RUNTIME_DIR" };
+  guint i;
+
+  for (i = 0; i < G_N_ELEMENTS (env_vars); i++)
+    {
+      const char *value = g_getenv (env_vars[i]);
+      if (value)
+        envp = g_environ_setenv (envp, env_vars[i], value, TRUE);
+    }
 
   g_debug ("About to launch '%s'", argv[0]);
 
   if (env != NULL)
     {
-      guint i;
       g_debug ("With environment:");
-      envp = g_get_environ ();
       for (i = 0; env != NULL && env[i] != NULL; i = i + 2)
         {
           g_debug ("  %s = %s", env[i], env[i+1]);
