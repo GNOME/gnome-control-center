@@ -119,6 +119,7 @@ static void
 on_removed_backgrounds_undo (CcBackgroundChooser *self)
 {
   g_ptr_array_set_free_func (self->removed_backgrounds, undo_remove);
+  gtk_widget_set_visible (self->recent_box, TRUE);
 }
 
 static void
@@ -136,6 +137,7 @@ on_delete_background_clicked_cb (GtkButton *button,
   CcBackgroundChooser *self;
   CcBackgroundItem *item;
   UndoData *undo_data;
+  GListStore *store;
 
   parent = gtk_widget_get_parent (gtk_widget_get_parent (GTK_WIDGET (button)));
   g_assert (GTK_IS_FLOW_BOX_CHILD (parent));
@@ -155,6 +157,12 @@ on_delete_background_clicked_cb (GtkButton *button,
   undo_data->parent = parent;
 
   g_ptr_array_add (self->removed_backgrounds, undo_data);
+
+  /* Recent flowbox should be hidden if all backgrounds are to be removed */
+  store = bg_source_get_liststore (BG_SOURCE (self->recent_source));
+
+  if (self->removed_backgrounds->len == g_list_model_get_n_items (G_LIST_MODEL (store)))
+    gtk_widget_set_visible (self->recent_box, FALSE);
 
   if (!self->toast)
     {
