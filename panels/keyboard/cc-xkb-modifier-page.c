@@ -241,14 +241,12 @@ add_radio_buttons (CcXkbModifierPage *self)
 
   for (i = 0; options[i].label && options[i].xkb_option; i++)
     {
-      row = g_object_new (ADW_TYPE_ACTION_ROW,
-                          NULL);
+      row = adw_action_row_new ();
       adw_preferences_group_add (self->options_group, row);
 
-      radio_button = g_object_new (GTK_TYPE_CHECK_BUTTON,
-                                   "valign", GTK_ALIGN_CENTER,
-                                   "group", last_button,
-                                   NULL);
+      radio_button = gtk_check_button_new ();
+      gtk_widget_set_valign (radio_button, GTK_ALIGN_CENTER);
+      gtk_check_button_set_group (GTK_CHECK_BUTTON (radio_button), GTK_CHECK_BUTTON (last_button));
       g_object_set_data (G_OBJECT (radio_button), "xkb-option", options[i].xkb_option);
       g_signal_connect_object (radio_button, "toggled", (GCallback)on_active_radio_changed_cb, self, G_CONNECT_SWAPPED);
       adw_action_row_add_prefix (ADW_ACTION_ROW (row), radio_button);
