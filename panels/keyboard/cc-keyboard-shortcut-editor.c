@@ -719,7 +719,7 @@ on_key_pressed_cb (CcKeyboardShortcutEditor *self,
 }
 
 static void
-cc_keyboard_shortcut_editor_close_attempt (CcKeyboardShortcutEditor *self)
+cc_keyboard_shortcut_editor_closed (CcKeyboardShortcutEditor *self)
 {
   if (self->mode == CC_SHORTCUT_EDITOR_EDIT && get_shortcut_editor_page (self) != PAGE_STANDARD)
     update_shortcut (self);
@@ -839,9 +839,9 @@ cc_keyboard_shortcut_editor_init (CcKeyboardShortcutEditor *self)
 {
   gtk_widget_init_template (GTK_WIDGET (self));
 
-  g_signal_connect_object (self, "close-attempt",
-                           G_CALLBACK (cc_keyboard_shortcut_editor_close_attempt),
-                           self, G_CONNECT_SWAPPED);
+  g_signal_connect (self, "closed",
+                    G_CALLBACK (cc_keyboard_shortcut_editor_closed),
+                    NULL);
 
   self->mode = CC_SHORTCUT_EDITOR_EDIT;
   self->custom_is_modifier = TRUE;
