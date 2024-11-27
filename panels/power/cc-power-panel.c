@@ -731,12 +731,13 @@ performance_profile_set_active (CcPowerPanel  *self,
   if (profile == CC_POWER_PROFILE_UNKNOWN)
     return;
 
-  button = cc_power_profile_row_get_radio_button (CC_POWER_PROFILE_ROW (self->power_profiles_row[profile]));
-  if (!button) {
-    g_warning ("Not setting profile '%s' as it doesn't have a widget", profile_str);
-    return;
-  }
-  gtk_check_button_set_active (GTK_CHECK_BUTTON (button), TRUE);
+  button = cc_power_profile_row_get_radio_button (self->power_profiles_row[profile]);
+  if (!button)
+    {
+      g_warning ("Not setting profile '%s' as it doesn't have a widget", profile_str);
+      return;
+    }
+  gtk_check_button_set_active (button, TRUE);
 }
 
 static void
@@ -1046,7 +1047,7 @@ setup_power_profiles (CcPowerPanel *self)
       if (profile == CC_POWER_PROFILE_UNKNOWN)
         continue;
 
-      row = cc_power_profile_row_new (cc_power_profile_from_str (name));
+      row = cc_power_profile_row_new (profile);
       g_signal_connect_object (G_OBJECT (row), "button-toggled",
                                G_CALLBACK (power_profile_button_toggled_cb), self,
                                0);
