@@ -31,10 +31,12 @@ G_BEGIN_DECLS
 
 typedef enum
 {
-  CC_POWER_PROFILE_PERFORMANCE = 0,
-  CC_POWER_PROFILE_BALANCED    = 1,
-  CC_POWER_PROFILE_POWER_SAVER = 2,
-  NUM_CC_POWER_PROFILES
+  CC_POWER_PROFILE_PERFORMANCE,
+  CC_POWER_PROFILE_BALANCED,
+  CC_POWER_PROFILE_POWER_SAVER,
+  NUM_CC_POWER_PROFILES,
+  /* The unknown profile is intentionally not counted as a profile. It exists to handle unsupported profiles. */
+  CC_POWER_PROFILE_UNKNOWN
 } CcPowerProfile;
 
 #define CC_TYPE_POWER_PROFILE_ROW (cc_power_profile_row_get_type())
