@@ -709,6 +709,7 @@ on_device_entry_row_activated_cb (CcBoltPage    *self,
 {
   g_autoptr(GPtrArray) parents = NULL;
   CcBoltDeviceEntry *entry;
+  GtkWindow *toplevel;
   BoltDevice *device;
   BoltDevice *iter;
   const char *parent;
@@ -749,6 +750,8 @@ on_device_entry_row_activated_cb (CcBoltPage    *self,
   cc_bolt_device_dialog_set_device (self->device_dialog, device, parents);
 
   gtk_window_set_default_size (GTK_WINDOW (self->device_dialog), 1, 1);
+  toplevel = GTK_WINDOW (gtk_widget_get_root (GTK_WIDGET (self)));
+  gtk_window_set_transient_for (GTK_WINDOW (self->device_dialog), toplevel);
   gtk_window_present (GTK_WINDOW (self->device_dialog));
 }
 
@@ -946,24 +949,11 @@ cc_bolt_page_dispose (GObject *object)
 }
 
 static void
-cc_bolt_page_constructed (GObject *object)
-{
-  CcBoltPage *self = CC_BOLT_PAGE (object);
-  GtkWindow *parent;
-
-  G_OBJECT_CLASS (cc_bolt_page_parent_class)->constructed (object);
-
-  parent = GTK_WINDOW (gtk_widget_get_root (GTK_WIDGET (self)));
-  gtk_window_set_transient_for (GTK_WINDOW (self->device_dialog), parent);
-}
-
-static void
 cc_bolt_page_class_init (CcBoltPageClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
-  object_class->constructed = cc_bolt_page_constructed;
   object_class->dispose = cc_bolt_page_dispose;
   object_class->finalize = cc_bolt_page_finalize;
 

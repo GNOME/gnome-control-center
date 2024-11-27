@@ -51,7 +51,6 @@ struct _CcSharingPanel
 {
   CcPanel parent_instance;
 
-  GtkWindow *toplevel;
   GtkWidget *hostname_entry;
   GtkWidget *main_list_box;
   AdwDialog *media_sharing_dialog;
@@ -118,12 +117,14 @@ on_public_folder_row_clicked (CcSharingPanel *self)
   g_autoptr(GFile) file = NULL;
   g_autoptr(GtkFileLauncher) launcher = NULL;
   const char *public_folder_uri;
+  GtkWindow *toplevel;
 
   public_folder_uri = g_get_user_special_dir (G_USER_DIRECTORY_PUBLIC_SHARE);
   file = g_file_new_for_path (public_folder_uri);
   launcher = gtk_file_launcher_new (file);
 
-  gtk_file_launcher_launch (launcher, self->toplevel, NULL, NULL, NULL);
+  toplevel = GTK_WINDOW (gtk_widget_get_root (GTK_WIDGET (self)));
+  gtk_file_launcher_launch (launcher, toplevel, NULL, NULL, NULL);
 }
 
 static void
@@ -267,16 +268,18 @@ cc_sharing_panel_add_folder (CcSharingPanel *self,
                              GtkListBoxRow  *row)
 {
   GtkFileDialog *dialog;
+  GtkWindow *toplevel;
 
   if (!GPOINTER_TO_INT (g_object_get_data (G_OBJECT (row), "is-add")))
     return;
 
   dialog = gtk_file_dialog_new ();
+  toplevel = GTK_WINDOW (gtk_widget_get_root (GTK_WIDGET (self)));
   gtk_file_dialog_set_title (dialog, _("Choose a Folder"));
   gtk_file_dialog_set_modal (dialog, TRUE);
 
   gtk_file_dialog_select_folder (dialog,
-                                 self->toplevel,
+                                 toplevel,
                                  cc_panel_get_cancellable (CC_PANEL (self)),
                                  on_folder_selected_cb,
                                  self);
@@ -287,6 +290,7 @@ cc_sharing_panel_open_folder (CcSharingPanel *self,
                               GtkButton      *button)
 {
   GtkWidget *row;
+  GtkWindow *toplevel;
   const gchar *path;
   g_autoptr(GFile) file = NULL;
   g_autoptr(GtkFileLauncher) launcher = NULL;
@@ -296,7 +300,8 @@ cc_sharing_panel_open_folder (CcSharingPanel *self,
   file = g_file_new_for_path (path);
   launcher = gtk_file_launcher_new (file);
 
-  gtk_file_launcher_launch (launcher, self->toplevel, NULL, NULL, NULL);
+  toplevel = GTK_WINDOW (gtk_widget_get_root (GTK_WIDGET (self)));
+  gtk_file_launcher_launch (launcher, toplevel, NULL, NULL, NULL);
 }
 
 static void
@@ -667,8 +672,6 @@ cc_sharing_panel_init (CcSharingPanel *self)
 
   gtk_widget_init_template (GTK_WIDGET (self));
 
-  self->toplevel = GTK_WINDOW (gtk_widget_get_root (GTK_WIDGET (self)));
-
   gsd_sharing_proxy_new_for_bus (G_BUS_TYPE_SESSION,
                                  G_DBUS_PROXY_FLAGS_NONE,
                                  "org.gnome.SettingsDaemon.Sharing",
@@ -701,4 +704,3 @@ cc_sharing_panel_static_init_func (void)
                                        visible ? CC_PANEL_VISIBLE : CC_PANEL_HIDDEN);
   g_debug ("Sharing panel visible: %s", visible ? "yes" : "no");
 }
-
