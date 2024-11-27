@@ -41,7 +41,6 @@
 struct _PpDetailsDialog {
   AdwDialog     parent_instance;
 
-  GtkWindow    *toplevel;
   AdwPreferencesGroup *driver_button_rows_group;
   AdwSpinner   *spinner_driver_search;
   AdwActionRow *printer_address_row;
@@ -182,6 +181,7 @@ select_ppd_in_dialog (PpDetailsDialog *self)
 {
   g_autofree gchar *device_id = NULL;
   g_autofree gchar *manufacturer = NULL;
+  GtkWindow *toplevel;
 
   g_clear_pointer (&self->ppd_file_name, g_free);
   self->ppd_file_name = g_strdup (cupsGetPPD (self->printer_name));
@@ -222,8 +222,9 @@ select_ppd_in_dialog (PpDetailsDialog *self)
           ppd_selection_dialog_response_cb,
           self);
 
+        toplevel = GTK_WINDOW (gtk_widget_get_root (GTK_WIDGET (self)));
         gtk_window_set_transient_for (GTK_WINDOW (self->pp_ppd_selection_dialog),
-                                      self->toplevel);
+                                      toplevel);
 
         gtk_widget_set_visible (GTK_WIDGET (self->pp_ppd_selection_dialog), TRUE);
     }
@@ -260,9 +261,11 @@ select_ppd_manually (PpDetailsDialog *self)
 {
   GtkFileFilter *filter;
   GtkWidget     *dialog;
+  GtkWindow     *toplevel;
 
+  toplevel = GTK_WINDOW (gtk_widget_get_root (GTK_WIDGET (self)));
   dialog = gtk_file_chooser_dialog_new (_("Select PPD File"),
-                                        self->toplevel,
+                                        toplevel,
                                         GTK_FILE_CHOOSER_ACTION_OPEN,
                                         _("_Cancel"), GTK_RESPONSE_CANCEL,
                                         _("_Open"), GTK_RESPONSE_ACCEPT,
@@ -282,6 +285,7 @@ select_ppd_manually (PpDetailsDialog *self)
   gtk_widget_set_visible (dialog, TRUE);
 
   g_signal_connect_swapped (dialog, "response", G_CALLBACK (ppd_file_select_response_cb), self);
+
 }
 
 static void
@@ -299,20 +303,19 @@ on_open_address_button_clicked (PpDetailsDialog *self)
   g_autoptr(GFile) file = NULL;
   g_autoptr(GtkFileLauncher) launcher = NULL;
   g_autofree gchar *printer_url;
+  GtkWindow *toplevel;
 
   printer_url = g_strdup_printf ("http://%s", adw_action_row_get_subtitle (self->printer_address_row));
   file = g_file_new_for_uri (printer_url);
   launcher = gtk_file_launcher_new (file);
-
-  gtk_file_launcher_launch (launcher, self->toplevel, NULL, NULL, NULL);
+  toplevel = GTK_WINDOW (gtk_widget_get_root (GTK_WIDGET (self)));
+  gtk_file_launcher_launch (launcher, toplevel, NULL, NULL, NULL);
 }
 
 static void
 pp_details_dialog_init (PpDetailsDialog *self)
 {
   gtk_widget_init_template (GTK_WIDGET (self));
-
-  self->toplevel = GTK_WINDOW (gtk_widget_get_root (GTK_WIDGET (self)));
 
   self->cancellable = g_cancellable_new ();
 }
