@@ -156,7 +156,9 @@ cc_power_profile_from_str (const char *profile)
   if (g_strcmp0 (profile, "performance") == 0)
     return CC_POWER_PROFILE_PERFORMANCE;
 
-  g_assert_not_reached ();
+  g_warning ("Unknown power profile: %s", profile);
+
+  return CC_POWER_PROFILE_UNKNOWN;
 }
 
 const char *
