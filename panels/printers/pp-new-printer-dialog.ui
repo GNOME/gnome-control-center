@@ -186,7 +186,14 @@
                           <object class="GtkStackPage">
                             <property name="name">loading-page</property>
                             <property name="child">
-                              <object class="AdwSpinner"/>
+                              <object class="AdwStatusPage">
+                                <property name="title" translatable="yes">Searching for Printers</property>
+                                <property name="paintable">
+                                  <object class="AdwSpinnerPaintable">
+                                    <property name="widget">PpNewPrinterDialog</property>
+                                  </object>
+                                </property>
+                              </object>
                             </property>
                           </object>
                         </child>
