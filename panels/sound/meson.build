@@ -24,7 +24,7 @@ cflags += [
 ]
 
 sources = files(
-  'cc-alert-chooser-window.c',
+  'cc-alert-chooser-page.c',
   'cc-balance-slider.c',
   'cc-device-combo-box.c',
   'cc-fade-slider.c',

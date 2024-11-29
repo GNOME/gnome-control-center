@@ -30,7 +30,7 @@
 #include <gvc-mixer-control.h>
 
 #include "cc-list-row.h"
-#include "cc-alert-chooser-window.h"
+#include "cc-alert-chooser-page.h"
 #include "cc-balance-slider.h"
 #include "cc-device-combo-box.h"
 #include "cc-fade-slider.h"
@@ -234,15 +234,15 @@ volume_levels_activated_cb (CcSoundPanel *self)
 static void
 alert_sound_activated_cb (CcSoundPanel *self)
 {
-  CcAlertChooserWindow *alert_chooser;
+  AdwNavigationPage *page;
 
-  alert_chooser = cc_alert_chooser_window_new ();
+  page = ADW_NAVIGATION_PAGE (cc_alert_chooser_page_new ());
 
-  g_signal_connect_object (alert_chooser, "destroy",
+  g_signal_connect_object (page, "hiding",
                            G_CALLBACK (update_alert_sound_label),
                            self, G_CONNECT_SWAPPED);
 
-  adw_dialog_present (ADW_DIALOG (alert_chooser), GTK_WIDGET (self));
+  cc_panel_push_subpage (CC_PANEL (self), page);
 }
 
 static const char *

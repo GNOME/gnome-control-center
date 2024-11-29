@@ -20,13 +20,13 @@
 #include <gsound.h>
 
 #include "config.h"
-#include "cc-alert-chooser-window.h"
+#include "cc-alert-chooser-page.h"
 
 #define KEY_SOUNDS_SCHEMA "org.gnome.desktop.sound"
 
-struct _CcAlertChooserWindow
+struct _CcAlertChooserPage
 {
-  AdwDialog       parent_instance;
+  AdwNavigationPage parent_instance;
 
   GtkCheckButton *none_button;
   GtkCheckButton *click_button;
@@ -38,7 +38,7 @@ struct _CcAlertChooserWindow
   GSettings      *sound_settings;
 };
 
-G_DEFINE_TYPE (CcAlertChooserWindow, cc_alert_chooser_window, ADW_TYPE_DIALOG)
+G_DEFINE_TYPE (CcAlertChooserPage, cc_alert_chooser_page, ADW_TYPE_NAVIGATION_PAGE)
 
 #define CUSTOM_THEME_NAME "__custom"
 
@@ -142,8 +142,8 @@ update_dir_mtime (const char *dir_path)
 }
 
 static void
-set_custom_theme (CcAlertChooserWindow *self,
-                  const gchar          *name)
+set_custom_theme (CcAlertChooserPage *self,
+                  const gchar        *name)
 {
   g_autofree gchar *dir_path = NULL;
   g_autofree gchar *theme_path = NULL;
@@ -195,8 +195,8 @@ set_custom_theme (CcAlertChooserWindow *self,
 }
 
 static void
-play_sound (CcAlertChooserWindow *self,
-            const gchar          *name)
+play_sound (CcAlertChooserPage *self,
+            const gchar        *name)
 {
   g_autofree gchar *path = NULL;
   g_autoptr(GError) error = NULL;
@@ -211,7 +211,7 @@ play_sound (CcAlertChooserWindow *self,
 }
 
 static void
-activate_cb (CcAlertChooserWindow *self)
+activate_cb (CcAlertChooserPage *self)
 {
   if (gtk_check_button_get_active (self->click_button))
     play_sound (self, "click");
@@ -224,7 +224,7 @@ activate_cb (CcAlertChooserWindow *self)
 }
 
 static void
-toggled_cb (CcAlertChooserWindow *self)
+toggled_cb (CcAlertChooserPage *self)
 {
   if (gtk_check_button_get_active (self->none_button))
     g_settings_set_boolean (self->sound_settings, "event-sounds", FALSE);
@@ -239,9 +239,9 @@ toggled_cb (CcAlertChooserWindow *self)
 }
 
 static void
-set_button_active (CcAlertChooserWindow *self,
-                   GtkCheckButton       *button,
-                   gboolean              active)
+set_button_active (CcAlertChooserPage *self,
+                   GtkCheckButton     *button,
+                   gboolean            active)
 {
   g_signal_handlers_block_by_func (button, toggled_cb, self);
   gtk_check_button_set_active (button, active);
@@ -249,38 +249,38 @@ set_button_active (CcAlertChooserWindow *self,
 }
 
 static void
-cc_alert_chooser_window_dispose (GObject *object)
+cc_alert_chooser_page_dispose (GObject *object)
 {
-  CcAlertChooserWindow *self = CC_ALERT_CHOOSER_WINDOW (object);
+  CcAlertChooserPage *self = CC_ALERT_CHOOSER_PAGE (object);
 
   g_clear_object (&self->context);
   g_clear_object (&self->sound_settings);
 
-  G_OBJECT_CLASS (cc_alert_chooser_window_parent_class)->dispose (object);
+  G_OBJECT_CLASS (cc_alert_chooser_page_parent_class)->dispose (object);
 }
 
 void
-cc_alert_chooser_window_class_init (CcAlertChooserWindowClass *klass)
+cc_alert_chooser_page_class_init (CcAlertChooserPageClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
-  object_class->dispose = cc_alert_chooser_window_dispose;
+  object_class->dispose = cc_alert_chooser_page_dispose;
 
-  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/sound/cc-alert-chooser-window.ui");
+  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/sound/cc-alert-chooser-page.ui");
 
-  gtk_widget_class_bind_template_child (widget_class, CcAlertChooserWindow, none_button);
-  gtk_widget_class_bind_template_child (widget_class, CcAlertChooserWindow, click_button);
-  gtk_widget_class_bind_template_child (widget_class, CcAlertChooserWindow, string_button);
-  gtk_widget_class_bind_template_child (widget_class, CcAlertChooserWindow, swing_button);
-  gtk_widget_class_bind_template_child (widget_class, CcAlertChooserWindow, hum_button);
+  gtk_widget_class_bind_template_child (widget_class, CcAlertChooserPage, none_button);
+  gtk_widget_class_bind_template_child (widget_class, CcAlertChooserPage, click_button);
+  gtk_widget_class_bind_template_child (widget_class, CcAlertChooserPage, string_button);
+  gtk_widget_class_bind_template_child (widget_class, CcAlertChooserPage, swing_button);
+  gtk_widget_class_bind_template_child (widget_class, CcAlertChooserPage, hum_button);
 
   gtk_widget_class_bind_template_callback (widget_class, activate_cb);
   gtk_widget_class_bind_template_callback (widget_class, toggled_cb);
 }
 
 void
-cc_alert_chooser_window_init (CcAlertChooserWindow *self)
+cc_alert_chooser_page_init (CcAlertChooserPage *self)
 {
   g_autofree gchar *alert_name = NULL;
   g_autoptr(GError) error = NULL;
@@ -320,10 +320,10 @@ cc_alert_chooser_window_init (CcAlertChooserWindow *self)
     g_warning ("Current alert sound has unknown name %s", alert_name);
 }
 
-CcAlertChooserWindow *
-cc_alert_chooser_window_new (void)
+CcAlertChooserPage *
+cc_alert_chooser_page_new (void)
 {
-  return g_object_new (CC_TYPE_ALERT_CHOOSER_WINDOW, NULL);
+  return g_object_new (CC_TYPE_ALERT_CHOOSER_PAGE, NULL);
 }
 
 const gchar *
