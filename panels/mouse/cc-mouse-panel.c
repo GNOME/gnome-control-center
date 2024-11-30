@@ -44,9 +44,7 @@ struct _CcMousePanel
   CcSplitRow        *mouse_scroll_direction_row;
   GtkScale          *mouse_speed_scale;
   GtkWindow         *mouse_test;
-  GtkBox            *primary_button_box;
-  GtkToggleButton   *primary_button_left;
-  GtkToggleButton   *primary_button_right;
+  AdwToggleGroup    *primary_toggle_group;
   CcSplitRow        *two_finger_push_row;
   GtkStack          *title_stack;
   CcIllustratedRow  *tap_to_click_row;
@@ -92,6 +90,22 @@ setup_touchpad_options (CcMousePanel *self)
 
   gtk_widget_set_visible (GTK_WIDGET (self->touchpad_scroll_method_row), have_two_finger_scrolling);
   gtk_widget_set_visible (GTK_WIDGET (self->tap_to_click_row), have_tap_to_click);
+}
+
+static void
+on_primary_button_changed_cb (CcMousePanel *self)
+{
+  const char *active_name;
+
+  active_name = adw_toggle_group_get_active_name (self->primary_toggle_group);
+
+  if (!active_name)
+    return;
+
+  if (g_strcmp0 (active_name, "left") == 0)
+    g_settings_set_boolean (self->mouse_settings, "left-handed", FALSE);
+  else
+    g_settings_set_boolean (self->mouse_settings, "left-handed", TRUE);
 }
 
 static void
@@ -190,22 +204,19 @@ click_method_set_mapping (const GValue       *value,
 }
 
 static void
-pressed_cb (GtkButton *button)
+primary_toggle_right_click_pressed_cb (CcMousePanel *self,
+                                       gint          n_press,
+                                       double        x,
+                                       double        y)
 {
-  g_signal_emit_by_name (button, "activate");
-}
+  double primary_toggle_group_width;
 
-static void
-handle_secondary_button (CcMousePanel    *self,
-                         GtkToggleButton *button,
-                         GtkGesture      *gesture)
-{
-  gtk_gesture_single_set_touch_only (GTK_GESTURE_SINGLE (gesture), FALSE);
-  gtk_gesture_single_set_exclusive (GTK_GESTURE_SINGLE (gesture), TRUE);
-  gtk_gesture_single_set_button (GTK_GESTURE_SINGLE (gesture), GDK_BUTTON_SECONDARY);
-  g_signal_connect_swapped (gesture, "pressed", G_CALLBACK (pressed_cb), button);
-  gtk_event_controller_set_propagation_phase (GTK_EVENT_CONTROLLER (gesture), GTK_PHASE_BUBBLE);
-  gtk_widget_add_controller (GTK_WIDGET (button), GTK_EVENT_CONTROLLER (gesture));
+  primary_toggle_group_width = gtk_widget_get_width (GTK_WIDGET (self->primary_toggle_group));
+
+  if (x < primary_toggle_group_width / 2)
+    adw_toggle_group_set_active_name (self->primary_toggle_group, "left");
+  else
+    adw_toggle_group_set_active_name (self->primary_toggle_group, "right");
 }
 
 static gboolean
@@ -229,53 +240,18 @@ mouse_accel_set_mapping (const GValue       *value,
     return g_variant_new_string (g_value_get_boolean (value) ? "default" : "flat");
 }
 
-static void
-update_primary_mouse_button_order (CcMousePanel *self)
-{
-  /* Manually reorder Left/Right buttons to preserve direction in RTL instead
-   * of calling gtk_widget_set_direction (self->primary_button_box, GTK_TEXT_DIR_LTR)
-   * which won't preserve the correct behavior of the CSS "linked" style class.
-   * See https://gitlab.gnome.org/GNOME/gnome-control-center/-/issues/1101
-   * and https://gitlab.gnome.org/GNOME/gnome-control-center/-/issues/2649 */
-  if (gtk_widget_get_direction (GTK_WIDGET (self)) == GTK_TEXT_DIR_RTL) {
-    gtk_box_reorder_child_after (self->primary_button_box,
-                                 GTK_WIDGET (self->primary_button_left),
-                                 GTK_WIDGET (self->primary_button_right));
-  } else {
-    gtk_box_reorder_child_after (self->primary_button_box,
-                                 GTK_WIDGET (self->primary_button_right),
-                                 GTK_WIDGET (self->primary_button_left));
-  }
-}
-
 /* Set up the property editors in the dialog. */
 static void
 setup_dialog (CcMousePanel *self)
 {
-  GtkToggleButton *button;
+  const char *active_toggle_name;
   gboolean left_handed;
 
-  update_primary_mouse_button_order (self);
   self->mouse_test = GTK_WINDOW (cc_mouse_test_new ());
 
   left_handed = g_settings_get_boolean (self->mouse_settings, "left-handed");
-  button = left_handed ? self->primary_button_right : self->primary_button_left;
-  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button), TRUE);
-
-  g_settings_bind (self->mouse_settings, "left-handed",
-                   self->primary_button_left, "active",
-                   G_SETTINGS_BIND_DEFAULT | G_SETTINGS_BIND_INVERT_BOOLEAN);
-  g_settings_bind (self->mouse_settings, "left-handed",
-                   self->primary_button_right, "active",
-                   G_SETTINGS_BIND_DEFAULT);
-
-  /* Allow changing orientation with either button */
-  button = self->primary_button_right;
-  self->right_gesture = gtk_gesture_click_new ();
-  handle_secondary_button (self, button, self->right_gesture);
-  button = self->primary_button_left;
-  self->left_gesture = gtk_gesture_click_new ();
-  handle_secondary_button (self, button, self->left_gesture);
+  active_toggle_name = left_handed ? "right" : "left";
+  adw_toggle_group_set_active_name (self->primary_toggle_group, active_toggle_name);
 
   g_settings_bind (self->mouse_settings, "natural-scroll",
                    self->mouse_scroll_direction_row, "use-default",
@@ -370,7 +346,7 @@ cc_mouse_panel_direction_changed (GtkWidget        *widget,
 {
   CcMousePanel *self = CC_MOUSE_PANEL (widget);
 
-  update_primary_mouse_button_order (self);
+  gtk_widget_set_direction (GTK_WIDGET (self->primary_toggle_group), GTK_TEXT_DIR_LTR);
 
   GTK_WIDGET_CLASS (cc_mouse_panel_parent_class)->direction_changed (widget, previous_direction);
 }
@@ -454,9 +430,7 @@ cc_mouse_panel_class_init (CcMousePanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcMousePanel, mouse_group);
   gtk_widget_class_bind_template_child (widget_class, CcMousePanel, mouse_scroll_direction_row);
   gtk_widget_class_bind_template_child (widget_class, CcMousePanel, mouse_speed_scale);
-  gtk_widget_class_bind_template_child (widget_class, CcMousePanel, primary_button_box);
-  gtk_widget_class_bind_template_child (widget_class, CcMousePanel, primary_button_left);
-  gtk_widget_class_bind_template_child (widget_class, CcMousePanel, primary_button_right);
+  gtk_widget_class_bind_template_child (widget_class, CcMousePanel, primary_toggle_group);
   gtk_widget_class_bind_template_child (widget_class, CcMousePanel, title_stack);
   gtk_widget_class_bind_template_child (widget_class, CcMousePanel, tap_to_click_row);
   gtk_widget_class_bind_template_child (widget_class, CcMousePanel, tap_to_click_switch);
@@ -468,6 +442,8 @@ cc_mouse_panel_class_init (CcMousePanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcMousePanel, touchpad_typing_row);
   gtk_widget_class_bind_template_child (widget_class, CcMousePanel, two_finger_push_row);
 
+  gtk_widget_class_bind_template_callback (widget_class, on_primary_button_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_touchpad_scroll_method_changed_cb);
+  gtk_widget_class_bind_template_callback (widget_class, primary_toggle_right_click_pressed_cb);
   gtk_widget_class_bind_template_callback (widget_class, test_button_row_activated_cb);
 }

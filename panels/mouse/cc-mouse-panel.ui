@@ -70,27 +70,29 @@
                                 <property name="title" translatable="yes">Primary Button</property>
                                 <property name="subtitle" translatable="yes">Order of physical buttons on mice and touchpads</property>
                                 <child>
-                                  <object class="GtkBox" id="primary_button_box">
+                                  <object class="AdwToggleGroup" id="primary_toggle_group">
                                     <property name="valign">center</property>
                                     <property name="homogeneous">True</property>
-                                    <style>
-                                     <class name="linked"/>
-                                    </style>
+                                    <signal name="notify::active" handler="on_primary_button_changed_cb" object="CcMousePanel" swapped="yes"/>
                                     <child>
-                                      <object class="GtkToggleButton" id="primary_button_left">
-                                        <property name="hexpand">True</property>
+                                      <object class="AdwToggle">
+                                        <property name="name">left</property>
                                         <property name="label" translatable="yes">_Left</property>
-                                        <property name="height_request">35</property>
                                         <property name="use-underline">True</property>
                                       </object>
                                     </child>
                                     <child>
-                                      <object class="GtkToggleButton" id="primary_button_right">
-                                        <property name="hexpand">True</property>
+                                      <object class="AdwToggle">
+                                        <property name="name">right</property>
                                         <property name="label" translatable="yes">_Right</property>
-                                        <property name="group">primary_button_left</property>
-                                        <property name="height_request">35</property>
                                         <property name="use-underline">True</property>
+                                      </object>
+                                    </child>
+                                    <child>
+                                      <object class="GtkGestureClick">
+                                        <property name="button">3</property> <!-- GDK_BUTTON_SECONDARY -->
+                                        <property name="exclusive">True</property>
+                                        <signal name="pressed" handler="primary_toggle_right_click_pressed_cb" object="CcMousePanel" swapped="yes"/>
                                       </object>
                                     </child>
                                   </object>
