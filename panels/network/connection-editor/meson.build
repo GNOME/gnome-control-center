@@ -2,7 +2,7 @@ name = 'connection-editor'
 
 ui_sources = files(
   'connection-editor.blp',
-  'details-page.blp',
+  'ce-page-details.blp',
   'security-page.blp',
   '8021x-security-page.blp',
   'bluetooth-page.blp',

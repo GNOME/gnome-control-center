@@ -1,0 +1,147 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CEPageDetails: Adw.PreferencesPage {
+  title: _("Details");
+
+  Adw.PreferencesGroup properties_group {
+    Adw.ActionRow strength_row {
+      title: _("Signal Strength");
+      subtitle: _("Weak");
+      subtitle-selectable: true;
+
+      styles [
+        "property",
+      ]
+    }
+
+    Adw.ActionRow speed_row {
+      title: _("Link speed");
+      subtitle: _("1Mb/sec");
+      subtitle-selectable: true;
+
+      styles [
+        "property",
+      ]
+    }
+
+    Adw.ActionRow security_row {
+      title: _("Security");
+      subtitle: "WPA";
+      subtitle-selectable: true;
+
+      styles [
+        "property",
+      ]
+    }
+
+    Adw.ActionRow ipv4_row {
+      title: _("IPv4 Address");
+      subtitle: "127.0.0.1";
+      subtitle-selectable: true;
+
+      styles [
+        "property",
+      ]
+    }
+
+    Adw.ActionRow ipv6_row {
+      title: _("IPv6 Address");
+      subtitle: "::1";
+      subtitle-selectable: true;
+
+      styles [
+        "property",
+      ]
+    }
+
+    Adw.ActionRow mac_row {
+      title: _("Hardware Address");
+      subtitle: "AA:BB:CC:DD:55:66:77:88";
+      subtitle-selectable: true;
+
+      styles [
+        "property",
+      ]
+    }
+
+    Adw.ActionRow freq_row {
+      title: _("Supported Frequencies");
+      subtitle: "2.4 GHz / 5 GHz";
+      subtitle-selectable: true;
+
+      styles [
+        "property",
+      ]
+    }
+
+    Adw.ActionRow route_row {
+      title: _("Default Route");
+      subtitle: "127.0.0.1";
+      subtitle-selectable: true;
+
+      styles [
+        "property",
+      ]
+    }
+
+    Adw.ActionRow dns4_row {
+      title: _("DNS");
+      subtitle: "127.0.0.1";
+      subtitle-selectable: true;
+
+      styles [
+        "property",
+      ]
+    }
+
+    Adw.ActionRow dns6_row {
+      title: _("DNS");
+      subtitle: "::1";
+      subtitle-selectable: true;
+
+      styles [
+        "property",
+      ]
+    }
+
+    Adw.ActionRow last_used_row {
+      title: _("Last Used");
+      subtitle: "today";
+      subtitle-selectable: true;
+
+      styles [
+        "property",
+      ]
+    }
+  }
+
+  Adw.PreferencesGroup switches_group {
+    Adw.SwitchRow auto_connect_switch {
+      title: _("Connect _automatically");
+      use-underline: true;
+    }
+
+    Adw.SwitchRow all_user_switch {
+      title: _("Make available to _other users");
+      use-underline: true;
+    }
+
+    Adw.SwitchRow restrict_data_switch {
+      title: _("_Metered connection: has data limits or can incur charges");
+      subtitle: _("Software updates and other large downloads will not be started automatically.");
+      use-underline: true;
+    }
+  }
+
+  Adw.PreferencesGroup {
+    visible: bind forget_button.visible no-sync-create;
+
+    Adw.ButtonRow forget_button {
+      styles [
+        "destructive-action",
+      ]
+    }
+  }
+}
+
