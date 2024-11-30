@@ -261,7 +261,6 @@ config_h.set10('HAVE_FN_EXPLICIT_BZERO',
 # Snap support
 enable_snap = get_option('snap')
 if enable_snap
-  json_glib_dep = dependency('json-glib-1.0')
   libsoup_dep = dependency('libsoup-3.0')
 endif
 config_h.set('HAVE_SNAP', enable_snap,
@@ -289,6 +288,10 @@ config_h.set('HAVE_LOCATION_SERVICES', location_services.enabled(),
 wellbeing = get_option('wellbeing')
 config_h.set('BUILD_WELLBEING', wellbeing.enabled(),
              description: 'Whether the wellbeing panel developer preview is enabled')
+
+if enable_snap or wellbeing
+  json_glib_dep = dependency('json-glib-1.0')
+endif
 
 if host_is_linux
   # ModemManager
