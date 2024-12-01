@@ -298,18 +298,9 @@ cc_wacom_stylus_page_class_init (CcWacomStylusPageClass *klass)
 }
 
 static void
-add_marks (GtkScale *scale)
-{
-	gtk_scale_add_mark (scale, 100, GTK_POS_BOTTOM, NULL);
-}
-
-static void
 cc_wacom_stylus_page_init (CcWacomStylusPage *page)
 {
 	gtk_widget_init_template (GTK_WIDGET (page));
-
-	add_marks (GTK_SCALE (page->stylus_tip_pressure_scale));
-	add_marks (GTK_SCALE (page->stylus_eraser_pressure_scale));
 }
 
 static void
