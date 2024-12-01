@@ -43,9 +43,6 @@ struct _CcWacomStylusPage
 	GtkWidget      *stylus_button1_action_row;
 	GtkWidget      *stylus_button2_action_row;
 	GtkWidget      *stylus_button3_action_row;
-	GtkLabel       *stylus_button1_action_label;
-	GtkLabel       *stylus_button2_action_label;
-	GtkLabel       *stylus_button3_action_label;
 	GtkWidget      *stylus_eraser_pressure;
 	GtkWidget      *stylus_tip_pressure_scale;
 	GtkWidget      *stylus_eraser_pressure_scale;
@@ -281,9 +278,6 @@ cc_wacom_stylus_page_class_init (CcWacomStylusPageClass *klass)
 	gtk_widget_class_bind_template_child (widget_class, CcWacomStylusPage, stylus_button1_action_row);
 	gtk_widget_class_bind_template_child (widget_class, CcWacomStylusPage, stylus_button2_action_row);
 	gtk_widget_class_bind_template_child (widget_class, CcWacomStylusPage, stylus_button3_action_row);
-	gtk_widget_class_bind_template_child (widget_class, CcWacomStylusPage, stylus_button1_action_label);
-	gtk_widget_class_bind_template_child (widget_class, CcWacomStylusPage, stylus_button2_action_label);
-	gtk_widget_class_bind_template_child (widget_class, CcWacomStylusPage, stylus_button3_action_label);
 	gtk_widget_class_bind_template_child (widget_class, CcWacomStylusPage, stylus_eraser_pressure);
 	gtk_widget_class_bind_template_child (widget_class, CcWacomStylusPage, stylus_tip_pressure_scale);
 	gtk_widget_class_bind_template_child (widget_class, CcWacomStylusPage, stylus_eraser_pressure_scale);
@@ -320,11 +314,10 @@ on_button_action_changed (GSettings *settings,
 			  gpointer user_data)
 {
 	GDesktopStylusButtonAction action = g_settings_get_enum (settings, key);
-	GtkLabel *label = GTK_LABEL (user_data);
 	const char *text = cc_wacom_panel_get_stylus_button_action_label (action);
 
 	if (text)
-		gtk_label_set_label (label, text);
+		cc_list_row_set_secondary_label (CC_LIST_ROW (user_data), text);
 }
 
 GtkWidget *
@@ -373,25 +366,25 @@ cc_wacom_stylus_page_new (CcWacomPanel *panel,
 	g_signal_connect (G_OBJECT (page->stylus_settings),
 			  "changed::button-action",
 			  G_CALLBACK (on_button_action_changed),
-			  page->stylus_button1_action_label);
+			  page->stylus_button1_action_row);
 	g_signal_connect (G_OBJECT (page->stylus_settings),
 			  "changed::secondary-button-action",
 			  G_CALLBACK (on_button_action_changed),
-			  page->stylus_button2_action_label);
+			  page->stylus_button2_action_row);
 	g_signal_connect (G_OBJECT (page->stylus_settings),
 			  "changed::tertiary-button-action",
 			  G_CALLBACK (on_button_action_changed),
-			  page->stylus_button3_action_label);
+			  page->stylus_button3_action_row);
 
 	on_button_action_changed (page->stylus_settings,
 				  "button-action",
-				  page->stylus_button1_action_label);
+				  page->stylus_button1_action_row);
 	on_button_action_changed (page->stylus_settings,
 				  "secondary-button-action",
-				  page->stylus_button2_action_label);
+				  page->stylus_button2_action_row);
 	on_button_action_changed (page->stylus_settings,
 				  "tertiary-button-action",
-				  page->stylus_button3_action_label);
+				  page->stylus_button3_action_row);
 
 	return GTK_WIDGET (page);
 }
@@ -419,27 +412,27 @@ cc_wacom_panel_get_stylus_button_action_label (GDesktopStylusButtonAction action
 
 	switch (action) {
 		case G_DESKTOP_STYLUS_BUTTON_ACTION_DEFAULT:
-			text = _("_Left Mousebutton Click");
+			text = _("Left Mousebutton Click");
 			break;
 		case G_DESKTOP_STYLUS_BUTTON_ACTION_MIDDLE:
-			text = _("_Middle Mousebutton Click");
+			text = _("Middle Mousebutton Click");
 			break;
 		case G_DESKTOP_STYLUS_BUTTON_ACTION_RIGHT:
-			text = _("_Right Mousebutton Click");
+			text = _("Right Mousebutton Click");
 			break;
 		case G_DESKTOP_STYLUS_BUTTON_ACTION_BACK:
 			/* Translators: this is the "go back" action of a button  */
-			text = _("_Back");
+			text = _("Back");
 			break;
 		case G_DESKTOP_STYLUS_BUTTON_ACTION_FORWARD:
 			/* Translators: this is the "go forward" action of a button  */
-			text = _("_Forward");
+			text = _("Forward");
 			break;
 		case G_DESKTOP_STYLUS_BUTTON_ACTION_KEYBINDING:
-			text = _("_Assign Keystroke");
+			text = _("Assign Keystroke");
 			break;
 		case G_DESKTOP_STYLUS_BUTTON_ACTION_SWITCH_MONITOR:
-			text = _("_Switch Monitor");
+			text = _("Switch Monitor");
 			break;
 	}
 
