@@ -150,7 +150,7 @@ run_in_thread (GTask           *task,
         state->func = func;
 
         g_mutex_lock (&thread_mutex);
-        g_queue_push_head_link (&thread_queue, &state->link);
+        g_queue_push_tail_link (&thread_queue, &state->link);
         if (thread == NULL)
                 thread = g_thread_new ("[cc-background-item]", run_in_thread_worker, NULL);
         g_mutex_unlock (&thread_mutex);
