@@ -32,3 +32,4 @@ G_BEGIN_DECLS
 G_DECLARE_FINAL_TYPE (CcRegionPage, cc_region_page, CC, REGION_PAGE, AdwNavigationPage)
 
 G_END_DECLS
+

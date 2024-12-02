@@ -26,22 +26,23 @@
 #include "cc-format-preview.h"
 
 #include <errno.h>
-#include <locale.h>
-#include <langinfo.h>
-#include <string.h>
 #include <glib/gi18n.h>
+#include <langinfo.h>
+#include <locale.h>
+#include <string.h>
 
-struct _CcFormatPreview {
-  AdwPreferencesGroup     parent_instance;
+struct _CcFormatPreview
+{
+  AdwPreferencesGroup parent_instance;
 
-  AdwActionRow *date_format_row;
-  AdwActionRow *date_time_format_row;
-  AdwActionRow *measurement_format_row;
-  AdwActionRow *number_format_row;
-  AdwActionRow *paper_format_row;
-  AdwActionRow *time_format_row;
+  AdwActionRow       *date_format_row;
+  AdwActionRow       *date_time_format_row;
+  AdwActionRow       *measurement_format_row;
+  AdwActionRow       *number_format_row;
+  AdwActionRow       *paper_format_row;
+  AdwActionRow       *time_format_row;
 
-  gchar     *region;
+  gchar              *region;
 };
 
 enum
@@ -65,13 +66,13 @@ update_format_examples (CcFormatPreview *self)
   const gchar *region = self->region;
   locale_t locale;
   locale_t old_locale;
-  g_autoptr(GDateTime) dt = NULL;
+  g_autoptr (GDateTime) dt = NULL;
   g_autofree gchar *s = NULL;
 #ifdef LC_MEASUREMENT
   const gchar *fmt;
   gboolean is_imperial = FALSE;
 #endif
-  g_autoptr(GtkPaperSize) paper = NULL;
+  g_autoptr (GtkPaperSize) paper = NULL;
 
   if (region == NULL || region[0] == '\0')
     return;
@@ -145,9 +146,9 @@ update_format_examples (CcFormatPreview *self)
     }
 
   if (is_imperial)
-    adw_action_row_set_subtitle (self->measurement_format_row, C_("measurement format", "Imperial"));
+    adw_action_row_set_subtitle (self->measurement_format_row, C_ ("measurement format", "Imperial"));
   else
-    adw_action_row_set_subtitle (self->measurement_format_row, C_("measurement format", "Metric"));
+    adw_action_row_set_subtitle (self->measurement_format_row, C_ ("measurement format", "Metric"));
 
 #endif
 
@@ -179,14 +180,15 @@ cc_format_preview_set_property (GObject      *object,
 
   self = CC_FORMAT_PREVIEW (object);
 
-  switch (prop_id) {
-  case PROP_REGION:
-    cc_format_preview_set_region (self, g_value_get_string (value));
-    break;
-  default:
-    G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-    break;
-  }
+  switch (prop_id)
+    {
+    case PROP_REGION:
+      cc_format_preview_set_region (self, g_value_get_string (value));
+      break;
+    default:
+      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+      break;
+    }
 }
 
 static void
@@ -199,14 +201,15 @@ cc_format_preview_get_property (GObject    *object,
 
   self = CC_FORMAT_PREVIEW (object);
 
-  switch (prop_id) {
-  case PROP_REGION:
-    g_value_set_string (value, self->region);
-    break;
-  default:
-    G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-    break;
-  }
+  switch (prop_id)
+    {
+    case PROP_REGION:
+      g_value_set_string (value, self->region);
+      break;
+    default:
+      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+      break;
+    }
 }
 
 static void
@@ -252,7 +255,7 @@ cc_format_preview_class_init (CcFormatPreviewClass *klass)
 void
 cc_format_preview_init (CcFormatPreview *self)
 {
-  g_autoptr(GtkCssProvider) provider = NULL;
+  g_autoptr (GtkCssProvider) provider = NULL;
 
   gtk_widget_init_template (GTK_WIDGET (self));
 
@@ -272,3 +275,4 @@ cc_format_preview_set_region (CcFormatPreview *preview,
   preview->region = g_strdup (region);
   update_format_examples (preview);
 }
+

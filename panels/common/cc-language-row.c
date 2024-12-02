@@ -16,26 +16,27 @@
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "cc-language-row.h"
 #include "cc-common-resources.h"
+#include "cc-language-row.h"
 
 #define GNOME_DESKTOP_USE_UNSTABLE_API
 #include <libgnome-desktop/gnome-languages.h>
 
-struct _CcLanguageRow {
+struct _CcLanguageRow
+{
   GtkListBoxRow parent_instance;
 
-  GtkImage *check_image;
-  GtkLabel *country_label;
-  GtkLabel *language_label;
+  GtkImage     *check_image;
+  GtkLabel     *country_label;
+  GtkLabel     *language_label;
 
-  gchar *locale_id;
-  gchar *language;
-  gchar *language_local;
-  gchar *country;
-  gchar *country_local;
+  gchar        *locale_id;
+  gchar        *language;
+  gchar        *language_local;
+  gchar        *country;
+  gchar        *country_local;
 
-  gboolean is_extra;
+  gboolean      is_extra;
 };
 
 G_DEFINE_TYPE (CcLanguageRow, cc_language_row, GTK_TYPE_LIST_BOX_ROW)
@@ -182,3 +183,4 @@ cc_language_row_get_is_extra (CcLanguageRow *self)
   g_return_val_if_fail (CC_IS_LANGUAGE_ROW (self), FALSE);
   return self->is_extra;
 }
+
