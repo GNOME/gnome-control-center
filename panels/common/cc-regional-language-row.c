@@ -32,6 +32,9 @@ struct _CcRegionalLanguageRow {
   GtkLabel *title_label;
   GtkLabel *description_label;
 
+  GtkLabel *region_label;
+  GtkLabel *language_label;
+
   gchar *locale_id;
   gchar *language;
   gchar *language_local;
@@ -99,7 +102,8 @@ cc_regional_language_row_init (CcRegionalLanguageRow *self)
 }
 
 CcRegionalLanguageRow *
-cc_regional_language_row_new (const gchar *locale_id)
+cc_regional_language_row_new (const gchar               *locale_id,
+                              CcRegionalLanguageRowType  row_type)
 {
   CcRegionalLanguageRow *self;
   g_autofree gchar *language_code = NULL;
@@ -111,9 +115,24 @@ cc_regional_language_row_new (const gchar *locale_id)
 
   gnome_parse_locale (locale_id, &language_code, &country_code, NULL, &modifier);
 
+  switch (row_type)
+    {
+      case CC_REGIONAL_LANGUAGE_ROW_TYPE_REGION:
+          self->region_label = self->title_label;
+          self->language_label = self->description_label;
+        break;
+      case CC_REGIONAL_LANGUAGE_ROW_TYPE_LANGUAGE:
+          self->region_label = self->description_label;
+          self->language_label = self->title_label;
+        break;
+      default:
+        /* TODO: should be an error */
+        break;
+    }
+
   self->language = get_language_label (language_code, modifier, locale_id);
   self->language_local = get_language_label (language_code, modifier, NULL);
-  gtk_label_set_label (self->title_label, self->language);
+  gtk_label_set_label (self->language_label, self->language);
 
   if (country_code == NULL)
     {
@@ -124,7 +143,7 @@ cc_regional_language_row_new (const gchar *locale_id)
     {
       self->country = gnome_get_country_from_code (country_code, locale_id);
       self->country_local = gnome_get_country_from_code (country_code, NULL);
-      gtk_label_set_label (self->description_label, self->country);
+      gtk_label_set_label (self->region_label, self->country);
     }
 
   return self;
