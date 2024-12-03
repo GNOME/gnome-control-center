@@ -55,4 +55,7 @@ void cc_regional_language_row_set_is_extra (CcRegionalLanguageRow *row,
 
 gboolean cc_regional_language_row_get_is_extra (CcRegionalLanguageRow *row);
 
+void cc_regional_language_row_add_suffix_widget (CcRegionalLanguageRow *row,
+                                                 GtkWidget *widget);
+
 G_END_DECLS
