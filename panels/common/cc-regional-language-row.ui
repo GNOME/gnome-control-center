@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
-  <!-- interface-requires gtk+ 3.0 -->
-  <template class="CcLanguageRow" parent="GtkListBoxRow">
-    <child>
+  <template class="CcRegionalLanguageRow" parent="GtkListBoxRow">
+    <property name="child">
       <object class="GtkBox">
         <property name="visible">True</property>
         <property name="spacing">12</property>
@@ -36,6 +35,6 @@
           </object>
         </child>
       </object>
-    </child>
+    </property>
   </template>
 </interface>
