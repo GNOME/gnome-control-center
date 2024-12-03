@@ -74,7 +74,7 @@ add_all_languages (CcLanguageChooser *self)
                 if (!cc_common_language_has_font (locale_ids[i]))
                         continue;
 
-                row = cc_regional_language_row_new (locale_ids[i]);
+                row = cc_regional_language_row_new (locale_ids[i], CC_REGIONAL_LANGUAGE_ROW_TYPE_LANGUAGE);
                 is_initial = (g_hash_table_lookup (initial, locale_ids[i]) != NULL);
                 cc_regional_language_row_set_is_extra (row, !is_initial);
                 gtk_list_box_prepend (self->language_listbox, GTK_WIDGET (row));
