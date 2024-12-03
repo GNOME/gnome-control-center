@@ -204,3 +204,19 @@ cc_regional_language_row_get_is_extra (CcRegionalLanguageRow *self)
   g_return_val_if_fail (CC_IS_REGIONAL_LANGUAGE_ROW (self), FALSE);
   return self->is_extra;
 }
+
+void
+cc_regional_language_row_add_suffix_widget (CcRegionalLanguageRow *self,
+                                            GtkWidget             *widget)
+{
+  GtkWidget *box;
+
+  g_return_if_fail (CC_IS_REGIONAL_LANGUAGE_ROW (self));
+
+  box = gtk_list_box_row_get_child (GTK_LIST_BOX_ROW (self));
+
+  g_return_if_fail (GTK_IS_BOX (box));
+  g_return_if_fail (GTK_IS_WIDGET (widget));
+
+  gtk_box_append (GTK_BOX (box), widget);
+}
