@@ -144,13 +144,13 @@ struct _CcApplicationsPanel
   guint64          data_size;
 };
 
+CC_PANEL_REGISTER (CcApplicationsPanel, cc_applications_panel)
+
 static void select_app (CcApplicationsPanel *self,
                         const gchar         *app_id,
                         gboolean             emit_activate);
 
 static void update_handler_dialog (CcApplicationsPanel *self, GAppInfo *info);
-
-G_DEFINE_TYPE (CcApplicationsPanel, cc_applications_panel, CC_TYPE_PANEL)
 
 enum
 {
