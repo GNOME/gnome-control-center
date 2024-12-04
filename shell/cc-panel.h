@@ -103,6 +103,8 @@ void          cc_panel_push_subpage       (CcPanel     *panel,
 
 void          cc_panel_pop_visible_subpage (CcPanel    *panel);
 
+void          cc_panel_enable_single_page_mode (CcPanel   *panel);
+
 AdwNavigationPage *cc_panel_get_visible_subpage (CcPanel *panel);
 
 G_END_DECLS
