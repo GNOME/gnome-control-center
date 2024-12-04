@@ -60,6 +60,7 @@ struct _CcWindow
   GtkWidget  *current_panel;
   char       *current_panel_id;
   GQueue     *previous_panels;
+  gboolean    single_panel_mode;
 
   GtkWidget  *custom_titlebar;
 
@@ -354,10 +355,10 @@ set_active_panel_from_id (CcWindow     *self,
       CC_RETURN (TRUE);
     }
 
-  if (add_to_history)
+  if (!self->single_panel_mode && add_to_history)
     add_current_panel_to_history (self, start_id);
 
-  if (force_moving_to_the_panel)
+  if (!self->single_panel_mode && force_moving_to_the_panel)
     adw_navigation_split_view_set_show_content (self->split_view, TRUE);
 
   g_free (self->current_panel_id);
@@ -365,7 +366,10 @@ set_active_panel_from_id (CcWindow     *self,
 
   CC_TRACE_MSG ("Current panel id: %s", start_id);
 
-  cc_panel_list_set_active_panel (self->panel_list, start_id);
+
+  /* Don't activate the panel list in single panel mode. */
+  if (!self->single_panel_mode)
+    cc_panel_list_set_active_panel (self->panel_list, start_id);
 
   CC_RETURN (TRUE);
 }
@@ -809,4 +813,15 @@ cc_window_set_search_item (CcWindow   *center,
   gtk_search_bar_set_search_mode (center->search_bar, TRUE);
   gtk_editable_set_text (GTK_EDITABLE (center->search_entry), search);
   gtk_editable_set_position (GTK_EDITABLE (center->search_entry), -1);
+}
+
+void
+cc_window_launch_single_panel_mode (CcWindow *self)
+{
+  g_return_if_fail (CC_IS_WINDOW (self));
+
+  self->single_panel_mode = TRUE;
+
+  adw_navigation_split_view_set_collapsed (self->split_view, TRUE);
+  adw_navigation_split_view_set_sidebar (self->split_view, NULL);
 }

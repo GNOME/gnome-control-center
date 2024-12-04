@@ -36,4 +36,6 @@ CcWindow *cc_window_new (GtkApplication *application,
 void cc_window_set_search_item (CcWindow *center,
                                 const char *search);
 
+void cc_window_launch_single_panel_mode (CcWindow *self);
+
 G_END_DECLS
