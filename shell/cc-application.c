@@ -49,6 +49,10 @@ static void launch_panel_activated (GSimpleAction *action,
                                     GVariant      *parameter,
                                     gpointer       user_data);
 
+static void launch_single_panel_mode_activated (GSimpleAction *action,
+                                                GVariant      *parameter,
+                                                gpointer       user_data);
+
 static void help_activated         (GSimpleAction *action,
                                     GVariant      *parameter,
                                     gpointer       user_data);
@@ -75,6 +79,7 @@ const GOptionEntry all_options[] = {
 
 static const GActionEntry cc_app_actions[] = {
   { "launch-panel", launch_panel_activated, "(sav)", NULL, NULL, { 0 } },
+  { "launch-single-panel-mode", launch_single_panel_mode_activated, "(sav)", NULL, NULL, { 0 } },
   { "help", help_activated, NULL, NULL, NULL, { 0 } },
   { "quit", cc_application_quit, NULL, NULL, NULL, { 0 } },
   { "about", about_activated, NULL, NULL, NULL, { 0 } }
@@ -153,6 +158,18 @@ launch_panel_activated (GSimpleAction *action,
 
   /* Now present the window */
   g_application_activate (G_APPLICATION (self));
+}
+
+static void
+launch_single_panel_mode_activated (GSimpleAction *action,
+                                    GVariant      *parameter,
+                                    gpointer       user_data)
+{
+  CcApplication *self = CC_APPLICATION (user_data);
+
+  cc_window_enable_single_panel_mode (self->window);
+
+  launch_panel_activated (action, parameter, user_data);
 }
 
 static char **
