@@ -45,13 +45,6 @@ struct _CcRemovableMediaSettings
 {
   AdwPreferencesGroup  parent;
 
-  GtkWidget           *cd_audio_row;
-  GtkWidget           *dvd_video_row;
-  GtkWidget           *music_player_row;
-  GtkWidget           *photos_row;
-  GtkWidget           *software_row;
-  GtkWidget           *other_media_row;
-
   GtkAppChooserButton *audio_cdda_chooser;
   GtkAppChooserButton *dcf_chooser;
   GtkAppChooserButton *music_player_chooser;
@@ -466,37 +459,7 @@ info_panel_setup_media (CcRemovableMediaSettings *self)
 
   g_settings_bind (self->settings,
                    PREF_MEDIA_AUTORUN_NEVER,
-                   self->cd_audio_row,
-                   "sensitive",
-                   G_SETTINGS_BIND_INVERT_BOOLEAN);
-
-  g_settings_bind (self->settings,
-                   PREF_MEDIA_AUTORUN_NEVER,
-                   self->dvd_video_row,
-                   "sensitive",
-                   G_SETTINGS_BIND_INVERT_BOOLEAN);
-
-  g_settings_bind (self->settings,
-                   PREF_MEDIA_AUTORUN_NEVER,
-                   self->music_player_row,
-                   "sensitive",
-                   G_SETTINGS_BIND_INVERT_BOOLEAN);
-
-  g_settings_bind (self->settings,
-                   PREF_MEDIA_AUTORUN_NEVER,
-                   self->photos_row,
-                   "sensitive",
-                   G_SETTINGS_BIND_INVERT_BOOLEAN);
-
-  g_settings_bind (self->settings,
-                   PREF_MEDIA_AUTORUN_NEVER,
-                   self->software_row,
-                   "sensitive",
-                   G_SETTINGS_BIND_INVERT_BOOLEAN);
-
-  g_settings_bind (self->settings,
-                   PREF_MEDIA_AUTORUN_NEVER,
-                   self->other_media_row,
+                   self,
                    "sensitive",
                    G_SETTINGS_BIND_INVERT_BOOLEAN);
 }
@@ -543,12 +506,6 @@ cc_removable_media_settings_class_init (CcRemovableMediaSettingsClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcRemovableMediaSettings, other_type_list_store);
   gtk_widget_class_bind_template_child (widget_class, CcRemovableMediaSettings, software_chooser);
   gtk_widget_class_bind_template_child (widget_class, CcRemovableMediaSettings, video_dvd_chooser);
-  gtk_widget_class_bind_template_child (widget_class, CcRemovableMediaSettings, cd_audio_row);
-  gtk_widget_class_bind_template_child (widget_class, CcRemovableMediaSettings, dvd_video_row);
-  gtk_widget_class_bind_template_child (widget_class, CcRemovableMediaSettings, music_player_row);
-  gtk_widget_class_bind_template_child (widget_class, CcRemovableMediaSettings, photos_row);
-  gtk_widget_class_bind_template_child (widget_class, CcRemovableMediaSettings, software_row);
-  gtk_widget_class_bind_template_child (widget_class, CcRemovableMediaSettings, other_media_row);
 
   gtk_widget_class_bind_template_callback (widget_class, on_extra_options_dialog_close_attempt);
   gtk_widget_class_bind_template_callback (widget_class, on_extra_options_button_clicked);
