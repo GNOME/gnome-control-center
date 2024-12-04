@@ -46,6 +46,7 @@ typedef struct
   GCancellable *cancellable;
 
   AdwNavigationView *navigation;
+  gboolean           single_page_mode;
 
   GHashTable *subpages;
 } CcPanelPrivate;
@@ -114,6 +115,7 @@ set_subpage (CcPanel     *panel,
           GType page_type = GPOINTER_TO_TYPE (g_hash_table_lookup (priv->subpages, tag));
 
           page = ADW_NAVIGATION_PAGE (g_object_new (page_type, NULL));
+          adw_navigation_page_set_can_pop (page, priv->single_page_mode);
           adw_navigation_view_add (priv->navigation, page);
         }
       else
@@ -370,4 +372,14 @@ cc_panel_get_visible_subpage (CcPanel *panel)
   g_return_val_if_fail (CC_IS_PANEL (panel), NULL);
 
   return adw_navigation_view_get_visible_page (priv->navigation);
+}
+
+void
+cc_panel_set_single_page_mode (CcPanel *panel)
+{
+  CcPanelPrivate *priv = cc_panel_get_instance_private (panel);
+
+  g_return_if_fail (CC_IS_PANEL (panel));
+
+  priv->single_page_mode = TRUE;
 }

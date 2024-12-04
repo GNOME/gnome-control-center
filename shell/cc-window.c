@@ -355,6 +355,8 @@ set_active_panel_from_id (CcWindow     *self,
       CC_RETURN (TRUE);
     }
 
+  cc_panel_set_single_page_mode (CC_PANEL (self->current_panel));
+
   if (!self->single_panel_mode && add_to_history)
     add_current_panel_to_history (self, start_id);
 
