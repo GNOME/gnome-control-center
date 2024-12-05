@@ -41,8 +41,6 @@ sources = files(
   'cc-system-panel.c',
   'cc-systemd-service.c',
   'about/cc-about-page.c',
-  'about/cc-system-details-window.c',
-  'about/cc-info-entry.c',
   'about/info-cleanup.c',
   'datetime/cc-datetime-page.c',
   'datetime/cc-tz-item.c',

@@ -9,102 +9,171 @@ template $CcAboutPage: Adw.NavigationPage {
     [top]
     Adw.HeaderBar {}
 
-    content: Adw.PreferencesPage {
-      Adw.PreferencesGroup {
-        Adw.Clamp {
-          orientation: vertical;
-          maximum-size: 192;
-          tightening-threshold: 192;
+    content: Adw.ToastOverlay toast_overlay {
+      child: Adw.PreferencesPage {
+        Adw.PreferencesGroup {
+          Adw.Clamp {
+            orientation: vertical;
+            maximum-size: 192;
+            tightening-threshold: 192;
 
-          child: Picture os_logo {
-            can-shrink: false;
-            content-fit: scale_down;
-            alternative-text: _("System Logo");
-          };
-        }
-      }
-
-      Adw.PreferencesGroup {
-        Adw.ActionRow {
-          title: _("Support GNOME");
-          subtitle: _("GNOME needs your help. Please donate today.");
-
-          [suffix]
-          Button {
-            label: _("D_onate");
-            use-underline: true;
-            valign: center;
-            styles [
-              "suggested-action",
-            ]
-
-            clicked => $on_donate_button_clicked_cb(template);
+            child: Picture os_logo {
+              can-shrink: false;
+              content-fit: scale_down;
+              alternative-text: _("System Logo");
+            };
           }
         }
-      }
 
-      Adw.PreferencesGroup {
-        $CcHostnameEntry hostname_row {
-          title: _("_Device Name");
-          use-underline: true;
-        }
-      }
+        Adw.PreferencesGroup {
+          Adw.ActionRow {
+            title: _("Support GNOME");
+            subtitle: _("GNOME needs your help. Please donate today.");
 
-      Adw.PreferencesGroup {
-        Adw.ActionRow os_name_row {
-          /* Translators: this field contains the distro name and version */
-          title: _("Operating System");
-          subtitle-selectable: true;
+            [suffix]
+            Button {
+              label: _("D_onate");
+              use-underline: true;
+              valign: center;
+              styles [
+                "suggested-action",
+              ]
 
-          styles [
-            "property",
-          ]
-        }
-
-        Adw.ActionRow hardware_model_row {
-          visible: false;
-          title: _("Hardware Model");
-          subtitle-selectable: true;
-
-          styles [
-            "property",
-          ]
+              clicked => $on_donate_button_clicked_cb(template);
+            }
+          }
         }
 
-        Adw.ActionRow processor_row {
-          title: _("Processor");
-          subtitle-selectable: true;
-
-          styles [
-            "property",
-          ]
+        Adw.PreferencesGroup {
+          $CcHostnameEntry hostname_row {
+            title: _("_Device Name");
+            use-underline: true;
+          }
         }
 
-        Adw.ActionRow memory_row {
-          title: _("Memory");
-          subtitle-selectable: true;
+        Adw.PreferencesGroup hardware_group {
+          title: _("Hardware Information");
 
-          styles [
-            "property",
-          ]
+          Adw.ActionRow hardware_model_row {
+            title: _("Model");
+            subtitle-selectable: true;
+
+            styles [
+              "property",
+            ]
+          }
+
+          Adw.ActionRow memory_row {
+            title: _("Memory");
+            subtitle-selectable: true;
+
+            styles [
+              "property",
+            ]
+          }
+
+          Adw.ActionRow processor_row {
+            title: _("Processor");
+            subtitle-selectable: true;
+
+            styles [
+              "property",
+            ]
+          }
+
+          Adw.ActionRow disk_row {
+            title: _("Disk Capacity");
+            subtitle: _("Calculating…");
+            subtitle-selectable: true;
+
+            styles [
+              "property",
+            ]
+          }
         }
 
-        Adw.ActionRow disk_row {
-          title: _("Disk Capacity");
-          subtitle: _("Calculating…");
-          subtitle-selectable: true;
+        Adw.PreferencesGroup {
+          title: _("Software Information");
 
-          styles [
-            "property",
-          ]
+          Adw.ActionRow firmware_version_row {
+            title: _("Firmware Version");
+            subtitle-selectable: true;
+
+            styles [
+              "property",
+            ]
+          }
+
+          Adw.ActionRow os_name_row {
+            /* Translators: this field contains the distro name and version */
+            title: _("Operating System Name");
+            subtitle-selectable: true;
+
+            styles [
+              "property",
+            ]
+          }
+
+          Adw.ActionRow os_build_row {
+            /* Translators: this field contains the distro build */
+            title: _("Operating System Build");
+            subtitle-selectable: true;
+
+            styles [
+              "property",
+            ]
+          }
+
+          Adw.ActionRow os_type_row {
+            /* Translators: this field contains the distro type */
+            title: _("Operating System Type");
+            subtitle-selectable: true;
+
+            styles [
+              "property",
+            ]
+          }
+
+          Adw.ActionRow gnome_version_row {
+            title: _("GNOME Version");
+            subtitle-selectable: true;
+
+            styles [
+              "property",
+            ]
+          }
+
+          Adw.ActionRow virtualization_row {
+            title: _("Virtualization");
+            subtitle-selectable: true;
+
+            styles [
+              "property",
+            ]
+          }
+
+          Adw.ActionRow kernel_row {
+            title: _("Kernel Version");
+            subtitle-selectable: true;
+
+            styles [
+              "property",
+            ]
+          }
         }
 
-        $CcListRow {
-          title: _("_System Details");
-          show-arrow: true;
-          activated => $cc_about_page_open_system_details(template);
+        Adw.PreferencesGroup {
+          Button details_copy_button {
+            child: Adw.ButtonContent {
+              icon-name: "edit-copy-symbolic";
+              label: _("_Copy");
+              use-underline: true;
+            };
+
+            clicked => $on_copy_button_clicked_cb();
+          }
         }
-      }
+      };
     };
   };
 }

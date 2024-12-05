@@ -10,8 +10,6 @@ i18n.merge_file(
 
 ui_sources = files(
   'cc-about-page.blp',
-  'cc-info-entry.blp',
-  'cc-system-details-window.blp',
 )
 
 ui_compiled = []
