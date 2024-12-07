@@ -49,13 +49,13 @@ widget_unset_error (GtkWidget *widget)
 }
 
 gboolean
-dns_entry_valid (GtkEntry *dns_entry, int family)
+dns_entry_valid (GtkEditable *dns_entry, int family)
 {
     g_auto(GStrv) dns_addresses = NULL;
     g_autofree gchar *dns_text = NULL;
     int i;
 
-    dns_text = g_strstrip (g_strdup (gtk_editable_get_text (GTK_EDITABLE (dns_entry))));
+    dns_text = g_strstrip (g_strdup (gtk_editable_get_text (dns_entry)));
 
     if (dns_text[0] == '\0')
         return TRUE;

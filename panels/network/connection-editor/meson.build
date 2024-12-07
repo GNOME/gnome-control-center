@@ -7,7 +7,7 @@ ui_sources = files(
   '8021x-security-page.blp',
   'ce-page-bluetooth.blp',
   'ce-page-ethernet.blp',
-  'ip4-page.blp',
+  'ce-page-ip4.blp',
   'ip6-page.blp',
   'ce-page-vpn.blp',
   'ce-page-wifi.blp',

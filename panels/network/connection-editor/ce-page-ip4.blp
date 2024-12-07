@@ -1,0 +1,295 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CEPageIP4: Adw.PreferencesPage {
+  title: _("IPv4");
+
+  // FIXME Maybe this group should be an AdwComboRow?
+  Adw.PreferencesGroup {
+    title: _("IPv4 Method");
+
+    Adw.ActionRow {
+      title: _("Automatic (DHCP)");
+      activatable-widget: automatic_radio;
+
+      [prefix]
+      CheckButton automatic_radio {
+        action-name: "ip4page.ip4method";
+        action-target: "'automatic'";
+        can-focus: false;
+        valign: center;
+      }
+    }
+
+    Adw.ActionRow {
+      title: _("Link-Local Only");
+      activatable-widget: local_radio;
+
+      [prefix]
+      CheckButton local_radio {
+        action-name: "ip4page.ip4method";
+        action-target: "'local'";
+        can-focus: false;
+        valign: center;
+      }
+    }
+
+    Adw.ActionRow {
+      title: _("Manual");
+      activatable-widget: manual_radio;
+
+      [prefix]
+      CheckButton manual_radio {
+        action-name: "ip4page.ip4method";
+        action-target: "'manual'";
+        can-focus: false;
+        valign: center;
+      }
+    }
+
+    Adw.ActionRow {
+      title: _("Disable");
+      activatable-widget: disabled_radio;
+
+      [prefix]
+      CheckButton disabled_radio {
+        action-name: "ip4page.ip4method";
+        action-target: "'disabled'";
+        can-focus: false;
+        valign: center;
+      }
+    }
+
+    Adw.ActionRow {
+      title: _("Shared to other computers");
+      activatable-widget: shared_radio;
+
+      [prefix]
+      CheckButton shared_radio {
+        action-name: "ip4page.ip4method";
+        action-target: "'shared'";
+        can-focus: false;
+        valign: center;
+      }
+    }
+  }
+
+  Adw.PreferencesGroup address_group {
+    title: _("Addresses");
+
+    // FIXME This needs a redesign.
+    Box address_box {
+      orientation: vertical;
+
+      styles [
+        "address-config",
+      ]
+
+      Box {
+        orientation: horizontal;
+
+        Label address_address_label {
+          hexpand: true;
+          label: _("Address");
+
+          styles [
+            "dim-label",
+            "caption",
+          ]
+        }
+
+        Label address_netmask_label {
+          hexpand: true;
+          label: _("Netmask");
+
+          styles [
+            "dim-label",
+            "caption",
+          ]
+        }
+
+        Label address_gateway_label {
+          hexpand: true;
+          label: _("Gateway");
+
+          styles [
+            "dim-label",
+            "caption",
+          ]
+        }
+
+        /* This invisible box is used to add some width in the
+        * end of the header row, assuming the space used by the
+        * delete button in the rows
+        */
+        Box address_stub_box {}
+      }
+    }
+  }
+
+  Adw.PreferencesGroup dns_group {
+    title: _("DNS");
+
+    Adw.SwitchRow auto_dns_switch {
+      title: _("Automatic");
+      use-underline: true;
+
+      accessibility {
+        label: _("Automatic DNS");
+      }
+    }
+
+    // FIXME Maybe we could have a list of individual IP rows and an "Add IP Address" AdwButtonRow.
+    Adw.EntryRow dns_entry {
+      title: _("Separate IP addresses with commas");
+
+      accessibility {
+        label: _("DNS server address(es)");
+      }
+
+      EventControllerFocus {
+        leave => $announce_dns_validation(template);
+      }
+    }
+  }
+
+  Adw.PreferencesGroup dns_search_group {
+    title: _("DNS Search Domains");
+    sensitive: bind dns_group.sensitive;
+
+    Adw.EntryRow dns_search_entry {
+      title: _("Separate search domains with commas");
+
+      accessibility {
+        label: _("DNS Search Domains");
+      }
+    }
+  }
+
+  Adw.PreferencesGroup routes_group {
+    title: _("Routes");
+
+    Adw.SwitchRow auto_routes_switch {
+      title: _("Automatic");
+      use-underline: true;
+
+      accessibility {
+        label: _("Automatic Routes");
+      }
+    }
+
+    Adw.SwitchRow never_default_switch {
+      title: _("Use this connection _only for resources on its network");
+      use-underline: true;
+    }
+
+    // FIXME This needs a redesign.
+    Box route_config_box {
+      orientation: vertical;
+
+      styles [
+        "route-config",
+      ]
+
+      Box {
+        orientation: horizontal;
+
+        Label routes_address_label {
+          hexpand: true;
+          label: _("Address");
+
+          styles [
+            "dim-label",
+            "caption",
+          ]
+        }
+
+        Label routes_netmask_label {
+          hexpand: true;
+          label: _("Netmask");
+
+          styles [
+            "dim-label",
+            "caption",
+          ]
+        }
+
+        Label routes_gateway_label {
+          hexpand: true;
+          label: _("Gateway");
+
+          styles [
+            "dim-label",
+            "caption",
+          ]
+        }
+
+        Label routes_metric_label {
+          hexpand: true;
+
+          /* Translators: Please see https://en.wikipedia.org/wiki/Metrics_(networking) */
+          label: _("Metric");
+
+          styles [
+            "dim-label",
+            "caption",
+          ]
+        }
+
+        /* This invisible box is used to add some width in the
+        * end of the header row, assuming the space used by the
+        * delete button in the rows
+        */
+        Box routes_stub_box {}
+      }
+    }
+  }
+}
+
+SizeGroup routes_address_sizegroup {
+  mode: horizontal;
+
+  widgets [
+    routes_address_label,
+  ]
+}
+
+SizeGroup routes_netmask_sizegroup {
+  mode: horizontal;
+
+  widgets [
+    routes_netmask_label,
+  ]
+}
+
+SizeGroup routes_gateway_sizegroup {
+  mode: horizontal;
+
+  widgets [
+    routes_gateway_label,
+  ]
+}
+
+SizeGroup routes_metric_sizegroup {
+  mode: horizontal;
+
+  widgets [
+    routes_metric_label,
+  ]
+}
+
+SizeGroup routes_sizegroup {
+  mode: horizontal;
+
+  widgets [
+    routes_stub_box,
+  ]
+}
+
+SizeGroup address_sizegroup {
+  mode: horizontal;
+
+  widgets [
+    address_stub_box,
+  ]
+}

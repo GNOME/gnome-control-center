@@ -539,7 +539,7 @@ connect_ip6_page (CEPageIP6 *self)
 static void
 announce_dns_validation (CEPageIP6 *self)
 {
-    gboolean invalid = !dns_entry_valid (self->dns_entry, AF_INET6);
+    gboolean invalid = !dns_entry_valid (GTK_EDITABLE (self->dns_entry), AF_INET6);
 
     /* Only announce the transition from valid to invalid, otherwise the
      * screen reader would repeat itself while the entry stays invalid. */
@@ -651,7 +651,7 @@ ui_to_setting (CEPageIP6 *self)
     else
         dns_addresses = NULL;
 
-    if (!dns_entry_valid (self->dns_entry, AF_INET6)) {
+    if (!dns_entry_valid (GTK_EDITABLE (self->dns_entry), AF_INET6)) {
         g_clear_pointer (&dns_addresses, g_strfreev);
         widget_set_error (GTK_WIDGET (self->dns_entry));
         ret = FALSE;
