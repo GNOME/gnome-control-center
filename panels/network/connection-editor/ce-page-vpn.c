@@ -30,11 +30,10 @@
 #include "vpn-helpers.h"
 
 struct _CEPageVpn {
-    GtkBox parent;
+    AdwPreferencesPage parent;
 
-    GtkBox *box;
-    GtkLabel *failure_label;
-    GtkEntry *name_entry;
+    AdwEntryRow *name_entry;
+    GtkListBoxRow *row;
 
     NMConnection *connection;
     NMSettingConnection *setting_connection;
@@ -46,7 +45,7 @@ struct _CEPageVpn {
 
 static void ce_page_iface_init (CEPageInterface *);
 
-G_DEFINE_FINAL_TYPE_WITH_CODE (CEPageVpn, ce_page_vpn, GTK_TYPE_BOX,
+G_DEFINE_FINAL_TYPE_WITH_CODE (CEPageVpn, ce_page_vpn, ADW_TYPE_PREFERENCES_PAGE,
                                G_IMPLEMENT_INTERFACE (CE_TYPE_PAGE, ce_page_iface_init))
 
 /* Hack to make the plugin-provided editor widget fit in better with
@@ -105,8 +104,8 @@ load_vpn_plugin (CEPageVpn *self)
     }
     vpn_gnome3ify_editor (ui_widget);
 
-    gtk_box_remove (self->box, GTK_WIDGET (self->failure_label));
-    gtk_box_append (self->box, ui_widget);
+    /* FIXME This widget needs to be ported to AdwPreferencesGroup or something similar */
+    gtk_list_box_row_set_child (GTK_LIST_BOX_ROW (self->row), ui_widget);
 
     g_signal_connect_object (self->editor, "changed", G_CALLBACK (ce_page_changed), self, G_CONNECT_SWAPPED);
 }
@@ -136,12 +135,6 @@ static const gchar *
 ce_page_vpn_get_security_setting (CEPage *page)
 {
     return NM_SETTING_VPN_SETTING_NAME;
-}
-
-static const gchar *
-ce_page_vpn_get_title (CEPage *page)
-{
-    return _("Identity");
 }
 
 static gboolean
@@ -175,18 +168,17 @@ ce_page_vpn_class_init (CEPageVpnClass *class)
 
     object_class->dispose = ce_page_vpn_dispose;
 
-    gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/network/vpn-page.ui");
+    gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/network/ce-page-vpn.ui");
 
-    gtk_widget_class_bind_template_child (widget_class, CEPageVpn, box);
-    gtk_widget_class_bind_template_child (widget_class, CEPageVpn, failure_label);
     gtk_widget_class_bind_template_child (widget_class, CEPageVpn, name_entry);
+    gtk_widget_class_bind_template_child (widget_class, CEPageVpn, row);
 }
 
 static void
 ce_page_iface_init (CEPageInterface *iface)
 {
     iface->get_security_setting = ce_page_vpn_get_security_setting;
-    iface->get_title = ce_page_vpn_get_title;
+    iface->get_title = (const char *(*) (CEPage *) ) adw_preferences_page_get_title;
     iface->validate = ce_page_vpn_validate;
 }
 

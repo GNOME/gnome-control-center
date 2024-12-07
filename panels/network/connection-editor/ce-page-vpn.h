@@ -22,12 +22,12 @@
 #pragma once
 
 #include <NetworkManager.h>
-#include <gtk/gtk.h>
+#include <adwaita.h>
 
 G_BEGIN_DECLS
 
 #define CE_TYPE_PAGE_VPN (ce_page_vpn_get_type ())
-G_DECLARE_FINAL_TYPE (CEPageVpn, ce_page_vpn, CE, PAGE_VPN, GtkBox);
+G_DECLARE_FINAL_TYPE (CEPageVpn, ce_page_vpn, CE, PAGE_VPN, AdwPreferencesPage);
 CEPageVpn *ce_page_vpn_new (NMConnection *connection);
 
 G_END_DECLS

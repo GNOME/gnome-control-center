@@ -9,7 +9,7 @@ ui_sources = files(
   'ce-page-ethernet.blp',
   'ip4-page.blp',
   'ip6-page.blp',
-  'vpn-page.blp',
+  'ce-page-vpn.blp',
   'wifi-page.blp',
   'wireguard-page.blp',
   'wireguard-peer.blp',

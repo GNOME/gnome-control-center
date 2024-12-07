@@ -1,0 +1,25 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CEPageVpn: Adw.PreferencesPage {
+  title: _("Identity");
+
+  Adw.PreferencesGroup {
+    Adw.EntryRow name_entry {
+      title: _("_Name");
+      use-underline: true;
+    }
+
+    Adw.PreferencesRow row {
+      title: _("_Name");
+      use-underline: true;
+
+      // FIXME The error should be displayed in a better way.
+      Label failure_label {
+        xalign: 0;
+        use-markup: true;
+        label: _("<i>(Error: unable to load VPN connection editor)</i>");
+      }
+    }
+  }
+}
