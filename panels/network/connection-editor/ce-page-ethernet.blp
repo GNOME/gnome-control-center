@@ -1,0 +1,76 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CEPageEthernet: Adw.PreferencesPage {
+  title: _("Identity");
+
+  Adw.PreferencesGroup {
+    Adw.EntryRow name_entry {
+      title: _("_Name");
+      use-underline: true;
+    }
+
+    // FIXME This needs a redesign, maybe with some kind of AdwEntryComboRow.
+    Adw.ActionRow {
+      title: _("_MAC Address");
+      use-underline: true;
+
+      ComboBoxText mac_combo {
+        has-entry: true;
+        entry-text-column: 0;
+        id-column: 1;
+        valign: center;
+
+        [internal-child entry]
+        Entry {
+          EventControllerFocus {
+            leave => $announce_mac_validation(mac_combo);
+          }
+        }
+      }
+    }
+
+    // FIXME This needs a redesign, maybe with some kind of AdwEntryComboRow.
+    Adw.ActionRow {
+      title: _("_Cloned Address");
+      use-underline: true;
+
+      ComboBoxText cloned_mac_combo {
+        has-entry: true;
+        entry-text-column: 0;
+        id-column: 1;
+        valign: center;
+
+        [internal-child entry]
+        Entry {
+          EventControllerFocus {
+            leave => $announce_mac_validation(cloned_mac_combo);
+          }
+        }
+      }
+    }
+  }
+
+  Adw.PreferencesGroup {
+    title: _("Maximum Transmission Unit");
+
+    Adw.SwitchRow mtu_switch {
+      title: _("_Automatic Sizing");
+      use-underline: true;
+    }
+
+    Adw.SpinRow mtu_spin {
+      numeric: true;
+      sensitive: bind mtu_switch.active inverted;
+      title: _("_Size in Bytes");
+      use-underline: true;
+
+      adjustment: Adjustment {
+        lower: 1;
+        page-increment: 10;
+        step-increment: 1;
+        upper: 65536;
+      };
+    }
+  }
+}

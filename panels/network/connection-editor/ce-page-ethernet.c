@@ -30,13 +30,13 @@
 #include "ui-helpers.h"
 
 struct _CEPageEthernet {
-    AdwBin parent;
+    AdwPreferencesPage parent;
 
     GtkComboBoxText *cloned_mac_combo;
     GtkComboBoxText *mac_combo;
-    GtkSpinButton *mtu_spin;
-    GtkWidget *mtu_label;
-    GtkEntry *name_entry;
+    AdwSpinRow *mtu_spin;
+    AdwSwitchRow *mtu_switch;
+    AdwEntryRow *name_entry;
 
     NMClient *client;
     NMSettingConnection *setting_connection;
@@ -45,32 +45,8 @@ struct _CEPageEthernet {
 
 static void ce_page_iface_init (CEPageInterface *);
 
-G_DEFINE_FINAL_TYPE_WITH_CODE (CEPageEthernet, ce_page_ethernet, ADW_TYPE_BIN,
+G_DEFINE_FINAL_TYPE_WITH_CODE (CEPageEthernet, ce_page_ethernet, ADW_TYPE_PREFERENCES_PAGE,
                                G_IMPLEMENT_INTERFACE (CE_TYPE_PAGE, ce_page_iface_init))
-
-static void
-mtu_changed (CEPageEthernet *self)
-{
-    gtk_widget_set_visible (self->mtu_label, gtk_spin_button_get_value_as_int (self->mtu_spin) != 0);
-}
-
-static void
-mtu_output_cb (CEPageEthernet *self)
-{
-    gint defvalue;
-    gint val;
-    g_autofree gchar *buf = NULL;
-
-    val = gtk_spin_button_get_value_as_int (self->mtu_spin);
-    defvalue = ce_get_property_default (NM_SETTING (self->setting_wired), NM_SETTING_WIRED_MTU);
-    if (val == defvalue)
-        buf = g_strdup (_("automatic"));
-    else
-        buf = g_strdup_printf ("%d", val);
-
-    if (strcmp (buf, gtk_editable_get_text (GTK_EDITABLE (self->mtu_spin))))
-        gtk_editable_set_text (GTK_EDITABLE (self->mtu_spin), buf);
-}
 
 static void
 connect_ethernet_page (CEPageEthernet *self)
@@ -80,6 +56,7 @@ connect_ethernet_page (CEPageEthernet *self)
     const char *s_mac_str;
     const gchar *name;
     const gchar *cloned_mac;
+    guint32 mtu;
 
     name = nm_setting_connection_get_id (self->setting_connection);
     gtk_editable_set_text (GTK_EDITABLE (self->name_entry), name);
@@ -97,13 +74,18 @@ connect_ethernet_page (CEPageEthernet *self)
     g_signal_connect_object (self->cloned_mac_combo, "changed", G_CALLBACK (ce_page_changed), self, G_CONNECT_SWAPPED);
 
     /* MTU */
-    g_signal_connect_object (self->mtu_spin, "output", G_CALLBACK (mtu_output_cb), self, G_CONNECT_SWAPPED);
-    gtk_spin_button_set_value (self->mtu_spin, (gdouble) nm_setting_wired_get_mtu (setting));
-    g_signal_connect_object (self->mtu_spin, "value-changed", G_CALLBACK (mtu_changed), self, G_CONNECT_SWAPPED);
-    mtu_changed (self);
+    mtu = nm_setting_wired_get_mtu (setting);
+    adw_switch_row_set_active (self->mtu_switch, mtu == 0);
+    /* `mtu == 0 ? 1 : mtu` works around GtkAdjustment not updating its
+     * value when its boundaries are changed, and GtkSpinButton not updating
+     * the adjustment's value if it didn't change, leading to the default 0
+     * value being displayed. We could just use `mtu` once fixed, see
+     * https://gitlab.gnome.org/GNOME/gtk/-/merge_requests/8122. */
+    adw_spin_row_set_value (self->mtu_spin, mtu == 0 ? 1 : mtu);
 
     g_signal_connect_object (self->name_entry, "changed", G_CALLBACK (ce_page_changed), self, G_CONNECT_SWAPPED);
-    g_signal_connect_object (self->mtu_spin, "value-changed", G_CALLBACK (ce_page_changed), self, G_CONNECT_SWAPPED);
+    g_signal_connect_object (self->mtu_spin, "notify::value", G_CALLBACK (ce_page_changed), self, G_CONNECT_SWAPPED);
+    g_signal_connect_object (self->mtu_switch, "notify::active", G_CALLBACK (ce_page_changed), self, G_CONNECT_SWAPPED);
 }
 
 static void
@@ -113,6 +95,7 @@ ui_to_setting (CEPageEthernet *self)
     g_autofree gchar *cloned_mac = NULL;
     const gchar *text;
     GtkWidget *entry;
+    guint32 mtu;
 
     entry = gtk_combo_box_get_child (GTK_COMBO_BOX (self->mac_combo));
     if (entry) {
@@ -122,17 +105,13 @@ ui_to_setting (CEPageEthernet *self)
 
     cloned_mac = ce_page_cloned_mac_get (self->cloned_mac_combo);
 
+    mtu = adw_switch_row_get_active (self->mtu_switch) ? 0 : adw_spin_row_get_value (self->mtu_spin);
+
     g_object_set (self->setting_wired, NM_SETTING_WIRED_MAC_ADDRESS, device_mac, NM_SETTING_WIRED_CLONED_MAC_ADDRESS,
-                  cloned_mac, NM_SETTING_WIRED_MTU, (guint32) gtk_spin_button_get_value_as_int (self->mtu_spin), NULL);
+                  cloned_mac, NM_SETTING_WIRED_MTU, mtu, NULL);
 
     g_object_set (self->setting_connection, NM_SETTING_CONNECTION_ID,
                   gtk_editable_get_text (GTK_EDITABLE (self->name_entry)), NULL);
-}
-
-static const gchar *
-ce_page_ethernet_get_title (CEPage *page)
-{
-    return _("Identity");
 }
 
 static gboolean
@@ -179,12 +158,12 @@ ce_page_ethernet_class_init (CEPageEthernetClass *klass)
 {
     GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
-    gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/network/ethernet-page.ui");
+    gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/network/ce-page-ethernet.ui");
 
     gtk_widget_class_bind_template_child (widget_class, CEPageEthernet, cloned_mac_combo);
     gtk_widget_class_bind_template_child (widget_class, CEPageEthernet, mac_combo);
     gtk_widget_class_bind_template_child (widget_class, CEPageEthernet, mtu_spin);
-    gtk_widget_class_bind_template_child (widget_class, CEPageEthernet, mtu_label);
+    gtk_widget_class_bind_template_child (widget_class, CEPageEthernet, mtu_switch);
     gtk_widget_class_bind_template_child (widget_class, CEPageEthernet, name_entry);
 
     gtk_widget_class_bind_template_callback (widget_class, announce_mac_validation);
@@ -193,7 +172,7 @@ ce_page_ethernet_class_init (CEPageEthernetClass *klass)
 static void
 ce_page_iface_init (CEPageInterface *iface)
 {
-    iface->get_title = ce_page_ethernet_get_title;
+    iface->get_title = (const char *(*) (CEPage *) ) adw_preferences_page_get_title;
     iface->validate = ce_page_ethernet_validate;
 }
 

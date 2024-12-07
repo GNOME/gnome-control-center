@@ -28,7 +28,7 @@
 G_BEGIN_DECLS
 
 #define CE_TYPE_PAGE_ETHERNET (ce_page_ethernet_get_type ())
-G_DECLARE_FINAL_TYPE (CEPageEthernet, ce_page_ethernet, CE, PAGE_ETHERNET, AdwBin);
+G_DECLARE_FINAL_TYPE (CEPageEthernet, ce_page_ethernet, CE, PAGE_ETHERNET, AdwPreferencesPage);
 CEPageEthernet *ce_page_ethernet_new (NMConnection *connection, NMClient *client);
 
 G_END_DECLS
