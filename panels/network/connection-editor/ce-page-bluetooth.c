@@ -29,16 +29,16 @@
 #include "ui-helpers.h"
 
 struct _CEPageBluetooth {
-    GtkGrid parent;
+    AdwPreferencesPage parent;
 
-    GtkEntry *name_entry;
+    AdwEntryRow *name_entry;
 
     NMSettingConnection *setting_connection;
 };
 
 static void ce_page_iface_init (CEPageInterface *);
 
-G_DEFINE_FINAL_TYPE_WITH_CODE (CEPageBluetooth, ce_page_bluetooth, GTK_TYPE_GRID,
+G_DEFINE_FINAL_TYPE_WITH_CODE (CEPageBluetooth, ce_page_bluetooth, ADW_TYPE_PREFERENCES_PAGE,
                                G_IMPLEMENT_INTERFACE (CE_TYPE_PAGE, ce_page_iface_init))
 
 static void
@@ -50,12 +50,6 @@ connect_bluetooth_page (CEPageBluetooth *self)
     gtk_editable_set_text (GTK_EDITABLE (self->name_entry), name);
 
     g_signal_connect_object (self->name_entry, "changed", G_CALLBACK (ce_page_changed), self, G_CONNECT_SWAPPED);
-}
-
-static const gchar *
-ce_page_bluetooth_get_title (CEPage *page)
-{
-    return _("Identity");
 }
 
 static gboolean
@@ -80,7 +74,8 @@ ce_page_bluetooth_class_init (CEPageBluetoothClass *klass)
 {
     GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
-    gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/network/bluetooth-page.ui");
+    gtk_widget_class_set_template_from_resource (widget_class,
+                                                 "/org/gnome/control-center/network/ce-page-bluetooth.ui");
 
     gtk_widget_class_bind_template_child (widget_class, CEPageBluetooth, name_entry);
 }
@@ -88,7 +83,7 @@ ce_page_bluetooth_class_init (CEPageBluetoothClass *klass)
 static void
 ce_page_iface_init (CEPageInterface *iface)
 {
-    iface->get_title = ce_page_bluetooth_get_title;
+    iface->get_title = (const char *(*) (CEPage *) ) adw_preferences_page_get_title;
     iface->validate = ce_page_bluetooth_validate;
 }
 

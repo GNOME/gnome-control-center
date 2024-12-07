@@ -1,0 +1,14 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CEPageBluetooth: Adw.PreferencesPage {
+  title: _("Identity");
+
+  Adw.PreferencesGroup {
+    Adw.EntryRow name_entry {
+      title: _("_Name");
+      use-underline: true;
+    }
+  }
+}
+
