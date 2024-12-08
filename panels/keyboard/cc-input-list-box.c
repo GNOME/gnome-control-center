@@ -30,6 +30,7 @@
 #include "cc-input-row.h"
 #include "cc-input-source-ibus.h"
 #include "cc-input-source-xkb.h"
+#include "cc-ui-util.h"
 
 #ifdef HAVE_IBUS
 #include <ibus.h>
@@ -179,23 +180,6 @@ maybe_start_ibus (void)
 }
 
 #endif
-
-static gboolean
-keynav_failed_cb (CcInputListBox   *self,
-                  GtkDirectionType  direction,
-                  GtkWidget        *list)
-{
-  GtkWidget *toplevel = GTK_WIDGET (gtk_widget_get_root (GTK_WIDGET (self)));
-
-  if (!toplevel)
-    return FALSE;
-
-  if (direction != GTK_DIR_UP && direction != GTK_DIR_DOWN)
-    return FALSE;
-
-  return gtk_widget_child_focus (toplevel, direction == GTK_DIR_UP ?
-                                 GTK_DIR_TAB_BACKWARD : GTK_DIR_TAB_FORWARD);
-}
 
 static void
 row_settings_cb (CcInputListBox *self,
@@ -698,7 +682,7 @@ cc_input_list_box_class_init (CcInputListBoxClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcInputListBox, listbox);
 
   gtk_widget_class_bind_template_callback (widget_class, input_row_activated_cb);
-  gtk_widget_class_bind_template_callback (widget_class, keynav_failed_cb);
+  gtk_widget_class_bind_template_callback (widget_class, cc_util_keynav_propagate_vertical);
 }
 
 static void

@@ -82,22 +82,6 @@ struct _CcWellbeingPanelClass {
 
 CC_PANEL_REGISTER (CcWellbeingPanel, cc_wellbeing_panel);
 
-static gboolean
-keynav_failed_cb (CcWellbeingPanel *self,
-                  GtkDirectionType  direction)
-{
-  GtkWidget *toplevel = GTK_WIDGET (gtk_widget_get_root (GTK_WIDGET (self)));
-
-  if (!toplevel)
-    return FALSE;
-
-  if (direction != GTK_DIR_UP && direction != GTK_DIR_DOWN)
-    return FALSE;
-
-  return gtk_widget_child_focus (toplevel, direction == GTK_DIR_UP ?
-                                 GTK_DIR_TAB_BACKWARD : GTK_DIR_TAB_FORWARD);
-}
-
 static void movement_break_schedule_notify_selected_item_cb (GObject    *object,
                                                              GParamSpec *pspec,
                                                              gpointer    user_data);
@@ -474,7 +458,5 @@ cc_wellbeing_panel_class_init (CcWellbeingPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcWellbeingPanel, movement_breaks_row);
   gtk_widget_class_bind_template_child (widget_class, CcWellbeingPanel, movement_break_schedule_row);
   gtk_widget_class_bind_template_child (widget_class, CcWellbeingPanel, sounds_row);
-
-  gtk_widget_class_bind_template_callback (widget_class, keynav_failed_cb);
 }
 

@@ -34,6 +34,7 @@
 #include "cc-power-profile-info-row.h"
 #include "cc-power-panel.h"
 #include "cc-power-resources.h"
+#include "cc-ui-util.h"
 
 struct _CcPowerPanel
 {
@@ -464,17 +465,6 @@ set_ac_battery_ui_mode (CcPowerPanel *self)
   else
     adw_preferences_row_set_title (ADW_PREFERENCES_ROW (self->suspend_on_ac_switch_row),
                                    adw_preferences_group_get_title (self->suspend_on_battery_group));
-}
-
-static gboolean
-keynav_failed_cb (CcPowerPanel *self, GtkDirectionType direction, GtkWidget *list)
-{
-  if (direction != GTK_DIR_UP && direction != GTK_DIR_DOWN)
-    return FALSE;
-
-  direction = GTK_DIR_UP ? GTK_DIR_TAB_BACKWARD : GTK_DIR_TAB_FORWARD;
-
-  return gtk_widget_child_focus (GTK_WIDGET (self), direction);
 }
 
 static void
@@ -1336,8 +1326,8 @@ cc_power_panel_class_init (CcPowerPanelClass *klass)
 
   gtk_widget_class_bind_template_callback (widget_class, als_row_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, blank_screen_switch_cb);
-  gtk_widget_class_bind_template_callback (widget_class, keynav_failed_cb);
   gtk_widget_class_bind_template_callback (widget_class, battery_health_radio_changed_cb);
+  gtk_widget_class_bind_template_callback (widget_class, cc_util_keynav_propagate_vertical);
   gtk_widget_class_bind_template_callback (widget_class, power_saving_group_visibility_cb);
 }
 

@@ -39,7 +39,7 @@
                     <child>
                       <object class="GtkListBox" id="list_box">
                         <property name="selection-mode">none</property>
-                        <signal name="keynav-failed" handler="keynav_failed_cb" object="CcSearchPanel" swapped="yes"/>
+                        <signal name="keynav-failed" handler="cc_util_keynav_propagate_vertical"/>
                         <accessibility>
                           <relation name="labelled-by">search_group</relation>
                         </accessibility>

@@ -23,6 +23,7 @@
 #include "cc-search-panel-row.h"
 #include "cc-search-locations-page.h"
 #include "cc-search-resources.h"
+#include "cc-ui-util.h"
 
 #include <gio/gdesktopappinfo.h>
 #include <glib/gi18n.h>
@@ -47,21 +48,6 @@ CC_PANEL_REGISTER (CcSearchPanel, cc_search_panel)
 
 #define SHELL_PROVIDER_GROUP "Shell Search Provider"
 #define SEARCH_LOCATIONS_PAGE_PARAM "locations"
-
-static gboolean
-keynav_failed_cb (CcSearchPanel *self, GtkDirectionType direction, GtkWidget *list)
-{
-  GtkWidget *toplevel = GTK_WIDGET (gtk_widget_get_root (GTK_WIDGET (self)));
-
-  if (!toplevel)
-    return FALSE;
-
-  if (direction != GTK_DIR_UP && direction != GTK_DIR_DOWN)
-    return FALSE;
-
-  return gtk_widget_child_focus (toplevel, direction == GTK_DIR_UP ?
-                                 GTK_DIR_TAB_BACKWARD : GTK_DIR_TAB_FORWARD);
-}
 
 static gint
 list_sort_func (gconstpointer a,
@@ -673,5 +659,5 @@ cc_search_panel_class_init (CcSearchPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcSearchPanel, search_group);
   gtk_widget_class_bind_template_child (widget_class, CcSearchPanel, settings_row);
 
-  gtk_widget_class_bind_template_callback (widget_class, keynav_failed_cb);
+  gtk_widget_class_bind_template_callback (widget_class, cc_util_keynav_propagate_vertical);
 }

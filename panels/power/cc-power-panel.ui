@@ -62,7 +62,7 @@
                             <child>
                               <object class="GtkListBox" id="battery_listbox">
                                 <property name="selection-mode">none</property>
-                                <signal name="keynav-failed" handler="keynav_failed_cb" object="CcPowerPanel" swapped="yes"/>
+                                <signal name="keynav-failed" handler="cc_util_keynav_propagate_vertical"/>
                                 <accessibility>
                                   <relation name="labelled-by">battery_section</relation>
                                 </accessibility>
@@ -116,7 +116,7 @@
                             <child>
                               <object class="GtkListBox" id="device_listbox">
                                 <property name="selection-mode">none</property>
-                                <signal name="keynav-failed" handler="keynav_failed_cb" object="CcPowerPanel" swapped="yes"/>
+                                <signal name="keynav-failed" handler="cc_util_keynav_propagate_vertical"/>
                                 <accessibility>
                                   <relation name="labelled-by">device_section</relation>
                                 </accessibility>
@@ -134,7 +134,7 @@
                             <child>
                               <object class="GtkListBox" id="power_profile_listbox">
                                 <property name="selection-mode">none</property>
-                                <signal name="keynav-failed" handler="keynav_failed_cb" object="CcPowerPanel" swapped="yes"/>
+                                <signal name="keynav-failed" handler="cc_util_keynav_propagate_vertical"/>
                                 <accessibility>
                                   <relation name="labelled-by">power_profile_section</relation>
                                 </accessibility>
@@ -148,7 +148,7 @@
                                 <property name="visible">False</property>
                                 <property name="selection-mode">none</property>
                                 <property name="margin_top">12</property>
-                                <signal name="keynav-failed" handler="keynav_failed_cb" object="CcPowerPanel" swapped="yes"/>
+                                <signal name="keynav-failed" handler="cc_util_keynav_propagate_vertical"/>
                                 <style>
                                   <class name="boxed-list"/>
                                 </style>

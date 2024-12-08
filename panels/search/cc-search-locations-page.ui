@@ -17,7 +17,7 @@
                 <child>
                   <object class="GtkListBox" id="places_list">
                     <property name="selection-mode">none</property>
-                    <signal name="keynav-failed" handler="keynav_failed_cb" object="CcSearchLocationsPage" swapped="yes"/>
+                    <signal name="keynav-failed" handler="cc_util_keynav_propagate_vertical"/>
                     <accessibility>
                       <relation name="labelled-by">places_group</relation>
                     </accessibility>
@@ -34,7 +34,7 @@
                 <child>
                   <object class="GtkListBox" id="bookmarks_list">
                     <property name="selection-mode">none</property>
-                    <signal name="keynav-failed" handler="keynav_failed_cb" object="CcSearchLocationsPage" swapped="yes"/>
+                    <signal name="keynav-failed" handler="cc_util_keynav_propagate_vertical"/>
                     <accessibility>
                       <relation name="labelled-by">bookmarks_group</relation>
                     </accessibility>
@@ -51,7 +51,7 @@
                 <child>
                   <object class="GtkListBox" id="others_list">
                     <property name="selection-mode">none</property>
-                    <signal name="keynav-failed" handler="keynav_failed_cb" object="CcSearchLocationsPage" swapped="yes"/>
+                    <signal name="keynav-failed" handler="cc_util_keynav_propagate_vertical"/>
                     <child>
                       <object class="AdwButtonRow">
                         <property name="title" translatable="yes">_Add Location</property>

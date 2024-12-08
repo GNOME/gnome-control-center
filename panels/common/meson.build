@@ -53,6 +53,7 @@ sources = common_sources + files(
   'cc-split-row.c',
   'cc-texture-utils.c',
   'cc-vertical-row.c',
+  'cc-ui-util.c',
   'cc-util.c',
   'cc-scaler.c'
 )

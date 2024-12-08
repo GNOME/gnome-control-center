@@ -30,6 +30,7 @@
 #include "cc-notifications-panel.h"
 #include "cc-notifications-resources.h"
 #include "cc-app-notifications-page.h"
+#include "cc-ui-util.h"
 
 #define MASTER_SCHEMA "org.gnome.desktop.notifications"
 #define APP_SCHEMA MASTER_SCHEMA ".application"
@@ -70,22 +71,6 @@ static void select_app      (CcNotificationsPanel *self, GtkListBoxRow *row);
 static int  sort_apps       (gconstpointer one, gconstpointer two, gpointer user_data);
 
 CC_PANEL_REGISTER (CcNotificationsPanel, cc_notifications_panel);
-
-static gboolean
-keynav_failed_cb (CcNotificationsPanel *self,
-                  GtkDirectionType      direction)
-{
-  GtkWidget *toplevel = GTK_WIDGET (gtk_widget_get_root (GTK_WIDGET (self)));
-
-  if (!toplevel)
-    return FALSE;
-
-  if (direction != GTK_DIR_UP && direction != GTK_DIR_DOWN)
-    return FALSE;
-
-  return gtk_widget_child_focus (toplevel, direction == GTK_DIR_UP ?
-                                 GTK_DIR_TAB_BACKWARD : GTK_DIR_TAB_FORWARD);
-}
 
 static void
 cc_notifications_panel_dispose (GObject *object)
@@ -190,8 +175,8 @@ cc_notifications_panel_class_init (CcNotificationsPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcNotificationsPanel, lock_screen_row);
   gtk_widget_class_bind_template_child (widget_class, CcNotificationsPanel, dnd_row);
 
+  gtk_widget_class_bind_template_callback (widget_class, cc_util_keynav_propagate_vertical);
   gtk_widget_class_bind_template_callback (widget_class, select_app);
-  gtk_widget_class_bind_template_callback (widget_class, keynav_failed_cb);
 }
 
 static inline GQuark

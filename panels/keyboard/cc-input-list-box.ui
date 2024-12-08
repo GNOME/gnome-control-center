@@ -5,7 +5,7 @@
       <object class="GtkListBox" id="listbox">
         <property name="selection-mode">none</property>
         <signal name="row_activated" handler="input_row_activated_cb" object="CcInputListBox" swapped="yes"/>
-        <signal name="keynav_failed" handler="keynav_failed_cb" object="CcInputListBox" swapped="yes"/>
+        <signal name="keynav-failed" handler="cc_util_keynav_propagate_vertical"/>
         <style>
           <class name="boxed-list"/>
         </style>

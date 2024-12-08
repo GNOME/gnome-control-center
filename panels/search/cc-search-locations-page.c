@@ -22,6 +22,8 @@
 
 #include <glib/gi18n.h>
 
+#include "cc-ui-util.h"
+
 #define TRACKER_SCHEMA "org.freedesktop.Tracker.Miner.Files"
 #define TRACKER3_SCHEMA "org.freedesktop.Tracker3.Miner.Files"
 #define TRACKER_KEY_RECURSIVE_DIRECTORIES "index-recursive-directories"
@@ -57,22 +59,6 @@ struct _CcSearchLocationsPage {
 G_DEFINE_TYPE (CcSearchLocationsPage, cc_search_locations_page, ADW_TYPE_NAVIGATION_PAGE)
 
 static const gchar *path_from_tracker_dir (const gchar *value);
-
-static gboolean
-keynav_failed_cb (CcSearchLocationsPage *self,
-                  GtkDirectionType         direction)
-{
-  GtkWidget *toplevel = GTK_WIDGET (gtk_widget_get_root (GTK_WIDGET (self)));
-
-  if (!toplevel)
-    return FALSE;
-
-  if (direction != GTK_DIR_UP && direction != GTK_DIR_DOWN)
-    return FALSE;
-
-  return gtk_widget_child_focus (toplevel, direction == GTK_DIR_UP ?
-                                 GTK_DIR_TAB_BACKWARD : GTK_DIR_TAB_FORWARD);
-}
 
 static void
 cc_search_locations_page_finalize (GObject *object)
@@ -815,5 +801,5 @@ cc_search_locations_page_class_init (CcSearchLocationsPageClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcSearchLocationsPage, others_list);
 
   gtk_widget_class_bind_template_callback (widget_class, add_button_clicked);
-  gtk_widget_class_bind_template_callback (widget_class, keynav_failed_cb);
+  gtk_widget_class_bind_template_callback (widget_class, cc_util_keynav_propagate_vertical);
 }
