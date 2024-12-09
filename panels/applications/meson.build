@@ -36,6 +36,18 @@ sources += gnome.compile_resources(
   export : true
 )
 
+sources += gnome.gdbus_codegen(
+  'cc-global-shortcuts-rebind-generated',
+  'org.gnome.GlobalShortcutsRebind.xml',
+  interface_prefix : 'org.gnome.',
+         namespace : 'Cc'
+)
+
+install_data(
+  'org.gnome.GlobalShortcutsRebind.xml',
+  install_dir : control_center_datadir + '/dbus-1/interfaces',
+)
+
 deps = common_deps + keyboard_shortcuts_dep
 
 if host_is_linux

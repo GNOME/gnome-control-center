@@ -33,6 +33,7 @@
 #include <glib/gi18n.h>
 
 #include "cc-application-shortcut-dialog.h"
+#include "cc-global-shortcuts-rebind-generated.h"
 #include "cc-keyboard-shortcut-group.h"
 #include "cc-util.h"
 
@@ -74,7 +75,36 @@ populate_shortcuts_model (CcApplicationShortcutDialog *self,
 static void
 shortcut_changed_cb (CcApplicationShortcutDialog *self)
 {
+  GVariant *shortcuts;
+  g_autoptr(GError) error = NULL;
+  g_autoptr(CcGlobalShortcutsRebind) proxy = NULL;
+
   cc_keyboard_manager_store_global_shortcuts (self->manager, self->app_id);
+  shortcuts = cc_keyboard_manager_get_global_shortcuts (self->manager, self->app_id);
+  proxy =
+    cc_global_shortcuts_rebind_proxy_new_for_bus_sync (G_BUS_TYPE_SESSION,
+                                                       G_DBUS_PROXY_FLAGS_NONE,
+                                                       "org.freedesktop.impl.portal.desktop.gnome",
+                                                       "/org/gnome/globalshortcuts",
+                                                       NULL,
+                                                       &error);
+  if (!proxy)
+    {
+      g_warning ("Can't connect to Global Shortcuts Rebind service: %s",
+                 error->message);
+      return;
+    }
+
+  cc_global_shortcuts_rebind_call_rebind_shortcuts_sync (proxy,
+                                                         self->app_id,
+                                                         shortcuts,
+                                                         NULL,
+                                                         &error);
+  if (error)
+    {
+      g_warning ("Can't connect to Global Shortcuts Rebind service: %s",
+                 error->message);
+    }
 }
 
 static void
