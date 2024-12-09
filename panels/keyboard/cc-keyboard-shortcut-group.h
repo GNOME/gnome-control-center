@@ -37,7 +37,6 @@ GtkWidget  *cc_keyboard_shortcut_group_new          (GListModel               *s
                                                      const char               *section_id,
                                                      const char               *section_title,
                                                      CcKeyboardManager        *manager,
-                                                     CcKeyboardShortcutEditor *shortcut_editor,
                                                      GtkSizeGroup             *size_group);
 GListModel *cc_keyboard_shortcut_group_get_model    (CcKeyboardShortcutGroup  *self);
 void        cc_keyboard_shortcut_group_set_filter   (CcKeyboardShortcutGroup  *self,

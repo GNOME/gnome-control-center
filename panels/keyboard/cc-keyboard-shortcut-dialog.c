@@ -79,7 +79,6 @@ keyboard_shortcut_get_section_store (CcKeyboardShortcutDialog *self,
                                      const char               *section_title)
 {
   g_autoptr(GListStore) section = NULL;
-  CcKeyboardShortcutEditor *shortcut_editor;
   GtkWidget *group;
   guint n_items;
 
@@ -105,13 +104,10 @@ keyboard_shortcut_get_section_store (CcKeyboardShortcutDialog *self,
   g_object_set_data_full (G_OBJECT (section), "id", g_strdup (section_id), g_free);
   g_object_set_data_full (G_OBJECT (section), "title", g_strdup (section_title), g_free);
 
-  shortcut_editor = cc_keyboard_shortcut_editor_new (self->manager);
-
   /* This group shall be shown in the search results page */
   group = cc_keyboard_shortcut_group_new (G_LIST_MODEL (section),
                                           section_id, section_title,
                                           self->manager,
-                                          shortcut_editor,
                                           self->accelerator_size_group);
   g_object_set_data (G_OBJECT (section), "search-group", group);
 
@@ -119,7 +115,6 @@ keyboard_shortcut_get_section_store (CcKeyboardShortcutDialog *self,
   group = cc_keyboard_shortcut_group_new (G_LIST_MODEL (section),
                                           section_id, NULL,
                                           self->manager,
-                                          shortcut_editor,
                                           self->accelerator_size_group);
   g_object_set_data (G_OBJECT (section), "group", group);
 

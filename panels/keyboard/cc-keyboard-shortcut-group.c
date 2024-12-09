@@ -382,12 +382,11 @@ cc_keyboard_shortcut_group_init (CcKeyboardShortcutGroup *self)
 }
 
 GtkWidget *
-cc_keyboard_shortcut_group_new (GListModel               *shortcut_items,
-                                const char               *section_id,
-                                const char               *section_title,
-                                CcKeyboardManager        *manager,
-                                CcKeyboardShortcutEditor *shortcut_editor,
-                                GtkSizeGroup             *size_group)
+cc_keyboard_shortcut_group_new (GListModel        *shortcut_items,
+                                const char        *section_id,
+                                const char        *section_title,
+                                CcKeyboardManager *manager,
+                                GtkSizeGroup      *size_group)
 {
   CcKeyboardShortcutGroup *self;
 
