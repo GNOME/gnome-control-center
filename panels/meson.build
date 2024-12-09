@@ -1,11 +1,14 @@
 subdir('common')
 
+dependent_panels = [
+  'keyboard',
+]
+
 panels = [
   'applications',
   'background',
   'color',
   'display',
-  'keyboard',
   'mouse',
   'multitasking',
   'notifications',
@@ -35,7 +38,7 @@ endif
 
 panels_list = []
 panels_libs = []
-foreach cappletname: panels
+foreach cappletname: dependent_panels + panels
   cflags = [
     '-DG_LOG_DOMAIN="cc-@0@-panel"'.format(cappletname),
     '-DPANEL_ID="@0@"'.format(cappletname)
