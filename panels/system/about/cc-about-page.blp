@@ -163,14 +163,12 @@ template $CcAboutPage: Adw.NavigationPage {
         }
 
         Adw.PreferencesGroup {
-          Button details_copy_button {
-            child: Adw.ButtonContent {
-              icon-name: "edit-copy-symbolic";
-              label: _("_Copy");
-              use-underline: true;
-            };
+          Adw.ButtonRow {
+            start-icon-name: "edit-copy-symbolic";
+            title: _("_Copy");
+            use-underline: true;
 
-            clicked => $on_copy_button_clicked_cb();
+            activated => $on_copy_row_activated_cb();
           }
         }
       };

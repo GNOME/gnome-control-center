@@ -753,7 +753,7 @@ system_details_window_title_print_padding (const gchar *title, GString *dst_stri
 }
 
 static void
-on_copy_button_clicked_cb (GtkWidget    *widget,
+on_copy_row_activated_cb (GtkWidget    *widget,
                            CcAboutPage  *self)
 {
   GdkClipboard *clip_board;
@@ -961,7 +961,7 @@ cc_about_page_class_init (CcAboutPageClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcAboutPage, processor_row);
   gtk_widget_class_bind_template_child (widget_class, CcAboutPage, virtualization_row);
 
-  gtk_widget_class_bind_template_callback (widget_class, on_copy_button_clicked_cb);
+  gtk_widget_class_bind_template_callback (widget_class, on_copy_row_activated_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_donate_button_clicked_cb);
 }
 
