@@ -848,14 +848,34 @@ static void
 net_connection_editor_add_connection (NetConnectionEditor *self)
 {
     GtkListBox *list;
+    GtkWidget *clamp;
+    GtkWidget *scrolled_window;
 
+    clamp = adw_clamp_new ();
+    scrolled_window = gtk_scrolled_window_new ();
     list = GTK_LIST_BOX (gtk_list_box_new ());
+
+    gtk_widget_set_valign (GTK_WIDGET (list), GTK_ALIGN_START);
     gtk_list_box_set_selection_mode (list, GTK_SELECTION_NONE);
     gtk_widget_add_css_class (GTK_WIDGET (list), "boxed-list");
 
+    gtk_widget_set_margin_start (clamp, 12);
+    gtk_widget_set_margin_end (clamp, 12);
+    gtk_widget_set_margin_top (clamp, 12);
+    gtk_widget_set_margin_bottom (clamp, 12);
+    adw_clamp_set_child (ADW_CLAMP (clamp), GTK_WIDGET (list));
+
+    gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled_window),
+                                    GTK_POLICY_NEVER,
+                                    GTK_POLICY_AUTOMATIC);
+    gtk_scrolled_window_set_child (GTK_SCROLLED_WINDOW (scrolled_window),
+                                   clamp);
+    gtk_scrolled_window_set_propagate_natural_height (GTK_SCROLLED_WINDOW (scrolled_window),
+                                                      TRUE);
+
     select_vpn_type (self, list);
 
-    adw_bin_set_child (self->add_connection_frame, GTK_WIDGET (list));
+    adw_bin_set_child (self->add_connection_frame, scrolled_window);
 
     gtk_stack_set_visible_child (self->toplevel_stack, GTK_WIDGET (self->add_connection_box));
     gtk_widget_set_visible (GTK_WIDGET (self->apply_button), FALSE);
