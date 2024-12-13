@@ -51,8 +51,7 @@ static guint signals[LAST_SIGNAL] = { 0 };
 struct _NetConnectionEditor {
     AdwWindow parent;
 
-    GtkBox *add_connection_box;
-    AdwBin *add_connection_frame;
+    AdwBin *add_connection_bin;
     GtkButton *apply_button;
     GtkButton *cancel_button;
     GtkNotebook *notebook;
@@ -326,8 +325,7 @@ net_connection_editor_class_init (NetConnectionEditorClass *class)
     gtk_widget_class_set_template_from_resource (widget_class,
                                                  "/org/gnome/control-center/network/connection-editor.ui");
 
-    gtk_widget_class_bind_template_child (widget_class, NetConnectionEditor, add_connection_box);
-    gtk_widget_class_bind_template_child (widget_class, NetConnectionEditor, add_connection_frame);
+    gtk_widget_class_bind_template_child (widget_class, NetConnectionEditor, add_connection_bin);
     gtk_widget_class_bind_template_child (widget_class, NetConnectionEditor, apply_button);
     gtk_widget_class_bind_template_child (widget_class, NetConnectionEditor, cancel_button);
     gtk_widget_class_bind_template_child (widget_class, NetConnectionEditor, notebook);
@@ -513,7 +511,7 @@ recheck_initialization (NetConnectionEditor *self)
     g_idle_add_once (idle_validate, self);
 
     if (self->is_new_connection)
-        adw_bin_set_child (self->add_connection_frame, NULL);
+        adw_bin_set_child (self->add_connection_bin, NULL);
 }
 
 static void
@@ -788,16 +786,13 @@ vpn_type_activated (NetConnectionEditor *self, GtkWidget *row)
 }
 
 static void
-select_vpn_type (NetConnectionEditor *self, GtkListBox *list)
+select_vpn_type (NetConnectionEditor *self, AdwPreferencesGroup *group)
 {
     GSList *vpn_plugins, *iter;
     GtkWidget *row;
 
     /* Get the available VPN types */
     vpn_plugins = vpn_get_plugins ();
-
-    /* Remove the previous menu contents */
-    gtk_list_box_remove_all (list);
 
     /* Add the VPN types */
     for (iter = vpn_plugins; iter; iter = iter->next) {
@@ -817,7 +812,8 @@ select_vpn_type (NetConnectionEditor *self, GtkListBox *list)
         adw_action_row_set_subtitle (ADW_ACTION_ROW (row), desc_markup);
 
         g_object_set_data_full (G_OBJECT (row), "service_name", g_steal_pointer (&service_name), g_free);
-        gtk_list_box_append (list, row);
+        adw_preferences_group_add (group, GTK_WIDGET (row));
+        g_signal_connect_object (row, "activated", G_CALLBACK (vpn_type_activated), self, G_CONNECT_SWAPPED);
     }
 
     /*  Translators: VPN add dialog Wireguard description */
@@ -831,7 +827,8 @@ select_vpn_type (NetConnectionEditor *self, GtkListBox *list)
     adw_action_row_set_subtitle (ADW_ACTION_ROW (row), desc_markup);
 
     g_object_set_data (G_OBJECT (row), "service_name", "wireguard");
-    gtk_list_box_append (list, row);
+    adw_preferences_group_add (group, GTK_WIDGET (row));
+    g_signal_connect_object (row, "activated", G_CALLBACK (vpn_type_activated), self, G_CONNECT_SWAPPED);
 
     /* Import */
     row = adw_action_row_new ();
@@ -839,45 +836,26 @@ select_vpn_type (NetConnectionEditor *self, GtkListBox *list)
     adw_preferences_row_set_title (ADW_PREFERENCES_ROW (row), _("Import from file…"));
 
     g_object_set_data (G_OBJECT (row), "service_name", "import");
-    gtk_list_box_append (list, row);
-
-    g_signal_connect_object (list, "row-activated", G_CALLBACK (vpn_type_activated), self, G_CONNECT_SWAPPED);
+    adw_preferences_group_add (group, GTK_WIDGET (row));
+    g_signal_connect_object (row, "activated", G_CALLBACK (vpn_type_activated), self, G_CONNECT_SWAPPED);
 }
 
 static void
 net_connection_editor_add_connection (NetConnectionEditor *self)
 {
-    GtkListBox *list;
-    GtkWidget *clamp;
-    GtkWidget *scrolled_window;
+    AdwPreferencesPage *page;
+    AdwPreferencesGroup *group;
 
-    clamp = adw_clamp_new ();
-    scrolled_window = gtk_scrolled_window_new ();
-    list = GTK_LIST_BOX (gtk_list_box_new ());
+    page = ADW_PREFERENCES_PAGE (adw_preferences_page_new ());
+    group = ADW_PREFERENCES_GROUP (adw_preferences_group_new ());
 
-    gtk_widget_set_valign (GTK_WIDGET (list), GTK_ALIGN_START);
-    gtk_list_box_set_selection_mode (list, GTK_SELECTION_NONE);
-    gtk_widget_add_css_class (GTK_WIDGET (list), "boxed-list");
+    adw_preferences_page_add (page, group);
 
-    gtk_widget_set_margin_start (clamp, 12);
-    gtk_widget_set_margin_end (clamp, 12);
-    gtk_widget_set_margin_top (clamp, 12);
-    gtk_widget_set_margin_bottom (clamp, 12);
-    adw_clamp_set_child (ADW_CLAMP (clamp), GTK_WIDGET (list));
+    select_vpn_type (self, group);
 
-    gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled_window),
-                                    GTK_POLICY_NEVER,
-                                    GTK_POLICY_AUTOMATIC);
-    gtk_scrolled_window_set_child (GTK_SCROLLED_WINDOW (scrolled_window),
-                                   clamp);
-    gtk_scrolled_window_set_propagate_natural_height (GTK_SCROLLED_WINDOW (scrolled_window),
-                                                      TRUE);
+    adw_bin_set_child (self->add_connection_bin, GTK_WIDGET (page));
 
-    select_vpn_type (self, list);
-
-    adw_bin_set_child (self->add_connection_frame, scrolled_window);
-
-    gtk_stack_set_visible_child (self->toplevel_stack, GTK_WIDGET (self->add_connection_box));
+    gtk_stack_set_visible_child (self->toplevel_stack, GTK_WIDGET (self->add_connection_bin));
     gtk_widget_set_visible (GTK_WIDGET (self->apply_button), FALSE);
     gtk_window_set_title (GTK_WINDOW (self), _("Add VPN"));
 }
