@@ -726,14 +726,42 @@
                 "-Dintrospection=true",
                 "-Ddocs=false",
                 "-Dtests=disabled",
-                "-Dprofiler=false",
-                "-Dlibdisplay_info=disabled"
+                "-Dprofiler=false"
             ],
             "sources" : [
                 {
                     "type" : "git",
                     "branch" : "main",
                     "url" : "https://gitlab.gnome.org/gnome/mutter.git"
+                }
+            ],
+            "modules": [
+                {
+                    "name" : "libdisplay-info",
+                    "buildsystem" : "meson",
+                    "sources" : [
+                        {
+                            "type" : "git",
+                            "branch" : "main",
+                            "url" : "https://gitlab.freedesktop.org/emersion/libdisplay-info.git"
+                        }
+                    ],
+                    "modules": [
+                        {
+                            "name" : "hwdata",
+                            "config-opts" : [
+                                "--prefix=/app",
+                                "--datadir=/app/share",
+                                "--disable-blacklist"
+                            ],
+                            "sources" : [
+                                {
+                                    "type" : "git",
+                                    "url" : "https://github.com/vcrhonek/hwdata.git"
+                                }
+                            ]
+                        }
+                    ]
                 }
             ]
         },
