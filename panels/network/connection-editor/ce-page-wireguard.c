@@ -226,17 +226,16 @@ toggle_show_secret_cb (GtkEntry *entry_private_key, gpointer user_data)
 gchar *
 peer_allowed_ips_to_str (NMWireGuardPeer *peer)
 {
-        gchar *allowed_ips = NULL;
-        if (nm_wireguard_peer_get_allowed_ips_len (peer) != 0) {
-                allowed_ips = (gchar *)nm_wireguard_peer_get_allowed_ip (peer, 0, NULL);
-                
-                for (guint i = 1; i < nm_wireguard_peer_get_allowed_ips_len (peer); i++) {
-                        allowed_ips = g_strconcat (allowed_ips, ", ",
-                                                   nm_wireguard_peer_get_allowed_ip (peer, i, NULL),
-                                                   NULL);
-                }
+        guint length = nm_wireguard_peer_get_allowed_ips_len (peer);
+        /* Only the container is owned by the function, not the strings. */
+        g_autofree const gchar **peer_allowed_ips = g_new0 (const gchar *, length + 1);
+
+        for (guint i = 0; i < length; i++) {
+                peer_allowed_ips[i] = nm_wireguard_peer_get_allowed_ip (peer, i, NULL);
         }
-        return allowed_ips;
+
+        /* Cast to GStrv to follow the API quirks of g_strjoinv(). */
+        return g_strjoinv (", ", (GStrv) peer_allowed_ips);
 }
 
 static void
@@ -251,6 +250,7 @@ handle_peer_changed_cb (GtkButton *apply_button, WireguardPeer *wg_peer)
         const gchar *psk = gtk_editable_get_text (GTK_EDITABLE (wg_peer->entry_psk));
         const gchar *allowed_ips = gtk_editable_get_text (GTK_EDITABLE (wg_peer->entry_allowed_ips));
         guint16 keepalive = gtk_spin_button_get_value_as_int (wg_peer->spin_persistent_keepalive);
+        g_autofree char *peer_allowed_ips = NULL;
 
         nm_wg_peer = nm_wireguard_peer_new_clone (wg_peer->nm_wg_peer, TRUE);
 
@@ -292,7 +292,8 @@ handle_peer_changed_cb (GtkButton *apply_button, WireguardPeer *wg_peer)
          * the connection without any real changes.
          */
         widget_unset_error (GTK_WIDGET (wg_peer->entry_allowed_ips));
-        if (g_strcmp0(peer_allowed_ips_to_str (nm_wg_peer), allowed_ips) != 0) {
+        peer_allowed_ips = peer_allowed_ips_to_str (nm_wg_peer);
+        if (g_strcmp0 (peer_allowed_ips, allowed_ips) != 0) {
                 nm_wireguard_peer_clear_allowed_ips (nm_wg_peer);
                 char **strv = g_strsplit (allowed_ips, ",", -1);
                 for (guint i = 0; strv && strv[i]; i++) {
@@ -367,6 +368,7 @@ WireguardPeer *
 add_nm_wg_peer_to_list (CEPageWireguard *self, NMWireGuardPeer *peer)
 {
         WireguardPeer *wg_peer;
+        g_autofree gchar *peer_allowed_ips = NULL;
         gchar *endpoint = (gchar *)nm_wireguard_peer_get_endpoint (peer);
         if (!endpoint) {
                 /* Translators: Unknown endpoint host for WireGuard (invalid setting) */
@@ -379,9 +381,11 @@ add_nm_wg_peer_to_list (CEPageWireguard *self, NMWireGuardPeer *peer)
 
         gtk_label_set_text (wg_peer->peer_label, endpoint);
 
+        peer_allowed_ips = peer_allowed_ips_to_str (peer);
+
         gtk_editable_set_text (GTK_EDITABLE (wg_peer->entry_endpoint), endpoint);
-        if (peer_allowed_ips_to_str (peer) != NULL)
-                gtk_editable_set_text (GTK_EDITABLE (wg_peer->entry_allowed_ips), peer_allowed_ips_to_str (peer));
+        if (peer_allowed_ips != NULL)
+                gtk_editable_set_text (GTK_EDITABLE (wg_peer->entry_allowed_ips), peer_allowed_ips);
         if (nm_wireguard_peer_get_preshared_key (peer) != NULL)
                 gtk_editable_set_text (GTK_EDITABLE (wg_peer->entry_psk), nm_wireguard_peer_get_preshared_key (peer));
         if (nm_wireguard_peer_get_public_key (peer) != NULL)
