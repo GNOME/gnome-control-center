@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2024-11-25 13:17+0000\n"
-"PO-Revision-Date: 2024-11-27 15:46+0100\n"
+"POT-Creation-Date: 2024-12-03 11:23+0000\n"
+"PO-Revision-Date: 2024-12-15 13:18+0100\n"
 "Last-Translator: Martin Srebotnjak <miles@filmsi.net>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "Language: sl_SI\n"
@@ -840,11 +840,30 @@ msgstr ""
 "samodejni zagon;application;flatpak;permission;setting;default;preferred;"
 "media;autorun;cd;dvd;usb;audio;video;disc;removable;device;system;"
 
-#: panels/background/cc-background-chooser.c:146
+#: panels/background/cc-background-chooser.c:169
+msgid "Background removed"
+msgstr "Ozadje odstranjeno"
+
+#: panels/background/cc-background-chooser.c:170
+#: panels/network/net-device-wifi.c:883 panels/printers/cc-printers-panel.c:672
+msgid "_Undo"
+msgstr "_Razveljavi"
+
+#. Translators: %d is the number of backgrounds deleted.
+#: panels/background/cc-background-chooser.c:186
+#, c-format
+msgid "%d background removed"
+msgid_plural "%d backgrounds removed"
+msgstr[0] "%d ozadij odstranjenih"
+msgstr[1] "%d ozadje odstranjeno"
+msgstr[2] "%d ozadji odstranjeni"
+msgstr[3] "%d ozadja odstranjena"
+
+#: panels/background/cc-background-chooser.c:250
 msgid "Remove Background"
 msgstr "Odstrani ozadje"
 
-#: panels/background/cc-background-chooser.c:339
+#: panels/background/cc-background-chooser.c:470
 msgid "Select Picture"
 msgstr "Izberite sliko"
 
@@ -903,27 +922,27 @@ msgstr "Skrilasto modra"
 msgid "Current background"
 msgstr "Trenutno ozadje"
 
-#: panels/background/cc-background-panel.ui:27
+#: panels/background/cc-background-panel.ui:29
 msgid "Style"
 msgstr "Slog"
 
-#: panels/background/cc-background-panel.ui:67
+#: panels/background/cc-background-panel.ui:69
 msgid "_Default"
 msgstr "_Privzeto"
 
-#: panels/background/cc-background-panel.ui:99
+#: panels/background/cc-background-panel.ui:101
 msgid "Da_rk"
 msgstr "_Temno"
 
-#: panels/background/cc-background-panel.ui:120
+#: panels/background/cc-background-panel.ui:122
 msgid "Accent Color"
 msgstr "Barva poudarka"
 
-#: panels/background/cc-background-panel.ui:140
+#: panels/background/cc-background-panel.ui:142
 msgid "Background"
 msgstr "Ozadje"
 
-#: panels/background/cc-background-panel.ui:146
+#: panels/background/cc-background-panel.ui:148
 msgid "_Add Picture…"
 msgstr "Dodaj _sliko …"
 
@@ -986,7 +1005,7 @@ msgstr "Za uporabo vmesnika Bluetooth je treba izklopiti letalski način."
 #: panels/bluetooth/gnome-bluetooth-panel.desktop.in:3
 #: panels/network/cc-network-panel.ui:48
 #: panels/network/net-device-bluetooth.c:138
-#: panels/printers/pp-new-printer-dialog.c:1378
+#: panels/printers/pp-new-printer-dialog.c:1369
 msgid "Bluetooth"
 msgstr "Bluetooth"
 
@@ -2625,11 +2644,11 @@ msgstr "Osnovni gumb"
 msgid "Order of physical buttons on mice and touchpads"
 msgstr "Vrstni red gumbov na miški in sledilnih ploščicah."
 
-#: panels/mouse/cc-mouse-panel.ui:82 panels/wacom/cc-wacom-page.ui:39
+#: panels/mouse/cc-mouse-panel.ui:82 panels/wacom/cc-wacom-page.ui:36
 msgid "_Left"
 msgstr "_Levo"
 
-#: panels/mouse/cc-mouse-panel.ui:90 panels/wacom/cc-wacom-page.ui:46
+#: panels/mouse/cc-mouse-panel.ui:90 panels/wacom/cc-wacom-page.ui:43
 msgid "_Right"
 msgstr "_Desno"
 
@@ -3025,7 +3044,7 @@ msgstr "Ime omrežja"
 #: panels/network/cc-qr-code-dialog.ui:66
 #: panels/network/cc-wifi-hotspot-dialog.ui:92
 #: panels/printers/pp-jobs-dialog.ui:178
-#: panels/printers/pp-new-printer-dialog.ui:292
+#: panels/printers/pp-new-printer-dialog.ui:299
 #: panels/system/users/cc-add-user-dialog.ui:103
 #: panels/wwan/cc-wwan-apn-dialog.ui:175
 msgid "Password"
@@ -3554,9 +3573,9 @@ msgstr "WireGuard"
 #: panels/privacy/firmware-security/cc-firmware-security-dialog.c:167
 #: panels/sound/cc-alert-chooser-window.c:350
 #: panels/system/about/cc-about-page.c:73
-#: panels/system/about/cc-system-details-window.c:274
-#: panels/system/about/cc-system-details-window.c:326
-#: panels/system/about/cc-system-details-window.c:829
+#: panels/system/about/cc-system-details-window.c:282
+#: panels/system/about/cc-system-details-window.c:334
+#: panels/system/about/cc-system-details-window.c:837
 #: panels/wwan/cc-wwan-details-dialog.c:100
 msgid "Unknown"
 msgstr "Neznano"
@@ -4033,10 +4052,6 @@ msgstr "Dodaj novo povezavo"
 #: panels/network/net-device-wifi.c:881
 msgid "Network deleted"
 msgstr "Omrežje je izbrisano"
-
-#: panels/network/net-device-wifi.c:883 panels/printers/cc-printers-panel.c:672
-msgid "_Undo"
-msgstr "_Razveljavi"
 
 #. Translators: %d is the number of network connections deleted.
 #: panels/network/net-device-wifi.c:896
@@ -5017,15 +5032,15 @@ msgstr ""
 msgid "Printer;Queue;Print;Paper;Ink;Toner;"
 msgstr "Tiskalnik;Vrsta;Tiskanje;Papir;Črnilo;Toner;"
 
-#: panels/printers/pp-details-dialog.c:107
+#: panels/printers/pp-details-dialog.c:106
 msgid "No suitable driver found"
 msgstr "Ni mogoče najti ustreznega gonilnika"
 
-#: panels/printers/pp-details-dialog.c:118
+#: panels/printers/pp-details-dialog.c:117
 msgid "Searching for preferred drivers…"
 msgstr "Iskanje prednostnih gonilnikov …"
 
-#: panels/printers/pp-details-dialog.c:275
+#: panels/printers/pp-details-dialog.c:277
 msgid ""
 "PostScript Printer Description files (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, *."
 "PPD.GZ)"
@@ -5239,7 +5254,7 @@ msgstr "Domena"
 
 #. Translators: This is a username on a print server.
 #: panels/printers/pp-jobs-dialog.ui:166
-#: panels/printers/pp-new-printer-dialog.ui:271
+#: panels/printers/pp-new-printer-dialog.ui:278
 #: panels/wwan/cc-wwan-apn-dialog.ui:150
 msgid "Username"
 msgstr "Uporabniško ime"
@@ -5278,45 +5293,42 @@ msgstr "Odkleni %s."
 msgid "Enter username and password to view printers on %s."
 msgstr "Vnesite uporabniško ime in geslo za ogled tiskalnikov na %s."
 
-#: panels/printers/pp-new-printer-dialog.c:577
-msgid "Searching for Printers"
-msgstr "Poteka iskanje tiskalnikov"
-
 #. Translators: The found device is a printer connected via USB
-#: panels/printers/pp-new-printer-dialog.c:1361
+#: panels/printers/pp-new-printer-dialog.c:1352
 msgid "USB"
 msgstr "USB"
 
 #. Translators: The found device is a printer connected via serial port
-#: panels/printers/pp-new-printer-dialog.c:1366
+#: panels/printers/pp-new-printer-dialog.c:1357
 msgid "Serial Port"
 msgstr "Zaporedna vrata"
 
 #. Translators: The found device is a printer connected via parallel port
-#: panels/printers/pp-new-printer-dialog.c:1373
+#: panels/printers/pp-new-printer-dialog.c:1364
 msgid "Parallel Port"
 msgstr "Vzporedna vrata"
 
 #. Translators: Location of found network printer (e.g. Kitchen, Reception)
-#: panels/printers/pp-new-printer-dialog.c:1415
+#: panels/printers/pp-new-printer-dialog.c:1406
 #, c-format
 msgid "Location: %s"
 msgstr "Mesto: %s"
 
 #. Translators: Network address of found printer
-#: panels/printers/pp-new-printer-dialog.c:1420
+#: panels/printers/pp-new-printer-dialog.c:1411
 #, c-format
 msgid "Address: %s"
 msgstr "Naslov: %s"
 
 #. Translators: This item is a server which needs authentication to show its printers
-#: panels/printers/pp-new-printer-dialog.c:1447
+#: panels/printers/pp-new-printer-dialog.c:1438
 msgid "Server requires authentication"
 msgstr "Strežnik zahteva overitev"
 
+#. Translators: this is the "go back" action of a button
 #: panels/printers/pp-new-printer-dialog.ui:78
 #: panels/system/users/cc-fingerprint-dialog.ui:23
-#: panels/wwan/cc-wwan-apn-dialog.ui:21
+#: panels/wacom/cc-wacom-stylus-page.c:425 panels/wwan/cc-wwan-apn-dialog.ui:21
 msgid "Back"
 msgstr "Nazaj"
 
@@ -5333,16 +5345,20 @@ msgstr "_Odkleni"
 msgid "No Printers Found"
 msgstr "Ni najdenih tiskalnikov"
 
+#: panels/printers/pp-new-printer-dialog.ui:190
+msgid "Searching for Printers"
+msgstr "Poteka iskanje tiskalnikov"
+
 #. Translators: The entered text should contain network address of a printer or a text which will filter found devices (their names and locations)
-#: panels/printers/pp-new-printer-dialog.ui:204
+#: panels/printers/pp-new-printer-dialog.ui:211
 msgid "Enter a network address or search for a printer"
 msgstr "Vpis omrežnega naslova oziroma niz za iskanje tiskalnika"
 
-#: panels/printers/pp-new-printer-dialog.ui:246
+#: panels/printers/pp-new-printer-dialog.ui:253
 msgid "Authentication Required"
 msgstr "Zahtevana je overitev"
 
-#: panels/printers/pp-new-printer-dialog.ui:262
+#: panels/printers/pp-new-printer-dialog.ui:269
 msgid "Enter username and password to view printers on Print Server"
 msgstr ""
 "Vnesite uporabniško ime in geslo za ogled tiskalnikov na strežniku tiskanja."
@@ -6596,12 +6612,12 @@ msgid "Subfolders must be manually added for this location"
 msgstr "Za to mesto je treba podmape dodati ročno"
 
 #: panels/search/cc-search-locations-page.c:614
-#: panels/sharing/cc-sharing-panel.c:413
+#: panels/sharing/cc-sharing-panel.c:418
 msgid "Open Folder"
 msgstr "Odpri mapo"
 
 #: panels/search/cc-search-locations-page.c:623
-#: panels/sharing/cc-sharing-panel.c:423
+#: panels/sharing/cc-sharing-panel.c:428
 msgid "Remove Folder"
 msgstr "Odstrani mapo"
 
@@ -6676,35 +6692,35 @@ msgstr "Ni izbranega omrežja za souporabo"
 msgid "Networks"
 msgstr "Omrežja"
 
-#: panels/sharing/cc-sharing-panel.c:112
+#: panels/sharing/cc-sharing-panel.c:111
 msgid "Address copied to clipboard"
 msgstr "Naslov je kopiran v odložišče"
 
-#: panels/sharing/cc-sharing-panel.c:184
+#: panels/sharing/cc-sharing-panel.c:185
 msgctxt "service is disabled"
 msgid "Off"
 msgstr "Onemogočeno"
 
-#: panels/sharing/cc-sharing-panel.c:187
+#: panels/sharing/cc-sharing-panel.c:188
 msgctxt "service is enabled"
 msgid "Enabled"
 msgstr "Omogočeno"
 
-#: panels/sharing/cc-sharing-panel.c:190
+#: panels/sharing/cc-sharing-panel.c:191
 msgctxt "service is active"
 msgid "Active"
 msgstr "Dejavno"
 
-#: panels/sharing/cc-sharing-panel.c:275
+#: panels/sharing/cc-sharing-panel.c:278
 msgid "Choose a Folder"
 msgstr "Izbor mape"
 
-#: panels/sharing/cc-sharing-panel.c:443
+#: panels/sharing/cc-sharing-panel.c:448
 msgid "_Add Folder"
 msgstr "_Dodaj mapo"
 
 #. Translators: %s is the hostname of the user's device
-#: panels/sharing/cc-sharing-panel.c:602
+#: panels/sharing/cc-sharing-panel.c:607
 #, c-format
 msgid ""
 "File sharing allows sharing the Public folder with other devices on the "
@@ -7019,45 +7035,45 @@ msgstr "Poteka preračunavanje …"
 msgid "_System Details"
 msgstr "Podrobnosti _sistema"
 
-#: panels/system/about/cc-system-details-window.c:300
+#: panels/system/about/cc-system-details-window.c:308
 msgid "Graphics"
 msgstr "Grafika"
 
-#: panels/system/about/cc-system-details-window.c:302
+#: panels/system/about/cc-system-details-window.c:310
 #, c-format
 msgid "Graphics %d"
 msgstr "Grafika %d"
 
 #. translators: This is the type of architecture for the OS
-#: panels/system/about/cc-system-details-window.c:344
+#: panels/system/about/cc-system-details-window.c:352
 #, c-format
 msgid "64-bit"
 msgstr "64-bitni sistem"
 
 #. translators: This is the type of architecture for the OS
-#: panels/system/about/cc-system-details-window.c:347
+#: panels/system/about/cc-system-details-window.c:355
 #, c-format
 msgid "32-bit"
 msgstr "32-bitni sistem"
 
-#: panels/system/about/cc-system-details-window.c:600
+#: panels/system/about/cc-system-details-window.c:608
 msgid "X11"
 msgstr "X11"
 
-#: panels/system/about/cc-system-details-window.c:604
+#: panels/system/about/cc-system-details-window.c:612
 msgid "Wayland"
 msgstr "Wayland"
 
-#: panels/system/about/cc-system-details-window.c:606
+#: panels/system/about/cc-system-details-window.c:614
 msgctxt "Windowing system (Wayland, X11, or Unknown)"
 msgid "Unknown"
 msgstr "Neznano"
 
-#: panels/system/about/cc-system-details-window.c:773
+#: panels/system/about/cc-system-details-window.c:781
 msgid "**Windowing System:**"
 msgstr "**Sistem izrisovanja oken:**"
 
-#: panels/system/about/cc-system-details-window.c:789
+#: panels/system/about/cc-system-details-window.c:797
 msgid "Details copied to clipboard"
 msgstr "Podrobnosti so kopirane v odložišče"
 
@@ -9144,26 +9160,26 @@ msgstr "Lokacija gumbov"
 msgid "The location of the physical buttons on the tablet"
 msgstr "Lokacija fizičnih gumbov na tablici"
 
-#: panels/wacom/cc-wacom-page.ui:56
+#: panels/wacom/cc-wacom-page.ui:53
 msgid "Map _Buttons"
 msgstr "_Preslikava gumbov"
 
-#: panels/wacom/cc-wacom-page.ui:70
+#: panels/wacom/cc-wacom-page.ui:66
 msgctxt "display setting"
 msgid "Map to _Monitor"
 msgstr "Preslikaj na _zaslon"
 
-#: panels/wacom/cc-wacom-page.ui:77
+#: panels/wacom/cc-wacom-page.ui:73
 msgid "_Keep Aspect Ratio"
 msgstr "_Ohrani razmerje velikosti"
 
-#: panels/wacom/cc-wacom-page.ui:78
+#: panels/wacom/cc-wacom-page.ui:74
 msgid "Only use a portion of the tablet surface to keep monitor aspect ratio"
 msgstr ""
 "Uporabi le del površine tablice za ohranjanje skladnosti z velikostjo "
 "monitorja"
 
-#: panels/wacom/cc-wacom-page.ui:84
+#: panels/wacom/cc-wacom-page.ui:80
 msgid "_Calibrate"
 msgstr "_Umeri …"
 
@@ -9185,82 +9201,70 @@ msgstr "Izbor dejanja, ko je pritisnjen gumb %d pisala"
 msgid "Button %d Mapping"
 msgstr "Preslikava gumba %d"
 
-#: panels/wacom/cc-wacom-stylus-action-dialog.ui:113
-#: panels/wacom/cc-wacom-stylus-action-dialog.ui:152
+#: panels/wacom/cc-wacom-stylus-action-dialog.ui:107
+#: panels/wacom/cc-wacom-stylus-action-dialog.ui:146
+#: panels/wacom/cc-wacom-stylus-page.c:432
 msgid "Assign Keystroke"
 msgstr "Dodeli tipkovno bližnjico"
 
-#: panels/wacom/cc-wacom-stylus-action-dialog.ui:179
+#: panels/wacom/cc-wacom-stylus-action-dialog.ui:173
 msgid "Press Esc to cancel"
 msgstr "Pritisnite ubežnico (Esc) za preklic"
 
-#: panels/wacom/cc-wacom-stylus-page.c:431
-msgid "_Left Mousebutton Click"
-msgstr "Klik _levega gumba miške"
+#: panels/wacom/cc-wacom-stylus-page.c:415
+msgid "Left Mousebutton Click"
+msgstr "Klik levega gumba miške"
 
-#: panels/wacom/cc-wacom-stylus-page.c:434
-msgid "_Middle Mousebutton Click"
-msgstr "Klik _srednjega gumba miške"
+#: panels/wacom/cc-wacom-stylus-page.c:418
+msgid "Middle Mousebutton Click"
+msgstr "Klik srednjega gumba miške"
 
-#: panels/wacom/cc-wacom-stylus-page.c:437
-msgid "_Right Mousebutton Click"
-msgstr "Klik _desnega gumba miške"
-
-#. Translators: this is the "go back" action of a button
-#: panels/wacom/cc-wacom-stylus-page.c:441
-msgid "_Back"
-msgstr "_Nazaj"
+#: panels/wacom/cc-wacom-stylus-page.c:421
+msgid "Right Mousebutton Click"
+msgstr "Klik desnega gumba miške"
 
 #. Translators: this is the "go forward" action of a button
-#: panels/wacom/cc-wacom-stylus-page.c:445
-msgid "_Forward"
-msgstr "_Naprej"
+#: panels/wacom/cc-wacom-stylus-page.c:429
+msgid "Forward"
+msgstr "Naprej"
 
-#: panels/wacom/cc-wacom-stylus-page.c:448
-msgid "_Assign Keystroke"
-msgstr "_Dodeli tipkovno bližnjico"
-
-#: panels/wacom/cc-wacom-stylus-page.c:451
-msgid "_Switch Monitor"
-msgstr "Pre_klopi zaslon"
+#: panels/wacom/cc-wacom-stylus-page.c:435
+msgid "Switch Monitor"
+msgstr "Preklopi zaslon"
 
 #: panels/wacom/cc-wacom-stylus-page.ui:19
 msgid "Tip _Pressure Feel"
 msgstr "Občutek _pritiska konice"
 
-#: panels/wacom/cc-wacom-stylus-page.ui:25
-#: panels/wacom/cc-wacom-stylus-page.ui:120
+#. Translators: This is a mark in the 'Tip Pressure Feel' scale
+#. Translators: This is a mark in the 'Erase Pressure Feel' scale
+#: panels/wacom/cc-wacom-stylus-page.ui:26
+#: panels/wacom/cc-wacom-stylus-page.ui:71
 msgid "Soft"
 msgstr "Mehko"
 
-#: panels/wacom/cc-wacom-stylus-page.ui:39
-msgid "Stylus tip pressure"
-msgstr "Pritisk konice pisala"
-
-#: panels/wacom/cc-wacom-stylus-page.ui:45
-#: panels/wacom/cc-wacom-stylus-page.ui:140
+#. Translators: This is a mark in the 'Tip Pressure Feel' scale
+#. Translators: This is a mark in the 'Erase Pressure Feel' scale
+#: panels/wacom/cc-wacom-stylus-page.ui:28
+#: panels/wacom/cc-wacom-stylus-page.ui:73
 msgid "Firm"
 msgstr "Čvrsto"
 
-#: panels/wacom/cc-wacom-stylus-page.ui:57
+#: panels/wacom/cc-wacom-stylus-page.ui:43
 msgid "Button _1"
 msgstr "Gumb _1"
 
-#: panels/wacom/cc-wacom-stylus-page.ui:76
+#: panels/wacom/cc-wacom-stylus-page.ui:50
 msgid "Button _2"
 msgstr "Gumb _2"
 
-#: panels/wacom/cc-wacom-stylus-page.ui:95
+#: panels/wacom/cc-wacom-stylus-page.ui:57
 msgid "Button _3"
 msgstr "Gumb _3"
 
-#: panels/wacom/cc-wacom-stylus-page.ui:114
+#: panels/wacom/cc-wacom-stylus-page.ui:64
 msgid "_Eraser Pressure Feel"
 msgstr "Občutek pritiska _radirke"
-
-#: panels/wacom/cc-wacom-stylus-page.ui:134
-msgid "Eraser pressure"
-msgstr "Pritisk radirke"
 
 #: panels/wacom/cc-wacom-tool.c:365
 msgid "Airbrush stylus with pressure, tilt, and integrated slider"
