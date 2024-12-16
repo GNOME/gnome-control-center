@@ -1,0 +1,68 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CEPageWifi: Adw.PreferencesPage {
+  title: _("Identity");
+
+  Adw.PreferencesGroup {
+    title: _("Identity");
+
+    Adw.EntryRow ssid_entry {
+      title: _("_SSID");
+      use-underline: true;
+    }
+
+    // FIXME This needs a redesign, maybe with some kind of AdwEntryComboRow.
+    Adw.ActionRow bssid_row {
+      title: _("_BSSID");
+      use-underline: true;
+
+      ComboBoxText bssid_combo {
+        entry-text-column: 0;
+        has-entry: true;
+        id-column: 1;
+        valign: center;
+      }
+    }
+
+    // FIXME This needs a redesign, maybe with some kind of AdwEntryComboRow.
+    Adw.ActionRow mac_row {
+      title: _("_MAC Address");
+      use-underline: true;
+
+      ComboBoxText mac_combo {
+        entry-text-column: 0;
+        has-entry: true;
+        id-column: 1;
+        valign: center;
+
+        [internal-child entry]
+        Entry {
+          EventControllerFocus {
+            leave => $announce_mac_validation(mac_combo);
+          }
+        }
+      }
+    }
+
+    // FIXME This needs a redesign, maybe with some kind of AdwEntryComboRow.
+    Adw.ActionRow cloned_mac_row {
+      title: _("_Cloned Address");
+      use-underline: true;
+
+      ComboBoxText cloned_mac_combo {
+        entry-text-column: 0;
+        has-entry: true;
+        id-column: 1;
+        valign: center;
+
+        [internal-child entry]
+        Entry {
+          EventControllerFocus {
+            leave => $announce_mac_validation(cloned_mac_combo);
+          }
+        }
+      }
+    }
+  }
+}

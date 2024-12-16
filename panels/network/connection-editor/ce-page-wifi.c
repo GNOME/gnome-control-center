@@ -30,12 +30,12 @@
 #include "ui-helpers.h"
 
 struct _CEPageWifi {
-    AdwBin parent;
+    AdwPreferencesPage parent;
 
     GtkComboBoxText *bssid_combo;
     GtkComboBoxText *cloned_mac_combo;
     GtkComboBoxText *mac_combo;
-    GtkEntry *ssid_entry;
+    AdwEntryRow *ssid_entry;
 
     NMClient *client;
     NMSettingWireless *setting;
@@ -43,7 +43,7 @@ struct _CEPageWifi {
 
 static void ce_page_iface_init (CEPageInterface *);
 
-G_DEFINE_FINAL_TYPE_WITH_CODE (CEPageWifi, ce_page_wifi, ADW_TYPE_BIN,
+G_DEFINE_FINAL_TYPE_WITH_CODE (CEPageWifi, ce_page_wifi, ADW_TYPE_PREFERENCES_PAGE,
                                G_IMPLEMENT_INTERFACE (CE_TYPE_PAGE, ce_page_iface_init))
 
 static void
@@ -118,12 +118,6 @@ ui_to_setting (CEPageWifi *self)
                   NULL);
 }
 
-static const gchar *
-ce_page_wifi_get_title (CEPage *page)
-{
-    return _("Identity");
-}
-
 static gboolean
 ce_page_wifi_class_validate (CEPage *parent, NMConnection *connection, GError **error)
 {
@@ -173,7 +167,7 @@ ce_page_wifi_class_init (CEPageWifiClass *klass)
 {
     GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
-    gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/network/wifi-page.ui");
+    gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/network/ce-page-wifi.ui");
 
     gtk_widget_class_bind_template_child (widget_class, CEPageWifi, bssid_combo);
     gtk_widget_class_bind_template_child (widget_class, CEPageWifi, cloned_mac_combo);
@@ -186,7 +180,7 @@ ce_page_wifi_class_init (CEPageWifiClass *klass)
 static void
 ce_page_iface_init (CEPageInterface *iface)
 {
-    iface->get_title = ce_page_wifi_get_title;
+    iface->get_title = (const char *(*) (CEPage *) ) adw_preferences_page_get_title;
     iface->validate = ce_page_wifi_class_validate;
 }
 
