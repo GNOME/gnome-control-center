@@ -8,7 +8,7 @@ ui_sources = files(
   'ce-page-bluetooth.blp',
   'ce-page-ethernet.blp',
   'ce-page-ip4.blp',
-  'ip6-page.blp',
+  'ce-page-ip6.blp',
   'ce-page-vpn.blp',
   'ce-page-wifi.blp',
   'wireguard-page.blp',

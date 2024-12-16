@@ -28,6 +28,7 @@
 #include <stdlib.h>
 
 #include "ce-ip-address-entry.h"
+#include "ce-macros.h"
 #include "ce-page-ip6.h"
 #include "ce-page.h"
 #include "ui-helpers.h"
@@ -36,26 +37,22 @@ static void ensure_empty_address_row (CEPageIP6 *self);
 static void ensure_empty_routes_row (CEPageIP6 *self);
 
 struct _CEPageIP6 {
-    AdwBin parent;
+    AdwPreferencesPage parent;
 
     GtkBox *address_box;
+    AdwPreferencesGroup *address_group;
     GtkLabel *address_address_label;
     GtkLabel *address_prefix_label;
     GtkLabel *address_gateway_label;
     GtkSizeGroup *address_sizegroup;
-    GtkLabel *auto_dns_label;
-    GtkSwitch *auto_dns_switch;
-    GtkLabel *auto_routes_label;
-    GtkSwitch *auto_routes_switch;
-    GtkBox *content_box;
-    GtkCheckButton *disabled_radio;
-    GtkBox *dns_box;
-    GtkEntry *dns_entry;
-    GtkBox *dns_search_box;
-    GtkEntry *dns_search_entry;
-    GtkGrid *main_box;
-    GtkCheckButton *never_default_check;
-    GtkBox *routes_box;
+    AdwSwitchRow *auto_dns_switch;
+    AdwSwitchRow *auto_routes_switch;
+    AdwEntryRow *dns_entry;
+    AdwPreferencesGroup *dns_group;
+    AdwEntryRow *dns_search_entry;
+    AdwPreferencesGroup *dns_search_group;
+    AdwSwitchRow *never_default_switch;
+    AdwPreferencesGroup *routes_group;
     GtkBox *route_config_box;
     GtkLabel *routes_address_label;
     GtkLabel *routes_prefix_label;
@@ -66,7 +63,6 @@ struct _CEPageIP6 {
     GtkSizeGroup *routes_gateway_sizegroup;
     GtkSizeGroup *routes_metric_sizegroup;
     GtkSizeGroup *routes_sizegroup;
-    GtkCheckButton *shared_radio;
 
     NMSettingIPConfig *setting;
 
@@ -80,7 +76,7 @@ struct _CEPageIP6 {
 
 static void ce_page_iface_init (CEPageInterface *);
 
-G_DEFINE_FINAL_TYPE_WITH_CODE (CEPageIP6, ce_page_ip6, ADW_TYPE_BIN,
+G_DEFINE_FINAL_TYPE_WITH_CODE (CEPageIP6, ce_page_ip6, ADW_TYPE_PREFERENCES_PAGE,
                                G_IMPLEMENT_INTERFACE (CE_TYPE_PAGE, ce_page_iface_init))
 
 enum {
@@ -97,18 +93,14 @@ sync_dns_entry_warning (CEPageIP6 *self)
     method_variant = g_action_group_get_action_state (self->method_group, "ip6method");
     method = g_variant_get_string (method_variant, NULL);
 
-    if (gtk_entry_get_text_length (self->dns_entry) && gtk_switch_get_active (self->auto_dns_switch)
+    if (adw_entry_row_get_text_length (self->dns_entry) && adw_switch_row_get_active (self->auto_dns_switch)
         && (g_strcmp0 (method, "automatic") == 0 || g_strcmp0 (method, "dhcp") == 0)) {
-        gtk_entry_set_icon_from_icon_name (self->dns_entry, GTK_ENTRY_ICON_SECONDARY, "dialog-warning-symbolic");
-        gtk_entry_set_icon_tooltip_text (self->dns_entry, GTK_ENTRY_ICON_SECONDARY,
-                                         _("Automatic DNS is enabled. Did you intend to disable Automatic DNS?"));
+        /* FIXME AdwEntryRow can't display an icon with a tooltip, the warning
+         * "Automatic DNS is enabled. Did you intend to disable Automatic DNS?"
+         * is currently not presented to the user. */
         gtk_widget_add_css_class (GTK_WIDGET (self->dns_entry), "warning");
     } else {
-        if (gtk_widget_has_css_class (GTK_WIDGET (self->dns_entry), "warning")) {
-            gtk_entry_set_icon_from_icon_name (self->dns_entry, GTK_ENTRY_ICON_SECONDARY, NULL);
-            gtk_entry_set_icon_tooltip_text (self->dns_entry, GTK_ENTRY_ICON_SECONDARY, NULL);
-            gtk_widget_remove_css_class (GTK_WIDGET (self->dns_entry), "warning");
-        }
+        gtk_widget_remove_css_class (GTK_WIDGET (self->dns_entry), "warning");
     }
 }
 
@@ -140,13 +132,11 @@ method_changed (CEPageIP6 *self)
         auto_routes_enabled = g_str_equal (method, "automatic");
     }
 
-    gtk_widget_set_visible (GTK_WIDGET (self->address_box), addr_enabled);
-    gtk_widget_set_sensitive (GTK_WIDGET (self->dns_box), dns_enabled);
-    gtk_widget_set_sensitive (GTK_WIDGET (self->routes_box), routes_enabled);
+    gtk_widget_set_visible (GTK_WIDGET (self->address_group), addr_enabled);
+    gtk_widget_set_sensitive (GTK_WIDGET (self->dns_group), dns_enabled);
+    gtk_widget_set_sensitive (GTK_WIDGET (self->routes_group), routes_enabled);
 
-    gtk_widget_set_visible (GTK_WIDGET (self->auto_dns_label), auto_dns_enabled);
     gtk_widget_set_visible (GTK_WIDGET (self->auto_dns_switch), auto_dns_enabled);
-    gtk_widget_set_visible (GTK_WIDGET (self->auto_routes_label), auto_routes_enabled);
     gtk_widget_set_visible (GTK_WIDGET (self->auto_routes_switch), auto_routes_enabled);
 
     sync_dns_entry_warning (self);
@@ -232,7 +222,7 @@ add_address_row (CEPageIP6 *self, const gchar *address, const gchar *network, co
     g_signal_connect_object (widget, "changed", G_CALLBACK (ce_page_changed), self, G_CONNECT_SWAPPED);
     g_signal_connect_object (widget, "activate", G_CALLBACK (ensure_empty_address_row), self, G_CONNECT_SWAPPED);
     g_object_set_data (G_OBJECT (row), "address", widget);
-    gtk_editable_set_text (GTK_EDITABLE (widget), address);
+    gtk_editable_set_text (GTK_EDITABLE (widget), ce_option_or (address, ""));
     gtk_editable_set_width_chars (GTK_EDITABLE (widget), 16);
     gtk_widget_set_hexpand (widget, TRUE);
     gtk_accessible_update_relation (GTK_ACCESSIBLE (widget), GTK_ACCESSIBLE_RELATION_LABELLED_BY,
@@ -243,7 +233,7 @@ add_address_row (CEPageIP6 *self, const gchar *address, const gchar *network, co
     g_signal_connect_object (widget, "changed", G_CALLBACK (ce_page_changed), self, G_CONNECT_SWAPPED);
     g_signal_connect_object (widget, "activate", G_CALLBACK (ensure_empty_address_row), self, G_CONNECT_SWAPPED);
     g_object_set_data (G_OBJECT (row), "prefix", widget);
-    gtk_editable_set_text (GTK_EDITABLE (widget), network);
+    gtk_editable_set_text (GTK_EDITABLE (widget), ce_option_or (network, ""));
     gtk_editable_set_width_chars (GTK_EDITABLE (widget), 16);
     gtk_widget_set_hexpand (widget, TRUE);
     gtk_accessible_update_relation (GTK_ACCESSIBLE (widget), GTK_ACCESSIBLE_RELATION_LABELLED_BY,
@@ -254,7 +244,7 @@ add_address_row (CEPageIP6 *self, const gchar *address, const gchar *network, co
     g_signal_connect_object (widget, "changed", G_CALLBACK (ce_page_changed), self, G_CONNECT_SWAPPED);
     g_signal_connect_object (widget, "activate", G_CALLBACK (ensure_empty_address_row), self, G_CONNECT_SWAPPED);
     g_object_set_data (G_OBJECT (row), "gateway", widget);
-    gtk_editable_set_text (GTK_EDITABLE (widget), gateway ? gateway : "");
+    gtk_editable_set_text (GTK_EDITABLE (widget), ce_option_or (gateway, ""));
     gtk_editable_set_width_chars (GTK_EDITABLE (widget), 16);
     gtk_widget_set_hexpand (widget, TRUE);
     gtk_accessible_update_relation (GTK_ACCESSIBLE (widget), GTK_ACCESSIBLE_RELATION_LABELLED_BY,
@@ -316,7 +306,7 @@ add_dns_section (CEPageIP6 *self)
     GString *string;
     gint i;
 
-    gtk_switch_set_active (self->auto_dns_switch, !nm_setting_ip_config_get_ignore_auto_dns (self->setting));
+    adw_switch_row_set_active (self->auto_dns_switch, !nm_setting_ip_config_get_ignore_auto_dns (self->setting));
     g_signal_connect_object (self->auto_dns_switch, "notify::active", G_CALLBACK (ce_page_changed), self,
                              G_CONNECT_SWAPPED);
     g_signal_connect_object (self->auto_dns_switch, "notify::active", G_CALLBACK (sync_dns_entry_warning), self,
@@ -391,7 +381,7 @@ add_route_row (CEPageIP6 *self, const gchar *address, const gchar *prefix, const
     g_signal_connect_object (widget, "changed", G_CALLBACK (ce_page_changed), self, G_CONNECT_SWAPPED);
     g_signal_connect_object (widget, "activate", G_CALLBACK (ensure_empty_routes_row), self, G_CONNECT_SWAPPED);
     g_object_set_data (G_OBJECT (row), "address", widget);
-    gtk_editable_set_text (GTK_EDITABLE (widget), address);
+    gtk_editable_set_text (GTK_EDITABLE (widget), ce_option_or (address, ""));
     gtk_editable_set_width_chars (GTK_EDITABLE (widget), 16);
     gtk_widget_set_hexpand (widget, TRUE);
     gtk_accessible_update_relation (GTK_ACCESSIBLE (widget), GTK_ACCESSIBLE_RELATION_LABELLED_BY,
@@ -404,7 +394,7 @@ add_route_row (CEPageIP6 *self, const gchar *address, const gchar *prefix, const
     g_signal_connect_object (widget, "changed", G_CALLBACK (ce_page_changed), self, G_CONNECT_SWAPPED);
     g_signal_connect_object (widget, "activate", G_CALLBACK (ensure_empty_routes_row), self, G_CONNECT_SWAPPED);
     g_object_set_data (G_OBJECT (row), "prefix", widget);
-    gtk_editable_set_text (GTK_EDITABLE (widget), prefix ? prefix : "");
+    gtk_editable_set_text (GTK_EDITABLE (widget), ce_option_or (prefix, ""));
     gtk_editable_set_width_chars (GTK_EDITABLE (widget), 16);
     gtk_widget_set_hexpand (widget, TRUE);
     gtk_accessible_update_relation (GTK_ACCESSIBLE (widget), GTK_ACCESSIBLE_RELATION_LABELLED_BY,
@@ -417,7 +407,7 @@ add_route_row (CEPageIP6 *self, const gchar *address, const gchar *prefix, const
     g_signal_connect_object (widget, "changed", G_CALLBACK (ce_page_changed), self, G_CONNECT_SWAPPED);
     g_signal_connect_object (widget, "activate", G_CALLBACK (ensure_empty_routes_row), self, G_CONNECT_SWAPPED);
     g_object_set_data (G_OBJECT (row), "gateway", widget);
-    gtk_editable_set_text (GTK_EDITABLE (widget), gateway);
+    gtk_editable_set_text (GTK_EDITABLE (widget), ce_option_or (gateway, ""));
     gtk_editable_set_width_chars (GTK_EDITABLE (widget), 16);
     gtk_widget_set_hexpand (widget, TRUE);
     gtk_accessible_update_relation (GTK_ACCESSIBLE (widget), GTK_ACCESSIBLE_RELATION_LABELLED_BY,
@@ -430,7 +420,7 @@ add_route_row (CEPageIP6 *self, const gchar *address, const gchar *prefix, const
     g_signal_connect_object (widget, "changed", G_CALLBACK (ce_page_changed), self, G_CONNECT_SWAPPED);
     g_signal_connect_object (widget, "activate", G_CALLBACK (ensure_empty_routes_row), self, G_CONNECT_SWAPPED);
     g_object_set_data (G_OBJECT (row), "metric", widget);
-    gtk_editable_set_text (GTK_EDITABLE (widget), metric ? metric : "");
+    gtk_editable_set_text (GTK_EDITABLE (widget), ce_option_or (metric, ""));
     gtk_editable_set_width_chars (GTK_EDITABLE (widget), 5);
     gtk_widget_set_hexpand (widget, TRUE);
     gtk_accessible_update_relation (GTK_ACCESSIBLE (widget), GTK_ACCESSIBLE_RELATION_LABELLED_BY,
@@ -467,12 +457,6 @@ ensure_empty_routes_row (CEPageIP6 *self)
 }
 
 static void
-add_empty_route_row (CEPageIP6 *self)
-{
-    add_route_row (self, "", NULL, "", NULL);
-}
-
-static void
 add_route_config_box (CEPageIP6 *self)
 {
     GtkWidget *list;
@@ -481,7 +465,7 @@ add_route_config_box (CEPageIP6 *self)
     self->routes_list = list = gtk_list_box_new ();
     gtk_list_box_set_selection_mode (GTK_LIST_BOX (list), GTK_SELECTION_NONE);
     gtk_box_append (self->route_config_box, list);
-    gtk_switch_set_active (self->auto_routes_switch, !nm_setting_ip_config_get_ignore_auto_routes (self->setting));
+    adw_switch_row_set_active (self->auto_routes_switch, !nm_setting_ip_config_get_ignore_auto_routes (self->setting));
     g_signal_connect_object (self->auto_routes_switch, "notify::active", G_CALLBACK (ce_page_changed), self,
                              G_CONNECT_SWAPPED);
 
@@ -496,7 +480,7 @@ add_route_config_box (CEPageIP6 *self)
         add_route_row (self, nm_ip_route_get_dest (route), prefix, nm_ip_route_get_next_hop (route), metric);
     }
     if (nm_setting_ip_config_get_num_routes (self->setting) == 0)
-        add_empty_route_row (self);
+        ensure_empty_routes_row (self);
 }
 
 static void
@@ -526,9 +510,8 @@ connect_ip6_page (CEPageIP6 *self)
         method = "disabled";
     }
 
-    gtk_check_button_set_active (GTK_CHECK_BUTTON (self->never_default_check),
-                                 nm_setting_ip_config_get_never_default (self->setting));
-    g_signal_connect_object (self->never_default_check, "toggled", G_CALLBACK (ce_page_changed), self,
+    adw_switch_row_set_active (self->never_default_switch, nm_setting_ip_config_get_never_default (self->setting));
+    g_signal_connect_object (self->never_default_switch, "notify::active", G_CALLBACK (ce_page_changed), self,
                              G_CONNECT_SWAPPED);
 
     g_action_group_change_action_state (self->method_group, "ip6method", g_variant_new_string (method));
@@ -743,16 +726,16 @@ ui_to_setting (CEPageIP6 *self)
     if (!ret)
         goto out;
 
-    ignore_auto_dns = !gtk_switch_get_active (self->auto_dns_switch);
-    ignore_auto_routes = !gtk_switch_get_active (self->auto_routes_switch);
-    never_default = gtk_check_button_get_active (self->never_default_check);
+    ignore_auto_dns = !adw_switch_row_get_active (self->auto_dns_switch);
+    ignore_auto_routes = !adw_switch_row_get_active (self->auto_routes_switch);
+    never_default = adw_switch_row_get_active (self->never_default_switch);
 
     g_object_set (self->setting, NM_SETTING_IP_CONFIG_METHOD, method, NM_SETTING_IP_CONFIG_IGNORE_AUTO_DNS,
                   ignore_auto_dns, NM_SETTING_IP_CONFIG_IGNORE_AUTO_ROUTES, ignore_auto_routes,
                   NM_SETTING_IP_CONFIG_NEVER_DEFAULT, never_default, NULL);
 
     /* Save DNS search domains if the field is sensitive */
-    if (gtk_widget_get_sensitive (GTK_WIDGET (self->dns_search_box))) {
+    if (gtk_widget_get_sensitive (GTK_WIDGET (self->dns_search_group))) {
         g_autofree gchar *search_text = NULL;
         g_auto(GStrv) search_domains = NULL;
 
@@ -783,12 +766,6 @@ on_ip6_method_activated_cb (GSimpleAction *action, GVariant *parameter, gpointer
     method_changed (self);
 }
 
-static const gchar *
-ce_page_ip6_get_title (CEPage *page)
-{
-    return _("IPv6");
-}
-
 static gboolean
 ce_page_ip6_validate (CEPage *self, NMConnection *connection, GError **error)
 {
@@ -801,6 +778,7 @@ ce_page_ip6_validate (CEPage *self, NMConnection *connection, GError **error)
 static void
 ce_page_ip6_init (CEPageIP6 *self)
 {
+    g_autoptr (GtkCssProvider) provider = NULL;
     const GActionEntry ip6_entries[] = {
         { "ip6method", on_ip6_method_activated_cb, "s", "'automatic'", NULL, { 0 } },
     };
@@ -810,6 +788,11 @@ ce_page_ip6_init (CEPageIP6 *self)
     gtk_widget_insert_action_group (GTK_WIDGET (self), "ip6page", G_ACTION_GROUP (self->method_group));
 
     gtk_widget_init_template (GTK_WIDGET (self));
+
+    provider = gtk_css_provider_new ();
+    gtk_css_provider_load_from_resource (provider, "/org/gnome/control-center/network/ce-page-ip6.css");
+    gtk_style_context_add_provider_for_display (gdk_display_get_default (), GTK_STYLE_PROVIDER (provider),
+                                                GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
 }
 
 static void
@@ -817,25 +800,22 @@ ce_page_ip6_class_init (CEPageIP6Class *klass)
 {
     GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
-    gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/network/ip6-page.ui");
+    gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/network/ce-page-ip6.ui");
 
     gtk_widget_class_bind_template_child (widget_class, CEPageIP6, address_box);
+    gtk_widget_class_bind_template_child (widget_class, CEPageIP6, address_group);
     gtk_widget_class_bind_template_child (widget_class, CEPageIP6, address_address_label);
     gtk_widget_class_bind_template_child (widget_class, CEPageIP6, address_prefix_label);
     gtk_widget_class_bind_template_child (widget_class, CEPageIP6, address_gateway_label);
     gtk_widget_class_bind_template_child (widget_class, CEPageIP6, address_sizegroup);
-    gtk_widget_class_bind_template_child (widget_class, CEPageIP6, auto_dns_label);
     gtk_widget_class_bind_template_child (widget_class, CEPageIP6, auto_dns_switch);
-    gtk_widget_class_bind_template_child (widget_class, CEPageIP6, auto_routes_label);
     gtk_widget_class_bind_template_child (widget_class, CEPageIP6, auto_routes_switch);
-    gtk_widget_class_bind_template_child (widget_class, CEPageIP6, content_box);
-    gtk_widget_class_bind_template_child (widget_class, CEPageIP6, dns_box);
+    gtk_widget_class_bind_template_child (widget_class, CEPageIP6, dns_group);
     gtk_widget_class_bind_template_child (widget_class, CEPageIP6, dns_entry);
-    gtk_widget_class_bind_template_child (widget_class, CEPageIP6, dns_search_box);
+    gtk_widget_class_bind_template_child (widget_class, CEPageIP6, dns_search_group);
     gtk_widget_class_bind_template_child (widget_class, CEPageIP6, dns_search_entry);
-    gtk_widget_class_bind_template_child (widget_class, CEPageIP6, main_box);
-    gtk_widget_class_bind_template_child (widget_class, CEPageIP6, never_default_check);
-    gtk_widget_class_bind_template_child (widget_class, CEPageIP6, routes_box);
+    gtk_widget_class_bind_template_child (widget_class, CEPageIP6, never_default_switch);
+    gtk_widget_class_bind_template_child (widget_class, CEPageIP6, routes_group);
     gtk_widget_class_bind_template_child (widget_class, CEPageIP6, route_config_box);
     gtk_widget_class_bind_template_child (widget_class, CEPageIP6, routes_address_label);
     gtk_widget_class_bind_template_child (widget_class, CEPageIP6, routes_address_sizegroup);
@@ -853,7 +833,7 @@ ce_page_ip6_class_init (CEPageIP6Class *klass)
 static void
 ce_page_iface_init (CEPageInterface *iface)
 {
-    iface->get_title = ce_page_ip6_get_title;
+    iface->get_title = (const char *(*) (CEPage *) ) adw_preferences_page_get_title;
     iface->validate = ce_page_ip6_validate;
 }
 
