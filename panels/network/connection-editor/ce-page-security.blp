@@ -1,0 +1,13 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CEPageSecurity: Adw.PreferencesPage {
+  title: _("Security");
+
+  Adw.PreferencesGroup group {
+    Adw.ComboRow security_combo {
+      title: _("S_ecurity");
+      use-underline: true;
+    }
+  }
+}

@@ -30,28 +30,21 @@
 #include "nma-ws.h"
 
 struct _CEPageSecurity {
-    AdwBin parent;
+    AdwPreferencesPage parent;
 
-    GtkBox *box;
-    GtkComboBox *security_combo;
-    GtkLabel *security_label;
+    AdwPreferencesGroup *group;
+    AdwComboRow *security_combo;
 
     NMConnection *connection;
     const gchar *security_setting;
-    GtkSizeGroup *group;
     gboolean adhoc;
+    NMAWs *current_sec;
 };
 
 static void ce_page_iface_init (CEPageInterface *);
 
-G_DEFINE_FINAL_TYPE_WITH_CODE (CEPageSecurity, ce_page_security, ADW_TYPE_BIN,
+G_DEFINE_FINAL_TYPE_WITH_CODE (CEPageSecurity, ce_page_security, ADW_TYPE_PREFERENCES_PAGE,
                                G_IMPLEMENT_INTERFACE (CE_TYPE_PAGE, ce_page_iface_init))
-
-enum {
-    S_NAME_COLUMN,
-    S_SEC_COLUMN,
-    S_ADHOC_VALID_COLUMN
-};
 
 static gboolean
 find_proto (NMSettingWirelessSecurity *sec, const char *item)
@@ -115,55 +108,29 @@ get_default_type_for_security (NMSettingWirelessSecurity *sec)
 }
 
 static NMAWs *
-security_combo_get_active (CEPageSecurity *self)
+security_combo_get_selected_sec (CEPageSecurity *self)
 {
-    GtkTreeIter iter;
-    GtkTreeModel *model;
-    NMAWs *sec;
+    GObject *object;
 
-    model = gtk_combo_box_get_model (self->security_combo);
-    if (!gtk_combo_box_get_active_iter (self->security_combo, &iter))
+    object = adw_combo_row_get_selected_item (self->security_combo);
+    if (object == NULL)
         return NULL;
-    gtk_tree_model_get (model, &iter, S_SEC_COLUMN, &sec, -1);
 
-    return sec;
-}
-
-static void
-wsec_size_group_clear (GtkSizeGroup *group)
-{
-    GSList *iter;
-
-    g_return_if_fail (group != NULL);
-
-    iter = gtk_size_group_get_widgets (group);
-    while (iter) {
-        gtk_size_group_remove_widget (group, GTK_WIDGET (iter->data));
-        iter = gtk_size_group_get_widgets (group);
-    }
+    return g_object_get_data (object, "sec");
 }
 
 static void
 security_combo_changed (CEPageSecurity *self)
 {
-    NMAWs *sec;
-    GtkWidget *child;
+    if (self->current_sec != NULL) {
+        gtk_widget_remove_css_class (GTK_WIDGET (self->current_sec), "security-config");
+        adw_preferences_group_remove (self->group, GTK_WIDGET (self->current_sec));
+    }
 
-    wsec_size_group_clear (self->group);
-
-    while ((child = gtk_widget_get_first_child (GTK_WIDGET (self->box))) != NULL)
-        gtk_box_remove (self->box, child);
-
-    sec = security_combo_get_active (self);
-    if (sec) {
-        if (gtk_widget_get_parent (GTK_WIDGET (sec)))
-            gtk_box_remove (self->box, GTK_WIDGET (sec));
-
-        gtk_size_group_add_widget (self->group, GTK_WIDGET (self->security_label));
-        nma_ws_add_to_size_group (sec, self->group);
-
-        gtk_box_append (self->box, g_object_ref (GTK_WIDGET (sec)));
-        g_object_unref (sec);
+    self->current_sec = security_combo_get_selected_sec (self);
+    if (self->current_sec != NULL) {
+        gtk_widget_add_css_class (GTK_WIDGET (self->current_sec), "security-config");
+        adw_preferences_group_add (self->group, GTK_WIDGET (self->current_sec));
     }
 
     ce_page_changed (CE_PAGE (self));
@@ -176,29 +143,18 @@ security_item_changed_cb (CEPageSecurity *self)
 }
 
 static void
-add_security_item (CEPageSecurity *self, NMAWs *sec, GtkListStore *model, GtkTreeIter *iter, const char *text,
-                   gboolean adhoc_valid)
+add_security_item (CEPageSecurity *self, NMAWs *sec, GListStore *model, const char *text, gboolean adhoc_valid)
 {
+    g_autoptr (GtkStringObject) object = NULL;
+
     if (G_IS_INITIALLY_UNOWNED (sec))
         g_object_ref_sink (sec);
     g_signal_connect_object (sec, "ws-changed", G_CALLBACK (security_item_changed_cb), self, G_CONNECT_SWAPPED);
-    gtk_list_store_append (model, iter);
-    gtk_list_store_set (model, iter, S_NAME_COLUMN, text, S_SEC_COLUMN, sec, S_ADHOC_VALID_COLUMN, adhoc_valid, -1);
-    g_object_unref (sec);
-}
 
-static void
-set_sensitive (GtkCellLayout *cell_layout, GtkCellRenderer *cell, GtkTreeModel *tree_model, GtkTreeIter *iter,
-               gpointer data)
-{
-    gboolean *adhoc = data;
-    gboolean sensitive = TRUE, adhoc_valid = TRUE;
-
-    gtk_tree_model_get (tree_model, iter, S_ADHOC_VALID_COLUMN, &adhoc_valid, -1);
-    if (*adhoc && !adhoc_valid)
-        sensitive = FALSE;
-
-    g_object_set (cell, "sensitive", sensitive, NULL);
+    object = gtk_string_object_new (text);
+    g_object_set_data_full (G_OBJECT (object), "sec", g_steal_pointer (&sec), g_object_unref);
+    g_object_set_data (G_OBJECT (object), "adhoc-valid", GUINT_TO_POINTER (adhoc_valid));
+    g_list_store_append (model, object);
 }
 
 static void
@@ -207,19 +163,15 @@ finish_setup (CEPageSecurity *self)
     NMSettingWireless *sw;
     NMSettingWirelessSecurity *sws;
     gboolean is_adhoc = FALSE;
-    g_autoptr(GtkListStore) sec_model = NULL;
-    GtkTreeIter iter;
+    g_autoptr (GListStore) sec_model = NULL;
     const gchar *mode;
     guint32 dev_caps = 0;
     NMUtilsSecurityType default_type = NMU_SEC_NONE;
-    int active = -1;
-    int item = 0;
-    GtkCellRenderer *renderer;
+    guint active = GTK_INVALID_LIST_POSITION;
+    guint item = 0;
 
     sw = nm_connection_get_setting_wireless (self->connection);
     g_assert (sw);
-
-    self->group = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
 
     dev_caps = NM_WIFI_DEVICE_CAP_CIPHER_TKIP | NM_WIFI_DEVICE_CAP_CIPHER_CCMP | NM_WIFI_DEVICE_CAP_WPA
                | NM_WIFI_DEVICE_CAP_RSN;
@@ -233,11 +185,13 @@ finish_setup (CEPageSecurity *self)
     if (sws)
         default_type = get_default_type_for_security (sws);
 
-    sec_model = gtk_list_store_new (3, G_TYPE_STRING, NMA_TYPE_WS, G_TYPE_BOOLEAN);
+    sec_model = g_list_store_new (GTK_TYPE_STRING_OBJECT);
 
     if (nm_utils_security_valid (NMU_SEC_NONE, dev_caps, FALSE, is_adhoc, 0, 0, 0)) {
-        gtk_list_store_insert_with_values (sec_model, &iter, -1, S_NAME_COLUMN,
-                                           C_("Wi-Fi/Ethernet security", "None"), S_ADHOC_VALID_COLUMN, TRUE, -1);
+        g_autoptr (GtkStringObject) object = gtk_string_object_new (C_("Wi-Fi/Ethernet security", "None"));
+
+        g_object_set_data (G_OBJECT (object), "adhoc-valid", GUINT_TO_POINTER (TRUE));
+        g_list_store_append (sec_model, object);
         if (default_type == NMU_SEC_NONE)
             active = item;
         item++;
@@ -245,9 +199,11 @@ finish_setup (CEPageSecurity *self)
 
 #if NM_CHECK_VERSION(1, 24, 0)
     if (nm_utils_security_valid (NMU_SEC_OWE, dev_caps, FALSE, is_adhoc, 0, 0, 0)) {
-        gtk_list_store_insert_with_values (sec_model, &iter, -1, S_NAME_COLUMN,
-                                           _("Enhanced Open"), S_ADHOC_VALID_COLUMN, FALSE, -1);
-        if (active < 0 && default_type == NMU_SEC_OWE)
+        g_autoptr (GtkStringObject) object = gtk_string_object_new (_("Enhanced Open"));
+
+        g_object_set_data (G_OBJECT (object), "adhoc-valid", GUINT_TO_POINTER (FALSE));
+        g_list_store_append (sec_model, object);
+        if (active == GTK_INVALID_LIST_POSITION && default_type == NMU_SEC_OWE)
             active = item;
         item++;
     }
@@ -258,8 +214,8 @@ finish_setup (CEPageSecurity *self)
 
         ws_leap = nma_ws_leap_new (self->connection, FALSE);
         if (ws_leap) {
-            add_security_item (self, NMA_WS (ws_leap), sec_model, &iter, _("LEAP"), FALSE);
-            if ((active < 0) && (default_type == NMU_SEC_LEAP))
+            add_security_item (self, NMA_WS (ws_leap), sec_model, _("LEAP"), FALSE);
+            if ((active == GTK_INVALID_LIST_POSITION) && (default_type == NMU_SEC_LEAP))
                 active = item;
             item++;
         }
@@ -271,8 +227,9 @@ finish_setup (CEPageSecurity *self)
 
         ws_wpa_psk = nma_ws_wpa_psk_new (self->connection, FALSE);
         if (ws_wpa_psk) {
-            add_security_item (self, NMA_WS (ws_wpa_psk), sec_model, &iter, _("WPA & WPA2 Personal"), FALSE);
-            if ((active < 0) && ((default_type == NMU_SEC_WPA_PSK) || (default_type == NMU_SEC_WPA2_PSK)))
+            add_security_item (self, NMA_WS (ws_wpa_psk), sec_model, _("WPA & WPA2 Personal"), FALSE);
+            if ((active == GTK_INVALID_LIST_POSITION)
+                && ((default_type == NMU_SEC_WPA_PSK) || (default_type == NMU_SEC_WPA2_PSK)))
                 active = item;
             item++;
         }
@@ -284,8 +241,9 @@ finish_setup (CEPageSecurity *self)
 
         ws_wpa_eap = nma_ws_wpa_eap_new (self->connection, TRUE, FALSE, NULL);
         if (ws_wpa_eap) {
-            add_security_item (self, NMA_WS (ws_wpa_eap), sec_model, &iter, _("WPA & WPA2 Enterprise"), FALSE);
-            if ((active < 0) && ((default_type == NMU_SEC_WPA_ENTERPRISE) || (default_type == NMU_SEC_WPA2_ENTERPRISE)))
+            add_security_item (self, NMA_WS (ws_wpa_eap), sec_model, _("WPA & WPA2 Enterprise"), FALSE);
+            if ((active == GTK_INVALID_LIST_POSITION)
+                && ((default_type == NMU_SEC_WPA_ENTERPRISE) || (default_type == NMU_SEC_WPA2_ENTERPRISE)))
                 active = item;
             item++;
         }
@@ -297,27 +255,19 @@ finish_setup (CEPageSecurity *self)
 
         ws_sae = nma_ws_sae_new (self->connection, FALSE);
         if (ws_sae) {
-            add_security_item (self, NMA_WS (ws_sae), sec_model, &iter, _("WPA3 Personal"), FALSE);
-            if ((active < 0) && ((default_type == NMU_SEC_SAE)))
+            add_security_item (self, NMA_WS (ws_sae), sec_model, _("WPA3 Personal"), FALSE);
+            if ((active == GTK_INVALID_LIST_POSITION) && ((default_type == NMU_SEC_SAE)))
                 active = item;
             item++;
         }
     }
 #endif
 
-    gtk_combo_box_set_model (self->security_combo, GTK_TREE_MODEL (sec_model));
-    gtk_cell_layout_clear (GTK_CELL_LAYOUT (self->security_combo));
-
-    renderer = gtk_cell_renderer_text_new ();
-    gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (self->security_combo), renderer, TRUE);
-    gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (self->security_combo), renderer, "text", S_NAME_COLUMN, NULL);
-    gtk_cell_layout_set_cell_data_func (GTK_CELL_LAYOUT (self->security_combo), renderer, set_sensitive, &self->adhoc,
-                                        NULL);
-
-    gtk_combo_box_set_active (self->security_combo, active < 0 ? 0 : (guint32) active);
+    adw_combo_row_set_model (self->security_combo, G_LIST_MODEL (sec_model));
+    adw_combo_row_set_selected (self->security_combo, active == GTK_INVALID_LIST_POSITION ? 0 : (guint32) active);
 
     security_combo_changed (self);
-    g_signal_connect_object (self->security_combo, "changed", G_CALLBACK (security_combo_changed), self,
+    g_signal_connect_object (self->security_combo, "notify::selected", G_CALLBACK (security_combo_changed), self,
                              G_CONNECT_SWAPPED);
 }
 
@@ -327,7 +277,6 @@ ce_page_security_dispose (GObject *object)
     CEPageSecurity *self = CE_PAGE_SECURITY (object);
 
     g_clear_object (&self->connection);
-    g_clear_object (&self->group);
 
     G_OBJECT_CLASS (ce_page_security_parent_class)->dispose (object);
 }
@@ -336,12 +285,6 @@ static const gchar *
 ce_page_security_get_security_setting (CEPage *page)
 {
     return CE_PAGE_SECURITY (page)->security_setting;
-}
-
-static const gchar *
-ce_page_security_get_title (CEPage *page)
-{
-    return _("Security");
 }
 
 static gboolean
@@ -361,7 +304,7 @@ ce_page_security_validate (CEPage *page, NMConnection *connection, GError **erro
     else
         CE_PAGE_SECURITY (self)->adhoc = FALSE;
 
-    sec = security_combo_get_active (CE_PAGE_SECURITY (self));
+    sec = security_combo_get_selected_sec (CE_PAGE_SECURITY (self));
     if (sec) {
         GBytes *ssid = nm_setting_wireless_get_ssid (sw);
 
@@ -383,10 +326,9 @@ ce_page_security_validate (CEPage *page, NMConnection *connection, GError **erro
                 valid = FALSE;
             }
         }
-        g_object_unref (sec);
     } else {
 
-        if (gtk_combo_box_get_active ((CE_PAGE_SECURITY (self))->security_combo) == 0) {
+        if (adw_combo_row_get_selected ((CE_PAGE_SECURITY (self))->security_combo) == 0) {
             /* No security, unencrypted */
             nm_connection_remove_setting (connection, NM_TYPE_SETTING_WIRELESS_SECURITY);
             nm_connection_remove_setting (connection, NM_TYPE_SETTING_802_1X);
@@ -411,7 +353,14 @@ ce_page_security_validate (CEPage *page, NMConnection *connection, GError **erro
 static void
 ce_page_security_init (CEPageSecurity *self)
 {
+    g_autoptr (GtkCssProvider) provider = NULL;
+
     gtk_widget_init_template (GTK_WIDGET (self));
+
+    provider = gtk_css_provider_new ();
+    gtk_css_provider_load_from_resource (provider, "/org/gnome/control-center/network/ce-page-security.css");
+    gtk_style_context_add_provider_for_display (gdk_display_get_default (), GTK_STYLE_PROVIDER (provider),
+                                                GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
 }
 
 static void
@@ -422,10 +371,9 @@ ce_page_security_class_init (CEPageSecurityClass *klass)
 
     object_class->dispose = ce_page_security_dispose;
 
-    gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/network/security-page.ui");
+    gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/network/ce-page-security.ui");
 
-    gtk_widget_class_bind_template_child (widget_class, CEPageSecurity, box);
-    gtk_widget_class_bind_template_child (widget_class, CEPageSecurity, security_label);
+    gtk_widget_class_bind_template_child (widget_class, CEPageSecurity, group);
     gtk_widget_class_bind_template_child (widget_class, CEPageSecurity, security_combo);
 }
 
@@ -433,7 +381,7 @@ static void
 ce_page_iface_init (CEPageInterface *iface)
 {
     iface->get_security_setting = ce_page_security_get_security_setting;
-    iface->get_title = ce_page_security_get_title;
+    iface->get_title = (const char *(*) (CEPage *) ) adw_preferences_page_get_title;
     iface->validate = ce_page_security_validate;
 }
 
