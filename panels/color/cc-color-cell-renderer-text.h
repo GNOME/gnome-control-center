@@ -23,6 +23,8 @@
 
 #include <gtk/gtk.h>
 
+G_BEGIN_DECLS
+
 #define CC_COLOR_TYPE_CELL_RENDERER_TEXT (cc_color_cell_renderer_text_get_type ())
 G_DECLARE_FINAL_TYPE (CcColorCellRendererText, cc_color_cell_renderer_text, CC_COLOR, CELL_RENDERER_TEXT, GtkCellRendererText)
 

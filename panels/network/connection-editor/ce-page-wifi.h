@@ -25,6 +25,8 @@
 #include <gtk/gtk.h>
 #include <NetworkManager.h>
 
+G_BEGIN_DECLS
+
 G_DECLARE_FINAL_TYPE (CEPageWifi, ce_page_wifi, CE, PAGE_WIFI, AdwBin)
 
 CEPageWifi *ce_page_wifi_new (NMConnection *connection,

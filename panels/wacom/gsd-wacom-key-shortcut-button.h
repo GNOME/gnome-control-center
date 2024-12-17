@@ -38,3 +38,5 @@ typedef enum
 } GsdWacomKeyShortcutButtonMode;
 
 GtkWidget    * gsd_wacom_key_shortcut_button_new             (void);
+
+G_END_DECLS

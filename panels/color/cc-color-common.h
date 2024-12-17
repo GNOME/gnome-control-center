@@ -23,6 +23,8 @@
 
 #include <colord.h>
 
+G_BEGIN_DECLS
+
 #define GCM_SETTINGS_SCHEMA             "org.gnome.settings-daemon.plugins.color"
 
 gchar   *cc_color_device_get_sortable_base (CdDevice *device);
