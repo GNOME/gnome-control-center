@@ -871,7 +871,7 @@ ce_page_ip4_new (NMConnection     *connection,
 {
         CEPageIP4 *self;
 
-        self = CE_PAGE_IP4 (g_object_new (CE_TYPE_PAGE_IP4, NULL));
+        self = g_object_new (CE_TYPE_PAGE_IP4, NULL);
 
         self->setting = nm_connection_get_setting_ip4_config (connection);
         if (!self->setting) {

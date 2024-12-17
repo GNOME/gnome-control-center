@@ -840,7 +840,7 @@ ce_page_ip6_new (NMConnection     *connection,
 {
         CEPageIP6 *self;
 
-        self = CE_PAGE_IP6 (g_object_new (CE_TYPE_PAGE_IP6, NULL));
+        self = g_object_new (CE_TYPE_PAGE_IP6, NULL);
 
         self->setting = nm_connection_get_setting_ip6_config (connection);
         if (!self->setting) {

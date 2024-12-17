@@ -103,7 +103,7 @@ cc_language_row_new (const gchar *locale_id)
   g_autofree gchar *country_code = NULL;
   g_autofree gchar *modifier = NULL;
 
-  self = CC_LANGUAGE_ROW (g_object_new (CC_TYPE_LANGUAGE_ROW, NULL));
+  self = g_object_new (CC_TYPE_LANGUAGE_ROW, NULL);
   self->locale_id = g_strdup (locale_id);
 
   gnome_parse_locale (locale_id, &language_code, &country_code, NULL, &modifier);

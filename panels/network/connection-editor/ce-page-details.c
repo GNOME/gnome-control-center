@@ -599,7 +599,7 @@ ce_page_details_new (NMConnection        *connection,
 {
         CEPageDetails *self;
 
-        self = CE_PAGE_DETAILS (g_object_new (CE_TYPE_PAGE_DETAILS, NULL));
+        self = g_object_new (CE_TYPE_PAGE_DETAILS, NULL);
 
         self->connection = g_object_ref (connection);
         self->editor = editor;

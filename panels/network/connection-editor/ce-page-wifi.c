@@ -201,7 +201,7 @@ ce_page_wifi_new (NMConnection     *connection,
 {
         CEPageWifi *self;
 
-        self = CE_PAGE_WIFI (g_object_new (CE_TYPE_PAGE_WIFI, NULL));
+        self = g_object_new (CE_TYPE_PAGE_WIFI, NULL);
 
         self->client = client;
         self->setting = nm_connection_get_setting_wireless (connection);

@@ -101,7 +101,7 @@ ce_page_bluetooth_new (NMConnection     *connection)
 {
         CEPageBluetooth *self;
 
-        self = CE_PAGE_BLUETOOTH (g_object_new (CE_TYPE_PAGE_BLUETOOTH, NULL));
+        self = g_object_new (CE_TYPE_PAGE_BLUETOOTH, NULL);
 
         self->setting_connection = nm_connection_get_setting_connection (connection);
 

@@ -475,7 +475,7 @@ cc_format_chooser_init (CcFormatChooser *chooser)
 CcFormatChooser *
 cc_format_chooser_new (void)
 {
-        return CC_FORMAT_CHOOSER (g_object_new (CC_TYPE_FORMAT_CHOOSER, NULL));
+        return g_object_new (CC_TYPE_FORMAT_CHOOSER, NULL);
 }
 
 void

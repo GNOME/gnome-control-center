@@ -171,5 +171,5 @@ cc_mouse_test_init (CcMouseTest *self)
 GtkWidget *
 cc_mouse_test_new (void)
 {
-    return (GtkWidget *) g_object_new (CC_TYPE_MOUSE_TEST, NULL);
+    return GTK_WIDGET (g_object_new (CC_TYPE_MOUSE_TEST, NULL));
 }

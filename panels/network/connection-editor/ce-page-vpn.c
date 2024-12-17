@@ -219,7 +219,7 @@ ce_page_vpn_new (NMConnection *connection)
 {
         CEPageVpn *self;
 
-        self = CE_PAGE_VPN (g_object_new (CE_TYPE_PAGE_VPN, NULL));
+        self = g_object_new (CE_TYPE_PAGE_VPN, NULL);
 
         self->connection = g_object_ref (connection);
 

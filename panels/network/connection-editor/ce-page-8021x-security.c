@@ -185,7 +185,7 @@ ce_page_8021x_security_new (NMConnection *connection)
 {
 	CEPage8021xSecurity *self;
 
-        self = CE_PAGE_8021X_SECURITY (g_object_new (CE_TYPE_PAGE_8021X_SECURITY, NULL));
+        self = g_object_new (CE_TYPE_PAGE_8021X_SECURITY, NULL);
 
         self->connection = g_object_ref (connection);
 

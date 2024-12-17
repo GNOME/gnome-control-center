@@ -231,7 +231,7 @@ cc_wacom_button_row_new (guint      button,
   GtkWidget               *grid, *combo, *label, *shortcut_button;
   g_autofree gchar        *name = NULL;
 
-  row = CC_WACOM_BUTTON_ROW (g_object_new (CC_WACOM_TYPE_BUTTON_ROW, NULL));
+  row = g_object_new (CC_WACOM_TYPE_BUTTON_ROW, NULL);
 
   row->button = button;
   row->settings = g_object_ref (settings);

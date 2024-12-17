@@ -465,7 +465,7 @@ finish_setup (CEPageWireguard *self, gpointer unused, GError *error, gpointer us
 CEPageWireguard *
 ce_page_wireguard_new (NMConnection *connection)
 {
-        CEPageWireguard *self = CE_PAGE_WIREGUARD (g_object_new (CE_TYPE_PAGE_WIREGUARD, NULL));
+        CEPageWireguard *self = g_object_new (CE_TYPE_PAGE_WIREGUARD, NULL);
 
         self->connection = g_object_ref (connection);
 

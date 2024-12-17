@@ -312,7 +312,7 @@ cc_language_chooser_class_init (CcLanguageChooserClass *klass)
 CcLanguageChooser *
 cc_language_chooser_new (void)
 {
-        return CC_LANGUAGE_CHOOSER (g_object_new (CC_TYPE_LANGUAGE_CHOOSER, NULL));
+        return g_object_new (CC_TYPE_LANGUAGE_CHOOSER, NULL);
 }
 
 void

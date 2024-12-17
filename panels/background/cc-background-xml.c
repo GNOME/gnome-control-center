@@ -653,5 +653,5 @@ cc_background_xml_init (CcBackgroundXml *xml)
 CcBackgroundXml *
 cc_background_xml_new (void)
 {
-	return CC_BACKGROUND_XML (g_object_new (CC_TYPE_BACKGROUND_XML, NULL));
+	return g_object_new (CC_TYPE_BACKGROUND_XML, NULL);
 }

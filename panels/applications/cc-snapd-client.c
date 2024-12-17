@@ -203,7 +203,7 @@ cc_snapd_client_init (CcSnapdClient *self)
 CcSnapdClient *
 cc_snapd_client_new (void)
 {
-  return CC_SNAPD_CLIENT (g_object_new (CC_TYPE_SNAPD_CLIENT, NULL));
+  return g_object_new (CC_TYPE_SNAPD_CLIENT, NULL);
 }
 
 JsonObject *

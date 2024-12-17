@@ -710,7 +710,7 @@ cc_user_page_init (CcUserPage *self)
 CcUserPage *
 cc_user_page_new (void)
 {
-    return CC_USER_PAGE (g_object_new (CC_TYPE_USER_PAGE, NULL));
+    return g_object_new (CC_TYPE_USER_PAGE, NULL);
 }
 
 void

@@ -409,7 +409,7 @@ cc_snap_row_new (GCancellable *cancellable, JsonObject *plug, JsonArray *slots)
   const gchar *label = NULL;
   GtkTreeIter iter;
 
-  self = CC_SNAP_ROW (g_object_new (CC_TYPE_SNAP_ROW, NULL));
+  self = g_object_new (CC_TYPE_SNAP_ROW, NULL);
 
   self->cancellable = g_object_ref (cancellable);
   self->plug = json_object_ref (plug);

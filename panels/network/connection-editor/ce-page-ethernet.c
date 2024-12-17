@@ -210,7 +210,7 @@ ce_page_ethernet_new (NMConnection     *connection,
 {
         CEPageEthernet *self;
 
-        self = CE_PAGE_ETHERNET (g_object_new (CE_TYPE_PAGE_ETHERNET, NULL));
+        self = g_object_new (CE_TYPE_PAGE_ETHERNET, NULL);
 
         self->client = client;
         self->setting_connection = nm_connection_get_setting_connection (connection);
