@@ -37,7 +37,7 @@ typedef struct {
   GtkApplicationClass parent_class;
 } CcSearchProviderAppClass;
 
-#define CC_TYPE_SEARCH_PROVIDER_APP cc_search_provider_app_get_type ()
+#define CC_TYPE_SEARCH_PROVIDER_APP (cc_search_provider_app_get_type ())
 
 #define CC_SEARCH_PROVIDER_APP(obj) \
   (G_TYPE_CHECK_INSTANCE_CAST ((obj), \

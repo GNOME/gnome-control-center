@@ -25,7 +25,7 @@
 
 G_BEGIN_DECLS
 
-#define BOLT_TYPE_DEVICE bolt_device_get_type ()
+#define BOLT_TYPE_DEVICE (bolt_device_get_type ())
 G_DECLARE_FINAL_TYPE (BoltDevice, bolt_device, BOLT, DEVICE, BoltProxy);
 
 BoltDevice *  bolt_device_new_for_object_path (GDBusConnection *bus,

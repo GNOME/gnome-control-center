@@ -26,7 +26,7 @@
 
 G_BEGIN_DECLS
 
-#define BOLT_TYPE_CLIENT bolt_client_get_type ()
+#define BOLT_TYPE_CLIENT (bolt_client_get_type ())
 G_DECLARE_FINAL_TYPE (BoltClient, bolt_client, BOLT, CLIENT, BoltProxy);
 
 BoltClient *    bolt_client_new (GError **error);

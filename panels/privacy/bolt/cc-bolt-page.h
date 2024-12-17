@@ -23,7 +23,7 @@
 
 G_BEGIN_DECLS
 
-#define CC_TYPE_BOLT_PAGE cc_bolt_page_get_type ()
+#define CC_TYPE_BOLT_PAGE (cc_bolt_page_get_type ())
 
 G_DECLARE_FINAL_TYPE (CcBoltPage, cc_bolt_page, CC, BOLT_PAGE, AdwNavigationPage);
 

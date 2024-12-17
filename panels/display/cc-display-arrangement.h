@@ -25,7 +25,7 @@
 
 G_BEGIN_DECLS
 
-#define CC_TYPE_DISPLAY_ARRANGEMENT cc_display_arrangement_get_type ()
+#define CC_TYPE_DISPLAY_ARRANGEMENT (cc_display_arrangement_get_type ())
 G_DECLARE_FINAL_TYPE (CcDisplayArrangement, cc_display_arrangement, CC, DISPLAY_ARRANGEMENT, GtkDrawingArea);
 
 CcDisplayArrangement* cc_display_arrangement_new                 (CcDisplayConfig      *config);

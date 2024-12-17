@@ -23,7 +23,7 @@
 
 G_BEGIN_DECLS
 
-#define CC_TYPE_NETWORK_PANEL cc_network_panel_get_type()
+#define CC_TYPE_NETWORK_PANEL (cc_network_panel_get_type ())
 
 G_DECLARE_FINAL_TYPE (CcNetworkPanel, cc_network_panel, CC, NETWORK_PANEL, CcPanel)
 
