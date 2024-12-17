@@ -27,7 +27,6 @@
 G_BEGIN_DECLS
 
 #define CC_TYPE_BOLT_DEVICE_DIALOG (cc_bolt_device_dialog_get_type ())
-
 G_DECLARE_FINAL_TYPE (CcBoltDeviceDialog, cc_bolt_device_dialog, CC, BOLT_DEVICE_DIALOG, AdwWindow);
 
 CcBoltDeviceDialog * cc_bolt_device_dialog_new (void);

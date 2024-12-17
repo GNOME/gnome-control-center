@@ -30,7 +30,6 @@ G_BEGIN_DECLS
 #define CC_OBJECT_PWQ_SETTINGS "CcObjectStorage::pw-quality-settings"
 
 #define CC_TYPE_OBJECT_STORAGE (cc_object_storage_get_type())
-
 G_DECLARE_FINAL_TYPE (CcObjectStorage, cc_object_storage, CC, OBJECT_STORAGE, GObject)
 
 gboolean cc_object_storage_has_object             (const gchar         *key);

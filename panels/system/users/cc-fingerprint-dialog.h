@@ -28,7 +28,6 @@
 G_BEGIN_DECLS
 
 #define CC_TYPE_FINGERPRINT_DIALOG (cc_fingerprint_dialog_get_type ())
-
 G_DECLARE_FINAL_TYPE (CcFingerprintDialog, cc_fingerprint_dialog,
                       CC, FINGERPRINT_DIALOG, AdwDialog)
 

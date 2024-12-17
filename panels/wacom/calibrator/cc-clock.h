@@ -25,7 +25,6 @@
 G_BEGIN_DECLS
 
 #define CC_TYPE_CLOCK (cc_clock_get_type ())
-
 G_DECLARE_FINAL_TYPE (CcClock, cc_clock, CC, CLOCK, GtkWidget)
 
 GtkWidget * cc_clock_new          (guint duration);

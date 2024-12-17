@@ -24,7 +24,6 @@
 G_BEGIN_DECLS
 
 #define CC_TYPE_REMOTE_LOGIN_PAGE (cc_remote_login_page_get_type ())
-
 G_DECLARE_FINAL_TYPE (CcRemoteLoginPage, cc_remote_login_page, CC, REMOTE_LOGIN_PAGE, AdwNavigationPage)
 
 G_END_DECLS

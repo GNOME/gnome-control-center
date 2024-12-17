@@ -23,7 +23,6 @@
 G_BEGIN_DECLS
 
 #define CC_TYPE_WIFI_CONNECTION_LIST (cc_wifi_connection_list_get_type())
-
 G_DECLARE_FINAL_TYPE (CcWifiConnectionList, cc_wifi_connection_list, CC, WIFI_CONNECTION_LIST, AdwBin)
 
 CcWifiConnectionList *cc_wifi_connection_list_new (NMClient     *client,

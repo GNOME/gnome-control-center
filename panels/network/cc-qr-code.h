@@ -32,7 +32,6 @@
 G_BEGIN_DECLS
 
 #define CC_TYPE_QR_CODE (cc_qr_code_get_type ())
-
 G_DECLARE_FINAL_TYPE (CcQrCode, cc_qr_code, CC, QR_CODE, GObject)
 
 CcQrCode     *cc_qr_code_new         (void);

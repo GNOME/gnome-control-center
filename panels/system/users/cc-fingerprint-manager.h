@@ -28,7 +28,6 @@
 G_BEGIN_DECLS
 
 #define CC_TYPE_FINGERPRINT_MANAGER (cc_fingerprint_manager_get_type ())
-
 G_DECLARE_FINAL_TYPE (CcFingerprintManager, cc_fingerprint_manager, CC, FINGERPRINT_MANAGER, GObject)
 
 /**

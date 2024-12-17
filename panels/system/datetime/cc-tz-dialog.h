@@ -7,7 +7,6 @@
 G_BEGIN_DECLS
 
 #define CC_TYPE_TZ_DIALOG (cc_tz_dialog_get_type ())
-
 G_DECLARE_FINAL_TYPE (CcTzDialog, cc_tz_dialog, CC, TZ_DIALOG, AdwDialog)
 
 GtkWidget   *cc_tz_dialog_new                   (void);

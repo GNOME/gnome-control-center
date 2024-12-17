@@ -29,7 +29,6 @@
 G_BEGIN_DECLS
 
 #define CC_TYPE_ENTERPRISE_LOGIN_DIALOG (cc_enterprise_login_dialog_get_type ())
-
 G_DECLARE_FINAL_TYPE (CcEnterpriseLoginDialog, cc_enterprise_login_dialog, CC, ENTERPRISE_LOGIN_DIALOG, AdwDialog)
 
 CcEnterpriseLoginDialog *cc_enterprise_login_dialog_new      (void);

@@ -29,7 +29,6 @@
 G_BEGIN_DECLS
 
 #define CC_TYPE_WELLBEING_PANEL  (cc_wellbeing_panel_get_type ())
-
 G_DECLARE_FINAL_TYPE (CcWellbeingPanel, cc_wellbeing_panel, CC, WELLBEING_PANEL, CcPanel)
 
 G_END_DECLS

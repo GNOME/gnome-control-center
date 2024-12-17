@@ -27,7 +27,6 @@
 G_BEGIN_DECLS
 
 #define CC_TYPE_SHELL_MODEL (cc_shell_model_get_type ())
-
 G_DECLARE_FINAL_TYPE (CcShellModel, cc_shell_model, CC, SHELL_MODEL, GtkListStore)
 
 typedef enum

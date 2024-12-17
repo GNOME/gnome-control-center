@@ -24,7 +24,6 @@
 G_BEGIN_DECLS
 
 #define CC_TYPE_REMOTE_DESKTOP_PAGE (cc_remote_desktop_page_get_type ())
-
 G_DECLARE_FINAL_TYPE (CcRemoteDesktopPage, cc_remote_desktop_page, CC, CC_TYPE_REMOTE_DESKTOP_PAGE, AdwNavigationPage)
 
 G_END_DECLS

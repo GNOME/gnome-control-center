@@ -25,7 +25,6 @@
 G_BEGIN_DECLS
 
 #define CC_TYPE_NOTIFICATIONS_PANEL  (cc_notifications_panel_get_type ())
-
 G_DECLARE_FINAL_TYPE (CcNotificationsPanel, cc_notifications_panel, CC, NOTIFICATIONS_PANEL, CcPanel)
 
 G_END_DECLS

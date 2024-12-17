@@ -26,7 +26,6 @@
 G_BEGIN_DECLS
 
 #define CC_TYPE_AVATAR_CHOOSER (cc_avatar_chooser_get_type())
-
 G_DECLARE_FINAL_TYPE (CcAvatarChooser, cc_avatar_chooser, CC, AVATAR_CHOOSER, GtkPopover)
 
 typedef struct _CcAvatarChooser CcAvatarChooser;

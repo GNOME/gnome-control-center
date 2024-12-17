@@ -27,7 +27,6 @@
 G_BEGIN_DECLS
 
 #define CC_TYPE_SEARCH_PROVIDER (cc_search_provider_get_type())
-
 G_DECLARE_FINAL_TYPE (CcSearchProvider, cc_search_provider, CC, SEARCH_PROVIDER, GObject)
 
 CcSearchProvider *cc_search_provider_new (void);

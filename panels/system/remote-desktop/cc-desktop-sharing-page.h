@@ -24,7 +24,6 @@
 G_BEGIN_DECLS
 
 #define CC_TYPE_DESKTOP_SHARING_PAGE (cc_desktop_sharing_page_get_type ())
-
 G_DECLARE_FINAL_TYPE (CcDesktopSharingPage, cc_desktop_sharing_page, CC, DESKTOP_SHARING_PAGE, AdwBin)
 
 G_END_DECLS
