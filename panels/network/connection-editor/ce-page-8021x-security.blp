@@ -1,0 +1,13 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CEPage8021xSecurity: Adw.PreferencesPage {
+  title: _("Security");
+
+  Adw.PreferencesGroup group {
+    Adw.SwitchRow enable_8021x_switch {
+      title: _("802.1x _Security");
+      use-underline: true;
+    }
+  }
+}

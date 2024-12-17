@@ -32,27 +32,25 @@
 #include "nma-ws.h"
 
 struct _CEPage8021xSecurity {
-    AdwBin parent;
+    AdwPreferencesPage parent;
 
-    GtkBox *box;
-    GtkSwitch *enable_8021x_switch;
-    GtkLabel *security_label;
+    AdwPreferencesGroup *group;
+    AdwSwitchRow *enable_8021x_switch;
 
     NMConnection *connection;
     NMAWs8021x *security;
-    GtkSizeGroup *group;
     gboolean initial_have_8021x;
 };
 
 static void ce_page_iface_init (CEPageInterface *);
 
-G_DEFINE_FINAL_TYPE_WITH_CODE (CEPage8021xSecurity, ce_page_8021x_security, ADW_TYPE_BIN,
+G_DEFINE_FINAL_TYPE_WITH_CODE (CEPage8021xSecurity, ce_page_8021x_security, ADW_TYPE_PREFERENCES_PAGE,
                                G_IMPLEMENT_INTERFACE (CE_TYPE_PAGE, ce_page_iface_init))
 
 static void
 enable_toggled (CEPage8021xSecurity *self)
 {
-    gtk_widget_set_sensitive (GTK_WIDGET (self->security), gtk_switch_get_active (self->enable_8021x_switch));
+    gtk_widget_set_sensitive (GTK_WIDGET (self->security), adw_switch_row_get_active (self->enable_8021x_switch));
     ce_page_changed (CE_PAGE (self));
 }
 
@@ -68,8 +66,6 @@ finish_setup (CEPage8021xSecurity *self, gpointer unused, GError *error, gpointe
     if (error)
         return;
 
-    self->group = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
-
     self->security = nma_ws_802_1x_new (self->connection, FALSE, FALSE);
     if (!self->security) {
         g_warning ("Could not load 802.1x user interface.");
@@ -79,15 +75,13 @@ finish_setup (CEPage8021xSecurity *self, gpointer unused, GError *error, gpointe
     g_signal_connect_object (NMA_WS (self->security), "ws-changed", G_CALLBACK (security_item_changed_cb), self,
                              G_CONNECT_SWAPPED);
 
-    gtk_switch_set_active (self->enable_8021x_switch, self->initial_have_8021x);
+    adw_switch_row_set_active (self->enable_8021x_switch, self->initial_have_8021x);
     g_signal_connect_object (self->enable_8021x_switch, "notify::active", G_CALLBACK (enable_toggled), self,
                              G_CONNECT_SWAPPED);
     gtk_widget_set_sensitive (GTK_WIDGET (self->security), self->initial_have_8021x);
 
-    gtk_size_group_add_widget (self->group, GTK_WIDGET (self->security_label));
-    nma_ws_add_to_size_group (NMA_WS (self->security), self->group);
-
-    gtk_box_append (self->box, GTK_WIDGET (self->security));
+    gtk_widget_add_css_class (GTK_WIDGET (self->security), "security-config");
+    adw_preferences_group_add (self->group, GTK_WIDGET (self->security));
 }
 
 static const gchar *
@@ -101,19 +95,13 @@ ce_page_8021x_security_get_security_setting (CEPage *page)
     return NULL;
 }
 
-static const gchar *
-ce_page_8021x_security_get_title (CEPage *page)
-{
-    return _("Security");
-}
-
 static gboolean
 ce_page_8021x_security_validate (CEPage *cepage, NMConnection *connection, GError **error)
 {
     CEPage8021xSecurity *self = CE_PAGE_8021X_SECURITY (cepage);
     gboolean valid = TRUE;
 
-    if (gtk_switch_get_active (self->enable_8021x_switch)) {
+    if (adw_switch_row_get_active (self->enable_8021x_switch)) {
         NMSetting *s_8021x;
 
         /* FIXME: get failed property and error out of wireless security objects */
@@ -144,7 +132,14 @@ ce_page_8021x_security_validate (CEPage *cepage, NMConnection *connection, GErro
 static void
 ce_page_8021x_security_init (CEPage8021xSecurity *self)
 {
+    g_autoptr (GtkCssProvider) provider = NULL;
+
     gtk_widget_init_template (GTK_WIDGET (self));
+
+    provider = gtk_css_provider_new ();
+    gtk_css_provider_load_from_resource (provider, "/org/gnome/control-center/network/ce-page-8021x-security.css");
+    gtk_style_context_add_provider_for_display (gdk_display_get_default (), GTK_STYLE_PROVIDER (provider),
+                                                GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
 }
 
 static void
@@ -153,7 +148,6 @@ ce_page_8021x_security_dispose (GObject *object)
     CEPage8021xSecurity *self = CE_PAGE_8021X_SECURITY (object);
 
     g_clear_object (&self->connection);
-    g_clear_object (&self->group);
 
     G_OBJECT_CLASS (ce_page_8021x_security_parent_class)->dispose (object);
 }
@@ -167,18 +161,17 @@ ce_page_8021x_security_class_init (CEPage8021xSecurityClass *klass)
     object_class->dispose = ce_page_8021x_security_dispose;
 
     gtk_widget_class_set_template_from_resource (widget_class,
-                                                 "/org/gnome/control-center/network/8021x-security-page.ui");
+                                                 "/org/gnome/control-center/network/ce-page-8021x-security.ui");
 
-    gtk_widget_class_bind_template_child (widget_class, CEPage8021xSecurity, box);
+    gtk_widget_class_bind_template_child (widget_class, CEPage8021xSecurity, group);
     gtk_widget_class_bind_template_child (widget_class, CEPage8021xSecurity, enable_8021x_switch);
-    gtk_widget_class_bind_template_child (widget_class, CEPage8021xSecurity, security_label);
 }
 
 static void
 ce_page_iface_init (CEPageInterface *iface)
 {
     iface->get_security_setting = ce_page_8021x_security_get_security_setting;
-    iface->get_title = ce_page_8021x_security_get_title;
+    iface->get_title = (const char *(*) (CEPage *) ) adw_preferences_page_get_title;
     iface->validate = ce_page_8021x_security_validate;
 }
 
