@@ -215,7 +215,7 @@ net_vpn_new (NMClient     *client,
 {
         NetVpn *self;
 
-        self = g_object_new (net_vpn_get_type (), NULL);
+        self = g_object_new (NET_TYPE_VPN, NULL);
         self->client = g_object_ref (client);
         self->connection = g_object_ref (connection);
 

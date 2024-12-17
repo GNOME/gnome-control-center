@@ -22,6 +22,7 @@
 
 G_BEGIN_DECLS
 
+#define CC_TYPE_CURSOR_SIZE_PAGE (cc_cursor_size_page_get_type ())
 G_DECLARE_FINAL_TYPE (CcCursorSizePage, cc_cursor_size_page, CC, CURSOR_SIZE_PAGE, AdwNavigationPage)
 
 CcCursorSizePage *cc_cursor_size_page_new (void);

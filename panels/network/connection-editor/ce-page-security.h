@@ -27,6 +27,7 @@
 
 G_BEGIN_DECLS
 
+#define CE_TYPE_PAGE_SECURITY (ce_page_security_get_type ())
 G_DECLARE_FINAL_TYPE (CEPageSecurity, ce_page_security, CE, PAGE_SECURITY, AdwBin)
 
 CEPageSecurity *ce_page_security_new (NMConnection *connection);

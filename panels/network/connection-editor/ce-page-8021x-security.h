@@ -28,6 +28,7 @@
 
 G_BEGIN_DECLS
 
+#define CE_TYPE_PAGE_8021X_SECURITY (ce_page_8021x_security_get_type ())
 G_DECLARE_FINAL_TYPE (CEPage8021xSecurity, ce_page_8021x_security, CE, PAGE_8021X_SECURITY, AdwBin)
 
 CEPage8021xSecurity *ce_page_8021x_security_new (NMConnection *connection);

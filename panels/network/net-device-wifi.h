@@ -26,6 +26,7 @@
 
 G_BEGIN_DECLS
 
+#define NET_TYPE_DEVICE_WIFI (net_device_wifi_get_type ())
 G_DECLARE_FINAL_TYPE (NetDeviceWifi, net_device_wifi, NET, DEVICE_WIFI, AdwBin)
 
 NetDeviceWifi *net_device_wifi_new               (CcPanel       *panel,

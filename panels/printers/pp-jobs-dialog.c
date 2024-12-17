@@ -456,7 +456,7 @@ pp_jobs_dialog_new (const gchar *printer_name)
   text = g_strdup_printf (_("Enter credentials to print from %s"), printer_name);
   gtk_label_set_text (self->authentication_label, text);
 
-  self->store = g_list_store_new (pp_job_get_type ());
+  self->store = g_list_store_new (PP_TYPE_JOB);
   gtk_list_box_bind_model (self->jobs_listbox, G_LIST_MODEL (self->store),
                            create_listbox_row, self, NULL);
 

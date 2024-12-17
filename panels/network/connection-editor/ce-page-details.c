@@ -71,7 +71,7 @@ struct _CEPageDetails
 static void ce_page_iface_init (CEPageInterface *);
 
 G_DEFINE_TYPE_WITH_CODE (CEPageDetails, ce_page_details, ADW_TYPE_BIN,
-                         G_IMPLEMENT_INTERFACE (ce_page_get_type (), ce_page_iface_init))
+                         G_IMPLEMENT_INTERFACE (CE_TYPE_PAGE, ce_page_iface_init))
 
 static void
 forget_cb (CEPageDetails *self)
@@ -599,7 +599,7 @@ ce_page_details_new (NMConnection        *connection,
 {
         CEPageDetails *self;
 
-        self = CE_PAGE_DETAILS (g_object_new (ce_page_details_get_type (), NULL));
+        self = CE_PAGE_DETAILS (g_object_new (CE_TYPE_PAGE_DETAILS, NULL));
 
         self->connection = g_object_ref (connection);
         self->editor = editor;

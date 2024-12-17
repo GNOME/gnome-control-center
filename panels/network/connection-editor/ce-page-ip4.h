@@ -26,6 +26,7 @@
 
 G_BEGIN_DECLS
 
+#define CE_TYPE_PAGE_IP4 (ce_page_ip4_get_type ())
 G_DECLARE_FINAL_TYPE (CEPageIP4, ce_page_ip4, CE, PAGE_IP4, AdwBin)
 
 CEPageIP4 *ce_page_ip4_new (NMConnection     *connection,

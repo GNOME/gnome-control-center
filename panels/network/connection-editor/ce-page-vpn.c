@@ -48,7 +48,7 @@ struct _CEPageVpn
 static void ce_page_iface_init (CEPageInterface *);
 
 G_DEFINE_TYPE_WITH_CODE (CEPageVpn, ce_page_vpn, GTK_TYPE_BOX,
-                         G_IMPLEMENT_INTERFACE (ce_page_get_type (), ce_page_iface_init))
+                         G_IMPLEMENT_INTERFACE (CE_TYPE_PAGE, ce_page_iface_init))
 
 /* Hack to make the plugin-provided editor widget fit in better with
  * the control center by changing
@@ -219,7 +219,7 @@ ce_page_vpn_new (NMConnection *connection)
 {
         CEPageVpn *self;
 
-        self = CE_PAGE_VPN (g_object_new (ce_page_vpn_get_type (), NULL));
+        self = CE_PAGE_VPN (g_object_new (CE_TYPE_PAGE_VPN, NULL));
 
         self->connection = g_object_ref (connection);
 

@@ -77,7 +77,7 @@ struct _CEPageIP4
 static void ce_page_iface_init (CEPageInterface *);
 
 G_DEFINE_TYPE_WITH_CODE (CEPageIP4, ce_page_ip4, ADW_TYPE_BIN,
-                         G_IMPLEMENT_INTERFACE (ce_page_get_type (), ce_page_iface_init))
+                         G_IMPLEMENT_INTERFACE (CE_TYPE_PAGE, ce_page_iface_init))
 
 enum {
         METHOD_COL_NAME,
@@ -871,7 +871,7 @@ ce_page_ip4_new (NMConnection     *connection,
 {
         CEPageIP4 *self;
 
-        self = CE_PAGE_IP4 (g_object_new (ce_page_ip4_get_type (), NULL));
+        self = CE_PAGE_IP4 (g_object_new (CE_TYPE_PAGE_IP4, NULL));
 
         self->setting = nm_connection_get_setting_ip4_config (connection);
         if (!self->setting) {

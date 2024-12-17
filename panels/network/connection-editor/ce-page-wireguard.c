@@ -81,7 +81,7 @@ struct _WireguardPeer
 static void ce_page_iface_init (CEPageInterface *);
 
 G_DEFINE_TYPE_WITH_CODE (CEPageWireguard, ce_page_wireguard, GTK_TYPE_BOX,
-                         G_IMPLEMENT_INTERFACE (ce_page_get_type (), ce_page_iface_init));
+                         G_IMPLEMENT_INTERFACE (CE_TYPE_PAGE, ce_page_iface_init));
 G_DEFINE_TYPE (WireguardPeer, wireguard_peer, GTK_TYPE_BOX);
 
 static void
@@ -465,7 +465,7 @@ finish_setup (CEPageWireguard *self, gpointer unused, GError *error, gpointer us
 CEPageWireguard *
 ce_page_wireguard_new (NMConnection *connection)
 {
-        CEPageWireguard *self = CE_PAGE_WIREGUARD (g_object_new (ce_page_wireguard_get_type (), NULL));
+        CEPageWireguard *self = CE_PAGE_WIREGUARD (g_object_new (CE_TYPE_PAGE_WIREGUARD, NULL));
 
         self->connection = g_object_ref (connection);
 
@@ -485,7 +485,7 @@ wireguard_peer_new (CEPageWireguard *parent)
 {
         WireguardPeer *self;
 
-        self = g_object_new (wireguard_peer_get_type (), NULL);
+        self = g_object_new (WIREGUARD_TYPE_PEER, NULL);
         self->ce_pg_wg = parent;
         self->is_unsaved = TRUE;
         return self;

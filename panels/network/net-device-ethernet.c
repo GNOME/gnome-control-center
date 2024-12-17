@@ -517,7 +517,7 @@ net_device_ethernet_new (NMClient *client, NMDevice *device)
 {
         NetDeviceEthernet *self;
 
-        self = g_object_new (net_device_ethernet_get_type (), NULL);
+        self = g_object_new (NET_TYPE_DEVICE_ETHERNET, NULL);
         self->client = g_object_ref (client);
         self->device = g_object_ref (device);
 

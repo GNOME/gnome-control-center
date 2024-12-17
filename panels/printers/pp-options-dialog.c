@@ -856,7 +856,7 @@ pp_options_dialog_new (gchar   *printer_name,
 {
   PpOptionsDialog *self;
 
-  self = g_object_new (pp_options_dialog_get_type (), NULL);
+  self = g_object_new (PP_TYPE_OPTIONS_DIALOG, NULL);
 
   self->printer_name = g_strdup (printer_name);
 

@@ -47,7 +47,7 @@ struct _CEPageEthernet
 static void ce_page_iface_init (CEPageInterface *);
 
 G_DEFINE_TYPE_WITH_CODE (CEPageEthernet, ce_page_ethernet, ADW_TYPE_BIN,
-                         G_IMPLEMENT_INTERFACE (ce_page_get_type (), ce_page_iface_init))
+                         G_IMPLEMENT_INTERFACE (CE_TYPE_PAGE, ce_page_iface_init))
 
 static void
 mtu_changed (CEPageEthernet *self)
@@ -210,7 +210,7 @@ ce_page_ethernet_new (NMConnection     *connection,
 {
         CEPageEthernet *self;
 
-        self = CE_PAGE_ETHERNET (g_object_new (ce_page_ethernet_get_type (), NULL));
+        self = CE_PAGE_ETHERNET (g_object_new (CE_TYPE_PAGE_ETHERNET, NULL));
 
         self->client = client;
         self->setting_connection = nm_connection_get_setting_connection (connection);

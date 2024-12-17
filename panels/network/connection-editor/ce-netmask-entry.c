@@ -95,7 +95,7 @@ ce_netmask_entry_class_init (CENetmaskEntryClass *klass)
 CENetmaskEntry *
 ce_netmask_entry_new (void)
 {
-  return CE_NETMASK_ENTRY (g_object_new (ce_netmask_entry_get_type (), NULL));
+  return CE_NETMASK_ENTRY (g_object_new (CE_TYPE_NETMASK_ENTRY, NULL));
 }
 
 gboolean

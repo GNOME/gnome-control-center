@@ -26,6 +26,7 @@
 
 G_BEGIN_DECLS
 
+#define NET_TYPE_DEVICE_MOBILE (net_device_mobile_get_type ())
 G_DECLARE_FINAL_TYPE (NetDeviceMobile, net_device_mobile, NET, DEVICE_MOBILE, GtkBox)
 
 NetDeviceMobile *net_device_mobile_new          (NMClient        *client,

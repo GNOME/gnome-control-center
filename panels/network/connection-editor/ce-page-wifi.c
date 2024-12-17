@@ -45,7 +45,7 @@ struct _CEPageWifi
 static void ce_page_iface_init (CEPageInterface *);
 
 G_DEFINE_TYPE_WITH_CODE (CEPageWifi, ce_page_wifi, ADW_TYPE_BIN,
-                         G_IMPLEMENT_INTERFACE (ce_page_get_type (), ce_page_iface_init))
+                         G_IMPLEMENT_INTERFACE (CE_TYPE_PAGE, ce_page_iface_init))
 
 static void
 connect_wifi_page (CEPageWifi *self)
@@ -201,7 +201,7 @@ ce_page_wifi_new (NMConnection     *connection,
 {
         CEPageWifi *self;
 
-        self = CE_PAGE_WIFI (g_object_new (ce_page_wifi_get_type (), NULL));
+        self = CE_PAGE_WIFI (g_object_new (CE_TYPE_PAGE_WIFI, NULL));
 
         self->client = client;
         self->setting = nm_connection_get_setting_wireless (connection);

@@ -79,7 +79,7 @@ struct _CEPageIP6
 static void ce_page_iface_init (CEPageInterface *);
 
 G_DEFINE_TYPE_WITH_CODE (CEPageIP6, ce_page_ip6, ADW_TYPE_BIN,
-                         G_IMPLEMENT_INTERFACE (ce_page_get_type (), ce_page_iface_init))
+                         G_IMPLEMENT_INTERFACE (CE_TYPE_PAGE, ce_page_iface_init))
 
 enum {
         METHOD_COL_NAME,
@@ -840,7 +840,7 @@ ce_page_ip6_new (NMConnection     *connection,
 {
         CEPageIP6 *self;
 
-        self = CE_PAGE_IP6 (g_object_new (ce_page_ip6_get_type (), NULL));
+        self = CE_PAGE_IP6 (g_object_new (CE_TYPE_PAGE_IP6, NULL));
 
         self->setting = nm_connection_get_setting_ip6_config (connection);
         if (!self->setting) {

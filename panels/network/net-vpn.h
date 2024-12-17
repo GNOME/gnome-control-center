@@ -27,6 +27,7 @@
 
 G_BEGIN_DECLS
 
+#define NET_TYPE_VPN (net_vpn_get_type ())
 G_DECLARE_FINAL_TYPE (NetVpn, net_vpn, NET, VPN, AdwActionRow)
 
 NetVpn       *net_vpn_new                (NMClient     *client,

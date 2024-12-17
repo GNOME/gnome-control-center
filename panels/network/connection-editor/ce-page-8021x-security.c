@@ -47,7 +47,7 @@ struct _CEPage8021xSecurity {
 static void ce_page_iface_init (CEPageInterface *);
 
 G_DEFINE_TYPE_WITH_CODE (CEPage8021xSecurity, ce_page_8021x_security, ADW_TYPE_BIN,
-                         G_IMPLEMENT_INTERFACE (ce_page_get_type (), ce_page_iface_init))
+                         G_IMPLEMENT_INTERFACE (CE_TYPE_PAGE, ce_page_iface_init))
 
 static void
 enable_toggled (CEPage8021xSecurity *self)
@@ -185,7 +185,7 @@ ce_page_8021x_security_new (NMConnection *connection)
 {
 	CEPage8021xSecurity *self;
 
-        self = CE_PAGE_8021X_SECURITY (g_object_new (ce_page_8021x_security_get_type (), NULL));
+        self = CE_PAGE_8021X_SECURITY (g_object_new (CE_TYPE_PAGE_8021X_SECURITY, NULL));
 
         self->connection = g_object_ref (connection);
 

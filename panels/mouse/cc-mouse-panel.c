@@ -410,7 +410,6 @@ cc_mouse_panel_init (CcMousePanel *self)
 
   g_resources_register (cc_mouse_get_resource ());
 
-  cc_mouse_test_get_type ();
   gtk_widget_init_template (GTK_WIDGET (self));
 
   self->mouse_settings = g_settings_new ("org.gnome.desktop.peripherals.mouse");
@@ -447,6 +446,7 @@ cc_mouse_panel_class_init (CcMousePanelClass *klass)
   g_type_ensure (CC_TYPE_ILLUSTRATED_ROW);
   g_type_ensure (CC_TYPE_SPLIT_ROW);
   g_type_ensure (CC_TYPE_LIST_ROW_INFO_BUTTON);
+  g_type_ensure (CC_TYPE_MOUSE_TEST);
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/mouse/cc-mouse-panel.ui");
 

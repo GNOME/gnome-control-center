@@ -820,7 +820,7 @@ net_device_mobile_new (NMClient *client, NMDevice *device, GDBusObject *modem)
         NetDeviceMobile *self;
         NMDeviceModemCapabilities caps;
 
-        self = g_object_new (net_device_mobile_get_type (), NULL);
+        self = g_object_new (NET_TYPE_DEVICE_MOBILE, NULL);
         self->client = g_object_ref (client);
         self->device = g_object_ref (device);
 

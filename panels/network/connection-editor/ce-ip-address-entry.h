@@ -25,6 +25,7 @@
 
 G_BEGIN_DECLS
 
+#define CE_TYPE_IP_ADDRESS_ENTRY (ce_ip_address_entry_get_type ())
 G_DECLARE_FINAL_TYPE (CEIPAddressEntry, ce_ip_address_entry, CE, IP_ADDRESS_ENTRY, GtkEntry)
 
 CEIPAddressEntry *ce_ip_address_entry_new      (int family);

@@ -225,6 +225,8 @@ cc_bluetooth_panel_class_init (CcBluetoothPanelClass *klass)
 
 	panel_class->get_help_uri = cc_bluetooth_panel_get_help_uri;
 
+	g_type_ensure (BLUETOOTH_TYPE_SETTINGS_WIDGET);
+
 	gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/bluetooth/cc-bluetooth-panel.ui");
 
 	gtk_widget_class_bind_template_child (widget_class, CcBluetoothPanel, enable_switch);
@@ -241,7 +243,6 @@ cc_bluetooth_panel_class_init (CcBluetoothPanelClass *klass)
 static void
 cc_bluetooth_panel_init (CcBluetoothPanel *self)
 {
-	bluetooth_settings_widget_get_type ();
 	g_resources_register (cc_bluetooth_get_resource ());
 
 	gtk_widget_init_template (GTK_WIDGET (self));

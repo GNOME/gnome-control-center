@@ -180,7 +180,7 @@ net_device_bluetooth_new (NMClient *client, NMDevice *device)
 {
         NetDeviceBluetooth *self;
 
-        self = g_object_new (net_device_bluetooth_get_type (), NULL);
+        self = g_object_new (NET_TYPE_DEVICE_BLUETOOTH, NULL);
         self->client = g_object_ref (client);
         self->device = g_object_ref (device);
 

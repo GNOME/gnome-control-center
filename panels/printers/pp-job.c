@@ -73,7 +73,7 @@ pp_job_cancel_purge_async_dbus_cb (GObject      *source_object,
 PpJob *
 pp_job_new (gint id, const gchar *title, gint state, gint priority, GStrv auth_info_required)
 {
-   PpJob *job = g_object_new (pp_job_get_type (), NULL);
+   PpJob *job = g_object_new (PP_TYPE_JOB, NULL);
 
    job->id = id;
    job->title = g_strdup (title);

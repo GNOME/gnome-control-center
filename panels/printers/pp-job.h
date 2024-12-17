@@ -27,6 +27,7 @@
 
 G_BEGIN_DECLS
 
+#define PP_TYPE_JOB (pp_job_get_type ())
 G_DECLARE_FINAL_TYPE (PpJob, pp_job, PP, JOB, GObject)
 
 PpJob         *pp_job_new                        (gint                  id,

@@ -68,7 +68,7 @@ ce_ip_address_entry_new (int family)
 {
   CEIPAddressEntry *self;
 
-  self = CE_IP_ADDRESS_ENTRY (g_object_new (ce_ip_address_entry_get_type (), NULL));
+  self = CE_IP_ADDRESS_ENTRY (g_object_new (CE_TYPE_IP_ADDRESS_ENTRY, NULL));
   self->family = family;
 
   return self;

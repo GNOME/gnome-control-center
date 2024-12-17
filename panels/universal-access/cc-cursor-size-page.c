@@ -110,5 +110,5 @@ cc_cursor_size_page_init (CcCursorSizePage *self)
 CcCursorSizePage *
 cc_cursor_size_page_new (void)
 {
-  return g_object_new (cc_cursor_size_page_get_type (), NULL);
+  return g_object_new (CC_TYPE_CURSOR_SIZE_PAGE, NULL);
 }

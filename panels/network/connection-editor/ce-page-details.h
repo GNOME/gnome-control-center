@@ -29,6 +29,7 @@
 
 G_BEGIN_DECLS
 
+#define CE_TYPE_PAGE_DETAILS (ce_page_details_get_type ())
 G_DECLARE_FINAL_TYPE (CEPageDetails, ce_page_details, CE, PAGE_DETAILS, AdwBin)
 
 CEPageDetails *ce_page_details_new (NMConnection        *connection,

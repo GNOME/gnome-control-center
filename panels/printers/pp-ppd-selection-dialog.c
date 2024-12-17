@@ -294,7 +294,7 @@ pp_ppd_selection_dialog_new (PPDList              *ppd_list,
 {
   PpPPDSelectionDialog *self;
 
-  self = g_object_new (pp_ppd_selection_dialog_get_type (), NULL);
+  self = g_object_new (PP_TYPE_PPD_SELECTION_DIALOG, NULL);
 
   self->user_callback = user_callback;
   self->user_data = user_data;

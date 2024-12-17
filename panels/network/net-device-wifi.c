@@ -1144,7 +1144,7 @@ net_device_wifi_new (CcPanel *panel, NMClient *client, NMDevice *device)
         GtkListBox *listbox;
         CcWifiConnectionList *list;
 
-        self = g_object_new (net_device_wifi_get_type (), NULL);
+        self = g_object_new (NET_TYPE_DEVICE_WIFI, NULL);
         self->panel = panel;
         self->client = g_object_ref (client);
         self->device = g_object_ref (device);

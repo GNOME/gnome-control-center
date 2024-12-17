@@ -28,6 +28,7 @@
 
 G_BEGIN_DECLS
 
+#define NET_TYPE_DEVICE_BLUETOOTH (net_device_bluetooth_get_type ())
 G_DECLARE_FINAL_TYPE (NetDeviceBluetooth, net_device_bluetooth, NET, DEVICE_BLUETOOTH, AdwActionRow)
 
 NetDeviceBluetooth *net_device_bluetooth_new                (NMClient           *client,

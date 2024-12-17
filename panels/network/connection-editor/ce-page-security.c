@@ -46,7 +46,7 @@ struct _CEPageSecurity
 static void ce_page_iface_init (CEPageInterface *);
 
 G_DEFINE_TYPE_WITH_CODE (CEPageSecurity, ce_page_security, ADW_TYPE_BIN,
-                         G_IMPLEMENT_INTERFACE (ce_page_get_type (), ce_page_iface_init))
+                         G_IMPLEMENT_INTERFACE (CE_TYPE_PAGE, ce_page_iface_init))
 
 enum {
         S_NAME_COLUMN,
@@ -517,7 +517,7 @@ ce_page_security_new (NMConnection *connection)
         NMUtilsSecurityType default_type = NMU_SEC_NONE;
         NMSettingWirelessSecurity *sws;
 
-        self = CE_PAGE_SECURITY (g_object_new (ce_page_security_get_type (), NULL));
+        self = CE_PAGE_SECURITY (g_object_new (CE_TYPE_PAGE_SECURITY, NULL));
 
         self->connection = g_object_ref (connection);
 

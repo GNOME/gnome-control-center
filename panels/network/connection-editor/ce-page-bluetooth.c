@@ -40,7 +40,7 @@ struct _CEPageBluetooth
 static void ce_page_iface_init (CEPageInterface *);
 
 G_DEFINE_TYPE_WITH_CODE (CEPageBluetooth, ce_page_bluetooth, GTK_TYPE_GRID,
-                         G_IMPLEMENT_INTERFACE (ce_page_get_type (), ce_page_iface_init))
+                         G_IMPLEMENT_INTERFACE (CE_TYPE_PAGE, ce_page_iface_init))
 
 static void
 connect_bluetooth_page (CEPageBluetooth *self)
@@ -101,7 +101,7 @@ ce_page_bluetooth_new (NMConnection     *connection)
 {
         CEPageBluetooth *self;
 
-        self = CE_PAGE_BLUETOOTH (g_object_new (ce_page_bluetooth_get_type (), NULL));
+        self = CE_PAGE_BLUETOOTH (g_object_new (CE_TYPE_PAGE_BLUETOOTH, NULL));
 
         self->setting_connection = nm_connection_get_setting_connection (connection);
 

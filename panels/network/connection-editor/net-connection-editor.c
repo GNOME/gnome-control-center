@@ -938,7 +938,7 @@ net_connection_editor_new (NMConnection     *connection,
 {
         NetConnectionEditor *self;
 
-        self = g_object_new (net_connection_editor_get_type (), NULL);
+        self = g_object_new (NET_TYPE_CONNECTION_EDITOR, NULL);
 
         self->cancellable = g_cancellable_new ();
 
