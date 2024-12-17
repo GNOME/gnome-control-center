@@ -21,6 +21,8 @@
                 <property name="name">no-data</property>
                 <property name="child">
                   <object class="AdwStatusPage">
+                    <!-- Ensure the box is tall enough to show the AdwStatusPage without making it scrollable -->
+                    <property name="height-request">240</property>
                     <property name="vexpand">True</property>
                     <property name="title" translatable="yes">Screen Time Unavailable</property>
                     <property name="icon-name">org.gnome.Settings-screen-time-symbolic</property>
