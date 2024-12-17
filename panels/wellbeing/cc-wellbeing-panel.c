@@ -95,12 +95,7 @@ struct _CcWellbeingPanelClass {
 
 CC_PANEL_REGISTER (CcWellbeingPanel, cc_wellbeing_panel);
 
-static void screen_time_limits_settings_writable_changed_daily_limit_seconds_or_grayscale_cb (GSettings  *settings,
-                                                                                              const char *key,
-                                                                                              gpointer    user_data);
-static void screen_time_limits_settings_changed_enabled_cb (GSettings  *settings,
-                                                            const char *key,
-                                                            gpointer    user_data);
+static void update_daily_time_limit_and_grayscale_row_sensitivity (CcWellbeingPanel *self);
 
 static void movement_break_schedule_notify_selected_item_cb (GObject    *object,
                                                              GParamSpec *pspec,
@@ -266,16 +261,16 @@ cc_wellbeing_panel_init (CcWellbeingPanel *self)
   /* Sensitivity has to be handled separately for grayscale_row and
    * daily_time_limit_row because it’s the combination of two inputs. */
   self->screen_time_limits_settings_writable_changed_daily_limit_seconds_id =
-      g_signal_connect (self->screen_time_limits_settings, "writable-changed::daily-limit-seconds",
-                        G_CALLBACK (screen_time_limits_settings_writable_changed_daily_limit_seconds_or_grayscale_cb), self);
+      g_signal_connect_swapped (self->screen_time_limits_settings, "writable-changed::daily-limit-seconds",
+                                G_CALLBACK (update_daily_time_limit_and_grayscale_row_sensitivity), self);
   self->screen_time_limits_settings_writable_changed_grayscale_id =
-      g_signal_connect (self->screen_time_limits_settings, "writable-changed::grayscale",
-                        G_CALLBACK (screen_time_limits_settings_writable_changed_daily_limit_seconds_or_grayscale_cb), self);
+      g_signal_connect_swapped (self->screen_time_limits_settings, "writable-changed::grayscale",
+                                G_CALLBACK (update_daily_time_limit_and_grayscale_row_sensitivity), self);
   self->screen_time_limits_settings_changed_enabled_id =
-      g_signal_connect (self->screen_time_limits_settings, "changed::enabled",
-                        G_CALLBACK (screen_time_limits_settings_changed_enabled_cb), self);
+      g_signal_connect_swapped (self->screen_time_limits_settings, "changed::enabled",
+                                G_CALLBACK (update_daily_time_limit_and_grayscale_row_sensitivity), self);
 
-  screen_time_limits_settings_writable_changed_daily_limit_seconds_or_grayscale_cb (NULL, NULL, self);
+  update_daily_time_limit_and_grayscale_row_sensitivity (self);
 
   /* Set up settings bindings for break reminders. */
   self->break_reminders_settings = g_settings_new ("org.gnome.desktop.break-reminders");
@@ -362,24 +357,6 @@ update_daily_time_limit_and_grayscale_row_sensitivity (CcWellbeingPanel *self)
 
   gtk_widget_set_sensitive (GTK_WIDGET (self->daily_time_limit_row), enabled && daily_limit_seconds_writable);
   gtk_widget_set_sensitive (GTK_WIDGET (self->grayscale_row), enabled && grayscale_writable);
-}
-
-static void
-screen_time_limits_settings_writable_changed_daily_limit_seconds_or_grayscale_cb (GSettings  *settings,
-                                                                                  const char *key,
-                                                                                  gpointer    user_data)
-{
-  CcWellbeingPanel *self = CC_WELLBEING_PANEL (user_data);
-  update_daily_time_limit_and_grayscale_row_sensitivity (self);
-}
-
-static void
-screen_time_limits_settings_changed_enabled_cb (GSettings  *settings,
-                                                const char *key,
-                                                gpointer    user_data)
-{
-  CcWellbeingPanel *self = CC_WELLBEING_PANEL (user_data);
-  update_daily_time_limit_and_grayscale_row_sensitivity (self);
 }
 
 static void
