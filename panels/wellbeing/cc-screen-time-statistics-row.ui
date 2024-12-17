@@ -113,6 +113,9 @@
                           <object class="GtkLabel" id="week_date_label">
                             <property name="halign">start</property>
                             <property name="label">This Week</property><!-- placeholder -->
+                            <!-- When the widget is really narrow, week ranges which span a month end (e.g. “30 December–5 January”) can overflow.
+                                 Avoid that by ellipsizing, which will probably only truncate the last part of the second month, so still be intelligible by users -->
+                            <property name="ellipsize">end</property>
                             <layout>
                               <property name="column">1</property>
                               <property name="row">0</property>
