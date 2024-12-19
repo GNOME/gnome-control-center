@@ -79,6 +79,14 @@
           </object>
         </child>
         <child>
+          <object class="AdwSwitchRow" id="hdr_row">
+            <property name="width_request">100</property>
+            <property name="title" translatable="yes">_HDR (High Dynamic Range)</property>
+            <property name="use-underline">True</property>
+            <signal name="notify::active" handler="on_hdr_row_active_changed_cb" swapped="yes"/>
+          </object>
+        </child>
+        <child>
           <object class="AdwSwitchRow" id="underscanning_row">
             <property name="width_request">100</property>
             <property name="title" translatable="yes">Adjust for _TV</property>

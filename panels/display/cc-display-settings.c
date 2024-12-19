@@ -58,6 +58,7 @@ struct _CcDisplaySettings
   AdwToggleGroup   *scale_toggle_group;
   GtkWidget        *scale_buttons_row;
   GtkWidget        *scale_combo_row;
+  AdwSwitchRow     *hdr_row;
   AdwSwitchRow     *underscanning_row;
 };
 
@@ -388,6 +389,7 @@ cc_display_settings_rebuild_ui (CcDisplaySettings *self)
       gtk_widget_set_visible (self->resolution_row, FALSE);
       gtk_widget_set_visible (self->scale_combo_row, FALSE);
       gtk_widget_set_visible (self->scale_buttons_row, FALSE);
+      gtk_widget_set_visible (GTK_WIDGET (self->hdr_row), FALSE);
       gtk_widget_set_visible (GTK_WIDGET (self->underscanning_row), FALSE);
 
       return G_SOURCE_REMOVE;
@@ -401,6 +403,7 @@ cc_display_settings_rebuild_ui (CcDisplaySettings *self)
   g_object_freeze_notify ((GObject*) self->preferred_refresh_rate_row);
   g_object_freeze_notify ((GObject*) self->resolution_row);
   g_object_freeze_notify ((GObject*) self->scale_combo_row);
+  g_object_freeze_notify ((GObject*) self->hdr_row);
   g_object_freeze_notify ((GObject*) self->underscanning_row);
   g_object_freeze_notify ((GObject*) self->scale_toggle_group);
 
@@ -638,6 +641,13 @@ cc_display_settings_rebuild_ui (CcDisplaySettings *self)
     }
   cc_display_settings_refresh_layout (self, self->collapsed);
 
+  gtk_widget_set_visible (GTK_WIDGET (self->hdr_row),
+                          cc_display_monitor_supports_color_mode (self->selected_output,
+                                                                  CC_DISPLAY_COLOR_MODE_BT2100));
+  adw_switch_row_set_active (self->hdr_row,
+                             cc_display_monitor_get_color_mode (self->selected_output) ==
+                             CC_DISPLAY_COLOR_MODE_BT2100);
+
   gtk_widget_set_visible (GTK_WIDGET (self->underscanning_row),
                           cc_display_monitor_supports_underscanning (self->selected_output) &&
                           !cc_display_config_is_cloning (self->config));
@@ -653,6 +663,7 @@ cc_display_settings_rebuild_ui (CcDisplaySettings *self)
   g_object_thaw_notify ((GObject*) self->preferred_refresh_rate_row);
   g_object_thaw_notify ((GObject*) self->resolution_row);
   g_object_thaw_notify ((GObject*) self->scale_combo_row);
+  g_object_thaw_notify ((GObject*) self->hdr_row);
   g_object_thaw_notify ((GObject*) self->underscanning_row);
   g_object_thaw_notify ((GObject*) self->scale_toggle_group);
   self->updating = FALSE;
@@ -816,6 +827,25 @@ on_scale_selection_changed_cb (CcDisplaySettings *self)
 }
 
 static void
+on_hdr_row_active_changed_cb (CcDisplaySettings *self)
+{
+  CcDisplayColorMode color_mode;
+
+  if (self->updating)
+    return;
+
+  if (adw_switch_row_get_active (self->hdr_row))
+    color_mode = CC_DISPLAY_COLOR_MODE_BT2100;
+  else
+    color_mode = CC_DISPLAY_COLOR_MODE_DEFAULT;
+
+  cc_display_monitor_set_color_mode (self->selected_output,
+                                     color_mode);
+
+  g_signal_emit_by_name (G_OBJECT (self), "updated", self->selected_output);
+}
+
+static void
 on_underscanning_row_active_changed_cb (CcDisplaySettings *self)
 {
   if (self->updating)
@@ -950,6 +980,7 @@ cc_display_settings_class_init (CcDisplaySettingsClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcDisplaySettings, scale_toggle_group);
   gtk_widget_class_bind_template_child (widget_class, CcDisplaySettings, scale_buttons_row);
   gtk_widget_class_bind_template_child (widget_class, CcDisplaySettings, scale_combo_row);
+  gtk_widget_class_bind_template_child (widget_class, CcDisplaySettings, hdr_row);
   gtk_widget_class_bind_template_child (widget_class, CcDisplaySettings, underscanning_row);
 
   gtk_widget_class_bind_template_callback (widget_class, on_enabled_row_active_changed_cb);
@@ -959,6 +990,7 @@ cc_display_settings_class_init (CcDisplaySettingsClass *klass)
   gtk_widget_class_bind_template_callback (widget_class, on_resolution_selection_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_scale_selection_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_scale_btn_active_changed_cb);
+  gtk_widget_class_bind_template_callback (widget_class, on_hdr_row_active_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_underscanning_row_active_changed_cb);
 }
 
