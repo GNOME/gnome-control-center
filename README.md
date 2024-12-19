@@ -23,5 +23,3 @@ For feature requests or conceptual changes, please start a topic on [GNOME Disco
 
 See [`docs/CONTRIBUTING.md`](docs/CONTRIBUTING.md) for details on the contribution process, and [`docs/CODING_STYLE.md`](docs/CODING_STYLE.md)
 for the coding style guidelines.
-
-Visit the [Settings development wiki](https://gitlab.gnome.org/GNOME/gnome-control-center/-/wikis/home) for more information.
