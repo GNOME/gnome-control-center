@@ -20,6 +20,7 @@
 #include <float.h>
 #include <math.h>
 #include <gio/gio.h>
+#include <stdint.h>
 
 #include "cc-display-config-dbus.h"
 
@@ -369,6 +370,9 @@ struct _CcDisplayMonitorDBus
 
   gboolean supports_variable_refresh_rate;
 
+  CcDisplayColorMode color_mode;
+  GList *supported_color_modes;
+
   CcDisplayLogicalMonitor *logical_monitor;
 };
 
@@ -671,6 +675,31 @@ cc_display_monitor_dbus_supports_variable_refresh_rate (CcDisplayMonitor *pself)
   return self->supports_variable_refresh_rate;
 }
 
+static GList *
+cc_display_monitor_dbus_get_supported_color_modes (CcDisplayMonitor *pself)
+{
+  CcDisplayMonitorDBus *self = CC_DISPLAY_MONITOR_DBUS (pself);
+
+  return self->supported_color_modes;
+}
+
+static CcDisplayColorMode
+cc_display_monitor_dbus_get_color_mode (CcDisplayMonitor *pself)
+{
+  CcDisplayMonitorDBus *self = CC_DISPLAY_MONITOR_DBUS (pself);
+
+  return self->color_mode;
+}
+
+static void
+cc_display_monitor_dbus_set_color_mode (CcDisplayMonitor   *pself,
+                                        CcDisplayColorMode  color_mode)
+{
+  CcDisplayMonitorDBus *self = CC_DISPLAY_MONITOR_DBUS (pself);
+
+  self->color_mode = color_mode;
+}
+
 static gboolean
 cc_display_monitor_dbus_supports_underscanning (CcDisplayMonitor *pself)
 {
@@ -909,6 +938,7 @@ cc_display_monitor_dbus_finalize (GObject *object)
   g_free (self->display_name);
 
   g_list_free_full (self->modes, g_object_unref);
+  g_list_free (self->supported_color_modes);
 
   if (self->logical_monitor)
     {
@@ -948,6 +978,9 @@ cc_display_monitor_dbus_class_init (CcDisplayMonitorDBusClass *klass)
   parent_class->get_id = cc_display_monitor_dbus_get_id;
   parent_class->get_modes = cc_display_monitor_dbus_get_modes;
   parent_class->supports_variable_refresh_rate = cc_display_monitor_dbus_supports_variable_refresh_rate;
+  parent_class->get_supported_color_modes = cc_display_monitor_dbus_get_supported_color_modes;
+  parent_class->get_color_mode = cc_display_monitor_dbus_get_color_mode;
+  parent_class->set_color_mode = cc_display_monitor_dbus_set_color_mode;
   parent_class->supports_underscanning = cc_display_monitor_dbus_supports_underscanning;
   parent_class->get_underscanning = cc_display_monitor_dbus_get_underscanning;
   parent_class->set_underscanning = cc_display_monitor_dbus_set_underscanning;
@@ -1063,6 +1096,26 @@ cc_display_monitor_dbus_new (GVariant *variant,
         {
           g_variant_get (v, "i", &self->min_refresh_rate);
         }
+      else if (g_str_equal (s, "color-mode"))
+        {
+          uint32_t color_mode;
+
+          g_variant_get (v, "u", &color_mode);
+          self->color_mode = color_mode;
+        }
+      else if (g_str_equal (s, "supported-color-modes"))
+        {
+          g_autoptr (GVariantIter) iter = NULL;
+          uint32_t color_mode;
+
+          g_variant_get (v, "au", &iter);
+          while (g_variant_iter_next (iter, "u", &color_mode))
+            {
+              self->supported_color_modes =
+                g_list_append (self->supported_color_modes,
+                               GUINT_TO_POINTER (color_mode));
+            }
+        }
     }
 
   return self;
@@ -1145,6 +1198,9 @@ build_monitors_variant (GHashTable *monitors)
         continue;
 
       g_variant_builder_init (&props_builder, G_VARIANT_TYPE ("a{sv}"));
+      g_variant_builder_add (&props_builder, "{sv}",
+                             "color-mode",
+                             g_variant_new_uint32 (monitor->color_mode));
       g_variant_builder_add (&props_builder, "{sv}",
                              "underscanning",
                              g_variant_new_boolean (monitor->underscanning == UNDERSCANNING_ENABLED));
@@ -1292,6 +1348,9 @@ cc_display_config_dbus_equal (CcDisplayConfig *pself,
 
       if (!cc_display_mode_dbus_equal (CC_DISPLAY_MODE_DBUS (m1->current_mode),
                                        CC_DISPLAY_MODE_DBUS (m2->current_mode)))
+        return FALSE;
+
+      if (m1->color_mode != m2->color_mode)
         return FALSE;
     }
 

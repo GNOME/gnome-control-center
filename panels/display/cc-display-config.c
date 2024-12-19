@@ -351,6 +351,35 @@ cc_display_monitor_supports_variable_refresh_rate (CcDisplayMonitor *self)
   return CC_DISPLAY_MONITOR_GET_CLASS (self)->supports_variable_refresh_rate (self);
 }
 
+GList *
+cc_display_monitor_get_supported_color_modes (CcDisplayMonitor *self)
+{
+  return CC_DISPLAY_MONITOR_GET_CLASS (self)->get_supported_color_modes (self);
+}
+
+gboolean
+cc_display_monitor_supports_color_mode (CcDisplayMonitor   *self,
+                                        CcDisplayColorMode  color_mode)
+{
+  GList *supported_color_modes =
+    cc_display_monitor_get_supported_color_modes (self);
+
+  return !!g_list_find (supported_color_modes, GUINT_TO_POINTER (color_mode));
+}
+
+CcDisplayColorMode
+cc_display_monitor_get_color_mode (CcDisplayMonitor *self)
+{
+  return CC_DISPLAY_MONITOR_GET_CLASS (self)->get_color_mode (self);
+}
+
+void
+cc_display_monitor_set_color_mode (CcDisplayMonitor   *self,
+                                   CcDisplayColorMode  color_mode)
+{
+  CC_DISPLAY_MONITOR_GET_CLASS (self)->set_color_mode (self, color_mode);
+}
+
 gboolean
 cc_display_monitor_supports_underscanning (CcDisplayMonitor *self)
 {

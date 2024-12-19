@@ -82,6 +82,12 @@ typedef enum _CcDisplayModeRefreshRateMode
   MODE_REFRESH_RATE_MODE_VARIABLE,
 } CcDisplayModeRefreshRateMode;
 
+typedef enum _CcDisplayColorMode
+{
+  CC_DISPLAY_COLOR_MODE_DEFAULT = 0,
+  CC_DISPLAY_COLOR_MODE_BT2100 = 1,
+} CcDisplayColorMode;
+
 #define CC_TYPE_DISPLAY_MODE (cc_display_mode_get_type ())
 G_DECLARE_DERIVABLE_TYPE (CcDisplayMode, cc_display_mode,
                           CC, DISPLAY_MODE, GObject)
@@ -138,6 +144,10 @@ struct _CcDisplayMonitorClass
                                                int               *h);
   int               (*get_min_freq)           (CcDisplayMonitor  *self);
   gboolean          (*supports_variable_refresh_rate) (CcDisplayMonitor  *self);
+  GList *           (*get_supported_color_modes) (CcDisplayMonitor *self);
+  CcDisplayColorMode (*get_color_mode)        (CcDisplayMonitor   *self);
+  void              (*set_color_mode)         (CcDisplayMonitor   *self,
+                                               CcDisplayColorMode  color_mode);
   gboolean          (*supports_underscanning) (CcDisplayMonitor  *self);
   gboolean          (*get_underscanning)      (CcDisplayMonitor  *self);
   void              (*set_underscanning)      (CcDisplayMonitor  *self,
@@ -240,6 +250,12 @@ void              cc_display_monitor_set_primary            (CcDisplayMonitor  *
 guint32           cc_display_monitor_get_id                 (CcDisplayMonitor  *monitor);
 
 gboolean          cc_display_monitor_supports_variable_refresh_rate (CcDisplayMonitor *self);
+GList *           cc_display_monitor_get_supported_color_modes (CcDisplayMonitor *monitor);
+gboolean          cc_display_monitor_supports_color_mode    (CcDisplayMonitor   *monitor,
+                                                             CcDisplayColorMode  color_mode);
+CcDisplayColorMode cc_display_monitor_get_color_mode        (CcDisplayMonitor   *monitor);
+void              cc_display_monitor_set_color_mode         (CcDisplayMonitor   *monitor,
+                                                             CcDisplayColorMode  color_mode);
 gboolean          cc_display_monitor_supports_underscanning (CcDisplayMonitor  *monitor);
 gboolean          cc_display_monitor_get_underscanning      (CcDisplayMonitor  *monitor);
 void              cc_display_monitor_set_underscanning      (CcDisplayMonitor  *monitor,
