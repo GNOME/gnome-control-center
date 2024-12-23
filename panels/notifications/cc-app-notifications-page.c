@@ -379,6 +379,8 @@ cc_app_notifications_page_new (const gchar          *app_id,
   self->app_id = g_strdup (app_id);
   self->perm_store = g_object_ref (perm_store);
 
+  g_signal_connect_swapped (self->settings, "changed", G_CALLBACK (update_switches), self);
+
   update_switches (self);
 
   return self;
