@@ -263,7 +263,10 @@ row_data_new (CcPanelCategory     category,
   gtk_grid_set_column_spacing (GTK_GRID (grid), 12);
 
   /* Icon */
-  image = gtk_image_new_from_icon_name (icon);
+  image = g_object_new (GTK_TYPE_IMAGE,
+                        "accessible-role", GTK_ACCESSIBLE_ROLE_PRESENTATION,
+                        "icon-name", icon,
+                        NULL);
 
   gtk_grid_attach (GTK_GRID (grid), image, 0, 0, 1, 1);
 
