@@ -1,5 +1,5 @@
 include:
- - remote: 'https://gitlab.freedesktop.org/freedesktop/ci-templates/-/raw/34f4ade99434043f88e164933f570301fd18b125/templates/fedora.yml'
+ - remote: 'https://gitlab.gnome.org/Infrastructure/freedesktop-ci-templates/-/raw/34f4ade99434043f88e164933f570301fd18b125/templates/fedora.yml'
 
 variables:
   FDO_UPSTREAM_REPO: gnome/gnome-control-center
@@ -64,7 +64,7 @@ stages:
 #          Create CI Docker Images          #
 #############################################
 
-# See also https://gitlab.freedesktop.org/freedesktop/ci-templates
+# See also https://gitlab.gnome.org/Infrastructure/freedesktop-ci-templates
 build.container.fedora@x86_64:
   extends:
   - '.fdo.container-build@fedora'
