@@ -238,7 +238,7 @@ release-build:
     - '.fedora.container.common'
   script:
     - meson setup _build
-    - meson dist -C _build
+    - meson dist -C _build --no-tests
   artifacts:
     paths:
       - $TARBALL_ARTIFACT_PATH
