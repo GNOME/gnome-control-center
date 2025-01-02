@@ -241,7 +241,7 @@ dist:
     - build.container.fedora@x86_64
   script:
     - mkdir -m 1777 /tmp/.X11-unix
-    - meson setup build
+    - meson setup build -Dtests=false
     - meson compile -C build
     - meson dist -C build
   artifacts:
