@@ -196,7 +196,7 @@ parse_event_variant_iter (CcFirmwareSecurityPage *self,
   row = adw_expander_row_new ();
   if (attr->flags & FWUPD_SECURITY_ATTR_FLAG_SUCCESS)
     {
-      icon = gtk_image_new_from_icon_name ("emblem-ok");
+      icon = gtk_image_new_from_icon_name ("check-plain");
       gtk_widget_add_css_class (icon, "success-icon");
     }
   else

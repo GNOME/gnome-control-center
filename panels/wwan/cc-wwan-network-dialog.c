@@ -151,7 +151,7 @@ cc_wwan_network_dialog_row_new (CcWwanNetworkDialog *self,
   gtk_widget_set_halign (label, GTK_ALIGN_START);
   gtk_box_append (GTK_BOX (box), label);
 
-  image = gtk_image_new_from_icon_name ("emblem-ok-symbolic");
+  image = gtk_image_new_from_icon_name ("check-plain-symbolic");
   gtk_widget_set_visible (image, FALSE);
   row->ok_emblem = GTK_IMAGE (image);
   gtk_box_append (GTK_BOX (box), image);

@@ -545,7 +545,7 @@ realm_manager_discover_cb (GObject       *source,
     {
       self->selected_realm = g_object_ref (realms->data);
 
-      cc_entry_feedback_update (self->domain_feedback, "emblem-default-symbolic", _("Valid domain"));
+      cc_entry_feedback_update (self->domain_feedback, "check-outlined-symbolic", _("Valid domain"));
       gtk_widget_remove_css_class (GTK_WIDGET (self->domain_row), "error");
     }
   else
