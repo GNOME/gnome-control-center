@@ -153,7 +153,7 @@ cc_wwan_mode_dialog_row_new (CcWwanModeDialog *self,
   gtk_box_append (GTK_BOX (box), label);
 
   /* image should be hidden by default */
-  image = gtk_image_new_from_icon_name ("emblem-ok-symbolic");
+  image = gtk_image_new_from_icon_name ("check-plain-symbolic");
   gtk_widget_set_visible (image, FALSE);
   row->ok_emblem = GTK_IMAGE (image);
   gtk_box_append (GTK_BOX (box), image);

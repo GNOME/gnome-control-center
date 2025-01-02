@@ -315,7 +315,7 @@ add_row (NetDeviceEthernet *self, NMConnection *connection)
         gtk_widget_set_hexpand (widget, TRUE);
         gtk_box_append (GTK_BOX (box), widget);
 
-        widget = gtk_button_new_from_icon_name ("emblem-system-symbolic");
+        widget = gtk_button_new_from_icon_name ("cog-wheel-symbolic");
         gtk_widget_set_margin_start (widget, 12);
         gtk_widget_set_margin_end (widget, 12);
         gtk_widget_set_margin_top (widget, 8);

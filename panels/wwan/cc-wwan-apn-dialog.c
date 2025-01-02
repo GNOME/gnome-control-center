@@ -288,7 +288,7 @@ cc_wwan_apn_dialog_row_new (CcWwanDataApn   *apn,
   gtk_widget_add_css_class (apn_label, "dim-label");
   gtk_grid_attach (GTK_GRID (grid), apn_label, 1, 1, 1, 1);
 
-  edit_button = gtk_button_new_from_icon_name ("emblem-system-symbolic");
+  edit_button = gtk_button_new_from_icon_name ("cog-wheel-symbolic");
   gtk_accessible_update_property (GTK_ACCESSIBLE (edit_button),
                                 GTK_ACCESSIBLE_PROPERTY_LABEL, _("Edit"),
                                 -1);
