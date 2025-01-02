@@ -1,8 +1,13 @@
 include:
  - remote: 'https://gitlab.gnome.org/Infrastructure/freedesktop-ci-templates/-/raw/34f4ade99434043f88e164933f570301fd18b125/templates/fedora.yml'
+ - component: gitlab.gnome.org/GNOME/citemplates/release-service@release-service-sandbox
+   inputs:
+     dist-job-name: release-build
+     tarball-artifact-path: $TARBALL_ARTIFACT_PATH
 
 variables:
   FDO_UPSTREAM_REPO: gnome/gnome-control-center
+  TARBALL_ARTIFACT_PATH: "_build/meson-dist/$CI_PROJECT_NAME-$CI_COMMIT_TAG.tar.xz"
 
 stages:
   - prepare
@@ -266,6 +271,18 @@ test:
       - $CI_PIPELINE_SOURCE == "schedule"
       - $CI_COMMIT_TITLE =~ /^Update.*translation$/
 
+release-build:
+  stage: build
+  extends:
+    - '.fdo.suffixed-image@fedora'
+    - '.fedora.container.common'
+  script:
+    - meson setup _build
+    - meson dist -C _build
+  artifacts:
+    paths:
+      - $TARBALL_ARTIFACT_PATH
+
 # Runs the coverage test.
 coverage:
   extends:
@@ -302,7 +319,7 @@ coverage:
 ##
 # Stage: Deploy
 #
-# Publishes the Coverage Report generated above
+# Publishes release artifacts and the Coverage Report generated above
 ##
 pages:
   extends:
