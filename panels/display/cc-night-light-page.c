@@ -43,7 +43,6 @@ struct _CcNightLightPage {
   GtkButton           *button_to_pm;
   AdwStatusPage       *night_light_unsupported_page;
   GtkWidget           *infobar_disabled;
-  GtkWidget           *scale_color_temperature;
   AdwSwitchRow        *night_light_toggle_row;
   AdwComboRow         *schedule_type_row;
   GtkWidget           *from_spinbuttons_box;
@@ -625,7 +624,6 @@ cc_night_light_page_class_init (CcNightLightPageClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcNightLightPage, infobar_disabled);
   gtk_widget_class_bind_template_child (widget_class, CcNightLightPage, night_light_toggle_row);
   gtk_widget_class_bind_template_child (widget_class, CcNightLightPage, schedule_type_row);
-  gtk_widget_class_bind_template_child (widget_class, CcNightLightPage, scale_color_temperature);
   gtk_widget_class_bind_template_child (widget_class, CcNightLightPage, from_spinbuttons_box);
   gtk_widget_class_bind_template_child (widget_class, CcNightLightPage, spinbutton_from_hours);
   gtk_widget_class_bind_template_child (widget_class, CcNightLightPage, spinbutton_from_minutes);
@@ -656,22 +654,6 @@ cc_night_light_page_init (CcNightLightPage *self)
   g_autoptr(GtkCssProvider) provider = NULL;
 
   gtk_widget_init_template (GTK_WIDGET (self));
-
-  gtk_scale_add_mark (GTK_SCALE (self->scale_color_temperature),
-                      1700, GTK_POS_BOTTOM,
-                      NULL);
-
-  gtk_scale_add_mark (GTK_SCALE (self->scale_color_temperature),
-                      2700, GTK_POS_BOTTOM,
-                      NULL);
-
-  gtk_scale_add_mark (GTK_SCALE (self->scale_color_temperature),
-                      3700, GTK_POS_BOTTOM,
-                      NULL);
-
-  gtk_scale_add_mark (GTK_SCALE (self->scale_color_temperature),
-                      4700, GTK_POS_BOTTOM,
-                      NULL);
 
   self->cancellable = g_cancellable_new ();
   self->settings_display = g_settings_new (DISPLAY_SCHEMA);
