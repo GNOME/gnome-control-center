@@ -1,22 +1,14 @@
-/* color selection by Daniel Foré and elementary OS */
-@define-color ORANGE_100 #ffc27d;
-@define-color ORANGE_500 #f37329;
-@define-color base_color white;
-@define-color bg_color shade(@base_color, 0.96);
-
-/* Hide the marks at the beginning and the end */
-.night-light-temperature mark indicator:nth-child(even) {
-   color:transparent;
-}
-
+/* Increase the thickness and draw a gradient of color temperature */
 .night-light-temperature trough {
     padding-top: 2px;
     padding-bottom: 2px;
-    background-image: linear-gradient(to right, mix(@bg_color, @ORANGE_100, 0.5), @ORANGE_500);
+    --temp-1700K-color: rgb(255 122 0); /* From colord, blackbody_data_d65plankian LUT */
+    --temp-4700K-color: rgb(255 225 196); /* From colord, blackbody_data_d65plankian LUT */
+    background: linear-gradient(to right, var(--temp-4700K-color), var(--temp-1700K-color));
 }
 
 .night-light-temperature:dir(rtl) trough {
-    background-image: linear-gradient(to left, mix(@bg_color, @ORANGE_100, 0.5), @ORANGE_500);
+    background: linear-gradient(to left, var(--temp-4700K-color), var(--temp-1700K-color));
 }
 
 .padded-spinbutton {
