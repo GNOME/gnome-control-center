@@ -209,7 +209,6 @@ handle_get_result_metas (CcSearchProvider        *self,
     {
       g_autofree gchar *description = NULL;
       g_autofree gchar *name = NULL;
-      g_autoptr(GAppInfo) app = NULL;
       g_autoptr(GIcon) icon = NULL;
 
       iter = get_iter_for_result (self, results[i]);
@@ -217,12 +216,11 @@ handle_get_result_metas (CcSearchProvider        *self,
         continue;
 
       gtk_tree_model_get (model, iter,
-                          COL_APP, &app,
+                          COL_ID, &id,
                           COL_NAME, &name,
                           COL_GICON, &icon,
                           COL_DESCRIPTION, &description,
                           -1);
-      id = g_app_info_get_id (app);
 
       g_variant_builder_open (&builder, G_VARIANT_TYPE ("a{sv}"));
       g_variant_builder_add (&builder, "{sv}",
@@ -249,14 +247,26 @@ handle_activate_result (CcSearchProvider        *self,
                         char                   **results,
                         guint                    timestamp)
 {
+  GtkTreeModel *model = get_model ();
+  GtkTreeIter *iter;
   GdkAppLaunchContext *launch_context;
   g_autoptr(GError) error = NULL;
   GAppInfo *app;
 
+  iter = get_iter_for_result (self, identifier);
+
+  if (!iter)
+    {
+      g_dbus_method_invocation_return_error (invocation, G_DBUS_ERROR,
+                                             G_DBUS_ERROR_INVALID_ARGS,
+                                             "Identifier '%s' cannot be found",
+                                             identifier);
+      return TRUE;
+    }
+
+  gtk_tree_model_get (model, iter, COL_APP, &app, -1);
   launch_context = gdk_display_get_app_launch_context (gdk_display_get_default ());
   gdk_app_launch_context_set_timestamp (launch_context, timestamp);
-
-  app = G_APP_INFO (g_desktop_app_info_new (identifier));
 
   if (!g_app_info_launch (app, NULL, G_APP_LAUNCH_CONTEXT (launch_context), &error))
     g_dbus_method_invocation_return_gerror (invocation, error);
