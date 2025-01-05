@@ -668,6 +668,7 @@ set_enroll_result_message (CcFingerprintDialog *self,
 
   gtk_image_set_from_icon_name (self->enroll_result_image, icon_name);
   gtk_label_set_label (self->enroll_result_message, message);
+  gtk_label_set_wrap (self->enroll_result_message, TRUE);
 }
 
 static gboolean
