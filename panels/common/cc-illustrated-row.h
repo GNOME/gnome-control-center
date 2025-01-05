@@ -24,7 +24,7 @@
 
 #include <adwaita.h>
 
-#include "cc-vertical-row.h"
+#include "cc-content-row.h"
 
 G_BEGIN_DECLS
 

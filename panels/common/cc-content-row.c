@@ -1,4 +1,4 @@
-/* cc-vertical-row.c
+/* cc-content-row.c
  *
  * Copyright 2018 Purism SPC
  *           2021 Georges Basile Stavracas Neto <georges.stavracas@gmail.com>
@@ -20,7 +20,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-#include "cc-vertical-row.h"
+#include "cc-content-row.h"
 
 typedef struct
 {
@@ -258,7 +258,7 @@ cc_vertical_row_class_init (CcVerticalRowClass *klass)
                   G_TYPE_NONE,
                   0);
 
-  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/common/cc-vertical-row.ui");
+  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/common/cc-content-row.ui");
 
   gtk_widget_class_bind_template_child_private (widget_class, CcVerticalRow, content_box);
   gtk_widget_class_bind_template_child_private (widget_class, CcVerticalRow, header);

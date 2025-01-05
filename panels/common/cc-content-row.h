@@ -1,4 +1,4 @@
-/* cc-vertical-row.h
+/* cc-content-row.h
  *
  * Copyright 2018 Purism SPC
  *           2021 Georges Basile Stavracas Neto <georges.stavracas@gmail.com>

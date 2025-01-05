@@ -1,4 +1,4 @@
-/* cc-vertical-row.h
+/* cc-content-row.h
  *
  * Copyright 2018 Purism SPC
  *           2021 Georges Basile Stavracas Neto <georges.stavracas@gmail.com>
@@ -24,7 +24,7 @@
 
 #include <adwaita.h>
 
-#include "cc-vertical-row.h"
+#include "cc-content-row.h"
 
 G_BEGIN_DECLS
 

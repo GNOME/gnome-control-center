@@ -52,7 +52,7 @@ sources = common_sources + files(
   'cc-permission-infobar.c',
   'cc-split-row.c',
   'cc-texture-utils.c',
-  'cc-vertical-row.c',
+  'cc-content-row.c',
   'cc-ui-util.c',
   'cc-util.c',
   'cc-scaler.c'
