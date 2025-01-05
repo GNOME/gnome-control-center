@@ -347,11 +347,9 @@ populate_ui (NetDeviceEthernet *self)
 {
         GSList *connections, *l;
         NMConnection *connection;
-        GtkWidget *child;
         gint n_connections;
 
-        while ((child = gtk_widget_get_first_child (GTK_WIDGET (self->connection_list))) != NULL)
-               gtk_list_box_remove (self->connection_list, child);
+        gtk_list_box_remove_all (self->connection_list);
 
         connections = net_device_get_valid_connections (self->client, self->device);
         for (l = connections; l; l = l->next) {

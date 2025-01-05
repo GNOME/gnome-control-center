@@ -301,15 +301,6 @@ input_source_row_new (CcInputChooser *self,
 }
 
 static void
-remove_all_rows (GtkListBox *listbox)
-{
-  GtkWidget *child;
-
-  while ((child = gtk_widget_get_first_child (GTK_WIDGET (listbox))) != NULL)
-    gtk_list_box_remove (listbox, child);
-}
-
-static void
 add_input_source_rows_for_locale (CcInputChooser *self,
                                   LocaleInfo     *info)
 {
@@ -358,7 +349,7 @@ static void
 show_input_sources_for_locale (CcInputChooser *self,
                                LocaleInfo     *info)
 {
-  remove_all_rows (self->input_sources_listbox);
+  gtk_list_box_remove_all (self->input_sources_listbox);
 
   if (!info->back_row)
     {
@@ -400,7 +391,7 @@ show_locale_rows (CcInputChooser *self)
   LocaleInfo *info;
   GHashTableIter iter;
 
-  remove_all_rows (self->input_sources_listbox);
+  gtk_list_box_remove_all (self->input_sources_listbox);
 
   if (!self->showing_extra)
     initial = cc_common_language_get_initial_languages ();

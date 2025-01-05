@@ -124,15 +124,6 @@ add_device (CcPowerPanel *self, UpDevice *device)
 }
 
 static void
-empty_listbox (GtkListBox *listbox)
-{
-  GtkWidget *child;
-
-  while ((child = gtk_widget_get_first_child (GTK_WIDGET (listbox))) != NULL)
-    gtk_list_box_remove (listbox, child);
-}
-
-static void
 update_power_saver_low_battery_row_visibility (CcPowerPanel *self)
 {
   g_autoptr(UpDevice) composite = NULL;
@@ -249,11 +240,11 @@ up_client_changed (CcPowerPanel *self)
   gboolean charge_threshold_enabled;
   g_autoptr(UpDevice) composite = NULL;
 
-  empty_listbox (self->battery_listbox);
+  gtk_list_box_remove_all (self->battery_listbox);
   gtk_widget_set_visible (GTK_WIDGET (self->battery_section), FALSE);
 
   gtk_widget_set_visible (GTK_WIDGET (self->battery_charging_section), FALSE);
-  empty_listbox (self->device_listbox);
+  gtk_list_box_remove_all (self->device_listbox);
   gtk_widget_set_visible (GTK_WIDGET (self->device_section), FALSE);
 
   charge_threshold_supported = FALSE;
@@ -849,7 +840,7 @@ power_profile_update_info_boxes (CcPowerPanel *self)
   CcPowerProfileInfoRow *row;
   int next_insert = 0;
 
-  empty_listbox (self->power_profile_info_listbox);
+  gtk_list_box_remove_all (self->power_profile_info_listbox);
   gtk_widget_set_visible (GTK_WIDGET (self->power_profile_info_listbox), FALSE);
 
   profile_variant = g_dbus_proxy_get_cached_property (self->power_profiles_proxy, "ActiveProfile");

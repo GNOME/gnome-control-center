@@ -838,14 +838,12 @@ select_vpn_type (NetConnectionEditor *self, GtkListBox *list)
 {
         GSList *vpn_plugins, *iter;
         GtkWidget *row;
-        GtkWidget *child;
 
         /* Get the available VPN types */
         vpn_plugins = vpn_get_plugins ();
 
         /* Remove the previous menu contents */
-        while ((child = gtk_widget_get_first_child (GTK_WIDGET (list))) != NULL)
-                gtk_list_box_remove (list, child);
+        gtk_list_box_remove_all (list);
 
         /* Add the VPN types */
         for (iter = vpn_plugins; iter; iter = iter->next) {

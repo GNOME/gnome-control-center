@@ -413,8 +413,6 @@ cc_bolt_device_dialog_set_device (CcBoltDeviceDialog *dialog,
 
   if (dialog->device)
     {
-      GtkWidget *child;
-
       g_cancellable_cancel (dialog->cancel);
       g_clear_object (&dialog->cancel);
       dialog->cancel = g_cancellable_new ();
@@ -424,8 +422,7 @@ cc_bolt_device_dialog_set_device (CcBoltDeviceDialog *dialog,
                                             dialog);
       g_clear_object (&dialog->device);
 
-      while ((child = gtk_widget_get_first_child (GTK_WIDGET (dialog->parents_devices))) != NULL)
-        gtk_list_box_remove (dialog->parents_devices, child);
+      gtk_list_box_remove_all (dialog->parents_devices);
 
       gtk_widget_set_visible (GTK_WIDGET (dialog->parents_group), FALSE);
     }
