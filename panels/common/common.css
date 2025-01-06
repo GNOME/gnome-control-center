@@ -1,0 +1,27 @@
+/*************************************************
+ * CcContentRow, mostly copied from AdwActionRow *
+ *************************************************/
+
+row.content box.header,
+row.content box.contents {
+  margin-left: 12px;
+  margin-right: 12px;
+  border-spacing: 6px;
+  min-height: 50px;
+}
+row.content box.title {
+  margin-top: 6px;
+  margin-bottom: 6px;
+  border-spacing: 3px;
+  padding: 0;
+}
+row.content .prefixes,
+row.content .suffixes {
+  border-spacing: 6px;
+}
+row.content .prefixes:dir(ltr) {
+  margin-right: 6px;
+}
+row.content .prefixes:dir(rtl) {
+  margin-left: 6px;
+}

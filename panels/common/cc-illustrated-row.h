@@ -29,15 +29,7 @@
 G_BEGIN_DECLS
 
 #define CC_TYPE_ILLUSTRATED_ROW (cc_illustrated_row_get_type())
-G_DECLARE_FINAL_TYPE (CcIllustratedRow, cc_illustrated_row, CC, ILLUSTRATED_ROW, CcVerticalRow)
-
-struct _CcIllustratedRowClass
-{
-  CcVerticalRowClass parent_class;
-
-  /*< private >*/
-  gpointer padding[4];
-};
+G_DECLARE_FINAL_TYPE (CcIllustratedRow, cc_illustrated_row, CC, ILLUSTRATED_ROW, CcContentRow)
 
 void         cc_illustrated_row_set_resource (CcIllustratedRow *self,
                                               const gchar      *resource_path);

@@ -27,14 +27,14 @@
 
 struct _CcIllustratedRow
 {
-  CcVerticalRow      parent;
+  CcContentRow       parent;
 
   GtkBox            *picture_box;
   CcMaskPaintable   *picture_mask;
   gchar             *resource_path;
 };
 
-G_DEFINE_FINAL_TYPE (CcIllustratedRow, cc_illustrated_row, CC_TYPE_VERTICAL_ROW);
+G_DEFINE_FINAL_TYPE (CcIllustratedRow, cc_illustrated_row, CC_TYPE_CONTENT_ROW);
 
 enum
 {

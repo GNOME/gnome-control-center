@@ -3,6 +3,7 @@
  * Copyright 2018 Purism SPC
  *           2021 Georges Basile Stavracas Neto <georges.stavracas@gmail.com>
  *           2023 Red Hat, Inc
+ *           2025 Matthijs Velsink <mvelsink@gnome.org>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -26,50 +27,52 @@
 
 G_BEGIN_DECLS
 
-#define CC_TYPE_VERTICAL_ROW (cc_vertical_row_get_type())
-G_DECLARE_DERIVABLE_TYPE (CcVerticalRow, cc_vertical_row, CC, VERTICAL_ROW, AdwPreferencesRow)
+#define CC_TYPE_CONTENT_ROW (cc_content_row_get_type())
+G_DECLARE_DERIVABLE_TYPE (CcContentRow, cc_content_row, CC, CONTENT_ROW, AdwPreferencesRow)
 
-struct _CcVerticalRowClass
+/**
+ * CcContentRowClass
+ * @parent_class: The parent class
+ * @activate: Activates the row to trigger its main action.
+ */
+struct _CcContentRowClass
 {
   AdwPreferencesRowClass parent_class;
 
-  /*< private >*/
-  gpointer padding[4];
+  void (*activate) (CcContentRow *self);
 };
 
-const gchar *cc_vertical_row_get_subtitle (CcVerticalRow *self);
-void         cc_vertical_row_set_subtitle (CcVerticalRow *self,
-                                           const gchar    *subtitle);
+GtkWidget *cc_content_row_new (void);
 
-const gchar *cc_vertical_row_get_icon_name (CcVerticalRow *self);
-void         cc_vertical_row_set_icon_name (CcVerticalRow *self,
-                                            const gchar   *icon_name);
+void cc_content_row_add_prefix (CcContentRow *self,
+                                GtkWidget    *widget);
+void cc_content_row_add_suffix (CcContentRow *self,
+                                GtkWidget    *widget);
+void cc_content_row_add_content (CcContentRow *self,
+                                 GtkWidget    *widget);
+void cc_content_row_remove     (CcContentRow *self,
+                                GtkWidget    *widget);
 
-GtkWidget *cc_vertical_row_get_activatable_widget (CcVerticalRow *self);
-void       cc_vertical_row_set_activatable_widget (CcVerticalRow *self,
-                                                   GtkWidget     *widget);
+const char *cc_content_row_get_subtitle (CcContentRow *self);
+void        cc_content_row_set_subtitle (CcContentRow *self,
+                                         const char   *subtitle);
 
-gboolean cc_vertical_row_get_use_underline (CcVerticalRow *self);
-void     cc_vertical_row_set_use_underline (CcVerticalRow *self,
-                                            gboolean       use_underline);
+GtkWidget *cc_content_row_get_activatable_widget (CcContentRow *self);
+void       cc_content_row_set_activatable_widget (CcContentRow *self,
+                                                  GtkWidget    *widget);
 
-gint cc_vertical_row_get_title_lines (CcVerticalRow *self);
-void cc_vertical_row_set_title_lines (CcVerticalRow *self,
-                                      gint           title_lines);
+int  cc_content_row_get_title_lines (CcContentRow *self);
+void cc_content_row_set_title_lines (CcContentRow *self,
+                                     int           title_lines);
 
-gint cc_vertical_row_get_subtitle_lines (CcVerticalRow *self);
-void cc_vertical_row_set_subtitle_lines (CcVerticalRow *self,
-                                         gint           subtitle_lines);
+int  cc_content_row_get_subtitle_lines (CcContentRow *self);
+void cc_content_row_set_subtitle_lines (CcContentRow *self,
+                                        int           subtitle_lines);
 
-void cc_vertical_row_add_prefix (CcVerticalRow *self,
-                                 GtkWidget     *widget);
+gboolean cc_content_row_get_subtitle_selectable (CcContentRow *self);
+void     cc_content_row_set_subtitle_selectable (CcContentRow *self,
+                                                 gboolean      subtitle_selectable);
 
-void cc_vertical_row_add_content (CcVerticalRow *self,
-                                  GtkWidget     *widget);
-
-void cc_vertical_row_activate (CcVerticalRow *self);
-
-void cc_vertical_row_remove (CcVerticalRow *self,
-                             GtkWidget     *child);
+void cc_content_row_activate (CcContentRow *self);
 
 G_END_DECLS

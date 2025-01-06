@@ -29,15 +29,7 @@
 G_BEGIN_DECLS
 
 #define CC_TYPE_SPLIT_ROW (cc_split_row_get_type())
-G_DECLARE_FINAL_TYPE (CcSplitRow, cc_split_row, CC, SPLIT_ROW, CcVerticalRow)
-
-struct _CcSplitRowClass
-{
-  CcVerticalRowClass parent_class;
-
-  /*< private >*/
-  gpointer padding[4];
-};
+G_DECLARE_FINAL_TYPE (CcSplitRow, cc_split_row, CC, SPLIT_ROW, CcContentRow)
 
 void         cc_split_row_set_default_illustration_resource (CcSplitRow  *self,
                                                              const gchar *resource_path);

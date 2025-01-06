@@ -26,9 +26,9 @@
 
 struct _CcSplitRow
 {
-  CcVerticalRow      parent;
+  CcContentRow       parent;
 
-  GtkWidget         *box;
+  GtkBox            *box;
   GtkSizeGroup      *size_group;
 
   GtkPicture        *default_option_picture;
@@ -52,7 +52,7 @@ struct _CcSplitRow
   gboolean           compact;
 };
 
-G_DEFINE_FINAL_TYPE (CcSplitRow, cc_split_row, CC_TYPE_VERTICAL_ROW);
+G_DEFINE_FINAL_TYPE (CcSplitRow, cc_split_row, CC_TYPE_CONTENT_ROW);
 
 enum
 {
