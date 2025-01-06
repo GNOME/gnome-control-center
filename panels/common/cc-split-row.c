@@ -399,6 +399,7 @@ cc_split_row_set_compact (CcSplitRow *self,
 
   gtk_orientable_set_orientation (GTK_ORIENTABLE (self->box),
                                   compact ? GTK_ORIENTATION_VERTICAL : GTK_ORIENTATION_HORIZONTAL);
+  gtk_box_set_spacing (self->box, compact ? 6 : 18);
   gtk_size_group_set_mode (self->size_group,
                            compact ? GTK_SIZE_GROUP_NONE : GTK_SIZE_GROUP_VERTICAL);
 
