@@ -96,7 +96,7 @@ status_to_string_for_ui (BoltDevice *dev)
       if (nopcie)
         return C_("Thunderbolt Device Status", "Reduced Functionality");
       else
-        return C_("Thunderbolt Device Status", "Connected & Authorized");
+        return C_("Thunderbolt Device Status", "Connected and Authorized");
 
     case BOLT_STATUS_UNKNOWN:
       break; /* use default return value, i.e. Unknown */
