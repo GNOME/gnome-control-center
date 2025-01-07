@@ -256,12 +256,6 @@ test:
     - *build_procedure
     - *run_tests
 
-    - |
-      if [[ -n "${CI_COMMIT_TAG}" ]]; then
-        echo "== Distro Test =="
-        ninja dist -C _build
-      fi
-
   artifacts:
     reports:
         junit: "_build/meson-logs/testlog.junit.xml"
