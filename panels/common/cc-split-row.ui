@@ -52,12 +52,13 @@
 
             <child>
               <object class="GtkCheckButton" id="default_option_checkbutton">
+                <property name="margin-start">6</property>
                 <property name="group">alternative_option_checkbutton</property>
                 <signal name="toggled" handler="on_checkbutton_toggled_cb" object="CcSplitRow" swapped="yes"/>
                 <property name="child">
                   <object class="GtkBox">
                     <property name="valign">center</property>
-                    <property name="margin-start">12</property>
+                    <property name="margin-start">6</property>
                     <property name="orientation">vertical</property>
                     <style>
                       <class name="title" />
@@ -142,11 +143,12 @@
 
             <child>
               <object class="GtkCheckButton" id="alternative_option_checkbutton">
+                <property name="margin-start">6</property>
                 <signal name="toggled" handler="on_checkbutton_toggled_cb" object="CcSplitRow" swapped="yes"/>
                 <property name="child">
                   <object class="GtkBox">
                     <property name="valign">center</property>
-                    <property name="margin-start">12</property>
+                    <property name="margin-start">6</property>
                     <property name="orientation">vertical</property>
                     <style>
                       <class name="title" />
