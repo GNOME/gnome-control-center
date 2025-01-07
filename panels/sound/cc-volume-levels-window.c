@@ -112,6 +112,10 @@ stream_added_cb (CcVolumeLevelsWindow *self,
   if (stream == NULL)
     return;
 
+  /* We don't present streams without a name in the UI. */
+  if (gvc_mixer_stream_get_name (stream) == NULL)
+    return;
+
   g_list_store_append (self->stream_list, G_OBJECT (stream));
 }
 
