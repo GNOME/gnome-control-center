@@ -1,3 +1,161 @@
+================
+Version 48.alpha
+================
+
+- Various translation updates
+- Start using the new GNOME release service
+- Prevent crash on CcSplitRow related to Gtk size group changes
+- Use accessible-role=presentation for illustrative icons/images
+- Use gtk_list_box_remove_all instead of iterating GTK widget children
+- Import developer docs from gitlab wiki to the docs/ source folder
+- Various improvements to our development Flatpak build
+- Various style/consistency updates to gobject creations
+- Stop calling "gtk_widget_get_root()" incorrectly
+- Various improvements to CcPermissionInfobar
+- Use luminance masking for webm assets
+- Introduce follow-accent property to CcMaskPaintable
+- Allow FQDN hostnames
+
+Dependency updates
+- upower >= 1.90.6
+- gsettings-desktop-schema >= 47.0
+- libadwaita >= 1.7.alpha
+
+About
+- Fixes wrong GPU names when g-c-c is launched using dGPU
+
+Accessibility
+- Turn CcCursorSizeDialog into a page
+- Remove "screen" mark labels in zoom page
+- Simplify cursor size subtitle
+
+Apps
+- Avoid crash when parsing invalid app permissions
+- Handle Epiphany webapps
+- Various memory leak fixes
+- Remove .circular style class from some buttons
+
+Appearance
+- Load GnomeBG thumbnails async
+- Internally handle scale-factor
+- Allow for concurrent cache updates
+- Generate one background thumbnail at a time
+- Don't accidentally reset accent colors
+- Add "undo" option when deleting a wallpaper
+- Load async wallpapers in order
+
+Color
+- Fix "Show details" link on profile warning
+- Fix row expansion and button visibility
+- Port "Add Profile" to AdwDialog
+- Rename "Color" panel to "Color Management"
+- Various code style improvements
+- Port add profile page from GtkTreeView to GtkListView
+- Ensure profile is connected before setting system-wide
+- Various fixes to the color calibration tool
+
+Date and Time
+- Fix incorrect disabling of auto timezone without location services
+- Use AdwToggleGroup in the "Time Format" row
+
+Display
+- Snap monitors after updating prefer mode to current config when enable join mode
+- Port "Scale" and "Multiple Displays" rows to AdwToggleGroup
+- Use real color temp in night light scale widget
+
+Keyboard
+- Port Shortcut editor to AdwDialog
+- Use "--parent-handle" option when launching Tecla (keyboard layout previewer)
+- Fix compose key example string
+
+Network
+- Make metered connection and hotspot settings adaptive to small screens
+- Fix memory leaks in wireguard page
+
+Notifications
+- Update UI when underlying gsetting changes
+
+Mouse
+- Convert VP9 webm with alpha to monochrome variants (so we don't need gstreamer-bad-pluggins)
+- Update webm illustration assets to latest versions
+
+Mobile Networks
+- Fix status pages alignments
+- Use header capitalization in the "Turn off Airplane Mode" button
+
+Multitasking
+- Make workspace settings insensitive for single workspace
+
+Online Accounts
+- Track goa changes in PresentationIdentity and update the UI accordingly
+
+Power
+- Add support for battery charge limiting
+- Split panel into "General" and "Power Saving" pages
+- Split "Black Screen" setting in switch and delay
+- Remove separate dialog for "Automatic Suspend"
+- Various improvements on code readability and refactors
+- Fix conflicting mnemonics
+- Handle when tuned-ppd has an unsupported power profile
+
+Printers
+- Remove "search as you type" feature as it conflicts with global search
+- Add a confirmation dialog when attempting to clear all jobs
+- Add "No Results" page when nothing to show on search
+- Use a consistent printer icon in several status pages
+- Set "Driver" row after selecting ppd file in Printer Details dialog
+- Port "Install PPD" dialog to GtkFileDialog
+
+Region
+- Update language row after closing lang selector
+- Port format chooser dialog to AdwDialog
+- Show locale name in format chooser preview
+- Reset format chooser preview when uncollapsing
+
+Sound
+- Turn sound alert dialog into a subpage
+- Prevent crash in Volume Levels when stream has no name
+
+Search
+- Add a button to open custom search locations
+
+Sharing
+- Fix saving of new shared folders in "Media Sharing" settings
+- Make "Media Sharing" dialog use GtkFileDialog for new folders
+
+Tests
+- Disable randomly failing network panel test
+- Improve waiting on NM device/client changes
+- Add FQDN hostname tests
+
+Thunderbolt
+- Use AdwToast to display transient notifications
+- Use property-rows style in device dialog
+
+Users
+- Use a dialog to confirm fingerprint removal
+- Stop shipping legacy avatar images
+- Fix conflicting mnemonic in "Add User" dialog
+- Port "Remove User" button to AdwButtonRow
+- Make screen reader read avatar file names when there are no names
+- Port fingerprint dialog to AdwDialog
+
+Wacom
+- Do not crash when handling an unknown stylus ID
+- Support hidpi for tablet/stylus images
+- Make assets recolorable
+- Rename visible entry to "Graphics Tablet"
+- Change from "left handed orientation" to "location of buttons"
+- Various style tweaks to stylus page
+
+Wellbeing
+- Add initial Wellbeing panel (disabled by default)
+
+Wifi
+- Fix crash on wifi adapter removal
+- Fix using wifi hotspot with multiple wifi adapters
+- Don't disable wireless globally when toggling one Wifi connection OFF
+
 ===============
 Version 47.beta
 ===============
