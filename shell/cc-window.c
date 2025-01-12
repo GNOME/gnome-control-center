@@ -483,7 +483,6 @@ search_shortcut_cb (GtkWidget *widget,
 {
   CcPanelListView view;
   CcWindow *self;
-  gboolean search;
 
   self = CC_WINDOW (widget);
   view = cc_panel_list_get_view (self->panel_list);
@@ -492,10 +491,8 @@ search_shortcut_cb (GtkWidget *widget,
   if (view != CC_PANEL_LIST_MAIN && view != CC_PANEL_LIST_SEARCH)
     return GDK_EVENT_PROPAGATE;
 
-  search = !gtk_search_bar_get_search_mode (self->search_bar);
-  gtk_search_bar_set_search_mode (self->search_bar, search);
-  if (search)
-    gtk_widget_grab_focus (GTK_WIDGET (self->search_entry));
+  gtk_search_bar_set_search_mode (self->search_bar, TRUE);
+  gtk_widget_grab_focus (GTK_WIDGET (self->search_entry));
 
   return GDK_EVENT_STOP;
 }
