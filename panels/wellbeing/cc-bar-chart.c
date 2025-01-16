@@ -1756,9 +1756,11 @@ cc_bar_chart_set_data (CcBarChart   *self,
   if (n_data == 0)
     data = NULL;
 
-  if ((self->data == NULL && data == NULL) ||
-      (self->data != NULL && data != NULL &&
-       memcmp (self->data, data, n_data * sizeof (*data)) == 0))
+  if (self->data == NULL && data == NULL)
+    return;
+
+  if (self->data != NULL && data != NULL && self->n_data == n_data &&
+      memcmp (self->data, data, n_data * sizeof (*data)) == 0)
     return;
 
   g_clear_pointer (&self->data, g_free);
