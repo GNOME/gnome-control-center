@@ -50,7 +50,6 @@ void ce_page_complete_init (CEPage *page, NMConnection *connection, const gchar 
 gchar **ce_page_get_mac_list (NMClient *client, GType device_type, const gchar *mac_property);
 void ce_page_setup_mac_combo (GtkComboBoxText *combo, const gchar *current_mac, gchar **mac_list);
 void ce_page_setup_cloned_mac_combo (GtkComboBoxText *combo, const char *current, gboolean is_wifi);
-gint ce_get_property_default (NMSetting *setting, const gchar *property_name);
 gboolean ce_page_address_is_valid (const gchar *addr);
 gchar *ce_page_trim_address (const gchar *addr);
 char *ce_page_cloned_mac_get (GtkComboBoxText *combo);

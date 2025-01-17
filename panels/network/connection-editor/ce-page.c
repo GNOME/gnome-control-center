@@ -319,40 +319,6 @@ ce_page_get_security_setting (CEPage *self)
     return NULL;
 }
 
-gint
-ce_get_property_default (NMSetting *setting, const gchar *property_name)
-{
-    GParamSpec *spec;
-    GValue value = {
-        0,
-    };
-
-    spec = g_object_class_find_property (G_OBJECT_GET_CLASS (setting), property_name);
-    g_return_val_if_fail (spec != NULL, -1);
-
-    g_value_init (&value, spec->value_type);
-    g_param_value_set_default (spec, &value);
-
-    if (G_VALUE_HOLDS_CHAR (&value))
-        return (int) g_value_get_schar (&value);
-    else if (G_VALUE_HOLDS_INT (&value))
-        return g_value_get_int (&value);
-    else if (G_VALUE_HOLDS_INT64 (&value))
-        return (int) g_value_get_int64 (&value);
-    else if (G_VALUE_HOLDS_LONG (&value))
-        return (int) g_value_get_long (&value);
-    else if (G_VALUE_HOLDS_UINT (&value))
-        return (int) g_value_get_uint (&value);
-    else if (G_VALUE_HOLDS_UINT64 (&value))
-        return (int) g_value_get_uint64 (&value);
-    else if (G_VALUE_HOLDS_ULONG (&value))
-        return (int) g_value_get_ulong (&value);
-    else if (G_VALUE_HOLDS_UCHAR (&value))
-        return (int) g_value_get_uchar (&value);
-    g_return_val_if_fail (FALSE, 0);
-    return 0;
-}
-
 gchar *
 ce_page_get_next_available_name (const GPtrArray *connections, NameFormat format, const gchar *type_name)
 {
