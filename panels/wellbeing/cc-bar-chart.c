@@ -1330,11 +1330,11 @@ ensure_cached_grid_lines_and_labels (CcBarChart *self)
         {
           const double grid_line_value = g_array_index (self->cached_continuous_axis_grid_line_values, double, i);
           g_autofree char *label_text = format_continuous_axis_label (self, grid_line_value);
-          g_autoptr(GtkLabel) label = GTK_LABEL (g_object_ref_sink (create_continuous_axis_label (label_text)));
+          GtkLabel *label = create_continuous_axis_label (label_text);
           gtk_widget_set_parent (GTK_WIDGET (label), GTK_WIDGET (self));
           /* don’t insert the label into the widget child order using
            * gtk_widget_insert_after(), as it shouldn’t be focusable */
-          g_ptr_array_add (self->cached_continuous_axis_labels, g_steal_pointer (&label));
+          g_ptr_array_add (self->cached_continuous_axis_labels, label);
         }
     }
 }
@@ -1608,11 +1608,11 @@ cc_bar_chart_set_discrete_axis_labels (CcBarChart         *self,
 
   for (size_t i = 0; i < self->n_discrete_axis_labels; i++)
     {
-      g_autoptr(GtkLabel) label = GTK_LABEL (g_object_ref_sink (create_discrete_axis_label (self->discrete_axis_labels[i])));
+      GtkLabel *label = create_discrete_axis_label (self->discrete_axis_labels[i]);
       gtk_widget_set_parent (GTK_WIDGET (label), GTK_WIDGET (self));
       /* don’t insert the label into the widget child order using
        * gtk_widget_insert_after(), as it shouldn’t be focusable */
-      g_ptr_array_add (self->cached_discrete_axis_labels, g_steal_pointer (&label));
+      g_ptr_array_add (self->cached_discrete_axis_labels, label);
     }
 
   update_group_accessible_relations (self);
@@ -1783,12 +1783,10 @@ cc_bar_chart_set_data (CcBarChart   *self,
 
   for (size_t i = 0; i < self->n_data; i++)
     {
-      g_autoptr(CcBarChartGroup) group = NULL;
-      g_autoptr(CcBarChartBar) bar = NULL;
+      CcBarChartGroup *group = cc_bar_chart_group_new ();
       CcBarChartGroup *previous_group = (i > 0) ? self->cached_groups->pdata[i - 1] : NULL;
       g_autofree char *accessible_label = format_continuous_axis_label (self, self->data[i]);
 
-      group = CC_BAR_CHART_GROUP (g_object_ref_sink (cc_bar_chart_group_new ()));
       g_signal_connect (group, "notify::selected-index", G_CALLBACK (group_notify_selected_index_cb), self);
       g_signal_connect (group, "notify::is-selected", G_CALLBACK (group_notify_selected_index_cb), self);
       cc_bar_chart_group_set_selectable (group, isnan (self->data[i]));
@@ -1796,14 +1794,14 @@ cc_bar_chart_set_data (CcBarChart   *self,
 
       if (!isnan (self->data[i]))
         {
-          bar = CC_BAR_CHART_BAR (g_object_ref_sink (cc_bar_chart_bar_new (self->data[i], accessible_label)));
+          CcBarChartBar *bar = cc_bar_chart_bar_new (self->data[i], accessible_label);
           cc_bar_chart_group_insert_bar (group, -1, bar);
           g_signal_connect (bar, "activate", G_CALLBACK (bar_activate_cb), self);
         }
 
       gtk_widget_set_parent (GTK_WIDGET (group), GTK_WIDGET (self));
       gtk_widget_insert_after (GTK_WIDGET (group), GTK_WIDGET (self), GTK_WIDGET (previous_group));
-      g_ptr_array_add (self->cached_groups, g_steal_pointer (&group));
+      g_ptr_array_add (self->cached_groups, group);
     }
 
   update_group_accessible_relations (self);
