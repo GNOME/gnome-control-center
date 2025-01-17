@@ -6,14 +6,15 @@
 # Matjaž Horvat <m@owca.info>, 2005–2006.
 # Matic Žgur <mr.zgur@gmail.com>, 2006–2007.
 # Matej Urbančič <mateju@src.gnome.org>, + 2007–2024.
+# Martin Srebotnjak <miles@filmsi.net>, 2024,2025.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2025-01-11 12:45+0000\n"
-"PO-Revision-Date: 2025-01-12 16:43+0100\n"
+"POT-Creation-Date: 2025-01-16 22:02+0000\n"
+"PO-Revision-Date: 2025-01-17 11:55+0100\n"
 "Last-Translator: Martin Srebotnjak <miles@filmsi.net>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "Language: sl_SI\n"
@@ -81,7 +82,7 @@ msgstr "Datotečni sistem"
 
 #: panels/applications/cc-applications-panel.c:876
 #: panels/keyboard/01-launchers.xml.in:6
-#: shell/appdata/org.gnome.Settings.appdata.xml.in.in:7 shell/cc-window.c:798
+#: shell/appdata/org.gnome.Settings.appdata.xml.in.in:7 shell/cc-window.c:795
 #: shell/cc-window.ui:18 shell/org.gnome.Settings.desktop.in:3
 msgid "Settings"
 msgstr "Nastavitve"
@@ -1710,28 +1711,29 @@ msgstr "_Odkleni …"
 msgid "Error — some settings cannot be unlocked"
 msgstr "Napaka - nekaterih nastavitev ni mogoče odkleniti"
 
-#: panels/common/cc-time-editor.ui:25
+#: panels/common/cc-timelike-editor.ui:25
 msgid "Increment Hour"
 msgstr "Povečanje ure"
 
-#: panels/common/cc-time-editor.ui:53
+#: panels/common/cc-timelike-editor.ui:53
 msgid "Increment Minute"
 msgstr "Povečanje minute"
 
-#: panels/common/cc-time-editor.ui:73
+#: panels/common/cc-timelike-editor.ui:73
 msgid "Time"
 msgstr "Čas"
 
-#: panels/common/cc-time-editor.ui:94
+#: panels/common/cc-timelike-editor.ui:94
 msgid "Decrement Hour"
 msgstr "Zmanjšanje ure"
 
-#: panels/common/cc-time-editor.ui:122
+#: panels/common/cc-timelike-editor.ui:122
 msgid "Decrement Minute"
 msgstr "Zmanjšanje minute"
 
 #: panels/common/cc-util.c:130
 #: panels/network/connection-editor/ce-page-details.c:188
+#: panels/wellbeing/cc-screen-time-statistics-row.c:928
 msgid "Today"
 msgstr "Danes"
 
@@ -5729,7 +5731,7 @@ msgstr "Zmanjšana zmogljivost"
 
 #: panels/privacy/bolt/cc-bolt-device-dialog.c:99
 msgctxt "Thunderbolt Device Status"
-msgid "Connected & Authorized"
+msgid "Connected and Authorized"
 msgstr "Povezano in overjeno"
 
 #: panels/privacy/bolt/cc-bolt-device-dialog.c:105
@@ -7196,17 +7198,17 @@ msgid "S_oftware Updates"
 msgstr "_Programske posodobitve"
 
 #. Translators: This is the full date and time format used in 12-hour mode.
-#: panels/system/datetime/cc-datetime-page.c:239
+#: panels/system/datetime/cc-datetime-page.c:237
 msgid "%e %B %Y, %l:%M %p"
 msgstr "%e %B %Y, %l:%M %p"
 
 #. Translators: This is the full date and time format used in 24-hour mode.
-#: panels/system/datetime/cc-datetime-page.c:244
+#: panels/system/datetime/cc-datetime-page.c:242
 msgid "%e %B %Y, %R"
 msgstr "%e %B %Y, %R"
 
 #. Translators: "city, country"
-#: panels/system/datetime/cc-datetime-page.c:404
+#: panels/system/datetime/cc-datetime-page.c:402
 #, c-format
 msgctxt "timezone loc"
 msgid "%s, %s"
@@ -7214,7 +7216,7 @@ msgstr "%s, %s"
 
 #. Update the timezone on the listbow row
 #. Translators: "timezone (details)"
-#: panels/system/datetime/cc-datetime-page.c:421
+#: panels/system/datetime/cc-datetime-page.c:419
 #, c-format
 msgctxt "timezone desc"
 msgid "%s (%s)"
@@ -9310,35 +9312,223 @@ msgstr "Trajanje"
 msgid "Interval"
 msgstr "Interval"
 
+#: panels/wellbeing/cc-screen-time-statistics-row.c:221
+msgctxt "abbreviated weekday name for Sunday"
+msgid "S"
+msgstr "Ne"
+
+#: panels/wellbeing/cc-screen-time-statistics-row.c:222
+msgctxt "abbreviated weekday name for Monday"
+msgid "M"
+msgstr "Po"
+
+#: panels/wellbeing/cc-screen-time-statistics-row.c:223
+msgctxt "abbreviated weekday name for Tuesday"
+msgid "T"
+msgstr "To"
+
+#: panels/wellbeing/cc-screen-time-statistics-row.c:224
+msgctxt "abbreviated weekday name for Wednesday"
+msgid "W"
+msgstr "Sr"
+
+#: panels/wellbeing/cc-screen-time-statistics-row.c:225
+msgctxt "abbreviated weekday name for Thursday"
+msgid "T"
+msgstr "Če"
+
+#: panels/wellbeing/cc-screen-time-statistics-row.c:226
+msgctxt "abbreviated weekday name for Friday"
+msgid "F"
+msgstr "Pe"
+
+#: panels/wellbeing/cc-screen-time-statistics-row.c:227
+msgctxt "abbreviated weekday name for Saturday"
+msgid "S"
+msgstr "So"
+
+#. Translators: This is a duration in minutes, for example ‘15m’ for 15 minutes.
+#. * Use whatever shortest unit label is used for minutes in your locale.
+#: panels/wellbeing/cc-screen-time-statistics-row.c:384
+#, c-format
+msgid "%um"
+msgstr "%u min"
+
+#. Translators: This is a duration in hours, for example ‘2h’ for 2 hours.
+#. * Use whatever shortest unit label is used for hours in your locale.
+#: panels/wellbeing/cc-screen-time-statistics-row.c:390
+#, c-format
+msgid "%uh"
+msgstr "%u ur"
+
+#. Translators: This is a duration in hours and minutes, for example
+#. * ‘3h 15m’ for 3 hours and 15 minutes. Use whatever shortest unit label
+#. * is used for hours and minutes in your locale.
+#: panels/wellbeing/cc-screen-time-statistics-row.c:397
+#, c-format
+msgid "%uh %um"
+msgstr "%u ur %u min"
+
+#: panels/wellbeing/cc-screen-time-statistics-row.c:627
+#: panels/wellbeing/cc-screen-time-statistics-row.c:747
+#, c-format
+msgid "Failed to load session history file ‘%s’: %s"
+msgstr "Ni bilo mogoče naložiti datoteke zgodovine sej »%s«: %s"
+
+#: panels/wellbeing/cc-screen-time-statistics-row.c:628
+msgid "Invalid file structure"
+msgstr "Neveljavna struktura datotek"
+
+#: panels/wellbeing/cc-screen-time-statistics-row.c:665
+#, c-format
+msgid "Failed to load session history file: %s"
+msgstr "Nalaganje datoteke zgodovine sej ni uspelo: %s"
+
+#: panels/wellbeing/cc-screen-time-statistics-row.c:666
+#: panels/wellbeing/cc-screen-time-statistics-row.c:748
+msgid "File is empty"
+msgstr "Datoteka je prazna"
+
+#. Translators: This a medium-length date, for example ‘15 April’
+#: panels/wellbeing/cc-screen-time-statistics-row.c:933
+msgid "%-d %B"
+msgstr "%-d. %B"
+
+#: panels/wellbeing/cc-screen-time-statistics-row.c:946
+#: panels/wellbeing/cc-screen-time-statistics-row.c:957
+msgid "No Data"
+msgstr "Ni podatkov"
+
+#. Translators: This is an annotated day of the week. For example ‘Average Monday’.
+#: panels/wellbeing/cc-screen-time-statistics-row.c:950
+#, c-format
+msgid "Average %A"
+msgstr "Povprečje %A"
+
+#: panels/wellbeing/cc-screen-time-statistics-row.c:961
+#, c-format
+msgid "This Week"
+msgstr "Ta teden"
+
+#. Translators: This is a range of days within a given month.
+#. * For example ‘20–27 April’. The dash is an en-dash.
+#: panels/wellbeing/cc-screen-time-statistics-row.c:972
+#, c-format
+msgid "%u–%u %s"
+msgstr "%u. – %u. %s"
+
+#. Translators: This is a range of days spanning two months.
+#. * For example, ‘27 April–4 May’. The dash is an en-dash.
+#: panels/wellbeing/cc-screen-time-statistics-row.c:989
+#, c-format
+msgid "%u %s–%u %s"
+msgstr "%u. %s – %u. %s"
+
+#. Translators: The first placeholder is a formatted date string. The
+#. * second placeholder is a formatted time duration (for example, ‘3 hours’
+#. * or ‘25 minutes’).
+#: panels/wellbeing/cc-screen-time-statistics-row.c:1050
+#, c-format
+msgid ""
+"Bar chart of screen time usage over the week starting %s. A line is "
+"overlayed at the %s mark to indicate the configured screen time limit."
+msgstr ""
+"Stolpčni grafikon uporabe časa pred zaslonom v tednu s pričetkom %s. Na "
+"oznaki %s je prekrivna črta, ki označuje nastavljena časovno omejitev "
+"zaslona."
+
+#. Translators: The placeholder is a formatted date string.
+#: panels/wellbeing/cc-screen-time-statistics-row.c:1067
+#, c-format
+msgid "Bar chart of screen time usage over the week starting %s."
+msgstr "Stolpčni grafikon uporabe časa pred zaslonom v tednu od %s."
+
+#: panels/wellbeing/cc-screen-time-statistics-row.c:1073
+#, c-format
+msgid ""
+"Placeholder for a bar chart of screen time usage. No data is currently "
+"available."
+msgstr ""
+"Označba mesta za stolpčni grafikon uporabe časa pred zaslonom. Trenutno "
+"podatki niso na voljo."
+
+#: panels/wellbeing/cc-screen-time-statistics-row.ui:27
+msgid "Screen Time Unavailable"
+msgstr "Čas pred zaslonom ni na voljo"
+
+#: panels/wellbeing/cc-screen-time-statistics-row.ui:29
+msgid ""
+"Screen time information will appear here after a period of usage with Screen "
+"Limits enabled"
+msgstr ""
+"Informacije o času pred zaslonom se bodo tukaj prikazale po določenem "
+"obdobju uporabe z omogočenimi omejitvami zaslona"
+
+#: panels/wellbeing/cc-screen-time-statistics-row.ui:147
+msgid "Average Week"
+msgstr "Povprečni teden"
+
+#: panels/wellbeing/cc-screen-time-statistics-row.ui:190
+msgid "Previous Week"
+msgstr "Prejšnji teden"
+
+#: panels/wellbeing/cc-screen-time-statistics-row.ui:200
+msgid "Next Week"
+msgstr "Prihodnji teden"
+
 #: panels/wellbeing/cc-wellbeing-panel.ui:18
+msgid "Screen Time"
+msgstr "Čas pred zaslonom"
+
+#: panels/wellbeing/cc-wellbeing-panel.ui:29
+msgid "Screen Limits"
+msgstr "Omejitve zaslona"
+
+#: panels/wellbeing/cc-wellbeing-panel.ui:32
+msgid "Daily Screen Usage Limi_t"
+msgstr "_Dnevna omejitev uporabe zaslona"
+
+#: panels/wellbeing/cc-wellbeing-panel.ui:39
+msgid "Daily _Limit Amount"
+msgstr "Dnevna o_mejitev"
+
+#: panels/wellbeing/cc-wellbeing-panel.ui:45
+msgid "_Grayscale"
+msgstr "_Sivinsko"
+
+#: panels/wellbeing/cc-wellbeing-panel.ui:46
+msgid "Makes the screen monochrome when the daily limit is reached"
+msgstr "Naredi zaslon enobarven, ko je dosežena dnevna omejitev"
+
+#: panels/wellbeing/cc-wellbeing-panel.ui:55
 msgid "Break Reminders"
 msgstr "Opomniki za prekinitve"
 
-#: panels/wellbeing/cc-wellbeing-panel.ui:21
+#: panels/wellbeing/cc-wellbeing-panel.ui:58
 msgid "_Eyesight Reminders"
 msgstr "Opomniki za _vid"
 
-#: panels/wellbeing/cc-wellbeing-panel.ui:22
+#: panels/wellbeing/cc-wellbeing-panel.ui:59
 msgid "Reminders to look away from the screen"
 msgstr "Opomniki, da odvrnete pogled od zaslona"
 
-#: panels/wellbeing/cc-wellbeing-panel.ui:28
+#: panels/wellbeing/cc-wellbeing-panel.ui:65
 msgid "_Movement Reminders"
 msgstr "Opomniki za _gibanje"
 
-#: panels/wellbeing/cc-wellbeing-panel.ui:29
+#: panels/wellbeing/cc-wellbeing-panel.ui:66
 msgid "Reminders to move around"
 msgstr "Opomniki za gibanje po prostoru"
 
-#: panels/wellbeing/cc-wellbeing-panel.ui:35
+#: panels/wellbeing/cc-wellbeing-panel.ui:72
 msgid "Movement Break S_chedule"
 msgstr "Razpored premorov z gibanjem"
 
-#: panels/wellbeing/cc-wellbeing-panel.ui:41
+#: panels/wellbeing/cc-wellbeing-panel.ui:78
 msgid "S_ounds"
 msgstr "Zvo_ki"
 
-#: panels/wellbeing/cc-wellbeing-panel.ui:42
+#: panels/wellbeing/cc-wellbeing-panel.ui:79
 msgid "Play a sound when a break ends"
 msgstr "Predvajaj zvok, ko se odmor konča"
 
@@ -9947,7 +10137,9 @@ msgstr "[PULT][ARGUMENT …]"
 #. Translators should localize the following string which will be displayed in the About dialog giving credit to the translator(s).
 #: shell/cc-application.c:118
 msgid "translator-credits"
-msgstr "Matej Urbančič <mateju@src.gnome.org>"
+msgstr ""
+"Martin Srebotnjak <miles@filmsi.net>\n"
+"Matej Urbančič <mateju@src.gnome.org>"
 
 #: shell/cc-application.c:119
 #, c-format
@@ -9958,7 +10150,7 @@ msgstr "© 1998 %s"
 msgid "Settings categories"
 msgstr "Kategorije nastavitev"
 
-#: shell/cc-panel-loader.c:317
+#: shell/cc-panel-loader.c:313
 msgid "Available panels:"
 msgstr "Razpoložljivi pulti:"
 
