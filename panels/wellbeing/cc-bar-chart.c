@@ -690,8 +690,8 @@ cc_bar_chart_size_allocate (GtkWidget *widget,
       /* Hide continuous axis labels according to the collision modulus. */
       for (unsigned int i = 0; i < self->cached_continuous_axis_labels->len; i++)
         {
-          gtk_widget_set_visible (self->cached_continuous_axis_labels->pdata[i],
-                                  (i % self->cached_continuous_axis_label_collision_modulus) == 0);
+          gtk_widget_set_child_visible (self->cached_continuous_axis_labels->pdata[i],
+                                        (i % self->cached_continuous_axis_label_collision_modulus) == 0);
         }
     }
 
