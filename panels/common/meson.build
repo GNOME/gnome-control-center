@@ -53,6 +53,7 @@ sources = common_sources + files(
   'cc-mask-paintable.c',
   'cc-time-editor.c',
   'cc-timelike-editor.c',
+  'cc-timelike-editor-layout.c',
   'cc-permission-infobar.c',
   'cc-split-row.c',
   'cc-texture-utils.c',

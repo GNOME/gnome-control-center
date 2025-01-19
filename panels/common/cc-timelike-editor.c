@@ -37,6 +37,7 @@
 #include "cc-timelike-entry.h"
 #include "cc-timelike-editor.h"
 #include "cc-timelike-editor-enums.h"
+#include "cc-timelike-editor-layout.h"
 
 
 #define TIMEOUT_INITIAL  500
@@ -52,7 +53,7 @@
 
 struct _CcTimelikeEditor
 {
-  AdwBin     parent_instance;
+  GtkWidget  parent_instance;
 
   GtkButton *am_pm_button;
   GtkStack  *am_pm_stack;
@@ -73,7 +74,7 @@ struct _CcTimelikeEditor
   CcTimelikeEditorMode mode;
 };
 
-G_DEFINE_TYPE (CcTimelikeEditor, cc_timelike_editor, ADW_TYPE_BIN)
+G_DEFINE_TYPE (CcTimelikeEditor, cc_timelike_editor, GTK_TYPE_WIDGET)
 
 typedef enum {
   PROP_MODE = 1,
@@ -253,7 +254,6 @@ cc_timelike_editor_constructed (GObject *object)
 {
   CcTimelikeEditor *self = (CcTimelikeEditor *)object;
   GDateTime *date;
-  GtkWidget *grid;
   char *label;
 
   G_OBJECT_CLASS (cc_timelike_editor_parent_class)->constructed (object);
@@ -271,10 +271,6 @@ cc_timelike_editor_constructed (GObject *object)
   gtk_label_set_label (self->pm_label, label);
   g_date_time_unref (date);
   g_free (label);
-
-  /* Force LTR so we don't reorder clock buttons for RTL languages */
-  grid = gtk_widget_get_parent (GTK_WIDGET (self->hour_up_button));
-  gtk_widget_set_direction (grid, GTK_TEXT_DIR_LTR);
 }
 
 static void
@@ -393,6 +389,7 @@ cc_timelike_editor_class_init (CcTimelikeEditorClass *klass)
   gtk_widget_class_set_template_from_resource (widget_class,
                                                "/org/gnome/control-center/"
                                                "common/cc-timelike-editor.ui");
+  gtk_widget_class_set_layout_manager_type (widget_class, CC_TYPE_TIMELIKE_EDITOR_LAYOUT);
 
   gtk_widget_class_bind_template_child (widget_class, CcTimelikeEditor, am_pm_button);
   gtk_widget_class_bind_template_child (widget_class, CcTimelikeEditor, am_pm_stack);

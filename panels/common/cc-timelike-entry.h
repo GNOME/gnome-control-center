@@ -48,4 +48,8 @@ guint      cc_timelike_entry_get_minute_increment (CcTimelikeEntry *self);
 void       cc_timelike_entry_set_minute_increment (CcTimelikeEntry *self,
                                                    guint            minutes);
 
+void        cc_timelike_entry_get_hours_and_minutes_midpoints (CcTimelikeEntry *self,
+                                                               float           *out_hours_midpoint_x,
+                                                               float           *out_minutes_midpoint_x);
+
 G_END_DECLS

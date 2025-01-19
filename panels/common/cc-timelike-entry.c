@@ -736,3 +736,56 @@ cc_timelike_entry_set_minute_increment (CcTimelikeEntry *self,
   self->minute_increment = minutes;
   g_object_notify_by_pspec (G_OBJECT (self), props[PROP_MINUTE_INCREMENT]);
 }
+
+/**
+ * cc_timelike_entry_get_hours_and_minutes_midpoints:
+ * @self: a #CcTimelikeEntry
+ * @out_hours_midpoint_x: (out) (optional): return location for the X coordinate
+ *    of the midpoint of the hours digits
+ * @out_minutes_midpoint_x: (out) (optional): return location for the X
+ *    coordinate of the midpoint of the minutes digits
+ *
+ * Get the X coordinates of the midpoints of the hours and minutes parts of the
+ * entry, in the coordinate space of @self.
+ *
+ * These can be used to align surrounding widgets with the hours and minutes
+ * displays. Remember to convert to the coordinate space of the relevant parent
+ * widget to take account of intermediate margins, etc.
+ */
+void
+cc_timelike_entry_get_hours_and_minutes_midpoints (CcTimelikeEntry *self,
+                                                   float           *out_hours_midpoint_x,
+                                                   float           *out_minutes_midpoint_x)
+{
+  gboolean success;
+  graphene_rect_t hours_cursor, minutes_cursor;
+  graphene_point_t hours_midpoint_self, minutes_midpoint_self;
+
+  g_return_if_fail (CC_IS_TIMELIKE_ENTRY (self));
+
+  /* The layout offsets in GtkText are only correctly calculated once the widget
+   * has been realised (gtk_text_adjust_scroll() bails out if unrealised, and
+   * priv->scroll_offset is used in gtk_text_compute_cursor_extents()), so
+   * realize it before proceeding. */
+  gtk_widget_realize (GTK_WIDGET (self->text));
+
+  /* Calculate the midpoints of the hours and minutes, so that surrounding
+   * widgets (such as increment and decrement buttons) can be lined up with them. */
+  gtk_text_compute_cursor_extents (GTK_TEXT (self->text), 1 /* half-way through hours */,
+                                   &hours_cursor, NULL);
+  gtk_text_compute_cursor_extents (GTK_TEXT (self->text), 4 /* half-way through minutes */,
+                                   &minutes_cursor, NULL);
+
+  success = gtk_widget_compute_point (GTK_WIDGET (self->text), GTK_WIDGET (self),
+                                      &hours_cursor.origin, &hours_midpoint_self);
+  g_assert (success);
+
+  success = gtk_widget_compute_point (GTK_WIDGET (self->text), GTK_WIDGET (self),
+                                      &minutes_cursor.origin, &minutes_midpoint_self);
+  g_assert (success);
+
+  if (out_hours_midpoint_x != NULL)
+    *out_hours_midpoint_x = hours_midpoint_self.x;
+  if (out_minutes_midpoint_x != NULL)
+    *out_minutes_midpoint_x = minutes_midpoint_self.x;
+}
