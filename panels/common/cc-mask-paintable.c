@@ -142,6 +142,16 @@ cc_mask_paintable_dispose (GObject *object)
 }
 
 static void
+cc_mask_paintable_finalize (GObject *object)
+{
+  CcMaskPaintable *self = CC_MASK_PAINTABLE (object);
+
+  g_free (self->resource_path);
+
+  G_OBJECT_CLASS (cc_mask_paintable_parent_class)->finalize (object);
+}
+
+static void
 cc_mask_paintable_get_property (GObject    *object,
                                 guint       prop_id,
                                 GValue     *value,
@@ -195,6 +205,7 @@ cc_mask_paintable_class_init (CcMaskPaintableClass *klass)
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
   object_class->dispose = cc_mask_paintable_dispose;
+  object_class->finalize = cc_mask_paintable_finalize;
   object_class->get_property = cc_mask_paintable_get_property;
   object_class->set_property = cc_mask_paintable_set_property;
 
