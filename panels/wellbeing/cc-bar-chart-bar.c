@@ -87,6 +87,7 @@ static void cc_bar_chart_bar_set_property (GObject      *object,
                                            const GValue *value,
                                            GParamSpec   *pspec);
 static void cc_bar_chart_bar_dispose (GObject *object);
+static void cc_bar_chart_bar_finalize (GObject *object);
 static void cc_bar_chart_bar_measure (GtkWidget      *widget,
                                       GtkOrientation  orientation,
                                       int             for_size,
@@ -104,6 +105,7 @@ cc_bar_chart_bar_class_init (CcBarChartBarClass *klass)
   object_class->get_property = cc_bar_chart_bar_get_property;
   object_class->set_property = cc_bar_chart_bar_set_property;
   object_class->dispose = cc_bar_chart_bar_dispose;
+  object_class->finalize = cc_bar_chart_bar_finalize;
 
   widget_class->measure = cc_bar_chart_bar_measure;
 
@@ -215,6 +217,16 @@ cc_bar_chart_bar_dispose (GObject *object)
   gtk_widget_dispose_template (GTK_WIDGET (object), CC_TYPE_BAR_CHART_BAR);
 
   G_OBJECT_CLASS (cc_bar_chart_bar_parent_class)->dispose (object);
+}
+
+static void
+cc_bar_chart_bar_finalize (GObject *object)
+{
+  CcBarChartBar *self = CC_BAR_CHART_BAR (object);
+
+  g_free (self->accessible_description);
+
+  G_OBJECT_CLASS (cc_bar_chart_bar_parent_class)->finalize (object);
 }
 
 static const unsigned int MINIMUM_BAR_WIDTH = 10;
