@@ -349,6 +349,9 @@ on_key_pressed_cb (CcTimelikeEntry *self,
                    guint            keycode,
                    GdkModifierType  state)
 {
+  if (keyval == GDK_KEY_Escape)
+    return GDK_EVENT_PROPAGATE;
+
   /* Allow entering numbers */
   if (!(state & GDK_SHIFT_MASK) &&
       ((keyval >= GDK_KEY_KP_0 && keyval <= GDK_KEY_KP_9) ||
