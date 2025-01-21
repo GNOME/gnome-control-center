@@ -247,28 +247,31 @@ set_localed_locale (CcRegionPage *self)
 {
         g_autoptr(GVariantBuilder) b = NULL;
         g_autofree gchar *lang_value = NULL;
+        g_autofree gchar *time_value = NULL;
+        g_autofree gchar *numeric_value = NULL;
+        g_autofree gchar *monetary_value = NULL;
+        g_autofree gchar *measurement_value = NULL;
+        g_autofree gchar *paper_value = NULL;
+        const gchar *region = self->system_region;
+
+        if (region == NULL)
+                region = self->system_language;
 
         b = g_variant_builder_new (G_VARIANT_TYPE ("as"));
         lang_value = g_strconcat ("LANG=", self->system_language, NULL);
         g_variant_builder_add (b, "s", lang_value);
 
-        if (self->system_region != NULL) {
-                g_autofree gchar *time_value = NULL;
-                g_autofree gchar *numeric_value = NULL;
-                g_autofree gchar *monetary_value = NULL;
-                g_autofree gchar *measurement_value = NULL;
-                g_autofree gchar *paper_value = NULL;
-                time_value = g_strconcat ("LC_TIME=", self->system_region, NULL);
-                g_variant_builder_add (b, "s", time_value);
-                numeric_value = g_strconcat ("LC_NUMERIC=", self->system_region, NULL);
-                g_variant_builder_add (b, "s", numeric_value);
-                monetary_value = g_strconcat ("LC_MONETARY=", self->system_region, NULL);
-                g_variant_builder_add (b, "s", monetary_value);
-                measurement_value = g_strconcat ("LC_MEASUREMENT=", self->system_region, NULL);
-                g_variant_builder_add (b, "s", measurement_value);
-                paper_value = g_strconcat ("LC_PAPER=", self->system_region, NULL);
-                g_variant_builder_add (b, "s", paper_value);
-        }
+        time_value = g_strconcat ("LC_TIME=", region, NULL);
+        g_variant_builder_add (b, "s", time_value);
+        numeric_value = g_strconcat ("LC_NUMERIC=", region, NULL);
+        g_variant_builder_add (b, "s", numeric_value);
+        monetary_value = g_strconcat ("LC_MONETARY=", region, NULL);
+        g_variant_builder_add (b, "s", monetary_value);
+        measurement_value = g_strconcat ("LC_MEASUREMENT=", region, NULL);
+        g_variant_builder_add (b, "s", measurement_value);
+        paper_value = g_strconcat ("LC_PAPER=", region, NULL);
+        g_variant_builder_add (b, "s", paper_value);
+
         g_dbus_proxy_call (self->localed,
                            "SetLocale",
                            g_variant_new ("(asb)", b, TRUE),
