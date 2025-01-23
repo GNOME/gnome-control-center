@@ -62,6 +62,10 @@ struct _CcWellbeingPanel {
 
   CcScreenTimeStatisticsRow *screen_time_statistics_row;
 
+  GtkMenuButton *screen_time_statistics_info_button;
+  GtkLabel *screen_time_statistics_disable_description;
+  AdwPreferencesRow *screen_time_statistics_disabled_row;
+
   AdwSwitchRow *screen_time_limit_row;
   AdwComboRow *daily_time_limit_row;
   AdwSwitchRow *grayscale_row;
@@ -73,7 +77,9 @@ struct _CcWellbeingPanel {
 
   gulong screen_time_limits_settings_writable_changed_daily_limit_seconds_id;
   gulong screen_time_limits_settings_writable_changed_grayscale_id;
-  gulong screen_time_limits_settings_changed_enabled_id;
+  gulong screen_time_limits_settings_changed_history_enabled_id;
+  gulong screen_time_limits_settings_writable_changed_daily_limit_enabled_id;
+  gulong screen_time_limits_settings_changed_daily_limit_enabled_id;
 
   gulong movement_break_schedule_notify_selected_item_id;
   gulong movement_break_settings_changed_duration_id;
@@ -95,6 +101,11 @@ struct _CcWellbeingPanelClass {
 
 CC_PANEL_REGISTER (CcWellbeingPanel, cc_wellbeing_panel);
 
+static void enable_screen_time_recording_button_clicked_cb (GtkButton *button,
+                                                            gpointer   user_data);
+static void disable_screen_time_recording_button_clicked_cb (GtkButton *button,
+                                                             gpointer   user_data);
+static void update_screen_time_limits_enabled (CcWellbeingPanel *self);
 static void update_daily_time_limit_and_grayscale_row_sensitivity (CcWellbeingPanel *self);
 
 static void movement_break_schedule_notify_selected_item_cb (GObject    *object,
@@ -239,10 +250,10 @@ cc_wellbeing_panel_init (CcWellbeingPanel *self)
   self->screen_time_limits_settings = g_settings_new ("org.gnome.desktop.screen-time-limits");
 
   g_settings_bind (self->screen_time_limits_settings,
-                   "enabled",
+                   "daily-limit-enabled",
                    self->screen_time_limit_row,
                    "active",
-                   G_SETTINGS_BIND_DEFAULT);
+                   G_SETTINGS_BIND_DEFAULT | G_SETTINGS_BIND_NO_SENSITIVITY);
   g_settings_bind_with_mapping (self->screen_time_limits_settings,
                                 "daily-limit-seconds",
                                 self->daily_time_limit_row,
@@ -258,16 +269,25 @@ cc_wellbeing_panel_init (CcWellbeingPanel *self)
                    "active",
                    G_SETTINGS_BIND_DEFAULT | G_SETTINGS_BIND_NO_SENSITIVITY);
 
-  /* Sensitivity has to be handled separately for grayscale_row and
-   * daily_time_limit_row because it’s the combination of two inputs. */
+  self->screen_time_limits_settings_changed_history_enabled_id =
+      g_signal_connect_swapped (self->screen_time_limits_settings, "changed::history-enabled",
+                                G_CALLBACK (update_screen_time_limits_enabled), self);
+
+  update_screen_time_limits_enabled (self);
+
+  /* Sensitivity has to be handled separately for the screen time settings
+   * because it’s the combination of multiple inputs. */
   self->screen_time_limits_settings_writable_changed_daily_limit_seconds_id =
       g_signal_connect_swapped (self->screen_time_limits_settings, "writable-changed::daily-limit-seconds",
                                 G_CALLBACK (update_daily_time_limit_and_grayscale_row_sensitivity), self);
   self->screen_time_limits_settings_writable_changed_grayscale_id =
       g_signal_connect_swapped (self->screen_time_limits_settings, "writable-changed::grayscale",
                                 G_CALLBACK (update_daily_time_limit_and_grayscale_row_sensitivity), self);
-  self->screen_time_limits_settings_changed_enabled_id =
-      g_signal_connect_swapped (self->screen_time_limits_settings, "changed::enabled",
+  self->screen_time_limits_settings_writable_changed_daily_limit_enabled_id =
+      g_signal_connect_swapped (self->screen_time_limits_settings, "writable-changed::daily-limit-enabled",
+                                G_CALLBACK (update_daily_time_limit_and_grayscale_row_sensitivity), self);
+  self->screen_time_limits_settings_changed_daily_limit_enabled_id =
+      g_signal_connect_swapped (self->screen_time_limits_settings, "changed::daily-limit-enabled",
                                 G_CALLBACK (update_daily_time_limit_and_grayscale_row_sensitivity), self);
 
   update_daily_time_limit_and_grayscale_row_sensitivity (self);
@@ -349,14 +369,63 @@ cc_wellbeing_panel_init (CcWellbeingPanel *self)
 }
 
 static void
+enable_screen_time_recording_button_clicked_cb (GtkButton *button,
+                                                gpointer   user_data)
+{
+  CcWellbeingPanel *self = CC_WELLBEING_PANEL (user_data);
+
+  g_settings_set_boolean (self->screen_time_limits_settings, "history-enabled", TRUE);
+}
+
+static void
+disable_screen_time_recording_button_clicked_cb (GtkButton *button,
+                                                 gpointer   user_data)
+{
+  CcWellbeingPanel *self = CC_WELLBEING_PANEL (user_data);
+
+  g_settings_set_boolean (self->screen_time_limits_settings, "history-enabled", FALSE);
+}
+
+static void
+update_screen_time_limits_enabled (CcWellbeingPanel *self)
+{
+  gboolean history_enabled = g_settings_get_boolean (self->screen_time_limits_settings, "history-enabled");
+
+  gtk_widget_set_visible (GTK_WIDGET (self->screen_time_statistics_row), history_enabled);
+  gtk_widget_set_visible (GTK_WIDGET (self->screen_time_statistics_disabled_row), !history_enabled);
+  gtk_widget_set_visible (GTK_WIDGET (self->screen_time_statistics_info_button), history_enabled);
+
+  if (!history_enabled)
+    g_settings_set_boolean (self->screen_time_limits_settings, "daily-limit-enabled", FALSE);
+
+  update_daily_time_limit_and_grayscale_row_sensitivity (self);
+}
+
+static void
 update_daily_time_limit_and_grayscale_row_sensitivity (CcWellbeingPanel *self)
 {
-  gboolean enabled = g_settings_get_boolean (self->screen_time_limits_settings, "enabled");
+  gboolean history_enabled = g_settings_get_boolean (self->screen_time_limits_settings, "history-enabled");
+  gboolean daily_limit_enabled_writable = g_settings_is_writable (self->screen_time_limits_settings, "daily-limit-enabled");
+  gboolean daily_limit_enabled = g_settings_get_boolean (self->screen_time_limits_settings, "daily-limit-enabled");
   gboolean daily_limit_seconds_writable = g_settings_is_writable (self->screen_time_limits_settings, "daily-limit-seconds");
   gboolean grayscale_writable = g_settings_is_writable (self->screen_time_limits_settings, "grayscale");
 
-  gtk_widget_set_sensitive (GTK_WIDGET (self->daily_time_limit_row), enabled && daily_limit_seconds_writable);
-  gtk_widget_set_sensitive (GTK_WIDGET (self->grayscale_row), enabled && grayscale_writable);
+  gtk_widget_set_sensitive (GTK_WIDGET (self->screen_time_limit_row),
+                            history_enabled && daily_limit_enabled_writable);
+  gtk_widget_set_sensitive (GTK_WIDGET (self->daily_time_limit_row),
+                            history_enabled && daily_limit_enabled && daily_limit_seconds_writable);
+  gtk_widget_set_sensitive (GTK_WIDGET (self->grayscale_row),
+                            history_enabled && daily_limit_enabled && grayscale_writable);
+}
+
+static void
+screen_time_statistics_disable_popover_show_cb (CcWellbeingPanel *self)
+{
+  const char *text = gtk_label_get_label (self->screen_time_statistics_disable_description);
+
+  gtk_accessible_announce (GTK_ACCESSIBLE (self),
+                           text,
+                           GTK_ACCESSIBLE_ANNOUNCEMENT_PRIORITY_MEDIUM);
 }
 
 static void
@@ -517,7 +586,8 @@ cc_wellbeing_panel_dispose (GObject *object)
 
   g_clear_signal_handler (&self->screen_time_limits_settings_writable_changed_daily_limit_seconds_id, self->screen_time_limits_settings);
   g_clear_signal_handler (&self->screen_time_limits_settings_writable_changed_grayscale_id, self->screen_time_limits_settings);
-  g_clear_signal_handler (&self->screen_time_limits_settings_changed_enabled_id, self->screen_time_limits_settings);
+  g_clear_signal_handler (&self->screen_time_limits_settings_writable_changed_daily_limit_enabled_id, self->screen_time_limits_settings);
+  g_clear_signal_handler (&self->screen_time_limits_settings_changed_daily_limit_enabled_id, self->screen_time_limits_settings);
   g_clear_signal_handler (&self->movement_break_schedule_notify_selected_item_id, self->movement_break_schedule_row);
   g_clear_signal_handler (&self->movement_break_settings_changed_duration_id, self->movement_break_settings);
   g_clear_signal_handler (&self->movement_break_settings_changed_interval_id, self->movement_break_settings);
@@ -561,7 +631,10 @@ cc_wellbeing_panel_class_init (CcWellbeingPanelClass *klass)
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/wellbeing/cc-wellbeing-panel.ui");
 
+  gtk_widget_class_bind_template_child (widget_class, CcWellbeingPanel, screen_time_statistics_info_button);
+  gtk_widget_class_bind_template_child (widget_class, CcWellbeingPanel, screen_time_statistics_disable_description);
   gtk_widget_class_bind_template_child (widget_class, CcWellbeingPanel, screen_time_statistics_row);
+  gtk_widget_class_bind_template_child (widget_class, CcWellbeingPanel, screen_time_statistics_disabled_row);
   gtk_widget_class_bind_template_child (widget_class, CcWellbeingPanel, screen_time_limit_row);
   gtk_widget_class_bind_template_child (widget_class, CcWellbeingPanel, daily_time_limit_row);
   gtk_widget_class_bind_template_child (widget_class, CcWellbeingPanel, grayscale_row);
@@ -569,6 +642,10 @@ cc_wellbeing_panel_class_init (CcWellbeingPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcWellbeingPanel, movement_breaks_row);
   gtk_widget_class_bind_template_child (widget_class, CcWellbeingPanel, movement_break_schedule_row);
   gtk_widget_class_bind_template_child (widget_class, CcWellbeingPanel, sounds_row);
+
+  gtk_widget_class_bind_template_callback (widget_class, enable_screen_time_recording_button_clicked_cb);
+  gtk_widget_class_bind_template_callback (widget_class, disable_screen_time_recording_button_clicked_cb);
+  gtk_widget_class_bind_template_callback (widget_class, screen_time_statistics_disable_popover_show_cb);
 
   g_type_ensure (CC_TYPE_DURATION_ROW);
   g_type_ensure (CC_TYPE_SCREEN_TIME_STATISTICS_ROW);

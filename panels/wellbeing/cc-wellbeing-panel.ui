@@ -16,9 +16,82 @@
             <child>
               <object class="AdwPreferencesGroup">
                 <property name="title" translatable="yes">Screen Time</property>
+                <child type="header-suffix">
+                  <object class="GtkMenuButton" id="screen_time_statistics_info_button">
+                    <property name="tooltip-text" translatable="yes">More Information</property>
+                    <property name="icon-name">view-more-symbolic</property>
+                    <style>
+                      <class name="flat"/>
+                    </style>
+                    <property name="popover">
+                      <object class="GtkPopover" id="screen_time_statistics_disable_popover">
+                        <property name="position">bottom</property>
+                        <signal name="show" handler="screen_time_statistics_disable_popover_show_cb" object="CcWellbeingPanel" swapped="yes"/>
+                        <child>
+                          <object class="GtkBox">
+                            <property name="margin-top">12</property>
+                            <property name="margin-bottom">12</property>
+                            <property name="margin-start">12</property>
+                            <property name="margin-end">12</property>
+                            <property name="orientation">vertical</property>
+                            <property name="spacing">12</property>
+                            <child>
+                              <object class="GtkLabel" id="screen_time_statistics_disable_description">
+                                <property name="label" translatable="yes">Disabling screen time recording stops screen time data from being saved. This data is never shared outside this device.</property>
+                                <property name="justify">center</property>
+                                <property name="max-width-chars">35</property>
+                                <property name="wrap">True</property>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkButton">
+                                <property name="halign">center</property>
+                                <property name="label" translatable="yes">_Disable Screen Time</property>
+                                <property name="use-underline">True</property>
+                                <signal name="clicked" handler="disable_screen_time_recording_button_clicked_cb" />
+                                <style>
+                                  <class name="destructive-action"/>
+                                </style>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                      </object>
+                    </property>
+                  </object>
+                </child>
+
                 <child>
                   <object class="CcScreenTimeStatisticsRow" id="screen_time_statistics_row">
                     <property name="daily-limit" bind-source="daily_time_limit_row" bind-property="duration" bind-flags="sync-create" />
+                  </object>
+                </child>
+                <child>
+                  <object class="AdwPreferencesRow" id="screen_time_statistics_disabled_row">
+                    <child>
+                      <object class="AdwStatusPage">
+                        <!-- Ensure the box is tall enough to show the AdwStatusPage without making it scrollable -->
+                        <property name="height-request">300</property>
+                        <property name="vexpand">True</property>
+                        <property name="title" translatable="yes">Screen Time Recording Disabled</property>
+                        <property name="icon-name">org.gnome.Settings-screen-time-symbolic</property>
+                        <property name="description" translatable="yes">Enable recording to view screen usage history</property>
+                        <property name="child">
+                          <object class="GtkButton">
+                            <property name="halign">center</property>
+                            <property name="label" translatable="yes">E_nable</property>
+                            <property name="use-underline">True</property>
+                            <signal name="clicked" handler="enable_screen_time_recording_button_clicked_cb" />
+                            <style>
+                              <class name="pill" />
+                            </style>
+                          </object>
+                        </property>
+                        <style>
+                          <class name="compact" />
+                        </style>
+                      </object>
+                    </child>
                   </object>
                 </child>
               </object>
