@@ -42,9 +42,9 @@ struct _CcFormatChooser {
   GtkWidget *split_view;
   GtkWidget *region_filter_entry;
   GtkWidget *region_list_stack;
-  GtkWidget *common_region_title;
+  GtkWidget *common_region_group;
   GtkWidget *common_region_listbox;
-  GtkWidget *region_title;
+  GtkWidget *region_group;
   GtkWidget *region_listbox;
   GtkWidget *close_sidebar_button;
   GtkLabel *preview_title_label;
@@ -53,6 +53,7 @@ struct _CcFormatChooser {
   gboolean showing_extra;
   gboolean no_results;
   gchar *region;
+  gchar *region_group_title;
   gchar *preview_region;
   gchar **filter_words;
 };
@@ -352,18 +353,20 @@ static void
 filter_changed (CcFormatChooser *chooser)
 {
         g_autofree gchar *filter_contents = NULL;
-        gboolean visible;
+        gboolean search_is_empty;
 
         g_clear_pointer (&chooser->filter_words, g_strfreev);
 
         filter_contents =
                 cc_util_normalize_casefold_and_unaccent (gtk_editable_get_text (GTK_EDITABLE (chooser->region_filter_entry)));
 
-        /* The popular listbox is shown only if search is empty */
-        visible = filter_contents == NULL || *filter_contents == '\0';
-        gtk_widget_set_visible (chooser->common_region_listbox, visible);
-        gtk_widget_set_visible (chooser->common_region_title, visible);
-        gtk_widget_set_visible (chooser->region_title, visible);
+        /* The popular listbox and the region group title are shown only if search is empty */
+        search_is_empty = filter_contents == NULL || *filter_contents == '\0';
+        gtk_widget_set_visible (chooser->common_region_group, search_is_empty);
+        if (search_is_empty)
+                adw_preferences_group_set_title (ADW_PREFERENCES_GROUP (chooser->region_group), chooser->region_group_title);
+        else
+                adw_preferences_group_set_title (ADW_PREFERENCES_GROUP (chooser->region_group), "");
 
         /* Reset cached search state */
         chooser->no_results = TRUE;
@@ -413,6 +416,7 @@ cc_format_chooser_dispose (GObject *object)
 
         g_clear_pointer (&chooser->filter_words, g_strfreev);
         g_clear_pointer (&chooser->region, g_free);
+        g_clear_pointer (&chooser->region_group_title, g_free);
 
         G_OBJECT_CLASS (cc_format_chooser_parent_class)->dispose (object);
 }
@@ -440,9 +444,9 @@ cc_format_chooser_class_init (CcFormatChooserClass *klass)
 
         gtk_widget_class_bind_template_child (widget_class, CcFormatChooser, split_view);
         gtk_widget_class_bind_template_child (widget_class, CcFormatChooser, region_filter_entry);
-        gtk_widget_class_bind_template_child (widget_class, CcFormatChooser, common_region_title);
+        gtk_widget_class_bind_template_child (widget_class, CcFormatChooser, common_region_group);
         gtk_widget_class_bind_template_child (widget_class, CcFormatChooser, common_region_listbox);
-        gtk_widget_class_bind_template_child (widget_class, CcFormatChooser, region_title);
+        gtk_widget_class_bind_template_child (widget_class, CcFormatChooser, region_group);
         gtk_widget_class_bind_template_child (widget_class, CcFormatChooser, region_listbox);
         gtk_widget_class_bind_template_child (widget_class, CcFormatChooser, region_list_stack);
         gtk_widget_class_bind_template_child (widget_class, CcFormatChooser, format_preview);
@@ -470,6 +474,10 @@ cc_format_chooser_init (CcFormatChooser *chooser)
 
         add_all_regions (chooser);
         gtk_list_box_invalidate_filter (GTK_LIST_BOX (chooser->region_listbox));
+
+        /* Store group title so we can hide it during search */
+        g_set_str (&chooser->region_group_title,
+                   adw_preferences_group_get_title (ADW_PREFERENCES_GROUP (chooser->region_group)));
 }
 
 CcFormatChooser *

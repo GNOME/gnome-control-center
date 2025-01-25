@@ -84,76 +84,35 @@
                       <object class="GtkStackPage">
                         <property name="name">region_list_page</property>
                         <property name="child">
-                          <object class="GtkScrolledWindow">
-                            <property name="child">
-                              <object class="AdwClamp">
-                                <property name="child">
-                                  <object class="AdwPreferencesGroup">
-                                    <property name="margin-top">6</property>
-                                    <property name="margin-bottom">12</property>
-                                    <property name="margin-start">12</property>
-                                    <property name="margin-end">12</property>
-                                    <!-- Common formats title -->
-                                    <child>
-                                      <object class="GtkLabel" id="common_region_title">
-                                        <property name="label" translatable="yes">Common Formats</property>
-                                        <property name="halign">start</property>
-                                        <property name="margin-bottom">6</property>
-                                        <attributes>
-                                          <attribute name="weight" value="bold"/>
-                                        </attributes>
-                                        <style>
-                                          <class name="dim-label" />
-                                        </style>
-                                      </object>
-                                    </child>
-
-                                    <!-- Common formats list -->
-                                    <child>
-                                      <object class="GtkListBox" id="common_region_listbox">
-                                        <property name="margin-bottom">24</property>
-                                        <property name="selection-mode">none</property>
-                                        <signal name="row-activated" handler="row_activated" object="CcFormatChooser" swapped="yes" />
-                                        <style>
-                                          <class name="boxed-list" />
-                                        </style>
-                                      </object>
-                                    </child>
-
-                                    <!-- Complete formats title -->
-                                    <child>
-                                      <object class="GtkLabel" id="region_title">
-                                        <property name="label" translatable="yes">All Formats</property>
-                                        <property name="halign">start</property>
-                                        <property name="margin-bottom">6</property>
-                                        <attributes>
-                                          <attribute name="weight" value="bold"/>
-                                        </attributes>
-                                        <style>
-                                         <class name="dim-label" />
-                                        </style>
-                                      </object>
-                                    </child>
-
-                                    <!-- Complete formats list -->
-                                    <child>
-                                      <object class="GtkListBox" id="region_listbox">
-                                        <property name="vexpand">True</property>
-                                        <property name="halign">fill</property>
-                                        <property name="valign">start</property>
-                                        <property name="selection-mode">none</property>
-                                        <signal name="row-activated" handler="row_activated" object="CcFormatChooser" swapped="yes" />
-                                        <style>
-                                         <class name="boxed-list" />
-                                        </style>
-                                      </object>
-                                    </child>
-
+                          <object class="AdwPreferencesPage">
+                            <child>
+                              <object class="AdwPreferencesGroup" id="common_region_group">
+                                <property name="title" translatable="yes">Common Formats</property>
+                                <child>
+                                  <object class="GtkListBox" id="common_region_listbox">
+                                    <property name="selection-mode">none</property>
+                                    <signal name="row-activated" handler="row_activated" object="CcFormatChooser" swapped="yes" />
+                                    <style>
+                                      <class name="boxed-list" />
+                                    </style>
                                   </object>
-                                </property>
+                                </child>
                               </object>
-
-                            </property>
+                            </child>
+                            <child>
+                              <object class="AdwPreferencesGroup" id="region_group">
+                                <property name="title" translatable="yes">All Formats</property>
+                                <child>
+                                  <object class="GtkListBox" id="region_listbox">
+                                    <property name="selection-mode">none</property>
+                                    <signal name="row-activated" handler="row_activated" object="CcFormatChooser" swapped="yes" />
+                                    <style>
+                                     <class name="boxed-list" />
+                                    </style>
+                                  </object>
+                                </child>
+                              </object>
+                            </child>
                           </object>
                         </property>
                       </object>
