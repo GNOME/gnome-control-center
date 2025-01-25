@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center HEAD\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2025-01-24 10:56+0000\n"
-"PO-Revision-Date: 2025-01-25 20:29+0100\n"
+"POT-Creation-Date: 2025-01-25 19:31+0000\n"
+"PO-Revision-Date: 2025-01-25 22:21+0100\n"
 "Last-Translator: Quentin PAGÈS\n"
 "Language-Team: Tot en òc\n"
 "Language: oc\n"
@@ -177,16 +177,12 @@ msgstr "Permetre de listar las aplicacions"
 
 #. Translators: Parental Controls here refers to the features provided by 'malcontent'
 #: panels/applications/cc-applications-panel.ui:122
-#, fuzzy
-#| msgid ""
-#| "An error has occurred and apps cannot be listed.\n"
-#| "Error details: Malcontent is not installed."
 msgid ""
 "An error has occurred and apps cannot be listed.\n"
 "Error details: Parental Controls are not installed."
 msgstr ""
-"Se’s producha una error e se pòt pas utilizar lo ret.\n"
-"Detalhs de l’error : Malcontent es pas installat."
+"Se’s producha una error e se pòt listar las aplicacions.\n"
+"Detalhs de l’error : lo Contraròtle parental es pas installat."
 
 #: panels/applications/cc-applications-panel.ui:139
 #: panels/applications/cc-default-apps-page.ui:4
@@ -8029,6 +8025,9 @@ msgid ""
 "Deleting all enrolled fingerprints will disable Fingerprint Login. To re-"
 "enable Fingerprint Login at least one fingerprint will have to be enrolled."
 msgstr ""
+"La supression de totas las emprentas inscrichas desactivarà la connexion via "
+"reconeissença d'emprentas. Per la reactivar se deurà inscriure almens una "
+"emprenta digitala."
 
 #: panels/system/users/cc-fingerprint-dialog.c:1401
 msgid "_Delete All"
@@ -8209,7 +8208,7 @@ msgstr "_Administrator"
 
 #: panels/system/users/cc-user-page.ui:167
 msgid "_Parental Controls"
-msgstr "Contròle _parental"
+msgstr "Contraròtle _parental"
 
 #: panels/system/users/cc-user-page.ui:168
 msgid "Open the Parental Controls app"
@@ -9369,20 +9368,18 @@ msgstr "%uh %um"
 
 #: panels/wellbeing/cc-screen-time-statistics-row.c:627
 #: panels/wellbeing/cc-screen-time-statistics-row.c:747
-#, fuzzy, c-format
-#| msgid "Failed to upload file: %s"
+#, c-format
 msgid "Failed to load session history file ‘%s’: %s"
-msgstr "Fracàs de cargament del fichièr : %s"
+msgstr "Fracàs de cargament del fichièr d’istoric « %s » : %s"
 
 #: panels/wellbeing/cc-screen-time-statistics-row.c:628
 msgid "Invalid file structure"
 msgstr "Estructura de fichièr invalida"
 
 #: panels/wellbeing/cc-screen-time-statistics-row.c:665
-#, fuzzy, c-format
-#| msgid "Failed to upload file: %s"
+#, c-format
 msgid "Failed to load session history file: %s"
-msgstr "Fracàs de cargament del fichièr : %s"
+msgstr "Fracàs de cargament del fichièr d’istoric : %s"
 
 #: panels/wellbeing/cc-screen-time-statistics-row.c:666
 #: panels/wellbeing/cc-screen-time-statistics-row.c:748
@@ -9433,12 +9430,17 @@ msgid ""
 "Bar chart of screen time usage over the week starting %s. A line is "
 "overlayed at the %s mark to indicate the configured screen time limit."
 msgstr ""
+"Grafic en barras de l’utilizacion del temps d’ecran pendent la setmana "
+"dempuèi %s. Una linha es superpausada a la marca %s per indicar lo limit de "
+"temps d’ecran configurat."
 
 #. Translators: The placeholder is a formatted date string.
 #: panels/wellbeing/cc-screen-time-statistics-row.c:1067
 #, c-format
 msgid "Bar chart of screen time usage over the week starting %s."
 msgstr ""
+"Grafic en barras de l’utilizacion del temps d’ecran pendent la setmana "
+"dempuèi %s."
 
 #: panels/wellbeing/cc-screen-time-statistics-row.c:1073
 #, c-format
@@ -9446,6 +9448,8 @@ msgid ""
 "Placeholder for a bar chart of screen time usage. No data is currently "
 "available."
 msgstr ""
+"Marcador de contengut pel grafic en barras de l’utilizacion del temps "
+"d’ecran. Cap de donada es pas disponibla."
 
 #: panels/wellbeing/cc-screen-time-statistics-row.ui:27
 msgid "Screen Time Unavailable"
@@ -9456,7 +9460,7 @@ msgid ""
 "Screen time information will appear here after a period of usage with Screen "
 "Limits enabled"
 msgstr ""
-"Las indormacions de temps d’ecran apareissaràn aquí aprèp un periòde "
+"Las informacions de temps d’ecran apareissaràn aquí aprèp un periòde "
 "d’utilizacion amb los limits d’ecran activats"
 
 #: panels/wellbeing/cc-screen-time-statistics-row.ui:147
@@ -9469,7 +9473,7 @@ msgstr "Setmana precedenta"
 
 #: panels/wellbeing/cc-screen-time-statistics-row.ui:200
 msgid "Next Week"
-msgstr "La setmana seguenta"
+msgstr "Setmana seguenta"
 
 #: panels/wellbeing/cc-wellbeing-panel.ui:18
 msgid "Screen Time"
@@ -9512,16 +9516,12 @@ msgid "_Movement Reminders"
 msgstr "_Rapèls pels movements"
 
 #: panels/wellbeing/cc-wellbeing-panel.ui:66
-#, fuzzy
-#| msgid "Remove Background"
 msgid "Reminders to move around"
-msgstr "Levar lo rèireplan"
+msgstr "Rapèls de bolegar"
 
 #: panels/wellbeing/cc-wellbeing-panel.ui:72
-#, fuzzy
-#| msgid "Manual Schedule"
 msgid "Movement Break S_chedule"
-msgstr "Orari manual"
+msgstr "Planifi_cacion de las pausas per bolegar"
 
 #: panels/wellbeing/cc-wellbeing-panel.ui:78
 msgid "S_ounds"
