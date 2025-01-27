@@ -108,20 +108,20 @@ set_locale_id (CcFormatChooser *self,
 }
 
 static gint
-sort_regions (gconstpointer a,
-              gconstpointer b,
-              gpointer      data)
+sort_regions (GtkListBoxRow* row1,
+              GtkListBoxRow* row2,
+              gpointer       user_data)
 {
         const gchar *la;
         const gchar *lb;
 
-        if (g_object_get_data (G_OBJECT (a), "locale-id") == NULL)
+        if (g_object_get_data (G_OBJECT (row1), "locale-id") == NULL)
                 return 1;
-        if (g_object_get_data (G_OBJECT (b), "locale-id") == NULL)
+        if (g_object_get_data (G_OBJECT (row2), "locale-id") == NULL)
                 return -1;
 
-        la = g_object_get_data (G_OBJECT (a), "locale-name");
-        lb = g_object_get_data (G_OBJECT (b), "locale-name");
+        la = g_object_get_data (G_OBJECT (row1), "locale-name");
+        lb = g_object_get_data (G_OBJECT (row2), "locale-name");
 
         return g_strcmp0 (la, lb);
 }
@@ -463,12 +463,9 @@ cc_format_chooser_init (CcFormatChooser *self)
 {
         gtk_widget_init_template (GTK_WIDGET (self));
 
-        gtk_list_box_set_sort_func (self->common_region_listbox,
-                                    (GtkListBoxSortFunc)sort_regions, self, NULL);
-        gtk_list_box_set_sort_func (self->region_listbox,
-                                    (GtkListBoxSortFunc)sort_regions, self, NULL);
-        gtk_list_box_set_filter_func (self->region_listbox,
-                                      region_visible, self, NULL);
+        gtk_list_box_set_sort_func (self->common_region_listbox, sort_regions, self, NULL);
+        gtk_list_box_set_sort_func (self->region_listbox, sort_regions, self, NULL);
+        gtk_list_box_set_filter_func (self->region_listbox, region_visible, self, NULL);
 
         add_all_regions (self);
         gtk_list_box_invalidate_filter (self->region_listbox);
