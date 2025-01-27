@@ -265,10 +265,10 @@ cc_format_preview_init (CcFormatPreview *self)
 }
 
 void
-cc_format_preview_set_region (CcFormatPreview *preview,
+cc_format_preview_set_region (CcFormatPreview *self,
                               const gchar     *region)
 {
-  g_free (preview->region);
-  preview->region = g_strdup (region);
-  update_format_examples (preview);
+  g_free (self->region);
+  self->region = g_strdup (region);
+  update_format_examples (self);
 }
