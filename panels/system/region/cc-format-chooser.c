@@ -39,13 +39,13 @@
 struct _CcFormatChooser {
   AdwDialog parent_instance;
 
-  GtkWidget *split_view;
-  GtkWidget *region_filter_entry;
-  GtkWidget *region_list_stack;
-  GtkWidget *common_region_group;
-  GtkWidget *common_region_listbox;
-  GtkWidget *region_group;
-  GtkWidget *region_listbox;
+  AdwOverlaySplitView *split_view;
+  GtkSearchEntry *region_filter_entry;
+  GtkStack *region_list_stack;
+  AdwPreferencesGroup *common_region_group;
+  GtkListBox *common_region_listbox;
+  AdwPreferencesGroup *region_group;
+  GtkListBox *region_listbox;
   GtkWidget *close_sidebar_button;
   GtkLabel *preview_title_label;
   CcFormatPreview *format_preview;
@@ -69,12 +69,12 @@ enum
 static guint signals[LAST_SIGNAL];
 
 static void
-update_check_button_for_list (GtkWidget   *list_box,
+update_check_button_for_list (GtkListBox  *list_box,
                               const gchar *locale_id)
 {
   GtkWidget *child;
 
-  for (child = gtk_widget_get_first_child (list_box);
+  for (child = gtk_widget_get_first_child (GTK_WIDGET (list_box));
        child;
        child = gtk_widget_get_next_sibling (child))
     {
@@ -162,7 +162,7 @@ collapsed_cb (CcFormatChooser *self)
     if (!self->region)
         return;
 
-    if (!adw_overlay_split_view_get_collapsed (ADW_OVERLAY_SPLIT_VIEW (self->split_view))) {
+    if (!adw_overlay_split_view_get_collapsed (self->split_view)) {
         g_autofree gchar *locale_name = NULL;
 
         cc_format_preview_set_region (self->format_preview, self->region);
@@ -174,7 +174,7 @@ collapsed_cb (CcFormatChooser *self)
 static void
 format_chooser_close_sidebar_button_pressed_cb (CcFormatChooser *self)
 {
-  adw_overlay_split_view_set_show_sidebar (ADW_OVERLAY_SPLIT_VIEW (self->split_view), FALSE);
+  adw_overlay_split_view_set_show_sidebar (self->split_view, FALSE);
 }
 
 static void
@@ -196,7 +196,7 @@ preview_button_clicked_cb (CcFormatChooser *self,
   locale_name = g_object_get_data (G_OBJECT (row), "locale-name");
   gtk_label_set_label (self->preview_title_label, locale_name);
 
-  adw_overlay_split_view_set_show_sidebar (ADW_OVERLAY_SPLIT_VIEW (self->split_view), TRUE);
+  adw_overlay_split_view_set_show_sidebar (self->split_view, TRUE);
 }
 
 static GtkWidget *
@@ -268,7 +268,7 @@ add_regions (CcFormatChooser *self,
                 if (!widget)
                         continue;
 
-                gtk_list_box_append (GTK_LIST_BOX (self->common_region_listbox), widget);
+                gtk_list_box_append (self->common_region_listbox, widget);
           }
 
         /* Populate All locales */
@@ -285,7 +285,7 @@ add_regions (CcFormatChooser *self,
                 if (!widget)
                   continue;
 
-                gtk_list_box_append (GTK_LIST_BOX (self->region_listbox), widget);
+                gtk_list_box_append (self->region_listbox, widget);
         }
 
         self->adding = FALSE;
@@ -362,29 +362,27 @@ filter_changed (CcFormatChooser *self)
 
         /* The popular listbox and the region group title are shown only if search is empty */
         search_is_empty = filter_contents == NULL || *filter_contents == '\0';
-        gtk_widget_set_visible (self->common_region_group, search_is_empty);
+        gtk_widget_set_visible (GTK_WIDGET (self->common_region_group), search_is_empty);
         if (search_is_empty)
-                adw_preferences_group_set_title (ADW_PREFERENCES_GROUP (self->region_group), self->region_group_title);
+                adw_preferences_group_set_title (self->region_group, self->region_group_title);
         else
-                adw_preferences_group_set_title (ADW_PREFERENCES_GROUP (self->region_group), "");
+                adw_preferences_group_set_title (self->region_group, "");
 
         /* Reset cached search state */
         self->no_results = TRUE;
 
         if (!filter_contents) {
-                gtk_list_box_invalidate_filter (GTK_LIST_BOX (self->region_listbox));
-                gtk_list_box_set_placeholder (GTK_LIST_BOX (self->region_listbox), NULL);
+                gtk_list_box_invalidate_filter (self->region_listbox);
+                gtk_list_box_set_placeholder (self->region_listbox, NULL);
                 return;
         }
         self->filter_words = g_strsplit_set (g_strstrip (filter_contents), " ", 0);
-        gtk_list_box_invalidate_filter (GTK_LIST_BOX (self->region_listbox));
+        gtk_list_box_invalidate_filter (self->region_listbox);
 
         if (self->no_results)
-          gtk_stack_set_visible_child_name (GTK_STACK (self->region_list_stack),
-                                            "empty_results_page");
+          gtk_stack_set_visible_child_name (self->region_list_stack, "empty_results_page");
         else
-          gtk_stack_set_visible_child_name (GTK_STACK (self->region_list_stack),
-                                            "region_list_page");
+          gtk_stack_set_visible_child_name (self->region_list_stack, "region_list_page");
 }
 
 static void
@@ -465,19 +463,18 @@ cc_format_chooser_init (CcFormatChooser *self)
 {
         gtk_widget_init_template (GTK_WIDGET (self));
 
-        gtk_list_box_set_sort_func (GTK_LIST_BOX (self->common_region_listbox),
+        gtk_list_box_set_sort_func (self->common_region_listbox,
                                     (GtkListBoxSortFunc)sort_regions, self, NULL);
-        gtk_list_box_set_sort_func (GTK_LIST_BOX (self->region_listbox),
+        gtk_list_box_set_sort_func (self->region_listbox,
                                     (GtkListBoxSortFunc)sort_regions, self, NULL);
-        gtk_list_box_set_filter_func (GTK_LIST_BOX (self->region_listbox),
+        gtk_list_box_set_filter_func (self->region_listbox,
                                       region_visible, self, NULL);
 
         add_all_regions (self);
-        gtk_list_box_invalidate_filter (GTK_LIST_BOX (self->region_listbox));
+        gtk_list_box_invalidate_filter (self->region_listbox);
 
         /* Store group title so we can hide it during search */
-        g_set_str (&self->region_group_title,
-                   adw_preferences_group_get_title (ADW_PREFERENCES_GROUP (self->region_group)));
+        g_set_str (&self->region_group_title, adw_preferences_group_get_title (self->region_group));
 }
 
 CcFormatChooser *
