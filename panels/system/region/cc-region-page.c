@@ -289,6 +289,17 @@ set_system_language (CcRegionPage *self,
         set_localed_locale (self);
 }
 
+static void
+set_accountservice_languages (CcRegionPage *self)
+{
+        const gchar *languages[] = { self->language, NULL, NULL };
+
+        if (g_strcmp0 (self->language, self->region) != 0 && self->region[0] != '\0')
+                languages[1] = self->region;
+
+        act_user_set_languages (self->user, languages);
+}
+
 static void update_user_language_row (CcRegionPage *self);
 
 static void
@@ -300,12 +311,13 @@ update_language (CcRegionPage   *self,
         case USER:
                 if (g_strcmp0 (language, self->language) == 0)
                         return;
-                act_user_set_language (self->user, language);
+                g_set_str (&self->language, language);
+                set_accountservice_languages (self);
+
                 if (self->login_auto_apply)
                         set_system_language (self, language);
                 maybe_notify (self, LC_MESSAGES, language);
 
-                g_set_str (&self->language, language);
                 update_user_language_row (self);
 
                 break;
@@ -342,6 +354,9 @@ update_region (CcRegionPage   *self,
                         g_settings_reset (self->locale_settings, KEY_REGION);
                 else
                         g_settings_set_string (self->locale_settings, KEY_REGION, region);
+
+                set_accountservice_languages (self);
+
                 if (self->login_auto_apply)
                         set_system_region (self, region);
 

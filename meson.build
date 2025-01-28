@@ -178,7 +178,7 @@ if tecla_is_subproject
   )
 endif
 
-accounts_dep = dependency('accountsservice', version: '>= 0.6.39')
+accounts_dep = dependency('accountsservice', version: '>= 23.11.69')
 colord_dep = dependency('colord', version: '>= 0.1.34')
 gdk_pixbuf_dep = dependency('gdk-pixbuf-2.0', version: '>= 2.23.0')
 gio_dep = dependency('gio-2.0')
