@@ -105,7 +105,7 @@ cc_remote_login_page_init (CcRemoteLoginPage *self)
                            self,
                            G_CONNECT_SWAPPED);
 
-  hostname = cc_hostname_get_display_hostname (cc_hostname_get_default ());
+  hostname = cc_hostname_get_static_hostname (cc_hostname_get_default ());
   command = g_strdup_printf ("ssh %s", hostname);
   adw_action_row_set_subtitle (self->hostname_row, command);
 }
