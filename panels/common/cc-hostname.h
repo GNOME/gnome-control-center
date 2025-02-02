@@ -37,6 +37,8 @@ CcHostname  *cc_hostname_get_default          (void);
 
 gchar       *cc_hostname_get_display_hostname (CcHostname *self);
 
+gchar       *cc_hostname_get_static_hostname  (CcHostname *self);
+
 void         cc_hostname_set_hostname         (CcHostname *self, const gchar *hostname);
 
 gchar       *cc_hostname_get_property         (CcHostname *self, const gchar *property);

@@ -155,6 +155,21 @@ cc_hostname_get_display_hostname (CcHostname *self)
   return g_steal_pointer (&str);
 }
 
+gchar *
+cc_hostname_get_static_hostname (CcHostname *self)
+{
+  g_autofree gchar *str = NULL;
+
+  g_return_val_if_fail (CC_IS_HOSTNAME (self), NULL);
+
+  str = cc_hostname_get_property (self, "StaticHostname");
+  /* Empty strings means that we need to fallback */
+  if (str != NULL && *str == '\0')
+     return cc_hostname_get_property (self, "Hostname");
+
+  return g_steal_pointer (&str);
+}
+
 void
 cc_hostname_set_hostname (CcHostname  *self,
                           const gchar *hostname)

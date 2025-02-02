@@ -10,6 +10,10 @@ The main `CcHostname` methods are:
 
 Obtains the system "Pretty Hostname". See https://www.freedesktop.org/software/systemd/man/latest/hostnamectl.html#hostname%20%5BNAME%5D
 
+# `CcHostname.get_display_hostname`
+
+Obtains the system "Static Hostname".
+
 # `CcHostname.set_hostname`
 
 Allows for setting the system "pretty" and "static" hostnames (SetPrettyHostname and SetStaticHostname).
