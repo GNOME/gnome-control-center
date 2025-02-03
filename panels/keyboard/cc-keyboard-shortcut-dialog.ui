@@ -1,15 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
-  <template class="CcKeyboardShortcutDialog" parent="AdwWindow">
-    <property name="modal">True</property>
-    <property name="width-request">360</property>
-    <property name="height-request">294</property>
-    <property name="default-width">600</property>
-    <property name="default-height">540</property>
+  <template class="CcKeyboardShortcutDialog" parent="AdwDialog">
+    <property name="content-width">600</property>
+    <property name="content-height">540</property>
     <property name="title" translatable="yes">Keyboard Shortcuts</property>
     <signal name="map" handler="gtk_widget_grab_focus" object="search_entry" swapped="yes"/>
 
-    <child>
+    <property name="child">
       <object class="AdwNavigationView" id="navigation_view">
         <signal name="notify::visible-page" handler="shortcut_dialog_visible_page_changed_cb" swapped="yes"/>
 
@@ -149,7 +146,7 @@
         </child>
 
       </object>  <!-- ./AdwNavigationView navigation_view-->
-    </child>
+    </property>
 
   </template>
   <object class="AdwAlertDialog" id="reset_all_dialog">

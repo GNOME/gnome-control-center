@@ -121,14 +121,10 @@ compose_row_activated (CcKeyboardPanel *self)
 static void
 keyboard_shortcuts_activated (CcKeyboardPanel *self)
 {
-  GtkWindow *window;
-  GtkWidget *shortcut_dialog;
+  AdwDialog *dialog;
 
-  window = GTK_WINDOW (cc_shell_get_toplevel (cc_panel_get_shell (CC_PANEL (self))));
-
-  shortcut_dialog = cc_keyboard_shortcut_dialog_new ();
-  gtk_window_set_transient_for (GTK_WINDOW (shortcut_dialog), window);
-  gtk_window_present (GTK_WINDOW (shortcut_dialog));
+  dialog = ADW_DIALOG (cc_keyboard_shortcut_dialog_new ());
+  adw_dialog_present (dialog, GTK_WIDGET (self));
 }
 
 static void

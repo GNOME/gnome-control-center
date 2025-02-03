@@ -42,7 +42,7 @@
 
 struct _CcKeyboardShortcutDialog
 {
-  AdwWindow             parent_instance;
+  AdwDialog             parent_instance;
 
   AdwNavigationView    *navigation_view;
   AdwNavigationPage    *main_page;
@@ -70,7 +70,7 @@ struct _CcKeyboardShortcutDialog
   GStrv                 search_terms;
  };
 
-G_DEFINE_TYPE (CcKeyboardShortcutDialog, cc_keyboard_shortcut_dialog, ADW_TYPE_WINDOW)
+G_DEFINE_TYPE (CcKeyboardShortcutDialog, cc_keyboard_shortcut_dialog, ADW_TYPE_DIALOG)
 
 
 static GListStore *
@@ -433,7 +433,7 @@ shortcut_search_entry_stopped_cb (CcKeyboardShortcutDialog *self)
   if (search_text && g_strcmp0 (search_text, "") != 0)
     gtk_editable_set_text (GTK_EDITABLE (self->search_entry), "");
   else
-    gtk_window_close (GTK_WINDOW (self));
+    adw_dialog_close (ADW_DIALOG (self));
 }
 
 static void
@@ -476,8 +476,6 @@ cc_keyboard_shortcut_dialog_class_init (CcKeyboardShortcutDialogClass *klass)
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
   object_class->finalize = cc_keyboard_shortcut_dialog_finalize;
-
-  gtk_widget_class_add_binding_action (widget_class, GDK_KEY_Escape, 0, "window.close", NULL);
 
   gtk_widget_class_set_template_from_resource (widget_class,
                                                "/org/gnome/control-center/"
@@ -541,7 +539,7 @@ cc_keyboard_shortcut_dialog_init (CcKeyboardShortcutDialog *self)
                            self, NULL);
 }
 
-GtkWidget*
+CcKeyboardShortcutDialog*
 cc_keyboard_shortcut_dialog_new (void)
 {
   return g_object_new (CC_TYPE_KEYBOARD_SHORTCUT_DIALOG, NULL);
