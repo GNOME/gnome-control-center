@@ -692,7 +692,7 @@ cc_remote_login_page_init (CcRemoteLoginPage *self)
 
   self->cancellable = g_cancellable_new ();
 
-  hostname = cc_hostname_get_display_hostname (cc_hostname_get_default ());
+  hostname = cc_hostname_get_static_hostname (cc_hostname_get_default ());
   adw_action_row_set_subtitle (self->hostname_row, hostname);
 
   g_signal_connect_swapped (self->username_entry, "notify::text",
