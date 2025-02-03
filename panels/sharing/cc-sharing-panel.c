@@ -517,7 +517,7 @@ cc_sharing_panel_setup_label_with_hostname (CcSharingPanel *self,
 {
   g_autofree gchar *hostname;
 
-  hostname = cc_hostname_get_display_hostname (cc_hostname_get_default ());
+  hostname = cc_hostname_get_static_hostname (cc_hostname_get_default ());
 
   if (page == self->personal_file_sharing_page)
     {
