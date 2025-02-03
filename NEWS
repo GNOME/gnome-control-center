@@ -1,3 +1,47 @@
+===============
+Version 48.beta
+===============
+
+- Various translation updates
+- Make search bar always grab focus with shortcuts
+- Fix a memory leak in CcMaskPaintable (used for illustrations)
+- Fix missing icons in Mouse/Wacom/WWAN settings (ship our own icons)
+- Add single-panel-mode for distros to launch Settings in a single panel (without sidebar)
+- Use static hostname instead of pretty hostname (hostnamed) in URLs
+
+Dependency updates
+- gnome-settings-daemon >= 48.alpha.1
+
+Device Security
+- Don't hardcode height of "help" dialog
+
+Display
+- Add monitor HDR setting
+
+Keyboard
+- Rename old "logout" media key name to "Power Off"
+- Add new media keys shortcuts for "Restart" and "Logout"
+- Port shortcuts dialog to AdwDialog
+
+Mouse
+- Use AdwToggleGroup in the "Primary Button" settings
+
+Region
+- Port Format Chooser to AdwPreferencesPage
+- Inform accountsservice of all configured languages
+
+Sound
+- Filter out NULL stream names in Volume Levels settings
+
+Thunderbolt
+- Fix unescaped string in device status dialog
+
+Wellbeing
+- Add screen time support
+- Use gtk_widget_set_child_visible in allocate
+- Various accessibility/navigation/esthetic improvements
+- Split data collection and limits settings
+
 ================
 Version 48.alpha
 ================
