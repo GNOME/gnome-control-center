@@ -109,7 +109,7 @@ on_verify_encryption_button_clicked (CcDesktopSharingPage *self)
 static char *
 get_hostname (void)
 {
-  return cc_hostname_get_display_hostname (cc_hostname_get_default ());
+  return cc_hostname_get_static_hostname (cc_hostname_get_default ());
 }
 
 static gboolean
