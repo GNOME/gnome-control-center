@@ -57,7 +57,7 @@ stages:
     # Should probably also switch away from 'rawhide',
     # to stable fedora branch as well.
     BRANCH_NAME: 'gnome-46'
-    CONTAINER_TAG: '2024-05-21.0'
+    CONTAINER_TAG: '2024-02-03.0'
     FEDORA_VERSION: 40
     # Derive FDO variables from this automatically.
     # DO NOT edit, instead change the variables above
@@ -81,114 +81,21 @@ build.container.fedora@x86_64:
     # Expiry sets fdo.expires on the image
     FDO_EXPIRES_AFTER: 8w
     # NOTES:
-    # - gobject-introspection-devel is needed for gsettings-desktop-schemas
+    # - most packages are needed for testing
+    # - libsass-devel, sassc are often needed for building libadwaita, gtk, etc.
     FDO_DISTRIBUTION_PACKAGES: >-
-      @c-development @development-tools
+      dnf5-plugins
       git
-      llvm clang libasan libtsan libubsan gcovr
+      llvm clang libasan libtsan libubsan compiler-rt gcovr
       meson
-      accountsservice-devel
-      cheese-libs-devel
-      chrpath
       clang-tools-extra
-      colord-devel colord-gtk-devel
-      cups-devel
-      desktop-file-utils
-      docbook-style-xsl
-      flatpak-devel
-      gdk-pixbuf2-devel
-      gettext
-      glib2-devel
-      gobject-introspection-devel
-      gnome-bluetooth-libs-devel
-      gnome-desktop3-devel
-      gnome-online-accounts-devel
-      grilo-devel
-      gsettings-desktop-schemas-devel
-      gsound-devel
-      gtk3-devel ibus-devel
-      gtk4-devel
-      gtk-doc
-      intltool
-      appstream-devel
-      sassc
-      libadwaita-devel
-      libcanberra-devel
-      libgtop2-devel
-      libgudev-devel
-      libnma-devel
-      libnotify-devel
-      libpwquality-devel
-      libsmbclient-devel
-      libsoup3-devel
-      libudisks2-devel
-      libwacom-devel
-      libX11-devel
-      libXi-devel
-      libxml2-devel
-      libxslt
-      ModemManager-glib-devel
-      NetworkManager-libnm-devel
-      polkit-devel
-      pulseaudio-libs-devel
-      upower-devel
       python3-dbusmock
       xorg-x11-server-Xvfb
       mesa-dri-drivers
-      libsecret-devel
-      geocode-glib2-devel
-      libgweather4-devel
-      lcms2-devel
-      geoclue2-devel
-      libnotify-devel
-      alsa-lib-devel
-      nss-devel
-      gcr-devel
-      setxkbmap
-      appstream-devel
+      libsass-devel sassc
     FDO_DISTRIBUTION_EXEC: |-
-      git clone https://gitlab.gnome.org/GNOME/gsettings-desktop-schemas.git && \
-        cd gsettings-desktop-schemas && \
-        meson . _build --prefix=/usr && \
-        ninja -C _build && \
-        ninja -C _build install && \
-        cd .. && \
-      git clone https://gitlab.gnome.org/GNOME/gnome-desktop.git && \
-        cd gnome-desktop && \
-        meson . _build --prefix=/usr -Ddesktop_docs=false && \
-        ninja -C _build && \
-        ninja -C _build install && \
-        cd .. && \
-      git clone https://gitlab.gnome.org/GNOME/gnome-bluetooth.git && \
-        cd gnome-bluetooth && \
-        meson . _build --prefix=/usr -Dsendto=false && \
-        ninja -C _build && \
-        ninja -C _build install && \
-        cd .. && \
-      git clone https://gitlab.gnome.org/GNOME/libnma.git && \
-        cd libnma && \
-        meson . _build --prefix=/usr -Dlibnma_gtk4=true -Dmobile_broadband_provider_info=false -Dgcr=false -Dgtk_doc=false && \
-        ninja -C _build && \
-        ninja -C _build install && \
-        cd .. && \
-      git clone https://github.com/hughsie/colord-gtk.git && \
-        cd colord-gtk && \
-        meson . _build --prefix=/usr -Dgtk4=true -Ddocs=false -Dtests=false -Dman=false && \
-        ninja -C _build && \
-        ninja -C _build install && \
-        cd .. && \
-      git clone https://gitlab.gnome.org/GNOME/libgweather.git && \
-        cd libgweather && \
-        meson . _build --prefix=/usr -Denable_vala=false -Dgtk_doc=false -Dintrospection=false && \
-        ninja -C _build && \
-        ninja -C _build install && \
-        cd .. && \
-      git clone https://gitlab.gnome.org/GNOME/gnome-settings-daemon.git && \
-        cd gnome-settings-daemon && \
-        meson . _build --prefix=/usr && \
-        ninja -C _build && \
-        ninja -C _build install && \
-        cd .. && \
+      dnf install -y 'dnf-command(builddep)' && \
+      dnf builddep -y gnome-control-center && \
       dnf remove -y systemtap-runtime
 
 ##
