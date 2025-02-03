@@ -34,6 +34,8 @@ struct _CcWifiConnectionList
   gboolean       hide_unavailable;
   gboolean       show_aps;
 
+  gboolean       activatable;
+
   NMClient      *client;
   NMDeviceWifi  *device;
 
@@ -79,6 +81,7 @@ enum
   PROP_CLIENT,
   PROP_DEVICE,
   PROP_FORGETTABLE,
+  PROP_ACTIVATABLE,
   PROP_LAST
 };
 
@@ -139,7 +142,11 @@ cc_wifi_connection_list_row_add (CcWifiConnectionList *self,
                                     aps,
                                     self->checkable,
                                     known_connection,
-                                    self->forgettable);
+                                    self->forgettable,
+                                    self->activatable);
+                                  
+
+
   gtk_list_box_append (self->listbox, GTK_WIDGET (res));
 
   g_signal_connect_object (res, "configure", G_CALLBACK (on_row_configured_cb), self, G_CONNECT_SWAPPED);
@@ -652,6 +659,10 @@ cc_wifi_connection_list_get_property (GObject    *object,
       g_value_set_boolean (value, self->forgettable);
       break;
 
+    case PROP_ACTIVATABLE:
+      g_value_set_boolean (value, self->activatable);
+      break;
+
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
     }
@@ -689,6 +700,10 @@ cc_wifi_connection_list_set_property (GObject      *object,
 
     case PROP_FORGETTABLE:
       self->forgettable = g_value_get_boolean (value);
+      break;
+
+    case PROP_ACTIVATABLE:
+      self->activatable = g_value_get_boolean (value);
       break;
 
     default:
@@ -741,6 +756,14 @@ cc_wifi_connection_list_class_init (CcWifiConnectionListClass *klass)
                            "Passed to the created rows to show/hide the checkbox for deletion",
                            FALSE,
                            G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
+  
+  props[PROP_ACTIVATABLE] =   
+    g_param_spec_boolean ("activatable", "Activatable",
+                          "Determines if the rows are clickable",
+                          TRUE,
+                          G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
+
+  
 
   g_object_class_install_properties (object_class,
                                      PROP_LAST,
@@ -784,6 +807,7 @@ cc_wifi_connection_list_init (CcWifiConnectionList *self)
 
   self->hide_unavailable = TRUE;
   self->show_aps = TRUE;
+  self->activatable = TRUE;
 
   self->connections = g_ptr_array_new_with_free_func (g_object_unref);
   self->connections_row = g_ptr_array_new ();
@@ -799,7 +823,8 @@ cc_wifi_connection_list_new (NMClient     *client,
                              gboolean      hide_unavailable,
                              gboolean      show_aps,
                              gboolean      checkable,
-                             gboolean      forgettable)
+                             gboolean      forgettable,
+                             gboolean      activatable)
 {
   return g_object_new (CC_TYPE_WIFI_CONNECTION_LIST,
                        "client", client,
@@ -808,6 +833,7 @@ cc_wifi_connection_list_new (NMClient     *client,
                        "show-aps", show_aps,
                        "checkable", checkable,
                        "forgettable", forgettable,
+                       "activatable", activatable,
                        NULL);
 }
 
