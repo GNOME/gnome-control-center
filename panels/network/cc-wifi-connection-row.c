@@ -35,7 +35,6 @@ struct _CcWifiConnectionRow
   NMConnection    *connection;
   gboolean         known_connection;
 
-  GtkLabel        *active_label;
   GtkCheckButton  *checkbutton;
   AdwSpinner      *connecting_spinner;
   GtkImage        *encrypted_icon;
@@ -259,7 +258,7 @@ update_ui (CcWifiConnectionRow *self)
     }
 
   gtk_widget_set_visible (GTK_WIDGET (self->connecting_spinner), connecting);
-  gtk_widget_set_visible (GTK_WIDGET (self->active_label), active);
+  adw_action_row_set_subtitle (ADW_ACTION_ROW (self), active ? _("Connected") : "");
   gtk_widget_set_visible (GTK_WIDGET (self->options_button), active || connecting || self->known_connection);
   gtk_widget_set_visible (GTK_WIDGET (self->qr_code_button), (active || self->known_connection) && is_qr_code_supported (self->connection));
 
@@ -473,7 +472,6 @@ cc_wifi_connection_row_class_init (CcWifiConnectionRowClass *klass)
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/network/cc-wifi-connection-row.ui");
 
-  gtk_widget_class_bind_template_child (widget_class, CcWifiConnectionRow, active_label);
   gtk_widget_class_bind_template_child (widget_class, CcWifiConnectionRow, checkbutton);
   gtk_widget_class_bind_template_child (widget_class, CcWifiConnectionRow, connecting_spinner);
   gtk_widget_class_bind_template_child (widget_class, CcWifiConnectionRow, encrypted_icon);
