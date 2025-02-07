@@ -1026,12 +1026,12 @@ power_profile_button_toggled_cb (CcPowerProfileRow *row,
     }
 
   g_dbus_connection_call (connection,
-                          "net.hadess.PowerProfiles",
-                          "/net/hadess/PowerProfiles",
+                          "org.freedesktop.UPower.PowerProfiles",
+                          "/org/freedesktop/UPower/PowerProfiles",
                           "org.freedesktop.DBus.Properties",
                           "Set",
                           g_variant_new ("(ssv)",
-                                         "net.hadess.PowerProfiles",
+                                         "org.freedesktop.UPower.PowerProfiles",
                                          "ActiveProfile",
                                          g_variant_new_string (cc_power_profile_to_str (profile))),
                           NULL,
@@ -1057,9 +1057,9 @@ setup_power_profiles (CcPowerPanel *self)
 
   self->power_profiles_proxy = cc_object_storage_create_dbus_proxy_sync (G_BUS_TYPE_SYSTEM,
                                                                          G_DBUS_PROXY_FLAGS_NONE,
-                                                                         "net.hadess.PowerProfiles",
-                                                                         "/net/hadess/PowerProfiles",
-                                                                         "net.hadess.PowerProfiles",
+                                                                         "org.freedesktop.UPower.PowerProfiles",
+                                                                         "/org/freedesktop/UPower/PowerProfiles",
+                                                                         "org.freedesktop.UPower.PowerProfiles",
                                                                          NULL,
                                                                          &error);
 
@@ -1080,12 +1080,12 @@ setup_power_profiles (CcPowerPanel *self)
     }
 
   variant = g_dbus_connection_call_sync (connection,
-                                         "net.hadess.PowerProfiles",
-                                         "/net/hadess/PowerProfiles",
+                                         "org.freedesktop.UPower.PowerProfiles",
+                                         "/org/freedesktop/UPower/PowerProfiles",
                                          "org.freedesktop.DBus.Properties",
                                          "GetAll",
                                          g_variant_new ("(s)",
-                                                        "net.hadess.PowerProfiles"),
+                                                        "org.freedesktop.UPower.PowerProfiles"),
                                          NULL,
                                          G_DBUS_CALL_FLAGS_NONE,
                                          -1,

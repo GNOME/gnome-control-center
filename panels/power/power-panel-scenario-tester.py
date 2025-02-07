@@ -73,7 +73,7 @@ class GccDBusTestCase(DBusTestCase):
         klass.testbed = UMockdev.Testbed.new()
 
         # Start ppd and logind
-        klass.start_from_template('power_profiles_daemon')
+        klass.start_from_template('upower_power_profiles_daemon')
         klass.start_from_template('logind')
 
         klass.system_bus = Gio.bus_get_sync(Gio.BusType.SYSTEM, None)
@@ -251,7 +251,7 @@ class GccDBusTestCase(DBusTestCase):
         return None
 
     def cycle_degraded(self):
-        perf = self.ppd.Get('net.hadess.PowerProfiles', 'PerformanceDegraded')
+        perf = self.ppd.Get('org.freedesktop.UPower.PowerProfiles', 'PerformanceDegraded')
         if perf == '':
             perf = 'lap-detected'
         elif perf == 'lap-detected':
@@ -259,7 +259,7 @@ class GccDBusTestCase(DBusTestCase):
         elif perf == 'high-operating-temperature':
             perf = ''
         mock_iface = dbus.Interface(self.ppd, dbusmock.MOCK_IFACE)
-        mock_iface.UpdateProperties('net.hadess.PowerProfiles', {
+        mock_iface.UpdateProperties('org.freedesktop.UPower.PowerProfiles', {
                 'PerformanceDegraded': dbus.String(perf, variant_level=1)
         })
 
