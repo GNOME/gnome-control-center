@@ -147,19 +147,11 @@ shortcut_group_row_new (gpointer item,
   /* Row to add custom shortcut */
   if (GTK_IS_STRING_OBJECT (item))
     {
-      GtkWidget *icon;
-
-      row = adw_preferences_row_new ();
-      gtk_list_box_row_set_activatable (GTK_LIST_BOX_ROW (row), TRUE);
+      row = adw_button_row_new ();
       gtk_list_box_row_set_selectable (GTK_LIST_BOX_ROW (row), FALSE);
-      gtk_accessible_update_property (GTK_ACCESSIBLE (row),
-                                      GTK_ACCESSIBLE_PROPERTY_LABEL,
-                                      _("Add a Shortcut"),
-                                      -1);
-      icon = gtk_image_new_from_icon_name ("list-add-symbolic");
-      gtk_widget_set_margin_top (icon, 15);
-      gtk_widget_set_margin_bottom (icon, 15);
-      gtk_list_box_row_set_child (GTK_LIST_BOX_ROW (row), icon);
+      adw_preferences_row_set_title (ADW_PREFERENCES_ROW (row), _("_Add Shortcut"));
+      adw_preferences_row_set_use_underline (ADW_PREFERENCES_ROW (row), TRUE);
+      adw_button_row_set_start_icon_name (ADW_BUTTON_ROW (row), "list-add-symbolic");
 
       return row;
 
