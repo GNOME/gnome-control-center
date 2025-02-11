@@ -71,9 +71,9 @@ enum
 static GParamSpec *props[N_PROPS] = { NULL, };
 
 static void
-on_option_click_released_cb (GtkCheckButton *check_button)
+on_button_activate (GtkCheckButton *check_button)
 {
-  gtk_widget_activate (GTK_WIDGET (check_button));
+  gtk_check_button_set_active (check_button, TRUE);
 }
 
 static void
@@ -281,8 +281,8 @@ cc_split_row_class_init (CcSplitRowClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcSplitRow, default_option_picture);
   gtk_widget_class_bind_template_child (widget_class, CcSplitRow, default_option_mask);
 
+  gtk_widget_class_bind_template_callback (widget_class, on_button_activate);
   gtk_widget_class_bind_template_callback (widget_class, on_checkbutton_toggled_cb);
-  gtk_widget_class_bind_template_callback (widget_class, on_option_click_released_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_option_focus_enter_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_option_focus_leave_cb);
 }

@@ -5,186 +5,206 @@
       <object class="GtkBox" id="box">
         <property name="hexpand">True</property>
         <property name="homogeneous">True</property>
-        <property name="spacing">24</property>
+        <property name="spacing">3</property>
 
         <!-- Default Option -->
         <child>
-          <object class="GtkBox">
-            <property name="orientation">vertical</property>
+          <object class="GtkButton">
+            <property name="accessible-role">radio</property>
+            <signal name="clicked" handler="on_button_activate" object="default_option_checkbutton" />
+            <accessibility>
+              <relation name="labelled-by">default_option_checkbutton</relation>
+              <relation name="described-by">default_option_checkbutton</relation>
+            </accessibility>
+            <style>
+              <class name="card"/>
+            </style>
 
-            <child>
-              <object class="GtkEventControllerMotion">
-                <signal name="enter" handler="on_option_focus_enter_cb" object="default_option_mask" swapped="yes" />
-                <signal name="leave" handler="on_option_focus_leave_cb" object="default_option_mask" swapped="yes" />
-              </object>
-            </child>
+            <property name="child">
+              <object class="GtkBox">
+                <property name="spacing">12</property>
+                <property name="orientation">vertical</property>
+                <property name="margin-top">9</property>
+                <property name="margin-bottom">9</property>
+                <property name="margin-start">9</property>
+                <property name="margin-end">9</property>
 
-            <child>
-              <object class="GtkGestureClick">
-                <signal name="released" handler="on_option_click_released_cb" object="default_option_checkbutton" swapped="yes" />
-              </object>
-            </child>
-
-            <child>
-              <object class="AdwBin">
-                <style>
-                  <class name="background"/>
-                  <class name="frame"/>
-                </style>
                 <child>
-                  <object class="GtkPicture" id="default_option_picture">
-                    <property name="hexpand">True</property>
-                    <property name="halign">center</property>
-                    <property name="margin-top">18</property>
-                    <property name="margin-bottom">18</property>
-                    <property name="margin-start">6</property>
-                    <property name="margin-end">6</property>
-                    <property name="height-request">128</property>
-                    <property name="paintable">
-                      <object class="CcMaskPaintable" id="default_option_mask">
-                        <property name="follow-accent">True</property>
+                  <object class="GtkEventControllerMotion">
+                    <signal name="enter" handler="on_option_focus_enter_cb" object="default_option_mask" swapped="yes" />
+                    <signal name="leave" handler="on_option_focus_leave_cb" object="default_option_mask" swapped="yes" />
+                  </object>
+                </child>
+
+                <child>
+                  <object class="AdwBin">
+                    <style>
+                      <class name="background"/>
+                      <class name="frame"/>
+                    </style>
+                    <child>
+                      <object class="GtkPicture" id="default_option_picture">
+                        <property name="hexpand">True</property>
+                        <property name="halign">center</property>
+                        <property name="margin-top">18</property>
+                        <property name="margin-bottom">18</property>
+                        <property name="margin-start">6</property>
+                        <property name="margin-end">6</property>
+                        <property name="height-request">128</property>
+                        <property name="paintable">
+                          <object class="CcMaskPaintable" id="default_option_mask">
+                            <property name="follow-accent">True</property>
+                          </object>
+                        </property>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+
+                <child>
+                  <object class="GtkCheckButton" id="default_option_checkbutton">
+                    <property name="can-focus">False</property>
+                    <property name="group">alternative_option_checkbutton</property>
+                    <signal name="toggled" handler="on_checkbutton_toggled_cb" object="CcSplitRow" swapped="yes"/>
+                    <property name="child">
+                      <object class="GtkBox">
+                        <property name="valign">center</property>
+                        <property name="margin-start">6</property>
+                        <property name="orientation">vertical</property>
+                        <child>
+                          <object class="GtkLabel">
+                            <property name="use-underline">True</property>
+                            <property name="xalign">0.0</property>
+                            <property name="wrap">True</property>
+                            <property name="wrap-mode">word-char</property>
+                            <binding name="label">
+                              <lookup name="default-option-title">CcSplitRow</lookup>
+                            </binding>
+                            <style>
+                              <class name="title" />
+                            </style>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkLabel">
+                            <property name="xalign">0.0</property>
+                            <property name="wrap">True</property>
+                            <property name="wrap-mode">word-char</property>
+                            <binding name="label">
+                              <lookup name="default-option-subtitle">CcSplitRow</lookup>
+                            </binding>
+                            <style>
+                              <class name="subtitle" />
+                            </style>
+                          </object>
+                        </child>
                       </object>
                     </property>
                   </object>
                 </child>
-              </object>
-            </child>
 
-            <child>
-              <object class="GtkCheckButton" id="default_option_checkbutton">
-                <property name="margin-start">6</property>
-                <property name="group">alternative_option_checkbutton</property>
-                <signal name="toggled" handler="on_checkbutton_toggled_cb" object="CcSplitRow" swapped="yes"/>
-                <property name="child">
-                  <object class="GtkBox">
-                    <property name="valign">center</property>
-                    <property name="margin-start">6</property>
-                    <property name="orientation">vertical</property>
-                    <style>
-                      <class name="title" />
-                    </style>
-                    <child>
-                      <object class="GtkLabel">
-                        <property name="use-underline">True</property>
-                        <property name="xalign">0.0</property>
-                        <property name="wrap">True</property>
-                        <property name="wrap-mode">word-char</property>
-                        <binding name="label">
-                          <lookup name="default-option-title">CcSplitRow</lookup>
-                        </binding>
-                        <style>
-                          <class name="title" />
-                        </style>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkLabel">
-                        <property name="xalign">0.0</property>
-                        <property name="wrap">True</property>
-                        <property name="wrap-mode">word-char</property>
-                        <binding name="label">
-                          <lookup name="default-option-subtitle">CcSplitRow</lookup>
-                        </binding>
-                        <style>
-                          <class name="subtitle" />
-                        </style>
-                      </object>
-                    </child>
-                  </object>
-                </property>
               </object>
-            </child>
-
+            </property>
           </object>
         </child>
 
         <!-- Alternative Option -->
         <child>
-          <object class="GtkBox">
-            <property name="orientation">vertical</property>
+          <object class="GtkButton">
+            <property name="accessible-role">radio</property>
+            <signal name="clicked" handler="on_button_activate" object="alternative_option_checkbutton" />
+            <accessibility>
+              <relation name="labelled-by">alternative_option_checkbutton</relation>
+              <relation name="described-by">alternative_option_checkbutton</relation>
+            </accessibility>
+            <style>
+              <class name="card"/>
+            </style>
 
-            <child>
-              <object class="GtkEventControllerMotion">
-                <signal name="enter" handler="on_option_focus_enter_cb" object="alternative_option_mask" swapped="yes" />
-                <signal name="leave" handler="on_option_focus_leave_cb" object="alternative_option_mask" swapped="yes" />
-              </object>
-            </child>
+            <property name="child">
+              <object class="GtkBox">
+                <property name="spacing">12</property>
+                <property name="orientation">vertical</property>
+                <property name="margin-top">9</property>
+                <property name="margin-bottom">9</property>
+                <property name="margin-start">9</property>
+                <property name="margin-end">9</property>
 
-            <child>
-              <object class="GtkGestureClick">
-                <signal name="released" handler="on_option_click_released_cb" object="alternative_option_checkbutton" swapped="yes" />
-              </object>
-            </child>
-
-            <child>
-              <object class="AdwBin">
-                <style>
-                  <class name="background"/>
-                  <class name="frame"/>
-                </style>
                 <child>
-                  <object class="GtkPicture" id="alternative_option_picture">
-                    <property name="hexpand">True</property>
-                    <property name="halign">center</property>
-                    <property name="margin-top">18</property>
-                    <property name="margin-bottom">18</property>
-                    <property name="margin-start">6</property>
-                    <property name="margin-end">6</property>
-                    <property name="height-request">128</property>
-                    <property name="paintable">
-                      <object class="CcMaskPaintable" id="alternative_option_mask">
-                        <property name="follow-accent">True</property>
+                  <object class="GtkEventControllerMotion">
+                    <signal name="enter" handler="on_option_focus_enter_cb" object="alternative_option_mask" swapped="yes" />
+                    <signal name="leave" handler="on_option_focus_leave_cb" object="alternative_option_mask" swapped="yes" />
+                  </object>
+                </child>
+
+                <child>
+                  <object class="AdwBin">
+                    <style>
+                      <class name="background"/>
+                      <class name="frame"/>
+                    </style>
+                    <child>
+                      <object class="GtkPicture" id="alternative_option_picture">
+                        <property name="hexpand">True</property>
+                        <property name="halign">center</property>
+                        <property name="margin-top">18</property>
+                        <property name="margin-bottom">18</property>
+                        <property name="margin-start">6</property>
+                        <property name="margin-end">6</property>
+                        <property name="height-request">128</property>
+                        <property name="paintable">
+                          <object class="CcMaskPaintable" id="alternative_option_mask">
+                            <property name="follow-accent">True</property>
+                          </object>
+                        </property>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+
+                <child>
+                  <object class="GtkCheckButton" id="alternative_option_checkbutton">
+                    <property name="can-focus">False</property>
+                    <signal name="toggled" handler="on_checkbutton_toggled_cb" object="CcSplitRow" swapped="yes"/>
+                    <property name="child">
+                      <object class="GtkBox">
+                        <property name="valign">center</property>
+                        <property name="margin-start">6</property>
+                        <property name="orientation">vertical</property>
+                        <child>
+                          <object class="GtkLabel">
+                            <property name="use-underline">True</property>
+                            <property name="xalign">0.0</property>
+                            <property name="wrap">True</property>
+                            <property name="wrap-mode">word-char</property>
+                            <binding name="label">
+                              <lookup name="alternative-option-title">CcSplitRow</lookup>
+                            </binding>
+                            <style>
+                              <class name="title" />
+                            </style>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkLabel">
+                            <property name="xalign">0.0</property>
+                            <property name="wrap">True</property>
+                            <property name="wrap-mode">word-char</property>
+                            <binding name="label">
+                              <lookup name="alternative-option-subtitle">CcSplitRow</lookup>
+                            </binding>
+                            <style>
+                              <class name="subtitle" />
+                            </style>
+                          </object>
+                        </child>
                       </object>
                     </property>
                   </object>
                 </child>
-              </object>
-            </child>
 
-            <child>
-              <object class="GtkCheckButton" id="alternative_option_checkbutton">
-                <property name="margin-start">6</property>
-                <signal name="toggled" handler="on_checkbutton_toggled_cb" object="CcSplitRow" swapped="yes"/>
-                <property name="child">
-                  <object class="GtkBox">
-                    <property name="valign">center</property>
-                    <property name="margin-start">6</property>
-                    <property name="orientation">vertical</property>
-                    <style>
-                      <class name="title" />
-                    </style>
-                    <child>
-                      <object class="GtkLabel">
-                        <property name="use-underline">True</property>
-                        <property name="xalign">0.0</property>
-                        <property name="wrap">True</property>
-                        <property name="wrap-mode">word-char</property>
-                        <binding name="label">
-                          <lookup name="alternative-option-title">CcSplitRow</lookup>
-                        </binding>
-                        <style>
-                          <class name="title" />
-                        </style>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkLabel">
-                        <property name="xalign">0.0</property>
-                        <property name="wrap">True</property>
-                        <property name="wrap-mode">word-char</property>
-                        <binding name="label">
-                          <lookup name="alternative-option-subtitle">CcSplitRow</lookup>
-                        </binding>
-                        <style>
-                          <class name="subtitle" />
-                        </style>
-                      </object>
-                    </child>
-                  </object>
-                </property>
               </object>
-            </child>
-
+            </property>
           </object>
         </child>
 
