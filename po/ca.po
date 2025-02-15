@@ -22,6 +22,7 @@
 #   disabled         | inhabilitat
 #   enabled          | habilitat
 #   hotspot          | punt d'accés Wi-Fi
+#   job              | feina
 #   login            | inici de sessió
 #   log out          | tanca la sessió
 #   magnifier        | lupa
@@ -33,8 +34,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
-"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/issues\n"
-"POT-Creation-Date: 2025-02-12 21:44+0000\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
+"issues\n"
+"POT-Creation-Date: 2025-02-14 18:43+0000\n"
 "PO-Revision-Date: 2025-02-12 09:49+0200\n"
 "Last-Translator: Ícar N. S. <icar.nin@protonmail.com>\n"
 "Language-Team: Catalan <tradgnome@softcatala.org>\n"
@@ -67,7 +69,7 @@ msgstr "Sessió del bus"
 msgid "Devices"
 msgstr "Dispositius"
 
-#: panels/applications/cc-applications-panel.c:856Setmana mitjana
+#: panels/applications/cc-applications-panel.c:856
 msgid "Full access to /dev"
 msgstr "Accés complet a /dev"
 
@@ -199,8 +201,7 @@ msgstr "_Cerca al programari"
 msgid "Unable to List Apps"
 msgstr "No es poden llistar les aplicacions"
 
-#. Translators: Parental Controls here refers to the features provided by
-#. 'malcontent'
+#. Translators: Parental Controls here refers to the features provided by 'malcontent'
 #: panels/applications/cc-applications-panel.ui:122
 msgid ""
 "An error has occurred and apps cannot be listed.\n"
@@ -255,9 +256,7 @@ msgstr "_Detalls de l'aplicació"
 msgid "Permissions"
 msgstr "Permisos"
 
-#. Translators: This row shows/sets whether the app shown in this page can add
-#. results to the GNOME Shell search results. Internally this enables/disables
-#. the app's Shell Search Provider
+#. Translators: This row shows/sets whether the app shown in this page can add results to the GNOME Shell search results. Internally this enables/disables the app's Shell Search Provider
 #: panels/applications/cc-applications-panel.ui:278
 msgid "_Search"
 msgstr "_Cerca"
@@ -268,6 +267,7 @@ msgstr "Rebre cerques del sistema i enviar resultats"
 
 #. This label is displayed in a treeview cell displaying
 #. * a disabled accelerator key combination.
+#.
 #. TRANSLATORS: device status
 #. translators:
 #. * The device has been disabled
@@ -280,8 +280,7 @@ msgstr "Rebre cerques del sistema i enviar resultats"
 #: panels/keyboard/cc-xkb-modifier-page.c:323
 #: panels/keyboard/keyboard-shortcuts.c:367 panels/network/panel-common.c:336
 #: panels/system/users/cc-user-page.c:367
-#: panels/system/users/cc-user-page.c:752
-#: panels/wwan/cc-wwan-device-page.c:477
+#: panels/system/users/cc-user-page.c:752 panels/wwan/cc-wwan-device-page.c:477
 #: subprojects/gvc/gvc-mixer-control.c:1872
 msgid "Disabled"
 msgstr "Inhabilitat"
@@ -529,6 +528,7 @@ msgstr "Seleccioneu l'aplicació per als CD de programari"
 #. * strings, just here to fix capitalization of the English originals.
 #. * If the shared-mime-info translation works for your language,
 #. * simply leave these untranslated.
+#.
 #: panels/applications/cc-removable-media-settings.c:390
 msgid "audio DVD"
 msgstr "DVD d'àudio"
@@ -840,22 +840,21 @@ msgstr "Accés de lectura/escriptura als dispositius U2F exposats"
 msgid "Control various app permissions and settings"
 msgstr "Controla diversos permisos i paràmetres d'aplicació"
 
-#. Translators: Search terms to find the Apps panel. Do NOT translate or
-#. localize the semicolons! The list MUST also end with a semicolon!
+#. Translators: Search terms to find the Apps panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/applications/gnome-applications-panel.desktop.in:16
 msgid ""
-"application;flatpak;permission;setting;default;preferred;media;autorun;cd;dvd;usb;audio;video;disc;removable;device;system;"
+"application;flatpak;permission;setting;default;preferred;media;autorun;cd;"
+"dvd;usb;audio;video;disc;removable;device;system;"
 msgstr ""
-"aplicació;flatpak;permisos;paràmetre;predeterminat;preferit;mitjans;execució"
-" automàtica;cd;dvd;usb;àudio;vídeo;disc;extraïble;dispositiu;sistema;"
+"aplicació;flatpak;permisos;paràmetre;predeterminat;preferit;mitjans;execució "
+"automàtica;cd;dvd;usb;àudio;vídeo;disc;extraïble;dispositiu;sistema;"
 
 #: panels/background/cc-background-chooser.c:169
 msgid "Background removed"
 msgstr "Fons suprimit"
 
 #: panels/background/cc-background-chooser.c:170
-#: panels/network/net-device-wifi.c:883
-#: panels/printers/cc-printers-panel.c:672
+#: panels/network/net-device-wifi.c:883 panels/printers/cc-printers-panel.c:672
 msgid "_Undo"
 msgstr "_Desfés"
 
@@ -962,8 +961,7 @@ msgstr "Aparença"
 msgid "Change your background image or the UI colors"
 msgstr "Canvieu la imatge de fons o els colors de la interfície"
 
-#. Translators: Search terms to find the Appearance panel. Do NOT translate or
-#. localize the semicolons! The list MUST also end with a semicolon!
+#. Translators: Search terms to find the Appearance panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/background/gnome-background-panel.desktop.in:15
 msgid "Background;Wallpaper;Screen;Desktop;Style;Light;Dark;Appearance;"
 msgstr "Fons;Fons de pantalla;Pantalla;Escriptori;Estil;Clar;Fosc;Aparença;"
@@ -1021,8 +1019,7 @@ msgstr "Bluetooth"
 msgid "Turn Bluetooth on and off and connect your devices"
 msgstr "Activeu i desactiveu el Bluetooth i connecteu els dispositius"
 
-#. Translators: Search terms to find the Bluetooth panel. Do NOT translate or
-#. localize the semicolons! The list MUST also end with a semicolon!
+#. Translators: Search terms to find the Bluetooth panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/bluetooth/gnome-bluetooth-panel.desktop.in:15
 msgid "share;sharing;bluetooth;obex;"
 msgstr "comparteix;compartició;bluetooth;obex;"
@@ -1113,8 +1110,7 @@ msgstr "Calibratge de la pantalla"
 
 #: panels/color/cc-color-calibrate.ui:21
 #: panels/common/cc-language-chooser.ui:15
-#: panels/display/cc-display-panel.ui:32
-#: panels/display/cc-display-panel.ui:184
+#: panels/display/cc-display-panel.ui:32 panels/display/cc-display-panel.ui:184
 #: panels/display/cc-display-panel.ui:246
 #: panels/keyboard/cc-input-chooser.ui:15
 #: panels/keyboard/cc-keyboard-shortcut-dialog.ui:159
@@ -1161,14 +1157,12 @@ msgstr "_Continua"
 msgid "_Done"
 msgstr "_Fet"
 
-#. TRANSLATORS: This refers to the embedded display on e.g. a smartphone, a
-#. laptop, an all-in-one desktop…
+#. TRANSLATORS: This refers to the embedded display on e.g. a smartphone, a laptop, an all-in-one desktop…
 #: panels/color/cc-color-common.c:41
 msgid "Built-In Screen"
 msgstr "Pantalla integrada"
 
-#. TRANSLATORS: This refers to the embedded webcam on e.g. a smartphone, a
-#. laptop, an all-in-one desktop…
+#. TRANSLATORS: This refers to the embedded webcam on e.g. a smartphone, a laptop, an all-in-one desktop…
 #: panels/color/cc-color-common.c:50
 msgid "Built-In Webcam"
 msgstr "Càmera web integrada"
@@ -1288,11 +1282,9 @@ msgstr "L'instrument de mesura no admet el perfilat d'impressores."
 msgid "The device type is not currently supported."
 msgstr "El tipus de dispositiu no és compatible actualment."
 
-#. Translators: This will be presented as the text of a link to the
-#. documentation
+#. Translators: This will be presented as the text of a link to the documentation
 #. translators: Text used in link to privacy policy
-#. Translators: This will be presented as the text of a link to the
-#. documentation
+#. Translators: This will be presented as the text of a link to the documentation
 #: panels/color/cc-color-panel.c:2003
 #: panels/privacy/diagnostics/cc-diagnostics-page.c:122
 #: panels/wacom/cc-wacom-device.c:168
@@ -1302,8 +1294,7 @@ msgstr "aprèn-ne més"
 #. Translators: %s is a link to the documentation with the label "learn more"
 #: panels/color/cc-color-panel.c:2005
 #, c-format
-msgid ""
-"Each device needs an up to date color profile to be color managed — %s."
+msgid "Each device needs an up to date color profile to be color managed — %s."
 msgstr ""
 "Cada dispositiu necessita un perfil de color actualitzat per a poder "
 "gestionar el color — «%s»."
@@ -1328,8 +1319,7 @@ msgstr ""
 
 #: panels/color/cc-color-panel.ui:28
 msgid "You will not be able to use your device while calibration takes place."
-msgstr ""
-"No podreu utilitzar el vostre dispositiu mentre es faci el calibratge."
+msgstr "No podreu utilitzar el vostre dispositiu mentre es faci el calibratge."
 
 #. This is the approximate time it takes to calibrate the display.
 #: panels/color/cc-color-panel.ui:40
@@ -1363,8 +1353,8 @@ msgstr "Punt blanc del perfil"
 
 #: panels/color/cc-color-panel.ui:160
 msgid ""
-"Select a display target white point. Most displays should be calibrated to a"
-" D65 illuminant."
+"Select a display target white point. Most displays should be calibrated to a "
+"D65 illuminant."
 msgstr ""
 "Seleccioneu un punt blanc objectiu de la pantalla. La majoria de pantalles "
 "s'haurien de calibrar amb una il·luminació D65."
@@ -1661,8 +1651,8 @@ msgstr "Dades de calibratge de fàbrica proporcionades pel venedor"
 #: panels/color/cc-color-profile.c:196
 msgid "Full-screen display correction not possible with this profile"
 msgstr ""
-"Amb aquest perfil no es pot fer la correcció de la pantalla en mode pantalla"
-" completa"
+"Amb aquest perfil no es pot fer la correcció de la pantalla en mode pantalla "
+"completa"
 
 #: panels/color/cc-color-profile.c:218
 msgid "This profile may no longer be accurate"
@@ -1678,9 +1668,7 @@ msgid ""
 msgstr ""
 "Calibreu el color dels dispositius, com ara pantalles, càmeres o impressores"
 
-#. Translators: Search terms to find the Color Management panel. Do NOT
-#. translate or localize the semicolons! The list MUST also end with a
-#. semicolon!
+#. Translators: Search terms to find the Color Management panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/color/gnome-color-panel.desktop.in:15
 msgid "Color;ICC;Profile;Calibrate;Printer;Display;"
 msgstr "Color;ICC;Perfil;Calibratge;Impressora;Pantalla;"
@@ -1847,8 +1835,7 @@ msgstr "%s"
 msgid "0 seconds"
 msgstr "0 segons"
 
-#. translators: This is the default hotspot name, need to be less than
-#. 32-bytes
+#. translators: This is the default hotspot name, need to be less than 32-bytes
 #: panels/common/hostname-helper.c:221
 msgctxt "hotspot"
 msgid "Hotspot"
@@ -1859,8 +1846,7 @@ msgstr "Punt d'accés Wi-Fi"
 msgid "On"
 msgstr "Activat"
 
-#: panels/display/cc-display-panel.c:507
-#: panels/network/cc-net-proxy-page.c:193
+#: panels/display/cc-display-panel.c:507 panels/network/cc-net-proxy-page.c:193
 #: panels/notifications/cc-notifications-panel.c:198
 msgid "Off"
 msgstr "Desactivat"
@@ -1882,8 +1868,7 @@ msgstr "Això pot ser degut a limitacions del maquinari."
 msgid "Displays"
 msgstr "Pantalles"
 
-#: panels/display/cc-display-panel.ui:45
-#: panels/display/cc-display-panel.ui:200
+#: panels/display/cc-display-panel.ui:45 panels/display/cc-display-panel.ui:200
 #: panels/display/cc-display-panel.ui:262
 #: panels/network/connection-editor/connection-editor.ui:23
 msgid "_Apply"
@@ -1916,8 +1901,7 @@ msgstr "Conté la barra superior i les Activitats"
 msgid "_Primary Display"
 msgstr "_Pantalla principal"
 
-#. This is the redshift functionality where we suppress blue light when the
-#. sun has gone down
+#. This is the redshift functionality where we suppress blue light when the sun has gone down
 #: panels/display/cc-display-panel.ui:150
 #: panels/display/cc-night-light-page.ui:67
 msgid "_Night Light"
@@ -1997,6 +1981,7 @@ msgstr "%.2lf Hz"
 #. * 1. "Variable" is an adjective that refers to the refresh rate
 #. * 2. The formatting sequence is a range separated by an en-dash
 #. *    (unicode "\u2013"). For example: "Variable (48–144.97 Hz)"
+#.
 #: panels/display/cc-display-settings.c:252
 msgid "Variable (%d–%.2lf Hz)"
 msgstr "Variable (%d–%.2lf Hz)"
@@ -2133,20 +2118,19 @@ msgid "_Color Temperature"
 msgstr "Temperatura del _color"
 
 #: panels/display/gnome-display-panel.desktop.in:4
-msgid ""
-"Use Night Light and choose how to use connected monitors and projectors"
+msgid "Use Night Light and choose how to use connected monitors and projectors"
 msgstr ""
 "Utilitza la Llum nocturna i tria com utilitzar monitors i projectors "
 "connectats"
 
-#. Translators: Search terms to find the Displays panel. Do NOT translate or
-#. localize the semicolons! The list MUST also end with a semicolon!
+#. Translators: Search terms to find the Displays panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/display/gnome-display-panel.desktop.in:15
 msgid ""
-"Panel;Projector;xrandr;Screen;Resolution;Refresh;Monitor;Night;Light;Blue;redshift;color;sunset;sunrise;"
+"Panel;Projector;xrandr;Screen;Resolution;Refresh;Monitor;Night;Light;Blue;"
+"redshift;color;sunset;sunrise;"
 msgstr ""
-"Quadre;Projector;xrandr;Pantalla;Resolució;Refresca;Monitor;Nit;Llum;Blau;color;posta"
-" de sol;"
+"Quadre;Projector;xrandr;Pantalla;Resolució;Refresca;Monitor;Nit;Llum;Blau;"
+"color;posta de sol;"
 
 #: panels/keyboard/00-multimedia.xml.in:2
 msgid "Sound and Media"
@@ -2234,8 +2218,7 @@ msgid "Home folder"
 msgstr "Carpeta d'usuari"
 
 #. Translators: this is a verb.
-#. Translators: "Search" should be phrased as a verb (in both "Name" and
-#. "Keywords" fields).
+#. Translators: "Search" should be phrased as a verb (in both "Name" and "Keywords" fields).
 #. Translators: this is a verb.
 #: panels/keyboard/01-launchers.xml.in:16
 #: panels/printers/cc-printers-panel.ui:21 panels/search/cc-search-panel.ui:6
@@ -2419,9 +2402,9 @@ msgstr "Tecla de composició"
 #, fuzzy
 #| msgid ""
 #| "The compose key allows a wide variety of characters to be entered. To use "
-#| "it, press compose then a sequence of characters.  For example, compose key "
-#| "followed by <b>C</b> and <b>o</b> will enter <b>©</b>, <b>a</b> followed by "
-#| "<b>'</b> will enter <b>á</b>."
+#| "it, press compose then a sequence of characters.  For example, compose "
+#| "key followed by <b>C</b> and <b>o</b> will enter <b>©</b>, <b>a</b> "
+#| "followed by <b>'</b> will enter <b>á</b>."
 msgid ""
 "The compose key allows a wide variety of characters to be entered. To use "
 "it, press compose then a sequence of characters.  For example, compose key "
@@ -2556,8 +2539,7 @@ msgstr "Tots els canvis a les dreceres de teclat es perdran"
 msgid "_Reset All"
 msgstr "_Restableix-ho tot"
 
-#. TRANSLATORS: Don't translate/transliterate <b>%s</b>, which is the
-#. accelerator used
+#. TRANSLATORS: Don't translate/transliterate <b>%s</b>, which is the accelerator used
 #: panels/keyboard/cc-keyboard-shortcut-editor.c:373
 #, c-format
 msgid ""
@@ -2578,8 +2560,10 @@ msgid "Set Shortcut"
 msgstr "Estableix la drecera"
 
 #. Setup the top label
+#.
 #. * TRANSLATORS: %s is replaced with a description of the keyboard shortcut,
 #. * don't translate/transliterate <b>%s</b>
+#.
 #: panels/keyboard/cc-keyboard-shortcut-editor.c:543
 #, c-format
 msgid "Enter new shortcut to change <b>%s</b>"
@@ -2608,8 +2592,7 @@ msgstr "_Estableix"
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:100
 msgid "Press Esc to cancel or Backspace to disable the keyboard shortcut"
 msgstr ""
-"Premeu Esc per a cancel·lar o Retrocés per a inhabilitar la drecera de "
-"teclat"
+"Premeu Esc per a cancel·lar o Retrocés per a inhabilitar la drecera de teclat"
 
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:125
 #: panels/keyboard/cc-keyboard-shortcut-row.ui:23
@@ -2664,15 +2647,14 @@ msgstr ""
 "Canvieu les dreceres de teclat i establiu les vostres preferències "
 "d'escriptura, disposicions de teclat i fonts d'entrada"
 
-#. Translators: Search terms to find the Keyboard panel. Do NOT translate or
-#. localize the semicolons! The list MUST also end with a semicolon!
+#. Translators: Search terms to find the Keyboard panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/keyboard/gnome-keyboard-panel.desktop.in:15
 msgid ""
-"Shortcut;Workspace;Window;Resize;Zoom;Contrast;Input;Source;Lock;Volume;Hotkey;Compose;Character;"
+"Shortcut;Workspace;Window;Resize;Zoom;Contrast;Input;Source;Lock;Volume;"
+"Hotkey;Compose;Character;"
 msgstr ""
-"Drecera;Espai de treball;Finestra;Canvia la "
-"mida;Amplia;Contrast;Entrada;Font;Bloqueig;Volum;Tecla "
-"d'accés;Composa;Caràcter;"
+"Drecera;Espai de treball;Finestra;Canvia la mida;Amplia;Contrast;Entrada;"
+"Font;Bloqueig;Volum;Tecla d'accés;Composa;Caràcter;"
 
 #: panels/mouse/cc-mouse-panel.ui:59
 msgid "_Mouse"
@@ -2864,9 +2846,7 @@ msgstr ""
 "Canvieu la sensibilitat del ratolí i del ratolí tàctil i seleccioneu l'ús "
 "per dretans o esquerrans"
 
-#. Translators: Search terms to find the Mouse and Touchpad panel. Do NOT
-#. translate or localize the semicolons! The list MUST also end with a
-#. semicolon!
+#. Translators: Search terms to find the Mouse and Touchpad panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/mouse/gnome-mouse-panel.desktop.in:15
 msgid "Trackpad;Pointer;Click;Tap;Double;Button;Trackball;Scroll;"
 msgstr "Ratolí tàctil;Punter;Clic;Toc;Doble;Botó;Ratolí de bola;Desplaça;"
@@ -2948,8 +2928,7 @@ msgstr "Multitasca"
 msgid "Manage preferences for productivity and multitasking"
 msgstr "Gestiona les preferències de productivitat i multitasca"
 
-#. Translators: Search terms to find the Search panel. Do NOT translate or
-#. localize the semicolons! The list MUST also end with a semicolon!
+#. Translators: Search terms to find the Search panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/multitasking/gnome-multitasking-panel.desktop.in:15
 msgid ""
 "Multitasking;Multitask;Productivity;Customize;Desktop;Hot;Corner;Workspaces;"
@@ -2976,8 +2955,7 @@ msgid "Manual"
 msgstr "Manual"
 
 #. xxx: Added to avoid confusion with the preceding VPN row
-#: panels/network/cc-net-proxy-page.ui:4
-#: panels/network/cc-network-panel.ui:102
+#: panels/network/cc-net-proxy-page.ui:4 panels/network/cc-network-panel.ui:102
 msgid "Proxy"
 msgstr "Servidor intermediari"
 
@@ -3098,8 +3076,7 @@ msgstr "Nom de la xarxa"
 msgid "Password"
 msgstr "Contrasenya"
 
-#. TRANSLATORS: This happens when the connection name does not contain the
-#. SSID.
+#. TRANSLATORS: This happens when the connection name does not contain the SSID.
 #: panels/network/cc-wifi-connection-row.c:223
 #, c-format
 msgctxt "Wi-Fi Connection"
@@ -3132,14 +3109,12 @@ msgid "Signal strength %d%%"
 msgstr "Força del senyal %d%%"
 
 #. TRANSLATORS: device status
-#: panels/network/cc-wifi-connection-row.ui:35
-#: panels/network/panel-common.c:63
+#: panels/network/cc-wifi-connection-row.ui:35 panels/network/panel-common.c:63
 msgid "Connected"
 msgstr "Connectat"
 
 #: panels/network/cc-wifi-connection-row.ui:63
-#: panels/network/network-bluetooth.ui:14
-#: panels/network/network-ethernet.ui:47
+#: panels/network/network-bluetooth.ui:14 panels/network/network-ethernet.ui:47
 msgid "Network Options"
 msgstr "Opcions de xarxa"
 
@@ -3183,8 +3158,8 @@ msgstr "Cal activar el punt d'accés Wi-Fi?"
 
 #: panels/network/cc-wifi-hotspot-dialog.ui:28
 msgid ""
-"Wi-Fi hotspot allows others to share your internet connection, by creating a"
-" Wi-Fi network that they can connect to. To do this, you must have an "
+"Wi-Fi hotspot allows others to share your internet connection, by creating a "
+"Wi-Fi network that they can connect to. To do this, you must have an "
 "internet connection through a source other than Wi-Fi."
 msgstr ""
 "El punt d'accés Wi-Fi permet compatir la vostra connexió a Internet amb "
@@ -3340,8 +3315,8 @@ msgstr "Estable per SSID"
 #: panels/network/connection-editor/ce-page.c:251
 msgid ""
 "The MAC address entered here will be used as hardware address for the "
-"network device this connection is activated on. This feature is known as MAC"
-" cloning or spoofing. Example: 00:11:22:33:44:55"
+"network device this connection is activated on. This feature is known as MAC "
+"cloning or spoofing. Example: 00:11:22:33:44:55"
 msgstr ""
 "L'adreça MAC introduïda aquí s'utilitzarà com adreça de maquinari per la "
 "connexió per la qual s'activi aquest dispositiu. Aquesta funcionalitat es "
@@ -3356,8 +3331,8 @@ msgstr "Perfil %d"
 #: panels/network/connection-editor/ce-page-details.c:83
 #, c-format
 msgid ""
-"Saved details for “%s” will be permanently lost. This includes passwords and"
-" any network changes."
+"Saved details for “%s” will be permanently lost. This includes passwords and "
+"any network changes."
 msgstr ""
 "Els detalls desats de «%s» no es podran recuperar. Això inclou les "
 "contrasenyes i qualsevol canvi de xarxa."
@@ -3680,8 +3655,7 @@ msgstr "Connexió li_mitada: té dades limitades o pot incórrer en càrrecs"
 
 #: panels/network/connection-editor/details-page.ui:426
 msgid ""
-"Software updates and other large downloads will not be started "
-"automatically."
+"Software updates and other large downloads will not be started automatically."
 msgstr ""
 "Les actualitzacions de programari i altres baixades grans no s'iniciaran "
 "automàticament."
@@ -3852,11 +3826,13 @@ msgstr "No es pot importar la connexió VPN"
 #: panels/network/connection-editor/vpn-helpers.c:145
 #, c-format
 msgid ""
-"The file “%s” could not be read or does not contain recognized VPN connection information\n"
+"The file “%s” could not be read or does not contain recognized VPN "
+"connection information\n"
 "\n"
 "Error: %s."
 msgstr ""
-"No s'ha pogut llegir el fitxer «%s» o no conté informació reconeguda d'una connexió VPN\n"
+"No s'ha pogut llegir el fitxer «%s» o no conté informació reconeguda d'una "
+"connexió VPN\n"
 "\n"
 "Error: %s."
 
@@ -3912,8 +3888,8 @@ msgstr "_Port a escoltar"
 
 #: panels/network/connection-editor/wireguard-page.ui:109
 msgid ""
-"A port to listen on. If set to 'automatic', the port will be chosen randomly"
-" when the interface comes up."
+"A port to listen on. If set to 'automatic', the port will be chosen randomly "
+"when the interface comes up."
 msgstr ""
 "Un port per a escoltar. Si s'estableix a «automàtic», el port es triarà "
 "aleatòriament quan aparegui la interfície."
@@ -4005,9 +3981,9 @@ msgid ""
 "incoming traffic for this peer is allowed and to which outgoing traffic for "
 "this peer is directed."
 msgstr ""
-"Llista separada per comes d'adreces IP (v4 o v6) amb màscara CIDR des de les"
-" quals el trànsit entrant d'aquest parell està permès i al qual serà adreçat"
-" el trànsit de sortida per a aquest parell."
+"Llista separada per comes d'adreces IP (v4 o v6) amb màscara CIDR des de les "
+"quals el trànsit entrant d'aquest parell està permès i al qual serà adreçat "
+"el trànsit de sortida per a aquest parell."
 
 #: panels/network/connection-editor/wireguard-peer.ui:194
 msgid "_Persistent keepalive"
@@ -4035,8 +4011,7 @@ msgstr "Aplica"
 msgid "Control how you connect to the Internet"
 msgstr "Controleu com us connecteu a Internet"
 
-#. Translators: Search terms to find the Network panel. Do NOT translate or
-#. localize the semicolons! The list MUST also end with a semicolon!
+#. Translators: Search terms to find the Network panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/network/gnome-network-panel.desktop.in:15
 msgid "Network;IP;LAN;Proxy;WAN;Broadband;Modem;Bluetooth;vpn;DNS;"
 msgstr ""
@@ -4046,13 +4021,12 @@ msgstr ""
 msgid "Control how you connect to Wi-Fi networks"
 msgstr "Controleu com us connecteu a les xarxes sense fil"
 
-#. Translators: Search terms to find the Wi-Fi panel. Do NOT translate or
-#. localize the semicolons! The list MUST also end with a semicolon!
+#. Translators: Search terms to find the Wi-Fi panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/network/gnome-wifi-panel.desktop.in:15
 msgid "Network;Wireless;Wi-Fi;Wifi;IP;LAN;Broadband;DNS;Hotspot;"
 msgstr ""
-"Xarxa;Sense fil;Wi-Fi;Wifi;IP;LAN;Servidor intermediari;WAN;Banda "
-"ampla;DNS;punt d'accés Wi-Fi;"
+"Xarxa;Sense fil;Wi-Fi;Wifi;IP;LAN;Servidor intermediari;WAN;Banda ampla;DNS;"
+"punt d'accés Wi-Fi;"
 
 #: panels/network/net-device-ethernet.c:93
 msgid "never"
@@ -4081,6 +4055,7 @@ msgstr "%'d Mb/s"
 #. * details window for ethernet, if there is only a single
 #. * profile. It is also used to display ethernet in the
 #. * device list.
+#.
 #: panels/network/net-device-ethernet.c:265
 #: panels/network/network-bluetooth.ui:5 panels/network/network-ethernet.ui:5
 msgid "Wired"
@@ -4467,8 +4442,7 @@ msgstr "_Mostra els bàners"
 msgid "Show notifications above apps"
 msgstr "Mostra notificacions per sobre de les aplicacions"
 
-#. Popups here refers to message tray notifications in the middle of the
-#. screen.
+#. Popups here refers to message tray notifications in the middle of the screen.
 #: panels/notifications/cc-app-notifications-page.ui:45
 msgctxt "notifications"
 msgid "Show _Content"
@@ -4523,8 +4497,7 @@ msgstr "Notificacions d'aplicacions"
 msgid "Control which notifications are displayed and what they show"
 msgstr "Controleu quines notificacions es mostren i què mostren"
 
-#. Translators: Search terms to find the Notifications panel. Do NOT translate
-#. or localize the semicolons! The list MUST also end with a semicolon!
+#. Translators: Search terms to find the Notifications panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/notifications/gnome-notifications-panel.desktop.in:15
 msgid "Notifications;Banner;Message;Tray;Popup;"
 msgstr "Notificacions;Bàner;Missatge;Safata;Emergent;"
@@ -4637,14 +4610,14 @@ msgstr "Connecteu-vos als comptes en línia i decidiu quin ús en voleu fer"
 #. Translators: Search terms to find the Online Accounts panel.
 #. Do NOT translate or localize the semicolons!
 #. The list MUST also end with a semicolon!
-#. For ReadItLater and Pocket, see
-#. http://en.wikipedia.org/wiki/Pocket_(application)
+#. For ReadItLater and Pocket, see http://en.wikipedia.org/wiki/Pocket_(application)
 #: panels/online-accounts/gnome-online-accounts-panel.desktop.in:18
 msgid ""
-"Google;Facebook;Twitter;Yahoo;Web;Online;Chat;Calendar;Mail;Contact;ownCloud;Kerberos;IMAP;SMTP;Pocket;ReadItLater;"
+"Google;Facebook;Twitter;Yahoo;Web;Online;Chat;Calendar;Mail;Contact;ownCloud;"
+"Kerberos;IMAP;SMTP;Pocket;ReadItLater;"
 msgstr ""
-"Google;Facebook;Twitter;Yahoo;Web;En "
-"línia;Xat;Calendari;Correu;Contacte;ownCloud;Kerberos;IMAP;SMTP;Pocket;ReadItLater;"
+"Google;Facebook;Twitter;Yahoo;Web;En línia;Xat;Calendari;Correu;Contacte;"
+"ownCloud;Kerberos;IMAP;SMTP;Pocket;ReadItLater;"
 
 #: panels/power/cc-battery-row.c:80
 msgid "Unknown time"
@@ -4786,16 +4759,13 @@ msgctxt "Battery name"
 msgid "Extra"
 msgstr "Addicional"
 
-#. TRANSLATORS: This is the battery charge level percentage (e.g. 50%). This
-#. could be localized to account for local Percent sign formatting guidelines.
-#. See https://en.wikipedia.org/wiki/Percent_sign#Correct_style
+#. TRANSLATORS: This is the battery charge level percentage (e.g. 50%). This could be localized to account for local Percent sign formatting guidelines. See https://en.wikipedia.org/wiki/Percent_sign#Correct_style
 #: panels/power/cc-battery-row.c:289
 #, c-format
 msgid "%d %%"
 msgstr "%d %%"
 
-#. TRANSLATORS: This is the same title as the title from the .ui file, but
-#. without mnemonic
+#. TRANSLATORS: This is the same title as the title from the .ui file, but without mnemonic
 #: panels/power/cc-power-panel.c:206
 msgid "Power Saving"
 msgstr "Estalvi d'energia"
@@ -4831,16 +4801,15 @@ msgid "Nothing"
 msgstr "Res"
 
 #: panels/power/cc-power-panel.c:864
-msgid ""
-"Performance mode temporarily disabled due to high operating temperature"
+msgid "Performance mode temporarily disabled due to high operating temperature"
 msgstr ""
 "El mode de rendiment està temporalment inhabilitat a causa de l'alta "
 "temperatura"
 
 #: panels/power/cc-power-panel.c:866
 msgid ""
-"Lap detected: performance mode temporarily unavailable. Move the device to a"
-" stable surface to restore."
+"Lap detected: performance mode temporarily unavailable. Move the device to a "
+"stable surface to restore."
 msgstr ""
 "S'ha detectat una volta: el mode de rendiment no està disponible "
 "temporalment. Moveu el dispositiu a una superfície estable per a restaurar-"
@@ -4947,10 +4916,8 @@ msgid "Turn on power saver mode when battery power is low"
 msgstr "Activa el mode d'estalvi d'energia quan la bateria estigui baixa"
 
 #: panels/power/cc-power-panel.ui:226
-#, fuzzy
-#| msgid "Automatic Screen _Lock"
 msgid "Automatic Screen _Blank"
-msgstr "_Bloqueja la pantalla automàticament"
+msgstr ""
 
 #: panels/power/cc-power-panel.ui:227
 msgid "Turn the screen off after a period of inactivity"
@@ -5017,14 +4984,14 @@ msgstr ""
 "Visualitzeu l'estat de la bateria i canvieu els paràmetres d'estalvi "
 "d'energia"
 
-#. Translators: Search terms to find the Power panel. Do NOT translate or
-#. localize the semicolons! The list MUST also end with a semicolon!
+#. Translators: Search terms to find the Power panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/power/gnome-power-panel.desktop.in:15
 msgid ""
-"Power;Sleep;Suspend;Hibernate;Battery;Brightness;Dim;Blank;Monitor;DPMS;Idle;Energy;"
+"Power;Sleep;Suspend;Hibernate;Battery;Brightness;Dim;Blank;Monitor;DPMS;Idle;"
+"Energy;"
 msgstr ""
-"Energia;Baix consum;suspèn;Hibernació;Bateria;Brillantor;Atenuar;En "
-"blanc;Monitor;DPMS;Inactiu;Energia;"
+"Energia;Baix consum;suspèn;Hibernació;Bateria;Brillantor;Atenuar;En blanc;"
+"Monitor;DPMS;Inactiu;Energia;"
 
 #. Translators: %s is the printer name
 #: panels/printers/cc-printers-panel.c:682
@@ -5051,14 +5018,12 @@ msgstr "Cerca impressores"
 msgid "No Printers"
 msgstr "Sense impressores"
 
-#. Translators: Title if the CUPS server is not running (we can not connect to
-#. it).
+#. Translators: Title if the CUPS server is not running (we can not connect to it).
 #: panels/printers/cc-printers-panel.ui:144
 msgid "No Print Service"
 msgstr "Sense servei d'impressió"
 
-#. Translators: Description if the CUPS server is not running (we can not
-#. connect to it).
+#. Translators: Description if the CUPS server is not running (we can not connect to it).
 #: panels/printers/cc-printers-panel.ui:145
 msgid "The system printing service doesn’t seem to be available"
 msgstr "Sembla que el servei d'impressió del sistema no està disponible"
@@ -5073,8 +5038,7 @@ msgstr ""
 "Afegiu impressores, visualitzeu tasques d'impressió i decidiu com voleu "
 "imprimir"
 
-#. Translators: Search terms to find the Printers panel. Do NOT translate or
-#. localize the semicolons! The list MUST also end with a semicolon!
+#. Translators: Search terms to find the Printers panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/printers/gnome-printers-panel.desktop.in:16
 msgid "Printer;Queue;Print;Paper;Ink;Toner;"
 msgstr "Impressora;Cua;Imprimir;Paper;Tinta;Tòner;"
@@ -5089,11 +5053,11 @@ msgstr "S'estan cercant els controladors preferits…"
 
 #: panels/printers/pp-details-dialog.c:277
 msgid ""
-"PostScript Printer Description files (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, "
-"*.PPD.GZ)"
+"PostScript Printer Description files (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, *."
+"PPD.GZ)"
 msgstr ""
-"Fitxers de descripció d'impressora PostScript (*.ppd, *.PPD, *.ppd.gz, "
-"*.PPD.gz, *.PPD.GZ)"
+"Fitxers de descripció d'impressora PostScript (*.ppd, *.PPD, *.ppd.gz, *.PPD."
+"gz, *.PPD.GZ)"
 
 #: panels/printers/pp-details-dialog.ui:4
 #: panels/printers/pp-details-dialog.ui:12
@@ -5103,8 +5067,7 @@ msgstr "Detalls de la impressora"
 
 #: panels/printers/pp-details-dialog.ui:35
 msgid "Printer names cannot contain SPACE, TAB, #, or /"
-msgstr ""
-"Els noms de les impressores no poden contenir espai, tabulador, #, o /"
+msgstr "Els noms de les impressores no poden contenir espai, tabulador, #, o /"
 
 #: panels/printers/pp-details-dialog.ui:54
 #: panels/privacy/cc-privacy-panel.ui:34
@@ -5246,8 +5209,7 @@ msgstr "Completada"
 msgid "Move Print Job to Top of Queue"
 msgstr "Mou aquest treball al principi de la cua"
 
-#. Translators: This label shows how many jobs of this printer needs to be
-#. authenticated to be printed.
+#. Translators: This label shows how many jobs of this printer needs to be authenticated to be printed.
 #: panels/printers/pp-jobs-dialog.c:319
 #, c-format
 msgid "%u Job Requires Authentication"
@@ -5261,8 +5223,7 @@ msgstr[1] "%u tasques requereixen autenticació"
 msgid "Enter credentials to print from %s"
 msgstr "Introduïu les credencials per a imprimir des de %s"
 
-#. Translators: this action removes (purges) all the listed jobs from the
-#. list.
+#. Translators: this action removes (purges) all the listed jobs from the list.
 #: panels/printers/pp-jobs-dialog.ui:12
 msgid "_Clear All"
 msgstr "_Neteja-ho tot"
@@ -5271,26 +5232,23 @@ msgstr "_Neteja-ho tot"
 msgid "Active Jobs"
 msgstr "Treballs actius"
 
-#. Translators: this label describes the dialog empty state, with no jobs
-#. listed.
+#. Translators: this label describes the dialog empty state, with no jobs listed.
 #: panels/printers/pp-jobs-dialog.ui:36
 msgid "No Active Printer Jobs"
 msgstr "No hi ha tasques d'impressió actives"
 
-#. Translators: This button pop up authentication dialog for print jobs which
-#. need credentials.
+#. Translators: This button pop up authentication dialog for print jobs which need credentials.
 #: panels/printers/pp-jobs-dialog.ui:80
 msgid "_Authenticate"
 msgstr "_Autentica"
 
 #: panels/printers/pp-jobs-dialog.ui:119
-#, fuzzy
 msgid "Clear All Active Jobs?"
 msgstr "Voleu netejar totes les tasques actives?"
 
 #: panels/printers/pp-jobs-dialog.ui:120
 msgid "Clearing jobs cannot be undone"
-msgstr "No es pot desfer la neteja de treballs"
+msgstr "No es pot desfer la neteja de tasques"
 
 #: panels/printers/pp-jobs-dialog.ui:126
 msgid "Clear _All"
@@ -5308,8 +5266,7 @@ msgstr "Domini"
 msgid "Username"
 msgstr "Nom d'usuari"
 
-#. Translators: This button authenticates all print jobs and send them for
-#. printing.
+#. Translators: This button authenticates all print jobs and send them for printing.
 #: panels/printers/pp-jobs-dialog.ui:227
 msgid "A_uthenticate"
 msgstr "A_utentica"
@@ -5331,21 +5288,19 @@ msgstr "Afegeix una impressora"
 msgid "Unlock Print Server"
 msgstr "Desbloqueja el servidor d'impressió"
 
-#. Translators: Samba server needs authentication of the user to show list of
-#. its printers.
+#. Translators: Samba server needs authentication of the user to show list of its printers.
 #: panels/printers/pp-new-printer-dialog.c:273
 #, c-format
 msgid "Unlock %s."
 msgstr "Desbloqueja %s."
 
-#. Translators: Samba server needs authentication of the user to show list of
-#. its printers.
+#. Translators: Samba server needs authentication of the user to show list of its printers.
 #: panels/printers/pp-new-printer-dialog.c:277
 #, c-format
 msgid "Enter username and password to view printers on %s."
 msgstr ""
-"Introduïu el nom d'usuari i la contrasenya per a visualitzar les impressores"
-" a %s."
+"Introduïu el nom d'usuari i la contrasenya per a visualitzar les impressores "
+"a %s."
 
 #. Translators: The found device is a printer connected via USB
 #: panels/printers/pp-new-printer-dialog.c:1352
@@ -5374,8 +5329,7 @@ msgstr "Ubicació: %s"
 msgid "Address: %s"
 msgstr "Adreça: %s"
 
-#. Translators: This item is a server which needs authentication to show its
-#. printers
+#. Translators: This item is a server which needs authentication to show its printers
 #: panels/printers/pp-new-printer-dialog.c:1438
 msgid "Server requires authentication"
 msgstr "El servidor requereix autenticació"
@@ -5383,8 +5337,7 @@ msgstr "El servidor requereix autenticació"
 #. Translators: this is the "go back" action of a button
 #: panels/printers/pp-new-printer-dialog.ui:78
 #: panels/system/users/cc-fingerprint-dialog.ui:23
-#: panels/wacom/cc-wacom-stylus-page.c:425
-#: panels/wwan/cc-wwan-apn-dialog.ui:21
+#: panels/wacom/cc-wacom-stylus-page.c:425 panels/wwan/cc-wwan-apn-dialog.ui:21
 msgid "Back"
 msgstr "Enrere"
 
@@ -5405,8 +5358,7 @@ msgstr "No s'ha trobat cap impressora"
 msgid "Searching for Printers"
 msgstr "S'estan cercant les impressores"
 
-#. Translators: The entered text should contain network address of a printer
-#. or a text which will filter found devices (their names and locations)
+#. Translators: The entered text should contain network address of a printer or a text which will filter found devices (their names and locations)
 #: panels/printers/pp-new-printer-dialog.ui:211
 msgid "Enter a network address or search for a printer"
 msgstr "Introduïu una adreça de xarxa o cerqueu una impressora"
@@ -5418,8 +5370,8 @@ msgstr "Cal autenticació"
 #: panels/printers/pp-new-printer-dialog.ui:269
 msgid "Enter username and password to view printers on Print Server"
 msgstr ""
-"Introduïu el nom d'usuari i la contrasenya per a visualitzar les impressores"
-" al servidor d'impressió"
+"Introduïu el nom d'usuari i la contrasenya per a visualitzar les impressores "
+"al servidor d'impressió"
 
 #: panels/printers/pp-options-dialog.c:86
 msgid "Two Sided"
@@ -5471,15 +5423,13 @@ msgctxt "Printer Option Group"
 msgid "General"
 msgstr "General"
 
-#. Translators: "Page Setup" tab contains settings related to pages (page
-#. size, paper source, etc.)
+#. Translators: "Page Setup" tab contains settings related to pages (page size, paper source, etc.)
 #: panels/printers/pp-options-dialog.c:634
 msgctxt "Printer Option Group"
 msgid "Page Setup"
 msgstr "Configuració de la pàgina"
 
-#. Translators: "Installable Options" tab contains settings of presence of
-#. installed options (amount of RAM, duplex unit, etc.)
+#. Translators: "Installable Options" tab contains settings of presence of installed options (amount of RAM, duplex unit, etc.)
 #: panels/printers/pp-options-dialog.c:637
 msgctxt "Printer Option Group"
 msgid "Installable Options"
@@ -5491,8 +5441,7 @@ msgctxt "Printer Option Group"
 msgid "Job"
 msgstr "Tasca"
 
-#. Translators: "Image Quality" tab contains settings for quality of output
-#. print (e.g. resolution)
+#. Translators: "Image Quality" tab contains settings for quality of output print (e.g. resolution)
 #: panels/printers/pp-options-dialog.c:643
 msgctxt "Printer Option Group"
 msgid "Image Quality"
@@ -5504,8 +5453,7 @@ msgctxt "Printer Option Group"
 msgid "Color"
 msgstr "Color"
 
-#. Translators: "Finishing" tab contains finishing settings (e.g. booklet
-#. printing)
+#. Translators: "Finishing" tab contains finishing settings (e.g. booklet printing)
 #: panels/printers/pp-options-dialog.c:649
 msgctxt "Printer Option Group"
 msgid "Finishing"
@@ -5744,8 +5692,7 @@ msgstr "Opcions d'impressió"
 msgid "Use Printer by Default"
 msgstr "Utilitza la impressora per defecte"
 
-#. Translators: This button executes command which cleans print heads of the
-#. printer.
+#. Translators: This button executes command which cleans print heads of the printer.
 #: panels/printers/pp-printer-entry.ui:254
 msgid "Clean Print Heads"
 msgstr "Neteja els capçals d'impressió"
@@ -5790,9 +5737,6 @@ msgid "Reduced Functionality"
 msgstr "Funcionalitat reduïda"
 
 #: panels/privacy/bolt/cc-bolt-device-dialog.c:99
-#, fuzzy
-#| msgctxt "Thunderbolt Device Status"
-#| msgid "Connected & Authorized"
 msgctxt "Thunderbolt Device Status"
 msgid "Connected and Authorized"
 msgstr "Connectat i autoritzat"
@@ -5886,10 +5830,12 @@ msgstr "Només es poden adjuntar dispositius USB i pantalles."
 #: panels/privacy/bolt/cc-bolt-page.c:505
 msgid ""
 "Thunderbolt could not be detected.\n"
-"Either the system lacks Thunderbolt support, it has been disabled in the BIOS or is set to an unsupported security level in the BIOS."
+"Either the system lacks Thunderbolt support, it has been disabled in the "
+"BIOS or is set to an unsupported security level in the BIOS."
 msgstr ""
 "No s'ha pogut detectar Thunderbolt.\n"
-"O bé el sistema no és compatible amb Thunderbolt, s'ha inhabilitat al BIOS o està configurat amb un nivell de seguretat no compatible al BIOS."
+"O bé el sistema no és compatible amb Thunderbolt, s'ha inhabilitat al BIOS o "
+"està configurat amb un nivell de seguretat no compatible al BIOS."
 
 #: panels/privacy/bolt/cc-bolt-page.c:549
 msgid "Thunderbolt support has been disabled in the BIOS."
@@ -5951,8 +5897,8 @@ msgstr "Aplicacions permeses"
 
 #: panels/privacy/camera/cc-camera-page.ui:28
 msgid ""
-"The following sandboxed apps have been given permission to use cameras. Apps"
-" that are not sandboxed can use cameras without asking for permission."
+"The following sandboxed apps have been given permission to use cameras. Apps "
+"that are not sandboxed can use cameras without asking for permission."
 msgstr ""
 "Les aplicacions en espais aïllats següents han rebut permís per a utilitzar "
 "càmeres. Les aplicacions que no estan en un entorn aïllat poden utilitzar "
@@ -6019,8 +5965,7 @@ msgstr "_Seguretat del dispositiu"
 msgid "Hardware security status and information"
 msgstr "Estat de seguretat i informació del maquinari"
 
-#. translators: The first '%s' is the distributor's name, such as 'Fedora',
-#. the second '%s' is a link to the privacy policy
+#. translators: The first '%s' is the distributor's name, such as 'Fedora', the second '%s' is a link to the privacy policy
 #: panels/privacy/diagnostics/cc-diagnostics-page.c:125
 #, c-format
 msgid ""
@@ -6118,9 +6063,8 @@ msgstr ""
 #. TRANSLATORS: this is the second section of the description.
 #: panels/privacy/firmware-security/cc-firmware-security-boot-dialog.c:105
 msgid ""
-"Secure boot can often be turned on from your device's UEFI firmware settings"
-" (BIOS). For help, contact your hardware manufacturer or IT support "
-"provider."
+"Secure boot can often be turned on from your device's UEFI firmware settings "
+"(BIOS). For help, contact your hardware manufacturer or IT support provider."
 msgstr ""
 "L'arrencada segura sovint es pot activar des de la configuració del "
 "microprogramari UEFI del vostre ordinador (BIOS). Per a obtenir ajuda, "
@@ -6128,13 +6072,16 @@ msgstr ""
 
 #: panels/privacy/firmware-security/cc-firmware-security-boot-dialog.ui:51
 msgid ""
-"Secure boot prevents malicious software from being loaded when the device starts.\n"
+"Secure boot prevents malicious software from being loaded when the device "
+"starts.\n"
 "\n"
 "For more information, contact the hardware manufacturer or IT support."
 msgstr ""
-"L'arrencada segura evita que el programari maliciós es carregui quan s'iniciï el dispositiu.\n"
+"L'arrencada segura evita que el programari maliciós es carregui quan "
+"s'iniciï el dispositiu.\n"
 "\n"
-"Per a més informació, contacteu amb el fabricant de maquinari o el suport tècnic."
+"Per a més informació, contacteu amb el fabricant de maquinari o el suport "
+"tècnic."
 
 #. TRANSLATORS: in reference to firmware protection: 0/4 stars
 #: panels/privacy/firmware-security/cc-firmware-security-dialog.c:108
@@ -6146,13 +6093,20 @@ msgstr "Han fallat les comprovacions de seguretat"
 #. checking the security items.
 #: panels/privacy/firmware-security/cc-firmware-security-dialog.c:111
 msgid ""
-"Hardware does not pass checks. This means that you are not protected against common hardware security issues.\n"
+"Hardware does not pass checks. This means that you are not protected against "
+"common hardware security issues.\n"
 "\n"
-"It may be possible to resolve hardware security issues by updating your firmware or changing device configuration options. However, failures can stem from the physical hardware itself and may not be fixable."
+"It may be possible to resolve hardware security issues by updating your "
+"firmware or changing device configuration options. However, failures can "
+"stem from the physical hardware itself and may not be fixable."
 msgstr ""
-"El maquinari no passa les comprovacions. Això vol dir que no esteu protegits contra problemes comuns de seguretat del maquinari.\n"
+"El maquinari no passa les comprovacions. Això vol dir que no esteu protegits "
+"contra problemes comuns de seguretat del maquinari.\n"
 "\n"
-"Podria ser possible resoldre problemes de seguretat del maquinari actualitzant el microprogramari o canviant les opcions de configuració del dispositiu. No obstant això, els errors poden provenir del propi maquinari físic, i poden no tenir solució."
+"Podria ser possible resoldre problemes de seguretat del maquinari "
+"actualitzant el microprogramari o canviant les opcions de configuració del "
+"dispositiu. No obstant això, els errors poden provenir del propi maquinari "
+"físic, i poden no tenir solució."
 
 #. TRANSLATORS: in reference to firmware protection: 1/4 stars
 #: panels/privacy/firmware-security/cc-firmware-security-dialog.c:121
@@ -6169,8 +6123,8 @@ msgid ""
 "protections."
 msgstr ""
 "Aquest dispositiu compleix els requisits bàsics de seguretat i proporciona "
-"protecció contra algunes amenaces de seguretat del maquinari. Tot i això, li"
-" manquen altres proteccions recomanades."
+"protecció contra algunes amenaces de seguretat del maquinari. Tot i això, li "
+"manquen altres proteccions recomanades."
 
 #. TRANSLATORS: in reference to firmware protection: 2~4 stars
 #: panels/privacy/firmware-security/cc-firmware-security-dialog.c:134
@@ -6192,12 +6146,11 @@ msgstr ""
 msgid "Checks Unavailable"
 msgstr "Comprovacions no disponibles"
 
-#. TRANSLATORS: When the security result is unavailable, this description is
-#. shown.
+#. TRANSLATORS: When the security result is unavailable, this description is shown.
 #: panels/privacy/firmware-security/cc-firmware-security-dialog.c:146
 msgid ""
-"Device security checks are not available for this device. It is not possible"
-" to tell whether it meets hardware security requirements."
+"Device security checks are not available for this device. It is not possible "
+"to tell whether it meets hardware security requirements."
 msgstr ""
 "Les comprovacions de seguretat del dispositiu no estan disponibles per a "
 "aquest sistema. No és possible saber si compleix els requisits de seguretat."
@@ -6217,7 +6170,8 @@ msgstr "Quant a la Seguretat del dispositiu"
 
 #: panels/privacy/firmware-security/cc-firmware-security-help-dialog.ui:26
 msgid ""
-"Device security provides information about how protected your device is against security issues which target the hardware itself.\n"
+"Device security provides information about how protected your device is "
+"against security issues which target the hardware itself.\n"
 "\n"
 "Aspects of hardware that affect security include:\n"
 "\n"
@@ -6225,21 +6179,31 @@ msgid ""
 "• how the hardware is configured to protect against security issues;\n"
 "• the security of the software runs directly on the hardware.\n"
 "\n"
-"Security threats which affect hardware include malware and viruses that target the software that runs directly on the hardware. It also includes physical tampering, such as physical connection to the hardware to read data and implant malware.\n"
+"Security threats which affect hardware include malware and viruses that "
+"target the software that runs directly on the hardware. It also includes "
+"physical tampering, such as physical connection to the hardware to read data "
+"and implant malware.\n"
 "\n"
-"Device security is just one aspect of security, and does not reflect the overall security status of the system and applications."
+"Device security is just one aspect of security, and does not reflect the "
+"overall security status of the system and applications."
 msgstr ""
-"La seguretat del dispositiu proporciona informació sobre com està protegit el dispositiu contra problemes de seguretat que afecten el propi maquinari.\n"
+"La seguretat del dispositiu proporciona informació sobre com està protegit "
+"el dispositiu contra problemes de seguretat que afecten el propi maquinari.\n"
 "\n"
 "Els aspectes del maquinari que afecten la seguretat inclouen:\n"
 "\n"
 "• funcions de seguretat que estan integrades en el propi maquinari;\n"
-"• com es configura el maquinari per a protegir-se contra problemes de seguretat;\n"
+"• com es configura el maquinari per a protegir-se contra problemes de "
+"seguretat;\n"
 "• la seguretat del programari s'executa directament al maquinari.\n"
 "\n"
-"Les amenaces de seguretat que afecten el maquinari inclouen el programari maliciós i els virus que ataquen al programari que s'executa directament al maquinari. També inclou la manipulació física, com la connexió física al maquinari per a llegir dades i implantar programari maliciós.\n"
+"Les amenaces de seguretat que afecten el maquinari inclouen el programari "
+"maliciós i els virus que ataquen al programari que s'executa directament al "
+"maquinari. També inclou la manipulació física, com la connexió física al "
+"maquinari per a llegir dades i implantar programari maliciós.\n"
 "\n"
-"La seguretat del dispositiu és només un aspecte de la seguretat, i no reflecteix l'estat general de seguretat del sistema i les aplicacions."
+"La seguretat del dispositiu és només un aspecte de la seguretat, i no "
+"reflecteix l'estat general de seguretat del sistema i les aplicacions."
 
 #: panels/privacy/firmware-security/cc-firmware-security-page.c:123
 msgid "Protected against malicious software when the device starts."
@@ -6275,8 +6239,8 @@ msgstr ""
 #. TRANSLATORS: this is to explain an event that has already happened
 #: panels/privacy/firmware-security/cc-firmware-security-page.c:163
 msgid ""
-"This issue could have been caused by a change in the UEFI firmware settings,"
-" or because of malicious software on this system."
+"This issue could have been caused by a change in the UEFI firmware settings, "
+"or because of malicious software on this system."
 msgstr ""
 "Aquest problema podria haver estat causat per un canvi en la configuració "
 "del microprogramari UEFI, o a causa del programari maliciós en aquest "
@@ -6298,14 +6262,12 @@ msgstr ""
 msgid "%1$s"
 msgstr "%1$s"
 
-#. TRANSLATOR: This is the text event status output when the event status is
-#. "success"
+#. TRANSLATOR: This is the text event status output when the event status is "success"
 #: panels/privacy/firmware-security/cc-firmware-security-page.c:235
 msgid "Pass"
 msgstr "Correcte"
 
-#. TRANSLATOR: This is the text event status output when the event status is
-#. not "success"
+#. TRANSLATOR: This is the text event status output when the event status is not "success"
 #: panels/privacy/firmware-security/cc-firmware-security-page.c:238
 msgid "! Fail"
 msgstr "Ha fallat"
@@ -6334,8 +6296,7 @@ msgstr "Comprovacions de seguretat no disponibles"
 
 #: panels/privacy/firmware-security/cc-firmware-security-page.c:557
 msgid "Security levels are not available for this device."
-msgstr ""
-"Els nivells de seguretat no estan disponibles per a aquest dispositiu."
+msgstr "Els nivells de seguretat no estan disponibles per a aquest dispositiu."
 
 #: panels/privacy/firmware-security/cc-firmware-security-page.ui:4
 msgid "Device Security"
@@ -6347,8 +6308,8 @@ msgstr "Seguretat del dispositiu no disponible"
 
 #: panels/privacy/firmware-security/cc-firmware-security-page.ui:43
 msgid ""
-"Device Security is only available on physical hardware. No physical hardware"
-" has been detected."
+"Device Security is only available on physical hardware. No physical hardware "
+"has been detected."
 msgstr ""
 "La seguretat del dispositiu només està disponible en maquinari físic. No "
 "s'ha detectat cap maquinari físic."
@@ -6361,8 +6322,7 @@ msgstr "Esdeveniments de seguretat"
 msgid "No Events"
 msgstr "Sense esdeveniments"
 
-#. TRANSLATORS: if the status is valid. For example security check is valid
-#. and key is valid.
+#. TRANSLATORS: if the status is valid. For example security check is valid and key is valid.
 #: panels/privacy/firmware-security/cc-firmware-security-utils.c:35
 msgid "Valid"
 msgstr "Vàlid"
@@ -6376,8 +6336,7 @@ msgstr "No vàlid"
 #. TRANSLATORS: Status of Parental Controls setup
 #: panels/privacy/firmware-security/cc-firmware-security-utils.c:45
 #: panels/system/users/cc-user-page.c:365
-#: panels/system/users/cc-user-page.c:752
-#: panels/wwan/cc-wwan-device-page.c:475
+#: panels/system/users/cc-user-page.c:752 panels/wwan/cc-wwan-device-page.c:475
 msgid "Enabled"
 msgstr "Habilitat"
 
@@ -6386,8 +6345,7 @@ msgstr "Habilitat"
 msgid "Not Enabled"
 msgstr "Sense habilitar"
 
-#. TRANSLATORS: the memory space or system mode is locked to prevent from
-#. malicious modification.
+#. TRANSLATORS: the memory space or system mode is locked to prevent from malicious modification.
 #: panels/privacy/firmware-security/cc-firmware-security-utils.c:55
 msgid "Locked"
 msgstr "Bloquejat"
@@ -6441,14 +6399,17 @@ msgstr "No compatible"
 msgid "Control access to your data and hardware, device security"
 msgstr "Control de l'accés al vostre maquinari, serveis i dades"
 
-#. Translators: Search terms to find the Privacy panel. Do NOT translate or
-#. localize the semicolons! The list MUST also end with a semicolon!
+#. Translators: Search terms to find the Privacy panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/privacy/gnome-privacy-panel.desktop.in:15
 msgid ""
-"Privacy;Screen;Lock;Private;Usage;Recent;History;Files;Temporary;Tmp;Trash;Purge;Retain;Diagnostics;Crash;Location;Gps;Camera;Photos;Video;Webcam;Recording;Security;Firmware;Thunderbolt;"
+"Privacy;Screen;Lock;Private;Usage;Recent;History;Files;Temporary;Tmp;Trash;"
+"Purge;Retain;Diagnostics;Crash;Location;Gps;Camera;Photos;Video;Webcam;"
+"Recording;Security;Firmware;Thunderbolt;"
 msgstr ""
-"Privadesa;Pantalla;Bloqueig;Privat;Ús;Recent;Història;Fitxers;Temporal;Tmp;Brossa;Purga;Mantenir;Diagnòstics;Trencaments;Ubicació;GPS;Càmera;Fotos;Vídeo;Càmera"
-" web;Micròfon;Enregistrament;Seguretat;Microprogramari;Thunderbolt;"
+"Privadesa;Pantalla;Bloqueig;Privat;Ús;Recent;Història;Fitxers;Temporal;Tmp;"
+"Brossa;Purga;Mantenir;Diagnòstics;Trencaments;Ubicació;GPS;Càmera;Fotos;"
+"Vídeo;Càmera web;Micròfon;Enregistrament;Seguretat;Microprogramari;"
+"Thunderbolt;"
 
 #: panels/privacy/location/cc-location-page.ui:17
 msgid "_Automatic Device Location"
@@ -6467,8 +6428,8 @@ msgid ""
 "permission."
 msgstr ""
 "Les aplicacions en espais aïllats següents han rebut permís per a utilitzar "
-"les dades d'ubicació. Les aplicacions que no estan en un entorn aïllat poden"
-" utilitzar les dades d'ubicació sense demanar permís."
+"les dades d'ubicació. Les aplicacions que no estan en un entorn aïllat poden "
+"utilitzar les dades d'ubicació sense demanar permís."
 
 #: panels/privacy/location/cc-location-page.ui:38
 msgid "No sandboxed apps have asked for location access"
@@ -6550,8 +6511,8 @@ msgstr "Historial dels fitxers"
 
 #: panels/privacy/usage/cc-usage-page.ui:17
 msgid ""
-"File history keeps a record of files that you have used. This information is"
-" shared between apps, and makes it easier to find files that you might want "
+"File history keeps a record of files that you have used. This information is "
+"shared between apps, and makes it easier to find files that you might want "
 "to use."
 msgstr ""
 "L'historial dels fitxers manté un registre dels fitxers que heu utilitzat. "
@@ -6600,8 +6561,7 @@ msgstr "Suprimeix automàticament els _fitxers temporals"
 msgid "Automatic Deletion _Period"
 msgstr "_Període per a la supressió automàtica"
 
-#. Translators: Option for Automatically Delete Period in Trash and Temporary
-#. Files group
+#. Translators: Option for Automatically Delete Period in Trash and Temporary Files group
 #: panels/privacy/usage/cc-usage-page.ui:81
 msgid "1 hour"
 msgstr "1 hora"
@@ -6715,8 +6675,8 @@ msgstr "_Ubicacions de cerca"
 #: panels/search/cc-search-panel.ui:27
 msgid "Filesystem locations which are searched by system apps"
 msgstr ""
-"Localitzacions del sistema de fitxers que se cerquen per les aplicacions del"
-" sistema"
+"Localitzacions del sistema de fitxers que se cerquen per les aplicacions del "
+"sistema"
 
 #: panels/search/cc-search-panel.ui:37
 msgid "Search Results"
@@ -6732,8 +6692,7 @@ msgstr ""
 "Controleu quines aplicacions mostren resultats de cerca a la vista general "
 "d'activitats"
 
-#. Translators: Search terms to find the Search panel. Do NOT translate or
-#. localize the semicolons! The list MUST also end with a semicolon!
+#. Translators: Search terms to find the Search panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/search/gnome-search-panel.desktop.in:16
 msgid "Search;Find;Index;Hide;Privacy;Results;"
 msgstr "Cerca;Troba;Índex;Oculta;Privacitat;Resultats;"
@@ -6803,8 +6762,7 @@ msgstr ""
 "Retransmeteu música, fotografies i vídeos a altres dispositius en aquesta "
 "xarxa"
 
-#: panels/sharing/cc-sharing-panel.ui:38
-#: panels/sharing/cc-sharing-panel.ui:164
+#: panels/sharing/cc-sharing-panel.ui:38 panels/sharing/cc-sharing-panel.ui:164
 msgid "_Media Sharing"
 msgstr "_Compartició de mitjans"
 
@@ -6840,10 +6798,13 @@ msgstr "_Demana contrasenya"
 #: panels/sharing/cc-sharing-panel.ui:121
 msgid ""
 "Password is required on devices that want to access shared content.\n"
-"It may still be possible for devices on this network to see what content is being shared."
+"It may still be possible for devices on this network to see what content is "
+"being shared."
 msgstr ""
-"Es requereix una contrasenya en dispositius que volen accedir a contingut compartit.\n"
-"Encara podria ser possible visualitzar pels dispositius d'aquesta xarxa el contingut que s'està compartint."
+"Es requereix una contrasenya en dispositius que volen accedir a contingut "
+"compartit.\n"
+"Encara podria ser possible visualitzar pels dispositius d'aquesta xarxa el "
+"contingut que s'està compartint."
 
 #: panels/sharing/cc-sharing-panel.ui:134
 #: panels/system/users/cc-add-user-dialog.ui:176
@@ -6875,13 +6836,14 @@ msgstr "Compartició"
 msgid "Control what you want to share with others"
 msgstr "Controleu què voleu compartir amb els altres"
 
-#. Translators: Search terms to find the Sharing panel. Do NOT translate or
-#. localize the semicolons! The list MUST also end with a semicolon!
+#. Translators: Search terms to find the Sharing panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/sharing/gnome-sharing-panel.desktop.in:15
 msgid ""
-"share;sharing;host;name;media;audio;video;pictures;photos;movies;server;renderer;"
+"share;sharing;host;name;media;audio;video;pictures;photos;movies;server;"
+"renderer;"
 msgstr ""
-"comparteix;compartició;ssh;amfitrió;nom;remot;escriptori;multimèdia;àudio;vídeo;imatges;fotografies;pel·lícules;servidor;renderitzar;"
+"comparteix;compartició;ssh;amfitrió;nom;remot;escriptori;multimèdia;àudio;"
+"vídeo;imatges;fotografies;pel·lícules;servidor;renderitzar;"
 
 #: panels/sound/cc-alert-chooser-page.c:169
 msgid "Custom"
@@ -6927,8 +6889,7 @@ msgstr "Selecciona un altaveu"
 msgid "Test Speakers"
 msgstr "Prova dels altaveus"
 
-#: panels/sound/cc-sound-panel.ui:6
-#: panels/sound/gnome-sound-panel.desktop.in:3
+#: panels/sound/cc-sound-panel.ui:6 panels/sound/gnome-sound-panel.desktop.in:3
 msgid "Sound"
 msgstr "So"
 
@@ -7042,13 +7003,13 @@ msgid "Change sound levels, inputs, outputs, and alert sounds"
 msgstr ""
 "Canvieu els nivells de so, les entrades, les sortides i les alertes sonores"
 
-#. Translators: Search terms to find the Sound panel. Do NOT translate or
-#. localize the semicolons! The list MUST also end with a semicolon!
+#. Translators: Search terms to find the Sound panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/sound/gnome-sound-panel.desktop.in:15
 msgid ""
 "Card;Microphone;Volume;Fade;Balance;Bluetooth;Headset;Audio;Output;Input;"
 msgstr ""
-"Targeta;Micròfon;Volum;Esvair;Balanç;Bluetooth;Auriculars;Àudio;Sortida;Entrada;"
+"Targeta;Micròfon;Volum;Esvair;Balanç;Bluetooth;Auriculars;Àudio;Sortida;"
+"Entrada;"
 
 #: panels/system/about/cc-about-page.ui:4
 #: panels/system/about/gnome-about-panel.desktop.in:3
@@ -7196,10 +7157,12 @@ msgstr "Visualitzeu informació sobre el sistema"
 #. sure that you use the same "translation" for those keywords
 #: panels/system/about/gnome-about-panel.desktop.in:19
 msgid ""
-"device;system;information;hostname;memory;processor;version;default;application;preferred;cd;dvd;usb;audio;video;disc;removable;media;autorun;"
+"device;system;information;hostname;memory;processor;version;default;"
+"application;preferred;cd;dvd;usb;audio;video;disc;removable;media;autorun;"
 msgstr ""
 "dispositiu;sistema;informació;amfitrió;memòria;processador;versió;per "
-"defecte;aplicació;preferit;cd;dvd;usb;àudio;vídeo;disc;extraïble;medis;autorun;"
+"defecte;aplicació;preferit;cd;dvd;usb;àudio;vídeo;disc;extraïble;medis;"
+"autorun;"
 
 #: panels/system/cc-system-panel.ui:20
 msgid "_Region &amp; Language"
@@ -7420,8 +7383,7 @@ msgstr "Cerca ciutats"
 msgid "Change the date and time, including time zone"
 msgstr "Canvieu la data i l'hora, incloent-hi el fus horari"
 
-#. Translators: Search terms to find the Date and Time panel. Do NOT translate
-#. or localize the semicolons! The list MUST also end with a semicolon!
+#. Translators: Search terms to find the Date and Time panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/system/datetime/gnome-datetime-panel.desktop.in:15
 msgid "Clock;Timezone;Location;"
 msgstr "Rellotge;Fus horari;Ubicació;"
@@ -7438,14 +7400,16 @@ msgstr "Per a canviar els paràmetres d'hora i data, us heu d'autentificar."
 msgid "Language and time settings, system information"
 msgstr "Paràmetres d'idioma i hora, informació del sistema"
 
-#. Translators: Search terms to find the System panel. Do NOT translate or
-#. localize the semicolons! The list MUST also end with a semicolon!
+#. Translators: Search terms to find the System panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/system/gnome-system-panel.desktop.in:15
 msgid ""
-"device;system;information;details;hostname;memory;processor;version;software;operating;os;model;language;region;country;formats;numbers;units;clock;timezone;date;location;remote;desktop;rdp;vnc;ssh;"
+"device;system;information;details;hostname;memory;processor;version;software;"
+"operating;os;model;language;region;country;formats;numbers;units;clock;"
+"timezone;date;location;remote;desktop;rdp;vnc;ssh;"
 msgstr ""
-"dispositiu;sistema;informació;detalls;amfitrió;memòria;processador;versió;programari;operatiu;so;model;idioma;regió;país;formats;nombres;unitats;rellotge;fus"
-" horari;data;ubicació;remot;escriptori;rdp;vnc;"
+"dispositiu;sistema;informació;detalls;amfitrió;memòria;processador;versió;"
+"programari;operatiu;so;model;idioma;regió;país;formats;nombres;unitats;"
+"rellotge;fus horari;data;ubicació;remot;escriptori;rdp;vnc;"
 
 #: panels/system/region/cc-format-chooser.c:229
 #: panels/system/region/cc-format-chooser.ui:155
@@ -7556,9 +7520,7 @@ msgstr "Fo_rmats"
 msgid "Select your display language and formats"
 msgstr "Seleccioneu l'idioma a mostrar i els formats"
 
-#. Translators: Search terms to find the Region and Language panel. Do NOT
-#. translate or localize the semicolons! The list MUST also end with a
-#. semicolon!
+#. Translators: Search terms to find the Region and Language panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/system/region/gnome-region-panel.desktop.in:15
 msgid "Language;Layout;Keyboard;Input;"
 msgstr "Idioma;Disposició;Teclat;Entrada;"
@@ -7615,8 +7577,8 @@ msgid ""
 "information about the device’s network location may also be required."
 msgstr ""
 "Usa una aplicació d'escriptori remot per a la connexió usant el protocol "
-"RDP. Es pot requerir informació addicional sobre la ubicació de la xarxa del"
-" dispositiu."
+"RDP. Es pot requerir informació addicional sobre la ubicació de la xarxa del "
+"dispositiu."
 
 #: panels/system/remote-desktop/cc-desktop-sharing-page.ui:46
 #: panels/system/remote-desktop/cc-remote-login-page.ui:45
@@ -7725,8 +7687,7 @@ msgstr "Habilita o inhabilita l'inici de sessió remot"
 
 #: panels/system/secure-shell/org.gnome.controlcenter.remote-login-helper.policy.in.in:12
 msgid "Authentication is required to enable or disable remote login"
-msgstr ""
-"Cal autenticació per a habilitar o inhabilitar l'inici de sessió remot"
+msgstr "Cal autenticació per a habilitar o inhabilitar l'inici de sessió remot"
 
 #: panels/system/users/cc-add-user-dialog.c:151
 msgid "Failed to add account"
@@ -7782,8 +7743,8 @@ msgid ""
 "Usernames can only include lower case letters, numbers, hyphens and "
 "underscores."
 msgstr ""
-"Els noms d'usuari només poden incloure lletres minúscules, nombres, guions i"
-" guions baixos."
+"Els noms d'usuari només poden incloure lletres minúscules, nombres, guions i "
+"guions baixos."
 
 #: panels/system/users/cc-add-user-dialog.ui:107
 msgid "User sets password on _first login"
@@ -7917,8 +7878,7 @@ msgstr "Ha de coincidir amb l'adreça web del proveïdor del compte"
 msgid "Enroll Device"
 msgstr "Inscriu el dispositiu"
 
-#. Translators: This button enrolls the computer in the domain in order to use
-#. enterprise logins.
+#. Translators: This button enrolls the computer in the domain in order to use enterprise logins.
 #: panels/system/users/cc-enterprise-login-dialog.ui:125
 #: panels/system/users/data/join-dialog.ui:30
 msgid "_Enroll"
@@ -8056,8 +8016,7 @@ msgid ""
 "Repeatedly lift and place your finger on the reader to enroll your "
 "fingerprint"
 msgstr ""
-"Aixequeu i poseu el dit al lector per a inscriure la vostra empremta "
-"dactilar"
+"Aixequeu i poseu el dit al lector per a inscriure la vostra empremta dactilar"
 
 #: panels/system/users/cc-fingerprint-dialog.c:1015
 msgid "_Re-enroll this finger…"
@@ -8093,26 +8052,23 @@ msgid "Delete All Fingerprints?"
 msgstr "Voleu suprimir les empremtes dactilars?"
 
 #: panels/system/users/cc-fingerprint-dialog.c:1396
-#, fuzzy
 msgid ""
 "Deleting all enrolled fingerprints will disable Fingerprint Login. To re-"
 "enable Fingerprint Login at least one fingerprint will have to be enrolled."
 msgstr ""
 "Suprimir totes les empremtes digitals inscrites inhabilitarà l'inici de "
-"sessió de les empremtes digitals. Per a tornar a habilitar l'inici de sessió"
-" de l'empremta digital almenys s'haurà d'inscriure una empremta digital."
+"sessió de les empremtes digitals. Per a tornar a habilitar l'inici de sessió "
+"de l'empremta digital heu d'inscriure  almenys una empremta digital."
 
 #: panels/system/users/cc-fingerprint-dialog.c:1401
-#, fuzzy
 msgid "_Delete All"
-msgstr "Suprimeix-ho tot"
+msgstr "_Suprimeix-ho tot"
 
 #: panels/system/users/cc-fingerprint-dialog.ui:102
 msgid "No fingerprint device"
 msgstr "No hi ha cap dispositiu d'empremtes"
 
-#. Translators: This is the empty state page label which states that there are
-#. no devices ready.
+#. Translators: This is the empty state page label which states that there are no devices ready.
 #: panels/system/users/cc-fingerprint-dialog.ui:117
 msgid "No Fingerprint device"
 msgstr "No hi ha cap dispositiu d'empremtes"
@@ -8274,8 +8230,8 @@ msgid ""
 "such as when unlocking the screen."
 msgstr ""
 "L'inici de sessió automàtic obre el compte d'usuari quan el dispositiu "
-"s'inicia, sense requerir autenticació. L'autenticació es requereix igualment"
-" en altres moments, com quan es vol desbloquejar la pantalla."
+"s'inicia, sense requerir autenticació. L'autenticació es requereix igualment "
+"en altres moments, com quan es vol desbloquejar la pantalla."
 
 #: panels/system/users/cc-user-page.ui:147
 msgid "_Administrator"
@@ -8344,16 +8300,15 @@ msgstr "Contrasenya de l'administrador"
 msgid "Add or remove users and change your password"
 msgstr "Afegiu o suprimiu usuaris i canvieu la contrasenya"
 
-#. Translators: Search terms to find the Users panel. Do NOT translate or
-#. localize the semicolons! The list MUST also end with a semicolon!
+#. Translators: Search terms to find the Users panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/system/users/gnome-users-panel.desktop.in:15
 msgid ""
-"Login;Name;Fingerprint;Avatar;Logo;Face;Password;Parental;Restrictions;Usage;Kid;Child;"
+"Login;Name;Fingerprint;Avatar;Logo;Face;Password;Parental;Restrictions;Usage;"
+"Kid;Child;"
 msgstr ""
-"Inici de sessió;Nom;Empremta "
-"dactilar;Avatar;Logotip;Cara;Contrasenya;Control parental; Temps de "
-"pantalla; Restriccions d'aplicacions;Restriccions web;Ús;Límit "
-"d'ús;Nen;Nena;Infant;"
+"Inici de sessió;Nom;Empremta dactilar;Avatar;Logotip;Cara;Contrasenya;"
+"Control parental; Temps de pantalla; Restriccions d'aplicacions;Restriccions "
+"web;Ús;Límit d'ús;Nen;Nena;Infant;"
 
 #: panels/system/users/org.gnome.controlcenter.user-accounts.policy.in:11
 msgid "Manage user accounts"
@@ -8513,8 +8468,7 @@ msgstr "La vostra contrasenya ha canviat des que us heu autenticat!"
 msgid "The new password does not contain enough different characters"
 msgstr "La contrasenya nova no conté suficients caràcters diferents"
 
-#: panels/system/users/run-passwd.c:503
-#: panels/wwan/cc-wwan-errors-private.h:72
+#: panels/system/users/run-passwd.c:503 panels/wwan/cc-wwan-errors-private.h:72
 #, c-format
 msgid "Unknown error"
 msgstr "Error desconegut"
@@ -8530,8 +8484,7 @@ msgid "Username is already in use — please choose another"
 msgstr "El nom d'usuari ja està en ús — trieu-ne un altre"
 
 #: panels/system/users/user-utils.c:195
-#, fuzzy, c-format
-#| msgid "Usernames must have fewer than %ld characters"
+#, c-format
 msgid "Usernames must have fewer than %ld character"
 msgid_plural "Usernames must have fewer than %ld characters"
 msgstr[0] "Els noms d'usuari han de tenir menys de %ld caràcters"
@@ -8546,8 +8499,7 @@ msgid ""
 "Cursor size can be combined with Zoom to make it easier to see the cursor"
 msgstr "La mida del cursor es pot ampliar perquè sigui més fàcil veure'l"
 
-#. Translators: This will be presented as the text of a link to the Sound
-#. panel
+#. Translators: This will be presented as the text of a link to the Sound panel
 #: panels/universal-access/cc-ua-hearing-page.c:156
 msgctxt "Sound panel name"
 msgid "Sound"
@@ -8778,11 +8730,10 @@ msgid "_High Contrast"
 msgstr "_Contrast alt"
 
 #: panels/universal-access/cc-ua-seeing-page.ui:30
-msgid ""
-"Increase color contrast of foreground and background interface elements"
+msgid "Increase color contrast of foreground and background interface elements"
 msgstr ""
-"Augmenta el contrast de color dels elements de la interfície de primer pla i"
-" de fons"
+"Augmenta el contrast de color dels elements de la interfície de primer pla i "
+"de fons"
 
 #: panels/universal-access/cc-ua-seeing-page.ui:37
 msgid "_On/Off Shapes"
@@ -8807,8 +8758,8 @@ msgid ""
 "that may have a negative impact on some visual sensitivities."
 msgstr ""
 "Si desactiveu els efectes d'animació, no hi haurà moviment a la interfície "
-"d'usuari i les transicions seran més sobtades. Això pot introduir efectes no"
-" desitjats que poden tenir un impacte negatiu en algunes sensibilitats "
+"d'usuari i les transicions seran més sobtades. Això pot introduir efectes no "
+"desitjats que poden tenir un impacte negatiu en algunes sensibilitats "
 "visuals."
 
 #: panels/universal-access/cc-ua-seeing-page.ui:65
@@ -9121,16 +9072,18 @@ msgstr "Tot"
 msgid "Make it easier to see, hear, type, point and click"
 msgstr "Feu més fàcil veure, sentir, teclejar, apuntar i fer clic"
 
-#. Translators: Search terms to find the Accessibility panel. Do NOT translate
-#. or localize the semicolons! The list MUST also end with a semicolon!
+#. Translators: Search terms to find the Accessibility panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/universal-access/gnome-universal-access-panel.desktop.in:15
 msgid ""
-"Keyboard;Mouse;a11y;Accessibility;Universal;Access;Contrast;Cursor;Sound;Zoom;Screen;Reader;big;high;large;text;font;size;AccessX;Sticky;Keys;Slow;Bounce;Mouse;Double;click;Delay;Speed;Assist;Repeat;Blink;Pointer;find;locate;visual;hearing;audio;typing;animations;"
+"Keyboard;Mouse;a11y;Accessibility;Universal;Access;Contrast;Cursor;Sound;"
+"Zoom;Screen;Reader;big;high;large;text;font;size;AccessX;Sticky;Keys;Slow;"
+"Bounce;Mouse;Double;click;Delay;Speed;Assist;Repeat;Blink;Pointer;find;"
+"locate;visual;hearing;audio;typing;animations;"
 msgstr ""
-"Teclat;ratolí;a11y;accessibilitat;accés "
-"universal;contrast;cursor;so;zoom;pantalla;lector;gran;alt;ample;text;tipus "
-"de "
-"lletra;mida;AccessX;adhesiu;-tecles;lent;rebot;ratolí;doble;clic;retard;velocitat;assistència;repetició;parpelleig;punter;cercar;ubicar;visual-;audició;àudio;escriptura;animacions;"
+"Teclat;ratolí;a11y;accessibilitat;accés universal;contrast;cursor;so;zoom;"
+"pantalla;lector;gran;alt;ample;text;tipus de lletra;mida;AccessX;adhesiu;-"
+"tecles;lent;rebot;ratolí;doble;clic;retard;velocitat;assistència;repetició;"
+"parpelleig;punter;cercar;ubicar;visual-;audició;àudio;escriptura;animacions;"
 
 #: panels/wacom/button-mapping.ui:7 panels/wacom/cc-wacom-ekr-page.ui:19
 msgid "Map Buttons"
@@ -9158,8 +9111,8 @@ msgid ""
 "Please tap the target markers as they appear on screen to calibrate the "
 "tablet"
 msgstr ""
-"Feu un toc als marcadors a mesura que apareguin a la pantalla per a calibrar"
-" la tauleta"
+"Feu un toc als marcadors a mesura que apareguin a la pantalla per a calibrar "
+"la tauleta"
 
 #: panels/wacom/calibrator/calibrator.ui:63
 msgid "Mis-click detected, restarting…"
@@ -9209,8 +9162,7 @@ msgstr "Tauleta muntada en pantalla externa"
 msgid "External tablet device"
 msgstr "Tauleta externa"
 
-#. translators: this is a drawing tablet pad, i.e. a collection of buttons and
-#. knobs
+#. translators: this is a drawing tablet pad, i.e. a collection of buttons and knobs
 #: panels/wacom/cc-wacom-ekr-page.ui:9
 #, fuzzy
 #| msgid "External tablet device"
@@ -9376,9 +9328,7 @@ msgstr ""
 "Establiu el mapa de botons i ajusteu la sensibilitat de l'estilogràfica per "
 "a tauletes gràfiques"
 
-#. Translators: Search terms to find the Graphics Tablets panel. Do NOT
-#. translate or localize the semicolons! The list MUST also end with a
-#. semicolon!
+#. Translators: Search terms to find the Graphics Tablets panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/wacom/gnome-wacom-panel.desktop.in:15
 msgid "Tablet;Wacom;Stylus;Eraser;Mouse;"
 msgstr "Tauleta gràfica;Wacom;Estilogràfica;Esborrador;Ratolí;"
@@ -9437,8 +9387,7 @@ msgctxt "abbreviated weekday name for Saturday"
 msgid "S"
 msgstr "Ds."
 
-#. Translators: This is a duration in minutes, for example ‘15m’ for 15
-#. minutes.
+#. Translators: This is a duration in minutes, for example ‘15m’ for 15 minutes.
 #. * Use whatever shortest unit label is used for minutes in your locale.
 #: panels/wellbeing/cc-screen-time-statistics-row.c:384
 #, c-format
@@ -9493,8 +9442,7 @@ msgstr "%-d %B"
 msgid "No Data"
 msgstr "Sense dades"
 
-#. Translators: This is an annotated day of the week. For example ‘Average
-#. Monday’.
+#. Translators: This is an annotated day of the week. For example ‘Average Monday’.
 #: panels/wellbeing/cc-screen-time-statistics-row.c:950
 #, c-format
 msgid "Average %A"
@@ -9557,8 +9505,7 @@ msgstr "Temps de pantalla no disponible"
 #: panels/wellbeing/cc-screen-time-statistics-row.ui:29
 msgid "Screen time information will appear here after a period of usage"
 msgstr ""
-"La informació del temps de pantalla apareixerà aquí després d'un període "
-"d'ús"
+"La informació del temps de pantalla apareixerà aquí després d'un període d'ús"
 
 #: panels/wellbeing/cc-screen-time-statistics-row.ui:146
 msgid "Average Week"
@@ -9665,12 +9612,11 @@ msgstr ""
 "Reviseu i limiteu la quantitat de temps que passeu a la pantalla de "
 "l'ordinador"
 
-#. Translators: Search terms to find the Wellbeing panel. Do NOT translate or
-#. localize the semicolons! The list MUST also end with a semicolon!
+#. Translators: Search terms to find the Wellbeing panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/wellbeing/gnome-wellbeing-panel.desktop.in:18
 msgid ""
-"Wellbeing;Screen Time;Breaks;Break Reminders;Health Breaks;Daily "
-"Usage;Screen Limits;Usage Limit;"
+"Wellbeing;Screen Time;Breaks;Break Reminders;Health Breaks;Daily Usage;"
+"Screen Limits;Usage Limit;"
 msgstr ""
 "Benestar;Temps de pantalla;Descans;Recordatoris de descans;Descans per la "
 "salut;Ús diari;Limita el temps de pantalla;Límits d'ús;"
@@ -10214,8 +10160,7 @@ msgstr "Xarxa mòbil"
 msgid "Configure Telephony and mobile data connections"
 msgstr "Configura les connexions de dades de telefonia i mòbils"
 
-#. Translators: Search terms to find the WWAN panel. Do NOT translate or
-#. localize the semicolons! The list MUST also end with a semicolon!
+#. Translators: Search terms to find the WWAN panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/wwan/gnome-wwan-panel.desktop.in:16
 msgid "cellular;wwan;telephony;sim;mobile;"
 msgstr "cel·lular;wwan;telefonia;sim;mòbil;"
@@ -10259,8 +10204,7 @@ msgstr "Quadre a mostrar"
 msgid "[PANEL] [ARGUMENT…]"
 msgstr "[QUADRE] [ARGUMENT…]"
 
-#. Translators should localize the following string which will be displayed in
-#. the About dialog giving credit to the translator(s).
+#. Translators should localize the following string which will be displayed in the About dialog giving credit to the translator(s).
 #: shell/cc-application.c:123
 msgid "translator-credits"
 msgstr ""
@@ -10299,8 +10243,8 @@ msgid ""
 "issues. "
 msgstr ""
 "Aquesta versió del Paràmetres només s'ha d'utilitzar amb finalitats de "
-"desenvolupament. Podeu exposar-vos a un comportament incorrecte del sistema,"
-" pèrdua de dades, i altres problemes inesperats. "
+"desenvolupament. Podeu exposar-vos a un comportament incorrecte del sistema, "
+"pèrdua de dades, i altres problemes inesperats. "
 
 #: shell/cc-window.ui:91
 msgid "_Keyboard Shortcuts"
@@ -10354,8 +10298,7 @@ msgctxt "shortcut window"
 msgid "Cancel search"
 msgstr "Cancel·la la cerca"
 
-#. Translators: Search terms to find this app. Do NOT translate or localize
-#. the semicolons! The list MUST also end with a semicolon!
+#. Translators: Search terms to find this app. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: shell/org.gnome.Settings.desktop.in:14
 msgid "Preferences;Settings;"
 msgstr "Preferències;Configuració;"
@@ -10366,8 +10309,8 @@ msgstr "L'identificador de l'últim quadre de configuració a obrir"
 
 #: shell/org.gnome.Settings.gschema.xml:6
 msgid ""
-"The identifier for the last Settings panel to be opened. Unrecognised values"
-" will be ignored and the first panel in the list selected."
+"The identifier for the last Settings panel to be opened. Unrecognised values "
+"will be ignored and the first panel in the list selected."
 msgstr ""
 "L'identificador de l'últim quadre de configuració a obrir. S'ignoraran els "
 "valors que no siguin reconeguts i se seleccionarà el primer quadre de la "
