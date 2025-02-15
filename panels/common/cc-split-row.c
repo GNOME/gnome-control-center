@@ -71,19 +71,7 @@ enum
 static GParamSpec *props[N_PROPS] = { NULL, };
 
 static void
-on_default_option_click_released_cb (CcSplitRow *self)
-{
-  gtk_widget_activate (GTK_WIDGET (self->default_option_checkbutton));
-}
-
-static void
-on_alternative_option_click_released_cb (CcSplitRow *self)
-{
-  gtk_widget_activate (GTK_WIDGET (self->alternative_option_checkbutton));
-}
-
-static void
-focus_leave (CcMaskPaintable *mask)
+on_option_focus_leave_cb (CcMaskPaintable *mask)
 {
   GtkMediaStream *stream;
   GdkPaintable *paintable;
@@ -99,19 +87,7 @@ focus_leave (CcMaskPaintable *mask)
 }
 
 static void
-on_default_option_focus_leave_cb (CcSplitRow *self)
-{
-  focus_leave (self->default_option_mask);
-}
-
-static void
-on_alternative_option_focus_leave_cb (CcSplitRow *self)
-{
-  focus_leave (self->alternative_option_mask);
-}
-
-static void
-focus_enter (CcMaskPaintable *mask)
+on_option_focus_enter_cb (CcMaskPaintable *mask)
 {
   GtkMediaStream *stream;
   GdkPaintable *paintable;
@@ -124,18 +100,6 @@ focus_enter (CcMaskPaintable *mask)
   stream = GTK_MEDIA_STREAM (paintable);
   gtk_media_stream_set_loop (stream, TRUE);
   gtk_media_stream_play (stream);
-}
-
-static void
-on_default_option_focus_enter_cb (CcSplitRow *self)
-{
-  focus_enter (self->default_option_mask);
-}
-
-static void
-on_alternative_option_focus_enter_cb (CcSplitRow *self)
-{
-  focus_enter (self->alternative_option_mask);
 }
 
 static void
@@ -312,12 +276,8 @@ cc_split_row_class_init (CcSplitRowClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcSplitRow, default_option_mask);
 
   gtk_widget_class_bind_template_callback (widget_class, on_checkbutton_toggled_cb);
-  gtk_widget_class_bind_template_callback (widget_class, on_default_option_click_released_cb);
-  gtk_widget_class_bind_template_callback (widget_class, on_alternative_option_click_released_cb);
-  gtk_widget_class_bind_template_callback (widget_class, on_default_option_focus_enter_cb);
-  gtk_widget_class_bind_template_callback (widget_class, on_alternative_option_focus_enter_cb);
-  gtk_widget_class_bind_template_callback (widget_class, on_default_option_focus_leave_cb);
-  gtk_widget_class_bind_template_callback (widget_class, on_alternative_option_focus_leave_cb);
+  gtk_widget_class_bind_template_callback (widget_class, on_option_focus_enter_cb);
+  gtk_widget_class_bind_template_callback (widget_class, on_option_focus_leave_cb);
 }
 
 static void
