@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <template class="CcIllustratedRow" parent="CcContentRow">
+    <style>
+      <class name="illustration"/>
+    </style>
     <child>
       <object class="GtkEventControllerMotion">
         <signal name="enter" handler="on_picture_hover_cb" object="CcIllustratedRow" swapped="yes"/>
