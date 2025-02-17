@@ -25,3 +25,16 @@ row.content .prefixes:dir(ltr) {
 row.content .prefixes:dir(rtl) {
   margin-left: 6px;
 }
+
+/*******************
+ * Everything else *
+ *******************/
+
+.split-row  picture:disabled,
+.illustrated-row picture:disabled {
+  /*
+   * FIXME: This is a workaround to handle disabled pictures
+   * see: https://gitlab.gnome.org/GNOME/libadwaita/-/merge_requests/814
+   */
+  opacity: 0.5;
+}
