@@ -30,6 +30,11 @@
 #include <gtk/gtk.h>
 #include <json-glib/json-glib.h>
 
+#ifdef HAVE__NL_TIME_FIRST_WEEKDAY
+#include <langinfo.h>
+#include <locale.h>
+#endif
+
 #include "cc-bar-chart.h"
 #include "cc-screen-time-statistics-row.h"
 #include "cc-util.h"
