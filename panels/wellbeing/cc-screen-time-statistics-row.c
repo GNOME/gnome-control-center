@@ -21,6 +21,8 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+#include "config.h"
+
 #include <adwaita.h>
 #include <glib.h>
 #include <glib/gi18n.h>

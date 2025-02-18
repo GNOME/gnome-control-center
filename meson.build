@@ -221,6 +221,12 @@ foreach polkit_file: polkit_files
   assert(r.returncode() == 0, 'ITS support missing from polkit, please upgrade or contact your distribution')
 endforeach
 
+# Localisation API
+if cc.has_header_symbol('langinfo.h', '_NL_TIME_FIRST_WEEKDAY')
+  config_h.set('HAVE__NL_TIME_FIRST_WEEKDAY', 1,
+               description: 'Define if langinfo.h supports _NL_TIME_FIRST_WEEKDAY')
+endif
+
 # Check for CUPS 1.4 or newer
 cups_dep = dependency('cups', version : '>= 1.4', required: false)
 assert(cups_dep.found(), 'CUPS 1.4 or newer not found')
