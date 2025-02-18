@@ -519,12 +519,41 @@ is_today (const GDate *date)
   return (g_date_compare (&today, date) == 0);
 }
 
+/* We can’t just use g_date_get_{monday,sunday}_week_of_year() because there
+ * are some countries (such as Egypt) where the week starts on a Saturday.
+ *
+ * FIXME: date_get_week_of_year() can be replaced with new API from GLib once
+ * that’s implemented; see https://gitlab.gnome.org/GNOME/glib/-/issues/3617 */
+static unsigned int
+date_get_week_of_year (const GDate  *date,
+                       GDateWeekday  first_day_of_week)
+{
+  GDate first_day_of_year;
+  unsigned int n_days_before_first_week;
+
+  g_return_val_if_fail (g_date_valid (date), 0);
+
+  g_date_clear (&first_day_of_year, 1);
+  g_date_set_dmy (&first_day_of_year, 1, 1, g_date_get_year (date));
+
+  n_days_before_first_week = (first_day_of_week - g_date_get_weekday (&first_day_of_year) + 7) % 7;
+  return (g_date_get_day_of_year (date) + 6 - n_days_before_first_week) / 7;
+}
+
 static unsigned int
 get_week_of_year (const GDate *date)
 {
   unsigned int week_start = get_week_start (); /* 0 = Sunday, 1 = Monday, 2 = Tuesday etc. */
-  g_assert (week_start == 0 || week_start == 1);
-  return (week_start == 0) ? g_date_get_sunday_week_of_year (date) : g_date_get_monday_week_of_year (date);
+  GDateWeekday week_start_as_weekday = (week_start == 0) ? G_DATE_SUNDAY : (GDateWeekday) week_start;
+  unsigned int week_of_year = date_get_week_of_year (date, week_start_as_weekday);
+
+  /* Safety checks */
+  if (week_start == 0)
+    g_assert (week_of_year == g_date_get_sunday_week_of_year (date));
+  else if (week_start == 1)
+    g_assert (week_of_year == g_date_get_monday_week_of_year (date));
+
+  return week_of_year;
 }
 
 static gboolean
