@@ -553,6 +553,9 @@ cc_timelike_entry_init (CcTimelikeEntry *self)
 {
   GtkEventController *key_controller;
 
+  /* Default value */
+  self->minute_increment = 1;
+
   key_controller = gtk_event_controller_key_new ();
   gtk_event_controller_set_propagation_phase (key_controller, GTK_PHASE_CAPTURE);
   g_signal_connect_swapped (key_controller, "key-pressed", G_CALLBACK (on_key_pressed_cb), self);
