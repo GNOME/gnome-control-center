@@ -102,6 +102,9 @@
 
         <child>
           <object class="AdwNavigationPage" id="subview_page">
+            <!-- The title is set dynamically at the code, but is set after the
+            widgets are constructed/mapped. Adding a blank title here prevents a
+            warning about AdwNavigationPage missing a title. -->
             <property name="title"> </property>
             <property name="child">
               <object class="AdwToolbarView">
