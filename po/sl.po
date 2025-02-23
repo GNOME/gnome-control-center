@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2025-02-02 09:15+0000\n"
-"PO-Revision-Date: 2025-02-02 10:18+0100\n"
+"POT-Creation-Date: 2025-02-23 08:33+0000\n"
+"PO-Revision-Date: 2025-02-23 15:11+0100\n"
 "Last-Translator: Martin Srebotnjak <miles@filmsi.net>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "Language: sl_SI\n"
@@ -26,33 +26,124 @@ msgstr ""
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Generator: Poedit 2.2.1\n"
 
-#: panels/applications/cc-applications-panel.c:850
+#: global-shortcuts-provider/cc-global-shortcut-dialog.ui:6
+msgid "Add Keyboard Shortcuts"
+msgstr "Dodaj tipkovne bližnjice"
+
+#: global-shortcuts-provider/cc-global-shortcut-dialog.ui:15
+#: panels/applications/cc-application-shortcut-dialog.c:152
+#: panels/color/cc-color-calibrate.ui:21
+#: panels/common/cc-language-chooser.ui:15
+#: panels/display/cc-display-panel.ui:32 panels/display/cc-display-panel.ui:184
+#: panels/display/cc-display-panel.ui:246
+#: panels/keyboard/cc-input-chooser.ui:15
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:159
+#: panels/keyboard/cc-keyboard-shortcut-editor.ui:12
+#: panels/network/cc-net-proxy-page.ui:14
+#: panels/network/cc-wifi-hotspot-dialog.ui:142
+#: panels/network/cc-wifi-panel.ui:241
+#: panels/network/connection-editor/ce-page-details.c:89
+#: panels/network/connection-editor/connection-editor.ui:16
+#: panels/printers/pp-jobs-dialog.ui:125
+#: panels/printers/pp-new-printer-dialog.ui:65
+#: panels/printers/pp-ppd-selection-dialog.ui:17
+#: panels/privacy/usage/cc-usage-page.ui:125
+#: panels/privacy/usage/cc-usage-page.ui:136
+#: panels/privacy/usage/cc-usage-page.ui:147
+#: panels/system/region/cc-format-chooser.ui:32
+#: panels/system/users/cc-add-user-dialog.ui:24
+#: panels/system/users/cc-avatar-chooser.c:92
+#: panels/system/users/cc-enterprise-login-dialog.ui:44
+#: panels/system/users/cc-fingerprint-dialog.c:1400
+#: panels/system/users/cc-fingerprint-dialog.ui:17
+#: panels/system/users/cc-password-dialog.ui:15
+#: panels/system/users/cc-user-page.ui:223
+#: panels/system/users/data/join-dialog.ui:17
+#: panels/wwan/cc-wwan-mode-dialog.ui:32
+#: panels/wwan/cc-wwan-network-dialog.ui:109
+#: panels/wwan/cc-wwan-sim-lock-dialog.ui:239
+msgid "_Cancel"
+msgstr "_Prekliči"
+
+#: global-shortcuts-provider/cc-global-shortcut-dialog.ui:23
+#: panels/color/cc-color-panel.ui:349 panels/keyboard/cc-input-chooser.ui:23
+#: panels/keyboard/cc-keyboard-shortcut-editor.ui:30
+#: panels/network/connection-editor/net-connection-editor.c:653
+#: panels/printers/pp-new-printer-dialog.ui:96
+#: panels/system/users/cc-add-user-dialog.c:362
+#: panels/system/users/cc-add-user-dialog.ui:32
+#: panels/system/users/cc-add-user-dialog.ui:153
+#: panels/system/users/cc-enterprise-login-dialog.ui:52
+msgid "_Add"
+msgstr "_Dodaj"
+
+#: global-shortcuts-provider/cc-global-shortcut-dialog.ui:36
+msgid ""
+"Added keyboard shortcuts will be available globally, and can be changed in "
+"the application’s panel in Settings"
+msgstr ""
+"Dodane tipkovne bližnjice bodo na voljo po vsem svetu in jih je mogoče "
+"spremeniti na plošči programa v Nastavitvah"
+
+#: panels/applications/cc-application-shortcut-dialog.c:143
+msgid "Remove All Shortcuts?"
+msgstr "Ali želite odstraniti vse tipkovne bližnjice?"
+
+#: panels/applications/cc-application-shortcut-dialog.c:148
+#, c-format
+msgid ""
+"All actions from %s that have been registered for global shortcuts will be "
+"removed."
+msgstr ""
+"Vsa dejanja %s, registrirana za globalne tipkovne bližnjice, bodo "
+"odstranjena."
+
+#: panels/applications/cc-application-shortcut-dialog.c:153
+#: panels/keyboard/cc-keyboard-shortcut-editor.ui:19
+#: panels/system/users/cc-user-page.ui:224
+msgid "_Remove"
+msgstr "_Odstrani"
+
+#: panels/applications/cc-application-shortcut-dialog.c:183
+msgid "_Remove All Shortcuts"
+msgstr "_Odstrani vse tipkovne bližnjice"
+
+#: panels/applications/cc-application-shortcut-dialog.c:265
+#, c-format
+msgid "%s has registered the following global shortcuts"
+msgstr "%s je registriral naslednje globalne tipkovne bližnjice"
+
+#: panels/applications/cc-application-shortcut-dialog.ui:5
+msgid "Global Shortcuts"
+msgstr "Globalne tipkovne bližnjice"
+
+#: panels/applications/cc-applications-panel.c:880
 msgid "System Bus"
 msgstr "Sistemsko vodilo"
 
-#: panels/applications/cc-applications-panel.c:850
-#: panels/applications/cc-applications-panel.c:852
-#: panels/applications/cc-applications-panel.c:865
-#: panels/applications/cc-applications-panel.c:870
+#: panels/applications/cc-applications-panel.c:880
+#: panels/applications/cc-applications-panel.c:882
+#: panels/applications/cc-applications-panel.c:895
+#: panels/applications/cc-applications-panel.c:900
 msgid "Full access"
 msgstr "Poln dostop"
 
-#: panels/applications/cc-applications-panel.c:852
+#: panels/applications/cc-applications-panel.c:882
 msgid "Session Bus"
 msgstr "Vodilo seje"
 
-#: panels/applications/cc-applications-panel.c:856
+#: panels/applications/cc-applications-panel.c:886
 #: panels/privacy/bolt/cc-bolt-page.ui:164
 #: panels/privacy/bolt/cc-bolt-page.ui:202
 #: panels/privacy/cc-privacy-panel.ui:72
 msgid "Devices"
 msgstr "Naprave"
 
-#: panels/applications/cc-applications-panel.c:856
+#: panels/applications/cc-applications-panel.c:886
 msgid "Full access to /dev"
 msgstr "Poln dostop do mape /dev"
 
-#: panels/applications/cc-applications-panel.c:860
+#: panels/applications/cc-applications-panel.c:890
 #: panels/network/cc-network-panel.ui:8
 #: panels/network/gnome-network-panel.desktop.in:3
 #: panels/network/network-mobile.ui:235 panels/wwan/cc-wwan-device-page.ui:61
@@ -60,38 +151,38 @@ msgstr "Poln dostop do mape /dev"
 msgid "Network"
 msgstr "Omrežje"
 
-#: panels/applications/cc-applications-panel.c:860
+#: panels/applications/cc-applications-panel.c:890
 msgid "Has network access"
 msgstr "Ima dostop do omrežja"
 
-#: panels/applications/cc-applications-panel.c:865
-#: panels/applications/cc-applications-panel.c:867
+#: panels/applications/cc-applications-panel.c:895
+#: panels/applications/cc-applications-panel.c:897
 #: panels/search/cc-search-locations-page.c:421
 msgid "Home"
 msgstr "Domača mapa"
 
-#: panels/applications/cc-applications-panel.c:867
-#: panels/applications/cc-applications-panel.c:872
+#: panels/applications/cc-applications-panel.c:897
+#: panels/applications/cc-applications-panel.c:902
 msgid "Read-only"
 msgstr "Le za branje"
 
-#: panels/applications/cc-applications-panel.c:870
-#: panels/applications/cc-applications-panel.c:872
+#: panels/applications/cc-applications-panel.c:900
+#: panels/applications/cc-applications-panel.c:902
 msgid "File System"
 msgstr "Datotečni sistem"
 
-#: panels/applications/cc-applications-panel.c:876
+#: panels/applications/cc-applications-panel.c:906
 #: panels/keyboard/01-launchers.xml.in:6
 #: shell/appdata/org.gnome.Settings.appdata.xml.in.in:7 shell/cc-window.c:804
 #: shell/cc-window.ui:18 shell/org.gnome.Settings.desktop.in:3
 msgid "Settings"
 msgstr "Nastavitve"
 
-#: panels/applications/cc-applications-panel.c:876
+#: panels/applications/cc-applications-panel.c:906
 msgid "Can change settings"
 msgstr "Dovoljeno spreminjati nastavitve"
 
-#: panels/applications/cc-applications-panel.c:878
+#: panels/applications/cc-applications-panel.c:908
 #, c-format
 msgid ""
 "<b>%s</b> requires access to the following system resources. To stop this "
@@ -100,7 +191,7 @@ msgstr ""
 "<b>%s</b> zahteva dostop do navedenih sistemskih virov. Za zaustavitev "
 "dostopa je treba program odstraniti."
 
-#: panels/applications/cc-applications-panel.c:882
+#: panels/applications/cc-applications-panel.c:912
 #, c-format
 msgid "%u permission"
 msgid_plural "%u permissions"
@@ -109,15 +200,15 @@ msgstr[1] "%u dovoljenje"
 msgstr[2] "%u dovoljenji"
 msgstr[3] "%u dovoljenja"
 
-#: panels/applications/cc-applications-panel.c:1054
+#: panels/applications/cc-applications-panel.c:1084
 msgid "Remove Link Type"
 msgstr "Odstrani vrsto povezav"
 
-#: panels/applications/cc-applications-panel.c:1085
+#: panels/applications/cc-applications-panel.c:1115
 msgid "Remove File Type"
 msgstr "Odstrani vrsto datotek"
 
-#: panels/applications/cc-applications-panel.c:1217
+#: panels/applications/cc-applications-panel.c:1247
 #, c-format
 msgid "%u type"
 msgid_plural "%u types"
@@ -126,13 +217,13 @@ msgstr[1] "%u vrsta"
 msgstr[2] "%u vrsti"
 msgstr[3] "%u vrste"
 
-#: panels/applications/cc-applications-panel.c:1224
+#: panels/applications/cc-applications-panel.c:1254
 #, c-format
 msgid "<b>%s</b> is used to open the following types of files and links"
 msgstr "Program <b>%s</b> omogoča odpiranje navedenih datotek in povezav."
 
 #. TRANSLATORS: %s is an app name.
-#: panels/applications/cc-applications-panel.c:1265
+#: panels/applications/cc-applications-panel.c:1295
 #, c-format
 msgid "How much disk space <b>%s</b> is occupying with app data and caches"
 msgstr ""
@@ -159,7 +250,7 @@ msgstr ""
 "vsebine"
 
 #: panels/applications/cc-applications-panel.ui:84
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:94
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:91
 #: panels/printers/cc-printers-panel.ui:100
 #: panels/system/datetime/cc-tz-dialog.ui:42
 #: panels/system/region/cc-format-chooser.ui:128 shell/cc-panel-list.ui:44
@@ -167,7 +258,7 @@ msgid "No Results Found"
 msgstr "Ni najdenih zadetkov."
 
 #: panels/applications/cc-applications-panel.ui:85
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:95
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:92
 #: panels/printers/cc-printers-panel.ui:101
 #: panels/system/datetime/cc-tz-dialog.ui:43
 #: panels/system/region/cc-format-chooser.ui:129 shell/cc-panel-list.ui:45
@@ -372,70 +463,78 @@ msgstr "_Zahtevana dovoljenja"
 msgid "System permissions that the app requires"
 msgstr "Sistemska dovoljenja, ki jih zahteva program"
 
-#: panels/applications/cc-applications-panel.ui:415
+#: panels/applications/cc-applications-panel.ui:412
+msgid "Global S_hortcuts"
+msgstr "_Globalne tipkovne bližnjice"
+
+#: panels/applications/cc-applications-panel.ui:413
+msgid "Global actions that have been registered for use"
+msgstr "Globalna dejanja, ki so registrirana za uporabo programa"
+
+#: panels/applications/cc-applications-panel.ui:423
 #: panels/mouse/cc-mouse-panel.ui:67 panels/mouse/cc-mouse-panel.ui:203
 #: panels/multitasking/cc-multitasking-panel.ui:15
 #: panels/power/cc-power-panel.ui:161
 msgid "General"
 msgstr "Splošno"
 
-#: panels/applications/cc-applications-panel.ui:418
+#: panels/applications/cc-applications-panel.ui:426
 msgid "_Files &amp; Links"
 msgstr "_Datoteke in povezave"
 
-#: panels/applications/cc-applications-panel.ui:419
+#: panels/applications/cc-applications-panel.ui:427
 msgid "File and link types that are opened by the app"
 msgstr "Datoteka in vrste povezav, ki jih odpira program."
 
-#: panels/applications/cc-applications-panel.ui:427
+#: panels/applications/cc-applications-panel.ui:435
 msgid "S_torage"
 msgstr "_Shramba"
 
-#: panels/applications/cc-applications-panel.ui:428
+#: panels/applications/cc-applications-panel.ui:436
 msgid "Disk space being used"
 msgstr "Uporabljen prostor na disku"
 
-#: panels/applications/cc-applications-panel.ui:448
+#: panels/applications/cc-applications-panel.ui:456
 msgid "Required Permissions"
 msgstr "Zahtevana dovoljenja"
 
-#: panels/applications/cc-applications-panel.ui:479
+#: panels/applications/cc-applications-panel.ui:487
 msgid "Files & Links"
 msgstr "Datoteke in povezave"
 
-#: panels/applications/cc-applications-panel.ui:490
+#: panels/applications/cc-applications-panel.ui:498
 msgid "File Types"
 msgstr "Vrste datotek"
 
-#: panels/applications/cc-applications-panel.ui:495
+#: panels/applications/cc-applications-panel.ui:503
 msgid "Link Types"
 msgstr "Vrste povezav"
 
-#: panels/applications/cc-applications-panel.ui:502
+#: panels/applications/cc-applications-panel.ui:510
 msgid "_Reset"
 msgstr "_Ponastavi"
 
-#: panels/applications/cc-applications-panel.ui:522
+#: panels/applications/cc-applications-panel.ui:530
 msgid "Storage"
 msgstr "Shramba"
 
-#: panels/applications/cc-applications-panel.ui:535
+#: panels/applications/cc-applications-panel.ui:543
 msgid "App"
 msgstr "Program"
 
-#: panels/applications/cc-applications-panel.ui:543
+#: panels/applications/cc-applications-panel.ui:551
 msgid "Data"
 msgstr "Podatki"
 
-#: panels/applications/cc-applications-panel.ui:551
+#: panels/applications/cc-applications-panel.ui:559
 msgid "Cache"
 msgstr "Predpomnilnik"
 
-#: panels/applications/cc-applications-panel.ui:559
+#: panels/applications/cc-applications-panel.ui:567
 msgid "Total"
 msgstr "Skupaj"
 
-#: panels/applications/cc-applications-panel.ui:571
+#: panels/applications/cc-applications-panel.ui:579
 msgid "_Clear Cache"
 msgstr "__Počisti predpomnilnik"
 
@@ -1098,39 +1197,6 @@ msgstr "Ne motite umeritvene naprave med merjenjem"
 msgid "Display Calibration"
 msgstr "Umerjanje zaslona"
 
-#: panels/color/cc-color-calibrate.ui:21
-#: panels/common/cc-language-chooser.ui:15
-#: panels/display/cc-display-panel.ui:32 panels/display/cc-display-panel.ui:184
-#: panels/display/cc-display-panel.ui:246
-#: panels/keyboard/cc-input-chooser.ui:15
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:162
-#: panels/keyboard/cc-keyboard-shortcut-editor.ui:12
-#: panels/network/cc-net-proxy-page.ui:14
-#: panels/network/cc-wifi-hotspot-dialog.ui:142
-#: panels/network/cc-wifi-panel.ui:241
-#: panels/network/connection-editor/ce-page-details.c:89
-#: panels/network/connection-editor/connection-editor.ui:16
-#: panels/printers/pp-jobs-dialog.ui:125
-#: panels/printers/pp-new-printer-dialog.ui:65
-#: panels/printers/pp-ppd-selection-dialog.ui:17
-#: panels/privacy/usage/cc-usage-page.ui:125
-#: panels/privacy/usage/cc-usage-page.ui:136
-#: panels/privacy/usage/cc-usage-page.ui:147
-#: panels/system/region/cc-format-chooser.ui:32
-#: panels/system/users/cc-add-user-dialog.ui:24
-#: panels/system/users/cc-avatar-chooser.c:92
-#: panels/system/users/cc-enterprise-login-dialog.ui:44
-#: panels/system/users/cc-fingerprint-dialog.c:1400
-#: panels/system/users/cc-fingerprint-dialog.ui:17
-#: panels/system/users/cc-password-dialog.ui:15
-#: panels/system/users/cc-user-page.ui:223
-#: panels/system/users/data/join-dialog.ui:17
-#: panels/wwan/cc-wwan-mode-dialog.ui:32
-#: panels/wwan/cc-wwan-network-dialog.ui:109
-#: panels/wwan/cc-wwan-sim-lock-dialog.ui:239
-msgid "_Cancel"
-msgstr "_Prekliči"
-
 #. This starts the calibration process
 #: panels/color/cc-color-calibrate.ui:27
 msgid "_Start"
@@ -1418,17 +1484,6 @@ msgstr "Dodaj profil"
 #: panels/color/cc-color-panel.ui:343
 msgid "_Import File…"
 msgstr "_Uvozi datoteko …"
-
-#: panels/color/cc-color-panel.ui:349 panels/keyboard/cc-input-chooser.ui:23
-#: panels/keyboard/cc-keyboard-shortcut-editor.ui:30
-#: panels/network/connection-editor/net-connection-editor.c:653
-#: panels/printers/pp-new-printer-dialog.ui:96
-#: panels/system/users/cc-add-user-dialog.c:362
-#: panels/system/users/cc-add-user-dialog.ui:32
-#: panels/system/users/cc-add-user-dialog.ui:153
-#: panels/system/users/cc-enterprise-login-dialog.ui:52
-msgid "_Add"
-msgstr "_Dodaj"
 
 #: panels/color/cc-color-panel.ui:418
 msgid ""
@@ -1734,7 +1789,7 @@ msgstr "Zmanjšanje minute"
 
 #: panels/common/cc-util.c:130
 #: panels/network/connection-editor/ce-page-details.c:188
-#: panels/wellbeing/cc-screen-time-statistics-row.c:928
+#: panels/wellbeing/cc-screen-time-statistics-row.c:964
 msgid "Today"
 msgstr "Danes"
 
@@ -2329,9 +2384,9 @@ msgstr "Možnosti"
 msgid "Remove"
 msgstr "Odstrani"
 
-#: panels/keyboard/cc-keyboard-manager.c:488
-#: panels/keyboard/cc-keyboard-manager.c:496
-#: panels/keyboard/cc-keyboard-manager.c:936
+#: panels/keyboard/cc-keyboard-manager.c:507
+#: panels/keyboard/cc-keyboard-manager.c:515
+#: panels/keyboard/cc-keyboard-manager.c:1074
 msgid "Custom Shortcuts"
 msgstr "Bližnjica po meri"
 
@@ -2424,7 +2479,7 @@ msgctxt "keyboard key"
 msgid "Insert"
 msgstr "Vstavljalna tipka"
 
-#: panels/keyboard/cc-keyboard-panel.c:213
+#: panels/keyboard/cc-keyboard-panel.c:209
 #, c-format
 msgid ""
 "Input sources can be switched using the %s keyboard shortcut.\n"
@@ -2475,7 +2530,7 @@ msgid "_Compose Key"
 msgstr "_Sestavljalna tipka"
 
 #: panels/keyboard/cc-keyboard-panel.ui:79
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:9
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:6
 msgid "Keyboard Shortcuts"
 msgstr "Tipkovne bližnjice"
 
@@ -2483,41 +2538,41 @@ msgstr "Tipkovne bližnjice"
 msgid "_View and Customize Shortcuts"
 msgstr "_Pregled in prilagoditev bližnjic"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:37
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:34
 msgid "Search shortcuts"
 msgstr "Poišči tipkovno bližnjico"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:41
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:38
 msgid "Search Shortcuts"
 msgstr "Poišči tipkovno bližnjico"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:74
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:71
 msgid "_Reset All…"
 msgstr "_Ponastavi vse …"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:127
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:124
 msgid "Add Custom Shortcuts"
 msgstr "Dodaj bližnjice po meri"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:128
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:125
 msgid "Set up custom shortcuts for launching apps, running scripts, and more"
 msgstr ""
 "Nastavi tipkovne bližnjice po meri za zaganjanje programov, izvajanje "
 "skriptov in drugih opravil."
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:133
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:130
 msgid "_Add Shortcut…"
 msgstr "_Dodaj tipkovno bližnjico …"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:156
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:153
 msgid "Reset All Shortcuts?"
 msgstr "Ali želite ponastaviti vse tipkovne bližnjice?"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:157
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:154
 msgid "All changes to keyboard shortcuts will be lost"
 msgstr "Vse spremembe tipkovnih bližnjic bodo izgubljene."
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:163
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:160
 msgid "_Reset All"
 msgstr "Ponastavi _vse"
 
@@ -2554,11 +2609,6 @@ msgstr "Vpišite novo tipkovno bližnjico za zamenjavo <b>%s</b>."
 #: panels/keyboard/cc-keyboard-shortcut-editor.c:932
 msgid "Add Custom Shortcut"
 msgstr "Dodaj bližnjico po meri"
-
-#: panels/keyboard/cc-keyboard-shortcut-editor.ui:19
-#: panels/system/users/cc-user-page.ui:224
-msgid "_Remove"
-msgstr "_Odstrani"
 
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:41
 msgid "Re_place"
@@ -6170,7 +6220,7 @@ msgstr "_Kopiraj tehnično poročilo"
 msgid "About Device Security"
 msgstr "O varnosti naprav"
 
-#: panels/privacy/firmware-security/cc-firmware-security-help-dialog.ui:27
+#: panels/privacy/firmware-security/cc-firmware-security-help-dialog.ui:26
 msgid ""
 "Device security provides information about how protected your device is "
 "against security issues which target the hardware itself.\n"
@@ -9321,51 +9371,51 @@ msgstr "Trajanje"
 msgid "Interval"
 msgstr "Interval"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:221
+#: panels/wellbeing/cc-screen-time-statistics-row.c:228
 msgctxt "abbreviated weekday name for Sunday"
 msgid "S"
 msgstr "Ne"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:222
+#: panels/wellbeing/cc-screen-time-statistics-row.c:229
 msgctxt "abbreviated weekday name for Monday"
 msgid "M"
 msgstr "Po"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:223
+#: panels/wellbeing/cc-screen-time-statistics-row.c:230
 msgctxt "abbreviated weekday name for Tuesday"
 msgid "T"
 msgstr "To"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:224
+#: panels/wellbeing/cc-screen-time-statistics-row.c:231
 msgctxt "abbreviated weekday name for Wednesday"
 msgid "W"
 msgstr "Sr"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:225
+#: panels/wellbeing/cc-screen-time-statistics-row.c:232
 msgctxt "abbreviated weekday name for Thursday"
 msgid "T"
 msgstr "Če"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:226
+#: panels/wellbeing/cc-screen-time-statistics-row.c:233
 msgctxt "abbreviated weekday name for Friday"
 msgid "F"
 msgstr "Pe"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:227
+#: panels/wellbeing/cc-screen-time-statistics-row.c:234
 msgctxt "abbreviated weekday name for Saturday"
 msgid "S"
 msgstr "So"
 
 #. Translators: This is a duration in minutes, for example ‘15m’ for 15 minutes.
 #. * Use whatever shortest unit label is used for minutes in your locale.
-#: panels/wellbeing/cc-screen-time-statistics-row.c:384
+#: panels/wellbeing/cc-screen-time-statistics-row.c:391
 #, c-format
 msgid "%um"
 msgstr "%u min"
 
 #. Translators: This is a duration in hours, for example ‘2h’ for 2 hours.
 #. * Use whatever shortest unit label is used for hours in your locale.
-#: panels/wellbeing/cc-screen-time-statistics-row.c:390
+#: panels/wellbeing/cc-screen-time-statistics-row.c:397
 #, c-format
 msgid "%uh"
 msgstr "%u ur"
@@ -9373,62 +9423,62 @@ msgstr "%u ur"
 #. Translators: This is a duration in hours and minutes, for example
 #. * ‘3h 15m’ for 3 hours and 15 minutes. Use whatever shortest unit label
 #. * is used for hours and minutes in your locale.
-#: panels/wellbeing/cc-screen-time-statistics-row.c:397
+#: panels/wellbeing/cc-screen-time-statistics-row.c:404
 #, c-format
 msgid "%uh %um"
 msgstr "%u ur %u min"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:627
-#: panels/wellbeing/cc-screen-time-statistics-row.c:747
+#: panels/wellbeing/cc-screen-time-statistics-row.c:663
+#: panels/wellbeing/cc-screen-time-statistics-row.c:783
 #, c-format
 msgid "Failed to load session history file ‘%s’: %s"
 msgstr "Ni bilo mogoče naložiti datoteke zgodovine sej »%s«: %s"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:628
+#: panels/wellbeing/cc-screen-time-statistics-row.c:664
 msgid "Invalid file structure"
 msgstr "Neveljavna struktura datotek"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:665
+#: panels/wellbeing/cc-screen-time-statistics-row.c:701
 #, c-format
 msgid "Failed to load session history file: %s"
 msgstr "Nalaganje datoteke zgodovine sej ni uspelo: %s"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:666
-#: panels/wellbeing/cc-screen-time-statistics-row.c:748
+#: panels/wellbeing/cc-screen-time-statistics-row.c:702
+#: panels/wellbeing/cc-screen-time-statistics-row.c:784
 msgid "File is empty"
 msgstr "Datoteka je prazna"
 
 #. Translators: This a medium-length date, for example ‘15 April’
-#: panels/wellbeing/cc-screen-time-statistics-row.c:933
+#: panels/wellbeing/cc-screen-time-statistics-row.c:969
 msgid "%-d %B"
 msgstr "%-d. %B"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:946
-#: panels/wellbeing/cc-screen-time-statistics-row.c:957
+#: panels/wellbeing/cc-screen-time-statistics-row.c:982
+#: panels/wellbeing/cc-screen-time-statistics-row.c:993
 msgid "No Data"
 msgstr "Ni podatkov"
 
 #. Translators: This is an annotated day of the week. For example ‘Average Monday’.
-#: panels/wellbeing/cc-screen-time-statistics-row.c:950
+#: panels/wellbeing/cc-screen-time-statistics-row.c:986
 #, c-format
 msgid "Average %A"
 msgstr "Povprečje %A"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:961
+#: panels/wellbeing/cc-screen-time-statistics-row.c:997
 #, c-format
 msgid "This Week"
 msgstr "Ta teden"
 
 #. Translators: This is a range of days within a given month.
 #. * For example ‘20–27 April’. The dash is an en-dash.
-#: panels/wellbeing/cc-screen-time-statistics-row.c:972
+#: panels/wellbeing/cc-screen-time-statistics-row.c:1008
 #, c-format
 msgid "%u–%u %s"
 msgstr "%u. – %u. %s"
 
 #. Translators: This is a range of days spanning two months.
 #. * For example, ‘27 April–4 May’. The dash is an en-dash.
-#: panels/wellbeing/cc-screen-time-statistics-row.c:989
+#: panels/wellbeing/cc-screen-time-statistics-row.c:1025
 #, c-format
 msgid "%u %s–%u %s"
 msgstr "%u. %s – %u. %s"
@@ -9436,7 +9486,7 @@ msgstr "%u. %s – %u. %s"
 #. Translators: The first placeholder is a formatted date string. The
 #. * second placeholder is a formatted time duration (for example, ‘3 hours’
 #. * or ‘25 minutes’).
-#: panels/wellbeing/cc-screen-time-statistics-row.c:1050
+#: panels/wellbeing/cc-screen-time-statistics-row.c:1086
 #, c-format
 msgid ""
 "Bar chart of screen time usage over the week starting %s. A line is "
@@ -9447,12 +9497,12 @@ msgstr ""
 "zaslona."
 
 #. Translators: The placeholder is a formatted date string.
-#: panels/wellbeing/cc-screen-time-statistics-row.c:1067
+#: panels/wellbeing/cc-screen-time-statistics-row.c:1103
 #, c-format
 msgid "Bar chart of screen time usage over the week starting %s."
 msgstr "Stolpčni grafikon uporabe časa pred zaslonom v tednu od %s."
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:1073
+#: panels/wellbeing/cc-screen-time-statistics-row.c:1109
 #, c-format
 msgid ""
 "Placeholder for a bar chart of screen time usage. No data is currently "
