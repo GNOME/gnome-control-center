@@ -24,7 +24,7 @@
 #include <glib.h>
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
-#include <gsk/gl/gskglrenderer.h>
+#include <gsk/gsk.h>
 
 #include "cc-crop-area.h"
 
