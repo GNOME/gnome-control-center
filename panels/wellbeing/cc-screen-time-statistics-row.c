@@ -915,7 +915,16 @@ update_ui_for_model_or_selected_date (CcScreenTimeStatisticsRow *self)
   size_t retval;
   char selected_date_text[100] = { 0, };
   unsigned int screen_time_for_selected_date;
-  char selected_average_text[100] = { 0, };
+  const char * const average_weekday_labels[] = {
+    NULL,  /* G_DATE_BAD_WEEKDAY */
+    _("Average Monday"),
+    _("Average Tuesday"),
+    _("Average Wednesday"),
+    _("Average Thursday"),
+    _("Average Friday"),
+    _("Average Saturday"),
+    _("Average Sunday"),
+  };
   unsigned int average_screen_time_for_selected_day_of_week;
   GDate today;
   GDate first_day_of_selected_week;
@@ -982,10 +991,10 @@ update_ui_for_model_or_selected_date (CcScreenTimeStatisticsRow *self)
       gtk_label_set_label (self->selected_screen_time_label, _("No Data"));
     }
 
-  /* Translators: This is an annotated day of the week. For example ‘Average Monday’. */
-  retval = g_date_strftime (selected_average_text, sizeof (selected_average_text), _("Average %A"), &self->selected_date);
-  g_assert (retval != 0);
-  gtk_label_set_text (self->selected_average_label, selected_average_text);
+  /* We can’t use g_date_strftime() for this, as in some locales weekdays have
+   * different grammatical genders, and the ‘Average’ prefix needs to match that. */
+  gtk_label_set_text (self->selected_average_label,
+                      average_weekday_labels[g_date_get_weekday (&self->selected_date)]);
 
   if (calculate_average_screen_time_for_day_of_week (self, g_date_get_weekday (&self->selected_date), &average_screen_time_for_selected_day_of_week))
     label_set_text_hours_and_minutes (self->selected_average_value_label, average_screen_time_for_selected_day_of_week);
