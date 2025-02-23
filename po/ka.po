@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2025-02-22 15:28+0000\n"
-"PO-Revision-Date: 2025-02-23 06:46+0100\n"
+"POT-Creation-Date: 2025-02-23 08:33+0000\n"
+"PO-Revision-Date: 2025-02-23 17:25+0100\n"
 "Last-Translator: Ekaterine Papava <papava.e@gtu.ge>\n"
 "Language-Team: Georgian <(nothing)>\n"
 "Language: ka\n"
@@ -24,33 +24,124 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Poedit 3.5\n"
 
-#: panels/applications/cc-applications-panel.c:850
+#: global-shortcuts-provider/cc-global-shortcut-dialog.ui:6
+msgid "Add Keyboard Shortcuts"
+msgstr "კლავიატურის მალსახმობების დამატება"
+
+#: global-shortcuts-provider/cc-global-shortcut-dialog.ui:15
+#: panels/applications/cc-application-shortcut-dialog.c:152
+#: panels/color/cc-color-calibrate.ui:21
+#: panels/common/cc-language-chooser.ui:15
+#: panels/display/cc-display-panel.ui:32 panels/display/cc-display-panel.ui:184
+#: panels/display/cc-display-panel.ui:246
+#: panels/keyboard/cc-input-chooser.ui:15
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:159
+#: panels/keyboard/cc-keyboard-shortcut-editor.ui:12
+#: panels/network/cc-net-proxy-page.ui:14
+#: panels/network/cc-wifi-hotspot-dialog.ui:142
+#: panels/network/cc-wifi-panel.ui:241
+#: panels/network/connection-editor/ce-page-details.c:89
+#: panels/network/connection-editor/connection-editor.ui:16
+#: panels/printers/pp-jobs-dialog.ui:125
+#: panels/printers/pp-new-printer-dialog.ui:65
+#: panels/printers/pp-ppd-selection-dialog.ui:17
+#: panels/privacy/usage/cc-usage-page.ui:125
+#: panels/privacy/usage/cc-usage-page.ui:136
+#: panels/privacy/usage/cc-usage-page.ui:147
+#: panels/system/region/cc-format-chooser.ui:32
+#: panels/system/users/cc-add-user-dialog.ui:24
+#: panels/system/users/cc-avatar-chooser.c:92
+#: panels/system/users/cc-enterprise-login-dialog.ui:44
+#: panels/system/users/cc-fingerprint-dialog.c:1400
+#: panels/system/users/cc-fingerprint-dialog.ui:17
+#: panels/system/users/cc-password-dialog.ui:15
+#: panels/system/users/cc-user-page.ui:223
+#: panels/system/users/data/join-dialog.ui:17
+#: panels/wwan/cc-wwan-mode-dialog.ui:32
+#: panels/wwan/cc-wwan-network-dialog.ui:109
+#: panels/wwan/cc-wwan-sim-lock-dialog.ui:239
+msgid "_Cancel"
+msgstr "_გაუქმება"
+
+#: global-shortcuts-provider/cc-global-shortcut-dialog.ui:23
+#: panels/color/cc-color-panel.ui:349 panels/keyboard/cc-input-chooser.ui:23
+#: panels/keyboard/cc-keyboard-shortcut-editor.ui:30
+#: panels/network/connection-editor/net-connection-editor.c:653
+#: panels/printers/pp-new-printer-dialog.ui:96
+#: panels/system/users/cc-add-user-dialog.c:362
+#: panels/system/users/cc-add-user-dialog.ui:32
+#: panels/system/users/cc-add-user-dialog.ui:153
+#: panels/system/users/cc-enterprise-login-dialog.ui:52
+msgid "_Add"
+msgstr "დ_ამატება"
+
+#: global-shortcuts-provider/cc-global-shortcut-dialog.ui:36
+msgid ""
+"Added keyboard shortcuts will be available globally, and can be changed in "
+"the application’s panel in Settings"
+msgstr ""
+"დამატებული კლავიატურის მალსახმობები გლობალურად იქნება ხელმისაწვდომი და მათი "
+"შეცვლა მორგების ფანჯრის აპლიკაციის პანელიდანაა შესაძლებელი"
+
+#: panels/applications/cc-application-shortcut-dialog.c:143
+msgid "Remove All Shortcuts?"
+msgstr "წავშალო ყველა მალსახმობი?"
+
+#: panels/applications/cc-application-shortcut-dialog.c:148
+#, c-format
+msgid ""
+"All actions from %s that have been registered for global shortcuts will be "
+"removed."
+msgstr ""
+"ყველა ქმედება %s-დან, რომელიც რეგისტრირებულია გლობალური მალსახმობებისთვის, "
+"წაიშლება."
+
+#: panels/applications/cc-application-shortcut-dialog.c:153
+#: panels/keyboard/cc-keyboard-shortcut-editor.ui:19
+#: panels/system/users/cc-user-page.ui:224
+msgid "_Remove"
+msgstr "_წაშლა"
+
+#: panels/applications/cc-application-shortcut-dialog.c:183
+msgid "_Remove All Shortcuts"
+msgstr "ყველა მალსახმობის _წაშლა"
+
+#: panels/applications/cc-application-shortcut-dialog.c:265
+#, c-format
+msgid "%s has registered the following global shortcuts"
+msgstr "%s-მა დაარეგისტრირა შემდეგი გლობალური მალსახმობები"
+
+#: panels/applications/cc-application-shortcut-dialog.ui:5
+msgid "Global Shortcuts"
+msgstr "გლობალური მალსახმობები"
+
+#: panels/applications/cc-applications-panel.c:880
 msgid "System Bus"
 msgstr "სისტემური მატარებელი"
 
-#: panels/applications/cc-applications-panel.c:850
-#: panels/applications/cc-applications-panel.c:852
-#: panels/applications/cc-applications-panel.c:865
-#: panels/applications/cc-applications-panel.c:870
+#: panels/applications/cc-applications-panel.c:880
+#: panels/applications/cc-applications-panel.c:882
+#: panels/applications/cc-applications-panel.c:895
+#: panels/applications/cc-applications-panel.c:900
 msgid "Full access"
 msgstr "სრული წვდომა"
 
-#: panels/applications/cc-applications-panel.c:852
+#: panels/applications/cc-applications-panel.c:882
 msgid "Session Bus"
 msgstr "სესიების მატარებელი"
 
-#: panels/applications/cc-applications-panel.c:856
+#: panels/applications/cc-applications-panel.c:886
 #: panels/privacy/bolt/cc-bolt-page.ui:164
 #: panels/privacy/bolt/cc-bolt-page.ui:202
 #: panels/privacy/cc-privacy-panel.ui:72
 msgid "Devices"
 msgstr "მოწყობილობა"
 
-#: panels/applications/cc-applications-panel.c:856
+#: panels/applications/cc-applications-panel.c:886
 msgid "Full access to /dev"
 msgstr "სრული წვდომა /dev-თან"
 
-#: panels/applications/cc-applications-panel.c:860
+#: panels/applications/cc-applications-panel.c:890
 #: panels/network/cc-network-panel.ui:8
 #: panels/network/gnome-network-panel.desktop.in:3
 #: panels/network/network-mobile.ui:235 panels/wwan/cc-wwan-device-page.ui:61
@@ -58,38 +149,38 @@ msgstr "სრული წვდომა /dev-თან"
 msgid "Network"
 msgstr "ქსელი"
 
-#: panels/applications/cc-applications-panel.c:860
+#: panels/applications/cc-applications-panel.c:890
 msgid "Has network access"
 msgstr "აქვს ქსელთან წვდომა"
 
-#: panels/applications/cc-applications-panel.c:865
-#: panels/applications/cc-applications-panel.c:867
+#: panels/applications/cc-applications-panel.c:895
+#: panels/applications/cc-applications-panel.c:897
 #: panels/search/cc-search-locations-page.c:421
 msgid "Home"
 msgstr "სახლი"
 
-#: panels/applications/cc-applications-panel.c:867
-#: panels/applications/cc-applications-panel.c:872
+#: panels/applications/cc-applications-panel.c:897
+#: panels/applications/cc-applications-panel.c:902
 msgid "Read-only"
 msgstr "მხოლოდ წაკითხვა"
 
-#: panels/applications/cc-applications-panel.c:870
-#: panels/applications/cc-applications-panel.c:872
+#: panels/applications/cc-applications-panel.c:900
+#: panels/applications/cc-applications-panel.c:902
 msgid "File System"
 msgstr "ფაილური სისტემა"
 
-#: panels/applications/cc-applications-panel.c:876
+#: panels/applications/cc-applications-panel.c:906
 #: panels/keyboard/01-launchers.xml.in:6
 #: shell/appdata/org.gnome.Settings.appdata.xml.in.in:7 shell/cc-window.c:804
 #: shell/cc-window.ui:18 shell/org.gnome.Settings.desktop.in:3
 msgid "Settings"
 msgstr "მორგება"
 
-#: panels/applications/cc-applications-panel.c:876
+#: panels/applications/cc-applications-panel.c:906
 msgid "Can change settings"
 msgstr "პარამეტრები შეცვლადია"
 
-#: panels/applications/cc-applications-panel.c:878
+#: panels/applications/cc-applications-panel.c:908
 #, c-format
 msgid ""
 "<b>%s</b> requires access to the following system resources. To stop this "
@@ -98,33 +189,33 @@ msgstr ""
 "<b>%s</b> ითხოვს წვდომას შემდეგ სისტემურ რესურსებთან. ამ წვდომის "
 "გასაჩერებლად, აპი უნდა წაშალოთ."
 
-#: panels/applications/cc-applications-panel.c:882
+#: panels/applications/cc-applications-panel.c:912
 #, c-format
 msgid "%u permission"
 msgid_plural "%u permissions"
 msgstr[0] "%u წვდომები"
 
-#: panels/applications/cc-applications-panel.c:1054
+#: panels/applications/cc-applications-panel.c:1084
 msgid "Remove Link Type"
 msgstr "ბმულის ტიპის წაშლა"
 
-#: panels/applications/cc-applications-panel.c:1085
+#: panels/applications/cc-applications-panel.c:1115
 msgid "Remove File Type"
 msgstr "ფაილის ტიპის წაშლა"
 
-#: panels/applications/cc-applications-panel.c:1217
+#: panels/applications/cc-applications-panel.c:1247
 #, c-format
 msgid "%u type"
 msgid_plural "%u types"
 msgstr[0] "%u ტიპი"
 
-#: panels/applications/cc-applications-panel.c:1224
+#: panels/applications/cc-applications-panel.c:1254
 #, c-format
 msgid "<b>%s</b> is used to open the following types of files and links"
 msgstr "<b>%s</b> გამოიყენება შემდეგი ტიპის ფაილებისა და ბმულების გასახსნელად"
 
 #. TRANSLATORS: %s is an app name.
-#: panels/applications/cc-applications-panel.c:1265
+#: panels/applications/cc-applications-panel.c:1295
 #, c-format
 msgid "How much disk space <b>%s</b> is occupying with app data and caches"
 msgstr "რამდენი ადგილი მიაქვს <b>%s</b>-ს, მონაცემების და ქეშის ჩათვლით"
@@ -359,70 +450,78 @@ msgstr "_აუცილებელი წვდომები"
 msgid "System permissions that the app requires"
 msgstr "სისტემური წვდომები, რომლებიც აპს სჭირდება"
 
-#: panels/applications/cc-applications-panel.ui:415
+#: panels/applications/cc-applications-panel.ui:412
+msgid "Global S_hortcuts"
+msgstr "გლობალური მალსახმ_ობები"
+
+#: panels/applications/cc-applications-panel.ui:413
+msgid "Global actions that have been registered for use"
+msgstr "გამოსაყენებლად დარეგისტრირებული გლობალური ქმედებები"
+
+#: panels/applications/cc-applications-panel.ui:423
 #: panels/mouse/cc-mouse-panel.ui:67 panels/mouse/cc-mouse-panel.ui:203
 #: panels/multitasking/cc-multitasking-panel.ui:15
 #: panels/power/cc-power-panel.ui:161
 msgid "General"
 msgstr "საერთო"
 
-#: panels/applications/cc-applications-panel.ui:418
+#: panels/applications/cc-applications-panel.ui:426
 msgid "_Files &amp; Links"
 msgstr "_ფაილები &amp; ბმული"
 
-#: panels/applications/cc-applications-panel.ui:419
+#: panels/applications/cc-applications-panel.ui:427
 msgid "File and link types that are opened by the app"
 msgstr "ფაილი და ბმულის ტიპები აპლიკაციით გაიხსნება"
 
-#: panels/applications/cc-applications-panel.ui:427
+#: panels/applications/cc-applications-panel.ui:435
 msgid "S_torage"
 msgstr "_საცავი"
 
-#: panels/applications/cc-applications-panel.ui:428
+#: panels/applications/cc-applications-panel.ui:436
 msgid "Disk space being used"
 msgstr "დისკზე დაკავებული ადგილი"
 
-#: panels/applications/cc-applications-panel.ui:448
+#: panels/applications/cc-applications-panel.ui:456
 msgid "Required Permissions"
 msgstr "აუცილებელი წვდომები"
 
-#: panels/applications/cc-applications-panel.ui:479
+#: panels/applications/cc-applications-panel.ui:487
 msgid "Files & Links"
 msgstr "ფაილები & ბმულები"
 
-#: panels/applications/cc-applications-panel.ui:490
+#: panels/applications/cc-applications-panel.ui:498
 msgid "File Types"
 msgstr "ფაილის ტიპები"
 
-#: panels/applications/cc-applications-panel.ui:495
+#: panels/applications/cc-applications-panel.ui:503
 msgid "Link Types"
 msgstr "ბმულის ტიპები"
 
-#: panels/applications/cc-applications-panel.ui:502
+#: panels/applications/cc-applications-panel.ui:510
 msgid "_Reset"
 msgstr "ჩამოყ_რა"
 
-#: panels/applications/cc-applications-panel.ui:522
+#: panels/applications/cc-applications-panel.ui:530
 msgid "Storage"
 msgstr "საცავი"
 
-#: panels/applications/cc-applications-panel.ui:535
+#: panels/applications/cc-applications-panel.ui:543
 msgid "App"
 msgstr "აპი"
 
-#: panels/applications/cc-applications-panel.ui:543
+#: panels/applications/cc-applications-panel.ui:551
 msgid "Data"
 msgstr "მონაცემები"
 
-#: panels/applications/cc-applications-panel.ui:551
+#: panels/applications/cc-applications-panel.ui:559
 msgid "Cache"
 msgstr "კეში"
 
-#: panels/applications/cc-applications-panel.ui:559
+#: panels/applications/cc-applications-panel.ui:567
 msgid "Total"
 msgstr "ჯამში"
 
-#: panels/applications/cc-applications-panel.ui:571
+#: panels/applications/cc-applications-panel.ui:579
 msgid "_Clear Cache"
 msgstr "კეშის _გასუფთავება"
 
@@ -1077,39 +1176,6 @@ msgstr "არ შეაწუხოთ მოწყობილობის კ
 msgid "Display Calibration"
 msgstr "ეკრანის კალიბრაცია"
 
-#: panels/color/cc-color-calibrate.ui:21
-#: panels/common/cc-language-chooser.ui:15
-#: panels/display/cc-display-panel.ui:32 panels/display/cc-display-panel.ui:184
-#: panels/display/cc-display-panel.ui:246
-#: panels/keyboard/cc-input-chooser.ui:15
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:159
-#: panels/keyboard/cc-keyboard-shortcut-editor.ui:12
-#: panels/network/cc-net-proxy-page.ui:14
-#: panels/network/cc-wifi-hotspot-dialog.ui:142
-#: panels/network/cc-wifi-panel.ui:241
-#: panels/network/connection-editor/ce-page-details.c:89
-#: panels/network/connection-editor/connection-editor.ui:16
-#: panels/printers/pp-jobs-dialog.ui:125
-#: panels/printers/pp-new-printer-dialog.ui:65
-#: panels/printers/pp-ppd-selection-dialog.ui:17
-#: panels/privacy/usage/cc-usage-page.ui:125
-#: panels/privacy/usage/cc-usage-page.ui:136
-#: panels/privacy/usage/cc-usage-page.ui:147
-#: panels/system/region/cc-format-chooser.ui:32
-#: panels/system/users/cc-add-user-dialog.ui:24
-#: panels/system/users/cc-avatar-chooser.c:92
-#: panels/system/users/cc-enterprise-login-dialog.ui:44
-#: panels/system/users/cc-fingerprint-dialog.c:1400
-#: panels/system/users/cc-fingerprint-dialog.ui:17
-#: panels/system/users/cc-password-dialog.ui:15
-#: panels/system/users/cc-user-page.ui:223
-#: panels/system/users/data/join-dialog.ui:17
-#: panels/wwan/cc-wwan-mode-dialog.ui:32
-#: panels/wwan/cc-wwan-network-dialog.ui:109
-#: panels/wwan/cc-wwan-sim-lock-dialog.ui:239
-msgid "_Cancel"
-msgstr "_გაუქმება"
-
 #. This starts the calibration process
 #: panels/color/cc-color-calibrate.ui:27
 msgid "_Start"
@@ -1398,17 +1464,6 @@ msgstr "პროფილის დამატება"
 #: panels/color/cc-color-panel.ui:343
 msgid "_Import File…"
 msgstr "_ფაილის შემოტანა…"
-
-#: panels/color/cc-color-panel.ui:349 panels/keyboard/cc-input-chooser.ui:23
-#: panels/keyboard/cc-keyboard-shortcut-editor.ui:30
-#: panels/network/connection-editor/net-connection-editor.c:653
-#: panels/printers/pp-new-printer-dialog.ui:96
-#: panels/system/users/cc-add-user-dialog.c:362
-#: panels/system/users/cc-add-user-dialog.ui:32
-#: panels/system/users/cc-add-user-dialog.ui:153
-#: panels/system/users/cc-enterprise-login-dialog.ui:52
-msgid "_Add"
-msgstr "დ_ამატება"
 
 #: panels/color/cc-color-panel.ui:418
 msgid ""
@@ -2300,9 +2355,9 @@ msgstr "გამართვა"
 msgid "Remove"
 msgstr "წაშლა"
 
-#: panels/keyboard/cc-keyboard-manager.c:488
-#: panels/keyboard/cc-keyboard-manager.c:496
-#: panels/keyboard/cc-keyboard-manager.c:936
+#: panels/keyboard/cc-keyboard-manager.c:507
+#: panels/keyboard/cc-keyboard-manager.c:515
+#: panels/keyboard/cc-keyboard-manager.c:1074
 msgid "Custom Shortcuts"
 msgstr "საკუთარი მალსახმობი"
 
@@ -2524,11 +2579,6 @@ msgstr "%s-ის შესაცვლელად შეიყვანეთ 
 #: panels/keyboard/cc-keyboard-shortcut-editor.c:932
 msgid "Add Custom Shortcut"
 msgstr "საკუთარი მალსახმობის დამატება"
-
-#: panels/keyboard/cc-keyboard-shortcut-editor.ui:19
-#: panels/system/users/cc-user-page.ui:224
-msgid "_Remove"
-msgstr "_წაშლა"
 
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:41
 msgid "Re_place"
@@ -9297,7 +9347,6 @@ msgstr "შაბ"
 #. * Use whatever shortest unit label is used for minutes in your locale.
 #: panels/wellbeing/cc-screen-time-statistics-row.c:391
 #, c-format
-#| msgid "Hum"
 msgid "%um"
 msgstr "%uწთ"
 
@@ -11486,9 +11535,6 @@ msgstr "სისტემური ხმები"
 
 #~ msgid "_Rename"
 #~ msgstr "_გადარქმევა"
-
-#~ msgid "Shortcuts"
-#~ msgstr "მალსახმობები"
 
 #~ msgid "_Socks Host"
 #~ msgstr "Socks _ჰოსტი"
