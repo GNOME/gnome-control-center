@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: amberol\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/issues\n"
-"POT-Creation-Date: 2025-02-06 21:02+0000\n"
-"PO-Revision-Date: 2025-02-11 01:45+0330\n"
+"POT-Creation-Date: 2025-02-23 08:33+0000\n"
+"PO-Revision-Date: 2025-02-23 21:00+0330\n"
 "Last-Translator: Danial Behzadi <dani.behzi@ubuntu.com>\n"
 "Language-Team: Farsi\n"
 "Language: fa\n"
@@ -15,32 +15,114 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Poedit 3.5\n"
 
-#: panels/applications/cc-applications-panel.c:850
+#: global-shortcuts-provider/cc-global-shortcut-dialog.ui:6
+msgid "Add Keyboard Shortcuts"
+msgstr "افزودن میان‌برهای صفحه‌کلید"
+
+#: global-shortcuts-provider/cc-global-shortcut-dialog.ui:15
+#: panels/applications/cc-application-shortcut-dialog.c:152
+#: panels/color/cc-color-calibrate.ui:21 panels/common/cc-language-chooser.ui:15
+#: panels/display/cc-display-panel.ui:32 panels/display/cc-display-panel.ui:184
+#: panels/display/cc-display-panel.ui:246 panels/keyboard/cc-input-chooser.ui:15
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:159
+#: panels/keyboard/cc-keyboard-shortcut-editor.ui:12
+#: panels/network/cc-net-proxy-page.ui:14
+#: panels/network/cc-wifi-hotspot-dialog.ui:142 panels/network/cc-wifi-panel.ui:241
+#: panels/network/connection-editor/ce-page-details.c:89
+#: panels/network/connection-editor/connection-editor.ui:16
+#: panels/printers/pp-jobs-dialog.ui:125 panels/printers/pp-new-printer-dialog.ui:65
+#: panels/printers/pp-ppd-selection-dialog.ui:17
+#: panels/privacy/usage/cc-usage-page.ui:125
+#: panels/privacy/usage/cc-usage-page.ui:136
+#: panels/privacy/usage/cc-usage-page.ui:147
+#: panels/system/region/cc-format-chooser.ui:32
+#: panels/system/users/cc-add-user-dialog.ui:24
+#: panels/system/users/cc-avatar-chooser.c:92
+#: panels/system/users/cc-enterprise-login-dialog.ui:44
+#: panels/system/users/cc-fingerprint-dialog.c:1400
+#: panels/system/users/cc-fingerprint-dialog.ui:17
+#: panels/system/users/cc-password-dialog.ui:15
+#: panels/system/users/cc-user-page.ui:223 panels/system/users/data/join-dialog.ui:17
+#: panels/wwan/cc-wwan-mode-dialog.ui:32 panels/wwan/cc-wwan-network-dialog.ui:109
+#: panels/wwan/cc-wwan-sim-lock-dialog.ui:239
+msgid "_Cancel"
+msgstr "_لغو"
+
+#: global-shortcuts-provider/cc-global-shortcut-dialog.ui:23
+#: panels/color/cc-color-panel.ui:349 panels/keyboard/cc-input-chooser.ui:23
+#: panels/keyboard/cc-keyboard-shortcut-editor.ui:30
+#: panels/network/connection-editor/net-connection-editor.c:653
+#: panels/printers/pp-new-printer-dialog.ui:96
+#: panels/system/users/cc-add-user-dialog.c:362
+#: panels/system/users/cc-add-user-dialog.ui:32
+#: panels/system/users/cc-add-user-dialog.ui:153
+#: panels/system/users/cc-enterprise-login-dialog.ui:52
+msgid "_Add"
+msgstr "_اضافه کردن"
+
+#: global-shortcuts-provider/cc-global-shortcut-dialog.ui:36
+msgid ""
+"Added keyboard shortcuts will be available globally, and can be changed in the "
+"application’s panel in Settings"
+msgstr ""
+"میان‌برهای صفحه‌کلید افزوده به صورت سراسری در دسترس خواهند بود و می‌توانند در تابلوی "
+"برنامه در تنظیمات تغییر کنند"
+
+#: panels/applications/cc-application-shortcut-dialog.c:143
+msgid "Remove All Shortcuts?"
+msgstr "برداشتن همهٔ میان‌برها؟"
+
+#: panels/applications/cc-application-shortcut-dialog.c:148
+#, c-format
+msgid ""
+"All actions from %s that have been registered for global shortcuts will be removed."
+msgstr "همهٔ کنش‌های %s که به صورت میان‌برهای سراسری ثبت شده‌اند برداشته خواهند شد."
+
+#: panels/applications/cc-application-shortcut-dialog.c:153
+#: panels/keyboard/cc-keyboard-shortcut-editor.ui:19
+#: panels/system/users/cc-user-page.ui:224
+msgid "_Remove"
+msgstr "_‌حذف"
+
+#: panels/applications/cc-application-shortcut-dialog.c:183
+msgid "_Remove All Shortcuts"
+msgstr "_برداشتن همهٔ میان‌برها"
+
+#: panels/applications/cc-application-shortcut-dialog.c:265
+#, c-format
+msgid "%s has registered the following global shortcuts"
+msgstr "برنامهٔ %s میان‌برهی سراسری زیر را ثبت کرده"
+
+#: panels/applications/cc-application-shortcut-dialog.ui:5
+msgid "Global Shortcuts"
+msgstr "میان‌برهای سراسری"
+
+#: panels/applications/cc-applications-panel.c:880
 msgid "System Bus"
 msgstr "گذرگاه سامانه"
 
-#: panels/applications/cc-applications-panel.c:850
-#: panels/applications/cc-applications-panel.c:852
-#: panels/applications/cc-applications-panel.c:865
-#: panels/applications/cc-applications-panel.c:870
+#: panels/applications/cc-applications-panel.c:880
+#: panels/applications/cc-applications-panel.c:882
+#: panels/applications/cc-applications-panel.c:895
+#: panels/applications/cc-applications-panel.c:900
 msgid "Full access"
 msgstr "دسترسی کامل"
 
-#: panels/applications/cc-applications-panel.c:852
+#: panels/applications/cc-applications-panel.c:882
 msgid "Session Bus"
 msgstr "گذرگاه نشست"
 
-#: panels/applications/cc-applications-panel.c:856
+#: panels/applications/cc-applications-panel.c:886
 #: panels/privacy/bolt/cc-bolt-page.ui:164 panels/privacy/bolt/cc-bolt-page.ui:202
 #: panels/privacy/cc-privacy-panel.ui:72
 msgid "Devices"
 msgstr "افزاره‌ها"
 
-#: panels/applications/cc-applications-panel.c:856
+#: panels/applications/cc-applications-panel.c:886
 msgid "Full access to /dev"
 msgstr "دسترسی کامل به ‎/dev"
 
-#: panels/applications/cc-applications-panel.c:860
+#: panels/applications/cc-applications-panel.c:890
 #: panels/network/cc-network-panel.ui:8
 #: panels/network/gnome-network-panel.desktop.in:3
 #: panels/network/network-mobile.ui:235 panels/wwan/cc-wwan-device-page.ui:61
@@ -48,38 +130,38 @@ msgstr "دسترسی کامل به ‎/dev"
 msgid "Network"
 msgstr "شبکه"
 
-#: panels/applications/cc-applications-panel.c:860
+#: panels/applications/cc-applications-panel.c:890
 msgid "Has network access"
 msgstr "دسترسی شبکه دارد"
 
-#: panels/applications/cc-applications-panel.c:865
-#: panels/applications/cc-applications-panel.c:867
+#: panels/applications/cc-applications-panel.c:895
+#: panels/applications/cc-applications-panel.c:897
 #: panels/search/cc-search-locations-page.c:421
 msgid "Home"
 msgstr "خانه"
 
-#: panels/applications/cc-applications-panel.c:867
-#: panels/applications/cc-applications-panel.c:872
+#: panels/applications/cc-applications-panel.c:897
+#: panels/applications/cc-applications-panel.c:902
 msgid "Read-only"
 msgstr "فقط‌خواندنی"
 
-#: panels/applications/cc-applications-panel.c:870
-#: panels/applications/cc-applications-panel.c:872
+#: panels/applications/cc-applications-panel.c:900
+#: panels/applications/cc-applications-panel.c:902
 msgid "File System"
 msgstr "سامانه پرونده"
 
-#: panels/applications/cc-applications-panel.c:876
+#: panels/applications/cc-applications-panel.c:906
 #: panels/keyboard/01-launchers.xml.in:6
 #: shell/appdata/org.gnome.Settings.appdata.xml.in.in:7 shell/cc-window.c:804
 #: shell/cc-window.ui:18 shell/org.gnome.Settings.desktop.in:3
 msgid "Settings"
 msgstr "تنظیمات"
 
-#: panels/applications/cc-applications-panel.c:876
+#: panels/applications/cc-applications-panel.c:906
 msgid "Can change settings"
 msgstr "می‌تواند تنظیمات را دگرگون کند"
 
-#: panels/applications/cc-applications-panel.c:878
+#: panels/applications/cc-applications-panel.c:908
 #, c-format
 msgid ""
 "<b>%s</b> requires access to the following system resources. To stop this access, "
@@ -88,35 +170,35 @@ msgstr ""
 "<b>%s</b> نیازمند دسترسی به منابع سامانه‌ای زیر است. برای توقّف این دسترسی باید "
 "برنامه برداشته شود."
 
-#: panels/applications/cc-applications-panel.c:882
+#: panels/applications/cc-applications-panel.c:912
 #, c-format
 msgid "%u permission"
 msgid_plural "%u permissions"
 msgstr[0] "%Iu اجازه"
 msgstr[1] "%Iu اجازه"
 
-#: panels/applications/cc-applications-panel.c:1054
+#: panels/applications/cc-applications-panel.c:1084
 msgid "Remove Link Type"
 msgstr "برداشتن گونهٔ پیوند"
 
-#: panels/applications/cc-applications-panel.c:1085
+#: panels/applications/cc-applications-panel.c:1115
 msgid "Remove File Type"
 msgstr "برداشتن گونهٔ پرونده"
 
-#: panels/applications/cc-applications-panel.c:1217
+#: panels/applications/cc-applications-panel.c:1247
 #, c-format
 msgid "%u type"
 msgid_plural "%u types"
 msgstr[0] "%Iu گونه"
 msgstr[1] "%Iu گونه"
 
-#: panels/applications/cc-applications-panel.c:1224
+#: panels/applications/cc-applications-panel.c:1254
 #, c-format
 msgid "<b>%s</b> is used to open the following types of files and links"
 msgstr "برای گشودن گونه‌های پرونده و پیوند زیر از <b>%s</b> استفاده شده"
 
 #. TRANSLATORS: %s is an app name.
-#: panels/applications/cc-applications-panel.c:1265
+#: panels/applications/cc-applications-panel.c:1295
 #, c-format
 msgid "How much disk space <b>%s</b> is occupying with app data and caches"
 msgstr "مقدار فضایی که <b>%s</b> به همراه انباره‌ها و داده‌های کاره اشغال کرده"
@@ -348,69 +430,77 @@ msgstr "_اجازه‌های لازم"
 msgid "System permissions that the app requires"
 msgstr "اجازه‌های سامانه‌ای مورد نیاز کاره"
 
-#: panels/applications/cc-applications-panel.ui:415 panels/mouse/cc-mouse-panel.ui:67
+#: panels/applications/cc-applications-panel.ui:412
+msgid "Global S_hortcuts"
+msgstr "میان‌برهای _سراسری"
+
+#: panels/applications/cc-applications-panel.ui:413
+msgid "Global actions that have been registered for use"
+msgstr "کنش‌های سراسری که برای استفاده ثبت شده‌اند"
+
+#: panels/applications/cc-applications-panel.ui:423 panels/mouse/cc-mouse-panel.ui:67
 #: panels/mouse/cc-mouse-panel.ui:203 panels/multitasking/cc-multitasking-panel.ui:15
 #: panels/power/cc-power-panel.ui:161
 msgid "General"
 msgstr "عمومی"
 
-#: panels/applications/cc-applications-panel.ui:418
+#: panels/applications/cc-applications-panel.ui:426
 msgid "_Files &amp; Links"
 msgstr "_پرونده‌ها و پیوندها"
 
-#: panels/applications/cc-applications-panel.ui:419
+#: panels/applications/cc-applications-panel.ui:427
 msgid "File and link types that are opened by the app"
 msgstr "گونه‌های پیوند و پرونده‌ای که به دست کاره گشوده می‌شوند"
 
-#: panels/applications/cc-applications-panel.ui:427
+#: panels/applications/cc-applications-panel.ui:435
 msgid "S_torage"
 msgstr "_ذخیره‌سازی"
 
-#: panels/applications/cc-applications-panel.ui:428
+#: panels/applications/cc-applications-panel.ui:436
 msgid "Disk space being used"
 msgstr "فضای دیسک استفاده شده"
 
-#: panels/applications/cc-applications-panel.ui:448
+#: panels/applications/cc-applications-panel.ui:456
 msgid "Required Permissions"
 msgstr "اجازه‌های لازم"
 
-#: panels/applications/cc-applications-panel.ui:479
+#: panels/applications/cc-applications-panel.ui:487
 msgid "Files & Links"
 msgstr "پرونده‌ها و پیوندها"
 
-#: panels/applications/cc-applications-panel.ui:490
+#: panels/applications/cc-applications-panel.ui:498
 msgid "File Types"
 msgstr "گونه‌های پرونده"
 
-#: panels/applications/cc-applications-panel.ui:495
+#: panels/applications/cc-applications-panel.ui:503
 msgid "Link Types"
 msgstr "گونه‌های پیوند"
 
-#: panels/applications/cc-applications-panel.ui:502
+#: panels/applications/cc-applications-panel.ui:510
 msgid "_Reset"
 msgstr "_بازنشانی"
 
-#: panels/applications/cc-applications-panel.ui:522
+#: panels/applications/cc-applications-panel.ui:530
 msgid "Storage"
 msgstr "ذخیره‌سازی"
 
-#: panels/applications/cc-applications-panel.ui:535
+#: panels/applications/cc-applications-panel.ui:543
 msgid "App"
 msgstr "کاره"
 
-#: panels/applications/cc-applications-panel.ui:543
+#: panels/applications/cc-applications-panel.ui:551
 msgid "Data"
 msgstr "داده"
 
-#: panels/applications/cc-applications-panel.ui:551
+#: panels/applications/cc-applications-panel.ui:559
 msgid "Cache"
 msgstr "انباره"
 
-#: panels/applications/cc-applications-panel.ui:559
+#: panels/applications/cc-applications-panel.ui:567
 msgid "Total"
 msgstr "مجموع"
 
-#: panels/applications/cc-applications-panel.ui:571
+#: panels/applications/cc-applications-panel.ui:579
 msgid "_Clear Cache"
 msgstr "__پاک‌سازی انباره"
 
@@ -1047,33 +1137,6 @@ msgstr "مزاحم افزارهٔ واسنجی در هنگام کار نشوید
 msgid "Display Calibration"
 msgstr "واسنجی نمایشگر"
 
-#: panels/color/cc-color-calibrate.ui:21 panels/common/cc-language-chooser.ui:15
-#: panels/display/cc-display-panel.ui:32 panels/display/cc-display-panel.ui:184
-#: panels/display/cc-display-panel.ui:246 panels/keyboard/cc-input-chooser.ui:15
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:159
-#: panels/keyboard/cc-keyboard-shortcut-editor.ui:12
-#: panels/network/cc-net-proxy-page.ui:14
-#: panels/network/cc-wifi-hotspot-dialog.ui:142 panels/network/cc-wifi-panel.ui:241
-#: panels/network/connection-editor/ce-page-details.c:89
-#: panels/network/connection-editor/connection-editor.ui:16
-#: panels/printers/pp-jobs-dialog.ui:125 panels/printers/pp-new-printer-dialog.ui:65
-#: panels/printers/pp-ppd-selection-dialog.ui:17
-#: panels/privacy/usage/cc-usage-page.ui:125
-#: panels/privacy/usage/cc-usage-page.ui:136
-#: panels/privacy/usage/cc-usage-page.ui:147
-#: panels/system/region/cc-format-chooser.ui:32
-#: panels/system/users/cc-add-user-dialog.ui:24
-#: panels/system/users/cc-avatar-chooser.c:92
-#: panels/system/users/cc-enterprise-login-dialog.ui:44
-#: panels/system/users/cc-fingerprint-dialog.c:1400
-#: panels/system/users/cc-fingerprint-dialog.ui:17
-#: panels/system/users/cc-password-dialog.ui:15
-#: panels/system/users/cc-user-page.ui:223 panels/system/users/data/join-dialog.ui:17
-#: panels/wwan/cc-wwan-mode-dialog.ui:32 panels/wwan/cc-wwan-network-dialog.ui:109
-#: panels/wwan/cc-wwan-sim-lock-dialog.ui:239
-msgid "_Cancel"
-msgstr "_لغو"
-
 #. This starts the calibration process
 #: panels/color/cc-color-calibrate.ui:27
 msgid "_Start"
@@ -1355,17 +1418,6 @@ msgstr "افزودن نمایه"
 #: panels/color/cc-color-panel.ui:343
 msgid "_Import File…"
 msgstr "درون‌ریزی _پرونده…"
-
-#: panels/color/cc-color-panel.ui:349 panels/keyboard/cc-input-chooser.ui:23
-#: panels/keyboard/cc-keyboard-shortcut-editor.ui:30
-#: panels/network/connection-editor/net-connection-editor.c:653
-#: panels/printers/pp-new-printer-dialog.ui:96
-#: panels/system/users/cc-add-user-dialog.c:362
-#: panels/system/users/cc-add-user-dialog.ui:32
-#: panels/system/users/cc-add-user-dialog.ui:153
-#: panels/system/users/cc-enterprise-login-dialog.ui:52
-msgid "_Add"
-msgstr "_اضافه کردن"
 
 #: panels/color/cc-color-panel.ui:418
 msgid ""
@@ -1665,7 +1717,7 @@ msgid "Decrement Minute"
 msgstr "دقیقهٔ کاهش"
 
 #: panels/common/cc-util.c:130 panels/network/connection-editor/ce-page-details.c:188
-#: panels/wellbeing/cc-screen-time-statistics-row.c:928
+#: panels/wellbeing/cc-screen-time-statistics-row.c:964
 msgid "Today"
 msgstr "امروز"
 
@@ -2242,9 +2294,9 @@ msgstr "ترجیحات"
 msgid "Remove"
 msgstr "برداشتن"
 
-#: panels/keyboard/cc-keyboard-manager.c:488
-#: panels/keyboard/cc-keyboard-manager.c:496
-#: panels/keyboard/cc-keyboard-manager.c:936
+#: panels/keyboard/cc-keyboard-manager.c:507
+#: panels/keyboard/cc-keyboard-manager.c:515
+#: panels/keyboard/cc-keyboard-manager.c:1074
 msgid "Custom Shortcuts"
 msgstr "میان‌برهای سفارشی"
 
@@ -2460,11 +2512,6 @@ msgstr "ورود میان‌بر جدید برای دگرگونی <b>%s</b>"
 #: panels/keyboard/cc-keyboard-shortcut-editor.c:932
 msgid "Add Custom Shortcut"
 msgstr "افزودن میان‌بر سفارشی"
-
-#: panels/keyboard/cc-keyboard-shortcut-editor.ui:19
-#: panels/system/users/cc-user-page.ui:224
-msgid "_Remove"
-msgstr "_‌حذف"
 
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:41
 msgid "Re_place"
@@ -9019,51 +9066,51 @@ msgstr "مدّت"
 msgid "Interval"
 msgstr "دوره"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:221
+#: panels/wellbeing/cc-screen-time-statistics-row.c:228
 msgctxt "abbreviated weekday name for Sunday"
 msgid "S"
 msgstr "ی"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:222
+#: panels/wellbeing/cc-screen-time-statistics-row.c:229
 msgctxt "abbreviated weekday name for Monday"
 msgid "M"
 msgstr "د"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:223
+#: panels/wellbeing/cc-screen-time-statistics-row.c:230
 msgctxt "abbreviated weekday name for Tuesday"
 msgid "T"
 msgstr "س"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:224
+#: panels/wellbeing/cc-screen-time-statistics-row.c:231
 msgctxt "abbreviated weekday name for Wednesday"
 msgid "W"
 msgstr "چ"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:225
+#: panels/wellbeing/cc-screen-time-statistics-row.c:232
 msgctxt "abbreviated weekday name for Thursday"
 msgid "T"
 msgstr "پ"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:226
+#: panels/wellbeing/cc-screen-time-statistics-row.c:233
 msgctxt "abbreviated weekday name for Friday"
 msgid "F"
 msgstr "آ"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:227
+#: panels/wellbeing/cc-screen-time-statistics-row.c:234
 msgctxt "abbreviated weekday name for Saturday"
 msgid "S"
 msgstr "ش"
 
 #. Translators: This is a duration in minutes, for example ‘15m’ for 15 minutes.
 #. * Use whatever shortest unit label is used for minutes in your locale.
-#: panels/wellbeing/cc-screen-time-statistics-row.c:384
+#: panels/wellbeing/cc-screen-time-statistics-row.c:391
 #, c-format
 msgid "%um"
 msgstr "%Iuد"
 
 #. Translators: This is a duration in hours, for example ‘2h’ for 2 hours.
 #. * Use whatever shortest unit label is used for hours in your locale.
-#: panels/wellbeing/cc-screen-time-statistics-row.c:390
+#: panels/wellbeing/cc-screen-time-statistics-row.c:397
 #, c-format
 msgid "%uh"
 msgstr "%Iuس"
@@ -9071,62 +9118,62 @@ msgstr "%Iuس"
 #. Translators: This is a duration in hours and minutes, for example
 #. * ‘3h 15m’ for 3 hours and 15 minutes. Use whatever shortest unit label
 #. * is used for hours and minutes in your locale.
-#: panels/wellbeing/cc-screen-time-statistics-row.c:397
+#: panels/wellbeing/cc-screen-time-statistics-row.c:404
 #, c-format
 msgid "%uh %um"
 msgstr "%Iuس و %Iuد"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:627
-#: panels/wellbeing/cc-screen-time-statistics-row.c:747
+#: panels/wellbeing/cc-screen-time-statistics-row.c:663
+#: panels/wellbeing/cc-screen-time-statistics-row.c:783
 #, c-format
 msgid "Failed to load session history file ‘%s’: %s"
 msgstr "شکست در بار کردن پروندهٔ تاریخچهٔ نشست «%s»: ‏%s"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:628
+#: panels/wellbeing/cc-screen-time-statistics-row.c:664
 msgid "Invalid file structure"
 msgstr "ساختار پرونده نامعتبر"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:665
+#: panels/wellbeing/cc-screen-time-statistics-row.c:701
 #, c-format
 msgid "Failed to load session history file: %s"
 msgstr "شکست در بار کردن پروندهٔ تاریخچهٔ نشست: %s"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:666
-#: panels/wellbeing/cc-screen-time-statistics-row.c:748
+#: panels/wellbeing/cc-screen-time-statistics-row.c:702
+#: panels/wellbeing/cc-screen-time-statistics-row.c:784
 msgid "File is empty"
 msgstr "پرونده خالیست"
 
 #. Translators: This a medium-length date, for example ‘15 April’
-#: panels/wellbeing/cc-screen-time-statistics-row.c:933
+#: panels/wellbeing/cc-screen-time-statistics-row.c:969
 msgid "%-d %B"
 msgstr "%I-d %OB"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:946
-#: panels/wellbeing/cc-screen-time-statistics-row.c:957
+#: panels/wellbeing/cc-screen-time-statistics-row.c:982
+#: panels/wellbeing/cc-screen-time-statistics-row.c:993
 msgid "No Data"
 msgstr "بدون داده"
 
 #. Translators: This is an annotated day of the week. For example ‘Average Monday’.
-#: panels/wellbeing/cc-screen-time-statistics-row.c:950
+#: panels/wellbeing/cc-screen-time-statistics-row.c:986
 #, c-format
 msgid "Average %A"
 msgstr "میانگین %A"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:961
+#: panels/wellbeing/cc-screen-time-statistics-row.c:997
 #, c-format
 msgid "This Week"
 msgstr "این هفته"
 
 #. Translators: This is a range of days within a given month.
 #. * For example ‘20–27 April’. The dash is an en-dash.
-#: panels/wellbeing/cc-screen-time-statistics-row.c:972
+#: panels/wellbeing/cc-screen-time-statistics-row.c:1008
 #, c-format
 msgid "%u–%u %s"
 msgstr "%Iu–%Iu %s"
 
 #. Translators: This is a range of days spanning two months.
 #. * For example, ‘27 April–4 May’. The dash is an en-dash.
-#: panels/wellbeing/cc-screen-time-statistics-row.c:989
+#: panels/wellbeing/cc-screen-time-statistics-row.c:1025
 #, c-format
 msgid "%u %s–%u %s"
 msgstr "%Iu %s–%Iu %s"
@@ -9134,7 +9181,7 @@ msgstr "%Iu %s–%Iu %s"
 #. Translators: The first placeholder is a formatted date string. The
 #. * second placeholder is a formatted time duration (for example, ‘3 hours’
 #. * or ‘25 minutes’).
-#: panels/wellbeing/cc-screen-time-statistics-row.c:1050
+#: panels/wellbeing/cc-screen-time-statistics-row.c:1086
 #, c-format
 msgid ""
 "Bar chart of screen time usage over the week starting %s. A line is overlayed at "
@@ -9144,12 +9191,12 @@ msgstr ""
 "شده تا محدودیت زمان صفحهٔ پیکربندی شده را مشخّص کند."
 
 #. Translators: The placeholder is a formatted date string.
-#: panels/wellbeing/cc-screen-time-statistics-row.c:1067
+#: panels/wellbeing/cc-screen-time-statistics-row.c:1103
 #, c-format
 msgid "Bar chart of screen time usage over the week starting %s."
 msgstr "نمودار میله‌ای زمان استفادهٔ صفحه در طول هفتهٔ آغاز شده از %s."
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:1073
+#: panels/wellbeing/cc-screen-time-statistics-row.c:1109
 #, c-format
 msgid ""
 "Placeholder for a bar chart of screen time usage. No data is currently available."
