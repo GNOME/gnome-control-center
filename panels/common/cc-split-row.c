@@ -77,6 +77,102 @@ on_button_activate (GtkCheckButton *check_button)
 }
 
 static void
+update_accessible_states (CcSplitRow *self)
+{
+  GtkWidget *default_option_button, *alternative_option_button;
+
+  default_option_button = gtk_widget_get_ancestor (GTK_WIDGET (self->default_option_checkbutton), GTK_TYPE_BUTTON);
+  alternative_option_button = gtk_widget_get_ancestor (GTK_WIDGET (self->alternative_option_checkbutton), GTK_TYPE_BUTTON);
+
+  gtk_widget_set_can_focus (default_option_button, gtk_check_button_get_active (self->default_option_checkbutton));
+  gtk_widget_set_can_focus (alternative_option_button, gtk_check_button_get_active (self->alternative_option_checkbutton));
+
+  gtk_accessible_update_state (GTK_ACCESSIBLE (default_option_button),
+                               GTK_ACCESSIBLE_STATE_CHECKED, gtk_check_button_get_active (self->default_option_checkbutton),
+                               -1);
+
+  gtk_accessible_update_state (GTK_ACCESSIBLE (alternative_option_button),
+                               GTK_ACCESSIBLE_STATE_CHECKED, gtk_check_button_get_active (self->alternative_option_checkbutton),
+                               -1);
+}
+
+static gboolean
+cc_split_row_focus (GtkWidget         *widget,
+                    GtkDirectionType   direction)
+{
+  CcSplitRow *self = CC_SPLIT_ROW (widget);
+  gpointer active_checkbutton, active_button;
+  gint previous_dir, next_dir;
+
+  active_checkbutton = cc_split_row_get_use_default (self) ? self->default_option_checkbutton : self->alternative_option_checkbutton;
+  active_button = gtk_widget_get_ancestor (active_checkbutton, GTK_TYPE_BUTTON);
+
+  if (direction == GTK_DIR_LEFT || direction == GTK_DIR_RIGHT)
+    {
+      previous_dir = gtk_widget_get_direction (widget) == GTK_TEXT_DIR_LTR ? GTK_DIR_LEFT : GTK_DIR_RIGHT;
+      next_dir = gtk_widget_get_direction (widget) == GTK_TEXT_DIR_LTR ? GTK_DIR_RIGHT : GTK_DIR_LEFT;
+
+      if (active_checkbutton == self->default_option_checkbutton && direction == next_dir)
+        {
+          gtk_check_button_set_active (self->alternative_option_checkbutton, TRUE);
+          update_accessible_states (self);
+          gtk_widget_grab_focus (gtk_widget_get_ancestor (GTK_WIDGET (self->alternative_option_checkbutton), GTK_TYPE_BUTTON));
+          return TRUE;
+        }
+      else if (active_checkbutton == self->alternative_option_checkbutton && direction == previous_dir)
+        {
+          gtk_check_button_set_active (self->default_option_checkbutton, TRUE);
+          update_accessible_states (self);
+          gtk_widget_grab_focus (gtk_widget_get_ancestor (GTK_WIDGET (self->default_option_checkbutton), GTK_TYPE_BUTTON));
+          return TRUE;
+        }
+      else
+        {
+          return FALSE;
+        }
+    }
+
+  if (direction == GTK_DIR_TAB_FORWARD || direction == GTK_DIR_TAB_BACKWARD)
+    {
+      if (gtk_widget_is_focus (widget))
+        {
+          if (direction == GTK_DIR_TAB_FORWARD)
+            {
+              gtk_widget_grab_focus (active_button);
+              return TRUE;
+            }
+          else
+            {
+              return FALSE;
+            }
+        }
+      else
+        {
+          if ((!gtk_widget_get_focus_child (widget) &&
+              direction == GTK_DIR_TAB_FORWARD) ||
+              (!!gtk_widget_get_focus_child (widget) &&
+              direction == GTK_DIR_TAB_BACKWARD))
+            {
+              gtk_widget_grab_focus (widget);
+              return TRUE;
+            }
+          else if (!gtk_widget_get_focus_child (widget) &&
+                   direction == GTK_DIR_TAB_BACKWARD)
+            {
+              gtk_widget_grab_focus (active_button);
+              return TRUE;
+            }
+          else
+            {
+              return FALSE;
+            }
+        }
+    }
+
+  return FALSE;
+}
+
+static void
 on_option_focus_leave_cb (CcMaskPaintable *mask)
 {
   GtkMediaStream *stream;
@@ -112,6 +208,8 @@ static void
 on_checkbutton_toggled_cb (CcSplitRow *self)
 {
   g_object_notify_by_pspec (G_OBJECT (self), props[PROP_USE_DEFAULT]);
+
+  update_accessible_states (self);
 }
 
 static void
@@ -217,6 +315,8 @@ cc_split_row_class_init (CcSplitRowClass *klass)
   object_class->get_property = cc_split_row_get_property;
   object_class->set_property = cc_split_row_set_property;
 
+  widget_class->focus = cc_split_row_focus;
+
   props[PROP_USE_DEFAULT] =
     g_param_spec_boolean ("use-default",
                           "Use Default",
@@ -293,6 +393,7 @@ cc_split_row_init (CcSplitRow *self)
   gtk_widget_init_template (GTK_WIDGET (self));
   gtk_widget_set_name (GTK_WIDGET (self), "split-row");
   gtk_widget_add_css_class (GTK_WIDGET (self), "split-row");
+  update_accessible_states (self);
 }
 
 const gchar *
@@ -346,6 +447,7 @@ cc_split_row_set_use_default (CcSplitRow *self,
   g_return_if_fail (CC_IS_SPLIT_ROW (self));
 
   gtk_check_button_set_active (use_default ? self->default_option_checkbutton : self->alternative_option_checkbutton, TRUE);
+  update_accessible_states (self);
 
   g_object_notify_by_pspec (G_OBJECT (self), props[PROP_USE_DEFAULT]);
 }
