@@ -739,12 +739,12 @@ grab_idle (gpointer data)
 }
 
 static void
-cc_keyboard_shortcut_editor_show (GtkWidget *widget)
+cc_keyboard_shortcut_editor_realize (GtkWidget *widget)
 {
   CcKeyboardShortcutEditor *self = CC_KEYBOARD_SHORTCUT_EDITOR (widget);
 
   /* Map before grabbing, so that the window is visible */
-  GTK_WIDGET_CLASS (cc_keyboard_shortcut_editor_parent_class)->show (widget);
+  GTK_WIDGET_CLASS (cc_keyboard_shortcut_editor_parent_class)->realize (widget);
 
   self->grab_idle_id = g_timeout_add (100, grab_idle, self);
 }
@@ -771,7 +771,7 @@ cc_keyboard_shortcut_editor_class_init (CcKeyboardShortcutEditorClass *klass)
   object_class->get_property = cc_keyboard_shortcut_editor_get_property;
   object_class->set_property = cc_keyboard_shortcut_editor_set_property;
 
-  widget_class->show = cc_keyboard_shortcut_editor_show;
+  widget_class->realize = cc_keyboard_shortcut_editor_realize;
   widget_class->unrealize = cc_keyboard_shortcut_editor_unrealize;
 
   /**
