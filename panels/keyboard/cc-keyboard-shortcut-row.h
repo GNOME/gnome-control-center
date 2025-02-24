@@ -32,7 +32,6 @@ G_DECLARE_FINAL_TYPE (CcKeyboardShortcutRow, cc_keyboard_shortcut_row, CC, KEYBO
 
 CcKeyboardShortcutRow *cc_keyboard_shortcut_row_new (CcKeyboardItem           *item,
                                                      CcKeyboardManager        *manager,
-                                                     CcKeyboardShortcutEditor *editor,
                                                      GtkSizeGroup             *size_group);
 CcKeyboardItem        *cc_keyboard_shortcut_row_get_item  (CcKeyboardShortcutRow   *self);
 

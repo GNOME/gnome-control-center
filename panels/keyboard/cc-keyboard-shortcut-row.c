@@ -33,7 +33,6 @@ struct _CcKeyboardShortcutRow
 
   CcKeyboardItem           *item;
   CcKeyboardManager        *manager;
-  CcKeyboardShortcutEditor *shortcut_editor;
 };
 
 G_DEFINE_TYPE (CcKeyboardShortcutRow, cc_keyboard_shortcut_row, ADW_TYPE_ACTION_ROW)
@@ -96,7 +95,6 @@ transform_binding_to_accel (GBinding     *binding,
 CcKeyboardShortcutRow *
 cc_keyboard_shortcut_row_new (CcKeyboardItem           *item,
                               CcKeyboardManager        *manager,
-                              CcKeyboardShortcutEditor *shortcut_editor,
                               GtkSizeGroup             *size_group)
 {
   CcKeyboardShortcutRow *self;
@@ -104,7 +102,6 @@ cc_keyboard_shortcut_row_new (CcKeyboardItem           *item,
   self = g_object_new (CC_TYPE_KEYBOARD_SHORTCUT_ROW, NULL);
   self->item = item;
   self->manager = manager;
-  self->shortcut_editor = shortcut_editor;
 
   g_object_bind_property (item, "description",
                           self, "title",

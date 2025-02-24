@@ -143,7 +143,6 @@ shortcut_group_row_new (gpointer item,
 {
   CcKeyboardShortcutGroup *self = user_data;
   GtkWidget *row;
-  CcKeyboardShortcutEditor *shortcut_editor;
 
   /* Row to add custom shortcut */
   if (GTK_IS_STRING_OBJECT (item))
@@ -166,11 +165,8 @@ shortcut_group_row_new (gpointer item,
 
     }
 
-  shortcut_editor = cc_keyboard_shortcut_editor_new (self->keyboard_manager);
-
   row = GTK_WIDGET (cc_keyboard_shortcut_row_new (item,
                                                   self->keyboard_manager,
-                                                  shortcut_editor,
                                                   self->accelerator_size_group));
 
   g_signal_connect_object (item, "notify::is-value-default",
