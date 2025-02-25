@@ -717,6 +717,20 @@
             ]
         },
         {
+            "name": "python3-docutils",
+            "buildsystem": "simple",
+            "build-commands": [
+                "pip3 install --verbose --exists-action=i --no-index --find-links=\"file://${PWD}\" --prefix=${FLATPAK_DEST} \"docutils\" --no-build-isolation"
+            ],
+            "sources": [
+                {
+                    "type": "file",
+                    "url": "https://files.pythonhosted.org/packages/8f/d7/9322c609343d929e75e7e5e6255e614fcc67572cfd083959cdef3b7aad79/docutils-0.21.2-py3-none-any.whl",
+                    "sha256": "dafca5b9e384f0e419294eb4d2ff9fa826435bf15f15b7bd45723e8ad76811b2"
+                }
+            ]
+        },
+        {
             "name" : "mutter",
             "buildsystem" : "meson",
             "config-opts" : [
@@ -725,6 +739,7 @@
                 "-Dxwayland=false",
                 "-Dwayland=false",
                 "-Dlogind=false",
+                "-Dbash_completion=false",
                 "-Dnative_backend=false",
                 "-Dremote_desktop=false",
                 "-Degl_device=false",
