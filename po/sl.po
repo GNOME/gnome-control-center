@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2025-02-23 08:33+0000\n"
-"PO-Revision-Date: 2025-02-23 15:11+0100\n"
+"POT-Creation-Date: 2025-02-26 13:02+0000\n"
+"PO-Revision-Date: 2025-02-26 15:43+0100\n"
 "Last-Translator: Martin Srebotnjak <miles@filmsi.net>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "Language: sl_SI\n"
@@ -37,7 +37,7 @@ msgstr "Dodaj tipkovne bližnjice"
 #: panels/display/cc-display-panel.ui:32 panels/display/cc-display-panel.ui:184
 #: panels/display/cc-display-panel.ui:246
 #: panels/keyboard/cc-input-chooser.ui:15
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:159
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:162
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:12
 #: panels/network/cc-net-proxy-page.ui:14
 #: panels/network/cc-wifi-hotspot-dialog.ui:142
@@ -1789,7 +1789,7 @@ msgstr "Zmanjšanje minute"
 
 #: panels/common/cc-util.c:130
 #: panels/network/connection-editor/ce-page-details.c:188
-#: panels/wellbeing/cc-screen-time-statistics-row.c:964
+#: panels/wellbeing/cc-screen-time-statistics-row.c:973
 msgid "Today"
 msgstr "Danes"
 
@@ -2550,29 +2550,29 @@ msgstr "Poišči tipkovno bližnjico"
 msgid "_Reset All…"
 msgstr "_Ponastavi vse …"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:124
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:127
 msgid "Add Custom Shortcuts"
 msgstr "Dodaj bližnjice po meri"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:125
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:128
 msgid "Set up custom shortcuts for launching apps, running scripts, and more"
 msgstr ""
 "Nastavi tipkovne bližnjice po meri za zaganjanje programov, izvajanje "
 "skriptov in drugih opravil."
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:130
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:133
 msgid "_Add Shortcut…"
 msgstr "_Dodaj tipkovno bližnjico …"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:153
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:156
 msgid "Reset All Shortcuts?"
 msgstr "Ali želite ponastaviti vse tipkovne bližnjice?"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:154
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:157
 msgid "All changes to keyboard shortcuts will be lost"
 msgstr "Vse spremembe tipkovnih bližnjic bodo izgubljene."
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:160
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:163
 msgid "_Reset All"
 msgstr "Ponastavi _vse"
 
@@ -3083,7 +3083,7 @@ msgid "_Proxy"
 msgstr "_Posredniški strežnik"
 
 #: panels/network/cc-qr-code-dialog.ui:6
-#: panels/network/cc-wifi-connection-row.ui:51
+#: panels/network/cc-wifi-connection-row.ui:50
 msgid "Share Network"
 msgstr "Souporaba omrežja"
 
@@ -3143,16 +3143,16 @@ msgid "Signal strength %d%%"
 msgstr "Moč signala %d%%"
 
 #. TRANSLATORS: device status
-#: panels/network/cc-wifi-connection-row.ui:35 panels/network/panel-common.c:63
+#: panels/network/cc-wifi-connection-row.ui:34 panels/network/panel-common.c:63
 msgid "Connected"
 msgstr "Povezano"
 
-#: panels/network/cc-wifi-connection-row.ui:63
+#: panels/network/cc-wifi-connection-row.ui:62
 #: panels/network/network-bluetooth.ui:14 panels/network/network-ethernet.ui:47
 msgid "Network Options"
 msgstr "Možnosti omrežja"
 
-#: panels/network/cc-wifi-connection-row.ui:74
+#: panels/network/cc-wifi-connection-row.ui:73
 msgid "Forget Network"
 msgstr "Pozabi omrežje"
 
@@ -4896,6 +4896,7 @@ msgstr "Zmogljivostni način delovanja je sprožil program »%s«."
 msgid "_General"
 msgstr "_Splošno"
 
+#. Translators: 'battery charging' means the settings to handle the way battery charges, not that the battery is currently charging.
 #: panels/power/cc-power-panel.ui:78
 msgid "Battery Charging"
 msgstr "Polnjenje baterije"
@@ -9448,37 +9449,60 @@ msgstr "Nalaganje datoteke zgodovine sej ni uspelo: %s"
 msgid "File is empty"
 msgstr "Datoteka je prazna"
 
+#. G_DATE_BAD_WEEKDAY
+#: panels/wellbeing/cc-screen-time-statistics-row.c:920
+msgid "Average Monday"
+msgstr "Povprečni ponedeljek"
+
+#: panels/wellbeing/cc-screen-time-statistics-row.c:921
+msgid "Average Tuesday"
+msgstr "Povprečni torek"
+
+#: panels/wellbeing/cc-screen-time-statistics-row.c:922
+msgid "Average Wednesday"
+msgstr "Povprečna sreda"
+
+#: panels/wellbeing/cc-screen-time-statistics-row.c:923
+msgid "Average Thursday"
+msgstr "Povprečni četrtek"
+
+#: panels/wellbeing/cc-screen-time-statistics-row.c:924
+msgid "Average Friday"
+msgstr "Povprečen petek"
+
+#: panels/wellbeing/cc-screen-time-statistics-row.c:925
+msgid "Average Saturday"
+msgstr "Povprečna sobota"
+
+#: panels/wellbeing/cc-screen-time-statistics-row.c:926
+msgid "Average Sunday"
+msgstr "Povprečna nedelja"
+
 #. Translators: This a medium-length date, for example ‘15 April’
-#: panels/wellbeing/cc-screen-time-statistics-row.c:969
+#: panels/wellbeing/cc-screen-time-statistics-row.c:978
 msgid "%-d %B"
 msgstr "%-d. %B"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:982
-#: panels/wellbeing/cc-screen-time-statistics-row.c:993
+#: panels/wellbeing/cc-screen-time-statistics-row.c:991
+#: panels/wellbeing/cc-screen-time-statistics-row.c:1002
 msgid "No Data"
 msgstr "Ni podatkov"
 
-#. Translators: This is an annotated day of the week. For example ‘Average Monday’.
-#: panels/wellbeing/cc-screen-time-statistics-row.c:986
-#, c-format
-msgid "Average %A"
-msgstr "Povprečje %A"
-
-#: panels/wellbeing/cc-screen-time-statistics-row.c:997
+#: panels/wellbeing/cc-screen-time-statistics-row.c:1006
 #, c-format
 msgid "This Week"
 msgstr "Ta teden"
 
 #. Translators: This is a range of days within a given month.
 #. * For example ‘20–27 April’. The dash is an en-dash.
-#: panels/wellbeing/cc-screen-time-statistics-row.c:1008
+#: panels/wellbeing/cc-screen-time-statistics-row.c:1017
 #, c-format
 msgid "%u–%u %s"
 msgstr "%u. – %u. %s"
 
 #. Translators: This is a range of days spanning two months.
 #. * For example, ‘27 April–4 May’. The dash is an en-dash.
-#: panels/wellbeing/cc-screen-time-statistics-row.c:1025
+#: panels/wellbeing/cc-screen-time-statistics-row.c:1034
 #, c-format
 msgid "%u %s–%u %s"
 msgstr "%u. %s – %u. %s"
@@ -9486,7 +9510,7 @@ msgstr "%u. %s – %u. %s"
 #. Translators: The first placeholder is a formatted date string. The
 #. * second placeholder is a formatted time duration (for example, ‘3 hours’
 #. * or ‘25 minutes’).
-#: panels/wellbeing/cc-screen-time-statistics-row.c:1086
+#: panels/wellbeing/cc-screen-time-statistics-row.c:1095
 #, c-format
 msgid ""
 "Bar chart of screen time usage over the week starting %s. A line is "
@@ -9497,12 +9521,12 @@ msgstr ""
 "zaslona."
 
 #. Translators: The placeholder is a formatted date string.
-#: panels/wellbeing/cc-screen-time-statistics-row.c:1103
+#: panels/wellbeing/cc-screen-time-statistics-row.c:1112
 #, c-format
 msgid "Bar chart of screen time usage over the week starting %s."
 msgstr "Stolpčni grafikon uporabe časa pred zaslonom v tednu od %s."
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:1109
+#: panels/wellbeing/cc-screen-time-statistics-row.c:1118
 #, c-format
 msgid ""
 "Placeholder for a bar chart of screen time usage. No data is currently "
