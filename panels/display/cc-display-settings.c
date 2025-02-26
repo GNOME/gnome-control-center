@@ -25,12 +25,16 @@
 #include <math.h>
 #include "cc-display-settings.h"
 #include "cc-display-config.h"
+#include "cc-display-config-manager.h"
+#include "cc-display-panel.h"
 
 #define MAX_SCALE_BUTTONS 5
 
 struct _CcDisplaySettings
 {
   GtkBox            object;
+
+  CcDisplayPanel   *panel;
 
   gboolean          updating;
   gboolean          num_scales;
@@ -1045,10 +1049,14 @@ cc_display_settings_init (CcDisplaySettings *self)
 }
 
 CcDisplaySettings*
-cc_display_settings_new (void)
+cc_display_settings_new (CcDisplayPanel *panel)
 {
-  return g_object_new (CC_TYPE_DISPLAY_SETTINGS,
-                       NULL);
+  CcDisplaySettings *self;
+
+  self = g_object_new (CC_TYPE_DISPLAY_SETTINGS, NULL);
+  self->panel = panel;
+
+  return self;
 }
 
 gboolean

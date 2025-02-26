@@ -1085,7 +1085,7 @@ cc_display_panel_init (CcDisplayPanel *self)
 			   G_CALLBACK (on_arrangement_selected_ouptut_changed_cb), self,
 			   G_CONNECT_SWAPPED);
 
-  self->settings = cc_display_settings_new ();
+  self->settings = cc_display_settings_new (self);
   adw_bin_set_child (self->display_settings_bin, GTK_WIDGET (self->settings));
   g_signal_connect_object (self->settings, "updated",
                            G_CALLBACK (on_monitor_settings_updated_cb), self,
@@ -1147,4 +1147,10 @@ cc_display_panel_init (CcDisplayPanel *self)
                            self,
                            G_CONNECT_SWAPPED);
   on_night_light_enabled_changed_cb (self);
+}
+
+CcDisplayConfigManager *
+cc_display_panel_get_config_manager (CcDisplayPanel *self)
+{
+  return self->manager;
 }

@@ -24,7 +24,11 @@
 
 G_BEGIN_DECLS
 
+typedef struct _CcDisplayConfigManager CcDisplayConfigManager;
+
 #define CC_TYPE_DISPLAY_PANEL (cc_display_panel_get_type ())
 G_DECLARE_FINAL_TYPE (CcDisplayPanel, cc_display_panel, CC, DISPLAY_PANEL, CcPanel)
+
+CcDisplayConfigManager * cc_display_panel_get_config_manager (CcDisplayPanel *self);
 
 G_END_DECLS

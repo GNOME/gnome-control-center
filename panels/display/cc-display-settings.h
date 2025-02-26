@@ -25,10 +25,12 @@
 
 G_BEGIN_DECLS
 
+typedef struct _CcDisplayPanel CcDisplayPanel;
+
 #define CC_TYPE_DISPLAY_SETTINGS (cc_display_settings_get_type ())
 G_DECLARE_FINAL_TYPE (CcDisplaySettings, cc_display_settings, CC, DISPLAY_SETTINGS, GtkBox);
 
-CcDisplaySettings*  cc_display_settings_new                 (void);
+CcDisplaySettings*  cc_display_settings_new                 (CcDisplayPanel *panel);
 
 gboolean            cc_display_settings_get_has_accelerometer (CcDisplaySettings    *settings);
 void                cc_display_settings_set_has_accelerometer (CcDisplaySettings    *settings,
