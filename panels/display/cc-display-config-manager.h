@@ -36,6 +36,16 @@ struct _CcDisplayConfigManagerClass
   CcDisplayConfig * (*get_current) (CcDisplayConfigManager *self);
   gboolean (* get_apply_allowed) (CcDisplayConfigManager *self);
   gboolean (* get_night_light_supported) (CcDisplayConfigManager *self);
+  double (* get_luminance) (CcDisplayConfigManager *self,
+                            CcDisplayMonitor       *monitor,
+                            CcDisplayColorMode      color_mode);
+  double (* get_default_luminance) (CcDisplayConfigManager *self,
+                                    CcDisplayMonitor       *monitor,
+                                    CcDisplayColorMode      color_mode);
+  void (* set_luminance) (CcDisplayConfigManager *self,
+                          CcDisplayMonitor       *monitor,
+                          CcDisplayColorMode      color_mode,
+                          double                  luminance);
 };
 
 CcDisplayConfig * cc_display_config_manager_get_current (CcDisplayConfigManager *self);
@@ -43,6 +53,19 @@ CcDisplayConfig * cc_display_config_manager_get_current (CcDisplayConfigManager 
 gboolean cc_display_config_manager_get_apply_allowed (CcDisplayConfigManager *self);
 
 gboolean cc_display_config_manager_get_night_light_supported (CcDisplayConfigManager *self);
+
+double cc_display_config_manager_get_luminance (CcDisplayConfigManager *self,
+                                                CcDisplayMonitor       *monitor,
+                                                CcDisplayColorMode      color_mode);
+
+double cc_display_config_manager_get_default_luminance (CcDisplayConfigManager *self,
+                                                        CcDisplayMonitor       *monitor,
+                                                        CcDisplayColorMode      color_mode);
+
+void cc_display_config_manager_set_luminance (CcDisplayConfigManager *self,
+                                              CcDisplayMonitor       *monitor,
+                                              CcDisplayColorMode      color_mode,
+                                              double                  luminance);
 
 void _cc_display_config_manager_emit_changed (CcDisplayConfigManager *self);
 
