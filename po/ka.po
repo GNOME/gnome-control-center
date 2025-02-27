@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2025-02-23 08:33+0000\n"
-"PO-Revision-Date: 2025-02-23 17:25+0100\n"
+"POT-Creation-Date: 2025-02-26 13:02+0000\n"
+"PO-Revision-Date: 2025-02-27 11:17+0100\n"
 "Last-Translator: Ekaterine Papava <papava.e@gtu.ge>\n"
 "Language-Team: Georgian <(nothing)>\n"
 "Language: ka\n"
@@ -35,7 +35,7 @@ msgstr "კლავიატურის მალსახმობები�
 #: panels/display/cc-display-panel.ui:32 panels/display/cc-display-panel.ui:184
 #: panels/display/cc-display-panel.ui:246
 #: panels/keyboard/cc-input-chooser.ui:15
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:159
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:162
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:12
 #: panels/network/cc-net-proxy-page.ui:14
 #: panels/network/cc-wifi-hotspot-dialog.ui:142
@@ -1768,7 +1768,7 @@ msgstr "წუთის შემცირება"
 
 #: panels/common/cc-util.c:130
 #: panels/network/connection-editor/ce-page-details.c:188
-#: panels/wellbeing/cc-screen-time-statistics-row.c:964
+#: panels/wellbeing/cc-screen-time-statistics-row.c:973
 msgid "Today"
 msgstr "დღეს"
 
@@ -2520,29 +2520,29 @@ msgstr "ძებნის მალსახმობები"
 msgid "_Reset All…"
 msgstr "_ყველას ჩამოყრა…"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:124
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:127
 msgid "Add Custom Shortcuts"
 msgstr "საკუთარი მალსახმობების დამატება"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:125
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:128
 msgid "Set up custom shortcuts for launching apps, running scripts, and more"
 msgstr ""
 "დააყენეთ საკუთარი მალსახმობები აპების გასაშვებად, სკრიპტების შესასრულებლად "
 "და სხვ"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:130
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:133
 msgid "_Add Shortcut…"
 msgstr "მალსახმობის _დამატება…"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:153
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:156
 msgid "Reset All Shortcuts?"
 msgstr "დავაბრუნო ყველა მალსახმობი საწყის მნიშვნელობაზე?"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:154
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:157
 msgid "All changes to keyboard shortcuts will be lost"
 msgstr "ყველა კლავიატურის მალსახმობის ცვლილება დაიკარგება"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:160
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:163
 msgid "_Reset All"
 msgstr "ყველას ჩამოყრ_ა"
 
@@ -3047,7 +3047,7 @@ msgid "_Proxy"
 msgstr "_პროქსი"
 
 #: panels/network/cc-qr-code-dialog.ui:6
-#: panels/network/cc-wifi-connection-row.ui:51
+#: panels/network/cc-wifi-connection-row.ui:50
 msgid "Share Network"
 msgstr "ქსელის გაზიარება"
 
@@ -3107,16 +3107,16 @@ msgid "Signal strength %d%%"
 msgstr "სიგნალის სიძლიერე %d%%"
 
 #. TRANSLATORS: device status
-#: panels/network/cc-wifi-connection-row.ui:35 panels/network/panel-common.c:63
+#: panels/network/cc-wifi-connection-row.ui:34 panels/network/panel-common.c:63
 msgid "Connected"
 msgstr "დაკავშირებულია"
 
-#: panels/network/cc-wifi-connection-row.ui:63
+#: panels/network/cc-wifi-connection-row.ui:62
 #: panels/network/network-bluetooth.ui:14 panels/network/network-ethernet.ui:47
 msgid "Network Options"
 msgstr "ქსელის მორგება"
 
-#: panels/network/cc-wifi-connection-row.ui:74
+#: panels/network/cc-wifi-connection-row.ui:73
 msgid "Forget Network"
 msgstr "ქსელის დავიწყება"
 
@@ -4831,6 +4831,7 @@ msgstr "წარმადობის რეჟიმი გააქტიუ�
 msgid "_General"
 msgstr "_საერთო"
 
+#. Translators: 'battery charging' means the settings to handle the way battery charges, not that the battery is currently charging.
 #: panels/power/cc-power-panel.ui:78
 msgid "Battery Charging"
 msgstr "ელემენტი იტენება"
@@ -9385,37 +9386,60 @@ msgstr "ჩავარდა ჩატვირთვა სესიის ი
 msgid "File is empty"
 msgstr "ფაილი ცარიელია"
 
+#. G_DATE_BAD_WEEKDAY
+#: panels/wellbeing/cc-screen-time-statistics-row.c:920
+msgid "Average Monday"
+msgstr "საშუალო ორშაბათი"
+
+#: panels/wellbeing/cc-screen-time-statistics-row.c:921
+msgid "Average Tuesday"
+msgstr "საშუალო ხუთშაბათი"
+
+#: panels/wellbeing/cc-screen-time-statistics-row.c:922
+msgid "Average Wednesday"
+msgstr "საშუალო ოთხშაბათი"
+
+#: panels/wellbeing/cc-screen-time-statistics-row.c:923
+msgid "Average Thursday"
+msgstr "საშუალო სამშაბათი"
+
+#: panels/wellbeing/cc-screen-time-statistics-row.c:924
+msgid "Average Friday"
+msgstr "საშუალო პარასკევი"
+
+#: panels/wellbeing/cc-screen-time-statistics-row.c:925
+msgid "Average Saturday"
+msgstr "საშუალო შაბათი"
+
+#: panels/wellbeing/cc-screen-time-statistics-row.c:926
+msgid "Average Sunday"
+msgstr "საშუალო კვირა"
+
 #. Translators: This a medium-length date, for example ‘15 April’
-#: panels/wellbeing/cc-screen-time-statistics-row.c:969
+#: panels/wellbeing/cc-screen-time-statistics-row.c:978
 msgid "%-d %B"
 msgstr "%-d %B"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:982
-#: panels/wellbeing/cc-screen-time-statistics-row.c:993
+#: panels/wellbeing/cc-screen-time-statistics-row.c:991
+#: panels/wellbeing/cc-screen-time-statistics-row.c:1002
 msgid "No Data"
 msgstr "მონაცემების გარეშე"
 
-#. Translators: This is an annotated day of the week. For example ‘Average Monday’.
-#: panels/wellbeing/cc-screen-time-statistics-row.c:986
-#, c-format
-msgid "Average %A"
-msgstr "საშუალოდ %A"
-
-#: panels/wellbeing/cc-screen-time-statistics-row.c:997
+#: panels/wellbeing/cc-screen-time-statistics-row.c:1006
 #, c-format
 msgid "This Week"
 msgstr "ამ კვირაში"
 
 #. Translators: This is a range of days within a given month.
 #. * For example ‘20–27 April’. The dash is an en-dash.
-#: panels/wellbeing/cc-screen-time-statistics-row.c:1008
+#: panels/wellbeing/cc-screen-time-statistics-row.c:1017
 #, c-format
 msgid "%u–%u %s"
 msgstr "%u–%u %s"
 
 #. Translators: This is a range of days spanning two months.
 #. * For example, ‘27 April–4 May’. The dash is an en-dash.
-#: panels/wellbeing/cc-screen-time-statistics-row.c:1025
+#: panels/wellbeing/cc-screen-time-statistics-row.c:1034
 #, c-format
 msgid "%u %s–%u %s"
 msgstr "%u %s–%u %s"
@@ -9423,7 +9447,7 @@ msgstr "%u %s–%u %s"
 #. Translators: The first placeholder is a formatted date string. The
 #. * second placeholder is a formatted time duration (for example, ‘3 hours’
 #. * or ‘25 minutes’).
-#: panels/wellbeing/cc-screen-time-statistics-row.c:1086
+#: panels/wellbeing/cc-screen-time-statistics-row.c:1095
 #, c-format
 msgid ""
 "Bar chart of screen time usage over the week starting %s. A line is "
@@ -9433,12 +9457,12 @@ msgstr ""
 "ზემოდანაა დადებული %s ნიშანზე, რომ გაჩვენოთ მორგებული ეკრანის დროის ზღვარი."
 
 #. Translators: The placeholder is a formatted date string.
-#: panels/wellbeing/cc-screen-time-statistics-row.c:1103
+#: panels/wellbeing/cc-screen-time-statistics-row.c:1112
 #, c-format
 msgid "Bar chart of screen time usage over the week starting %s."
 msgstr "ეკრანის გამოყენების დროის გრაფიკი მთელი კვირისთვის, დაწყებული %s-დან."
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:1109
+#: panels/wellbeing/cc-screen-time-statistics-row.c:1118
 #, c-format
 msgid ""
 "Placeholder for a bar chart of screen time usage. No data is currently "
