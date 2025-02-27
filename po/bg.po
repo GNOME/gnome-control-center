@@ -22,8 +22,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2025-02-24 12:25+0000\n"
-"PO-Revision-Date: 2025-02-24 19:00+0100\n"
+"POT-Creation-Date: 2025-02-27 07:07+0000\n"
+"PO-Revision-Date: 2025-02-27 10:16+0100\n"
 "Last-Translator: twlvnn kraftwerk <kraft_werk@tutanota.com>\n"
 "Language-Team: Bulgarian <dict-notifications@fsa-bg.org>\n"
 "Language: bg\n"
@@ -1782,7 +1782,7 @@ msgstr "Минута назад"
 
 #: panels/common/cc-util.c:130
 #: panels/network/connection-editor/ce-page-details.c:188
-#: panels/wellbeing/cc-screen-time-statistics-row.c:964
+#: panels/wellbeing/cc-screen-time-statistics-row.c:973
 msgid "Today"
 msgstr "Днес"
 
@@ -3055,7 +3055,7 @@ msgid "_Proxy"
 msgstr "Сървър-_посредник"
 
 #: panels/network/cc-qr-code-dialog.ui:6
-#: panels/network/cc-wifi-connection-row.ui:51
+#: panels/network/cc-wifi-connection-row.ui:50
 msgid "Share Network"
 msgstr "Споделяне на мрежа"
 
@@ -3115,16 +3115,16 @@ msgid "Signal strength %d%%"
 msgstr "Сила на сигнала %d%%"
 
 #. TRANSLATORS: device status
-#: panels/network/cc-wifi-connection-row.ui:35 panels/network/panel-common.c:63
+#: panels/network/cc-wifi-connection-row.ui:34 panels/network/panel-common.c:63
 msgid "Connected"
 msgstr "Свързано"
 
-#: panels/network/cc-wifi-connection-row.ui:63
+#: panels/network/cc-wifi-connection-row.ui:62
 #: panels/network/network-bluetooth.ui:14 panels/network/network-ethernet.ui:47
 msgid "Network Options"
 msgstr "Мрежови настройки"
 
-#: panels/network/cc-wifi-connection-row.ui:74
+#: panels/network/cc-wifi-connection-row.ui:73
 msgid "Forget Network"
 msgstr "Забравяне на мрежата"
 
@@ -6679,8 +6679,7 @@ msgstr "_Местоположения, където да се търси"
 
 #: panels/search/cc-search-panel.ui:27
 msgid "Filesystem locations which are searched by system apps"
-msgstr ""
-"Места във файловата система, в които системните програми да търсят"
+msgstr "Места във файловата система, в които системните програми да търсят"
 
 #: panels/search/cc-search-panel.ui:37
 msgid "Search Results"
@@ -9394,37 +9393,60 @@ msgstr "Файлът за историята на сесията не може �
 msgid "File is empty"
 msgstr "Файлът е празен"
 
+#. G_DATE_BAD_WEEKDAY
+#: panels/wellbeing/cc-screen-time-statistics-row.c:920
+msgid "Average Monday"
+msgstr "Средно за понеделник"
+
+#: panels/wellbeing/cc-screen-time-statistics-row.c:921
+msgid "Average Tuesday"
+msgstr "Средно за вторник"
+
+#: panels/wellbeing/cc-screen-time-statistics-row.c:922
+msgid "Average Wednesday"
+msgstr "Средно за сряда"
+
+#: panels/wellbeing/cc-screen-time-statistics-row.c:923
+msgid "Average Thursday"
+msgstr "Средно за четвъртък"
+
+#: panels/wellbeing/cc-screen-time-statistics-row.c:924
+msgid "Average Friday"
+msgstr "Средно за петък"
+
+#: panels/wellbeing/cc-screen-time-statistics-row.c:925
+msgid "Average Saturday"
+msgstr "Средно за събота"
+
+#: panels/wellbeing/cc-screen-time-statistics-row.c:926
+msgid "Average Sunday"
+msgstr "Средно за неделя"
+
 #. Translators: This a medium-length date, for example ‘15 April’
-#: panels/wellbeing/cc-screen-time-statistics-row.c:969
+#: panels/wellbeing/cc-screen-time-statistics-row.c:978
 msgid "%-d %B"
 msgstr "%-d %B"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:982
-#: panels/wellbeing/cc-screen-time-statistics-row.c:993
+#: panels/wellbeing/cc-screen-time-statistics-row.c:991
+#: panels/wellbeing/cc-screen-time-statistics-row.c:1002
 msgid "No Data"
 msgstr "Няма данни"
 
-#. Translators: This is an annotated day of the week. For example ‘Average Monday’.
-#: panels/wellbeing/cc-screen-time-statistics-row.c:986
-#, c-format
-msgid "Average %A"
-msgstr "Средно за %A"
-
-#: panels/wellbeing/cc-screen-time-statistics-row.c:997
+#: panels/wellbeing/cc-screen-time-statistics-row.c:1006
 #, c-format
 msgid "This Week"
 msgstr "Тази седмица"
 
 #. Translators: This is a range of days within a given month.
 #. * For example ‘20–27 April’. The dash is an en-dash.
-#: panels/wellbeing/cc-screen-time-statistics-row.c:1008
+#: panels/wellbeing/cc-screen-time-statistics-row.c:1017
 #, c-format
 msgid "%u–%u %s"
 msgstr "%u–%u %s"
 
 #. Translators: This is a range of days spanning two months.
 #. * For example, ‘27 April–4 May’. The dash is an en-dash.
-#: panels/wellbeing/cc-screen-time-statistics-row.c:1025
+#: panels/wellbeing/cc-screen-time-statistics-row.c:1034
 #, c-format
 msgid "%u %s–%u %s"
 msgstr "%u %s–%u %s"
@@ -9432,7 +9454,7 @@ msgstr "%u %s–%u %s"
 #. Translators: The first placeholder is a formatted date string. The
 #. * second placeholder is a formatted time duration (for example, ‘3 hours’
 #. * or ‘25 minutes’).
-#: panels/wellbeing/cc-screen-time-statistics-row.c:1086
+#: panels/wellbeing/cc-screen-time-statistics-row.c:1095
 #, c-format
 msgid ""
 "Bar chart of screen time usage over the week starting %s. A line is "
@@ -9443,13 +9465,13 @@ msgstr ""
 "екрана."
 
 #. Translators: The placeholder is a formatted date string.
-#: panels/wellbeing/cc-screen-time-statistics-row.c:1103
+#: panels/wellbeing/cc-screen-time-statistics-row.c:1112
 #, c-format
 msgid "Bar chart of screen time usage over the week starting %s."
 msgstr ""
 "Стълбова диаграма на времето пред екрана през седмицата, започвайки от %s."
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:1109
+#: panels/wellbeing/cc-screen-time-statistics-row.c:1118
 #, c-format
 msgid ""
 "Placeholder for a bar chart of screen time usage. No data is currently "
