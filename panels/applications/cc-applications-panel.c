@@ -1455,12 +1455,22 @@ update_global_shortcuts_section (CcApplicationsPanel *self)
 {
   int global_shortcuts_count;
   g_autoptr(GVariant) shortcuts = NULL;
+  g_autofree gchar *n_actions = NULL;
 
   shortcuts = g_settings_get_value (self->global_shortcuts_app_settings,
                                     "shortcuts");
   global_shortcuts_count = g_variant_n_children (shortcuts);
   gtk_widget_set_visible (GTK_WIDGET (self->global_shortcuts_row),
                           global_shortcuts_count != 0);
+
+  /* TRANSLATORS: %u is the number of global shortcut actions. */
+  n_actions = g_strdup_printf (g_dngettext (GETTEXT_PACKAGE,
+                                            "%u action",
+                                            "%u actions",
+                                            global_shortcuts_count),
+                               global_shortcuts_count);
+
+  cc_list_row_set_secondary_label (self->global_shortcuts_row, n_actions);
 
   return global_shortcuts_count != 0;
 }
