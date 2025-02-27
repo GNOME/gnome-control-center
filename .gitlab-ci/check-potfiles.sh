@@ -66,7 +66,7 @@ fi
 if [ ${#invalid} -ne 0 ]; then
   cat >&2 << EOT
 
-The following files are in po/POTFILES.in but are missing or not translatable:
+The following files are in po/POTFILES.in but are missing, skipped or not translatable:
 
 EOT
   for f in $invalid; do
