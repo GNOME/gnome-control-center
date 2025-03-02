@@ -15,15 +15,10 @@
           </object>
         </property>
         <child>
-          <object class="AdwActionRow" id="ekr_map_buttons">
-            <property name="title" translatable="yes">Map Buttons</property>
-            <property name="activatable">True</property>
+          <object class="CcListRow" id="ekr_map_buttons">
+            <property name="title" translatable="yes">Map _Buttons</property>
+            <property name="show-arrow">True</property>
             <signal name="activated" handler="on_map_buttons_activated" object="CcWacomEkrPage" swapped="yes" />
-            <child type="suffix">
-              <object class="GtkImage">
-                <property name="icon-name">go-next-symbolic</property>
-              </object>
-            </child>
           </object>
         </child>
       </object>
