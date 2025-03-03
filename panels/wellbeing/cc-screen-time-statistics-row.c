@@ -613,7 +613,7 @@ calculate_total_screen_time_for_week (CcScreenTimeStatisticsRow *self,
   const int offset = g_date_days_between (&self->model.start_date, first_day_of_week);
 
   sum = 0.0;
-  for (size_t i = 0; i < 7; i++)
+  for (int i = 0; i < 7; i++)
     sum += (offset + i >= 0 && offset + i < self->model.n_days) ? self->model.screen_time_per_day[offset + i] : 0;
 
   return sum;
@@ -959,7 +959,7 @@ update_ui_for_model_or_selected_date (CcScreenTimeStatisticsRow *self)
    * buffer to avoid that, and initialise its values to NAN to indicate
    * unknown/unset data values. */
   data_slice = g_new (double, 7);
-  for (size_t i = 0; i < 7; i++)
+  for (int i = 0; i < 7; i++)
     data_slice[i] = (model_offset + i >= 0 && model_offset + i < self->model.n_days) ? self->model.screen_time_per_day[model_offset + i] : NAN;
 
   cc_bar_chart_set_data (self->bar_chart, data_slice, 7);
