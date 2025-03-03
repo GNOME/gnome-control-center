@@ -516,9 +516,18 @@ sounds_notify_active_cb (GObject    *object,
   CcWellbeingPanel *self = CC_WELLBEING_PANEL (user_data);
   gboolean play_sound = adw_switch_row_get_active (self->sounds_row);
 
+  /* Unfortunately we can’t delay/apply the GSettings changes here so that the
+   * results are notified atomically, as the changes apply to two different
+   * schemas. So instead, block the changed signals. */
+  g_signal_handler_block (self->eyesight_break_settings, self->eyesight_break_settings_changed_play_sound_id);
+  g_signal_handler_block (self->movement_break_settings, self->movement_break_settings_changed_play_sound_id);
+
   g_settings_set_boolean (self->eyesight_break_settings, "play-sound", play_sound);
   g_settings_set_boolean (self->movement_break_settings, "play-sound", play_sound);
   g_settings_apply (self->movement_break_settings);
+
+  g_signal_handler_unblock (self->movement_break_settings, self->movement_break_settings_changed_play_sound_id);
+  g_signal_handler_unblock (self->eyesight_break_settings, self->eyesight_break_settings_changed_play_sound_id);
 }
 
 static void
