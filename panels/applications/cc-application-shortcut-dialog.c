@@ -213,8 +213,6 @@ cc_application_shortcut_dialog_class_init (CcApplicationShortcutDialogClass *kla
 
   object_class->finalize = cc_application_shortcut_dialog_finalize;
 
-  gtk_widget_class_add_binding_action (widget_class, GDK_KEY_Escape, 0, "window.close", NULL);
-
   gtk_widget_class_set_template_from_resource (widget_class,
                                                "/org/gnome/control-center/applications/"
                                                "cc-application-shortcut-dialog.ui");
