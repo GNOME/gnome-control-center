@@ -701,7 +701,7 @@ cc_wwan_data_connection_updated_cb (GObject      *object,
                                               result, &error);
   if (!error)
     {
-      guint apn_index;
+      gint apn_index;
       apn_index = wwan_data_get_apn_index (self, apn);
 
       if (apn_index >= 0)
