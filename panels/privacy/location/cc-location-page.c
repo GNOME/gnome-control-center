@@ -58,7 +58,8 @@ typedef struct
 } LocationAppStateData;
 
 static void
-location_app_state_data_free (LocationAppStateData *data)
+location_app_state_data_free (LocationAppStateData *data,
+                              GClosure             *closure)
 {
     g_free (data->app_id);
     g_slice_free (LocationAppStateData, data);
