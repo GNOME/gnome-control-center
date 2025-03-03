@@ -29,8 +29,6 @@
 #include <glib/gstdio.h>
 #include <gtk/gtk.h>
 #include <act/act.h>
-#define GNOME_DESKTOP_USE_UNSTABLE_API
-#include <libgnome-desktop/gnome-desktop-thumbnail.h>
 
 #include "cc-avatar-chooser.h"
 #include "cc-crop-area.h"
@@ -45,7 +43,6 @@ struct _CcAvatarChooser {
         GtkWidget *crop_area;
         GtkWidget *flowbox;
 
-        GnomeDesktopThumbnailFactory *thumb_factory;
         GListStore *faces;
 
         ActUser *user;
@@ -383,7 +380,6 @@ cc_avatar_chooser_dispose (GObject *object)
 {
         CcAvatarChooser *self = CC_AVATAR_CHOOSER (object);
 
-        g_clear_object (&self->thumb_factory);
         g_clear_object (&self->user);
 
         G_OBJECT_CLASS (cc_avatar_chooser_parent_class)->dispose (object);
@@ -393,8 +389,6 @@ static void
 cc_avatar_chooser_init (CcAvatarChooser *self)
 {
         gtk_widget_init_template (GTK_WIDGET (self));
-
-        self->thumb_factory = gnome_desktop_thumbnail_factory_new (GNOME_DESKTOP_THUMBNAIL_SIZE_NORMAL);
 
         setup_photo_popup (self);
 }
