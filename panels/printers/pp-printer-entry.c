@@ -395,7 +395,9 @@ show_printer_details_response_cb (PpPrinterEntry  *self,
 }
 
 static void
-printer_details_cb (PpPrinterEntry *self)
+printer_details_cb (PpPrinterEntry *self,
+                    const char     *action,
+                    GVariant       *parameter)
 {
   PpDetailsDialog *dialog = pp_details_dialog_new (self->printer_name,
                                                    self->printer_location,
@@ -409,7 +411,9 @@ printer_details_cb (PpPrinterEntry *self)
 }
 
 static void
-printer_options_cb (PpPrinterEntry *self)
+printer_options_cb (PpPrinterEntry *self,
+                    const char     *action_name,
+                    GVariant       *parameter)
 {
   PpOptionsDialog *dialog;
 
@@ -486,7 +490,9 @@ clean_heads_maintenance_command_cb (GObject      *source_object,
 }
 
 static void
-printer_clean_heads_cb (PpPrinterEntry *self)
+printer_clean_heads_cb (PpPrinterEntry *self,
+                        const char     *action_name,
+                        GVariant       *parameter)
 {
   if (self->clean_command == NULL)
     return;
@@ -499,7 +505,9 @@ printer_clean_heads_cb (PpPrinterEntry *self)
 }
 
 static void
-printer_remove_cb (PpPrinterEntry *self)
+printer_remove_cb (PpPrinterEntry *self,
+                   const char     *action_name,
+                   GVariant       *parameter)
 {
   g_signal_emit_by_name (self, "printer-delete");
 }
