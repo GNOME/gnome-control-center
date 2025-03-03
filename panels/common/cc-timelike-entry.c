@@ -606,8 +606,8 @@ cc_timelike_entry_set_time (CcTimelikeEntry *self,
   is_am_pm = cc_timelike_entry_get_am_pm (self);
   cc_timelike_entry_set_am_pm (self, FALSE);
 
-  self->hour = CLAMP (hour, 0, 23);
-  self->minute = CLAMP (minute, 0, 59);
+  self->hour = MIN (hour, 23);
+  self->minute = MIN (minute, 59);
 
   cc_timelike_entry_set_am_pm (self, is_am_pm);
 
