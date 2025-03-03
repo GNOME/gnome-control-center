@@ -359,7 +359,7 @@ sort_modes_by_area_desc (CcDisplayMode *a, CcDisplayMode *b)
 }
 
 static gint
-sort_modes_by_refresh_rate_desc (CcDisplayMode *a, CcDisplayMode *b)
+sort_modes_by_refresh_rate_desc (CcDisplayMode *a, CcDisplayMode *b, void *user_data)
 {
   if (cc_display_mode_get_refresh_rate_mode (a) != cc_display_mode_get_refresh_rate_mode (b))
     {
