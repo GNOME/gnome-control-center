@@ -35,8 +35,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/issues\n"
-"POT-Creation-Date: 2025-02-14 18:43+0000\n"
-"PO-Revision-Date: 2025-02-27 09:49+0200\n"
+"POT-Creation-Date: 2025-03-01 20:50+0000\n"
+"PO-Revision-Date: 2025-03-03 09:49+0200\n"
 "Last-Translator: Ícar N. S. <icar.nin@protonmail.com>\n"
 "Language-Team: Catalan <tradgnome@softcatala.org>\n"
 "Language: ca\n"
@@ -46,33 +46,125 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 2.4.2\n"
 
-#: panels/applications/cc-applications-panel.c:850
+#: global-shortcuts-provider/cc-global-shortcut-dialog.ui:6
+msgid "Add Keyboard Shortcuts"
+msgstr "Afegeix dreceres de teclat"
+
+#: global-shortcuts-provider/cc-global-shortcut-dialog.ui:15
+#: panels/applications/cc-application-shortcut-dialog.c:152
+#: panels/color/cc-color-calibrate.ui:21
+#: panels/common/cc-language-chooser.ui:15
+#: panels/display/cc-display-panel.ui:32
+#: panels/display/cc-display-panel.ui:184
+#: panels/display/cc-display-panel.ui:246
+#: panels/keyboard/cc-input-chooser.ui:15
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:162
+#: panels/keyboard/cc-keyboard-shortcut-editor.ui:12
+#: panels/network/cc-net-proxy-page.ui:14
+#: panels/network/cc-wifi-hotspot-dialog.ui:142
+#: panels/network/cc-wifi-panel.ui:241
+#: panels/network/connection-editor/ce-page-details.c:89
+#: panels/network/connection-editor/connection-editor.ui:16
+#: panels/printers/pp-jobs-dialog.ui:125
+#: panels/printers/pp-new-printer-dialog.ui:65
+#: panels/printers/pp-ppd-selection-dialog.ui:17
+#: panels/privacy/usage/cc-usage-page.ui:125
+#: panels/privacy/usage/cc-usage-page.ui:136
+#: panels/privacy/usage/cc-usage-page.ui:147
+#: panels/system/region/cc-format-chooser.ui:32
+#: panels/system/users/cc-add-user-dialog.ui:24
+#: panels/system/users/cc-avatar-chooser.c:92
+#: panels/system/users/cc-enterprise-login-dialog.ui:44
+#: panels/system/users/cc-fingerprint-dialog.c:1400
+#: panels/system/users/cc-fingerprint-dialog.ui:17
+#: panels/system/users/cc-password-dialog.ui:15
+#: panels/system/users/cc-user-page.ui:223
+#: panels/system/users/data/join-dialog.ui:17
+#: panels/wwan/cc-wwan-mode-dialog.ui:32
+#: panels/wwan/cc-wwan-network-dialog.ui:109
+#: panels/wwan/cc-wwan-sim-lock-dialog.ui:239
+msgid "_Cancel"
+msgstr "_Cancel·la"
+
+#: global-shortcuts-provider/cc-global-shortcut-dialog.ui:23
+#: panels/color/cc-color-panel.ui:349 panels/keyboard/cc-input-chooser.ui:23
+#: panels/keyboard/cc-keyboard-shortcut-editor.ui:30
+#: panels/network/connection-editor/net-connection-editor.c:653
+#: panels/printers/pp-new-printer-dialog.ui:96
+#: panels/system/users/cc-add-user-dialog.c:362
+#: panels/system/users/cc-add-user-dialog.ui:32
+#: panels/system/users/cc-add-user-dialog.ui:153
+#: panels/system/users/cc-enterprise-login-dialog.ui:52
+msgid "_Add"
+msgstr "_Afegeix"
+
+#: global-shortcuts-provider/cc-global-shortcut-dialog.ui:36
+msgid ""
+"Added keyboard shortcuts will be available globally, and can be changed in "
+"the application’s panel in Settings"
+msgstr ""
+"Les dreceres de teclat afegides estaran disponibles globalment, i es poden "
+"canviar al plafó de l'aplicació a Paràmetres"
+
+#: panels/applications/cc-application-shortcut-dialog.c:143
+msgid "Remove All Shortcuts?"
+msgstr "Voleu suprimir totes les dreceres?"
+
+#: panels/applications/cc-application-shortcut-dialog.c:148
+#, c-format
+msgid ""
+"All actions from %s that have been registered for global shortcuts will be "
+"removed."
+msgstr ""
+"S'eliminaran totes les accions de %s que hagin estat registrades per a les "
+"dreceres globals."
+
+#: panels/applications/cc-application-shortcut-dialog.c:153
+#: panels/keyboard/cc-keyboard-shortcut-editor.ui:19
+#: panels/system/users/cc-user-page.ui:224
+msgid "_Remove"
+msgstr "_Suprimeix"
+
+#: panels/applications/cc-application-shortcut-dialog.c:183
+msgid "_Remove All Shortcuts"
+msgstr "_Suprimir totes les dreceres"
+
+#: panels/applications/cc-application-shortcut-dialog.c:265
+#, c-format
+msgid "%s has registered the following global shortcuts"
+msgstr "%s ha registrat les següents dreceres globals"
+
+#: panels/applications/cc-application-shortcut-dialog.ui:5
+msgid "Global Shortcuts"
+msgstr "Dreceres globals"
+
+#: panels/applications/cc-applications-panel.c:880
 msgid "System Bus"
 msgstr "Bus del sistema"
 
-#: panels/applications/cc-applications-panel.c:850
-#: panels/applications/cc-applications-panel.c:852
-#: panels/applications/cc-applications-panel.c:865
-#: panels/applications/cc-applications-panel.c:870
+#: panels/applications/cc-applications-panel.c:880
+#: panels/applications/cc-applications-panel.c:882
+#: panels/applications/cc-applications-panel.c:895
+#: panels/applications/cc-applications-panel.c:900
 msgid "Full access"
 msgstr "Accés complet"
 
-#: panels/applications/cc-applications-panel.c:852
+#: panels/applications/cc-applications-panel.c:882
 msgid "Session Bus"
 msgstr "Bus de sessió"
 
-#: panels/applications/cc-applications-panel.c:856
+#: panels/applications/cc-applications-panel.c:886
 #: panels/privacy/bolt/cc-bolt-page.ui:164
 #: panels/privacy/bolt/cc-bolt-page.ui:202
 #: panels/privacy/cc-privacy-panel.ui:72
 msgid "Devices"
 msgstr "Dispositius"
 
-#: panels/applications/cc-applications-panel.c:856
+#: panels/applications/cc-applications-panel.c:886
 msgid "Full access to /dev"
 msgstr "Accés complet a /dev"
 
-#: panels/applications/cc-applications-panel.c:860
+#: panels/applications/cc-applications-panel.c:890
 #: panels/network/cc-network-panel.ui:8
 #: panels/network/gnome-network-panel.desktop.in:3
 #: panels/network/network-mobile.ui:235 panels/wwan/cc-wwan-device-page.ui:61
@@ -80,38 +172,38 @@ msgstr "Accés complet a /dev"
 msgid "Network"
 msgstr "Xarxa"
 
-#: panels/applications/cc-applications-panel.c:860
+#: panels/applications/cc-applications-panel.c:890
 msgid "Has network access"
 msgstr "Té accés a la xarxa"
 
-#: panels/applications/cc-applications-panel.c:865
-#: panels/applications/cc-applications-panel.c:867
+#: panels/applications/cc-applications-panel.c:895
+#: panels/applications/cc-applications-panel.c:897
 #: panels/search/cc-search-locations-page.c:421
 msgid "Home"
 msgstr "Inici"
 
-#: panels/applications/cc-applications-panel.c:867
-#: panels/applications/cc-applications-panel.c:872
+#: panels/applications/cc-applications-panel.c:897
+#: panels/applications/cc-applications-panel.c:902
 msgid "Read-only"
 msgstr "Només lectura"
 
-#: panels/applications/cc-applications-panel.c:870
-#: panels/applications/cc-applications-panel.c:872
+#: panels/applications/cc-applications-panel.c:900
+#: panels/applications/cc-applications-panel.c:902
 msgid "File System"
 msgstr "Sistema de fitxers"
 
-#: panels/applications/cc-applications-panel.c:876
+#: panels/applications/cc-applications-panel.c:906
 #: panels/keyboard/01-launchers.xml.in:6
 #: shell/appdata/org.gnome.Settings.appdata.xml.in.in:7 shell/cc-window.c:804
 #: shell/cc-window.ui:18 shell/org.gnome.Settings.desktop.in:3
 msgid "Settings"
 msgstr "Paràmetres"
 
-#: panels/applications/cc-applications-panel.c:876
+#: panels/applications/cc-applications-panel.c:906
 msgid "Can change settings"
 msgstr "Es poden canviar els paràmetres"
 
-#: panels/applications/cc-applications-panel.c:878
+#: panels/applications/cc-applications-panel.c:908
 #, c-format
 msgid ""
 "<b>%s</b> requires access to the following system resources. To stop this "
@@ -120,36 +212,36 @@ msgstr ""
 "<b>%s</b> requereix accés als següents recursos del sistema. Per a aturar "
 "aquest accés, cal eliminar l'aplicació."
 
-#: panels/applications/cc-applications-panel.c:882
+#: panels/applications/cc-applications-panel.c:912
 #, c-format
 msgid "%u permission"
 msgid_plural "%u permissions"
 msgstr[0] "permís %u"
 msgstr[1] "permisos %u"
 
-#: panels/applications/cc-applications-panel.c:1054
+#: panels/applications/cc-applications-panel.c:1084
 msgid "Remove Link Type"
 msgstr "Suprimeix el tipus d'enllaç"
 
-#: panels/applications/cc-applications-panel.c:1085
+#: panels/applications/cc-applications-panel.c:1115
 msgid "Remove File Type"
 msgstr "Suprimeix el tipus de fitxer"
 
-#: panels/applications/cc-applications-panel.c:1217
+#: panels/applications/cc-applications-panel.c:1247
 #, c-format
 msgid "%u type"
 msgid_plural "%u types"
 msgstr[0] "tipus %u"
 msgstr[1] "tipus %u"
 
-#: panels/applications/cc-applications-panel.c:1224
+#: panels/applications/cc-applications-panel.c:1254
 #, c-format
 msgid "<b>%s</b> is used to open the following types of files and links"
 msgstr ""
 "<b>%s</b> s'utilitza per a obrir els següents tipus de fitxers i enllaços"
 
 #. TRANSLATORS: %s is an app name.
-#: panels/applications/cc-applications-panel.c:1265
+#: panels/applications/cc-applications-panel.c:1295
 #, c-format
 msgid "How much disk space <b>%s</b> is occupying with app data and caches"
 msgstr "Espai en disc que <b>%s</b> ocupa amb dades d'aplicació i memòria cau"
@@ -388,70 +480,78 @@ msgstr "Accés re_querit"
 msgid "System permissions that the app requires"
 msgstr "Permisos del sistema que l'aplicació requereix"
 
-#: panels/applications/cc-applications-panel.ui:415
+#: panels/applications/cc-applications-panel.ui:412
+msgid "Global S_hortcuts"
+msgstr "_Dreceres globlas"
+
+#: panels/applications/cc-applications-panel.ui:413
+msgid "Global actions that have been registered for use"
+msgstr "Accions globals que s'han registrat per al seu ús"
+
+#: panels/applications/cc-applications-panel.ui:423
 #: panels/mouse/cc-mouse-panel.ui:67 panels/mouse/cc-mouse-panel.ui:203
 #: panels/multitasking/cc-multitasking-panel.ui:15
 #: panels/power/cc-power-panel.ui:161
 msgid "General"
 msgstr "General"
 
-#: panels/applications/cc-applications-panel.ui:418
+#: panels/applications/cc-applications-panel.ui:426
 msgid "_Files &amp; Links"
 msgstr "Fit_xers i enllaços"
 
-#: panels/applications/cc-applications-panel.ui:419
+#: panels/applications/cc-applications-panel.ui:427
 msgid "File and link types that are opened by the app"
 msgstr "Tipus de fitxer i d'enllaç que obre l'aplicació"
 
-#: panels/applications/cc-applications-panel.ui:427
+#: panels/applications/cc-applications-panel.ui:435
 msgid "S_torage"
 msgstr "Emmaga_tzematge"
 
-#: panels/applications/cc-applications-panel.ui:428
+#: panels/applications/cc-applications-panel.ui:436
 msgid "Disk space being used"
 msgstr "Espai del disc utilitzat"
 
-#: panels/applications/cc-applications-panel.ui:448
+#: panels/applications/cc-applications-panel.ui:456
 msgid "Required Permissions"
 msgstr "Permisos requerits"
 
-#: panels/applications/cc-applications-panel.ui:479
+#: panels/applications/cc-applications-panel.ui:487
 msgid "Files & Links"
 msgstr "Fitxers i enllaços"
 
-#: panels/applications/cc-applications-panel.ui:490
+#: panels/applications/cc-applications-panel.ui:498
 msgid "File Types"
 msgstr "Tipus de fitxer"
 
-#: panels/applications/cc-applications-panel.ui:495
+#: panels/applications/cc-applications-panel.ui:503
 msgid "Link Types"
 msgstr "Tipus d'enllaç"
 
-#: panels/applications/cc-applications-panel.ui:502
+#: panels/applications/cc-applications-panel.ui:510
 msgid "_Reset"
 msgstr "_Reinicia"
 
-#: panels/applications/cc-applications-panel.ui:522
+#: panels/applications/cc-applications-panel.ui:530
 msgid "Storage"
 msgstr "Emmagatzematge"
 
-#: panels/applications/cc-applications-panel.ui:535
+#: panels/applications/cc-applications-panel.ui:543
 msgid "App"
 msgstr "Aplicació"
 
-#: panels/applications/cc-applications-panel.ui:543
+#: panels/applications/cc-applications-panel.ui:551
 msgid "Data"
 msgstr "Dades"
 
-#: panels/applications/cc-applications-panel.ui:551
+#: panels/applications/cc-applications-panel.ui:559
 msgid "Cache"
 msgstr "Memòria cau"
 
-#: panels/applications/cc-applications-panel.ui:559
+#: panels/applications/cc-applications-panel.ui:567
 msgid "Total"
 msgstr "Total"
 
-#: panels/applications/cc-applications-panel.ui:571
+#: panels/applications/cc-applications-panel.ui:579
 msgid "_Clear Cache"
 msgstr "_Neteja la memòria cau"
 
@@ -729,8 +829,8 @@ msgstr "Canvia els paràmetres de baix nivell de la xarxa"
 #: panels/applications/cc-snap-row.c:309
 msgid "Access the NetworkManager service to read and change network settings"
 msgstr ""
-"Accedeix al servei NetworkManager per a llegir o modificar els paràmetres de "
-"xarxa"
+"Accedeix al servei NetworkManager per a llegir o modificar els paràmetres de"
+" xarxa"
 
 #: panels/applications/cc-snap-row.c:311
 msgid "Read access to network settings"
@@ -749,8 +849,8 @@ msgid ""
 "Access the ofono service to read and change network settings for mobile "
 "telephony"
 msgstr ""
-"Accedeix al servei ofono per a llegir i modificar els paràmetres de xarxa de "
-"la telefonia mòbil"
+"Accedeix al servei ofono per a llegir i modificar els paràmetres de xarxa de"
+" la telefonia mòbil"
 
 #: panels/applications/cc-snap-row.c:319
 msgid "Control Open vSwitch hardware"
@@ -827,7 +927,8 @@ msgstr "Canvia el fus horari"
 #: panels/applications/cc-snap-row.c:355
 msgid "Access the UDisks2 service for configuring disks and removable media"
 msgstr ""
-"Accedeix al servei UDisks2 per a configurar els discos i els medis extraïbles"
+"Accedeix al servei UDisks2 per a configurar els discos i els medis "
+"extraïbles"
 
 #: panels/applications/cc-snap-row.c:357
 msgid "Access energy usage data"
@@ -1111,40 +1212,6 @@ msgstr "No interrompeu el dispositiu de calibratge mentre treballi"
 #: panels/color/cc-color-calibrate.ui:8
 msgid "Display Calibration"
 msgstr "Calibratge de la pantalla"
-
-#: panels/color/cc-color-calibrate.ui:21
-#: panels/common/cc-language-chooser.ui:15
-#: panels/display/cc-display-panel.ui:32
-#: panels/display/cc-display-panel.ui:184
-#: panels/display/cc-display-panel.ui:246
-#: panels/keyboard/cc-input-chooser.ui:15
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:159
-#: panels/keyboard/cc-keyboard-shortcut-editor.ui:12
-#: panels/network/cc-net-proxy-page.ui:14
-#: panels/network/cc-wifi-hotspot-dialog.ui:142
-#: panels/network/cc-wifi-panel.ui:241
-#: panels/network/connection-editor/ce-page-details.c:89
-#: panels/network/connection-editor/connection-editor.ui:16
-#: panels/printers/pp-jobs-dialog.ui:125
-#: panels/printers/pp-new-printer-dialog.ui:65
-#: panels/printers/pp-ppd-selection-dialog.ui:17
-#: panels/privacy/usage/cc-usage-page.ui:125
-#: panels/privacy/usage/cc-usage-page.ui:136
-#: panels/privacy/usage/cc-usage-page.ui:147
-#: panels/system/region/cc-format-chooser.ui:32
-#: panels/system/users/cc-add-user-dialog.ui:24
-#: panels/system/users/cc-avatar-chooser.c:92
-#: panels/system/users/cc-enterprise-login-dialog.ui:44
-#: panels/system/users/cc-fingerprint-dialog.c:1400
-#: panels/system/users/cc-fingerprint-dialog.ui:17
-#: panels/system/users/cc-password-dialog.ui:15
-#: panels/system/users/cc-user-page.ui:223
-#: panels/system/users/data/join-dialog.ui:17
-#: panels/wwan/cc-wwan-mode-dialog.ui:32
-#: panels/wwan/cc-wwan-network-dialog.ui:109
-#: panels/wwan/cc-wwan-sim-lock-dialog.ui:239
-msgid "_Cancel"
-msgstr "_Cancel·la"
 
 #. This starts the calibration process
 #: panels/color/cc-color-calibrate.ui:27
@@ -1439,17 +1506,6 @@ msgstr "Afegeix un perfil"
 #: panels/color/cc-color-panel.ui:343
 msgid "_Import File…"
 msgstr "_Importa un fitxer…"
-
-#: panels/color/cc-color-panel.ui:349 panels/keyboard/cc-input-chooser.ui:23
-#: panels/keyboard/cc-keyboard-shortcut-editor.ui:30
-#: panels/network/connection-editor/net-connection-editor.c:653
-#: panels/printers/pp-new-printer-dialog.ui:96
-#: panels/system/users/cc-add-user-dialog.c:362
-#: panels/system/users/cc-add-user-dialog.ui:32
-#: panels/system/users/cc-add-user-dialog.ui:153
-#: panels/system/users/cc-enterprise-login-dialog.ui:52
-msgid "_Add"
-msgstr "_Afegeix"
 
 #: panels/color/cc-color-panel.ui:418
 msgid ""
@@ -1759,7 +1815,7 @@ msgstr "Redueix un minut"
 
 #: panels/common/cc-util.c:130
 #: panels/network/connection-editor/ce-page-details.c:188
-#: panels/wellbeing/cc-screen-time-statistics-row.c:928
+#: panels/wellbeing/cc-screen-time-statistics-row.c:973
 msgid "Today"
 msgstr "Avui"
 
@@ -2358,9 +2414,9 @@ msgstr "Preferències"
 msgid "Remove"
 msgstr "Suprimeix"
 
-#: panels/keyboard/cc-keyboard-manager.c:488
-#: panels/keyboard/cc-keyboard-manager.c:496
-#: panels/keyboard/cc-keyboard-manager.c:936
+#: panels/keyboard/cc-keyboard-manager.c:507
+#: panels/keyboard/cc-keyboard-manager.c:515
+#: panels/keyboard/cc-keyboard-manager.c:1074
 msgid "Custom Shortcuts"
 msgstr "Dreceres personalitzades"
 
@@ -2525,29 +2581,29 @@ msgstr "Cerca les dreceres"
 msgid "_Reset All…"
 msgstr "_Restableix-ho tot…"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:124
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:127
 msgid "Add Custom Shortcuts"
 msgstr "Afegeix dreceres personalitzades"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:125
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:128
 msgid "Set up custom shortcuts for launching apps, running scripts, and more"
 msgstr ""
 "Configureu dreceres personalitzades per a iniciar aplicacions, executar "
 "scripts i més"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:130
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:133
 msgid "_Add Shortcut…"
 msgstr "_Afegeix una drecera…"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:153
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:156
 msgid "Reset All Shortcuts?"
 msgstr "Voleu restablir totes les dreceres?"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:154
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:157
 msgid "All changes to keyboard shortcuts will be lost"
 msgstr "Tots els canvis a les dreceres de teclat es perdran"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:160
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:163
 msgid "_Reset All"
 msgstr "_Restableix-ho tot"
 
@@ -2583,11 +2639,6 @@ msgstr "Introduïu una drecera nova per a canviar <b>%s</b>"
 #: panels/keyboard/cc-keyboard-shortcut-editor.c:932
 msgid "Add Custom Shortcut"
 msgstr "Afegeix drecera personalitzada"
-
-#: panels/keyboard/cc-keyboard-shortcut-editor.ui:19
-#: panels/system/users/cc-user-page.ui:224
-msgid "_Remove"
-msgstr "_Suprimeix"
 
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:41
 msgid "Re_place"
@@ -3066,7 +3117,7 @@ msgid "_Proxy"
 msgstr "Servidor _intermediari"
 
 #: panels/network/cc-qr-code-dialog.ui:6
-#: panels/network/cc-wifi-connection-row.ui:51
+#: panels/network/cc-wifi-connection-row.ui:50
 msgid "Share Network"
 msgstr "Comparteix xarxes"
 
@@ -3127,18 +3178,18 @@ msgid "Signal strength %d%%"
 msgstr "Força del senyal %d%%"
 
 #. TRANSLATORS: device status
-#: panels/network/cc-wifi-connection-row.ui:35
+#: panels/network/cc-wifi-connection-row.ui:34
 #: panels/network/panel-common.c:63
 msgid "Connected"
 msgstr "Connectat"
 
-#: panels/network/cc-wifi-connection-row.ui:63
+#: panels/network/cc-wifi-connection-row.ui:62
 #: panels/network/network-bluetooth.ui:14
 #: panels/network/network-ethernet.ui:47
 msgid "Network Options"
 msgstr "Opcions de xarxa"
 
-#: panels/network/cc-wifi-connection-row.ui:74
+#: panels/network/cc-wifi-connection-row.ui:73
 msgid "Forget Network"
 msgstr "Oblida la xarxa"
 
@@ -4015,8 +4066,8 @@ msgid ""
 "not recommended outside of specific setups."
 msgstr ""
 "Amb quina freqüència s'envia un paquet buit autenticat a l'altre costat amb "
-"el propòsit de mantenir vàlida la correspondència en un NAT o l'estat d'un tallafoc. "
-"Això és opcional i no es recomana fora de casos específics."
+"el propòsit de mantenir vàlida la correspondència en un NAT o l'estat d'un "
+"tallafoc. Això és opcional i no es recomana fora de casos específics."
 
 #: panels/network/connection-editor/wireguard-peer.ui:217
 msgid "seconds"
@@ -4869,6 +4920,8 @@ msgstr "Mode de rendiment activat per «%s»."
 msgid "_General"
 msgstr "_General"
 
+#. Translators: 'battery charging' means the settings to handle the way
+#. battery charges, not that the battery is currently charging.
 #: panels/power/cc-power-panel.ui:78
 msgid "Battery Charging"
 msgstr "S'està carregant la bateria"
@@ -7674,7 +7727,7 @@ msgid ""
 "Remotely connect to your user account when it isn’t being used. The display "
 "resolution can be set from the remote."
 msgstr ""
-"Connecta remotament al compte d'usuari quan no està sent usat. La resolució "
+"Connecta remotament al compte d'usuari quan no és usat. La resolució "
 "de la pantalla es pot establir remotament."
 
 #: panels/system/remote-desktop/cc-remote-login-page.ui:33
@@ -7853,8 +7906,8 @@ msgid ""
 "password."
 msgstr ""
 "Per a afegir un compte d'inici de sessió empresarial, aquest dispositiu ha "
-"d'estar inscrit amb <b>%s</b>. Per a inscriure'l, feu que l'administrador del "
-"domini introdueixi el seu nom i contrasenya."
+"d'estar inscrit amb <b>%s</b>. Per a inscriure'l, feu que l'administrador "
+"del domini introdueixi el seu nom i contrasenya."
 
 #: panels/system/users/cc-enterprise-login-dialog.c:548
 msgid "Valid domain"
@@ -9377,37 +9430,37 @@ msgstr "Duració"
 msgid "Interval"
 msgstr "Interval"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:221
+#: panels/wellbeing/cc-screen-time-statistics-row.c:228
 msgctxt "abbreviated weekday name for Sunday"
 msgid "S"
 msgstr "Dg."
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:222
+#: panels/wellbeing/cc-screen-time-statistics-row.c:229
 msgctxt "abbreviated weekday name for Monday"
 msgid "M"
 msgstr "Dl."
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:223
+#: panels/wellbeing/cc-screen-time-statistics-row.c:230
 msgctxt "abbreviated weekday name for Tuesday"
 msgid "T"
 msgstr "Dt."
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:224
+#: panels/wellbeing/cc-screen-time-statistics-row.c:231
 msgctxt "abbreviated weekday name for Wednesday"
 msgid "W"
 msgstr "Dc."
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:225
+#: panels/wellbeing/cc-screen-time-statistics-row.c:232
 msgctxt "abbreviated weekday name for Thursday"
 msgid "T"
 msgstr "Dj."
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:226
+#: panels/wellbeing/cc-screen-time-statistics-row.c:233
 msgctxt "abbreviated weekday name for Friday"
 msgid "F"
 msgstr "Dv."
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:227
+#: panels/wellbeing/cc-screen-time-statistics-row.c:234
 msgctxt "abbreviated weekday name for Saturday"
 msgid "S"
 msgstr "Ds."
@@ -9415,14 +9468,14 @@ msgstr "Ds."
 #. Translators: This is a duration in minutes, for example ‘15m’ for 15
 #. minutes.
 #. * Use whatever shortest unit label is used for minutes in your locale.
-#: panels/wellbeing/cc-screen-time-statistics-row.c:384
+#: panels/wellbeing/cc-screen-time-statistics-row.c:391
 #, c-format
 msgid "%um"
 msgstr "%u m"
 
 #. Translators: This is a duration in hours, for example ‘2h’ for 2 hours.
 #. * Use whatever shortest unit label is used for hours in your locale.
-#: panels/wellbeing/cc-screen-time-statistics-row.c:390
+#: panels/wellbeing/cc-screen-time-statistics-row.c:397
 #, c-format
 msgid "%uh"
 msgstr "%u h"
@@ -9430,65 +9483,85 @@ msgstr "%u h"
 #. Translators: This is a duration in hours and minutes, for example
 #. * ‘3h 15m’ for 3 hours and 15 minutes. Use whatever shortest unit label
 #. * is used for hours and minutes in your locale.
-#: panels/wellbeing/cc-screen-time-statistics-row.c:397
+#: panels/wellbeing/cc-screen-time-statistics-row.c:404
 #, c-format
 msgid "%uh %um"
 msgstr "%u h %u m"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:627
-#: panels/wellbeing/cc-screen-time-statistics-row.c:747
+#: panels/wellbeing/cc-screen-time-statistics-row.c:663
+#: panels/wellbeing/cc-screen-time-statistics-row.c:783
 #, c-format
-#| msgid "Failed to release fingerprint device %s: %s"
 msgid "Failed to load session history file ‘%s’: %s"
 msgstr "No s'ha pogut carregar el fitxer de l'historial de sessions «%s»: %s"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:628
+#: panels/wellbeing/cc-screen-time-statistics-row.c:664
 msgid "Invalid file structure"
 msgstr "Estructura de fitxer no vàlida"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:665
+#: panels/wellbeing/cc-screen-time-statistics-row.c:701
 #, c-format
-#| msgid "Failed to list fingerprints: %s"
 msgid "Failed to load session history file: %s"
 msgstr "No s'ha pogut carregar el fitxer de l'historial de sessions: %s"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:666
-#: panels/wellbeing/cc-screen-time-statistics-row.c:748
+#: panels/wellbeing/cc-screen-time-statistics-row.c:702
+#: panels/wellbeing/cc-screen-time-statistics-row.c:784
 msgid "File is empty"
 msgstr "El fitxer és buit"
 
+#. G_DATE_BAD_WEEKDAY
+#: panels/wellbeing/cc-screen-time-statistics-row.c:920
+msgid "Average Monday"
+msgstr "Dilluns mitjà"
+
+#: panels/wellbeing/cc-screen-time-statistics-row.c:921
+msgid "Average Tuesday"
+msgstr "Dimarts mitjà"
+
+#: panels/wellbeing/cc-screen-time-statistics-row.c:922
+msgid "Average Wednesday"
+msgstr "Dimecres mitjà"
+
+#: panels/wellbeing/cc-screen-time-statistics-row.c:923
+msgid "Average Thursday"
+msgstr "Dijous mitjà"
+
+#: panels/wellbeing/cc-screen-time-statistics-row.c:924
+msgid "Average Friday"
+msgstr "Divendres mitjà"
+
+#: panels/wellbeing/cc-screen-time-statistics-row.c:925
+msgid "Average Saturday"
+msgstr "Dissabte mitjà"
+
+#: panels/wellbeing/cc-screen-time-statistics-row.c:926
+msgid "Average Sunday"
+msgstr "Diumenge mitjà"
+
 #. Translators: This a medium-length date, for example ‘15 April’
-#: panels/wellbeing/cc-screen-time-statistics-row.c:933
+#: panels/wellbeing/cc-screen-time-statistics-row.c:978
 msgid "%-d %B"
 msgstr "%-d %B"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:946
-#: panels/wellbeing/cc-screen-time-statistics-row.c:957
+#: panels/wellbeing/cc-screen-time-statistics-row.c:991
+#: panels/wellbeing/cc-screen-time-statistics-row.c:1002
 msgid "No Data"
 msgstr "Sense dades"
 
-#. Translators: This is an annotated day of the week. For example ‘Average
-#. Monday’.
-#: panels/wellbeing/cc-screen-time-statistics-row.c:950
-#, c-format
-msgid "Average %A"
-msgstr "%A mitjà"
-
-#: panels/wellbeing/cc-screen-time-statistics-row.c:961
+#: panels/wellbeing/cc-screen-time-statistics-row.c:1006
 #, c-format
 msgid "This Week"
 msgstr "Aquesta setmana"
 
 #. Translators: This is a range of days within a given month.
 #. * For example ‘20–27 April’. The dash is an en-dash.
-#: panels/wellbeing/cc-screen-time-statistics-row.c:972
+#: panels/wellbeing/cc-screen-time-statistics-row.c:1017
 #, c-format
 msgid "%u–%u %s"
 msgstr "%u–%u %s"
 
 #. Translators: This is a range of days spanning two months.
 #. * For example, ‘27 April–4 May’. The dash is an en-dash.
-#: panels/wellbeing/cc-screen-time-statistics-row.c:989
+#: panels/wellbeing/cc-screen-time-statistics-row.c:1034
 #, c-format
 msgid "%u %s–%u %s"
 msgstr "%u %s–%u %s"
@@ -9496,7 +9569,7 @@ msgstr "%u %s–%u %s"
 #. Translators: The first placeholder is a formatted date string. The
 #. * second placeholder is a formatted time duration (for example, ‘3 hours’
 #. * or ‘25 minutes’).
-#: panels/wellbeing/cc-screen-time-statistics-row.c:1050
+#: panels/wellbeing/cc-screen-time-statistics-row.c:1095
 #, c-format
 msgid ""
 "Bar chart of screen time usage over the week starting %s. A line is "
@@ -9507,14 +9580,14 @@ msgstr ""
 "pantalla configurat."
 
 #. Translators: The placeholder is a formatted date string.
-#: panels/wellbeing/cc-screen-time-statistics-row.c:1067
+#: panels/wellbeing/cc-screen-time-statistics-row.c:1112
 #, c-format
 msgid "Bar chart of screen time usage over the week starting %s."
 msgstr ""
 "Diagrama de barres d'ús del temps de pantalla durant la setmana que comença "
 "%s."
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:1073
+#: panels/wellbeing/cc-screen-time-statistics-row.c:1118
 #, c-format
 msgid ""
 "Placeholder for a bar chart of screen time usage. No data is currently "
@@ -10211,7 +10284,7 @@ msgstr "Mostra el número de versió"
 #: shell/cc-application.c:73
 msgid "Enable verbose mode. Specify multiple times to increase verbosity"
 msgstr ""
-"Activa el mode detallat. Especifiqueu-ho diverses vàries vegades per "
+"Activa el mode detallat. Especifiqueu-ho diverses vegades per "
 "incrementar el nivell de detall"
 
 #: shell/cc-application.c:74
