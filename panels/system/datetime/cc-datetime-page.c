@@ -485,7 +485,7 @@ on_month_selection_changed_cb (CcDateTimePage *self)
   g_assert (CC_IS_DATE_TIME_PAGE (self));
 
   i = gtk_single_selection_get_selected (self->month_model);
-  g_assert (i >= 0 && i < 12);
+  g_assert (/* i >= 0 && */ i < 12);
 
   self->month = i + 1;
   month_year_changed (self);
