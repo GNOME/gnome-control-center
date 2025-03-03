@@ -48,7 +48,7 @@ install_data(
   install_dir : control_center_datadir + '/dbus-1/interfaces',
 )
 
-deps = common_deps + keyboard_shortcuts_dep
+deps = common_deps + [keyboard_shortcuts_dep]
 
 if host_is_linux
   deps += mm_dep
