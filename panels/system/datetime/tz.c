@@ -128,7 +128,8 @@ tz_load_db (void)
 }
 
 static void
-tz_location_free (TzLocation *loc)
+tz_location_free (TzLocation *loc,
+                  void       *user_data)
 {
 	g_free (loc->country);
 	g_free (loc->zone);

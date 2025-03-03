@@ -378,7 +378,8 @@ change_fingerprint (CcUserPage *self)
 
 static void
 delete_user_done (ActUserManager *manager,
-                  GAsyncResult   *res)
+                  GAsyncResult   *res,
+                  void           *user_data)
 {
     g_autoptr(GError) error = NULL;
 
