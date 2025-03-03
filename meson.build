@@ -112,6 +112,11 @@ if get_option('buildtype').contains('debug')
   common_flags += cc.get_supported_arguments(test_cflags)
 endif
 
+# Warnings which are not useful for our coding style, regardless of the build type
+common_flags += cc.get_supported_arguments([
+    '-Wno-unused-parameter',
+])
+
 add_project_arguments(common_flags, language: 'c')
 
 # Check that we meet the dependencies
