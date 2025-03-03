@@ -58,7 +58,8 @@ typedef struct
 } CameraAppStateData;
 
 static void
-camera_app_state_data_free (CameraAppStateData *data)
+camera_app_state_data_free (CameraAppStateData *data,
+                            GClosure           *closure)
 {
     g_free (data->app_id);
     g_slice_free (CameraAppStateData, data);
