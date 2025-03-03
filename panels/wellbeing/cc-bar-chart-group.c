@@ -304,7 +304,7 @@ cc_bar_chart_group_dispose (GObject *object)
   CcBarChartGroup *self = CC_BAR_CHART_GROUP (object);
 
   g_clear_pointer (&self->bars, g_ptr_array_unref);
-  gtk_widget_dispose_template (GTK_WIDGET (object), CC_TYPE_BAR_CHART_BAR);
+  gtk_widget_dispose_template (GTK_WIDGET (object), CC_TYPE_BAR_CHART_GROUP);
 
   G_OBJECT_CLASS (cc_bar_chart_group_parent_class)->dispose (object);
 }
