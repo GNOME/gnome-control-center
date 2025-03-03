@@ -297,6 +297,12 @@ cc_wellbeing_panel_init (CcWellbeingPanel *self)
   self->eyesight_break_settings = g_settings_new ("org.gnome.desktop.break-reminders.eyesight");
   self->movement_break_settings = g_settings_new ("org.gnome.desktop.break-reminders.movement");
 
+  /* Put the movement break settings object into delayed-apply mode so that
+   * changes to the movement schedule are sent atomically.
+   * Note this means that all settings changes to it must be explicitly committed
+   * using g_settings_apply(). */
+  g_settings_delay (self->movement_break_settings);
+
   g_settings_bind_with_mapping (self->break_reminders_settings,
                                 "selected-breaks",
                                 self->eyesight_breaks_row,
@@ -436,7 +442,6 @@ movement_break_schedule_notify_selected_item_cb (GObject    *object,
   CcWellbeingPanel *self = CC_WELLBEING_PANEL (user_data);
   CcBreakSchedule *selected_item  = CC_BREAK_SCHEDULE (adw_combo_row_get_selected_item (self->movement_break_schedule_row));
 
-  g_settings_delay (self->movement_break_settings);
   g_settings_set_uint (self->movement_break_settings, "duration-seconds", cc_break_schedule_get_duration_secs (selected_item));
   g_settings_set_uint (self->movement_break_settings, "interval-seconds", cc_break_schedule_get_interval_secs (selected_item));
   g_settings_apply (self->movement_break_settings);
@@ -513,6 +518,7 @@ sounds_notify_active_cb (GObject    *object,
 
   g_settings_set_boolean (self->eyesight_break_settings, "play-sound", play_sound);
   g_settings_set_boolean (self->movement_break_settings, "play-sound", play_sound);
+  g_settings_apply (self->movement_break_settings);
 }
 
 static void
