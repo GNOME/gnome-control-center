@@ -206,6 +206,14 @@ cleanup_cached_devices (CcFingerprintManager *self)
   g_list_free_full (g_steal_pointer (&priv->cached_devices), g_object_unref);
 }
 
+static void *
+cached_devices_copy_cb (const void *src,
+                        void       *user_data)
+{
+  CcFprintdDevice *device = CC_FPRINTD_DEVICE (src);
+  return g_object_ref (device);
+}
+
 static void
 cache_devices (CcFingerprintManager *self,
                GList                *devices)
@@ -216,7 +224,7 @@ cache_devices (CcFingerprintManager *self,
   g_return_if_fail (devices && CC_FPRINTD_IS_DEVICE (devices->data));
 
   cleanup_cached_devices (self);
-  priv->cached_devices = g_list_copy_deep (devices, (GCopyFunc) g_object_ref, NULL);
+  priv->cached_devices = g_list_copy_deep (devices, cached_devices_copy_cb, NULL);
 
   /* We can monitor just the first device name, as the owner is just the same */
   target_device = CC_FPRINTD_DEVICE (priv->cached_devices->data);
@@ -357,7 +365,7 @@ cc_fingerprint_manager_get_devices (CcFingerprintManager *self,
     {
       GList *devices;
 
-      devices = g_list_copy_deep (priv->cached_devices, (GCopyFunc) g_object_ref, NULL);
+      devices = g_list_copy_deep (priv->cached_devices, cached_devices_copy_cb, NULL);
       g_task_return_pointer (task, devices, object_list_destroy_notify);
       return;
     }
