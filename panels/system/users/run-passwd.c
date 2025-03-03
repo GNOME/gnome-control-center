@@ -650,8 +650,7 @@ passwd_authenticate (PasswdHandler *passwd_handler,
         passwd_handler->new_password = NULL;
         passwd_handler->chpasswd_cb = NULL;
         passwd_handler->chpasswd_cb_data = NULL;
-        g_queue_foreach (passwd_handler->backend_stdin_queue, (GFunc) g_free, NULL);
-        g_queue_clear (passwd_handler->backend_stdin_queue);
+        g_queue_clear_full (passwd_handler->backend_stdin_queue, g_free);
 
         passwd_handler->current_password = current_password;
         passwd_handler->auth_cb = cb;
