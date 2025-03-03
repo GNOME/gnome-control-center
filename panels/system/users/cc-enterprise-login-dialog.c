@@ -559,9 +559,11 @@ realm_manager_discover_cb (GObject       *source,
   g_list_free_full (realms, g_object_unref);
 }
 
-static void
-domain_validate (CcEnterpriseLoginDialog *self)
+static gboolean
+domain_validate (void *user_data)
 {
+  CcEnterpriseLoginDialog *self = CC_ENTERPRISE_LOGIN_DIALOG (user_data);
+
   self->domain_timeout_id = 0;
 
   /* This is needed to stop previous calls to avoid rewriting feedback. */
@@ -574,6 +576,8 @@ domain_validate (CcEnterpriseLoginDialog *self)
                              self->cancellable,
                              realm_manager_discover_cb,
                              g_object_ref (self));
+
+  return G_SOURCE_REMOVE;
 }
 
 static void
@@ -595,7 +599,7 @@ on_domain_entry_changed_cb (CcEnterpriseLoginDialog *self)
     }
 
   cc_entry_feedback_update (self->domain_feedback, CC_ENTRY_LOADING, _("Checking domain…"));
-  self->domain_timeout_id = g_timeout_add (DOMAIN_CHECK_TIMEOUT, (GSourceFunc)domain_validate, self);
+  self->domain_timeout_id = g_timeout_add (DOMAIN_CHECK_TIMEOUT, domain_validate, self);
 }
 
 static void
