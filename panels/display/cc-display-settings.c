@@ -725,10 +725,6 @@ cc_display_settings_rebuild_ui (CcDisplaySettings *self)
   gtk_widget_set_visible (GTK_WIDGET (self->luminance_row),
                           cc_display_monitor_supports_color_mode (self->selected_output,
                                                                   CC_DISPLAY_COLOR_MODE_BT2100));
-  g_signal_connect_swapped (gtk_range_get_adjustment (GTK_RANGE (self->luminance_scale)),
-                            "notify::value",
-                            G_CALLBACK (on_luminance_value_changed_cb),
-                            self);
 
   gtk_widget_set_visible (GTK_WIDGET (self->underscanning_row),
                           cc_display_monitor_supports_underscanning (self->selected_output) &&
@@ -1124,6 +1120,11 @@ cc_display_settings_init (CcDisplaySettings *self)
   adw_combo_row_set_expression (ADW_COMBO_ROW (self->resolution_row), expression);
   adw_combo_row_set_model (ADW_COMBO_ROW (self->resolution_row),
                            G_LIST_MODEL (self->resolution_list));
+
+  g_signal_connect_swapped (self->luminance_scale_adjustment,
+                            "notify::value",
+                            G_CALLBACK (on_luminance_value_changed_cb),
+                            self);
 
   self->updating = FALSE;
 }
