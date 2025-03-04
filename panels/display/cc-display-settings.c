@@ -390,6 +390,9 @@ on_luminance_value_changed_cb (CcDisplaySettings *self)
   CcDisplayColorMode color_mode;
   double luminance;
 
+  if (self->updating)
+    return;
+
   config_manager = cc_display_panel_get_config_manager (self->panel);
 
   color_mode = get_pending_color_mode (self);
@@ -450,7 +453,7 @@ cc_display_settings_rebuild_ui (CcDisplaySettings *self)
   g_object_freeze_notify ((GObject*) self->resolution_row);
   g_object_freeze_notify ((GObject*) self->scale_combo_row);
   g_object_freeze_notify ((GObject*) self->hdr_row);
-  g_object_freeze_notify ((GObject*) self->luminance_row);
+  g_object_freeze_notify ((GObject*) self->luminance_scale_adjustment);
   g_object_freeze_notify ((GObject*) self->underscanning_row);
   g_object_freeze_notify ((GObject*) self->scale_toggle_group);
 
@@ -742,7 +745,7 @@ cc_display_settings_rebuild_ui (CcDisplaySettings *self)
   g_object_thaw_notify ((GObject*) self->resolution_row);
   g_object_thaw_notify ((GObject*) self->scale_combo_row);
   g_object_thaw_notify ((GObject*) self->hdr_row);
-  g_object_thaw_notify ((GObject*) self->luminance_row);
+  g_object_thaw_notify ((GObject*) self->luminance_scale_adjustment);
   g_object_thaw_notify ((GObject*) self->underscanning_row);
   g_object_thaw_notify ((GObject*) self->scale_toggle_group);
   self->updating = FALSE;
