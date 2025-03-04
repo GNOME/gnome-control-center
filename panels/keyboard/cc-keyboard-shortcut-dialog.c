@@ -40,12 +40,15 @@
 #include "cc-util.h"
 #include "keyboard-shortcuts.h"
 
+#define DEFAULT_ACTIVITIES_OVERVIEW_SHORTCUT "Super_L"
+
 struct _CcKeyboardShortcutDialog
 {
   AdwDialog             parent_instance;
 
   AdwNavigationView    *navigation_view;
   AdwNavigationPage    *main_page;
+  AdwSwitchRow         *overview_shortcut_row;
   AdwButtonRow         *reset_all_button_row;
   AdwDialog            *reset_all_dialog;
   GtkSearchEntry       *search_entry;
@@ -361,6 +364,8 @@ on_reset_all_dialog_response_cb (CcKeyboardShortcutDialog *self)
           cc_keyboard_manager_reset_shortcut (self->manager, item);
         }
     }
+
+  adw_switch_row_set_active (self->overview_shortcut_row, TRUE);
 }
 
 static void
@@ -457,6 +462,27 @@ shortcut_section_row_activated_cb (CcKeyboardShortcutDialog *self,
   shortcut_custom_items_changed (self);
 }
 
+static gboolean
+get_overview_shortcut_setting (GValue   *value,
+                               GVariant *variant,
+                               gpointer  user_data)
+{
+  gboolean enabled = g_strcmp0 (g_variant_get_string (variant, NULL), DEFAULT_ACTIVITIES_OVERVIEW_SHORTCUT) == 0;
+  g_value_set_boolean (value, enabled);
+
+  return TRUE;
+}
+
+static GVariant *
+set_overview_shortcut_setting (const GValue       *value,
+                               const GVariantType *variant,
+                               gpointer            user_data)
+{
+  gboolean enabled = g_value_get_boolean (value);
+
+  return g_variant_new_string (enabled ? DEFAULT_ACTIVITIES_OVERVIEW_SHORTCUT : "");
+}
+
 static void
 cc_keyboard_shortcut_dialog_finalize (GObject *object)
 {
@@ -485,6 +511,7 @@ cc_keyboard_shortcut_dialog_class_init (CcKeyboardShortcutDialogClass *klass)
 
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutDialog, navigation_view);
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutDialog, main_page);
+  gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutDialog, overview_shortcut_row);
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutDialog, reset_all_button_row);
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutDialog, reset_all_dialog);
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutDialog, search_entry);
@@ -511,6 +538,8 @@ cc_keyboard_shortcut_dialog_class_init (CcKeyboardShortcutDialogClass *klass)
 static void
 cc_keyboard_shortcut_dialog_init (CcKeyboardShortcutDialog *self)
 {
+  g_autoptr(GSettings) mutter_settings = g_settings_new ("org.gnome.mutter");
+
   gtk_widget_init_template (GTK_WIDGET (self));
   shortcut_dialog_visible_page_changed_cb (self);
 
@@ -539,6 +568,13 @@ cc_keyboard_shortcut_dialog_init (CcKeyboardShortcutDialog *self)
                            G_LIST_MODEL (self->sections),
                            shortcut_dialog_row_new,
                            self, NULL);
+
+  g_settings_bind_with_mapping (mutter_settings, "overlay-key",
+                                self->overview_shortcut_row, "active",
+				G_SETTINGS_BIND_DEFAULT,
+				get_overview_shortcut_setting,
+				set_overview_shortcut_setting,
+				NULL, NULL);
 }
 
 CcKeyboardShortcutDialog*
