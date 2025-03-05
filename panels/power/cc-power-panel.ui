@@ -279,6 +279,27 @@
                             </child>
                           </object>
                         </child>
+                        <child>
+                          <object class="AdwPreferencesGroup" id="suspend_notice_group">
+                            <property name="visible">False</property>
+                            <child>
+                              <object class="AdwActionRow">
+                                <property name="activatable">False</property>
+                                <property name="selectable">False</property>
+                                <property name="title" translatable="yes">Disabling automatic suspend will result in higher power consumption. It is recommended to keep automatic suspend enabled.</property>
+                                <child type="prefix">
+                                  <object class="GtkImage">
+                                    <property name="icon-name">dialog-warning-symbolic</property>
+                                    <property name="pixel-size">24</property>
+                                  </object>
+                                </child>
+                                <style>
+                                  <class name="power-profile-info-row"/>
+                                </style>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
                       </object>
                     </property>
                   </object>

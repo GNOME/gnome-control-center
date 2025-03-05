@@ -71,6 +71,7 @@ struct _CcPowerPanel
   CcNumberRow       *suspend_on_ac_delay_row;
   AdwSwitchRow      *suspend_on_ac_switch_row;
   AdwPreferencesGroup *suspend_on_ac_group;
+  AdwPreferencesGroup *suspend_notice_group;
 
   GSettings     *gsd_settings;
   GSettings     *session_settings;
@@ -515,12 +516,25 @@ get_sleep_type (GValue   *value,
   return TRUE;
 }
 
+static void
+update_auto_suspend_description (CcPowerPanel *self)
+{
+  gboolean suspend = adw_switch_row_get_active (self->suspend_on_ac_switch_row);
+  if (self->has_batteries) {
+    suspend = suspend && adw_switch_row_get_active (self->suspend_on_battery_switch_row);
+  }
+
+  gtk_widget_set_visible (GTK_WIDGET (self->suspend_notice_group), !suspend);
+}
+
 static GVariant *
 set_sleep_type (const GValue       *value,
                 const GVariantType *expected_type,
                 gpointer            data)
 {
   const char *sleep_str = g_value_get_boolean (value) ? "suspend" : "nothing";
+
+  update_auto_suspend_description (CC_POWER_PANEL (data));
 
   return g_variant_new_string (sleep_str);
 }
@@ -783,16 +797,17 @@ setup_power_saving (CcPowerPanel *self)
       g_settings_bind_with_mapping (self->gsd_settings, "sleep-inactive-battery-type",
                                     self->suspend_on_battery_switch_row, "active",
                                     G_SETTINGS_BIND_DEFAULT,
-                                    get_sleep_type, set_sleep_type, NULL, NULL);
+                                    get_sleep_type, set_sleep_type, self, NULL);
 
       g_settings_bind_with_mapping (self->gsd_settings, "sleep-inactive-ac-type",
                                     self->suspend_on_ac_switch_row, "active",
                                     G_SETTINGS_BIND_DEFAULT,
-                                    get_sleep_type, set_sleep_type, NULL, NULL);
+                                    get_sleep_type, set_sleep_type, self, NULL);
 
       setup_suspend_delay_rows (self);
 
       set_ac_battery_ui_mode (self);
+      update_auto_suspend_description (self);
     }
 }
 
@@ -1169,12 +1184,14 @@ switch_to_single_page_layout (CcPowerPanel *self)
   adw_preferences_page_remove (self->power_saving_page, self->blank_screen_group);
   adw_preferences_page_remove (self->power_saving_page, self->suspend_on_battery_group);
   adw_preferences_page_remove (self->power_saving_page, self->suspend_on_ac_group);
+  adw_preferences_page_remove (self->power_saving_page, self->suspend_notice_group);
 
   adw_preferences_page_remove (self->general_page, self->general_section);
   adw_preferences_page_add (self->general_page, self->power_saving_group);
   adw_preferences_page_add (self->general_page, self->blank_screen_group);
   adw_preferences_page_add (self->general_page, self->suspend_on_battery_group);
   adw_preferences_page_add (self->general_page, self->suspend_on_ac_group);
+  adw_preferences_page_add (self->general_page, self->suspend_notice_group);
   adw_preferences_page_add (self->general_page, self->general_section);
 
   /* Reset title and hide view switcher by hiding stack page */
@@ -1314,6 +1331,7 @@ cc_power_panel_class_init (CcPowerPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, suspend_on_ac_delay_row);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, suspend_on_ac_switch_row);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, suspend_on_ac_group);
+  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, suspend_notice_group);
 
   gtk_widget_class_bind_template_callback (widget_class, als_row_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, blank_screen_switch_cb);
