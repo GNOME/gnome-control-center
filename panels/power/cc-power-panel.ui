@@ -248,6 +248,7 @@
                               <object class="AdwSwitchRow" id="suspend_on_battery_switch_row">
                                 <property name="title" translatable="yes">On Ba_ttery Power</property>
                                 <property name="use_underline">True</property>
+				<signal name="notify::active" handler="update_suspend_notice_visibility" object="CcPowerPanel" swapped="yes"/>
                               </object>
                             </child>
                             <child>
@@ -267,6 +268,7 @@
                               <object class="AdwSwitchRow" id="suspend_on_ac_switch_row">
                                 <property name="title" translatable="yes">Whe_n Plugged In</property>
                                 <property name="use_underline">True</property>
+				<signal name="notify::active" handler="update_suspend_notice_visibility" object="CcPowerPanel" swapped="yes"/>
                               </object>
                             </child>
                             <child>
@@ -275,6 +277,16 @@
                                 <property name="title" translatable="yes">Del_ay</property>
                                 <property name="use-underline">True</property>
                                 <property name="value-type">seconds</property>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="AdwPreferencesGroup" id="suspend_notice_group">
+                            <property name="visible">False</property>
+                            <child>
+                              <object class="CcPowerProfileInfoRow">
+                                <property name="title" translatable="yes">Disabling automatic suspend will result in higher power consumption. It is recommended to keep automatic suspend enabled.</property>
                               </object>
                             </child>
                           </object>
