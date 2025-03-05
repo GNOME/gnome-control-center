@@ -1571,14 +1571,13 @@ gcm_prefs_update_device_list_extra_entry (CcColorPanel *self)
   GtkListBoxRow *first_row;
 
   /* any devices to show? */
-  first_row = gtk_list_box_get_row_at_index (self->list_box, 0);
-
-  if (first_row == NULL)
+  if (self->devices->len == 0)
     adw_view_stack_set_visible_child_name (self->stack, "no-devices-page");
   else
     adw_view_stack_set_visible_child_name (self->stack, "color-page");
 
   /* if we have only one device expand it by default */
+  first_row = gtk_list_box_get_row_at_index (self->list_box, 0);
   if (first_row != NULL &&
       gtk_list_box_get_row_at_index (self->list_box, 1) == NULL)
     cc_color_device_set_expanded (CC_COLOR_DEVICE (first_row), TRUE);
