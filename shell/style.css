@@ -6,10 +6,10 @@
   color: color-mix(in srgb, var(--window-fg-color) 40%, transparent);
 }
 
-.split-row  picture:disabled,
-.illustrated-row picture:disabled {
-  /* FIXME: This is a workaround to handle disabled pictures
-   * see: https: //gitlab.gnome.org/GNOME/libadwaita/-/merge_requests/814
+row.illustrated picture:disabled {
+  /*
+   * FIXME: This is a workaround to handle disabled pictures
+   * see: https://gitlab.gnome.org/GNOME/libadwaita/-/merge_requests/814
    */
   opacity: 0.5;
 }
