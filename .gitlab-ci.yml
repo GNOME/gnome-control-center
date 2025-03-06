@@ -232,7 +232,8 @@ release-build:
     - '.fdo.suffixed-image@fedora'
     - '.fedora.container.common'
   script:
-    - meson setup $MESON_BUILD_DIR
+    - meson subprojects download gvc libgxdp
+    - meson setup $MESON_BUILD_DIR --wrap-mode=nodownload
     - meson dist -C $MESON_BUILD_DIR --no-tests --include-subprojects
   artifacts:
     paths:
