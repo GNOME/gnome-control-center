@@ -34,8 +34,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2025-03-01 20:50+0000\n"
-"PO-Revision-Date: 2025-03-03 04:25+0900\n"
+"POT-Creation-Date: 2025-03-04 12:21+0000\n"
+"PO-Revision-Date: 2025-03-05 23:40+0900\n"
 "Last-Translator: Changwoo Ryu <cwryu@debian.org>\n"
 "Language-Team: GNOME Korea <gnome-kr@googlegroups.com>\n"
 "Language: ko\n"
@@ -125,7 +125,7 @@ msgstr "제거(_R)"
 msgid "_Remove All Shortcuts"
 msgstr "모든 바로 가기 제거(_R)"
 
-#: panels/applications/cc-application-shortcut-dialog.c:265
+#: panels/applications/cc-application-shortcut-dialog.c:263
 #, c-format
 msgid "%s has registered the following global shortcuts"
 msgstr "%s 앱이 다음 전체 바로 가기를 등록했습니다"
@@ -984,7 +984,9 @@ msgstr "여러가지 앱 권한과 설정 조정"
 # NOTE: 키워드
 #. Translators: Search terms to find the Apps panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/applications/gnome-applications-panel.desktop.in:16
-msgid "application;flatpak;permission;setting;default;preferred;media;autorun;cd;dvd;usb;audio;video;disc;removable;device;system;"
+msgid ""
+"application;flatpak;permission;setting;default;preferred;media;autorun;cd;"
+"dvd;usb;audio;video;disc;removable;device;system;"
 msgstr ""
 "application;앱;애플리케이션;flatpak;플랫팩;permission;권한;퍼미션;setting;설"
 "정;세팅;default;기본값;디폴트;preferred;선호;옵션;media;미디어;autorun;자동;"
@@ -1995,67 +1997,67 @@ msgstr "야간 모드(_N)"
 msgid "Night Light"
 msgstr "야간 모드"
 
-#: panels/display/cc-display-settings.c:120
+#: panels/display/cc-display-settings.c:126
 msgctxt "Display rotation"
 msgid "Landscape"
 msgstr "가로"
 
-#: panels/display/cc-display-settings.c:123
+#: panels/display/cc-display-settings.c:129
 msgctxt "Display rotation"
 msgid "Portrait Right"
 msgstr "세로 오른쪽"
 
-#: panels/display/cc-display-settings.c:126
+#: panels/display/cc-display-settings.c:132
 msgctxt "Display rotation"
 msgid "Portrait Left"
 msgstr "세로 왼쪽"
 
-#: panels/display/cc-display-settings.c:129
+#: panels/display/cc-display-settings.c:135
 msgctxt "Display rotation"
 msgid "Landscape (flipped)"
 msgstr "가로 (뒤집힘)"
 
-#: panels/display/cc-display-settings.c:140
+#: panels/display/cc-display-settings.c:146
 msgctxt "Display rotation"
 msgid "Portrait"
 msgstr "세로"
 
-#: panels/display/cc-display-settings.c:143
+#: panels/display/cc-display-settings.c:149
 msgctxt "Display rotation"
 msgid "Landscape Right"
 msgstr "가로 오른쪽"
 
-#: panels/display/cc-display-settings.c:146
+#: panels/display/cc-display-settings.c:152
 msgctxt "Display rotation"
 msgid "Landscape Left"
 msgstr "가로 왼쪽"
 
-#: panels/display/cc-display-settings.c:149
+#: panels/display/cc-display-settings.c:155
 msgctxt "Display rotation"
 msgid "Portrait (flipped)"
 msgstr "세로 (뒤집힘)"
 
-#: panels/display/cc-display-settings.c:160
+#: panels/display/cc-display-settings.c:166
 msgctxt "Display rotation"
 msgid "Upright"
 msgstr "똑바로"
 
-#: panels/display/cc-display-settings.c:163
+#: panels/display/cc-display-settings.c:169
 msgctxt "Display rotation"
 msgid "Right"
 msgstr "오른쪽"
 
-#: panels/display/cc-display-settings.c:166
+#: panels/display/cc-display-settings.c:172
 msgctxt "Display rotation"
 msgid "Left"
 msgstr "왼쪽"
 
-#: panels/display/cc-display-settings.c:169
+#: panels/display/cc-display-settings.c:175
 msgctxt "Display rotation"
 msgid "Flipped"
 msgstr "뒤집힘"
 
-#: panels/display/cc-display-settings.c:235
+#: panels/display/cc-display-settings.c:241
 msgid "%.2lf Hz"
 msgstr "%.2lf Hz"
 
@@ -2064,12 +2066,12 @@ msgstr "%.2lf Hz"
 #. * 2. The formatting sequence is a range separated by an en-dash
 #. *    (unicode "\u2013"). For example: "Variable (48–144.97 Hz)"
 #.
-#: panels/display/cc-display-settings.c:252
+#: panels/display/cc-display-settings.c:258
 msgid "Variable (%d–%.2lf Hz)"
 msgstr "가변 (%d–%.2lf Hz)"
 
 #. Translators: "Variable" is an adjective that refers to the refresh rate
-#: panels/display/cc-display-settings.c:259
+#: panels/display/cc-display-settings.c:265
 msgid "Variable (up to %.2lf Hz)"
 msgstr "가변 (최대 %.2lf Hz)"
 
@@ -2101,11 +2103,15 @@ msgid "_HDR (High Dynamic Range)"
 msgstr "_HDR (High Dynamic Range)"
 
 #: panels/display/cc-display-settings.ui:92
+msgid "HDR _Brightness"
+msgstr "HDR 밝기(_B)"
+
+#: panels/display/cc-display-settings.ui:113
 msgid "Adjust for _TV"
 msgstr "TV에 맞게 조정(_T)"
 
-#: panels/display/cc-display-settings.ui:100
-#: panels/display/cc-display-settings.ui:114
+#: panels/display/cc-display-settings.ui:121
+#: panels/display/cc-display-settings.ui:135
 msgctxt "display setting"
 msgid "_Scale"
 msgstr "비율 조정(_S)"
@@ -2205,11 +2211,13 @@ msgstr "야간 모드 사용 및 연결한 모니터와 프로젝터 사용법�
 
 #. Translators: Search terms to find the Displays panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/display/gnome-display-panel.desktop.in:15
-msgid "Panel;Projector;xrandr;Screen;Resolution;Refresh;Monitor;Night;Light;Blue;redshift;color;sunset;sunrise;"
+msgid ""
+"Panel;Projector;xrandr;Screen;Resolution;Refresh;Monitor;Night;Light;Blue;"
+"redshift;color;sunset;sunrise;"
 msgstr ""
 "Panel;패널;Projector;프로젝터;xrandr;Screen;화면;Resolution;해상도;Refresh;주"
-"사율;Monitor;모니터;Night;Light;야간;모드;조명;Blue;파란빛;redshift;적색편"
-"이;color;색;sunset;일몰;sunrise;일출;"
+"사율;Monitor;모니터;Night;Light;야간;모드;조명;Blue;파란빛;redshift;적색편이;"
+"color;색;sunset;일몰;sunrise;일출;"
 
 #: panels/keyboard/00-multimedia.xml.in:2
 msgid "Sound and Media"
@@ -2714,7 +2722,9 @@ msgstr ""
 # 주의: 키워드이므로 번역될 수 있는 용어 적기
 #. Translators: Search terms to find the Keyboard panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/keyboard/gnome-keyboard-panel.desktop.in:15
-msgid "Shortcut;Workspace;Window;Resize;Zoom;Contrast;Input;Source;Lock;Volume;Hotkey;Compose;Character;"
+msgid ""
+"Shortcut;Workspace;Window;Resize;Zoom;Contrast;Input;Source;Lock;Volume;"
+"Hotkey;Compose;Character;"
 msgstr ""
 "Shortcut;바로;가기;단축키;Workspace;작업;공간;Window;창;윈도우;Resize;Zoom;크"
 "기;조정;줌;Contrast;대비;고대비;Input;입력;Source;Lock;잠금;잠그기;Volume;볼"
@@ -2913,8 +2923,8 @@ msgstr ""
 #: panels/mouse/gnome-mouse-panel.desktop.in:15
 msgid "Trackpad;Pointer;Click;Tap;Double;Button;Trackball;Scroll;"
 msgstr ""
-"Trackpad;트랙패드;Pointer;포인터;Click;클릭;누르기;Tap;두드리기;Double;더"
-"블;Button;버튼;단추;Trackball;트랙볼;Scroll;스크롤;"
+"Trackpad;트랙패드;Pointer;포인터;Click;클릭;누르기;Tap;두드리기;Double;더블;"
+"Button;버튼;단추;Trackball;트랙볼;Scroll;스크롤;"
 
 #: panels/multitasking/cc-multitasking-panel.ui:21
 msgid "_Hot Corner"
@@ -2991,11 +3001,12 @@ msgstr "생산성 및 다중 작업에 대한 설정을 관리합니다"
 
 #. Translators: Search terms to find the Search panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/multitasking/gnome-multitasking-panel.desktop.in:15
-msgid "Multitasking;Multitask;Productivity;Customize;Desktop;Hot;Corner;Workspaces;"
+msgid ""
+"Multitasking;Multitask;Productivity;Customize;Desktop;Hot;Corner;Workspaces;"
 msgstr ""
 "Multitasking;다중작업;다중 작업;멀티태스킹;Multitask;멀티태스크;Productivity;"
-"생산성;Customize;사용자설정;사용자 설정;Desktop;데스크톱;Hot;Corner;핫코"
-"너;Workspaces;작업공간;"
+"생산성;Customize;사용자설정;사용자 설정;Desktop;데스크톱;Hot;Corner;핫코너;"
+"Workspaces;작업공간;"
 
 #: panels/network/cc-net-proxy-page.c:195
 #: panels/network/cc-net-proxy-page.ui:63
@@ -4076,8 +4087,8 @@ msgstr "어떻게 인터넷에 연결할지 정합니다"
 #: panels/network/gnome-network-panel.desktop.in:15
 msgid "Network;IP;LAN;Proxy;WAN;Broadband;Modem;Bluetooth;vpn;DNS;"
 msgstr ""
-"Network;네트워크;IP;LAN;랜;Proxy;프록시;WAN;인터넷;Broadband;브로드밴"
-"드;Modem;모뎀;Bluetooth;블루투스;vpn;가상사설망;;DNS;네임서버;"
+"Network;네트워크;IP;LAN;랜;Proxy;프록시;WAN;인터넷;Broadband;브로드밴드;"
+"Modem;모뎀;Bluetooth;블루투스;vpn;가상사설망;;DNS;네임서버;"
 
 #: panels/network/gnome-wifi-panel.desktop.in:4
 msgid "Control how you connect to Wi-Fi networks"
@@ -4671,11 +4682,13 @@ msgstr "온라인 계정에 연결하고 그 계정을 어디에 이용할지 �
 #. The list MUST also end with a semicolon!
 #. For ReadItLater and Pocket, see http://en.wikipedia.org/wiki/Pocket_(application)
 #: panels/online-accounts/gnome-online-accounts-panel.desktop.in:18
-msgid "Google;Facebook;Twitter;Yahoo;Web;Online;Chat;Calendar;Mail;Contact;ownCloud;Kerberos;IMAP;SMTP;Pocket;ReadItLater;"
+msgid ""
+"Google;Facebook;Twitter;Yahoo;Web;Online;Chat;Calendar;Mail;Contact;ownCloud;"
+"Kerberos;IMAP;SMTP;Pocket;ReadItLater;"
 msgstr ""
-"Google;구글;Facebook;페이스북;Twitter;트위터;Yahoo;야후;Web;웹;Online;온라"
-"인;Chat;채팅;Calendar;달력;Mail;메일;Contact;연락처;ownCloud;Kerberos;커브로"
-"스;케르베로스;IMAP;SMTP;;Pocket;포켓;ReadItLater;"
+"Google;구글;Facebook;페이스북;Twitter;트위터;Yahoo;야후;Web;웹;Online;온라인;"
+"Chat;채팅;Calendar;달력;Mail;메일;Contact;연락처;ownCloud;Kerberos;커브로스;"
+"케르베로스;IMAP;SMTP;;Pocket;포켓;ReadItLater;"
 
 #: panels/power/cc-battery-row.c:80
 msgid "Unknown time"
@@ -5033,11 +5046,13 @@ msgstr "배터리 상태를 보고 절전 설정을 바꿉니다"
 
 #. Translators: Search terms to find the Power panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/power/gnome-power-panel.desktop.in:15
-msgid "Power;Sleep;Suspend;Hibernate;Battery;Brightness;Dim;Blank;Monitor;DPMS;Idle;Energy;"
+msgid ""
+"Power;Sleep;Suspend;Hibernate;Battery;Brightness;Dim;Blank;Monitor;DPMS;Idle;"
+"Energy;"
 msgstr ""
-"Power;전원;Sleep;절전;Suspend;대기 모드;Hibernate;최대 절전;Battery;배터"
-"리;Brightness;밝기;Dim;어둡게;Blank;Monitor;모니터;DPMS;Idle;입력;Energy;에너"
-"지;절약;"
+"Power;전원;Sleep;절전;Suspend;대기 모드;Hibernate;최대 절전;Battery;배터리;"
+"Brightness;밝기;Dim;어둡게;Blank;Monitor;모니터;DPMS;Idle;입력;Energy;에너지;"
+"절약;"
 
 #. Translators: %s is the printer name
 #: panels/printers/cc-printers-panel.c:682
@@ -5098,8 +5113,8 @@ msgstr "준비된 드라이버 검색중…"
 
 #: panels/printers/pp-details-dialog.c:277
 msgid ""
-"PostScript Printer Description files (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, "
-"*.PPD.GZ)"
+"PostScript Printer Description files (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, *."
+"PPD.GZ)"
 msgstr ""
 "포스트스크립트 프린터 기술 파일(*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, *.PPD.GZ)"
 
@@ -6427,13 +6442,16 @@ msgstr "데이터, 하드웨어, 장치의 보안에 대한 접근 제어"
 
 #. Translators: Search terms to find the Privacy panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/privacy/gnome-privacy-panel.desktop.in:15
-msgid "Privacy;Screen;Lock;Private;Usage;Recent;History;Files;Temporary;Tmp;Trash;Purge;Retain;Diagnostics;Crash;Location;Gps;Camera;Photos;Video;Webcam;Recording;Security;Firmware;Thunderbolt;"
+msgid ""
+"Privacy;Screen;Lock;Private;Usage;Recent;History;Files;Temporary;Tmp;Trash;"
+"Purge;Retain;Diagnostics;Crash;Location;Gps;Camera;Photos;Video;Webcam;"
+"Recording;Security;Firmware;Thunderbolt;"
 msgstr ""
-"Privacy;사생활;Screen;화면;Lock;잠금;Private;개인;Usage;사용;Recent;최"
-"근;History;Files;파일;Temporary;임시;Tmp;Trash;휴지통;Purge;비우기;Retain;유"
-"지;Diagnostics;진단;Crash;크래시;Location;위치;Gps;Camera;카메라;Photos;사"
-"진;Video;비디오;동영상;Webcam;웹캠;Recording;녹화;Security;보안;Firmware;펌웨"
-"어;Thunderbolt;썬더볼트;"
+"Privacy;사생활;Screen;화면;Lock;잠금;Private;개인;Usage;사용;Recent;최근;"
+"History;Files;파일;Temporary;임시;Tmp;Trash;휴지통;Purge;비우기;Retain;유지;"
+"Diagnostics;진단;Crash;크래시;Location;위치;Gps;Camera;카메라;Photos;사진;"
+"Video;비디오;동영상;Webcam;웹캠;Recording;녹화;Security;보안;Firmware;펌웨어;"
+"Thunderbolt;썬더볼트;"
 
 #: panels/privacy/location/cc-location-page.ui:17
 msgid "_Automatic Device Location"
@@ -6845,11 +6863,13 @@ msgstr "다른 사람과 공유할 사항을 정합니다"
 
 #. Translators: Search terms to find the Sharing panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/sharing/gnome-sharing-panel.desktop.in:15
-msgid "share;sharing;host;name;media;audio;video;pictures;photos;movies;server;renderer;"
+msgid ""
+"share;sharing;host;name;media;audio;video;pictures;photos;movies;server;"
+"renderer;"
 msgstr ""
 "share;sharing;공유;ssh;보안;셸;쉘;host;name;호스트;이름;media;미디어;audio;오"
-"디오;video;비디오;pictures;photos;사진;movies;영상;동영상;server;서"
-"버;renderer;렌더러;"
+"디오;video;비디오;pictures;photos;사진;movies;영상;동영상;server;서버;"
+"renderer;렌더러;"
 
 #: panels/sound/cc-alert-chooser-page.c:169
 msgid "Custom"
@@ -7015,10 +7035,11 @@ msgstr "사운드 음량과, 입력, 출력, 경고음을 바꿉니다"
 
 #. Translators: Search terms to find the Sound panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/sound/gnome-sound-panel.desktop.in:15
-msgid "Card;Microphone;Volume;Fade;Balance;Bluetooth;Headset;Audio;Output;Input;"
+msgid ""
+"Card;Microphone;Volume;Fade;Balance;Bluetooth;Headset;Audio;Output;Input;"
 msgstr ""
-"Card;카드;Microphone;마이크;Volume;볼륨;음량;Fade;페이드;Balance;균형;밸런"
-"스;Bluetooth;블루투스;Headset;헤드셋;Audio;오디오;Output;출력;Input;입력;"
+"Card;카드;Microphone;마이크;Volume;볼륨;음량;Fade;페이드;Balance;균형;밸런스;"
+"Bluetooth;블루투스;Headset;헤드셋;Audio;오디오;Output;출력;Input;입력;"
 
 #: panels/system/about/cc-about-page.ui:4
 #: panels/system/about/gnome-about-panel.desktop.in:3
@@ -7165,12 +7186,14 @@ msgstr "시스템의 정보를 봅니다"
 #. "Preferred Applications" is the old name for the preference, so make
 #. sure that you use the same "translation" for those keywords
 #: panels/system/about/gnome-about-panel.desktop.in:19
-msgid "device;system;information;hostname;memory;processor;version;default;application;preferred;cd;dvd;usb;audio;video;disc;removable;media;autorun;"
+msgid ""
+"device;system;information;hostname;memory;processor;version;default;"
+"application;preferred;cd;dvd;usb;audio;video;disc;removable;media;autorun;"
 msgstr ""
 "device;장치;system;시스템;information;정보;hostname;호스트;이름;memory;메모"
-"리;processor;프로세서;version;버전;default;기본값;application;응용 프로그"
-"램;preferred;우선;cd;dvd;usb;audio;오디오;video;비디오;disc;디스크;removable;"
-"이동식;media;미디어;autorun;자동;실행;"
+"리;processor;프로세서;version;버전;default;기본값;application;응용 프로그램;"
+"preferred;우선;cd;dvd;usb;audio;오디오;video;비디오;disc;디스크;removable;이"
+"동식;media;미디어;autorun;자동;실행;"
 
 #: panels/system/cc-system-panel.ui:20
 msgid "_Region &amp; Language"
@@ -7410,13 +7433,16 @@ msgstr "언어 및 시각 설정, 시스템 정보"
 
 #. Translators: Search terms to find the System panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/system/gnome-system-panel.desktop.in:15
-msgid "device;system;information;details;hostname;memory;processor;version;software;operating;os;model;language;region;country;formats;numbers;units;clock;timezone;date;location;remote;desktop;rdp;vnc;ssh;"
+msgid ""
+"device;system;information;details;hostname;memory;processor;version;software;"
+"operating;os;model;language;region;country;formats;numbers;units;clock;"
+"timezone;date;location;remote;desktop;rdp;vnc;ssh;"
 msgstr ""
 "device;장치;system;시스템;information;정보;details;자세히;hostname;호스트;이"
-"름;memory;메모리;processor;프로세서;version;버전;software;소프트웨"
-"어;operating;os;운영체제;model;모델;language;언어;region;지역;country;국가;나"
-"라;formats;형식;numbers;숫자;번호;units;단위;clock;시계;timezone;표준;시간대;"
-"타임존;date;날짜;location;위치;remote;원격;desktop;데스크톱;rdp;vnc;ssh;"
+"름;memory;메모리;processor;프로세서;version;버전;software;소프트웨어;"
+"operating;os;운영체제;model;모델;language;언어;region;지역;country;국가;나라;"
+"formats;형식;numbers;숫자;번호;units;단위;clock;시계;timezone;표준;시간대;타"
+"임존;date;날짜;location;위치;remote;원격;desktop;데스크톱;rdp;vnc;ssh;"
 
 #: panels/system/region/cc-format-chooser.c:229
 #: panels/system/region/cc-format-chooser.ui:155
@@ -8304,11 +8330,13 @@ msgstr "사용자 추가/제거 및 암호 바꾸기"
 
 #. Translators: Search terms to find the Users panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/system/users/gnome-users-panel.desktop.in:15
-msgid "Login;Name;Fingerprint;Avatar;Logo;Face;Password;Parental;Restrictions;Usage;Kid;Child;"
+msgid ""
+"Login;Name;Fingerprint;Avatar;Logo;Face;Password;Parental;Restrictions;Usage;"
+"Kid;Child;"
 msgstr ""
-"Login;로그인;Name;이름;Fingerprint;지문;Avatar;아바타;Logo;로고;Face;얼"
-"굴;Password;암호;비밀 번호;비밀번호;Parental;부모;Restrictions;보호;제한;제"
-"약;Usage;사용;Kid;자녀;Child;아이;어린이;"
+"Login;로그인;Name;이름;Fingerprint;지문;Avatar;아바타;Logo;로고;Face;얼굴;"
+"Password;암호;비밀 번호;비밀번호;Parental;부모;Restrictions;보호;제한;제약;"
+"Usage;사용;Kid;자녀;Child;아이;어린이;"
 
 #: panels/system/users/org.gnome.controlcenter.user-accounts.policy.in:11
 msgid "Manage user accounts"
@@ -9061,16 +9089,19 @@ msgstr "보기, 듣기, 타이핑, 누르기 편의 사항"
 # 주의: 원문이 'Mouse' 키워드 중복
 #. Translators: Search terms to find the Accessibility panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/universal-access/gnome-universal-access-panel.desktop.in:15
-msgid "Keyboard;Mouse;a11y;Accessibility;Universal;Access;Contrast;Cursor;Sound;Zoom;Screen;Reader;big;high;large;text;font;size;AccessX;Sticky;Keys;Slow;Bounce;Mouse;Double;click;Delay;Speed;Assist;Repeat;Blink;Pointer;find;locate;visual;hearing;audio;typing;animations;"
+msgid ""
+"Keyboard;Mouse;a11y;Accessibility;Universal;Access;Contrast;Cursor;Sound;"
+"Zoom;Screen;Reader;big;high;large;text;font;size;AccessX;Sticky;Keys;Slow;"
+"Bounce;Mouse;Double;click;Delay;Speed;Assist;Repeat;Blink;Pointer;find;"
+"locate;visual;hearing;audio;typing;animations;"
 msgstr ""
 "Keyboard;키보드;Mouse;마우스;a11y;Accessibility;접근성;Universal;Access;보편"
-"적;접근;Contrast;대비;Cursor;커서;Sound;소리;사운드;Zoom;확대;축"
-"소;Screen;Reader;스크린;리더;화면;읽기;big;high;large;text;큰;텍스"
-"트;font;size;폰트;글꼴;크기;AccessX;Sticky;Keys;고정;키;Slow;느린;Bounce;탄"
-"력;Mouse;마우스;Double;click;두번;누르기;Delay;Speed;Assist;지연;도우"
-"미;Repeat;반복;Blink;깜박;Pointer;포인터;find;찾기;locate;visual;시"
-"각;hearing;듣기;audio;오디오;typing;타이핑;hearing;듣기;audio;오디오;typing;"
-"타이핑;animations;애니메이션;"
+"적;접근;Contrast;대비;Cursor;커서;Sound;소리;사운드;Zoom;확대;축소;Screen;"
+"Reader;스크린;리더;화면;읽기;big;high;large;text;큰;텍스트;font;size;폰트;글"
+"꼴;크기;AccessX;Sticky;Keys;고정;키;Slow;느린;Bounce;탄력;Mouse;마우스;"
+"Double;click;두번;누르기;Delay;Speed;Assist;지연;도우미;Repeat;반복;Blink;깜"
+"박;Pointer;포인터;find;찾기;locate;visual;시각;hearing;듣기;audio;오디오;"
+"typing;타이핑;hearing;듣기;audio;오디오;typing;타이핑;animations;애니메이션;"
 
 #: panels/wacom/button-mapping.ui:7 panels/wacom/cc-wacom-ekr-page.ui:19
 msgid "Map Buttons"
@@ -9316,8 +9347,8 @@ msgstr ""
 #: panels/wacom/gnome-wacom-panel.desktop.in:15
 msgid "Tablet;Wacom;Stylus;Eraser;Mouse;"
 msgstr ""
-"Tablet;태블릿;타블렛;디지타이저;Wacom;와콤;Stylus;스타일러스;Eraser;지우"
-"개;Mouse;마우스;"
+"Tablet;태블릿;타블렛;디지타이저;Wacom;와콤;Stylus;스타일러스;Eraser;지우개;"
+"Mouse;마우스;"
 
 #: panels/wacom/gsd-wacom-key-shortcut-button.c:190
 msgid "New shortcut…"
@@ -9609,12 +9640,12 @@ msgstr "컴퓨터 화면에 사용하는 시간을 검토하고 제한합니다"
 #. Translators: Search terms to find the Wellbeing panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/wellbeing/gnome-wellbeing-panel.desktop.in:18
 msgid ""
-"Wellbeing;Screen Time;Breaks;Break Reminders;Health Breaks;Daily "
-"Usage;Screen Limits;Usage Limit;"
+"Wellbeing;Screen Time;Breaks;Break Reminders;Health Breaks;Daily Usage;"
+"Screen Limits;Usage Limit;"
 msgstr ""
 "Wellbeing;건강;복지;Screen Time;화면 시간;Breaks;휴식;Break Reminders;휴식 알"
-"림;Health Breaks;건강 휴식;Daily Usage;일일;사용량;Screen Limits;화면 제"
-"한;Usage Limit;사용 제한;"
+"림;Health Breaks;건강 휴식;Daily Usage;일일;사용량;Screen Limits;화면 제한;"
+"Usage Limit;사용 제한;"
 
 #: panels/wwan/cc-wwan-apn-dialog.c:293
 msgid "Edit"
