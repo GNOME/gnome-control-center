@@ -1089,9 +1089,11 @@ bar_chart_update_accessible_description (CcScreenTimeStatisticsRow *self)
 
       daily_limit_str = cc_util_time_to_string_text (self->daily_limit_minutes * 60 * 1000);
 
-      /* Translators: The first placeholder is a formatted date string. The
-       * second placeholder is a formatted time duration (for example, ‘3 hours’
-       * or ‘25 minutes’). */
+      /* Translators: The first placeholder is a formatted date string
+       * (formatted using the `%x` strftime placeholder, which gives the
+       * preferred date representation for the current locale without the time).
+       * The second placeholder is a formatted time duration (for example,
+       * ‘3 hours’ or ‘25 minutes’). */
       description = g_strdup_printf (_("Bar chart of screen time usage over the "
                                        "week starting %s. A line is overlayed at "
                                        "the %s mark to indicate the "
@@ -1108,7 +1110,9 @@ bar_chart_update_accessible_description (CcScreenTimeStatisticsRow *self)
       retval = g_date_strftime (date_str, sizeof (date_str), "%x", &first_day_of_week);
       g_assert (retval != 0);
 
-      /* Translators: The placeholder is a formatted date string. */
+      /* Translators: The placeholder is a formatted date string (formatted
+       * using the `%x` strftime placeholder, which gives the preferred date
+       * representation for the current locale without the time). */
       description = g_strdup_printf (_("Bar chart of screen time usage over the "
                                        "week starting %s."),
                                      date_str);
