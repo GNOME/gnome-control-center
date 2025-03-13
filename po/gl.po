@@ -20,8 +20,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center-master-po-gl-72290.merged\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2025-03-07 11:33+0000\n"
-"PO-Revision-Date: 2025-03-08 17:31+0100\n"
+"POT-Creation-Date: 2025-03-13 14:46+0000\n"
+"PO-Revision-Date: 2025-03-13 18:56+0100\n"
 "Last-Translator: Fran Dieguez <fran.dieguez@gnome.org>\n"
 "Language-Team: Galician <proxecto@trasno.gal>\n"
 "Language: gl\n"
@@ -2055,12 +2055,12 @@ msgstr "_HDR (rango dinámico alto)"
 msgid "HDR _Brightness"
 msgstr "_Brillo HDR"
 
-#: panels/display/cc-display-settings.ui:113
+#: panels/display/cc-display-settings.ui:114
 msgid "Adjust for _TV"
 msgstr "Axustar para _TV"
 
-#: panels/display/cc-display-settings.ui:121
-#: panels/display/cc-display-settings.ui:135
+#: panels/display/cc-display-settings.ui:122
+#: panels/display/cc-display-settings.ui:136
 msgctxt "display setting"
 msgid "_Scale"
 msgstr "_Escala"
@@ -4786,47 +4786,47 @@ msgid "%d %%"
 msgstr "%d %%"
 
 #. TRANSLATORS: This is the same title as the title from the .ui file, but without mnemonic
-#: panels/power/cc-power-panel.c:206
+#: panels/power/cc-power-panel.c:207
 msgid "Power Saving"
 msgstr "Aforro de enerxí­a"
 
-#: panels/power/cc-power-panel.c:302
+#: panels/power/cc-power-panel.c:303
 msgid "Battery Levels"
 msgstr "Niveis de baterías"
 
 #. Translators: UPS is an Uninterruptible Power Supply:
 #. * https://en.wikipedia.org/wiki/Uninterruptible_power_supply
-#: panels/power/cc-power-panel.c:307
+#: panels/power/cc-power-panel.c:308
 msgid "UPS"
 msgstr "SAI"
 
-#: panels/power/cc-power-panel.c:310
+#: panels/power/cc-power-panel.c:311
 msgid "Battery Level"
 msgstr "Nivel de batería"
 
-#: panels/power/cc-power-panel.c:537
+#: panels/power/cc-power-panel.c:549
 msgid "Suspend"
 msgstr "Suspender"
 
-#: panels/power/cc-power-panel.c:538
+#: panels/power/cc-power-panel.c:550
 msgid "Power Off"
 msgstr "Apagar"
 
-#: panels/power/cc-power-panel.c:539
+#: panels/power/cc-power-panel.c:551
 msgid "Hibernate"
 msgstr "Hibernar"
 
-#: panels/power/cc-power-panel.c:540
+#: panels/power/cc-power-panel.c:552
 msgid "Nothing"
 msgstr "Non facer nada"
 
-#: panels/power/cc-power-panel.c:864
+#: panels/power/cc-power-panel.c:876
 msgid "Performance mode temporarily disabled due to high operating temperature"
 msgstr ""
 "Modo de rendemento desactivado temporalmente debido á temperatura de "
 "operación alta"
 
-#: panels/power/cc-power-panel.c:866
+#: panels/power/cc-power-panel.c:878
 msgid ""
 "Lap detected: performance mode temporarily unavailable. Move the device to a "
 "stable surface to restore."
@@ -4834,11 +4834,11 @@ msgstr ""
 "Colo detectado: o modo de rendemento está desactivado temporalmente. Mova o "
 "dispositivo a unha superficie estábel para restaurar."
 
-#: panels/power/cc-power-panel.c:868
+#: panels/power/cc-power-panel.c:880
 msgid "Performance mode temporarily disabled"
 msgstr "Modo de rendemento temporalmente non dispoñíbel"
 
-#: panels/power/cc-power-panel.c:910
+#: panels/power/cc-power-panel.c:922
 msgid ""
 "Power saver enabled due to low battery. Previous mode will be restored when "
 "battery is charged."
@@ -4847,13 +4847,13 @@ msgstr ""
 "restabelecerase cando a batería estea suficientemente cargada."
 
 #. translators: "%s" is an application name
-#: panels/power/cc-power-panel.c:918
+#: panels/power/cc-power-panel.c:930
 #, c-format
 msgid "Power Saver mode activated by “%s”"
 msgstr "Modo de aforro de enerxía activado por «%s»"
 
 #. translators: "%s" is an application name
-#: panels/power/cc-power-panel.c:922
+#: panels/power/cc-power-panel.c:934
 #, c-format
 msgid "Performance mode activated by “%s”"
 msgstr "Modo de rendemento activado por «%s»"
@@ -4952,17 +4952,25 @@ msgstr "Suspensión automática"
 msgid "On Ba_ttery Power"
 msgstr "Ao usar a enerxía da _batería"
 
-#: panels/power/cc-power-panel.ui:256
+#: panels/power/cc-power-panel.ui:257
 msgid "De_lay"
 msgstr "_Atraso"
 
-#: panels/power/cc-power-panel.ui:268
+#: panels/power/cc-power-panel.ui:269
 msgid "Whe_n Plugged In"
 msgstr "Ao estar enchufado"
 
-#: panels/power/cc-power-panel.ui:275
+#: panels/power/cc-power-panel.ui:277
 msgid "Del_ay"
 msgstr "_Atraso"
+
+#: panels/power/cc-power-panel.ui:289
+msgid ""
+"Disabling automatic suspend will result in higher power consumption. It is "
+"recommended to keep automatic suspend enabled."
+msgstr ""
+"A desactivación da suspensión automática producirá un maior consumo de "
+"enerxía. Recoméndase manter activada a suspensión automática."
 
 #: panels/power/cc-power-profile-row.c:128
 msgctxt "Power profile"
@@ -9488,10 +9496,12 @@ msgstr "%u–%u %s"
 msgid "%u %s–%u %s"
 msgstr "%u %s–%u %s"
 
-#. Translators: The first placeholder is a formatted date string. The
-#. * second placeholder is a formatted time duration (for example, ‘3 hours’
-#. * or ‘25 minutes’).
-#: panels/wellbeing/cc-screen-time-statistics-row.c:1095
+#. Translators: The first placeholder is a formatted date string
+#. * (formatted using the `%x` strftime placeholder, which gives the
+#. * preferred date representation for the current locale without the time).
+#. * The second placeholder is a formatted time duration (for example,
+#. * ‘3 hours’ or ‘25 minutes’).
+#: panels/wellbeing/cc-screen-time-statistics-row.c:1097
 #, c-format
 msgid ""
 "Bar chart of screen time usage over the week starting %s. A line is "
@@ -9501,15 +9511,17 @@ msgstr ""
 "%s. Unha liña está superposta na marca %s para indicar o límite de tempo "
 "configurado."
 
-#. Translators: The placeholder is a formatted date string.
-#: panels/wellbeing/cc-screen-time-statistics-row.c:1112
+#. Translators: The placeholder is a formatted date string (formatted
+#. * using the `%x` strftime placeholder, which gives the preferred date
+#. * representation for the current locale without the time).
+#: panels/wellbeing/cc-screen-time-statistics-row.c:1116
 #, c-format
 msgid "Bar chart of screen time usage over the week starting %s."
 msgstr ""
 "Gráfico de barras de uso de tempo de pantalla durante a semana a partir de "
 "%s."
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:1118
+#: panels/wellbeing/cc-screen-time-statistics-row.c:1122
 #, c-format
 msgid ""
 "Placeholder for a bar chart of screen time usage. No data is currently "
