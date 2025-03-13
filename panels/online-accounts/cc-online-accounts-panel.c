@@ -292,7 +292,6 @@ goa_provider_priority (const char *provider_type)
   static const char *goa_priority[] = {
     "owncloud",     /* Nextcloud */
     "google",       /* Google */
-    "windows_live", /* Microsoft Personal */
     "ms_graph",     /* Microsoft 365 */
     "exchange",     /* Microsoft Exchange */
     "fedora",       /* Fedora */
