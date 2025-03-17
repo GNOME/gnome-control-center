@@ -32,7 +32,8 @@ CcWifiConnectionRow *cc_wifi_connection_row_new                 (NMDeviceWifi  *
                                                                  GPtrArray     *aps,
                                                                  gboolean       checkable,
                                                                  gboolean       known_connection,
-                                                                 gboolean       forgettable);
+                                                                 gboolean       forgettable,
+                                                                 gboolean       activatable);
 
 gboolean             cc_wifi_connection_row_get_checkable       (CcWifiConnectionRow   *row);
 gboolean             cc_wifi_connection_row_get_checked         (CcWifiConnectionRow   *row);

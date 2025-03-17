@@ -383,6 +383,7 @@ cc_wifi_connection_row_get_property (GObject    *object,
     case PROP_KNOWN_CONNECTION:
       g_value_set_boolean (value, self->known_connection);
       break;
+
     case PROP_FORGETTABLE:
       g_value_set_boolean (value, self->forgettable);
       break;
@@ -520,6 +521,7 @@ cc_wifi_connection_row_class_init (CcWifiConnectionRowClass *klass)
                                                   FALSE,
                                                   G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
 
+
   g_object_class_install_properties (object_class,
                                      PROP_LAST,
                                      props);
@@ -582,7 +584,8 @@ cc_wifi_connection_row_new (NMDeviceWifi  *device,
                             GPtrArray     *aps,
                             gboolean       checkable,
                             gboolean       known_connection,
-                            gboolean       forgettable)
+                            gboolean       forgettable,
+                            gboolean       activatable)
 {
   return g_object_new (CC_TYPE_WIFI_CONNECTION_ROW,
                        "device", device,
@@ -591,6 +594,7 @@ cc_wifi_connection_row_new (NMDeviceWifi  *device,
                        "checkable", checkable,
                        "known-connection", known_connection,
                        "forgettable", forgettable,
+                       "activatable", activatable,
                        NULL);
 }
 
