@@ -36,16 +36,10 @@ xml_files = [
   '50-accessibility.xml'
 ]
 
-foreach file: xml_files
-  i18n.merge_file(
-    input: file + '.in',
-    output: file,
-    po_dir: po_dir,
-    data_dirs: its_dir,
-    install: true,
-    install_dir: join_paths(control_center_pkgdatadir, 'keybindings')
-  )
-endforeach
+install_data(
+  xml_files,
+  install_dir: join_paths(control_center_pkgdatadir, 'keybindings')
+)
 
 libkeyboard_shortcuts = static_library(
   'keyboard-shortcuts',
