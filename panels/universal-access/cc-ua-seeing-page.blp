@@ -80,7 +80,7 @@ template $CcUaSeeingPage: Adw.NavigationPage {
           title: _("_Cursor Size");
           subtitle: _("Increase the size of the cursor");
           activated => $ua_cursor_row_activated_cb(template);
-          show-arrow: "True";
+          show-arrow: true;
         }
 
         Adw.SwitchRow sound_keys_row {
@@ -131,28 +131,48 @@ Adw.Dialog text_size_dialog {
       description: _("Set the size at whichtext is displayed in the user interface, without changing font size, when the Large Text setting is active.");
 
       Adw.PreferencesGroup {
-        Scale text_size_scale {
-          margin-start: 20;
-          margin-end: 20;
-          hexpand: true;
+        Adw.PreferencesRow {
+          Box {
+            spacing: 10;
 
-          marks [
-            mark (1.00, bottom, _("Default")),
-            mark (1.05),
-            mark (1.10),
-            mark (1.15),
-            mark (1.20),
-            mark (1.25),
-            mark (1.30),
-          ]
+            Label {
+              label: "A";
+              margin-start: 20;
+            }
 
-          adjustment: Adjustment {
-            lower: 1.00;
-            upper: 1.30;
-            value: 1.00;
-            step-increment: 0.06;
-            page-increment: 0.06;
-          };
+            Scale text_size_scale {
+              margin-top: 10;
+              margin-bottom: 10;
+              hexpand: true;
+
+              marks [
+                mark (1.00),
+                mark (1.05),
+                mark (1.10),
+                mark (1.15),
+                mark (1.20),
+                mark (1.25),
+                mark (1.30),
+              ]
+
+              adjustment: Adjustment {
+                lower: 1.00;
+                upper: 1.30;
+                value: 1.00;
+                step-increment: 0.06;
+                page-increment: 0.06;
+              };
+            }
+
+            Label {
+              label: "A";
+              margin-end: 20;
+
+              styles [
+                "title-1",
+              ]
+            }
+          }
         }
       }
 
