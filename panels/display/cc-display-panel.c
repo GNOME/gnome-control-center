@@ -78,7 +78,6 @@ struct _CcDisplayPanel
   guint           focus_id;
 
   CcNightLightPage *night_light_page;
-  CcListRow        *night_light_row;
 
   UpClient *up_client;
   gboolean lid_is_closed;
@@ -499,15 +498,6 @@ on_config_type_toggled_cb (CcDisplayPanel *self)
 }
 
 static void
-on_night_light_enabled_changed_cb (CcDisplayPanel *self)
-{
-  if (g_settings_get_boolean (self->display_settings, "night-light-enabled"))
-    cc_list_row_set_secondary_label (self->night_light_row, _("On"));
-  else
-    cc_list_row_set_secondary_label (self->night_light_row, _("Off"));
-}
-
-static void
 on_primary_display_selected_item_changed_cb (CcDisplayPanel *self)
 {
   gint idx = adw_combo_row_get_selected (self->primary_display_row);
@@ -608,7 +598,6 @@ cc_display_panel_class_init (CcDisplayPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, display_settings_page);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, escape_shortcut);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, night_light_page);
-  gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, night_light_row);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, primary_display_row);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, single_display_settings_group);
 
@@ -1139,14 +1128,6 @@ cc_display_panel_init (CcDisplayPanel *self)
                            gtk_callback_action_new ((GtkShortcutFunc) on_toplevel_escape_pressed_cb,
                                                     self,
                                                     NULL));
-
-  self->display_settings = g_settings_new (DISPLAY_SCHEMA);
-  g_signal_connect_object (self->display_settings,
-                           "changed::night-light-enabled",
-                           G_CALLBACK (on_night_light_enabled_changed_cb),
-                           self,
-                           G_CONNECT_SWAPPED);
-  on_night_light_enabled_changed_cb (self);
 }
 
 CcDisplayConfigManager *
