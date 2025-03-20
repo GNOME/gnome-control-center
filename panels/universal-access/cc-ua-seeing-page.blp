@@ -69,45 +69,11 @@ template $CcUaSeeingPage: Adw.NavigationPage {
           }
         }
 
-        Adw.PreferencesRow {
-          Box {
-            margin-start: 12;
-            margin-end: 12;
-            margin-top: 6;
-            margin-bottom: 6;
-            orientation: vertical;
-            spacing: 6;
-
-            Label {
-              xalign: 0.0;
-              label: _("_Text Size");
-              use-underline: true;
-            }
-
-            Scale text_size_scale {
-              margin-start: 20;
-              margin-end: 20;
-              hexpand: true;
-
-              marks [
-                mark (1.00, bottom, _("Default")),
-                mark (1.05),
-                mark (1.10),
-                mark (1.15),
-                mark (1.20),
-                mark (1.25),
-                mark (1.30),
-              ]
-
-              adjustment: Adjustment {
-                lower: 1.00;
-                upper: 1.30;
-                value: 1.00;
-                step-increment: 0.06;
-                page-increment: 0.06;
-              };
-            }
-          }
+        $CcListRow {
+          title: _("_Text Size");
+          use-underline: true;
+          show-arrow: true;
+          activated => $adw_dialog_present(text_size_dialog);
         }
 
         $CcListRow cursor_size_row {
@@ -127,6 +93,72 @@ template $CcUaSeeingPage: Adw.NavigationPage {
           title: _("Always Show Scroll_bars");
           subtitle: _("Make scrollbars always visible");
           use-underline: true;
+        }
+      }
+    };
+  };
+}
+
+Adw.Dialog text_size_dialog {
+  title: _("Text Size");
+  content-width: 400;
+  content-height: 300;
+
+  child: Adw.ToolbarView {
+    [top]
+    Adw.HeaderBar {
+      show-start-title-buttons: false;
+      show-end-title-buttons: false;
+
+      [start]
+      Button {
+        label: _("Cancel");
+        clicked => $adw_dialog_close(text_size_dialog);
+      }
+
+      [end]
+      Button {
+        label: _("Apply");
+        clicked => $apply_text_size_changes(template);
+
+        styles [
+          "suggested-action",
+        ]
+      }
+    }
+
+    content: Adw.PreferencesPage {
+      description: _("Set the size at whichtext is displayed in the user interface, without changing font size, when the Large Text setting is active.");
+
+      Adw.PreferencesGroup {
+        Scale text_size_scale {
+          margin-start: 20;
+          margin-end: 20;
+          hexpand: true;
+
+          marks [
+            mark (1.00, bottom, _("Default")),
+            mark (1.05),
+            mark (1.10),
+            mark (1.15),
+            mark (1.20),
+            mark (1.25),
+            mark (1.30),
+          ]
+
+          adjustment: Adjustment {
+            lower: 1.00;
+            upper: 1.30;
+            value: 1.00;
+            step-increment: 0.06;
+            page-increment: 0.06;
+          };
+        }
+      }
+
+      Adw.PreferencesGroup {
+        Label text_size_preview_label {
+          label: _("This preview shows the size of text...");
         }
       }
     };

@@ -61,6 +61,9 @@ struct _CcUaSeeingPage
 
   GDBusProxy         *proxy;
 
+  AdwDialog          *text_size_dialog;
+  GtkWidget          *text_size_preview_label;
+
   GSettings          *kb_settings;
   GSettings          *interface_settings;
   GSettings          *application_settings;
@@ -69,13 +72,25 @@ struct _CcUaSeeingPage
 
 G_DEFINE_TYPE (CcUaSeeingPage, cc_ua_seeing_page, ADW_TYPE_NAVIGATION_PAGE)
 
+static void
+apply_text_size_changes (CcUaSeeingPage *self)
+{
+  g_settings_set_double (self->interface_settings, KEY_TEXT_SCALING_FACTOR,
+                         gtk_range_get_value (GTK_RANGE (self->text_size_scale)));
+  adw_dialog_close (self->text_size_dialog);
+}
+
+
 static gboolean
 ua_text_size_change_value (GtkRange      *text_size_range,
                            GtkScrollType *scroll,
-                           gdouble        value)
+                           gdouble        value,
+                           gpointer       user_data)
 {
   /* Always round to 0.05 multiples */
   gtk_range_set_value (text_size_range, round (value / 0.05) * 0.05);
+
+  // TODO: resize self->text_size_preview_label
 
   return TRUE;
 }
@@ -267,6 +282,10 @@ cc_ua_seeing_page_class_init (CcUaSeeingPageClass *klass)
 
   gtk_widget_class_bind_template_callback (widget_class, ua_cursor_row_activated_cb);
   gtk_widget_class_bind_template_callback (widget_class, configure_screen_reader_activated_cb);
+  gtk_widget_class_bind_template_child (widget_class, CcUaSeeingPage, text_size_dialog);
+  gtk_widget_class_bind_template_child (widget_class, CcUaSeeingPage, text_size_preview_label);
+
+  gtk_widget_class_bind_template_callback (widget_class, apply_text_size_changes);
 }
 
 static void
@@ -295,12 +314,8 @@ cc_ua_seeing_page_init (CcUaSeeingPage *self)
                    G_SETTINGS_BIND_DEFAULT);
 
   /* Text Size */
-  g_settings_bind (self->interface_settings, KEY_TEXT_SCALING_FACTOR,
-                   gtk_range_get_adjustment (GTK_RANGE (self->text_size_scale)), "value",
-                   G_SETTINGS_BIND_DEFAULT);
-
   g_signal_connect (GTK_RANGE (self->text_size_scale), "change-value",
-                    G_CALLBACK (ua_text_size_change_value), NULL);
+                    G_CALLBACK (ua_text_size_change_value), self);
 
   /* Sound Keys */
   g_settings_bind (self->kb_settings, KEY_TOGGLEKEYS_ENABLED,
