@@ -366,7 +366,7 @@ on_printer_rename_cb (GObject      *source_object,
   g_signal_emit_by_name (self, "printer-renamed", pp_printer_get_name (PP_PRINTER (source_object)));
 }
 
-static gboolean
+static void
 show_printer_details_response_cb (PpPrinterEntry  *self,
                                   PpDetailsDialog *dialog)
 {
@@ -391,7 +391,7 @@ show_printer_details_response_cb (PpPrinterEntry  *self,
 
   g_signal_emit_by_name (self, "printer-changed");
 
-  return GDK_EVENT_PROPAGATE;
+  adw_dialog_force_close (ADW_DIALOG (dialog));
 }
 
 static void
