@@ -14,8 +14,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2025-01-24 10:56+0000\n"
-"PO-Revision-Date: 2025-02-01 22:11+0100\n"
+"POT-Creation-Date: 2025-03-21 18:19+0000\n"
+"PO-Revision-Date: 2025-03-25 00:34+0100\n"
 "Last-Translator: Jose Riha <jose1711@gmail.com>\n"
 "Language-Team: Slovak <gnome-sk-list@gnome.org>\n"
 "Language: sk\n"
@@ -26,37 +26,136 @@ msgstr ""
 "X-Launchpad-Export-Date: 2012-10-06 09:48+0000\n"
 "X-Generator: Poedit 3.4.2\n"
 
-#: panels/applications/cc-applications-panel.c:850
+# GtkLabel label
+#: global-shortcuts-provider/cc-global-shortcut-dialog.ui:6
+#| msgid "Keyboard Shortcuts"
+msgid "Add Keyboard Shortcuts"
+msgstr "Pridať klávesové skratky"
+
+# GtkButton label
+#: global-shortcuts-provider/cc-global-shortcut-dialog.ui:15
+#: panels/applications/cc-application-shortcut-dialog.c:152
+#: panels/color/cc-color-calibrate.ui:21
+#: panels/common/cc-language-chooser.ui:15
+#: panels/display/cc-display-panel.ui:32 panels/display/cc-display-panel.ui:184
+#: panels/display/cc-display-panel.ui:246
+#: panels/keyboard/cc-input-chooser.ui:15
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:162
+#: panels/keyboard/cc-keyboard-shortcut-editor.ui:12
+#: panels/network/cc-net-proxy-page.ui:14
+#: panels/network/cc-wifi-hotspot-dialog.ui:142
+#: panels/network/cc-wifi-panel.ui:241
+#: panels/network/connection-editor/ce-page-details.c:89
+#: panels/network/connection-editor/connection-editor.ui:16
+#: panels/printers/pp-jobs-dialog.ui:125
+#: panels/printers/pp-new-printer-dialog.ui:65
+#: panels/printers/pp-ppd-selection-dialog.ui:17
+#: panels/privacy/usage/cc-usage-page.ui:125
+#: panels/privacy/usage/cc-usage-page.ui:136
+#: panels/privacy/usage/cc-usage-page.ui:147
+#: panels/system/region/cc-format-chooser.ui:32
+#: panels/system/users/cc-add-user-dialog.ui:24
+#: panels/system/users/cc-avatar-chooser.c:89
+#: panels/system/users/cc-enterprise-login-dialog.ui:44
+#: panels/system/users/cc-fingerprint-dialog.c:1400
+#: panels/system/users/cc-fingerprint-dialog.ui:17
+#: panels/system/users/cc-password-dialog.ui:15
+#: panels/system/users/cc-user-page.ui:223
+#: panels/system/users/data/join-dialog.ui:17
+#: panels/wwan/cc-wwan-mode-dialog.ui:32
+#: panels/wwan/cc-wwan-network-dialog.ui:109
+#: panels/wwan/cc-wwan-sim-lock-dialog.ui:239
+msgid "_Cancel"
+msgstr "_Zrušiť"
+
+#: global-shortcuts-provider/cc-global-shortcut-dialog.ui:23
+#: panels/color/cc-color-panel.ui:349 panels/keyboard/cc-input-chooser.ui:23
+#: panels/keyboard/cc-keyboard-shortcut-editor.ui:30
+#: panels/network/connection-editor/net-connection-editor.c:653
+#: panels/printers/pp-new-printer-dialog.ui:96
+#: panels/system/users/cc-add-user-dialog.c:362
+#: panels/system/users/cc-add-user-dialog.ui:32
+#: panels/system/users/cc-add-user-dialog.ui:153
+#: panels/system/users/cc-enterprise-login-dialog.ui:52
+msgid "_Add"
+msgstr "P_ridať"
+
+#: global-shortcuts-provider/cc-global-shortcut-dialog.ui:36
+msgid ""
+"Added keyboard shortcuts will be available globally, and can be changed in "
+"the application’s panel in Settings"
+msgstr ""
+"Pridané klávesové skratky budú dostupné globálne a je ich možné meniť v paneli aplikácie v Nastaveniach"
+
+# tab
+#: panels/applications/cc-application-shortcut-dialog.c:143
+#| msgid "Reset All Shortcuts?"
+msgid "Remove All Shortcuts?"
+msgstr "Odstrániť všetky skratky?"
+
+#: panels/applications/cc-application-shortcut-dialog.c:148
+#, c-format
+msgid ""
+"All actions from %s that have been registered for global shortcuts will be "
+"removed."
+msgstr ""
+"Všetky akcie od %s, ktoré boli registrované pre globálne skratky, budú odobrané."
+
+# button
+#: panels/applications/cc-application-shortcut-dialog.c:153
+#: panels/keyboard/cc-keyboard-shortcut-editor.ui:19
+#: panels/system/users/cc-user-page.ui:224
+msgid "_Remove"
+msgstr "O_dstrániť"
+
+# GtkToolButton label
+#: panels/applications/cc-application-shortcut-dialog.c:183
+#| msgid "Remove Shortcut"
+msgid "_Remove All Shortcuts"
+msgstr "_Odstrániť všetky skratky"
+
+#: panels/applications/cc-application-shortcut-dialog.c:263
+#, c-format
+msgid "%s has registered the following global shortcuts"
+msgstr "%s má zaregistrované nasledujúce globálne skratky"
+
+# tab
+#: panels/applications/cc-application-shortcut-dialog.ui:5
+#| msgid "Shortcuts"
+msgid "Global Shortcuts"
+msgstr "Globálne skratky"
+
+#: panels/applications/cc-applications-panel.c:881
 msgid "System Bus"
 msgstr "Zbernica systému"
 
 # GtkLabel
-#: panels/applications/cc-applications-panel.c:850
-#: panels/applications/cc-applications-panel.c:852
-#: panels/applications/cc-applications-panel.c:865
-#: panels/applications/cc-applications-panel.c:870
+#: panels/applications/cc-applications-panel.c:881
+#: panels/applications/cc-applications-panel.c:883
+#: panels/applications/cc-applications-panel.c:896
+#: panels/applications/cc-applications-panel.c:901
 msgid "Full access"
 msgstr "Plný prístup"
 
 # DK: zaznam v historii relacie
-#: panels/applications/cc-applications-panel.c:852
+#: panels/applications/cc-applications-panel.c:883
 msgid "Session Bus"
 msgstr "Zbernica relácie"
 
 # label
-#: panels/applications/cc-applications-panel.c:856
+#: panels/applications/cc-applications-panel.c:887
 #: panels/privacy/bolt/cc-bolt-page.ui:164
 #: panels/privacy/bolt/cc-bolt-page.ui:202
 #: panels/privacy/cc-privacy-panel.ui:72
 msgid "Devices"
 msgstr "Zariadenia"
 
-#: panels/applications/cc-applications-panel.c:856
+#: panels/applications/cc-applications-panel.c:887
 msgid "Full access to /dev"
 msgstr "Plný prístup k adresáru /dev"
 
 # desktop entry name
-#: panels/applications/cc-applications-panel.c:860
+#: panels/applications/cc-applications-panel.c:891
 #: panels/network/cc-network-panel.ui:8
 #: panels/network/gnome-network-panel.desktop.in:3
 #: panels/network/network-mobile.ui:235 panels/wwan/cc-wwan-device-page.ui:61
@@ -65,49 +164,53 @@ msgid "Network"
 msgstr "Sieť"
 
 # GtkLabel label
-#: panels/applications/cc-applications-panel.c:860
+#: panels/applications/cc-applications-panel.c:891
 msgid "Has network access"
 msgstr "Má prístup k sieti"
 
-#: panels/applications/cc-applications-panel.c:865
-#: panels/applications/cc-applications-panel.c:867
+#: panels/applications/cc-applications-panel.c:896
+#: panels/applications/cc-applications-panel.c:898
 #: panels/search/cc-search-locations-page.c:421
 msgid "Home"
 msgstr "Domov"
 
-#: panels/applications/cc-applications-panel.c:867
-#: panels/applications/cc-applications-panel.c:872
+#: panels/applications/cc-applications-panel.c:898
+#: panels/applications/cc-applications-panel.c:903
 msgid "Read-only"
 msgstr "Iba na čítanie"
 
 # Overenie totožnosti
 # GtkListStore item
-#: panels/applications/cc-applications-panel.c:870
-#: panels/applications/cc-applications-panel.c:872
+#: panels/applications/cc-applications-panel.c:901
+#: panels/applications/cc-applications-panel.c:903
 msgid "File System"
 msgstr "Systém súborov"
 
-#: panels/applications/cc-applications-panel.c:876
+#: panels/applications/cc-applications-panel.c:907
 #: panels/keyboard/01-launchers.xml.in:6
-#: shell/appdata/org.gnome.Settings.appdata.xml.in.in:7 shell/cc-window.c:795
+#: shell/appdata/org.gnome.Settings.appdata.xml.in.in:7 shell/cc-window.c:804
 #: shell/cc-window.ui:18 shell/org.gnome.Settings.desktop.in:3
 msgid "Settings"
 msgstr "Nastavenia"
 
-#: panels/applications/cc-applications-panel.c:876
+#: panels/applications/cc-applications-panel.c:907
 msgid "Can change settings"
 msgstr "Môže meniť nastavenia"
 
-#: panels/applications/cc-applications-panel.c:878
+#. TRANSLATORS: %s is an app name.
+#: panels/applications/cc-applications-panel.c:911
 #, c-format
+#| msgid ""
+#| "<b>%s</b> requires access to the following system resources. To stop this "
+#| "access, the app must be removed."
 msgid ""
-"<b>%s</b> requires access to the following system resources. To stop this "
-"access, the app must be removed."
+"%s requires access to the following system resources. To stop this access, "
+"the app must be removed."
 msgstr ""
 "Aplikácia <b>%s</b> žiada prístup k nasledujúcim systémovým prostriedkom. "
 "Pre zamedzenie tohto prístupu musíte aplikáciu odobrať."
 
-#: panels/applications/cc-applications-panel.c:882
+#: panels/applications/cc-applications-panel.c:915
 #, c-format
 msgid "%u permission"
 msgid_plural "%u permissions"
@@ -116,18 +219,18 @@ msgstr[1] "%u oprávnenie"
 msgstr[2] "%u oprávnenia"
 
 # GtkLabel label
-#: panels/applications/cc-applications-panel.c:1054
+#: panels/applications/cc-applications-panel.c:1087
 msgid "Remove Link Type"
 msgstr "Odstrániť typ odkazu"
 
 # Overenie totožnosti
 # GtkListStore item
-#: panels/applications/cc-applications-panel.c:1085
+#: panels/applications/cc-applications-panel.c:1118
 msgid "Remove File Type"
 msgstr "Odstrániť typ súboru"
 
 # GtkLabel label
-#: panels/applications/cc-applications-panel.c:1217
+#: panels/applications/cc-applications-panel.c:1251
 #, c-format
 msgid "%u type"
 msgid_plural "%u types"
@@ -135,18 +238,31 @@ msgstr[0] "%u typov"
 msgstr[1] "%u typ"
 msgstr[2] "%u typy"
 
-#: panels/applications/cc-applications-panel.c:1224
+#. TRANSLATORS: %s is an app name.
+#: panels/applications/cc-applications-panel.c:1260
 #, c-format
-msgid "<b>%s</b> is used to open the following types of files and links"
-msgstr "<b>%s</b> sa používa na otváranie nasledovných typov súborov a odkazov"
+#| msgid "<b>%s</b> is used to open the following types of files and links"
+msgid "%s is used to open the following types of files and links"
+msgstr "%s sa používa na otváranie nasledovných typov súborov a odkazov"
 
 #. TRANSLATORS: %s is an app name.
-#: panels/applications/cc-applications-panel.c:1265
+#: panels/applications/cc-applications-panel.c:1303
 #, c-format
-msgid "How much disk space <b>%s</b> is occupying with app data and caches"
+#| msgid "How much disk space <b>%s</b> is occupying with app data and caches"
+msgid "How much disk space %s is occupying with app data and caches"
 msgstr ""
-"Koľko priestoru na disku obsadzuje <b>%s</b> svojimi údajmi a vyrovnávacími "
+"Koľko priestoru na disku zaberá %s svojimi údajmi a vyrovnávacími "
 "pamäťami"
+
+#: panels/applications/cc-applications-panel.c:1468
+#, c-format
+#| msgid "%u active"
+#| msgid_plural "%u active"
+msgid "%u action"
+msgid_plural "%u actions"
+msgstr[0] "%u akcií"
+msgstr[1] "%u akcia"
+msgstr[2] "%u akcie"
 
 #: panels/applications/cc-applications-panel.ui:7
 #: panels/applications/gnome-applications-panel.desktop.in:3
@@ -167,18 +283,18 @@ msgid "Set which apps open links, files, and media"
 msgstr "Nastavte, ktoré aplikácie majú otvárať odkazy, súbory a nosiče"
 
 #: panels/applications/cc-applications-panel.ui:84
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:94
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:91
 #: panels/printers/cc-printers-panel.ui:100
 #: panels/system/datetime/cc-tz-dialog.ui:42
-#: panels/system/region/cc-format-chooser.ui:169 shell/cc-panel-list.ui:44
+#: panels/system/region/cc-format-chooser.ui:128 shell/cc-panel-list.ui:44
 msgid "No Results Found"
 msgstr "Nenašli sa žiadne výsledky"
 
 #: panels/applications/cc-applications-panel.ui:85
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:95
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:92
 #: panels/printers/cc-printers-panel.ui:101
 #: panels/system/datetime/cc-tz-dialog.ui:43
-#: panels/system/region/cc-format-chooser.ui:170 shell/cc-panel-list.ui:45
+#: panels/system/region/cc-format-chooser.ui:129 shell/cc-panel-list.ui:45
 msgid "Try a different search"
 msgstr "Skúste vyhľadať niečo iné"
 
@@ -394,76 +510,86 @@ msgstr "P_ožadované oprávnenia"
 msgid "System permissions that the app requires"
 msgstr "Systémové oprávnenia vyžadované aplikáciou"
 
+# tab
+#: panels/applications/cc-applications-panel.ui:412
+#| msgid "Shortcuts"
+msgid "Global S_hortcuts"
+msgstr "Globálne _skratky"
+
+#: panels/applications/cc-applications-panel.ui:413
+msgid "Global actions that have been registered for use"
+msgstr "Globálne akcie, ktoré boli zaregistrované na použitie"
+
 # GtkLabel label
-#: panels/applications/cc-applications-panel.ui:415
+#: panels/applications/cc-applications-panel.ui:423
 #: panels/mouse/cc-mouse-panel.ui:67 panels/mouse/cc-mouse-panel.ui:203
 #: panels/multitasking/cc-multitasking-panel.ui:15
 #: panels/power/cc-power-panel.ui:161
 msgid "General"
 msgstr "Všeobecné"
 
-#: panels/applications/cc-applications-panel.ui:418
+#: panels/applications/cc-applications-panel.ui:426
 msgid "_Files &amp; Links"
 msgstr "_Súbory a odkazy"
 
-#: panels/applications/cc-applications-panel.ui:419
+#: panels/applications/cc-applications-panel.ui:427
 msgid "File and link types that are opened by the app"
 msgstr "Typy súborov a odkazov, ktoré sú otvárané aplikáciou"
 
-#: panels/applications/cc-applications-panel.ui:427
+#: panels/applications/cc-applications-panel.ui:435
 msgid "S_torage"
 msgstr "Ú_ložisko"
 
-#: panels/applications/cc-applications-panel.ui:428
+#: panels/applications/cc-applications-panel.ui:436
 msgid "Disk space being used"
 msgstr "Využité miesto na disku"
 
-#: panels/applications/cc-applications-panel.ui:448
+#: panels/applications/cc-applications-panel.ui:456
 msgid "Required Permissions"
 msgstr "Vyžadované oprávnenia"
 
-#: panels/applications/cc-applications-panel.ui:479
+#: panels/applications/cc-applications-panel.ui:487
 msgid "Files & Links"
 msgstr "Súbory a odkazy"
 
 # Overenie totožnosti
 # GtkListStore item
-#: panels/applications/cc-applications-panel.ui:490
+#: panels/applications/cc-applications-panel.ui:498
 msgid "File Types"
 msgstr "Typy súborov"
 
 # GtkLabel label
-#: panels/applications/cc-applications-panel.ui:495
+#: panels/applications/cc-applications-panel.ui:503
 msgid "Link Types"
 msgstr "Typy odkazov"
 
 # GtkButton label
-#: panels/applications/cc-applications-panel.ui:502
+#: panels/applications/cc-applications-panel.ui:510
 msgid "_Reset"
 msgstr "_Vrátiť predvolené"
 
-#: panels/applications/cc-applications-panel.ui:522
+#: panels/applications/cc-applications-panel.ui:530
 msgid "Storage"
 msgstr "Úložisko"
 
 # GtkButton label
-#: panels/applications/cc-applications-panel.ui:535
+#: panels/applications/cc-applications-panel.ui:543
 msgid "App"
 msgstr "Aplikácia"
 
-#: panels/applications/cc-applications-panel.ui:543
+#: panels/applications/cc-applications-panel.ui:551
 msgid "Data"
 msgstr "Údaje"
 
-#: panels/applications/cc-applications-panel.ui:551
+#: panels/applications/cc-applications-panel.ui:559
 msgid "Cache"
 msgstr "Vyrovnávacia pamäť"
 
-#: panels/applications/cc-applications-panel.ui:559
+#: panels/applications/cc-applications-panel.ui:567
 msgid "Total"
 msgstr "Celkom"
 
-#: panels/applications/cc-applications-panel.ui:571
+#: panels/applications/cc-applications-panel.ui:579
 msgid "_Clear Cache"
 msgstr "V_yčistiť vyrovnávaciu pamäť"
 
@@ -910,7 +1036,6 @@ msgstr ""
 
 # desktop entry name
 #: panels/background/cc-background-chooser.c:169
-#| msgid "Background"
 msgid "Background removed"
 msgstr "Pozadie odstránené"
 
@@ -935,7 +1060,6 @@ msgstr "Odstrániť pozadie"
 
 # file chooser dialog title
 #: panels/background/cc-background-chooser.c:470
-#| msgid "Select a picture"
 msgid "Select Picture"
 msgstr "Vyberte obrázok"
 
@@ -1010,7 +1134,6 @@ msgid "Da_rk"
 msgstr "_Tmavý"
 
 #: panels/background/cc-background-panel.ui:122
-#| msgid "Accent color"
 msgid "Accent Color"
 msgstr "Farba zvýraznenia"
 
@@ -1190,40 +1313,6 @@ msgstr "Nemanipulujte s kalibračným zariadením počas kalibrácie"
 #: panels/color/cc-color-calibrate.ui:8
 msgid "Display Calibration"
 msgstr "Kalibrácia displeja"
-
-# GtkButton label
-#: panels/color/cc-color-calibrate.ui:21
-#: panels/common/cc-language-chooser.ui:15
-#: panels/display/cc-display-panel.ui:32 panels/display/cc-display-panel.ui:184
-#: panels/display/cc-display-panel.ui:246
-#: panels/keyboard/cc-input-chooser.ui:15
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:162
-#: panels/keyboard/cc-keyboard-shortcut-editor.ui:12
-#: panels/network/cc-net-proxy-page.ui:14
-#: panels/network/cc-wifi-hotspot-dialog.ui:142
-#: panels/network/cc-wifi-panel.ui:241
-#: panels/network/connection-editor/ce-page-details.c:89
-#: panels/network/connection-editor/connection-editor.ui:16
-#: panels/printers/pp-jobs-dialog.ui:125
-#: panels/printers/pp-new-printer-dialog.ui:65
-#: panels/printers/pp-ppd-selection-dialog.ui:17
-#: panels/privacy/usage/cc-usage-page.ui:125
-#: panels/privacy/usage/cc-usage-page.ui:136
-#: panels/privacy/usage/cc-usage-page.ui:147
-#: panels/system/region/cc-format-chooser.ui:32
-#: panels/system/users/cc-add-user-dialog.ui:24
-#: panels/system/users/cc-avatar-chooser.c:92
-#: panels/system/users/cc-enterprise-login-dialog.ui:44
-#: panels/system/users/cc-fingerprint-dialog.c:1400
-#: panels/system/users/cc-fingerprint-dialog.ui:17
-#: panels/system/users/cc-password-dialog.ui:15
-#: panels/system/users/cc-user-page.ui:223
-#: panels/system/users/data/join-dialog.ui:17
-#: panels/wwan/cc-wwan-mode-dialog.ui:32
-#: panels/wwan/cc-wwan-network-dialog.ui:109
-#: panels/wwan/cc-wwan-sim-lock-dialog.ui:239
-msgid "_Cancel"
-msgstr "_Zrušiť"
 
 # GtkButton label
 #. This starts the calibration process
@@ -1547,17 +1636,6 @@ msgstr "Pridanie profilu"
 msgid "_Import File…"
 msgstr "_Importovať súbor…"
 
-#: panels/color/cc-color-panel.ui:349 panels/keyboard/cc-input-chooser.ui:23
-#: panels/keyboard/cc-keyboard-shortcut-editor.ui:30
-#: panels/network/connection-editor/net-connection-editor.c:653
-#: panels/printers/pp-new-printer-dialog.ui:96
-#: panels/system/users/cc-add-user-dialog.c:362
-#: panels/system/users/cc-add-user-dialog.ui:32
-#: panels/system/users/cc-add-user-dialog.ui:153
-#: panels/system/users/cc-enterprise-login-dialog.ui:52
-msgid "_Add"
-msgstr "P_ridať"
-
 # GtkLabel label
 #: panels/color/cc-color-panel.ui:418
 msgid ""
@@ -1584,7 +1662,6 @@ msgid "_Enable"
 msgstr "Povo_liť"
 
 #: panels/color/cc-color-panel.ui:475
-#| msgid "Save Profile"
 msgid "Enable profile"
 msgstr "Povoliť profil"
 
@@ -1810,7 +1887,6 @@ msgstr "Tento profil môže byť už nepresný"
 
 # atk
 #: panels/color/gnome-color-panel.desktop.in:3
-#| msgid "Enable color management for %s"
 msgid "Color Management"
 msgstr "Správa farieb"
 
@@ -1858,6 +1934,7 @@ msgid "More…"
 msgstr "Viac…"
 
 #: panels/common/cc-list-row-info-button.ui:6
+#: panels/wellbeing/cc-wellbeing-panel.ui:21
 msgid "More Information"
 msgstr "Viac informácií"
 
@@ -1885,30 +1962,30 @@ msgstr "_Odomknúť…"
 msgid "Error — some settings cannot be unlocked"
 msgstr "Chyba — niektoré nastavenia sa nedajú odomknúť"
 
-#: panels/common/cc-timelike-editor.ui:25
+#: panels/common/cc-timelike-editor.ui:17
 msgid "Increment Hour"
 msgstr "Navýšiť hodinu"
 
-#: panels/common/cc-timelike-editor.ui:53
+#: panels/common/cc-timelike-editor.ui:42
 msgid "Increment Minute"
 msgstr "Navýšiť minútu"
 
-#: panels/common/cc-timelike-editor.ui:73
+#: panels/common/cc-timelike-editor.ui:57
 msgid "Time"
 msgstr "Čas"
 
-#: panels/common/cc-timelike-editor.ui:94
+#: panels/common/cc-timelike-editor.ui:75
 msgid "Decrement Hour"
 msgstr "Znížiť hodinu"
 
-#: panels/common/cc-timelike-editor.ui:122
+#: panels/common/cc-timelike-editor.ui:100
 msgid "Decrement Minute"
 msgstr "Znížiť minútu"
 
 # naposledy použité
 #: panels/common/cc-util.c:130
 #: panels/network/connection-editor/ce-page-details.c:188
-#: panels/wellbeing/cc-screen-time-statistics-row.c:928
+#: panels/wellbeing/cc-screen-time-statistics-row.c:973
 msgid "Today"
 msgstr "Dnes"
 
@@ -2087,67 +2164,67 @@ msgstr "_Nočné osvetlenie"
 msgid "Night Light"
 msgstr "Nočné osvetlenie"
 
-#: panels/display/cc-display-settings.c:119
+#: panels/display/cc-display-settings.c:127
 msgctxt "Display rotation"
 msgid "Landscape"
 msgstr "Na šírku"
 
-#: panels/display/cc-display-settings.c:122
+#: panels/display/cc-display-settings.c:130
 msgctxt "Display rotation"
 msgid "Portrait Right"
 msgstr "Na výšku doprava"
 
-#: panels/display/cc-display-settings.c:125
+#: panels/display/cc-display-settings.c:133
 msgctxt "Display rotation"
 msgid "Portrait Left"
 msgstr "Na výšku doľava"
 
-#: panels/display/cc-display-settings.c:128
+#: panels/display/cc-display-settings.c:136
 msgctxt "Display rotation"
 msgid "Landscape (flipped)"
 msgstr "Na šírku (obrátene)"
 
-#: panels/display/cc-display-settings.c:139
+#: panels/display/cc-display-settings.c:147
 msgctxt "Display rotation"
 msgid "Portrait"
 msgstr "Na výšku"
 
-#: panels/display/cc-display-settings.c:142
+#: panels/display/cc-display-settings.c:150
 msgctxt "Display rotation"
 msgid "Landscape Right"
 msgstr "Na šírku"
 
-#: panels/display/cc-display-settings.c:145
+#: panels/display/cc-display-settings.c:153
 msgctxt "Display rotation"
 msgid "Landscape Left"
 msgstr "Na šírku vľavo"
 
-#: panels/display/cc-display-settings.c:148
+#: panels/display/cc-display-settings.c:156
 msgctxt "Display rotation"
 msgid "Portrait (flipped)"
 msgstr "Na výšku (preklopené)"
 
-#: panels/display/cc-display-settings.c:159
+#: panels/display/cc-display-settings.c:167
 msgctxt "Display rotation"
 msgid "Upright"
 msgstr "Zvislý"
 
-#: panels/display/cc-display-settings.c:162
+#: panels/display/cc-display-settings.c:170
 msgctxt "Display rotation"
 msgid "Right"
 msgstr "Doprava"
 
-#: panels/display/cc-display-settings.c:165
+#: panels/display/cc-display-settings.c:173
 msgctxt "Display rotation"
 msgid "Left"
 msgstr "Doľava"
 
-#: panels/display/cc-display-settings.c:168
+#: panels/display/cc-display-settings.c:176
 msgctxt "Display rotation"
 msgid "Flipped"
 msgstr "Preklopený"
 
-#: panels/display/cc-display-settings.c:234
+#: panels/display/cc-display-settings.c:242
 msgid "%.2lf Hz"
 msgstr "%.2lf Hz"
 
@@ -2156,12 +2233,12 @@ msgstr "%.2lf Hz"
 #. * 2. The formatting sequence is a range separated by an en-dash
 #. *    (unicode "\u2013"). For example: "Variable (48–144.97 Hz)"
 #.
-#: panels/display/cc-display-settings.c:251
+#: panels/display/cc-display-settings.c:259
 msgid "Variable (%d–%.2lf Hz)"
 msgstr "Variabilná (%d – %.2lf Hz)"
 
 #. Translators: "Variable" is an adjective that refers to the refresh rate
-#: panels/display/cc-display-settings.c:258
+#: panels/display/cc-display-settings.c:266
 msgid "Variable (up to %.2lf Hz)"
 msgstr "Variabilná (do %.2lf Hz)"
 
@@ -2189,11 +2266,21 @@ msgid "Re_fresh Rate"
 msgstr "Obno_vovacia frekvencia"
 
 #: panels/display/cc-display-settings.ui:84
+msgid "_HDR (High Dynamic Range)"
+msgstr "_HDR (Vysoký dynamický rozsah)"
+
+# GtkLabel
+#: panels/display/cc-display-settings.ui:92
+#| msgid "_Brightness"
+msgid "HDR _Brightness"
+msgstr "_Jas HDR"
+
+#: panels/display/cc-display-settings.ui:114
 msgid "Adjust for _TV"
 msgstr "Prispôsobiť pre _TV"
 
-#: panels/display/cc-display-settings.ui:92
-#: panels/display/cc-display-settings.ui:106
+#: panels/display/cc-display-settings.ui:122
+#: panels/display/cc-display-settings.ui:136
 msgctxt "display setting"
 msgid "_Scale"
 msgstr "Š_kálovať"
@@ -2420,12 +2507,6 @@ msgstr "Domovský priečinok"
 msgid "Search"
 msgstr "Vyhľadávanie"
 
-# KeyListEntry description
-#: panels/keyboard/01-launchers.xml.in:16
-msgctxt "keybinding"
-msgid "Search"
-msgstr "Hľadať"
-
 # KeyListEntries name
 #: panels/keyboard/01-system.xml.in:2 panels/privacy/cc-privacy-panel.ui:18
 #: panels/system/cc-system-panel.ui:6
@@ -2446,7 +2527,6 @@ msgstr "Reštartovať"
 
 # label
 #: panels/keyboard/01-system.xml.in:8
-#| msgid "Power Off"
 msgid "Power off"
 msgstr "Vypnúť"
 
@@ -2558,9 +2638,9 @@ msgid "Remove"
 msgstr "Odstrániť"
 
 # KeyListEntry name
-#: panels/keyboard/cc-keyboard-manager.c:488
-#: panels/keyboard/cc-keyboard-manager.c:496
-#: panels/keyboard/cc-keyboard-manager.c:936
+#: panels/keyboard/cc-keyboard-manager.c:507
+#: panels/keyboard/cc-keyboard-manager.c:515
+#: panels/keyboard/cc-keyboard-manager.c:1074
 msgid "Custom Shortcuts"
 msgstr "Vlastné skratky"
 
@@ -2623,11 +2703,6 @@ msgid "Compose Key"
 msgstr "Kláves Compose"
 
 #: panels/keyboard/cc-keyboard-panel.c:80
-#| msgid ""
-#| "The compose key allows a wide variety of characters to be entered. To use "
-#| "it, press compose then a sequence of characters.  For example, compose "
-#| "key followed by <b>C</b> and <b>o</b> will enter <b>©</b>, <b>a</b> "
-#| "followed by <b>'</b> will enter <b>á</b>."
 msgid ""
 "The compose key allows a wide variety of characters to be entered. To use "
 "it, press compose then a sequence of characters.  For example, compose key "
@@ -2667,7 +2742,7 @@ msgid "Insert"
 msgstr "Insert"
 
 # GtkLabel label
-#: panels/keyboard/cc-keyboard-panel.c:213
+#: panels/keyboard/cc-keyboard-panel.c:209
 #, c-format
 msgid ""
 "Input sources can be switched using the %s keyboard shortcut.\n"
@@ -2728,7 +2803,7 @@ msgstr "Kláves _Compose"
 
 # GtkLabel label
 #: panels/keyboard/cc-keyboard-panel.ui:79
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:9
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:6
 msgid "Keyboard Shortcuts"
 msgstr "Klávesové skratky"
 
@@ -2737,16 +2812,16 @@ msgstr "Klávesové skratky"
 msgid "_View and Customize Shortcuts"
 msgstr "_Zobraziť a prispôsobiť skratky"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:37
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:34
 msgid "Search shortcuts"
 msgstr "Vyhľadajte skratky"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:41
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:38
 msgid "Search Shortcuts"
 msgstr "Vyhľadajte skratky"
 
 # GtkListStore item; page
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:74
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:71
 msgid "_Reset All…"
 msgstr "_Obnoviť všetky…"
 
@@ -2815,15 +2890,9 @@ msgstr "Zadajte novú skratku na zmenu akcie <b>%s</b>"
 
 # PM: že ide o klávesovú vyplýva z kontextu
 # GtkDialog title
-#: panels/keyboard/cc-keyboard-shortcut-editor.c:932
+#: panels/keyboard/cc-keyboard-shortcut-editor.c:929
 msgid "Add Custom Shortcut"
 msgstr "Pridanie vlastnej skratky"
-
-# button
-#: panels/keyboard/cc-keyboard-shortcut-editor.ui:19
-#: panels/system/users/cc-user-page.ui:224
-msgid "_Remove"
-msgstr "O_dstrániť"
 
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:41
 msgid "Re_place"
@@ -2893,7 +2962,7 @@ msgstr[1] "%d upravená"
 msgstr[2] "%d upravené"
 
 # GtkToolButton label
-#: panels/keyboard/cc-keyboard-shortcut-group.c:158
+#: panels/keyboard/cc-keyboard-shortcut-group.c:157
 msgid "Add a Shortcut"
 msgstr "Pridať skratku"
 
@@ -3348,7 +3417,7 @@ msgstr "_Proxy"
 
 # GtkEntry text
 #: panels/network/cc-qr-code-dialog.ui:6
-#: panels/network/cc-wifi-connection-row.ui:51
+#: panels/network/cc-wifi-connection-row.ui:50
 msgid "Share Network"
 msgstr "Sprístupniť sieť"
 
@@ -3412,18 +3481,18 @@ msgid "Signal strength %d%%"
 msgstr "Sila signálu %d%%"
 
 #. TRANSLATORS: device status
-#: panels/network/cc-wifi-connection-row.ui:35 panels/network/panel-common.c:63
+#: panels/network/cc-wifi-connection-row.ui:34 panels/network/panel-common.c:63
 msgid "Connected"
 msgstr "Pripojené"
 
 # GtkLabel label
-#: panels/network/cc-wifi-connection-row.ui:63
+#: panels/network/cc-wifi-connection-row.ui:62
 #: panels/network/network-bluetooth.ui:14 panels/network/network-ethernet.ui:47
 msgid "Network Options"
 msgstr "Možnosti siete"
 
 # GtkEntry text
-#: panels/network/cc-wifi-connection-row.ui:74
+#: panels/network/cc-wifi-connection-row.ui:73
 msgid "Forget Network"
 msgstr "Zabudnúť sieť"
 
@@ -3591,7 +3660,7 @@ msgstr "_Zabezpečenie 802.1x"
 #: panels/network/connection-editor/bluetooth-page.ui:16
 #: panels/network/connection-editor/ethernet-page.ui:27
 #: panels/network/connection-editor/vpn-page.ui:23
-#: panels/printers/pp-details-dialog.ui:24
+#: panels/printers/pp-details-dialog.ui:25
 #: panels/system/users/cc-user-page.ui:84
 msgid "_Name"
 msgstr "_Názov"
@@ -5230,48 +5299,48 @@ msgstr "%d %%"
 
 # label
 #. TRANSLATORS: This is the same title as the title from the .ui file, but without mnemonic
-#: panels/power/cc-power-panel.c:206
+#: panels/power/cc-power-panel.c:207
 msgid "Power Saving"
 msgstr "Šetrenie energie"
 
-#: panels/power/cc-power-panel.c:302
+#: panels/power/cc-power-panel.c:303
 msgid "Battery Levels"
 msgstr "Úrovne batérie"
 
 #. Translators: UPS is an Uninterruptible Power Supply:
 #. * https://en.wikipedia.org/wiki/Uninterruptible_power_supply
-#: panels/power/cc-power-panel.c:307
+#: panels/power/cc-power-panel.c:308
 msgid "UPS"
 msgstr "UPS"
 
-#: panels/power/cc-power-panel.c:310
+#: panels/power/cc-power-panel.c:311
 msgid "Battery Level"
 msgstr "Úroveň batérie"
 
-#: panels/power/cc-power-panel.c:537
+#: panels/power/cc-power-panel.c:549
 msgid "Suspend"
 msgstr "Uspať"
 
 # label
-#: panels/power/cc-power-panel.c:538
+#: panels/power/cc-power-panel.c:550
 msgid "Power Off"
 msgstr "Vypnúť"
 
 # GtkListStore item
-#: panels/power/cc-power-panel.c:539
+#: panels/power/cc-power-panel.c:551
 msgid "Hibernate"
 msgstr "Hibernovať"
 
 # chooser_button
-#: panels/power/cc-power-panel.c:540
+#: panels/power/cc-power-panel.c:552
 msgid "Nothing"
 msgstr "Nerobiť nič"
 
-#: panels/power/cc-power-panel.c:864
+#: panels/power/cc-power-panel.c:876
 msgid "Performance mode temporarily disabled due to high operating temperature"
 msgstr "Výkonný režim je dočasne zakázaný kvôli vysokej pracovnej teplote"
 
-#: panels/power/cc-power-panel.c:866
+#: panels/power/cc-power-panel.c:878
 msgid ""
 "Lap detected: performance mode temporarily unavailable. Move the device to a "
 "stable surface to restore."
@@ -5279,11 +5348,11 @@ msgstr ""
 "Zistené lono: výkonný režim je dočasne nedostupný. Obnovíte ho presunutím "
 "zariadenia na stabilný povrch."
 
-#: panels/power/cc-power-panel.c:868
+#: panels/power/cc-power-panel.c:880
 msgid "Performance mode temporarily disabled"
 msgstr "Výkonný režim je dočasne zakázaný"
 
-#: panels/power/cc-power-panel.c:910
+#: panels/power/cc-power-panel.c:922
 msgid ""
 "Power saver enabled due to low battery. Previous mode will be restored when "
 "battery is charged."
@@ -5292,43 +5361,44 @@ msgstr ""
 "obnovený po dostatočnom nabití."
 
 #. translators: "%s" is an application name
-#: panels/power/cc-power-panel.c:918
+#: panels/power/cc-power-panel.c:930
 #, c-format
 msgid "Power Saver mode activated by “%s”"
 msgstr "Režim šetriča energie aktivovaný aplikáciou „%s“"
 
 #. translators: "%s" is an application name
-#: panels/power/cc-power-panel.c:922
+#: panels/power/cc-power-panel.c:934
 #, c-format
 msgid "Performance mode activated by “%s”"
 msgstr "Výkonný režim aktivovaný aplikáciou „%s“"
 
 # GtkLabel label
 #: panels/power/cc-power-panel.ui:55
-#| msgid "General"
 msgid "_General"
 msgstr "_Všeobecné"
 
+#. Translators: 'battery charging' means the settings to handle the way battery charges, not that the battery is currently charging.
 #: panels/power/cc-power-panel.ui:78
-#| msgid "Charging"
 msgid "Battery Charging"
 msgstr "Batéria sa nabíja"
 
 #: panels/power/cc-power-panel.ui:84
 msgid "_Maximize Charge"
-msgstr ""
+msgstr "_Maximalizovať nabitie"
 
 #: panels/power/cc-power-panel.ui:85
 msgid "Uses all battery capacity. Degrades batteries more quickly."
 msgstr ""
+"Využíva všetku kapacitu batérie. Spôsobuje rýchlejšie opotrebenie batérií."
 
 #: panels/power/cc-power-panel.ui:99
 msgid "Preserve Battery _Health"
-msgstr ""
+msgstr "Za_chovať zdravie batérie"
 
 #: panels/power/cc-power-panel.ui:100
 msgid "Increases battery longevity by maintaining lower charge levels"
 msgstr ""
+"Predlžuje životnosť batérie udržiavaním nižšej úrovne nabitia"
 
 # GtkLabel label
 #: panels/power/cc-power-panel.ui:115
@@ -5345,7 +5415,6 @@ msgid "Po_wer Button Behavior"
 msgstr "Správanie _tlačidla napájania"
 
 #: panels/power/cc-power-panel.ui:174
-#| msgid "Show Battery _Percentage"
 msgid "_Show Battery Percentage"
 msgstr "Zobraziť _percentá batérie"
 
@@ -5355,7 +5424,6 @@ msgstr "Zobraziť presnú úroveň nabitia v hornej lište"
 
 # label
 #: panels/power/cc-power-panel.ui:187
-#| msgid "Power Saving"
 msgid "_Power Saving"
 msgstr "Še_trenie energie"
 
@@ -5387,10 +5455,9 @@ msgstr "Povoliť režim šetriča energie, keď je batéria vybitá"
 
 # GtkLabel label
 #: panels/power/cc-power-panel.ui:226
-#, fuzzy
 #| msgid "Automatic Screen _Lock"
 msgid "Automatic Screen _Blank"
-msgstr "A_utomatické uzamykanie obrazovky"
+msgstr "A_utomatické stmavenie obrazovky"
 
 #: panels/power/cc-power-panel.ui:227
 msgid "Turn the screen off after a period of inactivity"
@@ -5407,24 +5474,29 @@ msgstr "Automatické uspanie"
 
 # GtkLabel label
 #: panels/power/cc-power-panel.ui:249
-#| msgid "On Battery Power"
 msgid "On Ba_ttery Power"
 msgstr "Pri na_pájaní z batérie"
 
-#: panels/power/cc-power-panel.ui:256
+#: panels/power/cc-power-panel.ui:257
 msgid "De_lay"
 msgstr "O_neskorenie"
 
 # PK: ked je zastrceny v zasuvke
 #  label
-#: panels/power/cc-power-panel.ui:268
-#| msgid "When Plugged In"
+#: panels/power/cc-power-panel.ui:269
 msgid "Whe_n Plugged In"
 msgstr "Pri napájaní zo _siete"
 
-#: panels/power/cc-power-panel.ui:275
+#: panels/power/cc-power-panel.ui:277
 msgid "Del_ay"
 msgstr "_Oneskorenie"
+
+#: panels/power/cc-power-panel.ui:289
+msgid ""
+"Disabling automatic suspend will result in higher power consumption. It is "
+"recommended to keep automatic suspend enabled."
+msgstr ""
+"Zakázanie automatického uspania bude mať za následok vyššiu spotrebu energie. Odporúča sa ponechať automatické uspanie zapnuté."
 
 #: panels/power/cc-power-profile-row.c:128
 msgctxt "Power profile"
@@ -5548,49 +5620,49 @@ msgstr ""
 "GZ)"
 
 #: panels/printers/pp-details-dialog.ui:4
-#: panels/printers/pp-details-dialog.ui:12
+#: panels/printers/pp-details-dialog.ui:13
 #: panels/printers/pp-printer-entry.ui:246
 msgid "Printer Details"
 msgstr "Podrobnosti o tlačiarni"
 
-#: panels/printers/pp-details-dialog.ui:35
+#: panels/printers/pp-details-dialog.ui:36
 msgid "Printer names cannot contain SPACE, TAB, #, or /"
 msgstr "Názvy tlačiarní nemôžu obsahovať MEDZERU, TABULÁTOR, znak # alebo /"
 
 # GtkLabel label
-#: panels/printers/pp-details-dialog.ui:54
+#: panels/printers/pp-details-dialog.ui:55
 #: panels/privacy/cc-privacy-panel.ui:34
 msgid "_Location"
 msgstr "_Poloha"
 
 # GtkLabel label
-#: panels/printers/pp-details-dialog.ui:60
+#: panels/printers/pp-details-dialog.ui:61
 msgid "_Address"
 msgstr "A_dresa"
 
 # GtkLabel label
-#: panels/printers/pp-details-dialog.ui:69
+#: panels/printers/pp-details-dialog.ui:70
 msgid "Open Address"
 msgstr "Otvoriť adresu"
 
 #. Translators: Name of column showing printer drivers
-#: panels/printers/pp-details-dialog.ui:81
+#: panels/printers/pp-details-dialog.ui:82
 #: panels/printers/pp-ppd-selection-dialog.c:232
 msgid "Driver"
 msgstr "Ovládač"
 
 # gtkbutton label
-#: panels/printers/pp-details-dialog.ui:102
+#: panels/printers/pp-details-dialog.ui:103
 msgid "_Search for Drivers"
 msgstr "Vy_hľadať ovládače"
 
 # gtk_image_menu_item
-#: panels/printers/pp-details-dialog.ui:109
+#: panels/printers/pp-details-dialog.ui:110
 msgid "S_elect from Database…"
 msgstr "Vybrať z _databázy…"
 
 # gtk_image_menu_item
-#: panels/printers/pp-details-dialog.ui:116
+#: panels/printers/pp-details-dialog.ui:117
 msgid "_Install PPD File…"
 msgstr "_Inštalovať súbor PPD…"
 
@@ -5747,7 +5819,6 @@ msgstr "_Overiť totožnosť"
 
 # GtkDialog title
 #: panels/printers/pp-jobs-dialog.ui:119
-#| msgid "No Active Jobs"
 msgid "Clear All Active Jobs?"
 msgstr "Vymazať všetky aktívne úlohy?"
 
@@ -5757,7 +5828,6 @@ msgstr "Vymazanie úloh nie je možné vziať späť"
 
 # GtkButton label
 #: panels/printers/pp-jobs-dialog.ui:126
-#| msgid "_Clear All"
 msgid "Clear _All"
 msgstr "_Vymazať všetky"
 
@@ -6266,8 +6336,6 @@ msgstr "Obmedzená funkčnosť"
 
 # GtkLabel label
 #: panels/privacy/bolt/cc-bolt-device-dialog.c:99
-#| msgctxt "Thunderbolt Device Status"
-#| msgid "Connected & Authorized"
 msgctxt "Thunderbolt Device Status"
 msgid "Connected and Authorized"
 msgstr "Pripojené s overením totožnosti"
@@ -6718,7 +6786,7 @@ msgstr "_Kopírovať technické hlásenie"
 msgid "About Device Security"
 msgstr "Informácie o zabezpečení zariadenia"
 
-#: panels/privacy/firmware-security/cc-firmware-security-help-dialog.ui:27
+#: panels/privacy/firmware-security/cc-firmware-security-help-dialog.ui:26
 msgid ""
 "Device security provides information about how protected your device is "
 "against security issues which target the hardware itself.\n"
@@ -8115,8 +8183,8 @@ msgstr ""
 "pripojenie;rdp;vnc;ssh;"
 
 # GtkLabel label
-#: panels/system/region/cc-format-chooser.c:228
-#: panels/system/region/cc-format-chooser.ui:196
+#: panels/system/region/cc-format-chooser.c:229
+#: panels/system/region/cc-format-chooser.ui:155
 msgid "Preview"
 msgstr "Ukážka"
 
@@ -8133,19 +8201,18 @@ msgstr "hľadať národné prostredia"
 
 # TODO lepšia alternatíva?
 # GtkDialog title; GtkLabel label
-#: panels/system/region/cc-format-chooser.ui:99
+#: panels/system/region/cc-format-chooser.ui:90
 msgid "Common Formats"
 msgstr "Spoločné formáty"
 
 # TODO lepšia alternatíva?
 # GtkDialog title; GtkLabel label
-#: panels/system/region/cc-format-chooser.ui:126
+#: panels/system/region/cc-format-chooser.ui:104
 msgid "All Formats"
 msgstr "Všetky formáty"
 
 # GtkLabel label
-#: panels/system/region/cc-format-chooser.ui:205
-#| msgid "Preview"
+#: panels/system/region/cc-format-chooser.ui:164
 msgid "Close Preview"
 msgstr "Zatvoriť ukážku"
 
@@ -8493,7 +8560,6 @@ msgstr "Podrobnosti o používateľovi"
 
 # GtkLabel
 #: panels/system/users/cc-add-user-dialog.ui:79
-#| msgid "Full _Name"
 msgid "Fu_ll Name"
 msgstr "_Celé meno"
 
@@ -8533,13 +8599,13 @@ msgid "_Confirm Password"
 msgstr "Po_tvrdenie hesla"
 
 # tlačidlo
-#: panels/system/users/cc-avatar-chooser.c:94
+#: panels/system/users/cc-avatar-chooser.c:91
 msgid "Select"
 msgstr "Vybrať"
 
 # DK: nechajme zatial tento tvar, kym to rozdelia.je to neskodny preklad
 # DK: https://bugzilla.gnome.org/show_bug.cgi?id=701344
-#: panels/system/users/cc-avatar-chooser.c:162
+#: panels/system/users/cc-avatar-chooser.c:159
 msgid "Browse for more pictures"
 msgstr "Výber ďalších obrázkov"
 
@@ -9301,13 +9367,13 @@ msgid "Username is already in use — please choose another"
 msgstr "Meno používateľa sa už používa — vyberte prosím iné"
 
 #: panels/system/users/user-utils.c:195
-#, fuzzy, c-format
+#, c-format
 #| msgid "Usernames must have fewer than %ld characters"
 msgid "Usernames must have fewer than %ld character"
 msgid_plural "Usernames must have fewer than %ld characters"
-msgstr[0] "Meno používateľa musí mať menej ako %ld znakov"
-msgstr[1] "Meno používateľa musí mať menej ako %ld znakov"
-msgstr[2] "Meno používateľa musí mať menej ako %ld znakov"
+msgstr[0] "Mená používateľov musia mať menej ako %ld znakov"
+msgstr[1] "Mená používateľov musia mať menej ako %ld znak"
+msgstr[2] "Mená používateľov musia mať menej ako %ld znaky"
 
 # GtkLabel label
 #: panels/universal-access/cc-cursor-size-page.ui:4
@@ -9627,7 +9693,6 @@ msgid "_Cursor Size"
 msgstr "V_eľkosť kurzora"
 
 #: panels/universal-access/cc-ua-seeing-page.ui:74
-#| msgid "Increase the size of all text in the user interface"
 msgid "Increase the size of the cursor"
 msgstr "Zväčšiť veľkosť kurzora"
 
@@ -10085,13 +10150,12 @@ msgstr "Použiť absolútnu pozíciu pre pero"
 
 # KeyListEntry name
 #: panels/wacom/cc-wacom-page.ui:26
-#| msgid "Custom Locations"
 msgid "Button Location"
 msgstr "Umiestnenie tlačidla"
 
 #: panels/wacom/cc-wacom-page.ui:27
 msgid "The location of the physical buttons on the tablet"
-msgstr ""
+msgstr "Umiestnenie fyzických tlačidiel na tablete"
 
 # window title
 #: panels/wacom/cc-wacom-page.ui:53
@@ -10151,32 +10215,26 @@ msgstr "Stlačte kláves Esc pre zrušenie"
 
 # GtkListStore row
 #: panels/wacom/cc-wacom-stylus-page.c:415
-#| msgid "_Left Mousebutton Click"
 msgid "Left Mousebutton Click"
 msgstr "Kliknutie ľavým tlačidlom myši"
 
 # GtkListStore row
 #: panels/wacom/cc-wacom-stylus-page.c:418
-#| msgid "_Middle Mousebutton Click"
 msgid "Middle Mousebutton Click"
 msgstr "Kliknutie stredným tlačidlom myši"
 
 # GtkListStore row
 #: panels/wacom/cc-wacom-stylus-page.c:421
-#| msgid "_Right Mousebutton Click"
 msgid "Right Mousebutton Click"
 msgstr "Kliknutie pravým tlačidlom myši"
 
 # GtkListStore row
 #. Translators: this is the "go forward" action of a button
 #: panels/wacom/cc-wacom-stylus-page.c:429
-#| msgid "_Forward"
 msgid "Forward"
 msgstr "Dopredu"
 
 #: panels/wacom/cc-wacom-stylus-page.c:435
-#| msgctxt "Wacom action-type"
-#| msgid "Switch Monitor"
 msgid "Switch Monitor"
 msgstr "Prepnúť displej"
 
@@ -10235,7 +10293,6 @@ msgstr "Stylus s prítlakom"
 
 # GtkLabel label
 #: panels/wacom/gnome-wacom-panel.desktop.in:3
-#| msgid "Graphics %d"
 msgid "Graphics Tablets"
 msgstr "Grafické tablety"
 
@@ -10272,55 +10329,51 @@ msgstr "Trvanie"
 msgid "Interval"
 msgstr "Interval"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:221
+#: panels/wellbeing/cc-screen-time-statistics-row.c:228
 msgctxt "abbreviated weekday name for Sunday"
 msgid "S"
-msgstr ""
+msgstr "N"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:222
-#| msgid "AM"
+#: panels/wellbeing/cc-screen-time-statistics-row.c:229
 msgctxt "abbreviated weekday name for Monday"
 msgid "M"
 msgstr "P"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:223
-#| msgid "To"
+#: panels/wellbeing/cc-screen-time-statistics-row.c:230
 msgctxt "abbreviated weekday name for Tuesday"
 msgid "T"
 msgstr "U"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:224
+#: panels/wellbeing/cc-screen-time-statistics-row.c:231
 msgctxt "abbreviated weekday name for Wednesday"
 msgid "W"
 msgstr "S"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:225
-#| msgid "To"
+#: panels/wellbeing/cc-screen-time-statistics-row.c:232
 msgctxt "abbreviated weekday name for Thursday"
 msgid "T"
 msgstr "Š"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:226
+#: panels/wellbeing/cc-screen-time-statistics-row.c:233
 msgctxt "abbreviated weekday name for Friday"
 msgid "F"
 msgstr "P"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:227
+#: panels/wellbeing/cc-screen-time-statistics-row.c:234
 msgctxt "abbreviated weekday name for Saturday"
 msgid "S"
 msgstr "S"
 
 #. Translators: This is a duration in minutes, for example ‘15m’ for 15 minutes.
 #. * Use whatever shortest unit label is used for minutes in your locale.
-#: panels/wellbeing/cc-screen-time-statistics-row.c:384
+#: panels/wellbeing/cc-screen-time-statistics-row.c:391
 #, c-format
-#| msgid "Hum"
 msgid "%um"
 msgstr "%u m"
 
 #. Translators: This is a duration in hours, for example ‘2h’ for 2 hours.
 #. * Use whatever shortest unit label is used for hours in your locale.
-#: panels/wellbeing/cc-screen-time-statistics-row.c:390
+#: panels/wellbeing/cc-screen-time-statistics-row.c:397
 #, c-format
 msgid "%uh"
 msgstr "%u h"
@@ -10328,185 +10381,239 @@ msgstr "%u h"
 #. Translators: This is a duration in hours and minutes, for example
 #. * ‘3h 15m’ for 3 hours and 15 minutes. Use whatever shortest unit label
 #. * is used for hours and minutes in your locale.
-#: panels/wellbeing/cc-screen-time-statistics-row.c:397
+#: panels/wellbeing/cc-screen-time-statistics-row.c:404
 #, c-format
 msgid "%uh %um"
 msgstr "%u h %u m"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:627
-#: panels/wellbeing/cc-screen-time-statistics-row.c:747
+#: panels/wellbeing/cc-screen-time-statistics-row.c:663
+#: panels/wellbeing/cc-screen-time-statistics-row.c:783
 #, c-format
-#| msgid "Failed to upload file: %s"
 msgid "Failed to load session history file ‘%s’: %s"
 msgstr "Chyba pri čítaní súboru s históriou sedenia „%s“: %s"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:628
-#| msgid "Infrastructure"
+#: panels/wellbeing/cc-screen-time-statistics-row.c:664
 msgid "Invalid file structure"
 msgstr "Neplatná štruktúra súboru"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:665
+#: panels/wellbeing/cc-screen-time-statistics-row.c:701
 #, c-format
-#| msgid "Failed to upload file: %s"
 msgid "Failed to load session history file: %s"
 msgstr "Chyba pri čítaní súboru s históriu sedenia: %s"
 
 # window title;
-#: panels/wellbeing/cc-screen-time-statistics-row.c:666
-#: panels/wellbeing/cc-screen-time-statistics-row.c:748
-#| msgid "File History"
+#: panels/wellbeing/cc-screen-time-statistics-row.c:702
+#: panels/wellbeing/cc-screen-time-statistics-row.c:784
 msgid "File is empty"
 msgstr "Súbor je prázdny"
 
+#. G_DATE_BAD_WEEKDAY
+#: panels/wellbeing/cc-screen-time-statistics-row.c:920
+#| msgid "Average Week"
+msgid "Average Monday"
+msgstr "Priemerný pondelok"
+
+#: panels/wellbeing/cc-screen-time-statistics-row.c:921
+#| msgid "Average Week"
+msgid "Average Tuesday"
+msgstr "Priemerný utorok"
+
+#: panels/wellbeing/cc-screen-time-statistics-row.c:922
+#| msgid "Average Week"
+msgid "Average Wednesday"
+msgstr "Priemerná streda"
+
+#: panels/wellbeing/cc-screen-time-statistics-row.c:923
+msgid "Average Thursday"
+msgstr "Priemerný štvrtok"
+
+#: panels/wellbeing/cc-screen-time-statistics-row.c:924
+#| msgid "Average Week"
+msgid "Average Friday"
+msgstr "Priemerný piatok"
+
+#: panels/wellbeing/cc-screen-time-statistics-row.c:925
+msgid "Average Saturday"
+msgstr "Priemerná sobota"
+
+#: panels/wellbeing/cc-screen-time-statistics-row.c:926
+#| msgid "Average Week"
+msgid "Average Sunday"
+msgstr "Priemerná nedeľa"
+
 #. Translators: This a medium-length date, for example ‘15 April’
-#: panels/wellbeing/cc-screen-time-statistics-row.c:933
+#: panels/wellbeing/cc-screen-time-statistics-row.c:978
 msgid "%-d %B"
 msgstr "%-d %B"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:946
-#: panels/wellbeing/cc-screen-time-statistics-row.c:957
-#| msgid "Data"
+#: panels/wellbeing/cc-screen-time-statistics-row.c:991
+#: panels/wellbeing/cc-screen-time-statistics-row.c:1002
 msgid "No Data"
 msgstr "Žiadne údaje"
 
-#. Translators: This is an annotated day of the week. For example ‘Average Monday’.
-#: panels/wellbeing/cc-screen-time-statistics-row.c:950
-#, c-format
-msgid "Average %A"
-msgstr ""
-
-#: panels/wellbeing/cc-screen-time-statistics-row.c:961
+#: panels/wellbeing/cc-screen-time-statistics-row.c:1006
 #, c-format
 msgid "This Week"
 msgstr "Tento týždeň"
 
 #. Translators: This is a range of days within a given month.
 #. * For example ‘20–27 April’. The dash is an en-dash.
-#: panels/wellbeing/cc-screen-time-statistics-row.c:972
+#: panels/wellbeing/cc-screen-time-statistics-row.c:1017
 #, c-format
 msgid "%u–%u %s"
-msgstr ""
+msgstr "%u. – %u. %s"
 
 #. Translators: This is a range of days spanning two months.
 #. * For example, ‘27 April–4 May’. The dash is an en-dash.
-#: panels/wellbeing/cc-screen-time-statistics-row.c:989
+#: panels/wellbeing/cc-screen-time-statistics-row.c:1034
 #, c-format
 msgid "%u %s–%u %s"
-msgstr ""
+msgstr "%u. %s - %u. %s"
 
-#. Translators: The first placeholder is a formatted date string. The
-#. * second placeholder is a formatted time duration (for example, ‘3 hours’
-#. * or ‘25 minutes’).
-#: panels/wellbeing/cc-screen-time-statistics-row.c:1050
+#. Translators: The first placeholder is a formatted date string
+#. * (formatted using the `%x` strftime placeholder, which gives the
+#. * preferred date representation for the current locale without the time).
+#. * The second placeholder is a formatted time duration (for example,
+#. * ‘3 hours’ or ‘25 minutes’).
+#: panels/wellbeing/cc-screen-time-statistics-row.c:1097
 #, c-format
 msgid ""
 "Bar chart of screen time usage over the week starting %s. A line is "
 "overlayed at the %s mark to indicate the configured screen time limit."
 msgstr ""
+"Stĺpcový graf využitia času stráveného pred obrazovkou za týždeň od %s. Pri značke %s je prekrytá čiara označujúca nastavený limit času stráveného pred obrazovkou."
 
-#. Translators: The placeholder is a formatted date string.
-#: panels/wellbeing/cc-screen-time-statistics-row.c:1067
+#. Translators: The placeholder is a formatted date string (formatted
+#. * using the `%x` strftime placeholder, which gives the preferred date
+#. * representation for the current locale without the time).
+#: panels/wellbeing/cc-screen-time-statistics-row.c:1116
 #, c-format
 msgid "Bar chart of screen time usage over the week starting %s."
 msgstr ""
+"Stĺpcový graf využitia času stráveného pred obrazovkou za týždeň od %s."
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:1073
+#: panels/wellbeing/cc-screen-time-statistics-row.c:1122
 #, c-format
 msgid ""
 "Placeholder for a bar chart of screen time usage. No data is currently "
 "available."
 msgstr ""
+"Voľné miesto pre stĺpcový graf využitia času stráveného pred obrazovkou. Momentálne nie sú k dispozícii žiadne údaje."
 
 #: panels/wellbeing/cc-screen-time-statistics-row.ui:27
-#, fuzzy
 #| msgid "Security Checks Unavailable"
 msgid "Screen Time Unavailable"
-msgstr "Kontroly zabezpečenia nie sú nedostupné"
+msgstr "Čas strávený pred obrazovkou je nedostupný"
 
 #: panels/wellbeing/cc-screen-time-statistics-row.ui:29
-msgid ""
-"Screen time information will appear here after a period of usage with Screen "
-"Limits enabled"
+msgid "Screen time information will appear here after a period of usage"
 msgstr ""
+"Po určitom čase používania sa tu zobrazia informácie o čase strávenom pred obrazovkou"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.ui:147
+#: panels/wellbeing/cc-screen-time-statistics-row.ui:146
 msgid "Average Week"
 msgstr "Týždeň v priemere"
 
 # KeyListEntry description
-#: panels/wellbeing/cc-screen-time-statistics-row.ui:190
-#| msgid "Previous"
+#: panels/wellbeing/cc-screen-time-statistics-row.ui:189
 msgid "Previous Week"
 msgstr "Minulý týždeň"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.ui:200
-#| msgid "Last Week"
+#: panels/wellbeing/cc-screen-time-statistics-row.ui:199
 msgid "Next Week"
 msgstr "Budúci týždeň"
 
 # GtkLabel
 #: panels/wellbeing/cc-wellbeing-panel.ui:18
-#, fuzzy
 #| msgid "Screen Area"
 msgid "Screen Time"
-msgstr "Oblasť obrazovky"
+msgstr "Čas pred obrazovkou"
+
+#: panels/wellbeing/cc-wellbeing-panel.ui:40
+msgid ""
+"Disabling screen time recording stops screen time data from being saved. "
+"This data is never shared outside this device."
+msgstr ""
+"Zakázaním zaznamenávania času stráveného pred obrazovkou sa prestanú ukladať časové údaje. Tieto údaje nie sú nikdy zdieľané s inými zariadeniami."
+
+# GtkLabel
+#: panels/wellbeing/cc-wellbeing-panel.ui:49
+#| msgid "Screen Area"
+msgid "_Disable Screen Time"
+msgstr "_Zakázať čas pred obrazovkou"
+
+#: panels/wellbeing/cc-wellbeing-panel.ui:76
+#| msgid "Security Checks Unavailable"
+msgid "Screen Time Recording Disabled"
+msgstr "Zaznamenávanie času stráveného pred obrazovkou je zakázané"
+
+#: panels/wellbeing/cc-wellbeing-panel.ui:78
+msgid "Enable recording to view screen usage history"
+msgstr "Ak chcete zobrazit históriu používania obrazovky, povoľte zaznamenávanie"
+
+# zariadenie
+# GtkButton label
+#: panels/wellbeing/cc-wellbeing-panel.ui:82
+#| msgid "Enable"
+msgid "E_nable"
+msgstr "_Povoliť"
 
 # 2 GtkDialog title
-#: panels/wellbeing/cc-wellbeing-panel.ui:29
-#, fuzzy
+#: panels/wellbeing/cc-wellbeing-panel.ui:102
 #| msgid "Screen Lock"
 msgid "Screen Limits"
-msgstr "Uzamknutie obrazovky"
+msgstr "Limity obrazovky"
 
-#: panels/wellbeing/cc-wellbeing-panel.ui:32
-msgid "Daily Screen Usage Limi_t"
-msgstr ""
+# 2 GtkDialog title
+#: panels/wellbeing/cc-wellbeing-panel.ui:105
+#| msgid "Screen Lock"
+msgid "_Screen Time Limit"
+msgstr "_Limit času stráveného pred obrazovkou"
 
-#: panels/wellbeing/cc-wellbeing-panel.ui:39
-msgid "Daily _Limit Amount"
-msgstr ""
+#: panels/wellbeing/cc-wellbeing-panel.ui:112
+msgid "Daily _Limit"
+msgstr "Den_ný limit"
 
-#: panels/wellbeing/cc-wellbeing-panel.ui:45
-#| msgctxt "display setting"
-#| msgid "_Scale"
+#: panels/wellbeing/cc-wellbeing-panel.ui:118
 msgid "_Grayscale"
 msgstr "_Stupne šedej"
 
-#: panels/wellbeing/cc-wellbeing-panel.ui:46
-msgid "Makes the screen monochrome when the daily limit is reached"
-msgstr ""
+#: panels/wellbeing/cc-wellbeing-panel.ui:119
+msgid "Black and white screen for screen limits"
+msgstr "Čiernobiela obrazovka pre limity obrazovky"
 
-#: panels/wellbeing/cc-wellbeing-panel.ui:55
+#: panels/wellbeing/cc-wellbeing-panel.ui:128
 msgid "Break Reminders"
 msgstr "Pripomienky prestávok"
 
-#: panels/wellbeing/cc-wellbeing-panel.ui:58
+#: panels/wellbeing/cc-wellbeing-panel.ui:131
 msgid "_Eyesight Reminders"
 msgstr "Pripomienky šetrenia zra_ku"
 
-#: panels/wellbeing/cc-wellbeing-panel.ui:59
+#: panels/wellbeing/cc-wellbeing-panel.ui:132
 msgid "Reminders to look away from the screen"
 msgstr "Pripomienky na odvrátenie zraku od obrazovky"
 
-#: panels/wellbeing/cc-wellbeing-panel.ui:65
+#: panels/wellbeing/cc-wellbeing-panel.ui:138
 msgid "_Movement Reminders"
 msgstr "Pripomienky _pohybu"
 
 # gtk button
-#: panels/wellbeing/cc-wellbeing-panel.ui:66
+#: panels/wellbeing/cc-wellbeing-panel.ui:139
 msgid "Reminders to move around"
 msgstr "Pripomienky na pohyb"
 
-#: panels/wellbeing/cc-wellbeing-panel.ui:72
-msgid "Movement Break S_chedule"
-msgstr "_Plán prestávok na pohyb"
+#: panels/wellbeing/cc-wellbeing-panel.ui:145
+#| msgid "Movement Break S_chedule"
+msgid "Movement _Break Schedule"
+msgstr "P_lánovanie prestávky na pohyb"
 
 # desktop entry name
-#: panels/wellbeing/cc-wellbeing-panel.ui:78
+#: panels/wellbeing/cc-wellbeing-panel.ui:151
 msgid "S_ounds"
 msgstr "Z_vuky"
 
-#: panels/wellbeing/cc-wellbeing-panel.ui:79
+#: panels/wellbeing/cc-wellbeing-panel.ui:152
 msgid "Play a sound when a break ends"
 msgstr "Po skončení prestávky prehrať zvuk"
 
@@ -11119,43 +11226,43 @@ msgid "The GNOME Project"
 msgstr "Projekt GNOME"
 
 # cmd line desc
-#: shell/cc-application.c:68
+#: shell/cc-application.c:72
 msgid "Display version number"
 msgstr "Vypíše číslo verzie"
 
-#: shell/cc-application.c:69
+#: shell/cc-application.c:73
 msgid "Enable verbose mode. Specify multiple times to increase verbosity"
 msgstr ""
 "Povoliť podrobný režim. Zadajte viackrát pre zvýšenie úrovne zaznamenávania"
 
 # cmd desc
-#: shell/cc-application.c:70
+#: shell/cc-application.c:74
 msgid "Search for the string"
 msgstr "Vyhľadá reťazec"
 
 # cmd desc
-#: shell/cc-application.c:71
+#: shell/cc-application.c:75
 msgid "List possible panel names and exit"
 msgstr "Vypíše možné názvy panelov a ukončí sa"
 
 # cmd desc
-#: shell/cc-application.c:72
+#: shell/cc-application.c:76
 msgid "Panel to display"
 msgstr "Panel na zobrazenie"
 
 # cmd desc
-#: shell/cc-application.c:72
+#: shell/cc-application.c:76
 msgid "[PANEL] [ARGUMENT…]"
 msgstr "[PANEL] [PARAMETER…]"
 
 #. Translators should localize the following string which will be displayed in the About dialog giving credit to the translator(s).
-#: shell/cc-application.c:118
+#: shell/cc-application.c:123
 msgid "translator-credits"
 msgstr ""
 "Dušan Kazik <prescott66@gmail.com>\n"
 "Jose Riha <jose1711@gmail.com>"
 
-#: shell/cc-application.c:119
+#: shell/cc-application.c:124
 #, c-format
 msgid "© 1998 %s"
 msgstr "© 1998 %s"
@@ -11313,6 +11420,11 @@ msgstr[2] "%u vstupy"
 #: subprojects/gvc/gvc-mixer-control.c:2872
 msgid "System Sounds"
 msgstr "Systémové zvuky"
+
+# KeyListEntry description
+#~ msgctxt "keybinding"
+#~ msgid "Search"
+#~ msgstr "Hľadať"
 
 #~ msgid "How much disk space this app is occupying with app data and caches"
 #~ msgstr ""
@@ -12768,10 +12880,6 @@ msgstr "Systémové zvuky"
 # 1.,2. treeviewcolumn;
 #~ msgid "Section"
 #~ msgstr "Sekcia"
-
-# tab
-#~ msgid "Shortcuts"
-#~ msgstr "Skratky"
 
 #~ msgid "Location Services Turned Off"
 #~ msgstr "Služby umiestnenia sú vypnuté"
@@ -14927,12 +15035,6 @@ msgstr "Systémové zvuky"
 #~ msgid "Installing"
 #~ msgstr "Inštaluje sa"
 
-#~ msgid "%u active"
-#~ msgid_plural "%u active"
-#~ msgstr[0] "%u aktívnych"
-#~ msgstr[1] "%u aktívna"
-#~ msgstr[2] "%u aktívne"
-
 # button atk
 #~ msgctxt "button"
 #~ msgid "Add"
@@ -15102,10 +15204,6 @@ msgstr "Systémové zvuky"
 # button
 #~ msgid "_Sign In"
 #~ msgstr "_Prihlásiť sa"
-
-# GtkToolButton label
-#~ msgid "Remove Shortcut"
-#~ msgstr "Odstrániť skratku"
 
 #~ msgid "<Unknown Action>"
 #~ msgstr "<Neznáma akcia>"
