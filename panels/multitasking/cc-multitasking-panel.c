@@ -41,6 +41,8 @@ struct _CcMultitaskingPanel
   GtkCheckButton  *fixed_workspaces_radio;
   CcIllustratedRow *hot_corner_row;
   GtkSwitch       *hot_corner_switch;
+  AdwSwitchRow    *maximize_row;
+  AdwSwitchRow    *minimize_row;
   AdwSpinRow      *number_of_workspaces_spin_row;
   AdwPreferencesGroup *workspaces_display_group;
   GtkCheckButton  *workspaces_primary_display_radio;
@@ -48,6 +50,48 @@ struct _CcMultitaskingPanel
 };
 
 CC_PANEL_REGISTER (CcMultitaskingPanel, cc_multitasking_panel)
+
+static void
+set_window_controls (CcMultitaskingPanel *self)
+{
+  g_autofree gchar *layout = NULL;
+  g_autofree gchar *topbar_layout = NULL;
+  gboolean maximize, minimize;
+
+  maximize = adw_switch_row_get_active (self->maximize_row);;
+  minimize = adw_switch_row_get_active (self->minimize_row);;
+
+  if (minimize && maximize)
+    layout = g_strdup ("minimize,maximize,");
+  else if (minimize)
+    layout = g_strdup ("minimize,");
+  else if (maximize)
+    layout = g_strdup ("maximize,");
+  else
+    layout = g_strdup ("");
+
+  topbar_layout = g_strdup_printf ("appmnenu:%sclose", layout);
+  g_settings_set_string (self->wm_settings,
+                         "button-layout",
+                         topbar_layout);
+}
+
+static void
+get_window_controls (CcMultitaskingPanel *self)
+{
+  g_autofree gchar *layout = NULL;
+
+  layout = g_settings_get_string (self->wm_settings, "button-layout");
+
+  g_signal_handlers_block_by_func (self->maximize_row, set_window_controls, self);
+  g_signal_handlers_block_by_func (self->minimize_row, set_window_controls, self);
+
+  adw_switch_row_set_active (self->maximize_row, g_strrstr (layout, "maximize") != NULL);
+  adw_switch_row_set_active (self->minimize_row, g_strrstr (layout, "minimize") != NULL);
+
+  g_signal_handlers_unblock_by_func (self->maximize_row, set_window_controls, self);
+  g_signal_handlers_unblock_by_func (self->minimize_row, set_window_controls, self);
+}
 
 static void
 fixed_workspaces_changed_cb (CcMultitaskingPanel *self)
@@ -97,11 +141,14 @@ cc_multitasking_panel_class_init (CcMultitaskingPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcMultitaskingPanel, hot_corner_row);
   gtk_widget_class_bind_template_child (widget_class, CcMultitaskingPanel, hot_corner_switch);
   gtk_widget_class_bind_template_child (widget_class, CcMultitaskingPanel, number_of_workspaces_spin_row);
+  gtk_widget_class_bind_template_child (widget_class, CcMultitaskingPanel, maximize_row);
+  gtk_widget_class_bind_template_child (widget_class, CcMultitaskingPanel, minimize_row);
   gtk_widget_class_bind_template_child (widget_class, CcMultitaskingPanel, workspaces_display_group);
   gtk_widget_class_bind_template_child (widget_class, CcMultitaskingPanel, workspaces_primary_display_radio);
   gtk_widget_class_bind_template_child (widget_class, CcMultitaskingPanel, workspaces_span_displays_radio);
 
   gtk_widget_class_bind_template_callback (widget_class, fixed_workspaces_changed_cb);
+  gtk_widget_class_bind_template_callback (widget_class, set_window_controls);
 }
 
 static void
@@ -153,6 +200,11 @@ cc_multitasking_panel_init (CcMultitaskingPanel *self)
                    self->number_of_workspaces_spin_row,
                    "value",
                    G_SETTINGS_BIND_DEFAULT | G_SETTINGS_BIND_NO_SENSITIVITY);
+  g_signal_connect_swapped (self->wm_settings,
+                            "changed::button-layout",
+                            G_CALLBACK (get_window_controls),
+                            self);
+  get_window_controls (self);
 
   self->shell_settings = g_settings_new ("org.gnome.shell.app-switcher");
 

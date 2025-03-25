@@ -99,6 +99,27 @@
               </object>
             </child>
 
+            <!-- Window Controls -->
+            <child>
+              <object class="AdwPreferencesGroup">
+                <property name="title" translatable="yes">Window Controls</property>
+                <child>
+                  <object class="AdwSwitchRow" id="maximize_row">
+                    <property name="use-underline">True</property>
+                    <property name="title" translatable="yes">_Maximize</property>
+                    <signal name="notify::active" handler="set_window_controls" object="CcMultitaskingPanel" swapped="yes"/>
+                  </object>
+                </child>
+                <child>
+                  <object class="AdwSwitchRow" id="minimize_row">
+                    <property name="use-underline">True</property>
+                    <property name="title" translatable="yes">Minimi_ze</property>
+                    <signal name="notify::active" handler="set_window_controls" object="CcMultitaskingPanel" swapped="yes"/>
+                  </object>
+                </child>
+              </object>
+            </child>
+
             <child>
               <object class="AdwPreferencesGroup" id="workspaces_display_group">
                 <property name="title" translatable="yes">Multi-Monitor</property>
