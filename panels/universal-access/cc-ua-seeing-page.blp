@@ -102,7 +102,7 @@ template $CcUaSeeingPage: Adw.NavigationPage {
 Adw.Dialog text_size_dialog {
   title: _("Text Size");
   content-width: 400;
-  content-height: 300;
+  content-height: 320;
 
   child: Adw.ToolbarView {
     [top]
@@ -178,7 +178,12 @@ Adw.Dialog text_size_dialog {
 
       Adw.PreferencesGroup {
         Label text_size_preview_label {
-          label: _("This preview shows the size of text...");
+          wrap: true;
+          label: _("This preview shows the size of text when the Large Text setting is active. Use the slider to adjust the size of text. Changes you make here will apply to most applications.");
+
+          styles [
+            "dim-label",
+          ]
         }
       }
     };

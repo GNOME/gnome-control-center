@@ -62,7 +62,7 @@ struct _CcUaSeeingPage
   GDBusProxy         *proxy;
 
   AdwDialog          *text_size_dialog;
-  GtkWidget          *text_size_preview_label;
+  GtkLabel           *text_size_preview_label;
 
   GSettings          *kb_settings;
   GSettings          *interface_settings;
@@ -87,10 +87,17 @@ ua_text_size_change_value (GtkRange      *text_size_range,
                            gdouble        value,
                            gpointer       user_data)
 {
-  /* Always round to 0.05 multiples */
-  gtk_range_set_value (text_size_range, round (value / 0.05) * 0.05);
+  CcUaSeeingPage *self = CC_UA_SEEING_PAGE (user_data);
+  gdouble rounded_value = round (value / 0.05) * 0.05;
+  PangoAttrList *new_attrs = pango_attr_list_new ();
+  PangoAttribute *attr = pango_attr_size_new_absolute ((int)(15 * PANGO_SCALE * rounded_value));
 
-  // TODO: resize self->text_size_preview_label
+  /* Always round to 0.05 multiples */
+  gtk_range_set_value (text_size_range, rounded_value);
+
+  pango_attr_list_insert (new_attrs, attr);
+  gtk_label_set_attributes (GTK_LABEL (self->text_size_preview_label), new_attrs);
+  pango_attr_list_unref (new_attrs);
 
   return TRUE;
 }
