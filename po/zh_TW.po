@@ -17,8 +17,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center 3.3.91\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2025-02-15 12:01+0000\n"
-"PO-Revision-Date: 2025-02-20 16:54+0800\n"
+"POT-Creation-Date: 2025-03-21 18:21+0000\n"
+"PO-Revision-Date: 2025-03-27 15:25+0800\n"
 "Last-Translator: Cheng-Chia Tseng <zerngjia@gmail.com>\n"
 "Language-Team: Chinese (Traditional) <http://darkbear.mercusysddns.com/"
 "projects/gnome-45/gnome-control-center-main-po-zh_tw/zh_Hant/>\n"
@@ -29,33 +29,120 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Poedit 3.5\n"
 
-#: panels/applications/cc-applications-panel.c:850
+#: global-shortcuts-provider/cc-global-shortcut-dialog.ui:6
+msgid "Add Keyboard Shortcuts"
+msgstr "新增鍵盤快捷鍵"
+
+#: global-shortcuts-provider/cc-global-shortcut-dialog.ui:15
+#: panels/applications/cc-application-shortcut-dialog.c:152
+#: panels/color/cc-color-calibrate.ui:21
+#: panels/common/cc-language-chooser.ui:15
+#: panels/display/cc-display-panel.ui:32 panels/display/cc-display-panel.ui:184
+#: panels/display/cc-display-panel.ui:246
+#: panels/keyboard/cc-input-chooser.ui:15
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:162
+#: panels/keyboard/cc-keyboard-shortcut-editor.ui:12
+#: panels/network/cc-net-proxy-page.ui:14
+#: panels/network/cc-wifi-hotspot-dialog.ui:142
+#: panels/network/cc-wifi-panel.ui:241
+#: panels/network/connection-editor/ce-page-details.c:89
+#: panels/network/connection-editor/connection-editor.ui:16
+#: panels/printers/pp-jobs-dialog.ui:125
+#: panels/printers/pp-new-printer-dialog.ui:65
+#: panels/printers/pp-ppd-selection-dialog.ui:17
+#: panels/privacy/usage/cc-usage-page.ui:125
+#: panels/privacy/usage/cc-usage-page.ui:136
+#: panels/privacy/usage/cc-usage-page.ui:147
+#: panels/system/region/cc-format-chooser.ui:32
+#: panels/system/users/cc-add-user-dialog.ui:24
+#: panels/system/users/cc-avatar-chooser.c:89
+#: panels/system/users/cc-enterprise-login-dialog.ui:44
+#: panels/system/users/cc-fingerprint-dialog.c:1400
+#: panels/system/users/cc-fingerprint-dialog.ui:17
+#: panels/system/users/cc-password-dialog.ui:15
+#: panels/system/users/cc-user-page.ui:223
+#: panels/system/users/data/join-dialog.ui:17
+#: panels/wwan/cc-wwan-mode-dialog.ui:32
+#: panels/wwan/cc-wwan-network-dialog.ui:109
+#: panels/wwan/cc-wwan-sim-lock-dialog.ui:239
+msgid "_Cancel"
+msgstr "取消(_C)"
+
+#: global-shortcuts-provider/cc-global-shortcut-dialog.ui:23
+#: panels/color/cc-color-panel.ui:349 panels/keyboard/cc-input-chooser.ui:23
+#: panels/keyboard/cc-keyboard-shortcut-editor.ui:30
+#: panels/network/connection-editor/net-connection-editor.c:653
+#: panels/printers/pp-new-printer-dialog.ui:96
+#: panels/system/users/cc-add-user-dialog.c:362
+#: panels/system/users/cc-add-user-dialog.ui:32
+#: panels/system/users/cc-add-user-dialog.ui:153
+#: panels/system/users/cc-enterprise-login-dialog.ui:52
+msgid "_Add"
+msgstr "加入(_A)"
+
+#: global-shortcuts-provider/cc-global-shortcut-dialog.ui:36
+msgid ""
+"Added keyboard shortcuts will be available globally, and can be changed in "
+"the application’s panel in Settings"
+msgstr "新增的鍵盤快捷鍵將可在系統全域使用，並可在「設定」的程式面板中變更"
+
+#: panels/applications/cc-application-shortcut-dialog.c:143
+msgid "Remove All Shortcuts?"
+msgstr "移除所有快捷鍵？"
+
+#: panels/applications/cc-application-shortcut-dialog.c:148
+#, c-format
+msgid ""
+"All actions from %s that have been registered for global shortcuts will be "
+"removed."
+msgstr "「%s」所註冊為全域快捷鍵的所有動作將被移除。"
+
+#: panels/applications/cc-application-shortcut-dialog.c:153
+#: panels/keyboard/cc-keyboard-shortcut-editor.ui:19
+#: panels/system/users/cc-user-page.ui:224
+msgid "_Remove"
+msgstr "移除(_R)"
+
+#: panels/applications/cc-application-shortcut-dialog.c:183
+msgid "_Remove All Shortcuts"
+msgstr "移除所有快捷鍵(_R)"
+
+#: panels/applications/cc-application-shortcut-dialog.c:263
+#, c-format
+msgid "%s has registered the following global shortcuts"
+msgstr "「%s 」已註冊下列全域快捷鍵"
+
+#: panels/applications/cc-application-shortcut-dialog.ui:5
+msgid "Global Shortcuts"
+msgstr "全域快捷鍵"
+
+#: panels/applications/cc-applications-panel.c:880
 msgid "System Bus"
 msgstr "系統匯流排"
 
-#: panels/applications/cc-applications-panel.c:850
-#: panels/applications/cc-applications-panel.c:852
-#: panels/applications/cc-applications-panel.c:865
-#: panels/applications/cc-applications-panel.c:870
+#: panels/applications/cc-applications-panel.c:880
+#: panels/applications/cc-applications-panel.c:882
+#: panels/applications/cc-applications-panel.c:895
+#: panels/applications/cc-applications-panel.c:900
 msgid "Full access"
 msgstr "可以完全取用"
 
-#: panels/applications/cc-applications-panel.c:852
+#: panels/applications/cc-applications-panel.c:882
 msgid "Session Bus"
 msgstr "作業階段匯流排"
 
-#: panels/applications/cc-applications-panel.c:856
+#: panels/applications/cc-applications-panel.c:886
 #: panels/privacy/bolt/cc-bolt-page.ui:164
 #: panels/privacy/bolt/cc-bolt-page.ui:202
 #: panels/privacy/cc-privacy-panel.ui:72
 msgid "Devices"
 msgstr "裝置"
 
-#: panels/applications/cc-applications-panel.c:856
+#: panels/applications/cc-applications-panel.c:886
 msgid "Full access to /dev"
 msgstr "可以完全取用 /dev"
 
-#: panels/applications/cc-applications-panel.c:860
+#: panels/applications/cc-applications-panel.c:890
 #: panels/network/cc-network-panel.ui:8
 #: panels/network/gnome-network-panel.desktop.in:3
 #: panels/network/network-mobile.ui:235 panels/wwan/cc-wwan-device-page.ui:61
@@ -63,71 +150,71 @@ msgstr "可以完全取用 /dev"
 msgid "Network"
 msgstr "網路"
 
-#: panels/applications/cc-applications-panel.c:860
+#: panels/applications/cc-applications-panel.c:890
 msgid "Has network access"
 msgstr "可以取用網路"
 
-#: panels/applications/cc-applications-panel.c:865
-#: panels/applications/cc-applications-panel.c:867
+#: panels/applications/cc-applications-panel.c:895
+#: panels/applications/cc-applications-panel.c:897
 #: panels/search/cc-search-locations-page.c:421
 msgid "Home"
 msgstr "家目錄"
 
-#: panels/applications/cc-applications-panel.c:867
-#: panels/applications/cc-applications-panel.c:872
+#: panels/applications/cc-applications-panel.c:897
+#: panels/applications/cc-applications-panel.c:902
 msgid "Read-only"
 msgstr "僅能讀取"
 
-#: panels/applications/cc-applications-panel.c:870
-#: panels/applications/cc-applications-panel.c:872
+#: panels/applications/cc-applications-panel.c:900
+#: panels/applications/cc-applications-panel.c:902
 msgid "File System"
 msgstr "檔案系統"
 
-#: panels/applications/cc-applications-panel.c:876
+#: panels/applications/cc-applications-panel.c:906
 #: panels/keyboard/01-launchers.xml.in:6
 #: shell/appdata/org.gnome.Settings.appdata.xml.in.in:7 shell/cc-window.c:804
 #: shell/cc-window.ui:18 shell/org.gnome.Settings.desktop.in:3
 msgid "Settings"
 msgstr "設定"
 
-#: panels/applications/cc-applications-panel.c:876
+#: panels/applications/cc-applications-panel.c:906
 msgid "Can change settings"
 msgstr "可以更改設定值"
 
-#: panels/applications/cc-applications-panel.c:878
+#: panels/applications/cc-applications-panel.c:908
 #, c-format
 msgid ""
 "<b>%s</b> requires access to the following system resources. To stop this "
 "access, the app must be removed."
 msgstr "<b>%s</b> 需要取用下列系統資源。若要停止這項取用，必須移除此程式。"
 
-#: panels/applications/cc-applications-panel.c:882
+#: panels/applications/cc-applications-panel.c:912
 #, c-format
 msgid "%u permission"
 msgid_plural "%u permissions"
 msgstr[0] "%u 取用權"
 
-#: panels/applications/cc-applications-panel.c:1054
+#: panels/applications/cc-applications-panel.c:1084
 msgid "Remove Link Type"
 msgstr "移除連結類型"
 
-#: panels/applications/cc-applications-panel.c:1085
+#: panels/applications/cc-applications-panel.c:1115
 msgid "Remove File Type"
 msgstr "移除檔案類型"
 
-#: panels/applications/cc-applications-panel.c:1217
+#: panels/applications/cc-applications-panel.c:1247
 #, c-format
 msgid "%u type"
 msgid_plural "%u types"
 msgstr[0] "%u 類型"
 
-#: panels/applications/cc-applications-panel.c:1224
+#: panels/applications/cc-applications-panel.c:1254
 #, c-format
 msgid "<b>%s</b> is used to open the following types of files and links"
 msgstr "<b>%s</b> 用於開啟下列類型的檔案和連結"
 
 #. TRANSLATORS: %s is an app name.
-#: panels/applications/cc-applications-panel.c:1265
+#: panels/applications/cc-applications-panel.c:1295
 #, c-format
 msgid "How much disk space <b>%s</b> is occupying with app data and caches"
 msgstr "<b>%s</b> 的程式資料和快取正佔用多少磁碟空間"
@@ -362,70 +449,78 @@ msgstr "請求的取用權(_Q)"
 msgid "System permissions that the app requires"
 msgstr "程式請求的系統取用權"
 
-#: panels/applications/cc-applications-panel.ui:415
+#: panels/applications/cc-applications-panel.ui:412
+msgid "Global S_hortcuts"
+msgstr "全域快捷鍵(_H)"
+
+#: panels/applications/cc-applications-panel.ui:413
+msgid "Global actions that have been registered for use"
+msgstr "已註冊使用的全域動作"
+
+#: panels/applications/cc-applications-panel.ui:423
 #: panels/mouse/cc-mouse-panel.ui:67 panels/mouse/cc-mouse-panel.ui:203
 #: panels/multitasking/cc-multitasking-panel.ui:15
 #: panels/power/cc-power-panel.ui:161
 msgid "General"
 msgstr "一般"
 
-#: panels/applications/cc-applications-panel.ui:418
+#: panels/applications/cc-applications-panel.ui:426
 msgid "_Files &amp; Links"
 msgstr "檔案與連結(_F)"
 
-#: panels/applications/cc-applications-panel.ui:419
+#: panels/applications/cc-applications-panel.ui:427
 msgid "File and link types that are opened by the app"
 msgstr "檔案與連結類型的開啟程式"
 
-#: panels/applications/cc-applications-panel.ui:427
+#: panels/applications/cc-applications-panel.ui:435
 msgid "S_torage"
 msgstr "儲存空間(_T)"
 
-#: panels/applications/cc-applications-panel.ui:428
+#: panels/applications/cc-applications-panel.ui:436
 msgid "Disk space being used"
 msgstr "正在使用的磁碟空間"
 
-#: panels/applications/cc-applications-panel.ui:448
+#: panels/applications/cc-applications-panel.ui:456
 msgid "Required Permissions"
 msgstr "請求的取用權"
 
-#: panels/applications/cc-applications-panel.ui:479
+#: panels/applications/cc-applications-panel.ui:487
 msgid "Files & Links"
 msgstr "檔案與連結"
 
-#: panels/applications/cc-applications-panel.ui:490
+#: panels/applications/cc-applications-panel.ui:498
 msgid "File Types"
 msgstr "檔案類型"
 
-#: panels/applications/cc-applications-panel.ui:495
+#: panels/applications/cc-applications-panel.ui:503
 msgid "Link Types"
 msgstr "連結類型"
 
-#: panels/applications/cc-applications-panel.ui:502
+#: panels/applications/cc-applications-panel.ui:510
 msgid "_Reset"
 msgstr "重設(_R)"
 
-#: panels/applications/cc-applications-panel.ui:522
+#: panels/applications/cc-applications-panel.ui:530
 msgid "Storage"
 msgstr "儲存空間"
 
-#: panels/applications/cc-applications-panel.ui:535
+#: panels/applications/cc-applications-panel.ui:543
 msgid "App"
 msgstr "程式"
 
-#: panels/applications/cc-applications-panel.ui:543
+#: panels/applications/cc-applications-panel.ui:551
 msgid "Data"
 msgstr "資料"
 
-#: panels/applications/cc-applications-panel.ui:551
+#: panels/applications/cc-applications-panel.ui:559
 msgid "Cache"
 msgstr "快取"
 
-#: panels/applications/cc-applications-panel.ui:559
+#: panels/applications/cc-applications-panel.ui:567
 msgid "Total"
 msgstr "總計"
 
-#: panels/applications/cc-applications-panel.ui:571
+#: panels/applications/cc-applications-panel.ui:579
 msgid "_Clear Cache"
 msgstr "清除快取(_C)"
 
@@ -1075,39 +1170,6 @@ msgstr "校準過程中請勿干擾校準裝置"
 msgid "Display Calibration"
 msgstr "顯示器校準"
 
-#: panels/color/cc-color-calibrate.ui:21
-#: panels/common/cc-language-chooser.ui:15
-#: panels/display/cc-display-panel.ui:32 panels/display/cc-display-panel.ui:184
-#: panels/display/cc-display-panel.ui:246
-#: panels/keyboard/cc-input-chooser.ui:15
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:159
-#: panels/keyboard/cc-keyboard-shortcut-editor.ui:12
-#: panels/network/cc-net-proxy-page.ui:14
-#: panels/network/cc-wifi-hotspot-dialog.ui:142
-#: panels/network/cc-wifi-panel.ui:241
-#: panels/network/connection-editor/ce-page-details.c:89
-#: panels/network/connection-editor/connection-editor.ui:16
-#: panels/printers/pp-jobs-dialog.ui:125
-#: panels/printers/pp-new-printer-dialog.ui:65
-#: panels/printers/pp-ppd-selection-dialog.ui:17
-#: panels/privacy/usage/cc-usage-page.ui:125
-#: panels/privacy/usage/cc-usage-page.ui:136
-#: panels/privacy/usage/cc-usage-page.ui:147
-#: panels/system/region/cc-format-chooser.ui:32
-#: panels/system/users/cc-add-user-dialog.ui:24
-#: panels/system/users/cc-avatar-chooser.c:92
-#: panels/system/users/cc-enterprise-login-dialog.ui:44
-#: panels/system/users/cc-fingerprint-dialog.c:1400
-#: panels/system/users/cc-fingerprint-dialog.ui:17
-#: panels/system/users/cc-password-dialog.ui:15
-#: panels/system/users/cc-user-page.ui:223
-#: panels/system/users/data/join-dialog.ui:17
-#: panels/wwan/cc-wwan-mode-dialog.ui:32
-#: panels/wwan/cc-wwan-network-dialog.ui:109
-#: panels/wwan/cc-wwan-sim-lock-dialog.ui:239
-msgid "_Cancel"
-msgstr "取消(_C)"
-
 #. This starts the calibration process
 #: panels/color/cc-color-calibrate.ui:27
 msgid "_Start"
@@ -1385,17 +1447,6 @@ msgstr "加入描述檔"
 #: panels/color/cc-color-panel.ui:343
 msgid "_Import File…"
 msgstr "載入檔案(_I)…"
-
-#: panels/color/cc-color-panel.ui:349 panels/keyboard/cc-input-chooser.ui:23
-#: panels/keyboard/cc-keyboard-shortcut-editor.ui:30
-#: panels/network/connection-editor/net-connection-editor.c:653
-#: panels/printers/pp-new-printer-dialog.ui:96
-#: panels/system/users/cc-add-user-dialog.c:362
-#: panels/system/users/cc-add-user-dialog.ui:32
-#: panels/system/users/cc-add-user-dialog.ui:153
-#: panels/system/users/cc-enterprise-login-dialog.ui:52
-msgid "_Add"
-msgstr "加入(_A)"
 
 #: panels/color/cc-color-panel.ui:418
 msgid ""
@@ -1699,7 +1750,7 @@ msgstr "遞減分鐘"
 
 #: panels/common/cc-util.c:130
 #: panels/network/connection-editor/ce-page-details.c:188
-#: panels/wellbeing/cc-screen-time-statistics-row.c:928
+#: panels/wellbeing/cc-screen-time-statistics-row.c:973
 msgid "Today"
 msgstr "今天"
 
@@ -1859,67 +1910,67 @@ msgstr "夜光(_N)"
 msgid "Night Light"
 msgstr "夜光模式"
 
-#: panels/display/cc-display-settings.c:120
+#: panels/display/cc-display-settings.c:127
 msgctxt "Display rotation"
 msgid "Landscape"
 msgstr "橫向"
 
-#: panels/display/cc-display-settings.c:123
+#: panels/display/cc-display-settings.c:130
 msgctxt "Display rotation"
 msgid "Portrait Right"
 msgstr "直向右轉"
 
-#: panels/display/cc-display-settings.c:126
+#: panels/display/cc-display-settings.c:133
 msgctxt "Display rotation"
 msgid "Portrait Left"
 msgstr "直向左轉"
 
-#: panels/display/cc-display-settings.c:129
+#: panels/display/cc-display-settings.c:136
 msgctxt "Display rotation"
 msgid "Landscape (flipped)"
 msgstr "橫向（翻轉）"
 
-#: panels/display/cc-display-settings.c:140
+#: panels/display/cc-display-settings.c:147
 msgctxt "Display rotation"
 msgid "Portrait"
 msgstr "直向"
 
-#: panels/display/cc-display-settings.c:143
+#: panels/display/cc-display-settings.c:150
 msgctxt "Display rotation"
 msgid "Landscape Right"
 msgstr "橫向右轉"
 
-#: panels/display/cc-display-settings.c:146
+#: panels/display/cc-display-settings.c:153
 msgctxt "Display rotation"
 msgid "Landscape Left"
 msgstr "橫向左轉"
 
-#: panels/display/cc-display-settings.c:149
+#: panels/display/cc-display-settings.c:156
 msgctxt "Display rotation"
 msgid "Portrait (flipped)"
 msgstr "直向（翻轉）"
 
-#: panels/display/cc-display-settings.c:160
+#: panels/display/cc-display-settings.c:167
 msgctxt "Display rotation"
 msgid "Upright"
 msgstr "直立"
 
-#: panels/display/cc-display-settings.c:163
+#: panels/display/cc-display-settings.c:170
 msgctxt "Display rotation"
 msgid "Right"
 msgstr "右轉"
 
-#: panels/display/cc-display-settings.c:166
+#: panels/display/cc-display-settings.c:173
 msgctxt "Display rotation"
 msgid "Left"
 msgstr "左轉"
 
-#: panels/display/cc-display-settings.c:169
+#: panels/display/cc-display-settings.c:176
 msgctxt "Display rotation"
 msgid "Flipped"
 msgstr "翻轉"
 
-#: panels/display/cc-display-settings.c:235
+#: panels/display/cc-display-settings.c:242
 msgid "%.2lf Hz"
 msgstr "%.2lf Hz"
 
@@ -1928,12 +1979,12 @@ msgstr "%.2lf Hz"
 #. * 2. The formatting sequence is a range separated by an en-dash
 #. *    (unicode "\u2013"). For example: "Variable (48–144.97 Hz)"
 #.
-#: panels/display/cc-display-settings.c:252
+#: panels/display/cc-display-settings.c:259
 msgid "Variable (%d–%.2lf Hz)"
 msgstr "變動（%d–%.2lf Hz）"
 
 #. Translators: "Variable" is an adjective that refers to the refresh rate
-#: panels/display/cc-display-settings.c:259
+#: panels/display/cc-display-settings.c:266
 msgid "Variable (up to %.2lf Hz)"
 msgstr "變動（最高 %.2lf Hz）"
 
@@ -1965,11 +2016,15 @@ msgid "_HDR (High Dynamic Range)"
 msgstr "_HDR（高動態範圍）"
 
 #: panels/display/cc-display-settings.ui:92
+msgid "HDR _Brightness"
+msgstr "HDR 亮度(_B)"
+
+#: panels/display/cc-display-settings.ui:114
 msgid "Adjust for _TV"
 msgstr "對電視調整(_T)"
 
-#: panels/display/cc-display-settings.ui:100
-#: panels/display/cc-display-settings.ui:114
+#: panels/display/cc-display-settings.ui:122
+#: panels/display/cc-display-settings.ui:136
 msgctxt "display setting"
 msgid "_Scale"
 msgstr "縮放(_S)"
@@ -2168,11 +2223,6 @@ msgstr "家目錄"
 msgid "Search"
 msgstr "搜尋"
 
-#: panels/keyboard/01-launchers.xml.in:16
-msgctxt "keybinding"
-msgid "Search"
-msgstr "搜尋"
-
 #: panels/keyboard/01-system.xml.in:2 panels/privacy/cc-privacy-panel.ui:18
 #: panels/system/cc-system-panel.ui:6
 #: panels/system/gnome-system-panel.desktop.in:3
@@ -2282,9 +2332,9 @@ msgstr "偏好設定"
 msgid "Remove"
 msgstr "移除"
 
-#: panels/keyboard/cc-keyboard-manager.c:488
-#: panels/keyboard/cc-keyboard-manager.c:496
-#: panels/keyboard/cc-keyboard-manager.c:936
+#: panels/keyboard/cc-keyboard-manager.c:507
+#: panels/keyboard/cc-keyboard-manager.c:515
+#: panels/keyboard/cc-keyboard-manager.c:1074
 msgid "Custom Shortcuts"
 msgstr "自訂快捷鍵"
 
@@ -2446,27 +2496,27 @@ msgstr "搜尋快捷鍵"
 msgid "_Reset All…"
 msgstr "重設全部(_R)…"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:124
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:127
 msgid "Add Custom Shortcuts"
 msgstr "加入自訂快捷鍵"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:125
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:128
 msgid "Set up custom shortcuts for launching apps, running scripts, and more"
 msgstr "設定自訂快捷鍵來啟動應用程式、執行命令稿等"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:130
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:133
 msgid "_Add Shortcut…"
 msgstr "加入快捷鍵(_A)…"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:153
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:156
 msgid "Reset All Shortcuts?"
 msgstr "要重設所有快捷鍵嗎？"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:154
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:157
 msgid "All changes to keyboard shortcuts will be lost"
 msgstr "對鍵盤快捷鍵的所有變更都會遺失"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:160
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:163
 msgid "_Reset All"
 msgstr "重設全部(_R)"
 
@@ -2500,14 +2550,9 @@ msgstr "設定快捷鍵"
 msgid "Enter new shortcut to change <b>%s</b>"
 msgstr "請輸入新的快捷鍵來更改 <b>%s</b>"
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.c:932
+#: panels/keyboard/cc-keyboard-shortcut-editor.c:929
 msgid "Add Custom Shortcut"
 msgstr "加入自訂快捷鍵"
-
-#: panels/keyboard/cc-keyboard-shortcut-editor.ui:19
-#: panels/system/users/cc-user-page.ui:224
-msgid "_Remove"
-msgstr "移除(_R)"
 
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:41
 msgid "Re_place"
@@ -2564,7 +2609,7 @@ msgid "%d modified"
 msgid_plural "%d modified"
 msgstr[0] "已修改 %d 個"
 
-#: panels/keyboard/cc-keyboard-shortcut-group.c:158
+#: panels/keyboard/cc-keyboard-shortcut-group.c:157
 msgid "Add a Shortcut"
 msgstr "加入快捷鍵"
 
@@ -2966,7 +3011,7 @@ msgid "_Proxy"
 msgstr "代理伺服器(_P)"
 
 #: panels/network/cc-qr-code-dialog.ui:6
-#: panels/network/cc-wifi-connection-row.ui:51
+#: panels/network/cc-wifi-connection-row.ui:50
 msgid "Share Network"
 msgstr "分享網路"
 
@@ -3026,16 +3071,16 @@ msgid "Signal strength %d%%"
 msgstr "訊號強度 %d%%"
 
 #. TRANSLATORS: device status
-#: panels/network/cc-wifi-connection-row.ui:35 panels/network/panel-common.c:63
+#: panels/network/cc-wifi-connection-row.ui:34 panels/network/panel-common.c:63
 msgid "Connected"
 msgstr "已連線"
 
-#: panels/network/cc-wifi-connection-row.ui:63
+#: panels/network/cc-wifi-connection-row.ui:62
 #: panels/network/network-bluetooth.ui:14 panels/network/network-ethernet.ui:47
 msgid "Network Options"
 msgstr "網路選項"
 
-#: panels/network/cc-wifi-connection-row.ui:74
+#: panels/network/cc-wifi-connection-row.ui:73
 msgid "Forget Network"
 msgstr "遺忘網路"
 
@@ -3180,7 +3225,7 @@ msgstr "802.1x 安全加密(_S)"
 #: panels/network/connection-editor/bluetooth-page.ui:16
 #: panels/network/connection-editor/ethernet-page.ui:27
 #: panels/network/connection-editor/vpn-page.ui:23
-#: panels/printers/pp-details-dialog.ui:24
+#: panels/printers/pp-details-dialog.ui:25
 #: panels/system/users/cc-user-page.ui:84
 msgid "_Name"
 msgstr "名稱(_N)"
@@ -4653,69 +4698,69 @@ msgid "%d %%"
 msgstr "%d %%"
 
 #. TRANSLATORS: This is the same title as the title from the .ui file, but without mnemonic
-#: panels/power/cc-power-panel.c:206
+#: panels/power/cc-power-panel.c:207
 msgid "Power Saving"
 msgstr "省電模式"
 
-#: panels/power/cc-power-panel.c:302
+#: panels/power/cc-power-panel.c:303
 msgid "Battery Levels"
 msgstr "電池電量"
 
 #. Translators: UPS is an Uninterruptible Power Supply:
 #. * https://en.wikipedia.org/wiki/Uninterruptible_power_supply
-#: panels/power/cc-power-panel.c:307
+#: panels/power/cc-power-panel.c:308
 msgid "UPS"
 msgstr "UPS"
 
-#: panels/power/cc-power-panel.c:310
+#: panels/power/cc-power-panel.c:311
 msgid "Battery Level"
 msgstr "電池電量"
 
-#: panels/power/cc-power-panel.c:537
+#: panels/power/cc-power-panel.c:549
 msgid "Suspend"
 msgstr "暫停"
 
-#: panels/power/cc-power-panel.c:538
+#: panels/power/cc-power-panel.c:550
 msgid "Power Off"
 msgstr "關閉電源"
 
-#: panels/power/cc-power-panel.c:539
+#: panels/power/cc-power-panel.c:551
 msgid "Hibernate"
 msgstr "休眠"
 
-#: panels/power/cc-power-panel.c:540
+#: panels/power/cc-power-panel.c:552
 msgid "Nothing"
 msgstr "沒有動作"
 
-#: panels/power/cc-power-panel.c:864
+#: panels/power/cc-power-panel.c:876
 msgid "Performance mode temporarily disabled due to high operating temperature"
 msgstr "因作業溫度高，暫時停用效能模式"
 
-#: panels/power/cc-power-panel.c:866
+#: panels/power/cc-power-panel.c:878
 msgid ""
 "Lap detected: performance mode temporarily unavailable. Move the device to a "
 "stable surface to restore."
 msgstr ""
 "偵測到大腿：效能模式暫無法使用。請將裝置移動至穩定的平面以重啟效能模式。"
 
-#: panels/power/cc-power-panel.c:868
+#: panels/power/cc-power-panel.c:880
 msgid "Performance mode temporarily disabled"
 msgstr "效能模式暫時停用"
 
-#: panels/power/cc-power-panel.c:910
+#: panels/power/cc-power-panel.c:922
 msgid ""
 "Power saver enabled due to low battery. Previous mode will be restored when "
 "battery is charged."
 msgstr "因電池電量低，啟用省電功能。在電池充電後將恢復先前的模式。"
 
 #. translators: "%s" is an application name
-#: panels/power/cc-power-panel.c:918
+#: panels/power/cc-power-panel.c:930
 #, c-format
 msgid "Power Saver mode activated by “%s”"
 msgstr "省電模式已由「%s」啟動"
 
 #. translators: "%s" is an application name
-#: panels/power/cc-power-panel.c:922
+#: panels/power/cc-power-panel.c:934
 #, c-format
 msgid "Performance mode activated by “%s”"
 msgstr "效能模式已由「%s」啟動"
@@ -4724,6 +4769,7 @@ msgstr "效能模式已由「%s」啟動"
 msgid "_General"
 msgstr "一般(_G)"
 
+#. Translators: 'battery charging' means the settings to handle the way battery charges, not that the battery is currently charging.
 #: panels/power/cc-power-panel.ui:78
 msgid "Battery Charging"
 msgstr "電池充電"
@@ -4812,17 +4858,23 @@ msgstr "自動暫停"
 msgid "On Ba_ttery Power"
 msgstr "使用電池電力時(_T)"
 
-#: panels/power/cc-power-panel.ui:256
+#: panels/power/cc-power-panel.ui:257
 msgid "De_lay"
 msgstr "延遲(_L)"
 
-#: panels/power/cc-power-panel.ui:268
+#: panels/power/cc-power-panel.ui:269
 msgid "Whe_n Plugged In"
 msgstr "插入電源線時(_N)"
 
-#: panels/power/cc-power-panel.ui:275
+#: panels/power/cc-power-panel.ui:277
 msgid "Del_ay"
 msgstr "延遲(_A)"
+
+#: panels/power/cc-power-panel.ui:289
+msgid ""
+"Disabling automatic suspend will result in higher power consumption. It is "
+"recommended to keep automatic suspend enabled."
+msgstr "停用自動暫停功能會導致較高的耗電量。建議保持啟用自動暫停。"
 
 #: panels/power/cc-power-profile-row.c:128
 msgctxt "Power profile"
@@ -4931,43 +4983,43 @@ msgid ""
 msgstr "PostScript 印表機描述檔 (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, *.PPD.GZ)"
 
 #: panels/printers/pp-details-dialog.ui:4
-#: panels/printers/pp-details-dialog.ui:12
+#: panels/printers/pp-details-dialog.ui:13
 #: panels/printers/pp-printer-entry.ui:246
 msgid "Printer Details"
 msgstr "印表機詳細資料"
 
-#: panels/printers/pp-details-dialog.ui:35
+#: panels/printers/pp-details-dialog.ui:36
 msgid "Printer names cannot contain SPACE, TAB, #, or /"
 msgstr "印表機名稱不能包含空格、TAB 鍵、# 或 /"
 
-#: panels/printers/pp-details-dialog.ui:54
+#: panels/printers/pp-details-dialog.ui:55
 #: panels/privacy/cc-privacy-panel.ui:34
 msgid "_Location"
 msgstr "位置(_L)"
 
-#: panels/printers/pp-details-dialog.ui:60
+#: panels/printers/pp-details-dialog.ui:61
 msgid "_Address"
 msgstr "位址(_A)"
 
-#: panels/printers/pp-details-dialog.ui:69
+#: panels/printers/pp-details-dialog.ui:70
 msgid "Open Address"
 msgstr "開啟位址"
 
 #. Translators: Name of column showing printer drivers
-#: panels/printers/pp-details-dialog.ui:81
+#: panels/printers/pp-details-dialog.ui:82
 #: panels/printers/pp-ppd-selection-dialog.c:232
 msgid "Driver"
 msgstr "驅動程式"
 
-#: panels/printers/pp-details-dialog.ui:102
+#: panels/printers/pp-details-dialog.ui:103
 msgid "_Search for Drivers"
 msgstr "搜尋驅動程式(_S)"
 
-#: panels/printers/pp-details-dialog.ui:109
+#: panels/printers/pp-details-dialog.ui:110
 msgid "S_elect from Database…"
 msgstr "從資料庫選取(_E)…"
 
-#: panels/printers/pp-details-dialog.ui:116
+#: panels/printers/pp-details-dialog.ui:117
 msgid "_Install PPD File…"
 msgstr "安裝 PPD 檔案(_I)…"
 
@@ -7576,11 +7628,11 @@ msgstr "為了設定好的密碼，請混合使用大寫字母、小寫字母、
 msgid "_Confirm Password"
 msgstr "確認密碼(_C)"
 
-#: panels/system/users/cc-avatar-chooser.c:94
+#: panels/system/users/cc-avatar-chooser.c:91
 msgid "Select"
 msgstr "選取"
 
-#: panels/system/users/cc-avatar-chooser.c:162
+#: panels/system/users/cc-avatar-chooser.c:159
 msgid "Browse for more pictures"
 msgstr "瀏覽更多照片"
 
@@ -9113,51 +9165,51 @@ msgstr "持續期間"
 msgid "Interval"
 msgstr "間隔時間"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:221
+#: panels/wellbeing/cc-screen-time-statistics-row.c:228
 msgctxt "abbreviated weekday name for Sunday"
 msgid "S"
 msgstr "日"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:222
+#: panels/wellbeing/cc-screen-time-statistics-row.c:229
 msgctxt "abbreviated weekday name for Monday"
 msgid "M"
 msgstr "一"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:223
+#: panels/wellbeing/cc-screen-time-statistics-row.c:230
 msgctxt "abbreviated weekday name for Tuesday"
 msgid "T"
 msgstr "二"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:224
+#: panels/wellbeing/cc-screen-time-statistics-row.c:231
 msgctxt "abbreviated weekday name for Wednesday"
 msgid "W"
 msgstr "三"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:225
+#: panels/wellbeing/cc-screen-time-statistics-row.c:232
 msgctxt "abbreviated weekday name for Thursday"
 msgid "T"
 msgstr "四"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:226
+#: panels/wellbeing/cc-screen-time-statistics-row.c:233
 msgctxt "abbreviated weekday name for Friday"
 msgid "F"
 msgstr "五"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:227
+#: panels/wellbeing/cc-screen-time-statistics-row.c:234
 msgctxt "abbreviated weekday name for Saturday"
 msgid "S"
 msgstr "六"
 
 #. Translators: This is a duration in minutes, for example ‘15m’ for 15 minutes.
 #. * Use whatever shortest unit label is used for minutes in your locale.
-#: panels/wellbeing/cc-screen-time-statistics-row.c:384
+#: panels/wellbeing/cc-screen-time-statistics-row.c:391
 #, c-format
 msgid "%um"
 msgstr "%u 分鐘"
 
 #. Translators: This is a duration in hours, for example ‘2h’ for 2 hours.
 #. * Use whatever shortest unit label is used for hours in your locale.
-#: panels/wellbeing/cc-screen-time-statistics-row.c:390
+#: panels/wellbeing/cc-screen-time-statistics-row.c:397
 #, c-format
 msgid "%uh"
 msgstr "%u 小時"
@@ -9165,70 +9217,95 @@ msgstr "%u 小時"
 #. Translators: This is a duration in hours and minutes, for example
 #. * ‘3h 15m’ for 3 hours and 15 minutes. Use whatever shortest unit label
 #. * is used for hours and minutes in your locale.
-#: panels/wellbeing/cc-screen-time-statistics-row.c:397
+#: panels/wellbeing/cc-screen-time-statistics-row.c:404
 #, c-format
 msgid "%uh %um"
 msgstr "%u 小時 %u 分"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:627
-#: panels/wellbeing/cc-screen-time-statistics-row.c:747
+#: panels/wellbeing/cc-screen-time-statistics-row.c:663
+#: panels/wellbeing/cc-screen-time-statistics-row.c:783
 #, c-format
 msgid "Failed to load session history file ‘%s’: %s"
 msgstr "載入作業階段歷史檔案「%s」失敗：%s"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:628
+#: panels/wellbeing/cc-screen-time-statistics-row.c:664
 msgid "Invalid file structure"
 msgstr "檔案結構無效"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:665
+#: panels/wellbeing/cc-screen-time-statistics-row.c:701
 #, c-format
 msgid "Failed to load session history file: %s"
 msgstr "載入作業階段歷史檔案失敗：%s"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:666
-#: panels/wellbeing/cc-screen-time-statistics-row.c:748
+#: panels/wellbeing/cc-screen-time-statistics-row.c:702
+#: panels/wellbeing/cc-screen-time-statistics-row.c:784
 msgid "File is empty"
 msgstr "檔案空白"
 
+#. G_DATE_BAD_WEEKDAY
+#: panels/wellbeing/cc-screen-time-statistics-row.c:920
+msgid "Average Monday"
+msgstr "週一平均"
+
+#: panels/wellbeing/cc-screen-time-statistics-row.c:921
+msgid "Average Tuesday"
+msgstr "週二平均"
+
+#: panels/wellbeing/cc-screen-time-statistics-row.c:922
+msgid "Average Wednesday"
+msgstr "週三平均"
+
+#: panels/wellbeing/cc-screen-time-statistics-row.c:923
+msgid "Average Thursday"
+msgstr "週四平均"
+
+#: panels/wellbeing/cc-screen-time-statistics-row.c:924
+msgid "Average Friday"
+msgstr "週五平均"
+
+#: panels/wellbeing/cc-screen-time-statistics-row.c:925
+msgid "Average Saturday"
+msgstr "週六平均"
+
+#: panels/wellbeing/cc-screen-time-statistics-row.c:926
+msgid "Average Sunday"
+msgstr "週日平均"
+
 #. Translators: This a medium-length date, for example ‘15 April’
-#: panels/wellbeing/cc-screen-time-statistics-row.c:933
+#: panels/wellbeing/cc-screen-time-statistics-row.c:978
 msgid "%-d %B"
 msgstr "%b%-d日"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:946
-#: panels/wellbeing/cc-screen-time-statistics-row.c:957
+#: panels/wellbeing/cc-screen-time-statistics-row.c:991
+#: panels/wellbeing/cc-screen-time-statistics-row.c:1002
 msgid "No Data"
 msgstr "無資料"
 
-#. Translators: This is an annotated day of the week. For example ‘Average Monday’.
-#: panels/wellbeing/cc-screen-time-statistics-row.c:950
-#, c-format
-msgid "Average %A"
-msgstr "%A平均"
-
-#: panels/wellbeing/cc-screen-time-statistics-row.c:961
+#: panels/wellbeing/cc-screen-time-statistics-row.c:1006
 #, c-format
 msgid "This Week"
 msgstr "本週"
 
 #. Translators: This is a range of days within a given month.
 #. * For example ‘20–27 April’. The dash is an en-dash.
-#: panels/wellbeing/cc-screen-time-statistics-row.c:972
+#: panels/wellbeing/cc-screen-time-statistics-row.c:1017
 #, c-format
 msgid "%u–%u %s"
 msgstr "%3$s%1$u–%2$u日"
 
 #. Translators: This is a range of days spanning two months.
 #. * For example, ‘27 April–4 May’. The dash is an en-dash.
-#: panels/wellbeing/cc-screen-time-statistics-row.c:989
+#: panels/wellbeing/cc-screen-time-statistics-row.c:1034
 #, c-format
 msgid "%u %s–%u %s"
 msgstr "%2$s%1$u日–%4$s%3$u日"
 
-#. Translators: The first placeholder is a formatted date string. The
-#. * second placeholder is a formatted time duration (for example, ‘3 hours’
-#. * or ‘25 minutes’).
-#: panels/wellbeing/cc-screen-time-statistics-row.c:1050
+#. Translators: The first placeholder is a formatted date string
+#. * (formatted using the `%x` strftime placeholder, which gives the
+#. * preferred date representation for the current locale without the time).
+#. * The second placeholder is a formatted time duration (for example,
+#. * ‘3 hours’ or ‘25 minutes’).
+#: panels/wellbeing/cc-screen-time-statistics-row.c:1097
 #, c-format
 msgid ""
 "Bar chart of screen time usage over the week starting %s. A line is "
@@ -9237,13 +9314,15 @@ msgstr ""
 "從 %s 開始的一週內螢幕使用時間長條圖。在 %s 標記處會疊上一條線，表示設定的螢"
 "幕使用時間限制。"
 
-#. Translators: The placeholder is a formatted date string.
-#: panels/wellbeing/cc-screen-time-statistics-row.c:1067
+#. Translators: The placeholder is a formatted date string (formatted
+#. * using the `%x` strftime placeholder, which gives the preferred date
+#. * representation for the current locale without the time).
+#: panels/wellbeing/cc-screen-time-statistics-row.c:1116
 #, c-format
 msgid "Bar chart of screen time usage over the week starting %s."
 msgstr "從 %s 開始的一週內螢幕使用時間長條圖。"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:1073
+#: panels/wellbeing/cc-screen-time-statistics-row.c:1122
 #, c-format
 msgid ""
 "Placeholder for a bar chart of screen time usage. No data is currently "
@@ -10103,6 +10182,10 @@ msgstr[0] "%u 輸入"
 #: subprojects/gvc/gvc-mixer-control.c:2872
 msgid "System Sounds"
 msgstr "系統音效"
+
+#~ msgctxt "keybinding"
+#~ msgid "Search"
+#~ msgstr "搜尋"
 
 #~ msgid "How much disk space this app is occupying with app data and caches"
 #~ msgstr "程式的資料與快取所佔用的磁碟空間"
@@ -11481,9 +11564,6 @@ msgstr "系統音效"
 
 #~ msgid "Section"
 #~ msgstr "節"
-
-#~ msgid "Shortcuts"
-#~ msgstr "快捷鍵"
 
 #~ msgid "Location Services Turned Off"
 #~ msgstr "定位服務已關閉"
@@ -13445,9 +13525,6 @@ msgstr "系統音效"
 
 #~ msgid "Scroll Right"
 #~ msgstr "向右捲動"
-
-#~ msgid "Remove Shortcut"
-#~ msgstr "移除捷徑鍵"
 
 #~ msgid ""
 #~ "To edit a shortcut, click the row and hold down the new keys or press "
