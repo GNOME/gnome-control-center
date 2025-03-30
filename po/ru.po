@@ -24,8 +24,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2025-03-13 14:46+0000\n"
-"PO-Revision-Date: 2025-03-13 19:45+0300\n"
+"POT-Creation-Date: 2025-03-19 09:49+0000\n"
+"PO-Revision-Date: 2025-03-20 18:38+0300\n"
 "Last-Translator: Artur So <arturios2005@mail.ru>\n"
 "Language-Team: Русский <gnome-cyr@gnome.org>\n"
 "Language: ru\n"
@@ -128,33 +128,33 @@ msgstr ""
 msgid "Global Shortcuts"
 msgstr "Глобальные комбинации клавиш"
 
-#: panels/applications/cc-applications-panel.c:880
+#: panels/applications/cc-applications-panel.c:881
 msgid "System Bus"
 msgstr "Системная шина"
 
-#: panels/applications/cc-applications-panel.c:880
-#: panels/applications/cc-applications-panel.c:882
-#: panels/applications/cc-applications-panel.c:895
-#: panels/applications/cc-applications-panel.c:900
+#: panels/applications/cc-applications-panel.c:881
+#: panels/applications/cc-applications-panel.c:883
+#: panels/applications/cc-applications-panel.c:896
+#: panels/applications/cc-applications-panel.c:901
 msgid "Full access"
 msgstr "Полный доступ"
 
-#: panels/applications/cc-applications-panel.c:882
+#: panels/applications/cc-applications-panel.c:883
 msgid "Session Bus"
 msgstr "Шина сеанса"
 
-#: panels/applications/cc-applications-panel.c:886
+#: panels/applications/cc-applications-panel.c:887
 #: panels/privacy/bolt/cc-bolt-page.ui:164
 #: panels/privacy/bolt/cc-bolt-page.ui:202
 #: panels/privacy/cc-privacy-panel.ui:72
 msgid "Devices"
 msgstr "Устройства"
 
-#: panels/applications/cc-applications-panel.c:886
+#: panels/applications/cc-applications-panel.c:887
 msgid "Full access to /dev"
 msgstr "Полный доступ к /dev"
 
-#: panels/applications/cc-applications-panel.c:890
+#: panels/applications/cc-applications-panel.c:891
 #: panels/network/cc-network-panel.ui:8
 #: panels/network/gnome-network-panel.desktop.in:3
 #: panels/network/network-mobile.ui:235 panels/wwan/cc-wwan-device-page.ui:61
@@ -162,47 +162,48 @@ msgstr "Полный доступ к /dev"
 msgid "Network"
 msgstr "Сеть"
 
-#: panels/applications/cc-applications-panel.c:890
+#: panels/applications/cc-applications-panel.c:891
 msgid "Has network access"
 msgstr "Имеет доступ к сети"
 
-#: panels/applications/cc-applications-panel.c:895
-#: panels/applications/cc-applications-panel.c:897
+#: panels/applications/cc-applications-panel.c:896
+#: panels/applications/cc-applications-panel.c:898
 #: panels/search/cc-search-locations-page.c:421
 msgid "Home"
 msgstr "Домашняя папка"
 
-#: panels/applications/cc-applications-panel.c:897
-#: panels/applications/cc-applications-panel.c:902
+#: panels/applications/cc-applications-panel.c:898
+#: panels/applications/cc-applications-panel.c:903
 msgid "Read-only"
 msgstr "Только для чтения"
 
-#: panels/applications/cc-applications-panel.c:900
-#: panels/applications/cc-applications-panel.c:902
+#: panels/applications/cc-applications-panel.c:901
+#: panels/applications/cc-applications-panel.c:903
 msgid "File System"
 msgstr "Файловая система"
 
-#: panels/applications/cc-applications-panel.c:906
+#: panels/applications/cc-applications-panel.c:907
 #: panels/keyboard/01-launchers.xml.in:6
 #: shell/appdata/org.gnome.Settings.appdata.xml.in.in:7 shell/cc-window.c:804
 #: shell/cc-window.ui:18 shell/org.gnome.Settings.desktop.in:3
 msgid "Settings"
 msgstr "Настройки"
 
-#: panels/applications/cc-applications-panel.c:906
+#: panels/applications/cc-applications-panel.c:907
 msgid "Can change settings"
 msgstr "Может изменять настройки"
 
-#: panels/applications/cc-applications-panel.c:908
+#. TRANSLATORS: %s is an app name.
+#: panels/applications/cc-applications-panel.c:911
 #, c-format
 msgid ""
-"<b>%s</b> requires access to the following system resources. To stop this "
-"access, the app must be removed."
+"%s requires access to the following system resources. To stop this access, "
+"the app must be removed."
 msgstr ""
-"Приложение <b>%s</b> требует доступа к следующим системным ресурсам. Чтобы "
+"Приложение %s требует доступа к следующим системным ресурсам. Чтобы "
 "прекратить этот доступ, приложение должно быть удалено."
 
-#: panels/applications/cc-applications-panel.c:912
+#: panels/applications/cc-applications-panel.c:915
 #, c-format
 msgid "%u permission"
 msgid_plural "%u permissions"
@@ -210,15 +211,15 @@ msgstr[0] "%u разрешение"
 msgstr[1] "%u разрешения"
 msgstr[2] "%u разрешений"
 
-#: panels/applications/cc-applications-panel.c:1084
+#: panels/applications/cc-applications-panel.c:1087
 msgid "Remove Link Type"
 msgstr "Удалить тип ссылки"
 
-#: panels/applications/cc-applications-panel.c:1115
+#: panels/applications/cc-applications-panel.c:1118
 msgid "Remove File Type"
 msgstr "Удалить тип файла"
 
-#: panels/applications/cc-applications-panel.c:1247
+#: panels/applications/cc-applications-panel.c:1251
 #, c-format
 msgid "%u type"
 msgid_plural "%u types"
@@ -226,20 +227,27 @@ msgstr[0] "%u тип"
 msgstr[1] "%u типа"
 msgstr[2] "%u типов"
 
-#: panels/applications/cc-applications-panel.c:1254
+#. TRANSLATORS: %s is an app name.
+#: panels/applications/cc-applications-panel.c:1260
 #, c-format
-msgid "<b>%s</b> is used to open the following types of files and links"
+msgid "%s is used to open the following types of files and links"
 msgstr ""
-"Приложение <b>%s</b> используется для открытия следующих типов файлов и "
-"ссылок"
+"Приложение %s используется для открытия следующих типов файлов и ссылок"
 
 #. TRANSLATORS: %s is an app name.
-#: panels/applications/cc-applications-panel.c:1295
+#: panels/applications/cc-applications-panel.c:1303
 #, c-format
-msgid "How much disk space <b>%s</b> is occupying with app data and caches"
+msgid "How much disk space %s is occupying with app data and caches"
 msgstr ""
-"Сколько дискового пространства занимает приложение <b>%s</b> с его данными и "
-"кэшами"
+"Сколько дискового пространства занимает приложение %s с его данными и кэшами"
+
+#: panels/applications/cc-applications-panel.c:1468
+#, c-format
+msgid "%u action"
+msgid_plural "%u actions"
+msgstr[0] "%u действие"
+msgstr[1] "%u действия"
+msgstr[2] "%u действий"
 
 #: panels/applications/cc-applications-panel.ui:7
 #: panels/applications/gnome-applications-panel.desktop.in:3
@@ -2276,11 +2284,6 @@ msgstr "Домашняя папка"
 msgid "Search"
 msgstr "Поиск"
 
-#: panels/keyboard/01-launchers.xml.in:16
-msgctxt "keybinding"
-msgid "Search"
-msgstr "Найти"
-
 #: panels/keyboard/01-system.xml.in:2 panels/privacy/cc-privacy-panel.ui:18
 #: panels/system/cc-system-panel.ui:6
 #: panels/system/gnome-system-panel.desktop.in:3
@@ -2614,7 +2617,7 @@ msgstr "Установить комбинацию клавиш"
 msgid "Enter new shortcut to change <b>%s</b>"
 msgstr "Введите новую комбинацию для изменения <b>%s</b>"
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.c:932
+#: panels/keyboard/cc-keyboard-shortcut-editor.c:929
 msgid "Add Custom Shortcut"
 msgstr "Добавить пользовательскую комбинацию клавиш"
 
@@ -2675,7 +2678,7 @@ msgstr[0] "%d изменена"
 msgstr[1] "%d изменены"
 msgstr[2] "%d изменено"
 
-#: panels/keyboard/cc-keyboard-shortcut-group.c:158
+#: panels/keyboard/cc-keyboard-shortcut-group.c:157
 msgid "Add a Shortcut"
 msgstr "Добавить комбинацию"
 
@@ -4998,7 +5001,8 @@ msgid ""
 "recommended to keep automatic suspend enabled."
 msgstr ""
 "Отключение автоматического режима ожидания приведет к увеличению "
-"энергопотребления. Рекомендуется держать автоматический режим ожидания включенным."
+"энергопотребления. Рекомендуется держать автоматический режим ожидания "
+"включенным."
 
 #: panels/power/cc-power-profile-row.c:128
 msgctxt "Power profile"
@@ -10437,6 +10441,10 @@ msgstr[2] "%u входов"
 #: subprojects/gvc/gvc-mixer-control.c:2872
 msgid "System Sounds"
 msgstr "Системные звуки"
+
+#~ msgctxt "keybinding"
+#~ msgid "Search"
+#~ msgstr "Найти"
 
 #~ msgid "Daily Screen Usage Limi_t"
 #~ msgstr "Огра_ничение суточного использования экрана"
