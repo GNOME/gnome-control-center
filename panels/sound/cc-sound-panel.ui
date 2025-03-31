@@ -24,6 +24,13 @@
                             <property name="width-request">40</property>
                           </object>
                         </child>
+                        <child>
+                          <object class="GtkButton">
+                            <property name="label" translatable="yes">_Test…</property>
+                            <property name="use-underline">True</property>
+                            <signal name="clicked" handler="test_output_configuration_button_clicked_cb" object="CcSoundPanel" swapped="yes"/>
+                          </object>
+                        </child>
                       </object>
                     </property>
                     <child>
@@ -54,13 +61,6 @@
                                       <relation name="labelled-by">output_device_label</relation>
                                     </accessibility>
                                     <signal name="changed" handler="output_device_changed_cb" object="CcSoundPanel" swapped="yes"/>
-                                  </object>
-                                </child>
-                                <child>
-                                  <object class="GtkButton">
-                                    <property name="label" translatable="yes">_Test…</property>
-                                    <property name="use-underline">True</property>
-                                    <signal name="clicked" handler="test_output_configuration_button_clicked_cb" object="CcSoundPanel" swapped="yes"/>
                                   </object>
                                 </child>
                               </object>
