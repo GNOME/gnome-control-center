@@ -199,7 +199,7 @@ verify_result_str_to_msg (const char *result, bool is_swipe)
     }
 
   if (strcmp (result, "verify-unknown-error") == 0)
-    return TR (N_("An unexpected error happened during finger verification"));
+    return TR (N_("An unexpected error happened during fingerprint verification"));
 
   return NULL;
 }
@@ -248,7 +248,7 @@ enroll_result_str_to_msg (const char *result, bool is_swipe)
 
   if (strcmp (result, "enroll-failed") == 0 ||
       strcmp (result, "enroll-unknown-error") == 0)
-    return TR (N_("An unexpected error happened during finger enrollment"));
+    return TR (N_("An unexpected error happened during fingerprint enrollment"));
 
   return NULL;
 }
