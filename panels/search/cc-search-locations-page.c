@@ -717,10 +717,9 @@ add_file_chooser_response (GObject      *source,
 static void
 add_button_clicked (CcSearchLocationsPage *self)
 {
-  GtkFileDialog *file_dialog;
+  g_autoptr(GtkFileDialog) file_dialog = gtk_file_dialog_new ();
   GtkWidget *toplevel = GTK_WIDGET (gtk_widget_get_root (GTK_WIDGET (self)));
 
-  file_dialog = gtk_file_dialog_new ();
   gtk_file_dialog_set_title (file_dialog, _("Select Location"));
   gtk_file_dialog_set_modal (file_dialog, TRUE);
 

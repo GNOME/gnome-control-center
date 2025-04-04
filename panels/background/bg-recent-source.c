@@ -365,6 +365,8 @@ bg_recent_source_finalize (GObject *object)
 
   g_cancellable_cancel (self->cancellable);
   g_clear_object (&self->cancellable);
+  g_clear_pointer (&self->items, g_hash_table_unref);
+  g_clear_object (&self->backgrounds_folder);
   g_clear_object (&self->monitor);
 
   G_OBJECT_CLASS (bg_recent_source_parent_class)->finalize (object);

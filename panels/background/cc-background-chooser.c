@@ -458,7 +458,7 @@ cc_background_chooser_select_file (CcBackgroundChooser *self)
 {
   g_autoptr(GFile) pictures_folder = NULL;
   GtkFileFilter *filter;
-  GtkFileDialog *file_dialog;
+  g_autoptr(GtkFileDialog) file_dialog = NULL;
   GtkWindow *toplevel;
   GListStore *filters;
 

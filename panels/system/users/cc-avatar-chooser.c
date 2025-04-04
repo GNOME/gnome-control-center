@@ -149,7 +149,7 @@ static void
 cc_avatar_chooser_select_file (CcAvatarChooser *self)
 {
         g_autoptr(GFile) pictures_folder = NULL;
-        GtkFileDialog *file_dialog;
+        g_autoptr(GtkFileDialog) file_dialog = NULL;
         GtkFileFilter *filter;
         GListStore *filters;
 

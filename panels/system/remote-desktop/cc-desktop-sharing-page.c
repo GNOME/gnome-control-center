@@ -391,8 +391,8 @@ on_password_copy_clicked (CcDesktopSharingPage *self,
 static void
 setup_desktop_sharing_page (CcDesktopSharingPage *self)
 {
-  const gchar *username = NULL;
-  const gchar *password = NULL;
+  g_autofree gchar *username = NULL;
+  g_autofree gchar *password = NULL;
   g_autofree char *hostname = NULL;
 
   self->rdp_settings = g_settings_new (GNOME_REMOTE_DESKTOP_RDP_SCHEMA_ID);
@@ -499,6 +499,7 @@ cc_desktop_sharing_page_dispose (GObject *object)
   g_clear_object (&self->cancellable);
 
   g_clear_handle_id (&self->store_credentials_id, g_source_remove);
+  g_clear_object (&self->certificate);
 
   g_clear_object (&self->rdp_server);
   g_clear_object (&self->rdp_settings);

@@ -318,6 +318,7 @@ cc_keyboard_shortcut_group_finalize (GObject *object)
 
   g_clear_pointer (&self->section_id, g_free);
   g_clear_pointer (&self->section_title, g_free);
+  g_clear_pointer (&self->modified_text, g_free);
   g_clear_object (&self->shortcut_items);
   g_clear_object (&self->filtered_shortcuts);
 

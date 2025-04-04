@@ -406,7 +406,7 @@ net_device_get_valid_connections (NMClient *client, NMDevice *device)
         NMActiveConnection *active_connection;
         const char *active_uuid;
         const GPtrArray *all;
-        GPtrArray *filtered;
+        g_autoptr(GPtrArray) filtered = NULL;
         guint i;
 
         all = nm_client_get_connections (client);
@@ -428,7 +428,6 @@ net_device_get_valid_connections (NMClient *client, NMDevice *device)
 
                 valid = g_slist_prepend (valid, connection);
         }
-        g_ptr_array_free (filtered, FALSE);
 
         return g_slist_reverse (valid);
 }

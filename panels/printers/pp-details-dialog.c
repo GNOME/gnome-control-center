@@ -267,10 +267,8 @@ select_ppd_manually (PpDetailsDialog *self)
 {
   GtkFileFilter *filter;
   GListStore    *filters;
-  GtkFileDialog *dialog;
+  g_autoptr(GtkFileDialog) dialog = gtk_file_dialog_new ();
   GtkWindow     *toplevel;
-
-  dialog = gtk_file_dialog_new ();
 
   filter = gtk_file_filter_new ();
   gtk_file_filter_set_name (filter,

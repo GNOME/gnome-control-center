@@ -872,7 +872,8 @@ select_vpn_type (NetConnectionEditor *self, GtkListBox *list)
         /*  Translators: VPN add dialog Wireguard description */
         gchar *desc = _("Free and open-source VPN solution designed for ease "
                         "of use, high speed performance and low attack surface.");
-        gchar *desc_markup = g_markup_printf_escaped ("<span size='smaller'>%s</span>", desc);
+        g_autofree gchar *desc_markup = g_markup_printf_escaped ("<span size='smaller'>%s</span>",
+                                                                 desc);
 
         row = adw_action_row_new ();
         gtk_list_box_row_set_activatable (GTK_LIST_BOX_ROW (row), TRUE);

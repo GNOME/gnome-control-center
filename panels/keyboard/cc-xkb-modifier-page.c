@@ -208,6 +208,7 @@ cc_xkb_modifier_page_finalize (GObject *object)
   CcXkbModifierPage *self = (CcXkbModifierPage *)object;
 
   g_clear_object (&self->input_source_settings);
+  g_clear_pointer (&self->radio_group, g_slist_free);
 
   G_OBJECT_CLASS (cc_xkb_modifier_page_parent_class)->finalize (object);
 }
@@ -306,10 +307,8 @@ xcb_modifier_transform_binding_to_label (GValue   *value,
 {
   const CcXkbModifier *modifier = user_data;
   const CcXkbOption *entry = NULL;
-  const char **items;
+  g_autofree const char **items = g_variant_get_strv (variant, NULL);
   guint i;
-
-  items = g_variant_get_strv (variant, NULL);
 
   for (i = 0; items != NULL && items[i] != NULL; i++)
     {

@@ -267,7 +267,7 @@ static void
 cc_sharing_panel_add_folder (CcSharingPanel *self,
                              GtkListBoxRow  *row)
 {
-  GtkFileDialog *dialog;
+  g_autoptr(GtkFileDialog) dialog = NULL;
   GtkWindow *toplevel;
 
   if (!GPOINTER_TO_INT (g_object_get_data (G_OBJECT (row), "is-add")))

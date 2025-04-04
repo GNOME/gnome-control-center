@@ -157,10 +157,9 @@ void
 vpn_import (GtkWindow *parent, VpnImportCallback callback, gpointer user_data)
 {
 	g_autoptr(GFile) home_folder = NULL;
-	GtkFileDialog *dialog;
+	g_autoptr(GtkFileDialog) dialog = gtk_file_dialog_new ();
 	ActionInfo *info;
 
-	dialog = gtk_file_dialog_new ();
 	gtk_file_dialog_set_title (dialog, _("Select file to import"));
 	gtk_file_dialog_set_modal (dialog, TRUE);
 	home_folder = g_file_new_for_path (g_get_home_dir ());

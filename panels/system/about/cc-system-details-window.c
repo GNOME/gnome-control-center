@@ -168,6 +168,15 @@ typedef struct {
   gboolean is_default;
 } GpuData;
 
+static void
+gpu_data_free (GpuData *data)
+{
+  g_clear_pointer (&data->name, g_free);
+  g_free (data);
+}
+
+G_DEFINE_AUTOPTR_CLEANUP_FUNC (GpuData, gpu_data_free)
+
 static int
 gpu_data_sort (gconstpointer a, gconstpointer b)
 {
@@ -301,7 +310,7 @@ create_graphics_rows (CcSystemDetailsWindow *self, GSList *devices)
   for (l = devices; l != NULL; l = l->next)
     {
       GpuData *data = l->data;
-      g_autofree char *name = data->name;
+      const char *name = data->name;
       g_autofree char *label = NULL;
 
       if (data->is_default)
@@ -683,7 +692,8 @@ on_copy_button_clicked_cb (GtkWidget              *widget,
   g_autofree char *firmware_version_text = NULL;
   g_autofree char *windowing_system_text = NULL;
   g_autofree char *kernel_version_text = NULL;
-  g_autofree GSList *graphics_hardware_list, *l;
+  g_autoslist(GpuData) graphics_hardware_list = NULL;
+  GSList *l;
   g_autofree gchar *disk_capacity_string = NULL;
   g_autoptr (GString) result_str;
   locale_t untranslated_locale;
@@ -732,7 +742,7 @@ on_copy_button_clicked_cb (GtkWidget              *widget,
   for (l = graphics_hardware_list; l != NULL; l = l->next)
     {
       GpuData *data = l->data;
-      g_autofree char *name = data->name;
+      const char *name = data->name;
       g_autofree char *label = NULL;
 
       if (data->is_default)
@@ -809,7 +819,7 @@ system_details_window_setup_overview (CcSystemDetailsWindow *self)
   g_autofree char *hardware_model_text = NULL;
   g_autofree char *firmware_version_text = NULL;
   g_autofree char *kernel_version_text = NULL;
-  g_autofree GSList *graphics_hardware_list = NULL;
+  g_autoslist(GpuData) graphics_hardware_list = NULL;
   g_autofree gchar *disk_capacity_string = NULL;
 
   hardware_model_text = get_hardware_model_string ();

@@ -282,13 +282,12 @@ gcm_prefs_file_chooser_get_icc_profile (CcColorPanel *self)
 {
   g_autoptr(GFile) current_folder = NULL;
   GtkWindow *toplevel;
-  GtkFileDialog *dialog;
+  g_autoptr(GtkFileDialog) dialog = gtk_file_dialog_new ();
   GtkFileFilter *filter;
-  GListStore *filters;
+  g_autoptr(GListStore) filters = NULL;
 
   /* create new dialog */
   toplevel = GTK_WINDOW (gtk_widget_get_root (GTK_WIDGET (self)));
-  dialog = gtk_file_dialog_new ();
   /* TRANSLATORS: an ICC profile is a file containing colorspace data */
   gtk_file_dialog_set_title (dialog, _("Select ICC Profile File"));
   gtk_file_dialog_set_modal (dialog, TRUE);
@@ -307,6 +306,7 @@ gcm_prefs_file_chooser_get_icc_profile (CcColorPanel *self)
   /* TRANSLATORS: filter name on the file->open dialog */
   gtk_file_filter_set_name (filter, _("Supported ICC profiles"));
   g_list_store_append (filters, filter);
+  g_object_unref (filter);
 
   /* setup the all files filter */
   filter = gtk_file_filter_new ();
@@ -314,6 +314,7 @@ gcm_prefs_file_chooser_get_icc_profile (CcColorPanel *self)
   /* TRANSLATORS: filter name on the file->open dialog */
   gtk_file_filter_set_name (filter, _("All files"));
   g_list_store_append (filters, filter);
+  g_object_unref (filter);
 
   gtk_file_dialog_open (dialog, toplevel, NULL,
                         icc_prefs_imported_cb, self);
@@ -845,7 +846,7 @@ gcm_prefs_calib_export_cb (CcColorPanel *self)
   gboolean ret;
   g_autofree gchar *default_name = NULL;
   g_autoptr(GError) error = NULL;
-  GtkFileDialog *dialog;
+  g_autoptr(GtkFileDialog) dialog = NULL;
 
   profile = cc_color_calibrate_get_profile (self->calibrate);
   ret = cd_profile_connect_sync (profile, NULL, &error);

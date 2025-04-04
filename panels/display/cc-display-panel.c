@@ -1068,7 +1068,7 @@ static void
 cc_display_panel_init (CcDisplayPanel *self)
 {
   g_autoptr(GtkCssProvider) provider = NULL;
-  GtkExpression *expression;
+  g_autoptr(GtkExpression) expression = NULL;
 
   g_resources_register (cc_display_get_resource ());
 
