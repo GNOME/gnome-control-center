@@ -79,7 +79,7 @@ cc_media_sharing_get_preferences (gchar  ***folders)
 	  else if (g_str_equal (*str_list, "@PICTURES@"))
             dir = g_get_user_special_dir (G_USER_DIRECTORY_PICTURES);
 	  else
-	    dir = g_strdup (*str_list);
+	    dir = *str_list;
 
           if (dir != NULL)
             g_ptr_array_add (array, g_strdup (dir));

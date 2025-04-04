@@ -946,6 +946,7 @@ cc_background_item_finalize (GObject *object)
         g_clear_object (&item->cached_thumbnail_dark.thumbnail);
         g_free (item->name);
         g_free (item->uri);
+        g_free (item->uri_dark);
         g_free (item->primary_color);
         g_free (item->secondary_color);
         g_free (item->mime_type);

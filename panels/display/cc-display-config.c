@@ -510,6 +510,7 @@ cc_display_monitor_set_ui_info (CcDisplayMonitor *self, gint ui_number, gchar *u
   priv->ui_number = ui_number;
   g_free (priv->ui_name);
   priv->ui_name = ui_name;
+  g_free (priv->ui_number_name);
   priv->ui_number_name = g_strdup_printf ("%d\u2003%s", ui_number, ui_name);
 }
 

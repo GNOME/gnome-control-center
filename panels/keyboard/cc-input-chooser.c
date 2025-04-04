@@ -259,6 +259,7 @@ input_source_row_new (CcInputChooser *self,
 
       gtk_list_box_row_set_child (GTK_LIST_BOX_ROW (row), box);
       g_object_set_data (G_OBJECT (row), "name", (gpointer) display_name);
+      g_object_set_data_full (G_OBJECT (row), "source", source, g_object_unref);
       g_object_set_data_full (G_OBJECT (row), "unaccented-name",
                               cc_util_normalize_casefold_and_unaccent (display_name), g_free);
     }

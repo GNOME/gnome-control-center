@@ -221,10 +221,12 @@ add_application (CcNotificationsPanel *self,
   GtkWidget *w;
   g_autoptr(GIcon) icon = NULL;
   const gchar *app_name;
+  g_autofree gchar *escaped_app_name = NULL;
 
   app_name = g_app_info_get_name (app->app_info);
   if (app_name == NULL || *app_name == '\0')
     return;
+  escaped_app_name = g_markup_escape_text (app_name, -1);
 
   icon = g_app_info_get_icon (app->app_info);
   if (icon == NULL)
@@ -234,7 +236,7 @@ add_application (CcNotificationsPanel *self,
 
   row = g_object_new (CC_TYPE_LIST_ROW, "show-arrow", TRUE, NULL);
   adw_preferences_row_set_title (ADW_PREFERENCES_ROW (row),
-                                 g_markup_escape_text (app_name, -1));
+                                 escaped_app_name);
 
   g_object_set_qdata_full (G_OBJECT (row), application_quark (),
                            app, (GDestroyNotify) application_free);

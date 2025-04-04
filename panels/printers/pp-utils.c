@@ -92,8 +92,9 @@ get_tag_value (const gchar *tag_string, const gchar *tag_name)
           for (i = 0; i < g_strv_length (tag_string_splitted); i++)
             if (g_ascii_strncasecmp (tag_string_splitted[i], tag_name, tag_name_length) == 0)
               if (strlen (tag_string_splitted[i]) > tag_name_length + 1)
-                tag_value = g_strdup (tag_string_splitted[i] + tag_name_length + 1);
+                tag_value = tag_string_splitted[i] + tag_name_length + 1;
 
+          tag_value = g_strdup (tag_value);
           g_strfreev (tag_string_splitted);
         }
     }

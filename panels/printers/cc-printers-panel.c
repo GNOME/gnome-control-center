@@ -313,6 +313,7 @@ cc_printers_panel_dispose (GObject *object)
   g_clear_handle_id (&self->remove_printer_timeout_id, g_source_remove);
   g_clear_pointer (&self->deleted_printer_name, g_free);
   g_clear_pointer (&self->action, g_variant_unref);
+  g_clear_pointer (&self->size_group, g_object_unref);
   g_clear_pointer (&self->printer_entries, g_hash_table_destroy);
   g_clear_pointer (&self->all_ppds_list, ppd_list_free);
   free_dests (self);

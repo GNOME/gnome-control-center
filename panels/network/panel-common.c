@@ -428,7 +428,7 @@ net_device_get_valid_connections (NMClient *client, NMDevice *device)
 
                 valid = g_slist_prepend (valid, connection);
         }
-        g_ptr_array_free (filtered, FALSE);
+        g_ptr_array_free (filtered, TRUE);
 
         return g_slist_reverse (valid);
 }

@@ -1107,6 +1107,7 @@ cc_display_settings_init (CcDisplaySettings *self)
   adw_combo_row_set_expression (self->preferred_refresh_rate_row, expression);
   adw_combo_row_set_model (self->preferred_refresh_rate_row,
                            G_LIST_MODEL (self->refresh_rate_list));
+  gtk_expression_unref (expression);
 
   g_object_bind_property_full (self->preferred_refresh_rate_row,
                                "selected-item",
@@ -1123,6 +1124,7 @@ cc_display_settings_init (CcDisplaySettings *self)
   adw_combo_row_set_expression (ADW_COMBO_ROW (self->resolution_row), expression);
   adw_combo_row_set_model (ADW_COMBO_ROW (self->resolution_row),
                            G_LIST_MODEL (self->resolution_list));
+  gtk_expression_unref (expression);
 
   g_signal_connect_swapped (self->luminance_scale_adjustment,
                             "notify::value",

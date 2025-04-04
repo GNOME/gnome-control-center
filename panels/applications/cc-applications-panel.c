@@ -1481,6 +1481,7 @@ update_usage_section (CcApplicationsPanel *self,
 {
   g_autofree gchar *portal_app_id = get_portal_app_id (info);
   gboolean has_builtin = FALSE, has_global_shortcuts;
+  g_autofree char *app_id = get_app_id (info);
   g_autofree char *app_path;
 
   if (portal_app_id != NULL)
@@ -1491,7 +1492,7 @@ update_usage_section (CcApplicationsPanel *self,
   gtk_widget_set_visible (GTK_WIDGET (self->builtin_row), has_builtin);
 
   g_clear_object (&self->global_shortcuts_app_settings);
-  app_path = g_strdup_printf (GLOBAL_SHORTCUTS_PATH "%s/", get_app_id (info));
+  app_path = g_strdup_printf (GLOBAL_SHORTCUTS_PATH "%s/", app_id);
   self->global_shortcuts_app_settings =
     g_settings_new_with_path (GLOBAL_SHORTCUTS_APP_SCHEMA, app_path);
 
