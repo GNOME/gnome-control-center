@@ -1479,7 +1479,10 @@ get_maximum_data_value (CcBarChart *self,
   g_assert (self->data != NULL);
 
   for (size_t i = 0; i < self->n_data; i++)
-    value = MAX (value, self->data[i]);
+    {
+      if (!isnan (self->data[i]))
+        value = MAX (value, self->data[i]);
+    }
 
   if (include_overlay_line && !isnan (self->overlay_line_value))
     value = MAX (value, self->overlay_line_value);
