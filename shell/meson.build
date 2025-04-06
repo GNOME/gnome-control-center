@@ -104,7 +104,7 @@ shell_deps = common_deps + [
   libshell_dep,
 ]
 if have_x11_support
-  deps += [x11_dep]
+  shell_deps += [x11_dep]
 endif
 
 if host_is_linux_not_s390
