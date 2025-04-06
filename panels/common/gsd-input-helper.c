@@ -28,10 +28,10 @@
 #endif /* GDK_WINDOWING_X11 */
 
 #include <sys/types.h>
-#ifdef GDK_WINDOWING_X11
+#ifdef ENABLE_X11_SUPPORT
 #include <X11/Xatom.h>
 #include <X11/extensions/XInput2.h>
-#endif /* GDK_WINDOWING_X11 */
+#endif /* ENABLE_X11_SUPPORT */
 
 #include "gsd-input-helper.h"
 #include "gsd-device-manager.h"
