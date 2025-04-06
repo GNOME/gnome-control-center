@@ -126,7 +126,7 @@ shortcut_added_cb (CcApplicationShortcutDialog *self,
 static void
 on_remove_dialog_response_cb (CcApplicationShortcutDialog *self,
                               char                        *response,
-                              AdwMessageDialog            *dialog)
+                              AdwAlertDialog              *dialog)
 {
   if (g_strcmp0 (response, "remove") == 0)
     {
