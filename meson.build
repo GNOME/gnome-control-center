@@ -260,6 +260,10 @@ if have_x11_support
 endif
 config_h.set('ENABLE_X11_SUPPORT', get_option('x11-support'))
 
+if not get_option('wayland') and not have_x11_support
+  error('GNOME Control Center requires either Wayland or X11 support')
+endif
+
 # IBus support
 enable_ibus = get_option('ibus')
 if enable_ibus
