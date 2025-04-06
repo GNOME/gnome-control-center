@@ -410,6 +410,7 @@ summary({
     'GNOME Bluetooth': host_is_linux_not_s390,
     'NetworkManager': host_is_linux,
     'Wacom': host_is_linux_not_s390,
+    'X11 xupport': have_x11_support,
   },
   section: 'Dependencies',
   bool_yn: true,
