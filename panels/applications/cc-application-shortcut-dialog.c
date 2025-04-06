@@ -128,11 +128,8 @@ on_remove_dialog_response_cb (CcApplicationShortcutDialog *self,
                               char                        *response,
                               AdwAlertDialog              *dialog)
 {
-  if (g_strcmp0 (response, "remove") == 0)
-    {
-      cc_keyboard_manager_reset_global_shortcuts (self->manager, self->app_id);
-      adw_dialog_close (ADW_DIALOG (self));
-    }
+  cc_keyboard_manager_reset_global_shortcuts (self->manager, self->app_id);
+  adw_dialog_close (ADW_DIALOG (self));
 }
 
 static void
@@ -164,7 +161,7 @@ reset_all_activated_cb (CcApplicationShortcutDialog *self)
                                        "cancel");
 
   g_signal_connect_swapped (GTK_WIDGET (dialog),
-                            "response",
+                            "response::remove",
                             G_CALLBACK (on_remove_dialog_response_cb),
                             self);
 
