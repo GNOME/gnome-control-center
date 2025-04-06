@@ -394,6 +394,8 @@ summary({
     'GNOME Bluetooth': host_is_linux_not_s390,
     'NetworkManager': host_is_linux,
     'Wacom': host_is_linux_not_s390,
+    'Use WaylandSupport': get_option('wayland'),
+    'Use X11Support': have_x11_support,
   },
   section: 'Dependencies',
   bool_yn: true,
