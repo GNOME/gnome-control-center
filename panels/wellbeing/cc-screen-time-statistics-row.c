@@ -1058,6 +1058,9 @@ bar_chart_continuous_axis_label_cb (CcBarChart *chart,
                                     double      value,
                                     void       *user_data)
 {
+  if (isnan (value))
+    return g_strdup ("");
+
   /* @value is in minutes already */
   return format_hours_and_minutes (value, TRUE);
 }
