@@ -91,16 +91,19 @@ help_activated (GSimpleAction *action,
                 gpointer       user_data)
 {
   CcApplication *self = CC_APPLICATION (user_data);
-  CcPanel *panel;
-  GtkWidget *window;
+  CcPanel *panel = NULL;
+  GtkWidget *window = NULL;
   g_autoptr(GtkUriLauncher) launcher = NULL;
   const char *uri = NULL;
 
-  panel = cc_shell_get_active_panel (CC_SHELL (self->window));
+  if (self->window)
+    {
+      window = cc_shell_get_toplevel (CC_SHELL (self->window));
+      panel = cc_shell_get_active_panel (CC_SHELL (self->window));
+    }
+
   if (panel)
     uri = cc_panel_get_help_uri (panel);
-
-  window = cc_shell_get_toplevel (CC_SHELL (self->window));
 
   launcher = gtk_uri_launcher_new (uri ? uri : "help:gnome-help/prefs");
   gtk_uri_launcher_launch (launcher, GTK_WINDOW (window), NULL, NULL, NULL);
@@ -153,11 +156,10 @@ launch_panel_activated (GSimpleAction *action,
            panel_id,
            g_variant_n_children (parameters));
 
+  g_application_activate (G_APPLICATION (self));
+
   if (!cc_shell_set_active_panel_from_id (CC_SHELL (self->window), panel_id, parameters, &error))
     g_warning ("Failed to activate the '%s' panel: %s", panel_id, error->message);
-
-  /* Now present the window */
-  g_application_activate (G_APPLICATION (self));
 }
 
 static void
@@ -166,6 +168,8 @@ launch_single_panel_mode_activated (GSimpleAction *action,
                                     gpointer       user_data)
 {
   CcApplication *self = CC_APPLICATION (user_data);
+
+  g_application_activate (G_APPLICATION (self));
 
   cc_window_enable_single_panel_mode (self->window);
 
@@ -246,7 +250,7 @@ cc_application_command_line (GApplication            *application,
   if (debug)
     cc_log_init ();
 
-  gtk_window_present (GTK_WINDOW (self->window));
+  g_application_activate (application);
 
   if (g_variant_dict_lookup (options, "search", "&s", &search_str))
     {
@@ -294,7 +298,8 @@ cc_application_quit (GSimpleAction *simple,
 {
   CcApplication *self = CC_APPLICATION (user_data);
 
-  gtk_window_destroy (GTK_WINDOW (self->window));
+  if (self->window)
+    gtk_window_destroy (GTK_WINDOW (self->window));
 }
 
 
@@ -302,6 +307,9 @@ static void
 cc_application_activate (GApplication *application)
 {
   CcApplication *self = CC_APPLICATION (application);
+
+  if (!self->window)
+    self->window = cc_window_new (GTK_APPLICATION (application), self->model);
 
   gtk_window_present (GTK_WINDOW (self->window));
 }
@@ -326,7 +334,6 @@ cc_application_startup (GApplication *application)
                                          "app.help", help_accels);
 
   self->model = cc_shell_model_new ();
-  self->window = cc_window_new (GTK_APPLICATION (application), self->model);
 
   provider = gtk_css_provider_new ();
   gtk_css_provider_load_from_resource (provider, "/org/gnome/Settings/gtk/style.css");
