@@ -311,7 +311,6 @@ cc_application_startup (GApplication *application)
 {
   CcApplication *self = CC_APPLICATION (application);
   const gchar *help_accels[] = { "F1", NULL };
-  g_autoptr(GtkCssProvider) provider = NULL;
 
   g_action_map_add_action_entries (G_ACTION_MAP (self),
                                    cc_app_actions,
@@ -327,12 +326,6 @@ cc_application_startup (GApplication *application)
 
   self->model = cc_shell_model_new ();
   self->window = cc_window_new (GTK_APPLICATION (application), self->model);
-
-  provider = gtk_css_provider_new ();
-  gtk_css_provider_load_from_resource (provider, "/org/gnome/Settings/gtk/style.css");
-  gtk_style_context_add_provider_for_display (gdk_display_get_default (),
-                                              GTK_STYLE_PROVIDER (provider),
-                                              GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
 }
 
 static void
