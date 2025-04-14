@@ -296,17 +296,9 @@ static void
 cc_users_page_init (CcUsersPage *self)
 {
     g_autoptr(GError) error = NULL;
-    g_autoptr(GtkCssProvider) provider = NULL;
     gboolean is_loaded = FALSE;
 
     gtk_widget_init_template (GTK_WIDGET (self));
-
-    provider = gtk_css_provider_new ();
-    gtk_css_provider_load_from_resource (provider,
-                                         "/org/gnome/control-center/system/users/users.css");
-    gtk_style_context_add_provider_for_display (gdk_display_get_default (),
-                                                GTK_STYLE_PROVIDER (provider),
-                                                GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
 
     self->model = g_list_store_new (ACT_TYPE_USER);
     gtk_list_box_bind_model (self->user_list,

@@ -1056,7 +1056,6 @@ session_bus_ready (GObject        *source,
 static void
 cc_display_panel_init (CcDisplayPanel *self)
 {
-  g_autoptr(GtkCssProvider) provider = NULL;
   g_autoptr(GtkExpression) expression = NULL;
 
   g_resources_register (cc_display_get_resource ());
@@ -1117,12 +1116,6 @@ cc_display_panel_init (CcDisplayPanel *self)
              cc_panel_get_cancellable (CC_PANEL (self)),
              (GAsyncReadyCallback) session_bus_ready,
              self);
-
-  provider = gtk_css_provider_new ();
-  gtk_css_provider_load_from_resource (provider, "/org/gnome/control-center/display/display-arrangement.css");
-  gtk_style_context_add_provider_for_display (gdk_display_get_default (),
-                                              GTK_STYLE_PROVIDER (provider),
-                                              GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
 
   gtk_shortcut_set_action (self->escape_shortcut,
                            gtk_callback_action_new ((GtkShortcutFunc) on_toplevel_escape_pressed_cb,
