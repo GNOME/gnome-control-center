@@ -220,18 +220,11 @@ settings_strv_add_or_remove_str (const GValue       *value,
 static void
 cc_wellbeing_panel_init (CcWellbeingPanel *self)
 {
-  g_autoptr(GtkCssProvider) provider = NULL;
   g_autoptr(GFile) history_file = NULL;
 
   g_resources_register (cc_wellbeing_get_resource ());
 
   gtk_widget_init_template (GTK_WIDGET (self));
-
-  provider = gtk_css_provider_new ();
-  gtk_css_provider_load_from_resource (provider, "/org/gnome/control-center/wellbeing/wellbeing.css");
-  gtk_style_context_add_provider_for_display (gdk_display_get_default (),
-                                              GTK_STYLE_PROVIDER (provider),
-                                              GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
 
   /* Set up the movement break schedule combo row. It’s a highly customised
    * #AdwComboRow because it needs to represent two settings at once. */

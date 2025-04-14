@@ -385,7 +385,6 @@ static void
 cc_firmware_security_dialog_init (CcFirmwareSecurityDialog *dialog)
 {
   gtk_widget_init_template (GTK_WIDGET (dialog));
-  load_custom_css ("/org/gnome/control-center/privacy/firmware-security/security-level.css");
 }
 
 GtkWidget *

@@ -348,15 +348,7 @@ cc_content_row_class_init (CcContentRowClass *klass)
 static void
 cc_content_row_init (CcContentRow *self)
 {
-  g_autoptr(GtkCssProvider) provider = NULL;
-
   gtk_widget_init_template (GTK_WIDGET (self));
-
-  provider = gtk_css_provider_new ();
-  gtk_css_provider_load_from_resource (provider, "/org/gnome/control-center/common/common.css");
-  gtk_style_context_add_provider_for_display (gdk_display_get_default (),
-                                              GTK_STYLE_PROVIDER (provider),
-                                              GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
 
   g_signal_connect (self, "notify::parent", G_CALLBACK (parent_cb), NULL);
 }

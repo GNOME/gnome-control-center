@@ -74,18 +74,6 @@ CC_PANEL_REGISTER (CcBackgroundPanel, cc_background_panel)
 static void on_settings_changed (CcBackgroundPanel *self);
 
 static void
-load_custom_css (CcBackgroundPanel *self)
-{
-  g_autoptr(GtkCssProvider) provider = NULL;
-
-  provider = gtk_css_provider_new ();
-  gtk_css_provider_load_from_resource (provider, "/org/gnome/control-center/background/preview.css");
-  gtk_style_context_add_provider_for_display (gdk_display_get_default (),
-                                              GTK_STYLE_PROVIDER (provider),
-                                              GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
-}
-
-static void
 transition_screen (CcBackgroundPanel *self)
 {
   g_autoptr (GError) error = NULL;
@@ -591,6 +579,4 @@ cc_background_panel_init (CcBackgroundPanel *self)
                             NULL,
                             got_transition_proxy_cb,
                             self);
-
-  load_custom_css (self);
 }

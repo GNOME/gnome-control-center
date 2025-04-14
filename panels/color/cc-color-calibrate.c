@@ -978,7 +978,6 @@ cc_color_calibrate_init (CcColorCalibrate *calibrate)
   g_autoptr(GError) error = NULL;
   gint retval;
   g_autoptr(GSettings) settings = NULL;
-  g_autoptr(GtkCssProvider) provider = NULL;
   GtkBox *box;
   GtkWidget *widget;
   GtkWindow *window;
@@ -993,13 +992,6 @@ cc_color_calibrate_init (CcColorCalibrate *calibrate)
                                           &error);
   if (retval == 0)
     g_warning ("Could not load interface: %s", error->message);
-
-  /* load stylesheet */
-  provider = gtk_css_provider_new ();
-  gtk_css_provider_load_from_resource (provider, "/org/gnome/control-center/color/color-calibrate.css");
-  gtk_style_context_add_provider_for_display (gdk_display_get_default (),
-                                              GTK_STYLE_PROVIDER (provider),
-                                              GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
 
   /* add sample widget */
   box = GTK_BOX (gtk_builder_get_object (calibrate->builder,

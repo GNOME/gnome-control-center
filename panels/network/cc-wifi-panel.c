@@ -858,7 +858,6 @@ cc_wifi_panel_class_init (CcWifiPanelClass *klass)
 static void
 cc_wifi_panel_init (CcWifiPanel *self)
 {
-  g_autoptr(GtkCssProvider) provider = NULL;
   GtkLabel *hotspot_off_label;
 
   g_resources_register (cc_network_get_resource ());
@@ -910,13 +909,6 @@ cc_wifi_panel_init (CcWifiPanel *self)
 
   /* Handle comment-line arguments after loading devices */
   handle_argv (self);
-
-  /* use custom CSS */
-  provider = gtk_css_provider_new ();
-  gtk_css_provider_load_from_resource (provider, "/org/gnome/control-center/network/wifi-panel.css");
-  gtk_style_context_add_provider_for_display (gdk_display_get_default (),
-                                              GTK_STYLE_PROVIDER (provider),
-                                              GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
 
   /* Customize some properties that would lose styling if done in UI */
   hotspot_off_label = GTK_LABEL (gtk_button_get_child (self->hotspot_off_button));
