@@ -44,18 +44,6 @@ struct _CcOutputTestWheel
 
 G_DEFINE_TYPE (CcOutputTestWheel, cc_output_test_wheel, GTK_TYPE_WIDGET)
 
-static void
-load_custom_css (CcOutputTestWheel *self)
-{
-  g_autoptr(GtkCssProvider) provider = NULL;
-
-  provider = gtk_css_provider_new ();
-  gtk_css_provider_load_from_resource (provider, "/org/gnome/control-center/sound/output-test-wheel.css");
-  gtk_style_context_add_provider_for_display (gdk_display_get_default (),
-                                              GTK_STYLE_PROVIDER (provider),
-                                              GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
-}
-
 static GtkWidget*
 create_speaker_button (CcOutputTestWheel     *self,
                        pa_channel_position_t  position)
@@ -225,8 +213,6 @@ cc_output_test_wheel_init (CcOutputTestWheel *self)
   self->rear_right_speaker_button = create_speaker_button (self, PA_CHANNEL_POSITION_REAR_RIGHT);
   self->side_left_speaker_button = create_speaker_button (self, PA_CHANNEL_POSITION_SIDE_LEFT);
   self->side_right_speaker_button = create_speaker_button (self, PA_CHANNEL_POSITION_SIDE_RIGHT);
-
-  load_custom_css (self);
 }
 
 void

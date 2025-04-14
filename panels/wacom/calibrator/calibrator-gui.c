@@ -47,7 +47,6 @@ struct _CcCalibArea
   GtkWidget  *target1, *target2, *target3, *target4;
   GtkWidget  *stack;
   GtkWidget  *success_page;
-  GtkCssProvider *style_provider;
 
   FinishCallback callback;
   gpointer       user_data;
@@ -230,17 +229,6 @@ on_fullscreen (GtkWindow    *window,
 }
 
 static void
-cc_calib_area_finalize (GObject *object)
-{
-  CcCalibArea *area = CC_CALIB_AREA (object);
-
-  gtk_style_context_remove_provider_for_display (gtk_widget_get_display (GTK_WIDGET (area)),
-                                                 GTK_STYLE_PROVIDER (area->style_provider));
-
-  G_OBJECT_CLASS (cc_calib_area_parent_class)->finalize (object);
-}
-
-static void
 cc_calib_area_size_allocate (GtkWidget *widget,
                              int        width,
                              int        height,
@@ -261,10 +249,7 @@ cc_calib_area_size_allocate (GtkWidget *widget,
 static void
 cc_calib_area_class_init (CcCalibAreaClass *klass)
 {
-  GObjectClass *object_class = G_OBJECT_CLASS (klass);
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
-
-  object_class->finalize = cc_calib_area_finalize;
 
   widget_class->size_allocate = cc_calib_area_size_allocate;
 
@@ -291,12 +276,6 @@ cc_calib_area_init (CcCalibArea *calib_area)
   GtkEventController *key;
 
   gtk_widget_init_template (GTK_WIDGET (calib_area));
-
-  calib_area->style_provider = gtk_css_provider_new ();
-  gtk_css_provider_load_from_resource (calib_area->style_provider, "/org/gnome/control-center/wacom/calibrator/calibrator.css");
-  gtk_style_context_add_provider_for_display (gtk_widget_get_display (GTK_WIDGET (calib_area)),
-                                              GTK_STYLE_PROVIDER (calib_area->style_provider),
-                                              GTK_STYLE_PROVIDER_PRIORITY_USER);
 
   cc_clock_set_duration (CC_CLOCK (calib_area->clock), MAX_TIME);
   g_signal_connect_swapped (calib_area->clock, "finished",

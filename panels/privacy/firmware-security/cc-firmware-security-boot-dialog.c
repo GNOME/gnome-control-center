@@ -53,7 +53,6 @@ static void
 cc_firmware_security_boot_dialog_init (CcFirmwareSecurityBootDialog *dialog)
 {
   gtk_widget_init_template (GTK_WIDGET (dialog));
-  load_custom_css ("/org/gnome/control-center/privacy/firmware-security/security-level.css");
 }
 
 GtkWidget *

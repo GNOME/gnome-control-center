@@ -276,18 +276,6 @@ command_add (CcOnlineAccountsPanel *self,
     }
 }
 
-static void
-load_custom_css (void)
-{
-  g_autoptr (GtkCssProvider) provider = NULL;
-
-  provider = gtk_css_provider_new ();
-  gtk_css_provider_load_from_resource (provider, "/org/gnome/control-center/online-accounts/online-accounts.css");
-  gtk_style_context_add_provider_for_display (gdk_display_get_default (),
-                                              GTK_STYLE_PROVIDER (provider),
-                                              GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
-}
-
 /* Callbacks */
 
 static int
@@ -610,8 +598,6 @@ cc_online_accounts_panel_init (CcOnlineAccountsPanel *self)
                           self->providers_listbox,
                           "sensitive",
                           G_BINDING_SYNC_CREATE);
-
-  load_custom_css ();
 
   /* Disable the panel while we wait for the client */
   gtk_widget_set_sensitive (GTK_WIDGET (self), FALSE);

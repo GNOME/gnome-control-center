@@ -164,16 +164,6 @@ firmware_security_attr_has_flag (FwupdSecurityAttr     *attr,
 }
 
 void
-load_custom_css (const char *path)
-{
-  g_autoptr (GtkCssProvider) provider = gtk_css_provider_new ();
-  gtk_css_provider_load_from_resource (provider, path);
-  gtk_style_context_add_provider_for_display (gdk_display_get_default (),
-                                              GTK_STYLE_PROVIDER (provider),
-                                              GTK_STYLE_PROVIDER_PRIORITY_USER);
-}
-
-void
 hsi_report_title_print_padding(const gchar *title, GString *dst_string, gsize maxlen)
 {
   gsize title_len;

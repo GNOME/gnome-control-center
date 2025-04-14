@@ -1,3 +1,8 @@
+/*
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ * SPDX-FileCopyrightText: 2025 GNOME Foundation, Inc.
+ */
+
 .drag-handle {
   color: color-mix(in srgb, var(--window-fg-color) 40%, transparent);
 }
@@ -20,4 +25,858 @@ row.illustrated .frame {
 
 .cc-placeholder-row {
   padding: 18px;
+}
+
+/* Appearance Settings */
+background-preview {
+  border-radius: 6px;
+}
+
+background-preview .window {
+  border-radius: 6px;
+  box-shadow: 0 1px 4px 1px color-mix(in srgb, black 13%, transparent),
+              0 1px 10px 5px color-mix(in srgb, black 9%, transparent),
+              0 3px 16px 8px color-mix(in srgb, black 4%, transparent),
+              0 0 0 1px color-mix(in srgb, black 5%, transparent);
+
+  --window-bg-color: #fafafa;
+  --headerbar-bg-color: white;
+  --headerbar-shade-color: rgb(0 0 0 / 12%);
+  --sidebar-bg-color: #ebebeb;
+  --sidebar-backdrop-color: #f2f2f2;
+  --sidebar-border-color: rgb(0 0 0 / 7%);
+}
+
+background-preview .window.dark {
+  --window-bg-color: #242424;
+  --headerbar-bg-color: #303030;
+  --headerbar-shade-color: rgb(0 0 0 / 36%);
+  --sidebar-bg-color: #303030;
+  --sidebar-backdrop-color: #2a2a2a;
+  --sidebar-border-color: rgb(0 0 0 / 36%);
+}
+
+background-preview .window .header-bar {
+  min-height: 15px;
+  box-shadow: 0 1px color-mix(in srgb, var(--headerbar-shade-color) 50%, transparent),
+              0 2px 4px color-mix(in srgb, var(--headerbar-shade-color) 50%, transparent);
+}
+
+background-preview .window.front .header-bar {
+  background-color: var(--headerbar-bg-color);
+}
+
+background-preview .window .sidebar {
+  background-color: var(--sidebar-backdrop-color);
+  min-width: 30px;
+  border: none;
+}
+
+background-preview .window.front .sidebar {
+  background-color: var(--sidebar-bg-color);
+}
+
+background-preview .window .sidebar:dir(ltr) {
+  box-shadow: inset -1px 0 var(--sidebar-border-color);
+}
+
+background-preview .window .sidebar:dir(rtl) {
+  border: none;
+  box-shadow: inset 1px 0 var(--sidebar-border-color);
+}
+
+.background-preview-button {
+  background: none;
+  border-radius: 9px;
+  padding: 3px;
+  box-shadow: none;
+  outline: none;
+}
+
+.background-preview-button:checked {
+  box-shadow: 0 0 0 3px var(--accent-bg-color);
+}
+
+.background-preview-button:focus:focus-visible {
+  box-shadow: 0 0 0 3px var(--accent-bg-color), 0 0 0 6px color-mix(in srgb, var(--accent-color) 30%, transparent);
+}
+
+.background-preview-button:checked:focus:focus-visible {
+  box-shadow: 0 0 0 3px var(--accent-color), 0 0 0 6px color-mix(in srgb, var(--accent-color) 30%, transparent);
+}
+
+.background-flowbox > flowboxchild {
+  background: none;
+  border-radius: 9px;
+}
+
+.background-thumbnail {
+  border-radius: 6px;
+}
+
+.slideshow-icon {
+  color: white;
+  -gtk-icon-shadow: 0 1px 2px rgba(0, 0, 0, 0.33);
+  margin: 8px;
+}
+
+.selected-check {
+  color: var(--accent-fg-color);
+  background: var(--accent-bg-color);
+  border-radius: 100px;
+  padding: 2px;
+  opacity: 0;
+  margin: 6px;
+  transition-duration: 200ms;
+}
+
+flowboxchild.active-item .selected-check {
+  opacity: 1;
+}
+
+.remove-button {
+  padding: 2px;
+  min-width: 0;
+  min-height: 0;
+  margin: 6px;
+}
+
+.accent-button {
+  border-radius: 9999px;
+  padding: 3px;
+  background: var(--accent-bg-color);
+  min-width: 24px;
+  min-height: 24px;
+  outline: none;
+  background-clip: content-box;
+  box-shadow: none;
+}
+
+.accent-button:checked {
+  box-shadow: 0 0 0 3px var(--accent-bg-color);
+}
+
+.accent-button:focus:focus-visible {
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent-color) 30%, transparent);
+}
+
+.accent-button:checked:focus:focus-visible {
+  box-shadow: 0 0 0 3px var(--accent-bg-color),
+              0 0 0 6px color-mix(in srgb, var(--accent-color) 30%, transparent);
+}
+
+.blue, .teal, .green, .yellow, .orange, .red, .pink, .purple, .slate {
+  --accent-color: oklab(from var(--accent-bg-color) var(--standalone-color-oklab));
+}
+
+.blue {
+  --accent-bg-color: var(--accent-blue);
+}
+
+.teal {
+  --accent-bg-color: var(--accent-teal);
+}
+
+.green {
+  --accent-bg-color: var(--accent-green);
+}
+
+.yellow {
+  --accent-bg-color: var(--accent-yellow);
+}
+
+.orange {
+  --accent-bg-color: var(--accent-orange);
+}background-preview {
+  border-radius: 6px;
+}
+
+background-preview .window {
+  border-radius: 6px;
+  box-shadow: 0 1px 4px 1px color-mix(in srgb, black 13%, transparent),
+              0 1px 10px 5px color-mix(in srgb, black 9%, transparent),
+              0 3px 16px 8px color-mix(in srgb, black 4%, transparent),
+              0 0 0 1px color-mix(in srgb, black 5%, transparent);
+
+  --window-bg-color: #fafafa;
+  --headerbar-bg-color: white;
+  --headerbar-shade-color: rgb(0 0 0 / 12%);
+  --sidebar-bg-color: #ebebeb;
+  --sidebar-backdrop-color: #f2f2f2;
+  --sidebar-border-color: rgb(0 0 0 / 7%);
+}
+
+background-preview .window.dark {
+  --window-bg-color: #242424;
+  --headerbar-bg-color: #303030;
+  --headerbar-shade-color: rgb(0 0 0 / 36%);
+  --sidebar-bg-color: #303030;
+  --sidebar-backdrop-color: #2a2a2a;
+  --sidebar-border-color: rgb(0 0 0 / 36%);
+}
+
+background-preview .window .header-bar {
+  min-height: 15px;
+  box-shadow: 0 1px color-mix(in srgb, var(--headerbar-shade-color) 50%, transparent),
+              0 2px 4px color-mix(in srgb, var(--headerbar-shade-color) 50%, transparent);
+}
+
+background-preview .window.front .header-bar {
+  background-color: var(--headerbar-bg-color);
+}
+
+background-preview .window .sidebar {
+  background-color: var(--sidebar-backdrop-color);
+  min-width: 30px;
+  border: none;
+}
+
+background-preview .window.front .sidebar {
+  background-color: var(--sidebar-bg-color);
+}
+
+background-preview .window .sidebar:dir(ltr) {
+  box-shadow: inset -1px 0 var(--sidebar-border-color);
+}
+
+background-preview .window .sidebar:dir(rtl) {
+  border: none;
+  box-shadow: inset 1px 0 var(--sidebar-border-color);
+}
+
+.background-preview-button {
+  background: none;
+  border-radius: 9px;
+  padding: 3px;
+  box-shadow: none;
+  outline: none;
+}
+
+.background-preview-button:checked {
+  box-shadow: 0 0 0 3px var(--accent-bg-color);
+}
+
+.background-preview-button:focus:focus-visible {
+  box-shadow: 0 0 0 3px var(--accent-bg-color), 0 0 0 6px color-mix(in srgb, var(--accent-color) 30%, transparent);
+}
+
+.background-preview-button:checked:focus:focus-visible {
+  box-shadow: 0 0 0 3px var(--accent-color), 0 0 0 6px color-mix(in srgb, var(--accent-color) 30%, transparent);
+}
+
+.background-flowbox > flowboxchild {
+  background: none;
+  border-radius: 9px;
+}
+
+.background-thumbnail {
+  border-radius: 6px;
+}
+
+.slideshow-icon {
+  color: white;
+  -gtk-icon-shadow: 0 1px 2px rgba(0, 0, 0, 0.33);
+  margin: 8px;
+}
+
+.selected-check {
+  color: var(--accent-fg-color);
+  background: var(--accent-bg-color);
+  border-radius: 100px;
+  padding: 2px;
+  opacity: 0;
+  margin: 6px;
+  transition-duration: 200ms;
+}
+
+flowboxchild.active-item .selected-check {
+  opacity: 1;
+}
+
+.remove-button {
+  padding: 2px;
+  min-width: 0;
+  min-height: 0;
+  margin: 6px;
+}
+
+.accent-button {
+  border-radius: 9999px;
+  padding: 3px;
+  background: var(--accent-bg-color);
+  min-width: 24px;
+  min-height: 24px;
+  outline: none;
+  background-clip: content-box;
+  box-shadow: none;
+}
+
+.accent-button:checked {
+  box-shadow: 0 0 0 3px var(--accent-bg-color);
+}
+
+.accent-button:focus:focus-visible {
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent-color) 30%, transparent);
+}
+
+.accent-button:checked:focus:focus-visible {
+  box-shadow: 0 0 0 3px var(--accent-bg-color),
+              0 0 0 6px color-mix(in srgb, var(--accent-color) 30%, transparent);
+}
+
+.blue, .teal, .green, .yellow, .orange, .red, .pink, .purple, .slate {
+  --accent-color: oklab(from var(--accent-bg-color) var(--standalone-color-oklab));
+}
+
+.blue {
+  --accent-bg-color: var(--accent-blue);
+}
+
+.teal {
+  --accent-bg-color: var(--accent-teal);
+}
+
+.green {
+  --accent-bg-color: var(--accent-green);
+}
+
+.yellow {
+  --accent-bg-color: var(--accent-yellow);
+}
+
+.orange {
+  --accent-bg-color: var(--accent-orange);
+}
+
+.red {
+  --accent-bg-color: var(--accent-red);
+}
+
+.pink {
+  --accent-bg-color: var(--accent-pink);
+}
+
+.purple {
+  --accent-bg-color: var(--accent-purple);
+}
+
+.slate {
+  --accent-bg-color: var(--accent-slate);
+}
+
+/* Color Calibration */
+.cc-color-calibrate-window {
+  background-color: black;
+  color: white;
+}
+
+.cc-color-calibrate-window label {
+  font-weight: bold;
+}
+
+/*************************************************
+ * CcContentRow, mostly copied from AdwActionRow *
+ *************************************************/
+
+row.content box.header,
+row.content box.contents {
+  margin-left: 12px;
+  margin-right: 12px;
+  border-spacing: 6px;
+  min-height: 50px;
+}
+row.content box.title {
+  margin-top: 6px;
+  margin-bottom: 6px;
+  border-spacing: 3px;
+  padding: 0;
+}
+row.content .prefixes,
+row.content .suffixes {
+  border-spacing: 6px;
+}
+row.content .prefixes:dir(ltr) {
+  margin-right: 6px;
+}
+row.content .prefixes:dir(rtl) {
+  margin-left: 6px;
+}
+
+/* Display Arrangement */
+display-arrangement {
+  font-weight: bold;
+  font-size: larger;
+}
+
+display-arrangement.monitor {
+  border: solid 1px color-mix(in srgb, currentColor 15%, transparent);
+  margin: 0px 0px 1px 1px;
+  background: var(--window-bg-color);
+  padding: 0.4em;
+  border-radius: 5px;
+}
+
+display-arrangement.monitor.primary {
+  border-top: 0.4em solid #000000;
+}
+
+.monitor-label {
+  border-radius: 50%;
+  font-weight: bold;
+  min-width: 1.5em;
+  min-height: 1.5em;
+  color: #000;
+  background: #ddd;
+  font-feature-settings:"tnum";
+}
+
+/* Night Light */
+/* Increase the thickness and draw a gradient of color temperature */
+.night-light-temperature trough {
+    padding-top: 2px;
+    padding-bottom: 2px;
+    --temp-1700K-color: rgb(255 122 0); /* From colord, blackbody_data_d65plankian LUT */
+    --temp-4700K-color: rgb(255 225 196); /* From colord, blackbody_data_d65plankian LUT */
+    background: linear-gradient(to right, var(--temp-4700K-color), var(--temp-1700K-color));
+}
+
+.night-light-temperature:dir(rtl) trough {
+    background: linear-gradient(to left, var(--temp-4700K-color), var(--temp-1700K-color));
+}
+
+.padded-spinbutton {
+    min-width: 40px;
+}
+
+.unpadded-button {
+    padding: 6px;
+}
+
+/* Mouse Test */
+.mouse-test-viewport {
+    background: #26a269;
+}
+
+.mouse-test-arrow {
+    color: white;
+}
+
+.top-arrow {
+    padding-bottom:2em;
+    background: linear-gradient(to top, transparent, rgba(0,0,0,0.5));
+}
+.bottom-arrow {
+    padding-top:2em;
+    background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.5));
+}
+
+.click-status-emblem {
+    border-radius: 9999px;
+    background-color: color-mix(in srgb, currentColor 20%, transparent);
+    color: color-mix(in srgb, currentColor 50%, transparent);
+    padding: 10px;
+}
+
+.click-status-emblem.success {
+    background-color: var(--success-bg-color);
+    color: var(--success-fg-color);
+}
+
+/* Wi-Fi Settings */
+.qr-image {
+  background: #fff;
+  padding: 12px;
+  min-width: 128px;
+  min-height: 128px;
+}
+
+/* Online Accounts */
+image.symbolic-circular {
+  background-color: color-mix(in srgb, currentColor 8%, transparent);
+  min-width: 32px;
+  min-height: 32px;
+  border-radius: 50%;
+}
+
+.error-box image,
+.error-box label {
+  color: var(--error-color);
+}
+
+.error-box label {
+  font-weight: 600;
+}
+
+/* Battery levels */
+levelbar block.warning-battery-offset {
+  background-color: var(--error-color);
+  border-color: var(--error-color);
+}
+
+levelbar block.low-battery-offset {
+  background-color: var(--warning-color);
+  border-color: var(--warning-color);
+}
+
+levelbar block.high-battery-offset {
+  background-color: var(--success-color);
+  border-color: var(--success-color);
+}
+
+/* Power profiles */
+
+.power-profile.low-power {
+  color: var(--success-color);
+}
+
+.power-profile.performance {
+  color: var(--error-color);
+}
+
+.power-profile-info-row {
+  padding: 6px 0;
+}
+
+/* Printers */
+.printer-options-sidebar * {
+  padding: 6px;
+}
+
+/* Sound Output Test Wheel */
+wheel {
+  background: color-mix(in srgb, currentColor 8%, transparent);
+  border-radius: 100%;
+  margin: 40px;
+  min-width: 280px;
+  min-height: 280px;
+}
+
+wheel > button {
+  background-color: var(--window-bg-color);
+  border: 1px solid color-mix(in srgb, currentColor 15%, transparent);
+  padding: 3px;
+}
+
+wheel > button.playing {
+  background-color: var(--accent-bg-color);
+  color: var(--accent-fg-color);
+}
+
+/* Wacom Calibrator */
+#calibrator {
+    background-color: #000;
+}
+
+#calibrator * {
+    color: #fff;
+}
+
+#calibrator label {
+    font-size: larger;
+}
+
+#calibrator #title {
+    font-weight: bold;
+    color: #888;
+}
+
+#calibrator #error {
+    font-weight: bold;
+}
+
+#calibrator #target {
+    background-image: url('target.svg');
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+}
+
+@keyframes target-enabled-animation {
+    0%   { background-size: 0px; }
+    90%  { background-size: 120px; }
+    100% { background-size: 100px; }
+}
+
+@keyframes target-disabled-animation {
+    0%   { background-size: 100px; }
+    100% { background-size: 0px; }
+}
+
+#calibrator #target:not(disabled) {
+    animation: target-enabled-animation 1 ease 0.5s;
+    background-size: 100px;
+}
+
+#calibrator #target:disabled {
+    animation: target-disabled-animation 1 ease 0.2s;
+    background-size: 0px;
+}
+
+/* Device Security */
+.security-level-icon {
+  border-radius: 9999px;
+  min-width: 64px;
+  min-height: 64px;
+}
+
+.security-level-icon {
+  border-radius: 9999px;
+  min-width: 64px;
+  min-height: 64px;
+}
+
+.security-level-icon.good {
+  color: var(--success-color);
+  background-color: color-mix(in srgb, var(--success-color) 25%, transparent);
+}
+
+.security-level-icon.error {
+  color: var(--error-color);
+  background-color: color-mix(in srgb, var(--error-color) 25%, transparent);
+}
+
+.security-level-icon.warning {
+  color: var(--warning-color);
+  background-color: color-mix(in srgb, var(--warning-color) 25%, transparent);
+}
+
+.security-level-icon.neutral {
+  color: color-mix(in srgb, currentColor 40%, transparent);
+  background-color: color-mix(in srgb, currentColor 40%, transparent);
+}
+
+image.success-icon {
+  color: var(--success-color);
+}
+
+image.error-icon {
+  color: var(--error-color);
+}
+
+row.hide-arrow image.expander-row-arrow {
+  opacity: 0;
+}
+
+/* Region Settings */
+formatpreview list {
+  background: none;
+  box-shadow: none;
+}
+
+formatpreview row {
+  border: none;
+  border-radius: 12px;
+}
+
+formatpreview row .header .title {
+  font-size: inherit;
+}
+
+/* Remote Desktop Settings */
+.tls-cert-fingerprint {
+  font-family: monospace;
+  margin: 0px 25px;
+}
+
+/* User Settings */
+.cutout-button {
+  background-color: var(--window-bg-color);
+  border-radius: 9999px;
+  padding: 2px;
+}
+
+/* "Add User" and "Add Enterprise Login" dialogs */
+image.check-outlined-symbolic {
+  color: var(--success-color);
+}
+
+image.dialog-error-symbolic {
+  color: var(--error-color);
+}
+
+/* Add user dialog */
+levelbar .strength-weak {
+  background-color: #cc0000;
+  border-color: #cc0000;
+}
+
+levelbar .strength-low {
+  background-color: #f5ce00;
+  border-color: #f5ce00;
+}
+
+levelbar .strength-medium,
+levelbar .strength-good,
+levelbar .strength-high {
+  background-color: #73d216;
+  border-color: #73d216;
+}
+
+/* Fingerprint dialog */
+.fingerprint-icon {
+  padding: 3px;
+}
+
+.fingerprint-icon > button,
+.fingerprint-icon > image {
+  padding: 15px;
+  min-width: 32px;
+  min-height: 32px;
+  border-radius: 64px;
+  border: 1px solid color-mix(in srgb, currentColor 15%, transparent);
+  background-color: var(--view-bg-color);
+  color: color-mix(in srgb, var(--window-fg-color) 50%, transparent);
+}
+
+.fingerprint-print-add image:not(:disabled):not(:backdrop),
+.fingerprint-print-add button:not(:disabled):not(:backdrop) {
+  color: var(--window-fg-color);
+}
+
+.fingerprint-icon.enroll-status image {
+  outline-color: var(--accent-bg-color);
+  outline-offset: 0px;
+  outline-width: 4px;
+}
+
+.fingerprint-icon.enroll-status image:backdrop {
+  outline-color: var(--accent-bg-color);
+}
+
+.fingerprint-icon.enroll-status {
+  font-weight: bold;
+}
+
+.fingerprint-icon.enroll-status.completed image {
+  outline-color: var(--success-color);
+}
+
+.fingerprint-icon.enroll-status.warning image {
+  outline-color: var(--warning-color);
+}
+
+.fingerprint-icon.enroll-status.error image {
+  outline-color: var(--error-color);
+  /* Given we don't have an error image, we can just recolorize the warning one */
+  -gtk-icon-palette: warning var(--error-color);
+}
+
+.fingerprint-icon.enroll-status.success image:not(:backdrop) {
+  color: var(--accent-bg-color);
+}
+
+.fingerprint-icon.enroll-status.warning image:not(:backdrop),
+.fingerprint-icon.enroll-status.warning label:not(:backdrop) {
+  color: var(--warning-color);
+}
+
+.fingerprint-icon.enroll-status.error image:not(:backdrop),
+.fingerprint-icon.enroll-status.error label:not(:backdrop) {
+  color: var(--error-color);
+}
+
+@keyframes wiggle {
+  /* Unfortunately we can't use translation or xalign, so here's the workaround */
+  0% { padding-left: 0; padding-right: 0; }
+  10% { padding-left: 0; padding-right: 2px; }
+  20% { padding-left: 4px; padding-right: 0; }
+  30% { padding-left: 0; padding-right: 8px; }
+  40% { padding-left: 8px; padding-right: 0; }
+  50% { padding-left: 0; padding-right: 8px; }
+  60% { padding-left: 8px; padding-right: 0; }
+  70% { padding-left: 0; padding-right: 8px; }
+  80% { padding-left: 4px; padding-right: 0; }
+  90% { padding-left: 0; padding-right: 2px; }
+  100% { padding-left: 0; padding-right: 0; }
+}
+
+.fingerprint-icon.enroll-status.retry label {
+  animation-name: wiggle;
+  animation-duration: 850ms;
+  animation-timing-function: ease-in;
+  animation-iteration-count: 1;
+}
+
+/* Wellbeing Settings */
+/* Break scheduling */
+.break-schedule-row popover listview header {
+  /* Override the default GTK theming for the header row of a listview because
+   * that much top padding looks weird when the listview is the only child of a
+   * popover. The original padding was 18px. */
+  padding-top: 6px;
+}
+
+/* Screen time statistics */
+row.screen-time-statistics-row box.main-box {
+  margin: 12px 16px 12px 16px;
+}
+
+row.screen-time-statistics-row .primary-label,
+row.screen-time-statistics-row .primary-value {
+  color: var(--view-fg-color);
+}
+
+row.screen-time-statistics-row .primary-label {
+  font-size: 100%;
+}
+
+row.screen-time-statistics-row .primary-value {
+  font-weight: 800;
+  font-size: 181%;
+  margin-top: 6px;
+  margin-left: -2px; /* offset the label to account for misalignment illusion with large font */
+}
+
+row.screen-time-statistics-row .secondary-label {
+  margin-top: 6px;
+  margin-bottom: 2px;
+  font-size: 82%;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--view-fg-color) var(--dim-opacity), transparent);
+}
+
+row.screen-time-statistics-row .secondary-value {
+  color: var(--view-fg-color);
+}
+
+/* Bar chart */
+bar-chart bar-group {
+  padding: 0 6px;
+  transition: background 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  border-radius: 6px;
+}
+
+bar-chart bar-group:hover {
+  background-color: color-mix(in srgb, currentColor 7%, transparent);  /* equivalent to $hover_color from libadwaita */
+}
+
+bar-chart bar {
+  border-radius: 5px 5px 0 0;
+  background-color: color-mix(in srgb, var(--accent-bg-color) 27%, transparent);
+}
+
+bar-chart bar:selected {
+  background-color: var(--accent-bg-color);
+  transition: background 400ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+bar-chart bar-group:focus-within {
+  transition-property: outline-style, outline-width, outline-offset, outline-color;
+  transition-duration: 300ms;
+  animation-timing-function: ease-in-out;
+
+  outline-style: solid;
+  outline-color: color-mix(in srgb, var(--accent-color) 50%, transparent);  /* equivalent to $focus_border_color from libadwaita */
+  outline-width: 2px;
+  outline-offset: -2px;
+}
+
+/* Chart labels */
+label.continuous-axis-label {
+  color: color-mix(in srgb, var(--view-fg-color) var(--dim-opacity), transparent);
+  margin: 0 6px;
+  font-size: 82%;
+}
+
+label.discrete-axis-label {
+  margin-top: 6px;
 }

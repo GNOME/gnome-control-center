@@ -651,8 +651,6 @@ cc_night_light_page_class_init (CcNightLightPageClass *klass)
 static void
 cc_night_light_page_init (CcNightLightPage *self)
 {
-  g_autoptr(GtkCssProvider) provider = NULL;
-
   gtk_widget_init_template (GTK_WIDGET (self));
 
   self->cancellable = g_cancellable_new ();
@@ -686,13 +684,6 @@ cc_night_light_page_init (CcNightLightPage *self)
   g_settings_bind_writable (self->settings_display, "night-light-schedule-to",
                             self->spinbutton_to_minutes, "sensitive",
                             FALSE);
-
-  /* use custom CSS */
-  provider = gtk_css_provider_new ();
-  gtk_css_provider_load_from_resource (provider, "/org/gnome/control-center/display/night-light.css");
-  gtk_style_context_add_provider_for_display (gdk_display_get_default (),
-                                              GTK_STYLE_PROVIDER (provider),
-                                              GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
 
   cc_object_storage_create_dbus_proxy (G_BUS_TYPE_SESSION,
                                        G_DBUS_PROXY_FLAGS_NONE,
