@@ -705,8 +705,6 @@ cc_firmware_security_page_init (CcFirmwareSecurityPage *self)
   self->event_log_output = g_string_new (NULL);
   self->cancellable = g_cancellable_new ();
 
-  load_custom_css ("/org/gnome/control-center/privacy/firmware-security/security-level.css");
-
   g_dbus_proxy_new_for_bus (G_BUS_TYPE_SYSTEM,
                             G_DBUS_PROXY_FLAGS_NONE,
                             NULL,
