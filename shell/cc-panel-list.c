@@ -270,6 +270,8 @@ row_data_new (CcPanelCategory     category,
   label = gtk_label_new (name);
   gtk_label_set_xalign (GTK_LABEL (label), 0.0);
   gtk_widget_set_hexpand (label, TRUE);
+  gtk_label_set_max_width_chars (GTK_LABEL (label), 40);
+  gtk_label_set_wrap (GTK_LABEL (label), TRUE);
   gtk_grid_attach (GTK_GRID (grid), label, 1, 0, 1, 1);
   gtk_accessible_update_relation (GTK_ACCESSIBLE (data->row),
                                   GTK_ACCESSIBLE_RELATION_LABELLED_BY,
@@ -1100,4 +1102,3 @@ cc_panel_list_set_selection_mode (CcPanelList      *self,
       gtk_list_box_select_row (GTK_LIST_BOX (listbox), GTK_LIST_BOX_ROW (data->row));
     }
 }
-
