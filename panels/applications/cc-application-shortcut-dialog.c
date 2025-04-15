@@ -124,9 +124,7 @@ shortcut_added_cb (CcApplicationShortcutDialog *self,
 }
 
 static void
-on_remove_dialog_response_cb (CcApplicationShortcutDialog *self,
-                              char                        *response,
-                              AdwAlertDialog              *dialog)
+on_remove_dialog_response_cb (CcApplicationShortcutDialog *self)
 {
   cc_keyboard_manager_reset_global_shortcuts (self->manager, self->app_id);
   adw_dialog_close (ADW_DIALOG (self));
