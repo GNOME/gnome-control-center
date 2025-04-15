@@ -84,9 +84,7 @@ struct _CcDisplayPanel
 
   GDBusProxy *shell_proxy;
 
-  GtkWidget      *apply_button;
   GtkWidget      *cancel_button;
-  AdwWindowTitle *apply_titlebar_title_widget;
   gboolean        showing_apply_titlebar;
 
   GListStore     *primary_display_list;
@@ -103,6 +101,8 @@ struct _CcDisplayPanel
   AdwNavigationPage *display_settings_page;
   AdwComboRow    *primary_display_row;
   AdwPreferencesGroup *single_display_settings_group;
+  AdwToastOverlay *toast_overlay;
+  AdwToastOverlay *display_settings_page_toast_overlay;
 
   GtkShortcut *escape_shortcut;
 
@@ -585,8 +585,6 @@ cc_display_panel_class_init (CcDisplayPanelClass *klass)
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/display/cc-display-panel.ui");
 
-  gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, apply_button);
-  gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, apply_titlebar_title_widget);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, display_settings_disabled_group);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, arrangement_bin);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, arrangement_row);
@@ -600,6 +598,8 @@ cc_display_panel_class_init (CcDisplayPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, night_light_page);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, primary_display_row);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, single_display_settings_group);
+  gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, toast_overlay);
+  gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, display_settings_page_toast_overlay);
 
   gtk_widget_class_bind_template_callback (widget_class, apply_current_configuration);
   gtk_widget_class_bind_template_callback (widget_class, cancel_current_configuration);
@@ -902,25 +902,19 @@ on_screen_changed (CcDisplayPanel *self)
 }
 
 static void
-show_apply_titlebar (CcDisplayPanel *self, gboolean is_applicable)
+show_apply_buttons (CcDisplayPanel *self, gboolean is_applicable)
 {
-  gtk_widget_set_sensitive (self->apply_button, is_applicable);
+  if (!is_applicable)
+    {
+      AdwToast *toast = adw_toast_new (_("Changes Cannot be Applied: This could be due to hardware limitations."));
 
-  if (is_applicable)
-    {
-      adw_window_title_set_title (self->apply_titlebar_title_widget,
-                                  _("Apply Changes?"));
-      adw_window_title_set_subtitle (self->apply_titlebar_title_widget, "");
-    }
-  else
-    {
-      adw_window_title_set_title (self->apply_titlebar_title_widget,
-                                  _("Changes Cannot be Applied"));
-      adw_window_title_set_subtitle (self->apply_titlebar_title_widget,
-                                  _("This could be due to hardware limitations."));
+      if (cc_panel_get_visible_subpage (CC_PANEL (self)) == self->display_settings_page)
+        adw_toast_overlay_add_toast (self->display_settings_page_toast_overlay, toast);
+      else
+        adw_toast_overlay_add_toast (self->toast_overlay, toast);
     }
 
-  self->showing_apply_titlebar = TRUE;
+  self->showing_apply_titlebar = is_applicable;
   g_object_notify (G_OBJECT (self), "showing-apply-titlebar");
 }
 
@@ -944,7 +938,7 @@ update_apply_button (CcDisplayPanel *self)
   if (config_equal)
     reset_titlebar (self);
   else
-    show_apply_titlebar (self, cc_display_config_is_applicable (self->current_config));
+    show_apply_buttons (self, cc_display_config_is_applicable (self->current_config));
 }
 
 static void
