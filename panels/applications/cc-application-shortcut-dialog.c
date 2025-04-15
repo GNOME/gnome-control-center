@@ -249,6 +249,7 @@ cc_application_shortcut_dialog_new (const char *app_id)
 {
   CcApplicationShortcutDialog *dialog;
   g_autofree char *explanation_str = NULL;
+  g_autofree char *formatted_name = NULL;
   g_autofree char *name = NULL;
 
   dialog = g_object_new (CC_TYPE_APPLICATION_SHORTCUT_DIALOG, NULL);
@@ -258,9 +259,10 @@ cc_application_shortcut_dialog_new (const char *app_id)
 
   name = cc_util_app_id_to_display_name (app_id);
 
+  formatted_name = g_strdup_printf ("<b>%s</b>", name);
   /* TRANSLATORS: %s is an app name. */
   explanation_str =
-    g_strdup_printf (_("%s has registered the following global shortcuts"), name);
+    g_strdup_printf (_("%s has registered the following global shortcuts"), formatted_name);
   adw_preferences_page_set_description (dialog->shortcut_list, explanation_str);
 
   return dialog;
