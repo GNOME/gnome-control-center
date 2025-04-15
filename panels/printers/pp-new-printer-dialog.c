@@ -34,8 +34,11 @@
 #include "pp-host.h"
 #include "pp-new-printer.h"
 #include "pp-ppd-selection-dialog.h"
-#include "pp-samba.h"
 #include "pp-utils.h"
+
+#ifdef WITH_SAMBA
+#include "pp-samba.h"
+#endif
 
 #if (CUPS_VERSION_MAJOR > 1) || (CUPS_VERSION_MINOR > 5)
 #define HAVE_CUPS_1_6 1
@@ -150,7 +153,9 @@ struct _PpNewPrinterDialog
   PpHost  *socket_host;
   PpHost  *lpd_host;
   PpHost  *remote_cups_host;
+#ifdef WITH_SAMBA
   PpSamba *samba_host;
+#endif
   guint    host_search_timeout_id;
 };
 
@@ -162,6 +167,7 @@ typedef struct
   gpointer  dialog;
 } AuthSMBData;
 
+#ifdef WITH_SAMBA
 static void
 get_authenticated_samba_devices_cb (GObject      *source_object,
                                     GAsyncResult *res,
@@ -221,6 +227,7 @@ get_authenticated_samba_devices_cb (GObject      *source_object,
   g_free (data->server_name);
   g_free (data);
 }
+#endif
 
 static void
 go_to_page (PpNewPrinterDialog *self,
@@ -231,6 +238,7 @@ go_to_page (PpNewPrinterDialog *self,
   gtk_stack_set_visible_child_name (self->headerbar_topleft_buttons, page);
 }
 
+#ifdef WITH_SAMBA
 static void
 on_authenticate (PpNewPrinterDialog *self)
 {
@@ -300,12 +308,15 @@ auth_entries_changed (PpNewPrinterDialog *self)
   g_clear_pointer (&username, g_free);
   g_clear_pointer (&password, g_free);
 }
+#endif
 
 static void
 on_go_back_button_clicked (PpNewPrinterDialog *self)
 {
+#ifdef WITH_SAMBA
   pp_samba_set_auth_info (self->samba_host, NULL, NULL);
   g_clear_object (&self->samba_host);
+#endif
 
   go_to_page (self, ADDPRINTER_PAGE);
   adw_window_title_set_title (self->header_title, _("Add Printer"));
@@ -314,6 +325,7 @@ on_go_back_button_clicked (PpNewPrinterDialog *self)
   gtk_tree_selection_unselect_all (gtk_tree_view_get_selection (self->devices_treeview));
 }
 
+#ifdef WITH_SAMBA
 static void
 authenticate_samba_server (PpNewPrinterDialog *self)
 {
@@ -357,6 +369,7 @@ authenticate_samba_server (PpNewPrinterDialog *self)
         }
     }
 }
+#endif
 
 static void
 device_selection_changed_cb (PpNewPrinterDialog *self)
@@ -566,11 +579,13 @@ update_dialog_state (PpNewPrinterDialog *self)
   searching = self->cups_searching ||
               self->remote_cups_host != NULL ||
               self->snmp_host != NULL ||
+              #ifdef HAVE_SAMBA
+                self->samba_host != NULL ||
+                self->samba_authenticated_searching ||
+                self->samba_searching ||
+              #endif
               self->socket_host != NULL ||
-              self->lpd_host != NULL ||
-              self->samba_host != NULL ||
-              self->samba_authenticated_searching ||
-              self->samba_searching;
+              self->lpd_host != NULL;
 
   if (gtk_tree_model_get_iter_first (GTK_TREE_MODEL (self->devices_liststore), &iter))
       gtk_stack_set_visible_child_name (self->stack, "standard-page");
@@ -896,6 +911,7 @@ get_remote_cups_devices_cb (GObject      *source_object,
     }
 }
 
+#ifdef WITH_SAMBA
 static void
 get_samba_host_devices_cb (GObject      *source_object,
                            GAsyncResult *res,
@@ -959,6 +975,7 @@ get_samba_devices_cb (GObject      *source_object,
         }
     }
 }
+#endif
 
 static void
 get_jetdirect_devices_cb (GObject      *source_object,
@@ -1133,9 +1150,6 @@ search_for_remote_printers (THostSearchData *data)
         g_object_set (self->lpd_host, "port", data->host_port, NULL);
     }
 
-  self->samba_host = pp_samba_new (data->host_name);
-
-  update_dialog_state (data->dialog);
 
   pp_host_get_remote_cups_devices_async (self->remote_cups_host,
                                          self->remote_host_cancellable,
@@ -1157,13 +1171,18 @@ search_for_remote_printers (THostSearchData *data)
                                  get_lpd_devices_cb,
                                  data->dialog);
 
+#ifdef WITH_SAMBA
+  self->samba_host = pp_samba_new (data->host_name);
   pp_samba_get_devices_async (self->samba_host,
                               FALSE,
                               self->remote_host_cancellable,
                               get_samba_host_devices_cb,
                               data->dialog);
+#endif
 
   self->host_search_timeout_id = 0;
+
+  update_dialog_state (data->dialog);
 
   return G_SOURCE_REMOVE;
 }
@@ -1521,7 +1540,9 @@ row_activated_cb (PpNewPrinterDialog *self)
 
       if (authentication_needed)
         {
+#ifdef WITH_SAMBA
           authenticate_samba_server (self);
+#endif
         }
       else
         {
@@ -1580,7 +1601,9 @@ static void
 populate_devices_list (PpNewPrinterDialog *self)
 {
   GtkTreeViewColumn         *column;
+#ifdef HAVE_SAMBA
   g_autoptr(PpSamba)         samba = NULL;
+#endif
   g_autoptr(GEmblem)         emblem = NULL;
   g_autoptr(PpCups)          cups = NULL;
   g_autoptr(GIcon)           icon = NULL;
@@ -1626,11 +1649,13 @@ populate_devices_list (PpNewPrinterDialog *self)
   cups = pp_cups_new ();
   pp_cups_get_dests_async (cups, self->cancellable, cups_get_dests_cb, self);
 
+#ifdef WITH_SAMBA
   self->samba_searching = TRUE;
-  update_dialog_state (self);
-
   samba = pp_samba_new (NULL);
   pp_samba_get_devices_async (samba, FALSE, self->cancellable, get_samba_devices_cb, self);
+#endif
+
+  update_dialog_state (self);
 }
 
 static void
@@ -1767,11 +1792,13 @@ pp_new_printer_dialog_new (PPDList              *ppd_list,
   g_signal_connect_object (self->search_entry, "activate", G_CALLBACK (search_entry_activated_cb), self, G_CONNECT_SWAPPED);
   g_signal_connect_object (self->search_entry, "search-changed", G_CALLBACK (search_entry_changed_cb), self, G_CONNECT_SWAPPED);
 
+#ifdef WITH_SAMBA
   g_signal_connect_object (self->unlock_button, "clicked", G_CALLBACK (authenticate_samba_server), self, G_CONNECT_SWAPPED);
 
   /* Authentication form widgets */
   g_signal_connect_object (self->username_entry, "changed", G_CALLBACK (auth_entries_changed), self, G_CONNECT_SWAPPED);
   g_signal_connect_object (self->password_entry, "changed", G_CALLBACK (auth_entries_changed), self, G_CONNECT_SWAPPED);
+#endif
   g_signal_connect_object (self->go_back_button, "clicked", G_CALLBACK (on_go_back_button_clicked), self, G_CONNECT_SWAPPED);
 
   /* Fill with data */
@@ -1811,7 +1838,9 @@ pp_new_printer_dialog_dispose (GObject *object)
   g_clear_object (&self->socket_host);
   g_clear_object (&self->lpd_host);
   g_clear_object (&self->remote_cups_host);
+#ifdef WITH_SAMBA
   g_clear_object (&self->samba_host);
+#endif
 
   if (self->ppd_selection_dialog != NULL)
     {
