@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2025-04-11 08:42+0000\n"
-"PO-Revision-Date: 2025-04-12 00:44+0200\n"
+"POT-Creation-Date: 2025-04-16 23:57+0000\n"
+"PO-Revision-Date: 2025-04-17 08:33+0200\n"
 "Last-Translator: Martin Srebotnjak <miles@filmsi.net>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "Language: sl_SI\n"
@@ -80,10 +80,10 @@ msgstr "_Dodaj"
 #: global-shortcuts-provider/cc-global-shortcut-dialog.ui:36
 msgid ""
 "Added keyboard shortcuts will be available globally, and can be changed in "
-"the app's page in Settings"
+"the app’s page in Settings"
 msgstr ""
 "Dodane tipkovne bližnjice bodo na voljo vsepovsod in jih je mogoče "
-"spremeniti na plošči programa v Nastavitvah"
+"spremeniti na strani programa med nastavitvami"
 
 #: panels/applications/cc-application-shortcut-dialog.c:140
 msgid "Remove All Shortcuts?"
@@ -108,7 +108,7 @@ msgstr "_Odstrani"
 msgid "_Remove All Shortcuts"
 msgstr "_Odstrani vse tipkovne bližnjice"
 
-#: panels/applications/cc-application-shortcut-dialog.c:260
+#: panels/applications/cc-application-shortcut-dialog.c:262
 #, c-format
 msgid "%s has registered the following global shortcuts"
 msgstr "%s je registriral naslednje globalne tipkovne bližnjice"
@@ -368,7 +368,7 @@ msgstr "Prejme sistemska iskanja in pošlji zadetke"
 #: panels/keyboard/cc-xkb-modifier-page.c:322
 #: panels/keyboard/keyboard-shortcuts.c:367 panels/network/panel-common.c:336
 #: panels/system/users/cc-user-page.c:367
-#: panels/system/users/cc-user-page.c:752 panels/wwan/cc-wwan-device-page.c:477
+#: panels/system/users/cc-user-page.c:753 panels/wwan/cc-wwan-device-page.c:477
 #: subprojects/gvc/gvc-mixer-control.c:1872
 msgid "Disabled"
 msgstr "Onemogočeno"
@@ -3098,7 +3098,7 @@ msgid "_Proxy"
 msgstr "_Posredniški strežnik"
 
 #: panels/network/cc-qr-code-dialog.ui:6
-#: panels/network/cc-wifi-connection-row.ui:50
+#: panels/network/cc-wifi-connection-row.ui:41
 msgid "Share Network"
 msgstr "Souporaba omrežja"
 
@@ -3126,48 +3126,48 @@ msgid "Password"
 msgstr "Geslo"
 
 #. TRANSLATORS: This happens when the connection name does not contain the SSID.
-#: panels/network/cc-wifi-connection-row.c:223
+#: panels/network/cc-wifi-connection-row.c:222
 #, c-format
 msgctxt "Wi-Fi Connection"
 msgid "%s (SSID: %s)"
 msgstr "%s (SSID: %s)"
 
-#: panels/network/cc-wifi-connection-row.c:274
+#. TRANSLATORS: device status
+#: panels/network/cc-wifi-connection-row.c:261 panels/network/panel-common.c:63
+msgid "Connected"
+msgstr "Povezano"
+
+#: panels/network/cc-wifi-connection-row.c:273
 msgid "Insecure network (WEP)"
 msgstr "Ne-varno omrežje (WEP)"
 
-#: panels/network/cc-wifi-connection-row.c:278
+#: panels/network/cc-wifi-connection-row.c:277
 msgid "Secure network (WPA)"
 msgstr "Varno omrežje (WPA)"
 
-#: panels/network/cc-wifi-connection-row.c:282
+#: panels/network/cc-wifi-connection-row.c:281
 msgid "Secure network (WPA2)"
 msgstr "Varno omrežje (WPA2)"
 
-#: panels/network/cc-wifi-connection-row.c:286
+#: panels/network/cc-wifi-connection-row.c:285
 msgid "Secure network (WPA3)"
 msgstr "Varno omrežje (WPA3)"
 
-#: panels/network/cc-wifi-connection-row.c:290
+#: panels/network/cc-wifi-connection-row.c:289
 msgid "Secure network"
 msgstr "Varno omrežje"
 
-#: panels/network/cc-wifi-connection-row.c:319
+#: panels/network/cc-wifi-connection-row.c:318
 #, c-format
 msgid "Signal strength %d%%"
 msgstr "Moč signala %d%%"
 
-#. TRANSLATORS: device status
-#: panels/network/cc-wifi-connection-row.ui:34 panels/network/panel-common.c:63
-msgid "Connected"
-msgstr "Povezano"
-
-#: panels/network/cc-wifi-connection-row.ui:62
+#: panels/network/cc-wifi-connection-row.ui:53
 #: panels/network/network-bluetooth.ui:14 panels/network/network-ethernet.ui:47
 msgid "Network Options"
 msgstr "Možnosti omrežja"
 
-#: panels/network/cc-wifi-connection-row.ui:73
+#: panels/network/cc-wifi-connection-row.ui:64
 msgid "Forget Network"
 msgstr "Pozabi omrežje"
 
@@ -5610,13 +5610,13 @@ msgid "Loading Drivers"
 msgstr "Nalaganje gonilnikov"
 
 #. Translators: This is the label of the button that opens the Jobs Dialog.
-#: panels/printers/pp-printer-entry.c:532
+#: panels/printers/pp-printer-entry.c:540
 #: panels/printers/pp-printer-entry.ui:41
 msgid "No Active Jobs"
 msgstr "Ni dejavnih poslov"
 
 #. Translators: This is the label of the button that opens the Jobs Dialog.
-#: panels/printers/pp-printer-entry.c:537
+#: panels/printers/pp-printer-entry.c:545
 #, c-format
 msgid "%u Job"
 msgid_plural "%u Jobs"
@@ -5626,110 +5626,110 @@ msgstr[2] "%u posla"
 msgstr[3] "%u posli"
 
 #. Translators: Name of job which makes printer to clean its heads
-#: panels/printers/pp-printer-entry.c:657
+#: panels/printers/pp-printer-entry.c:665
 msgid "Clean print heads"
 msgstr "Počisti glave tiskalnika"
 
 #. Translators: The printer is low on toner
-#: panels/printers/pp-printer-entry.c:724
+#: panels/printers/pp-printer-entry.c:732
 msgid "Low on toner"
 msgstr "Tonerja je malo"
 
 #. Translators: The printer has no toner left
-#: panels/printers/pp-printer-entry.c:726
+#: panels/printers/pp-printer-entry.c:734
 msgid "Out of toner"
 msgstr "Zmanjkalo je tonerja"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: panels/printers/pp-printer-entry.c:729
+#: panels/printers/pp-printer-entry.c:737
 msgid "Low on developer"
 msgstr "Razvijalca je malo"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: panels/printers/pp-printer-entry.c:732
+#: panels/printers/pp-printer-entry.c:740
 msgid "Out of developer"
 msgstr "Zmanjkalo je razvijalca"
 
 #. Translators: "marker" is one color bin of the printer
-#: panels/printers/pp-printer-entry.c:734
+#: panels/printers/pp-printer-entry.c:742
 msgid "Low on a marker supply"
 msgstr "Zaloge označevalnika je malo"
 
 #. Translators: "marker" is one color bin of the printer
-#: panels/printers/pp-printer-entry.c:736
+#: panels/printers/pp-printer-entry.c:744
 msgid "Out of a marker supply"
 msgstr "Zaloge označevalnika je zmanjkalo"
 
 #. Translators: One or more covers on the printer are open
-#: panels/printers/pp-printer-entry.c:738
+#: panels/printers/pp-printer-entry.c:746
 msgid "Open cover"
 msgstr "Odprt pokrov"
 
 #. Translators: One or more doors on the printer are open
-#: panels/printers/pp-printer-entry.c:740
+#: panels/printers/pp-printer-entry.c:748
 msgid "Open door"
 msgstr "Odprta vrata"
 
 #. Translators: At least one input tray is low on media
-#: panels/printers/pp-printer-entry.c:742
+#: panels/printers/pp-printer-entry.c:750
 msgid "Low on paper"
 msgstr "Malo papirja"
 
 #. Translators: At least one input tray is empty
-#: panels/printers/pp-printer-entry.c:744
+#: panels/printers/pp-printer-entry.c:752
 msgid "Out of paper"
 msgstr "Ni papirja"
 
 #. Translators: The printer is offline
-#: panels/printers/pp-printer-entry.c:746
+#: panels/printers/pp-printer-entry.c:754
 msgctxt "printer state"
 msgid "Offline"
 msgstr "Nepovezano"
 
 #. Translators: Someone has stopped the Printer
 #. Translators: Printer's state (no jobs can be processed)
-#: panels/printers/pp-printer-entry.c:748
-#: panels/printers/pp-printer-entry.c:891
+#: panels/printers/pp-printer-entry.c:756
+#: panels/printers/pp-printer-entry.c:899
 msgctxt "printer state"
 msgid "Stopped"
 msgstr "Zaustavljeno"
 
 #. Translators: The printer marker supply waste receptacle is almost full
-#: panels/printers/pp-printer-entry.c:750
+#: panels/printers/pp-printer-entry.c:758
 msgid "Waste receptacle almost full"
 msgstr "Zbiralnik odpadkov je skoraj poln"
 
 #. Translators: The printer marker supply waste receptacle is full
-#: panels/printers/pp-printer-entry.c:752
+#: panels/printers/pp-printer-entry.c:760
 msgid "Waste receptacle full"
 msgstr "Zbiralnik odpadkov je poln"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: panels/printers/pp-printer-entry.c:754
+#: panels/printers/pp-printer-entry.c:762
 msgid "The optical photo conductor is near end of life"
 msgstr "Optični foto prevodnik ne bo več dolgo deloval"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: panels/printers/pp-printer-entry.c:756
+#: panels/printers/pp-printer-entry.c:764
 msgid "The optical photo conductor is no longer functioning"
 msgstr "Optični foto prevodnik ne deluje več"
 
 #. Translators: Printer's state (can start new job without waiting)
-#: panels/printers/pp-printer-entry.c:877
+#: panels/printers/pp-printer-entry.c:885
 msgctxt "printer state"
 msgid "Ready"
 msgstr "Pripravljen"
 
 #. Translators: Printer's state (printer is ready but doesn't accept new jobs)
-#: panels/printers/pp-printer-entry.c:882
+#: panels/printers/pp-printer-entry.c:890
 msgctxt "printer state"
 msgid "Does not accept jobs"
 msgstr "Ne sprejema poslov"
 
 #. Translators: Printer's state (jobs are processing)
-#: panels/printers/pp-printer-entry.c:887
+#: panels/printers/pp-printer-entry.c:895
 msgctxt "printer state"
 msgid "Processing"
 msgstr "Obdelovanje"
@@ -6410,7 +6410,7 @@ msgstr "Ni veljavno"
 #. TRANSLATORS: Status of Parental Controls setup
 #: panels/privacy/firmware-security/cc-firmware-security-utils.c:45
 #: panels/system/users/cc-user-page.c:365
-#: panels/system/users/cc-user-page.c:752 panels/wwan/cc-wwan-device-page.c:475
+#: panels/system/users/cc-user-page.c:753 panels/wwan/cc-wwan-device-page.c:475
 msgid "Enabled"
 msgstr "Omogočeno"
 
@@ -7896,11 +7896,11 @@ msgstr "Veljavna domena"
 msgid "Domain not found"
 msgstr "Domene ni mogoče najti"
 
-#: panels/system/users/cc-enterprise-login-dialog.c:597
+#: panels/system/users/cc-enterprise-login-dialog.c:601
 msgid "Checking domain…"
 msgstr "Poteka predpomnjenje domene ..."
 
-#: panels/system/users/cc-enterprise-login-dialog.c:641
+#: panels/system/users/cc-enterprise-login-dialog.c:645
 msgid "Failed to contact realmd service"
 msgstr "Povezovanje s storitvijo realmd je spodletelo"
 
@@ -8250,7 +8250,7 @@ msgid "None"
 msgstr "Brez"
 
 #. TODO: Handle enterprise accounts
-#: panels/system/users/cc-user-page.c:420
+#: panels/system/users/cc-user-page.c:421
 #, c-format
 msgid "Remove %s?"
 msgstr "Ali želite odstraniti %s?"
@@ -9138,7 +9138,7 @@ msgstr ""
 "lepljive;počasne;odskočne;tipke;zamik;odskočne;dvojne;klik;dvoklik;ponovitev;"
 "utripanje;kazalec;iskanje;lociranje;vidno;slišno;zvok;tipkanje;animacije;"
 
-#: panels/wacom/button-mapping.ui:7 panels/wacom/cc-wacom-ekr-page.ui:19
+#: panels/wacom/button-mapping.ui:7
 msgid "Map Buttons"
 msgstr "Preslikava gumbov"
 
@@ -9218,6 +9218,10 @@ msgstr "Zunanja tablična naprava"
 msgid "External pad device"
 msgstr "Zunanja krmilna naprava"
 
+#: panels/wacom/cc-wacom-ekr-page.ui:19 panels/wacom/cc-wacom-page.ui:53
+msgid "Map _Buttons"
+msgstr "_Preslikava gumbov"
+
 #. All displays item
 #: panels/wacom/cc-wacom-page.c:667
 msgid "All Displays"
@@ -9238,10 +9242,6 @@ msgstr "Lokacija gumbov"
 #: panels/wacom/cc-wacom-page.ui:27
 msgid "The location of the physical buttons on the tablet"
 msgstr "Lokacija fizičnih gumbov na tablici"
-
-#: panels/wacom/cc-wacom-page.ui:53
-msgid "Map _Buttons"
-msgstr "_Preslikava gumbov"
 
 #: panels/wacom/cc-wacom-page.ui:66
 msgctxt "display setting"
@@ -9600,67 +9600,67 @@ msgstr ""
 msgid "_Disable Screen Time"
 msgstr "_Onemogoči čas pred zaslonom"
 
-#: panels/wellbeing/cc-wellbeing-panel.ui:76
+#: panels/wellbeing/cc-wellbeing-panel.ui:78
 msgid "Screen Time Recording Disabled"
 msgstr "Čas pred zaslonom je onemogočen"
 
-#: panels/wellbeing/cc-wellbeing-panel.ui:78
+#: panels/wellbeing/cc-wellbeing-panel.ui:80
 msgid "Enable recording to view screen usage history"
 msgstr "Omogoči snemanje za ogled zgodovine uporabe zaslona"
 
-#: panels/wellbeing/cc-wellbeing-panel.ui:82
+#: panels/wellbeing/cc-wellbeing-panel.ui:84
 msgid "E_nable"
 msgstr "O_mogoči"
 
-#: panels/wellbeing/cc-wellbeing-panel.ui:102
+#: panels/wellbeing/cc-wellbeing-panel.ui:104
 msgid "Screen Limits"
 msgstr "Omejitve zaslona"
 
-#: panels/wellbeing/cc-wellbeing-panel.ui:105
+#: panels/wellbeing/cc-wellbeing-panel.ui:107
 msgid "_Screen Time Limit"
 msgstr "_Omejitev časa pred zaslonom"
 
-#: panels/wellbeing/cc-wellbeing-panel.ui:112
+#: panels/wellbeing/cc-wellbeing-panel.ui:114
 msgid "Daily _Limit"
 msgstr "Dnevna o_mejitev"
 
-#: panels/wellbeing/cc-wellbeing-panel.ui:118
+#: panels/wellbeing/cc-wellbeing-panel.ui:120
 msgid "_Grayscale"
 msgstr "_Sivinsko"
 
-#: panels/wellbeing/cc-wellbeing-panel.ui:119
+#: panels/wellbeing/cc-wellbeing-panel.ui:121
 msgid "Black and white screen for screen limits"
 msgstr "Črno-beli zaslon za omejitve časa pred zaslonom"
 
-#: panels/wellbeing/cc-wellbeing-panel.ui:128
+#: panels/wellbeing/cc-wellbeing-panel.ui:130
 msgid "Break Reminders"
 msgstr "Opomniki za prekinitve"
 
-#: panels/wellbeing/cc-wellbeing-panel.ui:131
+#: panels/wellbeing/cc-wellbeing-panel.ui:133
 msgid "_Eyesight Reminders"
 msgstr "Opomniki za _vid"
 
-#: panels/wellbeing/cc-wellbeing-panel.ui:132
+#: panels/wellbeing/cc-wellbeing-panel.ui:134
 msgid "Reminders to look away from the screen"
 msgstr "Opomniki, da odvrnete pogled od zaslona"
 
-#: panels/wellbeing/cc-wellbeing-panel.ui:138
+#: panels/wellbeing/cc-wellbeing-panel.ui:140
 msgid "_Movement Reminders"
 msgstr "Opomniki za _gibanje"
 
-#: panels/wellbeing/cc-wellbeing-panel.ui:139
+#: panels/wellbeing/cc-wellbeing-panel.ui:141
 msgid "Reminders to move around"
 msgstr "Opomniki za gibanje po prostoru"
 
-#: panels/wellbeing/cc-wellbeing-panel.ui:145
+#: panels/wellbeing/cc-wellbeing-panel.ui:147
 msgid "Movement _Break Schedule"
 msgstr "Razpored premorov z _gibanjem"
 
-#: panels/wellbeing/cc-wellbeing-panel.ui:151
+#: panels/wellbeing/cc-wellbeing-panel.ui:153
 msgid "S_ounds"
 msgstr "Zvo_ki"
 
-#: panels/wellbeing/cc-wellbeing-panel.ui:152
+#: panels/wellbeing/cc-wellbeing-panel.ui:154
 msgid "Play a sound when a break ends"
 msgstr "Predvajaj zvok, ko se odmor konča"
 
