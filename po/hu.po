@@ -19,8 +19,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/issu"
 "es\n"
-"POT-Creation-Date: 2025-03-21 18:19+0000\n"
-"PO-Revision-Date: 2025-03-27 00:13+0100\n"
+"POT-Creation-Date: 2025-04-20 12:32+0000\n"
+"PO-Revision-Date: 2025-04-22 12:29+0200\n"
 "Last-Translator: Balázs Úr <ur.balazs at fsf dot hu>\n"
 "Language-Team: Hungarian <openscope at fsf dot hu>\n"
 "Language: hu\n"
@@ -28,14 +28,14 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 23.08.5\n"
+"X-Generator: Lokalize 24.12.3\n"
 
 #: global-shortcuts-provider/cc-global-shortcut-dialog.ui:6
 msgid "Add Keyboard Shortcuts"
 msgstr "Gyorsbillentyűk hozzáadása"
 
 #: global-shortcuts-provider/cc-global-shortcut-dialog.ui:15
-#: panels/applications/cc-application-shortcut-dialog.c:152
+#: panels/applications/cc-application-shortcut-dialog.c:147
 #: panels/color/cc-color-calibrate.ui:21
 #: panels/common/cc-language-chooser.ui:15
 #: panels/display/cc-display-panel.ui:32 panels/display/cc-display-panel.ui:184
@@ -84,16 +84,16 @@ msgstr "_Hozzáadás"
 #: global-shortcuts-provider/cc-global-shortcut-dialog.ui:36
 msgid ""
 "Added keyboard shortcuts will be available globally, and can be changed in "
-"the application’s panel in Settings"
+"the app’s page in Settings"
 msgstr ""
-"A hozzáadott gyorsbillentyűk globálisan elérhetőek lesznek, és az alkalmazás "
-"paneljén a beállítások alatt változtathatók meg"
+"A hozzáadott gyorsbillentyűk globálisan elérhetőek lesznek, és az alkalmazás o"
+"ldalán változtathatók meg a Beállításokban."
 
-#: panels/applications/cc-application-shortcut-dialog.c:143
+#: panels/applications/cc-application-shortcut-dialog.c:138
 msgid "Remove All Shortcuts?"
 msgstr "Eltávolítja az összes gyorsbillentyűt?"
 
-#: panels/applications/cc-application-shortcut-dialog.c:148
+#: panels/applications/cc-application-shortcut-dialog.c:143
 #, c-format
 msgid ""
 "All actions from %s that have been registered for global shortcuts will be "
@@ -102,17 +102,17 @@ msgstr ""
 "A(z) %s alkalmazásból származó összes olyan művelet eltávolításra kerül, "
 "amely a globális gyorsbillentyűkhöz lett regisztrálva."
 
-#: panels/applications/cc-application-shortcut-dialog.c:153
+#: panels/applications/cc-application-shortcut-dialog.c:148
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:19
 #: panels/system/users/cc-user-page.ui:224
 msgid "_Remove"
 msgstr "_Eltávolítás"
 
-#: panels/applications/cc-application-shortcut-dialog.c:183
+#: panels/applications/cc-application-shortcut-dialog.c:178
 msgid "_Remove All Shortcuts"
 msgstr "Összes gyorsbillentyű _eltávolítása"
 
-#: panels/applications/cc-application-shortcut-dialog.c:263
+#: panels/applications/cc-application-shortcut-dialog.c:260
 #, c-format
 msgid "%s has registered the following global shortcuts"
 msgstr "A(z) %s a következő globális gyorsbillentyűket regisztrálta"
@@ -189,15 +189,12 @@ msgstr "Megváltoztathatja a beállításokat"
 #. TRANSLATORS: %s is an app name.
 #: panels/applications/cc-applications-panel.c:911
 #, c-format
-#| msgid ""
-#| "<b>%s</b> requires access to the following system resources. To stop this "
-#| "access, the app must be removed."
 msgid ""
 "%s requires access to the following system resources. To stop this access, "
 "the app must be removed."
 msgstr ""
-"A(z) %s hozzáférést igényel a következő rendszererőforrásokhoz. A hozzáférés"
-" leállításához el kell távolítani az alkalmazást."
+"A(z) %s hozzáférést igényel a következő rendszererőforrásokhoz. A hozzáférés "
+"leállításához el kell távolítani az alkalmazást."
 
 #: panels/applications/cc-applications-panel.c:915
 #, c-format
@@ -224,22 +221,19 @@ msgstr[1] "%u típus"
 #. TRANSLATORS: %s is an app name.
 #: panels/applications/cc-applications-panel.c:1260
 #, c-format
-#| msgid "<b>%s</b> is used to open the following types of files and links"
 msgid "%s is used to open the following types of files and links"
 msgstr ""
-"A(z) %s van használatban a fájlok és hivatkozások alábbi típusainak"
-" megnyitásához"
+"A(z) %s van használatban a fájlok és hivatkozások alábbi típusainak "
+"megnyitásához"
 
 #. TRANSLATORS: %s is an app name.
 #: panels/applications/cc-applications-panel.c:1303
 #, c-format
-#| msgid "How much disk space <b>%s</b> is occupying with app data and caches"
 msgid "How much disk space %s is occupying with app data and caches"
 msgstr "Mennyi tárhelyet foglal a(z) %s az adataival és a gyorsítótáraival"
 
 #: panels/applications/cc-applications-panel.c:1468
 #, c-format
-#| msgid "Duration"
 msgid "%u action"
 msgid_plural "%u actions"
 msgstr[0] "%u művelet"
@@ -369,10 +363,10 @@ msgstr "Rendszerkeresések fogadása és a találatok küldése"
 #: panels/applications/cc-applications-panel.ui:376
 #: panels/applications/cc-applications-panel.ui:392
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:120
-#: panels/keyboard/cc-xkb-modifier-page.c:323
+#: panels/keyboard/cc-xkb-modifier-page.c:322
 #: panels/keyboard/keyboard-shortcuts.c:367 panels/network/panel-common.c:336
 #: panels/system/users/cc-user-page.c:367
-#: panels/system/users/cc-user-page.c:752 panels/wwan/cc-wwan-device-page.c:477
+#: panels/system/users/cc-user-page.c:753 panels/wwan/cc-wwan-device-page.c:477
 #: subprojects/gvc/gvc-mixer-control.c:1872
 msgid "Disabled"
 msgstr "Letiltva"
@@ -956,7 +950,7 @@ msgid "Background removed"
 msgstr "Háttér eltávolítva"
 
 #: panels/background/cc-background-chooser.c:170
-#: panels/network/net-device-wifi.c:883 panels/printers/cc-printers-panel.c:672
+#: panels/network/net-device-wifi.c:883 panels/printers/cc-printers-panel.c:673
 msgid "_Undo"
 msgstr "_Visszavonás"
 
@@ -1298,16 +1292,16 @@ msgid "Test profile: "
 msgstr "Tesztprofil: "
 
 #. TRANSLATORS: an ICC profile is a file containing colorspace data
-#: panels/color/cc-color-panel.c:293
+#: panels/color/cc-color-panel.c:292
 msgid "Select ICC Profile File"
 msgstr "Válasszon ICC profilfájlt"
 
-#: panels/color/cc-color-panel.c:296
+#: panels/color/cc-color-panel.c:295
 msgid "Import"
 msgstr "Importálás"
 
 #. TRANSLATORS: filter name on the file->open dialog
-#: panels/color/cc-color-panel.c:308
+#: panels/color/cc-color-panel.c:307
 msgid "Supported ICC profiles"
 msgstr "Támogatott ICC profilok"
 
@@ -1316,22 +1310,22 @@ msgstr "Támogatott ICC profilok"
 msgid "All files"
 msgstr "Minden fájl"
 
-#: panels/color/cc-color-panel.c:580
+#: panels/color/cc-color-panel.c:581
 msgid "Screen"
 msgstr "Képernyő"
 
 #. TRANSLATORS: this is the dialog to save the ICC profile
-#: panels/color/cc-color-panel.c:860
+#: panels/color/cc-color-panel.c:861
 msgid "Save Profile"
 msgstr "Profil mentése"
 
 #. TRANSLATORS: this is when the button is sensitive
-#: panels/color/cc-color-panel.c:1118
+#: panels/color/cc-color-panel.c:1119
 msgid "Create a color profile for the selected device"
 msgstr "Színprofil létrehozása a kiválasztott eszközhöz"
 
 #. TRANSLATORS: this is when the button is insensitive
-#: panels/color/cc-color-panel.c:1133 panels/color/cc-color-panel.c:1157
+#: panels/color/cc-color-panel.c:1134 panels/color/cc-color-panel.c:1158
 msgid ""
 "The measuring instrument is not detected. Please check it is turned on and "
 "correctly connected."
@@ -1340,26 +1334,26 @@ msgstr ""
 "megfelelően van-e csatlakoztatva."
 
 #. TRANSLATORS: this is when the button is insensitive
-#: panels/color/cc-color-panel.c:1167
+#: panels/color/cc-color-panel.c:1168
 msgid "The measuring instrument does not support printer profiling."
 msgstr "A mérőkészülék nem támogatja a nyomtatóprofilozást."
 
 #. TRANSLATORS: this is when the button is insensitive
-#: panels/color/cc-color-panel.c:1178
+#: panels/color/cc-color-panel.c:1179
 msgid "The device type is not currently supported."
 msgstr "Az eszköztípus jelenleg nem támogatott."
 
 #. Translators: This will be presented as the text of a link to the documentation
 #. translators: Text used in link to privacy policy
 #. Translators: This will be presented as the text of a link to the documentation
-#: panels/color/cc-color-panel.c:2003
+#: panels/color/cc-color-panel.c:2004
 #: panels/privacy/diagnostics/cc-diagnostics-page.c:122
 #: panels/wacom/cc-wacom-device.c:168
 msgid "learn more"
 msgstr "tudjon meg többet"
 
 #. Translators: %s is a link to the documentation with the label "learn more"
-#: panels/color/cc-color-panel.c:2005
+#: panels/color/cc-color-panel.c:2006
 #, c-format
 msgid "Each device needs an up to date color profile to be color managed — %s."
 msgstr ""
@@ -2276,6 +2270,11 @@ msgstr "Saját mappa"
 msgid "Search"
 msgstr "Keresés"
 
+#: panels/keyboard/01-launchers.xml.in:16
+msgctxt "keybinding"
+msgid "Search"
+msgstr "Keresés"
+
 #: panels/keyboard/01-system.xml.in:2 panels/privacy/cc-privacy-panel.ui:18
 #: panels/system/cc-system-panel.ui:6
 #: panels/system/gnome-system-panel.desktop.in:3
@@ -2345,7 +2344,7 @@ msgstr "Nem találhatók bemeneti források"
 msgid "View Keyboard Layout"
 msgstr "Billentyűzetkiosztás megtekintése"
 
-#: panels/keyboard/cc-input-chooser.c:1034
+#: panels/keyboard/cc-input-chooser.c:1035
 msgctxt "Input Source"
 msgid "Other"
 msgstr "Egyéb"
@@ -3071,7 +3070,7 @@ msgid "VPN"
 msgstr "VPN"
 
 #: panels/network/cc-network-panel.ui:67
-#: panels/network/connection-editor/net-connection-editor.c:912
+#: panels/network/connection-editor/net-connection-editor.c:913
 msgid "Add VPN"
 msgstr "VPN hozzáadása"
 
@@ -3084,7 +3083,7 @@ msgid "_Proxy"
 msgstr "_Proxy"
 
 #: panels/network/cc-qr-code-dialog.ui:6
-#: panels/network/cc-wifi-connection-row.ui:50
+#: panels/network/cc-wifi-connection-row.ui:41
 msgid "Share Network"
 msgstr "Hálózat megosztása"
 
@@ -3112,48 +3111,48 @@ msgid "Password"
 msgstr "Jelszó"
 
 #. TRANSLATORS: This happens when the connection name does not contain the SSID.
-#: panels/network/cc-wifi-connection-row.c:223
+#: panels/network/cc-wifi-connection-row.c:222
 #, c-format
 msgctxt "Wi-Fi Connection"
 msgid "%s (SSID: %s)"
 msgstr "%s (SSID: %s)"
 
-#: panels/network/cc-wifi-connection-row.c:274
+#. TRANSLATORS: device status
+#: panels/network/cc-wifi-connection-row.c:261 panels/network/panel-common.c:63
+msgid "Connected"
+msgstr "Kapcsolódva"
+
+#: panels/network/cc-wifi-connection-row.c:273
 msgid "Insecure network (WEP)"
 msgstr "Nem biztonságos hálózat (WEP)"
 
-#: panels/network/cc-wifi-connection-row.c:278
+#: panels/network/cc-wifi-connection-row.c:277
 msgid "Secure network (WPA)"
 msgstr "Biztonságos hálózat (WPA)"
 
-#: panels/network/cc-wifi-connection-row.c:282
+#: panels/network/cc-wifi-connection-row.c:281
 msgid "Secure network (WPA2)"
 msgstr "Biztonságos hálózat (WPA2)"
 
-#: panels/network/cc-wifi-connection-row.c:286
+#: panels/network/cc-wifi-connection-row.c:285
 msgid "Secure network (WPA3)"
 msgstr "Biztonságos hálózat (WPA3)"
 
-#: panels/network/cc-wifi-connection-row.c:290
+#: panels/network/cc-wifi-connection-row.c:289
 msgid "Secure network"
 msgstr "Biztonságos hálózat"
 
-#: panels/network/cc-wifi-connection-row.c:319
+#: panels/network/cc-wifi-connection-row.c:318
 #, c-format
 msgid "Signal strength %d%%"
 msgstr "%d%%-os jelerősség"
 
-#. TRANSLATORS: device status
-#: panels/network/cc-wifi-connection-row.ui:34 panels/network/panel-common.c:63
-msgid "Connected"
-msgstr "Kapcsolódva"
-
-#: panels/network/cc-wifi-connection-row.ui:62
+#: panels/network/cc-wifi-connection-row.ui:53
 #: panels/network/network-bluetooth.ui:14 panels/network/network-ethernet.ui:47
 msgid "Network Options"
 msgstr "Hálózati beállítások"
 
-#: panels/network/cc-wifi-connection-row.ui:73
+#: panels/network/cc-wifi-connection-row.ui:64
 msgid "Forget Network"
 msgstr "Hálózat elfelejtése"
 
@@ -3313,7 +3312,7 @@ msgid "_Name"
 msgstr "_Név"
 
 #: panels/network/connection-editor/ce-page-8021x-security.c:106
-#: panels/network/connection-editor/ce-page-security.c:415
+#: panels/network/connection-editor/ce-page-security.c:416
 #: panels/network/connection-editor/details-page.ui:84
 #: panels/sharing/cc-sharing-panel.ui:112
 msgid "Security"
@@ -3402,7 +3401,7 @@ msgstr "WPA3"
 
 #. TRANSLATORS: this Enhanced Open WiFi security
 #: panels/network/connection-editor/ce-page-details.c:133
-#: panels/network/connection-editor/ce-page-security.c:270
+#: panels/network/connection-editor/ce-page-security.c:271
 msgid "Enhanced Open"
 msgstr "Enhanced Open"
 
@@ -3589,41 +3588,41 @@ msgstr "IPv4"
 msgid "IPv6"
 msgstr "IPv6"
 
-#: panels/network/connection-editor/ce-page-security.c:259
+#: panels/network/connection-editor/ce-page-security.c:260
 msgctxt "Wi-Fi/Ethernet security"
 msgid "None"
 msgstr "Nincs"
 
-#: panels/network/connection-editor/ce-page-security.c:294
+#: panels/network/connection-editor/ce-page-security.c:295
 msgid "WEP 40/128-bit Key (Hex or ASCII)"
 msgstr "WEP 40/128 bites kulcs (Hex vagy ASCII)"
 
-#: panels/network/connection-editor/ce-page-security.c:304
+#: panels/network/connection-editor/ce-page-security.c:305
 msgid "WEP 128-bit Passphrase"
 msgstr "WEP 128 bites jelmondat"
 
-#: panels/network/connection-editor/ce-page-security.c:317
+#: panels/network/connection-editor/ce-page-security.c:318
 msgid "LEAP"
 msgstr "LEAP"
 
-#: panels/network/connection-editor/ce-page-security.c:330
+#: panels/network/connection-editor/ce-page-security.c:331
 msgid "Dynamic WEP (802.1x)"
 msgstr "Dinamikus WEP (802.1x)"
 
-#: panels/network/connection-editor/ce-page-security.c:344
+#: panels/network/connection-editor/ce-page-security.c:345
 msgid "WPA & WPA2 Personal"
 msgstr "WPA és WPA2 Personal"
 
-#: panels/network/connection-editor/ce-page-security.c:358
+#: panels/network/connection-editor/ce-page-security.c:359
 msgid "WPA & WPA2 Enterprise"
 msgstr "WPA és WPA2 Enterprise"
 
-#: panels/network/connection-editor/ce-page-security.c:372
+#: panels/network/connection-editor/ce-page-security.c:373
 msgid "WPA3 Personal"
 msgstr "WPA3 Personal"
 
 #: panels/network/connection-editor/ce-page-wireguard.c:106
-#: panels/network/connection-editor/net-connection-editor.c:879
+#: panels/network/connection-editor/net-connection-editor.c:880
 msgid "WireGuard"
 msgstr "WireGuard"
 
@@ -3632,9 +3631,9 @@ msgstr "WireGuard"
 #: panels/privacy/firmware-security/cc-firmware-security-dialog.c:167
 #: panels/sound/cc-alert-chooser-page.c:350
 #: panels/system/about/cc-about-page.c:73
-#: panels/system/about/cc-system-details-window.c:282
-#: panels/system/about/cc-system-details-window.c:334
-#: panels/system/about/cc-system-details-window.c:837
+#: panels/system/about/cc-system-details-window.c:291
+#: panels/system/about/cc-system-details-window.c:343
+#: panels/system/about/cc-system-details-window.c:847
 #: panels/wwan/cc-wwan-details-dialog.c:100
 msgid "Unknown"
 msgstr "Ismeretlen"
@@ -3852,7 +3851,7 @@ msgstr ""
 "Ingyenes és nyílt forráskódú VPN-megoldás, amelyet egyszerű használatra, "
 "nagy sebességű teljesítményre és alacsony támadási felületűre terveztek."
 
-#: panels/network/connection-editor/net-connection-editor.c:888
+#: panels/network/connection-editor/net-connection-editor.c:889
 msgid "Import from file…"
 msgstr "Importálás fájlból…"
 
@@ -3883,7 +3882,7 @@ msgstr ""
 msgid "_OK"
 msgstr "_OK"
 
-#: panels/network/connection-editor/vpn-helpers.c:164
+#: panels/network/connection-editor/vpn-helpers.c:163
 msgid "Select file to import"
 msgstr "Válassza ki az importálandó fájlt"
 
@@ -4560,64 +4559,56 @@ msgid "Google"
 msgstr "Google"
 
 #: panels/online-accounts/cc-online-account-provider-row.c:58
-#: panels/online-accounts/cc-online-account-provider-row.c:60
+#: panels/online-accounts/cc-online-account-provider-row.c:59
 msgid "Email, calendar, contacts, files"
 msgstr "E-mail, naptár, névjegyek, fájlok"
 
 #: panels/online-accounts/cc-online-account-provider-row.c:59
-msgid "Microsoft"
-msgstr "Microsoft"
-
-#: panels/online-accounts/cc-online-account-provider-row.c:59
-msgid "Email"
-msgstr "E-mail"
-
-#: panels/online-accounts/cc-online-account-provider-row.c:60
 msgid "Microsoft 365"
 msgstr "Microsoft 365"
 
-#: panels/online-accounts/cc-online-account-provider-row.c:61
+#: panels/online-accounts/cc-online-account-provider-row.c:60
 msgid "Microsoft Exchange"
 msgstr "Microsoft Exchange"
 
-#: panels/online-accounts/cc-online-account-provider-row.c:61
+#: panels/online-accounts/cc-online-account-provider-row.c:60
 msgid "Email, calendar, contacts"
 msgstr "E-mail, naptár, névjegyek"
 
-#: panels/online-accounts/cc-online-account-provider-row.c:62
+#: panels/online-accounts/cc-online-account-provider-row.c:61
 msgid "Fedora"
 msgstr "Fedora"
 
-#: panels/online-accounts/cc-online-account-provider-row.c:62
+#: panels/online-accounts/cc-online-account-provider-row.c:61
 msgid "Enterprise authentication"
 msgstr "Vállalati hitelesítés"
 
-#: panels/online-accounts/cc-online-account-provider-row.c:63
+#: panels/online-accounts/cc-online-account-provider-row.c:62
 msgid "Email Server"
 msgstr "E-mail-kiszolgáló"
 
-#: panels/online-accounts/cc-online-account-provider-row.c:63
+#: panels/online-accounts/cc-online-account-provider-row.c:62
 msgid "IMAP/SMTP"
 msgstr "IMAP/SMTP"
 
-#: panels/online-accounts/cc-online-account-provider-row.c:64
+#: panels/online-accounts/cc-online-account-provider-row.c:63
 msgid "Calendar, Contacts and Files"
 msgstr "Naptár, névjegyek és fájlok"
 
-#: panels/online-accounts/cc-online-account-provider-row.c:64
+#: panels/online-accounts/cc-online-account-provider-row.c:63
 msgid "WebDAV"
 msgstr "WebDAV"
 
-#: panels/online-accounts/cc-online-account-provider-row.c:65
+#: panels/online-accounts/cc-online-account-provider-row.c:64
 msgid "Enterprise Authentication"
 msgstr "Vállalati hitelesítés"
 
-#: panels/online-accounts/cc-online-account-provider-row.c:65
+#: panels/online-accounts/cc-online-account-provider-row.c:64
 msgid "Kerberos"
 msgstr "Kerberos"
 
-#: panels/online-accounts/cc-online-account-provider-row.c:77
-#: panels/online-accounts/cc-online-account-provider-row.c:140
+#: panels/online-accounts/cc-online-account-provider-row.c:76
+#: panels/online-accounts/cc-online-account-provider-row.c:139
 msgctxt "Online Account"
 msgid "Other"
 msgstr "Egyéb"
@@ -4998,8 +4989,8 @@ msgid ""
 "Disabling automatic suspend will result in higher power consumption. It is "
 "recommended to keep automatic suspend enabled."
 msgstr ""
-"Az automatikus felfüggesztés letiltása nagyobb energiafogyasztást eredményez."
-" Ajánlott az automatikus felfüggesztést engedélyezve hagyni."
+"Az automatikus felfüggesztés letiltása nagyobb energiafogyasztást "
+"eredményez. Ajánlott az automatikus felfüggesztést engedélyezve hagyni."
 
 #: panels/power/cc-power-profile-row.c:128
 msgctxt "Power profile"
@@ -5048,12 +5039,12 @@ msgstr ""
 "Elsötétítés;Elhalványítás;Monitor;DPMS;Üresjárat;Energia;"
 
 #. Translators: %s is the printer name
-#: panels/printers/cc-printers-panel.c:682
+#: panels/printers/cc-printers-panel.c:683
 #, c-format
 msgid "Printer “%s” has been deleted"
 msgstr "A(z) „%s” nyomtató törölve lett"
 
-#: panels/printers/cc-printers-panel.c:924
+#: panels/printers/cc-printers-panel.c:925
 msgid "Failed to add new printer."
 msgstr "Nem sikerült hozzáadni új nyomtatót."
 
@@ -5105,7 +5096,7 @@ msgstr "Nem található megfelelő illesztőprogram"
 msgid "Searching for preferred drivers…"
 msgstr "Előnyben részesített illesztőprogramok keresése…"
 
-#: panels/printers/pp-details-dialog.c:277
+#: panels/printers/pp-details-dialog.c:275
 msgid ""
 "PostScript Printer Description files (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, *."
 "PPD.GZ)"
@@ -5589,13 +5580,13 @@ msgid "Loading Drivers"
 msgstr "Illesztőprogramok betöltése"
 
 #. Translators: This is the label of the button that opens the Jobs Dialog.
-#: panels/printers/pp-printer-entry.c:532
+#: panels/printers/pp-printer-entry.c:540
 #: panels/printers/pp-printer-entry.ui:41
 msgid "No Active Jobs"
 msgstr "Nincsenek aktív feladatok"
 
 #. Translators: This is the label of the button that opens the Jobs Dialog.
-#: panels/printers/pp-printer-entry.c:537
+#: panels/printers/pp-printer-entry.c:545
 #, c-format
 msgid "%u Job"
 msgid_plural "%u Jobs"
@@ -5603,110 +5594,110 @@ msgstr[0] "%u feladat"
 msgstr[1] "%u feladat"
 
 #. Translators: Name of job which makes printer to clean its heads
-#: panels/printers/pp-printer-entry.c:657
+#: panels/printers/pp-printer-entry.c:665
 msgid "Clean print heads"
 msgstr "Nyomtatófejek tisztítása"
 
 #. Translators: The printer is low on toner
-#: panels/printers/pp-printer-entry.c:724
+#: panels/printers/pp-printer-entry.c:732
 msgid "Low on toner"
 msgstr "A festékkazetta kifogyóban"
 
 #. Translators: The printer has no toner left
-#: panels/printers/pp-printer-entry.c:726
+#: panels/printers/pp-printer-entry.c:734
 msgid "Out of toner"
 msgstr "A festékkazetta kifogyott"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: panels/printers/pp-printer-entry.c:729
+#: panels/printers/pp-printer-entry.c:737
 msgid "Low on developer"
 msgstr "Az előhívó kifogyóban"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: panels/printers/pp-printer-entry.c:732
+#: panels/printers/pp-printer-entry.c:740
 msgid "Out of developer"
 msgstr "Az előhívó kifogyott"
 
 #. Translators: "marker" is one color bin of the printer
-#: panels/printers/pp-printer-entry.c:734
+#: panels/printers/pp-printer-entry.c:742
 msgid "Low on a marker supply"
 msgstr "A tintapatron kifogyóban"
 
 #. Translators: "marker" is one color bin of the printer
-#: panels/printers/pp-printer-entry.c:736
+#: panels/printers/pp-printer-entry.c:744
 msgid "Out of a marker supply"
 msgstr "A tintapatron kifogyott"
 
 #. Translators: One or more covers on the printer are open
-#: panels/printers/pp-printer-entry.c:738
+#: panels/printers/pp-printer-entry.c:746
 msgid "Open cover"
 msgstr "Fedél nyitva"
 
 #. Translators: One or more doors on the printer are open
-#: panels/printers/pp-printer-entry.c:740
+#: panels/printers/pp-printer-entry.c:748
 msgid "Open door"
 msgstr "Ajtó nyitva"
 
 #. Translators: At least one input tray is low on media
-#: panels/printers/pp-printer-entry.c:742
+#: panels/printers/pp-printer-entry.c:750
 msgid "Low on paper"
 msgstr "Kevés a papír"
 
 #. Translators: At least one input tray is empty
-#: panels/printers/pp-printer-entry.c:744
+#: panels/printers/pp-printer-entry.c:752
 msgid "Out of paper"
 msgstr "Kifogyott a papír"
 
 #. Translators: The printer is offline
-#: panels/printers/pp-printer-entry.c:746
+#: panels/printers/pp-printer-entry.c:754
 msgctxt "printer state"
 msgid "Offline"
 msgstr "Kikapcsolva"
 
 #. Translators: Someone has stopped the Printer
 #. Translators: Printer's state (no jobs can be processed)
-#: panels/printers/pp-printer-entry.c:748
-#: panels/printers/pp-printer-entry.c:891
+#: panels/printers/pp-printer-entry.c:756
+#: panels/printers/pp-printer-entry.c:899
 msgctxt "printer state"
 msgid "Stopped"
 msgstr "Leállítva"
 
 #. Translators: The printer marker supply waste receptacle is almost full
-#: panels/printers/pp-printer-entry.c:750
+#: panels/printers/pp-printer-entry.c:758
 msgid "Waste receptacle almost full"
 msgstr "A hulladékgyűjtő majdnem tele"
 
 #. Translators: The printer marker supply waste receptacle is full
-#: panels/printers/pp-printer-entry.c:752
+#: panels/printers/pp-printer-entry.c:760
 msgid "Waste receptacle full"
 msgstr "A hulladékgyűjtő tele"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: panels/printers/pp-printer-entry.c:754
+#: panels/printers/pp-printer-entry.c:762
 msgid "The optical photo conductor is near end of life"
 msgstr "Az optikai fotovezető közel jár az élete végéhez"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: panels/printers/pp-printer-entry.c:756
+#: panels/printers/pp-printer-entry.c:764
 msgid "The optical photo conductor is no longer functioning"
 msgstr "Az optikai fotovezető már nem működik"
 
 #. Translators: Printer's state (can start new job without waiting)
-#: panels/printers/pp-printer-entry.c:877
+#: panels/printers/pp-printer-entry.c:885
 msgctxt "printer state"
 msgid "Ready"
 msgstr "Kész"
 
 #. Translators: Printer's state (printer is ready but doesn't accept new jobs)
-#: panels/printers/pp-printer-entry.c:882
+#: panels/printers/pp-printer-entry.c:890
 msgctxt "printer state"
 msgid "Does not accept jobs"
 msgstr "Nem fogad feladatokat"
 
 #. Translators: Printer's state (jobs are processing)
-#: panels/printers/pp-printer-entry.c:887
+#: panels/printers/pp-printer-entry.c:895
 msgctxt "printer state"
 msgid "Processing"
 msgstr "Feldolgozás"
@@ -6396,7 +6387,7 @@ msgstr "Nem érvényes"
 #. TRANSLATORS: Status of Parental Controls setup
 #: panels/privacy/firmware-security/cc-firmware-security-utils.c:45
 #: panels/system/users/cc-user-page.c:365
-#: panels/system/users/cc-user-page.c:752 panels/wwan/cc-wwan-device-page.c:475
+#: panels/system/users/cc-user-page.c:753 panels/wwan/cc-wwan-device-page.c:475
 msgid "Enabled"
 msgstr "Engedélyezve"
 
@@ -6688,7 +6679,7 @@ msgstr "Mappa megnyitása"
 msgid "Remove Folder"
 msgstr "Mappa eltávolítása"
 
-#: panels/search/cc-search-locations-page.c:724
+#: panels/search/cc-search-locations-page.c:723
 msgid "Select Location"
 msgstr "Válasszon régiót"
 
@@ -6952,13 +6943,13 @@ msgstr "Hang"
 msgid "Output"
 msgstr "Kimenet"
 
-#: panels/sound/cc-sound-panel.ui:43
-msgid "_Output Device"
-msgstr "_Kimeneti eszköz"
-
-#: panels/sound/cc-sound-panel.ui:61
+#: panels/sound/cc-sound-panel.ui:29
 msgid "_Test…"
 msgstr "Tes_ztelés…"
+
+#: panels/sound/cc-sound-panel.ui:50
+msgid "_Output Device"
+msgstr "_Kimeneti eszköz"
 
 #: panels/sound/cc-sound-panel.ui:86
 msgid "_Configuration"
@@ -7106,45 +7097,45 @@ msgstr "Számítás…"
 msgid "_System Details"
 msgstr "_Rendszer részletei"
 
-#: panels/system/about/cc-system-details-window.c:308
+#: panels/system/about/cc-system-details-window.c:317
 msgid "Graphics"
 msgstr "Grafika"
 
-#: panels/system/about/cc-system-details-window.c:310
+#: panels/system/about/cc-system-details-window.c:319
 #, c-format
 msgid "Graphics %d"
 msgstr "%d. grafika"
 
 #. translators: This is the type of architecture for the OS
-#: panels/system/about/cc-system-details-window.c:352
+#: panels/system/about/cc-system-details-window.c:361
 #, c-format
 msgid "64-bit"
 msgstr "64 bites"
 
 #. translators: This is the type of architecture for the OS
-#: panels/system/about/cc-system-details-window.c:355
+#: panels/system/about/cc-system-details-window.c:364
 #, c-format
 msgid "32-bit"
 msgstr "32 bites"
 
-#: panels/system/about/cc-system-details-window.c:608
+#: panels/system/about/cc-system-details-window.c:617
 msgid "X11"
 msgstr "X11"
 
-#: panels/system/about/cc-system-details-window.c:612
+#: panels/system/about/cc-system-details-window.c:621
 msgid "Wayland"
 msgstr "Wayland"
 
-#: panels/system/about/cc-system-details-window.c:614
+#: panels/system/about/cc-system-details-window.c:623
 msgctxt "Windowing system (Wayland, X11, or Unknown)"
 msgid "Unknown"
 msgstr "Ismeretlen"
 
-#: panels/system/about/cc-system-details-window.c:781
+#: panels/system/about/cc-system-details-window.c:791
 msgid "**Windowing System:**"
 msgstr "**Ablakkezelő-rendszer:**"
 
-#: panels/system/about/cc-system-details-window.c:797
+#: panels/system/about/cc-system-details-window.c:807
 msgid "Details copied to clipboard"
 msgstr "A részletek a vágólapra másolva"
 
@@ -7899,11 +7890,11 @@ msgstr "Érvényes tartomány"
 msgid "Domain not found"
 msgstr "A tartomány nem található"
 
-#: panels/system/users/cc-enterprise-login-dialog.c:597
+#: panels/system/users/cc-enterprise-login-dialog.c:601
 msgid "Checking domain…"
 msgstr "Tartomány ellenőrzése…"
 
-#: panels/system/users/cc-enterprise-login-dialog.c:641
+#: panels/system/users/cc-enterprise-login-dialog.c:645
 msgid "Failed to contact realmd service"
 msgstr "Nem sikerült kapcsolódni a realmd szolgáltatáshoz"
 
@@ -8253,7 +8244,7 @@ msgid "None"
 msgstr "Nincs"
 
 #. TODO: Handle enterprise accounts
-#: panels/system/users/cc-user-page.c:420
+#: panels/system/users/cc-user-page.c:421
 #, c-format
 msgid "Remove %s?"
 msgstr "Eltávolítja ezt: „%s”?"
@@ -9146,7 +9137,7 @@ msgstr ""
 "Billentyűk;Lassú;Pattogó;Egér;Dupla;kattintás;Késleltetés;Sebesség;Kisegítő;"
 "Ismétlés;Villogás;Mutató;keresés;vizuális;hallás;hang;írás;animációk;"
 
-#: panels/wacom/button-mapping.ui:7 panels/wacom/cc-wacom-ekr-page.ui:19
+#: panels/wacom/button-mapping.ui:7
 msgid "Map Buttons"
 msgstr "Gombok leképezése"
 
@@ -9229,6 +9220,10 @@ msgstr "Külső rajztábla eszköz"
 msgid "External pad device"
 msgstr "Külső tábla eszköz"
 
+#: panels/wacom/cc-wacom-ekr-page.ui:19 panels/wacom/cc-wacom-page.ui:53
+msgid "Map _Buttons"
+msgstr "_Gombok leképezése"
+
 #. All displays item
 #: panels/wacom/cc-wacom-page.c:667
 msgid "All Displays"
@@ -9249,10 +9244,6 @@ msgstr "Gomb helye"
 #: panels/wacom/cc-wacom-page.ui:27
 msgid "The location of the physical buttons on the tablet"
 msgstr "A fizikai gombok helye a táblagépen"
-
-#: panels/wacom/cc-wacom-page.ui:53
-msgid "Map _Buttons"
-msgstr "_Gombok leképezése"
 
 #: panels/wacom/cc-wacom-page.ui:66
 msgctxt "display setting"
@@ -9546,7 +9537,7 @@ msgstr "%2$s %1$u.–%4$s %3$u."
 #. * preferred date representation for the current locale without the time).
 #. * The second placeholder is a formatted time duration (for example,
 #. * ‘3 hours’ or ‘25 minutes’).
-#: panels/wellbeing/cc-screen-time-statistics-row.c:1097
+#: panels/wellbeing/cc-screen-time-statistics-row.c:1100
 #, c-format
 msgid ""
 "Bar chart of screen time usage over the week starting %s. A line is "
@@ -9559,14 +9550,14 @@ msgstr ""
 #. Translators: The placeholder is a formatted date string (formatted
 #. * using the `%x` strftime placeholder, which gives the preferred date
 #. * representation for the current locale without the time).
-#: panels/wellbeing/cc-screen-time-statistics-row.c:1116
+#: panels/wellbeing/cc-screen-time-statistics-row.c:1119
 #, c-format
 msgid "Bar chart of screen time usage over the week starting %s."
 msgstr ""
 "A képernyőidő használatának oszlopdiagramja a(z) %s dátumot tartalmazó "
 "héttől kezdődően."
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:1122
+#: panels/wellbeing/cc-screen-time-statistics-row.c:1125
 #, c-format
 msgid ""
 "Placeholder for a bar chart of screen time usage. No data is currently "
@@ -9613,74 +9604,74 @@ msgstr ""
 msgid "_Disable Screen Time"
 msgstr "Képernyőidő _letiltása"
 
-#: panels/wellbeing/cc-wellbeing-panel.ui:76
+#: panels/wellbeing/cc-wellbeing-panel.ui:78
 msgid "Screen Time Recording Disabled"
 msgstr "Képernyőidő-rögzítés letiltva"
 
-#: panels/wellbeing/cc-wellbeing-panel.ui:78
+#: panels/wellbeing/cc-wellbeing-panel.ui:80
 msgid "Enable recording to view screen usage history"
 msgstr ""
 "Engedélyezze a rögzítést a képernyőhasználat előzményeinek megtekintéséhez"
 
-#: panels/wellbeing/cc-wellbeing-panel.ui:82
+#: panels/wellbeing/cc-wellbeing-panel.ui:84
 msgid "E_nable"
 msgstr "E_ngedélyezés"
 
-#: panels/wellbeing/cc-wellbeing-panel.ui:102
+#: panels/wellbeing/cc-wellbeing-panel.ui:104
 msgid "Screen Limits"
 msgstr "Képernyőkorlátok"
 
-#: panels/wellbeing/cc-wellbeing-panel.ui:105
+#: panels/wellbeing/cc-wellbeing-panel.ui:107
 msgid "_Screen Time Limit"
 msgstr "_Képernyőidő-korlát"
 
-#: panels/wellbeing/cc-wellbeing-panel.ui:112
+#: panels/wellbeing/cc-wellbeing-panel.ui:114
 msgid "Daily _Limit"
 msgstr "Napi _korlát"
 
-#: panels/wellbeing/cc-wellbeing-panel.ui:118
+#: panels/wellbeing/cc-wellbeing-panel.ui:120
 msgid "_Grayscale"
 msgstr "_Szürkeárnyalatos"
 
-#: panels/wellbeing/cc-wellbeing-panel.ui:119
+#: panels/wellbeing/cc-wellbeing-panel.ui:121
 msgid "Black and white screen for screen limits"
 msgstr "Fekete-fehér képernyő a képernyőkorlátokhoz"
 
-#: panels/wellbeing/cc-wellbeing-panel.ui:128
+#: panels/wellbeing/cc-wellbeing-panel.ui:130
 msgid "Break Reminders"
 msgstr "Szünet emlékeztetők"
 
-#: panels/wellbeing/cc-wellbeing-panel.ui:131
+#: panels/wellbeing/cc-wellbeing-panel.ui:133
 msgid "_Eyesight Reminders"
 msgstr "_Látási emlékeztetők"
 
-#: panels/wellbeing/cc-wellbeing-panel.ui:132
+#: panels/wellbeing/cc-wellbeing-panel.ui:134
 msgid "Reminders to look away from the screen"
 msgstr "Emlékeztetők, hogy forduljon el a képernyőtől"
 
-#: panels/wellbeing/cc-wellbeing-panel.ui:138
+#: panels/wellbeing/cc-wellbeing-panel.ui:140
 msgid "_Movement Reminders"
 msgstr "_Mozgási emlékeztetők"
 
-#: panels/wellbeing/cc-wellbeing-panel.ui:139
+#: panels/wellbeing/cc-wellbeing-panel.ui:141
 msgid "Reminders to move around"
 msgstr "Emlékeztetők, hogy mozogjon"
 
-#: panels/wellbeing/cc-wellbeing-panel.ui:145
+#: panels/wellbeing/cc-wellbeing-panel.ui:147
 msgid "Movement _Break Schedule"
 msgstr "Mozgási _szünet ütemezése"
 
-#: panels/wellbeing/cc-wellbeing-panel.ui:151
+#: panels/wellbeing/cc-wellbeing-panel.ui:153
 msgid "S_ounds"
 msgstr "_Hangok"
 
-#: panels/wellbeing/cc-wellbeing-panel.ui:152
+#: panels/wellbeing/cc-wellbeing-panel.ui:154
 msgid "Play a sound when a break ends"
 msgstr "Hang lejátszása a szünet befejezésekor"
 
 #: panels/wellbeing/gnome-wellbeing-panel.desktop.in:6
 msgid "Wellbeing"
-msgstr "Jólét"
+msgstr "Jóllét"
 
 #: panels/wellbeing/gnome-wellbeing-panel.desktop.in:7
 msgid "Review and limit the amount of time you spend at the computer screen"
@@ -9694,7 +9685,7 @@ msgid ""
 "Wellbeing;Screen Time;Breaks;Break Reminders;Health Breaks;Daily Usage;"
 "Screen Limits;Usage Limit;"
 msgstr ""
-"Jólét;Képernyőidő;Szünetek;Szünetemlékeztetők;Egészségügyi szünetek;Napi "
+"Jóllét;Képernyőidő;Szünetek;Szünetemlékeztetők;Egészségügyi szünetek;Napi "
 "használat;Képernyőkorlátok;Használati korlátok;"
 
 #: panels/wwan/cc-wwan-apn-dialog.c:293
