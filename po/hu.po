@@ -19,8 +19,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/issu"
 "es\n"
-"POT-Creation-Date: 2025-03-21 18:21+0000\n"
-"PO-Revision-Date: 2025-03-27 00:10+0100\n"
+"POT-Creation-Date: 2025-04-20 12:25+0000\n"
+"PO-Revision-Date: 2025-04-22 12:16+0200\n"
 "Last-Translator: Balázs Úr <ur.balazs at fsf dot hu>\n"
 "Language-Team: Hungarian <openscope at fsf dot hu>\n"
 "Language: hu\n"
@@ -28,7 +28,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 23.08.5\n"
+"X-Generator: Lokalize 24.12.3\n"
 
 #: global-shortcuts-provider/cc-global-shortcut-dialog.ui:6
 msgid "Add Keyboard Shortcuts"
@@ -112,7 +112,7 @@ msgstr "_Eltávolítás"
 msgid "_Remove All Shortcuts"
 msgstr "Összes gyorsbillentyű _eltávolítása"
 
-#: panels/applications/cc-application-shortcut-dialog.c:263
+#: panels/applications/cc-application-shortcut-dialog.c:265
 #, c-format
 msgid "%s has registered the following global shortcuts"
 msgstr "A(z) %s a következő globális gyorsbillentyűket regisztrálta"
@@ -2262,6 +2262,12 @@ msgstr "Saját mappa"
 msgid "Search"
 msgstr "Keresés"
 
+#: panels/keyboard/01-launchers.xml.in:16
+#| msgid "Search"
+msgctxt "keybinding"
+msgid "Search"
+msgstr "Keresés"
+
 #: panels/keyboard/01-system.xml.in:2 panels/privacy/cc-privacy-panel.ui:18
 #: panels/system/cc-system-panel.ui:6
 #: panels/system/gnome-system-panel.desktop.in:3
@@ -3299,7 +3305,7 @@ msgid "_Name"
 msgstr "_Név"
 
 #: panels/network/connection-editor/ce-page-8021x-security.c:106
-#: panels/network/connection-editor/ce-page-security.c:415
+#: panels/network/connection-editor/ce-page-security.c:416
 #: panels/network/connection-editor/details-page.ui:84
 #: panels/sharing/cc-sharing-panel.ui:112
 msgid "Security"
@@ -3388,7 +3394,7 @@ msgstr "WPA3"
 
 #. TRANSLATORS: this Enhanced Open WiFi security
 #: panels/network/connection-editor/ce-page-details.c:133
-#: panels/network/connection-editor/ce-page-security.c:270
+#: panels/network/connection-editor/ce-page-security.c:271
 msgid "Enhanced Open"
 msgstr "Enhanced Open"
 
@@ -3575,36 +3581,36 @@ msgstr "IPv4"
 msgid "IPv6"
 msgstr "IPv6"
 
-#: panels/network/connection-editor/ce-page-security.c:259
+#: panels/network/connection-editor/ce-page-security.c:260
 msgctxt "Wi-Fi/Ethernet security"
 msgid "None"
 msgstr "Nincs"
 
-#: panels/network/connection-editor/ce-page-security.c:294
+#: panels/network/connection-editor/ce-page-security.c:295
 msgid "WEP 40/128-bit Key (Hex or ASCII)"
 msgstr "WEP 40/128 bites kulcs (Hex vagy ASCII)"
 
-#: panels/network/connection-editor/ce-page-security.c:304
+#: panels/network/connection-editor/ce-page-security.c:305
 msgid "WEP 128-bit Passphrase"
 msgstr "WEP 128 bites jelmondat"
 
-#: panels/network/connection-editor/ce-page-security.c:317
+#: panels/network/connection-editor/ce-page-security.c:318
 msgid "LEAP"
 msgstr "LEAP"
 
-#: panels/network/connection-editor/ce-page-security.c:330
+#: panels/network/connection-editor/ce-page-security.c:331
 msgid "Dynamic WEP (802.1x)"
 msgstr "Dinamikus WEP (802.1x)"
 
-#: panels/network/connection-editor/ce-page-security.c:344
+#: panels/network/connection-editor/ce-page-security.c:345
 msgid "WPA & WPA2 Personal"
 msgstr "WPA és WPA2 Personal"
 
-#: panels/network/connection-editor/ce-page-security.c:358
+#: panels/network/connection-editor/ce-page-security.c:359
 msgid "WPA & WPA2 Enterprise"
 msgstr "WPA és WPA2 Enterprise"
 
-#: panels/network/connection-editor/ce-page-security.c:372
+#: panels/network/connection-editor/ce-page-security.c:373
 msgid "WPA3 Personal"
 msgstr "WPA3 Personal"
 
@@ -4984,8 +4990,8 @@ msgid ""
 "Disabling automatic suspend will result in higher power consumption. It is "
 "recommended to keep automatic suspend enabled."
 msgstr ""
-"Az automatikus felfüggesztés letiltása nagyobb energiafogyasztást eredményez."
-" Ajánlott az automatikus felfüggesztést engedélyezve hagyni."
+"Az automatikus felfüggesztés letiltása nagyobb energiafogyasztást "
+"eredményez. Ajánlott az automatikus felfüggesztést engedélyezve hagyni."
 
 #: panels/power/cc-power-profile-row.c:128
 msgctxt "Power profile"
@@ -9532,7 +9538,7 @@ msgstr "%2$s %1$u.–%4$s %3$u."
 #. * preferred date representation for the current locale without the time).
 #. * The second placeholder is a formatted time duration (for example,
 #. * ‘3 hours’ or ‘25 minutes’).
-#: panels/wellbeing/cc-screen-time-statistics-row.c:1097
+#: panels/wellbeing/cc-screen-time-statistics-row.c:1100
 #, c-format
 msgid ""
 "Bar chart of screen time usage over the week starting %s. A line is "
@@ -9545,14 +9551,14 @@ msgstr ""
 #. Translators: The placeholder is a formatted date string (formatted
 #. * using the `%x` strftime placeholder, which gives the preferred date
 #. * representation for the current locale without the time).
-#: panels/wellbeing/cc-screen-time-statistics-row.c:1116
+#: panels/wellbeing/cc-screen-time-statistics-row.c:1119
 #, c-format
 msgid "Bar chart of screen time usage over the week starting %s."
 msgstr ""
 "A képernyőidő használatának oszlopdiagramja a(z) %s dátumot tartalmazó "
 "héttől kezdődően."
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:1122
+#: panels/wellbeing/cc-screen-time-statistics-row.c:1125
 #, c-format
 msgid ""
 "Placeholder for a bar chart of screen time usage. No data is currently "
@@ -9599,74 +9605,74 @@ msgstr ""
 msgid "_Disable Screen Time"
 msgstr "Képernyőidő _letiltása"
 
-#: panels/wellbeing/cc-wellbeing-panel.ui:76
+#: panels/wellbeing/cc-wellbeing-panel.ui:78
 msgid "Screen Time Recording Disabled"
 msgstr "Képernyőidő-rögzítés letiltva"
 
-#: panels/wellbeing/cc-wellbeing-panel.ui:78
+#: panels/wellbeing/cc-wellbeing-panel.ui:80
 msgid "Enable recording to view screen usage history"
 msgstr ""
 "Engedélyezze a rögzítést a képernyőhasználat előzményeinek megtekintéséhez"
 
-#: panels/wellbeing/cc-wellbeing-panel.ui:82
+#: panels/wellbeing/cc-wellbeing-panel.ui:84
 msgid "E_nable"
 msgstr "E_ngedélyezés"
 
-#: panels/wellbeing/cc-wellbeing-panel.ui:102
+#: panels/wellbeing/cc-wellbeing-panel.ui:104
 msgid "Screen Limits"
 msgstr "Képernyőkorlátok"
 
-#: panels/wellbeing/cc-wellbeing-panel.ui:105
+#: panels/wellbeing/cc-wellbeing-panel.ui:107
 msgid "_Screen Time Limit"
 msgstr "_Képernyőidő-korlát"
 
-#: panels/wellbeing/cc-wellbeing-panel.ui:112
+#: panels/wellbeing/cc-wellbeing-panel.ui:114
 msgid "Daily _Limit"
 msgstr "Napi _korlát"
 
-#: panels/wellbeing/cc-wellbeing-panel.ui:118
+#: panels/wellbeing/cc-wellbeing-panel.ui:120
 msgid "_Grayscale"
 msgstr "_Szürkeárnyalatos"
 
-#: panels/wellbeing/cc-wellbeing-panel.ui:119
+#: panels/wellbeing/cc-wellbeing-panel.ui:121
 msgid "Black and white screen for screen limits"
 msgstr "Fekete-fehér képernyő a képernyőkorlátokhoz"
 
-#: panels/wellbeing/cc-wellbeing-panel.ui:128
+#: panels/wellbeing/cc-wellbeing-panel.ui:130
 msgid "Break Reminders"
 msgstr "Szünet emlékeztetők"
 
-#: panels/wellbeing/cc-wellbeing-panel.ui:131
+#: panels/wellbeing/cc-wellbeing-panel.ui:133
 msgid "_Eyesight Reminders"
 msgstr "_Látási emlékeztetők"
 
-#: panels/wellbeing/cc-wellbeing-panel.ui:132
+#: panels/wellbeing/cc-wellbeing-panel.ui:134
 msgid "Reminders to look away from the screen"
 msgstr "Emlékeztetők, hogy forduljon el a képernyőtől"
 
-#: panels/wellbeing/cc-wellbeing-panel.ui:138
+#: panels/wellbeing/cc-wellbeing-panel.ui:140
 msgid "_Movement Reminders"
 msgstr "_Mozgási emlékeztetők"
 
-#: panels/wellbeing/cc-wellbeing-panel.ui:139
+#: panels/wellbeing/cc-wellbeing-panel.ui:141
 msgid "Reminders to move around"
 msgstr "Emlékeztetők, hogy mozogjon"
 
-#: panels/wellbeing/cc-wellbeing-panel.ui:145
+#: panels/wellbeing/cc-wellbeing-panel.ui:147
 msgid "Movement _Break Schedule"
 msgstr "Mozgási _szünet ütemezése"
 
-#: panels/wellbeing/cc-wellbeing-panel.ui:151
+#: panels/wellbeing/cc-wellbeing-panel.ui:153
 msgid "S_ounds"
 msgstr "_Hangok"
 
-#: panels/wellbeing/cc-wellbeing-panel.ui:152
+#: panels/wellbeing/cc-wellbeing-panel.ui:154
 msgid "Play a sound when a break ends"
 msgstr "Hang lejátszása a szünet befejezésekor"
 
 #: panels/wellbeing/gnome-wellbeing-panel.desktop.in:6
 msgid "Wellbeing"
-msgstr "Jólét"
+msgstr "Jóllét"
 
 #: panels/wellbeing/gnome-wellbeing-panel.desktop.in:7
 msgid "Review and limit the amount of time you spend at the computer screen"
@@ -9680,7 +9686,7 @@ msgid ""
 "Wellbeing;Screen Time;Breaks;Break Reminders;Health Breaks;Daily Usage;"
 "Screen Limits;Usage Limit;"
 msgstr ""
-"Jólét;Képernyőidő;Szünetek;Szünetemlékeztetők;Egészségügyi szünetek;Napi "
+"Jóllét;Képernyőidő;Szünetek;Szünetemlékeztetők;Egészségügyi szünetek;Napi "
 "használat;Képernyőkorlátok;Használati korlátok;"
 
 #: panels/wwan/cc-wwan-apn-dialog.c:293
