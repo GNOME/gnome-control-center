@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center HEAD\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2025-03-21 18:19+0000\n"
-"PO-Revision-Date: 2025-03-24 12:24+1100\n"
+"POT-Creation-Date: 2025-04-26 17:27+0000\n"
+"PO-Revision-Date: 2025-04-27 10:24+1000\n"
 "Last-Translator: Quentin PAGÈS\n"
 "Language-Team: Tot en òc\n"
 "Language: oc\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 3.5\n"
+"X-Generator: Poedit 3.6\n"
 "X-DamnedLies-Scope: partial\n"
 "X-Project-Style: gnome\n"
 
@@ -27,7 +27,7 @@ msgid "Add Keyboard Shortcuts"
 msgstr "Apondre un acorchi de clavièr"
 
 #: global-shortcuts-provider/cc-global-shortcut-dialog.ui:15
-#: panels/applications/cc-application-shortcut-dialog.c:152
+#: panels/applications/cc-application-shortcut-dialog.c:147
 #: panels/color/cc-color-calibrate.ui:21
 #: panels/common/cc-language-chooser.ui:15
 #: panels/display/cc-display-panel.ui:32 panels/display/cc-display-panel.ui:184
@@ -76,16 +76,16 @@ msgstr "_Apondre"
 #: global-shortcuts-provider/cc-global-shortcut-dialog.ui:36
 msgid ""
 "Added keyboard shortcuts will be available globally, and can be changed in "
-"the application’s panel in Settings"
+"the app’s page in Settings"
 msgstr ""
 "Los acorchis de clavièrs aponduts seràn disponibles globalament, e se pòdon "
-"modificar dins lo panèl de l’aplicacion dins Paramètres."
+"modificar dins lo panèl de l’aplicacion dins Paramètres"
 
-#: panels/applications/cc-application-shortcut-dialog.c:143
+#: panels/applications/cc-application-shortcut-dialog.c:138
 msgid "Remove All Shortcuts?"
 msgstr "Suprimir totes los acorchis ?"
 
-#: panels/applications/cc-application-shortcut-dialog.c:148
+#: panels/applications/cc-application-shortcut-dialog.c:143
 #, c-format
 msgid ""
 "All actions from %s that have been registered for global shortcuts will be "
@@ -94,17 +94,17 @@ msgstr ""
 "Totas las accions de %s qu’èran enregistradas pels acorchis globals seràn "
 "tiradas."
 
-#: panels/applications/cc-application-shortcut-dialog.c:153
+#: panels/applications/cc-application-shortcut-dialog.c:148
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:19
 #: panels/system/users/cc-user-page.ui:224
 msgid "_Remove"
 msgstr "_Suprimir"
 
-#: panels/applications/cc-application-shortcut-dialog.c:183
+#: panels/applications/cc-application-shortcut-dialog.c:178
 msgid "_Remove All Shortcuts"
 msgstr "_Suprimir totes los acorchis"
 
-#: panels/applications/cc-application-shortcut-dialog.c:263
+#: panels/applications/cc-application-shortcut-dialog.c:260
 #, c-format
 msgid "%s has registered the following global shortcuts"
 msgstr "%s enregistrèt los acorchis globals seguents"
@@ -351,10 +351,10 @@ msgstr "Recebre las recèrcas sistèma e enviar los resultats"
 #: panels/applications/cc-applications-panel.ui:376
 #: panels/applications/cc-applications-panel.ui:392
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:120
-#: panels/keyboard/cc-xkb-modifier-page.c:323
+#: panels/keyboard/cc-xkb-modifier-page.c:322
 #: panels/keyboard/keyboard-shortcuts.c:367 panels/network/panel-common.c:336
 #: panels/system/users/cc-user-page.c:367
-#: panels/system/users/cc-user-page.c:752 panels/wwan/cc-wwan-device-page.c:477
+#: panels/system/users/cc-user-page.c:753 panels/wwan/cc-wwan-device-page.c:477
 #: subprojects/gvc/gvc-mixer-control.c:1872
 msgid "Disabled"
 msgstr "Desactivat"
@@ -937,7 +937,7 @@ msgid "Background removed"
 msgstr "Rèireplan suprimit"
 
 #: panels/background/cc-background-chooser.c:170
-#: panels/network/net-device-wifi.c:883 panels/printers/cc-printers-panel.c:672
+#: panels/network/net-device-wifi.c:883 panels/printers/cc-printers-panel.c:673
 msgid "_Undo"
 msgstr "_Anullar"
 
@@ -1282,16 +1282,16 @@ msgid "Test profile: "
 msgstr "Perfil de pròva : "
 
 #. TRANSLATORS: an ICC profile is a file containing colorspace data
-#: panels/color/cc-color-panel.c:293
+#: panels/color/cc-color-panel.c:292
 msgid "Select ICC Profile File"
 msgstr "Seleccionatz un fichièr de perfil ICC"
 
-#: panels/color/cc-color-panel.c:296
+#: panels/color/cc-color-panel.c:295
 msgid "Import"
 msgstr "Importar"
 
 #. TRANSLATORS: filter name on the file->open dialog
-#: panels/color/cc-color-panel.c:308
+#: panels/color/cc-color-panel.c:307
 msgid "Supported ICC profiles"
 msgstr "Perfils ICC preses en carga"
 
@@ -1300,22 +1300,22 @@ msgstr "Perfils ICC preses en carga"
 msgid "All files"
 msgstr "Totes los fichièrs"
 
-#: panels/color/cc-color-panel.c:580
+#: panels/color/cc-color-panel.c:581
 msgid "Screen"
 msgstr "Ecran"
 
 #. TRANSLATORS: this is the dialog to save the ICC profile
-#: panels/color/cc-color-panel.c:860
+#: panels/color/cc-color-panel.c:861
 msgid "Save Profile"
 msgstr "Enregistrar lo perfil"
 
 #. TRANSLATORS: this is when the button is sensitive
-#: panels/color/cc-color-panel.c:1118
+#: panels/color/cc-color-panel.c:1119
 msgid "Create a color profile for the selected device"
 msgstr "Crear un perfil de color pel periferic seleccionat"
 
 #. TRANSLATORS: this is when the button is insensitive
-#: panels/color/cc-color-panel.c:1133 panels/color/cc-color-panel.c:1157
+#: panels/color/cc-color-panel.c:1134 panels/color/cc-color-panel.c:1158
 msgid ""
 "The measuring instrument is not detected. Please check it is turned on and "
 "correctly connected."
@@ -1324,26 +1324,26 @@ msgstr ""
 "corrèctament."
 
 #. TRANSLATORS: this is when the button is insensitive
-#: panels/color/cc-color-panel.c:1167
+#: panels/color/cc-color-panel.c:1168
 msgid "The measuring instrument does not support printer profiling."
 msgstr "L'instrument de mesura pren pas en carga los perfils d'imprimenta."
 
 #. TRANSLATORS: this is when the button is insensitive
-#: panels/color/cc-color-panel.c:1178
+#: panels/color/cc-color-panel.c:1179
 msgid "The device type is not currently supported."
 msgstr "Lo tipe de periferic es pas actualament pres en carga."
 
 #. Translators: This will be presented as the text of a link to the documentation
 #. translators: Text used in link to privacy policy
 #. Translators: This will be presented as the text of a link to the documentation
-#: panels/color/cc-color-panel.c:2003
+#: panels/color/cc-color-panel.c:2004
 #: panels/privacy/diagnostics/cc-diagnostics-page.c:122
 #: panels/wacom/cc-wacom-device.c:168
 msgid "learn more"
 msgstr "ne saber mai"
 
 #. Translators: %s is a link to the documentation with the label "learn more"
-#: panels/color/cc-color-panel.c:2005
+#: panels/color/cc-color-panel.c:2006
 #, c-format
 msgid "Each device needs an up to date color profile to be color managed — %s."
 msgstr ""
@@ -1464,13 +1464,13 @@ msgstr "Requerís un mèdia inscriptible"
 
 #: panels/color/cc-color-panel.ui:313
 msgid ""
-"You may find these instructions on how to use the profile on <a href=\"linux"
-"\">GNU/Linux</a>, <a href=\"osx\">Apple OS X</a> and <a href=\"windows"
-"\">Microsoft Windows</a> systems useful."
+"You may find these instructions on how to use the profile on <a "
+"href=\"linux\">GNU/Linux</a>, <a href=\"osx\">Apple OS X</a> and <a "
+"href=\"windows\">Microsoft Windows</a> systems useful."
 msgstr ""
 "Aicí, podètz consultar de conselhs utils sus l'utilizacion d'un perfil <a "
-"href=\"linux\">GNU/Linux</a>, <a href=\"osx\">Apple OS X</a> e <a href="
-"\"windows\">Microsoft Windows</a>."
+"href=\"linux\">GNU/Linux</a>, <a href=\"osx\">Apple OS X</a> e <a "
+"href=\"windows\">Microsoft Windows</a>."
 
 #: panels/color/cc-color-panel.ui:335
 msgid "Add Profile"
@@ -2265,6 +2265,11 @@ msgstr "Dorsièr personal"
 msgid "Search"
 msgstr "Recercar"
 
+#: panels/keyboard/01-launchers.xml.in:16
+msgctxt "keybinding"
+msgid "Search"
+msgstr "Recercar"
+
 #: panels/keyboard/01-system.xml.in:2 panels/privacy/cc-privacy-panel.ui:18
 #: panels/system/cc-system-panel.ui:6
 #: panels/system/gnome-system-panel.desktop.in:3
@@ -2334,7 +2339,7 @@ msgstr "Cap de font d'entrada pas trobada"
 msgid "View Keyboard Layout"
 msgstr "Veire l’agençament del clavièr"
 
-#: panels/keyboard/cc-input-chooser.c:1034
+#: panels/keyboard/cc-input-chooser.c:1035
 msgctxt "Input Source"
 msgid "Other"
 msgstr "Autre"
@@ -3056,7 +3061,7 @@ msgid "VPN"
 msgstr "VPN"
 
 #: panels/network/cc-network-panel.ui:67
-#: panels/network/connection-editor/net-connection-editor.c:912
+#: panels/network/connection-editor/net-connection-editor.c:913
 msgid "Add VPN"
 msgstr "Apondre un VPN"
 
@@ -3069,7 +3074,7 @@ msgid "_Proxy"
 msgstr "_Servidor mandatari"
 
 #: panels/network/cc-qr-code-dialog.ui:6
-#: panels/network/cc-wifi-connection-row.ui:50
+#: panels/network/cc-wifi-connection-row.ui:41
 msgid "Share Network"
 msgstr "Partejar la ret"
 
@@ -3097,48 +3102,48 @@ msgid "Password"
 msgstr "Senhal"
 
 #. TRANSLATORS: This happens when the connection name does not contain the SSID.
-#: panels/network/cc-wifi-connection-row.c:223
+#: panels/network/cc-wifi-connection-row.c:222
 #, c-format
 msgctxt "Wi-Fi Connection"
 msgid "%s (SSID: %s)"
 msgstr "%s (SSID : %s)"
 
-#: panels/network/cc-wifi-connection-row.c:274
+#. TRANSLATORS: device status
+#: panels/network/cc-wifi-connection-row.c:261 panels/network/panel-common.c:63
+msgid "Connected"
+msgstr "Connectat"
+
+#: panels/network/cc-wifi-connection-row.c:273
 msgid "Insecure network (WEP)"
 msgstr "Ret pas segur (WEP)"
 
-#: panels/network/cc-wifi-connection-row.c:278
+#: panels/network/cc-wifi-connection-row.c:277
 msgid "Secure network (WPA)"
 msgstr "Ret segur (WPA)"
 
-#: panels/network/cc-wifi-connection-row.c:282
+#: panels/network/cc-wifi-connection-row.c:281
 msgid "Secure network (WPA2)"
 msgstr "Ret segur (WPA2)"
 
-#: panels/network/cc-wifi-connection-row.c:286
+#: panels/network/cc-wifi-connection-row.c:285
 msgid "Secure network (WPA3)"
 msgstr "Ret segur (WPA3)"
 
-#: panels/network/cc-wifi-connection-row.c:290
+#: panels/network/cc-wifi-connection-row.c:289
 msgid "Secure network"
 msgstr "Ret segur"
 
-#: panels/network/cc-wifi-connection-row.c:319
+#: panels/network/cc-wifi-connection-row.c:318
 #, c-format
 msgid "Signal strength %d%%"
 msgstr "Fòrça del senhal %d%%"
 
-#. TRANSLATORS: device status
-#: panels/network/cc-wifi-connection-row.ui:34 panels/network/panel-common.c:63
-msgid "Connected"
-msgstr "Connectat"
-
-#: panels/network/cc-wifi-connection-row.ui:62
+#: panels/network/cc-wifi-connection-row.ui:53
 #: panels/network/network-bluetooth.ui:14 panels/network/network-ethernet.ui:47
 msgid "Network Options"
 msgstr "Opcions de ret"
 
-#: panels/network/cc-wifi-connection-row.ui:73
+#: panels/network/cc-wifi-connection-row.ui:64
 msgid "Forget Network"
 msgstr "Oblidar la ret"
 
@@ -3295,7 +3300,7 @@ msgid "_Name"
 msgstr "_Nom"
 
 #: panels/network/connection-editor/ce-page-8021x-security.c:106
-#: panels/network/connection-editor/ce-page-security.c:415
+#: panels/network/connection-editor/ce-page-security.c:416
 #: panels/network/connection-editor/details-page.ui:84
 #: panels/sharing/cc-sharing-panel.ui:112
 msgid "Security"
@@ -3384,7 +3389,7 @@ msgstr "WPA3"
 
 #. TRANSLATORS: this Enhanced Open WiFi security
 #: panels/network/connection-editor/ce-page-details.c:133
-#: panels/network/connection-editor/ce-page-security.c:270
+#: panels/network/connection-editor/ce-page-security.c:271
 msgid "Enhanced Open"
 msgstr "Enhanced Open"
 
@@ -3571,41 +3576,41 @@ msgstr "IPv4"
 msgid "IPv6"
 msgstr "IPv6"
 
-#: panels/network/connection-editor/ce-page-security.c:259
+#: panels/network/connection-editor/ce-page-security.c:260
 msgctxt "Wi-Fi/Ethernet security"
 msgid "None"
 msgstr "Pas cap"
 
-#: panels/network/connection-editor/ce-page-security.c:294
+#: panels/network/connection-editor/ce-page-security.c:295
 msgid "WEP 40/128-bit Key (Hex or ASCII)"
 msgstr "Clau WEP 40/128-bit (Hex o ASCII)"
 
-#: panels/network/connection-editor/ce-page-security.c:304
+#: panels/network/connection-editor/ce-page-security.c:305
 msgid "WEP 128-bit Passphrase"
 msgstr "Frasa secreta WEP 128-bit"
 
-#: panels/network/connection-editor/ce-page-security.c:317
+#: panels/network/connection-editor/ce-page-security.c:318
 msgid "LEAP"
 msgstr "LEAP"
 
-#: panels/network/connection-editor/ce-page-security.c:330
+#: panels/network/connection-editor/ce-page-security.c:331
 msgid "Dynamic WEP (802.1x)"
 msgstr "WEP dinamic (802.1x)"
 
-#: panels/network/connection-editor/ce-page-security.c:344
+#: panels/network/connection-editor/ce-page-security.c:345
 msgid "WPA & WPA2 Personal"
 msgstr "WPA e WPA2 privadas"
 
-#: panels/network/connection-editor/ce-page-security.c:358
+#: panels/network/connection-editor/ce-page-security.c:359
 msgid "WPA & WPA2 Enterprise"
 msgstr "WPA e WPA2 d'entrepresa"
 
-#: panels/network/connection-editor/ce-page-security.c:372
+#: panels/network/connection-editor/ce-page-security.c:373
 msgid "WPA3 Personal"
 msgstr "WPA3 Personal"
 
 #: panels/network/connection-editor/ce-page-wireguard.c:106
-#: panels/network/connection-editor/net-connection-editor.c:879
+#: panels/network/connection-editor/net-connection-editor.c:880
 msgid "WireGuard"
 msgstr "WireGuard"
 
@@ -3614,9 +3619,9 @@ msgstr "WireGuard"
 #: panels/privacy/firmware-security/cc-firmware-security-dialog.c:167
 #: panels/sound/cc-alert-chooser-page.c:350
 #: panels/system/about/cc-about-page.c:73
-#: panels/system/about/cc-system-details-window.c:282
-#: panels/system/about/cc-system-details-window.c:334
-#: panels/system/about/cc-system-details-window.c:837
+#: panels/system/about/cc-system-details-window.c:291
+#: panels/system/about/cc-system-details-window.c:343
+#: panels/system/about/cc-system-details-window.c:847
 #: panels/wwan/cc-wwan-details-dialog.c:100
 msgid "Unknown"
 msgstr "Desconegut"
@@ -3836,7 +3841,7 @@ msgstr ""
 "d'utilizacion, la performança a granda velocitat e una superficia d'ataca "
 "bassa."
 
-#: panels/network/connection-editor/net-connection-editor.c:888
+#: panels/network/connection-editor/net-connection-editor.c:889
 msgid "Import from file…"
 msgstr "Importar dempuèi un fichièr…"
 
@@ -3867,7 +3872,7 @@ msgstr ""
 msgid "_OK"
 msgstr "_D'acòrdi"
 
-#: panels/network/connection-editor/vpn-helpers.c:164
+#: panels/network/connection-editor/vpn-helpers.c:163
 msgid "Select file to import"
 msgstr "Seleccionar lo fichièr d'importar"
 
@@ -4538,64 +4543,56 @@ msgid "Google"
 msgstr "Google"
 
 #: panels/online-accounts/cc-online-account-provider-row.c:58
-#: panels/online-accounts/cc-online-account-provider-row.c:60
+#: panels/online-accounts/cc-online-account-provider-row.c:59
 msgid "Email, calendar, contacts, files"
 msgstr "Corrièl, calendièr, contactes e fichièr"
 
 #: panels/online-accounts/cc-online-account-provider-row.c:59
-msgid "Microsoft"
-msgstr "Microsoft"
-
-#: panels/online-accounts/cc-online-account-provider-row.c:59
-msgid "Email"
-msgstr "Corrièr electronic"
-
-#: panels/online-accounts/cc-online-account-provider-row.c:60
 msgid "Microsoft 365"
 msgstr "Microsoft 365"
 
-#: panels/online-accounts/cc-online-account-provider-row.c:61
+#: panels/online-accounts/cc-online-account-provider-row.c:60
 msgid "Microsoft Exchange"
 msgstr "Microsoft Exchange"
 
-#: panels/online-accounts/cc-online-account-provider-row.c:61
+#: panels/online-accounts/cc-online-account-provider-row.c:60
 msgid "Email, calendar, contacts"
 msgstr "Corrièl, alendièr, contactes"
 
-#: panels/online-accounts/cc-online-account-provider-row.c:62
+#: panels/online-accounts/cc-online-account-provider-row.c:61
 msgid "Fedora"
 msgstr "Fedora"
 
-#: panels/online-accounts/cc-online-account-provider-row.c:62
+#: panels/online-accounts/cc-online-account-provider-row.c:61
 msgid "Enterprise authentication"
 msgstr "Autentificacion d’entrepresa"
 
-#: panels/online-accounts/cc-online-account-provider-row.c:63
+#: panels/online-accounts/cc-online-account-provider-row.c:62
 msgid "Email Server"
 msgstr "Servidor de corrièl"
 
-#: panels/online-accounts/cc-online-account-provider-row.c:63
+#: panels/online-accounts/cc-online-account-provider-row.c:62
 msgid "IMAP/SMTP"
 msgstr "IMAP/SMTP"
 
-#: panels/online-accounts/cc-online-account-provider-row.c:64
+#: panels/online-accounts/cc-online-account-provider-row.c:63
 msgid "Calendar, Contacts and Files"
 msgstr "Calendièr, contactes e fichièr"
 
-#: panels/online-accounts/cc-online-account-provider-row.c:64
+#: panels/online-accounts/cc-online-account-provider-row.c:63
 msgid "WebDAV"
 msgstr "WebDAV"
 
-#: panels/online-accounts/cc-online-account-provider-row.c:65
+#: panels/online-accounts/cc-online-account-provider-row.c:64
 msgid "Enterprise Authentication"
 msgstr "Autentificacion d’entrepresa"
 
-#: panels/online-accounts/cc-online-account-provider-row.c:65
+#: panels/online-accounts/cc-online-account-provider-row.c:64
 msgid "Kerberos"
 msgstr "Kerberos"
 
-#: panels/online-accounts/cc-online-account-provider-row.c:77
-#: panels/online-accounts/cc-online-account-provider-row.c:140
+#: panels/online-accounts/cc-online-account-provider-row.c:76
+#: panels/online-accounts/cc-online-account-provider-row.c:139
 msgctxt "Online Account"
 msgid "Other"
 msgstr "Autre"
@@ -5023,12 +5020,12 @@ msgstr ""
 "luminositat;negre;ecran;DPMS;inactiu;som;dormir;"
 
 #. Translators: %s is the printer name
-#: panels/printers/cc-printers-panel.c:682
+#: panels/printers/cc-printers-panel.c:683
 #, c-format
 msgid "Printer “%s” has been deleted"
 msgstr "L’imprimenta « %s » es estada suprimida"
 
-#: panels/printers/cc-printers-panel.c:924
+#: panels/printers/cc-printers-panel.c:925
 msgid "Failed to add new printer."
 msgstr "L'apondon de la novèla imprimenta a fracassat."
 
@@ -5080,7 +5077,7 @@ msgstr "Cap de pilòt adeqüat pas trobat"
 msgid "Searching for preferred drivers…"
 msgstr "Recèrca de pilòts preferits…"
 
-#: panels/printers/pp-details-dialog.c:277
+#: panels/printers/pp-details-dialog.c:275
 msgid ""
 "PostScript Printer Description files (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, *."
 "PPD.GZ)"
@@ -5567,13 +5564,13 @@ msgid "Loading Drivers"
 msgstr "Cargament dels pilòts"
 
 #. Translators: This is the label of the button that opens the Jobs Dialog.
-#: panels/printers/pp-printer-entry.c:532
+#: panels/printers/pp-printer-entry.c:540
 #: panels/printers/pp-printer-entry.ui:41
 msgid "No Active Jobs"
 msgstr "Cap de prètzfaches d’impression actiu"
 
 #. Translators: This is the label of the button that opens the Jobs Dialog.
-#: panels/printers/pp-printer-entry.c:537
+#: panels/printers/pp-printer-entry.c:545
 #, c-format
 msgid "%u Job"
 msgid_plural "%u Jobs"
@@ -5581,110 +5578,110 @@ msgstr[0] "%u prètzfach"
 msgstr[1] "%u prètzfaches"
 
 #. Translators: Name of job which makes printer to clean its heads
-#: panels/printers/pp-printer-entry.c:657
+#: panels/printers/pp-printer-entry.c:665
 msgid "Clean print heads"
 msgstr "Netejatge de las tèstas d’impression"
 
 #. Translators: The printer is low on toner
-#: panels/printers/pp-printer-entry.c:724
+#: panels/printers/pp-printer-entry.c:732
 msgid "Low on toner"
 msgstr "Toner gaireben agotat"
 
 #. Translators: The printer has no toner left
-#: panels/printers/pp-printer-entry.c:726
+#: panels/printers/pp-printer-entry.c:734
 msgid "Out of toner"
 msgstr "Pas mai de toner"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: panels/printers/pp-printer-entry.c:729
+#: panels/printers/pp-printer-entry.c:737
 msgid "Low on developer"
 msgstr "Revelator gaireben agotat"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: panels/printers/pp-printer-entry.c:732
+#: panels/printers/pp-printer-entry.c:740
 msgid "Out of developer"
 msgstr "Pas mai de revelator"
 
 #. Translators: "marker" is one color bin of the printer
-#: panels/printers/pp-printer-entry.c:734
+#: panels/printers/pp-printer-entry.c:742
 msgid "Low on a marker supply"
 msgstr "Cartocha de color gaireben voida"
 
 #. Translators: "marker" is one color bin of the printer
-#: panels/printers/pp-printer-entry.c:736
+#: panels/printers/pp-printer-entry.c:744
 msgid "Out of a marker supply"
 msgstr "Cartocha de color voida"
 
 #. Translators: One or more covers on the printer are open
-#: panels/printers/pp-printer-entry.c:738
+#: panels/printers/pp-printer-entry.c:746
 msgid "Open cover"
 msgstr "Tapador dobèrt"
 
 #. Translators: One or more doors on the printer are open
-#: panels/printers/pp-printer-entry.c:740
+#: panels/printers/pp-printer-entry.c:748
 msgid "Open door"
 msgstr "Pòrta dobèrta"
 
 #. Translators: At least one input tray is low on media
-#: panels/printers/pp-printer-entry.c:742
+#: panels/printers/pp-printer-entry.c:750
 msgid "Low on paper"
 msgstr "Gaireben pas mai de papièr"
 
 #. Translators: At least one input tray is empty
-#: panels/printers/pp-printer-entry.c:744
+#: panels/printers/pp-printer-entry.c:752
 msgid "Out of paper"
 msgstr "Pas mai de papièr"
 
 #. Translators: The printer is offline
-#: panels/printers/pp-printer-entry.c:746
+#: panels/printers/pp-printer-entry.c:754
 msgctxt "printer state"
 msgid "Offline"
 msgstr "Fòra linha"
 
 #. Translators: Someone has stopped the Printer
 #. Translators: Printer's state (no jobs can be processed)
-#: panels/printers/pp-printer-entry.c:748
-#: panels/printers/pp-printer-entry.c:891
+#: panels/printers/pp-printer-entry.c:756
+#: panels/printers/pp-printer-entry.c:899
 msgctxt "printer state"
 msgid "Stopped"
 msgstr "Arrestada"
 
 #. Translators: The printer marker supply waste receptacle is almost full
-#: panels/printers/pp-printer-entry.c:750
+#: panels/printers/pp-printer-entry.c:758
 msgid "Waste receptacle almost full"
 msgstr "Recipient de descais gaireben plen"
 
 #. Translators: The printer marker supply waste receptacle is full
-#: panels/printers/pp-printer-entry.c:752
+#: panels/printers/pp-printer-entry.c:760
 msgid "Waste receptacle full"
 msgstr "Recipient de descais plen"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: panels/printers/pp-printer-entry.c:754
+#: panels/printers/pp-printer-entry.c:762
 msgid "The optical photo conductor is near end of life"
 msgstr "Lo fotoconductor optic es gaireben en fin de vida"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: panels/printers/pp-printer-entry.c:756
+#: panels/printers/pp-printer-entry.c:764
 msgid "The optical photo conductor is no longer functioning"
 msgstr "Lo fotoconductor optic es pas mai en estat"
 
 #. Translators: Printer's state (can start new job without waiting)
-#: panels/printers/pp-printer-entry.c:877
+#: panels/printers/pp-printer-entry.c:885
 msgctxt "printer state"
 msgid "Ready"
 msgstr "Prèsta"
 
 #. Translators: Printer's state (printer is ready but doesn't accept new jobs)
-#: panels/printers/pp-printer-entry.c:882
+#: panels/printers/pp-printer-entry.c:890
 msgctxt "printer state"
 msgid "Does not accept jobs"
 msgstr "Accèpta pas mai de prètzfaches suplementaris"
 
 #. Translators: Printer's state (jobs are processing)
-#: panels/printers/pp-printer-entry.c:887
+#: panels/printers/pp-printer-entry.c:895
 msgctxt "printer state"
 msgid "Processing"
 msgstr "Tractament en cors"
@@ -6374,7 +6371,7 @@ msgstr "Pas valid"
 #. TRANSLATORS: Status of Parental Controls setup
 #: panels/privacy/firmware-security/cc-firmware-security-utils.c:45
 #: panels/system/users/cc-user-page.c:365
-#: panels/system/users/cc-user-page.c:752 panels/wwan/cc-wwan-device-page.c:475
+#: panels/system/users/cc-user-page.c:753 panels/wwan/cc-wwan-device-page.c:475
 msgid "Enabled"
 msgstr "Activat"
 
@@ -6669,7 +6666,7 @@ msgstr "Dobrir lo dorsièr"
 msgid "Remove Folder"
 msgstr "Suprimir un dorsièr"
 
-#: panels/search/cc-search-locations-page.c:724
+#: panels/search/cc-search-locations-page.c:723
 msgid "Select Location"
 msgstr "Seleccionar un emplaçament"
 
@@ -6932,13 +6929,13 @@ msgstr "Son"
 msgid "Output"
 msgstr "Sortida"
 
-#: panels/sound/cc-sound-panel.ui:43
-msgid "_Output Device"
-msgstr "Periferic de _sortida"
-
-#: panels/sound/cc-sound-panel.ui:61
+#: panels/sound/cc-sound-panel.ui:29
 msgid "_Test…"
 msgstr "_Provar…"
+
+#: panels/sound/cc-sound-panel.ui:50
+msgid "_Output Device"
+msgstr "Periferic de _sortida"
 
 #: panels/sound/cc-sound-panel.ui:86
 msgid "_Configuration"
@@ -7086,45 +7083,45 @@ msgstr "Calcul en cors…"
 msgid "_System Details"
 msgstr "Detalhs del _sistèma"
 
-#: panels/system/about/cc-system-details-window.c:308
+#: panels/system/about/cc-system-details-window.c:317
 msgid "Graphics"
 msgstr "Grafisme"
 
-#: panels/system/about/cc-system-details-window.c:310
+#: panels/system/about/cc-system-details-window.c:319
 #, c-format
 msgid "Graphics %d"
 msgstr "Grafisme %d"
 
 #. translators: This is the type of architecture for the OS
-#: panels/system/about/cc-system-details-window.c:352
+#: panels/system/about/cc-system-details-window.c:361
 #, c-format
 msgid "64-bit"
 msgstr "64-bit"
 
 #. translators: This is the type of architecture for the OS
-#: panels/system/about/cc-system-details-window.c:355
+#: panels/system/about/cc-system-details-window.c:364
 #, c-format
 msgid "32-bit"
 msgstr "32-bit"
 
-#: panels/system/about/cc-system-details-window.c:608
+#: panels/system/about/cc-system-details-window.c:617
 msgid "X11"
 msgstr "X11"
 
-#: panels/system/about/cc-system-details-window.c:612
+#: panels/system/about/cc-system-details-window.c:621
 msgid "Wayland"
 msgstr "Wayland"
 
-#: panels/system/about/cc-system-details-window.c:614
+#: panels/system/about/cc-system-details-window.c:623
 msgctxt "Windowing system (Wayland, X11, or Unknown)"
 msgid "Unknown"
 msgstr "Desconegut"
 
-#: panels/system/about/cc-system-details-window.c:781
+#: panels/system/about/cc-system-details-window.c:791
 msgid "**Windowing System:**"
 msgstr "**Gestionari de fenèstras :**"
 
-#: panels/system/about/cc-system-details-window.c:797
+#: panels/system/about/cc-system-details-window.c:807
 msgid "Details copied to clipboard"
 msgstr "Detalhs copiats al quichapapièrs"
 
@@ -7858,8 +7855,8 @@ msgstr "La connexion a aqueste domeni a fracassat"
 #: panels/system/users/cc-enterprise-login-dialog.c:365
 #, c-format
 msgid ""
-"To add an enterprise login account, this device needs to be enrolled with <b>"
-"%s</b>. To enroll, have your domain administrator enter their name and "
+"To add an enterprise login account, this device needs to be enrolled with "
+"<b>%s</b>. To enroll, have your domain administrator enter their name and "
 "password."
 msgstr ""
 "Per apondre un compte de connexion, aqueste aparelh deu èsser inscrich sus "
@@ -7874,11 +7871,11 @@ msgstr "Domeni valid"
 msgid "Domain not found"
 msgstr "Domeni pas trobat"
 
-#: panels/system/users/cc-enterprise-login-dialog.c:597
+#: panels/system/users/cc-enterprise-login-dialog.c:601
 msgid "Checking domain…"
 msgstr "Verificacion del domeni…"
 
-#: panels/system/users/cc-enterprise-login-dialog.c:641
+#: panels/system/users/cc-enterprise-login-dialog.c:645
 msgid "Failed to contact realmd service"
 msgstr "La connexion al servici realmd a fracassat"
 
@@ -8230,7 +8227,7 @@ msgid "None"
 msgstr "Pas cap"
 
 #. TODO: Handle enterprise accounts
-#: panels/system/users/cc-user-page.c:420
+#: panels/system/users/cc-user-page.c:421
 #, c-format
 msgid "Remove %s?"
 msgstr "Suprimir %s ?"
@@ -9124,7 +9121,7 @@ msgstr ""
 "polissa;polissas;escritura;tòca;acorchi;lent;mirga;doble;clic;relambi;delai;"
 "lenga;lengatge;audicion;repetir;visual;animacions;"
 
-#: panels/wacom/button-mapping.ui:7 panels/wacom/cc-wacom-ekr-page.ui:19
+#: panels/wacom/button-mapping.ui:7
 msgid "Map Buttons"
 msgstr "Associar los botons"
 
@@ -9205,6 +9202,10 @@ msgstr "Aparelh tauleta extèrna"
 msgid "External pad device"
 msgstr "Aparelh tauleta extèrna"
 
+#: panels/wacom/cc-wacom-ekr-page.ui:19 panels/wacom/cc-wacom-page.ui:53
+msgid "Map _Buttons"
+msgstr "Associar los _botons"
+
 #. All displays item
 #: panels/wacom/cc-wacom-page.c:667
 msgid "All Displays"
@@ -9225,10 +9226,6 @@ msgstr "Emplaçament de boton"
 #: panels/wacom/cc-wacom-page.ui:27
 msgid "The location of the physical buttons on the tablet"
 msgstr "L’emplaçament dels botons fisics sus la tauleta"
-
-#: panels/wacom/cc-wacom-page.ui:53
-msgid "Map _Buttons"
-msgstr "Associar los _botons"
 
 #: panels/wacom/cc-wacom-page.ui:66
 msgctxt "display setting"
@@ -9522,7 +9519,7 @@ msgstr "%u %s – %u %s"
 #. * preferred date representation for the current locale without the time).
 #. * The second placeholder is a formatted time duration (for example,
 #. * ‘3 hours’ or ‘25 minutes’).
-#: panels/wellbeing/cc-screen-time-statistics-row.c:1097
+#: panels/wellbeing/cc-screen-time-statistics-row.c:1100
 #, c-format
 msgid ""
 "Bar chart of screen time usage over the week starting %s. A line is "
@@ -9535,14 +9532,14 @@ msgstr ""
 #. Translators: The placeholder is a formatted date string (formatted
 #. * using the `%x` strftime placeholder, which gives the preferred date
 #. * representation for the current locale without the time).
-#: panels/wellbeing/cc-screen-time-statistics-row.c:1116
+#: panels/wellbeing/cc-screen-time-statistics-row.c:1119
 #, c-format
 msgid "Bar chart of screen time usage over the week starting %s."
 msgstr ""
 "Grafic en barras de l’utilizacion del temps d’ecran pendent la setmana "
 "dempuèi %s."
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:1122
+#: panels/wellbeing/cc-screen-time-statistics-row.c:1125
 #, c-format
 msgid ""
 "Placeholder for a bar chart of screen time usage. No data is currently "
@@ -9590,67 +9587,67 @@ msgstr ""
 msgid "_Disable Screen Time"
 msgstr "_Desactivar lo temps d’ecran"
 
-#: panels/wellbeing/cc-wellbeing-panel.ui:76
+#: panels/wellbeing/cc-wellbeing-panel.ui:78
 msgid "Screen Time Recording Disabled"
 msgstr "Enregistrament del temps d’ecran desactivat"
 
-#: panels/wellbeing/cc-wellbeing-panel.ui:78
+#: panels/wellbeing/cc-wellbeing-panel.ui:80
 msgid "Enable recording to view screen usage history"
 msgstr "Activar l’enregistrament per veire l’istoric d’utilizacion de l’ecran"
 
-#: panels/wellbeing/cc-wellbeing-panel.ui:82
+#: panels/wellbeing/cc-wellbeing-panel.ui:84
 msgid "E_nable"
 msgstr "A_ctivar"
 
-#: panels/wellbeing/cc-wellbeing-panel.ui:102
+#: panels/wellbeing/cc-wellbeing-panel.ui:104
 msgid "Screen Limits"
 msgstr "Limits d'ecran"
 
-#: panels/wellbeing/cc-wellbeing-panel.ui:105
+#: panels/wellbeing/cc-wellbeing-panel.ui:107
 msgid "_Screen Time Limit"
 msgstr "Limits de temps d'ecran"
 
-#: panels/wellbeing/cc-wellbeing-panel.ui:112
+#: panels/wellbeing/cc-wellbeing-panel.ui:114
 msgid "Daily _Limit"
 msgstr "_Limit jornalièr"
 
-#: panels/wellbeing/cc-wellbeing-panel.ui:118
+#: panels/wellbeing/cc-wellbeing-panel.ui:120
 msgid "_Grayscale"
 msgstr "Nivèls de _gris"
 
-#: panels/wellbeing/cc-wellbeing-panel.ui:119
+#: panels/wellbeing/cc-wellbeing-panel.ui:121
 msgid "Black and white screen for screen limits"
 msgstr "Ecran blanc e negre pels limits d’ecran"
 
-#: panels/wellbeing/cc-wellbeing-panel.ui:128
+#: panels/wellbeing/cc-wellbeing-panel.ui:130
 msgid "Break Reminders"
 msgstr "Rapèls de pausa"
 
-#: panels/wellbeing/cc-wellbeing-panel.ui:131
+#: panels/wellbeing/cc-wellbeing-panel.ui:133
 msgid "_Eyesight Reminders"
 msgstr "_Rapèls per la vision"
 
-#: panels/wellbeing/cc-wellbeing-panel.ui:132
+#: panels/wellbeing/cc-wellbeing-panel.ui:134
 msgid "Reminders to look away from the screen"
 msgstr "Rapèls d’agachar quicòm mai que l’ecran"
 
-#: panels/wellbeing/cc-wellbeing-panel.ui:138
+#: panels/wellbeing/cc-wellbeing-panel.ui:140
 msgid "_Movement Reminders"
 msgstr "_Rapèls pels movements"
 
-#: panels/wellbeing/cc-wellbeing-panel.ui:139
+#: panels/wellbeing/cc-wellbeing-panel.ui:141
 msgid "Reminders to move around"
 msgstr "Rapèls de bolegar"
 
-#: panels/wellbeing/cc-wellbeing-panel.ui:145
+#: panels/wellbeing/cc-wellbeing-panel.ui:147
 msgid "Movement _Break Schedule"
 msgstr "Planificacion de las pausas per _bolegar"
 
-#: panels/wellbeing/cc-wellbeing-panel.ui:151
+#: panels/wellbeing/cc-wellbeing-panel.ui:153
 msgid "S_ounds"
 msgstr "S_ons"
 
-#: panels/wellbeing/cc-wellbeing-panel.ui:152
+#: panels/wellbeing/cc-wellbeing-panel.ui:154
 msgid "Play a sound when a break ends"
 msgstr "Legir un son quand una pausa se termina"
 
@@ -10256,7 +10253,9 @@ msgstr "[PANÈL] [ARGUMENT…]"
 #. Translators should localize the following string which will be displayed in the About dialog giving credit to the translator(s).
 #: shell/cc-application.c:123
 msgid "translator-credits"
-msgstr "Quentin PAGÈS"
+msgstr ""
+"Quentin PAGÈS\n"
+"Cédric Valmary"
 
 #: shell/cc-application.c:124
 #, c-format
@@ -10409,9 +10408,11 @@ msgstr[1] "%u entradas"
 msgid "System Sounds"
 msgstr "Sons sistèma"
 
-#~ msgctxt "keybinding"
-#~ msgid "Search"
-#~ msgstr "Recercar"
+#~ msgid "Microsoft"
+#~ msgstr "Microsoft"
+
+#~ msgid "Email"
+#~ msgstr "Corrièr electronic"
 
 #~ msgid "Daily Screen Usage Limi_t"
 #~ msgstr "Limi_t d’usatge de l’ecran jornalièr"
@@ -12454,8 +12455,8 @@ msgstr "Sons sistèma"
 #~ msgstr "Pas modificable"
 
 #~ msgid ""
-#~ "Individual permissions for applications can be reviewed in the <a href="
-#~ "\"privacy\">Privacy</a> Settings."
+#~ "Individual permissions for applications can be reviewed in the <a "
+#~ "href=\"privacy\">Privacy</a> Settings."
 #~ msgstr ""
 #~ "Las permissions especificas a las aplicacions pòdon èsser examinadas dins "
 #~ "los reglatges de <a href=\"privacy\">Confidencialitat</a>."
