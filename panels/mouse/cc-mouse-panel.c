@@ -44,6 +44,7 @@ struct _CcMousePanel
   CcSplitRow        *mouse_scroll_direction_row;
   GtkScale          *mouse_speed_scale;
   GtkWindow         *mouse_test;
+
   AdwToggleGroup    *primary_toggle_group;
   CcSplitRow        *two_finger_push_row;
   GtkStack          *title_stack;
@@ -56,12 +57,19 @@ struct _CcMousePanel
   AdwSwitchRow      *touchpad_toggle_row;
   AdwSwitchRow      *touchpad_typing_row;
 
+  GtkSwitch         *pointingstick_accel_switch;
+  AdwViewStackPage  *pointingstick_stack_page;
+  GtkScale          *pointingstick_speed_scale;
+  GtkWindow         *pointingstick_test;
+
   GSettings         *mouse_settings;
   GSettings         *touchpad_settings;
+  GSettings         *pointingstick_settings;
 
   gboolean           have_mouse;
   gboolean           have_touchpad;
   gboolean           have_touchscreen;
+  gboolean           have_pointingstick;
   gboolean           have_synaptics;
 
   GtkGesture        *left_gesture;
@@ -70,26 +78,32 @@ struct _CcMousePanel
 
 CC_PANEL_REGISTER (CcMousePanel, cc_mouse_panel)
 
-static void
-setup_touchpad_options (CcMousePanel *self)
-{
-  gboolean have_two_finger_scrolling;
-  gboolean have_edge_scrolling;
-  gboolean have_tap_to_click;
 
-  if (self->have_synaptics || !self->have_touchpad) {
-    adw_view_stack_page_set_visible (self->touchpad_stack_page, FALSE);
-    gtk_stack_set_visible_child_name (self->title_stack, "title");
-    return;
+static void
+setup_title_stack (CcMousePanel *self)
+{
+  gboolean have_pointingstick;
+  gboolean have_touchpad;
+
+  have_touchpad = self->have_touchpad && !self->have_synaptics;
+  have_pointingstick = self->have_pointingstick;
+
+  if (have_touchpad) {
+    gboolean have_two_finger_scrolling;
+    gboolean have_edge_scrolling;
+    gboolean have_tap_to_click;
+
+    cc_touchpad_check_capabilities (&have_two_finger_scrolling, &have_edge_scrolling, &have_tap_to_click);
+
+    gtk_widget_set_visible (GTK_WIDGET (self->touchpad_scroll_method_row), have_two_finger_scrolling);
+    gtk_widget_set_visible (GTK_WIDGET (self->tap_to_click_row), have_tap_to_click);
   }
 
-  cc_touchpad_check_capabilities (&have_two_finger_scrolling, &have_edge_scrolling, &have_tap_to_click);
+  adw_view_stack_page_set_visible (self->touchpad_stack_page, have_touchpad);
+  adw_view_stack_page_set_visible (self->pointingstick_stack_page, have_pointingstick);
+  gtk_stack_set_visible_child_name (self->title_stack,
+                                    have_pointingstick || have_touchpad ? "switcher" : "title");
 
-  adw_view_stack_page_set_visible (self->touchpad_stack_page, TRUE);
-  gtk_stack_set_visible_child_name (self->title_stack, "switcher");
-
-  gtk_widget_set_visible (GTK_WIDGET (self->touchpad_scroll_method_row), have_two_finger_scrolling);
-  gtk_widget_set_visible (GTK_WIDGET (self->tap_to_click_row), have_tap_to_click);
 }
 
 static void
@@ -142,8 +156,8 @@ can_disable_touchpad (CcMousePanel *self)
      self->have_mouse ? "true" : "false",
      self->have_touchscreen ? "true" : "false");
 
-  /* Let's show the button when a mouse or touchscreen is present */
-  if (self->have_mouse || self->have_touchscreen)
+  /* Let's show the button when a mouse, touchscreen or pointing stick is present */
+  if (self->have_mouse || self->have_touchscreen || self->have_pointingstick)
     return TRUE;
 
   /* Let's also show when the touchpad is disabled. */
@@ -240,6 +254,27 @@ mouse_accel_set_mapping (const GValue       *value,
     return g_variant_new_string (g_value_get_boolean (value) ? "default" : "flat");
 }
 
+static gboolean
+pointingstick_accel_get_mapping (GValue    *value,
+                                 GVariant  *variant,
+                                 gpointer   user_data)
+{
+    gboolean enabled;
+
+    enabled = g_strcmp0 (g_variant_get_string (variant, NULL), "flat") != 0;
+    g_value_set_boolean (value, enabled);
+
+    return TRUE;
+}
+
+static GVariant *
+pointingstick_accel_set_mapping (const GValue       *value,
+                                 const GVariantType *type,
+                                 gpointer            user_data)
+{
+    return g_variant_new_string (g_value_get_boolean (value) ? "default" : "flat");
+}
+
 /* Set up the property editors in the dialog. */
 static void
 setup_dialog (CcMousePanel *self)
@@ -324,7 +359,19 @@ setup_dialog (CcMousePanel *self)
                    self->touchpad_typing_row, "active",
                    G_SETTINGS_BIND_DEFAULT);
 
-  setup_touchpad_options (self);
+  /* Pointing stick section */
+  g_settings_bind (self->pointingstick_settings, "speed",
+                   gtk_range_get_adjustment (GTK_RANGE (self->pointingstick_speed_scale)), "value",
+                   G_SETTINGS_BIND_DEFAULT);
+
+  g_settings_bind_with_mapping (self->pointingstick_settings, "accel-profile",
+                                self->pointingstick_accel_switch, "active",
+                                G_SETTINGS_BIND_DEFAULT,
+                                pointingstick_accel_get_mapping,
+                                pointingstick_accel_set_mapping,
+                                NULL, NULL);
+
+  setup_title_stack (self);
 }
 
 /* Callback issued when a button is clicked on the dialog */
@@ -332,8 +379,9 @@ static void
 device_changed (CcMousePanel *self)
 {
   self->have_touchpad = touchpad_is_present ();
+  self->have_pointingstick = pointingstick_is_present ();
 
-  setup_touchpad_options (self);
+  setup_title_stack (self);
 
   self->have_mouse = mouse_is_present ();
   gtk_widget_set_visible (GTK_WIDGET (self->mouse_group), self->have_mouse);
@@ -390,6 +438,7 @@ cc_mouse_panel_init (CcMousePanel *self)
 
   self->mouse_settings = g_settings_new ("org.gnome.desktop.peripherals.mouse");
   self->touchpad_settings = g_settings_new ("org.gnome.desktop.peripherals.touchpad");
+  self->pointingstick_settings = g_settings_new ("org.gnome.desktop.peripherals.pointingstick");
 
   device_manager = gsd_device_manager_get ();
   g_signal_connect_object (device_manager, "device-added",
@@ -400,6 +449,7 @@ cc_mouse_panel_init (CcMousePanel *self)
   self->have_mouse = mouse_is_present ();
   self->have_touchpad = touchpad_is_present ();
   self->have_touchscreen = touchscreen_is_present ();
+  self->have_pointingstick = pointingstick_is_present ();
   self->have_synaptics = cc_synaptics_check ();
   if (self->have_synaptics)
     g_warning ("Detected synaptics X driver, please migrate to libinput");
@@ -430,6 +480,9 @@ cc_mouse_panel_class_init (CcMousePanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcMousePanel, mouse_group);
   gtk_widget_class_bind_template_child (widget_class, CcMousePanel, mouse_scroll_direction_row);
   gtk_widget_class_bind_template_child (widget_class, CcMousePanel, mouse_speed_scale);
+  gtk_widget_class_bind_template_child (widget_class, CcMousePanel, pointingstick_accel_switch);
+  gtk_widget_class_bind_template_child (widget_class, CcMousePanel, pointingstick_stack_page);
+  gtk_widget_class_bind_template_child (widget_class, CcMousePanel, pointingstick_speed_scale);
   gtk_widget_class_bind_template_child (widget_class, CcMousePanel, primary_toggle_group);
   gtk_widget_class_bind_template_child (widget_class, CcMousePanel, title_stack);
   gtk_widget_class_bind_template_child (widget_class, CcMousePanel, tap_to_click_row);

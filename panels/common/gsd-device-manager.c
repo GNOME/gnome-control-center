@@ -83,6 +83,7 @@ const gchar *udev_ids[] = {
 	"ID_INPUT_TABLET",
 	"ID_INPUT_TOUCHSCREEN",
 	"ID_INPUT_TABLET_PAD",
+	"ID_INPUT_POINTINGSTICK", /* udev sets ID_INPUT_MOUSE too */
 };
 
 static guint signals[N_SIGNALS] = { 0 };
@@ -618,6 +619,8 @@ gsd_device_get_settings (GsdDevice *device)
 		}
 	} else if (type & (GSD_DEVICE_TYPE_MOUSE | GSD_DEVICE_TYPE_TOUCHPAD)) {
 		schema = "org.gnome.desktop.peripherals.mouse";
+	} else if (type & (GSD_DEVICE_TYPE_POINTINGSTICK)) {
+		schema = "org.gnome.desktop.peripherals.pointingstick";
 	} else if (type & GSD_DEVICE_TYPE_KEYBOARD) {
 		schema = "org.gnome.desktop.peripherals.keyboard";
 	} else {

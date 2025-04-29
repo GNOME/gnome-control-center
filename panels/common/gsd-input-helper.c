@@ -60,6 +60,12 @@ mouse_is_present (void)
         return device_type_is_present (GSD_DEVICE_TYPE_MOUSE);
 }
 
+gboolean
+pointingstick_is_present (void)
+{
+        return device_type_is_present (GSD_DEVICE_TYPE_POINTINGSTICK);
+}
+
 #ifdef GDK_WINDOWING_X11
 char *
 xdevice_get_device_node (int deviceid)

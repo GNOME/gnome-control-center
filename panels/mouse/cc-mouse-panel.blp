@@ -276,6 +276,69 @@ template $CcMousePanel: $CcPanel {
             }
           };
         }
+
+        Adw.ViewStackPage pointingstick_stack_page {
+          title: _("_Pointing Stick");
+          use-underline: true;
+          icon-name: "input-pointing-stick-symbolic";
+
+          child: Adw.PreferencesPage {
+            Adw.PreferencesGroup pointingstick_group {
+              title: _("Pointing Stick");
+
+              Adw.ActionRow pointingstick_row {
+                title: _("Po_inter Speed");
+                use-underline: true;
+                activatable-widget: pointingstick_speed_scale;
+
+                [suffix]
+                Scale pointingstick_speed_scale {
+                  hexpand: true;
+
+                  marks [
+                    mark (-1, bottom, _("Slow")),
+                    mark (0),
+                    mark (1, bottom, _("Fast")),
+                  ]
+
+                  adjustment: Adjustment {
+                    lower: -1;
+                    upper: 1;
+                    step-increment: 0.1;
+                    page-increment: 0.1;
+                  };
+                }
+              }
+
+              Adw.ActionRow pointingstick_accel_profile {
+                title: _("Pointing Stick _Acceleration");
+                subtitle: _("Recommended for most users and applications");
+                activatable-widget: pointingstick_accel_switch;
+                use-underline: true;
+
+                [suffix]
+                $CcListRowInfoButton {
+                  valign: center;
+                  text: _("Turning pointing stick acceleration off can allow faster and more precise movements, but can also make the pointing stick more difficult to use.");
+                }
+
+                [suffix]
+                Switch pointingstick_accel_switch {
+                  valign: center;
+                }
+              }
+            }
+
+            Adw.PreferencesGroup {
+              Adw.ButtonRow {
+                title: _("Test _Settings");
+                end-icon-name: "go-next-symbolic";
+                use-underline: true;
+                activated => $test_button_row_activated_cb(template);
+              }
+            }
+          };
+        }
       };
     };
   };

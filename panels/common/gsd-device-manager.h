@@ -32,12 +32,13 @@ G_DECLARE_DERIVABLE_TYPE (GsdDevice, gsd_device, GSD, DEVICE, GObject)
 G_DECLARE_DERIVABLE_TYPE (GsdDeviceManager, gsd_device_manager, GSD, DEVICE_MANAGER, GObject)
 
 typedef enum {
-	GSD_DEVICE_TYPE_MOUSE	     = 1 << 0,
-	GSD_DEVICE_TYPE_KEYBOARD     = 1 << 1,
-	GSD_DEVICE_TYPE_TOUCHPAD     = 1 << 2,
-	GSD_DEVICE_TYPE_TABLET	     = 1 << 3,
-	GSD_DEVICE_TYPE_TOUCHSCREEN  = 1 << 4,
-	GSD_DEVICE_TYPE_PAD          = 1 << 5
+	GSD_DEVICE_TYPE_MOUSE	      = 1 << 0,
+	GSD_DEVICE_TYPE_KEYBOARD      = 1 << 1,
+	GSD_DEVICE_TYPE_TOUCHPAD      = 1 << 2,
+	GSD_DEVICE_TYPE_TABLET	      = 1 << 3,
+	GSD_DEVICE_TYPE_TOUCHSCREEN   = 1 << 4,
+	GSD_DEVICE_TYPE_PAD           = 1 << 5,
+	GSD_DEVICE_TYPE_POINTINGSTICK = 1 << 6
 } GsdDeviceType;
 
 struct _GsdDeviceClass {

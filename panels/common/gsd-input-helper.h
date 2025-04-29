@@ -23,9 +23,10 @@ G_BEGIN_DECLS
 #include <gdk/gdk.h>
 #include <glib.h>
 
-gboolean  touchpad_is_present     (void);
-gboolean  touchscreen_is_present  (void);
-gboolean  mouse_is_present        (void);
+gboolean  touchpad_is_present      (void);
+gboolean  touchscreen_is_present   (void);
+gboolean  mouse_is_present         (void);
+gboolean  pointingstick_is_present (void);
 
 #ifdef GDK_WINDOWING_X11
 char     *xdevice_get_device_node (int deviceid);
