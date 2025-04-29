@@ -21,3 +21,16 @@ row.illustrated .frame {
 .cc-placeholder-row {
   padding: 18px;
 }
+
+row.neutral-selectable:selected {
+  background-color: transparent;
+}
+
+row.neutral-selectable:selected:hover {
+  background-image: image(color-mix(in srgb, currentColor 3%, transparent));
+}
+
+row.neutral-selectable:selected:active {
+  background-image: image(color-mix(in srgb, currentColor 8%, transparent));
+}
+
