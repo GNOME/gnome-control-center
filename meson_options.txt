@@ -5,7 +5,7 @@ option('ibus', type: 'boolean', value: true, description: 'build with IBus suppo
 option('privileged_group', type: 'string', value: 'wheel', description: 'name of group that has elevated permissions')
 option('snap', type: 'boolean', value: true, description: 'build with Snap support')
 option('tests', type: 'boolean', value: true, description: 'build tests')
-option('x11', type: 'boolean', value: true, description: 'build with X11 support')
+option('x11', type: 'boolean', value: false, description: 'build with X11 support')
 option('profile', type: 'combo', choices: ['default','development'], value: 'default')
 option('malcontent', type: 'boolean', value: false, description: 'build with malcontent support')
 option('distributor_logo', type: 'string', description: 'absolute path to distributor logo for the About panel')
