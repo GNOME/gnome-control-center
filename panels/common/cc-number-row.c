@@ -671,6 +671,7 @@ number_row_settings_changed_cb (CcNumberRow *self)
         } else {
             g_warning ("Unsigned GSettings value out of range for CcNumberRow");
             position = GTK_INVALID_LIST_POSITION;
+            value = -1;
         }
         break;
     case G_TYPE_INT:
