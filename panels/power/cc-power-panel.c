@@ -1297,6 +1297,7 @@ cc_power_panel_class_init (CcPowerPanelClass *klass)
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/power/cc-power-panel.ui");
 
   g_type_ensure (CC_TYPE_NUMBER_ROW);
+  g_type_ensure (CC_TYPE_POWER_PROFILE_INFO_ROW);
 
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, als_row);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, battery_charging_section);

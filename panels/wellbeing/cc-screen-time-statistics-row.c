@@ -194,6 +194,8 @@ cc_screen_time_statistics_row_class_init (CcScreenTimeStatisticsRowClass *klass)
 
   g_object_class_install_properties (object_class, G_N_ELEMENTS (props), props);
 
+  g_type_ensure (CC_TYPE_BAR_CHART);
+
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/wellbeing/cc-screen-time-statistics-row.ui");
 
   gtk_widget_class_bind_template_child (widget_class, CcScreenTimeStatisticsRow, bar_chart);

@@ -662,6 +662,7 @@ cc_wellbeing_panel_class_init (CcWellbeingPanelClass *klass)
   gtk_widget_class_bind_template_callback (widget_class, disable_screen_time_recording_button_clicked_cb);
   gtk_widget_class_bind_template_callback (widget_class, screen_time_statistics_disable_popover_show_cb);
 
+  g_type_ensure (CC_TYPE_BREAK_SCHEDULE_ROW);
   g_type_ensure (CC_TYPE_DURATION_ROW);
   g_type_ensure (CC_TYPE_SCREEN_TIME_STATISTICS_ROW);
 }
