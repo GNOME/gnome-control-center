@@ -147,6 +147,8 @@ cc_duration_row_class_init (CcDurationRowClass *klass)
 
   g_object_class_install_properties (object_class, G_N_ELEMENTS (props), props);
 
+  g_type_ensure (CC_TYPE_DURATION_EDITOR);
+
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/common/cc-duration-row.ui");
 
   gtk_widget_class_bind_template_child (widget_class, CcDurationRow, current);

@@ -124,6 +124,8 @@ cc_duration_editor_class_init (CcDurationEditorClass *klass)
 
   g_object_class_install_properties (object_class, G_N_ELEMENTS (props), props);
 
+  g_type_ensure (CC_TYPE_TIMELIKE_EDITOR);
+
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/common/cc-duration-editor.ui");
 
   gtk_widget_class_bind_template_child (widget_class, CcDurationEditor, editor);

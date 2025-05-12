@@ -141,6 +141,8 @@ cc_illustrated_row_class_init (CcIllustratedRowClass *klass)
 
   g_object_class_install_properties (object_class, N_PROPS, props);
 
+  g_type_ensure (CC_TYPE_MASK_PAINTABLE);
+
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/common/cc-illustrated-row.ui");
 
   gtk_widget_class_bind_template_child (widget_class, CcIllustratedRow, picture_box);
