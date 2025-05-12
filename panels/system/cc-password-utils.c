@@ -21,11 +21,6 @@
 #include <gio/gio.h>
 #include <glib.h>
 #include <glob.h>
-#include <stdlib.h>
-#include <string.h>
-
-#define SPECIAL_CHARACTERS "-!\"#$%&()*,./:;?@[]^_`{|}~+<=>"
-#define WORD_SEPARATORS " -_&+,;:."
 
 static char *
 get_word_at_line (GFile *file,
@@ -75,113 +70,35 @@ get_word_at_line (GFile *file,
   return NULL;
 }
 
-static gboolean
-is_word_separator (char character)
-{
-  return strchr (WORD_SEPARATORS, character) != NULL;
-}
-
-static char
-generate_word_separator (void)
-{
-  return WORD_SEPARATORS[g_random_int_range (0, strlen (WORD_SEPARATORS))];
-}
-
-static char
-generate_special_character (void)
-{
-  return SPECIAL_CHARACTERS[g_random_int_range (0, strlen (SPECIAL_CHARACTERS))];
-}
-
-static char
-generate_digit (void)
-{
-  return g_random_int_range (0, 10) + '0';
-}
-
 char *
 cc_generate_password (void)
 {
   g_autoptr(GString) password_string = NULL;
-  g_autofree char *password = NULL;
-  static const size_t min_number_of_words = 2;
-  size_t i;
-  char *p = NULL;
-  gboolean needs_digit = TRUE;
-  gboolean needs_special_character = TRUE;
-  gboolean needs_uppercase = TRUE;
-  gboolean last_character_trimmable = TRUE;
+  g_autoptr(GFile) file = NULL;
+  static const int number_of_words = 5;
+
+  file = g_file_new_for_uri ("resource://org/gnome/control-center/system/wordlist.txt");
+
+  if (!file)
+    return NULL;
 
   password_string = g_string_new (NULL);
 
-  i = 0;
-  while (password_string->len < 16 || i < min_number_of_words)
+  for (int i = 0; i < number_of_words; i++)
     {
-      g_autoptr(GFile) file = NULL;
       int word_offset = g_random_int ();
       g_autofree char *word = NULL;
-
-      file = g_file_new_for_uri ("resource://org/gnome/control-center/system/wordlist.txt");
-
-      if (!file)
-        return NULL;
 
       word = get_word_at_line (file, word_offset);
 
       if (word == NULL)
         return NULL;
 
-      if (strlen (word) > 10)
-        continue;
+      /* Capitalize every first letter */
+      word[0] = g_ascii_toupper (word[0]);
 
       g_string_append (password_string, word);
-      g_string_append_c (password_string, ' ');
-      i++;
     }
-
-  password = g_string_free_and_steal (g_steal_pointer (&password_string));
-
-  while (needs_uppercase || needs_digit || needs_special_character || strstr (password, " ") != NULL)
-    {
-      for (p = password; *p != '\0'; p++)
-        {
-          if (p == password || is_word_separator (p[-1]))
-            {
-              if (g_random_int_range (0, 2) == 0)
-                {
-                  *p = g_ascii_toupper (*p);
-                  needs_uppercase = FALSE;
-                }
-            }
-
-          if (!is_word_separator (*p))
-            continue;
-
-          if (needs_digit && g_random_int_range (0, strlen (password)) == 0)
-            {
-              *p = generate_digit ();
-              needs_digit = FALSE;
-
-              if (p[1] == '\0')
-                last_character_trimmable = FALSE;
-            }
-          else if (needs_special_character && g_random_int_range (0, strlen (password)) == 0)
-            {
-              *p = generate_special_character ();
-              needs_special_character = FALSE;
-
-              if (p[1] == '\0')
-                last_character_trimmable = FALSE;
-            }
-          else if (!needs_digit && !needs_special_character)
-            {
-              *p = generate_word_separator ();
-            }
-        }
-    }
-
-  if (last_character_trimmable)
-    password[strlen (password) - 1] = '\0';
-
-  return g_steal_pointer (&password);
+    
+  return g_string_free_and_steal (g_steal_pointer (&password_string));
 }
