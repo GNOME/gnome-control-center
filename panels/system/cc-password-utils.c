@@ -24,23 +24,19 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define DICEWARE_CORPUS_GLOB "/usr/share/dict/*"
 #define SPECIAL_CHARACTERS "-!\"#$%&()*,./:;?@[]^_`{|}~+<=>"
 #define WORD_SEPARATORS " -_&+,;:."
 
 static char *
-get_word_at_line (const char *file_path,
-                  guint       line_number)
+get_word_at_line (GFile *file,
+                  guint  line_number)
 {
   g_autoptr (GError) error = NULL;
-  g_autoptr (GFile) file = NULL;
   g_autoptr (GFileInputStream) input_stream = NULL;
   g_autoptr (GDataInputStream) data = NULL;
   g_autofree char *line = NULL;
   gsize length;
   guint line_count = 0;
-
-  file = g_file_new_for_path (file_path);
 
   input_stream = g_file_read (file, NULL, &error);
 
@@ -74,7 +70,7 @@ get_word_at_line (const char *file_path,
     }
 
   if (line_number >= line_count)
-    return get_word_at_line (file_path, line_number % line_count);
+    return get_word_at_line (file, line_number % line_count);
 
   return NULL;
 }
@@ -103,29 +99,6 @@ generate_digit (void)
   return g_random_int_range (0, 10) + '0';
 }
 
-static char *
-get_random_file_from_glob (const char *pattern)
-{
-  glob_t glob_result;
-  int ret = 0;
-  int index;
-  g_autofree char *file = NULL;
-
-  ret = glob (pattern, 0, NULL, &glob_result);
-  if (ret != 0)
-    goto out;
-
-  if (glob_result.gl_pathc == 0)
-    goto out;
-
-  index = g_random_int_range (0, glob_result.gl_pathc);
-  file = g_strdup (glob_result.gl_pathv[index]);
-
-out:
-  globfree (&glob_result);
-  return g_steal_pointer (&file);
-}
-
 char *
 cc_generate_password (void)
 {
@@ -144,16 +117,16 @@ cc_generate_password (void)
   i = 0;
   while (password_string->len < 16 || i < min_number_of_words)
     {
-      g_autofree char *file_path = NULL;
+      g_autoptr(GFile) file = NULL;
       int word_offset = g_random_int ();
       g_autofree char *word = NULL;
 
-      file_path = get_random_file_from_glob (DICEWARE_CORPUS_GLOB);
+      file = g_file_new_for_uri ("resource://org/gnome/control-center/system/wordlist.txt");
 
-      if (!file_path)
+      if (!file)
         return NULL;
 
-      word = get_word_at_line (file_path, word_offset);
+      word = get_word_at_line (file, word_offset);
 
       if (word == NULL)
         return NULL;
