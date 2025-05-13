@@ -1932,15 +1932,16 @@ cc_wwan_data_apn_set_initial_eps_auth ( CcWwanDataApn *apn,
 }
 
 /**
- * cc_wwan_data_apn_get_initial_eps_apntype:
+ * cc_wwan_data_apn_should_configure_initial_eps_bearer:
  * @apn: A #CcWwanDataApn
  *
- * For LTE modems, get the initial eps bearer configure of @apn
+ * For LTE modems, Determine whether NetworkManager should explicitly
+ * configure the initial EPS bearer.
  *
  * Returns: (transfer none): The initial eps bearer configure status of @apn
  */
 gboolean
-cc_wwan_data_apn_get_initial_eps_apntype (CcWwanDataApn *apn)
+cc_wwan_data_apn_should_configure_initial_eps_bearer (CcWwanDataApn *apn)
 {
   gboolean apn_type = FALSE;
 
@@ -1968,19 +1969,18 @@ cc_wwan_data_apn_get_initial_eps_apntype (CcWwanDataApn *apn)
  * @apn: A #CcWwanDataApn
  * @apntype: The initial eps bearer configure to be used
  *
- * For LTE modems, set the apn type of @apn to @apntype.
+ * For LTE modems, set whether NetworkManager should explicitly configure
+ * the initial EPS bearer.
  *
  * @apn is only modified, use @cc_wwan_data_save_apn()
  * to save the changes.
  */
 void
-cc_wwan_data_apn_set_initial_eps_apntype (CcWwanDataApn *apn,
-                              guint apntype)
+cc_wwan_data_apn_set_should_configure_initial_eps_bearer (CcWwanDataApn *apn,
+                                                          gboolean       configure)
 {
   NMConnection *connection;
   NMSettingGsm *setting;
-  gboolean init_eps_config = TRUE;
-
 
   g_return_if_fail (CC_IS_WWAN_DATA_APN (apn));
 
@@ -1988,20 +1988,9 @@ cc_wwan_data_apn_set_initial_eps_apntype (CcWwanDataApn *apn,
   connection = wwan_data_get_nm_connection(apn);
   setting = nm_connection_get_setting_gsm(connection);
 
-  if(apntype == 0){
-    init_eps_config = FALSE;
-  }
-  else if(apntype == 1){
-    init_eps_config = TRUE;
-  }
-  else
-  {
-    init_eps_config = FALSE;
-  }
-
   g_object_set (setting,
-              NM_SETTING_GSM_INITIAL_EPS_BEARER_CONFIGURE, init_eps_config,
-              NULL);
+                NM_SETTING_GSM_INITIAL_EPS_BEARER_CONFIGURE, configure,
+                NULL);
 }
 
 gint

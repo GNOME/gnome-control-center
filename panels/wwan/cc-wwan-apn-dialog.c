@@ -178,7 +178,7 @@ cc_wwan_apn_save_clicked_cb (CcWwanApnDialog *self)
       cc_wwan_data_apn_set_initial_eps_auth (apn, gtk_drop_down_get_selected (self->lte_auth_combo));
     }
 
-  cc_wwan_data_apn_set_initial_eps_apntype (apn, gtk_drop_down_get_selected (self->lte_attach_combo));
+  cc_wwan_data_apn_set_should_configure_initial_eps_bearer (apn, gtk_drop_down_get_selected (self->lte_attach_combo));
 
   cc_wwan_data_save_apn (self->wwan_data, apn, NULL, NULL, NULL);
 
@@ -256,7 +256,7 @@ cc_wwan_apn_edit_clicked_cb (CcWwanApnDialog *self,
   gtk_widget_set_visible (GTK_WIDGET (self->add_button), FALSE);
 
   gtk_editable_set_text (GTK_EDITABLE (self->name_entry), cc_wwan_data_apn_get_name (apn));
-  if (cc_wwan_data_apn_get_initial_eps_apntype (apn))
+  if (cc_wwan_data_apn_should_configure_initial_eps_bearer (apn))
     {
       apn_name = cc_wwan_data_apn_get_initial_eps_apn (apn);
       username = cc_wwan_data_apn_get_initial_eps_username (apn);
