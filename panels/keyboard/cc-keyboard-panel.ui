@@ -32,6 +32,7 @@
                         <property name="activatable-widget">same_source</property>
                         <child type="prefix">
                           <object class="GtkCheckButton" id="same_source">
+                            <property name="can-focus">False</property>
                             <property name="valign">center</property>
                           </object>
                         </child>
@@ -44,6 +45,7 @@
                         <property name="activatable-widget">per_window_source</property>
                         <child type="prefix">
                           <object class="GtkCheckButton" id="per_window_source">
+                            <property name="can-focus">False</property>
                             <property name="active" bind-source="same_source" bind-flags="sync-create|invert-boolean"/>
                             <property name="valign">center</property>
                             <property name="group">same_source</property>
