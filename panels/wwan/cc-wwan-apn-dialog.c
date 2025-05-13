@@ -175,7 +175,7 @@ cc_wwan_apn_save_clicked_cb (CcWwanApnDialog *self)
       cc_wwan_data_apn_set_initial_eps_apn (apn, apn_name);
       cc_wwan_data_apn_set_initial_eps_username (apn, gtk_editable_get_text (GTK_EDITABLE (self->username_entry)));
       cc_wwan_data_apn_set_initial_eps_password (apn, gtk_editable_get_text (GTK_EDITABLE (self->password_entry)));
-      cc_wwan_data_apn_set_initial_eps_auth (apn, gtk_drop_down_get_selected (self->lte_auth_combo));
+      cc_wwan_data_apn_set_initial_eps_auth_method (apn, gtk_drop_down_get_selected (self->lte_auth_combo));
     }
 
   cc_wwan_data_apn_set_should_configure_initial_eps_bearer (apn, gtk_drop_down_get_selected (self->lte_attach_combo));
@@ -262,7 +262,7 @@ cc_wwan_apn_edit_clicked_cb (CcWwanApnDialog *self,
       username = cc_wwan_data_apn_get_initial_eps_username (apn);
       password = cc_wwan_data_apn_get_initial_eps_password (apn);
 
-      gtk_drop_down_set_selected (self->lte_auth_combo, cc_wwan_data_apn_get_initial_eps_auth (apn));
+      gtk_drop_down_set_selected (self->lte_auth_combo, cc_wwan_data_apn_get_initial_eps_auth_method (apn));
       gtk_drop_down_set_selected (self->lte_attach_combo, 1);
     }
   else

@@ -1658,169 +1658,7 @@ cc_wwan_data_apn_set_initial_eps_password (CcWwanDataApn *apn,
 }
 
 /**
- * cc_wwan_data_apn_get_initial_eps_noauth:
- * @apn: A #CcWwanDataApn
- *
- * For LTE modems, get the noauth authentication status of @apn
- *
- * Returns: (transfer none): The noauth authentication status of @apn
- */
-static gboolean
-cc_wwan_data_apn_get_initial_eps_noauth (CcWwanDataApn *apn)
-{
-  gboolean noauth_enabled;
-
-
-  if (apn->remote_connection)
-  {
-    NMSettingGsm *setting;
-    setting = nm_connection_get_setting_gsm(NM_CONNECTION(apn->remote_connection));
-    noauth_enabled = nm_setting_gsm_get_initial_eps_noauth(setting);
-  }
-  else if (apn->access_method)
-  {
-    return FALSE;
-  }
-  return noauth_enabled;
-}
-
-/**
- * cc_wwan_data_apn_get_initial_eps_eap:
- * @apn: A #CcWwanDataApn
- *
- * For LTE modems, get the eap authentication status of @apn
- *
- * Returns: (transfer none): The eap authentication status of @apn
- */
-static gboolean
-cc_wwan_data_apn_get_initial_eps_refuse_eap (CcWwanDataApn *apn)
-{
-  gboolean eap_enabled;
-
-
-  if (apn->remote_connection)
-  {
-    NMSettingGsm *setting;
-    setting = nm_connection_get_setting_gsm(NM_CONNECTION(apn->remote_connection));
-    eap_enabled = nm_setting_gsm_get_initial_eps_refuse_eap(setting);
-  }
-  else if (apn->access_method)
-  {
-    return FALSE;
-  }
-  return eap_enabled;
-}
-
-/**
- * cc_wwan_data_apn_get_initial_eps_pap:
- * @apn: A #CcWwanDataApn
- *
- * For LTE modems, get the pap authentication status of @apn
- *
- * Returns: (transfer none): The pap authentication status of @apn
- */
-static gboolean
-cc_wwan_data_apn_get_initial_eps_refuse_pap (CcWwanDataApn *apn)
-{
-  gboolean pap_enabled;
-
-
-  if (apn->remote_connection)
-  {
-    NMSettingGsm *setting;
-    setting = nm_connection_get_setting_gsm(NM_CONNECTION(apn->remote_connection));
-    pap_enabled = nm_setting_gsm_get_initial_eps_refuse_pap(setting);
-  }
-  else if (apn->access_method)
-  {
-    return FALSE;
-  }
-  return pap_enabled;
-}
-
-/**
- * cc_wwan_data_apn_get_initial_eps_refuse_chap:
- * @apn: A #CcWwanDataApn
- *
- * For LTE modems, get the chap authentication status of @apn
- *
- * Returns: (transfer none): The chap authentication status of @apn
- */
-static gboolean
-cc_wwan_data_apn_get_initial_eps_refuse_chap (CcWwanDataApn *apn)
-{
-  gboolean chap_enabled;
-
-
-  if (apn->remote_connection)
-  {
-    NMSettingGsm *setting;
-    setting = nm_connection_get_setting_gsm(NM_CONNECTION(apn->remote_connection));
-    chap_enabled = nm_setting_gsm_get_initial_eps_refuse_chap(setting);
-  }
-  else if (apn->access_method)
-  {
-    return TRUE;
-  }
-  return chap_enabled;
-}
-
-/**
- * cc_wwan_data_apn_get_initial_eps_refuse_mschap:
- * @apn: A #CcWwanDataApn
- *
- * For LTE modems, get the mschap authentication status of @apn
- *
- * Returns: (transfer none): The mschap authentication status of @apn
- */
-static gboolean
-cc_wwan_data_apn_get_initial_eps_refuse_mschap (CcWwanDataApn *apn)
-{
-  gboolean mschap_enabled;
-
-
-  if (apn->remote_connection)
-  {
-    NMSettingGsm *setting;
-    setting = nm_connection_get_setting_gsm(NM_CONNECTION(apn->remote_connection));
-    mschap_enabled = nm_setting_gsm_get_initial_eps_refuse_mschap(setting);
-  }
-  else if (apn->access_method)
-  {
-    return FALSE;
-  }
-  return mschap_enabled;
-}
-
-/**
- * cc_wwan_data_apn_get_initial_eps_refuse_mschapv2:
- * @apn: A #CcWwanDataApn
- *
- * For LTE modems, get the mschapv2 authentication status of @apn
- *
- * Returns: (transfer none): The mschapv2 authentication status of @apn
- */
-static gboolean
-cc_wwan_data_apn_get_initial_eps_refuse_mschapv2 (CcWwanDataApn *apn)
-{
-  gboolean mschapv2_enabled;
-
-
-  if (apn->remote_connection)
-  {
-    NMSettingGsm *setting;
-    setting = nm_connection_get_setting_gsm(NM_CONNECTION(apn->remote_connection));
-    mschapv2_enabled = nm_setting_gsm_get_initial_eps_refuse_mschapv2(setting);
-  }
-  else if (apn->access_method)
-  {
-    return FALSE;
-  }
-  return mschapv2_enabled;
-}
-
-/**
- * cc_wwan_data_apn_get_initial_eps_auth:
+ * cc_wwan_data_apn_get_initial_eps_auth_method:
  * @apn: A #CcWwanDataApn
  *
  * For LTE modems, get the authentication status for all auth types of @apn
@@ -1828,19 +1666,34 @@ cc_wwan_data_apn_get_initial_eps_refuse_mschapv2 (CcWwanDataApn *apn)
  * Returns: (transfer none): The authentication status of @apn
  */
 guint
-cc_wwan_data_apn_get_initial_eps_auth (CcWwanDataApn *apn)
+cc_wwan_data_apn_get_initial_eps_auth_method (CcWwanDataApn *apn)
 {
-  if(cc_wwan_data_apn_get_initial_eps_noauth(apn) == TRUE) return 0;
-  else if(cc_wwan_data_apn_get_initial_eps_refuse_pap(apn) == FALSE) return 1;
-  else if(cc_wwan_data_apn_get_initial_eps_refuse_chap(apn) == FALSE) return 2;
-  else if(cc_wwan_data_apn_get_initial_eps_refuse_eap(apn) == FALSE) return 3;
-  else if(cc_wwan_data_apn_get_initial_eps_refuse_mschap(apn) == FALSE) return 4;
-  else if(cc_wwan_data_apn_get_initial_eps_refuse_mschapv2(apn) == FALSE) return 5;
-  else return 0;
+  NMSettingGsm *setting;
+
+  g_return_val_if_fail (CC_IS_WWAN_DATA_APN (apn), 0);
+
+  if (!apn->remote_connection)
+    return 0;
+
+  setting = nm_connection_get_setting_gsm (NM_CONNECTION (apn->remote_connection));
+  if (nm_setting_gsm_get_initial_eps_noauth (setting))
+    return 0;
+  if (!nm_setting_gsm_get_initial_eps_refuse_pap (setting))
+    return 1;
+  if (!nm_setting_gsm_get_initial_eps_refuse_chap (setting))
+    return 2;
+  if (!nm_setting_gsm_get_initial_eps_refuse_eap (setting))
+    return 3;
+  if (!nm_setting_gsm_get_initial_eps_refuse_mschap (setting))
+    return 4;
+  if (!nm_setting_gsm_get_initial_eps_refuse_mschapv2 (setting))
+    return 5;
+
+  return 0;
 }
 
 /**
- * cc_wwan_data_apn_set_initial_eps_auth:
+ * cc_wwan_data_apn_set_initial_eps_auth_method:
  * @apn: A #CcWwanDataApn
  * @authtype: The initial eps bearer auth type
  *
@@ -1850,8 +1703,8 @@ cc_wwan_data_apn_get_initial_eps_auth (CcWwanDataApn *apn)
  * to save the changes.
  */
 void
-cc_wwan_data_apn_set_initial_eps_auth ( CcWwanDataApn *apn,
-                            guint authtype)
+cc_wwan_data_apn_set_initial_eps_auth_method (CcWwanDataApn *apn,
+                                              guint authtype)
 {
   NMSettingGsm *setting;
   NMConnection *connection;
