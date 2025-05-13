@@ -1665,7 +1665,7 @@ cc_wwan_data_apn_set_initial_eps_password (CcWwanDataApn *apn,
  *
  * Returns: (transfer none): The noauth authentication status of @apn
  */
-gboolean
+static gboolean
 cc_wwan_data_apn_get_initial_eps_noauth (CcWwanDataApn *apn)
 {
   gboolean noauth_enabled;
@@ -1692,7 +1692,7 @@ cc_wwan_data_apn_get_initial_eps_noauth (CcWwanDataApn *apn)
  *
  * Returns: (transfer none): The eap authentication status of @apn
  */
-gboolean
+static gboolean
 cc_wwan_data_apn_get_initial_eps_refuse_eap (CcWwanDataApn *apn)
 {
   gboolean eap_enabled;
@@ -1719,7 +1719,7 @@ cc_wwan_data_apn_get_initial_eps_refuse_eap (CcWwanDataApn *apn)
  *
  * Returns: (transfer none): The pap authentication status of @apn
  */
-gboolean
+static gboolean
 cc_wwan_data_apn_get_initial_eps_refuse_pap (CcWwanDataApn *apn)
 {
   gboolean pap_enabled;
@@ -1746,7 +1746,7 @@ cc_wwan_data_apn_get_initial_eps_refuse_pap (CcWwanDataApn *apn)
  *
  * Returns: (transfer none): The chap authentication status of @apn
  */
-gboolean
+static gboolean
 cc_wwan_data_apn_get_initial_eps_refuse_chap (CcWwanDataApn *apn)
 {
   gboolean chap_enabled;
@@ -1773,7 +1773,7 @@ cc_wwan_data_apn_get_initial_eps_refuse_chap (CcWwanDataApn *apn)
  *
  * Returns: (transfer none): The mschap authentication status of @apn
  */
-gboolean
+static gboolean
 cc_wwan_data_apn_get_initial_eps_refuse_mschap (CcWwanDataApn *apn)
 {
   gboolean mschap_enabled;
@@ -1800,7 +1800,7 @@ cc_wwan_data_apn_get_initial_eps_refuse_mschap (CcWwanDataApn *apn)
  *
  * Returns: (transfer none): The mschapv2 authentication status of @apn
  */
-gboolean
+static gboolean
 cc_wwan_data_apn_get_initial_eps_refuse_mschapv2 (CcWwanDataApn *apn)
 {
   gboolean mschapv2_enabled;
