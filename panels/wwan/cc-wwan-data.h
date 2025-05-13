@@ -110,9 +110,9 @@ guint cc_wwan_data_apn_get_initial_eps_auth (CcWwanDataApn *apn);
 void cc_wwan_data_apn_set_initial_eps_auth (CcWwanDataApn *apn,
                                             guint allowed_auth);
 
-gboolean cc_wwan_data_apn_get_initial_eps_apntype (CcWwanDataApn *apn);
+gboolean cc_wwan_data_apn_should_configure_initial_eps_bearer (CcWwanDataApn *apn);
 
-void cc_wwan_data_apn_set_initial_eps_apntype (CcWwanDataApn *apn,
-                                               guint         apntype);
+void cc_wwan_data_apn_set_should_configure_initial_eps_bearer (CcWwanDataApn *apn,
+                                                               gboolean       configure);
 
 G_END_DECLS
