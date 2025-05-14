@@ -64,6 +64,7 @@ struct _CcInputChooser
   GtkStack          *input_sources_stack;
   GtkListBoxRow     *more_row;
   GtkWidget         *no_results;
+  GtkSearchBar      *search_bar;
 
   GnomeXkbInfo      *xkb_info;
   GHashTable        *ibus_engines;
@@ -372,10 +373,6 @@ show_input_sources_for_locale (CcInputChooser *self,
   gtk_list_box_set_selection_mode (self->input_sources_listbox, GTK_SELECTION_SINGLE);
   gtk_list_box_set_activate_on_single_click (self->input_sources_listbox, FALSE);
   gtk_list_box_unselect_all (self->input_sources_listbox);
-
-  if (gtk_widget_is_visible (GTK_WIDGET (self->filter_entry)) &&
-      !gtk_widget_is_focus (GTK_WIDGET (self->filter_entry)))
-    gtk_widget_grab_focus (GTK_WIDGET (self->filter_entry));
 }
 
 static gboolean
@@ -423,9 +420,6 @@ show_locale_rows (CcInputChooser *self)
   gtk_list_box_set_selection_mode (self->input_sources_listbox, GTK_SELECTION_NONE);
   gtk_list_box_set_activate_on_single_click (self->input_sources_listbox, TRUE);
 
-  if (gtk_widget_is_visible (GTK_WIDGET (self->filter_entry)) &&
-      !gtk_widget_is_focus (GTK_WIDGET (self->filter_entry)))
-    gtk_widget_grab_focus (GTK_WIDGET (self->filter_entry));
 }
 
 static gint
@@ -594,9 +588,7 @@ strvs_differ (gchar **av,
 static void
 show_more (CcInputChooser *self)
 {
-  gtk_widget_set_visible (GTK_WIDGET (self->filter_entry), TRUE);
-
-  gtk_widget_grab_focus (GTK_WIDGET (self->filter_entry));
+  gtk_search_bar_set_search_mode (self->search_bar, TRUE);
 
   self->showing_extra = TRUE;
 
@@ -1128,6 +1120,7 @@ cc_input_chooser_class_init (CcInputChooserClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcInputChooser, filter_entry);
   gtk_widget_class_bind_template_child (widget_class, CcInputChooser, input_sources_listbox);
   gtk_widget_class_bind_template_child (widget_class, CcInputChooser, input_sources_stack);
+  gtk_widget_class_bind_template_child (widget_class, CcInputChooser, search_bar);
 
   gtk_widget_class_bind_template_callback (widget_class, on_input_sources_listbox_row_activated_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_input_sources_listbox_selected_rows_changed_cb);
@@ -1142,7 +1135,7 @@ cc_input_chooser_init (CcInputChooser *self)
 {
   gtk_widget_init_template (GTK_WIDGET (self));
 
-  gtk_search_entry_set_key_capture_widget (self->filter_entry, GTK_WIDGET (self));
+  gtk_search_bar_set_key_capture_widget (self->search_bar, GTK_WIDGET (self));
 }
 
 CcInputChooser *
