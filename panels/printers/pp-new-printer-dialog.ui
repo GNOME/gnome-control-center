@@ -206,12 +206,14 @@
                           <class name="toolbar"/>
                         </style>
                         <child>
-                          <object class="GtkSearchEntry" id="search_entry">
-                            <property name="has_tooltip">True</property>
-                            <property name="placeholder_text" translatable="yes" comments="Translators: The entered text should contain network address of a printer or a text which will filter found devices (their names and locations)">Enter a network address or search for a printer</property>
-                            <property name="margin_start">40</property>
-                            <property name="margin_end">40</property>
-                            <property name="hexpand">True</property>
+                          <object class="GtkSearchBar" id="search_bar">
+                            <property name="search-mode-enabled">True</property>
+                            <child>
+                              <object class="GtkSearchEntry" id="search_entry">
+                                <property name="placeholder-text" translatable="yes" comments="Translators: The entered text should contain network address of a printer or a text which will filter found devices (their names and locations)">Enter a network address or search for a printer</property>
+                                <property name="hexpand">True</property>
+                              </object>
+                            </child>
                           </object>
                         </child>
                       </object>
