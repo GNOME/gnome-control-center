@@ -59,21 +59,28 @@
               <object class="AdwToolbarView">
                 <!-- Language search -->
                 <child type="top">
-                  <object class="AdwClamp">
-                    <property name="tightening-threshold">240</property>
-                    <property name="maximum-size">480</property>
-                    <property name="child">
-                      <object class="GtkSearchEntry" id="region_filter_entry">
-                        <property name="hexpand">True</property>
-                        <property name="placeholder-text" translatable="yes">Search locales</property>
-                        <property name="margin-top">18</property>
-                        <property name="margin-bottom">18</property>
-                        <property name="margin-start">18</property>
-                        <property name="margin-end">18</property>
-                        <signal name="search-changed" handler="filter_changed" object="CcFormatChooser" swapped="yes" />
-                        <signal name="stop-search" handler="on_stop_search" object="CcFormatChooser" swapped="yes" />
+                  <object class="AdwBin">
+                    <style>
+                      <class name="toolbar"/>
+                    </style>
+                    <child>
+                      <object class="GtkSearchBar" id="search_bar">
+                        <property name="search-mode-enabled">True</property>
+                        <property name="child">
+                          <object class="AdwClamp">
+                            <property name="maximum-size">400</property>
+                            <child>
+                              <object class="GtkSearchEntry" id="region_filter_entry">
+                                <property name="hexpand">True</property>
+                                <property name="placeholder-text" translatable="yes">Search locales</property>
+                                <signal name="search-changed" handler="filter_changed" object="CcFormatChooser" swapped="yes" />
+                                <signal name="stop-search" handler="on_stop_search" object="CcFormatChooser" swapped="yes" />
+                              </object>
+                            </child>
+                          </object>
+                        </property>
                       </object>
-                    </property>
+                    </child>
                   </object>
                 </child>
 
