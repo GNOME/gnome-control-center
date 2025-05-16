@@ -87,6 +87,7 @@
                                 <child type="prefix">
                                   <object class="GtkCheckButton" id="maximize_charge_radio">
                                     <property name="valign">center</property>
+                                    <property name="can-focus">False</property>
                                   </object>
                                 </child>
                               </object>
@@ -102,6 +103,7 @@
                                 <child type="prefix">
                                   <object class="GtkCheckButton" id="preserve_battery_radio">
                                     <property name="valign">center</property>
+                                    <property name="can-focus">False</property>
                                     <property name="group">maximize_charge_radio</property>
                                     <signal name="notify::active" handler="battery_health_radio_changed_cb" object="CcPowerPanel" swapped="yes"/>
                                   </object>

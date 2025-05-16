@@ -25,6 +25,7 @@
                     <child>
                       <object class="GtkSwitch" id="hot_corner_switch">
                         <property name="valign">center</property>
+                        <property name="can-focus">False</property>
                       </object>
                     </child>
                   </object>
@@ -41,6 +42,7 @@
                     <child>
                       <object class="GtkSwitch" id="active_screen_edges_switch">
                         <property name="valign">center</property>
+                        <property name="can-focus">False</property>
                       </object>
                     </child>
                   </object>
@@ -63,6 +65,7 @@
                     <child type="prefix">
                       <object class="GtkCheckButton" id="dynamic_workspaces_radio">
                         <property name="valign">center</property>
+                        <property name="can-focus">False</property>
                       </object>
                     </child>
                   </object>
@@ -78,6 +81,7 @@
                     <child type="prefix">
                       <object class="GtkCheckButton" id="fixed_workspaces_radio">
                         <property name="valign">center</property>
+                        <property name="can-focus">False</property>
                         <property name="group">dynamic_workspaces_radio</property>
                         <signal name="toggled" handler="fixed_workspaces_changed_cb" object="CcMultitaskingPanel" swapped="yes"/>
                       </object>
@@ -113,6 +117,7 @@
                     <child type="prefix">
                       <object class="GtkCheckButton" id="workspaces_primary_display_radio">
                         <property name="valign">center</property>
+                        <property name="can-focus">False</property>
                       </object>
                     </child>
                   </object>
@@ -128,6 +133,7 @@
                     <child type="prefix">
                       <object class="GtkCheckButton" id="workspaces_span_displays_radio">
                         <property name="valign">center</property>
+                        <property name="can-focus">False</property>
                         <property name="group">workspaces_primary_display_radio</property>
                       </object>
                     </child>
@@ -151,6 +157,7 @@
                     <child type="prefix">
                       <object class="GtkCheckButton" id="all_workspaces_radio">
                         <property name="valign">center</property>
+                        <property name="can-focus">False</property>
                       </object>
                     </child>
                   </object>
@@ -165,6 +172,7 @@
                     <child type="prefix">
                       <object class="GtkCheckButton" id="current_workspace_radio">
                         <property name="valign">center</property>
+                        <property name="can-focus">False</property>
                         <property name="group">all_workspaces_radio</property>
                       </object>
                     </child>

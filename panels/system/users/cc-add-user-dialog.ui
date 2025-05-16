@@ -65,6 +65,7 @@
                             <child type="suffix">
                               <object class="GtkSwitch" id="account_type_switch">
                                 <property name="valign">center</property>
+                                <property name="can-focus">False</property>
                               </object>
                             </child>
                           </object>
@@ -110,6 +111,7 @@
                               <object class="GtkCheckButton" id="password_login_radio">
                                 <property name="valign">center</property>
                                 <property name="active">True</property>
+                                <property name="can-focus">False</property>
                               </object>
                             </child>
                           </object>
@@ -123,6 +125,7 @@
                               <object class="GtkCheckButton" id="password_radio">
                                 <property name="valign">center</property>
                                 <property name="use_underline">True</property>
+                                <property name="can-focus">False</property>
                                 <property name="group">password_login_radio</property>
                                 <signal name="toggled" handler="password_radio_changed_cb" object="CcAddUserDialog" swapped="yes"/>
                               </object>

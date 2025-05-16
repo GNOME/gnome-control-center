@@ -6,6 +6,7 @@
     <child type="suffix">
       <object class="GtkSwitch" id="device_off_switch">
         <property name="valign">center</property>
+        <property name="can-focus">False</property>
         <signal name="notify::active" handler="device_off_toggled" object="NetVpn" swapped="yes"/>
       </object>
     </child>
