@@ -32,7 +32,7 @@
 
 struct _CcDisplaySettings
 {
-  GtkBox            object;
+  AdwPreferencesPage object;
 
   CcDisplayPanel   *panel;
 
@@ -50,8 +50,6 @@ struct _CcDisplaySettings
   GListStore       *resolution_list;
   GListModel       *scale_list;
 
-  GtkWidget        *enabled_listbox;
-  AdwSwitchRow     *enabled_row;
   GtkWidget        *orientation_row;
   GtkWidget        *refresh_rate_row;
   AdwExpanderRow   *refresh_rate_expander_row;
@@ -67,6 +65,8 @@ struct _CcDisplaySettings
   GtkScale         *luminance_scale;
   GtkAdjustment    *luminance_scale_adjustment;
   AdwSwitchRow     *underscanning_row;
+
+  AdwComboRow      *use_as_row;
 };
 
 typedef struct _CcDisplaySettings CcDisplaySettings;
@@ -79,7 +79,7 @@ enum {
   PROP_LAST
 };
 
-G_DEFINE_TYPE (CcDisplaySettings, cc_display_settings, GTK_TYPE_BOX)
+G_DEFINE_TYPE (CcDisplaySettings, cc_display_settings, ADW_TYPE_PREFERENCES_PAGE)
 
 static GParamSpec *props[PROP_LAST];
 
@@ -430,7 +430,7 @@ cc_display_settings_rebuild_ui (CcDisplaySettings *self)
 
   if (!self->config || !self->selected_output)
     {
-      gtk_widget_set_visible (self->enabled_listbox, FALSE);
+      gtk_widget_set_visible (GTK_WIDGET (self->use_as_row), FALSE);
       gtk_widget_set_visible (self->orientation_row, FALSE);
       gtk_widget_set_visible (self->refresh_rate_row, FALSE);
       gtk_widget_set_visible (GTK_WIDGET (self->refresh_rate_expander_row), FALSE);
@@ -444,7 +444,7 @@ cc_display_settings_rebuild_ui (CcDisplaySettings *self)
       return G_SOURCE_REMOVE;
     }
 
-  g_object_freeze_notify ((GObject*) self->enabled_row);
+  g_object_freeze_notify ((GObject*) self->use_as_row);
   g_object_freeze_notify ((GObject*) self->orientation_row);
   g_object_freeze_notify ((GObject*) self->refresh_rate_row);
   g_object_freeze_notify ((GObject*) self->refresh_rate_expander_row);
@@ -470,11 +470,12 @@ cc_display_settings_rebuild_ui (CcDisplaySettings *self)
     current_mode = CC_DISPLAY_MODE (modes->data);
   }
 
-  /* Enabled Switch */
-  adw_preferences_row_set_title (ADW_PREFERENCES_ROW (self->enabled_row),
-                                 cc_display_monitor_get_ui_name (self->selected_output));
-  adw_switch_row_set_active (self->enabled_row,
-                             cc_display_monitor_is_active (self->selected_output));
+  if (cc_display_monitor_is_primary (self->selected_output))
+    adw_combo_row_set_selected (self->use_as_row, 0);
+  else if (!cc_display_monitor_is_active (self->selected_output))
+    adw_combo_row_set_selected (self->use_as_row, 2);
+  else
+    adw_combo_row_set_selected (self->use_as_row, 1);
 
   if (should_show_rotation (self))
     {
@@ -736,7 +737,7 @@ cc_display_settings_rebuild_ui (CcDisplaySettings *self)
                              cc_display_monitor_get_underscanning (self->selected_output));
 
   self->updating = TRUE;
-  g_object_thaw_notify ((GObject*) self->enabled_row);
+  g_object_thaw_notify ((GObject*) self->use_as_row);
   g_object_thaw_notify ((GObject*) self->orientation_row);
   g_object_thaw_notify ((GObject*) self->refresh_rate_row);
   g_object_thaw_notify ((GObject*) self->refresh_rate_expander_row);
@@ -765,18 +766,6 @@ on_output_changed_cb (CcDisplaySettings *self,
     return;
 
   self->idle_udpate_id = g_idle_add ((GSourceFunc) cc_display_settings_rebuild_ui, self);
-}
-
-static void
-on_enabled_row_active_changed_cb (CcDisplaySettings *self)
-{
-  if (self->updating)
-    return;
-
-  cc_display_monitor_set_active (self->selected_output,
-                                 adw_switch_row_get_active (self->enabled_row));
-
-  g_signal_emit_by_name (G_OBJECT (self), "updated", self->selected_output);
 }
 
 static void
@@ -938,6 +927,30 @@ on_underscanning_row_active_changed_cb (CcDisplaySettings *self)
 }
 
 static void
+on_use_as_selected_item_changed_cb (CcDisplaySettings *self)
+{
+  guint idx = adw_combo_row_get_selected (self->use_as_row);
+
+  if (idx == 0) {
+    if (cc_display_monitor_is_primary (self->selected_output))
+      return;
+
+    cc_display_monitor_set_active (self->selected_output, TRUE);
+    cc_display_monitor_set_primary (self->selected_output, TRUE);
+  } else if (idx == 1) {
+    cc_display_monitor_set_active (self->selected_output, TRUE);
+    cc_display_monitor_set_primary (self->selected_output, FALSE);
+  } else {
+    if (self->updating)
+      return;
+
+    cc_display_monitor_set_active (self->selected_output, FALSE);
+  }
+
+  g_signal_emit_by_name (G_OBJECT (self), "updated", self->selected_output);
+}
+
+static void
 cc_display_settings_get_property (GObject    *object,
                                   guint       prop_id,
                                   GValue     *value,
@@ -1048,8 +1061,6 @@ cc_display_settings_class_init (CcDisplaySettingsClass *klass)
                 0, NULL, NULL, NULL,
                 G_TYPE_NONE, 1, CC_TYPE_DISPLAY_MONITOR);
 
-  gtk_widget_class_bind_template_child (widget_class, CcDisplaySettings, enabled_listbox);
-  gtk_widget_class_bind_template_child (widget_class, CcDisplaySettings, enabled_row);
   gtk_widget_class_bind_template_child (widget_class, CcDisplaySettings, orientation_row);
   gtk_widget_class_bind_template_child (widget_class, CcDisplaySettings, refresh_rate_row);
   gtk_widget_class_bind_template_child (widget_class, CcDisplaySettings, refresh_rate_expander_row);
@@ -1065,8 +1076,8 @@ cc_display_settings_class_init (CcDisplaySettingsClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcDisplaySettings, luminance_scale);
   gtk_widget_class_bind_template_child (widget_class, CcDisplaySettings, luminance_scale_adjustment);
   gtk_widget_class_bind_template_child (widget_class, CcDisplaySettings, underscanning_row);
+  gtk_widget_class_bind_template_child (widget_class, CcDisplaySettings, use_as_row);
 
-  gtk_widget_class_bind_template_callback (widget_class, on_enabled_row_active_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_orientation_selection_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_refresh_rate_selection_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_variable_refresh_rate_active_changed_cb);
@@ -1074,6 +1085,7 @@ cc_display_settings_class_init (CcDisplaySettingsClass *klass)
   gtk_widget_class_bind_template_callback (widget_class, on_scale_selection_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_scale_btn_active_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_hdr_row_active_changed_cb);
+  gtk_widget_class_bind_template_callback (widget_class, on_use_as_selected_item_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_underscanning_row_active_changed_cb);
 }
 
@@ -1243,8 +1255,5 @@ void
 cc_display_settings_set_multimonitor (CcDisplaySettings *self,
                                       gboolean           multimonitor)
 {
-  gtk_widget_set_visible (self->enabled_listbox, multimonitor);
-
-  if (!multimonitor)
-    adw_switch_row_set_active (self->enabled_row, TRUE);
+  gtk_widget_set_visible (GTK_WIDGET (self->use_as_row), multimonitor);
 }

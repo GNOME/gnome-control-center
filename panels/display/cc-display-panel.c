@@ -87,22 +87,17 @@ struct _CcDisplayPanel
   GtkWidget      *cancel_button;
   gboolean        showing_apply_titlebar;
 
-  GListStore     *primary_display_list;
   GList          *monitor_rows;
 
-  GtkWidget      *display_settings_disabled_group;
+  AdwNavigationPage *display_settings_disabled_page;
 
-  GtkWidget      *arrangement_row;
-  AdwBin         *arrangement_bin;
+  GtkWidget      *arrangement_button;
+  AdwDialog      *display_arrangement_dialog;
+  AdwPreferencesGroup *arrangement_group;
   AdwToggleGroup *display_config_type;
-  GtkWidget      *display_multiple_displays;
-  AdwBin         *display_settings_bin;
   GtkWidget      *display_settings_group;
-  AdwNavigationPage *display_settings_page;
-  AdwComboRow    *primary_display_row;
-  AdwPreferencesGroup *single_display_settings_group;
+  GtkBox *display_settings_box;
   AdwToastOverlay *toast_overlay;
-  AdwToastOverlay *display_settings_page_toast_overlay;
 
   GtkShortcut *escape_shortcut;
 
@@ -498,24 +493,6 @@ on_config_type_toggled_cb (CcDisplayPanel *self)
 }
 
 static void
-on_primary_display_selected_item_changed_cb (CcDisplayPanel *self)
-{
-  gint idx = adw_combo_row_get_selected (self->primary_display_row);
-  g_autoptr(CcDisplayMonitor) output = NULL;
-
-  if (idx < 0 || self->rebuilding_counter > 0)
-    return;
-
-  output = g_list_model_get_item (G_LIST_MODEL (self->primary_display_list), idx);
-
-  if (cc_display_monitor_is_primary (output))
-    return;
-
-  cc_display_monitor_set_primary (output, TRUE);
-  update_apply_button (self);
-}
-
-static void
 on_toplevel_collapsed (CcDisplayPanel *self, GParamSpec *pspec, GtkWidget *toplevel)
 {
   gboolean collapsed;
@@ -585,26 +562,21 @@ cc_display_panel_class_init (CcDisplayPanelClass *klass)
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/display/cc-display-panel.ui");
 
-  gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, display_settings_disabled_group);
-  gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, arrangement_bin);
-  gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, arrangement_row);
+  gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, display_settings_disabled_page);
+  gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, arrangement_group);
+  gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, arrangement_button);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, cancel_button);
-  gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, display_multiple_displays);
+  gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, display_arrangement_dialog);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, display_config_type);
-  gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, display_settings_bin);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, display_settings_group);
-  gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, display_settings_page);
+  gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, display_settings_box);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, escape_shortcut);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, night_light_page);
-  gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, primary_display_row);
-  gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, single_display_settings_group);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, toast_overlay);
-  gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, display_settings_page_toast_overlay);
 
   gtk_widget_class_bind_template_callback (widget_class, apply_current_configuration);
   gtk_widget_class_bind_template_callback (widget_class, cancel_current_configuration);
   gtk_widget_class_bind_template_callback (widget_class, on_config_type_toggled_cb);
-  gtk_widget_class_bind_template_callback (widget_class, on_primary_display_selected_item_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_screen_changed);
   gtk_widget_class_bind_template_callback (widget_class, on_toplevel_escape_pressed_cb);
 }
@@ -631,8 +603,8 @@ set_current_output (CcDisplayPanel   *self,
       cc_display_settings_set_selected_output (self->settings, self->current_output);
       cc_display_arrangement_set_selected_output (self->arrangement, self->current_output);
 
-      adw_navigation_page_set_title (self->display_settings_page,
-                                     output ? cc_display_monitor_get_ui_name (output) : "");
+      //adw_navigation_page_set_title (self->display_settings_box,
+        //                             output ? cc_display_monitor_get_ui_name (output) : "");
     }
 
   self->rebuilding_counter--;
@@ -647,7 +619,8 @@ on_monitor_row_activated_cb (CcDisplayPanel *self,
   monitor = g_object_get_data (G_OBJECT (row), "monitor");
   set_current_output (self, monitor, FALSE);
 
-  cc_panel_push_subpage (CC_PANEL (self), self->display_settings_page);
+  //cc_panel_push_subpage (CC_PANEL (self), self->display_settings_box);
+  // Toggle gtk_stack_set_visible_child_name ()
 }
 
 static void
@@ -683,41 +656,6 @@ add_display_row (CcDisplayPanel   *self,
 }
 
 static void
-move_display_settings_to_main_page (CcDisplayPanel *self)
-{
-  GtkWidget *parent = gtk_widget_get_parent (GTK_WIDGET (self->settings));
-
-  if (parent != GTK_WIDGET (self->display_settings_bin))
-    return;
-
-  g_object_ref (self->settings);
-  adw_bin_set_child (self->display_settings_bin, NULL);
-  adw_preferences_group_add (self->single_display_settings_group,
-                             GTK_WIDGET (self->settings));
-  g_object_unref (self->settings);
-
-  gtk_widget_set_visible (GTK_WIDGET (self->single_display_settings_group), TRUE);
-}
-
-static void
-move_display_settings_to_separate_page (CcDisplayPanel *self)
-{
-  GtkWidget *parent = gtk_widget_get_parent (GTK_WIDGET (self->settings));
-
-  if (parent == GTK_WIDGET (self->display_settings_bin))
-    return;
-
-  g_object_ref (self->settings);
-  adw_preferences_group_remove (self->single_display_settings_group,
-                                GTK_WIDGET (self->settings));
-  adw_bin_set_child (self->display_settings_bin,
-                     GTK_WIDGET (self->settings));
-  g_object_unref (self->settings);
-
-  gtk_widget_set_visible (GTK_WIDGET (self->single_display_settings_group), FALSE);
-}
-
-static void
 rebuild_ui (CcDisplayPanel *self)
 {
   guint n_active_outputs, n_usable_outputs;
@@ -726,15 +664,11 @@ rebuild_ui (CcDisplayPanel *self)
 
   if (!cc_display_config_manager_get_apply_allowed (self->manager))
     {
-      gtk_widget_set_visible (self->display_settings_disabled_group, TRUE);
-      gtk_widget_set_visible (self->display_settings_group, FALSE);
-      gtk_widget_set_visible (self->arrangement_row, FALSE);
+      cc_panel_push_subpage (CC_PANEL (self), self->display_settings_disabled_page);
       return;
     }
 
   self->rebuilding_counter++;
-
-  g_list_store_remove_all (self->primary_display_list);
 
   /* Remove all monitor rows */
   while (self->monitor_rows)
@@ -749,8 +683,6 @@ rebuild_ui (CcDisplayPanel *self)
       self->rebuilding_counter--;
       return;
     }
-
-  gtk_widget_set_visible (self->display_settings_disabled_group, FALSE);
 
   n_active_outputs = 0;
   n_usable_outputs = 0;
@@ -767,11 +699,6 @@ rebuild_ui (CcDisplayPanel *self)
       if (cc_display_monitor_is_active (output))
         {
           n_active_outputs += 1;
-
-          g_list_store_append (self->primary_display_list, output);
-          if (cc_display_monitor_is_primary (output))
-            adw_combo_row_set_selected (self->primary_display_row,
-                                        g_list_model_get_n_items (G_LIST_MODEL (self->primary_display_list)) - 1);
 
           /* Ensure that an output is selected; note that this doesn't ensure
            * the selected output is any useful (i.e. when switching types).
@@ -794,23 +721,25 @@ rebuild_ui (CcDisplayPanel *self)
         type = CC_DISPLAY_CONFIG_JOIN;
 
       gtk_widget_set_visible (self->display_settings_group, type == CC_DISPLAY_CONFIG_JOIN);
-      gtk_widget_set_visible (self->display_multiple_displays, TRUE);
-      gtk_widget_set_visible (self->arrangement_row, type == CC_DISPLAY_CONFIG_JOIN);
+      //gtk_widget_set_visible (self->display_multiple_displays, TRUE);
+      gtk_widget_set_visible (self->arrangement_button, type == CC_DISPLAY_CONFIG_JOIN);
 
+        /*
       if (type == CC_DISPLAY_CONFIG_CLONE)
         move_display_settings_to_main_page (self);
       else
         move_display_settings_to_separate_page (self);
+         */
     }
   else
     {
       type = CC_DISPLAY_CONFIG_JOIN;
 
       gtk_widget_set_visible (self->display_settings_group, FALSE);
-      gtk_widget_set_visible (self->display_multiple_displays, FALSE);
-      gtk_widget_set_visible (self->arrangement_row, FALSE);
+      //gtk_widget_set_visible (self->display_multiple_displays, FALSE);
+      gtk_widget_set_visible (self->arrangement_button, FALSE);
 
-      move_display_settings_to_main_page (self);
+      //move_display_settings_to_main_page (self);
     }
 
   cc_display_settings_set_multimonitor (self->settings,
@@ -856,8 +785,6 @@ reset_current_config (CcDisplayPanel *self)
                            G_CONNECT_SWAPPED);
   update_panel_orientation_managed (self,
                                     cc_display_config_get_panel_orientation_managed (current));
-
-  g_list_store_remove_all (self->primary_display_list);
 
   if (self->current_config)
     {
@@ -907,11 +834,7 @@ show_apply_buttons (CcDisplayPanel *self, gboolean is_applicable)
   if (!is_applicable)
     {
       AdwToast *toast = adw_toast_new (_("Changes Cannot be Applied: This could be due to hardware limitations."));
-
-      if (cc_panel_get_visible_subpage (CC_PANEL (self)) == self->display_settings_page)
-        adw_toast_overlay_add_toast (self->display_settings_page_toast_overlay, toast);
-      else
-        adw_toast_overlay_add_toast (self->toast_overlay, toast);
+      adw_toast_overlay_add_toast (self->toast_overlay, toast);
     }
 
   self->showing_apply_titlebar = is_applicable;
@@ -1059,7 +982,7 @@ cc_display_panel_init (CcDisplayPanel *self)
 
   self->arrangement = cc_display_arrangement_new (NULL);
   gtk_widget_set_size_request (GTK_WIDGET (self->arrangement), -1, 175);
-  adw_bin_set_child (self->arrangement_bin, GTK_WIDGET (self->arrangement));
+  adw_preferences_group_add (self->arrangement_group, GTK_WIDGET (self->arrangement));
 
   g_signal_connect_object (self->arrangement, "updated",
 			   G_CALLBACK (update_apply_button), self,
@@ -1069,20 +992,10 @@ cc_display_panel_init (CcDisplayPanel *self)
 			   G_CONNECT_SWAPPED);
 
   self->settings = cc_display_settings_new (self);
-  adw_bin_set_child (self->display_settings_bin, GTK_WIDGET (self->settings));
+  gtk_box_append (self->display_settings_box, GTK_WIDGET (self->settings));
   g_signal_connect_object (self->settings, "updated",
                            G_CALLBACK (on_monitor_settings_updated_cb), self,
                            G_CONNECT_SWAPPED);
-
-  self->primary_display_list = g_list_store_new (CC_TYPE_DISPLAY_MONITOR);
-
-  expression = gtk_cclosure_expression_new (G_TYPE_STRING,
-                                            NULL, 0, NULL,
-                                            G_CALLBACK (cc_display_monitor_dup_ui_number_name),
-                                            self, NULL);
-  adw_combo_row_set_expression (self->primary_display_row, expression);
-  adw_combo_row_set_model (self->primary_display_row,
-                           G_LIST_MODEL (self->primary_display_list));
 
   self->up_client = up_client_new ();
   if (up_client_get_lid_is_present (self->up_client))

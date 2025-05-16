@@ -28,7 +28,7 @@ G_BEGIN_DECLS
 typedef struct _CcDisplayPanel CcDisplayPanel;
 
 #define CC_TYPE_DISPLAY_SETTINGS (cc_display_settings_get_type ())
-G_DECLARE_FINAL_TYPE (CcDisplaySettings, cc_display_settings, CC, DISPLAY_SETTINGS, GtkBox);
+G_DECLARE_FINAL_TYPE (CcDisplaySettings, cc_display_settings, CC, DISPLAY_SETTINGS, AdwPreferencesPage);
 
 CcDisplaySettings*  cc_display_settings_new                 (CcDisplayPanel *panel);
 
