@@ -83,10 +83,13 @@
                     <child>
                       <object class="AdwActionRow" id="config_type_switcher_row">
                         <property name="title" translatable="yes">Multiple Displays</property>
+                        <property name="activatable-widget">display_config_type</property>
                         <child type="suffix">
                           <object class="AdwToggleGroup" id="display_config_type">
                             <property name="valign">center</property>
                             <property name="homogeneous">True</property>
+                            <property name="can-focus">False</property>
+                            <signal name="mnemonic-activate" handler="on_config_type_group_activated_cb"/>
                             <signal name="notify::active" handler="on_config_type_toggled_cb" object="CcDisplayPanel" swapped="yes"/>
                             <child>
                               <object class="AdwToggle">

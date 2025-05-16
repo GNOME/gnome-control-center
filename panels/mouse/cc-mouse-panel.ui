@@ -69,11 +69,14 @@
                               <object class="AdwActionRow" id="primary_button_row">
                                 <property name="title" translatable="yes">Primary Button</property>
                                 <property name="subtitle" translatable="yes">Order of physical buttons on mice and touchpads</property>
+                                <property name="activatable-widget">primary_toggle_group</property>
                                 <child>
                                   <object class="AdwToggleGroup" id="primary_toggle_group">
                                     <property name="valign">center</property>
                                     <property name="homogeneous">True</property>
+                                    <property name="can-focus">False</property>
                                     <signal name="notify::active" handler="on_primary_button_changed_cb" object="CcMousePanel" swapped="yes"/>
+                                    <signal name="mnemonic-activate" handler="on_primary_toggle_group_activated_cb"/>
                                     <child>
                                       <object class="AdwToggle">
                                         <property name="name">left</property>

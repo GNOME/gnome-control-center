@@ -25,6 +25,7 @@
 #include "cc-time-editor.h"
 #include "cc-datetime-page.h"
 #include "cc-permission-infobar.h"
+#include "cc-ui-util.h"
 
 #include <langinfo.h>
 #include <sys/time.h>
@@ -687,6 +688,13 @@ list_box_row_activated (CcDateTimePage *self,
     }
 }
 
+static gboolean
+on_time_format_toggle_group_activated_cb (AdwToggleGroup *toggle_group)
+{
+  cc_util_toggle_group_activate_next (toggle_group);
+  return GDK_EVENT_STOP;
+}
+
 static void
 time_changed_cb (CcDateTimePage *self,
                  CcTimeEditor   *editor)
@@ -838,6 +846,7 @@ cc_date_time_page_class_init (CcDateTimePageClass *klass)
 
   gtk_widget_class_bind_template_callback (widget_class, panel_tz_selection_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, list_box_row_activated);
+  gtk_widget_class_bind_template_callback (widget_class, on_time_format_toggle_group_activated_cb);
   gtk_widget_class_bind_template_callback (widget_class, change_clock_settings_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_date_box_row_activated_cb);
 

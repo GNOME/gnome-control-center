@@ -21,8 +21,10 @@
 #pragma once
 
 #include <gtk/gtk.h>
+#include <adwaita.h>
 
 gboolean cc_util_keynav_propagate_vertical (GtkWidget        *self,
                                             GtkDirectionType  direction);
 gboolean cc_util_keynav_propagate_up (GtkWidget        *self,
                                       GtkDirectionType  direction);
+void cc_util_toggle_group_activate_next (AdwToggleGroup *toggle_group);

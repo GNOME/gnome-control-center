@@ -25,10 +25,13 @@
           <object class="AdwActionRow" id="tablet_button_location_row">
             <property name="title" translatable="yes">Button Location</property>
             <property name="subtitle" translatable="yes">The location of the physical buttons on the tablet</property>
+            <property name="activatable-widget">tablet_button_location_group</property>
             <child>
               <object class="AdwToggleGroup" id="tablet_button_location_group">
                 <property name="valign">center</property>
                 <property name="homogeneous">True</property>
+                <property name="can-focus">False</property>
+                <signal name="mnemonic-activate" handler="on_tablet_button_location_group_activated_cb"/>
                 <signal name="notify::active" handler="on_tablet_button_location_changed" object="CcWacomPage" swapped="yes"/>
                 <child>
                   <object class="AdwToggle">

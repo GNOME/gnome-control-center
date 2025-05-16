@@ -44,6 +44,7 @@
 #include "gsd-enums.h"
 #include "calibrator-gui.h"
 #include "gsd-input-helper.h"
+#include "cc-ui-util.h"
 #include "panels/display/cc-display-config-manager-dbus.h"
 
 #include <string.h>
@@ -563,6 +564,13 @@ static void
 on_tablet_button_location_changed (CcWacomPage *page,
 				   gchar       *key);
 
+static gboolean
+on_tablet_button_location_group_activated_cb (AdwToggleGroup *toggle_group)
+{
+	cc_util_toggle_group_activate_next (toggle_group);
+	return GDK_EVENT_STOP;
+}
+
 static void
 cc_wacom_page_class_init (CcWacomPageClass *klass)
 {
@@ -595,6 +603,7 @@ cc_wacom_page_class_init (CcWacomPageClass *klass)
 	gtk_widget_class_bind_template_callback (widget_class, on_calibrate_activated);
 	gtk_widget_class_bind_template_callback (widget_class, on_display_selected);
 	gtk_widget_class_bind_template_callback (widget_class, on_tablet_button_location_changed);
+	gtk_widget_class_bind_template_callback (widget_class, on_tablet_button_location_group_activated_cb);
 }
 
 static void

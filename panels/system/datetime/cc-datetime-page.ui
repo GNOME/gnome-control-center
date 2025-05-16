@@ -166,10 +166,13 @@
                       <object class="AdwActionRow">
                         <property name="title" translatable="yes">Time _Format</property>
                         <property name="use_underline">True</property>
+                        <property name="activatable-widget">time_format_toggle_group</property>
                         <child type="suffix">
                           <object class="AdwToggleGroup" id="time_format_toggle_group">
                             <property name="valign">center</property>
                             <property name="homogeneous">True</property>
+                            <property name="can-focus">False</property>
+                            <signal name="mnemonic-activate" handler="on_time_format_toggle_group_activated_cb"/>
                             <signal name="notify::active" handler="change_clock_settings_cb" object="CcDateTimePage" swapped="yes"/>
                             <child>
                               <object class="AdwToggle">

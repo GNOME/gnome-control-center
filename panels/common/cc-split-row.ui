@@ -54,6 +54,7 @@
             <child>
               <object class="GtkCheckButton" id="default_option_checkbutton">
                 <property name="margin-start">6</property>
+                <property name="can-focus">False</property>
                 <property name="group">alternative_option_checkbutton</property>
                 <signal name="toggled" handler="on_checkbutton_toggled_cb" object="CcSplitRow" swapped="yes"/>
                 <property name="child">
@@ -145,6 +146,7 @@
             <child>
               <object class="GtkCheckButton" id="alternative_option_checkbutton">
                 <property name="margin-start">6</property>
+                <property name="can-focus">False</property>
                 <signal name="toggled" handler="on_checkbutton_toggled_cb" object="CcSplitRow" swapped="yes"/>
                 <property name="child">
                   <object class="GtkBox">

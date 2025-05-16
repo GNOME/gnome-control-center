@@ -55,3 +55,23 @@ cc_util_keynav_propagate_up (GtkWidget        *self,
     return FALSE;
   }
 }
+
+/* Activates the next toggle in a AdwToggleGroup. If current active
+ * AdwToggle is in invalid position or is at last position then the
+ * next toggle activated will be the first one i.e. circles back */
+void
+cc_util_toggle_group_activate_next (AdwToggleGroup *toggle_group)
+{
+  guint active_toggle;
+  active_toggle = adw_toggle_group_get_active (toggle_group);
+
+  if (active_toggle == GTK_INVALID_LIST_POSITION) {
+    adw_toggle_group_set_active (toggle_group, 0);
+  } else {
+    active_toggle++;
+    if (active_toggle >= adw_toggle_group_get_n_toggles (toggle_group)) {
+      active_toggle = 0;
+    }
+    adw_toggle_group_set_active (toggle_group, active_toggle);
+  }
+}

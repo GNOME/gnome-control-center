@@ -34,6 +34,7 @@
 #include "cc-mouse-test.h"
 #include "gsd-device-manager.h"
 #include "gsd-input-helper.h"
+#include "cc-ui-util.h"
 
 struct _CcMousePanel
 {
@@ -106,6 +107,13 @@ on_primary_button_changed_cb (CcMousePanel *self)
     g_settings_set_boolean (self->mouse_settings, "left-handed", FALSE);
   else
     g_settings_set_boolean (self->mouse_settings, "left-handed", TRUE);
+}
+
+static gboolean
+on_primary_toggle_group_activated_cb (AdwToggleGroup *toggle_group)
+{
+  cc_util_toggle_group_activate_next (toggle_group);
+  return GDK_EVENT_STOP;
 }
 
 static void
@@ -443,6 +451,7 @@ cc_mouse_panel_class_init (CcMousePanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcMousePanel, two_finger_push_row);
 
   gtk_widget_class_bind_template_callback (widget_class, on_primary_button_changed_cb);
+  gtk_widget_class_bind_template_callback (widget_class, on_primary_toggle_group_activated_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_touchpad_scroll_method_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, primary_toggle_right_click_pressed_cb);
   gtk_widget_class_bind_template_callback (widget_class, test_button_row_activated_cb);

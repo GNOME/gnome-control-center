@@ -36,6 +36,7 @@
 #include "cc-night-light-page.h"
 #include "cc-display-resources.h"
 #include "cc-display-settings.h"
+#include "cc-ui-util.h"
 
 /* The minimum supported size for the panel
  * Note that WIDTH is assumed to be the larger size and we accept portrait
@@ -498,6 +499,13 @@ on_config_type_toggled_cb (CcDisplayPanel *self)
   config_ensure_of_type (self, type);
 }
 
+static gboolean
+on_config_type_group_activated_cb (AdwToggleGroup *toggle_group)
+{
+  cc_util_toggle_group_activate_next (toggle_group);
+  return GDK_EVENT_STOP;
+}
+
 static void
 on_night_light_enabled_changed_cb (CcDisplayPanel *self)
 {
@@ -615,6 +623,7 @@ cc_display_panel_class_init (CcDisplayPanelClass *klass)
   gtk_widget_class_bind_template_callback (widget_class, apply_current_configuration);
   gtk_widget_class_bind_template_callback (widget_class, cancel_current_configuration);
   gtk_widget_class_bind_template_callback (widget_class, on_config_type_toggled_cb);
+  gtk_widget_class_bind_template_callback (widget_class, on_config_type_group_activated_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_primary_display_selected_item_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_screen_changed);
   gtk_widget_class_bind_template_callback (widget_class, on_toplevel_escape_pressed_cb);
