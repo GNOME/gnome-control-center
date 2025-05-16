@@ -109,6 +109,16 @@ on_checkbutton_toggled_cb (CcSplitRow *self)
 }
 
 static void
+on_splitrow_activate_cb (CcSplitRow *self)
+{
+  if (gtk_check_button_get_active (self->default_option_checkbutton)) {
+    gtk_check_button_set_active (self->alternative_option_checkbutton, TRUE);
+  } else {
+    gtk_check_button_set_active (self->default_option_checkbutton, TRUE);
+  }
+}
+
+static void
 cc_split_row_dispose (GObject *object)
 {
   CcSplitRow *self = CC_SPLIT_ROW (object);
@@ -276,6 +286,7 @@ cc_split_row_class_init (CcSplitRowClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcSplitRow, default_option_mask);
 
   gtk_widget_class_bind_template_callback (widget_class, on_checkbutton_toggled_cb);
+  gtk_widget_class_bind_template_callback (widget_class, on_splitrow_activate_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_option_focus_enter_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_option_focus_leave_cb);
 }

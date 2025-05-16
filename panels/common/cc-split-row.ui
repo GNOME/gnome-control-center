@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <template class="CcSplitRow" parent="CcContentRow">
+    <signal name="activate" handler="on_splitrow_activate_cb" object="CcSplitRow" swapped="yes"/>
     <child type="content">
       <object class="GtkBox" id="box">
         <property name="hexpand">True</property>
