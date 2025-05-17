@@ -69,6 +69,12 @@ crop_dialog_response (CcAvatarChooser *self,
         }
 
         pb = cc_crop_area_create_pixbuf (CC_CROP_AREA (self->crop_area));
+        if (!pb) {
+                g_warning ("Crop operation failed");
+                self->crop_area = NULL;
+                gtk_window_destroy (GTK_WINDOW (dialog));
+                return;
+        }
         pb2 = gdk_pixbuf_scale_simple (pb, AVATAR_PIXEL_SIZE, AVATAR_PIXEL_SIZE, GDK_INTERP_BILINEAR);
         texture = gdk_texture_new_for_pixbuf (pb2);
 
