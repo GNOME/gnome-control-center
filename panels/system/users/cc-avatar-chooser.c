@@ -73,8 +73,6 @@ crop_dialog_response (CcAvatarChooser *self,
 
         self->crop_area = NULL;
         gtk_window_destroy (GTK_WINDOW (dialog));
-
-        gtk_popover_popdown (GTK_POPOVER (self));
 }
 
 static void
