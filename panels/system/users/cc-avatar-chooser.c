@@ -51,6 +51,21 @@ struct _CcAvatarChooser {
 G_DEFINE_TYPE (CcAvatarChooser, cc_avatar_chooser, GTK_TYPE_POPOVER)
 
 static void
+show_message_dialog (const char *primary,
+                     const char *secondary,
+                     GtkWidget  *parent)
+{
+        AdwDialog *dialog;
+
+        dialog = adw_alert_dialog_new (primary, secondary);
+
+        adw_alert_dialog_add_response (ADW_ALERT_DIALOG (dialog), "close",  _("Close"));
+        adw_alert_dialog_set_default_response (ADW_ALERT_DIALOG (dialog), "close");
+
+        adw_dialog_present (dialog, parent);
+}
+
+static void
 crop_dialog_response (CcAvatarChooser *self,
                       gint             response_id,
                       GtkWidget       *dialog)
@@ -66,6 +81,12 @@ crop_dialog_response (CcAvatarChooser *self,
         }
 
         pb = cc_crop_area_create_pixbuf (CC_CROP_AREA (self->crop_area));
+        if (!pb) {
+                show_message_dialog (NULL, _("Crop operation failed"), GTK_WIDGET (self));
+                self->crop_area = NULL;
+                gtk_window_destroy (GTK_WINDOW (dialog));
+                return;
+        }
         pb2 = gdk_pixbuf_scale_simple (pb, AVATAR_PIXEL_SIZE, AVATAR_PIXEL_SIZE, GDK_INTERP_BILINEAR);
         texture = gdk_texture_new_for_pixbuf (pb2);
 
