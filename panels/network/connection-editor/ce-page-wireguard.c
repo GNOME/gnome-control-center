@@ -110,13 +110,22 @@ static void
 ui_to_setting (CEPageWireguard *self,
                GError **error)
 {
+        static guint signal_id;
         // Transform UI values to NM_SETTING
         NMSettingSecretFlags secret_flags;
 
         // Ensure that the spin boxes are updated
+        // We need to block CEPage "changed" signal because
+        // gtk_spin_button_update() will trigger it which
+        // calls this same function and can end up in infinite loop
+        if (signal_id == 0)
+                signal_id = g_signal_lookup ("changed", CE_TYPE_PAGE);
+
+        g_signal_handlers_block_matched (self, G_SIGNAL_MATCH_ID, signal_id, 0, NULL, NULL, NULL);
         gtk_spin_button_update (self->spin_listen_port);
         gtk_spin_button_update (self->spin_fwmark);
         gtk_spin_button_update (self->spin_mtu);
+        g_signal_handlers_unblock_matched (self, G_SIGNAL_MATCH_ID, signal_id, 0, NULL, NULL, NULL);
 
         // Update peers
         GtkWidget *widget;
