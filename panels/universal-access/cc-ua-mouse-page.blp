@@ -1,0 +1,142 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CcUaMousePage: Adw.NavigationPage {
+  title: _("Pointing & Clicking");
+  tag: "mouse";
+
+  child: Adw.ToolbarView {
+    [top]
+    Adw.HeaderBar {}
+
+    content: Adw.PreferencesPage {
+      Adw.PreferencesGroup {
+        Adw.SwitchRow mouse_keys_row {
+          title: _("_Mouse Keys");
+          subtitle: _("Use numeric keypad to move your mouse pointer");
+          use-underline: true;
+        }
+
+        Adw.SwitchRow locate_pointer_row {
+          title: _("_Locate Pointer");
+          subtitle: _("Reveal pointer location by pressing Left Ctrl");
+          use-underline: true;
+        }
+
+        Adw.SwitchRow focus_windows_on_hover_row {
+          title: _("_Activate Windows on Hover");
+          subtitle: _("Place the pointer over a window to activate it");
+          use-underline: true;
+        }
+
+        Adw.ActionRow {
+          title: _("_Double-Click Delay");
+          use-underline: true;
+
+          [suffix]
+          Scale double_click_delay_scale {
+            hexpand: true;
+
+            marks [
+              mark (100, bottom, _("Short")),
+              mark (400),
+              mark (1000, bottom, _("Long")),
+            ]
+
+            adjustment: Adjustment {
+              lower: 100;
+              upper: 1000;
+              value: 400;
+              step-increment: 100;
+              page-increment: 100;
+            };
+          }
+        }
+      }
+
+      Adw.PreferencesGroup {
+        title: _("Click Assist");
+
+        Adw.ExpanderRow secondary_click_row {
+          title: _("_Simulated Secondary Click");
+          subtitle: _("Secondary click by holding down the primary mouse button");
+          use-underline: true;
+          show-enable-switch: true;
+
+          Adw.ActionRow {
+            title: _("Acceptance Delay");
+
+            [suffix]
+            Scale secondary_delay_scale {
+              hexpand: true;
+
+              marks [
+                mark (0.5, bottom, _("Short")),
+                mark (1.2),
+                mark (3, bottom, _("Long")),
+              ]
+
+              adjustment: Adjustment {
+                upper: 3;
+                lower: 0.5;
+                step-increment: 0.1;
+                page-increment: 0.1;
+              };
+            }
+          }
+        }
+
+        Adw.ExpanderRow hover_click_row {
+          title: _("_Hover Click");
+          subtitle: _("Trigger a click when the pointer hovers");
+          use-underline: true;
+          show-enable-switch: true;
+
+          Adw.ActionRow {
+            title: _("Delay");
+
+            [suffix]
+            Scale hover_delay_scale {
+              hexpand: true;
+
+              marks [
+                mark (0.2, bottom, _("Short")),
+                mark (1.2),
+                mark (3, bottom, _("Long")),
+              ]
+
+              adjustment: Adjustment {
+                lower: 0.2;
+                upper: 3;
+                value: 1.2;
+                step-increment: 0.1;
+                page-increment: 0.1;
+              };
+            }
+          }
+
+          Adw.ActionRow {
+            title: _("Motion Threshold");
+
+            [suffix]
+            Scale motion_threshold_scale {
+              hexpand: true;
+
+              marks [
+                mark (0, bottom, _("Small")),
+                mark (10),
+                mark (30, bottom, _("Large")),
+              ]
+
+              adjustment: Adjustment {
+                upper: 30;
+                step-increment: 1;
+                page-increment: 1;
+              };
+            }
+          }
+        }
+      }
+    };
+  };
+}

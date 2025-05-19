@@ -1,0 +1,216 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CcUaTypingPage: Adw.NavigationPage {
+  title: _("Typing");
+  tag: "typing";
+  hidden => $page_hidden_cb(template);
+
+  child: Adw.ToolbarView {
+    [top]
+    Adw.HeaderBar {}
+
+    content: Adw.PreferencesPage {
+      Adw.PreferencesGroup {
+        Adw.SwitchRow screen_kb_row {
+          title: _("Screen _Keyboard");
+          subtitle: _("Use the on-screen keyboard to type in input fields");
+          use-underline: true;
+        }
+
+        Adw.SwitchRow shortcuts_by_kb_row {
+          title: _("_Enable by Keyboard");
+          subtitle: _("Turn accessibility features on or off using the keyboard");
+          use-underline: true;
+        }
+      }
+
+      Adw.PreferencesGroup {
+        title: _("Text Cursor");
+
+        Adw.SwitchRow cursor_blink_row {
+          title: _("_Cursor Blinking");
+          subtitle: _("Change if the cursor blinks in text fields");
+          use-underline: true;
+        }
+
+        Adw.ActionRow blink_speed_row {
+          title: _("_Blink Speed");
+          use-underline: true;
+
+          [suffix]
+          Scale blink_time_scale {
+            hexpand: true;
+
+            accessibility {
+              label: _("Blink Speed");
+            }
+
+            marks [
+              mark (-100, bottom, _("Fast")),
+              mark (-1200),
+              mark (-2500, bottom, _("Slow")),
+            ]
+
+            adjustment: Adjustment {
+              lower: -2500;
+              upper: -100;
+              step-increment: 200;
+              page-increment: 200;
+            };
+          }
+        }
+
+        Adw.EntryRow test_blink_row {
+          title: _("_Test Entry");
+          use-underline: true;
+        }
+      }
+
+      Adw.PreferencesGroup {
+        title: _("Typing Assist");
+
+        Adw.ExpanderRow repeat_keys_row {
+          title: _("_Repeat Keys");
+          subtitle: _("Key presses repeat when the key is held down");
+          use-underline: true;
+          show-enable-switch: true;
+
+          Adw.ActionRow {
+            title: _("Speed");
+            activatable-widget: repeat_speed_scale;
+
+            [suffix]
+            Scale repeat_speed_scale {
+              hexpand: true;
+
+              marks [
+                mark (-0.5, bottom, _("Fast")),
+                mark (-30),
+                mark (-110.0, bottom, _("Slow")),
+              ]
+
+              adjustment: Adjustment {
+                lower: -110.0;
+                upper: -1.5;
+                step-increment: 1;
+                page-increment: 1;
+              };
+            }
+          }
+
+          Adw.ActionRow {
+            title: _("Delay");
+            activatable-widget: repeat_delay_scale;
+
+            [suffix]
+            Scale repeat_delay_scale {
+              hexpand: true;
+
+              marks [
+                mark (100, bottom, _("Short")),
+                mark (500),
+                mark (2000, bottom, _("Long")),
+              ]
+
+              adjustment: Adjustment {
+                lower: 100;
+                upper: 2000;
+                step-increment: 10;
+                page-increment: 10;
+              };
+            }
+          }
+        }
+
+        Adw.ExpanderRow sticky_keys_row {
+          title: _("_Sticky Keys");
+          subtitle: _("Sequences of modifier keys act as a key combination");
+          use-underline: true;
+          show-enable-switch: true;
+
+          Adw.SwitchRow disable_sticky_keys_row {
+            title: _("Disable if two keys are pressed together");
+          }
+
+          Adw.SwitchRow beep_sticky_keys_row {
+            title: _("Beep when modifier key is pressed");
+          }
+        }
+
+        Adw.ExpanderRow slow_keys_row {
+          title: _("S_low Keys");
+          subtitle: _("Delay between when a key is pressed and when it is accepted");
+          use-underline: true;
+          show-enable-switch: true;
+
+          Adw.ActionRow {
+            title: _("Acceptance Delay");
+            activatable-widget: slow_keys_delay_scale;
+
+            [suffix]
+            Scale slow_keys_delay_scale {
+              hexpand: true;
+
+              marks [
+                mark (0, bottom, _("Short")),
+                mark (300),
+                mark (500, bottom, _("Long")),
+              ]
+
+              adjustment: Adjustment {
+                upper: 500;
+                step-increment: 10;
+                page-increment: 10;
+              };
+            }
+          }
+
+          Adw.SwitchRow slow_keys_beep_row {
+            title: _("Beep when a key is pressed");
+          }
+
+          Adw.SwitchRow slow_keys_beep_accept_row {
+            title: _("Beep when a key is accepted");
+          }
+
+          Adw.SwitchRow slow_keys_beep_reject_row {
+            title: _("Beep when a key is rejected");
+          }
+        }
+
+        Adw.ExpanderRow bounce_keys_row {
+          title: _("B_ounce Keys");
+          subtitle: _("Ignore fast duplicate keypresses");
+          use-underline: true;
+          show-enable-switch: true;
+
+          Adw.ActionRow {
+            title: _("Acceptance Delay");
+
+            [suffix]
+            Scale bounce_keys_delay_scale {
+              hexpand: true;
+
+              marks [
+                mark (0, bottom, _("Short")),
+                mark (300),
+                mark (900, bottom, _("Long")),
+              ]
+
+              adjustment: Adjustment {
+                upper: 900;
+                step-increment: 10;
+                page-increment: 10;
+              };
+            }
+          }
+
+          Adw.SwitchRow bounce_keys_beep_reject_row {
+            title: _("Beep when a key is rejected");
+          }
+        }
+      }
+    };
+  };
+}

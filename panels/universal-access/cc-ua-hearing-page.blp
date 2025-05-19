@@ -1,0 +1,67 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CcUaHearingPage: Adw.NavigationPage {
+  title: _("Hearing");
+  tag: "hearing";
+
+  child: Adw.ToolbarView {
+    [top]
+    Adw.HeaderBar {}
+
+    content: Adw.PreferencesPage {
+      Adw.PreferencesGroup {
+        Adw.SwitchRow overamplification_row {
+          title: _("_Overamplification");
+          subtitle: _("Allow volume to exceed 100%, with reduced sound quality");
+          use-underline: true;
+        }
+
+        Label sound_settings_label {
+          use-markup: true;
+          margin-top: 9;
+          xalign: 0.0;
+          wrap: true;
+          activate-link => $ua_hearing_sound_settings_clicked_cb() swapped;
+
+          styles [
+            "dim-label",
+          ]
+        }
+      }
+
+      Adw.PreferencesGroup {
+        title: _("Visual Alerts");
+        description: _("Use a visual indication when an alert sound occurs");
+
+        Adw.SwitchRow visual_alerts_row {
+          title: _("_Visual Alerts");
+          use-underline: true;
+        }
+
+        Adw.ComboRow flash_type_row {
+          sensitive: bind visual_alerts_row.active;
+          title: _("_Flash Area");
+          use-underline: true;
+          notify::selected => $ua_hearing_flash_type_row_changed_cb() swapped;
+
+          model: StringList {
+            strings [
+              _("Entire Screen"),
+              _("Entire Window"),
+            ]
+          };
+        }
+      }
+
+      Adw.PreferencesGroup {
+        Adw.ButtonRow {
+          sensitive: bind visual_alerts_row.active;
+          title: _("_Test Flash");
+          use-underline: true;
+          activated => $ua_hearing_test_flash_activated_cb() swapped;
+        }
+      }
+    };
+  };
+}

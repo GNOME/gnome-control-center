@@ -1,0 +1,79 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CcUaSeeingPage: Adw.NavigationPage {
+  title: _("Seeing");
+  tag: "seeing";
+
+  child: Adw.ToolbarView {
+    [top]
+    Adw.HeaderBar {}
+
+    content: Adw.PreferencesPage {
+      Adw.PreferencesGroup {
+        Adw.SwitchRow screen_reader_row {
+          title: _("Screen _Reader");
+          subtitle: _("The screen reader reads displayed text as you move the focus");
+          use-underline: true;
+        }
+      }
+
+      Adw.PreferencesGroup {
+        Adw.SwitchRow high_contrast_row {
+          title: _("_High Contrast");
+          subtitle: _("Increase color contrast of foreground and background interface elements");
+          use-underline: true;
+        }
+
+        Adw.SwitchRow status_shapes_row {
+          title: _("_On/Off Shapes");
+          subtitle: _("Use shapes to indicate state in addition to or instead of color");
+          use-underline: true;
+        }
+
+        Adw.ActionRow {
+          title: _("_Animation Effects");
+          subtitle: _("Toggle animation effects throughout the user interface");
+          use-underline: true;
+          activatable-widget: animation_effects_switch;
+
+          [suffix]
+          $CcListRowInfoButton {
+            text: _("Turning off animation effects will result in more sudden transitions and no motion in the user interface at all. This may introduce unwanted effects that may have a negative impact on some visual sensitivities.");
+            valign: "center";
+          }
+
+          [suffix]
+          Switch animation_effects_switch {
+            valign: center;
+          }
+        }
+
+        Adw.SwitchRow large_text_row {
+          title: _("_Large Text");
+          subtitle: _("Increase the size of all text in the user interface");
+          use-underline: true;
+        }
+
+        $CcListRow cursor_size_row {
+          title: _("_Cursor Size");
+          subtitle: _("Increase the size of the cursor");
+          activated => $ua_cursor_row_activated_cb() swapped;
+          show-arrow: true;
+        }
+
+        Adw.SwitchRow sound_keys_row {
+          title: _("_Sound Keys");
+          subtitle: _("Beep when Num Lock or Caps Lock are turned on or off");
+          use-underline: true;
+        }
+
+        Adw.SwitchRow show_scrollbars_row {
+          title: _("Always Show Scroll_bars");
+          subtitle: _("Make scrollbars always visible");
+          use-underline: true;
+        }
+      }
+    };
+  };
+}

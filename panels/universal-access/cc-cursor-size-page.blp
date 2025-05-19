@@ -1,0 +1,24 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CcCursorSizePage: Adw.NavigationPage {
+  title: _("Cursor Size");
+
+  child: Adw.ToolbarView {
+    [top]
+    Adw.HeaderBar {}
+
+    content: Adw.PreferencesPage {
+      description: _("Cursor size can be combined with Zoom to make it easier to see the cursor");
+
+      Adw.PreferencesGroup {
+        FlowBox cursor_box {
+          homogeneous: true;
+          column-spacing: 6;
+          row-spacing: 6;
+          selection-mode: none;
+        }
+      }
+    };
+  };
+}
