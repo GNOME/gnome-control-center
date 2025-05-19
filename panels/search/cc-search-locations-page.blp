@@ -1,0 +1,80 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CcSearchLocationsPage: Adw.NavigationPage {
+  title: _("Search Locations");
+  tag: "locations";
+
+  child: Adw.ToolbarView {
+    [top]
+    Adw.HeaderBar {}
+
+    content: Adw.PreferencesPage {
+      description: _("Filesystem locations which are searched by system apps, such as Files");
+
+      Adw.PreferencesGroup places_group {
+        title: _("Default Locations");
+
+        ListBox places_list {
+          selection-mode: none;
+          keynav-failed => $cc_util_keynav_propagate_vertical();
+
+          accessibility {
+            labelled-by: [
+              places_group,
+            ];
+          }
+
+          styles [
+            "boxed-list",
+          ]
+        }
+      }
+
+      Adw.PreferencesGroup bookmarks_group {
+        title: _("Bookmarked Locations");
+
+        ListBox bookmarks_list {
+          selection-mode: none;
+          keynav-failed => $cc_util_keynav_propagate_vertical();
+
+          accessibility {
+            labelled-by: [
+              bookmarks_group,
+            ];
+          }
+
+          styles [
+            "boxed-list",
+          ]
+        }
+      }
+
+      Adw.PreferencesGroup others_group {
+        title: _("Custom Locations");
+
+        ListBox others_list {
+          selection-mode: none;
+          keynav-failed => $cc_util_keynav_propagate_vertical();
+
+          Adw.ButtonRow {
+            title: _("_Add Location");
+            start-icon-name: "list-add-symbolic";
+            use-underline: true;
+            activated => $add_button_clicked(template);
+          }
+
+          accessibility {
+            labelled-by: [
+              others_group,
+            ];
+          }
+
+          styles [
+            "boxed-list",
+          ]
+        }
+      }
+    };
+  };
+}
