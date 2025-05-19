@@ -1,0 +1,96 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $PpPPDSelectionDialog: Adw.Window {
+  width-request: 600;
+  height-request: 400;
+  title: _("Select Printer Driver");
+  modal: true;
+  destroy-with-parent: true;
+
+  content: Adw.ToolbarView {
+    [top]
+    Adw.HeaderBar {
+      show-start-title-buttons: false;
+      show-end-title-buttons: false;
+
+      [start]
+      Button ppd_selection_cancel_button {
+        label: _("_Cancel");
+        use-underline: true;
+        clicked => $cancel_cb() swapped;
+      }
+
+      [end]
+      Button ppd_selection_select_button {
+        label: _("_Select");
+        use-underline: true;
+        sensitive: false;
+        clicked => $select_cb() swapped;
+
+        styles [
+          "suggested-action",
+        ]
+      }
+    }
+
+    content: Stack stack {
+      StackPage {
+        name: "spinner-page";
+
+        child: Adw.StatusPage {
+          paintable: Adw.SpinnerPaintable {
+            widget: template;
+          };
+
+          title: _("Loading Drivers");
+        };
+      }
+
+      StackPage {
+        name: "ppd-selection-page";
+
+        child: Box {
+          orientation: vertical;
+          spacing: 10;
+          margin-top: 10;
+          margin-start: 10;
+          margin-bottom: 10;
+          margin-end: 10;
+
+          Box {
+            hexpand: true;
+            vexpand: true;
+            spacing: 10;
+            halign: fill;
+
+            ScrolledWindow {
+              width-request: 140;
+              hscrollbar-policy: never;
+              halign: fill;
+              has-frame: true;
+
+              TreeView ppd_selection_manufacturers_treeview {
+                [internal-child selection]
+                TreeSelection treeview-selection {}
+              }
+            }
+
+            ScrolledWindow {
+              hexpand: true;
+              halign: fill;
+              has-frame: true;
+
+              TreeView ppd_selection_models_treeview {
+                row-activated => $select_cb() swapped;
+
+                [internal-child selection]
+                TreeSelection treeview-selection1 {}
+              }
+            }
+          }
+        };
+      }
+    };
+  };
+}
