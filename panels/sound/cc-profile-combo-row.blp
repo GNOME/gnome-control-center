@@ -1,0 +1,11 @@
+using Gtk 4.0;
+using Adw 1;
+using Gio 2.0;
+
+template $CcProfileComboRow: Adw.ComboRow {
+  model: Gio.ListStore profile_list {
+    item-type: typeof<StringObject>;
+  };
+
+  notify::selected => $profile_changed_cb(template);
+}

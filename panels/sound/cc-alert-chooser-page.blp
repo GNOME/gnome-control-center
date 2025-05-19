@@ -1,0 +1,78 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CcAlertChooserPage: Adw.NavigationPage {
+  title: _("Alert Sound");
+
+  child: Adw.ToolbarView {
+    [top]
+    Adw.HeaderBar {}
+
+    content: Adw.PreferencesPage {
+      Adw.PreferencesGroup {
+        Adw.ActionRow {
+          title: _("None");
+          activatable-widget: none_button;
+
+          [prefix]
+          CheckButton none_button {
+            valign: center;
+            toggled => $toggled_cb() swapped;
+          }
+        }
+
+        Adw.ActionRow {
+          title: _("Click");
+          activatable-widget: click_button;
+
+          [prefix]
+          CheckButton click_button {
+            valign: center;
+            group: none_button;
+            activate => $activate_cb() swapped;
+            toggled => $toggled_cb() swapped;
+          }
+        }
+
+        Adw.ActionRow {
+          title: _("String");
+          activatable-widget: string_button;
+
+          [prefix]
+          CheckButton string_button {
+            valign: center;
+            group: none_button;
+            activate => $activate_cb() swapped;
+            toggled => $toggled_cb() swapped;
+          }
+        }
+
+        Adw.ActionRow {
+          title: _("Swing");
+          activatable-widget: swing_button;
+
+          [prefix]
+          CheckButton swing_button {
+            valign: center;
+            group: none_button;
+            activate => $activate_cb() swapped;
+            toggled => $toggled_cb() swapped;
+          }
+        }
+
+        Adw.ActionRow {
+          title: _("Hum");
+          activatable-widget: hum_button;
+
+          [prefix]
+          CheckButton hum_button {
+            valign: center;
+            group: none_button;
+            activate => $activate_cb() swapped;
+            toggled => $toggled_cb() swapped;
+          }
+        }
+      }
+    };
+  };
+}

@@ -1,0 +1,42 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CcVolumeLevelsPage: Adw.NavigationPage {
+  title: _("Volume Levels");
+
+  child: Adw.ToolbarView {
+    [top]
+    Adw.HeaderBar {}
+
+    content: Stack stack {
+      StackPage {
+        name: "no-streams-found-page";
+
+        child: Adw.StatusPage {
+          icon-name: "org.gnome.Settings-sound-symbolic";
+          title: _("No Sound Playing");
+        };
+      }
+
+      StackPage {
+        name: "streams-page";
+
+        child: Adw.PreferencesPage {
+          Adw.PreferencesGroup {
+            ListBox listbox {
+              selection-mode: none;
+
+              styles [
+                "boxed-list",
+              ]
+            }
+          }
+        };
+      }
+    };
+  };
+}
+
+SizeGroup label_size_group {
+  mode: horizontal;
+}

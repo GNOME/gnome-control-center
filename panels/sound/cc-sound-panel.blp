@@ -1,0 +1,297 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CcSoundPanel: $CcPanel {
+  [subpage]
+  Adw.NavigationPage {
+    title: _("Sound");
+
+    Adw.ToolbarView {
+      [top]
+      Adw.HeaderBar {}
+
+      content: Adw.PreferencesPage {
+        Adw.PreferencesGroup output_group {
+          title: _("Output");
+          visible: false;
+
+          header-suffix: Box {
+            spacing: 24;
+
+            $CcLevelBar output_level_bar {
+              valign: "center";
+              width-request: "40";
+            }
+
+            Button {
+              label: _("_Test…");
+              use-underline: true;
+              clicked => $test_output_configuration_button_clicked_cb(template);
+            }
+          };
+
+          Adw.PreferencesRow {
+            activatable: false;
+
+            Box {
+              margin-top: 12;
+              margin-bottom: 12;
+              margin-start: 12;
+              margin-end: 12;
+              spacing: 12;
+
+              Label output_device_label {
+                ellipsize: end;
+                xalign: 0;
+                label: _("_Output Device");
+                use-underline: true;
+              }
+
+              Box {
+                spacing: 6;
+
+                $CcDeviceComboBox output_device_combo_box {
+                  hexpand: true;
+
+                  accessibility {
+                    labelled-by: [
+                      output_device_label,
+                    ];
+                  }
+
+                  changed => $output_device_changed_cb(template);
+                }
+              }
+            }
+          }
+
+          $CcProfileComboRow output_profile_combo_row {
+            title: _("_Configuration");
+            use-underline: true;
+          }
+
+          Adw.PreferencesRow {
+            activatable: false;
+
+            accessibility {
+              label: _("Master volume");
+            }
+
+            Box {
+              margin-top: 12;
+              margin-bottom: 12;
+              margin-start: 12;
+              margin-end: 12;
+              spacing: 12;
+
+              Label output_volume_label {
+                ellipsize: end;
+                xalign: 0;
+                label: _("O_utput Volume");
+                use-underline: true;
+              }
+
+              $CcVolumeSlider output_volume_slider {
+                hexpand: true;
+              }
+            }
+          }
+
+          Adw.PreferencesRow {
+            activatable: false;
+
+            Box {
+              margin-top: 12;
+              margin-bottom: 12;
+              margin-start: 12;
+              margin-end: 12;
+              spacing: 12;
+
+              Label output_balance_label {
+                ellipsize: end;
+                xalign: 0;
+                label: _("_Balance");
+                use-underline: true;
+              }
+
+              $CcBalanceSlider balance_slider {
+                hexpand: true;
+              }
+            }
+          }
+
+          Adw.PreferencesRow fade_row {
+            activatable: false;
+
+            Box {
+              margin-top: 12;
+              margin-bottom: 12;
+              margin-start: 12;
+              margin-end: 12;
+              spacing: 12;
+
+              Label output_fade_label {
+                ellipsize: end;
+                xalign: 0;
+                label: _("Fad_e");
+                use-underline: true;
+              }
+
+              $CcFadeSlider fade_slider {
+                hexpand: true;
+              }
+            }
+          }
+
+          Adw.PreferencesRow subwoofer_row {
+            activatable: false;
+
+            Box {
+              margin-top: 12;
+              margin-bottom: 12;
+              margin-start: 12;
+              margin-end: 12;
+              spacing: 12;
+
+              Label output_subwoofer_label {
+                ellipsize: end;
+                xalign: 0;
+                label: _("_Subwoofer");
+                use-underline: true;
+              }
+
+              $CcSubwooferSlider subwoofer_slider {
+                hexpand: true;
+              }
+            }
+          }
+        }
+
+        Adw.PreferencesGroup output_no_devices_group {
+          title: _("Output");
+
+          $CcListRow {
+            title: _("Output Device");
+            secondary-label: _("No Output Devices");
+            activatable: false;
+          }
+        }
+
+        Adw.PreferencesGroup input_group {
+          title: _("Input");
+          visible: false;
+
+          header-suffix: $CcLevelBar input_level_bar {
+            valign: "center";
+            width-request: "40";
+          };
+
+          Adw.PreferencesRow {
+            activatable: false;
+
+            Box {
+              margin-top: 12;
+              margin-bottom: 12;
+              margin-start: 12;
+              margin-end: 12;
+              spacing: 12;
+
+              Label input_device_label {
+                ellipsize: end;
+                xalign: 0;
+                label: _("_Input Device");
+                use-underline: true;
+              }
+
+              Box {
+                orientation: vertical;
+                hexpand: true;
+                spacing: 9;
+
+                $CcDeviceComboBox input_device_combo_box {
+                  hexpand: true;
+
+                  accessibility {
+                    labelled-by: [
+                      input_device_label,
+                    ];
+                  }
+
+                  changed => $input_device_changed_cb(template);
+                }
+              }
+            }
+          }
+
+          $CcProfileComboRow input_profile_combo_row {
+            title: _("Con_figuration");
+            use-underline: true;
+          }
+
+          Adw.PreferencesRow {
+            activatable: false;
+
+            Box {
+              margin-top: 12;
+              margin-bottom: 12;
+              margin-start: 12;
+              margin-end: 12;
+              spacing: 12;
+
+              Label input_volume_label {
+                ellipsize: end;
+                xalign: 0;
+                label: _("I_nput Volume");
+                use-underline: true;
+              }
+
+              $CcVolumeSlider input_volume_slider {
+                hexpand: true;
+              }
+            }
+          }
+        }
+
+        Adw.PreferencesGroup input_no_devices_group {
+          title: _("Input");
+
+          $CcListRow {
+            title: _("Input Device");
+            secondary-label: _("No Input Devices");
+            activatable: false;
+          }
+        }
+
+        Adw.PreferencesGroup {
+          title: _("Sounds");
+
+          $CcListRow {
+            title: _("Vo_lume Levels");
+            show-arrow: true;
+            activated => $volume_levels_activated_cb() swapped;
+          }
+
+          $CcListRow alert_sound_row {
+            title: _("_Alert Sound");
+            show-arrow: true;
+            activated => $alert_sound_activated_cb() swapped;
+          }
+        }
+      };
+    }
+  }
+}
+
+SizeGroup {
+  mode: horizontal;
+
+  widgets [
+    output_device_label,
+    output_volume_label,
+    output_balance_label,
+    output_fade_label,
+    output_subwoofer_label,
+    input_device_label,
+    input_volume_label,
+  ]
+}
