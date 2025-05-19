@@ -1,0 +1,14 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CcPowerProfileRow: Adw.ActionRow {
+  selectable: false;
+  activatable-widget: button;
+  use-underline: true;
+
+  [prefix]
+  CheckButton button {
+    toggled => $cc_power_profile_row_button_toggled_cb(template);
+    valign: center;
+  }
+}

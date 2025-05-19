@@ -1,0 +1,17 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CcPowerProfileInfoRow: Adw.ActionRow {
+  activatable: false;
+  selectable: false;
+
+  [prefix]
+  Image icon_image {
+    icon-name: "info-outline-symbolic";
+    pixel-size: 24;
+  }
+
+  styles [
+    "power-profile-info-row",
+  ]
+}

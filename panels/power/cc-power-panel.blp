@@ -1,0 +1,267 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CcPowerPanel: $CcPanel {
+  child: Adw.BreakpointBin {
+    width-request: 300;
+    height-request: 200;
+
+    Adw.Breakpoint {
+      condition ("max-width: 450sp")
+
+      setters {
+        header_bar.title-widget: null;
+        view_switcher_bar.reveal: true;
+      }
+    }
+
+    child: Adw.ToolbarView {
+      [top]
+      Adw.HeaderBar header_bar {
+        title-widget: Stack title_stack {
+          StackPage {
+            name: "switcher";
+
+            child: Adw.ViewSwitcher {
+              stack: stack;
+              policy: wide;
+            };
+          }
+
+          StackPage {
+            name: "title";
+
+            child: Adw.WindowTitle {
+              title: bind template.title;
+            };
+          }
+        };
+      }
+
+      [bottom]
+      Adw.ViewSwitcherBar view_switcher_bar {
+        stack: stack;
+      }
+
+      content: Adw.ViewStack stack {
+        Adw.ViewStackPage {
+          title: _("_General");
+          use-underline: true;
+          icon-name: "org.gnome.Settings-power-symbolic";
+
+          child: Adw.PreferencesPage general_page {
+            Adw.PreferencesGroup battery_section {
+              ListBox battery_listbox {
+                selection-mode: none;
+                keynav-failed => $cc_util_keynav_propagate_vertical();
+
+                accessibility {
+                  labelled-by: [
+                    battery_section,
+                  ];
+                }
+
+                styles [
+                  "boxed-list",
+                ]
+              }
+            }
+
+            Adw.PreferencesGroup battery_charging_section {
+              /* Translators: 'battery charging' means the settings to handle the way battery charges, not that the battery is currently charging. */
+              title: _("Battery Charging");
+
+              Adw.ActionRow {
+                activatable-widget: maximize_charge_radio;
+                title: _("_Maximize Charge");
+                subtitle: _("Uses all battery capacity. Degrades batteries more quickly.");
+                use-underline: true;
+
+                [prefix]
+                CheckButton maximize_charge_radio {
+                  valign: center;
+                }
+              }
+
+              Adw.ActionRow {
+                activatable-widget: preserve_battery_radio;
+                title: _("Preserve Battery _Health");
+                subtitle: _("Increases battery longevity by maintaining lower charge levels");
+                use-underline: true;
+
+                [prefix]
+                CheckButton preserve_battery_radio {
+                  valign: center;
+                  group: maximize_charge_radio;
+                  notify::active => $battery_health_radio_changed_cb(template);
+                }
+              }
+            }
+
+            Adw.PreferencesGroup device_section {
+              title: _("Connected Devices");
+
+              ListBox device_listbox {
+                selection-mode: none;
+                keynav-failed => $cc_util_keynav_propagate_vertical();
+
+                accessibility {
+                  labelled-by: [
+                    device_section,
+                  ];
+                }
+
+                styles [
+                  "boxed-list",
+                ]
+              }
+            }
+
+            Adw.PreferencesGroup power_profile_section {
+              visible: false;
+              title: _("Power Mode");
+
+              ListBox power_profile_listbox {
+                selection-mode: none;
+                keynav-failed => $cc_util_keynav_propagate_vertical();
+
+                accessibility {
+                  labelled-by: [
+                    power_profile_section,
+                  ];
+                }
+
+                styles [
+                  "boxed-list",
+                ]
+              }
+
+              ListBox power_profile_info_listbox {
+                visible: false;
+                selection-mode: none;
+                margin-top: 12;
+                keynav-failed => $cc_util_keynav_propagate_vertical();
+
+                styles [
+                  "boxed-list",
+                ]
+              }
+            }
+
+            Adw.PreferencesGroup general_section {
+              title: _("General");
+
+              $CcNumberRow power_button_row {
+                visible: false;
+                title: _("Po_wer Button Behavior");
+                use-underline: true;
+                value-type: "string";
+                sort-type: "none";
+              }
+
+              Adw.SwitchRow battery_percentage_row {
+                visible: false;
+                title: _("_Show Battery Percentage");
+                subtitle: _("Show exact charge level in the top bar");
+                use-underline: true;
+              }
+            }
+          };
+        }
+
+        Adw.ViewStackPage power_saving_stack_page {
+          title: _("_Power Saving");
+          use-underline: true;
+          icon-name: "power-saving-symbolic";
+
+          child: Adw.PreferencesPage power_saving_page {
+            Adw.PreferencesGroup power_saving_group {
+              Adw.SwitchRow als_row {
+                title: _("A_utomatic Screen Brightness");
+                subtitle: _("Adjust screen brightness to the surrounding light");
+                use-underline: true;
+                notify::active => $als_row_changed_cb(template);
+                notify::visible => $power_saving_group_visibility_cb(template);
+              }
+
+              Adw.SwitchRow dim_screen_row {
+                title: _("_Dim Screen");
+                subtitle: _("Reduce screen brightness when the device is inactive");
+                use-underline: true;
+                notify::visible => $power_saving_group_visibility_cb(template);
+              }
+
+              Adw.SwitchRow power_saver_low_battery_row {
+                visible: false;
+                title: _("Automatic Power _Saver");
+                subtitle: _("Turn on power saver mode when battery power is low");
+                use-underline: true;
+                notify::visible => $power_saving_group_visibility_cb(template);
+              }
+            }
+
+            Adw.PreferencesGroup blank_screen_group {
+              Adw.SwitchRow blank_screen_switch_row {
+                title: _("Automatic Screen _Blank");
+                subtitle: _("Turn the screen off after a period of inactivity");
+                use-underline: true;
+                notify::active => $blank_screen_switch_cb(template);
+              }
+
+              $CcNumberRow blank_screen_delay_row {
+                title: _("D_elay");
+                use-underline: true;
+                sensitive: bind blank_screen_switch_row.active;
+                values: "[60, 120, 180, 240, 300, 480, 600, 720, 900]";
+                value-type: "seconds";
+              }
+            }
+
+            Adw.PreferencesGroup suspend_on_battery_group {
+              title: _("Automatic Suspend");
+              visible: false;
+
+              Adw.SwitchRow suspend_on_battery_switch_row {
+                title: _("On Ba_ttery Power");
+                use-underline: true;
+                notify::active => $update_suspend_notice_visibility(template);
+              }
+
+              $CcNumberRow suspend_on_battery_delay_row {
+                sensitive: bind suspend_on_battery_switch_row.active;
+                title: _("De_lay");
+                use-underline: true;
+                value-type: "seconds";
+              }
+            }
+
+            Adw.PreferencesGroup suspend_on_ac_group {
+              visible: false;
+
+              Adw.SwitchRow suspend_on_ac_switch_row {
+                title: _("Whe_n Plugged In");
+                use-underline: true;
+                notify::active => $update_suspend_notice_visibility(template);
+              }
+
+              $CcNumberRow suspend_on_ac_delay_row {
+                sensitive: bind suspend_on_ac_switch_row.active;
+                title: _("Del_ay");
+                use-underline: true;
+                value-type: "seconds";
+              }
+            }
+
+            Adw.PreferencesGroup suspend_notice_group {
+              visible: true;
+
+              $CcPowerProfileInfoRow {
+                title: _("Disabling automatic suspend will result in higher power consumption. It is recommended to keep automatic suspend enabled.");
+              }
+            }
+          };
+        }
+      };
+    };
+  };
+}
