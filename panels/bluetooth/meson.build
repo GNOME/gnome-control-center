@@ -10,13 +10,28 @@ i18n.merge_file(
   install_dir: control_center_desktopdir
 )
 
+blueprints = custom_target('blueprints',
+  input: files(
+    'cc-bluetooth-panel.blp',
+  ),
+  output: '.',
+  command: [
+    find_program('blueprint-compiler'),
+    'batch-compile',
+    '@OUTPUT@',
+    '@CURRENT_SOURCE_DIR@',
+    '@INPUT@',
+  ],
+)
+
 sources = files('cc-bluetooth-panel.c')
 
 sources += gnome.compile_resources(
   'cc-' + cappletname + '-resources',
   cappletname + '.gresource.xml',
   c_name: 'cc_' + cappletname,
-  export: true
+  export: true,
+  dependencies: blueprints,
 )
 
 deps = common_deps + [gnome_bluetooth_dep]

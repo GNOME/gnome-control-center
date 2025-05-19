@@ -1,0 +1,86 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CcBluetoothPanel: $CcPanel {
+  child: Adw.ToolbarView {
+    [top]
+    Adw.HeaderBar {
+      [end]
+      Box header_box {
+        Switch enable_switch {
+          valign: center;
+
+          accessibility {
+            label: _("Enable");
+          }
+
+          state-set => $enable_switch_state_set_cb(template);
+        }
+      }
+    }
+
+    content: Stack stack {
+      StackPage {
+        name: "no-devices-page";
+
+        child: Adw.StatusPage {
+          icon-name: "bluetooth-active-symbolic";
+          title: _("No Bluetooth Found");
+          description: _("Plug in a dongle to use Bluetooth");
+        };
+      }
+
+      StackPage {
+        name: "disabled-page";
+
+        child: Adw.StatusPage {
+          icon-name: "bluetooth-active-symbolic";
+          title: _("Bluetooth Turned Off");
+          description: _("Turn on to connect devices and receive file transfers");
+        };
+      }
+
+      StackPage {
+        name: "airplane-page";
+
+        child: Adw.StatusPage {
+          icon-name: "airplane-mode-symbolic";
+          title: _("Airplane Mode is On");
+          description: _("Bluetooth is disabled when airplane mode is on");
+
+          child: Button {
+            label: _("_Turn Off Airplane Mode");
+            use-underline: true;
+            halign: center;
+            valign: center;
+            clicked => $airplane_mode_off_button_clicked_cb(template);
+
+            styles [
+              "pill",
+              "suggested-action",
+            ]
+          };
+        };
+      }
+
+      StackPage {
+        name: "hw-airplane-page";
+
+        child: Adw.StatusPage {
+          icon-name: "airplane-mode-symbolic";
+          title: _("Hardware Airplane Mode is On");
+          description: _("Turn off the Airplane mode switch to enable Bluetooth");
+        };
+      }
+
+      StackPage {
+        name: "bluetooth-page";
+
+        child: $BluetoothSettingsWidget settings_widget {
+          panel-changed => $panel_changed_cb(template);
+          adapter-status-changed => $adapter_status_changed_cb(template);
+        };
+      }
+    };
+  };
+}
