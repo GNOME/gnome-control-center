@@ -28,6 +28,30 @@ foreach name: panel_names
   )
 endforeach
 
+blueprints = custom_target(
+  'blueprints',
+  input: files(
+    'cc-net-proxy-page.blp',
+    'cc-network-panel.blp',
+    'cc-qr-code-dialog.blp',
+    'cc-wifi-connection-row.blp',
+    'cc-wifi-hotspot-dialog.blp',
+    'cc-wifi-panel.blp',
+    'network-bluetooth.blp',
+    'network-ethernet.blp',
+    'network-vpn.blp',
+    'network-wifi.blp',
+  ),
+  output: '.',
+  command: [
+    blueprint_compiler,
+    'batch-compile',
+    '@OUTPUT@',
+    '@CURRENT_SOURCE_DIR@',
+    '@INPUT@',
+  ],
+)
+
 sources = files(
   'cc-qr-code.c',
   'cc-qr-code-dialog.c',
@@ -51,7 +75,8 @@ sources += gnome.compile_resources(
   'cc-' + cappletname + '-resources',
   cappletname + '.gresource.xml',
   c_name: 'cc_' + cappletname,
-  export: true
+  export: true,
+  dependencies: blueprints,
 )
 
 network_panel_lib = static_library(
