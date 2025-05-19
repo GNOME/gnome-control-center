@@ -1,0 +1,48 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CcDurationRow: Adw.ActionRow {
+  activatable: true;
+  use-markup: false;
+
+  styles [
+    "combo",
+  ]
+
+  Label current {
+    valign: center;
+    can-focus: false;
+    can-target: false;
+  }
+
+  Box arrow_box {
+    valign: center;
+
+    Image {
+      icon-name: "pan-down-symbolic";
+      accessible-role: presentation;
+
+      styles [
+        "dropdown-arrow",
+      ]
+    }
+
+    Popover popover {
+      notify::visible => $popover_notify_visible_cb();
+
+      styles [
+        "menu",
+      ]
+
+      child: $CcDurationEditor editor {
+        margin-start: "6";
+        margin-end: "6";
+        margin-top: "6";
+        margin-bottom: "6";
+        notify::duration => $editor_notify_duration_cb();
+        notify::minimum => $editor_notify_minimum_cb();
+        notify::maximum => $editor_notify_maximum_cb();
+      };
+    }
+  }
+}
