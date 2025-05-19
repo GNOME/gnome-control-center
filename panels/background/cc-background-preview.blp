@@ -1,0 +1,50 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CcBackgroundPreview: Widget {
+  overflow: hidden;
+  width-request: 2;
+  height-request: 2;
+
+  Picture picture {
+    content-fit: cover;
+  }
+
+  Adw.Bin dark_window {
+    overflow: hidden;
+
+    styles [
+      "window",
+      "background",
+      "back",
+      "dark",
+    ]
+
+    Adw.Bin {
+      styles [
+        "sidebar",
+      ]
+
+      halign: start;
+    }
+  }
+
+  Adw.Bin light_dark_window {
+    overflow: hidden;
+
+    styles [
+      "window",
+      "background",
+      "front",
+      "light",
+    ]
+
+    Adw.Bin {
+      styles [
+        "header-bar",
+      ]
+
+      valign: start;
+    }
+  }
+}
