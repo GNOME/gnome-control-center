@@ -1,0 +1,43 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CcGlobalShortcutDialog: Adw.Window {
+  modal: true;
+  default-width: 480;
+  title: _("Add Keyboard Shortcuts");
+
+  Adw.ToolbarView {
+    [top]
+    Adw.HeaderBar {
+      show-start-title-buttons: false;
+      show-end-title-buttons: false;
+
+      [start]
+      Button cancel_button {
+        label: _("_Cancel");
+        use-underline: true;
+        valign: center;
+        action-name: "window.close";
+      }
+
+      [end]
+      Button add_button {
+        label: _("_Add");
+        use-underline: true;
+        valign: center;
+        clicked => $on_add_button_clicked_cb(template);
+
+        styles [
+          "suggested-action",
+        ]
+      }
+    }
+
+    content: Adw.PreferencesPage shortcut_list {
+      description: _("Added keyboard shortcuts will be available globally, and can be changed in the app’s page in Settings");
+      description-centered: true;
+    };
+  }
+}
+
+SizeGroup accelerator_size_group {}
