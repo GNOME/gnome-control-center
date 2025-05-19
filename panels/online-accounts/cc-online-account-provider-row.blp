@@ -1,0 +1,19 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CcOnlineAccountProviderRow: Adw.ActionRow {
+  activatable: true;
+
+  [prefix]
+  Image icon_image {
+    halign: center;
+    valign: center;
+    accessible-role: presentation;
+  }
+
+  [suffix]
+  Image {
+    icon-name: "go-next-symbolic";
+    accessible-role: presentation;
+  }
+}

@@ -1,0 +1,64 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CcOnlineAccountsPanel: $CcPanel {
+  child: Adw.ToolbarView {
+    [top]
+    Adw.HeaderBar {}
+
+    content: Adw.ToastOverlay toast_overlay {
+      child: Box {
+        orientation: vertical;
+
+        Adw.Banner offline_banner {
+          title: _("Offline — unable to connect accounts");
+        }
+
+        Adw.PreferencesPage {
+          description: _("Allow apps to access online services by connecting your cloud accounts");
+
+          Adw.PreferencesGroup accounts_frame {
+            title: _("Your Accounts");
+            visible: false;
+
+            ListBox accounts_listbox {
+              hexpand: true;
+              selection-mode: none;
+              row-activated => $on_accounts_listbox_row_activated(template);
+
+              styles [
+                "boxed-list",
+              ]
+
+              accessibility {
+                labelled-by: [
+                  accounts_frame,
+                ];
+              }
+            }
+          }
+
+          Adw.PreferencesGroup providers_group {
+            title: _("Connect an Account");
+
+            ListBox providers_listbox {
+              selection-mode: none;
+
+              accessibility {
+                labelled-by: [
+                  providers_group,
+                ];
+              }
+
+              row-activated => $on_provider_row_activated_cb(template);
+
+              styles [
+                "boxed-list",
+              ]
+            }
+          }
+        }
+      };
+    };
+  };
+}
