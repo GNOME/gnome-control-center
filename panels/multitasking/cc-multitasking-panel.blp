@@ -1,0 +1,141 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CcMultitaskingPanel: $CcPanel {
+  child: Adw.ToolbarView {
+    [top]
+    Adw.HeaderBar {}
+
+    content: Adw.PreferencesPage {
+      Adw.PreferencesGroup {
+        title: _("General");
+
+        $CcIllustratedRow hot_corner_row {
+          activatable-widget: "hot_corner_switch";
+          title: _("_Hot Corner");
+          subtitle: _("Touch the top-left corner to open the Activities Overview");
+          use-underline: true;
+          resource: "/org/gnome/control-center/multitasking/assets/hot-corner.svg";
+
+          Switch hot_corner_switch {
+            valign: center;
+          }
+        }
+
+        $CcIllustratedRow active_screen_edges_row {
+          activatable-widget: "active_screen_edges_switch";
+          title: _("_Active Screen Edges");
+          subtitle: _("Drag windows against the top, left, and right screen edges to resize them");
+          use-underline: true;
+          resource: "/org/gnome/control-center/multitasking/assets/active-screen-edges.svg";
+
+          Switch active_screen_edges_switch {
+            valign: center;
+          }
+        }
+      }
+
+      Adw.PreferencesGroup {
+        title: _("Workspaces");
+
+        Adw.ActionRow {
+          activatable-widget: dynamic_workspaces_radio;
+          title: _("_Dynamic Workspaces");
+          subtitle: _("Automatically removes empty workspaces");
+          use-underline: true;
+
+          [prefix]
+          CheckButton dynamic_workspaces_radio {
+            valign: center;
+          }
+        }
+
+        Adw.ActionRow {
+          activatable-widget: fixed_workspaces_radio;
+          title: _("_Fixed Number of Workspaces");
+          subtitle: _("Specify a number of permanent workspaces");
+          use-underline: true;
+
+          [prefix]
+          CheckButton fixed_workspaces_radio {
+            valign: center;
+            group: dynamic_workspaces_radio;
+            toggled => $fixed_workspaces_changed_cb(template);
+          }
+        }
+
+        Adw.SpinRow number_of_workspaces_spin_row {
+          sensitive: bind fixed_workspaces_radio.active;
+          title: _("_Number of Workspaces");
+          use-underline: true;
+          adjustment: workspaces_adjustment;
+          notify::value => $fixed_workspaces_changed_cb(template);
+        }
+      }
+
+      Adw.PreferencesGroup workspaces_display_group {
+        title: _("Multi-Monitor");
+
+        $CcIllustratedRow {
+          activatable-widget: "workspaces_primary_display_radio";
+          title: _("Workspaces on _primary display only");
+          use-underline: true;
+          resource: "/org/gnome/control-center/multitasking/assets/workspaces-primary-display.svg";
+
+          [prefix]
+          CheckButton workspaces_primary_display_radio {
+            valign: center;
+          }
+        }
+
+        $CcIllustratedRow {
+          activatable-widget: "workspaces_span_displays_radio";
+          title: _("Workspaces on all d_isplays");
+          use-underline: true;
+          resource: "/org/gnome/control-center/multitasking/assets/workspaces-span-displays.svg";
+
+          [prefix]
+          CheckButton workspaces_span_displays_radio {
+            valign: center;
+            group: workspaces_primary_display_radio;
+          }
+        }
+      }
+
+      Adw.PreferencesGroup {
+        title: _("App Switching");
+        sensitive: bind workspaces_display_group.sensitive;
+
+        Adw.ActionRow {
+          activatable-widget: all_workspaces_radio;
+          title: _("Include apps from all _workspaces");
+          use-underline: true;
+
+          [prefix]
+          CheckButton all_workspaces_radio {
+            valign: center;
+          }
+        }
+
+        Adw.ActionRow {
+          activatable-widget: current_workspace_radio;
+          title: _("Include apps from the _current workspace only");
+          use-underline: true;
+
+          [prefix]
+          CheckButton current_workspace_radio {
+            valign: center;
+            group: all_workspaces_radio;
+          }
+        }
+      }
+    };
+  };
+}
+
+Adjustment workspaces_adjustment {
+  lower: 1.0;
+  step-increment: 1.0;
+  value: 4.0;
+  upper: 36.0;
+}
