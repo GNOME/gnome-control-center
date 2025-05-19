@@ -1,0 +1,81 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CcUaPanel: $CcPanel {
+  [subpage]
+  Adw.NavigationPage main_page {
+    title: _("Accessibility");
+
+    child: Adw.ToolbarView {
+      [top]
+      Adw.HeaderBar {}
+
+      content: Adw.PreferencesPage {
+        Adw.PreferencesGroup {
+          Adw.SwitchRow show_ua_menu_row {
+            title: _("_Always Show Accessibility Menu");
+            subtitle: _("Display the accessibility menu in the top bar");
+            use-underline: true;
+          }
+        }
+
+        Adw.PreferencesGroup {
+          $CcListRow seeing_row {
+            title: _("_Seeing");
+            icon-name: "org.gnome.Settings-accessibility-seeing-symbolic";
+            show-arrow: true;
+            action-name: "navigation.push";
+            action-target: "'seeing'";
+          }
+
+          $CcListRow hearing_row {
+            title: _("_Hearing");
+            icon-name: "org.gnome.Settings-accessibility-hearing-symbolic";
+            show-arrow: true;
+            action-name: "navigation.push";
+            action-target: "'hearing'";
+          }
+
+          $CcListRow typing_row {
+            title: _("_Typing");
+            icon-name: "org.gnome.Settings-accessibility-typing-symbolic";
+            show-arrow: true;
+            action-name: "navigation.push";
+            action-target: "'typing'";
+          }
+
+          $CcListRow mouse_row {
+            title: _("_Pointing and Clicking");
+            icon-name: "org.gnome.Settings-accessibility-pointing-symbolic";
+            show-arrow: true;
+            action-name: "navigation.push";
+            action-target: "'mouse'";
+          }
+
+          $CcListRow zoom_row {
+            title: _("_Zoom");
+            icon-name: "org.gnome.Settings-accessibility-zoom-symbolic";
+            show-arrow: true;
+            action-name: "navigation.push";
+            action-target: "'zoom'";
+          }
+        }
+      };
+    };
+  }
+
+  [subpage]
+  $CcUaSeeingPage seeing_page {}
+
+  [subpage]
+  $CcUaHearingPage hearing_page {}
+
+  [subpage]
+  $CcUaTypingPage typing_page {}
+
+  [subpage]
+  $CcUaMousePage mouse_page {}
+
+  [subpage]
+  $CcUaZoomPage zoom_page {}
+}
