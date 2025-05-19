@@ -1,0 +1,19 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CcXkbModifierPage: Adw.NavigationPage {
+  child: Adw.ToolbarView {
+    [top]
+    Adw.HeaderBar {}
+
+    content: Adw.PreferencesPage xkb_modifier_page {
+      Adw.PreferencesGroup switch_group {
+        Adw.SwitchRow switch_row {
+          notify::active => $switch_row_changed_cb(template);
+        }
+      }
+
+      Adw.PreferencesGroup options_group {}
+    };
+  };
+}
