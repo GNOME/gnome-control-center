@@ -1,0 +1,220 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CcScreenTimeStatisticsRow: Adw.PreferencesRow {
+  activatable: false;
+  focusable: false;
+  use-markup: false;
+
+  styles [
+    "screen-time-statistics-row",
+  ]
+
+  Box {
+    Stack data_stack {
+      hexpand: true;
+
+      StackPage {
+        name: "no-data";
+
+        child: Adw.StatusPage {
+          height-request: 240;
+          vexpand: true;
+          title: _("Screen Time Unavailable");
+          icon-name: "org.gnome.Settings-screen-time-symbolic";
+          description: _("Screen time information will appear here after a period of usage");
+
+          styles [
+            "compact",
+          ]
+        };
+      }
+
+      StackPage {
+        name: "main";
+
+        child: Box {
+          orientation: vertical;
+          spacing: 12;
+
+          styles [
+            "main-box",
+          ]
+
+          Grid {
+            column-homogeneous: true;
+            column-spacing: 10;
+            row-spacing: 0;
+
+            Label selected_date_label {
+              halign: start;
+              label: "Today";
+
+              layout {
+                column: "0";
+                row: "0";
+              }
+
+              styles [
+                "primary-label",
+              ]
+            }
+
+            Label selected_screen_time_label {
+              halign: start;
+              label: "3h 15m";
+
+              layout {
+                column: "0";
+                row: "1";
+              }
+
+              styles [
+                "primary-value",
+              ]
+
+              accessibility {
+                labelled-by: [
+                  selected_date_label,
+                ];
+              }
+            }
+
+            Label selected_average_label {
+              halign: start;
+              label: "Average Sunday";
+
+              layout {
+                column: "0";
+                row: "2";
+              }
+
+              styles [
+                "secondary-label",
+              ]
+            }
+
+            Label selected_average_value_label {
+              halign: start;
+              label: "6h 5m";
+
+              layout {
+                column: "0";
+                row: "3";
+              }
+
+              styles [
+                "secondary-value",
+              ]
+
+              accessibility {
+                labelled-by: [
+                  selected_average_label,
+                ];
+              }
+            }
+
+            Label week_date_label {
+              halign: start;
+              label: "This Week";
+              ellipsize: end;
+
+              layout {
+                column: "1";
+                row: "0";
+              }
+
+              styles [
+                "primary-label",
+              ]
+            }
+
+            Label week_screen_time_label {
+              halign: start;
+              label: "34h 55m";
+
+              layout {
+                column: "1";
+                row: "1";
+              }
+
+              styles [
+                "primary-value",
+              ]
+
+              accessibility {
+                labelled-by: [
+                  week_date_label,
+                ];
+              }
+            }
+
+            Label week_average_label {
+              halign: start;
+              label: _("Average Week");
+
+              layout {
+                column: "1";
+                row: "2";
+              }
+
+              styles [
+                "secondary-label",
+              ]
+            }
+
+            Label week_average_value_label {
+              halign: start;
+              label: "36h 18m";
+
+              layout {
+                column: "1";
+                row: "3";
+              }
+
+              styles [
+                "secondary-value",
+              ]
+
+              accessibility {
+                labelled-by: [
+                  week_average_label,
+                ];
+              }
+            }
+          }
+
+          $CcBarChart bar_chart {
+            notify::selected-index => $bar_chart_notify_selected_index_cb();
+          }
+
+          Box {
+            halign: center;
+            orientation: horizontal;
+            spacing: 10;
+
+            Button previous_week_button {
+              icon-name: "go-previous-symbolic";
+              tooltip-text: _("Previous Week");
+              clicked => $previous_week_button_clicked_cb();
+
+              styles [
+                "circular",
+              ]
+            }
+
+            Button next_week_button {
+              icon-name: "go-next-symbolic";
+              tooltip-text: _("Next Week");
+              clicked => $next_week_button_clicked_cb();
+
+              styles [
+                "circular",
+              ]
+            }
+          }
+        };
+      }
+    }
+  }
+}
