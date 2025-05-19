@@ -1,0 +1,113 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CcNetworkPanel: $CcPanel {
+  child: Adw.NavigationView main_nav {
+    Adw.NavigationPage {
+      title: _("Network");
+
+      Adw.ToolbarView {
+        [top]
+        Adw.HeaderBar {}
+
+        content: Adw.ViewStack stack {
+          Adw.ViewStackPage {
+            name: "nm-error-page";
+
+            child: Adw.StatusPage {
+              icon-name: "network-error-symbolic";
+              title: _("Network Unavailable");
+              description: _("An error has occurred and network cannot be used.\nError details: NetworkManager not running.");
+            };
+          }
+
+          Adw.ViewStackPage {
+            name: "network-page";
+
+            child: Adw.PreferencesPage {
+              Adw.PreferencesGroup {
+                Box box_wired {
+                  orientation: vertical;
+                  spacing: 24;
+                }
+              }
+
+              Adw.PreferencesGroup container_bluetooth {
+                visible: false;
+                title: _("Bluetooth");
+
+                ListBox box_bluetooth {
+                  selection-mode: none;
+
+                  accessibility {
+                    labelled-by: [
+                      container_bluetooth,
+                    ];
+                  }
+
+                  styles [
+                    "boxed-list",
+                  ]
+                }
+              }
+
+              Adw.PreferencesGroup {
+                title: _("VPN");
+
+                header-suffix: Button {
+                  tooltip-text: _("Add VPN");
+                  icon-name: "list-add-symbolic";
+
+                  styles [
+                    "flat",
+                  ]
+
+                  clicked => $create_connection_cb(template);
+                };
+
+                ListBox box_vpn {
+                  selection-mode: none;
+
+                  [placeholder]
+                  Label {
+                    label: _("Not set up");
+                    wrap: true;
+                    max-width-chars: 50;
+
+                    styles [
+                      "dim-label",
+                      "cc-placeholder-row",
+                    ]
+                  }
+
+                  accessibility {
+                    label: _("VPN");
+                  }
+
+                  styles [
+                    "boxed-list",
+                  ]
+                }
+              }
+
+              Adw.PreferencesGroup {
+                title: _("Proxy");
+
+                $CcListRow proxy_row {
+                  title: _("_Proxy");
+                  show-arrow: true;
+                  icon-name: "org.gnome.Settings-network-proxy-symbolic";
+                  secondary-label: bind proxy_page.state-text;
+                  action-name: "navigation.push";
+                  action-target: "'proxy'";
+                }
+              }
+            };
+          }
+        };
+      }
+    }
+
+    $CcNetProxyPage proxy_page {}
+  };
+}

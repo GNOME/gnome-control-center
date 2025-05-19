@@ -1,0 +1,24 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $NetVpn: Adw.ActionRow {
+  activatable-widget: device_off_switch;
+
+  [suffix]
+  Switch device_off_switch {
+    valign: center;
+    notify::active => $device_off_toggled(template);
+  }
+
+  [suffix]
+  Button options_button {
+    tooltip-text: _("VPN Options");
+    valign: center;
+    icon-name: "cog-wheel-symbolic";
+    clicked => $edit_connection(template);
+
+    styles [
+      "flat",
+    ]
+  }
+}

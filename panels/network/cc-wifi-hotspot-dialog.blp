@@ -1,0 +1,130 @@
+using Gtk 4.0;
+
+template $CcWifiHotspotDialog: Dialog {
+  title: _("Turn On Wi-Fi Hotspot?");
+  modal: true;
+  destroy-with-parent: true;
+  hide-on-close: true;
+
+  [internal-child headerbar]
+  HeaderBar {
+    show-title-buttons: false;
+  }
+
+  [internal-child content_area]
+  Box {
+    orientation: vertical;
+    margin-top: 30;
+    margin-bottom: 30;
+    margin-start: 30;
+    margin-end: 30;
+    spacing: 20;
+
+    Label label {
+      wrap: true;
+      max-width-chars: 50;
+      label: _("Wi-Fi hotspot allows others to share your internet connection, by creating a Wi-Fi network that they can connect to. To do this, you must have an internet connection through a source other than Wi-Fi.");
+      xalign: 0.0;
+    }
+
+    Label connection_label {
+      margin-bottom: 18;
+      wrap: true;
+      max-width-chars: 40;
+      use-markup: true;
+      xalign: 0.0;
+    }
+
+    Grid {
+      row-spacing: 6;
+      column-spacing: 12;
+
+      Label {
+        label: _("Network Name");
+        halign: end;
+        mnemonic-widget: name_entry;
+
+        layout {
+          column: "0";
+          row: "0";
+        }
+      }
+
+      Entry name_entry {
+        hexpand: true;
+        max-length: 64;
+        changed => $hotspot_entry_changed_cb() swapped;
+
+        layout {
+          column: "1";
+          row: "0";
+        }
+      }
+
+      Label name_error_label {
+        halign: start;
+
+        layout {
+          column: "1";
+          row: "1";
+        }
+
+        styles [
+          "dim-label",
+          "caption",
+        ]
+      }
+
+      Label {
+        label: _("Password");
+        halign: end;
+        mnemonic-widget: password_entry;
+
+        layout {
+          column: "0";
+          row: "2";
+        }
+      }
+
+      Entry password_entry {
+        max-length: 64;
+        secondary-icon-name: "view-refresh-symbolic";
+        secondary-icon-tooltip-text: _("Generate Random Password");
+        placeholder-text: _("Autogenerate Password");
+        icon-press => $generate_password_clicked_cb() swapped;
+        changed => $hotspot_entry_changed_cb() swapped;
+
+        layout {
+          column: "1";
+          row: "2";
+        }
+      }
+
+      Label password_error_label {
+        halign: start;
+
+        layout {
+          column: "1";
+          row: "3";
+        }
+
+        styles [
+          "dim-label",
+          "caption",
+        ]
+      }
+    }
+  }
+
+  [action response=cancel]
+  Button cancel_button {
+    use-underline: true;
+    label: _("_Cancel");
+  }
+
+  [action response=apply default]
+  Button ok_button {
+    use-underline: true;
+    label: _("_Turn On");
+  }
+}

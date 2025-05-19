@@ -1,0 +1,67 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $NetConnectionEditor: Adw.Window {
+  destroy-with-parent: true;
+  modal: true;
+  width-request: 360;
+  height-request: 294;
+
+  Adw.ToolbarView {
+    [top]
+    Adw.HeaderBar {
+      show-end-title-buttons: false;
+      show-start-title-buttons: false;
+
+      Button cancel_button {
+        label: _("_Cancel");
+        use-underline: true;
+        clicked => $cancel_clicked_cb(template);
+      }
+
+      [end]
+      Button apply_button {
+        label: _("_Apply");
+        use-underline: true;
+        clicked => $apply_clicked_cb(template);
+
+        styles [
+          "suggested-action",
+        ]
+      }
+    }
+
+    Adw.ToastOverlay toast_overlay {
+      child: Stack toplevel_stack {
+        hexpand: true;
+        vexpand: true;
+
+        Adw.Spinner spinner {}
+
+        Notebook notebook {
+          show-border: false;
+        }
+
+        Box add_connection_box {
+          vexpand: true;
+
+          Box {
+            hexpand: true;
+            vexpand: true;
+
+            Adw.Bin add_connection_frame {
+              hexpand: true;
+              vexpand: true;
+              width-request: 300;
+              valign: start;
+              margin-start: 12;
+              margin-end: 12;
+              margin-top: 12;
+              margin-bottom: 12;
+            }
+          }
+        }
+      };
+    }
+  }
+}
