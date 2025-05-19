@@ -1,0 +1,24 @@
+using Gtk 4.0;
+
+template $CcBalanceSlider: Widget {
+  Scale scale {
+    has-origin: false;
+    adjustment: adjustment;
+
+    accessibility {
+      label: _("Balance");
+    }
+
+    marks [
+      mark (0),
+    ]
+  }
+}
+
+Adjustment adjustment {
+  lower: -1.0;
+  upper: 1.0;
+  step-increment: 0.02;
+  page-increment: 0.2;
+  value-changed => $changed_cb(template);
+}
