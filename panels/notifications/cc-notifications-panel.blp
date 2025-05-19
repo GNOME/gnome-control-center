@@ -1,0 +1,50 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CcNotificationsPanel: $CcPanel {
+  [subpage]
+  Adw.NavigationPage {
+    title: _("Notifications");
+
+    Adw.ToolbarView {
+      [top]
+      Adw.HeaderBar {}
+
+      content: Adw.PreferencesPage {
+        Adw.PreferencesGroup {
+          Adw.SwitchRow dnd_row {
+            title: _("_Do Not Disturb");
+            use-underline: true;
+          }
+
+          Adw.SwitchRow lock_screen_row {
+            /* Translators: Whether to show notifications on the lock screen */
+            title: _("_Lock Screen Notifications");
+            use-underline: true;
+          }
+        }
+
+        Adw.PreferencesGroup app_group {
+          /* Translators: List of apps. */
+          title: _("App Notifications");
+
+          ListBox app_listbox {
+            selection-mode: none;
+            row-activated => $select_app(template);
+            keynav-failed => $cc_util_keynav_propagate_vertical();
+
+            styles [
+              "boxed-list",
+            ]
+
+            accessibility {
+              labelled-by: [
+                app_group,
+              ];
+            }
+          }
+        }
+      };
+    }
+  }
+}
