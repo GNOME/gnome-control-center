@@ -1,0 +1,26 @@
+using Gtk 4.0;
+
+template $CcVolumeSlider: Widget {
+  Button mute_button {
+    icon-name: "audio-volume-muted-symbolic";
+    action-name: "volume-slider.mute";
+    tooltip-text: _("Mute");
+
+    styles [
+      "flat",
+    ]
+  }
+
+  Scale volume_scale {
+    adjustment: volume_adjustment;
+    hexpand: true;
+
+    accessibility {
+      label: _("Volume");
+    }
+  }
+}
+
+Adjustment volume_adjustment {
+  value-changed => $volume_changed_cb(template);
+}

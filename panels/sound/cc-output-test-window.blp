@@ -1,0 +1,14 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CcOutputTestWindow: Adw.Dialog {
+  title: _("Test Speakers");
+  follows-content-size: false;
+
+  child: Adw.ToolbarView {
+    [top]
+    Adw.HeaderBar {}
+
+    content: $CcOutputTestWheel wheel {};
+  };
+}
