@@ -1,0 +1,109 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $PpDetailsDialog: Adw.Dialog {
+  title: _("Printer Details");
+  content-width: 360;
+  can-close: false;
+
+  child: Adw.ToolbarView {
+    [top]
+    Adw.HeaderBar {
+      title-widget: Adw.WindowTitle title_widget {
+        title: _("Printer Details");
+      };
+    }
+
+    content: Adw.PreferencesPage {
+      Adw.PreferencesGroup {
+        Adw.EntryRow printer_name_entry {
+          title: _("_Name");
+          use-underline: true;
+          changed => $printer_name_changed(template);
+        }
+
+        Revealer printer_name_hint_revealer {
+          visible: true;
+          can-focus: false;
+
+          child: Label {
+            label: _("Printer names cannot contain SPACE, TAB, #, or /");
+            margin-top: 6;
+            wrap: true;
+            xalign: 0.0;
+
+            styles [
+              "warning",
+              "caption",
+            ]
+          };
+        }
+      }
+
+      Adw.PreferencesGroup {
+        Adw.EntryRow printer_location_entry {
+          title: _("_Location");
+          use-underline: true;
+        }
+
+        Adw.ActionRow printer_address_row {
+          title: _("_Address");
+          use-underline: true;
+          subtitle-selectable: true;
+
+          [suffix]
+          Button {
+            styles [
+              "flat",
+            ]
+
+            icon-name: "adw-external-link-symbolic";
+            tooltip-text: _("Open Address");
+            valign: center;
+            clicked => $on_open_address_button_clicked(template);
+          }
+
+          styles [
+            "property",
+          ]
+        }
+
+        Adw.ActionRow printer_model_label {
+          title: _("Driver");
+          subtitle-selectable: true;
+
+          [suffix]
+          Adw.Spinner spinner_driver_search {
+            visible: false;
+          }
+
+          styles [
+            "property",
+          ]
+        }
+      }
+
+      Adw.PreferencesGroup driver_button_rows_group {
+        separate-rows: true;
+
+        Adw.ButtonRow search_for_drivers_button_row {
+          title: _("_Search for Drivers");
+          use-underline: true;
+          activated => $search_for_drivers(template);
+        }
+
+        Adw.ButtonRow {
+          title: _("S_elect from Database…");
+          use-underline: true;
+          activated => $select_ppd_in_dialog(template);
+        }
+
+        Adw.ButtonRow {
+          title: _("_Install PPD File…");
+          use-underline: true;
+          activated => $select_ppd_manually(template);
+        }
+      }
+    };
+  };
+}

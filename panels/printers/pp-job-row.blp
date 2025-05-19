@@ -1,0 +1,48 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $PpJobRow: Adw.ActionRow {
+  [suffix]
+  Label state_label {
+    margin-end: 6;
+
+    styles [
+      "dim-label",
+    ]
+  }
+
+  [suffix]
+  Button priority_button {
+    /* Translators: Clicking this button prioritizes printing of this print job. */
+    tooltip-text: _("Move Print Job to Top of Queue");
+    icon-name: "list-high-priority-symbolic";
+    valign: center;
+    clicked => $priority_cb(template);
+
+    styles [
+      "flat",
+    ]
+  }
+
+  [suffix]
+  Button pause_button {
+    valign: center;
+    clicked => $pause_cb(template);
+
+    styles [
+      "flat",
+    ]
+  }
+
+  [suffix]
+  Button {
+    tooltip-text: _("Remove");
+    icon-name: "edit-delete-symbolic";
+    valign: center;
+    clicked => $stop_cb(template);
+
+    styles [
+      "flat",
+    ]
+  }
+}

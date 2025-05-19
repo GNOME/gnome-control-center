@@ -1,0 +1,145 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CcPrintersPanel: $CcPanel {
+  child: Adw.BreakpointBin {
+    width-request: 300;
+    height-request: 200;
+
+    Adw.Breakpoint {
+      condition ("max-width: 500sp")
+
+      setters {
+        template.compact: true;
+      }
+    }
+
+    child: Adw.ToolbarView {
+      [top]
+      Adw.HeaderBar {
+        [end]
+        ToggleButton search_button {
+          /* Translators: this is a verb. */
+          tooltip-text: _("Search");
+          icon-name: "edit-find-symbolic";
+        }
+
+        [end]
+        Button printer_add_button {
+          sensitive: false;
+          use-underline: true;
+          can-shrink: true;
+
+          /* Translators: This button adds new printer. */
+          label: _("_Add Printer…");
+          clicked => $printer_add_cb() swapped;
+
+          styles [
+            "suggested-action",
+          ]
+        }
+      }
+
+      [top]
+      SearchBar search_bar {
+        search-mode-enabled: bind search_button.active no-sync-create bidirectional;
+
+        Adw.Clamp {
+          maximum-size: 400;
+          hexpand: true;
+          margin-start: 6;
+          margin-end: 6;
+
+          SearchEntry search_entry {
+            placeholder-text: _("Search printers");
+          }
+        }
+      }
+
+      content: Adw.ToastOverlay toast_overlay {
+        child: Box {
+          orientation: vertical;
+
+          $CcPermissionInfobar permission_infobar {}
+
+          Stack main_stack {
+            hexpand: true;
+            vexpand: true;
+
+            StackPage {
+              name: "loading-page";
+
+              child: Adw.Spinner {};
+            }
+
+            StackPage {
+              name: "printers-list";
+
+              child: ScrolledWindow scrolled_window {
+                hscrollbar-policy: never;
+
+                Adw.Clamp {
+                  ListBox content {
+                    selection-mode: none;
+                    margin-top: 24;
+                    margin-bottom: 24;
+                    margin-start: 12;
+                    margin-end: 12;
+
+                    styles [
+                      "boxed-list-separate",
+                    ]
+
+                    [placeholder]
+                    Adw.StatusPage {
+                      icon-name: "edit-find-symbolic";
+                      title: _("No Results Found");
+                      description: _("Try a different search");
+                    }
+                  }
+                }
+              };
+            }
+
+            StackPage {
+              name: "empty-state";
+
+              child: Adw.StatusPage {
+                icon-name: "org.gnome.Settings-printers-symbolic";
+                title: _("No Printers");
+
+                Button printer_add_button_empty {
+                  /* Translators: This button adds a new printer. */
+                  label: _("_Add Printer…");
+                  use-underline: true;
+                  receives-default: true;
+                  halign: center;
+                  clicked => $printer_add_cb() swapped;
+
+                  styles [
+                    "suggested-action",
+                    "pill",
+                  ]
+                }
+              };
+            }
+
+            StackPage {
+              name: "no-cups-page";
+
+              child: Adw.StatusPage {
+                icon-name: "computer-fail-symbolic";
+
+                /* Translators: Title if the CUPS server is not running (we can not connect to it). */
+                title: _("No Print Service");
+
+                /* Translators: Description if the CUPS server is not running (we can not connect to it). */
+                description: _("The system printing service doesn’t seem to be available");
+              };
+            }
+          }
+        };
+      };
+    };
+  };
+}

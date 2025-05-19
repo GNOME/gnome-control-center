@@ -1,0 +1,249 @@
+using Gtk 4.0;
+
+template $PpPrinterEntry: ListBoxRow {
+  activatable: false;
+  hexpand: true;
+
+  Box {
+    margin-top: 18;
+    margin-end: 18;
+    margin-start: 24;
+    margin-bottom: 18;
+    spacing: 12;
+    orientation: vertical;
+
+    Box header_box {
+      spacing: 12;
+
+      Label printer_name_label {
+        ellipsize: middle;
+        xalign: 0;
+        hexpand: true;
+
+        styles [
+          "title-2",
+        ]
+      }
+
+      Box {
+        spacing: 6;
+        orientation: horizontal;
+        valign: center;
+
+        Button show_jobs_dialog_button {
+          sensitive: false;
+          label: _("No Active Jobs");
+          can-shrink: true;
+          clicked => $show_jobs_dialog();
+        }
+
+        MenuButton {
+          tooltip-text: _("View More");
+          menu-model: printer_menu;
+          icon-name: "view-more-symbolic";
+
+          styles [
+            "flat",
+          ]
+        }
+      }
+    }
+
+    Grid {
+      row-spacing: 6;
+      column-spacing: 12;
+
+      Label printer_model_label {
+        label: _("Model");
+        ellipsize: middle;
+        xalign: 1;
+        mnemonic-widget: printer_model;
+
+        layout {
+          column: "0";
+          row: "0";
+        }
+
+        styles [
+          "dim-label",
+        ]
+      }
+
+      Label printer_model {
+        ellipsize: middle;
+        xalign: 0;
+        hexpand: true;
+
+        layout {
+          column: "1";
+          row: "0";
+        }
+      }
+
+      Label printer_location_label {
+        label: _("Location");
+        xalign: 1;
+        mnemonic-widget: printer_location_address_label;
+
+        layout {
+          column: "0";
+          row: "1";
+        }
+
+        styles [
+          "dim-label",
+        ]
+      }
+
+      Label printer_location_address_label {
+        ellipsize: middle;
+        xalign: 0;
+        hexpand: true;
+
+        layout {
+          column: "1";
+          row: "1";
+        }
+      }
+
+      Label {
+        label: _("Status");
+        xalign: 1;
+        mnemonic-widget: printer_status;
+
+        layout {
+          column: "0";
+          row: "2";
+        }
+
+        styles [
+          "dim-label",
+        ]
+      }
+
+      Label printer_status {
+        xalign: 0;
+        ellipsize: middle;
+        hexpand: true;
+
+        layout {
+          column: "1";
+          row: "2";
+        }
+      }
+
+      Label printer_inklevel_label {
+        label: _("Ink Level");
+        xalign: 1;
+        mnemonic-widget: supply_frame;
+
+        layout {
+          column: "0";
+          row: "3";
+        }
+
+        styles [
+          "dim-label",
+        ]
+      }
+
+      Frame supply_frame {
+        valign: center;
+        height-request: 18;
+        hexpand: true;
+
+        layout {
+          column: "1";
+          row: "3";
+        }
+
+        DrawingArea supply_drawing_area {}
+      }
+    }
+
+    Grid printer_error {
+      visible: false;
+      column-spacing: 12;
+      row-spacing: 3;
+      margin-top: 6;
+
+      Label error_status {
+        hexpand: true;
+        xalign: 0;
+        wrap: true;
+        wrap-mode: word_char;
+
+        layout {
+          column: "0";
+          row: "0";
+        }
+
+        styles [
+          "heading",
+        ]
+      }
+
+      Label {
+        hexpand: true;
+        xalign: 0;
+        wrap: true;
+        wrap-mode: word_char;
+
+        /* Translators: This is the message which follows the printer error. */
+        label: _("Please restart when the problem is resolved");
+
+        layout {
+          column: "0";
+          row: "1";
+        }
+      }
+
+      Button {
+        valign: center;
+        can-shrink: true;
+
+        /* Translators: This is the button which restarts the printer. */
+        label: _("Restart");
+        clicked => $restart_printer();
+
+        layout {
+          column: "1";
+          row: "0";
+          row-span: "2";
+        }
+      }
+    }
+  }
+}
+
+menu printer_menu {
+  section {
+    item {
+      label: _("Printing Options");
+      action: "printer.options";
+    }
+
+    item {
+      label: _("Printer Details");
+      action: "printer.details";
+    }
+
+    item {
+      /* Translators: Set this printer as default */
+      label: _("Use Printer by Default");
+      action: "printer.default";
+    }
+
+    item {
+      /* Translators: This button executes command which cleans print heads of the printer. */
+      label: _("Clean Print Heads");
+      action: "printer.clean-heads";
+      hidden-when: "action-disabled";
+    }
+
+    item {
+      label: _("Remove Printer");
+      action: "printer.remove";
+    }
+  }
+}
