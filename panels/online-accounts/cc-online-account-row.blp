@@ -1,0 +1,37 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CcOnlineAccountRow: Adw.ActionRow {
+  activatable: true;
+
+  [prefix]
+  Image icon_image {
+    halign: center;
+    valign: center;
+  }
+
+  [suffix]
+  Box error_box {
+    orientation: horizontal;
+    spacing: 6;
+    margin-end: 6;
+    valign: center;
+
+    Image {
+      icon-name: "dialog-error-symbolic";
+    }
+
+    Label {
+      label: _("Error");
+    }
+
+    styles [
+      "error-box",
+    ]
+  }
+
+  [suffix]
+  Image {
+    icon-name: "go-next-symbolic";
+  }
+}
