@@ -1,0 +1,50 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CcPanelList: Adw.Bin {
+  Stack stack {
+    vhomogeneous: false;
+    hhomogeneous: true;
+    transition-type: slide_left_right;
+
+    StackPage {
+      name: "main";
+
+      child: ListBox main_listbox {
+        accessibility {
+          label: _("Settings categories");
+        }
+
+        row-activated => $row_activated_cb(template) not-swapped;
+
+        styles [
+          "navigation-sidebar",
+        ]
+      };
+    }
+
+    StackPage {
+      name: "search";
+
+      child: ListBox search_listbox {
+        row-activated => $search_row_activated_cb(template) not-swapped;
+        keynav-failed => $cc_util_keynav_propagate_up();
+
+        styles [
+          "navigation-sidebar",
+        ]
+
+        [placeholder]
+        Adw.StatusPage {
+          icon-name: "edit-find-symbolic";
+          title: _("No Results Found");
+          description: _("Try a different search");
+
+          styles [
+            "compact",
+          ]
+        }
+      };
+    }
+  }
+}

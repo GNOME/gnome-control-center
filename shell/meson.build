@@ -35,6 +35,22 @@ i18n.merge_file(
 
 cflags = ['-DGNOMELOCALEDIR="@0@"'.format(control_center_localedir)]
 
+blueprints = custom_target('blueprints',
+  input: files(
+    'cc-panel-list.blp',
+    'cc-panel.blp',
+    'cc-window.blp',
+    'help-overlay.blp',
+  ),
+  output: '.',
+  command: [
+    find_program('blueprint-compiler'),
+    'batch-compile',
+    '@OUTPUT@',
+    '@CURRENT_SOURCE_DIR@',
+    '@INPUT@',
+  ],
+)
 
 # Common sources between gnome-control-center and
 # libtestshell.
@@ -67,7 +83,7 @@ generated_sources += gnome.compile_resources(
   'resources',
   gresource_file,
   export : true,
-  dependencies: [gresource_file, appdata_file]
+  dependencies: [gresource_file, appdata_file, blueprints]
 )
 
 common_sources += generated_sources
