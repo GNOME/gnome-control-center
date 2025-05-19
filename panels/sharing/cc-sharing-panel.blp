@@ -1,0 +1,158 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CcSharingPanel: $CcPanel {
+  child: Adw.ToolbarView {
+    [top]
+    Adw.HeaderBar {}
+
+    content: Adw.PreferencesPage sharing_panel {
+      Adw.PreferencesGroup {
+        margin-bottom: 12;
+
+        $CcHostnameEntry hostname_entry {
+          title: _("_Device Name");
+          use-underline: true;
+        }
+      }
+
+      Adw.PreferencesGroup main_list_box {
+        $CcListRow personal_file_sharing_row {
+          icon-name: "folder-remote-symbolic";
+          show-arrow: true;
+          subtitle: _("Share files with other devices on the current network");
+          title: _("_File Sharing");
+          activated => $adw_dialog_present(personal_file_sharing_dialog);
+        }
+
+        $CcListRow media_sharing_row {
+          icon-name: "applications-multimedia-symbolic";
+          show-arrow: true;
+          subtitle: _("Stream music, photos and videos to devices on the current network");
+          title: _("_Media Sharing");
+          activated => $adw_dialog_present(media_sharing_dialog);
+        }
+      }
+    };
+  };
+}
+
+Adw.Dialog personal_file_sharing_dialog {
+  title: _("File Sharing");
+  content-width: 360;
+
+  child: Adw.ToolbarView {
+    [top]
+    Adw.HeaderBar {}
+
+    content: Adw.ToastOverlay personal_file_sharing_toast_overlay {
+      child: Adw.PreferencesPage personal_file_sharing_page {
+        Adw.PreferencesGroup {
+          Adw.ActionRow personal_file_sharing_enable_row {
+            title: _("_File Sharing");
+            use-underline: true;
+
+            [suffix]
+            $CcListRowInfoButton personal_file_sharing_info_button {
+              valign: "center";
+            }
+          }
+
+          Adw.ActionRow personal_file_sharing_address_row {
+            title: _("File Sharing _Address");
+            use-underline: true;
+            use-markup: false;
+
+            styles [
+              "property",
+            ]
+
+            [suffix]
+            Button {
+              valign: center;
+              tooltip-text: _("Copy");
+              icon-name: "edit-copy-symbolic";
+              clicked => $on_copy_personal_file_sharing_address_clicked(template);
+
+              styles [
+                "flat",
+              ]
+            }
+          }
+        }
+
+        Adw.PreferencesGroup {
+          Adw.ButtonRow {
+            title: _("_Open Public Folder");
+            end-icon-name: "adw-external-link-symbolic";
+            use-underline: true;
+            activated => $on_public_folder_row_clicked(template);
+          }
+        }
+
+        Adw.PreferencesGroup {
+          title: _("Security");
+
+          Adw.ActionRow {
+            title: _("_Require Password");
+            use-underline: true;
+            activatable-widget: personal_file_sharing_require_password_switch;
+
+            [suffix]
+            $CcListRowInfoButton {
+              valign: "center";
+              text: _("Password is required on devices that want to access shared content.\nIt may still be possible for devices on this network to see what content is being shared.");
+            }
+
+            Switch personal_file_sharing_require_password_switch {
+              valign: center;
+            }
+          }
+
+          Adw.PasswordEntryRow personal_file_sharing_password_entry_row {
+            title: _("_Password");
+            use-underline: true;
+          }
+        }
+      };
+    };
+  };
+}
+
+Adw.Dialog media_sharing_dialog {
+  can-close: false;
+  title: _("Media Sharing");
+  content-width: 360;
+
+  child: Adw.ToolbarView {
+    [top]
+    Adw.HeaderBar {}
+
+    content: Adw.PreferencesPage media_sharing_page {
+      Adw.PreferencesGroup {
+        Adw.ActionRow media_sharing_enable_row {
+          title: _("_Media Sharing");
+          use-underline: true;
+
+          [suffix]
+          $CcListRowInfoButton {
+            valign: "center";
+            text: _("Media sharing allows streaming pictures, music and video to DLNA enabled devices on the current network.");
+          }
+        }
+      }
+
+      Adw.PreferencesGroup {
+        title: _("Folders");
+
+        ListBox shared_folders_listbox {
+          selection-mode: none;
+
+          styles [
+            "boxed-list",
+          ]
+        }
+      }
+    };
+  };
+}
