@@ -1,0 +1,69 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CcAppNotificationsPage: Adw.NavigationPage {
+  child: Adw.ToolbarView {
+    [top]
+    Adw.HeaderBar {}
+
+    content: Adw.PreferencesPage {
+      Adw.PreferencesGroup {
+        Adw.SwitchRow notifications_row {
+          use-underline: true;
+
+          /* Translators: This is the per app switch for message tray usage. */
+          title: C_("notifications", "_Notifications");
+          subtitle: _("Show in notifications list");
+          notify::active => $notifications_row_state_set_cb(template);
+        }
+
+        Adw.SwitchRow sound_alerts_row {
+          use-underline: true;
+
+          /* Translators: This is the setting to configure sounds associated with notifications. */
+          title: C_("notifications", "_Sound");
+          subtitle: _("Allow notification sounds from app");
+          notify::active => $sound_alerts_row_state_set_cb(template);
+        }
+      }
+
+      Adw.PreferencesGroup {
+        title: _("Banners");
+
+        Adw.SwitchRow notification_banners_row {
+          use-underline: true;
+          title: C_("notifications", "Show _Banners");
+          subtitle: _("Show notifications above apps");
+          notify::active => $notification_banners_row_state_set_cb(template);
+        }
+
+        Adw.SwitchRow notification_banners_content_row {
+          use-underline: true;
+
+          /* Translators: Popups here refers to message tray notifications in the middle of the screen. */
+          title: C_("notifications", "Show _Content");
+          subtitle: _("Include message details in notification banners");
+          notify::active => $notification_banners_content_row_state_set_cb(template);
+        }
+      }
+
+      Adw.PreferencesGroup {
+        title: _("Lock Screen");
+
+        Adw.SwitchRow lock_screen_notifications_row {
+          use-underline: true;
+          title: C_("notifications", "Show B_anners");
+          subtitle: _("Show notifications on lock screen");
+          notify::active => $lock_screen_notifications_row_state_set_cb(template);
+        }
+
+        Adw.SwitchRow lock_screen_content_row {
+          use-underline: true;
+          title: C_("notifications", "Show C_ontent");
+          subtitle: _("Include message details on lock screen");
+          notify::active => $lock_screen_content_row_state_set_cb(template);
+        }
+      }
+    };
+  };
+}
