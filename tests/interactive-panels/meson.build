@@ -4,6 +4,22 @@ subdir('applications')
 # Sources #
 ###########
 
+blueprints = custom_target(
+  'blueprints',
+  input: files(
+    'gtp-dynamic-panel.blp',
+    'gtp-static-init.blp',
+  ),
+  output: '.',
+  command: [
+    blueprint_compiler,
+    'batch-compile',
+    '@OUTPUT@',
+    '@CURRENT_SOURCE_DIR@',
+    '@INPUT@',
+  ],
+)
+
 sources = files(
   'gtp-dynamic-panel.c',
   'gtp-static-init.c',
@@ -21,6 +37,7 @@ sources += gnome.compile_resources(
               source_dir : '.',
                   c_name : 'test_panels',
                   export : true,
+            dependencies : blueprints,
 )
 
 
