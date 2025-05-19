@@ -10,6 +10,23 @@ i18n.merge_file(
   install_dir : control_center_desktopdir
 )
 
+blueprints = custom_target('blueprints',
+  input: files(
+    'cc-application-shortcut-dialog.blp',
+    'cc-applications-panel.blp',
+    'cc-applications-row.blp',
+    'cc-default-apps-page.blp',
+  ),
+  output: '.',
+  command: [
+    find_program('blueprint-compiler'),
+    'batch-compile',
+    '@OUTPUT@',
+    '@CURRENT_SOURCE_DIR@',
+    '@INPUT@',
+  ],
+)
+
 sources = files(
   'cc-applications-panel.c',
   'cc-applications-row.c',
@@ -22,17 +39,11 @@ sources = files(
   'utils.c',
 )
 
-resource_data = files(
-  'cc-applications-panel.ui',
-  'cc-default-apps-page.ui',
-  'cc-removable-media-settings.ui',
-)
-
 sources += gnome.compile_resources(
   'cc-' + cappletname + '-resources',
   cappletname + '.gresource.xml',
   c_name : 'cc_' + cappletname,
-  dependencies: resource_data,
+  dependencies: blueprints,
   export : true
 )
 
