@@ -1,0 +1,68 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CcWifiConnectionRow: Adw.ActionRow {
+  [prefix]
+  Box {
+    valign: center;
+
+    CheckButton checkbutton {
+      halign: start;
+      valign: center;
+      margin-end: 6;
+    }
+
+    Image strength_icon {
+      icon-name: "network-wireless-signal-excellent-symbolic";
+      icon-size: normal;
+    }
+
+    Image encrypted_icon {
+      valign: end;
+      pixel-size: 8;
+    }
+  }
+
+  [suffix]
+  Adw.Spinner connecting_spinner {
+    margin-end: 6;
+  }
+
+  [suffix]
+  Button qr_code_button {
+    name: "qr_code_button";
+    icon-name: "qr-code-symbolic";
+    valign: center;
+    tooltip-text: _("Share Network");
+    clicked => $qr_code_clicked_cb(template);
+
+    styles [
+      "flat",
+    ]
+  }
+
+  [suffix]
+  Button options_button {
+    name: "options_button";
+    icon-name: "cog-wheel-symbolic";
+    valign: center;
+    tooltip-text: _("Network Options");
+    clicked => $configure_clicked_cb(template);
+
+    styles [
+      "flat",
+    ]
+  }
+
+  [suffix]
+  Button forget_button {
+    icon-name: "user-trash-symbolic";
+    valign: center;
+    tooltip-text: _("Forget Network");
+    clicked => $forget_clicked_cb(template);
+
+    styles [
+      "flat",
+    ]
+  }
+}

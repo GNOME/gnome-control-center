@@ -1,0 +1,65 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CcQrCodeDialog: Adw.Dialog {
+  content-width: 350;
+  content-height: 500;
+  title: _("Share Network");
+
+  child: Adw.ToolbarView {
+    [top]
+    Adw.HeaderBar {}
+
+    content: Adw.PreferencesPage {
+      Adw.PreferencesGroup {
+        Box {
+          orientation: vertical;
+          spacing: 24;
+
+          Picture qr_image {
+            halign: center;
+            alternative-text: _("QR Code");
+            focusable: true;
+
+            styles [
+              "card",
+              "qr-image",
+            ]
+          }
+
+          Label qr_title {
+            label: _("Scan to Connect");
+
+            css-classes: [
+              "title-1",
+            ];
+
+            selectable: bind template.visible no-sync-create inverted;
+            wrap: true;
+            justify: center;
+          }
+        }
+      }
+
+      Adw.PreferencesGroup {
+        Adw.ActionRow network_name_row {
+          title: _("Network Name");
+          use-markup: false;
+
+          styles [
+            "property",
+          ]
+        }
+
+        Adw.ActionRow network_password_row {
+          title: _("Password");
+          use-markup: false;
+
+          styles [
+            "property",
+          ]
+        }
+      }
+    };
+  };
+}
