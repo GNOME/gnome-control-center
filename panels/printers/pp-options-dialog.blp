@@ -1,0 +1,77 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $PpOptionsDialog: Adw.Window {
+  title: _("Printer Options");
+  width-request: 500;
+  height-request: 400;
+  resizable: false;
+  modal: true;
+
+  content: Adw.ToolbarView {
+    top-bar-style: raised;
+
+    [top]
+    Adw.HeaderBar {
+      [start]
+      Button {
+        /* Translators: This button triggers the printing of a test page. */
+        label: _("_Test Page");
+        use-underline: true;
+        clicked => $test_page_cb(template);
+
+        styles [
+          "suggested-action",
+        ]
+      }
+
+      title-widget: Adw.WindowTitle title_widget {
+        title: _("Printer Options");
+      };
+    }
+
+    content: Stack stack {
+      hhomogeneous: true;
+      vhomogeneous: true;
+
+      StackPage {
+        name: "spinner-page";
+
+        child: Adw.Spinner {};
+      }
+
+      StackPage {
+        name: "pp-options-page";
+
+        child: Adw.OverlaySplitView {
+          sidebar: ScrolledWindow {
+            width-request: 120;
+            hscrollbar-policy: never;
+
+            TreeView categories_treeview {
+              headers-visible: false;
+
+              styles [
+                "navigation-sidebar",
+                "printer-options-sidebar",
+              ]
+
+              [internal-child selection]
+              TreeSelection categories_selection {
+                changed => $category_selection_changed_cb(template);
+              }
+            }
+          };
+
+          content: Notebook notebook {
+            tab-pos: left;
+            show-tabs: false;
+            show-border: false;
+            hexpand: true;
+            vexpand: true;
+          };
+        };
+      }
+    };
+  };
+}

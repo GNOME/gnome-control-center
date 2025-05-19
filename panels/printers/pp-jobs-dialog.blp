@@ -1,0 +1,233 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $PpJobsDialog: Adw.Dialog {
+  content-width: 720;
+  content-height: 500;
+
+  child: Adw.ToolbarView {
+    [top]
+    Adw.HeaderBar {
+      [start]
+      Button jobs_clear_all_button {
+        /* Translators: this action removes (purges) all the listed jobs from the list. */
+        label: _("_Clear All");
+        receives-default: true;
+        use-underline: true;
+        clicked => $adw_dialog_present(clear_all_jobs_dialog);
+
+        styles [
+          "destructive-action",
+        ]
+      }
+
+      title-widget: Adw.WindowTitle title_widget {
+        title: _("Active Jobs");
+      };
+    }
+
+    content: Stack stack {
+      StackPage {
+        name: "no-jobs-page";
+
+        child: Adw.StatusPage {
+          /* Translators: this label describes the dialog empty state, with no jobs listed. */
+          title: _("No Active Printer Jobs");
+          icon-name: "org.gnome.Settings-printers-symbolic";
+
+          styles [
+            "dim-label",
+          ]
+        };
+      }
+
+      StackPage {
+        name: "jobs-page";
+
+        child: Box {
+          orientation: vertical;
+
+          InfoBar authentication_infobar {
+            Box {
+              spacing: 16;
+              margin-start: 12;
+
+              Label authenticate_jobs_label {
+                halign: start;
+                hexpand: false;
+                wrap: true;
+                label: "2 Jobs Require Authentication";
+
+                styles [
+                  "heading",
+                ]
+              }
+            }
+
+            Box {
+              margin-top: 12;
+              margin-bottom: 12;
+              margin-start: 12;
+              margin-end: 2;
+              spacing: 6;
+
+              MenuButton authenticate_jobs_button {
+                /* Translators: This button pop up authentication dialog for print jobs which need credentials. */
+                label: _("_Authenticate");
+                receives-default: false;
+                use-underline: true;
+                halign: end;
+                valign: center;
+                popover: authentication_popover;
+              }
+            }
+          }
+
+          Adw.PreferencesPage {
+            Adw.PreferencesGroup {
+              ListBox jobs_listbox {
+                selection-mode: none;
+
+                styles [
+                  "boxed-list",
+                ]
+              }
+            }
+          }
+        };
+      }
+    };
+  };
+}
+
+Adw.AlertDialog clear_all_jobs_dialog {
+  heading: _("Clear All Active Jobs?");
+  body: _("Clearing jobs cannot be undone");
+  default-response: "cancel";
+  close-response: "cancel";
+  response::clear-all => $on_clear_all_response_cb() swapped;
+
+  responses [
+    cancel: _("_Cancel"),
+    clear-all: _("Clear _All") destructive,
+  ]
+}
+
+Popover authentication_popover {
+  halign: start;
+  valign: start;
+
+  Box {
+    margin-start: 30;
+    margin-end: 30;
+    margin-top: 20;
+    margin-bottom: 20;
+    orientation: vertical;
+    spacing: 20;
+
+    Label authentication_label {
+      margin-top: 5;
+      margin-bottom: 5;
+      label: "Enter credentials to print from %s";
+    }
+
+    Grid {
+      row-spacing: 10;
+      column-spacing: 15;
+
+      Label domain_label {
+        halign: start;
+
+        /* Translators: This is a windows domain used with SMB protocol. */
+        label: _("Domain");
+        xalign: 1;
+        mnemonic-widget: domain_entry;
+
+        layout {
+          column: "0";
+          row: "0";
+        }
+      }
+
+      Label username_label {
+        halign: start;
+
+        /* Translators: This is a username on a print server. */
+        label: _("Username");
+        xalign: 1;
+        mnemonic-widget: username_entry;
+
+        layout {
+          column: "0";
+          row: "1";
+        }
+      }
+
+      Label password_label {
+        halign: start;
+
+        /* Translators: This is a password needed for printing. */
+        label: _("Password");
+        xalign: 1;
+        mnemonic-widget: password_entry;
+
+        layout {
+          column: "0";
+          row: "2";
+        }
+      }
+
+      Entry domain_entry {
+        hexpand: true;
+        changed => $auth_entries_changed() swapped;
+        activate => $auth_entries_activated() swapped;
+
+        layout {
+          column: "1";
+          row: "0";
+        }
+      }
+
+      Entry username_entry {
+        hexpand: true;
+        changed => $auth_entries_changed() swapped;
+        activate => $auth_entries_activated() swapped;
+
+        layout {
+          column: "1";
+          row: "1";
+        }
+      }
+
+      Entry password_entry {
+        hexpand: true;
+        visibility: false;
+        input-purpose: password;
+        changed => $auth_entries_changed() swapped;
+        activate => $auth_entries_activated() swapped;
+
+        layout {
+          column: "1";
+          row: "2";
+        }
+      }
+    }
+
+    Button authenticate_button {
+      /* Translators: This button authenticates all print jobs and send them for printing. */
+      label: _("A_uthenticate");
+      use-underline: true;
+      receives-default: true;
+      halign: end;
+      clicked => $authenticate_button_clicked() swapped;
+    }
+  }
+}
+
+SizeGroup {
+  widgets [
+    domain_label,
+    username_label,
+    password_label,
+  ]
+}
