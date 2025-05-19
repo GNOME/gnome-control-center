@@ -10,6 +10,23 @@ i18n.merge_file(
   install_dir: control_center_desktopdir
 )
 
+blueprints = custom_target(
+  'blueprints',
+  input: files(
+    'cc-search-locations-page.blp',
+    'cc-search-panel-row.blp',
+    'cc-search-panel.blp',
+  ),
+  output: '.',
+  command: [
+    blueprint_compiler,
+    'batch-compile',
+    '@OUTPUT@',
+    '@CURRENT_SOURCE_DIR@',
+    '@INPUT@',
+  ],
+)
+
 sources = files(
   'cc-search-panel.c',
   'cc-search-locations-page.c',
@@ -20,7 +37,8 @@ sources += gnome.compile_resources(
   'cc-' + cappletname + '-resources',
   cappletname + '.gresource.xml',
   c_name: 'cc_' + cappletname,
-  export: true
+  export: true,
+  dependencies: blueprints,
 )
 
 cflags += [
