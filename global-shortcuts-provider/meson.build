@@ -11,6 +11,21 @@ configure_file(
   configuration: service_conf
 )
 
+blueprints = custom_target(
+  'blueprints',
+  input: files(
+    'cc-global-shortcut-dialog.blp',
+  ),
+  output: '.',
+  command: [
+    blueprint_compiler,
+    'batch-compile',
+    '@OUTPUT@',
+    '@CURRENT_SOURCE_DIR@',
+    '@INPUT@',
+  ],
+)
+
 sources = files(
   'cc-global-shortcut-dialog.c',
   'cc-global-shortcuts-provider.c',
@@ -21,7 +36,8 @@ global_shortcuts_resources = gnome.compile_resources(
   'cc-global-shortcuts-provider-resources',
   'global-shortcuts-provider.gresource.xml',
   c_name: 'cc_global_shortcut_provider',
-  export: true
+  export: true,
+  dependencies: blueprints,
 )
 
 sources += global_shortcuts_resources
