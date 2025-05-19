@@ -1,0 +1,20 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CcSharingNetworks: Adw.PreferencesGroup {
+  title: _("Networks");
+
+  ListBox listbox {
+    selection-mode: none;
+
+    accessibility {
+      labelled-by: [
+        template,
+      ];
+    }
+
+    styles [
+      "boxed-list",
+    ]
+  }
+}
