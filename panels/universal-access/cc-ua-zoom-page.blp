@@ -1,0 +1,267 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CcUaZoomPage: Adw.NavigationPage {
+  title: _("Zoom");
+  tag: "zoom";
+
+  child: Adw.ToolbarView {
+    [top]
+    Adw.HeaderBar {}
+
+    content: Adw.PreferencesPage {
+      Adw.PreferencesGroup {
+        Adw.SwitchRow desktop_zoom_row {
+          title: _("_Desktop Zoom");
+          subtitle: _("Magnify the entire screen");
+          use-underline: true;
+        }
+      }
+
+      Adw.PreferencesGroup {
+        title: _("Magnifier");
+
+        Adw.SpinRow magnify_factor_spin_row {
+          title: _("_Magnification Factor");
+          use-underline: true;
+          digits: 2;
+
+          adjustment: Adjustment {
+            lower: 1;
+            upper: 20;
+            value: 2;
+            step-increment: 0.25;
+            page-increment: 1;
+          };
+        }
+
+        Adw.ComboRow magnify_view_row {
+          title: _("M_agnifier View");
+          use-underline: true;
+          notify::selected => $ua_zoom_magnify_postion_row_changed_cb() swapped;
+
+          model: StringList {
+            strings [
+              /* Translators: This is a behavior option of the Magnifier View */
+              _("Follow Mouse Cursor"),
+              /* Translators: This is a behavior option of the Magnifier View */
+              _("Screen Area"),
+            ]
+          };
+        }
+
+        Adw.SwitchRow magnify_outside_screen_row {
+          title: _("_Extend Outside Screen Edges");
+          use-underline: true;
+        }
+
+        Adw.ComboRow zoom_screen_area_row {
+          sensitive: bind magnify_outside_screen_row.sensitive;
+          notify::selected => $ua_zoom_screen_area_row_changed_cb() swapped;
+          title: _("_Screen Area");
+          use-underline: true;
+
+          model: StringList {
+            strings [
+              /* Translators: This is an option of the Magnifier Screen Area */
+              _("Full Screen"),
+              /* Translators: This is an option of the Magnifier Screen Area */
+              _("Top Half"),
+              /* Translators: This is an option of the Magnifier Screen Area */
+              _("Bottom Half"),
+              /* Translators: This is an option of the Magnifier Screen Area */
+              _("Left Half"),
+              /* Translators: This is an option of the Magnifier Screen Area */
+              _("Right Half"),
+            ]
+          };
+        }
+
+        Adw.ComboRow zoom_follow_behaviour_row {
+          sensitive: bind magnify_outside_screen_row.sensitive;
+          title: _("_Follow Behavior");
+          use-underline: true;
+          notify::selected => $ua_zoom_behaviour_row_changed_cb() swapped;
+
+          model: StringList {
+            strings [
+              /* Translators: This is an option of the zoom Magnifier behavior */
+              _("Moves with Contents"),
+              /* Translators: This is an option of the zoom Magnifier behavior */
+              _("Pushes Contents Around"),
+              /* Translators: This is an option of the zoom Magnifier behavior */
+              _("Remains Centered"),
+            ]
+          };
+        }
+      }
+
+      Adw.PreferencesGroup {
+        title: _("Crosshairs");
+
+        Adw.ExpanderRow crosshair_row {
+          title: _("_Crosshair Lines");
+          subtitle: _("Mark the cursor location in the magnifier region using lines");
+          use-underline: true;
+          show-enable-switch: true;
+
+          Adw.SwitchRow crosshair_overlap_mouse_row {
+            title: _("_Overlap Mouse Cursor");
+            use-underline: true;
+          }
+
+          Adw.ActionRow {
+            title: _("_Thickness");
+            use-underline: true;
+
+            [suffix]
+            Scale crosshair_thickness_scale {
+              marks [
+                /* Translators: This is a mark in the Thickness scale */
+                mark (1, bottom, _("Thin")),
+                /* Translators: This is a mark in the Thickness scale */
+                mark (100, bottom, _("Thick")),
+                mark (8),
+              ]
+
+              adjustment: Adjustment {
+                lower: 1;
+                upper: 100;
+                value: 8;
+                step-increment: 1;
+                page-increment: 10;
+              };
+            }
+          }
+
+          Adw.ActionRow {
+            title: _("Len_gth");
+            use-underline: true;
+
+            [suffix]
+            Scale crosshair_length_scale {
+              marks [
+                /* Translators: This is a mark in the Crosshair Length scale */
+                mark (20, bottom, _("Short")),
+                /* Translators: This is a mark in the Crosshair Length scale */
+                mark (4096, bottom, _("Long")),
+              ]
+
+              adjustment: Adjustment {
+                lower: 20;
+                upper: 4096;
+                value: 4096;
+                step-increment: 1;
+                page-increment: 100;
+              };
+            }
+          }
+
+          Adw.ActionRow {
+            title: _("Colo_r");
+            use-underline: true;
+            activatable-widget: crosshair_color_button;
+
+            ColorButton crosshair_color_button {
+              valign: center;
+              color-set => $ua_zoom_crosshair_color_set_cb() swapped;
+            }
+          }
+        }
+      }
+
+      Adw.PreferencesGroup {
+        title: _("Color Filters");
+
+        Adw.SwitchRow color_inverted_row {
+          title: _("_Inverted");
+          subtitle: _("Invert colors in the magnifier region");
+          use-underline: true;
+        }
+
+        Adw.ActionRow {
+          title: _("_Brightness");
+          use-underline: true;
+
+          [suffix]
+          Scale brightness_scale {
+            width-request: 240;
+
+            marks [
+              /* Translators: This is a mark in the Brightness scale */
+              mark (-0.75, bottom, _("Low")),
+              /* Translators: This is a mark in the Brightness scale */
+              mark (0.75, bottom, _("High")),
+              mark (0),
+            ]
+
+            adjustment: Adjustment {
+              lower: -0.75;
+              upper: 0.75;
+              step-increment: 0.1;
+              page-increment: 0.1;
+              value-changed => $ua_zoom_brightness_value_changed_cb() swapped;
+            };
+          }
+        }
+
+        Adw.ActionRow {
+          title: _("Co_ntrast");
+          use-underline: true;
+
+          [suffix]
+          Scale contrast_scale {
+            marks [
+              /* Translators: This is a mark in the Contrast scale */
+              mark (-0.75, bottom, _("Low")),
+              /* Translators: This is a mark in the Contrast scale */
+              mark (0.75, bottom, _("High")),
+              mark (0),
+            ]
+
+            adjustment: Adjustment {
+              lower: -0.75;
+              upper: 0.75;
+              step-increment: 0.1;
+              page-increment: 0.1;
+              value-changed => $ua_zoom_contrast_value_changed_cb() swapped;
+            };
+          }
+        }
+
+        Adw.ActionRow {
+          title: _("Co_lor");
+          use-underline: true;
+
+          [suffix]
+          Scale grayscale_scale {
+            marks [
+              /* Translators: This is a mark in the Grayscale scale */
+              mark (0, bottom, _("None")),
+              /* Translators: This is a mark in the Grayscale scale */
+              mark (1, bottom, _("Full")),
+            ]
+
+            adjustment: Adjustment {
+              upper: 1;
+              step-increment: 0.1;
+              page-increment: 0.2;
+            };
+          }
+        }
+      }
+    };
+  };
+}
+
+SizeGroup {
+  mode: horizontal;
+
+  widgets [
+    crosshair_thickness_scale,
+    crosshair_length_scale,
+    brightness_scale,
+    contrast_scale,
+    grayscale_scale,
+  ]
+}
