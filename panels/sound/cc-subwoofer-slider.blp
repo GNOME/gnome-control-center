@@ -1,0 +1,15 @@
+using Gtk 4.0;
+
+template $CcSubwooferSlider: Widget {
+  Scale scale {
+    adjustment: adjustment;
+
+    accessibility {
+      label: _("Subwoofer");
+    }
+  }
+}
+
+Adjustment adjustment {
+  value-changed => $changed_cb(template);
+}
