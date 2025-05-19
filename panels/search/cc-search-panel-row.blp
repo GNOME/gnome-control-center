@@ -1,0 +1,63 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CcSearchPanelRow: Adw.ActionRow {
+  activatable-widget: switcher;
+
+  [prefix]
+  Image icon {
+    icon-size: large;
+    accessible-role: presentation;
+
+    styles [
+      "lowres-icon",
+    ]
+  }
+
+  [prefix]
+  Image {
+    icon-name: "list-drag-handle-symbolic";
+
+    styles [
+      "drag-handle",
+    ]
+  }
+
+  [suffix]
+  Switch switcher {
+    valign: center;
+  }
+
+  [suffix]
+  Separator {
+    orientation: vertical;
+    margin-top: 12;
+    margin-bottom: 12;
+  }
+
+  [suffix]
+  MenuButton {
+    tooltip-text: _("View More");
+    valign: center;
+    icon-name: "view-more-symbolic";
+    menu-model: move_row_menu;
+
+    styles [
+      "flat",
+    ]
+  }
+}
+
+menu move_row_menu {
+  section {
+    item {
+      label: _("Move Up");
+      action: "row.move-up";
+    }
+
+    item {
+      label: _("Move Down");
+      action: "row.move-down";
+    }
+  }
+}
