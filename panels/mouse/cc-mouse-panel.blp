@@ -1,0 +1,282 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CcMousePanel: $CcPanel {
+  child: Adw.BreakpointBin {
+    width-request: 300;
+    height-request: 200;
+
+    Adw.Breakpoint {
+      condition ("max-width: 500sp")
+
+      setters {
+        header_bar.title-widget: null;
+        view_switcher_bar.reveal: true;
+        two_finger_push_row.compact: true;
+        mouse_scroll_direction_row.compact: true;
+        touchpad_scroll_method_row.compact: true;
+        touchpad_scroll_direction_row.compact: true;
+      }
+    }
+
+    child: Adw.ToolbarView {
+      [top]
+      Adw.HeaderBar header_bar {
+        title-widget: Stack title_stack {
+          StackPage {
+            name: "switcher";
+
+            child: Adw.ViewSwitcher {
+              stack: stack;
+              policy: wide;
+            };
+          }
+
+          StackPage {
+            name: "title";
+
+            child: Adw.WindowTitle {
+              title: bind template.title;
+            };
+          }
+        };
+      }
+
+      [bottom]
+      Adw.ViewSwitcherBar view_switcher_bar {
+        stack: stack;
+      }
+
+      content: Adw.ViewStack stack {
+        Adw.ViewStackPage mouse_stack_page {
+          title: _("_Mouse");
+          use-underline: true;
+          icon-name: "input-mouse-symbolic";
+
+          child: Adw.PreferencesPage {
+            Adw.PreferencesGroup {
+              title: _("General");
+
+              Adw.ActionRow primary_button_row {
+                title: _("Primary Button");
+                subtitle: _("Order of physical buttons on mice and touchpads");
+
+                Adw.ToggleGroup primary_toggle_group {
+                  valign: center;
+                  homogeneous: true;
+                  notify::active => $on_primary_button_changed_cb(template);
+
+                  Adw.Toggle {
+                    name: "left";
+                    label: _("_Left");
+                    use-underline: true;
+                  }
+
+                  Adw.Toggle {
+                    name: "right";
+                    label: _("_Right");
+                    use-underline: true;
+                  }
+
+                  GestureClick {
+                    button: 3;
+                    exclusive: true;
+                    pressed => $primary_toggle_right_click_pressed_cb(template);
+                  }
+                }
+              }
+            }
+
+            Adw.PreferencesGroup mouse_group {
+              title: _("Mouse");
+
+              Adw.ActionRow mouse_row {
+                title: _("Po_inter Speed");
+                use-underline: true;
+                activatable-widget: mouse_speed_scale;
+
+                [suffix]
+                Scale mouse_speed_scale {
+                  hexpand: true;
+
+                  marks [
+                    mark (-1, bottom, _("Slow")),
+                    mark (0),
+                    mark (1, bottom, _("Fast")),
+                  ]
+
+                  adjustment: Adjustment {
+                    lower: -1;
+                    upper: 1;
+                    step-increment: 0.1;
+                    page-increment: 0.1;
+                  };
+                }
+              }
+
+              Adw.ActionRow mouse_accel_profile {
+                title: _("Mouse _Acceleration");
+                subtitle: _("Recommended for most users and applications");
+                activatable-widget: mouse_accel_switch;
+                use-underline: true;
+
+                [suffix]
+                $CcListRowInfoButton {
+                  valign: "center";
+                  text: _("Turning mouse acceleration off can allow faster and more precise movements, but can also make the mouse more difficult to use.");
+                }
+
+                [suffix]
+                Switch mouse_accel_switch {
+                  valign: center;
+                }
+              }
+
+              $CcSplitRow mouse_scroll_direction_row {
+                title: _("Scroll Direction");
+                default-option-title: _("Tra_ditional");
+                default-option-subtitle: _("Scrolling moves the view");
+                default-illustration-resource: "/org/gnome/control-center/mouse/assets/scroll-traditional.webm";
+                alternative-option-title: _("_Natural");
+                alternative-option-subtitle: _("Scrolling moves the content");
+                alternative-illustration-resource: "/org/gnome/control-center/mouse/assets/scroll-natural.webm";
+              }
+            }
+
+            Adw.PreferencesGroup {
+              Adw.ButtonRow {
+                title: _("Test _Settings");
+                end-icon-name: "go-next-symbolic";
+                use-underline: true;
+                activated => $test_button_row_activated_cb(template);
+              }
+            }
+          };
+        }
+
+        Adw.ViewStackPage touchpad_stack_page {
+          visible: false;
+          name: "touchpad";
+          icon-name: "input-touchpad-symbolic";
+          title: _("_Touchpad");
+          use-underline: true;
+
+          child: Adw.PreferencesPage {
+            Adw.PreferencesGroup {
+              Adw.SwitchRow touchpad_toggle_row {
+                title: _("T_ouchpad");
+                use-underline: true;
+              }
+            }
+
+            Adw.PreferencesGroup {
+              sensitive: bind touchpad_toggle_row.active;
+              title: _("General");
+
+              Adw.SwitchRow touchpad_typing_row {
+                title: _("_Disable Touchpad While Typing");
+                use-underline: true;
+              }
+
+              Adw.ActionRow {
+                title: _("Po_inter Speed");
+                use-underline: true;
+                activatable-widget: touchpad_speed_scale;
+
+                [suffix]
+                Scale touchpad_speed_scale {
+                  hexpand: true;
+
+                  marks [
+                    mark (-1, bottom, _("Slow")),
+                    mark (0),
+                    mark (1, bottom, _("Fast")),
+                  ]
+
+                  adjustment: Adjustment {
+                    lower: -1;
+                    upper: 1;
+                    step-increment: 0.1;
+                    page-increment: 0.1;
+                  };
+                }
+              }
+            }
+
+            Adw.PreferencesGroup {
+              title: _("Clicking");
+              sensitive: bind touchpad_toggle_row.active;
+
+              $CcSplitRow two_finger_push_row {
+                title: _("Secondary Click");
+                default-option-title: _("Two _Finger Push");
+                default-option-subtitle: _("Push anywhere with 2 fingers");
+                default-illustration-resource: "/org/gnome/control-center/mouse/assets/push-to-click-anywhere.webm";
+                alternative-option-title: _("_Corner Push");
+                alternative-option-subtitle: _("Push with a single finger in the corner");
+                alternative-illustration-resource: "/org/gnome/control-center/mouse/assets/push-areas.webm";
+              }
+            }
+
+            Adw.PreferencesGroup {
+              sensitive: bind touchpad_toggle_row.active;
+
+              $CcIllustratedRow tap_to_click_row {
+                visible: false;
+                title: _("T_ap to Click");
+                use-underline: true;
+                subtitle: _("Quickly touch the touchpad to click");
+                resource: "/org/gnome/control-center/mouse/assets/tap-to-click.webm";
+                activatable-widget: "tap_to_click_switch";
+
+                Switch tap_to_click_switch {
+                  valign: center;
+                }
+              }
+            }
+
+            Adw.PreferencesGroup {
+              title: _("Scrolling");
+              sensitive: bind touchpad_toggle_row.active;
+
+              $CcSplitRow touchpad_scroll_method_row {
+                title: _("Scroll Method");
+                default-option-title: _("T_wo Finger");
+                default-option-subtitle: _("Drag two fingers on the touchpad");
+                default-illustration-resource: "/org/gnome/control-center/mouse/assets/scroll-2finger.webm";
+                alternative-option-title: _("_Edge");
+                alternative-option-subtitle: _("Drag one finger on the edge");
+                alternative-illustration-resource: "/org/gnome/control-center/mouse/assets/edge-scroll.webm";
+                notify::use-default => $on_touchpad_scroll_method_changed_cb(template);
+              }
+            }
+
+            Adw.PreferencesGroup {
+              sensitive: bind touchpad_toggle_row.active;
+
+              $CcSplitRow touchpad_scroll_direction_row {
+                title: _("Scroll Direction");
+                default-option-title: _("T_raditional");
+                default-option-subtitle: _("Scrolling moves the view");
+                default-illustration-resource: "/org/gnome/control-center/mouse/assets/touch-scroll-traditional.webm";
+                alternative-option-title: _("_Natural");
+                alternative-option-subtitle: _("Scrolling moves the content");
+                alternative-illustration-resource: "/org/gnome/control-center/mouse/assets/touch-scroll-natural.webm";
+              }
+            }
+
+            Adw.PreferencesGroup {
+              Adw.ButtonRow {
+                title: _("Test _Settings");
+                end-icon-name: "go-next-symbolic";
+                use-underline: true;
+                sensitive: bind touchpad_toggle_row.active;
+                activated => $test_button_row_activated_cb(template);
+              }
+            }
+          };
+        }
+      };
+    };
+  };
+}

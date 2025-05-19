@@ -1,0 +1,205 @@
+using Gtk 4.0;
+using Adw 1;
+
+Adjustment scrolled_window_adjustment {
+  upper: 100;
+  value: 100;
+  step-increment: 1;
+  page-increment: 10;
+  value-changed => $on_scroll_adjustment_changed_cb();
+}
+
+template $CcMouseTest: Adw.Window {
+  title: _("Test Mouse & Touchpad");
+  modal: true;
+  hide-on-close: true;
+  show => $on_mouse_test_show_cb();
+
+  content: Adw.ToolbarView {
+    [top]
+    Adw.HeaderBar {
+      title-widget: Adw.ViewSwitcher switcher_bar {
+        stack: stack;
+        policy: wide;
+      };
+    }
+
+    content: Adw.ViewStack stack {
+      Adw.ViewStackPage click_page {
+        title: _("_Clicking");
+        icon-name: "mouse-test-click-symbolic";
+        use-underline: true;
+
+        child: Box {
+          orientation: vertical;
+          halign: center;
+          spacing: 32;
+          margin-top: 32;
+          margin-bottom: 32;
+
+          Button click_button {
+            label: _("Click Here");
+            halign: center;
+            valign: center;
+            vexpand: true;
+            width-request: 256;
+            height-request: 256;
+
+            styles [
+              "circular",
+              "title-1",
+            ]
+
+            GestureClick {
+              propagation-phase: capture;
+              pressed => $on_test_button_clicked_cb();
+              button: 0;
+            }
+          }
+
+          Grid {
+            halign: center;
+            valign: center;
+            vexpand: true;
+            column-spacing: 10;
+            row-spacing: 10;
+
+            styles [
+              "title-4",
+            ]
+
+            Image primary_click_image {
+              icon-name: "check-plain-symbolic";
+              icon-size: normal;
+
+              styles [
+                "click-status-emblem",
+              ]
+
+              layout {
+                column: "0";
+                row: "0";
+              }
+            }
+
+            Label {
+              label: _("Primary Click");
+              xalign: 0;
+
+              layout {
+                column: "1";
+                row: "0";
+              }
+            }
+
+            Image secondary_click_image {
+              icon-name: "check-plain-symbolic";
+              icon-size: normal;
+
+              styles [
+                "click-status-emblem",
+              ]
+
+              layout {
+                column: "0";
+                row: "1";
+              }
+            }
+
+            Label {
+              label: _("Secondary Click");
+              xalign: 0;
+
+              layout {
+                column: "1";
+                row: "1";
+              }
+            }
+
+            Image double_click_image {
+              icon-name: "check-plain-symbolic";
+              icon-size: normal;
+
+              styles [
+                "click-status-emblem",
+              ]
+
+              layout {
+                column: "0";
+                row: "2";
+              }
+            }
+
+            Label {
+              label: _("Double Click");
+              xalign: 0;
+
+              layout {
+                column: "1";
+                row: "2";
+              }
+            }
+          }
+        };
+      }
+
+      Adw.ViewStackPage scroll_page {
+        title: _("_Scrolling");
+        icon-name: "mouse-test-scroll-symbolic";
+        use-underline: true;
+
+        child: Box {
+          orientation: vertical;
+
+          Overlay {
+            [overlay]
+            Image arrow_up {
+              icon-name: "go-up-symbolic";
+              pixel-size: 64;
+              valign: start;
+              can-target: false;
+
+              styles [
+                "mouse-test-arrow",
+                "top-arrow",
+              ]
+            }
+
+            [overlay]
+            Image arrow_down {
+              icon-name: "go-down-symbolic";
+              pixel-size: 64;
+              valign: end;
+              can-target: false;
+
+              styles [
+                "mouse-test-arrow",
+                "bottom-arrow",
+              ]
+            }
+
+            ScrolledWindow scrolledwindow {
+              hexpand: true;
+              vexpand: true;
+              vadjustment: scrolled_window_adjustment;
+              hscrollbar-policy: never;
+              vscrollbar-policy: external;
+              min-content-height: 440;
+
+              Viewport viewport {
+                styles [
+                  "mouse-test-viewport",
+                ]
+
+                Picture image {
+                  can-shrink: false;
+                  file: "resource:///org/gnome/control-center/mouse/scroll-test.svg";
+                }
+              }
+            }
+          }
+        };
+      }
+    };
+  };
+}
