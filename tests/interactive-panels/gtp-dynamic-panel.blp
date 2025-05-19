@@ -1,0 +1,25 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $GtpDynamicPanel: $CcPanel {
+  child: Adw.ToolbarView {
+    [top]
+    Adw.HeaderBar {}
+
+    content: Adw.StatusPage {
+      icon-name: "weather-clear-night-symbolic";
+      title: "Dynamic Panel";
+      description: "Dynamic panels may hide if you don't have some hardware. Use the button below to toggle the panel visibility:";
+
+      Button {
+        halign: center;
+        label: "Hide";
+        clicked => $on_button_clicked_cb(template) not-swapped;
+
+        styles [
+          "pill",
+        ]
+      }
+    };
+  };
+}
