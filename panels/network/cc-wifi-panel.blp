@@ -1,0 +1,183 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CcWifiPanel: $CcPanel {
+  child: Adw.ToolbarView {
+    [top]
+    Adw.HeaderBar titlebar {
+      title-widget: Stack center_stack {
+        halign: center;
+        hhomogeneous: false;
+
+        StackPage {
+          name: "many";
+
+          child: StackSwitcher {
+            stack: stack;
+          };
+        }
+      };
+    }
+
+    content: Adw.PreferencesPage {
+      Adw.PreferencesGroup {
+        Stack device_stack {}
+      }
+
+      Adw.PreferencesGroup rfkill_widget {
+        Adw.SwitchRow rfkill_row {
+          title: _("Airplane Mode");
+          subtitle: _("Disables Wi-Fi, Bluetooth and mobile broadband");
+          notify::active => $rfkill_switch_notify_activate_cb(template);
+        }
+      }
+
+      Adw.PreferencesGroup {
+        Stack main_stack {
+          hhomogeneous: false;
+          vhomogeneous: false;
+          transition-type: crossfade;
+
+          StackPage {
+            name: "wifi-off";
+
+            child: Adw.StatusPage {
+              icon-name: "network-wireless-disabled-symbolic";
+              title: _("Wi-Fi Off");
+              description: _("Turn on to use Wi-Fi");
+            };
+          }
+
+          StackPage {
+            name: "no-wifi-devices";
+
+            child: Adw.StatusPage {
+              icon-name: "network-wireless-no-route-symbolic";
+              title: _("No Wi-Fi Adapter Found");
+              description: _("Make sure you have a Wi-Fi adapter plugged and turned on");
+            };
+          }
+
+          StackPage {
+            name: "airplane-mode";
+
+            child: Adw.StatusPage {
+              icon-name: "airplane-mode-symbolic";
+              title: _("Airplane Mode On");
+              description: _("Turn off to use Wi-Fi");
+            };
+          }
+
+          StackPage {
+            name: "wifi-connections";
+
+            child: Box {
+              orientation: vertical;
+
+              Box hotspot_box {
+                orientation: vertical;
+                margin-start: 12;
+                margin-end: 12;
+                margin-top: 36;
+                margin-bottom: 24;
+
+                Picture wifi_qr_image {
+                  halign: center;
+                  width-request: 180;
+                  height-request: 180;
+                  margin-bottom: 36;
+
+                  styles [
+                    "card",
+                    "qr-image",
+                  ]
+                }
+
+                Label {
+                  label: _("Wi-Fi Hotspot Active");
+                  margin-bottom: 12;
+                  justify: center;
+                  wrap: true;
+                  wrap-mode: word_char;
+
+                  styles [
+                    "title",
+                    "title-1",
+                  ]
+                }
+
+                Label {
+                  label: _("Scan with another device to connect to the hotspot.\nTurn off the hotspot to use Wi-Fi with this device.");
+                  justify: center;
+                  wrap: true;
+                  wrap-mode: word_char;
+                  margin-bottom: 36;
+                }
+
+                Button hotspot_off_button {
+                  halign: center;
+                  label: _("T_urn Off Hotspot…");
+                  use-underline: true;
+                  clicked => $adw_dialog_present(stop_hotspot_dialog);
+
+                  styles [
+                    "destructive-action",
+                    "pill",
+                  ]
+                }
+              }
+
+              Box {
+                hexpand: true;
+                halign: start;
+                spacing: 6;
+                margin-bottom: 12;
+
+                Label list_label {
+                  label: _("Visible Networks");
+                  xalign: 0.0;
+
+                  styles [
+                    "heading",
+                  ]
+                }
+
+                Adw.Spinner spinner {}
+              }
+
+              Stack stack {
+                hexpand: true;
+                vexpand: true;
+                transition-type: crossfade;
+                notify::visible-child-name => $on_stack_visible_child_changed_cb(template);
+              }
+            };
+          }
+
+          StackPage {
+            name: "nm-not-running";
+
+            child: Adw.StatusPage {
+              icon-name: "network-wireless-disabled";
+              title: _("Wi-Fi Unavailable");
+              description: _("An error has occurred and Wi-Fi cannot be used.\nError details: NetworkManager not running.");
+            };
+          }
+        }
+      }
+    };
+  };
+}
+
+Adw.AlertDialog stop_hotspot_dialog {
+  heading: _("Turn Off Hotspot?");
+  body: _("Turning off will disconnect any devices that are using the hotspot.");
+  default-response: "cancel";
+  close-response: "cancel";
+  response::turn-off => $on_stop_hotspot_dialog_response_cb(template);
+
+  responses [
+    cancel: _("_Cancel"),
+    turn-off: _("_Turn Off") destructive,
+  ]
+}

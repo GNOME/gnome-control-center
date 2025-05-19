@@ -1,0 +1,165 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CcNetProxyPage: Adw.NavigationPage {
+  title: _("Proxy");
+  tag: "proxy";
+  can-pop: bind template.modified inverted;
+
+  child: Adw.ToolbarView {
+    [top]
+    Adw.HeaderBar {
+      [start]
+      Button cancel_button {
+        visible: bind template.modified;
+        label: _("_Cancel");
+        use-underline: true;
+        can-shrink: true;
+        clicked => $cancel_clicked_cb() swapped;
+      }
+
+      [end]
+      Button save_button {
+        visible: bind template.modified;
+        label: _("_Save");
+        use-underline: true;
+        can-shrink: true;
+
+        styles [
+          "suggested-action",
+        ]
+
+        clicked => $save_clicked_cb() swapped;
+      }
+    }
+
+    content: Adw.PreferencesPage {
+      Adw.PreferencesGroup {
+        Adw.SwitchRow enable_proxy_row {
+          title: _("_Network Proxy");
+          use-underline: true;
+          active: bind template.enabled bidirectional;
+        }
+      }
+
+      Adw.PreferencesGroup {
+        Adw.ComboRow proxy_type_row {
+          title: _("C_onfiguration");
+          use-underline: true;
+          notify::selected-item => $proxy_configuration_changed_cb() swapped;
+
+          model: StringList {
+            strings [
+              _("Automatic"),
+              _("Manual"),
+            ]
+          };
+        }
+      }
+
+      Adw.PreferencesGroup {
+        Stack main_stack {
+          hhomogeneous: false;
+          vhomogeneous: false;
+
+          Adw.PreferencesGroup automatic_view {
+            Adw.EntryRow proxy_url_entry {
+              title: _("Con_figuration URL");
+              use-underline: true;
+            }
+
+            Label proxy_warning_label {
+              margin-top: 12;
+              wrap: true;
+              xalign: 0.0;
+              label: _("Web Proxy Autodiscovery is used when a Configuration URL is not provided. This is not recommended for untrusted public networks.");
+
+              styles [
+                "dim-label",
+              ]
+            }
+          }
+
+          Box manual_view {
+            orientation: vertical;
+            spacing: 24;
+
+            Adw.PreferencesGroup {
+              title: _("HTTP Proxy");
+
+              Adw.EntryRow http_host_entry {
+                title: _("URL");
+              }
+
+              Adw.SpinRow {
+                title: _("Port");
+
+                adjustment: Adjustment http_port_adjustment {
+                  upper: 65535;
+                  step-increment: 1;
+                };
+              }
+            }
+
+            Adw.PreferencesGroup {
+              title: _("HTTPS Proxy");
+
+              Adw.EntryRow https_host_entry {
+                title: _("URL");
+              }
+
+              Adw.SpinRow {
+                title: _("Port");
+
+                adjustment: Adjustment https_port_adjustment {
+                  upper: 65535;
+                  step-increment: 1;
+                };
+              }
+            }
+
+            Adw.PreferencesGroup {
+              title: _("FTP Proxy");
+
+              Adw.EntryRow ftp_host_entry {
+                title: _("URL");
+              }
+
+              Adw.SpinRow {
+                title: _("Port");
+
+                adjustment: Adjustment ftp_port_adjustment {
+                  upper: 65535;
+                  step-increment: 1;
+                };
+              }
+            }
+
+            Adw.PreferencesGroup {
+              title: _("SOCKS Host");
+
+              Adw.EntryRow socks_host_entry {
+                title: _("URL");
+              }
+
+              Adw.SpinRow {
+                title: _("Port");
+
+                adjustment: Adjustment socks_port_adjustment {
+                  upper: 65535;
+                  step-increment: 1;
+                };
+              }
+            }
+
+            Adw.PreferencesGroup {
+              Adw.EntryRow proxy_ignore_entry {
+                title: _("Ignored Hosts");
+              }
+            }
+          }
+        }
+      }
+    };
+  };
+}

@@ -1,0 +1,349 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CEPageIP4: Adw.Bin {
+  ScrolledWindow {
+    propagate-natural-height: true;
+    propagate-natural-width: true;
+
+    Viewport {
+      Grid main_box {
+        margin-start: 24;
+        margin-end: 24;
+        margin-top: 24;
+        margin-bottom: 24;
+        orientation: vertical;
+        row-spacing: 6;
+        column-spacing: 6;
+
+        Label {
+          label: _("IPv_4 Method");
+          use-underline: true;
+          mnemonic-widget: disabled_radio;
+          xalign: 0.0;
+
+          layout {
+            row: "0";
+            column: "0";
+          }
+
+          styles [
+            "heading",
+          ]
+        }
+
+        CheckButton automatic_radio {
+          label: _("Automatic (DHCP)");
+          action-name: "ip4page.ip4method";
+          action-target: "'automatic'";
+
+          layout {
+            row: "0";
+            column: "1";
+          }
+        }
+
+        CheckButton local_radio {
+          label: _("Link-Local Only");
+          action-name: "ip4page.ip4method";
+          action-target: "'local'";
+
+          layout {
+            row: "0";
+            column: "2";
+          }
+        }
+
+        CheckButton manual_radio {
+          label: _("Manual");
+          action-name: "ip4page.ip4method";
+          action-target: "'manual'";
+
+          layout {
+            row: "1";
+            column: "1";
+          }
+        }
+
+        CheckButton disabled_radio {
+          label: _("Disable");
+          action-name: "ip4page.ip4method";
+          action-target: "'disabled'";
+
+          layout {
+            row: "1";
+            column: "2";
+          }
+        }
+
+        CheckButton shared_radio {
+          label: _("Shared to other computers");
+          action-name: "ip4page.ip4method";
+          action-target: "'shared'";
+
+          layout {
+            row: "2";
+            column: "1";
+          }
+        }
+
+        Box content_box {
+          orientation: vertical;
+          spacing: 6;
+
+          layout {
+            row: "3";
+            column: "0";
+            column-span: "3";
+          }
+
+          Box address_box {
+            orientation: vertical;
+
+            Label {
+              xalign: 0;
+              label: _("Addresses");
+              margin-top: 24;
+              margin-bottom: 8;
+
+              styles [
+                "heading",
+              ]
+            }
+
+            Box {
+              orientation: horizontal;
+
+              Label address_address_label {
+                hexpand: true;
+                label: _("Address");
+
+                styles [
+                  "dim-label",
+                  "caption",
+                ]
+              }
+
+              Label address_netmask_label {
+                hexpand: true;
+                label: _("Netmask");
+
+                styles [
+                  "dim-label",
+                  "caption",
+                ]
+              }
+
+              Label address_gateway_label {
+                hexpand: true;
+                label: _("Gateway");
+
+                styles [
+                  "dim-label",
+                  "caption",
+                ]
+              }
+
+              Box address_stub_box {}
+            }
+          }
+
+          Box dns_box {
+            orientation: vertical;
+            spacing: 6;
+
+            Box {
+              margin-top: 24;
+              spacing: 6;
+
+              Label dns4_label {
+                hexpand: true;
+                xalign: 0;
+                label: _("DNS");
+
+                styles [
+                  "heading",
+                ]
+              }
+
+              Label auto_dns_label {
+                hexpand: true;
+                xalign: 1;
+                label: _("Automatic");
+              }
+
+              Switch auto_dns_switch {
+                halign: end;
+                valign: center;
+
+                accessibility {
+                  label: _("Automatic DNS");
+                }
+              }
+            }
+
+            Entry dns_entry {
+              accessibility {
+                label: _("DNS server address(es)");
+
+                described-by: [
+                  dns_multiple_help,
+                ];
+              }
+            }
+
+            Label dns_multiple_help {
+              xalign: 0;
+              label: _("Separate IP addresses with commas");
+
+              styles [
+                "dim-label",
+                "caption",
+              ]
+            }
+          }
+
+          Box routes_box {
+            orientation: vertical;
+            spacing: 6;
+
+            Box {
+              margin-top: 24;
+              spacing: 6;
+
+              Label {
+                xalign: 0;
+                hexpand: true;
+                label: _("Routes");
+
+                styles [
+                  "heading",
+                ]
+              }
+
+              Label auto_routes_label {
+                hexpand: true;
+                xalign: 1;
+                label: _("Automatic");
+              }
+
+              Switch auto_routes_switch {
+                halign: end;
+                valign: center;
+
+                accessibility {
+                  label: _("Automatic Routes");
+                }
+              }
+            }
+
+            Box route_config_box {
+              orientation: vertical;
+
+              Box {
+                orientation: horizontal;
+
+                Label routes_address_label {
+                  hexpand: true;
+                  label: _("Address");
+
+                  styles [
+                    "dim-label",
+                    "caption",
+                  ]
+                }
+
+                Label routes_netmask_label {
+                  hexpand: true;
+                  label: _("Netmask");
+
+                  styles [
+                    "dim-label",
+                    "caption",
+                  ]
+                }
+
+                Label routes_gateway_label {
+                  hexpand: true;
+                  label: _("Gateway");
+
+                  styles [
+                    "dim-label",
+                    "caption",
+                  ]
+                }
+
+                Label routes_metric_label {
+                  hexpand: true;
+
+                  /* Translators: Please see https://en.wikipedia.org/wiki/Metrics_(networking) */
+                  label: _("Metric");
+
+                  styles [
+                    "dim-label",
+                    "caption",
+                  ]
+                }
+
+                Box routes_stub_box {}
+              }
+            }
+
+            CheckButton never_default_check {
+              label: _("Use this connection _only for resources on its network");
+              use-underline: true;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+SizeGroup routes_address_sizegroup {
+  mode: horizontal;
+
+  widgets [
+    routes_address_label,
+  ]
+}
+
+SizeGroup routes_netmask_sizegroup {
+  mode: horizontal;
+
+  widgets [
+    routes_netmask_label,
+  ]
+}
+
+SizeGroup routes_gateway_sizegroup {
+  mode: horizontal;
+
+  widgets [
+    routes_gateway_label,
+  ]
+}
+
+SizeGroup routes_metric_sizegroup {
+  mode: horizontal;
+
+  widgets [
+    routes_metric_label,
+  ]
+}
+
+SizeGroup routes_sizegroup {
+  mode: horizontal;
+
+  widgets [
+    routes_stub_box,
+  ]
+}
+
+SizeGroup address_sizegroup {
+  mode: horizontal;
+
+  widgets [
+    address_stub_box,
+  ]
+}

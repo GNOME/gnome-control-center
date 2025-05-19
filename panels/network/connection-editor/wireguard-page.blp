@@ -1,0 +1,270 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CEPageWireguard: Box {
+  ScrolledWindow {
+    propagate-natural-height: true;
+    propagate-natural-width: true;
+
+    Viewport {
+      Grid main_box {
+        margin-start: 24;
+        margin-end: 24;
+        margin-top: 24;
+        margin-bottom: 24;
+        orientation: vertical;
+        row-spacing: 6;
+        column-spacing: 6;
+
+        Label {
+          label: _("_Connection Name");
+          use-underline: true;
+          halign: end;
+          mnemonic-widget: entry_conname;
+
+          layout {
+            column: "0";
+            row: "0";
+          }
+        }
+
+        Entry entry_conname {
+          changed => $ce_page_changed(template);
+
+          layout {
+            column: "1";
+            row: "0";
+          }
+        }
+
+        Label {
+          halign: end;
+          hexpand: false;
+          label: _("_Interface Name");
+          use-underline: true;
+          mnemonic-widget: entry_ifname;
+
+          layout {
+            column: "0";
+            row: "1";
+          }
+        }
+
+        Entry entry_ifname {
+          tooltip-text: _("The name of the wireguard interface to create.");
+          hexpand: true;
+          changed => $ce_page_changed(template);
+
+          layout {
+            column: "1";
+            row: "1";
+          }
+        }
+
+        Label {
+          halign: end;
+          label: _("_Private Key");
+          use-underline: true;
+          mnemonic-widget: entry_private_key;
+
+          layout {
+            column: "0";
+            row: "2";
+          }
+        }
+
+        Entry entry_private_key {
+          tooltip-text: _("The 256 bit private key in base64 encoding");
+          visibility: false;
+          truncate-multiline: true;
+          secondary-icon-name: "dialog-password";
+          secondary-icon-tooltip-text: _("Show/hide private key");
+          changed => $ce_page_changed(template);
+
+          layout {
+            column: "1";
+            row: "2";
+          }
+        }
+
+        Label {
+          halign: end;
+          hexpand: false;
+          label: _("_Listen Port");
+          use-underline: true;
+          mnemonic-widget: spin_listen_port;
+
+          layout {
+            column: "0";
+            row: "3";
+          }
+        }
+
+        SpinButton spin_listen_port {
+          width-request: 5;
+          tooltip-text: _("A port to listen on. If set to 'automatic', the port will be chosen randomly when the interface comes up.");
+          text: _("0");
+
+          adjustment: Adjustment {
+            upper: 65535;
+            value: 51820;
+            step-increment: 1;
+            page-increment: 1000;
+          };
+
+          climb-rate: 1;
+          changed => $ce_page_changed(template);
+
+          layout {
+            column: "1";
+            row: "3";
+          }
+        }
+
+        Label {
+          halign: end;
+          hexpand: false;
+          label: _("_fwmark");
+          use-underline: true;
+          mnemonic-widget: spin_fwmark;
+
+          layout {
+            column: "0";
+            row: "4";
+          }
+        }
+
+        SpinButton spin_fwmark {
+          width-request: 10;
+          tooltip-text: _("A 32-bit fwmark for outgoing packets. Leave it to 'off' to disable fwmark.");
+          text: _("0");
+
+          adjustment: Adjustment {
+            upper: 4294967295;
+            step-increment: 1;
+            page-increment: 10;
+          };
+
+          climb-rate: 1;
+          changed => $ce_page_changed(template);
+
+          layout {
+            column: "1";
+            row: "4";
+          }
+        }
+
+        Label {
+          halign: end;
+          hexpand: false;
+          label: _("_MTU");
+          use-underline: true;
+          mnemonic-widget: spin_mtu;
+
+          layout {
+            column: "0";
+            row: "5";
+          }
+        }
+
+        SpinButton spin_mtu {
+          width-request: 15;
+
+          adjustment: Adjustment {
+            upper: 65536;
+            step-increment: 1;
+            page-increment: 10;
+          };
+
+          climb-rate: 1;
+          changed => $ce_page_changed(template);
+
+          layout {
+            column: "1";
+            row: "5";
+          }
+        }
+
+        Label {
+          halign: start;
+          label: _("bytes");
+          justify: fill;
+
+          layout {
+            column: "2";
+            row: "5";
+          }
+        }
+
+        CheckButton checkbutton_peer_routes {
+          label: _("_Add peer routes");
+          halign: start;
+          use-underline: true;
+          toggled => $ce_page_changed(template);
+
+          layout {
+            column: "1";
+            row: "6";
+          }
+        }
+
+        Box {
+          orientation: vertical;
+          spacing: 6;
+
+          layout {
+            row: "7";
+            column: "0";
+            column-span: "3";
+          }
+
+          Box {
+            margin-top: 12;
+
+            Label {
+              hexpand: true;
+              label: _("_Peers");
+              use-underline: true;
+              xalign: 0;
+
+              styles [
+                "heading",
+              ]
+            }
+
+            Button button_add_peer {
+              receives-default: true;
+              icon-name: "list-add-symbolic";
+
+              accessibility {
+                label: _("Add WireGuard peer");
+              }
+
+              styles [
+                "flat",
+              ]
+            }
+          }
+
+          Frame {
+            Box peers_box {
+              orientation: vertical;
+
+              ListBox empty_listbox {
+                selection-mode: none;
+
+                styles [
+                  "boxed-list",
+                ]
+
+                Adw.ActionRow {
+                  title: _("No peers set up");
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

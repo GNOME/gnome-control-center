@@ -1,0 +1,38 @@
+using Gtk 4.0;
+
+template $CEPageVpn: Box {
+  ScrolledWindow {
+    propagate-natural-height: true;
+    propagate-natural-width: true;
+
+    Box box {
+      margin-start: 50;
+      margin-end: 50;
+      margin-top: 12;
+      margin-bottom: 12;
+      orientation: vertical;
+      spacing: 10;
+
+      Box {
+        spacing: 6;
+
+        Label {
+          xalign: 1;
+          label: _("_Name");
+          use-underline: true;
+          mnemonic-widget: name_entry;
+        }
+
+        Entry name_entry {
+          hexpand: true;
+        }
+      }
+
+      Label failure_label {
+        xalign: 0;
+        use-markup: true;
+        label: _("<i>(Error: unable to load VPN connection editor)</i>");
+      }
+    }
+  }
+}

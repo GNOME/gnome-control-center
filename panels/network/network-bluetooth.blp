@@ -1,0 +1,25 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $NetDeviceBluetooth: Adw.ActionRow {
+  activatable-widget: device_off_switch;
+  title: _("Wired");
+
+  [suffix]
+  Switch device_off_switch {
+    valign: center;
+    notify::active => $device_off_switch_changed_cb(template);
+  }
+
+  [suffix]
+  Button options_button {
+    tooltip-text: _("Network Options");
+    valign: center;
+    icon-name: "cog-wheel-symbolic";
+    clicked => $options_button_clicked_cb(template);
+
+    styles [
+      "flat",
+    ]
+  }
+}

@@ -1,0 +1,96 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $NetDeviceWifi: Adw.Bin {
+  Stack stack {
+    valign: start;
+    vhomogeneous: false;
+
+    StackPage {
+      child: Box listbox_box {
+        orientation: vertical;
+        height-request: 140;
+      };
+    }
+
+    StackPage {
+      child: ListBox hotspot_box {
+        selection-mode: none;
+
+        styles [
+          "boxed-list",
+        ]
+
+        Adw.ActionRow hotspot_name_row {
+          title: C_("Wi-Fi Hotspot", "Network Name");
+
+          styles [
+            "property",
+          ]
+        }
+
+        Adw.ActionRow hotspot_security_row {
+          title: C_("Wi-Fi Hotspot", "Security Type");
+
+          styles [
+            "property",
+          ]
+        }
+
+        Adw.ActionRow hotspot_password_row {
+          title: C_("Wi-Fi Hotspot", "Password");
+
+          styles [
+            "property",
+          ]
+        }
+      };
+    }
+  }
+}
+
+Adw.WindowTitle wifi_headerbar_title {
+  title: _("Wi-Fi");
+}
+
+Adw.PreferencesGroup details_box {
+  Adw.SwitchRow device_enable_row {
+    title: _("Wi-Fi");
+    notify::active => $device_off_switch_changed_cb(template);
+  }
+
+  $CcListRow saved_network_row {
+    title: _("Saved Networks");
+    show-arrow: true;
+    activated => $adw_dialog_present(saved_networks_dialog);
+  }
+
+  $CcListRow connect_hidden_row {
+    title: _("_Connect to Hidden Network…");
+    show-arrow: true;
+    activated => $on_connect_hidden_network(template);
+  }
+
+  $CcListRow hotspot_row {
+    title: _("_Turn On Wi-Fi Hotspot…");
+    show-arrow: true;
+    activated => $on_wifi_hotspot_network(template);
+  }
+}
+
+Adw.Dialog saved_networks_dialog {
+  title: _("Saved Wi-Fi Networks");
+  content-width: 500;
+  content-height: 600;
+
+  child: Adw.ToolbarView {
+    [top]
+    Adw.HeaderBar {}
+
+    content: Adw.ToastOverlay saved_networks_toast_overlay {
+      Adw.PreferencesPage {
+        Adw.PreferencesGroup saved_networks_box {}
+      }
+    };
+  };
+}

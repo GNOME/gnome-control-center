@@ -1,0 +1,467 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CEPageDetails: Adw.Bin {
+  ScrolledWindow {
+    propagate-natural-height: true;
+    propagate-natural-width: true;
+
+    Grid {
+      margin-start: 24;
+      margin-end: 24;
+      margin-top: 24;
+      margin-bottom: 24;
+      row-spacing: 12;
+      column-spacing: 12;
+
+      Label strength_heading_label {
+        xalign: 1;
+        label: _("Signal Strength");
+        mnemonic-widget: strength_label;
+
+        layout {
+          column: "0";
+          row: "0";
+          column-span: "1";
+          row-span: "1";
+        }
+
+        styles [
+          "dim-label",
+        ]
+      }
+
+      Label strength_label {
+        hexpand: true;
+        xalign: 0;
+        label: _("Weak");
+        selectable: true;
+        max-width-chars: 50;
+        ellipsize: end;
+
+        layout {
+          column: "1";
+          row: "0";
+          column-span: "1";
+          row-span: "1";
+        }
+      }
+
+      Label speed_heading_label {
+        xalign: 1;
+        label: _("Link speed");
+        mnemonic-widget: speed_label;
+
+        layout {
+          column: "0";
+          row: "1";
+          column-span: "1";
+          row-span: "1";
+        }
+
+        styles [
+          "dim-label",
+        ]
+      }
+
+      Label speed_label {
+        xalign: 0;
+        label: _("1Mb/sec");
+        selectable: true;
+        hexpand: true;
+        max-width-chars: 50;
+        ellipsize: end;
+
+        layout {
+          column: "1";
+          row: "1";
+          column-span: "1";
+          row-span: "1";
+        }
+      }
+
+      Label security_heading_label {
+        xalign: 1;
+        label: _("Security");
+        mnemonic-widget: security_label;
+
+        layout {
+          column: "0";
+          row: "2";
+          column-span: "1";
+          row-span: "1";
+        }
+
+        styles [
+          "dim-label",
+        ]
+      }
+
+      Label ipv4_heading_label {
+        xalign: 1;
+        label: _("IPv4 Address");
+        mnemonic-widget: ipv4_label;
+
+        layout {
+          column: "0";
+          row: "3";
+          column-span: "1";
+          row-span: "1";
+        }
+
+        styles [
+          "dim-label",
+        ]
+      }
+
+      Label ipv6_heading_label {
+        xalign: 1;
+        label: _("IPv6 Address");
+        mnemonic-widget: ipv6_label;
+
+        layout {
+          column: "0";
+          row: "4";
+          column-span: "1";
+          row-span: "1";
+        }
+
+        styles [
+          "dim-label",
+        ]
+      }
+
+      Label mac_heading_label {
+        xalign: 1;
+        label: _("Hardware Address");
+        mnemonic-widget: mac_label;
+
+        layout {
+          column: "0";
+          row: "5";
+          column-span: "1";
+          row-span: "1";
+        }
+
+        styles [
+          "dim-label",
+        ]
+      }
+
+      Label freq_heading_label {
+        xalign: 1;
+        label: _("Supported Frequencies");
+        mnemonic-widget: freq_label;
+
+        layout {
+          column: "0";
+          row: "6";
+          column-span: "1";
+          row-span: "1";
+        }
+
+        styles [
+          "dim-label",
+        ]
+      }
+
+      Label route_heading_label {
+        xalign: 1;
+        label: _("Default Route");
+        mnemonic-widget: route_label;
+
+        layout {
+          column: "0";
+          row: "7";
+          column-span: "1";
+          row-span: "1";
+        }
+
+        styles [
+          "dim-label",
+        ]
+      }
+
+      Label dns4_heading_label {
+        xalign: 1;
+        yalign: 0;
+        label: _("DNS");
+        mnemonic-widget: dns4_label;
+
+        layout {
+          column: "0";
+          row: "8";
+          column-span: "1";
+          row-span: "1";
+        }
+
+        styles [
+          "dim-label",
+        ]
+      }
+
+      Label dns6_heading_label {
+        xalign: 1;
+        yalign: 0;
+        label: _("DNS");
+        mnemonic-widget: dns6_label;
+
+        layout {
+          column: "0";
+          row: "9";
+          column-span: "1";
+          row-span: "1";
+        }
+
+        styles [
+          "dim-label",
+        ]
+      }
+
+      Label last_used_heading_label {
+        xalign: 1;
+        label: _("Last Used");
+        mnemonic-widget: last_used_label;
+
+        layout {
+          column: "0";
+          row: "10";
+          column-span: "1";
+          row-span: "1";
+        }
+
+        styles [
+          "dim-label",
+        ]
+      }
+
+      Label security_label {
+        xalign: 0;
+        label: "WPA";
+        selectable: true;
+        hexpand: true;
+        max-width-chars: 50;
+        ellipsize: end;
+
+        layout {
+          column: "1";
+          row: "2";
+          column-span: "1";
+          row-span: "1";
+        }
+      }
+
+      Label ipv4_label {
+        xalign: 0;
+        label: "127.0.0.1";
+        selectable: true;
+        hexpand: true;
+        max-width-chars: 50;
+        ellipsize: end;
+
+        layout {
+          column: "1";
+          row: "3";
+          column-span: "1";
+          row-span: "1";
+        }
+      }
+
+      Label ipv6_label {
+        xalign: 0;
+        label: "::1";
+        selectable: true;
+        hexpand: true;
+        max-width-chars: 50;
+        ellipsize: end;
+
+        layout {
+          column: "1";
+          row: "4";
+          column-span: "1";
+          row-span: "1";
+        }
+      }
+
+      Label mac_label {
+        xalign: 0;
+        label: "AA:BB:CC:DD:55:66:77:88";
+        selectable: true;
+        hexpand: true;
+        max-width-chars: 50;
+        ellipsize: end;
+
+        layout {
+          column: "1";
+          row: "5";
+          column-span: "1";
+          row-span: "1";
+        }
+      }
+
+      Label freq_label {
+        xalign: 0;
+        label: "2.4 GHz / 5 GHz";
+        selectable: true;
+        hexpand: true;
+
+        layout {
+          column: "1";
+          row: "6";
+          column-span: "1";
+          row-span: "1";
+        }
+      }
+
+      Label route_label {
+        xalign: 0;
+        label: "127.0.0.1";
+        selectable: true;
+        hexpand: true;
+        max-width-chars: 50;
+        ellipsize: end;
+
+        layout {
+          column: "1";
+          row: "7";
+          column-span: "1";
+          row-span: "1";
+        }
+      }
+
+      Label dns4_label {
+        xalign: 0;
+        yalign: 0;
+        label: "127.0.0.1";
+        wrap: true;
+        selectable: true;
+        hexpand: true;
+        max-width-chars: 50;
+        ellipsize: end;
+
+        layout {
+          column: "1";
+          row: "8";
+          column-span: "1";
+          row-span: "1";
+        }
+      }
+
+      Label dns6_label {
+        xalign: 0;
+        yalign: 0;
+        label: "::1";
+        wrap: true;
+        selectable: true;
+        hexpand: true;
+        max-width-chars: 50;
+        ellipsize: end;
+
+        layout {
+          column: "1";
+          row: "9";
+          column-span: "1";
+          row-span: "1";
+        }
+      }
+
+      Label last_used_label {
+        xalign: 0;
+        label: "today";
+        selectable: true;
+        hexpand: true;
+        max-width-chars: 50;
+        ellipsize: end;
+
+        layout {
+          column: "1";
+          row: "10";
+          column-span: "1";
+          row-span: "1";
+        }
+      }
+
+      CheckButton auto_connect_check {
+        label: _("Connect _automatically");
+        valign: end;
+        use-underline: true;
+        margin-top: 12;
+
+        layout {
+          column: "0";
+          row: "11";
+          column-span: "2";
+          row-span: "1";
+        }
+      }
+
+      CheckButton all_user_check {
+        label: _("Make available to _other users");
+        use-underline: true;
+
+        layout {
+          column: "0";
+          row: "12";
+          column-span: "2";
+          row-span: "1";
+        }
+      }
+
+      CheckButton restrict_data_check {
+        layout {
+          column: "0";
+          row: "13";
+          column-span: "2";
+          row-span: "1";
+        }
+
+        margin-bottom: 12;
+
+        child: Box {
+          orientation: vertical;
+
+          Label {
+            xalign: 0;
+            label: _("_Metered connection: has data limits or can incur charges");
+            hexpand: true;
+            wrap: true;
+            use-underline: true;
+            mnemonic-widget: restrict_data_check;
+          }
+
+          Label {
+            xalign: 0;
+            label: _("Software updates and other large downloads will not be started automatically.");
+            wrap: true;
+            max-width-chars: 60;
+
+            styles [
+              "dim-label",
+              "caption",
+            ]
+          }
+        };
+      }
+
+      Button forget_button {
+        use-underline: true;
+        hexpand: true;
+        vexpand: true;
+        halign: center;
+        valign: end;
+
+        layout {
+          column: "0";
+          row: "14";
+          column-span: "2";
+          row-span: "1";
+        }
+
+        styles [
+          "destructive-action",
+          "pill",
+        ]
+      }
+    }
+  }
+}
