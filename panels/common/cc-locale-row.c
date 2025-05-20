@@ -89,6 +89,9 @@ cc_locale_row_state_flags_changed (GtkWidget     *widget,
 
   is_selected = !!(gtk_widget_get_state_flags (widget) & GTK_STATE_FLAG_SELECTED);
 
+  gtk_widget_set_visible (GTK_WIDGET (self->check_image),
+                          gtk_widget_get_state_flags (widget) & GTK_STATE_FLAG_SELECTED);
+
   gtk_accessible_update_state (GTK_ACCESSIBLE (self),
                                GTK_ACCESSIBLE_STATE_CHECKED, is_selected,
                                -1);
