@@ -115,10 +115,9 @@
                             <child>
                               <object class="GtkLabel">
                                 <property name="label" translatable="yes" comments="Translators: This is the empty state page label which states that there are no devices ready.">No Fingerprint device</property>
-                                <attributes>
-                                  <attribute name="weight" value="bold"/>
-                                  <attribute name="scale" value="1.6"/>
-                                </attributes>
+                                <style>
+                                  <class name="title-1" />
+                                </style>
                               </object>
                             </child>
                             <child>
@@ -150,9 +149,9 @@
                                 <property name="label" translatable="yes">Choose the fingerprint device you want to configure</property>
                                 <property name="wrap">True</property>
                                 <property name="halign">start</property>
-                                <attributes>
-                                  <attribute name="weight" value="bold"/>
-                                </attributes>
+                                <style>
+                                  <class name="heading" />
+                                </style>
                               </object>
                             </child>
 
