@@ -1,0 +1,170 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CcWacomStylusActionDialog: Adw.Dialog {
+  title: "Grip Pen";
+  content-width: 380;
+
+  Adw.NavigationView navigation_view {
+    Adw.NavigationPage main_page {
+      title: bind template.title;
+
+      child: Adw.ToolbarView {
+        [top]
+        Adw.HeaderBar {}
+
+        content: Adw.PreferencesPage {
+          Adw.PreferencesGroup preferences_group {
+            title: "Button %d mapping";
+            description: "Choose an action when Button %d on the stylus is pressed";
+
+            Adw.ActionRow left_button_row {
+              use-underline: true;
+              activatable-widget: left_button;
+              activated => $left_button_activated() swapped;
+
+              [prefix]
+              CheckButton left_button {
+                valign: center;
+              }
+            }
+
+            Adw.ActionRow middle_button_row {
+              use-underline: true;
+              activatable-widget: middle_button;
+              activated => $middle_button_activated() swapped;
+
+              [prefix]
+              CheckButton middle_button {
+                valign: center;
+                group: left_button;
+              }
+            }
+
+            Adw.ActionRow right_button_row {
+              use-underline: true;
+              activatable-widget: right_button;
+              activated => $right_button_activated() swapped;
+
+              [prefix]
+              CheckButton right_button {
+                valign: center;
+                group: left_button;
+              }
+            }
+
+            Adw.ActionRow back_row {
+              use-underline: true;
+              activatable-widget: back;
+              activated => $back_activated() swapped;
+
+              [prefix]
+              CheckButton back {
+                valign: center;
+                group: left_button;
+              }
+            }
+
+            Adw.ActionRow forward_row {
+              use-underline: true;
+              activatable-widget: forward;
+              activated => $forward_activated() swapped;
+
+              [prefix]
+              CheckButton forward {
+                valign: center;
+                group: left_button;
+              }
+            }
+
+            Adw.ActionRow keybinding_row {
+              use-underline: true;
+              activatable-widget: keybinding;
+              activated => $keybinding_activated() swapped;
+
+              [prefix]
+              CheckButton keybinding {
+                valign: center;
+                group: left_button;
+              }
+
+              Label keybinding_text {
+                margin-end: 6;
+
+                styles [
+                  "dim-label",
+                ]
+              }
+
+              Button keybinding_button {
+                tooltip-text: _("Assign Keystroke");
+                valign: center;
+                icon-name: "go-next-symbolic";
+                clicked => $adw_dialog_present(shortcut_window);
+
+                styles [
+                  "flat",
+                ]
+              }
+            }
+
+            Adw.ActionRow switch_monitor_row {
+              use-underline: true;
+              activatable-widget: switch_monitor;
+              activated => $switch_monitor_activated() swapped;
+
+              [prefix]
+              CheckButton switch_monitor {
+                valign: center;
+                group: left_button;
+              }
+            }
+          }
+        };
+      };
+    }
+  }
+}
+
+SizeGroup accelerator_size_group {}
+
+Adw.Dialog shortcut_window {
+  title: _("Assign Keystroke");
+  content-width: 360;
+  content-height: 200;
+
+  Adw.ToolbarView {
+    [top]
+    Adw.HeaderBar {}
+
+    content: Box edit_box {
+      orientation: vertical;
+      spacing: 18;
+      hexpand: true;
+      vexpand: true;
+      halign: center;
+      valign: center;
+
+      Picture {
+        halign: center;
+        valign: center;
+        can-shrink: false;
+        file: "resource:///org/gnome/control-center/keyboard/enter-keyboard-shortcut.svg";
+      }
+
+      Label {
+        wrap: true;
+        label: _("Press Esc to cancel");
+
+        styles [
+          "dim-label",
+        ]
+      }
+    };
+  }
+
+  EventControllerKey {
+    propagation-phase: capture;
+    key-pressed => $keybinding_edited(template);
+  }
+}

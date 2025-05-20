@@ -1,0 +1,76 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CcWacomPanel: $CcPanel {
+  child: Adw.ToolbarView {
+    [top]
+    Adw.HeaderBar {
+      [end]
+      MenuButton test_button {
+        use-underline: true;
+        label: _("Test _Settings");
+        can-shrink: true;
+        popover: test_popover;
+      }
+    }
+
+    content: Stack initial_state_stack {
+      transition-duration: 0;
+
+      ScrolledWindow panel_view {
+        hscrollbar-policy: never;
+        vadjustment: vadjustment;
+
+        Adw.Clamp scrollable {
+          margin-top: 32;
+          margin-bottom: 32;
+          margin-start: 12;
+          margin-end: 12;
+
+          Box {
+            spacing: 48;
+            orientation: vertical;
+
+            Box tablets {
+              orientation: vertical;
+              spacing: 48;
+            }
+
+            Box styli {
+              orientation: vertical;
+              spacing: 48;
+            }
+          }
+        }
+      }
+
+      Adw.StatusPage panel_empty_state {
+        icon-name: "input-tablet-symbolic";
+        title: _("No tablet detected");
+        description: _("Please plug in or turn on your Wacom tablet");
+      }
+    };
+  };
+}
+
+Adjustment vadjustment {}
+
+Popover test_popover {
+  styles [
+    "menu",
+  ]
+
+  Box {
+    margin-top: 12;
+    margin-bottom: 12;
+    margin-start: 12;
+    margin-end: 12;
+    spacing: 6;
+    orientation: vertical;
+
+    $CcDrawingArea test_draw_area {
+      width-request: "400";
+      height-request: "300";
+    }
+  }
+}

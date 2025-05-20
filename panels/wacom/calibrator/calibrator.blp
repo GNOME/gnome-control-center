@@ -1,0 +1,135 @@
+using Gtk 4.0;
+
+template $CcCalibArea: Window {
+  name: "calibrator";
+
+  child: Stack stack {
+    transition-duration: 0;
+
+    Grid {
+      row-homogeneous: true;
+      column-homogeneous: true;
+
+      Box {
+        orientation: vertical;
+
+        layout {
+          column: "0";
+          row: "0";
+          column-span: "8";
+          row-span: "8";
+        }
+
+        Box box1 {
+          orientation: vertical;
+          vexpand: true;
+        }
+
+        $CcClock clock {}
+
+        Box box2 {
+          orientation: vertical;
+          vexpand: true;
+
+          Revealer title_revealer {
+            transition-duration: 300;
+
+            child: Label {
+              name: "title";
+              label: _("Screen Calibration");
+            };
+          }
+
+          Revealer subtitle_revealer {
+            transition-duration: 300;
+
+            child: Label {
+              name: "subtitle";
+              label: _("Please tap the target markers as they appear on screen to calibrate the tablet");
+            };
+          }
+
+          Revealer error_revealer {
+            transition-type: crossfade;
+            transition-duration: 500;
+
+            child: Label {
+              name: "error";
+              label: _("Mis-click detected, restarting…");
+            };
+          }
+        }
+      }
+
+      Image target1 {
+        name: "target";
+        width-request: 100;
+        height-request: 100;
+        sensitive: false;
+
+        layout {
+          column: "0";
+          row: "0";
+          column-span: "2";
+          row-span: "2";
+        }
+      }
+
+      Image target2 {
+        name: "target";
+        width-request: 100;
+        height-request: 100;
+        sensitive: false;
+
+        layout {
+          column: "6";
+          row: "0";
+          column-span: "2";
+          row-span: "2";
+        }
+      }
+
+      Image target3 {
+        name: "target";
+        width-request: 100;
+        height-request: 100;
+        sensitive: false;
+
+        layout {
+          column: "0";
+          row: "6";
+          column-span: "2";
+          row-span: "2";
+        }
+      }
+
+      Image target4 {
+        name: "target";
+        width-request: 100;
+        height-request: 100;
+        sensitive: false;
+
+        layout {
+          column: "6";
+          row: "6";
+          column-span: "2";
+          row-span: "2";
+        }
+      }
+    }
+
+    Image success_page {
+      pixel-size: 300;
+      icon-name: "check-plain-symbolic";
+    }
+  };
+}
+
+SizeGroup {
+  mode: vertical;
+
+  widgets [
+    box1,
+    box2,
+  ]
+}

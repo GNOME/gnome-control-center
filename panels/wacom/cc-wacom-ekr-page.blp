@@ -1,0 +1,24 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CcWacomEkrPage: Box {
+  orientation: vertical;
+  spacing: 24;
+
+  Adw.PreferencesGroup ekr_section {
+    /* Translators: this is a drawing tablet pad, i.e. a collection of buttons and knobs */
+    description: _("External pad device");
+
+    header-suffix: Picture ekr_icon {
+      halign: end;
+      valign: start;
+      file: "resource:///org/gnome/control-center/wacom/wacom-tablet.svg";
+    };
+
+    $CcListRow ekr_map_buttons {
+      title: _("Map _Buttons");
+      show-arrow: true;
+      activated => $on_map_buttons_activated(template);
+    }
+  }
+}

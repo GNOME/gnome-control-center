@@ -1,0 +1,89 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CcWacomStylusPage: Box {
+  orientation: vertical;
+  spacing: 24;
+
+  Adw.PreferencesGroup stylus_section {
+    header-suffix: Picture {
+      halign: end;
+      valign: start;
+
+      paintable: $CcMaskPaintable stylus_paintable {};
+    };
+
+    Adw.ActionRow stylus_tip_pressure {
+      title: _("Tip _Pressure Feel");
+      use-underline: true;
+      activatable-widget: stylus_tip_pressure_scale;
+
+      Scale stylus_tip_pressure_scale {
+        value-changed => $on_tip_pressure_value_changed() swapped;
+
+        marks [
+          /* Translators: This is a mark in the 'Tip Pressure Feel' scale */
+          mark (0, bottom, _("Soft")),
+          mark (100),
+          /* Translators: This is a mark in the 'Tip Pressure Feel' scale */
+          mark (200, bottom, _("Firm")),
+        ]
+
+        adjustment: Adjustment stylus_tip_pressure_adjustment {
+          upper: 200;
+          step-increment: 20;
+          page-increment: 60;
+        };
+      }
+    }
+
+    $CcListRow stylus_button1_action_row {
+      title: _("Button _1");
+      show-arrow: true;
+      activated => $on_stylus_button1_action_activated(template);
+    }
+
+    $CcListRow stylus_button2_action_row {
+      title: _("Button _2");
+      show-arrow: true;
+      activated => $on_stylus_button2_action_activated(template);
+    }
+
+    $CcListRow stylus_button3_action_row {
+      title: _("Button _3");
+      show-arrow: true;
+      activated => $on_stylus_button3_action_activated(template);
+    }
+
+    Adw.ActionRow stylus_eraser_pressure {
+      title: _("_Eraser Pressure Feel");
+      use-underline: true;
+      activatable-widget: stylus_eraser_pressure_scale;
+
+      Scale stylus_eraser_pressure_scale {
+        value-changed => $on_eraser_pressure_value_changed() swapped;
+
+        marks [
+          /* Translators: This is a mark in the 'Erase Pressure Feel' scale */
+          mark (0, bottom, _("Soft")),
+          mark (100),
+          /* Translators: This is a mark in the 'Erase Pressure Feel' scale */
+          mark (200, bottom, _("Firm")),
+        ]
+
+        adjustment: Adjustment stylus_eraser_pressure_adjustment {
+          upper: 200;
+          step-increment: 20;
+          page-increment: 60;
+        };
+      }
+    }
+  }
+}
+
+SizeGroup sizegroup_pressure {
+  widgets [
+    stylus_tip_pressure_scale,
+    stylus_eraser_pressure_scale,
+  ]
+}

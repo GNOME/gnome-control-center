@@ -1,0 +1,72 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CcWacomPage: Box {
+  orientation: vertical;
+  spacing: 24;
+
+  Adw.PreferencesGroup tablet_section {
+    header-suffix: Picture {
+      halign: end;
+      valign: start;
+
+      paintable: $CcMaskPaintable tablet_paintable {};
+    };
+
+    Adw.SwitchRow tablet_mode_row {
+      title: _("_Tablet Mode");
+      subtitle: _("Use absolute positioning for the pen");
+      use-underline: true;
+    }
+
+    Adw.ActionRow tablet_button_location_row {
+      title: _("Button Location");
+      subtitle: _("The location of the physical buttons on the tablet");
+
+      Adw.ToggleGroup tablet_button_location_group {
+        valign: center;
+        homogeneous: true;
+        notify::active => $on_tablet_button_location_changed(template);
+
+        Adw.Toggle {
+          name: "left";
+          label: _("_Left");
+          use-underline: true;
+        }
+
+        Adw.Toggle {
+          name: "right";
+          label: _("_Right");
+          use-underline: true;
+        }
+      }
+    }
+
+    $CcListRow tablet_map_buttons {
+      title: _("Map _Buttons");
+      show-arrow: true;
+      activated => $on_map_buttons_activated(template);
+    }
+  }
+
+  Adw.PreferencesGroup display_section {
+    Adw.ComboRow tablet_display {
+      width-request: 100;
+      title: C_("display setting", "Map to _Monitor");
+      use-underline: true;
+      notify::selected-item => $on_display_selected(template);
+    }
+
+    Adw.SwitchRow tablet_aspect_ratio_row {
+      title: _("_Keep Aspect Ratio");
+      subtitle: _("Only use a portion of the tablet surface to keep monitor aspect ratio");
+      use-underline: true;
+    }
+
+    $CcListRow tablet_calibrate {
+      title: _("_Calibrate");
+      show-arrow: true;
+      activated => $on_calibrate_activated(template);
+    }
+  }
+}
