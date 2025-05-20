@@ -27,7 +27,17 @@ G_BEGIN_DECLS
 #define CC_TYPE_REGIONAL_LANGUAGE_ROW (cc_regional_language_row_get_type ())
 G_DECLARE_FINAL_TYPE (CcRegionalLanguageRow, cc_regional_language_row, CC, REGIONAL_LANGUAGE_ROW, GtkListBoxRow)
 
-CcRegionalLanguageRow *cc_regional_language_row_new                (const gchar *locale_id);
+typedef enum
+{
+  CC_REGIONAL_LANGUAGE_TYPE_REGION = 0,
+  CC_REGIONAL_LANGUAGE_TYPE_LANGUAGE = 1
+} CcRegionalLanguageType;
+
+#define CC_REGIONAL_LANGUAGE_TYPE (CC_REGIONAL_LANGUAGE_TYPE_REGION | \
+                                   CC_REGIONAL_LANGUAGE_TYPE_LANGUAGE)
+
+CcRegionalLanguageRow *cc_regional_language_row_new                (const gchar            *locale_id,
+                                                                    CcRegionalLanguageType  row_type);
 
 const gchar           *cc_regional_language_row_get_locale_id      (CcRegionalLanguageRow *row);
 
