@@ -129,15 +129,20 @@ cc_locale_row_init (CcLocaleRow *self)
 /**
  * cc_locale_row_new:
  * @locale_id: the locale ID
+ * @layout_type: a #CcLocaleLayoutType
  *
- * Create a new #CcLocaleRow based on the locale ID.
+ * Create a new #CcLocaleRow based on the locale ID. The #CcLocaleLayoutType
+ * will adjust the title and description of the row.
  *
  * Returns: (transfer full): a newly created #CcLocaleRow
  */
 CcLocaleRow *
-cc_locale_row_new (const gchar *locale_id)
+cc_locale_row_new (const gchar        *locale_id,
+                   CcLocaleLayoutType  layout_type)
 {
   CcLocaleRow *self;
+  GtkLabel *region_label;
+  GtkLabel *language_label;
   g_autofree gchar *language_code = NULL;
   g_autofree gchar *country_code = NULL;
   g_autofree gchar *modifier = NULL;
@@ -147,9 +152,23 @@ cc_locale_row_new (const gchar *locale_id)
 
   gnome_parse_locale (locale_id, &language_code, &country_code, NULL, &modifier);
 
+  switch (layout_type)
+    {
+    case CC_LOCALE_LAYOUT_TYPE_REGION:
+      region_label = self->title_label;
+      language_label = self->description_label;
+      break;
+    case CC_LOCALE_LAYOUT_TYPE_LANGUAGE:
+      region_label = self->description_label;
+      language_label = self->title_label;
+      break;
+    default:
+      g_assert_not_reached ();
+    }
+
   self->language = get_language_label (language_code, modifier, locale_id);
   self->language_local = get_language_label (language_code, modifier, NULL);
-  gtk_label_set_label (self->title_label, self->language);
+  gtk_label_set_label (language_label, self->language);
 
   if (country_code == NULL)
     {
@@ -160,7 +179,7 @@ cc_locale_row_new (const gchar *locale_id)
     {
       self->country = gnome_get_country_from_code (country_code, locale_id);
       self->country_local = gnome_get_country_from_code (country_code, NULL);
-      gtk_label_set_label (self->description_label, self->country);
+      gtk_label_set_label (region_label, self->country);
     }
 
   return self;
