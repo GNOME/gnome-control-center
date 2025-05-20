@@ -10,35 +10,40 @@ template $CcLocaleRow: ListBoxRow {
     "neutral-selectable",
   ]
 
-  Box {
+  child: Box {
     visible: true;
-    spacing: 12;
-    margin-top: 12;
-    margin-bottom: 12;
-    margin-start: 18;
-    margin-end: 18;
+    margin-start: 6;
+    margin-end: 6;
 
-    Label title_label {
-      visible: true;
-      xalign: 0;
-      ellipsize: end;
+    Box {
+      spacing: 12;
+      margin-top: 12;
+      margin-bottom: 12;
+      margin-start: 6;
+      margin-end: 6;
+
+      Label title_label {
+        visible: true;
+        xalign: 0;
+        ellipsize: end;
+      }
+
+      Image check_image {
+        visible: false;
+        icon-name: "object-select-symbolic";
+        icon-size: normal;
+      }
+
+      Label description_label {
+        visible: true;
+        xalign: 1;
+        ellipsize: end;
+        hexpand: true;
+
+        styles [
+          "dim-label",
+        ]
+      }
     }
-
-    Image check_image {
-      visible: false;
-      icon-name: "object-select-symbolic";
-      icon-size: normal;
-    }
-
-    Label description_label {
-      visible: true;
-      xalign: 1;
-      ellipsize: end;
-      hexpand: true;
-
-      styles [
-        "dim-label",
-      ]
-    }
-  }
+  };
 }
