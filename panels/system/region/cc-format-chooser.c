@@ -31,6 +31,7 @@
 
 #include "cc-common-language.h"
 #include "cc-format-preview.h"
+#include "cc-locale-row.h"
 #include "cc-util.h"
 
 #define GNOME_DESKTOP_USE_UNSTABLE_API
@@ -73,20 +74,23 @@ update_check_button_for_list (GtkListBox  *list_box,
                               const gchar *locale_id)
 {
   GtkWidget *child;
+  const gchar *row_locale_id;
 
   for (child = gtk_widget_get_first_child (GTK_WIDGET (list_box));
        child;
        child = gtk_widget_get_next_sibling (child))
     {
-      if (!GTK_IS_LIST_BOX_ROW (child))
+      if (!CC_IS_LOCALE_ROW (child))
         continue;
 
-      GtkWidget *check = g_object_get_data (G_OBJECT (child), "check");
-      const gchar *region = g_object_get_data (G_OBJECT (child), "locale-id");
-      if (check == NULL || region == NULL)
+      row_locale_id = cc_locale_row_get_locale_id (CC_LOCALE_ROW (child));
+      if (!row_locale_id)
         continue;
 
-      gtk_widget_set_visible (check, g_strcmp0 (locale_id, region) == 0);
+      if (g_strcmp0 (locale_id, row_locale_id) != 0)
+        continue;
+
+      gtk_list_box_select_row (list_box, GTK_LIST_BOX_ROW (child));
     }
 }
 
@@ -108,40 +112,24 @@ set_locale_id (CcFormatChooser *self,
 }
 
 static gint
-sort_regions (GtkListBoxRow* row1,
-              GtkListBoxRow* row2,
+sort_regions (GtkListBoxRow* a,
+              GtkListBoxRow* b,
               gpointer       user_data)
 {
+        CcLocaleRow *row1 = CC_LOCALE_ROW (a);
+        CcLocaleRow *row2 = CC_LOCALE_ROW (b);
         const gchar *la;
         const gchar *lb;
 
-        if (g_object_get_data (G_OBJECT (row1), "locale-id") == NULL)
+        if (!cc_locale_row_get_locale_id (row1))
                 return 1;
-        if (g_object_get_data (G_OBJECT (row2), "locale-id") == NULL)
+        if (!cc_locale_row_get_locale_id (row2))
                 return -1;
 
-        la = g_object_get_data (G_OBJECT (row1), "locale-name");
-        lb = g_object_get_data (G_OBJECT (row2), "locale-name");
+        la = cc_locale_row_get_country (row1);
+        lb = cc_locale_row_get_country (row2);
 
         return g_strcmp0 (la, lb);
-}
-
-static GtkWidget *
-padded_label_new (const char *text)
-{
-        GtkWidget *widget, *label;
-
-        widget = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
-        g_object_set (widget, "margin-start", 9, NULL);
-        g_object_set (widget, "margin-end", 9, NULL);
-
-        label = gtk_label_new (text);
-        g_object_set (label, "margin-top", 12, NULL);
-        g_object_set (label, "margin-bottom", 12, NULL);
-        gtk_label_set_ellipsize (GTK_LABEL (label), PANGO_ELLIPSIZE_END);
-        gtk_box_append (GTK_BOX (widget), label);
-
-        return widget;
 }
 
 static void
@@ -188,60 +176,46 @@ preview_button_clicked_cb (CcFormatChooser *self,
   g_assert (CC_IS_FORMAT_CHOOSER (self));
   g_assert (GTK_IS_WIDGET (button));
 
-  row = gtk_widget_get_ancestor (button, GTK_TYPE_LIST_BOX_ROW);
+  row = gtk_widget_get_ancestor (button, CC_TYPE_LOCALE_ROW);
   g_assert (row);
 
-  region = g_object_get_data (G_OBJECT (row), "locale-id");
+  region = cc_locale_row_get_locale_id (CC_LOCALE_ROW (row));
   cc_format_preview_set_region (self->format_preview, region);
-  locale_name = g_object_get_data (G_OBJECT (row), "locale-name");
+  locale_name = cc_locale_row_get_country (CC_LOCALE_ROW (row));
   gtk_label_set_label (self->preview_title_label, locale_name);
 
   adw_overlay_split_view_set_show_sidebar (self->split_view, TRUE);
 }
 
-static GtkWidget *
+static CcLocaleRow *
 region_widget_new (CcFormatChooser *self,
                    const gchar     *locale_id)
 {
         gchar *locale_name;
-        gchar *locale_current_name;
         gchar *locale_untranslated_name;
-        GtkWidget *row, *check, *box, *button;
+        GtkWidget *button;
+        CcLocaleRow *row;
 
         locale_name = gnome_get_country_from_locale (locale_id, locale_id);
         if (!locale_name)
           return NULL;
 
-        locale_current_name = gnome_get_country_from_locale (locale_id, NULL);
         locale_untranslated_name = gnome_get_country_from_locale (locale_id, "C");
 
-        row = gtk_list_box_row_new ();
-        box = padded_label_new (locale_name);
-        gtk_list_box_row_set_child (GTK_LIST_BOX_ROW (row), box);
-
-        check = gtk_image_new_from_icon_name ("object-select-symbolic");
-        gtk_widget_set_halign (check, GTK_ALIGN_START);
-        gtk_widget_set_hexpand (check, TRUE);
-        gtk_widget_set_visible (check, FALSE);
-        gtk_box_append (GTK_BOX (box), check);
+        row = cc_locale_row_new (locale_id, CC_LOCALE_LAYOUT_TYPE_REGION);
 
         button = gtk_button_new_from_icon_name ("view-reveal-symbolic");
         gtk_widget_set_tooltip_text (button, _("Preview"));
-        gtk_widget_set_hexpand (button, TRUE);
         gtk_widget_add_css_class (button, "flat");
         gtk_widget_set_valign (button, GTK_ALIGN_CENTER);
-        gtk_widget_set_halign (button, GTK_ALIGN_END);
         g_signal_connect_object (button, "clicked", G_CALLBACK (preview_button_clicked_cb),
                                  self, G_CONNECT_SWAPPED);
         g_object_bind_property (self->split_view, "collapsed",
                                 button, "visible",
                                 G_BINDING_SYNC_CREATE);
-        gtk_box_append (GTK_BOX (box), button);
 
-        g_object_set_data (G_OBJECT (row), "check", check);
-        g_object_set_data_full (G_OBJECT (row), "locale-id", g_strdup (locale_id), g_free);
-        g_object_set_data_full (G_OBJECT (row), "locale-name", locale_name, g_free);
-        g_object_set_data_full (G_OBJECT (row), "locale-current-name", locale_current_name, g_free);
+        cc_locale_row_add_suffix (row, button);
+
         g_object_set_data_full (G_OBJECT (row), "locale-untranslated-name", locale_untranslated_name, g_free);
 
         return row;
@@ -253,7 +227,7 @@ add_regions (CcFormatChooser *self,
              GHashTable      *initial)
 {
         g_autoptr(GList) initial_locales = NULL;
-        GtkWidget *widget;
+        CcLocaleRow *row;
         GList *l;
 
         self->adding = TRUE;
@@ -264,11 +238,11 @@ add_regions (CcFormatChooser *self,
                 if (!cc_common_language_has_font (l->data))
                         continue;
 
-                widget = region_widget_new (self, l->data);
-                if (!widget)
+                row = region_widget_new (self, l->data);
+                if (!row)
                         continue;
 
-                gtk_list_box_append (self->common_region_listbox, widget);
+                gtk_list_box_append (self->common_region_listbox, GTK_WIDGET (row));
           }
 
         /* Populate All locales */
@@ -281,11 +255,11 @@ add_regions (CcFormatChooser *self,
                 if (!cc_common_language_has_font (locale_id))
                         continue;
 
-                widget = region_widget_new (self, locale_id);
-                if (!widget)
+                row = region_widget_new (self, locale_id);
+                if (!row)
                   continue;
 
-                gtk_list_box_append (self->region_listbox, widget);
+                gtk_list_box_append (self->region_listbox, GTK_WIDGET (row));
         }
 
         self->adding = FALSE;
@@ -329,12 +303,12 @@ region_visible (GtkListBoxRow *row,
           goto end;
 
         locale_name =
-                cc_util_normalize_casefold_and_unaccent (g_object_get_data (G_OBJECT (row), "locale-name"));
+                cc_util_normalize_casefold_and_unaccent (cc_locale_row_get_country (CC_LOCALE_ROW (row)));
         if (match_all (self->filter_words, locale_name))
           goto end;
 
         locale_current_name =
-                cc_util_normalize_casefold_and_unaccent (g_object_get_data (G_OBJECT (row), "locale-current-name"));
+                cc_util_normalize_casefold_and_unaccent (cc_locale_row_get_country_local (CC_LOCALE_ROW (row)));
         if (match_all (self->filter_words, locale_current_name))
           goto end;
 
@@ -387,14 +361,14 @@ filter_changed (CcFormatChooser *self)
 
 static void
 row_activated (CcFormatChooser *self,
-               GtkListBoxRow   *row)
+               CcLocaleRow *row)
 {
         const gchar *new_locale_id;
 
         if (self->adding)
                 return;
 
-        new_locale_id = g_object_get_data (G_OBJECT (row), "locale-id");
+        new_locale_id = cc_locale_row_get_locale_id (row);
         if (g_strcmp0 (new_locale_id, self->region) == 0)
                 g_signal_emit (self, signals[LANGUAGE_SELECTED], 0);
         else
