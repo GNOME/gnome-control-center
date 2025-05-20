@@ -51,4 +51,7 @@ void          cc_locale_row_set_is_extra       (CcLocaleRow *row,
 
 gboolean      cc_locale_row_get_is_extra       (CcLocaleRow *row);
 
+void          cc_locale_row_add_suffix         (CcLocaleRow *row,
+                                                GtkWidget *widget);
+
 G_END_DECLS
