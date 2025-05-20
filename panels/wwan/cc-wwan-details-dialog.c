@@ -32,6 +32,8 @@
 #include "cc-wwan-details-dialog.h"
 #include "cc-wwan-resources.h"
 
+#include "cc-list-row.h"
+
 /**
  * @short_description: Dialog to Show Device Details
  */
@@ -40,16 +42,15 @@ struct _CcWwanDetailsDialog
 {
   AdwDialog     parent_instance;
 
-  GtkLabel     *device_identifier;
-  GtkLabel     *device_model;
-  GtkLabel     *firmware_version;
-  GtkLabel     *identifier_label;
-  GtkLabel     *manufacturer;
-  GtkLabel     *network_status;
-  GtkLabel     *network_type;
-  GtkLabel     *operator_name;
-  GtkLabel     *own_numbers;
-  GtkLabel     *signal_strength;
+  CcListRow    *device_identifier;
+  CcListRow    *device_model;
+  CcListRow    *firmware_version;
+  CcListRow    *manufacturer;
+  CcListRow    *network_status;
+  CcListRow    *network_type;
+  CcListRow    *operator_name;
+  CcListRow    *own_numbers;
+  CcListRow    *signal_strength;
 
   CcWwanDevice *device;
 };
@@ -77,27 +78,27 @@ cc_wwan_details_update_network_status (CcWwanDetailsDialog *self)
   switch (state)
     {
     case CC_WWAN_REGISTRATION_STATE_IDLE:
-      gtk_label_set_label (self->network_status, _("Not Registered"));
+      cc_list_row_set_secondary_label (self->network_status, _("Not Registered"));
       break;
 
     case CC_WWAN_REGISTRATION_STATE_REGISTERED:
-      gtk_label_set_label (self->network_status, _("Registered"));
+      cc_list_row_set_secondary_label (self->network_status, _("Registered"));
       break;
 
     case CC_WWAN_REGISTRATION_STATE_ROAMING:
-      gtk_label_set_label (self->network_status, _("Roaming"));
+      cc_list_row_set_secondary_label (self->network_status, _("Roaming"));
       break;
 
     case CC_WWAN_REGISTRATION_STATE_SEARCHING:
-      gtk_label_set_label (self->network_status, _("Searching"));
+      cc_list_row_set_secondary_label (self->network_status, _("Searching"));
       break;
 
     case CC_WWAN_REGISTRATION_STATE_DENIED:
-      gtk_label_set_label (self->network_status, _("Denied"));
+      cc_list_row_set_secondary_label (self->network_status, _("Denied"));
       break;
 
     default:
-      gtk_label_set_label (self->network_status, _("Unknown"));
+      cc_list_row_set_secondary_label (self->network_status, _("Unknown"));
       break;
     }
 }
@@ -113,15 +114,15 @@ cc_wwan_details_signal_changed_cb (CcWwanDetailsDialog *self)
 
   operator_name = cc_wwan_device_get_operator_name (self->device);
   if (operator_name)
-    gtk_label_set_label (self->operator_name, operator_name);
+    cc_list_row_set_secondary_label (self->operator_name, operator_name);
 
   network_type_string = cc_wwan_device_dup_network_type_string (self->device);
   if (network_type_string)
-    gtk_label_set_label (self->network_type, network_type_string);
+    cc_list_row_set_secondary_label (self->network_type, network_type_string);
 
   signal_string = cc_wwan_device_dup_signal_string (self->device);
   if (signal_string)
-    gtk_label_set_label (self->signal_strength, signal_string);
+    cc_list_row_set_secondary_label (self->signal_strength, signal_string);
 
   cc_wwan_details_update_network_status (self);
 }
@@ -135,19 +136,19 @@ cc_wwan_details_update_hardware_details (CcWwanDetailsDialog *self)
 
   str = cc_wwan_device_get_manufacturer (self->device);
   if (str)
-    gtk_label_set_label (self->manufacturer, str);
+    cc_list_row_set_secondary_label (self->manufacturer, str);
 
   str = cc_wwan_device_get_model (self->device);
   if (str)
-    gtk_label_set_label (self->device_model, str);
+    cc_list_row_set_secondary_label (self->device_model, str);
 
   str = cc_wwan_device_get_firmware_version (self->device);
   if (str)
-    gtk_label_set_label (self->firmware_version, str);
+    cc_list_row_set_secondary_label (self->firmware_version, str);
 
   str = cc_wwan_device_get_identifier (self->device);
   if (str)
-    gtk_label_set_label (self->device_identifier, str);
+    cc_list_row_set_secondary_label (self->device_identifier, str);
 }
 
 static void
@@ -185,7 +186,7 @@ cc_wwan_details_dialog_constructed (GObject *object)
   gtk_widget_set_visible (GTK_WIDGET (self->own_numbers), !!numbers);
 
   if (numbers)
-    gtk_label_set_text (self->own_numbers, numbers);
+    cc_list_row_set_secondary_label (self->own_numbers, numbers);
 
   cc_wwan_details_signal_changed_cb (self);
   cc_wwan_details_update_hardware_details (self);
@@ -220,13 +221,14 @@ cc_wwan_details_dialog_class_init (CcWwanDetailsDialogClass *klass)
 
   g_object_class_install_properties (object_class, N_PROPS, properties);
 
+  g_type_ensure (CC_TYPE_LIST_ROW);
+
   gtk_widget_class_set_template_from_resource (widget_class,
                                                "/org/gnome/control-center/wwan/cc-wwan-details-dialog.ui");
 
   gtk_widget_class_bind_template_child (widget_class, CcWwanDetailsDialog, device_identifier);
   gtk_widget_class_bind_template_child (widget_class, CcWwanDetailsDialog, device_model);
   gtk_widget_class_bind_template_child (widget_class, CcWwanDetailsDialog, firmware_version);
-  gtk_widget_class_bind_template_child (widget_class, CcWwanDetailsDialog, identifier_label);
   gtk_widget_class_bind_template_child (widget_class, CcWwanDetailsDialog, manufacturer);
   gtk_widget_class_bind_template_child (widget_class, CcWwanDetailsDialog, network_status);
   gtk_widget_class_bind_template_child (widget_class, CcWwanDetailsDialog, network_type);
