@@ -179,13 +179,6 @@ cc_regional_language_row_get_country_local (CcRegionalLanguageRow *self)
 }
 
 void
-cc_regional_language_row_set_checked (CcRegionalLanguageRow *self, gboolean checked)
-{
-  g_return_if_fail (CC_IS_REGIONAL_LANGUAGE_ROW (self));
-  gtk_widget_set_visible (GTK_WIDGET (self->check_image), checked);
-}
-
-void
 cc_regional_language_row_set_is_extra (CcRegionalLanguageRow *self, gboolean is_extra)
 {
   g_return_if_fail (CC_IS_REGIONAL_LANGUAGE_ROW (self));
