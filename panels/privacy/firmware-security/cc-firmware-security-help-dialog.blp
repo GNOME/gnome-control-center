@@ -1,0 +1,32 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CcFirmwareSecurityHelpDialog: Adw.Dialog {
+  title: _("About Device Security");
+  content-width: 420;
+
+  child: Adw.ToolbarView {
+    [top]
+    Adw.HeaderBar {}
+
+    content: ScrolledWindow {
+      accessibility {
+        described-by: [
+          label,
+        ];
+      }
+
+      hscrollbar-policy: never;
+      propagate-natural-height: true;
+
+      child: Label label {
+        margin-top: 12;
+        margin-start: 24;
+        margin-end: 24;
+        margin-bottom: 24;
+        wrap: true;
+        label: _("Device security provides information about how protected your device is against security issues which target the hardware itself.\n\nAspects of hardware that affect security include:\n\n• security features that are built into a hardware itself;\n• how the hardware is configured to protect against security issues;\n• the security of the software runs directly on the hardware.\n\nSecurity threats which affect hardware include malware and viruses that target the software that runs directly on the hardware. It also includes physical tampering, such as physical connection to the hardware to read data and implant malware.\n\nDevice security is just one aspect of security, and does not reflect the overall security status of the system and applications.");
+      };
+    };
+  };
+}

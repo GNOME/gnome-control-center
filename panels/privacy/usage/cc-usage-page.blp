@@ -1,0 +1,143 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CcUsagePage: Adw.NavigationPage {
+  title: _("File History & Trash");
+  tag: "usage";
+
+  child: Adw.ToolbarView {
+    [top]
+    Adw.HeaderBar {}
+
+    content: Adw.PreferencesPage {
+      Adw.PreferencesGroup {
+        title: _("File History");
+        description: _("File history keeps a record of files that you have used. This information is shared between apps, and makes it easier to find files that you might want to use.");
+
+        Adw.SwitchRow recently_used_row {
+          title: _("File H_istory");
+          use-underline: true;
+        }
+
+        $CcNumberRow retain_history_row {
+          title: _("File _History Duration");
+          use-underline: true;
+          values: "[1, 7, 30]";
+          value-type: "days";
+
+          special-value: $CcNumberObject {
+            value: "-1";
+
+            /* Translators: Option for File History Duration in File History group */
+            string: _("Forever");
+            order: "last";
+          };
+        }
+      }
+
+      Adw.PreferencesGroup {
+        Adw.ButtonRow {
+          title: _("_Clear History…");
+          use-underline: true;
+          activated => $adw_dialog_present(clear_file_history_dialog);
+
+          styles [
+            "destructive-action",
+          ]
+        }
+      }
+
+      Adw.PreferencesGroup {
+        title: _("Trash &amp; Temporary Files");
+        description: _("Trash and temporary files can sometimes include personal or sensitive information. Automatically deleting them can help to protect privacy.");
+
+        Adw.SwitchRow purge_trash_row {
+          title: _("Automatically Empty _Trash");
+          use-underline: true;
+        }
+
+        Adw.SwitchRow purge_temp_row {
+          title: _("Automatically Delete Temporary _Files");
+          use-underline: true;
+        }
+
+        $CcNumberRow purge_after_row {
+          title: _("Automatic Deletion _Period");
+          use-underline: true;
+          values: "[1, 2, 3, 4, 5, 6, 7, 14, 30]";
+          value-type: "days";
+
+          special-value: $CcNumberObject {
+            value: "0";
+
+            /* Translators: Option for Automatically Delete Period in Trash and Temporary Files group */
+            string: _("1 hour");
+          };
+        }
+      }
+
+      Adw.PreferencesGroup {
+        separate-rows: true;
+
+        Adw.ButtonRow {
+          title: _("_Empty Trash…");
+          use-underline: true;
+          activated => $adw_dialog_present(empty_trash_dialog);
+
+          styles [
+            "destructive-action",
+          ]
+        }
+
+        Adw.ButtonRow {
+          title: _("_Delete Temporary Files…");
+          use-underline: true;
+          activated => $adw_dialog_present(delete_temp_files_dialog);
+
+          styles [
+            "destructive-action",
+          ]
+        }
+      }
+    };
+  };
+}
+
+Adw.AlertDialog clear_file_history_dialog {
+  heading: _("Clear File History?");
+  body: _("After clearing, lists of recently used files will appear empty.");
+  default-response: "cancel";
+  close-response: "cancel";
+  response::clear-history => $on_clear_history_response_cb();
+
+  responses [
+    cancel: _("_Cancel"),
+    clear-history: _("Clear _History") destructive,
+  ]
+}
+
+Adw.AlertDialog empty_trash_dialog {
+  heading: _("Empty all items from Trash?");
+  body: _("All items in the Trash will be permanently deleted.");
+  default-response: "cancel";
+  close-response: "cancel";
+  response::empty-trash => $on_empty_trash_response_cb();
+
+  responses [
+    cancel: _("_Cancel"),
+    empty-trash: _("_Empty Trash") destructive,
+  ]
+}
+
+Adw.AlertDialog delete_temp_files_dialog {
+  heading: _("Delete all the temporary files?");
+  body: _("All the temporary files will be permanently deleted.");
+  default-response: "cancel";
+  close-response: "cancel";
+  response::purge-temp => $on_purge_temp_response_cb();
+
+  responses [
+    cancel: _("_Cancel"),
+    purge-temp: _("_Purge Temporary Files") destructive,
+  ]
+}

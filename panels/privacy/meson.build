@@ -10,6 +10,33 @@ i18n.merge_file(
   install_dir: control_center_desktopdir
 )
 
+blueprints = custom_target(
+  'blueprints',
+  input: files(
+    'bolt/cc-bolt-device-dialog.blp',
+    'bolt/cc-bolt-device-entry.blp',
+    'bolt/cc-bolt-page.blp',
+    'camera/cc-camera-page.blp',
+    'cc-privacy-panel.blp',
+    'diagnostics/cc-diagnostics-page.blp',
+    'firmware-security/cc-firmware-security-boot-dialog.blp',
+    'firmware-security/cc-firmware-security-dialog.blp',
+    'firmware-security/cc-firmware-security-help-dialog.blp',
+    'firmware-security/cc-firmware-security-page.blp',
+    'location/cc-location-page.blp',
+    'screen/cc-screen-page.blp',
+    'usage/cc-usage-page.blp',
+  ),
+  output: '.',
+  command: [
+    blueprint_compiler,
+    'batch-compile',
+    '@OUTPUT@',
+    '@CURRENT_SOURCE_DIR@',
+    '@INPUT@',
+  ],
+)
+
 sources = files(
   'camera/cc-camera-page.c',
   'diagnostics/cc-diagnostics-page.c',
@@ -54,7 +81,8 @@ sources += gnome.compile_resources(
   'cc-' + cappletname + '-resources',
   cappletname + '.gresource.xml',
   c_name: 'cc_' + cappletname,
-  export: true
+  export: true,
+  dependencies: blueprints,
 )
 
 cflags += [
