@@ -1,0 +1,64 @@
+using Gtk 4.0;
+
+Dialog button-mapping-dialog {
+  width-request: 600;
+  height-request: 450;
+  title: _("Map Buttons");
+  resizable: false;
+  modal: true;
+  default-width: 600;
+  default-height: 450;
+
+  Box top_vbox {
+    orientation: vertical;
+    spacing: 2;
+
+    Box shortcuts_vbox {
+      orientation: vertical;
+      spacing: 6;
+      hexpand: true;
+      vexpand: true;
+
+      Label label1 {
+        xalign: 0;
+        margin-top: 12;
+        label: _("Map buttons to functions");
+
+        styles [
+          "heading",
+        ]
+      }
+
+      ScrolledWindow actions_swindow {
+        hscrollbar-policy: never;
+
+        ListBox shortcuts_list {}
+      }
+
+      Box hbox1 {
+        margin-top: 5;
+        margin-bottom: 5;
+        margin-start: 5;
+        margin-end: 5;
+        spacing: 12;
+
+        Label label12 {
+          xalign: 0;
+          label: _("To edit a shortcut, choose the “Send Keystroke” action, press the keyboard shortcut button and hold down the new keys or press Backspace to clear");
+          justify: fill;
+          wrap: true;
+          hexpand: true;
+        }
+      }
+    }
+
+    $GtkButtonBox dialog-action_area1 {
+      layout-style: "end";
+
+      Button close_button {
+        label: _("_Close");
+        use-underline: true;
+      }
+    }
+  }
+}
