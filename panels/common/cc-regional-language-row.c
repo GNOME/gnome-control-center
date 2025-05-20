@@ -74,7 +74,7 @@ cc_regional_language_row_dispose (GObject *object)
   G_OBJECT_CLASS (cc_regional_language_row_parent_class)->dispose (object);
 }
 
-void
+static void
 cc_regional_language_row_class_init (CcRegionalLanguageRowClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
@@ -89,7 +89,7 @@ cc_regional_language_row_class_init (CcRegionalLanguageRowClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcRegionalLanguageRow, language_label);
 }
 
-void
+static void
 cc_regional_language_row_init (CcRegionalLanguageRow *self)
 {
   g_resources_register (cc_common_get_resource ());
