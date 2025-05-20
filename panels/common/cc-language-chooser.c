@@ -21,7 +21,7 @@
 #define _GNU_SOURCE
 #include <config.h>
 #include "cc-language-chooser.h"
-#include "cc-language-row.h"
+#include "cc-locale-row.h"
 #include "cc-common-resources.h"
 
 #include <locale.h>
@@ -68,15 +68,15 @@ add_all_languages (CcLanguageChooser *self)
         locale_ids = gnome_get_all_locales ();
         initial = cc_common_language_get_initial_languages ();
         for (int i = 0; locale_ids[i] != NULL; i++) {
-                CcLanguageRow *row;
+                CcLocaleRow *row;
                 gboolean is_initial;
 
                 if (!cc_common_language_has_font (locale_ids[i]))
                         continue;
 
-                row = cc_language_row_new (locale_ids[i]);
+                row = cc_locale_row_new (locale_ids[i], CC_LOCALE_LAYOUT_TYPE_LANGUAGE);
                 is_initial = (g_hash_table_lookup (initial, locale_ids[i]) != NULL);
-                cc_language_row_set_is_extra (row, !is_initial);
+                cc_locale_row_set_is_extra (row, !is_initial);
                 gtk_list_box_prepend (self->language_listbox, GTK_WIDGET (row));
         }
 }
@@ -98,48 +98,51 @@ match_all (gchar       **words,
 }
 
 static gboolean
-language_visible (GtkListBoxRow *row,
+language_visible (GtkListBoxRow *list_box_row,
                   gpointer   user_data)
 {
         CcLanguageChooser *self = user_data;
+        CcLocaleRow *row;
         g_autofree gchar *language = NULL;
         g_autofree gchar *country = NULL;
         g_autofree gchar *language_local = NULL;
         g_autofree gchar *country_local = NULL;
         gboolean visible;
 
-        if (row == self->more_row)
+        if (list_box_row == self->more_row)
                 return !self->showing_extra;
 
-        if (!CC_IS_LANGUAGE_ROW (row))
+        if (!CC_IS_LOCALE_ROW (list_box_row))
                 return TRUE;
 
-        if (!self->showing_extra && cc_language_row_get_is_extra (CC_LANGUAGE_ROW (row)))
+        row = CC_LOCALE_ROW (list_box_row);
+
+        if (!self->showing_extra && cc_locale_row_get_is_extra (row))
                 return FALSE;
 
         if (!self->filter_words)
                 return TRUE;
 
         language =
-                cc_util_normalize_casefold_and_unaccent (cc_language_row_get_language (CC_LANGUAGE_ROW (row)));
+                cc_util_normalize_casefold_and_unaccent (cc_locale_row_get_language (row));
         visible = match_all (self->filter_words, language);
         if (visible)
                 return TRUE;
 
         country =
-                cc_util_normalize_casefold_and_unaccent (cc_language_row_get_country (CC_LANGUAGE_ROW (row)));
+                cc_util_normalize_casefold_and_unaccent (cc_locale_row_get_country (row));
         visible = match_all (self->filter_words, country);
         if (visible)
                 return TRUE;
 
         language_local =
-                cc_util_normalize_casefold_and_unaccent (cc_language_row_get_language_local (CC_LANGUAGE_ROW (row)));
+                cc_util_normalize_casefold_and_unaccent (cc_locale_row_get_language_local (row));
         visible = match_all (self->filter_words, language_local);
         if (visible)
                 return TRUE;
 
         country_local =
-                cc_util_normalize_casefold_and_unaccent (cc_language_row_get_country_local (CC_LANGUAGE_ROW (row)));
+                cc_util_normalize_casefold_and_unaccent (cc_locale_row_get_country_local (row));
         return match_all (self->filter_words, country_local);
 }
 
@@ -148,18 +151,22 @@ sort_languages (GtkListBoxRow *a,
                 GtkListBoxRow *b,
                 gpointer   data)
 {
+        CcLocaleRow *row1, *row2;
         int d;
 
-        if (!CC_IS_LANGUAGE_ROW (a))
+        if (!CC_IS_LOCALE_ROW (a))
                 return 1;
-        if (!CC_IS_LANGUAGE_ROW (b))
+        if (!CC_IS_LOCALE_ROW (b))
                 return -1;
 
-        d = g_strcmp0 (cc_language_row_get_language (CC_LANGUAGE_ROW (a)), cc_language_row_get_language (CC_LANGUAGE_ROW (b)));
+        row1 = CC_LOCALE_ROW (a);
+        row2 = CC_LOCALE_ROW (b);
+
+        d = g_strcmp0 (cc_locale_row_get_language (row1), cc_locale_row_get_language (row2));
         if (d != 0)
                 return d;
 
-        return g_strcmp0 (cc_language_row_get_country (CC_LANGUAGE_ROW (a)), cc_language_row_get_country (CC_LANGUAGE_ROW (b)));
+        return g_strcmp0 (cc_locale_row_get_country (row1), cc_locale_row_get_country (row2));
 }
 
 static void
@@ -201,23 +208,22 @@ set_locale_id (CcLanguageChooser *self,
         for (child = gtk_widget_get_first_child (GTK_WIDGET (self->language_listbox));
              child;
              child = gtk_widget_get_next_sibling (child)) {
-                CcLanguageRow *row;
+                CcLocaleRow *row;
 
-                if (!CC_IS_LANGUAGE_ROW (child))
+                if (!CC_IS_LOCALE_ROW (child))
                         continue;
 
-                row = CC_LANGUAGE_ROW (child);
-                if (g_strcmp0 (locale_id, cc_language_row_get_locale_id (row)) == 0) {
-                        cc_language_row_set_checked (row, TRUE);
+                row = CC_LOCALE_ROW (child);
+                if (g_strcmp0 (locale_id, cc_locale_row_get_locale_id (row)) == 0) {
+                        gtk_list_box_select_row (self->language_listbox, GTK_LIST_BOX_ROW (row));
                         gtk_widget_set_sensitive (GTK_WIDGET (self->select_button), TRUE);
 
                         /* make sure the selected language is shown */
-                        if (!self->showing_extra && cc_language_row_get_is_extra (row)) {
-                                cc_language_row_set_is_extra (row, FALSE);
+                        if (!self->showing_extra && cc_locale_row_get_is_extra (row)) {
+                                cc_locale_row_set_is_extra (row, FALSE);
                                 gtk_list_box_invalidate_filter (self->language_listbox);
                         }
-                } else {
-                        cc_language_row_set_checked (row, FALSE);
+                        break;
                 }
         }
 
@@ -235,14 +241,15 @@ language_listbox_row_activated_cb (CcLanguageChooser *self, GtkListBoxRow *row)
                 return;
         }
 
-        if (!CC_IS_LANGUAGE_ROW (row))
+        if (!CC_IS_LOCALE_ROW (row))
                 return;
 
-        new_locale_id = cc_language_row_get_locale_id (CC_LANGUAGE_ROW (row));
+        new_locale_id = cc_locale_row_get_locale_id (CC_LOCALE_ROW (row));
         if (g_strcmp0 (new_locale_id, self->language) == 0) {
                 g_signal_emit (self, signals[LANGUAGE_SELECTED], 0);
         } else {
-                set_locale_id (self, new_locale_id);
+                g_free (self->language);
+                self->language = g_strdup (new_locale_id);
         }
 }
 

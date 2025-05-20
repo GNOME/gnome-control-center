@@ -59,11 +59,11 @@
                 <property name="min-content-height">200</property>
                 <property name="child">
                   <object class="GtkListBox" id="language_listbox">
+                    <property name="tab-behavior">item</property>
                     <property name="can-focus">True</property>
                     <property name="vexpand">True</property>
                     <property name="halign">fill</property>
                     <property name="valign">fill</property>
-                    <property name="selection-mode">none</property>
                     <property name="show-separators">True</property>
                     <signal name="row-activated" handler="language_listbox_row_activated_cb" object="CcLanguageChooser" swapped="yes"/>
                     <child type="placeholder">
@@ -76,6 +76,7 @@
                     <!-- "More" row -->
                     <child>
                       <object class="GtkListBoxRow" id="more_row">
+                        <property name="selectable">False</property>
                         <child>
                           <object class="GtkBox">
                             <property name="spacing">10</property>
