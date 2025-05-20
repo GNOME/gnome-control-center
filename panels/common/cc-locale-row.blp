@@ -1,6 +1,11 @@
 using Gtk 4.0;
 
 template $CcLocaleRow: ListBoxRow {
+  accessibility {
+    labelled-by: title_label;
+    described-by: description_label;
+  }
+
   styles [
     "neutral-selectable",
   ]
