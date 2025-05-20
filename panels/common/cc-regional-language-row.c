@@ -31,6 +31,9 @@ struct _CcRegionalLanguageRow {
   GtkLabel *description_label;
   GtkLabel *title_label;
 
+  GtkLabel *region_label;
+  GtkLabel *language_label;
+
   gchar *locale_id;
   gchar *language;
   gchar *language_local;
@@ -70,6 +73,9 @@ cc_regional_language_row_dispose (GObject *object)
   g_clear_pointer (&self->country_local, g_free);
   g_clear_pointer (&self->language, g_free);
   g_clear_pointer (&self->language_local, g_free);
+
+  g_clear_weak_pointer (&self->region_label);
+  g_clear_weak_pointer (&self->language_label);
 
   G_OBJECT_CLASS (cc_regional_language_row_parent_class)->dispose (object);
 }
@@ -112,7 +118,8 @@ cc_regional_language_row_init (CcRegionalLanguageRow *self)
 }
 
 CcRegionalLanguageRow *
-cc_regional_language_row_new (const gchar *locale_id)
+cc_regional_language_row_new (const gchar            *locale_id,
+                              CcRegionalLanguageType  row_type)
 {
   CcRegionalLanguageRow *self;
   g_autofree gchar *language_code = NULL;
@@ -124,9 +131,23 @@ cc_regional_language_row_new (const gchar *locale_id)
 
   gnome_parse_locale (locale_id, &language_code, &country_code, NULL, &modifier);
 
+  switch (row_type)
+    {
+    case CC_REGIONAL_LANGUAGE_TYPE_REGION:
+      g_set_weak_pointer (&self->region_label, self->title_label);
+      g_set_weak_pointer (&self->language_label, self->description_label);
+      break;
+    case CC_REGIONAL_LANGUAGE_TYPE_LANGUAGE:
+      g_set_weak_pointer (&self->region_label, self->description_label);
+      g_set_weak_pointer (&self->language_label, self->title_label);
+      break;
+    default:
+      g_assert_not_reached ();
+    }
+
   self->language = get_language_label (language_code, modifier, locale_id);
   self->language_local = get_language_label (language_code, modifier, NULL);
-  gtk_label_set_label (self->title_label, self->language);
+  gtk_label_set_label (self->language_label, self->language);
 
   if (country_code == NULL)
     {
@@ -137,7 +158,7 @@ cc_regional_language_row_new (const gchar *locale_id)
     {
       self->country = gnome_get_country_from_code (country_code, locale_id);
       self->country_local = gnome_get_country_from_code (country_code, NULL);
-      gtk_label_set_label (self->description_label, self->country);
+      gtk_label_set_label (self->region_label, self->country);
     }
 
   return self;
