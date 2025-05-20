@@ -1,0 +1,82 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CcScreenPage: Adw.NavigationPage {
+  title: _("Screen Lock");
+  tag: "screenlock";
+
+  child: Adw.ToolbarView {
+    [top]
+    Adw.HeaderBar {}
+
+    content: Adw.PreferencesPage {
+      description: _("Automatically locking the screen prevents others from accessing the device while you're away");
+
+      Adw.PreferencesGroup {
+        $CcNumberRow blank_screen_row {
+          title: _("_Blank Screen Delay");
+          subtitle: _("Period of inactivity until screen blanks");
+          subtitle-lines: "2";
+          use-underline: true;
+          values: "[60, 120, 180, 240, 300, 480, 600, 720, 900]";
+
+          special-value: $CcNumberObject {
+            value: "0";
+
+            /* Translators: Option for Blank Screen in Screen Lock page */
+            string: _("Never");
+            order: "last";
+          };
+
+          value-type: "seconds";
+        }
+
+        Adw.SwitchRow automatic_screen_lock_row {
+          title: _("Automatic Screen _Lock");
+          subtitle: _("Locks the screen after it blanks");
+          use-underline: true;
+        }
+
+        $CcNumberRow lock_after_row {
+          title: _("Automatic _Screen Lock Delay");
+          subtitle: _("Time from screen blank to screen lock");
+          subtitle-lines: "2";
+          use-underline: true;
+          values: "[30, 60, 120, 180, 300, 1800, 3600]";
+
+          special-value: $CcNumberObject {
+            value: "0";
+
+            /* Translators: Option for Automatic Screen Lock in Screen Lock page */
+            string: _("Screen Turns Off");
+          };
+
+          value-type: "seconds";
+        }
+
+        Adw.SwitchRow show_notifications_row {
+          /* Translators: Whether to show notifications on the lock screen */
+          title: _("Lock Screen _Notifications");
+          use-underline: true;
+        }
+
+        Adw.SwitchRow usb_protection_row {
+          visible: false;
+          title: _("Forbid New _USB Devices");
+          subtitle: _("Prevent new USB devices from interacting with the system when the screen is locked");
+          subtitle-lines: 2;
+          use-underline: true;
+        }
+      }
+
+      Adw.PreferencesGroup screen_privacy_group {
+        title: _("Screen Privacy");
+
+        Adw.SwitchRow privacy_screen_row {
+          title: _("Restrict Viewing _Angle");
+          use-underline: true;
+        }
+      }
+    };
+  };
+}

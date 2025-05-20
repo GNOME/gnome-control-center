@@ -1,0 +1,161 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CcBoltPage: Adw.NavigationPage {
+  title: _("Thunderbolt");
+  tag: "thunderbolt";
+
+  child: Adw.ToolbarView {
+    [top]
+    Adw.HeaderBar {
+      [end]
+      Box headerbar_box {
+        visible: false;
+        spacing: 6;
+        halign: end;
+
+        LockButton lock_button {}
+      }
+    }
+
+    content: Adw.ToastOverlay toast_overlay {
+      child: Stack container {
+        hhomogeneous: false;
+        vhomogeneous: false;
+        transition-type: crossfade;
+
+        StackPage {
+          name: "loading";
+
+          child: Adw.Spinner {};
+        }
+
+        StackPage {
+          name: "no-thunderbolt";
+
+          child: Adw.StatusPage notb_page {
+            title: _("No Thunderbolt Support");
+            description: _("Could not connect to the thunderbolt subsystem");
+            icon-name: "thunderbolt-symbolic";
+          };
+        }
+
+        StackPage {
+          name: "devices-listing";
+
+          child: Adw.PreferencesPage {
+            Adw.PreferencesGroup {
+              title: _("Direct Access");
+
+              Adw.ActionRow direct_access_row {
+                title: _("Allow direct access to devices such as docks and external GPUs");
+                activatable-widget: authmode_switch;
+
+                Switch authmode_switch {
+                  valign: center;
+                  active: true;
+                  state-set => $on_authmode_state_set_cb(template);
+                }
+              }
+            }
+
+            Adw.PreferencesGroup {
+              Stack devices_stack {
+                transition-type: crossfade;
+
+                StackPage {
+                  name: "have-devices";
+
+                  child: Box {
+                    orientation: vertical;
+                    spacing: 32;
+
+                    Box pending_box {
+                      visible: false;
+                      orientation: vertical;
+                      spacing: 12;
+
+                      Box pending_header {
+                        hexpand: true;
+                        halign: start;
+                        spacing: 6;
+
+                        Image {
+                          icon-name: "dialog-warning-symbolic";
+                          icon-size: normal;
+                        }
+
+                        Label {
+                          label: _("Pending Devices");
+                          xalign: 0.0;
+
+                          styles [
+                            "heading",
+                          ]
+                        }
+                      }
+
+                      Frame {
+                        valign: start;
+                        vexpand: false;
+
+                        styles [
+                          "view",
+                        ]
+
+                        ListBox pending_list {
+                          selection-mode: none;
+                          can-focus: true;
+                          row-activated => $on_device_entry_row_activated_cb(template);
+                        }
+                      }
+                    }
+
+                    Adw.PreferencesGroup devices_box {
+                      title: _("Devices");
+                      visible: false;
+
+                      ListBox devices_list {
+                        selection-mode: none;
+                        row-activated => $on_device_entry_row_activated_cb(template);
+
+                        styles [
+                          "boxed-list",
+                        ]
+                      }
+                    }
+                  };
+                }
+
+                StackPage {
+                  name: "no-devices";
+
+                  child: Box {
+                    hexpand: true;
+                    halign: start;
+                    orientation: vertical;
+                    spacing: 6;
+
+                    Label {
+                      label: _("Devices");
+                      xalign: 0.0;
+
+                      styles [
+                        "heading",
+                      ]
+                    }
+
+                    Label {
+                      label: _("No devices attached");
+                      xalign: 0.0;
+                    }
+                  };
+                }
+              }
+            }
+          };
+        }
+      };
+    };
+  };
+}
