@@ -75,12 +75,26 @@ cc_regional_language_row_dispose (GObject *object)
 }
 
 static void
+cc_regional_language_row_state_flags_changed (GtkWidget     *widget,
+                                              GtkStateFlags  previous_state_flags)
+{
+  CcRegionalLanguageRow *self = CC_REGIONAL_LANGUAGE_ROW (widget);
+
+  gtk_widget_set_visible (GTK_WIDGET (self->check_image),
+                          gtk_widget_get_state_flags (widget) & GTK_STATE_FLAG_SELECTED);
+
+  GTK_WIDGET_CLASS (cc_regional_language_row_parent_class)->state_flags_changed (widget, previous_state_flags);
+}
+
+static void
 cc_regional_language_row_class_init (CcRegionalLanguageRowClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
   object_class->dispose = cc_regional_language_row_dispose;
+
+  widget_class->state_flags_changed = cc_regional_language_row_state_flags_changed;
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/common/cc-regional-language-row.ui");
 
