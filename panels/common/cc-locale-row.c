@@ -80,7 +80,7 @@ cc_locale_row_dispose (GObject *object)
   G_OBJECT_CLASS (cc_locale_row_parent_class)->dispose (object);
 }
 
-void
+static void
 cc_locale_row_class_init (CcLocaleRowClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
@@ -95,7 +95,7 @@ cc_locale_row_class_init (CcLocaleRowClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcLocaleRow, language_label);
 }
 
-void
+static void
 cc_locale_row_init (CcLocaleRow *self)
 {
   g_resources_register (cc_common_get_resource ());
