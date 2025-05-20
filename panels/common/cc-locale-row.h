@@ -27,7 +27,14 @@ G_BEGIN_DECLS
 #define CC_TYPE_LOCALE_ROW (cc_locale_row_get_type ())
 G_DECLARE_FINAL_TYPE (CcLocaleRow, cc_locale_row, CC, LOCALE_ROW, GtkListBoxRow)
 
-CcLocaleRow  *cc_locale_row_new                (const gchar *locale_id);
+typedef enum
+{
+  CC_LOCALE_LAYOUT_TYPE_REGION,
+  CC_LOCALE_LAYOUT_TYPE_LANGUAGE
+} CcLocaleLayoutType;
+
+CcLocaleRow  *cc_locale_row_new                (const gchar        *locale_id,
+                                                CcLocaleLayoutType  layout_type);
 
 const gchar  *cc_locale_row_get_locale_id      (CcLocaleRow *row);
 
