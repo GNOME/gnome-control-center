@@ -55,6 +55,7 @@ sources = common_sources + files(
   'cc-timelike-editor.c',
   'cc-timelike-editor-layout.c',
   'cc-permission-infobar.c',
+  'cc-regional-language-row.c',
   'cc-split-row.c',
   'cc-texture-utils.c',
   'cc-content-row.c',
