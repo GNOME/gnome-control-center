@@ -26,7 +26,6 @@
 #include <glib.h>
 #include <glib/gi18n.h>
 #include <glib/gstdio.h>
-#include <gdk/x11/gdkx.h>
 #include <gtk/gtk.h>
 
 #include "pp-new-printer-dialog.h"

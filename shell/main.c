@@ -26,10 +26,6 @@
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
 
-#ifdef GDK_WINDOWING_X11
-#include <X11/Xlib.h>
-#endif
-
 #include "cc-log.h"
 #include "cc-application.h"
 
