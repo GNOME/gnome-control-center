@@ -33,6 +33,7 @@
 struct _CcLocaleRow {
   GtkListBoxRow parent_instance;
 
+  GtkBox   *box;
   GtkImage *check_image;
   GtkLabel *description_label;
   GtkLabel *title_label;
@@ -111,6 +112,7 @@ cc_locale_row_class_init (CcLocaleRowClass *klass)
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/common/cc-locale-row.ui");
 
+  gtk_widget_class_bind_template_child (widget_class, CcLocaleRow, box);
   gtk_widget_class_bind_template_child (widget_class, CcLocaleRow, check_image);
   gtk_widget_class_bind_template_child (widget_class, CcLocaleRow, description_label);
   gtk_widget_class_bind_template_child (widget_class, CcLocaleRow, title_label);
@@ -287,4 +289,20 @@ cc_locale_row_get_is_extra (CcLocaleRow *self)
 {
   g_return_val_if_fail (CC_IS_LOCALE_ROW (self), FALSE);
   return self->is_extra;
+}
+
+/**
+ * cc_locale_row_add_suffix:
+ * @self: a `CcLocaleRow`
+ * @widget: a widget to append
+ *
+ * Append @widget to @self.
+ */
+void
+cc_locale_row_add_suffix (CcLocaleRow *self, GtkWidget *widget)
+{
+  g_return_if_fail (CC_IS_LOCALE_ROW (self));
+  g_return_if_fail (GTK_IS_WIDGET (widget));
+
+  gtk_box_append (self->box, widget);
 }
