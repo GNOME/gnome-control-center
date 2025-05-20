@@ -27,6 +27,7 @@
 struct _CcRegionalLanguageRow {
   GtkListBoxRow parent_instance;
 
+  GtkBox   *box;
   GtkImage *check_image;
   GtkLabel *description_label;
   GtkLabel *title_label;
@@ -104,6 +105,7 @@ cc_regional_language_row_class_init (CcRegionalLanguageRowClass *klass)
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/common/cc-regional-language-row.ui");
 
+  gtk_widget_class_bind_template_child (widget_class, CcRegionalLanguageRow, box);
   gtk_widget_class_bind_template_child (widget_class, CcRegionalLanguageRow, check_image);
   gtk_widget_class_bind_template_child (widget_class, CcRegionalLanguageRow, description_label);
   gtk_widget_class_bind_template_child (widget_class, CcRegionalLanguageRow, title_label);
@@ -211,4 +213,14 @@ cc_regional_language_row_get_is_extra (CcRegionalLanguageRow *self)
 {
   g_return_val_if_fail (CC_IS_REGIONAL_LANGUAGE_ROW (self), FALSE);
   return self->is_extra;
+}
+
+void
+cc_regional_language_row_add_suffix (CcRegionalLanguageRow *self,
+                                     GtkWidget *widget)
+{
+  g_return_if_fail (CC_IS_REGIONAL_LANGUAGE_ROW (self));
+  g_return_if_fail (GTK_IS_WIDGET (widget));
+
+  gtk_box_append (self->box, widget);
 }
