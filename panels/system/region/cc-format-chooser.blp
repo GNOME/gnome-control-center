@@ -82,7 +82,7 @@ template $CcFormatChooser: Adw.Dialog {
                 title: _("Common Formats");
 
                 ListBox common_region_listbox {
-                  selection-mode: none;
+                  tab-behavior: item;
                   row-activated => $row_activated(template);
 
                   styles [
@@ -95,7 +95,7 @@ template $CcFormatChooser: Adw.Dialog {
                 title: _("All Formats");
 
                 ListBox region_listbox {
-                  selection-mode: none;
+                  tab-behavior: item;
                   row-activated => $row_activated(template);
 
                   styles [
