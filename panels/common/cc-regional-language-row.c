@@ -28,8 +28,8 @@ struct _CcRegionalLanguageRow {
   GtkListBoxRow parent_instance;
 
   GtkImage *check_image;
-  GtkLabel *country_label;
-  GtkLabel *language_label;
+  GtkLabel *description_label;
+  GtkLabel *title_label;
 
   gchar *locale_id;
   gchar *language;
@@ -99,8 +99,8 @@ cc_regional_language_row_class_init (CcRegionalLanguageRowClass *klass)
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/common/cc-regional-language-row.ui");
 
   gtk_widget_class_bind_template_child (widget_class, CcRegionalLanguageRow, check_image);
-  gtk_widget_class_bind_template_child (widget_class, CcRegionalLanguageRow, country_label);
-  gtk_widget_class_bind_template_child (widget_class, CcRegionalLanguageRow, language_label);
+  gtk_widget_class_bind_template_child (widget_class, CcRegionalLanguageRow, description_label);
+  gtk_widget_class_bind_template_child (widget_class, CcRegionalLanguageRow, title_label);
 }
 
 static void
@@ -126,7 +126,7 @@ cc_regional_language_row_new (const gchar *locale_id)
 
   self->language = get_language_label (language_code, modifier, locale_id);
   self->language_local = get_language_label (language_code, modifier, NULL);
-  gtk_label_set_label (self->language_label, self->language);
+  gtk_label_set_label (self->title_label, self->language);
 
   if (country_code == NULL)
     {
@@ -137,7 +137,7 @@ cc_regional_language_row_new (const gchar *locale_id)
     {
       self->country = gnome_get_country_from_code (country_code, locale_id);
       self->country_local = gnome_get_country_from_code (country_code, NULL);
-      gtk_label_set_label (self->country_label, self->country);
+      gtk_label_set_label (self->description_label, self->country);
     }
 
   return self;
