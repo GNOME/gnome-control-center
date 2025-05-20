@@ -941,3 +941,16 @@ row.split-row box.header {
   margin-top: 9px;
   margin-bottom: 3px;
 }
+
+row.neutral-selectable:selected {
+  background-color: transparent;
+}
+
+row.neutral-selectable:selected:hover {
+  background-image: image(color-mix(in srgb, currentColor 3%, transparent));
+}
+
+row.neutral-selectable:selected:active {
+  background-image: image(color-mix(in srgb, currentColor 8%, transparent));
+}
+
