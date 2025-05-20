@@ -38,7 +38,7 @@
 
 struct _CcWwanDetailsDialog
 {
-  GtkDialog     parent_instance;
+  AdwDialog     parent_instance;
 
   GtkLabel     *device_identifier;
   GtkLabel     *device_model;
@@ -54,7 +54,7 @@ struct _CcWwanDetailsDialog
   CcWwanDevice *device;
 };
 
-G_DEFINE_TYPE (CcWwanDetailsDialog, cc_wwan_details_dialog, GTK_TYPE_DIALOG)
+G_DEFINE_TYPE (CcWwanDetailsDialog, cc_wwan_details_dialog, ADW_TYPE_DIALOG)
 
 
 enum {
@@ -241,16 +241,12 @@ cc_wwan_details_dialog_init (CcWwanDetailsDialog *self)
   gtk_widget_init_template (GTK_WIDGET (self));
 }
 
-GtkWindow *
-cc_wwan_details_dialog_new (GtkWindow    *parent_window,
-                            CcWwanDevice *device)
+AdwDialog *
+cc_wwan_details_dialog_new (CcWwanDevice *device)
 {
-  g_return_val_if_fail (GTK_IS_WINDOW (parent_window), NULL);
   g_return_val_if_fail (CC_IS_WWAN_DEVICE (device), NULL);
 
-  return GTK_WINDOW (g_object_new (CC_TYPE_WWAN_DETAILS_DIALOG,
-                                   "transient-for", parent_window,
-                                   "use-header-bar", 1,
+  return ADW_DIALOG (g_object_new (CC_TYPE_WWAN_DETAILS_DIALOG,
                                    "device", device,
                                    NULL));
 }

@@ -79,7 +79,6 @@ struct _CcWwanDevicePage
   GDBusProxy    *wwan_proxy;
 
   GtkWindow     *apn_dialog;
-  GtkWindow     *details_dialog;
   GtkWindow     *network_mode_dialog;
   GtkWindow     *network_dialog;
   GtkWindow     *sim_lock_dialog;
@@ -402,9 +401,8 @@ wwan_advanced_settings_activated_cb (CcWwanDevicePage *self,
     }
   else if (row == self->details_row)
     {
-      if (!self->details_dialog)
-        self->details_dialog = cc_wwan_details_dialog_new (top_level, self->device);
-      gtk_widget_set_visible (GTK_WIDGET (self->details_dialog), TRUE);
+      AdwDialog *dialog = cc_wwan_details_dialog_new (self->device);
+      adw_dialog_present (dialog, GTK_WIDGET (top_level));
     }
   else if (row == self->apn_settings_row)
     {
@@ -534,7 +532,6 @@ cc_wwan_device_page_dispose (GObject *object)
   CcWwanDevicePage *self = (CcWwanDevicePage *)object;
 
   g_clear_pointer (&self->apn_dialog, gtk_window_destroy);
-  g_clear_pointer (&self->details_dialog, gtk_window_destroy);
   g_clear_pointer (&self->network_mode_dialog, gtk_window_destroy);
   g_clear_pointer (&self->network_dialog, gtk_window_destroy);
   g_clear_pointer (&self->sim_lock_dialog, gtk_window_destroy);

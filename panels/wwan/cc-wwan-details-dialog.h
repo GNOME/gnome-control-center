@@ -32,9 +32,8 @@
 G_BEGIN_DECLS
 
 #define CC_TYPE_WWAN_DETAILS_DIALOG (cc_wwan_details_dialog_get_type())
-G_DECLARE_FINAL_TYPE (CcWwanDetailsDialog, cc_wwan_details_dialog, CC, WWAN_DETAILS_DIALOG, GtkDialog)
+G_DECLARE_FINAL_TYPE (CcWwanDetailsDialog, cc_wwan_details_dialog, CC, WWAN_DETAILS_DIALOG, AdwDialog)
 
-GtkWindow *cc_wwan_details_dialog_new (GtkWindow    *parent_window,
-                                       CcWwanDevice *device);
+AdwDialog *cc_wwan_details_dialog_new (CcWwanDevice *device);
 
 G_END_DECLS
