@@ -39,9 +39,6 @@ const gchar  *cc_locale_row_get_country        (CcLocaleRow *row);
 
 const gchar  *cc_locale_row_get_country_local  (CcLocaleRow *row);
 
-void          cc_locale_row_set_checked        (CcLocaleRow *row,
-                                                gboolean checked);
-
 void          cc_locale_row_set_is_extra       (CcLocaleRow *row,
                                                 gboolean is_extra);
 

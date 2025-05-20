@@ -236,20 +236,6 @@ cc_locale_row_get_country_local (CcLocaleRow *self)
 }
 
 /**
- * cc_locale_row_set_checked:
- * @self: a `CcLocaleRow`
- * @checked: the new value to set
- *
- * Change the row's active state.
- */
-void
-cc_locale_row_set_checked (CcLocaleRow *self, gboolean checked)
-{
-  g_return_if_fail (CC_IS_LOCALE_ROW (self));
-  gtk_widget_set_visible (GTK_WIDGET (self->check_image), checked);
-}
-
-/**
  * cc_locale_row_set_is_extra:
  * @self: a `CcLocaleRow`
  * @is_extra: the new value to set
