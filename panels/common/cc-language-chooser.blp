@@ -57,11 +57,11 @@ template $CcLanguageChooser: Adw.Dialog {
         min-content-height: 200;
 
         child: ListBox language_listbox {
+          tab-behavior: item;
           can-focus: true;
           vexpand: true;
           halign: fill;
           valign: fill;
-          selection-mode: none;
           show-separators: true;
           row-activated => $language_listbox_row_activated_cb(template);
 
@@ -72,6 +72,8 @@ template $CcLanguageChooser: Adw.Dialog {
           }
 
           ListBoxRow more_row {
+            selectable: false;
+
             Box {
               spacing: 10;
               tooltip-markup: _("More…");
