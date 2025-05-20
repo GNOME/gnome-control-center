@@ -76,7 +76,6 @@ sources = common_sources + files(
   'cc-hostname.c',
   'cc-illustrated-row.c',
   'cc-language-chooser.c',
-  'cc-language-row.c',
   'cc-list-row.c',
   'cc-list-row-info-button.c',
   'cc-mask-paintable.c',
