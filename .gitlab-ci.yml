@@ -56,9 +56,9 @@ stages:
     # be created, tailored for the stable branch.
     # Should probably also switch away from 'rawhide',
     # to stable fedora branch as well.
-    BRANCH_NAME: 'main'
-    CONTAINER_TAG: '2025-03-13.0'
-    FEDORA_VERSION: rawhide
+    BRANCH_NAME: 'gnome-48'
+    CONTAINER_TAG: '2025-05-20.0'
+    FEDORA_VERSION: 42
     # Derive FDO variables from this automatically.
     # DO NOT edit, instead change the variables above
     FDO_REPO_SUFFIX: '${BRANCH_NAME}'
@@ -98,40 +98,6 @@ build.container.fedora@x86_64:
       libsass-devel sassc
     FDO_DISTRIBUTION_EXEC: |-
       dnf builddep -y gnome-control-center && \
-      dnf builddep -y gsettings-desktop-schemas && \
-      git clone --depth 1 https://gitlab.gnome.org/GNOME/gsettings-desktop-schemas.git && \
-        cd gsettings-desktop-schemas && \
-        meson setup $MESON_BUILD_DIR --prefix=/usr && \
-        meson compile -C $MESON_BUILD_DIR && \
-        meson install -C $MESON_BUILD_DIR && \
-        cd .. && \
-      dnf builddep -y gnome-settings-daemon && \
-      git clone --depth 1 https://gitlab.gnome.org/GNOME/gnome-settings-daemon.git && \
-        cd gnome-settings-daemon && \
-        meson setup $MESON_BUILD_DIR --prefix=/usr && \
-        meson compile -C $MESON_BUILD_DIR && \
-        meson install -C $MESON_BUILD_DIR && \
-        cd .. && \
-      dnf builddep -y gtk4 && \
-      git clone --depth 1 https://gitlab.gnome.org/GNOME/gtk.git && \
-        cd gtk && \
-        meson setup $MESON_BUILD_DIR --prefix=/usr && \
-        meson compile -C $MESON_BUILD_DIR && \
-        meson install -C $MESON_BUILD_DIR && \
-        cd .. && \
-      dnf builddep -y libadwaita && \
-      git clone --depth 1 https://gitlab.gnome.org/GNOME/libadwaita.git && \
-        cd libadwaita && \
-        meson setup $MESON_BUILD_DIR --prefix=/usr -Dtests=false -Dexamples=false && \
-        meson compile -C $MESON_BUILD_DIR && \
-        meson install -C $MESON_BUILD_DIR && \
-        cd .. && \
-      git clone --depth 1 https://gitlab.gnome.org/GNOME/gnome-online-accounts.git && \
-        cd gnome-online-accounts && \
-        meson setup $MESON_BUILD_DIR --prefix=/usr -Dfedora=true  && \
-        meson compile -C $MESON_BUILD_DIR && \
-        meson install -C $MESON_BUILD_DIR && \
-        cd .. && \
       dnf remove -y systemtap-runtime
 
 ##
