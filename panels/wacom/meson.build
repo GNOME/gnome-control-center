@@ -9,12 +9,34 @@ cflags += ['-DGNOMELOCALEDIR="@0@"'.format(control_center_localedir)]
 
 test_cflags = cflags + ['-DFAKE_AREA']
 
+blueprints = custom_target(
+  'blueprints',
+  input: files(
+    'button-mapping.blp',
+    'calibrator/calibrator.blp',
+    'cc-wacom-ekr-page.blp',
+    'cc-wacom-page.blp',
+    'cc-wacom-panel.blp',
+    'cc-wacom-stylus-action-dialog.blp',
+    'cc-wacom-stylus-page.blp',
+  ),
+  output: '.',
+  command: [
+    blueprint_compiler,
+    'batch-compile',
+    '@OUTPUT@',
+    '@CURRENT_SOURCE_DIR@',
+    '@INPUT@',
+  ],
+)
+
 wacom_gresource = gnome.compile_resources(
   'cc-' + cappletname + '-resources',
   cappletname + '.gresource.xml',
     source_dir : '.',
         c_name : 'cc_' + cappletname,
-        export : true
+        export : true,
+  dependencies : blueprints,
 )
 
 subdir('calibrator')
