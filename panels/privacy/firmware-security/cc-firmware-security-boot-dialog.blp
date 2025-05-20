@@ -1,0 +1,52 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CcFirmwareSecurityBootDialog: Adw.Dialog {
+  content-width: 420;
+
+  child: Adw.ToolbarView {
+    [top]
+    Adw.HeaderBar {
+      show-title: false;
+    }
+
+    content: ScrolledWindow {
+      hscrollbar-policy: never;
+      propagate-natural-height: true;
+
+      child: Box {
+        orientation: vertical;
+        spacing: 24;
+        margin-top: 12;
+        margin-start: 24;
+        margin-end: 24;
+        margin-bottom: 24;
+
+        Image secure_boot_icon {
+          icon-size: large;
+          halign: center;
+          icon-name: "channel-insecure";
+
+          styles [
+            "security-level-icon",
+          ]
+        }
+
+        Label secure_boot_title {
+          wrap: true;
+          justify: center;
+
+          styles [
+            "title-2",
+          ]
+        }
+
+        Label secure_boot_description {
+          wrap: true;
+          justify: center;
+          label: _("Secure boot prevents malicious software from being loaded when the device starts.\n\nFor more information, contact the hardware manufacturer or IT support.");
+        }
+      };
+    };
+  };
+}

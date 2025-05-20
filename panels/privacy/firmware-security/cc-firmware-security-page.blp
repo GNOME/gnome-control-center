@@ -1,0 +1,185 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CcFirmwareSecurityPage: Adw.NavigationPage {
+  title: _("Device Security");
+  tag: "device-security";
+
+  child: Adw.ToolbarView {
+    [top]
+    Adw.HeaderBar {
+      [end]
+      Button fw_help_button {
+        tooltip-text: _("About Device Security");
+        halign: center;
+        valign: center;
+        icon-name: "help-about-symbolic";
+        clicked => $on_fw_help_button_clicked_cb(template);
+
+        styles [
+          "image-button",
+        ]
+      }
+    }
+
+    content: Stack panel_stack {
+      StackPage {
+        name: "loading-page";
+
+        child: Adw.Spinner {};
+      }
+
+      StackPage {
+        name: "unavailable-page";
+
+        child: Adw.StatusPage {
+          title: _("Device Security Unavailable");
+          icon-name: "security-high-symbolic";
+          description: _("Device Security is only available on physical hardware. No physical hardware has been detected.");
+        };
+      }
+
+      StackPage {
+        name: "firmware-security-page";
+
+        child: Adw.PreferencesPage {
+          Adw.PreferencesGroup {
+            Box firmware_security_hbox {
+              spacing: 24;
+              homogeneous: true;
+
+              Button hsi_button {
+                receives-default: true;
+                sensitive: true;
+                vexpand-set: true;
+                clicked => $on_hsi_button_clicked_cb(template);
+
+                styles [
+                  "card",
+                ]
+
+                Box hsi_box {
+                  orientation: vertical;
+                  halign: fill;
+                  valign: start;
+                  margin-start: 12;
+                  margin-end: 12;
+                  margin-top: 24;
+                  margin-bottom: 24;
+                  spacing: 6;
+
+                  Image hsi_icon {
+                    halign: center;
+                    valign: center;
+                    icon-name: "dialog-question-symbolic";
+                    pixel-size: 32;
+                    margin-bottom: 6;
+
+                    styles [
+                      "security-level-icon",
+                    ]
+                  }
+
+                  Label hsi_label {
+                    justify: center;
+                    wrap: true;
+
+                    styles [
+                      "heading",
+                    ]
+                  }
+
+                  Label hsi_description {
+                    wrap: true;
+                    justify: center;
+                    ellipsize: none;
+                    lines: 2;
+
+                    styles [
+                      "caption",
+                    ]
+                  }
+                }
+              }
+
+              Button secure_boot_button {
+                receives-default: true;
+                clicked => $on_secure_boot_button_clicked_cb(template);
+
+                styles [
+                  "card",
+                ]
+
+                Box secure_boot_box {
+                  orientation: vertical;
+                  halign: fill;
+                  valign: start;
+                  margin-start: 12;
+                  margin-end: 12;
+                  margin-top: 24;
+                  margin-bottom: 24;
+                  spacing: 6;
+
+                  Image secure_boot_icon {
+                    pixel-size: 32;
+                    halign: center;
+                    valign: center;
+                    icon-name: "channel-insecure";
+                    margin-bottom: 6;
+
+                    styles [
+                      "security-level-icon",
+                    ]
+                  }
+
+                  Label secure_boot_label {
+                    justify: center;
+                    wrap: true;
+
+                    styles [
+                      "heading",
+                    ]
+                  }
+
+                  Label secure_boot_description {
+                    wrap: true;
+                    justify: center;
+                    ellipsize: none;
+                    lines: 2;
+
+                    styles [
+                      "caption",
+                    ]
+                  }
+                }
+              }
+            }
+          }
+
+          Adw.PreferencesGroup firmware_security_log_pgroup {
+            title: _("Security Events");
+
+            Box no_events_box {
+              orientation: vertical;
+
+              Adw.StatusPage {
+                vexpand: true;
+                title: _("No Events");
+                icon-name: "document-open-recent-symbolic";
+
+                styles [
+                  "dim-label",
+                  "compact",
+                ]
+              }
+
+              styles [
+                "card",
+              ]
+            }
+          }
+        };
+      }
+    };
+  };
+}

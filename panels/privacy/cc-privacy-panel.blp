@@ -1,0 +1,106 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CcPrivacyPanel: $CcPanel {
+  [subpage]
+  Adw.NavigationPage {
+    title: _("Privacy & Security");
+
+    child: Adw.ToolbarView {
+      [top]
+      Adw.HeaderBar {}
+
+      content: Adw.PreferencesPage {
+        Adw.PreferencesGroup {
+          title: _("System");
+
+          $CcListRow {
+            title: _("_Screen Lock");
+            subtitle: _("Automatic screen lock");
+            icon-name: "org.gnome.Settings-screen-lock-symbolic";
+            show-arrow: true;
+            action-name: "navigation.push";
+            action-target: "'screenlock'";
+          }
+
+          $CcListRow location_row {
+            visible: false;
+            title: _("_Location");
+            subtitle: _("Control access to your location");
+            icon-name: "org.gnome.Settings-location-access-symbolic";
+            show-arrow: true;
+            action-name: "navigation.push";
+            action-target: "'location'";
+          }
+
+          $CcListRow {
+            title: _("_File History &amp; Trash");
+            subtitle: _("Remove saved data and files");
+            icon-name: "org.gnome.Settings-trash-file-history-symbolic";
+            show-arrow: true;
+            action-name: "navigation.push";
+            action-target: "'usage'";
+          }
+
+          $CcListRow {
+            title: _("_Diagnostics");
+            subtitle: _("Automatic problem reporting");
+            icon-name: "org.gnome.Settings-device-diagnostics-symbolic";
+            show-arrow: true;
+            action-name: "navigation.push";
+            action-target: "'diagnostics'";
+            visible: bind diagnostics_page.visible;
+          }
+        }
+
+        Adw.PreferencesGroup {
+          title: _("Devices");
+
+          $CcListRow {
+            title: _("_Cameras");
+            subtitle: _("Control camera access");
+            icon-name: "org.gnome.Settings-camera-access-symbolic";
+            show-arrow: true;
+            action-name: "navigation.push";
+            action-target: "'camera'";
+          }
+
+          $CcListRow bolt_row {
+            visible: false;
+            title: _("_Thunderbolt");
+            subtitle: _("Manage device access");
+            icon-name: "org.gnome.Settings-thunderbolt-access-symbolic";
+            show-arrow: true;
+            action-name: "navigation.push";
+            action-target: "'thunderbolt'";
+          }
+
+          $CcListRow {
+            title: _("Device _Security");
+            subtitle: _("Hardware security status and information");
+            icon-name: "org.gnome.Settings-device-security-symbolic";
+            show-arrow: true;
+            action-name: "navigation.push";
+            action-target: "'device-security'";
+            visible: bind security_page.visible;
+          }
+        }
+      };
+    };
+  }
+
+  [subpage]
+  $CcScreenPage {}
+
+  [subpage]
+  $CcCameraPage {}
+
+  [subpage]
+  $CcUsagePage {}
+
+  [subpage]
+  $CcDiagnosticsPage diagnostics_page {}
+
+  [subpage]
+  $CcFirmwareSecurityPage security_page {}
+}

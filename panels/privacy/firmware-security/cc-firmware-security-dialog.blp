@@ -1,0 +1,65 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CcFirmwareSecurityDialog: Adw.Dialog {
+  content-width: 420;
+
+  child: Adw.ToastOverlay toast_overlay {
+    child: Adw.ToolbarView {
+      [top]
+      Adw.HeaderBar {
+        show-title: false;
+      }
+
+      content: ScrolledWindow {
+        hscrollbar-policy: never;
+        propagate-natural-height: true;
+
+        child: Box {
+          orientation: vertical;
+          spacing: 24;
+          margin-top: 12;
+          margin-start: 24;
+          margin-end: 24;
+          margin-bottom: 24;
+
+          Image firmware_security_dialog_icon {
+            icon-size: large;
+            halign: center;
+            icon-name: "dialog-question-symbolic";
+
+            styles [
+              "security-level-icon",
+            ]
+          }
+
+          Label firmware_security_dialog_title_label {
+            wrap: true;
+            justify: center;
+
+            styles [
+              "title-2",
+            ]
+          }
+
+          Label firmware_security_dialog_body_label {
+            wrap: true;
+            justify: center;
+          }
+
+          Button status_download_button {
+            receives-default: true;
+            halign: center;
+            use-underline: true;
+            label: _("_Copy Technical Report");
+            clicked => $on_hsi_detail_button_clicked_cb(template);
+
+            styles [
+              "pill",
+            ]
+          }
+        };
+      };
+    };
+  };
+}
