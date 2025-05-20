@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <template class="CcRegionalLanguageRow" parent="GtkListBoxRow">
+    <accessibility>
+      <relation name="labelled-by">title_label</relation>
+      <relation name="described-by">description_label</relation>
+    </accessibility>
     <style>
       <class name="neutral-selectable"/>
     </style>
