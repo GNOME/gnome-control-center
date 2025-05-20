@@ -1,0 +1,148 @@
+using Gtk 4.0;
+
+Dialog join-dialog {
+  can-focus: false;
+  resizable: false;
+  modal: true;
+  destroy-with-parent: true;
+  title: _("Add User");
+  use-header-bar: 1;
+
+  [internal-child headerbar]
+  HeaderBar join-dialog-header-bar {
+    visible: true;
+    can-focus: false;
+
+    [start]
+    Button button1 {
+      label: _("_Cancel");
+      visible: true;
+      can-focus: true;
+      use-underline: true;
+      valign: center;
+
+      styles [
+        "text-button",
+      ]
+    }
+
+    [end]
+    Button button2 {
+      /* Translators: Translators: This button enrolls the computer in the domain in order to use enterprise logins. */
+      label: _("_Enroll");
+      visible: true;
+      can-focus: true;
+      receives-default: true;
+      use-underline: true;
+      valign: center;
+
+      styles [
+        "text-button",
+        "suggested-action",
+      ]
+    }
+  }
+
+  Box dialog-vbox1 {
+    can-focus: false;
+    orientation: vertical;
+    spacing: 2;
+
+    Box box2 {
+      visible: true;
+      can-focus: false;
+      orientation: vertical;
+      spacing: 10;
+
+      Label label71 {
+        visible: true;
+        can-focus: false;
+        label: _("Domain Administrator Login");
+
+        styles [
+          "title-4",
+        ]
+      }
+
+      Label label12 {
+        visible: true;
+        can-focus: false;
+        xalign: 0;
+        yalign: 0;
+        label: _("In order to use enterprise logins, this computer needs to be\nenrolled in the domain. Please have your network administrator\ntype their domain password here.");
+      }
+
+      Grid grid1 {
+        visible: true;
+        can-focus: false;
+        margin-start: 12;
+        hexpand: true;
+        row-spacing: 6;
+        column-spacing: 12;
+
+        Label label13 {
+          visible: true;
+          can-focus: false;
+          xalign: 1;
+          label: _("_Domain");
+          use-underline: true;
+          mnemonic-widget: join-domain;
+
+          styles [
+            "dim-label",
+          ]
+        }
+
+        Label join-domain {
+          visible: true;
+          can-focus: false;
+          margin-top: 5;
+          margin-bottom: 5;
+          xalign: 0;
+        }
+
+        Label label14 {
+          visible: true;
+          can-focus: false;
+          xalign: 1;
+          label: _("Administrator _Name");
+          use-underline: true;
+          mnemonic-widget: join-name;
+
+          styles [
+            "dim-label",
+          ]
+        }
+
+        Entry join-name {
+          visible: true;
+          can-focus: true;
+          hexpand: true;
+          activates-default: true;
+        }
+
+        Label label15 {
+          visible: true;
+          can-focus: false;
+          xalign: 1;
+          label: _("Administrator Password");
+          use-underline: true;
+          mnemonic-widget: join-password;
+
+          styles [
+            "dim-label",
+          ]
+        }
+
+        Entry join-password {
+          visible: true;
+          can-focus: true;
+          hexpand: true;
+          visibility: false;
+          activates-default: true;
+          input-purpose: password;
+        }
+      }
+    }
+  }
+}
