@@ -1,0 +1,46 @@
+using Gtk 4.0;
+
+template $CcLocaleRow: ListBoxRow {
+  accessibility {
+    labelled-by: title_label;
+    described-by: description_label;
+  }
+
+  styles [
+    "neutral-selectable",
+  ]
+
+  child: Box box {
+    margin-start: 6;
+    margin-end: 6;
+
+    Box {
+      spacing: 12;
+      margin-top: 12;
+      margin-bottom: 12;
+      margin-start: 6;
+      margin-end: 6;
+
+      Label title_label {
+        xalign: 0;
+        ellipsize: end;
+      }
+
+      Image check_image {
+        visible: false;
+        icon-name: "object-select-symbolic";
+        icon-size: normal;
+      }
+
+      Label description_label {
+        xalign: 1;
+        ellipsize: end;
+        hexpand: true;
+
+        styles [
+          "subtitle",
+        ]
+      }
+    }
+  };
+}
