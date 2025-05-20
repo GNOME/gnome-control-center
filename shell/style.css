@@ -954,3 +954,15 @@ box.address-config {
 box.route-config {
   margin-top: 24px;
 }
+
+row.check:selected {
+  background-color: transparent;
+}
+
+row.check:selected:hover {
+  background-image: image(color-mix(in srgb, currentColor 3%, transparent));
+}
+
+row.check:selected:active {
+  background-image: image(color-mix(in srgb, currentColor 8%, transparent));
+}

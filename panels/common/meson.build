@@ -9,6 +9,7 @@ common_sources += gnome.mkenums_simple(
 
 common_sources += gnome.mkenums_simple('cc-number-row-enums', sources: files('cc-number-row.h'))
 common_sources += gnome.mkenums_simple('cc-timelike-editor-enums', sources: files('cc-timelike-editor.h'))
+common_sources += gnome.mkenums_simple('cc-locale-row-enums', sources: files('cc-locale-row.h'))
 
 ui_sources = files(
   'cc-content-row.blp',
@@ -19,6 +20,7 @@ ui_sources = files(
   'cc-language-row.blp',
   'cc-list-row-info-button.blp',
   'cc-list-row.blp',
+  'cc-locale-row.blp',
   'cc-permission-infobar.blp',
   'cc-split-row.blp',
   'cc-time-editor.blp',
@@ -82,6 +84,7 @@ sources = common_sources + files(
   'cc-timelike-editor.c',
   'cc-timelike-editor-layout.c',
   'cc-permission-infobar.c',
+  'cc-locale-row.c',
   'cc-split-row.c',
   'cc-texture-utils.c',
   'cc-content-row.c',
