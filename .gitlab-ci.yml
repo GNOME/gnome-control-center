@@ -1,5 +1,7 @@
 include:
- - remote: 'https://gitlab.gnome.org/Infrastructure/freedesktop-ci-templates/-/raw/765bb77a5e1274b0daeb14344e7caa6cd3876232/templates/fedora.yml'
+ - project: Infrastructure/freedesktop-ci-templates
+   file: templates/fedora.yml
+   ref: 765bb77a5e1274b0daeb14344e7caa6cd3876232
  - component: gitlab.gnome.org/GNOME/citemplates/release-service@master
    inputs:
      dist-job-name: release-build
