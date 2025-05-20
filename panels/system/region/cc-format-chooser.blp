@@ -82,8 +82,9 @@ template $CcFormatChooser: Adw.Dialog {
                 title: _("Common Formats");
 
                 ListBox common_region_listbox {
-                  selection-mode: none;
-                  row-activated => $row_activated(template);
+                  tab-behavior: item;
+                  selection-mode: single;
+                  row-selected => $region_list_box_row_selected_cb(template);
 
                   styles [
                     "boxed-list",
@@ -95,8 +96,9 @@ template $CcFormatChooser: Adw.Dialog {
                 title: _("All Formats");
 
                 ListBox region_listbox {
-                  selection-mode: none;
-                  row-activated => $row_activated(template);
+                  tab-behavior: item;
+                  selection-mode: single;
+                  row-selected => $region_list_box_row_selected_cb(template);
 
                   styles [
                     "boxed-list",
