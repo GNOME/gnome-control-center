@@ -1,0 +1,107 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CcBoltDeviceDialog: Adw.Window {
+  title: _("Device Identifier");
+  modal: true;
+  hide-on-close: true;
+  width-request: 480;
+  height-request: 360;
+
+  Box {
+    orientation: vertical;
+
+    Adw.HeaderBar {
+      show-end-title-buttons: true;
+    }
+
+    Adw.ToastOverlay toast_overlay {
+      Adw.PreferencesPage {
+        Adw.PreferencesGroup {
+          Adw.ActionRow status_row {
+            title: _("Status");
+
+            styles [
+              "property",
+            ]
+          }
+
+          Adw.ActionRow uuid_row {
+            title: _("UUID");
+
+            styles [
+              "property",
+            ]
+          }
+
+          Adw.ActionRow time_row {
+            title: _("Timestamp");
+
+            styles [
+              "property",
+            ]
+          }
+        }
+
+        Adw.PreferencesGroup parents_group {
+          visible: false;
+          title: _("Depends on other devices");
+
+          ListBox parents_devices {}
+        }
+      }
+    }
+
+    Box button_box {
+      orientation: horizontal;
+      spacing: 12;
+      margin-start: 72;
+      margin-end: 72;
+      margin-top: 36;
+      margin-bottom: 0;
+      hexpand: true;
+
+      Adw.Spinner spinner {
+        visible: false;
+      }
+
+      Button connect_button {
+        hexpand: true;
+        label: _("Authorize and Connect");
+        receives-default: true;
+        clicked => $on_connect_button_clicked_cb(template);
+
+        styles [
+          "suggested-action",
+        ]
+      }
+
+      Button forget_button {
+        hexpand: true;
+        label: _("Forget Device");
+        receives-default: false;
+        clicked => $on_forget_button_clicked_cb(template);
+
+        styles [
+          "destructive-action",
+        ]
+      }
+
+      Box spinner_box {}
+    }
+  }
+}
+
+SizeGroup actions_sizegroup {
+  widgets [
+    forget_button,
+    connect_button,
+  ]
+}
+
+SizeGroup spinner_sizegroup {
+  widgets [
+    spinner,
+    spinner_box,
+  ]
+}

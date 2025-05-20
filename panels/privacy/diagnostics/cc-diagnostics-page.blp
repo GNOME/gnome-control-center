@@ -1,0 +1,23 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CcDiagnosticsPage: Adw.NavigationPage {
+  title: _("Diagnostics");
+  tag: "diagnostics";
+
+  child: Adw.ToolbarView {
+    [top]
+    Adw.HeaderBar {}
+
+    content: Adw.PreferencesPage {
+      Adw.PreferencesGroup diagnostics_group {
+        title: _("Problem Reporting");
+
+        Adw.SwitchRow abrt_row {
+          title: _("_Automatic Problem Reporting");
+          use-underline: true;
+        }
+      }
+    };
+  };
+}

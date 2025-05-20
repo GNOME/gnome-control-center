@@ -1,0 +1,47 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CcCameraPage: Adw.NavigationPage {
+  title: _("Cameras");
+  tag: "camera";
+
+  child: Adw.ToolbarView {
+    [top]
+    Adw.HeaderBar {}
+
+    content: Adw.PreferencesPage {
+      Adw.PreferencesGroup {
+        Adw.SwitchRow camera_row {
+          title: _("_Camera Access");
+          subtitle: _("Allow permitted apps to use cameras");
+          use-underline: true;
+        }
+      }
+
+      Adw.PreferencesGroup {
+        title: _("Permitted Apps");
+        description: _("The following sandboxed apps have been given permission to use cameras. Apps that are not sandboxed can use cameras without asking for permission.");
+
+        ListBox camera_apps_list_box {
+          selection-mode: none;
+
+          styles [
+            "boxed-list",
+          ]
+
+          [placeholder]
+          Label {
+            label: _("No sandboxed apps have asked for camera access");
+            wrap: true;
+            max-width-chars: 50;
+
+            styles [
+              "dim-label",
+              "cc-placeholder-row",
+            ]
+          }
+        }
+      }
+    };
+  };
+}
