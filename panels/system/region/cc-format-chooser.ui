@@ -90,7 +90,7 @@
                                 <property name="title" translatable="yes">Common Formats</property>
                                 <child>
                                   <object class="GtkListBox" id="common_region_listbox">
-                                    <property name="selection-mode">none</property>
+                                    <property name="tab-behavior">item</property>
                                     <signal name="row-activated" handler="row_activated" object="CcFormatChooser" swapped="yes" />
                                     <style>
                                       <class name="boxed-list" />
@@ -104,7 +104,7 @@
                                 <property name="title" translatable="yes">All Formats</property>
                                 <child>
                                   <object class="GtkListBox" id="region_listbox">
-                                    <property name="selection-mode">none</property>
+                                    <property name="tab-behavior">item</property>
                                     <signal name="row-activated" handler="row_activated" object="CcFormatChooser" swapped="yes" />
                                     <style>
                                      <class name="boxed-list" />
