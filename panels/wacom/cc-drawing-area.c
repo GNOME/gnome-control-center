@@ -122,19 +122,12 @@ stylus_down_cb (CcDrawingArea    *area,
 }
 
 static void
-stylus_motion_cb (CcDrawingArea    *area,
-		  double            x,
-		  double            y,
-		  GtkGestureStylus *gesture)
+apply_stroke (CcDrawingArea *area,
+	      GdkDeviceTool *tool,
+	      double         x,
+	      double         y,
+	      double         pressure)
 {
-	GdkDeviceTool *tool;
-	gdouble pressure;
-
-	tool = gtk_gesture_stylus_get_device_tool (gesture);
-	gtk_gesture_stylus_get_axis (gesture,
-				     GDK_AXIS_PRESSURE,
-				     &pressure);
-
 	if (gdk_device_tool_get_tool_type (tool) == GDK_DEVICE_TOOL_TYPE_ERASER) {
 		cairo_set_line_width (area->cr, 10 * pressure);
 		cairo_set_operator (area->cr, CAIRO_OPERATOR_DEST_OUT);
@@ -148,6 +141,35 @@ stylus_motion_cb (CcDrawingArea    *area,
 	cairo_stroke (area->cr);
 
 	cairo_move_to (area->cr, x, y);
+}
+
+static void
+stylus_motion_cb (CcDrawingArea    *area,
+		  double            x,
+		  double            y,
+		  GtkGestureStylus *gesture)
+{
+	GdkTimeCoord *backlog;
+	GdkDeviceTool *tool;
+	gdouble pressure;
+	guint i, n_items;
+
+	tool = gtk_gesture_stylus_get_device_tool (gesture);
+
+	if (gtk_gesture_stylus_get_backlog (gesture, &backlog, &n_items)) {
+		for (i = 0; i < n_items; i++) {
+			apply_stroke (area, tool,
+				      backlog[i].axes[GDK_AXIS_X],
+				      backlog[i].axes[GDK_AXIS_Y],
+				      backlog[i].axes[GDK_AXIS_PRESSURE]);
+		}
+	}
+
+	gtk_gesture_stylus_get_axis (gesture,
+				     GDK_AXIS_PRESSURE,
+				     &pressure);
+
+	apply_stroke (area, tool, x, y, pressure);
 
 	gtk_widget_queue_draw (GTK_WIDGET (area));
 }
