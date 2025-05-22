@@ -61,6 +61,8 @@ struct _CcAppNotificationsPage {
   AdwSwitchRow        *notification_banners_content_row;
   AdwSwitchRow        *lock_screen_notifications_row;
   AdwSwitchRow        *lock_screen_content_row;
+
+  gulong notifications_page_change_signal_handler_id;
 };
 
 G_DEFINE_TYPE (CcAppNotificationsPage, cc_app_notifications_page, ADW_TYPE_NAVIGATION_PAGE)
@@ -323,6 +325,8 @@ cc_app_notifications_page_dispose (GObject *object)
 {
   CcAppNotificationsPage *self = CC_APP_NOTIFICATIONS_PAGE (object);
 
+  g_clear_signal_handler (&self->notifications_page_change_signal_handler_id, self->settings);
+
   g_clear_object (&self->settings);
   g_clear_object (&self->master_settings);
   g_clear_pointer (&self->app_id, g_free);
@@ -379,7 +383,8 @@ cc_app_notifications_page_new (const gchar          *app_id,
   self->app_id = g_strdup (app_id);
   self->perm_store = g_object_ref (perm_store);
 
-  g_signal_connect_swapped (self->settings, "changed", G_CALLBACK (update_switches), self);
+  self->notifications_page_change_signal_handler_id =
+     g_signal_connect_swapped (self->settings, "changed", G_CALLBACK (update_switches), self);
 
   update_switches (self);
 
