@@ -161,7 +161,7 @@ static void select_app (CcApplicationsPanel *self,
 
 static void update_handler_dialog (CcApplicationsPanel *self, GAppInfo *info);
 
-static gboolean update_global_shortcuts_section (CcApplicationsPanel *self);
+static void update_usage_section (CcApplicationsPanel *self, GAppInfo *info);
 
 enum
 {
@@ -707,7 +707,7 @@ location_cb (CcApplicationsPanel *self)
 static void
 dialog_closed_cb (CcApplicationsPanel *self)
 {
-  update_global_shortcuts_section (self);
+  update_usage_section (self, self->current_app_info);
 }
 
 static void
