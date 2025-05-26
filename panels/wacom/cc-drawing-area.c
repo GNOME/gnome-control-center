@@ -149,7 +149,7 @@ stylus_motion_cb (CcDrawingArea    *area,
 		  double            y,
 		  GtkGestureStylus *gesture)
 {
-	GdkTimeCoord *backlog;
+	g_autofree GdkTimeCoord *backlog = NULL;
 	GdkDeviceTool *tool;
 	gdouble pressure;
 	guint i, n_items;
