@@ -393,26 +393,28 @@ template $CcApplicationsPanel: $CcPanel {
       [top]
       Adw.HeaderBar {}
 
-      content: Adw.PreferencesPage handler_page {
-        Adw.PreferencesGroup handler_file_group {
-          title: _("File Types");
-        }
-
-        Adw.PreferencesGroup handler_link_group {
-          title: _("Link Types");
-        }
-
-        Adw.PreferencesGroup {
-          Adw.ButtonRow handler_reset_button_row {
-            title: _("_Reset");
-            use-underline: true;
-            activated => $handler_reset_cb(template);
-
-            styles [
-              "destructive-action",
-            ]
+      content: Adw.ToastOverlay toast_overlay {
+        child: Adw.PreferencesPage handler_page {
+          Adw.PreferencesGroup handler_file_group {
+            title: _("File Types");
           }
-        }
+
+          Adw.PreferencesGroup handler_link_group {
+            title: _("Link Types");
+          }
+
+          Adw.PreferencesGroup {
+            Adw.ButtonRow handler_reset_button_row {
+              title: _("_Reset");
+              use-underline: true;
+              activated => $handler_reset_cb(template);
+
+              styles [
+                "destructive-action",
+              ]
+            }
+          }
+        };
       };
     };
   }

@@ -147,6 +147,10 @@ struct _CcApplicationsPanel
   AdwActionRow    *storage_page_total_row;
   AdwButtonRow    *clear_cache_button_row;
 
+  AdwToastOverlay *toast_overlay;
+  AdwToast        *toast;
+  GList           *removed_itens;
+
   guint64          app_size;
   guint64          cache_size;
   guint64          data_size;
@@ -1054,17 +1058,66 @@ update_permissions_group (CcApplicationsPanel *self,
 }
 
 /* --- handler section --- */
+static void
+on_remove_undo (CcApplicationsPanel *self)
+{
+  GList *l;
+
+  for (l = self->removed_itens; l; l = l->next)
+    g_app_info_add_supports_type (self->current_app_info, l->data, NULL);
+
+  update_handler_dialog (self, self->current_app_info);
+  g_clear_pointer (&self->removed_itens, g_list_free);
+}
+
+static void
+on_remove_toast_dismissed (CcApplicationsPanel *self)
+{
+  self->toast = NULL;
+  adw_toast_overlay_dismiss_all (self->toast_overlay);
+  g_clear_pointer (&self->removed_itens, g_list_free);
+}
+
 
 static void
 unset_cb (CcApplicationsPanel *self,
-          GtkButton           *button)
+          GtkButton *button)
 {
-  const gchar *type;
-
-  type = (const gchar *)g_object_get_data (G_OBJECT (button), "type");
+  gchar *type = g_object_get_data (G_OBJECT (button), "type");
+  self->removed_itens = g_list_append (self->removed_itens, g_strdup (type));
 
   g_app_info_remove_supports_type (self->current_app_info, type, NULL);
-  update_handler_dialog (self, self->current_app_info);
+  update_handler_dialog (self, self->current_app_info);  
+
+  if (!self->toast)
+    {
+      self->toast = adw_toast_new (_("Type removed"));
+      adw_toast_set_button_label (self->toast, _("_Undo"));
+
+      g_signal_connect_swapped (self->toast,
+                                "button-clicked",
+                                G_CALLBACK (on_remove_undo),
+                                self);
+      g_signal_connect_swapped (self->toast,
+                                "dismissed",
+                                G_CALLBACK (on_remove_toast_dismissed),
+                                self);
+    }
+  else
+    {
+      g_autofree gchar *message = NULL;
+
+      message = g_strdup_printf (ngettext ("%d type removed",
+                                           "%d types removed",
+                                           g_list_length (self->removed_itens)),
+                                 g_list_length (self->removed_itens));
+
+      adw_toast_set_title (self->toast, message);
+
+      g_object_ref (self->toast);
+    }
+
+  adw_toast_overlay_add_toast (self->toast_overlay, self->toast);
 }
 
 static void
@@ -1904,6 +1957,7 @@ cc_applications_panel_class_init (CcApplicationsPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, storage_page_total_row);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, general_group);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, view_details_button);
+  gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, toast_overlay);
 
   gtk_widget_class_bind_template_callback (widget_class, camera_cb);
   gtk_widget_class_bind_template_callback (widget_class, location_cb);
