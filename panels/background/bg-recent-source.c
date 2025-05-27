@@ -70,6 +70,7 @@ add_file_from_info (BgRecentSource *self,
   g_autoptr(CcBackgroundItem) item = NULL;
   g_autofree gchar *source_uri = NULL;
   g_autofree gchar *uri = NULL;
+  g_autofree gchar *name = NULL;
   GListStore *store;
   const gchar *content_type;
   guint64 mtime;
@@ -81,6 +82,7 @@ add_file_from_info (BgRecentSource *self,
     return;
 
   uri = g_file_get_uri (file);
+  name = g_strdup_printf ("Recent background %d", g_hash_table_size (self->items) + 1);
   item = cc_background_item_new (uri);
   g_object_set (G_OBJECT (item),
                 "shading", G_DESKTOP_BACKGROUND_SHADING_SOLID,
@@ -88,6 +90,7 @@ add_file_from_info (BgRecentSource *self,
                 "modified", mtime,
                 "needs-download", FALSE,
                 "source-url", source_uri,
+                "name", name,
                 NULL);
 
   store = bg_source_get_liststore (BG_SOURCE (self));
