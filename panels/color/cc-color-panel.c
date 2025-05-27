@@ -1907,13 +1907,18 @@ cc_color_panel_filter_func (GtkListBoxRow *row, void *user_data)
 {
   CcColorPanel *self = CC_COLOR_PANEL (user_data);
   g_autoptr(CdDevice) device = NULL;
+  gboolean is_visible;
 
   /* always show all devices */
   if (CC_IS_COLOR_DEVICE (row))
     return TRUE;
 
   g_object_get (row, "device", &device, NULL);
-  return g_strcmp0 (cd_device_get_id (device), self->list_box_filter) == 0;
+  is_visible = g_strcmp0 (cd_device_get_id (device), self->list_box_filter) == 0;
+
+  /* workaround to remove extra line at the end of a row */
+  gtk_widget_set_visible (GTK_WIDGET (row), is_visible);
+  return is_visible;
 }
 
 static gboolean
