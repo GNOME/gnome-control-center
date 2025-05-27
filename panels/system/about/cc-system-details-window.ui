@@ -6,14 +6,6 @@
     <property name="height-request">200</property>
     <property name="content-width">640</property>
     <property name="content-height">420</property>
-    <child>
-      <object class="AdwBreakpoint">
-        <condition>max-width: 500sp</condition>
-        <setter object="box" property="orientation">vertical</setter>
-        <setter object="box" property="spacing">12</setter>
-        <setter object="software_information_box" property="margin-top">12</setter>
-      </object>
-    </child>
     <property name="child">
       <object class="AdwToastOverlay" id="toast_overlay">
         <property name="child">
@@ -37,12 +29,13 @@
             <property name="content">
               <object class="GtkScrolledWindow">
                 <child>
-                  <object class="GtkBox" id="box">
+                  <object class="AdwWrapBox">
                     <property name="margin-bottom">18</property>
                     <property name="margin-end">18</property>
                     <property name="margin-start">18</property>
                     <property name="margin-top">18</property>
-                    <property name="spacing">18</property>
+                    <property name="child-spacing">18</property>
+                    <property name="line-spacing">12</property>
 
                     <!-- Hardware Information -->
                     <child>
