@@ -268,6 +268,7 @@ create_widget_func (gpointer model_item,
   gtk_widget_set_halign (child, GTK_ALIGN_CENTER);
   gtk_widget_set_valign (child, GTK_ALIGN_CENTER);
   gtk_flow_box_child_set_child (GTK_FLOW_BOX_CHILD (child), overlay);
+  g_object_set (child, "accessible-role", GTK_ACCESSIBLE_ROLE_TOGGLE_BUTTON, NULL);
   gtk_accessible_update_property (GTK_ACCESSIBLE (child),
                                   GTK_ACCESSIBLE_PROPERTY_LABEL,
                                   cc_background_item_get_name (item),
