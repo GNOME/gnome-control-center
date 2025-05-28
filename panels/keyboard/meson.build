@@ -96,13 +96,15 @@ sources = files(
   'cc-input-source-xkb.c',
 )
 
-sources += gnome.compile_resources(
+resources_ch = gnome.compile_resources(
   'cc-' + cappletname + '-resources',
   cappletname + '.gresource.xml',
   c_name: 'cc_' + cappletname,
   export: true,
   dependencies: blueprints,
 )
+
+sources += resources_ch
 
 deps = common_deps + [
   keyboard_shortcuts_dep,
@@ -133,6 +135,7 @@ panels_libs += keyboard_panel_lib
 
 keyboard_panel_dep = declare_dependency(
   include_directories: [top_inc, keyboard_inc],
+  sources: [resources_ch[1]],
   link_with: keyboard_panel_lib,
 )
 
