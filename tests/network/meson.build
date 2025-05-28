@@ -1,6 +1,6 @@
 
 
-includes = [top_inc, include_directories('../../panels/network', 'nm-utils')]
+includes = [top_inc, include_directories('nm-utils')]
 cflags = [
   '-DTEST_SRCDIR="@0@"'.format(meson.current_source_dir()),
   '-DNETWORKMANAGER_COMPILATION=NM_NETWORKMANAGER_COMPILATION_WITH_GLIB',
@@ -22,8 +22,7 @@ if Xvfb.found()
     'test-network-panel',
     ['test-network-panel.c', 'cc-test-window.c', 'nm-utils/nm-test-utils-impl.c'],
     include_directories : includes + [common_inc],
-           dependencies : common_deps + network_manager_deps + [libtestshell_dep],
-              link_with : [network_panel_lib],
+           dependencies : common_deps + network_manager_deps + [libtestshell_dep, network_panel_dep],
                  c_args : cflags
   )
 
@@ -39,8 +38,7 @@ exe = executable(
   'test-wifi-panel-text',
   ['test-wifi-text.c'],
   include_directories : includes + [common_inc],
-  dependencies : common_deps + network_manager_deps + [libtestshell_dep],
-  link_with : [network_panel_lib],
+  dependencies : common_deps + network_manager_deps + [libtestshell_dep, network_panel_dep],
   c_args : cflags,
 )
 

@@ -71,13 +71,15 @@ sources = files(
   'ui-helpers.c'
 )
 
-sources += gnome.compile_resources(
+resources_ch = gnome.compile_resources(
   'cc-' + cappletname + '-resources',
   cappletname + '.gresource.xml',
   c_name: 'cc_' + cappletname,
   export: true,
   dependencies: blueprints,
 )
+
+sources += resources_ch
 
 network_panel_lib = static_library(
   cappletname,
@@ -88,3 +90,9 @@ network_panel_lib = static_library(
   link_with: libconnection_editor
 )
 panels_libs += network_panel_lib
+
+network_panel_dep = declare_dependency(
+  include_directories: [top_inc, network_inc],
+  sources: [resources_ch[1]],
+  link_with: network_panel_lib,
+)
