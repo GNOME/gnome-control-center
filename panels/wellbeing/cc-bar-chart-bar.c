@@ -74,7 +74,7 @@ static GParamSpec *props[PROP_ACCESSIBLE_DESCRIPTION + 1];
 
 typedef enum {
   SIGNAL_ACTIVATE,
-} CcBarChartSignal;
+} CcBarChartBarSignal;
 
 static guint signals[SIGNAL_ACTIVATE + 1];
 
