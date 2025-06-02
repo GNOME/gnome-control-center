@@ -1,0 +1,26 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CcBreakScheduleRow: Adw.ComboRow {
+  factory: SignalListItemFactory {
+    setup => $factory_setup_cb();
+    bind => $factory_bind_cb();
+    unbind => $factory_unbind_cb();
+  };
+
+  header-factory: SignalListItemFactory {
+    setup => $header_factory_setup_cb();
+  };
+
+  styles [
+    "break-schedule-row",
+  ]
+}
+
+SizeGroup duration_size_group {
+  mode: horizontal;
+}
+
+SizeGroup interval_size_group {
+  mode: horizontal;
+}

@@ -1,0 +1,137 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CcWellbeingPanel: $CcPanel {
+  child: Adw.ToolbarView {
+    [top]
+    Adw.HeaderBar {}
+
+    content: Adw.PreferencesPage {
+      Adw.PreferencesGroup {
+        title: _("Screen Time");
+
+        [header-suffix]
+        MenuButton screen_time_statistics_info_button {
+          tooltip-text: _("More Information");
+          icon-name: "view-more-symbolic";
+
+          styles [
+            "flat",
+          ]
+
+          popover: Popover screen_time_statistics_disable_popover {
+            position: bottom;
+            show => $screen_time_statistics_disable_popover_show_cb(template);
+
+            Box {
+              margin-top: 12;
+              margin-bottom: 12;
+              margin-start: 12;
+              margin-end: 12;
+              orientation: vertical;
+              spacing: 12;
+
+              Label screen_time_statistics_disable_description {
+                label: _("Disabling screen time recording stops screen time data from being saved. This data is never shared outside this device.");
+                justify: center;
+                max-width-chars: 35;
+                wrap: true;
+              }
+
+              Button {
+                halign: center;
+                label: _("_Disable Screen Time");
+                use-underline: true;
+                clicked => $disable_screen_time_recording_button_clicked_cb();
+
+                styles [
+                  "destructive-action",
+                ]
+              }
+            }
+          };
+        }
+
+        $CcScreenTimeStatisticsRow screen_time_statistics_row {
+          daily-limit: bind daily_time_limit_row.duration;
+        }
+
+        Adw.PreferencesRow screen_time_statistics_disabled_row {
+          activatable: false;
+          focusable: false;
+
+          Adw.StatusPage {
+            height-request: 300;
+            vexpand: true;
+            title: _("Screen Time Recording Disabled");
+            icon-name: "org.gnome.Settings-screen-time-symbolic";
+            description: _("Enable recording to view screen usage history");
+
+            child: Button {
+              halign: center;
+              label: _("E_nable");
+              use-underline: true;
+              clicked => $enable_screen_time_recording_button_clicked_cb();
+
+              styles [
+                "pill",
+              ]
+            };
+
+            styles [
+              "compact",
+            ]
+          }
+        }
+      }
+
+      Adw.PreferencesGroup {
+        title: _("Screen Limits");
+
+        Adw.SwitchRow screen_time_limit_row {
+          title: _("_Screen Time Limit");
+          use-underline: true;
+        }
+
+        $CcDurationRow daily_time_limit_row {
+          minimum: "1";
+          title: _("Daily _Limit");
+          use-underline: true;
+        }
+
+        Adw.SwitchRow grayscale_row {
+          title: _("_Grayscale");
+          subtitle: _("Black and white screen for screen limits");
+          use-underline: true;
+        }
+      }
+
+      Adw.PreferencesGroup {
+        title: _("Break Reminders");
+
+        Adw.SwitchRow eyesight_breaks_row {
+          title: _("_Eyesight Reminders");
+          subtitle: _("Reminders to look away from the screen");
+          use-underline: true;
+        }
+
+        Adw.SwitchRow movement_breaks_row {
+          title: _("_Movement Reminders");
+          subtitle: _("Reminders to move around");
+          use-underline: true;
+        }
+
+        $CcBreakScheduleRow movement_break_schedule_row {
+          title: _("Movement _Break Schedule");
+          use-underline: true;
+        }
+
+        Adw.SwitchRow sounds_row {
+          title: _("S_ounds");
+          subtitle: _("Play a sound when a break ends");
+          use-underline: true;
+        }
+      }
+    };
+  };
+}
