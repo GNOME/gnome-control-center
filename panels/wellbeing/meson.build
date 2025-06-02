@@ -13,6 +13,26 @@ i18n.merge_file(
   install_dir: control_center_desktopdir,
 )
 
+blueprints = custom_target(
+  'blueprints',
+  input: files(
+    'cc-bar-chart-bar.blp',
+    'cc-bar-chart-group.blp',
+    'cc-bar-chart.blp',
+    'cc-break-schedule-row.blp',
+    'cc-screen-time-statistics-row.blp',
+    'cc-wellbeing-panel.blp',
+  ),
+  output: '.',
+  command: [
+    blueprint_compiler,
+    'batch-compile',
+    '@OUTPUT@',
+    '@CURRENT_SOURCE_DIR@',
+    '@INPUT@',
+  ],
+)
+
 sources = files(
   'cc-bar-chart.c',
   'cc-bar-chart-bar.c',
@@ -36,6 +56,7 @@ sources += gnome.compile_resources(
   cappletname + '.gresource.xml',
   c_name: 'cc_' + cappletname.underscorify(),
   export: true,
+  dependencies: blueprints,
 )
 
 panels_libs += static_library(
