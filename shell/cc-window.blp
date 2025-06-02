@@ -1,0 +1,100 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CcWindow: Adw.ApplicationWindow {
+  default-width: 980;
+  default-height: 640;
+
+  Adw.Breakpoint break_point {
+    condition ("max-width: 550sp")
+
+    setters {
+      split_view.collapsed: true;
+    }
+  }
+
+  content: Adw.NavigationSplitView split_view {
+    notify::collapsed => $on_split_view_collapsed_changed_cb(template);
+
+    sidebar: Adw.NavigationPage {
+      title: _("Settings");
+
+      child: Adw.ToolbarView {
+        [top]
+        Adw.HeaderBar {
+          ToggleButton search_button {
+            icon-name: "edit-find-symbolic";
+
+            /* Translators: Translators: this is a verb. */
+            tooltip-text: _("Search");
+          }
+
+          [end]
+          MenuButton {
+            icon-name: "open-menu-symbolic";
+            menu-model: primary_menu;
+            primary: true;
+            tooltip-text: _("Main Menu");
+          }
+        }
+
+        [top]
+        SearchBar search_bar {
+          search-mode-enabled: bind search_button.active bidirectional;
+
+          SearchEntry search_entry {
+            hexpand: true;
+            placeholder-text: _("Search settings");
+            activate => $search_entry_activate_cb(template);
+
+            EventControllerKey {
+              key-pressed => $search_entry_key_pressed_cb(template);
+            }
+          }
+        }
+
+        content: ScrolledWindow {
+          hscrollbar-policy: never;
+
+          $CcPanelList panel_list {
+            search-mode: bind search_bar.search-mode-enabled no-sync-create bidirectional;
+            search-query: bind search_entry.text no-sync-create;
+            show-panel => $show_panel_cb(template);
+          }
+        };
+      };
+    };
+  };
+}
+
+Adw.AlertDialog development_warning_dialog {
+  heading: _("Warning: Development Version");
+  body: _("This version of Settings should only be used for development purposes. You may experience incorrect system behavior, data loss, and other unexpected issues. ");
+  default-response: "ok";
+  close-response: "ok";
+
+  responses [
+    ok: _("_OK"),
+  ]
+
+  response => $on_development_warning_dialog_responded_cb(template);
+}
+
+menu primary_menu {
+  section {
+    item {
+      label: _("_Keyboard Shortcuts");
+      action: "win.show-help-overlay";
+    }
+
+    item {
+      label: _("_Help");
+      action: "app.help";
+    }
+
+    item {
+      label: _("_About Settings");
+      action: "app.about";
+    }
+  }
+}
