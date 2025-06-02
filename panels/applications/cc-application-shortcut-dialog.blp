@@ -1,0 +1,18 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CcApplicationShortcutDialog: Adw.Dialog {
+  content-width: 480;
+  title: _("Global Shortcuts");
+
+  child: Adw.ToolbarView {
+    [top]
+    Adw.HeaderBar {}
+
+    content: Adw.PreferencesPage shortcut_list {
+      description-centered: true;
+    };
+  };
+}
+
+SizeGroup accelerator_size_group {}

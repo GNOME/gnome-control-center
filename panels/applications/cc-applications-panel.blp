@@ -1,0 +1,483 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CcApplicationsPanel: $CcPanel {
+  [subpage]
+  Adw.NavigationPage {
+    title: _("Apps");
+
+    child: Adw.ToolbarView {
+      [top]
+      Adw.HeaderBar {}
+
+      [top]
+      SearchBar {
+        search-mode-enabled: true;
+
+        child: Adw.Clamp {
+          maximum-size: 400;
+          hexpand: true;
+          margin-start: 6;
+          margin-end: 6;
+
+          SearchEntry app_search_entry {
+            placeholder-text: _("Search apps");
+            activate => $on_app_search_entry_activated_cb(template);
+            search-changed => $on_app_search_entry_search_changed_cb(template);
+            stop-search => $on_app_search_entry_search_stopped_cb(template);
+          }
+        };
+      }
+
+      content: Stack main_page_stack {
+        StackPage {
+          name: "apps-page";
+
+          child: Adw.PreferencesPage {
+            Adw.PreferencesGroup {
+              $CcListRow {
+                title: _("_Default Apps");
+                subtitle: _("Set which apps open links, files, and media");
+                show-arrow: true;
+                action-name: "navigation.push";
+                action-target: "'default-apps'";
+              }
+            }
+
+            Adw.PreferencesGroup {
+              ListBox app_listbox {
+                selection-mode: none;
+
+                styles [
+                  "boxed-list",
+                ]
+              }
+            }
+          };
+        }
+
+        StackPage {
+          name: "no-search-results-page";
+
+          child: Adw.StatusPage {
+            icon-name: "edit-find-symbolic";
+            title: _("No Results Found");
+            description: _("Try a different search");
+          };
+        }
+
+        StackPage {
+          name: "no-apps-found-page";
+
+          child: Adw.StatusPage {
+            icon-name: "computer-fail-symbolic";
+            title: _("No Apps Found");
+
+            Button install_button {
+              label: _("_Find in Software");
+              use-underline: true;
+              halign: center;
+              clicked => $open_software_cb(template);
+
+              styles [
+                "pill",
+                "suggested-action",
+              ]
+            }
+          };
+        }
+
+        StackPage {
+          name: "malcontent-not-found-page";
+
+          child: Adw.StatusPage {
+            icon-name: "dialog-error-symbolic";
+            title: _("Unable to List Apps");
+
+            /* Translators: Parental Controls here refers to the features provided by 'malcontent' */
+            description: _("An error has occurred and apps cannot be listed.\nError details: Parental Controls are not installed.");
+          };
+        }
+      };
+    };
+  }
+
+  [subpage]
+  Adw.NavigationPage {
+    title: _("Default Apps");
+    tag: "default-apps";
+
+    child: Adw.ToolbarView {
+      [top]
+      Adw.HeaderBar {}
+
+      content: Adw.PreferencesPage {
+        $CcDefaultAppsPage default_apps_page {}
+
+        Adw.PreferencesGroup {
+          title: _("Removable Media");
+
+          Adw.SwitchRow autorun_never_row {
+            title: _("Med_ia Autostart");
+            subtitle: _("Start apps or prompt when media is connected");
+            use-underline: true;
+          }
+        }
+
+        $CcRemovableMediaSettings removable_media_settings {}
+      };
+    };
+  }
+
+  [subpage]
+  Adw.NavigationPage app_settings_page {
+    title: _("App Settings");
+
+    child: Adw.ToolbarView {
+      [top]
+      Adw.HeaderBar {}
+
+      content: Box {
+        orientation: vertical;
+
+        Adw.Banner sandbox_banner {
+          visible: false;
+          revealed: true;
+          title: _("App is not sandboxed");
+
+          $CcListRowInfoButton sandbox_info_button {
+            visible: bind sandbox_banner.visible;
+            halign: "end";
+            valign: "center";
+            margin-end: "3";
+            text: _("App settings cannot be fully enforced for apps which are not sandboxed. These apps may use permissions which are not shown.");
+          }
+        }
+
+        Adw.PreferencesPage {
+          Adw.PreferencesGroup {
+            Box {
+              orientation: vertical;
+              spacing: 6;
+
+              Image app_icon_image {
+                icon-name: "org.gnome.Software";
+                pixel-size: 96;
+
+                styles [
+                  "icon-dropshadow",
+                ]
+              }
+
+              Label app_name_label {
+                justify: center;
+                wrap: true;
+
+                styles [
+                  "title-1",
+                ]
+              }
+
+              Adw.WrapBox {
+                align: 0.5;
+                margin-top: 12;
+                margin-bottom: 12;
+                child-spacing: 18;
+                line-spacing: 12;
+
+                Button launch_button {
+                  label: _("_Open");
+                  use-underline: true;
+                  can-shrink: true;
+                  clicked => $on_launch_button_clicked_cb(template);
+
+                  styles [
+                    "pill",
+                    "suggested-action",
+                  ]
+                }
+
+                Button view_details_button {
+                  label: _("App _Details");
+                  use-underline: true;
+                  can-shrink: true;
+
+                  styles [
+                    "pill",
+                  ]
+                }
+              }
+            }
+          }
+
+          Adw.PreferencesGroup permissions_group {
+            title: _("Permissions");
+
+            Adw.SwitchRow search_row {
+              /* Translators: This row shows/sets whether the app shown in this page can add results to the GNOME Shell search results. Internally this enables/disables the app's Shell Search Provider */
+              title: _("_Search");
+              subtitle: _("Receive system searches and send results");
+              use-underline: true;
+              notify::active => $search_cb(template);
+            }
+
+            $CcListRow no_search_row {
+              title: bind search_row.title;
+              subtitle: bind search_row.subtitle;
+              secondary-label: _("Disabled");
+              activatable: false;
+            }
+
+            Adw.SwitchRow notifications_row {
+              title: _("_Notifications");
+              subtitle: _("Show system notifications");
+              use-underline: true;
+              notify::active => $notification_cb(template);
+            }
+
+            Adw.SwitchRow background_row {
+              title: _("_Run in Background");
+              subtitle: _("Allow activity when the app is closed");
+              use-underline: true;
+              notify::active => $background_cb() swapped;
+            }
+
+            Adw.SwitchRow screenshots_row {
+              title: _("Scr_eenshots");
+              subtitle: _("Take pictures of the screen at any time");
+              use-underline: true;
+              notify::active => $screenshot_cb(template);
+            }
+
+            Adw.SwitchRow wallpaper_row {
+              title: _("Change _Wallpaper");
+              subtitle: _("Change the desktop wallpaper");
+              use-underline: true;
+              notify::active => $wallpaper_cb() swapped;
+            }
+
+            Adw.SwitchRow sounds_row {
+              title: _("So_unds");
+              subtitle: _("Reproduce sounds");
+              use-underline: true;
+              notify::active => $sound_cb(template);
+            }
+
+            $CcListRow no_sounds_row {
+              title: _("Sounds");
+              subtitle: _("Reproduce sounds");
+              secondary-label: _("Disabled");
+              activatable: false;
+            }
+
+            Adw.SwitchRow shortcuts_row {
+              title: _("_Inhibit Shortcuts");
+              subtitle: _("Block standard keyboard shortcuts");
+              use-underline: true;
+              notify::active => $shortcuts_cb() swapped;
+            }
+
+            Adw.SwitchRow camera_row {
+              title: _("C_amera");
+              subtitle: _("Take pictures with the camera");
+              use-underline: true;
+              notify::active => $camera_cb(template);
+            }
+
+            $CcListRow no_camera_row {
+              title: _("Camera");
+              subtitle: _("Take pictures with the camera");
+              secondary-label: _("Disabled");
+              activatable: false;
+            }
+
+            Adw.SwitchRow microphone_row {
+              title: _("_Microphone");
+              subtitle: _("Record audio with the microphone");
+              use-underline: true;
+              notify::active => $microphone_cb(template);
+            }
+
+            $CcListRow no_microphone_row {
+              title: _("Microphone");
+              subtitle: _("Record audio with the microphone");
+              secondary-label: _("Disabled");
+              activatable: false;
+            }
+
+            Adw.SwitchRow location_row {
+              title: _("_Location Services");
+              subtitle: _("Access device location data");
+              use-underline: true;
+              notify::active => $location_cb(template);
+            }
+
+            $CcListRow no_location_row {
+              title: _("Location Services");
+              subtitle: _("Access device location data");
+              secondary-label: _("Disabled");
+              activatable: false;
+            }
+          }
+
+          Adw.PreferencesGroup required_permissions_group {
+            $CcListRow builtin_row {
+              title: _("Re_quired Permissions");
+              subtitle: _("System permissions that the app requires");
+              show-arrow: true;
+              action-name: "navigation.push";
+              action-target: "'builtin-page'";
+            }
+
+            $CcListRow global_shortcuts_row {
+              title: _("Global S_hortcuts");
+              subtitle: _("Global actions that have been registered for use");
+              show-arrow: true;
+              activated => $global_shortcuts_cb(template);
+            }
+          }
+
+          Adw.PreferencesGroup general_group {
+            title: _("General");
+
+            $CcListRow handler_row {
+              title: _("_Files &amp; Links");
+              subtitle: _("File and link types that are opened by the app");
+              show-arrow: true;
+              action-name: "navigation.push";
+              action-target: "'handler-page'";
+            }
+
+            $CcListRow storage_row {
+              title: _("S_torage");
+              subtitle: _("Disk space being used");
+              show-arrow: true;
+              action-name: "navigation.push";
+              action-target: "'storage-page'";
+            }
+          }
+        }
+      };
+    };
+  }
+
+  [subpage]
+  Adw.NavigationPage {
+    title: _("Required Permissions");
+    tag: "builtin-page";
+
+    child: Adw.ToolbarView {
+      [top]
+      Adw.HeaderBar {}
+
+      content: Adw.PreferencesPage builtin_page {
+        Adw.PreferencesGroup {
+          ListBox builtin_list {
+            selection-mode: none;
+
+            styles [
+              "boxed-list",
+            ]
+          }
+        }
+      };
+    };
+  }
+
+  [subpage]
+  Adw.NavigationPage {
+    title: _("Files & Links");
+    tag: "handler-page";
+
+    child: Adw.ToolbarView {
+      [top]
+      Adw.HeaderBar {}
+
+      content: Adw.PreferencesPage handler_page {
+        Adw.PreferencesGroup handler_file_group {
+          title: _("File Types");
+        }
+
+        Adw.PreferencesGroup handler_link_group {
+          title: _("Link Types");
+        }
+
+        Adw.PreferencesGroup {
+          Adw.ButtonRow handler_reset_button_row {
+            title: _("_Reset");
+            use-underline: true;
+            activated => $handler_reset_cb(template);
+
+            styles [
+              "destructive-action",
+            ]
+          }
+        }
+      };
+    };
+  }
+
+  [subpage]
+  Adw.NavigationPage {
+    title: _("Storage");
+    tag: "storage-page";
+
+    child: Adw.ToolbarView {
+      [top]
+      Adw.HeaderBar {}
+
+      content: Adw.PreferencesPage storage_page {
+        Adw.PreferencesGroup {
+          Adw.ActionRow storage_page_app_row {
+            title: _("App");
+
+            styles [
+              "property",
+            ]
+          }
+
+          Adw.ActionRow storage_page_data_row {
+            title: _("Data");
+
+            styles [
+              "property",
+            ]
+          }
+
+          Adw.ActionRow storage_page_cache_row {
+            title: _("Cache");
+
+            styles [
+              "property",
+            ]
+          }
+
+          Adw.ActionRow storage_page_total_row {
+            title: _("Total");
+
+            styles [
+              "property",
+            ]
+          }
+        }
+
+        Adw.PreferencesGroup {
+          Adw.ButtonRow clear_cache_button_row {
+            title: _("_Clear Cache");
+            use-underline: true;
+            activated => $clear_cache_cb(template);
+          }
+        }
+      };
+    };
+  }
+}
+
+SizeGroup {
+  mode: horizontal;
+
+  widgets [
+    launch_button,
+    view_details_button,
+  ]
+}

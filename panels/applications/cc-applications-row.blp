@@ -1,0 +1,12 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CcApplicationsRow: Adw.ActionRow {
+  use-markup: false;
+
+  [suffix]
+  Image {
+    icon-name: "go-next-symbolic";
+    accessible-role: presentation;
+  }
+}
