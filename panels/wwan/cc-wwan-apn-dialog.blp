@@ -1,0 +1,246 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CcWwanApnDialog: Dialog {
+  default-height: 510;
+  default-width: 360;
+  hide-on-close: true;
+  title: _("Access Points");
+  modal: true;
+
+  [titlebar]
+  HeaderBar {
+    [start]
+    Button back_button {
+      use-underline: true;
+      icon-name: "go-previous-symbolic";
+      clicked => $cc_wwan_apn_back_clicked_cb() swapped;
+
+      accessibility {
+        label: _("Back");
+      }
+    }
+
+    [end]
+    Button add_button {
+      use-underline: true;
+      icon-name: "list-add-symbolic";
+      clicked => $cc_wwan_apn_add_clicked_cb() swapped;
+
+      accessibility {
+        label: _("Add");
+      }
+    }
+
+    [end]
+    Button save_button {
+      visible: false;
+      use-underline: true;
+      label: _("_Save");
+      clicked => $cc_wwan_apn_save_clicked_cb() swapped;
+
+      styles [
+        "default",
+      ]
+    }
+  }
+
+  Stack apn_settings_stack {
+    transition-type: slide_left_right;
+
+    Adw.PreferencesPage apn_list_view {
+      Adw.PreferencesGroup {
+        ListBox apn_list {
+          valign: start;
+          selection-mode: none;
+          row-activated => $cc_wwan_apn_activated_cb() swapped;
+
+          styles [
+            "boxed-list",
+          ]
+        }
+      }
+    }
+
+    Adw.PreferencesPage apn_edit_view {
+      Adw.PreferencesGroup {
+        Grid {
+          orientation: vertical;
+          hexpand: true;
+          vexpand: true;
+          row-spacing: 6;
+          column-spacing: 12;
+
+          Label {
+            halign: end;
+            valign: center;
+            label: _("Name");
+            mnemonic-widget: name_entry;
+
+            styles [
+              "dim-label",
+            ]
+
+            layout {
+              column: "0";
+              row: "0";
+            }
+          }
+
+          Entry name_entry {
+            hexpand: true;
+            changed => $cc_wwan_apn_entry_changed_cb() swapped;
+
+            layout {
+              column: "1";
+              row: "0";
+            }
+          }
+
+          Label {
+            halign: end;
+            valign: center;
+            label: _("APN");
+            mnemonic-widget: apn_entry;
+
+            styles [
+              "dim-label",
+            ]
+
+            layout {
+              column: "0";
+              row: "1";
+            }
+          }
+
+          Entry apn_entry {
+            margin-bottom: 12;
+            changed => $cc_wwan_apn_entry_changed_cb() swapped;
+
+            layout {
+              column: "1";
+              row: "1";
+            }
+          }
+
+          Label {
+            halign: end;
+            valign: center;
+            label: _("Username");
+            mnemonic-widget: username_entry;
+
+            styles [
+              "dim-label",
+            ]
+
+            layout {
+              column: "0";
+              row: "2";
+            }
+          }
+
+          Entry username_entry {
+            layout {
+              column: "1";
+              row: "2";
+            }
+          }
+
+          Label {
+            halign: end;
+            valign: center;
+            label: _("Password");
+            mnemonic-widget: password_entry;
+
+            styles [
+              "dim-label",
+            ]
+
+            layout {
+              column: "0";
+              row: "3";
+            }
+          }
+
+          Entry password_entry {
+            margin-bottom: 12;
+
+            layout {
+              column: "1";
+              row: "3";
+            }
+          }
+
+          Label {
+            halign: end;
+            valign: center;
+            label: _("APN Type");
+            mnemonic-widget: lte_attach_combo;
+
+            styles [
+              "dim-label",
+            ]
+
+            layout {
+              column: "0";
+              row: "4";
+            }
+          }
+
+          DropDown lte_attach_combo {
+            model: StringList {
+              strings [
+                _("Internet"),
+                _("Attach"),
+              ]
+            };
+
+            layout {
+              column: "1";
+              row: "4";
+            }
+          }
+
+          Label {
+            visible: bind lte_attach_combo.selected bidirectional;
+            halign: end;
+            valign: center;
+            label: _("Auth Type");
+            mnemonic-widget: lte_auth_combo;
+
+            styles [
+              "dim-label",
+            ]
+
+            layout {
+              column: "0";
+              row: "5";
+            }
+          }
+
+          DropDown lte_auth_combo {
+            visible: bind lte_attach_combo.selected bidirectional;
+
+            model: StringList {
+              strings [
+                _("None"),
+                "PAP",
+                "CHAP",
+                "EAP",
+                "MSCHAP",
+                "MSCHAPV2",
+              ]
+            };
+
+            layout {
+              column: "1";
+              row: "5";
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+CheckButton apn_radio_button {}
