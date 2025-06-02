@@ -1,0 +1,14 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CcColorProfile: Adw.ActionRow {
+  activatable: true;
+
+  [prefix]
+  Image widget_image {}
+
+  [suffix]
+  $CcListRowInfoButton widget_info {
+    valign: "center";
+  }
+}

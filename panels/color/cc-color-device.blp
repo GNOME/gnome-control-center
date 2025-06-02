@@ -1,0 +1,30 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CcColorDevice: Adw.ActionRow {
+  [suffix]
+  Label widget_nocalib {
+    label: _("Not Calibrated");
+    margin-end: 6;
+
+    styles [
+      "dim-label",
+    ]
+  }
+
+  [suffix]
+  Switch widget_switch {
+    valign: center;
+  }
+
+  [suffix]
+  Button widget_button {
+    icon-name: "pan-end-symbolic";
+    valign: center;
+    clicked => $cc_color_device_clicked_expander_cb(template);
+
+    styles [
+      "flat",
+    ]
+  }
+}
