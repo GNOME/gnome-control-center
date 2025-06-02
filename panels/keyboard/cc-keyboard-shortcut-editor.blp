@@ -1,0 +1,287 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CcKeyboardShortcutEditor: Adw.Dialog {
+  content-width: 400;
+  content-height: 300;
+
+  child: Adw.ToolbarView {
+    [top]
+    Adw.HeaderBar headerbar {
+      [start]
+      Button cancel_button {
+        label: _("_Cancel");
+        use-underline: true;
+        clicked => $cancel_button_clicked_cb(template);
+      }
+
+      [start]
+      Button remove_button {
+        label: _("_Remove");
+        use-underline: true;
+        valign: end;
+        clicked => $remove_button_clicked_cb(template);
+
+        styles [
+          "destructive-action",
+        ]
+      }
+
+      [end]
+      Button add_button {
+        label: _("_Add");
+        use-underline: true;
+        sensitive: false;
+        clicked => $add_button_clicked_cb(template);
+
+        styles [
+          "suggested-action",
+        ]
+      }
+
+      [end]
+      Button replace_button {
+        label: _("Re_place");
+        use-underline: true;
+        clicked => $replace_button_clicked_cb(template);
+
+        styles [
+          "suggested-action",
+        ]
+      }
+
+      [end]
+      Button set_button {
+        label: _("_Set");
+        use-underline: true;
+        clicked => $set_button_clicked_cb(template);
+
+        styles [
+          "suggested-action",
+        ]
+      }
+    }
+
+    content: Box {
+      orientation: vertical;
+      spacing: 18;
+      margin-top: 12;
+      margin-bottom: 12;
+      margin-start: 12;
+      margin-end: 12;
+
+      Label top_info_label {
+        wrap: true;
+        wrap-mode: word_char;
+        width-chars: 15;
+        max-width-chars: 20;
+      }
+
+      Stack stack {
+        hexpand: true;
+        vexpand: true;
+
+        Box edit_box {
+          orientation: vertical;
+          spacing: 18;
+          hexpand: true;
+          vexpand: true;
+          halign: center;
+          valign: center;
+
+          Picture {
+            halign: center;
+            valign: center;
+            can-shrink: false;
+            file: "resource:///org/gnome/control-center/keyboard/enter-keyboard-shortcut.svg";
+          }
+
+          Label {
+            wrap: true;
+            label: _("Press Esc to cancel or Backspace to disable the keyboard shortcut");
+
+            styles [
+              "dim-label",
+            ]
+          }
+        }
+
+        Box standard_box {
+          hexpand: true;
+          orientation: vertical;
+          spacing: 18;
+
+          CenterBox {
+            [center]
+            ShortcutLabel shortcut_accel_label {
+              margin-start: 18;
+              margin-end: 18;
+              halign: center;
+              disabled-text: _("Disabled");
+            }
+
+            [end]
+            Button reset_button {
+              tooltip-text: _("Reset Shortcut");
+              icon-name: "edit-clear-symbolic";
+              halign: end;
+              clicked => $reset_item_clicked_cb(template);
+
+              styles [
+                "flat",
+              ]
+            }
+          }
+
+          Label shortcut_conflict_label {
+            hexpand: true;
+            wrap: true;
+            wrap-mode: word_char;
+            width-chars: 15;
+            max-width-chars: 20;
+            xalign: 0;
+          }
+        }
+
+        Grid custom_grid {
+          hexpand: true;
+          vexpand: true;
+          row-spacing: 12;
+          column-spacing: 12;
+
+          Label {
+            label: _("Name");
+            xalign: 1;
+            mnemonic-widget: name_entry;
+
+            layout {
+              column: "0";
+              row: "0";
+            }
+          }
+
+          Label {
+            label: _("Command");
+            xalign: 1;
+            mnemonic-widget: command_entry;
+
+            layout {
+              column: "0";
+              row: "1";
+            }
+          }
+
+          Label {
+            label: _("Shortcut");
+            xalign: 1;
+
+            layout {
+              column: "0";
+              row: "2";
+            }
+          }
+
+          Label new_shortcut_conflict_label {
+            wrap: true;
+            wrap-mode: word_char;
+            width-chars: 0;
+            max-width-chars: 0;
+            xalign: 0;
+
+            layout {
+              column: "0";
+              row: "3";
+              column-span: "3";
+            }
+          }
+
+          Entry name_entry {
+            hexpand: true;
+            notify::text => $name_entry_changed_cb(template);
+
+            layout {
+              column: "1";
+              row: "0";
+              column-span: "2";
+            }
+          }
+
+          Entry command_entry {
+            hexpand: true;
+            notify::text => $command_entry_changed_cb(template);
+
+            layout {
+              column: "1";
+              row: "1";
+              column-span: "2";
+            }
+          }
+
+          Button reset_custom_button {
+            halign: end;
+            icon-name: "edit-clear-symbolic";
+            clicked => $reset_custom_clicked_cb(template);
+
+            accessibility {
+              label: _("Reset");
+            }
+
+            layout {
+              column: "2";
+              row: "2";
+            }
+
+            styles [
+              "flat",
+            ]
+          }
+
+          ShortcutLabel custom_shortcut_accel_label {
+            halign: start;
+            disabled-text: _("None");
+
+            layout {
+              column: "1";
+              row: "2";
+            }
+          }
+
+          Button change_custom_shortcut_button {
+            label: _("_Set Shortcut…");
+            use-underline: true;
+            hexpand: true;
+            clicked => $change_custom_shortcut_button_clicked_cb(template);
+
+            layout {
+              column: "1";
+              row: "2";
+              column-span: "2";
+            }
+          }
+        }
+      }
+    };
+  };
+
+  EventControllerKey {
+    propagation-phase: capture;
+    key-pressed => $on_key_pressed_cb(template);
+  }
+
+  ShortcutController {
+    Shortcut {
+      trigger: "Escape";
+      action: "action(window.close)";
+    }
+  }
+}
+
+SizeGroup {
+  widgets [
+    cancel_button,
+    add_button,
+    replace_button,
+    reset_button,
+    set_button,
+  ]
+}

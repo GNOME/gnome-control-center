@@ -1,0 +1,77 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CcInputChooser: Adw.Dialog {
+  title: _("Add Input Source");
+  content-height: 400;
+  content-width: 420;
+
+  child: Adw.ToolbarView {
+    [top]
+    Adw.HeaderBar {
+      show-start-title-buttons: false;
+      show-end-title-buttons: false;
+
+      Button cancel_button {
+        label: _("_Cancel");
+        use-underline: true;
+        valign: center;
+        action-name: "window.close";
+      }
+
+      [end]
+      Button add_button {
+        label: _("_Add");
+        sensitive: false;
+        use-underline: true;
+        valign: center;
+        clicked => $on_add_button_clicked_cb(template);
+
+        styles [
+          "suggested-action",
+        ]
+      }
+    }
+
+    [top]
+    Adw.Bin {
+      styles [
+        "toolbar",
+      ]
+
+      SearchBar search_bar {
+        SearchEntry filter_entry {
+          placeholder-text: _("Search languages and countries");
+          hexpand: true;
+          changed => $on_filter_entry_search_changed_cb(template);
+          stop-search => $on_stop_search_cb(template);
+        }
+      }
+    }
+
+    Stack input_sources_stack {
+      StackPage {
+        name: "spinner-page";
+
+        child: Adw.Spinner {};
+      }
+
+      StackPage {
+        name: "input-sources-page";
+
+        child: Adw.PreferencesPage {
+          Adw.PreferencesGroup {
+            ListBox input_sources_listbox {
+              row-activated => $on_input_sources_listbox_row_activated_cb(template);
+              selected-rows-changed => $on_input_sources_listbox_selected_rows_changed_cb(template);
+
+              styles [
+                "boxed-list",
+              ]
+            }
+          }
+        };
+      }
+    }
+  };
+}

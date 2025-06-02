@@ -1,0 +1,20 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CcInputListBox: Adw.Bin {
+  ListBox listbox {
+    selection-mode: none;
+    row-activated => $input_row_activated_cb(template);
+    keynav-failed => $cc_util_keynav_propagate_vertical();
+
+    styles [
+      "boxed-list",
+    ]
+
+    Adw.ButtonRow add_input_row {
+      title: _("_Add Input Source");
+      start-icon-name: "list-add-symbolic";
+      use-underline: true;
+    }
+  }
+}

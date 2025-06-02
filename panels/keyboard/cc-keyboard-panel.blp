@@ -1,0 +1,81 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CcKeyboardPanel: $CcPanel {
+  [subpage]
+  Adw.NavigationPage {
+    title: _("Keyboard");
+
+    Adw.ToolbarView {
+      [top]
+      Adw.HeaderBar {}
+
+      content: Adw.PreferencesPage {
+        Adw.PreferencesGroup {
+          title: _("Input Sources");
+          description: _("Includes keyboard layouts and input methods");
+
+          $CcInputListBox input_list {
+            vexpand: false;
+          }
+        }
+
+        Adw.PreferencesGroup input_switch_group {
+          title: _("Input Source Switching");
+
+          Adw.ActionRow {
+            title: _("Use the _same source for all windows");
+            use-underline: true;
+            activatable-widget: same_source;
+
+            [prefix]
+            CheckButton same_source {
+              valign: center;
+            }
+          }
+
+          Adw.ActionRow {
+            title: _("Switch input sources _individually for each window");
+            use-underline: true;
+            activatable-widget: per_window_source;
+
+            [prefix]
+            CheckButton per_window_source {
+              active: bind same_source.active inverted;
+              valign: center;
+              group: same_source;
+            }
+          }
+        }
+
+        Adw.PreferencesGroup {
+          title: _("Special Character Entry");
+          description: _("Methods for entering symbols and letter variants using the keyboard");
+
+          $CcListRow alt_chars_row {
+            title: _("A_lternate Characters Key");
+            show-arrow: true;
+            secondary-label: "Right Alt";
+            activated => $alt_chars_row_activated(template);
+          }
+
+          $CcListRow compose_row {
+            title: _("_Compose Key");
+            show-arrow: true;
+            activated => $compose_row_activated(template);
+          }
+        }
+
+        Adw.PreferencesGroup {
+          title: _("Keyboard Shortcuts");
+
+          $CcListRow common_shortcuts_row {
+            title: _("_View and Customize Shortcuts");
+            show-arrow: true;
+            activated => $keyboard_shortcuts_activated(template);
+          }
+        }
+      };
+    }
+  }
+}
