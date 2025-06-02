@@ -1,0 +1,34 @@
+using Gtk 4.0;
+
+template $CcIllustratedRow: $CcContentRow {
+  EventControllerMotion {
+    enter => $on_picture_hover_cb(template);
+    leave => $on_picture_leave_cb(template);
+  }
+
+  [content]
+  Box picture_box {
+    visible: false;
+    hexpand: true;
+    margin-bottom: 12;
+
+    styles [
+      "frame",
+      "background",
+    ]
+
+    Picture picture {
+      hexpand: true;
+      content-fit: scale_down;
+      margin-top: 18;
+      margin-bottom: 18;
+      margin-start: 18;
+      margin-end: 18;
+      height-request: 128;
+
+      paintable: $CcMaskPaintable picture_mask {
+        follow-accent: true;
+      };
+    }
+  }
+}

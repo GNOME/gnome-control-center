@@ -10,11 +10,38 @@ common_sources += gnome.mkenums_simple(
 common_sources += gnome.mkenums_simple('cc-number-row-enums', sources: files('cc-number-row.h'))
 common_sources += gnome.mkenums_simple('cc-timelike-editor-enums', sources: files('cc-timelike-editor.h'))
 
+blueprints = custom_target(
+  'blueprints',
+  input: files(
+    'cc-content-row.blp',
+    'cc-duration-editor.blp',
+    'cc-duration-row.blp',
+    'cc-illustrated-row.blp',
+    'cc-language-chooser.blp',
+    'cc-language-row.blp',
+    'cc-list-row-info-button.blp',
+    'cc-list-row.blp',
+    'cc-permission-infobar.blp',
+    'cc-split-row.blp',
+    'cc-time-editor.blp',
+    'cc-timelike-editor.blp',
+  ),
+  output: '.',
+  command: [
+    blueprint_compiler,
+    'batch-compile',
+    '@OUTPUT@',
+    '@CURRENT_SOURCE_DIR@',
+    '@INPUT@',
+  ],
+)
+
 common_sources += gnome.compile_resources(
   'cc-common-resources',
   'common.gresource.xml',
   c_name: 'cc_common',
-  export: true
+  export: true,
+  dependencies: blueprints,
 )
 
 generates_sources_dep = declare_dependency(

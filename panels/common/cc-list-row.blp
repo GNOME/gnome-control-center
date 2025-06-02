@@ -1,0 +1,28 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CcListRow: Adw.ActionRow {
+  activatable: true;
+  use-underline: true;
+
+  [suffix]
+  Label secondary_label {
+    valign: center;
+    ellipsize: end;
+    selectable: bind template.activatable inverted;
+
+    styles [
+      "dim-label",
+    ]
+  }
+
+  [suffix]
+  Image arrow {
+    visible: bind template.show-arrow;
+    valign: center;
+    icon-name: "go-next-symbolic";
+    accessible-role: presentation;
+  }
+
+  notify::sensitive => $cc_list_row_sensitivity_changed_cb(template);
+}

@@ -1,0 +1,97 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CcLanguageChooser: Adw.Dialog {
+  title: _("Select Language");
+  content-width: 400;
+  content-height: 475;
+  default-widget: select_button;
+
+  child: Adw.ToolbarView {
+    [top]
+    Adw.HeaderBar {
+      show-end-title-buttons: false;
+
+      [start]
+      Button {
+        label: _("_Cancel");
+        use-underline: true;
+        valign: center;
+        clicked => $adw_dialog_close(template);
+      }
+
+      [end]
+      Button select_button {
+        label: _("_Select");
+        sensitive: false;
+        use-underline: true;
+        valign: center;
+        clicked => $select_button_clicked_cb(template);
+
+        styles [
+          "suggested-action",
+        ]
+      }
+    }
+
+    content: Box {
+      orientation: vertical;
+      spacing: 0;
+
+      SearchBar search_bar {
+        SearchEntry language_filter_entry {
+          placeholder-text: _("Language or country");
+          hexpand: true;
+          margin-start: 6;
+          margin-end: 6;
+          margin-top: 6;
+          margin-bottom: 6;
+          search-changed => $language_filter_entry_search_changed_cb(template);
+        }
+      }
+
+      ScrolledWindow {
+        hscrollbar-policy: never;
+        vscrollbar-policy: automatic;
+        propagate-natural-height: true;
+        min-content-height: 200;
+
+        child: ListBox language_listbox {
+          can-focus: true;
+          vexpand: true;
+          halign: fill;
+          valign: fill;
+          selection-mode: none;
+          show-separators: true;
+          row-activated => $language_listbox_row_activated_cb(template);
+
+          [placeholder]
+          Label {
+            label: _("No languages found");
+            sensitive: false;
+          }
+
+          ListBoxRow more_row {
+            Box {
+              spacing: 10;
+              tooltip-markup: _("More…");
+
+              Image {
+                hexpand: true;
+                halign: center;
+                icon-name: "view-more-symbolic";
+                icon-size: normal;
+                margin-top: 10;
+                margin-bottom: 10;
+
+                styles [
+                  "dim-label",
+                ]
+              }
+            }
+          }
+        };
+      }
+    };
+  };
+}
