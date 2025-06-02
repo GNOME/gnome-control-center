@@ -1,0 +1,169 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CcBackgroundPanel: $CcPanel {
+  child: Adw.BreakpointBin {
+    width-request: 346;
+    height-request: 200;
+
+    Adw.Breakpoint {
+      condition ("max-width: 420px")
+
+      setters {
+        accent_box.spacing: 6;
+        accent_box.margin-top: 6;
+        accent_box.margin-bottom: 6;
+      }
+    }
+
+    child: Adw.ToolbarView {
+      [top]
+      Adw.HeaderBar {}
+
+      content: Adw.ToastOverlay toast_overlay {
+        child: Adw.PreferencesPage {
+          Adw.PreferencesGroup {
+            title: _("Style");
+
+            Adw.PreferencesRow {
+              accessible-role: group;
+              activatable: false;
+              focusable: false;
+
+              Adw.Clamp {
+                maximum-size: 400;
+                tightening-threshold: 300;
+
+                Grid {
+                  column-homogeneous: true;
+                  column-spacing: 24;
+                  row-spacing: 12;
+                  margin-start: 12;
+                  margin-end: 12;
+                  margin-top: 18;
+                  margin-bottom: 12;
+                  hexpand: true;
+
+                  ToggleButton default_toggle {
+                    accessibility {
+                      labelled-by: [
+                        default_label,
+                      ];
+                    }
+
+                    notify::active => $on_color_scheme_toggle_active_cb() swapped;
+
+                    $CcBackgroundPreview default_preview {}
+
+                    styles [
+                      "background-preview-button",
+                    ]
+
+                    layout {
+                      column: "0";
+                      row: "0";
+                    }
+                  }
+
+                  Label default_label {
+                    label: _("_Default");
+                    use-underline: true;
+                    mnemonic-widget: default_toggle;
+
+                    layout {
+                      column: "0";
+                      row: "1";
+                    }
+                  }
+
+                  ToggleButton dark_toggle {
+                    group: default_toggle;
+
+                    accessibility {
+                      labelled-by: [
+                        dark_label,
+                      ];
+                    }
+
+                    notify::active => $on_color_scheme_toggle_active_cb() swapped;
+
+                    $CcBackgroundPreview dark_preview {
+                      is-dark: true;
+                    }
+
+                    styles [
+                      "background-preview-button",
+                    ]
+
+                    layout {
+                      column: "1";
+                      row: "0";
+                    }
+                  }
+
+                  Label dark_label {
+                    label: _("Da_rk");
+                    use-underline: true;
+                    mnemonic-widget: dark_toggle;
+
+                    layout {
+                      column: "1";
+                      row: "1";
+                    }
+                  }
+                }
+              }
+            }
+          }
+
+          Adw.PreferencesGroup {
+            title: _("Accent Color");
+
+            Adw.PreferencesRow {
+              accessible-role: group;
+              activatable: false;
+              focusable: false;
+
+              Box accent_box {
+                spacing: 12;
+                margin-top: 12;
+                margin-bottom: 12;
+                halign: center;
+              }
+            }
+          }
+
+          Adw.PreferencesGroup {
+            title: _("Background");
+
+            header-suffix: Button {
+              Adw.ButtonContent {
+                icon-name: "list-add-symbolic";
+                label: _("_Add Picture…");
+                use-underline: true;
+              }
+
+              clicked => $on_add_picture_button_clicked_cb(template);
+
+              styles [
+                "flat",
+              ]
+            };
+
+            Adw.Bin {
+              styles [
+                "card",
+              ]
+
+              $CcBackgroundChooser background_chooser {
+                hexpand: true;
+                toast-overlay: "toast_overlay";
+                background-chosen => $on_chooser_background_chosen_cb(template);
+              }
+            }
+          }
+        };
+      };
+    };
+  };
+}

@@ -1,0 +1,55 @@
+using Gtk 4.0;
+
+template $CcBackgroundChooser: Box {
+  orientation: vertical;
+
+  Box recent_box {
+    orientation: vertical;
+    halign: center;
+
+    FlowBox recent_flowbox {
+      margin-top: 12;
+      margin-bottom: 12;
+      margin-start: 12;
+      margin-end: 12;
+      column-spacing: 12;
+      row-spacing: 12;
+      homogeneous: true;
+      halign: center;
+      min-children-per-line: 1;
+      max-children-per-line: 8;
+      activate-on-single-click: true;
+      selection-mode: single;
+      child-activated => $on_item_activated_cb(template);
+
+      styles [
+        "background-flowbox",
+      ]
+    }
+
+    Separator {
+      margin-top: 12;
+      margin-bottom: 12;
+    }
+  }
+
+  FlowBox flowbox {
+    margin-top: 12;
+    margin-bottom: 12;
+    margin-start: 12;
+    margin-end: 12;
+    column-spacing: 12;
+    row-spacing: 12;
+    homogeneous: true;
+    halign: center;
+    min-children-per-line: 1;
+    max-children-per-line: 8;
+    activate-on-single-click: true;
+    selection-mode: single;
+    child-activated => $on_item_activated_cb(template);
+
+    styles [
+      "background-flowbox",
+    ]
+  }
+}
