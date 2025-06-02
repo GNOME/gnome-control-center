@@ -15,6 +15,9 @@ files="$files "$(grep -lRs --include='*.c' --include='*.h' '[^I_)]_(' $srcdirs)
 # find ui files that contain translatable string
 files="$files "$(grep -lRis --include='*.ui' 'translatable="[ty1]' $uidirs)
 
+# find blp files that contain translatable string
+files="$files "$(grep -lRis --include='*.blp' '_(' $uidirs)
+
 # find .desktop files
 files="$files "$(find $desktopdirs -name '*.desktop*')
 
