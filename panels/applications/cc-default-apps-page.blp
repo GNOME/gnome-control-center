@@ -1,0 +1,70 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CcDefaultAppsPage: Adw.PreferencesGroup {
+  title: _("Default Apps");
+
+  $CcDefaultAppsRow web_row {
+    title: _("_Web");
+    use-underline: true;
+    content-type: "x-scheme-handler/http";
+    filters: "text/html;application/xhtml+xml;x-scheme-handler/https";
+    notify::selected-item => $on_row_selected_item_changed();
+  }
+
+  $CcDefaultAppsRow mail_row {
+    title: _("_Mail");
+    use-underline: true;
+    content-type: "x-scheme-handler/mailto";
+    notify::selected-item => $on_row_selected_item_changed();
+  }
+
+  $CcDefaultAppsRow calendar_row {
+    title: _("_Calendar");
+    use-underline: true;
+    content-type: "text/calendar";
+    notify::selected-item => $on_row_selected_item_changed();
+  }
+
+  $CcDefaultAppsRow music_row {
+    title: _("M_usic");
+    use-underline: true;
+    content-type: "audio/x-vorbis+ogg";
+    filters: "audio/*";
+    notify::selected-item => $on_row_selected_item_changed();
+  }
+
+  $CcDefaultAppsRow video_row {
+    title: _("_Video");
+    use-underline: true;
+    content-type: "video/x-ogm+ogg";
+    filters: "video/*";
+    notify::selected-item => $on_row_selected_item_changed();
+  }
+
+  $CcDefaultAppsRow photos_row {
+    title: _("_Photos");
+    use-underline: true;
+    content-type: "image/jpeg";
+    filters: "image/*";
+    notify::selected-item => $on_row_selected_item_changed();
+  }
+
+  $CcDefaultAppsRow calls_row {
+    visible: false;
+
+    /* Translators: This is a telephone call */
+    title: _("Ca_lls");
+    use-underline: true;
+    content-type: "x-scheme-handler/tel";
+    notify::selected-item => $on_row_selected_item_changed();
+  }
+
+  $CcDefaultAppsRow sms_row {
+    visible: false;
+    title: _("_SMS");
+    use-underline: true;
+    content-type: "x-scheme-handler/sms";
+    notify::selected-item => $on_row_selected_item_changed();
+  }
+}
