@@ -57,7 +57,7 @@ stages:
     # Should probably also switch away from 'rawhide',
     # to stable fedora branch as well.
     BRANCH_NAME: 'main'
-    CONTAINER_TAG: '2025-03-13.0'
+    CONTAINER_TAG: '2025-06-02.0'
     FEDORA_VERSION: rawhide
     # Derive FDO variables from this automatically.
     # DO NOT edit, instead change the variables above
@@ -96,6 +96,7 @@ build.container.fedora@x86_64:
       xorg-x11-server-Xvfb
       mesa-dri-drivers
       libsass-devel sassc
+      blueprint-compiler
     FDO_DISTRIBUTION_EXEC: |-
       dnf builddep -y gnome-control-center && \
       dnf builddep -y gsettings-desktop-schemas && \
