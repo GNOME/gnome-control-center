@@ -1,0 +1,35 @@
+using Gtk 4.0;
+
+template $CcLanguageRow: ListBoxRow {
+  Box {
+    visible: true;
+    spacing: 12;
+    margin-top: 12;
+    margin-bottom: 12;
+    margin-start: 18;
+    margin-end: 18;
+
+    Label language_label {
+      visible: true;
+      xalign: 0;
+      ellipsize: end;
+    }
+
+    Image check_image {
+      visible: false;
+      icon-name: "object-select-symbolic";
+      icon-size: normal;
+    }
+
+    Label country_label {
+      visible: true;
+      xalign: 1;
+      ellipsize: end;
+      hexpand: true;
+
+      styles [
+        "dim-label",
+      ]
+    }
+  }
+}

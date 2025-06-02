@@ -1,0 +1,122 @@
+using Gtk 4.0;
+
+template $CcTimelikeEditor: Widget {
+  Button hour_up_button {
+    valign: center;
+    halign: start;
+    icon-name: "go-up-symbolic";
+    focusable: false;
+
+    styles [
+      "titlebutton",
+      "circular",
+      "flat",
+    ]
+
+    accessibility {
+      label: _("Increment Hour");
+    }
+
+    GestureClick {
+      propagation-phase: capture;
+      pressed => $editor_change_time_pressed_cb() swapped;
+      released => $editor_change_time_released_cb() swapped;
+    }
+  }
+
+  Button minute_up_button {
+    valign: center;
+    halign: end;
+    icon-name: "go-up-symbolic";
+    focusable: false;
+
+    styles [
+      "titlebutton",
+      "circular",
+      "flat",
+    ]
+
+    accessibility {
+      label: _("Increment Minute");
+    }
+
+    GestureClick {
+      propagation-phase: capture;
+      pressed => $editor_change_time_pressed_cb() swapped;
+      released => $editor_change_time_released_cb() swapped;
+    }
+  }
+
+  $CcTimelikeEntry timelike_entry {
+    accessibility {
+      label: _("Time");
+    }
+  }
+
+  Button hour_down_button {
+    valign: center;
+    halign: start;
+    icon-name: "go-down-symbolic";
+    focusable: false;
+
+    styles [
+      "titlebutton",
+      "circular",
+      "flat",
+    ]
+
+    accessibility {
+      label: _("Decrement Hour");
+    }
+
+    GestureClick {
+      propagation-phase: capture;
+      pressed => $editor_change_time_pressed_cb() swapped;
+      released => $editor_change_time_released_cb() swapped;
+    }
+  }
+
+  Button minute_down_button {
+    valign: center;
+    halign: end;
+    icon-name: "go-down-symbolic";
+    focusable: false;
+
+    styles [
+      "titlebutton",
+      "circular",
+      "flat",
+    ]
+
+    accessibility {
+      label: _("Decrement Minute");
+    }
+
+    GestureClick {
+      propagation-phase: capture;
+      pressed => $editor_change_time_pressed_cb() swapped;
+      released => $editor_change_time_released_cb() swapped;
+    }
+  }
+
+  Button am_pm_button {
+    valign: center;
+    clicked => $editor_am_pm_button_clicked_cb() swapped;
+
+    Stack am_pm_stack {
+      notify::visible-child => $editor_am_pm_stack_changed_cb() swapped;
+
+      Label am_label {
+        styles [
+          "title-3",
+        ]
+      }
+
+      Label pm_label {
+        styles [
+          "title-3",
+        ]
+      }
+    }
+  }
+}

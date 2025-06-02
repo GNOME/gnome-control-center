@@ -1,0 +1,101 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CcContentRow: Adw.PreferencesRow {
+  activatable: false;
+
+  accessibility {
+    labelled-by: [
+      title,
+    ];
+
+    described-by: [
+      subtitle,
+    ];
+  }
+
+  styles [
+    "content",
+  ]
+
+  child: Box {
+    orientation: vertical;
+    hexpand: false;
+
+    Box header {
+      valign: center;
+
+      styles [
+        "header",
+      ]
+
+      Box prefixes {
+        visible: false;
+
+        styles [
+          "prefixes",
+        ]
+      }
+
+      Box title_box {
+        orientation: vertical;
+        valign: center;
+        hexpand: true;
+
+        styles [
+          "title",
+        ]
+
+        Label title {
+          visible: bind $string_is_not_empty(title.label) as <bool>;
+          ellipsize: none;
+          label: bind template.title;
+          lines: 0;
+          mnemonic-widget: template;
+          use-underline: bind template.use-underline;
+          selectable: bind template.title-selectable;
+          wrap: true;
+          wrap-mode: word_char;
+          xalign: 0;
+          use-markup: bind template.use-markup;
+
+          styles [
+            "title",
+          ]
+        }
+
+        Label subtitle {
+          visible: bind $string_is_not_empty(subtitle.label) as <bool>;
+          ellipsize: none;
+          lines: 0;
+          selectable: bind template.subtitle-selectable;
+          wrap: true;
+          wrap-mode: word_char;
+          xalign: 0;
+          use-markup: bind template.use-markup;
+
+          styles [
+            "subtitle",
+          ]
+        }
+      }
+
+      Box suffixes {
+        visible: false;
+
+        styles [
+          "suffixes",
+        ]
+      }
+    }
+
+    Box contents {
+      orientation: vertical;
+      visible: false;
+
+      styles [
+        "contents",
+      ]
+    }
+  };
+}
