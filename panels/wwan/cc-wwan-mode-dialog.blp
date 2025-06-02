@@ -1,0 +1,41 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CcWwanModeDialog: Dialog {
+  title: _("Network Mode");
+  default-height: 480;
+  default-width: 360;
+  hide-on-close: true;
+  modal: true;
+
+  Adw.PreferencesPage {
+    Adw.PreferencesGroup {
+      ListBox network_mode_list {
+        selection-mode: none;
+        row-activated => $cc_wwan_mode_changed_cb() swapped;
+
+        styles [
+          "boxed-list",
+        ]
+      }
+    }
+  }
+
+  [action response=cancel]
+  Button button_cancel {
+    use-underline: true;
+    label: _("_Cancel");
+    clicked => $gtk_widget_hide() swapped;
+  }
+
+  [action response=apply default]
+  Button button_ok {
+    use-underline: true;
+    label: _("_Set");
+    clicked => $cc_wwan_mode_dialog_ok_clicked_cb() swapped;
+
+    styles [
+      "suggested-action ",
+    ]
+  }
+}

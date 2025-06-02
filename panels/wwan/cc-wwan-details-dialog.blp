@@ -1,0 +1,253 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CcWwanDetailsDialog: Dialog {
+  title: _("Modem Details");
+  default-height: 480;
+  default-width: 360;
+  hide-on-close: true;
+  modal: true;
+
+  Adw.PreferencesPage {
+    Adw.PreferencesGroup {
+      title: _("Modem Status");
+
+      Grid {
+        row-spacing: 9;
+        column-spacing: 6;
+
+        Label carrier_label {
+          label: _("Carrier");
+          xalign: 1.0;
+
+          styles [
+            "dim-label",
+          ]
+
+          layout {
+            column: "0";
+            row: "0";
+          }
+        }
+
+        Label operator_name {
+          xalign: 0.0;
+
+          layout {
+            column: "1";
+            row: "0";
+          }
+        }
+
+        Label {
+          label: _("Network Type");
+          xalign: 1.0;
+
+          styles [
+            "dim-label",
+          ]
+
+          layout {
+            column: "0";
+            row: "1";
+          }
+        }
+
+        Label network_type {
+          xalign: 0.0;
+
+          layout {
+            column: "1";
+            row: "1";
+          }
+        }
+
+        Label {
+          label: _("Signal Strength");
+          xalign: 1.0;
+
+          styles [
+            "dim-label",
+          ]
+
+          layout {
+            column: "0";
+            row: "2";
+          }
+        }
+
+        Label signal_strength {
+          xalign: 0.0;
+
+          layout {
+            column: "1";
+            row: "2";
+          }
+        }
+
+        Label {
+          label: _("Network Status");
+          xalign: 1.0;
+
+          styles [
+            "dim-label",
+          ]
+
+          layout {
+            column: "0";
+            row: "3";
+          }
+        }
+
+        Label network_status {
+          xalign: 0.0;
+
+          layout {
+            column: "1";
+            row: "3";
+          }
+        }
+
+        Label {
+          visible: bind own_numbers.visible;
+          label: _("Own Number");
+          xalign: 1.0;
+
+          styles [
+            "dim-label",
+          ]
+
+          layout {
+            column: "0";
+            row: "4";
+          }
+        }
+
+        Label own_numbers {
+          xalign: 0.0;
+
+          layout {
+            column: "1";
+            row: "4";
+          }
+        }
+      }
+    }
+
+    Adw.PreferencesGroup {
+      title: _("Device Details");
+
+      Grid {
+        row-spacing: 9;
+        column-spacing: 6;
+
+        Label {
+          label: _("Manufacturer");
+          xalign: 1.0;
+
+          styles [
+            "dim-label",
+          ]
+
+          layout {
+            column: "0";
+            row: "0";
+          }
+        }
+
+        Label manufacturer {
+          xalign: 0.0;
+
+          layout {
+            column: "1";
+            row: "0";
+          }
+        }
+
+        Label {
+          label: _("Model");
+          xalign: 1.0;
+
+          styles [
+            "dim-label",
+          ]
+
+          layout {
+            column: "0";
+            row: "1";
+          }
+        }
+
+        Label device_model {
+          xalign: 0.0;
+          selectable: true;
+          ellipsize: end;
+
+          layout {
+            column: "1";
+            row: "1";
+          }
+        }
+
+        Label firmware_label {
+          label: _("Firmware Version");
+          xalign: 1.0;
+
+          styles [
+            "dim-label",
+          ]
+
+          layout {
+            column: "0";
+            row: "2";
+          }
+        }
+
+        Label firmware_version {
+          selectable: true;
+          xalign: 0.0;
+          ellipsize: end;
+          wrap: true;
+
+          layout {
+            column: "1";
+            row: "2";
+          }
+        }
+
+        Label identifier_label {
+          label: _("IMEI");
+          xalign: 1.0;
+
+          styles [
+            "dim-label",
+          ]
+
+          layout {
+            column: "0";
+            row: "3";
+          }
+        }
+
+        Label device_identifier {
+          selectable: true;
+          xalign: 0.0;
+
+          layout {
+            column: "1";
+            row: "3";
+          }
+        }
+      }
+    }
+  }
+}
+
+SizeGroup {
+  mode: horizontal;
+
+  widgets [
+    carrier_label,
+    firmware_label,
+  ]
+}

@@ -12,6 +12,27 @@ i18n.merge_file(
   install_dir : control_center_desktopdir
 )
 
+blueprints = custom_target(
+  'blueprints',
+  input: files(
+    'cc-wwan-apn-dialog.blp',
+    'cc-wwan-details-dialog.blp',
+    'cc-wwan-device-page.blp',
+    'cc-wwan-mode-dialog.blp',
+    'cc-wwan-network-dialog.blp',
+    'cc-wwan-panel.blp',
+    'cc-wwan-sim-lock-dialog.blp',
+  ),
+  output: '.',
+  command: [
+    blueprint_compiler,
+    'batch-compile',
+    '@OUTPUT@',
+    '@CURRENT_SOURCE_DIR@',
+    '@INPUT@',
+  ],
+)
+
 sources = files(
   'cc-wwan-panel.c',
   'cc-wwan-device.c',
@@ -27,8 +48,9 @@ sources = files(
 sources += gnome.compile_resources(
   'cc-' + cappletname + '-resources',
   cappletname + '.gresource.xml',
-  c_name : 'cc_' + cappletname,
-  export : true,
+        c_name : 'cc_' + cappletname,
+        export : true,
+  dependencies : blueprints,
 )
 
 cflags += '-DGNOMELOCALEDIR="@0@"'.format(control_center_localedir)

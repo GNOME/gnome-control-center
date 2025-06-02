@@ -1,0 +1,140 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CcWwanDevicePage: Box {
+  Stack main_stack {
+    vhomogeneous: false;
+    hhomogeneous: false;
+
+    StackPage {
+      name: "no-sim-view";
+
+      child: Adw.StatusPage {
+        hexpand: true;
+        icon-name: "auth-sim-missing";
+        title: _("No SIM");
+        description: _("Insert a SIM card to use this modem");
+      };
+    }
+
+    StackPage {
+      name: "sim-lock-view";
+
+      child: Adw.StatusPage {
+        hexpand: true;
+        icon-name: "auth-sim-locked";
+        title: _("SIM Locked");
+
+        Button unlock_button {
+          halign: center;
+          use-underline: true;
+          label: _("_Unlock");
+          clicked => $wwan_device_unlock_clicked_cb() swapped;
+
+          styles [
+            "suggested-action",
+          ]
+        }
+      };
+    }
+
+    StackPage {
+      name: "settings-view";
+
+      child: Box {
+        margin-top: 18;
+        orientation: vertical;
+
+        Adw.PreferencesGroup {
+          title: _("Network");
+          margin-bottom: 32;
+
+          ListBox data_settings_list {
+            selection-mode: none;
+
+            styles [
+              "boxed-list",
+            ]
+
+            Adw.SwitchRow data_enable_row {
+              use-underline: true;
+              title: _("_Mobile Data");
+              subtitle: _("Access data using mobile network");
+              notify::active => $wwan_data_settings_changed_cb() swapped;
+            }
+
+            Adw.SwitchRow data_roaming_row {
+              use-underline: true;
+              title: _("_Data Roaming");
+              subtitle: _("Use mobile data when roaming");
+              notify::active => $wwan_data_settings_changed_cb() swapped;
+            }
+          }
+        }
+
+        Adw.PreferencesGroup {
+          margin-bottom: 32;
+
+          ListBox network_settings_list {
+            selection-mode: none;
+            row-activated => $wwan_network_settings_activated_cb() swapped;
+
+            styles [
+              "boxed-list",
+            ]
+
+            $CcListRow network_mode_row {
+              show-arrow: true;
+              title: _("_Network Mode");
+            }
+
+            $CcListRow network_name_row {
+              show-arrow: true;
+              title: _("N_etwork");
+            }
+          }
+        }
+
+        Adw.PreferencesGroup {
+          title: _("Advanced");
+
+          ListBox advanced_settings_list {
+            selection-mode: none;
+
+            styles [
+              "boxed-list",
+            ]
+
+            row-activated => $wwan_advanced_settings_activated_cb() swapped;
+
+            $CcListRow apn_settings_row {
+              show-arrow: true;
+              title: _("_Access Point Names");
+            }
+
+            $CcListRow sim_lock_row {
+              show-arrow: true;
+              title: _("_SIM Lock");
+              subtitle: _("Lock SIM with PIN");
+            }
+
+            $CcListRow details_row {
+              show-arrow: true;
+              title: _("M_odem Details");
+            }
+          }
+        }
+      };
+    }
+  }
+}
+
+SizeGroup {
+  mode: both;
+
+  widgets [
+    apn_settings_row,
+    sim_lock_row,
+    details_row,
+  ]
+}
