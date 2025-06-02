@@ -24,6 +24,12 @@
 #define GNOME_DESKTOP_USE_UNSTABLE_API
 #include <libgnome-desktop/gnome-languages.h>
 
+/**
+ * CcLocaleRow:
+ *
+ * A [class@Gtk.ListBoxRow] representing locale information.
+ */
+
 struct _CcLocaleRow {
   GtkListBoxRow parent_instance;
 
@@ -97,6 +103,14 @@ cc_locale_row_init (CcLocaleRow *self)
   gtk_widget_init_template (GTK_WIDGET (self));
 }
 
+/**
+ * cc_locale_row_new:
+ * @locale_id: the locale ID
+ *
+ * Create a new #CcLocaleRow based on the locale ID.
+ *
+ * Returns: (transfer full): a newly created #CcLocaleRow
+ */
 CcLocaleRow *
 cc_locale_row_new (const gchar *locale_id)
 {
@@ -129,6 +143,14 @@ cc_locale_row_new (const gchar *locale_id)
   return self;
 }
 
+/**
+ * cc_locale_row_get_locale_id:
+ * @self: a `CcLocaleRow`
+ *
+ * Get the locale ID.
+ *
+ * Returns: (nullable): the locale ID
+ */
 const gchar *
 cc_locale_row_get_locale_id (CcLocaleRow *self)
 {
@@ -136,6 +158,14 @@ cc_locale_row_get_locale_id (CcLocaleRow *self)
   return self->locale_id;
 }
 
+/**
+ * cc_locale_row_get_language:
+ * @self: a `CcLocaleRow`
+ *
+ * Get the language.
+ *
+ * Returns: (nullable): the language
+ */
 const gchar *
 cc_locale_row_get_language (CcLocaleRow *self)
 {
@@ -143,6 +173,14 @@ cc_locale_row_get_language (CcLocaleRow *self)
   return self->language;
 }
 
+/**
+ * cc_locale_row_get_language_local:
+ * @self: a `CcLocaleRow`
+ *
+ * Get the system's language.
+ *
+ * Returns: (nullable): the system's language
+ */
 const gchar *
 cc_locale_row_get_language_local (CcLocaleRow *self)
 {
@@ -150,6 +188,14 @@ cc_locale_row_get_language_local (CcLocaleRow *self)
   return self->language_local;
 }
 
+/**
+ * cc_locale_row_get_country:
+ * @self: a `CcLocaleRow`
+ *
+ * Get the country.
+ *
+ * Returns: (nullable): the country
+ */
 const gchar *
 cc_locale_row_get_country (CcLocaleRow *self)
 {
@@ -157,6 +203,14 @@ cc_locale_row_get_country (CcLocaleRow *self)
   return self->country;
 }
 
+/**
+ * cc_locale_row_get_country_local:
+ * @self: a `CcLocaleRow`
+ *
+ * Get the system's country.
+ *
+ * Returns: (nullable): the system's country
+ */
 const gchar *
 cc_locale_row_get_country_local (CcLocaleRow *self)
 {
@@ -164,6 +218,13 @@ cc_locale_row_get_country_local (CcLocaleRow *self)
   return self->country_local;
 }
 
+/**
+ * cc_locale_row_set_checked:
+ * @self: a `CcLocaleRow`
+ * @checked: the new value to set
+ *
+ * Change the row's active state.
+ */
 void
 cc_locale_row_set_checked (CcLocaleRow *self, gboolean checked)
 {
@@ -171,6 +232,13 @@ cc_locale_row_set_checked (CcLocaleRow *self, gboolean checked)
   gtk_widget_set_visible (GTK_WIDGET (self->check_image), checked);
 }
 
+/**
+ * cc_locale_row_set_is_extra:
+ * @self: a `CcLocaleRow`
+ * @is_extra: the new value to set
+ *
+ * Hint the row about whether it should display additional information.
+ */
 void
 cc_locale_row_set_is_extra (CcLocaleRow *self, gboolean is_extra)
 {
@@ -178,6 +246,14 @@ cc_locale_row_set_is_extra (CcLocaleRow *self, gboolean is_extra)
   self->is_extra = is_extra;
 }
 
+/**
+ * cc_locale_row_get_is_extra:
+ * @self: a `CcLocaleRow`
+ *
+ * Return whether the row is displaying additional information.
+ *
+ * Returns: whether the row is displaying additional information
+ */
 gboolean
 cc_locale_row_get_is_extra (CcLocaleRow *self)
 {
