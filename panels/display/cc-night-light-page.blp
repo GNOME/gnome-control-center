@@ -1,0 +1,355 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CcNightLightPage: Adw.Bin {
+  Adw.ViewStack main_stack {
+    Adw.ViewStackPage {
+      name: "night-light-unsupported-page";
+
+      child: Adw.StatusPage night_light_unsupported_page {
+        icon-name: "night-light-disabled-symbolic";
+        title: _("Night Light Unavailable");
+      };
+    }
+
+    Adw.ViewStackPage {
+      name: "night-light-page";
+
+      child: Box {
+        orientation: vertical;
+
+        InfoBar infobar_disabled {
+          name: "infobar_disabled";
+
+          Box {
+            hexpand: true;
+            spacing: 16;
+
+            Label {
+              halign: start;
+              margin-start: 12;
+              hexpand: false;
+
+              /* Translators: Inhibit the redshift functionality until the next day starts */
+              label: _("Temporarily Disabled Until Tomorrow");
+
+              styles [
+                "heading",
+              ]
+            }
+          }
+
+          Button button_undisable {
+            margin-top: 12;
+            margin-bottom: 12;
+            margin-start: 12;
+            margin-end: 12;
+
+            /* Translators: This cancels the redshift inhibit. */
+            label: _("Restart Filter");
+            name: "button_undisable";
+            can-focus: true;
+            receives-default: true;
+            valign: center;
+            clicked => $dialog_undisable_clicked_cb(template);
+          }
+        }
+
+        Adw.PreferencesPage night_light_settings {
+          description: _("Night light makes the screen color warmer. This can help to prevent eye strain and sleeplessness.");
+
+          Adw.PreferencesGroup {
+            Adw.SwitchRow night_light_toggle_row {
+              title: _("_Night Light");
+              use-underline: true;
+            }
+
+            Adw.ComboRow schedule_type_row {
+              title: _("_Schedule");
+              use-underline: true;
+              sensitive: bind night_light_toggle_row.active;
+              notify::selected => $on_schedule_type_row_selected_changed_cb(template);
+
+              model: StringList {
+                strings [
+                  _("Sunset to Sunrise"),
+                  _("Manual Schedule"),
+                ]
+              };
+            }
+
+            Adw.ActionRow {
+              title: _("_Times");
+              use-underline: true;
+              sensitive: bind night_light_toggle_row.active;
+
+              Box box_manual {
+                spacing: 6;
+                margin-top: 12;
+                margin-bottom: 12;
+
+                styles [
+                  "time-widget",
+                ]
+
+                Label {
+                  label: _("From");
+                  mnemonic-widget: spinbutton_from_hours;
+
+                  styles [
+                    "dim-label",
+                  ]
+                }
+
+                Box from_spinbuttons_box {
+                  spacing: 4;
+
+                  SpinButton spinbutton_from_hours {
+                    can-focus: true;
+                    max-width-chars: 2;
+                    text: "4";
+                    orientation: vertical;
+                    adjustment: adjustment_from_hours;
+                    numeric: true;
+                    wrap: true;
+                    value: 4;
+                    output => $dialog_format_from_hours_combobox(template);
+
+                    styles [
+                      "padded-spinbutton",
+                    ]
+
+                    accessibility {
+                      description: _("Hour");
+                    }
+                  }
+
+                  Label {
+                    label: _(":");
+                  }
+
+                  SpinButton spinbutton_from_minutes {
+                    can-focus: true;
+                    max-width-chars: 2;
+                    text: "0";
+                    orientation: vertical;
+                    adjustment: adjustment_from_minutes;
+                    numeric: true;
+                    wrap: true;
+                    output => $dialog_format_from_minutes_combobox(template);
+
+                    styles [
+                      "padded-spinbutton",
+                    ]
+
+                    accessibility {
+                      description: _("Minute");
+                    }
+                  }
+
+                  Stack stack_from {
+                    hhomogeneous: false;
+                    vhomogeneous: false;
+
+                    Button button_from_am {
+                      /* Translators: This is the short form for the time period in the morning */
+                      label: _("AM");
+                      can-focus: true;
+                      receives-default: true;
+                      valign: center;
+                      clicked => $dialog_am_pm_from_button_clicked_cb(template);
+
+                      styles [
+                        "unpadded-button",
+                      ]
+                    }
+
+                    Button button_from_pm {
+                      /* Translators: This is the short form for the time period in the afternoon */
+                      label: _("PM");
+                      can-focus: true;
+                      receives-default: true;
+                      valign: center;
+                      clicked => $dialog_am_pm_from_button_clicked_cb(template);
+
+                      styles [
+                        "unpadded-button",
+                      ]
+                    }
+                  }
+                }
+
+                Label {
+                  margin-start: 6;
+                  label: _("To");
+                  mnemonic-widget: spinbutton_to_hours;
+
+                  styles [
+                    "dim-label",
+                  ]
+                }
+
+                Box to_spinbuttons_box {
+                  spacing: 4;
+
+                  SpinButton spinbutton_to_hours {
+                    can-focus: true;
+                    max-width-chars: 2;
+                    text: "4";
+                    orientation: vertical;
+                    adjustment: adjustment_to_hours;
+                    numeric: true;
+                    wrap: true;
+                    value: 4;
+                    output => $dialog_format_to_hours_combobox(template);
+
+                    styles [
+                      "padded-spinbutton",
+                    ]
+
+                    accessibility {
+                      description: _("Hour");
+                    }
+                  }
+
+                  Label {
+                    label: _(":");
+                  }
+
+                  SpinButton spinbutton_to_minutes {
+                    can-focus: true;
+                    max-width-chars: 2;
+                    text: "0";
+                    orientation: vertical;
+                    adjustment: adjustment_to_minutes;
+                    numeric: true;
+                    wrap: true;
+                    output => $dialog_format_to_minutes_combobox(template);
+
+                    styles [
+                      "padded-spinbutton",
+                    ]
+
+                    accessibility {
+                      description: _("Minute");
+                    }
+                  }
+
+                  Stack stack_to {
+                    hhomogeneous: false;
+                    vhomogeneous: false;
+
+                    Button button_to_am {
+                      label: _("AM");
+                      can-focus: true;
+                      receives-default: true;
+                      valign: center;
+                      clicked => $dialog_am_pm_to_button_clicked_cb(template);
+
+                      styles [
+                        "unpadded-button",
+                      ]
+                    }
+
+                    Button button_to_pm {
+                      label: _("PM");
+                      can-focus: true;
+                      receives-default: true;
+                      valign: center;
+                      clicked => $dialog_am_pm_to_button_clicked_cb(template);
+
+                      styles [
+                        "unpadded-button",
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+
+            Adw.PreferencesRow {
+              activatable: false;
+              sensitive: bind night_light_toggle_row.active;
+
+              Box {
+                margin-start: 12;
+                margin-end: 12;
+                margin-top: 12;
+                margin-bottom: 12;
+                spacing: 6;
+                orientation: vertical;
+
+                Label title {
+                  label: _("_Color Temperature");
+                  use-underline: true;
+                  ellipsize: none;
+                  lines: 0;
+                  xalign: 0.0;
+
+                  styles [
+                    "title",
+                  ]
+                }
+
+                Scale scale_color_temperature {
+                  hexpand: true;
+                  width-request: 280;
+                  adjustment: adjustment_color_temperature;
+                  inverted: true;
+                  has-origin: false;
+
+                  styles [
+                    "night-light-temperature",
+                  ]
+
+                  marks [
+                    mark (1700),
+                    mark (2700),
+                    mark (3700),
+                    mark (4700),
+                  ]
+                }
+              }
+            }
+          }
+        }
+      };
+    }
+  }
+}
+
+Adjustment adjustment_from_hours {
+  upper: 23;
+  step-increment: 1;
+  page-increment: 10;
+  value-changed => $dialog_time_from_value_changed_cb(template);
+}
+
+Adjustment adjustment_from_minutes {
+  upper: 59;
+  step-increment: 1;
+  page-increment: 10;
+  value-changed => $dialog_time_from_value_changed_cb(template);
+}
+
+Adjustment adjustment_to_hours {
+  upper: 23;
+  step-increment: 1;
+  page-increment: 10;
+  value-changed => $dialog_time_to_value_changed_cb(template);
+}
+
+Adjustment adjustment_to_minutes {
+  upper: 59;
+  step-increment: 1;
+  page-increment: 10;
+  value-changed => $dialog_time_to_value_changed_cb(template);
+}
+
+Adjustment adjustment_color_temperature {
+  lower: 1700;
+  upper: 4700;
+  step-increment: 100;
+  page-increment: 500;
+  value-changed => $dialog_color_temperature_value_changed_cb(template);
+}

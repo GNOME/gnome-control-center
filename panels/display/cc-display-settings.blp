@@ -1,0 +1,106 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CcDisplaySettings: Box {
+  spacing: 18;
+  orientation: vertical;
+
+  ListBox enabled_listbox {
+    hexpand: true;
+    selection-mode: none;
+
+    styles [
+      "boxed-list",
+    ]
+
+    Adw.SwitchRow enabled_row {
+      notify::active => $on_enabled_row_active_changed_cb() swapped;
+    }
+  }
+
+  ListBox listbox {
+    hexpand: true;
+    selection-mode: none;
+
+    styles [
+      "boxed-list",
+    ]
+
+    Adw.ComboRow orientation_row {
+      width-request: 100;
+      title: C_("display setting", "_Orientation");
+      use-underline: true;
+      notify::selected-item => $on_orientation_selection_changed_cb() swapped;
+    }
+
+    Adw.ComboRow resolution_row {
+      width-request: 100;
+      title: C_("display setting", "_Resolution");
+      use-underline: true;
+      notify::selected-item => $on_resolution_selection_changed_cb() swapped;
+    }
+
+    Adw.ComboRow refresh_rate_row {
+      width-request: 100;
+      title: _("R_efresh Rate");
+      use-underline: true;
+      notify::selected-item => $on_refresh_rate_selection_changed_cb() swapped;
+    }
+
+    Adw.ExpanderRow refresh_rate_expander_row {
+      width-request: 100;
+      title: _("R_efresh Rate");
+      use-underline: true;
+
+      [suffix]
+      Label refresh_rate_expander_suffix_label {}
+
+      Adw.SwitchRow variable_refresh_rate_row {
+        width-request: 100;
+        title: _("_Variable Refresh Rate");
+        use-underline: true;
+        notify::active => $on_variable_refresh_rate_active_changed_cb() swapped;
+      }
+
+      Adw.ComboRow preferred_refresh_rate_row {
+        width-request: 100;
+        title: _("Re_fresh Rate");
+        use-underline: true;
+        selected: bind refresh_rate_row.selected no-sync-create bidirectional;
+      }
+    }
+
+    Adw.SwitchRow hdr_row {
+      width-request: 100;
+      title: _("_HDR (High Dynamic Range)");
+      use-underline: true;
+      notify::active => $on_hdr_row_active_changed_cb() swapped;
+    }
+
+    Adw.SwitchRow underscanning_row {
+      width-request: 100;
+      title: _("Adjust for _TV");
+      use-underline: true;
+      notify::active => $on_underscanning_row_active_changed_cb() swapped;
+    }
+
+    Adw.ActionRow scale_buttons_row {
+      width-request: 100;
+      title: C_("display setting", "_Scale");
+      use-underline: true;
+
+      Adw.ToggleGroup scale_toggle_group {
+        valign: center;
+        homogeneous: true;
+        notify::active => $on_scale_btn_active_changed_cb(template);
+      }
+    }
+
+    Adw.ComboRow scale_combo_row {
+      width-request: 100;
+      title: C_("display setting", "_Scale");
+      use-underline: true;
+      notify::selected-item => $on_scale_selection_changed_cb() swapped;
+    }
+  }
+}

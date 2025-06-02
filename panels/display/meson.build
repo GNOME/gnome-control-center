@@ -10,6 +10,23 @@ i18n.merge_file(
   install_dir: control_center_desktopdir
 )
 
+blueprints = custom_target(
+  'blueprints',
+  input: files(
+    'cc-display-panel.blp',
+    'cc-display-settings.blp',
+    'cc-night-light-page.blp',
+  ),
+  output: '.',
+  command: [
+    blueprint_compiler,
+    'batch-compile',
+    '@OUTPUT@',
+    '@CURRENT_SOURCE_DIR@',
+    '@INPUT@',
+  ],
+)
+
 sources = files(
   'cc-display-panel.c',
   'cc-display-arrangement.c',
@@ -26,7 +43,8 @@ sources += gnome.compile_resources(
   cappletname + '.gresource.xml',
   source_dir: ['.', 'icons'],
   c_name: 'cc_' + cappletname,
-  export: true
+  export: true,
+  dependencies: blueprints,
 )
 
 deps = common_deps + [
