@@ -81,6 +81,22 @@ cc_locale_row_dispose (GObject *object)
 }
 
 static void
+cc_locale_row_state_flags_changed (GtkWidget     *widget,
+                                   GtkStateFlags  previous_state_flags)
+{
+  CcLocaleRow *self = CC_LOCALE_ROW (widget);
+  gboolean is_selected;
+
+  is_selected = !!(gtk_widget_get_state_flags (widget) & GTK_STATE_FLAG_SELECTED);
+
+  gtk_accessible_update_state (GTK_ACCESSIBLE (self),
+                               GTK_ACCESSIBLE_STATE_CHECKED, is_selected,
+                               -1);
+
+  GTK_WIDGET_CLASS (cc_locale_row_parent_class)->state_flags_changed (widget, previous_state_flags);
+}
+
+static void
 cc_locale_row_class_init (CcLocaleRowClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
@@ -88,11 +104,9 @@ cc_locale_row_class_init (CcLocaleRowClass *klass)
 
   object_class->dispose = cc_locale_row_dispose;
 
-  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/common/cc-locale-row.ui");
+  widget_class->state_flags_changed = cc_locale_row_state_flags_changed;
 
-  gtk_widget_class_bind_template_child (widget_class, CcLocaleRow, check_image);
-  gtk_widget_class_bind_template_child (widget_class, CcLocaleRow, country_label);
-  gtk_widget_class_bind_template_child (widget_class, CcLocaleRow, language_label);
+  gtk_widget_class_set_accessible_role (widget_class, GTK_ACCESSIBLE_ROLE_RADIO);
 }
 
 static void
