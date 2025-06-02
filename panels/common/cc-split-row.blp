@@ -1,0 +1,165 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CcSplitRow: $CcContentRow {
+  [content]
+  Box box {
+    hexpand: true;
+    homogeneous: true;
+    spacing: 24;
+
+    Box {
+      orientation: vertical;
+
+      EventControllerMotion {
+        enter => $on_option_focus_enter_cb(default_option_mask);
+        leave => $on_option_focus_leave_cb(default_option_mask);
+      }
+
+      GestureClick {
+        released => $gtk_widget_activate(default_option_checkbutton);
+      }
+
+      Adw.Bin {
+        styles [
+          "background",
+          "frame",
+        ]
+
+        Picture default_option_picture {
+          hexpand: true;
+          halign: center;
+          margin-top: 18;
+          margin-bottom: 18;
+          margin-start: 6;
+          margin-end: 6;
+          height-request: 128;
+
+          paintable: $CcMaskPaintable default_option_mask {
+            follow-accent: true;
+          };
+        }
+      }
+
+      CheckButton default_option_checkbutton {
+        margin-start: 6;
+        group: alternative_option_checkbutton;
+        toggled => $on_checkbutton_toggled_cb(template);
+
+        child: Box {
+          valign: center;
+          margin-start: 6;
+          orientation: vertical;
+
+          styles [
+            "title",
+          ]
+
+          Label {
+            use-underline: true;
+            xalign: 0.0;
+            wrap: true;
+            wrap-mode: word_char;
+            label: bind template.default-option-title;
+
+            styles [
+              "title",
+            ]
+          }
+
+          Label {
+            xalign: 0.0;
+            wrap: true;
+            wrap-mode: word_char;
+            label: bind template.default-option-subtitle;
+
+            styles [
+              "subtitle",
+            ]
+          }
+        };
+      }
+    }
+
+    Box {
+      orientation: vertical;
+
+      EventControllerMotion {
+        enter => $on_option_focus_enter_cb(alternative_option_mask);
+        leave => $on_option_focus_leave_cb(alternative_option_mask);
+      }
+
+      GestureClick {
+        released => $gtk_widget_activate(alternative_option_checkbutton);
+      }
+
+      Adw.Bin {
+        styles [
+          "background",
+          "frame",
+        ]
+
+        Picture alternative_option_picture {
+          hexpand: true;
+          halign: center;
+          margin-top: 18;
+          margin-bottom: 18;
+          margin-start: 6;
+          margin-end: 6;
+          height-request: 128;
+
+          paintable: $CcMaskPaintable alternative_option_mask {
+            follow-accent: true;
+          };
+        }
+      }
+
+      CheckButton alternative_option_checkbutton {
+        margin-start: 6;
+        toggled => $on_checkbutton_toggled_cb(template);
+
+        child: Box {
+          valign: center;
+          margin-start: 6;
+          orientation: vertical;
+
+          styles [
+            "title",
+          ]
+
+          Label {
+            use-underline: true;
+            xalign: 0.0;
+            wrap: true;
+            wrap-mode: word_char;
+            label: bind template.alternative-option-title;
+
+            styles [
+              "title",
+            ]
+          }
+
+          Label {
+            xalign: 0.0;
+            wrap: true;
+            wrap-mode: word_char;
+            label: bind template.alternative-option-subtitle;
+
+            styles [
+              "subtitle",
+            ]
+          }
+        };
+      }
+    }
+  }
+}
+
+SizeGroup size_group {
+  mode: both;
+
+  widgets [
+    default_option_checkbutton,
+    alternative_option_checkbutton,
+  ]
+}
