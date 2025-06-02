@@ -1,0 +1,70 @@
+using Gtk 4.0;
+
+Window dialog_calibrate {
+  margin-top: 32;
+  margin-bottom: 32;
+  margin-start: 12;
+  margin-end: 12;
+  title: _("Display Calibration");
+  deletable: false;
+
+  styles [
+    "cc-color-calibrate-window",
+  ]
+
+  Box dialog-vbox4 {
+    orientation: vertical;
+    spacing: 12;
+
+    Box dialog-action_area1 {
+      Button button_cancel {
+        label: _("_Cancel");
+        use-underline: true;
+      }
+
+      Button button_start {
+        /* Translators: This starts the calibration process */
+        label: _("_Start");
+        use-underline: true;
+      }
+
+      Button button_resume {
+        /* Translators: This resumes the calibration process */
+        label: _("_Resume");
+        use-underline: true;
+      }
+
+      Button button_done {
+        /* Translators: This button returns the user back to the color control panel */
+        label: _("_Done");
+        use-underline: true;
+      }
+    }
+
+    Box vbox_status {
+      halign: center;
+      valign: center;
+      hexpand: true;
+      vexpand: true;
+      orientation: vertical;
+      spacing: 15;
+
+      Image image_status {
+        valign: end;
+        pixel-size: 192;
+        icon-name: "address-book-new";
+      }
+
+      Label label_status {
+        valign: start;
+        label: _("Do not disturb the calibration device while in progress");
+        justify: center;
+        wrap: true;
+      }
+
+      ProgressBar progressbar_status {}
+    }
+  }
+}
+
+SizeGroup sizegroup_sample {}
