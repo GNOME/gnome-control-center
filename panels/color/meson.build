@@ -10,6 +10,23 @@ i18n.merge_file(
   install_dir: control_center_desktopdir
 )
 
+blueprints = custom_target(
+  'blueprints',
+  input: files(
+    'cc-color-calibrate.blp',
+    'cc-color-device.blp',
+    'cc-color-profile.blp',
+  ),
+  output: '.',
+  command: [
+    blueprint_compiler,
+    'batch-compile',
+    '@OUTPUT@',
+    '@CURRENT_SOURCE_DIR@',
+    '@INPUT@',
+  ],
+)
+
 sources = files(
   'cc-color-panel.c',
   'cc-color-calibrate.c',
@@ -23,7 +40,8 @@ sources += gnome.compile_resources(
   'cc-' + cappletname + '-resources',
   cappletname + '.gresource.xml',
   c_name: 'cc_' + cappletname,
-  export: true
+  export: true,
+  dependencies: blueprints,
 )
 
 deps = common_deps + [
