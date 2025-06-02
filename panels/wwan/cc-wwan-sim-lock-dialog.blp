@@ -1,0 +1,205 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CcWwanSimLockDialog: Dialog {
+  default-height: 480;
+  default-width: 360;
+  hide-on-close: true;
+  modal: true;
+  title: _("SIM Lock");
+
+  [titlebar]
+  HeaderBar {
+    [end]
+    Stack button_stack {
+      StackPage {
+        name: "next";
+
+        child: Button next_button {
+          sensitive: false;
+          use-underline: true;
+          label: _("_Next");
+          clicked => $cc_wwan_pin_next_clicked_cb() swapped;
+
+          styles [
+            "suggested-action",
+          ]
+        };
+      }
+
+      StackPage {
+        name: "apply";
+
+        child: Button apply_button {
+          use-underline: true;
+          clicked => $cc_wwan_pin_apply_clicked_cb() swapped;
+
+          styles [
+            "suggested-action",
+          ]
+        };
+      }
+    }
+  }
+
+  Box {
+    width-request: 340;
+    height-request: 360;
+
+    Adw.Clamp {
+      margin-top: 32;
+      margin-bottom: 32;
+      margin-start: 18;
+      margin-end: 18;
+
+      Adw.ToastOverlay toast_overlay {
+        child: Stack pin_settings_stack {
+          transition-type: slide_left;
+
+          StackPage {
+            name: "pin-settings";
+
+            child: Box {
+              orientation: vertical;
+
+              ListBox {
+                selection-mode: none;
+                margin-bottom: 18;
+
+                styles [
+                  "frame",
+                ]
+
+                Adw.SwitchRow lock_row {
+                  use-underline: true;
+                  title: _("_Lock SIM with PIN");
+                  notify::active => $cc_wwan_sim_lock_changed_cb() swapped;
+                }
+              }
+
+              Grid lock_change_grid {
+                visible: false;
+                row-spacing: 18;
+                column-spacing: 12;
+
+                Label lock_change_title {
+                  label: _("Change PIN");
+                  margin-bottom: 9;
+                  xalign: 0.0;
+
+                  styles [
+                    "heading",
+                  ]
+
+                  layout {
+                    column: "0";
+                    row: "0";
+                    column-span: "2";
+                  }
+                }
+
+                Label {
+                  label: _("New PIN");
+                  halign: end;
+                  mnemonic-widget: new_pin_entry;
+
+                  layout {
+                    column: "0";
+                    row: "1";
+                  }
+                }
+
+                Entry new_pin_entry {
+                  visibility: false;
+                  input-purpose: password;
+                  input-hints: no_emoji;
+                  max-length: 8;
+                  max-width-chars: 32;
+                  notify::text => $cc_wwan_pin_entry_changed_cb() swapped;
+                  insert-text => $cc_wwan_pin_entry_text_inserted_cb() swapped;
+
+                  layout {
+                    column: "1";
+                    row: "1";
+                  }
+                }
+
+                Label {
+                  label: _("Confirm");
+                  halign: end;
+                  mnemonic-widget: pin_confirm_entry;
+
+                  layout {
+                    column: "0";
+                    row: "2";
+                  }
+                }
+
+                Entry pin_confirm_entry {
+                  visibility: false;
+                  input-purpose: password;
+                  input-hints: no_emoji;
+                  max-length: 8;
+                  max-width-chars: 32;
+                  notify::text => $cc_wwan_pin_entry_changed_cb() swapped;
+                  insert-text => $cc_wwan_pin_entry_changed_cb() swapped;
+
+                  layout {
+                    column: "1";
+                    row: "2";
+                  }
+                }
+              }
+            };
+          }
+
+          StackPage {
+            name: "pin-entry";
+
+            child: Box {
+              orientation: vertical;
+              hexpand: true;
+              vexpand: true;
+              valign: center;
+              halign: center;
+
+              Image {
+                pixel-size: 128;
+                icon-name: "dialog-password-symbolic";
+              }
+
+              Label {
+                label: _("Enter current PIN to change SIM lock settings");
+                margin-bottom: 24;
+                halign: center;
+                mnemonic-widget: pin_entry;
+
+                styles [
+                  "dim-label",
+                ]
+              }
+
+              Entry pin_entry {
+                visibility: false;
+                input-purpose: password;
+                input-hints: no_emoji;
+                max-length: 8;
+                max-width-chars: 32;
+                notify::text => $cc_wwan_pin_entered_cb() swapped;
+                insert-text => $cc_wwan_pin_entry_text_inserted_cb() swapped;
+                activate => $cc_wwan_pin_apply_clicked_cb() swapped;
+              }
+            };
+          }
+        };
+      }
+    }
+  }
+
+  [action response=cancel]
+  Button cancel_button {
+    use-underline: true;
+    label: _("_Cancel");
+    clicked => $gtk_widget_hide() swapped;
+  }
+}

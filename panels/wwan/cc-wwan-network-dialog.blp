@@ -1,0 +1,109 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CcWwanNetworkDialog: Dialog {
+  title: _("Network");
+  default-height: 480;
+  default-width: 360;
+  hide-on-close: true;
+  modal: true;
+
+  Box {
+    width-request: 340;
+    height-request: 360;
+
+    Adw.ToastOverlay toast_overlay {
+      hexpand: true;
+
+      child: Box {
+        margin-start: 12;
+        margin-end: 12;
+        margin-top: 18;
+        margin-bottom: 18;
+        orientation: vertical;
+
+        ListBox {
+          selection-mode: none;
+          margin-bottom: 18;
+
+          styles [
+            "boxed-list",
+          ]
+
+          Adw.SwitchRow automatic_row {
+            use-underline: true;
+            title: _("_Automatic");
+            notify::active => $cc_wwan_auto_network_changed_cb() swapped;
+          }
+        }
+
+        Box network_search_title {
+          visible: bind automatic_row.active inverted;
+          margin-bottom: 9;
+          spacing: 6;
+
+          Label {
+            label: _("Choose Network");
+            xalign: 0.0;
+
+            styles [
+              "heading",
+            ]
+          }
+
+          Adw.Spinner loading_spinner {
+            visible: false;
+          }
+
+          Button refresh_button {
+            icon-name: "view-refresh-symbolic";
+            clicked => $cc_wwan_network_dialog_refresh_networks() swapped;
+
+            accessibility {
+              label: _("Refresh Network Providers");
+            }
+          }
+        }
+
+        ScrolledWindow {
+          hscrollbar-policy: never;
+          propagate-natural-height: true;
+          visible: bind operator_list_box.visible;
+
+          styles [
+            "frame",
+          ]
+
+          child: ListBox operator_list_box {
+            visible: false;
+            sensitive: false;
+            selection-mode: none;
+            row-activated => $cc_wwan_network_changed_cb() swapped;
+
+            styles [
+              "boxed-list",
+            ]
+          };
+        }
+      };
+    }
+  }
+
+  [action response=cancel]
+  Button button_cancel {
+    use-underline: true;
+    label: _("_Cancel");
+    clicked => $gtk_widget_hide() swapped;
+  }
+
+  [action response=apply default]
+  Button button_apply {
+    use-underline: true;
+    label: _("_Set");
+    clicked => $cc_wwan_network_dialog_apply_clicked_cb() swapped;
+
+    styles [
+      "suggested-action ",
+    ]
+  }
+}

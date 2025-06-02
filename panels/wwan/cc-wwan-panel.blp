@@ -1,0 +1,116 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CcWwanPanel: $CcPanel {
+  child: Adw.ToolbarView {
+    [top]
+    Adw.HeaderBar {
+      [end]
+      Switch enable_switch {
+        accessibility {
+          label: _("Enable Mobile Network");
+        }
+      }
+    }
+
+    content: Adw.ToastOverlay toast_overlay {
+      child: ScrolledWindow {
+        hscrollbar-policy: never;
+        min-content-height: 500;
+
+        Adw.Clamp {
+          margin-top: 0;
+          margin-bottom: 32;
+          margin-start: 18;
+          margin-end: 18;
+
+          Box {
+            hexpand: true;
+            orientation: vertical;
+
+            Stack main_stack {
+              vhomogeneous: false;
+              hhomogeneous: false;
+              transition-type: crossfade;
+
+              StackPage {
+                name: "no-wwan-devices";
+
+                child: Adw.StatusPage {
+                  icon-name: "network-cellular-offline-symbolic";
+                  title: _("No WWAN Adapter Found");
+                  description: _("Make sure you have a Wireless Wan/Cellular device");
+                  vexpand: true;
+                };
+              }
+
+              StackPage {
+                name: "airplane-mode";
+
+                child: Adw.StatusPage {
+                  icon-name: "airplane-mode-symbolic";
+                  title: _("Airplane Mode On");
+                  description: _("Wireless Wan is disabled when airplane mode is on");
+                  vexpand: true;
+
+                  child: Button {
+                    halign: center;
+                    use-underline: true;
+                    label: _("_Turn Off Airplane Mode");
+                    clicked => $wwan_on_airplane_off_clicked_cb() swapped;
+
+                    styles [
+                      "pill",
+                      "suggested-action",
+                    ]
+                  };
+                };
+              }
+
+              StackPage {
+                name: "device-settings";
+
+                child: Box {
+                  orientation: vertical;
+
+                  Revealer multi_device_revealer {
+                    margin-top: 18;
+
+                    child: Box {
+                      orientation: vertical;
+
+                      ListBox data_sim_select_listbox {
+                        margin-bottom: 32;
+
+                        styles [
+                          "boxed-list",
+                        ]
+
+                        Adw.ComboRow data_list_row {
+                          title: _("Data Connection");
+                          subtitle: _("SIM card used for internet");
+                          notify::selected-item => $wwan_data_list_selected_sim_changed_cb() swapped;
+                        }
+                      }
+
+                      StackSwitcher devices_switcher {
+                        stack: devices_stack;
+                        hexpand: true;
+                        halign: center;
+                      }
+                    };
+                  }
+
+                  Stack devices_stack {
+                    vhomogeneous: false;
+                    hhomogeneous: false;
+                  }
+                };
+              }
+            }
+          }
+        }
+      };
+    };
+  };
+}
