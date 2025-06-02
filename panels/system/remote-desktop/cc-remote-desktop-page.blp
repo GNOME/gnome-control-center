@@ -1,0 +1,55 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CcRemoteDesktopPage: Adw.NavigationPage {
+  title: _("Remote Desktop");
+  tag: "remote-desktop";
+  visible: bind desktop_sharing_page.visible;
+
+  child: Adw.BreakpointBin {
+    width-request: 300;
+    height-request: 200;
+
+    Adw.Breakpoint {
+      condition ("max-width: 450sp")
+
+      setters {
+        header_bar.title-widget: null;
+        view_switcher_bar.reveal: true;
+      }
+    }
+
+    child: Adw.ToolbarView {
+      [top]
+      Adw.HeaderBar header_bar {
+        title-widget: Adw.ViewSwitcher {
+          stack: stack;
+          policy: wide;
+        };
+      }
+
+      [bottom]
+      Adw.ViewSwitcherBar view_switcher_bar {
+        stack: stack;
+      }
+
+      content: Adw.ViewStack stack {
+        Adw.ViewStackPage {
+          title: _("Desktop _Sharing");
+          use-underline: true;
+          icon-name: "org.gnome.Settings-desktop-sharing-symbolic";
+
+          child: $CcDesktopSharingPage desktop_sharing_page {};
+        }
+
+        Adw.ViewStackPage {
+          title: _("Remote _Login");
+          use-underline: true;
+          icon-name: "org.gnome.Settings-remote-desktop-symbolic";
+
+          child: $CcRemoteLoginPage remote_login_page {};
+        }
+      };
+    };
+  };
+}

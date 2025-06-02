@@ -1,0 +1,41 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CcUsersPage: Adw.NavigationPage {
+  tag: "users";
+
+  child: Adw.NavigationView navigation {
+    $CcUserPage current_user_page {
+      title: _("Users");
+
+      Adw.PreferencesGroup other_users_group {
+        visible: false;
+        title: _("Other Users");
+
+        ListBox user_list {
+          selection-mode: none;
+          row-activated => $on_user_row_activated(template);
+
+          styles [
+            "boxed-list",
+          ]
+        }
+      }
+
+      Adw.ButtonRow add_user_button_row {
+        title: _("_Add User");
+        end-icon-name: "go-next-symbolic";
+        use-underline: true;
+        activated => $add_user(template);
+      }
+
+      Adw.ButtonRow add_enterprise_user_button_row {
+        visible: false;
+        title: _("Add _Enterprise Login");
+        use-underline: true;
+        end-icon-name: "go-next-symbolic";
+        activated => $add_enterprise_user(template);
+      }
+    }
+  };
+}

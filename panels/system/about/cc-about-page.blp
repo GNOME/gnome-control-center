@@ -1,0 +1,91 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CcAboutPage: Adw.NavigationPage {
+  title: _("About");
+  tag: "about";
+
+  child: Adw.ToolbarView {
+    [top]
+    Adw.HeaderBar {}
+
+    content: Adw.PreferencesPage {
+      Adw.PreferencesGroup {
+        Adw.Clamp {
+          orientation: vertical;
+          maximum-size: 192;
+          tightening-threshold: 192;
+
+          child: Picture os_logo {
+            can-shrink: false;
+            content-fit: scale_down;
+            alternative-text: _("System Logo");
+          };
+        }
+      }
+
+      Adw.PreferencesGroup {
+        $CcHostnameEntry hostname_row {
+          title: _("_Device Name");
+          use-underline: true;
+        }
+      }
+
+      Adw.PreferencesGroup {
+        Adw.ActionRow os_name_row {
+          /* Translators: this field contains the distro name and version */
+          title: _("Operating System");
+          subtitle-selectable: true;
+
+          styles [
+            "property",
+          ]
+        }
+
+        Adw.ActionRow hardware_model_row {
+          visible: false;
+          title: _("Hardware Model");
+          subtitle-selectable: true;
+
+          styles [
+            "property",
+          ]
+        }
+
+        Adw.ActionRow processor_row {
+          title: _("Processor");
+          subtitle-selectable: true;
+
+          styles [
+            "property",
+          ]
+        }
+
+        Adw.ActionRow memory_row {
+          title: _("Memory");
+          subtitle-selectable: true;
+
+          styles [
+            "property",
+          ]
+        }
+
+        Adw.ActionRow disk_row {
+          title: _("Disk Capacity");
+          subtitle: _("Calculating…");
+          subtitle-selectable: true;
+
+          styles [
+            "property",
+          ]
+        }
+
+        $CcListRow {
+          title: _("_System Details");
+          show-arrow: true;
+          activated => $cc_about_page_open_system_details() swapped;
+        }
+      }
+    };
+  };
+}

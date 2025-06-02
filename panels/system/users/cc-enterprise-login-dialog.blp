@@ -1,0 +1,149 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CcEnterpriseLoginDialog: Adw.Dialog {
+  content-width: 600;
+  content-height: 540;
+
+  Adw.ToastOverlay toast_overlay {
+    Adw.NavigationView navigation {
+      pop-on-escape: false;
+
+      Adw.NavigationPage offline_page {
+        title: _("Add Enterprise Login");
+
+        child: Adw.ToolbarView {
+          [top]
+          Adw.HeaderBar {}
+
+          content: Adw.StatusPage {
+            icon-name: "network-offline-symbolic";
+            title: _("Offline");
+            description: _("A network connection is needed to add enterprise login accounts.");
+          };
+        };
+      }
+
+      Adw.NavigationPage main_page {
+        title: _("Add Enterprise Login");
+
+        child: Adw.ToolbarView {
+          [top]
+          Adw.HeaderBar {
+            show-back-button: false;
+            show-end-title-buttons: false;
+            show-start-title-buttons: false;
+
+            [start]
+            Button cancel_button {
+              label: _("_Cancel");
+              use-underline: true;
+              clicked => $adw_dialog_close(template);
+            }
+
+            [end]
+            Button add_button {
+              sensitive: false;
+              label: _("_Add");
+              use-underline: true;
+              clicked => $on_add_button_clicked_cb(template);
+
+              styles [
+                "suggested-action",
+              ]
+            }
+
+            [end]
+            Adw.Spinner main_page_spinner {
+              visible: false;
+            }
+          }
+
+          content: Adw.PreferencesPage main_preferences_page {
+            description: _("Enterprise login allows an existing centrally managed account to be used on this device.");
+
+            Adw.PreferencesGroup {
+              Adw.EntryRow domain_row {
+                title: _("_Domain");
+                use-underline: true;
+                changed => $main_page_validate(template);
+                changed => $on_domain_entry_changed_cb(template);
+              }
+
+              $CcEntryFeedback domain_feedback {
+                default-text: _("Should match the web domain of the account provider");
+                default-icon-name: "info-outline-symbolic";
+              }
+            }
+
+            Adw.PreferencesGroup {
+              Adw.EntryRow username_row {
+                title: _("_Username");
+                use-underline: true;
+                changed => $main_page_validate(template);
+              }
+
+              Adw.PasswordEntryRow password_row {
+                title: _("_Password");
+                use-underline: true;
+                changed => $main_page_validate(template);
+              }
+            }
+          };
+        };
+      }
+
+      Adw.NavigationPage enroll_page {
+        title: _("Enroll Device");
+
+        child: Adw.ToolbarView {
+          [top]
+          Adw.HeaderBar {
+            show-end-title-buttons: false;
+            show-start-title-buttons: false;
+
+            [end]
+            Button enroll_button {
+              sensitive: false;
+              label: _("_Enroll");
+              use-underline: true;
+              clicked => $on_enroll_button_clicked_cb(template);
+
+              styles [
+                "suggested-action",
+              ]
+            }
+
+            [end]
+            Adw.Spinner enroll_page_spinner {
+              visible: false;
+            }
+          }
+
+          content: Adw.PreferencesPage enroll_preferences_page {
+            Adw.PreferencesGroup {
+              Adw.EntryRow admin_name_row {
+                title: _("Administrator _Name");
+                use-underline: true;
+                changed => $enroll_page_validate(template);
+              }
+
+              Adw.PasswordEntryRow admin_password_row {
+                title: _("Administrator _Password");
+                use-underline: true;
+                changed => $enroll_page_validate(template);
+              }
+            }
+          };
+        };
+      }
+    }
+  }
+}
+
+SizeGroup {
+  widgets [
+    add_button,
+    cancel_button,
+  ]
+}

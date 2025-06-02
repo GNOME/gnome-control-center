@@ -1,0 +1,95 @@
+using Gtk 4.0;
+
+template ListItem {
+  child: Grid {
+    margin-start: 12;
+    margin-end: 12;
+    margin-top: 12;
+    margin-bottom: 12;
+    row-spacing: 6;
+    column-spacing: 6;
+
+    Label {
+      ellipsize: end;
+      xalign: 0;
+
+      styles [
+        "title",
+      ]
+
+      label: bind template.item as <$CcTzItem>.name;
+
+      layout {
+        column: "0";
+        row: "0";
+      }
+    }
+
+    Label {
+      hexpand: true;
+      ellipsize: end;
+      xalign: 0;
+
+      styles [
+        "heading",
+      ]
+
+      label: bind template.item as <$CcTzItem>.country;
+
+      layout {
+        column: "1";
+        row: "0";
+      }
+    }
+
+    Box {
+      spacing: 3;
+
+      styles [
+        "caption",
+        "dim-label",
+      ]
+
+      layout {
+        column: "0";
+        row: "1";
+        column-span: "2";
+      }
+
+      Label {
+        xalign: 0;
+        ellipsize: end;
+        label: bind template.item as <$CcTzItem>.zone;
+      }
+
+      Label {
+        margin-start: 3;
+        margin-end: 3;
+        label: "•";
+      }
+
+      Label {
+        xalign: 0;
+        label: bind template.item as <$CcTzItem>.offset;
+      }
+    }
+
+    Label {
+      xalign: 0;
+      halign: end;
+
+      styles [
+        "dim-label",
+        "numeric",
+      ]
+
+      label: bind template.item as <$CcTzItem>.time;
+
+      layout {
+        column: "2";
+        row: "0";
+        row-span: "2";
+      }
+    }
+  };
+}

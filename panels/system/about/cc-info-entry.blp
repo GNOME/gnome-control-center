@@ -1,0 +1,30 @@
+using Gtk 4.0;
+
+template $CcInfoEntry: Box {
+  accessible-role: group;
+  orientation: vertical;
+
+  accessibility {
+    labelled-by: [
+      prop,
+    ];
+
+    label: "Info entry";
+  }
+
+  Label prop {
+    halign: start;
+
+    styles [
+      "dim-label",
+      "caption",
+    ]
+  }
+
+  Label value {
+    halign: start;
+    selectable: true;
+    wrap: true;
+    xalign: 0;
+  }
+}

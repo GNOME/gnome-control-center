@@ -1,0 +1,139 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CcRemoteLoginPage: Adw.Bin {
+  Adw.ToastOverlay toast_overlay {
+    child: Box {
+      orientation: vertical;
+
+      $CcPermissionInfobar permission_infobar {}
+
+      Adw.PreferencesPage {
+        Adw.PreferencesGroup {
+          Label {
+            label: _("Remotely connect to your user account when it isn’t being used. The display resolution can be set from the remote.");
+            hexpand: true;
+            justify: center;
+            wrap: true;
+
+            styles [
+              "dim-label",
+            ]
+          }
+        }
+
+        Adw.PreferencesGroup {
+          Adw.SwitchRow remote_login_row {
+            title: _("_Remote Login");
+            use-underline: true;
+          }
+        }
+
+        Adw.PreferencesGroup {
+          title: _("How to Connect");
+          description: _("Use a remote desktop app to connect using the RDP protocol. Additional information about the device’s network location may also be required.");
+
+          Adw.ActionRow hostname_row {
+            title: _("_Hostname");
+            use-underline: true;
+
+            styles [
+              "property",
+            ]
+
+            [suffix]
+            Button {
+              tooltip-text: _("Copy");
+              valign: center;
+              icon-name: "edit-copy-symbolic";
+              clicked => $on_address_copy_clicked() swapped;
+
+              styles [
+                "flat",
+              ]
+            }
+          }
+
+          Adw.ActionRow port_row {
+            title: _("_Port");
+            subtitle: "—";
+            use-underline: true;
+
+            styles [
+              "property",
+            ]
+
+            [suffix]
+            Button {
+              tooltip-text: _("Copy");
+              valign: center;
+              icon-name: "edit-copy-symbolic";
+              clicked => $on_port_copy_clicked() swapped;
+
+              styles [
+                "flat",
+              ]
+            }
+          }
+        }
+
+        Adw.PreferencesGroup credentials_group {
+          title: _("Login Details");
+
+          Adw.EntryRow username_entry {
+            title: _("_Username");
+            use-underline: true;
+
+            [suffix]
+            Button {
+              tooltip-text: _("Copy");
+              valign: center;
+              icon-name: "edit-copy-symbolic";
+              clicked => $on_username_copy_clicked() swapped;
+
+              styles [
+                "flat",
+              ]
+            }
+          }
+
+          Adw.PasswordEntryRow password_entry {
+            title: _("P_assword");
+            use-underline: true;
+
+            [suffix]
+            Button {
+              tooltip-text: _("Copy");
+              valign: center;
+              icon-name: "edit-copy-symbolic";
+              clicked => $on_password_copy_clicked() swapped;
+
+              styles [
+                "flat",
+              ]
+            }
+          }
+        }
+
+        Adw.PreferencesGroup {
+          sensitive: bind credentials_group.sensitive no-sync-create;
+          separate-rows: true;
+
+          Adw.ButtonRow generate_password_button_row {
+            sensitive: false;
+            title: _("_Generate New Password");
+            use-underline: true;
+            activated => $on_generate_password_button_row_activated() swapped;
+          }
+
+          Adw.ButtonRow verify_encryption_button_row {
+            sensitive: false;
+            title: _("_Verify Encryption");
+            use-underline: true;
+            activated => $on_verify_encryption_button_row_activated() swapped;
+          }
+        }
+      }
+    };
+  }
+}

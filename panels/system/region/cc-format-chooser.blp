@@ -1,0 +1,162 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CcFormatChooser: Adw.Dialog {
+  title: _("Formats");
+  content-width: 768;
+  content-height: 600;
+  width-request: 360;
+  height-request: 200;
+  focus-widget: region_filter_entry;
+
+  Adw.Breakpoint {
+    condition ("max-width: 550sp")
+
+    setters {
+      split_view.collapsed: true;
+    }
+  }
+
+  child: Adw.ToolbarView {
+    top-bar-style: raised;
+
+    [top]
+    Adw.HeaderBar {
+      show-end-title-buttons: false;
+      show-start-title-buttons: false;
+
+      [start]
+      Button {
+        valign: center;
+        use-underline: true;
+        label: _("_Cancel");
+        clicked => $adw_dialog_close(template);
+      }
+
+      [end]
+      Button {
+        valign: center;
+        use-underline: true;
+        label: _("_Select");
+        clicked => $select_button_clicked_cb(template);
+
+        styles [
+          "suggested-action",
+        ]
+      }
+    }
+
+    content: Adw.OverlaySplitView split_view {
+      sidebar-position: end;
+      notify::collapsed => $collapsed_cb(template);
+
+      content: Adw.ToolbarView {
+        [top]
+        Adw.Bin {
+          styles [
+            "toolbar",
+          ]
+
+          SearchBar search_bar {
+            search-mode-enabled: true;
+
+            child: Adw.Clamp {
+              maximum-size: 400;
+
+              SearchEntry region_filter_entry {
+                hexpand: true;
+                placeholder-text: _("Search locales");
+                search-changed => $filter_changed(template);
+                stop-search => $on_stop_search(template);
+              }
+            };
+          }
+        }
+
+        content: Stack region_list_stack {
+          StackPage {
+            name: "region_list_page";
+
+            child: Adw.PreferencesPage {
+              Adw.PreferencesGroup common_region_group {
+                title: _("Common Formats");
+
+                ListBox common_region_listbox {
+                  selection-mode: none;
+                  row-activated => $row_activated(template);
+
+                  styles [
+                    "boxed-list",
+                  ]
+                }
+              }
+
+              Adw.PreferencesGroup region_group {
+                title: _("All Formats");
+
+                ListBox region_listbox {
+                  selection-mode: none;
+                  row-activated => $row_activated(template);
+
+                  styles [
+                    "boxed-list",
+                  ]
+                }
+              }
+            };
+          }
+
+          StackPage {
+            name: "empty_results_page";
+
+            child: Adw.StatusPage empty_results_page {
+              icon-name: "edit-find-symbolic";
+              title: _("No Results Found");
+              description: _("Try a different search");
+            };
+          }
+        };
+      };
+
+      sidebar: Adw.PreferencesPage {
+        Adw.PreferencesGroup {
+          CenterBox {
+            [center]
+            Label preview_title_label {
+              halign: center;
+              hexpand: true;
+              xalign: 0;
+              justify: center;
+              wrap: true;
+              label: _("Preview");
+
+              styles [
+                "title-4",
+              ]
+            }
+
+            [end]
+            Button close_sidebar_button {
+              icon-name: "window-close-symbolic";
+              tooltip-text: _("Close Preview");
+              visible: bind split_view.collapsed;
+              valign: center;
+              margin-start: 12;
+              margin-end: 12;
+              clicked => $format_chooser_close_sidebar_button_pressed_cb(template);
+
+              styles [
+                "flat",
+                "circular",
+              ]
+            }
+          }
+        }
+
+        $CcFormatPreview format_preview {
+          width-request: "300";
+        }
+      };
+    };
+  };
+}

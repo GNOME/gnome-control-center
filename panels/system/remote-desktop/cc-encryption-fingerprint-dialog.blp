@@ -1,0 +1,44 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CcEncryptionFingerprintDialog: Adw.Dialog {
+  content-width: 360;
+
+  child: Adw.ToolbarView {
+    [top]
+    Adw.HeaderBar {
+      show-title: false;
+    }
+
+    content: Adw.StatusPage {
+      title: _("Encryption Fingerprint");
+      description: _("The encryption fingerprint can be seen in connecting clients and should be identical");
+      vexpand: true;
+
+      styles [
+        "compact",
+      ]
+
+      Box {
+        orientation: horizontal;
+        halign: center;
+
+        styles [
+          "tls-cert-verification",
+        ]
+
+        Label fingerprint_left_label {
+          styles [
+            "tls-cert-fingerprint",
+          ]
+        }
+
+        Label fingerprint_right_label {
+          styles [
+            "tls-cert-fingerprint",
+          ]
+        }
+      }
+    };
+  };
+}

@@ -1,0 +1,19 @@
+using Gtk 4.0;
+
+template $CcEntryFeedback: Box {
+  spacing: 6;
+  margin-top: 12;
+
+  Image image {}
+
+  Label label {
+    wrap: true;
+    wrap-mode: word_char;
+    hexpand: true;
+    xalign: 0.0;
+
+    styles [
+      "caption",
+    ]
+  }
+}

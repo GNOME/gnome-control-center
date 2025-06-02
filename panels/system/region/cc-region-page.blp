@@ -1,0 +1,58 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CcRegionPage: Adw.NavigationPage {
+  title: _("Region & Language");
+  tag: "region";
+
+  child: Adw.ToolbarView {
+    [top]
+    Adw.HeaderBar {}
+
+    content: Box {
+      orientation: vertical;
+
+      Adw.Banner banner {
+        title: _("Language and format will be changed after next login");
+        button-label: _("Log _Out…");
+        button-clicked => $restart_now(template);
+      }
+
+      Adw.PreferencesPage {
+        description: _("The language setting is used for interface text and web pages. Formats are used for numbers, dates, and currencies.");
+
+        Adw.PreferencesGroup {
+          title: _("Your Account");
+
+          $CcListRow language_row {
+            title: _("_Language");
+            show-arrow: true;
+            activated => $on_user_language_row_activated_cb(template);
+          }
+
+          $CcListRow formats_row {
+            title: _("_Formats");
+            show-arrow: true;
+            activated => $on_user_formats_row_activated_cb(template);
+          }
+        }
+
+        Adw.PreferencesGroup login_group {
+          title: _("Login Screen");
+
+          $CcListRow login_language_row {
+            title: _("L_anguage");
+            show-arrow: true;
+            activated => $on_login_language_row_activated_cb(template);
+          }
+
+          $CcListRow login_formats_row {
+            title: _("Fo_rmats");
+            show-arrow: true;
+            activated => $on_login_formats_row_activated_cb(template);
+          }
+        }
+      }
+    };
+  };
+}

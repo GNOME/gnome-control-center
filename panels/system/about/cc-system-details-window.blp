@@ -1,0 +1,148 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CcSystemDetailsWindow: Adw.Dialog {
+  title: _("System Details");
+  width-request: 360;
+  height-request: 200;
+  content-width: 640;
+  content-height: 420;
+
+  Adw.Breakpoint {
+    condition ("max-width: 500sp")
+
+    setters {
+      box.orientation: vertical;
+      box.spacing: 12;
+      software_information_box.margin-top: 12;
+    }
+  }
+
+  child: Adw.ToastOverlay toast_overlay {
+    child: Adw.ToolbarView {
+      [top]
+      Adw.HeaderBar {
+        [start]
+        Button details_copy_button {
+          Adw.ButtonContent {
+            icon-name: "edit-copy-symbolic";
+            label: _("_Copy");
+            use-underline: true;
+          }
+
+          clicked => $on_copy_button_clicked_cb();
+        }
+      }
+
+      content: ScrolledWindow {
+        Box box {
+          margin-bottom: 18;
+          margin-end: 18;
+          margin-start: 18;
+          margin-top: 18;
+          spacing: 18;
+
+          Box {
+            accessible-role: group;
+            orientation: vertical;
+            spacing: 12;
+            hexpand: true;
+
+            accessibility {
+              labelled-by: [
+                hardware_info_label,
+              ];
+            }
+
+            Label hardware_info_label {
+              label: _("Hardware Information");
+              halign: start;
+
+              styles [
+                "title-2",
+              ]
+            }
+
+            $CcInfoEntry hardware_model_row {
+              label: _("Model");
+            }
+
+            $CcInfoEntry memory_row {
+              label: _("Memory");
+            }
+
+            $CcInfoEntry processor_row {
+              label: _("Processor");
+            }
+
+            Box graphics_row {
+              spacing: 12;
+              orientation: vertical;
+            }
+
+            $CcInfoEntry disk_row {
+              label: _("Disk Capacity");
+            }
+          }
+
+          Box software_information_box {
+            accessible-role: group;
+            orientation: vertical;
+            spacing: 12;
+            hexpand: true;
+
+            accessibility {
+              labelled-by: [
+                software_info_label,
+              ];
+            }
+
+            Label software_info_label {
+              label: _("Software Information");
+              halign: start;
+
+              styles [
+                "title-2",
+              ]
+            }
+
+            $CcInfoEntry firmware_version_row {
+              label: _("Firmware Version");
+            }
+
+            $CcInfoEntry os_name_row {
+              /* Translators: this field contains the distro name and version */
+              label: _("OS Name");
+            }
+
+            $CcInfoEntry os_build_row {
+              /* Translators: this field contains the distro build */
+              label: _("OS Build");
+            }
+
+            $CcInfoEntry os_type_row {
+              /* Translators: this field contains the distro type */
+              label: _("OS Type");
+            }
+
+            $CcInfoEntry gnome_version_row {
+              label: _("GNOME Version");
+            }
+
+            $CcInfoEntry windowing_system_row {
+              label: _("Windowing System");
+            }
+
+            $CcInfoEntry virtualization_row {
+              label: _("Virtualization");
+            }
+
+            $CcInfoEntry kernel_row {
+              label: _("Kernel Version");
+            }
+          }
+        }
+      };
+    };
+  };
+}

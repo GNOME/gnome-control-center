@@ -1,0 +1,59 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CcTzDialog: Adw.Dialog {
+  title: _("Select Time Zone");
+  content-height: 540;
+  content-width: 400;
+
+  styles [
+    "view",
+  ]
+
+  child: Adw.ToolbarView {
+    [top]
+    Adw.HeaderBar {}
+
+    [top]
+    Adw.Bin {
+      styles [
+        "toolbar",
+      ]
+
+      SearchBar search_bar {
+        search-mode-enabled: true;
+
+        SearchEntry location_entry {
+          placeholder-text: _("Search cities");
+          hexpand: true;
+          search-changed => $tz_dialog_search_changed_cb() swapped;
+          stop-search => $tz_dialog_search_stopped_cb() swapped;
+        }
+      }
+    }
+
+    content: Stack main_stack {
+      Adw.StatusPage empty_page {
+        title: _("No Results Found");
+        description: _("Try a different search");
+        icon-name: "edit-find-symbolic";
+      }
+
+      ScrolledWindow tz_page {
+        hscrollbar-policy: never;
+
+        Adw.ClampScrollable {
+          ListView tz_view {
+            show-separators: true;
+            single-click-activate: true;
+            activate => $tz_dialog_row_activated_cb() swapped;
+
+            factory: BuilderListItemFactory {
+              resource: "/org/gnome/control-center/system/datetime/cc-tz-row.ui";
+            };
+          }
+        }
+      }
+    };
+  };
+}
