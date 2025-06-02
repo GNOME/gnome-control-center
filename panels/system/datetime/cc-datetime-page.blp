@@ -1,0 +1,219 @@
+using Gtk 4.0;
+using Adw 1;
+
+$CcTzDialog timezone_dialog {
+  tz-selected => $panel_tz_selection_changed_cb() swapped;
+}
+
+Adw.Dialog datetime_dialog {
+  title: _("Date & Time");
+  content-width: 430;
+
+  child: Adw.ToolbarView {
+    [top]
+    Adw.HeaderBar {}
+
+    content: Adw.PreferencesPage {
+      Adw.PreferencesGroup {
+        $CcTimeEditor time_editor {
+          halign: "center";
+        }
+      }
+
+      Adw.PreferencesGroup {
+        ListBox date_box {
+          selection-mode: none;
+          row-activated => $on_date_box_row_activated_cb() swapped;
+
+          styles [
+            "boxed-list",
+          ]
+
+          Adw.SpinRow year_spin_row {
+            title: _("_Year");
+            use-underline: true;
+            valign: center;
+            width-chars: 4;
+            numeric: true;
+          }
+
+          Adw.ActionRow month_row {
+            title: _("_Month");
+            use-underline: true;
+            activatable-widget: month_selector_box;
+
+            [suffix]
+            Box month_selector_box {
+              spacing: 6;
+
+              Label month_label {
+                label: bind month_model.selected-item as <StringObject>.string;
+              }
+
+              Image {
+                icon-name: "pan-down-symbolic";
+              }
+
+              Popover month_popover {
+                child: month_grid;
+              }
+            }
+          }
+
+          Adw.SpinRow day_spin_row {
+            title: _("_Day");
+            use-underline: true;
+            valign: center;
+            width-chars: 3;
+            numeric: true;
+          }
+        }
+      }
+    };
+  };
+}
+
+template $CcDateTimePage: Adw.NavigationPage {
+  title: _("Date & Time");
+  tag: "datetime";
+
+  child: Adw.ToolbarView {
+    [top]
+    Adw.HeaderBar {}
+
+    content: Box {
+      orientation: vertical;
+
+      $CcPermissionInfobar permission_infobar {}
+
+      Adw.PreferencesPage {
+        Adw.PreferencesGroup {
+          Adw.ActionRow auto_datetime_row {
+            title: _("Automatic _Date &amp; Time");
+            subtitle: _("Requires internet access");
+            use-underline: true;
+            activatable-widget: network_time_switch;
+
+            Switch network_time_switch {
+              valign: center;
+            }
+          }
+
+          $CcListRow datetime_row {
+            title: _("Date &amp; _Time");
+            show-arrow: true;
+            activated => $list_box_row_activated() swapped;
+          }
+        }
+
+        Adw.PreferencesGroup {
+          Adw.SwitchRow auto_timezone_row {
+            visible: false;
+            title: _("Automatic Time _Zone");
+            subtitle: _("Requires location services enabled and internet access");
+            use-underline: true;
+          }
+
+          $CcListRow timezone_row {
+            title: _("Time Z_one");
+            show-arrow: true;
+            activated => $list_box_row_activated() swapped;
+          }
+        }
+
+        Adw.PreferencesGroup {
+          Adw.ActionRow {
+            title: _("Time _Format");
+            use-underline: true;
+
+            [suffix]
+            Adw.ToggleGroup time_format_toggle_group {
+              valign: center;
+              homogeneous: true;
+              notify::active => $change_clock_settings_cb(template);
+
+              Adw.Toggle {
+                label: _("_24-hour");
+                use-underline: true;
+                name: "twenty-four";
+              }
+
+              Adw.Toggle {
+                label: _("AM / _PM");
+                use-underline: true;
+                name: "am-pm";
+              }
+            }
+          }
+        }
+
+        Adw.PreferencesGroup {
+          title: _("Clock &amp; Calendar");
+          description: _("Control how the time and date is shown in the top bar");
+
+          Adw.SwitchRow weekday_row {
+            title: _("_Week Day");
+            use-underline: true;
+          }
+
+          Adw.SwitchRow date_row {
+            title: _("D_ate");
+            use-underline: true;
+          }
+
+          Adw.SwitchRow seconds_row {
+            title: _("_Seconds");
+            use-underline: true;
+          }
+
+          Adw.SwitchRow week_numbers_row {
+            title: _("Week _Numbers");
+            subtitle: _("Shown in the dropdown calendar");
+            use-underline: true;
+          }
+        }
+      }
+    };
+  };
+}
+
+GridView month_grid {
+  halign: start;
+  margin-start: 3;
+  margin-end: 3;
+  margin-top: 3;
+  margin-bottom: 3;
+  orientation: horizontal;
+  max-columns: 6;
+  min-columns: 6;
+  enable-rubberband: false;
+
+  styles [
+    "month-grid",
+  ]
+
+  factory: BuilderListItemFactory {
+    resource: "/org/gnome/control-center/system/datetime/cc-month-row.ui";
+  };
+
+  model: SingleSelection month_model {
+    autoselect: false;
+
+    model: StringList {
+      strings [
+        _("January"),
+        _("February"),
+        _("March"),
+        _("April"),
+        _("May"),
+        _("June"),
+        _("July"),
+        _("August"),
+        _("September"),
+        _("October"),
+        _("November"),
+        _("December"),
+      ]
+    };
+  };
+}

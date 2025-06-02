@@ -1,0 +1,90 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CcSystemPanel: $CcPanel {
+  [subpage]
+  Adw.NavigationPage {
+    title: _("System");
+
+    child: Adw.ToolbarView {
+      [top]
+      Adw.HeaderBar {}
+
+      content: Adw.PreferencesPage {
+        Adw.PreferencesGroup {
+          $CcListRow region_row {
+            title: _("_Region &amp; Language");
+            subtitle: _("System language and localization");
+            icon-name: "org.gnome.Settings-region-symbolic";
+            show-arrow: true;
+            action-name: "navigation.push";
+            action-target: "'region'";
+          }
+
+          $CcListRow datetime_row {
+            title: _("_Date &amp; Time");
+            subtitle: _("Time zone and clock settings");
+            icon-name: "org.gnome.Settings-time-symbolic";
+            show-arrow: true;
+            action-name: "navigation.push";
+            action-target: "'datetime'";
+          }
+
+          $CcListRow users_row {
+            title: _("_Users");
+            subtitle: _("Add and remove accounts, change password");
+            icon-name: "org.gnome.Settings-users-symbolic";
+            use-underline: true;
+            show-arrow: true;
+            action-name: "navigation.push";
+            action-target: "'users'";
+          }
+
+          $CcListRow remote_desktop_row {
+            title: _("R_emote Desktop");
+            subtitle: _("Allow this device to be used remotely");
+            icon-name: "org.gnome.Settings-remote-desktop-symbolic";
+            show-arrow: true;
+            action-name: "navigation.push";
+            action-target: "'remote-desktop'";
+          }
+
+          $CcListRow {
+            title: _("Se_cure Shell");
+            subtitle: _("SSH network access");
+            icon-name: "utilities-terminal-symbolic";
+            show-arrow: true;
+            activated => $on_secure_shell_row_clicked(template);
+          }
+
+          $CcListRow about_row {
+            title: _("_About");
+            subtitle: _("Hardware details and software versions");
+            icon-name: "org.gnome.Settings-about-symbolic";
+            show-arrow: true;
+            action-name: "navigation.push";
+            action-target: "'about'";
+          }
+        }
+
+        Adw.PreferencesGroup software_updates_group {
+          visible: false;
+
+          Adw.ActionRow {
+            activatable: true;
+            title: _("S_oftware Updates");
+            icon-name: "system-update-symbolic";
+            use-underline: true;
+            activated => $cc_system_page_open_software_update() swapped;
+
+            [suffix]
+            Image {
+              valign: center;
+              icon-name: "adw-external-link-symbolic";
+            }
+          }
+        }
+      };
+    };
+  }
+}
