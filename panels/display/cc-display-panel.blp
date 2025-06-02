@@ -1,0 +1,231 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CcDisplayPanel: $CcPanel {
+  ShortcutController {
+    scope: managed;
+    name: "Display Panel Globals Shortcuts";
+
+    Shortcut escape_shortcut {
+      trigger: "Escape";
+    }
+  }
+
+  [subpage]
+  Adw.NavigationPage {
+    title: _("Displays");
+
+    child: Adw.ToolbarView {
+      [top]
+      Adw.HeaderBar apply_titlebar {
+        visible: bind template.showing-apply-titlebar;
+        show-start-title-buttons: false;
+        show-end-title-buttons: false;
+
+        [start]
+        Button cancel_button {
+          use-underline: true;
+          label: _("_Cancel");
+          can-shrink: true;
+          clicked => $cancel_current_configuration(template);
+        }
+
+        title-widget: Adw.WindowTitle apply_titlebar_title_widget {};
+
+        [end]
+        Button apply_button {
+          use-underline: true;
+          label: _("_Apply");
+          can-shrink: true;
+          clicked => $apply_current_configuration(template);
+
+          styles [
+            "suggested-action",
+          ]
+        }
+      }
+
+      [top]
+      Adw.HeaderBar displays_titlebar {
+        visible: bind template.showing-apply-titlebar inverted;
+      }
+
+      content: Adw.PreferencesPage {
+        Adw.PreferencesGroup display_settings_disabled_group {
+          visible: false;
+
+          Adw.StatusPage {
+            vexpand: true;
+            icon-name: "computer-symbolic";
+            title: _("Display Settings Disabled");
+          }
+        }
+
+        Adw.PreferencesGroup display_multiple_displays {
+          Adw.ActionRow config_type_switcher_row {
+            title: _("Multiple Displays");
+
+            [suffix]
+            Adw.ToggleGroup display_config_type {
+              valign: center;
+              homogeneous: true;
+              notify::active => $on_config_type_toggled_cb(template);
+
+              Adw.Toggle {
+                name: "join";
+
+                /* Translators: 'Join' as in 'Join displays' */
+                label: _("_Join");
+                use-underline: true;
+              }
+
+              Adw.Toggle {
+                name: "clone";
+                label: _("_Mirror");
+                use-underline: true;
+              }
+            }
+          }
+        }
+
+        Adw.PreferencesGroup display_settings_group {
+          Adw.PreferencesRow arrangement_row {
+            activatable: false;
+
+            Adw.Bin arrangement_bin {}
+          }
+
+          Adw.ComboRow primary_display_row {
+            subtitle: _("Contains top bar and Activities");
+            title: _("_Primary Display");
+            use-underline: true;
+            notify::selected-item => $on_primary_display_selected_item_changed_cb() swapped;
+          }
+        }
+
+        Adw.PreferencesGroup single_display_settings_group {
+          visible: false;
+        }
+
+        Adw.PreferencesGroup {
+          $CcListRow night_light_row {
+            /* Translators: This is the redshift functionality where we suppress blue light when the sun has gone down */
+            title: _("_Night Light");
+            icon-name: "night-light-symbolic";
+            show-arrow: true;
+            action-name: "navigation.push";
+            action-target: "'night-light'";
+          }
+        }
+      };
+    };
+  }
+
+  [subpage]
+  Adw.NavigationPage {
+    tag: "night-light";
+    title: _("Night Light");
+
+    child: Adw.ToolbarView {
+      [top]
+      Adw.HeaderBar {
+        visible: bind template.showing-apply-titlebar;
+        show-start-title-buttons: false;
+        show-end-title-buttons: false;
+
+        [start]
+        Button {
+          use-underline: true;
+          label: _("_Cancel");
+          can-shrink: true;
+          clicked => $cancel_current_configuration(template);
+        }
+
+        title-widget: Adw.WindowTitle {
+          title: bind apply_titlebar_title_widget.title;
+          subtitle: bind apply_titlebar_title_widget.subtitle;
+        };
+
+        [end]
+        Button {
+          use-underline: true;
+          label: _("_Apply");
+          can-shrink: true;
+          clicked => $apply_current_configuration(template);
+          sensitive: bind apply_button.sensitive;
+
+          styles [
+            "suggested-action",
+          ]
+        }
+      }
+
+      [top]
+      Adw.HeaderBar night_light_titlebar {
+        visible: bind template.showing-apply-titlebar inverted;
+      }
+
+      content: $CcNightLightPage night_light_page {};
+    };
+  }
+
+  [subpage]
+  Adw.NavigationPage display_settings_page {
+    tag: "display-settings";
+
+    child: Adw.ToolbarView {
+      [top]
+      Adw.HeaderBar {
+        visible: bind template.showing-apply-titlebar;
+        show-start-title-buttons: false;
+        show-end-title-buttons: false;
+
+        [start]
+        Button {
+          use-underline: true;
+          label: _("_Cancel");
+          can-shrink: true;
+          clicked => $cancel_current_configuration(template);
+        }
+
+        title-widget: Adw.WindowTitle {
+          title: bind apply_titlebar_title_widget.title;
+          subtitle: bind apply_titlebar_title_widget.subtitle;
+        };
+
+        [end]
+        Button {
+          use-underline: true;
+          label: _("_Apply");
+          can-shrink: true;
+          clicked => $apply_current_configuration(template);
+          sensitive: bind apply_button.sensitive;
+
+          styles [
+            "suggested-action",
+          ]
+        }
+      }
+
+      [top]
+      Adw.HeaderBar display_settings_titlebar {
+        visible: bind template.showing-apply-titlebar inverted;
+      }
+
+      content: Adw.PreferencesPage {
+        Adw.PreferencesGroup {
+          Adw.Bin display_settings_bin {}
+        }
+      };
+    };
+  }
+}
+
+SizeGroup {
+  mode: horizontal;
+
+  widgets [
+    apply_button,
+    cancel_button,
+  ]
+}
