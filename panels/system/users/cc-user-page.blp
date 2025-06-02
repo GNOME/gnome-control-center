@@ -1,0 +1,208 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CcUserPage: Adw.NavigationPage {
+  child: Adw.ToolbarView {
+    [top]
+    Adw.HeaderBar {}
+
+    content: Box {
+      orientation: vertical;
+
+      $CcPermissionInfobar permission_infobar {}
+
+      Adw.PreferencesPage preferences_page {
+        Adw.PreferencesGroup {
+          Overlay {
+            halign: center;
+            sensitive: bind template.avatar-editable;
+            has-tooltip: bind template.avatar-editable no-sync-create inverted;
+            tooltip-text: _("Unlock to Change This Setting");
+
+            Adw.Avatar avatar {
+              show-initials: true;
+              size: 120;
+              halign: center;
+            }
+
+            [overlay]
+            Adw.Bin {
+              styles [
+                "cutout-button",
+              ]
+
+              halign: end;
+              valign: end;
+
+              MenuButton avatar_edit_button {
+                tooltip-text: _("Change Avatar");
+                icon-name: "document-edit-symbolic";
+
+                styles [
+                  "circular",
+                ]
+              }
+            }
+
+            [overlay]
+            Adw.Bin {
+              styles [
+                "cutout-button",
+              ]
+
+              halign: end;
+              valign: start;
+
+              Button avatar_remove_button {
+                tooltip-text: _("Remove Avatar");
+                icon-name: "user-trash-symbolic";
+                clicked => $remove_avatar(template);
+
+                styles [
+                  "circular",
+                  "destructive-action",
+                ]
+              }
+            }
+          }
+        }
+
+        Adw.PreferencesGroup {
+          Adw.EntryRow fullname_row {
+            sensitive: bind template.editable;
+            has-tooltip: bind template.editable no-sync-create inverted;
+            tooltip-text: _("Unlock to Change This Setting");
+            input-purpose: name;
+            show-apply-button: true;
+            title: _("_Name");
+            use-underline: true;
+            apply => $fullname_entry_apply_cb(template);
+          }
+
+          $CcListRow password_row {
+            sensitive: bind template.editable;
+            has-tooltip: bind template.editable no-sync-create inverted;
+            tooltip-text: _("Unlock to Change This Setting");
+            activatable: true;
+            title: _("Pa_ssword");
+            use-underline: true;
+            show-arrow: true;
+            activated => $change_password(template);
+          }
+
+          $CcListRow fingerprint_row {
+            sensitive: bind template.editable;
+            has-tooltip: bind template.editable no-sync-create inverted;
+            tooltip-text: _("Unlock to Change This Setting");
+            visible: false;
+            title: _("_Fingerprint Login");
+            use-underline: true;
+            activatable: true;
+            show-arrow: true;
+            activated => $change_fingerprint(template);
+          }
+
+          Adw.ActionRow auto_login_row {
+            title: _("A_utomatic Login");
+            use-underline: true;
+            activatable-widget: auto_login_switch;
+            sensitive: bind template.locked no-sync-create inverted;
+            has-tooltip: bind template.locked;
+            tooltip-text: _("Unlock to Change This Setting");
+
+            [suffix]
+            $CcListRowInfoButton {
+              valign: "center";
+              text: _("Automatic login opens the user account when the device starts, without requiring authentication. Authentication is still required at other times, such as when unlocking the screen.");
+            }
+
+            [suffix]
+            Switch auto_login_switch {
+              valign: center;
+              notify::active => $autologin_changed(template);
+            }
+          }
+        }
+
+        Adw.PreferencesGroup account_settings_box {
+          $CcListRow account_type_row {
+            sensitive: bind template.editable;
+            has-tooltip: bind template.editable no-sync-create inverted;
+            tooltip-text: _("Unlock to Change This Setting");
+            title: _("_Administrator");
+            subtitle-lines: "0";
+            use-underline: true;
+
+            [suffix]
+            $CcListRowInfoButton {
+              valign: "center";
+              text: _("Administrators have extra abilities, including adding and removing users, changing login settings, and removing software. Parental controls cannot be applied to administrators.");
+            }
+
+            Switch account_type_switch {
+              valign: center;
+              notify::active => $account_type_changed(template);
+            }
+          }
+
+          $CcListRow parental_controls_row {
+            title: _("_Parental Controls");
+            subtitle: _("Open the Parental Controls app");
+            subtitle-lines: "0";
+            use-underline: true;
+            activatable: true;
+            show-arrow: true;
+            visible: false;
+          }
+
+          $CcListRow language_row {
+            sensitive: bind template.editable;
+            has-tooltip: bind template.editable no-sync-create inverted;
+            tooltip-text: _("Unlock to Change This Setting");
+            title: _("_Language");
+            use-underline: true;
+            activatable: true;
+            show-arrow: true;
+            activated => $show_language_chooser(template);
+          }
+        }
+
+        Adw.PreferencesGroup button_group {
+          separate-rows: true;
+
+          Adw.ButtonRow remove_user_button {
+            visible: bind template.is-current-user no-sync-create inverted;
+            sensitive: bind template.editable;
+            title: _("_Remove User…");
+            use-underline: true;
+            activated => $remove_user(template);
+
+            styles [
+              "destructive-action",
+            ]
+          }
+        }
+      }
+    };
+  };
+}
+
+Adw.AlertDialog remove_local_user_dialog {
+  body: _("The user will not be able to use this device once their account has been removed");
+  default-response: "cancel";
+  close-response: "cancel";
+  response::remove => $remove_local_user_response(template);
+
+  responses [
+    cancel: _("_Cancel"),
+    remove: _("_Remove") destructive,
+  ]
+
+  [extra-child]
+  Adw.PreferencesGroup {
+    Adw.SwitchRow remove_local_files_choice {
+      title: _("_Delete Files and Settings");
+      use-underline: true;
+    }
+  }
+}

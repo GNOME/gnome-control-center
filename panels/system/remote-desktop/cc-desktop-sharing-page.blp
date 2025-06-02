@@ -1,0 +1,137 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CcDesktopSharingPage: Adw.Bin {
+  Adw.ToastOverlay toast_overlay {
+    child: Adw.PreferencesPage {
+      Adw.PreferencesGroup {
+        Label {
+          label: _("Share your existing desktop with other devices. The remote connection uses the existing screen resolution.");
+          hexpand: true;
+          wrap: true;
+          justify: center;
+
+          styles [
+            "dim-label",
+          ]
+        }
+      }
+
+      Adw.PreferencesGroup {
+        Adw.SwitchRow desktop_sharing_row {
+          title: _("_Desktop Sharing");
+          use-underline: true;
+        }
+
+        Adw.SwitchRow remote_control_row {
+          title: _("Remote _Control");
+          use-underline: true;
+          subtitle: _("Allows desktop shares to control the screen");
+        }
+      }
+
+      Adw.PreferencesGroup {
+        title: _("How to Connect");
+        description: _("Use a remote desktop app to connect using the RDP protocol. Additional information about the device’s network location may also be required.");
+
+        Adw.ActionRow hostname_row {
+          title: _("_Hostname");
+          use-underline: true;
+
+          styles [
+            "property",
+          ]
+
+          [suffix]
+          Button {
+            tooltip-text: _("Copy");
+            valign: center;
+            icon-name: "edit-copy-symbolic";
+            clicked => $on_address_copy_clicked() swapped;
+
+            styles [
+              "flat",
+            ]
+          }
+        }
+
+        Adw.ActionRow port_row {
+          title: _("_Port");
+          use-underline: true;
+
+          styles [
+            "property",
+          ]
+
+          [suffix]
+          Button {
+            tooltip-text: _("Copy");
+            valign: center;
+            icon-name: "edit-copy-symbolic";
+            clicked => $on_port_copy_clicked() swapped;
+
+            styles [
+              "flat",
+            ]
+          }
+        }
+      }
+
+      Adw.PreferencesGroup {
+        title: _("Login Details");
+
+        Adw.EntryRow username_entry {
+          title: _("_Username");
+          use-underline: true;
+
+          [suffix]
+          Button {
+            tooltip-text: _("Copy");
+            valign: center;
+            icon-name: "edit-copy-symbolic";
+            clicked => $on_username_copy_clicked() swapped;
+
+            styles [
+              "flat",
+            ]
+          }
+        }
+
+        Adw.PasswordEntryRow password_entry {
+          title: _("P_assword");
+          use-underline: true;
+
+          [suffix]
+          Button {
+            tooltip-text: _("Copy");
+            valign: center;
+            icon-name: "edit-copy-symbolic";
+            clicked => $on_password_copy_clicked() swapped;
+
+            styles [
+              "flat",
+            ]
+          }
+        }
+      }
+
+      Adw.PreferencesGroup {
+        separate-rows: true;
+
+        Adw.ButtonRow generate_password_button_row {
+          sensitive: false;
+          title: _("_Generate New Password");
+          use-underline: true;
+          activated => $on_generate_password_button_row_activated() swapped;
+        }
+
+        Adw.ButtonRow verify_encryption_button_row {
+          sensitive: false;
+          title: _("_Verify Encryption");
+          use-underline: true;
+          activated => $on_verify_encryption_button_row_activated() swapped;
+        }
+      }
+    };
+  }
+}

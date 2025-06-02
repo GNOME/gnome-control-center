@@ -1,0 +1,58 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CcSecureShellPage: Adw.Dialog {
+  title: _("Secure Shell");
+  content-width: 360;
+
+  child: Adw.ToolbarView {
+    [top]
+    Adw.HeaderBar {}
+
+    content: Adw.ToastOverlay toast_overlay {
+      child: Adw.PreferencesPage {
+        Adw.PreferencesGroup {
+          Label {
+            halign: center;
+            wrap: true;
+            lines: 2;
+            label: _("Access this device using Secure Shell (SSH)");
+
+            styles [
+              "dim-label",
+            ]
+          }
+        }
+
+        Adw.PreferencesGroup {
+          Adw.SwitchRow secure_shell_row {
+            title: _("_Secure Shell");
+            use-underline: true;
+            sensitive: false;
+          }
+
+          Adw.ActionRow hostname_row {
+            title: _("SSH Login _Command");
+            use-underline: true;
+
+            styles [
+              "property",
+            ]
+
+            [suffix]
+            Button {
+              valign: center;
+              tooltip-text: _("Copy");
+              icon-name: "edit-copy-symbolic";
+              clicked => $on_copy_ssh_command_button_clicked(template);
+
+              styles [
+                "flat",
+              ]
+            }
+          }
+        }
+      };
+    };
+  };
+}

@@ -1,0 +1,43 @@
+using Gtk 4.0;
+using Adw 1;
+
+template ListItem {
+  activatable: false;
+
+  child: Box {
+    margin-start: 6;
+    margin-end: 6;
+    margin-top: 6;
+    margin-bottom: 6;
+
+    Label {
+      ellipsize: end;
+      xalign: 0;
+      width-request: 96;
+
+      styles [
+        "title",
+      ]
+
+      label: bind template.item as <StringObject>.string;
+    }
+
+    Image select_image {
+      visible: bind template.selected;
+      icon-name: "object-select-symbolic";
+    }
+
+    Adw.Bin image_placeholder {
+      visible: bind select_image.visible inverted;
+    }
+  };
+}
+
+SizeGroup {
+  mode: both;
+
+  widgets [
+    select_image,
+    image_placeholder,
+  ]
+}
