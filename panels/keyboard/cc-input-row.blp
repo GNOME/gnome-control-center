@@ -1,0 +1,64 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CcInputRow: Adw.ActionRow {
+  selectable: false;
+
+  [prefix]
+  Image {
+    icon-name: "list-drag-handle-symbolic";
+
+    styles [
+      "drag-handle",
+    ]
+  }
+
+  [suffix]
+  MenuButton {
+    tooltip-text: _("View More");
+    valign: center;
+    icon-name: "view-more-symbolic";
+    menu-model: popover_menu;
+
+    styles [
+      "flat",
+    ]
+  }
+}
+
+menu popover_menu {
+  section {
+    item {
+      label: _("Move Up");
+      action: "row.move-up";
+    }
+
+    item {
+      label: _("Move Down");
+      action: "row.move-down";
+    }
+  }
+
+  section {
+    item {
+      label: _("Preferences");
+      action: "row.show-settings";
+      hidden-when: "action-disabled";
+    }
+  }
+
+  section {
+    item {
+      label: _("View Keyboard Layout");
+      action: "row.show-layout";
+    }
+  }
+
+  section {
+    item {
+      label: _("Remove");
+      action: "row.remove";
+      hidden-when: "action-disabled";
+    }
+  }
+}

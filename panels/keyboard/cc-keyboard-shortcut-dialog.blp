@@ -1,0 +1,144 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CcKeyboardShortcutDialog: Adw.Dialog {
+  content-width: 600;
+  content-height: 540;
+  title: _("Keyboard Shortcuts");
+  map => $gtk_widget_grab_focus(search_entry);
+
+  child: Adw.NavigationView navigation_view {
+    notify::visible-page => $shortcut_dialog_visible_page_changed_cb() swapped;
+
+    Adw.NavigationPage main_page {
+      title: bind template.title;
+
+      child: Adw.ToolbarView {
+        [top]
+        Adw.HeaderBar {}
+
+        [top]
+        SearchBar {
+          search-mode-enabled: true;
+          key-capture-widget: template;
+
+          child: Adw.Clamp {
+            maximum-size: 400;
+            hexpand: true;
+            margin-start: 6;
+            margin-end: 6;
+
+            SearchEntry search_entry {
+              placeholder-text: _("Search shortcuts");
+              search-changed => $shortcut_search_entry_changed_cb() swapped;
+              stop-search => $shortcut_search_entry_stopped_cb() swapped;
+
+              accessibility {
+                label: _("Search Shortcuts");
+              }
+            }
+          };
+        }
+
+        content: Stack section_stack {
+          vhomogeneous: false;
+
+          css-classes: [
+            "shortcut-list",
+          ];
+
+          Adw.PreferencesPage section_list_page {
+            Adw.PreferencesGroup {
+              ListBox section_list_box {
+                selection-mode: none;
+                row-activated => $shortcut_section_row_activated_cb() swapped;
+
+                styles [
+                  "boxed-list",
+                ]
+              }
+            }
+
+            Adw.PreferencesGroup {
+              Adw.SwitchRow overview_shortcut_row {
+                title: _("Activities _Overview Shortcut");
+                use-underline: true;
+                subtitle: _("Use the Super key to open the overview");
+              }
+            }
+
+            Adw.PreferencesGroup {
+              Adw.ButtonRow reset_all_button_row {
+                title: _("_Reset All…");
+                use-underline: true;
+                activated => $adw_dialog_present(reset_all_dialog);
+
+                styles [
+                  "destructive-action",
+                ]
+              }
+            }
+          }
+
+          Adw.PreferencesPage search_result_page {}
+
+          Adw.StatusPage empty_results_page {
+            vexpand: true;
+            icon-name: "edit-find-symbolic";
+            title: _("No Results Found");
+            description: _("Try a different search");
+          }
+        };
+      };
+    }
+
+    Adw.NavigationPage subview_page {
+      title: " ";
+
+      child: Adw.ToolbarView {
+        [top]
+        Adw.HeaderBar {}
+
+        content: Stack subview_stack {
+          Stack shortcut_list_stack {
+            vhomogeneous: false;
+          }
+
+          Adw.StatusPage empty_custom_shortcut_page {
+            vexpand: true;
+            icon-name: "input-keyboard-symbolic";
+            title: _("Add Custom Shortcuts");
+            description: _("Set up custom shortcuts for launching apps, running scripts, and more");
+
+            Button {
+              halign: center;
+              use-underline: true;
+              label: _("_Add Shortcut…");
+              clicked => $add_custom_shortcut_clicked_cb() swapped;
+
+              styles [
+                "suggested-action",
+                "pill",
+              ]
+            }
+          }
+        };
+      };
+    }
+  };
+}
+
+Adw.AlertDialog reset_all_dialog {
+  heading: _("Reset All Shortcuts?");
+  body: _("All changes to keyboard shortcuts will be lost");
+  default-response: "cancel";
+  close-response: "cancel";
+  response::reset-all => $on_reset_all_dialog_response_cb(template);
+
+  responses [
+    cancel: _("_Cancel"),
+    reset-all: _("_Reset All") destructive,
+  ]
+}
+
+SizeGroup accelerator_size_group {}

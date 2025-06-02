@@ -1,0 +1,38 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CcKeyboardShortcutRow: Adw.ActionRow {
+  use-markup: false;
+  selectable: false;
+  activatable: true;
+
+  Label accelerator_label {
+    xalign: 1.0;
+
+    styles [
+      "dim-label",
+    ]
+  }
+
+  Revealer reset_revealer {
+    transition-type: slide_right;
+
+    Button reset_button {
+      valign: center;
+      icon-name: "edit-clear-symbolic";
+      tooltip-text: _("Reset Shortcut");
+      clicked => $reset_shortcut_cb() swapped;
+
+      styles [
+        "flat",
+        "circular",
+      ]
+    }
+  }
+
+  [suffix]
+  Image {
+    icon-name: "document-edit-symbolic";
+    margin-start: 6;
+  }
+}

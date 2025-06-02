@@ -56,6 +56,28 @@ keyboard_shortcuts_dep = declare_dependency(
   link_with: libkeyboard_shortcuts,
 )
 
+blueprints = custom_target(
+  'blueprints',
+  input: files(
+    'cc-input-chooser.blp',
+    'cc-input-list-box.blp',
+    'cc-input-row.blp',
+    'cc-keyboard-panel.blp',
+    'cc-keyboard-shortcut-dialog.blp',
+    'cc-keyboard-shortcut-editor.blp',
+    'cc-keyboard-shortcut-row.blp',
+    'cc-xkb-modifier-page.blp',
+  ),
+  output: '.',
+  command: [
+    blueprint_compiler,
+    'batch-compile',
+    '@OUTPUT@',
+    '@CURRENT_SOURCE_DIR@',
+    '@INPUT@',
+  ],
+)
+
 sources = files(
   'cc-xkb-modifier-page.c',
   'cc-keyboard-shortcut-row.c',
@@ -78,7 +100,8 @@ sources += gnome.compile_resources(
   'cc-' + cappletname + '-resources',
   cappletname + '.gresource.xml',
   c_name: 'cc_' + cappletname,
-  export: true
+  export: true,
+  dependencies: blueprints,
 )
 
 deps = common_deps + [
