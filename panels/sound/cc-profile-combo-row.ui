@@ -1,24 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
-  <!-- interface-requires gtk+ 3.0 -->
-  <template class="CcProfileComboRow" parent="GtkComboBox">
-    <property name="model">profile_model</property>
-    <signal name="changed" handler="profile_changed_cb" object="CcProfileComboRow" swapped="yes"/>
-    <child>
-      <object class="GtkCellRendererText">
-        <property name="ellipsize">end</property>
+  <template class="CcProfileComboRow" parent="AdwComboRow">
+    <property name="model">
+      <object class="GListStore" id="profile_list">
+        <property name="item-type">GtkStringObject</property>
       </object>
-      <attributes>
-        <attribute name="text">0</attribute>
-      </attributes>
-    </child>
+    </property>
+    <signal name="notify::selected" handler="profile_changed_cb" object="CcProfileComboRow" swapped="yes"/>
   </template>
-  <object class="GtkListStore" id="profile_model">
-    <columns>
-      <!-- column-name title -->
-      <column type="gchararray"/>
-      <!-- column-name profile -->
-      <column type="gchararray"/>
-    </columns>
-  </object>
 </interface>

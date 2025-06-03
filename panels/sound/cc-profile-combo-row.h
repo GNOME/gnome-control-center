@@ -17,15 +17,14 @@
 
 #pragma once
 
-#include <gtk/gtk.h>
-#include <pulse/pulseaudio.h>
+#include <adwaita.h>
 #include <gvc-mixer-control.h>
 #include <gvc-mixer-ui-device.h>
 
 G_BEGIN_DECLS
 
 #define CC_TYPE_PROFILE_COMBO_ROW (cc_profile_combo_row_get_type ())
-G_DECLARE_FINAL_TYPE (CcProfileComboRow, cc_profile_combo_row, CC, PROFILE_COMBO_ROW, GtkComboBox)
+G_DECLARE_FINAL_TYPE (CcProfileComboRow, cc_profile_combo_row, CC, PROFILE_COMBO_ROW, AdwComboRow)
 
 void                cc_profile_combo_row_set_device        (CcProfileComboRow *self,
                                                             GvcMixerControl   *mixer_control,

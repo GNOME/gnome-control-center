@@ -70,38 +70,9 @@
                       </object>
                     </child>
                     <child>
-                      <object class="AdwPreferencesRow" id="output_profile_row">
-                        <property name="activatable">False</property>
-                        <child>
-                          <object class="GtkBox">
-                            <property name="margin-top">12</property>
-                            <property name="margin-bottom">12</property>
-                            <property name="margin-start">12</property>
-                            <property name="margin-end">12</property>
-                            <property name="spacing">12</property>
-                            <child>
-                              <object class="GtkLabel" id="output_configuration_label">
-                                <property name="ellipsize">end</property>
-                                <property name="xalign">0</property>
-                                <property name="label" translatable="yes">_Configuration</property>
-                                <property name="use-underline">True</property>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="GtkBox">
-                                <property name="spacing">6</property>
-                                <child>
-                                  <object class="CcProfileComboRow" id="output_profile_combo_row">
-                                    <property name="hexpand">True</property>
-                                    <accessibility>
-                                      <relation name="labelled-by">output_configuration_label</relation>
-                                    </accessibility>
-                                  </object>
-                                </child>
-                              </object>
-                            </child>
-                          </object>
-                        </child>
+                      <object class="CcProfileComboRow" id="output_profile_combo_row">
+                        <property name="title" translatable="yes">_Configuration</property>
+                        <property name="use_underline">True</property>
                       </object>
                     </child>
                     <child>
@@ -278,38 +249,9 @@
                       </object>
                     </child>
                     <child>
-                      <object class="AdwPreferencesRow" id="input_profile_row">
-                        <property name="activatable">False</property>
-                        <child>
-                          <object class="GtkBox">
-                            <property name="margin-top">12</property>
-                            <property name="margin-bottom">12</property>
-                            <property name="margin-start">12</property>
-                            <property name="margin-end">12</property>
-                            <property name="spacing">12</property>
-                            <child>
-                              <object class="GtkLabel" id="input_configuration_label">
-                                <property name="ellipsize">end</property>
-                                <property name="xalign">0</property>
-                                <property name="label" translatable="yes">Con_figuration</property>
-                                <property name="use-underline">True</property>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="GtkBox">
-                                <property name="spacing">6</property>
-                                <child>
-                                  <object class="CcProfileComboRow" id="input_profile_combo_row">
-                                    <property name="hexpand">True</property>
-                                    <accessibility>
-                                      <relation name="labelled-by">input_configuration_label</relation>
-                                    </accessibility>
-                                  </object>
-                                </child>
-                              </object>
-                            </child>
-                          </object>
-                        </child>
+                      <object class="CcProfileComboRow" id="input_profile_combo_row">
+                        <property name="title" translatable="yes">Con_figuration</property>
+                        <property name="use_underline">True</property>
                       </object>
                     </child>
                     <child>
@@ -383,12 +325,10 @@
     <property name="mode">horizontal</property>
     <widgets>
       <widget name="output_device_label"/>
-      <widget name="output_configuration_label"/>
       <widget name="output_volume_label"/>
       <widget name="output_balance_label"/>
       <widget name="output_fade_label"/>
       <widget name="output_subwoofer_label"/>
-      <widget name="input_configuration_label"/>
       <widget name="input_device_label"/>
       <widget name="input_volume_label"/>
     </widgets>

@@ -18,37 +18,37 @@
 #include "cc-profile-combo-row.h"
 #include "cc-sound-resources.h"
 
+#define PROFILE_KEY "profile-string"
+
 struct _CcProfileComboRow
 {
-  GtkComboBox       parent_instance;
+  AdwComboRow       parent_instance;
 
-  GtkListStore     *profile_model;
+  GListStore       *profile_list;
 
   GvcMixerControl  *mixer_control;
   GvcMixerUIDevice *device;
 };
 
-G_DEFINE_TYPE (CcProfileComboRow, cc_profile_combo_row, GTK_TYPE_COMBO_BOX)
+G_DEFINE_TYPE (CcProfileComboRow, cc_profile_combo_row, ADW_TYPE_COMBO_ROW)
 
 static void
 profile_changed_cb (CcProfileComboRow *self)
 {
-  GtkTreeIter iter;
-  g_autofree gchar *profile = NULL;
+  GtkStringObject *selected_profile;
+  char *profile;
 
-  if (!gtk_combo_box_get_active_iter (GTK_COMBO_BOX (self), &iter))
+  selected_profile = GTK_STRING_OBJECT (adw_combo_row_get_selected_item (ADW_COMBO_ROW (self)));
+
+  if (!selected_profile)
     return;
 
-  gtk_tree_model_get (GTK_TREE_MODEL (self->profile_model), &iter,
-                      1, &profile,
-                      -1);
+  profile = g_object_get_data (G_OBJECT (selected_profile), PROFILE_KEY);
 
   if (!gvc_mixer_control_change_profile_on_selected_device (self->mixer_control,
                                                             self->device,
                                                             profile))
-    {
-      g_warning ("Failed to change profile on %s", gvc_mixer_ui_device_get_description (self->device));
-    }
+    g_warning ("Failed to change profile on %s", gvc_mixer_ui_device_get_description (self->device));
 }
 
 static void
@@ -71,7 +71,7 @@ cc_profile_combo_row_class_init (CcProfileComboRowClass *klass)
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/sound/cc-profile-combo-row.ui");
 
-  gtk_widget_class_bind_template_child (widget_class, CcProfileComboRow, profile_model);
+  gtk_widget_class_bind_template_child (widget_class, CcProfileComboRow, profile_list);
 
   gtk_widget_class_bind_template_callback (widget_class, profile_changed_cb);
 }
@@ -99,7 +99,7 @@ cc_profile_combo_row_set_device (CcProfileComboRow *self,
   g_clear_object (&self->mixer_control);
   self->mixer_control = g_object_ref (mixer_control);
   g_clear_object (&self->device);
-  gtk_list_store_clear (self->profile_model);
+  g_list_store_remove_all (self->profile_list);
 
   if (device == NULL)
     return;
@@ -109,20 +109,21 @@ cc_profile_combo_row_set_device (CcProfileComboRow *self,
   for (link = profiles; link; link = link->next)
     {
       GvcMixerCardProfile *profile = link->data;
-      GtkTreeIter iter;
+      g_autoptr(GtkStringObject) profile_object = NULL;
 
-      gtk_list_store_append (self->profile_model, &iter);
-      gtk_list_store_set (self->profile_model, &iter,
-                          0, profile->human_profile,
-                          1, profile->profile,
-                          -1);
+      profile_object = gtk_string_object_new (profile->human_profile);
+      g_object_set_data_full (G_OBJECT (profile_object), PROFILE_KEY,
+                              g_strdup (profile->profile), g_free);
+
+      g_signal_handlers_block_by_func(self, profile_changed_cb, self);
+
+      g_list_store_append (self->profile_list, profile_object);
 
       if (g_strcmp0 (gvc_mixer_ui_device_get_active_profile (device), profile->profile) == 0)
-        {
-          g_signal_handlers_block_by_func(self, profile_changed_cb, self);
-          gtk_combo_box_set_active_iter (GTK_COMBO_BOX (self), &iter);
-          g_signal_handlers_unblock_by_func(self, profile_changed_cb, self);
-        }
+        adw_combo_row_set_selected (ADW_COMBO_ROW (self),
+                                    g_list_model_get_n_items (G_LIST_MODEL (self->profile_list)));
+
+      g_signal_handlers_unblock_by_func(self, profile_changed_cb, self);
     }
 }
 
@@ -130,5 +131,6 @@ gint
 cc_profile_combo_row_get_profile_count (CcProfileComboRow *self)
 {
   g_return_val_if_fail (CC_IS_PROFILE_COMBO_ROW (self), 0);
-  return gtk_tree_model_iter_n_children (GTK_TREE_MODEL (self->profile_model), NULL);
+
+  return g_list_model_get_n_items (G_LIST_MODEL (self->profile_list));
 }
