@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <!-- interface-requires gtk+ 3.0 -->
-  <template class="CcProfileComboBox" parent="GtkComboBox">
+  <template class="CcProfileComboRow" parent="GtkComboBox">
     <property name="model">profile_model</property>
-    <signal name="changed" handler="profile_changed_cb" object="CcProfileComboBox" swapped="yes"/>
+    <signal name="changed" handler="profile_changed_cb" object="CcProfileComboRow" swapped="yes"/>
     <child>
       <object class="GtkCellRendererText">
         <property name="ellipsize">end</property>

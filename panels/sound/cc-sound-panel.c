@@ -36,7 +36,7 @@
 #include "cc-fade-slider.h"
 #include "cc-level-bar.h"
 #include "cc-output-test-window.h"
-#include "cc-profile-combo-box.h"
+#include "cc-profile-combo-row.h"
 #include "cc-sound-panel.h"
 #include "cc-sound-resources.h"
 #include "cc-subwoofer-slider.h"
@@ -51,7 +51,7 @@ struct _CcSoundPanel
   CcLevelBar          *output_level_bar;
   CcDeviceComboBox    *output_device_combo_box;
   AdwPreferencesRow   *output_profile_row;
-  CcProfileComboBox   *output_profile_combo_box;
+  CcProfileComboRow   *output_profile_combo_row;
   CcVolumeSlider      *output_volume_slider;
   CcBalanceSlider     *balance_slider;
   AdwPreferencesRow   *fade_row;
@@ -63,7 +63,7 @@ struct _CcSoundPanel
   CcLevelBar          *input_level_bar;
   CcDeviceComboBox    *input_device_combo_box;
   AdwPreferencesRow   *input_profile_row;
-  CcProfileComboBox   *input_profile_combo_box;
+  CcProfileComboRow   *input_profile_combo_row;
   CcVolumeSlider      *input_volume_slider;
   AdwPreferencesGroup *input_no_devices_group;
   CcListRow           *alert_sound_row;
@@ -167,8 +167,8 @@ output_device_update_cb (CcSoundPanel *self,
   gtk_widget_set_visible (GTK_WIDGET (self->output_group), device != NULL);
   gtk_widget_set_visible (GTK_WIDGET (self->output_no_devices_group), device == NULL);
 
-  cc_profile_combo_box_set_device (self->output_profile_combo_box, self->mixer_control, device);
-  has_multi_profiles = (cc_profile_combo_box_get_profile_count (self->output_profile_combo_box) > 1);
+  cc_profile_combo_row_set_device (self->output_profile_combo_row, self->mixer_control, device);
+  has_multi_profiles = (cc_profile_combo_row_get_profile_count (self->output_profile_combo_row) > 1);
   gtk_widget_set_visible (GTK_WIDGET (self->output_profile_row),
                           has_multi_profiles);
 
@@ -195,8 +195,8 @@ input_device_update_cb (CcSoundPanel *self,
   gtk_widget_set_visible (GTK_WIDGET (self->input_group), device != NULL);
   gtk_widget_set_visible (GTK_WIDGET (self->input_no_devices_group), device == NULL);
 
-  cc_profile_combo_box_set_device (self->input_profile_combo_box, self->mixer_control, device);
-  has_multi_profiles = (cc_profile_combo_box_get_profile_count (self->input_profile_combo_box) > 1);
+  cc_profile_combo_row_set_device (self->input_profile_combo_row, self->mixer_control, device);
+  has_multi_profiles = (cc_profile_combo_row_get_profile_count (self->input_profile_combo_row) > 1);
   gtk_widget_set_visible (GTK_WIDGET (self->input_profile_row),
                           has_multi_profiles);
 
@@ -279,7 +279,7 @@ cc_sound_panel_class_init (CcSoundPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcSoundPanel, output_level_bar);
   gtk_widget_class_bind_template_child (widget_class, CcSoundPanel, output_device_combo_box);
   gtk_widget_class_bind_template_child (widget_class, CcSoundPanel, output_profile_row);
-  gtk_widget_class_bind_template_child (widget_class, CcSoundPanel, output_profile_combo_box);
+  gtk_widget_class_bind_template_child (widget_class, CcSoundPanel, output_profile_combo_row);
   gtk_widget_class_bind_template_child (widget_class, CcSoundPanel, output_volume_slider);
   gtk_widget_class_bind_template_child (widget_class, CcSoundPanel, balance_slider);
   gtk_widget_class_bind_template_child (widget_class, CcSoundPanel, fade_row);
@@ -291,7 +291,7 @@ cc_sound_panel_class_init (CcSoundPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcSoundPanel, input_level_bar);
   gtk_widget_class_bind_template_child (widget_class, CcSoundPanel, input_device_combo_box);
   gtk_widget_class_bind_template_child (widget_class, CcSoundPanel, input_profile_row);
-  gtk_widget_class_bind_template_child (widget_class, CcSoundPanel, input_profile_combo_box);
+  gtk_widget_class_bind_template_child (widget_class, CcSoundPanel, input_profile_combo_row);
   gtk_widget_class_bind_template_child (widget_class, CcSoundPanel, input_volume_slider);
   gtk_widget_class_bind_template_child (widget_class, CcSoundPanel, input_no_devices_group);
   gtk_widget_class_bind_template_child (widget_class, CcSoundPanel, alert_sound_row);
@@ -306,7 +306,7 @@ cc_sound_panel_class_init (CcSoundPanelClass *klass)
   g_type_ensure (CC_TYPE_DEVICE_COMBO_BOX);
   g_type_ensure (CC_TYPE_FADE_SLIDER);
   g_type_ensure (CC_TYPE_LEVEL_BAR);
-  g_type_ensure (CC_TYPE_PROFILE_COMBO_BOX);
+  g_type_ensure (CC_TYPE_PROFILE_COMBO_ROW);
   g_type_ensure (CC_TYPE_SUBWOOFER_SLIDER);
   g_type_ensure (CC_TYPE_VOLUME_SLIDER);
   g_type_ensure (CC_TYPE_LIST_ROW);

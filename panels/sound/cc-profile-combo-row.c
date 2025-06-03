@@ -15,10 +15,10 @@
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "cc-profile-combo-box.h"
+#include "cc-profile-combo-row.h"
 #include "cc-sound-resources.h"
 
-struct _CcProfileComboBox
+struct _CcProfileComboRow
 {
   GtkComboBox       parent_instance;
 
@@ -28,10 +28,10 @@ struct _CcProfileComboBox
   GvcMixerUIDevice *device;
 };
 
-G_DEFINE_TYPE (CcProfileComboBox, cc_profile_combo_box, GTK_TYPE_COMBO_BOX)
+G_DEFINE_TYPE (CcProfileComboRow, cc_profile_combo_row, GTK_TYPE_COMBO_BOX)
 
 static void
-profile_changed_cb (CcProfileComboBox *self)
+profile_changed_cb (CcProfileComboRow *self)
 {
   GtkTreeIter iter;
   g_autofree gchar *profile = NULL;
@@ -52,32 +52,32 @@ profile_changed_cb (CcProfileComboBox *self)
 }
 
 static void
-cc_profile_combo_box_dispose (GObject *object)
+cc_profile_combo_row_dispose (GObject *object)
 {
-  CcProfileComboBox *self = CC_PROFILE_COMBO_BOX (object);
+  CcProfileComboRow *self = CC_PROFILE_COMBO_ROW (object);
 
   g_clear_object (&self->device);
 
-  G_OBJECT_CLASS (cc_profile_combo_box_parent_class)->dispose (object);
+  G_OBJECT_CLASS (cc_profile_combo_row_parent_class)->dispose (object);
 }
 
 void
-cc_profile_combo_box_class_init (CcProfileComboBoxClass *klass)
+cc_profile_combo_row_class_init (CcProfileComboRowClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
-  object_class->dispose = cc_profile_combo_box_dispose;
+  object_class->dispose = cc_profile_combo_row_dispose;
 
-  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/sound/cc-profile-combo-box.ui");
+  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/sound/cc-profile-combo-row.ui");
 
-  gtk_widget_class_bind_template_child (widget_class, CcProfileComboBox, profile_model);
+  gtk_widget_class_bind_template_child (widget_class, CcProfileComboRow, profile_model);
 
   gtk_widget_class_bind_template_callback (widget_class, profile_changed_cb);
 }
 
 void
-cc_profile_combo_box_init (CcProfileComboBox *self)
+cc_profile_combo_row_init (CcProfileComboRow *self)
 {
   g_resources_register (cc_sound_get_resource ());
 
@@ -85,13 +85,13 @@ cc_profile_combo_box_init (CcProfileComboBox *self)
 }
 
 void
-cc_profile_combo_box_set_device (CcProfileComboBox *self,
+cc_profile_combo_row_set_device (CcProfileComboRow *self,
                                  GvcMixerControl   *mixer_control,
                                  GvcMixerUIDevice  *device)
 {
   GList *profiles, *link;
 
-  g_return_if_fail (CC_IS_PROFILE_COMBO_BOX (self));
+  g_return_if_fail (CC_IS_PROFILE_COMBO_ROW (self));
 
   if (device == self->device)
     return;
@@ -127,8 +127,8 @@ cc_profile_combo_box_set_device (CcProfileComboBox *self,
 }
 
 gint
-cc_profile_combo_box_get_profile_count (CcProfileComboBox *self)
+cc_profile_combo_row_get_profile_count (CcProfileComboRow *self)
 {
-  g_return_val_if_fail (CC_IS_PROFILE_COMBO_BOX (self), 0);
+  g_return_val_if_fail (CC_IS_PROFILE_COMBO_ROW (self), 0);
   return gtk_tree_model_iter_n_children (GTK_TREE_MODEL (self->profile_model), NULL);
 }

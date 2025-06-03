@@ -31,7 +31,7 @@ sources = files(
   'cc-level-bar.c',
   'cc-output-test-wheel.c',
   'cc-output-test-window.c',
-  'cc-profile-combo-box.c',
+  'cc-profile-combo-row.c',
   'cc-sound-panel.c',
   'cc-speaker-test-button.c',
   'cc-stream-row.c',
