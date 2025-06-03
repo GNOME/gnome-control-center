@@ -28,7 +28,7 @@ G_BEGIN_DECLS
 #define CC_TYPE_LEVEL_BAR (cc_level_bar_get_type ())
 G_DECLARE_FINAL_TYPE (CcLevelBar, cc_level_bar, CC, LEVEL_BAR, GtkWidget)
 
-void cc_level_bar_set_stream (CcLevelBar     *bar,
+void cc_level_bar_set_stream (CcLevelBar     *self,
                               GvcMixerStream *stream);
 
 G_END_DECLS

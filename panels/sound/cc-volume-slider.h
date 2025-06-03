@@ -29,16 +29,16 @@ G_BEGIN_DECLS
 #define CC_TYPE_VOLUME_SLIDER (cc_volume_slider_get_type ())
 G_DECLARE_FINAL_TYPE (CcVolumeSlider, cc_volume_slider, CC, VOLUME_SLIDER, GtkWidget)
 
-void cc_volume_slider_set_mixer_control (CcVolumeSlider  *slider,
+void cc_volume_slider_set_mixer_control (CcVolumeSlider  *self,
                                          GvcMixerControl *mixer_control);
 
-void cc_volume_slider_set_stream        (CcVolumeSlider  *slider,
+void cc_volume_slider_set_stream        (CcVolumeSlider  *self,
                                          GvcMixerStream  *stream,
                                          CcStreamType     type);
 
-void cc_volume_slider_set_is_amplified  (CcVolumeSlider  *slider,
+void cc_volume_slider_set_is_amplified  (CcVolumeSlider  *self,
                                          gboolean         is_amplified);
 
-GvcMixerStream *cc_volume_slider_get_stream (CcVolumeSlider *slider);
+GvcMixerStream *cc_volume_slider_get_stream (CcVolumeSlider *self);
 
 G_END_DECLS

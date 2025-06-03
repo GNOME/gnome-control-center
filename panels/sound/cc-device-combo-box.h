@@ -26,11 +26,11 @@ G_BEGIN_DECLS
 #define CC_TYPE_DEVICE_COMBO_BOX (cc_device_combo_box_get_type ())
 G_DECLARE_FINAL_TYPE (CcDeviceComboBox, cc_device_combo_box, CC, DEVICE_COMBO_BOX, GtkComboBox)
 
-void                   cc_device_combo_box_set_mixer_control (CcDeviceComboBox *combo_box,
+void                   cc_device_combo_box_set_mixer_control (CcDeviceComboBox *self,
                                                               GvcMixerControl  *mixer_control,
                                                               gboolean          is_output);
 
-GvcMixerUIDevice      *cc_device_combo_box_get_device        (CcDeviceComboBox *combo_box);
+GvcMixerUIDevice      *cc_device_combo_box_get_device        (CcDeviceComboBox *self);
 
 void cc_device_combo_box_device_added (CcDeviceComboBox *self,
                                        guint             id);

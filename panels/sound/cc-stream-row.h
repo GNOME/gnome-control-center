@@ -35,8 +35,8 @@ CcStreamRow     *cc_stream_row_new       (GtkSizeGroup    *size_group,
                                           CcStreamType     stream_type,
                                           GvcMixerControl *mixer_control);
 
-GvcMixerStream *cc_stream_row_get_stream (CcStreamRow    *row);
+GvcMixerStream *cc_stream_row_get_stream (CcStreamRow    *self);
 
-guint           cc_stream_row_get_id     (CcStreamRow    *row);
+guint           cc_stream_row_get_id     (CcStreamRow    *self);
 
 G_END_DECLS

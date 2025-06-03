@@ -29,7 +29,7 @@ G_DECLARE_FINAL_TYPE (CcSpeakerTestButton, cc_speaker_test_button, CC, SPEAKER_T
 GtkWidget *cc_speaker_test_button_new (GSoundContext         *context,
                                        pa_channel_position_t  position);
 
-void       cc_speaker_test_button_set_channel_position (CcSpeakerTestButton   *button,
+void       cc_speaker_test_button_set_channel_position (CcSpeakerTestButton   *self,
                                                         pa_channel_position_t  position);
 
 G_END_DECLS
