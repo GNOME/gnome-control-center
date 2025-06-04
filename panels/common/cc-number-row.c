@@ -285,7 +285,7 @@ cc_number_object_to_string_for_days (CcNumberObject *self)
  * CcNumberRow:
  *
  * `CcNumberRow` is an `AdwComboRow` with a model that wraps a GListStore of
- * `CcStringObject`. It has convenient methods to add values directly.
+ * `CcNumberObject`. It has convenient methods to add values directly.
  */
 
 struct _CcNumberRow {
