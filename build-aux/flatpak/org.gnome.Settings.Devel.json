@@ -847,36 +847,6 @@
             ]
         },
         {
-            "name" : "cogl",
-            "buildsystem" : "autotools",
-            "sources" : [
-                {
-                    "type" : "git",
-                    "tag" : "cogl-1.22",
-                    "url" : "https://gitlab.gnome.org/Archive/cogl.git"
-                }
-            ]
-        },
-        {
-            "name" : "clutter",
-            "buildsystem" : "meson",
-            "config-opts" : [
-                "-Dbackends='system'",
-                "-Ddrivers='all'",
-                "-Dbuild_tests=false",
-                "-Dbuild_examples=false",
-                "-Ddocumentation=false",
-                "-Dintrospection=true",
-                "-Dpixbuf_tests=false"
-            ],
-            "sources" : [
-                {
-                    "type" : "git",
-                    "url" : "https://gitlab.gnome.org/GNOME/clutter.git"
-                }
-            ]
-        },
-        {
             "name" : "gnome-shell",
             "buildsystem" : "meson",
             "config-opts" : [
