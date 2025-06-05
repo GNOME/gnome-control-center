@@ -1,33 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
-  <!-- interface-requires gtk+ 3.0 -->
-  <template class="CcDeviceComboRow" parent="GtkComboBox">
-    <property name="model">device_model</property>
-    <child>
-      <object class="GtkCellRendererPixbuf">
-        <property name="xpad">6</property>
+  <template class="CcDeviceComboRow" parent="AdwComboRow">
+    <property name="model">
+      <object class="GListStore" id="device_list">
+        <property name="item-type">GvcMixerUIDevice</property>
       </object>
-      <attributes>
-        <attribute name="icon-name">1</attribute>
-      </attributes>
-    </child>
-    <child>
-      <object class="GtkCellRendererText">
-        <property name="ellipsize">end</property>
+    </property>
+    <property name="factory">
+      <object class="GtkSignalListItemFactory">
+        <signal name="setup" handler="factory_setup_cb" object="CcDeviceComboRow"/>
+        <signal name="bind" handler="factory_bind_cb" object="CcDeviceComboRow"/>
+        <signal name="unbind" handler="factory_unbind_cb" object="CcDeviceComboRow"/>
       </object>
-      <attributes>
-        <attribute name="text">0</attribute>
-      </attributes>
-    </child>
+    </property>
   </template>
-  <object class="GtkListStore" id="device_model">
-    <columns>
-      <!-- column-name title -->
-      <column type="gchararray"/>
-      <!-- column-name icon -->
-      <column type="gchararray"/>
-      <!-- column-name id -->
-      <column type="guint"/>
-    </columns>
-  </object>
 </interface>

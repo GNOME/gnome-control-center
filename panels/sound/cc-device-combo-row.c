@@ -20,100 +20,187 @@
 
 struct _CcDeviceComboRow
 {
-  GtkComboBox      parent_instance;
+  AdwComboRow      parent_instance;
 
-  GtkListStore    *device_model;
+  GListStore      *device_list;
 
   GvcMixerControl *mixer_control;
   gboolean         is_output;
 };
 
-G_DEFINE_TYPE (CcDeviceComboRow, cc_device_combo_row, GTK_TYPE_COMBO_BOX)
+G_DEFINE_TYPE (CcDeviceComboRow, cc_device_combo_row, ADW_TYPE_COMBO_ROW)
 
-static gboolean get_iter (CcDeviceComboRow *self, guint id, GtkTreeIter *iter);
+static void
+selected_item_changed (CcDeviceComboRow *self,
+                       GParamSpec       *pspec,
+                       GtkListItem      *list_item)
+{
+  GtkWidget *box;
+  GtkWidget *selected_icon;
+
+  box = gtk_list_item_get_child (list_item);
+  selected_icon = gtk_widget_get_last_child (box);
+
+  if (adw_combo_row_get_selected_item (ADW_COMBO_ROW (self)) == gtk_list_item_get_item (list_item))
+    gtk_widget_set_opacity (selected_icon, 1.0);
+  else
+    gtk_widget_set_opacity (selected_icon, 0.0);
+}
+
+static void
+item_root_changed (GtkWidget        *box,
+                   GParamSpec       *pspec,
+                   CcDeviceComboRow *self)
+{
+  GtkWidget *selected_icon;
+  GtkWidget *box_popover;
+  gboolean is_in_combo_popover;
+
+  selected_icon = gtk_widget_get_last_child (box);
+  box_popover = gtk_widget_get_ancestor (box, GTK_TYPE_POPOVER);
+  is_in_combo_popover = (box_popover != NULL &&
+                         gtk_widget_get_ancestor (box_popover, ADW_TYPE_COMBO_ROW) == (GtkWidget *) self);
+
+  /* Selection icon should only be visible when in the popover */
+  gtk_widget_set_visible (selected_icon, is_in_combo_popover);
+}
+
+static void
+factory_setup_cb (CcDeviceComboRow *self,
+                 GtkListItem       *list_item)
+{
+  GtkWidget *box;
+  GtkWidget *device_icon;
+  GtkWidget *label;
+  GtkWidget *selected_icon;
+
+  box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
+
+  device_icon = g_object_new (GTK_TYPE_IMAGE,
+                              "accessible-role", GTK_ACCESSIBLE_ROLE_PRESENTATION,
+                              "use-fallback", TRUE,
+                              NULL);
+  gtk_widget_set_margin_start (device_icon, 6);
+  gtk_widget_set_margin_end (device_icon, 6);
+  gtk_box_append (GTK_BOX (box), device_icon);
+
+  label = gtk_label_new (NULL);
+  gtk_label_set_xalign (GTK_LABEL (label), 0.0);
+  gtk_label_set_ellipsize (GTK_LABEL (label), PANGO_ELLIPSIZE_END);
+  gtk_label_set_width_chars (GTK_LABEL (label), 1);
+  gtk_widget_set_valign (label, GTK_ALIGN_CENTER);
+  gtk_box_append (GTK_BOX (box), label);
+
+  selected_icon = g_object_new (GTK_TYPE_IMAGE,
+                                "accessible-role", GTK_ACCESSIBLE_ROLE_PRESENTATION,
+                                "icon-name", "object-select-symbolic",
+                                NULL);
+  gtk_box_append (GTK_BOX (box), selected_icon);
+
+  gtk_list_item_set_child (list_item, box);
+}
+
+static void
+factory_bind_cb (CcDeviceComboRow *self,
+                 GtkListItem      *list_item)
+{
+  GvcMixerUIDevice *device;
+  GtkWidget *box;
+  GtkWidget *device_icon;
+  GtkWidget *label;
+  g_autofree gchar *icon_name = NULL;
+  g_autofree gchar *description = NULL;
+  const gchar *origin;
+
+  device = gtk_list_item_get_item (list_item);
+  box = gtk_list_item_get_child (list_item);
+  device_icon = gtk_widget_get_first_child (box);
+  label = gtk_widget_get_next_sibling (device_icon);
+
+  if (gvc_mixer_ui_device_get_icon_name (device) != NULL)
+    icon_name = g_strdup_printf ("%s-symbolic", gvc_mixer_ui_device_get_icon_name (device));
+
+  gtk_image_set_from_icon_name (GTK_IMAGE (device_icon), icon_name);
+
+  origin = gvc_mixer_ui_device_get_origin (device);
+  if (origin && origin[0] != '\0')
+    {
+      description = g_strdup_printf ("%s - %s",
+                                     gvc_mixer_ui_device_get_description (device),
+                                     origin);
+    }
+  else
+    {
+      description = g_strdup (gvc_mixer_ui_device_get_description (device));
+    }
+
+  gtk_label_set_label (GTK_LABEL (label), description);
+
+  g_signal_connect (self, "notify::selected-item",
+                    G_CALLBACK (selected_item_changed), list_item);
+  selected_item_changed (self, NULL, list_item);
+
+  g_signal_connect (box, "notify::root",
+                    G_CALLBACK (item_root_changed), self);
+  item_root_changed (box, NULL, self);
+}
+
+static void
+factory_unbind_cb (CcDeviceComboRow *self,
+                   GtkListItem      *list_item)
+{
+  GtkWidget *box;
+
+  box = gtk_list_item_get_child (list_item);
+
+  g_signal_handlers_disconnect_by_func (self, selected_item_changed, list_item);
+  g_signal_handlers_disconnect_by_func (box, item_root_changed, self);
+}
+
+static GvcMixerUIDevice *
+lookup_device_id (CcDeviceComboRow *self,
+                  guint             id)
+{
+  if (self->is_output)
+    return gvc_mixer_control_lookup_output_id (self->mixer_control, id);
+
+  return gvc_mixer_control_lookup_input_id (self->mixer_control, id);
+}
 
 void
 cc_device_combo_row_device_added (CcDeviceComboRow *self,
                                   guint             id)
 {
-  GvcMixerUIDevice *device = NULL;
-  g_autofree gchar *label = NULL;
-  g_autofree gchar *icon_name = NULL;
-  const gchar *origin;
-  GtkTreeIter iter;
+  GvcMixerUIDevice *device = lookup_device_id (self, id);
 
-  if (self->is_output)
-    device = gvc_mixer_control_lookup_output_id (self->mixer_control, id);
-  else
-    device = gvc_mixer_control_lookup_input_id (self->mixer_control, id);
   if (device == NULL)
     return;
 
-  origin = gvc_mixer_ui_device_get_origin (device);
-  if (origin && origin[0] != '\0')
-    {
-      label = g_strdup_printf ("%s - %s",
-                               gvc_mixer_ui_device_get_description (device),
-                               origin);
-    }
-  else
-    {
-      label = g_strdup (gvc_mixer_ui_device_get_description (device));
-    }
-
-  if (gvc_mixer_ui_device_get_icon_name (device) != NULL)
-    icon_name = g_strdup_printf ("%s-symbolic", gvc_mixer_ui_device_get_icon_name (device));
-
-  if (!get_iter (self, id, &iter))
-    gtk_list_store_append (self->device_model, &iter);
-
-  gtk_list_store_set (self->device_model, &iter,
-                      0, label,
-                      1, icon_name,
-                      2, id,
-                      -1);
-}
-
-static gboolean
-get_iter (CcDeviceComboRow *self,
-          guint             id,
-          GtkTreeIter      *iter)
-{
-  if (!gtk_tree_model_get_iter_first (GTK_TREE_MODEL (self->device_model), iter))
-    return FALSE;
-
-  do
-    {
-      guint i;
-
-      gtk_tree_model_get (GTK_TREE_MODEL (self->device_model), iter, 2, &i, -1);
-      if (i == id)
-        return TRUE;
-    } while (gtk_tree_model_iter_next (GTK_TREE_MODEL (self->device_model), iter));
-
-  return FALSE;
+  g_list_store_append (self->device_list, device);
 }
 
 void
 cc_device_combo_row_device_removed (CcDeviceComboRow *self,
                                     guint             id)
 {
-  GtkTreeIter iter;
+  GvcMixerUIDevice *device = lookup_device_id (self, id);
+  guint position;
 
-  if (get_iter (self, id, &iter))
-    gtk_list_store_remove (self->device_model, &iter);
+  if (g_list_store_find (self->device_list, device, &position))
+    g_list_store_remove (self->device_list, position);
 }
 
 void
 cc_device_combo_row_active_device_changed (CcDeviceComboRow *self,
                                            guint             id)
 {
-  GtkTreeIter iter;
+  GvcMixerUIDevice *device = lookup_device_id (self, id);
+  guint position;
 
-  if (get_iter (self, id, &iter))
-    gtk_combo_box_set_active_iter (GTK_COMBO_BOX (self), &iter);
+  if (g_list_store_find (self->device_list, device, &position))
+    adw_combo_row_set_selected (ADW_COMBO_ROW (self), position);
   else
-    gtk_combo_box_set_active_iter (GTK_COMBO_BOX (self), NULL);
+    adw_combo_row_set_selected (ADW_COMBO_ROW (self), GTK_INVALID_LIST_POSITION);
 }
 
 static void
@@ -136,7 +223,11 @@ cc_device_combo_row_class_init (CcDeviceComboRowClass *klass)
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/sound/cc-device-combo-row.ui");
 
-  gtk_widget_class_bind_template_child (widget_class, CcDeviceComboRow, device_model);
+  gtk_widget_class_bind_template_child (widget_class, CcDeviceComboRow, device_list);
+
+  gtk_widget_class_bind_template_callback (widget_class, factory_setup_cb);
+  gtk_widget_class_bind_template_callback (widget_class, factory_bind_cb);
+  gtk_widget_class_bind_template_callback (widget_class, factory_unbind_cb);
 }
 
 void
@@ -163,18 +254,7 @@ cc_device_combo_row_set_mixer_control (CcDeviceComboRow *self,
 GvcMixerUIDevice *
 cc_device_combo_row_get_device (CcDeviceComboRow *self)
 {
-  GtkTreeIter iter;
-  guint id;
-
   g_return_val_if_fail (CC_IS_DEVICE_COMBO_ROW (self), NULL);
 
-  if (!gtk_combo_box_get_active_iter (GTK_COMBO_BOX (self), &iter))
-    return NULL;
-
-  gtk_tree_model_get (GTK_TREE_MODEL (self->device_model), &iter, 2, &id, -1);
-
-  if (self->is_output)
-    return gvc_mixer_control_lookup_output_id (self->mixer_control, id);
-  else
-    return gvc_mixer_control_lookup_input_id (self->mixer_control, id);
+  return adw_combo_row_get_selected_item (ADW_COMBO_ROW (self));
 }
