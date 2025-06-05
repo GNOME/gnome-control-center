@@ -15,10 +15,10 @@
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "cc-device-combo-box.h"
+#include "cc-device-combo-row.h"
 #include "cc-sound-resources.h"
 
-struct _CcDeviceComboBox
+struct _CcDeviceComboRow
 {
   GtkComboBox      parent_instance;
 
@@ -28,12 +28,12 @@ struct _CcDeviceComboBox
   gboolean         is_output;
 };
 
-G_DEFINE_TYPE (CcDeviceComboBox, cc_device_combo_box, GTK_TYPE_COMBO_BOX)
+G_DEFINE_TYPE (CcDeviceComboRow, cc_device_combo_row, GTK_TYPE_COMBO_BOX)
 
-static gboolean get_iter (CcDeviceComboBox *self, guint id, GtkTreeIter *iter);
+static gboolean get_iter (CcDeviceComboRow *self, guint id, GtkTreeIter *iter);
 
 void
-cc_device_combo_box_device_added (CcDeviceComboBox *self,
+cc_device_combo_row_device_added (CcDeviceComboRow *self,
                                   guint             id)
 {
   GvcMixerUIDevice *device = NULL;
@@ -75,7 +75,7 @@ cc_device_combo_box_device_added (CcDeviceComboBox *self,
 }
 
 static gboolean
-get_iter (CcDeviceComboBox *self,
+get_iter (CcDeviceComboRow *self,
           guint             id,
           GtkTreeIter      *iter)
 {
@@ -95,7 +95,7 @@ get_iter (CcDeviceComboBox *self,
 }
 
 void
-cc_device_combo_box_device_removed (CcDeviceComboBox *self,
+cc_device_combo_row_device_removed (CcDeviceComboRow *self,
                                     guint             id)
 {
   GtkTreeIter iter;
@@ -105,7 +105,7 @@ cc_device_combo_box_device_removed (CcDeviceComboBox *self,
 }
 
 void
-cc_device_combo_box_active_device_changed (CcDeviceComboBox *self,
+cc_device_combo_row_active_device_changed (CcDeviceComboRow *self,
                                            guint             id)
 {
   GtkTreeIter iter;
@@ -117,30 +117,30 @@ cc_device_combo_box_active_device_changed (CcDeviceComboBox *self,
 }
 
 static void
-cc_device_combo_box_dispose (GObject *object)
+cc_device_combo_row_dispose (GObject *object)
 {
-  CcDeviceComboBox *self = CC_DEVICE_COMBO_BOX (object);
+  CcDeviceComboRow *self = CC_DEVICE_COMBO_ROW (object);
 
   g_clear_object (&self->mixer_control);
 
-  G_OBJECT_CLASS (cc_device_combo_box_parent_class)->dispose (object);
+  G_OBJECT_CLASS (cc_device_combo_row_parent_class)->dispose (object);
 }
 
 void
-cc_device_combo_box_class_init (CcDeviceComboBoxClass *klass)
+cc_device_combo_row_class_init (CcDeviceComboRowClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
-  object_class->dispose = cc_device_combo_box_dispose;
+  object_class->dispose = cc_device_combo_row_dispose;
 
-  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/sound/cc-device-combo-box.ui");
+  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/sound/cc-device-combo-row.ui");
 
-  gtk_widget_class_bind_template_child (widget_class, CcDeviceComboBox, device_model);
+  gtk_widget_class_bind_template_child (widget_class, CcDeviceComboRow, device_model);
 }
 
 void
-cc_device_combo_box_init (CcDeviceComboBox *self)
+cc_device_combo_row_init (CcDeviceComboRow *self)
 {
   g_resources_register (cc_sound_get_resource ());
 
@@ -148,11 +148,11 @@ cc_device_combo_box_init (CcDeviceComboBox *self)
 }
 
 void
-cc_device_combo_box_set_mixer_control (CcDeviceComboBox *self,
+cc_device_combo_row_set_mixer_control (CcDeviceComboRow *self,
                                        GvcMixerControl  *mixer_control,
                                        gboolean          is_output)
 {
-  g_return_if_fail (CC_IS_DEVICE_COMBO_BOX (self));
+  g_return_if_fail (CC_IS_DEVICE_COMBO_ROW (self));
 
   g_clear_object (&self->mixer_control);
 
@@ -161,12 +161,12 @@ cc_device_combo_box_set_mixer_control (CcDeviceComboBox *self,
 }
 
 GvcMixerUIDevice *
-cc_device_combo_box_get_device (CcDeviceComboBox *self)
+cc_device_combo_row_get_device (CcDeviceComboRow *self)
 {
   GtkTreeIter iter;
   guint id;
 
-  g_return_val_if_fail (CC_IS_DEVICE_COMBO_BOX (self), NULL);
+  g_return_val_if_fail (CC_IS_DEVICE_COMBO_ROW (self), NULL);
 
   if (!gtk_combo_box_get_active_iter (GTK_COMBO_BOX (self), &iter))
     return NULL;

@@ -23,22 +23,22 @@
 
 G_BEGIN_DECLS
 
-#define CC_TYPE_DEVICE_COMBO_BOX (cc_device_combo_box_get_type ())
-G_DECLARE_FINAL_TYPE (CcDeviceComboBox, cc_device_combo_box, CC, DEVICE_COMBO_BOX, GtkComboBox)
+#define CC_TYPE_DEVICE_COMBO_ROW (cc_device_combo_row_get_type ())
+G_DECLARE_FINAL_TYPE (CcDeviceComboRow, cc_device_combo_row, CC, DEVICE_COMBO_ROW, GtkComboBox)
 
-void                   cc_device_combo_box_set_mixer_control (CcDeviceComboBox *self,
+void                   cc_device_combo_row_set_mixer_control (CcDeviceComboRow *self,
                                                               GvcMixerControl  *mixer_control,
                                                               gboolean          is_output);
 
-GvcMixerUIDevice      *cc_device_combo_box_get_device        (CcDeviceComboBox *self);
+GvcMixerUIDevice      *cc_device_combo_row_get_device        (CcDeviceComboRow *self);
 
-void cc_device_combo_box_device_added (CcDeviceComboBox *self,
+void cc_device_combo_row_device_added (CcDeviceComboRow *self,
                                        guint             id);
 
-void cc_device_combo_box_device_removed (CcDeviceComboBox *self,
+void cc_device_combo_row_device_removed (CcDeviceComboRow *self,
                                          guint             id);
 
-void cc_device_combo_box_active_device_changed (CcDeviceComboBox *self,
+void cc_device_combo_row_active_device_changed (CcDeviceComboRow *self,
                                                 guint             id);
 
 G_END_DECLS

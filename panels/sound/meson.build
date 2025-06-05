@@ -50,7 +50,7 @@ blueprints = custom_target(
 sources = files(
   'cc-alert-chooser-page.c',
   'cc-balance-slider.c',
-  'cc-device-combo-box.c',
+  'cc-device-combo-row.c',
   'cc-fade-slider.c',
   'cc-level-bar.c',
   'cc-output-test-wheel.c',
