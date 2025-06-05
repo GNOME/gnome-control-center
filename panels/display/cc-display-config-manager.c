@@ -71,35 +71,3 @@ cc_display_config_manager_get_night_light_supported (CcDisplayConfigManager *sel
 {
   return CC_DISPLAY_CONFIG_MANAGER_GET_CLASS (self)->get_night_light_supported (self);
 }
-
-double
-cc_display_config_manager_get_luminance (CcDisplayConfigManager *self,
-                                         CcDisplayMonitor       *monitor,
-                                         CcDisplayColorMode      color_mode)
-{
-  return CC_DISPLAY_CONFIG_MANAGER_GET_CLASS (self)->get_luminance (self,
-                                                                    monitor,
-                                                                    color_mode);
-}
-
-double
-cc_display_config_manager_get_default_luminance (CcDisplayConfigManager *self,
-                                                 CcDisplayMonitor       *monitor,
-                                                 CcDisplayColorMode      color_mode)
-{
-  return CC_DISPLAY_CONFIG_MANAGER_GET_CLASS (self)->get_default_luminance (self,
-                                                                            monitor,
-                                                                            color_mode);
-}
-
-void
-cc_display_config_manager_set_luminance (CcDisplayConfigManager *self,
-                                         CcDisplayMonitor       *monitor,
-                                         CcDisplayColorMode      color_mode,
-                                         double                  luminance)
-{
-  return CC_DISPLAY_CONFIG_MANAGER_GET_CLASS (self)->set_luminance (self,
-                                                                    monitor,
-                                                                    color_mode,
-                                                                    luminance);
-}

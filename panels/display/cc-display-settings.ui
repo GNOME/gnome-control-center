@@ -87,28 +87,6 @@
           </object>
         </child>
         <child>
-          <object class="AdwActionRow" id="luminance_row">
-            <property name="width_request">100</property>
-            <property name="title" translatable="yes">HDR _Brightness</property>
-            <property name="use-underline">True</property>
-            <property name="activatable-widget">luminance_scale</property>
-            <child>
-              <object class="GtkScale" id="luminance_scale">
-                <property name="width-request">240</property>
-                <property name="adjustment">
-                  <object class="GtkAdjustment"  id="luminance_scale_adjustment">
-                    <property name="upper">190</property>
-                    <property name="lower">10</property>
-                    <property name="value">100</property>
-                    <property name="step-increment">1</property>
-                    <property name="page-increment">10</property>
-                  </object>
-                </property>
-              </object>
-            </child>
-          </object>
-        </child>
-        <child>
           <object class="AdwSwitchRow" id="underscanning_row">
             <property name="width_request">100</property>
             <property name="title" translatable="yes">Adjust for _TV</property>
