@@ -19,8 +19,8 @@ template $CcTimelikeEditor: Widget {
 
     GestureClick {
       propagation-phase: capture;
-      pressed => $editor_change_time_pressed_cb() swapped;
-      released => $editor_change_time_released_cb() swapped;
+      pressed => $editor_change_time_pressed_cb(template);
+      released => $editor_change_time_released_cb(template);
     }
   }
 
@@ -42,8 +42,8 @@ template $CcTimelikeEditor: Widget {
 
     GestureClick {
       propagation-phase: capture;
-      pressed => $editor_change_time_pressed_cb() swapped;
-      released => $editor_change_time_released_cb() swapped;
+      pressed => $editor_change_time_pressed_cb(template);
+      released => $editor_change_time_released_cb(template);
     }
   }
 
@@ -71,8 +71,8 @@ template $CcTimelikeEditor: Widget {
 
     GestureClick {
       propagation-phase: capture;
-      pressed => $editor_change_time_pressed_cb() swapped;
-      released => $editor_change_time_released_cb() swapped;
+      pressed => $editor_change_time_pressed_cb(template);
+      released => $editor_change_time_released_cb(template);
     }
   }
 
@@ -94,17 +94,17 @@ template $CcTimelikeEditor: Widget {
 
     GestureClick {
       propagation-phase: capture;
-      pressed => $editor_change_time_pressed_cb() swapped;
-      released => $editor_change_time_released_cb() swapped;
+      pressed => $editor_change_time_pressed_cb(template);
+      released => $editor_change_time_released_cb(template);
     }
   }
 
   Button am_pm_button {
     valign: center;
-    clicked => $editor_am_pm_button_clicked_cb() swapped;
+    clicked => $editor_am_pm_button_clicked_cb(template);
 
     Stack am_pm_stack {
-      notify::visible-child => $editor_am_pm_stack_changed_cb() swapped;
+      notify::visible-child => $editor_am_pm_stack_changed_cb(template);
 
       Label am_label {
         styles [

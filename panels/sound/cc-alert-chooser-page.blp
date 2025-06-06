@@ -17,7 +17,7 @@ template $CcAlertChooserPage: Adw.NavigationPage {
           [prefix]
           CheckButton none_button {
             valign: center;
-            toggled => $toggled_cb() swapped;
+            toggled => $toggled_cb(template);
           }
         }
 
@@ -29,8 +29,8 @@ template $CcAlertChooserPage: Adw.NavigationPage {
           CheckButton click_button {
             valign: center;
             group: none_button;
-            activate => $activate_cb() swapped;
-            toggled => $toggled_cb() swapped;
+            activate => $activate_cb(template);
+            toggled => $toggled_cb(template);
           }
         }
 
@@ -42,8 +42,8 @@ template $CcAlertChooserPage: Adw.NavigationPage {
           CheckButton string_button {
             valign: center;
             group: none_button;
-            activate => $activate_cb() swapped;
-            toggled => $toggled_cb() swapped;
+            activate => $activate_cb(template);
+            toggled => $toggled_cb(template);
           }
         }
 
@@ -55,8 +55,8 @@ template $CcAlertChooserPage: Adw.NavigationPage {
           CheckButton swing_button {
             valign: center;
             group: none_button;
-            activate => $activate_cb() swapped;
-            toggled => $toggled_cb() swapped;
+            activate => $activate_cb(template);
+            toggled => $toggled_cb(template);
           }
         }
 
@@ -68,8 +68,8 @@ template $CcAlertChooserPage: Adw.NavigationPage {
           CheckButton hum_button {
             valign: center;
             group: none_button;
-            activate => $activate_cb() swapped;
-            toggled => $toggled_cb() swapped;
+            activate => $activate_cb(template);
+            toggled => $toggled_cb(template);
           }
         }
       }

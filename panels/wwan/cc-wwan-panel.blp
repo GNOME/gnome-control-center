@@ -57,7 +57,7 @@ template $CcWwanPanel: $CcPanel {
                     halign: center;
                     use-underline: true;
                     label: _("_Turn Off Airplane Mode");
-                    clicked => $wwan_on_airplane_off_clicked_cb() swapped;
+                    clicked => $wwan_on_airplane_off_clicked_cb(template);
 
                     styles [
                       "pill",
@@ -89,7 +89,7 @@ template $CcWwanPanel: $CcPanel {
                         Adw.ComboRow data_list_row {
                           title: _("Data Connection");
                           subtitle: _("SIM card used for internet");
-                          notify::selected-item => $wwan_data_list_selected_sim_changed_cb() swapped;
+                          notify::selected-item => $wwan_data_list_selected_sim_changed_cb(template);
                         }
                       }
 

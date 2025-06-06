@@ -38,7 +38,7 @@ template $CcUaZoomPage: Adw.NavigationPage {
         Adw.ComboRow magnify_view_row {
           title: _("M_agnifier View");
           use-underline: true;
-          notify::selected => $ua_zoom_magnify_postion_row_changed_cb() swapped;
+          notify::selected => $ua_zoom_magnify_postion_row_changed_cb(template);
 
           model: StringList {
             strings [
@@ -57,7 +57,7 @@ template $CcUaZoomPage: Adw.NavigationPage {
 
         Adw.ComboRow zoom_screen_area_row {
           sensitive: bind magnify_outside_screen_row.sensitive;
-          notify::selected => $ua_zoom_screen_area_row_changed_cb() swapped;
+          notify::selected => $ua_zoom_screen_area_row_changed_cb(template);
           title: _("_Screen Area");
           use-underline: true;
 
@@ -81,7 +81,7 @@ template $CcUaZoomPage: Adw.NavigationPage {
           sensitive: bind magnify_outside_screen_row.sensitive;
           title: _("_Follow Behavior");
           use-underline: true;
-          notify::selected => $ua_zoom_behaviour_row_changed_cb() swapped;
+          notify::selected => $ua_zoom_behaviour_row_changed_cb(template);
 
           model: StringList {
             strings [
@@ -164,7 +164,7 @@ template $CcUaZoomPage: Adw.NavigationPage {
 
             ColorButton crosshair_color_button {
               valign: center;
-              color-set => $ua_zoom_crosshair_color_set_cb() swapped;
+              color-set => $ua_zoom_crosshair_color_set_cb(template);
             }
           }
         }
@@ -200,7 +200,7 @@ template $CcUaZoomPage: Adw.NavigationPage {
               upper: 0.75;
               step-increment: 0.1;
               page-increment: 0.1;
-              value-changed => $ua_zoom_brightness_value_changed_cb() swapped;
+              value-changed => $ua_zoom_brightness_value_changed_cb(template);
             };
           }
         }
@@ -224,7 +224,7 @@ template $CcUaZoomPage: Adw.NavigationPage {
               upper: 0.75;
               step-increment: 0.1;
               page-increment: 0.1;
-              value-changed => $ua_zoom_contrast_value_changed_cb() swapped;
+              value-changed => $ua_zoom_contrast_value_changed_cb(template);
             };
           }
         }

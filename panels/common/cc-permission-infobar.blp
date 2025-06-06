@@ -6,6 +6,6 @@ template $CcPermissionInfobar: Adw.Bin {
     title: _("Error — some settings cannot be unlocked");
     revealed: true;
     button-style: suggested;
-    button-clicked => $banner_button_clicked_cb() swapped;
+    button-clicked => $banner_button_clicked_cb(template);
   }
 }

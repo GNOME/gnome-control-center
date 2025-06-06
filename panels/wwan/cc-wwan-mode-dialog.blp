@@ -12,7 +12,7 @@ template $CcWwanModeDialog: Dialog {
     Adw.PreferencesGroup {
       ListBox network_mode_list {
         selection-mode: none;
-        row-activated => $cc_wwan_mode_changed_cb() swapped;
+        row-activated => $cc_wwan_mode_changed_cb(template);
 
         styles [
           "boxed-list",
@@ -25,14 +25,14 @@ template $CcWwanModeDialog: Dialog {
   Button button_cancel {
     use-underline: true;
     label: _("_Cancel");
-    clicked => $gtk_widget_hide() swapped;
+    clicked => $gtk_widget_hide(template);
   }
 
   [action response=apply default]
   Button button_ok {
     use-underline: true;
     label: _("_Set");
-    clicked => $cc_wwan_mode_dialog_ok_clicked_cb() swapped;
+    clicked => $cc_wwan_mode_dialog_ok_clicked_cb(template);
 
     styles [
       "suggested-action ",
