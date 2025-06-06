@@ -99,18 +99,11 @@ build.container.fedora@x86_64:
     FDO_DISTRIBUTION_EXEC: |-
       dnf builddep -y gnome-control-center && \
       dnf builddep -y gsettings-desktop-schemas && \
-      dnf builddep -y gtk4 && \
       dnf builddep -y gnome-settings-daemon && \
       dnf builddep -y libadwaita && \
       dnf builddep -y gnome-online-accounts && \
       git clone --depth 1 https://gitlab.gnome.org/GNOME/gsettings-desktop-schemas.git && \
         cd gsettings-desktop-schemas && \
-        meson setup $MESON_BUILD_DIR --prefix=/usr && \
-        meson compile -C $MESON_BUILD_DIR && \
-        meson install -C $MESON_BUILD_DIR && \
-        cd .. && \
-      git clone --depth 1 https://gitlab.gnome.org/GNOME/gtk.git && \
-        cd gtk && \
         meson setup $MESON_BUILD_DIR --prefix=/usr && \
         meson compile -C $MESON_BUILD_DIR && \
         meson install -C $MESON_BUILD_DIR && \
