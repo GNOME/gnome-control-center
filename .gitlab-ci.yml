@@ -45,7 +45,7 @@ stages:
   meson compile -C $MESON_BUILD_DIR 2>&1 | tee compilation.log
 
 .Run Tests: &run_tests
-  export GSK_RENDERER=ngl &&
+  export GSK_RENDERER=gl &&
   echo "== Testing ==" &&
   meson test -C $MESON_BUILD_DIR --verbose --no-stdsplit --no-rebuild
 
