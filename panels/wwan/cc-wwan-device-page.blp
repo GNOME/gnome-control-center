@@ -29,7 +29,7 @@ template $CcWwanDevicePage: Box {
           halign: center;
           use-underline: true;
           label: _("_Unlock");
-          clicked => $wwan_device_unlock_clicked_cb() swapped;
+          clicked => $wwan_device_unlock_clicked_cb(template);
 
           styles [
             "suggested-action",
@@ -60,14 +60,14 @@ template $CcWwanDevicePage: Box {
               use-underline: true;
               title: _("_Mobile Data");
               subtitle: _("Access data using mobile network");
-              notify::active => $wwan_data_settings_changed_cb() swapped;
+              notify::active => $wwan_data_settings_changed_cb(template);
             }
 
             Adw.SwitchRow data_roaming_row {
               use-underline: true;
               title: _("_Data Roaming");
               subtitle: _("Use mobile data when roaming");
-              notify::active => $wwan_data_settings_changed_cb() swapped;
+              notify::active => $wwan_data_settings_changed_cb(template);
             }
           }
         }
@@ -77,7 +77,7 @@ template $CcWwanDevicePage: Box {
 
           ListBox network_settings_list {
             selection-mode: none;
-            row-activated => $wwan_network_settings_activated_cb() swapped;
+            row-activated => $wwan_network_settings_activated_cb(template);
 
             styles [
               "boxed-list",
@@ -105,7 +105,7 @@ template $CcWwanDevicePage: Box {
               "boxed-list",
             ]
 
-            row-activated => $wwan_advanced_settings_activated_cb() swapped;
+            row-activated => $wwan_advanced_settings_activated_cb(template);
 
             $CcListRow apn_settings_row {
               show-arrow: true;

@@ -99,7 +99,7 @@ template $CcDisplayPanel: $CcPanel {
             subtitle: _("Contains top bar and Activities");
             title: _("_Primary Display");
             use-underline: true;
-            notify::selected-item => $on_primary_display_selected_item_changed_cb() swapped;
+            notify::selected-item => $on_primary_display_selected_item_changed_cb(template);
           }
         }
 

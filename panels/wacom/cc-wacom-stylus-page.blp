@@ -19,7 +19,7 @@ template $CcWacomStylusPage: Box {
       activatable-widget: stylus_tip_pressure_scale;
 
       Scale stylus_tip_pressure_scale {
-        value-changed => $on_tip_pressure_value_changed() swapped;
+        value-changed => $on_tip_pressure_value_changed(template);
 
         marks [
           /* Translators: This is a mark in the 'Tip Pressure Feel' scale */
@@ -61,7 +61,7 @@ template $CcWacomStylusPage: Box {
       activatable-widget: stylus_eraser_pressure_scale;
 
       Scale stylus_eraser_pressure_scale {
-        value-changed => $on_eraser_pressure_value_changed() swapped;
+        value-changed => $on_eraser_pressure_value_changed(template);
 
         marks [
           /* Translators: This is a mark in the 'Erase Pressure Feel' scale */

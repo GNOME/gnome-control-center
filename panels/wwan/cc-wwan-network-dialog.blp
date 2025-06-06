@@ -33,7 +33,7 @@ template $CcWwanNetworkDialog: Dialog {
           Adw.SwitchRow automatic_row {
             use-underline: true;
             title: _("_Automatic");
-            notify::active => $cc_wwan_auto_network_changed_cb() swapped;
+            notify::active => $cc_wwan_auto_network_changed_cb(template);
           }
         }
 
@@ -57,7 +57,7 @@ template $CcWwanNetworkDialog: Dialog {
 
           Button refresh_button {
             icon-name: "view-refresh-symbolic";
-            clicked => $cc_wwan_network_dialog_refresh_networks() swapped;
+            clicked => $cc_wwan_network_dialog_refresh_networks(template);
 
             accessibility {
               label: _("Refresh Network Providers");
@@ -78,7 +78,7 @@ template $CcWwanNetworkDialog: Dialog {
             visible: false;
             sensitive: false;
             selection-mode: none;
-            row-activated => $cc_wwan_network_changed_cb() swapped;
+            row-activated => $cc_wwan_network_changed_cb(template);
 
             styles [
               "boxed-list",
@@ -93,14 +93,14 @@ template $CcWwanNetworkDialog: Dialog {
   Button button_cancel {
     use-underline: true;
     label: _("_Cancel");
-    clicked => $gtk_widget_hide() swapped;
+    clicked => $gtk_widget_hide(template);
   }
 
   [action response=apply default]
   Button button_apply {
     use-underline: true;
     label: _("_Set");
-    clicked => $cc_wwan_network_dialog_apply_clicked_cb() swapped;
+    clicked => $cc_wwan_network_dialog_apply_clicked_cb(template);
 
     styles [
       "suggested-action ",

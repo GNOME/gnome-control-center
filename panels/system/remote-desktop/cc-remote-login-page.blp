@@ -46,7 +46,7 @@ template $CcRemoteLoginPage: Adw.Bin {
               tooltip-text: _("Copy");
               valign: center;
               icon-name: "edit-copy-symbolic";
-              clicked => $on_address_copy_clicked() swapped;
+              clicked => $on_address_copy_clicked(template);
 
               styles [
                 "flat",
@@ -68,7 +68,7 @@ template $CcRemoteLoginPage: Adw.Bin {
               tooltip-text: _("Copy");
               valign: center;
               icon-name: "edit-copy-symbolic";
-              clicked => $on_port_copy_clicked() swapped;
+              clicked => $on_port_copy_clicked(template);
 
               styles [
                 "flat",
@@ -89,7 +89,7 @@ template $CcRemoteLoginPage: Adw.Bin {
               tooltip-text: _("Copy");
               valign: center;
               icon-name: "edit-copy-symbolic";
-              clicked => $on_username_copy_clicked() swapped;
+              clicked => $on_username_copy_clicked(template);
 
               styles [
                 "flat",
@@ -106,7 +106,7 @@ template $CcRemoteLoginPage: Adw.Bin {
               tooltip-text: _("Copy");
               valign: center;
               icon-name: "edit-copy-symbolic";
-              clicked => $on_password_copy_clicked() swapped;
+              clicked => $on_password_copy_clicked(template);
 
               styles [
                 "flat",
@@ -123,14 +123,14 @@ template $CcRemoteLoginPage: Adw.Bin {
             sensitive: false;
             title: _("_Generate New Password");
             use-underline: true;
-            activated => $on_generate_password_button_row_activated() swapped;
+            activated => $on_generate_password_button_row_activated(template);
           }
 
           Adw.ButtonRow verify_encryption_button_row {
             sensitive: false;
             title: _("_Verify Encryption");
             use-underline: true;
-            activated => $on_verify_encryption_button_row_activated() swapped;
+            activated => $on_verify_encryption_button_row_activated(template);
           }
         }
       }

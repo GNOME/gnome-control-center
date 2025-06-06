@@ -268,13 +268,13 @@ template $CcSoundPanel: $CcPanel {
           $CcListRow {
             title: _("Vo_lume Levels");
             show-arrow: true;
-            activated => $volume_levels_activated_cb() swapped;
+            activated => $volume_levels_activated_cb(template);
           }
 
           $CcListRow alert_sound_row {
             title: _("_Alert Sound");
             show-arrow: true;
-            activated => $alert_sound_activated_cb() swapped;
+            activated => $alert_sound_activated_cb(template);
           }
         }
       };

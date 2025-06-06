@@ -239,7 +239,7 @@ template $CcApplicationsPanel: $CcPanel {
               title: _("_Run in Background");
               subtitle: _("Allow activity when the app is closed");
               use-underline: true;
-              notify::active => $background_cb() swapped;
+              notify::active => $background_cb(template);
             }
 
             Adw.SwitchRow screenshots_row {
@@ -253,7 +253,7 @@ template $CcApplicationsPanel: $CcPanel {
               title: _("Change _Wallpaper");
               subtitle: _("Change the desktop wallpaper");
               use-underline: true;
-              notify::active => $wallpaper_cb() swapped;
+              notify::active => $wallpaper_cb(template);
             }
 
             Adw.SwitchRow sounds_row {
@@ -274,7 +274,7 @@ template $CcApplicationsPanel: $CcPanel {
               title: _("_Inhibit Shortcuts");
               subtitle: _("Block standard keyboard shortcuts");
               use-underline: true;
-              notify::active => $shortcuts_cb() swapped;
+              notify::active => $shortcuts_cb(template);
             }
 
             Adw.SwitchRow camera_row {

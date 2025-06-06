@@ -53,7 +53,7 @@ template $CcWifiHotspotDialog: Dialog {
       Entry name_entry {
         hexpand: true;
         max-length: 64;
-        changed => $hotspot_entry_changed_cb() swapped;
+        changed => $hotspot_entry_changed_cb(template);
 
         layout {
           column: "1";
@@ -91,8 +91,8 @@ template $CcWifiHotspotDialog: Dialog {
         secondary-icon-name: "view-refresh-symbolic";
         secondary-icon-tooltip-text: _("Generate Random Password");
         placeholder-text: _("Autogenerate Password");
-        icon-press => $generate_password_clicked_cb() swapped;
-        changed => $hotspot_entry_changed_cb() swapped;
+        icon-press => $generate_password_clicked_cb(template);
+        changed => $hotspot_entry_changed_cb(template);
 
         layout {
           column: "1";

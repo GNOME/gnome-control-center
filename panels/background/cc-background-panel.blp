@@ -51,7 +51,7 @@ template $CcBackgroundPanel: $CcPanel {
                       ];
                     }
 
-                    notify::active => $on_color_scheme_toggle_active_cb() swapped;
+                    notify::active => $on_color_scheme_toggle_active_cb(template);
 
                     $CcBackgroundPreview default_preview {}
 
@@ -85,7 +85,7 @@ template $CcBackgroundPanel: $CcPanel {
                       ];
                     }
 
-                    notify::active => $on_color_scheme_toggle_active_cb() swapped;
+                    notify::active => $on_color_scheme_toggle_active_cb(template);
 
                     $CcBackgroundPreview dark_preview {
                       is-dark: true;

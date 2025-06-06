@@ -19,7 +19,7 @@ template $CcWwanSimLockDialog: Dialog {
           sensitive: false;
           use-underline: true;
           label: _("_Next");
-          clicked => $cc_wwan_pin_next_clicked_cb() swapped;
+          clicked => $cc_wwan_pin_next_clicked_cb(template);
 
           styles [
             "suggested-action",
@@ -32,7 +32,7 @@ template $CcWwanSimLockDialog: Dialog {
 
         child: Button apply_button {
           use-underline: true;
-          clicked => $cc_wwan_pin_apply_clicked_cb() swapped;
+          clicked => $cc_wwan_pin_apply_clicked_cb(template);
 
           styles [
             "suggested-action",
@@ -73,7 +73,7 @@ template $CcWwanSimLockDialog: Dialog {
                 Adw.SwitchRow lock_row {
                   use-underline: true;
                   title: _("_Lock SIM with PIN");
-                  notify::active => $cc_wwan_sim_lock_changed_cb() swapped;
+                  notify::active => $cc_wwan_sim_lock_changed_cb(template);
                 }
               }
 
@@ -115,8 +115,8 @@ template $CcWwanSimLockDialog: Dialog {
                   input-hints: no_emoji;
                   max-length: 8;
                   max-width-chars: 32;
-                  notify::text => $cc_wwan_pin_entry_changed_cb() swapped;
-                  insert-text => $cc_wwan_pin_entry_text_inserted_cb() swapped;
+                  notify::text => $cc_wwan_pin_entry_changed_cb(template);
+                  insert-text => $cc_wwan_pin_entry_text_inserted_cb(template);
 
                   layout {
                     column: "1";
@@ -141,8 +141,8 @@ template $CcWwanSimLockDialog: Dialog {
                   input-hints: no_emoji;
                   max-length: 8;
                   max-width-chars: 32;
-                  notify::text => $cc_wwan_pin_entry_changed_cb() swapped;
-                  insert-text => $cc_wwan_pin_entry_changed_cb() swapped;
+                  notify::text => $cc_wwan_pin_entry_changed_cb(template);
+                  insert-text => $cc_wwan_pin_entry_changed_cb(template);
 
                   layout {
                     column: "1";
@@ -185,9 +185,9 @@ template $CcWwanSimLockDialog: Dialog {
                 input-hints: no_emoji;
                 max-length: 8;
                 max-width-chars: 32;
-                notify::text => $cc_wwan_pin_entered_cb() swapped;
-                insert-text => $cc_wwan_pin_entry_text_inserted_cb() swapped;
-                activate => $cc_wwan_pin_apply_clicked_cb() swapped;
+                notify::text => $cc_wwan_pin_entered_cb(template);
+                insert-text => $cc_wwan_pin_entry_text_inserted_cb(template);
+                activate => $cc_wwan_pin_apply_clicked_cb(template);
               }
             };
           }
@@ -200,6 +200,6 @@ template $CcWwanSimLockDialog: Dialog {
   Button cancel_button {
     use-underline: true;
     label: _("_Cancel");
-    clicked => $gtk_widget_hide() swapped;
+    clicked => $gtk_widget_hide(template);
   }
 }

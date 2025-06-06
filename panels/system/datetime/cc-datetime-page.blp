@@ -2,7 +2,7 @@ using Gtk 4.0;
 using Adw 1;
 
 $CcTzDialog timezone_dialog {
-  tz-selected => $panel_tz_selection_changed_cb() swapped;
+  tz-selected => $panel_tz_selection_changed_cb(template);
 }
 
 Adw.Dialog datetime_dialog {
@@ -23,7 +23,7 @@ Adw.Dialog datetime_dialog {
       Adw.PreferencesGroup {
         ListBox date_box {
           selection-mode: none;
-          row-activated => $on_date_box_row_activated_cb() swapped;
+          row-activated => $on_date_box_row_activated_cb(template);
 
           styles [
             "boxed-list",
@@ -102,7 +102,7 @@ template $CcDateTimePage: Adw.NavigationPage {
           $CcListRow datetime_row {
             title: _("Date &amp; _Time");
             show-arrow: true;
-            activated => $list_box_row_activated() swapped;
+            activated => $list_box_row_activated(template);
           }
         }
 
@@ -117,7 +117,7 @@ template $CcDateTimePage: Adw.NavigationPage {
           $CcListRow timezone_row {
             title: _("Time Z_one");
             show-arrow: true;
-            activated => $list_box_row_activated() swapped;
+            activated => $list_box_row_activated(template);
           }
         }
 

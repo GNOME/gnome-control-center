@@ -21,7 +21,7 @@ template $CcWacomStylusActionDialog: Adw.Dialog {
             Adw.ActionRow left_button_row {
               use-underline: true;
               activatable-widget: left_button;
-              activated => $left_button_activated() swapped;
+              activated => $left_button_activated(template);
 
               [prefix]
               CheckButton left_button {
@@ -32,7 +32,7 @@ template $CcWacomStylusActionDialog: Adw.Dialog {
             Adw.ActionRow middle_button_row {
               use-underline: true;
               activatable-widget: middle_button;
-              activated => $middle_button_activated() swapped;
+              activated => $middle_button_activated(template);
 
               [prefix]
               CheckButton middle_button {
@@ -44,7 +44,7 @@ template $CcWacomStylusActionDialog: Adw.Dialog {
             Adw.ActionRow right_button_row {
               use-underline: true;
               activatable-widget: right_button;
-              activated => $right_button_activated() swapped;
+              activated => $right_button_activated(template);
 
               [prefix]
               CheckButton right_button {
@@ -56,7 +56,7 @@ template $CcWacomStylusActionDialog: Adw.Dialog {
             Adw.ActionRow back_row {
               use-underline: true;
               activatable-widget: back;
-              activated => $back_activated() swapped;
+              activated => $back_activated(template);
 
               [prefix]
               CheckButton back {
@@ -68,7 +68,7 @@ template $CcWacomStylusActionDialog: Adw.Dialog {
             Adw.ActionRow forward_row {
               use-underline: true;
               activatable-widget: forward;
-              activated => $forward_activated() swapped;
+              activated => $forward_activated(template);
 
               [prefix]
               CheckButton forward {
@@ -80,7 +80,7 @@ template $CcWacomStylusActionDialog: Adw.Dialog {
             Adw.ActionRow keybinding_row {
               use-underline: true;
               activatable-widget: keybinding;
-              activated => $keybinding_activated() swapped;
+              activated => $keybinding_activated(template);
 
               [prefix]
               CheckButton keybinding {
@@ -111,7 +111,7 @@ template $CcWacomStylusActionDialog: Adw.Dialog {
             Adw.ActionRow switch_monitor_row {
               use-underline: true;
               activatable-widget: switch_monitor;
-              activated => $switch_monitor_activated() swapped;
+              activated => $switch_monitor_activated(template);
 
               [prefix]
               CheckButton switch_monitor {

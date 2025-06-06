@@ -18,7 +18,7 @@ template $PpPPDSelectionDialog: Adw.Window {
       Button ppd_selection_cancel_button {
         label: _("_Cancel");
         use-underline: true;
-        clicked => $cancel_cb() swapped;
+        clicked => $cancel_cb(template);
       }
 
       [end]
@@ -26,7 +26,7 @@ template $PpPPDSelectionDialog: Adw.Window {
         label: _("_Select");
         use-underline: true;
         sensitive: false;
-        clicked => $select_cb() swapped;
+        clicked => $select_cb(template);
 
         styles [
           "suggested-action",
@@ -82,7 +82,7 @@ template $PpPPDSelectionDialog: Adw.Window {
               has-frame: true;
 
               TreeView ppd_selection_models_treeview {
-                row-activated => $select_cb() swapped;
+                row-activated => $select_cb(template);
 
                 [internal-child selection]
                 TreeSelection treeview-selection1 {}
