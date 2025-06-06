@@ -14,7 +14,7 @@ template $GtpDynamicPanel: $CcPanel {
       Button {
         halign: center;
         label: "Hide";
-        clicked => $on_button_clicked_cb(template) not-swapped;
+        clicked => $on_button_clicked_cb();
 
         styles [
           "pill",

@@ -15,7 +15,7 @@ template $CcPanelList: Adw.Bin {
           label: _("Settings categories");
         }
 
-        row-activated => $row_activated_cb(template) not-swapped;
+        row-activated => $row_activated_cb();
 
         styles [
           "navigation-sidebar",
@@ -27,7 +27,7 @@ template $CcPanelList: Adw.Bin {
       name: "search";
 
       child: ListBox search_listbox {
-        row-activated => $search_row_activated_cb(template) not-swapped;
+        row-activated => $search_row_activated_cb();
         keynav-failed => $cc_util_keynav_propagate_up();
 
         styles [
