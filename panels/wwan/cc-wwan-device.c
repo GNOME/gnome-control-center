@@ -1000,41 +1000,6 @@ cc_wwan_device_get_supported_modes (CcWwanDevice *self,
 }
 
 gchar *
-cc_wwan_device_get_string_from_slots (CcWwanDevice *self,
-                                      MMSim *sim,
-                                      guint slot_num)
-{
-  g_return_val_if_fail (CC_IS_WWAN_DEVICE (self), NULL);
-
-  MMSimType simType;
-  gchar *slot_number;
-  GString *str, *mmSimType;
-
-  str = g_string_sized_new (5);
-  simType = mm_sim_get_sim_type (sim);
-  slot_number = g_strdup_printf ("Slot %d", slot_num);
-  g_string_append (str, slot_number);
-
-  switch(simType)
-  {
-    case MM_SIM_TYPE_UNKNOWN:
-      mmSimType = g_string_append (str, _(" [Unknown]"));
-      break;
-    case MM_SIM_TYPE_PHYSICAL:
-      mmSimType = g_string_append (str, _(" [Physical]"));
-      break;
-    case MM_SIM_TYPE_ESIM:
-      mmSimType = g_string_append (str, _(" [ESIM]"));
-      break;
-    default:
-      mmSimType = g_string_append (str, _(" [Unknown]"));
-      break;
-  }
-
-  return g_string_free (str, FALSE);
-}
-
-gchar *
 cc_wwan_device_get_string_from_mode (CcWwanDevice *self,
                                      MMModemMode   allowed,
                                      MMModemMode   preferred)

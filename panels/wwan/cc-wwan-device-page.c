@@ -37,7 +37,6 @@
 #include "cc-wwan-network-dialog.h"
 #include "cc-wwan-details-dialog.h"
 #include "cc-wwan-sim-lock-dialog.h"
-#include "cc-wwan-sim-slot-dialog.h"
 #include "cc-wwan-apn-dialog.h"
 #include "cc-wwan-device-page.h"
 #include "cc-wwan-resources.h"
@@ -71,7 +70,8 @@ struct _CcWwanDevicePage
   CcListRow     *network_name_row;
   GtkListBox    *network_settings_list;
   CcListRow     *sim_lock_row;
-  CcListRow     *sim_slot_row;
+  AdwComboRow   *sim_slot_row;
+  GtkStringList *sim_slot_string_list;
   GtkButton     *unlock_button;
 
   AdwToastOverlay *toast_overlay;
@@ -393,7 +393,6 @@ wwan_advanced_settings_activated_cb (CcWwanDevicePage *self,
                                      CcListRow        *row)
 {
   GtkWindow *top_level;
-  GtkWidget *sim_slot_dialog;
 
   top_level = GTK_WINDOW (gtk_widget_get_root (GTK_WIDGET (self)));
 
@@ -408,14 +407,13 @@ wwan_advanced_settings_activated_cb (CcWwanDevicePage *self,
       AdwDialog *dialog = cc_wwan_details_dialog_new (self->device);
       adw_dialog_present (dialog, GTK_WIDGET (top_level));
     }
-  else if (row == self->sim_slot_row)
-    {
-      sim_slot_dialog = cc_wwan_sim_slot_dialog_new (GTK_BOX (self), self->device);
-      adw_dialog_present (ADW_DIALOG (sim_slot_dialog), GTK_WIDGET (self));
-    }
   else if (row == self->apn_settings_row)
     {
       wwan_data_show_apn_dialog (self);
+    }
+  else if (GTK_WIDGET (row) == GTK_WIDGET (self->sim_slot_row))
+    {
+        /* NOP handling sim_slot_row, since it is a combo row. */
     }
   else
     {
@@ -488,6 +486,47 @@ cc_wwan_locks_changed_cb (CcWwanDevicePage *self)
 }
 
 static void
+wwan_device_set_primary_sim_slot_cb (CcWwanDevicePage *self)
+{
+  guint primary_slot = adw_combo_row_get_selected (self->sim_slot_row);
+
+  cc_wwan_device_set_primary_sim_slot (self->device, primary_slot, NULL); // FIXME: cancellable
+  g_debug ("Setting primary sim slot to %d", primary_slot);
+}
+
+static void
+cc_wwan_update_sim_slots_row (CcWwanDevicePage *self)
+{
+  g_autoptr(GPtrArray) sim_slots = cc_wwan_device_get_sim_slots (self->device, NULL); // FIXME: cancellable
+  int i;
+
+  /* There's nothing the user can do if we get zero slots. Hide the row. */
+  gtk_widget_set_visible (GTK_WIDGET (self->sim_slot_row), sim_slots->len > 0);
+
+  for (i = 0; i < sim_slots->len; i++) {
+    MMSim *sim = MM_SIM (g_ptr_array_index (sim_slots, i));
+    MMSimType sim_type = mm_sim_get_sim_type (sim);
+    g_autofree gchar *sim_type_label = NULL;
+    g_autofree gchar *sim_label = NULL;
+
+    if (sim_type == MM_SIM_TYPE_PHYSICAL)
+        sim_type_label = g_strdup_printf ("[%s]", _("Physical"));
+    else if (sim_type == MM_SIM_TYPE_ESIM)
+        sim_type_label = g_strdup ("[ESIM]"); /* Let's not translate ESIM. */
+    else
+        sim_type_label = g_strdup_printf ("[%s]", _("Unknown"));
+
+    /* Translators: This refers to a physical or esim slot in a modem.
+     * For example: "Slot 1 Physical" or "Slot 2 ESIM". */
+    sim_label = g_strdup_printf (_("Slot %d %s"), i+1, sim_type_label);
+    gtk_string_list_append (self->sim_slot_string_list, sim_label);
+
+    if (mm_sim_get_active (sim))
+        adw_combo_row_set_selected (self->sim_slot_row, i);
+  }
+}
+
+static void
 cc_wwan_device_page_set_property (GObject      *object,
                                   guint         prop_id,
                                   const GValue *value,
@@ -533,6 +572,7 @@ cc_wwan_device_page_constructed (GObject *object)
 
   cc_wwan_device_page_update (self);
   cc_wwan_locks_changed_cb (self);
+  cc_wwan_update_sim_slots_row (self);
 }
 
 static void
@@ -588,9 +628,11 @@ cc_wwan_device_page_class_init (CcWwanDevicePageClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcWwanDevicePage, network_settings_list);
   gtk_widget_class_bind_template_child (widget_class, CcWwanDevicePage, sim_lock_row);
   gtk_widget_class_bind_template_child (widget_class, CcWwanDevicePage, sim_slot_row);
+  gtk_widget_class_bind_template_child (widget_class, CcWwanDevicePage, sim_slot_string_list);
   gtk_widget_class_bind_template_child (widget_class, CcWwanDevicePage, unlock_button);
 
   gtk_widget_class_bind_template_callback (widget_class, wwan_device_unlock_clicked_cb);
+  gtk_widget_class_bind_template_callback (widget_class, wwan_device_set_primary_sim_slot_cb);
   gtk_widget_class_bind_template_callback (widget_class, wwan_data_settings_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, wwan_network_settings_activated_cb);
   gtk_widget_class_bind_template_callback (widget_class, wwan_advanced_settings_activated_cb);
