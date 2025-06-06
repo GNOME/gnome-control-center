@@ -57,7 +57,7 @@ stages:
     # Should probably also switch away from 'rawhide',
     # to stable fedora branch as well.
     BRANCH_NAME: 'main'
-    CONTAINER_TAG: '2025-06-02.0'
+    CONTAINER_TAG: '2025-06-06.0'
     FEDORA_VERSION: rawhide
     # Derive FDO variables from this automatically.
     # DO NOT edit, instead change the variables above
@@ -96,7 +96,6 @@ build.container.fedora@x86_64:
       xorg-x11-server-Xvfb
       mesa-dri-drivers
       libsass-devel sassc
-      blueprint-compiler
     FDO_DISTRIBUTION_EXEC: |-
       dnf builddep -y gnome-control-center && \
       dnf builddep -y gsettings-desktop-schemas && \
@@ -130,6 +129,12 @@ build.container.fedora@x86_64:
       git clone --depth 1 https://gitlab.gnome.org/GNOME/gnome-online-accounts.git && \
         cd gnome-online-accounts && \
         meson setup $MESON_BUILD_DIR --prefix=/usr -Dfedora=true  && \
+        meson compile -C $MESON_BUILD_DIR && \
+        meson install -C $MESON_BUILD_DIR && \
+        cd .. && \
+      git clone --depth 1 https://gitlab.gnome.org/GNOME/blueprint-compiler.git && \
+        cd blueprint-compiler && \
+        meson setup $MESON_BUILD_DIR --prefix=/usr && \
         meson compile -C $MESON_BUILD_DIR && \
         meson install -C $MESON_BUILD_DIR && \
         cd .. && \
