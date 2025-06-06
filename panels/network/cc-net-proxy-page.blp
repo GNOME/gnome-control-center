@@ -15,7 +15,7 @@ template $CcNetProxyPage: Adw.NavigationPage {
         label: _("_Cancel");
         use-underline: true;
         can-shrink: true;
-        clicked => $cancel_clicked_cb() swapped;
+        clicked => $cancel_clicked_cb(template);
       }
 
       [end]
@@ -29,7 +29,7 @@ template $CcNetProxyPage: Adw.NavigationPage {
           "suggested-action",
         ]
 
-        clicked => $save_clicked_cb() swapped;
+        clicked => $save_clicked_cb(template);
       }
     }
 
@@ -46,7 +46,7 @@ template $CcNetProxyPage: Adw.NavigationPage {
         Adw.ComboRow proxy_type_row {
           title: _("C_onfiguration");
           use-underline: true;
-          notify::selected-item => $proxy_configuration_changed_cb() swapped;
+          notify::selected-item => $proxy_configuration_changed_cb(template);
 
           model: StringList {
             strings [

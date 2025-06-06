@@ -20,7 +20,7 @@ template $CcAvatarChooser: Popover {
 
       Button {
         label: _("Select a File…");
-        clicked => $cc_avatar_chooser_select_file() swapped;
+        clicked => $cc_avatar_chooser_select_file(template);
       }
     }
   }

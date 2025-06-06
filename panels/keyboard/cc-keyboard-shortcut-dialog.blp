@@ -8,7 +8,7 @@ template $CcKeyboardShortcutDialog: Adw.Dialog {
   map => $gtk_widget_grab_focus(search_entry);
 
   child: Adw.NavigationView navigation_view {
-    notify::visible-page => $shortcut_dialog_visible_page_changed_cb() swapped;
+    notify::visible-page => $shortcut_dialog_visible_page_changed_cb(template);
 
     Adw.NavigationPage main_page {
       title: bind template.title;
@@ -30,8 +30,8 @@ template $CcKeyboardShortcutDialog: Adw.Dialog {
 
             SearchEntry search_entry {
               placeholder-text: _("Search shortcuts");
-              search-changed => $shortcut_search_entry_changed_cb() swapped;
-              stop-search => $shortcut_search_entry_stopped_cb() swapped;
+              search-changed => $shortcut_search_entry_changed_cb(template);
+              stop-search => $shortcut_search_entry_stopped_cb(template);
 
               accessibility {
                 label: _("Search Shortcuts");
@@ -51,7 +51,7 @@ template $CcKeyboardShortcutDialog: Adw.Dialog {
             Adw.PreferencesGroup {
               ListBox section_list_box {
                 selection-mode: none;
-                row-activated => $shortcut_section_row_activated_cb() swapped;
+                row-activated => $shortcut_section_row_activated_cb(template);
 
                 styles [
                   "boxed-list",
@@ -114,7 +114,7 @@ template $CcKeyboardShortcutDialog: Adw.Dialog {
               halign: center;
               use-underline: true;
               label: _("_Add Shortcut…");
-              clicked => $add_custom_shortcut_clicked_cb() swapped;
+              clicked => $add_custom_shortcut_clicked_cb(template);
 
               styles [
                 "suggested-action",

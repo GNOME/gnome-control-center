@@ -26,8 +26,8 @@ template $CcTzDialog: Adw.Dialog {
         SearchEntry location_entry {
           placeholder-text: _("Search cities");
           hexpand: true;
-          search-changed => $tz_dialog_search_changed_cb() swapped;
-          stop-search => $tz_dialog_search_stopped_cb() swapped;
+          search-changed => $tz_dialog_search_changed_cb(template);
+          stop-search => $tz_dialog_search_stopped_cb(template);
         }
       }
     }
@@ -46,7 +46,7 @@ template $CcTzDialog: Adw.Dialog {
           ListView tz_view {
             show-separators: true;
             single-click-activate: true;
-            activate => $tz_dialog_row_activated_cb() swapped;
+            activate => $tz_dialog_row_activated_cb(template);
 
             factory: BuilderListItemFactory {
               resource: "/org/gnome/control-center/system/datetime/cc-tz-row.ui";

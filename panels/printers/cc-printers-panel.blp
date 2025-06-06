@@ -32,7 +32,7 @@ template $CcPrintersPanel: $CcPanel {
 
           /* Translators: This button adds new printer. */
           label: _("_Add Printer…");
-          clicked => $printer_add_cb() swapped;
+          clicked => $printer_add_cb(template);
 
           styles [
             "suggested-action",
@@ -114,7 +114,7 @@ template $CcPrintersPanel: $CcPanel {
                   use-underline: true;
                   receives-default: true;
                   halign: center;
-                  clicked => $printer_add_cb() swapped;
+                  clicked => $printer_add_cb(template);
 
                   styles [
                     "suggested-action",

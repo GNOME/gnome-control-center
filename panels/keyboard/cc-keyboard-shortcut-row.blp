@@ -21,7 +21,7 @@ template $CcKeyboardShortcutRow: Adw.ActionRow {
       valign: center;
       icon-name: "edit-clear-symbolic";
       tooltip-text: _("Reset Shortcut");
-      clicked => $reset_shortcut_cb() swapped;
+      clicked => $reset_shortcut_cb(template);
 
       styles [
         "flat",

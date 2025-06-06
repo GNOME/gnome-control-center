@@ -14,7 +14,7 @@ template $CcWwanApnDialog: Dialog {
     Button back_button {
       use-underline: true;
       icon-name: "go-previous-symbolic";
-      clicked => $cc_wwan_apn_back_clicked_cb() swapped;
+      clicked => $cc_wwan_apn_back_clicked_cb(template);
 
       accessibility {
         label: _("Back");
@@ -25,7 +25,7 @@ template $CcWwanApnDialog: Dialog {
     Button add_button {
       use-underline: true;
       icon-name: "list-add-symbolic";
-      clicked => $cc_wwan_apn_add_clicked_cb() swapped;
+      clicked => $cc_wwan_apn_add_clicked_cb(template);
 
       accessibility {
         label: _("Add");
@@ -37,7 +37,7 @@ template $CcWwanApnDialog: Dialog {
       visible: false;
       use-underline: true;
       label: _("_Save");
-      clicked => $cc_wwan_apn_save_clicked_cb() swapped;
+      clicked => $cc_wwan_apn_save_clicked_cb(template);
 
       styles [
         "default",
@@ -53,7 +53,7 @@ template $CcWwanApnDialog: Dialog {
         ListBox apn_list {
           valign: start;
           selection-mode: none;
-          row-activated => $cc_wwan_apn_activated_cb() swapped;
+          row-activated => $cc_wwan_apn_activated_cb(template);
 
           styles [
             "boxed-list",
@@ -89,7 +89,7 @@ template $CcWwanApnDialog: Dialog {
 
           Entry name_entry {
             hexpand: true;
-            changed => $cc_wwan_apn_entry_changed_cb() swapped;
+            changed => $cc_wwan_apn_entry_changed_cb(template);
 
             layout {
               column: "1";
@@ -115,7 +115,7 @@ template $CcWwanApnDialog: Dialog {
 
           Entry apn_entry {
             margin-bottom: 12;
-            changed => $cc_wwan_apn_entry_changed_cb() swapped;
+            changed => $cc_wwan_apn_entry_changed_cb(template);
 
             layout {
               column: "1";

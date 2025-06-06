@@ -105,7 +105,7 @@ Adw.AlertDialog clear_all_jobs_dialog {
   body: _("Clearing jobs cannot be undone");
   default-response: "cancel";
   close-response: "cancel";
-  response::clear-all => $on_clear_all_response_cb() swapped;
+  response::clear-all => $on_clear_all_response_cb(template);
 
   responses [
     cancel: _("_Cancel"),
@@ -179,8 +179,8 @@ Popover authentication_popover {
 
       Entry domain_entry {
         hexpand: true;
-        changed => $auth_entries_changed() swapped;
-        activate => $auth_entries_activated() swapped;
+        changed => $auth_entries_changed(template);
+        activate => $auth_entries_activated(template);
 
         layout {
           column: "1";
@@ -190,8 +190,8 @@ Popover authentication_popover {
 
       Entry username_entry {
         hexpand: true;
-        changed => $auth_entries_changed() swapped;
-        activate => $auth_entries_activated() swapped;
+        changed => $auth_entries_changed(template);
+        activate => $auth_entries_activated(template);
 
         layout {
           column: "1";
@@ -203,8 +203,8 @@ Popover authentication_popover {
         hexpand: true;
         visibility: false;
         input-purpose: password;
-        changed => $auth_entries_changed() swapped;
-        activate => $auth_entries_activated() swapped;
+        changed => $auth_entries_changed(template);
+        activate => $auth_entries_activated(template);
 
         layout {
           column: "1";
@@ -219,7 +219,7 @@ Popover authentication_popover {
       use-underline: true;
       receives-default: true;
       halign: end;
-      clicked => $authenticate_button_clicked() swapped;
+      clicked => $authenticate_button_clicked(template);
     }
   }
 }
