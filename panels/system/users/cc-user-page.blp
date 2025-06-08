@@ -112,7 +112,7 @@ template $CcUserPage: Adw.NavigationPage {
 
             [suffix]
             $CcListRowInfoButton {
-              valign: "center";
+              valign: center;
               text: _("Automatic login opens the user account when the device starts, without requiring authentication. Authentication is still required at other times, such as when unlocking the screen.");
             }
 
@@ -130,12 +130,12 @@ template $CcUserPage: Adw.NavigationPage {
             has-tooltip: bind template.editable no-sync-create inverted;
             tooltip-text: _("Unlock to Change This Setting");
             title: _("_Administrator");
-            subtitle-lines: "0";
+            subtitle-lines: 0;
             use-underline: true;
 
             [suffix]
             $CcListRowInfoButton {
-              valign: "center";
+              valign: center;
               text: _("Administrators have extra abilities, including adding and removing users, changing login settings, and removing software. Parental controls cannot be applied to administrators.");
             }
 
@@ -148,7 +148,7 @@ template $CcUserPage: Adw.NavigationPage {
           $CcListRow parental_controls_row {
             title: _("_Parental Controls");
             subtitle: _("Open the Parental Controls app");
-            subtitle-lines: "0";
+            subtitle-lines: 0;
             use-underline: true;
             activatable: true;
             show-arrow: true;

@@ -16,19 +16,19 @@ template $CcScreenPage: Adw.NavigationPage {
         $CcNumberRow blank_screen_row {
           title: _("_Blank Screen Delay");
           subtitle: _("Period of inactivity until screen blanks");
-          subtitle-lines: "2";
+          subtitle-lines: 2;
           use-underline: true;
           values: "[60, 120, 180, 240, 300, 480, 600, 720, 900]";
 
           special-value: $CcNumberObject {
-            value: "0";
+            value: 0;
 
             /* Translators: Option for Blank Screen in Screen Lock page */
             string: _("Never");
-            order: "last";
+            order: last;
           };
 
-          value-type: "seconds";
+          value-type: seconds;
         }
 
         Adw.SwitchRow automatic_screen_lock_row {
@@ -40,18 +40,18 @@ template $CcScreenPage: Adw.NavigationPage {
         $CcNumberRow lock_after_row {
           title: _("Automatic _Screen Lock Delay");
           subtitle: _("Time from screen blank to screen lock");
-          subtitle-lines: "2";
+          subtitle-lines: 2;
           use-underline: true;
           values: "[30, 60, 120, 180, 300, 1800, 3600]";
 
           special-value: $CcNumberObject {
-            value: "0";
+            value: 0;
 
             /* Translators: Option for Automatic Screen Lock in Screen Lock page */
             string: _("Screen Turns Off");
           };
 
-          value-type: "seconds";
+          value-type: seconds;
         }
 
         Adw.SwitchRow show_notifications_row {

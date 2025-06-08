@@ -11,7 +11,7 @@ template $CcMultitaskingPanel: $CcPanel {
         title: _("General");
 
         $CcIllustratedRow hot_corner_row {
-          activatable-widget: "hot_corner_switch";
+          activatable-widget: hot_corner_switch;
           title: _("_Hot Corner");
           subtitle: _("Touch the top-left corner to open the Activities Overview");
           use-underline: true;
@@ -23,7 +23,7 @@ template $CcMultitaskingPanel: $CcPanel {
         }
 
         $CcIllustratedRow active_screen_edges_row {
-          activatable-widget: "active_screen_edges_switch";
+          activatable-widget: active_screen_edges_switch;
           title: _("_Active Screen Edges");
           subtitle: _("Drag windows against the top, left, and right screen edges to resize them");
           use-underline: true;
@@ -77,7 +77,7 @@ template $CcMultitaskingPanel: $CcPanel {
         title: _("Multi-Monitor");
 
         $CcIllustratedRow {
-          activatable-widget: "workspaces_primary_display_radio";
+          activatable-widget: workspaces_primary_display_radio;
           title: _("Workspaces on _primary display only");
           use-underline: true;
           resource: "/org/gnome/control-center/multitasking/assets/workspaces-primary-display.svg";
@@ -89,7 +89,7 @@ template $CcMultitaskingPanel: $CcPanel {
         }
 
         $CcIllustratedRow {
-          activatable-widget: "workspaces_span_displays_radio";
+          activatable-widget: workspaces_span_displays_radio;
           title: _("Workspaces on all d_isplays");
           use-underline: true;
           resource: "/org/gnome/control-center/multitasking/assets/workspaces-span-displays.svg";

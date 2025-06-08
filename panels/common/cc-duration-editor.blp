@@ -2,8 +2,8 @@ using Gtk 4.0;
 
 template $CcDurationEditor: Widget {
   $CcTimelikeEditor editor {
-    mode: "duration";
-    minute-increment: "15";
+    mode: duration;
+    minute-increment: 15;
     time-changed => $editor_time_changed_cb();
   }
 }
