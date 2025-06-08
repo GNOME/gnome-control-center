@@ -155,8 +155,8 @@ template $CcKeyboardShortcutEditor: Adw.Dialog {
             mnemonic-widget: name_entry;
 
             layout {
-              column: "0";
-              row: "0";
+              column: 0;
+              row: 0;
             }
           }
 
@@ -166,8 +166,8 @@ template $CcKeyboardShortcutEditor: Adw.Dialog {
             mnemonic-widget: command_entry;
 
             layout {
-              column: "0";
-              row: "1";
+              column: 0;
+              row: 1;
             }
           }
 
@@ -176,8 +176,8 @@ template $CcKeyboardShortcutEditor: Adw.Dialog {
             xalign: 1;
 
             layout {
-              column: "0";
-              row: "2";
+              column: 0;
+              row: 2;
             }
           }
 
@@ -189,9 +189,9 @@ template $CcKeyboardShortcutEditor: Adw.Dialog {
             xalign: 0;
 
             layout {
-              column: "0";
-              row: "3";
-              column-span: "3";
+              column: 0;
+              row: 3;
+              column-span: 3;
             }
           }
 
@@ -200,9 +200,9 @@ template $CcKeyboardShortcutEditor: Adw.Dialog {
             notify::text => $name_entry_changed_cb(template);
 
             layout {
-              column: "1";
-              row: "0";
-              column-span: "2";
+              column: 1;
+              row: 0;
+              column-span: 2;
             }
           }
 
@@ -211,9 +211,9 @@ template $CcKeyboardShortcutEditor: Adw.Dialog {
             notify::text => $command_entry_changed_cb(template);
 
             layout {
-              column: "1";
-              row: "1";
-              column-span: "2";
+              column: 1;
+              row: 1;
+              column-span: 2;
             }
           }
 
@@ -227,8 +227,8 @@ template $CcKeyboardShortcutEditor: Adw.Dialog {
             }
 
             layout {
-              column: "2";
-              row: "2";
+              column: 2;
+              row: 2;
             }
 
             styles [
@@ -241,8 +241,8 @@ template $CcKeyboardShortcutEditor: Adw.Dialog {
             disabled-text: _("None");
 
             layout {
-              column: "1";
-              row: "2";
+              column: 1;
+              row: 2;
             }
           }
 
@@ -253,9 +253,9 @@ template $CcKeyboardShortcutEditor: Adw.Dialog {
             clicked => $change_custom_shortcut_button_clicked_cb(template);
 
             layout {
-              column: "1";
-              row: "2";
-              column-span: "2";
+              column: 1;
+              row: 2;
+              column-span: 2;
             }
           }
         }

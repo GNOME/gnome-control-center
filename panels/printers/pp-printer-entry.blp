@@ -60,8 +60,8 @@ template $PpPrinterEntry: ListBoxRow {
         mnemonic-widget: printer_model;
 
         layout {
-          column: "0";
-          row: "0";
+          column: 0;
+          row: 0;
         }
 
         styles [
@@ -75,8 +75,8 @@ template $PpPrinterEntry: ListBoxRow {
         hexpand: true;
 
         layout {
-          column: "1";
-          row: "0";
+          column: 1;
+          row: 0;
         }
       }
 
@@ -86,8 +86,8 @@ template $PpPrinterEntry: ListBoxRow {
         mnemonic-widget: printer_location_address_label;
 
         layout {
-          column: "0";
-          row: "1";
+          column: 0;
+          row: 1;
         }
 
         styles [
@@ -101,8 +101,8 @@ template $PpPrinterEntry: ListBoxRow {
         hexpand: true;
 
         layout {
-          column: "1";
-          row: "1";
+          column: 1;
+          row: 1;
         }
       }
 
@@ -112,8 +112,8 @@ template $PpPrinterEntry: ListBoxRow {
         mnemonic-widget: printer_status;
 
         layout {
-          column: "0";
-          row: "2";
+          column: 0;
+          row: 2;
         }
 
         styles [
@@ -127,8 +127,8 @@ template $PpPrinterEntry: ListBoxRow {
         hexpand: true;
 
         layout {
-          column: "1";
-          row: "2";
+          column: 1;
+          row: 2;
         }
       }
 
@@ -138,8 +138,8 @@ template $PpPrinterEntry: ListBoxRow {
         mnemonic-widget: supply_frame;
 
         layout {
-          column: "0";
-          row: "3";
+          column: 0;
+          row: 3;
         }
 
         styles [
@@ -153,8 +153,8 @@ template $PpPrinterEntry: ListBoxRow {
         hexpand: true;
 
         layout {
-          column: "1";
-          row: "3";
+          column: 1;
+          row: 3;
         }
 
         DrawingArea supply_drawing_area {}
@@ -174,8 +174,8 @@ template $PpPrinterEntry: ListBoxRow {
         wrap-mode: word_char;
 
         layout {
-          column: "0";
-          row: "0";
+          column: 0;
+          row: 0;
         }
 
         styles [
@@ -193,8 +193,8 @@ template $PpPrinterEntry: ListBoxRow {
         label: _("Please restart when the problem is resolved");
 
         layout {
-          column: "0";
-          row: "1";
+          column: 0;
+          row: 1;
         }
       }
 
@@ -207,9 +207,9 @@ template $PpPrinterEntry: ListBoxRow {
         clicked => $restart_printer();
 
         layout {
-          column: "1";
-          row: "0";
-          row-span: "2";
+          column: 1;
+          row: 0;
+          row-span: 2;
         }
       }
     }

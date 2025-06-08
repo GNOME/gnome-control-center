@@ -155,8 +155,8 @@ template $CcPowerPanel: $CcPanel {
                 visible: false;
                 title: _("Po_wer Button Behavior");
                 use-underline: true;
-                value-type: "string";
-                sort-type: "none";
+                value-type: string;
+                sort-type: none;
               }
 
               Adw.SwitchRow battery_percentage_row {
@@ -213,7 +213,7 @@ template $CcPowerPanel: $CcPanel {
                 use-underline: true;
                 sensitive: bind blank_screen_switch_row.active;
                 values: "[60, 120, 180, 240, 300, 480, 600, 720, 900]";
-                value-type: "seconds";
+                value-type: seconds;
               }
             }
 
@@ -231,7 +231,7 @@ template $CcPowerPanel: $CcPanel {
                 sensitive: bind suspend_on_battery_switch_row.active;
                 title: _("De_lay");
                 use-underline: true;
-                value-type: "seconds";
+                value-type: seconds;
               }
             }
 
@@ -248,7 +248,7 @@ template $CcPowerPanel: $CcPanel {
                 sensitive: bind suspend_on_ac_switch_row.active;
                 title: _("Del_ay");
                 use-underline: true;
-                value-type: "seconds";
+                value-type: seconds;
               }
             }
 

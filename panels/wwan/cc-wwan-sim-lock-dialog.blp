@@ -92,9 +92,9 @@ template $CcWwanSimLockDialog: Dialog {
                   ]
 
                   layout {
-                    column: "0";
-                    row: "0";
-                    column-span: "2";
+                    column: 0;
+                    row: 0;
+                    column-span: 2;
                   }
                 }
 
@@ -104,8 +104,8 @@ template $CcWwanSimLockDialog: Dialog {
                   mnemonic-widget: new_pin_entry;
 
                   layout {
-                    column: "0";
-                    row: "1";
+                    column: 0;
+                    row: 1;
                   }
                 }
 
@@ -119,8 +119,8 @@ template $CcWwanSimLockDialog: Dialog {
                   insert-text => $cc_wwan_pin_entry_text_inserted_cb(template);
 
                   layout {
-                    column: "1";
-                    row: "1";
+                    column: 1;
+                    row: 1;
                   }
                 }
 
@@ -130,8 +130,8 @@ template $CcWwanSimLockDialog: Dialog {
                   mnemonic-widget: pin_confirm_entry;
 
                   layout {
-                    column: "0";
-                    row: "2";
+                    column: 0;
+                    row: 2;
                   }
                 }
 
@@ -145,8 +145,8 @@ template $CcWwanSimLockDialog: Dialog {
                   insert-text => $cc_wwan_pin_entry_changed_cb(template);
 
                   layout {
-                    column: "1";
-                    row: "2";
+                    column: 1;
+                    row: 2;
                   }
                 }
               }

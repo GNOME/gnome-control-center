@@ -23,14 +23,14 @@ template $CcUsagePage: Adw.NavigationPage {
           title: _("File _History Duration");
           use-underline: true;
           values: "[1, 7, 30]";
-          value-type: "days";
+          value-type: days;
 
           special-value: $CcNumberObject {
-            value: "-1";
+            value: -1;
 
             /* Translators: Option for File History Duration in File History group */
             string: _("Forever");
-            order: "last";
+            order: last;
           };
         }
       }
@@ -65,10 +65,10 @@ template $CcUsagePage: Adw.NavigationPage {
           title: _("Automatic Deletion _Period");
           use-underline: true;
           values: "[1, 2, 3, 4, 5, 6, 7, 14, 30]";
-          value-type: "days";
+          value-type: days;
 
           special-value: $CcNumberObject {
-            value: "0";
+            value: 0;
 
             /* Translators: Option for Automatically Delete Period in Trash and Temporary Files group */
             string: _("1 hour");

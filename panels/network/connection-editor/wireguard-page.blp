@@ -23,8 +23,8 @@ template $CEPageWireguard: Box {
           mnemonic-widget: entry_conname;
 
           layout {
-            column: "0";
-            row: "0";
+            column: 0;
+            row: 0;
           }
         }
 
@@ -32,8 +32,8 @@ template $CEPageWireguard: Box {
           changed => $ce_page_changed(template);
 
           layout {
-            column: "1";
-            row: "0";
+            column: 1;
+            row: 0;
           }
         }
 
@@ -45,8 +45,8 @@ template $CEPageWireguard: Box {
           mnemonic-widget: entry_ifname;
 
           layout {
-            column: "0";
-            row: "1";
+            column: 0;
+            row: 1;
           }
         }
 
@@ -56,8 +56,8 @@ template $CEPageWireguard: Box {
           changed => $ce_page_changed(template);
 
           layout {
-            column: "1";
-            row: "1";
+            column: 1;
+            row: 1;
           }
         }
 
@@ -68,8 +68,8 @@ template $CEPageWireguard: Box {
           mnemonic-widget: entry_private_key;
 
           layout {
-            column: "0";
-            row: "2";
+            column: 0;
+            row: 2;
           }
         }
 
@@ -82,8 +82,8 @@ template $CEPageWireguard: Box {
           changed => $ce_page_changed(template);
 
           layout {
-            column: "1";
-            row: "2";
+            column: 1;
+            row: 2;
           }
         }
 
@@ -95,8 +95,8 @@ template $CEPageWireguard: Box {
           mnemonic-widget: spin_listen_port;
 
           layout {
-            column: "0";
-            row: "3";
+            column: 0;
+            row: 3;
           }
         }
 
@@ -116,8 +116,8 @@ template $CEPageWireguard: Box {
           changed => $ce_page_changed(template);
 
           layout {
-            column: "1";
-            row: "3";
+            column: 1;
+            row: 3;
           }
         }
 
@@ -129,8 +129,8 @@ template $CEPageWireguard: Box {
           mnemonic-widget: spin_fwmark;
 
           layout {
-            column: "0";
-            row: "4";
+            column: 0;
+            row: 4;
           }
         }
 
@@ -149,8 +149,8 @@ template $CEPageWireguard: Box {
           changed => $ce_page_changed(template);
 
           layout {
-            column: "1";
-            row: "4";
+            column: 1;
+            row: 4;
           }
         }
 
@@ -162,8 +162,8 @@ template $CEPageWireguard: Box {
           mnemonic-widget: spin_mtu;
 
           layout {
-            column: "0";
-            row: "5";
+            column: 0;
+            row: 5;
           }
         }
 
@@ -180,8 +180,8 @@ template $CEPageWireguard: Box {
           changed => $ce_page_changed(template);
 
           layout {
-            column: "1";
-            row: "5";
+            column: 1;
+            row: 5;
           }
         }
 
@@ -191,8 +191,8 @@ template $CEPageWireguard: Box {
           justify: fill;
 
           layout {
-            column: "2";
-            row: "5";
+            column: 2;
+            row: 5;
           }
         }
 
@@ -203,8 +203,8 @@ template $CEPageWireguard: Box {
           toggled => $ce_page_changed(template);
 
           layout {
-            column: "1";
-            row: "6";
+            column: 1;
+            row: 6;
           }
         }
 
@@ -213,9 +213,9 @@ template $CEPageWireguard: Box {
           spacing: 6;
 
           layout {
-            row: "7";
-            column: "0";
-            column-span: "3";
+            row: 7;
+            column: 0;
+            column-span: 3;
           }
 
           Box {
