@@ -10,22 +10,23 @@ i18n.merge_file(
   install_dir : control_center_desktopdir
 )
 
+ui_sources = files(
+  'cc-application-shortcut-dialog.blp',
+  'cc-applications-panel.blp',
+  'cc-applications-row.blp',
+  'cc-default-apps-page.blp',  
+)
+
+ui_compiled = []
+foreach ui_source : ui_sources
+  ui_compiled += fs.name(fs.replace_suffix(ui_source, '.ui'))
+endforeach
+
 blueprints = custom_target(
   'blueprints',
-  input: files(
-    'cc-application-shortcut-dialog.blp',
-    'cc-applications-panel.blp',
-    'cc-applications-row.blp',
-    'cc-default-apps-page.blp',
-  ),
-  output: '.',
-  command: [
-    blueprint_compiler,
-    'batch-compile',
-    '@OUTPUT@',
-    '@CURRENT_SOURCE_DIR@',
-    '@INPUT@',
-  ],
+  input: ui_sources,
+  output: ui_compiled,
+  command: [blueprint_compiler, 'batch-compile', '@OUTDIR@', '@CURRENT_SOURCE_DIR@', '@INPUT@']
 )
 
 sources = files(

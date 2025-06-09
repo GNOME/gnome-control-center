@@ -10,22 +10,25 @@ i18n.merge_file(
   install_dir: control_center_desktopdir
 )
 
-blueprints = custom_target(
-  'blueprints',
-  input: files(
-    'cc-bluetooth-panel.blp',
-  ),
-  output: '.',
-  command: [
-    blueprint_compiler,
-    'batch-compile',
-    '@OUTPUT@',
-    '@CURRENT_SOURCE_DIR@',
-    '@INPUT@',
-  ],
+ui_sources = files(
+  'cc-bluetooth-panel.blp',
 )
 
-sources = files('cc-bluetooth-panel.c')
+ui_compiled = []
+foreach ui_source : ui_sources
+  ui_compiled += fs.name(fs.replace_suffix(ui_source, '.ui'))
+endforeach
+
+blueprints = custom_target(
+  'blueprints',
+  input: ui_sources,
+  output: ui_compiled,
+  command: [blueprint_compiler, 'batch-compile', '@OUTDIR@', '@CURRENT_SOURCE_DIR@', '@INPUT@']
+)
+
+sources = files(
+  'cc-bluetooth-panel.c',
+)
 
 sources += gnome.compile_resources(
   'cc-' + cappletname + '-resources',

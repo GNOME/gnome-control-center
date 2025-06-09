@@ -28,28 +28,29 @@ foreach name: panel_names
   )
 endforeach
 
+ui_sources = files(
+  'cc-net-proxy-page.blp',
+  'cc-network-panel.blp',
+  'cc-qr-code-dialog.blp',
+  'cc-wifi-connection-row.blp',
+  'cc-wifi-hotspot-dialog.blp',
+  'cc-wifi-panel.blp',
+  'network-bluetooth.blp',
+  'network-ethernet.blp',
+  'network-vpn.blp',
+  'network-wifi.blp',
+)
+
+ui_compiled = []
+foreach ui_source : ui_sources
+  ui_compiled += fs.name(fs.replace_suffix(ui_source, '.ui'))
+endforeach
+
 blueprints = custom_target(
   'blueprints',
-  input: files(
-    'cc-net-proxy-page.blp',
-    'cc-network-panel.blp',
-    'cc-qr-code-dialog.blp',
-    'cc-wifi-connection-row.blp',
-    'cc-wifi-hotspot-dialog.blp',
-    'cc-wifi-panel.blp',
-    'network-bluetooth.blp',
-    'network-ethernet.blp',
-    'network-vpn.blp',
-    'network-wifi.blp',
-  ),
-  output: '.',
-  command: [
-    blueprint_compiler,
-    'batch-compile',
-    '@OUTPUT@',
-    '@CURRENT_SOURCE_DIR@',
-    '@INPUT@',
-  ],
+  input: ui_sources,
+  output: ui_compiled,
+  command: [blueprint_compiler, 'batch-compile', '@OUTDIR@', '@CURRENT_SOURCE_DIR@', '@INPUT@']
 )
 
 sources = files(

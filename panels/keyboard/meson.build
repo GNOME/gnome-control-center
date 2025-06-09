@@ -56,26 +56,27 @@ keyboard_shortcuts_dep = declare_dependency(
   link_with: libkeyboard_shortcuts,
 )
 
+ui_sources = files(
+  'cc-input-chooser.blp',
+  'cc-input-list-box.blp',
+  'cc-input-row.blp',
+  'cc-keyboard-panel.blp',
+  'cc-keyboard-shortcut-dialog.blp',
+  'cc-keyboard-shortcut-editor.blp',
+  'cc-keyboard-shortcut-row.blp',
+  'cc-xkb-modifier-page.blp',
+)
+
+ui_compiled = []
+foreach ui_source : ui_sources
+  ui_compiled += fs.name(fs.replace_suffix(ui_source, '.ui'))
+endforeach
+
 blueprints = custom_target(
   'blueprints',
-  input: files(
-    'cc-input-chooser.blp',
-    'cc-input-list-box.blp',
-    'cc-input-row.blp',
-    'cc-keyboard-panel.blp',
-    'cc-keyboard-shortcut-dialog.blp',
-    'cc-keyboard-shortcut-editor.blp',
-    'cc-keyboard-shortcut-row.blp',
-    'cc-xkb-modifier-page.blp',
-  ),
-  output: '.',
-  command: [
-    blueprint_compiler,
-    'batch-compile',
-    '@OUTPUT@',
-    '@CURRENT_SOURCE_DIR@',
-    '@INPUT@',
-  ],
+  input: ui_sources,
+  output: ui_compiled,
+  command: [blueprint_compiler, 'batch-compile', '@OUTDIR@', '@CURRENT_SOURCE_DIR@', '@INPUT@']
 )
 
 sources = files(

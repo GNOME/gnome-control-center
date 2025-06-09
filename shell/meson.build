@@ -35,22 +35,23 @@ i18n.merge_file(
 
 cflags = ['-DGNOMELOCALEDIR="@0@"'.format(control_center_localedir)]
 
+ui_sources = files(
+  'cc-panel-list.blp',
+  'cc-panel.blp',
+  'cc-window.blp',
+  'help-overlay.blp',
+)
+
+ui_compiled = []
+foreach ui_source : ui_sources
+  ui_compiled += fs.name(fs.replace_suffix(ui_source, '.ui'))
+endforeach
+
 blueprints = custom_target(
   'blueprints',
-  input: files(
-    'cc-panel-list.blp',
-    'cc-panel.blp',
-    'cc-window.blp',
-    'help-overlay.blp',
-  ),
-  output: '.',
-  command: [
-    blueprint_compiler,
-    'batch-compile',
-    '@OUTPUT@',
-    '@CURRENT_SOURCE_DIR@',
-    '@INPUT@',
-  ],
+  input: ui_sources,
+  output: ui_compiled,
+  command: [blueprint_compiler, 'batch-compile', '@OUTDIR@', '@CURRENT_SOURCE_DIR@', '@INPUT@']
 )
 
 # Common sources between gnome-control-center and
