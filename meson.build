@@ -2,7 +2,7 @@ project(
   'gnome-control-center', 'c',
         version : '49.alpha',
         license : 'GPL2+',
-  meson_version : '>= 0.58.0'
+  meson_version : '>= 0.59.0'
 )
 
 control_center_prefix = get_option('prefix')
@@ -351,6 +351,7 @@ config_h.set('HAVE_WACOM', host_is_linux_not_s390,
 config_h.set('BUILD_THUNDERBOLT', host_is_linux_not_s390,
              description: 'Define to 1 to build the Thunderbolt panel')
 
+fs = import('fs')
 gnome = import('gnome')
 i18n = import('i18n')
 pkg = import('pkgconfig')

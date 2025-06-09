@@ -10,20 +10,21 @@ i18n.merge_file(
   install_dir: control_center_desktopdir
 )
 
+ui_sources = files(
+  'cc-mouse-panel.blp',
+  'cc-mouse-test.blp',
+)
+
+ui_compiled = []
+foreach ui_source : ui_sources
+  ui_compiled += fs.name(fs.replace_suffix(ui_source, '.ui'))
+endforeach
+
 blueprints = custom_target(
   'blueprints',
-  input: files(
-    'cc-mouse-panel.blp',
-    'cc-mouse-test.blp',
-  ),
-  output: '.',
-  command: [
-    blueprint_compiler,
-    'batch-compile',
-    '@OUTPUT@',
-    '@CURRENT_SOURCE_DIR@',
-    '@INPUT@',
-  ],
+  input: ui_sources,
+  output: ui_compiled,
+  command: [blueprint_compiler, 'batch-compile', '@OUTDIR@', '@CURRENT_SOURCE_DIR@', '@INPUT@']
 )
 
 common_sources = gnome.compile_resources(

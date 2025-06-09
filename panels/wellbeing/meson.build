@@ -13,24 +13,25 @@ i18n.merge_file(
   install_dir: control_center_desktopdir,
 )
 
+ui_sources = files(
+  'cc-bar-chart-bar.blp',
+  'cc-bar-chart-group.blp',
+  'cc-bar-chart.blp',
+  'cc-break-schedule-row.blp',
+  'cc-screen-time-statistics-row.blp',
+  'cc-wellbeing-panel.blp',
+)
+
+ui_compiled = []
+foreach ui_source : ui_sources
+  ui_compiled += fs.name(fs.replace_suffix(ui_source, '.ui'))
+endforeach
+
 blueprints = custom_target(
   'blueprints',
-  input: files(
-    'cc-bar-chart-bar.blp',
-    'cc-bar-chart-group.blp',
-    'cc-bar-chart.blp',
-    'cc-break-schedule-row.blp',
-    'cc-screen-time-statistics-row.blp',
-    'cc-wellbeing-panel.blp',
-  ),
-  output: '.',
-  command: [
-    blueprint_compiler,
-    'batch-compile',
-    '@OUTPUT@',
-    '@CURRENT_SOURCE_DIR@',
-    '@INPUT@',
-  ],
+  input: ui_sources,
+  output: ui_compiled,
+  command: [blueprint_compiler, 'batch-compile', '@OUTDIR@', '@CURRENT_SOURCE_DIR@', '@INPUT@']
 )
 
 sources = files(
