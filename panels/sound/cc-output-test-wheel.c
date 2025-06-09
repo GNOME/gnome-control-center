@@ -16,6 +16,7 @@
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <adwaita.h>
 #include <glib/gi18n.h>
 
 #include "cc-speaker-test-button.h"
@@ -59,14 +60,19 @@ static GtkWidget*
 create_speaker_button (CcOutputTestWheel     *self,
                        pa_channel_position_t  position)
 {
+  GtkWidget *bin;
   GtkWidget *button;
 
   button = cc_speaker_test_button_new (self->context, position);
   gtk_widget_add_css_class (button, "circular");
-  gtk_widget_add_css_class (button, "opaque");
-  gtk_widget_set_parent (button, GTK_WIDGET (self));
 
-  return button;
+  bin = adw_bin_new ();
+  gtk_widget_add_css_class (bin, "background");
+  gtk_widget_add_css_class (bin, "test-button-bin");
+  adw_bin_set_child (ADW_BIN (bin), button);
+  gtk_widget_set_parent (bin, GTK_WIDGET (self));
+
+  return bin;
 }
 
 static void

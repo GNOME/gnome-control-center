@@ -6,13 +6,16 @@ wheel {
   min-height: 280px;
 }
 
-wheel > button {
-  background-color: var(--window-bg-color);
-  border: 1px solid color-mix(in srgb, currentColor 15%, transparent);
-  padding: 3px;
+wheel button {
+  padding: 5px;
 }
 
-wheel > button.playing {
+wheel button.playing {
   background-color: var(--accent-bg-color);
   color: var(--accent-fg-color);
+}
+
+.test-button-bin {
+  border-radius: 9999px;
+  padding: 2px;
 }
