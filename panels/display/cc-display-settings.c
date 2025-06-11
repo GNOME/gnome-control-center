@@ -32,7 +32,7 @@
 
 struct _CcDisplaySettings
 {
-  GtkBox            object;
+  AdwPreferencesPage object;
 
   CcDisplayPanel   *panel;
 
@@ -76,7 +76,7 @@ enum {
   PROP_LAST
 };
 
-G_DEFINE_TYPE (CcDisplaySettings, cc_display_settings, GTK_TYPE_BOX)
+G_DEFINE_TYPE (CcDisplaySettings, cc_display_settings, ADW_TYPE_PREFERENCES_PAGE)
 
 static GParamSpec *props[PROP_LAST];
 

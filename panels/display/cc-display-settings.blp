@@ -1,10 +1,7 @@
 using Gtk 4.0;
 using Adw 1;
 
-template $CcDisplaySettings: Box {
-  spacing: 18;
-  orientation: vertical;
-
+template $CcDisplaySettings: Adw.PreferencesPage {
   Adw.PreferencesGroup {
     Adw.ComboRow use_as_row {
       title: _("Use As");
@@ -21,14 +18,7 @@ template $CcDisplaySettings: Box {
     }
   }
 
-  ListBox listbox {
-    hexpand: true;
-    selection-mode: none;
-
-    styles [
-      "boxed-list",
-    ]
-
+  Adw.PreferencesGroup {
     Adw.ComboRow orientation_row {
       width-request: 100;
       title: C_("display setting", "_Orientation");
