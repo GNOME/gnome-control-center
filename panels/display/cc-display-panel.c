@@ -89,7 +89,7 @@ struct _CcDisplayPanel
 
   GList          *monitor_rows;
 
-  GtkWidget      *display_settings_disabled_group;
+  AdwNavigationPage *disabled_page;
 
   GtkWidget      *arrangement_row;
   AdwPreferencesGroup *arrangement_group;
@@ -570,10 +570,10 @@ cc_display_panel_class_init (CcDisplayPanelClass *klass)
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/display/cc-display-panel.ui");
 
-  gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, display_settings_disabled_group);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, arrangement_group);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, arrangement_row);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, cancel_button);
+  gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, disabled_page);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, display_arrangement_dialog);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, display_multiple_displays);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, display_config_type);
@@ -711,9 +711,7 @@ rebuild_ui (CcDisplayPanel *self)
 
   if (!cc_display_config_manager_get_apply_allowed (self->manager))
     {
-      gtk_widget_set_visible (self->display_settings_disabled_group, TRUE);
-      gtk_widget_set_visible (self->display_settings_group, FALSE);
-      gtk_widget_set_visible (self->arrangement_row, FALSE);
+      cc_panel_push_subpage (CC_PANEL (self), self->disabled_page);
       return;
     }
 
@@ -732,8 +730,6 @@ rebuild_ui (CcDisplayPanel *self)
       self->rebuilding_counter--;
       return;
     }
-
-  gtk_widget_set_visible (self->display_settings_disabled_group, FALSE);
 
   n_active_outputs = 0;
   n_usable_outputs = 0;
