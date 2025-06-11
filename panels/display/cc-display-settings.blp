@@ -5,16 +5,19 @@ template $CcDisplaySettings: Box {
   spacing: 18;
   orientation: vertical;
 
-  ListBox enabled_listbox {
-    hexpand: true;
-    selection-mode: none;
+  Adw.PreferencesGroup {
+    Adw.ComboRow use_as_row {
+      title: _("Use As");
 
-    styles [
-      "boxed-list",
-    ]
+      model: StringList {
+        strings [
+          _("Primary Display"),
+          _("Secondary Display"),
+          _("Disable"),
+        ]
+      };
 
-    Adw.SwitchRow enabled_row {
-      notify::active => $on_enabled_row_active_changed_cb(template);
+      notify::selected => $on_use_as_selected_item_changed_cb(template);
     }
   }
 
@@ -30,21 +33,21 @@ template $CcDisplaySettings: Box {
       width-request: 100;
       title: C_("display setting", "_Orientation");
       use-underline: true;
-      notify::selected-item => $on_orientation_selection_changed_cb(template);
+      notify::selected-item => $on_orientation_selection_changed_cb();
     }
 
     Adw.ComboRow resolution_row {
       width-request: 100;
       title: C_("display setting", "_Resolution");
       use-underline: true;
-      notify::selected-item => $on_resolution_selection_changed_cb(template);
+      notify::selected-item => $on_resolution_selection_changed_cb();
     }
 
     Adw.ComboRow refresh_rate_row {
       width-request: 100;
       title: _("R_efresh Rate");
       use-underline: true;
-      notify::selected-item => $on_refresh_rate_selection_changed_cb(template);
+      notify::selected-item => $on_refresh_rate_selection_changed_cb();
     }
 
     Adw.ExpanderRow refresh_rate_expander_row {
@@ -59,7 +62,7 @@ template $CcDisplaySettings: Box {
         width-request: 100;
         title: _("_Variable Refresh Rate");
         use-underline: true;
-        notify::active => $on_variable_refresh_rate_active_changed_cb(template);
+        notify::active => $on_variable_refresh_rate_active_changed_cb();
       }
 
       Adw.ComboRow preferred_refresh_rate_row {
@@ -74,14 +77,14 @@ template $CcDisplaySettings: Box {
       width-request: 100;
       title: _("_HDR (High Dynamic Range)");
       use-underline: true;
-      notify::active => $on_hdr_row_active_changed_cb(template);
+      notify::active => $on_hdr_row_active_changed_cb();
     }
 
     Adw.SwitchRow underscanning_row {
       width-request: 100;
       title: _("Adjust for _TV");
       use-underline: true;
-      notify::active => $on_underscanning_row_active_changed_cb(template);
+      notify::active => $on_underscanning_row_active_changed_cb();
     }
 
     Adw.ActionRow scale_buttons_row {
@@ -100,7 +103,7 @@ template $CcDisplaySettings: Box {
       width-request: 100;
       title: C_("display setting", "_Scale");
       use-underline: true;
-      notify::selected-item => $on_scale_selection_changed_cb(template);
+      notify::selected-item => $on_scale_selection_changed_cb();
     }
   }
 }

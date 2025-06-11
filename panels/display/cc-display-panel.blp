@@ -103,14 +103,7 @@ template $CcDisplayPanel: $CcPanel {
                 }
               }
 
-              Adw.PreferencesGroup display_settings_group {
-                Adw.ComboRow primary_display_row {
-                  subtitle: _("Contains top bar and Activities");
-                  title: _("_Primary Display");
-                  use-underline: true;
-                  notify::selected-item => $on_primary_display_selected_item_changed_cb();
-                }
-              }
+              Adw.PreferencesGroup display_settings_group {}
 
               Adw.PreferencesGroup single_display_settings_group {
                 visible: false;
