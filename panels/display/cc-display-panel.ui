@@ -116,22 +116,19 @@
                                     </child>
                                   </object>
                                 </child>
+                                <!-- Display Arrangement -->
+                                <child>
+                                  <object class="CcListRow" id="arrangement_row">
+                                    <property name="show-arrow">True</property>
+                                    <property name="title" translatable="yes">Arrange Displays</property>
+                                    <signal name="activated" handler="adw_dialog_present" object="display_arrangement_dialog" swapped="yes"/>
+                                  </object>
+                                </child>
                               </object>
                             </child>
 
                             <child>
                               <object class="AdwPreferencesGroup" id="display_settings_group">
-                                <!-- Display Arrangement -->
-                                <child>
-                                  <object class="AdwPreferencesRow" id="arrangement_row">
-                                    <property name="activatable">False</property>
-                                    <child>
-                                      <object class="AdwBin" id="arrangement_bin">
-                                      </object>
-                                    </child>
-                                  </object>
-                                </child>
-
                                 <!-- Primary Display -->
                                 <child>
                                   <object class="AdwComboRow" id="primary_display_row">
@@ -245,5 +242,30 @@
       </object>
     </child>
   </template>
-</interface>
 
+  <object class="AdwDialog" id="display_arrangement_dialog">
+    <property name="title" translatable="yes">Arrange Displays</property>
+    <property name="content-width">400</property>
+    <property name="can-close">False</property>
+    <signal name="close-attempt" handler="on_display_arrangement_dialog_close_attempt_cb" object="CcDisplayPanel" swapped="yes"/>
+    <property name="child">
+      <object class="AdwToolbarView">
+        <child type="top">
+          <object class="AdwHeaderBar"/>
+        </child>
+        <property name="content">
+          <object class="AdwPreferencesPage">
+            <property name="description" translatable="yes">Drag displays so they match the physical layout</property>
+            <child>
+              <object class="AdwPreferencesGroup" id="arrangement_group">
+                <style>
+                  <class name="view"/>
+                </style>
+              </object>
+            </child>
+          </object>
+        </property>
+      </object>
+    </property>
+  </object>
+</interface>
