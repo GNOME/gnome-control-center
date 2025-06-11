@@ -79,7 +79,7 @@ template $CcMousePanel: $CcPanel {
                   }
 
                   GestureClick {
-                    button: 3;
+                    button: 3; /* GDK_BUTTON_SECONDARY */
                     exclusive: true;
                     pressed => $primary_toggle_right_click_pressed_cb(template);
                   }

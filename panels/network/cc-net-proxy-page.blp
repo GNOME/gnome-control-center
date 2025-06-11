@@ -49,6 +49,7 @@ template $CcNetProxyPage: Adw.NavigationPage {
           notify::selected-item => $proxy_configuration_changed_cb(template);
 
           model: StringList {
+            /* Update cc-net-proxy-page.c if the order is changed */
             strings [
               _("Automatic"),
               _("Manual"),

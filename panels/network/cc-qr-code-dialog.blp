@@ -19,6 +19,11 @@ template $CcQrCodeDialog: Adw.Dialog {
           Picture qr_image {
             halign: center;
             alternative-text: _("QR Code");
+
+            /* Set the QR code as focusable so the alternative
+             * text can be read.
+             * See https://gitlab.gnome.org/GNOME/gtk/-/issues/6749
+             */
             focusable: true;
 
             styles [
@@ -34,6 +39,10 @@ template $CcQrCodeDialog: Adw.Dialog {
               "title-1",
             ];
 
+            /* Add a workaround to prevent this label from showing
+             * entirely selected without any user interaction.
+             * See https://gitlab.gnome.org/GNOME/gtk/-/issues/4377
+             */
             selectable: bind template.visible no-sync-create inverted;
             wrap: true;
             justify: center;
