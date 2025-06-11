@@ -128,18 +128,7 @@
                             </child>
 
                             <child>
-                              <object class="AdwPreferencesGroup" id="display_settings_group">
-                                <!-- Primary Display -->
-                                <child>
-                                  <object class="AdwComboRow" id="primary_display_row">
-                                    <property name="subtitle" translatable="yes">Contains top bar and Activities</property>
-                                    <property name="title" translatable="yes">_Primary Display</property>
-                                    <property name="use-underline">True</property>
-                                    <signal name="notify::selected-item" handler="on_primary_display_selected_item_changed_cb" swapped="yes"/>
-                                  </object>
-                                </child>
-                              </object>
-
+                              <object class="AdwPreferencesGroup" id="display_settings_group"/>
                             </child>
 
                             <!-- Single Display Settings -->

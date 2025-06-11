@@ -6,15 +6,20 @@
     <property name="orientation">vertical</property>
 
     <child>
-      <object class="GtkListBox" id="enabled_listbox">
-        <property name="hexpand">True</property>
-        <property name="selection_mode">none</property>
-        <style>
-          <class name="boxed-list" />
-        </style>
+      <object class="AdwPreferencesGroup">
         <child>
-          <object class="AdwSwitchRow" id="enabled_row">
-            <signal name="notify::active" handler="on_enabled_row_active_changed_cb" swapped="yes"/>
+          <object class="AdwComboRow" id="use_as_row">
+            <property name="title" translatable="yes">Use As</property>
+            <property name="model">
+              <object class="GtkStringList">
+                <items>
+                  <item translatable="yes">Primary Display</item>
+                  <item translatable="yes">Secondary Display</item>
+                  <item translatable="yes">Disable</item>
+                </items>
+              </object>
+            </property>
+            <signal name="notify::selected" handler="on_use_as_selected_item_changed_cb" swapped="yes"/>
           </object>
         </child>
       </object>
